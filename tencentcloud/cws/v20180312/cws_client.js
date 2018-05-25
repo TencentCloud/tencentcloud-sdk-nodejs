@@ -1,0 +1,232 @@
+const models = require("./models");
+const AbstractClient = require('../../common/abstract_client')
+const ModifySiteAttributeRequest = models.ModifySiteAttributeRequest;
+const MonitorsDetail = models.MonitorsDetail;
+const DescribeSitesResponse = models.DescribeSitesResponse;
+const DescribeMonitorsResponse = models.DescribeMonitorsResponse;
+const DeleteSitesRequest = models.DeleteSitesRequest;
+const DescribeConfigRequest = models.DescribeConfigRequest;
+const ModifyConfigAttributeResponse = models.ModifyConfigAttributeResponse;
+const CreateSitesResponse = models.CreateSitesResponse;
+const ModifyMonitorAttributeResponse = models.ModifyMonitorAttributeResponse;
+const CreateMonitorsResponse = models.CreateMonitorsResponse;
+const CreateSitesScansResponse = models.CreateSitesScansResponse;
+const SitesVerification = models.SitesVerification;
+const DescribeSiteQuotaResponse = models.DescribeSiteQuotaResponse;
+const CreateVulsMisinformationRequest = models.CreateVulsMisinformationRequest;
+const DescribeVulsRequest = models.DescribeVulsRequest;
+const MonitorMiniSite = models.MonitorMiniSite;
+const CreateSitesScansRequest = models.CreateSitesScansRequest;
+const DescribeVulsResponse = models.DescribeVulsResponse;
+const VerifySitesResponse = models.VerifySitesResponse;
+const CreateMonitorsRequest = models.CreateMonitorsRequest;
+const DeleteMonitorsResponse = models.DeleteMonitorsResponse;
+const Monitor = models.Monitor;
+const CreateVulsMisinformationResponse = models.CreateVulsMisinformationResponse;
+const VerifySitesRequest = models.VerifySitesRequest;
+const ModifyMonitorAttributeRequest = models.ModifyMonitorAttributeRequest;
+const Vul = models.Vul;
+const ModifySiteAttributeResponse = models.ModifySiteAttributeResponse;
+const CreateSitesRequest = models.CreateSitesRequest;
+const ModifyConfigAttributeRequest = models.ModifyConfigAttributeRequest;
+const Filter = models.Filter;
+const DescribeMonitorsRequest = models.DescribeMonitorsRequest;
+const DeleteSitesResponse = models.DeleteSitesResponse;
+const DeleteMonitorsRequest = models.DeleteMonitorsRequest;
+const DescribeSitesVerificationResponse = models.DescribeSitesVerificationResponse;
+const Site = models.Site;
+const DescribeConfigResponse = models.DescribeConfigResponse;
+const DescribeSitesRequest = models.DescribeSitesRequest;
+const DescribeSiteQuotaRequest = models.DescribeSiteQuotaRequest;
+const DescribeSitesVerificationRequest = models.DescribeSitesVerificationRequest;
+
+
+/**
+ * cws client
+ * @class
+ */
+class CwsClient extends AbstractClient {
+
+    constructor(credential, region, profile) {
+        super("cws.tencentcloudapi.com", "2018-03-12", credential, region, profile);
+    }
+    
+    /**
+     * 本接口 (DescribeVuls) 用于查询一个或多个漏洞的详细信息。
+     * @param {DescribeVulsRequest} req
+     * @param {function(string, DescribeVulsResponse):void} cb
+     * @public
+     */
+    DescribeVuls(req, cb) {
+        let resp = new DescribeVulsResponse();
+        this.request("DescribeVuls", req, resp, cb);
+    }
+
+    /**
+     * 本接口 (ModifyMonitorAttribute) 用于修改监测任务的属性。
+     * @param {ModifyMonitorAttributeRequest} req
+     * @param {function(string, ModifyMonitorAttributeResponse):void} cb
+     * @public
+     */
+    ModifyMonitorAttribute(req, cb) {
+        let resp = new ModifyMonitorAttributeResponse();
+        this.request("ModifyMonitorAttribute", req, resp, cb);
+    }
+
+    /**
+     * 本接口（CreateSitesScans）用于新增一个或多个站点的单次扫描任务。
+     * @param {CreateSitesScansRequest} req
+     * @param {function(string, CreateSitesScansResponse):void} cb
+     * @public
+     */
+    CreateSitesScans(req, cb) {
+        let resp = new CreateSitesScansResponse();
+        this.request("CreateSitesScans", req, resp, cb);
+    }
+
+    /**
+     * 本接口（CreateSites）用于新增一个或多个站点。
+     * @param {CreateSitesRequest} req
+     * @param {function(string, CreateSitesResponse):void} cb
+     * @public
+     */
+    CreateSites(req, cb) {
+        let resp = new CreateSitesResponse();
+        this.request("CreateSites", req, resp, cb);
+    }
+
+    /**
+     * 本接口（CreateVulsMisinformation）用于新增一个或多个漏洞误报信息。
+     * @param {CreateVulsMisinformationRequest} req
+     * @param {function(string, CreateVulsMisinformationResponse):void} cb
+     * @public
+     */
+    CreateVulsMisinformation(req, cb) {
+        let resp = new CreateVulsMisinformationResponse();
+        this.request("CreateVulsMisinformation", req, resp, cb);
+    }
+
+    /**
+     * 本接口 (DescribeConfig) 用于查询用户配置的详细信息。
+     * @param {DescribeConfigRequest} req
+     * @param {function(string, DescribeConfigResponse):void} cb
+     * @public
+     */
+    DescribeConfig(req, cb) {
+        let resp = new DescribeConfigResponse();
+        this.request("DescribeConfig", req, resp, cb);
+    }
+
+    /**
+     * 本接口 (DescribeSites) 用于查询一个或多个站点的详细信息。
+     * @param {DescribeSitesRequest} req
+     * @param {function(string, DescribeSitesResponse):void} cb
+     * @public
+     */
+    DescribeSites(req, cb) {
+        let resp = new DescribeSitesResponse();
+        this.request("DescribeSites", req, resp, cb);
+    }
+
+    /**
+     * 本接口 (DescribeSitesVerification) 用于查询一个或多个待验证站点的验证信息。
+     * @param {DescribeSitesVerificationRequest} req
+     * @param {function(string, DescribeSitesVerificationResponse):void} cb
+     * @public
+     */
+    DescribeSitesVerification(req, cb) {
+        let resp = new DescribeSitesVerificationResponse();
+        this.request("DescribeSitesVerification", req, resp, cb);
+    }
+
+    /**
+     * 本接口 (ModifySiteAttribute) 用于修改站点的属性。
+     * @param {ModifySiteAttributeRequest} req
+     * @param {function(string, ModifySiteAttributeResponse):void} cb
+     * @public
+     */
+    ModifySiteAttribute(req, cb) {
+        let resp = new ModifySiteAttributeResponse();
+        this.request("ModifySiteAttribute", req, resp, cb);
+    }
+
+    /**
+     * 本接口 (ModifyConfigAttribute) 用于修改用户配置的属性。
+     * @param {ModifyConfigAttributeRequest} req
+     * @param {function(string, ModifyConfigAttributeResponse):void} cb
+     * @public
+     */
+    ModifyConfigAttribute(req, cb) {
+        let resp = new ModifyConfigAttributeResponse();
+        this.request("ModifyConfigAttribute", req, resp, cb);
+    }
+
+    /**
+     * 本接口 (VerifySites) 用于验证一个或多个待验证站点。
+     * @param {VerifySitesRequest} req
+     * @param {function(string, VerifySitesResponse):void} cb
+     * @public
+     */
+    VerifySites(req, cb) {
+        let resp = new VerifySitesResponse();
+        this.request("VerifySites", req, resp, cb);
+    }
+
+    /**
+     * 本接口 (DeleteMonitors) 用于删除监控任务。
+     * @param {DeleteMonitorsRequest} req
+     * @param {function(string, DeleteMonitorsResponse):void} cb
+     * @public
+     */
+    DeleteMonitors(req, cb) {
+        let resp = new DeleteMonitorsResponse();
+        this.request("DeleteMonitors", req, resp, cb);
+    }
+
+    /**
+     * 本接口（CreateMonitors）用于新增一个或多个站点的监测任务。
+     * @param {CreateMonitorsRequest} req
+     * @param {function(string, CreateMonitorsResponse):void} cb
+     * @public
+     */
+    CreateMonitors(req, cb) {
+        let resp = new CreateMonitorsResponse();
+        this.request("CreateMonitors", req, resp, cb);
+    }
+
+    /**
+     * 本接口 (DeleteSites) 用于删除站点。
+     * @param {DeleteSitesRequest} req
+     * @param {function(string, DeleteSitesResponse):void} cb
+     * @public
+     */
+    DeleteSites(req, cb) {
+        let resp = new DeleteSitesResponse();
+        this.request("DeleteSites", req, resp, cb);
+    }
+
+    /**
+     * 本接口 (DescribeMonitors) 用于查询一个或多个监控任务的详细信息。
+     * @param {DescribeMonitorsRequest} req
+     * @param {function(string, DescribeMonitorsResponse):void} cb
+     * @public
+     */
+    DescribeMonitors(req, cb) {
+        let resp = new DescribeMonitorsResponse();
+        this.request("DescribeMonitors", req, resp, cb);
+    }
+
+    /**
+     * 本接口 (DescribeSiteQuota) 用于查询用户购买的站点总数和已使用数。
+     * @param {DescribeSiteQuotaRequest} req
+     * @param {function(string, DescribeSiteQuotaResponse):void} cb
+     * @public
+     */
+    DescribeSiteQuota(req, cb) {
+        let resp = new DescribeSiteQuotaResponse();
+        this.request("DescribeSiteQuota", req, resp, cb);
+    }
+
+
+}
+module.exports = CwsClient;
