@@ -1,0 +1,562 @@
+const AbstractModel = require("../../common/abstract_model");
+
+/**
+ * ImageTranslate返回参数结构体
+ * @class
+ */
+class ImageTranslateResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 请求的SessionUuid返回
+         * @type {string || null}
+         */
+        this.SessionUuid = null;
+
+        /**
+         * 源语言
+         * @type {string || null}
+         */
+        this.Source = null;
+
+        /**
+         * 目标语言
+         * @type {string || null}
+         */
+        this.Target = null;
+
+        /**
+         * 图片翻译结果
+         * @type {ImageRecord || null}
+         */
+        this.ImageRecord = null;
+
+        /**
+         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SessionUuid = params.SessionUuid || null;
+        this.Source = params.Source || null;
+        this.Target = params.Target || null;
+
+        if (params.ImageRecord) {
+            let obj = new ImageRecord();
+            obj.deserialize(params.ImageRecord)
+            this.ImageRecord = obj;
+        }
+        this.RequestId = params.RequestId || null;
+
+    }
+}
+
+/**
+ * SpeechTranslate返回参数结构体
+ * @class
+ */
+class SpeechTranslateResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 请求的SessionUuid直接返回
+         * @type {string || null}
+         */
+        this.SessionUuid = null;
+
+        /**
+         * 语音识别状态 1-进行中 0-完成
+         * @type {number || null}
+         */
+        this.RecognizeStatus = null;
+
+        /**
+         * 识别出的源文
+         * @type {string || null}
+         */
+        this.SourceText = null;
+
+        /**
+         * 翻译出的译文
+         * @type {string || null}
+         */
+        this.TargetText = null;
+
+        /**
+         * 第几个语音分片
+         * @type {number || null}
+         */
+        this.Seq = null;
+
+        /**
+         * 源语言
+         * @type {string || null}
+         */
+        this.Source = null;
+
+        /**
+         * 目标语言
+         * @type {string || null}
+         */
+        this.Target = null;
+
+        /**
+         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SessionUuid = params.SessionUuid || null;
+        this.RecognizeStatus = params.RecognizeStatus || null;
+        this.SourceText = params.SourceText || null;
+        this.TargetText = params.TargetText || null;
+        this.Seq = params.Seq || null;
+        this.Source = params.Source || null;
+        this.Target = params.Target || null;
+        this.RequestId = params.RequestId || null;
+
+    }
+}
+
+/**
+ * 图片翻译结果
+ * @class
+ */
+class ImageRecord extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 图片翻译结果
+         * @type {Array.<ItemValue> || null}
+         */
+        this.Value = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Value) {
+            this.Value = new Array();
+            for (let z in params.Value) {
+                let obj = new ItemValue();
+                obj.deserialize(params.Value[z]);
+                this.Value.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * LanguageDetect请求参数结构体
+ * @class
+ */
+class LanguageDetectRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 待识别的文本
+         * @type {string || null}
+         */
+        this.Text = null;
+
+        /**
+         * 项目id
+         * @type {number || null}
+         */
+        this.ProjectId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Text = params.Text || null;
+        this.ProjectId = params.ProjectId || null;
+
+    }
+}
+
+/**
+ * LanguageDetect返回参数结构体
+ * @class
+ */
+class LanguageDetectResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 识别出的语言种类，参考语言列表
+<li> zh : 中文 </li> <li> en : 英文 </li><li> jp : 日语 </li> <li> kr : 韩语 </li><li> de : 德语 </li><li> fr : 法语 </li><li> es : 西班牙文 </li> <li> it : 意大利文 </li><li> tr : 土耳其文 </li><li> ru : 俄文 </li><li> pt : 葡萄牙文 </li><li> vi : 越南文 </li><li> id : 印度尼西亚文 </li><li> ms : 马来西亚文 </li><li> th : 泰文 </li>
+         * @type {string || null}
+         */
+        this.Lang = null;
+
+        /**
+         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Lang = params.Lang || null;
+        this.RequestId = params.RequestId || null;
+
+    }
+}
+
+/**
+ * 翻译结果
+ * @class
+ */
+class ItemValue extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 识别出的源文
+         * @type {string || null}
+         */
+        this.SourceText = null;
+
+        /**
+         * 翻译后的译文
+         * @type {string || null}
+         */
+        this.TargetText = null;
+
+        /**
+         * X坐标
+         * @type {number || null}
+         */
+        this.X = null;
+
+        /**
+         * Y坐标
+         * @type {number || null}
+         */
+        this.Y = null;
+
+        /**
+         * 宽度
+         * @type {number || null}
+         */
+        this.W = null;
+
+        /**
+         * 高度
+         * @type {number || null}
+         */
+        this.H = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SourceText = params.SourceText || null;
+        this.TargetText = params.TargetText || null;
+        this.X = params.X || null;
+        this.Y = params.Y || null;
+        this.W = params.W || null;
+        this.H = params.H || null;
+
+    }
+}
+
+/**
+ * TextTranslate返回参数结构体
+ * @class
+ */
+class TextTranslateResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 翻译后的文本
+         * @type {string || null}
+         */
+        this.TargetText = null;
+
+        /**
+         * 源语言，详见入参Target
+         * @type {string || null}
+         */
+        this.Source = null;
+
+        /**
+         * 目标语言，详见入参Target
+         * @type {string || null}
+         */
+        this.Target = null;
+
+        /**
+         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TargetText = params.TargetText || null;
+        this.Source = params.Source || null;
+        this.Target = params.Target || null;
+        this.RequestId = params.RequestId || null;
+
+    }
+}
+
+/**
+ * SpeechTranslate请求参数结构体
+ * @class
+ */
+class SpeechTranslateRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 一段完整的语音对应一个SessionUuid
+         * @type {string || null}
+         */
+        this.SessionUuid = null;
+
+        /**
+         * 音频中的语言类型，支持语言列表<li> zh : 中文 </li> <li> en : 英文 </li>
+         * @type {string || null}
+         */
+        this.Source = null;
+
+        /**
+         * 翻译目标语⾔言类型 ，支持的语言列表<li> zh : 中文 </li> <li> en : 英文 </li>
+         * @type {string || null}
+         */
+        this.Target = null;
+
+        /**
+         * pcm : 146   amr : 33554432   mp3 : 83886080
+         * @type {number || null}
+         */
+        this.AudioFormat = null;
+
+        /**
+         * 语音分片后的第几片
+         * @type {number || null}
+         */
+        this.Seq = null;
+
+        /**
+         * 是否最后一片
+         * @type {number || null}
+         */
+        this.IsEnd = null;
+
+        /**
+         * 语音分片内容的base64字符串
+         * @type {string || null}
+         */
+        this.Data = null;
+
+        /**
+         * 项目id
+         * @type {number || null}
+         */
+        this.ProjectId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SessionUuid = params.SessionUuid || null;
+        this.Source = params.Source || null;
+        this.Target = params.Target || null;
+        this.AudioFormat = params.AudioFormat || null;
+        this.Seq = params.Seq || null;
+        this.IsEnd = params.IsEnd || null;
+        this.Data = params.Data || null;
+        this.ProjectId = params.ProjectId || null;
+
+    }
+}
+
+/**
+ * ImageTranslate请求参数结构体
+ * @class
+ */
+class ImageTranslateRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一id，返回时原样返回
+         * @type {string || null}
+         */
+        this.SessionUuid = null;
+
+        /**
+         * doc:文档扫描
+         * @type {string || null}
+         */
+        this.Scene = null;
+
+        /**
+         * 图片数据的Base64字符串
+         * @type {string || null}
+         */
+        this.Data = null;
+
+        /**
+         * 源语言，支持语言列表<li> zh : 中文 </li> <li> en : 英文 </li>
+         * @type {string || null}
+         */
+        this.Source = null;
+
+        /**
+         * 目标语言，支持语言列表<li> zh : 中文 </li> <li> en : 英文 </li>
+         * @type {string || null}
+         */
+        this.Target = null;
+
+        /**
+         * 项目id
+         * @type {number || null}
+         */
+        this.ProjectId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SessionUuid = params.SessionUuid || null;
+        this.Scene = params.Scene || null;
+        this.Data = params.Data || null;
+        this.Source = params.Source || null;
+        this.Target = params.Target || null;
+        this.ProjectId = params.ProjectId || null;
+
+    }
+}
+
+/**
+ * TextTranslate请求参数结构体
+ * @class
+ */
+class TextTranslateRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 待翻译的文本
+         * @type {string || null}
+         */
+        this.SourceText = null;
+
+        /**
+         * 源语言，参照Target支持语言列表
+         * @type {string || null}
+         */
+        this.Source = null;
+
+        /**
+         * 目标语言，参照支持语言列表
+<li> zh : 中文 </li> <li> en : 英文 </li><li> jp : 日语 </li> <li> kr : 韩语 </li><li> de : 德语 </li><li> fr : 法语 </li><li> es : 西班牙文 </li> <li> it : 意大利文 </li><li> tr : 土耳其文 </li><li> ru : 俄文 </li><li> pt : 葡萄牙文 </li><li> vi : 越南文 </li><li> id : 印度尼西亚文 </li><li> ms : 马来西亚文 </li><li> th : 泰文 </li><li> auto : 自动识别源语言，只能用于source字段 </li>
+         * @type {string || null}
+         */
+        this.Target = null;
+
+        /**
+         * 项目id
+         * @type {number || null}
+         */
+        this.ProjectId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SourceText = params.SourceText || null;
+        this.Source = params.Source || null;
+        this.Target = params.Target || null;
+        this.ProjectId = params.ProjectId || null;
+
+    }
+}
+
+module.exports = {
+    ImageTranslateResponse: ImageTranslateResponse,
+    SpeechTranslateResponse: SpeechTranslateResponse,
+    ImageRecord: ImageRecord,
+    LanguageDetectRequest: LanguageDetectRequest,
+    LanguageDetectResponse: LanguageDetectResponse,
+    ItemValue: ItemValue,
+    TextTranslateResponse: TextTranslateResponse,
+    SpeechTranslateRequest: SpeechTranslateRequest,
+    ImageTranslateRequest: ImageTranslateRequest,
+    TextTranslateRequest: TextTranslateRequest,
+
+}

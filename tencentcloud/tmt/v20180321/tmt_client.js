@@ -1,0 +1,74 @@
+const models = require("./models");
+const AbstractClient = require('../../common/abstract_client')
+const ImageTranslateResponse = models.ImageTranslateResponse;
+const SpeechTranslateResponse = models.SpeechTranslateResponse;
+const ImageRecord = models.ImageRecord;
+const LanguageDetectRequest = models.LanguageDetectRequest;
+const LanguageDetectResponse = models.LanguageDetectResponse;
+const ItemValue = models.ItemValue;
+const TextTranslateResponse = models.TextTranslateResponse;
+const SpeechTranslateRequest = models.SpeechTranslateRequest;
+const ImageTranslateRequest = models.ImageTranslateRequest;
+const TextTranslateRequest = models.TextTranslateRequest;
+
+
+/**
+ * tmt client
+ * @class
+ */
+class TmtClient extends AbstractClient {
+
+    constructor(credential, region, profile) {
+        super("tmt.tencentcloudapi.com", "2018-03-21", credential, region, profile);
+    }
+    
+    /**
+     * 提供中文到英文、英文到中文的等多种语言的文本内容翻译服务， 经过大数据语料库、多种解码算法、翻译引擎深度优化，在新闻文章、生活口语等不同语言场景中都有深厚积累，翻译结果专业评价处于行业顶级水平。
+
+     * @param {TextTranslateRequest} req
+     * @param {function(string, TextTranslateResponse):void} cb
+     * @public
+     */
+    TextTranslate(req, cb) {
+        let resp = new TextTranslateResponse();
+        this.request("TextTranslate", req, resp, cb);
+    }
+
+    /**
+     * 提供中文到英文、英文到中文两种语言的图片翻译服务，可自动识别图片中的文本内容并翻译成目标语言
+     * @param {ImageTranslateRequest} req
+     * @param {function(string, ImageTranslateResponse):void} cb
+     * @public
+     */
+    ImageTranslate(req, cb) {
+        let resp = new ImageTranslateResponse();
+        this.request("ImageTranslate", req, resp, cb);
+    }
+
+    /**
+     * 本接口提供音频内文字识别 + 翻译功能，目前开放中到英的语音翻译服务。
+待识别和翻译的音频文件可以是 pcm、mp3、amr和speex 格式，音频内语音清晰，采用流式传输和翻译的方式。
+
+     * @param {SpeechTranslateRequest} req
+     * @param {function(string, SpeechTranslateResponse):void} cb
+     * @public
+     */
+    SpeechTranslate(req, cb) {
+        let resp = new SpeechTranslateResponse();
+        this.request("SpeechTranslate", req, resp, cb);
+    }
+
+    /**
+     * 可自动识别文本内容的语言种类，轻量高效，无需额外实现判断方式，使面向客户的服务体验更佳。
+     * @param {LanguageDetectRequest} req
+     * @param {function(string, LanguageDetectResponse):void} cb
+     * @public
+     */
+    LanguageDetect(req, cb) {
+        let resp = new LanguageDetectResponse();
+        this.request("LanguageDetect", req, resp, cb);
+    }
+
+
+}
+module.exports = TmtClient;

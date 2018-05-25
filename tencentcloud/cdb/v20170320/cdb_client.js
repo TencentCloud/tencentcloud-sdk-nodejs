@@ -1,0 +1,545 @@
+const models = require("./models");
+const AbstractClient = require('../../common/abstract_client')
+const SellType = models.SellType;
+const CreateDBInstanceRequest = models.CreateDBInstanceRequest;
+const CreateDBImportJobRequest = models.CreateDBImportJobRequest;
+const DescribeBackupConfigRequest = models.DescribeBackupConfigRequest;
+const RoVipInfo = models.RoVipInfo;
+const StopDBImportJobResponse = models.StopDBImportJobResponse;
+const DatabaseTableList = models.DatabaseTableList;
+const DescribeSlowLogsRequest = models.DescribeSlowLogsRequest;
+const Inbound = models.Inbound;
+const AssociateSecurityGroupsRequest = models.AssociateSecurityGroupsRequest;
+const SellConfig = models.SellConfig;
+const DescribeDBSecurityGroupsResponse = models.DescribeDBSecurityGroupsResponse;
+const MasterInfo = models.MasterInfo;
+const DescribeBinlogsResponse = models.DescribeBinlogsResponse;
+const DescribeBackupDownloadDbTableCodeResponse = models.DescribeBackupDownloadDbTableCodeResponse;
+const InitDBInstancesResponse = models.InitDBInstancesResponse;
+const DescribeTasksResponse = models.DescribeTasksResponse;
+const DescribeBackupsRequest = models.DescribeBackupsRequest;
+const ModifyDBInstanceProjectResponse = models.ModifyDBInstanceProjectResponse;
+const DescribeDBInstancesResponse = models.DescribeDBInstancesResponse;
+const IsolateDBInstanceResponse = models.IsolateDBInstanceResponse;
+const DescribeDBInstanceGTIDResponse = models.DescribeDBInstanceGTIDResponse;
+const DescribeDBZoneConfigRequest = models.DescribeDBZoneConfigRequest;
+const DescribeDBInstanceRebootTimeResponse = models.DescribeDBInstanceRebootTimeResponse;
+const DrInfo = models.DrInfo;
+const RoGroup = models.RoGroup;
+const SwitchForUpgradeRequest = models.SwitchForUpgradeRequest;
+const ModifyInstanceParamRequest = models.ModifyInstanceParamRequest;
+const CreateDBInstanceHourResponse = models.CreateDBInstanceHourResponse;
+const BinlogInfo = models.BinlogInfo;
+const DescribeTasksRequest = models.DescribeTasksRequest;
+const ModifyDBInstanceSecurityGroupsResponse = models.ModifyDBInstanceSecurityGroupsResponse;
+const CreateDBInstanceHourRequest = models.CreateDBInstanceHourRequest;
+const DescribeSlowLogsResponse = models.DescribeSlowLogsResponse;
+const BackupInfo = models.BackupInfo;
+const CloseWanServiceResponse = models.CloseWanServiceResponse;
+const DescribeDBInstancesRequest = models.DescribeDBInstancesRequest;
+const DescribeDBSecurityGroupsRequest = models.DescribeDBSecurityGroupsRequest;
+const ModifyDBInstanceVipVportResponse = models.ModifyDBInstanceVipVportResponse;
+const TableName = models.TableName;
+const DeleteBackupResponse = models.DeleteBackupResponse;
+const DescribeProjectSecurityGroupsResponse = models.DescribeProjectSecurityGroupsResponse;
+const CreateDBInstanceResponse = models.CreateDBInstanceResponse;
+const SlowLogInfo = models.SlowLogInfo;
+const CloseWanServiceRequest = models.CloseWanServiceRequest;
+const DescribeDBInstanceCharsetResponse = models.DescribeDBInstanceCharsetResponse;
+const DescribeBackupDatabasesResponse = models.DescribeBackupDatabasesResponse;
+const DescribeDBInstanceRebootTimeRequest = models.DescribeDBInstanceRebootTimeRequest;
+const First = models.First;
+const DescribeBackupsResponse = models.DescribeBackupsResponse;
+const DescribeDBImportRecordsResponse = models.DescribeDBImportRecordsResponse;
+const OpenWanServiceRequest = models.OpenWanServiceRequest;
+const DatabaseName = models.DatabaseName;
+const DescribeBackupConfigResponse = models.DescribeBackupConfigResponse;
+const ModifyDBInstanceSecurityGroupsRequest = models.ModifyDBInstanceSecurityGroupsRequest;
+const DescribeBackupTablesResponse = models.DescribeBackupTablesResponse;
+const Outbound = models.Outbound;
+const ParamInfo = models.ParamInfo;
+const DescribeProjectSecurityGroupsRequest = models.DescribeProjectSecurityGroupsRequest;
+const SecurityGroup = models.SecurityGroup;
+const SlaveInfo = models.SlaveInfo;
+const ModifyDBInstanceNameRequest = models.ModifyDBInstanceNameRequest;
+const ModifyInstanceParamResponse = models.ModifyInstanceParamResponse;
+const UpgradeDBInstanceEngineVersionResponse = models.UpgradeDBInstanceEngineVersionResponse;
+const InitDBInstancesRequest = models.InitDBInstancesRequest;
+const AssociateSecurityGroupsResponse = models.AssociateSecurityGroupsResponse;
+const InstanceInfo = models.InstanceInfo;
+const CreateBackupResponse = models.CreateBackupResponse;
+const DescribeBackupTablesRequest = models.DescribeBackupTablesRequest;
+const ImportRecord = models.ImportRecord;
+const ModifyDBInstanceNameResponse = models.ModifyDBInstanceNameResponse;
+const InstanceRebootTime = models.InstanceRebootTime;
+const UpgradeDBInstanceRequest = models.UpgradeDBInstanceRequest;
+const ZoneSellConf = models.ZoneSellConf;
+const IsolateDBInstanceRequest = models.IsolateDBInstanceRequest;
+const CreateBackupRequest = models.CreateBackupRequest;
+const DescribeDBInstanceCharsetRequest = models.DescribeDBInstanceCharsetRequest;
+const DescribeBackupDatabasesRequest = models.DescribeBackupDatabasesRequest;
+const UpgradeDBInstanceEngineVersionRequest = models.UpgradeDBInstanceEngineVersionRequest;
+const UpgradeDBInstanceResponse = models.UpgradeDBInstanceResponse;
+const ModifyDBInstanceVipVportRequest = models.ModifyDBInstanceVipVportRequest;
+const Parameter = models.Parameter;
+const DescribeDBImportRecordsRequest = models.DescribeDBImportRecordsRequest;
+const CreateDBImportJobResponse = models.CreateDBImportJobResponse;
+const DescribeBinlogsRequest = models.DescribeBinlogsRequest;
+const DescribeDBZoneConfigResponse = models.DescribeDBZoneConfigResponse;
+const ModifyDBInstanceProjectRequest = models.ModifyDBInstanceProjectRequest;
+const DisassociateSecurityGroupsRequest = models.DisassociateSecurityGroupsRequest;
+const DisassociateSecurityGroupsResponse = models.DisassociateSecurityGroupsResponse;
+const SwitchForUpgradeResponse = models.SwitchForUpgradeResponse;
+const ZoneConf = models.ZoneConf;
+const DeleteBackupRequest = models.DeleteBackupRequest;
+const StopDBImportJobRequest = models.StopDBImportJobRequest;
+const OpenWanServiceResponse = models.OpenWanServiceResponse;
+const ModifyBackupConfigRequest = models.ModifyBackupConfigRequest;
+const RegionSellConf = models.RegionSellConf;
+const DescribeBackupDownloadDbTableCodeRequest = models.DescribeBackupDownloadDbTableCodeRequest;
+const ModifyBackupConfigResponse = models.ModifyBackupConfigResponse;
+const DescribeDBInstanceGTIDRequest = models.DescribeDBInstanceGTIDRequest;
+
+
+/**
+ * cdb client
+ * @class
+ */
+class CdbClient extends AbstractClient {
+
+    constructor(credential, region, profile) {
+        super("cdb.tencentcloudapi.com", "2017-03-20", credential, region, profile);
+    }
+    
+    /**
+     * 本接口(DescribeDBInstanceGTID)用于查询云数据库实例是否开通了GTID，不支持版本为5.5以及以下的实例。
+     * @param {DescribeDBInstanceGTIDRequest} req
+     * @param {function(string, DescribeDBInstanceGTIDResponse):void} cb
+     * @public
+     */
+    DescribeDBInstanceGTID(req, cb) {
+        let resp = new DescribeDBInstanceGTIDResponse();
+        this.request("DescribeDBInstanceGTID", req, resp, cb);
+    }
+
+    /**
+     * 本接口(DescribeProjectSecurityGroups)用于查询项目的安全组详情。
+     * @param {DescribeProjectSecurityGroupsRequest} req
+     * @param {function(string, DescribeProjectSecurityGroupsResponse):void} cb
+     * @public
+     */
+    DescribeProjectSecurityGroups(req, cb) {
+        let resp = new DescribeProjectSecurityGroupsResponse();
+        this.request("DescribeProjectSecurityGroups", req, resp, cb);
+    }
+
+    /**
+     * 本接口(CreateDBImportJob)用于创建云数据库数据导入任务。
+     * @param {CreateDBImportJobRequest} req
+     * @param {function(string, CreateDBImportJobResponse):void} cb
+     * @public
+     */
+    CreateDBImportJob(req, cb) {
+        let resp = new CreateDBImportJobResponse();
+        this.request("CreateDBImportJob", req, resp, cb);
+    }
+
+    /**
+     * 本接口(DeleteBackup)用于删除数据库备份。
+     * @param {DeleteBackupRequest} req
+     * @param {function(string, DeleteBackupResponse):void} cb
+     * @public
+     */
+    DeleteBackup(req, cb) {
+        let resp = new DeleteBackupResponse();
+        this.request("DeleteBackup", req, resp, cb);
+    }
+
+    /**
+     * 本接口(IsolateDBInstance)用于销毁云数据库实例，销毁之后不能通过IP和端口访问数据库，按量计费实例销毁后直接下线。
+
+本接口不支持包年包月实例；
+     * @param {IsolateDBInstanceRequest} req
+     * @param {function(string, IsolateDBInstanceResponse):void} cb
+     * @public
+     */
+    IsolateDBInstance(req, cb) {
+        let resp = new IsolateDBInstanceResponse();
+        this.request("IsolateDBInstance", req, resp, cb);
+    }
+
+    /**
+     * 本接口(ModifyBackupConfig)用于修改数据库备份配置信息。
+     * @param {ModifyBackupConfigRequest} req
+     * @param {function(string, ModifyBackupConfigResponse):void} cb
+     * @public
+     */
+    ModifyBackupConfig(req, cb) {
+        let resp = new ModifyBackupConfigResponse();
+        this.request("ModifyBackupConfig", req, resp, cb);
+    }
+
+    /**
+     * 本接口(ModifyInstanceParam)用于修改云数据库实例的参数。
+     * @param {ModifyInstanceParamRequest} req
+     * @param {function(string, ModifyInstanceParamResponse):void} cb
+     * @public
+     */
+    ModifyInstanceParam(req, cb) {
+        let resp = new ModifyInstanceParamResponse();
+        this.request("ModifyInstanceParam", req, resp, cb);
+    }
+
+    /**
+     * 本接口(ModifyDBInstanceProject)用于修改云数据库实例的所属项目。
+     * @param {ModifyDBInstanceProjectRequest} req
+     * @param {function(string, ModifyDBInstanceProjectResponse):void} cb
+     * @public
+     */
+    ModifyDBInstanceProject(req, cb) {
+        let resp = new ModifyDBInstanceProjectResponse();
+        this.request("ModifyDBInstanceProject", req, resp, cb);
+    }
+
+    /**
+     * 本接口(DescribeBackups)用于查询云数据库实例的备份数据。
+     * @param {DescribeBackupsRequest} req
+     * @param {function(string, DescribeBackupsResponse):void} cb
+     * @public
+     */
+    DescribeBackups(req, cb) {
+        let resp = new DescribeBackupsResponse();
+        this.request("DescribeBackups", req, resp, cb);
+    }
+
+    /**
+     * 本接口(DescribeBackupDatabases)用于查询备份数据库列表。
+     * @param {DescribeBackupDatabasesRequest} req
+     * @param {function(string, DescribeBackupDatabasesResponse):void} cb
+     * @public
+     */
+    DescribeBackupDatabases(req, cb) {
+        let resp = new DescribeBackupDatabasesResponse();
+        this.request("DescribeBackupDatabases", req, resp, cb);
+    }
+
+    /**
+     * 本接口(CreateDBInstanceHour)用于创建按量计费的实例，可通过传入实例规格、MySQL 版本号和数量等信息创建云数据库实例，支持主实例、灾备实例和只读实例的创建。
+
+您还可以使用[查询实例列表](https://cloud.tencent.com/document/api/236/15872)接口查询该实例的详细信息。
+
+1. 首先请使用[获取云数据库可售卖规格](https://cloud.tencent.com/document/api/236/17229)接口查询可创建的实例规格信息，然后请使用[查询价格（按量计费）](https://cloud.tencent.com/document/api/253/5176)接口查询可创建实例的售卖价格；
+2. 单次创建实例最大支持 100 个，实例时长最大支持 36 个月；
+3. 支持创建 MySQL5.5、MySQL5.6和MySQL5.7 版本；
+4. 支持创建主实例、灾备实例和只读实例；
+     * @param {CreateDBInstanceHourRequest} req
+     * @param {function(string, CreateDBInstanceHourResponse):void} cb
+     * @public
+     */
+    CreateDBInstanceHour(req, cb) {
+        let resp = new CreateDBInstanceHourResponse();
+        this.request("CreateDBInstanceHour", req, resp, cb);
+    }
+
+    /**
+     * 本接口(ModifyDBInstanceName)用于修改云数据库实例的名称。
+     * @param {ModifyDBInstanceNameRequest} req
+     * @param {function(string, ModifyDBInstanceNameResponse):void} cb
+     * @public
+     */
+    ModifyDBInstanceName(req, cb) {
+        let resp = new ModifyDBInstanceNameResponse();
+        this.request("ModifyDBInstanceName", req, resp, cb);
+    }
+
+    /**
+     * 本接口(DescribeDBZoneConfig)用于查询可创建的云数据库各地域可售卖的规格配置。
+     * @param {DescribeDBZoneConfigRequest} req
+     * @param {function(string, DescribeDBZoneConfigResponse):void} cb
+     * @public
+     */
+    DescribeDBZoneConfig(req, cb) {
+        let resp = new DescribeDBZoneConfigResponse();
+        this.request("DescribeDBZoneConfig", req, resp, cb);
+    }
+
+    /**
+     * 本接口(CreateBackup)用于创建数据库备份。
+     * @param {CreateBackupRequest} req
+     * @param {function(string, CreateBackupResponse):void} cb
+     * @public
+     */
+    CreateBackup(req, cb) {
+        let resp = new CreateBackupResponse();
+        this.request("CreateBackup", req, resp, cb);
+    }
+
+    /**
+     * 本接口(ModifyDBInstanceVipVport)用于修改云数据库实例的IP和端口号，也可进行基础网络转VPC网络和VPC网络下的子网变更。
+     * @param {ModifyDBInstanceVipVportRequest} req
+     * @param {function(string, ModifyDBInstanceVipVportResponse):void} cb
+     * @public
+     */
+    ModifyDBInstanceVipVport(req, cb) {
+        let resp = new ModifyDBInstanceVipVportResponse();
+        this.request("ModifyDBInstanceVipVport", req, resp, cb);
+    }
+
+    /**
+     * 本接口(DescribeDBInstanceRebootTime)用于查询云数据库实例重启预计所需的时间。
+     * @param {DescribeDBInstanceRebootTimeRequest} req
+     * @param {function(string, DescribeDBInstanceRebootTimeResponse):void} cb
+     * @public
+     */
+    DescribeDBInstanceRebootTime(req, cb) {
+        let resp = new DescribeDBInstanceRebootTimeResponse();
+        this.request("DescribeDBInstanceRebootTime", req, resp, cb);
+    }
+
+    /**
+     * 本接口(DescribeBackupTables)用于查询指定的数据库的备份数据表名。
+     * @param {DescribeBackupTablesRequest} req
+     * @param {function(string, DescribeBackupTablesResponse):void} cb
+     * @public
+     */
+    DescribeBackupTables(req, cb) {
+        let resp = new DescribeBackupTablesResponse();
+        this.request("DescribeBackupTables", req, resp, cb);
+    }
+
+    /**
+     * 本接口(DescribeDBInstances)用于查询云数据库实例列表，支持通过项目ID、实例ID、访问地址、实例状态等来筛选实例。
+
+1. 不指定任何过滤条件, 则默认返回20条实例记录，单次请求最多支持返回100条实例记录；
+2. 支持查询主实例、灾备实例和只读实例信息列表。
+     * @param {DescribeDBInstancesRequest} req
+     * @param {function(string, DescribeDBInstancesResponse):void} cb
+     * @public
+     */
+    DescribeDBInstances(req, cb) {
+        let resp = new DescribeDBInstancesResponse();
+        this.request("DescribeDBInstances", req, resp, cb);
+    }
+
+    /**
+     * 本接口(DescribeDBInstanceCharset)用于查询云数据库实例的字符集，获取字符集的名称。
+     * @param {DescribeDBInstanceCharsetRequest} req
+     * @param {function(string, DescribeDBInstanceCharsetResponse):void} cb
+     * @public
+     */
+    DescribeDBInstanceCharset(req, cb) {
+        let resp = new DescribeDBInstanceCharsetResponse();
+        this.request("DescribeDBInstanceCharset", req, resp, cb);
+    }
+
+    /**
+     * 本接口(AssociateSecurityGroups)用于安全组批量绑定实例。
+     * @param {AssociateSecurityGroupsRequest} req
+     * @param {function(string, AssociateSecurityGroupsResponse):void} cb
+     * @public
+     */
+    AssociateSecurityGroups(req, cb) {
+        let resp = new AssociateSecurityGroupsResponse();
+        this.request("AssociateSecurityGroups", req, resp, cb);
+    }
+
+    /**
+     * 本接口(DescribeSlowLogs)用于获取云数据库实例的慢查询日志。
+     * @param {DescribeSlowLogsRequest} req
+     * @param {function(string, DescribeSlowLogsResponse):void} cb
+     * @public
+     */
+    DescribeSlowLogs(req, cb) {
+        let resp = new DescribeSlowLogsResponse();
+        this.request("DescribeSlowLogs", req, resp, cb);
+    }
+
+    /**
+     * 本接口(InitDBInstances)用于初始化云数据库实例，包括初始化密码、默认字符集、实例端口号等
+     * @param {InitDBInstancesRequest} req
+     * @param {function(string, InitDBInstancesResponse):void} cb
+     * @public
+     */
+    InitDBInstances(req, cb) {
+        let resp = new InitDBInstancesResponse();
+        this.request("InitDBInstances", req, resp, cb);
+    }
+
+    /**
+     * 本接口(OpenWanService)用于开通实例外网访问
+     * @param {OpenWanServiceRequest} req
+     * @param {function(string, OpenWanServiceResponse):void} cb
+     * @public
+     */
+    OpenWanService(req, cb) {
+        let resp = new OpenWanServiceResponse();
+        this.request("OpenWanService", req, resp, cb);
+    }
+
+    /**
+     * 本接口(CreateDBInstance)用于创建包年包月的云数据库实例（包括主实例、灾备实例和只读实例），可通过传入实例规格、MySQL 版本号、购买时长和数量等信息创建云数据库实例。
+
+您还可以使用[查询实例列表](https://cloud.tencent.com/document/api/236/15872)接口查询该实例的详细信息。
+
+1. 首先请使用[获取云数据库可售卖规格](https://cloud.tencent.com/document/api/236/17229)接口查询可创建的实例规格信息，然后请使用[查询价格（包年包月）](https://cloud.tencent.com/document/api/236/1332)接口查询可创建实例的售卖价格；
+
+2. 单次创建实例最大支持 100 个，实例时长最大支持 36 个月；
+
+3. 支持创建 MySQL5.5 、 MySQL5.6 、 MySQL5.7 版本；
+
+4. 支持创建主实例、只读实例、灾备实例；
+     * @param {CreateDBInstanceRequest} req
+     * @param {function(string, CreateDBInstanceResponse):void} cb
+     * @public
+     */
+    CreateDBInstance(req, cb) {
+        let resp = new CreateDBInstanceResponse();
+        this.request("CreateDBInstance", req, resp, cb);
+    }
+
+    /**
+     * 本接口(ModifyDBInstanceSecurityGroups)用于修改实例绑定的安全组。
+     * @param {ModifyDBInstanceSecurityGroupsRequest} req
+     * @param {function(string, ModifyDBInstanceSecurityGroupsResponse):void} cb
+     * @public
+     */
+    ModifyDBInstanceSecurityGroups(req, cb) {
+        let resp = new ModifyDBInstanceSecurityGroupsResponse();
+        this.request("ModifyDBInstanceSecurityGroups", req, resp, cb);
+    }
+
+    /**
+     * 本接口(DescribeDBImportRecords)用于查询云数据库导入任务操作日志。
+     * @param {DescribeDBImportRecordsRequest} req
+     * @param {function(string, DescribeDBImportRecordsResponse):void} cb
+     * @public
+     */
+    DescribeDBImportRecords(req, cb) {
+        let resp = new DescribeDBImportRecordsResponse();
+        this.request("DescribeDBImportRecords", req, resp, cb);
+    }
+
+    /**
+     * 本接口(SwitchForUpgrade)用于切换访问新实例，针对主升级中的实例处于待切换状态时，用户可主动发起该流程
+     * @param {SwitchForUpgradeRequest} req
+     * @param {function(string, SwitchForUpgradeResponse):void} cb
+     * @public
+     */
+    SwitchForUpgrade(req, cb) {
+        let resp = new SwitchForUpgradeResponse();
+        this.request("SwitchForUpgrade", req, resp, cb);
+    }
+
+    /**
+     * 本接口(DescribeTasks)用于查询云数据库实例任务列表。
+     * @param {DescribeTasksRequest} req
+     * @param {function(string, DescribeTasksResponse):void} cb
+     * @public
+     */
+    DescribeTasks(req, cb) {
+        let resp = new DescribeTasksResponse();
+        this.request("DescribeTasks", req, resp, cb);
+    }
+
+    /**
+     * 本接口(DescribeBackupConfig)用于查询数据库备份配置信息。
+     * @param {DescribeBackupConfigRequest} req
+     * @param {function(string, DescribeBackupConfigResponse):void} cb
+     * @public
+     */
+    DescribeBackupConfig(req, cb) {
+        let resp = new DescribeBackupConfigResponse();
+        this.request("DescribeBackupConfig", req, resp, cb);
+    }
+
+    /**
+     * 本接口(CloseWanService)用于关闭云数据库实例的外网访问。关闭外网访问后，外网地址将不可访问。
+     * @param {CloseWanServiceRequest} req
+     * @param {function(string, CloseWanServiceResponse):void} cb
+     * @public
+     */
+    CloseWanService(req, cb) {
+        let resp = new CloseWanServiceResponse();
+        this.request("CloseWanService", req, resp, cb);
+    }
+
+    /**
+     * 本接口(StopDBImportJob)用于终止数据导入任务。
+     * @param {StopDBImportJobRequest} req
+     * @param {function(string, StopDBImportJobResponse):void} cb
+     * @public
+     */
+    StopDBImportJob(req, cb) {
+        let resp = new StopDBImportJobResponse();
+        this.request("StopDBImportJob", req, resp, cb);
+    }
+
+    /**
+     * 本接口(DescribeBackupDownloadDbTableCode)用于查询备份数据分库分表下载位点。
+     * @param {DescribeBackupDownloadDbTableCodeRequest} req
+     * @param {function(string, DescribeBackupDownloadDbTableCodeResponse):void} cb
+     * @public
+     */
+    DescribeBackupDownloadDbTableCode(req, cb) {
+        let resp = new DescribeBackupDownloadDbTableCodeResponse();
+        this.request("DescribeBackupDownloadDbTableCode", req, resp, cb);
+    }
+
+    /**
+     * 本接口(DescribeBinlogs)用于查询云数据库实例的二进制数据。
+     * @param {DescribeBinlogsRequest} req
+     * @param {function(string, DescribeBinlogsResponse):void} cb
+     * @public
+     */
+    DescribeBinlogs(req, cb) {
+        let resp = new DescribeBinlogsResponse();
+        this.request("DescribeBinlogs", req, resp, cb);
+    }
+
+    /**
+     * 本接口(DescribeDBSecurityGroups)用于查询实例的安全组详情。
+     * @param {DescribeDBSecurityGroupsRequest} req
+     * @param {function(string, DescribeDBSecurityGroupsResponse):void} cb
+     * @public
+     */
+    DescribeDBSecurityGroups(req, cb) {
+        let resp = new DescribeDBSecurityGroupsResponse();
+        this.request("DescribeDBSecurityGroups", req, resp, cb);
+    }
+
+    /**
+     * 本接口(UpgradeDBInstanceEngineVersion)用于升级云数据库实例版本，实例类型支持主实例、灾备实例和只读实例。
+     * @param {UpgradeDBInstanceEngineVersionRequest} req
+     * @param {function(string, UpgradeDBInstanceEngineVersionResponse):void} cb
+     * @public
+     */
+    UpgradeDBInstanceEngineVersion(req, cb) {
+        let resp = new UpgradeDBInstanceEngineVersionResponse();
+        this.request("UpgradeDBInstanceEngineVersion", req, resp, cb);
+    }
+
+    /**
+     * 本接口(UpgradeDBInstance)用于升级云数据库实例，实例类型支持主实例、灾备实例和只读实例
+     * @param {UpgradeDBInstanceRequest} req
+     * @param {function(string, UpgradeDBInstanceResponse):void} cb
+     * @public
+     */
+    UpgradeDBInstance(req, cb) {
+        let resp = new UpgradeDBInstanceResponse();
+        this.request("UpgradeDBInstance", req, resp, cb);
+    }
+
+    /**
+     * 本接口(DisassociateSecurityGroups)用于安全组批量解绑实例。
+     * @param {DisassociateSecurityGroupsRequest} req
+     * @param {function(string, DisassociateSecurityGroupsResponse):void} cb
+     * @public
+     */
+    DisassociateSecurityGroups(req, cb) {
+        let resp = new DisassociateSecurityGroupsResponse();
+        this.request("DisassociateSecurityGroups", req, resp, cb);
+    }
+
+
+}
+module.exports = CdbClient;

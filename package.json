@@ -1,0 +1,33 @@
+{
+  "name": "tencentcloud-sdk-nodejs",
+  "version": "3.0.1",
+  "description": "腾讯云 API NODEJS SDK",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "engines": {
+    "node": ">=7.10.0"
+  },
+  "keywords": [
+    "tencentcloudapi",
+    "tencentcloud",
+    "qcloud",
+    "sdk",
+    "js",
+    "nodejs"
+  ],
+  "author": "tencentcloudapi",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "request": "^2.85.0"
+  },
+  "directories": {
+    "example": "examples",
+    "lib": "lib"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tencentcloud/tencentcloud-sdk-nodejs"
+  }
+}

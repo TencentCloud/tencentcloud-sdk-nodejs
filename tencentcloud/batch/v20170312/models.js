@@ -1,0 +1,4869 @@
+const AbstractModel = require("../../common/abstract_model");
+
+/**
+ * 计算环境
+ * @class
+ */
+class AnonymousComputeEnv extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 计算环境管理类型
+         * @type {string || null}
+         */
+        this.EnvType = null;
+
+        /**
+         * 计算环境具体参数
+         * @type {EnvData || null}
+         */
+        this.EnvData = null;
+
+        /**
+         * 数据盘挂载选项
+         * @type {Array.<MountDataDisk> || null}
+         */
+        this.MountDataDisks = null;
+
+        /**
+         * agent运行模式，适用于Windows系统
+         * @type {AgentRunningMode || null}
+         */
+        this.AgentRunningMode = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.EnvType = params.EnvType || null;
+
+        if (params.EnvData) {
+            let obj = new EnvData();
+            obj.deserialize(params.EnvData)
+            this.EnvData = obj;
+        }
+
+        if (params.MountDataDisks) {
+            this.MountDataDisks = new Array();
+            for (let z in params.MountDataDisks) {
+                let obj = new MountDataDisk();
+                obj.deserialize(params.MountDataDisks[z]);
+                this.MountDataDisks.push(obj);
+            }
+        }
+
+        if (params.AgentRunningMode) {
+            let obj = new AgentRunningMode();
+            obj.deserialize(params.AgentRunningMode)
+            this.AgentRunningMode = obj;
+        }
+
+    }
+}
+
+/**
+ * DeleteComputeEnv返回参数结构体
+ * @class
+ */
+class DeleteComputeEnvResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = params.RequestId || null;
+
+    }
+}
+
+/**
+ * SubmitJob请求参数结构体
+ * @class
+ */
+class SubmitJobRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 作业所提交的位置信息。通过该参数可以指定作业关联CVM所属可用区等信息。
+         * @type {Array.<Placement> || null}
+         */
+        this.Placement = null;
+
+        /**
+         * 作业信息
+         * @type {Job || null}
+         */
+        this.Job = null;
+
+        /**
+         * 用于保证请求幂等性的字符串。该字符串由用户生成，需保证不同请求之间唯一，最大值不超过64个ASCII字符。若不指定该参数，则无法保证请求的幂等性。
+         * @type {string || null}
+         */
+        this.ClientToken = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Placement) {
+            this.Placement = new Array();
+            for (let z in params.Placement) {
+                let obj = new Placement();
+                obj.deserialize(params.Placement[z]);
+                this.Placement.push(obj);
+            }
+        }
+
+        if (params.Job) {
+            let obj = new Job();
+            obj.deserialize(params.Job)
+            this.Job = obj;
+        }
+        this.ClientToken = params.ClientToken || null;
+
+    }
+}
+
+/**
+ * 授权认证信息
+ * @class
+ */
+class Authentication extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 授权场景，例如COS
+         * @type {string || null}
+         */
+        this.Scene = null;
+
+        /**
+         * SecretId
+         * @type {string || null}
+         */
+        this.SecretId = null;
+
+        /**
+         * SecretKey
+         * @type {string || null}
+         */
+        this.SecretKey = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Scene = params.Scene || null;
+        this.SecretId = params.SecretId || null;
+        this.SecretKey = params.SecretKey || null;
+
+    }
+}
+
+/**
+ * TerminateComputeNode请求参数结构体
+ * @class
+ */
+class TerminateComputeNodeRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 计算环境ID
+         * @type {string || null}
+         */
+        this.EnvId = null;
+
+        /**
+         * 计算节点ID
+         * @type {string || null}
+         */
+        this.ComputeNodeId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.EnvId = params.EnvId || null;
+        this.ComputeNodeId = params.ComputeNodeId || null;
+
+    }
+}
+
+/**
+ * agent运行模式
+ * @class
+ */
+class AgentRunningMode extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 场景类型，支持WINDOWS
+         * @type {string || null}
+         */
+        this.Scene = null;
+
+        /**
+         * 运行Agent的User
+         * @type {string || null}
+         */
+        this.User = null;
+
+        /**
+         * 运行Agent的Session
+         * @type {string || null}
+         */
+        this.Session = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Scene = params.Scene || null;
+        this.User = params.User || null;
+        this.Session = params.Session || null;
+
+    }
+}
+
+/**
+ * 计算环境数据
+ * @class
+ */
+class EnvData extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * CVM实例类型
+         * @type {string || null}
+         */
+        this.InstanceType = null;
+
+        /**
+         * CVM镜像ID
+         * @type {string || null}
+         */
+        this.ImageId = null;
+
+        /**
+         * 实例系统盘配置信息
+         * @type {SystemDisk || null}
+         */
+        this.SystemDisk = null;
+
+        /**
+         * 实例数据盘配置信息
+         * @type {Array.<DataDisk> || null}
+         */
+        this.DataDisks = null;
+
+        /**
+         * 私有网络相关信息配置
+         * @type {VirtualPrivateCloud || null}
+         */
+        this.VirtualPrivateCloud = null;
+
+        /**
+         * 公网带宽相关信息设置
+         * @type {InternetAccessible || null}
+         */
+        this.InternetAccessible = null;
+
+        /**
+         * CVM实例显示名称
+         * @type {string || null}
+         */
+        this.InstanceName = null;
+
+        /**
+         * 实例登录设置
+         * @type {LoginSettings || null}
+         */
+        this.LoginSettings = null;
+
+        /**
+         * 实例所属安全组
+         * @type {Array.<string> || null}
+         */
+        this.SecurityGroupIds = null;
+
+        /**
+         * 增强服务。通过该参数可以指定是否开启云安全、云监控等服务。若不指定该参数，则默认开启云监控、云安全服务。
+         * @type {EnhancedService || null}
+         */
+        this.EnhancedService = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceType = params.InstanceType || null;
+        this.ImageId = params.ImageId || null;
+
+        if (params.SystemDisk) {
+            let obj = new SystemDisk();
+            obj.deserialize(params.SystemDisk)
+            this.SystemDisk = obj;
+        }
+
+        if (params.DataDisks) {
+            this.DataDisks = new Array();
+            for (let z in params.DataDisks) {
+                let obj = new DataDisk();
+                obj.deserialize(params.DataDisks[z]);
+                this.DataDisks.push(obj);
+            }
+        }
+
+        if (params.VirtualPrivateCloud) {
+            let obj = new VirtualPrivateCloud();
+            obj.deserialize(params.VirtualPrivateCloud)
+            this.VirtualPrivateCloud = obj;
+        }
+
+        if (params.InternetAccessible) {
+            let obj = new InternetAccessible();
+            obj.deserialize(params.InternetAccessible)
+            this.InternetAccessible = obj;
+        }
+        this.InstanceName = params.InstanceName || null;
+
+        if (params.LoginSettings) {
+            let obj = new LoginSettings();
+            obj.deserialize(params.LoginSettings)
+            this.LoginSettings = obj;
+        }
+        this.SecurityGroupIds = params.SecurityGroupIds || null;
+
+        if (params.EnhancedService) {
+            let obj = new EnhancedService();
+            obj.deserialize(params.EnhancedService)
+            this.EnhancedService = obj;
+        }
+
+    }
+}
+
+/**
+ * DescribeTaskTemplates请求参数结构体
+ * @class
+ */
+class DescribeTaskTemplatesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 任务模板ID
+         * @type {Array.<string> || null}
+         */
+        this.TaskTemplateIds = null;
+
+        /**
+         * 过滤条件
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * 偏移量
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 返回数量
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskTemplateIds = params.TaskTemplateIds || null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.Offset = params.Offset || null;
+        this.Limit = params.Limit || null;
+
+    }
+}
+
+/**
+ * 通知信息
+ * @class
+ */
+class Notification extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * CMQ主题名字，要求主题名有效且关联订阅
+         * @type {string || null}
+         */
+        this.TopicName = null;
+
+        /**
+         * 事件配置
+         * @type {Array.<EventConfig> || null}
+         */
+        this.EventConfigs = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TopicName = params.TopicName || null;
+
+        if (params.EventConfigs) {
+            this.EventConfigs = new Array();
+            for (let z in params.EventConfigs) {
+                let obj = new EventConfig();
+                obj.deserialize(params.EventConfigs[z]);
+                this.EventConfigs.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * 描述了操作系统所在块设备即系统盘的信息
+ * @class
+ */
+class SystemDisk extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 系统盘类型。系统盘类型限制详见[CVM实例配置](/document/product/213/2177)。取值范围：<br><li>LOCAL_BASIC：本地硬盘<br><li>LOCAL_SSD：本地SSD硬盘<br><li>CLOUD_BASIC：普通云硬盘<br><li>CLOUD_SSD：SSD云硬盘<br><br>默认取值：LOCAL_BASIC。
+         * @type {string || null}
+         */
+        this.DiskType = null;
+
+        /**
+         * 系统盘ID。LOCAL_BASIC 和 LOCAL_SSD 类型没有ID。暂时不支持该参数。
+         * @type {string || null}
+         */
+        this.DiskId = null;
+
+        /**
+         * 系统盘大小，单位：GB。默认值为 50
+         * @type {number || null}
+         */
+        this.DiskSize = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DiskType = params.DiskType || null;
+        this.DiskId = params.DiskId || null;
+        this.DiskSize = params.DiskSize || null;
+
+    }
+}
+
+/**
+ * 任务
+ * @class
+ */
+class Task extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 任务名称，在一个作业内部唯一
+         * @type {string || null}
+         */
+        this.TaskName = null;
+
+        /**
+         * 任务实例运行个数
+         * @type {number || null}
+         */
+        this.TaskInstanceNum = null;
+
+        /**
+         * 应用程序信息
+         * @type {Application || null}
+         */
+        this.Application = null;
+
+        /**
+         * 运行环境信息，ComputeEnv 和 EnvId 必须指定一个（且只有一个）参数。
+         * @type {AnonymousComputeEnv || null}
+         */
+        this.ComputeEnv = null;
+
+        /**
+         * 计算环境ID，ComputeEnv 和 EnvId 必须指定一个（且只有一个）参数。
+         * @type {string || null}
+         */
+        this.EnvId = null;
+
+        /**
+         * 重定向信息
+         * @type {RedirectInfo || null}
+         */
+        this.RedirectInfo = null;
+
+        /**
+         * 重定向本地信息
+         * @type {RedirectLocalInfo || null}
+         */
+        this.RedirectLocalInfo = null;
+
+        /**
+         * 输入映射
+         * @type {Array.<InputMapping> || null}
+         */
+        this.InputMappings = null;
+
+        /**
+         * 输出映射
+         * @type {Array.<OutputMapping> || null}
+         */
+        this.OutputMappings = null;
+
+        /**
+         * 输出映射配置
+         * @type {Array.<OutputMappingConfig> || null}
+         */
+        this.OutputMappingConfigs = null;
+
+        /**
+         * 自定义环境变量
+         * @type {Array.<Authentication> || null}
+         */
+        this.EnvVars = null;
+
+        /**
+         * 授权信息
+         * @type {Array.<EnvVar> || null}
+         */
+        this.Authentications = null;
+
+        /**
+         * TaskInstance失败后处理方式，取值包括TERMINATE（默认）、INTERRUPT、FAST_INTERRUPT。
+         * @type {string || null}
+         */
+        this.FailedAction = null;
+
+        /**
+         * 任务失败后的最大重试次数，默认为0
+         * @type {number || null}
+         */
+        this.MaxRetryCount = null;
+
+        /**
+         * 任务启动后的超时时间，单位秒，默认为3600秒
+         * @type {number || null}
+         */
+        this.Timeout = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskName = params.TaskName || null;
+        this.TaskInstanceNum = params.TaskInstanceNum || null;
+
+        if (params.Application) {
+            let obj = new Application();
+            obj.deserialize(params.Application)
+            this.Application = obj;
+        }
+
+        if (params.ComputeEnv) {
+            let obj = new AnonymousComputeEnv();
+            obj.deserialize(params.ComputeEnv)
+            this.ComputeEnv = obj;
+        }
+        this.EnvId = params.EnvId || null;
+
+        if (params.RedirectInfo) {
+            let obj = new RedirectInfo();
+            obj.deserialize(params.RedirectInfo)
+            this.RedirectInfo = obj;
+        }
+
+        if (params.RedirectLocalInfo) {
+            let obj = new RedirectLocalInfo();
+            obj.deserialize(params.RedirectLocalInfo)
+            this.RedirectLocalInfo = obj;
+        }
+
+        if (params.InputMappings) {
+            this.InputMappings = new Array();
+            for (let z in params.InputMappings) {
+                let obj = new InputMapping();
+                obj.deserialize(params.InputMappings[z]);
+                this.InputMappings.push(obj);
+            }
+        }
+
+        if (params.OutputMappings) {
+            this.OutputMappings = new Array();
+            for (let z in params.OutputMappings) {
+                let obj = new OutputMapping();
+                obj.deserialize(params.OutputMappings[z]);
+                this.OutputMappings.push(obj);
+            }
+        }
+
+        if (params.OutputMappingConfigs) {
+            this.OutputMappingConfigs = new Array();
+            for (let z in params.OutputMappingConfigs) {
+                let obj = new OutputMappingConfig();
+                obj.deserialize(params.OutputMappingConfigs[z]);
+                this.OutputMappingConfigs.push(obj);
+            }
+        }
+
+        if (params.EnvVars) {
+            this.EnvVars = new Array();
+            for (let z in params.EnvVars) {
+                let obj = new Authentication();
+                obj.deserialize(params.EnvVars[z]);
+                this.EnvVars.push(obj);
+            }
+        }
+
+        if (params.Authentications) {
+            this.Authentications = new Array();
+            for (let z in params.Authentications) {
+                let obj = new EnvVar();
+                obj.deserialize(params.Authentications[z]);
+                this.Authentications.push(obj);
+            }
+        }
+        this.FailedAction = params.FailedAction || null;
+        this.MaxRetryCount = params.MaxRetryCount || null;
+        this.Timeout = params.Timeout || null;
+
+    }
+}
+
+/**
+ * 描述实例机型配置信息
+ * @class
+ */
+class InstanceTypeConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 可用区。
+         * @type {string || null}
+         */
+        this.Zone = null;
+
+        /**
+         * 实例机型。
+         * @type {string || null}
+         */
+        this.InstanceType = null;
+
+        /**
+         * 实例机型系列。
+         * @type {string || null}
+         */
+        this.InstanceFamily = null;
+
+        /**
+         * GPU核数，单位：核。
+         * @type {number || null}
+         */
+        this.GPU = null;
+
+        /**
+         * CPU核数，单位：核。
+         * @type {number || null}
+         */
+        this.CPU = null;
+
+        /**
+         * 内存容量，单位：`GB`。
+         * @type {number || null}
+         */
+        this.Memory = null;
+
+        /**
+         * 是否支持云硬盘。取值范围：<br><li>`TRUE`：表示支持云硬盘；<br><li>`FALSE`：表示不支持云硬盘。
+         * @type {string || null}
+         */
+        this.CbsSupport = null;
+
+        /**
+         * 机型状态。取值范围：<br><li>`AVAILABLE`：表示机型可用；<br><li>`UNAVAILABLE`：表示机型不可用。
+         * @type {string || null}
+         */
+        this.InstanceTypeState = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Zone = params.Zone || null;
+        this.InstanceType = params.InstanceType || null;
+        this.InstanceFamily = params.InstanceFamily || null;
+        this.GPU = params.GPU || null;
+        this.CPU = params.CPU || null;
+        this.Memory = params.Memory || null;
+        this.CbsSupport = params.CbsSupport || null;
+        this.InstanceTypeState = params.InstanceTypeState || null;
+
+    }
+}
+
+/**
+ * DescribeComputeEnvActivities返回参数结构体
+ * @class
+ */
+class DescribeComputeEnvActivitiesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 计算环境中的活动列表
+         * @type {Array.<Activity> || null}
+         */
+        this.ActivitySet = null;
+
+        /**
+         * 活动数量
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.ActivitySet) {
+            this.ActivitySet = new Array();
+            for (let z in params.ActivitySet) {
+                let obj = new Activity();
+                obj.deserialize(params.ActivitySet[z]);
+                this.ActivitySet.push(obj);
+            }
+        }
+        this.TotalCount = params.TotalCount || null;
+        this.RequestId = params.RequestId || null;
+
+    }
+}
+
+/**
+ * 任务实例统计指标
+ * @class
+ */
+class TaskInstanceMetrics extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Submitted个数
+         * @type {number || null}
+         */
+        this.SubmittedCount = null;
+
+        /**
+         * Pending个数
+         * @type {number || null}
+         */
+        this.PendingCount = null;
+
+        /**
+         * Runnable个数
+         * @type {number || null}
+         */
+        this.RunnableCount = null;
+
+        /**
+         * Starting个数
+         * @type {number || null}
+         */
+        this.StartingCount = null;
+
+        /**
+         * Running个数
+         * @type {number || null}
+         */
+        this.RunningCount = null;
+
+        /**
+         * Succeed个数
+         * @type {number || null}
+         */
+        this.SucceedCount = null;
+
+        /**
+         * FailedInterrupted个数
+         * @type {number || null}
+         */
+        this.FailedInterruptedCount = null;
+
+        /**
+         * Failed个数
+         * @type {number || null}
+         */
+        this.FailedCount = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SubmittedCount = params.SubmittedCount || null;
+        this.PendingCount = params.PendingCount || null;
+        this.RunnableCount = params.RunnableCount || null;
+        this.StartingCount = params.StartingCount || null;
+        this.RunningCount = params.RunningCount || null;
+        this.SucceedCount = params.SucceedCount || null;
+        this.FailedInterruptedCount = params.FailedInterruptedCount || null;
+        this.FailedCount = params.FailedCount || null;
+
+    }
+}
+
+/**
+ * 数据盘挂载选项
+ * @class
+ */
+class MountDataDisk extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 文件系统类型，Linux系统下支持"EXT3"和"EXT4"两种，默认"EXT3"；Windows系统下仅支持"NTFS"
+         * @type {string || null}
+         */
+        this.FileSystemType = null;
+
+        /**
+         * 挂载点，Linux系统合法路径，或Windows系统盘符,比如"H:\\"
+         * @type {string || null}
+         */
+        this.LocalPath = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FileSystemType = params.FileSystemType || null;
+        this.LocalPath = params.LocalPath || null;
+
+    }
+}
+
+/**
+ * 任务视图信息
+ * @class
+ */
+class TaskView extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 任务名称
+         * @type {string || null}
+         */
+        this.TaskName = null;
+
+        /**
+         * 任务状态
+         * @type {string || null}
+         */
+        this.TaskState = null;
+
+        /**
+         * 开始时间
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * 结束时间
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskName = params.TaskName || null;
+        this.TaskState = params.TaskState || null;
+        this.CreateTime = params.CreateTime || null;
+        this.EndTime = params.EndTime || null;
+
+    }
+}
+
+/**
+ * DescribeComputeEnv返回参数结构体
+ * @class
+ */
+class DescribeComputeEnvResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 计算环境ID
+         * @type {string || null}
+         */
+        this.EnvId = null;
+
+        /**
+         * 计算环境名称
+         * @type {string || null}
+         */
+        this.EnvName = null;
+
+        /**
+         * 位置信息
+         * @type {Placement || null}
+         */
+        this.Placement = null;
+
+        /**
+         * 计算环境创建时间
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * 计算节点列表信息
+         * @type {Array.<ComputeNode> || null}
+         */
+        this.ComputeNodeSet = null;
+
+        /**
+         * 计算节点统计指标
+         * @type {ComputeNodeMetrics || null}
+         */
+        this.ComputeNodeMetrics = null;
+
+        /**
+         * 计算节点期望个数
+         * @type {number || null}
+         */
+        this.DesiredComputeNodeCount = null;
+
+        /**
+         * 计算环境类型
+         * @type {string || null}
+         */
+        this.EnvType = null;
+
+        /**
+         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.EnvId = params.EnvId || null;
+        this.EnvName = params.EnvName || null;
+
+        if (params.Placement) {
+            let obj = new Placement();
+            obj.deserialize(params.Placement)
+            this.Placement = obj;
+        }
+        this.CreateTime = params.CreateTime || null;
+
+        if (params.ComputeNodeSet) {
+            this.ComputeNodeSet = new Array();
+            for (let z in params.ComputeNodeSet) {
+                let obj = new ComputeNode();
+                obj.deserialize(params.ComputeNodeSet[z]);
+                this.ComputeNodeSet.push(obj);
+            }
+        }
+
+        if (params.ComputeNodeMetrics) {
+            let obj = new ComputeNodeMetrics();
+            obj.deserialize(params.ComputeNodeMetrics)
+            this.ComputeNodeMetrics = obj;
+        }
+        this.DesiredComputeNodeCount = params.DesiredComputeNodeCount || null;
+        this.EnvType = params.EnvType || null;
+        this.RequestId = params.RequestId || null;
+
+    }
+}
+
+/**
+ * TerminateJob请求参数结构体
+ * @class
+ */
+class TerminateJobRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 作业ID
+         * @type {string || null}
+         */
+        this.JobId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.JobId = params.JobId || null;
+
+    }
+}
+
+/**
+ * 应用程序信息
+ * @class
+ */
+class Application extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 任务执行命令
+         * @type {string || null}
+         */
+        this.Command = null;
+
+        /**
+         * 应用程序的交付方式，包括PACKAGE、LOCAL 两种取值，分别指远程存储的软件包、计算环境本地。
+         * @type {string || null}
+         */
+        this.DeliveryForm = null;
+
+        /**
+         * 应用程序软件包的远程存储路径
+         * @type {string || null}
+         */
+        this.PackagePath = null;
+
+        /**
+         * 应用使用Docker的相关配置。在使用Docker配置的情况下，DeliveryForm 为 LOCAL 表示直接使用Docker镜像内部的应用软件，通过Docker方式运行；DeliveryForm 为 PACKAGE，表示将远程应用包注入到Docker镜像后，通过Docker方式运行。为避免Docker不同版本的兼容性问题，Docker安装包及相关依赖由Batch统一负责，对于已安装Docker的自定义镜像，请卸载后再使用Docker特性。
+         * @type {Docker || null}
+         */
+        this.Docker = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Command = params.Command || null;
+        this.DeliveryForm = params.DeliveryForm || null;
+        this.PackagePath = params.PackagePath || null;
+
+        if (params.Docker) {
+            let obj = new Docker();
+            obj.deserialize(params.Docker)
+            this.Docker = obj;
+        }
+
+    }
+}
+
+/**
+ * 输出映射配置
+ * @class
+ */
+class OutputMappingConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 存储类型，仅支持COS
+         * @type {string || null}
+         */
+        this.Scene = null;
+
+        /**
+         * 并行worker数量
+         * @type {number || null}
+         */
+        this.WorkerNum = null;
+
+        /**
+         * worker分块大小
+         * @type {number || null}
+         */
+        this.WorkerPartSize = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Scene = params.Scene || null;
+        this.WorkerNum = params.WorkerNum || null;
+        this.WorkerPartSize = params.WorkerPartSize || null;
+
+    }
+}
+
+/**
+ * 任务实例视图信息
+ * @class
+ */
+class TaskInstanceView extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 任务实例索引
+         * @type {number || null}
+         */
+        this.TaskInstanceIndex = null;
+
+        /**
+         * 任务实例状态
+         * @type {string || null}
+         */
+        this.TaskInstanceState = null;
+
+        /**
+         * 应用程序执行结束的exit code
+         * @type {number || null}
+         */
+        this.ExitCode = null;
+
+        /**
+         * 任务实例状态原因，任务实例失败时，会记录失败原因
+         * @type {string || null}
+         */
+        this.StateReason = null;
+
+        /**
+         * 任务实例运行时所在计算节点（例如CVM）的InstanceId。任务实例未运行或者完结时，本字段为空。任务实例重试时，本字段会随之变化
+         * @type {string || null}
+         */
+        this.ComputeNodeInstanceId = null;
+
+        /**
+         * 创建时间
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * 启动时间
+         * @type {string || null}
+         */
+        this.LaunchTime = null;
+
+        /**
+         * 开始运行时间
+         * @type {string || null}
+         */
+        this.RunningTime = null;
+
+        /**
+         * 结束时间
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * 重定向信息
+         * @type {RedirectInfo || null}
+         */
+        this.RedirectInfo = null;
+
+        /**
+         * 任务实例状态原因详情，任务实例失败时，会记录失败原因
+         * @type {string || null}
+         */
+        this.StateDetailedReason = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskInstanceIndex = params.TaskInstanceIndex || null;
+        this.TaskInstanceState = params.TaskInstanceState || null;
+        this.ExitCode = params.ExitCode || null;
+        this.StateReason = params.StateReason || null;
+        this.ComputeNodeInstanceId = params.ComputeNodeInstanceId || null;
+        this.CreateTime = params.CreateTime || null;
+        this.LaunchTime = params.LaunchTime || null;
+        this.RunningTime = params.RunningTime || null;
+        this.EndTime = params.EndTime || null;
+
+        if (params.RedirectInfo) {
+            let obj = new RedirectInfo();
+            obj.deserialize(params.RedirectInfo)
+            this.RedirectInfo = obj;
+        }
+        this.StateDetailedReason = params.StateDetailedReason || null;
+
+    }
+}
+
+/**
+ * 任务统计指标
+ * @class
+ */
+class TaskMetrics extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Submitted个数
+         * @type {number || null}
+         */
+        this.SubmittedCount = null;
+
+        /**
+         * Pending个数
+         * @type {number || null}
+         */
+        this.PendingCount = null;
+
+        /**
+         * Runnable个数
+         * @type {number || null}
+         */
+        this.RunnableCount = null;
+
+        /**
+         * Starting个数
+         * @type {number || null}
+         */
+        this.StartingCount = null;
+
+        /**
+         * Running个数
+         * @type {number || null}
+         */
+        this.RunningCount = null;
+
+        /**
+         * Succeed个数
+         * @type {number || null}
+         */
+        this.SucceedCount = null;
+
+        /**
+         * FailedInterrupted个数
+         * @type {number || null}
+         */
+        this.FailedInterruptedCount = null;
+
+        /**
+         * Failed个数
+         * @type {number || null}
+         */
+        this.FailedCount = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SubmittedCount = params.SubmittedCount || null;
+        this.PendingCount = params.PendingCount || null;
+        this.RunnableCount = params.RunnableCount || null;
+        this.StartingCount = params.StartingCount || null;
+        this.RunningCount = params.RunningCount || null;
+        this.SucceedCount = params.SucceedCount || null;
+        this.FailedInterruptedCount = params.FailedInterruptedCount || null;
+        this.FailedCount = params.FailedCount || null;
+
+    }
+}
+
+/**
+ * TerminateComputeNodes请求参数结构体
+ * @class
+ */
+class TerminateComputeNodesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 计算环境ID
+         * @type {string || null}
+         */
+        this.EnvId = null;
+
+        /**
+         * 计算节点ID列表
+         * @type {Array.<string> || null}
+         */
+        this.ComputeNodeIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.EnvId = params.EnvId || null;
+        this.ComputeNodeIds = params.ComputeNodeIds || null;
+
+    }
+}
+
+/**
+ * 自定义键值对
+ * @class
+ */
+class EventVar extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 自定义键
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 自定义值
+         * @type {string || null}
+         */
+        this.Value = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = params.Name || null;
+        this.Value = params.Value || null;
+
+    }
+}
+
+/**
+ * DescribeComputeEnvActivities请求参数结构体
+ * @class
+ */
+class DescribeComputeEnvActivitiesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * u8ba1u7b97u73afu5883ID
+         * @type {string || null}
+         */
+        this.EnvId = null;
+
+        /**
+         * 偏移量
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 返回数量
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 过滤条件
+         * @type {Filter || null}
+         */
+        this.Filters = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.EnvId = params.EnvId || null;
+        this.Offset = params.Offset || null;
+        this.Limit = params.Limit || null;
+
+        if (params.Filters) {
+            let obj = new Filter();
+            obj.deserialize(params.Filters)
+            this.Filters = obj;
+        }
+
+    }
+}
+
+/**
+ * CreateTaskTemplate请求参数结构体
+ * @class
+ */
+class CreateTaskTemplateRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 任务模板名称
+         * @type {string || null}
+         */
+        this.TaskTemplateName = null;
+
+        /**
+         * 任务模板描述
+         * @type {string || null}
+         */
+        this.TaskTemplateDescription = null;
+
+        /**
+         * 任务模板内容，参数要求与任务一致
+         * @type {Task || null}
+         */
+        this.TaskTemplateInfo = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskTemplateName = params.TaskTemplateName || null;
+        this.TaskTemplateDescription = params.TaskTemplateDescription || null;
+
+        if (params.TaskTemplateInfo) {
+            let obj = new Task();
+            obj.deserialize(params.TaskTemplateInfo)
+            this.TaskTemplateInfo = obj;
+        }
+
+    }
+}
+
+/**
+ * 作业
+ * @class
+ */
+class Job extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 作业名称
+         * @type {string || null}
+         */
+        this.JobName = null;
+
+        /**
+         * 作业描述
+         * @type {string || null}
+         */
+        this.JobDescription = null;
+
+        /**
+         * 作业优先级，任务（Task）和任务实例（TaskInstance）会继承作业优先级
+         * @type {number || null}
+         */
+        this.Priority = null;
+
+        /**
+         * 任务信息
+         * @type {Array.<Task> || null}
+         */
+        this.Tasks = null;
+
+        /**
+         * 依赖信息
+         * @type {Array.<Dependence> || null}
+         */
+        this.Dependences = null;
+
+        /**
+         * 通知信息
+         * @type {Array.<Notification> || null}
+         */
+        this.Notifications = null;
+
+        /**
+         * 对于存在依赖关系的任务中，后序任务执行对于前序任务的依赖条件。取值范围包括 PRE_TASK_SUCCEED，PRE_TASK_AT_LEAST_PARTLY_SUCCEED，PRE_TASK_FINISHED，默认值为PRE_TASK_SUCCEED。
+         * @type {string || null}
+         */
+        this.TaskExecutionDependOn = null;
+
+        /**
+         * 表示创建 CVM 失败按照何种策略处理。取值范围包括 FAILED，RUNNABLE。FAILED 表示创建 CVM 失败按照一次执行失败处理，RUNNABLE 表示创建 CVM 失败按照继续等待处理。默认值为FAILED。StateIfCreateCvmFailed对于提交的指定计算环境的作业无效。
+         * @type {string || null}
+         */
+        this.StateIfCreateCvmFailed = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.JobName = params.JobName || null;
+        this.JobDescription = params.JobDescription || null;
+        this.Priority = params.Priority || null;
+
+        if (params.Tasks) {
+            this.Tasks = new Array();
+            for (let z in params.Tasks) {
+                let obj = new Task();
+                obj.deserialize(params.Tasks[z]);
+                this.Tasks.push(obj);
+            }
+        }
+
+        if (params.Dependences) {
+            this.Dependences = new Array();
+            for (let z in params.Dependences) {
+                let obj = new Dependence();
+                obj.deserialize(params.Dependences[z]);
+                this.Dependences.push(obj);
+            }
+        }
+
+        if (params.Notifications) {
+            this.Notifications = new Array();
+            for (let z in params.Notifications) {
+                let obj = new Notification();
+                obj.deserialize(params.Notifications[z]);
+                this.Notifications.push(obj);
+            }
+        }
+        this.TaskExecutionDependOn = params.TaskExecutionDependOn || null;
+        this.StateIfCreateCvmFailed = params.StateIfCreateCvmFailed || null;
+
+    }
+}
+
+/**
+ * CreateComputeEnv请求参数结构体
+ * @class
+ */
+class CreateComputeEnvRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 计算环境信息
+         * @type {NamedComputeEnv || null}
+         */
+        this.ComputeEnv = null;
+
+        /**
+         * 位置信息
+         * @type {Placement || null}
+         */
+        this.Placement = null;
+
+        /**
+         * 用于保证请求幂等性的字符串。该字符串由用户生成，需保证不同请求之间唯一，最大值不超过64个ASCII字符。若不指定该参数，则无法保证请求的幂等性。
+         * @type {string || null}
+         */
+        this.ClientToken = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.ComputeEnv) {
+            let obj = new NamedComputeEnv();
+            obj.deserialize(params.ComputeEnv)
+            this.ComputeEnv = obj;
+        }
+
+        if (params.Placement) {
+            let obj = new Placement();
+            obj.deserialize(params.Placement)
+            this.Placement = obj;
+        }
+        this.ClientToken = params.ClientToken || null;
+
+    }
+}
+
+/**
+ * DescribeComputeEnvCreateInfo返回参数结构体
+ * @class
+ */
+class DescribeComputeEnvCreateInfoResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 计算环境 ID
+         * @type {string || null}
+         */
+        this.EnvId = null;
+
+        /**
+         * 计算环境名称
+         * @type {string || null}
+         */
+        this.EnvName = null;
+
+        /**
+         * 计算环境描述
+         * @type {string || null}
+         */
+        this.EnvDescription = null;
+
+        /**
+         * 计算环境类型，仅支持“MANAGED”类型
+         * @type {string || null}
+         */
+        this.EnvType = null;
+
+        /**
+         * 计算环境参数
+         * @type {EnvData || null}
+         */
+        this.EnvData = null;
+
+        /**
+         * 数据盘挂载选项
+         * @type {Array.<MountDataDisk> || null}
+         */
+        this.MountDataDisks = null;
+
+        /**
+         * 输入映射
+         * @type {Array.<InputMapping> || null}
+         */
+        this.InputMappings = null;
+
+        /**
+         * 授权信息
+         * @type {Array.<Authentication> || null}
+         */
+        this.Authentications = null;
+
+        /**
+         * 通知信息
+         * @type {Array.<Notification> || null}
+         */
+        this.Notifications = null;
+
+        /**
+         * 计算节点期望个数
+         * @type {number || null}
+         */
+        this.DesiredComputeNodeCount = null;
+
+        /**
+         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.EnvId = params.EnvId || null;
+        this.EnvName = params.EnvName || null;
+        this.EnvDescription = params.EnvDescription || null;
+        this.EnvType = params.EnvType || null;
+
+        if (params.EnvData) {
+            let obj = new EnvData();
+            obj.deserialize(params.EnvData)
+            this.EnvData = obj;
+        }
+
+        if (params.MountDataDisks) {
+            this.MountDataDisks = new Array();
+            for (let z in params.MountDataDisks) {
+                let obj = new MountDataDisk();
+                obj.deserialize(params.MountDataDisks[z]);
+                this.MountDataDisks.push(obj);
+            }
+        }
+
+        if (params.InputMappings) {
+            this.InputMappings = new Array();
+            for (let z in params.InputMappings) {
+                let obj = new InputMapping();
+                obj.deserialize(params.InputMappings[z]);
+                this.InputMappings.push(obj);
+            }
+        }
+
+        if (params.Authentications) {
+            this.Authentications = new Array();
+            for (let z in params.Authentications) {
+                let obj = new Authentication();
+                obj.deserialize(params.Authentications[z]);
+                this.Authentications.push(obj);
+            }
+        }
+
+        if (params.Notifications) {
+            this.Notifications = new Array();
+            for (let z in params.Notifications) {
+                let obj = new Notification();
+                obj.deserialize(params.Notifications[z]);
+                this.Notifications.push(obj);
+            }
+        }
+        this.DesiredComputeNodeCount = params.DesiredComputeNodeCount || null;
+        this.RequestId = params.RequestId || null;
+
+    }
+}
+
+/**
+ * 计算环境创建信息。
+ * @class
+ */
+class ComputeEnvCreateInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 计算环境 ID
+         * @type {string || null}
+         */
+        this.EnvId = null;
+
+        /**
+         * 计算环境名称
+         * @type {string || null}
+         */
+        this.EnvName = null;
+
+        /**
+         * 计算环境描述
+         * @type {string || null}
+         */
+        this.EnvDescription = null;
+
+        /**
+         * 计算环境类型，仅支持“MANAGED”类型
+         * @type {string || null}
+         */
+        this.EnvType = null;
+
+        /**
+         * 计算环境参数
+         * @type {EnvData || null}
+         */
+        this.EnvData = null;
+
+        /**
+         * 数据盘挂载选项
+         * @type {Array.<MountDataDisk> || null}
+         */
+        this.MountDataDisks = null;
+
+        /**
+         * 输入映射
+         * @type {Array.<InputMapping> || null}
+         */
+        this.InputMappings = null;
+
+        /**
+         * 授权信息
+         * @type {Array.<Authentication> || null}
+         */
+        this.Authentications = null;
+
+        /**
+         * 通知信息
+         * @type {Array.<Notification> || null}
+         */
+        this.Notifications = null;
+
+        /**
+         * 计算节点期望个数
+         * @type {number || null}
+         */
+        this.DesiredComputeNodeCount = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.EnvId = params.EnvId || null;
+        this.EnvName = params.EnvName || null;
+        this.EnvDescription = params.EnvDescription || null;
+        this.EnvType = params.EnvType || null;
+
+        if (params.EnvData) {
+            let obj = new EnvData();
+            obj.deserialize(params.EnvData)
+            this.EnvData = obj;
+        }
+
+        if (params.MountDataDisks) {
+            this.MountDataDisks = new Array();
+            for (let z in params.MountDataDisks) {
+                let obj = new MountDataDisk();
+                obj.deserialize(params.MountDataDisks[z]);
+                this.MountDataDisks.push(obj);
+            }
+        }
+
+        if (params.InputMappings) {
+            this.InputMappings = new Array();
+            for (let z in params.InputMappings) {
+                let obj = new InputMapping();
+                obj.deserialize(params.InputMappings[z]);
+                this.InputMappings.push(obj);
+            }
+        }
+
+        if (params.Authentications) {
+            this.Authentications = new Array();
+            for (let z in params.Authentications) {
+                let obj = new Authentication();
+                obj.deserialize(params.Authentications[z]);
+                this.Authentications.push(obj);
+            }
+        }
+
+        if (params.Notifications) {
+            this.Notifications = new Array();
+            for (let z in params.Notifications) {
+                let obj = new Notification();
+                obj.deserialize(params.Notifications[z]);
+                this.Notifications.push(obj);
+            }
+        }
+        this.DesiredComputeNodeCount = params.DesiredComputeNodeCount || null;
+
+    }
+}
+
+/**
+ * DescribeComputeEnvCreateInfos请求参数结构体
+ * @class
+ */
+class DescribeComputeEnvCreateInfosRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 计算环境ID
+         * @type {Array.<string> || null}
+         */
+        this.EnvIds = null;
+
+        /**
+         * 过滤条件
+<li> zone - String - 是否必填：否 -（过滤条件）按照可用区过滤。</li>
+<li> env-id - String - 是否必填：否 -（过滤条件）按照计算环境ID过滤。</li>
+<li> env-name - String - 是否必填：否 -（过滤条件）按照计算环境名称过滤。</li>
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * 偏移量
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 返回数量
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.EnvIds = params.EnvIds || null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.Offset = params.Offset || null;
+        this.Limit = params.Limit || null;
+
+    }
+}
+
+/**
+ * DescribeComputeEnv请求参数结构体
+ * @class
+ */
+class DescribeComputeEnvRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 计算环境ID
+         * @type {string || null}
+         */
+        this.EnvId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.EnvId = params.EnvId || null;
+
+    }
+}
+
+/**
+ * DescribeTaskTemplates返回参数结构体
+ * @class
+ */
+class DescribeTaskTemplatesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 任务模板列表
+         * @type {Array.<TaskTemplateView> || null}
+         */
+        this.TaskTemplateSet = null;
+
+        /**
+         * 任务模板数量
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.TaskTemplateSet) {
+            this.TaskTemplateSet = new Array();
+            for (let z in params.TaskTemplateSet) {
+                let obj = new TaskTemplateView();
+                obj.deserialize(params.TaskTemplateSet[z]);
+                this.TaskTemplateSet.push(obj);
+            }
+        }
+        this.TotalCount = params.TotalCount || null;
+        this.RequestId = params.RequestId || null;
+
+    }
+}
+
+/**
+ * 计算节点统计指标
+ * @class
+ */
+class ComputeNodeMetrics extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 已经完成提交的计算节点数量
+         * @type {string || null}
+         */
+        this.SubmittedCount = null;
+
+        /**
+         * 创建中的计算节点数量
+         * @type {string || null}
+         */
+        this.CreatingCount = null;
+
+        /**
+         * 创建失败的计算节点数量
+         * @type {string || null}
+         */
+        this.CreationFailedCount = null;
+
+        /**
+         * 完成创建的计算节点数量
+         * @type {string || null}
+         */
+        this.CreatedCount = null;
+
+        /**
+         * 运行中的计算节点数量
+         * @type {string || null}
+         */
+        this.RunningCount = null;
+
+        /**
+         * 销毁中的计算节点数量
+         * @type {string || null}
+         */
+        this.DeletingCount = null;
+
+        /**
+         * 异常的计算节点数量
+         * @type {string || null}
+         */
+        this.AbnormalCount = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SubmittedCount = params.SubmittedCount || null;
+        this.CreatingCount = params.CreatingCount || null;
+        this.CreationFailedCount = params.CreationFailedCount || null;
+        this.CreatedCount = params.CreatedCount || null;
+        this.RunningCount = params.RunningCount || null;
+        this.DeletingCount = params.DeletingCount || null;
+        this.AbnormalCount = params.AbnormalCount || null;
+
+    }
+}
+
+/**
+ * DeleteJob请求参数结构体
+ * @class
+ */
+class DeleteJobRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 作业ID
+         * @type {string || null}
+         */
+        this.JobId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.JobId = params.JobId || null;
+
+    }
+}
+
+/**
+ * DeleteTaskTemplates请求参数结构体
+ * @class
+ */
+class DeleteTaskTemplatesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 用于删除任务模板信息
+         * @type {Array.<string> || null}
+         */
+        this.TaskTemplateIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskTemplateIds = params.TaskTemplateIds || null;
+
+    }
+}
+
+/**
+ * DescribeJob返回参数结构体
+ * @class
+ */
+class DescribeJobResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 作业ID
+         * @type {string || null}
+         */
+        this.JobId = null;
+
+        /**
+         * 作业名称
+         * @type {string || null}
+         */
+        this.JobName = null;
+
+        /**
+         * 可用区信息
+         * @type {string || null}
+         */
+        this.Zone = null;
+
+        /**
+         * 作业优先级
+         * @type {number || null}
+         */
+        this.Priority = null;
+
+        /**
+         * 作业状态
+         * @type {string || null}
+         */
+        this.JobState = null;
+
+        /**
+         * 创建时间
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * 结束时间
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * 任务视图信息
+         * @type {Array.<TaskView> || null}
+         */
+        this.TaskSet = null;
+
+        /**
+         * 任务间依赖信息
+         * @type {Array.<Dependence> || null}
+         */
+        this.DependenceSet = null;
+
+        /**
+         * 任务统计指标
+         * @type {TaskMetrics || null}
+         */
+        this.TaskMetrics = null;
+
+        /**
+         * 任务实例统计指标
+         * @type {TaskInstanceView || null}
+         */
+        this.TaskInstanceMetrics = null;
+
+        /**
+         * 作业失败原因
+         * @type {string || null}
+         */
+        this.StateReason = null;
+
+        /**
+         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.JobId = params.JobId || null;
+        this.JobName = params.JobName || null;
+        this.Zone = params.Zone || null;
+        this.Priority = params.Priority || null;
+        this.JobState = params.JobState || null;
+        this.CreateTime = params.CreateTime || null;
+        this.EndTime = params.EndTime || null;
+
+        if (params.TaskSet) {
+            this.TaskSet = new Array();
+            for (let z in params.TaskSet) {
+                let obj = new TaskView();
+                obj.deserialize(params.TaskSet[z]);
+                this.TaskSet.push(obj);
+            }
+        }
+
+        if (params.DependenceSet) {
+            this.DependenceSet = new Array();
+            for (let z in params.DependenceSet) {
+                let obj = new Dependence();
+                obj.deserialize(params.DependenceSet[z]);
+                this.DependenceSet.push(obj);
+            }
+        }
+
+        if (params.TaskMetrics) {
+            let obj = new TaskMetrics();
+            obj.deserialize(params.TaskMetrics)
+            this.TaskMetrics = obj;
+        }
+
+        if (params.TaskInstanceMetrics) {
+            let obj = new TaskInstanceView();
+            obj.deserialize(params.TaskInstanceMetrics)
+            this.TaskInstanceMetrics = obj;
+        }
+        this.StateReason = params.StateReason || null;
+        this.RequestId = params.RequestId || null;
+
+    }
+}
+
+/**
+ * DescribeComputeEnvCreateInfo请求参数结构体
+ * @class
+ */
+class DescribeComputeEnvCreateInfoRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 计算环境ID
+         * @type {string || null}
+         */
+        this.EnvId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.EnvId = params.EnvId || null;
+
+    }
+}
+
+/**
+ * ModifyTaskTemplate请求参数结构体
+ * @class
+ */
+class ModifyTaskTemplateRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 任务模板ID
+         * @type {string || null}
+         */
+        this.TaskTemplateId = null;
+
+        /**
+         * 任务模板名称
+         * @type {string || null}
+         */
+        this.TaskTemplateName = null;
+
+        /**
+         * 任务模板描述
+         * @type {string || null}
+         */
+        this.TaskTemplateDescription = null;
+
+        /**
+         * 任务模板信息
+         * @type {Task || null}
+         */
+        this.TaskTemplateInfo = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskTemplateId = params.TaskTemplateId || null;
+        this.TaskTemplateName = params.TaskTemplateName || null;
+        this.TaskTemplateDescription = params.TaskTemplateDescription || null;
+
+        if (params.TaskTemplateInfo) {
+            let obj = new Task();
+            obj.deserialize(params.TaskTemplateInfo)
+            this.TaskTemplateInfo = obj;
+        }
+
+    }
+}
+
+/**
+ * 描述了数据盘的信息
+ * @class
+ */
+class DataDisk extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 数据盘类型。数据盘类型限制详见[CVM实例配置](/document/product/213/2177)。取值范围：<br><li>LOCAL_BASIC：本地硬盘<br><li>LOCAL_SSD：本地SSD硬盘<br><li>CLOUD_BASIC：普通云硬盘<br><li>CLOUD_PREMIUM：高性能云硬盘<br><li>CLOUD_SSD：SSD云硬盘<br><br>默认取值：LOCAL_BASIC。<br><br>该参数对`ResizeInstanceDisk`接口无效。
+         * @type {string || null}
+         */
+        this.DiskType = null;
+
+        /**
+         * 系统盘ID。LOCAL_BASIC 和 LOCAL_SSD 类型没有ID。暂时不支持该参数。
+         * @type {string || null}
+         */
+        this.DiskId = null;
+
+        /**
+         * 数据盘大小，单位：GB。最小调整步长为10G，不同数据盘类型取值范围不同，具体限制详见：[CVM实例配置](/document/product/213/2177)。默认值为0，表示不购买数据盘。更多限制详见产品文档。
+         * @type {number || null}
+         */
+        this.DiskSize = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DiskType = params.DiskType || null;
+        this.DiskId = params.DiskId || null;
+        this.DiskSize = params.DiskSize || null;
+
+    }
+}
+
+/**
+ * 计算环境
+ * @class
+ */
+class NamedComputeEnv extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 计算环境名称
+         * @type {string || null}
+         */
+        this.EnvName = null;
+
+        /**
+         * 计算环境描述
+         * @type {string || null}
+         */
+        this.EnvDescription = null;
+
+        /**
+         * 计算环境管理类型
+         * @type {string || null}
+         */
+        this.EnvType = null;
+
+        /**
+         * 计算环境具体参数
+         * @type {EnvData || null}
+         */
+        this.EnvData = null;
+
+        /**
+         * 计算节点期望个数
+         * @type {number || null}
+         */
+        this.DesiredComputeNodeCount = null;
+
+        /**
+         * 数据盘挂载选项
+         * @type {Array.<MountDataDisk> || null}
+         */
+        this.MountDataDisks = null;
+
+        /**
+         * 授权信息
+         * @type {Array.<Authentication> || null}
+         */
+        this.Authentications = null;
+
+        /**
+         * 输入映射信息
+         * @type {Array.<InputMapping> || null}
+         */
+        this.InputMappings = null;
+
+        /**
+         * agent运行模式，适用于Windows系统
+         * @type {AgentRunningMode || null}
+         */
+        this.AgentRunningMode = null;
+
+        /**
+         * 通知信息
+         * @type {Notification || null}
+         */
+        this.Notifications = null;
+
+        /**
+         * 非活跃节点处理策略，默认“RECREATE”，即对于实例创建失败或异常退还的计算节点，定期重新创建实例资源。
+         * @type {string || null}
+         */
+        this.ActionIfComputeNodeInactive = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.EnvName = params.EnvName || null;
+        this.EnvDescription = params.EnvDescription || null;
+        this.EnvType = params.EnvType || null;
+
+        if (params.EnvData) {
+            let obj = new EnvData();
+            obj.deserialize(params.EnvData)
+            this.EnvData = obj;
+        }
+        this.DesiredComputeNodeCount = params.DesiredComputeNodeCount || null;
+
+        if (params.MountDataDisks) {
+            this.MountDataDisks = new Array();
+            for (let z in params.MountDataDisks) {
+                let obj = new MountDataDisk();
+                obj.deserialize(params.MountDataDisks[z]);
+                this.MountDataDisks.push(obj);
+            }
+        }
+
+        if (params.Authentications) {
+            this.Authentications = new Array();
+            for (let z in params.Authentications) {
+                let obj = new Authentication();
+                obj.deserialize(params.Authentications[z]);
+                this.Authentications.push(obj);
+            }
+        }
+
+        if (params.InputMappings) {
+            this.InputMappings = new Array();
+            for (let z in params.InputMappings) {
+                let obj = new InputMapping();
+                obj.deserialize(params.InputMappings[z]);
+                this.InputMappings.push(obj);
+            }
+        }
+
+        if (params.AgentRunningMode) {
+            let obj = new AgentRunningMode();
+            obj.deserialize(params.AgentRunningMode)
+            this.AgentRunningMode = obj;
+        }
+
+        if (params.Notifications) {
+            let obj = new Notification();
+            obj.deserialize(params.Notifications)
+            this.Notifications = obj;
+        }
+        this.ActionIfComputeNodeInactive = params.ActionIfComputeNodeInactive || null;
+
+    }
+}
+
+/**
+ * DeleteJob返回参数结构体
+ * @class
+ */
+class DeleteJobResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = params.RequestId || null;
+
+    }
+}
+
+/**
+ * 事件配置
+ * @class
+ */
+class EventConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 事件类型
+         * @type {string || null}
+         */
+        this.EventName = null;
+
+        /**
+         * 自定义键值对
+         * @type {Array.<EventVar> || null}
+         */
+        this.EventVars = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.EventName = params.EventName || null;
+
+        if (params.EventVars) {
+            this.EventVars = new Array();
+            for (let z in params.EventVars) {
+                let obj = new EventVar();
+                obj.deserialize(params.EventVars[z]);
+                this.EventVars.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * 描述了实例登录相关配置与信息。
+ * @class
+ */
+class LoginSettings extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例登录密码。不同操作系统类型密码复杂度限制不一样，具体如下：<br><li>Linux实例密码必须8到16位，至少包括两项[a-z，A-Z]、[0-9] 和 [( ) ` ~ ! @ # $ % ^ & * - + = | { } [ ] : ; ' , . ? / ]中的特殊符号。<br><li>Windows实例密码必须12到16位，至少包括三项[a-z]，[A-Z]，[0-9] 和 [( ) ` ~ ! @ # $ % ^ & * - + = { } [ ] : ; ' , . ? /]中的特殊符号。<br><br>若不指定该参数，则由系统随机生成密码，并通过站内信方式通知到用户。
+         * @type {string || null}
+         */
+        this.Password = null;
+
+        /**
+         * 密钥ID列表。关联密钥后，就可以通过对应的私钥来访问实例；KeyId可通过接口DescribeKeyPairs获取，密钥与密码不能同时指定，同时Windows操作系统不支持指定密钥。当前仅支持购买的时候指定一个密钥。
+         * @type {Array.<string> || null}
+         */
+        this.KeyIds = null;
+
+        /**
+         * 保持镜像的原始设置。该参数与Password或KeyIds.N不能同时指定。只有使用自定义镜像、共享镜像或外部导入镜像创建实例时才能指定该参数为TRUE。取值范围：<br><li>TRUE：表示保持镜像的登录设置<br><li>FALSE：表示不保持镜像的登录设置<br><br>默认取值：FALSE。
+         * @type {string || null}
+         */
+        this.KeepImageLogin = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Password = params.Password || null;
+        this.KeyIds = params.KeyIds || null;
+        this.KeepImageLogin = params.KeepImageLogin || null;
+
+    }
+}
+
+/**
+ * 输出映射
+ * @class
+ */
+class OutputMapping extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 源端路径
+         * @type {string || null}
+         */
+        this.SourcePath = null;
+
+        /**
+         * 目的端路径
+         * @type {string || null}
+         */
+        this.DestinationPath = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SourcePath = params.SourcePath || null;
+        this.DestinationPath = params.DestinationPath || null;
+
+    }
+}
+
+/**
+ * 描述了实例的增强服务启用情况与其设置，如云安全，云监控等实例 Agent
+ * @class
+ */
+class EnhancedService extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 开启云安全服务。若不指定该参数，则默认开启云安全服务。
+         * @type {RunSecurityServiceEnabled || null}
+         */
+        this.SecurityService = null;
+
+        /**
+         * 开启云安全服务。若不指定该参数，则默认开启云监控服务。
+         * @type {RunMonitorServiceEnabled || null}
+         */
+        this.MonitorService = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.SecurityService) {
+            let obj = new RunSecurityServiceEnabled();
+            obj.deserialize(params.SecurityService)
+            this.SecurityService = obj;
+        }
+
+        if (params.MonitorService) {
+            let obj = new RunMonitorServiceEnabled();
+            obj.deserialize(params.MonitorService)
+            this.MonitorService = obj;
+        }
+
+    }
+}
+
+/**
+ * DescribeJobSubmitInfo返回参数结构体
+ * @class
+ */
+class DescribeJobSubmitInfoResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 作业ID
+         * @type {string || null}
+         */
+        this.JobId = null;
+
+        /**
+         * 作业名称
+         * @type {string || null}
+         */
+        this.JobName = null;
+
+        /**
+         * 作业描述
+         * @type {string || null}
+         */
+        this.JobDescription = null;
+
+        /**
+         * 作业优先级，任务（Task）和任务实例（TaskInstance）会继承作业优先级
+         * @type {number || null}
+         */
+        this.Priority = null;
+
+        /**
+         * 任务信息
+         * @type {Array.<Task> || null}
+         */
+        this.Tasks = null;
+
+        /**
+         * 依赖信息
+         * @type {Array.<Dependence> || null}
+         */
+        this.Dependences = null;
+
+        /**
+         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.JobId = params.JobId || null;
+        this.JobName = params.JobName || null;
+        this.JobDescription = params.JobDescription || null;
+        this.Priority = params.Priority || null;
+
+        if (params.Tasks) {
+            this.Tasks = new Array();
+            for (let z in params.Tasks) {
+                let obj = new Task();
+                obj.deserialize(params.Tasks[z]);
+                this.Tasks.push(obj);
+            }
+        }
+
+        if (params.Dependences) {
+            this.Dependences = new Array();
+            for (let z in params.Dependences) {
+                let obj = new Dependence();
+                obj.deserialize(params.Dependences[z]);
+                this.Dependences.push(obj);
+            }
+        }
+        this.RequestId = params.RequestId || null;
+
+    }
+}
+
+/**
+ * DescribeComputeEnvCreateInfos返回参数结构体
+ * @class
+ */
+class DescribeComputeEnvCreateInfosResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 计算环境数量
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 计算环境创建信息列表
+         * @type {Array.<ComputeEnvCreateInfo> || null}
+         */
+        this.ComputeEnvCreateInfoSet = null;
+
+        /**
+         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = params.TotalCount || null;
+
+        if (params.ComputeEnvCreateInfoSet) {
+            this.ComputeEnvCreateInfoSet = new Array();
+            for (let z in params.ComputeEnvCreateInfoSet) {
+                let obj = new ComputeEnvCreateInfo();
+                obj.deserialize(params.ComputeEnvCreateInfoSet[z]);
+                this.ComputeEnvCreateInfoSet.push(obj);
+            }
+        }
+        this.RequestId = params.RequestId || null;
+
+    }
+}
+
+/**
+ * 描述了 “云安全” 服务相关的信息
+ * @class
+ */
+class RunSecurityServiceEnabled extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 是否开启[云安全](/document/product/296)服务。取值范围：<br><li>TRUE：表示开启云安全服务<br><li>FALSE：表示不开启云安全服务<br><br>默认取值：TRUE。
+         * @type {boolean || null}
+         */
+        this.Enabled = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Enabled = params.Enabled || null;
+
+    }
+}
+
+/**
+ * DescribeJob请求参数结构体
+ * @class
+ */
+class DescribeJobRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 作业标识
+         * @type {string || null}
+         */
+        this.JobId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.JobId = params.JobId || null;
+
+    }
+}
+
+/**
+ * 重定向信息
+
+ * @class
+ */
+class RedirectInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 标准输出重定向路径
+         * @type {string || null}
+         */
+        this.StdoutRedirectPath = null;
+
+        /**
+         * 标准错误重定向路径
+         * @type {string || null}
+         */
+        this.StderrRedirectPath = null;
+
+        /**
+         * 标准输出重定向文件名，支持三个占位符${BATCH_JOB_ID}、${BATCH_TASK_NAME}、${BATCH_TASK_INSTANCE_INDEX}
+         * @type {string || null}
+         */
+        this.StdoutRedirectFileName = null;
+
+        /**
+         * 标准错误重定向文件名，支持三个占位符${BATCH_JOB_ID}、${BATCH_TASK_NAME}、${BATCH_TASK_INSTANCE_INDEX}
+         * @type {string || null}
+         */
+        this.StderrRedirectFileName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.StdoutRedirectPath = params.StdoutRedirectPath || null;
+        this.StderrRedirectPath = params.StderrRedirectPath || null;
+        this.StdoutRedirectFileName = params.StdoutRedirectFileName || null;
+        this.StderrRedirectFileName = params.StderrRedirectFileName || null;
+
+    }
+}
+
+/**
+ * ModifyTaskTemplate返回参数结构体
+ * @class
+ */
+class ModifyTaskTemplateResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = params.RequestId || null;
+
+    }
+}
+
+/**
+ * SubmitJob返回参数结构体
+ * @class
+ */
+class SubmitJobResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 当通过本接口来提交作业时会返回该参数，表示一个作业ID。返回作业ID列表并不代表作业解析/运行成功，可根据 DescribeJob 接口查询其状态。
+         * @type {string || null}
+         */
+        this.JobId = null;
+
+        /**
+         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.JobId = params.JobId || null;
+        this.RequestId = params.RequestId || null;
+
+    }
+}
+
+/**
+ * 输入映射
+ * @class
+ */
+class InputMapping extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 源端路径
+         * @type {string || null}
+         */
+        this.SourcePath = null;
+
+        /**
+         * 目的端路径
+         * @type {string || null}
+         */
+        this.DestinationPath = null;
+
+        /**
+         * 挂载配置项参数
+         * @type {string || null}
+         */
+        this.MountOptionParameter = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SourcePath = params.SourcePath || null;
+        this.DestinationPath = params.DestinationPath || null;
+        this.MountOptionParameter = params.MountOptionParameter || null;
+
+    }
+}
+
+/**
+ * 本地重定向信息
+ * @class
+ */
+class RedirectLocalInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 标准输出重定向本地路径
+         * @type {string || null}
+         */
+        this.StdoutLocalPath = null;
+
+        /**
+         * 标准错误重定向本地路径
+         * @type {string || null}
+         */
+        this.StderrLocalPath = null;
+
+        /**
+         * 标准输出重定向本地文件名，支持三个占位符${BATCH_JOB_ID}、${BATCH_TASK_NAME}、${BATCH_TASK_INSTANCE_INDEX}
+         * @type {string || null}
+         */
+        this.StdoutLocalFileName = null;
+
+        /**
+         * 标准错误重定向本地文件名，支持三个占位符${BATCH_JOB_ID}、${BATCH_TASK_NAME}、${BATCH_TASK_INSTANCE_INDEX}
+         * @type {string || null}
+         */
+        this.StderrLocalFileName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.StdoutLocalPath = params.StdoutLocalPath || null;
+        this.StderrLocalPath = params.StderrLocalPath || null;
+        this.StdoutLocalFileName = params.StdoutLocalFileName || null;
+        this.StderrLocalFileName = params.StderrLocalFileName || null;
+
+    }
+}
+
+/**
+ * DescribeJobSubmitInfo请求参数结构体
+ * @class
+ */
+class DescribeJobSubmitInfoRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 作业ID
+         * @type {string || null}
+         */
+        this.JobId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.JobId = params.JobId || null;
+
+    }
+}
+
+/**
+ * 依赖关系
+ * @class
+ */
+class Dependence extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 依赖关系的起点任务名称
+         * @type {string || null}
+         */
+        this.StartTask = null;
+
+        /**
+         * 依赖关系的终点任务名称
+         * @type {string || null}
+         */
+        this.EndTask = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.StartTask = params.StartTask || null;
+        this.EndTask = params.EndTask || null;
+
+    }
+}
+
+/**
+ * >描述键值对过滤器，用于条件过滤查询。例如过滤ID、名称、状态等
+> * 若存在多个`Filter`时，`Filter`间的关系为逻辑与（`AND`）关系。
+> * 若同一个`Filter`存在多个`Values`，同一`Filter`下`Values`间的关系为逻辑或（`OR`）关系。
+>
+> 以[DescribeInstances](https://cloud.tencent.com/document/api/213/9388)接口的`Filter`为例。若我们需要查询可用区（`zone`）为广州一区 ***并且*** 实例计费模式（`instance-charge-type`）为包年包月 ***或者*** 按量计费的实例时，可如下实现：
+```
+Filters.0.Name=zone
+&Filters.0.Values.0=ap-guangzhou-1
+&Filters.1.Name=instance-charge-type
+&Filters.1.Values.0=PREPAID
+&Filters.1.Values.1=POSTPAID_BY_HOUR
+```
+ * @class
+ */
+class Filter extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 需要过滤的字段。
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 字段的过滤值。
+         * @type {Array.<string> || null}
+         */
+        this.Values = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = params.Name || null;
+        this.Values = params.Values || null;
+
+    }
+}
+
+/**
+ * CreateComputeEnv返回参数结构体
+ * @class
+ */
+class CreateComputeEnvResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 计算环境ID
+         * @type {string || null}
+         */
+        this.EnvId = null;
+
+        /**
+         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.EnvId = params.EnvId || null;
+        this.RequestId = params.RequestId || null;
+
+    }
+}
+
+/**
+ * Docker容器信息
+ * @class
+ */
+class Docker extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Docker Hub 用户名或 Tencent Registry 用户名
+         * @type {string || null}
+         */
+        this.User = null;
+
+        /**
+         * Docker Hub 密码或 Tencent Registry 密码
+         * @type {string || null}
+         */
+        this.Password = null;
+
+        /**
+         * Docker Hub 可以不填，但确保具有公网访问能力。或者是 Tencent Registry 服务地址“ccr.ccs.tencentyun.com”
+         * @type {string || null}
+         */
+        this.Server = null;
+
+        /**
+         * Docker Hub填写“[user/repo]:[tag]”，Tencent Registry填写“ccr.ccs.tencentyun.com/[namespace/repo]:[tag]”
+         * @type {string || null}
+         */
+        this.Image = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.User = params.User || null;
+        this.Password = params.Password || null;
+        this.Server = params.Server || null;
+        this.Image = params.Image || null;
+
+    }
+}
+
+/**
+ * ModifyComputeEnv返回参数结构体
+ * @class
+ */
+class ModifyComputeEnvResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = params.RequestId || null;
+
+    }
+}
+
+/**
+ * 描述了实例的抽象位置，包括其所在的可用区，所属的项目，宿主机等（仅CDH产品可用）
+ * @class
+ */
+class Placement extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例所属的[可用区](/document/product/213/9452#zone)ID。该参数也可以通过调用  [DescribeZones](/document/api/213/9455) 的返回值中的Zone字段来获取。
+         * @type {string || null}
+         */
+        this.Zone = null;
+
+        /**
+         * 实例所属项目ID。该参数可以通过调用 [DescribeProject](/document/api/378/4400) 的返回值中的 projectId 字段来获取。不填为默认项目。
+         * @type {number || null}
+         */
+        this.ProjectId = null;
+
+        /**
+         * 实例所属的专用宿主机ID列表。如果您有购买专用宿主机并且指定了该参数，则您购买的实例就会随机的部署在这些专用宿主机上。当前暂不支持。
+         * @type {Array.<string> || null}
+         */
+        this.HostIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Zone = params.Zone || null;
+        this.ProjectId = params.ProjectId || null;
+        this.HostIds = params.HostIds || null;
+
+    }
+}
+
+/**
+ * 计算节点
+ * @class
+ */
+class ComputeNode extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 计算节点ID
+         * @type {string || null}
+         */
+        this.ComputeNodeId = null;
+
+        /**
+         * 计算节点实例ID，对于CVM场景，即为CVM的InstanceId
+         * @type {string || null}
+         */
+        this.ComputeNodeInstanceId = null;
+
+        /**
+         * 计算节点状态
+         * @type {string || null}
+         */
+        this.ComputeNodeState = null;
+
+        /**
+         * CPU核数
+         * @type {number || null}
+         */
+        this.Cpu = null;
+
+        /**
+         * 内存容量，单位GiB
+         * @type {number || null}
+         */
+        this.Mem = null;
+
+        /**
+         * 资源创建完成时间
+         * @type {string || null}
+         */
+        this.ResourceCreatedTime = null;
+
+        /**
+         * 计算节点运行  TaskInstance 可用容量。0表示计算节点忙碌。
+         * @type {number || null}
+         */
+        this.TaskInstanceNumAvailable = null;
+
+        /**
+         * Batch Agent 版本
+         * @type {string || null}
+         */
+        this.AgentVersion = null;
+
+        /**
+         * 实例内网IP
+         * @type {Array.<string> || null}
+         */
+        this.PrivateIpAddresses = null;
+
+        /**
+         * 实例公网IP
+         * @type {Array.<string> || null}
+         */
+        this.PublicIpAddresses = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ComputeNodeId = params.ComputeNodeId || null;
+        this.ComputeNodeInstanceId = params.ComputeNodeInstanceId || null;
+        this.ComputeNodeState = params.ComputeNodeState || null;
+        this.Cpu = params.Cpu || null;
+        this.Mem = params.Mem || null;
+        this.ResourceCreatedTime = params.ResourceCreatedTime || null;
+        this.TaskInstanceNumAvailable = params.TaskInstanceNumAvailable || null;
+        this.AgentVersion = params.AgentVersion || null;
+        this.PrivateIpAddresses = params.PrivateIpAddresses || null;
+        this.PublicIpAddresses = params.PublicIpAddresses || null;
+
+    }
+}
+
+/**
+ * DeleteComputeEnv请求参数结构体
+ * @class
+ */
+class DeleteComputeEnvRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 计算环境ID
+         * @type {string || null}
+         */
+        this.EnvId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.EnvId = params.EnvId || null;
+
+    }
+}
+
+/**
+ * CreateTaskTemplate返回参数结构体
+ * @class
+ */
+class CreateTaskTemplateResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 任务模板ID
+         * @type {string || null}
+         */
+        this.TaskTemplateId = null;
+
+        /**
+         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskTemplateId = params.TaskTemplateId || null;
+        this.RequestId = params.RequestId || null;
+
+    }
+}
+
+/**
+ * TerminateJob返回参数结构体
+ * @class
+ */
+class TerminateJobResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = params.RequestId || null;
+
+    }
+}
+
+/**
+ * DescribeJobs请求参数结构体
+ * @class
+ */
+class DescribeJobsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 作业ID
+         * @type {Array.<string> || null}
+         */
+        this.JobIds = null;
+
+        /**
+         * 过滤条件
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * 偏移量
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 返回数量
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.JobIds = params.JobIds || null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.Offset = params.Offset || null;
+        this.Limit = params.Limit || null;
+
+    }
+}
+
+/**
+ * 任务模板信息
+ * @class
+ */
+class TaskTemplateView extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 任务模板ID
+         * @type {string || null}
+         */
+        this.TaskTemplateId = null;
+
+        /**
+         * 任务模板名称
+         * @type {string || null}
+         */
+        this.TaskTemplateName = null;
+
+        /**
+         * 任务模板描述
+         * @type {string || null}
+         */
+        this.TaskTemplateDescription = null;
+
+        /**
+         * 任务模板信息
+         * @type {Task || null}
+         */
+        this.TaskTemplateInfo = null;
+
+        /**
+         * 创建时间
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskTemplateId = params.TaskTemplateId || null;
+        this.TaskTemplateName = params.TaskTemplateName || null;
+        this.TaskTemplateDescription = params.TaskTemplateDescription || null;
+
+        if (params.TaskTemplateInfo) {
+            let obj = new Task();
+            obj.deserialize(params.TaskTemplateInfo)
+            this.TaskTemplateInfo = obj;
+        }
+        this.CreateTime = params.CreateTime || null;
+
+    }
+}
+
+/**
+ * DeleteTaskTemplates返回参数结构体
+ * @class
+ */
+class DeleteTaskTemplatesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = params.RequestId || null;
+
+    }
+}
+
+/**
+ * TerminateTaskInstance请求参数结构体
+ * @class
+ */
+class TerminateTaskInstanceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 作业ID
+         * @type {string || null}
+         */
+        this.JobId = null;
+
+        /**
+         * 任务名称
+         * @type {string || null}
+         */
+        this.TaskName = null;
+
+        /**
+         * 任务实例索引
+         * @type {number || null}
+         */
+        this.TaskInstanceIndex = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.JobId = params.JobId || null;
+        this.TaskName = params.TaskName || null;
+        this.TaskInstanceIndex = params.TaskInstanceIndex || null;
+
+    }
+}
+
+/**
+ * TerminateTaskInstance返回参数结构体
+ * @class
+ */
+class TerminateTaskInstanceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = params.RequestId || null;
+
+    }
+}
+
+/**
+ * TerminateComputeNodes返回参数结构体
+ * @class
+ */
+class TerminateComputeNodesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = params.RequestId || null;
+
+    }
+}
+
+/**
+ * DescribeAvailableCvmInstanceTypes返回参数结构体
+ * @class
+ */
+class DescribeAvailableCvmInstanceTypesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 机型配置数组
+         * @type {Array.<InstanceTypeConfig> || null}
+         */
+        this.InstanceTypeConfigSet = null;
+
+        /**
+         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.InstanceTypeConfigSet) {
+            this.InstanceTypeConfigSet = new Array();
+            for (let z in params.InstanceTypeConfigSet) {
+                let obj = new InstanceTypeConfig();
+                obj.deserialize(params.InstanceTypeConfigSet[z]);
+                this.InstanceTypeConfigSet.push(obj);
+            }
+        }
+        this.RequestId = params.RequestId || null;
+
+    }
+}
+
+/**
+ * DescribeTask返回参数结构体
+ * @class
+ */
+class DescribeTaskResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 作业ID
+         * @type {string || null}
+         */
+        this.JobId = null;
+
+        /**
+         * 任务名称
+         * @type {string || null}
+         */
+        this.TaskName = null;
+
+        /**
+         * 任务状态
+         * @type {string || null}
+         */
+        this.TaskState = null;
+
+        /**
+         * 创建时间
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * 结束时间
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * 任务实例总数
+         * @type {number || null}
+         */
+        this.TaskInstanceTotalCount = null;
+
+        /**
+         * 任务实例信息
+         * @type {Array.<TaskInstanceView> || null}
+         */
+        this.TaskInstanceSet = null;
+
+        /**
+         * 任务实例统计指标
+         * @type {TaskInstanceMetrics || null}
+         */
+        this.TaskInstanceMetrics = null;
+
+        /**
+         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.JobId = params.JobId || null;
+        this.TaskName = params.TaskName || null;
+        this.TaskState = params.TaskState || null;
+        this.CreateTime = params.CreateTime || null;
+        this.EndTime = params.EndTime || null;
+        this.TaskInstanceTotalCount = params.TaskInstanceTotalCount || null;
+
+        if (params.TaskInstanceSet) {
+            this.TaskInstanceSet = new Array();
+            for (let z in params.TaskInstanceSet) {
+                let obj = new TaskInstanceView();
+                obj.deserialize(params.TaskInstanceSet[z]);
+                this.TaskInstanceSet.push(obj);
+            }
+        }
+
+        if (params.TaskInstanceMetrics) {
+            let obj = new TaskInstanceMetrics();
+            obj.deserialize(params.TaskInstanceMetrics)
+            this.TaskInstanceMetrics = obj;
+        }
+        this.RequestId = params.RequestId || null;
+
+    }
+}
+
+/**
+ * 计算环境信息
+ * @class
+ */
+class ComputeEnvView extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 计算环境ID
+         * @type {string || null}
+         */
+        this.EnvId = null;
+
+        /**
+         * 计算环境名称
+         * @type {string || null}
+         */
+        this.EnvName = null;
+
+        /**
+         * 位置信息
+         * @type {Placement || null}
+         */
+        this.Placement = null;
+
+        /**
+         * 创建时间
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * 计算节点统计指标
+         * @type {ComputeNodeMetrics || null}
+         */
+        this.ComputeNodeMetrics = null;
+
+        /**
+         * 计算环境类型
+         * @type {string || null}
+         */
+        this.EnvType = null;
+
+        /**
+         * 计算节点期望个数
+         * @type {number || null}
+         */
+        this.DesiredComputeNodeCount = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.EnvId = params.EnvId || null;
+        this.EnvName = params.EnvName || null;
+
+        if (params.Placement) {
+            let obj = new Placement();
+            obj.deserialize(params.Placement)
+            this.Placement = obj;
+        }
+        this.CreateTime = params.CreateTime || null;
+
+        if (params.ComputeNodeMetrics) {
+            let obj = new ComputeNodeMetrics();
+            obj.deserialize(params.ComputeNodeMetrics)
+            this.ComputeNodeMetrics = obj;
+        }
+        this.EnvType = params.EnvType || null;
+        this.DesiredComputeNodeCount = params.DesiredComputeNodeCount || null;
+
+    }
+}
+
+/**
+ * DescribeComputeEnvs返回参数结构体
+ * @class
+ */
+class DescribeComputeEnvsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 计算环境列表
+         * @type {Array.<ComputeEnvView> || null}
+         */
+        this.ComputeEnvSet = null;
+
+        /**
+         * 计算环境数量
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.ComputeEnvSet) {
+            this.ComputeEnvSet = new Array();
+            for (let z in params.ComputeEnvSet) {
+                let obj = new ComputeEnvView();
+                obj.deserialize(params.ComputeEnvSet[z]);
+                this.ComputeEnvSet.push(obj);
+            }
+        }
+        this.TotalCount = params.TotalCount || null;
+        this.RequestId = params.RequestId || null;
+
+    }
+}
+
+/**
+ * DescribeTask请求参数结构体
+ * @class
+ */
+class DescribeTaskRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 作业ID
+         * @type {string || null}
+         */
+        this.JobId = null;
+
+        /**
+         * 任务名称
+         * @type {string || null}
+         */
+        this.TaskName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.JobId = params.JobId || null;
+        this.TaskName = params.TaskName || null;
+
+    }
+}
+
+/**
+ * DescribeComputeEnvs请求参数结构体
+ * @class
+ */
+class DescribeComputeEnvsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 计算环境ID
+         * @type {Array.<string> || null}
+         */
+        this.EnvIds = null;
+
+        /**
+         * 过滤条件
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * 偏移量
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 返回数量
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.EnvIds = params.EnvIds || null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.Offset = params.Offset || null;
+        this.Limit = params.Limit || null;
+
+    }
+}
+
+/**
+ * DescribeJobs返回参数结构体
+ * @class
+ */
+class DescribeJobsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 作业列表
+         * @type {JobView || null}
+         */
+        this.JobSet = null;
+
+        /**
+         * 符合条件的作业数量
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.JobSet) {
+            let obj = new JobView();
+            obj.deserialize(params.JobSet)
+            this.JobSet = obj;
+        }
+        this.TotalCount = params.TotalCount || null;
+        this.RequestId = params.RequestId || null;
+
+    }
+}
+
+/**
+ * 计算环境的创建或销毁活动
+ * @class
+ */
+class Activity extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 活动ID
+         * @type {string || null}
+         */
+        this.ActivityId = null;
+
+        /**
+         * 计算节点ID
+         * @type {string || null}
+         */
+        this.ComputeNodeId = null;
+
+        /**
+         * 计算节点活动类型，创建或者销毁
+         * @type {string || null}
+         */
+        this.ComputeNodeActivityType = null;
+
+        /**
+         * 计算环境ID
+         * @type {string || null}
+         */
+        this.EnvId = null;
+
+        /**
+         * 起因
+         * @type {string || null}
+         */
+        this.Cause = null;
+
+        /**
+         * 活动状态
+         * @type {string || null}
+         */
+        this.ActivityState = null;
+
+        /**
+         * 状态原因
+         * @type {string || null}
+         */
+        this.StateReason = null;
+
+        /**
+         * 活动开始时间
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * 活动结束时间
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ActivityId = params.ActivityId || null;
+        this.ComputeNodeId = params.ComputeNodeId || null;
+        this.ComputeNodeActivityType = params.ComputeNodeActivityType || null;
+        this.EnvId = params.EnvId || null;
+        this.Cause = params.Cause || null;
+        this.ActivityState = params.ActivityState || null;
+        this.StateReason = params.StateReason || null;
+        this.StartTime = params.StartTime || null;
+        this.EndTime = params.EndTime || null;
+
+    }
+}
+
+/**
+ * 描述了 “云监控” 服务相关的信息
+ * @class
+ */
+class RunMonitorServiceEnabled extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 是否开启[云监控](/document/product/248)服务。取值范围：<br><li>TRUE：表示开启云监控服务<br><li>FALSE：表示不开启云监控服务<br><br>默认取值：TRUE。
+         * @type {boolean || null}
+         */
+        this.Enabled = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Enabled = params.Enabled || null;
+
+    }
+}
+
+/**
+ * TerminateComputeNode返回参数结构体
+ * @class
+ */
+class TerminateComputeNodeResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = params.RequestId || null;
+
+    }
+}
+
+/**
+ * 描述了VPC相关信息，包括子网，IP信息等
+ * @class
+ */
+class VirtualPrivateCloud extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 私有网络ID，形如`vpc-xxx`。有效的VpcId可通过登录[控制台](https://console.cloud.tencent.com/vpc/vpc?rid=1)查询；也可以调用接口 [DescribeVpcEx](/document/api/215/1372) ，从接口返回中的`unVpcId`字段获取。
+         * @type {string || null}
+         */
+        this.VpcId = null;
+
+        /**
+         * 私有网络子网ID，形如`subnet-xxx`。有效的私有网络子网ID可通过登录[控制台](https://console.cloud.tencent.com/vpc/subnet?rid=1)查询；也可以调用接口  [DescribeSubnetEx](/document/api/215/1371) ，从接口返回中的`unSubnetId`字段获取。
+         * @type {string || null}
+         */
+        this.SubnetId = null;
+
+        /**
+         * 是否用作公网网关。公网网关只有在实例拥有公网IP以及处于私有网络下时才能正常使用。取值范围：<br><li>TRUE：表示用作公网网关<br><li>FALSE：表示不用作公网网关<br><br>默认取值：FALSE。
+         * @type {boolean || null}
+         */
+        this.AsVpcGateway = null;
+
+        /**
+         * 私有网络子网 IP 数组，在创建实例、修改实例vpc属性操作中可使用此参数。当前仅批量创建多台实例时支持传入相同子网的多个 IP。
+         * @type {Array.<string> || null}
+         */
+        this.PrivateIpAddresses = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.VpcId = params.VpcId || null;
+        this.SubnetId = params.SubnetId || null;
+        this.AsVpcGateway = params.AsVpcGateway || null;
+        this.PrivateIpAddresses = params.PrivateIpAddresses || null;
+
+    }
+}
+
+/**
+ * DescribeAvailableCvmInstanceTypes请求参数结构体
+ * @class
+ */
+class DescribeAvailableCvmInstanceTypesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 过滤条件
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * ModifyComputeEnv请求参数结构体
+ * @class
+ */
+class ModifyComputeEnvRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 计算环境ID
+         * @type {string || null}
+         */
+        this.EnvId = null;
+
+        /**
+         * 计算节点期望个数
+         * @type {number || null}
+         */
+        this.DesiredComputeNodeCount = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.EnvId = params.EnvId || null;
+        this.DesiredComputeNodeCount = params.DesiredComputeNodeCount || null;
+
+    }
+}
+
+/**
+ * 描述了实例的公网可访问性，声明了实例的公网使用计费模式，最大带宽等
+ * @class
+ */
+class InternetAccessible extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 网络计费类型。取值范围：<br><li>BANDWIDTH_PREPAID：预付费按带宽结算<br><li>TRAFFIC_POSTPAID_BY_HOUR：流量按小时后付费<br><li>BANDWIDTH_POSTPAID_BY_HOUR：带宽按小时后付费<br><li>BANDWIDTH_PACKAGE：带宽包用户<br>默认取值：TRAFFIC_POSTPAID_BY_HOUR。
+         * @type {string || null}
+         */
+        this.InternetChargeType = null;
+
+        /**
+         * 公网出带宽上限，单位：Mbps。默认值：0Mbps。不同机型带宽上限范围不一致，具体限制详见[购买网络带宽](/document/product/213/509)。
+         * @type {number || null}
+         */
+        this.InternetMaxBandwidthOut = null;
+
+        /**
+         * 是否分配公网IP。取值范围：<br><li>TRUE：表示分配公网IP<br><li>FALSE：表示不分配公网IP<br><br>当公网带宽大于0Mbps时，可自由选择开通与否，默认开通公网IP；当公网带宽为0，则不允许分配公网IP。
+         * @type {boolean || null}
+         */
+        this.PublicIpAssigned = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InternetChargeType = params.InternetChargeType || null;
+        this.InternetMaxBandwidthOut = params.InternetMaxBandwidthOut || null;
+        this.PublicIpAssigned = params.PublicIpAssigned || null;
+
+    }
+}
+
+/**
+ * 作业信息
+ * @class
+ */
+class JobView extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 作业ID
+         * @type {string || null}
+         */
+        this.JobId = null;
+
+        /**
+         * 作业名称
+         * @type {string || null}
+         */
+        this.JobName = null;
+
+        /**
+         * 作业状态
+         * @type {string || null}
+         */
+        this.JobState = null;
+
+        /**
+         * 作业优先级
+         * @type {number || null}
+         */
+        this.Priority = null;
+
+        /**
+         * 位置信息
+         * @type {Placement || null}
+         */
+        this.Placement = null;
+
+        /**
+         * 创建时间
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * 结束时间
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * 任务统计指标
+         * @type {TaskMetrics || null}
+         */
+        this.TaskMetrics = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.JobId = params.JobId || null;
+        this.JobName = params.JobName || null;
+        this.JobState = params.JobState || null;
+        this.Priority = params.Priority || null;
+
+        if (params.Placement) {
+            let obj = new Placement();
+            obj.deserialize(params.Placement)
+            this.Placement = obj;
+        }
+        this.CreateTime = params.CreateTime || null;
+        this.EndTime = params.EndTime || null;
+
+        if (params.TaskMetrics) {
+            let obj = new TaskMetrics();
+            obj.deserialize(params.TaskMetrics)
+            this.TaskMetrics = obj;
+        }
+
+    }
+}
+
+/**
+ * 环境变量
+ * @class
+ */
+class EnvVar extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 环境变量名称
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 环境变量取值
+         * @type {string || null}
+         */
+        this.Value = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = params.Name || null;
+        this.Value = params.Value || null;
+
+    }
+}
+
+module.exports = {
+    AnonymousComputeEnv: AnonymousComputeEnv,
+    DeleteComputeEnvResponse: DeleteComputeEnvResponse,
+    SubmitJobRequest: SubmitJobRequest,
+    Authentication: Authentication,
+    TerminateComputeNodeRequest: TerminateComputeNodeRequest,
+    AgentRunningMode: AgentRunningMode,
+    EnvData: EnvData,
+    DescribeTaskTemplatesRequest: DescribeTaskTemplatesRequest,
+    Notification: Notification,
+    SystemDisk: SystemDisk,
+    Task: Task,
+    InstanceTypeConfig: InstanceTypeConfig,
+    DescribeComputeEnvActivitiesResponse: DescribeComputeEnvActivitiesResponse,
+    TaskInstanceMetrics: TaskInstanceMetrics,
+    MountDataDisk: MountDataDisk,
+    TaskView: TaskView,
+    DescribeComputeEnvResponse: DescribeComputeEnvResponse,
+    TerminateJobRequest: TerminateJobRequest,
+    Application: Application,
+    OutputMappingConfig: OutputMappingConfig,
+    TaskInstanceView: TaskInstanceView,
+    TaskMetrics: TaskMetrics,
+    TerminateComputeNodesRequest: TerminateComputeNodesRequest,
+    EventVar: EventVar,
+    DescribeComputeEnvActivitiesRequest: DescribeComputeEnvActivitiesRequest,
+    CreateTaskTemplateRequest: CreateTaskTemplateRequest,
+    Job: Job,
+    CreateComputeEnvRequest: CreateComputeEnvRequest,
+    DescribeComputeEnvCreateInfoResponse: DescribeComputeEnvCreateInfoResponse,
+    ComputeEnvCreateInfo: ComputeEnvCreateInfo,
+    DescribeComputeEnvCreateInfosRequest: DescribeComputeEnvCreateInfosRequest,
+    DescribeComputeEnvRequest: DescribeComputeEnvRequest,
+    DescribeTaskTemplatesResponse: DescribeTaskTemplatesResponse,
+    ComputeNodeMetrics: ComputeNodeMetrics,
+    DeleteJobRequest: DeleteJobRequest,
+    DeleteTaskTemplatesRequest: DeleteTaskTemplatesRequest,
+    DescribeJobResponse: DescribeJobResponse,
+    DescribeComputeEnvCreateInfoRequest: DescribeComputeEnvCreateInfoRequest,
+    ModifyTaskTemplateRequest: ModifyTaskTemplateRequest,
+    DataDisk: DataDisk,
+    NamedComputeEnv: NamedComputeEnv,
+    DeleteJobResponse: DeleteJobResponse,
+    EventConfig: EventConfig,
+    LoginSettings: LoginSettings,
+    OutputMapping: OutputMapping,
+    EnhancedService: EnhancedService,
+    DescribeJobSubmitInfoResponse: DescribeJobSubmitInfoResponse,
+    DescribeComputeEnvCreateInfosResponse: DescribeComputeEnvCreateInfosResponse,
+    RunSecurityServiceEnabled: RunSecurityServiceEnabled,
+    DescribeJobRequest: DescribeJobRequest,
+    RedirectInfo: RedirectInfo,
+    ModifyTaskTemplateResponse: ModifyTaskTemplateResponse,
+    SubmitJobResponse: SubmitJobResponse,
+    InputMapping: InputMapping,
+    RedirectLocalInfo: RedirectLocalInfo,
+    DescribeJobSubmitInfoRequest: DescribeJobSubmitInfoRequest,
+    Dependence: Dependence,
+    Filter: Filter,
+    CreateComputeEnvResponse: CreateComputeEnvResponse,
+    Docker: Docker,
+    ModifyComputeEnvResponse: ModifyComputeEnvResponse,
+    Placement: Placement,
+    ComputeNode: ComputeNode,
+    DeleteComputeEnvRequest: DeleteComputeEnvRequest,
+    CreateTaskTemplateResponse: CreateTaskTemplateResponse,
+    TerminateJobResponse: TerminateJobResponse,
+    DescribeJobsRequest: DescribeJobsRequest,
+    TaskTemplateView: TaskTemplateView,
+    DeleteTaskTemplatesResponse: DeleteTaskTemplatesResponse,
+    TerminateTaskInstanceRequest: TerminateTaskInstanceRequest,
+    TerminateTaskInstanceResponse: TerminateTaskInstanceResponse,
+    TerminateComputeNodesResponse: TerminateComputeNodesResponse,
+    DescribeAvailableCvmInstanceTypesResponse: DescribeAvailableCvmInstanceTypesResponse,
+    DescribeTaskResponse: DescribeTaskResponse,
+    ComputeEnvView: ComputeEnvView,
+    DescribeComputeEnvsResponse: DescribeComputeEnvsResponse,
+    DescribeTaskRequest: DescribeTaskRequest,
+    DescribeComputeEnvsRequest: DescribeComputeEnvsRequest,
+    DescribeJobsResponse: DescribeJobsResponse,
+    Activity: Activity,
+    RunMonitorServiceEnabled: RunMonitorServiceEnabled,
+    TerminateComputeNodeResponse: TerminateComputeNodeResponse,
+    VirtualPrivateCloud: VirtualPrivateCloud,
+    DescribeAvailableCvmInstanceTypesRequest: DescribeAvailableCvmInstanceTypesRequest,
+    ModifyComputeEnvRequest: ModifyComputeEnvRequest,
+    InternetAccessible: InternetAccessible,
+    JobView: JobView,
+    EnvVar: EnvVar,
+
+}
