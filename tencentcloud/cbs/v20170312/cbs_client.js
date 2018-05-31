@@ -34,6 +34,7 @@ const RenewDiskRequest = models.RenewDiskRequest;
 const RenewDiskResponse = models.RenewDiskResponse;
 const CreateDisksRequest = models.CreateDisksRequest;
 const AttachDisksRequest = models.AttachDisksRequest;
+const Tag = models.Tag;
 const DescribeSnapshotsRequest = models.DescribeSnapshotsRequest;
 const TerminateDisksResponse = models.TerminateDisksResponse;
 const DescribeDiskConfigQuotaResponse = models.DescribeDiskConfigQuotaResponse;

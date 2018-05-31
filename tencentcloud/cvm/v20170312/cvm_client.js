@@ -1,5 +1,6 @@
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
+const LocalDiskType = models.LocalDiskType;
 const AssociateInstancesKeyPairsResponse = models.AssociateInstancesKeyPairsResponse;
 const DescribeInstanceOperationLogsRequest = models.DescribeInstanceOperationLogsRequest;
 const DescribeImageQuotaResponse = models.DescribeImageQuotaResponse;
@@ -46,6 +47,7 @@ const UpdateInstanceVpcConfigRequest = models.UpdateInstanceVpcConfigRequest;
 const ModifyInstancesAttributeResponse = models.ModifyInstancesAttributeResponse;
 const ModifyInstancesRenewFlagRequest = models.ModifyInstancesRenewFlagRequest;
 const SyncImagesResponse = models.SyncImagesResponse;
+const DescribeZoneInstanceConfigInfosResponse = models.DescribeZoneInstanceConfigInfosResponse;
 const ModifyInstancesAttributeRequest = models.ModifyInstancesAttributeRequest;
 const RenewHostsRequest = models.RenewHostsRequest;
 const DescribeZonesRequest = models.DescribeZonesRequest;
@@ -95,8 +97,10 @@ const ModifyHostsAttributeResponse = models.ModifyHostsAttributeResponse;
 const StartInstancesResponse = models.StartInstancesResponse;
 const ChargePrepaid = models.ChargePrepaid;
 const DescribeInternetChargeTypeConfigsResponse = models.DescribeInternetChargeTypeConfigsResponse;
+const DescribeZoneInstanceConfigInfosRequest = models.DescribeZoneInstanceConfigInfosRequest;
 const DescribeZonesResponse = models.DescribeZonesResponse;
 const ItemPrice = models.ItemPrice;
+const InstanceTypeQuotaItem = models.InstanceTypeQuotaItem;
 const DescribeInstanceOperationLogsResponse = models.DescribeInstanceOperationLogsResponse;
 const Image = models.Image;
 const DescribeHostsRequest = models.DescribeHostsRequest;
@@ -129,6 +133,7 @@ const DescribeInstanceTypeConfigsResponse = models.DescribeInstanceTypeConfigsRe
 const ResizeInstanceDisksRequest = models.ResizeInstanceDisksRequest;
 const DescribeInstanceFamilyConfigsRequest = models.DescribeInstanceFamilyConfigsRequest;
 const DescribeInstanceInternetBandwidthConfigsRequest = models.DescribeInstanceInternetBandwidthConfigsRequest;
+const StorageBlock = models.StorageBlock;
 const InternetAccessible = models.InternetAccessible;
 const RenewHostsResponse = models.RenewHostsResponse;
 const ModifyHostsAttributeRequest = models.ModifyHostsAttributeRequest;
@@ -228,6 +233,17 @@ class CvmClient extends AbstractClient {
     }
 
     /**
+     * 本接口（ModifyHostsAttribute）用于修改CDH实例的属性，如实例名称和续费标记等。参数HostName和RenewFlag必须设置其中一个，但不能同时设置。
+     * @param {ModifyHostsAttributeRequest} req
+     * @param {function(string, ModifyHostsAttributeResponse):void} cb
+     * @public
+     */
+    ModifyHostsAttribute(req, cb) {
+        let resp = new ModifyHostsAttributeResponse();
+        this.request("ModifyHostsAttribute", req, resp, cb);
+    }
+
+    /**
      * 本接口(DescribeImages) 用于查看镜像列表。
 
 * 可以通过指定镜像ID来查询指定镜像的详细信息，或通过设定过滤器来查询满足过滤条件的镜像的详细信息。
@@ -289,18 +305,19 @@ class CvmClient extends AbstractClient {
     }
 
     /**
-     * 本接口（DeleteImages）用于删除一个或多个镜像。
+     * 本接口 (DisassociateInstancesKeyPairs) 用于解除实例的密钥绑定关系。
 
-* 当[镜像状态](https://cloud.tencent.com/document/api/213/9452#image_state)为`创建中`和`使用中`时, 不允许删除。镜像状态可以通过[DescribeImages](https://cloud.tencent.com/document/api/213/9418)获取。
-* 每个地域最多只支持创建10个自定义镜像，删除镜像可以释放账户的配额。
-* 当镜像正在被其它账户分享时，不允许删除。
-     * @param {DeleteImagesRequest} req
-     * @param {function(string, DeleteImagesResponse):void} cb
+* 只支持[`STOPPED`](https://cloud.tencent.com/document/api/213/9452#INSTANCE_STATE)状态的`Linux`操作系统的实例。
+* 解绑密钥后，实例可以通过原来设置的密码登录。
+* 如果原来没有设置密码，解绑后将无法使用 `SSH` 登录。可以调用 [ResetInstancesPassword](https://cloud.tencent.com/document/api/213/9397) 接口来设置登陆密码。
+* 支持批量操作。每次请求批量实例的上限为100。如果批量实例存在不允许操作的实例，操作会以特定错误码返回。
+     * @param {DisassociateInstancesKeyPairsRequest} req
+     * @param {function(string, DisassociateInstancesKeyPairsResponse):void} cb
      * @public
      */
-    DeleteImages(req, cb) {
-        let resp = new DeleteImagesResponse();
-        this.request("DeleteImages", req, resp, cb);
+    DisassociateInstancesKeyPairs(req, cb) {
+        let resp = new DisassociateInstancesKeyPairsResponse();
+        this.request("DisassociateInstancesKeyPairs", req, resp, cb);
     }
 
     /**
@@ -409,19 +426,18 @@ class CvmClient extends AbstractClient {
     }
 
     /**
-     * 本接口 (DisassociateInstancesKeyPairs) 用于解除实例的密钥绑定关系。
+     * 本接口（DeleteImages）用于删除一个或多个镜像。
 
-* 只支持[`STOPPED`](https://cloud.tencent.com/document/api/213/9452#INSTANCE_STATE)状态的`Linux`操作系统的实例。
-* 解绑密钥后，实例可以通过原来设置的密码登录。
-* 如果原来没有设置密码，解绑后将无法使用 `SSH` 登录。可以调用 [ResetInstancesPassword](https://cloud.tencent.com/document/api/213/9397) 接口来设置登陆密码。
-* 支持批量操作。每次请求批量实例的上限为100。如果批量实例存在不允许操作的实例，操作会以特定错误码返回。
-     * @param {DisassociateInstancesKeyPairsRequest} req
-     * @param {function(string, DisassociateInstancesKeyPairsResponse):void} cb
+* 当[镜像状态](https://cloud.tencent.com/document/api/213/9452#image_state)为`创建中`和`使用中`时, 不允许删除。镜像状态可以通过[DescribeImages](https://cloud.tencent.com/document/api/213/9418)获取。
+* 每个地域最多只支持创建10个自定义镜像，删除镜像可以释放账户的配额。
+* 当镜像正在被其它账户分享时，不允许删除。
+     * @param {DeleteImagesRequest} req
+     * @param {function(string, DeleteImagesResponse):void} cb
      * @public
      */
-    DisassociateInstancesKeyPairs(req, cb) {
-        let resp = new DisassociateInstancesKeyPairsResponse();
-        this.request("DisassociateInstancesKeyPairs", req, resp, cb);
+    DeleteImages(req, cb) {
+        let resp = new DeleteImagesResponse();
+        this.request("DeleteImages", req, resp, cb);
     }
 
     /**
@@ -591,6 +607,17 @@ class CvmClient extends AbstractClient {
     }
 
     /**
+     * 本接口(DescribeZoneInstanceConfigInfos) 获取可用区的机型信息。
+     * @param {DescribeZoneInstanceConfigInfosRequest} req
+     * @param {function(string, DescribeZoneInstanceConfigInfosResponse):void} cb
+     * @public
+     */
+    DescribeZoneInstanceConfigInfos(req, cb) {
+        let resp = new DescribeZoneInstanceConfigInfosResponse();
+        this.request("DescribeZoneInstanceConfigInfos", req, resp, cb);
+    }
+
+    /**
      * 本接口(DescribeRegions)用于查询地域信息。
      * @param {DescribeRegionsRequest} req
      * @param {function(string, DescribeRegionsResponse):void} cb
@@ -599,17 +626,6 @@ class CvmClient extends AbstractClient {
     DescribeRegions(req, cb) {
         let resp = new DescribeRegionsResponse();
         this.request("DescribeRegions", req, resp, cb);
-    }
-
-    /**
-     * 本接口（ModifyHostsAttribute）用于修改CDH实例的属性，如实例名称和续费标记等。参数HostName和RenewFlag必须设置其中一个，但不能同时设置。
-     * @param {ModifyHostsAttributeRequest} req
-     * @param {function(string, ModifyHostsAttributeResponse):void} cb
-     * @public
-     */
-    ModifyHostsAttribute(req, cb) {
-        let resp = new ModifyHostsAttributeResponse();
-        this.request("ModifyHostsAttribute", req, resp, cb);
     }
 
     /**

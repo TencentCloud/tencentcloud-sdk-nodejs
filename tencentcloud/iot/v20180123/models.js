@@ -972,6 +972,34 @@ class IssueDeviceControlRequest extends  AbstractModel {
 }
 
 /**
+ * UpdateRule返回参数结构体
+ * @class
+ */
+class UpdateRuleResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = params.RequestId || null;
+
+    }
+}
+
+/**
  * PublishMsg返回参数结构体
  * @class
  */
@@ -2650,34 +2678,6 @@ class DeleteDeviceResponse extends  AbstractModel {
 }
 
 /**
- * UpdateRule返回参数结构体
- * @class
- */
-class UpdateRuleResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RequestId = params.RequestId || null;
-
-    }
-}
-
-/**
  * Topic
  * @class
  */
@@ -2967,6 +2967,7 @@ module.exports = {
     DeleteProductResponse: DeleteProductResponse,
     DeactivateRuleResponse: DeactivateRuleResponse,
     IssueDeviceControlRequest: IssueDeviceControlRequest,
+    UpdateRuleResponse: UpdateRuleResponse,
     PublishMsgResponse: PublishMsgResponse,
     ResetDeviceResponse: ResetDeviceResponse,
     GetUserResponse: GetUserResponse,
@@ -3006,7 +3007,6 @@ module.exports = {
     GetTopicRequest: GetTopicRequest,
     GetDevicesResponse: GetDevicesResponse,
     DeleteDeviceResponse: DeleteDeviceResponse,
-    UpdateRuleResponse: UpdateRuleResponse,
     Topic: Topic,
     GetDevicesRequest: GetDevicesRequest,
     GetProductRequest: GetProductRequest,

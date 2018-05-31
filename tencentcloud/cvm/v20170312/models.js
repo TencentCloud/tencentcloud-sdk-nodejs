@@ -1,6 +1,55 @@
 const AbstractModel = require("../../common/abstract_model");
 
 /**
+ * 本地磁盘规格
+ * @class
+ */
+class LocalDiskType extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 本地磁盘类型。
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * 本地磁盘属性。
+         * @type {string || null}
+         */
+        this.PartitionType = null;
+
+        /**
+         * 本地磁盘最小值。
+         * @type {number || null}
+         */
+        this.MinSize = null;
+
+        /**
+         * 本地磁盘最大值。
+         * @type {number || null}
+         */
+        this.MaxSize = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Type = params.Type || null;
+        this.PartitionType = params.PartitionType || null;
+        this.MinSize = params.MinSize || null;
+        this.MaxSize = params.MaxSize || null;
+
+    }
+}
+
+/**
  * AssociateInstancesKeyPairs返回参数结构体
  * @class
  */
@@ -2063,6 +2112,49 @@ class SyncImagesResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeZoneInstanceConfigInfos返回参数结构体
+ * @class
+ */
+class DescribeZoneInstanceConfigInfosResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 可用区机型配置列表。
+         * @type {Array.<InstanceTypeQuotaItem> || null}
+         */
+        this.InstanceTypeQuotaSet = null;
+
+        /**
+         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.InstanceTypeQuotaSet) {
+            this.InstanceTypeQuotaSet = new Array();
+            for (let z in params.InstanceTypeQuotaSet) {
+                let obj = new InstanceTypeQuotaItem();
+                obj.deserialize(params.InstanceTypeQuotaSet[z]);
+                this.InstanceTypeQuotaSet.push(obj);
+            }
+        }
+        this.RequestId = params.RequestId || null;
+
+    }
+}
+
+/**
  * ModifyInstancesAttribute请求参数结构体
  * @class
  */
@@ -3128,6 +3220,18 @@ class Externals extends  AbstractModel {
          */
         this.ReleaseAddress = null;
 
+        /**
+         * 不支持的网络类型
+         * @type {Array.<string> || null}
+         */
+        this.UnsupportNetworks = null;
+
+        /**
+         * HDD本地存储属性
+         * @type {StorageBlock || null}
+         */
+        this.StorageBlockAttr = null;
+
     }
 
     /**
@@ -3138,6 +3242,13 @@ class Externals extends  AbstractModel {
             return;
         }
         this.ReleaseAddress = params.ReleaseAddress || null;
+        this.UnsupportNetworks = params.UnsupportNetworks || null;
+
+        if (params.StorageBlockAttr) {
+            let obj = new StorageBlock();
+            obj.deserialize(params.StorageBlockAttr)
+            this.StorageBlockAttr = obj;
+        }
 
     }
 }
@@ -3528,13 +3639,13 @@ class ActionTimer extends  AbstractModel {
         super();
 
         /**
-         * 定时器
+         * 定时器名称，目前仅支持销毁一个值：TerminateInstances。
          * @type {string || null}
          */
         this.TimerAction = null;
 
         /**
-         * 执行时间
+         * 执行时间，格式形如：2018/5/29 11:26:40,执行时间必须大于当前时间5分钟。
          * @type {string || null}
          */
         this.ActionTime = null;
@@ -4390,6 +4501,50 @@ class DescribeInternetChargeTypeConfigsResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeZoneInstanceConfigInfos请求参数结构体
+ * @class
+ */
+class DescribeZoneInstanceConfigInfosRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 过滤条件。
+
+<li> zone - String - 是否必填：否 -（过滤条件）按照可用区过滤。</li>
+
+<li> instance-family String - 是否必填：否 -（过滤条件）按照机型系列过滤。按照实例机型系列过滤。实例机型系列形如：S1、I1、M1等。</li>
+
+<li> instance-type - String - 是否必填：否 - （过滤条件）按照机型过滤。按照实例机型过滤。不同实例机型指定了不同的资源规格，具体取值可通过调用接口 DescribeInstanceTypeConfigs 来获得最新的规格表或参见实例类型描述。若不指定该参数，则默认机型为S1.SMALL1。</li>
+
+<li> instance-charge-type - String - 是否必填：否 -（过滤条件）按照实例计费模式过滤。 (PREPAID：表示预付费，即包年包月 | POSTPAID_BY_HOUR：表示后付费，即按量计费 | CDHPAID：表示CDH付费，即只对CDH计费，不对CDH上的实例计费。 )  </li>
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * DescribeZones返回参数结构体
  * @class
  */
@@ -4484,6 +4639,129 @@ class ItemPrice extends  AbstractModel {
         this.ChargeUnit = params.ChargeUnit || null;
         this.OriginalPrice = params.OriginalPrice || null;
         this.DiscountPrice = params.DiscountPrice || null;
+
+    }
+}
+
+/**
+ * 描述实例机型配额信息。
+ * @class
+ */
+class InstanceTypeQuotaItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 可用区。
+         * @type {string || null}
+         */
+        this.Zone = null;
+
+        /**
+         * 实例机型。
+         * @type {string || null}
+         */
+        this.InstanceType = null;
+
+        /**
+         * 实例计费模式。取值范围： <br>*`PREPAID`：表示预付费，即包年包月 <br>* `POSTPAID_BY_HOUR`：表示后付费，即按量计费 * `CDHPAID`：[CDH](/document/product/416)付费，即只对[CDH(/document/product/416)]计费，不对[CDH](/document/product/416)上的实例计费。
+         * @type {string || null}
+         */
+        this.InstanceChargeType = null;
+
+        /**
+         * 网卡类型，例如：25代表25G网卡
+         * @type {number || null}
+         */
+        this.NetworkCard = null;
+
+        /**
+         * 扩展属性。
+         * @type {Externals || null}
+         */
+        this.Externals = null;
+
+        /**
+         * 实例的CPU核数，单位：核。
+         * @type {number || null}
+         */
+        this.Cpu = null;
+
+        /**
+         * 实例内存容量，单位：`GB`。
+         * @type {number || null}
+         */
+        this.Memory = null;
+
+        /**
+         * 实例机型系列。
+         * @type {string || null}
+         */
+        this.InstanceFamily = null;
+
+        /**
+         * 机型名称。
+         * @type {string || null}
+         */
+        this.TypeName = null;
+
+        /**
+         * 本地磁盘规格列表。
+         * @type {Array.<LocalDiskType> || null}
+         */
+        this.LocalDiskTypeList = null;
+
+        /**
+         * 实例是否售卖。
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * 实例的售卖价格。
+         * @type {ItemPrice || null}
+         */
+        this.Price = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Zone = params.Zone || null;
+        this.InstanceType = params.InstanceType || null;
+        this.InstanceChargeType = params.InstanceChargeType || null;
+        this.NetworkCard = params.NetworkCard || null;
+
+        if (params.Externals) {
+            let obj = new Externals();
+            obj.deserialize(params.Externals)
+            this.Externals = obj;
+        }
+        this.Cpu = params.Cpu || null;
+        this.Memory = params.Memory || null;
+        this.InstanceFamily = params.InstanceFamily || null;
+        this.TypeName = params.TypeName || null;
+
+        if (params.LocalDiskTypeList) {
+            this.LocalDiskTypeList = new Array();
+            for (let z in params.LocalDiskTypeList) {
+                let obj = new LocalDiskType();
+                obj.deserialize(params.LocalDiskTypeList[z]);
+                this.LocalDiskTypeList.push(obj);
+            }
+        }
+        this.Status = params.Status || null;
+
+        if (params.Price) {
+            let obj = new ItemPrice();
+            obj.deserialize(params.Price)
+            this.Price = obj;
+        }
 
     }
 }
@@ -5764,6 +6042,48 @@ class DescribeInstanceInternetBandwidthConfigsRequest extends  AbstractModel {
 }
 
 /**
+ * HDD的本地存储信息
+ * @class
+ */
+class StorageBlock extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * HDD本地存储类型，值为：LOCAL_PRO.
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * HDD本地存储的最小容量
+         * @type {number || null}
+         */
+        this.MinSize = null;
+
+        /**
+         * HDD本地存储的最大容量
+         * @type {number || null}
+         */
+        this.MaxSize = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Type = params.Type || null;
+        this.MinSize = params.MinSize || null;
+        this.MaxSize = params.MaxSize || null;
+
+    }
+}
+
+/**
  * 描述了实例的公网可访问性，声明了实例的公网使用计费模式，最大带宽等
  * @class
  */
@@ -5996,6 +6316,7 @@ class Price extends  AbstractModel {
 }
 
 module.exports = {
+    LocalDiskType: LocalDiskType,
     AssociateInstancesKeyPairsResponse: AssociateInstancesKeyPairsResponse,
     DescribeInstanceOperationLogsRequest: DescribeInstanceOperationLogsRequest,
     DescribeImageQuotaResponse: DescribeImageQuotaResponse,
@@ -6042,6 +6363,7 @@ module.exports = {
     ModifyInstancesAttributeResponse: ModifyInstancesAttributeResponse,
     ModifyInstancesRenewFlagRequest: ModifyInstancesRenewFlagRequest,
     SyncImagesResponse: SyncImagesResponse,
+    DescribeZoneInstanceConfigInfosResponse: DescribeZoneInstanceConfigInfosResponse,
     ModifyInstancesAttributeRequest: ModifyInstancesAttributeRequest,
     RenewHostsRequest: RenewHostsRequest,
     DescribeZonesRequest: DescribeZonesRequest,
@@ -6091,8 +6413,10 @@ module.exports = {
     StartInstancesResponse: StartInstancesResponse,
     ChargePrepaid: ChargePrepaid,
     DescribeInternetChargeTypeConfigsResponse: DescribeInternetChargeTypeConfigsResponse,
+    DescribeZoneInstanceConfigInfosRequest: DescribeZoneInstanceConfigInfosRequest,
     DescribeZonesResponse: DescribeZonesResponse,
     ItemPrice: ItemPrice,
+    InstanceTypeQuotaItem: InstanceTypeQuotaItem,
     DescribeInstanceOperationLogsResponse: DescribeInstanceOperationLogsResponse,
     Image: Image,
     DescribeHostsRequest: DescribeHostsRequest,
@@ -6125,6 +6449,7 @@ module.exports = {
     ResizeInstanceDisksRequest: ResizeInstanceDisksRequest,
     DescribeInstanceFamilyConfigsRequest: DescribeInstanceFamilyConfigsRequest,
     DescribeInstanceInternetBandwidthConfigsRequest: DescribeInstanceInternetBandwidthConfigsRequest,
+    StorageBlock: StorageBlock,
     InternetAccessible: InternetAccessible,
     RenewHostsResponse: RenewHostsResponse,
     ModifyHostsAttributeRequest: ModifyHostsAttributeRequest,

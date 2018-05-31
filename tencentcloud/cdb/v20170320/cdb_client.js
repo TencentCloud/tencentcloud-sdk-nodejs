@@ -2,36 +2,46 @@ const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const SellType = models.SellType;
 const CreateDBInstanceRequest = models.CreateDBInstanceRequest;
+const DescribeAccountPrivilegesResponse = models.DescribeAccountPrivilegesResponse;
 const CreateDBImportJobRequest = models.CreateDBImportJobRequest;
+const DescribeDatabasesRequest = models.DescribeDatabasesRequest;
 const DescribeBackupConfigRequest = models.DescribeBackupConfigRequest;
 const RoVipInfo = models.RoVipInfo;
+const DescribeAccountsRequest = models.DescribeAccountsRequest;
 const StopDBImportJobResponse = models.StopDBImportJobResponse;
+const Parameter = models.Parameter;
 const DatabaseTableList = models.DatabaseTableList;
 const DescribeSlowLogsRequest = models.DescribeSlowLogsRequest;
 const Inbound = models.Inbound;
 const AssociateSecurityGroupsRequest = models.AssociateSecurityGroupsRequest;
+const CreateAccountsResponse = models.CreateAccountsResponse;
+const RegionSellConf = models.RegionSellConf;
 const SellConfig = models.SellConfig;
 const DescribeDBSecurityGroupsResponse = models.DescribeDBSecurityGroupsResponse;
 const MasterInfo = models.MasterInfo;
 const DescribeBinlogsResponse = models.DescribeBinlogsResponse;
+const DBSwitchInfo = models.DBSwitchInfo;
 const DescribeBackupDownloadDbTableCodeResponse = models.DescribeBackupDownloadDbTableCodeResponse;
 const InitDBInstancesResponse = models.InitDBInstancesResponse;
 const DescribeTasksResponse = models.DescribeTasksResponse;
 const DescribeBackupsRequest = models.DescribeBackupsRequest;
 const ModifyDBInstanceProjectResponse = models.ModifyDBInstanceProjectResponse;
-const DescribeDBInstancesResponse = models.DescribeDBInstancesResponse;
 const IsolateDBInstanceResponse = models.IsolateDBInstanceResponse;
 const DescribeDBInstanceGTIDResponse = models.DescribeDBInstanceGTIDResponse;
+const OpenDBInstanceGTIDResponse = models.OpenDBInstanceGTIDResponse;
 const DescribeDBZoneConfigRequest = models.DescribeDBZoneConfigRequest;
 const DescribeDBInstanceRebootTimeResponse = models.DescribeDBInstanceRebootTimeResponse;
 const DrInfo = models.DrInfo;
 const RoGroup = models.RoGroup;
+const ModifyAccountDescriptionResponse = models.ModifyAccountDescriptionResponse;
 const SwitchForUpgradeRequest = models.SwitchForUpgradeRequest;
 const ModifyInstanceParamRequest = models.ModifyInstanceParamRequest;
 const CreateDBInstanceHourResponse = models.CreateDBInstanceHourResponse;
 const BinlogInfo = models.BinlogInfo;
 const DescribeTasksRequest = models.DescribeTasksRequest;
-const ModifyDBInstanceSecurityGroupsResponse = models.ModifyDBInstanceSecurityGroupsResponse;
+const OpenDBInstanceGTIDRequest = models.OpenDBInstanceGTIDRequest;
+const ImportRecord = models.ImportRecord;
+const CreateAccountsRequest = models.CreateAccountsRequest;
 const CreateDBInstanceHourRequest = models.CreateDBInstanceHourRequest;
 const DescribeSlowLogsResponse = models.DescribeSlowLogsResponse;
 const BackupInfo = models.BackupInfo;
@@ -39,13 +49,19 @@ const CloseWanServiceResponse = models.CloseWanServiceResponse;
 const DescribeDBInstancesRequest = models.DescribeDBInstancesRequest;
 const DescribeDBSecurityGroupsRequest = models.DescribeDBSecurityGroupsRequest;
 const ModifyDBInstanceVipVportResponse = models.ModifyDBInstanceVipVportResponse;
+const DescribeDBSwitchRecordsResponse = models.DescribeDBSwitchRecordsResponse;
 const TableName = models.TableName;
 const DeleteBackupResponse = models.DeleteBackupResponse;
+const TablePrivilege = models.TablePrivilege;
 const DescribeProjectSecurityGroupsResponse = models.DescribeProjectSecurityGroupsResponse;
+const ModifyAccountPasswordResponse = models.ModifyAccountPasswordResponse;
+const DescribeDBSwitchRecordsRequest = models.DescribeDBSwitchRecordsRequest;
 const CreateDBInstanceResponse = models.CreateDBInstanceResponse;
 const SlowLogInfo = models.SlowLogInfo;
 const CloseWanServiceRequest = models.CloseWanServiceRequest;
+const DeleteAccountsResponse = models.DeleteAccountsResponse;
 const DescribeDBInstanceCharsetResponse = models.DescribeDBInstanceCharsetResponse;
+const RestartDBInstancesResponse = models.RestartDBInstancesResponse;
 const DescribeBackupDatabasesResponse = models.DescribeBackupDatabasesResponse;
 const DescribeDBInstanceRebootTimeRequest = models.DescribeDBInstanceRebootTimeRequest;
 const First = models.First;
@@ -60,44 +76,62 @@ const Outbound = models.Outbound;
 const ParamInfo = models.ParamInfo;
 const DescribeProjectSecurityGroupsRequest = models.DescribeProjectSecurityGroupsRequest;
 const SecurityGroup = models.SecurityGroup;
+const ZoneConf = models.ZoneConf;
 const SlaveInfo = models.SlaveInfo;
 const ModifyDBInstanceNameRequest = models.ModifyDBInstanceNameRequest;
-const ModifyInstanceParamResponse = models.ModifyInstanceParamResponse;
 const UpgradeDBInstanceEngineVersionResponse = models.UpgradeDBInstanceEngineVersionResponse;
+const ModifyInstanceParamResponse = models.ModifyInstanceParamResponse;
+const ColumnPrivilege = models.ColumnPrivilege;
 const InitDBInstancesRequest = models.InitDBInstancesRequest;
 const AssociateSecurityGroupsResponse = models.AssociateSecurityGroupsResponse;
 const InstanceInfo = models.InstanceInfo;
 const CreateBackupResponse = models.CreateBackupResponse;
+const DescribeDBInstanceConfigResponse = models.DescribeDBInstanceConfigResponse;
+const SlaveConfig = models.SlaveConfig;
+const ModifyAccountPrivilegesResponse = models.ModifyAccountPrivilegesResponse;
+const BackupConfig = models.BackupConfig;
+const VerifyRootAccountResponse = models.VerifyRootAccountResponse;
+const DescribeDBInstanceConfigRequest = models.DescribeDBInstanceConfigRequest;
 const DescribeBackupTablesRequest = models.DescribeBackupTablesRequest;
-const ImportRecord = models.ImportRecord;
+const DatabasePrivilege = models.DatabasePrivilege;
+const ModifyDBInstanceSecurityGroupsResponse = models.ModifyDBInstanceSecurityGroupsResponse;
 const ModifyDBInstanceNameResponse = models.ModifyDBInstanceNameResponse;
+const ModifyAccountDescriptionRequest = models.ModifyAccountDescriptionRequest;
+const ModifyAccountPasswordRequest = models.ModifyAccountPasswordRequest;
 const InstanceRebootTime = models.InstanceRebootTime;
 const UpgradeDBInstanceRequest = models.UpgradeDBInstanceRequest;
+const DescribeDatabasesResponse = models.DescribeDatabasesResponse;
 const ZoneSellConf = models.ZoneSellConf;
 const IsolateDBInstanceRequest = models.IsolateDBInstanceRequest;
+const ModifyAccountPrivilegesRequest = models.ModifyAccountPrivilegesRequest;
+const Account = models.Account;
 const CreateBackupRequest = models.CreateBackupRequest;
+const AccountInfo = models.AccountInfo;
 const DescribeDBInstanceCharsetRequest = models.DescribeDBInstanceCharsetRequest;
 const DescribeBackupDatabasesRequest = models.DescribeBackupDatabasesRequest;
 const UpgradeDBInstanceEngineVersionRequest = models.UpgradeDBInstanceEngineVersionRequest;
 const UpgradeDBInstanceResponse = models.UpgradeDBInstanceResponse;
 const ModifyDBInstanceVipVportRequest = models.ModifyDBInstanceVipVportRequest;
-const Parameter = models.Parameter;
+const ModifyBackupConfigResponse = models.ModifyBackupConfigResponse;
 const DescribeDBImportRecordsRequest = models.DescribeDBImportRecordsRequest;
 const CreateDBImportJobResponse = models.CreateDBImportJobResponse;
-const DescribeBinlogsRequest = models.DescribeBinlogsRequest;
+const DescribeDBInstancesResponse = models.DescribeDBInstancesResponse;
+const RestartDBInstancesRequest = models.RestartDBInstancesRequest;
 const DescribeDBZoneConfigResponse = models.DescribeDBZoneConfigResponse;
 const ModifyDBInstanceProjectRequest = models.ModifyDBInstanceProjectRequest;
 const DisassociateSecurityGroupsRequest = models.DisassociateSecurityGroupsRequest;
-const DisassociateSecurityGroupsResponse = models.DisassociateSecurityGroupsResponse;
+const DeleteAccountsRequest = models.DeleteAccountsRequest;
 const SwitchForUpgradeResponse = models.SwitchForUpgradeResponse;
-const ZoneConf = models.ZoneConf;
+const DescribeAccountPrivilegesRequest = models.DescribeAccountPrivilegesRequest;
+const DescribeAccountsResponse = models.DescribeAccountsResponse;
 const DeleteBackupRequest = models.DeleteBackupRequest;
 const StopDBImportJobRequest = models.StopDBImportJobRequest;
+const VerifyRootAccountRequest = models.VerifyRootAccountRequest;
 const OpenWanServiceResponse = models.OpenWanServiceResponse;
 const ModifyBackupConfigRequest = models.ModifyBackupConfigRequest;
-const RegionSellConf = models.RegionSellConf;
+const DescribeBinlogsRequest = models.DescribeBinlogsRequest;
 const DescribeBackupDownloadDbTableCodeRequest = models.DescribeBackupDownloadDbTableCodeRequest;
-const ModifyBackupConfigResponse = models.ModifyBackupConfigResponse;
+const DisassociateSecurityGroupsResponse = models.DisassociateSecurityGroupsResponse;
 const DescribeDBInstanceGTIDRequest = models.DescribeDBInstanceGTIDRequest;
 
 
@@ -120,6 +154,28 @@ class CdbClient extends AbstractClient {
     DescribeDBInstanceGTID(req, cb) {
         let resp = new DescribeDBInstanceGTIDResponse();
         this.request("DescribeDBInstanceGTID", req, resp, cb);
+    }
+
+    /**
+     * 本接口(DescribeAccountPrivileges)用于查询云数据库账户支持的权限信息。
+     * @param {DescribeAccountPrivilegesRequest} req
+     * @param {function(string, DescribeAccountPrivilegesResponse):void} cb
+     * @public
+     */
+    DescribeAccountPrivileges(req, cb) {
+        let resp = new DescribeAccountPrivilegesResponse();
+        this.request("DescribeAccountPrivileges", req, resp, cb);
+    }
+
+    /**
+     * 本接口(DeleteAccounts)用于删除云数据库的账户。
+     * @param {DeleteAccountsRequest} req
+     * @param {function(string, DeleteAccountsResponse):void} cb
+     * @public
+     */
+    DeleteAccounts(req, cb) {
+        let resp = new DeleteAccountsResponse();
+        this.request("DeleteAccounts", req, resp, cb);
     }
 
     /**
@@ -153,6 +209,28 @@ class CdbClient extends AbstractClient {
     DeleteBackup(req, cb) {
         let resp = new DeleteBackupResponse();
         this.request("DeleteBackup", req, resp, cb);
+    }
+
+    /**
+     * 本接口(OpenDBInstanceGTID)用于开启云数据库实例的GTID，只支持版本为5.6以及以上的实例。
+     * @param {OpenDBInstanceGTIDRequest} req
+     * @param {function(string, OpenDBInstanceGTIDResponse):void} cb
+     * @public
+     */
+    OpenDBInstanceGTID(req, cb) {
+        let resp = new OpenDBInstanceGTIDResponse();
+        this.request("OpenDBInstanceGTID", req, resp, cb);
+    }
+
+    /**
+     * 本接口(ModifyAccountDescription)用于修改云数据库账户的备注信息。
+     * @param {ModifyAccountDescriptionRequest} req
+     * @param {function(string, ModifyAccountDescriptionResponse):void} cb
+     * @public
+     */
+    ModifyAccountDescription(req, cb) {
+        let resp = new ModifyAccountDescriptionResponse();
+        this.request("ModifyAccountDescription", req, resp, cb);
     }
 
     /**
@@ -286,6 +364,17 @@ class CdbClient extends AbstractClient {
     }
 
     /**
+     * 本接口(DescribeDBInstanceConfig)用于云数据库实例的配置信息，包括同步模式，部署模式等。
+     * @param {DescribeDBInstanceConfigRequest} req
+     * @param {function(string, DescribeDBInstanceConfigResponse):void} cb
+     * @public
+     */
+    DescribeDBInstanceConfig(req, cb) {
+        let resp = new DescribeDBInstanceConfigResponse();
+        this.request("DescribeDBInstanceConfig", req, resp, cb);
+    }
+
+    /**
      * 本接口(DescribeDBInstanceRebootTime)用于查询云数据库实例重启预计所需的时间。
      * @param {DescribeDBInstanceRebootTimeRequest} req
      * @param {function(string, DescribeDBInstanceRebootTimeResponse):void} cb
@@ -308,6 +397,21 @@ class CdbClient extends AbstractClient {
     }
 
     /**
+     * 本接口(RestartDBInstances)用于重启云数据库实例。
+
+注意：
+1、本接口只支持主实例进行重启操作；
+2、实例状态必须为正常，并且没有其他异步任务在执行中。
+     * @param {RestartDBInstancesRequest} req
+     * @param {function(string, RestartDBInstancesResponse):void} cb
+     * @public
+     */
+    RestartDBInstances(req, cb) {
+        let resp = new RestartDBInstancesResponse();
+        this.request("RestartDBInstances", req, resp, cb);
+    }
+
+    /**
      * 本接口(DescribeDBInstances)用于查询云数据库实例列表，支持通过项目ID、实例ID、访问地址、实例状态等来筛选实例。
 
 1. 不指定任何过滤条件, 则默认返回20条实例记录，单次请求最多支持返回100条实例记录；
@@ -319,6 +423,17 @@ class CdbClient extends AbstractClient {
     DescribeDBInstances(req, cb) {
         let resp = new DescribeDBInstancesResponse();
         this.request("DescribeDBInstances", req, resp, cb);
+    }
+
+    /**
+     * 本接口(VerifyRootAccount)用于校验云数据库实例的ROOT账号是否有足够的权限进行授权操作。
+     * @param {VerifyRootAccountRequest} req
+     * @param {function(string, VerifyRootAccountResponse):void} cb
+     * @public
+     */
+    VerifyRootAccount(req, cb) {
+        let resp = new VerifyRootAccountResponse();
+        this.request("VerifyRootAccount", req, resp, cb);
     }
 
     /**
@@ -398,6 +513,17 @@ class CdbClient extends AbstractClient {
     }
 
     /**
+     * 本接口(ModifyAccountPrivileges)用于修改云数据库的账户的权限信息。
+     * @param {ModifyAccountPrivilegesRequest} req
+     * @param {function(string, ModifyAccountPrivilegesResponse):void} cb
+     * @public
+     */
+    ModifyAccountPrivileges(req, cb) {
+        let resp = new ModifyAccountPrivilegesResponse();
+        this.request("ModifyAccountPrivileges", req, resp, cb);
+    }
+
+    /**
      * 本接口(ModifyDBInstanceSecurityGroups)用于修改实例绑定的安全组。
      * @param {ModifyDBInstanceSecurityGroupsRequest} req
      * @param {function(string, ModifyDBInstanceSecurityGroupsResponse):void} cb
@@ -417,6 +543,17 @@ class CdbClient extends AbstractClient {
     DescribeDBImportRecords(req, cb) {
         let resp = new DescribeDBImportRecordsResponse();
         this.request("DescribeDBImportRecords", req, resp, cb);
+    }
+
+    /**
+     * 本接口(DescribeDBSwitchRecords)用于查询云数据库实例切换记录。
+     * @param {DescribeDBSwitchRecordsRequest} req
+     * @param {function(string, DescribeDBSwitchRecordsResponse):void} cb
+     * @public
+     */
+    DescribeDBSwitchRecords(req, cb) {
+        let resp = new DescribeDBSwitchRecordsResponse();
+        this.request("DescribeDBSwitchRecords", req, resp, cb);
     }
 
     /**
@@ -453,6 +590,17 @@ class CdbClient extends AbstractClient {
     }
 
     /**
+     * 本接口(DescribeAccounts)用于查询云数据库的所有账户信息。
+     * @param {DescribeAccountsRequest} req
+     * @param {function(string, DescribeAccountsResponse):void} cb
+     * @public
+     */
+    DescribeAccounts(req, cb) {
+        let resp = new DescribeAccountsResponse();
+        this.request("DescribeAccounts", req, resp, cb);
+    }
+
+    /**
      * 本接口(CloseWanService)用于关闭云数据库实例的外网访问。关闭外网访问后，外网地址将不可访问。
      * @param {CloseWanServiceRequest} req
      * @param {function(string, CloseWanServiceResponse):void} cb
@@ -486,6 +634,17 @@ class CdbClient extends AbstractClient {
     }
 
     /**
+     * 本接口(ModifyAccountPassword)用于修改云数据库账户的密码。
+     * @param {ModifyAccountPasswordRequest} req
+     * @param {function(string, ModifyAccountPasswordResponse):void} cb
+     * @public
+     */
+    ModifyAccountPassword(req, cb) {
+        let resp = new ModifyAccountPasswordResponse();
+        this.request("ModifyAccountPassword", req, resp, cb);
+    }
+
+    /**
      * 本接口(DescribeBinlogs)用于查询云数据库实例的二进制数据。
      * @param {DescribeBinlogsRequest} req
      * @param {function(string, DescribeBinlogsResponse):void} cb
@@ -494,6 +653,28 @@ class CdbClient extends AbstractClient {
     DescribeBinlogs(req, cb) {
         let resp = new DescribeBinlogsResponse();
         this.request("DescribeBinlogs", req, resp, cb);
+    }
+
+    /**
+     * 本接口(DescribeDatabases)用于查询云数据库实例的数据库信息。
+     * @param {DescribeDatabasesRequest} req
+     * @param {function(string, DescribeDatabasesResponse):void} cb
+     * @public
+     */
+    DescribeDatabases(req, cb) {
+        let resp = new DescribeDatabasesResponse();
+        this.request("DescribeDatabases", req, resp, cb);
+    }
+
+    /**
+     * 本接口(CreateAccounts)用于创建云数据库的账户，需要指定新的账户名和域名，以及所对应的密码，同时可以设置账号的备注信息。
+     * @param {CreateAccountsRequest} req
+     * @param {function(string, CreateAccountsResponse):void} cb
+     * @public
+     */
+    CreateAccounts(req, cb) {
+        let resp = new CreateAccountsResponse();
+        this.request("CreateAccounts", req, resp, cb);
     }
 
     /**
