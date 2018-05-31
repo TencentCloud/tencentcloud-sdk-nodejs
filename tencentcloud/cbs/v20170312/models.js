@@ -1481,6 +1481,41 @@ class AttachDisksRequest extends  AbstractModel {
 }
 
 /**
+ * 标签。
+ * @class
+ */
+class Tag extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 标签健。
+         * @type {string || null}
+         */
+        this.Key = null;
+
+        /**
+         * 标签值。
+         * @type {string || null}
+         */
+        this.Value = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Key = params.Key || null;
+        this.Value = params.Value || null;
+
+    }
+}
+
+/**
  * DescribeSnapshots请求参数结构体
  * @class
  */
@@ -2033,6 +2068,12 @@ class Disk extends  AbstractModel {
          */
         this.AutoSnapshotPolicyIds = null;
 
+        /**
+         * 与云盘绑定的标签，云盘未绑定标签则取值为空。
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
     }
 
     /**
@@ -2070,6 +2111,15 @@ class Disk extends  AbstractModel {
         this.IsReturnable = params.IsReturnable || null;
         this.ReturnFailCode = params.ReturnFailCode || null;
         this.AutoSnapshotPolicyIds = params.AutoSnapshotPolicyIds || null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
 
     }
 }
@@ -2144,6 +2194,7 @@ module.exports = {
     RenewDiskResponse: RenewDiskResponse,
     CreateDisksRequest: CreateDisksRequest,
     AttachDisksRequest: AttachDisksRequest,
+    Tag: Tag,
     DescribeSnapshotsRequest: DescribeSnapshotsRequest,
     TerminateDisksResponse: TerminateDisksResponse,
     DescribeDiskConfigQuotaResponse: DescribeDiskConfigQuotaResponse,
