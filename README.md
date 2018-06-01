@@ -49,7 +49,8 @@ client.DescribeZones(req, function(errMsg, response) {
     console.log(response.to_json_string());
 });
 ```
-更丰富使用demo请前往[github仓库](https://github.com/tencentcloud/tencentcloud-sdk-nodejs)在examples目录中寻找。
+# 更多示例
+更丰富的使用demo请在examples目录中寻找。
 
 # 旧版SDK
 我们推荐使用新版NODEJS SDK，如果一定要用旧版SDK，请前往[github仓库](https://github.com/CFETeam/qcloudapi-sdk)下载。
