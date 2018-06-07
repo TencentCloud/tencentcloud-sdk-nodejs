@@ -2,7 +2,7 @@ const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const LocalDiskType = models.LocalDiskType;
 const AssociateInstancesKeyPairsResponse = models.AssociateInstancesKeyPairsResponse;
-const DescribeInstanceOperationLogsRequest = models.DescribeInstanceOperationLogsRequest;
+const RenewInstancesRequest = models.RenewInstancesRequest;
 const DescribeImageQuotaResponse = models.DescribeImageQuotaResponse;
 const ModifyInstancesProjectRequest = models.ModifyInstancesProjectRequest;
 const ResetInstancesTypeResponse = models.ResetInstancesTypeResponse;
@@ -10,7 +10,6 @@ const HostResource = models.HostResource;
 const DeleteKeyPairsResponse = models.DeleteKeyPairsResponse;
 const TerminateInstancesResponse = models.TerminateInstancesResponse;
 const ResetInstancesInternetMaxBandwidthResponse = models.ResetInstancesInternetMaxBandwidthResponse;
-const UpdateInstanceVpcConfigResponse = models.UpdateInstanceVpcConfigResponse;
 const InquiryPriceResetInstancesInternetMaxBandwidthResponse = models.InquiryPriceResetInstancesInternetMaxBandwidthResponse;
 const ModifyKeyPairAttributeRequest = models.ModifyKeyPairAttributeRequest;
 const DescribeImportImageOsResponse = models.DescribeImportImageOsResponse;
@@ -43,7 +42,6 @@ const ModifyImageSharePermissionRequest = models.ModifyImageSharePermissionReque
 const DisassociateInstancesKeyPairsResponse = models.DisassociateInstancesKeyPairsResponse;
 const InquiryPriceResizeInstanceDisksRequest = models.InquiryPriceResizeInstanceDisksRequest;
 const RunInstancesResponse = models.RunInstancesResponse;
-const UpdateInstanceVpcConfigRequest = models.UpdateInstanceVpcConfigRequest;
 const ModifyInstancesAttributeResponse = models.ModifyInstancesAttributeResponse;
 const ModifyInstancesRenewFlagRequest = models.ModifyInstancesRenewFlagRequest;
 const SyncImagesResponse = models.SyncImagesResponse;
@@ -101,7 +99,6 @@ const DescribeZoneInstanceConfigInfosRequest = models.DescribeZoneInstanceConfig
 const DescribeZonesResponse = models.DescribeZonesResponse;
 const ItemPrice = models.ItemPrice;
 const InstanceTypeQuotaItem = models.InstanceTypeQuotaItem;
-const DescribeInstanceOperationLogsResponse = models.DescribeInstanceOperationLogsResponse;
 const Image = models.Image;
 const DescribeHostsRequest = models.DescribeHostsRequest;
 const ModifyInstancesRenewFlagResponse = models.ModifyInstancesRenewFlagResponse;
@@ -122,7 +119,6 @@ const DescribeInternetChargeTypeConfigsRequest = models.DescribeInternetChargeTy
 const DescribeImagesRequest = models.DescribeImagesRequest;
 const ModifyImageAttributeRequest = models.ModifyImageAttributeRequest;
 const ResizeInstanceDisksResponse = models.ResizeInstanceDisksResponse;
-const RenewInstancesRequest = models.RenewInstancesRequest;
 const KeyPair = models.KeyPair;
 const RenewInstancesResponse = models.RenewInstancesResponse;
 const RunMonitorServiceEnabled = models.RunMonitorServiceEnabled;
@@ -305,19 +301,18 @@ class CvmClient extends AbstractClient {
     }
 
     /**
-     * 本接口 (DisassociateInstancesKeyPairs) 用于解除实例的密钥绑定关系。
+     * 本接口（DeleteImages）用于删除一个或多个镜像。
 
-* 只支持[`STOPPED`](https://cloud.tencent.com/document/api/213/9452#INSTANCE_STATE)状态的`Linux`操作系统的实例。
-* 解绑密钥后，实例可以通过原来设置的密码登录。
-* 如果原来没有设置密码，解绑后将无法使用 `SSH` 登录。可以调用 [ResetInstancesPassword](https://cloud.tencent.com/document/api/213/9397) 接口来设置登陆密码。
-* 支持批量操作。每次请求批量实例的上限为100。如果批量实例存在不允许操作的实例，操作会以特定错误码返回。
-     * @param {DisassociateInstancesKeyPairsRequest} req
-     * @param {function(string, DisassociateInstancesKeyPairsResponse):void} cb
+* 当[镜像状态](https://cloud.tencent.com/document/api/213/9452#image_state)为`创建中`和`使用中`时, 不允许删除。镜像状态可以通过[DescribeImages](https://cloud.tencent.com/document/api/213/9418)获取。
+* 每个地域最多只支持创建10个自定义镜像，删除镜像可以释放账户的配额。
+* 当镜像正在被其它账户分享时，不允许删除。
+     * @param {DeleteImagesRequest} req
+     * @param {function(string, DeleteImagesResponse):void} cb
      * @public
      */
-    DisassociateInstancesKeyPairs(req, cb) {
-        let resp = new DisassociateInstancesKeyPairsResponse();
-        this.request("DisassociateInstancesKeyPairs", req, resp, cb);
+    DeleteImages(req, cb) {
+        let resp = new DeleteImagesResponse();
+        this.request("DeleteImages", req, resp, cb);
     }
 
     /**
@@ -426,18 +421,19 @@ class CvmClient extends AbstractClient {
     }
 
     /**
-     * 本接口（DeleteImages）用于删除一个或多个镜像。
+     * 本接口 (DisassociateInstancesKeyPairs) 用于解除实例的密钥绑定关系。
 
-* 当[镜像状态](https://cloud.tencent.com/document/api/213/9452#image_state)为`创建中`和`使用中`时, 不允许删除。镜像状态可以通过[DescribeImages](https://cloud.tencent.com/document/api/213/9418)获取。
-* 每个地域最多只支持创建10个自定义镜像，删除镜像可以释放账户的配额。
-* 当镜像正在被其它账户分享时，不允许删除。
-     * @param {DeleteImagesRequest} req
-     * @param {function(string, DeleteImagesResponse):void} cb
+* 只支持[`STOPPED`](https://cloud.tencent.com/document/api/213/9452#INSTANCE_STATE)状态的`Linux`操作系统的实例。
+* 解绑密钥后，实例可以通过原来设置的密码登录。
+* 如果原来没有设置密码，解绑后将无法使用 `SSH` 登录。可以调用 [ResetInstancesPassword](https://cloud.tencent.com/document/api/213/9397) 接口来设置登陆密码。
+* 支持批量操作。每次请求批量实例的上限为100。如果批量实例存在不允许操作的实例，操作会以特定错误码返回。
+     * @param {DisassociateInstancesKeyPairsRequest} req
+     * @param {function(string, DisassociateInstancesKeyPairsResponse):void} cb
      * @public
      */
-    DeleteImages(req, cb) {
-        let resp = new DeleteImagesResponse();
-        this.request("DeleteImages", req, resp, cb);
+    DisassociateInstancesKeyPairs(req, cb) {
+        let resp = new DisassociateInstancesKeyPairsResponse();
+        this.request("DisassociateInstancesKeyPairs", req, resp, cb);
     }
 
     /**
@@ -655,30 +651,6 @@ class CvmClient extends AbstractClient {
     ResetInstancesInternetMaxBandwidth(req, cb) {
         let resp = new ResetInstancesInternetMaxBandwidthResponse();
         this.request("ResetInstancesInternetMaxBandwidth", req, resp, cb);
-    }
-
-    /**
-     * 本接口（DescribeInstanceOperationLogs）查询指定实例操作记录。
-     * @param {DescribeInstanceOperationLogsRequest} req
-     * @param {function(string, DescribeInstanceOperationLogsResponse):void} cb
-     * @public
-     */
-    DescribeInstanceOperationLogs(req, cb) {
-        let resp = new DescribeInstanceOperationLogsResponse();
-        this.request("DescribeInstanceOperationLogs", req, resp, cb);
-    }
-
-    /**
-     * 本接口(UpdateInstanceVpcConfig)用于修改实例vpc属性，如私有网络ip。
-* 此操作默认会关闭实例，完成后再启动。
-* 不支持跨VpcId操作。
-     * @param {UpdateInstanceVpcConfigRequest} req
-     * @param {function(string, UpdateInstanceVpcConfigResponse):void} cb
-     * @public
-     */
-    UpdateInstanceVpcConfig(req, cb) {
-        let resp = new UpdateInstanceVpcConfigResponse();
-        this.request("UpdateInstanceVpcConfig", req, resp, cb);
     }
 
     /**

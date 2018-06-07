@@ -3128,6 +3128,55 @@ class InquiryPriceResetVpnGatewayInternetMaxBandwidthRequest extends  AbstractMo
 }
 
 /**
+ * 单项计费价格信息
+ * @class
+ */
+class ItemPrice extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 按量计费后付费单价，单位：元。
+         * @type {number || null}
+         */
+        this.UnitPrice = null;
+
+        /**
+         * 按量计费后付费计价单元，可取值范围： HOUR：表示计价单元是按每小时来计算。当前涉及该计价单元的场景有：实例按小时后付费（POSTPAID_BY_HOUR）、带宽按小时后付费（BANDWIDTH_POSTPAID_BY_HOUR）： GB：表示计价单元是按每GB来计算。当前涉及该计价单元的场景有：流量按小时后付费（TRAFFIC_POSTPAID_BY_HOUR）。
+         * @type {string || null}
+         */
+        this.ChargeUnit = null;
+
+        /**
+         * 预付费商品的原价，单位：元。
+         * @type {number || null}
+         */
+        this.OriginalPrice = null;
+
+        /**
+         * 预付费商品的折扣价，单位：元。
+         * @type {number || null}
+         */
+        this.DiscountPrice = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.UnitPrice = params.UnitPrice || null;
+        this.ChargeUnit = params.ChargeUnit || null;
+        this.OriginalPrice = params.OriginalPrice || null;
+        this.DiscountPrice = params.DiscountPrice || null;
+
+    }
+}
+
+/**
  * DeleteVpnConnection返回参数结构体
  * @class
  */
@@ -4131,18 +4180,42 @@ class DetachNetworkInterfaceRequest extends  AbstractModel {
 }
 
 /**
- * UnassignPrivateIpAddresses返回参数结构体
+ * 安全组关联的实例统计
  * @class
  */
-class UnassignPrivateIpAddressesResponse extends  AbstractModel {
+class SecurityGroupAssociationStatistics extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 安全组实例ID。
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.SecurityGroupId = null;
+
+        /**
+         * 云主机实例数。
+         * @type {number || null}
+         */
+        this.CVM = null;
+
+        /**
+         * 数据库实例数。
+         * @type {number || null}
+         */
+        this.CDB = null;
+
+        /**
+         * 弹性网卡实例数。
+         * @type {number || null}
+         */
+        this.ENI = null;
+
+        /**
+         * 被安全组引用数。
+         * @type {number || null}
+         */
+        this.SG = null;
 
     }
 
@@ -4153,7 +4226,11 @@ class UnassignPrivateIpAddressesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.SecurityGroupId = params.SecurityGroupId || null;
+        this.CVM = params.CVM || null;
+        this.CDB = params.CDB || null;
+        this.ENI = params.ENI || null;
+        this.SG = params.SG || null;
 
     }
 }
@@ -6241,36 +6318,24 @@ class DeleteRoutesResponse extends  AbstractModel {
 }
 
 /**
- * 单项计费价格信息
+ * DescribeSecurityGroupAssociationStatistics返回参数结构体
  * @class
  */
-class ItemPrice extends  AbstractModel {
+class DescribeSecurityGroupAssociationStatisticsResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 按量计费后付费单价，单位：元。
-         * @type {number || null}
+         * 安全组关联实例统计。
+         * @type {Array.<SecurityGroupAssociationStatistics> || null}
          */
-        this.UnitPrice = null;
+        this.SecurityGroupAssociationStatisticsSet = null;
 
         /**
-         * 按量计费后付费计价单元，可取值范围： HOUR：表示计价单元是按每小时来计算。当前涉及该计价单元的场景有：实例按小时后付费（POSTPAID_BY_HOUR）、带宽按小时后付费（BANDWIDTH_POSTPAID_BY_HOUR）： GB：表示计价单元是按每GB来计算。当前涉及该计价单元的场景有：流量按小时后付费（TRAFFIC_POSTPAID_BY_HOUR）。
+         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
          * @type {string || null}
          */
-        this.ChargeUnit = null;
-
-        /**
-         * 预付费商品的原价，单位：元。
-         * @type {number || null}
-         */
-        this.OriginalPrice = null;
-
-        /**
-         * 预付费商品的折扣价，单位：元。
-         * @type {number || null}
-         */
-        this.DiscountPrice = null;
+        this.RequestId = null;
 
     }
 
@@ -6281,10 +6346,16 @@ class ItemPrice extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.UnitPrice = params.UnitPrice || null;
-        this.ChargeUnit = params.ChargeUnit || null;
-        this.OriginalPrice = params.OriginalPrice || null;
-        this.DiscountPrice = params.DiscountPrice || null;
+
+        if (params.SecurityGroupAssociationStatisticsSet) {
+            this.SecurityGroupAssociationStatisticsSet = new Array();
+            for (let z in params.SecurityGroupAssociationStatisticsSet) {
+                let obj = new SecurityGroupAssociationStatistics();
+                obj.deserialize(params.SecurityGroupAssociationStatisticsSet[z]);
+                this.SecurityGroupAssociationStatisticsSet.push(obj);
+            }
+        }
+        this.RequestId = params.RequestId || null;
 
     }
 }
@@ -7211,6 +7282,34 @@ class Quota extends  AbstractModel {
 }
 
 /**
+ * UnassignPrivateIpAddresses返回参数结构体
+ * @class
+ */
+class UnassignPrivateIpAddressesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = params.RequestId || null;
+
+    }
+}
+
+/**
  * 描述 EIP 信息
  * @class
  */
@@ -7596,6 +7695,34 @@ class DeleteServiceTemplateRequest extends  AbstractModel {
             return;
         }
         this.ServiceTemplateId = params.ServiceTemplateId || null;
+
+    }
+}
+
+/**
+ * DescribeSecurityGroupAssociationStatistics请求参数结构体
+ * @class
+ */
+class DescribeSecurityGroupAssociationStatisticsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 安全实例ID，例如sg-33ocnj9n，可通过DescribeSecurityGroups获取。
+         * @type {Array.<string> || null}
+         */
+        this.SecurityGroupIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SecurityGroupIds = params.SecurityGroupIds || null;
 
     }
 }
@@ -8357,6 +8484,7 @@ module.exports = {
     DeleteServiceTemplateGroupResponse: DeleteServiceTemplateGroupResponse,
     DisassociateAddressRequest: DisassociateAddressRequest,
     InquiryPriceResetVpnGatewayInternetMaxBandwidthRequest: InquiryPriceResetVpnGatewayInternetMaxBandwidthRequest,
+    ItemPrice: ItemPrice,
     DeleteVpnConnectionResponse: DeleteVpnConnectionResponse,
     ReplaceSecurityGroupPolicyResponse: ReplaceSecurityGroupPolicyResponse,
     ModifyCustomerGatewayAttributeResponse: ModifyCustomerGatewayAttributeResponse,
@@ -8384,7 +8512,7 @@ module.exports = {
     ResetVpnGatewayInternetMaxBandwidthResponse: ResetVpnGatewayInternetMaxBandwidthResponse,
     CreateVpnConnectionResponse: CreateVpnConnectionResponse,
     DetachNetworkInterfaceRequest: DetachNetworkInterfaceRequest,
-    UnassignPrivateIpAddressesResponse: UnassignPrivateIpAddressesResponse,
+    SecurityGroupAssociationStatistics: SecurityGroupAssociationStatistics,
     ModifyCustomerGatewayAttributeRequest: ModifyCustomerGatewayAttributeRequest,
     AttachClassicLinkVpcResponse: AttachClassicLinkVpcResponse,
     CreateServiceTemplateGroupResponse: CreateServiceTemplateGroupResponse,
@@ -8436,7 +8564,7 @@ module.exports = {
     ReplaceRoutesRequest: ReplaceRoutesRequest,
     CreateRouteTableResponse: CreateRouteTableResponse,
     DeleteRoutesResponse: DeleteRoutesResponse,
-    ItemPrice: ItemPrice,
+    DescribeSecurityGroupAssociationStatisticsResponse: DescribeSecurityGroupAssociationStatisticsResponse,
     ModifyPrivateIpAddressesAttributeRequest: ModifyPrivateIpAddressesAttributeRequest,
     DeleteVpnConnectionRequest: DeleteVpnConnectionRequest,
     CreateSecurityGroupRequest: CreateSecurityGroupRequest,
@@ -8459,6 +8587,7 @@ module.exports = {
     DeleteVpnGatewayResponse: DeleteVpnGatewayResponse,
     DescribeAddressTemplateGroupsResponse: DescribeAddressTemplateGroupsResponse,
     Quota: Quota,
+    UnassignPrivateIpAddressesResponse: UnassignPrivateIpAddressesResponse,
     Address: Address,
     ModifyVpnGatewayAttributeResponse: ModifyVpnGatewayAttributeResponse,
     DeleteAddressTemplateResponse: DeleteAddressTemplateResponse,
@@ -8468,6 +8597,7 @@ module.exports = {
     CreateVpcRequest: CreateVpcRequest,
     CreateServiceTemplateGroupRequest: CreateServiceTemplateGroupRequest,
     DeleteServiceTemplateRequest: DeleteServiceTemplateRequest,
+    DescribeSecurityGroupAssociationStatisticsRequest: DescribeSecurityGroupAssociationStatisticsRequest,
     DescribeClassicLinkInstancesResponse: DescribeClassicLinkInstancesResponse,
     DescribeRouteTablesResponse: DescribeRouteTablesResponse,
     DeleteAddressTemplateRequest: DeleteAddressTemplateRequest,

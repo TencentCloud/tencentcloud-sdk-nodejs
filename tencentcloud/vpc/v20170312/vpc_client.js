@@ -68,6 +68,7 @@ const AddressTemplate = models.AddressTemplate;
 const DeleteServiceTemplateGroupResponse = models.DeleteServiceTemplateGroupResponse;
 const DisassociateAddressRequest = models.DisassociateAddressRequest;
 const InquiryPriceResetVpnGatewayInternetMaxBandwidthRequest = models.InquiryPriceResetVpnGatewayInternetMaxBandwidthRequest;
+const ItemPrice = models.ItemPrice;
 const DeleteVpnConnectionResponse = models.DeleteVpnConnectionResponse;
 const ReplaceSecurityGroupPolicyResponse = models.ReplaceSecurityGroupPolicyResponse;
 const ModifyCustomerGatewayAttributeResponse = models.ModifyCustomerGatewayAttributeResponse;
@@ -95,7 +96,7 @@ const ResetRoutesRequest = models.ResetRoutesRequest;
 const ResetVpnGatewayInternetMaxBandwidthResponse = models.ResetVpnGatewayInternetMaxBandwidthResponse;
 const CreateVpnConnectionResponse = models.CreateVpnConnectionResponse;
 const DetachNetworkInterfaceRequest = models.DetachNetworkInterfaceRequest;
-const UnassignPrivateIpAddressesResponse = models.UnassignPrivateIpAddressesResponse;
+const SecurityGroupAssociationStatistics = models.SecurityGroupAssociationStatistics;
 const ModifyCustomerGatewayAttributeRequest = models.ModifyCustomerGatewayAttributeRequest;
 const AttachClassicLinkVpcResponse = models.AttachClassicLinkVpcResponse;
 const CreateServiceTemplateGroupResponse = models.CreateServiceTemplateGroupResponse;
@@ -147,7 +148,7 @@ const ModifyVpnConnectionAttributeRequest = models.ModifyVpnConnectionAttributeR
 const ReplaceRoutesRequest = models.ReplaceRoutesRequest;
 const CreateRouteTableResponse = models.CreateRouteTableResponse;
 const DeleteRoutesResponse = models.DeleteRoutesResponse;
-const ItemPrice = models.ItemPrice;
+const DescribeSecurityGroupAssociationStatisticsResponse = models.DescribeSecurityGroupAssociationStatisticsResponse;
 const ModifyPrivateIpAddressesAttributeRequest = models.ModifyPrivateIpAddressesAttributeRequest;
 const DeleteVpnConnectionRequest = models.DeleteVpnConnectionRequest;
 const CreateSecurityGroupRequest = models.CreateSecurityGroupRequest;
@@ -170,6 +171,7 @@ const DeleteCustomerGatewayRequest = models.DeleteCustomerGatewayRequest;
 const DeleteVpnGatewayResponse = models.DeleteVpnGatewayResponse;
 const DescribeAddressTemplateGroupsResponse = models.DescribeAddressTemplateGroupsResponse;
 const Quota = models.Quota;
+const UnassignPrivateIpAddressesResponse = models.UnassignPrivateIpAddressesResponse;
 const Address = models.Address;
 const ModifyVpnGatewayAttributeResponse = models.ModifyVpnGatewayAttributeResponse;
 const DeleteAddressTemplateResponse = models.DeleteAddressTemplateResponse;
@@ -179,6 +181,7 @@ const DescribeServiceTemplateGroupsRequest = models.DescribeServiceTemplateGroup
 const CreateVpcRequest = models.CreateVpcRequest;
 const CreateServiceTemplateGroupRequest = models.CreateServiceTemplateGroupRequest;
 const DeleteServiceTemplateRequest = models.DeleteServiceTemplateRequest;
+const DescribeSecurityGroupAssociationStatisticsRequest = models.DescribeSecurityGroupAssociationStatisticsRequest;
 const DescribeClassicLinkInstancesResponse = models.DescribeClassicLinkInstancesResponse;
 const DescribeRouteTablesResponse = models.DescribeRouteTablesResponse;
 const DeleteAddressTemplateRequest = models.DeleteAddressTemplateRequest;
@@ -1045,6 +1048,17 @@ class VpcClient extends AbstractClient {
     DisassociateAddress(req, cb) {
         let resp = new DisassociateAddressResponse();
         this.request("DisassociateAddress", req, resp, cb);
+    }
+
+    /**
+     * 本接口（DescribeSecurityGroupAssociationStatistics）用于查询安全组关联的实例统计。
+     * @param {DescribeSecurityGroupAssociationStatisticsRequest} req
+     * @param {function(string, DescribeSecurityGroupAssociationStatisticsResponse):void} cb
+     * @public
+     */
+    DescribeSecurityGroupAssociationStatistics(req, cb) {
+        let resp = new DescribeSecurityGroupAssociationStatisticsResponse();
+        this.request("DescribeSecurityGroupAssociationStatistics", req, resp, cb);
     }
 
     /**
