@@ -78,19 +78,24 @@ class AssociateInstancesKeyPairsResponse extends  AbstractModel {
 }
 
 /**
- * DescribeInstanceOperationLogs请求参数结构体
+ * RenewInstances请求参数结构体
  * @class
  */
-class DescribeInstanceOperationLogsRequest extends  AbstractModel {
+class RenewInstancesRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 每次请求的`Filters`的上限为1，`Filter.Values`的上限为1。
-Filters.1.Name目前支持“instance-id”，即根据实例 ID 过滤。实例 ID 形如：ins-1w2x3y4z。
-         * @type {Array.<Filter> || null}
+         * 一个或多个待操作的实例ID。可通过[`DescribeInstances`](https://cloud.tencent.com/document/api/213/9388)接口返回值中的`InstanceId`获取。每次请求批量实例的上限为100。
+         * @type {Array.<string> || null}
          */
-        this.Filters = null;
+        this.InstanceIds = null;
+
+        /**
+         * 预付费模式，即包年包月相关参数设置。通过该参数可以指定包年包月实例的续费时长、是否设置自动续费等属性。
+         * @type {InstanceChargePrepaid || null}
+         */
+        this.InstanceChargePrepaid = null;
 
     }
 
@@ -101,14 +106,12 @@ Filters.1.Name目前支持“instance-id”，即根据实例 ID 过滤。实例
         if (!params) {
             return;
         }
+        this.InstanceIds = params.InstanceIds || null;
 
-        if (params.Filters) {
-            this.Filters = new Array();
-            for (let z in params.Filters) {
-                let obj = new Filter();
-                obj.deserialize(params.Filters[z]);
-                this.Filters.push(obj);
-            }
+        if (params.InstanceChargePrepaid) {
+            let obj = new InstanceChargePrepaid();
+            obj.deserialize(params.InstanceChargePrepaid)
+            this.InstanceChargePrepaid = obj;
         }
 
     }
@@ -336,34 +339,6 @@ class TerminateInstancesResponse extends  AbstractModel {
  * @class
  */
 class ResetInstancesInternetMaxBandwidthResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RequestId = params.RequestId || null;
-
-    }
-}
-
-/**
- * UpdateInstanceVpcConfig返回参数结构体
- * @class
- */
-class UpdateInstanceVpcConfigResponse extends  AbstractModel {
     constructor(){
         super();
 
@@ -741,6 +716,19 @@ class RunInstancesRequest extends  AbstractModel {
          */
         this.TagSpecification = null;
 
+        /**
+         * 实例的市场相关选项，如竞价实例相关参数
+         * @type {InstanceMarketOptionsRequest || null}
+         */
+        this.InstanceMarketOptions = null;
+
+        /**
+         * 提供给实例使用的用户数据，需要以 base64 方式编码，支持的最大数据大小为 16KB。关于获取此参数的详细介绍，请参阅[Windows](https://cloud.tencent.com/document/product/213/17526
+)和[Linux](https://cloud.tencent.com/document/product/213/17525)启动时运行命令。
+         * @type {string || null}
+         */
+        this.UserData = null;
+
     }
 
     /**
@@ -824,6 +812,13 @@ class RunInstancesRequest extends  AbstractModel {
                 this.TagSpecification.push(obj);
             }
         }
+
+        if (params.InstanceMarketOptions) {
+            let obj = new InstanceMarketOptionsRequest();
+            obj.deserialize(params.InstanceMarketOptions)
+            this.InstanceMarketOptions = obj;
+        }
+        this.UserData = params.UserData || null;
 
     }
 }
@@ -1974,53 +1969,6 @@ class RunInstancesResponse extends  AbstractModel {
 }
 
 /**
- * UpdateInstanceVpcConfig请求参数结构体
- * @class
- */
-class UpdateInstanceVpcConfigRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 待操作的实例ID。可通过[`DescribeInstances`](document/api/213/9388)接口返回值中的`InstanceId`获取。
-         * @type {string || null}
-         */
-        this.InstanceId = null;
-
-        /**
-         * 私有网络相关信息配置。通过该参数指定私有网络的ID，子网ID，私有网络ip等信息。
-         * @type {VirtualPrivateCloud || null}
-         */
-        this.VirtualPrivateCloud = null;
-
-        /**
-         * 是否对运行中的实例选择强制关机。默认为TRUE。
-         * @type {boolean || null}
-         */
-        this.ForceStop = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.InstanceId = params.InstanceId || null;
-
-        if (params.VirtualPrivateCloud) {
-            let obj = new VirtualPrivateCloud();
-            obj.deserialize(params.VirtualPrivateCloud)
-            this.VirtualPrivateCloud = obj;
-        }
-        this.ForceStop = params.ForceStop || null;
-
-    }
-}
-
-/**
  * ModifyInstancesAttribute返回参数结构体
  * @class
  */
@@ -2174,6 +2122,12 @@ class ModifyInstancesAttributeRequest extends  AbstractModel {
          */
         this.InstanceName = null;
 
+        /**
+         * 指定实例的安全组Id列表。
+         * @type {Array.<string> || null}
+         */
+        this.SecurityGroups = null;
+
     }
 
     /**
@@ -2185,6 +2139,7 @@ class ModifyInstancesAttributeRequest extends  AbstractModel {
         }
         this.InstanceIds = params.InstanceIds || null;
         this.InstanceName = params.InstanceName || null;
+        this.SecurityGroups = params.SecurityGroups || null;
 
     }
 }
@@ -2407,7 +2362,7 @@ class DisassociateInstancesKeyPairsRequest extends  AbstractModel {
         super();
 
         /**
-         * 一个或多个待操作的实例ID，每次请求批量实例的上限为100。<br><br>可以通过以下方式获取可用的实例ID：<br><li>通过登录[控制台](https://console.cloud.tencent.com/cvm/index)查询实例ID。<br><li>通过调用接口 [DescribeInstances](https://cloud.tencent.com/document/api/213/15728) ，取返回信息中的 `InstanceId` 获取密钥对ID。
+         * 一个或多个待操作的实例ID，每次请求批量实例的上限为100。<br><br>可以通过以下方式获取可用的实例ID：<br><li>通过登录[控制台](https://console.cloud.tencent.com/cvm/index)查询实例ID。<br><li>通过调用接口 [DescribeInstances](https://cloud.tencent.com/document/api/213/15728) ，取返回信息中的 `InstanceId` 获取实例ID。
          * @type {Array.<string> || null}
          */
         this.InstanceIds = null;
@@ -3450,6 +3405,12 @@ class Instance extends  AbstractModel {
          */
         this.LoginSettings = null;
 
+        /**
+         * 实例状态。取值范围：<br><li>PENDING：表示创建中<br></li><li>LAUNCH_FAILED：表示创建失败<br></li><li>RUNNING：表示运行中<br></li><li>STOPPED：表示关机<br></li><li>STARTING：表示开机中<br></li><li>STOPPING：表示关机中<br></li><li>REBOOTING：表示重启中<br></li><li>SHUTDOWN：表示停止待销毁<br></li><li>TERMINATING：表示销毁中。<br></li>
+         * @type {string || null}
+         */
+        this.InstanceState = null;
+
     }
 
     /**
@@ -3513,6 +3474,7 @@ class Instance extends  AbstractModel {
             obj.deserialize(params.LoginSettings)
             this.LoginSettings = obj;
         }
+        this.InstanceState = params.InstanceState || null;
 
     }
 }
@@ -4767,34 +4729,6 @@ class InstanceTypeQuotaItem extends  AbstractModel {
 }
 
 /**
- * DescribeInstanceOperationLogs返回参数结构体
- * @class
- */
-class DescribeInstanceOperationLogsResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RequestId = params.RequestId || null;
-
-    }
-}
-
-/**
  * 一个关于镜像详细信息的结构体，主要包括镜像的主要状态与属性。
  * @class
  */
@@ -5615,46 +5549,6 @@ class ResizeInstanceDisksResponse extends  AbstractModel {
 }
 
 /**
- * RenewInstances请求参数结构体
- * @class
- */
-class RenewInstancesRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 一个或多个待操作的实例ID。可通过[`DescribeInstances`](https://cloud.tencent.com/document/api/213/9388)接口返回值中的`InstanceId`获取。每次请求批量实例的上限为100。
-         * @type {Array.<string> || null}
-         */
-        this.InstanceIds = null;
-
-        /**
-         * 预付费模式，即包年包月相关参数设置。通过该参数可以指定包年包月实例的续费时长、是否设置自动续费等属性。
-         * @type {InstanceChargePrepaid || null}
-         */
-        this.InstanceChargePrepaid = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.InstanceIds = params.InstanceIds || null;
-
-        if (params.InstanceChargePrepaid) {
-            let obj = new InstanceChargePrepaid();
-            obj.deserialize(params.InstanceChargePrepaid)
-            this.InstanceChargePrepaid = obj;
-        }
-
-    }
-}
-
-/**
  * 描述密钥对信息
  * @class
  */
@@ -6318,7 +6212,7 @@ class Price extends  AbstractModel {
 module.exports = {
     LocalDiskType: LocalDiskType,
     AssociateInstancesKeyPairsResponse: AssociateInstancesKeyPairsResponse,
-    DescribeInstanceOperationLogsRequest: DescribeInstanceOperationLogsRequest,
+    RenewInstancesRequest: RenewInstancesRequest,
     DescribeImageQuotaResponse: DescribeImageQuotaResponse,
     ModifyInstancesProjectRequest: ModifyInstancesProjectRequest,
     ResetInstancesTypeResponse: ResetInstancesTypeResponse,
@@ -6326,7 +6220,6 @@ module.exports = {
     DeleteKeyPairsResponse: DeleteKeyPairsResponse,
     TerminateInstancesResponse: TerminateInstancesResponse,
     ResetInstancesInternetMaxBandwidthResponse: ResetInstancesInternetMaxBandwidthResponse,
-    UpdateInstanceVpcConfigResponse: UpdateInstanceVpcConfigResponse,
     InquiryPriceResetInstancesInternetMaxBandwidthResponse: InquiryPriceResetInstancesInternetMaxBandwidthResponse,
     ModifyKeyPairAttributeRequest: ModifyKeyPairAttributeRequest,
     DescribeImportImageOsResponse: DescribeImportImageOsResponse,
@@ -6359,7 +6252,6 @@ module.exports = {
     DisassociateInstancesKeyPairsResponse: DisassociateInstancesKeyPairsResponse,
     InquiryPriceResizeInstanceDisksRequest: InquiryPriceResizeInstanceDisksRequest,
     RunInstancesResponse: RunInstancesResponse,
-    UpdateInstanceVpcConfigRequest: UpdateInstanceVpcConfigRequest,
     ModifyInstancesAttributeResponse: ModifyInstancesAttributeResponse,
     ModifyInstancesRenewFlagRequest: ModifyInstancesRenewFlagRequest,
     SyncImagesResponse: SyncImagesResponse,
@@ -6417,7 +6309,6 @@ module.exports = {
     DescribeZonesResponse: DescribeZonesResponse,
     ItemPrice: ItemPrice,
     InstanceTypeQuotaItem: InstanceTypeQuotaItem,
-    DescribeInstanceOperationLogsResponse: DescribeInstanceOperationLogsResponse,
     Image: Image,
     DescribeHostsRequest: DescribeHostsRequest,
     ModifyInstancesRenewFlagResponse: ModifyInstancesRenewFlagResponse,
@@ -6438,7 +6329,6 @@ module.exports = {
     DescribeImagesRequest: DescribeImagesRequest,
     ModifyImageAttributeRequest: ModifyImageAttributeRequest,
     ResizeInstanceDisksResponse: ResizeInstanceDisksResponse,
-    RenewInstancesRequest: RenewInstancesRequest,
     KeyPair: KeyPair,
     RenewInstancesResponse: RenewInstancesResponse,
     RunMonitorServiceEnabled: RunMonitorServiceEnabled,

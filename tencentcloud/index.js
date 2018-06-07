@@ -14,5 +14,8 @@ module.exports = {
     scf: require("./scf"),
     tmt: require("./tmt"),
     vpc: require("./vpc"),
+	cis: require("./cis"),
+	ds: require("./ds"),
+	ms: require("./ms")
 };
 

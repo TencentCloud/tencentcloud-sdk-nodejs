@@ -33,7 +33,7 @@ class SentenceRecognitionRequest extends  AbstractModel {
         this.SourceType = null;
 
         /**
-         * 语音 URL，公网可下载。当 SourceType 值为 0 时须填写该字段，为 1 时不填；URL 的长度大于 0，小于 2048。
+         * 语音 URL，公网可下载。当 SourceType 值为 0 时须填写该字段，为 1 时不填；URL 的长度大于 0，小于 2048，需进行urlencode编码。
          * @type {string || null}
          */
         this.Url = null;
@@ -51,7 +51,7 @@ class SentenceRecognitionRequest extends  AbstractModel {
         this.UsrAudioKey = null;
 
         /**
-         * 语音数据，当SourceType 值为1时必须填写，为0可不写。
+         * 语音数据，当SourceType 值为1时必须填写，为0可不写。要base64编码
          * @type {string || null}
          */
         this.Data = null;
