@@ -105,7 +105,7 @@ class SubmitJobRequest extends  AbstractModel {
 
         /**
          * 作业所提交的位置信息。通过该参数可以指定作业关联CVM所属可用区等信息。
-         * @type {Array.<Placement> || null}
+         * @type {Placement || null}
          */
         this.Placement = null;
 
@@ -132,12 +132,9 @@ class SubmitJobRequest extends  AbstractModel {
         }
 
         if (params.Placement) {
-            this.Placement = new Array();
-            for (let z in params.Placement) {
-                let obj = new Placement();
-                obj.deserialize(params.Placement[z]);
-                this.Placement.push(obj);
-            }
+            let obj = new Placement();
+            obj.deserialize(params.Placement)
+            this.Placement = obj;
         }
 
         if (params.Job) {
@@ -502,7 +499,7 @@ class SystemDisk extends  AbstractModel {
         super();
 
         /**
-         * 系统盘类型。系统盘类型限制详见[CVM实例配置](/document/product/213/2177)。取值范围：<br><li>LOCAL_BASIC：本地硬盘<br><li>LOCAL_SSD：本地SSD硬盘<br><li>CLOUD_BASIC：普通云硬盘<br><li>CLOUD_SSD：SSD云硬盘<br><br>默认取值：LOCAL_BASIC。
+         * 系统盘类型。系统盘类型限制详见[CVM实例配置](/document/product/213/2177)。取值范围：<br><li>LOCAL_BASIC：本地硬盘<br><li>LOCAL_SSD：本地SSD硬盘<br><li>CLOUD_BASIC：普通云硬盘<br><li>CLOUD_SSD：SSD云硬盘<br><li>CLOUD_PREMIUM：高效云硬盘<br><br>默认取值：LOCAL_BASIC。
          * @type {string || null}
          */
         this.DiskType = null;
@@ -2501,7 +2498,7 @@ class DataDisk extends  AbstractModel {
         this.DiskType = null;
 
         /**
-         * 系统盘ID。LOCAL_BASIC 和 LOCAL_SSD 类型没有ID。暂时不支持该参数。
+         * 数据盘ID。LOCAL_BASIC 和 LOCAL_SSD 类型没有ID。暂时不支持该参数。
          * @type {string || null}
          */
         this.DiskId = null;
@@ -4507,7 +4504,7 @@ class VirtualPrivateCloud extends  AbstractModel {
         this.VpcId = null;
 
         /**
-         * 私有网络子网ID，形如`subnet-xxx`。有效的私有网络子网ID可通过登录[控制台](https://console.cloud.tencent.com/vpc/subnet?rid=1)查询；也可以调用接口  [DescribeSubnetEx](/document/api/215/1371) ，从接口返回中的`unSubnetId`字段获取。
+         * 私有网络子网ID，形如`subnet-xxx`。有效的私有网络子网ID可通过登录[控制台](https://console.cloud.tencent.com/vpc/subnet?rid=1)查询；也可以调用接口  [DescribeSubnets](/document/api/215/15784) ，从接口返回中的`unSubnetId`字段获取。
          * @type {string || null}
          */
         this.SubnetId = null;

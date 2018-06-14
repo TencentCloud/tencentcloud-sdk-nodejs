@@ -20,6 +20,36 @@ class ModifySiteAttributeRequest extends  AbstractModel {
          */
         this.Name = null;
 
+        /**
+         * 网站是否需要登录扫描：0-未知；-1-不需要；1-需要
+         * @type {number || null}
+         */
+        this.NeedLogin = null;
+
+        /**
+         * 登录后的cookie
+         * @type {string || null}
+         */
+        this.LoginCookie = null;
+
+        /**
+         * 用于测试cookie是否有效的URL
+         * @type {string || null}
+         */
+        this.LoginCheckUrl = null;
+
+        /**
+         * 用于测试cookie是否有效的关键字
+         * @type {string || null}
+         */
+        this.LoginCheckKw = null;
+
+        /**
+         * 禁止扫描器扫描的目录关键字
+         * @type {string || null}
+         */
+        this.ScanDisallow = null;
+
     }
 
     /**
@@ -31,6 +61,11 @@ class ModifySiteAttributeRequest extends  AbstractModel {
         }
         this.SiteId = params.SiteId || null;
         this.Name = params.Name || null;
+        this.NeedLogin = params.NeedLogin || null;
+        this.LoginCookie = params.LoginCookie || null;
+        this.LoginCheckUrl = params.LoginCheckUrl || null;
+        this.LoginCheckKw = params.LoginCheckKw || null;
+        this.ScanDisallow = params.ScanDisallow || null;
 
     }
 }
@@ -512,6 +547,18 @@ class SitesVerification extends  AbstractModel {
          */
         this.Appid = null;
 
+        /**
+         * 用于验证站点的url，即访问该url获取验证数据。
+         * @type {string || null}
+         */
+        this.VerifyUrl = null;
+
+        /**
+         * 获取验证验证文件的url。
+         * @type {string || null}
+         */
+        this.VerifyFileUrl = null;
+
     }
 
     /**
@@ -530,6 +577,8 @@ class SitesVerification extends  AbstractModel {
         this.UpdatedAt = params.UpdatedAt || null;
         this.Id = params.Id || null;
         this.Appid = params.Appid || null;
+        this.VerifyUrl = params.VerifyUrl || null;
+        this.VerifyFileUrl = params.VerifyFileUrl || null;
 
     }
 }
@@ -543,19 +592,19 @@ class DescribeSiteQuotaResponse extends  AbstractModel {
         super();
 
         /**
-         * 已购买的站点数。
+         * 已购买的扫描次数。
          * @type {number || null}
          */
         this.Total = null;
 
         /**
-         * 已使用的站点数。
+         * 已使用的扫描次数。
          * @type {number || null}
          */
         this.Used = null;
 
         /**
-         * 剩余可用的站点数。
+         * 剩余可用的扫描次数。
          * @type {number || null}
          */
         this.Available = null;
@@ -1291,6 +1340,18 @@ class Vul extends  AbstractModel {
          */
         this.IsReported = null;
 
+        /**
+         * 云用户appid。
+         * @type {number || null}
+         */
+        this.Appid = null;
+
+        /**
+         * 云用户标识。
+         * @type {string || null}
+         */
+        this.Uin = null;
+
     }
 
     /**
@@ -1316,6 +1377,8 @@ class Vul extends  AbstractModel {
         this.CreatedAt = params.CreatedAt || null;
         this.UpdatedAt = params.UpdatedAt || null;
         this.IsReported = params.IsReported || null;
+        this.Appid = params.Appid || null;
+        this.Uin = params.Uin || null;
 
     }
 }
@@ -1362,6 +1425,12 @@ class CreateSitesRequest extends  AbstractModel {
          */
         this.Urls = null;
 
+        /**
+         * 访问网站的客户端标识
+         * @type {string || null}
+         */
+        this.UserAgent = null;
+
     }
 
     /**
@@ -1372,6 +1441,7 @@ class CreateSitesRequest extends  AbstractModel {
             return;
         }
         this.Urls = params.Urls || null;
+        this.UserAgent = params.UserAgent || null;
 
     }
 }
@@ -1571,7 +1641,7 @@ class DescribeSitesVerificationResponse extends  AbstractModel {
 
         /**
          * 验证信息列表。
-         * @type {SitesVerification || null}
+         * @type {Array.<SitesVerification> || null}
          */
         this.SitesVerification = null;
 
@@ -1593,9 +1663,12 @@ class DescribeSitesVerificationResponse extends  AbstractModel {
         this.TotalCount = params.TotalCount || null;
 
         if (params.SitesVerification) {
-            let obj = new SitesVerification();
-            obj.deserialize(params.SitesVerification)
-            this.SitesVerification = obj;
+            this.SitesVerification = new Array();
+            for (let z in params.SitesVerification) {
+                let obj = new SitesVerification();
+                obj.deserialize(params.SitesVerification[z]);
+                this.SitesVerification.push(obj);
+            }
         }
         this.RequestId = params.RequestId || null;
 
@@ -1749,12 +1822,6 @@ class Site extends  AbstractModel {
         this.Progress = null;
 
         /**
-         * 最近一次扫描各个类型风险漏洞数量，存储的是json对象
-         * @type {string || null}
-         */
-        this.LastScanExtsCount = null;
-
-        /**
          * 云用户appid。
          * @type {number || null}
          */
@@ -1765,6 +1832,48 @@ class Site extends  AbstractModel {
          * @type {string || null}
          */
         this.Uin = null;
+
+        /**
+         * 网站是否需要登录扫描：0-未知；-1-不需要；1-需要。
+         * @type {number || null}
+         */
+        this.NeedLogin = null;
+
+        /**
+         * 登录后的cookie。
+         * @type {string || null}
+         */
+        this.LoginCookie = null;
+
+        /**
+         * 登录后的cookie是否有效：0-无效；1-有效。
+         * @type {number || null}
+         */
+        this.LoginCookieValid = null;
+
+        /**
+         * 用于测试cookie是否有效的URL。
+         * @type {string || null}
+         */
+        this.LoginCheckUrl = null;
+
+        /**
+         * 用于测试cookie是否有效的关键字。
+         * @type {string || null}
+         */
+        this.LoginCheckKw = null;
+
+        /**
+         * 禁止扫描器扫描的目录关键字。
+         * @type {string || null}
+         */
+        this.ScanDisallow = null;
+
+        /**
+         * 访问网站的客户端标识。
+         * @type {string || null}
+         */
+        this.UserAgent = null;
 
     }
 
@@ -1798,9 +1907,15 @@ class Site extends  AbstractModel {
         this.LastScanVulsNum = params.LastScanVulsNum || null;
         this.LastScanNoticeNum = params.LastScanNoticeNum || null;
         this.Progress = params.Progress || null;
-        this.LastScanExtsCount = params.LastScanExtsCount || null;
         this.Appid = params.Appid || null;
         this.Uin = params.Uin || null;
+        this.NeedLogin = params.NeedLogin || null;
+        this.LoginCookie = params.LoginCookie || null;
+        this.LoginCookieValid = params.LoginCookieValid || null;
+        this.LoginCheckUrl = params.LoginCheckUrl || null;
+        this.LoginCheckKw = params.LoginCheckKw || null;
+        this.ScanDisallow = params.ScanDisallow || null;
+        this.UserAgent = params.UserAgent || null;
 
     }
 }
@@ -1838,6 +1953,12 @@ class DescribeConfigResponse extends  AbstractModel {
         this.UpdatedAt = null;
 
         /**
+         * 云用户appid。
+         * @type {number || null}
+         */
+        this.Appid = null;
+
+        /**
          * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
          * @type {string || null}
          */
@@ -1856,6 +1977,7 @@ class DescribeConfigResponse extends  AbstractModel {
         this.Id = params.Id || null;
         this.CreatedAt = params.CreatedAt || null;
         this.UpdatedAt = params.UpdatedAt || null;
+        this.Appid = params.Appid || null;
         this.RequestId = params.RequestId || null;
 
     }
