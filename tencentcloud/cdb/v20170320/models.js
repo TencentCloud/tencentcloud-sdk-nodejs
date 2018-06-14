@@ -1894,7 +1894,7 @@ class CreateDBInstanceHourResponse extends  AbstractModel {
 
         /**
          * 短订单ID，用于调用云API相关接口，如[获取订单信息](https://cloud.tencent.com/document/api/403/4392)
-         * @type {string || null}
+         * @type {Array.<string> || null}
          */
         this.DealIds = null;
 
@@ -3164,7 +3164,7 @@ class CreateDBInstanceResponse extends  AbstractModel {
 
         /**
          * 短订单ID，用于调用云API相关接口，如[获取订单信息](https://cloud.tencent.com/document/api/403/4392)
-         * @type {string || null}
+         * @type {Array.<string> || null}
          */
         this.DealIds = null;
 
@@ -4663,6 +4663,12 @@ class CreateBackupResponse extends  AbstractModel {
         super();
 
         /**
+         * 备份任务ID。
+         * @type {number || null}
+         */
+        this.BackupId = null;
+
+        /**
          * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
          * @type {string || null}
          */
@@ -4677,6 +4683,7 @@ class CreateBackupResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.BackupId = params.BackupId || null;
         this.RequestId = params.RequestId || null;
 
     }
@@ -4965,7 +4972,7 @@ class DescribeBackupTablesRequest extends  AbstractModel {
 
         /**
          * 要查询的数据表名前缀。
-         * @type {Array.<string> || null}
+         * @type {string || null}
          */
         this.SearchTable = null;
 
@@ -5875,16 +5882,10 @@ class UpgradeDBInstanceResponse extends  AbstractModel {
         super();
 
         /**
-         * 短订单ID，用于调用云API相关接口，如[获取订单信息](https://cloud.tencent.com/document/api/403/4392)
+         * 订单ID，用于调用云API相关接口，如[获取订单信息](https://cloud.tencent.com/document/api/403/4392)
          * @type {Array.<string> || null}
          */
         this.DealIds = null;
-
-        /**
-         * 长订单ID，用于反馈订单问题给腾讯云官方客服
-         * @type {Array.<string> || null}
-         */
-        this.DealNames = null;
 
         /**
          * 异步任务的请求ID，可使用此ID查询异步任务的执行结果
@@ -5908,7 +5909,6 @@ class UpgradeDBInstanceResponse extends  AbstractModel {
             return;
         }
         this.DealIds = params.DealIds || null;
-        this.DealNames = params.DealNames || null;
         this.AsyncRequestId = params.AsyncRequestId || null;
         this.RequestId = params.RequestId || null;
 
@@ -5930,13 +5930,13 @@ class ModifyDBInstanceVipVportRequest extends  AbstractModel {
         this.InstanceId = null;
 
         /**
-         * 目标IP。
+         * 目标IP。该参数和DstPort参数，两者必传一个。
          * @type {string || null}
          */
         this.DstIp = null;
 
         /**
-         * 目标端口，支持范围为：[1024-65535]。
+         * 目标端口，支持范围为：[1024-65535]。该参数和DstIp参数，两者必传一个。
          * @type {number || null}
          */
         this.DstPort = null;
@@ -6466,7 +6466,7 @@ class DeleteBackupRequest extends  AbstractModel {
         this.InstanceId = null;
 
         /**
-         * 备份任务Id。
+         * 备份任务ID。该任务ID为[创建云数据库备份](https://cloud.tencent.com/document/api/236/15844)接口返回的任务ID。
          * @type {number || null}
          */
         this.BackupId = null;

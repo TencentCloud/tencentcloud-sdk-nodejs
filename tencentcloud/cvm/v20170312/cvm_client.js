@@ -7,9 +7,11 @@ const DescribeImageQuotaResponse = models.DescribeImageQuotaResponse;
 const ModifyInstancesProjectRequest = models.ModifyInstancesProjectRequest;
 const ResetInstancesTypeResponse = models.ResetInstancesTypeResponse;
 const HostResource = models.HostResource;
+const DeleteDisasterRecoverGroupsRequest = models.DeleteDisasterRecoverGroupsRequest;
 const DeleteKeyPairsResponse = models.DeleteKeyPairsResponse;
 const TerminateInstancesResponse = models.TerminateInstancesResponse;
 const ResetInstancesInternetMaxBandwidthResponse = models.ResetInstancesInternetMaxBandwidthResponse;
+const CreateDisasterRecoverGroupResponse = models.CreateDisasterRecoverGroupResponse;
 const InquiryPriceResetInstancesInternetMaxBandwidthResponse = models.InquiryPriceResetInstancesInternetMaxBandwidthResponse;
 const ModifyKeyPairAttributeRequest = models.ModifyKeyPairAttributeRequest;
 const DescribeImportImageOsResponse = models.DescribeImportImageOsResponse;
@@ -31,19 +33,20 @@ const AssociateInstancesKeyPairsRequest = models.AssociateInstancesKeyPairsReque
 const ImportKeyPairResponse = models.ImportKeyPairResponse;
 const DescribeInstancesStatusResponse = models.DescribeInstancesStatusResponse;
 const ZoneInfo = models.ZoneInfo;
-const ModifyImageSharePermissionResponse = models.ModifyImageSharePermissionResponse;
+const DescribeInstanceTypeConfigsRequest = models.DescribeInstanceTypeConfigsRequest;
 const DescribeKeyPairsResponse = models.DescribeKeyPairsResponse;
 const Tag = models.Tag;
 const InternetChargeTypeConfig = models.InternetChargeTypeConfig;
 const DescribeImagesResponse = models.DescribeImagesResponse;
-const InquiryPriceResetInstancesTypeRequest = models.InquiryPriceResetInstancesTypeRequest;
+const OsVersion = models.OsVersion;
+const CreateKeyPairResponse = models.CreateKeyPairResponse;
 const ModifyKeyPairAttributeResponse = models.ModifyKeyPairAttributeResponse;
 const ModifyImageSharePermissionRequest = models.ModifyImageSharePermissionRequest;
 const DisassociateInstancesKeyPairsResponse = models.DisassociateInstancesKeyPairsResponse;
 const InquiryPriceResizeInstanceDisksRequest = models.InquiryPriceResizeInstanceDisksRequest;
 const RunInstancesResponse = models.RunInstancesResponse;
 const ModifyInstancesAttributeResponse = models.ModifyInstancesAttributeResponse;
-const ModifyInstancesRenewFlagRequest = models.ModifyInstancesRenewFlagRequest;
+const ModifyImageSharePermissionResponse = models.ModifyImageSharePermissionResponse;
 const SyncImagesResponse = models.SyncImagesResponse;
 const DescribeZoneInstanceConfigInfosResponse = models.DescribeZoneInstanceConfigInfosResponse;
 const ModifyInstancesAttributeRequest = models.ModifyInstancesAttributeRequest;
@@ -52,6 +55,7 @@ const DescribeZonesRequest = models.DescribeZonesRequest;
 const StartInstancesRequest = models.StartInstancesRequest;
 const DescribeInstanceInternetBandwidthConfigsResponse = models.DescribeInstanceInternetBandwidthConfigsResponse;
 const Placement = models.Placement;
+const DescribeDisasterRecoverGroupsRequest = models.DescribeDisasterRecoverGroupsRequest;
 const SyncImagesRequest = models.SyncImagesRequest;
 const DisassociateInstancesKeyPairsRequest = models.DisassociateInstancesKeyPairsRequest;
 const InstanceMarketOptionsRequest = models.InstanceMarketOptionsRequest;
@@ -63,16 +67,20 @@ const InquiryPriceResetInstancesInternetMaxBandwidthRequest = models.InquiryPric
 const ResetInstancesPasswordResponse = models.ResetInstancesPasswordResponse;
 const InquiryPriceRunInstancesRequest = models.InquiryPriceRunInstancesRequest;
 const InquiryPriceRunInstancesResponse = models.InquiryPriceRunInstancesResponse;
+const DescribeDisasterRecoverGroupQuotaResponse = models.DescribeDisasterRecoverGroupQuotaResponse;
 const DescribeInstanceFamilyConfigsResponse = models.DescribeInstanceFamilyConfigsResponse;
 const DescribeRegionsRequest = models.DescribeRegionsRequest;
+const CreateDisasterRecoverGroupRequest = models.CreateDisasterRecoverGroupRequest;
 const DataDisk = models.DataDisk;
 const DescribeKeyPairsRequest = models.DescribeKeyPairsRequest;
+const DeleteDisasterRecoverGroupsResponse = models.DeleteDisasterRecoverGroupsResponse;
 const HostItem = models.HostItem;
 const Externals = models.Externals;
 const CreateImageRequest = models.CreateImageRequest;
 const Instance = models.Instance;
 const EnhancedService = models.EnhancedService;
-const CreateKeyPairResponse = models.CreateKeyPairResponse;
+const InquiryPriceResetInstancesTypeRequest = models.InquiryPriceResetInstancesTypeRequest;
+const DescribeDisasterRecoverGroupsResponse = models.DescribeDisasterRecoverGroupsResponse;
 const RunSecurityServiceEnabled = models.RunSecurityServiceEnabled;
 const ActionTimer = models.ActionTimer;
 const TagSpecification = models.TagSpecification;
@@ -87,11 +95,12 @@ const InstanceStatus = models.InstanceStatus;
 const InquiryPriceRenewInstancesResponse = models.InquiryPriceRenewInstancesResponse;
 const ResetInstancesPasswordRequest = models.ResetInstancesPasswordRequest;
 const DescribeImageSharePermissionRequest = models.DescribeImageSharePermissionRequest;
-const DescribeInstancesRequest = models.DescribeInstancesRequest;
+const DisasterRecoverGroup = models.DisasterRecoverGroup;
 const InquiryPriceResetInstanceResponse = models.InquiryPriceResetInstanceResponse;
 const Filter = models.Filter;
 const DescribeImageSharePermissionResponse = models.DescribeImageSharePermissionResponse;
 const ModifyHostsAttributeResponse = models.ModifyHostsAttributeResponse;
+const DescribeDisasterRecoverGroupQuotaRequest = models.DescribeDisasterRecoverGroupQuotaRequest;
 const StartInstancesResponse = models.StartInstancesResponse;
 const ChargePrepaid = models.ChargePrepaid;
 const DescribeInternetChargeTypeConfigsResponse = models.DescribeInternetChargeTypeConfigsResponse;
@@ -99,6 +108,7 @@ const DescribeZoneInstanceConfigInfosRequest = models.DescribeZoneInstanceConfig
 const DescribeZonesResponse = models.DescribeZonesResponse;
 const ItemPrice = models.ItemPrice;
 const InstanceTypeQuotaItem = models.InstanceTypeQuotaItem;
+const ImageOsList = models.ImageOsList;
 const Image = models.Image;
 const DescribeHostsRequest = models.DescribeHostsRequest;
 const ModifyInstancesRenewFlagResponse = models.ModifyInstancesRenewFlagResponse;
@@ -108,23 +118,26 @@ const TerminateInstancesRequest = models.TerminateInstancesRequest;
 const SharePermission = models.SharePermission;
 const DeleteImagesResponse = models.DeleteImagesResponse;
 const ImportImageResponse = models.ImportImageResponse;
+const ModifyDisasterRecoverGroupAttributeRequest = models.ModifyDisasterRecoverGroupAttributeRequest;
 const RebootInstancesResponse = models.RebootInstancesResponse;
 const InquiryPriceResetInstancesTypeResponse = models.InquiryPriceResetInstancesTypeResponse;
 const ModifyImageAttributeResponse = models.ModifyImageAttributeResponse;
 const InquiryPriceRenewInstancesRequest = models.InquiryPriceRenewInstancesRequest;
-const DescribeInstanceTypeConfigsRequest = models.DescribeInstanceTypeConfigsRequest;
+const DescribeInstancesRequest = models.DescribeInstancesRequest;
 const RegionInfo = models.RegionInfo;
 const StopInstancesRequest = models.StopInstancesRequest;
 const DescribeInternetChargeTypeConfigsRequest = models.DescribeInternetChargeTypeConfigsRequest;
 const DescribeImagesRequest = models.DescribeImagesRequest;
 const ModifyImageAttributeRequest = models.ModifyImageAttributeRequest;
 const ResizeInstanceDisksResponse = models.ResizeInstanceDisksResponse;
+const ModifyInstancesRenewFlagRequest = models.ModifyInstancesRenewFlagRequest;
 const KeyPair = models.KeyPair;
 const RenewInstancesResponse = models.RenewInstancesResponse;
 const RunMonitorServiceEnabled = models.RunMonitorServiceEnabled;
 const ResetInstanceResponse = models.ResetInstanceResponse;
 const VirtualPrivateCloud = models.VirtualPrivateCloud;
-const InstanceChargePrepaid = models.InstanceChargePrepaid;
+const InternetBandwidthConfig = models.InternetBandwidthConfig;
+const ModifyDisasterRecoverGroupAttributeResponse = models.ModifyDisasterRecoverGroupAttributeResponse;
 const DescribeInstanceTypeConfigsResponse = models.DescribeInstanceTypeConfigsResponse;
 const ResizeInstanceDisksRequest = models.ResizeInstanceDisksRequest;
 const DescribeInstanceFamilyConfigsRequest = models.DescribeInstanceFamilyConfigsRequest;
@@ -134,7 +147,7 @@ const InternetAccessible = models.InternetAccessible;
 const RenewHostsResponse = models.RenewHostsResponse;
 const ModifyHostsAttributeRequest = models.ModifyHostsAttributeRequest;
 const ModifyInstancesProjectResponse = models.ModifyInstancesProjectResponse;
-const InternetBandwidthConfig = models.InternetBandwidthConfig;
+const InstanceChargePrepaid = models.InstanceChargePrepaid;
 const Price = models.Price;
 
 
@@ -254,6 +267,17 @@ class CvmClient extends AbstractClient {
     }
 
     /**
+     * 本接口(DescribeZoneInstanceConfigInfos) 获取可用区的机型信息。
+     * @param {DescribeZoneInstanceConfigInfosRequest} req
+     * @param {function(string, DescribeZoneInstanceConfigInfosResponse):void} cb
+     * @public
+     */
+    DescribeZoneInstanceConfigInfos(req, cb) {
+        let resp = new DescribeZoneInstanceConfigInfosResponse();
+        this.request("DescribeZoneInstanceConfigInfos", req, resp, cb);
+    }
+
+    /**
      * 本接口 (ModifyInstancesAttribute) 用于修改实例的属性（目前只支持修改实例的名称）。
 
 * “实例名称”仅为方便用户自己管理之用，腾讯云并不以此名称作为提交工单或是进行实例管理操作的依据。
@@ -301,18 +325,19 @@ class CvmClient extends AbstractClient {
     }
 
     /**
-     * 本接口（DeleteImages）用于删除一个或多个镜像。
+     * 本接口 (DisassociateInstancesKeyPairs) 用于解除实例的密钥绑定关系。
 
-* 当[镜像状态](https://cloud.tencent.com/document/api/213/9452#image_state)为`创建中`和`使用中`时, 不允许删除。镜像状态可以通过[DescribeImages](https://cloud.tencent.com/document/api/213/9418)获取。
-* 每个地域最多只支持创建10个自定义镜像，删除镜像可以释放账户的配额。
-* 当镜像正在被其它账户分享时，不允许删除。
-     * @param {DeleteImagesRequest} req
-     * @param {function(string, DeleteImagesResponse):void} cb
+* 只支持[`STOPPED`](https://cloud.tencent.com/document/api/213/9452#INSTANCE_STATE)状态的`Linux`操作系统的实例。
+* 解绑密钥后，实例可以通过原来设置的密码登录。
+* 如果原来没有设置密码，解绑后将无法使用 `SSH` 登录。可以调用 [ResetInstancesPassword](https://cloud.tencent.com/document/api/213/9397) 接口来设置登陆密码。
+* 支持批量操作。每次请求批量实例的上限为100。如果批量实例存在不允许操作的实例，操作会以特定错误码返回。
+     * @param {DisassociateInstancesKeyPairsRequest} req
+     * @param {function(string, DisassociateInstancesKeyPairsResponse):void} cb
      * @public
      */
-    DeleteImages(req, cb) {
-        let resp = new DeleteImagesResponse();
-        this.request("DeleteImages", req, resp, cb);
+    DisassociateInstancesKeyPairs(req, cb) {
+        let resp = new DisassociateInstancesKeyPairsResponse();
+        this.request("DisassociateInstancesKeyPairs", req, resp, cb);
     }
 
     /**
@@ -343,6 +368,17 @@ class CvmClient extends AbstractClient {
     DeleteKeyPairs(req, cb) {
         let resp = new DeleteKeyPairsResponse();
         this.request("DeleteKeyPairs", req, resp, cb);
+    }
+
+    /**
+     * 本接口 (CreateDisasterRecoverGroup)用于创建[分散置放群组](https://cloud.tencent.com/document/product/213/15486)。创建好的置放群组，可在[创建实例](https://cloud.tencent.com/document/api/213/15730)时指定。
+     * @param {CreateDisasterRecoverGroupRequest} req
+     * @param {function(string, CreateDisasterRecoverGroupResponse):void} cb
+     * @public
+     */
+    CreateDisasterRecoverGroup(req, cb) {
+        let resp = new CreateDisasterRecoverGroupResponse();
+        this.request("CreateDisasterRecoverGroup", req, resp, cb);
     }
 
     /**
@@ -421,19 +457,18 @@ class CvmClient extends AbstractClient {
     }
 
     /**
-     * 本接口 (DisassociateInstancesKeyPairs) 用于解除实例的密钥绑定关系。
+     * 本接口（DeleteImages）用于删除一个或多个镜像。
 
-* 只支持[`STOPPED`](https://cloud.tencent.com/document/api/213/9452#INSTANCE_STATE)状态的`Linux`操作系统的实例。
-* 解绑密钥后，实例可以通过原来设置的密码登录。
-* 如果原来没有设置密码，解绑后将无法使用 `SSH` 登录。可以调用 [ResetInstancesPassword](https://cloud.tencent.com/document/api/213/9397) 接口来设置登陆密码。
-* 支持批量操作。每次请求批量实例的上限为100。如果批量实例存在不允许操作的实例，操作会以特定错误码返回。
-     * @param {DisassociateInstancesKeyPairsRequest} req
-     * @param {function(string, DisassociateInstancesKeyPairsResponse):void} cb
+* 当[镜像状态](https://cloud.tencent.com/document/api/213/9452#image_state)为`创建中`和`使用中`时, 不允许删除。镜像状态可以通过[DescribeImages](https://cloud.tencent.com/document/api/213/9418)获取。
+* 每个地域最多只支持创建10个自定义镜像，删除镜像可以释放账户的配额。
+* 当镜像正在被其它账户分享时，不允许删除。
+     * @param {DeleteImagesRequest} req
+     * @param {function(string, DeleteImagesResponse):void} cb
      * @public
      */
-    DisassociateInstancesKeyPairs(req, cb) {
-        let resp = new DisassociateInstancesKeyPairsResponse();
-        this.request("DisassociateInstancesKeyPairs", req, resp, cb);
+    DeleteImages(req, cb) {
+        let resp = new DeleteImagesResponse();
+        this.request("DeleteImages", req, resp, cb);
     }
 
     /**
@@ -474,6 +509,17 @@ class CvmClient extends AbstractClient {
     InquiryPriceResetInstance(req, cb) {
         let resp = new InquiryPriceResetInstanceResponse();
         this.request("InquiryPriceResetInstance", req, resp, cb);
+    }
+
+    /**
+     * 本接口 (DescribeDisasterRecoverGroupQuota)用于查询[分散置放群组](https://cloud.tencent.com/document/product/213/15486)配额。
+     * @param {DescribeDisasterRecoverGroupQuotaRequest} req
+     * @param {function(string, DescribeDisasterRecoverGroupQuotaResponse):void} cb
+     * @public
+     */
+    DescribeDisasterRecoverGroupQuota(req, cb) {
+        let resp = new DescribeDisasterRecoverGroupQuotaResponse();
+        this.request("DescribeDisasterRecoverGroupQuota", req, resp, cb);
     }
 
     /**
@@ -603,17 +649,6 @@ class CvmClient extends AbstractClient {
     }
 
     /**
-     * 本接口(DescribeZoneInstanceConfigInfos) 获取可用区的机型信息。
-     * @param {DescribeZoneInstanceConfigInfosRequest} req
-     * @param {function(string, DescribeZoneInstanceConfigInfosResponse):void} cb
-     * @public
-     */
-    DescribeZoneInstanceConfigInfos(req, cb) {
-        let resp = new DescribeZoneInstanceConfigInfosResponse();
-        this.request("DescribeZoneInstanceConfigInfos", req, resp, cb);
-    }
-
-    /**
      * 本接口(DescribeRegions)用于查询地域信息。
      * @param {DescribeRegionsRequest} req
      * @param {function(string, DescribeRegionsResponse):void} cb
@@ -622,6 +657,17 @@ class CvmClient extends AbstractClient {
     DescribeRegions(req, cb) {
         let resp = new DescribeRegionsResponse();
         this.request("DescribeRegions", req, resp, cb);
+    }
+
+    /**
+     * 本接口 (DeleteDisasterRecoverGroups)用于删除[分散置放群组](https://cloud.tencent.com/document/product/213/15486)。只有空的置放群组才能被删除，非空的群组需要先销毁组内所有云主机，才能执行删除操作，不然会产生删除置放群组失败的错误。
+     * @param {DeleteDisasterRecoverGroupsRequest} req
+     * @param {function(string, DeleteDisasterRecoverGroupsResponse):void} cb
+     * @public
+     */
+    DeleteDisasterRecoverGroups(req, cb) {
+        let resp = new DeleteDisasterRecoverGroupsResponse();
+        this.request("DeleteDisasterRecoverGroups", req, resp, cb);
     }
 
     /**
@@ -707,6 +753,17 @@ class CvmClient extends AbstractClient {
     }
 
     /**
+     * 本接口 (ModifyDisasterRecoverGroupAttribute)用于修改[分散置放群组](https://cloud.tencent.com/document/product/213/15486)属性。
+     * @param {ModifyDisasterRecoverGroupAttributeRequest} req
+     * @param {function(string, ModifyDisasterRecoverGroupAttributeResponse):void} cb
+     * @public
+     */
+    ModifyDisasterRecoverGroupAttribute(req, cb) {
+        let resp = new ModifyDisasterRecoverGroupAttributeResponse();
+        this.request("ModifyDisasterRecoverGroupAttribute", req, resp, cb);
+    }
+
+    /**
      * 本接口（DescribeInstanceFamilyConfigs）查询当前用户和地域所支持的机型族列表信息。
      * @param {DescribeInstanceFamilyConfigsRequest} req
      * @param {function(string, DescribeInstanceFamilyConfigsResponse):void} cb
@@ -748,16 +805,14 @@ class CvmClient extends AbstractClient {
     }
 
     /**
-     * 本接口 (DescribeKeyPairs) 用于查询密钥对信息。
-
-* 密钥对是通过一种算法生成的一对密钥，在生成的密钥对中，一个向外界公开，称为公钥；另一个用户自己保留，称为私钥。密钥对的公钥内容可以通过这个接口查询，但私钥内容系统不保留。
-     * @param {DescribeKeyPairsRequest} req
-     * @param {function(string, DescribeKeyPairsResponse):void} cb
+     * 本接口 (DescribeDisasterRecoverGroups)用于查询[分散置放群组](https://cloud.tencent.com/document/product/213/15486)信息。
+     * @param {DescribeDisasterRecoverGroupsRequest} req
+     * @param {function(string, DescribeDisasterRecoverGroupsResponse):void} cb
      * @public
      */
-    DescribeKeyPairs(req, cb) {
-        let resp = new DescribeKeyPairsResponse();
-        this.request("DescribeKeyPairs", req, resp, cb);
+    DescribeDisasterRecoverGroups(req, cb) {
+        let resp = new DescribeDisasterRecoverGroupsResponse();
+        this.request("DescribeDisasterRecoverGroups", req, resp, cb);
     }
 
     /**
@@ -773,6 +828,19 @@ class CvmClient extends AbstractClient {
     StartInstances(req, cb) {
         let resp = new StartInstancesResponse();
         this.request("StartInstances", req, resp, cb);
+    }
+
+    /**
+     * 本接口 (DescribeKeyPairs) 用于查询密钥对信息。
+
+* 密钥对是通过一种算法生成的一对密钥，在生成的密钥对中，一个向外界公开，称为公钥；另一个用户自己保留，称为私钥。密钥对的公钥内容可以通过这个接口查询，但私钥内容系统不保留。
+     * @param {DescribeKeyPairsRequest} req
+     * @param {function(string, DescribeKeyPairsResponse):void} cb
+     * @public
+     */
+    DescribeKeyPairs(req, cb) {
+        let resp = new DescribeKeyPairsResponse();
+        this.request("DescribeKeyPairs", req, resp, cb);
     }
 
     /**

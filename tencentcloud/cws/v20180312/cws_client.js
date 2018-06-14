@@ -217,7 +217,7 @@ class CwsClient extends AbstractClient {
     }
 
     /**
-     * 本接口 (DescribeSiteQuota) 用于查询用户购买的站点总数和已使用数。
+     * 本接口 (DescribeSiteQuota) 用于查询用户购买的扫描次数总数和已使用数。
      * @param {DescribeSiteQuotaRequest} req
      * @param {function(string, DescribeSiteQuotaResponse):void} cb
      * @public
