@@ -1,4 +1,4 @@
-const tencentcloud = require("../../../../tencentcloud-sdk-nodejs");
+const tencentcloud = require("tencentcloud-sdk-nodejs");
 
 // 导入对应产品模块的client models。
 const CvmClient = tencentcloud.cvm.v20170312.Client;
@@ -28,20 +28,18 @@ let client = new CvmClient(cred, "ap-shanghai", clientProfile);
 
 // 实例化一个请求对象,并填充参数
 req = new models.DescribeInstancesRequest();
-let filters = [
-    {
-        Filter: {
-            name: "zone",
-            value: ["ap-shanghai-1", "ap-shanghai-2"]
-        }
-    },
-    {
-        Filter: {
-            name: "instance-charge-type",
-            value: ["POSTPAID_BY_HOUR"]
-        }
-    },
-];
+let filters = {
+	Filters: [
+	    {
+	        Name: "zone",
+	        Values: ["ap-shanghai-1", "ap-shanghai-2"]
+	    },
+	    {
+	        Name: "instance-charge-type",
+	        Values: ["POSTPAID_BY_HOUR"]
+	    }
+	]
+};
 // 传入json参数
 req.from_json_string(JSON.stringify(filters));
 
