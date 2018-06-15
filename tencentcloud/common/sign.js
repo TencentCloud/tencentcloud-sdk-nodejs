@@ -16,7 +16,7 @@ class Sign {
             throw new TencentCloudSDKHttpException("signMethod invalid, signMethod only support (HmacSHA1, HmacSHA256)");
         }
         let hmac = crypto.createHmac(signMethodMap[signMethod], secretKey || "");
-        return hmac.update(new Buffer(signStr, 'utf8')).digest('base64')
+        return hmac.update(Buffer.from(signStr, 'utf8')).digest('base64')
     }
 }
 module.exports = Sign;
