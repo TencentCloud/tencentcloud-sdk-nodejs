@@ -363,10 +363,10 @@ class TerminateInstancesResponse extends  AbstractModel {
 }
 
 /**
- * ResetInstancesInternetMaxBandwidth返回参数结构体
+ * ModifyInstancesChargeType返回参数结构体
  * @class
  */
-class ResetInstancesInternetMaxBandwidthResponse extends  AbstractModel {
+class ModifyInstancesChargeTypeResponse extends  AbstractModel {
     constructor(){
         super();
 
@@ -1099,7 +1099,7 @@ class SystemDisk extends  AbstractModel {
         super();
 
         /**
-         * 系统盘类型。系统盘类型限制详见[CVM实例配置](/document/product/213/2177)。取值范围：<br><li>LOCAL_BASIC：本地硬盘<br><li>LOCAL_SSD：本地SSD硬盘<br><li>CLOUD_BASIC：普通云硬盘<br><li>CLOUD_SSD：SSD云硬盘<br><li>CLOUD_PREMIUM：高效云硬盘<br><br>默认取值：LOCAL_BASIC。
+         * 系统盘类型。系统盘类型限制详见[CVM实例配置](/document/product/213/2177)。取值范围：<br><li>LOCAL_BASIC：本地硬盘<br><li>LOCAL_SSD：本地SSD硬盘<br><li>CLOUD_BASIC：普通云硬盘<br><li>CLOUD_SSD：SSD云硬盘<br><li>CLOUD_PREMIUM：高性能云硬盘<br><br>默认取值：LOCAL_BASIC。
          * @type {string || null}
          */
         this.DiskType = null;
@@ -1657,21 +1657,24 @@ class ZoneInfo extends  AbstractModel {
 }
 
 /**
- * DescribeInstanceTypeConfigs请求参数结构体
+ * InquiryPriceModifyInstancesChargeType返回参数结构体
  * @class
  */
-class DescribeInstanceTypeConfigsRequest extends  AbstractModel {
+class InquiryPriceModifyInstancesChargeTypeResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 过滤条件。
-<li> zone - String - 是否必填：否 -（过滤条件）按照[可用区](https://cloud.tencent.com/document/api/213/9452#zone)过滤。</li>
-<li> instance-family - String - 是否必填：否 -（过滤条件）按照实例机型系列过滤。实例机型系列形如：S1、I1、M1等。</li>
-每次请求的`Filters`的上限为10，`Filter.Values`的上限为1。
-         * @type {Array.<Filter> || null}
+         * 该参数表示对应配置实例转换计费模式的价格。
+         * @type {Price || null}
          */
-        this.Filters = null;
+        this.Price = null;
+
+        /**
+         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
 
     }
 
@@ -1683,14 +1686,12 @@ class DescribeInstanceTypeConfigsRequest extends  AbstractModel {
             return;
         }
 
-        if (params.Filters) {
-            this.Filters = new Array();
-            for (let z in params.Filters) {
-                let obj = new Filter();
-                obj.deserialize(params.Filters[z]);
-                this.Filters.push(obj);
-            }
+        if (params.Price) {
+            let obj = new Price();
+            obj.deserialize(params.Price)
+            this.Price = obj;
         }
+        this.RequestId = params.RequestId || null;
 
     }
 }
@@ -1969,6 +1970,53 @@ class ModifyKeyPairAttributeResponse extends  AbstractModel {
 }
 
 /**
+ * ModifyInstancesChargeType请求参数结构体
+ * @class
+ */
+class ModifyInstancesChargeTypeRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 一个或多个待操作的实例ID。可通过[`DescribeInstances`](https://cloud.tencent.com/document/api/213/9388)接口返回值中的`InstanceId`获取。每次请求批量实例的上限为100。
+         * @type {Array.<string> || null}
+         */
+        this.InstanceIds = null;
+
+        /**
+         * 实例[计费类型](https://cloud.tencent.com/document/product/213/2180)。<br><li>PREPAID：预付费，即包年包月。
+         * @type {string || null}
+         */
+        this.InstanceChargeType = null;
+
+        /**
+         * 预付费模式，即包年包月相关参数设置。通过该参数可以指定包年包月实例的购买时长、是否设置自动续费等属性。若指定实例的付费模式为预付费则该参数必传。
+         * @type {InstanceChargePrepaid || null}
+         */
+        this.InstanceChargePrepaid = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceIds = params.InstanceIds || null;
+        this.InstanceChargeType = params.InstanceChargeType || null;
+
+        if (params.InstanceChargePrepaid) {
+            let obj = new InstanceChargePrepaid();
+            obj.deserialize(params.InstanceChargePrepaid)
+            this.InstanceChargePrepaid = obj;
+        }
+
+    }
+}
+
+/**
  * ModifyImageSharePermission请求参数结构体
  * @class
  */
@@ -2118,6 +2166,34 @@ class RunInstancesResponse extends  AbstractModel {
             return;
         }
         this.InstanceIdSet = params.InstanceIdSet || null;
+        this.RequestId = params.RequestId || null;
+
+    }
+}
+
+/**
+ * ResetInstancesInternetMaxBandwidth返回参数结构体
+ * @class
+ */
+class ResetInstancesInternetMaxBandwidthResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
         this.RequestId = params.RequestId || null;
 
     }
@@ -3532,6 +3608,54 @@ class Externals extends  AbstractModel {
 }
 
 /**
+ * InquiryPriceModifyInstancesChargeType请求参数结构体
+ * @class
+ */
+class InquiryPriceModifyInstancesChargeTypeRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 一个或多个待操作的实例ID。可通过[`DescribeInstances`](https://cloud.tencent.com/document/api/213/15728)接口返回值中的`InstanceId`获取。每次请求批量实例的上限为100。
+         * @type {Array.<string> || null}
+         */
+        this.InstanceIds = null;
+
+        /**
+         * 实例[计费类型](https://cloud.tencent.com//document/product/213/2180)。<br><li>PREPAID：预付费，即包年包月
+。
+         * @type {string || null}
+         */
+        this.InstanceChargeType = null;
+
+        /**
+         * 预付费模式，即包年包月相关参数设置。通过该参数可以指定包年包月实例的续费时长、是否设置自动续费等属性。
+         * @type {InstanceChargePrepaid || null}
+         */
+        this.InstanceChargePrepaid = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceIds = params.InstanceIds || null;
+        this.InstanceChargeType = params.InstanceChargeType || null;
+
+        if (params.InstanceChargePrepaid) {
+            let obj = new InstanceChargePrepaid();
+            obj.deserialize(params.InstanceChargePrepaid)
+            this.InstanceChargePrepaid = obj;
+        }
+
+    }
+}
+
+/**
  * CreateImage请求参数结构体
  * @class
  */
@@ -4023,7 +4147,7 @@ class TagSpecification extends  AbstractModel {
         super();
 
         /**
-         * 标签绑定的资源类型
+         * 标签绑定的资源类型，当前仅支持类型："instance"
          * @type {string || null}
          */
         this.ResourceType = null;
@@ -4616,35 +4740,21 @@ class InquiryPriceResetInstanceResponse extends  AbstractModel {
 }
 
 /**
- * >描述键值对过滤器，用于条件过滤查询。例如过滤ID、名称、状态等
-> * 若存在多个`Filter`时，`Filter`间的关系为逻辑与（`AND`）关系。
-> * 若同一个`Filter`存在多个`Values`，同一`Filter`下`Values`间的关系为逻辑或（`OR`）关系。
->
-> 以[DescribeInstances](https://cloud.tencent.com/document/api/213/9388)接口的`Filter`为例。若我们需要查询可用区（`zone`）为广州一区 ***并且*** 实例计费模式（`instance-charge-type`）为包年包月 ***或者*** 按量计费的实例时，可如下实现：
-```
-Filters.0.Name=zone
-&Filters.0.Values.0=ap-guangzhou-1
-&Filters.1.Name=instance-charge-type
-&Filters.1.Values.0=PREPAID
-&Filters.1.Values.1=POSTPAID_BY_HOUR
-```
+ * DescribeInstanceTypeConfigs请求参数结构体
  * @class
  */
-class Filter extends  AbstractModel {
+class DescribeInstanceTypeConfigsRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 需要过滤的字段。
-         * @type {string || null}
+         * 过滤条件。
+<li> zone - String - 是否必填：否 -（过滤条件）按照[可用区](https://cloud.tencent.com/document/api/213/9452#zone)过滤。</li>
+<li> instance-family - String - 是否必填：否 -（过滤条件）按照实例机型系列过滤。实例机型系列形如：S1、I1、M1等。</li>
+每次请求的`Filters`的上限为10，`Filter.Values`的上限为1。
+         * @type {Array.<Filter> || null}
          */
-        this.Name = null;
-
-        /**
-         * 字段的过滤值。
-         * @type {Array.<string> || null}
-         */
-        this.Values = null;
+        this.Filters = null;
 
     }
 
@@ -4655,8 +4765,15 @@ class Filter extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Name = params.Name || null;
-        this.Values = params.Values || null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
 
     }
 }
@@ -6242,6 +6359,52 @@ class ResetInstanceResponse extends  AbstractModel {
 }
 
 /**
+ * >描述键值对过滤器，用于条件过滤查询。例如过滤ID、名称、状态等
+> * 若存在多个`Filter`时，`Filter`间的关系为逻辑与（`AND`）关系。
+> * 若同一个`Filter`存在多个`Values`，同一`Filter`下`Values`间的关系为逻辑或（`OR`）关系。
+>
+> 以[DescribeInstances](https://cloud.tencent.com/document/api/213/9388)接口的`Filter`为例。若我们需要查询可用区（`zone`）为广州一区 ***并且*** 实例计费模式（`instance-charge-type`）为包年包月 ***或者*** 按量计费的实例时，可如下实现：
+```
+Filters.0.Name=zone
+&Filters.0.Values.0=ap-guangzhou-1
+&Filters.1.Name=instance-charge-type
+&Filters.1.Values.0=PREPAID
+&Filters.1.Values.1=POSTPAID_BY_HOUR
+```
+ * @class
+ */
+class Filter extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 需要过滤的字段。
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 字段的过滤值。
+         * @type {Array.<string> || null}
+         */
+        this.Values = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = params.Name || null;
+        this.Values = params.Values || null;
+
+    }
+}
+
+/**
  * 描述了VPC相关信息，包括子网，IP信息等
  * @class
  */
@@ -6780,7 +6943,7 @@ module.exports = {
     DeleteDisasterRecoverGroupsRequest: DeleteDisasterRecoverGroupsRequest,
     DeleteKeyPairsResponse: DeleteKeyPairsResponse,
     TerminateInstancesResponse: TerminateInstancesResponse,
-    ResetInstancesInternetMaxBandwidthResponse: ResetInstancesInternetMaxBandwidthResponse,
+    ModifyInstancesChargeTypeResponse: ModifyInstancesChargeTypeResponse,
     CreateDisasterRecoverGroupResponse: CreateDisasterRecoverGroupResponse,
     InquiryPriceResetInstancesInternetMaxBandwidthResponse: InquiryPriceResetInstancesInternetMaxBandwidthResponse,
     ModifyKeyPairAttributeRequest: ModifyKeyPairAttributeRequest,
@@ -6803,7 +6966,7 @@ module.exports = {
     ImportKeyPairResponse: ImportKeyPairResponse,
     DescribeInstancesStatusResponse: DescribeInstancesStatusResponse,
     ZoneInfo: ZoneInfo,
-    DescribeInstanceTypeConfigsRequest: DescribeInstanceTypeConfigsRequest,
+    InquiryPriceModifyInstancesChargeTypeResponse: InquiryPriceModifyInstancesChargeTypeResponse,
     DescribeKeyPairsResponse: DescribeKeyPairsResponse,
     Tag: Tag,
     InternetChargeTypeConfig: InternetChargeTypeConfig,
@@ -6811,10 +6974,12 @@ module.exports = {
     OsVersion: OsVersion,
     CreateKeyPairResponse: CreateKeyPairResponse,
     ModifyKeyPairAttributeResponse: ModifyKeyPairAttributeResponse,
+    ModifyInstancesChargeTypeRequest: ModifyInstancesChargeTypeRequest,
     ModifyImageSharePermissionRequest: ModifyImageSharePermissionRequest,
     DisassociateInstancesKeyPairsResponse: DisassociateInstancesKeyPairsResponse,
     InquiryPriceResizeInstanceDisksRequest: InquiryPriceResizeInstanceDisksRequest,
     RunInstancesResponse: RunInstancesResponse,
+    ResetInstancesInternetMaxBandwidthResponse: ResetInstancesInternetMaxBandwidthResponse,
     ModifyInstancesAttributeResponse: ModifyInstancesAttributeResponse,
     ModifyImageSharePermissionResponse: ModifyImageSharePermissionResponse,
     SyncImagesResponse: SyncImagesResponse,
@@ -6846,6 +7011,7 @@ module.exports = {
     DeleteDisasterRecoverGroupsResponse: DeleteDisasterRecoverGroupsResponse,
     HostItem: HostItem,
     Externals: Externals,
+    InquiryPriceModifyInstancesChargeTypeRequest: InquiryPriceModifyInstancesChargeTypeRequest,
     CreateImageRequest: CreateImageRequest,
     Instance: Instance,
     EnhancedService: EnhancedService,
@@ -6867,7 +7033,7 @@ module.exports = {
     DescribeImageSharePermissionRequest: DescribeImageSharePermissionRequest,
     DisasterRecoverGroup: DisasterRecoverGroup,
     InquiryPriceResetInstanceResponse: InquiryPriceResetInstanceResponse,
-    Filter: Filter,
+    DescribeInstanceTypeConfigsRequest: DescribeInstanceTypeConfigsRequest,
     DescribeImageSharePermissionResponse: DescribeImageSharePermissionResponse,
     ModifyHostsAttributeResponse: ModifyHostsAttributeResponse,
     DescribeDisasterRecoverGroupQuotaRequest: DescribeDisasterRecoverGroupQuotaRequest,
@@ -6905,6 +7071,7 @@ module.exports = {
     RenewInstancesResponse: RenewInstancesResponse,
     RunMonitorServiceEnabled: RunMonitorServiceEnabled,
     ResetInstanceResponse: ResetInstanceResponse,
+    Filter: Filter,
     VirtualPrivateCloud: VirtualPrivateCloud,
     InternetBandwidthConfig: InternetBandwidthConfig,
     ModifyDisasterRecoverGroupAttributeResponse: ModifyDisasterRecoverGroupAttributeResponse,

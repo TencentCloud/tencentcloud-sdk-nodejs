@@ -10,7 +10,7 @@ const HostResource = models.HostResource;
 const DeleteDisasterRecoverGroupsRequest = models.DeleteDisasterRecoverGroupsRequest;
 const DeleteKeyPairsResponse = models.DeleteKeyPairsResponse;
 const TerminateInstancesResponse = models.TerminateInstancesResponse;
-const ResetInstancesInternetMaxBandwidthResponse = models.ResetInstancesInternetMaxBandwidthResponse;
+const ModifyInstancesChargeTypeResponse = models.ModifyInstancesChargeTypeResponse;
 const CreateDisasterRecoverGroupResponse = models.CreateDisasterRecoverGroupResponse;
 const InquiryPriceResetInstancesInternetMaxBandwidthResponse = models.InquiryPriceResetInstancesInternetMaxBandwidthResponse;
 const ModifyKeyPairAttributeRequest = models.ModifyKeyPairAttributeRequest;
@@ -33,7 +33,7 @@ const AssociateInstancesKeyPairsRequest = models.AssociateInstancesKeyPairsReque
 const ImportKeyPairResponse = models.ImportKeyPairResponse;
 const DescribeInstancesStatusResponse = models.DescribeInstancesStatusResponse;
 const ZoneInfo = models.ZoneInfo;
-const DescribeInstanceTypeConfigsRequest = models.DescribeInstanceTypeConfigsRequest;
+const InquiryPriceModifyInstancesChargeTypeResponse = models.InquiryPriceModifyInstancesChargeTypeResponse;
 const DescribeKeyPairsResponse = models.DescribeKeyPairsResponse;
 const Tag = models.Tag;
 const InternetChargeTypeConfig = models.InternetChargeTypeConfig;
@@ -41,10 +41,12 @@ const DescribeImagesResponse = models.DescribeImagesResponse;
 const OsVersion = models.OsVersion;
 const CreateKeyPairResponse = models.CreateKeyPairResponse;
 const ModifyKeyPairAttributeResponse = models.ModifyKeyPairAttributeResponse;
+const ModifyInstancesChargeTypeRequest = models.ModifyInstancesChargeTypeRequest;
 const ModifyImageSharePermissionRequest = models.ModifyImageSharePermissionRequest;
 const DisassociateInstancesKeyPairsResponse = models.DisassociateInstancesKeyPairsResponse;
 const InquiryPriceResizeInstanceDisksRequest = models.InquiryPriceResizeInstanceDisksRequest;
 const RunInstancesResponse = models.RunInstancesResponse;
+const ResetInstancesInternetMaxBandwidthResponse = models.ResetInstancesInternetMaxBandwidthResponse;
 const ModifyInstancesAttributeResponse = models.ModifyInstancesAttributeResponse;
 const ModifyImageSharePermissionResponse = models.ModifyImageSharePermissionResponse;
 const SyncImagesResponse = models.SyncImagesResponse;
@@ -76,6 +78,7 @@ const DescribeKeyPairsRequest = models.DescribeKeyPairsRequest;
 const DeleteDisasterRecoverGroupsResponse = models.DeleteDisasterRecoverGroupsResponse;
 const HostItem = models.HostItem;
 const Externals = models.Externals;
+const InquiryPriceModifyInstancesChargeTypeRequest = models.InquiryPriceModifyInstancesChargeTypeRequest;
 const CreateImageRequest = models.CreateImageRequest;
 const Instance = models.Instance;
 const EnhancedService = models.EnhancedService;
@@ -97,7 +100,7 @@ const ResetInstancesPasswordRequest = models.ResetInstancesPasswordRequest;
 const DescribeImageSharePermissionRequest = models.DescribeImageSharePermissionRequest;
 const DisasterRecoverGroup = models.DisasterRecoverGroup;
 const InquiryPriceResetInstanceResponse = models.InquiryPriceResetInstanceResponse;
-const Filter = models.Filter;
+const DescribeInstanceTypeConfigsRequest = models.DescribeInstanceTypeConfigsRequest;
 const DescribeImageSharePermissionResponse = models.DescribeImageSharePermissionResponse;
 const ModifyHostsAttributeResponse = models.ModifyHostsAttributeResponse;
 const DescribeDisasterRecoverGroupQuotaRequest = models.DescribeDisasterRecoverGroupQuotaRequest;
@@ -135,6 +138,7 @@ const KeyPair = models.KeyPair;
 const RenewInstancesResponse = models.RenewInstancesResponse;
 const RunMonitorServiceEnabled = models.RunMonitorServiceEnabled;
 const ResetInstanceResponse = models.ResetInstanceResponse;
+const Filter = models.Filter;
 const VirtualPrivateCloud = models.VirtualPrivateCloud;
 const InternetBandwidthConfig = models.InternetBandwidthConfig;
 const ModifyDisasterRecoverGroupAttributeResponse = models.ModifyDisasterRecoverGroupAttributeResponse;
@@ -220,7 +224,7 @@ class CvmClient extends AbstractClient {
     }
 
     /**
-     * 本接口（ModifyImageSharePermission）用于修改镜像分享信息。
+     * 本接口（DescribeImageSharePermission）用于查询镜像分享信息。
      * @param {DescribeImageSharePermissionRequest} req
      * @param {function(string, DescribeImageSharePermissionResponse):void} cb
      * @public
@@ -231,14 +235,17 @@ class CvmClient extends AbstractClient {
     }
 
     /**
-     * 本接口(InquiryPriceRunInstances)用于创建实例询价。本接口仅允许针对购买限制范围内的实例配置进行询价, 详见：[创建实例](https://cloud.tencent.com/document/api/213/15730)。
-     * @param {InquiryPriceRunInstancesRequest} req
-     * @param {function(string, InquiryPriceRunInstancesResponse):void} cb
+     * 本接口 (InquiryPriceModifyInstancesChargeType) 用于切换实例的计费模式询价。
+
+* 只支持从 `POSTPAID_BY_HOUR` 计费模式切换为`PREPAID`计费模式。
+* 关机不收费的实例、`BC1`和`BS1`机型族的实例、设置定时销毁的实例不支持该操作。
+     * @param {InquiryPriceModifyInstancesChargeTypeRequest} req
+     * @param {function(string, InquiryPriceModifyInstancesChargeTypeResponse):void} cb
      * @public
      */
-    InquiryPriceRunInstances(req, cb) {
-        let resp = new InquiryPriceRunInstancesResponse();
-        this.request("InquiryPriceRunInstances", req, resp, cb);
+    InquiryPriceModifyInstancesChargeType(req, cb) {
+        let resp = new InquiryPriceModifyInstancesChargeTypeResponse();
+        this.request("InquiryPriceModifyInstancesChargeType", req, resp, cb);
     }
 
     /**
@@ -264,6 +271,21 @@ class CvmClient extends AbstractClient {
     DescribeImages(req, cb) {
         let resp = new DescribeImagesResponse();
         this.request("DescribeImages", req, resp, cb);
+    }
+
+    /**
+     * 本接口 (ModifyKeyPairAttribute) 用于修改密钥对属性。
+
+* 修改密钥对ID所指定的密钥对的名称和描述信息。
+* 密钥对名称不能和已经存在的密钥对的名称重复。
+* 密钥对ID是密钥对的唯一标识，不可修改。
+     * @param {ModifyKeyPairAttributeRequest} req
+     * @param {function(string, ModifyKeyPairAttributeResponse):void} cb
+     * @public
+     */
+    ModifyKeyPairAttribute(req, cb) {
+        let resp = new ModifyKeyPairAttributeResponse();
+        this.request("ModifyKeyPairAttribute", req, resp, cb);
     }
 
     /**
@@ -682,21 +704,19 @@ class CvmClient extends AbstractClient {
     }
 
     /**
-     * 本接口 (ResetInstancesInternetMaxBandwidth) 用于调整实例公网带宽上限。
+     * 本接口 (ModifyInstancesProject) 用于修改实例所属项目。
 
-* 不同机型带宽上限范围不一致，具体限制详见[购买网络带宽](https://cloud.tencent.com/document/product/213/509)。
-* 对于 `BANDWIDTH_PREPAID` 计费方式的带宽，需要输入参数 `StartTime` 和 `EndTime` ，指定调整后的带宽的生效时间段。在这种场景下目前不支持调小带宽，会涉及扣费，请确保账户余额充足。可通过 [`DescribeAccountBalance`](https://cloud.tencent.com/document/product/378/4397) 接口查询账户余额。
-* 对于 `TRAFFIC_POSTPAID_BY_HOUR` 、 `BANDWIDTH_POSTPAID_BY_HOUR` 和 `BANDWIDTH_PACKAGE` 计费方式的带宽，使用该接口调整带宽上限是实时生效的，可以在带宽允许的范围内调大或者调小带宽，不支持输入参数 `StartTime` 和 `EndTime` 。
-* 接口不支持调整 `BANDWIDTH_POSTPAID_BY_MONTH` 计费方式的带宽。
-* 接口不支持批量调整 `BANDWIDTH_PREPAID` 和 `BANDWIDTH_POSTPAID_BY_HOUR` 计费方式的带宽。
-* 接口不支持批量调整混合计费方式的带宽。例如不支持同时调整 `TRAFFIC_POSTPAID_BY_HOUR` 和 `BANDWIDTH_PACKAGE` 计费方式的带宽。
-     * @param {ResetInstancesInternetMaxBandwidthRequest} req
-     * @param {function(string, ResetInstancesInternetMaxBandwidthResponse):void} cb
+* 项目为一个虚拟概念，用户可以在一个账户下面建立多个项目，每个项目中管理不同的资源；将多个不同实例分属到不同项目中，后续使用 [`DescribeInstances`](https://cloud.tencent.com/document/api/213/9388)接口查询实例，项目ID可用于过滤结果。
+* 绑定负载均衡的实例不支持修改实例所属项目，请先使用[`DeregisterInstancesFromLoadBalancer`](https://cloud.tencent.com/document/api/214/1258)接口解绑负载均衡。
+* 修改实例所属项目会自动解关联实例原来关联的安全组，修改完成后可能使用[`ModifySecurityGroupsOfInstance`](https://cloud.tencent.com/document/api/213/1367)接口关联安全组。
+* 支持批量操作。每次请求批量实例的上限为100。
+     * @param {ModifyInstancesProjectRequest} req
+     * @param {function(string, ModifyInstancesProjectResponse):void} cb
      * @public
      */
-    ResetInstancesInternetMaxBandwidth(req, cb) {
-        let resp = new ResetInstancesInternetMaxBandwidthResponse();
-        this.request("ResetInstancesInternetMaxBandwidth", req, resp, cb);
+    ModifyInstancesProject(req, cb) {
+        let resp = new ModifyInstancesProjectResponse();
+        this.request("ModifyInstancesProject", req, resp, cb);
     }
 
     /**
@@ -713,18 +733,14 @@ class CvmClient extends AbstractClient {
     }
 
     /**
-     * 本接口 (ModifyKeyPairAttribute) 用于修改密钥对属性。
-
-* 修改密钥对ID所指定的密钥对的名称和描述信息。
-* 密钥对名称不能和已经存在的密钥对的名称重复。
-* 密钥对ID是密钥对的唯一标识，不可修改。
-     * @param {ModifyKeyPairAttributeRequest} req
-     * @param {function(string, ModifyKeyPairAttributeResponse):void} cb
+     * 本接口(InquiryPriceRunInstances)用于创建实例询价。本接口仅允许针对购买限制范围内的实例配置进行询价, 详见：[创建实例](https://cloud.tencent.com/document/api/213/15730)。
+     * @param {InquiryPriceRunInstancesRequest} req
+     * @param {function(string, InquiryPriceRunInstancesResponse):void} cb
      * @public
      */
-    ModifyKeyPairAttribute(req, cb) {
-        let resp = new ModifyKeyPairAttributeResponse();
-        this.request("ModifyKeyPairAttribute", req, resp, cb);
+    InquiryPriceRunInstances(req, cb) {
+        let resp = new InquiryPriceRunInstancesResponse();
+        this.request("InquiryPriceRunInstances", req, resp, cb);
     }
 
     /**
@@ -775,19 +791,17 @@ class CvmClient extends AbstractClient {
     }
 
     /**
-     * 本接口 (ModifyInstancesProject) 用于修改实例所属项目。
+     * 本接口 (ModifyInstancesChargeType) 用于切换实例的计费模式。
 
-* 项目为一个虚拟概念，用户可以在一个账户下面建立多个项目，每个项目中管理不同的资源；将多个不同实例分属到不同项目中，后续使用 [`DescribeInstances`](https://cloud.tencent.com/document/api/213/9388)接口查询实例，项目ID可用于过滤结果。
-* 绑定负载均衡的实例不支持修改实例所属项目，请先使用[`DeregisterInstancesFromLoadBalancer`](https://cloud.tencent.com/document/api/214/1258)接口解绑负载均衡。
-* 修改实例所属项目会自动解关联实例原来关联的安全组，修改完成后可能使用[`ModifySecurityGroupsOfInstance`](https://cloud.tencent.com/document/api/213/1367)接口关联安全组。
-* 支持批量操作。每次请求批量实例的上限为100。
-     * @param {ModifyInstancesProjectRequest} req
-     * @param {function(string, ModifyInstancesProjectResponse):void} cb
+* 只支持从 `POSTPAID_BY_HOUR` 计费模式切换为`PREPAID`计费模式。
+* 关机不收费的实例、`BC1`和`BS1`机型族的实例、设置定时销毁的实例不支持该操作。
+     * @param {ModifyInstancesChargeTypeRequest} req
+     * @param {function(string, ModifyInstancesChargeTypeResponse):void} cb
      * @public
      */
-    ModifyInstancesProject(req, cb) {
-        let resp = new ModifyInstancesProjectResponse();
-        this.request("ModifyInstancesProject", req, resp, cb);
+    ModifyInstancesChargeType(req, cb) {
+        let resp = new ModifyInstancesChargeTypeResponse();
+        this.request("ModifyInstancesChargeType", req, resp, cb);
     }
 
     /**
@@ -828,6 +842,24 @@ class CvmClient extends AbstractClient {
     StartInstances(req, cb) {
         let resp = new StartInstancesResponse();
         this.request("StartInstances", req, resp, cb);
+    }
+
+    /**
+     * 本接口 (ResetInstancesInternetMaxBandwidth) 用于调整实例公网带宽上限。
+
+* 不同机型带宽上限范围不一致，具体限制详见[购买网络带宽](https://cloud.tencent.com/document/product/213/509)。
+* 对于 `BANDWIDTH_PREPAID` 计费方式的带宽，需要输入参数 `StartTime` 和 `EndTime` ，指定调整后的带宽的生效时间段。在这种场景下目前不支持调小带宽，会涉及扣费，请确保账户余额充足。可通过 [`DescribeAccountBalance`](https://cloud.tencent.com/document/product/378/4397) 接口查询账户余额。
+* 对于 `TRAFFIC_POSTPAID_BY_HOUR` 、 `BANDWIDTH_POSTPAID_BY_HOUR` 和 `BANDWIDTH_PACKAGE` 计费方式的带宽，使用该接口调整带宽上限是实时生效的，可以在带宽允许的范围内调大或者调小带宽，不支持输入参数 `StartTime` 和 `EndTime` 。
+* 接口不支持调整 `BANDWIDTH_POSTPAID_BY_MONTH` 计费方式的带宽。
+* 接口不支持批量调整 `BANDWIDTH_PREPAID` 和 `BANDWIDTH_POSTPAID_BY_HOUR` 计费方式的带宽。
+* 接口不支持批量调整混合计费方式的带宽。例如不支持同时调整 `TRAFFIC_POSTPAID_BY_HOUR` 和 `BANDWIDTH_PACKAGE` 计费方式的带宽。
+     * @param {ResetInstancesInternetMaxBandwidthRequest} req
+     * @param {function(string, ResetInstancesInternetMaxBandwidthResponse):void} cb
+     * @public
+     */
+    ResetInstancesInternetMaxBandwidth(req, cb) {
+        let resp = new ResetInstancesInternetMaxBandwidthResponse();
+        this.request("ResetInstancesInternetMaxBandwidth", req, resp, cb);
     }
 
     /**

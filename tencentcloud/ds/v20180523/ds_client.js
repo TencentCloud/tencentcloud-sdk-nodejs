@@ -4,11 +4,13 @@ const SendVcodeResponse = models.SendVcodeResponse;
 const DeleteAccountRequest = models.DeleteAccountRequest;
 const CreateSealRequest = models.CreateSealRequest;
 const CreateSealResponse = models.CreateSealResponse;
+const SignKeyword = models.SignKeyword;
 const DescribeTaskStatusResponse = models.DescribeTaskStatusResponse;
 const CheckVcodeRequest = models.CheckVcodeRequest;
 const CheckVcodeResponse = models.CheckVcodeResponse;
 const DownloadContractResponse = models.DownloadContractResponse;
 const SignLocation = models.SignLocation;
+const SignContractByKeywordResponse = models.SignContractByKeywordResponse;
 const SignInfo = models.SignInfo;
 const DeleteSealRequest = models.DeleteSealRequest;
 const DownloadContractRequest = models.DownloadContractRequest;
@@ -20,6 +22,7 @@ const CreateContractByUploadResponse = models.CreateContractByUploadResponse;
 const DeleteSealResponse = models.DeleteSealResponse;
 const CreatePersonalAccountRequest = models.CreatePersonalAccountRequest;
 const DescribeTaskStatusRequest = models.DescribeTaskStatusRequest;
+const SignContractByKeywordRequest = models.SignContractByKeywordRequest;
 const SendVcodeRequest = models.SendVcodeRequest;
 const SignContractByCoordinateRequest = models.SignContractByCoordinateRequest;
 const SignContractByCoordinateResponse = models.SignContractByCoordinateResponse;
@@ -100,6 +103,17 @@ class DsClient extends AbstractClient {
     CreatePersonalAccount(req, cb) {
         let resp = new CreatePersonalAccountResponse();
         this.request("CreatePersonalAccount", req, resp, cb);
+    }
+
+    /**
+     * 此接口适用于：客户平台在创建好合同后，由合同签署方对创建的合同内容进行确认，无误后再进行签署。客户平台使用该接口对PDF合同文档按照关键字和坐标进行签署。
+     * @param {SignContractByKeywordRequest} req
+     * @param {function(string, SignContractByKeywordResponse):void} cb
+     * @public
+     */
+    SignContractByKeyword(req, cb) {
+        let resp = new SignContractByKeywordResponse();
+        this.request("SignContractByKeyword", req, resp, cb);
     }
 
     /**
