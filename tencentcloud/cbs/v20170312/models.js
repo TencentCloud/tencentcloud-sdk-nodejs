@@ -83,7 +83,7 @@ class ResizeDiskRequest extends  AbstractModel {
         this.DiskId = null;
 
         /**
-         * 云硬盘扩容后的大小，单位为GB，必须大于当前云硬盘大小。取值范围： 普通云硬盘:10GB ~ 4000G；高性能云硬盘:50GB ~ 4000GB；SSD云硬盘:100GB ~ 4000GB，步长均为10GB。
+         * 云硬盘扩容后的大小，单位为GB，必须大于当前云硬盘大小。云盘大小取值范围参见云硬盘[产品分类](/document/product/362/2353)的说明。
          * @type {number || null}
          */
         this.DiskSize = null;
@@ -464,13 +464,13 @@ class DiskConfig extends  AbstractModel {
         this.DiskChargeType = null;
 
         /**
-         * 最大可配置云盘大小。
+         * 最大可配置云盘大小，单位GB。
          * @type {number || null}
          */
         this.MaxDiskSize = null;
 
         /**
-         * 最小可配置云盘大小。
+         * 最小可配置云盘大小，单位GB。
          * @type {number || null}
          */
         this.MinDiskSize = null;
@@ -692,7 +692,7 @@ class DiskChargePrepaid extends  AbstractModel {
         super();
 
         /**
-         * 购买云盘的时长，默认单位为月，此时，取值范围：1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36。
+         * 购买云盘的时长，默认单位为月，取值范围：1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36。
          * @type {number || null}
          */
         this.Period = null;
@@ -740,7 +740,7 @@ class InquiryPriceResizeDiskRequest extends  AbstractModel {
         this.DiskId = null;
 
         /**
-         * 云硬盘扩容后的大小，单位为GB，不得小于当前云硬盘大小。取值范围： 普通云硬盘:10GB ~ 4000G；高性能云硬盘:50GB ~ 4000GB；SSD云硬盘:100GB ~ 4000GB，步长均为10GB。
+         * 云硬盘扩容后的大小，单位为GB，不得小于当前云硬盘大小。云盘大小取值范围参见云硬盘[产品分类](/document/product/362/2353)的说明。
          * @type {number || null}
          */
         this.DiskSize = null;
@@ -1122,7 +1122,7 @@ class Snapshot extends  AbstractModel {
         this.DiskId = null;
 
         /**
-         * 创建此快照的云硬盘大小。
+         * 创建此快照的云硬盘大小，单位GB。
          * @type {number || null}
          */
         this.DiskSize = null;
@@ -1389,7 +1389,7 @@ class CreateDisksRequest extends  AbstractModel {
         this.Placement = null;
 
         /**
-         * 云硬盘大小，单位为GB。<br><li>如果传入`SnapshotId`则可不传`DiskSize`，此时新建云盘的大小为快照大小<br><li>如果传入`SnapshotId`同时传入`DiskSize`，则云盘大小必须大于或等于快照大小<br><li>云盘大小取值范围： 普通云硬盘:10GB ~ 4000G；高性能云硬盘:50GB ~ 4000GB；SSD云硬盘:100GB ~ 4000GB。步长均为10GB
+         * 云硬盘大小，单位为GB。<br><li>如果传入`SnapshotId`则可不传`DiskSize`，此时新建云盘的大小为快照大小<br><li>如果传入`SnapshotId`同时传入`DiskSize`，则云盘大小必须大于或等于快照大小<br><li>云盘大小取值范围参见云硬盘[产品分类](/document/product/362/2353)的说明。
          * @type {number || null}
          */
         this.DiskSize = null;
@@ -1411,6 +1411,12 @@ class CreateDisksRequest extends  AbstractModel {
          * @type {string || null}
          */
         this.Encrypt = null;
+
+        /**
+         * 云盘绑定的标签。
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
 
     }
 
@@ -1441,6 +1447,15 @@ class CreateDisksRequest extends  AbstractModel {
         this.SnapshotId = params.SnapshotId || null;
         this.ClientToken = params.ClientToken || null;
         this.Encrypt = params.Encrypt || null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
 
     }
 }
@@ -1973,7 +1988,7 @@ class Disk extends  AbstractModel {
         this.DiskName = null;
 
         /**
-         * 云硬盘大小。
+         * 云硬盘大小，单位GB。
          * @type {number || null}
          */
         this.DiskSize = null;

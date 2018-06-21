@@ -97,7 +97,7 @@ class CreateSealRequest extends  AbstractModel {
         this.AccountResId = null;
 
         /**
-         * 签章链接
+         * 签章链接，图片必须为png格式
          * @type {string || null}
          */
         this.ImgUrl = null;
@@ -150,6 +150,62 @@ class CreateSealResponse extends  AbstractModel {
         }
         this.SealResId = params.SealResId || null;
         this.RequestId = params.RequestId || null;
+
+    }
+}
+
+/**
+ * 签署关键字信息
+ * @class
+ */
+class SignKeyword extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 关键字
+         * @type {string || null}
+         */
+        this.Keyword = null;
+
+        /**
+         * X轴偏移坐标
+         * @type {string || null}
+         */
+        this.OffsetCoordX = null;
+
+        /**
+         * Y轴偏移坐标
+         * @type {string || null}
+         */
+        this.OffsetCoordY = null;
+
+        /**
+         * 签章突破宽度
+         * @type {string || null}
+         */
+        this.ImageWidth = null;
+
+        /**
+         * 签章图片高度
+         * @type {string || null}
+         */
+        this.ImageHeight = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Keyword = params.Keyword || null;
+        this.OffsetCoordX = params.OffsetCoordX || null;
+        this.OffsetCoordY = params.OffsetCoordY || null;
+        this.ImageWidth = params.ImageWidth || null;
+        this.ImageHeight = params.ImageHeight || null;
 
     }
 }
@@ -372,6 +428,34 @@ class SignLocation extends  AbstractModel {
 }
 
 /**
+ * SignContractByKeyword返回参数结构体
+ * @class
+ */
+class SignContractByKeywordResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = params.RequestId || null;
+
+    }
+}
+
+/**
  * 签署人信息
  * @class
  */
@@ -385,6 +469,36 @@ class SignInfo extends  AbstractModel {
          */
         this.AccountResId = null;
 
+        /**
+         * 授权时间，格式为年月日时分秒，例20160801095509
+         * @type {string || null}
+         */
+        this.AuthorizationTime = null;
+
+        /**
+         * 授权IP地址
+         * @type {string || null}
+         */
+        this.Location = null;
+
+        /**
+         * 签章ID
+         * @type {string || null}
+         */
+        this.SealId = null;
+
+        /**
+         * 签名图片，优先级比SealId高
+         * @type {string || null}
+         */
+        this.ImageData = null;
+
+        /**
+         * 默认值：1  表示RSA证书， 2 表示国密证书， 参数不传时默认为1
+         * @type {number || null}
+         */
+        this.CertType = null;
+
     }
 
     /**
@@ -395,6 +509,11 @@ class SignInfo extends  AbstractModel {
             return;
         }
         this.AccountResId = params.AccountResId || null;
+        this.AuthorizationTime = params.AuthorizationTime || null;
+        this.Location = params.Location || null;
+        this.SealId = params.SealId || null;
+        this.ImageData = params.ImageData || null;
+        this.CertType = params.CertType || null;
 
     }
 }
@@ -905,6 +1024,88 @@ class DescribeTaskStatusRequest extends  AbstractModel {
 }
 
 /**
+ * SignContractByKeyword请求参数结构体
+ * @class
+ */
+class SignContractByKeywordRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 模块名
+         * @type {string || null}
+         */
+        this.Module = null;
+
+        /**
+         * 操作名
+         * @type {string || null}
+         */
+        this.Operation = null;
+
+        /**
+         * 合同ID
+         * @type {string || null}
+         */
+        this.ContractResId = null;
+
+        /**
+         * 账户ID
+         * @type {string || null}
+         */
+        this.AccountResId = null;
+
+        /**
+         * 授权时间，格式为年月日时分秒，例20160801095509
+         * @type {string || null}
+         */
+        this.AuthorizationTime = null;
+
+        /**
+         * 授权IP地址
+         * @type {string || null}
+         */
+        this.Position = null;
+
+        /**
+         * 签章ID
+         * @type {string || null}
+         */
+        this.SealResId = null;
+
+        /**
+         * 签署关键字，坐标和范围不得超过合同文件边界
+         * @type {SignKeyword || null}
+         */
+        this.SignKeyword = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Module = params.Module || null;
+        this.Operation = params.Operation || null;
+        this.ContractResId = params.ContractResId || null;
+        this.AccountResId = params.AccountResId || null;
+        this.AuthorizationTime = params.AuthorizationTime || null;
+        this.Position = params.Position || null;
+        this.SealResId = params.SealResId || null;
+
+        if (params.SignKeyword) {
+            let obj = new SignKeyword();
+            obj.deserialize(params.SignKeyword)
+            this.SignKeyword = obj;
+        }
+
+    }
+}
+
+/**
  * SendVcode请求参数结构体
  * @class
  */
@@ -986,7 +1187,7 @@ class SignContractByCoordinateRequest extends  AbstractModel {
         this.AccountResId = null;
 
         /**
-         * 授权时间，格式20160801095509
+         * 授权时间，格式为年月日时分秒，例20160801095509
          * @type {string || null}
          */
         this.AuthorizationTime = null;
@@ -1113,11 +1314,13 @@ module.exports = {
     DeleteAccountRequest: DeleteAccountRequest,
     CreateSealRequest: CreateSealRequest,
     CreateSealResponse: CreateSealResponse,
+    SignKeyword: SignKeyword,
     DescribeTaskStatusResponse: DescribeTaskStatusResponse,
     CheckVcodeRequest: CheckVcodeRequest,
     CheckVcodeResponse: CheckVcodeResponse,
     DownloadContractResponse: DownloadContractResponse,
     SignLocation: SignLocation,
+    SignContractByKeywordResponse: SignContractByKeywordResponse,
     SignInfo: SignInfo,
     DeleteSealRequest: DeleteSealRequest,
     DownloadContractRequest: DownloadContractRequest,
@@ -1129,6 +1332,7 @@ module.exports = {
     DeleteSealResponse: DeleteSealResponse,
     CreatePersonalAccountRequest: CreatePersonalAccountRequest,
     DescribeTaskStatusRequest: DescribeTaskStatusRequest,
+    SignContractByKeywordRequest: SignContractByKeywordRequest,
     SendVcodeRequest: SendVcodeRequest,
     SignContractByCoordinateRequest: SignContractByCoordinateRequest,
     SignContractByCoordinateResponse: SignContractByCoordinateResponse,
