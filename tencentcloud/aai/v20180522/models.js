@@ -33,12 +33,6 @@ class SentenceRecognitionRequest extends  AbstractModel {
         this.SourceType = null;
 
         /**
-         * 语音 URL，公网可下载。当 SourceType 值为 0 时须填写该字段，为 1 时不填；URL 的长度大于 0，小于 2048，需进行urlencode编码。
-         * @type {string || null}
-         */
-        this.Url = null;
-
-        /**
          * 识别音频的音频格式（支持mp3,wav）。
          * @type {string || null}
          */
@@ -51,7 +45,13 @@ class SentenceRecognitionRequest extends  AbstractModel {
         this.UsrAudioKey = null;
 
         /**
-         * 语音数据，当SourceType 值为1时必须填写，为0可不写。要base64编码
+         * 语音 URL，公网可下载。当 SourceType 值为 0 时须填写该字段，为 1 时不填；URL 的长度大于 0，小于 2048，需进行urlencode编码。音频时间长度要小于60s。
+         * @type {string || null}
+         */
+        this.Url = null;
+
+        /**
+         * 语音数据，当SourceType 值为1时必须填写，为0可不写。要base64编码。音频数据要小于900k。
          * @type {string || null}
          */
         this.Data = null;
@@ -75,11 +75,137 @@ class SentenceRecognitionRequest extends  AbstractModel {
         this.SubServiceType = params.SubServiceType || null;
         this.EngSerViceType = params.EngSerViceType || null;
         this.SourceType = params.SourceType || null;
-        this.Url = params.Url || null;
         this.VoiceFormat = params.VoiceFormat || null;
         this.UsrAudioKey = params.UsrAudioKey || null;
+        this.Url = params.Url || null;
         this.Data = params.Data || null;
         this.DataLen = params.DataLen || null;
+
+    }
+}
+
+/**
+ * TextToVoice返回参数结构体
+ * @class
+ */
+class TextToVoiceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * base编码的wav音频
+         * @type {string || null}
+         */
+        this.Audio = null;
+
+        /**
+         * 一次请求对应一个SessionId
+         * @type {string || null}
+         */
+        this.SessionId = null;
+
+        /**
+         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Audio = params.Audio || null;
+        this.SessionId = params.SessionId || null;
+        this.RequestId = params.RequestId || null;
+
+    }
+}
+
+/**
+ * TextToVoice请求参数结构体
+ * @class
+ */
+class TextToVoiceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 合成语音的源文本
+         * @type {string || null}
+         */
+        this.Text = null;
+
+        /**
+         * 一次请求对应一个SessionId，会原样返回
+         * @type {string || null}
+         */
+        this.SessionId = null;
+
+        /**
+         * 项目id
+         * @type {number || null}
+         */
+        this.ProjectId = null;
+
+        /**
+         * 模型类型，1-默认模型
+         * @type {number || null}
+         */
+        this.ModelType = null;
+
+        /**
+         * 音量大小，暂仅支持默认值1.0
+         * @type {number || null}
+         */
+        this.Volume = null;
+
+        /**
+         * 语速，暂仅支持默认值1.0
+         * @type {number || null}
+         */
+        this.Speed = null;
+
+        /**
+         * 音色，1-默认音色
+         * @type {number || null}
+         */
+        this.VoiceType = null;
+
+        /**
+         * 主语言类型<li>1-中文(包括粤语)，最大300字符</li><li>2-英文，最大支持600字符</li>
+         * @type {number || null}
+         */
+        this.PrimaryLanguage = null;
+
+        /**
+         * 音频采样率：暂仅支持16k
+         * @type {number || null}
+         */
+        this.SampleRate = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Text = params.Text || null;
+        this.SessionId = params.SessionId || null;
+        this.ProjectId = params.ProjectId || null;
+        this.ModelType = params.ModelType || null;
+        this.Volume = params.Volume || null;
+        this.Speed = params.Speed || null;
+        this.VoiceType = params.VoiceType || null;
+        this.PrimaryLanguage = params.PrimaryLanguage || null;
+        this.SampleRate = params.SampleRate || null;
 
     }
 }
@@ -121,6 +247,8 @@ class SentenceRecognitionResponse extends  AbstractModel {
 
 module.exports = {
     SentenceRecognitionRequest: SentenceRecognitionRequest,
+    TextToVoiceResponse: TextToVoiceResponse,
+    TextToVoiceRequest: TextToVoiceRequest,
     SentenceRecognitionResponse: SentenceRecognitionResponse,
 
 }
