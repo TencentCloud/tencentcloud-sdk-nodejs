@@ -79,6 +79,18 @@ class MonitorsDetail extends  AbstractModel {
         super();
 
         /**
+         * 监控任务包含的站点列表的平均扫描进度。
+         * @type {number || null}
+         */
+        this.Progress = null;
+
+        /**
+         * 扫描页面总数。
+         * @type {number || null}
+         */
+        this.PageCount = null;
+
+        /**
          * 监控任务基础信息。
          * @type {Monitor || null}
          */
@@ -132,18 +144,6 @@ class MonitorsDetail extends  AbstractModel {
          */
         this.VulsNoticeNumber = null;
 
-        /**
-         * 监控任务包含的站点列表的平均扫描进度。
-         * @type {number || null}
-         */
-        this.Progress = null;
-
-        /**
-         * 扫描页面总数。
-         * @type {number || null}
-         */
-        this.PageCount = null;
-
     }
 
     /**
@@ -153,6 +153,8 @@ class MonitorsDetail extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.Progress = params.Progress || null;
+        this.PageCount = params.PageCount || null;
 
         if (params.Basic) {
             let obj = new Monitor();
@@ -183,8 +185,6 @@ class MonitorsDetail extends  AbstractModel {
         this.VulsMiddleNumber = params.VulsMiddleNumber || null;
         this.VulsLowNumber = params.VulsLowNumber || null;
         this.VulsNoticeNumber = params.VulsNoticeNumber || null;
-        this.Progress = params.Progress || null;
-        this.PageCount = params.PageCount || null;
 
     }
 }
@@ -339,6 +339,70 @@ class DescribeConfigRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeVuls请求参数结构体
+ * @class
+ */
+class DescribeVulsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 站点ID
+         * @type {number || null}
+         */
+        this.SiteId = null;
+
+        /**
+         * 监控任务ID
+         * @type {number || null}
+         */
+        this.MonitorId = null;
+
+        /**
+         * 过滤条件
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * 偏移量，默认为0
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 返回数量，默认为10，最大值为100
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SiteId = params.SiteId || null;
+        this.MonitorId = params.MonitorId || null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.Offset = params.Offset || null;
+        this.Limit = params.Limit || null;
+
+    }
+}
+
+/**
  * ModifyConfigAttribute返回参数结构体
  * @class
  */
@@ -402,6 +466,27 @@ class CreateSitesResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeVulsNumber请求参数结构体
+ * @class
+ */
+class DescribeVulsNumberRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+    }
+}
+
+/**
  * ModifyMonitorAttribute返回参数结构体
  * @class
  */
@@ -430,10 +515,10 @@ class ModifyMonitorAttributeResponse extends  AbstractModel {
 }
 
 /**
- * CreateMonitors返回参数结构体
+ * ModifySiteAttribute返回参数结构体
  * @class
  */
-class CreateMonitorsResponse extends  AbstractModel {
+class ModifySiteAttributeResponse extends  AbstractModel {
     constructor(){
         super();
 
@@ -453,6 +538,41 @@ class CreateMonitorsResponse extends  AbstractModel {
             return;
         }
         this.RequestId = params.RequestId || null;
+
+    }
+}
+
+/**
+ * CreateVulsReport请求参数结构体
+ * @class
+ */
+class CreateVulsReportRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 站点ID
+         * @type {number || null}
+         */
+        this.SiteId = null;
+
+        /**
+         * 监控任务ID
+         * @type {number || null}
+         */
+        this.MonitorId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SiteId = params.SiteId || null;
+        this.MonitorId = params.MonitorId || null;
 
     }
 }
@@ -492,6 +612,30 @@ class CreateSitesScansResponse extends  AbstractModel {
 class SitesVerification extends  AbstractModel {
     constructor(){
         super();
+
+        /**
+         * ID。
+         * @type {number || null}
+         */
+        this.Id = null;
+
+        /**
+         * 云用户appid
+         * @type {number || null}
+         */
+        this.Appid = null;
+
+        /**
+         * 用于验证站点的url，即访问该url获取验证数据。
+         * @type {string || null}
+         */
+        this.VerifyUrl = null;
+
+        /**
+         * 获取验证验证文件的url。
+         * @type {string || null}
+         */
+        this.VerifyFileUrl = null;
 
         /**
          * 根域名。
@@ -535,30 +679,6 @@ class SitesVerification extends  AbstractModel {
          */
         this.UpdatedAt = null;
 
-        /**
-         * ID。
-         * @type {number || null}
-         */
-        this.Id = null;
-
-        /**
-         * 云用户appid
-         * @type {number || null}
-         */
-        this.Appid = null;
-
-        /**
-         * 用于验证站点的url，即访问该url获取验证数据。
-         * @type {string || null}
-         */
-        this.VerifyUrl = null;
-
-        /**
-         * 获取验证验证文件的url。
-         * @type {string || null}
-         */
-        this.VerifyFileUrl = null;
-
     }
 
     /**
@@ -568,6 +688,10 @@ class SitesVerification extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.Id = params.Id || null;
+        this.Appid = params.Appid || null;
+        this.VerifyUrl = params.VerifyUrl || null;
+        this.VerifyFileUrl = params.VerifyFileUrl || null;
         this.Domain = params.Domain || null;
         this.TxtName = params.TxtName || null;
         this.TxtText = params.TxtText || null;
@@ -575,10 +699,6 @@ class SitesVerification extends  AbstractModel {
         this.VerifyStatus = params.VerifyStatus || null;
         this.CreatedAt = params.CreatedAt || null;
         this.UpdatedAt = params.UpdatedAt || null;
-        this.Id = params.Id || null;
-        this.Appid = params.Appid || null;
-        this.VerifyUrl = params.VerifyUrl || null;
-        this.VerifyFileUrl = params.VerifyFileUrl || null;
 
     }
 }
@@ -633,6 +753,113 @@ class DescribeSiteQuotaResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeVulsNumber返回参数结构体
+ * @class
+ */
+class DescribeVulsNumberResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 受影响的网站总数。
+         * @type {number || null}
+         */
+        this.ImpactSiteNumber = null;
+
+        /**
+         * 已验证的网站总数。
+         * @type {number || null}
+         */
+        this.SiteNumber = null;
+
+        /**
+         * 高风险漏洞总数。
+         * @type {number || null}
+         */
+        this.VulsHighNumber = null;
+
+        /**
+         * 中风险漏洞总数。
+         * @type {number || null}
+         */
+        this.VulsMiddleNumber = null;
+
+        /**
+         * 低高风险漏洞总数。
+         * @type {number || null}
+         */
+        this.VulsLowNumber = null;
+
+        /**
+         * 风险提示总数。
+         * @type {number || null}
+         */
+        this.VulsNoticeNumber = null;
+
+        /**
+         * 扫描页面总数。
+         * @type {number || null}
+         */
+        this.PageCount = null;
+
+        /**
+         * 已验证的网站列表。
+         * @type {Array.<MonitorMiniSite> || null}
+         */
+        this.Sites = null;
+
+        /**
+         * 受影响的网站列表。
+         * @type {Array.<MonitorMiniSite> || null}
+         */
+        this.ImpactSites = null;
+
+        /**
+         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ImpactSiteNumber = params.ImpactSiteNumber || null;
+        this.SiteNumber = params.SiteNumber || null;
+        this.VulsHighNumber = params.VulsHighNumber || null;
+        this.VulsMiddleNumber = params.VulsMiddleNumber || null;
+        this.VulsLowNumber = params.VulsLowNumber || null;
+        this.VulsNoticeNumber = params.VulsNoticeNumber || null;
+        this.PageCount = params.PageCount || null;
+
+        if (params.Sites) {
+            this.Sites = new Array();
+            for (let z in params.Sites) {
+                let obj = new MonitorMiniSite();
+                obj.deserialize(params.Sites[z]);
+                this.Sites.push(obj);
+            }
+        }
+
+        if (params.ImpactSites) {
+            this.ImpactSites = new Array();
+            for (let z in params.ImpactSites) {
+                let obj = new MonitorMiniSite();
+                obj.deserialize(params.ImpactSites[z]);
+                this.ImpactSites.push(obj);
+            }
+        }
+        this.RequestId = params.RequestId || null;
+
+    }
+}
+
+/**
  * CreateVulsMisinformation请求参数结构体
  * @class
  */
@@ -661,42 +888,12 @@ class CreateVulsMisinformationRequest extends  AbstractModel {
 }
 
 /**
- * DescribeVuls请求参数结构体
+ * DescribeVulsNumberTimeline请求参数结构体
  * @class
  */
-class DescribeVulsRequest extends  AbstractModel {
+class DescribeVulsNumberTimelineRequest extends  AbstractModel {
     constructor(){
         super();
-
-        /**
-         * 站点ID
-         * @type {number || null}
-         */
-        this.SiteId = null;
-
-        /**
-         * 监控任务ID
-         * @type {number || null}
-         */
-        this.MonitorId = null;
-
-        /**
-         * 过滤条件
-         * @type {Array.<Filter> || null}
-         */
-        this.Filters = null;
-
-        /**
-         * 偏移量，默认为0
-         * @type {number || null}
-         */
-        this.Offset = null;
-
-        /**
-         * 返回数量，默认为10，最大值为100
-         * @type {number || null}
-         */
-        this.Limit = null;
 
     }
 
@@ -707,19 +904,6 @@ class DescribeVulsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.SiteId = params.SiteId || null;
-        this.MonitorId = params.MonitorId || null;
-
-        if (params.Filters) {
-            this.Filters = new Array();
-            for (let z in params.Filters) {
-                let obj = new Filter();
-                obj.deserialize(params.Filters[z]);
-                this.Filters.push(obj);
-            }
-        }
-        this.Offset = params.Offset || null;
-        this.Limit = params.Limit || null;
 
     }
 }
@@ -797,6 +981,34 @@ class CreateSitesScansRequest extends  AbstractModel {
         this.SiteIds = params.SiteIds || null;
         this.ScannerType = params.ScannerType || null;
         this.RateLimit = params.RateLimit || null;
+
+    }
+}
+
+/**
+ * CreateMonitors返回参数结构体
+ * @class
+ */
+class CreateMonitorsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = params.RequestId || null;
 
     }
 }
@@ -993,6 +1205,12 @@ class Monitor extends  AbstractModel {
         super();
 
         /**
+         * 云用户appid。
+         * @type {number || null}
+         */
+        this.Appid = null;
+
+        /**
          * 监控任务ID。
          * @type {number || null}
          */
@@ -1070,12 +1288,6 @@ class Monitor extends  AbstractModel {
          */
         this.UpdatedAt = null;
 
-        /**
-         * 云用户appid。
-         * @type {number || null}
-         */
-        this.Appid = null;
-
     }
 
     /**
@@ -1085,6 +1297,7 @@ class Monitor extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.Appid = params.Appid || null;
         this.Id = params.Id || null;
         this.Name = params.Name || null;
         this.MonitorStatus = params.MonitorStatus || null;
@@ -1098,7 +1311,258 @@ class Monitor extends  AbstractModel {
         this.CurrentScanStartTime = params.CurrentScanStartTime || null;
         this.CreatedAt = params.CreatedAt || null;
         this.UpdatedAt = params.UpdatedAt || null;
+
+    }
+}
+
+/**
+ * 漏洞数据
+ * @class
+ */
+class Vul extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 是否已经添加误报，0-否，1-是。
+         * @type {number || null}
+         */
+        this.IsReported = null;
+
+        /**
+         * 云用户appid。
+         * @type {number || null}
+         */
+        this.Appid = null;
+
+        /**
+         * 云用户标识。
+         * @type {string || null}
+         */
+        this.Uin = null;
+
+        /**
+         * 漏洞ID。
+         * @type {number || null}
+         */
+        this.Id = null;
+
+        /**
+         * 站点ID。
+         * @type {number || null}
+         */
+        this.SiteId = null;
+
+        /**
+         * 扫描引擎的扫描任务ID。
+         * @type {number || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * 漏洞级别：high、middle、low、notice。
+         * @type {string || null}
+         */
+        this.Level = null;
+
+        /**
+         * 漏洞名称。
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 出现漏洞的url。
+         * @type {string || null}
+         */
+        this.Url = null;
+
+        /**
+         * 网址/细节。
+         * @type {string || null}
+         */
+        this.Html = null;
+
+        /**
+         * 漏洞类型。
+         * @type {string || null}
+         */
+        this.Nickname = null;
+
+        /**
+         * 危害说明。
+         * @type {string || null}
+         */
+        this.Harm = null;
+
+        /**
+         * 漏洞描述。
+         * @type {string || null}
+         */
+        this.Describe = null;
+
+        /**
+         * 解决方案。
+         * @type {string || null}
+         */
+        this.Solution = null;
+
+        /**
+         * 漏洞参考。
+         * @type {string || null}
+         */
+        this.From = null;
+
+        /**
+         * 漏洞通过该参数攻击。
+         * @type {string || null}
+         */
+        this.Parameter = null;
+
+        /**
+         * CreatedAt。
+         * @type {string || null}
+         */
+        this.CreatedAt = null;
+
+        /**
+         * UpdatedAt。
+         * @type {string || null}
+         */
+        this.UpdatedAt = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.IsReported = params.IsReported || null;
         this.Appid = params.Appid || null;
+        this.Uin = params.Uin || null;
+        this.Id = params.Id || null;
+        this.SiteId = params.SiteId || null;
+        this.TaskId = params.TaskId || null;
+        this.Level = params.Level || null;
+        this.Name = params.Name || null;
+        this.Url = params.Url || null;
+        this.Html = params.Html || null;
+        this.Nickname = params.Nickname || null;
+        this.Harm = params.Harm || null;
+        this.Describe = params.Describe || null;
+        this.Solution = params.Solution || null;
+        this.From = params.From || null;
+        this.Parameter = params.Parameter || null;
+        this.CreatedAt = params.CreatedAt || null;
+        this.UpdatedAt = params.UpdatedAt || null;
+
+    }
+}
+
+/**
+ * 用户漏洞数随时间变化统计数据
+ * @class
+ */
+class VulsTimeline extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * ID。
+         * @type {number || null}
+         */
+        this.Id = null;
+
+        /**
+         * 云用户appid。
+         * @type {number || null}
+         */
+        this.Appid = null;
+
+        /**
+         * 日期。
+         * @type {string || null}
+         */
+        this.Date = null;
+
+        /**
+         * 扫描页面总数量。
+         * @type {number || null}
+         */
+        this.PageCount = null;
+
+        /**
+         * 已验证网站总数量。
+         * @type {number || null}
+         */
+        this.SiteNum = null;
+
+        /**
+         * 受影响的网站总数量。
+         * @type {number || null}
+         */
+        this.ImpactSiteNum = null;
+
+        /**
+         * 高危漏洞总数量。
+         * @type {number || null}
+         */
+        this.VulsHighNum = null;
+
+        /**
+         * 中危漏洞总数量。
+         * @type {number || null}
+         */
+        this.VulsMiddleNum = null;
+
+        /**
+         * 低危漏洞总数量。
+         * @type {number || null}
+         */
+        this.VulsLowNum = null;
+
+        /**
+         * 风险提示总数量
+         * @type {number || null}
+         */
+        this.VulsNoticeNum = null;
+
+        /**
+         * 记录添加时间。
+         * @type {string || null}
+         */
+        this.CreatedAt = null;
+
+        /**
+         * 记录最近修改时间。
+         * @type {string || null}
+         */
+        this.UpdatedAt = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Id = params.Id || null;
+        this.Appid = params.Appid || null;
+        this.Date = params.Date || null;
+        this.PageCount = params.PageCount || null;
+        this.SiteNum = params.SiteNum || null;
+        this.ImpactSiteNum = params.ImpactSiteNum || null;
+        this.VulsHighNum = params.VulsHighNum || null;
+        this.VulsMiddleNum = params.VulsMiddleNum || null;
+        this.VulsLowNum = params.VulsLowNum || null;
+        this.VulsNoticeNum = params.VulsNoticeNum || null;
+        this.CreatedAt = params.CreatedAt || null;
+        this.UpdatedAt = params.UpdatedAt || null;
 
     }
 }
@@ -1237,159 +1701,24 @@ class ModifyMonitorAttributeRequest extends  AbstractModel {
 }
 
 /**
- * 漏洞数据
+ * DescribeVulsNumberTimeline返回参数结构体
  * @class
  */
-class Vul extends  AbstractModel {
+class DescribeVulsNumberTimelineResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 漏洞ID。
+         * 统计数据记录数量。
          * @type {number || null}
          */
-        this.Id = null;
+        this.TotalCount = null;
 
         /**
-         * 站点ID。
-         * @type {number || null}
+         * 用户漏洞数随时间变化统计数据。
+         * @type {Array.<VulsTimeline> || null}
          */
-        this.SiteId = null;
-
-        /**
-         * 扫描引擎的扫描任务ID。
-         * @type {number || null}
-         */
-        this.TaskId = null;
-
-        /**
-         * 漏洞级别：high、middle、low、notice。
-         * @type {string || null}
-         */
-        this.Level = null;
-
-        /**
-         * 漏洞名称。
-         * @type {string || null}
-         */
-        this.Name = null;
-
-        /**
-         * 出现漏洞的url。
-         * @type {string || null}
-         */
-        this.Url = null;
-
-        /**
-         * 网址/细节。
-         * @type {string || null}
-         */
-        this.Html = null;
-
-        /**
-         * 漏洞类型。
-         * @type {string || null}
-         */
-        this.Nickname = null;
-
-        /**
-         * 危害说明。
-         * @type {string || null}
-         */
-        this.Harm = null;
-
-        /**
-         * 漏洞描述。
-         * @type {string || null}
-         */
-        this.Describe = null;
-
-        /**
-         * 解决方案。
-         * @type {string || null}
-         */
-        this.Solution = null;
-
-        /**
-         * 漏洞参考。
-         * @type {string || null}
-         */
-        this.From = null;
-
-        /**
-         * 漏洞通过该参数攻击。
-         * @type {string || null}
-         */
-        this.Parameter = null;
-
-        /**
-         * CreatedAt。
-         * @type {string || null}
-         */
-        this.CreatedAt = null;
-
-        /**
-         * UpdatedAt。
-         * @type {string || null}
-         */
-        this.UpdatedAt = null;
-
-        /**
-         * 是否已经添加误报，0-否，1-是。
-         * @type {number || null}
-         */
-        this.IsReported = null;
-
-        /**
-         * 云用户appid。
-         * @type {number || null}
-         */
-        this.Appid = null;
-
-        /**
-         * 云用户标识。
-         * @type {string || null}
-         */
-        this.Uin = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Id = params.Id || null;
-        this.SiteId = params.SiteId || null;
-        this.TaskId = params.TaskId || null;
-        this.Level = params.Level || null;
-        this.Name = params.Name || null;
-        this.Url = params.Url || null;
-        this.Html = params.Html || null;
-        this.Nickname = params.Nickname || null;
-        this.Harm = params.Harm || null;
-        this.Describe = params.Describe || null;
-        this.Solution = params.Solution || null;
-        this.From = params.From || null;
-        this.Parameter = params.Parameter || null;
-        this.CreatedAt = params.CreatedAt || null;
-        this.UpdatedAt = params.UpdatedAt || null;
-        this.IsReported = params.IsReported || null;
-        this.Appid = params.Appid || null;
-        this.Uin = params.Uin || null;
-
-    }
-}
-
-/**
- * ModifySiteAttribute返回参数结构体
- * @class
- */
-class ModifySiteAttributeResponse extends  AbstractModel {
-    constructor(){
-        super();
+        this.VulsTimeline = null;
 
         /**
          * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
@@ -1406,6 +1735,51 @@ class ModifySiteAttributeResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.TotalCount = params.TotalCount || null;
+
+        if (params.VulsTimeline) {
+            this.VulsTimeline = new Array();
+            for (let z in params.VulsTimeline) {
+                let obj = new VulsTimeline();
+                obj.deserialize(params.VulsTimeline[z]);
+                this.VulsTimeline.push(obj);
+            }
+        }
+        this.RequestId = params.RequestId || null;
+
+    }
+}
+
+/**
+ * CreateVulsReport返回参数结构体
+ * @class
+ */
+class CreateVulsReportResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 报告下载地址
+         * @type {string || null}
+         */
+        this.ReportFileUrl = null;
+
+        /**
+         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ReportFileUrl = params.ReportFileUrl || null;
         this.RequestId = params.RequestId || null;
 
     }
@@ -1684,6 +2058,66 @@ class Site extends  AbstractModel {
         super();
 
         /**
+         * 扫描进度，百分比整数
+         * @type {number || null}
+         */
+        this.Progress = null;
+
+        /**
+         * 云用户appid。
+         * @type {number || null}
+         */
+        this.Appid = null;
+
+        /**
+         * 云用户标识。
+         * @type {string || null}
+         */
+        this.Uin = null;
+
+        /**
+         * 网站是否需要登录扫描：0-未知；-1-不需要；1-需要。
+         * @type {number || null}
+         */
+        this.NeedLogin = null;
+
+        /**
+         * 登录后的cookie。
+         * @type {string || null}
+         */
+        this.LoginCookie = null;
+
+        /**
+         * 登录后的cookie是否有效：0-无效；1-有效。
+         * @type {number || null}
+         */
+        this.LoginCookieValid = null;
+
+        /**
+         * 用于测试cookie是否有效的URL。
+         * @type {string || null}
+         */
+        this.LoginCheckUrl = null;
+
+        /**
+         * 用于测试cookie是否有效的关键字。
+         * @type {string || null}
+         */
+        this.LoginCheckKw = null;
+
+        /**
+         * 禁止扫描器扫描的目录关键字。
+         * @type {string || null}
+         */
+        this.ScanDisallow = null;
+
+        /**
+         * 访问网站的客户端标识。
+         * @type {string || null}
+         */
+        this.UserAgent = null;
+
+        /**
          * 站点ID。
          * @type {number || null}
          */
@@ -1815,66 +2249,6 @@ class Site extends  AbstractModel {
          */
         this.LastScanNoticeNum = null;
 
-        /**
-         * 扫描进度，百分比整数
-         * @type {number || null}
-         */
-        this.Progress = null;
-
-        /**
-         * 云用户appid。
-         * @type {number || null}
-         */
-        this.Appid = null;
-
-        /**
-         * 云用户标识。
-         * @type {string || null}
-         */
-        this.Uin = null;
-
-        /**
-         * 网站是否需要登录扫描：0-未知；-1-不需要；1-需要。
-         * @type {number || null}
-         */
-        this.NeedLogin = null;
-
-        /**
-         * 登录后的cookie。
-         * @type {string || null}
-         */
-        this.LoginCookie = null;
-
-        /**
-         * 登录后的cookie是否有效：0-无效；1-有效。
-         * @type {number || null}
-         */
-        this.LoginCookieValid = null;
-
-        /**
-         * 用于测试cookie是否有效的URL。
-         * @type {string || null}
-         */
-        this.LoginCheckUrl = null;
-
-        /**
-         * 用于测试cookie是否有效的关键字。
-         * @type {string || null}
-         */
-        this.LoginCheckKw = null;
-
-        /**
-         * 禁止扫描器扫描的目录关键字。
-         * @type {string || null}
-         */
-        this.ScanDisallow = null;
-
-        /**
-         * 访问网站的客户端标识。
-         * @type {string || null}
-         */
-        this.UserAgent = null;
-
     }
 
     /**
@@ -1884,6 +2258,16 @@ class Site extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.Progress = params.Progress || null;
+        this.Appid = params.Appid || null;
+        this.Uin = params.Uin || null;
+        this.NeedLogin = params.NeedLogin || null;
+        this.LoginCookie = params.LoginCookie || null;
+        this.LoginCookieValid = params.LoginCookieValid || null;
+        this.LoginCheckUrl = params.LoginCheckUrl || null;
+        this.LoginCheckKw = params.LoginCheckKw || null;
+        this.ScanDisallow = params.ScanDisallow || null;
+        this.UserAgent = params.UserAgent || null;
         this.Id = params.Id || null;
         this.MonitorId = params.MonitorId || null;
         this.Url = params.Url || null;
@@ -1906,16 +2290,6 @@ class Site extends  AbstractModel {
         this.LastScanRateLimit = params.LastScanRateLimit || null;
         this.LastScanVulsNum = params.LastScanVulsNum || null;
         this.LastScanNoticeNum = params.LastScanNoticeNum || null;
-        this.Progress = params.Progress || null;
-        this.Appid = params.Appid || null;
-        this.Uin = params.Uin || null;
-        this.NeedLogin = params.NeedLogin || null;
-        this.LoginCookie = params.LoginCookie || null;
-        this.LoginCookieValid = params.LoginCookieValid || null;
-        this.LoginCheckUrl = params.LoginCheckUrl || null;
-        this.LoginCheckKw = params.LoginCheckKw || null;
-        this.ScanDisallow = params.ScanDisallow || null;
-        this.UserAgent = params.UserAgent || null;
 
     }
 }
@@ -2096,27 +2470,34 @@ module.exports = {
     DescribeMonitorsResponse: DescribeMonitorsResponse,
     DeleteSitesRequest: DeleteSitesRequest,
     DescribeConfigRequest: DescribeConfigRequest,
+    DescribeVulsRequest: DescribeVulsRequest,
     ModifyConfigAttributeResponse: ModifyConfigAttributeResponse,
     CreateSitesResponse: CreateSitesResponse,
+    DescribeVulsNumberRequest: DescribeVulsNumberRequest,
     ModifyMonitorAttributeResponse: ModifyMonitorAttributeResponse,
-    CreateMonitorsResponse: CreateMonitorsResponse,
+    ModifySiteAttributeResponse: ModifySiteAttributeResponse,
+    CreateVulsReportRequest: CreateVulsReportRequest,
     CreateSitesScansResponse: CreateSitesScansResponse,
     SitesVerification: SitesVerification,
     DescribeSiteQuotaResponse: DescribeSiteQuotaResponse,
+    DescribeVulsNumberResponse: DescribeVulsNumberResponse,
     CreateVulsMisinformationRequest: CreateVulsMisinformationRequest,
-    DescribeVulsRequest: DescribeVulsRequest,
+    DescribeVulsNumberTimelineRequest: DescribeVulsNumberTimelineRequest,
     MonitorMiniSite: MonitorMiniSite,
     CreateSitesScansRequest: CreateSitesScansRequest,
+    CreateMonitorsResponse: CreateMonitorsResponse,
     DescribeVulsResponse: DescribeVulsResponse,
     VerifySitesResponse: VerifySitesResponse,
     CreateMonitorsRequest: CreateMonitorsRequest,
     DeleteMonitorsResponse: DeleteMonitorsResponse,
     Monitor: Monitor,
+    Vul: Vul,
+    VulsTimeline: VulsTimeline,
     CreateVulsMisinformationResponse: CreateVulsMisinformationResponse,
     VerifySitesRequest: VerifySitesRequest,
     ModifyMonitorAttributeRequest: ModifyMonitorAttributeRequest,
-    Vul: Vul,
-    ModifySiteAttributeResponse: ModifySiteAttributeResponse,
+    DescribeVulsNumberTimelineResponse: DescribeVulsNumberTimelineResponse,
+    CreateVulsReportResponse: CreateVulsReportResponse,
     CreateSitesRequest: CreateSitesRequest,
     ModifyConfigAttributeRequest: ModifyConfigAttributeRequest,
     Filter: Filter,
