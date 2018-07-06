@@ -42,6 +42,7 @@ const OsVersion = models.OsVersion;
 const CreateKeyPairResponse = models.CreateKeyPairResponse;
 const ModifyKeyPairAttributeResponse = models.ModifyKeyPairAttributeResponse;
 const ModifyInstancesChargeTypeRequest = models.ModifyInstancesChargeTypeRequest;
+const DescribeInstanceVncUrlRequest = models.DescribeInstanceVncUrlRequest;
 const ModifyImageSharePermissionRequest = models.ModifyImageSharePermissionRequest;
 const DisassociateInstancesKeyPairsResponse = models.DisassociateInstancesKeyPairsResponse;
 const InquiryPriceResizeInstanceDisksRequest = models.InquiryPriceResizeInstanceDisksRequest;
@@ -60,11 +61,11 @@ const Placement = models.Placement;
 const DescribeDisasterRecoverGroupsRequest = models.DescribeDisasterRecoverGroupsRequest;
 const SyncImagesRequest = models.SyncImagesRequest;
 const DisassociateInstancesKeyPairsRequest = models.DisassociateInstancesKeyPairsRequest;
-const InstanceMarketOptionsRequest = models.InstanceMarketOptionsRequest;
-const ImportKeyPairRequest = models.ImportKeyPairRequest;
+const DescribeImageQuotaRequest = models.DescribeImageQuotaRequest;
+const InstanceFamilyConfig = models.InstanceFamilyConfig;
 const CreateImageResponse = models.CreateImageResponse;
 const StopInstancesResponse = models.StopInstancesResponse;
-const DescribeImageQuotaRequest = models.DescribeImageQuotaRequest;
+const InstanceMarketOptionsRequest = models.InstanceMarketOptionsRequest;
 const InquiryPriceResetInstancesInternetMaxBandwidthRequest = models.InquiryPriceResetInstancesInternetMaxBandwidthRequest;
 const ResetInstancesPasswordResponse = models.ResetInstancesPasswordResponse;
 const InquiryPriceRunInstancesRequest = models.InquiryPriceRunInstancesRequest;
@@ -83,12 +84,12 @@ const CreateImageRequest = models.CreateImageRequest;
 const Instance = models.Instance;
 const EnhancedService = models.EnhancedService;
 const InquiryPriceResetInstancesTypeRequest = models.InquiryPriceResetInstancesTypeRequest;
+const DescribeInstanceVncUrlResponse = models.DescribeInstanceVncUrlResponse;
 const DescribeDisasterRecoverGroupsResponse = models.DescribeDisasterRecoverGroupsResponse;
 const RunSecurityServiceEnabled = models.RunSecurityServiceEnabled;
 const ActionTimer = models.ActionTimer;
 const TagSpecification = models.TagSpecification;
 const ResetInstancesInternetMaxBandwidthRequest = models.ResetInstancesInternetMaxBandwidthRequest;
-const InstanceFamilyConfig = models.InstanceFamilyConfig;
 const AllocateHostsResponse = models.AllocateHostsResponse;
 const ImportImageRequest = models.ImportImageRequest;
 const SpotMarketOptions = models.SpotMarketOptions;
@@ -134,6 +135,7 @@ const DescribeImagesRequest = models.DescribeImagesRequest;
 const ModifyImageAttributeRequest = models.ModifyImageAttributeRequest;
 const ResizeInstanceDisksResponse = models.ResizeInstanceDisksResponse;
 const ModifyInstancesRenewFlagRequest = models.ModifyInstancesRenewFlagRequest;
+const ImportKeyPairRequest = models.ImportKeyPairRequest;
 const KeyPair = models.KeyPair;
 const RenewInstancesResponse = models.RenewInstancesResponse;
 const RunMonitorServiceEnabled = models.RunMonitorServiceEnabled;
@@ -314,18 +316,14 @@ class CvmClient extends AbstractClient {
     }
 
     /**
-     * 本接口（SyncImages）用于将自定义镜像同步到其它地区。
-
-* 该接口每次调用只支持同步一个镜像。
-* 该接口支持多个同步地域。
-* 单个帐号在每个地域最多支持存在10个自定义镜像。
-     * @param {SyncImagesRequest} req
-     * @param {function(string, SyncImagesResponse):void} cb
+     * 本接口(DescribeRegions)用于查询地域信息。
+     * @param {DescribeRegionsRequest} req
+     * @param {function(string, DescribeRegionsResponse):void} cb
      * @public
      */
-    SyncImages(req, cb) {
-        let resp = new SyncImagesResponse();
-        this.request("SyncImages", req, resp, cb);
+    DescribeRegions(req, cb) {
+        let resp = new DescribeRegionsResponse();
+        this.request("DescribeRegions", req, resp, cb);
     }
 
     /**
@@ -430,6 +428,21 @@ class CvmClient extends AbstractClient {
     ImportKeyPair(req, cb) {
         let resp = new ImportKeyPairResponse();
         this.request("ImportKeyPair", req, resp, cb);
+    }
+
+    /**
+     * 本接口（SyncImages）用于将自定义镜像同步到其它地区。
+
+* 该接口每次调用只支持同步一个镜像。
+* 该接口支持多个同步地域。
+* 单个帐号在每个地域最多支持存在10个自定义镜像。
+     * @param {SyncImagesRequest} req
+     * @param {function(string, SyncImagesResponse):void} cb
+     * @public
+     */
+    SyncImages(req, cb) {
+        let resp = new SyncImagesResponse();
+        this.request("SyncImages", req, resp, cb);
     }
 
     /**
@@ -671,14 +684,14 @@ class CvmClient extends AbstractClient {
     }
 
     /**
-     * 本接口(DescribeRegions)用于查询地域信息。
-     * @param {DescribeRegionsRequest} req
-     * @param {function(string, DescribeRegionsResponse):void} cb
+     * 本接口（DescribeInstanceFamilyConfigs）查询当前用户和地域所支持的机型族列表信息。
+     * @param {DescribeInstanceFamilyConfigsRequest} req
+     * @param {function(string, DescribeInstanceFamilyConfigsResponse):void} cb
      * @public
      */
-    DescribeRegions(req, cb) {
-        let resp = new DescribeRegionsResponse();
-        this.request("DescribeRegions", req, resp, cb);
+    DescribeInstanceFamilyConfigs(req, cb) {
+        let resp = new DescribeInstanceFamilyConfigsResponse();
+        this.request("DescribeInstanceFamilyConfigs", req, resp, cb);
     }
 
     /**
@@ -780,14 +793,28 @@ class CvmClient extends AbstractClient {
     }
 
     /**
-     * 本接口（DescribeInstanceFamilyConfigs）查询当前用户和地域所支持的机型族列表信息。
-     * @param {DescribeInstanceFamilyConfigsRequest} req
-     * @param {function(string, DescribeInstanceFamilyConfigsResponse):void} cb
+     * 本接口 ( DescribeInstanceVncUrl ) 用于查询实例管理终端地址。
+
+* 处于 `STOPPED` 状态的机器无法使用此功能。
+* 管理终端地址的有效期为 15 秒，调用接口成功后如果 15 秒内不使用该链接进行访问，管理终端地址自动失效，您需要重新查询。
+* 管理终端地址一旦被访问，将自动失效，您需要重新查询。
+* 如果连接断开，每分钟内重新连接的次数不能超过 30 次。
+* 获取到 `InstanceVncUrl` 后，您需要在在链接 <https://img.qcloud.com/qcloud/app/active_vnc/index.html?> 末尾加上参数 `InstanceVncUrl=xxxx`  。
+  - 参数 `InstanceVncUrl` ：调用接口成功后会返回的 `InstanceVncUrl` 的值。
+
+    最后组成的 URL 格式如下：
+
+```
+https://img.qcloud.com/qcloud/app/active_vnc/index.html?InstanceVncUrl=wss%3A%2F%2Fbjvnc.qcloud.com%3A26789%2Fvnc%3Fs%3DaHpjWnRVMFNhYmxKdDM5MjRHNlVTSVQwajNUSW0wb2tBbmFtREFCTmFrcy8vUUNPMG0wSHZNOUUxRm5PMmUzWmFDcWlOdDJIbUJxSTZDL0RXcHZxYnZZMmRkWWZWcEZia2lyb09XMzdKNmM9
+```
+
+     * @param {DescribeInstanceVncUrlRequest} req
+     * @param {function(string, DescribeInstanceVncUrlResponse):void} cb
      * @public
      */
-    DescribeInstanceFamilyConfigs(req, cb) {
-        let resp = new DescribeInstanceFamilyConfigsResponse();
-        this.request("DescribeInstanceFamilyConfigs", req, resp, cb);
+    DescribeInstanceVncUrl(req, cb) {
+        let resp = new DescribeInstanceVncUrlResponse();
+        this.request("DescribeInstanceVncUrl", req, resp, cb);
     }
 
     /**
