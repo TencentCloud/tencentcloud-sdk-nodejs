@@ -895,12 +895,6 @@ class SellConfig extends  AbstractModel {
         super();
 
         /**
-         * 设备类型
-         * @type {string || null}
-         */
-        this.Device = null;
-
-        /**
          * 售卖规格描述
          * @type {string || null}
          */
@@ -972,6 +966,12 @@ class SellConfig extends  AbstractModel {
          */
         this.Status = null;
 
+        /**
+         * 设备类型
+         * @type {string || null}
+         */
+        this.Device = null;
+
     }
 
     /**
@@ -981,7 +981,6 @@ class SellConfig extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Device = params.Device || null;
         this.Type = params.Type || null;
         this.CdbType = params.CdbType || null;
         this.Memory = params.Memory || null;
@@ -994,6 +993,7 @@ class SellConfig extends  AbstractModel {
         this.Iops = params.Iops || null;
         this.Info = params.Info || null;
         this.Status = params.Status || null;
+        this.Device = params.Device || null;
 
     }
 }
@@ -1710,16 +1710,16 @@ class RoGroup extends  AbstractModel {
         super();
 
         /**
-         * 只读组ID
-         * @type {string || null}
-         */
-        this.RoGroupId = null;
-
-        /**
          * 只读组模式，可选值为：alone-系统自动分配只读组；allinone-新建只读组；join-使用现有只读组
          * @type {string || null}
          */
         this.RoGroupMode = null;
+
+        /**
+         * 只读组ID
+         * @type {string || null}
+         */
+        this.RoGroupId = null;
 
         /**
          * 只读组名称
@@ -1757,6 +1757,24 @@ class RoGroup extends  AbstractModel {
          */
         this.Weight = null;
 
+        /**
+         * 只读组中的只读实例详情
+         * @type {Array.<RoInstanceInfo> || null}
+         */
+        this.RoInstances = null;
+
+        /**
+         * 只读组的内网IP
+         * @type {string || null}
+         */
+        this.Vip = null;
+
+        /**
+         * 只读组的内网端口号
+         * @type {number || null}
+         */
+        this.Vport = null;
+
     }
 
     /**
@@ -1766,14 +1784,25 @@ class RoGroup extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RoGroupId = params.RoGroupId || null;
         this.RoGroupMode = params.RoGroupMode || null;
+        this.RoGroupId = params.RoGroupId || null;
         this.RoGroupName = params.RoGroupName || null;
         this.RoOfflineDelay = params.RoOfflineDelay || null;
         this.RoMaxDelayTime = params.RoMaxDelayTime || null;
         this.MinRoInGroup = params.MinRoInGroup || null;
         this.WeightMode = params.WeightMode || null;
         this.Weight = params.Weight || null;
+
+        if (params.RoInstances) {
+            this.RoInstances = new Array();
+            for (let z in params.RoInstances) {
+                let obj = new RoInstanceInfo();
+                obj.deserialize(params.RoInstances[z]);
+                this.RoInstances.push(obj);
+            }
+        }
+        this.Vip = params.Vip || null;
+        this.Vport = params.Vport || null;
 
     }
 }
@@ -2272,6 +2301,24 @@ class CreateDBInstanceHourRequest extends  AbstractModel {
         super();
 
         /**
+         * 实例数量，默认值为1, 最小值1，最大值为100
+         * @type {number || null}
+         */
+        this.GoodsNum = null;
+
+        /**
+         * 实例内存大小，单位：MB，请使用[获取云数据库可售卖规格](https://cloud.tencent.com/document/api/236/17229)接口获取可创建的内存规格
+         * @type {number || null}
+         */
+        this.Memory = null;
+
+        /**
+         * 实例硬盘大小，单位：GB，请使用[获取云数据库可售卖规格](https://cloud.tencent.com/document/api/236/17229)接口获取可创建的硬盘范围
+         * @type {number || null}
+         */
+        this.Volume = null;
+
+        /**
          * MySQL版本，值包括：5.5、5.6和5.7，请使用[获取云数据库可售卖规格](https://cloud.tencent.com/document/api/236/17229)接口获取可创建的实例版本
          * @type {string || null}
          */
@@ -2294,24 +2341,6 @@ class CreateDBInstanceHourRequest extends  AbstractModel {
          * @type {number || null}
          */
         this.ProjectId = null;
-
-        /**
-         * 实例数量，默认值为1, 最小值1，最大值为100
-         * @type {number || null}
-         */
-        this.GoodsNum = null;
-
-        /**
-         * 实例内存大小，单位：MB，请使用[获取云数据库可售卖规格](https://cloud.tencent.com/document/api/236/17229)接口获取可创建的内存规格
-         * @type {number || null}
-         */
-        this.Memory = null;
-
-        /**
-         * 实例硬盘大小，单位：GB，请使用[获取云数据库可售卖规格](https://cloud.tencent.com/document/api/236/17229)接口获取可创建的硬盘范围
-         * @type {number || null}
-         */
-        this.Volume = null;
 
         /**
          * 可用区信息，该参数缺省时，系统会自动选择一个可用区，请使用[获取云数据库可售卖规格](https://cloud.tencent.com/document/api/236/17229)接口获取可创建的可用区
@@ -2412,13 +2441,13 @@ class CreateDBInstanceHourRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.GoodsNum = params.GoodsNum || null;
+        this.Memory = params.Memory || null;
+        this.Volume = params.Volume || null;
         this.EngineVersion = params.EngineVersion || null;
         this.UniqVpcId = params.UniqVpcId || null;
         this.UniqSubnetId = params.UniqSubnetId || null;
         this.ProjectId = params.ProjectId || null;
-        this.GoodsNum = params.GoodsNum || null;
-        this.Memory = params.Memory || null;
-        this.Volume = params.Volume || null;
         this.Zone = params.Zone || null;
         this.MasterInstanceId = params.MasterInstanceId || null;
         this.InstanceRole = params.InstanceRole || null;
@@ -4297,16 +4326,16 @@ class InitDBInstancesRequest extends  AbstractModel {
         this.NewPassword = null;
 
         /**
-         * 实例的端口
-         * @type {number || null}
-         */
-        this.Vport = null;
-
-        /**
          * 实例的参数列表，目前支持设置“character_set_server”、“lower_case_table_names”参数。其中，“character_set_server”参数可选值为["utf8","latin1","gbk","utf8mb4"]；“lower_case_table_names”可选值为[“0”,“1”]
          * @type {Array.<ParamInfo> || null}
          */
         this.Parameters = null;
+
+        /**
+         * 实例的端口
+         * @type {number || null}
+         */
+        this.Vport = null;
 
     }
 
@@ -4319,7 +4348,6 @@ class InitDBInstancesRequest extends  AbstractModel {
         }
         this.InstanceIds = params.InstanceIds || null;
         this.NewPassword = params.NewPassword || null;
-        this.Vport = params.Vport || null;
 
         if (params.Parameters) {
             this.Parameters = new Array();
@@ -4329,6 +4357,7 @@ class InitDBInstancesRequest extends  AbstractModel {
                 this.Parameters.push(obj);
             }
         }
+        this.Vport = params.Vport || null;
 
     }
 }
@@ -4389,7 +4418,7 @@ class InstanceInfo extends  AbstractModel {
 
         /**
          * 只读vip信息
-         * @type {Array.<RoVipInfo> || null}
+         * @type {RoVipInfo || null}
          */
         this.RoVipInfo = null;
 
@@ -4490,12 +4519,6 @@ class InstanceInfo extends  AbstractModel {
         this.TaskStatus = null;
 
         /**
-         * 主实例信息
-         * @type {MasterInfo || null}
-         */
-        this.MasterInfo = null;
-
-        /**
          * 实例售卖机型
          * @type {string || null}
          */
@@ -4573,6 +4596,12 @@ class InstanceInfo extends  AbstractModel {
          */
         this.UniqSubnetId = null;
 
+        /**
+         * 主实例信息
+         * @type {MasterInfo || null}
+         */
+        this.MasterInfo = null;
+
     }
 
     /**
@@ -4587,12 +4616,9 @@ class InstanceInfo extends  AbstractModel {
         this.InitFlag = params.InitFlag || null;
 
         if (params.RoVipInfo) {
-            this.RoVipInfo = new Array();
-            for (let z in params.RoVipInfo) {
-                let obj = new RoVipInfo();
-                obj.deserialize(params.RoVipInfo[z]);
-                this.RoVipInfo.push(obj);
-            }
+            let obj = new RoVipInfo();
+            obj.deserialize(params.RoVipInfo)
+            this.RoVipInfo = obj;
         }
         this.Memory = params.Memory || null;
         this.Status = params.Status || null;
@@ -4623,12 +4649,6 @@ class InstanceInfo extends  AbstractModel {
         this.DeadlineTime = params.DeadlineTime || null;
         this.DeployMode = params.DeployMode || null;
         this.TaskStatus = params.TaskStatus || null;
-
-        if (params.MasterInfo) {
-            let obj = new MasterInfo();
-            obj.deserialize(params.MasterInfo)
-            this.MasterInfo = obj;
-        }
         this.DeviceType = params.DeviceType || null;
         this.EngineVersion = params.EngineVersion || null;
         this.InstanceName = params.InstanceName || null;
@@ -4650,6 +4670,12 @@ class InstanceInfo extends  AbstractModel {
         this.CdbError = params.CdbError || null;
         this.UniqVpcId = params.UniqVpcId || null;
         this.UniqSubnetId = params.UniqSubnetId || null;
+
+        if (params.MasterInfo) {
+            let obj = new MasterInfo();
+            obj.deserialize(params.MasterInfo)
+            this.MasterInfo = obj;
+        }
 
     }
 }
@@ -5113,16 +5139,16 @@ class ModifyAccountDescriptionRequest extends  AbstractModel {
         this.InstanceId = null;
 
         /**
-         * 数据库账号的备注信息。
-         * @type {string || null}
-         */
-        this.Description = null;
-
-        /**
          * 云数据库账号。
          * @type {Array.<Account> || null}
          */
         this.Accounts = null;
+
+        /**
+         * 数据库账号的备注信息。
+         * @type {string || null}
+         */
+        this.Description = null;
 
     }
 
@@ -5134,7 +5160,6 @@ class ModifyAccountDescriptionRequest extends  AbstractModel {
             return;
         }
         this.InstanceId = params.InstanceId || null;
-        this.Description = params.Description || null;
 
         if (params.Accounts) {
             this.Accounts = new Array();
@@ -5144,6 +5169,7 @@ class ModifyAccountDescriptionRequest extends  AbstractModel {
                 this.Accounts.push(obj);
             }
         }
+        this.Description = params.Description || null;
 
     }
 }
@@ -5487,6 +5513,188 @@ class ZoneSellConf extends  AbstractModel {
             obj.deserialize(params.ZoneConf)
             this.ZoneConf = obj;
         }
+
+    }
+}
+
+/**
+ * RO实例的详细信息
+ * @class
+ */
+class RoInstanceInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * RO组对应的主实例的ID
+         * @type {string || null}
+         */
+        this.MasterInstanceId = null;
+
+        /**
+         * RO实例在RO组内的状态，可能的值：online-在线，offline-下线
+         * @type {string || null}
+         */
+        this.RoStatus = null;
+
+        /**
+         * RO实例在RO组内上一次下线的时间
+         * @type {string || null}
+         */
+        this.OfflineTime = null;
+
+        /**
+         * RO实例在RO组内的权重
+         * @type {number || null}
+         */
+        this.Weight = null;
+
+        /**
+         * RO实例所在区域名称，如ap-shanghai
+         * @type {string || null}
+         */
+        this.Region = null;
+
+        /**
+         * RO可用区的正式名称，如ap-shanghai-1
+         * @type {string || null}
+         */
+        this.Zone = null;
+
+        /**
+         * RO实例ID，格式如：cdbro-c1nl9rpv
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * RO实例状态，可能返回值：0-创建中，1-运行中，4-删除中
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * 实例类型，可能返回值：1-主实例，2-灾备实例，3-只读实例
+         * @type {number || null}
+         */
+        this.InstanceType = null;
+
+        /**
+         * RO实例名称
+         * @type {string || null}
+         */
+        this.InstanceName = null;
+
+        /**
+         * 按量计费状态，可能的取值：1-正常，2-欠费
+         * @type {number || null}
+         */
+        this.HourFeeStatus = null;
+
+        /**
+         * RO实例任务状态，可能返回值：<br>0-没有任务<br>1-升级中<br>2-数据导入中<br>3-开放Slave中<br>4-外网访问开通中<br>5-批量操作执行中<br>6-回档中<br>7-外网访问关闭中<br>8-密码修改中<br>9-实例名修改中<br>10-重启中<br>12-自建迁移中<br>13-删除库表中<br>14-灾备实例创建同步中
+         * @type {number || null}
+         */
+        this.TaskStatus = null;
+
+        /**
+         * RO实例内存大小，单位：MB
+         * @type {number || null}
+         */
+        this.Memory = null;
+
+        /**
+         * RO实例硬盘大小，单位：GB
+         * @type {number || null}
+         */
+        this.Volume = null;
+
+        /**
+         * 每次查询数量
+         * @type {number || null}
+         */
+        this.Qps = null;
+
+        /**
+         * RO实例的内网IP地址
+         * @type {string || null}
+         */
+        this.Vip = null;
+
+        /**
+         * RO实例访问端口
+         * @type {number || null}
+         */
+        this.Vport = null;
+
+        /**
+         * RO实例所在私有网络ID
+         * @type {number || null}
+         */
+        this.VpcId = null;
+
+        /**
+         * RO实例所在私有网络子网ID
+         * @type {number || null}
+         */
+        this.SubnetId = null;
+
+        /**
+         * RO实例规格描述，目前可取值 CUSTOM
+         * @type {string || null}
+         */
+        this.DeviceType = null;
+
+        /**
+         * RO实例数据库引擎版本，可能返回值：5.1、5.5、5.6和5.7
+         * @type {string || null}
+         */
+        this.EngineVersion = null;
+
+        /**
+         * RO实例到期时间，时间格式：yyyy-mm-dd hh:mm:ss，如实例为按量计费模式，则此字段值为0000-00-00 00:00:00
+         * @type {string || null}
+         */
+        this.DeadlineTime = null;
+
+        /**
+         * RO实例计费类型，可能返回值：0-包年包月，1-按量计费，2-后付费月结
+         * @type {number || null}
+         */
+        this.PayType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MasterInstanceId = params.MasterInstanceId || null;
+        this.RoStatus = params.RoStatus || null;
+        this.OfflineTime = params.OfflineTime || null;
+        this.Weight = params.Weight || null;
+        this.Region = params.Region || null;
+        this.Zone = params.Zone || null;
+        this.InstanceId = params.InstanceId || null;
+        this.Status = params.Status || null;
+        this.InstanceType = params.InstanceType || null;
+        this.InstanceName = params.InstanceName || null;
+        this.HourFeeStatus = params.HourFeeStatus || null;
+        this.TaskStatus = params.TaskStatus || null;
+        this.Memory = params.Memory || null;
+        this.Volume = params.Volume || null;
+        this.Qps = params.Qps || null;
+        this.Vip = params.Vip || null;
+        this.Vport = params.Vport || null;
+        this.VpcId = params.VpcId || null;
+        this.SubnetId = params.SubnetId || null;
+        this.DeviceType = params.DeviceType || null;
+        this.EngineVersion = params.EngineVersion || null;
+        this.DeadlineTime = params.DeadlineTime || null;
+        this.PayType = params.PayType || null;
 
     }
 }
@@ -6884,6 +7092,7 @@ module.exports = {
     UpgradeDBInstanceRequest: UpgradeDBInstanceRequest,
     DescribeDatabasesResponse: DescribeDatabasesResponse,
     ZoneSellConf: ZoneSellConf,
+    RoInstanceInfo: RoInstanceInfo,
     IsolateDBInstanceRequest: IsolateDBInstanceRequest,
     ModifyAccountPrivilegesRequest: ModifyAccountPrivilegesRequest,
     Account: Account,

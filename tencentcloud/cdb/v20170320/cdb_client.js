@@ -102,6 +102,7 @@ const InstanceRebootTime = models.InstanceRebootTime;
 const UpgradeDBInstanceRequest = models.UpgradeDBInstanceRequest;
 const DescribeDatabasesResponse = models.DescribeDatabasesResponse;
 const ZoneSellConf = models.ZoneSellConf;
+const RoInstanceInfo = models.RoInstanceInfo;
 const IsolateDBInstanceRequest = models.IsolateDBInstanceRequest;
 const ModifyAccountPrivilegesRequest = models.ModifyAccountPrivilegesRequest;
 const Account = models.Account;

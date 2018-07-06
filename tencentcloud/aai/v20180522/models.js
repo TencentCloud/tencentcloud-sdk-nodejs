@@ -147,28 +147,28 @@ class TextToVoiceRequest extends  AbstractModel {
         this.SessionId = null;
 
         /**
-         * 项目id
-         * @type {number || null}
-         */
-        this.ProjectId = null;
-
-        /**
          * 模型类型，1-默认模型
          * @type {number || null}
          */
         this.ModelType = null;
 
         /**
-         * 音量大小，暂仅支持默认值1.0
+         * 音量大小，暂仅支持默认值1
          * @type {number || null}
          */
         this.Volume = null;
 
         /**
-         * 语速，暂仅支持默认值1.0
+         * 语速，暂仅支持默认值1
          * @type {number || null}
          */
         this.Speed = null;
+
+        /**
+         * 用户自定义项目id，默认为0
+         * @type {number || null}
+         */
+        this.ProjectId = null;
 
         /**
          * 音色，1-默认音色
@@ -199,10 +199,10 @@ class TextToVoiceRequest extends  AbstractModel {
         }
         this.Text = params.Text || null;
         this.SessionId = params.SessionId || null;
-        this.ProjectId = params.ProjectId || null;
         this.ModelType = params.ModelType || null;
         this.Volume = params.Volume || null;
         this.Speed = params.Speed || null;
+        this.ProjectId = params.ProjectId || null;
         this.VoiceType = params.VoiceType || null;
         this.PrimaryLanguage = params.PrimaryLanguage || null;
         this.SampleRate = params.SampleRate || null;
