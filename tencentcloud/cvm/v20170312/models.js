@@ -97,6 +97,12 @@ class RenewInstancesRequest extends  AbstractModel {
          */
         this.InstanceChargePrepaid = null;
 
+        /**
+         * 是否续费弹性数据盘。取值范围：<br><li>TRUE：表示续费包年包月实例同时续费其挂载的弹性数据盘<br><li>FALSE：表示续费包年包月实例同时不再续费其挂载的弹性数据盘<br><br>默认取值：TRUE。
+         * @type {boolean || null}
+         */
+        this.RenewPortableDataDisk = null;
+
     }
 
     /**
@@ -113,6 +119,7 @@ class RenewInstancesRequest extends  AbstractModel {
             obj.deserialize(params.InstanceChargePrepaid)
             this.InstanceChargePrepaid = obj;
         }
+        this.RenewPortableDataDisk = params.RenewPortableDataDisk || null;
 
     }
 }
@@ -731,7 +738,7 @@ class RunInstancesRequest extends  AbstractModel {
         this.ImageId = null;
 
         /**
-         * 实例[计费类型](https://cloud.tencent.com/document/product/213/2180)。<br><li>PREPAID：预付费，即包年包月<br><li>POSTPAID_BY_HOUR：按小时后付费<br><li>CDHPAID：独享母机付费（基于专用宿主机创建，宿主机部分的资源不收费）<br>默认值：POSTPAID_BY_HOUR。
+         * 实例[计费类型](https://cloud.tencent.com/document/product/213/2180)。<br><li>PREPAID：预付费，即包年包月<br><li>POSTPAID_BY_HOUR：按小时后付费<br><li>CDHPAID：独享母机付费（基于专用宿主机创建，宿主机部分的资源不收费）<br><li>SPOTPAID：竞价付费<br>默认值：POSTPAID_BY_HOUR。
          * @type {string || null}
          */
         this.InstanceChargeType = null;
@@ -810,7 +817,7 @@ class RunInstancesRequest extends  AbstractModel {
         this.ClientToken = null;
 
         /**
-         * 云服务器的主机名。<br><li>点号（.）和短横线（-）不能作为 HostName 的首尾字符，不能连续使用。<br><li>Windows 实例：名字符长度为[2, 15]，允许字母（不限制大小写）、数字和短横线（-）组成，不支持点号（.），不能全是数字。<br><li>其他类型（Linux 等）实例：字符长度为[2, 30]，允许支持多个点号，点之间为一段，每段允许字母（不限制大小写）、数字和短横线（-）组成。
+         * 云服务器的主机名。<br><li>点号（.）和短横线（-）不能作为 HostName 的首尾字符，不能连续使用。<br><li>Windows 实例：名字符长度为[2, 15]，允许字母（不限制大小写）、数字和短横线（-）组成，不支持点号（.），不能全是数字。<br><li>其他类型（Linux 等）实例：字符长度为[2, 60]，允许支持多个点号，点之间为一段，每段允许字母（不限制大小写）、数字和短横线（-）组成。
          * @type {string || null}
          */
         this.HostName = null;
@@ -840,8 +847,7 @@ class RunInstancesRequest extends  AbstractModel {
         this.InstanceMarketOptions = null;
 
         /**
-         * 提供给实例使用的用户数据，需要以 base64 方式编码，支持的最大数据大小为 16KB。关于获取此参数的详细介绍，请参阅[Windows](https://cloud.tencent.com/document/product/213/17526
-)和[Linux](https://cloud.tencent.com/document/product/213/17525)启动时运行命令。
+         * 提供给实例使用的用户数据，需要以 base64 方式编码，支持的最大数据大小为 16KB。关于获取此参数的详细介绍，请参阅[Windows](https://cloud.tencent.com/document/product/213/17526)和[Linux](https://cloud.tencent.com/document/product/213/17525)启动时运行命令。
          * @type {string || null}
          */
         this.UserData = null;
@@ -1893,6 +1899,12 @@ class OsVersion extends  AbstractModel {
          */
         this.OsVersions = null;
 
+        /**
+         * 支持的操作系统架构
+         * @type {Array.<string> || null}
+         */
+        this.Architecture = null;
+
     }
 
     /**
@@ -1904,6 +1916,7 @@ class OsVersion extends  AbstractModel {
         }
         this.OsName = params.OsName || null;
         this.OsVersions = params.OsVersions || null;
+        this.Architecture = params.Architecture || null;
 
     }
 }
@@ -2556,7 +2569,7 @@ class Placement extends  AbstractModel {
         this.ProjectId = null;
 
         /**
-         * 实例所属的专用宿主机ID列表。如果您有购买专用宿主机并且指定了该参数，则您购买的实例就会随机的部署在这些专用宿主机上。当前暂不支持。
+         * 实例所属的专用宿主机ID列表。如果您有购买专用宿主机并且指定了该参数，则您购买的实例就会随机的部署在这些专用宿主机上。
          * @type {Array.<string> || null}
          */
         this.HostIds = null;
@@ -4424,7 +4437,7 @@ class SpotMarketOptions extends  AbstractModel {
         this.MaxPrice = null;
 
         /**
-         * 竞价请求类型
+         * 竞价请求类型，当前仅支持类型：one-time
          * @type {string || null}
          */
         this.SpotInstanceType = null;
@@ -5849,6 +5862,12 @@ class InquiryPriceRenewInstancesRequest extends  AbstractModel {
          */
         this.DryRun = null;
 
+        /**
+         * 是否续费弹性数据盘。取值范围：<br><li>TRUE：表示续费包年包月实例同时续费其挂载的弹性数据盘<br><li>FALSE：表示续费包年包月实例同时不再续费其挂载的弹性数据盘<br><br>默认取值：TRUE。
+         * @type {boolean || null}
+         */
+        this.RenewPortableDataDisk = null;
+
     }
 
     /**
@@ -5866,6 +5885,7 @@ class InquiryPriceRenewInstancesRequest extends  AbstractModel {
             this.InstanceChargePrepaid = obj;
         }
         this.DryRun = params.DryRun || null;
+        this.RenewPortableDataDisk = params.RenewPortableDataDisk || null;
 
     }
 }

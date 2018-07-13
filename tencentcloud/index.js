@@ -5,6 +5,7 @@ module.exports = {
     cdb: require("./cdb"),
     cis: require("./cis"),
     common: require("./common"),
+    cr: require("./cr"),
     cvm: require("./cvm"),
     cws: require("./cws"),
     dcdb: require("./dcdb"),
@@ -16,6 +17,7 @@ module.exports = {
     partners: require("./partners"),
     postgres: require("./postgres"),
     scf: require("./scf"),
+    tia: require("./tia"),
     tmt: require("./tmt"),
     vpc: require("./vpc")
 };

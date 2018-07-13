@@ -10,7 +10,7 @@ const RoVipInfo = models.RoVipInfo;
 const DescribeAccountsRequest = models.DescribeAccountsRequest;
 const StopDBImportJobResponse = models.StopDBImportJobResponse;
 const Parameter = models.Parameter;
-const DatabaseTableList = models.DatabaseTableList;
+const DescribeDBInstanceRebootTimeRequest = models.DescribeDBInstanceRebootTimeRequest;
 const DescribeSlowLogsRequest = models.DescribeSlowLogsRequest;
 const Inbound = models.Inbound;
 const AssociateSecurityGroupsRequest = models.AssociateSecurityGroupsRequest;
@@ -21,7 +21,6 @@ const DescribeDBSecurityGroupsResponse = models.DescribeDBSecurityGroupsResponse
 const MasterInfo = models.MasterInfo;
 const DescribeBinlogsResponse = models.DescribeBinlogsResponse;
 const DBSwitchInfo = models.DBSwitchInfo;
-const DescribeBackupDownloadDbTableCodeResponse = models.DescribeBackupDownloadDbTableCodeResponse;
 const InitDBInstancesResponse = models.InitDBInstancesResponse;
 const DescribeTasksResponse = models.DescribeTasksResponse;
 const DescribeBackupsRequest = models.DescribeBackupsRequest;
@@ -36,7 +35,7 @@ const RoGroup = models.RoGroup;
 const ModifyAccountDescriptionResponse = models.ModifyAccountDescriptionResponse;
 const SwitchForUpgradeRequest = models.SwitchForUpgradeRequest;
 const ModifyInstanceParamRequest = models.ModifyInstanceParamRequest;
-const CreateDBInstanceHourResponse = models.CreateDBInstanceHourResponse;
+const ModifyAccountPasswordResponse = models.ModifyAccountPasswordResponse;
 const BinlogInfo = models.BinlogInfo;
 const DescribeTasksRequest = models.DescribeTasksRequest;
 const OpenDBInstanceGTIDRequest = models.OpenDBInstanceGTIDRequest;
@@ -54,7 +53,7 @@ const TableName = models.TableName;
 const DeleteBackupResponse = models.DeleteBackupResponse;
 const TablePrivilege = models.TablePrivilege;
 const DescribeProjectSecurityGroupsResponse = models.DescribeProjectSecurityGroupsResponse;
-const ModifyAccountPasswordResponse = models.ModifyAccountPasswordResponse;
+const CreateDBInstanceHourResponse = models.CreateDBInstanceHourResponse;
 const DescribeDBSwitchRecordsRequest = models.DescribeDBSwitchRecordsRequest;
 const CreateDBInstanceResponse = models.CreateDBInstanceResponse;
 const SlowLogInfo = models.SlowLogInfo;
@@ -63,7 +62,6 @@ const DeleteAccountsResponse = models.DeleteAccountsResponse;
 const DescribeDBInstanceCharsetResponse = models.DescribeDBInstanceCharsetResponse;
 const RestartDBInstancesResponse = models.RestartDBInstancesResponse;
 const DescribeBackupDatabasesResponse = models.DescribeBackupDatabasesResponse;
-const DescribeDBInstanceRebootTimeRequest = models.DescribeDBInstanceRebootTimeRequest;
 const First = models.First;
 const DescribeBackupsResponse = models.DescribeBackupsResponse;
 const DescribeDBImportRecordsResponse = models.DescribeDBImportRecordsResponse;
@@ -131,7 +129,6 @@ const VerifyRootAccountRequest = models.VerifyRootAccountRequest;
 const OpenWanServiceResponse = models.OpenWanServiceResponse;
 const ModifyBackupConfigRequest = models.ModifyBackupConfigRequest;
 const DescribeBinlogsRequest = models.DescribeBinlogsRequest;
-const DescribeBackupDownloadDbTableCodeRequest = models.DescribeBackupDownloadDbTableCodeRequest;
 const DisassociateSecurityGroupsResponse = models.DisassociateSecurityGroupsResponse;
 const DescribeDBInstanceGTIDRequest = models.DescribeDBInstanceGTIDRequest;
 
@@ -621,17 +618,6 @@ class CdbClient extends AbstractClient {
     StopDBImportJob(req, cb) {
         let resp = new StopDBImportJobResponse();
         this.request("StopDBImportJob", req, resp, cb);
-    }
-
-    /**
-     * 本接口(DescribeBackupDownloadDbTableCode)用于查询备份数据分库分表下载位点。
-     * @param {DescribeBackupDownloadDbTableCodeRequest} req
-     * @param {function(string, DescribeBackupDownloadDbTableCodeResponse):void} cb
-     * @public
-     */
-    DescribeBackupDownloadDbTableCode(req, cb) {
-        let resp = new DescribeBackupDownloadDbTableCodeResponse();
-        this.request("DescribeBackupDownloadDbTableCode", req, resp, cb);
     }
 
     /**
