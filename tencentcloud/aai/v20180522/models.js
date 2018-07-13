@@ -141,7 +141,7 @@ class TextToVoiceRequest extends  AbstractModel {
         this.Text = null;
 
         /**
-         * 一次请求对应一个SessionId，会原样返回
+         * 一次请求对应一个SessionId，会原样返回，建议传入类似于uuid的字符串防止重复
          * @type {string || null}
          */
         this.SessionId = null;

@@ -620,24 +620,18 @@ class Parameter extends  AbstractModel {
 }
 
 /**
- * 数据库表列表
+ * DescribeDBInstanceRebootTime请求参数结构体
  * @class
  */
-class DatabaseTableList extends  AbstractModel {
+class DescribeDBInstanceRebootTimeRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 数据库名
-         * @type {string || null}
-         */
-        this.DatabaseName = null;
-
-        /**
-         * 数据表数组
+         * 实例的ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例ID相同。
          * @type {Array.<string> || null}
          */
-        this.TableList = null;
+        this.InstanceIds = null;
 
     }
 
@@ -648,8 +642,7 @@ class DatabaseTableList extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.DatabaseName = params.DatabaseName || null;
-        this.TableList = params.TableList || null;
+        this.InstanceIds = params.InstanceIds || null;
 
     }
 }
@@ -1274,41 +1267,6 @@ class DBSwitchInfo extends  AbstractModel {
 }
 
 /**
- * DescribeBackupDownloadDbTableCode返回参数结构体
- * @class
- */
-class DescribeBackupDownloadDbTableCodeResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 下载位点
-         * @type {number || null}
-         */
-        this.DatabaseTableCode = null;
-
-        /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.DatabaseTableCode = params.DatabaseTableCode || null;
-        this.RequestId = params.RequestId || null;
-
-    }
-}
-
-/**
  * InitDBInstances返回参数结构体
  * @class
  */
@@ -1914,24 +1872,18 @@ class ModifyInstanceParamRequest extends  AbstractModel {
 }
 
 /**
- * CreateDBInstanceHour返回参数结构体
+ * ModifyAccountPassword返回参数结构体
  * @class
  */
-class CreateDBInstanceHourResponse extends  AbstractModel {
+class ModifyAccountPasswordResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 短订单ID，用于调用云API相关接口，如[获取订单信息](https://cloud.tencent.com/document/api/403/4392)
-         * @type {Array.<string> || null}
+         * 异步任务的请求ID，可使用此ID查询异步任务的执行结果。
+         * @type {string || null}
          */
-        this.DealIds = null;
-
-        /**
-         * 实例ID列表
-         * @type {Array.<string> || null}
-         */
-        this.InstanceIds = null;
+        this.AsyncRequestId = null;
 
         /**
          * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
@@ -1948,8 +1900,7 @@ class CreateDBInstanceHourResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.DealIds = params.DealIds || null;
-        this.InstanceIds = params.InstanceIds || null;
+        this.AsyncRequestId = params.AsyncRequestId || null;
         this.RequestId = params.RequestId || null;
 
     }
@@ -3107,18 +3058,24 @@ class DescribeProjectSecurityGroupsResponse extends  AbstractModel {
 }
 
 /**
- * ModifyAccountPassword返回参数结构体
+ * CreateDBInstanceHour返回参数结构体
  * @class
  */
-class ModifyAccountPasswordResponse extends  AbstractModel {
+class CreateDBInstanceHourResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 异步任务的请求ID，可使用此ID查询异步任务的执行结果。
-         * @type {string || null}
+         * 短订单ID，用于调用云API相关接口，如[获取订单信息](https://cloud.tencent.com/document/api/403/4392)
+         * @type {Array.<string> || null}
          */
-        this.AsyncRequestId = null;
+        this.DealIds = null;
+
+        /**
+         * 实例ID列表
+         * @type {Array.<string> || null}
+         */
+        this.InstanceIds = null;
 
         /**
          * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
@@ -3135,7 +3092,8 @@ class ModifyAccountPasswordResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.AsyncRequestId = params.AsyncRequestId || null;
+        this.DealIds = params.DealIds || null;
+        this.InstanceIds = params.InstanceIds || null;
         this.RequestId = params.RequestId || null;
 
     }
@@ -3467,34 +3425,6 @@ class DescribeBackupDatabasesResponse extends  AbstractModel {
             }
         }
         this.RequestId = params.RequestId || null;
-
-    }
-}
-
-/**
- * DescribeDBInstanceRebootTime请求参数结构体
- * @class
- */
-class DescribeDBInstanceRebootTimeRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 实例的ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例ID相同。
-         * @type {Array.<string> || null}
-         */
-        this.InstanceIds = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.InstanceIds = params.InstanceIds || null;
 
     }
 }
@@ -6884,56 +6814,6 @@ class DescribeBinlogsRequest extends  AbstractModel {
 }
 
 /**
- * DescribeBackupDownloadDbTableCode请求参数结构体
- * @class
- */
-class DescribeBackupDownloadDbTableCodeRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 实例ID，格式如：cdb-c1nl9rpv。与云数据库控制台页面中显示的实例ID相同。
-         * @type {string || null}
-         */
-        this.InstanceId = null;
-
-        /**
-         * 开始时间，格式为：2017-07-12 10:29:20。
-         * @type {string || null}
-         */
-        this.StartTime = null;
-
-        /**
-         * 待下载的数据库和数据表列表。
-         * @type {Array.<DatabaseTableList> || null}
-         */
-        this.DatabaseTableList = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.InstanceId = params.InstanceId || null;
-        this.StartTime = params.StartTime || null;
-
-        if (params.DatabaseTableList) {
-            this.DatabaseTableList = new Array();
-            for (let z in params.DatabaseTableList) {
-                let obj = new DatabaseTableList();
-                obj.deserialize(params.DatabaseTableList[z]);
-                this.DatabaseTableList.push(obj);
-            }
-        }
-
-    }
-}
-
-/**
  * DisassociateSecurityGroups返回参数结构体
  * @class
  */
@@ -7000,7 +6880,7 @@ module.exports = {
     DescribeAccountsRequest: DescribeAccountsRequest,
     StopDBImportJobResponse: StopDBImportJobResponse,
     Parameter: Parameter,
-    DatabaseTableList: DatabaseTableList,
+    DescribeDBInstanceRebootTimeRequest: DescribeDBInstanceRebootTimeRequest,
     DescribeSlowLogsRequest: DescribeSlowLogsRequest,
     Inbound: Inbound,
     AssociateSecurityGroupsRequest: AssociateSecurityGroupsRequest,
@@ -7011,7 +6891,6 @@ module.exports = {
     MasterInfo: MasterInfo,
     DescribeBinlogsResponse: DescribeBinlogsResponse,
     DBSwitchInfo: DBSwitchInfo,
-    DescribeBackupDownloadDbTableCodeResponse: DescribeBackupDownloadDbTableCodeResponse,
     InitDBInstancesResponse: InitDBInstancesResponse,
     DescribeTasksResponse: DescribeTasksResponse,
     DescribeBackupsRequest: DescribeBackupsRequest,
@@ -7026,7 +6905,7 @@ module.exports = {
     ModifyAccountDescriptionResponse: ModifyAccountDescriptionResponse,
     SwitchForUpgradeRequest: SwitchForUpgradeRequest,
     ModifyInstanceParamRequest: ModifyInstanceParamRequest,
-    CreateDBInstanceHourResponse: CreateDBInstanceHourResponse,
+    ModifyAccountPasswordResponse: ModifyAccountPasswordResponse,
     BinlogInfo: BinlogInfo,
     DescribeTasksRequest: DescribeTasksRequest,
     OpenDBInstanceGTIDRequest: OpenDBInstanceGTIDRequest,
@@ -7044,7 +6923,7 @@ module.exports = {
     DeleteBackupResponse: DeleteBackupResponse,
     TablePrivilege: TablePrivilege,
     DescribeProjectSecurityGroupsResponse: DescribeProjectSecurityGroupsResponse,
-    ModifyAccountPasswordResponse: ModifyAccountPasswordResponse,
+    CreateDBInstanceHourResponse: CreateDBInstanceHourResponse,
     DescribeDBSwitchRecordsRequest: DescribeDBSwitchRecordsRequest,
     CreateDBInstanceResponse: CreateDBInstanceResponse,
     SlowLogInfo: SlowLogInfo,
@@ -7053,7 +6932,6 @@ module.exports = {
     DescribeDBInstanceCharsetResponse: DescribeDBInstanceCharsetResponse,
     RestartDBInstancesResponse: RestartDBInstancesResponse,
     DescribeBackupDatabasesResponse: DescribeBackupDatabasesResponse,
-    DescribeDBInstanceRebootTimeRequest: DescribeDBInstanceRebootTimeRequest,
     First: First,
     DescribeBackupsResponse: DescribeBackupsResponse,
     DescribeDBImportRecordsResponse: DescribeDBImportRecordsResponse,
@@ -7121,7 +6999,6 @@ module.exports = {
     OpenWanServiceResponse: OpenWanServiceResponse,
     ModifyBackupConfigRequest: ModifyBackupConfigRequest,
     DescribeBinlogsRequest: DescribeBinlogsRequest,
-    DescribeBackupDownloadDbTableCodeRequest: DescribeBackupDownloadDbTableCodeRequest,
     DisassociateSecurityGroupsResponse: DisassociateSecurityGroupsResponse,
     DescribeDBInstanceGTIDRequest: DescribeDBInstanceGTIDRequest,
 
