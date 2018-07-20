@@ -8,6 +8,7 @@ module.exports = {
     cr: require("./cr"),
     cvm: require("./cvm"),
     cws: require("./cws"),
+    dc: require("./dc"),
     dcdb: require("./dcdb"),
     ds: require("./ds"),
     dts: require("./dts"),
@@ -17,6 +18,7 @@ module.exports = {
     partners: require("./partners"),
     postgres: require("./postgres"),
     scf: require("./scf"),
+    tbm: require("./tbm"),
     tia: require("./tia"),
     tmt: require("./tmt"),
     vpc: require("./vpc")

@@ -1112,7 +1112,7 @@ class SystemDisk extends  AbstractModel {
         super();
 
         /**
-         * 系统盘类型。系统盘类型限制详见[CVM实例配置](/document/product/213/2177)。取值范围：<br><li>LOCAL_BASIC：本地硬盘<br><li>LOCAL_SSD：本地SSD硬盘<br><li>CLOUD_BASIC：普通云硬盘<br><li>CLOUD_SSD：SSD云硬盘<br><li>CLOUD_PREMIUM：高性能云硬盘<br><br>默认取值：LOCAL_BASIC。
+         * 系统盘类型。系统盘类型限制详见[CVM实例配置](/document/product/213/2177)。取值范围：<br><li>LOCAL_BASIC：本地硬盘<br><li>LOCAL_SSD：本地SSD硬盘<br><li>CLOUD_BASIC：普通云硬盘<br><li>CLOUD_SSD：SSD云硬盘<br><li>CLOUD_PREMIUM：高性能云硬盘<br><br>默认取值：CLOUD_BASIC。
          * @type {string || null}
          */
         this.DiskType = null;
@@ -3341,6 +3341,12 @@ class CreateDisasterRecoverGroupRequest extends  AbstractModel {
          */
         this.Type = null;
 
+        /**
+         * 用于保证请求幂等性的字符串。该字符串由客户生成，需保证不同请求之间唯一，最大值不超过64个ASCII字符。若不指定该参数，则无法保证请求的幂等性。<br>更多详细信息请参阅：如何保证幂等性。
+         * @type {string || null}
+         */
+        this.ClientToken = null;
+
     }
 
     /**
@@ -3352,6 +3358,7 @@ class CreateDisasterRecoverGroupRequest extends  AbstractModel {
         }
         this.Name = params.Name || null;
         this.Type = params.Type || null;
+        this.ClientToken = params.ClientToken || null;
 
     }
 }
@@ -3791,6 +3798,12 @@ class Instance extends  AbstractModel {
         this.InstanceState = null;
 
         /**
+         * 实例关联的标签列表。
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
+        /**
          * 实例所在的位置。
          * @type {Placement || null}
          */
@@ -3916,6 +3929,15 @@ class Instance extends  AbstractModel {
             this.LoginSettings = obj;
         }
         this.InstanceState = params.InstanceState || null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
 
         if (params.Placement) {
             let obj = new Placement();
