@@ -1,34 +1,49 @@
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
+const PlanDetailInfo = models.PlanDetailInfo;
 const AppSetInfo = models.AppSetInfo;
+const CreateShieldPlanInstanceResponse = models.CreateShieldPlanInstanceResponse;
 const ScanInfo = models.ScanInfo;
+const VulList = models.VulList;
 const DescribeShieldInstancesResponse = models.DescribeShieldInstancesResponse;
 const PluginInfo = models.PluginInfo;
 const DescribeShieldResultRequest = models.DescribeShieldResultRequest;
 const CreateShieldInstanceRequest = models.CreateShieldInstanceRequest;
 const DescribeScanResultsResponse = models.DescribeScanResultsResponse;
 const VirusInfo = models.VirusInfo;
+const CreateShieldPlanInstanceRequest = models.CreateShieldPlanInstanceRequest;
 const ScanSetInfo = models.ScanSetInfo;
 const AppScanSet = models.AppScanSet;
+const ShieldPlanInfo = models.ShieldPlanInfo;
+const CreateBindInstanceRequest = models.CreateBindInstanceRequest;
 const CreateShieldInstanceResponse = models.CreateShieldInstanceResponse;
 const DeleteShieldInstancesRequest = models.DeleteShieldInstancesRequest;
+const ResourceInfo = models.ResourceInfo;
 const DescribeShieldInstancesRequest = models.DescribeShieldInstancesRequest;
 const CreateScanInstancesResponse = models.CreateScanInstancesResponse;
 const DescribeScanInstancesResponse = models.DescribeScanInstancesResponse;
-const AppInfo = models.AppInfo;
-const DescribeShieldResultResponse = models.DescribeShieldResultResponse;
-const ServiceInfo = models.ServiceInfo;
 const VulInfo = models.VulInfo;
+const AppInfo = models.AppInfo;
+const ServiceInfo = models.ServiceInfo;
+const SoInfo = models.SoInfo;
+const DescribeShieldPlanInstanceResponse = models.DescribeShieldPlanInstanceResponse;
+const ResourceServiceInfo = models.ResourceServiceInfo;
+const DescribeResourceInstancesRequest = models.DescribeResourceInstancesRequest;
 const AdInfo = models.AdInfo;
-const VulList = models.VulList;
+const DescribeShieldPlanInstanceRequest = models.DescribeShieldPlanInstanceRequest;
 const ShieldInfo = models.ShieldInfo;
 const AppDetailInfo = models.AppDetailInfo;
 const DeleteScanInstancesResponse = models.DeleteScanInstancesResponse;
+const Filter = models.Filter;
 const DeleteShieldInstancesResponse = models.DeleteShieldInstancesResponse;
 const DescribeScanInstancesRequest = models.DescribeScanInstancesRequest;
+const DescribeResourceInstancesResponse = models.DescribeResourceInstancesResponse;
 const DescribeScanResultsRequest = models.DescribeScanResultsRequest;
 const CreateScanInstancesRequest = models.CreateScanInstancesRequest;
-const Filters = models.Filters;
+const PlanInfo = models.PlanInfo;
+const DescribeShieldResultResponse = models.DescribeShieldResultResponse;
+const CreateBindInstanceResponse = models.CreateBindInstanceResponse;
+const BindInfo = models.BindInfo;
 const DeleteScanInstancesRequest = models.DeleteScanInstancesRequest;
 
 
@@ -76,6 +91,28 @@ class MsClient extends AbstractClient {
     }
 
     /**
+     * 将应用和资源进行绑定
+     * @param {CreateBindInstanceRequest} req
+     * @param {function(string, CreateBindInstanceResponse):void} cb
+     * @public
+     */
+    CreateBindInstance(req, cb) {
+        let resp = new CreateBindInstanceResponse();
+        this.request("CreateBindInstance", req, resp, cb);
+    }
+
+    /**
+     * 获取某个用户的所有资源信息
+     * @param {DescribeResourceInstancesRequest} req
+     * @param {function(string, DescribeResourceInstancesResponse):void} cb
+     * @public
+     */
+    DescribeResourceInstances(req, cb) {
+        let resp = new DescribeResourceInstancesResponse();
+        this.request("DescribeResourceInstances", req, resp, cb);
+    }
+
+    /**
      * 用户通过CreateScanInstances接口提交应用进行风险批量扫描后，用此接口批量获取风险详细信息,包含漏洞信息，广告信息，插件信息和病毒信息
      * @param {DescribeScanResultsRequest} req
      * @param {function(string, DescribeScanResultsResponse):void} cb
@@ -84,6 +121,17 @@ class MsClient extends AbstractClient {
     DescribeScanResults(req, cb) {
         let resp = new DescribeScanResultsResponse();
         this.request("DescribeScanResults", req, resp, cb);
+    }
+
+    /**
+     * 查询加固策略
+     * @param {DescribeShieldPlanInstanceRequest} req
+     * @param {function(string, DescribeShieldPlanInstanceResponse):void} cb
+     * @public
+     */
+    DescribeShieldPlanInstance(req, cb) {
+        let resp = new DescribeShieldPlanInstanceResponse();
+        this.request("DescribeShieldPlanInstance", req, resp, cb);
     }
 
     /**
@@ -108,6 +156,17 @@ class MsClient extends AbstractClient {
     DescribeShieldInstances(req, cb) {
         let resp = new DescribeShieldInstancesResponse();
         this.request("DescribeShieldInstances", req, resp, cb);
+    }
+
+    /**
+     * 对资源进行策略新增
+     * @param {CreateShieldPlanInstanceRequest} req
+     * @param {function(string, CreateShieldPlanInstanceResponse):void} cb
+     * @public
+     */
+    CreateShieldPlanInstance(req, cb) {
+        let resp = new CreateShieldPlanInstanceResponse();
+        this.request("CreateShieldPlanInstance", req, resp, cb);
     }
 
     /**

@@ -21,7 +21,7 @@ const DescribeDBSecurityGroupsResponse = models.DescribeDBSecurityGroupsResponse
 const MasterInfo = models.MasterInfo;
 const DescribeBinlogsResponse = models.DescribeBinlogsResponse;
 const DBSwitchInfo = models.DBSwitchInfo;
-const InitDBInstancesResponse = models.InitDBInstancesResponse;
+const DescribeDBPriceResponse = models.DescribeDBPriceResponse;
 const DescribeTasksResponse = models.DescribeTasksResponse;
 const DescribeBackupsRequest = models.DescribeBackupsRequest;
 const ModifyDBInstanceProjectResponse = models.ModifyDBInstanceProjectResponse;
@@ -84,7 +84,7 @@ const InitDBInstancesRequest = models.InitDBInstancesRequest;
 const AssociateSecurityGroupsResponse = models.AssociateSecurityGroupsResponse;
 const InstanceInfo = models.InstanceInfo;
 const CreateBackupResponse = models.CreateBackupResponse;
-const DescribeDBInstanceConfigResponse = models.DescribeDBInstanceConfigResponse;
+const DescribeDBPriceRequest = models.DescribeDBPriceRequest;
 const SlaveConfig = models.SlaveConfig;
 const ModifyAccountPrivilegesResponse = models.ModifyAccountPrivilegesResponse;
 const BackupConfig = models.BackupConfig;
@@ -100,6 +100,7 @@ const InstanceRebootTime = models.InstanceRebootTime;
 const UpgradeDBInstanceRequest = models.UpgradeDBInstanceRequest;
 const DescribeDatabasesResponse = models.DescribeDatabasesResponse;
 const ZoneSellConf = models.ZoneSellConf;
+const DescribeDBInstanceConfigResponse = models.DescribeDBInstanceConfigResponse;
 const RoInstanceInfo = models.RoInstanceInfo;
 const IsolateDBInstanceRequest = models.IsolateDBInstanceRequest;
 const ModifyAccountPrivilegesRequest = models.ModifyAccountPrivilegesRequest;
@@ -115,6 +116,7 @@ const ModifyBackupConfigResponse = models.ModifyBackupConfigResponse;
 const DescribeDBImportRecordsRequest = models.DescribeDBImportRecordsRequest;
 const CreateDBImportJobResponse = models.CreateDBImportJobResponse;
 const DescribeDBInstancesResponse = models.DescribeDBInstancesResponse;
+const InitDBInstancesResponse = models.InitDBInstancesResponse;
 const RestartDBInstancesRequest = models.RestartDBInstancesRequest;
 const DescribeDBZoneConfigResponse = models.DescribeDBZoneConfigResponse;
 const ModifyDBInstanceProjectRequest = models.ModifyDBInstanceProjectRequest;
@@ -300,6 +302,17 @@ class CdbClient extends AbstractClient {
     }
 
     /**
+     * 本接口(InitDBInstances)用于初始化云数据库实例，包括初始化密码、默认字符集、实例端口号等
+     * @param {InitDBInstancesRequest} req
+     * @param {function(string, InitDBInstancesResponse):void} cb
+     * @public
+     */
+    InitDBInstances(req, cb) {
+        let resp = new InitDBInstancesResponse();
+        this.request("InitDBInstances", req, resp, cb);
+    }
+
+    /**
      * 本接口(CreateDBInstanceHour)用于创建按量计费的实例，可通过传入实例规格、MySQL 版本号和数量等信息创建云数据库实例，支持主实例、灾备实例和只读实例的创建。
 
 您还可以使用[查询实例列表](https://cloud.tencent.com/document/api/236/15872)接口查询该实例的详细信息。
@@ -468,14 +481,14 @@ class CdbClient extends AbstractClient {
     }
 
     /**
-     * 本接口(InitDBInstances)用于初始化云数据库实例，包括初始化密码、默认字符集、实例端口号等
-     * @param {InitDBInstancesRequest} req
-     * @param {function(string, InitDBInstancesResponse):void} cb
+     * 本接口(DescribeDBPrice)用于查询云数据库实例的价格，支持查询按量计费或者包年包月的价格。可传入实例类型、购买时长、购买数量、内存大小、硬盘大小和可用区信息等来查询实例价格。
+     * @param {DescribeDBPriceRequest} req
+     * @param {function(string, DescribeDBPriceResponse):void} cb
      * @public
      */
-    InitDBInstances(req, cb) {
-        let resp = new InitDBInstancesResponse();
-        this.request("InitDBInstances", req, resp, cb);
+    DescribeDBPrice(req, cb) {
+        let resp = new DescribeDBPriceResponse();
+        this.request("DescribeDBPrice", req, resp, cb);
     }
 
     /**

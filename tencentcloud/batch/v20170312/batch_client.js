@@ -1,5 +1,6 @@
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
+const EventVar = models.EventVar;
 const AnonymousComputeEnv = models.AnonymousComputeEnv;
 const DeleteComputeEnvResponse = models.DeleteComputeEnvResponse;
 const SubmitJobRequest = models.SubmitJobRequest;
@@ -12,6 +13,7 @@ const Notification = models.Notification;
 const SystemDisk = models.SystemDisk;
 const Task = models.Task;
 const InstanceTypeConfig = models.InstanceTypeConfig;
+const LoginSettings = models.LoginSettings;
 const DescribeComputeEnvActivitiesResponse = models.DescribeComputeEnvActivitiesResponse;
 const TaskInstanceMetrics = models.TaskInstanceMetrics;
 const MountDataDisk = models.MountDataDisk;
@@ -23,15 +25,17 @@ const OutputMappingConfig = models.OutputMappingConfig;
 const TaskInstanceView = models.TaskInstanceView;
 const TaskMetrics = models.TaskMetrics;
 const TerminateComputeNodesRequest = models.TerminateComputeNodesRequest;
-const EventVar = models.EventVar;
+const LocalDiskType = models.LocalDiskType;
 const DescribeComputeEnvActivitiesRequest = models.DescribeComputeEnvActivitiesRequest;
 const CreateTaskTemplateRequest = models.CreateTaskTemplateRequest;
 const Job = models.Job;
+const DeleteComputeEnvRequest = models.DeleteComputeEnvRequest;
 const CreateComputeEnvRequest = models.CreateComputeEnvRequest;
 const DescribeComputeEnvCreateInfoResponse = models.DescribeComputeEnvCreateInfoResponse;
 const ComputeEnvCreateInfo = models.ComputeEnvCreateInfo;
 const DescribeComputeEnvCreateInfosRequest = models.DescribeComputeEnvCreateInfosRequest;
 const DescribeComputeEnvRequest = models.DescribeComputeEnvRequest;
+const InstanceMarketOptionsRequest = models.InstanceMarketOptionsRequest;
 const DescribeTaskTemplatesResponse = models.DescribeTaskTemplatesResponse;
 const ComputeNodeMetrics = models.ComputeNodeMetrics;
 const DeleteJobRequest = models.DeleteJobRequest;
@@ -43,7 +47,8 @@ const DataDisk = models.DataDisk;
 const NamedComputeEnv = models.NamedComputeEnv;
 const DeleteJobResponse = models.DeleteJobResponse;
 const EventConfig = models.EventConfig;
-const LoginSettings = models.LoginSettings;
+const SpotMarketOptions = models.SpotMarketOptions;
+const Externals = models.Externals;
 const OutputMapping = models.OutputMapping;
 const EnhancedService = models.EnhancedService;
 const DescribeJobSubmitInfoResponse = models.DescribeJobSubmitInfoResponse;
@@ -63,14 +68,17 @@ const Docker = models.Docker;
 const ModifyComputeEnvResponse = models.ModifyComputeEnvResponse;
 const Placement = models.Placement;
 const ComputeNode = models.ComputeNode;
-const DeleteComputeEnvRequest = models.DeleteComputeEnvRequest;
+const ItemPrice = models.ItemPrice;
+const InstanceTypeQuotaItem = models.InstanceTypeQuotaItem;
 const CreateTaskTemplateResponse = models.CreateTaskTemplateResponse;
 const TerminateJobResponse = models.TerminateJobResponse;
 const DescribeJobsRequest = models.DescribeJobsRequest;
 const TaskTemplateView = models.TaskTemplateView;
 const DeleteTaskTemplatesResponse = models.DeleteTaskTemplatesResponse;
+const DescribeCvmZoneInstanceConfigInfosRequest = models.DescribeCvmZoneInstanceConfigInfosRequest;
 const TerminateTaskInstanceRequest = models.TerminateTaskInstanceRequest;
 const TerminateTaskInstanceResponse = models.TerminateTaskInstanceResponse;
+const ModifyComputeEnvRequest = models.ModifyComputeEnvRequest;
 const TerminateComputeNodesResponse = models.TerminateComputeNodesResponse;
 const DescribeAvailableCvmInstanceTypesResponse = models.DescribeAvailableCvmInstanceTypesResponse;
 const DescribeTaskResponse = models.DescribeTaskResponse;
@@ -78,13 +86,14 @@ const ComputeEnvView = models.ComputeEnvView;
 const DescribeComputeEnvsResponse = models.DescribeComputeEnvsResponse;
 const DescribeTaskRequest = models.DescribeTaskRequest;
 const DescribeComputeEnvsRequest = models.DescribeComputeEnvsRequest;
+const DescribeCvmZoneInstanceConfigInfosResponse = models.DescribeCvmZoneInstanceConfigInfosResponse;
 const DescribeJobsResponse = models.DescribeJobsResponse;
 const Activity = models.Activity;
 const RunMonitorServiceEnabled = models.RunMonitorServiceEnabled;
 const TerminateComputeNodeResponse = models.TerminateComputeNodeResponse;
 const VirtualPrivateCloud = models.VirtualPrivateCloud;
 const DescribeAvailableCvmInstanceTypesRequest = models.DescribeAvailableCvmInstanceTypesRequest;
-const ModifyComputeEnvRequest = models.ModifyComputeEnvRequest;
+const StorageBlock = models.StorageBlock;
 const InternetAccessible = models.InternetAccessible;
 const JobView = models.JobView;
 const EnvVar = models.EnvVar;
@@ -199,6 +208,17 @@ class BatchClient extends AbstractClient {
     DescribeTask(req, cb) {
         let resp = new DescribeTaskResponse();
         this.request("DescribeTask", req, resp, cb);
+    }
+
+    /**
+     * 获取批量计算可用区机型配置信息
+     * @param {DescribeCvmZoneInstanceConfigInfosRequest} req
+     * @param {function(string, DescribeCvmZoneInstanceConfigInfosResponse):void} cb
+     * @public
+     */
+    DescribeCvmZoneInstanceConfigInfos(req, cb) {
+        let resp = new DescribeCvmZoneInstanceConfigInfosResponse();
+        this.request("DescribeCvmZoneInstanceConfigInfos", req, resp, cb);
     }
 
     /**

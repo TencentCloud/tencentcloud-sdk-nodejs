@@ -1,6 +1,41 @@
 const AbstractModel = require("../../common/abstract_model");
 
 /**
+ * 自定义键值对
+ * @class
+ */
+class EventVar extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 自定义键
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 自定义值
+         * @type {string || null}
+         */
+        this.Value = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = params.Name || null;
+        this.Value = params.Value || null;
+
+    }
+}
+
+/**
  * 计算环境
  * @class
  */
@@ -334,6 +369,18 @@ class EnvData extends  AbstractModel {
          */
         this.EnhancedService = null;
 
+        /**
+         * CVM实例计费类型<br><li>POSTPAID_BY_HOUR：按小时后付费<br><li>SPOTPAID：竞价付费<br>默认值：POSTPAID_BY_HOUR。
+         * @type {string || null}
+         */
+        this.InstanceChargeType = null;
+
+        /**
+         * 实例的市场相关选项，如竞价实例相关参数
+         * @type {InstanceMarketOptionsRequest || null}
+         */
+        this.InstanceMarketOptions = null;
+
     }
 
     /**
@@ -385,6 +432,13 @@ class EnvData extends  AbstractModel {
             let obj = new EnhancedService();
             obj.deserialize(params.EnhancedService)
             this.EnhancedService = obj;
+        }
+        this.InstanceChargeType = params.InstanceChargeType || null;
+
+        if (params.InstanceMarketOptions) {
+            let obj = new InstanceMarketOptionsRequest();
+            obj.deserialize(params.InstanceMarketOptions)
+            this.InstanceMarketOptions = obj;
         }
 
     }
@@ -499,7 +553,7 @@ class SystemDisk extends  AbstractModel {
         super();
 
         /**
-         * 系统盘类型。系统盘类型限制详见[CVM实例配置](/document/product/213/2177)。取值范围：<br><li>LOCAL_BASIC：本地硬盘<br><li>LOCAL_SSD：本地SSD硬盘<br><li>CLOUD_BASIC：普通云硬盘<br><li>CLOUD_SSD：SSD云硬盘<br><li>CLOUD_PREMIUM：高性能云硬盘<br><br>默认取值：LOCAL_BASIC。
+         * 系统盘类型。系统盘类型限制详见[CVM实例配置](/document/product/213/2177)。取值范围：<br><li>LOCAL_BASIC：本地硬盘<br><li>LOCAL_SSD：本地SSD硬盘<br><li>CLOUD_BASIC：普通云硬盘<br><li>CLOUD_SSD：SSD云硬盘<br><li>CLOUD_PREMIUM：高性能云硬盘<br><br>默认取值：CLOUD_BASIC。
          * @type {string || null}
          */
         this.DiskType = null;
@@ -559,6 +613,24 @@ class Task extends  AbstractModel {
         this.Application = null;
 
         /**
+         * 重定向信息
+         * @type {RedirectInfo || null}
+         */
+        this.RedirectInfo = null;
+
+        /**
+         * 任务失败后的最大重试次数，默认为0
+         * @type {number || null}
+         */
+        this.MaxRetryCount = null;
+
+        /**
+         * 任务启动后的超时时间，单位秒，默认为3600秒
+         * @type {number || null}
+         */
+        this.Timeout = null;
+
+        /**
          * 运行环境信息，ComputeEnv 和 EnvId 必须指定一个（且只有一个）参数。
          * @type {AnonymousComputeEnv || null}
          */
@@ -569,12 +641,6 @@ class Task extends  AbstractModel {
          * @type {string || null}
          */
         this.EnvId = null;
-
-        /**
-         * 重定向信息
-         * @type {RedirectInfo || null}
-         */
-        this.RedirectInfo = null;
 
         /**
          * 重定向本地信息
@@ -618,18 +684,6 @@ class Task extends  AbstractModel {
          */
         this.FailedAction = null;
 
-        /**
-         * 任务失败后的最大重试次数，默认为0
-         * @type {number || null}
-         */
-        this.MaxRetryCount = null;
-
-        /**
-         * 任务启动后的超时时间，单位秒，默认为3600秒
-         * @type {number || null}
-         */
-        this.Timeout = null;
-
     }
 
     /**
@@ -648,18 +702,20 @@ class Task extends  AbstractModel {
             this.Application = obj;
         }
 
+        if (params.RedirectInfo) {
+            let obj = new RedirectInfo();
+            obj.deserialize(params.RedirectInfo)
+            this.RedirectInfo = obj;
+        }
+        this.MaxRetryCount = params.MaxRetryCount || null;
+        this.Timeout = params.Timeout || null;
+
         if (params.ComputeEnv) {
             let obj = new AnonymousComputeEnv();
             obj.deserialize(params.ComputeEnv)
             this.ComputeEnv = obj;
         }
         this.EnvId = params.EnvId || null;
-
-        if (params.RedirectInfo) {
-            let obj = new RedirectInfo();
-            obj.deserialize(params.RedirectInfo)
-            this.RedirectInfo = obj;
-        }
 
         if (params.RedirectLocalInfo) {
             let obj = new RedirectLocalInfo();
@@ -712,8 +768,6 @@ class Task extends  AbstractModel {
             }
         }
         this.FailedAction = params.FailedAction || null;
-        this.MaxRetryCount = params.MaxRetryCount || null;
-        this.Timeout = params.Timeout || null;
 
     }
 }
@@ -791,6 +845,48 @@ class InstanceTypeConfig extends  AbstractModel {
         this.Memory = params.Memory || null;
         this.CbsSupport = params.CbsSupport || null;
         this.InstanceTypeState = params.InstanceTypeState || null;
+
+    }
+}
+
+/**
+ * 描述了实例登录相关配置与信息。
+ * @class
+ */
+class LoginSettings extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例登录密码。不同操作系统类型密码复杂度限制不一样，具体如下：<br><li>Linux实例密码必须8到16位，至少包括两项[a-z，A-Z]、[0-9] 和 [( ) ` ~ ! @ # $ % ^ & * - + = | { } [ ] : ; ' , . ? / ]中的特殊符号。<br><li>Windows实例密码必须12到16位，至少包括三项[a-z]，[A-Z]，[0-9] 和 [( ) ` ~ ! @ # $ % ^ & * - + = { } [ ] : ; ' , . ? /]中的特殊符号。<br><br>若不指定该参数，则由系统随机生成密码，并通过站内信方式通知到用户。
+         * @type {string || null}
+         */
+        this.Password = null;
+
+        /**
+         * 密钥ID列表。关联密钥后，就可以通过对应的私钥来访问实例；KeyId可通过接口DescribeKeyPairs获取，密钥与密码不能同时指定，同时Windows操作系统不支持指定密钥。当前仅支持购买的时候指定一个密钥。
+         * @type {Array.<string> || null}
+         */
+        this.KeyIds = null;
+
+        /**
+         * 保持镜像的原始设置。该参数与Password或KeyIds.N不能同时指定。只有使用自定义镜像、共享镜像或外部导入镜像创建实例时才能指定该参数为TRUE。取值范围：<br><li>TRUE：表示保持镜像的登录设置<br><li>FALSE：表示不保持镜像的登录设置<br><br>默认取值：FALSE。
+         * @type {string || null}
+         */
+        this.KeepImageLogin = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Password = params.Password || null;
+        this.KeyIds = params.KeyIds || null;
+        this.KeepImageLogin = params.KeepImageLogin || null;
 
     }
 }
@@ -931,16 +1027,16 @@ class MountDataDisk extends  AbstractModel {
         super();
 
         /**
-         * 文件系统类型，Linux系统下支持"EXT3"和"EXT4"两种，默认"EXT3"；Windows系统下仅支持"NTFS"
-         * @type {string || null}
-         */
-        this.FileSystemType = null;
-
-        /**
          * 挂载点，Linux系统合法路径，或Windows系统盘符,比如"H:\\"
          * @type {string || null}
          */
         this.LocalPath = null;
+
+        /**
+         * 文件系统类型，Linux系统下支持"EXT3"和"EXT4"两种，默认"EXT3"；Windows系统下仅支持"NTFS"
+         * @type {string || null}
+         */
+        this.FileSystemType = null;
 
     }
 
@@ -951,8 +1047,8 @@ class MountDataDisk extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.FileSystemType = params.FileSystemType || null;
         this.LocalPath = params.LocalPath || null;
+        this.FileSystemType = params.FileSystemType || null;
 
     }
 }
@@ -1448,24 +1544,36 @@ class TerminateComputeNodesRequest extends  AbstractModel {
 }
 
 /**
- * 自定义键值对
+ * 本地磁盘规格
  * @class
  */
-class EventVar extends  AbstractModel {
+class LocalDiskType extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 自定义键
+         * 本地磁盘类型。
          * @type {string || null}
          */
-        this.Name = null;
+        this.Type = null;
 
         /**
-         * 自定义值
+         * 本地磁盘属性。
          * @type {string || null}
          */
-        this.Value = null;
+        this.PartitionType = null;
+
+        /**
+         * 本地磁盘最小值。
+         * @type {number || null}
+         */
+        this.MinSize = null;
+
+        /**
+         * 本地磁盘最大值。
+         * @type {number || null}
+         */
+        this.MaxSize = null;
 
     }
 
@@ -1476,8 +1584,10 @@ class EventVar extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Name = params.Name || null;
-        this.Value = params.Value || null;
+        this.Type = params.Type || null;
+        this.PartitionType = params.PartitionType || null;
+        this.MinSize = params.MinSize || null;
+        this.MaxSize = params.MaxSize || null;
 
     }
 }
@@ -1551,16 +1661,16 @@ class CreateTaskTemplateRequest extends  AbstractModel {
         this.TaskTemplateName = null;
 
         /**
-         * 任务模板描述
-         * @type {string || null}
-         */
-        this.TaskTemplateDescription = null;
-
-        /**
          * 任务模板内容，参数要求与任务一致
          * @type {Task || null}
          */
         this.TaskTemplateInfo = null;
+
+        /**
+         * 任务模板描述
+         * @type {string || null}
+         */
+        this.TaskTemplateDescription = null;
 
     }
 
@@ -1572,13 +1682,13 @@ class CreateTaskTemplateRequest extends  AbstractModel {
             return;
         }
         this.TaskTemplateName = params.TaskTemplateName || null;
-        this.TaskTemplateDescription = params.TaskTemplateDescription || null;
 
         if (params.TaskTemplateInfo) {
             let obj = new Task();
             obj.deserialize(params.TaskTemplateInfo)
             this.TaskTemplateInfo = obj;
         }
+        this.TaskTemplateDescription = params.TaskTemplateDescription || null;
 
     }
 }
@@ -1598,12 +1708,6 @@ class Job extends  AbstractModel {
         this.JobName = null;
 
         /**
-         * 作业描述
-         * @type {string || null}
-         */
-        this.JobDescription = null;
-
-        /**
          * 作业优先级，任务（Task）和任务实例（TaskInstance）会继承作业优先级
          * @type {number || null}
          */
@@ -1614,6 +1718,12 @@ class Job extends  AbstractModel {
          * @type {Array.<Task> || null}
          */
         this.Tasks = null;
+
+        /**
+         * 作业描述
+         * @type {string || null}
+         */
+        this.JobDescription = null;
 
         /**
          * 依赖信息
@@ -1649,7 +1759,6 @@ class Job extends  AbstractModel {
             return;
         }
         this.JobName = params.JobName || null;
-        this.JobDescription = params.JobDescription || null;
         this.Priority = params.Priority || null;
 
         if (params.Tasks) {
@@ -1660,6 +1769,7 @@ class Job extends  AbstractModel {
                 this.Tasks.push(obj);
             }
         }
+        this.JobDescription = params.JobDescription || null;
 
         if (params.Dependences) {
             this.Dependences = new Array();
@@ -1680,6 +1790,34 @@ class Job extends  AbstractModel {
         }
         this.TaskExecutionDependOn = params.TaskExecutionDependOn || null;
         this.StateIfCreateCvmFailed = params.StateIfCreateCvmFailed || null;
+
+    }
+}
+
+/**
+ * DeleteComputeEnv请求参数结构体
+ * @class
+ */
+class DeleteComputeEnvRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 计算环境ID
+         * @type {string || null}
+         */
+        this.EnvId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.EnvId = params.EnvId || null;
 
     }
 }
@@ -2083,6 +2221,46 @@ class DescribeComputeEnvRequest extends  AbstractModel {
             return;
         }
         this.EnvId = params.EnvId || null;
+
+    }
+}
+
+/**
+ * 竞价请求相关选项
+ * @class
+ */
+class InstanceMarketOptionsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 市场选项类型，当前只支持取值：spot
+         * @type {string || null}
+         */
+        this.MarketType = null;
+
+        /**
+         * 竞价相关选项
+         * @type {SpotMarketOptions || null}
+         */
+        this.SpotOptions = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MarketType = params.MarketType || null;
+
+        if (params.SpotOptions) {
+            let obj = new SpotMarketOptions();
+            obj.deserialize(params.SpotOptions)
+            this.SpotOptions = obj;
+        }
 
     }
 }
@@ -2492,6 +2670,12 @@ class DataDisk extends  AbstractModel {
         super();
 
         /**
+         * 数据盘大小，单位：GB。最小调整步长为10G，不同数据盘类型取值范围不同，具体限制详见：[CVM实例配置](/document/product/213/2177)。默认值为0，表示不购买数据盘。更多限制详见产品文档。
+         * @type {number || null}
+         */
+        this.DiskSize = null;
+
+        /**
          * 数据盘类型。数据盘类型限制详见[CVM实例配置](/document/product/213/2177)。取值范围：<br><li>LOCAL_BASIC：本地硬盘<br><li>LOCAL_SSD：本地SSD硬盘<br><li>CLOUD_BASIC：普通云硬盘<br><li>CLOUD_PREMIUM：高性能云硬盘<br><li>CLOUD_SSD：SSD云硬盘<br><br>默认取值：LOCAL_BASIC。<br><br>该参数对`ResizeInstanceDisk`接口无效。
          * @type {string || null}
          */
@@ -2503,12 +2687,6 @@ class DataDisk extends  AbstractModel {
          */
         this.DiskId = null;
 
-        /**
-         * 数据盘大小，单位：GB。最小调整步长为10G，不同数据盘类型取值范围不同，具体限制详见：[CVM实例配置](/document/product/213/2177)。默认值为0，表示不购买数据盘。更多限制详见产品文档。
-         * @type {number || null}
-         */
-        this.DiskSize = null;
-
     }
 
     /**
@@ -2518,9 +2696,9 @@ class DataDisk extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.DiskSize = params.DiskSize || null;
         this.DiskType = params.DiskType || null;
         this.DiskId = params.DiskId || null;
-        this.DiskSize = params.DiskSize || null;
 
     }
 }
@@ -2540,12 +2718,6 @@ class NamedComputeEnv extends  AbstractModel {
         this.EnvName = null;
 
         /**
-         * 计算环境描述
-         * @type {string || null}
-         */
-        this.EnvDescription = null;
-
-        /**
          * 计算环境管理类型
          * @type {string || null}
          */
@@ -2562,6 +2734,12 @@ class NamedComputeEnv extends  AbstractModel {
          * @type {number || null}
          */
         this.DesiredComputeNodeCount = null;
+
+        /**
+         * 计算环境描述
+         * @type {string || null}
+         */
+        this.EnvDescription = null;
 
         /**
          * 数据盘挂载选项
@@ -2609,7 +2787,6 @@ class NamedComputeEnv extends  AbstractModel {
             return;
         }
         this.EnvName = params.EnvName || null;
-        this.EnvDescription = params.EnvDescription || null;
         this.EnvType = params.EnvType || null;
 
         if (params.EnvData) {
@@ -2618,6 +2795,7 @@ class NamedComputeEnv extends  AbstractModel {
             this.EnvData = obj;
         }
         this.DesiredComputeNodeCount = params.DesiredComputeNodeCount || null;
+        this.EnvDescription = params.EnvDescription || null;
 
         if (params.MountDataDisks) {
             this.MountDataDisks = new Array();
@@ -2734,30 +2912,24 @@ class EventConfig extends  AbstractModel {
 }
 
 /**
- * 描述了实例登录相关配置与信息。
+ * 竞价相关选项
  * @class
  */
-class LoginSettings extends  AbstractModel {
+class SpotMarketOptions extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 实例登录密码。不同操作系统类型密码复杂度限制不一样，具体如下：<br><li>Linux实例密码必须8到16位，至少包括两项[a-z，A-Z]、[0-9] 和 [( ) ` ~ ! @ # $ % ^ & * - + = | { } [ ] : ; ' , . ? / ]中的特殊符号。<br><li>Windows实例密码必须12到16位，至少包括三项[a-z]，[A-Z]，[0-9] 和 [( ) ` ~ ! @ # $ % ^ & * - + = { } [ ] : ; ' , . ? /]中的特殊符号。<br><br>若不指定该参数，则由系统随机生成密码，并通过站内信方式通知到用户。
+         * 竞价出价
          * @type {string || null}
          */
-        this.Password = null;
+        this.MaxPrice = null;
 
         /**
-         * 密钥ID列表。关联密钥后，就可以通过对应的私钥来访问实例；KeyId可通过接口DescribeKeyPairs获取，密钥与密码不能同时指定，同时Windows操作系统不支持指定密钥。当前仅支持购买的时候指定一个密钥。
-         * @type {Array.<string> || null}
-         */
-        this.KeyIds = null;
-
-        /**
-         * 保持镜像的原始设置。该参数与Password或KeyIds.N不能同时指定。只有使用自定义镜像、共享镜像或外部导入镜像创建实例时才能指定该参数为TRUE。取值范围：<br><li>TRUE：表示保持镜像的登录设置<br><li>FALSE：表示不保持镜像的登录设置<br><br>默认取值：FALSE。
+         * 竞价请求类型，当前仅支持类型：one-time
          * @type {string || null}
          */
-        this.KeepImageLogin = null;
+        this.SpotInstanceType = null;
 
     }
 
@@ -2768,9 +2940,55 @@ class LoginSettings extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Password = params.Password || null;
-        this.KeyIds = params.KeyIds || null;
-        this.KeepImageLogin = params.KeepImageLogin || null;
+        this.MaxPrice = params.MaxPrice || null;
+        this.SpotInstanceType = params.SpotInstanceType || null;
+
+    }
+}
+
+/**
+ * 扩展数据
+ * @class
+ */
+class Externals extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 释放地址
+         * @type {boolean || null}
+         */
+        this.ReleaseAddress = null;
+
+        /**
+         * 不支持的网络类型
+         * @type {Array.<string> || null}
+         */
+        this.UnsupportNetworks = null;
+
+        /**
+         * HDD本地存储属性
+         * @type {StorageBlock || null}
+         */
+        this.StorageBlockAttr = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ReleaseAddress = params.ReleaseAddress || null;
+        this.UnsupportNetworks = params.UnsupportNetworks || null;
+
+        if (params.StorageBlockAttr) {
+            let obj = new StorageBlock();
+            obj.deserialize(params.StorageBlockAttr)
+            this.StorageBlockAttr = obj;
+        }
 
     }
 }
@@ -3416,16 +3634,16 @@ class Docker extends  AbstractModel {
         this.Password = null;
 
         /**
-         * Docker Hub 可以不填，但确保具有公网访问能力。或者是 Tencent Registry 服务地址“ccr.ccs.tencentyun.com”
-         * @type {string || null}
-         */
-        this.Server = null;
-
-        /**
          * Docker Hub填写“[user/repo]:[tag]”，Tencent Registry填写“ccr.ccs.tencentyun.com/[namespace/repo]:[tag]”
          * @type {string || null}
          */
         this.Image = null;
+
+        /**
+         * Docker Hub 可以不填，但确保具有公网访问能力。或者是 Tencent Registry 服务地址“ccr.ccs.tencentyun.com”
+         * @type {string || null}
+         */
+        this.Server = null;
 
     }
 
@@ -3438,8 +3656,8 @@ class Docker extends  AbstractModel {
         }
         this.User = params.User || null;
         this.Password = params.Password || null;
-        this.Server = params.Server || null;
         this.Image = params.Image || null;
+        this.Server = params.Server || null;
 
     }
 }
@@ -3493,7 +3711,7 @@ class Placement extends  AbstractModel {
         this.ProjectId = null;
 
         /**
-         * 实例所属的专用宿主机ID列表。如果您有购买专用宿主机并且指定了该参数，则您购买的实例就会随机的部署在这些专用宿主机上。当前暂不支持。
+         * 实例所属的专用宿主机ID列表。如果您有购买专用宿主机并且指定了该参数，则您购买的实例就会随机的部署在这些专用宿主机上。
          * @type {Array.<string> || null}
          */
         this.HostIds = null;
@@ -3606,18 +3824,36 @@ class ComputeNode extends  AbstractModel {
 }
 
 /**
- * DeleteComputeEnv请求参数结构体
+ * 描述了单项的价格信息
  * @class
  */
-class DeleteComputeEnvRequest extends  AbstractModel {
+class ItemPrice extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 计算环境ID
+         * 后续单价，单位：元。
+         * @type {number || null}
+         */
+        this.UnitPrice = null;
+
+        /**
+         * 后续计价单元，可取值范围： <br><li>HOUR：表示计价单元是按每小时来计算。当前涉及该计价单元的场景有：实例按小时后付费（POSTPAID_BY_HOUR）、带宽按小时后付费（BANDWIDTH_POSTPAID_BY_HOUR）：<br><li>GB：表示计价单元是按每GB来计算。当前涉及该计价单元的场景有：流量按小时后付费（TRAFFIC_POSTPAID_BY_HOUR）。
          * @type {string || null}
          */
-        this.EnvId = null;
+        this.ChargeUnit = null;
+
+        /**
+         * 预支费用的原价，单位：元。
+         * @type {number || null}
+         */
+        this.OriginalPrice = null;
+
+        /**
+         * 预支费用的折扣价，单位：元。
+         * @type {number || null}
+         */
+        this.DiscountPrice = null;
 
     }
 
@@ -3628,7 +3864,133 @@ class DeleteComputeEnvRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.EnvId = params.EnvId || null;
+        this.UnitPrice = params.UnitPrice || null;
+        this.ChargeUnit = params.ChargeUnit || null;
+        this.OriginalPrice = params.OriginalPrice || null;
+        this.DiscountPrice = params.DiscountPrice || null;
+
+    }
+}
+
+/**
+ * 描述实例机型配额信息。
+ * @class
+ */
+class InstanceTypeQuotaItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 可用区。
+         * @type {string || null}
+         */
+        this.Zone = null;
+
+        /**
+         * 实例机型。
+         * @type {string || null}
+         */
+        this.InstanceType = null;
+
+        /**
+         * 实例计费模式。取值范围： <br><li>PREPAID：表示预付费，即包年包月<br><li>POSTPAID_BY_HOUR：表示后付费，即按量计费<br><li>CDHPAID：表示[CDH](https://cloud.tencent.com/document/product/416)付费，即只对CDH计费，不对CDH上的实例计费。
+         * @type {string || null}
+         */
+        this.InstanceChargeType = null;
+
+        /**
+         * 网卡类型，例如：25代表25G网卡
+         * @type {number || null}
+         */
+        this.NetworkCard = null;
+
+        /**
+         * 扩展属性。
+         * @type {Externals || null}
+         */
+        this.Externals = null;
+
+        /**
+         * 实例的CPU核数，单位：核。
+         * @type {number || null}
+         */
+        this.Cpu = null;
+
+        /**
+         * 实例内存容量，单位：`GB`。
+         * @type {number || null}
+         */
+        this.Memory = null;
+
+        /**
+         * 实例机型系列。
+         * @type {string || null}
+         */
+        this.InstanceFamily = null;
+
+        /**
+         * 机型名称。
+         * @type {string || null}
+         */
+        this.TypeName = null;
+
+        /**
+         * 本地磁盘规格列表。
+         * @type {Array.<LocalDiskType> || null}
+         */
+        this.LocalDiskTypeList = null;
+
+        /**
+         * 实例是否售卖。
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * 实例的售卖价格。
+         * @type {ItemPrice || null}
+         */
+        this.Price = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Zone = params.Zone || null;
+        this.InstanceType = params.InstanceType || null;
+        this.InstanceChargeType = params.InstanceChargeType || null;
+        this.NetworkCard = params.NetworkCard || null;
+
+        if (params.Externals) {
+            let obj = new Externals();
+            obj.deserialize(params.Externals)
+            this.Externals = obj;
+        }
+        this.Cpu = params.Cpu || null;
+        this.Memory = params.Memory || null;
+        this.InstanceFamily = params.InstanceFamily || null;
+        this.TypeName = params.TypeName || null;
+
+        if (params.LocalDiskTypeList) {
+            this.LocalDiskTypeList = new Array();
+            for (let z in params.LocalDiskTypeList) {
+                let obj = new LocalDiskType();
+                obj.deserialize(params.LocalDiskTypeList[z]);
+                this.LocalDiskTypeList.push(obj);
+            }
+        }
+        this.Status = params.Status || null;
+
+        if (params.Price) {
+            let obj = new ItemPrice();
+            obj.deserialize(params.Price)
+            this.Price = obj;
+        }
 
     }
 }
@@ -3843,6 +4205,39 @@ class DeleteTaskTemplatesResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeCvmZoneInstanceConfigInfos请求参数结构体
+ * @class
+ */
+class DescribeCvmZoneInstanceConfigInfosRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 过滤条件
+         * @type {Filter || null}
+         */
+        this.Filters = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Filters) {
+            let obj = new Filter();
+            obj.deserialize(params.Filters)
+            this.Filters = obj;
+        }
+
+    }
+}
+
+/**
  * TerminateTaskInstance请求参数结构体
  * @class
  */
@@ -3908,6 +4303,41 @@ class TerminateTaskInstanceResponse extends  AbstractModel {
             return;
         }
         this.RequestId = params.RequestId || null;
+
+    }
+}
+
+/**
+ * ModifyComputeEnv请求参数结构体
+ * @class
+ */
+class ModifyComputeEnvRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 计算环境ID
+         * @type {string || null}
+         */
+        this.EnvId = null;
+
+        /**
+         * 计算节点期望个数
+         * @type {number || null}
+         */
+        this.DesiredComputeNodeCount = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.EnvId = params.EnvId || null;
+        this.DesiredComputeNodeCount = params.DesiredComputeNodeCount || null;
 
     }
 }
@@ -4303,6 +4733,49 @@ class DescribeComputeEnvsRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeCvmZoneInstanceConfigInfos返回参数结构体
+ * @class
+ */
+class DescribeCvmZoneInstanceConfigInfosResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 可用区机型配置列表。
+         * @type {Array.<InstanceTypeQuotaItem> || null}
+         */
+        this.InstanceTypeQuotaSet = null;
+
+        /**
+         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.InstanceTypeQuotaSet) {
+            this.InstanceTypeQuotaSet = new Array();
+            for (let z in params.InstanceTypeQuotaSet) {
+                let obj = new InstanceTypeQuotaItem();
+                obj.deserialize(params.InstanceTypeQuotaSet[z]);
+                this.InstanceTypeQuotaSet.push(obj);
+            }
+        }
+        this.RequestId = params.RequestId || null;
+
+    }
+}
+
+/**
  * DescribeJobs返回参数结构体
  * @class
  */
@@ -4575,24 +5048,30 @@ class DescribeAvailableCvmInstanceTypesRequest extends  AbstractModel {
 }
 
 /**
- * ModifyComputeEnv请求参数结构体
+ * HDD的本地存储信息
  * @class
  */
-class ModifyComputeEnvRequest extends  AbstractModel {
+class StorageBlock extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 计算环境ID
+         * HDD本地存储类型，值为：LOCAL_PRO.
          * @type {string || null}
          */
-        this.EnvId = null;
+        this.Type = null;
 
         /**
-         * 计算节点期望个数
+         * HDD本地存储的最小容量
          * @type {number || null}
          */
-        this.DesiredComputeNodeCount = null;
+        this.MinSize = null;
+
+        /**
+         * HDD本地存储的最大容量
+         * @type {number || null}
+         */
+        this.MaxSize = null;
 
     }
 
@@ -4603,8 +5082,9 @@ class ModifyComputeEnvRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.EnvId = params.EnvId || null;
-        this.DesiredComputeNodeCount = params.DesiredComputeNodeCount || null;
+        this.Type = params.Type || null;
+        this.MinSize = params.MinSize || null;
+        this.MaxSize = params.MaxSize || null;
 
     }
 }
@@ -4774,6 +5254,7 @@ class EnvVar extends  AbstractModel {
 }
 
 module.exports = {
+    EventVar: EventVar,
     AnonymousComputeEnv: AnonymousComputeEnv,
     DeleteComputeEnvResponse: DeleteComputeEnvResponse,
     SubmitJobRequest: SubmitJobRequest,
@@ -4786,6 +5267,7 @@ module.exports = {
     SystemDisk: SystemDisk,
     Task: Task,
     InstanceTypeConfig: InstanceTypeConfig,
+    LoginSettings: LoginSettings,
     DescribeComputeEnvActivitiesResponse: DescribeComputeEnvActivitiesResponse,
     TaskInstanceMetrics: TaskInstanceMetrics,
     MountDataDisk: MountDataDisk,
@@ -4797,15 +5279,17 @@ module.exports = {
     TaskInstanceView: TaskInstanceView,
     TaskMetrics: TaskMetrics,
     TerminateComputeNodesRequest: TerminateComputeNodesRequest,
-    EventVar: EventVar,
+    LocalDiskType: LocalDiskType,
     DescribeComputeEnvActivitiesRequest: DescribeComputeEnvActivitiesRequest,
     CreateTaskTemplateRequest: CreateTaskTemplateRequest,
     Job: Job,
+    DeleteComputeEnvRequest: DeleteComputeEnvRequest,
     CreateComputeEnvRequest: CreateComputeEnvRequest,
     DescribeComputeEnvCreateInfoResponse: DescribeComputeEnvCreateInfoResponse,
     ComputeEnvCreateInfo: ComputeEnvCreateInfo,
     DescribeComputeEnvCreateInfosRequest: DescribeComputeEnvCreateInfosRequest,
     DescribeComputeEnvRequest: DescribeComputeEnvRequest,
+    InstanceMarketOptionsRequest: InstanceMarketOptionsRequest,
     DescribeTaskTemplatesResponse: DescribeTaskTemplatesResponse,
     ComputeNodeMetrics: ComputeNodeMetrics,
     DeleteJobRequest: DeleteJobRequest,
@@ -4817,7 +5301,8 @@ module.exports = {
     NamedComputeEnv: NamedComputeEnv,
     DeleteJobResponse: DeleteJobResponse,
     EventConfig: EventConfig,
-    LoginSettings: LoginSettings,
+    SpotMarketOptions: SpotMarketOptions,
+    Externals: Externals,
     OutputMapping: OutputMapping,
     EnhancedService: EnhancedService,
     DescribeJobSubmitInfoResponse: DescribeJobSubmitInfoResponse,
@@ -4837,14 +5322,17 @@ module.exports = {
     ModifyComputeEnvResponse: ModifyComputeEnvResponse,
     Placement: Placement,
     ComputeNode: ComputeNode,
-    DeleteComputeEnvRequest: DeleteComputeEnvRequest,
+    ItemPrice: ItemPrice,
+    InstanceTypeQuotaItem: InstanceTypeQuotaItem,
     CreateTaskTemplateResponse: CreateTaskTemplateResponse,
     TerminateJobResponse: TerminateJobResponse,
     DescribeJobsRequest: DescribeJobsRequest,
     TaskTemplateView: TaskTemplateView,
     DeleteTaskTemplatesResponse: DeleteTaskTemplatesResponse,
+    DescribeCvmZoneInstanceConfigInfosRequest: DescribeCvmZoneInstanceConfigInfosRequest,
     TerminateTaskInstanceRequest: TerminateTaskInstanceRequest,
     TerminateTaskInstanceResponse: TerminateTaskInstanceResponse,
+    ModifyComputeEnvRequest: ModifyComputeEnvRequest,
     TerminateComputeNodesResponse: TerminateComputeNodesResponse,
     DescribeAvailableCvmInstanceTypesResponse: DescribeAvailableCvmInstanceTypesResponse,
     DescribeTaskResponse: DescribeTaskResponse,
@@ -4852,13 +5340,14 @@ module.exports = {
     DescribeComputeEnvsResponse: DescribeComputeEnvsResponse,
     DescribeTaskRequest: DescribeTaskRequest,
     DescribeComputeEnvsRequest: DescribeComputeEnvsRequest,
+    DescribeCvmZoneInstanceConfigInfosResponse: DescribeCvmZoneInstanceConfigInfosResponse,
     DescribeJobsResponse: DescribeJobsResponse,
     Activity: Activity,
     RunMonitorServiceEnabled: RunMonitorServiceEnabled,
     TerminateComputeNodeResponse: TerminateComputeNodeResponse,
     VirtualPrivateCloud: VirtualPrivateCloud,
     DescribeAvailableCvmInstanceTypesRequest: DescribeAvailableCvmInstanceTypesRequest,
-    ModifyComputeEnvRequest: ModifyComputeEnvRequest,
+    StorageBlock: StorageBlock,
     InternetAccessible: InternetAccessible,
     JobView: JobView,
     EnvVar: EnvVar,

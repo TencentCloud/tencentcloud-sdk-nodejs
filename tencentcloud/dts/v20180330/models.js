@@ -1,6 +1,56 @@
 const AbstractModel = require("../../common/abstract_model");
 
 /**
+ * DescribeSyncJobs返回参数结构体
+ * @class
+ */
+class DescribeSyncJobsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 任务数目
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 任务详情数组
+         * @type {Array.<SyncJobInfo> || null}
+         */
+        this.JobList = null;
+
+        /**
+         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = params.TotalCount || null;
+
+        if (params.JobList) {
+            this.JobList = new Array();
+            for (let z in params.JobList) {
+                let obj = new SyncJobInfo();
+                obj.deserialize(params.JobList[z]);
+                this.JobList.push(obj);
+            }
+        }
+        this.RequestId = params.RequestId || null;
+
+    }
+}
+
+/**
  * DescribeMigrateJobs返回参数结构体
  * @class
  */
@@ -51,36 +101,54 @@ class DescribeMigrateJobsResponse extends  AbstractModel {
 }
 
 /**
- * 迁移中的步骤信息
+ * 描述详细迁移过程
  * @class
  */
-class MigrateStepDetailInfo extends  AbstractModel {
+class MigrateDetailInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 步骤序列
+         * 总步骤数
          * @type {number || null}
          */
-        this.StepNo = null;
+        this.StepAll = null;
 
         /**
-         * 步骤展现名称
-         * @type {string || null}
-         */
-        this.StepName = null;
-
-        /**
-         * 步骤英文标识
-         * @type {string || null}
-         */
-        this.StepId = null;
-
-        /**
-         * 步骤状态:0-默认值,1-成功,2-失败,3-执行中,4-未执行
+         * 当前步骤
          * @type {number || null}
          */
-        this.Status = null;
+        this.StepNow = null;
+
+        /**
+         * 总进度,如：
+         * @type {string || null}
+         */
+        this.Progress = null;
+
+        /**
+         * 当前步骤进度,如:
+         * @type {string || null}
+         */
+        this.CurrentStepProgress = null;
+
+        /**
+         * 主从差距，MB
+         * @type {number || null}
+         */
+        this.MasterSlaveDistance = null;
+
+        /**
+         * 主从差距，秒
+         * @type {number || null}
+         */
+        this.SecondsBehindMaster = null;
+
+        /**
+         * 步骤信息
+         * @type {Array.<MigrateStepDetailInfo> || null}
+         */
+        this.StepInfo = null;
 
     }
 
@@ -91,10 +159,21 @@ class MigrateStepDetailInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.StepNo = params.StepNo || null;
-        this.StepName = params.StepName || null;
-        this.StepId = params.StepId || null;
-        this.Status = params.Status || null;
+        this.StepAll = params.StepAll || null;
+        this.StepNow = params.StepNow || null;
+        this.Progress = params.Progress || null;
+        this.CurrentStepProgress = params.CurrentStepProgress || null;
+        this.MasterSlaveDistance = params.MasterSlaveDistance || null;
+        this.SecondsBehindMaster = params.SecondsBehindMaster || null;
+
+        if (params.StepInfo) {
+            this.StepInfo = new Array();
+            for (let z in params.StepInfo) {
+                let obj = new MigrateStepDetailInfo();
+                obj.deserialize(params.StepInfo[z]);
+                this.StepInfo.push(obj);
+            }
+        }
 
     }
 }
@@ -156,6 +235,76 @@ class CreateMigrateCheckJobRequest extends  AbstractModel {
 }
 
 /**
+ * 灾备同步的实例信息，记录主实例或灾备实例的信息
+ * @class
+ */
+class SyncInstanceInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 地域英文名，如：ap-guangzhou
+         * @type {string || null}
+         */
+        this.Region = null;
+
+        /**
+         * 实例短Id
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Region = params.Region || null;
+        this.InstanceId = params.InstanceId || null;
+
+    }
+}
+
+/**
+ * CreateSyncJob返回参数结构体
+ * @class
+ */
+class CreateSyncJobResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 灾备同步任务ID
+         * @type {string || null}
+         */
+        this.JobId = null;
+
+        /**
+         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.JobId = params.JobId || null;
+        this.RequestId = params.RequestId || null;
+
+    }
+}
+
+/**
  * DescribeMigrateCheckJob请求参数结构体
  * @class
  */
@@ -193,6 +342,74 @@ class StartMigrateJobRequest extends  AbstractModel {
 
         /**
          * 数据迁移任务ID
+         * @type {string || null}
+         */
+        this.JobId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.JobId = params.JobId || null;
+
+    }
+}
+
+/**
+ * SwitchDrToMaster请求参数结构体
+ * @class
+ */
+class SwitchDrToMasterRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 灾备实例的信息
+         * @type {SyncInstanceInfo || null}
+         */
+        this.DstInfo = null;
+
+        /**
+         * 数据库的类型  （如 mysql）
+         * @type {string || null}
+         */
+        this.DatabaseType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.DstInfo) {
+            let obj = new SyncInstanceInfo();
+            obj.deserialize(params.DstInfo)
+            this.DstInfo = obj;
+        }
+        this.DatabaseType = params.DatabaseType || null;
+
+    }
+}
+
+/**
+ * StartSyncJob请求参数结构体
+ * @class
+ */
+class StartSyncJobRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 灾备同步任务ID
          * @type {string || null}
          */
         this.JobId = null;
@@ -314,6 +531,152 @@ Schema:s1}]
             this.DstInfo = obj;
         }
         this.DatabaseInfo = params.DatabaseInfo || null;
+
+    }
+}
+
+/**
+ * 灾备同步任务信息
+ * @class
+ */
+class SyncJobInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 灾备任务id
+         * @type {string || null}
+         */
+        this.JobId = null;
+
+        /**
+         * 灾备任务名
+         * @type {string || null}
+         */
+        this.JobName = null;
+
+        /**
+         * 任务同步
+         * @type {SyncOption || null}
+         */
+        this.SyncOption = null;
+
+        /**
+         * 源接入类型
+         * @type {string || null}
+         */
+        this.SrcAccessType = null;
+
+        /**
+         * 源数据类型
+         * @type {string || null}
+         */
+        this.SrcDatabaseType = null;
+
+        /**
+         * 源实例信息
+         * @type {SyncInstanceInfo || null}
+         */
+        this.SrcInfo = null;
+
+        /**
+         * 灾备接入类型
+         * @type {string || null}
+         */
+        this.DstAccessType = null;
+
+        /**
+         * 灾备数据类型
+         * @type {string || null}
+         */
+        this.DstDatabaseType = null;
+
+        /**
+         * 灾备实例信息
+         * @type {SyncInstanceInfo || null}
+         */
+        this.DstInfo = null;
+
+        /**
+         * 任务信息
+         * @type {SyncDetailInfo || null}
+         */
+        this.Detail = null;
+
+        /**
+         * 任务状态
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * 迁移库表
+         * @type {string || null}
+         */
+        this.DatabaseInfo = null;
+
+        /**
+         * 创建时间
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * 开始时间
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * 结束时间
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.JobId = params.JobId || null;
+        this.JobName = params.JobName || null;
+
+        if (params.SyncOption) {
+            let obj = new SyncOption();
+            obj.deserialize(params.SyncOption)
+            this.SyncOption = obj;
+        }
+        this.SrcAccessType = params.SrcAccessType || null;
+        this.SrcDatabaseType = params.SrcDatabaseType || null;
+
+        if (params.SrcInfo) {
+            let obj = new SyncInstanceInfo();
+            obj.deserialize(params.SrcInfo)
+            this.SrcInfo = obj;
+        }
+        this.DstAccessType = params.DstAccessType || null;
+        this.DstDatabaseType = params.DstDatabaseType || null;
+
+        if (params.DstInfo) {
+            let obj = new SyncInstanceInfo();
+            obj.deserialize(params.DstInfo)
+            this.DstInfo = obj;
+        }
+
+        if (params.Detail) {
+            let obj = new SyncDetailInfo();
+            obj.deserialize(params.Detail)
+            this.Detail = obj;
+        }
+        this.Status = params.Status || null;
+        this.DatabaseInfo = params.DatabaseInfo || null;
+        this.CreateTime = params.CreateTime || null;
+        this.StartTime = params.StartTime || null;
+        this.EndTime = params.EndTime || null;
 
     }
 }
@@ -564,6 +927,55 @@ class ConsistencyParams extends  AbstractModel {
 }
 
 /**
+ * 灾备同步任务配置选项
+ * @class
+ */
+class SyncOption extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 同步对象，1-整个实例，2-指定库表
+         * @type {number || null}
+         */
+        this.SyncObject = null;
+
+        /**
+         * 同步开始设置，1-立即开始
+         * @type {number || null}
+         */
+        this.RunMode = null;
+
+        /**
+         * 同步模式， 3-增量同步
+         * @type {number || null}
+         */
+        this.SyncType = null;
+
+        /**
+         * 数据一致性检测， 1-不配置
+         * @type {number || null}
+         */
+        this.ConsistencyType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SyncObject = params.SyncObject || null;
+        this.RunMode = params.RunMode || null;
+        this.SyncType = params.SyncType || null;
+        this.ConsistencyType = params.ConsistencyType || null;
+
+    }
+}
+
+/**
  * 迁移任务配置选项
  * @class
  */
@@ -688,6 +1100,55 @@ class CreateMigrateCheckJobResponse extends  AbstractModel {
 }
 
 /**
+ * 迁移中的步骤信息
+ * @class
+ */
+class MigrateStepDetailInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 步骤序列
+         * @type {number || null}
+         */
+        this.StepNo = null;
+
+        /**
+         * 步骤展现名称
+         * @type {string || null}
+         */
+        this.StepName = null;
+
+        /**
+         * 步骤英文标识
+         * @type {string || null}
+         */
+        this.StepId = null;
+
+        /**
+         * 步骤状态:0-默认值,1-成功,2-失败,3-执行中,4-未执行
+         * @type {number || null}
+         */
+        this.Status = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.StepNo = params.StepNo || null;
+        this.StepName = params.StepName || null;
+        this.StepId = params.StepId || null;
+        this.Status = params.Status || null;
+
+    }
+}
+
+/**
  * DescribeMigrateCheckJob返回参数结构体
  * @class
  */
@@ -751,10 +1212,553 @@ class DescribeMigrateCheckJobResponse extends  AbstractModel {
 }
 
 /**
- * 描述详细迁移过程
+ * StartSyncJob返回参数结构体
  * @class
  */
-class MigrateDetailInfo extends  AbstractModel {
+class StartSyncJobResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = params.RequestId || null;
+
+    }
+}
+
+/**
+ * CreateSyncCheckJob返回参数结构体
+ * @class
+ */
+class CreateSyncCheckJobResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = params.RequestId || null;
+
+    }
+}
+
+/**
+ * DescribeSyncCheckJob请求参数结构体
+ * @class
+ */
+class DescribeSyncCheckJobRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 要查询的灾备同步任务ID
+         * @type {string || null}
+         */
+        this.JobId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.JobId = params.JobId || null;
+
+    }
+}
+
+/**
+ * StopMigrateJob请求参数结构体
+ * @class
+ */
+class StopMigrateJobRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 数据迁移任务ID
+         * @type {string || null}
+         */
+        this.JobId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.JobId = params.JobId || null;
+
+    }
+}
+
+/**
+ * ModifySyncJob返回参数结构体
+ * @class
+ */
+class ModifySyncJobResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = params.RequestId || null;
+
+    }
+}
+
+/**
+ * ModifyMigrateJob请求参数结构体
+ * @class
+ */
+class ModifyMigrateJobRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 待修改的数据迁移任务ID
+         * @type {string || null}
+         */
+        this.JobId = null;
+
+        /**
+         * 数据迁移任务名称
+         * @type {string || null}
+         */
+        this.JobName = null;
+
+        /**
+         * 迁移任务配置选项
+         * @type {MigrateOption || null}
+         */
+        this.MigrateOption = null;
+
+        /**
+         * 源实例接入类型，值包括：extranet(外网),cvm(cvm自建实例),dcg(专线接入的实例),vpncloud(云vpn接入的实例),vpnselfbuild(自建vpn接入的实例)，cdb(云上cdb实例)
+         * @type {string || null}
+         */
+        this.SrcAccessType = null;
+
+        /**
+         * 源实例信息，具体内容跟迁移任务类型相关
+         * @type {SrcInfo || null}
+         */
+        this.SrcInfo = null;
+
+        /**
+         * 目标实例接入类型，值包括：extranet(外网),cvm(cvm自建实例),dcg(专线接入的实例),vpncloud(云vpn接入的实例),vpnselfbuild(自建vpn接入的实例)，cdb(云上cdb实例). 目前只支持cdb.
+         * @type {string || null}
+         */
+        this.DstAccessType = null;
+
+        /**
+         * 目标实例信息, 其中目标实例地域不允许修改.
+         * @type {DstInfo || null}
+         */
+        this.DstInfo = null;
+
+        /**
+         * 当选择'指定库表'迁移的时候, 需要设置待迁移的源数据库表信息,用符合json数组格式的字符串描述, 如下所例。
+
+对于database-table两级结构的数据库：
+[{"Database":"db1","Table":["table1","table2"]},{"Database":"db2"}]
+对于database-schema-table三级结构：
+[{"Database":"db1","Schema":"s1","Table":["table1","table2"]},{"Database":"db1","Schema":"s2","Table":["table1","table2"]},{"Database":"db2","Schema":"s1","Table":["table1","table2"]},{"Database":"db3"},{"Database":"db4","Schema":"s1"}]
+
+如果是'整个实例'的迁移模式,不需设置该字段
+         * @type {string || null}
+         */
+        this.DatabaseInfo = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.JobId = params.JobId || null;
+        this.JobName = params.JobName || null;
+
+        if (params.MigrateOption) {
+            let obj = new MigrateOption();
+            obj.deserialize(params.MigrateOption)
+            this.MigrateOption = obj;
+        }
+        this.SrcAccessType = params.SrcAccessType || null;
+
+        if (params.SrcInfo) {
+            let obj = new SrcInfo();
+            obj.deserialize(params.SrcInfo)
+            this.SrcInfo = obj;
+        }
+        this.DstAccessType = params.DstAccessType || null;
+
+        if (params.DstInfo) {
+            let obj = new DstInfo();
+            obj.deserialize(params.DstInfo)
+            this.DstInfo = obj;
+        }
+        this.DatabaseInfo = params.DatabaseInfo || null;
+
+    }
+}
+
+/**
+ * CompleteMigrateJob请求参数结构体
+ * @class
+ */
+class CompleteMigrateJobRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 数据迁移任务ID
+         * @type {string || null}
+         */
+        this.JobId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.JobId = params.JobId || null;
+
+    }
+}
+
+/**
+ * 灾备任务校验步骤
+ * @class
+ */
+class SyncCheckStepInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 步骤序列
+         * @type {number || null}
+         */
+        this.StepNo = null;
+
+        /**
+         * 步骤展现名称
+         * @type {string || null}
+         */
+        this.StepName = null;
+
+        /**
+         * 步骤执行结果代码
+         * @type {number || null}
+         */
+        this.StepCode = null;
+
+        /**
+         * 步骤执行结果提示
+         * @type {string || null}
+         */
+        this.StepMessage = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.StepNo = params.StepNo || null;
+        this.StepName = params.StepName || null;
+        this.StepCode = params.StepCode || null;
+        this.StepMessage = params.StepMessage || null;
+
+    }
+}
+
+/**
+ * CreateSyncJob请求参数结构体
+ * @class
+ */
+class CreateSyncJobRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 灾备同步任务名
+         * @type {string || null}
+         */
+        this.JobName = null;
+
+        /**
+         * 灾备同步任务配置选项
+         * @type {SyncOption || null}
+         */
+        this.SyncOption = null;
+
+        /**
+         * 源实例数据库类型，目前仅包括：mysql
+         * @type {string || null}
+         */
+        this.SrcDatabaseType = null;
+
+        /**
+         * 源实例接入类型，目前仅包括：cdb(云上cdb实例)
+         * @type {string || null}
+         */
+        this.SrcAccessType = null;
+
+        /**
+         * 源实例信息
+         * @type {SyncInstanceInfo || null}
+         */
+        this.SrcInfo = null;
+
+        /**
+         * 目标实例数据库类型，目前仅包括：mysql
+         * @type {string || null}
+         */
+        this.DstDatabaseType = null;
+
+        /**
+         * 目标实例接入类型，目前仅包括：cdb(云上cdb实例)
+         * @type {string || null}
+         */
+        this.DstAccessType = null;
+
+        /**
+         * 目标实例信息
+         * @type {SyncInstanceInfo || null}
+         */
+        this.DstInfo = null;
+
+        /**
+         * 需要同步的源数据库表信息，用json格式的字符串描述。
+对于database-table两级结构的数据库：
+[{Database:db1,Table:[table1,table2]},{Database:db2}]
+         * @type {string || null}
+         */
+        this.DatabaseInfo = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.JobName = params.JobName || null;
+
+        if (params.SyncOption) {
+            let obj = new SyncOption();
+            obj.deserialize(params.SyncOption)
+            this.SyncOption = obj;
+        }
+        this.SrcDatabaseType = params.SrcDatabaseType || null;
+        this.SrcAccessType = params.SrcAccessType || null;
+
+        if (params.SrcInfo) {
+            let obj = new SyncInstanceInfo();
+            obj.deserialize(params.SrcInfo)
+            this.SrcInfo = obj;
+        }
+        this.DstDatabaseType = params.DstDatabaseType || null;
+        this.DstAccessType = params.DstAccessType || null;
+
+        if (params.DstInfo) {
+            let obj = new SyncInstanceInfo();
+            obj.deserialize(params.DstInfo)
+            this.DstInfo = obj;
+        }
+        this.DatabaseInfo = params.DatabaseInfo || null;
+
+    }
+}
+
+/**
+ * DescribeSyncJobs请求参数结构体
+ * @class
+ */
+class DescribeSyncJobsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 灾备同步任务ID
+         * @type {string || null}
+         */
+        this.JobId = null;
+
+        /**
+         * 灾备同步任务名
+         * @type {string || null}
+         */
+        this.JobName = null;
+
+        /**
+         * 排序字段，可以取值为JobId、Status、JobName、CreateTime
+         * @type {string || null}
+         */
+        this.Order = null;
+
+        /**
+         * 排序方式，升序为ASC，降序为DESC
+         * @type {string || null}
+         */
+        this.OrderSeq = null;
+
+        /**
+         * 偏移量，默认为0
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 返回实例数量，默认20，有效区间[1,100]
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.JobId = params.JobId || null;
+        this.JobName = params.JobName || null;
+        this.Order = params.Order || null;
+        this.OrderSeq = params.OrderSeq || null;
+        this.Offset = params.Offset || null;
+        this.Limit = params.Limit || null;
+
+    }
+}
+
+/**
+ * DescribeMigrateJobs请求参数结构体
+ * @class
+ */
+class DescribeMigrateJobsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 数据迁移任务ID
+         * @type {string || null}
+         */
+        this.JobId = null;
+
+        /**
+         * 数据迁移任务名称
+         * @type {string || null}
+         */
+        this.JobName = null;
+
+        /**
+         * 排序字段，可以取值为JobId、Status、JobName、MigrateType、RunMode、CreateTime
+         * @type {string || null}
+         */
+        this.Order = null;
+
+        /**
+         * 排序方式，升序为ASC，降序为DESC
+         * @type {string || null}
+         */
+        this.OrderSeq = null;
+
+        /**
+         * 偏移量，默认为0
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 返回实例数量，默认20，有效区间[1,100]
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.JobId = params.JobId || null;
+        this.JobName = params.JobName || null;
+        this.Order = params.Order || null;
+        this.OrderSeq = params.OrderSeq || null;
+        this.Offset = params.Offset || null;
+        this.Limit = params.Limit || null;
+
+    }
+}
+
+/**
+ * 描述详细同步任务过程
+ * @class
+ */
+class SyncDetailInfo extends  AbstractModel {
     constructor(){
         super();
 
@@ -771,13 +1775,13 @@ class MigrateDetailInfo extends  AbstractModel {
         this.StepNow = null;
 
         /**
-         * 总进度,如：
+         * 总进度
          * @type {string || null}
          */
         this.Progress = null;
 
         /**
-         * 当前步骤进度,如:
+         * 当前步骤进度
          * @type {string || null}
          */
         this.CurrentStepProgress = null;
@@ -796,7 +1800,7 @@ class MigrateDetailInfo extends  AbstractModel {
 
         /**
          * 步骤信息
-         * @type {Array.<MigrateStepDetailInfo> || null}
+         * @type {Array.<SyncStepDetailInfo> || null}
          */
         this.StepInfo = null;
 
@@ -819,7 +1823,7 @@ class MigrateDetailInfo extends  AbstractModel {
         if (params.StepInfo) {
             this.StepInfo = new Array();
             for (let z in params.StepInfo) {
-                let obj = new MigrateStepDetailInfo();
+                let obj = new SyncStepDetailInfo();
                 obj.deserialize(params.StepInfo[z]);
                 this.StepInfo.push(obj);
             }
@@ -829,15 +1833,302 @@ class MigrateDetailInfo extends  AbstractModel {
 }
 
 /**
- * StopMigrateJob请求参数结构体
+ * 同步任务进度
  * @class
  */
-class StopMigrateJobRequest extends  AbstractModel {
+class SyncStepDetailInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 步骤编号
+         * @type {number || null}
+         */
+        this.StepNo = null;
+
+        /**
+         * 步骤名
+         * @type {string || null}
+         */
+        this.StepName = null;
+
+        /**
+         * 能否中止
+         * @type {number || null}
+         */
+        this.CanStop = null;
+
+        /**
+         * 步骤号
+         * @type {number || null}
+         */
+        this.StepId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.StepNo = params.StepNo || null;
+        this.StepName = params.StepName || null;
+        this.CanStop = params.CanStop || null;
+        this.StepId = params.StepId || null;
+
+    }
+}
+
+/**
+ * StopMigrateJob返回参数结构体
+ * @class
+ */
+class StopMigrateJobResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = params.RequestId || null;
+
+    }
+}
+
+/**
+ * DeleteSyncJob返回参数结构体
+ * @class
+ */
+class DeleteSyncJobResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = params.RequestId || null;
+
+    }
+}
+
+/**
+ * CreateSyncCheckJob请求参数结构体
+ * @class
+ */
+class CreateSyncCheckJobRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 灾备同步任务ID
+         * @type {string || null}
+         */
+        this.JobId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.JobId = params.JobId || null;
+
+    }
+}
+
+/**
+ * SwitchDrToMaster返回参数结构体
+ * @class
+ */
+class SwitchDrToMasterResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 后台异步任务请求id
+         * @type {string || null}
+         */
+        this.AsyncRequestId = null;
+
+        /**
+         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AsyncRequestId = params.AsyncRequestId || null;
+        this.RequestId = params.RequestId || null;
+
+    }
+}
+
+/**
+ * CompleteMigrateJob返回参数结构体
+ * @class
+ */
+class CompleteMigrateJobResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = params.RequestId || null;
+
+    }
+}
+
+/**
+ * StartMigrateJob返回参数结构体
+ * @class
+ */
+class StartMigrateJobResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = params.RequestId || null;
+
+    }
+}
+
+/**
+ * CreateMigrateJob返回参数结构体
+ * @class
+ */
+class CreateMigrateJobResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
          * 数据迁移任务ID
+         * @type {string || null}
+         */
+        this.JobId = null;
+
+        /**
+         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.JobId = params.JobId || null;
+        this.RequestId = params.RequestId || null;
+
+    }
+}
+
+/**
+ * DeleteMigrateJob请求参数结构体
+ * @class
+ */
+class DeleteMigrateJobRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 数据迁移任务ID
+         * @type {string || null}
+         */
+        this.JobId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.JobId = params.JobId || null;
+
+    }
+}
+
+/**
+ * DeleteSyncJob请求参数结构体
+ * @class
+ */
+class DeleteSyncJobRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 待删除的灾备同步任务ID
          * @type {string || null}
          */
         this.JobId = null;
@@ -1003,274 +2294,35 @@ class MigrateJobInfo extends  AbstractModel {
 }
 
 /**
- * DescribeMigrateJobs请求参数结构体
+ * ModifySyncJob请求参数结构体
  * @class
  */
-class DescribeMigrateJobsRequest extends  AbstractModel {
+class ModifySyncJobRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 数据迁移任务ID
+         * 待修改的灾备同步任务ID
          * @type {string || null}
          */
         this.JobId = null;
 
         /**
-         * 数据迁移任务名称
+         * 灾备同步任务名称
          * @type {string || null}
          */
         this.JobName = null;
 
         /**
-         * 排序字段，可以取值为JobId、Status、JobName、MigrateType、RunMode、CreateTime
-         * @type {string || null}
+         * 灾备同步任务配置选项
+         * @type {SyncOption || null}
          */
-        this.Order = null;
+        this.SyncOption = null;
 
         /**
-         * 排序方式，升序为ASC，降序为DESC
-         * @type {string || null}
-         */
-        this.OrderSeq = null;
-
-        /**
-         * 偏移量，默认为0
-         * @type {number || null}
-         */
-        this.Offset = null;
-
-        /**
-         * 返回实例数量，默认20，有效区间[1,100]
-         * @type {number || null}
-         */
-        this.Limit = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.JobId = params.JobId || null;
-        this.JobName = params.JobName || null;
-        this.Order = params.Order || null;
-        this.OrderSeq = params.OrderSeq || null;
-        this.Offset = params.Offset || null;
-        this.Limit = params.Limit || null;
-
-    }
-}
-
-/**
- * StopMigrateJob返回参数结构体
- * @class
- */
-class StopMigrateJobResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RequestId = params.RequestId || null;
-
-    }
-}
-
-/**
- * CompleteMigrateJob请求参数结构体
- * @class
- */
-class CompleteMigrateJobRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 数据迁移任务ID
-         * @type {string || null}
-         */
-        this.JobId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.JobId = params.JobId || null;
-
-    }
-}
-
-/**
- * CompleteMigrateJob返回参数结构体
- * @class
- */
-class CompleteMigrateJobResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RequestId = params.RequestId || null;
-
-    }
-}
-
-/**
- * CreateMigrateJob返回参数结构体
- * @class
- */
-class CreateMigrateJobResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 数据迁移任务ID
-         * @type {string || null}
-         */
-        this.JobId = null;
-
-        /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.JobId = params.JobId || null;
-        this.RequestId = params.RequestId || null;
-
-    }
-}
-
-/**
- * DeleteMigrateJob请求参数结构体
- * @class
- */
-class DeleteMigrateJobRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 数据迁移任务ID
-         * @type {string || null}
-         */
-        this.JobId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.JobId = params.JobId || null;
-
-    }
-}
-
-/**
- * ModifyMigrateJob请求参数结构体
- * @class
- */
-class ModifyMigrateJobRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 待修改的数据迁移任务ID
-         * @type {string || null}
-         */
-        this.JobId = null;
-
-        /**
-         * 数据迁移任务名称
-         * @type {string || null}
-         */
-        this.JobName = null;
-
-        /**
-         * 迁移任务配置选项
-         * @type {MigrateOption || null}
-         */
-        this.MigrateOption = null;
-
-        /**
-         * 源实例接入类型，值包括：extranet(外网),cvm(cvm自建实例),dcg(专线接入的实例),vpncloud(云vpn接入的实例),vpnselfbuild(自建vpn接入的实例)，cdb(云上cdb实例)
-         * @type {string || null}
-         */
-        this.SrcAccessType = null;
-
-        /**
-         * 源实例信息，具体内容跟迁移任务类型相关
-         * @type {SrcInfo || null}
-         */
-        this.SrcInfo = null;
-
-        /**
-         * 目标实例接入类型，值包括：extranet(外网),cvm(cvm自建实例),dcg(专线接入的实例),vpncloud(云vpn接入的实例),vpnselfbuild(自建vpn接入的实例)，cdb(云上cdb实例). 目前只支持cdb.
-         * @type {string || null}
-         */
-        this.DstAccessType = null;
-
-        /**
-         * 目标实例信息, 其中目标实例地域不允许修改.
-         * @type {DstInfo || null}
-         */
-        this.DstInfo = null;
-
-        /**
-         * 当选择'指定库表'迁移的时候, 需要设置待迁移的源数据库表信息,用符合json数组格式的字符串描述, 如下所例。
-
+         * 当选择'指定库表'灾备同步的时候, 需要设置待同步的源数据库表信息,用符合json数组格式的字符串描述, 如下所例。
 对于database-table两级结构的数据库：
 [{"Database":"db1","Table":["table1","table2"]},{"Database":"db2"}]
-对于database-schema-table三级结构：
-[{"Database":"db1","Schema":"s1","Table":["table1","table2"]},{"Database":"db1","Schema":"s2","Table":["table1","table2"]},{"Database":"db2","Schema":"s1","Table":["table1","table2"]},{"Database":"db3"},{"Database":"db4","Schema":"s1"}]
-
-如果是'整个实例'的迁移模式,不需设置该字段
          * @type {string || null}
          */
         this.DatabaseInfo = null;
@@ -1287,24 +2339,10 @@ class ModifyMigrateJobRequest extends  AbstractModel {
         this.JobId = params.JobId || null;
         this.JobName = params.JobName || null;
 
-        if (params.MigrateOption) {
-            let obj = new MigrateOption();
-            obj.deserialize(params.MigrateOption)
-            this.MigrateOption = obj;
-        }
-        this.SrcAccessType = params.SrcAccessType || null;
-
-        if (params.SrcInfo) {
-            let obj = new SrcInfo();
-            obj.deserialize(params.SrcInfo)
-            this.SrcInfo = obj;
-        }
-        this.DstAccessType = params.DstAccessType || null;
-
-        if (params.DstInfo) {
-            let obj = new DstInfo();
-            obj.deserialize(params.DstInfo)
-            this.DstInfo = obj;
+        if (params.SyncOption) {
+            let obj = new SyncOption();
+            obj.deserialize(params.SyncOption)
+            this.SyncOption = obj;
         }
         this.DatabaseInfo = params.DatabaseInfo || null;
 
@@ -1312,12 +2350,42 @@ class ModifyMigrateJobRequest extends  AbstractModel {
 }
 
 /**
- * StartMigrateJob返回参数结构体
+ * DescribeSyncCheckJob返回参数结构体
  * @class
  */
-class StartMigrateJobResponse extends  AbstractModel {
+class DescribeSyncCheckJobResponse extends  AbstractModel {
     constructor(){
         super();
+
+        /**
+         * 任务校验状态
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * 任务校验结果代码
+         * @type {number || null}
+         */
+        this.ErrorCode = null;
+
+        /**
+         * 提示信息
+         * @type {string || null}
+         */
+        this.ErrorMessage = null;
+
+        /**
+         * 任务执行步骤描述
+         * @type {Array.<SyncCheckStepInfo> || null}
+         */
+        this.StepInfo = null;
+
+        /**
+         * 校验标志
+         * @type {number || null}
+         */
+        this.CheckFlag = null;
 
         /**
          * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
@@ -1334,36 +2402,71 @@ class StartMigrateJobResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.Status = params.Status || null;
+        this.ErrorCode = params.ErrorCode || null;
+        this.ErrorMessage = params.ErrorMessage || null;
+
+        if (params.StepInfo) {
+            this.StepInfo = new Array();
+            for (let z in params.StepInfo) {
+                let obj = new SyncCheckStepInfo();
+                obj.deserialize(params.StepInfo[z]);
+                this.StepInfo.push(obj);
+            }
+        }
+        this.CheckFlag = params.CheckFlag || null;
         this.RequestId = params.RequestId || null;
 
     }
 }
 
 module.exports = {
+    DescribeSyncJobsResponse: DescribeSyncJobsResponse,
     DescribeMigrateJobsResponse: DescribeMigrateJobsResponse,
-    MigrateStepDetailInfo: MigrateStepDetailInfo,
+    MigrateDetailInfo: MigrateDetailInfo,
     DeleteMigrateJobResponse: DeleteMigrateJobResponse,
     CreateMigrateCheckJobRequest: CreateMigrateCheckJobRequest,
+    SyncInstanceInfo: SyncInstanceInfo,
+    CreateSyncJobResponse: CreateSyncJobResponse,
     DescribeMigrateCheckJobRequest: DescribeMigrateCheckJobRequest,
     StartMigrateJobRequest: StartMigrateJobRequest,
+    SwitchDrToMasterRequest: SwitchDrToMasterRequest,
+    StartSyncJobRequest: StartSyncJobRequest,
     CreateMigrateJobRequest: CreateMigrateJobRequest,
+    SyncJobInfo: SyncJobInfo,
     DstInfo: DstInfo,
     ModifyMigrateJobResponse: ModifyMigrateJobResponse,
     SrcInfo: SrcInfo,
     ConsistencyParams: ConsistencyParams,
+    SyncOption: SyncOption,
     MigrateOption: MigrateOption,
     CreateMigrateCheckJobResponse: CreateMigrateCheckJobResponse,
+    MigrateStepDetailInfo: MigrateStepDetailInfo,
     DescribeMigrateCheckJobResponse: DescribeMigrateCheckJobResponse,
-    MigrateDetailInfo: MigrateDetailInfo,
+    StartSyncJobResponse: StartSyncJobResponse,
+    CreateSyncCheckJobResponse: CreateSyncCheckJobResponse,
+    DescribeSyncCheckJobRequest: DescribeSyncCheckJobRequest,
     StopMigrateJobRequest: StopMigrateJobRequest,
-    MigrateJobInfo: MigrateJobInfo,
-    DescribeMigrateJobsRequest: DescribeMigrateJobsRequest,
-    StopMigrateJobResponse: StopMigrateJobResponse,
+    ModifySyncJobResponse: ModifySyncJobResponse,
+    ModifyMigrateJobRequest: ModifyMigrateJobRequest,
     CompleteMigrateJobRequest: CompleteMigrateJobRequest,
+    SyncCheckStepInfo: SyncCheckStepInfo,
+    CreateSyncJobRequest: CreateSyncJobRequest,
+    DescribeSyncJobsRequest: DescribeSyncJobsRequest,
+    DescribeMigrateJobsRequest: DescribeMigrateJobsRequest,
+    SyncDetailInfo: SyncDetailInfo,
+    SyncStepDetailInfo: SyncStepDetailInfo,
+    StopMigrateJobResponse: StopMigrateJobResponse,
+    DeleteSyncJobResponse: DeleteSyncJobResponse,
+    CreateSyncCheckJobRequest: CreateSyncCheckJobRequest,
+    SwitchDrToMasterResponse: SwitchDrToMasterResponse,
     CompleteMigrateJobResponse: CompleteMigrateJobResponse,
+    StartMigrateJobResponse: StartMigrateJobResponse,
     CreateMigrateJobResponse: CreateMigrateJobResponse,
     DeleteMigrateJobRequest: DeleteMigrateJobRequest,
-    ModifyMigrateJobRequest: ModifyMigrateJobRequest,
-    StartMigrateJobResponse: StartMigrateJobResponse,
+    DeleteSyncJobRequest: DeleteSyncJobRequest,
+    MigrateJobInfo: MigrateJobInfo,
+    ModifySyncJobRequest: ModifySyncJobRequest,
+    DescribeSyncCheckJobResponse: DescribeSyncCheckJobResponse,
 
 }

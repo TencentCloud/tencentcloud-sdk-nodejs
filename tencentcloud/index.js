@@ -15,12 +15,14 @@ module.exports = {
     iot: require("./iot"),
     mariadb: require("./mariadb"),
     ms: require("./ms"),
+    msp: require("./msp"),
     partners: require("./partners"),
     postgres: require("./postgres"),
     scf: require("./scf"),
     tbm: require("./tbm"),
     tia: require("./tia"),
     tmt: require("./tmt"),
-    vpc: require("./vpc")
+    vpc: require("./vpc"),
+    youmall: require("./youmall")
 };
 

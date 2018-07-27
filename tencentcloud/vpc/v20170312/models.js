@@ -231,16 +231,16 @@ class CreateNetworkInterfaceRequest extends  AbstractModel {
         this.NetworkInterfaceName = null;
 
         /**
-         * 弹性网卡描述，可任意命名，但不得超过60个字符。
-         * @type {string || null}
-         */
-        this.NetworkInterfaceDescription = null;
-
-        /**
          * 弹性网卡所在的子网实例ID，例如：subnet-0ap8nwca。
          * @type {string || null}
          */
         this.SubnetId = null;
+
+        /**
+         * 弹性网卡描述，可任意命名，但不得超过60个字符。
+         * @type {string || null}
+         */
+        this.NetworkInterfaceDescription = null;
 
         /**
          * 新申请的内网IP地址个数。
@@ -271,8 +271,8 @@ class CreateNetworkInterfaceRequest extends  AbstractModel {
         }
         this.VpcId = params.VpcId || null;
         this.NetworkInterfaceName = params.NetworkInterfaceName || null;
-        this.NetworkInterfaceDescription = params.NetworkInterfaceDescription || null;
         this.SubnetId = params.SubnetId || null;
+        this.NetworkInterfaceDescription = params.NetworkInterfaceDescription || null;
         this.SecondaryPrivateIpAddressCount = params.SecondaryPrivateIpAddressCount || null;
         this.SecurityGroupIds = params.SecurityGroupIds || null;
 
@@ -304,7 +304,7 @@ class CreateRoutesRequest extends  AbstractModel {
 
         /**
          * 路由策略对象。
-         * @type {Array.<string> || null}
+         * @type {Array.<Route> || null}
          */
         this.Routes = null;
 
@@ -318,7 +318,15 @@ class CreateRoutesRequest extends  AbstractModel {
             return;
         }
         this.RouteTableId = params.RouteTableId || null;
-        this.Routes = params.Routes || null;
+
+        if (params.Routes) {
+            this.Routes = new Array();
+            for (let z in params.Routes) {
+                let obj = new Route();
+                obj.deserialize(params.Routes[z]);
+                this.Routes.push(obj);
+            }
+        }
 
     }
 }
@@ -1199,6 +1207,24 @@ class Vpc extends  AbstractModel {
          */
         this.CreatedTime = null;
 
+        /**
+         * DNS列表
+         * @type {Array.<string> || null}
+         */
+        this.DnsServerSet = null;
+
+        /**
+         * DHCP域名选项值
+         * @type {string || null}
+         */
+        this.DomainName = null;
+
+        /**
+         * DHCP选项集ID
+         * @type {string || null}
+         */
+        this.DhcpOptionsId = null;
+
     }
 
     /**
@@ -1214,6 +1240,9 @@ class Vpc extends  AbstractModel {
         this.IsDefault = params.IsDefault || null;
         this.EnableMulticast = params.EnableMulticast || null;
         this.CreatedTime = params.CreatedTime || null;
+        this.DnsServerSet = params.DnsServerSet || null;
+        this.DomainName = params.DomainName || null;
+        this.DhcpOptionsId = params.DhcpOptionsId || null;
 
     }
 }
@@ -3483,12 +3512,6 @@ class Route extends  AbstractModel {
         super();
 
         /**
-         * 路由策略ID。
-         * @type {number || null}
-         */
-        this.RouteId = null;
-
-        /**
          * 目的网段，取值不能在私有网络网段内，例如：112.20.51.0/24。
          * @type {string || null}
          */
@@ -3507,10 +3530,22 @@ class Route extends  AbstractModel {
         this.GatewayId = null;
 
         /**
+         * 路由策略ID。
+         * @type {number || null}
+         */
+        this.RouteId = null;
+
+        /**
          * 路由策略描述。
          * @type {string || null}
          */
         this.RouteDescription = null;
+
+        /**
+         * 是否启用
+         * @type {boolean || null}
+         */
+        this.Enabled = null;
 
     }
 
@@ -3521,11 +3556,12 @@ class Route extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RouteId = params.RouteId || null;
         this.DestinationCidrBlock = params.DestinationCidrBlock || null;
         this.GatewayType = params.GatewayType || null;
         this.GatewayId = params.GatewayId || null;
+        this.RouteId = params.RouteId || null;
         this.RouteDescription = params.RouteDescription || null;
+        this.Enabled = params.Enabled || null;
 
     }
 }
@@ -3649,7 +3685,7 @@ class DeleteRoutesRequest extends  AbstractModel {
 
         /**
          * 路由策略对象。
-         * @type {Array.<string> || null}
+         * @type {Array.<Route> || null}
          */
         this.Routes = null;
 
@@ -3663,7 +3699,15 @@ class DeleteRoutesRequest extends  AbstractModel {
             return;
         }
         this.RouteTableId = params.RouteTableId || null;
-        this.Routes = params.Routes || null;
+
+        if (params.Routes) {
+            this.Routes = new Array();
+            for (let z in params.Routes) {
+                let obj = new Route();
+                obj.deserialize(params.Routes[z]);
+                this.Routes.push(obj);
+            }
+        }
 
     }
 }
@@ -4042,7 +4086,7 @@ class DescribeVpcsRequest extends  AbstractModel {
         /**
          * 过滤条件，参数不支持同时指定VpcIds和Filters。
 <li>vpc-name - String - （过滤条件）VPC实例名称。</li>
-<li>is-default - Boolean - （过滤条件）是否默认VPC。</li>
+<li>is-default - String - （过滤条件）是否默认VPC。</li>
 <li>vpc-id - String - （过滤条件）VPC实例ID形如：vpc-f49l6u0z。</li>
 <li>cidr-block - String - （过滤条件）vpc的cidr。</li>
          * @type {Array.<Filter> || null}
@@ -4861,12 +4905,6 @@ class SecurityGroup extends  AbstractModel {
         super();
 
         /**
-         * 项目id，默认0。可在qcloud控制台项目管理页面查询到。
-         * @type {string || null}
-         */
-        this.ProjectId = null;
-
-        /**
          * 安全组实例ID，例如：sg-ohuuioma。
          * @type {string || null}
          */
@@ -4883,6 +4921,12 @@ class SecurityGroup extends  AbstractModel {
          * @type {string || null}
          */
         this.SecurityGroupDesc = null;
+
+        /**
+         * 项目id，默认0。可在qcloud控制台项目管理页面查询到。
+         * @type {string || null}
+         */
+        this.ProjectId = null;
 
         /**
          * 是否是默认安全组，默认安全组不支持删除。
@@ -4905,10 +4949,10 @@ class SecurityGroup extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ProjectId = params.ProjectId || null;
         this.SecurityGroupId = params.SecurityGroupId || null;
         this.SecurityGroupName = params.SecurityGroupName || null;
         this.SecurityGroupDesc = params.SecurityGroupDesc || null;
+        this.ProjectId = params.ProjectId || null;
         this.IsDefault = params.IsDefault || null;
         this.CreatedTime = params.CreatedTime || null;
 
@@ -5551,16 +5595,16 @@ class CreateVpnGatewayRequest extends  AbstractModel {
         this.VpnGatewayName = null;
 
         /**
-         * VPN网关计费模式，PREPAID：表示预付费，即包年包月，POSTPAID_BY_HOUR：表示后付费，即按量计费。默认：POSTPAID_BY_HOUR，如果指定预付费模式，参数InstanceChargePrepaid必填。
-         * @type {string || null}
-         */
-        this.InstanceChargeType = null;
-
-        /**
          * 公网带宽设置。可选带宽规格：5, 10, 20, 50, 100；单位：Mbps
          * @type {number || null}
          */
         this.InternetMaxBandwidthOut = null;
+
+        /**
+         * VPN网关计费模式，PREPAID：表示预付费，即包年包月，POSTPAID_BY_HOUR：表示后付费，即按量计费。默认：POSTPAID_BY_HOUR，如果指定预付费模式，参数InstanceChargePrepaid必填。
+         * @type {string || null}
+         */
+        this.InstanceChargeType = null;
 
         /**
          * 预付费模式，即包年包月相关参数设置。通过该参数可以指定包年包月实例的购买时长、是否设置自动续费等属性。若指定实例的付费模式为预付费则该参数必传。
@@ -5579,8 +5623,8 @@ class CreateVpnGatewayRequest extends  AbstractModel {
         }
         this.VpcId = params.VpcId || null;
         this.VpnGatewayName = params.VpnGatewayName || null;
-        this.InstanceChargeType = params.InstanceChargeType || null;
         this.InternetMaxBandwidthOut = params.InternetMaxBandwidthOut || null;
+        this.InstanceChargeType = params.InstanceChargeType || null;
 
         if (params.InstanceChargePrepaid) {
             let obj = new InstanceChargePrepaid();
@@ -6589,12 +6633,6 @@ class CreateSecurityGroupRequest extends  AbstractModel {
         super();
 
         /**
-         * 项目id，默认0。可在qcloud控制台项目管理页面查询到。
-         * @type {string || null}
-         */
-        this.ProjectId = null;
-
-        /**
          * 安全组名称，可任意命名，但不得超过60个字符。
          * @type {string || null}
          */
@@ -6606,6 +6644,12 @@ class CreateSecurityGroupRequest extends  AbstractModel {
          */
         this.GroupDescription = null;
 
+        /**
+         * 项目id，默认0。可在qcloud控制台项目管理页面查询到。
+         * @type {string || null}
+         */
+        this.ProjectId = null;
+
     }
 
     /**
@@ -6615,9 +6659,9 @@ class CreateSecurityGroupRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ProjectId = params.ProjectId || null;
         this.GroupName = params.GroupName || null;
         this.GroupDescription = params.GroupDescription || null;
+        this.ProjectId = params.ProjectId || null;
 
     }
 }
@@ -6807,7 +6851,7 @@ class DescribeAccountAttributesResponse extends  AbstractModel {
         super();
 
         /**
-         * 用户账号私有属性对象
+         * 用户账号属性对象
          * @type {Array.<AccountAttribute> || null}
          */
         this.AccountAttributeSet = null;
@@ -6850,6 +6894,12 @@ class InquiryPriceCreateVpnGatewayRequest extends  AbstractModel {
         super();
 
         /**
+         * 公网带宽设置。可选带宽规格：5, 10, 20, 50, 100；单位：Mbps。
+         * @type {number || null}
+         */
+        this.InternetMaxBandwidthOut = null;
+
+        /**
          * VPN网关计费模式，PREPAID：表示预付费，即包年包月，POSTPAID_BY_HOUR：表示后付费，即按量计费。默认：POSTPAID_BY_HOUR，如果指定预付费模式，参数InstanceChargePrepaid必填。
          * @type {string || null}
          */
@@ -6861,12 +6911,6 @@ class InquiryPriceCreateVpnGatewayRequest extends  AbstractModel {
          */
         this.InstanceChargePrepaid = null;
 
-        /**
-         * 公网带宽设置。可选带宽规格：5, 10, 20, 50, 100；单位：Mbps。
-         * @type {number || null}
-         */
-        this.InternetMaxBandwidthOut = null;
-
     }
 
     /**
@@ -6876,6 +6920,7 @@ class InquiryPriceCreateVpnGatewayRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.InternetMaxBandwidthOut = params.InternetMaxBandwidthOut || null;
         this.InstanceChargeType = params.InstanceChargeType || null;
 
         if (params.InstanceChargePrepaid) {
@@ -6883,7 +6928,6 @@ class InquiryPriceCreateVpnGatewayRequest extends  AbstractModel {
             obj.deserialize(params.InstanceChargePrepaid)
             this.InstanceChargePrepaid = obj;
         }
-        this.InternetMaxBandwidthOut = params.InternetMaxBandwidthOut || null;
 
     }
 }
