@@ -888,6 +888,12 @@ class SellConfig extends  AbstractModel {
         super();
 
         /**
+         * 设备类型
+         * @type {string || null}
+         */
+        this.Device = null;
+
+        /**
          * 售卖规格描述
          * @type {string || null}
          */
@@ -959,12 +965,6 @@ class SellConfig extends  AbstractModel {
          */
         this.Status = null;
 
-        /**
-         * 设备类型
-         * @type {string || null}
-         */
-        this.Device = null;
-
     }
 
     /**
@@ -974,6 +974,7 @@ class SellConfig extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.Device = params.Device || null;
         this.Type = params.Type || null;
         this.CdbType = params.CdbType || null;
         this.Memory = params.Memory || null;
@@ -986,7 +987,6 @@ class SellConfig extends  AbstractModel {
         this.Iops = params.Iops || null;
         this.Info = params.Info || null;
         this.Status = params.Status || null;
-        this.Device = params.Device || null;
 
     }
 }
@@ -1267,18 +1267,24 @@ class DBSwitchInfo extends  AbstractModel {
 }
 
 /**
- * InitDBInstances返回参数结构体
+ * DescribeDBPrice返回参数结构体
  * @class
  */
-class InitDBInstancesResponse extends  AbstractModel {
+class DescribeDBPriceResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 异步任务的请求ID数组，可使用此ID查询异步任务的执行结果
-         * @type {Array.<string> || null}
+         * 实例价格，单位：分（人民币）
+         * @type {number || null}
          */
-        this.AsyncRequestIds = null;
+        this.Price = null;
+
+        /**
+         * 实例原价，单位：分（人民币）
+         * @type {number || null}
+         */
+        this.OriginalPrice = null;
 
         /**
          * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
@@ -1295,7 +1301,8 @@ class InitDBInstancesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.AsyncRequestIds = params.AsyncRequestIds || null;
+        this.Price = params.Price || null;
+        this.OriginalPrice = params.OriginalPrice || null;
         this.RequestId = params.RequestId || null;
 
     }
@@ -2634,7 +2641,7 @@ class DescribeDBInstancesRequest extends  AbstractModel {
         this.Vips = null;
 
         /**
-         * 实例状态，可取值：0-创建中，1-运行中，4-删除中，5-隔离中
+         * 实例状态，可取值：0-创建中，1-运行中，4-隔离中，5-已隔离
          * @type {Array.<number> || null}
          */
         this.Status = null;
@@ -2646,7 +2653,7 @@ class DescribeDBInstancesRequest extends  AbstractModel {
         this.Offset = null;
 
         /**
-         * 单次请求返回的数量，默认值为20，最大值为100
+         * 单次请求返回的数量，默认值为20，最大值为2000
          * @type {number || null}
          */
         this.Limit = null;
@@ -4449,6 +4456,12 @@ class InstanceInfo extends  AbstractModel {
         this.TaskStatus = null;
 
         /**
+         * 主实例信息
+         * @type {MasterInfo || null}
+         */
+        this.MasterInfo = null;
+
+        /**
          * 实例售卖机型
          * @type {string || null}
          */
@@ -4526,12 +4539,6 @@ class InstanceInfo extends  AbstractModel {
          */
         this.UniqSubnetId = null;
 
-        /**
-         * 主实例信息
-         * @type {MasterInfo || null}
-         */
-        this.MasterInfo = null;
-
     }
 
     /**
@@ -4579,6 +4586,12 @@ class InstanceInfo extends  AbstractModel {
         this.DeadlineTime = params.DeadlineTime || null;
         this.DeployMode = params.DeployMode || null;
         this.TaskStatus = params.TaskStatus || null;
+
+        if (params.MasterInfo) {
+            let obj = new MasterInfo();
+            obj.deserialize(params.MasterInfo)
+            this.MasterInfo = obj;
+        }
         this.DeviceType = params.DeviceType || null;
         this.EngineVersion = params.EngineVersion || null;
         this.InstanceName = params.InstanceName || null;
@@ -4600,12 +4613,6 @@ class InstanceInfo extends  AbstractModel {
         this.CdbError = params.CdbError || null;
         this.UniqVpcId = params.UniqVpcId || null;
         this.UniqSubnetId = params.UniqSubnetId || null;
-
-        if (params.MasterInfo) {
-            let obj = new MasterInfo();
-            obj.deserialize(params.MasterInfo)
-            this.MasterInfo = obj;
-        }
 
     }
 }
@@ -4646,48 +4653,60 @@ class CreateBackupResponse extends  AbstractModel {
 }
 
 /**
- * DescribeDBInstanceConfig返回参数结构体
+ * DescribeDBPrice请求参数结构体
  * @class
  */
-class DescribeDBInstanceConfigResponse extends  AbstractModel {
+class DescribeDBPriceRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 主库数据保护方式，主实例属性，可能的返回值：0-异步复制方式，1-半同步复制方式，2-强同步复制方式。
-         * @type {number || null}
-         */
-        this.ProtectMode = null;
-
-        /**
-         * 主库部署方式，主实例属性，可能的返回值：0-单可用部署，1-多可用区部署。
-         * @type {number || null}
-         */
-        this.DeployMode = null;
-
-        /**
-         * 主库可用区的正式名称，如ap-shanghai-1。
+         * 可用区信息，格式如"ap-guangzhou-1"
          * @type {string || null}
          */
         this.Zone = null;
 
         /**
-         * 从库的配置信息。
-         * @type {SlaveConfig || null}
+         * 实例数量，默认值为1, 最小值1，最大值为100
+         * @type {number || null}
          */
-        this.SlaveConfig = null;
+        this.GoodsNum = null;
 
         /**
-         * ECDB第二个从库的配置信息，只有ECDB实例才有这个字段。
-         * @type {BackupConfig || null}
+         * 实例内存大小，单位：MB
+         * @type {number || null}
          */
-        this.BackupConfig = null;
+        this.Memory = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 实例硬盘大小，单位：GB
+         * @type {number || null}
+         */
+        this.Volume = null;
+
+        /**
+         * 付费类型，支持值包括：PRE_PAID - 包年包月，HOUR_PAID - 按量计费
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.PayType = null;
+
+        /**
+         * 实例时长，单位：月，最小值1，最大值为36；查询按量计费价格时，该字段无效
+         * @type {number || null}
+         */
+        this.Period = null;
+
+        /**
+         * 实例类型，默认为 master，支持值包括：master-表示主实例，ro-表示只读实例，dr-表示灾备实例
+         * @type {string || null}
+         */
+        this.InstanceRole = null;
+
+        /**
+         * 数据复制方式，默认为0，支持值包括：0-表示异步复制，1-表示半同步复制，2-表示强同步复制
+         * @type {number || null}
+         */
+        this.ProtectMode = null;
 
     }
 
@@ -4698,22 +4717,14 @@ class DescribeDBInstanceConfigResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ProtectMode = params.ProtectMode || null;
-        this.DeployMode = params.DeployMode || null;
         this.Zone = params.Zone || null;
-
-        if (params.SlaveConfig) {
-            let obj = new SlaveConfig();
-            obj.deserialize(params.SlaveConfig)
-            this.SlaveConfig = obj;
-        }
-
-        if (params.BackupConfig) {
-            let obj = new BackupConfig();
-            obj.deserialize(params.BackupConfig)
-            this.BackupConfig = obj;
-        }
-        this.RequestId = params.RequestId || null;
+        this.GoodsNum = params.GoodsNum || null;
+        this.Memory = params.Memory || null;
+        this.Volume = params.Volume || null;
+        this.PayType = params.PayType || null;
+        this.Period = params.Period || null;
+        this.InstanceRole = params.InstanceRole || null;
+        this.ProtectMode = params.ProtectMode || null;
 
     }
 }
@@ -5443,6 +5454,79 @@ class ZoneSellConf extends  AbstractModel {
             obj.deserialize(params.ZoneConf)
             this.ZoneConf = obj;
         }
+
+    }
+}
+
+/**
+ * DescribeDBInstanceConfig返回参数结构体
+ * @class
+ */
+class DescribeDBInstanceConfigResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 主库数据保护方式，主实例属性，可能的返回值：0-异步复制方式，1-半同步复制方式，2-强同步复制方式。
+         * @type {number || null}
+         */
+        this.ProtectMode = null;
+
+        /**
+         * 主库部署方式，主实例属性，可能的返回值：0-单可用部署，1-多可用区部署。
+         * @type {number || null}
+         */
+        this.DeployMode = null;
+
+        /**
+         * 主库可用区的正式名称，如ap-shanghai-1。
+         * @type {string || null}
+         */
+        this.Zone = null;
+
+        /**
+         * 从库的配置信息。
+         * @type {SlaveConfig || null}
+         */
+        this.SlaveConfig = null;
+
+        /**
+         * ECDB第二个从库的配置信息，只有ECDB实例才有这个字段。
+         * @type {BackupConfig || null}
+         */
+        this.BackupConfig = null;
+
+        /**
+         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ProtectMode = params.ProtectMode || null;
+        this.DeployMode = params.DeployMode || null;
+        this.Zone = params.Zone || null;
+
+        if (params.SlaveConfig) {
+            let obj = new SlaveConfig();
+            obj.deserialize(params.SlaveConfig)
+            this.SlaveConfig = obj;
+        }
+
+        if (params.BackupConfig) {
+            let obj = new BackupConfig();
+            obj.deserialize(params.BackupConfig)
+            this.BackupConfig = obj;
+        }
+        this.RequestId = params.RequestId || null;
 
     }
 }
@@ -6279,6 +6363,41 @@ class DescribeDBInstancesResponse extends  AbstractModel {
 }
 
 /**
+ * InitDBInstances返回参数结构体
+ * @class
+ */
+class InitDBInstancesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 异步任务的请求ID数组，可使用此ID查询异步任务的执行结果
+         * @type {Array.<string> || null}
+         */
+        this.AsyncRequestIds = null;
+
+        /**
+         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AsyncRequestIds = params.AsyncRequestIds || null;
+        this.RequestId = params.RequestId || null;
+
+    }
+}
+
+/**
  * RestartDBInstances请求参数结构体
  * @class
  */
@@ -6891,7 +7010,7 @@ module.exports = {
     MasterInfo: MasterInfo,
     DescribeBinlogsResponse: DescribeBinlogsResponse,
     DBSwitchInfo: DBSwitchInfo,
-    InitDBInstancesResponse: InitDBInstancesResponse,
+    DescribeDBPriceResponse: DescribeDBPriceResponse,
     DescribeTasksResponse: DescribeTasksResponse,
     DescribeBackupsRequest: DescribeBackupsRequest,
     ModifyDBInstanceProjectResponse: ModifyDBInstanceProjectResponse,
@@ -6954,7 +7073,7 @@ module.exports = {
     AssociateSecurityGroupsResponse: AssociateSecurityGroupsResponse,
     InstanceInfo: InstanceInfo,
     CreateBackupResponse: CreateBackupResponse,
-    DescribeDBInstanceConfigResponse: DescribeDBInstanceConfigResponse,
+    DescribeDBPriceRequest: DescribeDBPriceRequest,
     SlaveConfig: SlaveConfig,
     ModifyAccountPrivilegesResponse: ModifyAccountPrivilegesResponse,
     BackupConfig: BackupConfig,
@@ -6970,6 +7089,7 @@ module.exports = {
     UpgradeDBInstanceRequest: UpgradeDBInstanceRequest,
     DescribeDatabasesResponse: DescribeDatabasesResponse,
     ZoneSellConf: ZoneSellConf,
+    DescribeDBInstanceConfigResponse: DescribeDBInstanceConfigResponse,
     RoInstanceInfo: RoInstanceInfo,
     IsolateDBInstanceRequest: IsolateDBInstanceRequest,
     ModifyAccountPrivilegesRequest: ModifyAccountPrivilegesRequest,
@@ -6985,6 +7105,7 @@ module.exports = {
     DescribeDBImportRecordsRequest: DescribeDBImportRecordsRequest,
     CreateDBImportJobResponse: CreateDBImportJobResponse,
     DescribeDBInstancesResponse: DescribeDBInstancesResponse,
+    InitDBInstancesResponse: InitDBInstancesResponse,
     RestartDBInstancesRequest: RestartDBInstancesRequest,
     DescribeDBZoneConfigResponse: DescribeDBZoneConfigResponse,
     ModifyDBInstanceProjectRequest: ModifyDBInstanceProjectRequest,

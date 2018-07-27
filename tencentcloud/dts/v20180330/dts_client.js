@@ -1,30 +1,52 @@
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
+const DescribeSyncJobsResponse = models.DescribeSyncJobsResponse;
 const DescribeMigrateJobsResponse = models.DescribeMigrateJobsResponse;
-const MigrateStepDetailInfo = models.MigrateStepDetailInfo;
+const MigrateDetailInfo = models.MigrateDetailInfo;
 const DeleteMigrateJobResponse = models.DeleteMigrateJobResponse;
 const CreateMigrateCheckJobRequest = models.CreateMigrateCheckJobRequest;
+const SyncInstanceInfo = models.SyncInstanceInfo;
+const CreateSyncJobResponse = models.CreateSyncJobResponse;
 const DescribeMigrateCheckJobRequest = models.DescribeMigrateCheckJobRequest;
 const StartMigrateJobRequest = models.StartMigrateJobRequest;
+const SwitchDrToMasterRequest = models.SwitchDrToMasterRequest;
+const StartSyncJobRequest = models.StartSyncJobRequest;
 const CreateMigrateJobRequest = models.CreateMigrateJobRequest;
+const SyncJobInfo = models.SyncJobInfo;
 const DstInfo = models.DstInfo;
 const ModifyMigrateJobResponse = models.ModifyMigrateJobResponse;
 const SrcInfo = models.SrcInfo;
 const ConsistencyParams = models.ConsistencyParams;
+const SyncOption = models.SyncOption;
 const MigrateOption = models.MigrateOption;
 const CreateMigrateCheckJobResponse = models.CreateMigrateCheckJobResponse;
+const MigrateStepDetailInfo = models.MigrateStepDetailInfo;
 const DescribeMigrateCheckJobResponse = models.DescribeMigrateCheckJobResponse;
-const MigrateDetailInfo = models.MigrateDetailInfo;
+const StartSyncJobResponse = models.StartSyncJobResponse;
+const CreateSyncCheckJobResponse = models.CreateSyncCheckJobResponse;
+const DescribeSyncCheckJobRequest = models.DescribeSyncCheckJobRequest;
 const StopMigrateJobRequest = models.StopMigrateJobRequest;
-const MigrateJobInfo = models.MigrateJobInfo;
-const DescribeMigrateJobsRequest = models.DescribeMigrateJobsRequest;
-const StopMigrateJobResponse = models.StopMigrateJobResponse;
+const ModifySyncJobResponse = models.ModifySyncJobResponse;
+const ModifyMigrateJobRequest = models.ModifyMigrateJobRequest;
 const CompleteMigrateJobRequest = models.CompleteMigrateJobRequest;
+const SyncCheckStepInfo = models.SyncCheckStepInfo;
+const CreateSyncJobRequest = models.CreateSyncJobRequest;
+const DescribeSyncJobsRequest = models.DescribeSyncJobsRequest;
+const DescribeMigrateJobsRequest = models.DescribeMigrateJobsRequest;
+const SyncDetailInfo = models.SyncDetailInfo;
+const SyncStepDetailInfo = models.SyncStepDetailInfo;
+const StopMigrateJobResponse = models.StopMigrateJobResponse;
+const DeleteSyncJobResponse = models.DeleteSyncJobResponse;
+const CreateSyncCheckJobRequest = models.CreateSyncCheckJobRequest;
+const SwitchDrToMasterResponse = models.SwitchDrToMasterResponse;
 const CompleteMigrateJobResponse = models.CompleteMigrateJobResponse;
+const StartMigrateJobResponse = models.StartMigrateJobResponse;
 const CreateMigrateJobResponse = models.CreateMigrateJobResponse;
 const DeleteMigrateJobRequest = models.DeleteMigrateJobRequest;
-const ModifyMigrateJobRequest = models.ModifyMigrateJobRequest;
-const StartMigrateJobResponse = models.StartMigrateJobResponse;
+const DeleteSyncJobRequest = models.DeleteSyncJobRequest;
+const MigrateJobInfo = models.MigrateJobInfo;
+const ModifySyncJobRequest = models.ModifySyncJobRequest;
+const DescribeSyncCheckJobResponse = models.DescribeSyncCheckJobResponse;
 
 
 /**
@@ -38,6 +60,64 @@ class DtsClient extends AbstractClient {
     }
     
     /**
+     * 在开始灾备同步前, 必须调用本接口创建校验, 且校验成功后才能开始同步数据. 校验的结果可以通过DescribeSyncCheckJob查看.
+校验成功或失败后均可再修改, 修改后必须重新校验并通过后, 才能开始同步.
+     * @param {CreateSyncCheckJobRequest} req
+     * @param {function(string, CreateSyncCheckJobResponse):void} cb
+     * @public
+     */
+    CreateSyncCheckJob(req, cb) {
+        let resp = new CreateSyncCheckJobResponse();
+        this.request("CreateSyncCheckJob", req, resp, cb);
+    }
+
+    /**
+     * 将灾备升级为主实例，停止从原来所属主实例的同步，断开主备关系。
+     * @param {SwitchDrToMasterRequest} req
+     * @param {function(string, SwitchDrToMasterResponse):void} cb
+     * @public
+     */
+    SwitchDrToMaster(req, cb) {
+        let resp = new SwitchDrToMasterResponse();
+        this.request("SwitchDrToMaster", req, resp, cb);
+    }
+
+    /**
+     * 本接口用于创建灾备同步校验任务后,获取校验的结果. 能查询到当前校验的状态和进度. 
+若通过校验, 则可调用'StartSyncJob' 开始迁移.
+若未通过校验, 则会返回校验失败的原因. 可通过'ModifySyncJob'修改配置重新发起校验.
+     * @param {DescribeSyncCheckJobRequest} req
+     * @param {function(string, DescribeSyncCheckJobResponse):void} cb
+     * @public
+     */
+    DescribeSyncCheckJob(req, cb) {
+        let resp = new DescribeSyncCheckJobResponse();
+        this.request("DescribeSyncCheckJob", req, resp, cb);
+    }
+
+    /**
+     * 删除灾备同步任务 （运行中的同步任务不能删除）。
+     * @param {DeleteSyncJobRequest} req
+     * @param {function(string, DeleteSyncJobResponse):void} cb
+     * @public
+     */
+    DeleteSyncJob(req, cb) {
+        let resp = new DeleteSyncJobResponse();
+        this.request("DeleteSyncJob", req, resp, cb);
+    }
+
+    /**
+     * 查询在迁移平台发起的灾备同步任务
+     * @param {DescribeSyncJobsRequest} req
+     * @param {function(string, DescribeSyncJobsResponse):void} cb
+     * @public
+     */
+    DescribeSyncJobs(req, cb) {
+        let resp = new DescribeSyncJobsResponse();
+        this.request("DescribeSyncJobs", req, resp, cb);
+    }
+
+    /**
      * 非定时任务会在调用后立即开始迁移，定时任务则会开始倒计时。
 调用此接口前，请务必先校验数据迁移任务通过。
      * @param {StartMigrateJobRequest} req
@@ -50,31 +130,16 @@ class DtsClient extends AbstractClient {
     }
 
     /**
-     * 本接口用于创建校验后,获取校验的结果. 能查询到当前校验的状态和进度. 
-若通过校验, 则可调用'StartMigrateJob' 开始迁移.
-若未通过校验, 则能查询到校验失败的原因. 请按照报错, 通过'ModifyMigrateJob'修改迁移配置或是调整源/目标实例的相关参数.
-     * @param {DescribeMigrateCheckJobRequest} req
-     * @param {function(string, DescribeMigrateCheckJobResponse):void} cb
+     * 修改灾备同步任务. 
+当同步任务处于下述状态时, 允许调用本接口: 同步任务创建中, 创建完成, 校验成功, 校验失败. 
+源实例和目标实例信息不允许修改，可以修改任务名、需要同步的库表。
+     * @param {ModifySyncJobRequest} req
+     * @param {function(string, ModifySyncJobResponse):void} cb
      * @public
      */
-    DescribeMigrateCheckJob(req, cb) {
-        let resp = new DescribeMigrateCheckJobResponse();
-        this.request("DescribeMigrateCheckJob", req, resp, cb);
-    }
-
-    /**
-     * 修改数据迁移任务. 
-当迁移任务处于下述状态时, 允许调用本接口: 迁移创建中, 创建完成, 校验成功, 校验失败, 迁移失败. 
-源实例和目标实例类型不允许修改, 目标实例地域不允许修改。
-
-如果是金融区链路, 请使用域名: dts.ap-shenzhen-fsi.tencentcloudapi.com
-     * @param {ModifyMigrateJobRequest} req
-     * @param {function(string, ModifyMigrateJobResponse):void} cb
-     * @public
-     */
-    ModifyMigrateJob(req, cb) {
-        let resp = new ModifyMigrateJobResponse();
-        this.request("ModifyMigrateJob", req, resp, cb);
+    ModifySyncJob(req, cb) {
+        let resp = new ModifySyncJobResponse();
+        this.request("ModifySyncJob", req, resp, cb);
     }
 
     /**
@@ -102,6 +167,17 @@ class DtsClient extends AbstractClient {
     }
 
     /**
+     * 创建的灾备同步任务在校验成功后，可以调用该接口开始同步
+     * @param {StartSyncJobRequest} req
+     * @param {function(string, StartSyncJobResponse):void} cb
+     * @public
+     */
+    StartSyncJob(req, cb) {
+        let resp = new StartSyncJobResponse();
+        this.request("StartSyncJob", req, resp, cb);
+    }
+
+    /**
      * 创建校验迁移任务
 在开始迁移前, 必须调用本接口创建校验, 且校验成功后才能开始迁移. 校验的结果可以通过DescribeMigrateCheckJob查看.
 校验成功后,迁移任务若有修改, 则必须重新创建校验并通过后, 才能开始迁移.
@@ -112,6 +188,32 @@ class DtsClient extends AbstractClient {
     CreateMigrateCheckJob(req, cb) {
         let resp = new CreateMigrateCheckJobResponse();
         this.request("CreateMigrateCheckJob", req, resp, cb);
+    }
+
+    /**
+     * 修改数据迁移任务. 
+当迁移任务处于下述状态时, 允许调用本接口: 迁移创建中, 创建完成, 校验成功, 校验失败, 迁移失败. 
+源实例和目标实例类型不允许修改, 目标实例地域不允许修改。
+
+如果是金融区链路, 请使用域名: dts.ap-shenzhen-fsi.tencentcloudapi.com
+     * @param {ModifyMigrateJobRequest} req
+     * @param {function(string, ModifyMigrateJobResponse):void} cb
+     * @public
+     */
+    ModifyMigrateJob(req, cb) {
+        let resp = new ModifyMigrateJobResponse();
+        this.request("ModifyMigrateJob", req, resp, cb);
+    }
+
+    /**
+     * 本接口(CreateSyncJob)用于创建灾备同步任务。
+     * @param {CreateSyncJobRequest} req
+     * @param {function(string, CreateSyncJobResponse):void} cb
+     * @public
+     */
+    CreateSyncJob(req, cb) {
+        let resp = new CreateSyncJobResponse();
+        this.request("CreateSyncJob", req, resp, cb);
     }
 
     /**
@@ -136,6 +238,19 @@ class DtsClient extends AbstractClient {
     DescribeMigrateJobs(req, cb) {
         let resp = new DescribeMigrateJobsResponse();
         this.request("DescribeMigrateJobs", req, resp, cb);
+    }
+
+    /**
+     * 本接口用于创建校验后,获取校验的结果. 能查询到当前校验的状态和进度. 
+若通过校验, 则可调用'StartMigrateJob' 开始迁移.
+若未通过校验, 则能查询到校验失败的原因. 请按照报错, 通过'ModifyMigrateJob'修改迁移配置或是调整源/目标实例的相关参数.
+     * @param {DescribeMigrateCheckJobRequest} req
+     * @param {function(string, DescribeMigrateCheckJobResponse):void} cb
+     * @public
+     */
+    DescribeMigrateCheckJob(req, cb) {
+        let resp = new DescribeMigrateCheckJobResponse();
+        this.request("DescribeMigrateCheckJob", req, resp, cb);
     }
 
     /**

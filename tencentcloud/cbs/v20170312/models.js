@@ -365,18 +365,6 @@ class Price extends  AbstractModel {
         super();
 
         /**
-         * 后付费云盘的单价，单位：元。
-         * @type {number || null}
-         */
-        this.UnitPrice = null;
-
-        /**
-         * 后付费云盘的计价单元，取值范围：<br><li>HOUR：表示后付费云盘的计价单元是按小时计算。
-         * @type {string || null}
-         */
-        this.ChargeUnit = null;
-
-        /**
          * 预付费云盘预支费用的原价，单位：元。
          * @type {number || null}
          */
@@ -388,6 +376,18 @@ class Price extends  AbstractModel {
          */
         this.DiscountPrice = null;
 
+        /**
+         * 后付费云盘的单价，单位：元。
+         * @type {number || null}
+         */
+        this.UnitPrice = null;
+
+        /**
+         * 后付费云盘的计价单元，取值范围：<br><li>HOUR：表示后付费云盘的计价单元是按小时计算。
+         * @type {string || null}
+         */
+        this.ChargeUnit = null;
+
     }
 
     /**
@@ -397,10 +397,10 @@ class Price extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.UnitPrice = params.UnitPrice || null;
-        this.ChargeUnit = params.ChargeUnit || null;
         this.OriginalPrice = params.OriginalPrice || null;
         this.DiscountPrice = params.DiscountPrice || null;
+        this.UnitPrice = params.UnitPrice || null;
+        this.ChargeUnit = params.ChargeUnit || null;
 
     }
 }
@@ -1112,18 +1112,6 @@ class Snapshot extends  AbstractModel {
         super();
 
         /**
-         * 快照正在跨地域复制的目的地域，默认取值为[]。
-         * @type {Array.<string> || null}
-         */
-        this.CopyingToRegions = null;
-
-        /**
-         * 是否为跨地域复制的快照。取值范围：<br><li>true：表示为跨地域复制的快照。<br><li>false:本地域的快照。
-         * @type {boolean || null}
-         */
-        this.CopyFromRemote = null;
-
-        /**
          * 快照ID。
          * @type {string || null}
          */
@@ -1195,6 +1183,18 @@ class Snapshot extends  AbstractModel {
          */
         this.IsPermanent = null;
 
+        /**
+         * 快照正在跨地域复制的目的地域，默认取值为[]。
+         * @type {Array.<string> || null}
+         */
+        this.CopyingToRegions = null;
+
+        /**
+         * 是否为跨地域复制的快照。取值范围：<br><li>true：表示为跨地域复制的快照。<br><li>false:本地域的快照。
+         * @type {boolean || null}
+         */
+        this.CopyFromRemote = null;
+
     }
 
     /**
@@ -1204,8 +1204,6 @@ class Snapshot extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.CopyingToRegions = params.CopyingToRegions || null;
-        this.CopyFromRemote = params.CopyFromRemote || null;
         this.SnapshotId = params.SnapshotId || null;
 
         if (params.Placement) {
@@ -1223,6 +1221,8 @@ class Snapshot extends  AbstractModel {
         this.DeadlineTime = params.DeadlineTime || null;
         this.Encrypt = params.Encrypt || null;
         this.IsPermanent = params.IsPermanent || null;
+        this.CopyingToRegions = params.CopyingToRegions || null;
+        this.CopyFromRemote = params.CopyFromRemote || null;
 
     }
 }
@@ -1725,6 +1725,12 @@ class ModifyDiskAttributesRequest extends  AbstractModel {
          */
         this.Portable = null;
 
+        /**
+         * 成功挂载到云主机后该云硬盘是否随云主机销毁，TRUE表示随云主机销毁，FALSE表示不随云主机销毁。仅支持按量计费云硬盘数据盘。
+         * @type {boolean || null}
+         */
+        this.DeleteWithInstance = null;
+
     }
 
     /**
@@ -1738,6 +1744,7 @@ class ModifyDiskAttributesRequest extends  AbstractModel {
         this.ProjectId = params.ProjectId || null;
         this.DiskName = params.DiskName || null;
         this.Portable = params.Portable || null;
+        this.DeleteWithInstance = params.DeleteWithInstance || null;
 
     }
 }
@@ -1967,12 +1974,6 @@ class Disk extends  AbstractModel {
         super();
 
         /**
-         * 与云盘绑定的标签，云盘未绑定标签则取值为空。
-         * @type {Array.<Tag> || null}
-         */
-        this.Tags = null;
-
-        /**
          * 云硬盘ID。
          * @type {string || null}
          */
@@ -2110,6 +2111,18 @@ class Disk extends  AbstractModel {
          */
         this.AutoSnapshotPolicyIds = null;
 
+        /**
+         * 与云盘绑定的标签，云盘未绑定标签则取值为空。
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
+        /**
+         * 云盘是否与挂载的实例一起销毁。<br><li>true:销毁实例时会同时销毁云盘，只支持按小时后付费云盘。<br><li>false：销毁实例时不销毁云盘。
+         * @type {boolean || null}
+         */
+        this.DeleteWithInstance = null;
+
     }
 
     /**
@@ -2118,15 +2131,6 @@ class Disk extends  AbstractModel {
     deserialize(params) {
         if (!params) {
             return;
-        }
-
-        if (params.Tags) {
-            this.Tags = new Array();
-            for (let z in params.Tags) {
-                let obj = new Tag();
-                obj.deserialize(params.Tags[z]);
-                this.Tags.push(obj);
-            }
         }
         this.DiskId = params.DiskId || null;
         this.DiskUsage = params.DiskUsage || null;
@@ -2156,6 +2160,16 @@ class Disk extends  AbstractModel {
         this.IsReturnable = params.IsReturnable || null;
         this.ReturnFailCode = params.ReturnFailCode || null;
         this.AutoSnapshotPolicyIds = params.AutoSnapshotPolicyIds || null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
+        this.DeleteWithInstance = params.DeleteWithInstance || null;
 
     }
 }

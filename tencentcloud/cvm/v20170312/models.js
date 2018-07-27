@@ -3774,36 +3774,6 @@ class Instance extends  AbstractModel {
         super();
 
         /**
-         * 操作系统名称。
-         * @type {string || null}
-         */
-        this.OsName = null;
-
-        /**
-         * 实例所属安全组。该参数可以通过调用 [DescribeSecurityGroups](https://cloud.tencent.com/document/api/215/15808) 的返回值中的sgId字段来获取。
-         * @type {Array.<string> || null}
-         */
-        this.SecurityGroupIds = null;
-
-        /**
-         * 实例登录设置。目前只返回实例所关联的密钥。
-         * @type {LoginSettings || null}
-         */
-        this.LoginSettings = null;
-
-        /**
-         * 实例状态。取值范围：<br><li>PENDING：表示创建中<br></li><li>LAUNCH_FAILED：表示创建失败<br></li><li>RUNNING：表示运行中<br></li><li>STOPPED：表示关机<br></li><li>STARTING：表示开机中<br></li><li>STOPPING：表示关机中<br></li><li>REBOOTING：表示重启中<br></li><li>SHUTDOWN：表示停止待销毁<br></li><li>TERMINATING：表示销毁中。<br></li>
-         * @type {string || null}
-         */
-        this.InstanceState = null;
-
-        /**
-         * 实例关联的标签列表。
-         * @type {Array.<Tag> || null}
-         */
-        this.Tags = null;
-
-        /**
          * 实例所在的位置。
          * @type {Placement || null}
          */
@@ -3911,6 +3881,36 @@ class Instance extends  AbstractModel {
          */
         this.ExpiredTime = null;
 
+        /**
+         * 操作系统名称。
+         * @type {string || null}
+         */
+        this.OsName = null;
+
+        /**
+         * 实例所属安全组。该参数可以通过调用 [DescribeSecurityGroups](https://cloud.tencent.com/document/api/215/15808) 的返回值中的sgId字段来获取。
+         * @type {Array.<string> || null}
+         */
+        this.SecurityGroupIds = null;
+
+        /**
+         * 实例登录设置。目前只返回实例所关联的密钥。
+         * @type {LoginSettings || null}
+         */
+        this.LoginSettings = null;
+
+        /**
+         * 实例状态。取值范围：<br><li>PENDING：表示创建中<br></li><li>LAUNCH_FAILED：表示创建失败<br></li><li>RUNNING：表示运行中<br></li><li>STOPPED：表示关机<br></li><li>STARTING：表示开机中<br></li><li>STOPPING：表示关机中<br></li><li>REBOOTING：表示重启中<br></li><li>SHUTDOWN：表示停止待销毁<br></li><li>TERMINATING：表示销毁中。<br></li>
+         * @type {string || null}
+         */
+        this.InstanceState = null;
+
+        /**
+         * 实例关联的标签列表。
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
     }
 
     /**
@@ -3919,24 +3919,6 @@ class Instance extends  AbstractModel {
     deserialize(params) {
         if (!params) {
             return;
-        }
-        this.OsName = params.OsName || null;
-        this.SecurityGroupIds = params.SecurityGroupIds || null;
-
-        if (params.LoginSettings) {
-            let obj = new LoginSettings();
-            obj.deserialize(params.LoginSettings)
-            this.LoginSettings = obj;
-        }
-        this.InstanceState = params.InstanceState || null;
-
-        if (params.Tags) {
-            this.Tags = new Array();
-            for (let z in params.Tags) {
-                let obj = new Tag();
-                obj.deserialize(params.Tags[z]);
-                this.Tags.push(obj);
-            }
         }
 
         if (params.Placement) {
@@ -3984,6 +3966,24 @@ class Instance extends  AbstractModel {
         this.RenewFlag = params.RenewFlag || null;
         this.CreatedTime = params.CreatedTime || null;
         this.ExpiredTime = params.ExpiredTime || null;
+        this.OsName = params.OsName || null;
+        this.SecurityGroupIds = params.SecurityGroupIds || null;
+
+        if (params.LoginSettings) {
+            let obj = new LoginSettings();
+            obj.deserialize(params.LoginSettings)
+            this.LoginSettings = obj;
+        }
+        this.InstanceState = params.InstanceState || null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
 
     }
 }
@@ -5347,6 +5347,24 @@ class Image extends  AbstractModel {
         super();
 
         /**
+         * 镜像ID
+         * @type {string || null}
+         */
+        this.ImageId = null;
+
+        /**
+         * 镜像操作系统
+         * @type {string || null}
+         */
+        this.OsName = null;
+
+        /**
+         * 镜像类型
+         * @type {string || null}
+         */
+        this.ImageType = null;
+
+        /**
          * 镜像创建时间
          * @type {string || null}
          */
@@ -5383,24 +5401,6 @@ class Image extends  AbstractModel {
         this.ImageState = null;
 
         /**
-         * 镜像ID
-         * @type {string || null}
-         */
-        this.ImageId = null;
-
-        /**
-         * 镜像操作系统
-         * @type {string || null}
-         */
-        this.OsName = null;
-
-        /**
-         * 镜像类型
-         * @type {string || null}
-         */
-        this.ImageType = null;
-
-        /**
          * 镜像来源平台
          * @type {string || null}
          */
@@ -5427,15 +5427,15 @@ class Image extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.ImageId = params.ImageId || null;
+        this.OsName = params.OsName || null;
+        this.ImageType = params.ImageType || null;
         this.CreatedTime = params.CreatedTime || null;
         this.ImageName = params.ImageName || null;
         this.ImageDescription = params.ImageDescription || null;
         this.ImageSize = params.ImageSize || null;
         this.Architecture = params.Architecture || null;
         this.ImageState = params.ImageState || null;
-        this.ImageId = params.ImageId || null;
-        this.OsName = params.OsName || null;
-        this.ImageType = params.ImageType || null;
         this.Platform = params.Platform || null;
         this.ImageCreator = params.ImageCreator || null;
         this.ImageSource = params.ImageSource || null;
@@ -6049,12 +6049,6 @@ class StopInstancesRequest extends  AbstractModel {
          */
         this.StopType = null;
 
-        /**
-         * 关机收费模式<br><li>KEEP_CHARGING：关机继续收费<br><li>STOP_CHARGING：关机停止收费<br>默认取值：KEEP_CHARGING。
-         * @type {string || null}
-         */
-        this.StoppedMode = null;
-
     }
 
     /**
@@ -6067,7 +6061,6 @@ class StopInstancesRequest extends  AbstractModel {
         this.InstanceIds = params.InstanceIds || null;
         this.ForceStop = params.ForceStop || null;
         this.StopType = params.StopType || null;
-        this.StoppedMode = params.StoppedMode || null;
 
     }
 }

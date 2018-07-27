@@ -1,6 +1,60 @@
 const AbstractModel = require("../../common/abstract_model");
 
 /**
+ * 加固策略具体信息
+ * @class
+ */
+class PlanDetailInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 默认策略，1为默认，0为非默认
+         * @type {number || null}
+         */
+        this.IsDefault = null;
+
+        /**
+         * 策略id
+         * @type {number || null}
+         */
+        this.PlanId = null;
+
+        /**
+         * 策略名称
+         * @type {string || null}
+         */
+        this.PlanName = null;
+
+        /**
+         * 策略信息
+         * @type {PlanInfo || null}
+         */
+        this.PlanInfo = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.IsDefault = params.IsDefault || null;
+        this.PlanId = params.PlanId || null;
+        this.PlanName = params.PlanName || null;
+
+        if (params.PlanInfo) {
+            let obj = new PlanInfo();
+            obj.deserialize(params.PlanInfo)
+            this.PlanInfo = obj;
+        }
+
+    }
+}
+
+/**
  * 加固后app的信息，包含基本信息和加固信息
  * @class
  */
@@ -127,6 +181,48 @@ class AppSetInfo extends  AbstractModel {
 }
 
 /**
+ * CreateShieldPlanInstance返回参数结构体
+ * @class
+ */
+class CreateShieldPlanInstanceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 策略id
+         * @type {number || null}
+         */
+        this.PlanId = null;
+
+        /**
+         * 任务状态: 1-已完成,2-处理中,3-处理出错,4-处理超时
+         * @type {number || null}
+         */
+        this.Progress = null;
+
+        /**
+         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PlanId = params.PlanId || null;
+        this.Progress = params.Progress || null;
+        this.RequestId = params.RequestId || null;
+
+    }
+}
+
+/**
  * 需要扫描的应用的服务信息
  * @class
  */
@@ -157,6 +253,83 @@ class ScanInfo extends  AbstractModel {
         }
         this.CallbackUrl = params.CallbackUrl || null;
         this.ScanTypes = params.ScanTypes || null;
+
+    }
+}
+
+/**
+ * 漏洞信息
+ * @class
+ */
+class VulList extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 漏洞id
+         * @type {string || null}
+         */
+        this.VulId = null;
+
+        /**
+         * 漏洞名称
+         * @type {string || null}
+         */
+        this.VulName = null;
+
+        /**
+         * 漏洞代码
+         * @type {string || null}
+         */
+        this.VulCode = null;
+
+        /**
+         * 漏洞描述
+         * @type {string || null}
+         */
+        this.VulDesc = null;
+
+        /**
+         * 漏洞解决方案
+         * @type {string || null}
+         */
+        this.VulSolution = null;
+
+        /**
+         * 漏洞来源类别，0默认自身，1第三方插件
+         * @type {number || null}
+         */
+        this.VulSrcType = null;
+
+        /**
+         * 漏洞位置
+         * @type {string || null}
+         */
+        this.VulFilepath = null;
+
+        /**
+         * 风险级别：1 低风险 ；2中等风险；3 高风险
+         * @type {number || null}
+         */
+        this.RiskLevel = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.VulId = params.VulId || null;
+        this.VulName = params.VulName || null;
+        this.VulCode = params.VulCode || null;
+        this.VulDesc = params.VulDesc || null;
+        this.VulSolution = params.VulSolution || null;
+        this.VulSrcType = params.VulSrcType || null;
+        this.VulFilepath = params.VulFilepath || null;
+        this.RiskLevel = params.RiskLevel || null;
 
     }
 }
@@ -419,6 +592,53 @@ class VirusInfo extends  AbstractModel {
 }
 
 /**
+ * CreateShieldPlanInstance请求参数结构体
+ * @class
+ */
+class CreateShieldPlanInstanceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 资源id
+         * @type {string || null}
+         */
+        this.ResourceId = null;
+
+        /**
+         * 策略名称
+         * @type {string || null}
+         */
+        this.PlanName = null;
+
+        /**
+         * 策略具体信息
+         * @type {PlanInfo || null}
+         */
+        this.PlanInfo = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ResourceId = params.ResourceId || null;
+        this.PlanName = params.PlanName || null;
+
+        if (params.PlanInfo) {
+            let obj = new PlanInfo();
+            obj.deserialize(params.PlanInfo)
+            this.PlanInfo = obj;
+        }
+
+    }
+}
+
+/**
  * app扫描结果集
  * @class
  */
@@ -614,6 +834,98 @@ class AppScanSet extends  AbstractModel {
 }
 
 /**
+ * 加固策略信息
+ * @class
+ */
+class ShieldPlanInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 加固策略数量
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 加固策略具体信息数组
+         * @type {Array.<PlanDetailInfo> || null}
+         */
+        this.PlanSet = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = params.TotalCount || null;
+
+        if (params.PlanSet) {
+            this.PlanSet = new Array();
+            for (let z in params.PlanSet) {
+                let obj = new PlanDetailInfo();
+                obj.deserialize(params.PlanSet[z]);
+                this.PlanSet.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * CreateBindInstance请求参数结构体
+ * @class
+ */
+class CreateBindInstanceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 资源id，全局唯一
+         * @type {string || null}
+         */
+        this.ResourceId = null;
+
+        /**
+         * app的icon的url
+         * @type {string || null}
+         */
+        this.AppIconUrl = null;
+
+        /**
+         * app的名称
+         * @type {string || null}
+         */
+        this.AppName = null;
+
+        /**
+         * app的包名
+         * @type {string || null}
+         */
+        this.AppPkgName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ResourceId = params.ResourceId || null;
+        this.AppIconUrl = params.AppIconUrl || null;
+        this.AppName = params.AppName || null;
+        this.AppPkgName = params.AppPkgName || null;
+
+    }
+}
+
+/**
  * CreateShieldInstance返回参数结构体
  * @class
  */
@@ -684,6 +996,81 @@ class DeleteShieldInstancesRequest extends  AbstractModel {
 }
 
 /**
+ * 拉取某个用户的所有资源信息
+ * @class
+ */
+class ResourceInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 用户购买的资源id，全局唯一
+         * @type {string || null}
+         */
+        this.ResourceId = null;
+
+        /**
+         * 资源的pid，MTP加固-12767，应用加固-12750 MTP反作弊-12766 源代码混淆-12736
+         * @type {number || null}
+         */
+        this.Pid = null;
+
+        /**
+         * 购买时间戳
+         * @type {number || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * 到期时间戳
+         * @type {number || null}
+         */
+        this.ExpireTime = null;
+
+        /**
+         * 0-未绑定，1-已绑定
+         * @type {number || null}
+         */
+        this.IsBind = null;
+
+        /**
+         * 用户绑定app的基本信息
+         * @type {BindInfo || null}
+         */
+        this.BindInfo = null;
+
+        /**
+         * 资源名称，如应用加固，漏洞扫描
+         * @type {string || null}
+         */
+        this.ResourceName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ResourceId = params.ResourceId || null;
+        this.Pid = params.Pid || null;
+        this.CreateTime = params.CreateTime || null;
+        this.ExpireTime = params.ExpireTime || null;
+        this.IsBind = params.IsBind || null;
+
+        if (params.BindInfo) {
+            let obj = new BindInfo();
+            obj.deserialize(params.BindInfo)
+            this.BindInfo = obj;
+        }
+        this.ResourceName = params.ResourceName || null;
+
+    }
+}
+
+/**
  * DescribeShieldInstances请求参数结构体
  * @class
  */
@@ -693,7 +1080,7 @@ class DescribeShieldInstancesRequest extends  AbstractModel {
 
         /**
          * 支持通过app名称，app包名，加固的服务版本，提交的渠道进行筛选。
-         * @type {Array.<Filters> || null}
+         * @type {Array.<Filter> || null}
          */
         this.Filters = null;
 
@@ -740,7 +1127,7 @@ class DescribeShieldInstancesRequest extends  AbstractModel {
         if (params.Filters) {
             this.Filters = new Array();
             for (let z in params.Filters) {
-                let obj = new Filters();
+                let obj = new Filter();
                 obj.deserialize(params.Filters[z]);
                 this.Filters.push(obj);
             }
@@ -868,6 +1255,49 @@ class DescribeScanInstancesResponse extends  AbstractModel {
 }
 
 /**
+ * 漏洞信息
+ * @class
+ */
+class VulInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 漏洞列表
+         * @type {Array.<VulList> || null}
+         */
+        this.VulList = null;
+
+        /**
+         * 漏洞文件评分
+         * @type {number || null}
+         */
+        this.VulFileScore = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.VulList) {
+            this.VulList = new Array();
+            for (let z in params.VulList) {
+                let obj = new VulList();
+                obj.deserialize(params.VulList[z]);
+                this.VulList.push(obj);
+            }
+        }
+        this.VulFileScore = params.VulFileScore || null;
+
+    }
+}
+
+/**
  * 提交的app基本信息
  * @class
  */
@@ -945,65 +1375,6 @@ class AppInfo extends  AbstractModel {
 }
 
 /**
- * DescribeShieldResult返回参数结构体
- * @class
- */
-class DescribeShieldResultResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 任务状态: 1-已完成,2-处理中,3-处理出错,4-处理超时
-         * @type {number || null}
-         */
-        this.TaskStatus = null;
-
-        /**
-         * app加固前的详细信息
-         * @type {AppDetailInfo || null}
-         */
-        this.AppDetailInfo = null;
-
-        /**
-         * app加固后的详细信息
-         * @type {ShieldInfo || null}
-         */
-        this.ShieldInfo = null;
-
-        /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.TaskStatus = params.TaskStatus || null;
-
-        if (params.AppDetailInfo) {
-            let obj = new AppDetailInfo();
-            obj.deserialize(params.AppDetailInfo)
-            this.AppDetailInfo = obj;
-        }
-
-        if (params.ShieldInfo) {
-            let obj = new ShieldInfo();
-            obj.deserialize(params.ShieldInfo)
-            this.ShieldInfo = obj;
-        }
-        this.RequestId = params.RequestId || null;
-
-    }
-}
-
-/**
  * 提交app加固的服务信息
  * @class
  */
@@ -1029,6 +1400,12 @@ class ServiceInfo extends  AbstractModel {
          */
         this.SubmitSource = null;
 
+        /**
+         * 加固策略编号，如果不传则使用系统默认加固策略。如果指定的plan不存在会返回错误。
+         * @type {number || null}
+         */
+        this.PlanId = null;
+
     }
 
     /**
@@ -1041,29 +1418,70 @@ class ServiceInfo extends  AbstractModel {
         this.ServiceEdition = params.ServiceEdition || null;
         this.CallbackUrl = params.CallbackUrl || null;
         this.SubmitSource = params.SubmitSource || null;
+        this.PlanId = params.PlanId || null;
 
     }
 }
 
 /**
- * 漏洞信息
+ * so加固信息
  * @class
  */
-class VulInfo extends  AbstractModel {
+class SoInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 漏洞列表
-         * @type {Array.<VulList> || null}
+         * so文件列表
+         * @type {Array.<string> || null}
          */
-        this.VulList = null;
+        this.SoFileNames = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SoFileNames = params.SoFileNames || null;
+
+    }
+}
+
+/**
+ * DescribeShieldPlanInstance返回参数结构体
+ * @class
+ */
+class DescribeShieldPlanInstanceResponse extends  AbstractModel {
+    constructor(){
+        super();
 
         /**
-         * 漏洞文件评分
-         * @type {number || null}
+         * 绑定资源信息
+         * @type {BindInfo || null}
          */
-        this.VulFileScore = null;
+        this.BindInfo = null;
+
+        /**
+         * 加固策略信息
+         * @type {ShieldPlanInfo || null}
+         */
+        this.ShieldPlanInfo = null;
+
+        /**
+         * 加固资源信息
+         * @type {ResourceServiceInfo || null}
+         */
+        this.ResourceServiceInfo = null;
+
+        /**
+         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
 
     }
 
@@ -1075,15 +1493,137 @@ class VulInfo extends  AbstractModel {
             return;
         }
 
-        if (params.VulList) {
-            this.VulList = new Array();
-            for (let z in params.VulList) {
-                let obj = new VulList();
-                obj.deserialize(params.VulList[z]);
-                this.VulList.push(obj);
+        if (params.BindInfo) {
+            let obj = new BindInfo();
+            obj.deserialize(params.BindInfo)
+            this.BindInfo = obj;
+        }
+
+        if (params.ShieldPlanInfo) {
+            let obj = new ShieldPlanInfo();
+            obj.deserialize(params.ShieldPlanInfo)
+            this.ShieldPlanInfo = obj;
+        }
+
+        if (params.ResourceServiceInfo) {
+            let obj = new ResourceServiceInfo();
+            obj.deserialize(params.ResourceServiceInfo)
+            this.ResourceServiceInfo = obj;
+        }
+        this.RequestId = params.RequestId || null;
+
+    }
+}
+
+/**
+ * 资源服务信息
+ * @class
+ */
+class ResourceServiceInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 创建时间戳
+         * @type {number || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * 到期时间戳
+         * @type {number || null}
+         */
+        this.ExpireTime = null;
+
+        /**
+         * 资源名称，如应用加固，源码混淆
+         * @type {string || null}
+         */
+        this.ResourceName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CreateTime = params.CreateTime || null;
+        this.ExpireTime = params.ExpireTime || null;
+        this.ResourceName = params.ResourceName || null;
+
+    }
+}
+
+/**
+ * DescribeResourceInstances请求参数结构体
+ * @class
+ */
+class DescribeResourceInstancesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 资源类别id数组
+         * @type {Array.<number> || null}
+         */
+        this.Pids = null;
+
+        /**
+         * 支持通过资源id，pid进行查询
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * 偏移量，默认为0
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 数量限制，默认为20，最大值为100。
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 按某个字段排序，目前支持CreateTime、ExpireTime其中的一个排序。
+         * @type {string || null}
+         */
+        this.OrderField = null;
+
+        /**
+         * 升序（asc）还是降序（desc），默认：desc。
+         * @type {string || null}
+         */
+        this.OrderDirection = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Pids = params.Pids || null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
             }
         }
-        this.VulFileScore = params.VulFileScore || null;
+        this.Offset = params.Offset || null;
+        this.Limit = params.Limit || null;
+        this.OrderField = params.OrderField || null;
+        this.OrderDirection = params.OrderDirection || null;
 
     }
 }
@@ -1200,60 +1740,24 @@ class AdInfo extends  AbstractModel {
 }
 
 /**
- * 漏洞信息
+ * DescribeShieldPlanInstance请求参数结构体
  * @class
  */
-class VulList extends  AbstractModel {
+class DescribeShieldPlanInstanceRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 漏洞id
+         * 资源id
          * @type {string || null}
          */
-        this.VulId = null;
+        this.ResourceId = null;
 
         /**
-         * 漏洞名称
-         * @type {string || null}
-         */
-        this.VulName = null;
-
-        /**
-         * 漏洞代码
-         * @type {string || null}
-         */
-        this.VulCode = null;
-
-        /**
-         * 漏洞描述
-         * @type {string || null}
-         */
-        this.VulDesc = null;
-
-        /**
-         * 漏洞解决方案
-         * @type {string || null}
-         */
-        this.VulSolution = null;
-
-        /**
-         * 漏洞来源类别，0默认自身，1第三方插件
+         * 服务类别id
          * @type {number || null}
          */
-        this.VulSrcType = null;
-
-        /**
-         * 漏洞位置
-         * @type {string || null}
-         */
-        this.VulFilepath = null;
-
-        /**
-         * 风险级别：1 低风险 ；2中等风险；3 高风险
-         * @type {number || null}
-         */
-        this.RiskLevel = null;
+        this.Pid = null;
 
     }
 
@@ -1264,14 +1768,8 @@ class VulList extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.VulId = params.VulId || null;
-        this.VulName = params.VulName || null;
-        this.VulCode = params.VulCode || null;
-        this.VulDesc = params.VulDesc || null;
-        this.VulSolution = params.VulSolution || null;
-        this.VulSrcType = params.VulSrcType || null;
-        this.VulFilepath = params.VulFilepath || null;
-        this.RiskLevel = params.RiskLevel || null;
+        this.ResourceId = params.ResourceId || null;
+        this.Pid = params.Pid || null;
 
     }
 }
@@ -1320,6 +1818,12 @@ class ShieldInfo extends  AbstractModel {
          */
         this.ItemId = null;
 
+        /**
+         * 加固版本，basic基础版，professional专业版
+         * @type {string || null}
+         */
+        this.ServiceEdition = null;
+
     }
 
     /**
@@ -1335,6 +1839,7 @@ class ShieldInfo extends  AbstractModel {
         this.AppUrl = params.AppUrl || null;
         this.TaskTime = params.TaskTime || null;
         this.ItemId = params.ItemId || null;
+        this.ServiceEdition = params.ServiceEdition || null;
 
     }
 }
@@ -1445,6 +1950,41 @@ class DeleteScanInstancesResponse extends  AbstractModel {
 }
 
 /**
+ * 筛选数据结构
+ * @class
+ */
+class Filter extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 需要过滤的字段
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 需要过滤字段的值
+         * @type {string || null}
+         */
+        this.Value = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = params.Name || null;
+        this.Value = params.Value || null;
+
+    }
+}
+
+/**
  * DeleteShieldInstances返回参数结构体
  * @class
  */
@@ -1489,7 +2029,7 @@ class DescribeScanInstancesRequest extends  AbstractModel {
 
         /**
          * 支持通过app名称，app包名进行筛选
-         * @type {Array.<Filters> || null}
+         * @type {Array.<Filter> || null}
          */
         this.Filters = null;
 
@@ -1536,7 +2076,7 @@ class DescribeScanInstancesRequest extends  AbstractModel {
         if (params.Filters) {
             this.Filters = new Array();
             for (let z in params.Filters) {
-                let obj = new Filters();
+                let obj = new Filter();
                 obj.deserialize(params.Filters[z]);
                 this.Filters.push(obj);
             }
@@ -1546,6 +2086,56 @@ class DescribeScanInstancesRequest extends  AbstractModel {
         this.ItemIds = params.ItemIds || null;
         this.OrderField = params.OrderField || null;
         this.OrderDirection = params.OrderDirection || null;
+
+    }
+}
+
+/**
+ * DescribeResourceInstances返回参数结构体
+ * @class
+ */
+class DescribeResourceInstancesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 符合要求的资源数量
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 符合要求的资源数组
+         * @type {Array.<ResourceInfo> || null}
+         */
+        this.ResourceSet = null;
+
+        /**
+         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = params.TotalCount || null;
+
+        if (params.ResourceSet) {
+            this.ResourceSet = new Array();
+            for (let z in params.ResourceSet) {
+                let obj = new ResourceInfo();
+                obj.deserialize(params.ResourceSet[z]);
+                this.ResourceSet.push(obj);
+            }
+        }
+        this.RequestId = params.RequestId || null;
 
     }
 }
@@ -1634,24 +2224,108 @@ class CreateScanInstancesRequest extends  AbstractModel {
 }
 
 /**
- * 筛选数据结构
+ * 加固策略信息
  * @class
  */
-class Filters extends  AbstractModel {
+class PlanInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 需要过滤的字段
-         * @type {string || null}
+         * apk大小优化，0关闭，1开启
+         * @type {number || null}
          */
-        this.Name = null;
+        this.ApkSizeOpt = null;
 
         /**
-         * 需要过滤字段的值
+         * Dex加固，0关闭，1开启
+         * @type {number || null}
+         */
+        this.Dex = null;
+
+        /**
+         * So加固，0关闭，1开启
+         * @type {number || null}
+         */
+        this.So = null;
+
+        /**
+         * 数据收集，0关闭，1开启
+         * @type {number || null}
+         */
+        this.Bugly = null;
+
+        /**
+         * 防止重打包，0关闭，1开启
+         * @type {number || null}
+         */
+        this.AntiRepack = null;
+
+        /**
+         * Dex分离，0关闭，1开启
+         * @type {number || null}
+         */
+        this.SeperateDex = null;
+
+        /**
+         * 内存保护，0关闭，1开启
+         * @type {number || null}
+         */
+        this.Db = null;
+
+        /**
+         * Dex签名校验，0关闭，1开启
+         * @type {number || null}
+         */
+        this.DexSig = null;
+
+        /**
+         * So文件信息
+         * @type {SoInfo || null}
+         */
+        this.SoInfo = null;
+
+        /**
+         * vmp，0关闭，1开启
+         * @type {number || null}
+         */
+        this.AntiVMP = null;
+
+        /**
+         * 保护so的强度，
          * @type {string || null}
          */
-        this.Value = null;
+        this.SoType = null;
+
+        /**
+         * 防日志泄漏，0关闭，1开启
+         * @type {number || null}
+         */
+        this.AntiLogLeak = null;
+
+        /**
+         * root检测，0关闭，1开启
+         * @type {number || null}
+         */
+        this.AntiQemuRoot = null;
+
+        /**
+         * 资源防篡改，0关闭，1开启
+         * @type {number || null}
+         */
+        this.AntiAssets = null;
+
+        /**
+         * 防止截屏，0关闭，1开启
+         * @type {number || null}
+         */
+        this.AntiScreenshot = null;
+
+        /**
+         * SSL证书防窃取，0关闭，1开启
+         * @type {number || null}
+         */
+        this.AntiSSL = null;
 
     }
 
@@ -1662,8 +2336,163 @@ class Filters extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Name = params.Name || null;
-        this.Value = params.Value || null;
+        this.ApkSizeOpt = params.ApkSizeOpt || null;
+        this.Dex = params.Dex || null;
+        this.So = params.So || null;
+        this.Bugly = params.Bugly || null;
+        this.AntiRepack = params.AntiRepack || null;
+        this.SeperateDex = params.SeperateDex || null;
+        this.Db = params.Db || null;
+        this.DexSig = params.DexSig || null;
+
+        if (params.SoInfo) {
+            let obj = new SoInfo();
+            obj.deserialize(params.SoInfo)
+            this.SoInfo = obj;
+        }
+        this.AntiVMP = params.AntiVMP || null;
+        this.SoType = params.SoType || null;
+        this.AntiLogLeak = params.AntiLogLeak || null;
+        this.AntiQemuRoot = params.AntiQemuRoot || null;
+        this.AntiAssets = params.AntiAssets || null;
+        this.AntiScreenshot = params.AntiScreenshot || null;
+        this.AntiSSL = params.AntiSSL || null;
+
+    }
+}
+
+/**
+ * DescribeShieldResult返回参数结构体
+ * @class
+ */
+class DescribeShieldResultResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 任务状态: 1-已完成,2-处理中,3-处理出错,4-处理超时
+         * @type {number || null}
+         */
+        this.TaskStatus = null;
+
+        /**
+         * app加固前的详细信息
+         * @type {AppDetailInfo || null}
+         */
+        this.AppDetailInfo = null;
+
+        /**
+         * app加固后的详细信息
+         * @type {ShieldInfo || null}
+         */
+        this.ShieldInfo = null;
+
+        /**
+         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskStatus = params.TaskStatus || null;
+
+        if (params.AppDetailInfo) {
+            let obj = new AppDetailInfo();
+            obj.deserialize(params.AppDetailInfo)
+            this.AppDetailInfo = obj;
+        }
+
+        if (params.ShieldInfo) {
+            let obj = new ShieldInfo();
+            obj.deserialize(params.ShieldInfo)
+            this.ShieldInfo = obj;
+        }
+        this.RequestId = params.RequestId || null;
+
+    }
+}
+
+/**
+ * CreateBindInstance返回参数结构体
+ * @class
+ */
+class CreateBindInstanceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 任务状态: 1-已完成,2-处理中,3-处理出错,4-处理超时
+         * @type {number || null}
+         */
+        this.Progress = null;
+
+        /**
+         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Progress = params.Progress || null;
+        this.RequestId = params.RequestId || null;
+
+    }
+}
+
+/**
+ * 用户绑定app的基本信息
+ * @class
+ */
+class BindInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * app的icon的url
+         * @type {string || null}
+         */
+        this.AppIconUrl = null;
+
+        /**
+         * app的名称
+         * @type {string || null}
+         */
+        this.AppName = null;
+
+        /**
+         * app的包名
+         * @type {string || null}
+         */
+        this.AppPkgName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AppIconUrl = params.AppIconUrl || null;
+        this.AppName = params.AppName || null;
+        this.AppPkgName = params.AppPkgName || null;
 
     }
 }
@@ -1697,35 +2526,50 @@ class DeleteScanInstancesRequest extends  AbstractModel {
 }
 
 module.exports = {
+    PlanDetailInfo: PlanDetailInfo,
     AppSetInfo: AppSetInfo,
+    CreateShieldPlanInstanceResponse: CreateShieldPlanInstanceResponse,
     ScanInfo: ScanInfo,
+    VulList: VulList,
     DescribeShieldInstancesResponse: DescribeShieldInstancesResponse,
     PluginInfo: PluginInfo,
     DescribeShieldResultRequest: DescribeShieldResultRequest,
     CreateShieldInstanceRequest: CreateShieldInstanceRequest,
     DescribeScanResultsResponse: DescribeScanResultsResponse,
     VirusInfo: VirusInfo,
+    CreateShieldPlanInstanceRequest: CreateShieldPlanInstanceRequest,
     ScanSetInfo: ScanSetInfo,
     AppScanSet: AppScanSet,
+    ShieldPlanInfo: ShieldPlanInfo,
+    CreateBindInstanceRequest: CreateBindInstanceRequest,
     CreateShieldInstanceResponse: CreateShieldInstanceResponse,
     DeleteShieldInstancesRequest: DeleteShieldInstancesRequest,
+    ResourceInfo: ResourceInfo,
     DescribeShieldInstancesRequest: DescribeShieldInstancesRequest,
     CreateScanInstancesResponse: CreateScanInstancesResponse,
     DescribeScanInstancesResponse: DescribeScanInstancesResponse,
-    AppInfo: AppInfo,
-    DescribeShieldResultResponse: DescribeShieldResultResponse,
-    ServiceInfo: ServiceInfo,
     VulInfo: VulInfo,
+    AppInfo: AppInfo,
+    ServiceInfo: ServiceInfo,
+    SoInfo: SoInfo,
+    DescribeShieldPlanInstanceResponse: DescribeShieldPlanInstanceResponse,
+    ResourceServiceInfo: ResourceServiceInfo,
+    DescribeResourceInstancesRequest: DescribeResourceInstancesRequest,
     AdInfo: AdInfo,
-    VulList: VulList,
+    DescribeShieldPlanInstanceRequest: DescribeShieldPlanInstanceRequest,
     ShieldInfo: ShieldInfo,
     AppDetailInfo: AppDetailInfo,
     DeleteScanInstancesResponse: DeleteScanInstancesResponse,
+    Filter: Filter,
     DeleteShieldInstancesResponse: DeleteShieldInstancesResponse,
     DescribeScanInstancesRequest: DescribeScanInstancesRequest,
+    DescribeResourceInstancesResponse: DescribeResourceInstancesResponse,
     DescribeScanResultsRequest: DescribeScanResultsRequest,
     CreateScanInstancesRequest: CreateScanInstancesRequest,
-    Filters: Filters,
+    PlanInfo: PlanInfo,
+    DescribeShieldResultResponse: DescribeShieldResultResponse,
+    CreateBindInstanceResponse: CreateBindInstanceResponse,
+    BindInfo: BindInfo,
     DeleteScanInstancesRequest: DeleteScanInstancesRequest,
 
 }
