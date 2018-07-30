@@ -1,6 +1,7 @@
 module.exports = {
     aai: require("./aai"),
     batch: require("./batch"),
+    bm: require("./bm"),
     cbs: require("./cbs"),
     cdb: require("./cdb"),
     cis: require("./cis"),
