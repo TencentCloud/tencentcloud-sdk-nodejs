@@ -61,8 +61,8 @@ class AbstractClient {
     /**
      * @inner
      */
-    failRequest(errMsg, cb) {
-        cb(errMsg, null);
+    failRequest(err, cb) {
+        cb(err, null);
     }
 
     /**
