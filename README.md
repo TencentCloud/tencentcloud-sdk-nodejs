@@ -54,3 +54,11 @@ client.DescribeZones(req, function(errMsg, response) {
 
 # 旧版SDK
 我们推荐使用新版NODEJS SDK，如果一定要用旧版SDK，请前往[github仓库](https://github.com/CFETeam/qcloudapi-sdk)下载。
+
+# 社区版SDK
+
+## tencentcloud
+
+热心网友 alsotang 根据官方 sdk 封装的，更符合 Node.js 风格的 sdk
+
+https://github.com/alsotang/tencentcloud
