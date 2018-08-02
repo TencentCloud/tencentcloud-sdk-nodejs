@@ -3,6 +3,7 @@ const sdkVersion = require("./sdk_version");
 const ClientProfile = require("./profile/client_profile");
 const Sign = require("./sign");
 const HttpConnection = require("./http/http_connection");
+const TencentCloudSDKHttpException = require("./exception/tencent_cloud_sdk_exception");
 
 /**
  * @inner
@@ -60,8 +61,8 @@ class AbstractClient {
     /**
      * @inner
      */
-    failRequest(errMsg, cb) {
-        cb(errMsg, null);
+    failRequest(err, cb) {
+        cb(err, null);
     }
 
     /**
@@ -86,13 +87,17 @@ class AbstractClient {
                 this.profile.httpProfile.protocol + this.getEndpoint() + this.path,
                 params, (error, response, data) => {
                     if (error) {
-                        reject(error.message);
+                        reject(new TencentCloudSDKHttpException(error.message));
                     } else if (response.statusCode !== 200) {
-                        reject(response.statusCode.toString() + response.statusMessage);
+                        const tcError = new TencentCloudSDKHttpException(response.statusMessage)
+                        tcError.httpCode = response.statusCode
+                        reject(tcError);
                     } else {
                         data = JSON.parse(data);
                         if (data.Response.Error) {
-                            reject(data.Response.Error.code + data.Response.Error.Message, data.RequestId);
+                            const tcError = new TencentCloudSDKHttpException(data.Response.Error.Message, data.Response.RequestId)
+                            tcError.code = data.Response.Error.Code
+                            reject(tcError);
                         } else {
                             resolve(data.Response);
                         }
