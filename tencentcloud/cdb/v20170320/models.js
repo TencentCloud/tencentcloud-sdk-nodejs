@@ -557,6 +557,34 @@ class DescribeAccountsRequest extends  AbstractModel {
 }
 
 /**
+ * StopDBImportJob请求参数结构体
+ * @class
+ */
+class StopDBImportJobRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 异步任务的请求ID。
+         * @type {string || null}
+         */
+        this.AsyncRequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AsyncRequestId = params.AsyncRequestId || null;
+
+    }
+}
+
+/**
  * StopDBImportJob返回参数结构体
  * @class
  */
@@ -875,6 +903,105 @@ class RegionSellConf extends  AbstractModel {
                 this.ZonesConf.push(obj);
             }
         }
+
+    }
+}
+
+/**
+ * 实例可回档时间范围
+ * @class
+ */
+class InstanceRollbackRangeTime extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 查询数据库错误码
+         * @type {number || null}
+         */
+        this.Code = null;
+
+        /**
+         * 查询数据库错误信息
+         * @type {string || null}
+         */
+        this.Message = null;
+
+        /**
+         * 实例ID列表，单个实例Id的格式如：cdb-c1nl9rpv。与云数据库控制台页面中显示的实例ID相同
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 可回档时间范围
+         * @type {Array.<RollbackTimeRange> || null}
+         */
+        this.Times = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Code = params.Code || null;
+        this.Message = params.Message || null;
+        this.InstanceId = params.InstanceId || null;
+
+        if (params.Times) {
+            this.Times = new Array();
+            for (let z in params.Times) {
+                let obj = new RollbackTimeRange();
+                obj.deserialize(params.Times[z]);
+                this.Times.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * DescribeTables返回参数结构体
+ * @class
+ */
+class DescribeTablesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 符合查询条件的数据库表总数。
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 返回的数据库表信息。
+         * @type {Array.<string> || null}
+         */
+        this.Items = null;
+
+        /**
+         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = params.TotalCount || null;
+        this.Items = params.Items || null;
+        this.RequestId = params.RequestId || null;
 
     }
 }
@@ -1346,6 +1473,34 @@ class DescribeTasksResponse extends  AbstractModel {
         this.TotalCount = params.TotalCount || null;
         this.Items = params.Items || null;
         this.RequestId = params.RequestId || null;
+
+    }
+}
+
+/**
+ * DescribeRollbackRangeTime请求参数结构体
+ * @class
+ */
+class DescribeRollbackRangeTimeRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例ID列表，单个实例Id的格式如：cdb-c1nl9rpv。与云数据库控制台页面中显示的实例ID相同。
+         * @type {Array.<string> || null}
+         */
+        this.InstanceIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceIds = params.InstanceIds || null;
 
     }
 }
@@ -1879,18 +2034,24 @@ class ModifyInstanceParamRequest extends  AbstractModel {
 }
 
 /**
- * ModifyAccountPassword返回参数结构体
+ * CreateDBInstanceHour返回参数结构体
  * @class
  */
-class ModifyAccountPasswordResponse extends  AbstractModel {
+class CreateDBInstanceHourResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 异步任务的请求ID，可使用此ID查询异步任务的执行结果。
-         * @type {string || null}
+         * 短订单ID，用于调用云API相关接口，如[获取订单信息](https://cloud.tencent.com/document/api/403/4392)
+         * @type {Array.<string> || null}
          */
-        this.AsyncRequestId = null;
+        this.DealIds = null;
+
+        /**
+         * 实例ID列表
+         * @type {Array.<string> || null}
+         */
+        this.InstanceIds = null;
 
         /**
          * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
@@ -1907,7 +2068,8 @@ class ModifyAccountPasswordResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.AsyncRequestId = params.AsyncRequestId || null;
+        this.DealIds = params.DealIds || null;
+        this.InstanceIds = params.InstanceIds || null;
         this.RequestId = params.RequestId || null;
 
     }
@@ -2489,6 +2651,78 @@ class DescribeSlowLogsResponse extends  AbstractModel {
 }
 
 /**
+ * 用于回档的实例详情
+ * @class
+ */
+class RollbackInstancesInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 云数据库实例ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 回档策略。可选值为：table、db、full；默认值为full。table - 急速回档模式，仅导入所选中表级别的备份和binlog，如有跨表操作，且关联表未被同时选中，将会导致回档失败，该模式下参数Databases必须为空；db - 快速模式，仅导入所选中库级别的备份和binlog，如有跨库操作，且关联库未被同时选中，将会导致回档失败；full - 普通回档模式，将导入整个实例的备份和binlog，速度较慢。
+         * @type {string || null}
+         */
+        this.Strategy = null;
+
+        /**
+         * 数据库回档时间，时间格式为：yyyy-mm-dd hh:mm:ss
+         * @type {string || null}
+         */
+        this.RollbackTime = null;
+
+        /**
+         * 待回档的数据库信息，表示整库回档
+         * @type {Array.<RollbackDBName> || null}
+         */
+        this.Databases = null;
+
+        /**
+         * 待回档的数据库表信息，表示按表回档
+         * @type {Array.<RollbackTables> || null}
+         */
+        this.Tables = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = params.InstanceId || null;
+        this.Strategy = params.Strategy || null;
+        this.RollbackTime = params.RollbackTime || null;
+
+        if (params.Databases) {
+            this.Databases = new Array();
+            for (let z in params.Databases) {
+                let obj = new RollbackDBName();
+                obj.deserialize(params.Databases[z]);
+                this.Databases.push(obj);
+            }
+        }
+
+        if (params.Tables) {
+            this.Tables = new Array();
+            for (let z in params.Tables) {
+                let obj = new RollbackTables();
+                obj.deserialize(params.Tables[z]);
+                this.Tables.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * 备份详细信息
  * @class
  */
@@ -2952,6 +3186,69 @@ class TableName extends  AbstractModel {
 }
 
 /**
+ * 慢查询日志详情
+ * @class
+ */
+class SlowLogInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 备份文件名
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 备份文件大小，单位：Byte
+         * @type {number || null}
+         */
+        this.Size = null;
+
+        /**
+         * 备份快照时间，时间格式：2016-03-17 02:10:37
+         * @type {string || null}
+         */
+        this.Date = null;
+
+        /**
+         * 内网下载地址
+         * @type {string || null}
+         */
+        this.IntranetUrl = null;
+
+        /**
+         * 外网下载地址
+         * @type {string || null}
+         */
+        this.InternetUrl = null;
+
+        /**
+         * 日志具体类型，可能的值：slowlog - 慢日志
+         * @type {string || null}
+         */
+        this.Type = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = params.Name || null;
+        this.Size = params.Size || null;
+        this.Date = params.Date || null;
+        this.IntranetUrl = params.IntranetUrl || null;
+        this.InternetUrl = params.InternetUrl || null;
+        this.Type = params.Type || null;
+
+    }
+}
+
+/**
  * DeleteBackup返回参数结构体
  * @class
  */
@@ -3065,24 +3362,18 @@ class DescribeProjectSecurityGroupsResponse extends  AbstractModel {
 }
 
 /**
- * CreateDBInstanceHour返回参数结构体
+ * ModifyAccountPassword返回参数结构体
  * @class
  */
-class CreateDBInstanceHourResponse extends  AbstractModel {
+class ModifyAccountPasswordResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 短订单ID，用于调用云API相关接口，如[获取订单信息](https://cloud.tencent.com/document/api/403/4392)
-         * @type {Array.<string> || null}
+         * 异步任务的请求ID，可使用此ID查询异步任务的执行结果。
+         * @type {string || null}
          */
-        this.DealIds = null;
-
-        /**
-         * 实例ID列表
-         * @type {Array.<string> || null}
-         */
-        this.InstanceIds = null;
+        this.AsyncRequestId = null;
 
         /**
          * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
@@ -3099,8 +3390,7 @@ class CreateDBInstanceHourResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.DealIds = params.DealIds || null;
-        this.InstanceIds = params.InstanceIds || null;
+        this.AsyncRequestId = params.AsyncRequestId || null;
         this.RequestId = params.RequestId || null;
 
     }
@@ -3191,48 +3481,24 @@ class CreateDBInstanceResponse extends  AbstractModel {
 }
 
 /**
- * 慢查询日志详情
+ * 用于回档的数据库表名
  * @class
  */
-class SlowLogInfo extends  AbstractModel {
+class RollbackTableName extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 备份文件名
+         * 回档前的原数据库表名
          * @type {string || null}
          */
-        this.Name = null;
+        this.TableName = null;
 
         /**
-         * 备份文件大小，单位：Byte
-         * @type {number || null}
-         */
-        this.Size = null;
-
-        /**
-         * 备份快照时间，时间格式：2016-03-17 02:10:37
+         * 回档后的新数据库表名
          * @type {string || null}
          */
-        this.Date = null;
-
-        /**
-         * 内网下载地址
-         * @type {string || null}
-         */
-        this.IntranetUrl = null;
-
-        /**
-         * 外网下载地址
-         * @type {string || null}
-         */
-        this.InternetUrl = null;
-
-        /**
-         * 日志具体类型，可能的值：slowlog - 慢日志
-         * @type {string || null}
-         */
-        this.Type = null;
+        this.NewTableName = null;
 
     }
 
@@ -3243,12 +3509,8 @@ class SlowLogInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Name = params.Name || null;
-        this.Size = params.Size || null;
-        this.Date = params.Date || null;
-        this.IntranetUrl = params.IntranetUrl || null;
-        this.InternetUrl = params.InternetUrl || null;
-        this.Type = params.Type || null;
+        this.TableName = params.TableName || null;
+        this.NewTableName = params.NewTableName || null;
 
     }
 }
@@ -3904,6 +4166,42 @@ class DescribeProjectSecurityGroupsRequest extends  AbstractModel {
             return;
         }
         this.ProjectId = params.ProjectId || null;
+
+    }
+}
+
+/**
+ * StartBatchRollback请求参数结构体
+ * @class
+ */
+class StartBatchRollbackRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 用于回档的实例详情信息
+         * @type {Array.<RollbackInstancesInfo> || null}
+         */
+        this.Instances = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Instances) {
+            this.Instances = new Array();
+            for (let z in params.Instances) {
+                let obj = new RollbackInstancesInfo();
+                obj.deserialize(params.Instances[z]);
+                this.Instances.push(obj);
+            }
+        }
 
     }
 }
@@ -5166,6 +5464,62 @@ class ModifyAccountPasswordRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeTables请求参数结构体
+ * @class
+ */
+class DescribeTablesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例ID相同。
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 数据库的名称。
+         * @type {string || null}
+         */
+        this.Database = null;
+
+        /**
+         * 记录偏移量，默认值为0。
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 单次请求返回的数量，默认值为20，最大值为2000。
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 匹配数据库表名的正则表达式，规则同MySQL官网
+         * @type {string || null}
+         */
+        this.TableRegexp = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = params.InstanceId || null;
+        this.Database = params.Database || null;
+        this.Offset = params.Offset || null;
+        this.Limit = params.Limit || null;
+        this.TableRegexp = params.TableRegexp || null;
+
+    }
+}
+
+/**
  * 实例预期重启时间
  * @class
  */
@@ -5998,6 +6352,49 @@ class DescribeDBInstanceCharsetRequest extends  AbstractModel {
 }
 
 /**
+ * 用于回档的数据库表详情
+ * @class
+ */
+class RollbackTables extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 数据库名
+         * @type {string || null}
+         */
+        this.Database = null;
+
+        /**
+         * 数据库表详情
+         * @type {Array.<RollbackTableName> || null}
+         */
+        this.Table = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Database = params.Database || null;
+
+        if (params.Table) {
+            this.Table = new Array();
+            for (let z in params.Table) {
+                let obj = new RollbackTableName();
+                obj.deserialize(params.Table[z]);
+                this.Table.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * DescribeBackupDatabases请求参数结构体
  * @class
  */
@@ -6709,6 +7106,41 @@ class DescribeAccountsResponse extends  AbstractModel {
 }
 
 /**
+ * 可回档时间范围
+ * @class
+ */
+class RollbackTimeRange extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例可回档开始时间，时间格式：2016-10-29 01:06:04
+         * @type {string || null}
+         */
+        this.Begin = null;
+
+        /**
+         * 实例可回档结束时间，时间格式：2016-11-02 11:44:47
+         * @type {string || null}
+         */
+        this.End = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Begin = params.Begin || null;
+        this.End = params.End || null;
+
+    }
+}
+
+/**
  * DeleteBackup请求参数结构体
  * @class
  */
@@ -6744,18 +7176,24 @@ class DeleteBackupRequest extends  AbstractModel {
 }
 
 /**
- * StopDBImportJob请求参数结构体
+ * StartBatchRollback返回参数结构体
  * @class
  */
-class StopDBImportJobRequest extends  AbstractModel {
+class StartBatchRollbackResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 异步任务的请求ID。
+         * 异步任务的请求ID，可使用此ID查询异步任务的执行结果
          * @type {string || null}
          */
         this.AsyncRequestId = null;
+
+        /**
+         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
 
     }
 
@@ -6767,6 +7205,57 @@ class StopDBImportJobRequest extends  AbstractModel {
             return;
         }
         this.AsyncRequestId = params.AsyncRequestId || null;
+        this.RequestId = params.RequestId || null;
+
+    }
+}
+
+/**
+ * DescribeRollbackRangeTime返回参数结构体
+ * @class
+ */
+class DescribeRollbackRangeTimeResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 符合查询条件的实例总数。
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 返回的参数信息。
+         * @type {Array.<InstanceRollbackRangeTime> || null}
+         */
+        this.Items = null;
+
+        /**
+         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = params.TotalCount || null;
+
+        if (params.Items) {
+            this.Items = new Array();
+            for (let z in params.Items) {
+                let obj = new InstanceRollbackRangeTime();
+                obj.deserialize(params.Items[z]);
+                this.Items.push(obj);
+            }
+        }
+        this.RequestId = params.RequestId || null;
 
     }
 }
@@ -6988,6 +7477,41 @@ class DescribeDBInstanceGTIDRequest extends  AbstractModel {
     }
 }
 
+/**
+ * 用于回档的数据库名
+ * @class
+ */
+class RollbackDBName extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 回档前的原数据库名
+         * @type {string || null}
+         */
+        this.DatabaseName = null;
+
+        /**
+         * 回档后的新数据库名
+         * @type {string || null}
+         */
+        this.NewDatabaseName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DatabaseName = params.DatabaseName || null;
+        this.NewDatabaseName = params.NewDatabaseName || null;
+
+    }
+}
+
 module.exports = {
     SellType: SellType,
     CreateDBInstanceRequest: CreateDBInstanceRequest,
@@ -6997,6 +7521,7 @@ module.exports = {
     DescribeBackupConfigRequest: DescribeBackupConfigRequest,
     RoVipInfo: RoVipInfo,
     DescribeAccountsRequest: DescribeAccountsRequest,
+    StopDBImportJobRequest: StopDBImportJobRequest,
     StopDBImportJobResponse: StopDBImportJobResponse,
     Parameter: Parameter,
     DescribeDBInstanceRebootTimeRequest: DescribeDBInstanceRebootTimeRequest,
@@ -7005,6 +7530,8 @@ module.exports = {
     AssociateSecurityGroupsRequest: AssociateSecurityGroupsRequest,
     CreateAccountsResponse: CreateAccountsResponse,
     RegionSellConf: RegionSellConf,
+    InstanceRollbackRangeTime: InstanceRollbackRangeTime,
+    DescribeTablesResponse: DescribeTablesResponse,
     SellConfig: SellConfig,
     DescribeDBSecurityGroupsResponse: DescribeDBSecurityGroupsResponse,
     MasterInfo: MasterInfo,
@@ -7012,6 +7539,7 @@ module.exports = {
     DBSwitchInfo: DBSwitchInfo,
     DescribeDBPriceResponse: DescribeDBPriceResponse,
     DescribeTasksResponse: DescribeTasksResponse,
+    DescribeRollbackRangeTimeRequest: DescribeRollbackRangeTimeRequest,
     DescribeBackupsRequest: DescribeBackupsRequest,
     ModifyDBInstanceProjectResponse: ModifyDBInstanceProjectResponse,
     IsolateDBInstanceResponse: IsolateDBInstanceResponse,
@@ -7024,7 +7552,7 @@ module.exports = {
     ModifyAccountDescriptionResponse: ModifyAccountDescriptionResponse,
     SwitchForUpgradeRequest: SwitchForUpgradeRequest,
     ModifyInstanceParamRequest: ModifyInstanceParamRequest,
-    ModifyAccountPasswordResponse: ModifyAccountPasswordResponse,
+    CreateDBInstanceHourResponse: CreateDBInstanceHourResponse,
     BinlogInfo: BinlogInfo,
     DescribeTasksRequest: DescribeTasksRequest,
     OpenDBInstanceGTIDRequest: OpenDBInstanceGTIDRequest,
@@ -7032,6 +7560,7 @@ module.exports = {
     CreateAccountsRequest: CreateAccountsRequest,
     CreateDBInstanceHourRequest: CreateDBInstanceHourRequest,
     DescribeSlowLogsResponse: DescribeSlowLogsResponse,
+    RollbackInstancesInfo: RollbackInstancesInfo,
     BackupInfo: BackupInfo,
     CloseWanServiceResponse: CloseWanServiceResponse,
     DescribeDBInstancesRequest: DescribeDBInstancesRequest,
@@ -7039,13 +7568,14 @@ module.exports = {
     ModifyDBInstanceVipVportResponse: ModifyDBInstanceVipVportResponse,
     DescribeDBSwitchRecordsResponse: DescribeDBSwitchRecordsResponse,
     TableName: TableName,
+    SlowLogInfo: SlowLogInfo,
     DeleteBackupResponse: DeleteBackupResponse,
     TablePrivilege: TablePrivilege,
     DescribeProjectSecurityGroupsResponse: DescribeProjectSecurityGroupsResponse,
-    CreateDBInstanceHourResponse: CreateDBInstanceHourResponse,
+    ModifyAccountPasswordResponse: ModifyAccountPasswordResponse,
     DescribeDBSwitchRecordsRequest: DescribeDBSwitchRecordsRequest,
     CreateDBInstanceResponse: CreateDBInstanceResponse,
-    SlowLogInfo: SlowLogInfo,
+    RollbackTableName: RollbackTableName,
     CloseWanServiceRequest: CloseWanServiceRequest,
     DeleteAccountsResponse: DeleteAccountsResponse,
     DescribeDBInstanceCharsetResponse: DescribeDBInstanceCharsetResponse,
@@ -7062,6 +7592,7 @@ module.exports = {
     Outbound: Outbound,
     ParamInfo: ParamInfo,
     DescribeProjectSecurityGroupsRequest: DescribeProjectSecurityGroupsRequest,
+    StartBatchRollbackRequest: StartBatchRollbackRequest,
     SecurityGroup: SecurityGroup,
     ZoneConf: ZoneConf,
     SlaveInfo: SlaveInfo,
@@ -7085,6 +7616,7 @@ module.exports = {
     ModifyDBInstanceNameResponse: ModifyDBInstanceNameResponse,
     ModifyAccountDescriptionRequest: ModifyAccountDescriptionRequest,
     ModifyAccountPasswordRequest: ModifyAccountPasswordRequest,
+    DescribeTablesRequest: DescribeTablesRequest,
     InstanceRebootTime: InstanceRebootTime,
     UpgradeDBInstanceRequest: UpgradeDBInstanceRequest,
     DescribeDatabasesResponse: DescribeDatabasesResponse,
@@ -7097,6 +7629,7 @@ module.exports = {
     CreateBackupRequest: CreateBackupRequest,
     AccountInfo: AccountInfo,
     DescribeDBInstanceCharsetRequest: DescribeDBInstanceCharsetRequest,
+    RollbackTables: RollbackTables,
     DescribeBackupDatabasesRequest: DescribeBackupDatabasesRequest,
     UpgradeDBInstanceEngineVersionRequest: UpgradeDBInstanceEngineVersionRequest,
     UpgradeDBInstanceResponse: UpgradeDBInstanceResponse,
@@ -7114,13 +7647,16 @@ module.exports = {
     SwitchForUpgradeResponse: SwitchForUpgradeResponse,
     DescribeAccountPrivilegesRequest: DescribeAccountPrivilegesRequest,
     DescribeAccountsResponse: DescribeAccountsResponse,
+    RollbackTimeRange: RollbackTimeRange,
     DeleteBackupRequest: DeleteBackupRequest,
-    StopDBImportJobRequest: StopDBImportJobRequest,
+    StartBatchRollbackResponse: StartBatchRollbackResponse,
+    DescribeRollbackRangeTimeResponse: DescribeRollbackRangeTimeResponse,
     VerifyRootAccountRequest: VerifyRootAccountRequest,
     OpenWanServiceResponse: OpenWanServiceResponse,
     ModifyBackupConfigRequest: ModifyBackupConfigRequest,
     DescribeBinlogsRequest: DescribeBinlogsRequest,
     DisassociateSecurityGroupsResponse: DisassociateSecurityGroupsResponse,
     DescribeDBInstanceGTIDRequest: DescribeDBInstanceGTIDRequest,
+    RollbackDBName: RollbackDBName,
 
 }
