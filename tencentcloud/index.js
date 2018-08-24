@@ -1,6 +1,7 @@
 module.exports = {
     aai: require("./aai"),
     batch: require("./batch"),
+    billing: require("./billing"),
     bm: require("./bm"),
     cbs: require("./cbs"),
     cdb: require("./cdb"),

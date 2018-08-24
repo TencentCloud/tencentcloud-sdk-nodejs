@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2018 THL A29 Limited, a Tencent company. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ */
 const AbstractModel = require("../../common/abstract_model");
 
 /**
@@ -773,7 +789,7 @@ class Task extends  AbstractModel {
 }
 
 /**
- * 描述实例机型配置信息
+ * 批量计算可用的InstanceTypeConfig信息
  * @class
  */
 class InstanceTypeConfig extends  AbstractModel {
@@ -781,10 +797,16 @@ class InstanceTypeConfig extends  AbstractModel {
         super();
 
         /**
-         * 可用区。
-         * @type {string || null}
+         * 内存容量，单位：`GB`。
+         * @type {number || null}
          */
-        this.Zone = null;
+        this.Mem = null;
+
+        /**
+         * CPU核数，单位：核。
+         * @type {number || null}
+         */
+        this.Cpu = null;
 
         /**
          * 实例机型。
@@ -793,40 +815,16 @@ class InstanceTypeConfig extends  AbstractModel {
         this.InstanceType = null;
 
         /**
+         * 可用区。
+         * @type {string || null}
+         */
+        this.Zone = null;
+
+        /**
          * 实例机型系列。
          * @type {string || null}
          */
         this.InstanceFamily = null;
-
-        /**
-         * GPU核数，单位：核。
-         * @type {number || null}
-         */
-        this.GPU = null;
-
-        /**
-         * CPU核数，单位：核。
-         * @type {number || null}
-         */
-        this.CPU = null;
-
-        /**
-         * 内存容量，单位：`GB`。
-         * @type {number || null}
-         */
-        this.Memory = null;
-
-        /**
-         * 是否支持云硬盘。取值范围：<br><li>`TRUE`：表示支持云硬盘；<br><li>`FALSE`：表示不支持云硬盘。
-         * @type {string || null}
-         */
-        this.CbsSupport = null;
-
-        /**
-         * 机型状态。取值范围：<br><li>`AVAILABLE`：表示机型可用；<br><li>`UNAVAILABLE`：表示机型不可用。
-         * @type {string || null}
-         */
-        this.InstanceTypeState = null;
 
     }
 
@@ -837,14 +835,11 @@ class InstanceTypeConfig extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Zone = params.Zone || null;
+        this.Mem = params.Mem || null;
+        this.Cpu = params.Cpu || null;
         this.InstanceType = params.InstanceType || null;
+        this.Zone = params.Zone || null;
         this.InstanceFamily = params.InstanceFamily || null;
-        this.GPU = params.GPU || null;
-        this.CPU = params.CPU || null;
-        this.Memory = params.Memory || null;
-        this.CbsSupport = params.CbsSupport || null;
-        this.InstanceTypeState = params.InstanceTypeState || null;
 
     }
 }

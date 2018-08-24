@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2018 THL A29 Limited, a Tencent company. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ */
 const AbstractModel = require("../../common/abstract_model");
 
 /**
@@ -495,9 +511,10 @@ class CreateDirectConnectTunnelRequest extends  AbstractModel {
         this.DirectConnectOwnerAccount = null;
 
         /**
-         * 网络类型，分别为VPC、BMVPC
+         * 网络类型，分别为VPC、BMVPC，CCN，默认是VPC
 VPC：私有网络
 BMVPC：黑石网络
+CCN：云联网
          * @type {string || null}
          */
         this.NetworkType = null;
@@ -536,7 +553,7 @@ STATIC：静态
         this.RouteType = null;
 
         /**
-         * BgpPeer，用户侧bgp信息，包括asn和AuthKey
+         * BgpPeer，用户侧bgp信息，包括Asn和AuthKey
          * @type {BgpPeer || null}
          */
         this.BgpPeer = null;
@@ -657,6 +674,15 @@ class DirectConnectTunnel extends  AbstractModel {
 
         /**
          * 专线通道状态
+AVAILABLE:就绪或者已连接
+PENDING:申请中
+ALLOCATING:配置中
+ALLOCATED:配置完成
+ALTERING:修改中
+DELETING:删除中
+DELETED:删除完成
+COMFIRMING:待接受
+REJECTED:拒绝
          * @type {string || null}
          */
         this.State = null;
@@ -674,7 +700,8 @@ class DirectConnectTunnel extends  AbstractModel {
         this.OwnerAccount = null;
 
         /**
-         * 网络类型，分别为VPC、BMVPC VPC：私有网络 BMVPC：黑石网络
+         * 网络类型，分别为VPC、BMVPC、CCN
+ VPC：私有网络 ，BMVPC：黑石网络，CCN：云联网
          * @type {string || null}
          */
         this.NetworkType = null;
