@@ -1,0 +1,959 @@
+/*
+ * Copyright (c) 2018 THL A29 Limited, a Tencent company. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ */
+const AbstractModel = require("../../common/abstract_model");
+
+/**
+ * DescribeBillDetail返回参数结构体
+ * @class
+ */
+class DescribeBillDetailResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 详情列表
+         * @type {Array.<BillDetail> || null}
+         */
+        this.DetailSet = null;
+
+        /**
+         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.DetailSet) {
+            this.DetailSet = new Array();
+            for (let z in params.DetailSet) {
+                let obj = new BillDetail();
+                obj.deserialize(params.DetailSet[z]);
+                this.DetailSet.push(obj);
+            }
+        }
+        this.RequestId = params.RequestId || null;
+
+    }
+}
+
+/**
+ * 订单数据对象
+ * @class
+ */
+class Deal extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 订单号
+         * @type {string || null}
+         */
+        this.OrderId = null;
+
+        /**
+         * 订单状态
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * 支付者
+         * @type {string || null}
+         */
+        this.Payer = null;
+
+        /**
+         * 创建时间
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * 创建人
+         * @type {string || null}
+         */
+        this.Creator = null;
+
+        /**
+         * 实际支付金额（分）
+         * @type {number || null}
+         */
+        this.RealTotalCost = null;
+
+        /**
+         * 代金券抵扣金额（分）
+         * @type {number || null}
+         */
+        this.VoucherDecline = null;
+
+        /**
+         * 项目ID
+         * @type {number || null}
+         */
+        this.ProjectId = null;
+
+        /**
+         * 产品分类ID
+         * @type {number || null}
+         */
+        this.GoodsCategoryId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.OrderId = params.OrderId || null;
+        this.Status = params.Status || null;
+        this.Payer = params.Payer || null;
+        this.CreateTime = params.CreateTime || null;
+        this.Creator = params.Creator || null;
+        this.RealTotalCost = params.RealTotalCost || null;
+        this.VoucherDecline = params.VoucherDecline || null;
+        this.ProjectId = params.ProjectId || null;
+        this.GoodsCategoryId = params.GoodsCategoryId || null;
+
+    }
+}
+
+/**
+ * DescribeDealsByCond返回参数结构体
+ * @class
+ */
+class DescribeDealsByCondResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 订单列表
+         * @type {Array.<Deal> || null}
+         */
+        this.Deals = null;
+
+        /**
+         * 订单总数
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Deals) {
+            this.Deals = new Array();
+            for (let z in params.Deals) {
+                let obj = new Deal();
+                obj.deserialize(params.Deals[z]);
+                this.Deals.push(obj);
+            }
+        }
+        this.TotalCount = params.TotalCount || null;
+        this.RequestId = params.RequestId || null;
+
+    }
+}
+
+/**
+ * DescribeBillResourceSummary返回参数结构体
+ * @class
+ */
+class DescribeBillResourceSummaryResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 资源汇总列表
+         * @type {Array.<BillResourceSummary> || null}
+         */
+        this.ResourceSummarySet = null;
+
+        /**
+         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.ResourceSummarySet) {
+            this.ResourceSummarySet = new Array();
+            for (let z in params.ResourceSummarySet) {
+                let obj = new BillResourceSummary();
+                obj.deserialize(params.ResourceSummarySet[z]);
+                this.ResourceSummarySet.push(obj);
+            }
+        }
+        this.RequestId = params.RequestId || null;
+
+    }
+}
+
+/**
+ * DescribeBillDetail请求参数结构体
+ * @class
+ */
+class DescribeBillDetailRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 偏移量
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 数量
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 周期类型，byPayTime按扣费周期/byUsedTime按计费周期
+         * @type {string || null}
+         */
+        this.PeriodType = null;
+
+        /**
+         * 月份，格式为yyyy-mm
+         * @type {string || null}
+         */
+        this.Month = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Offset = params.Offset || null;
+        this.Limit = params.Limit || null;
+        this.PeriodType = params.PeriodType || null;
+        this.Month = params.Month || null;
+
+    }
+}
+
+/**
+ * DescribeDealsByCond请求参数结构体
+ * @class
+ */
+class DescribeDealsByCondRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 开始时间
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * 结束时间
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * 一页多少条数据，默认是20条，最大不超过1000
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 第多少页，从0开始，默认是0
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 订单状态,默认为4（成功的订单）
+订单的状态
+1：未支付
+2：已支付3：发货中
+4：已发货
+5：发货失败
+6：已退款
+7：已关单
+8：订单过期
+9：订单已失效
+10：产品已失效
+11：代付拒绝
+12：支付中
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * 订单号
+         * @type {string || null}
+         */
+        this.OrderId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.StartTime = params.StartTime || null;
+        this.EndTime = params.EndTime || null;
+        this.Limit = params.Limit || null;
+        this.Offset = params.Offset || null;
+        this.Status = params.Status || null;
+        this.OrderId = params.OrderId || null;
+
+    }
+}
+
+/**
+ * DescribeBillResourceSummary请求参数结构体
+ * @class
+ */
+class DescribeBillResourceSummaryRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 偏移量
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 数量
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 周期类型，byUsedTime按计费周期/byPayTime按扣费周期
+         * @type {string || null}
+         */
+        this.PeriodType = null;
+
+        /**
+         * 月份，格式为yyyy-mm
+         * @type {string || null}
+         */
+        this.Month = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Offset = params.Offset || null;
+        this.Limit = params.Limit || null;
+        this.PeriodType = params.PeriodType || null;
+        this.Month = params.Month || null;
+
+    }
+}
+
+/**
+ * PayDeals返回参数结构体
+ * @class
+ */
+class PayDealsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 此次操作支付成功的订单号数组
+         * @type {Array.<string> || null}
+         */
+        this.OrderIds = null;
+
+        /**
+         * 此次操作支付成功的资源Id数组
+         * @type {Array.<string> || null}
+         */
+        this.ResourceIds = null;
+
+        /**
+         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.OrderIds = params.OrderIds || null;
+        this.ResourceIds = params.ResourceIds || null;
+        this.RequestId = params.RequestId || null;
+
+    }
+}
+
+/**
+ * PayDeals请求参数结构体
+ * @class
+ */
+class PayDealsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 需要支付的一个或者多个订单号
+         * @type {Array.<string> || null}
+         */
+        this.OrderIds = null;
+
+        /**
+         * 是否自动使用代金券,1:是,0否,默认0
+         * @type {number || null}
+         */
+        this.AutoVoucher = null;
+
+        /**
+         * 代金券ID列表,目前仅支持指定一张代金券
+         * @type {Array.<string> || null}
+         */
+        this.VoucherIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.OrderIds = params.OrderIds || null;
+        this.AutoVoucher = params.AutoVoucher || null;
+        this.VoucherIds = params.VoucherIds || null;
+
+    }
+}
+
+/**
+ * 账单明细组件对象
+ * @class
+ */
+class BillDetailComponent extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 组件名称
+         * @type {string || null}
+         */
+        this.ComponentCodeName = null;
+
+        /**
+         * 组件类型名称
+         * @type {string || null}
+         */
+        this.ItemCodeName = null;
+
+        /**
+         * 组件刊例价
+         * @type {string || null}
+         */
+        this.SinglePrice = null;
+
+        /**
+         * 组件指定价
+         * @type {string || null}
+         */
+        this.SpecifiedPrice = null;
+
+        /**
+         * 价格单位
+         * @type {string || null}
+         */
+        this.PriceUnit = null;
+
+        /**
+         * 组件用量
+         * @type {string || null}
+         */
+        this.UsedAmount = null;
+
+        /**
+         * 组件用量单位
+         * @type {string || null}
+         */
+        this.UsedAmountUnit = null;
+
+        /**
+         * 使用时长
+         * @type {string || null}
+         */
+        this.TimeSpan = null;
+
+        /**
+         * 时长单位
+         * @type {string || null}
+         */
+        this.TimeUnitName = null;
+
+        /**
+         * 组件原价
+         * @type {string || null}
+         */
+        this.Cost = null;
+
+        /**
+         * 折扣率
+         * @type {string || null}
+         */
+        this.Discount = null;
+
+        /**
+         * 优惠类型
+         * @type {string || null}
+         */
+        this.ReduceType = null;
+
+        /**
+         * 优惠后总价
+         * @type {string || null}
+         */
+        this.RealCost = null;
+
+        /**
+         * 代金券支付金额
+         * @type {string || null}
+         */
+        this.VoucherPayAmount = null;
+
+        /**
+         * 现金支付金额
+         * @type {string || null}
+         */
+        this.CashPayAmount = null;
+
+        /**
+         * 赠送账户支付金额
+         * @type {string || null}
+         */
+        this.IncentivePayAmount = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ComponentCodeName = params.ComponentCodeName || null;
+        this.ItemCodeName = params.ItemCodeName || null;
+        this.SinglePrice = params.SinglePrice || null;
+        this.SpecifiedPrice = params.SpecifiedPrice || null;
+        this.PriceUnit = params.PriceUnit || null;
+        this.UsedAmount = params.UsedAmount || null;
+        this.UsedAmountUnit = params.UsedAmountUnit || null;
+        this.TimeSpan = params.TimeSpan || null;
+        this.TimeUnitName = params.TimeUnitName || null;
+        this.Cost = params.Cost || null;
+        this.Discount = params.Discount || null;
+        this.ReduceType = params.ReduceType || null;
+        this.RealCost = params.RealCost || null;
+        this.VoucherPayAmount = params.VoucherPayAmount || null;
+        this.CashPayAmount = params.CashPayAmount || null;
+        this.IncentivePayAmount = params.IncentivePayAmount || null;
+
+    }
+}
+
+/**
+ * 账单资源汇总数据对象
+ * @class
+ */
+class BillResourceSummary extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 产品
+         * @type {string || null}
+         */
+        this.BusinessCodeName = null;
+
+        /**
+         * 子产品
+         * @type {string || null}
+         */
+        this.ProductCodeName = null;
+
+        /**
+         * 计费模式
+         * @type {string || null}
+         */
+        this.PayModeName = null;
+
+        /**
+         * 项目
+         * @type {string || null}
+         */
+        this.ProjectName = null;
+
+        /**
+         * 地域
+         * @type {string || null}
+         */
+        this.RegionName = null;
+
+        /**
+         * 可用区
+         * @type {string || null}
+         */
+        this.ZoneName = null;
+
+        /**
+         * 资源实例ID
+         * @type {string || null}
+         */
+        this.ResourceId = null;
+
+        /**
+         * 资源实例名称
+         * @type {string || null}
+         */
+        this.ResourceName = null;
+
+        /**
+         * 交易类型
+         * @type {string || null}
+         */
+        this.ActionTypeName = null;
+
+        /**
+         * 订单ID
+         * @type {string || null}
+         */
+        this.OrderId = null;
+
+        /**
+         * 扣费时间
+         * @type {string || null}
+         */
+        this.PayTime = null;
+
+        /**
+         * 开始使用时间
+         * @type {string || null}
+         */
+        this.FeeBeginTime = null;
+
+        /**
+         * 结束使用时间
+         * @type {string || null}
+         */
+        this.FeeEndTime = null;
+
+        /**
+         * 配置描述
+         * @type {string || null}
+         */
+        this.ConfigDesc = null;
+
+        /**
+         * 扩展字段1
+         * @type {string || null}
+         */
+        this.ExtendField1 = null;
+
+        /**
+         * 扩展字段2
+         * @type {string || null}
+         */
+        this.ExtendField2 = null;
+
+        /**
+         * 原价，单位为元
+         * @type {string || null}
+         */
+        this.TotalCost = null;
+
+        /**
+         * 折扣率
+         * @type {string || null}
+         */
+        this.Discount = null;
+
+        /**
+         * 优惠类型
+         * @type {string || null}
+         */
+        this.ReduceType = null;
+
+        /**
+         * 优惠后总价，单位为元
+         * @type {string || null}
+         */
+        this.RealTotalCost = null;
+
+        /**
+         * 代金券支付金额，单位为元
+         * @type {string || null}
+         */
+        this.VoucherPayAmount = null;
+
+        /**
+         * 现金账户支付金额，单位为元
+         * @type {string || null}
+         */
+        this.CashPayAmount = null;
+
+        /**
+         * 赠送账户支付金额，单位为元
+         * @type {string || null}
+         */
+        this.IncentivePayAmount = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.BusinessCodeName = params.BusinessCodeName || null;
+        this.ProductCodeName = params.ProductCodeName || null;
+        this.PayModeName = params.PayModeName || null;
+        this.ProjectName = params.ProjectName || null;
+        this.RegionName = params.RegionName || null;
+        this.ZoneName = params.ZoneName || null;
+        this.ResourceId = params.ResourceId || null;
+        this.ResourceName = params.ResourceName || null;
+        this.ActionTypeName = params.ActionTypeName || null;
+        this.OrderId = params.OrderId || null;
+        this.PayTime = params.PayTime || null;
+        this.FeeBeginTime = params.FeeBeginTime || null;
+        this.FeeEndTime = params.FeeEndTime || null;
+        this.ConfigDesc = params.ConfigDesc || null;
+        this.ExtendField1 = params.ExtendField1 || null;
+        this.ExtendField2 = params.ExtendField2 || null;
+        this.TotalCost = params.TotalCost || null;
+        this.Discount = params.Discount || null;
+        this.ReduceType = params.ReduceType || null;
+        this.RealTotalCost = params.RealTotalCost || null;
+        this.VoucherPayAmount = params.VoucherPayAmount || null;
+        this.CashPayAmount = params.CashPayAmount || null;
+        this.IncentivePayAmount = params.IncentivePayAmount || null;
+
+    }
+}
+
+/**
+ * 账单明细数据对象
+ * @class
+ */
+class BillDetail extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 产品名称
+         * @type {string || null}
+         */
+        this.BusinessCodeName = null;
+
+        /**
+         * 子产品名称
+         * @type {string || null}
+         */
+        this.ProductCodeName = null;
+
+        /**
+         * 计费模式
+         * @type {string || null}
+         */
+        this.PayModeName = null;
+
+        /**
+         * 项目
+         * @type {string || null}
+         */
+        this.ProjectName = null;
+
+        /**
+         * 区域
+         * @type {string || null}
+         */
+        this.RegionName = null;
+
+        /**
+         * 可用区
+         * @type {string || null}
+         */
+        this.ZoneName = null;
+
+        /**
+         * 资源实例ID
+         * @type {string || null}
+         */
+        this.ResourceId = null;
+
+        /**
+         * 实例名称
+         * @type {string || null}
+         */
+        this.ResourceName = null;
+
+        /**
+         * 交易类型
+         * @type {string || null}
+         */
+        this.ActionTypeName = null;
+
+        /**
+         * 订单ID
+         * @type {string || null}
+         */
+        this.OrderId = null;
+
+        /**
+         * 交易ID
+         * @type {string || null}
+         */
+        this.BillId = null;
+
+        /**
+         * 扣费时间
+         * @type {string || null}
+         */
+        this.PayTime = null;
+
+        /**
+         * 开始使用时间
+         * @type {string || null}
+         */
+        this.FeeBeginTime = null;
+
+        /**
+         * 结束使用时间
+         * @type {string || null}
+         */
+        this.FeeEndTime = null;
+
+        /**
+         * 组件列表
+         * @type {Array.<BillDetailComponent> || null}
+         */
+        this.ComponentSet = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.BusinessCodeName = params.BusinessCodeName || null;
+        this.ProductCodeName = params.ProductCodeName || null;
+        this.PayModeName = params.PayModeName || null;
+        this.ProjectName = params.ProjectName || null;
+        this.RegionName = params.RegionName || null;
+        this.ZoneName = params.ZoneName || null;
+        this.ResourceId = params.ResourceId || null;
+        this.ResourceName = params.ResourceName || null;
+        this.ActionTypeName = params.ActionTypeName || null;
+        this.OrderId = params.OrderId || null;
+        this.BillId = params.BillId || null;
+        this.PayTime = params.PayTime || null;
+        this.FeeBeginTime = params.FeeBeginTime || null;
+        this.FeeEndTime = params.FeeEndTime || null;
+
+        if (params.ComponentSet) {
+            this.ComponentSet = new Array();
+            for (let z in params.ComponentSet) {
+                let obj = new BillDetailComponent();
+                obj.deserialize(params.ComponentSet[z]);
+                this.ComponentSet.push(obj);
+            }
+        }
+
+    }
+}
+
+module.exports = {
+    DescribeBillDetailResponse: DescribeBillDetailResponse,
+    Deal: Deal,
+    DescribeDealsByCondResponse: DescribeDealsByCondResponse,
+    DescribeBillResourceSummaryResponse: DescribeBillResourceSummaryResponse,
+    DescribeBillDetailRequest: DescribeBillDetailRequest,
+    DescribeDealsByCondRequest: DescribeDealsByCondRequest,
+    DescribeBillResourceSummaryRequest: DescribeBillResourceSummaryRequest,
+    PayDealsResponse: PayDealsResponse,
+    PayDealsRequest: PayDealsRequest,
+    BillDetailComponent: BillDetailComponent,
+    BillResourceSummary: BillResourceSummary,
+    BillDetail: BillDetail,
+
+}
