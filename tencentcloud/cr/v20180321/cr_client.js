@@ -57,7 +57,7 @@ class CrClient extends AbstractClient {
     }
 
     /**
-     * 客户通过调用该接口上传需催收文档，格式需为csv或者excel格式。接口返回任务ID。
+     * 客户通过调用该接口上传需催收文档，格式需为excel格式。接口返回任务ID。
      * @param {UploadFileRequest} req
      * @param {function(string, UploadFileResponse):void} cb
      * @public

@@ -1,0 +1,379 @@
+/*
+ * Copyright (c) 2018 THL A29 Limited, a Tencent company. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ */
+const AbstractModel = require("../../common/abstract_model");
+
+/**
+ * InitOralProcess请求参数结构体
+ * @class
+ */
+class InitOralProcessRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 语音段唯一标识，一段语音一个SessionId
+         * @type {string || null}
+         */
+        this.SessionId = null;
+
+        /**
+         * 被评估语音对应的文本
+         * @type {string || null}
+         */
+        this.RefText = null;
+
+        /**
+         * 语音输入模式，0流式分片，1非流式一次性评估
+         * @type {number || null}
+         */
+        this.WorkMode = null;
+
+        /**
+         * 评估模式，0:词模式, 1:句子模式，当为词模式评估时，能够提供每个音节的评估信息，当为句子模式时，能够提供完整度和流利度信息。
+         * @type {number || null}
+         */
+        this.EvalMode = null;
+
+        /**
+         * 评价苛刻指数，取值为[1.0 - 4.0]范围内的浮点数，用于平滑不同年龄段的分数，1.0为小年龄段，4.0为最高年龄段
+         * @type {number || null}
+         */
+        this.ScoreCoeff = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SessionId = params.SessionId || null;
+        this.RefText = params.RefText || null;
+        this.WorkMode = params.WorkMode || null;
+        this.EvalMode = params.EvalMode || null;
+        this.ScoreCoeff = params.ScoreCoeff || null;
+
+    }
+}
+
+/**
+ * TransmitOralProcess请求参数结构体
+ * @class
+ */
+class TransmitOralProcessRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 流式数据包的序号，从1开始，当IsEnd字段为1后后续序号无意义，非流式模式下无意义
+         * @type {number || null}
+         */
+        this.SeqId = null;
+
+        /**
+         * 是否传输完毕标志，若为0表示未完毕，若为1则传输完毕开始评估，非流式模式下无意义
+         * @type {number || null}
+         */
+        this.IsEnd = null;
+
+        /**
+         * 语音文件类型 	1:raw, 2:wav, 3:mp3(mp3格式目前仅支持16k采样率16bit编码单声道)
+         * @type {number || null}
+         */
+        this.VoiceFileType = null;
+
+        /**
+         * 语音编码类型	1:pcm
+         * @type {number || null}
+         */
+        this.VoiceEncodeType = null;
+
+        /**
+         * 当前数据包数据, 流式模式下数据包大小可以按需设置，数据包大小必须 >= 4K，编码格式要求为BASE64。
+         * @type {string || null}
+         */
+        this.UserVoiceData = null;
+
+        /**
+         * 语音段唯一标识，一个完整语音一个SessionId
+         * @type {string || null}
+         */
+        this.SessionId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SeqId = params.SeqId || null;
+        this.IsEnd = params.IsEnd || null;
+        this.VoiceFileType = params.VoiceFileType || null;
+        this.VoiceEncodeType = params.VoiceEncodeType || null;
+        this.UserVoiceData = params.UserVoiceData || null;
+        this.SessionId = params.SessionId || null;
+
+    }
+}
+
+/**
+ * TransmitOralProcess返回参数结构体
+ * @class
+ */
+class TransmitOralProcessResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 发音精准度，取值范围[-1, 100]，当取-1时指完全不匹配，当为句子模式时，是所有已识别单词准确度的加权平均值。当为流式模式且请求中IsEnd未置1时，取值无意义
+         * @type {number || null}
+         */
+        this.PronAccuracy = null;
+
+        /**
+         * 发音流利度，取值范围[0, 1]，当为词模式时，取值无意义；当为流式模式且请求中IsEnd未置1时，取值无意义
+         * @type {number || null}
+         */
+        this.PronFluency = null;
+
+        /**
+         * 发音完整度，取值范围[0, 1]，当为词模式时，取值无意义；当为流式模式且请求中IsEnd未置1时，取值无意义
+         * @type {number || null}
+         */
+        this.PronCompletion = null;
+
+        /**
+         * 详细发音评估结果
+         * @type {Array.<WordRsp> || null}
+         */
+        this.Words = null;
+
+        /**
+         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PronAccuracy = params.PronAccuracy || null;
+        this.PronFluency = params.PronFluency || null;
+        this.PronCompletion = params.PronCompletion || null;
+
+        if (params.Words) {
+            this.Words = new Array();
+            for (let z in params.Words) {
+                let obj = new WordRsp();
+                obj.deserialize(params.Words[z]);
+                this.Words.push(obj);
+            }
+        }
+        this.RequestId = params.RequestId || null;
+
+    }
+}
+
+/**
+ * InitOralProcess返回参数结构体
+ * @class
+ */
+class InitOralProcessResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = params.RequestId || null;
+
+    }
+}
+
+/**
+ * 单词评分细则
+ * @class
+ */
+class WordRsp extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 当前单词语音起始时间点，单位为ms
+         * @type {number || null}
+         */
+        this.MemBeginTime = null;
+
+        /**
+         * 当前单词语音终止时间点，单位为ms
+         * @type {number || null}
+         */
+        this.MemEndTime = null;
+
+        /**
+         * 单词发音准确度，取值范围[-1, 100]，当取-1时指完全不匹配
+         * @type {number || null}
+         */
+        this.PronAccuracy = null;
+
+        /**
+         * 单词发音流利度，取值范围[0, 1]
+         * @type {number || null}
+         */
+        this.PronFluency = null;
+
+        /**
+         * 当前词
+         * @type {string || null}
+         */
+        this.Word = null;
+
+        /**
+         * 当前词与输入语句的匹配情况，0:匹配单词、1：新增单词、2：缺少单词
+         * @type {number || null}
+         */
+        this.MatchTag = null;
+
+        /**
+         * 音节评估详情
+         * @type {Array.<PhoneInfo> || null}
+         */
+        this.PhoneInfos = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MemBeginTime = params.MemBeginTime || null;
+        this.MemEndTime = params.MemEndTime || null;
+        this.PronAccuracy = params.PronAccuracy || null;
+        this.PronFluency = params.PronFluency || null;
+        this.Word = params.Word || null;
+        this.MatchTag = params.MatchTag || null;
+
+        if (params.PhoneInfos) {
+            this.PhoneInfos = new Array();
+            for (let z in params.PhoneInfos) {
+                let obj = new PhoneInfo();
+                obj.deserialize(params.PhoneInfos[z]);
+                this.PhoneInfos.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * 单音节评价结果
+ * @class
+ */
+class PhoneInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 当前音节语音起始时间点，单位为ms
+         * @type {number || null}
+         */
+        this.MemBeginTime = null;
+
+        /**
+         * 当前音节语音终止时间点，单位为ms
+         * @type {number || null}
+         */
+        this.MemEndTime = null;
+
+        /**
+         * 音节发音准确度，取值范围[-1, 100]，当取-1时指完全不匹配
+         * @type {number || null}
+         */
+        this.PronAccuracy = null;
+
+        /**
+         * 当前音节是否检测为重音
+         * @type {boolean || null}
+         */
+        this.DetectedStress = null;
+
+        /**
+         * 当前音节
+         * @type {string || null}
+         */
+        this.Phone = null;
+
+        /**
+         * 当前音节是否应为重音
+         * @type {boolean || null}
+         */
+        this.Stress = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MemBeginTime = params.MemBeginTime || null;
+        this.MemEndTime = params.MemEndTime || null;
+        this.PronAccuracy = params.PronAccuracy || null;
+        this.DetectedStress = params.DetectedStress || null;
+        this.Phone = params.Phone || null;
+        this.Stress = params.Stress || null;
+
+    }
+}
+
+module.exports = {
+    InitOralProcessRequest: InitOralProcessRequest,
+    TransmitOralProcessRequest: TransmitOralProcessRequest,
+    TransmitOralProcessResponse: TransmitOralProcessResponse,
+    InitOralProcessResponse: InitOralProcessResponse,
+    WordRsp: WordRsp,
+    PhoneInfo: PhoneInfo,
+
+}

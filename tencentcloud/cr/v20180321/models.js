@@ -67,10 +67,22 @@ class DownloadReportResponse extends  AbstractModel {
         super();
 
         /**
-         * 报告下载地址
+         * 日报下载地址
          * @type {string || null}
          */
-        this.ReportUrl = null;
+        this.DailyReportUrl = null;
+
+        /**
+         * 结果下载地址
+         * @type {string || null}
+         */
+        this.ResultReportUrl = null;
+
+        /**
+         * 明细下载地址
+         * @type {string || null}
+         */
+        this.DetailReportUrl = null;
 
         /**
          * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
@@ -87,7 +99,9 @@ class DownloadReportResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ReportUrl = params.ReportUrl || null;
+        this.DailyReportUrl = params.DailyReportUrl || null;
+        this.ResultReportUrl = params.ResultReportUrl || null;
+        this.DetailReportUrl = params.DetailReportUrl || null;
         this.RequestId = params.RequestId || null;
 
     }

@@ -742,7 +742,7 @@ class RunInstancesRequest extends  AbstractModel {
         super();
 
         /**
-         * 实例所在的位置。通过该参数可以指定实例所属可用区，所属项目，专用宿主机（对于独享母机付费模式的子机创建）等属性。
+         * 实例所在的位置。通过该参数可以指定实例所属可用区，所属项目，专用宿主机（对于独享母机付费模式的实例创建）等属性。
          * @type {Placement || null}
          */
         this.Placement = null;
@@ -767,7 +767,7 @@ class RunInstancesRequest extends  AbstractModel {
 
         /**
          * 实例机型。不同实例机型指定了不同的资源规格。
-<br><li>对于付费模式为PREPAID或POSTPAID\_BY\_HOUR的子机创建，具体取值可通过调用接口[DescribeInstanceTypeConfigs](https://cloud.tencent.com/document/api/213/15749)来获得最新的规格表或参见[实例类型](https://cloud.tencent.com/document/product/213/11518)描述。若不指定该参数，则默认机型为S1.SMALL1。<br><li>对于付费模式为CDHPAID的子机创建，该参数以"CDH_"为前缀，根据cpu和内存配置生成，具体形式为：CDH_XCXG，例如对于创建cpu为1核，内存为1G大小的专用宿主机的子机，该参数应该为CDH_1C1G。
+<br><li>对于付费模式为PREPAID或POSTPAID\_BY\_HOUR的实例创建，具体取值可通过调用接口[DescribeInstanceTypeConfigs](https://cloud.tencent.com/document/api/213/15749)来获得最新的规格表或参见[实例类型](https://cloud.tencent.com/document/product/213/11518)描述。若不指定该参数，则默认机型为S1.SMALL1。<br><li>对于付费模式为CDHPAID的实例创建，该参数以"CDH_"为前缀，根据cpu和内存配置生成，具体形式为：CDH_XCXG，例如对于创建cpu为1核，内存为1G大小的专用宿主机的实例，该参数应该为CDH_1C1G。
          * @type {string || null}
          */
         this.InstanceType = null;
@@ -779,7 +779,7 @@ class RunInstancesRequest extends  AbstractModel {
         this.SystemDisk = null;
 
         /**
-         * 实例数据盘配置信息。若不指定该参数，则默认不购买数据盘，当前仅支持购买的时候指定一个数据盘。
+         * 实例数据盘配置信息。若不指定该参数，则默认不购买数据盘。支持购买的时候指定11块数据盘，其中最多包含1块LOCAL_BASIC数据盘或者LOCAL_SSD数据盘，最多包含10块CLOUD_BASIC数据盘、CLOUD_PREMIUM数据盘或者CLOUD_SSD数据盘。
          * @type {Array.<DataDisk> || null}
          */
         this.DataDisks = null;
@@ -2209,7 +2209,7 @@ class RunInstancesResponse extends  AbstractModel {
         super();
 
         /**
-         * 当通过本接口来创建实例时会返回该参数，表示一个或多个实例`ID`。返回实例`ID`列表并不代表实例创建成功，可根据 [DescribeInstancesStatus](https://cloud.tencent.com/document/api/213/15738) 接口查询返回的InstancesSet中对应实例的`ID`的状态来判断创建是否完成；如果实例状态由“准备中”变为“正在运行”，则为创建成功。
+         * 当通过本接口来创建实例时会返回该参数，表示一个或多个实例`ID`。返回实例`ID`列表并不代表实例创建成功，可根据 [DescribeInstances](https://cloud.tencent.com/document/api/213/15728) 接口查询返回的InstancesSet中对应实例的`ID`的状态来判断创建是否完成；如果实例状态由“准备中”变为“正在运行”，则为创建成功。
          * @type {Array.<string> || null}
          */
         this.InstanceIdSet = null;
@@ -3012,7 +3012,7 @@ class InquiryPriceRunInstancesRequest extends  AbstractModel {
         this.SystemDisk = null;
 
         /**
-         * 实例数据盘配置信息。若不指定该参数，则默认不购买数据盘，当前仅支持购买的时候指定一个数据盘。
+         * 实例数据盘配置信息。若不指定该参数，则默认不购买数据盘。支持购买的时候指定11块数据盘，其中最多包含1块LOCAL_BASIC数据盘或者LOCAL_SSD数据盘，最多包含10块CLOUD_BASIC数据盘、CLOUD_PREMIUM数据盘或者CLOUD_SSD数据盘。
          * @type {Array.<DataDisk> || null}
          */
         this.DataDisks = null;
@@ -5433,6 +5433,18 @@ class Image extends  AbstractModel {
          */
         this.ImageSource = null;
 
+        /**
+         * 同步百分比
+         * @type {number || null}
+         */
+        this.SyncPercent = null;
+
+        /**
+         * 镜像是否支持cloud-init
+         * @type {boolean || null}
+         */
+        this.IsSupportCloudinit = null;
+
     }
 
     /**
@@ -5454,6 +5466,8 @@ class Image extends  AbstractModel {
         this.Platform = params.Platform || null;
         this.ImageCreator = params.ImageCreator || null;
         this.ImageSource = params.ImageSource || null;
+        this.SyncPercent = params.SyncPercent || null;
+        this.IsSupportCloudinit = params.IsSupportCloudinit || null;
 
     }
 }
@@ -5663,13 +5677,13 @@ class SharePermission extends  AbstractModel {
          * 镜像分享时间
          * @type {string || null}
          */
-        this.CreateTime = null;
+        this.CreatedTime = null;
 
         /**
          * 镜像分享的账户ID
          * @type {string || null}
          */
-        this.Account = null;
+        this.AccountId = null;
 
     }
 
@@ -5680,8 +5694,8 @@ class SharePermission extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.CreateTime = params.CreateTime || null;
-        this.Account = params.Account || null;
+        this.CreatedTime = params.CreatedTime || null;
+        this.AccountId = params.AccountId || null;
 
     }
 }
@@ -6842,7 +6856,7 @@ class InternetAccessible extends  AbstractModel {
         super();
 
         /**
-         * 网络计费类型。取值范围：<br><li>BANDWIDTH_PREPAID：预付费按带宽结算<br><li>TRAFFIC_POSTPAID_BY_HOUR：流量按小时后付费<br><li>BANDWIDTH_POSTPAID_BY_HOUR：带宽按小时后付费<br><li>BANDWIDTH_PACKAGE：带宽包用户<br>默认取值：TRAFFIC_POSTPAID_BY_HOUR。
+         * 网络计费类型。取值范围：<br><li>BANDWIDTH_PREPAID：预付费按带宽结算<br><li>TRAFFIC_POSTPAID_BY_HOUR：流量按小时后付费<br><li>BANDWIDTH_POSTPAID_BY_HOUR：带宽按小时后付费<br><li>BANDWIDTH_PACKAGE：带宽包用户<br>默认取值：非带宽包用户默认与子机付费类型保持一致。
          * @type {string || null}
          */
         this.InternetChargeType = null;
