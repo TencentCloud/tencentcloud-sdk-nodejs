@@ -3405,6 +3405,16 @@ class DataDisk extends  AbstractModel {
          */
         this.DiskId = null;
 
+        /**
+         * 数据盘是否随子机销毁。取值范围：
+<li>TRUE：子机销毁时，销毁数据盘
+<li>FALSE：子机销毁时，保留数据盘<br>
+默认取值：TRUE<br>
+该参数目前仅用于 `RunInstances` 接口。
+         * @type {boolean || null}
+         */
+        this.DeleteWithInstance = null;
+
     }
 
     /**
@@ -3417,6 +3427,7 @@ class DataDisk extends  AbstractModel {
         this.DiskSize = params.DiskSize || null;
         this.DiskType = params.DiskType || null;
         this.DiskId = params.DiskId || null;
+        this.DeleteWithInstance = params.DeleteWithInstance || null;
 
     }
 }
