@@ -551,7 +551,7 @@ class DescribeAccountsRequest extends  AbstractModel {
         this.Offset = null;
 
         /**
-         * 单次请求返回的数量，默认值为20，最大值为100。
+         * 单次请求返回的数量，默认值为20，最小值为1，最大值为100。
          * @type {number || null}
          */
         this.Limit = null;
@@ -712,7 +712,7 @@ class DescribeSlowLogsRequest extends  AbstractModel {
         this.Offset = null;
 
         /**
-         * 返回记录数量，默认值为20，最大值为100。
+         * 分页大小，默认值为20，最小值为1，最大值为100。
          * @type {number || null}
          */
         this.Limit = null;
@@ -1542,7 +1542,7 @@ class DescribeBackupsRequest extends  AbstractModel {
         this.Offset = null;
 
         /**
-         * 单次请求返回的数量，默认值为20，最大值为100。
+         * 分页大小，默认值为20，最小值为1，最大值为100。
          * @type {number || null}
          */
         this.Limit = null;
@@ -3427,13 +3427,13 @@ class DescribeDBSwitchRecordsRequest extends  AbstractModel {
         this.InstanceId = null;
 
         /**
-         * 分页参数，偏移量。
+         * 分页偏移量。
          * @type {number || null}
          */
         this.Offset = null;
 
         /**
-         * 分页参数，单次请求数量限制。
+         * 分页大小，默认值为50，最小值为1，最大值为2000。
          * @type {number || null}
          */
         this.Limit = null;
@@ -3759,6 +3759,34 @@ class First extends  AbstractModel {
         this.Region = params.Region || null;
         this.Vip = params.Vip || null;
         this.Zone = params.Zone || null;
+
+    }
+}
+
+/**
+ * ModifyAutoRenewFlag返回参数结构体
+ * @class
+ */
+class ModifyAutoRenewFlagResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = params.RequestId || null;
 
     }
 }
@@ -5122,7 +5150,7 @@ class BackupConfig extends  AbstractModel {
         super();
 
         /**
-         * 第二个从库复制方式，可能的返回值：aysnc-异步，semisync-半同步
+         * 第二个从库复制方式，可能的返回值：async-异步，semisync-半同步
          * @type {string || null}
          */
         this.ReplicationMode = null;
@@ -5264,7 +5292,7 @@ class DescribeBackupTablesRequest extends  AbstractModel {
         this.Offset = null;
 
         /**
-         * 分页大小，最大值为2000。
+         * 分页大小，最小值为1，最大值为2000。
          * @type {number || null}
          */
         this.Limit = null;
@@ -6443,7 +6471,7 @@ class DescribeBackupDatabasesRequest extends  AbstractModel {
         this.Offset = null;
 
         /**
-         * 分页大小，最大值为2000。
+         * 分页大小，最小值为1，最大值为2000。
          * @type {number || null}
          */
         this.Limit = null;
@@ -6462,6 +6490,41 @@ class DescribeBackupDatabasesRequest extends  AbstractModel {
         this.SearchDatabase = params.SearchDatabase || null;
         this.Offset = params.Offset || null;
         this.Limit = params.Limit || null;
+
+    }
+}
+
+/**
+ * ModifyAutoRenewFlag请求参数结构体
+ * @class
+ */
+class ModifyAutoRenewFlagRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例的ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例ID相同。
+         * @type {Array.<string> || null}
+         */
+        this.InstanceIds = null;
+
+        /**
+         * 自动续费标记，可取值的有：0-不自动续费，1-自动续费。
+         * @type {number || null}
+         */
+        this.AutoRenew = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceIds = params.InstanceIds || null;
+        this.AutoRenew = params.AutoRenew || null;
 
     }
 }
@@ -7416,7 +7479,7 @@ class DescribeBinlogsRequest extends  AbstractModel {
         this.Offset = null;
 
         /**
-         * 单次请求返回的数量，默认值为20，最大值为100。
+         * 分页大小，默认值为20，最小值为1，最大值为100。
          * @type {number || null}
          */
         this.Limit = null;
@@ -7598,6 +7661,7 @@ module.exports = {
     RestartDBInstancesResponse: RestartDBInstancesResponse,
     DescribeBackupDatabasesResponse: DescribeBackupDatabasesResponse,
     First: First,
+    ModifyAutoRenewFlagResponse: ModifyAutoRenewFlagResponse,
     DescribeBackupsResponse: DescribeBackupsResponse,
     DescribeDBImportRecordsResponse: DescribeDBImportRecordsResponse,
     OpenWanServiceRequest: OpenWanServiceRequest,
@@ -7647,6 +7711,7 @@ module.exports = {
     DescribeDBInstanceCharsetRequest: DescribeDBInstanceCharsetRequest,
     RollbackTables: RollbackTables,
     DescribeBackupDatabasesRequest: DescribeBackupDatabasesRequest,
+    ModifyAutoRenewFlagRequest: ModifyAutoRenewFlagRequest,
     UpgradeDBInstanceEngineVersionRequest: UpgradeDBInstanceEngineVersionRequest,
     UpgradeDBInstanceResponse: UpgradeDBInstanceResponse,
     ModifyDBInstanceVipVportRequest: ModifyDBInstanceVipVportRequest,

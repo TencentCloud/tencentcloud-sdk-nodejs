@@ -85,6 +85,7 @@ const DescribeDBInstanceCharsetResponse = models.DescribeDBInstanceCharsetRespon
 const RestartDBInstancesResponse = models.RestartDBInstancesResponse;
 const DescribeBackupDatabasesResponse = models.DescribeBackupDatabasesResponse;
 const First = models.First;
+const ModifyAutoRenewFlagResponse = models.ModifyAutoRenewFlagResponse;
 const DescribeBackupsResponse = models.DescribeBackupsResponse;
 const DescribeDBImportRecordsResponse = models.DescribeDBImportRecordsResponse;
 const OpenWanServiceRequest = models.OpenWanServiceRequest;
@@ -134,6 +135,7 @@ const AccountInfo = models.AccountInfo;
 const DescribeDBInstanceCharsetRequest = models.DescribeDBInstanceCharsetRequest;
 const RollbackTables = models.RollbackTables;
 const DescribeBackupDatabasesRequest = models.DescribeBackupDatabasesRequest;
+const ModifyAutoRenewFlagRequest = models.ModifyAutoRenewFlagRequest;
 const UpgradeDBInstanceEngineVersionRequest = models.UpgradeDBInstanceEngineVersionRequest;
 const UpgradeDBInstanceResponse = models.UpgradeDBInstanceResponse;
 const ModifyDBInstanceVipVportRequest = models.ModifyDBInstanceVipVportRequest;
@@ -422,6 +424,17 @@ class CdbClient extends AbstractClient {
     DescribeDBInstanceConfig(req, cb) {
         let resp = new DescribeDBInstanceConfigResponse();
         this.request("DescribeDBInstanceConfig", req, resp, cb);
+    }
+
+    /**
+     * 本接口(ModifyAutoRenewFlag)用于修改云数据库实例的自动续费标记。仅支持包年包月的实例设置自动续费标记。
+     * @param {ModifyAutoRenewFlagRequest} req
+     * @param {function(string, ModifyAutoRenewFlagResponse):void} cb
+     * @public
+     */
+    ModifyAutoRenewFlag(req, cb) {
+        let resp = new ModifyAutoRenewFlagResponse();
+        this.request("ModifyAutoRenewFlag", req, resp, cb);
     }
 
     /**
