@@ -2309,7 +2309,7 @@ class PlanInfo extends  AbstractModel {
 
         /**
          * 保护so的强度，
-         * @type {string || null}
+         * @type {Array.<string> || null}
          */
         this.SoType = null;
 
