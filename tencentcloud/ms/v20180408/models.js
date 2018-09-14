@@ -274,60 +274,36 @@ class ScanInfo extends  AbstractModel {
 }
 
 /**
- * 漏洞信息
+ * CreateResourceInstances请求参数结构体
  * @class
  */
-class VulList extends  AbstractModel {
+class CreateResourceInstancesRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 漏洞id
-         * @type {string || null}
-         */
-        this.VulId = null;
-
-        /**
-         * 漏洞名称
-         * @type {string || null}
-         */
-        this.VulName = null;
-
-        /**
-         * 漏洞代码
-         * @type {string || null}
-         */
-        this.VulCode = null;
-
-        /**
-         * 漏洞描述
-         * @type {string || null}
-         */
-        this.VulDesc = null;
-
-        /**
-         * 漏洞解决方案
-         * @type {string || null}
-         */
-        this.VulSolution = null;
-
-        /**
-         * 漏洞来源类别，0默认自身，1第三方插件
+         * 资源类型id。
          * @type {number || null}
          */
-        this.VulSrcType = null;
+        this.Pid = null;
 
         /**
-         * 漏洞位置
+         * 时间单位，取值为d，m，y，分别表示天，月，年。
          * @type {string || null}
          */
-        this.VulFilepath = null;
+        this.TimeUnit = null;
 
         /**
-         * 风险级别：1 低风险 ；2中等风险；3 高风险
+         * 时间数量。
          * @type {number || null}
          */
-        this.RiskLevel = null;
+        this.TimeSpan = null;
+
+        /**
+         * 资源数量。
+         * @type {number || null}
+         */
+        this.ResourceNum = null;
 
     }
 
@@ -338,14 +314,10 @@ class VulList extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.VulId = params.VulId || null;
-        this.VulName = params.VulName || null;
-        this.VulCode = params.VulCode || null;
-        this.VulDesc = params.VulDesc || null;
-        this.VulSolution = params.VulSolution || null;
-        this.VulSrcType = params.VulSrcType || null;
-        this.VulFilepath = params.VulFilepath || null;
-        this.RiskLevel = params.RiskLevel || null;
+        this.Pid = params.Pid || null;
+        this.TimeUnit = params.TimeUnit || null;
+        this.TimeSpan = params.TimeSpan || null;
+        this.ResourceNum = params.ResourceNum || null;
 
     }
 }
@@ -1861,6 +1833,41 @@ class ShieldInfo extends  AbstractModel {
 }
 
 /**
+ * CreateResourceInstances返回参数结构体
+ * @class
+ */
+class CreateResourceInstancesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 新创建的资源列表。
+         * @type {Array.<string> || null}
+         */
+        this.ResourceSet = null;
+
+        /**
+         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ResourceSet = params.ResourceSet || null;
+        this.RequestId = params.RequestId || null;
+
+    }
+}
+
+/**
  * app的详细基础信息
  * @class
  */
@@ -2472,6 +2479,83 @@ class CreateBindInstanceResponse extends  AbstractModel {
 }
 
 /**
+ * 漏洞信息
+ * @class
+ */
+class VulList extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 漏洞id
+         * @type {string || null}
+         */
+        this.VulId = null;
+
+        /**
+         * 漏洞名称
+         * @type {string || null}
+         */
+        this.VulName = null;
+
+        /**
+         * 漏洞代码
+         * @type {string || null}
+         */
+        this.VulCode = null;
+
+        /**
+         * 漏洞描述
+         * @type {string || null}
+         */
+        this.VulDesc = null;
+
+        /**
+         * 漏洞解决方案
+         * @type {string || null}
+         */
+        this.VulSolution = null;
+
+        /**
+         * 漏洞来源类别，0默认自身，1第三方插件
+         * @type {number || null}
+         */
+        this.VulSrcType = null;
+
+        /**
+         * 漏洞位置
+         * @type {string || null}
+         */
+        this.VulFilepath = null;
+
+        /**
+         * 风险级别：1 低风险 ；2中等风险；3 高风险
+         * @type {number || null}
+         */
+        this.RiskLevel = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.VulId = params.VulId || null;
+        this.VulName = params.VulName || null;
+        this.VulCode = params.VulCode || null;
+        this.VulDesc = params.VulDesc || null;
+        this.VulSolution = params.VulSolution || null;
+        this.VulSrcType = params.VulSrcType || null;
+        this.VulFilepath = params.VulFilepath || null;
+        this.RiskLevel = params.RiskLevel || null;
+
+    }
+}
+
+/**
  * 用户绑定app的基本信息
  * @class
  */
@@ -2546,7 +2630,7 @@ module.exports = {
     AppSetInfo: AppSetInfo,
     CreateShieldPlanInstanceResponse: CreateShieldPlanInstanceResponse,
     ScanInfo: ScanInfo,
-    VulList: VulList,
+    CreateResourceInstancesRequest: CreateResourceInstancesRequest,
     DescribeShieldInstancesResponse: DescribeShieldInstancesResponse,
     PluginInfo: PluginInfo,
     DescribeShieldResultRequest: DescribeShieldResultRequest,
@@ -2574,6 +2658,7 @@ module.exports = {
     AdInfo: AdInfo,
     DescribeShieldPlanInstanceRequest: DescribeShieldPlanInstanceRequest,
     ShieldInfo: ShieldInfo,
+    CreateResourceInstancesResponse: CreateResourceInstancesResponse,
     AppDetailInfo: AppDetailInfo,
     DeleteScanInstancesResponse: DeleteScanInstancesResponse,
     Filter: Filter,
@@ -2585,6 +2670,7 @@ module.exports = {
     PlanInfo: PlanInfo,
     DescribeShieldResultResponse: DescribeShieldResultResponse,
     CreateBindInstanceResponse: CreateBindInstanceResponse,
+    VulList: VulList,
     BindInfo: BindInfo,
     DeleteScanInstancesRequest: DeleteScanInstancesRequest,
 

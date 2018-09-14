@@ -20,7 +20,7 @@ const PlanDetailInfo = models.PlanDetailInfo;
 const AppSetInfo = models.AppSetInfo;
 const CreateShieldPlanInstanceResponse = models.CreateShieldPlanInstanceResponse;
 const ScanInfo = models.ScanInfo;
-const VulList = models.VulList;
+const CreateResourceInstancesRequest = models.CreateResourceInstancesRequest;
 const DescribeShieldInstancesResponse = models.DescribeShieldInstancesResponse;
 const PluginInfo = models.PluginInfo;
 const DescribeShieldResultRequest = models.DescribeShieldResultRequest;
@@ -48,6 +48,7 @@ const DescribeResourceInstancesRequest = models.DescribeResourceInstancesRequest
 const AdInfo = models.AdInfo;
 const DescribeShieldPlanInstanceRequest = models.DescribeShieldPlanInstanceRequest;
 const ShieldInfo = models.ShieldInfo;
+const CreateResourceInstancesResponse = models.CreateResourceInstancesResponse;
 const AppDetailInfo = models.AppDetailInfo;
 const DeleteScanInstancesResponse = models.DeleteScanInstancesResponse;
 const Filter = models.Filter;
@@ -59,6 +60,7 @@ const CreateScanInstancesRequest = models.CreateScanInstancesRequest;
 const PlanInfo = models.PlanInfo;
 const DescribeShieldResultResponse = models.DescribeShieldResultResponse;
 const CreateBindInstanceResponse = models.CreateBindInstanceResponse;
+const VulList = models.VulList;
 const BindInfo = models.BindInfo;
 const DeleteScanInstancesRequest = models.DeleteScanInstancesRequest;
 
@@ -104,6 +106,17 @@ class MsClient extends AbstractClient {
     DeleteScanInstances(req, cb) {
         let resp = new DeleteScanInstancesResponse();
         this.request("DeleteScanInstances", req, resp, cb);
+    }
+
+    /**
+     * 用户可以使用该接口自建资源，只支持白名单用户
+     * @param {CreateResourceInstancesRequest} req
+     * @param {function(string, CreateResourceInstancesResponse):void} cb
+     * @public
+     */
+    CreateResourceInstances(req, cb) {
+        let resp = new CreateResourceInstancesResponse();
+        this.request("CreateResourceInstances", req, resp, cb);
     }
 
     /**

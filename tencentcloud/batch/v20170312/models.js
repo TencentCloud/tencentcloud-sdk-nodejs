@@ -611,6 +611,12 @@ class Task extends  AbstractModel {
         super();
 
         /**
+         * 应用程序信息
+         * @type {Application || null}
+         */
+        this.Application = null;
+
+        /**
          * 任务名称，在一个作业内部唯一
          * @type {string || null}
          */
@@ -623,30 +629,6 @@ class Task extends  AbstractModel {
         this.TaskInstanceNum = null;
 
         /**
-         * 应用程序信息
-         * @type {Application || null}
-         */
-        this.Application = null;
-
-        /**
-         * 重定向信息
-         * @type {RedirectInfo || null}
-         */
-        this.RedirectInfo = null;
-
-        /**
-         * 任务失败后的最大重试次数，默认为0
-         * @type {number || null}
-         */
-        this.MaxRetryCount = null;
-
-        /**
-         * 任务启动后的超时时间，单位秒，默认为3600秒
-         * @type {number || null}
-         */
-        this.Timeout = null;
-
-        /**
          * 运行环境信息，ComputeEnv 和 EnvId 必须指定一个（且只有一个）参数。
          * @type {AnonymousComputeEnv || null}
          */
@@ -657,6 +639,12 @@ class Task extends  AbstractModel {
          * @type {string || null}
          */
         this.EnvId = null;
+
+        /**
+         * 重定向信息
+         * @type {RedirectInfo || null}
+         */
+        this.RedirectInfo = null;
 
         /**
          * 重定向本地信息
@@ -700,6 +688,18 @@ class Task extends  AbstractModel {
          */
         this.FailedAction = null;
 
+        /**
+         * 任务失败后的最大重试次数，默认为0
+         * @type {number || null}
+         */
+        this.MaxRetryCount = null;
+
+        /**
+         * 任务启动后的超时时间，单位秒，默认为3600秒
+         * @type {number || null}
+         */
+        this.Timeout = null;
+
     }
 
     /**
@@ -709,22 +709,14 @@ class Task extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TaskName = params.TaskName || null;
-        this.TaskInstanceNum = params.TaskInstanceNum || null;
 
         if (params.Application) {
             let obj = new Application();
             obj.deserialize(params.Application)
             this.Application = obj;
         }
-
-        if (params.RedirectInfo) {
-            let obj = new RedirectInfo();
-            obj.deserialize(params.RedirectInfo)
-            this.RedirectInfo = obj;
-        }
-        this.MaxRetryCount = params.MaxRetryCount || null;
-        this.Timeout = params.Timeout || null;
+        this.TaskName = params.TaskName || null;
+        this.TaskInstanceNum = params.TaskInstanceNum || null;
 
         if (params.ComputeEnv) {
             let obj = new AnonymousComputeEnv();
@@ -732,6 +724,12 @@ class Task extends  AbstractModel {
             this.ComputeEnv = obj;
         }
         this.EnvId = params.EnvId || null;
+
+        if (params.RedirectInfo) {
+            let obj = new RedirectInfo();
+            obj.deserialize(params.RedirectInfo)
+            this.RedirectInfo = obj;
+        }
 
         if (params.RedirectLocalInfo) {
             let obj = new RedirectLocalInfo();
@@ -784,6 +782,8 @@ class Task extends  AbstractModel {
             }
         }
         this.FailedAction = params.FailedAction || null;
+        this.MaxRetryCount = params.MaxRetryCount || null;
+        this.Timeout = params.Timeout || null;
 
     }
 }
@@ -1697,28 +1697,28 @@ class Job extends  AbstractModel {
         super();
 
         /**
-         * 作业名称
-         * @type {string || null}
-         */
-        this.JobName = null;
-
-        /**
-         * 作业优先级，任务（Task）和任务实例（TaskInstance）会继承作业优先级
-         * @type {number || null}
-         */
-        this.Priority = null;
-
-        /**
          * 任务信息
          * @type {Array.<Task> || null}
          */
         this.Tasks = null;
 
         /**
+         * 作业名称
+         * @type {string || null}
+         */
+        this.JobName = null;
+
+        /**
          * 作业描述
          * @type {string || null}
          */
         this.JobDescription = null;
+
+        /**
+         * 作业优先级，任务（Task）和任务实例（TaskInstance）会继承作业优先级
+         * @type {number || null}
+         */
+        this.Priority = null;
 
         /**
          * 依赖信息
@@ -1753,8 +1753,6 @@ class Job extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.JobName = params.JobName || null;
-        this.Priority = params.Priority || null;
 
         if (params.Tasks) {
             this.Tasks = new Array();
@@ -1764,7 +1762,9 @@ class Job extends  AbstractModel {
                 this.Tasks.push(obj);
             }
         }
+        this.JobName = params.JobName || null;
         this.JobDescription = params.JobDescription || null;
+        this.Priority = params.Priority || null;
 
         if (params.Dependences) {
             this.Dependences = new Array();
@@ -2682,6 +2682,16 @@ class DataDisk extends  AbstractModel {
          */
         this.DiskId = null;
 
+        /**
+         * 数据盘是否随子机销毁。取值范围：
+<li>TRUE：子机销毁时，销毁数据盘
+<li>FALSE：子机销毁时，保留数据盘<br>
+默认取值：TRUE<br>
+该参数目前仅用于 `RunInstances` 接口。
+         * @type {boolean || null}
+         */
+        this.DeleteWithInstance = null;
+
     }
 
     /**
@@ -2694,6 +2704,7 @@ class DataDisk extends  AbstractModel {
         this.DiskSize = params.DiskSize || null;
         this.DiskType = params.DiskType || null;
         this.DiskId = params.DiskId || null;
+        this.DeleteWithInstance = params.DeleteWithInstance || null;
 
     }
 }
@@ -2713,18 +2724,6 @@ class NamedComputeEnv extends  AbstractModel {
         this.EnvName = null;
 
         /**
-         * 计算环境管理类型
-         * @type {string || null}
-         */
-        this.EnvType = null;
-
-        /**
-         * 计算环境具体参数
-         * @type {EnvData || null}
-         */
-        this.EnvData = null;
-
-        /**
          * 计算节点期望个数
          * @type {number || null}
          */
@@ -2735,6 +2734,18 @@ class NamedComputeEnv extends  AbstractModel {
          * @type {string || null}
          */
         this.EnvDescription = null;
+
+        /**
+         * 计算环境管理类型
+         * @type {string || null}
+         */
+        this.EnvType = null;
+
+        /**
+         * 计算环境具体参数
+         * @type {EnvData || null}
+         */
+        this.EnvData = null;
 
         /**
          * 数据盘挂载选项
@@ -2782,6 +2793,8 @@ class NamedComputeEnv extends  AbstractModel {
             return;
         }
         this.EnvName = params.EnvName || null;
+        this.DesiredComputeNodeCount = params.DesiredComputeNodeCount || null;
+        this.EnvDescription = params.EnvDescription || null;
         this.EnvType = params.EnvType || null;
 
         if (params.EnvData) {
@@ -2789,8 +2802,6 @@ class NamedComputeEnv extends  AbstractModel {
             obj.deserialize(params.EnvData)
             this.EnvData = obj;
         }
-        this.DesiredComputeNodeCount = params.DesiredComputeNodeCount || null;
-        this.EnvDescription = params.EnvDescription || null;
 
         if (params.MountDataDisks) {
             this.MountDataDisks = new Array();
@@ -5093,7 +5104,7 @@ class InternetAccessible extends  AbstractModel {
         super();
 
         /**
-         * 网络计费类型。取值范围：<br><li>BANDWIDTH_PREPAID：预付费按带宽结算<br><li>TRAFFIC_POSTPAID_BY_HOUR：流量按小时后付费<br><li>BANDWIDTH_POSTPAID_BY_HOUR：带宽按小时后付费<br><li>BANDWIDTH_PACKAGE：带宽包用户<br>默认取值：TRAFFIC_POSTPAID_BY_HOUR。
+         * 网络计费类型。取值范围：<br><li>BANDWIDTH_PREPAID：预付费按带宽结算<br><li>TRAFFIC_POSTPAID_BY_HOUR：流量按小时后付费<br><li>BANDWIDTH_POSTPAID_BY_HOUR：带宽按小时后付费<br><li>BANDWIDTH_PACKAGE：带宽包用户<br>默认取值：非带宽包用户默认与子机付费类型保持一致。
          * @type {string || null}
          */
         this.InternetChargeType = null;
