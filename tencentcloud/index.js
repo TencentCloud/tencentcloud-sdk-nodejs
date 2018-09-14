@@ -28,6 +28,7 @@ module.exports = {
     tia: require("./tia"),
     tmt: require("./tmt"),
     vpc: require("./vpc"),
-    youmall: require("./youmall")
+    youmall: require("./youmall"),
+    yunjing: require("./yunjing")
 };
 

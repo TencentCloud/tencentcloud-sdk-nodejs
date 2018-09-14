@@ -60,7 +60,7 @@ class CreateDirectConnectTunnelResponse extends  AbstractModel {
         super();
 
         /**
-         * 专线通道ID
+         * 专用通道ID
          * @type {Array.<string> || null}
          */
         this.DirectConnectTunnelIdSet = null;
@@ -95,7 +95,7 @@ class DeleteDirectConnectTunnelRequest extends  AbstractModel {
         super();
 
         /**
-         * 专线通道ID
+         * 专用通道ID
          * @type {string || null}
          */
         this.DirectConnectTunnelId = null;
@@ -153,15 +153,15 @@ class DescribeDirectConnectTunnelsRequest extends  AbstractModel {
         /**
          * 过滤条件:
 参数不支持同时指定DirectConnectTunnelIds和Filters。
-<li> direct-connect-tunnel-name, 专线通道名称。</li>
-<li> direct-connect-tunnel-id, 专线通道实例ID，如dcx-abcdefgh。</li>
+<li> direct-connect-tunnel-name, 专用通道名称。</li>
+<li> direct-connect-tunnel-id, 专用通道实例ID，如dcx-abcdefgh。</li>
 <li>direct-connect-id, 物理专线实例ID，如，dc-abcdefgh。</li>
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
 
         /**
-         * 专线通道 ID数组
+         * 专用通道 ID数组
          * @type {Array.<string> || null}
          */
         this.DirectConnectTunnelIds = null;
@@ -247,13 +247,13 @@ class DescribeDirectConnectTunnelsResponse extends  AbstractModel {
         super();
 
         /**
-         * 专线通道列表
+         * 专用通道列表
          * @type {Array.<DirectConnectTunnel> || null}
          */
         this.DirectConnectTunnelSet = null;
 
         /**
-         * 符合专线通道数量。
+         * 符合专用通道数量。
          * @type {number || null}
          */
         this.TotalCount = null;
@@ -297,13 +297,13 @@ class ModifyDirectConnectTunnelAttributeRequest extends  AbstractModel {
         super();
 
         /**
-         * 专线通道ID
+         * 专用通道ID
          * @type {string || null}
          */
         this.DirectConnectTunnelId = null;
 
         /**
-         * 专线通道名称
+         * 专用通道名称
          * @type {string || null}
          */
         this.DirectConnectTunnelName = null;
@@ -333,7 +333,7 @@ class ModifyDirectConnectTunnelAttributeRequest extends  AbstractModel {
         this.CustomerAddress = null;
 
         /**
-         * 专线通道带宽值，单位为M。
+         * 专用通道带宽值，单位为M。
          * @type {number || null}
          */
         this.Bandwidth = null;
@@ -436,7 +436,7 @@ class AcceptDirectConnectTunnelRequest extends  AbstractModel {
         super();
 
         /**
-         * 物理专线拥有者接受共享专线通道申请
+         * 物理专线拥有者接受共享专用通道申请
          * @type {string || null}
          */
         this.DirectConnectTunnelId = null;
@@ -498,7 +498,7 @@ class CreateDirectConnectTunnelRequest extends  AbstractModel {
         this.DirectConnectId = null;
 
         /**
-         * 专线通道名称
+         * 专用通道名称
          * @type {string || null}
          */
         this.DirectConnectTunnelName = null;
