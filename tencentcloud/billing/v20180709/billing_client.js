@@ -19,15 +19,17 @@ const AbstractClient = require('../../common/abstract_client')
 const DescribeBillDetailResponse = models.DescribeBillDetailResponse;
 const Deal = models.Deal;
 const DescribeDealsByCondResponse = models.DescribeDealsByCondResponse;
-const DescribeBillResourceSummaryResponse = models.DescribeBillResourceSummaryResponse;
+const DescribeAccountBalanceRequest = models.DescribeAccountBalanceRequest;
 const DescribeBillDetailRequest = models.DescribeBillDetailRequest;
-const DescribeDealsByCondRequest = models.DescribeDealsByCondRequest;
+const DescribeBillResourceSummaryResponse = models.DescribeBillResourceSummaryResponse;
 const DescribeBillResourceSummaryRequest = models.DescribeBillResourceSummaryRequest;
+const DescribeAccountBalanceResponse = models.DescribeAccountBalanceResponse;
 const PayDealsResponse = models.PayDealsResponse;
-const PayDealsRequest = models.PayDealsRequest;
+const DescribeDealsByCondRequest = models.DescribeDealsByCondRequest;
 const BillDetailComponent = models.BillDetailComponent;
 const BillResourceSummary = models.BillResourceSummary;
 const BillDetail = models.BillDetail;
+const PayDealsRequest = models.PayDealsRequest;
 
 
 /**
@@ -49,6 +51,17 @@ class BillingClient extends AbstractClient {
     DescribeBillDetail(req, cb) {
         let resp = new DescribeBillDetailResponse();
         this.request("DescribeBillDetail", req, resp, cb);
+    }
+
+    /**
+     * 获取云账户余额信息。
+     * @param {DescribeAccountBalanceRequest} req
+     * @param {function(string, DescribeAccountBalanceResponse):void} cb
+     * @public
+     */
+    DescribeAccountBalance(req, cb) {
+        let resp = new DescribeAccountBalanceResponse();
+        this.request("DescribeAccountBalance", req, resp, cb);
     }
 
     /**

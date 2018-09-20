@@ -36,6 +36,12 @@ class DeleteModelRequest extends  AbstractModel {
          */
         this.Cluster = null;
 
+        /**
+         * 模型类型
+         * @type {string || null}
+         */
+        this.ServType = null;
+
     }
 
     /**
@@ -47,6 +53,7 @@ class DeleteModelRequest extends  AbstractModel {
         }
         this.Name = params.Name || null;
         this.Cluster = params.Cluster || null;
+        this.ServType = params.ServType || null;
 
     }
 }
@@ -228,6 +235,12 @@ class CreateJobRequest extends  AbstractModel {
          */
         this.Debug = null;
 
+        /**
+         * 运行任务的其他配置信息
+         * @type {Array.<string> || null}
+         */
+        this.RuntimeConf = null;
+
     }
 
     /**
@@ -250,6 +263,7 @@ class CreateJobRequest extends  AbstractModel {
         this.WorkerCount = params.WorkerCount || null;
         this.ParameterServerCount = params.ParameterServerCount || null;
         this.Debug = params.Debug || null;
+        this.RuntimeConf = params.RuntimeConf || null;
 
     }
 }
@@ -389,6 +403,12 @@ class DescribeModelRequest extends  AbstractModel {
          */
         this.Cluster = null;
 
+        /**
+         * 模型类型
+         * @type {string || null}
+         */
+        this.ServType = null;
+
     }
 
     /**
@@ -400,6 +420,7 @@ class DescribeModelRequest extends  AbstractModel {
         }
         this.Name = params.Name || null;
         this.Cluster = params.Cluster || null;
+        this.ServType = params.ServType || null;
 
     }
 }
@@ -615,6 +636,18 @@ class Job extends  AbstractModel {
          */
         this.Debug = null;
 
+        /**
+         * Runtime的额外配置信息
+         * @type {Array.<string> || null}
+         */
+        this.RuntimeConf = null;
+
+        /**
+         * 任务Id
+         * @type {string || null}
+         */
+        this.Id = null;
+
     }
 
     /**
@@ -645,6 +678,8 @@ class Job extends  AbstractModel {
         this.AppId = params.AppId || null;
         this.Uin = params.Uin || null;
         this.Debug = params.Debug || null;
+        this.RuntimeConf = params.RuntimeConf || null;
+        this.Id = params.Id || null;
 
     }
 }
@@ -715,6 +750,12 @@ class ListModelsRequest extends  AbstractModel {
          */
         this.Offset = null;
 
+        /**
+         * 模型类型
+         * @type {string || null}
+         */
+        this.ServType = null;
+
     }
 
     /**
@@ -727,6 +768,7 @@ class ListModelsRequest extends  AbstractModel {
         this.Cluster = params.Cluster || null;
         this.Limit = params.Limit || null;
         this.Offset = params.Offset || null;
+        this.ServType = params.ServType || null;
 
     }
 }
@@ -912,7 +954,7 @@ class QueryLogsRequest extends  AbstractModel {
         this.Limit = null;
 
         /**
-         * 加载更多使用，透传上次返回的context值，获取后续的日志内容
+         * 加载更多使用，透传上次返回的context值，获取后续的日志内容，使用context翻页最多能获取10000条日志
          * @type {string || null}
          */
         this.Context = null;
@@ -1182,12 +1224,6 @@ class CreateModelRequest extends  AbstractModel {
         this.Name = null;
 
         /**
-         * 指定集群的名称
-         * @type {string || null}
-         */
-        this.Cluster = null;
-
-        /**
          * 要部署模型的路径名
          * @type {string || null}
          */
@@ -1200,28 +1236,40 @@ class CreateModelRequest extends  AbstractModel {
         this.Description = null;
 
         /**
+         * 指定集群的名称（集群模式下必填）
+         * @type {string || null}
+         */
+        this.Cluster = null;
+
+        /**
          * 运行环境镜像的标签
          * @type {string || null}
          */
         this.RuntimeVersion = null;
 
         /**
-         * 要部署的模型副本数目
+         * 要部署的模型副本数目（集群模式下选填）
          * @type {number || null}
          */
         this.Replicas = null;
 
         /**
-         * 暴露外网或内网，默认暴露外网
+         * 暴露外网或内网，默认暴露外网（集群模式下选填）
          * @type {string || null}
          */
         this.Expose = null;
 
         /**
-         * 要部署模型的机器配置
+         * 部署模式（无服务器函数模式/集群模式）
          * @type {string || null}
          */
         this.ServType = null;
+
+        /**
+         * 部署模型的其他配置信息
+         * @type {Array.<string> || null}
+         */
+        this.RuntimeConf = null;
 
     }
 
@@ -1233,13 +1281,14 @@ class CreateModelRequest extends  AbstractModel {
             return;
         }
         this.Name = params.Name || null;
-        this.Cluster = params.Cluster || null;
         this.Model = params.Model || null;
         this.Description = params.Description || null;
+        this.Cluster = params.Cluster || null;
         this.RuntimeVersion = params.RuntimeVersion || null;
         this.Replicas = params.Replicas || null;
         this.Expose = params.Expose || null;
         this.ServType = params.ServType || null;
+        this.RuntimeConf = params.RuntimeConf || null;
 
     }
 }

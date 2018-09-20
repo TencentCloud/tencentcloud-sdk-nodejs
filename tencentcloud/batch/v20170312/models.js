@@ -672,13 +672,13 @@ class Task extends  AbstractModel {
 
         /**
          * 自定义环境变量
-         * @type {Array.<Authentication> || null}
+         * @type {Array.<EnvVar> || null}
          */
         this.EnvVars = null;
 
         /**
          * 授权信息
-         * @type {Array.<EnvVar> || null}
+         * @type {Array.<Authentication> || null}
          */
         this.Authentications = null;
 
@@ -767,7 +767,7 @@ class Task extends  AbstractModel {
         if (params.EnvVars) {
             this.EnvVars = new Array();
             for (let z in params.EnvVars) {
-                let obj = new Authentication();
+                let obj = new EnvVar();
                 obj.deserialize(params.EnvVars[z]);
                 this.EnvVars.push(obj);
             }
@@ -776,7 +776,7 @@ class Task extends  AbstractModel {
         if (params.Authentications) {
             this.Authentications = new Array();
             for (let z in params.Authentications) {
-                let obj = new EnvVar();
+                let obj = new Authentication();
                 obj.deserialize(params.Authentications[z]);
                 this.Authentications.push(obj);
             }
@@ -3049,7 +3049,7 @@ class EnhancedService extends  AbstractModel {
         this.SecurityService = null;
 
         /**
-         * 开启云安全服务。若不指定该参数，则默认开启云监控服务。
+         * 开启云监控服务。若不指定该参数，则默认开启云监控服务。
          * @type {RunMonitorServiceEnabled || null}
          */
         this.MonitorService = null;
