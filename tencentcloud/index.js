@@ -23,6 +23,7 @@ module.exports = {
     postgres: require("./postgres"),
     scf: require("./scf"),
     soe: require("./soe"),
+    sqlserver: require("./sqlserver"),
     tbaas: require("./tbaas"),
     tbm: require("./tbm"),
     tia: require("./tia"),

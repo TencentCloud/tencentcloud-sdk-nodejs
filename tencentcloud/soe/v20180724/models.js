@@ -116,6 +116,12 @@ class TransmitOralProcessRequest extends  AbstractModel {
          */
         this.SessionId = null;
 
+        /**
+         * 业务应用ID，与账号应用APPID无关，是用来方便客户管理服务的参数，需要结合[控制台](https://console.cloud.tencent.com/soe)使用。
+         * @type {string || null}
+         */
+        this.SoeAppId = null;
+
     }
 
     /**
@@ -131,6 +137,7 @@ class TransmitOralProcessRequest extends  AbstractModel {
         this.VoiceEncodeType = params.VoiceEncodeType || null;
         this.UserVoiceData = params.UserVoiceData || null;
         this.SessionId = params.SessionId || null;
+        this.SoeAppId = params.SoeAppId || null;
 
     }
 }

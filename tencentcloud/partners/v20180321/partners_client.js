@@ -17,23 +17,27 @@
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const AgentClientElem = models.AgentClientElem;
-const DescribeAgentClientsRequest = models.DescribeAgentClientsRequest;
-const ModifyClientRemarkResponse = models.ModifyClientRemarkResponse;
-const AuditApplyClientResponse = models.AuditApplyClientResponse;
-const AgentAuditedClient = models.AgentAuditedClient;
 const DescribeAgentAuditedClientsRequest = models.DescribeAgentAuditedClientsRequest;
-const DescribeAgentBillsRequest = models.DescribeAgentBillsRequest;
-const DescribeRebateInfosResponse = models.DescribeRebateInfosResponse;
-const AgentPayDealsResponse = models.AgentPayDealsResponse;
-const DescribeRebateInfosRequest = models.DescribeRebateInfosRequest;
 const AgentPayDealsRequest = models.AgentPayDealsRequest;
+const RebateInfoElem = models.RebateInfoElem;
+const DescribeClientBalanceResponse = models.DescribeClientBalanceResponse;
+const AgentTransferMoneyRequest = models.AgentTransferMoneyRequest;
+const DescribeClientBalanceRequest = models.DescribeClientBalanceRequest;
+const DescribeRebateInfosRequest = models.DescribeRebateInfosRequest;
 const DescribeAgentAuditedClientsResponse = models.DescribeAgentAuditedClientsResponse;
 const DescribeAgentBillsResponse = models.DescribeAgentBillsResponse;
 const AuditApplyClientRequest = models.AuditApplyClientRequest;
-const AgentBillElem = models.AgentBillElem;
-const RebateInfoElem = models.RebateInfoElem;
-const ModifyClientRemarkRequest = models.ModifyClientRemarkRequest;
+const ModifyClientRemarkResponse = models.ModifyClientRemarkResponse;
 const DescribeAgentClientsResponse = models.DescribeAgentClientsResponse;
+const DescribeAgentClientsRequest = models.DescribeAgentClientsRequest;
+const AgentAuditedClient = models.AgentAuditedClient;
+const ModifyClientRemarkRequest = models.ModifyClientRemarkRequest;
+const AgentTransferMoneyResponse = models.AgentTransferMoneyResponse;
+const AgentBillElem = models.AgentBillElem;
+const AuditApplyClientResponse = models.AuditApplyClientResponse;
+const DescribeAgentBillsRequest = models.DescribeAgentBillsRequest;
+const AgentPayDealsResponse = models.AgentPayDealsResponse;
+const DescribeRebateInfosResponse = models.DescribeRebateInfosResponse;
 
 
 /**
@@ -69,6 +73,17 @@ class PartnersClient extends AbstractClient {
     }
 
     /**
+     * 为合作伙伴提供转账给客户能力。仅支持合作伙伴为自己名下客户转账。
+     * @param {AgentTransferMoneyRequest} req
+     * @param {function(string, AgentTransferMoneyResponse):void} cb
+     * @public
+     */
+    AgentTransferMoney(req, cb) {
+        let resp = new AgentTransferMoneyResponse();
+        this.request("AgentTransferMoney", req, resp, cb);
+    }
+
+    /**
      * 代理商可查询自己名下全部返佣信息
      * @param {DescribeRebateInfosRequest} req
      * @param {function(string, DescribeRebateInfosResponse):void} cb
@@ -99,6 +114,17 @@ class PartnersClient extends AbstractClient {
     DescribeAgentClients(req, cb) {
         let resp = new DescribeAgentClientsResponse();
         this.request("DescribeAgentClients", req, resp, cb);
+    }
+
+    /**
+     * 为合作伙伴提供查询客户余额能力。调用者必须是合作伙伴，只能查询自己名下客户余额
+     * @param {DescribeClientBalanceRequest} req
+     * @param {function(string, DescribeClientBalanceResponse):void} cb
+     * @public
+     */
+    DescribeClientBalance(req, cb) {
+        let resp = new DescribeClientBalanceResponse();
+        this.request("DescribeClientBalance", req, resp, cb);
     }
 
     /**

@@ -194,6 +194,76 @@ class DescribeDealsByCondResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeAccountBalance请求参数结构体
+ * @class
+ */
+class DescribeAccountBalanceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+    }
+}
+
+/**
+ * DescribeBillDetail请求参数结构体
+ * @class
+ */
+class DescribeBillDetailRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 偏移量
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 数量，最大值为100
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 周期类型，byPayTime按扣费周期/byUsedTime按计费周期
+         * @type {string || null}
+         */
+        this.PeriodType = null;
+
+        /**
+         * 月份，格式为yyyy-mm
+         * @type {string || null}
+         */
+        this.Month = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Offset = params.Offset || null;
+        this.Limit = params.Limit || null;
+        this.PeriodType = params.PeriodType || null;
+        this.Month = params.Month || null;
+
+    }
+}
+
+/**
  * DescribeBillResourceSummary返回参数结构体
  * @class
  */
@@ -237,10 +307,10 @@ class DescribeBillResourceSummaryResponse extends  AbstractModel {
 }
 
 /**
- * DescribeBillDetail请求参数结构体
+ * DescribeBillResourceSummary请求参数结构体
  * @class
  */
-class DescribeBillDetailRequest extends  AbstractModel {
+class DescribeBillResourceSummaryRequest extends  AbstractModel {
     constructor(){
         super();
 
@@ -251,13 +321,13 @@ class DescribeBillDetailRequest extends  AbstractModel {
         this.Offset = null;
 
         /**
-         * 数量
+         * 数量，最大值为1000
          * @type {number || null}
          */
         this.Limit = null;
 
         /**
-         * 周期类型，byPayTime按扣费周期/byUsedTime按计费周期
+         * 周期类型，byUsedTime按计费周期/byPayTime按扣费周期
          * @type {string || null}
          */
         this.PeriodType = null;
@@ -281,6 +351,83 @@ class DescribeBillDetailRequest extends  AbstractModel {
         this.Limit = params.Limit || null;
         this.PeriodType = params.PeriodType || null;
         this.Month = params.Month || null;
+
+    }
+}
+
+/**
+ * DescribeAccountBalance返回参数结构体
+ * @class
+ */
+class DescribeAccountBalanceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 云账户信息中的”展示可用余额”字段，单位为"分"
+         * @type {number || null}
+         */
+        this.Balance = null;
+
+        /**
+         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Balance = params.Balance || null;
+        this.RequestId = params.RequestId || null;
+
+    }
+}
+
+/**
+ * PayDeals返回参数结构体
+ * @class
+ */
+class PayDealsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 此次操作支付成功的订单号数组
+         * @type {Array.<string> || null}
+         */
+        this.OrderIds = null;
+
+        /**
+         * 此次操作支付成功的资源Id数组
+         * @type {Array.<string> || null}
+         */
+        this.ResourceIds = null;
+
+        /**
+         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.OrderIds = params.OrderIds || null;
+        this.ResourceIds = params.ResourceIds || null;
+        this.RequestId = params.RequestId || null;
 
     }
 }
@@ -356,139 +503,6 @@ class DescribeDealsByCondRequest extends  AbstractModel {
         this.Offset = params.Offset || null;
         this.Status = params.Status || null;
         this.OrderId = params.OrderId || null;
-
-    }
-}
-
-/**
- * DescribeBillResourceSummary请求参数结构体
- * @class
- */
-class DescribeBillResourceSummaryRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 偏移量
-         * @type {number || null}
-         */
-        this.Offset = null;
-
-        /**
-         * 数量
-         * @type {number || null}
-         */
-        this.Limit = null;
-
-        /**
-         * 周期类型，byUsedTime按计费周期/byPayTime按扣费周期
-         * @type {string || null}
-         */
-        this.PeriodType = null;
-
-        /**
-         * 月份，格式为yyyy-mm
-         * @type {string || null}
-         */
-        this.Month = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Offset = params.Offset || null;
-        this.Limit = params.Limit || null;
-        this.PeriodType = params.PeriodType || null;
-        this.Month = params.Month || null;
-
-    }
-}
-
-/**
- * PayDeals返回参数结构体
- * @class
- */
-class PayDealsResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 此次操作支付成功的订单号数组
-         * @type {Array.<string> || null}
-         */
-        this.OrderIds = null;
-
-        /**
-         * 此次操作支付成功的资源Id数组
-         * @type {Array.<string> || null}
-         */
-        this.ResourceIds = null;
-
-        /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.OrderIds = params.OrderIds || null;
-        this.ResourceIds = params.ResourceIds || null;
-        this.RequestId = params.RequestId || null;
-
-    }
-}
-
-/**
- * PayDeals请求参数结构体
- * @class
- */
-class PayDealsRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 需要支付的一个或者多个订单号
-         * @type {Array.<string> || null}
-         */
-        this.OrderIds = null;
-
-        /**
-         * 是否自动使用代金券,1:是,0否,默认0
-         * @type {number || null}
-         */
-        this.AutoVoucher = null;
-
-        /**
-         * 代金券ID列表,目前仅支持指定一张代金券
-         * @type {Array.<string> || null}
-         */
-        this.VoucherIds = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.OrderIds = params.OrderIds || null;
-        this.AutoVoucher = params.AutoVoucher || null;
-        this.VoucherIds = params.VoucherIds || null;
 
     }
 }
@@ -942,18 +956,62 @@ class BillDetail extends  AbstractModel {
     }
 }
 
+/**
+ * PayDeals请求参数结构体
+ * @class
+ */
+class PayDealsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 需要支付的一个或者多个订单号
+         * @type {Array.<string> || null}
+         */
+        this.OrderIds = null;
+
+        /**
+         * 是否自动使用代金券,1:是,0否,默认0
+         * @type {number || null}
+         */
+        this.AutoVoucher = null;
+
+        /**
+         * 代金券ID列表,目前仅支持指定一张代金券
+         * @type {Array.<string> || null}
+         */
+        this.VoucherIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.OrderIds = params.OrderIds || null;
+        this.AutoVoucher = params.AutoVoucher || null;
+        this.VoucherIds = params.VoucherIds || null;
+
+    }
+}
+
 module.exports = {
     DescribeBillDetailResponse: DescribeBillDetailResponse,
     Deal: Deal,
     DescribeDealsByCondResponse: DescribeDealsByCondResponse,
-    DescribeBillResourceSummaryResponse: DescribeBillResourceSummaryResponse,
+    DescribeAccountBalanceRequest: DescribeAccountBalanceRequest,
     DescribeBillDetailRequest: DescribeBillDetailRequest,
-    DescribeDealsByCondRequest: DescribeDealsByCondRequest,
+    DescribeBillResourceSummaryResponse: DescribeBillResourceSummaryResponse,
     DescribeBillResourceSummaryRequest: DescribeBillResourceSummaryRequest,
+    DescribeAccountBalanceResponse: DescribeAccountBalanceResponse,
     PayDealsResponse: PayDealsResponse,
-    PayDealsRequest: PayDealsRequest,
+    DescribeDealsByCondRequest: DescribeDealsByCondRequest,
     BillDetailComponent: BillDetailComponent,
     BillResourceSummary: BillResourceSummary,
     BillDetail: BillDetail,
+    PayDealsRequest: PayDealsRequest,
 
 }

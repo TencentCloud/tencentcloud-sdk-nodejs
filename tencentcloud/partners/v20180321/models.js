@@ -87,251 +87,6 @@ class AgentClientElem extends  AbstractModel {
 }
 
 /**
- * DescribeAgentClients请求参数结构体
- * @class
- */
-class DescribeAgentClientsRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 客户账号ID
-         * @type {string || null}
-         */
-        this.ClientUin = null;
-
-        /**
-         * 客户名称。由于涉及隐私，名称打码显示，故名称仅支持打码后的模糊搜索
-         * @type {string || null}
-         */
-        this.ClientName = null;
-
-        /**
-         * 客户类型，a/b，类型定义参考代理商相关政策文档
-         * @type {string || null}
-         */
-        this.ClientFlag = null;
-
-        /**
-         * ASC/DESC， 不区分大小写，按申请时间排序
-         * @type {string || null}
-         */
-        this.OrderDirection = null;
-
-        /**
-         * 偏移量
-         * @type {number || null}
-         */
-        this.Offset = null;
-
-        /**
-         * 限制数目
-         * @type {number || null}
-         */
-        this.Limit = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.ClientUin = params.ClientUin || null;
-        this.ClientName = params.ClientName || null;
-        this.ClientFlag = params.ClientFlag || null;
-        this.OrderDirection = params.OrderDirection || null;
-        this.Offset = params.Offset || null;
-        this.Limit = params.Limit || null;
-
-    }
-}
-
-/**
- * ModifyClientRemark返回参数结构体
- * @class
- */
-class ModifyClientRemarkResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RequestId = params.RequestId || null;
-
-    }
-}
-
-/**
- * AuditApplyClient返回参数结构体
- * @class
- */
-class AuditApplyClientResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 代理商账号ID
-         * @type {string || null}
-         */
-        this.Uin = null;
-
-        /**
-         * 客户账号ID
-         * @type {string || null}
-         */
-        this.ClientUin = null;
-
-        /**
-         * 审核结果，包括accept/reject/qcloudaudit（腾讯云审核）
-         * @type {string || null}
-         */
-        this.AuditResult = null;
-
-        /**
-         * 关联时间对应的时间戳
-         * @type {number || null}
-         */
-        this.AgentTime = null;
-
-        /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Uin = params.Uin || null;
-        this.ClientUin = params.ClientUin || null;
-        this.AuditResult = params.AuditResult || null;
-        this.AgentTime = params.AgentTime || null;
-        this.RequestId = params.RequestId || null;
-
-    }
-}
-
-/**
- * 已审核代客信息
- * @class
- */
-class AgentAuditedClient extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 代理商账号ID
-         * @type {string || null}
-         */
-        this.Uin = null;
-
-        /**
-         * 代客账号ID
-         * @type {string || null}
-         */
-        this.ClientUin = null;
-
-        /**
-         * 代客审核通过时间戳
-         * @type {string || null}
-         */
-        this.AgentTime = null;
-
-        /**
-         * 代客类型，可能值为a/b/c
-         * @type {string || null}
-         */
-        this.ClientFlag = null;
-
-        /**
-         * 代客备注
-         * @type {string || null}
-         */
-        this.ClientRemark = null;
-
-        /**
-         * 代客名称（首选实名认证名称）
-         * @type {string || null}
-         */
-        this.ClientName = null;
-
-        /**
-         * 认证类型, 0：个人，1：企业；其他：未认证
-         * @type {string || null}
-         */
-        this.AuthType = null;
-
-        /**
-         * 代客APPID
-         * @type {string || null}
-         */
-        this.AppId = null;
-
-        /**
-         * 上月消费金额
-         * @type {number || null}
-         */
-        this.LastMonthAmt = null;
-
-        /**
-         * 本月消费金额
-         * @type {number || null}
-         */
-        this.ThisMonthAmt = null;
-
-        /**
-         * 是否欠费,0：不欠费；1：欠费
-         * @type {number || null}
-         */
-        this.HasOverdueBill = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Uin = params.Uin || null;
-        this.ClientUin = params.ClientUin || null;
-        this.AgentTime = params.AgentTime || null;
-        this.ClientFlag = params.ClientFlag || null;
-        this.ClientRemark = params.ClientRemark || null;
-        this.ClientName = params.ClientName || null;
-        this.AuthType = params.AuthType || null;
-        this.AppId = params.AppId || null;
-        this.LastMonthAmt = params.LastMonthAmt || null;
-        this.ThisMonthAmt = params.ThisMonthAmt || null;
-        this.HasOverdueBill = params.HasOverdueBill || null;
-
-    }
-}
-
-/**
  * DescribeAgentAuditedClients请求参数结构体
  * @class
  */
@@ -416,18 +171,152 @@ class DescribeAgentAuditedClientsRequest extends  AbstractModel {
 }
 
 /**
- * DescribeAgentBills请求参数结构体
+ * AgentPayDeals请求参数结构体
  * @class
  */
-class DescribeAgentBillsRequest extends  AbstractModel {
+class AgentPayDealsRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 支付月份，如2018-02
+         * 订单所有者uin
          * @type {string || null}
          */
-        this.SettleMonth = null;
+        this.OwnerUin = null;
+
+        /**
+         * 代付标志，1：代付；0：自付
+         * @type {number || null}
+         */
+        this.AgentPay = null;
+
+        /**
+         * 订单号数组
+         * @type {Array.<string> || null}
+         */
+        this.DealNames = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.OwnerUin = params.OwnerUin || null;
+        this.AgentPay = params.AgentPay || null;
+        this.DealNames = params.DealNames || null;
+
+    }
+}
+
+/**
+ * 返佣信息定义
+ * @class
+ */
+class RebateInfoElem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 代理商账号ID
+         * @type {string || null}
+         */
+        this.Uin = null;
+
+        /**
+         * 返佣月份，如2018-02
+         * @type {string || null}
+         */
+        this.RebateMonth = null;
+
+        /**
+         * 返佣金额，单位分
+         * @type {number || null}
+         */
+        this.Amt = null;
+
+        /**
+         * 月度业绩，单位分
+         * @type {number || null}
+         */
+        this.MonthSales = null;
+
+        /**
+         * 季度业绩，单位分
+         * @type {number || null}
+         */
+        this.QuarterSales = null;
+
+        /**
+         * NORMAL(正常)/HAS_OVERDUE_BILL(欠费)/NO_CONTRACT(缺合同)
+         * @type {string || null}
+         */
+        this.ExceptionFlag = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Uin = params.Uin || null;
+        this.RebateMonth = params.RebateMonth || null;
+        this.Amt = params.Amt || null;
+        this.MonthSales = params.MonthSales || null;
+        this.QuarterSales = params.QuarterSales || null;
+        this.ExceptionFlag = params.ExceptionFlag || null;
+
+    }
+}
+
+/**
+ * DescribeClientBalance返回参数结构体
+ * @class
+ */
+class DescribeClientBalanceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 账户余额，单位分
+         * @type {number || null}
+         */
+        this.Balance = null;
+
+        /**
+         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Balance = params.Balance || null;
+        this.RequestId = params.RequestId || null;
+
+    }
+}
+
+/**
+ * AgentTransferMoney请求参数结构体
+ * @class
+ */
+class AgentTransferMoneyRequest extends  AbstractModel {
+    constructor(){
+        super();
 
         /**
          * 客户账号ID
@@ -436,34 +325,10 @@ class DescribeAgentBillsRequest extends  AbstractModel {
         this.ClientUin = null;
 
         /**
-         * 支付方式，prepay/postpay
-         * @type {string || null}
-         */
-        this.PayMode = null;
-
-        /**
-         * 预付费订单号
-         * @type {string || null}
-         */
-        this.OrderId = null;
-
-        /**
-         * 客户备注名称
-         * @type {string || null}
-         */
-        this.ClientRemark = null;
-
-        /**
-         * 偏移量
+         * 转账金额，单位分
          * @type {number || null}
          */
-        this.Offset = null;
-
-        /**
-         * 限制数目
-         * @type {number || null}
-         */
-        this.Limit = null;
+        this.Amount = null;
 
     }
 
@@ -474,42 +339,25 @@ class DescribeAgentBillsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.SettleMonth = params.SettleMonth || null;
         this.ClientUin = params.ClientUin || null;
-        this.PayMode = params.PayMode || null;
-        this.OrderId = params.OrderId || null;
-        this.ClientRemark = params.ClientRemark || null;
-        this.Offset = params.Offset || null;
-        this.Limit = params.Limit || null;
+        this.Amount = params.Amount || null;
 
     }
 }
 
 /**
- * DescribeRebateInfos返回参数结构体
+ * DescribeClientBalance请求参数结构体
  * @class
  */
-class DescribeRebateInfosResponse extends  AbstractModel {
+class DescribeClientBalanceRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 返佣信息列表
-         * @type {Array.<RebateInfoElem> || null}
-         */
-        this.RebateInfoSet = null;
-
-        /**
-         * 符合查询条件返佣信息数目
-         * @type {number || null}
-         */
-        this.TotalCount = null;
-
-        /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 客户(代客)账号ID
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.ClientUin = null;
 
     }
 
@@ -520,45 +368,7 @@ class DescribeRebateInfosResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.RebateInfoSet) {
-            this.RebateInfoSet = new Array();
-            for (let z in params.RebateInfoSet) {
-                let obj = new RebateInfoElem();
-                obj.deserialize(params.RebateInfoSet[z]);
-                this.RebateInfoSet.push(obj);
-            }
-        }
-        this.TotalCount = params.TotalCount || null;
-        this.RequestId = params.RequestId || null;
-
-    }
-}
-
-/**
- * AgentPayDeals返回参数结构体
- * @class
- */
-class AgentPayDealsResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RequestId = params.RequestId || null;
+        this.ClientUin = params.ClientUin || null;
 
     }
 }
@@ -601,48 +411,6 @@ class DescribeRebateInfosRequest extends  AbstractModel {
         this.RebateMonth = params.RebateMonth || null;
         this.Offset = params.Offset || null;
         this.Limit = params.Limit || null;
-
-    }
-}
-
-/**
- * AgentPayDeals请求参数结构体
- * @class
- */
-class AgentPayDealsRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 订单所有者uin
-         * @type {string || null}
-         */
-        this.OwnerUin = null;
-
-        /**
-         * 代付标志，1：代付；0：自付
-         * @type {number || null}
-         */
-        this.AgentPay = null;
-
-        /**
-         * 订单号数组
-         * @type {Array.<string> || null}
-         */
-        this.DealNames = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.OwnerUin = params.OwnerUin || null;
-        this.AgentPay = params.AgentPay || null;
-        this.DealNames = params.DealNames || null;
 
     }
 }
@@ -790,6 +558,308 @@ class AuditApplyClientRequest extends  AbstractModel {
 }
 
 /**
+ * ModifyClientRemark返回参数结构体
+ * @class
+ */
+class ModifyClientRemarkResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = params.RequestId || null;
+
+    }
+}
+
+/**
+ * DescribeAgentClients返回参数结构体
+ * @class
+ */
+class DescribeAgentClientsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 待审核代客列表
+         * @type {Array.<AgentClientElem> || null}
+         */
+        this.AgentClientSet = null;
+
+        /**
+         * 符合条件的代客总数
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.AgentClientSet) {
+            this.AgentClientSet = new Array();
+            for (let z in params.AgentClientSet) {
+                let obj = new AgentClientElem();
+                obj.deserialize(params.AgentClientSet[z]);
+                this.AgentClientSet.push(obj);
+            }
+        }
+        this.TotalCount = params.TotalCount || null;
+        this.RequestId = params.RequestId || null;
+
+    }
+}
+
+/**
+ * DescribeAgentClients请求参数结构体
+ * @class
+ */
+class DescribeAgentClientsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 客户账号ID
+         * @type {string || null}
+         */
+        this.ClientUin = null;
+
+        /**
+         * 客户名称。由于涉及隐私，名称打码显示，故名称仅支持打码后的模糊搜索
+         * @type {string || null}
+         */
+        this.ClientName = null;
+
+        /**
+         * 客户类型，a/b，类型定义参考代理商相关政策文档
+         * @type {string || null}
+         */
+        this.ClientFlag = null;
+
+        /**
+         * ASC/DESC， 不区分大小写，按申请时间排序
+         * @type {string || null}
+         */
+        this.OrderDirection = null;
+
+        /**
+         * 偏移量
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 限制数目
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClientUin = params.ClientUin || null;
+        this.ClientName = params.ClientName || null;
+        this.ClientFlag = params.ClientFlag || null;
+        this.OrderDirection = params.OrderDirection || null;
+        this.Offset = params.Offset || null;
+        this.Limit = params.Limit || null;
+
+    }
+}
+
+/**
+ * 已审核代客信息
+ * @class
+ */
+class AgentAuditedClient extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 代理商账号ID
+         * @type {string || null}
+         */
+        this.Uin = null;
+
+        /**
+         * 代客账号ID
+         * @type {string || null}
+         */
+        this.ClientUin = null;
+
+        /**
+         * 代客审核通过时间戳
+         * @type {string || null}
+         */
+        this.AgentTime = null;
+
+        /**
+         * 代客类型，可能值为a/b/c
+         * @type {string || null}
+         */
+        this.ClientFlag = null;
+
+        /**
+         * 代客备注
+         * @type {string || null}
+         */
+        this.ClientRemark = null;
+
+        /**
+         * 代客名称（首选实名认证名称）
+         * @type {string || null}
+         */
+        this.ClientName = null;
+
+        /**
+         * 认证类型, 0：个人，1：企业；其他：未认证
+         * @type {string || null}
+         */
+        this.AuthType = null;
+
+        /**
+         * 代客APPID
+         * @type {string || null}
+         */
+        this.AppId = null;
+
+        /**
+         * 上月消费金额
+         * @type {number || null}
+         */
+        this.LastMonthAmt = null;
+
+        /**
+         * 本月消费金额
+         * @type {number || null}
+         */
+        this.ThisMonthAmt = null;
+
+        /**
+         * 是否欠费,0：不欠费；1：欠费
+         * @type {number || null}
+         */
+        this.HasOverdueBill = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Uin = params.Uin || null;
+        this.ClientUin = params.ClientUin || null;
+        this.AgentTime = params.AgentTime || null;
+        this.ClientFlag = params.ClientFlag || null;
+        this.ClientRemark = params.ClientRemark || null;
+        this.ClientName = params.ClientName || null;
+        this.AuthType = params.AuthType || null;
+        this.AppId = params.AppId || null;
+        this.LastMonthAmt = params.LastMonthAmt || null;
+        this.ThisMonthAmt = params.ThisMonthAmt || null;
+        this.HasOverdueBill = params.HasOverdueBill || null;
+
+    }
+}
+
+/**
+ * ModifyClientRemark请求参数结构体
+ * @class
+ */
+class ModifyClientRemarkRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 客户备注名称
+         * @type {string || null}
+         */
+        this.ClientRemark = null;
+
+        /**
+         * 客户账号ID
+         * @type {string || null}
+         */
+        this.ClientUin = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClientRemark = params.ClientRemark || null;
+        this.ClientUin = params.ClientUin || null;
+
+    }
+}
+
+/**
+ * AgentTransferMoney返回参数结构体
+ * @class
+ */
+class AgentTransferMoneyResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = params.RequestId || null;
+
+    }
+}
+
+/**
  * 业务信息定义
  * @class
  */
@@ -881,10 +951,10 @@ class AgentBillElem extends  AbstractModel {
 }
 
 /**
- * 返佣信息定义
+ * AuditApplyClient返回参数结构体
  * @class
  */
-class RebateInfoElem extends  AbstractModel {
+class AuditApplyClientResponse extends  AbstractModel {
     constructor(){
         super();
 
@@ -895,34 +965,28 @@ class RebateInfoElem extends  AbstractModel {
         this.Uin = null;
 
         /**
-         * 返佣月份，如2018-02
+         * 客户账号ID
          * @type {string || null}
          */
-        this.RebateMonth = null;
+        this.ClientUin = null;
 
         /**
-         * 返佣金额，单位分
-         * @type {number || null}
-         */
-        this.Amt = null;
-
-        /**
-         * 月度业绩，单位分
-         * @type {number || null}
-         */
-        this.MonthSales = null;
-
-        /**
-         * 季度业绩，单位分
-         * @type {number || null}
-         */
-        this.QuarterSales = null;
-
-        /**
-         * NORMAL(正常)/HAS_OVERDUE_BILL(欠费)/NO_CONTRACT(缺合同)
+         * 审核结果，包括accept/reject/qcloudaudit（腾讯云审核）
          * @type {string || null}
          */
-        this.ExceptionFlag = null;
+        this.AuditResult = null;
+
+        /**
+         * 关联时间对应的时间戳
+         * @type {number || null}
+         */
+        this.AgentTime = null;
+
+        /**
+         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
 
     }
 
@@ -934,22 +998,45 @@ class RebateInfoElem extends  AbstractModel {
             return;
         }
         this.Uin = params.Uin || null;
-        this.RebateMonth = params.RebateMonth || null;
-        this.Amt = params.Amt || null;
-        this.MonthSales = params.MonthSales || null;
-        this.QuarterSales = params.QuarterSales || null;
-        this.ExceptionFlag = params.ExceptionFlag || null;
+        this.ClientUin = params.ClientUin || null;
+        this.AuditResult = params.AuditResult || null;
+        this.AgentTime = params.AgentTime || null;
+        this.RequestId = params.RequestId || null;
 
     }
 }
 
 /**
- * ModifyClientRemark请求参数结构体
+ * DescribeAgentBills请求参数结构体
  * @class
  */
-class ModifyClientRemarkRequest extends  AbstractModel {
+class DescribeAgentBillsRequest extends  AbstractModel {
     constructor(){
         super();
+
+        /**
+         * 支付月份，如2018-02
+         * @type {string || null}
+         */
+        this.SettleMonth = null;
+
+        /**
+         * 客户账号ID
+         * @type {string || null}
+         */
+        this.ClientUin = null;
+
+        /**
+         * 支付方式，prepay/postpay
+         * @type {string || null}
+         */
+        this.PayMode = null;
+
+        /**
+         * 预付费订单号
+         * @type {string || null}
+         */
+        this.OrderId = null;
 
         /**
          * 客户备注名称
@@ -958,10 +1045,16 @@ class ModifyClientRemarkRequest extends  AbstractModel {
         this.ClientRemark = null;
 
         /**
-         * 客户账号ID
-         * @type {string || null}
+         * 偏移量
+         * @type {number || null}
          */
-        this.ClientUin = null;
+        this.Offset = null;
+
+        /**
+         * 限制数目
+         * @type {number || null}
+         */
+        this.Limit = null;
 
     }
 
@@ -972,28 +1065,61 @@ class ModifyClientRemarkRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ClientRemark = params.ClientRemark || null;
+        this.SettleMonth = params.SettleMonth || null;
         this.ClientUin = params.ClientUin || null;
+        this.PayMode = params.PayMode || null;
+        this.OrderId = params.OrderId || null;
+        this.ClientRemark = params.ClientRemark || null;
+        this.Offset = params.Offset || null;
+        this.Limit = params.Limit || null;
 
     }
 }
 
 /**
- * DescribeAgentClients返回参数结构体
+ * AgentPayDeals返回参数结构体
  * @class
  */
-class DescribeAgentClientsResponse extends  AbstractModel {
+class AgentPayDealsResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 待审核代客列表
-         * @type {Array.<AgentClientElem> || null}
+         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * @type {string || null}
          */
-        this.AgentClientSet = null;
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = params.RequestId || null;
+
+    }
+}
+
+/**
+ * DescribeRebateInfos返回参数结构体
+ * @class
+ */
+class DescribeRebateInfosResponse extends  AbstractModel {
+    constructor(){
+        super();
 
         /**
-         * 符合条件的代客总数
+         * 返佣信息列表
+         * @type {Array.<RebateInfoElem> || null}
+         */
+        this.RebateInfoSet = null;
+
+        /**
+         * 符合查询条件返佣信息数目
          * @type {number || null}
          */
         this.TotalCount = null;
@@ -1014,12 +1140,12 @@ class DescribeAgentClientsResponse extends  AbstractModel {
             return;
         }
 
-        if (params.AgentClientSet) {
-            this.AgentClientSet = new Array();
-            for (let z in params.AgentClientSet) {
-                let obj = new AgentClientElem();
-                obj.deserialize(params.AgentClientSet[z]);
-                this.AgentClientSet.push(obj);
+        if (params.RebateInfoSet) {
+            this.RebateInfoSet = new Array();
+            for (let z in params.RebateInfoSet) {
+                let obj = new RebateInfoElem();
+                obj.deserialize(params.RebateInfoSet[z]);
+                this.RebateInfoSet.push(obj);
             }
         }
         this.TotalCount = params.TotalCount || null;
@@ -1030,22 +1156,26 @@ class DescribeAgentClientsResponse extends  AbstractModel {
 
 module.exports = {
     AgentClientElem: AgentClientElem,
-    DescribeAgentClientsRequest: DescribeAgentClientsRequest,
-    ModifyClientRemarkResponse: ModifyClientRemarkResponse,
-    AuditApplyClientResponse: AuditApplyClientResponse,
-    AgentAuditedClient: AgentAuditedClient,
     DescribeAgentAuditedClientsRequest: DescribeAgentAuditedClientsRequest,
-    DescribeAgentBillsRequest: DescribeAgentBillsRequest,
-    DescribeRebateInfosResponse: DescribeRebateInfosResponse,
-    AgentPayDealsResponse: AgentPayDealsResponse,
-    DescribeRebateInfosRequest: DescribeRebateInfosRequest,
     AgentPayDealsRequest: AgentPayDealsRequest,
+    RebateInfoElem: RebateInfoElem,
+    DescribeClientBalanceResponse: DescribeClientBalanceResponse,
+    AgentTransferMoneyRequest: AgentTransferMoneyRequest,
+    DescribeClientBalanceRequest: DescribeClientBalanceRequest,
+    DescribeRebateInfosRequest: DescribeRebateInfosRequest,
     DescribeAgentAuditedClientsResponse: DescribeAgentAuditedClientsResponse,
     DescribeAgentBillsResponse: DescribeAgentBillsResponse,
     AuditApplyClientRequest: AuditApplyClientRequest,
-    AgentBillElem: AgentBillElem,
-    RebateInfoElem: RebateInfoElem,
-    ModifyClientRemarkRequest: ModifyClientRemarkRequest,
+    ModifyClientRemarkResponse: ModifyClientRemarkResponse,
     DescribeAgentClientsResponse: DescribeAgentClientsResponse,
+    DescribeAgentClientsRequest: DescribeAgentClientsRequest,
+    AgentAuditedClient: AgentAuditedClient,
+    ModifyClientRemarkRequest: ModifyClientRemarkRequest,
+    AgentTransferMoneyResponse: AgentTransferMoneyResponse,
+    AgentBillElem: AgentBillElem,
+    AuditApplyClientResponse: AuditApplyClientResponse,
+    DescribeAgentBillsRequest: DescribeAgentBillsRequest,
+    AgentPayDealsResponse: AgentPayDealsResponse,
+    DescribeRebateInfosResponse: DescribeRebateInfosResponse,
 
 }
