@@ -695,7 +695,7 @@ class Task extends  AbstractModel {
         this.MaxRetryCount = null;
 
         /**
-         * 任务启动后的超时时间，单位秒，默认为3600秒
+         * 任务启动后的超时时间，单位秒，默认为86400秒
          * @type {number || null}
          */
         this.Timeout = null;
@@ -4791,7 +4791,7 @@ class DescribeJobsResponse extends  AbstractModel {
 
         /**
          * 作业列表
-         * @type {JobView || null}
+         * @type {Array.<JobView> || null}
          */
         this.JobSet = null;
 
@@ -4818,9 +4818,12 @@ class DescribeJobsResponse extends  AbstractModel {
         }
 
         if (params.JobSet) {
-            let obj = new JobView();
-            obj.deserialize(params.JobSet)
-            this.JobSet = obj;
+            this.JobSet = new Array();
+            for (let z in params.JobSet) {
+                let obj = new JobView();
+                obj.deserialize(params.JobSet[z]);
+                this.JobSet.push(obj);
+            }
         }
         this.TotalCount = params.TotalCount || null;
         this.RequestId = params.RequestId || null;

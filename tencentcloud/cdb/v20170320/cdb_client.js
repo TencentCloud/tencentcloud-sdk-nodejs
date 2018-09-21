@@ -276,8 +276,6 @@ class CdbClient extends AbstractClient {
 
     /**
      * 本接口(IsolateDBInstance)用于销毁云数据库实例，销毁之后不能通过IP和端口访问数据库，按量计费实例销毁后直接下线。
-
-本接口不支持包年包月实例；
      * @param {IsolateDBInstanceRequest} req
      * @param {function(string, IsolateDBInstanceResponse):void} cb
      * @public
