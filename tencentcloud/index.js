@@ -21,6 +21,7 @@ module.exports = {
     msp: require("./msp"),
     partners: require("./partners"),
     postgres: require("./postgres"),
+    redis: require("./redis"),
     scf: require("./scf"),
     soe: require("./soe"),
     sqlserver: require("./sqlserver"),
