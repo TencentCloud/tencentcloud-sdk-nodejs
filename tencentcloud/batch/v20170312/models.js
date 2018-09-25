@@ -326,7 +326,7 @@ class EnvData extends  AbstractModel {
         super();
 
         /**
-         * CVM实例类型
+         * CVM实例类型，不能与InstanceTypes同时出现。
          * @type {string || null}
          */
         this.InstanceType = null;
@@ -397,6 +397,12 @@ class EnvData extends  AbstractModel {
          */
         this.InstanceMarketOptions = null;
 
+        /**
+         * CVM实例类型列表，不能与InstanceType同时出现。指定该字段后，计算节点按照机型先后顺序依次尝试创建，直到实例创建成功，结束遍历过程。最多支持10个机型。
+         * @type {Array.<string> || null}
+         */
+        this.InstanceTypes = null;
+
     }
 
     /**
@@ -456,6 +462,7 @@ class EnvData extends  AbstractModel {
             obj.deserialize(params.InstanceMarketOptions)
             this.InstanceMarketOptions = obj;
         }
+        this.InstanceTypes = params.InstanceTypes || null;
 
     }
 }
