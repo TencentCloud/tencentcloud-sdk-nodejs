@@ -34,6 +34,7 @@ const DeleteServiceTemplateResponse = models.DeleteServiceTemplateResponse;
 const CreateServiceTemplateRequest = models.CreateServiceTemplateRequest;
 const DeleteSecurityGroupPoliciesRequest = models.DeleteSecurityGroupPoliciesRequest;
 const VpnConnection = models.VpnConnection;
+const RejectAttachCcnInstancesResponse = models.RejectAttachCcnInstancesResponse;
 const CreateDirectConnectGatewayRequest = models.CreateDirectConnectGatewayRequest;
 const DescribeCcnsRequest = models.DescribeCcnsRequest;
 const TransformAddressResponse = models.TransformAddressResponse;
@@ -76,6 +77,7 @@ const DescribeAddressTemplateGroupsRequest = models.DescribeAddressTemplateGroup
 const ResetVpnGatewayInternetMaxBandwidthRequest = models.ResetVpnGatewayInternetMaxBandwidthRequest;
 const RenewVpnGatewayRequest = models.RenewVpnGatewayRequest;
 const SecurityGroupPolicySet = models.SecurityGroupPolicySet;
+const ResetAttachCcnInstancesResponse = models.ResetAttachCcnInstancesResponse;
 const AllocateAddressesRequest = models.AllocateAddressesRequest;
 const NetworkInterfaceAttachment = models.NetworkInterfaceAttachment;
 const RouteTable = models.RouteTable;
@@ -177,12 +179,14 @@ const DeleteCustomerGatewayResponse = models.DeleteCustomerGatewayResponse;
 const AssociateAddressRequest = models.AssociateAddressRequest;
 const ModifySecurityGroupPoliciesResponse = models.ModifySecurityGroupPoliciesResponse;
 const CreateAddressTemplateResponse = models.CreateAddressTemplateResponse;
+const AcceptAttachCcnInstancesRequest = models.AcceptAttachCcnInstancesRequest;
 const DeleteAddressTemplateGroupRequest = models.DeleteAddressTemplateGroupRequest;
 const AttachNetworkInterfaceResponse = models.AttachNetworkInterfaceResponse;
 const ServiceTemplateSpecification = models.ServiceTemplateSpecification;
 const DescribeRouteConflictsResponse = models.DescribeRouteConflictsResponse;
 const CreateBandwidthPackageRequest = models.CreateBandwidthPackageRequest;
 const DescribeRouteTablesRequest = models.DescribeRouteTablesRequest;
+const ResetAttachCcnInstancesRequest = models.ResetAttachCcnInstancesRequest;
 const ModifyRouteTableAttributeRequest = models.ModifyRouteTableAttributeRequest;
 const DescribeVpnGatewaysRequest = models.DescribeVpnGatewaysRequest;
 const ClassicLinkInstance = models.ClassicLinkInstance;
@@ -223,6 +227,7 @@ const DeleteVpnConnectionRequest = models.DeleteVpnConnectionRequest;
 const CreateSecurityGroupRequest = models.CreateSecurityGroupRequest;
 const ModifyCcnAttributeResponse = models.ModifyCcnAttributeResponse;
 const DeleteCcnRequest = models.DeleteCcnRequest;
+const DescribeSecurityGroupsRequest = models.DescribeSecurityGroupsRequest;
 const DescribeClassicLinkInstancesRequest = models.DescribeClassicLinkInstancesRequest;
 const CreateServiceTemplateResponse = models.CreateServiceTemplateResponse;
 const DeleteNetworkInterfaceResponse = models.DeleteNetworkInterfaceResponse;
@@ -232,7 +237,7 @@ const IPSECOptionsSpecification = models.IPSECOptionsSpecification;
 const DescribeAccountAttributesResponse = models.DescribeAccountAttributesResponse;
 const DescribeCustomerGatewayVendorsResponse = models.DescribeCustomerGatewayVendorsResponse;
 const AssignPrivateIpAddressesResponse = models.AssignPrivateIpAddressesResponse;
-const DescribeSecurityGroupsRequest = models.DescribeSecurityGroupsRequest;
+const DescribeBandwidthPackageQuotaResponse = models.DescribeBandwidthPackageQuotaResponse;
 const DeleteServiceTemplateGroupResponse = models.DeleteServiceTemplateGroupResponse;
 const CustomerGatewayVendor = models.CustomerGatewayVendor;
 const DescribeAddressTemplatesRequest = models.DescribeAddressTemplatesRequest;
@@ -245,6 +250,7 @@ const ModifyAddressAttributeRequest = models.ModifyAddressAttributeRequest;
 const InquiryPriceCreateVpnGatewayRequest = models.InquiryPriceCreateVpnGatewayRequest;
 const DescribeVpnConnectionsResponse = models.DescribeVpnConnectionsResponse;
 const DeleteCustomerGatewayRequest = models.DeleteCustomerGatewayRequest;
+const RejectAttachCcnInstancesRequest = models.RejectAttachCcnInstancesRequest;
 const DirectConnectGateway = models.DirectConnectGateway;
 const DeleteVpnGatewayResponse = models.DeleteVpnGatewayResponse;
 const DescribeAddressTemplatesResponse = models.DescribeAddressTemplatesResponse;
@@ -284,9 +290,10 @@ const DescribeVpcsResponse = models.DescribeVpcsResponse;
 const ModifyAddressTemplateAttributeRequest = models.ModifyAddressTemplateAttributeRequest;
 const ModifySecurityGroupAttributeRequest = models.ModifySecurityGroupAttributeRequest;
 const CreateAddressTemplateGroupResponse = models.CreateAddressTemplateGroupResponse;
-const DescribeBandwidthPackageQuotaResponse = models.DescribeBandwidthPackageQuotaResponse;
+const CcnAttachedInstance = models.CcnAttachedInstance;
 const RemoveBandwidthPackageResourcesRequest = models.RemoveBandwidthPackageResourcesRequest;
 const SecurityPolicyDatabase = models.SecurityPolicyDatabase;
+const AcceptAttachCcnInstancesResponse = models.AcceptAttachCcnInstancesResponse;
 const DeleteServiceTemplateGroupRequest = models.DeleteServiceTemplateGroupRequest;
 const DescribeRouteConflictsRequest = models.DescribeRouteConflictsRequest;
 const Price = models.Price;
@@ -599,6 +606,18 @@ class VpcClient extends AbstractClient {
     }
 
     /**
+     * 本接口（RejectAttachCcnInstances）用于跨账号关联实例时，云联网所有者拒绝关联操作。
+
+     * @param {RejectAttachCcnInstancesRequest} req
+     * @param {function(string, RejectAttachCcnInstancesResponse):void} cb
+     * @public
+     */
+    RejectAttachCcnInstances(req, cb) {
+        let resp = new RejectAttachCcnInstancesResponse();
+        this.request("RejectAttachCcnInstances", req, resp, cb);
+    }
+
+    /**
      * 本接口（DeleteSecurityGroup）用于删除安全组（SecurityGroup）。
 * 只有当前账号下的安全组允许被删除。
 * 安全组实例ID如果在其他安全组的规则中被引用，则无法直接删除。这种情况下，需要先进行规则修改，再删除安全组。
@@ -662,6 +681,17 @@ class VpcClient extends AbstractClient {
     }
 
     /**
+     * 本接口（AcceptAttachCcnInstances）用于跨账号关联实例时，云联网所有者接受并同意关联操作。
+     * @param {AcceptAttachCcnInstancesRequest} req
+     * @param {function(string, AcceptAttachCcnInstancesResponse):void} cb
+     * @public
+     */
+    AcceptAttachCcnInstances(req, cb) {
+        let resp = new AcceptAttachCcnInstancesResponse();
+        this.request("AcceptAttachCcnInstances", req, resp, cb);
+    }
+
+    /**
      * 删除协议端口模板集合
      * @param {DeleteServiceTemplateGroupRequest} req
      * @param {function(string, DeleteServiceTemplateGroupResponse):void} cb
@@ -683,6 +713,17 @@ class VpcClient extends AbstractClient {
     DisassociateAddress(req, cb) {
         let resp = new DisassociateAddressResponse();
         this.request("DisassociateAddress", req, resp, cb);
+    }
+
+    /**
+     * 本接口（ResetAttachCcnInstances）用于跨账号关联实例申请过期时，重新申请关联操作。
+     * @param {ResetAttachCcnInstancesRequest} req
+     * @param {function(string, ResetAttachCcnInstancesResponse):void} cb
+     * @public
+     */
+    ResetAttachCcnInstances(req, cb) {
+        let resp = new ResetAttachCcnInstancesResponse();
+        this.request("ResetAttachCcnInstances", req, resp, cb);
     }
 
     /**
@@ -786,7 +827,7 @@ class VpcClient extends AbstractClient {
     }
 
     /**
-     * 本接口(AttachClassicLinkVpc)用于私有网络和基础网络设备互通。
+     * 本接口(AttachClassicLinkVpc)用于创建私有网络和基础网络设备互通。
 * 私有网络和基础网络设备必须在同一个地域。
 * 私有网络和基础网络的区别详见vpc产品文档-<a href="https://cloud.tencent.com/document/product/215/535#2.-.E7.A7.81.E6.9C.89.E7.BD.91.E7.BB.9C.E4.B8.8E.E5.9F.BA.E7.A1.80.E7.BD.91.E7.BB.9C">私有网络与基础网络</a>。
      * @param {AttachClassicLinkVpcRequest} req
@@ -1421,7 +1462,7 @@ class VpcClient extends AbstractClient {
     }
 
     /**
-     * 本接口(DescribeClassicLinkInstances)用于私有网络和基础网络设备互通。
+     * 本接口(DescribeClassicLinkInstances)用于查询私有网络和基础网络设备互通列表。
      * @param {DescribeClassicLinkInstancesRequest} req
      * @param {function(string, DescribeClassicLinkInstancesResponse):void} cb
      * @public

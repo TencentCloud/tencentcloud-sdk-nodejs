@@ -1018,6 +1018,12 @@ class CreateProductResponse extends  AbstractModel {
         this.ProductId = null;
 
         /**
+         * 产品属性
+         * @type {ProductProperties || null}
+         */
+        this.ProductProperties = null;
+
+        /**
          * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
          * @type {string || null}
          */
@@ -1034,6 +1040,12 @@ class CreateProductResponse extends  AbstractModel {
         }
         this.ProductName = params.ProductName || null;
         this.ProductId = params.ProductId || null;
+
+        if (params.ProductProperties) {
+            let obj = new ProductProperties();
+            obj.deserialize(params.ProductProperties)
+            this.ProductProperties = obj;
+        }
         this.RequestId = params.RequestId || null;
 
     }
@@ -1075,6 +1087,41 @@ class GetDeviceShadowRequest extends  AbstractModel {
 }
 
 /**
+ * 描述键值对过滤器，用于条件过滤查询。例如过滤ID、名称、状态等
+ * @class
+ */
+class Filter extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 过滤键的名称
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 一个或者多个过滤值
+         * @type {Array.<string> || null}
+         */
+        this.Values = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = params.Name || null;
+        this.Values = params.Values || null;
+
+    }
+}
+
+/**
  * DescribeDevices请求参数结构体
  * @class
  */
@@ -1095,7 +1142,7 @@ class DescribeDevicesRequest extends  AbstractModel {
         this.Offset = null;
 
         /**
-         * 分页的大小，数值范围 10-250
+         * 分页的大小，数值范围 10-100
          * @type {number || null}
          */
         this.Limit = null;
@@ -1246,6 +1293,12 @@ class DescribeProductsRequest extends  AbstractModel {
          */
         this.Limit = null;
 
+        /**
+         * 过滤条件
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
     }
 
     /**
@@ -1257,6 +1310,15 @@ class DescribeProductsRequest extends  AbstractModel {
         }
         this.Offset = params.Offset || null;
         this.Limit = params.Limit || null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
 
     }
 }
@@ -1322,6 +1384,12 @@ class CreateDeviceResponse extends  AbstractModel {
         this.DevicePrivateKey = null;
 
         /**
+         * LoRa设备的DevEui，当设备是LoRa设备时，会返回该字段
+         * @type {string || null}
+         */
+        this.LoraDevEui = null;
+
+        /**
          * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
          * @type {string || null}
          */
@@ -1340,6 +1408,7 @@ class CreateDeviceResponse extends  AbstractModel {
         this.DevicePsk = params.DevicePsk || null;
         this.DeviceCert = params.DeviceCert || null;
         this.DevicePrivateKey = params.DevicePrivateKey || null;
+        this.LoraDevEui = params.LoraDevEui || null;
         this.RequestId = params.RequestId || null;
 
     }
@@ -1389,6 +1458,12 @@ class CreateDeviceRequest extends  AbstractModel {
          */
         this.Imei = null;
 
+        /**
+         * LoRa设备的DevEui，当创建LoRa时，此字段必填
+         * @type {string || null}
+         */
+        this.LoraDevEui = null;
+
     }
 
     /**
@@ -1409,6 +1484,7 @@ class CreateDeviceRequest extends  AbstractModel {
         this.DefinedPsk = params.DefinedPsk || null;
         this.Isp = params.Isp || null;
         this.Imei = params.Imei || null;
+        this.LoraDevEui = params.LoraDevEui || null;
 
     }
 }
@@ -1702,6 +1778,12 @@ class DeviceInfo extends  AbstractModel {
          */
         this.LastUpdateTime = null;
 
+        /**
+         * LoRa设备的dev eui
+         * @type {string || null}
+         */
+        this.LoraDevEui = null;
+
     }
 
     /**
@@ -1732,6 +1814,7 @@ class DeviceInfo extends  AbstractModel {
         this.NbiotDeviceID = params.NbiotDeviceID || null;
         this.ConnIP = params.ConnIP || null;
         this.LastUpdateTime = params.LastUpdateTime || null;
+        this.LoraDevEui = params.LoraDevEui || null;
 
     }
 }
@@ -1844,6 +1927,18 @@ class ProductProperties extends  AbstractModel {
          */
         this.Format = null;
 
+        /**
+         * 产品所属平台，默认值是0
+         * @type {string || null}
+         */
+        this.Platform = null;
+
+        /**
+         * LoRa产品运营侧APPEUI，只有LoRa产品需要填写
+         * @type {string || null}
+         */
+        this.Appeui = null;
+
     }
 
     /**
@@ -1858,6 +1953,8 @@ class ProductProperties extends  AbstractModel {
         this.Region = params.Region || null;
         this.ProductType = params.ProductType || null;
         this.Format = params.Format || null;
+        this.Platform = params.Platform || null;
+        this.Appeui = params.Appeui || null;
 
     }
 }
@@ -2092,6 +2189,7 @@ module.exports = {
     DescribeTasksResponse: DescribeTasksResponse,
     CreateProductResponse: CreateProductResponse,
     GetDeviceShadowRequest: GetDeviceShadowRequest,
+    Filter: Filter,
     DescribeDevicesRequest: DescribeDevicesRequest,
     CreateTaskRequest: CreateTaskRequest,
     DescribeMultiDevTaskRequest: DescribeMultiDevTaskRequest,

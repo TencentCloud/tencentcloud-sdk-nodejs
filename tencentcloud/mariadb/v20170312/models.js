@@ -998,6 +998,41 @@ class DescribeFlowResponse extends  AbstractModel {
 }
 
 /**
+ * CloneAccount返回参数结构体
+ * @class
+ */
+class CloneAccountResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 异步任务流程ID。
+         * @type {number || null}
+         */
+        this.FlowId = null;
+
+        /**
+         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FlowId = params.FlowId || null;
+        this.RequestId = params.RequestId || null;
+
+    }
+}
+
+/**
  * 分片节点可用区选择
  * @class
  */
@@ -1141,6 +1176,12 @@ class ParamConstraint extends  AbstractModel {
          */
         this.Range = null;
 
+        /**
+         * 约束类型为string时的可选值列表
+         * @type {string || null}
+         */
+        this.String = null;
+
     }
 
     /**
@@ -1158,6 +1199,7 @@ class ParamConstraint extends  AbstractModel {
             obj.deserialize(params.Range)
             this.Range = obj;
         }
+        this.String = params.String || null;
 
     }
 }
@@ -1471,6 +1513,69 @@ class CopyAccountPrivilegesResponse extends  AbstractModel {
 }
 
 /**
+ * CloneAccount请求参数结构体
+ * @class
+ */
+class CloneAccountRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 源用户账户名
+         * @type {string || null}
+         */
+        this.SrcUser = null;
+
+        /**
+         * 源用户HOST
+         * @type {string || null}
+         */
+        this.SrcHost = null;
+
+        /**
+         * 目的用户账户名
+         * @type {string || null}
+         */
+        this.DstUser = null;
+
+        /**
+         * 目的用户HOST
+         * @type {string || null}
+         */
+        this.DstHost = null;
+
+        /**
+         * 目的用户账户描述
+         * @type {string || null}
+         */
+        this.DstDesc = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = params.InstanceId || null;
+        this.SrcUser = params.SrcUser || null;
+        this.SrcHost = params.SrcHost || null;
+        this.DstUser = params.DstUser || null;
+        this.DstHost = params.DstHost || null;
+        this.DstDesc = params.DstDesc || null;
+
+    }
+}
+
+/**
  * 修改参数结果
  * @class
  */
@@ -1538,20 +1643,20 @@ class DescribeDBInstancesRequest extends  AbstractModel {
         this.ProjectIds = null;
 
         /**
-         * 是否根据 VPC 网络来搜索，0 为否，1 为是
-         * @type {number || null}
+         * 是否根据 VPC 网络来搜索
+         * @type {boolean || null}
          */
         this.IsFilterVpc = null;
 
         /**
          * 私有网络 ID， IsFilterVpc 为 1 时有效
-         * @type {number || null}
+         * @type {string || null}
          */
         this.VpcId = null;
 
         /**
          * 私有网络的子网 ID， IsFilterVpc 为 1 时有效
-         * @type {number || null}
+         * @type {string || null}
          */
         this.SubnetId = null;
 
@@ -1585,6 +1690,18 @@ class DescribeDBInstancesRequest extends  AbstractModel {
          */
         this.OriginSerialIds = null;
 
+        /**
+         * 标识是否使用ExclusterType字段, false不使用，true使用
+         * @type {boolean || null}
+         */
+        this.IsFilterExcluster = null;
+
+        /**
+         * 1非独享集群，2独享集群， 0全部
+         * @type {number || null}
+         */
+        this.ExclusterType = null;
+
     }
 
     /**
@@ -1606,6 +1723,8 @@ class DescribeDBInstancesRequest extends  AbstractModel {
         this.Offset = params.Offset || null;
         this.Limit = params.Limit || null;
         this.OriginSerialIds = params.OriginSerialIds || null;
+        this.IsFilterExcluster = params.IsFilterExcluster || null;
+        this.ExclusterType = params.ExclusterType || null;
 
     }
 }
@@ -1676,6 +1795,48 @@ class RenewDBInstanceRequest extends  AbstractModel {
         this.Period = params.Period || null;
         this.AutoVoucher = params.AutoVoucher || null;
         this.VoucherIds = params.VoucherIds || null;
+
+    }
+}
+
+/**
+ * DescribeSqlLogs请求参数结构体
+ * @class
+ */
+class DescribeSqlLogsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例 ID，形如：tdsql-ow728lmc，可以通过 DescribeDBInstances 查询实例详情获得。
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * SQL日志偏移。
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 拉取数量（0-1000，为0时拉取总数信息）。
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = params.InstanceId || null;
+        this.Offset = params.Offset || null;
+        this.Limit = params.Limit || null;
 
     }
 }
@@ -1912,7 +2073,7 @@ class Deal extends  AbstractModel {
          * 商品数量
          * @type {number || null}
          */
-        this.Quantity = null;
+        this.Count = null;
 
         /**
          * 关联的流程 Id，可用于查询流程执行状态
@@ -1926,6 +2087,12 @@ class Deal extends  AbstractModel {
          */
         this.InstanceIds = null;
 
+        /**
+         * 付费模式，0后付费/1预付费
+         * @type {number || null}
+         */
+        this.PayMode = null;
+
     }
 
     /**
@@ -1937,9 +2104,10 @@ class Deal extends  AbstractModel {
         }
         this.DealName = params.DealName || null;
         this.OwnerUin = params.OwnerUin || null;
-        this.Quantity = params.Quantity || null;
+        this.Count = params.Count || null;
         this.FlowId = params.FlowId || null;
         this.InstanceIds = params.InstanceIds || null;
+        this.PayMode = params.PayMode || null;
 
     }
 }
@@ -1977,6 +2145,16 @@ class GrantAccountPrivilegesRequest extends  AbstractModel {
         this.DbName = null;
 
         /**
+         * 全局权限： SELECT，INSERT，UPDATE，DELETE，CREATE，DROP，REFERENCES，INDEX，ALTER，CREATE TEMPORARY TABLES，LOCK TABLES，EXECUTE，CREATE VIEW，SHOW VIEW，CREATE ROUTINE，ALTER ROUTINE，EVENT，TRIGGER，SHOW DATABASES 
+库权限： SELECT，INSERT，UPDATE，DELETE，CREATE，DROP，REFERENCES，INDEX，ALTER，CREATE TEMPORARY TABLES，LOCK TABLES，EXECUTE，CREATE VIEW，SHOW VIEW，CREATE ROUTINE，ALTER ROUTINE，EVENT，TRIGGER 
+表/视图权限： SELECT，INSERT，UPDATE，DELETE，CREATE，DROP，REFERENCES，INDEX，ALTER，CREATE VIEW，SHOW VIEW，TRIGGER 
+存储过程/函数权限： ALTER ROUTINE，EXECUTE 
+字段权限： INSERT，REFERENCES，SELECT，UPDATE
+         * @type {Array.<string> || null}
+         */
+        this.Privileges = null;
+
+        /**
          * 类型,可以填入 table 、 view 、 proc 、 func 和 \*。当 DbName 为具体数据库名，Type为 \* 时，表示设置该数据库权限（即db.\*），此时忽略 Object 参数
          * @type {string || null}
          */
@@ -1994,16 +2172,6 @@ class GrantAccountPrivilegesRequest extends  AbstractModel {
          */
         this.ColName = null;
 
-        /**
-         * 全局权限： SELECT，INSERT，UPDATE，DELETE，CREATE，DROP，REFERENCES，INDEX，ALTER，CREATE TEMPORARY TABLES，LOCK TABLES，EXECUTE，CREATE VIEW，SHOW VIEW，CREATE ROUTINE，ALTER ROUTINE，EVENT，TRIGGER，SHOW DATABASES 
-库权限： SELECT，INSERT，UPDATE，DELETE，CREATE，DROP，REFERENCES，INDEX，ALTER，CREATE TEMPORARY TABLES，LOCK TABLES，EXECUTE，CREATE VIEW，SHOW VIEW，CREATE ROUTINE，ALTER ROUTINE，EVENT，TRIGGER 
-表/视图权限： SELECT，INSERT，UPDATE，DELETE，CREATE，DROP，REFERENCES，INDEX，ALTER，CREATE VIEW，SHOW VIEW，TRIGGER 
-存储过程/函数权限： ALTER ROUTINE，EXECUTE 
-字段权限： INSERT，REFERENCES，SELECT，UPDATE
-         * @type {Array.<string> || null}
-         */
-        this.Privileges = null;
-
     }
 
     /**
@@ -2017,10 +2185,10 @@ class GrantAccountPrivilegesRequest extends  AbstractModel {
         this.UserName = params.UserName || null;
         this.Host = params.Host || null;
         this.DbName = params.DbName || null;
+        this.Privileges = params.Privileges || null;
         this.Type = params.Type || null;
         this.Object = params.Object || null;
         this.ColName = params.ColName || null;
-        this.Privileges = params.Privileges || null;
 
     }
 }
@@ -2240,7 +2408,7 @@ class ModifyDBParametersResponse extends  AbstractModel {
          * 参数修改结果
          * @type {Array.<ParamModifyResult> || null}
          */
-        this.Config = null;
+        this.Result = null;
 
         /**
          * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
@@ -2259,12 +2427,12 @@ class ModifyDBParametersResponse extends  AbstractModel {
         }
         this.InstanceId = params.InstanceId || null;
 
-        if (params.Config) {
-            this.Config = new Array();
-            for (let z in params.Config) {
+        if (params.Result) {
+            this.Result = new Array();
+            for (let z in params.Result) {
                 let obj = new ParamModifyResult();
-                obj.deserialize(params.Config[z]);
-                this.Config.push(obj);
+                obj.deserialize(params.Result[z]);
+                this.Result.push(obj);
             }
         }
         this.RequestId = params.RequestId || null;
@@ -2299,12 +2467,6 @@ class CopyAccountPrivilegesRequest extends  AbstractModel {
         this.SrcHost = null;
 
         /**
-         * 源账号的 ReadOnly 属性
-         * @type {string || null}
-         */
-        this.SrcReadOnly = null;
-
-        /**
          * 目的用户名
          * @type {string || null}
          */
@@ -2315,6 +2477,12 @@ class CopyAccountPrivilegesRequest extends  AbstractModel {
          * @type {string || null}
          */
         this.DstHost = null;
+
+        /**
+         * 源账号的 ReadOnly 属性
+         * @type {string || null}
+         */
+        this.SrcReadOnly = null;
 
         /**
          * 目的账号的 ReadOnly 属性
@@ -2334,9 +2502,9 @@ class CopyAccountPrivilegesRequest extends  AbstractModel {
         this.InstanceId = params.InstanceId || null;
         this.SrcUserName = params.SrcUserName || null;
         this.SrcHost = params.SrcHost || null;
-        this.SrcReadOnly = params.SrcReadOnly || null;
         this.DstUserName = params.DstUserName || null;
         this.DstHost = params.DstHost || null;
+        this.SrcReadOnly = params.SrcReadOnly || null;
         this.DstReadOnly = params.DstReadOnly || null;
 
     }
@@ -2413,10 +2581,10 @@ class ModifyDBInstanceNameRequest extends  AbstractModel {
 }
 
 /**
- * DeleteAccount请求参数结构体
+ * ModifyBackupTime请求参数结构体
  * @class
  */
-class DeleteAccountRequest extends  AbstractModel {
+class ModifyBackupTimeRequest extends  AbstractModel {
     constructor(){
         super();
 
@@ -2427,16 +2595,16 @@ class DeleteAccountRequest extends  AbstractModel {
         this.InstanceId = null;
 
         /**
-         * 用户名
+         * 每天备份执行的区间的开始时间，格式 mm:ss，形如 22:00
          * @type {string || null}
          */
-        this.UserName = null;
+        this.StartBackupTime = null;
 
         /**
-         * 用户允许的访问 host
+         * 每天备份执行的区间的结束时间，格式 mm:ss，形如 23:59
          * @type {string || null}
          */
-        this.Host = null;
+        this.EndBackupTime = null;
 
     }
 
@@ -2448,8 +2616,8 @@ class DeleteAccountRequest extends  AbstractModel {
             return;
         }
         this.InstanceId = params.InstanceId || null;
-        this.UserName = params.UserName || null;
-        this.Host = params.Host || null;
+        this.StartBackupTime = params.StartBackupTime || null;
+        this.EndBackupTime = params.EndBackupTime || null;
 
     }
 }
@@ -2490,7 +2658,7 @@ class UpgradeDBInstanceRequest extends  AbstractModel {
 
         /**
          * 代金券ID列表，目前仅支持指定一张代金券。
-         * @type {string || null}
+         * @type {Array.<string> || null}
          */
         this.VoucherIds = null;
 
@@ -2707,12 +2875,6 @@ class DBInstance extends  AbstractModel {
         this.AutoRenewFlag = null;
 
         /**
-         * 产品类型 Id
-         * @type {number || null}
-         */
-        this.Pid = null;
-
-        /**
          * 实例到期时间，格式为 2006-01-02 15:04:05
          * @type {string || null}
          */
@@ -2725,7 +2887,7 @@ class DBInstance extends  AbstractModel {
         this.Uin = null;
 
         /**
-         * TDSQL 版本信息，如 10.1.9
+         * TDSQL 版本信息
          * @type {string || null}
          */
         this.TdsqlVersion = null;
@@ -2741,6 +2903,78 @@ class DBInstance extends  AbstractModel {
          * @type {number || null}
          */
         this.Storage = null;
+
+        /**
+         * 字符串型的私有网络Id
+         * @type {string || null}
+         */
+        this.UniqueVpcId = null;
+
+        /**
+         * 字符串型的私有网络子网Id
+         * @type {string || null}
+         */
+        this.UniqueSubnetId = null;
+
+        /**
+         * 原始实例ID（过时字段，请勿依赖该值）
+         * @type {string || null}
+         */
+        this.OriginSerialId = null;
+
+        /**
+         * 节点数，2为一主一从，3为一主二从
+         * @type {number || null}
+         */
+        this.NodeCount = null;
+
+        /**
+         * 是否临时实例，0为否，非0为是
+         * @type {number || null}
+         */
+        this.IsTmp = null;
+
+        /**
+         * 独享集群Id，为空表示为普通实例
+         * @type {string || null}
+         */
+        this.ExclusterId = null;
+
+        /**
+         * 数字实例Id（过时字段，请勿依赖该值）
+         * @type {number || null}
+         */
+        this.Id = null;
+
+        /**
+         * 产品类型 Id
+         * @type {number || null}
+         */
+        this.Pid = null;
+
+        /**
+         * 最大 Qps 值
+         * @type {number || null}
+         */
+        this.Qps = null;
+
+        /**
+         * 付费模式
+         * @type {string || null}
+         */
+        this.Paymode = null;
+
+        /**
+         * 实例处于异步任务时的异步任务流程ID
+         * @type {number || null}
+         */
+        this.Locker = null;
+
+        /**
+         * 实例目前运行状态描述
+         * @type {string || null}
+         */
+        this.StatusDesc = null;
 
     }
 
@@ -2768,12 +3002,23 @@ class DBInstance extends  AbstractModel {
         this.CreateTime = params.CreateTime || null;
         this.UpdateTime = params.UpdateTime || null;
         this.AutoRenewFlag = params.AutoRenewFlag || null;
-        this.Pid = params.Pid || null;
         this.PeriodEndTime = params.PeriodEndTime || null;
         this.Uin = params.Uin || null;
         this.TdsqlVersion = params.TdsqlVersion || null;
         this.Memory = params.Memory || null;
         this.Storage = params.Storage || null;
+        this.UniqueVpcId = params.UniqueVpcId || null;
+        this.UniqueSubnetId = params.UniqueSubnetId || null;
+        this.OriginSerialId = params.OriginSerialId || null;
+        this.NodeCount = params.NodeCount || null;
+        this.IsTmp = params.IsTmp || null;
+        this.ExclusterId = params.ExclusterId || null;
+        this.Id = params.Id || null;
+        this.Pid = params.Pid || null;
+        this.Qps = params.Qps || null;
+        this.Paymode = params.Paymode || null;
+        this.Locker = params.Locker || null;
+        this.StatusDesc = params.StatusDesc || null;
 
     }
 }
@@ -3204,67 +3449,67 @@ class SlowLogData extends  AbstractModel {
 
         /**
          * 平均的锁时间
-         * @type {string || null}
+         * @type {number || null}
          */
         this.LockTimeAvg = null;
 
         /**
          * 最大锁时间
-         * @type {string || null}
+         * @type {number || null}
          */
         this.LockTimeMax = null;
 
         /**
          * 最小锁时间
-         * @type {string || null}
+         * @type {number || null}
          */
         this.LockTimeMin = null;
 
         /**
          * 锁时间总和
-         * @type {string || null}
+         * @type {number || null}
          */
         this.LockTimeSum = null;
 
         /**
          * 查询次数
-         * @type {string || null}
+         * @type {number || null}
          */
         this.QueryCount = null;
 
         /**
          * 平均查询时间
-         * @type {string || null}
+         * @type {number || null}
          */
         this.QueryTimeAvg = null;
 
         /**
          * 最大查询时间
-         * @type {string || null}
+         * @type {number || null}
          */
         this.QueryTimeMax = null;
 
         /**
          * 最小查询时间
-         * @type {string || null}
+         * @type {number || null}
          */
         this.QueryTimeMin = null;
 
         /**
          * 查询时间总和
-         * @type {string || null}
+         * @type {number || null}
          */
         this.QueryTimeSum = null;
 
         /**
          * 扫描行数
-         * @type {string || null}
+         * @type {number || null}
          */
         this.RowsExaminedSum = null;
 
         /**
          * 发送行数
-         * @type {string || null}
+         * @type {number || null}
          */
         this.RowsSentSum = null;
 
@@ -3416,13 +3661,13 @@ class DescribeDBLogFilesResponse extends  AbstractModel {
          * 如果是VPC网络的实例，做用本前缀加上URI为下载地址
          * @type {string || null}
          */
-        this.Vpcprefix = null;
+        this.VpcPrefix = null;
 
         /**
          * 如果是普通网络的实例，做用本前缀加上URI为下载地址
          * @type {string || null}
          */
-        this.Normalprefix = null;
+        this.NormalPrefix = null;
 
         /**
          * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
@@ -3451,8 +3696,8 @@ class DescribeDBLogFilesResponse extends  AbstractModel {
                 this.Files.push(obj);
             }
         }
-        this.Vpcprefix = params.Vpcprefix || null;
-        this.Normalprefix = params.Normalprefix || null;
+        this.VpcPrefix = params.VpcPrefix || null;
+        this.NormalPrefix = params.NormalPrefix || null;
         this.RequestId = params.RequestId || null;
 
     }
@@ -3487,10 +3732,88 @@ class CloseDBExtranetAccessRequest extends  AbstractModel {
 }
 
 /**
- * ModifyBackupTime请求参数结构体
+ * DescribeSqlLogs返回参数结构体
  * @class
  */
-class ModifyBackupTimeRequest extends  AbstractModel {
+class DescribeSqlLogsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 当前消息队列中的sql日志条目数。
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 消息队列中的sql日志起始偏移。
+         * @type {number || null}
+         */
+        this.StartOffset = null;
+
+        /**
+         * 消息队列中的sql日志结束偏移。
+         * @type {number || null}
+         */
+        this.EndOffset = null;
+
+        /**
+         * 返回的第一条sql日志的偏移。
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 返回的sql日志数量。
+         * @type {number || null}
+         */
+        this.Count = null;
+
+        /**
+         * Sql日志列表。
+         * @type {Array.<SqlLogItem> || null}
+         */
+        this.SqlItems = null;
+
+        /**
+         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = params.TotalCount || null;
+        this.StartOffset = params.StartOffset || null;
+        this.EndOffset = params.EndOffset || null;
+        this.Offset = params.Offset || null;
+        this.Count = params.Count || null;
+
+        if (params.SqlItems) {
+            this.SqlItems = new Array();
+            for (let z in params.SqlItems) {
+                let obj = new SqlLogItem();
+                obj.deserialize(params.SqlItems[z]);
+                this.SqlItems.push(obj);
+            }
+        }
+        this.RequestId = params.RequestId || null;
+
+    }
+}
+
+/**
+ * DeleteAccount请求参数结构体
+ * @class
+ */
+class DeleteAccountRequest extends  AbstractModel {
     constructor(){
         super();
 
@@ -3501,16 +3824,16 @@ class ModifyBackupTimeRequest extends  AbstractModel {
         this.InstanceId = null;
 
         /**
-         * 每天备份执行的区间的开始时间，格式 mm:ss，形如 22:00
+         * 用户名
          * @type {string || null}
          */
-        this.StartBackupTime = null;
+        this.UserName = null;
 
         /**
-         * 每天备份执行的区间的结束时间，格式 mm:ss，形如 23:59
+         * 用户允许的访问 host
          * @type {string || null}
          */
-        this.EndBackupTime = null;
+        this.Host = null;
 
     }
 
@@ -3522,8 +3845,8 @@ class ModifyBackupTimeRequest extends  AbstractModel {
             return;
         }
         this.InstanceId = params.InstanceId || null;
-        this.StartBackupTime = params.StartBackupTime || null;
-        this.EndBackupTime = params.EndBackupTime || null;
+        this.UserName = params.UserName || null;
+        this.Host = params.Host || null;
 
     }
 }
@@ -3932,7 +4255,7 @@ class DescribeDBInstancesResponse extends  AbstractModel {
 
         /**
          * 符合条件的实例数量
-         * @type {Array.<number> || null}
+         * @type {number || null}
          */
         this.TotalCount = null;
 
@@ -4064,7 +4387,7 @@ class LogFileInfo extends  AbstractModel {
 
         /**
          * 下载Log时用到的统一资源标识符
-         * @type {number || null}
+         * @type {string || null}
          */
         this.Uri = null;
 
@@ -4170,6 +4493,12 @@ class DBAccount extends  AbstractModel {
          */
         this.ReadOnly = null;
 
+        /**
+         * 该字段对只读帐号有意义，表示选择主备延迟小于该值的备机
+         * @type {number || null}
+         */
+        this.DelayThresh = null;
+
     }
 
     /**
@@ -4185,6 +4514,7 @@ class DBAccount extends  AbstractModel {
         this.CreateTime = params.CreateTime || null;
         this.UpdateTime = params.UpdateTime || null;
         this.ReadOnly = params.ReadOnly || null;
+        this.DelayThresh = params.DelayThresh || null;
 
     }
 }
@@ -4324,6 +4654,97 @@ class DescribeDBPerformanceDetailsResponse extends  AbstractModel {
 }
 
 /**
+ * 描述一条sql日志的详细信息。
+ * @class
+ */
+class SqlLogItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 本条日志在消息队列中的偏移量。
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 执行本条sql的用户。
+         * @type {string || null}
+         */
+        this.User = null;
+
+        /**
+         * 执行本条sql的客户端IP+端口。
+         * @type {string || null}
+         */
+        this.Client = null;
+
+        /**
+         * 数据库名称。
+         * @type {string || null}
+         */
+        this.DbName = null;
+
+        /**
+         * 执行的sql语句。
+         * @type {string || null}
+         */
+        this.Sql = null;
+
+        /**
+         * 返回的数据行数。
+         * @type {number || null}
+         */
+        this.SelectRowNum = null;
+
+        /**
+         * 影响行数。
+         * @type {number || null}
+         */
+        this.AffectRowNum = null;
+
+        /**
+         * Sql执行时间戳。
+         * @type {number || null}
+         */
+        this.Timestamp = null;
+
+        /**
+         * Sql耗时，单位为毫秒。
+         * @type {number || null}
+         */
+        this.TimeCostMs = null;
+
+        /**
+         * Sql返回码，0为成功。
+         * @type {number || null}
+         */
+        this.ResultCode = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Offset = params.Offset || null;
+        this.User = params.User || null;
+        this.Client = params.Client || null;
+        this.DbName = params.DbName || null;
+        this.Sql = params.Sql || null;
+        this.SelectRowNum = params.SelectRowNum || null;
+        this.AffectRowNum = params.AffectRowNum || null;
+        this.Timestamp = params.Timestamp || null;
+        this.TimeCostMs = params.TimeCostMs || null;
+        this.ResultCode = params.ResultCode || null;
+
+    }
+}
+
+/**
  * DescribeAccounts返回参数结构体
  * @class
  */
@@ -4389,25 +4810,25 @@ class DescribeDBSlowLogsResponse extends  AbstractModel {
 
         /**
          * 所有语句锁时间总和
-         * @type {string || null}
+         * @type {number || null}
          */
         this.LockTimeSum = null;
 
         /**
          * 所有语句查询总次数
-         * @type {string || null}
+         * @type {number || null}
          */
         this.QueryCount = null;
 
         /**
          * 总记录数
-         * @type {string || null}
+         * @type {number || null}
          */
         this.Total = null;
 
         /**
          * 所有语句查询时间总和
-         * @type {string || null}
+         * @type {number || null}
          */
         this.QueryTimeSum = null;
 
@@ -4708,6 +5129,7 @@ module.exports = {
     ModifyLogFileRetentionPeriodRequest: ModifyLogFileRetentionPeriodRequest,
     PerformanceMonitorSet: PerformanceMonitorSet,
     DescribeFlowResponse: DescribeFlowResponse,
+    CloneAccountResponse: CloneAccountResponse,
     ZoneChooseInfo: ZoneChooseInfo,
     ModifyAccountDescriptionResponse: ModifyAccountDescriptionResponse,
     DescribeDBResourceUsageRequest: DescribeDBResourceUsageRequest,
@@ -4719,10 +5141,12 @@ module.exports = {
     DescribeOrdersResponse: DescribeOrdersResponse,
     ResetAccountPasswordRequest: ResetAccountPasswordRequest,
     CopyAccountPrivilegesResponse: CopyAccountPrivilegesResponse,
+    CloneAccountRequest: CloneAccountRequest,
     ParamModifyResult: ParamModifyResult,
     DescribeDBInstancesRequest: DescribeDBInstancesRequest,
     DescribeSaleInfoRequest: DescribeSaleInfoRequest,
     RenewDBInstanceRequest: RenewDBInstanceRequest,
+    DescribeSqlLogsRequest: DescribeSqlLogsRequest,
     ResetAccountPasswordResponse: ResetAccountPasswordResponse,
     DescribePriceRequest: DescribePriceRequest,
     CreateDBInstanceResponse: CreateDBInstanceResponse,
@@ -4738,7 +5162,7 @@ module.exports = {
     CopyAccountPrivilegesRequest: CopyAccountPrivilegesRequest,
     OpenDBExtranetAccessResponse: OpenDBExtranetAccessResponse,
     ModifyDBInstanceNameRequest: ModifyDBInstanceNameRequest,
-    DeleteAccountRequest: DeleteAccountRequest,
+    ModifyBackupTimeRequest: ModifyBackupTimeRequest,
     UpgradeDBInstanceRequest: UpgradeDBInstanceRequest,
     DescribeUpgradePriceResponse: DescribeUpgradePriceResponse,
     MonitorIntData: MonitorIntData,
@@ -4759,7 +5183,8 @@ module.exports = {
     DescribeOrdersRequest: DescribeOrdersRequest,
     DescribeDBLogFilesResponse: DescribeDBLogFilesResponse,
     CloseDBExtranetAccessRequest: CloseDBExtranetAccessRequest,
-    ModifyBackupTimeRequest: ModifyBackupTimeRequest,
+    DescribeSqlLogsResponse: DescribeSqlLogsResponse,
+    DeleteAccountRequest: DeleteAccountRequest,
     InstanceSpec: InstanceSpec,
     DescribeFlowRequest: DescribeFlowRequest,
     DescribeDBPerformanceResponse: DescribeDBPerformanceResponse,
@@ -4774,6 +5199,7 @@ module.exports = {
     DBAccount: DBAccount,
     DescribeAccountPrivilegesRequest: DescribeAccountPrivilegesRequest,
     DescribeDBPerformanceDetailsResponse: DescribeDBPerformanceDetailsResponse,
+    SqlLogItem: SqlLogItem,
     DescribeAccountsResponse: DescribeAccountsResponse,
     DescribeDBSlowLogsResponse: DescribeDBSlowLogsResponse,
     UpgradeDBInstanceResponse: UpgradeDBInstanceResponse,

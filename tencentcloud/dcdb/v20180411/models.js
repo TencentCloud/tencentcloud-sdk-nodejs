@@ -607,6 +607,41 @@ class DescribeDBParametersResponse extends  AbstractModel {
 }
 
 /**
+ * CloneAccount返回参数结构体
+ * @class
+ */
+class CloneAccountResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 异步任务流程ID
+         * @type {number || null}
+         */
+        this.FlowId = null;
+
+        /**
+         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FlowId = params.FlowId || null;
+        this.RequestId = params.RequestId || null;
+
+    }
+}
+
+/**
  * ModifyAccountDescription返回参数结构体
  * @class
  */
@@ -957,6 +992,69 @@ class CopyAccountPrivilegesResponse extends  AbstractModel {
 }
 
 /**
+ * CloneAccount请求参数结构体
+ * @class
+ */
+class CloneAccountRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 源用户账户名
+         * @type {string || null}
+         */
+        this.SrcUser = null;
+
+        /**
+         * 源用户HOST
+         * @type {string || null}
+         */
+        this.SrcHost = null;
+
+        /**
+         * 目的用户账户名
+         * @type {string || null}
+         */
+        this.DstUser = null;
+
+        /**
+         * 目的用户HOST
+         * @type {string || null}
+         */
+        this.DstHost = null;
+
+        /**
+         * 目的用户账户描述
+         * @type {string || null}
+         */
+        this.DstDesc = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = params.InstanceId || null;
+        this.SrcUser = params.SrcUser || null;
+        this.SrcHost = params.SrcHost || null;
+        this.DstUser = params.DstUser || null;
+        this.DstHost = params.DstHost || null;
+        this.DstDesc = params.DstDesc || null;
+
+    }
+}
+
+/**
  * DescribeDCDBRenewalPrice请求参数结构体
  * @class
  */
@@ -1123,6 +1221,48 @@ class DatabaseFunction extends  AbstractModel {
             return;
         }
         this.Func = params.Func || null;
+
+    }
+}
+
+/**
+ * DescribeSqlLogs请求参数结构体
+ * @class
+ */
+class DescribeSqlLogsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例 ID，形如：dcdbt-ow728lmc，可以通过 DescribeDCDBInstances 查询实例详情获得。
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * SQL日志偏移。
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 拉取数量（0-1000，为0时拉取总数信息）。
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = params.InstanceId || null;
+        this.Offset = params.Offset || null;
+        this.Limit = params.Limit || null;
 
     }
 }
@@ -3280,6 +3420,84 @@ class InitDCDBInstancesRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeSqlLogs返回参数结构体
+ * @class
+ */
+class DescribeSqlLogsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 当前消息队列中的sql日志条目数。
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 消息队列中的sql日志起始偏移。
+         * @type {number || null}
+         */
+        this.StartOffset = null;
+
+        /**
+         * 消息队列中的sql日志结束偏移。
+         * @type {number || null}
+         */
+        this.EndOffset = null;
+
+        /**
+         * 返回的第一条sql日志的偏移。
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 返回的sql日志数量。
+         * @type {number || null}
+         */
+        this.Count = null;
+
+        /**
+         * Sql日志列表。
+         * @type {Array.<SqlLogItem> || null}
+         */
+        this.SqlItems = null;
+
+        /**
+         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = params.TotalCount || null;
+        this.StartOffset = params.StartOffset || null;
+        this.EndOffset = params.EndOffset || null;
+        this.Offset = params.Offset || null;
+        this.Count = params.Count || null;
+
+        if (params.SqlItems) {
+            this.SqlItems = new Array();
+            for (let z in params.SqlItems) {
+                let obj = new SqlLogItem();
+                obj.deserialize(params.SqlItems[z]);
+                this.SqlItems.push(obj);
+            }
+        }
+        this.RequestId = params.RequestId || null;
+
+    }
+}
+
+/**
  * DeleteAccount请求参数结构体
  * @class
  */
@@ -4199,6 +4417,97 @@ class DescribeAccountPrivilegesRequest extends  AbstractModel {
 }
 
 /**
+ * 描述一条sql日志的详细信息。
+ * @class
+ */
+class SqlLogItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 本条日志在消息队列中的偏移量。
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 执行本条sql的用户。
+         * @type {string || null}
+         */
+        this.User = null;
+
+        /**
+         * 执行本条sql的客户端IP+端口。
+         * @type {string || null}
+         */
+        this.Client = null;
+
+        /**
+         * 数据库名称。
+         * @type {string || null}
+         */
+        this.DbName = null;
+
+        /**
+         * 执行的sql语句。
+         * @type {string || null}
+         */
+        this.Sql = null;
+
+        /**
+         * 返回的数据行数。
+         * @type {number || null}
+         */
+        this.SelectRowNum = null;
+
+        /**
+         * 影响行数。
+         * @type {number || null}
+         */
+        this.AffectRowNum = null;
+
+        /**
+         * Sql执行时间戳。
+         * @type {number || null}
+         */
+        this.Timestamp = null;
+
+        /**
+         * Sql耗时，单位为毫秒。
+         * @type {number || null}
+         */
+        this.TimeCostMs = null;
+
+        /**
+         * Sql返回码，0为成功。
+         * @type {number || null}
+         */
+        this.ResultCode = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Offset = params.Offset || null;
+        this.User = params.User || null;
+        this.Client = params.Client || null;
+        this.DbName = params.DbName || null;
+        this.Sql = params.Sql || null;
+        this.SelectRowNum = params.SelectRowNum || null;
+        this.AffectRowNum = params.AffectRowNum || null;
+        this.Timestamp = params.Timestamp || null;
+        this.TimeCostMs = params.TimeCostMs || null;
+        this.ResultCode = params.ResultCode || null;
+
+    }
+}
+
+/**
  * DescribeAccounts返回参数结构体
  * @class
  */
@@ -4473,6 +4782,7 @@ module.exports = {
     DescribeDCDBUpgradePriceResponse: DescribeDCDBUpgradePriceResponse,
     CreateAccountRequest: CreateAccountRequest,
     DescribeDBParametersResponse: DescribeDBParametersResponse,
+    CloneAccountResponse: CloneAccountResponse,
     ModifyAccountDescriptionResponse: ModifyAccountDescriptionResponse,
     CreateDCDBInstanceResponse: CreateDCDBInstanceResponse,
     ParamConstraint: ParamConstraint,
@@ -4482,10 +4792,12 @@ module.exports = {
     DescribeOrdersResponse: DescribeOrdersResponse,
     ResetAccountPasswordRequest: ResetAccountPasswordRequest,
     CopyAccountPrivilegesResponse: CopyAccountPrivilegesResponse,
+    CloneAccountRequest: CloneAccountRequest,
     DescribeDCDBRenewalPriceRequest: DescribeDCDBRenewalPriceRequest,
     ParamModifyResult: ParamModifyResult,
     DescribeDCDBPriceRequest: DescribeDCDBPriceRequest,
     DatabaseFunction: DatabaseFunction,
+    DescribeSqlLogsRequest: DescribeSqlLogsRequest,
     ResetAccountPasswordResponse: ResetAccountPasswordResponse,
     DescribeDCDBSaleInfoRequest: DescribeDCDBSaleInfoRequest,
     ExpandShardConfig: ExpandShardConfig,
@@ -4525,6 +4837,7 @@ module.exports = {
     DescribeDBLogFilesResponse: DescribeDBLogFilesResponse,
     CloseDBExtranetAccessRequest: CloseDBExtranetAccessRequest,
     InitDCDBInstancesRequest: InitDCDBInstancesRequest,
+    DescribeSqlLogsResponse: DescribeSqlLogsResponse,
     DeleteAccountRequest: DeleteAccountRequest,
     DescribeDCDBInstancesResponse: DescribeDCDBInstancesResponse,
     CreateDCDBInstanceRequest: CreateDCDBInstanceRequest,
@@ -4541,6 +4854,7 @@ module.exports = {
     DBAccount: DBAccount,
     DescribeDatabaseTableResponse: DescribeDatabaseTableResponse,
     DescribeAccountPrivilegesRequest: DescribeAccountPrivilegesRequest,
+    SqlLogItem: SqlLogItem,
     DescribeAccountsResponse: DescribeAccountsResponse,
     DescribeDCDBInstancesRequest: DescribeDCDBInstancesRequest,
     ModifyDBInstancesProjectRequest: ModifyDBInstancesProjectRequest,

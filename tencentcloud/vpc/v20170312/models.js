@@ -806,6 +806,12 @@ class CcnRoute extends  AbstractModel {
          */
         this.Enabled = null;
 
+        /**
+         * 关联实例所属UIN（根账号）
+         * @type {string || null}
+         */
+        this.InstanceUin = null;
+
     }
 
     /**
@@ -823,6 +829,7 @@ class CcnRoute extends  AbstractModel {
         this.InstanceRegion = params.InstanceRegion || null;
         this.UpdateTime = params.UpdateTime || null;
         this.Enabled = params.Enabled || null;
+        this.InstanceUin = params.InstanceUin || null;
 
     }
 }
@@ -1070,6 +1077,34 @@ class VpnConnection extends  AbstractModel {
             obj.deserialize(params.IPSECOptionsSpecification)
             this.IPSECOptionsSpecification = obj;
         }
+
+    }
+}
+
+/**
+ * RejectAttachCcnInstances返回参数结构体
+ * @class
+ */
+class RejectAttachCcnInstancesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = params.RequestId || null;
 
     }
 }
@@ -2665,6 +2700,12 @@ class VpnGateway extends  AbstractModel {
          */
         this.RestrictState = null;
 
+        /**
+         * 可用区，如：ap-guangzhou-2
+         * @type {string || null}
+         */
+        this.Zone = null;
+
     }
 
     /**
@@ -2688,6 +2729,7 @@ class VpnGateway extends  AbstractModel {
         this.IsAddressBlocked = params.IsAddressBlocked || null;
         this.NewPurchasePlan = params.NewPurchasePlan || null;
         this.RestrictState = params.RestrictState || null;
+        this.Zone = params.Zone || null;
 
     }
 }
@@ -3070,6 +3112,34 @@ class SecurityGroupPolicySet extends  AbstractModel {
                 this.Ingress.push(obj);
             }
         }
+
+    }
+}
+
+/**
+ * ResetAttachCcnInstances返回参数结构体
+ * @class
+ */
+class ResetAttachCcnInstancesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = params.RequestId || null;
 
     }
 }
@@ -4265,6 +4335,12 @@ class AttachCcnInstancesRequest extends  AbstractModel {
          */
         this.Instances = null;
 
+        /**
+         * CCN所属UIN（根账号），默认当前账号所属UIN
+         * @type {string || null}
+         */
+        this.CcnUin = null;
+
     }
 
     /**
@@ -4284,6 +4360,7 @@ class AttachCcnInstancesRequest extends  AbstractModel {
                 this.Instances.push(obj);
             }
         }
+        this.CcnUin = params.CcnUin || null;
 
     }
 }
@@ -4366,7 +4443,7 @@ class AddressTemplate extends  AbstractModel {
 }
 
 /**
- * 云联网（CCN）关联的实例（Instance）对象
+ * 云联网（CCN）关联实例（Instance）对象。
  * @class
  */
 class CcnInstance extends  AbstractModel {
@@ -4386,28 +4463,10 @@ class CcnInstance extends  AbstractModel {
         this.InstanceRegion = null;
 
         /**
-         * 云联网实例ID
-         * @type {string || null}
-         */
-        this.CcnId = null;
-
-        /**
          * 关联实例类型，可选值：VPC、DIRECTCONNECT
          * @type {string || null}
          */
         this.InstanceType = null;
-
-        /**
-         * 关联实例名称
-         * @type {string || null}
-         */
-        this.InstanceName = null;
-
-        /**
-         * 关联实例CIDR
-         * @type {Array.<string> || null}
-         */
-        this.CidrBlock = null;
 
     }
 
@@ -4420,10 +4479,7 @@ class CcnInstance extends  AbstractModel {
         }
         this.InstanceId = params.InstanceId || null;
         this.InstanceRegion = params.InstanceRegion || null;
-        this.CcnId = params.CcnId || null;
         this.InstanceType = params.InstanceType || null;
-        this.InstanceName = params.InstanceName || null;
-        this.CidrBlock = params.CidrBlock || null;
 
     }
 }
@@ -6681,8 +6737,8 @@ class DescribeCcnAttachedInstancesResponse extends  AbstractModel {
         this.TotalCount = null;
 
         /**
-         * 关联实例列表
-         * @type {Array.<CcnInstance> || null}
+         * 关联实例列表。
+         * @type {Array.<CcnAttachedInstance> || null}
          */
         this.InstanceSet = null;
 
@@ -6706,7 +6762,7 @@ class DescribeCcnAttachedInstancesResponse extends  AbstractModel {
         if (params.InstanceSet) {
             this.InstanceSet = new Array();
             for (let z in params.InstanceSet) {
-                let obj = new CcnInstance();
+                let obj = new CcnAttachedInstance();
                 obj.deserialize(params.InstanceSet[z]);
                 this.InstanceSet.push(obj);
             }
@@ -6857,6 +6913,49 @@ class CreateAddressTemplateResponse extends  AbstractModel {
             this.AddressTemplate = obj;
         }
         this.RequestId = params.RequestId || null;
+
+    }
+}
+
+/**
+ * AcceptAttachCcnInstances请求参数结构体
+ * @class
+ */
+class AcceptAttachCcnInstancesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * CCN实例ID。形如：ccn-f49l6u0z。
+         * @type {string || null}
+         */
+        this.CcnId = null;
+
+        /**
+         * 接受关联实例列表。
+         * @type {Array.<CcnInstance> || null}
+         */
+        this.Instances = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CcnId = params.CcnId || null;
+
+        if (params.Instances) {
+            this.Instances = new Array();
+            for (let z in params.Instances) {
+                let obj = new CcnInstance();
+                obj.deserialize(params.Instances[z]);
+                this.Instances.push(obj);
+            }
+        }
 
     }
 }
@@ -7106,6 +7205,56 @@ class DescribeRouteTablesRequest extends  AbstractModel {
 }
 
 /**
+ * ResetAttachCcnInstances请求参数结构体
+ * @class
+ */
+class ResetAttachCcnInstancesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * CCN实例ID。形如：ccn-f49l6u0z。
+         * @type {string || null}
+         */
+        this.CcnId = null;
+
+        /**
+         * CCN所属UIN（根账号）。
+         * @type {string || null}
+         */
+        this.CcnUin = null;
+
+        /**
+         * 重新申请关联网络实例列表。
+         * @type {Array.<CcnInstance> || null}
+         */
+        this.Instances = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CcnId = params.CcnId || null;
+        this.CcnUin = params.CcnUin || null;
+
+        if (params.Instances) {
+            this.Instances = new Array();
+            for (let z in params.Instances) {
+                let obj = new CcnInstance();
+                obj.deserialize(params.Instances[z]);
+                this.Instances.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * ModifyRouteTableAttribute请求参数结构体
  * @class
  */
@@ -7155,7 +7304,14 @@ class DescribeVpnGatewaysRequest extends  AbstractModel {
         this.VpnGatewayIds = null;
 
         /**
-         * 过滤器对象属性
+         * 过滤条件，参数不支持同时指定VpnGatewayIds和Filters。
+<li>vpc-id - String - （过滤条件）VPC实例ID形如：vpc-f49l6u0z。</li>
+<li>vpn-gateway-id - String - （过滤条件）VPN实例ID形如：vpngw-5aluhh9t。</li>
+<li>vpn-gateway-name - String - （过滤条件）VPN实例名称。</li>
+<li>type - String - （过滤条件）VPN网关类型：'IPSEC', 'SSL'。</li>
+<li>public-ip-address- String - （过滤条件）公网IP。</li>
+<li>renew-flag - String - （过滤条件）网关续费类型，手动续费：'NOTIFY_AND_MANUAL_RENEW'、自动续费：'NOTIFY_AND_AUTO_RENEW'。</li>
+<li>zone - String - （过滤条件）VPN所在可用区，形如：ap-guangzhou-2。</li>
          * @type {Array.<FilterObject> || null}
          */
         this.Filters = null;
@@ -7270,6 +7426,12 @@ class CreateVpnGatewayRequest extends  AbstractModel {
          */
         this.InstanceChargePrepaid = null;
 
+        /**
+         * 可用区，如：ap-guangzhou-2。
+         * @type {string || null}
+         */
+        this.Zone = null;
+
     }
 
     /**
@@ -7289,6 +7451,7 @@ class CreateVpnGatewayRequest extends  AbstractModel {
             obj.deserialize(params.InstanceChargePrepaid)
             this.InstanceChargePrepaid = obj;
         }
+        this.Zone = params.Zone || null;
 
     }
 }
@@ -8711,6 +8874,65 @@ class DeleteCcnRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeSecurityGroups请求参数结构体
+ * @class
+ */
+class DescribeSecurityGroupsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 安全组实例ID，例如：sg-33ocnj9n，可通过DescribeSecurityGroups获取。每次请求的实例的上限为100。参数不支持同时指定SecurityGroupIds和Filters。
+         * @type {Array.<string> || null}
+         */
+        this.SecurityGroupIds = null;
+
+        /**
+         * 过滤条件，参数不支持同时指定SecurityGroupIds和Filters。
+<li>project-id - Integer - （过滤条件）项目id。</li>
+<li>security-group-name - String - （过滤条件）安全组名称。</li>
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * 偏移量。
+         * @type {string || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 返回数量。
+         * @type {string || null}
+         */
+        this.Limit = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SecurityGroupIds = params.SecurityGroupIds || null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.Offset = params.Offset || null;
+        this.Limit = params.Limit || null;
+
+    }
+}
+
+/**
  * DescribeClassicLinkInstances请求参数结构体
  * @class
  */
@@ -9072,38 +9294,24 @@ class AssignPrivateIpAddressesResponse extends  AbstractModel {
 }
 
 /**
- * DescribeSecurityGroups请求参数结构体
+ * DescribeBandwidthPackageQuota返回参数结构体
  * @class
  */
-class DescribeSecurityGroupsRequest extends  AbstractModel {
+class DescribeBandwidthPackageQuotaResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 安全组实例ID，例如：sg-33ocnj9n，可通过DescribeSecurityGroups获取。每次请求的实例的上限为100。参数不支持同时指定SecurityGroupIds和Filters。
-         * @type {Array.<string> || null}
+         * 带宽包配额数据结构
+         * @type {Array.<Quota> || null}
          */
-        this.SecurityGroupIds = null;
+        this.QuotaSet = null;
 
         /**
-         * 过滤条件，参数不支持同时指定SecurityGroupIds和Filters。
-<li>project-id - Integer - （过滤条件）项目id。</li>
-<li>security-group-name - String - （过滤条件）安全组名称。</li>
-         * @type {Array.<Filter> || null}
-         */
-        this.Filters = null;
-
-        /**
-         * 偏移量。
+         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
          * @type {string || null}
          */
-        this.Offset = null;
-
-        /**
-         * 返回数量。
-         * @type {string || null}
-         */
-        this.Limit = null;
+        this.RequestId = null;
 
     }
 
@@ -9114,18 +9322,16 @@ class DescribeSecurityGroupsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.SecurityGroupIds = params.SecurityGroupIds || null;
 
-        if (params.Filters) {
-            this.Filters = new Array();
-            for (let z in params.Filters) {
-                let obj = new Filter();
-                obj.deserialize(params.Filters[z]);
-                this.Filters.push(obj);
+        if (params.QuotaSet) {
+            this.QuotaSet = new Array();
+            for (let z in params.QuotaSet) {
+                let obj = new Quota();
+                obj.deserialize(params.QuotaSet[z]);
+                this.QuotaSet.push(obj);
             }
         }
-        this.Offset = params.Offset || null;
-        this.Limit = params.Limit || null;
+        this.RequestId = params.RequestId || null;
 
     }
 }
@@ -9567,6 +9773,49 @@ class DeleteCustomerGatewayRequest extends  AbstractModel {
 }
 
 /**
+ * RejectAttachCcnInstances请求参数结构体
+ * @class
+ */
+class RejectAttachCcnInstancesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * CCN实例ID。形如：ccn-f49l6u0z。
+         * @type {string || null}
+         */
+        this.CcnId = null;
+
+        /**
+         * 拒绝关联实例列表。
+         * @type {Array.<CcnInstance> || null}
+         */
+        this.Instances = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CcnId = params.CcnId || null;
+
+        if (params.Instances) {
+            this.Instances = new Array();
+            for (let z in params.Instances) {
+                let obj = new CcnInstance();
+                obj.deserialize(params.Instances[z]);
+                this.Instances.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * 专线网关对象。
  * @class
  */
@@ -9960,6 +10209,12 @@ class Address extends  AbstractModel {
          */
         this.AddressType = null;
 
+        /**
+         * eip是否在解绑后自动释放。true表示eip将会在解绑后自动释放，false表示eip在解绑后不会自动释放
+         * @type {boolean || null}
+         */
+        this.CascadeRelease = null;
+
     }
 
     /**
@@ -9981,6 +10236,7 @@ class Address extends  AbstractModel {
         this.IsBlocked = params.IsBlocked || null;
         this.IsEipDirectConnection = params.IsEipDirectConnection || null;
         this.AddressType = params.AddressType || null;
+        this.CascadeRelease = params.CascadeRelease || null;
 
     }
 }
@@ -11108,12 +11364,6 @@ class DescribeCcnAttachedInstancesRequest extends  AbstractModel {
         super();
 
         /**
-         * CCN实例ID。形如：ccn-f49l6u0z。
-         * @type {string || null}
-         */
-        this.CcnId = null;
-
-        /**
          * 偏移量
          * @type {number || null}
          */
@@ -11125,6 +11375,22 @@ class DescribeCcnAttachedInstancesRequest extends  AbstractModel {
          */
         this.Limit = null;
 
+        /**
+         * 过滤条件：
+<li>ccn-id - String -（过滤条件）CCN实例ID。</li>
+<li>instance-type - String -（过滤条件）关联实例类型。</li>
+<li>instance-region - String -（过滤条件）关联实例所属地域。</li>
+<li>instance-id - String -（过滤条件）关联实例实例ID。</li>
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * 云联网实例ID
+         * @type {string || null}
+         */
+        this.CcnId = null;
+
     }
 
     /**
@@ -11134,9 +11400,18 @@ class DescribeCcnAttachedInstancesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.CcnId = params.CcnId || null;
         this.Offset = params.Offset || null;
         this.Limit = params.Limit || null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.CcnId = params.CcnId || null;
 
     }
 }
@@ -11316,24 +11591,77 @@ class CreateAddressTemplateGroupResponse extends  AbstractModel {
 }
 
 /**
- * DescribeBandwidthPackageQuota返回参数结构体
+ * 云联网（CCN）关联实例（Instance）对象
  * @class
  */
-class DescribeBandwidthPackageQuotaResponse extends  AbstractModel {
+class CcnAttachedInstance extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 带宽包配额数据结构
-         * @type {Array.<Quota> || null}
-         */
-        this.QuotaSet = null;
-
-        /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 云联网实例ID
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.CcnId = null;
+
+        /**
+         * 关联实例类型，可选值：VPC、DIRECTCONNECT
+         * @type {string || null}
+         */
+        this.InstanceType = null;
+
+        /**
+         * 关联实例ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 关联实例名称
+         * @type {string || null}
+         */
+        this.InstanceName = null;
+
+        /**
+         * 关联实例所属大区，例如：ap-guangzhou
+         * @type {string || null}
+         */
+        this.InstanceRegion = null;
+
+        /**
+         * 关联实例所属UIN（根账号）
+         * @type {string || null}
+         */
+        this.InstanceUin = null;
+
+        /**
+         * 关联实例CIDR
+         * @type {Array.<string> || null}
+         */
+        this.CidrBlock = null;
+
+        /**
+         * 关联实例状态：
+PENDING：申请中
+ACTIVE：已连接
+EXPIRED：已过期
+REJECTED：已拒绝
+DELETED：已删除
+         * @type {string || null}
+         */
+        this.State = null;
+
+        /**
+         * 关联时间
+         * @type {string || null}
+         */
+        this.AttachedTime = null;
+
+        /**
+         * 云联网所属UIN（根账号）
+         * @type {string || null}
+         */
+        this.CcnUin = null;
 
     }
 
@@ -11344,16 +11672,16 @@ class DescribeBandwidthPackageQuotaResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.QuotaSet) {
-            this.QuotaSet = new Array();
-            for (let z in params.QuotaSet) {
-                let obj = new Quota();
-                obj.deserialize(params.QuotaSet[z]);
-                this.QuotaSet.push(obj);
-            }
-        }
-        this.RequestId = params.RequestId || null;
+        this.CcnId = params.CcnId || null;
+        this.InstanceType = params.InstanceType || null;
+        this.InstanceId = params.InstanceId || null;
+        this.InstanceName = params.InstanceName || null;
+        this.InstanceRegion = params.InstanceRegion || null;
+        this.InstanceUin = params.InstanceUin || null;
+        this.CidrBlock = params.CidrBlock || null;
+        this.State = params.State || null;
+        this.AttachedTime = params.AttachedTime || null;
+        this.CcnUin = params.CcnUin || null;
 
     }
 }
@@ -11431,6 +11759,34 @@ class SecurityPolicyDatabase extends  AbstractModel {
         }
         this.LocalCidrBlock = params.LocalCidrBlock || null;
         this.RemoteCidrBlock = params.RemoteCidrBlock || null;
+
+    }
+}
+
+/**
+ * AcceptAttachCcnInstances返回参数结构体
+ * @class
+ */
+class AcceptAttachCcnInstancesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = params.RequestId || null;
 
     }
 }
@@ -11562,6 +11918,7 @@ module.exports = {
     CreateServiceTemplateRequest: CreateServiceTemplateRequest,
     DeleteSecurityGroupPoliciesRequest: DeleteSecurityGroupPoliciesRequest,
     VpnConnection: VpnConnection,
+    RejectAttachCcnInstancesResponse: RejectAttachCcnInstancesResponse,
     CreateDirectConnectGatewayRequest: CreateDirectConnectGatewayRequest,
     DescribeCcnsRequest: DescribeCcnsRequest,
     TransformAddressResponse: TransformAddressResponse,
@@ -11604,6 +11961,7 @@ module.exports = {
     ResetVpnGatewayInternetMaxBandwidthRequest: ResetVpnGatewayInternetMaxBandwidthRequest,
     RenewVpnGatewayRequest: RenewVpnGatewayRequest,
     SecurityGroupPolicySet: SecurityGroupPolicySet,
+    ResetAttachCcnInstancesResponse: ResetAttachCcnInstancesResponse,
     AllocateAddressesRequest: AllocateAddressesRequest,
     NetworkInterfaceAttachment: NetworkInterfaceAttachment,
     RouteTable: RouteTable,
@@ -11705,12 +12063,14 @@ module.exports = {
     AssociateAddressRequest: AssociateAddressRequest,
     ModifySecurityGroupPoliciesResponse: ModifySecurityGroupPoliciesResponse,
     CreateAddressTemplateResponse: CreateAddressTemplateResponse,
+    AcceptAttachCcnInstancesRequest: AcceptAttachCcnInstancesRequest,
     DeleteAddressTemplateGroupRequest: DeleteAddressTemplateGroupRequest,
     AttachNetworkInterfaceResponse: AttachNetworkInterfaceResponse,
     ServiceTemplateSpecification: ServiceTemplateSpecification,
     DescribeRouteConflictsResponse: DescribeRouteConflictsResponse,
     CreateBandwidthPackageRequest: CreateBandwidthPackageRequest,
     DescribeRouteTablesRequest: DescribeRouteTablesRequest,
+    ResetAttachCcnInstancesRequest: ResetAttachCcnInstancesRequest,
     ModifyRouteTableAttributeRequest: ModifyRouteTableAttributeRequest,
     DescribeVpnGatewaysRequest: DescribeVpnGatewaysRequest,
     ClassicLinkInstance: ClassicLinkInstance,
@@ -11751,6 +12111,7 @@ module.exports = {
     CreateSecurityGroupRequest: CreateSecurityGroupRequest,
     ModifyCcnAttributeResponse: ModifyCcnAttributeResponse,
     DeleteCcnRequest: DeleteCcnRequest,
+    DescribeSecurityGroupsRequest: DescribeSecurityGroupsRequest,
     DescribeClassicLinkInstancesRequest: DescribeClassicLinkInstancesRequest,
     CreateServiceTemplateResponse: CreateServiceTemplateResponse,
     DeleteNetworkInterfaceResponse: DeleteNetworkInterfaceResponse,
@@ -11760,7 +12121,7 @@ module.exports = {
     DescribeAccountAttributesResponse: DescribeAccountAttributesResponse,
     DescribeCustomerGatewayVendorsResponse: DescribeCustomerGatewayVendorsResponse,
     AssignPrivateIpAddressesResponse: AssignPrivateIpAddressesResponse,
-    DescribeSecurityGroupsRequest: DescribeSecurityGroupsRequest,
+    DescribeBandwidthPackageQuotaResponse: DescribeBandwidthPackageQuotaResponse,
     DeleteServiceTemplateGroupResponse: DeleteServiceTemplateGroupResponse,
     CustomerGatewayVendor: CustomerGatewayVendor,
     DescribeAddressTemplatesRequest: DescribeAddressTemplatesRequest,
@@ -11773,6 +12134,7 @@ module.exports = {
     InquiryPriceCreateVpnGatewayRequest: InquiryPriceCreateVpnGatewayRequest,
     DescribeVpnConnectionsResponse: DescribeVpnConnectionsResponse,
     DeleteCustomerGatewayRequest: DeleteCustomerGatewayRequest,
+    RejectAttachCcnInstancesRequest: RejectAttachCcnInstancesRequest,
     DirectConnectGateway: DirectConnectGateway,
     DeleteVpnGatewayResponse: DeleteVpnGatewayResponse,
     DescribeAddressTemplatesResponse: DescribeAddressTemplatesResponse,
@@ -11812,9 +12174,10 @@ module.exports = {
     ModifyAddressTemplateAttributeRequest: ModifyAddressTemplateAttributeRequest,
     ModifySecurityGroupAttributeRequest: ModifySecurityGroupAttributeRequest,
     CreateAddressTemplateGroupResponse: CreateAddressTemplateGroupResponse,
-    DescribeBandwidthPackageQuotaResponse: DescribeBandwidthPackageQuotaResponse,
+    CcnAttachedInstance: CcnAttachedInstance,
     RemoveBandwidthPackageResourcesRequest: RemoveBandwidthPackageResourcesRequest,
     SecurityPolicyDatabase: SecurityPolicyDatabase,
+    AcceptAttachCcnInstancesResponse: AcceptAttachCcnInstancesResponse,
     DeleteServiceTemplateGroupRequest: DeleteServiceTemplateGroupRequest,
     DescribeRouteConflictsRequest: DescribeRouteConflictsRequest,
     Price: Price,
