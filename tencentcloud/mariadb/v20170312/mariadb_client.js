@@ -33,6 +33,7 @@ const ResourceUsageMonitorSet = models.ResourceUsageMonitorSet;
 const ModifyLogFileRetentionPeriodRequest = models.ModifyLogFileRetentionPeriodRequest;
 const PerformanceMonitorSet = models.PerformanceMonitorSet;
 const DescribeFlowResponse = models.DescribeFlowResponse;
+const CloneAccountResponse = models.CloneAccountResponse;
 const ZoneChooseInfo = models.ZoneChooseInfo;
 const ModifyAccountDescriptionResponse = models.ModifyAccountDescriptionResponse;
 const DescribeDBResourceUsageRequest = models.DescribeDBResourceUsageRequest;
@@ -44,10 +45,12 @@ const DescribeDBResourceUsageResponse = models.DescribeDBResourceUsageResponse;
 const DescribeOrdersResponse = models.DescribeOrdersResponse;
 const ResetAccountPasswordRequest = models.ResetAccountPasswordRequest;
 const CopyAccountPrivilegesResponse = models.CopyAccountPrivilegesResponse;
+const CloneAccountRequest = models.CloneAccountRequest;
 const ParamModifyResult = models.ParamModifyResult;
 const DescribeDBInstancesRequest = models.DescribeDBInstancesRequest;
 const DescribeSaleInfoRequest = models.DescribeSaleInfoRequest;
 const RenewDBInstanceRequest = models.RenewDBInstanceRequest;
+const DescribeSqlLogsRequest = models.DescribeSqlLogsRequest;
 const ResetAccountPasswordResponse = models.ResetAccountPasswordResponse;
 const DescribePriceRequest = models.DescribePriceRequest;
 const CreateDBInstanceResponse = models.CreateDBInstanceResponse;
@@ -63,7 +66,7 @@ const ModifyDBParametersResponse = models.ModifyDBParametersResponse;
 const CopyAccountPrivilegesRequest = models.CopyAccountPrivilegesRequest;
 const OpenDBExtranetAccessResponse = models.OpenDBExtranetAccessResponse;
 const ModifyDBInstanceNameRequest = models.ModifyDBInstanceNameRequest;
-const DeleteAccountRequest = models.DeleteAccountRequest;
+const ModifyBackupTimeRequest = models.ModifyBackupTimeRequest;
 const UpgradeDBInstanceRequest = models.UpgradeDBInstanceRequest;
 const DescribeUpgradePriceResponse = models.DescribeUpgradePriceResponse;
 const MonitorIntData = models.MonitorIntData;
@@ -84,7 +87,8 @@ const RenewDBInstanceResponse = models.RenewDBInstanceResponse;
 const DescribeOrdersRequest = models.DescribeOrdersRequest;
 const DescribeDBLogFilesResponse = models.DescribeDBLogFilesResponse;
 const CloseDBExtranetAccessRequest = models.CloseDBExtranetAccessRequest;
-const ModifyBackupTimeRequest = models.ModifyBackupTimeRequest;
+const DescribeSqlLogsResponse = models.DescribeSqlLogsResponse;
+const DeleteAccountRequest = models.DeleteAccountRequest;
 const InstanceSpec = models.InstanceSpec;
 const DescribeFlowRequest = models.DescribeFlowRequest;
 const DescribeDBPerformanceResponse = models.DescribeDBPerformanceResponse;
@@ -99,6 +103,7 @@ const DescribeDBResourceUsageDetailsRequest = models.DescribeDBResourceUsageDeta
 const DBAccount = models.DBAccount;
 const DescribeAccountPrivilegesRequest = models.DescribeAccountPrivilegesRequest;
 const DescribeDBPerformanceDetailsResponse = models.DescribeDBPerformanceDetailsResponse;
+const SqlLogItem = models.SqlLogItem;
 const DescribeAccountsResponse = models.DescribeAccountsResponse;
 const DescribeDBSlowLogsResponse = models.DescribeDBSlowLogsResponse;
 const UpgradeDBInstanceResponse = models.UpgradeDBInstanceResponse;
@@ -223,14 +228,14 @@ class MariadbClient extends AbstractClient {
     }
 
     /**
-     * 本接口(ModifyLogFileRetentionPeriod)用于修改数据库备份日志保存天数。
-     * @param {ModifyLogFileRetentionPeriodRequest} req
-     * @param {function(string, ModifyLogFileRetentionPeriodResponse):void} cb
+     * 本接口（DescribeSqlLogs）用于获取实例SQL日志。
+     * @param {DescribeSqlLogsRequest} req
+     * @param {function(string, DescribeSqlLogsResponse):void} cb
      * @public
      */
-    ModifyLogFileRetentionPeriod(req, cb) {
-        let resp = new ModifyLogFileRetentionPeriodResponse();
-        this.request("ModifyLogFileRetentionPeriod", req, resp, cb);
+    DescribeSqlLogs(req, cb) {
+        let resp = new DescribeSqlLogsResponse();
+        this.request("DescribeSqlLogs", req, resp, cb);
     }
 
     /**
@@ -479,6 +484,17 @@ class MariadbClient extends AbstractClient {
     }
 
     /**
+     * 本接口（CloneAccount）用于克隆实例账户。
+     * @param {CloneAccountRequest} req
+     * @param {function(string, CloneAccountResponse):void} cb
+     * @public
+     */
+    CloneAccount(req, cb) {
+        let resp = new CloneAccountResponse();
+        this.request("CloneAccount", req, resp, cb);
+    }
+
+    /**
      * 本接口(UpgradeDBInstance)用于扩容云数据库实例。本接口完成下单和支付两个动作，如果发生支付失败的错误，调用用户账户相关接口中的支付订单接口（PayDeals）重新支付即可。
      * @param {UpgradeDBInstanceRequest} req
      * @param {function(string, UpgradeDBInstanceResponse):void} cb
@@ -520,6 +536,17 @@ class MariadbClient extends AbstractClient {
     DescribeDBResourceUsage(req, cb) {
         let resp = new DescribeDBResourceUsageResponse();
         this.request("DescribeDBResourceUsage", req, resp, cb);
+    }
+
+    /**
+     * 本接口(ModifyLogFileRetentionPeriod)用于修改数据库备份日志保存天数。
+     * @param {ModifyLogFileRetentionPeriodRequest} req
+     * @param {function(string, ModifyLogFileRetentionPeriodResponse):void} cb
+     * @public
+     */
+    ModifyLogFileRetentionPeriod(req, cb) {
+        let resp = new ModifyLogFileRetentionPeriodResponse();
+        this.request("ModifyLogFileRetentionPeriod", req, resp, cb);
     }
 
 

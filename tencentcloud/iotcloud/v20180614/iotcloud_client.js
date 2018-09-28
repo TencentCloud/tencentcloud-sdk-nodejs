@@ -41,6 +41,7 @@ const ProductMetadata = models.ProductMetadata;
 const DescribeTasksResponse = models.DescribeTasksResponse;
 const CreateProductResponse = models.CreateProductResponse;
 const GetDeviceShadowRequest = models.GetDeviceShadowRequest;
+const Filter = models.Filter;
 const DescribeDevicesRequest = models.DescribeDevicesRequest;
 const CreateTaskRequest = models.CreateTaskRequest;
 const DescribeMultiDevTaskRequest = models.DescribeMultiDevTaskRequest;

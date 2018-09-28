@@ -30,6 +30,7 @@ const DescribeDBSyncModeResponse = models.DescribeDBSyncModeResponse;
 const DescribeDCDBUpgradePriceResponse = models.DescribeDCDBUpgradePriceResponse;
 const CreateAccountRequest = models.CreateAccountRequest;
 const DescribeDBParametersResponse = models.DescribeDBParametersResponse;
+const CloneAccountResponse = models.CloneAccountResponse;
 const ModifyAccountDescriptionResponse = models.ModifyAccountDescriptionResponse;
 const CreateDCDBInstanceResponse = models.CreateDCDBInstanceResponse;
 const ParamConstraint = models.ParamConstraint;
@@ -39,10 +40,12 @@ const DescribeDBLogFilesRequest = models.DescribeDBLogFilesRequest;
 const DescribeOrdersResponse = models.DescribeOrdersResponse;
 const ResetAccountPasswordRequest = models.ResetAccountPasswordRequest;
 const CopyAccountPrivilegesResponse = models.CopyAccountPrivilegesResponse;
+const CloneAccountRequest = models.CloneAccountRequest;
 const DescribeDCDBRenewalPriceRequest = models.DescribeDCDBRenewalPriceRequest;
 const ParamModifyResult = models.ParamModifyResult;
 const DescribeDCDBPriceRequest = models.DescribeDCDBPriceRequest;
 const DatabaseFunction = models.DatabaseFunction;
+const DescribeSqlLogsRequest = models.DescribeSqlLogsRequest;
 const ResetAccountPasswordResponse = models.ResetAccountPasswordResponse;
 const DescribeDCDBSaleInfoRequest = models.DescribeDCDBSaleInfoRequest;
 const ExpandShardConfig = models.ExpandShardConfig;
@@ -82,6 +85,7 @@ const DescribeOrdersRequest = models.DescribeOrdersRequest;
 const DescribeDBLogFilesResponse = models.DescribeDBLogFilesResponse;
 const CloseDBExtranetAccessRequest = models.CloseDBExtranetAccessRequest;
 const InitDCDBInstancesRequest = models.InitDCDBInstancesRequest;
+const DescribeSqlLogsResponse = models.DescribeSqlLogsResponse;
 const DeleteAccountRequest = models.DeleteAccountRequest;
 const DescribeDCDBInstancesResponse = models.DescribeDCDBInstancesResponse;
 const CreateDCDBInstanceRequest = models.CreateDCDBInstanceRequest;
@@ -98,6 +102,7 @@ const LogFileInfo = models.LogFileInfo;
 const DBAccount = models.DBAccount;
 const DescribeDatabaseTableResponse = models.DescribeDatabaseTableResponse;
 const DescribeAccountPrivilegesRequest = models.DescribeAccountPrivilegesRequest;
+const SqlLogItem = models.SqlLogItem;
 const DescribeAccountsResponse = models.DescribeAccountsResponse;
 const DescribeDCDBInstancesRequest = models.DescribeDCDBInstancesRequest;
 const ModifyDBInstancesProjectRequest = models.ModifyDBInstancesProjectRequest;
@@ -161,15 +166,14 @@ class DcdbClient extends AbstractClient {
     }
 
     /**
-     * 查询云数据库实例列表，支持通过项目ID、实例ID、内网地址、实例名称等来筛选实例。
-如果不指定任何筛选条件，则默认返回10条实例记录，单次请求最多支持返回100条实例记录。
-     * @param {DescribeDCDBInstancesRequest} req
-     * @param {function(string, DescribeDCDBInstancesResponse):void} cb
+     * 本接口（DescribeDCDBUpgradePrice）用于查询升级分布式数据库实例价格。
+     * @param {DescribeDCDBUpgradePriceRequest} req
+     * @param {function(string, DescribeDCDBUpgradePriceResponse):void} cb
      * @public
      */
-    DescribeDCDBInstances(req, cb) {
-        let resp = new DescribeDCDBInstancesResponse();
-        this.request("DescribeDCDBInstances", req, resp, cb);
+    DescribeDCDBUpgradePrice(req, cb) {
+        let resp = new DescribeDCDBUpgradePriceResponse();
+        this.request("DescribeDCDBUpgradePrice", req, resp, cb);
     }
 
     /**
@@ -241,6 +245,28 @@ class DcdbClient extends AbstractClient {
     }
 
     /**
+     * 本接口(InitDCDBInstances)用于初始化云数据库实例，包括设置默认字符集、表名大小写敏感等。
+     * @param {InitDCDBInstancesRequest} req
+     * @param {function(string, InitDCDBInstancesResponse):void} cb
+     * @public
+     */
+    InitDCDBInstances(req, cb) {
+        let resp = new InitDCDBInstancesResponse();
+        this.request("InitDCDBInstances", req, resp, cb);
+    }
+
+    /**
+     * 本接口（DescribeAccounts）用于查询指定云数据库实例的账号列表。
+     * @param {DescribeAccountsRequest} req
+     * @param {function(string, DescribeAccountsResponse):void} cb
+     * @public
+     */
+    DescribeAccounts(req, cb) {
+        let resp = new DescribeAccountsResponse();
+        this.request("DescribeAccounts", req, resp, cb);
+    }
+
+    /**
      * 本接口（GrantAccountPrivileges）用于给云数据库账号赋权。
 注意：相同用户名，不同Host是不同的账号。
      * @param {GrantAccountPrivilegesRequest} req
@@ -294,6 +320,17 @@ class DcdbClient extends AbstractClient {
     ModifyDBInstancesProject(req, cb) {
         let resp = new ModifyDBInstancesProjectResponse();
         this.request("ModifyDBInstancesProject", req, resp, cb);
+    }
+
+    /**
+     * 本接口（DescribeSqlLogs）用于获取实例SQL日志。
+     * @param {DescribeSqlLogsRequest} req
+     * @param {function(string, DescribeSqlLogsResponse):void} cb
+     * @public
+     */
+    DescribeSqlLogs(req, cb) {
+        let resp = new DescribeSqlLogsResponse();
+        this.request("DescribeSqlLogs", req, resp, cb);
     }
 
     /**
@@ -363,14 +400,15 @@ class DcdbClient extends AbstractClient {
     }
 
     /**
-     * 本接口（DescribeAccounts）用于查询指定云数据库实例的账号列表。
-     * @param {DescribeAccountsRequest} req
-     * @param {function(string, DescribeAccountsResponse):void} cb
+     * 查询云数据库实例列表，支持通过项目ID、实例ID、内网地址、实例名称等来筛选实例。
+如果不指定任何筛选条件，则默认返回10条实例记录，单次请求最多支持返回100条实例记录。
+     * @param {DescribeDCDBInstancesRequest} req
+     * @param {function(string, DescribeDCDBInstancesResponse):void} cb
      * @public
      */
-    DescribeAccounts(req, cb) {
-        let resp = new DescribeAccountsResponse();
-        this.request("DescribeAccounts", req, resp, cb);
+    DescribeDCDBInstances(req, cb) {
+        let resp = new DescribeDCDBInstancesResponse();
+        this.request("DescribeDCDBInstances", req, resp, cb);
     }
 
     /**
@@ -430,25 +468,14 @@ class DcdbClient extends AbstractClient {
     }
 
     /**
-     * 本接口（DescribeDCDBUpgradePrice）用于查询升级分布式数据库实例价格。
-     * @param {DescribeDCDBUpgradePriceRequest} req
-     * @param {function(string, DescribeDCDBUpgradePriceResponse):void} cb
+     * 本接口（CloneAccount）用于克隆实例账户。
+     * @param {CloneAccountRequest} req
+     * @param {function(string, CloneAccountResponse):void} cb
      * @public
      */
-    DescribeDCDBUpgradePrice(req, cb) {
-        let resp = new DescribeDCDBUpgradePriceResponse();
-        this.request("DescribeDCDBUpgradePrice", req, resp, cb);
-    }
-
-    /**
-     * 本接口(InitDCDBInstances)用于初始化云数据库实例，包括设置默认字符集、表名大小写敏感等。
-     * @param {InitDCDBInstancesRequest} req
-     * @param {function(string, InitDCDBInstancesResponse):void} cb
-     * @public
-     */
-    InitDCDBInstances(req, cb) {
-        let resp = new InitDCDBInstancesResponse();
-        this.request("InitDCDBInstances", req, resp, cb);
+    CloneAccount(req, cb) {
+        let resp = new CloneAccountResponse();
+        this.request("CloneAccount", req, resp, cb);
     }
 
     /**
