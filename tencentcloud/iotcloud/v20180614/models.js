@@ -784,41 +784,6 @@ class ProductInfo extends  AbstractModel {
 }
 
 /**
- * GetDeviceShadow返回参数结构体
- * @class
- */
-class GetDeviceShadowResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 设备影子数据
-         * @type {string || null}
-         */
-        this.Data = null;
-
-        /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Data = params.Data || null;
-        this.RequestId = params.RequestId || null;
-
-    }
-}
-
-/**
  * DescribeTask请求参数结构体
  * @class
  */
@@ -1047,41 +1012,6 @@ class CreateProductResponse extends  AbstractModel {
             this.ProductProperties = obj;
         }
         this.RequestId = params.RequestId || null;
-
-    }
-}
-
-/**
- * GetDeviceShadow请求参数结构体
- * @class
- */
-class GetDeviceShadowRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 产品 ID
-         * @type {string || null}
-         */
-        this.ProductID = null;
-
-        /**
-         * 设备名称。命名规则：[a-zA-Z0-9:_-]{1,48}
-         * @type {string || null}
-         */
-        this.DeviceName = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.ProductID = params.ProductID || null;
-        this.DeviceName = params.DeviceName || null;
 
     }
 }
@@ -1784,6 +1714,12 @@ class DeviceInfo extends  AbstractModel {
          */
         this.LoraDevEui = null;
 
+        /**
+         * LoRa设备的Mote type
+         * @type {number || null}
+         */
+        this.LoraMoteType = null;
+
     }
 
     /**
@@ -1815,6 +1751,7 @@ class DeviceInfo extends  AbstractModel {
         this.ConnIP = params.ConnIP || null;
         this.LastUpdateTime = params.LastUpdateTime || null;
         this.LoraDevEui = params.LoraDevEui || null;
+        this.LoraMoteType = params.LoraMoteType || null;
 
     }
 }
@@ -2181,14 +2118,12 @@ module.exports = {
     DescribeDevicesResponse: DescribeDevicesResponse,
     DeviceTag: DeviceTag,
     ProductInfo: ProductInfo,
-    GetDeviceShadowResponse: GetDeviceShadowResponse,
     DescribeTaskRequest: DescribeTaskRequest,
     Task: Task,
     PublishMessageResponse: PublishMessageResponse,
     ProductMetadata: ProductMetadata,
     DescribeTasksResponse: DescribeTasksResponse,
     CreateProductResponse: CreateProductResponse,
-    GetDeviceShadowRequest: GetDeviceShadowRequest,
     Filter: Filter,
     DescribeDevicesRequest: DescribeDevicesRequest,
     CreateTaskRequest: CreateTaskRequest,

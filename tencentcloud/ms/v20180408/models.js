@@ -282,7 +282,7 @@ class CreateResourceInstancesRequest extends  AbstractModel {
         super();
 
         /**
-         * 资源类型id。
+         * 资源类型id。13624：加固专业版。
          * @type {number || null}
          */
         this.Pid = null;
@@ -1371,13 +1371,13 @@ class ServiceInfo extends  AbstractModel {
         super();
 
         /**
-         * 服务版本，基础版basic,专业版Professional
+         * 服务版本，基础版basic，专业版professional，企业版enterprise
          * @type {string || null}
          */
         this.ServiceEdition = null;
 
         /**
-         * 任务处理完成后的反向通知回调地址,通知为POST请求，post信息{ItemId:"xxxduuyt-ugusg"}
+         * 任务处理完成后的反向通知回调地址,通知为POST请求，post包体数据示例{"Response":{"ItemId":"4cdad8fb86f036b06bccb3f58971c306","ShieldCode":0,"ShieldMd5":"78701576793c4a5f04e1c9660de0aa0b","ShieldSize":11997354,"TaskStatus":1,"TaskTime":1539148141}}，调用方需要返回如下信息，{"Result":"ok","Reason":"xxxxx"}，如果Result字段值不等于ok会继续回调。
          * @type {string || null}
          */
         this.CallbackUrl = null;
@@ -1554,7 +1554,7 @@ class DescribeResourceInstancesRequest extends  AbstractModel {
         super();
 
         /**
-         * 资源类别id数组
+         * 资源类别id数组，13624：加固专业版，12750：企业版。空数组表示返回全部资源。
          * @type {Array.<number> || null}
          */
         this.Pids = null;
@@ -1789,7 +1789,7 @@ class ShieldInfo extends  AbstractModel {
         this.ShieldMd5 = null;
 
         /**
-         * 加固后的APP下载地址
+         * 加固后的APP下载地址，该地址有效期为20分钟，请及时下载
          * @type {string || null}
          */
         this.AppUrl = null;
@@ -1807,7 +1807,7 @@ class ShieldInfo extends  AbstractModel {
         this.ItemId = null;
 
         /**
-         * 加固版本，basic基础版，professional专业版
+         * 加固版本，basic基础版，professional专业版，enterprise企业版
          * @type {string || null}
          */
         this.ServiceEdition = null;

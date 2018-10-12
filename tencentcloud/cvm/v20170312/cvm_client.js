@@ -54,7 +54,7 @@ const DescribeKeyPairsResponse = models.DescribeKeyPairsResponse;
 const Tag = models.Tag;
 const InternetChargeTypeConfig = models.InternetChargeTypeConfig;
 const DescribeImagesResponse = models.DescribeImagesResponse;
-const OsVersion = models.OsVersion;
+const ModifyInstancesVpcAttributeResponse = models.ModifyInstancesVpcAttributeResponse;
 const CreateKeyPairResponse = models.CreateKeyPairResponse;
 const ModifyKeyPairAttributeResponse = models.ModifyKeyPairAttributeResponse;
 const ModifyInstancesChargeTypeRequest = models.ModifyInstancesChargeTypeRequest;
@@ -122,6 +122,7 @@ const DescribeImageSharePermissionResponse = models.DescribeImageSharePermission
 const ModifyHostsAttributeResponse = models.ModifyHostsAttributeResponse;
 const DescribeDisasterRecoverGroupQuotaRequest = models.DescribeDisasterRecoverGroupQuotaRequest;
 const StartInstancesResponse = models.StartInstancesResponse;
+const ModifyInstancesVpcAttributeRequest = models.ModifyInstancesVpcAttributeRequest;
 const ChargePrepaid = models.ChargePrepaid;
 const DescribeInternetChargeTypeConfigsResponse = models.DescribeInternetChargeTypeConfigsResponse;
 const DescribeZoneInstanceConfigInfosRequest = models.DescribeZoneInstanceConfigInfosRequest;
@@ -141,6 +142,7 @@ const ImportImageResponse = models.ImportImageResponse;
 const ModifyDisasterRecoverGroupAttributeRequest = models.ModifyDisasterRecoverGroupAttributeRequest;
 const RebootInstancesResponse = models.RebootInstancesResponse;
 const InquiryPriceResetInstancesTypeResponse = models.InquiryPriceResetInstancesTypeResponse;
+const OsVersion = models.OsVersion;
 const ModifyImageAttributeResponse = models.ModifyImageAttributeResponse;
 const InquiryPriceRenewInstancesRequest = models.InquiryPriceRenewInstancesRequest;
 const DescribeInstancesRequest = models.DescribeInstancesRequest;
@@ -549,6 +551,19 @@ class CvmClient extends AbstractClient {
     TerminateInstances(req, cb) {
         let resp = new TerminateInstancesResponse();
         this.request("TerminateInstances", req, resp, cb);
+    }
+
+    /**
+     * 本接口(ModifyInstancesVpcAttribute)用于修改实例vpc属性，如私有网络ip。
+* 此操作默认会关闭实例，完成后再启动。
+* 当指定私有网络ID和子网ID（子网必须在实例所在的可用区）与指定实例所在私有网络不一致时，会将实例迁移至指定的私有网络的子网下。执行此操作前请确保指定的实例上没有绑定[弹性网卡](https://cloud.tencent.com/document/product/576)和[负载均衡](https://cloud.tencent.com/document/product/214)。
+     * @param {ModifyInstancesVpcAttributeRequest} req
+     * @param {function(string, ModifyInstancesVpcAttributeResponse):void} cb
+     * @public
+     */
+    ModifyInstancesVpcAttribute(req, cb) {
+        let resp = new ModifyInstancesVpcAttributeResponse();
+        this.request("ModifyInstancesVpcAttribute", req, resp, cb);
     }
 
     /**

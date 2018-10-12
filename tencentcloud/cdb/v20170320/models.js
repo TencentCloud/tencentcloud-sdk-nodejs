@@ -195,7 +195,7 @@ class CreateDBInstanceRequest extends  AbstractModel {
         this.MasterRegion = null;
 
         /**
-         * 安全组参数
+         * 安全组参数，可使用[查询项目安全组信息](https://cloud.tencent.com/document/api/236/15850)接口查询某个项目的安全组详情
          * @type {Array.<string> || null}
          */
         this.SecurityGroup = null;
@@ -1944,6 +1944,90 @@ class RoGroup extends  AbstractModel {
 }
 
 /**
+ * 实例参数的详细描述
+ * @class
+ */
+class ParameterDetail extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 参数名称
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 参数类型
+         * @type {string || null}
+         */
+        this.ParamType = null;
+
+        /**
+         * 参数默认值
+         * @type {string || null}
+         */
+        this.Default = null;
+
+        /**
+         * 参数描述
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * 参数当前值
+         * @type {string || null}
+         */
+        this.CurrentValue = null;
+
+        /**
+         * 修改参数后，是否需要重启数据库以使参数生效。可能的值包括：0-不需要重启；1-需要重启
+         * @type {number || null}
+         */
+        this.NeedReboot = null;
+
+        /**
+         * 参数允许的最大值
+         * @type {number || null}
+         */
+        this.Max = null;
+
+        /**
+         * 参数允许的最小值
+         * @type {number || null}
+         */
+        this.Min = null;
+
+        /**
+         * 参数的可选枚举值。如果为非枚举参数，则为空
+         * @type {Array.<string> || null}
+         */
+        this.EnumValue = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = params.Name || null;
+        this.ParamType = params.ParamType || null;
+        this.Default = params.Default || null;
+        this.Description = params.Description || null;
+        this.CurrentValue = params.CurrentValue || null;
+        this.NeedReboot = params.NeedReboot || null;
+        this.Max = params.Max || null;
+        this.Min = params.Min || null;
+        this.EnumValue = params.EnumValue || null;
+
+    }
+}
+
+/**
  * ModifyAccountDescription返回参数结构体
  * @class
  */
@@ -2515,7 +2599,7 @@ class CreateDBInstanceHourRequest extends  AbstractModel {
         this.Password = null;
 
         /**
-         * 参数列表，参数格式如ParamList.0.Name=auto_increment&ParamList.0.Value=1。可通过[查询参数列表](/document/product/236/6369)查询支持设置的参数
+         * 参数列表，参数格式如ParamList.0.Name=auto_increment_increment&ParamList.0.Value=1。可通过[查询参数列表](/document/product/236/6369)查询支持设置的参数
          * @type {Array.<ParamInfo> || null}
          */
         this.ParamList = null;
@@ -2545,7 +2629,7 @@ class CreateDBInstanceHourRequest extends  AbstractModel {
         this.BackupZone = null;
 
         /**
-         * 安全组参数
+         * 安全组参数，可使用[查询项目安全组信息](https://cloud.tencent.com/document/api/236/15850)接口查询某个项目的安全组详情
          * @type {Array.<string> || null}
          */
         this.SecurityGroup = null;
@@ -2557,7 +2641,7 @@ class CreateDBInstanceHourRequest extends  AbstractModel {
         this.RoGroup = null;
 
         /**
-         * 自动续费标记，值为0或1
+         * 自动续费标记，值为0或1。购买按量计费实例该字段无意义
          * @type {number || null}
          */
         this.AutoRenewFlag = null;
@@ -2975,13 +3059,13 @@ class DescribeDBInstancesRequest extends  AbstractModel {
         this.OrderDirection = null;
 
         /**
-         * 是否包含安全组信息
+         * 是否包含安全组信息，可取值：0-不包含，1-包含
          * @type {number || null}
          */
         this.WithSecurityGroup = null;
 
         /**
-         * 是否包含独享集群信息
+         * 是否包含独享集群信息，可取值：0-不包含，1-包含
          * @type {number || null}
          */
         this.WithExCluster = null;
@@ -3005,19 +3089,19 @@ class DescribeDBInstancesRequest extends  AbstractModel {
         this.InitFlag = null;
 
         /**
-         * 是否包含灾备实例
+         * 是否包含灾备实例，可取值：0-不包含，1-包含
          * @type {number || null}
          */
         this.WithDr = null;
 
         /**
-         * 是否包含只读实例
+         * 是否包含只读实例，可取值：0-不包含，1-包含
          * @type {number || null}
          */
         this.WithRo = null;
 
         /**
-         * 是否包含主实例
+         * 是否包含主实例，可取值：0-不包含，1-包含
          * @type {number || null}
          */
         this.WithMaster = null;
@@ -3450,6 +3534,48 @@ class DescribeDBSwitchRecordsRequest extends  AbstractModel {
         this.InstanceId = params.InstanceId || null;
         this.Offset = params.Offset || null;
         this.Limit = params.Limit || null;
+
+    }
+}
+
+/**
+ * DescribeAsyncRequestInfo返回参数结构体
+ * @class
+ */
+class DescribeAsyncRequestInfoResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 任务执行结果。可能的取值：INITIAL - 初始化，RUNNING - 运行中，SUCCESS - 执行成功，FAILED - 执行失败，KILLED - 已终止，REMOVED - 已删除，PAUSED - 终止中。
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * 任务执行信息描述。
+         * @type {string || null}
+         */
+        this.Info = null;
+
+        /**
+         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Status = params.Status || null;
+        this.Info = params.Info || null;
+        this.RequestId = params.RequestId || null;
 
     }
 }
@@ -3948,48 +4074,18 @@ class DatabaseName extends  AbstractModel {
 }
 
 /**
- * DescribeBackupConfig返回参数结构体
+ * DescribeInstanceParams请求参数结构体
  * @class
  */
-class DescribeBackupConfigResponse extends  AbstractModel {
+class DescribeInstanceParamsRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 备份开始的最早时间点，单位为时刻。例如，2 - 凌晨2:00
-         * @type {number || null}
-         */
-        this.StartTimeMin = null;
-
-        /**
-         * 备份开始的最晚时间点，单位为时刻。例如，6 - 凌晨6:00
-         * @type {number || null}
-         */
-        this.StartTimeMax = null;
-
-        /**
-         * 备份过期时间，单位为天
-         * @type {number || null}
-         */
-        this.BackupExpireDays = null;
-
-        /**
-         * 备份方式，可能的值为：physical - 物理备份，logical - 逻辑备份
+         * 实例ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例ID相同，可使用[查询实例列表](https://cloud.tencent.com/document/api/236/15872) 接口获取，其值为输出参数中字段 InstanceId 的值
          * @type {string || null}
          */
-        this.BackupMethod = null;
-
-        /**
-         * Binlog过期时间，单位为天
-         * @type {number || null}
-         */
-        this.BinlogExpireDays = null;
-
-        /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
+        this.InstanceId = null;
 
     }
 
@@ -4000,12 +4096,7 @@ class DescribeBackupConfigResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.StartTimeMin = params.StartTimeMin || null;
-        this.StartTimeMax = params.StartTimeMax || null;
-        this.BackupExpireDays = params.BackupExpireDays || null;
-        this.BackupMethod = params.BackupMethod || null;
-        this.BinlogExpireDays = params.BinlogExpireDays || null;
-        this.RequestId = params.RequestId || null;
+        this.InstanceId = params.InstanceId || null;
 
     }
 }
@@ -4496,6 +4587,34 @@ class UpgradeDBInstanceEngineVersionResponse extends  AbstractModel {
         }
         this.AsyncRequestId = params.AsyncRequestId || null;
         this.RequestId = params.RequestId || null;
+
+    }
+}
+
+/**
+ * DescribeAsyncRequestInfo请求参数结构体
+ * @class
+ */
+class DescribeAsyncRequestInfoRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 异步任务的请求ID。
+         * @type {string || null}
+         */
+        this.AsyncRequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AsyncRequestId = params.AsyncRequestId || null;
 
     }
 }
@@ -6902,6 +7021,56 @@ class RestartDBInstancesRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeInstanceParams返回参数结构体
+ * @class
+ */
+class DescribeInstanceParamsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例的参数总数
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 参数详情
+         * @type {Array.<ParameterDetail> || null}
+         */
+        this.Items = null;
+
+        /**
+         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = params.TotalCount || null;
+
+        if (params.Items) {
+            this.Items = new Array();
+            for (let z in params.Items) {
+                let obj = new ParameterDetail();
+                obj.deserialize(params.Items[z]);
+                this.Items.push(obj);
+            }
+        }
+        this.RequestId = params.RequestId || null;
+
+    }
+}
+
+/**
  * DescribeDBZoneConfig返回参数结构体
  * @class
  */
@@ -7250,6 +7419,69 @@ class DeleteBackupRequest extends  AbstractModel {
         }
         this.InstanceId = params.InstanceId || null;
         this.BackupId = params.BackupId || null;
+
+    }
+}
+
+/**
+ * DescribeBackupConfig返回参数结构体
+ * @class
+ */
+class DescribeBackupConfigResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 备份开始的最早时间点，单位为时刻。例如，2 - 凌晨2:00
+         * @type {number || null}
+         */
+        this.StartTimeMin = null;
+
+        /**
+         * 备份开始的最晚时间点，单位为时刻。例如，6 - 凌晨6:00
+         * @type {number || null}
+         */
+        this.StartTimeMax = null;
+
+        /**
+         * 备份过期时间，单位为天
+         * @type {number || null}
+         */
+        this.BackupExpireDays = null;
+
+        /**
+         * 备份方式，可能的值为：physical - 物理备份，logical - 逻辑备份
+         * @type {string || null}
+         */
+        this.BackupMethod = null;
+
+        /**
+         * Binlog过期时间，单位为天
+         * @type {number || null}
+         */
+        this.BinlogExpireDays = null;
+
+        /**
+         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.StartTimeMin = params.StartTimeMin || null;
+        this.StartTimeMax = params.StartTimeMax || null;
+        this.BackupExpireDays = params.BackupExpireDays || null;
+        this.BackupMethod = params.BackupMethod || null;
+        this.BinlogExpireDays = params.BinlogExpireDays || null;
+        this.RequestId = params.RequestId || null;
 
     }
 }
@@ -7628,6 +7860,7 @@ module.exports = {
     DescribeDBInstanceRebootTimeResponse: DescribeDBInstanceRebootTimeResponse,
     DrInfo: DrInfo,
     RoGroup: RoGroup,
+    ParameterDetail: ParameterDetail,
     ModifyAccountDescriptionResponse: ModifyAccountDescriptionResponse,
     SwitchForUpgradeRequest: SwitchForUpgradeRequest,
     ModifyInstanceParamRequest: ModifyInstanceParamRequest,
@@ -7653,6 +7886,7 @@ module.exports = {
     DescribeProjectSecurityGroupsResponse: DescribeProjectSecurityGroupsResponse,
     ModifyAccountPasswordResponse: ModifyAccountPasswordResponse,
     DescribeDBSwitchRecordsRequest: DescribeDBSwitchRecordsRequest,
+    DescribeAsyncRequestInfoResponse: DescribeAsyncRequestInfoResponse,
     CreateDBInstanceResponse: CreateDBInstanceResponse,
     RollbackTableName: RollbackTableName,
     CloseWanServiceRequest: CloseWanServiceRequest,
@@ -7666,7 +7900,7 @@ module.exports = {
     DescribeDBImportRecordsResponse: DescribeDBImportRecordsResponse,
     OpenWanServiceRequest: OpenWanServiceRequest,
     DatabaseName: DatabaseName,
-    DescribeBackupConfigResponse: DescribeBackupConfigResponse,
+    DescribeInstanceParamsRequest: DescribeInstanceParamsRequest,
     ModifyDBInstanceSecurityGroupsRequest: ModifyDBInstanceSecurityGroupsRequest,
     DescribeBackupTablesResponse: DescribeBackupTablesResponse,
     Outbound: Outbound,
@@ -7678,6 +7912,7 @@ module.exports = {
     SlaveInfo: SlaveInfo,
     ModifyDBInstanceNameRequest: ModifyDBInstanceNameRequest,
     UpgradeDBInstanceEngineVersionResponse: UpgradeDBInstanceEngineVersionResponse,
+    DescribeAsyncRequestInfoRequest: DescribeAsyncRequestInfoRequest,
     ModifyInstanceParamResponse: ModifyInstanceParamResponse,
     ColumnPrivilege: ColumnPrivilege,
     InitDBInstancesRequest: InitDBInstancesRequest,
@@ -7721,6 +7956,7 @@ module.exports = {
     DescribeDBInstancesResponse: DescribeDBInstancesResponse,
     InitDBInstancesResponse: InitDBInstancesResponse,
     RestartDBInstancesRequest: RestartDBInstancesRequest,
+    DescribeInstanceParamsResponse: DescribeInstanceParamsResponse,
     DescribeDBZoneConfigResponse: DescribeDBZoneConfigResponse,
     ModifyDBInstanceProjectRequest: ModifyDBInstanceProjectRequest,
     DisassociateSecurityGroupsRequest: DisassociateSecurityGroupsRequest,
@@ -7730,6 +7966,7 @@ module.exports = {
     DescribeAccountsResponse: DescribeAccountsResponse,
     RollbackTimeRange: RollbackTimeRange,
     DeleteBackupRequest: DeleteBackupRequest,
+    DescribeBackupConfigResponse: DescribeBackupConfigResponse,
     StartBatchRollbackResponse: StartBatchRollbackResponse,
     DescribeRollbackRangeTimeResponse: DescribeRollbackRangeTimeResponse,
     VerifyRootAccountRequest: VerifyRootAccountRequest,
