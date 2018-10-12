@@ -52,6 +52,7 @@ const DescribeDBZoneConfigRequest = models.DescribeDBZoneConfigRequest;
 const DescribeDBInstanceRebootTimeResponse = models.DescribeDBInstanceRebootTimeResponse;
 const DrInfo = models.DrInfo;
 const RoGroup = models.RoGroup;
+const ParameterDetail = models.ParameterDetail;
 const ModifyAccountDescriptionResponse = models.ModifyAccountDescriptionResponse;
 const SwitchForUpgradeRequest = models.SwitchForUpgradeRequest;
 const ModifyInstanceParamRequest = models.ModifyInstanceParamRequest;
@@ -77,6 +78,7 @@ const TablePrivilege = models.TablePrivilege;
 const DescribeProjectSecurityGroupsResponse = models.DescribeProjectSecurityGroupsResponse;
 const ModifyAccountPasswordResponse = models.ModifyAccountPasswordResponse;
 const DescribeDBSwitchRecordsRequest = models.DescribeDBSwitchRecordsRequest;
+const DescribeAsyncRequestInfoResponse = models.DescribeAsyncRequestInfoResponse;
 const CreateDBInstanceResponse = models.CreateDBInstanceResponse;
 const RollbackTableName = models.RollbackTableName;
 const CloseWanServiceRequest = models.CloseWanServiceRequest;
@@ -90,7 +92,7 @@ const DescribeBackupsResponse = models.DescribeBackupsResponse;
 const DescribeDBImportRecordsResponse = models.DescribeDBImportRecordsResponse;
 const OpenWanServiceRequest = models.OpenWanServiceRequest;
 const DatabaseName = models.DatabaseName;
-const DescribeBackupConfigResponse = models.DescribeBackupConfigResponse;
+const DescribeInstanceParamsRequest = models.DescribeInstanceParamsRequest;
 const ModifyDBInstanceSecurityGroupsRequest = models.ModifyDBInstanceSecurityGroupsRequest;
 const DescribeBackupTablesResponse = models.DescribeBackupTablesResponse;
 const Outbound = models.Outbound;
@@ -102,6 +104,7 @@ const ZoneConf = models.ZoneConf;
 const SlaveInfo = models.SlaveInfo;
 const ModifyDBInstanceNameRequest = models.ModifyDBInstanceNameRequest;
 const UpgradeDBInstanceEngineVersionResponse = models.UpgradeDBInstanceEngineVersionResponse;
+const DescribeAsyncRequestInfoRequest = models.DescribeAsyncRequestInfoRequest;
 const ModifyInstanceParamResponse = models.ModifyInstanceParamResponse;
 const ColumnPrivilege = models.ColumnPrivilege;
 const InitDBInstancesRequest = models.InitDBInstancesRequest;
@@ -145,6 +148,7 @@ const CreateDBImportJobResponse = models.CreateDBImportJobResponse;
 const DescribeDBInstancesResponse = models.DescribeDBInstancesResponse;
 const InitDBInstancesResponse = models.InitDBInstancesResponse;
 const RestartDBInstancesRequest = models.RestartDBInstancesRequest;
+const DescribeInstanceParamsResponse = models.DescribeInstanceParamsResponse;
 const DescribeDBZoneConfigResponse = models.DescribeDBZoneConfigResponse;
 const ModifyDBInstanceProjectRequest = models.ModifyDBInstanceProjectRequest;
 const DisassociateSecurityGroupsRequest = models.DisassociateSecurityGroupsRequest;
@@ -154,6 +158,7 @@ const DescribeAccountPrivilegesRequest = models.DescribeAccountPrivilegesRequest
 const DescribeAccountsResponse = models.DescribeAccountsResponse;
 const RollbackTimeRange = models.RollbackTimeRange;
 const DeleteBackupRequest = models.DeleteBackupRequest;
+const DescribeBackupConfigResponse = models.DescribeBackupConfigResponse;
 const StartBatchRollbackResponse = models.StartBatchRollbackResponse;
 const DescribeRollbackRangeTimeResponse = models.DescribeRollbackRangeTimeResponse;
 const VerifyRootAccountRequest = models.VerifyRootAccountRequest;
@@ -327,6 +332,17 @@ class CdbClient extends AbstractClient {
     DescribeBackups(req, cb) {
         let resp = new DescribeBackupsResponse();
         this.request("DescribeBackups", req, resp, cb);
+    }
+
+    /**
+     * 本接口(DescribeAsyncRequestInfo)用于查询云数据库实例异步任务的执行结果。
+     * @param {DescribeAsyncRequestInfoRequest} req
+     * @param {function(string, DescribeAsyncRequestInfoResponse):void} cb
+     * @public
+     */
+    DescribeAsyncRequestInfo(req, cb) {
+        let resp = new DescribeAsyncRequestInfoResponse();
+        this.request("DescribeAsyncRequestInfo", req, resp, cb);
     }
 
     /**
@@ -747,14 +763,14 @@ class CdbClient extends AbstractClient {
     }
 
     /**
-     * 本接口(UpgradeDBInstanceEngineVersion)用于升级云数据库实例版本，实例类型支持主实例、灾备实例和只读实例。
-     * @param {UpgradeDBInstanceEngineVersionRequest} req
-     * @param {function(string, UpgradeDBInstanceEngineVersionResponse):void} cb
+     * 该接口（DescribeInstanceParams）用于查询实例的参数列表。
+     * @param {DescribeInstanceParamsRequest} req
+     * @param {function(string, DescribeInstanceParamsResponse):void} cb
      * @public
      */
-    UpgradeDBInstanceEngineVersion(req, cb) {
-        let resp = new UpgradeDBInstanceEngineVersionResponse();
-        this.request("UpgradeDBInstanceEngineVersion", req, resp, cb);
+    DescribeInstanceParams(req, cb) {
+        let resp = new DescribeInstanceParamsResponse();
+        this.request("DescribeInstanceParams", req, resp, cb);
     }
 
     /**
@@ -766,6 +782,17 @@ class CdbClient extends AbstractClient {
     UpgradeDBInstance(req, cb) {
         let resp = new UpgradeDBInstanceResponse();
         this.request("UpgradeDBInstance", req, resp, cb);
+    }
+
+    /**
+     * 本接口(UpgradeDBInstanceEngineVersion)用于升级云数据库实例版本，实例类型支持主实例、灾备实例和只读实例。
+     * @param {UpgradeDBInstanceEngineVersionRequest} req
+     * @param {function(string, UpgradeDBInstanceEngineVersionResponse):void} cb
+     * @public
+     */
+    UpgradeDBInstanceEngineVersion(req, cb) {
+        let resp = new UpgradeDBInstanceEngineVersionResponse();
+        this.request("UpgradeDBInstanceEngineVersion", req, resp, cb);
     }
 
     /**

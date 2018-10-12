@@ -4227,7 +4227,7 @@ class DescribeCvmZoneInstanceConfigInfosRequest extends  AbstractModel {
 
         /**
          * 过滤条件
-         * @type {Filter || null}
+         * @type {Array.<Filter> || null}
          */
         this.Filters = null;
 
@@ -4242,9 +4242,12 @@ class DescribeCvmZoneInstanceConfigInfosRequest extends  AbstractModel {
         }
 
         if (params.Filters) {
-            let obj = new Filter();
-            obj.deserialize(params.Filters)
-            this.Filters = obj;
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
         }
 
     }

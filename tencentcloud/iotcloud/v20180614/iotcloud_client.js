@@ -33,14 +33,12 @@ const DescribeMultiDevTaskResponse = models.DescribeMultiDevTaskResponse;
 const DescribeDevicesResponse = models.DescribeDevicesResponse;
 const DeviceTag = models.DeviceTag;
 const ProductInfo = models.ProductInfo;
-const GetDeviceShadowResponse = models.GetDeviceShadowResponse;
 const DescribeTaskRequest = models.DescribeTaskRequest;
 const Task = models.Task;
 const PublishMessageResponse = models.PublishMessageResponse;
 const ProductMetadata = models.ProductMetadata;
 const DescribeTasksResponse = models.DescribeTasksResponse;
 const CreateProductResponse = models.CreateProductResponse;
-const GetDeviceShadowRequest = models.GetDeviceShadowRequest;
 const Filter = models.Filter;
 const DescribeDevicesRequest = models.DescribeDevicesRequest;
 const CreateTaskRequest = models.CreateTaskRequest;
@@ -149,17 +147,6 @@ class IotcloudClient extends AbstractClient {
     CancelTask(req, cb) {
         let resp = new CancelTaskResponse();
         this.request("CancelTask", req, resp, cb);
-    }
-
-    /**
-     * 本接口（GetDeviceShadow）用于查询虚拟设备信息。
-     * @param {GetDeviceShadowRequest} req
-     * @param {function(string, GetDeviceShadowResponse):void} cb
-     * @public
-     */
-    GetDeviceShadow(req, cb) {
-        let resp = new GetDeviceShadowResponse();
-        this.request("GetDeviceShadow", req, resp, cb);
     }
 
     /**

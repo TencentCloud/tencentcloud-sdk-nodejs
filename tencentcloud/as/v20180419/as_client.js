@@ -1,0 +1,310 @@
+/*
+ * Copyright (c) 2018 THL A29 Limited, a Tencent company. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ */
+const models = require("./models");
+const AbstractClient = require('../../common/abstract_client')
+const RemoveInstancesResponse = models.RemoveInstancesResponse;
+const DisableAutoScalingGroupResponse = models.DisableAutoScalingGroupResponse;
+const SystemDisk = models.SystemDisk;
+const DisableAutoScalingGroupRequest = models.DisableAutoScalingGroupRequest;
+const DeleteAutoScalingGroupResponse = models.DeleteAutoScalingGroupResponse;
+const AutoScalingGroupAbstract = models.AutoScalingGroupAbstract;
+const DetachInstancesResponse = models.DetachInstancesResponse;
+const EnableAutoScalingGroupRequest = models.EnableAutoScalingGroupRequest;
+const ModifyAutoScalingGroupRequest = models.ModifyAutoScalingGroupRequest;
+const CreateLaunchConfigurationRequest = models.CreateLaunchConfigurationRequest;
+const AutoScalingGroup = models.AutoScalingGroup;
+const CreateScheduledActionRequest = models.CreateScheduledActionRequest;
+const EnhancedService = models.EnhancedService;
+const AttachInstancesResponse = models.AttachInstancesResponse;
+const DeleteLaunchConfigurationResponse = models.DeleteLaunchConfigurationResponse;
+const DescribeAutoScalingGroupsRequest = models.DescribeAutoScalingGroupsRequest;
+const LaunchConfiguration = models.LaunchConfiguration;
+const DescribeAccountLimitsRequest = models.DescribeAccountLimitsRequest;
+const DescribeAccountLimitsResponse = models.DescribeAccountLimitsResponse;
+const DescribeLaunchConfigurationsResponse = models.DescribeLaunchConfigurationsResponse;
+const CreateLaunchConfigurationResponse = models.CreateLaunchConfigurationResponse;
+const ForwardLoadBalancer = models.ForwardLoadBalancer;
+const DeleteScheduledActionRequest = models.DeleteScheduledActionRequest;
+const ModifyDesiredCapacityRequest = models.ModifyDesiredCapacityRequest;
+const CreateScheduledActionResponse = models.CreateScheduledActionResponse;
+const DescribeScheduledActionsResponse = models.DescribeScheduledActionsResponse;
+const DescribeAutoScalingGroupsResponse = models.DescribeAutoScalingGroupsResponse;
+const DeleteAutoScalingGroupRequest = models.DeleteAutoScalingGroupRequest;
+const DescribeScheduledActionsRequest = models.DescribeScheduledActionsRequest;
+const ScheduledAction = models.ScheduledAction;
+const RemoveInstancesRequest = models.RemoveInstancesRequest;
+const ModifyAutoScalingGroupResponse = models.ModifyAutoScalingGroupResponse;
+const DeleteLaunchConfigurationRequest = models.DeleteLaunchConfigurationRequest;
+const AttachInstancesRequest = models.AttachInstancesRequest;
+const RunSecurityServiceEnabled = models.RunSecurityServiceEnabled;
+const LoginSettings = models.LoginSettings;
+const Filter = models.Filter;
+const ModifyScheduledActionResponse = models.ModifyScheduledActionResponse;
+const EnableAutoScalingGroupResponse = models.EnableAutoScalingGroupResponse;
+const DescribeLaunchConfigurationsRequest = models.DescribeLaunchConfigurationsRequest;
+const ModifyDesiredCapacityResponse = models.ModifyDesiredCapacityResponse;
+const CreateAutoScalingGroupResponse = models.CreateAutoScalingGroupResponse;
+const RunMonitorServiceEnabled = models.RunMonitorServiceEnabled;
+const TargetAttribute = models.TargetAttribute;
+const DetachInstancesRequest = models.DetachInstancesRequest;
+const Instance = models.Instance;
+const DescribeAutoScalingInstancesResponse = models.DescribeAutoScalingInstancesResponse;
+const CreateAutoScalingGroupRequest = models.CreateAutoScalingGroupRequest;
+const InternetAccessible = models.InternetAccessible;
+const DeleteScheduledActionResponse = models.DeleteScheduledActionResponse;
+const DescribeAutoScalingInstancesRequest = models.DescribeAutoScalingInstancesRequest;
+const LimitedLoginSettings = models.LimitedLoginSettings;
+const ModifyScheduledActionRequest = models.ModifyScheduledActionRequest;
+const DataDisk = models.DataDisk;
+
+
+/**
+ * as client
+ * @class
+ */
+class AsClient extends AbstractClient {
+
+    constructor(credential, region, profile) {
+        super("as.tencentcloudapi.com", "2018-04-19", credential, region, profile);
+    }
+    
+    /**
+     * 本接口（RemoveInstances）用于从伸缩组删除 CVM 实例。根据当前的产品逻辑，如果实例由弹性伸缩自动创建，则实例会被销毁；如果实例系创建后加入伸缩组的，则会从伸缩组中移除，保留实例。
+     * @param {RemoveInstancesRequest} req
+     * @param {function(string, RemoveInstancesResponse):void} cb
+     * @public
+     */
+    RemoveInstances(req, cb) {
+        let resp = new RemoveInstancesResponse();
+        this.request("RemoveInstances", req, resp, cb);
+    }
+
+    /**
+     * 本接口（CreateAutoScalingGroup）用于创建伸缩组
+     * @param {CreateAutoScalingGroupRequest} req
+     * @param {function(string, CreateAutoScalingGroupResponse):void} cb
+     * @public
+     */
+    CreateAutoScalingGroup(req, cb) {
+        let resp = new CreateAutoScalingGroupResponse();
+        this.request("CreateAutoScalingGroup", req, resp, cb);
+    }
+
+    /**
+     * 本接口（DeleteScheduledAction）用于删除特定的定时任务。
+     * @param {DeleteScheduledActionRequest} req
+     * @param {function(string, DeleteScheduledActionResponse):void} cb
+     * @public
+     */
+    DeleteScheduledAction(req, cb) {
+        let resp = new DeleteScheduledActionResponse();
+        this.request("DeleteScheduledAction", req, resp, cb);
+    }
+
+    /**
+     * 本接口（DettachInstances）用于从伸缩组移出 CVM 实例，本接口不会被销毁实例。
+     * @param {DetachInstancesRequest} req
+     * @param {function(string, DetachInstancesResponse):void} cb
+     * @public
+     */
+    DetachInstances(req, cb) {
+        let resp = new DetachInstancesResponse();
+        this.request("DetachInstances", req, resp, cb);
+    }
+
+    /**
+     * 本接口（CreateScheduledAction）用于创建定时任务。
+     * @param {CreateScheduledActionRequest} req
+     * @param {function(string, CreateScheduledActionResponse):void} cb
+     * @public
+     */
+    CreateScheduledAction(req, cb) {
+        let resp = new CreateScheduledActionResponse();
+        this.request("CreateScheduledAction", req, resp, cb);
+    }
+
+    /**
+     * 本接口（ModifyScheduledAction）用于修改定时任务。
+     * @param {ModifyScheduledActionRequest} req
+     * @param {function(string, ModifyScheduledActionResponse):void} cb
+     * @public
+     */
+    ModifyScheduledAction(req, cb) {
+        let resp = new ModifyScheduledActionResponse();
+        this.request("ModifyScheduledAction", req, resp, cb);
+    }
+
+    /**
+     * 本接口（CreateLaunchConfiguration）用于创建新的启动配置。
+
+* 启动配置无法编辑更改。如需使用新的启动配置，只能重新创建启动配置。
+
+* 每个项目最多只能创建20个启动配置，详见[使用限制](https://cloud.tencent.com/document/product/377/3120)。
+
+     * @param {CreateLaunchConfigurationRequest} req
+     * @param {function(string, CreateLaunchConfigurationResponse):void} cb
+     * @public
+     */
+    CreateLaunchConfiguration(req, cb) {
+        let resp = new CreateLaunchConfigurationResponse();
+        this.request("CreateLaunchConfiguration", req, resp, cb);
+    }
+
+    /**
+     * 本接口（ModifyAutoScalingGroup）用于修改伸缩组。
+     * @param {ModifyAutoScalingGroupRequest} req
+     * @param {function(string, ModifyAutoScalingGroupResponse):void} cb
+     * @public
+     */
+    ModifyAutoScalingGroup(req, cb) {
+        let resp = new ModifyAutoScalingGroupResponse();
+        this.request("ModifyAutoScalingGroup", req, resp, cb);
+    }
+
+    /**
+     * 本接口（EnableAutoScalingGroup）用于启用指定伸缩组。
+     * @param {EnableAutoScalingGroupRequest} req
+     * @param {function(string, EnableAutoScalingGroupResponse):void} cb
+     * @public
+     */
+    EnableAutoScalingGroup(req, cb) {
+        let resp = new EnableAutoScalingGroupResponse();
+        this.request("EnableAutoScalingGroup", req, resp, cb);
+    }
+
+    /**
+     * 本接口（DescribeAutoScalingInstances）用于查询弹性伸缩关联实例的信息。
+
+
+     * @param {DescribeAutoScalingInstancesRequest} req
+     * @param {function(string, DescribeAutoScalingInstancesResponse):void} cb
+     * @public
+     */
+    DescribeAutoScalingInstances(req, cb) {
+        let resp = new DescribeAutoScalingInstancesResponse();
+        this.request("DescribeAutoScalingInstances", req, resp, cb);
+    }
+
+    /**
+     * 本接口（DescribeAutoScalingGroups）用于查询伸缩组信息。
+     * @param {DescribeAutoScalingGroupsRequest} req
+     * @param {function(string, DescribeAutoScalingGroupsResponse):void} cb
+     * @public
+     */
+    DescribeAutoScalingGroups(req, cb) {
+        let resp = new DescribeAutoScalingGroupsResponse();
+        this.request("DescribeAutoScalingGroups", req, resp, cb);
+    }
+
+    /**
+     * 本接口 (DescribeScheduledActions) 用于查询一个或多个定时任务的详细信息。
+
+* 可以根据定时任务ID、定时任务名称或者伸缩组ID等信息来查询定时任务的详细信息。过滤信息详细请见过滤器Filter。
+* 如果参数为空，返回当前用户一定数量（Limit所指定的数量，默认为20）的定时任务。
+     * @param {DescribeScheduledActionsRequest} req
+     * @param {function(string, DescribeScheduledActionsResponse):void} cb
+     * @public
+     */
+    DescribeScheduledActions(req, cb) {
+        let resp = new DescribeScheduledActionsResponse();
+        this.request("DescribeScheduledActions", req, resp, cb);
+    }
+
+    /**
+     * 本接口（DeleteAutoScalingGroup）用于删除指定伸缩组，删除前提是伸缩组内无实例且当前未在执行伸缩活动。
+     * @param {DeleteAutoScalingGroupRequest} req
+     * @param {function(string, DeleteAutoScalingGroupResponse):void} cb
+     * @public
+     */
+    DeleteAutoScalingGroup(req, cb) {
+        let resp = new DeleteAutoScalingGroupResponse();
+        this.request("DeleteAutoScalingGroup", req, resp, cb);
+    }
+
+    /**
+     * 本接口（DeleteLaunchConfiguration）用于删除启动配置。
+
+* 若启动配置在伸缩组中属于生效状态，则该启动配置不允许删除。
+
+     * @param {DeleteLaunchConfigurationRequest} req
+     * @param {function(string, DeleteLaunchConfigurationResponse):void} cb
+     * @public
+     */
+    DeleteLaunchConfiguration(req, cb) {
+        let resp = new DeleteLaunchConfigurationResponse();
+        this.request("DeleteLaunchConfiguration", req, resp, cb);
+    }
+
+    /**
+     * 本接口（DisableAutoScalingGroup）用于停用指定伸缩组。
+     * @param {DisableAutoScalingGroupRequest} req
+     * @param {function(string, DisableAutoScalingGroupResponse):void} cb
+     * @public
+     */
+    DisableAutoScalingGroup(req, cb) {
+        let resp = new DisableAutoScalingGroupResponse();
+        this.request("DisableAutoScalingGroup", req, resp, cb);
+    }
+
+    /**
+     * 本接口（DescribeLaunchConfigurations）用于查询启动配置的信息。
+     * @param {DescribeLaunchConfigurationsRequest} req
+     * @param {function(string, DescribeLaunchConfigurationsResponse):void} cb
+     * @public
+     */
+    DescribeLaunchConfigurations(req, cb) {
+        let resp = new DescribeLaunchConfigurationsResponse();
+        this.request("DescribeLaunchConfigurations", req, resp, cb);
+    }
+
+    /**
+     * 本接口（DescribeAccountLimits）用于查询用户账户在弹性伸缩中的资源限制。
+     * @param {DescribeAccountLimitsRequest} req
+     * @param {function(string, DescribeAccountLimitsResponse):void} cb
+     * @public
+     */
+    DescribeAccountLimits(req, cb) {
+        let resp = new DescribeAccountLimitsResponse();
+        this.request("DescribeAccountLimits", req, resp, cb);
+    }
+
+    /**
+     * 本接口（AttachInstances）用于将 CVM 实例添加到伸缩组。
+
+     * @param {AttachInstancesRequest} req
+     * @param {function(string, AttachInstancesResponse):void} cb
+     * @public
+     */
+    AttachInstances(req, cb) {
+        let resp = new AttachInstancesResponse();
+        this.request("AttachInstances", req, resp, cb);
+    }
+
+    /**
+     * 本接口（ModifyDesiredCapacity）用于修改指定伸缩组的期望实例数
+     * @param {ModifyDesiredCapacityRequest} req
+     * @param {function(string, ModifyDesiredCapacityResponse):void} cb
+     * @public
+     */
+    ModifyDesiredCapacity(req, cb) {
+        let resp = new ModifyDesiredCapacityResponse();
+        this.request("ModifyDesiredCapacity", req, resp, cb);
+    }
+
+
+}
+module.exports = AsClient;

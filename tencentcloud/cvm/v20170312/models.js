@@ -1896,30 +1896,18 @@ class DescribeImagesResponse extends  AbstractModel {
 }
 
 /**
- * 操作系统支持的类型。
+ * ModifyInstancesVpcAttribute返回参数结构体
  * @class
  */
-class OsVersion extends  AbstractModel {
+class ModifyInstancesVpcAttributeResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 操作系统类型
+         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
          * @type {string || null}
          */
-        this.OsName = null;
-
-        /**
-         * 支持的操作系统版本
-         * @type {Array.<string> || null}
-         */
-        this.OsVersions = null;
-
-        /**
-         * 支持的操作系统架构
-         * @type {Array.<string> || null}
-         */
-        this.Architecture = null;
+        this.RequestId = null;
 
     }
 
@@ -1930,9 +1918,7 @@ class OsVersion extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.OsName = params.OsName || null;
-        this.OsVersions = params.OsVersions || null;
-        this.Architecture = params.Architecture || null;
+        this.RequestId = params.RequestId || null;
 
     }
 }
@@ -2894,7 +2880,7 @@ class InquiryPriceResetInstancesInternetMaxBandwidthRequest extends  AbstractMod
         super();
 
         /**
-         * 一个或多个待操作的实例ID。可通过[`DescribeInstances`](https://cloud.tencent.com/document/api/213/15728)接口返回值中的`InstanceId`获取。每次请求批量实例的上限为100。
+         * 一个或多个待操作的实例ID。可通过[`DescribeInstances`](https://cloud.tencent.com/document/api/213/15728)接口返回值中的`InstanceId`获取。每次请求批量实例的上限为100。当调整 `BANDWIDTH_PREPAID` 和 `BANDWIDTH_POSTPAID_BY_HOUR` 计费方式的带宽时，只支持一个实例。
          * @type {Array.<string> || null}
          */
         this.InstanceIds = null;
@@ -4313,7 +4299,7 @@ class ResetInstancesInternetMaxBandwidthRequest extends  AbstractModel {
         super();
 
         /**
-         * 一个或多个待操作的实例ID。可通过[`DescribeInstances`](https://cloud.tencent.com/document/api/213/9388)接口返回值中的 `InstanceId` 获取。 每次请求批量实例的上限为100。
+         * 一个或多个待操作的实例ID。可通过[`DescribeInstances`](https://cloud.tencent.com/document/api/213/9388)接口返回值中的 `InstanceId` 获取。 每次请求批量实例的上限为100。当调整 `BANDWIDTH_PREPAID` 和 `BANDWIDTH_POSTPAID_BY_HOUR` 计费方式的带宽时，只支持一个实例。
          * @type {Array.<string> || null}
          */
         this.InstanceIds = null;
@@ -4981,6 +4967,53 @@ class StartInstancesResponse extends  AbstractModel {
             return;
         }
         this.RequestId = params.RequestId || null;
+
+    }
+}
+
+/**
+ * ModifyInstancesVpcAttribute请求参数结构体
+ * @class
+ */
+class ModifyInstancesVpcAttributeRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 待操作的实例ID数组。可通过[`DescribeInstances`](document/api/213/9388)接口返回值中的`InstanceId`获取。
+         * @type {Array.<string> || null}
+         */
+        this.InstanceIds = null;
+
+        /**
+         * 私有网络相关信息配置。通过该参数指定私有网络的ID，子网ID，私有网络ip等信息。当指定私有网络ID和子网ID（子网必须在实例所在的可用区）与指定实例所在私有网络不一致时，会将实例迁移至指定的私有网络的子网下。可通过`PrivateIpAddresses`指定私有网络子网IP，若需指定则所有已指定的实例均需要指定子网IP，此时`InstanceIds`与`PrivateIpAddresses`一一对应。不指定`PrivateIpAddresses`时随机分配私有网络子网IP。
+         * @type {VirtualPrivateCloud || null}
+         */
+        this.VirtualPrivateCloud = null;
+
+        /**
+         * 是否对运行中的实例选择强制关机。默认为TRUE。
+         * @type {boolean || null}
+         */
+        this.ForceStop = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceIds = params.InstanceIds || null;
+
+        if (params.VirtualPrivateCloud) {
+            let obj = new VirtualPrivateCloud();
+            obj.deserialize(params.VirtualPrivateCloud)
+            this.VirtualPrivateCloud = obj;
+        }
+        this.ForceStop = params.ForceStop || null;
 
     }
 }
@@ -5871,6 +5904,48 @@ class InquiryPriceResetInstancesTypeResponse extends  AbstractModel {
 }
 
 /**
+ * 操作系统支持的类型。
+ * @class
+ */
+class OsVersion extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 操作系统类型
+         * @type {string || null}
+         */
+        this.OsName = null;
+
+        /**
+         * 支持的操作系统版本
+         * @type {Array.<string> || null}
+         */
+        this.OsVersions = null;
+
+        /**
+         * 支持的操作系统架构
+         * @type {Array.<string> || null}
+         */
+        this.Architecture = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.OsName = params.OsName || null;
+        this.OsVersions = params.OsVersions || null;
+        this.Architecture = params.Architecture || null;
+
+    }
+}
+
+/**
  * ModifyImageAttribute返回参数结构体
  * @class
  */
@@ -6366,7 +6441,7 @@ class KeyPair extends  AbstractModel {
 
         /**
          * 密钥对所属的项目`ID`。
-         * @type {string || null}
+         * @type {number || null}
          */
         this.ProjectId = null;
 
@@ -7014,7 +7089,7 @@ class InstanceChargePrepaid extends  AbstractModel {
         this.Period = null;
 
         /**
-         * 自动续费标识。取值范围：<br><li>NOTIFY_AND_AUTO_RENEW：通知过期且自动续费<br><li>NOTIFY_AND_MANUAL_RENEW：通知过期不自动续费<br><li>DISABLE_NOTIFY_AND_MANUAL_RENEW：不通知过期不自动续费<br><br>默认取值：NOTIFY_AND_AUTO_RENEW。若该参数指定为NOTIFY_AND_AUTO_RENEW，在账户余额充足的情况下，实例到期后将按月自动续费。
+         * 自动续费标识。取值范围：<br><li>NOTIFY_AND_AUTO_RENEW：通知过期且自动续费<br><li>NOTIFY_AND_MANUAL_RENEW：通知过期不自动续费<br><li>DISABLE_NOTIFY_AND_MANUAL_RENEW：不通知过期不自动续费<br><br>默认取值：NOTIFY_AND_MANUAL_RENEW。若该参数指定为NOTIFY_AND_AUTO_RENEW，在账户余额充足的情况下，实例到期后将按月自动续费。
          * @type {string || null}
          */
         this.RenewFlag = null;
@@ -7118,7 +7193,7 @@ module.exports = {
     Tag: Tag,
     InternetChargeTypeConfig: InternetChargeTypeConfig,
     DescribeImagesResponse: DescribeImagesResponse,
-    OsVersion: OsVersion,
+    ModifyInstancesVpcAttributeResponse: ModifyInstancesVpcAttributeResponse,
     CreateKeyPairResponse: CreateKeyPairResponse,
     ModifyKeyPairAttributeResponse: ModifyKeyPairAttributeResponse,
     ModifyInstancesChargeTypeRequest: ModifyInstancesChargeTypeRequest,
@@ -7186,6 +7261,7 @@ module.exports = {
     ModifyHostsAttributeResponse: ModifyHostsAttributeResponse,
     DescribeDisasterRecoverGroupQuotaRequest: DescribeDisasterRecoverGroupQuotaRequest,
     StartInstancesResponse: StartInstancesResponse,
+    ModifyInstancesVpcAttributeRequest: ModifyInstancesVpcAttributeRequest,
     ChargePrepaid: ChargePrepaid,
     DescribeInternetChargeTypeConfigsResponse: DescribeInternetChargeTypeConfigsResponse,
     DescribeZoneInstanceConfigInfosRequest: DescribeZoneInstanceConfigInfosRequest,
@@ -7205,6 +7281,7 @@ module.exports = {
     ModifyDisasterRecoverGroupAttributeRequest: ModifyDisasterRecoverGroupAttributeRequest,
     RebootInstancesResponse: RebootInstancesResponse,
     InquiryPriceResetInstancesTypeResponse: InquiryPriceResetInstancesTypeResponse,
+    OsVersion: OsVersion,
     ModifyImageAttributeResponse: ModifyImageAttributeResponse,
     InquiryPriceRenewInstancesRequest: InquiryPriceRenewInstancesRequest,
     DescribeInstancesRequest: DescribeInstancesRequest,

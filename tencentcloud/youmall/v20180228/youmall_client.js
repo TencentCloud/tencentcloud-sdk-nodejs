@@ -17,44 +17,67 @@
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const DescribePersonVisitInfoRequest = models.DescribePersonVisitInfoRequest;
+const ZoneAgeGroupAvrStayTime = models.ZoneAgeGroupAvrStayTime;
+const ShopInfo = models.ShopInfo;
 const DescribeZoneTrafficInfoResponse = models.DescribeZoneTrafficInfoResponse;
 const DescribeShopTrafficInfoRequest = models.DescribeShopTrafficInfoRequest;
-const ZoneTrafficInfo = models.ZoneTrafficInfo;
-const GenderAgeTrafficDetail = models.GenderAgeTrafficDetail;
-const DescribeFaceIdByTempIdRequest = models.DescribeFaceIdByTempIdRequest;
-const DescribePersonInfoResponse = models.DescribePersonInfoResponse;
-const DescribeNetworkInfoResponse = models.DescribeNetworkInfoResponse;
 const HourTrafficInfoDetail = models.HourTrafficInfoDetail;
+const ZoneTrafficInfo = models.ZoneTrafficInfo;
+const DescribePersonInfoRequest = models.DescribePersonInfoRequest;
+const ZoneHourFlow = models.ZoneHourFlow;
+const GenderAgeTrafficDetail = models.GenderAgeTrafficDetail;
+const RegisterCallbackResponse = models.RegisterCallbackResponse;
+const DescribeFaceIdByTempIdRequest = models.DescribeFaceIdByTempIdRequest;
+const DescribeZoneFlowAndStayTimeResponse = models.DescribeZoneFlowAndStayTimeResponse;
+const DescribeZoneFlowHourlyByZoneIdResponse = models.DescribeZoneFlowHourlyByZoneIdResponse;
+const NetworkAndShopInfo = models.NetworkAndShopInfo;
+const NetworkInfo = models.NetworkInfo;
+const DescribePersonInfoResponse = models.DescribePersonInfoResponse;
+const NetworkHistoryInfo = models.NetworkHistoryInfo;
+const DescribeTrajectoryDataRequest = models.DescribeTrajectoryDataRequest;
+const DescribeNetworkInfoResponse = models.DescribeNetworkInfoResponse;
+const DescribeZoneFlowGenderInfoByZoneIdRequest = models.DescribeZoneFlowGenderInfoByZoneIdRequest;
+const CreateAccountResponse = models.CreateAccountResponse;
 const DescribeHistoryNetworkInfoResponse = models.DescribeHistoryNetworkInfoResponse;
-const ShopInfo = models.ShopInfo;
+const CreateFacePictureResponse = models.CreateFacePictureResponse;
+const DescribeZoneFlowGenderAvrStayTimeByZoneIdRequest = models.DescribeZoneFlowGenderAvrStayTimeByZoneIdRequest;
 const DescribeShopInfoResponse = models.DescribeShopInfoResponse;
-const DescribeZoneTrafficInfoRequest = models.DescribeZoneTrafficInfoRequest;
-const RegisterCallbackRequest = models.RegisterCallbackRequest;
+const DescribeZoneFlowDailyByZoneIdResponse = models.DescribeZoneFlowDailyByZoneIdResponse;
+const DescribeShopHourTrafficInfoRequest = models.DescribeShopHourTrafficInfoRequest;
+const DescribeZoneFlowAgeInfoByZoneIdResponse = models.DescribeZoneFlowAgeInfoByZoneIdResponse;
 const PersonVisitInfo = models.PersonVisitInfo;
 const DescribeShopInfoRequest = models.DescribeShopInfoRequest;
-const DescribePersonInfoRequest = models.DescribePersonInfoRequest;
+const CreateFacePictureRequest = models.CreateFacePictureRequest;
+const DescribeZoneFlowAgeInfoByZoneIdRequest = models.DescribeZoneFlowAgeInfoByZoneIdRequest;
 const ZoneTrafficInfoDetail = models.ZoneTrafficInfoDetail;
-const NetworkHistoryInfo = models.NetworkHistoryInfo;
+const CreateAccountRequest = models.CreateAccountRequest;
 const NetworkLastInfo = models.NetworkLastInfo;
-const RegisterCallbackResponse = models.RegisterCallbackResponse;
+const RegisterCallbackRequest = models.RegisterCallbackRequest;
+const DescribeZoneFlowGenderAvrStayTimeByZoneIdResponse = models.DescribeZoneFlowGenderAvrStayTimeByZoneIdResponse;
 const PersonInfo = models.PersonInfo;
 const PersonTagInfo = models.PersonTagInfo;
 const DescribeFaceIdByTempIdResponse = models.DescribeFaceIdByTempIdResponse;
-const DescribeShopHourTrafficInfoRequest = models.DescribeShopHourTrafficInfoRequest;
+const DescribeZoneTrafficInfoRequest = models.DescribeZoneTrafficInfoRequest;
 const DescribeCameraPersonResponse = models.DescribeCameraPersonResponse;
 const ShopHourTrafficInfo = models.ShopHourTrafficInfo;
 const ModifyPersonTagInfoResponse = models.ModifyPersonTagInfoResponse;
 const CameraPersonInfo = models.CameraPersonInfo;
+const ZoneFlowAndAvrStayTime = models.ZoneFlowAndAvrStayTime;
 const DescribeShopHourTrafficInfoResponse = models.DescribeShopHourTrafficInfoResponse;
 const DescribePersonVisitInfoResponse = models.DescribePersonVisitInfoResponse;
 const DescribeNetworkInfoRequest = models.DescribeNetworkInfoRequest;
 const DescribeHistoryNetworkInfoRequest = models.DescribeHistoryNetworkInfoRequest;
+const DescribeZoneFlowHourlyByZoneIdRequest = models.DescribeZoneFlowHourlyByZoneIdRequest;
 const DescribeCameraPersonRequest = models.DescribeCameraPersonRequest;
-const NetworkInfoNoShop = models.NetworkInfoNoShop;
+const DescribeZoneFlowDailyByZoneIdRequest = models.DescribeZoneFlowDailyByZoneIdRequest;
+const TrajectorySunData = models.TrajectorySunData;
+const DescribeZoneFlowGenderInfoByZoneIdResponse = models.DescribeZoneFlowGenderInfoByZoneIdResponse;
 const ModifyPersonTagInfoRequest = models.ModifyPersonTagInfoRequest;
-const NetworkInfo = models.NetworkInfo;
-const DescribeShopTrafficInfoResponse = models.DescribeShopTrafficInfoResponse;
+const ZoneDayFlow = models.ZoneDayFlow;
+const DescribeZoneFlowAndStayTimeRequest = models.DescribeZoneFlowAndStayTimeRequest;
 const ShopDayTrafficInfo = models.ShopDayTrafficInfo;
+const DescribeShopTrafficInfoResponse = models.DescribeShopTrafficInfoResponse;
+const DescribeTrajectoryDataResponse = models.DescribeTrajectoryDataResponse;
 
 
 /**
@@ -79,14 +102,14 @@ class YoumallClient extends AbstractClient {
     }
 
     /**
-     * 指定门店获取所有顾客详情列表，包含客户ID、图片、年龄、性别
-     * @param {DescribePersonInfoRequest} req
-     * @param {function(string, DescribePersonInfoResponse):void} cb
+     * 上传人脸图片
+     * @param {CreateFacePictureRequest} req
+     * @param {function(string, CreateFacePictureResponse):void} cb
      * @public
      */
-    DescribePersonInfo(req, cb) {
-        let resp = new DescribePersonInfoResponse();
-        this.request("DescribePersonInfo", req, resp, cb);
+    CreateFacePicture(req, cb) {
+        let resp = new CreateFacePictureResponse();
+        this.request("CreateFacePicture", req, resp, cb);
     }
 
     /**
@@ -98,6 +121,17 @@ class YoumallClient extends AbstractClient {
     DescribeShopHourTrafficInfo(req, cb) {
         let resp = new DescribeShopHourTrafficInfoResponse();
         this.request("DescribeShopHourTrafficInfo", req, resp, cb);
+    }
+
+    /**
+     * 创建集团门店管理员账号
+     * @param {CreateAccountRequest} req
+     * @param {function(string, CreateAccountResponse):void} cb
+     * @public
+     */
+    CreateAccount(req, cb) {
+        let resp = new CreateAccountResponse();
+        this.request("CreateAccount", req, resp, cb);
     }
 
     /**
@@ -134,6 +168,28 @@ class YoumallClient extends AbstractClient {
     }
 
     /**
+     * 指定门店获取所有顾客详情列表，包含客户ID、图片、年龄、性别
+     * @param {DescribePersonInfoRequest} req
+     * @param {function(string, DescribePersonInfoResponse):void} cb
+     * @public
+     */
+    DescribePersonInfo(req, cb) {
+        let resp = new DescribePersonInfoResponse();
+        this.request("DescribePersonInfo", req, resp, cb);
+    }
+
+    /**
+     * 获取指定区域每日客流量
+     * @param {DescribeZoneFlowDailyByZoneIdRequest} req
+     * @param {function(string, DescribeZoneFlowDailyByZoneIdResponse):void} cb
+     * @public
+     */
+    DescribeZoneFlowDailyByZoneId(req, cb) {
+        let resp = new DescribeZoneFlowDailyByZoneIdResponse();
+        this.request("DescribeZoneFlowDailyByZoneId", req, resp, cb);
+    }
+
+    /**
      * 标记到店顾客的身份类型，例如黑名单、白名单等
 
      * @param {ModifyPersonTagInfoRequest} req
@@ -143,6 +199,17 @@ class YoumallClient extends AbstractClient {
     ModifyPersonTagInfo(req, cb) {
         let resp = new ModifyPersonTagInfoResponse();
         this.request("ModifyPersonTagInfo", req, resp, cb);
+    }
+
+    /**
+     * 获取指定区域性别占比
+     * @param {DescribeZoneFlowGenderInfoByZoneIdRequest} req
+     * @param {function(string, DescribeZoneFlowGenderInfoByZoneIdResponse):void} cb
+     * @public
+     */
+    DescribeZoneFlowGenderInfoByZoneId(req, cb) {
+        let resp = new DescribeZoneFlowGenderInfoByZoneIdResponse();
+        this.request("DescribeZoneFlowGenderInfoByZoneId", req, resp, cb);
     }
 
     /**
@@ -157,6 +224,17 @@ class YoumallClient extends AbstractClient {
     }
 
     /**
+     * 获取指定区域分时客流量
+     * @param {DescribeZoneFlowHourlyByZoneIdRequest} req
+     * @param {function(string, DescribeZoneFlowHourlyByZoneIdResponse):void} cb
+     * @public
+     */
+    DescribeZoneFlowHourlyByZoneId(req, cb) {
+        let resp = new DescribeZoneFlowHourlyByZoneIdResponse();
+        this.request("DescribeZoneFlowHourlyByZoneId", req, resp, cb);
+    }
+
+    /**
      * 根据客户身份标识获取客户下所有的门店信息列表
      * @param {DescribeShopInfoRequest} req
      * @param {function(string, DescribeShopInfoResponse):void} cb
@@ -168,6 +246,17 @@ class YoumallClient extends AbstractClient {
     }
 
     /**
+     * 获取指定区域人流各年龄占比
+     * @param {DescribeZoneFlowAgeInfoByZoneIdRequest} req
+     * @param {function(string, DescribeZoneFlowAgeInfoByZoneIdResponse):void} cb
+     * @public
+     */
+    DescribeZoneFlowAgeInfoByZoneId(req, cb) {
+        let resp = new DescribeZoneFlowAgeInfoByZoneIdResponse();
+        this.request("DescribeZoneFlowAgeInfoByZoneId", req, resp, cb);
+    }
+
+    /**
      * 调用本接口在优Mall中注册自己集团的到店通知回调接口地址，接口协议为HTTP或HTTPS。注册后，若集团有特殊身份（例如老客）到店通知，优Mall后台将主动将到店信息push给该接口
      * @param {RegisterCallbackRequest} req
      * @param {function(string, RegisterCallbackResponse):void} cb
@@ -176,6 +265,39 @@ class YoumallClient extends AbstractClient {
     RegisterCallback(req, cb) {
         let resp = new RegisterCallbackResponse();
         this.request("RegisterCallback", req, resp, cb);
+    }
+
+    /**
+     * 获取指定区域不同年龄段男女平均停留时间
+     * @param {DescribeZoneFlowGenderAvrStayTimeByZoneIdRequest} req
+     * @param {function(string, DescribeZoneFlowGenderAvrStayTimeByZoneIdResponse):void} cb
+     * @public
+     */
+    DescribeZoneFlowGenderAvrStayTimeByZoneId(req, cb) {
+        let resp = new DescribeZoneFlowGenderAvrStayTimeByZoneIdResponse();
+        this.request("DescribeZoneFlowGenderAvrStayTimeByZoneId", req, resp, cb);
+    }
+
+    /**
+     * 获取动线轨迹信息
+     * @param {DescribeTrajectoryDataRequest} req
+     * @param {function(string, DescribeTrajectoryDataResponse):void} cb
+     * @public
+     */
+    DescribeTrajectoryData(req, cb) {
+        let resp = new DescribeTrajectoryDataResponse();
+        this.request("DescribeTrajectoryData", req, resp, cb);
+    }
+
+    /**
+     * 获取区域人流和停留时间
+     * @param {DescribeZoneFlowAndStayTimeRequest} req
+     * @param {function(string, DescribeZoneFlowAndStayTimeResponse):void} cb
+     * @public
+     */
+    DescribeZoneFlowAndStayTime(req, cb) {
+        let resp = new DescribeZoneFlowAndStayTimeResponse();
+        this.request("DescribeZoneFlowAndStayTime", req, resp, cb);
     }
 
     /**

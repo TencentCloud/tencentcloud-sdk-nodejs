@@ -1,5 +1,6 @@
 module.exports = {
     aai: require("./aai"),
+    as: require("./as"),
     batch: require("./batch"),
     billing: require("./billing"),
     bm: require("./bm"),
@@ -16,6 +17,7 @@ module.exports = {
     dts: require("./dts"),
     iot: require("./iot"),
     iotcloud: require("./iotcloud"),
+    live: require("./live"),
     mariadb: require("./mariadb"),
     ms: require("./ms"),
     msp: require("./msp"),
