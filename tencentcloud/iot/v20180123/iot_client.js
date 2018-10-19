@@ -16,75 +16,121 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
-const DeleteProductRequest = models.DeleteProductRequest;
+const AppUpdateDeviceRequest = models.AppUpdateDeviceRequest;
 const GetDeviceResponse = models.GetDeviceResponse;
-const AppAddUserRequest = models.AppAddUserRequest;
 const GetDeviceDataResponse = models.GetDeviceDataResponse;
-const DeleteRuleResponse = models.DeleteRuleResponse;
-const GetDataHistoryRequest = models.GetDataHistoryRequest;
-const AddTopicResponse = models.AddTopicResponse;
-const AddProductRequest = models.AddProductRequest;
-const GetProductResponse = models.GetProductResponse;
-const GetDeviceLogResponse = models.GetDeviceLogResponse;
-const GetRuleResponse = models.GetRuleResponse;
-const GetTopicResponse = models.GetTopicResponse;
-const GetProductsResponse = models.GetProductsResponse;
+const AppResetPasswordResponse = models.AppResetPasswordResponse;
 const DeleteRuleRequest = models.DeleteRuleRequest;
 const ActivateRuleResponse = models.ActivateRuleResponse;
 const UpdateRuleRequest = models.UpdateRuleRequest;
-const RuleQuery = models.RuleQuery;
-const AppUser = models.AppUser;
-const GetRulesResponse = models.GetRulesResponse;
-const DeleteDeviceRequest = models.DeleteDeviceRequest;
-const DeleteProductResponse = models.DeleteProductResponse;
+const DeviceSignature = models.DeviceSignature;
+const AppGetDevicesRequest = models.AppGetDevicesRequest;
+const AppGetDeviceDataResponse = models.AppGetDeviceDataResponse;
+const GetTopicResponse = models.GetTopicResponse;
 const DeactivateRuleResponse = models.DeactivateRuleResponse;
 const IssueDeviceControlRequest = models.IssueDeviceControlRequest;
-const UpdateRuleResponse = models.UpdateRuleResponse;
-const PublishMsgResponse = models.PublishMsgResponse;
+const GetDeviceStatisticsRequest = models.GetDeviceStatisticsRequest;
 const ResetDeviceResponse = models.ResetDeviceResponse;
-const GetUserResponse = models.GetUserResponse;
-const AddRuleResponse = models.AddRuleResponse;
-const GetDeviceStatusesRequest = models.GetDeviceStatusesRequest;
+const GetDeviceLogResponse = models.GetDeviceLogResponse;
 const AddRuleRequest = models.AddRuleRequest;
-const GetDeviceStatusesResponse = models.GetDeviceStatusesResponse;
 const ResetDeviceRequest = models.ResetDeviceRequest;
-const GetUserRequest = models.GetUserRequest;
-const Device = models.Device;
-const AddUserResponse = models.AddUserResponse;
+const ServiceAction = models.ServiceAction;
+const DataTemplate = models.DataTemplate;
 const DeleteTopicRequest = models.DeleteTopicRequest;
 const AddProductResponse = models.AddProductResponse;
-const GetDataHistoryResponse = models.GetDataHistoryResponse;
-const User = models.User;
 const UpdateProductResponse = models.UpdateProductResponse;
-const GetRulesRequest = models.GetRulesRequest;
-const GetTopicsResponse = models.GetTopicsResponse;
-const AddUserRequest = models.AddUserRequest;
+const DataHistoryEntry = models.DataHistoryEntry;
+const AppGetDeviceResponse = models.AppGetDeviceResponse;
+const UpdateRuleResponse = models.UpdateRuleResponse;
+const AppDeviceDetail = models.AppDeviceDetail;
+const GetDeviceStatisticsResponse = models.GetDeviceStatisticsResponse;
+const UnassociateSubDeviceFromGatewayProductResponse = models.UnassociateSubDeviceFromGatewayProductResponse;
+const Topic = models.Topic;
+const AssociateSubDeviceToGatewayProductResponse = models.AssociateSubDeviceToGatewayProductResponse;
+const GetProductRequest = models.GetProductRequest;
+const AppGetTokenRequest = models.AppGetTokenRequest;
+const GetRuleRequest = models.GetRuleRequest;
+const DeleteProductRequest = models.DeleteProductRequest;
+const AppGetUserRequest = models.AppGetUserRequest;
+const GetProductsResponse = models.GetProductsResponse;
+const AppGetDeviceRequest = models.AppGetDeviceRequest;
+const GetDataHistoryRequest = models.GetDataHistoryRequest;
+const AddTopicResponse = models.AddTopicResponse;
+const AddProductRequest = models.AddProductRequest;
+const ProductEntry = models.ProductEntry;
+const GetRulesResponse = models.GetRulesResponse;
+const DeleteDeviceRequest = models.DeleteDeviceRequest;
+const AssociateSubDeviceToGatewayProductRequest = models.AssociateSubDeviceToGatewayProductRequest;
+const GetDeviceSignaturesResponse = models.GetDeviceSignaturesResponse;
+const RuleQuery = models.RuleQuery;
+const AppUser = models.AppUser;
+const BoolData = models.BoolData;
 const PublishMsgRequest = models.PublishMsgRequest;
-const DeviceStatus = models.DeviceStatus;
 const GetProductsRequest = models.GetProductsRequest;
-const AppAddUserResponse = models.AppAddUserResponse;
-const Product = models.Product;
 const AddTopicRequest = models.AddTopicRequest;
-const Rule = models.Rule;
-const Object = models.Object;
-const UpdateProductRequest = models.UpdateProductRequest;
-const GetDeviceLogRequest = models.GetDeviceLogRequest;
-const IssueDeviceControlResponse = models.IssueDeviceControlResponse;
-const AddDeviceResponse = models.AddDeviceResponse;
+const AppGetDeviceStatusesRequest = models.AppGetDeviceStatusesRequest;
+const DeviceLogEntry = models.DeviceLogEntry;
+const GetDebugLogRequest = models.GetDebugLogRequest;
 const GetDeviceRequest = models.GetDeviceRequest;
-const ActivateRuleRequest = models.ActivateRuleRequest;
 const GetDeviceDataRequest = models.GetDeviceDataRequest;
 const DeactivateRuleRequest = models.DeactivateRuleRequest;
-const DeleteTopicResponse = models.DeleteTopicResponse;
 const GetTopicRequest = models.GetTopicRequest;
 const GetDevicesResponse = models.GetDevicesResponse;
-const DeleteDeviceResponse = models.DeleteDeviceResponse;
-const Topic = models.Topic;
+const NumberData = models.NumberData;
 const GetDevicesRequest = models.GetDevicesRequest;
-const GetProductRequest = models.GetProductRequest;
+const AppGetTokenResponse = models.AppGetTokenResponse;
+const GetProductResponse = models.GetProductResponse;
+const AppAddUserRequest = models.AppAddUserRequest;
+const AddRuleResponse = models.AddRuleResponse;
+const AppDeleteDeviceResponse = models.AppDeleteDeviceResponse;
+const AppIssueDeviceControlRequest = models.AppIssueDeviceControlRequest;
+const DeviceStatus = models.DeviceStatus;
+const DeleteProductResponse = models.DeleteProductResponse;
+const AppGetUserResponse = models.AppGetUserResponse;
+const AppUpdateUserRequest = models.AppUpdateUserRequest;
+const GetDebugLogResponse = models.GetDebugLogResponse;
+const AppUpdateUserResponse = models.AppUpdateUserResponse;
+const Device = models.Device;
+const GetRulesRequest = models.GetRulesRequest;
+const Rule = models.Rule;
+const IssueDeviceControlResponse = models.IssueDeviceControlResponse;
+const GetDataHistoryResponse = models.GetDataHistoryResponse;
+const Action = models.Action;
+const PublishMsgResponse = models.PublishMsgResponse;
+const AppGetDevicesResponse = models.AppGetDevicesResponse;
+const CkafkaAction = models.CkafkaAction;
 const AddDeviceRequest = models.AddDeviceRequest;
-const GetRuleRequest = models.GetRuleRequest;
+const UpdateProductRequest = models.UpdateProductRequest;
+const DeleteRuleResponse = models.DeleteRuleResponse;
+const GetDeviceSignaturesRequest = models.GetDeviceSignaturesRequest;
+const GetRuleResponse = models.GetRuleResponse;
+const AppUpdateDeviceResponse = models.AppUpdateDeviceResponse;
+const Product = models.Product;
+const DebugLogEntry = models.DebugLogEntry;
+const GetDeviceStatusesRequest = models.GetDeviceStatusesRequest;
+const GetDeviceStatusesResponse = models.GetDeviceStatusesResponse;
+const UnassociateSubDeviceFromGatewayProductRequest = models.UnassociateSubDeviceFromGatewayProductRequest;
+const AppDeleteDeviceRequest = models.AppDeleteDeviceRequest;
+const StringData = models.StringData;
+const AppGetDeviceStatusesResponse = models.AppGetDeviceStatusesResponse;
+const GetTopicsResponse = models.GetTopicsResponse;
+const AppGetDeviceDataRequest = models.AppGetDeviceDataRequest;
+const AppAddUserResponse = models.AppAddUserResponse;
+const DeviceEntry = models.DeviceEntry;
+const GetDeviceLogRequest = models.GetDeviceLogRequest;
+const AddDeviceResponse = models.AddDeviceResponse;
+const ActivateRuleRequest = models.ActivateRuleRequest;
+const AppResetPasswordRequest = models.AppResetPasswordRequest;
+const DeleteTopicResponse = models.DeleteTopicResponse;
+const AppDevice = models.AppDevice;
 const GetTopicsRequest = models.GetTopicsRequest;
+const DeviceStatData = models.DeviceStatData;
+const EnumData = models.EnumData;
+const DeleteDeviceResponse = models.DeleteDeviceResponse;
+const AppSecureAddDeviceResponse = models.AppSecureAddDeviceResponse;
+const AppSecureAddDeviceRequest = models.AppSecureAddDeviceRequest;
+const AppIssueDeviceControlResponse = models.AppIssueDeviceControlResponse;
+const TopicAction = models.TopicAction;
 
 
 /**
@@ -98,7 +144,7 @@ class IotClient extends AbstractClient {
     }
     
     /**
-     * 批量获取设备某一段时间范围的设备上报数据。该接口只允许使用数据模板类型的产品通过REST API方式同步设备上报数据至用户的应用系统。
+     * 批量获取设备某一段时间范围的设备上报数据。该接口适用于使用高级版类型的产品
      * @param {GetDataHistoryRequest} req
      * @param {function(string, GetDataHistoryResponse):void} cb
      * @public
@@ -120,18 +166,29 @@ class IotClient extends AbstractClient {
     }
 
     /**
-     * 注册用户
-     * @param {AddUserRequest} req
-     * @param {function(string, AddUserResponse):void} cb
+     * 查询某段时间范围内产品的在线、激活设备数
+     * @param {GetDeviceStatisticsRequest} req
+     * @param {function(string, GetDeviceStatisticsResponse):void} cb
      * @public
      */
-    AddUser(req, cb) {
-        let resp = new AddUserResponse();
-        this.request("AddUser", req, resp, cb);
+    GetDeviceStatistics(req, cb) {
+        let resp = new GetDeviceStatisticsResponse();
+        this.request("GetDeviceStatistics", req, resp, cb);
     }
 
     /**
-     * 提供下发控制指令到指定设备的能力，该接口适用于使用数据模板类型的产品。
+     * 用户绑定设备，绑定后可以在APP端进行控制。绑定设备前需调用“获取设备绑定签名”接口
+     * @param {AppSecureAddDeviceRequest} req
+     * @param {function(string, AppSecureAddDeviceResponse):void} cb
+     * @public
+     */
+    AppSecureAddDevice(req, cb) {
+        let resp = new AppSecureAddDeviceResponse();
+        this.request("AppSecureAddDevice", req, resp, cb);
+    }
+
+    /**
+     * 提供下发控制指令到指定设备的能力，该接口适用于使用高级版类型的产品。
      * @param {IssueDeviceControlRequest} req
      * @param {function(string, IssueDeviceControlResponse):void} cb
      * @public
@@ -139,6 +196,17 @@ class IotClient extends AbstractClient {
     IssueDeviceControl(req, cb) {
         let resp = new IssueDeviceControlResponse();
         this.request("IssueDeviceControl", req, resp, cb);
+    }
+
+    /**
+     * 获取设备的调试日志，用于定位问题
+     * @param {GetDebugLogRequest} req
+     * @param {function(string, GetDebugLogResponse):void} cb
+     * @public
+     */
+    GetDebugLog(req, cb) {
+        let resp = new GetDebugLogResponse();
+        this.request("GetDebugLog", req, resp, cb);
     }
 
     /**
@@ -175,6 +243,17 @@ class IotClient extends AbstractClient {
     }
 
     /**
+     * 获取绑定设备的上下线状态
+     * @param {AppGetDeviceStatusesRequest} req
+     * @param {function(string, AppGetDeviceStatusesResponse):void} cb
+     * @public
+     */
+    AppGetDeviceStatuses(req, cb) {
+        let resp = new AppGetDeviceStatusesResponse();
+        this.request("AppGetDeviceStatuses", req, resp, cb);
+    }
+
+    /**
      * 获取用户在物联网套件所创建的所有产品信息。
      * @param {GetProductsRequest} req
      * @param {function(string, GetProductsResponse):void} cb
@@ -183,6 +262,28 @@ class IotClient extends AbstractClient {
     GetProducts(req, cb) {
         let resp = new GetProductsResponse();
         this.request("GetProducts", req, resp, cb);
+    }
+
+    /**
+     * 获取用户token
+     * @param {AppGetTokenRequest} req
+     * @param {function(string, AppGetTokenResponse):void} cb
+     * @public
+     */
+    AppGetToken(req, cb) {
+        let resp = new AppGetTokenResponse();
+        this.request("AppGetToken", req, resp, cb);
+    }
+
+    /**
+     * 修改用户信息
+     * @param {AppUpdateUserRequest} req
+     * @param {function(string, AppUpdateUserResponse):void} cb
+     * @public
+     */
+    AppUpdateUser(req, cb) {
+        let resp = new AppUpdateUserResponse();
+        this.request("AppUpdateUser", req, resp, cb);
     }
 
     /**
@@ -197,6 +298,28 @@ class IotClient extends AbstractClient {
     }
 
     /**
+     * 取消子设备产品与网关设备产品的关联
+     * @param {UnassociateSubDeviceFromGatewayProductRequest} req
+     * @param {function(string, UnassociateSubDeviceFromGatewayProductResponse):void} cb
+     * @public
+     */
+    UnassociateSubDeviceFromGatewayProduct(req, cb) {
+        let resp = new UnassociateSubDeviceFromGatewayProductResponse();
+        this.request("UnassociateSubDeviceFromGatewayProduct", req, resp, cb);
+    }
+
+    /**
+     * 获取设备绑定签名，用于用户绑定某个设备的应用场景
+     * @param {GetDeviceSignaturesRequest} req
+     * @param {function(string, GetDeviceSignaturesResponse):void} cb
+     * @public
+     */
+    GetDeviceSignatures(req, cb) {
+        let resp = new GetDeviceSignaturesResponse();
+        this.request("GetDeviceSignatures", req, resp, cb);
+    }
+
+    /**
      * 删除规则
      * @param {DeleteRuleRequest} req
      * @param {function(string, DeleteRuleResponse):void} cb
@@ -205,17 +328,6 @@ class IotClient extends AbstractClient {
     DeleteRule(req, cb) {
         let resp = new DeleteRuleResponse();
         this.request("DeleteRule", req, resp, cb);
-    }
-
-    /**
-     * 获取用户信息
-     * @param {GetUserRequest} req
-     * @param {function(string, GetUserResponse):void} cb
-     * @public
-     */
-    GetUser(req, cb) {
-        let resp = new GetUserResponse();
-        this.request("GetUser", req, resp, cb);
     }
 
     /**
@@ -241,7 +353,7 @@ class IotClient extends AbstractClient {
     }
 
     /**
-     * 提供向指定的Topic发布消息的能力，常用于向设备下发控制指令；该接口只适用于数据协议为“自定义”类型的产品，使用数据模板类型的产品需使用IssueDeviceControl接口
+     * 提供向指定的Topic发布消息的能力，常用于向设备下发控制指令。该接口只适用于产品版本为“基础版”类型的产品，使用高级版的产品需使用“下发设备控制指令”接口
      * @param {PublishMsgRequest} req
      * @param {function(string, PublishMsgResponse):void} cb
      * @public
@@ -260,6 +372,17 @@ class IotClient extends AbstractClient {
     UpdateRule(req, cb) {
         let resp = new UpdateRuleResponse();
         this.request("UpdateRule", req, resp, cb);
+    }
+
+    /**
+     * 用户解除与设备的关联关系，解除后APP用户无法控制设备，获取设备数据
+     * @param {AppDeleteDeviceRequest} req
+     * @param {function(string, AppDeleteDeviceResponse):void} cb
+     * @public
+     */
+    AppDeleteDevice(req, cb) {
+        let resp = new AppDeleteDeviceResponse();
+        this.request("AppDeleteDevice", req, resp, cb);
     }
 
     /**
@@ -296,7 +419,29 @@ class IotClient extends AbstractClient {
     }
 
     /**
-     * 注册应用用户
+     * 获取用户信息
+     * @param {AppGetUserRequest} req
+     * @param {function(string, AppGetUserResponse):void} cb
+     * @public
+     */
+    AppGetUser(req, cb) {
+        let resp = new AppGetUserResponse();
+        this.request("AppGetUser", req, resp, cb);
+    }
+
+    /**
+     * 获取用户的绑定设备列表
+     * @param {AppGetDevicesRequest} req
+     * @param {function(string, AppGetDevicesResponse):void} cb
+     * @public
+     */
+    AppGetDevices(req, cb) {
+        let resp = new AppGetDevicesResponse();
+        this.request("AppGetDevices", req, resp, cb);
+    }
+
+    /**
+     * 为APP提供用户注册功能
      * @param {AppAddUserRequest} req
      * @param {function(string, AppAddUserResponse):void} cb
      * @public
@@ -304,6 +449,28 @@ class IotClient extends AbstractClient {
     AppAddUser(req, cb) {
         let resp = new AppAddUserResponse();
         this.request("AppAddUser", req, resp, cb);
+    }
+
+    /**
+     * 提供修改产品信息及数据模板的能力。
+     * @param {UpdateProductRequest} req
+     * @param {function(string, UpdateProductResponse):void} cb
+     * @public
+     */
+    UpdateProduct(req, cb) {
+        let resp = new UpdateProductResponse();
+        this.request("UpdateProduct", req, resp, cb);
+    }
+
+    /**
+     * 用户通过APP控制设备
+     * @param {AppIssueDeviceControlRequest} req
+     * @param {function(string, AppIssueDeviceControlResponse):void} cb
+     * @public
+     */
+    AppIssueDeviceControl(req, cb) {
+        let resp = new AppIssueDeviceControlResponse();
+        this.request("AppIssueDeviceControl", req, resp, cb);
     }
 
     /**
@@ -318,6 +485,17 @@ class IotClient extends AbstractClient {
     }
 
     /**
+     * 获取绑定设备数据，用于实时展示设备的最新数据
+     * @param {AppGetDeviceDataRequest} req
+     * @param {function(string, AppGetDeviceDataResponse):void} cb
+     * @public
+     */
+    AppGetDeviceData(req, cb) {
+        let resp = new AppGetDeviceDataResponse();
+        this.request("AppGetDeviceData", req, resp, cb);
+    }
+
+    /**
      * 提供查询某个设备详细信息的能力。
      * @param {GetDeviceRequest} req
      * @param {function(string, GetDeviceResponse):void} cb
@@ -326,6 +504,17 @@ class IotClient extends AbstractClient {
     GetDevice(req, cb) {
         let resp = new GetDeviceResponse();
         this.request("GetDevice", req, resp, cb);
+    }
+
+    /**
+     * 获取绑定设备的基本信息与数据模板定义
+     * @param {AppGetDeviceRequest} req
+     * @param {function(string, AppGetDeviceResponse):void} cb
+     * @public
+     */
+    AppGetDevice(req, cb) {
+        let resp = new AppGetDeviceResponse();
+        this.request("AppGetDevice", req, resp, cb);
     }
 
     /**
@@ -351,7 +540,7 @@ class IotClient extends AbstractClient {
     }
 
     /**
-     * 批量获取设备与云端的详细通信日志，该接口适用于使用数据模板类型的产品。
+     * 批量获取设备与云端的详细通信日志，该接口适用于使用高级版类型的产品。
      * @param {GetDeviceLogRequest} req
      * @param {function(string, GetDeviceLogResponse):void} cb
      * @public
@@ -395,14 +584,14 @@ class IotClient extends AbstractClient {
     }
 
     /**
-     * 提供修改产品信息及数据模板的能力。
-     * @param {UpdateProductRequest} req
-     * @param {function(string, UpdateProductResponse):void} cb
+     * 重置APP用户密码
+     * @param {AppResetPasswordRequest} req
+     * @param {function(string, AppResetPasswordResponse):void} cb
      * @public
      */
-    UpdateProduct(req, cb) {
-        let resp = new UpdateProductResponse();
-        this.request("UpdateProduct", req, resp, cb);
+    AppResetPassword(req, cb) {
+        let resp = new AppResetPasswordResponse();
+        this.request("AppResetPassword", req, resp, cb);
     }
 
     /**
@@ -417,6 +606,17 @@ class IotClient extends AbstractClient {
     }
 
     /**
+     * 关联子设备产品和网关产品
+     * @param {AssociateSubDeviceToGatewayProductRequest} req
+     * @param {function(string, AssociateSubDeviceToGatewayProductResponse):void} cb
+     * @public
+     */
+    AssociateSubDeviceToGatewayProduct(req, cb) {
+        let resp = new AssociateSubDeviceToGatewayProductResponse();
+        this.request("AssociateSubDeviceToGatewayProduct", req, resp, cb);
+    }
+
+    /**
      * 删除Topic
      * @param {DeleteTopicRequest} req
      * @param {function(string, DeleteTopicResponse):void} cb
@@ -425,6 +625,17 @@ class IotClient extends AbstractClient {
     DeleteTopic(req, cb) {
         let resp = new DeleteTopicResponse();
         this.request("DeleteTopic", req, resp, cb);
+    }
+
+    /**
+     * 修改设备别名，便于用户个性化定义设备的名称
+     * @param {AppUpdateDeviceRequest} req
+     * @param {function(string, AppUpdateDeviceResponse):void} cb
+     * @public
+     */
+    AppUpdateDevice(req, cb) {
+        let resp = new AppUpdateDeviceResponse();
+        this.request("AppUpdateDevice", req, resp, cb);
     }
 
 
