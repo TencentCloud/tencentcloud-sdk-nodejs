@@ -25,7 +25,7 @@ class RemoveInstancesResponse extends  AbstractModel {
         super();
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -53,7 +53,7 @@ class DisableAutoScalingGroupResponse extends  AbstractModel {
         super();
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -144,7 +144,7 @@ class DeleteAutoScalingGroupResponse extends  AbstractModel {
         super();
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -207,7 +207,7 @@ class DetachInstancesResponse extends  AbstractModel {
         super();
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -433,6 +433,20 @@ class CreateLaunchConfigurationRequest extends  AbstractModel {
          */
         this.UserData = null;
 
+        /**
+         * 实例计费类型，CVM默认值按照POSTPAID_BY_HOUR处理。
+<br><li>POSTPAID_BY_HOUR：按小时后付费
+<br><li>SPOTPAID：竞价付费
+         * @type {string || null}
+         */
+        this.InstanceChargeType = null;
+
+        /**
+         * 实例的市场相关选项，如竞价实例相关参数，若指定实例的付费模式为竞价付费则该参数必传。
+         * @type {InstanceMarketOptionsRequest || null}
+         */
+        this.InstanceMarketOptions = null;
+
     }
 
     /**
@@ -481,6 +495,13 @@ class CreateLaunchConfigurationRequest extends  AbstractModel {
             this.EnhancedService = obj;
         }
         this.UserData = params.UserData || null;
+        this.InstanceChargeType = params.InstanceChargeType || null;
+
+        if (params.InstanceMarketOptions) {
+            let obj = new InstanceMarketOptionsRequest();
+            obj.deserialize(params.InstanceMarketOptions)
+            this.InstanceMarketOptions = obj;
+        }
 
     }
 }
@@ -785,7 +806,7 @@ class AttachInstancesResponse extends  AbstractModel {
         super();
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -813,7 +834,7 @@ class DeleteLaunchConfigurationResponse extends  AbstractModel {
         super();
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -991,6 +1012,20 @@ class LaunchConfiguration extends  AbstractModel {
          */
         this.LaunchConfigurationStatus = null;
 
+        /**
+         * 实例计费类型，CVM默认值按照POSTPAID_BY_HOUR处理。
+<br><li>POSTPAID_BY_HOUR：按小时后付费
+<br><li>SPOTPAID：竞价付费
+         * @type {string || null}
+         */
+        this.InstanceChargeType = null;
+
+        /**
+         * 实例的市场相关选项，如竞价实例相关参数，若指定实例的付费模式为竞价付费则该参数必传。
+         * @type {InstanceMarketOptionsRequest || null}
+         */
+        this.InstanceMarketOptions = null;
+
     }
 
     /**
@@ -1051,6 +1086,13 @@ class LaunchConfiguration extends  AbstractModel {
         }
         this.ImageId = params.ImageId || null;
         this.LaunchConfigurationStatus = params.LaunchConfigurationStatus || null;
+        this.InstanceChargeType = params.InstanceChargeType || null;
+
+        if (params.InstanceMarketOptions) {
+            let obj = new InstanceMarketOptionsRequest();
+            obj.deserialize(params.InstanceMarketOptions)
+            this.InstanceMarketOptions = obj;
+        }
 
     }
 }
@@ -1109,7 +1151,7 @@ class DescribeAccountLimitsResponse extends  AbstractModel {
         this.NumberOfAutoScalingGroups = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -1153,7 +1195,7 @@ class DescribeLaunchConfigurationsResponse extends  AbstractModel {
         this.LaunchConfigurationSet = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -1197,7 +1239,7 @@ class CreateLaunchConfigurationResponse extends  AbstractModel {
         this.LaunchConfigurationId = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -1338,6 +1380,46 @@ class ModifyDesiredCapacityRequest extends  AbstractModel {
 }
 
 /**
+ * CVM竞价请求相关选项
+ * @class
+ */
+class InstanceMarketOptionsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 竞价相关选项
+         * @type {SpotMarketOptions || null}
+         */
+        this.SpotOptions = null;
+
+        /**
+         * 市场选项类型，当前只支持取值：spot
+         * @type {string || null}
+         */
+        this.MarketType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.SpotOptions) {
+            let obj = new SpotMarketOptions();
+            obj.deserialize(params.SpotOptions)
+            this.SpotOptions = obj;
+        }
+        this.MarketType = params.MarketType || null;
+
+    }
+}
+
+/**
  * CreateScheduledAction返回参数结构体
  * @class
  */
@@ -1352,7 +1434,7 @@ class CreateScheduledActionResponse extends  AbstractModel {
         this.ScheduledActionId = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -1393,7 +1475,7 @@ class DescribeScheduledActionsResponse extends  AbstractModel {
         this.ScheduledActionSet = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -1443,7 +1525,7 @@ class DescribeAutoScalingGroupsResponse extends  AbstractModel {
         this.TotalCount = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -1695,7 +1777,7 @@ class ModifyAutoScalingGroupResponse extends  AbstractModel {
         super();
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -1773,6 +1855,41 @@ class AttachInstancesRequest extends  AbstractModel {
         }
         this.AutoScalingGroupId = params.AutoScalingGroupId || null;
         this.InstanceIds = params.InstanceIds || null;
+
+    }
+}
+
+/**
+ * 竞价相关选项
+ * @class
+ */
+class SpotMarketOptions extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 竞价出价，例如“1.05”
+         * @type {string || null}
+         */
+        this.MaxPrice = null;
+
+        /**
+         * 竞价请求类型，当前仅支持类型：one-time，默认值为one-time
+         * @type {string || null}
+         */
+        this.SpotInstanceType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MaxPrice = params.MaxPrice || null;
+        this.SpotInstanceType = params.SpotInstanceType || null;
 
     }
 }
@@ -1902,7 +2019,7 @@ class ModifyScheduledActionResponse extends  AbstractModel {
         super();
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -1930,7 +2047,7 @@ class EnableAutoScalingGroupResponse extends  AbstractModel {
         super();
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -2018,7 +2135,7 @@ class ModifyDesiredCapacityResponse extends  AbstractModel {
         super();
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -2052,7 +2169,7 @@ class CreateAutoScalingGroupResponse extends  AbstractModel {
         this.AutoScalingGroupId = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -2228,7 +2345,7 @@ class Instance extends  AbstractModel {
 
         /**
          * 创建类型，取值包括AUTO_CREATION, MANUAL_ATTACHING。
-         * @type {Array.<string> || null}
+         * @type {string || null}
          */
         this.CreationType = null;
 
@@ -2282,7 +2399,7 @@ class DescribeAutoScalingInstancesResponse extends  AbstractModel {
         this.TotalCount = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -2482,7 +2599,7 @@ class DeleteScheduledActionResponse extends  AbstractModel {
         super();
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -2726,6 +2843,7 @@ module.exports = {
     ForwardLoadBalancer: ForwardLoadBalancer,
     DeleteScheduledActionRequest: DeleteScheduledActionRequest,
     ModifyDesiredCapacityRequest: ModifyDesiredCapacityRequest,
+    InstanceMarketOptionsRequest: InstanceMarketOptionsRequest,
     CreateScheduledActionResponse: CreateScheduledActionResponse,
     DescribeScheduledActionsResponse: DescribeScheduledActionsResponse,
     DescribeAutoScalingGroupsResponse: DescribeAutoScalingGroupsResponse,
@@ -2736,6 +2854,7 @@ module.exports = {
     ModifyAutoScalingGroupResponse: ModifyAutoScalingGroupResponse,
     DeleteLaunchConfigurationRequest: DeleteLaunchConfigurationRequest,
     AttachInstancesRequest: AttachInstancesRequest,
+    SpotMarketOptions: SpotMarketOptions,
     RunSecurityServiceEnabled: RunSecurityServiceEnabled,
     LoginSettings: LoginSettings,
     Filter: Filter,
