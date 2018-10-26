@@ -34,6 +34,7 @@ const AssociateSecurityGroupsRequest = models.AssociateSecurityGroupsRequest;
 const CreateAccountsResponse = models.CreateAccountsResponse;
 const RegionSellConf = models.RegionSellConf;
 const InstanceRollbackRangeTime = models.InstanceRollbackRangeTime;
+const SqlFileInfo = models.SqlFileInfo;
 const DescribeTablesResponse = models.DescribeTablesResponse;
 const SellConfig = models.SellConfig;
 const DescribeDBSecurityGroupsResponse = models.DescribeDBSecurityGroupsResponse;
@@ -72,10 +73,12 @@ const DescribeDBSecurityGroupsRequest = models.DescribeDBSecurityGroupsRequest;
 const ModifyDBInstanceVipVportResponse = models.ModifyDBInstanceVipVportResponse;
 const DescribeDBSwitchRecordsResponse = models.DescribeDBSwitchRecordsResponse;
 const TableName = models.TableName;
+const RenewDBInstanceRequest = models.RenewDBInstanceRequest;
 const SlowLogInfo = models.SlowLogInfo;
 const DeleteBackupResponse = models.DeleteBackupResponse;
 const TablePrivilege = models.TablePrivilege;
 const DescribeProjectSecurityGroupsResponse = models.DescribeProjectSecurityGroupsResponse;
+const UploadInfo = models.UploadInfo;
 const ModifyAccountPasswordResponse = models.ModifyAccountPasswordResponse;
 const DescribeDBSwitchRecordsRequest = models.DescribeDBSwitchRecordsRequest;
 const DescribeAsyncRequestInfoResponse = models.DescribeAsyncRequestInfoResponse;
@@ -86,7 +89,6 @@ const DeleteAccountsResponse = models.DeleteAccountsResponse;
 const DescribeDBInstanceCharsetResponse = models.DescribeDBInstanceCharsetResponse;
 const RestartDBInstancesResponse = models.RestartDBInstancesResponse;
 const DescribeBackupDatabasesResponse = models.DescribeBackupDatabasesResponse;
-const First = models.First;
 const ModifyAutoRenewFlagResponse = models.ModifyAutoRenewFlagResponse;
 const DescribeBackupsResponse = models.DescribeBackupsResponse;
 const DescribeDBImportRecordsResponse = models.DescribeDBImportRecordsResponse;
@@ -96,6 +98,7 @@ const DescribeInstanceParamsRequest = models.DescribeInstanceParamsRequest;
 const ModifyDBInstanceSecurityGroupsRequest = models.ModifyDBInstanceSecurityGroupsRequest;
 const DescribeBackupTablesResponse = models.DescribeBackupTablesResponse;
 const Outbound = models.Outbound;
+const SlaveInstanceInfo = models.SlaveInstanceInfo;
 const ParamInfo = models.ParamInfo;
 const DescribeProjectSecurityGroupsRequest = models.DescribeProjectSecurityGroupsRequest;
 const StartBatchRollbackRequest = models.StartBatchRollbackRequest;
@@ -106,7 +109,10 @@ const ModifyDBInstanceNameRequest = models.ModifyDBInstanceNameRequest;
 const UpgradeDBInstanceEngineVersionResponse = models.UpgradeDBInstanceEngineVersionResponse;
 const DescribeAsyncRequestInfoRequest = models.DescribeAsyncRequestInfoRequest;
 const ModifyInstanceParamResponse = models.ModifyInstanceParamResponse;
+const UpgradeDBInstanceRequest = models.UpgradeDBInstanceRequest;
 const ColumnPrivilege = models.ColumnPrivilege;
+const DescribeUploadedFilesRequest = models.DescribeUploadedFilesRequest;
+const DescribeUploadedFilesResponse = models.DescribeUploadedFilesResponse;
 const InitDBInstancesRequest = models.InitDBInstancesRequest;
 const AssociateSecurityGroupsResponse = models.AssociateSecurityGroupsResponse;
 const InstanceInfo = models.InstanceInfo;
@@ -125,7 +131,7 @@ const ModifyAccountDescriptionRequest = models.ModifyAccountDescriptionRequest;
 const ModifyAccountPasswordRequest = models.ModifyAccountPasswordRequest;
 const DescribeTablesRequest = models.DescribeTablesRequest;
 const InstanceRebootTime = models.InstanceRebootTime;
-const UpgradeDBInstanceRequest = models.UpgradeDBInstanceRequest;
+const RenewDBInstanceResponse = models.RenewDBInstanceResponse;
 const DescribeDatabasesResponse = models.DescribeDatabasesResponse;
 const ZoneSellConf = models.ZoneSellConf;
 const DescribeDBInstanceConfigResponse = models.DescribeDBInstanceConfigResponse;
@@ -226,6 +232,8 @@ class CdbClient extends AbstractClient {
 
     /**
      * 本接口(CreateDBImportJob)用于创建云数据库数据导入任务。
+
+注意，用户进行数据导入任务的文件，必须提前上传到腾讯云。用户可在控制台进行文件导入，也可使用[上传导入文件](https://cloud.tencent.com/document/api/236/8595)进行文件导入。
      * @param {CreateDBImportJobRequest} req
      * @param {function(string, CreateDBImportJobResponse):void} cb
      * @public
@@ -489,10 +497,7 @@ class CdbClient extends AbstractClient {
     }
 
     /**
-     * 本接口(DescribeDBInstances)用于查询云数据库实例列表，支持通过项目ID、实例ID、访问地址、实例状态等来筛选实例。
-
-1. 不指定任何过滤条件, 则默认返回20条实例记录，单次请求最多支持返回100条实例记录；
-2. 支持查询主实例、灾备实例和只读实例信息列表。
+     * 本接口(DescribeDBInstances)用于查询云数据库实例列表，支持通过项目ID、实例ID、访问地址、实例状态等过滤条件来筛选实例。支持查询主实例、灾备实例和只读实例信息列表。
      * @param {DescribeDBInstancesRequest} req
      * @param {function(string, DescribeDBInstancesResponse):void} cb
      * @public
@@ -511,6 +516,17 @@ class CdbClient extends AbstractClient {
     VerifyRootAccount(req, cb) {
         let resp = new VerifyRootAccountResponse();
         this.request("VerifyRootAccount", req, resp, cb);
+    }
+
+    /**
+     * 本接口(RenewDBInstance)用于续费云数据库实例，仅支持付费模式为包年包月的实例。按量计费实例不需要续费。
+     * @param {RenewDBInstanceRequest} req
+     * @param {function(string, RenewDBInstanceResponse):void} cb
+     * @public
+     */
+    RenewDBInstance(req, cb) {
+        let resp = new RenewDBInstanceResponse();
+        this.request("RenewDBInstance", req, resp, cb);
     }
 
     /**
@@ -771,6 +787,17 @@ class CdbClient extends AbstractClient {
     DescribeInstanceParams(req, cb) {
         let resp = new DescribeInstanceParamsResponse();
         this.request("DescribeInstanceParams", req, resp, cb);
+    }
+
+    /**
+     * 本接口(DescribeUploadedFiles)用于查询用户导入的SQL文件列表。
+     * @param {DescribeUploadedFilesRequest} req
+     * @param {function(string, DescribeUploadedFilesResponse):void} cb
+     * @public
+     */
+    DescribeUploadedFiles(req, cb) {
+        let resp = new DescribeUploadedFilesResponse();
+        this.request("DescribeUploadedFiles", req, resp, cb);
     }
 
     /**

@@ -17,55 +17,95 @@
 const AbstractModel = require("../../common/abstract_model");
 
 /**
- * DescribePersonVisitInfo请求参数结构体
+ * DescribeClusterPersonArrivedMall返回参数结构体
  * @class
  */
-class DescribePersonVisitInfoRequest extends  AbstractModel {
+class DescribeClusterPersonArrivedMallResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 公司ID
+         * 卖场系统编码
          * @type {string || null}
          */
-        this.CompanyId = null;
+        this.MallId = null;
 
         /**
-         * 门店ID
-         * @type {number || null}
-         */
-        this.ShopId = null;
-
-        /**
-         * 开始日期，格式yyyy-MM-dd
+         * 卖场客户编码
          * @type {string || null}
          */
-        this.StartDate = null;
+        this.MallCode = null;
 
         /**
-         * 结束日期，格式yyyy-MM-dd
+         * 客户编码
          * @type {string || null}
          */
-        this.EndDate = null;
+        this.PersonId = null;
 
         /**
-         * 偏移量：分页控制参数，第一页传0，第n页Offset=(n-1)*Limit
+         * 到场信息
+         * @type {Array.<ArrivedMallInfo> || null}
+         */
+        this.ArrivedMallSet = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MallId = params.MallId || null;
+        this.MallCode = params.MallCode || null;
+        this.PersonId = params.PersonId || null;
+
+        if (params.ArrivedMallSet) {
+            this.ArrivedMallSet = new Array();
+            for (let z in params.ArrivedMallSet) {
+                let obj = new ArrivedMallInfo();
+                obj.deserialize(params.ArrivedMallSet[z]);
+                this.ArrivedMallSet.push(obj);
+            }
+        }
+        this.RequestId = params.RequestId || null;
+
+    }
+}
+
+/**
+ * DescribePerson请求参数结构体
+ * @class
+ */
+class DescribePersonRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 卖场编码
+         * @type {string || null}
+         */
+        this.MallId = null;
+
+        /**
+         * 查询偏移
          * @type {number || null}
          */
         this.Offset = null;
 
         /**
-         * Limit:每页的数据项，最大100，超过100会被强制指定为100
+         * 查询数量，默认20，最大查询数量100
          * @type {number || null}
          */
         this.Limit = null;
 
-        /**
-         * 图片url过期时间：在当前时间+PictureExpires秒后，图片url无法继续正常访问；单位s；默认值1*24*60*60（1天）
-         * @type {number || null}
-         */
-        this.PictureExpires = null;
-
     }
 
     /**
@@ -75,36 +115,44 @@ class DescribePersonVisitInfoRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.CompanyId = params.CompanyId || null;
-        this.ShopId = params.ShopId || null;
-        this.StartDate = params.StartDate || null;
-        this.EndDate = params.EndDate || null;
+        this.MallId = params.MallId || null;
         this.Offset = params.Offset || null;
         this.Limit = params.Limit || null;
-        this.PictureExpires = params.PictureExpires || null;
 
     }
 }
 
 /**
- * 区域性别平均停留时间子结构
+ * DescribeClusterPersonArrivedMall请求参数结构体
  * @class
  */
-class ZoneAgeGroupAvrStayTime extends  AbstractModel {
+class DescribeClusterPersonArrivedMallRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 男性平均停留时间
-         * @type {number || null}
+         * 卖场编码
+         * @type {string || null}
          */
-        this.MaleAvrStayTime = null;
+        this.MallId = null;
 
         /**
-         * 女性平均停留时间
-         * @type {number || null}
+         * 客户编码
+         * @type {string || null}
          */
-        this.FemaleAvrStayTime = null;
+        this.PersonId = null;
+
+        /**
+         * 查询开始时间
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * 查询结束时间
+         * @type {string || null}
+         */
+        this.EndTime = null;
 
     }
 
@@ -115,61 +163,33 @@ class ZoneAgeGroupAvrStayTime extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.MaleAvrStayTime = params.MaleAvrStayTime || null;
-        this.FemaleAvrStayTime = params.FemaleAvrStayTime || null;
+        this.MallId = params.MallId || null;
+        this.PersonId = params.PersonId || null;
+        this.StartTime = params.StartTime || null;
+        this.EndTime = params.EndTime || null;
 
     }
 }
 
 /**
- * 客户所属的门店信息
+ * 客户轨迹序列
  * @class
  */
-class ShopInfo extends  AbstractModel {
+class PersonTraceRoute extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 公司ID
+         * 轨迹编码
          * @type {string || null}
          */
-        this.CompanyId = null;
+        this.TraceId = null;
 
         /**
-         * 门店ID
-         * @type {number || null}
+         * 轨迹点序列
+         * @type {Array.<PersonTracePoint> || null}
          */
-        this.ShopId = null;
-
-        /**
-         * 门店名称
-         * @type {string || null}
-         */
-        this.ShopName = null;
-
-        /**
-         * 客户门店编码
-         * @type {string || null}
-         */
-        this.ShopCode = null;
-
-        /**
-         * 省
-         * @type {string || null}
-         */
-        this.Province = null;
-
-        /**
-         * 市
-         * @type {string || null}
-         */
-        this.City = null;
-
-        /**
-         * 公司名称
-         * @type {string || null}
-         */
-        this.CompanyName = null;
+        this.TracePointSet = null;
 
     }
 
@@ -180,13 +200,65 @@ class ShopInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.CompanyId = params.CompanyId || null;
-        this.ShopId = params.ShopId || null;
-        this.ShopName = params.ShopName || null;
-        this.ShopCode = params.ShopCode || null;
-        this.Province = params.Province || null;
-        this.City = params.City || null;
-        this.CompanyName = params.CompanyName || null;
+        this.TraceId = params.TraceId || null;
+
+        if (params.TracePointSet) {
+            this.TracePointSet = new Array();
+            for (let z in params.TracePointSet) {
+                let obj = new PersonTracePoint();
+                obj.deserialize(params.TracePointSet[z]);
+                this.TracePointSet.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * 客流停留统计子结构
+ * @class
+ */
+class ZoneFlowAndAvrStayTime extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 区域id
+         * @type {number || null}
+         */
+        this.ZoneId = null;
+
+        /**
+         * 区域名称
+         * @type {string || null}
+         */
+        this.ZoneName = null;
+
+        /**
+         * 人流量
+         * @type {number || null}
+         */
+        this.FlowCount = null;
+
+        /**
+         * 平均停留时长
+         * @type {number || null}
+         */
+        this.AvrStayTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ZoneId = params.ZoneId || null;
+        this.ZoneName = params.ZoneName || null;
+        this.FlowCount = params.FlowCount || null;
+        this.AvrStayTime = params.AvrStayTime || null;
 
     }
 }
@@ -224,7 +296,7 @@ class DescribeZoneTrafficInfoResponse extends  AbstractModel {
         this.ZoneTrafficInfoSet = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -354,6 +426,70 @@ class HourTrafficInfoDetail extends  AbstractModel {
 }
 
 /**
+ * DescribePersonTrace返回参数结构体
+ * @class
+ */
+class DescribePersonTraceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 卖场系统编码
+         * @type {string || null}
+         */
+        this.MallId = null;
+
+        /**
+         * 卖场用户编码
+         * @type {string || null}
+         */
+        this.MallCode = null;
+
+        /**
+         * 客户编码
+         * @type {string || null}
+         */
+        this.PersonId = null;
+
+        /**
+         * 轨迹列表
+         * @type {Array.<PersonTraceRoute> || null}
+         */
+        this.TraceRouteSet = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MallId = params.MallId || null;
+        this.MallCode = params.MallCode || null;
+        this.PersonId = params.PersonId || null;
+
+        if (params.TraceRouteSet) {
+            this.TraceRouteSet = new Array();
+            for (let z in params.TraceRouteSet) {
+                let obj = new PersonTraceRoute();
+                obj.deserialize(params.TraceRouteSet[z]);
+                this.TraceRouteSet.push(obj);
+            }
+        }
+        this.RequestId = params.RequestId || null;
+
+    }
+}
+
+/**
  * 门店区域客流信息
  * @class
  */
@@ -392,6 +528,76 @@ class ZoneTrafficInfo extends  AbstractModel {
                 this.ZoneTrafficInfoDetailSet.push(obj);
             }
         }
+
+    }
+}
+
+/**
+ * 来访客人基本资料
+ * @class
+ */
+class PersonProfile extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 客人编码
+         * @type {string || null}
+         */
+        this.PersonId = null;
+
+        /**
+         * 性别
+         * @type {number || null}
+         */
+        this.Gender = null;
+
+        /**
+         * 年龄
+         * @type {number || null}
+         */
+        this.Age = null;
+
+        /**
+         * 首次到场时间
+         * @type {string || null}
+         */
+        this.FirstArrivedTime = null;
+
+        /**
+         * 来访次数
+         * @type {number || null}
+         */
+        this.ArrivedCount = null;
+
+        /**
+         * 客户图片
+         * @type {string || null}
+         */
+        this.PicUrl = null;
+
+        /**
+         * 置信度
+         * @type {number || null}
+         */
+        this.Similarity = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PersonId = params.PersonId || null;
+        this.Gender = params.Gender || null;
+        this.Age = params.Age || null;
+        this.FirstArrivedTime = params.FirstArrivedTime || null;
+        this.ArrivedCount = params.ArrivedCount || null;
+        this.PicUrl = params.PicUrl || null;
+        this.Similarity = params.Similarity || null;
 
     }
 }
@@ -455,6 +661,104 @@ class DescribePersonInfoRequest extends  AbstractModel {
         this.Offset = params.Offset || null;
         this.Limit = params.Limit || null;
         this.PictureExpires = params.PictureExpires || null;
+
+    }
+}
+
+/**
+ * 区域性别平均停留时间子结构
+ * @class
+ */
+class ZoneAgeGroupAvrStayTime extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 男性平均停留时间
+         * @type {number || null}
+         */
+        this.MaleAvrStayTime = null;
+
+        /**
+         * 女性平均停留时间
+         * @type {number || null}
+         */
+        this.FemaleAvrStayTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MaleAvrStayTime = params.MaleAvrStayTime || null;
+        this.FemaleAvrStayTime = params.FemaleAvrStayTime || null;
+
+    }
+}
+
+/**
+ * 客户轨迹点
+ * @class
+ */
+class PersonTracePoint extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 卖场区域编码
+         * @type {number || null}
+         */
+        this.MallAreaId = null;
+
+        /**
+         * 门店编码
+         * @type {number || null}
+         */
+        this.ShopId = null;
+
+        /**
+         * 卖场区域类型
+         * @type {number || null}
+         */
+        this.MallAreaType = null;
+
+        /**
+         * 轨迹事件
+         * @type {number || null}
+         */
+        this.TraceEventType = null;
+
+        /**
+         * 轨迹事件发生时间点
+         * @type {string || null}
+         */
+        this.TraceEventTime = null;
+
+        /**
+         * 抓拍图片
+         * @type {string || null}
+         */
+        this.CapPic = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MallAreaId = params.MallAreaId || null;
+        this.ShopId = params.ShopId || null;
+        this.MallAreaType = params.MallAreaType || null;
+        this.TraceEventType = params.TraceEventType || null;
+        this.TraceEventTime = params.TraceEventTime || null;
+        this.CapPic = params.CapPic || null;
 
     }
 }
@@ -545,7 +849,7 @@ class RegisterCallbackResponse extends  AbstractModel {
         super();
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -647,7 +951,7 @@ class DescribeZoneFlowAndStayTimeResponse extends  AbstractModel {
         this.Data = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -716,7 +1020,7 @@ class DescribeZoneFlowHourlyByZoneIdResponse extends  AbstractModel {
         this.Data = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -741,6 +1045,70 @@ class DescribeZoneFlowHourlyByZoneIdResponse extends  AbstractModel {
                 let obj = new ZoneHourFlow();
                 obj.deserialize(params.Data[z]);
                 this.Data.push(obj);
+            }
+        }
+        this.RequestId = params.RequestId || null;
+
+    }
+}
+
+/**
+ * DescribePersonArrivedMall返回参数结构体
+ * @class
+ */
+class DescribePersonArrivedMallResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 卖场系统编码
+         * @type {string || null}
+         */
+        this.MallId = null;
+
+        /**
+         * 卖场用户编码
+         * @type {string || null}
+         */
+        this.MallCode = null;
+
+        /**
+         * 客户编码
+         * @type {string || null}
+         */
+        this.PersonId = null;
+
+        /**
+         * 到场轨迹
+         * @type {Array.<ArrivedMallInfo> || null}
+         */
+        this.ArrivedMallSet = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MallId = params.MallId || null;
+        this.MallCode = params.MallCode || null;
+        this.PersonId = params.PersonId || null;
+
+        if (params.ArrivedMallSet) {
+            this.ArrivedMallSet = new Array();
+            for (let z in params.ArrivedMallSet) {
+                let obj = new ArrivedMallInfo();
+                obj.deserialize(params.ArrivedMallSet[z]);
+                this.ArrivedMallSet.push(obj);
             }
         }
         this.RequestId = params.RequestId || null;
@@ -984,7 +1352,7 @@ class DescribePersonInfoResponse extends  AbstractModel {
         this.PersonInfoSet = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -1157,6 +1525,49 @@ class DescribeTrajectoryDataRequest extends  AbstractModel {
 }
 
 /**
+ * 客户天轨迹
+ * @class
+ */
+class DailyTracePoint extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 轨迹日期
+         * @type {string || null}
+         */
+        this.TraceDate = null;
+
+        /**
+         * 轨迹点序列
+         * @type {Array.<PersonTracePoint> || null}
+         */
+        this.TracePointSet = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TraceDate = params.TraceDate || null;
+
+        if (params.TracePointSet) {
+            this.TracePointSet = new Array();
+            for (let z in params.TracePointSet) {
+                let obj = new PersonTracePoint();
+                obj.deserialize(params.TracePointSet[z]);
+                this.TracePointSet.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * DescribeNetworkInfo返回参数结构体
  * @class
  */
@@ -1171,7 +1582,7 @@ class DescribeNetworkInfoResponse extends  AbstractModel {
         this.InstanceSet = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -1192,6 +1603,125 @@ class DescribeNetworkInfoResponse extends  AbstractModel {
             this.InstanceSet = obj;
         }
         this.RequestId = params.RequestId || null;
+
+    }
+}
+
+/**
+ * DescribePersonVisitInfo请求参数结构体
+ * @class
+ */
+class DescribePersonVisitInfoRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 公司ID
+         * @type {string || null}
+         */
+        this.CompanyId = null;
+
+        /**
+         * 门店ID
+         * @type {number || null}
+         */
+        this.ShopId = null;
+
+        /**
+         * 开始日期，格式yyyy-MM-dd
+         * @type {string || null}
+         */
+        this.StartDate = null;
+
+        /**
+         * 结束日期，格式yyyy-MM-dd
+         * @type {string || null}
+         */
+        this.EndDate = null;
+
+        /**
+         * 偏移量：分页控制参数，第一页传0，第n页Offset=(n-1)*Limit
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Limit:每页的数据项，最大100，超过100会被强制指定为100
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 图片url过期时间：在当前时间+PictureExpires秒后，图片url无法继续正常访问；单位s；默认值1*24*60*60（1天）
+         * @type {number || null}
+         */
+        this.PictureExpires = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CompanyId = params.CompanyId || null;
+        this.ShopId = params.ShopId || null;
+        this.StartDate = params.StartDate || null;
+        this.EndDate = params.EndDate || null;
+        this.Offset = params.Offset || null;
+        this.Limit = params.Limit || null;
+        this.PictureExpires = params.PictureExpires || null;
+
+    }
+}
+
+/**
+ * 门店区域客流详细信息
+ * @class
+ */
+class ZoneTrafficInfoDetail extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 区域ID
+         * @type {number || null}
+         */
+        this.ZoneId = null;
+
+        /**
+         * 区域名称
+         * @type {string || null}
+         */
+        this.ZoneName = null;
+
+        /**
+         * 客流量
+         * @type {number || null}
+         */
+        this.TrafficTotalCount = null;
+
+        /**
+         * 平均停留时间
+         * @type {number || null}
+         */
+        this.AvgStayTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ZoneId = params.ZoneId || null;
+        this.ZoneName = params.ZoneName || null;
+        this.TrafficTotalCount = params.TrafficTotalCount || null;
+        this.AvgStayTime = params.AvgStayTime || null;
 
     }
 }
@@ -1261,7 +1791,7 @@ class CreateAccountResponse extends  AbstractModel {
         super();
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -1295,7 +1825,7 @@ class DescribeHistoryNetworkInfoResponse extends  AbstractModel {
         this.InstanceSet = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -1347,7 +1877,7 @@ class CreateFacePictureResponse extends  AbstractModel {
         this.PictureUrl = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -1446,7 +1976,7 @@ class DescribeShopInfoResponse extends  AbstractModel {
         this.ShopInfoSet = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -1471,6 +2001,76 @@ class DescribeShopInfoResponse extends  AbstractModel {
             }
         }
         this.RequestId = params.RequestId || null;
+
+    }
+}
+
+/**
+ * 客户所属的门店信息
+ * @class
+ */
+class ShopInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 公司ID
+         * @type {string || null}
+         */
+        this.CompanyId = null;
+
+        /**
+         * 门店ID
+         * @type {number || null}
+         */
+        this.ShopId = null;
+
+        /**
+         * 门店名称
+         * @type {string || null}
+         */
+        this.ShopName = null;
+
+        /**
+         * 客户门店编码
+         * @type {string || null}
+         */
+        this.ShopCode = null;
+
+        /**
+         * 省
+         * @type {string || null}
+         */
+        this.Province = null;
+
+        /**
+         * 市
+         * @type {string || null}
+         */
+        this.City = null;
+
+        /**
+         * 公司名称
+         * @type {string || null}
+         */
+        this.CompanyName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CompanyId = params.CompanyId || null;
+        this.ShopId = params.ShopId || null;
+        this.ShopName = params.ShopName || null;
+        this.ShopCode = params.ShopCode || null;
+        this.Province = params.Province || null;
+        this.City = params.City || null;
+        this.CompanyName = params.CompanyName || null;
 
     }
 }
@@ -1514,7 +2114,7 @@ class DescribeZoneFlowDailyByZoneIdResponse extends  AbstractModel {
         this.Data = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -1542,6 +2142,49 @@ class DescribeZoneFlowDailyByZoneIdResponse extends  AbstractModel {
             }
         }
         this.RequestId = params.RequestId || null;
+
+    }
+}
+
+/**
+ * 获取当前门店最新网络状态数据返回结构
+ * @class
+ */
+class NetworkLastInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 总数
+         * @type {number || null}
+         */
+        this.Count = null;
+
+        /**
+         * 网络状态
+         * @type {Array.<NetworkAndShopInfo> || null}
+         */
+        this.Infos = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Count = params.Count || null;
+
+        if (params.Infos) {
+            this.Infos = new Array();
+            for (let z in params.Infos) {
+                let obj = new NetworkAndShopInfo();
+                obj.deserialize(params.Infos[z]);
+                this.Infos.push(obj);
+            }
+        }
 
     }
 }
@@ -1648,7 +2291,7 @@ class DescribeZoneFlowAgeInfoByZoneIdResponse extends  AbstractModel {
         this.Data = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -1667,6 +2310,56 @@ class DescribeZoneFlowAgeInfoByZoneIdResponse extends  AbstractModel {
         this.ZoneId = params.ZoneId || null;
         this.ZoneName = params.ZoneName || null;
         this.Data = params.Data || null;
+        this.RequestId = params.RequestId || null;
+
+    }
+}
+
+/**
+ * DescribePerson返回参数结构体
+ * @class
+ */
+class DescribePersonResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 总计客户数量
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 客户信息
+         * @type {Array.<PersonProfile> || null}
+         */
+        this.PersonSet = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = params.TotalCount || null;
+
+        if (params.PersonSet) {
+            this.PersonSet = new Array();
+            for (let z in params.PersonSet) {
+                let obj = new PersonProfile();
+                obj.deserialize(params.PersonSet[z]);
+                this.PersonSet.push(obj);
+            }
+        }
         this.RequestId = params.RequestId || null;
 
     }
@@ -1745,6 +2438,70 @@ class PersonVisitInfo extends  AbstractModel {
         this.GlassType = params.GlassType || null;
         this.HairType = params.HairType || null;
         this.CapturedPictureUrl = params.CapturedPictureUrl || null;
+
+    }
+}
+
+/**
+ * DescribeClusterPersonTrace返回参数结构体
+ * @class
+ */
+class DescribeClusterPersonTraceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 卖场系统编码
+         * @type {string || null}
+         */
+        this.MallId = null;
+
+        /**
+         * 卖场用户编码
+         * @type {string || null}
+         */
+        this.MallCode = null;
+
+        /**
+         * 客户编码
+         * @type {string || null}
+         */
+        this.PersonId = null;
+
+        /**
+         * 轨迹序列
+         * @type {Array.<DailyTracePoint> || null}
+         */
+        this.TracePointSet = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MallId = params.MallId || null;
+        this.MallCode = params.MallCode || null;
+        this.PersonId = params.PersonId || null;
+
+        if (params.TracePointSet) {
+            this.TracePointSet = new Array();
+            for (let z in params.TracePointSet) {
+                let obj = new DailyTracePoint();
+                obj.deserialize(params.TracePointSet[z]);
+                this.TracePointSet.push(obj);
+            }
+        }
+        this.RequestId = params.RequestId || null;
 
     }
 }
@@ -1897,36 +2654,30 @@ class DescribeZoneFlowAgeInfoByZoneIdRequest extends  AbstractModel {
 }
 
 /**
- * 门店区域客流详细信息
+ * DescribePersonTraceDetail请求参数结构体
  * @class
  */
-class ZoneTrafficInfoDetail extends  AbstractModel {
+class DescribePersonTraceDetailRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 区域ID
-         * @type {number || null}
-         */
-        this.ZoneId = null;
-
-        /**
-         * 区域名称
+         * 卖场编码
          * @type {string || null}
          */
-        this.ZoneName = null;
+        this.MallId = null;
 
         /**
-         * 客流量
-         * @type {number || null}
+         * 客户编码
+         * @type {string || null}
          */
-        this.TrafficTotalCount = null;
+        this.PersonId = null;
 
         /**
-         * 平均停留时间
-         * @type {number || null}
+         * 轨迹编码
+         * @type {string || null}
          */
-        this.AvgStayTime = null;
+        this.TraceId = null;
 
     }
 
@@ -1937,10 +2688,9 @@ class ZoneTrafficInfoDetail extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ZoneId = params.ZoneId || null;
-        this.ZoneName = params.ZoneName || null;
-        this.TrafficTotalCount = params.TrafficTotalCount || null;
-        this.AvgStayTime = params.AvgStayTime || null;
+        this.MallId = params.MallId || null;
+        this.PersonId = params.PersonId || null;
+        this.TraceId = params.TraceId || null;
 
     }
 }
@@ -2002,24 +2752,42 @@ class CreateAccountRequest extends  AbstractModel {
 }
 
 /**
- * 获取当前门店最新网络状态数据返回结构
+ * DescribeShopTrafficInfo返回参数结构体
  * @class
  */
-class NetworkLastInfo extends  AbstractModel {
+class DescribeShopTrafficInfoResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 总数
-         * @type {number || null}
+         * 公司ID
+         * @type {string || null}
          */
-        this.Count = null;
+        this.CompanyId = null;
 
         /**
-         * 网络状态
-         * @type {Array.<NetworkAndShopInfo> || null}
+         * 门店ID
+         * @type {number || null}
          */
-        this.Infos = null;
+        this.ShopId = null;
+
+        /**
+         * 查询结果总数
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 客流信息列表
+         * @type {Array.<ShopDayTrafficInfo> || null}
+         */
+        this.ShopDayTrafficInfoSet = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
 
     }
 
@@ -2030,16 +2798,19 @@ class NetworkLastInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Count = params.Count || null;
+        this.CompanyId = params.CompanyId || null;
+        this.ShopId = params.ShopId || null;
+        this.TotalCount = params.TotalCount || null;
 
-        if (params.Infos) {
-            this.Infos = new Array();
-            for (let z in params.Infos) {
-                let obj = new NetworkAndShopInfo();
-                obj.deserialize(params.Infos[z]);
-                this.Infos.push(obj);
+        if (params.ShopDayTrafficInfoSet) {
+            this.ShopDayTrafficInfoSet = new Array();
+            for (let z in params.ShopDayTrafficInfoSet) {
+                let obj = new ShopDayTrafficInfo();
+                obj.deserialize(params.ShopDayTrafficInfoSet[z]);
+                this.ShopDayTrafficInfoSet.push(obj);
             }
         }
+        this.RequestId = params.RequestId || null;
 
     }
 }
@@ -2132,7 +2903,7 @@ class DescribeZoneFlowGenderAvrStayTimeByZoneIdResponse extends  AbstractModel {
         this.Data = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -2160,6 +2931,69 @@ class DescribeZoneFlowGenderAvrStayTimeByZoneIdResponse extends  AbstractModel {
             }
         }
         this.RequestId = params.RequestId || null;
+
+    }
+}
+
+/**
+ * 客户到场信息
+ * @class
+ */
+class ArrivedMallInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 到场时间
+         * @type {string || null}
+         */
+        this.ArrivedTime = null;
+
+        /**
+         * 出场时间
+         * @type {string || null}
+         */
+        this.LeaveTime = null;
+
+        /**
+         * 停留时间，秒
+         * @type {number || null}
+         */
+        this.StaySecond = null;
+
+        /**
+         * 到场抓拍图片
+         * @type {string || null}
+         */
+        this.InCapPic = null;
+
+        /**
+         * 出场抓拍图片
+         * @type {string || null}
+         */
+        this.OutCapPic = null;
+
+        /**
+         * 轨迹编码
+         * @type {string || null}
+         */
+        this.TraceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ArrivedTime = params.ArrivedTime || null;
+        this.LeaveTime = params.LeaveTime || null;
+        this.StaySecond = params.StaySecond || null;
+        this.InCapPic = params.InCapPic || null;
+        this.OutCapPic = params.OutCapPic || null;
+        this.TraceId = params.TraceId || null;
 
     }
 }
@@ -2228,30 +3062,60 @@ class PersonInfo extends  AbstractModel {
 }
 
 /**
- * 修改顾客属性参数
+ * 轨迹点坐标
  * @class
  */
-class PersonTagInfo extends  AbstractModel {
+class PersonCoordinate extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 顾客原类型
+         * CAD图X坐标
          * @type {number || null}
          */
-        this.OldType = null;
+        this.CADX = null;
 
         /**
-         * 顾客新类型
+         * CAD图Y坐标
          * @type {number || null}
          */
-        this.NewType = null;
+        this.CADY = null;
 
         /**
-         * 顾客face id
+         * 抓拍时间点
+         * @type {string || null}
+         */
+        this.CapTime = null;
+
+        /**
+         * 抓拍图片
+         * @type {string || null}
+         */
+        this.CapPic = null;
+
+        /**
+         * 卖场区域类型
          * @type {number || null}
          */
-        this.PersonId = null;
+        this.MallAreaType = null;
+
+        /**
+         * 坐标编号
+         * @type {number || null}
+         */
+        this.PosId = null;
+
+        /**
+         * 门店编号
+         * @type {number || null}
+         */
+        this.ShopId = null;
+
+        /**
+         * 事件
+         * @type {string || null}
+         */
+        this.Event = null;
 
     }
 
@@ -2262,9 +3126,14 @@ class PersonTagInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.OldType = params.OldType || null;
-        this.NewType = params.NewType || null;
-        this.PersonId = params.PersonId || null;
+        this.CADX = params.CADX || null;
+        this.CADY = params.CADY || null;
+        this.CapTime = params.CapTime || null;
+        this.CapPic = params.CapPic || null;
+        this.MallAreaType = params.MallAreaType || null;
+        this.PosId = params.PosId || null;
+        this.ShopId = params.ShopId || null;
+        this.Event = params.Event || null;
 
     }
 }
@@ -2314,7 +3183,7 @@ class DescribeFaceIdByTempIdResponse extends  AbstractModel {
         this.FaceId = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -2441,7 +3310,7 @@ class DescribeCameraPersonResponse extends  AbstractModel {
         this.Infos = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -2525,7 +3394,7 @@ class ModifyPersonTagInfoResponse extends  AbstractModel {
         super();
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -2601,36 +3470,36 @@ class CameraPersonInfo extends  AbstractModel {
 }
 
 /**
- * 客流停留统计子结构
+ * DescribeClusterPersonTrace请求参数结构体
  * @class
  */
-class ZoneFlowAndAvrStayTime extends  AbstractModel {
+class DescribeClusterPersonTraceRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 区域id
-         * @type {number || null}
-         */
-        this.ZoneId = null;
-
-        /**
-         * 区域名称
+         * 卖场编码
          * @type {string || null}
          */
-        this.ZoneName = null;
+        this.MallId = null;
 
         /**
-         * 人流量
-         * @type {number || null}
+         * 客户编码
+         * @type {string || null}
          */
-        this.FlowCount = null;
+        this.PersonId = null;
 
         /**
-         * 平均停留时长
-         * @type {number || null}
+         * 查询开始时间
+         * @type {string || null}
          */
-        this.AvrStayTime = null;
+        this.StartTime = null;
+
+        /**
+         * 查询结束时间
+         * @type {string || null}
+         */
+        this.EndTime = null;
 
     }
 
@@ -2641,10 +3510,52 @@ class ZoneFlowAndAvrStayTime extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ZoneId = params.ZoneId || null;
-        this.ZoneName = params.ZoneName || null;
-        this.FlowCount = params.FlowCount || null;
-        this.AvrStayTime = params.AvrStayTime || null;
+        this.MallId = params.MallId || null;
+        this.PersonId = params.PersonId || null;
+        this.StartTime = params.StartTime || null;
+        this.EndTime = params.EndTime || null;
+
+    }
+}
+
+/**
+ * 修改顾客属性参数
+ * @class
+ */
+class PersonTagInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 顾客原类型
+         * @type {number || null}
+         */
+        this.OldType = null;
+
+        /**
+         * 顾客新类型
+         * @type {number || null}
+         */
+        this.NewType = null;
+
+        /**
+         * 顾客face id
+         * @type {number || null}
+         */
+        this.PersonId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.OldType = params.OldType || null;
+        this.NewType = params.NewType || null;
+        this.PersonId = params.PersonId || null;
 
     }
 }
@@ -2682,7 +3593,7 @@ class DescribeShopHourTrafficInfoResponse extends  AbstractModel {
         this.ShopHourTrafficInfoSet = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -2746,7 +3657,7 @@ class DescribePersonVisitInfoResponse extends  AbstractModel {
         this.PersonVisitInfoSet = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -3165,7 +4076,7 @@ class DescribeZoneFlowGenderInfoByZoneIdResponse extends  AbstractModel {
         this.FemalePercent = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -3276,6 +4187,55 @@ class ZoneDayFlow extends  AbstractModel {
 }
 
 /**
+ * DescribePersonTrace请求参数结构体
+ * @class
+ */
+class DescribePersonTraceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 卖场编码
+         * @type {string || null}
+         */
+        this.MallId = null;
+
+        /**
+         * 客户编码
+         * @type {string || null}
+         */
+        this.PersonId = null;
+
+        /**
+         * 查询开始时间
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * 查询结束时间
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MallId = params.MallId || null;
+        this.PersonId = params.PersonId || null;
+        this.StartTime = params.StartTime || null;
+        this.EndTime = params.EndTime || null;
+
+    }
+}
+
+/**
  * DescribeZoneFlowAndStayTime请求参数结构体
  * @class
  */
@@ -3320,6 +4280,70 @@ class DescribeZoneFlowAndStayTimeRequest extends  AbstractModel {
         this.ShopId = params.ShopId || null;
         this.StartDate = params.StartDate || null;
         this.EndDate = params.EndDate || null;
+
+    }
+}
+
+/**
+ * DescribePersonTraceDetail返回参数结构体
+ * @class
+ */
+class DescribePersonTraceDetailResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 卖场编码
+         * @type {string || null}
+         */
+        this.MallId = null;
+
+        /**
+         * 客户编码
+         * @type {string || null}
+         */
+        this.PersonId = null;
+
+        /**
+         * 轨迹编码
+         * @type {string || null}
+         */
+        this.TraceId = null;
+
+        /**
+         * 轨迹点坐标序列
+         * @type {Array.<PersonCoordinate> || null}
+         */
+        this.CoordinateSet = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MallId = params.MallId || null;
+        this.PersonId = params.PersonId || null;
+        this.TraceId = params.TraceId || null;
+
+        if (params.CoordinateSet) {
+            this.CoordinateSet = new Array();
+            for (let z in params.CoordinateSet) {
+                let obj = new PersonCoordinate();
+                obj.deserialize(params.CoordinateSet[z]);
+                this.CoordinateSet.push(obj);
+            }
+        }
+        this.RequestId = params.RequestId || null;
 
     }
 }
@@ -3375,42 +4399,36 @@ class ShopDayTrafficInfo extends  AbstractModel {
 }
 
 /**
- * DescribeShopTrafficInfo返回参数结构体
+ * DescribePersonArrivedMall请求参数结构体
  * @class
  */
-class DescribeShopTrafficInfoResponse extends  AbstractModel {
+class DescribePersonArrivedMallRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 公司ID
+         * 卖场编码
          * @type {string || null}
          */
-        this.CompanyId = null;
+        this.MallId = null;
 
         /**
-         * 门店ID
-         * @type {number || null}
-         */
-        this.ShopId = null;
-
-        /**
-         * 查询结果总数
-         * @type {number || null}
-         */
-        this.TotalCount = null;
-
-        /**
-         * 客流信息列表
-         * @type {Array.<ShopDayTrafficInfo> || null}
-         */
-        this.ShopDayTrafficInfoSet = null;
-
-        /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 客户编码
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.PersonId = null;
+
+        /**
+         * 查询开始时间
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * 查询结束时间
+         * @type {string || null}
+         */
+        this.EndTime = null;
 
     }
 
@@ -3421,19 +4439,10 @@ class DescribeShopTrafficInfoResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.CompanyId = params.CompanyId || null;
-        this.ShopId = params.ShopId || null;
-        this.TotalCount = params.TotalCount || null;
-
-        if (params.ShopDayTrafficInfoSet) {
-            this.ShopDayTrafficInfoSet = new Array();
-            for (let z in params.ShopDayTrafficInfoSet) {
-                let obj = new ShopDayTrafficInfo();
-                obj.deserialize(params.ShopDayTrafficInfoSet[z]);
-                this.ShopDayTrafficInfoSet.push(obj);
-            }
-        }
-        this.RequestId = params.RequestId || null;
+        this.MallId = params.MallId || null;
+        this.PersonId = params.PersonId || null;
+        this.StartTime = params.StartTime || null;
+        this.EndTime = params.EndTime || null;
 
     }
 }
@@ -3489,7 +4498,7 @@ class DescribeTrajectoryDataResponse extends  AbstractModel {
         this.Data = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -3524,53 +4533,69 @@ class DescribeTrajectoryDataResponse extends  AbstractModel {
 }
 
 module.exports = {
-    DescribePersonVisitInfoRequest: DescribePersonVisitInfoRequest,
-    ZoneAgeGroupAvrStayTime: ZoneAgeGroupAvrStayTime,
-    ShopInfo: ShopInfo,
+    DescribeClusterPersonArrivedMallResponse: DescribeClusterPersonArrivedMallResponse,
+    DescribePersonRequest: DescribePersonRequest,
+    DescribeClusterPersonArrivedMallRequest: DescribeClusterPersonArrivedMallRequest,
+    PersonTraceRoute: PersonTraceRoute,
+    ZoneFlowAndAvrStayTime: ZoneFlowAndAvrStayTime,
     DescribeZoneTrafficInfoResponse: DescribeZoneTrafficInfoResponse,
     DescribeShopTrafficInfoRequest: DescribeShopTrafficInfoRequest,
     HourTrafficInfoDetail: HourTrafficInfoDetail,
+    DescribePersonTraceResponse: DescribePersonTraceResponse,
     ZoneTrafficInfo: ZoneTrafficInfo,
+    PersonProfile: PersonProfile,
     DescribePersonInfoRequest: DescribePersonInfoRequest,
+    ZoneAgeGroupAvrStayTime: ZoneAgeGroupAvrStayTime,
+    PersonTracePoint: PersonTracePoint,
     ZoneHourFlow: ZoneHourFlow,
     GenderAgeTrafficDetail: GenderAgeTrafficDetail,
     RegisterCallbackResponse: RegisterCallbackResponse,
     DescribeFaceIdByTempIdRequest: DescribeFaceIdByTempIdRequest,
     DescribeZoneFlowAndStayTimeResponse: DescribeZoneFlowAndStayTimeResponse,
     DescribeZoneFlowHourlyByZoneIdResponse: DescribeZoneFlowHourlyByZoneIdResponse,
+    DescribePersonArrivedMallResponse: DescribePersonArrivedMallResponse,
     NetworkAndShopInfo: NetworkAndShopInfo,
     NetworkInfo: NetworkInfo,
     DescribePersonInfoResponse: DescribePersonInfoResponse,
     NetworkHistoryInfo: NetworkHistoryInfo,
     DescribeTrajectoryDataRequest: DescribeTrajectoryDataRequest,
+    DailyTracePoint: DailyTracePoint,
     DescribeNetworkInfoResponse: DescribeNetworkInfoResponse,
+    DescribePersonVisitInfoRequest: DescribePersonVisitInfoRequest,
+    ZoneTrafficInfoDetail: ZoneTrafficInfoDetail,
     DescribeZoneFlowGenderInfoByZoneIdRequest: DescribeZoneFlowGenderInfoByZoneIdRequest,
     CreateAccountResponse: CreateAccountResponse,
     DescribeHistoryNetworkInfoResponse: DescribeHistoryNetworkInfoResponse,
     CreateFacePictureResponse: CreateFacePictureResponse,
     DescribeZoneFlowGenderAvrStayTimeByZoneIdRequest: DescribeZoneFlowGenderAvrStayTimeByZoneIdRequest,
     DescribeShopInfoResponse: DescribeShopInfoResponse,
+    ShopInfo: ShopInfo,
     DescribeZoneFlowDailyByZoneIdResponse: DescribeZoneFlowDailyByZoneIdResponse,
+    NetworkLastInfo: NetworkLastInfo,
     DescribeShopHourTrafficInfoRequest: DescribeShopHourTrafficInfoRequest,
     DescribeZoneFlowAgeInfoByZoneIdResponse: DescribeZoneFlowAgeInfoByZoneIdResponse,
+    DescribePersonResponse: DescribePersonResponse,
     PersonVisitInfo: PersonVisitInfo,
+    DescribeClusterPersonTraceResponse: DescribeClusterPersonTraceResponse,
     DescribeShopInfoRequest: DescribeShopInfoRequest,
     CreateFacePictureRequest: CreateFacePictureRequest,
     DescribeZoneFlowAgeInfoByZoneIdRequest: DescribeZoneFlowAgeInfoByZoneIdRequest,
-    ZoneTrafficInfoDetail: ZoneTrafficInfoDetail,
+    DescribePersonTraceDetailRequest: DescribePersonTraceDetailRequest,
     CreateAccountRequest: CreateAccountRequest,
-    NetworkLastInfo: NetworkLastInfo,
+    DescribeShopTrafficInfoResponse: DescribeShopTrafficInfoResponse,
     RegisterCallbackRequest: RegisterCallbackRequest,
     DescribeZoneFlowGenderAvrStayTimeByZoneIdResponse: DescribeZoneFlowGenderAvrStayTimeByZoneIdResponse,
+    ArrivedMallInfo: ArrivedMallInfo,
     PersonInfo: PersonInfo,
-    PersonTagInfo: PersonTagInfo,
+    PersonCoordinate: PersonCoordinate,
     DescribeFaceIdByTempIdResponse: DescribeFaceIdByTempIdResponse,
     DescribeZoneTrafficInfoRequest: DescribeZoneTrafficInfoRequest,
     DescribeCameraPersonResponse: DescribeCameraPersonResponse,
     ShopHourTrafficInfo: ShopHourTrafficInfo,
     ModifyPersonTagInfoResponse: ModifyPersonTagInfoResponse,
     CameraPersonInfo: CameraPersonInfo,
-    ZoneFlowAndAvrStayTime: ZoneFlowAndAvrStayTime,
+    DescribeClusterPersonTraceRequest: DescribeClusterPersonTraceRequest,
+    PersonTagInfo: PersonTagInfo,
     DescribeShopHourTrafficInfoResponse: DescribeShopHourTrafficInfoResponse,
     DescribePersonVisitInfoResponse: DescribePersonVisitInfoResponse,
     DescribeNetworkInfoRequest: DescribeNetworkInfoRequest,
@@ -3582,9 +4607,11 @@ module.exports = {
     DescribeZoneFlowGenderInfoByZoneIdResponse: DescribeZoneFlowGenderInfoByZoneIdResponse,
     ModifyPersonTagInfoRequest: ModifyPersonTagInfoRequest,
     ZoneDayFlow: ZoneDayFlow,
+    DescribePersonTraceRequest: DescribePersonTraceRequest,
     DescribeZoneFlowAndStayTimeRequest: DescribeZoneFlowAndStayTimeRequest,
+    DescribePersonTraceDetailResponse: DescribePersonTraceDetailResponse,
     ShopDayTrafficInfo: ShopDayTrafficInfo,
-    DescribeShopTrafficInfoResponse: DescribeShopTrafficInfoResponse,
+    DescribePersonArrivedMallRequest: DescribePersonArrivedMallRequest,
     DescribeTrajectoryDataResponse: DescribeTrajectoryDataResponse,
 
 }

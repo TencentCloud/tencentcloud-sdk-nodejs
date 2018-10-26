@@ -17,15 +17,15 @@
 const AbstractModel = require("../../common/abstract_model");
 
 /**
- * AddDelayLiveStream返回参数结构体
+ * DeleteLiveRecord返回参数结构体
  * @class
  */
-class AddDelayLiveStreamResponse extends  AbstractModel {
+class DeleteLiveRecordResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -45,19 +45,18 @@ class AddDelayLiveStreamResponse extends  AbstractModel {
 }
 
 /**
- * 推流时间
+ * AddDelayLiveStream返回参数结构体
  * @class
  */
-class PublishTime extends  AbstractModel {
+class AddDelayLiveStreamResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 推流时间
-UTC 格式，例如：2018-06-29T19:00:00Z。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.PublishTime = null;
+        this.RequestId = null;
 
     }
 
@@ -68,7 +67,77 @@ UTC 格式，例如：2018-06-29T19:00:00Z。
         if (!params) {
             return;
         }
-        this.PublishTime = params.PublishTime || null;
+        this.RequestId = params.RequestId || null;
+
+    }
+}
+
+/**
+ * ModifyPullStreamConfig请求参数结构体
+ * @class
+ */
+class ModifyPullStreamConfigRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 配置id。
+         * @type {string || null}
+         */
+        this.ConfigId = null;
+
+        /**
+         * 源Url。
+         * @type {string || null}
+         */
+        this.FromUrl = null;
+
+        /**
+         * 目的Url。
+         * @type {string || null}
+         */
+        this.ToUrl = null;
+
+        /**
+         * 区域id,1-深圳,2-上海，3-天津,4-香港。如有改动，需同时传入IspId。
+         * @type {number || null}
+         */
+        this.AreaId = null;
+
+        /**
+         * 运营商id,1-电信,2-移动,3-联通,4-其他,AreaId为4的时候,IspId只能为其他。如有改动，需同时传入AreaId。
+         * @type {number || null}
+         */
+        this.IspId = null;
+
+        /**
+         * 开始时间。
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * 结束时间。
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ConfigId = params.ConfigId || null;
+        this.FromUrl = params.FromUrl || null;
+        this.ToUrl = params.ToUrl || null;
+        this.AreaId = params.AreaId || null;
+        this.IspId = params.IspId || null;
+        this.StartTime = params.StartTime || null;
+        this.EndTime = params.EndTime || null;
 
     }
 }
@@ -82,7 +151,7 @@ class ResumeLiveStreamResponse extends  AbstractModel {
         super();
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -102,30 +171,60 @@ class ResumeLiveStreamResponse extends  AbstractModel {
 }
 
 /**
- * ResumeLiveStream请求参数结构体
+ * 拉流配置
  * @class
  */
-class ResumeLiveStreamRequest extends  AbstractModel {
+class PullStreamConfig extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 应用名称。
+         * 拉流配置Id。
          * @type {string || null}
          */
-        this.AppName = null;
+        this.ConfigId = null;
 
         /**
-         * 您的加速域名。
+         * 源Url。
          * @type {string || null}
          */
-        this.DomainName = null;
+        this.FromUrl = null;
 
         /**
-         * 流名称。
+         * 目的Url。
          * @type {string || null}
          */
-        this.StreamName = null;
+        this.ToUrl = null;
+
+        /**
+         * 区域名。
+         * @type {string || null}
+         */
+        this.AreaName = null;
+
+        /**
+         * 运营商名。
+         * @type {string || null}
+         */
+        this.IspName = null;
+
+        /**
+         * 开始时间。
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * 结束时间。
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * 0无效，1初始状态，2正在运行，3拉起失败，4暂停。
+         * @type {string || null}
+         */
+        this.Status = null;
 
     }
 
@@ -136,9 +235,190 @@ class ResumeLiveStreamRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.AppName = params.AppName || null;
-        this.DomainName = params.DomainName || null;
-        this.StreamName = params.StreamName || null;
+        this.ConfigId = params.ConfigId || null;
+        this.FromUrl = params.FromUrl || null;
+        this.ToUrl = params.ToUrl || null;
+        this.AreaName = params.AreaName || null;
+        this.IspName = params.IspName || null;
+        this.StartTime = params.StartTime || null;
+        this.EndTime = params.EndTime || null;
+        this.Status = params.Status || null;
+
+    }
+}
+
+/**
+ * CreateLiveRecord返回参数结构体
+ * @class
+ */
+class CreateLiveRecordResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 任务ID，全局唯一标识录制任务。
+         * @type {number || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = params.TaskId || null;
+        this.RequestId = params.RequestId || null;
+
+    }
+}
+
+/**
+ * UpdateLiveWatermark返回参数结构体
+ * @class
+ */
+class UpdateLiveWatermarkResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = params.RequestId || null;
+
+    }
+}
+
+/**
+ * StopLiveRecord返回参数结构体
+ * @class
+ */
+class StopLiveRecordResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = params.RequestId || null;
+
+    }
+}
+
+/**
+ * DescribeLiveWatermarks返回参数结构体
+ * @class
+ */
+class DescribeLiveWatermarksResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 水印总个数。
+         * @type {number || null}
+         */
+        this.TotalNum = null;
+
+        /**
+         * 水印信息列表。
+         * @type {Array.<WatermarkInfo> || null}
+         */
+        this.WatermarkList = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalNum = params.TotalNum || null;
+
+        if (params.WatermarkList) {
+            this.WatermarkList = new Array();
+            for (let z in params.WatermarkList) {
+                let obj = new WatermarkInfo();
+                obj.deserialize(params.WatermarkList[z]);
+                this.WatermarkList.push(obj);
+            }
+        }
+        this.RequestId = params.RequestId || null;
+
+    }
+}
+
+/**
+ * CreatePullStreamConfig返回参数结构体
+ * @class
+ */
+class CreatePullStreamConfigResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 配置成功后的id。
+         * @type {string || null}
+         */
+        this.ConfigId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ConfigId = params.ConfigId || null;
+        this.RequestId = params.RequestId || null;
 
     }
 }
@@ -152,7 +432,7 @@ class ResumeDelayLiveStreamResponse extends  AbstractModel {
         super();
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -167,6 +447,140 @@ class ResumeDelayLiveStreamResponse extends  AbstractModel {
             return;
         }
         this.RequestId = params.RequestId || null;
+
+    }
+}
+
+/**
+ * ModifyPullStreamStatus返回参数结构体
+ * @class
+ */
+class ModifyPullStreamStatusResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = params.RequestId || null;
+
+    }
+}
+
+/**
+ * 水印信息
+
+ * @class
+ */
+class WatermarkInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 水印ID。
+         * @type {number || null}
+         */
+        this.WatermarkId = null;
+
+        /**
+         * 水印图片url。
+         * @type {string || null}
+         */
+        this.PictureUrl = null;
+
+        /**
+         * 显示位置，X轴偏移。
+         * @type {number || null}
+         */
+        this.XPosition = null;
+
+        /**
+         * 显示位置，Y轴偏移。
+         * @type {number || null}
+         */
+        this.YPosition = null;
+
+        /**
+         * 水印名称。
+         * @type {string || null}
+         */
+        this.WatermarkName = null;
+
+        /**
+         * 当前状态。0：未使用，1:使用中。
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * 添加时间。
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.WatermarkId = params.WatermarkId || null;
+        this.PictureUrl = params.PictureUrl || null;
+        this.XPosition = params.XPosition || null;
+        this.YPosition = params.YPosition || null;
+        this.WatermarkName = params.WatermarkName || null;
+        this.Status = params.Status || null;
+        this.CreateTime = params.CreateTime || null;
+
+    }
+}
+
+/**
+ * ModifyPullStreamStatus请求参数结构体
+ * @class
+ */
+class ModifyPullStreamStatusRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 配置id列表。
+         * @type {Array.<string> || null}
+         */
+        this.ConfigIds = null;
+
+        /**
+         * 目标状态。0无效，2正在运行，4暂停。
+         * @type {string || null}
+         */
+        this.Status = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ConfigIds = params.ConfigIds || null;
+        this.Status = params.Status || null;
 
     }
 }
@@ -210,7 +624,7 @@ class DescribeLiveStreamOnlineInfoResponse extends  AbstractModel {
         this.StreamInfoList = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -281,7 +695,7 @@ class DescribeLiveStreamOnlineListResponse extends  AbstractModel {
         this.OnlineInfo = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -356,6 +770,41 @@ class ResumeDelayLiveStreamRequest extends  AbstractModel {
 }
 
 /**
+ * SetLiveWatermarkStatus请求参数结构体
+ * @class
+ */
+class SetLiveWatermarkStatusRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 水印ID。
+         * @type {number || null}
+         */
+        this.WatermarkId = null;
+
+        /**
+         * 状态。0：停用，1:启用
+         * @type {number || null}
+         */
+        this.Status = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.WatermarkId = params.WatermarkId || null;
+        this.Status = params.Status || null;
+
+    }
+}
+
+/**
  * DescribeLiveStreamOnlineList请求参数结构体
  * @class
  */
@@ -407,6 +856,185 @@ class DescribeLiveStreamOnlineListRequest extends  AbstractModel {
 }
 
 /**
+ * UpdateLiveWatermark请求参数结构体
+ * @class
+ */
+class UpdateLiveWatermarkRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 水印ID。
+         * @type {number || null}
+         */
+        this.WatermarkId = null;
+
+        /**
+         * 水印图片url。
+         * @type {string || null}
+         */
+        this.PictureUrl = null;
+
+        /**
+         * 显示位置，X轴偏移。
+         * @type {number || null}
+         */
+        this.XPosition = null;
+
+        /**
+         * 显示位置，Y轴偏移。
+         * @type {number || null}
+         */
+        this.YPosition = null;
+
+        /**
+         * 水印名称。
+         * @type {string || null}
+         */
+        this.WatermarkName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.WatermarkId = params.WatermarkId || null;
+        this.PictureUrl = params.PictureUrl || null;
+        this.XPosition = params.XPosition || null;
+        this.YPosition = params.YPosition || null;
+        this.WatermarkName = params.WatermarkName || null;
+
+    }
+}
+
+/**
+ * DeleteLiveWatermark请求参数结构体
+ * @class
+ */
+class DeleteLiveWatermarkRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 水印ID。
+         * @type {number || null}
+         */
+        this.WatermarkId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.WatermarkId = params.WatermarkId || null;
+
+    }
+}
+
+/**
+ * CreateLiveRecord请求参数结构体
+ * @class
+ */
+class CreateLiveRecordRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 流名称。
+         * @type {string || null}
+         */
+        this.StreamName = null;
+
+        /**
+         * 直播流所属应用名称。
+         * @type {string || null}
+         */
+        this.AppName = null;
+
+        /**
+         * 您的加速域名。
+         * @type {string || null}
+         */
+        this.DomainName = null;
+
+        /**
+         * 任务起始时间，录制视频为精彩视频时，忽略此字段。如 2017-01-01 10:10:01
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * 结束时间，录制视频为精彩视频时，忽略此字段。如 2017-01-01 10:10:01
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * 录制类型。其值为“video”,“audio”，不区分大小写，默认为“video”。
+         * @type {string || null}
+         */
+        this.RecordType = null;
+
+        /**
+         * 录制文件格式。其值为“flv”,“hls”,”mp4”,“aac”,”mp3”，不区分大小写，默认为“flv”。
+         * @type {string || null}
+         */
+        this.FileFormat = null;
+
+        /**
+         * 精彩视频标志。0：普通视频【默认】；1：精彩视频。
+         * @type {number || null}
+         */
+        this.Highlight = null;
+
+        /**
+         * A+B=C混流标志。0：非A+B=C混流录制【默认】；1：标示为A+B=C混流录制。
+         * @type {number || null}
+         */
+        this.MixStream = null;
+
+        /**
+         * 录制流参数，当前支持以下参数： 
+interval 录制分片时长，单位 秒，0 - 7200
+storage_time 录制文件存储时长，单位 秒
+eg. interval=3600&storage_time=7200
+注：参数需要url encode。
+         * @type {string || null}
+         */
+        this.StreamParam = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.StreamName = params.StreamName || null;
+        this.AppName = params.AppName || null;
+        this.DomainName = params.DomainName || null;
+        this.StartTime = params.StartTime || null;
+        this.EndTime = params.EndTime || null;
+        this.RecordType = params.RecordType || null;
+        this.FileFormat = params.FileFormat || null;
+        this.Highlight = params.Highlight || null;
+        this.MixStream = params.MixStream || null;
+        this.StreamParam = params.StreamParam || null;
+
+    }
+}
+
+/**
  * ForbidLiveStream返回参数结构体
  * @class
  */
@@ -415,7 +1043,7 @@ class ForbidLiveStreamResponse extends  AbstractModel {
         super();
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -449,7 +1077,7 @@ class DescribeLiveStreamStateResponse extends  AbstractModel {
         this.StreamState = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -470,6 +1098,83 @@ class DescribeLiveStreamStateResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeLiveWatermarks请求参数结构体
+ * @class
+ */
+class DescribeLiveWatermarksRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+    }
+}
+
+/**
+ * SetLiveWatermarkStatus返回参数结构体
+ * @class
+ */
+class SetLiveWatermarkStatusResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = params.RequestId || null;
+
+    }
+}
+
+/**
+ * DeleteLiveWatermark返回参数结构体
+ * @class
+ */
+class DeleteLiveWatermarkResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = params.RequestId || null;
+
+    }
+}
+
+/**
  * DropLiveStream返回参数结构体
  * @class
  */
@@ -478,7 +1183,7 @@ class DropLiveStreamResponse extends  AbstractModel {
         super();
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -540,6 +1245,77 @@ class DropLiveStreamRequest extends  AbstractModel {
 }
 
 /**
+ * 推流时间
+ * @class
+ */
+class PublishTime extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 推流时间
+UTC 格式，例如：2018-06-29T19:00:00Z。
+         * @type {string || null}
+         */
+        this.PublishTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PublishTime = params.PublishTime || null;
+
+    }
+}
+
+/**
+ * ResumeLiveStream请求参数结构体
+ * @class
+ */
+class ResumeLiveStreamRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 应用名称。
+         * @type {string || null}
+         */
+        this.AppName = null;
+
+        /**
+         * 您的加速域名。
+         * @type {string || null}
+         */
+        this.DomainName = null;
+
+        /**
+         * 流名称。
+         * @type {string || null}
+         */
+        this.StreamName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AppName = params.AppName || null;
+        this.DomainName = params.DomainName || null;
+        this.StreamName = params.StreamName || null;
+
+    }
+}
+
+/**
  * DescribeLiveStreamPublishedList请求参数结构体
  * @class
  */
@@ -556,7 +1332,7 @@ class DescribeLiveStreamPublishedListRequest extends  AbstractModel {
         /**
          * 结束时间。
 UTC 格式，例如：2016-06-30T19:00:00Z。
-EndTime 和 StartTime 之间的间隔不能超过 30 天。
+不超过当前时间。
          * @type {string || null}
          */
         this.EndTime = null;
@@ -564,6 +1340,7 @@ EndTime 和 StartTime 之间的间隔不能超过 30 天。
         /**
          * 起始时间。 
 UTC 格式，例如：2016-06-29T19:00:00Z。
+和当前时间相隔不超过7天。
          * @type {string || null}
          */
         this.StartTime = null;
@@ -611,6 +1388,34 @@ UTC 格式，例如：2016-06-29T19:00:00Z。
 }
 
 /**
+ * ModifyPullStreamConfig返回参数结构体
+ * @class
+ */
+class ModifyPullStreamConfigResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = params.RequestId || null;
+
+    }
+}
+
+/**
  * DescribeLiveStreamState请求参数结构体
  * @class
  */
@@ -648,6 +1453,84 @@ class DescribeLiveStreamStateRequest extends  AbstractModel {
         this.AppName = params.AppName || null;
         this.DomainName = params.DomainName || null;
         this.StreamName = params.StreamName || null;
+
+    }
+}
+
+/**
+ * AddLiveWatermark返回参数结构体
+ * @class
+ */
+class AddLiveWatermarkResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 水印ID。
+         * @type {number || null}
+         */
+        this.WatermarkId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.WatermarkId = params.WatermarkId || null;
+        this.RequestId = params.RequestId || null;
+
+    }
+}
+
+/**
+ * DescribePullStreamConfigs返回参数结构体
+ * @class
+ */
+class DescribePullStreamConfigsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 拉流配置。
+         * @type {Array.<PullStreamConfig> || null}
+         */
+        this.PullStreamConfigs = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.PullStreamConfigs) {
+            this.PullStreamConfigs = new Array();
+            for (let z in params.PullStreamConfigs) {
+                let obj = new PullStreamConfig();
+                obj.deserialize(params.PullStreamConfigs[z]);
+                this.PullStreamConfigs.push(obj);
+            }
+        }
+        this.RequestId = params.RequestId || null;
 
     }
 }
@@ -845,6 +1728,69 @@ class StreamInfo extends  AbstractModel {
 }
 
 /**
+ * CreatePullStreamConfig请求参数结构体
+ * @class
+ */
+class CreatePullStreamConfigRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 源Url。
+         * @type {string || null}
+         */
+        this.FromUrl = null;
+
+        /**
+         * 目的Url。
+         * @type {string || null}
+         */
+        this.ToUrl = null;
+
+        /**
+         * 区域id,1-深圳,2-上海，3-天津,4-香港。
+         * @type {number || null}
+         */
+        this.AreaId = null;
+
+        /**
+         * 运营商id,1-电信,2-移动,3-联通,4-其他,AreaId为4的时候,IspId只能为其他。
+         * @type {number || null}
+         */
+        this.IspId = null;
+
+        /**
+         * 开始时间。
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * 结束时间。
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FromUrl = params.FromUrl || null;
+        this.ToUrl = params.ToUrl || null;
+        this.AreaId = params.AreaId || null;
+        this.IspId = params.IspId || null;
+        this.StartTime = params.StartTime || null;
+        this.EndTime = params.EndTime || null;
+
+    }
+}
+
+/**
  * DescribeLiveStreamOnlineInfo请求参数结构体
  * @class
  */
@@ -899,6 +1845,125 @@ class DescribeLiveStreamOnlineInfoRequest extends  AbstractModel {
 }
 
 /**
+ * AddLiveWatermark请求参数结构体
+ * @class
+ */
+class AddLiveWatermarkRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 水印图片url。
+         * @type {string || null}
+         */
+        this.PictureUrl = null;
+
+        /**
+         * 水印名称。
+         * @type {string || null}
+         */
+        this.WatermarkName = null;
+
+        /**
+         * 显示位置,X轴偏移。
+         * @type {number || null}
+         */
+        this.XPosition = null;
+
+        /**
+         * 显示位置,Y轴偏移。
+         * @type {number || null}
+         */
+        this.YPosition = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PictureUrl = params.PictureUrl || null;
+        this.WatermarkName = params.WatermarkName || null;
+        this.XPosition = params.XPosition || null;
+        this.YPosition = params.YPosition || null;
+
+    }
+}
+
+/**
+ * DeleteLiveRecord请求参数结构体
+ * @class
+ */
+class DeleteLiveRecordRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 流名称。
+         * @type {string || null}
+         */
+        this.StreamName = null;
+
+        /**
+         * 任务ID，全局唯一标识录制任务。
+         * @type {number || null}
+         */
+        this.TaskId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.StreamName = params.StreamName || null;
+        this.TaskId = params.TaskId || null;
+
+    }
+}
+
+/**
+ * StopLiveRecord请求参数结构体
+ * @class
+ */
+class StopLiveRecordRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 流名称。
+         * @type {string || null}
+         */
+        this.StreamName = null;
+
+        /**
+         * 任务ID，全局唯一标识录制任务。
+         * @type {number || null}
+         */
+        this.TaskId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.StreamName = params.StreamName || null;
+        this.TaskId = params.TaskId || null;
+
+    }
+}
+
+/**
  * AddDelayLiveStream请求参数结构体
  * @class
  */
@@ -948,6 +2013,34 @@ class AddDelayLiveStreamRequest extends  AbstractModel {
 }
 
 /**
+ * DescribePullStreamConfigs请求参数结构体
+ * @class
+ */
+class DescribePullStreamConfigsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 配置id。
+         * @type {string || null}
+         */
+        this.ConfigId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ConfigId = params.ConfigId || null;
+
+    }
+}
+
+/**
  * DescribeLiveStreamPublishedList返回参数结构体
  * @class
  */
@@ -986,7 +2079,7 @@ class DescribeLiveStreamPublishedListResponse extends  AbstractModel {
         this.TotalPage = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -1019,27 +2112,53 @@ class DescribeLiveStreamPublishedListResponse extends  AbstractModel {
 }
 
 module.exports = {
+    DeleteLiveRecordResponse: DeleteLiveRecordResponse,
     AddDelayLiveStreamResponse: AddDelayLiveStreamResponse,
-    PublishTime: PublishTime,
+    ModifyPullStreamConfigRequest: ModifyPullStreamConfigRequest,
     ResumeLiveStreamResponse: ResumeLiveStreamResponse,
-    ResumeLiveStreamRequest: ResumeLiveStreamRequest,
+    PullStreamConfig: PullStreamConfig,
+    CreateLiveRecordResponse: CreateLiveRecordResponse,
+    UpdateLiveWatermarkResponse: UpdateLiveWatermarkResponse,
+    StopLiveRecordResponse: StopLiveRecordResponse,
+    DescribeLiveWatermarksResponse: DescribeLiveWatermarksResponse,
+    CreatePullStreamConfigResponse: CreatePullStreamConfigResponse,
     ResumeDelayLiveStreamResponse: ResumeDelayLiveStreamResponse,
+    ModifyPullStreamStatusResponse: ModifyPullStreamStatusResponse,
+    WatermarkInfo: WatermarkInfo,
+    ModifyPullStreamStatusRequest: ModifyPullStreamStatusRequest,
     DescribeLiveStreamOnlineInfoResponse: DescribeLiveStreamOnlineInfoResponse,
     DescribeLiveStreamOnlineListResponse: DescribeLiveStreamOnlineListResponse,
     ResumeDelayLiveStreamRequest: ResumeDelayLiveStreamRequest,
+    SetLiveWatermarkStatusRequest: SetLiveWatermarkStatusRequest,
     DescribeLiveStreamOnlineListRequest: DescribeLiveStreamOnlineListRequest,
+    UpdateLiveWatermarkRequest: UpdateLiveWatermarkRequest,
+    DeleteLiveWatermarkRequest: DeleteLiveWatermarkRequest,
+    CreateLiveRecordRequest: CreateLiveRecordRequest,
     ForbidLiveStreamResponse: ForbidLiveStreamResponse,
     DescribeLiveStreamStateResponse: DescribeLiveStreamStateResponse,
+    DescribeLiveWatermarksRequest: DescribeLiveWatermarksRequest,
+    SetLiveWatermarkStatusResponse: SetLiveWatermarkStatusResponse,
+    DeleteLiveWatermarkResponse: DeleteLiveWatermarkResponse,
     DropLiveStreamResponse: DropLiveStreamResponse,
     DropLiveStreamRequest: DropLiveStreamRequest,
+    PublishTime: PublishTime,
+    ResumeLiveStreamRequest: ResumeLiveStreamRequest,
     DescribeLiveStreamPublishedListRequest: DescribeLiveStreamPublishedListRequest,
+    ModifyPullStreamConfigResponse: ModifyPullStreamConfigResponse,
     DescribeLiveStreamStateRequest: DescribeLiveStreamStateRequest,
+    AddLiveWatermarkResponse: AddLiveWatermarkResponse,
+    DescribePullStreamConfigsResponse: DescribePullStreamConfigsResponse,
     StreamName: StreamName,
     ForbidLiveStreamRequest: ForbidLiveStreamRequest,
     StreamOnlineInfo: StreamOnlineInfo,
     StreamInfo: StreamInfo,
+    CreatePullStreamConfigRequest: CreatePullStreamConfigRequest,
     DescribeLiveStreamOnlineInfoRequest: DescribeLiveStreamOnlineInfoRequest,
+    AddLiveWatermarkRequest: AddLiveWatermarkRequest,
+    DeleteLiveRecordRequest: DeleteLiveRecordRequest,
+    StopLiveRecordRequest: StopLiveRecordRequest,
     AddDelayLiveStreamRequest: AddDelayLiveStreamRequest,
+    DescribePullStreamConfigsRequest: DescribePullStreamConfigsRequest,
     DescribeLiveStreamPublishedListResponse: DescribeLiveStreamPublishedListResponse,
 
 }

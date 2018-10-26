@@ -16,27 +16,53 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
+const DeleteLiveRecordResponse = models.DeleteLiveRecordResponse;
 const AddDelayLiveStreamResponse = models.AddDelayLiveStreamResponse;
-const PublishTime = models.PublishTime;
+const ModifyPullStreamConfigRequest = models.ModifyPullStreamConfigRequest;
 const ResumeLiveStreamResponse = models.ResumeLiveStreamResponse;
-const ResumeLiveStreamRequest = models.ResumeLiveStreamRequest;
+const PullStreamConfig = models.PullStreamConfig;
+const CreateLiveRecordResponse = models.CreateLiveRecordResponse;
+const UpdateLiveWatermarkResponse = models.UpdateLiveWatermarkResponse;
+const StopLiveRecordResponse = models.StopLiveRecordResponse;
+const DescribeLiveWatermarksResponse = models.DescribeLiveWatermarksResponse;
+const CreatePullStreamConfigResponse = models.CreatePullStreamConfigResponse;
 const ResumeDelayLiveStreamResponse = models.ResumeDelayLiveStreamResponse;
+const ModifyPullStreamStatusResponse = models.ModifyPullStreamStatusResponse;
+const WatermarkInfo = models.WatermarkInfo;
+const ModifyPullStreamStatusRequest = models.ModifyPullStreamStatusRequest;
 const DescribeLiveStreamOnlineInfoResponse = models.DescribeLiveStreamOnlineInfoResponse;
 const DescribeLiveStreamOnlineListResponse = models.DescribeLiveStreamOnlineListResponse;
 const ResumeDelayLiveStreamRequest = models.ResumeDelayLiveStreamRequest;
+const SetLiveWatermarkStatusRequest = models.SetLiveWatermarkStatusRequest;
 const DescribeLiveStreamOnlineListRequest = models.DescribeLiveStreamOnlineListRequest;
+const UpdateLiveWatermarkRequest = models.UpdateLiveWatermarkRequest;
+const DeleteLiveWatermarkRequest = models.DeleteLiveWatermarkRequest;
+const CreateLiveRecordRequest = models.CreateLiveRecordRequest;
 const ForbidLiveStreamResponse = models.ForbidLiveStreamResponse;
 const DescribeLiveStreamStateResponse = models.DescribeLiveStreamStateResponse;
+const DescribeLiveWatermarksRequest = models.DescribeLiveWatermarksRequest;
+const SetLiveWatermarkStatusResponse = models.SetLiveWatermarkStatusResponse;
+const DeleteLiveWatermarkResponse = models.DeleteLiveWatermarkResponse;
 const DropLiveStreamResponse = models.DropLiveStreamResponse;
 const DropLiveStreamRequest = models.DropLiveStreamRequest;
+const PublishTime = models.PublishTime;
+const ResumeLiveStreamRequest = models.ResumeLiveStreamRequest;
 const DescribeLiveStreamPublishedListRequest = models.DescribeLiveStreamPublishedListRequest;
+const ModifyPullStreamConfigResponse = models.ModifyPullStreamConfigResponse;
 const DescribeLiveStreamStateRequest = models.DescribeLiveStreamStateRequest;
+const AddLiveWatermarkResponse = models.AddLiveWatermarkResponse;
+const DescribePullStreamConfigsResponse = models.DescribePullStreamConfigsResponse;
 const StreamName = models.StreamName;
 const ForbidLiveStreamRequest = models.ForbidLiveStreamRequest;
 const StreamOnlineInfo = models.StreamOnlineInfo;
 const StreamInfo = models.StreamInfo;
+const CreatePullStreamConfigRequest = models.CreatePullStreamConfigRequest;
 const DescribeLiveStreamOnlineInfoRequest = models.DescribeLiveStreamOnlineInfoRequest;
+const AddLiveWatermarkRequest = models.AddLiveWatermarkRequest;
+const DeleteLiveRecordRequest = models.DeleteLiveRecordRequest;
+const StopLiveRecordRequest = models.StopLiveRecordRequest;
 const AddDelayLiveStreamRequest = models.AddDelayLiveStreamRequest;
+const DescribePullStreamConfigsRequest = models.DescribePullStreamConfigsRequest;
 const DescribeLiveStreamPublishedListResponse = models.DescribeLiveStreamPublishedListResponse;
 
 
@@ -62,6 +88,17 @@ class LiveClient extends AbstractClient {
     }
 
     /**
+     * 修改直播拉流配置状态
+     * @param {ModifyPullStreamStatusRequest} req
+     * @param {function(string, ModifyPullStreamStatusResponse):void} cb
+     * @public
+     */
+    ModifyPullStreamStatus(req, cb) {
+        let resp = new ModifyPullStreamStatusResponse();
+        this.request("ModifyPullStreamStatus", req, resp, cb);
+    }
+
+    /**
      * 断开推流连接，但可以重新推流
      * @param {DropLiveStreamRequest} req
      * @param {function(string, DropLiveStreamResponse):void} cb
@@ -84,25 +121,25 @@ class LiveClient extends AbstractClient {
     }
 
     /**
-     * 返回正在直播中的流列表
-     * @param {DescribeLiveStreamOnlineListRequest} req
-     * @param {function(string, DescribeLiveStreamOnlineListResponse):void} cb
+     * 查询拉流配置
+     * @param {DescribePullStreamConfigsRequest} req
+     * @param {function(string, DescribePullStreamConfigsResponse):void} cb
      * @public
      */
-    DescribeLiveStreamOnlineList(req, cb) {
-        let resp = new DescribeLiveStreamOnlineListResponse();
-        this.request("DescribeLiveStreamOnlineList", req, resp, cb);
+    DescribePullStreamConfigs(req, cb) {
+        let resp = new DescribePullStreamConfigsResponse();
+        this.request("DescribePullStreamConfigs", req, resp, cb);
     }
 
     /**
-     * 恢复延迟播放设置
-     * @param {ResumeDelayLiveStreamRequest} req
-     * @param {function(string, ResumeDelayLiveStreamResponse):void} cb
+     * 查询水印列表
+     * @param {DescribeLiveWatermarksRequest} req
+     * @param {function(string, DescribeLiveWatermarksResponse):void} cb
      * @public
      */
-    ResumeDelayLiveStream(req, cb) {
-        let resp = new ResumeDelayLiveStreamResponse();
-        this.request("ResumeDelayLiveStream", req, resp, cb);
+    DescribeLiveWatermarks(req, cb) {
+        let resp = new DescribeLiveWatermarksResponse();
+        this.request("DescribeLiveWatermarks", req, resp, cb);
     }
 
     /**
@@ -117,6 +154,106 @@ class LiveClient extends AbstractClient {
     }
 
     /**
+     * 返回正在直播中的流列表
+     * @param {DescribeLiveStreamOnlineListRequest} req
+     * @param {function(string, DescribeLiveStreamOnlineListResponse):void} cb
+     * @public
+     */
+    DescribeLiveStreamOnlineList(req, cb) {
+        let resp = new DescribeLiveStreamOnlineListResponse();
+        this.request("DescribeLiveStreamOnlineList", req, resp, cb);
+    }
+
+    /**
+     * 录制文件存放于点播平台。用户如需使用录制功能，需首先自行开通点播服务，录制文件存放后相关费用（含存储以及下行播放流量）按照点播平台计费方式收取，具体请参考 对应文档。
+创建直播录制。该接口支持两种录制模式：定时录制模式与实时视频录制模式。定时录制需要传入开始与结束时间，录制任务根据时间自动开始与结束；实时视频录制忽略传入的开始时间，在录制任务创建后立即开始录制，录制时长支持最大为30分钟，如果传入的结束时间与当前时间差大于30分钟，则按30分钟计算，实时视频录制主要用于录制精彩视频场景，时长建议控制在5分钟以内。注意：调用接口超时设置应大于3秒，小于3秒重试以及频繁调用都有可能产生重复录制任务。
+     * @param {CreateLiveRecordRequest} req
+     * @param {function(string, CreateLiveRecordResponse):void} cb
+     * @public
+     */
+    CreateLiveRecord(req, cb) {
+        let resp = new CreateLiveRecordResponse();
+        this.request("CreateLiveRecord", req, resp, cb);
+    }
+
+    /**
+     * 更新水印
+     * @param {UpdateLiveWatermarkRequest} req
+     * @param {function(string, UpdateLiveWatermarkResponse):void} cb
+     * @public
+     */
+    UpdateLiveWatermark(req, cb) {
+        let resp = new UpdateLiveWatermarkResponse();
+        this.request("UpdateLiveWatermark", req, resp, cb);
+    }
+
+    /**
+     * 说明：录制后的文件存放于点播平台。用户如需使用录制功能，需首先自行开通点播账号并确保账号可用。录制文件存放后，相关费用（含存储以及下行播放流量）按照点播平台计费方式收取，请参考对应文档。
+     * @param {StopLiveRecordRequest} req
+     * @param {function(string, StopLiveRecordResponse):void} cb
+     * @public
+     */
+    StopLiveRecord(req, cb) {
+        let resp = new StopLiveRecordResponse();
+        this.request("StopLiveRecord", req, resp, cb);
+    }
+
+    /**
+     * 删除水印
+     * @param {DeleteLiveWatermarkRequest} req
+     * @param {function(string, DeleteLiveWatermarkResponse):void} cb
+     * @public
+     */
+    DeleteLiveWatermark(req, cb) {
+        let resp = new DeleteLiveWatermarkResponse();
+        this.request("DeleteLiveWatermark", req, resp, cb);
+    }
+
+    /**
+     * 添加拉流配置
+     * @param {CreatePullStreamConfigRequest} req
+     * @param {function(string, CreatePullStreamConfigResponse):void} cb
+     * @public
+     */
+    CreatePullStreamConfig(req, cb) {
+        let resp = new CreatePullStreamConfigResponse();
+        this.request("CreatePullStreamConfig", req, resp, cb);
+    }
+
+    /**
+     * 恢复延迟播放设置
+     * @param {ResumeDelayLiveStreamRequest} req
+     * @param {function(string, ResumeDelayLiveStreamResponse):void} cb
+     * @public
+     */
+    ResumeDelayLiveStream(req, cb) {
+        let resp = new ResumeDelayLiveStreamResponse();
+        this.request("ResumeDelayLiveStream", req, resp, cb);
+    }
+
+    /**
+     * 设置水印是否启用
+     * @param {SetLiveWatermarkStatusRequest} req
+     * @param {function(string, SetLiveWatermarkStatusResponse):void} cb
+     * @public
+     */
+    SetLiveWatermarkStatus(req, cb) {
+        let resp = new SetLiveWatermarkStatusResponse();
+        this.request("SetLiveWatermarkStatus", req, resp, cb);
+    }
+
+    /**
+     * 更新拉流配置
+     * @param {ModifyPullStreamConfigRequest} req
+     * @param {function(string, ModifyPullStreamConfigResponse):void} cb
+     * @public
+     */
+    ModifyPullStreamConfig(req, cb) {
+        let resp = new ModifyPullStreamConfigResponse();
+        this.request("ModifyPullStreamConfig", req, resp, cb);
+    }
+
+    /**
      * 返回已经推过流的流列表
      * @param {DescribeLiveStreamPublishedListRequest} req
      * @param {function(string, DescribeLiveStreamPublishedListResponse):void} cb
@@ -125,6 +262,28 @@ class LiveClient extends AbstractClient {
     DescribeLiveStreamPublishedList(req, cb) {
         let resp = new DescribeLiveStreamPublishedListResponse();
         this.request("DescribeLiveStreamPublishedList", req, resp, cb);
+    }
+
+    /**
+     * 添加水印
+     * @param {AddLiveWatermarkRequest} req
+     * @param {function(string, AddLiveWatermarkResponse):void} cb
+     * @public
+     */
+    AddLiveWatermark(req, cb) {
+        let resp = new AddLiveWatermarkResponse();
+        this.request("AddLiveWatermark", req, resp, cb);
+    }
+
+    /**
+     * 用于删除录制任务
+     * @param {DeleteLiveRecordRequest} req
+     * @param {function(string, DeleteLiveRecordResponse):void} cb
+     * @public
+     */
+    DeleteLiveRecord(req, cb) {
+        let resp = new DeleteLiveRecordResponse();
+        this.request("DeleteLiveRecord", req, resp, cb);
     }
 
     /**
