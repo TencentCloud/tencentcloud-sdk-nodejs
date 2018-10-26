@@ -17,15 +17,16 @@
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const DetachDisksRequest = models.DetachDisksRequest;
-const InquiryPriceRenewDisksResponse = models.InquiryPriceRenewDisksResponse;
+const DescribeDiskOperationLogsResponse = models.DescribeDiskOperationLogsResponse;
 const ResizeDiskRequest = models.ResizeDiskRequest;
 const ModifyDiskAttributesResponse = models.ModifyDiskAttributesResponse;
 const TerminateDisksRequest = models.TerminateDisksRequest;
-const CreateSnapshotRequest = models.CreateSnapshotRequest;
+const DescribeDisksRequest = models.DescribeDisksRequest;
 const DescribeInstancesDiskNumRequest = models.DescribeInstancesDiskNumRequest;
 const Placement = models.Placement;
 const ModifySnapshotAttributeRequest = models.ModifySnapshotAttributeRequest;
 const InquiryPriceRenewDisksRequest = models.InquiryPriceRenewDisksRequest;
+const InquiryPriceRenewDisksResponse = models.InquiryPriceRenewDisksResponse;
 const Price = models.Price;
 const InquiryPriceCreateDisksResponse = models.InquiryPriceCreateDisksResponse;
 const DiskConfig = models.DiskConfig;
@@ -38,6 +39,7 @@ const InquiryPriceResizeDiskRequest = models.InquiryPriceResizeDiskRequest;
 const ApplySnapshotResponse = models.ApplySnapshotResponse;
 const DescribeDisksResponse = models.DescribeDisksResponse;
 const ModifySnapshotAttributeResponse = models.ModifySnapshotAttributeResponse;
+const PrepayPrice = models.PrepayPrice;
 const DeleteSnapshotsResponse = models.DeleteSnapshotsResponse;
 const ModifyDisksRenewFlagRequest = models.ModifyDisksRenewFlagRequest;
 const Filter = models.Filter;
@@ -47,15 +49,18 @@ const Snapshot = models.Snapshot;
 const CreateDisksResponse = models.CreateDisksResponse;
 const AttachDisksResponse = models.AttachDisksResponse;
 const RenewDiskRequest = models.RenewDiskRequest;
+const DiskOperationLog = models.DiskOperationLog;
 const RenewDiskResponse = models.RenewDiskResponse;
 const CreateDisksRequest = models.CreateDisksRequest;
 const AttachDisksRequest = models.AttachDisksRequest;
+const DescribeDiskOperationLogsRequest = models.DescribeDiskOperationLogsRequest;
 const Tag = models.Tag;
 const DescribeSnapshotsRequest = models.DescribeSnapshotsRequest;
 const TerminateDisksResponse = models.TerminateDisksResponse;
 const DescribeDiskConfigQuotaResponse = models.DescribeDiskConfigQuotaResponse;
 const ModifyDiskAttributesRequest = models.ModifyDiskAttributesRequest;
-const DescribeDisksRequest = models.DescribeDisksRequest;
+const CreateSnapshotRequest = models.CreateSnapshotRequest;
+const AttachDetail = models.AttachDetail;
 const InquiryPriceResizeDiskResponse = models.InquiryPriceResizeDiskResponse;
 const DescribeInstancesDiskNumResponse = models.DescribeInstancesDiskNumResponse;
 const DetachDisksResponse = models.DetachDisksResponse;
@@ -116,7 +121,7 @@ class CbsClient extends AbstractClient {
 
     /**
      * 本接口（ModifyDiskAttributes）用于修改云硬盘属性。
-
+ 
 * 只支持修改弹性云盘的项目ID。随云主机创建的云硬盘项目ID与云主机联动。可以通过[DescribeDisks](/document/product/362/16315)接口查询，见输出参数中Portable字段解释。
 * “云硬盘名称”仅为方便用户自己管理之用，腾讯云并不以此名称作为提交工单或是进行云盘管理操作的依据。
 * 支持批量操作，如果传入多个云盘ID，则所有云盘修改为同一属性。如果存在不允许操作的云盘，则操作不执行，以特定错误码返回。
@@ -213,6 +218,20 @@ class CbsClient extends AbstractClient {
     }
 
     /**
+     * 本接口（DescribeDiskOperationLogs）用于查询云盘操作日志列表。
+
+可根据云盘ID过滤。云盘ID形如：disk-a1kmcp13。
+
+     * @param {DescribeDiskOperationLogsRequest} req
+     * @param {function(string, DescribeDiskOperationLogsResponse):void} cb
+     * @public
+     */
+    DescribeDiskOperationLogs(req, cb) {
+        let resp = new DescribeDiskOperationLogsResponse();
+        this.request("DescribeDiskOperationLogs", req, resp, cb);
+    }
+
+    /**
      * 本接口（ModifySnapshotAttribute）用于修改指定快照的属性。
 
 * 当前仅支持修改快照名称及将非永久快照修改为永久快照。
@@ -282,7 +301,7 @@ class CbsClient extends AbstractClient {
 
     /**
      * 本接口（AttachDisks）用于挂载云硬盘。
-
+ 
 * 支持批量操作，将多块云盘挂载到同一云主机。如果多个云盘存在不允许挂载的云盘，则操作不执行，以返回特定的错误码返回。
 * 本接口为异步接口，当挂载云盘的请求成功返回时，表示后台已发起挂载云盘的操作，可通过接口[DescribeDisks](/document/product/362/16315)来查询对应云盘的状态，如果云盘的状态由“ATTACHING”变为“ATTACHED”，则为挂载成功。
      * @param {AttachDisksRequest} req

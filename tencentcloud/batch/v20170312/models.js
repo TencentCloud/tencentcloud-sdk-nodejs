@@ -199,6 +199,34 @@ class SubmitJobRequest extends  AbstractModel {
 }
 
 /**
+ * 计算环境属性数据
+ * @class
+ */
+class ComputeEnvData extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * CVM实例类型列表
+         * @type {Array.<string> || null}
+         */
+        this.InstanceTypes = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceTypes = params.InstanceTypes || null;
+
+    }
+}
+
+/**
  * 授权认证信息
  * @class
  */
@@ -4343,6 +4371,24 @@ class ModifyComputeEnvRequest extends  AbstractModel {
          */
         this.DesiredComputeNodeCount = null;
 
+        /**
+         * 计算环境名称
+         * @type {string || null}
+         */
+        this.EnvName = null;
+
+        /**
+         * 计算环境描述
+         * @type {string || null}
+         */
+        this.EnvDescription = null;
+
+        /**
+         * 计算环境属性数据
+         * @type {ComputeEnvData || null}
+         */
+        this.EnvData = null;
+
     }
 
     /**
@@ -4354,6 +4400,14 @@ class ModifyComputeEnvRequest extends  AbstractModel {
         }
         this.EnvId = params.EnvId || null;
         this.DesiredComputeNodeCount = params.DesiredComputeNodeCount || null;
+        this.EnvName = params.EnvName || null;
+        this.EnvDescription = params.EnvDescription || null;
+
+        if (params.EnvData) {
+            let obj = new ComputeEnvData();
+            obj.deserialize(params.EnvData)
+            this.EnvData = obj;
+        }
 
     }
 }
@@ -5307,6 +5361,7 @@ module.exports = {
     AnonymousComputeEnv: AnonymousComputeEnv,
     DeleteComputeEnvResponse: DeleteComputeEnvResponse,
     SubmitJobRequest: SubmitJobRequest,
+    ComputeEnvData: ComputeEnvData,
     Authentication: Authentication,
     TerminateComputeNodeRequest: TerminateComputeNodeRequest,
     AgentRunningMode: AgentRunningMode,

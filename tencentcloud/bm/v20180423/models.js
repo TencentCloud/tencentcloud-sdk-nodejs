@@ -17,6 +17,34 @@
 const AbstractModel = require("../../common/abstract_model");
 
 /**
+ * ModifyPsaRegulation返回参数结构体
+ * @class
+ */
+class ModifyPsaRegulationResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = params.RequestId || null;
+
+    }
+}
+
+/**
  * DescribeTaskOperationLog请求参数结构体
  * @class
  */
@@ -54,56 +82,6 @@ class DescribeTaskOperationLogRequest extends  AbstractModel {
         this.TaskId = params.TaskId || null;
         this.OrderField = params.OrderField || null;
         this.Order = params.Order || null;
-
-    }
-}
-
-/**
- * DescribeTaskOperationLog返回参数结构体
- * @class
- */
-class DescribeTaskOperationLogResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 操作日志
-         * @type {Array.<TaskOperationLog> || null}
-         */
-        this.TaskOperationLogSet = null;
-
-        /**
-         * 日志条数
-         * @type {number || null}
-         */
-        this.TotalCount = null;
-
-        /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-        if (params.TaskOperationLogSet) {
-            this.TaskOperationLogSet = new Array();
-            for (let z in params.TaskOperationLogSet) {
-                let obj = new TaskOperationLog();
-                obj.deserialize(params.TaskOperationLogSet[z]);
-                this.TaskOperationLogSet.push(obj);
-            }
-        }
-        this.TotalCount = params.TotalCount || null;
-        this.RequestId = params.RequestId || null;
 
     }
 }
@@ -158,6 +136,204 @@ class TaskOperationLog extends  AbstractModel {
 }
 
 /**
+ * CreatePsaRegulation请求参数结构体
+ * @class
+ */
+class CreatePsaRegulationRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 规则别名
+         * @type {string || null}
+         */
+        this.PsaName = null;
+
+        /**
+         * 关联的故障类型ID列表
+         * @type {Array.<number> || null}
+         */
+        this.TaskTypeIds = null;
+
+        /**
+         * 维修实例上限，默认为5
+         * @type {number || null}
+         */
+        this.RepairLimit = null;
+
+        /**
+         * 规则备注
+         * @type {string || null}
+         */
+        this.PsaDescription = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PsaName = params.PsaName || null;
+        this.TaskTypeIds = params.TaskTypeIds || null;
+        this.RepairLimit = params.RepairLimit || null;
+        this.PsaDescription = params.PsaDescription || null;
+
+    }
+}
+
+/**
+ * 一条预授权规则
+ * @class
+ */
+class PsaRegulation extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 规则ID
+         * @type {string || null}
+         */
+        this.PsaId = null;
+
+        /**
+         * 规则别名
+         * @type {string || null}
+         */
+        this.PsaName = null;
+
+        /**
+         * 关联标签数量
+         * @type {number || null}
+         */
+        this.TagCount = null;
+
+        /**
+         * 关联实例数量
+         * @type {number || null}
+         */
+        this.InstanceCount = null;
+
+        /**
+         * 故障实例数量
+         * @type {number || null}
+         */
+        this.RepairCount = null;
+
+        /**
+         * 故障实例上限
+         * @type {number || null}
+         */
+        this.RepairLimit = null;
+
+        /**
+         * 创建时间
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * 规则备注
+         * @type {string || null}
+         */
+        this.PsaDescription = null;
+
+        /**
+         * 关联标签
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
+        /**
+         * 关联故障类型id
+         * @type {Array.<number> || null}
+         */
+        this.TaskTypeIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PsaId = params.PsaId || null;
+        this.PsaName = params.PsaName || null;
+        this.TagCount = params.TagCount || null;
+        this.InstanceCount = params.InstanceCount || null;
+        this.RepairCount = params.RepairCount || null;
+        this.RepairLimit = params.RepairLimit || null;
+        this.CreateTime = params.CreateTime || null;
+        this.PsaDescription = params.PsaDescription || null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
+        this.TaskTypeIds = params.TaskTypeIds || null;
+
+    }
+}
+
+/**
+ * DescribeTaskOperationLog返回参数结构体
+ * @class
+ */
+class DescribeTaskOperationLogResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 操作日志
+         * @type {Array.<TaskOperationLog> || null}
+         */
+        this.TaskOperationLogSet = null;
+
+        /**
+         * 日志条数
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.TaskOperationLogSet) {
+            this.TaskOperationLogSet = new Array();
+            for (let z in params.TaskOperationLogSet) {
+                let obj = new TaskOperationLog();
+                obj.deserialize(params.TaskOperationLogSet[z]);
+                this.TaskOperationLogSet.push(obj);
+            }
+        }
+        this.TotalCount = params.TotalCount || null;
+        this.RequestId = params.RequestId || null;
+
+    }
+}
+
+/**
  * RepairTaskControl返回参数结构体
  * @class
  */
@@ -173,7 +349,7 @@ class RepairTaskControlResponse extends  AbstractModel {
         this.TaskId = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -188,6 +364,203 @@ class RepairTaskControlResponse extends  AbstractModel {
             return;
         }
         this.TaskId = params.TaskId || null;
+        this.RequestId = params.RequestId || null;
+
+    }
+}
+
+/**
+ * UnbindPsaTag请求参数结构体
+ * @class
+ */
+class UnbindPsaTagRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 预授权规则ID
+         * @type {string || null}
+         */
+        this.PsaId = null;
+
+        /**
+         * 需要解绑的标签key
+         * @type {string || null}
+         */
+        this.TagKey = null;
+
+        /**
+         * 需要解绑的标签value
+         * @type {string || null}
+         */
+        this.TagValue = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PsaId = params.PsaId || null;
+        this.TagKey = params.TagKey || null;
+        this.TagValue = params.TagValue || null;
+
+    }
+}
+
+/**
+ * DescribeRepairTaskConstant请求参数结构体
+ * @class
+ */
+class DescribeRepairTaskConstantRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+    }
+}
+
+/**
+ * DeletePsaRegulation请求参数结构体
+ * @class
+ */
+class DeletePsaRegulationRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 预授权规则ID
+         * @type {string || null}
+         */
+        this.PsaId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PsaId = params.PsaId || null;
+
+    }
+}
+
+/**
+ * DescribeTaskInfo返回参数结构体
+ * @class
+ */
+class DescribeTaskInfoResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 返回任务总数量
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 任务信息列表
+         * @type {Array.<TaskInfo> || null}
+         */
+        this.TaskInfoSet = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = params.TotalCount || null;
+
+        if (params.TaskInfoSet) {
+            this.TaskInfoSet = new Array();
+            for (let z in params.TaskInfoSet) {
+                let obj = new TaskInfo();
+                obj.deserialize(params.TaskInfoSet[z]);
+                this.TaskInfoSet.push(obj);
+            }
+        }
+        this.RequestId = params.RequestId || null;
+
+    }
+}
+
+/**
+ * UnbindPsaTag返回参数结构体
+ * @class
+ */
+class UnbindPsaTagResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = params.RequestId || null;
+
+    }
+}
+
+/**
+ * BindPsaTag返回参数结构体
+ * @class
+ */
+class BindPsaTagResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
         this.RequestId = params.RequestId || null;
 
     }
@@ -205,10 +578,10 @@ class DescribeRepairTaskConstantResponse extends  AbstractModel {
          * 故障类型ID与对应中文名列表
          * @type {Array.<TaskType> || null}
          */
-        this.TaskTypeList = null;
+        this.TaskTypeSet = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -223,50 +596,15 @@ class DescribeRepairTaskConstantResponse extends  AbstractModel {
             return;
         }
 
-        if (params.TaskTypeList) {
-            this.TaskTypeList = new Array();
-            for (let z in params.TaskTypeList) {
+        if (params.TaskTypeSet) {
+            this.TaskTypeSet = new Array();
+            for (let z in params.TaskTypeSet) {
                 let obj = new TaskType();
-                obj.deserialize(params.TaskTypeList[z]);
-                this.TaskTypeList.push(obj);
+                obj.deserialize(params.TaskTypeSet[z]);
+                this.TaskTypeSet.push(obj);
             }
         }
         this.RequestId = params.RequestId || null;
-
-    }
-}
-
-/**
- * RepairTaskControl请求参数结构体
- * @class
- */
-class RepairTaskControlRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 维修任务ID
-         * @type {string || null}
-         */
-        this.TaskId = null;
-
-        /**
-         * 操作
-         * @type {string || null}
-         */
-        this.Operate = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.TaskId = params.TaskId || null;
-        this.Operate = params.Operate || null;
 
     }
 }
@@ -309,6 +647,189 @@ class TaskType extends  AbstractModel {
         this.TypeId = params.TypeId || null;
         this.TypeName = params.TypeName || null;
         this.TaskSubType = params.TaskSubType || null;
+
+    }
+}
+
+/**
+ * DescribePsaRegulations返回参数结构体
+ * @class
+ */
+class DescribePsaRegulationsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 返回规则数量
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 返回规则列表
+         * @type {Array.<PsaRegulation> || null}
+         */
+        this.PsaRegulations = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = params.TotalCount || null;
+
+        if (params.PsaRegulations) {
+            this.PsaRegulations = new Array();
+            for (let z in params.PsaRegulations) {
+                let obj = new PsaRegulation();
+                obj.deserialize(params.PsaRegulations[z]);
+                this.PsaRegulations.push(obj);
+            }
+        }
+        this.RequestId = params.RequestId || null;
+
+    }
+}
+
+/**
+ * BindPsaTag请求参数结构体
+ * @class
+ */
+class BindPsaTagRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 预授权规则ID
+         * @type {string || null}
+         */
+        this.PsaId = null;
+
+        /**
+         * 需要绑定的标签key
+         * @type {string || null}
+         */
+        this.TagKey = null;
+
+        /**
+         * 需要绑定的标签value
+         * @type {string || null}
+         */
+        this.TagValue = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PsaId = params.PsaId || null;
+        this.TagKey = params.TagKey || null;
+        this.TagValue = params.TagValue || null;
+
+    }
+}
+
+/**
+ * CreatePsaRegulation返回参数结构体
+ * @class
+ */
+class CreatePsaRegulationResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 创建的预授权规则ID
+         * @type {string || null}
+         */
+        this.PsaId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PsaId = params.PsaId || null;
+        this.RequestId = params.RequestId || null;
+
+    }
+}
+
+/**
+ * ModifyPsaRegulation请求参数结构体
+ * @class
+ */
+class ModifyPsaRegulationRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 预授权规则ID
+         * @type {string || null}
+         */
+        this.PsaId = null;
+
+        /**
+         * 预授权规则别名
+         * @type {string || null}
+         */
+        this.PsaName = null;
+
+        /**
+         * 维修中的实例上限
+         * @type {number || null}
+         */
+        this.RepairLimit = null;
+
+        /**
+         * 预授权规则备注
+         * @type {string || null}
+         */
+        this.PsaDescription = null;
+
+        /**
+         * 预授权规则关联故障类型ID列表
+         * @type {Array.<number> || null}
+         */
+        this.TaskTypeIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PsaId = params.PsaId || null;
+        this.PsaName = params.PsaName || null;
+        this.RepairLimit = params.RepairLimit || null;
+        this.PsaDescription = params.PsaDescription || null;
+        this.TaskTypeIds = params.TaskTypeIds || null;
 
     }
 }
@@ -412,12 +933,24 @@ class DescribeTaskInfoRequest extends  AbstractModel {
 }
 
 /**
- * DescribeRepairTaskConstant请求参数结构体
+ * RepairTaskControl请求参数结构体
  * @class
  */
-class DescribeRepairTaskConstantRequest extends  AbstractModel {
+class RepairTaskControlRequest extends  AbstractModel {
     constructor(){
         super();
+
+        /**
+         * 维修任务ID
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * 操作
+         * @type {string || null}
+         */
+        this.Operate = null;
 
     }
 
@@ -428,32 +961,135 @@ class DescribeRepairTaskConstantRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.TaskId = params.TaskId || null;
+        this.Operate = params.Operate || null;
 
     }
 }
 
 /**
- * DescribeTaskInfo返回参数结构体
+ * DescribePsaRegulations请求参数结构体
  * @class
  */
-class DescribeTaskInfoResponse extends  AbstractModel {
+class DescribePsaRegulationsRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 返回任务总数量
+         * 数量限制
          * @type {number || null}
          */
-        this.TotalCount = null;
+        this.Limit = null;
 
         /**
-         * 任务信息列表
-         * @type {Array.<TaskInfo> || null}
+         * 偏移量
+         * @type {number || null}
          */
-        this.TaskInfoSet = null;
+        this.Offset = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 规则ID过滤，支持模糊查询
+         * @type {Array.<string> || null}
+         */
+        this.PsaIds = null;
+
+        /**
+         * 规则别名过滤，支持模糊查询
+         * @type {Array.<string> || null}
+         */
+        this.PsaNames = null;
+
+        /**
+         * 标签过滤
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
+        /**
+         * 排序字段，取值支持：CreateTime
+         * @type {string || null}
+         */
+        this.OrderField = null;
+
+        /**
+         * 排序方式 0:递增(默认) 1:递减
+         * @type {number || null}
+         */
+        this.Order = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Limit = params.Limit || null;
+        this.Offset = params.Offset || null;
+        this.PsaIds = params.PsaIds || null;
+        this.PsaNames = params.PsaNames || null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
+        this.OrderField = params.OrderField || null;
+        this.Order = params.Order || null;
+
+    }
+}
+
+/**
+ * 标签键与值
+ * @class
+ */
+class Tag extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 标签键
+         * @type {string || null}
+         */
+        this.TagKey = null;
+
+        /**
+         * 标签键对应的值
+         * @type {Array.<string> || null}
+         */
+        this.TagValues = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TagKey = params.TagKey || null;
+        this.TagValues = params.TagValues || null;
+
+    }
+}
+
+/**
+ * DeletePsaRegulation返回参数结构体
+ * @class
+ */
+class DeletePsaRegulationResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -466,16 +1102,6 @@ class DescribeTaskInfoResponse extends  AbstractModel {
     deserialize(params) {
         if (!params) {
             return;
-        }
-        this.TotalCount = params.TotalCount || null;
-
-        if (params.TaskInfoSet) {
-            this.TaskInfoSet = new Array();
-            for (let z in params.TaskInfoSet) {
-                let obj = new TaskInfo();
-                obj.deserialize(params.TaskInfoSet[z]);
-                this.TaskInfoSet.push(obj);
-            }
         }
         this.RequestId = params.RequestId || null;
 
@@ -658,16 +1284,30 @@ class TaskInfo extends  AbstractModel {
 }
 
 module.exports = {
+    ModifyPsaRegulationResponse: ModifyPsaRegulationResponse,
     DescribeTaskOperationLogRequest: DescribeTaskOperationLogRequest,
-    DescribeTaskOperationLogResponse: DescribeTaskOperationLogResponse,
     TaskOperationLog: TaskOperationLog,
+    CreatePsaRegulationRequest: CreatePsaRegulationRequest,
+    PsaRegulation: PsaRegulation,
+    DescribeTaskOperationLogResponse: DescribeTaskOperationLogResponse,
     RepairTaskControlResponse: RepairTaskControlResponse,
-    DescribeRepairTaskConstantResponse: DescribeRepairTaskConstantResponse,
-    RepairTaskControlRequest: RepairTaskControlRequest,
-    TaskType: TaskType,
-    DescribeTaskInfoRequest: DescribeTaskInfoRequest,
+    UnbindPsaTagRequest: UnbindPsaTagRequest,
     DescribeRepairTaskConstantRequest: DescribeRepairTaskConstantRequest,
+    DeletePsaRegulationRequest: DeletePsaRegulationRequest,
     DescribeTaskInfoResponse: DescribeTaskInfoResponse,
+    UnbindPsaTagResponse: UnbindPsaTagResponse,
+    BindPsaTagResponse: BindPsaTagResponse,
+    DescribeRepairTaskConstantResponse: DescribeRepairTaskConstantResponse,
+    TaskType: TaskType,
+    DescribePsaRegulationsResponse: DescribePsaRegulationsResponse,
+    BindPsaTagRequest: BindPsaTagRequest,
+    CreatePsaRegulationResponse: CreatePsaRegulationResponse,
+    ModifyPsaRegulationRequest: ModifyPsaRegulationRequest,
+    DescribeTaskInfoRequest: DescribeTaskInfoRequest,
+    RepairTaskControlRequest: RepairTaskControlRequest,
+    DescribePsaRegulationsRequest: DescribePsaRegulationsRequest,
+    Tag: Tag,
+    DeletePsaRegulationResponse: DeletePsaRegulationResponse,
     TaskInfo: TaskInfo,
 
 }

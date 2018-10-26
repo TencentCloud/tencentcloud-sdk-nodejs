@@ -20,6 +20,7 @@ const EventVar = models.EventVar;
 const AnonymousComputeEnv = models.AnonymousComputeEnv;
 const DeleteComputeEnvResponse = models.DeleteComputeEnvResponse;
 const SubmitJobRequest = models.SubmitJobRequest;
+const ComputeEnvData = models.ComputeEnvData;
 const Authentication = models.Authentication;
 const TerminateComputeNodeRequest = models.TerminateComputeNodeRequest;
 const AgentRunningMode = models.AgentRunningMode;
@@ -309,7 +310,7 @@ class BatchClient extends AbstractClient {
     }
 
     /**
-     * 用于修改计算环境的期望节点数量
+     * 用于修改计算环境属性
      * @param {ModifyComputeEnvRequest} req
      * @param {function(string, ModifyComputeEnvResponse):void} cb
      * @public

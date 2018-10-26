@@ -45,21 +45,21 @@ class DetachDisksRequest extends  AbstractModel {
 }
 
 /**
- * InquiryPriceRenewDisks返回参数结构体
+ * DescribeDiskOperationLogs返回参数结构体
  * @class
  */
-class InquiryPriceRenewDisksResponse extends  AbstractModel {
+class DescribeDiskOperationLogsResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 描述了续费云盘的价格。
-         * @type {Price || null}
+         * 云盘的操作日志列表。
+         * @type {Array.<DiskOperationLog> || null}
          */
-        this.DiskPrice = null;
+        this.DiskOperationLogSet = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -74,10 +74,13 @@ class InquiryPriceRenewDisksResponse extends  AbstractModel {
             return;
         }
 
-        if (params.DiskPrice) {
-            let obj = new Price();
-            obj.deserialize(params.DiskPrice)
-            this.DiskPrice = obj;
+        if (params.DiskOperationLogSet) {
+            this.DiskOperationLogSet = new Array();
+            for (let z in params.DiskOperationLogSet) {
+                let obj = new DiskOperationLog();
+                obj.deserialize(params.DiskOperationLogSet[z]);
+                this.DiskOperationLogSet.push(obj);
+            }
         }
         this.RequestId = params.RequestId || null;
 
@@ -128,7 +131,7 @@ class ModifyDiskAttributesResponse extends  AbstractModel {
         super();
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -176,24 +179,54 @@ class TerminateDisksRequest extends  AbstractModel {
 }
 
 /**
- * CreateSnapshot请求参数结构体
+ * DescribeDisks请求参数结构体
  * @class
  */
-class CreateSnapshotRequest extends  AbstractModel {
+class DescribeDisksRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 需要创建快照的云硬盘ID，可通过[DescribeDisks](/document/product/362/16315)接口查询。
-         * @type {string || null}
+         * 按照一个或者多个云硬盘ID查询。云硬盘ID形如：`disk-11112222`，此参数的具体格式可参考API[简介](/document/product/362/15633)的ids.N一节）。参数不支持同时指定`DiskIds`和`Filters`。
+         * @type {Array.<string> || null}
          */
-        this.DiskId = null;
+        this.DiskIds = null;
 
         /**
-         * 快照名称，不传则新快照名称默认为“未命名”。
+         * 过滤条件。参数不支持同时指定`DiskIds`和`Filters`。<br><li>disk-usage - Array of String - 是否必填：否 -（过滤条件）按云盘类型过滤。 (SYSTEM_DISK：表示系统盘 | DATA_DISK：表示数据盘)<br><li>disk-charge-type - Array of String - 是否必填：否 -（过滤条件）按照云硬盘计费模式过滤。 (PREPAID：表示预付费，即包年包月 | POSTPAID_BY_HOUR：表示后付费，即按量计费。)<br><li>portable - Array of String - 是否必填：否 -（过滤条件）按是否为弹性云盘过滤。 (TRUE：表示弹性云盘 | FALSE：表示非弹性云盘。)<br><li>project-id - Array of Integer - 是否必填：否 -（过滤条件）按云硬盘所属项目ID过滤。<br><li>disk-id - Array of String - 是否必填：否 -（过滤条件）按照云硬盘ID过滤。云盘ID形如：`disk-11112222`。<br><li>disk-name - Array of String - 是否必填：否 -（过滤条件）按照云盘名称过滤。<br><li>disk-type - Array of String - 是否必填：否 -（过滤条件）按照云盘介质类型过滤。(CLOUD_BASIC：表示普通云硬盘 | CLOUD_PREMIUM：表示高性能云硬盘。| CLOUD_SSD：SSD表示SSD云硬盘。)<br><li>disk-state - Array of String - 是否必填：否 -（过滤条件）按照云盘状态过滤。(UNATTACHED：未挂载 | ATTACHING：挂载中 | ATTACHED：已挂载 | DETACHING：解挂中 | EXPANDING：扩容中 | ROLLBACKING：回滚中 | TORECYCLE：待回收。)<br><li>instance-id - Array of String - 是否必填：否 -（过滤条件）按照云盘挂载的云主机实例ID过滤。可根据此参数查询挂载在指定云主机下的云硬盘。<br><li>zone - Array of String - 是否必填：否 -（过滤条件）按照[可用区](/document/api/213/9452#zone)过滤。<br><li>instance-ip-address - Array of String - 是否必填：否 -（过滤条件）按云盘所挂载云主机的内网或外网IP过滤。<br><li>instance-name - Array of String - 是否必填：否 -（过滤条件）按云盘所挂载的实例名称过滤。<br><li>tag-key - Array of String - 是否必填：否 -（过滤条件）按照标签键进行过滤。<br><li>tag-value - Array of String - 是否必填：否 -（过滤条件）照标签值进行过滤。<br><li>tag:tag-key - Array of String - 是否必填：否 -（过滤条件）按照标签键值对进行过滤。 tag-key使用具体的标签键进行替换。
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * 偏移量，默认为0。关于`Offset`的更进一步介绍请参考API[简介](/document/product/362/15633)中的相关小节。
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 返回数量，默认为20，最大值为100。关于`Limit`的更进一步介绍请参考 API [简介](/document/product/362/15633)中的相关小节。
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 输出云盘列表的排列顺序。取值范围：<br><li>ASC：升序排列<br><li>DESC：降序排列。
          * @type {string || null}
          */
-        this.SnapshotName = null;
+        this.Order = null;
+
+        /**
+         * 云盘列表排序的依据字段。取值范围：<br><li>CREATE_TIME：依据云盘的创建时间排序<br><li>DEADLINE：依据云盘的到期时间排序<br>默认按云盘创建时间排序。
+         * @type {string || null}
+         */
+        this.OrderField = null;
+
+        /**
+         * 云盘详情中是否需要返回云盘绑定的定期快照策略ID，TRUE表示需要返回，FALSE表示不返回。
+         * @type {boolean || null}
+         */
+        this.ReturnBindAutoSnapshotPolicy = null;
 
     }
 
@@ -204,8 +237,21 @@ class CreateSnapshotRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.DiskId = params.DiskId || null;
-        this.SnapshotName = params.SnapshotName || null;
+        this.DiskIds = params.DiskIds || null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.Offset = params.Offset || null;
+        this.Limit = params.Limit || null;
+        this.Order = params.Order || null;
+        this.OrderField = params.OrderField || null;
+        this.ReturnBindAutoSnapshotPolicy = params.ReturnBindAutoSnapshotPolicy || null;
 
     }
 }
@@ -373,7 +419,47 @@ class InquiryPriceRenewDisksRequest extends  AbstractModel {
 }
 
 /**
- * 描述了云盘的价格
+ * InquiryPriceRenewDisks返回参数结构体
+ * @class
+ */
+class InquiryPriceRenewDisksResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 描述了续费云盘的价格。
+         * @type {PrepayPrice || null}
+         */
+        this.DiskPrice = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.DiskPrice) {
+            let obj = new PrepayPrice();
+            obj.deserialize(params.DiskPrice)
+            this.DiskPrice = obj;
+        }
+        this.RequestId = params.RequestId || null;
+
+    }
+}
+
+/**
+ * 描述预付费或后付费云盘的价格。
  * @class
  */
 class Price extends  AbstractModel {
@@ -436,7 +522,7 @@ class InquiryPriceCreateDisksResponse extends  AbstractModel {
         this.DiskPrice = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -560,7 +646,7 @@ class CreateSnapshotResponse extends  AbstractModel {
         this.SnapshotId = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -694,7 +780,7 @@ class ModifyDisksRenewFlagResponse extends  AbstractModel {
         super();
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -806,7 +892,7 @@ class ApplySnapshotResponse extends  AbstractModel {
         super();
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -846,7 +932,7 @@ class DescribeDisksResponse extends  AbstractModel {
         this.DiskSet = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -884,7 +970,7 @@ class ModifySnapshotAttributeResponse extends  AbstractModel {
         super();
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -904,6 +990,41 @@ class ModifySnapshotAttributeResponse extends  AbstractModel {
 }
 
 /**
+ * 预付费订单的费用。
+ * @class
+ */
+class PrepayPrice extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 预付费云盘或快照预支费用的原价，单位：元。
+         * @type {number || null}
+         */
+        this.OriginalPrice = null;
+
+        /**
+         * 预付费云盘或快照预支费用的折扣价，单位：元。
+         * @type {number || null}
+         */
+        this.DiscountPrice = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.OriginalPrice = params.OriginalPrice || null;
+        this.DiscountPrice = params.DiscountPrice || null;
+
+    }
+}
+
+/**
  * DeleteSnapshots返回参数结构体
  * @class
  */
@@ -912,7 +1033,7 @@ class DeleteSnapshotsResponse extends  AbstractModel {
         super();
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -1090,7 +1211,7 @@ class DescribeSnapshotsResponse extends  AbstractModel {
         this.SnapshotSet = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -1258,7 +1379,7 @@ class CreateDisksResponse extends  AbstractModel {
         this.DiskIdSet = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -1287,7 +1408,7 @@ class AttachDisksResponse extends  AbstractModel {
         super();
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -1347,6 +1468,81 @@ class RenewDiskRequest extends  AbstractModel {
 }
 
 /**
+ * 云盘操作日志。
+ * @class
+ */
+class DiskOperationLog extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 操作者的UIN。
+         * @type {string || null}
+         */
+        this.Operator = null;
+
+        /**
+         * 操作类型。取值范围：
+CBS_OPERATION_ATTACH：挂载云硬盘
+CBS_OPERATION_DETACH：解挂云硬盘
+CBS_OPERATION_RENEW：续费
+CBS_OPERATION_EXPAND：扩容
+CBS_OPERATION_CREATE：创建
+CBS_OPERATION_ISOLATE：隔离
+CBS_OPERATION_MODIFY：修改云硬盘属性
+ASP_OPERATION_BIND：关联定期快照策略
+ASP_OPERATION_UNBIND：取消关联定期快照策略
+         * @type {string || null}
+         */
+        this.Operation = null;
+
+        /**
+         * 操作的云盘ID。
+         * @type {string || null}
+         */
+        this.DiskId = null;
+
+        /**
+         * 操作的状态。取值范围：
+SUCCESS :表示操作成功 
+FAILED :表示操作失败 
+PROCESSING :表示操作中。
+         * @type {string || null}
+         */
+        this.OperationState = null;
+
+        /**
+         * 开始时间。
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * 结束时间。
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Operator = params.Operator || null;
+        this.Operation = params.Operation || null;
+        this.DiskId = params.DiskId || null;
+        this.OperationState = params.OperationState || null;
+        this.StartTime = params.StartTime || null;
+        this.EndTime = params.EndTime || null;
+
+    }
+}
+
+/**
  * RenewDisk返回参数结构体
  * @class
  */
@@ -1355,7 +1551,7 @@ class RenewDiskResponse extends  AbstractModel {
         super();
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -1448,6 +1644,12 @@ class CreateDisksRequest extends  AbstractModel {
          */
         this.Tags = null;
 
+        /**
+         * 可选参数，不传该参数则仅执行挂载操作。传入True时，新创建的云盘将设置为随云主机销毁模式，仅对按量计费云硬盘有效。
+         * @type {boolean || null}
+         */
+        this.DeleteWithInstance = null;
+
     }
 
     /**
@@ -1486,6 +1688,7 @@ class CreateDisksRequest extends  AbstractModel {
                 this.Tags.push(obj);
             }
         }
+        this.DeleteWithInstance = params.DeleteWithInstance || null;
 
     }
 }
@@ -1528,6 +1731,43 @@ class AttachDisksRequest extends  AbstractModel {
         this.DiskIds = params.DiskIds || null;
         this.InstanceId = params.InstanceId || null;
         this.DeleteWithInstance = params.DeleteWithInstance || null;
+
+    }
+}
+
+/**
+ * DescribeDiskOperationLogs请求参数结构体
+ * @class
+ */
+class DescribeDiskOperationLogsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 过滤条件。支持以下条件：
+<li>disk-id - Array of String - 是否必填：是 - 按云盘ID过滤，每个请求最多可指定10个云盘ID。
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
 
     }
 }
@@ -1647,7 +1887,7 @@ class TerminateDisksResponse extends  AbstractModel {
         super();
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -1681,7 +1921,7 @@ class DescribeDiskConfigQuotaResponse extends  AbstractModel {
         this.DiskConfigSet = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -1766,54 +2006,24 @@ class ModifyDiskAttributesRequest extends  AbstractModel {
 }
 
 /**
- * DescribeDisks请求参数结构体
+ * CreateSnapshot请求参数结构体
  * @class
  */
-class DescribeDisksRequest extends  AbstractModel {
+class CreateSnapshotRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 按照一个或者多个云硬盘ID查询。云硬盘ID形如：`disk-11112222`，此参数的具体格式可参考API[简介](/document/product/362/15633)的ids.N一节）。参数不支持同时指定`DiskIds`和`Filters`。
-         * @type {Array.<string> || null}
-         */
-        this.DiskIds = null;
-
-        /**
-         * 过滤条件。参数不支持同时指定`DiskIds`和`Filters`。<br><li>disk-usage - Array of String - 是否必填：否 -（过滤条件）按云盘类型过滤。 (SYSTEM_DISK：表示系统盘 | DATA_DISK：表示数据盘)<br><li>disk-charge-type - Array of String - 是否必填：否 -（过滤条件）按照云硬盘计费模式过滤。 (PREPAID：表示预付费，即包年包月 | POSTPAID_BY_HOUR：表示后付费，即按量计费。)<br><li>portable - Array of String - 是否必填：否 -（过滤条件）按是否为弹性云盘过滤。 (TRUE：表示弹性云盘 | FALSE：表示非弹性云盘。)<br><li>project-id - Array of Integer - 是否必填：否 -（过滤条件）按云硬盘所属项目ID过滤。<br><li>disk-id - Array of String - 是否必填：否 -（过滤条件）按照云硬盘ID过滤。云盘ID形如：`disk-11112222`。<br><li>disk-name - Array of String - 是否必填：否 -（过滤条件）按照云盘名称过滤。<br><li>disk-type - Array of String - 是否必填：否 -（过滤条件）按照云盘介质类型过滤。(CLOUD_BASIC：表示普通云硬盘 | CLOUD_PREMIUM：表示高性能云硬盘。| CLOUD_SSD：SSD表示SSD云硬盘。)<br><li>disk-state - Array of String - 是否必填：否 -（过滤条件）按照云盘状态过滤。(UNATTACHED：未挂载 | ATTACHING：挂载中 | ATTACHED：已挂载 | DETACHING：解挂中 | EXPANDING：扩容中 | ROLLBACKING：回滚中 | TORECYCLE：待回收。)<br><li>instance-id - Array of String - 是否必填：否 -（过滤条件）按照云盘挂载的云主机实例ID过滤。可根据此参数查询挂载在指定云主机下的云硬盘。<br><li>zone - Array of String - 是否必填：否 -（过滤条件）按照[可用区](/document/api/213/9452#zone)过滤。<br><li>instance-ip-address - Array of String - 是否必填：否 -（过滤条件）按云盘所挂载云主机的内网或外网IP过滤。<br><li>instance-name - Array of String - 是否必填：否 -（过滤条件）按云盘所挂载的实例名称过滤。<br><li>tag - Array of [Tag](/document/product/362/15669) - 是否必填：否 -（过滤条件）按云盘绑定的标签过滤。
-         * @type {Array.<Filter> || null}
-         */
-        this.Filters = null;
-
-        /**
-         * 偏移量，默认为0。关于`Offset`的更进一步介绍请参考API[简介](/document/product/362/15633)中的相关小节。
-         * @type {number || null}
-         */
-        this.Offset = null;
-
-        /**
-         * 返回数量，默认为20，最大值为100。关于`Limit`的更进一步介绍请参考 API [简介](/document/product/362/15633)中的相关小节。
-         * @type {number || null}
-         */
-        this.Limit = null;
-
-        /**
-         * 输出云盘列表的排列顺序。取值范围：<br><li>ASC：升序排列<br><li>DESC：降序排列。
+         * 需要创建快照的云硬盘ID，可通过[DescribeDisks](/document/product/362/16315)接口查询。
          * @type {string || null}
          */
-        this.Order = null;
+        this.DiskId = null;
 
         /**
-         * 云盘列表排序的依据字段。取值范围：<br><li>CREATE_TIME：依据云盘的创建时间排序<br><li>DEADLINE：依据云盘的到期时间排序<br>默认按云盘创建时间排序。
+         * 快照名称，不传则新快照名称默认为“未命名”。
          * @type {string || null}
          */
-        this.OrderField = null;
-
-        /**
-         * 云盘详情中是否需要返回云盘绑定的定期快照策略ID，TRUE表示需要返回，FALSE表示不返回。
-         * @type {boolean || null}
-         */
-        this.ReturnBindAutoSnapshotPolicy = null;
+        this.SnapshotName = null;
 
     }
 
@@ -1824,21 +2034,50 @@ class DescribeDisksRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.DiskIds = params.DiskIds || null;
+        this.DiskId = params.DiskId || null;
+        this.SnapshotName = params.SnapshotName || null;
 
-        if (params.Filters) {
-            this.Filters = new Array();
-            for (let z in params.Filters) {
-                let obj = new Filter();
-                obj.deserialize(params.Filters[z]);
-                this.Filters.push(obj);
-            }
+    }
+}
+
+/**
+ * 描述一个实例已挂载和可挂载数据盘的数量。
+ * @class
+ */
+class AttachDetail extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例ID。
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 实例已挂载数据盘的数量。
+         * @type {number || null}
+         */
+        this.AttachedDiskCount = null;
+
+        /**
+         * 实例最大可挂载数据盘的数量。
+         * @type {number || null}
+         */
+        this.MaxAttachCount = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
         }
-        this.Offset = params.Offset || null;
-        this.Limit = params.Limit || null;
-        this.Order = params.Order || null;
-        this.OrderField = params.OrderField || null;
-        this.ReturnBindAutoSnapshotPolicy = params.ReturnBindAutoSnapshotPolicy || null;
+        this.InstanceId = params.InstanceId || null;
+        this.AttachedDiskCount = params.AttachedDiskCount || null;
+        this.MaxAttachCount = params.MaxAttachCount || null;
 
     }
 }
@@ -1853,12 +2092,12 @@ class InquiryPriceResizeDiskResponse extends  AbstractModel {
 
         /**
          * 描述了扩容云盘的价格。
-         * @type {Price || null}
+         * @type {PrepayPrice || null}
          */
         this.DiskPrice = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -1874,7 +2113,7 @@ class InquiryPriceResizeDiskResponse extends  AbstractModel {
         }
 
         if (params.DiskPrice) {
-            let obj = new Price();
+            let obj = new PrepayPrice();
             obj.deserialize(params.DiskPrice)
             this.DiskPrice = obj;
         }
@@ -1892,19 +2131,13 @@ class DescribeInstancesDiskNumResponse extends  AbstractModel {
         super();
 
         /**
-         * 当前云服务器已挂载弹性云盘数量。
-         * @type {number || null}
+         * 各个云服务器已挂载和可挂载弹性云盘的数量。
+         * @type {Array.<AttachDetail> || null}
          */
-        this.AttachedDiskCount = null;
+        this.AttachDetail = null;
 
         /**
-         * 当前云服务器最大可挂载弹性云盘数量。
-         * @type {number || null}
-         */
-        this.MaxAttachCount = null;
-
-        /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -1918,8 +2151,15 @@ class DescribeInstancesDiskNumResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.AttachedDiskCount = params.AttachedDiskCount || null;
-        this.MaxAttachCount = params.MaxAttachCount || null;
+
+        if (params.AttachDetail) {
+            this.AttachDetail = new Array();
+            for (let z in params.AttachDetail) {
+                let obj = new AttachDetail();
+                obj.deserialize(params.AttachDetail[z]);
+                this.AttachDetail.push(obj);
+            }
+        }
         this.RequestId = params.RequestId || null;
 
     }
@@ -1934,7 +2174,7 @@ class DetachDisksResponse extends  AbstractModel {
         super();
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -1962,7 +2202,7 @@ class ResizeDiskResponse extends  AbstractModel {
         super();
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -2139,6 +2379,12 @@ class Disk extends  AbstractModel {
          */
         this.DeleteWithInstance = null;
 
+        /**
+         * 当前时间距离盘到期的天数（仅对预付费盘有意义）。
+         * @type {number || null}
+         */
+        this.DifferDaysOfDeadline = null;
+
     }
 
     /**
@@ -2186,6 +2432,7 @@ class Disk extends  AbstractModel {
             }
         }
         this.DeleteWithInstance = params.DeleteWithInstance || null;
+        this.DifferDaysOfDeadline = params.DifferDaysOfDeadline || null;
 
     }
 }
@@ -2227,15 +2474,16 @@ class ApplySnapshotRequest extends  AbstractModel {
 
 module.exports = {
     DetachDisksRequest: DetachDisksRequest,
-    InquiryPriceRenewDisksResponse: InquiryPriceRenewDisksResponse,
+    DescribeDiskOperationLogsResponse: DescribeDiskOperationLogsResponse,
     ResizeDiskRequest: ResizeDiskRequest,
     ModifyDiskAttributesResponse: ModifyDiskAttributesResponse,
     TerminateDisksRequest: TerminateDisksRequest,
-    CreateSnapshotRequest: CreateSnapshotRequest,
+    DescribeDisksRequest: DescribeDisksRequest,
     DescribeInstancesDiskNumRequest: DescribeInstancesDiskNumRequest,
     Placement: Placement,
     ModifySnapshotAttributeRequest: ModifySnapshotAttributeRequest,
     InquiryPriceRenewDisksRequest: InquiryPriceRenewDisksRequest,
+    InquiryPriceRenewDisksResponse: InquiryPriceRenewDisksResponse,
     Price: Price,
     InquiryPriceCreateDisksResponse: InquiryPriceCreateDisksResponse,
     DiskConfig: DiskConfig,
@@ -2248,6 +2496,7 @@ module.exports = {
     ApplySnapshotResponse: ApplySnapshotResponse,
     DescribeDisksResponse: DescribeDisksResponse,
     ModifySnapshotAttributeResponse: ModifySnapshotAttributeResponse,
+    PrepayPrice: PrepayPrice,
     DeleteSnapshotsResponse: DeleteSnapshotsResponse,
     ModifyDisksRenewFlagRequest: ModifyDisksRenewFlagRequest,
     Filter: Filter,
@@ -2257,15 +2506,18 @@ module.exports = {
     CreateDisksResponse: CreateDisksResponse,
     AttachDisksResponse: AttachDisksResponse,
     RenewDiskRequest: RenewDiskRequest,
+    DiskOperationLog: DiskOperationLog,
     RenewDiskResponse: RenewDiskResponse,
     CreateDisksRequest: CreateDisksRequest,
     AttachDisksRequest: AttachDisksRequest,
+    DescribeDiskOperationLogsRequest: DescribeDiskOperationLogsRequest,
     Tag: Tag,
     DescribeSnapshotsRequest: DescribeSnapshotsRequest,
     TerminateDisksResponse: TerminateDisksResponse,
     DescribeDiskConfigQuotaResponse: DescribeDiskConfigQuotaResponse,
     ModifyDiskAttributesRequest: ModifyDiskAttributesRequest,
-    DescribeDisksRequest: DescribeDisksRequest,
+    CreateSnapshotRequest: CreateSnapshotRequest,
+    AttachDetail: AttachDetail,
     InquiryPriceResizeDiskResponse: InquiryPriceResizeDiskResponse,
     DescribeInstancesDiskNumResponse: DescribeInstancesDiskNumResponse,
     DetachDisksResponse: DetachDisksResponse,

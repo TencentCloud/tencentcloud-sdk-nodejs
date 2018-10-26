@@ -294,7 +294,7 @@ class DescribeAccountPrivilegesResponse extends  AbstractModel {
         this.ColumnPrivileges = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -356,7 +356,7 @@ class CreateDBImportJobRequest extends  AbstractModel {
         this.InstanceId = null;
 
         /**
-         * 文件名称。
+         * 文件名称。该文件是指用户已上传到腾讯云的文件。
          * @type {string || null}
          */
         this.FileName = null;
@@ -609,7 +609,7 @@ class StopDBImportJobResponse extends  AbstractModel {
         super();
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -839,7 +839,7 @@ class CreateAccountsResponse extends  AbstractModel {
         this.AsyncRequestId = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -981,6 +981,74 @@ class InstanceRollbackRangeTime extends  AbstractModel {
 }
 
 /**
+ * sql文件信息
+ * @class
+ */
+class SqlFileInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 上传时间
+         * @type {string || null}
+         */
+        this.UploadTime = null;
+
+        /**
+         * 上传进度
+         * @type {UploadInfo || null}
+         */
+        this.UploadInfo = null;
+
+        /**
+         * 文件名
+         * @type {string || null}
+         */
+        this.FileName = null;
+
+        /**
+         * 文件大小，单位为Bytes
+         * @type {number || null}
+         */
+        this.FileSize = null;
+
+        /**
+         * 上传是否完成标志，可选值：0 - 未完成，1 - 已完成
+         * @type {number || null}
+         */
+        this.IsUploadFinished = null;
+
+        /**
+         * 文件ID
+         * @type {string || null}
+         */
+        this.FileId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.UploadTime = params.UploadTime || null;
+
+        if (params.UploadInfo) {
+            let obj = new UploadInfo();
+            obj.deserialize(params.UploadInfo)
+            this.UploadInfo = obj;
+        }
+        this.FileName = params.FileName || null;
+        this.FileSize = params.FileSize || null;
+        this.IsUploadFinished = params.IsUploadFinished || null;
+        this.FileId = params.FileId || null;
+
+    }
+}
+
+/**
  * DescribeTables返回参数结构体
  * @class
  */
@@ -1001,7 +1069,7 @@ class DescribeTablesResponse extends  AbstractModel {
         this.Items = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -1149,7 +1217,7 @@ class DescribeDBSecurityGroupsResponse extends  AbstractModel {
         this.Groups = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -1345,7 +1413,7 @@ class DescribeBinlogsResponse extends  AbstractModel {
         this.Items = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -1430,7 +1498,7 @@ class DescribeDBPriceResponse extends  AbstractModel {
         this.OriginalPrice = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -1472,7 +1540,7 @@ class DescribeTasksResponse extends  AbstractModel {
         this.Items = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -1572,7 +1640,7 @@ class ModifyDBInstanceProjectResponse extends  AbstractModel {
         super();
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -1606,7 +1674,7 @@ class IsolateDBInstanceResponse extends  AbstractModel {
         this.AsyncRequestId = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -1641,7 +1709,7 @@ class DescribeDBInstanceGTIDResponse extends  AbstractModel {
         this.IsGTIDOpen = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -1676,7 +1744,7 @@ class OpenDBInstanceGTIDResponse extends  AbstractModel {
         this.AsyncRequestId = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -1738,7 +1806,7 @@ class DescribeDBInstanceRebootTimeResponse extends  AbstractModel {
         this.Items = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -2042,7 +2110,7 @@ class ModifyAccountDescriptionResponse extends  AbstractModel {
         this.AsyncRequestId = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -2154,7 +2222,7 @@ class CreateDBInstanceHourResponse extends  AbstractModel {
         this.InstanceIds = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -2721,7 +2789,7 @@ class DescribeSlowLogsResponse extends  AbstractModel {
         this.Items = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -2928,7 +2996,7 @@ class CloseWanServiceResponse extends  AbstractModel {
         this.AsyncRequestId = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -2981,7 +3049,7 @@ class DescribeDBInstancesRequest extends  AbstractModel {
         this.Status = null;
 
         /**
-         * 记录偏移量，默认值为0
+         * 偏移量，默认值为0
          * @type {number || null}
          */
         this.Offset = null;
@@ -3047,25 +3115,25 @@ class DescribeDBInstancesRequest extends  AbstractModel {
         this.CdbErrors = null;
 
         /**
-         * 排序的字段，目前支持："InstanceId", "InstanceName", "CreateTime", "DeadlineTime"
+         * 返回结果集排序的字段，目前支持："InstanceId", "InstanceName", "CreateTime", "DeadlineTime"
          * @type {string || null}
          */
         this.OrderBy = null;
 
         /**
-         * 排序方式，目前支持："ASC"或者"DESC"
+         * 返回结果集排序方式，目前支持："ASC"或者"DESC"
          * @type {string || null}
          */
         this.OrderDirection = null;
 
         /**
-         * 是否包含安全组信息，可取值：0-不包含，1-包含
+         * 是否包含安全组详细信息，可取值：0-不包含，1-包含
          * @type {number || null}
          */
         this.WithSecurityGroup = null;
 
         /**
-         * 是否包含独享集群信息，可取值：0-不包含，1-包含
+         * 是否包含独享集群详细信息，可取值：0-不包含，1-包含
          * @type {number || null}
          */
         this.WithExCluster = null;
@@ -3187,7 +3255,7 @@ class ModifyDBInstanceVipVportResponse extends  AbstractModel {
         this.AsyncRequestId = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -3228,7 +3296,7 @@ class DescribeDBSwitchRecordsResponse extends  AbstractModel {
         this.Items = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -3281,6 +3349,41 @@ class TableName extends  AbstractModel {
             return;
         }
         this.TableName = params.TableName || null;
+
+    }
+}
+
+/**
+ * RenewDBInstance请求参数结构体
+ * @class
+ */
+class RenewDBInstanceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 待续费的实例ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例ID相同，可使用[查询实例列表](https://cloud.tencent.com/document/api/236/15872)
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 续费时长，单位：月，可选值包括[1,2,3,4,5,6,7,8,9,10,11,12,24,36]
+         * @type {number || null}
+         */
+        this.TimeSpan = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = params.InstanceId || null;
+        this.TimeSpan = params.TimeSpan || null;
 
     }
 }
@@ -3357,7 +3460,7 @@ class DeleteBackupResponse extends  AbstractModel {
         super();
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -3433,7 +3536,7 @@ class DescribeProjectSecurityGroupsResponse extends  AbstractModel {
         this.Groups = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -3462,6 +3565,41 @@ class DescribeProjectSecurityGroupsResponse extends  AbstractModel {
 }
 
 /**
+ * 文件上传描述
+ * @class
+ */
+class UploadInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 文件所有分片数
+         * @type {number || null}
+         */
+        this.AllSliceNum = null;
+
+        /**
+         * 已完成分片数
+         * @type {number || null}
+         */
+        this.CompleteNum = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AllSliceNum = params.AllSliceNum || null;
+        this.CompleteNum = params.CompleteNum || null;
+
+    }
+}
+
+/**
  * ModifyAccountPassword返回参数结构体
  * @class
  */
@@ -3476,7 +3614,7 @@ class ModifyAccountPasswordResponse extends  AbstractModel {
         this.AsyncRequestId = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -3559,7 +3697,7 @@ class DescribeAsyncRequestInfoResponse extends  AbstractModel {
         this.Info = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -3601,7 +3739,7 @@ class CreateDBInstanceResponse extends  AbstractModel {
         this.InstanceIds = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -3700,7 +3838,7 @@ class DeleteAccountsResponse extends  AbstractModel {
         this.AsyncRequestId = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -3735,7 +3873,7 @@ class DescribeDBInstanceCharsetResponse extends  AbstractModel {
         this.Charset = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -3770,7 +3908,7 @@ class RestartDBInstancesResponse extends  AbstractModel {
         this.AsyncRequestId = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -3811,7 +3949,7 @@ class DescribeBackupDatabasesResponse extends  AbstractModel {
         this.Items = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -3841,55 +3979,6 @@ class DescribeBackupDatabasesResponse extends  AbstractModel {
 }
 
 /**
- * 第一备机信息
- * @class
- */
-class First extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 端口号
-         * @type {number || null}
-         */
-        this.Vport = null;
-
-        /**
-         * 地域信息
-         * @type {string || null}
-         */
-        this.Region = null;
-
-        /**
-         * 虚拟Ip信息
-         * @type {string || null}
-         */
-        this.Vip = null;
-
-        /**
-         * 可用区信息
-         * @type {string || null}
-         */
-        this.Zone = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Vport = params.Vport || null;
-        this.Region = params.Region || null;
-        this.Vip = params.Vip || null;
-        this.Zone = params.Zone || null;
-
-    }
-}
-
-/**
  * ModifyAutoRenewFlag返回参数结构体
  * @class
  */
@@ -3898,7 +3987,7 @@ class ModifyAutoRenewFlagResponse extends  AbstractModel {
         super();
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -3938,7 +4027,7 @@ class DescribeBackupsResponse extends  AbstractModel {
         this.Items = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -3988,7 +4077,7 @@ class DescribeDBImportRecordsResponse extends  AbstractModel {
         this.Items = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -4157,7 +4246,7 @@ class DescribeBackupTablesResponse extends  AbstractModel {
         this.Items = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -4238,6 +4327,55 @@ class Outbound extends  AbstractModel {
         this.PortRange = params.PortRange || null;
         this.IpProtocol = params.IpProtocol || null;
         this.Dir = params.Dir || null;
+
+    }
+}
+
+/**
+ * 备机信息
+ * @class
+ */
+class SlaveInstanceInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 端口号
+         * @type {number || null}
+         */
+        this.Vport = null;
+
+        /**
+         * 地域信息
+         * @type {string || null}
+         */
+        this.Region = null;
+
+        /**
+         * 虚拟Ip信息
+         * @type {string || null}
+         */
+        this.Vip = null;
+
+        /**
+         * 可用区信息
+         * @type {string || null}
+         */
+        this.Zone = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Vport = params.Vport || null;
+        this.Region = params.Region || null;
+        this.Vip = params.Vip || null;
+        this.Zone = params.Zone || null;
 
     }
 }
@@ -4486,13 +4624,13 @@ class SlaveInfo extends  AbstractModel {
 
         /**
          * 第一备机信息
-         * @type {First || null}
+         * @type {SlaveInstanceInfo || null}
          */
         this.First = null;
 
         /**
          * 第二备机信息
-         * @type {First || null}
+         * @type {SlaveInstanceInfo || null}
          */
         this.Second = null;
 
@@ -4507,13 +4645,13 @@ class SlaveInfo extends  AbstractModel {
         }
 
         if (params.First) {
-            let obj = new First();
+            let obj = new SlaveInstanceInfo();
             obj.deserialize(params.First)
             this.First = obj;
         }
 
         if (params.Second) {
-            let obj = new First();
+            let obj = new SlaveInstanceInfo();
             obj.deserialize(params.Second)
             this.Second = obj;
         }
@@ -4571,7 +4709,7 @@ class UpgradeDBInstanceEngineVersionResponse extends  AbstractModel {
         this.AsyncRequestId = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -4634,7 +4772,7 @@ class ModifyInstanceParamResponse extends  AbstractModel {
         this.AsyncRequestId = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -4650,6 +4788,97 @@ class ModifyInstanceParamResponse extends  AbstractModel {
         }
         this.AsyncRequestId = params.AsyncRequestId || null;
         this.RequestId = params.RequestId || null;
+
+    }
+}
+
+/**
+ * UpgradeDBInstance请求参数结构体
+ * @class
+ */
+class UpgradeDBInstanceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例ID，格式如：cdb-c1nl9rpv或者cdbro-c1nl9rpv。与云数据库控制台页面中显示的实例ID相同，可使用[查询实例列表](https://cloud.tencent.com/document/api/236/15872) 接口获取，其值为输出参数中字段 InstanceId 的值
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 升级后的内存大小，单位：MB，为保证传入 Memory 值有效，请使用[查询可创建规格（支持可用区、配置自定义）](https://cloud.tencent.com/document/api/253/6109)接口获取可升级的内存规格
+         * @type {number || null}
+         */
+        this.Memory = null;
+
+        /**
+         * 升级后的硬盘大小，单位：GB，为保证传入 Volume 值有效，请使用[查询可创建规格（支持可用区、配置自定义）](https://cloud.tencent.com/document/api/253/6109)接口获取可升级的硬盘范围
+         * @type {number || null}
+         */
+        this.Volume = null;
+
+        /**
+         * 数据复制方式，支持值包括：0-异步复制，1-半同步复制，2-强同步复制，升级主实例时可指定该参数，升级只读实例或者灾备实例时指定该参数无意义
+         * @type {number || null}
+         */
+        this.ProtectMode = null;
+
+        /**
+         * 部署模式，默认为0，支持值包括：0-单可用区部署，1-多可用区部署，升级主实例时可指定该参数，升级只读实例或者灾备实例时指定该参数无意义
+         * @type {number || null}
+         */
+        this.DeployMode = null;
+
+        /**
+         * 备库1的可用区信息，默认为实例的Zone，升级主实例为多可用区部署时可指定该参数，升级只读实例或者灾备实例时指定该参数无意义。可通过<a href='/document/product/236/6921' title='查询云数据库可售卖规格'>查询云数据库可售卖规格</a>查询支持的可用区
+         * @type {string || null}
+         */
+        this.SlaveZone = null;
+
+        /**
+         * 主实例数据库引擎版本，支持值包括：5.5、5.6和5.7
+         * @type {string || null}
+         */
+        this.EngineVersion = null;
+
+        /**
+         * 切换访问新实例的方式，默认为0，升级主实例时，可指定该参数，升级只读实例或者灾备实例时指定该参数无意义，支持值包括：0-立刻切换，1-时间窗切换；当该值为1时，升级中过程中，切换访问新实例的流程将会在时间窗内进行，或者用户主动调用接口[切换访问新实例](https://cloud.tencent.com/document/api/403/4392)触发该流程
+         * @type {number || null}
+         */
+        this.WaitSwitch = null;
+
+        /**
+         * 备库2的可用区ID，默认为0，升级主实例时可指定该参数，升级只读实例或者灾备实例时指定该参数无意义
+         * @type {string || null}
+         */
+        this.BackupZone = null;
+
+        /**
+         * 实例类型，默认为 master，支持值包括：master-表示主实例，dr-表示灾备实例，ro-表示只读实例
+         * @type {string || null}
+         */
+        this.InstanceRole = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = params.InstanceId || null;
+        this.Memory = params.Memory || null;
+        this.Volume = params.Volume || null;
+        this.ProtectMode = params.ProtectMode || null;
+        this.DeployMode = params.DeployMode || null;
+        this.SlaveZone = params.SlaveZone || null;
+        this.EngineVersion = params.EngineVersion || null;
+        this.WaitSwitch = params.WaitSwitch || null;
+        this.BackupZone = params.BackupZone || null;
+        this.InstanceRole = params.InstanceRole || null;
 
     }
 }
@@ -4699,6 +4928,98 @@ class ColumnPrivilege extends  AbstractModel {
         this.Table = params.Table || null;
         this.Column = params.Column || null;
         this.Privileges = params.Privileges || null;
+
+    }
+}
+
+/**
+ * DescribeUploadedFiles请求参数结构体
+ * @class
+ */
+class DescribeUploadedFilesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 文件路径。该字段应填用户主账号的OwnerUin信息。
+         * @type {string || null}
+         */
+        this.Path = null;
+
+        /**
+         * 记录偏移量，默认值为0。
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 单次请求返回的数量，默认值为20。
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Path = params.Path || null;
+        this.Offset = params.Offset || null;
+        this.Limit = params.Limit || null;
+
+    }
+}
+
+/**
+ * DescribeUploadedFiles返回参数结构体
+ * @class
+ */
+class DescribeUploadedFilesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 符合查询条件的SQL文件总数。
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 返回的SQL文件列表。
+         * @type {Array.<SqlFileInfo> || null}
+         */
+        this.Items = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = params.TotalCount || null;
+
+        if (params.Items) {
+            this.Items = new Array();
+            for (let z in params.Items) {
+                let obj = new SqlFileInfo();
+                obj.deserialize(params.Items[z]);
+                this.Items.push(obj);
+            }
+        }
+        this.RequestId = params.RequestId || null;
 
     }
 }
@@ -4769,7 +5090,7 @@ class AssociateSecurityGroupsResponse extends  AbstractModel {
         super();
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -4797,7 +5118,7 @@ class InstanceInfo extends  AbstractModel {
         super();
 
         /**
-         * 外网状态
+         * 外网状态，可能的返回值为：0-未开通外网；1-已开通外网
          * @type {number || null}
          */
         this.WanStatus = null;
@@ -4809,31 +5130,31 @@ class InstanceInfo extends  AbstractModel {
         this.Zone = null;
 
         /**
-         * 初始化标志
+         * 初始化标志，可能的返回值为：0-未初始化；1-已初始化
          * @type {number || null}
          */
         this.InitFlag = null;
 
         /**
-         * 只读vip信息
+         * 只读vip信息。单独开通只读实例访问的只读实例才有该字段
          * @type {RoVipInfo || null}
          */
         this.RoVipInfo = null;
 
         /**
-         * 内存容量
+         * 内存容量，单位为MB
          * @type {number || null}
          */
         this.Memory = null;
 
         /**
-         * 实例状态
+         * 实例状态，可能的返回值：0-创建中；1-运行中；4-隔离中；5-已隔离
          * @type {number || null}
          */
         this.Status = null;
 
         /**
-         * 私有网络ID
+         * 私有网络ID，例如：51102
          * @type {number || null}
          */
         this.VpcId = null;
@@ -4851,13 +5172,13 @@ class InstanceInfo extends  AbstractModel {
         this.InstanceId = null;
 
         /**
-         * 硬盘容量
+         * 硬盘容量，单位为GB
          * @type {number || null}
          */
         this.Volume = null;
 
         /**
-         * 自动续费标志
+         * 自动续费标志，可能的返回值：0-未开通自动续费；1-已开通自动续费；2-已关闭自动续费
          * @type {number || null}
          */
         this.AutoRenew = null;
@@ -4869,19 +5190,19 @@ class InstanceInfo extends  AbstractModel {
         this.ProtectMode = null;
 
         /**
-         * 只读组信息
+         * 只读组详细信息
          * @type {Array.<RoGroup> || null}
          */
         this.RoGroups = null;
 
         /**
-         * 子网ID
+         * 子网ID，例如：2333
          * @type {number || null}
          */
         this.SubnetId = null;
 
         /**
-         * 实例类型
+         * 实例类型，可能的返回值：1-主实例；2-灾备实例；3-只读实例
          * @type {number || null}
          */
         this.InstanceType = null;
@@ -4899,7 +5220,7 @@ class InstanceInfo extends  AbstractModel {
         this.Region = null;
 
         /**
-         * 到期时间
+         * 实例到期时间
          * @type {string || null}
          */
         this.DeadlineTime = null;
@@ -4917,13 +5238,13 @@ class InstanceInfo extends  AbstractModel {
         this.TaskStatus = null;
 
         /**
-         * 主实例信息
+         * 主实例详细信息
          * @type {MasterInfo || null}
          */
         this.MasterInfo = null;
 
         /**
-         * 实例售卖机型
+         * 实例类型，可能的返回值：“HA”-高可用版；“BASIC”-基础版
          * @type {string || null}
          */
         this.DeviceType = null;
@@ -4941,7 +5262,7 @@ class InstanceInfo extends  AbstractModel {
         this.InstanceName = null;
 
         /**
-         * 灾备实例信息
+         * 灾备实例详细信息
          * @type {Array.<DrInfo> || null}
          */
         this.DrInfo = null;
@@ -4959,13 +5280,13 @@ class InstanceInfo extends  AbstractModel {
         this.WanPort = null;
 
         /**
-         * 付费类型
+         * 付费类型，可能的返回值：0-包年包月；1-按量计费
          * @type {number || null}
          */
         this.PayType = null;
 
         /**
-         * 创建时间
+         * 实例创建时间
          * @type {string || null}
          */
         this.CreateTime = null;
@@ -4983,19 +5304,19 @@ class InstanceInfo extends  AbstractModel {
         this.Vport = null;
 
         /**
-         * 实例状态
+         * 是否锁定标记
          * @type {number || null}
          */
         this.CdbError = null;
 
         /**
-         * 私有网络描述符
+         * 私有网络描述符，例如：“vpc-5v8wn9mg”
          * @type {string || null}
          */
         this.UniqVpcId = null;
 
         /**
-         * 子网描述符
+         * 子网描述符，例如：“subnet-1typ0s7d”
          * @type {string || null}
          */
         this.UniqSubnetId = null;
@@ -5093,7 +5414,7 @@ class CreateBackupResponse extends  AbstractModel {
         this.BackupId = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -5240,7 +5561,7 @@ class ModifyAccountPrivilegesResponse extends  AbstractModel {
         this.AsyncRequestId = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -5324,7 +5645,7 @@ class VerifyRootAccountResponse extends  AbstractModel {
         this.AsyncRequestId = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -5479,7 +5800,7 @@ class ModifyDBInstanceSecurityGroupsResponse extends  AbstractModel {
         super();
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -5507,7 +5828,7 @@ class ModifyDBInstanceNameResponse extends  AbstractModel {
         super();
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -5718,72 +6039,24 @@ class InstanceRebootTime extends  AbstractModel {
 }
 
 /**
- * UpgradeDBInstance请求参数结构体
+ * RenewDBInstance返回参数结构体
  * @class
  */
-class UpgradeDBInstanceRequest extends  AbstractModel {
+class RenewDBInstanceResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 实例ID，格式如：cdb-c1nl9rpv或者cdbro-c1nl9rpv。与云数据库控制台页面中显示的实例ID相同，可使用[查询实例列表](https://cloud.tencent.com/document/api/236/15872) 接口获取，其值为输出参数中字段 InstanceId 的值
+         * 订单ID
          * @type {string || null}
          */
-        this.InstanceId = null;
+        this.DealId = null;
 
         /**
-         * 升级后的内存大小，单位：MB，为保证传入 Memory 值有效，请使用[查询可创建规格（支持可用区、配置自定义）](https://cloud.tencent.com/document/api/253/6109)接口获取可升级的内存规格
-         * @type {number || null}
-         */
-        this.Memory = null;
-
-        /**
-         * 升级后的硬盘大小，单位：GB，为保证传入 Volume 值有效，请使用[查询可创建规格（支持可用区、配置自定义）](https://cloud.tencent.com/document/api/253/6109)接口获取可升级的硬盘范围
-         * @type {number || null}
-         */
-        this.Volume = null;
-
-        /**
-         * 数据复制方式，支持值包括：0-异步复制，1-半同步复制，2-强同步复制，升级主实例时可指定该参数，升级只读实例或者灾备实例时指定该参数无意义
-         * @type {number || null}
-         */
-        this.ProtectMode = null;
-
-        /**
-         * 部署模式，默认为0，支持值包括：0-单可用区部署，1-多可用区部署，升级主实例时可指定该参数，升级只读实例或者灾备实例时指定该参数无意义
-         * @type {number || null}
-         */
-        this.DeployMode = null;
-
-        /**
-         * 备库1的可用区信息，默认为实例的Zone，升级主实例为多可用区部署时可指定该参数，升级只读实例或者灾备实例时指定该参数无意义。可通过<a href='/document/product/236/6921' title='查询云数据库可售卖规格'>查询云数据库可售卖规格</a>查询支持的可用区
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.SlaveZone = null;
-
-        /**
-         * 主实例数据库引擎版本，支持值包括：5.5、5.6和5.7
-         * @type {string || null}
-         */
-        this.EngineVersion = null;
-
-        /**
-         * 切换访问新实例的方式，默认为0，升级主实例时，可指定该参数，升级只读实例或者灾备实例时指定该参数无意义，支持值包括：0-立刻切换，1-时间窗切换；当该值为1时，升级中过程中，切换访问新实例的流程将会在时间窗内进行，或者用户主动调用接口[切换访问新实例](https://cloud.tencent.com/document/api/403/4392)触发该流程
-         * @type {number || null}
-         */
-        this.WaitSwitch = null;
-
-        /**
-         * 备库2的可用区ID，默认为0，升级主实例时可指定该参数，升级只读实例或者灾备实例时指定该参数无意义
-         * @type {string || null}
-         */
-        this.BackupZone = null;
-
-        /**
-         * 实例类型，默认为 master，支持值包括：master-表示主实例，dr-表示灾备实例，ro-表示只读实例
-         * @type {string || null}
-         */
-        this.InstanceRole = null;
+        this.RequestId = null;
 
     }
 
@@ -5794,16 +6067,8 @@ class UpgradeDBInstanceRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = params.InstanceId || null;
-        this.Memory = params.Memory || null;
-        this.Volume = params.Volume || null;
-        this.ProtectMode = params.ProtectMode || null;
-        this.DeployMode = params.DeployMode || null;
-        this.SlaveZone = params.SlaveZone || null;
-        this.EngineVersion = params.EngineVersion || null;
-        this.WaitSwitch = params.WaitSwitch || null;
-        this.BackupZone = params.BackupZone || null;
-        this.InstanceRole = params.InstanceRole || null;
+        this.DealId = params.DealId || null;
+        this.RequestId = params.RequestId || null;
 
     }
 }
@@ -5829,7 +6094,7 @@ class DescribeDatabasesResponse extends  AbstractModel {
         this.Items = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -6014,7 +6279,7 @@ class DescribeDBInstanceConfigResponse extends  AbstractModel {
         this.BackupConfig = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -6711,7 +6976,7 @@ class UpgradeDBInstanceResponse extends  AbstractModel {
         this.AsyncRequestId = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -6797,7 +7062,7 @@ class ModifyBackupConfigResponse extends  AbstractModel {
         super();
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -6887,7 +7152,7 @@ class CreateDBImportJobResponse extends  AbstractModel {
         this.AsyncRequestId = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -6928,7 +7193,7 @@ class DescribeDBInstancesResponse extends  AbstractModel {
         this.Items = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -6972,7 +7237,7 @@ class InitDBInstancesResponse extends  AbstractModel {
         this.AsyncRequestIds = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -7041,7 +7306,7 @@ class DescribeInstanceParamsResponse extends  AbstractModel {
         this.Items = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -7091,7 +7356,7 @@ class DescribeDBZoneConfigResponse extends  AbstractModel {
         this.Items = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -7242,7 +7507,7 @@ class SwitchForUpgradeResponse extends  AbstractModel {
         super();
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -7324,7 +7589,7 @@ class DescribeAccountsResponse extends  AbstractModel {
         this.Items = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -7462,7 +7727,7 @@ class DescribeBackupConfigResponse extends  AbstractModel {
         this.BinlogExpireDays = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -7501,7 +7766,7 @@ class StartBatchRollbackResponse extends  AbstractModel {
         this.AsyncRequestId = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -7542,7 +7807,7 @@ class DescribeRollbackRangeTimeResponse extends  AbstractModel {
         this.Items = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -7621,7 +7886,7 @@ class OpenWanServiceResponse extends  AbstractModel {
         this.AsyncRequestId = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -7741,7 +8006,7 @@ class DisassociateSecurityGroupsResponse extends  AbstractModel {
         super();
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -7842,6 +8107,7 @@ module.exports = {
     CreateAccountsResponse: CreateAccountsResponse,
     RegionSellConf: RegionSellConf,
     InstanceRollbackRangeTime: InstanceRollbackRangeTime,
+    SqlFileInfo: SqlFileInfo,
     DescribeTablesResponse: DescribeTablesResponse,
     SellConfig: SellConfig,
     DescribeDBSecurityGroupsResponse: DescribeDBSecurityGroupsResponse,
@@ -7880,10 +8146,12 @@ module.exports = {
     ModifyDBInstanceVipVportResponse: ModifyDBInstanceVipVportResponse,
     DescribeDBSwitchRecordsResponse: DescribeDBSwitchRecordsResponse,
     TableName: TableName,
+    RenewDBInstanceRequest: RenewDBInstanceRequest,
     SlowLogInfo: SlowLogInfo,
     DeleteBackupResponse: DeleteBackupResponse,
     TablePrivilege: TablePrivilege,
     DescribeProjectSecurityGroupsResponse: DescribeProjectSecurityGroupsResponse,
+    UploadInfo: UploadInfo,
     ModifyAccountPasswordResponse: ModifyAccountPasswordResponse,
     DescribeDBSwitchRecordsRequest: DescribeDBSwitchRecordsRequest,
     DescribeAsyncRequestInfoResponse: DescribeAsyncRequestInfoResponse,
@@ -7894,7 +8162,6 @@ module.exports = {
     DescribeDBInstanceCharsetResponse: DescribeDBInstanceCharsetResponse,
     RestartDBInstancesResponse: RestartDBInstancesResponse,
     DescribeBackupDatabasesResponse: DescribeBackupDatabasesResponse,
-    First: First,
     ModifyAutoRenewFlagResponse: ModifyAutoRenewFlagResponse,
     DescribeBackupsResponse: DescribeBackupsResponse,
     DescribeDBImportRecordsResponse: DescribeDBImportRecordsResponse,
@@ -7904,6 +8171,7 @@ module.exports = {
     ModifyDBInstanceSecurityGroupsRequest: ModifyDBInstanceSecurityGroupsRequest,
     DescribeBackupTablesResponse: DescribeBackupTablesResponse,
     Outbound: Outbound,
+    SlaveInstanceInfo: SlaveInstanceInfo,
     ParamInfo: ParamInfo,
     DescribeProjectSecurityGroupsRequest: DescribeProjectSecurityGroupsRequest,
     StartBatchRollbackRequest: StartBatchRollbackRequest,
@@ -7914,7 +8182,10 @@ module.exports = {
     UpgradeDBInstanceEngineVersionResponse: UpgradeDBInstanceEngineVersionResponse,
     DescribeAsyncRequestInfoRequest: DescribeAsyncRequestInfoRequest,
     ModifyInstanceParamResponse: ModifyInstanceParamResponse,
+    UpgradeDBInstanceRequest: UpgradeDBInstanceRequest,
     ColumnPrivilege: ColumnPrivilege,
+    DescribeUploadedFilesRequest: DescribeUploadedFilesRequest,
+    DescribeUploadedFilesResponse: DescribeUploadedFilesResponse,
     InitDBInstancesRequest: InitDBInstancesRequest,
     AssociateSecurityGroupsResponse: AssociateSecurityGroupsResponse,
     InstanceInfo: InstanceInfo,
@@ -7933,7 +8204,7 @@ module.exports = {
     ModifyAccountPasswordRequest: ModifyAccountPasswordRequest,
     DescribeTablesRequest: DescribeTablesRequest,
     InstanceRebootTime: InstanceRebootTime,
-    UpgradeDBInstanceRequest: UpgradeDBInstanceRequest,
+    RenewDBInstanceResponse: RenewDBInstanceResponse,
     DescribeDatabasesResponse: DescribeDatabasesResponse,
     ZoneSellConf: ZoneSellConf,
     DescribeDBInstanceConfigResponse: DescribeDBInstanceConfigResponse,
