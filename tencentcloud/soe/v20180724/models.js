@@ -31,7 +31,7 @@ class InitOralProcessRequest extends  AbstractModel {
         this.SessionId = null;
 
         /**
-         * 被评估语音对应的文本
+         * 被评估语音对应的文本，不支持ascii大于128以上的字符，会统一替换成空格。
          * @type {string || null}
          */
         this.RefText = null;
@@ -54,6 +54,18 @@ class InitOralProcessRequest extends  AbstractModel {
          */
         this.ScoreCoeff = null;
 
+        /**
+         * 业务应用ID，与账号应用APPID无关，是用来方便客户管理服务的参数，需要结合[控制台](https://console.cloud.tencent.com/soe)使用。
+         * @type {string || null}
+         */
+        this.SoeAppId = null;
+
+        /**
+         * 长效session标识，当该参数为1时，session的持续时间为300s，但会一定程度上影响第一个数据包的返回速度，且TransmitOralProcess必须同时为1才可生效。
+         * @type {number || null}
+         */
+        this.IsLongLifeSession = null;
+
     }
 
     /**
@@ -68,6 +80,8 @@ class InitOralProcessRequest extends  AbstractModel {
         this.WorkMode = params.WorkMode || null;
         this.EvalMode = params.EvalMode || null;
         this.ScoreCoeff = params.ScoreCoeff || null;
+        this.SoeAppId = params.SoeAppId || null;
+        this.IsLongLifeSession = params.IsLongLifeSession || null;
 
     }
 }
@@ -81,25 +95,25 @@ class TransmitOralProcessRequest extends  AbstractModel {
         super();
 
         /**
-         * 流式数据包的序号，从1开始，当IsEnd字段为1后后续序号无意义，非流式模式下无意义
+         * 流式数据包的序号，从1开始，当IsEnd字段为1后后续序号无意义，当IsLongLifeSession不为1时切为非流式模式时无意义。
          * @type {number || null}
          */
         this.SeqId = null;
 
         /**
-         * 是否传输完毕标志，若为0表示未完毕，若为1则传输完毕开始评估，非流式模式下无意义
+         * 是否传输完毕标志，若为0表示未完毕，若为1则传输完毕开始评估，非流式模式下无意义。
          * @type {number || null}
          */
         this.IsEnd = null;
 
         /**
-         * 语音文件类型 	1:raw, 2:wav, 3:mp3(mp3格式目前仅支持16k采样率16bit编码单声道)
+         * 语音文件类型 	1:raw, 2:wav, 3:mp3(三种格式目前仅支持16k采样率16bit编码单声道，如有不一致可能导致评估不准确或失败)。
          * @type {number || null}
          */
         this.VoiceFileType = null;
 
         /**
-         * 语音编码类型	1:pcm
+         * 语音编码类型	1:pcm。
          * @type {number || null}
          */
         this.VoiceEncodeType = null;
@@ -111,7 +125,7 @@ class TransmitOralProcessRequest extends  AbstractModel {
         this.UserVoiceData = null;
 
         /**
-         * 语音段唯一标识，一个完整语音一个SessionId
+         * 语音段唯一标识，一个完整语音一个SessionId。
          * @type {string || null}
          */
         this.SessionId = null;
@@ -121,6 +135,12 @@ class TransmitOralProcessRequest extends  AbstractModel {
          * @type {string || null}
          */
         this.SoeAppId = null;
+
+        /**
+         * 长效session标识，当该参数为1时，session的持续时间为300s，但会一定程度上影响第一个数据包的返回速度。当InitOralProcess接口调用时此项为1时，此项必填1才可生效。
+         * @type {number || null}
+         */
+        this.IsLongLifeSession = null;
 
     }
 
@@ -138,6 +158,7 @@ class TransmitOralProcessRequest extends  AbstractModel {
         this.UserVoiceData = params.UserVoiceData || null;
         this.SessionId = params.SessionId || null;
         this.SoeAppId = params.SoeAppId || null;
+        this.IsLongLifeSession = params.IsLongLifeSession || null;
 
     }
 }
@@ -175,7 +196,13 @@ class TransmitOralProcessResponse extends  AbstractModel {
         this.Words = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 语音段唯一标识，一段语音一个SessionId
+         * @type {string || null}
+         */
+        this.SessionId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -201,6 +228,7 @@ class TransmitOralProcessResponse extends  AbstractModel {
                 this.Words.push(obj);
             }
         }
+        this.SessionId = params.SessionId || null;
         this.RequestId = params.RequestId || null;
 
     }
@@ -215,7 +243,13 @@ class InitOralProcessResponse extends  AbstractModel {
         super();
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 语音段唯一标识，一个完整语音一个SessionId
+         * @type {string || null}
+         */
+        this.SessionId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -229,6 +263,7 @@ class InitOralProcessResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.SessionId = params.SessionId || null;
         this.RequestId = params.RequestId || null;
 
     }
