@@ -68,49 +68,84 @@ class AbstractClient {
     /**
      * @inner
      */
-    request(action, req, resp, cb) {
-        this.doRequest(action, req).then(data => this.succRequest(resp, cb, data), error => this.failRequest(error, cb));
+    request(action, req, resp, options, cb) {
+        if (typeof options === 'function') {
+            cb = options
+            options = {}
+        }
+        if (this.profile.signMethod === 'TC3-HMAC-SHA256') {
+            this.doRequestWithSign3(action, req, options).then(data => this.succRequest(resp, cb, data), error => this.failRequest(error, cb));
+        } else {
+            this.doRequest(action, req).then(data => this.succRequest(resp, cb, data), error => this.failRequest(error, cb));
+        }
     }
 
     /**
      * @inner
      */
-    doRequest(action, req) {
+    async doRequest(action, req) {
         let params = this.mergeData(req);
         params = this.formatRequestData(action, params);
-        let optional = {
-            timeout: this.profile.httpProfile.reqTimeout * 1000
-        };
-        return new Promise(
-            (resolve, reject) => {
-            HttpConnection.doRequest(this.profile.httpProfile.reqMethod,
-                this.profile.httpProfile.protocol + this.getEndpoint() + this.path,
-                params, (error, response, data) => {
-                    if (error) {
-                        reject(new TencentCloudSDKHttpException(error.message));
-                    } else if (response.statusCode !== 200) {
-                        const tcError = new TencentCloudSDKHttpException(response.statusMessage)
-                        tcError.httpCode = response.statusCode
-                        reject(tcError);
-                    } else {
-                        data = JSON.parse(data);
-                        if (data.Response.Error) {
-                            const tcError = new TencentCloudSDKHttpException(data.Response.Error.Message, data.Response.RequestId)
-                            tcError.code = data.Response.Error.Code
-                            reject(tcError);
-                        } else {
-                            resolve(data.Response);
-                        }
-                    }
-                },  // callback
-                optional) // doRequest
-            ;})
+        try {
+            const res = await HttpConnection.doRequest({
+                method: this.profile.httpProfile.reqMethod,
+                url: this.profile.httpProfile.protocol + this.getEndpoint() + this.path,
+                data: params,
+                timeout: this.profile.httpProfile.reqTimeout * 1000
+            });
+            return await this.parseResponse(res)
+        } catch (error) {
+            throw new TencentCloudSDKHttpException(error.message);
+        }
+
+
     }
 
     /**
      * @inner
      */
-    mergeData(data, prefix="") {
+    async doRequestWithSign3(action, params, options) {
+        try {
+            const res = await HttpConnection.doRequestWithSign3({
+                method: this.profile.httpProfile.reqMethod,
+                url: this.profile.httpProfile.protocol + this.getEndpoint() + this.path,
+                secretId: this.credential.secretId,
+                secretKey: this.credential.secretKey,
+                region: this.region,
+                data: params,
+                service: this.endpoint.split('.')[0],
+                action: action,
+                version: this.apiVersion,
+                multipart: options.multipart,
+                timeout: this.profile.httpProfile.reqTimeout * 1000
+            })
+            return await this.parseResponse(res)
+        } catch (e) {
+            throw new TencentCloudSDKHttpException(e.message)
+        }
+    }
+
+    async parseResponse(res) {
+        if (res.status !== 200) {
+            const tcError = new TencentCloudSDKHttpException(res.statusText)
+            tcError.httpCode = res.status
+            throw tcError;
+        } else {
+            const data = await res.json();
+            if (data.Response.Error) {
+                const tcError = new TencentCloudSDKHttpException(data.Response.Error.Message, data.Response.RequestId)
+                tcError.code = data.Response.Error.Code
+                throw tcError;
+            } else {
+                return data.Response;
+            }
+        }
+    }
+
+    /**
+     * @inner
+     */
+    mergeData(data, prefix = "") {
         let ret = {};
         for (let k in data) {
             if (data[k] === null) {
@@ -131,7 +166,7 @@ class AbstractClient {
     formatRequestData(action, params) {
         params.Action = action;
         params.RequestClient = this.sdkVersion;
-        params.Nonce= Math.round(Math.random() * 65535);
+        params.Nonce = Math.round(Math.random() * 65535);
         params.Timestamp = Math.round(Date.now() / 1000);
         params.Version = this.apiVersion;
         params.Language = "en-US";
@@ -160,7 +195,7 @@ class AbstractClient {
     /**
      * @inner
      */
-    formatSignString (params) {
+    formatSignString(params) {
         let strParam = "";
         let keys = Object.keys(params);
         keys.sort();
