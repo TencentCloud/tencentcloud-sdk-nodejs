@@ -20,7 +20,11 @@
   "author": "tencentcloudapi",
   "license": "Apache-2.0",
   "dependencies": {
-    "request": "^2.85.0"
+    "form-data": "^2.3.3",
+    "get-stream": "^4.1.0",
+    "https-proxy-agent": "^2.2.1",
+    "is-stream": "^1.1.0",
+    "node-fetch": "^2.2.0"
   },
   "directories": {
     "example": "examples",
