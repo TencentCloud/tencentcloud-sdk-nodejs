@@ -10,7 +10,9 @@ const HttpProfile = tencentcloud.common.HttpProfile;
 
 
 // 实例化一个认证对象，入参需要传入腾讯云账户secretId，secretKey
-let cred = new Credential("secretId", "secretKey");
+//let cred = new Credential("secretId", "secretKey");
+// 可以直接指定，也可以使用环境变量提供账号信息（需要先设置）
+let cred = new Credential(process.env.TENCENTCLOUD_SECRET_ID, process.env.TENCENTCLOUD_SECRET_KEY);
 
 // 实例化一个http选项，可选的，没有特殊需求可以跳过。
 let httpProfile = new HttpProfile();
@@ -27,7 +29,7 @@ clientProfile.httpProfile = httpProfile;
 let client = new CvmClient(cred, "ap-shanghai", clientProfile);
 
 // 实例化一个请求对象,并填充参数
-req = new models.DescribeInstancesRequest();
+let req = new models.DescribeInstancesRequest();
 let filters = {
 	Filters: [
 	    {

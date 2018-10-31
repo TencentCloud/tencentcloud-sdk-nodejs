@@ -26,7 +26,7 @@ clientProfile.httpProfile = httpProfile;
 let client = new CvmClient(cred, "ap-shanghai", clientProfile);
 
 // 实例化一个请求对象,并填充参数
-req = new models.RunInstancesRequest();
+let req = new models.RunInstancesRequest();
 
 req.InternetAccessible = new models.InternetAccessible();
 req.InternetAccessible.InternetChargeType = "TRAFFIC_POSTPAID_BY_HOUR";
