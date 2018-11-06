@@ -24,19 +24,26 @@ const PsaRegulation = models.PsaRegulation;
 const DescribeTaskOperationLogResponse = models.DescribeTaskOperationLogResponse;
 const RepairTaskControlResponse = models.RepairTaskControlResponse;
 const UnbindPsaTagRequest = models.UnbindPsaTagRequest;
+const DescribeDevicesResponse = models.DescribeDevicesResponse;
 const DescribeRepairTaskConstantRequest = models.DescribeRepairTaskConstantRequest;
 const DeletePsaRegulationRequest = models.DeletePsaRegulationRequest;
 const DescribeTaskInfoResponse = models.DescribeTaskInfoResponse;
+const CreateSpotDeviceRequest = models.CreateSpotDeviceRequest;
+const CreateUserCmdResponse = models.CreateUserCmdResponse;
+const CreateUserCmdRequest = models.CreateUserCmdRequest;
 const UnbindPsaTagResponse = models.UnbindPsaTagResponse;
 const BindPsaTagResponse = models.BindPsaTagResponse;
 const DescribeRepairTaskConstantResponse = models.DescribeRepairTaskConstantResponse;
 const TaskType = models.TaskType;
 const DescribePsaRegulationsResponse = models.DescribePsaRegulationsResponse;
-const BindPsaTagRequest = models.BindPsaTagRequest;
+const DescribeDevicesRequest = models.DescribeDevicesRequest;
 const CreatePsaRegulationResponse = models.CreatePsaRegulationResponse;
 const ModifyPsaRegulationRequest = models.ModifyPsaRegulationRequest;
+const BindPsaTagRequest = models.BindPsaTagRequest;
 const DescribeTaskInfoRequest = models.DescribeTaskInfoRequest;
 const RepairTaskControlRequest = models.RepairTaskControlRequest;
+const CreateSpotDeviceResponse = models.CreateSpotDeviceResponse;
+const DeviceInfo = models.DeviceInfo;
 const DescribePsaRegulationsRequest = models.DescribePsaRegulationsRequest;
 const Tag = models.Tag;
 const DeletePsaRegulationResponse = models.DeletePsaRegulationResponse;
@@ -65,6 +72,17 @@ class BmClient extends AbstractClient {
     }
 
     /**
+     * 创建黑石竞价实例
+     * @param {CreateSpotDeviceRequest} req
+     * @param {function(string, CreateSpotDeviceResponse):void} cb
+     * @public
+     */
+    CreateSpotDevice(req, cb) {
+        let resp = new CreateSpotDeviceResponse();
+        this.request("CreateSpotDevice", req, resp, cb);
+    }
+
+    /**
      * 允许修改规则信息及关联故障类型
      * @param {ModifyPsaRegulationRequest} req
      * @param {function(string, ModifyPsaRegulationResponse):void} cb
@@ -84,6 +102,17 @@ class BmClient extends AbstractClient {
     DescribePsaRegulations(req, cb) {
         let resp = new DescribePsaRegulationsResponse();
         this.request("DescribePsaRegulations", req, resp, cb);
+    }
+
+    /**
+     * 查询物理服务器，可以按照实例，业务IP等过滤
+     * @param {DescribeDevicesRequest} req
+     * @param {function(string, DescribeDevicesResponse):void} cb
+     * @public
+     */
+    DescribeDevices(req, cb) {
+        let resp = new DescribeDevicesResponse();
+        this.request("DescribeDevices", req, resp, cb);
     }
 
     /**
@@ -128,6 +157,17 @@ class BmClient extends AbstractClient {
     DeletePsaRegulation(req, cb) {
         let resp = new DeletePsaRegulationResponse();
         this.request("DeletePsaRegulation", req, resp, cb);
+    }
+
+    /**
+     * 创建自定义脚本
+     * @param {CreateUserCmdRequest} req
+     * @param {function(string, CreateUserCmdResponse):void} cb
+     * @public
+     */
+    CreateUserCmd(req, cb) {
+        let resp = new CreateUserCmdResponse();
+        this.request("CreateUserCmd", req, resp, cb);
     }
 
     /**
