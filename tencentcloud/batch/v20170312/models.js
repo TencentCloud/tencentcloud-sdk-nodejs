@@ -304,6 +304,62 @@ class TerminateComputeNodeRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeTaskLogs请求参数结构体
+ * @class
+ */
+class DescribeTaskLogsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 作业ID
+         * @type {string || null}
+         */
+        this.JobId = null;
+
+        /**
+         * 任务名称
+         * @type {string || null}
+         */
+        this.TaskName = null;
+
+        /**
+         * 任务实例集合
+         * @type {Array.<number> || null}
+         */
+        this.TaskInstanceIndexes = null;
+
+        /**
+         * 起始任务实例
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 最大任务实例数
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.JobId = params.JobId || null;
+        this.TaskName = params.TaskName || null;
+        this.TaskInstanceIndexes = params.TaskInstanceIndexes || null;
+        this.Offset = params.Offset || null;
+        this.Limit = params.Limit || null;
+
+    }
+}
+
+/**
  * agent运行模式
  * @class
  */
@@ -511,6 +567,7 @@ class DescribeTaskTemplatesRequest extends  AbstractModel {
 
         /**
          * 过滤条件
+<li> task-template-name - String - 是否必填：否 -（过滤条件）按照任务模板名称过滤。</li>
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
@@ -922,6 +979,34 @@ class LoginSettings extends  AbstractModel {
 }
 
 /**
+ * TerminateComputeNodes返回参数结构体
+ * @class
+ */
+class TerminateComputeNodesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = params.RequestId || null;
+
+    }
+}
+
+/**
  * DescribeComputeEnvActivities返回参数结构体
  * @class
  */
@@ -1044,6 +1129,76 @@ class TaskInstanceMetrics extends  AbstractModel {
         this.SucceedCount = params.SucceedCount || null;
         this.FailedInterruptedCount = params.FailedInterruptedCount || null;
         this.FailedCount = params.FailedCount || null;
+
+    }
+}
+
+/**
+ * 任务实例日志详情。
+ * @class
+ */
+class TaskInstanceLog extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 任务实例
+         * @type {number || null}
+         */
+        this.TaskInstanceIndex = null;
+
+        /**
+         * 标准输出日志（Base64编码）
+         * @type {string || null}
+         */
+        this.StdoutLog = null;
+
+        /**
+         * 标准错误日志（Base64编码）
+         * @type {string || null}
+         */
+        this.StderrLog = null;
+
+        /**
+         * 标准输出重定向路径
+         * @type {string || null}
+         */
+        this.StdoutRedirectPath = null;
+
+        /**
+         * 标准错误重定向路径
+         * @type {string || null}
+         */
+        this.StderrRedirectPath = null;
+
+        /**
+         * 标准输出重定向文件名
+         * @type {string || null}
+         */
+        this.StdoutRedirectFileName = null;
+
+        /**
+         * 标准错误重定向文件名
+         * @type {string || null}
+         */
+        this.StderrRedirectFileName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskInstanceIndex = params.TaskInstanceIndex || null;
+        this.StdoutLog = params.StdoutLog || null;
+        this.StderrLog = params.StderrLog || null;
+        this.StdoutRedirectPath = params.StdoutRedirectPath || null;
+        this.StderrRedirectPath = params.StderrRedirectPath || null;
+        this.StdoutRedirectFileName = params.StdoutRedirectFileName || null;
+        this.StderrRedirectFileName = params.StderrRedirectFileName || null;
 
     }
 }
@@ -1359,78 +1514,54 @@ class OutputMappingConfig extends  AbstractModel {
 }
 
 /**
- * 任务实例视图信息
+ * 计算节点统计指标
  * @class
  */
-class TaskInstanceView extends  AbstractModel {
+class ComputeNodeMetrics extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 任务实例索引
-         * @type {number || null}
-         */
-        this.TaskInstanceIndex = null;
-
-        /**
-         * 任务实例状态
+         * 已经完成提交的计算节点数量
          * @type {string || null}
          */
-        this.TaskInstanceState = null;
+        this.SubmittedCount = null;
 
         /**
-         * 应用程序执行结束的exit code
-         * @type {number || null}
-         */
-        this.ExitCode = null;
-
-        /**
-         * 任务实例状态原因，任务实例失败时，会记录失败原因
+         * 创建中的计算节点数量
          * @type {string || null}
          */
-        this.StateReason = null;
+        this.CreatingCount = null;
 
         /**
-         * 任务实例运行时所在计算节点（例如CVM）的InstanceId。任务实例未运行或者完结时，本字段为空。任务实例重试时，本字段会随之变化
+         * 创建失败的计算节点数量
          * @type {string || null}
          */
-        this.ComputeNodeInstanceId = null;
+        this.CreationFailedCount = null;
 
         /**
-         * 创建时间
+         * 完成创建的计算节点数量
          * @type {string || null}
          */
-        this.CreateTime = null;
+        this.CreatedCount = null;
 
         /**
-         * 启动时间
+         * 运行中的计算节点数量
          * @type {string || null}
          */
-        this.LaunchTime = null;
+        this.RunningCount = null;
 
         /**
-         * 开始运行时间
+         * 销毁中的计算节点数量
          * @type {string || null}
          */
-        this.RunningTime = null;
+        this.DeletingCount = null;
 
         /**
-         * 结束时间
+         * 异常的计算节点数量
          * @type {string || null}
          */
-        this.EndTime = null;
-
-        /**
-         * 重定向信息
-         * @type {RedirectInfo || null}
-         */
-        this.RedirectInfo = null;
-
-        /**
-         * 任务实例状态原因详情，任务实例失败时，会记录失败原因
-         * @type {string || null}
-         */
-        this.StateDetailedReason = null;
+        this.AbnormalCount = null;
 
     }
 
@@ -1441,22 +1572,13 @@ class TaskInstanceView extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TaskInstanceIndex = params.TaskInstanceIndex || null;
-        this.TaskInstanceState = params.TaskInstanceState || null;
-        this.ExitCode = params.ExitCode || null;
-        this.StateReason = params.StateReason || null;
-        this.ComputeNodeInstanceId = params.ComputeNodeInstanceId || null;
-        this.CreateTime = params.CreateTime || null;
-        this.LaunchTime = params.LaunchTime || null;
-        this.RunningTime = params.RunningTime || null;
-        this.EndTime = params.EndTime || null;
-
-        if (params.RedirectInfo) {
-            let obj = new RedirectInfo();
-            obj.deserialize(params.RedirectInfo)
-            this.RedirectInfo = obj;
-        }
-        this.StateDetailedReason = params.StateDetailedReason || null;
+        this.SubmittedCount = params.SubmittedCount || null;
+        this.CreatingCount = params.CreatingCount || null;
+        this.CreationFailedCount = params.CreationFailedCount || null;
+        this.CreatedCount = params.CreatedCount || null;
+        this.RunningCount = params.RunningCount || null;
+        this.DeletingCount = params.DeletingCount || null;
+        this.AbnormalCount = params.AbnormalCount || null;
 
     }
 }
@@ -1650,6 +1772,7 @@ class DescribeComputeEnvActivitiesRequest extends  AbstractModel {
 
         /**
          * 过滤条件
+<li> compute-node-id - String - 是否必填：否 -（过滤条件）按照计算节点ID过滤。</li>
          * @type {Filter || null}
          */
         this.Filters = null;
@@ -2346,76 +2469,6 @@ class DescribeTaskTemplatesResponse extends  AbstractModel {
 }
 
 /**
- * 计算节点统计指标
- * @class
- */
-class ComputeNodeMetrics extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 已经完成提交的计算节点数量
-         * @type {string || null}
-         */
-        this.SubmittedCount = null;
-
-        /**
-         * 创建中的计算节点数量
-         * @type {string || null}
-         */
-        this.CreatingCount = null;
-
-        /**
-         * 创建失败的计算节点数量
-         * @type {string || null}
-         */
-        this.CreationFailedCount = null;
-
-        /**
-         * 完成创建的计算节点数量
-         * @type {string || null}
-         */
-        this.CreatedCount = null;
-
-        /**
-         * 运行中的计算节点数量
-         * @type {string || null}
-         */
-        this.RunningCount = null;
-
-        /**
-         * 销毁中的计算节点数量
-         * @type {string || null}
-         */
-        this.DeletingCount = null;
-
-        /**
-         * 异常的计算节点数量
-         * @type {string || null}
-         */
-        this.AbnormalCount = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.SubmittedCount = params.SubmittedCount || null;
-        this.CreatingCount = params.CreatingCount || null;
-        this.CreationFailedCount = params.CreationFailedCount || null;
-        this.CreatedCount = params.CreatedCount || null;
-        this.RunningCount = params.RunningCount || null;
-        this.DeletingCount = params.DeletingCount || null;
-        this.AbnormalCount = params.AbnormalCount || null;
-
-    }
-}
-
-/**
  * DeleteJob请求参数结构体
  * @class
  */
@@ -2439,6 +2492,56 @@ class DeleteJobRequest extends  AbstractModel {
             return;
         }
         this.JobId = params.JobId || null;
+
+    }
+}
+
+/**
+ * DescribeTaskLogs返回参数结构体
+ * @class
+ */
+class DescribeTaskLogsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 任务实例总数
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 任务实例日志详情集合
+         * @type {Array.<TaskInstanceLog> || null}
+         */
+        this.TaskInstanceLogSet = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = params.TotalCount || null;
+
+        if (params.TaskInstanceLogSet) {
+            this.TaskInstanceLogSet = new Array();
+            for (let z in params.TaskInstanceLogSet) {
+                let obj = new TaskInstanceLog();
+                obj.deserialize(params.TaskInstanceLogSet[z]);
+                this.TaskInstanceLogSet.push(obj);
+            }
+        }
+        this.RequestId = params.RequestId || null;
 
     }
 }
@@ -4115,6 +4218,10 @@ class DescribeJobsRequest extends  AbstractModel {
 
         /**
          * 过滤条件
+<li> job-id - String - 是否必填：否 -（过滤条件）按照作业ID过滤。</li>
+<li> job-name - String - 是否必填：否 -（过滤条件）按照作业名称过滤。</li>
+<li> job-state - String - 是否必填：否 -（过滤条件）按照作业状态过滤。</li>
+<li> zone - String - 是否必填：否 -（过滤条件）按照可用区过滤。</li>
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
@@ -4254,7 +4361,11 @@ class DescribeCvmZoneInstanceConfigInfosRequest extends  AbstractModel {
         super();
 
         /**
-         * 过滤条件
+         * 过滤条件。
+<li> zone - String - 是否必填：否 -（过滤条件）按照可用区过滤。</li>
+<li> instance-family String - 是否必填：否 -（过滤条件）按照机型系列过滤。实例机型系列形如：S1、I1、M1等。</li>
+<li> instance-type - String - 是否必填：否 - （过滤条件）按照机型过滤。</li>
+<li> instance-charge-type - String - 是否必填：否 -（过滤条件）按照实例计费模式过滤。 ( POSTPAID_BY_HOUR：表示后付费，即按量计费机型 | SPOTPAID：表示竞价付费机型。 )  </li>
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
@@ -4413,18 +4524,78 @@ class ModifyComputeEnvRequest extends  AbstractModel {
 }
 
 /**
- * TerminateComputeNodes返回参数结构体
+ * 任务实例视图信息
  * @class
  */
-class TerminateComputeNodesResponse extends  AbstractModel {
+class TaskInstanceView extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * 任务实例索引
+         * @type {number || null}
+         */
+        this.TaskInstanceIndex = null;
+
+        /**
+         * 任务实例状态
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.TaskInstanceState = null;
+
+        /**
+         * 应用程序执行结束的exit code
+         * @type {number || null}
+         */
+        this.ExitCode = null;
+
+        /**
+         * 任务实例状态原因，任务实例失败时，会记录失败原因
+         * @type {string || null}
+         */
+        this.StateReason = null;
+
+        /**
+         * 任务实例运行时所在计算节点（例如CVM）的InstanceId。任务实例未运行或者完结时，本字段为空。任务实例重试时，本字段会随之变化
+         * @type {string || null}
+         */
+        this.ComputeNodeInstanceId = null;
+
+        /**
+         * 创建时间
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * 启动时间
+         * @type {string || null}
+         */
+        this.LaunchTime = null;
+
+        /**
+         * 开始运行时间
+         * @type {string || null}
+         */
+        this.RunningTime = null;
+
+        /**
+         * 结束时间
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * 重定向信息
+         * @type {RedirectInfo || null}
+         */
+        this.RedirectInfo = null;
+
+        /**
+         * 任务实例状态原因详情，任务实例失败时，会记录失败原因
+         * @type {string || null}
+         */
+        this.StateDetailedReason = null;
 
     }
 
@@ -4435,7 +4606,22 @@ class TerminateComputeNodesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.TaskInstanceIndex = params.TaskInstanceIndex || null;
+        this.TaskInstanceState = params.TaskInstanceState || null;
+        this.ExitCode = params.ExitCode || null;
+        this.StateReason = params.StateReason || null;
+        this.ComputeNodeInstanceId = params.ComputeNodeInstanceId || null;
+        this.CreateTime = params.CreateTime || null;
+        this.LaunchTime = params.LaunchTime || null;
+        this.RunningTime = params.RunningTime || null;
+        this.EndTime = params.EndTime || null;
+
+        if (params.RedirectInfo) {
+            let obj = new RedirectInfo();
+            obj.deserialize(params.RedirectInfo)
+            this.RedirectInfo = obj;
+        }
+        this.StateDetailedReason = params.StateDetailedReason || null;
 
     }
 }
@@ -4791,6 +4977,9 @@ class DescribeComputeEnvsRequest extends  AbstractModel {
 
         /**
          * 过滤条件
+<li> zone - String - 是否必填：否 -（过滤条件）按照可用区过滤。</li>
+<li> env-id - String - 是否必填：否 -（过滤条件）按照计算环境ID过滤。</li>
+<li> env-name - String - 是否必填：否 -（过滤条件）按照计算环境名称过滤。</li>
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
@@ -5123,7 +5312,9 @@ class DescribeAvailableCvmInstanceTypesRequest extends  AbstractModel {
         super();
 
         /**
-         * 过滤条件
+         * 过滤条件。
+<li> zone - String - 是否必填：否 -（过滤条件）按照可用区过滤。</li>
+<li> instance-family String - 是否必填：否 -（过滤条件）按照机型系列过滤。实例机型系列形如：S1、I1、M1等。</li>
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
@@ -5364,6 +5555,7 @@ module.exports = {
     ComputeEnvData: ComputeEnvData,
     Authentication: Authentication,
     TerminateComputeNodeRequest: TerminateComputeNodeRequest,
+    DescribeTaskLogsRequest: DescribeTaskLogsRequest,
     AgentRunningMode: AgentRunningMode,
     EnvData: EnvData,
     DescribeTaskTemplatesRequest: DescribeTaskTemplatesRequest,
@@ -5372,15 +5564,17 @@ module.exports = {
     Task: Task,
     InstanceTypeConfig: InstanceTypeConfig,
     LoginSettings: LoginSettings,
+    TerminateComputeNodesResponse: TerminateComputeNodesResponse,
     DescribeComputeEnvActivitiesResponse: DescribeComputeEnvActivitiesResponse,
     TaskInstanceMetrics: TaskInstanceMetrics,
+    TaskInstanceLog: TaskInstanceLog,
     MountDataDisk: MountDataDisk,
     TaskView: TaskView,
     DescribeComputeEnvResponse: DescribeComputeEnvResponse,
     TerminateJobRequest: TerminateJobRequest,
     Application: Application,
     OutputMappingConfig: OutputMappingConfig,
-    TaskInstanceView: TaskInstanceView,
+    ComputeNodeMetrics: ComputeNodeMetrics,
     TaskMetrics: TaskMetrics,
     TerminateComputeNodesRequest: TerminateComputeNodesRequest,
     LocalDiskType: LocalDiskType,
@@ -5395,8 +5589,8 @@ module.exports = {
     DescribeComputeEnvRequest: DescribeComputeEnvRequest,
     InstanceMarketOptionsRequest: InstanceMarketOptionsRequest,
     DescribeTaskTemplatesResponse: DescribeTaskTemplatesResponse,
-    ComputeNodeMetrics: ComputeNodeMetrics,
     DeleteJobRequest: DeleteJobRequest,
+    DescribeTaskLogsResponse: DescribeTaskLogsResponse,
     DeleteTaskTemplatesRequest: DeleteTaskTemplatesRequest,
     DescribeJobResponse: DescribeJobResponse,
     DescribeComputeEnvCreateInfoRequest: DescribeComputeEnvCreateInfoRequest,
@@ -5437,7 +5631,7 @@ module.exports = {
     TerminateTaskInstanceRequest: TerminateTaskInstanceRequest,
     TerminateTaskInstanceResponse: TerminateTaskInstanceResponse,
     ModifyComputeEnvRequest: ModifyComputeEnvRequest,
-    TerminateComputeNodesResponse: TerminateComputeNodesResponse,
+    TaskInstanceView: TaskInstanceView,
     DescribeAvailableCvmInstanceTypesResponse: DescribeAvailableCvmInstanceTypesResponse,
     DescribeTaskResponse: DescribeTaskResponse,
     ComputeEnvView: ComputeEnvView,
