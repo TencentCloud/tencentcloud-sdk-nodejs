@@ -110,7 +110,10 @@ function getHash(message, encoding = 'hex') {
 
 function getDate() {
     const date = new Date()
-    return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`
+    const year = date.getFullYear()
+    const month = ('0' + (date.getMonth() + 1)).slice(-2)
+    const day = ('0' + date.getDate()).slice(-2)
+    return `${year}-${month}-${day}`
 }
 
 module.exports = Sign;
