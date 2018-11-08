@@ -113,7 +113,7 @@ class AbstractClient {
                 secretKey: this.credential.secretKey,
                 region: this.region,
                 data: params,
-                service: this.endpoint.split('.')[0],
+                service: this.getEndpoint().split('.')[0],
                 action: action,
                 version: this.apiVersion,
                 multipart: options.multipart,
