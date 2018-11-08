@@ -43,13 +43,13 @@ class ImageTranslateResponse extends  AbstractModel {
         this.Target = null;
 
         /**
-         * 图片翻译结果
+         * 图片翻译结果，翻译结果按识别的文本每一行独立翻译，后续会推出按段落划分并翻译的版本
          * @type {ImageRecord || null}
          */
         this.ImageRecord = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -128,7 +128,7 @@ class SpeechTranslateResponse extends  AbstractModel {
         this.Target = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -199,7 +199,7 @@ class LanguageDetectRequest extends  AbstractModel {
         super();
 
         /**
-         * 待识别的文本
+         * 待识别的文本，文本统一使用utf-8格式编码，非utf-8格式编码字符会翻译失败
          * @type {string || null}
          */
         this.Text = null;
@@ -241,7 +241,7 @@ class LanguageDetectResponse extends  AbstractModel {
         this.Lang = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -351,7 +351,7 @@ class TextTranslateResponse extends  AbstractModel {
         this.Target = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -406,13 +406,13 @@ class SpeechTranslateRequest extends  AbstractModel {
         this.AudioFormat = null;
 
         /**
-         * 语音分片后的第几片
+         * 语音分片的序号，从0开始
          * @type {number || null}
          */
         this.Seq = null;
 
         /**
-         * 是否最后一片
+         * 是否最后一片语音分片，0-否，1-是
          * @type {number || null}
          */
         this.IsEnd = null;
@@ -424,7 +424,7 @@ class SpeechTranslateRequest extends  AbstractModel {
         this.Data = null;
 
         /**
-         * 项目id
+         * 项目id，用户可自定义
          * @type {number || null}
          */
         this.ProjectId = null;
@@ -522,7 +522,7 @@ class TextTranslateRequest extends  AbstractModel {
         super();
 
         /**
-         * 待翻译的文本
+         * 待翻译的文本，文本统一使用utf-8格式编码，非utf-8格式编码字符会翻译失败
          * @type {string || null}
          */
         this.SourceText = null;

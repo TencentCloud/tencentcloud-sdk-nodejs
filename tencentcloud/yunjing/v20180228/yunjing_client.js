@@ -16,75 +16,131 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
-const DeleteNonlocalLoginPlacesRequest = models.DeleteNonlocalLoginPlacesRequest;
-const DescribeMachineInfoRequest = models.DescribeMachineInfoRequest;
-const DescribeBruteAttacksResponse = models.DescribeBruteAttacksResponse;
-const DescribeNonlocalLoginPlacesRequest = models.DescribeNonlocalLoginPlacesRequest;
-const DescribeMachinesResponse = models.DescribeMachinesResponse;
+const ModifyAutoOpenProVersionConfigRequest = models.ModifyAutoOpenProVersionConfigRequest;
+const DescribeProcessTaskStatusResponse = models.DescribeProcessTaskStatusResponse;
 const DescribeAlarmAttributeResponse = models.DescribeAlarmAttributeResponse;
-const CreateUsualLoginPlacesResponse = models.CreateUsualLoginPlacesResponse;
-const DescribeOverviewStatisticsRequest = models.DescribeOverviewStatisticsRequest;
+const DescribeWeeklyReportBruteAttacksResponse = models.DescribeWeeklyReportBruteAttacksResponse;
 const DescribeAgentVulsRequest = models.DescribeAgentVulsRequest;
-const Machine = models.Machine;
 const UsualPlace = models.UsualPlace;
-const DescribeVulInfoResponse = models.DescribeVulInfoResponse;
-const Malware = models.Malware;
-const DescribeProVersionInfoResponse = models.DescribeProVersionInfoResponse;
-const DeleteMachineResponse = models.DeleteMachineResponse;
-const DeleteBruteAttacksRequest = models.DeleteBruteAttacksRequest;
+const DescribeAccountsRequest = models.DescribeAccountsRequest;
+const WeeklyReportVul = models.WeeklyReportVul;
+const DescribeWeeklyReportBruteAttacksRequest = models.DescribeWeeklyReportBruteAttacksRequest;
 const CreateUsualLoginPlacesRequest = models.CreateUsualLoginPlacesRequest;
-const Vul = models.Vul;
-const DescribeVulScanResultResponse = models.DescribeVulScanResultResponse;
+const DescribeProcessTaskStatusRequest = models.DescribeProcessTaskStatusRequest;
 const ModifyAlarmAttributeRequest = models.ModifyAlarmAttributeRequest;
+const ComponentStatistics = models.ComponentStatistics;
+const DescribeBruteAttacksRequest = models.DescribeBruteAttacksRequest;
+const DescribeWeeklyReportMalwaresResponse = models.DescribeWeeklyReportMalwaresResponse;
+const Account = models.Account;
+const RescanImpactedHostRequest = models.RescanImpactedHostRequest;
+const BruteAttack = models.BruteAttack;
+const DescribeOpenPortsRequest = models.DescribeOpenPortsRequest;
+const DescribeImpactedHostsRequest = models.DescribeImpactedHostsRequest;
+const NonLocalLoginPlace = models.NonLocalLoginPlace;
+const CreateProcessTaskResponse = models.CreateProcessTaskResponse;
+const DescribeComponentsRequest = models.DescribeComponentsRequest;
+const DescribeNonlocalLoginPlacesRequest = models.DescribeNonlocalLoginPlacesRequest;
+const OpenPortStatistics = models.OpenPortStatistics;
+const DescribeHistoryAccountsResponse = models.DescribeHistoryAccountsResponse;
+const DescribeVulScanResultResponse = models.DescribeVulScanResultResponse;
+const UntrustMalwaresRequest = models.UntrustMalwaresRequest;
+const TrustMalwaresRequest = models.TrustMalwaresRequest;
+const UntrustMalwaresResponse = models.UntrustMalwaresResponse;
+const DescribeComponentInfoResponse = models.DescribeComponentInfoResponse;
+const DescribeAccountStatisticsResponse = models.DescribeAccountStatisticsResponse;
+const OpenPort = models.OpenPort;
+const DescribeProVersionInfoRequest = models.DescribeProVersionInfoRequest;
+const CreateProcessTaskRequest = models.CreateProcessTaskRequest;
+const DeleteMachineResponse = models.DeleteMachineResponse;
+const MisAlarmNonlocalLoginPlacesResponse = models.MisAlarmNonlocalLoginPlacesResponse;
+const WeeklyReportNonlocalLoginPlace = models.WeeklyReportNonlocalLoginPlace;
 const DescribeOverviewStatisticsResponse = models.DescribeOverviewStatisticsResponse;
 const RecoverMalwaresRequest = models.RecoverMalwaresRequest;
 const TrustMalwaresResponse = models.TrustMalwaresResponse;
-const DescribeUsualLoginPlacesRequest = models.DescribeUsualLoginPlacesRequest;
+const DescribeWeeklyReportInfoRequest = models.DescribeWeeklyReportInfoRequest;
+const DescribeProcessesResponse = models.DescribeProcessesResponse;
+const WeeklyReportMalware = models.WeeklyReportMalware;
+const DescribeWeeklyReportsRequest = models.DescribeWeeklyReportsRequest;
+const DescribeVulsResponse = models.DescribeVulsResponse;
+const DescribeImpactedHostsResponse = models.DescribeImpactedHostsResponse;
+const AgentVul = models.AgentVul;
+const DescribeOpenPortStatisticsRequest = models.DescribeOpenPortStatisticsRequest;
 const DeleteMachineRequest = models.DeleteMachineRequest;
+const DescribeVulInfoRequest = models.DescribeVulInfoRequest;
+const DescribeComponentStatisticsResponse = models.DescribeComponentStatisticsResponse;
+const Place = models.Place;
+const DeleteUsualLoginPlacesResponse = models.DeleteUsualLoginPlacesResponse;
+const DeleteNonlocalLoginPlacesResponse = models.DeleteNonlocalLoginPlacesResponse;
+const DescribeNonlocalLoginPlacesResponse = models.DescribeNonlocalLoginPlacesResponse;
+const DescribeWeeklyReportNonlocalLoginPlacesRequest = models.DescribeWeeklyReportNonlocalLoginPlacesRequest;
+const CloseProVersionRequest = models.CloseProVersionRequest;
+const DescribeUsualLoginPlacesResponse = models.DescribeUsualLoginPlacesResponse;
+const DescribeComponentInfoRequest = models.DescribeComponentInfoRequest;
+const MisAlarmNonlocalLoginPlacesRequest = models.MisAlarmNonlocalLoginPlacesRequest;
+const DescribeWeeklyReportMalwaresRequest = models.DescribeWeeklyReportMalwaresRequest;
+const DescribeBruteAttacksResponse = models.DescribeBruteAttacksResponse;
+const DescribeComponentStatisticsRequest = models.DescribeComponentStatisticsRequest;
+const DescribeOverviewStatisticsRequest = models.DescribeOverviewStatisticsRequest;
+const DescribeOpenPortStatisticsResponse = models.DescribeOpenPortStatisticsResponse;
+const SecurityDynamic = models.SecurityDynamic;
+const DescribeVulInfoResponse = models.DescribeVulInfoResponse;
+const DescribeProVersionInfoResponse = models.DescribeProVersionInfoResponse;
+const DeleteBruteAttacksRequest = models.DeleteBruteAttacksRequest;
+const DescribeWeeklyReportNonlocalLoginPlacesResponse = models.DescribeWeeklyReportNonlocalLoginPlacesResponse;
+const SeparateMalwaresRequest = models.SeparateMalwaresRequest;
+const DescribeSecurityTrendsResponse = models.DescribeSecurityTrendsResponse;
+const DescribeWeeklyReportInfoResponse = models.DescribeWeeklyReportInfoResponse;
+const DescribeSecurityDynamicsResponse = models.DescribeSecurityDynamicsResponse;
+const CloseProVersionResponse = models.CloseProVersionResponse;
+const DescribeOpenPortsResponse = models.DescribeOpenPortsResponse;
+const DescribeMachineInfoRequest = models.DescribeMachineInfoRequest;
+const DescribeProcessesRequest = models.DescribeProcessesRequest;
+const DeleteUsualLoginPlacesRequest = models.DeleteUsualLoginPlacesRequest;
+const WeeklyReport = models.WeeklyReport;
+const Filter = models.Filter;
+const DescribeAccountStatisticsRequest = models.DescribeAccountStatisticsRequest;
+const DeleteMalwaresResponse = models.DeleteMalwaresResponse;
+const SeparateMalwaresResponse = models.SeparateMalwaresResponse;
+const ProcessStatistics = models.ProcessStatistics;
+const Process = models.Process;
+const DescribeVulScanResultRequest = models.DescribeVulScanResultRequest;
+const DescribeSecurityTrendsRequest = models.DescribeSecurityTrendsRequest;
+const DescribeSecurityDynamicsRequest = models.DescribeSecurityDynamicsRequest;
+const ImpactedHost = models.ImpactedHost;
+const DescribeProcessStatisticsResponse = models.DescribeProcessStatisticsResponse;
+const DeleteNonlocalLoginPlacesRequest = models.DeleteNonlocalLoginPlacesRequest;
+const Malware = models.Malware;
+const AccountStatistics = models.AccountStatistics;
+const DescribeMachinesResponse = models.DescribeMachinesResponse;
+const CreateUsualLoginPlacesResponse = models.CreateUsualLoginPlacesResponse;
+const Machine = models.Machine;
+const DescribeWeeklyReportVulsResponse = models.DescribeWeeklyReportVulsResponse;
+const WeeklyReportBruteAttack = models.WeeklyReportBruteAttack;
+const HistoryAccount = models.HistoryAccount;
+const DescribeUsualLoginPlacesRequest = models.DescribeUsualLoginPlacesRequest;
+const Component = models.Component;
 const DescribeVulsRequest = models.DescribeVulsRequest;
 const DescribeAgentVulsResponse = models.DescribeAgentVulsResponse;
-const ModifyAutoOpenProVersionConfigRequest = models.ModifyAutoOpenProVersionConfigRequest;
-const ImpactedHost = models.ImpactedHost;
-const DescribeNonlocalLoginPlacesResponse = models.DescribeNonlocalLoginPlacesResponse;
-const DescribeProVersionInfoRequest = models.DescribeProVersionInfoRequest;
-const DescribeImpactedHostsResponse = models.DescribeImpactedHostsResponse;
-const TrustMalwaresRequest = models.TrustMalwaresRequest;
-const CloseProVersionResponse = models.CloseProVersionResponse;
-const DescribeBruteAttacksRequest = models.DescribeBruteAttacksRequest;
-const DescribeImpactedHostsRequest = models.DescribeImpactedHostsRequest;
-const IgnoreImpactedHostsResponse = models.IgnoreImpactedHostsResponse;
-const RescanImpactedHostRequest = models.RescanImpactedHostRequest;
-const RescanImpactedHostResponse = models.RescanImpactedHostResponse;
+const DescribeProcessStatisticsRequest = models.DescribeProcessStatisticsRequest;
+const DescribeHistoryAccountsRequest = models.DescribeHistoryAccountsRequest;
 const DescribeMachineInfoResponse = models.DescribeMachineInfoResponse;
-const BruteAttack = models.BruteAttack;
-const DeleteUsualLoginPlacesRequest = models.DeleteUsualLoginPlacesRequest;
 const ModifyAlarmAttributeResponse = models.ModifyAlarmAttributeResponse;
-const DescribeVulInfoRequest = models.DescribeVulInfoRequest;
-const DescribeVulsResponse = models.DescribeVulsResponse;
-const Filter = models.Filter;
-const Place = models.Place;
-const MisAlarmNonlocalLoginPlacesRequest = models.MisAlarmNonlocalLoginPlacesRequest;
-const DeleteUsualLoginPlacesResponse = models.DeleteUsualLoginPlacesResponse;
-const NonLocalLoginPlace = models.NonLocalLoginPlace;
+const IgnoreImpactedHostsResponse = models.IgnoreImpactedHostsResponse;
+const DescribeComponentsResponse = models.DescribeComponentsResponse;
+const RescanImpactedHostResponse = models.RescanImpactedHostResponse;
+const SecurityTrend = models.SecurityTrend;
+const Vul = models.Vul;
+const DescribeWeeklyReportsResponse = models.DescribeWeeklyReportsResponse;
+const DescribeAccountsResponse = models.DescribeAccountsResponse;
+const DeleteMalwaresRequest = models.DeleteMalwaresRequest;
 const ModifyAutoOpenProVersionConfigResponse = models.ModifyAutoOpenProVersionConfigResponse;
-const DeleteNonlocalLoginPlacesResponse = models.DeleteNonlocalLoginPlacesResponse;
 const RecoverMalwaresResponse = models.RecoverMalwaresResponse;
-const DeleteMalwaresResponse = models.DeleteMalwaresResponse;
-const SeparateMalwaresRequest = models.SeparateMalwaresRequest;
-const AgentVul = models.AgentVul;
-const SeparateMalwaresResponse = models.SeparateMalwaresResponse;
+const IgnoreImpactedHostsRequest = models.IgnoreImpactedHostsRequest;
 const DescribeAlarmAttributeRequest = models.DescribeAlarmAttributeRequest;
 const DescribeMalwaresRequest = models.DescribeMalwaresRequest;
-const DescribeVulScanResultRequest = models.DescribeVulScanResultRequest;
-const MisAlarmNonlocalLoginPlacesResponse = models.MisAlarmNonlocalLoginPlacesResponse;
-const IgnoreImpactedHostsRequest = models.IgnoreImpactedHostsRequest;
 const DescribeMachinesRequest = models.DescribeMachinesRequest;
-const CloseProVersionRequest = models.CloseProVersionRequest;
-const UntrustMalwaresRequest = models.UntrustMalwaresRequest;
-const DescribeUsualLoginPlacesResponse = models.DescribeUsualLoginPlacesResponse;
-const DeleteMalwaresRequest = models.DeleteMalwaresRequest;
+const DescribeWeeklyReportVulsRequest = models.DescribeWeeklyReportVulsRequest;
 const DescribeMalwaresResponse = models.DescribeMalwaresResponse;
-const UntrustMalwaresResponse = models.UntrustMalwaresResponse;
 const DeleteBruteAttacksResponse = models.DeleteBruteAttacksResponse;
 
 
@@ -133,6 +189,28 @@ class YunjingClient extends AbstractClient {
     }
 
     /**
+     * 本接口 (DescribeComponentStatistics) 用于获取组件统计列表数据。
+     * @param {DescribeComponentStatisticsRequest} req
+     * @param {function(string, DescribeComponentStatisticsResponse):void} cb
+     * @public
+     */
+    DescribeComponentStatistics(req, cb) {
+        let resp = new DescribeComponentStatisticsResponse();
+        this.request("DescribeComponentStatistics", req, resp, cb);
+    }
+
+    /**
+     * 本接口 (DescribeHistoryAccounts) 用于获取帐号变更历史列表数据。
+     * @param {DescribeHistoryAccountsRequest} req
+     * @param {function(string, DescribeHistoryAccountsResponse):void} cb
+     * @public
+     */
+    DescribeHistoryAccounts(req, cb) {
+        let resp = new DescribeHistoryAccountsResponse();
+        this.request("DescribeHistoryAccounts", req, resp, cb);
+    }
+
+    /**
      * 本接口 (DeleteMalwares) 用于删除木马记录。
      * @param {DeleteMalwaresRequest} req
      * @param {function(string, DeleteMalwaresResponse):void} cb
@@ -141,6 +219,17 @@ class YunjingClient extends AbstractClient {
     DeleteMalwares(req, cb) {
         let resp = new DeleteMalwaresResponse();
         this.request("DeleteMalwares", req, resp, cb);
+    }
+
+    /**
+     * 本接口 (DescribeWeeklyReportBruteAttacks) 用于获取专业周报密码破解数据。
+     * @param {DescribeWeeklyReportBruteAttacksRequest} req
+     * @param {function(string, DescribeWeeklyReportBruteAttacksResponse):void} cb
+     * @public
+     */
+    DescribeWeeklyReportBruteAttacks(req, cb) {
+        let resp = new DescribeWeeklyReportBruteAttacksResponse();
+        this.request("DescribeWeeklyReportBruteAttacks", req, resp, cb);
     }
 
     /**
@@ -155,6 +244,18 @@ class YunjingClient extends AbstractClient {
     }
 
     /**
+     * 本接口 (DescribeWeeklyReportVuls) 用于专业版周报漏洞数据。
+
+     * @param {DescribeWeeklyReportVulsRequest} req
+     * @param {function(string, DescribeWeeklyReportVulsResponse):void} cb
+     * @public
+     */
+    DescribeWeeklyReportVuls(req, cb) {
+        let resp = new DescribeWeeklyReportVulsResponse();
+        this.request("DescribeWeeklyReportVuls", req, resp, cb);
+    }
+
+    /**
      * 本接口（UntrustMalwares）用于取消信任木马文件。
      * @param {UntrustMalwaresRequest} req
      * @param {function(string, UntrustMalwaresResponse):void} cb
@@ -163,6 +264,28 @@ class YunjingClient extends AbstractClient {
     UntrustMalwares(req, cb) {
         let resp = new UntrustMalwaresResponse();
         this.request("UntrustMalwares", req, resp, cb);
+    }
+
+    /**
+     * 本接口 (DescribeWeeklyReportMalwares) 用于获取专业周报木马数据。
+     * @param {DescribeWeeklyReportMalwaresRequest} req
+     * @param {function(string, DescribeWeeklyReportMalwaresResponse):void} cb
+     * @public
+     */
+    DescribeWeeklyReportMalwares(req, cb) {
+        let resp = new DescribeWeeklyReportMalwaresResponse();
+        this.request("DescribeWeeklyReportMalwares", req, resp, cb);
+    }
+
+    /**
+     * 本接口 (DescribeComponentInfo) 用于获取组件信息数据。
+     * @param {DescribeComponentInfoRequest} req
+     * @param {function(string, DescribeComponentInfoResponse):void} cb
+     * @public
+     */
+    DescribeComponentInfo(req, cb) {
+        let resp = new DescribeComponentInfoResponse();
+        this.request("DescribeComponentInfo", req, resp, cb);
     }
 
     /**
@@ -199,6 +322,18 @@ class YunjingClient extends AbstractClient {
     }
 
     /**
+     * 本接口 (DescribeOpenPorts) 用于获取端口列表数据。
+
+     * @param {DescribeOpenPortsRequest} req
+     * @param {function(string, DescribeOpenPortsResponse):void} cb
+     * @public
+     */
+    DescribeOpenPorts(req, cb) {
+        let resp = new DescribeOpenPortsResponse();
+        this.request("DescribeOpenPorts", req, resp, cb);
+    }
+
+    /**
      * 本接口{MisAlarmNonlocalLoginPlaces}将设置当前地点为常用登录地。
      * @param {MisAlarmNonlocalLoginPlacesRequest} req
      * @param {function(string, MisAlarmNonlocalLoginPlacesResponse):void} cb
@@ -210,14 +345,14 @@ class YunjingClient extends AbstractClient {
     }
 
     /**
-     * 本接口（ModifyAlarmAttribute）用于修改告警设置。
-     * @param {ModifyAlarmAttributeRequest} req
-     * @param {function(string, ModifyAlarmAttributeResponse):void} cb
+     * 本接口 (DescribeOpenPortStatistics) 用于获取端口统计列表。
+     * @param {DescribeOpenPortStatisticsRequest} req
+     * @param {function(string, DescribeOpenPortStatisticsResponse):void} cb
      * @public
      */
-    ModifyAlarmAttribute(req, cb) {
-        let resp = new ModifyAlarmAttributeResponse();
-        this.request("ModifyAlarmAttribute", req, resp, cb);
+    DescribeOpenPortStatistics(req, cb) {
+        let resp = new DescribeOpenPortStatisticsResponse();
+        this.request("DescribeOpenPortStatistics", req, resp, cb);
     }
 
     /**
@@ -254,6 +389,17 @@ class YunjingClient extends AbstractClient {
     }
 
     /**
+     * 本接口 (DescribeProcessTaskStatus) 用于获取实时拉取进程任务状态。
+     * @param {DescribeProcessTaskStatusRequest} req
+     * @param {function(string, DescribeProcessTaskStatusResponse):void} cb
+     * @public
+     */
+    DescribeProcessTaskStatus(req, cb) {
+        let resp = new DescribeProcessTaskStatusResponse();
+        this.request("DescribeProcessTaskStatus", req, resp, cb);
+    }
+
+    /**
      * 本接口用于（DescribeOverviewStatistics）获取概览统计数据。
      * @param {DescribeOverviewStatisticsRequest} req
      * @param {function(string, DescribeOverviewStatisticsResponse):void} cb
@@ -273,6 +419,39 @@ class YunjingClient extends AbstractClient {
     DescribeUsualLoginPlaces(req, cb) {
         let resp = new DescribeUsualLoginPlacesResponse();
         this.request("DescribeUsualLoginPlaces", req, resp, cb);
+    }
+
+    /**
+     * 本接口 (DescribeProcessStatistics) 用于获取进程统计列表数据。
+     * @param {DescribeProcessStatisticsRequest} req
+     * @param {function(string, DescribeProcessStatisticsResponse):void} cb
+     * @public
+     */
+    DescribeProcessStatistics(req, cb) {
+        let resp = new DescribeProcessStatisticsResponse();
+        this.request("DescribeProcessStatistics", req, resp, cb);
+    }
+
+    /**
+     * 本接口 (DescribeWeeklyReportInfo) 用于获取专业周报详情数据。
+     * @param {DescribeWeeklyReportInfoRequest} req
+     * @param {function(string, DescribeWeeklyReportInfoResponse):void} cb
+     * @public
+     */
+    DescribeWeeklyReportInfo(req, cb) {
+        let resp = new DescribeWeeklyReportInfoResponse();
+        this.request("DescribeWeeklyReportInfo", req, resp, cb);
+    }
+
+    /**
+     * 本接口 (DescribeSecurityDynamics) 用于获取安全事件消息数据。
+     * @param {DescribeSecurityDynamicsRequest} req
+     * @param {function(string, DescribeSecurityDynamicsResponse):void} cb
+     * @public
+     */
+    DescribeSecurityDynamics(req, cb) {
+        let resp = new DescribeSecurityDynamicsResponse();
+        this.request("DescribeSecurityDynamics", req, resp, cb);
     }
 
     /**
@@ -309,14 +488,14 @@ class YunjingClient extends AbstractClient {
     }
 
     /**
-     * 本接口 (DescribeVuls) 用于获取漏洞列表数据。
-     * @param {DescribeVulsRequest} req
-     * @param {function(string, DescribeVulsResponse):void} cb
+     * 本接口 (DescribeSecurityTrends) 用于获取安全事件统计数据。
+     * @param {DescribeSecurityTrendsRequest} req
+     * @param {function(string, DescribeSecurityTrendsResponse):void} cb
      * @public
      */
-    DescribeVuls(req, cb) {
-        let resp = new DescribeVulsResponse();
-        this.request("DescribeVuls", req, resp, cb);
+    DescribeSecurityTrends(req, cb) {
+        let resp = new DescribeSecurityTrendsResponse();
+        this.request("DescribeSecurityTrends", req, resp, cb);
     }
 
     /**
@@ -331,14 +510,58 @@ class YunjingClient extends AbstractClient {
     }
 
     /**
-     * 本接口 (CloseProVersion) 用于关闭专业版。
-     * @param {CloseProVersionRequest} req
-     * @param {function(string, CloseProVersionResponse):void} cb
+     * 本接口 (DeleteBruteAttacks) 用于删除暴力破解记录。
+     * @param {DeleteBruteAttacksRequest} req
+     * @param {function(string, DeleteBruteAttacksResponse):void} cb
      * @public
      */
-    CloseProVersion(req, cb) {
-        let resp = new CloseProVersionResponse();
-        this.request("CloseProVersion", req, resp, cb);
+    DeleteBruteAttacks(req, cb) {
+        let resp = new DeleteBruteAttacksResponse();
+        this.request("DeleteBruteAttacks", req, resp, cb);
+    }
+
+    /**
+     * 本接口 (DescribeWeeklyReportNonlocalLoginPlaces) 用于获取专业周报异地登录数据。
+     * @param {DescribeWeeklyReportNonlocalLoginPlacesRequest} req
+     * @param {function(string, DescribeWeeklyReportNonlocalLoginPlacesResponse):void} cb
+     * @public
+     */
+    DescribeWeeklyReportNonlocalLoginPlaces(req, cb) {
+        let resp = new DescribeWeeklyReportNonlocalLoginPlacesResponse();
+        this.request("DescribeWeeklyReportNonlocalLoginPlaces", req, resp, cb);
+    }
+
+    /**
+     * 本接口 (DescribeAccounts) 用于获取帐号列表数据。
+     * @param {DescribeAccountsRequest} req
+     * @param {function(string, DescribeAccountsResponse):void} cb
+     * @public
+     */
+    DescribeAccounts(req, cb) {
+        let resp = new DescribeAccountsResponse();
+        this.request("DescribeAccounts", req, resp, cb);
+    }
+
+    /**
+     * 本接口 (DescribeVuls) 用于获取漏洞列表数据。
+     * @param {DescribeVulsRequest} req
+     * @param {function(string, DescribeVulsResponse):void} cb
+     * @public
+     */
+    DescribeVuls(req, cb) {
+        let resp = new DescribeVulsResponse();
+        this.request("DescribeVuls", req, resp, cb);
+    }
+
+    /**
+     * 本接口 (DescribeWeeklyReports) 用于获取周报列表数据。
+     * @param {DescribeWeeklyReportsRequest} req
+     * @param {function(string, DescribeWeeklyReportsResponse):void} cb
+     * @public
+     */
+    DescribeWeeklyReports(req, cb) {
+        let resp = new DescribeWeeklyReportsResponse();
+        this.request("DescribeWeeklyReports", req, resp, cb);
     }
 
     /**
@@ -364,14 +587,47 @@ class YunjingClient extends AbstractClient {
     }
 
     /**
-     * 本接口 (DeleteBruteAttacks) 用于删除暴力破解记录。
-     * @param {DeleteBruteAttacksRequest} req
-     * @param {function(string, DeleteBruteAttacksResponse):void} cb
+     * 本接口 (CloseProVersion) 用于关闭专业版。
+     * @param {CloseProVersionRequest} req
+     * @param {function(string, CloseProVersionResponse):void} cb
      * @public
      */
-    DeleteBruteAttacks(req, cb) {
-        let resp = new DeleteBruteAttacksResponse();
-        this.request("DeleteBruteAttacks", req, resp, cb);
+    CloseProVersion(req, cb) {
+        let resp = new CloseProVersionResponse();
+        this.request("CloseProVersion", req, resp, cb);
+    }
+
+    /**
+     * 本接口 (DescribeAccountStatistics) 用于获取帐号统计列表数据。
+     * @param {DescribeAccountStatisticsRequest} req
+     * @param {function(string, DescribeAccountStatisticsResponse):void} cb
+     * @public
+     */
+    DescribeAccountStatistics(req, cb) {
+        let resp = new DescribeAccountStatisticsResponse();
+        this.request("DescribeAccountStatistics", req, resp, cb);
+    }
+
+    /**
+     * 本接口 (CreateProcessTask) 用于创建实时拉取进程任务。
+     * @param {CreateProcessTaskRequest} req
+     * @param {function(string, CreateProcessTaskResponse):void} cb
+     * @public
+     */
+    CreateProcessTask(req, cb) {
+        let resp = new CreateProcessTaskResponse();
+        this.request("CreateProcessTask", req, resp, cb);
+    }
+
+    /**
+     * 本接口（ModifyAlarmAttribute）用于修改告警设置。
+     * @param {ModifyAlarmAttributeRequest} req
+     * @param {function(string, ModifyAlarmAttributeResponse):void} cb
+     * @public
+     */
+    ModifyAlarmAttribute(req, cb) {
+        let resp = new ModifyAlarmAttributeResponse();
+        this.request("ModifyAlarmAttribute", req, resp, cb);
     }
 
     /**
@@ -416,6 +672,28 @@ class YunjingClient extends AbstractClient {
     CreateUsualLoginPlaces(req, cb) {
         let resp = new CreateUsualLoginPlacesResponse();
         this.request("CreateUsualLoginPlaces", req, resp, cb);
+    }
+
+    /**
+     * 本接口 (DescribeComponents) 用于获取组件列表数据。
+     * @param {DescribeComponentsRequest} req
+     * @param {function(string, DescribeComponentsResponse):void} cb
+     * @public
+     */
+    DescribeComponents(req, cb) {
+        let resp = new DescribeComponentsResponse();
+        this.request("DescribeComponents", req, resp, cb);
+    }
+
+    /**
+     * 本接口 (DescribeProcesses) 用于获取进程列表数据。
+     * @param {DescribeProcessesRequest} req
+     * @param {function(string, DescribeProcessesResponse):void} cb
+     * @public
+     */
+    DescribeProcesses(req, cb) {
+        let resp = new DescribeProcessesResponse();
+        this.request("DescribeProcesses", req, resp, cb);
     }
 
     /**
