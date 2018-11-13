@@ -49,7 +49,7 @@ class HttpConnection {
         let payload = ''
         if (method === 'GET') {
             data = mergeData(data)
-            url += '?' + querystring.stringify(data)
+            url += '?' + QueryString.stringify(data)
         }
         if (method === 'POST') {
             payload = data
