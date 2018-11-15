@@ -86,27 +86,27 @@ class AbstractClient {
     async doRequest(action, req) {
         let params = this.mergeData(req);
         params = this.formatRequestData(action, params);
+        let res;
         try {
-            const res = await HttpConnection.doRequest({
+            res = await HttpConnection.doRequest({
                 method: this.profile.httpProfile.reqMethod,
                 url: this.profile.httpProfile.protocol + this.getEndpoint() + this.path,
                 data: params,
                 timeout: this.profile.httpProfile.reqTimeout * 1000
             });
-            return await this.parseResponse(res)
         } catch (error) {
             throw new TencentCloudSDKHttpException(error.message);
         }
-
-
+        return await this.parseResponse(res)
     }
 
     /**
      * @inner
      */
     async doRequestWithSign3(action, params, options) {
+        let res;
         try {
-            const res = await HttpConnection.doRequestWithSign3({
+            res = await HttpConnection.doRequestWithSign3({
                 method: this.profile.httpProfile.reqMethod,
                 url: this.profile.httpProfile.protocol + this.getEndpoint() + this.path,
                 secretId: this.credential.secretId,
@@ -119,10 +119,10 @@ class AbstractClient {
                 multipart: options.multipart,
                 timeout: this.profile.httpProfile.reqTimeout * 1000
             })
-            return await this.parseResponse(res)
         } catch (e) {
             throw new TencentCloudSDKHttpException(e.message)
         }
+        return await this.parseResponse(res)
     }
 
     async parseResponse(res) {
