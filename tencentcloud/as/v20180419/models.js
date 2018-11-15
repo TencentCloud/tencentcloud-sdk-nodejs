@@ -334,6 +334,14 @@ class ModifyAutoScalingGroupRequest extends  AbstractModel {
          */
         this.Zones = null;
 
+        /**
+         * 重试策略，取值包括 IMMEDIATE_RETRY 和 INCREMENTAL_INTERVALS，默认取值为 IMMEDIATE_RETRY。
+<br><li> IMMEDIATE_RETRY，立即重试，在较短时间内快速重试，连续失败超过一定次数（5次）后不再重试。
+<br><li> INCREMENTAL_INTERVALS，间隔递增重试，随着连续失败次数的增加，重试间隔逐渐增大，重试间隔从秒级到1天不等。在连续失败超过一定次数（25次）后不再重试。
+         * @type {string || null}
+         */
+        this.RetryPolicy = null;
+
     }
 
     /**
@@ -355,6 +363,7 @@ class ModifyAutoScalingGroupRequest extends  AbstractModel {
         this.TerminationPolicies = params.TerminationPolicies || null;
         this.VpcId = params.VpcId || null;
         this.Zones = params.Zones || null;
+        this.RetryPolicy = params.RetryPolicy || null;
 
     }
 }
@@ -374,12 +383,6 @@ class CreateLaunchConfigurationRequest extends  AbstractModel {
         this.LaunchConfigurationName = null;
 
         /**
-         * 实例机型。不同实例机型指定了不同的资源规格，具体取值可通过调用接口 [DescribeInstanceTypeConfigs](https://cloud.tencent.com/document/api/213/15749) 来获得最新的规格表或参见[实例类型](https://cloud.tencent.com/document/product/213/11518)描述。
-         * @type {string || null}
-         */
-        this.InstanceType = null;
-
-        /**
          * 指定有效的[镜像](https://cloud.tencent.com/document/product/213/4940)ID，格式形如`img-8toqc6s3`。镜像类型分为四种：<br/><li>公共镜像</li><li>自定义镜像</li><li>共享镜像</li><li>服务市场镜像</li><br/>可通过以下方式获取可用的镜像ID：<br/><li>`公共镜像`、`自定义镜像`、`共享镜像`的镜像ID可通过登录[控制台](https://console.cloud.tencent.com/cvm/image?rid=1&imageType=PUBLIC_IMAGE)查询；`服务镜像市场`的镜像ID可通过[云市场](https://market.cloud.tencent.com/list)查询。</li><li>通过调用接口 [DescribeImages](https://cloud.tencent.com/document/api/213/15715) ，取返回信息中的`ImageId`字段。</li>
          * @type {string || null}
          */
@@ -392,13 +395,20 @@ class CreateLaunchConfigurationRequest extends  AbstractModel {
         this.ProjectId = null;
 
         /**
+         * 实例机型。不同实例机型指定了不同的资源规格，具体取值可通过调用接口 [DescribeInstanceTypeConfigs](https://cloud.tencent.com/document/api/213/15749) 来获得最新的规格表或参见[实例类型](https://cloud.tencent.com/document/product/213/11518)描述。
+`InstanceType`和`InstanceTypes`参数互斥，二者必填一个且只能填写一个。
+         * @type {string || null}
+         */
+        this.InstanceType = null;
+
+        /**
          * 实例系统盘配置信息。若不指定该参数，则按照系统默认值进行分配。
          * @type {SystemDisk || null}
          */
         this.SystemDisk = null;
 
         /**
-         * 实例数据盘配置信息。若不指定该参数，则默认不购买数据盘，当前仅支持购买的时候指定一个数据盘。
+         * 实例数据盘配置信息。若不指定该参数，则默认不购买数据盘，最多支持指定11块数据盘。
          * @type {Array.<DataDisk> || null}
          */
         this.DataDisks = null;
@@ -447,6 +457,13 @@ class CreateLaunchConfigurationRequest extends  AbstractModel {
          */
         this.InstanceMarketOptions = null;
 
+        /**
+         * 实例机型列表，不同实例机型指定了不同的资源规格，最多支持5中实例机型。
+`InstanceType`和`InstanceTypes`参数互斥，二者必填一个且只能填写一个。
+         * @type {Array.<string> || null}
+         */
+        this.InstanceTypes = null;
+
     }
 
     /**
@@ -457,9 +474,9 @@ class CreateLaunchConfigurationRequest extends  AbstractModel {
             return;
         }
         this.LaunchConfigurationName = params.LaunchConfigurationName || null;
-        this.InstanceType = params.InstanceType || null;
         this.ImageId = params.ImageId || null;
         this.ProjectId = params.ProjectId || null;
+        this.InstanceType = params.InstanceType || null;
 
         if (params.SystemDisk) {
             let obj = new SystemDisk();
@@ -502,6 +519,7 @@ class CreateLaunchConfigurationRequest extends  AbstractModel {
             obj.deserialize(params.InstanceMarketOptions)
             this.InstanceMarketOptions = obj;
         }
+        this.InstanceTypes = params.InstanceTypes || null;
 
     }
 }
@@ -634,6 +652,12 @@ class AutoScalingGroup extends  AbstractModel {
          */
         this.ZoneSet = null;
 
+        /**
+         * 重试策略
+         * @type {string || null}
+         */
+        this.RetryPolicy = null;
+
     }
 
     /**
@@ -671,6 +695,7 @@ class AutoScalingGroup extends  AbstractModel {
         this.TerminationPolicySet = params.TerminationPolicySet || null;
         this.VpcId = params.VpcId || null;
         this.ZoneSet = params.ZoneSet || null;
+        this.RetryPolicy = params.RetryPolicy || null;
 
     }
 }
@@ -1026,6 +1051,12 @@ class LaunchConfiguration extends  AbstractModel {
          */
         this.InstanceMarketOptions = null;
 
+        /**
+         * 实例机型列表。
+         * @type {Array.<string> || null}
+         */
+        this.InstanceTypes = null;
+
     }
 
     /**
@@ -1093,6 +1124,7 @@ class LaunchConfiguration extends  AbstractModel {
             obj.deserialize(params.InstanceMarketOptions)
             this.InstanceMarketOptions = obj;
         }
+        this.InstanceTypes = params.InstanceTypes || null;
 
     }
 }
@@ -1598,9 +1630,9 @@ class DescribeScheduledActionsRequest extends  AbstractModel {
 
         /**
          * 过滤条件。
-* scheduled-action-id - String - 是否必填：否 -（过滤条件）按照定时任务ID过滤。
-* scheduled-action-name - String - 是否必填：否 - （过滤条件） 按照定时任务名称过滤。
-* auto-scaling-group-id - String - 是否必填：否 - （过滤条件） 按照伸缩组ID过滤。
+<li> scheduled-action-id - String - 是否必填：否 -（过滤条件）按照定时任务ID过滤。</li>
+<li> scheduled-action-name - String - 是否必填：否 - （过滤条件） 按照定时任务名称过滤。</li>
+<li> auto-scaling-group-id - String - 是否必填：否 - （过滤条件） 按照伸缩组ID过滤。</li>
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
@@ -2355,6 +2387,12 @@ class Instance extends  AbstractModel {
          */
         this.AddTime = null;
 
+        /**
+         * 实例类型
+         * @type {string || null}
+         */
+        this.InstanceType = null;
+
     }
 
     /**
@@ -2374,6 +2412,7 @@ class Instance extends  AbstractModel {
         this.Zone = params.Zone || null;
         this.CreationType = params.CreationType || null;
         this.AddTime = params.AddTime || null;
+        this.InstanceType = params.InstanceType || null;
 
     }
 }
@@ -2514,6 +2553,14 @@ class CreateAutoScalingGroupRequest extends  AbstractModel {
          */
         this.Zones = null;
 
+        /**
+         * 重试策略，取值包括 IMMEDIATE_RETRY 和 INCREMENTAL_INTERVALS，默认取值为 IMMEDIATE_RETRY。
+<br><li> IMMEDIATE_RETRY，立即重试，在较短时间内快速重试，连续失败超过一定次数（5次）后不再重试。
+<br><li> INCREMENTAL_INTERVALS，间隔递增重试，随着连续失败次数的增加，重试间隔逐渐增大，重试间隔从秒级到1天不等。在连续失败超过一定次数（25次）后不再重试。
+         * @type {string || null}
+         */
+        this.RetryPolicy = null;
+
     }
 
     /**
@@ -2544,6 +2591,7 @@ class CreateAutoScalingGroupRequest extends  AbstractModel {
         this.SubnetIds = params.SubnetIds || null;
         this.TerminationPolicies = params.TerminationPolicies || null;
         this.Zones = params.Zones || null;
+        this.RetryPolicy = params.RetryPolicy || null;
 
     }
 }

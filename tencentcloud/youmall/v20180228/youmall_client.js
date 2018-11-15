@@ -24,11 +24,12 @@ const ZoneFlowAndAvrStayTime = models.ZoneFlowAndAvrStayTime;
 const DescribeZoneTrafficInfoResponse = models.DescribeZoneTrafficInfoResponse;
 const DescribeShopTrafficInfoRequest = models.DescribeShopTrafficInfoRequest;
 const HourTrafficInfoDetail = models.HourTrafficInfoDetail;
-const DescribePersonTraceResponse = models.DescribePersonTraceResponse;
+const DeletePersonFeatureRequest = models.DeletePersonFeatureRequest;
 const ZoneTrafficInfo = models.ZoneTrafficInfo;
 const PersonProfile = models.PersonProfile;
 const DescribePersonInfoRequest = models.DescribePersonInfoRequest;
 const ZoneAgeGroupAvrStayTime = models.ZoneAgeGroupAvrStayTime;
+const ZoneTrafficInfoDetail = models.ZoneTrafficInfoDetail;
 const PersonTracePoint = models.PersonTracePoint;
 const ZoneHourFlow = models.ZoneHourFlow;
 const GenderAgeTrafficDetail = models.GenderAgeTrafficDetail;
@@ -40,12 +41,12 @@ const DescribePersonArrivedMallResponse = models.DescribePersonArrivedMallRespon
 const NetworkAndShopInfo = models.NetworkAndShopInfo;
 const NetworkInfo = models.NetworkInfo;
 const DescribePersonInfoResponse = models.DescribePersonInfoResponse;
-const NetworkHistoryInfo = models.NetworkHistoryInfo;
+const ModifyPersonTypeResponse = models.ModifyPersonTypeResponse;
 const DescribeTrajectoryDataRequest = models.DescribeTrajectoryDataRequest;
 const DailyTracePoint = models.DailyTracePoint;
 const DescribeNetworkInfoResponse = models.DescribeNetworkInfoResponse;
 const DescribePersonVisitInfoRequest = models.DescribePersonVisitInfoRequest;
-const ZoneTrafficInfoDetail = models.ZoneTrafficInfoDetail;
+const NetworkHistoryInfo = models.NetworkHistoryInfo;
 const DescribeZoneFlowGenderInfoByZoneIdRequest = models.DescribeZoneFlowGenderInfoByZoneIdRequest;
 const CreateAccountResponse = models.CreateAccountResponse;
 const DescribeHistoryNetworkInfoResponse = models.DescribeHistoryNetworkInfoResponse;
@@ -54,7 +55,7 @@ const DescribeZoneFlowGenderAvrStayTimeByZoneIdRequest = models.DescribeZoneFlow
 const DescribeShopInfoResponse = models.DescribeShopInfoResponse;
 const ShopInfo = models.ShopInfo;
 const DescribeZoneFlowDailyByZoneIdResponse = models.DescribeZoneFlowDailyByZoneIdResponse;
-const NetworkLastInfo = models.NetworkLastInfo;
+const DescribePersonTraceResponse = models.DescribePersonTraceResponse;
 const DescribeShopHourTrafficInfoRequest = models.DescribeShopHourTrafficInfoRequest;
 const DescribeZoneFlowAgeInfoByZoneIdResponse = models.DescribeZoneFlowAgeInfoByZoneIdResponse;
 const DescribePersonResponse = models.DescribePersonResponse;
@@ -66,12 +67,13 @@ const DescribeZoneFlowAgeInfoByZoneIdRequest = models.DescribeZoneFlowAgeInfoByZ
 const DescribePersonTraceDetailRequest = models.DescribePersonTraceDetailRequest;
 const CreateAccountRequest = models.CreateAccountRequest;
 const DescribeShopTrafficInfoResponse = models.DescribeShopTrafficInfoResponse;
-const RegisterCallbackRequest = models.RegisterCallbackRequest;
+const ModifyPersonTypeRequest = models.ModifyPersonTypeRequest;
 const DescribeZoneFlowGenderAvrStayTimeByZoneIdResponse = models.DescribeZoneFlowGenderAvrStayTimeByZoneIdResponse;
 const ArrivedMallInfo = models.ArrivedMallInfo;
 const PersonInfo = models.PersonInfo;
 const PersonCoordinate = models.PersonCoordinate;
 const DescribeFaceIdByTempIdResponse = models.DescribeFaceIdByTempIdResponse;
+const DeletePersonFeatureResponse = models.DeletePersonFeatureResponse;
 const DescribeZoneTrafficInfoRequest = models.DescribeZoneTrafficInfoRequest;
 const DescribeCameraPersonResponse = models.DescribeCameraPersonResponse;
 const ShopHourTrafficInfo = models.ShopHourTrafficInfo;
@@ -79,6 +81,7 @@ const ModifyPersonTagInfoResponse = models.ModifyPersonTagInfoResponse;
 const CameraPersonInfo = models.CameraPersonInfo;
 const DescribeClusterPersonTraceRequest = models.DescribeClusterPersonTraceRequest;
 const PersonTagInfo = models.PersonTagInfo;
+const ZoneDayFlow = models.ZoneDayFlow;
 const DescribeShopHourTrafficInfoResponse = models.DescribeShopHourTrafficInfoResponse;
 const DescribePersonVisitInfoResponse = models.DescribePersonVisitInfoResponse;
 const DescribeNetworkInfoRequest = models.DescribeNetworkInfoRequest;
@@ -89,12 +92,13 @@ const DescribeZoneFlowDailyByZoneIdRequest = models.DescribeZoneFlowDailyByZoneI
 const TrajectorySunData = models.TrajectorySunData;
 const DescribeZoneFlowGenderInfoByZoneIdResponse = models.DescribeZoneFlowGenderInfoByZoneIdResponse;
 const ModifyPersonTagInfoRequest = models.ModifyPersonTagInfoRequest;
-const ZoneDayFlow = models.ZoneDayFlow;
+const RegisterCallbackRequest = models.RegisterCallbackRequest;
 const DescribePersonTraceRequest = models.DescribePersonTraceRequest;
 const DescribeZoneFlowAndStayTimeRequest = models.DescribeZoneFlowAndStayTimeRequest;
 const DescribePersonTraceDetailResponse = models.DescribePersonTraceDetailResponse;
 const ShopDayTrafficInfo = models.ShopDayTrafficInfo;
 const DescribePersonArrivedMallRequest = models.DescribePersonArrivedMallRequest;
+const NetworkLastInfo = models.NetworkLastInfo;
 const DescribeTrajectoryDataResponse = models.DescribeTrajectoryDataResponse;
 
 
@@ -150,6 +154,17 @@ class YoumallClient extends AbstractClient {
     DescribeZoneFlowAgeInfoByZoneId(req, cb) {
         let resp = new DescribeZoneFlowAgeInfoByZoneIdResponse();
         this.request("DescribeZoneFlowAgeInfoByZoneId", req, resp, cb);
+    }
+
+    /**
+     * 调用本接口在优Mall中注册自己集团的到店通知回调接口地址，接口协议为HTTP或HTTPS。注册后，若集团有特殊身份（例如老客）到店通知，优Mall后台将主动将到店信息push给该接口
+     * @param {RegisterCallbackRequest} req
+     * @param {function(string, RegisterCallbackResponse):void} cb
+     * @public
+     */
+    RegisterCallback(req, cb) {
+        let resp = new RegisterCallbackResponse();
+        this.request("RegisterCallback", req, resp, cb);
     }
 
     /**
@@ -331,14 +346,14 @@ class YoumallClient extends AbstractClient {
     }
 
     /**
-     * 调用本接口在优Mall中注册自己集团的到店通知回调接口地址，接口协议为HTTP或HTTPS。注册后，若集团有特殊身份（例如老客）到店通知，优Mall后台将主动将到店信息push给该接口
-     * @param {RegisterCallbackRequest} req
-     * @param {function(string, RegisterCallbackResponse):void} cb
+     * 修改顾客身份类型接口
+     * @param {ModifyPersonTypeRequest} req
+     * @param {function(string, ModifyPersonTypeResponse):void} cb
      * @public
      */
-    RegisterCallback(req, cb) {
-        let resp = new RegisterCallbackResponse();
-        this.request("RegisterCallback", req, resp, cb);
+    ModifyPersonType(req, cb) {
+        let resp = new ModifyPersonTypeResponse();
+        this.request("ModifyPersonType", req, resp, cb);
     }
 
     /**
@@ -361,6 +376,17 @@ class YoumallClient extends AbstractClient {
     DescribeNetworkInfo(req, cb) {
         let resp = new DescribeNetworkInfoResponse();
         this.request("DescribeNetworkInfo", req, resp, cb);
+    }
+
+    /**
+     * 删除顾客特征，仅支持删除黑名单或者白名单用户特征。
+     * @param {DeletePersonFeatureRequest} req
+     * @param {function(string, DeletePersonFeatureResponse):void} cb
+     * @public
+     */
+    DeletePersonFeature(req, cb) {
+        let resp = new DeletePersonFeatureResponse();
+        this.request("DeletePersonFeature", req, resp, cb);
     }
 
     /**
