@@ -1,4 +1,5 @@
 const QueryString = require("querystring");
+const { URL } = require('url');
 const isStream = require('is-stream');
 const getStream = require('get-stream');
 const FormData = require('form-data');
