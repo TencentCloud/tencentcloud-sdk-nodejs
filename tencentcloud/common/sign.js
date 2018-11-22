@@ -81,7 +81,7 @@ class Sign {
             headers + '\n' +
             signedHeaders + '\n' +
             payload_hash
-        const date = getDate()
+        const date = getDate(timestamp)
     
         const StringToSign =
             'TC3-HMAC-SHA256' + '\n' +
@@ -108,8 +108,8 @@ function getHash(message, encoding = 'hex') {
     return hash.update(message).digest(encoding)
 }
 
-function getDate() {
-    const date = new Date()
+function getDate(timestamp) {
+    const date = new Date(timestamp * 1000)
     const year = date.getFullYear()
     const month = ('0' + (date.getMonth() + 1)).slice(-2)
     const day = ('0' + date.getDate()).slice(-2)
