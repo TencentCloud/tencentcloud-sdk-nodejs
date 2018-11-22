@@ -117,7 +117,9 @@ class AbstractClient {
                 action: action,
                 version: this.apiVersion,
                 multipart: options.multipart,
-                timeout: this.profile.httpProfile.reqTimeout * 1000
+                timeout: this.profile.httpProfile.reqTimeout * 1000,
+                token: this.credential.token,
+                requestClient: this.sdkVersion
             })
         } catch (e) {
             throw new TencentCloudSDKHttpException(e.message)
