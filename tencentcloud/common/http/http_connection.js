@@ -36,7 +36,9 @@ class HttpConnection {
         secretId,
         secretKey,
         multipart = false,
-        timeout = 60000
+        timeout = 60000,
+        token,
+        requestClient
     }) {
         // data 中可能带有 readStream，由于需要计算整个 body 的 hash，
         // 所以这里把 readStream 转为 Buffer
@@ -64,7 +66,9 @@ class HttpConnection {
                 'X-TC-Action': action,
                 'X-TC-Region': region,
                 'X-TC-Timestamp': timestamp,
-                'X-TC-Version': version
+                'X-TC-Version': version,
+                'X-TC-Token': token,
+                'X-TC-RequestClient': requestClient
             }
         }
 
