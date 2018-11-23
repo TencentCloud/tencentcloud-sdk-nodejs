@@ -129,7 +129,7 @@ class DcdbClient extends AbstractClient {
      */
     DescribeAccountPrivileges(req, cb) {
         let resp = new DescribeAccountPrivilegesResponse();
-        this.request("DescribeAccountPrivileges", req, resp, cb);
+        this.request("DescribeAccountPrivileges", req, resp, options, cb);
     }
 
     /**
@@ -140,7 +140,7 @@ class DcdbClient extends AbstractClient {
      */
     DescribeOrders(req, cb) {
         let resp = new DescribeOrdersResponse();
-        this.request("DescribeOrders", req, resp, cb);
+        this.request("DescribeOrders", req, resp, options, cb);
     }
 
     /**
@@ -151,7 +151,7 @@ class DcdbClient extends AbstractClient {
      */
     DescribeDatabaseObjects(req, cb) {
         let resp = new DescribeDatabaseObjectsResponse();
-        this.request("DescribeDatabaseObjects", req, resp, cb);
+        this.request("DescribeDatabaseObjects", req, resp, options, cb);
     }
 
     /**
@@ -162,7 +162,7 @@ class DcdbClient extends AbstractClient {
      */
     DescribeShardSpec(req, cb) {
         let resp = new DescribeShardSpecResponse();
-        this.request("DescribeShardSpec", req, resp, cb);
+        this.request("DescribeShardSpec", req, resp, options, cb);
     }
 
     /**
@@ -173,7 +173,7 @@ class DcdbClient extends AbstractClient {
      */
     DescribeDCDBUpgradePrice(req, cb) {
         let resp = new DescribeDCDBUpgradePriceResponse();
-        this.request("DescribeDCDBUpgradePrice", req, resp, cb);
+        this.request("DescribeDCDBUpgradePrice", req, resp, options, cb);
     }
 
     /**
@@ -185,7 +185,7 @@ class DcdbClient extends AbstractClient {
      */
     ModifyAccountDescription(req, cb) {
         let resp = new ModifyAccountDescriptionResponse();
-        this.request("ModifyAccountDescription", req, resp, cb);
+        this.request("ModifyAccountDescription", req, resp, options, cb);
     }
 
     /**
@@ -197,7 +197,7 @@ class DcdbClient extends AbstractClient {
      */
     ResetAccountPassword(req, cb) {
         let resp = new ResetAccountPasswordResponse();
-        this.request("ResetAccountPassword", req, resp, cb);
+        this.request("ResetAccountPassword", req, resp, options, cb);
     }
 
     /**
@@ -208,7 +208,7 @@ class DcdbClient extends AbstractClient {
      */
     DescribeDCDBPrice(req, cb) {
         let resp = new DescribeDCDBPriceResponse();
-        this.request("DescribeDCDBPrice", req, resp, cb);
+        this.request("DescribeDCDBPrice", req, resp, options, cb);
     }
 
     /**
@@ -219,7 +219,7 @@ class DcdbClient extends AbstractClient {
      */
     ModifyDBParameters(req, cb) {
         let resp = new ModifyDBParametersResponse();
-        this.request("ModifyDBParameters", req, resp, cb);
+        this.request("ModifyDBParameters", req, resp, options, cb);
     }
 
     /**
@@ -230,7 +230,7 @@ class DcdbClient extends AbstractClient {
      */
     DescribeDCDBSaleInfo(req, cb) {
         let resp = new DescribeDCDBSaleInfoResponse();
-        this.request("DescribeDCDBSaleInfo", req, resp, cb);
+        this.request("DescribeDCDBSaleInfo", req, resp, options, cb);
     }
 
     /**
@@ -241,7 +241,7 @@ class DcdbClient extends AbstractClient {
      */
     OpenDBExtranetAccess(req, cb) {
         let resp = new OpenDBExtranetAccessResponse();
-        this.request("OpenDBExtranetAccess", req, resp, cb);
+        this.request("OpenDBExtranetAccess", req, resp, options, cb);
     }
 
     /**
@@ -252,7 +252,7 @@ class DcdbClient extends AbstractClient {
      */
     InitDCDBInstances(req, cb) {
         let resp = new InitDCDBInstancesResponse();
-        this.request("InitDCDBInstances", req, resp, cb);
+        this.request("InitDCDBInstances", req, resp, options, cb);
     }
 
     /**
@@ -263,7 +263,7 @@ class DcdbClient extends AbstractClient {
      */
     DescribeAccounts(req, cb) {
         let resp = new DescribeAccountsResponse();
-        this.request("DescribeAccounts", req, resp, cb);
+        this.request("DescribeAccounts", req, resp, options, cb);
     }
 
     /**
@@ -275,7 +275,7 @@ class DcdbClient extends AbstractClient {
      */
     GrantAccountPrivileges(req, cb) {
         let resp = new GrantAccountPrivilegesResponse();
-        this.request("GrantAccountPrivileges", req, resp, cb);
+        this.request("GrantAccountPrivileges", req, resp, options, cb);
     }
 
     /**
@@ -286,7 +286,7 @@ class DcdbClient extends AbstractClient {
      */
     RenewDCDBInstance(req, cb) {
         let resp = new RenewDCDBInstanceResponse();
-        this.request("RenewDCDBInstance", req, resp, cb);
+        this.request("RenewDCDBInstance", req, resp, options, cb);
     }
 
     /**
@@ -297,7 +297,7 @@ class DcdbClient extends AbstractClient {
      */
     DeleteAccount(req, cb) {
         let resp = new DeleteAccountResponse();
-        this.request("DeleteAccount", req, resp, cb);
+        this.request("DeleteAccount", req, resp, options, cb);
     }
 
     /**
@@ -308,7 +308,7 @@ class DcdbClient extends AbstractClient {
      */
     DescribeDBParameters(req, cb) {
         let resp = new DescribeDBParametersResponse();
-        this.request("DescribeDBParameters", req, resp, cb);
+        this.request("DescribeDBParameters", req, resp, options, cb);
     }
 
     /**
@@ -319,7 +319,7 @@ class DcdbClient extends AbstractClient {
      */
     ModifyDBInstancesProject(req, cb) {
         let resp = new ModifyDBInstancesProjectResponse();
-        this.request("ModifyDBInstancesProject", req, resp, cb);
+        this.request("ModifyDBInstancesProject", req, resp, options, cb);
     }
 
     /**
@@ -330,7 +330,7 @@ class DcdbClient extends AbstractClient {
      */
     DescribeSqlLogs(req, cb) {
         let resp = new DescribeSqlLogsResponse();
-        this.request("DescribeSqlLogs", req, resp, cb);
+        this.request("DescribeSqlLogs", req, resp, options, cb);
     }
 
     /**
@@ -341,7 +341,7 @@ class DcdbClient extends AbstractClient {
      */
     DescribeDBLogFiles(req, cb) {
         let resp = new DescribeDBLogFilesResponse();
-        this.request("DescribeDBLogFiles", req, resp, cb);
+        this.request("DescribeDBLogFiles", req, resp, options, cb);
     }
 
     /**
@@ -352,7 +352,7 @@ class DcdbClient extends AbstractClient {
      */
     DescribeDBSyncMode(req, cb) {
         let resp = new DescribeDBSyncModeResponse();
-        this.request("DescribeDBSyncMode", req, resp, cb);
+        this.request("DescribeDBSyncMode", req, resp, options, cb);
     }
 
     /**
@@ -363,7 +363,7 @@ class DcdbClient extends AbstractClient {
      */
     CreateAccount(req, cb) {
         let resp = new CreateAccountResponse();
-        this.request("CreateAccount", req, resp, cb);
+        this.request("CreateAccount", req, resp, options, cb);
     }
 
     /**
@@ -374,7 +374,7 @@ class DcdbClient extends AbstractClient {
      */
     UpgradeDCDBInstance(req, cb) {
         let resp = new UpgradeDCDBInstanceResponse();
-        this.request("UpgradeDCDBInstance", req, resp, cb);
+        this.request("UpgradeDCDBInstance", req, resp, options, cb);
     }
 
     /**
@@ -385,7 +385,7 @@ class DcdbClient extends AbstractClient {
      */
     ModifyDBSyncMode(req, cb) {
         let resp = new ModifyDBSyncModeResponse();
-        this.request("ModifyDBSyncMode", req, resp, cb);
+        this.request("ModifyDBSyncMode", req, resp, options, cb);
     }
 
     /**
@@ -396,7 +396,7 @@ class DcdbClient extends AbstractClient {
      */
     CloseDBExtranetAccess(req, cb) {
         let resp = new CloseDBExtranetAccessResponse();
-        this.request("CloseDBExtranetAccess", req, resp, cb);
+        this.request("CloseDBExtranetAccess", req, resp, options, cb);
     }
 
     /**
@@ -408,7 +408,7 @@ class DcdbClient extends AbstractClient {
      */
     DescribeDCDBInstances(req, cb) {
         let resp = new DescribeDCDBInstancesResponse();
-        this.request("DescribeDCDBInstances", req, resp, cb);
+        this.request("DescribeDCDBInstances", req, resp, options, cb);
     }
 
     /**
@@ -420,7 +420,7 @@ class DcdbClient extends AbstractClient {
      */
     CopyAccountPrivileges(req, cb) {
         let resp = new CopyAccountPrivilegesResponse();
-        this.request("CopyAccountPrivileges", req, resp, cb);
+        this.request("CopyAccountPrivileges", req, resp, options, cb);
     }
 
     /**
@@ -431,7 +431,7 @@ class DcdbClient extends AbstractClient {
      */
     DescribeDCDBShards(req, cb) {
         let resp = new DescribeDCDBShardsResponse();
-        this.request("DescribeDCDBShards", req, resp, cb);
+        this.request("DescribeDCDBShards", req, resp, options, cb);
     }
 
     /**
@@ -442,7 +442,7 @@ class DcdbClient extends AbstractClient {
      */
     CreateDCDBInstance(req, cb) {
         let resp = new CreateDCDBInstanceResponse();
-        this.request("CreateDCDBInstance", req, resp, cb);
+        this.request("CreateDCDBInstance", req, resp, options, cb);
     }
 
     /**
@@ -453,7 +453,7 @@ class DcdbClient extends AbstractClient {
      */
     DescribeDatabases(req, cb) {
         let resp = new DescribeDatabasesResponse();
-        this.request("DescribeDatabases", req, resp, cb);
+        this.request("DescribeDatabases", req, resp, options, cb);
     }
 
     /**
@@ -464,7 +464,7 @@ class DcdbClient extends AbstractClient {
      */
     DescribeDatabaseTable(req, cb) {
         let resp = new DescribeDatabaseTableResponse();
-        this.request("DescribeDatabaseTable", req, resp, cb);
+        this.request("DescribeDatabaseTable", req, resp, options, cb);
     }
 
     /**
@@ -475,7 +475,7 @@ class DcdbClient extends AbstractClient {
      */
     CloneAccount(req, cb) {
         let resp = new CloneAccountResponse();
-        this.request("CloneAccount", req, resp, cb);
+        this.request("CloneAccount", req, resp, options, cb);
     }
 
     /**
@@ -486,7 +486,7 @@ class DcdbClient extends AbstractClient {
      */
     DescribeDCDBRenewalPrice(req, cb) {
         let resp = new DescribeDCDBRenewalPriceResponse();
-        this.request("DescribeDCDBRenewalPrice", req, resp, cb);
+        this.request("DescribeDCDBRenewalPrice", req, resp, options, cb);
     }
 
 

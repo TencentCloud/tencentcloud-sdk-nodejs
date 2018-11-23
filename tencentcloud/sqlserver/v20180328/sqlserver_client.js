@@ -140,7 +140,7 @@ class SqlserverClient extends AbstractClient {
      */
     ModifyMigration(req, cb) {
         let resp = new ModifyMigrationResponse();
-        this.request("ModifyMigration", req, resp, cb);
+        this.request("ModifyMigration", req, resp, options, cb);
     }
 
     /**
@@ -151,7 +151,7 @@ class SqlserverClient extends AbstractClient {
      */
     DescribeOrders(req, cb) {
         let resp = new DescribeOrdersResponse();
-        this.request("DescribeOrders", req, resp, cb);
+        this.request("DescribeOrders", req, resp, options, cb);
     }
 
     /**
@@ -162,7 +162,7 @@ class SqlserverClient extends AbstractClient {
      */
     DescribeBackups(req, cb) {
         let resp = new DescribeBackupsResponse();
-        this.request("DescribeBackups", req, resp, cb);
+        this.request("DescribeBackups", req, resp, options, cb);
     }
 
     /**
@@ -173,7 +173,7 @@ class SqlserverClient extends AbstractClient {
      */
     ModifyAccountPrivilege(req, cb) {
         let resp = new ModifyAccountPrivilegeResponse();
-        this.request("ModifyAccountPrivilege", req, resp, cb);
+        this.request("ModifyAccountPrivilege", req, resp, options, cb);
     }
 
     /**
@@ -184,7 +184,7 @@ class SqlserverClient extends AbstractClient {
      */
     ResetAccountPassword(req, cb) {
         let resp = new ResetAccountPasswordResponse();
-        this.request("ResetAccountPassword", req, resp, cb);
+        this.request("ResetAccountPassword", req, resp, options, cb);
     }
 
     /**
@@ -195,7 +195,7 @@ class SqlserverClient extends AbstractClient {
      */
     ModifyDBName(req, cb) {
         let resp = new ModifyDBNameResponse();
-        this.request("ModifyDBName", req, resp, cb);
+        this.request("ModifyDBName", req, resp, options, cb);
     }
 
     /**
@@ -206,7 +206,7 @@ class SqlserverClient extends AbstractClient {
      */
     InquiryPriceCreateDBInstances(req, cb) {
         let resp = new InquiryPriceCreateDBInstancesResponse();
-        this.request("InquiryPriceCreateDBInstances", req, resp, cb);
+        this.request("InquiryPriceCreateDBInstances", req, resp, options, cb);
     }
 
     /**
@@ -217,7 +217,7 @@ class SqlserverClient extends AbstractClient {
      */
     ModifyDBInstanceProject(req, cb) {
         let resp = new ModifyDBInstanceProjectResponse();
-        this.request("ModifyDBInstanceProject", req, resp, cb);
+        this.request("ModifyDBInstanceProject", req, resp, options, cb);
     }
 
     /**
@@ -228,7 +228,7 @@ class SqlserverClient extends AbstractClient {
      */
     DescribeSlowlogs(req, cb) {
         let resp = new DescribeSlowlogsResponse();
-        this.request("DescribeSlowlogs", req, resp, cb);
+        this.request("DescribeSlowlogs", req, resp, options, cb);
     }
 
     /**
@@ -239,7 +239,7 @@ class SqlserverClient extends AbstractClient {
      */
     DeleteAccount(req, cb) {
         let resp = new DeleteAccountResponse();
-        this.request("DeleteAccount", req, resp, cb);
+        this.request("DeleteAccount", req, resp, options, cb);
     }
 
     /**
@@ -250,7 +250,7 @@ class SqlserverClient extends AbstractClient {
      */
     DescribeFlowStatus(req, cb) {
         let resp = new DescribeFlowStatusResponse();
-        this.request("DescribeFlowStatus", req, resp, cb);
+        this.request("DescribeFlowStatus", req, resp, options, cb);
     }
 
     /**
@@ -261,7 +261,7 @@ class SqlserverClient extends AbstractClient {
      */
     ModifyAccountRemark(req, cb) {
         let resp = new ModifyAccountRemarkResponse();
-        this.request("ModifyAccountRemark", req, resp, cb);
+        this.request("ModifyAccountRemark", req, resp, options, cb);
     }
 
     /**
@@ -272,7 +272,7 @@ class SqlserverClient extends AbstractClient {
      */
     DescribeMigrations(req, cb) {
         let resp = new DescribeMigrationsResponse();
-        this.request("DescribeMigrations", req, resp, cb);
+        this.request("DescribeMigrations", req, resp, options, cb);
     }
 
     /**
@@ -283,7 +283,7 @@ class SqlserverClient extends AbstractClient {
      */
     RestartDBInstance(req, cb) {
         let resp = new RestartDBInstanceResponse();
-        this.request("RestartDBInstance", req, resp, cb);
+        this.request("RestartDBInstance", req, resp, options, cb);
     }
 
     /**
@@ -294,7 +294,7 @@ class SqlserverClient extends AbstractClient {
      */
     ModifyDBInstanceName(req, cb) {
         let resp = new ModifyDBInstanceNameResponse();
-        this.request("ModifyDBInstanceName", req, resp, cb);
+        this.request("ModifyDBInstanceName", req, resp, options, cb);
     }
 
     /**
@@ -305,7 +305,7 @@ class SqlserverClient extends AbstractClient {
      */
     CreateBackup(req, cb) {
         let resp = new CreateBackupResponse();
-        this.request("CreateBackup", req, resp, cb);
+        this.request("CreateBackup", req, resp, options, cb);
     }
 
     /**
@@ -316,7 +316,7 @@ class SqlserverClient extends AbstractClient {
      */
     CreateDBInstances(req, cb) {
         let resp = new CreateDBInstancesResponse();
-        this.request("CreateDBInstances", req, resp, cb);
+        this.request("CreateDBInstances", req, resp, options, cb);
     }
 
     /**
@@ -327,7 +327,7 @@ class SqlserverClient extends AbstractClient {
      */
     RollbackInstance(req, cb) {
         let resp = new RollbackInstanceResponse();
-        this.request("RollbackInstance", req, resp, cb);
+        this.request("RollbackInstance", req, resp, options, cb);
     }
 
     /**
@@ -338,7 +338,7 @@ class SqlserverClient extends AbstractClient {
      */
     DescribeDBs(req, cb) {
         let resp = new DescribeDBsResponse();
-        this.request("DescribeDBs", req, resp, cb);
+        this.request("DescribeDBs", req, resp, options, cb);
     }
 
     /**
@@ -349,7 +349,7 @@ class SqlserverClient extends AbstractClient {
      */
     DescribeDBInstances(req, cb) {
         let resp = new DescribeDBInstancesResponse();
-        this.request("DescribeDBInstances", req, resp, cb);
+        this.request("DescribeDBInstances", req, resp, options, cb);
     }
 
     /**
@@ -360,7 +360,7 @@ class SqlserverClient extends AbstractClient {
      */
     DescribeZones(req, cb) {
         let resp = new DescribeZonesResponse();
-        this.request("DescribeZones", req, resp, cb);
+        this.request("DescribeZones", req, resp, options, cb);
     }
 
     /**
@@ -371,7 +371,7 @@ class SqlserverClient extends AbstractClient {
      */
     ModifyDBRemark(req, cb) {
         let resp = new ModifyDBRemarkResponse();
-        this.request("ModifyDBRemark", req, resp, cb);
+        this.request("ModifyDBRemark", req, resp, options, cb);
     }
 
     /**
@@ -382,7 +382,7 @@ class SqlserverClient extends AbstractClient {
      */
     RenewDBInstance(req, cb) {
         let resp = new RenewDBInstanceResponse();
-        this.request("RenewDBInstance", req, resp, cb);
+        this.request("RenewDBInstance", req, resp, options, cb);
     }
 
     /**
@@ -393,7 +393,7 @@ class SqlserverClient extends AbstractClient {
      */
     CreateAccount(req, cb) {
         let resp = new CreateAccountResponse();
-        this.request("CreateAccount", req, resp, cb);
+        this.request("CreateAccount", req, resp, options, cb);
     }
 
     /**
@@ -404,7 +404,7 @@ class SqlserverClient extends AbstractClient {
      */
     InquiryPriceUpgradeDBInstance(req, cb) {
         let resp = new InquiryPriceUpgradeDBInstanceResponse();
-        this.request("InquiryPriceUpgradeDBInstance", req, resp, cb);
+        this.request("InquiryPriceUpgradeDBInstance", req, resp, options, cb);
     }
 
     /**
@@ -415,7 +415,7 @@ class SqlserverClient extends AbstractClient {
      */
     CreateMigration(req, cb) {
         let resp = new CreateMigrationResponse();
-        this.request("CreateMigration", req, resp, cb);
+        this.request("CreateMigration", req, resp, options, cb);
     }
 
     /**
@@ -426,7 +426,7 @@ class SqlserverClient extends AbstractClient {
      */
     DescribeRegions(req, cb) {
         let resp = new DescribeRegionsResponse();
-        this.request("DescribeRegions", req, resp, cb);
+        this.request("DescribeRegions", req, resp, options, cb);
     }
 
     /**
@@ -437,7 +437,7 @@ class SqlserverClient extends AbstractClient {
      */
     InquiryPriceRenewDBInstance(req, cb) {
         let resp = new InquiryPriceRenewDBInstanceResponse();
-        this.request("InquiryPriceRenewDBInstance", req, resp, cb);
+        this.request("InquiryPriceRenewDBInstance", req, resp, options, cb);
     }
 
     /**
@@ -448,7 +448,7 @@ class SqlserverClient extends AbstractClient {
      */
     DeleteMigration(req, cb) {
         let resp = new DeleteMigrationResponse();
-        this.request("DeleteMigration", req, resp, cb);
+        this.request("DeleteMigration", req, resp, options, cb);
     }
 
     /**
@@ -459,7 +459,7 @@ class SqlserverClient extends AbstractClient {
      */
     DescribeAccounts(req, cb) {
         let resp = new DescribeAccountsResponse();
-        this.request("DescribeAccounts", req, resp, cb);
+        this.request("DescribeAccounts", req, resp, options, cb);
     }
 
     /**
@@ -470,7 +470,7 @@ class SqlserverClient extends AbstractClient {
      */
     DescribeRollbackTime(req, cb) {
         let resp = new DescribeRollbackTimeResponse();
-        this.request("DescribeRollbackTime", req, resp, cb);
+        this.request("DescribeRollbackTime", req, resp, options, cb);
     }
 
     /**
@@ -481,7 +481,7 @@ class SqlserverClient extends AbstractClient {
      */
     CreateDB(req, cb) {
         let resp = new CreateDBResponse();
-        this.request("CreateDB", req, resp, cb);
+        this.request("CreateDB", req, resp, options, cb);
     }
 
     /**
@@ -492,7 +492,7 @@ class SqlserverClient extends AbstractClient {
      */
     DeleteDB(req, cb) {
         let resp = new DeleteDBResponse();
-        this.request("DeleteDB", req, resp, cb);
+        this.request("DeleteDB", req, resp, options, cb);
     }
 
     /**
@@ -503,7 +503,7 @@ class SqlserverClient extends AbstractClient {
      */
     DescribeMigrationDetail(req, cb) {
         let resp = new DescribeMigrationDetailResponse();
-        this.request("DescribeMigrationDetail", req, resp, cb);
+        this.request("DescribeMigrationDetail", req, resp, options, cb);
     }
 
     /**
@@ -514,7 +514,7 @@ class SqlserverClient extends AbstractClient {
      */
     RestoreInstance(req, cb) {
         let resp = new RestoreInstanceResponse();
-        this.request("RestoreInstance", req, resp, cb);
+        this.request("RestoreInstance", req, resp, options, cb);
     }
 
     /**
@@ -525,7 +525,7 @@ class SqlserverClient extends AbstractClient {
      */
     UpgradeDBInstance(req, cb) {
         let resp = new UpgradeDBInstanceResponse();
-        this.request("UpgradeDBInstance", req, resp, cb);
+        this.request("UpgradeDBInstance", req, resp, options, cb);
     }
 
     /**
@@ -536,7 +536,7 @@ class SqlserverClient extends AbstractClient {
      */
     RunMigration(req, cb) {
         let resp = new RunMigrationResponse();
-        this.request("RunMigration", req, resp, cb);
+        this.request("RunMigration", req, resp, options, cb);
     }
 
     /**
@@ -547,7 +547,7 @@ class SqlserverClient extends AbstractClient {
      */
     DescribeProductConfig(req, cb) {
         let resp = new DescribeProductConfigResponse();
-        this.request("DescribeProductConfig", req, resp, cb);
+        this.request("DescribeProductConfig", req, resp, options, cb);
     }
 
     /**
@@ -558,7 +558,7 @@ class SqlserverClient extends AbstractClient {
      */
     ModifyDBInstanceRenewFlag(req, cb) {
         let resp = new ModifyDBInstanceRenewFlagResponse();
-        this.request("ModifyDBInstanceRenewFlag", req, resp, cb);
+        this.request("ModifyDBInstanceRenewFlag", req, resp, options, cb);
     }
 
 

@@ -102,7 +102,7 @@ class PostgresClient extends AbstractClient {
      */
     DescribeOrders(req, cb) {
         let resp = new DescribeOrdersResponse();
-        this.request("DescribeOrders", req, resp, cb);
+        this.request("DescribeOrders", req, resp, options, cb);
     }
 
     /**
@@ -113,7 +113,7 @@ class PostgresClient extends AbstractClient {
      */
     DescribeDBBackups(req, cb) {
         let resp = new DescribeDBBackupsResponse();
-        this.request("DescribeDBBackups", req, resp, cb);
+        this.request("DescribeDBBackups", req, resp, options, cb);
     }
 
     /**
@@ -124,7 +124,7 @@ class PostgresClient extends AbstractClient {
      */
     ResetAccountPassword(req, cb) {
         let resp = new ResetAccountPasswordResponse();
-        this.request("ResetAccountPassword", req, resp, cb);
+        this.request("ResetAccountPassword", req, resp, options, cb);
     }
 
     /**
@@ -135,7 +135,7 @@ class PostgresClient extends AbstractClient {
      */
     DescribeDBErrlogs(req, cb) {
         let resp = new DescribeDBErrlogsResponse();
-        this.request("DescribeDBErrlogs", req, resp, cb);
+        this.request("DescribeDBErrlogs", req, resp, options, cb);
     }
 
     /**
@@ -146,7 +146,7 @@ class PostgresClient extends AbstractClient {
      */
     RestartDBInstance(req, cb) {
         let resp = new RestartDBInstanceResponse();
-        this.request("RestartDBInstance", req, resp, cb);
+        this.request("RestartDBInstance", req, resp, options, cb);
     }
 
     /**
@@ -157,7 +157,7 @@ class PostgresClient extends AbstractClient {
      */
     InquiryPriceCreateDBInstances(req, cb) {
         let resp = new InquiryPriceCreateDBInstancesResponse();
-        this.request("InquiryPriceCreateDBInstances", req, resp, cb);
+        this.request("InquiryPriceCreateDBInstances", req, resp, options, cb);
     }
 
     /**
@@ -168,7 +168,7 @@ class PostgresClient extends AbstractClient {
      */
     OpenDBExtranetAccess(req, cb) {
         let resp = new OpenDBExtranetAccessResponse();
-        this.request("OpenDBExtranetAccess", req, resp, cb);
+        this.request("OpenDBExtranetAccess", req, resp, options, cb);
     }
 
     /**
@@ -179,7 +179,7 @@ class PostgresClient extends AbstractClient {
      */
     ModifyDBInstancesProject(req, cb) {
         let resp = new ModifyDBInstancesProjectResponse();
-        this.request("ModifyDBInstancesProject", req, resp, cb);
+        this.request("ModifyDBInstancesProject", req, resp, options, cb);
     }
 
     /**
@@ -190,7 +190,7 @@ class PostgresClient extends AbstractClient {
      */
     ModifyAccountRemark(req, cb) {
         let resp = new ModifyAccountRemarkResponse();
-        this.request("ModifyAccountRemark", req, resp, cb);
+        this.request("ModifyAccountRemark", req, resp, options, cb);
     }
 
     /**
@@ -201,7 +201,7 @@ class PostgresClient extends AbstractClient {
      */
     DescribeDBXlogs(req, cb) {
         let resp = new DescribeDBXlogsResponse();
-        this.request("DescribeDBXlogs", req, resp, cb);
+        this.request("DescribeDBXlogs", req, resp, options, cb);
     }
 
     /**
@@ -212,7 +212,7 @@ class PostgresClient extends AbstractClient {
      */
     SetAutoRenewFlag(req, cb) {
         let resp = new SetAutoRenewFlagResponse();
-        this.request("SetAutoRenewFlag", req, resp, cb);
+        this.request("SetAutoRenewFlag", req, resp, options, cb);
     }
 
     /**
@@ -223,7 +223,7 @@ class PostgresClient extends AbstractClient {
      */
     DescribeDBInstanceAttribute(req, cb) {
         let resp = new DescribeDBInstanceAttributeResponse();
-        this.request("DescribeDBInstanceAttribute", req, resp, cb);
+        this.request("DescribeDBInstanceAttribute", req, resp, options, cb);
     }
 
     /**
@@ -234,7 +234,7 @@ class PostgresClient extends AbstractClient {
      */
     ModifyDBInstanceName(req, cb) {
         let resp = new ModifyDBInstanceNameResponse();
-        this.request("ModifyDBInstanceName", req, resp, cb);
+        this.request("ModifyDBInstanceName", req, resp, options, cb);
     }
 
     /**
@@ -245,7 +245,7 @@ class PostgresClient extends AbstractClient {
      */
     CreateDBInstances(req, cb) {
         let resp = new CreateDBInstancesResponse();
-        this.request("CreateDBInstances", req, resp, cb);
+        this.request("CreateDBInstances", req, resp, options, cb);
     }
 
     /**
@@ -256,7 +256,7 @@ class PostgresClient extends AbstractClient {
      */
     RenewInstance(req, cb) {
         let resp = new RenewInstanceResponse();
-        this.request("RenewInstance", req, resp, cb);
+        this.request("RenewInstance", req, resp, options, cb);
     }
 
     /**
@@ -267,7 +267,7 @@ class PostgresClient extends AbstractClient {
      */
     DescribeDBInstances(req, cb) {
         let resp = new DescribeDBInstancesResponse();
-        this.request("DescribeDBInstances", req, resp, cb);
+        this.request("DescribeDBInstances", req, resp, options, cb);
     }
 
     /**
@@ -278,7 +278,7 @@ class PostgresClient extends AbstractClient {
      */
     DescribeZones(req, cb) {
         let resp = new DescribeZonesResponse();
-        this.request("DescribeZones", req, resp, cb);
+        this.request("DescribeZones", req, resp, options, cb);
     }
 
     /**
@@ -289,7 +289,7 @@ class PostgresClient extends AbstractClient {
      */
     InitDBInstances(req, cb) {
         let resp = new InitDBInstancesResponse();
-        this.request("InitDBInstances", req, resp, cb);
+        this.request("InitDBInstances", req, resp, options, cb);
     }
 
     /**
@@ -300,7 +300,7 @@ class PostgresClient extends AbstractClient {
      */
     InquiryPriceUpgradeDBInstance(req, cb) {
         let resp = new InquiryPriceUpgradeDBInstanceResponse();
-        this.request("InquiryPriceUpgradeDBInstance", req, resp, cb);
+        this.request("InquiryPriceUpgradeDBInstance", req, resp, options, cb);
     }
 
     /**
@@ -311,7 +311,7 @@ class PostgresClient extends AbstractClient {
      */
     DescribeRegions(req, cb) {
         let resp = new DescribeRegionsResponse();
-        this.request("DescribeRegions", req, resp, cb);
+        this.request("DescribeRegions", req, resp, options, cb);
     }
 
     /**
@@ -322,7 +322,7 @@ class PostgresClient extends AbstractClient {
      */
     InquiryPriceRenewDBInstance(req, cb) {
         let resp = new InquiryPriceRenewDBInstanceResponse();
-        this.request("InquiryPriceRenewDBInstance", req, resp, cb);
+        this.request("InquiryPriceRenewDBInstance", req, resp, options, cb);
     }
 
     /**
@@ -333,7 +333,7 @@ class PostgresClient extends AbstractClient {
      */
     CloseDBExtranetAccess(req, cb) {
         let resp = new CloseDBExtranetAccessResponse();
-        this.request("CloseDBExtranetAccess", req, resp, cb);
+        this.request("CloseDBExtranetAccess", req, resp, options, cb);
     }
 
     /**
@@ -344,7 +344,7 @@ class PostgresClient extends AbstractClient {
      */
     DescribeAccounts(req, cb) {
         let resp = new DescribeAccountsResponse();
-        this.request("DescribeAccounts", req, resp, cb);
+        this.request("DescribeAccounts", req, resp, options, cb);
     }
 
     /**
@@ -355,7 +355,7 @@ class PostgresClient extends AbstractClient {
      */
     UpgradeDBInstance(req, cb) {
         let resp = new UpgradeDBInstanceResponse();
-        this.request("UpgradeDBInstance", req, resp, cb);
+        this.request("UpgradeDBInstance", req, resp, options, cb);
     }
 
     /**
@@ -366,7 +366,7 @@ class PostgresClient extends AbstractClient {
      */
     DescribeProductConfig(req, cb) {
         let resp = new DescribeProductConfigResponse();
-        this.request("DescribeProductConfig", req, resp, cb);
+        this.request("DescribeProductConfig", req, resp, options, cb);
     }
 
     /**
@@ -377,7 +377,7 @@ class PostgresClient extends AbstractClient {
      */
     DescribeDBSlowlogs(req, cb) {
         let resp = new DescribeDBSlowlogsResponse();
-        this.request("DescribeDBSlowlogs", req, resp, cb);
+        this.request("DescribeDBSlowlogs", req, resp, options, cb);
     }
 
 

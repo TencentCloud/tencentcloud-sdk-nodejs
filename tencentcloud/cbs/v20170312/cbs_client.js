@@ -91,7 +91,7 @@ class CbsClient extends AbstractClient {
      */
     CreateDisks(req, cb) {
         let resp = new CreateDisksResponse();
-        this.request("CreateDisks", req, resp, cb);
+        this.request("CreateDisks", req, resp, options, cb);
     }
 
     /**
@@ -105,7 +105,7 @@ class CbsClient extends AbstractClient {
      */
     DetachDisks(req, cb) {
         let resp = new DetachDisksResponse();
-        this.request("DetachDisks", req, resp, cb);
+        this.request("DetachDisks", req, resp, options, cb);
     }
 
     /**
@@ -116,7 +116,7 @@ class CbsClient extends AbstractClient {
      */
     DescribeDiskConfigQuota(req, cb) {
         let resp = new DescribeDiskConfigQuotaResponse();
-        this.request("DescribeDiskConfigQuota", req, resp, cb);
+        this.request("DescribeDiskConfigQuota", req, resp, options, cb);
     }
 
     /**
@@ -131,7 +131,7 @@ class CbsClient extends AbstractClient {
      */
     ModifyDiskAttributes(req, cb) {
         let resp = new ModifyDiskAttributesResponse();
-        this.request("ModifyDiskAttributes", req, resp, cb);
+        this.request("ModifyDiskAttributes", req, resp, options, cb);
     }
 
     /**
@@ -145,7 +145,7 @@ class CbsClient extends AbstractClient {
      */
     DeleteSnapshots(req, cb) {
         let resp = new DeleteSnapshotsResponse();
-        this.request("DeleteSnapshots", req, resp, cb);
+        this.request("DeleteSnapshots", req, resp, options, cb);
     }
 
     /**
@@ -160,7 +160,7 @@ class CbsClient extends AbstractClient {
      */
     RenewDisk(req, cb) {
         let resp = new RenewDiskResponse();
-        this.request("RenewDisk", req, resp, cb);
+        this.request("RenewDisk", req, resp, options, cb);
     }
 
     /**
@@ -173,7 +173,7 @@ class CbsClient extends AbstractClient {
      */
     DescribeInstancesDiskNum(req, cb) {
         let resp = new DescribeInstancesDiskNumResponse();
-        this.request("DescribeInstancesDiskNum", req, resp, cb);
+        this.request("DescribeInstancesDiskNum", req, resp, options, cb);
     }
 
     /**
@@ -186,7 +186,7 @@ class CbsClient extends AbstractClient {
      */
     InquiryPriceCreateDisks(req, cb) {
         let resp = new InquiryPriceCreateDisksResponse();
-        this.request("InquiryPriceCreateDisks", req, resp, cb);
+        this.request("InquiryPriceCreateDisks", req, resp, options, cb);
     }
 
     /**
@@ -199,7 +199,7 @@ class CbsClient extends AbstractClient {
      */
     InquiryPriceResizeDisk(req, cb) {
         let resp = new InquiryPriceResizeDiskResponse();
-        this.request("InquiryPriceResizeDisk", req, resp, cb);
+        this.request("InquiryPriceResizeDisk", req, resp, options, cb);
     }
 
     /**
@@ -214,7 +214,7 @@ class CbsClient extends AbstractClient {
      */
     ApplySnapshot(req, cb) {
         let resp = new ApplySnapshotResponse();
-        this.request("ApplySnapshot", req, resp, cb);
+        this.request("ApplySnapshot", req, resp, options, cb);
     }
 
     /**
@@ -228,7 +228,7 @@ class CbsClient extends AbstractClient {
      */
     DescribeDiskOperationLogs(req, cb) {
         let resp = new DescribeDiskOperationLogsResponse();
-        this.request("DescribeDiskOperationLogs", req, resp, cb);
+        this.request("DescribeDiskOperationLogs", req, resp, options, cb);
     }
 
     /**
@@ -242,7 +242,7 @@ class CbsClient extends AbstractClient {
      */
     ModifySnapshotAttribute(req, cb) {
         let resp = new ModifySnapshotAttributeResponse();
-        this.request("ModifySnapshotAttribute", req, resp, cb);
+        this.request("ModifySnapshotAttribute", req, resp, options, cb);
     }
 
     /**
@@ -257,7 +257,7 @@ class CbsClient extends AbstractClient {
      */
     TerminateDisks(req, cb) {
         let resp = new TerminateDisksResponse();
-        this.request("TerminateDisks", req, resp, cb);
+        this.request("TerminateDisks", req, resp, options, cb);
     }
 
     /**
@@ -271,7 +271,7 @@ class CbsClient extends AbstractClient {
      */
     DescribeDisks(req, cb) {
         let resp = new DescribeDisksResponse();
-        this.request("DescribeDisks", req, resp, cb);
+        this.request("DescribeDisks", req, resp, options, cb);
     }
 
     /**
@@ -282,7 +282,7 @@ class CbsClient extends AbstractClient {
      */
     ModifyDisksRenewFlag(req, cb) {
         let resp = new ModifyDisksRenewFlagResponse();
-        this.request("ModifyDisksRenewFlag", req, resp, cb);
+        this.request("ModifyDisksRenewFlag", req, resp, options, cb);
     }
 
     /**
@@ -296,7 +296,7 @@ class CbsClient extends AbstractClient {
      */
     DescribeSnapshots(req, cb) {
         let resp = new DescribeSnapshotsResponse();
-        this.request("DescribeSnapshots", req, resp, cb);
+        this.request("DescribeSnapshots", req, resp, options, cb);
     }
 
     /**
@@ -310,7 +310,7 @@ class CbsClient extends AbstractClient {
      */
     AttachDisks(req, cb) {
         let resp = new AttachDisksResponse();
-        this.request("AttachDisks", req, resp, cb);
+        this.request("AttachDisks", req, resp, options, cb);
     }
 
     /**
@@ -324,7 +324,7 @@ class CbsClient extends AbstractClient {
      */
     ResizeDisk(req, cb) {
         let resp = new ResizeDiskResponse();
-        this.request("ResizeDisk", req, resp, cb);
+        this.request("ResizeDisk", req, resp, options, cb);
     }
 
     /**
@@ -338,7 +338,7 @@ class CbsClient extends AbstractClient {
      */
     CreateSnapshot(req, cb) {
         let resp = new CreateSnapshotResponse();
-        this.request("CreateSnapshot", req, resp, cb);
+        this.request("CreateSnapshot", req, resp, options, cb);
     }
 
     /**
@@ -353,7 +353,7 @@ class CbsClient extends AbstractClient {
      */
     InquiryPriceRenewDisks(req, cb) {
         let resp = new InquiryPriceRenewDisksResponse();
-        this.request("InquiryPriceRenewDisks", req, resp, cb);
+        this.request("InquiryPriceRenewDisks", req, resp, options, cb);
     }
 
 

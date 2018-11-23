@@ -17,6 +17,84 @@
 const AbstractModel = require("../../common/abstract_model");
 
 /**
+ * 可用区内产品信息
+ * @class
+ */
+class ZoneCapacityConf extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 可用区ID：如ap-guangzhou-3
+         * @type {string || null}
+         */
+        this.ZoneId = null;
+
+        /**
+         * 可用区名称
+         * @type {string || null}
+         */
+        this.ZoneName = null;
+
+        /**
+         * 可用区是否售罄
+         * @type {boolean || null}
+         */
+        this.IsSaleout = null;
+
+        /**
+         * 是否为默认可用区
+         * @type {boolean || null}
+         */
+        this.IsDefault = null;
+
+        /**
+         * 网络类型
+         * @type {Array.<string> || null}
+         */
+        this.NetWorkType = null;
+
+        /**
+         * 可用区内产品规格等信息
+         * @type {Array.<ProductConf> || null}
+         */
+        this.ProductSet = null;
+
+        /**
+         * 可用区ID：如100003
+         * @type {number || null}
+         */
+        this.OldZoneId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ZoneId = params.ZoneId || null;
+        this.ZoneName = params.ZoneName || null;
+        this.IsSaleout = params.IsSaleout || null;
+        this.IsDefault = params.IsDefault || null;
+        this.NetWorkType = params.NetWorkType || null;
+
+        if (params.ProductSet) {
+            this.ProductSet = new Array();
+            for (let z in params.ProductSet) {
+                let obj = new ProductConf();
+                obj.deserialize(params.ProductSet[z]);
+                this.ProductSet.push(obj);
+            }
+        }
+        this.OldZoneId = params.OldZoneId || null;
+
+    }
+}
+
+/**
  * DescribeAutoBackupConfig返回参数结构体
  * @class
  */
@@ -43,7 +121,7 @@ class DescribeAutoBackupConfigResponse extends  AbstractModel {
         this.TimePeriod = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -61,6 +139,111 @@ class DescribeAutoBackupConfigResponse extends  AbstractModel {
         this.WeekDays = params.WeekDays || null;
         this.TimePeriod = params.TimePeriod || null;
         this.RequestId = params.RequestId || null;
+
+    }
+}
+
+/**
+ * 订单交易信息
+ * @class
+ */
+class TradeDealDetail extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 订单号ID，调用云API时使用此ID
+         * @type {string || null}
+         */
+        this.DealId = null;
+
+        /**
+         * 长订单ID，反馈订单问题给官方客服使用此ID
+         * @type {string || null}
+         */
+        this.DealName = null;
+
+        /**
+         * 可用区id
+         * @type {number || null}
+         */
+        this.ZoneId = null;
+
+        /**
+         * 订单关联的实例数
+         * @type {number || null}
+         */
+        this.GoodsNum = null;
+
+        /**
+         * 创建用户uin
+         * @type {string || null}
+         */
+        this.Creater = null;
+
+        /**
+         * 订单创建时间
+         * @type {string || null}
+         */
+        this.CreatTime = null;
+
+        /**
+         * 订单超时时间
+         * @type {string || null}
+         */
+        this.OverdueTime = null;
+
+        /**
+         * 订单完成时间
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * 订单状态 1：未支付 2:已支付，未发货 3:发货中 4:发货成功 5:发货失败 6:已退款 7:已关闭订单 8:订单过期 9:订单已失效 10:产品已失效 11:代付拒绝 12:支付中
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * 订单状态描述
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * 订单实际总价，单位：分
+         * @type {number || null}
+         */
+        this.Price = null;
+
+        /**
+         * 实例ID
+         * @type {Array.<string> || null}
+         */
+        this.InstanceIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DealId = params.DealId || null;
+        this.DealName = params.DealName || null;
+        this.ZoneId = params.ZoneId || null;
+        this.GoodsNum = params.GoodsNum || null;
+        this.Creater = params.Creater || null;
+        this.CreatTime = params.CreatTime || null;
+        this.OverdueTime = params.OverdueTime || null;
+        this.EndTime = params.EndTime || null;
+        this.Status = params.Status || null;
+        this.Description = params.Description || null;
+        this.Price = params.Price || null;
+        this.InstanceIds = params.InstanceIds || null;
 
     }
 }
@@ -197,7 +380,7 @@ class ModifyAutoBackupConfigResponse extends  AbstractModel {
         this.TimePeriod = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -332,6 +515,49 @@ class CreateInstancesRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeProductInfo返回参数结构体
+ * @class
+ */
+class DescribeProductInfoResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 地域售卖信息
+         * @type {Array.<RegionConf> || null}
+         */
+        this.RegionSet = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.RegionSet) {
+            this.RegionSet = new Array();
+            for (let z in params.RegionSet) {
+                let obj = new RegionConf();
+                obj.deserialize(params.RegionSet[z]);
+                this.RegionSet.push(obj);
+            }
+        }
+        this.RequestId = params.RequestId || null;
+
+    }
+}
+
+/**
  * ResetPassword请求参数结构体
  * @class
  */
@@ -367,6 +593,118 @@ class ResetPasswordRequest extends  AbstractModel {
 }
 
 /**
+ * 产品信息
+ * @class
+ */
+class ProductConf extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 产品类型，2-Redis主从版，3-CKV主从版，4-CKV集群版，5-Redis单机版，7-Redis集群版
+         * @type {number || null}
+         */
+        this.Type = null;
+
+        /**
+         * 产品名称，Redis主从版，CKV主从版，CKV集群版，Redis单机版，Redis集群版
+         * @type {string || null}
+         */
+        this.TypeName = null;
+
+        /**
+         * 购买时的最小数量
+         * @type {number || null}
+         */
+        this.MinBuyNum = null;
+
+        /**
+         * 购买时的最大数量
+         * @type {number || null}
+         */
+        this.MaxBuyNum = null;
+
+        /**
+         * 产品是否售罄
+         * @type {boolean || null}
+         */
+        this.Saleout = null;
+
+        /**
+         * 产品引擎，腾讯云CKV或者社区版Redis
+         * @type {string || null}
+         */
+        this.Engine = null;
+
+        /**
+         * 兼容版本，Redis-2.8，Redis-3.2，Redis-4.0
+         * @type {string || null}
+         */
+        this.Version = null;
+
+        /**
+         * 规格总大小，单位G
+         * @type {Array.<string> || null}
+         */
+        this.TotalSize = null;
+
+        /**
+         * 每个分片大小，单位G
+         * @type {Array.<string> || null}
+         */
+        this.ShardSize = null;
+
+        /**
+         * 副本数量
+         * @type {Array.<string> || null}
+         */
+        this.ReplicaNum = null;
+
+        /**
+         * 分片数量
+         * @type {Array.<string> || null}
+         */
+        this.ShardNum = null;
+
+        /**
+         * 支持的计费模式，1-包年包月，0-按量计费
+         * @type {string || null}
+         */
+        this.PayMode = null;
+
+        /**
+         * 是否支持副本只读
+         * @type {boolean || null}
+         */
+        this.EnableRepicaReadOnly = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Type = params.Type || null;
+        this.TypeName = params.TypeName || null;
+        this.MinBuyNum = params.MinBuyNum || null;
+        this.MaxBuyNum = params.MaxBuyNum || null;
+        this.Saleout = params.Saleout || null;
+        this.Engine = params.Engine || null;
+        this.Version = params.Version || null;
+        this.TotalSize = params.TotalSize || null;
+        this.ShardSize = params.ShardSize || null;
+        this.ReplicaNum = params.ReplicaNum || null;
+        this.ShardNum = params.ShardNum || null;
+        this.PayMode = params.PayMode || null;
+        this.EnableRepicaReadOnly = params.EnableRepicaReadOnly || null;
+
+    }
+}
+
+/**
  * RenewInstance返回参数结构体
  * @class
  */
@@ -381,7 +719,7 @@ class RenewInstanceResponse extends  AbstractModel {
         this.DealId = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -422,7 +760,7 @@ class DescribeInstanceBackupsResponse extends  AbstractModel {
         this.BackupSet = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -452,6 +790,34 @@ class DescribeInstanceBackupsResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeInstanceDealDetail请求参数结构体
+ * @class
+ */
+class DescribeInstanceDealDetailRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 订单ID数组
+         * @type {Array.<string> || null}
+         */
+        this.DealIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DealIds = params.DealIds || null;
+
+    }
+}
+
+/**
  * ManualBackupInstance返回参数结构体
  * @class
  */
@@ -466,7 +832,7 @@ class ManualBackupInstanceResponse extends  AbstractModel {
         this.TaskId = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -507,7 +873,7 @@ class DescribeInstancesResponse extends  AbstractModel {
         this.InstanceSet = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -537,6 +903,70 @@ class DescribeInstancesResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeInstanceDealDetail返回参数结构体
+ * @class
+ */
+class DescribeInstanceDealDetailResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 订单详细信息
+         * @type {Array.<TradeDealDetail> || null}
+         */
+        this.DealDetails = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.DealDetails) {
+            this.DealDetails = new Array();
+            for (let z in params.DealDetails) {
+                let obj = new TradeDealDetail();
+                obj.deserialize(params.DealDetails[z]);
+                this.DealDetails.push(obj);
+            }
+        }
+        this.RequestId = params.RequestId || null;
+
+    }
+}
+
+/**
+ * DescribeProductInfo请求参数结构体
+ * @class
+ */
+class DescribeProductInfoRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+    }
+}
+
+/**
  * ResetPassword返回参数结构体
  * @class
  */
@@ -551,7 +981,7 @@ class ResetPasswordResponse extends  AbstractModel {
         this.TaskId = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -705,6 +1135,70 @@ class ClearInstanceRequest extends  AbstractModel {
 }
 
 /**
+ * 地域信息
+ * @class
+ */
+class RegionConf extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 地域ID
+         * @type {string || null}
+         */
+        this.RegionId = null;
+
+        /**
+         * 地域名称
+         * @type {string || null}
+         */
+        this.RegionName = null;
+
+        /**
+         * 地域简称
+         * @type {string || null}
+         */
+        this.RegionShortName = null;
+
+        /**
+         * 地域所在大区名称
+         * @type {string || null}
+         */
+        this.Area = null;
+
+        /**
+         * 可用区信息
+         * @type {Array.<ZoneCapacityConf> || null}
+         */
+        this.ZoneSet = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RegionId = params.RegionId || null;
+        this.RegionName = params.RegionName || null;
+        this.RegionShortName = params.RegionShortName || null;
+        this.Area = params.Area || null;
+
+        if (params.ZoneSet) {
+            this.ZoneSet = new Array();
+            for (let z in params.ZoneSet) {
+                let obj = new ZoneCapacityConf();
+                obj.deserialize(params.ZoneSet[z]);
+                this.ZoneSet.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * RenewInstance请求参数结构体
  * @class
  */
@@ -803,6 +1297,69 @@ class DescribeInstanceBackupsRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeTaskInfo返回参数结构体
+ * @class
+ */
+class DescribeTaskInfoResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 任务状态preparing:待执行，running：执行中，succeed：成功，failed：失败，error 执行出错
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * 任务开始时间
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * 任务类型
+         * @type {string || null}
+         */
+        this.TaskType = null;
+
+        /**
+         * 实例的ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 任务信息，错误时显示错误信息。执行中与成功则为空
+         * @type {string || null}
+         */
+        this.TaskMessage = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Status = params.Status || null;
+        this.StartTime = params.StartTime || null;
+        this.TaskType = params.TaskType || null;
+        this.InstanceId = params.InstanceId || null;
+        this.TaskMessage = params.TaskMessage || null;
+        this.RequestId = params.RequestId || null;
+
+    }
+}
+
+/**
  * DescribeAutoBackupConfig请求参数结构体
  * @class
  */
@@ -894,7 +1451,7 @@ class CreateInstancesResponse extends  AbstractModel {
         this.DealId = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -915,6 +1472,34 @@ class CreateInstancesResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeTaskInfo请求参数结构体
+ * @class
+ */
+class DescribeTaskInfoRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 任务ID
+         * @type {number || null}
+         */
+        this.TaskId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = params.TaskId || null;
+
+    }
+}
+
+/**
  * UpgradeInstance返回参数结构体
  * @class
  */
@@ -929,7 +1514,7 @@ class UpgradeInstanceResponse extends  AbstractModel {
         this.DealId = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -1034,7 +1619,7 @@ class ModfiyInstancePasswordResponse extends  AbstractModel {
         this.TaskId = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -1099,13 +1684,13 @@ class InstanceSet extends  AbstractModel {
         this.ZoneId = null;
 
         /**
-         * vpc网络id
+         * vpc网络id 如：75101
          * @type {number || null}
          */
         this.VpcId = null;
 
         /**
-         * vpc网络下子网id
+         * vpc网络下子网id 如：46315
          * @type {number || null}
          */
         this.SubnetId = null;
@@ -1164,6 +1749,36 @@ class InstanceSet extends  AbstractModel {
          */
         this.DeadlineTime = null;
 
+        /**
+         * 引擎：社区版Redis、腾讯云CKV
+         * @type {string || null}
+         */
+        this.Engine = null;
+
+        /**
+         * 产品类型：Redis2.8集群版、Redis2.8主从版、Redis3.2主从版、Redis3.2集群版、Redis2.8单机版、Redis4.0集群版
+         * @type {string || null}
+         */
+        this.ProductType = null;
+
+        /**
+         * vpc网络id 如：vpc-fk33jsf43kgv
+         * @type {string || null}
+         */
+        this.UniqVpcId = null;
+
+        /**
+         * vpc网络下子网id 如：subnet-fd3j6l35mm0
+         * @type {string || null}
+         */
+        this.UniqSubnetId = null;
+
+        /**
+         * 计费模式：0-按量计费，1-包年包月
+         * @type {number || null}
+         */
+        this.BillingMode = null;
+
     }
 
     /**
@@ -1190,6 +1805,11 @@ class InstanceSet extends  AbstractModel {
         this.Type = params.Type || null;
         this.AutoRenewFlag = params.AutoRenewFlag || null;
         this.DeadlineTime = params.DeadlineTime || null;
+        this.Engine = params.Engine || null;
+        this.ProductType = params.ProductType || null;
+        this.UniqVpcId = params.UniqVpcId || null;
+        this.UniqSubnetId = params.UniqSubnetId || null;
+        this.BillingMode = params.BillingMode || null;
 
     }
 }
@@ -1209,7 +1829,7 @@ class ClearInstanceResponse extends  AbstractModel {
         this.TaskId = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -1230,24 +1850,34 @@ class ClearInstanceResponse extends  AbstractModel {
 }
 
 module.exports = {
+    ZoneCapacityConf: ZoneCapacityConf,
     DescribeAutoBackupConfigResponse: DescribeAutoBackupConfigResponse,
+    TradeDealDetail: TradeDealDetail,
     RedisBackupSet: RedisBackupSet,
     ModfiyInstancePasswordRequest: ModfiyInstancePasswordRequest,
     ModifyAutoBackupConfigResponse: ModifyAutoBackupConfigResponse,
     CreateInstancesRequest: CreateInstancesRequest,
+    DescribeProductInfoResponse: DescribeProductInfoResponse,
     ResetPasswordRequest: ResetPasswordRequest,
+    ProductConf: ProductConf,
     RenewInstanceResponse: RenewInstanceResponse,
     DescribeInstanceBackupsResponse: DescribeInstanceBackupsResponse,
+    DescribeInstanceDealDetailRequest: DescribeInstanceDealDetailRequest,
     ManualBackupInstanceResponse: ManualBackupInstanceResponse,
     DescribeInstancesResponse: DescribeInstancesResponse,
+    DescribeInstanceDealDetailResponse: DescribeInstanceDealDetailResponse,
+    DescribeProductInfoRequest: DescribeProductInfoRequest,
     ResetPasswordResponse: ResetPasswordResponse,
     DescribeInstancesRequest: DescribeInstancesRequest,
     ClearInstanceRequest: ClearInstanceRequest,
+    RegionConf: RegionConf,
     RenewInstanceRequest: RenewInstanceRequest,
     DescribeInstanceBackupsRequest: DescribeInstanceBackupsRequest,
+    DescribeTaskInfoResponse: DescribeTaskInfoResponse,
     DescribeAutoBackupConfigRequest: DescribeAutoBackupConfigRequest,
     ModifyAutoBackupConfigRequest: ModifyAutoBackupConfigRequest,
     CreateInstancesResponse: CreateInstancesResponse,
+    DescribeTaskInfoRequest: DescribeTaskInfoRequest,
     UpgradeInstanceResponse: UpgradeInstanceResponse,
     UpgradeInstanceRequest: UpgradeInstanceRequest,
     ManualBackupInstanceRequest: ManualBackupInstanceRequest,

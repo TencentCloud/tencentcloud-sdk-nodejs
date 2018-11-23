@@ -63,7 +63,7 @@ class DsClient extends AbstractClient {
      */
     CreateContractByUpload(req, cb) {
         let resp = new CreateContractByUploadResponse();
-        this.request("CreateContractByUpload", req, resp, cb);
+        this.request("CreateContractByUpload", req, resp, options, cb);
     }
 
     /**
@@ -74,7 +74,7 @@ class DsClient extends AbstractClient {
      */
     CreateSeal(req, cb) {
         let resp = new CreateSealResponse();
-        this.request("CreateSeal", req, resp, cb);
+        this.request("CreateSeal", req, resp, options, cb);
     }
 
     /**
@@ -85,7 +85,7 @@ class DsClient extends AbstractClient {
      */
     DownloadContract(req, cb) {
         let resp = new DownloadContractResponse();
-        this.request("DownloadContract", req, resp, cb);
+        this.request("DownloadContract", req, resp, options, cb);
     }
 
     /**
@@ -96,7 +96,7 @@ class DsClient extends AbstractClient {
      */
     DeleteAccount(req, cb) {
         let resp = new DeleteAccountResponse();
-        this.request("DeleteAccount", req, resp, cb);
+        this.request("DeleteAccount", req, resp, options, cb);
     }
 
     /**
@@ -107,7 +107,7 @@ class DsClient extends AbstractClient {
      */
     DescribeTaskStatus(req, cb) {
         let resp = new DescribeTaskStatusResponse();
-        this.request("DescribeTaskStatus", req, resp, cb);
+        this.request("DescribeTaskStatus", req, resp, options, cb);
     }
 
     /**
@@ -118,7 +118,7 @@ class DsClient extends AbstractClient {
      */
     CreatePersonalAccount(req, cb) {
         let resp = new CreatePersonalAccountResponse();
-        this.request("CreatePersonalAccount", req, resp, cb);
+        this.request("CreatePersonalAccount", req, resp, options, cb);
     }
 
     /**
@@ -129,7 +129,7 @@ class DsClient extends AbstractClient {
      */
     SignContractByKeyword(req, cb) {
         let resp = new SignContractByKeywordResponse();
-        this.request("SignContractByKeyword", req, resp, cb);
+        this.request("SignContractByKeyword", req, resp, options, cb);
     }
 
     /**
@@ -140,7 +140,7 @@ class DsClient extends AbstractClient {
      */
     DeleteSeal(req, cb) {
         let resp = new DeleteSealResponse();
-        this.request("DeleteSeal", req, resp, cb);
+        this.request("DeleteSeal", req, resp, options, cb);
     }
 
     /**
@@ -151,7 +151,7 @@ class DsClient extends AbstractClient {
      */
     CreateEnterpriseAccount(req, cb) {
         let resp = new CreateEnterpriseAccountResponse();
-        this.request("CreateEnterpriseAccount", req, resp, cb);
+        this.request("CreateEnterpriseAccount", req, resp, options, cb);
     }
 
     /**
@@ -162,7 +162,7 @@ class DsClient extends AbstractClient {
      */
     SendVcode(req, cb) {
         let resp = new SendVcodeResponse();
-        this.request("SendVcode", req, resp, cb);
+        this.request("SendVcode", req, resp, options, cb);
     }
 
     /**
@@ -175,7 +175,7 @@ class DsClient extends AbstractClient {
      */
     CheckVcode(req, cb) {
         let resp = new CheckVcodeResponse();
-        this.request("CheckVcode", req, resp, cb);
+        this.request("CheckVcode", req, resp, options, cb);
     }
 
     /**
@@ -186,7 +186,7 @@ class DsClient extends AbstractClient {
      */
     SignContractByCoordinate(req, cb) {
         let resp = new SignContractByCoordinateResponse();
-        this.request("SignContractByCoordinate", req, resp, cb);
+        this.request("SignContractByCoordinate", req, resp, options, cb);
     }
 
 

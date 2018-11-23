@@ -56,7 +56,7 @@ class MspClient extends AbstractClient {
      */
     ListMigrationTask(req, cb) {
         let resp = new ListMigrationTaskResponse();
-        this.request("ListMigrationTask", req, resp, cb);
+        this.request("ListMigrationTask", req, resp, options, cb);
     }
 
     /**
@@ -67,7 +67,7 @@ class MspClient extends AbstractClient {
      */
     RegisterMigrationTask(req, cb) {
         let resp = new RegisterMigrationTaskResponse();
-        this.request("RegisterMigrationTask", req, resp, cb);
+        this.request("RegisterMigrationTask", req, resp, options, cb);
     }
 
     /**
@@ -78,7 +78,7 @@ class MspClient extends AbstractClient {
      */
     ModifyMigrationTaskStatus(req, cb) {
         let resp = new ModifyMigrationTaskStatusResponse();
-        this.request("ModifyMigrationTaskStatus", req, resp, cb);
+        this.request("ModifyMigrationTaskStatus", req, resp, options, cb);
     }
 
     /**
@@ -89,7 +89,7 @@ class MspClient extends AbstractClient {
      */
     DeregisterMigrationTask(req, cb) {
         let resp = new DeregisterMigrationTaskResponse();
-        this.request("DeregisterMigrationTask", req, resp, cb);
+        this.request("DeregisterMigrationTask", req, resp, options, cb);
     }
 
     /**
@@ -100,7 +100,7 @@ class MspClient extends AbstractClient {
      */
     DescribeMigrationTask(req, cb) {
         let resp = new DescribeMigrationTaskResponse();
-        this.request("DescribeMigrationTask", req, resp, cb);
+        this.request("DescribeMigrationTask", req, resp, options, cb);
     }
 
     /**
@@ -111,7 +111,7 @@ class MspClient extends AbstractClient {
      */
     ModifyMigrationTaskBelongToProject(req, cb) {
         let resp = new ModifyMigrationTaskBelongToProjectResponse();
-        this.request("ModifyMigrationTaskBelongToProject", req, resp, cb);
+        this.request("ModifyMigrationTaskBelongToProject", req, resp, options, cb);
     }
 
     /**
@@ -122,7 +122,7 @@ class MspClient extends AbstractClient {
      */
     ListMigrationProject(req, cb) {
         let resp = new ListMigrationProjectResponse();
-        this.request("ListMigrationProject", req, resp, cb);
+        this.request("ListMigrationProject", req, resp, options, cb);
     }
 
 

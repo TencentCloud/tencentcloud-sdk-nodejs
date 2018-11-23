@@ -73,6 +73,7 @@ const ArrivedMallInfo = models.ArrivedMallInfo;
 const PersonInfo = models.PersonInfo;
 const PersonCoordinate = models.PersonCoordinate;
 const DescribeFaceIdByTempIdResponse = models.DescribeFaceIdByTempIdResponse;
+const SceneInfo = models.SceneInfo;
 const DeletePersonFeatureResponse = models.DeletePersonFeatureResponse;
 const DescribeZoneTrafficInfoRequest = models.DescribeZoneTrafficInfoRequest;
 const DescribeCameraPersonResponse = models.DescribeCameraPersonResponse;
@@ -120,7 +121,7 @@ class YoumallClient extends AbstractClient {
      */
     DescribeCameraPerson(req, cb) {
         let resp = new DescribeCameraPersonResponse();
-        this.request("DescribeCameraPerson", req, resp, cb);
+        this.request("DescribeCameraPerson", req, resp, options, cb);
     }
 
     /**
@@ -131,7 +132,7 @@ class YoumallClient extends AbstractClient {
      */
     DescribePersonInfo(req, cb) {
         let resp = new DescribePersonInfoResponse();
-        this.request("DescribePersonInfo", req, resp, cb);
+        this.request("DescribePersonInfo", req, resp, options, cb);
     }
 
     /**
@@ -142,7 +143,7 @@ class YoumallClient extends AbstractClient {
      */
     DescribeZoneTrafficInfo(req, cb) {
         let resp = new DescribeZoneTrafficInfoResponse();
-        this.request("DescribeZoneTrafficInfo", req, resp, cb);
+        this.request("DescribeZoneTrafficInfo", req, resp, options, cb);
     }
 
     /**
@@ -153,7 +154,7 @@ class YoumallClient extends AbstractClient {
      */
     DescribeZoneFlowAgeInfoByZoneId(req, cb) {
         let resp = new DescribeZoneFlowAgeInfoByZoneIdResponse();
-        this.request("DescribeZoneFlowAgeInfoByZoneId", req, resp, cb);
+        this.request("DescribeZoneFlowAgeInfoByZoneId", req, resp, options, cb);
     }
 
     /**
@@ -164,7 +165,7 @@ class YoumallClient extends AbstractClient {
      */
     RegisterCallback(req, cb) {
         let resp = new RegisterCallbackResponse();
-        this.request("RegisterCallback", req, resp, cb);
+        this.request("RegisterCallback", req, resp, options, cb);
     }
 
     /**
@@ -175,7 +176,7 @@ class YoumallClient extends AbstractClient {
      */
     DescribeZoneFlowGenderAvrStayTimeByZoneId(req, cb) {
         let resp = new DescribeZoneFlowGenderAvrStayTimeByZoneIdResponse();
-        this.request("DescribeZoneFlowGenderAvrStayTimeByZoneId", req, resp, cb);
+        this.request("DescribeZoneFlowGenderAvrStayTimeByZoneId", req, resp, options, cb);
     }
 
     /**
@@ -186,7 +187,7 @@ class YoumallClient extends AbstractClient {
      */
     DescribeZoneFlowAndStayTime(req, cb) {
         let resp = new DescribeZoneFlowAndStayTimeResponse();
-        this.request("DescribeZoneFlowAndStayTime", req, resp, cb);
+        this.request("DescribeZoneFlowAndStayTime", req, resp, options, cb);
     }
 
     /**
@@ -197,7 +198,7 @@ class YoumallClient extends AbstractClient {
      */
     DescribePersonVisitInfo(req, cb) {
         let resp = new DescribePersonVisitInfoResponse();
-        this.request("DescribePersonVisitInfo", req, resp, cb);
+        this.request("DescribePersonVisitInfo", req, resp, options, cb);
     }
 
     /**
@@ -208,7 +209,7 @@ class YoumallClient extends AbstractClient {
      */
     DescribeZoneFlowHourlyByZoneId(req, cb) {
         let resp = new DescribeZoneFlowHourlyByZoneIdResponse();
-        this.request("DescribeZoneFlowHourlyByZoneId", req, resp, cb);
+        this.request("DescribeZoneFlowHourlyByZoneId", req, resp, options, cb);
     }
 
     /**
@@ -219,7 +220,7 @@ class YoumallClient extends AbstractClient {
      */
     DescribeShopInfo(req, cb) {
         let resp = new DescribeShopInfoResponse();
-        this.request("DescribeShopInfo", req, resp, cb);
+        this.request("DescribeShopInfo", req, resp, options, cb);
     }
 
     /**
@@ -230,7 +231,7 @@ class YoumallClient extends AbstractClient {
      */
     DescribeFaceIdByTempId(req, cb) {
         let resp = new DescribeFaceIdByTempIdResponse();
-        this.request("DescribeFaceIdByTempId", req, resp, cb);
+        this.request("DescribeFaceIdByTempId", req, resp, options, cb);
     }
 
     /**
@@ -241,7 +242,7 @@ class YoumallClient extends AbstractClient {
      */
     DescribePersonTraceDetail(req, cb) {
         let resp = new DescribePersonTraceDetailResponse();
-        this.request("DescribePersonTraceDetail", req, resp, cb);
+        this.request("DescribePersonTraceDetail", req, resp, options, cb);
     }
 
     /**
@@ -252,7 +253,7 @@ class YoumallClient extends AbstractClient {
      */
     DescribeShopTrafficInfo(req, cb) {
         let resp = new DescribeShopTrafficInfoResponse();
-        this.request("DescribeShopTrafficInfo", req, resp, cb);
+        this.request("DescribeShopTrafficInfo", req, resp, options, cb);
     }
 
     /**
@@ -263,7 +264,7 @@ class YoumallClient extends AbstractClient {
      */
     CreateFacePicture(req, cb) {
         let resp = new CreateFacePictureResponse();
-        this.request("CreateFacePicture", req, resp, cb);
+        this.request("CreateFacePicture", req, resp, options, cb);
     }
 
     /**
@@ -274,7 +275,7 @@ class YoumallClient extends AbstractClient {
      */
     CreateAccount(req, cb) {
         let resp = new CreateAccountResponse();
-        this.request("CreateAccount", req, resp, cb);
+        this.request("CreateAccount", req, resp, options, cb);
     }
 
     /**
@@ -285,7 +286,7 @@ class YoumallClient extends AbstractClient {
      */
     DescribeShopHourTrafficInfo(req, cb) {
         let resp = new DescribeShopHourTrafficInfoResponse();
-        this.request("DescribeShopHourTrafficInfo", req, resp, cb);
+        this.request("DescribeShopHourTrafficInfo", req, resp, options, cb);
     }
 
     /**
@@ -296,7 +297,7 @@ class YoumallClient extends AbstractClient {
      */
     DescribePersonTrace(req, cb) {
         let resp = new DescribePersonTraceResponse();
-        this.request("DescribePersonTrace", req, resp, cb);
+        this.request("DescribePersonTrace", req, resp, options, cb);
     }
 
     /**
@@ -307,7 +308,7 @@ class YoumallClient extends AbstractClient {
      */
     DescribeZoneFlowDailyByZoneId(req, cb) {
         let resp = new DescribeZoneFlowDailyByZoneIdResponse();
-        this.request("DescribeZoneFlowDailyByZoneId", req, resp, cb);
+        this.request("DescribeZoneFlowDailyByZoneId", req, resp, options, cb);
     }
 
     /**
@@ -320,7 +321,7 @@ class YoumallClient extends AbstractClient {
      */
     DescribePersonArrivedMall(req, cb) {
         let resp = new DescribePersonArrivedMallResponse();
-        this.request("DescribePersonArrivedMall", req, resp, cb);
+        this.request("DescribePersonArrivedMall", req, resp, options, cb);
     }
 
     /**
@@ -331,7 +332,7 @@ class YoumallClient extends AbstractClient {
      */
     DescribeClusterPersonArrivedMall(req, cb) {
         let resp = new DescribeClusterPersonArrivedMallResponse();
-        this.request("DescribeClusterPersonArrivedMall", req, resp, cb);
+        this.request("DescribeClusterPersonArrivedMall", req, resp, options, cb);
     }
 
     /**
@@ -342,7 +343,7 @@ class YoumallClient extends AbstractClient {
      */
     DescribePerson(req, cb) {
         let resp = new DescribePersonResponse();
-        this.request("DescribePerson", req, resp, cb);
+        this.request("DescribePerson", req, resp, options, cb);
     }
 
     /**
@@ -353,7 +354,7 @@ class YoumallClient extends AbstractClient {
      */
     ModifyPersonType(req, cb) {
         let resp = new ModifyPersonTypeResponse();
-        this.request("ModifyPersonType", req, resp, cb);
+        this.request("ModifyPersonType", req, resp, options, cb);
     }
 
     /**
@@ -364,7 +365,7 @@ class YoumallClient extends AbstractClient {
      */
     DescribeHistoryNetworkInfo(req, cb) {
         let resp = new DescribeHistoryNetworkInfoResponse();
-        this.request("DescribeHistoryNetworkInfo", req, resp, cb);
+        this.request("DescribeHistoryNetworkInfo", req, resp, options, cb);
     }
 
     /**
@@ -375,7 +376,7 @@ class YoumallClient extends AbstractClient {
      */
     DescribeNetworkInfo(req, cb) {
         let resp = new DescribeNetworkInfoResponse();
-        this.request("DescribeNetworkInfo", req, resp, cb);
+        this.request("DescribeNetworkInfo", req, resp, options, cb);
     }
 
     /**
@@ -386,7 +387,7 @@ class YoumallClient extends AbstractClient {
      */
     DeletePersonFeature(req, cb) {
         let resp = new DeletePersonFeatureResponse();
-        this.request("DeletePersonFeature", req, resp, cb);
+        this.request("DeletePersonFeature", req, resp, options, cb);
     }
 
     /**
@@ -398,7 +399,7 @@ class YoumallClient extends AbstractClient {
      */
     ModifyPersonTagInfo(req, cb) {
         let resp = new ModifyPersonTagInfoResponse();
-        this.request("ModifyPersonTagInfo", req, resp, cb);
+        this.request("ModifyPersonTagInfo", req, resp, options, cb);
     }
 
     /**
@@ -409,7 +410,7 @@ class YoumallClient extends AbstractClient {
      */
     DescribeZoneFlowGenderInfoByZoneId(req, cb) {
         let resp = new DescribeZoneFlowGenderInfoByZoneIdResponse();
-        this.request("DescribeZoneFlowGenderInfoByZoneId", req, resp, cb);
+        this.request("DescribeZoneFlowGenderInfoByZoneId", req, resp, options, cb);
     }
 
     /**
@@ -420,7 +421,7 @@ class YoumallClient extends AbstractClient {
      */
     DescribeClusterPersonTrace(req, cb) {
         let resp = new DescribeClusterPersonTraceResponse();
-        this.request("DescribeClusterPersonTrace", req, resp, cb);
+        this.request("DescribeClusterPersonTrace", req, resp, options, cb);
     }
 
     /**
@@ -431,7 +432,7 @@ class YoumallClient extends AbstractClient {
      */
     DescribeTrajectoryData(req, cb) {
         let resp = new DescribeTrajectoryDataResponse();
-        this.request("DescribeTrajectoryData", req, resp, cb);
+        this.request("DescribeTrajectoryData", req, resp, options, cb);
     }
 
 

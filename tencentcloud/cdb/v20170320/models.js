@@ -5118,7 +5118,7 @@ class InstanceInfo extends  AbstractModel {
         super();
 
         /**
-         * 外网状态，可能的返回值为：0-未开通外网；1-已开通外网
+         * 外网状态，可能的返回值为：0-未开通外网；1-已开通外网；2-已关闭外网
          * @type {number || null}
          */
         this.WanStatus = null;
@@ -5321,6 +5321,12 @@ class InstanceInfo extends  AbstractModel {
          */
         this.UniqSubnetId = null;
 
+        /**
+         * 物理ID
+         * @type {string || null}
+         */
+        this.PhysicalId = null;
+
     }
 
     /**
@@ -5395,6 +5401,7 @@ class InstanceInfo extends  AbstractModel {
         this.CdbError = params.CdbError || null;
         this.UniqVpcId = params.UniqVpcId || null;
         this.UniqSubnetId = params.UniqSubnetId || null;
+        this.PhysicalId = params.PhysicalId || null;
 
     }
 }

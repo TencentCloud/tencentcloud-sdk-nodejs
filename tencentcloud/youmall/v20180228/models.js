@@ -940,6 +940,12 @@ class DescribeFaceIdByTempIdRequest extends  AbstractModel {
          */
         this.PosId = null;
 
+        /**
+         * 图片url过期时间：在当前时间+PictureExpires秒后，图片url无法继续正常访问；单位s；默认值1*24*60*60（1天）
+         * @type {number || null}
+         */
+        this.PictureExpires = null;
+
     }
 
     /**
@@ -954,6 +960,7 @@ class DescribeFaceIdByTempIdRequest extends  AbstractModel {
         this.TempId = params.TempId || null;
         this.CameraId = params.CameraId || null;
         this.PosId = params.PosId || null;
+        this.PictureExpires = params.PictureExpires || null;
 
     }
 }
@@ -1612,18 +1619,6 @@ class DescribePersonVisitInfoRequest extends  AbstractModel {
         this.ShopId = null;
 
         /**
-         * 开始日期，格式yyyy-MM-dd
-         * @type {string || null}
-         */
-        this.StartDate = null;
-
-        /**
-         * 结束日期，格式yyyy-MM-dd
-         * @type {string || null}
-         */
-        this.EndDate = null;
-
-        /**
          * 偏移量：分页控制参数，第一页传0，第n页Offset=(n-1)*Limit
          * @type {number || null}
          */
@@ -1636,10 +1631,34 @@ class DescribePersonVisitInfoRequest extends  AbstractModel {
         this.Limit = null;
 
         /**
+         * 开始日期，格式yyyy-MM-dd，已废弃，请使用StartDateTime
+         * @type {string || null}
+         */
+        this.StartDate = null;
+
+        /**
+         * 结束日期，格式yyyy-MM-dd，已废弃，请使用EndDateTime
+         * @type {string || null}
+         */
+        this.EndDate = null;
+
+        /**
          * 图片url过期时间：在当前时间+PictureExpires秒后，图片url无法继续正常访问；单位s；默认值1*24*60*60（1天）
          * @type {number || null}
          */
         this.PictureExpires = null;
+
+        /**
+         * 开始时间，格式yyyy-MM-dd HH:mm:ss
+         * @type {string || null}
+         */
+        this.StartDateTime = null;
+
+        /**
+         * 结束时间，格式yyyy-MM-dd HH:mm:ss
+         * @type {string || null}
+         */
+        this.EndDateTime = null;
 
     }
 
@@ -1652,11 +1671,13 @@ class DescribePersonVisitInfoRequest extends  AbstractModel {
         }
         this.CompanyId = params.CompanyId || null;
         this.ShopId = params.ShopId || null;
-        this.StartDate = params.StartDate || null;
-        this.EndDate = params.EndDate || null;
         this.Offset = params.Offset || null;
         this.Limit = params.Limit || null;
+        this.StartDate = params.StartDate || null;
+        this.EndDate = params.EndDate || null;
         this.PictureExpires = params.PictureExpires || null;
+        this.StartDateTime = params.StartDateTime || null;
+        this.EndDateTime = params.EndDateTime || null;
 
     }
 }
@@ -2455,6 +2476,12 @@ class PersonVisitInfo extends  AbstractModel {
          */
         this.CapturedPictureUrl = null;
 
+        /**
+         * 抓拍头像的场景图信息
+         * @type {SceneInfo || null}
+         */
+        this.SceneInfo = null;
+
     }
 
     /**
@@ -2472,6 +2499,12 @@ class PersonVisitInfo extends  AbstractModel {
         this.GlassType = params.GlassType || null;
         this.HairType = params.HairType || null;
         this.CapturedPictureUrl = params.CapturedPictureUrl || null;
+
+        if (params.SceneInfo) {
+            let obj = new SceneInfo();
+            obj.deserialize(params.SceneInfo)
+            this.SceneInfo = obj;
+        }
 
     }
 }
@@ -3244,6 +3277,12 @@ class DescribeFaceIdByTempIdResponse extends  AbstractModel {
         this.FaceId = null;
 
         /**
+         * 顾客属性信息
+         * @type {PersonInfo || null}
+         */
+        this.PersonInfo = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -3264,7 +3303,69 @@ class DescribeFaceIdByTempIdResponse extends  AbstractModel {
         this.PosId = params.PosId || null;
         this.TempId = params.TempId || null;
         this.FaceId = params.FaceId || null;
+
+        if (params.PersonInfo) {
+            let obj = new PersonInfo();
+            obj.deserialize(params.PersonInfo)
+            this.PersonInfo = obj;
+        }
         this.RequestId = params.RequestId || null;
+
+    }
+}
+
+/**
+ * 场景图信息
+ * @class
+ */
+class SceneInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 场景图
+         * @type {string || null}
+         */
+        this.ScenePictureURL = null;
+
+        /**
+         * 抓拍头像左上角X坐标在场景图中的像素点位置
+         * @type {number || null}
+         */
+        this.HeadX = null;
+
+        /**
+         * 抓拍头像左上角Y坐标在场景图中的像素点位置
+         * @type {number || null}
+         */
+        this.HeadY = null;
+
+        /**
+         * 抓拍头像在场景图中占有的像素宽度
+         * @type {number || null}
+         */
+        this.HeadWidth = null;
+
+        /**
+         * 抓拍头像在场景图中占有的像素高度
+         * @type {number || null}
+         */
+        this.HeadHeight = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ScenePictureURL = params.ScenePictureURL || null;
+        this.HeadX = params.HeadX || null;
+        this.HeadY = params.HeadY || null;
+        this.HeadWidth = params.HeadWidth || null;
+        this.HeadHeight = params.HeadHeight || null;
 
     }
 }
@@ -4771,6 +4872,7 @@ module.exports = {
     PersonInfo: PersonInfo,
     PersonCoordinate: PersonCoordinate,
     DescribeFaceIdByTempIdResponse: DescribeFaceIdByTempIdResponse,
+    SceneInfo: SceneInfo,
     DeletePersonFeatureResponse: DeletePersonFeatureResponse,
     DescribeZoneTrafficInfoRequest: DescribeZoneTrafficInfoRequest,
     DescribeCameraPersonResponse: DescribeCameraPersonResponse,

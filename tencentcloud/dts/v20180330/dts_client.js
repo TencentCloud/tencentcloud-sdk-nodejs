@@ -84,7 +84,7 @@ class DtsClient extends AbstractClient {
      */
     CreateSyncCheckJob(req, cb) {
         let resp = new CreateSyncCheckJobResponse();
-        this.request("CreateSyncCheckJob", req, resp, cb);
+        this.request("CreateSyncCheckJob", req, resp, options, cb);
     }
 
     /**
@@ -95,7 +95,7 @@ class DtsClient extends AbstractClient {
      */
     SwitchDrToMaster(req, cb) {
         let resp = new SwitchDrToMasterResponse();
-        this.request("SwitchDrToMaster", req, resp, cb);
+        this.request("SwitchDrToMaster", req, resp, options, cb);
     }
 
     /**
@@ -108,7 +108,7 @@ class DtsClient extends AbstractClient {
      */
     DescribeSyncCheckJob(req, cb) {
         let resp = new DescribeSyncCheckJobResponse();
-        this.request("DescribeSyncCheckJob", req, resp, cb);
+        this.request("DescribeSyncCheckJob", req, resp, options, cb);
     }
 
     /**
@@ -119,7 +119,7 @@ class DtsClient extends AbstractClient {
      */
     DeleteSyncJob(req, cb) {
         let resp = new DeleteSyncJobResponse();
-        this.request("DeleteSyncJob", req, resp, cb);
+        this.request("DeleteSyncJob", req, resp, options, cb);
     }
 
     /**
@@ -130,7 +130,7 @@ class DtsClient extends AbstractClient {
      */
     DescribeSyncJobs(req, cb) {
         let resp = new DescribeSyncJobsResponse();
-        this.request("DescribeSyncJobs", req, resp, cb);
+        this.request("DescribeSyncJobs", req, resp, options, cb);
     }
 
     /**
@@ -142,7 +142,7 @@ class DtsClient extends AbstractClient {
      */
     StartMigrateJob(req, cb) {
         let resp = new StartMigrateJobResponse();
-        this.request("StartMigrateJob", req, resp, cb);
+        this.request("StartMigrateJob", req, resp, options, cb);
     }
 
     /**
@@ -155,7 +155,7 @@ class DtsClient extends AbstractClient {
      */
     ModifySyncJob(req, cb) {
         let resp = new ModifySyncJobResponse();
-        this.request("ModifySyncJob", req, resp, cb);
+        this.request("ModifySyncJob", req, resp, options, cb);
     }
 
     /**
@@ -168,7 +168,7 @@ class DtsClient extends AbstractClient {
      */
     CreateMigrateJob(req, cb) {
         let resp = new CreateMigrateJobResponse();
-        this.request("CreateMigrateJob", req, resp, cb);
+        this.request("CreateMigrateJob", req, resp, options, cb);
     }
 
     /**
@@ -179,7 +179,7 @@ class DtsClient extends AbstractClient {
      */
     DeleteMigrateJob(req, cb) {
         let resp = new DeleteMigrateJobResponse();
-        this.request("DeleteMigrateJob", req, resp, cb);
+        this.request("DeleteMigrateJob", req, resp, options, cb);
     }
 
     /**
@@ -190,7 +190,7 @@ class DtsClient extends AbstractClient {
      */
     StartSyncJob(req, cb) {
         let resp = new StartSyncJobResponse();
-        this.request("StartSyncJob", req, resp, cb);
+        this.request("StartSyncJob", req, resp, options, cb);
     }
 
     /**
@@ -203,7 +203,7 @@ class DtsClient extends AbstractClient {
      */
     CreateMigrateCheckJob(req, cb) {
         let resp = new CreateMigrateCheckJobResponse();
-        this.request("CreateMigrateCheckJob", req, resp, cb);
+        this.request("CreateMigrateCheckJob", req, resp, options, cb);
     }
 
     /**
@@ -218,7 +218,7 @@ class DtsClient extends AbstractClient {
      */
     ModifyMigrateJob(req, cb) {
         let resp = new ModifyMigrateJobResponse();
-        this.request("ModifyMigrateJob", req, resp, cb);
+        this.request("ModifyMigrateJob", req, resp, options, cb);
     }
 
     /**
@@ -229,7 +229,7 @@ class DtsClient extends AbstractClient {
      */
     CreateSyncJob(req, cb) {
         let resp = new CreateSyncJobResponse();
-        this.request("CreateSyncJob", req, resp, cb);
+        this.request("CreateSyncJob", req, resp, options, cb);
     }
 
     /**
@@ -241,7 +241,7 @@ class DtsClient extends AbstractClient {
      */
     StopMigrateJob(req, cb) {
         let resp = new StopMigrateJobResponse();
-        this.request("StopMigrateJob", req, resp, cb);
+        this.request("StopMigrateJob", req, resp, options, cb);
     }
 
     /**
@@ -253,7 +253,7 @@ class DtsClient extends AbstractClient {
      */
     DescribeMigrateJobs(req, cb) {
         let resp = new DescribeMigrateJobsResponse();
-        this.request("DescribeMigrateJobs", req, resp, cb);
+        this.request("DescribeMigrateJobs", req, resp, options, cb);
     }
 
     /**
@@ -266,7 +266,7 @@ class DtsClient extends AbstractClient {
      */
     DescribeMigrateCheckJob(req, cb) {
         let resp = new DescribeMigrateCheckJobResponse();
-        this.request("DescribeMigrateCheckJob", req, resp, cb);
+        this.request("DescribeMigrateCheckJob", req, resp, options, cb);
     }
 
     /**
@@ -279,7 +279,7 @@ class DtsClient extends AbstractClient {
      */
     CompleteMigrateJob(req, cb) {
         let resp = new CompleteMigrateJobResponse();
-        this.request("CompleteMigrateJob", req, resp, cb);
+        this.request("CompleteMigrateJob", req, resp, options, cb);
     }
 
 

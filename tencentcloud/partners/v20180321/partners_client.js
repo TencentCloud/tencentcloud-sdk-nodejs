@@ -58,7 +58,7 @@ class PartnersClient extends AbstractClient {
      */
     AgentPayDeals(req, cb) {
         let resp = new AgentPayDealsResponse();
-        this.request("AgentPayDeals", req, resp, cb);
+        this.request("AgentPayDeals", req, resp, options, cb);
     }
 
     /**
@@ -69,7 +69,7 @@ class PartnersClient extends AbstractClient {
      */
     DescribeAgentBills(req, cb) {
         let resp = new DescribeAgentBillsResponse();
-        this.request("DescribeAgentBills", req, resp, cb);
+        this.request("DescribeAgentBills", req, resp, options, cb);
     }
 
     /**
@@ -80,7 +80,7 @@ class PartnersClient extends AbstractClient {
      */
     AgentTransferMoney(req, cb) {
         let resp = new AgentTransferMoneyResponse();
-        this.request("AgentTransferMoney", req, resp, cb);
+        this.request("AgentTransferMoney", req, resp, options, cb);
     }
 
     /**
@@ -91,7 +91,7 @@ class PartnersClient extends AbstractClient {
      */
     DescribeRebateInfos(req, cb) {
         let resp = new DescribeRebateInfosResponse();
-        this.request("DescribeRebateInfos", req, resp, cb);
+        this.request("DescribeRebateInfos", req, resp, options, cb);
     }
 
     /**
@@ -102,7 +102,7 @@ class PartnersClient extends AbstractClient {
      */
     ModifyClientRemark(req, cb) {
         let resp = new ModifyClientRemarkResponse();
-        this.request("ModifyClientRemark", req, resp, cb);
+        this.request("ModifyClientRemark", req, resp, options, cb);
     }
 
     /**
@@ -113,7 +113,7 @@ class PartnersClient extends AbstractClient {
      */
     DescribeAgentClients(req, cb) {
         let resp = new DescribeAgentClientsResponse();
-        this.request("DescribeAgentClients", req, resp, cb);
+        this.request("DescribeAgentClients", req, resp, options, cb);
     }
 
     /**
@@ -124,7 +124,7 @@ class PartnersClient extends AbstractClient {
      */
     DescribeClientBalance(req, cb) {
         let resp = new DescribeClientBalanceResponse();
-        this.request("DescribeClientBalance", req, resp, cb);
+        this.request("DescribeClientBalance", req, resp, options, cb);
     }
 
     /**
@@ -135,7 +135,7 @@ class PartnersClient extends AbstractClient {
      */
     DescribeAgentAuditedClients(req, cb) {
         let resp = new DescribeAgentAuditedClientsResponse();
-        this.request("DescribeAgentAuditedClients", req, resp, cb);
+        this.request("DescribeAgentAuditedClients", req, resp, options, cb);
     }
 
     /**
@@ -146,7 +146,7 @@ class PartnersClient extends AbstractClient {
      */
     AuditApplyClient(req, cb) {
         let resp = new AuditApplyClientResponse();
-        this.request("AuditApplyClient", req, resp, cb);
+        this.request("AuditApplyClient", req, resp, options, cb);
     }
 
 

@@ -42,7 +42,7 @@ class CrClient extends AbstractClient {
      */
     DownloadReport(req, cb) {
         let resp = new DownloadReportResponse();
-        this.request("DownloadReport", req, resp, cb);
+        this.request("DownloadReport", req, resp, options, cb);
     }
 
     /**
@@ -53,7 +53,7 @@ class CrClient extends AbstractClient {
      */
     DescribeTaskStatus(req, cb) {
         let resp = new DescribeTaskStatusResponse();
-        this.request("DescribeTaskStatus", req, resp, cb);
+        this.request("DescribeTaskStatus", req, resp, options, cb);
     }
 
     /**
@@ -64,7 +64,7 @@ class CrClient extends AbstractClient {
      */
     UploadFile(req, cb) {
         let resp = new UploadFileResponse();
-        this.request("UploadFile", req, resp, cb);
+        this.request("UploadFile", req, resp, options, cb);
     }
 
 

@@ -50,7 +50,7 @@ class BillingClient extends AbstractClient {
      */
     DescribeBillDetail(req, cb) {
         let resp = new DescribeBillDetailResponse();
-        this.request("DescribeBillDetail", req, resp, cb);
+        this.request("DescribeBillDetail", req, resp, options, cb);
     }
 
     /**
@@ -61,7 +61,7 @@ class BillingClient extends AbstractClient {
      */
     DescribeAccountBalance(req, cb) {
         let resp = new DescribeAccountBalanceResponse();
-        this.request("DescribeAccountBalance", req, resp, cb);
+        this.request("DescribeAccountBalance", req, resp, options, cb);
     }
 
     /**
@@ -72,7 +72,7 @@ class BillingClient extends AbstractClient {
      */
     PayDeals(req, cb) {
         let resp = new PayDealsResponse();
-        this.request("PayDeals", req, resp, cb);
+        this.request("PayDeals", req, resp, options, cb);
     }
 
     /**
@@ -83,7 +83,7 @@ class BillingClient extends AbstractClient {
      */
     DescribeDealsByCond(req, cb) {
         let resp = new DescribeDealsByCondResponse();
-        this.request("DescribeDealsByCond", req, resp, cb);
+        this.request("DescribeDealsByCond", req, resp, options, cb);
     }
 
     /**
@@ -94,7 +94,7 @@ class BillingClient extends AbstractClient {
      */
     DescribeBillResourceSummary(req, cb) {
         let resp = new DescribeBillResourceSummaryResponse();
-        this.request("DescribeBillResourceSummary", req, resp, cb);
+        this.request("DescribeBillResourceSummary", req, resp, options, cb);
     }
 
 

@@ -17,41 +17,6 @@
 const AbstractModel = require("../../common/abstract_model");
 
 /**
- * GetVodDrmLicense返回参数结构体
- * @class
- */
-class GetVodDrmLicenseResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * base64 加密的license 二进制数据
-         * @type {string || null}
-         */
-        this.License = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.License = params.License || null;
-        this.RequestId = params.RequestId || null;
-
-    }
-}
-
-/**
  * DeleteLiveRecord返回参数结构体
  * @class
  */
@@ -258,48 +223,60 @@ class PlayAuthKeyInfo extends  AbstractModel {
 }
 
 /**
- * DescribeLiveStreamOnlineList返回参数结构体
+ * 拉流配置
  * @class
  */
-class DescribeLiveStreamOnlineListResponse extends  AbstractModel {
+class PullStreamConfig extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 符合条件的总个数。
-         * @type {number || null}
-         */
-        this.TotalNum = null;
-
-        /**
-         * 总页数。
-         * @type {number || null}
-         */
-        this.TotalPage = null;
-
-        /**
-         * 分页的页码。
-         * @type {number || null}
-         */
-        this.PageNum = null;
-
-        /**
-         * 每页显示的条数。
-         * @type {number || null}
-         */
-        this.PageSize = null;
-
-        /**
-         * 正在推送流的信息列表
-         * @type {Array.<StreamOnlineInfo> || null}
-         */
-        this.OnlineInfo = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * 拉流配置Id。
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.ConfigId = null;
+
+        /**
+         * 源Url。
+         * @type {string || null}
+         */
+        this.FromUrl = null;
+
+        /**
+         * 目的Url。
+         * @type {string || null}
+         */
+        this.ToUrl = null;
+
+        /**
+         * 区域名。
+         * @type {string || null}
+         */
+        this.AreaName = null;
+
+        /**
+         * 运营商名。
+         * @type {string || null}
+         */
+        this.IspName = null;
+
+        /**
+         * 开始时间。
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * 结束时间。
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * 0无效，1初始状态，2正在运行，3拉起失败，4暂停。
+         * @type {string || null}
+         */
+        this.Status = null;
 
     }
 
@@ -310,20 +287,14 @@ class DescribeLiveStreamOnlineListResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalNum = params.TotalNum || null;
-        this.TotalPage = params.TotalPage || null;
-        this.PageNum = params.PageNum || null;
-        this.PageSize = params.PageSize || null;
-
-        if (params.OnlineInfo) {
-            this.OnlineInfo = new Array();
-            for (let z in params.OnlineInfo) {
-                let obj = new StreamOnlineInfo();
-                obj.deserialize(params.OnlineInfo[z]);
-                this.OnlineInfo.push(obj);
-            }
-        }
-        this.RequestId = params.RequestId || null;
+        this.ConfigId = params.ConfigId || null;
+        this.FromUrl = params.FromUrl || null;
+        this.ToUrl = params.ToUrl || null;
+        this.AreaName = params.AreaName || null;
+        this.IspName = params.IspName || null;
+        this.StartTime = params.StartTime || null;
+        this.EndTime = params.EndTime || null;
+        this.Status = params.Status || null;
 
     }
 }
@@ -359,39 +330,6 @@ class CreateLiveRecordResponse extends  AbstractModel {
         }
         this.TaskId = params.TaskId || null;
         this.RequestId = params.RequestId || null;
-
-    }
-}
-
-/**
- * GetVodDrmLicense请求参数结构体
- * @class
- */
-class GetVodDrmLicenseRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Drmlicense信息。
-         * @type {DrmLicenseInfo || null}
-         */
-        this.DrmLicenseInfo = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-        if (params.DrmLicenseInfo) {
-            let obj = new DrmLicenseInfo();
-            obj.deserialize(params.DrmLicenseInfo)
-            this.DrmLicenseInfo = obj;
-        }
 
     }
 }
@@ -453,48 +391,6 @@ class ModifyLivePlayAuthKeyResponse extends  AbstractModel {
 }
 
 /**
- * DescribeDrmEncryptKeys返回参数结构体
- * @class
- */
-class DescribeDrmEncryptKeysResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * base64加密后的EncryptKeys信息。
-         * @type {string || null}
-         */
-        this.EncryptKeys = null;
-
-        /**
-         * 使用公钥加密的sessionkey，用来使用aes-128 ecb模式解码encryptkeys中key和iv。
-         * @type {string || null}
-         */
-        this.SessionKey = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.EncryptKeys = params.EncryptKeys || null;
-        this.SessionKey = params.SessionKey || null;
-        this.RequestId = params.RequestId || null;
-
-    }
-}
-
-/**
  * DescribeLiveWatermarks返回参数结构体
  * @class
  */
@@ -545,24 +441,24 @@ class DescribeLiveWatermarksResponse extends  AbstractModel {
 }
 
 /**
- * 源对象
+ * ModifyPullStreamStatus请求参数结构体
  * @class
  */
-class DrmSourceObject extends  AbstractModel {
+class ModifyPullStreamStatusRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 输入的桶名称。
-         * @type {string || null}
+         * 配置id列表。
+         * @type {Array.<string> || null}
          */
-        this.BucketName = null;
+        this.ConfigIds = null;
 
         /**
-         * 输入对象名称。
+         * 目标状态。0无效，2正在运行，4暂停。
          * @type {string || null}
          */
-        this.ObjectName = null;
+        this.Status = null;
 
     }
 
@@ -573,8 +469,8 @@ class DrmSourceObject extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.BucketName = params.BucketName || null;
-        this.ObjectName = params.ObjectName || null;
+        this.ConfigIds = params.ConfigIds || null;
+        this.Status = params.Status || null;
 
     }
 }
@@ -925,19 +821,48 @@ class DescribeLivePlayAuthKeyRequest extends  AbstractModel {
 }
 
 /**
- * 推流时间
+ * DescribeLiveStreamOnlineList返回参数结构体
  * @class
  */
-class PublishTime extends  AbstractModel {
+class DescribeLiveStreamOnlineListResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 推流时间
-UTC 格式，例如：2018-06-29T19:00:00Z。
+         * 符合条件的总个数。
+         * @type {number || null}
+         */
+        this.TotalNum = null;
+
+        /**
+         * 总页数。
+         * @type {number || null}
+         */
+        this.TotalPage = null;
+
+        /**
+         * 分页的页码。
+         * @type {number || null}
+         */
+        this.PageNum = null;
+
+        /**
+         * 每页显示的条数。
+         * @type {number || null}
+         */
+        this.PageSize = null;
+
+        /**
+         * 正在推送流的信息列表
+         * @type {Array.<StreamOnlineInfo> || null}
+         */
+        this.OnlineInfo = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.PublishTime = null;
+        this.RequestId = null;
 
     }
 
@@ -948,47 +873,20 @@ UTC 格式，例如：2018-06-29T19:00:00Z。
         if (!params) {
             return;
         }
-        this.PublishTime = params.PublishTime || null;
+        this.TotalNum = params.TotalNum || null;
+        this.TotalPage = params.TotalPage || null;
+        this.PageNum = params.PageNum || null;
+        this.PageSize = params.PageSize || null;
 
-    }
-}
-
-/**
- * DescribeDrmEncryptKeys请求参数结构体
- * @class
- */
-class DescribeDrmEncryptKeysRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 获取key所需要的参数。
-         * @type {DrmGetKeyPara || null}
-         */
-        this.DrmGetKeyPara = null;
-
-        /**
-         * base64 编码的DrmGetKeyPara参数数字签名。
-         * @type {string || null}
-         */
-        this.RsaSignature = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
+        if (params.OnlineInfo) {
+            this.OnlineInfo = new Array();
+            for (let z in params.OnlineInfo) {
+                let obj = new StreamOnlineInfo();
+                obj.deserialize(params.OnlineInfo[z]);
+                this.OnlineInfo.push(obj);
+            }
         }
-
-        if (params.DrmGetKeyPara) {
-            let obj = new DrmGetKeyPara();
-            obj.deserialize(params.DrmGetKeyPara)
-            this.DrmGetKeyPara = obj;
-        }
-        this.RsaSignature = params.RsaSignature || null;
+        this.RequestId = params.RequestId || null;
 
     }
 }
@@ -1171,55 +1069,6 @@ class DescribeLiveStreamOnlineListRequest extends  AbstractModel {
 }
 
 /**
- * Drm获取key入参
- * @class
- */
-class DrmGetKeyPara extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * drm类型，widevine或fairplay
-         * @type {string || null}
-         */
-        this.DrmType = null;
-
-        /**
-         * Tracks，audio,video
-         * @type {Array.<string> || null}
-         */
-        this.Tracks = null;
-
-        /**
-         * rsa 公钥的base64 编码数据
-         * @type {string || null}
-         */
-        this.PublicKey = null;
-
-        /**
-         * 内容id，标识唯一一个加密内容
-         * @type {string || null}
-         */
-        this.ContentID = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.DrmType = params.DrmType || null;
-        this.Tracks = params.Tracks || null;
-        this.PublicKey = params.PublicKey || null;
-        this.ContentID = params.ContentID || null;
-
-    }
-}
-
-/**
  * UpdateLiveWatermark请求参数结构体
  * @class
  */
@@ -1271,39 +1120,6 @@ class UpdateLiveWatermarkRequest extends  AbstractModel {
         this.XPosition = params.XPosition || null;
         this.YPosition = params.YPosition || null;
         this.WatermarkName = params.WatermarkName || null;
-
-    }
-}
-
-/**
- * StartDrmEncryption请求参数结构体
- * @class
- */
-class StartDrmEncryptionRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Drm加密所需要的信息。
-         * @type {DrmEncryptInfo || null}
-         */
-        this.DrmEncryptInfo = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-        if (params.DrmEncryptInfo) {
-            let obj = new DrmEncryptInfo();
-            obj.deserialize(params.DrmEncryptInfo)
-            this.DrmEncryptInfo = obj;
-        }
 
     }
 }
@@ -1533,82 +1349,6 @@ class StopLiveRecordRequest extends  AbstractModel {
 }
 
 /**
- * Drm加密请求信息
- * @class
- */
-class DrmEncryptInfo extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * cos的end point。
-         * @type {string || null}
-         */
-        this.CosEndPoint = null;
-
-        /**
-         * cos api密钥id。
-         * @type {string || null}
-         */
-        this.SecretId = null;
-
-        /**
-         * cos api密钥。
-         * @type {string || null}
-         */
-        this.SecretKey = null;
-
-        /**
-         * drm类型，widevine或fairplay
-         * @type {string || null}
-         */
-        this.DrmType = null;
-
-        /**
-         * cos上的原始视频。
-         * @type {DrmSourceObject || null}
-         */
-        this.SourceObject = null;
-
-        /**
-         * 加密的视频传输到cos位置。
-         * @type {Array.<DrmOutputObject> || null}
-         */
-        this.OutputObjects = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.CosEndPoint = params.CosEndPoint || null;
-        this.SecretId = params.SecretId || null;
-        this.SecretKey = params.SecretKey || null;
-        this.DrmType = params.DrmType || null;
-
-        if (params.SourceObject) {
-            let obj = new DrmSourceObject();
-            obj.deserialize(params.SourceObject)
-            this.SourceObject = obj;
-        }
-
-        if (params.OutputObjects) {
-            this.OutputObjects = new Array();
-            for (let z in params.OutputObjects) {
-                let obj = new DrmOutputObject();
-                obj.deserialize(params.OutputObjects[z]);
-                this.OutputObjects.push(obj);
-            }
-        }
-
-    }
-}
-
-/**
  * ModifyLivePushAuthKey请求参数结构体
  * @class
  */
@@ -1665,123 +1405,6 @@ class ModifyLivePushAuthKeyRequest extends  AbstractModel {
 }
 
 /**
- * 推流信息
- * @class
- */
-class StreamInfo extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 直播流所属应用名称
-         * @type {string || null}
-         */
-        this.AppName = null;
-
-        /**
-         * 创建模式
-         * @type {string || null}
-         */
-        this.CreateMode = null;
-
-        /**
-         * 创建时间，如: 2018-07-13 14:48:23
-         * @type {string || null}
-         */
-        this.CreateTime = null;
-
-        /**
-         * 流状态
-         * @type {number || null}
-         */
-        this.Status = null;
-
-        /**
-         * 流id
-         * @type {string || null}
-         */
-        this.StreamId = null;
-
-        /**
-         * 流名称
-         * @type {string || null}
-         */
-        this.StreamName = null;
-
-        /**
-         * 水印id
-         * @type {string || null}
-         */
-        this.WaterMarkId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.AppName = params.AppName || null;
-        this.CreateMode = params.CreateMode || null;
-        this.CreateTime = params.CreateTime || null;
-        this.Status = params.Status || null;
-        this.StreamId = params.StreamId || null;
-        this.StreamName = params.StreamName || null;
-        this.WaterMarkId = params.WaterMarkId || null;
-
-    }
-}
-
-/**
- * Drm加密接口入参
- * @class
- */
-class DrmOutputObject extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 输出的桶名称。
-         * @type {string || null}
-         */
-        this.BucketName = null;
-
-        /**
-         * 输出的对象名称。
-         * @type {string || null}
-         */
-        this.ObjectName = null;
-
-        /**
-         * 输出对象参数。
-         * @type {DrmOutputPara || null}
-         */
-        this.Para = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.BucketName = params.BucketName || null;
-        this.ObjectName = params.ObjectName || null;
-
-        if (params.Para) {
-            let obj = new DrmOutputPara();
-            obj.deserialize(params.Para)
-            this.Para = obj;
-        }
-
-    }
-}
-
-/**
  * DescribeLiveWatermarks请求参数结构体
  * @class
  */
@@ -1803,24 +1426,18 @@ class DescribeLiveWatermarksRequest extends  AbstractModel {
 }
 
 /**
- * PlaybackPolicy参数
+ * SetLiveWatermarkStatus返回参数结构体
  * @class
  */
-class PlaybackPolicy extends  AbstractModel {
+class SetLiveWatermarkStatusResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 播放license有效时长
-         * @type {number || null}
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
          */
-        this.LicenseDurationSeconds = null;
-
-        /**
-         * 开始播放后，license的有效时长
-         * @type {number || null}
-         */
-        this.PlaybackDurationSeconds = null;
+        this.RequestId = null;
 
     }
 
@@ -1831,8 +1448,7 @@ class PlaybackPolicy extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.LicenseDurationSeconds = params.LicenseDurationSeconds || null;
-        this.PlaybackDurationSeconds = params.PlaybackDurationSeconds || null;
+        this.RequestId = params.RequestId || null;
 
     }
 }
@@ -1988,18 +1604,19 @@ class DropLiveStreamRequest extends  AbstractModel {
 }
 
 /**
- * GetLiveDrmLicense请求参数结构体
+ * 推流时间
  * @class
  */
-class GetLiveDrmLicenseRequest extends  AbstractModel {
+class PublishTime extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * DRMlicense信息。
-         * @type {DrmLicenseInfo || null}
+         * 推流时间
+UTC 格式，例如：2018-06-29T19:00:00Z。
+         * @type {string || null}
          */
-        this.DrmLicenseInfo = null;
+        this.PublishTime = null;
 
     }
 
@@ -2010,12 +1627,7 @@ class GetLiveDrmLicenseRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.DrmLicenseInfo) {
-            let obj = new DrmLicenseInfo();
-            obj.deserialize(params.DrmLicenseInfo)
-            this.DrmLicenseInfo = obj;
-        }
+        this.PublishTime = params.PublishTime || null;
 
     }
 }
@@ -2158,83 +1770,6 @@ UTC 格式，例如：2016-06-29T19:00:00Z。
         this.AppName = params.AppName || null;
         this.PageNum = params.PageNum || null;
         this.PageSize = params.PageSize || null;
-
-    }
-}
-
-/**
- * 拉流配置
- * @class
- */
-class PullStreamConfig extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 拉流配置Id。
-         * @type {string || null}
-         */
-        this.ConfigId = null;
-
-        /**
-         * 源Url。
-         * @type {string || null}
-         */
-        this.FromUrl = null;
-
-        /**
-         * 目的Url。
-         * @type {string || null}
-         */
-        this.ToUrl = null;
-
-        /**
-         * 区域名。
-         * @type {string || null}
-         */
-        this.AreaName = null;
-
-        /**
-         * 运营商名。
-         * @type {string || null}
-         */
-        this.IspName = null;
-
-        /**
-         * 开始时间。
-         * @type {string || null}
-         */
-        this.StartTime = null;
-
-        /**
-         * 结束时间。
-         * @type {string || null}
-         */
-        this.EndTime = null;
-
-        /**
-         * 0无效，1初始状态，2正在运行，3拉起失败，4暂停。
-         * @type {string || null}
-         */
-        this.Status = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.ConfigId = params.ConfigId || null;
-        this.FromUrl = params.FromUrl || null;
-        this.ToUrl = params.ToUrl || null;
-        this.AreaName = params.AreaName || null;
-        this.IspName = params.IspName || null;
-        this.StartTime = params.StartTime || null;
-        this.EndTime = params.EndTime || null;
-        this.Status = params.Status || null;
 
     }
 }
@@ -2416,81 +1951,6 @@ class DescribePullStreamConfigsResponse extends  AbstractModel {
 }
 
 /**
- * DrmLicense信息
- * @class
- */
-class DrmLicenseInfo extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * drm类型，widevine或fairplay
-         * @type {string || null}
-         */
-        this.DrmType = null;
-
-        /**
-         * base64编码后的License请求。
-         * @type {string || null}
-         */
-        this.LicenseReq = null;
-
-        /**
-         * 播放策略参数
-         * @type {PlaybackPolicy || null}
-         */
-        this.PlaybackPolicy = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.DrmType = params.DrmType || null;
-        this.LicenseReq = params.LicenseReq || null;
-
-        if (params.PlaybackPolicy) {
-            let obj = new PlaybackPolicy();
-            obj.deserialize(params.PlaybackPolicy)
-            this.PlaybackPolicy = obj;
-        }
-
-    }
-}
-
-/**
- * StartDrmEncryption返回参数结构体
- * @class
- */
-class StartDrmEncryptionResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RequestId = params.RequestId || null;
-
-    }
-}
-
-/**
  * 流名称列表
  * @class
  */
@@ -2546,8 +2006,7 @@ class ForbidLiveStreamRequest extends  AbstractModel {
 
         /**
          * 恢复流的时间。UTC 格式，例如：2018-11-29T19:00:00Z。
-
-UTC 时间，格式：2018-08-08T17:37:00Z。
+注意：默认禁播90天，且最长支持禁播90天。
          * @type {string || null}
          */
         this.ResumeTime = null;
@@ -2613,24 +2072,54 @@ class StreamOnlineInfo extends  AbstractModel {
 }
 
 /**
- * GetLiveDrmLicense返回参数结构体
+ * 推流信息
  * @class
  */
-class GetLiveDrmLicenseResponse extends  AbstractModel {
+class StreamInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * base64加密后的二进制License信息
+         * 直播流所属应用名称
          * @type {string || null}
          */
-        this.License = null;
+        this.AppName = null;
 
         /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * 创建模式
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.CreateMode = null;
+
+        /**
+         * 创建时间，如: 2018-07-13 14:48:23
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * 流状态
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * 流id
+         * @type {string || null}
+         */
+        this.StreamId = null;
+
+        /**
+         * 流名称
+         * @type {string || null}
+         */
+        this.StreamName = null;
+
+        /**
+         * 水印id
+         * @type {string || null}
+         */
+        this.WaterMarkId = null;
 
     }
 
@@ -2641,8 +2130,13 @@ class GetLiveDrmLicenseResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.License = params.License || null;
-        this.RequestId = params.RequestId || null;
+        this.AppName = params.AppName || null;
+        this.CreateMode = params.CreateMode || null;
+        this.CreateTime = params.CreateTime || null;
+        this.Status = params.Status || null;
+        this.StreamId = params.StreamId || null;
+        this.StreamName = params.StreamName || null;
+        this.WaterMarkId = params.WaterMarkId || null;
 
     }
 }
@@ -2662,7 +2156,7 @@ class CreatePullStreamConfigRequest extends  AbstractModel {
         this.FromUrl = null;
 
         /**
-         * 目的Url。
+         * 目的Url，目前限制该目标地址为腾讯域名。
          * @type {string || null}
          */
         this.ToUrl = null;
@@ -2817,41 +2311,6 @@ class AddLiveWatermarkRequest extends  AbstractModel {
 }
 
 /**
- * Drm加密接口入参
- * @class
- */
-class DrmOutputPara extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 内容类型。例:video
-         * @type {string || null}
-         */
-        this.Type = null;
-
-        /**
-         * 语言,例: en, zh-cn
-         * @type {string || null}
-         */
-        this.Language = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Type = params.Type || null;
-        this.Language = params.Language || null;
-
-    }
-}
-
-/**
  * DeleteLiveRecord请求参数结构体
  * @class
  */
@@ -2910,69 +2369,6 @@ class DescribeLivePushAuthKeyRequest extends  AbstractModel {
             return;
         }
         this.DomainName = params.DomainName || null;
-
-    }
-}
-
-/**
- * SetLiveWatermarkStatus返回参数结构体
- * @class
- */
-class SetLiveWatermarkStatusResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RequestId = params.RequestId || null;
-
-    }
-}
-
-/**
- * ModifyPullStreamStatus请求参数结构体
- * @class
- */
-class ModifyPullStreamStatusRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 配置id列表。
-         * @type {Array.<string> || null}
-         */
-        this.ConfigIds = null;
-
-        /**
-         * 目标状态。0无效，2正在运行，4暂停。
-         * @type {string || null}
-         */
-        this.Status = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.ConfigIds = params.ConfigIds || null;
-        this.Status = params.Status || null;
 
     }
 }
@@ -3126,20 +2522,17 @@ class DescribeLiveStreamPublishedListResponse extends  AbstractModel {
 }
 
 module.exports = {
-    GetVodDrmLicenseResponse: GetVodDrmLicenseResponse,
     DeleteLiveRecordResponse: DeleteLiveRecordResponse,
     AddDelayLiveStreamResponse: AddDelayLiveStreamResponse,
     StopLiveRecordResponse: StopLiveRecordResponse,
     ModifyPullStreamConfigRequest: ModifyPullStreamConfigRequest,
     PlayAuthKeyInfo: PlayAuthKeyInfo,
-    DescribeLiveStreamOnlineListResponse: DescribeLiveStreamOnlineListResponse,
+    PullStreamConfig: PullStreamConfig,
     CreateLiveRecordResponse: CreateLiveRecordResponse,
-    GetVodDrmLicenseRequest: GetVodDrmLicenseRequest,
     UpdateLiveWatermarkResponse: UpdateLiveWatermarkResponse,
     ModifyLivePlayAuthKeyResponse: ModifyLivePlayAuthKeyResponse,
-    DescribeDrmEncryptKeysResponse: DescribeDrmEncryptKeysResponse,
     DescribeLiveWatermarksResponse: DescribeLiveWatermarksResponse,
-    DrmSourceObject: DrmSourceObject,
+    ModifyPullStreamStatusRequest: ModifyPullStreamStatusRequest,
     CreatePullStreamConfigResponse: CreatePullStreamConfigResponse,
     ResumeDelayLiveStreamResponse: ResumeDelayLiveStreamResponse,
     ModifyPullStreamStatusResponse: ModifyPullStreamStatusResponse,
@@ -3148,54 +2541,42 @@ module.exports = {
     ForbidLiveStreamResponse: ForbidLiveStreamResponse,
     DescribeLiveStreamOnlineInfoResponse: DescribeLiveStreamOnlineInfoResponse,
     DescribeLivePlayAuthKeyRequest: DescribeLivePlayAuthKeyRequest,
-    PublishTime: PublishTime,
-    DescribeDrmEncryptKeysRequest: DescribeDrmEncryptKeysRequest,
+    DescribeLiveStreamOnlineListResponse: DescribeLiveStreamOnlineListResponse,
     ResumeDelayLiveStreamRequest: ResumeDelayLiveStreamRequest,
     ModifyLivePlayAuthKeyRequest: ModifyLivePlayAuthKeyRequest,
     SetLiveWatermarkStatusRequest: SetLiveWatermarkStatusRequest,
     DescribeLiveStreamOnlineListRequest: DescribeLiveStreamOnlineListRequest,
-    DrmGetKeyPara: DrmGetKeyPara,
     UpdateLiveWatermarkRequest: UpdateLiveWatermarkRequest,
-    StartDrmEncryptionRequest: StartDrmEncryptionRequest,
     DeleteLiveWatermarkRequest: DeleteLiveWatermarkRequest,
     CreateLiveRecordRequest: CreateLiveRecordRequest,
     DropLiveStreamResponse: DropLiveStreamResponse,
     DescribeLiveStreamStateResponse: DescribeLiveStreamStateResponse,
     StopLiveRecordRequest: StopLiveRecordRequest,
-    DrmEncryptInfo: DrmEncryptInfo,
     ModifyLivePushAuthKeyRequest: ModifyLivePushAuthKeyRequest,
-    StreamInfo: StreamInfo,
-    DrmOutputObject: DrmOutputObject,
     DescribeLiveWatermarksRequest: DescribeLiveWatermarksRequest,
-    PlaybackPolicy: PlaybackPolicy,
+    SetLiveWatermarkStatusResponse: SetLiveWatermarkStatusResponse,
     DescribeLivePlayAuthKeyResponse: DescribeLivePlayAuthKeyResponse,
     DeleteLiveWatermarkResponse: DeleteLiveWatermarkResponse,
     DescribeLivePushAuthKeyResponse: DescribeLivePushAuthKeyResponse,
     DropLiveStreamRequest: DropLiveStreamRequest,
-    GetLiveDrmLicenseRequest: GetLiveDrmLicenseRequest,
+    PublishTime: PublishTime,
     ResumeLiveStreamResponse: ResumeLiveStreamResponse,
     ResumeLiveStreamRequest: ResumeLiveStreamRequest,
     DescribeLiveStreamPublishedListRequest: DescribeLiveStreamPublishedListRequest,
-    PullStreamConfig: PullStreamConfig,
     ModifyPullStreamConfigResponse: ModifyPullStreamConfigResponse,
     ModifyLivePushAuthKeyResponse: ModifyLivePushAuthKeyResponse,
     DescribeLiveStreamStateRequest: DescribeLiveStreamStateRequest,
     AddLiveWatermarkResponse: AddLiveWatermarkResponse,
     DescribePullStreamConfigsResponse: DescribePullStreamConfigsResponse,
-    DrmLicenseInfo: DrmLicenseInfo,
-    StartDrmEncryptionResponse: StartDrmEncryptionResponse,
     StreamName: StreamName,
     ForbidLiveStreamRequest: ForbidLiveStreamRequest,
     StreamOnlineInfo: StreamOnlineInfo,
-    GetLiveDrmLicenseResponse: GetLiveDrmLicenseResponse,
+    StreamInfo: StreamInfo,
     CreatePullStreamConfigRequest: CreatePullStreamConfigRequest,
     DescribeLiveStreamOnlineInfoRequest: DescribeLiveStreamOnlineInfoRequest,
     AddLiveWatermarkRequest: AddLiveWatermarkRequest,
-    DrmOutputPara: DrmOutputPara,
     DeleteLiveRecordRequest: DeleteLiveRecordRequest,
     DescribeLivePushAuthKeyRequest: DescribeLivePushAuthKeyRequest,
-    SetLiveWatermarkStatusResponse: SetLiveWatermarkStatusResponse,
-    ModifyPullStreamStatusRequest: ModifyPullStreamStatusRequest,
     AddDelayLiveStreamRequest: AddDelayLiveStreamRequest,
     DescribePullStreamConfigsRequest: DescribePullStreamConfigsRequest,
     DescribeLiveStreamPublishedListResponse: DescribeLiveStreamPublishedListResponse,

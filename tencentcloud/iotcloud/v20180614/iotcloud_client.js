@@ -80,7 +80,7 @@ class IotcloudClient extends AbstractClient {
      */
     CreateTask(req, cb) {
         let resp = new CreateTaskResponse();
-        this.request("CreateTask", req, resp, cb);
+        this.request("CreateTask", req, resp, options, cb);
     }
 
     /**
@@ -91,7 +91,7 @@ class IotcloudClient extends AbstractClient {
      */
     DeleteProduct(req, cb) {
         let resp = new DeleteProductResponse();
-        this.request("DeleteProduct", req, resp, cb);
+        this.request("DeleteProduct", req, resp, options, cb);
     }
 
     /**
@@ -102,7 +102,7 @@ class IotcloudClient extends AbstractClient {
      */
     CreateProduct(req, cb) {
         let resp = new CreateProductResponse();
-        this.request("CreateProduct", req, resp, cb);
+        this.request("CreateProduct", req, resp, options, cb);
     }
 
     /**
@@ -113,7 +113,7 @@ class IotcloudClient extends AbstractClient {
      */
     CreateDevice(req, cb) {
         let resp = new CreateDeviceResponse();
-        this.request("CreateDevice", req, resp, cb);
+        this.request("CreateDevice", req, resp, options, cb);
     }
 
     /**
@@ -124,7 +124,7 @@ class IotcloudClient extends AbstractClient {
      */
     PublishMessage(req, cb) {
         let resp = new PublishMessageResponse();
-        this.request("PublishMessage", req, resp, cb);
+        this.request("PublishMessage", req, resp, options, cb);
     }
 
     /**
@@ -135,7 +135,7 @@ class IotcloudClient extends AbstractClient {
      */
     DescribeProducts(req, cb) {
         let resp = new DescribeProductsResponse();
-        this.request("DescribeProducts", req, resp, cb);
+        this.request("DescribeProducts", req, resp, options, cb);
     }
 
     /**
@@ -146,7 +146,7 @@ class IotcloudClient extends AbstractClient {
      */
     CancelTask(req, cb) {
         let resp = new CancelTaskResponse();
-        this.request("CancelTask", req, resp, cb);
+        this.request("CancelTask", req, resp, options, cb);
     }
 
     /**
@@ -157,7 +157,7 @@ class IotcloudClient extends AbstractClient {
      */
     UpdateDeviceShadow(req, cb) {
         let resp = new UpdateDeviceShadowResponse();
-        this.request("UpdateDeviceShadow", req, resp, cb);
+        this.request("UpdateDeviceShadow", req, resp, options, cb);
     }
 
     /**
@@ -168,7 +168,7 @@ class IotcloudClient extends AbstractClient {
      */
     DescribeMultiDevTask(req, cb) {
         let resp = new DescribeMultiDevTaskResponse();
-        this.request("DescribeMultiDevTask", req, resp, cb);
+        this.request("DescribeMultiDevTask", req, resp, options, cb);
     }
 
     /**
@@ -179,7 +179,7 @@ class IotcloudClient extends AbstractClient {
      */
     DescribeDeviceShadow(req, cb) {
         let resp = new DescribeDeviceShadowResponse();
-        this.request("DescribeDeviceShadow", req, resp, cb);
+        this.request("DescribeDeviceShadow", req, resp, options, cb);
     }
 
     /**
@@ -190,7 +190,7 @@ class IotcloudClient extends AbstractClient {
      */
     CreateMultiDevice(req, cb) {
         let resp = new CreateMultiDeviceResponse();
-        this.request("CreateMultiDevice", req, resp, cb);
+        this.request("CreateMultiDevice", req, resp, options, cb);
     }
 
     /**
@@ -201,7 +201,7 @@ class IotcloudClient extends AbstractClient {
      */
     DescribeTasks(req, cb) {
         let resp = new DescribeTasksResponse();
-        this.request("DescribeTasks", req, resp, cb);
+        this.request("DescribeTasks", req, resp, options, cb);
     }
 
     /**
@@ -212,7 +212,7 @@ class IotcloudClient extends AbstractClient {
      */
     DeleteDevice(req, cb) {
         let resp = new DeleteDeviceResponse();
-        this.request("DeleteDevice", req, resp, cb);
+        this.request("DeleteDevice", req, resp, options, cb);
     }
 
     /**
@@ -223,7 +223,7 @@ class IotcloudClient extends AbstractClient {
      */
     DescribeTask(req, cb) {
         let resp = new DescribeTaskResponse();
-        this.request("DescribeTask", req, resp, cb);
+        this.request("DescribeTask", req, resp, options, cb);
     }
 
     /**
@@ -234,7 +234,7 @@ class IotcloudClient extends AbstractClient {
      */
     DescribeMultiDevices(req, cb) {
         let resp = new DescribeMultiDevicesResponse();
-        this.request("DescribeMultiDevices", req, resp, cb);
+        this.request("DescribeMultiDevices", req, resp, options, cb);
     }
 
     /**
@@ -245,7 +245,7 @@ class IotcloudClient extends AbstractClient {
      */
     DescribeDevices(req, cb) {
         let resp = new DescribeDevicesResponse();
-        this.request("DescribeDevices", req, resp, cb);
+        this.request("DescribeDevices", req, resp, options, cb);
     }
 
 

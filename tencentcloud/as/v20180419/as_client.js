@@ -92,7 +92,7 @@ class AsClient extends AbstractClient {
      */
     RemoveInstances(req, cb) {
         let resp = new RemoveInstancesResponse();
-        this.request("RemoveInstances", req, resp, cb);
+        this.request("RemoveInstances", req, resp, options, cb);
     }
 
     /**
@@ -103,7 +103,7 @@ class AsClient extends AbstractClient {
      */
     CreateAutoScalingGroup(req, cb) {
         let resp = new CreateAutoScalingGroupResponse();
-        this.request("CreateAutoScalingGroup", req, resp, cb);
+        this.request("CreateAutoScalingGroup", req, resp, options, cb);
     }
 
     /**
@@ -114,7 +114,7 @@ class AsClient extends AbstractClient {
      */
     DeleteScheduledAction(req, cb) {
         let resp = new DeleteScheduledActionResponse();
-        this.request("DeleteScheduledAction", req, resp, cb);
+        this.request("DeleteScheduledAction", req, resp, options, cb);
     }
 
     /**
@@ -125,7 +125,7 @@ class AsClient extends AbstractClient {
      */
     DetachInstances(req, cb) {
         let resp = new DetachInstancesResponse();
-        this.request("DetachInstances", req, resp, cb);
+        this.request("DetachInstances", req, resp, options, cb);
     }
 
     /**
@@ -136,7 +136,7 @@ class AsClient extends AbstractClient {
      */
     CreateScheduledAction(req, cb) {
         let resp = new CreateScheduledActionResponse();
-        this.request("CreateScheduledAction", req, resp, cb);
+        this.request("CreateScheduledAction", req, resp, options, cb);
     }
 
     /**
@@ -147,7 +147,7 @@ class AsClient extends AbstractClient {
      */
     ModifyScheduledAction(req, cb) {
         let resp = new ModifyScheduledActionResponse();
-        this.request("ModifyScheduledAction", req, resp, cb);
+        this.request("ModifyScheduledAction", req, resp, options, cb);
     }
 
     /**
@@ -163,7 +163,7 @@ class AsClient extends AbstractClient {
      */
     CreateLaunchConfiguration(req, cb) {
         let resp = new CreateLaunchConfigurationResponse();
-        this.request("CreateLaunchConfiguration", req, resp, cb);
+        this.request("CreateLaunchConfiguration", req, resp, options, cb);
     }
 
     /**
@@ -174,7 +174,7 @@ class AsClient extends AbstractClient {
      */
     ModifyAutoScalingGroup(req, cb) {
         let resp = new ModifyAutoScalingGroupResponse();
-        this.request("ModifyAutoScalingGroup", req, resp, cb);
+        this.request("ModifyAutoScalingGroup", req, resp, options, cb);
     }
 
     /**
@@ -185,7 +185,7 @@ class AsClient extends AbstractClient {
      */
     EnableAutoScalingGroup(req, cb) {
         let resp = new EnableAutoScalingGroupResponse();
-        this.request("EnableAutoScalingGroup", req, resp, cb);
+        this.request("EnableAutoScalingGroup", req, resp, options, cb);
     }
 
     /**
@@ -199,7 +199,7 @@ class AsClient extends AbstractClient {
      */
     DescribeAutoScalingInstances(req, cb) {
         let resp = new DescribeAutoScalingInstancesResponse();
-        this.request("DescribeAutoScalingInstances", req, resp, cb);
+        this.request("DescribeAutoScalingInstances", req, resp, options, cb);
     }
 
     /**
@@ -213,7 +213,7 @@ class AsClient extends AbstractClient {
      */
     DescribeAutoScalingGroups(req, cb) {
         let resp = new DescribeAutoScalingGroupsResponse();
-        this.request("DescribeAutoScalingGroups", req, resp, cb);
+        this.request("DescribeAutoScalingGroups", req, resp, options, cb);
     }
 
     /**
@@ -227,7 +227,7 @@ class AsClient extends AbstractClient {
      */
     DescribeScheduledActions(req, cb) {
         let resp = new DescribeScheduledActionsResponse();
-        this.request("DescribeScheduledActions", req, resp, cb);
+        this.request("DescribeScheduledActions", req, resp, options, cb);
     }
 
     /**
@@ -238,7 +238,7 @@ class AsClient extends AbstractClient {
      */
     DeleteAutoScalingGroup(req, cb) {
         let resp = new DeleteAutoScalingGroupResponse();
-        this.request("DeleteAutoScalingGroup", req, resp, cb);
+        this.request("DeleteAutoScalingGroup", req, resp, options, cb);
     }
 
     /**
@@ -252,7 +252,7 @@ class AsClient extends AbstractClient {
      */
     DeleteLaunchConfiguration(req, cb) {
         let resp = new DeleteLaunchConfigurationResponse();
-        this.request("DeleteLaunchConfiguration", req, resp, cb);
+        this.request("DeleteLaunchConfiguration", req, resp, options, cb);
     }
 
     /**
@@ -263,7 +263,7 @@ class AsClient extends AbstractClient {
      */
     DisableAutoScalingGroup(req, cb) {
         let resp = new DisableAutoScalingGroupResponse();
-        this.request("DisableAutoScalingGroup", req, resp, cb);
+        this.request("DisableAutoScalingGroup", req, resp, options, cb);
     }
 
     /**
@@ -277,7 +277,7 @@ class AsClient extends AbstractClient {
      */
     DescribeLaunchConfigurations(req, cb) {
         let resp = new DescribeLaunchConfigurationsResponse();
-        this.request("DescribeLaunchConfigurations", req, resp, cb);
+        this.request("DescribeLaunchConfigurations", req, resp, options, cb);
     }
 
     /**
@@ -288,7 +288,7 @@ class AsClient extends AbstractClient {
      */
     DescribeAccountLimits(req, cb) {
         let resp = new DescribeAccountLimitsResponse();
-        this.request("DescribeAccountLimits", req, resp, cb);
+        this.request("DescribeAccountLimits", req, resp, options, cb);
     }
 
     /**
@@ -300,7 +300,7 @@ class AsClient extends AbstractClient {
      */
     AttachInstances(req, cb) {
         let resp = new AttachInstancesResponse();
-        this.request("AttachInstances", req, resp, cb);
+        this.request("AttachInstances", req, resp, options, cb);
     }
 
     /**
@@ -311,7 +311,7 @@ class AsClient extends AbstractClient {
      */
     ModifyDesiredCapacity(req, cb) {
         let resp = new ModifyDesiredCapacityResponse();
-        this.request("ModifyDesiredCapacity", req, resp, cb);
+        this.request("ModifyDesiredCapacity", req, resp, options, cb);
     }
 
 

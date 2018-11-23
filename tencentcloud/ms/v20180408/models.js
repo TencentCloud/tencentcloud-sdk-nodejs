@@ -217,7 +217,7 @@ class CreateShieldPlanInstanceResponse extends  AbstractModel {
         this.Progress = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -343,7 +343,7 @@ class DescribeShieldInstancesResponse extends  AbstractModel {
         this.AppSet = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -488,6 +488,41 @@ class CreateShieldInstanceRequest extends  AbstractModel {
 }
 
 /**
+ * CreateCosSecKeyInstance请求参数结构体
+ * @class
+ */
+class CreateCosSecKeyInstanceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 地域信息，例如广州：ap-guangzhou，上海：ap-shanghai，默认为广州。
+         * @type {string || null}
+         */
+        this.CosRegion = null;
+
+        /**
+         * 密钥有效时间，默认为1小时。
+         * @type {number || null}
+         */
+        this.Duration = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CosRegion = params.CosRegion || null;
+        this.Duration = params.Duration || null;
+
+    }
+}
+
+/**
  * DescribeScanResults返回参数结构体
  * @class
  */
@@ -508,7 +543,7 @@ class DescribeScanResultsResponse extends  AbstractModel {
         this.TotalCount = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -538,30 +573,24 @@ class DescribeScanResultsResponse extends  AbstractModel {
 }
 
 /**
- * 病毒信息
+ * CreateScanInstances请求参数结构体
  * @class
  */
-class VirusInfo extends  AbstractModel {
+class CreateScanInstancesRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 软件安全类型，分别为0-未知、 1-安全软件、2-风险软件、3-病毒软件
-         * @type {number || null}
+         * 待扫描的app信息列表，一次最多提交20个
+         * @type {Array.<AppInfo> || null}
          */
-        this.SafeType = null;
+        this.AppInfos = null;
 
         /**
-         * 病毒名称， utf8编码，非病毒时值为空
-         * @type {string || null}
+         * 扫描信息
+         * @type {ScanInfo || null}
          */
-        this.VirusName = null;
-
-        /**
-         * 病毒描述，utf8编码，非病毒时值为空
-         * @type {string || null}
-         */
-        this.VirusDesc = null;
+        this.ScanInfo = null;
 
     }
 
@@ -572,9 +601,21 @@ class VirusInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.SafeType = params.SafeType || null;
-        this.VirusName = params.VirusName || null;
-        this.VirusDesc = params.VirusDesc || null;
+
+        if (params.AppInfos) {
+            this.AppInfos = new Array();
+            for (let z in params.AppInfos) {
+                let obj = new AppInfo();
+                obj.deserialize(params.AppInfos[z]);
+                this.AppInfos.push(obj);
+            }
+        }
+
+        if (params.ScanInfo) {
+            let obj = new ScanInfo();
+            obj.deserialize(params.ScanInfo)
+            this.ScanInfo = obj;
+        }
 
     }
 }
@@ -670,6 +711,24 @@ class ScanSetInfo extends  AbstractModel {
          */
         this.TaskTime = null;
 
+        /**
+         * 状态码，成功返回0，失败返回错误码
+         * @type {number || null}
+         */
+        this.StatusCode = null;
+
+        /**
+         * 状态描述
+         * @type {string || null}
+         */
+        this.StatusDesc = null;
+
+        /**
+         * 状态操作指引
+         * @type {string || null}
+         */
+        this.StatusRef = null;
+
     }
 
     /**
@@ -705,6 +764,9 @@ class ScanSetInfo extends  AbstractModel {
             this.AdInfo = obj;
         }
         this.TaskTime = params.TaskTime || null;
+        this.StatusCode = params.StatusCode || null;
+        this.StatusDesc = params.StatusDesc || null;
+        this.StatusRef = params.StatusRef || null;
 
     }
 }
@@ -934,7 +996,7 @@ class CreateShieldInstanceResponse extends  AbstractModel {
         this.ItemId = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -1168,7 +1230,7 @@ class CreateScanInstancesResponse extends  AbstractModel {
         this.LimitTime = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -1213,7 +1275,7 @@ class DescribeScanInstancesResponse extends  AbstractModel {
         this.ScanSet = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -1300,7 +1362,7 @@ class AppInfo extends  AbstractModel {
         this.AppUrl = null;
 
         /**
-         * app的md5
+         * app的md5，需要正确传递
          * @type {string || null}
          */
         this.AppMd5 = null;
@@ -1318,7 +1380,7 @@ class AppInfo extends  AbstractModel {
         this.FileName = null;
 
         /**
-         * app的包名
+         * app的包名，如果是专业版加固和企业版本加固，需要正确的传递此字段
          * @type {string || null}
          */
         this.AppPkgName = null;
@@ -1371,19 +1433,19 @@ class ServiceInfo extends  AbstractModel {
         super();
 
         /**
-         * 服务版本，基础版basic，专业版professional，企业版enterprise
+         * 服务版本，基础版basic，专业版professional，企业版enterprise。
          * @type {string || null}
          */
         this.ServiceEdition = null;
 
         /**
-         * 任务处理完成后的反向通知回调地址,通知为POST请求，post包体数据示例{"Response":{"ItemId":"4cdad8fb86f036b06bccb3f58971c306","ShieldCode":0,"ShieldMd5":"78701576793c4a5f04e1c9660de0aa0b","ShieldSize":11997354,"TaskStatus":1,"TaskTime":1539148141}}，调用方需要返回如下信息，{"Result":"ok","Reason":"xxxxx"}，如果Result字段值不等于ok会继续回调。
+         * 任务处理完成后的反向通知回调地址，如果不需要通知请传递空字符串。通知为POST请求，post包体数据示例{"Response":{"ItemId":"4cdad8fb86f036b06bccb3f58971c306","ShieldCode":0,"ShieldMd5":"78701576793c4a5f04e1c9660de0aa0b","ShieldSize":11997354,"TaskStatus":1,"TaskTime":1539148141}}，调用方需要返回如下信息，{"Result":"ok","Reason":"xxxxx"}，如果Result字段值不等于ok会继续回调。
          * @type {string || null}
          */
         this.CallbackUrl = null;
 
         /**
-         * 提交来源 YYB-应用宝 RDM-rdm MC-控制台 MAC_TOOL-mac工具 WIN_TOOL-window工具
+         * 提交来源 YYB-应用宝 RDM-rdm MC-控制台 MAC_TOOL-mac工具 WIN_TOOL-window工具。
          * @type {string || null}
          */
         this.SubmitSource = null;
@@ -1466,7 +1528,7 @@ class DescribeShieldPlanInstanceResponse extends  AbstractModel {
         this.ResourceServiceInfo = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -1847,7 +1909,7 @@ class CreateResourceInstancesResponse extends  AbstractModel {
         this.ResourceSet = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -1952,7 +2014,7 @@ class DeleteScanInstancesResponse extends  AbstractModel {
         this.Progress = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -2022,7 +2084,7 @@ class DeleteShieldInstancesResponse extends  AbstractModel {
         this.Progress = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -2134,7 +2196,7 @@ class DescribeResourceInstancesResponse extends  AbstractModel {
         this.ResourceSet = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -2199,24 +2261,66 @@ class DescribeScanResultsRequest extends  AbstractModel {
 }
 
 /**
- * CreateScanInstances请求参数结构体
+ * CreateCosSecKeyInstance返回参数结构体
  * @class
  */
-class CreateScanInstancesRequest extends  AbstractModel {
+class CreateCosSecKeyInstanceResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 待扫描的app信息列表，一次最多提交20个
-         * @type {Array.<AppInfo> || null}
+         * COS密钥对应的AppId
+         * @type {number || null}
          */
-        this.AppInfos = null;
+        this.CosAppid = null;
 
         /**
-         * 扫描信息
-         * @type {ScanInfo || null}
+         * COS密钥对应的存储桶名
+         * @type {string || null}
          */
-        this.ScanInfo = null;
+        this.CosBucket = null;
+
+        /**
+         * 存储桶对应的地域
+         * @type {string || null}
+         */
+        this.CosRegion = null;
+
+        /**
+         * 密钥过期时间
+         * @type {number || null}
+         */
+        this.ExpireTime = null;
+
+        /**
+         * 密钥ID信息
+         * @type {string || null}
+         */
+        this.CosId = null;
+
+        /**
+         * 密钥KEY信息
+         * @type {string || null}
+         */
+        this.CosKey = null;
+
+        /**
+         * 密钥TOCKEN信息
+         * @type {string || null}
+         */
+        this.CosTocken = null;
+
+        /**
+         * 密钥可访问的文件前缀人。例如：CosPrefix=test/123/666，则该密钥只能操作test/123/666为前缀的文件，例如test/123/666/1.txt
+         * @type {string || null}
+         */
+        this.CosPrefix = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
 
     }
 
@@ -2227,21 +2331,57 @@ class CreateScanInstancesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.CosAppid = params.CosAppid || null;
+        this.CosBucket = params.CosBucket || null;
+        this.CosRegion = params.CosRegion || null;
+        this.ExpireTime = params.ExpireTime || null;
+        this.CosId = params.CosId || null;
+        this.CosKey = params.CosKey || null;
+        this.CosTocken = params.CosTocken || null;
+        this.CosPrefix = params.CosPrefix || null;
+        this.RequestId = params.RequestId || null;
 
-        if (params.AppInfos) {
-            this.AppInfos = new Array();
-            for (let z in params.AppInfos) {
-                let obj = new AppInfo();
-                obj.deserialize(params.AppInfos[z]);
-                this.AppInfos.push(obj);
-            }
-        }
+    }
+}
 
-        if (params.ScanInfo) {
-            let obj = new ScanInfo();
-            obj.deserialize(params.ScanInfo)
-            this.ScanInfo = obj;
+/**
+ * 病毒信息
+ * @class
+ */
+class VirusInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 软件安全类型，分别为0-未知、 1-安全软件、2-风险软件、3-病毒软件
+         * @type {number || null}
+         */
+        this.SafeType = null;
+
+        /**
+         * 病毒名称， utf8编码，非病毒时值为空
+         * @type {string || null}
+         */
+        this.VirusName = null;
+
+        /**
+         * 病毒描述，utf8编码，非病毒时值为空
+         * @type {string || null}
+         */
+        this.VirusDesc = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
         }
+        this.SafeType = params.SafeType || null;
+        this.VirusName = params.VirusName || null;
+        this.VirusDesc = params.VirusDesc || null;
 
     }
 }
@@ -2411,7 +2551,19 @@ class DescribeShieldResultResponse extends  AbstractModel {
         this.ShieldInfo = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 状态描述
+         * @type {string || null}
+         */
+        this.StatusDesc = null;
+
+        /**
+         * 状态指引
+         * @type {string || null}
+         */
+        this.StatusRef = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -2438,6 +2590,8 @@ class DescribeShieldResultResponse extends  AbstractModel {
             obj.deserialize(params.ShieldInfo)
             this.ShieldInfo = obj;
         }
+        this.StatusDesc = params.StatusDesc || null;
+        this.StatusRef = params.StatusRef || null;
         this.RequestId = params.RequestId || null;
 
     }
@@ -2458,7 +2612,7 @@ class CreateBindInstanceResponse extends  AbstractModel {
         this.Progress = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -2635,8 +2789,9 @@ module.exports = {
     PluginInfo: PluginInfo,
     DescribeShieldResultRequest: DescribeShieldResultRequest,
     CreateShieldInstanceRequest: CreateShieldInstanceRequest,
+    CreateCosSecKeyInstanceRequest: CreateCosSecKeyInstanceRequest,
     DescribeScanResultsResponse: DescribeScanResultsResponse,
-    VirusInfo: VirusInfo,
+    CreateScanInstancesRequest: CreateScanInstancesRequest,
     CreateShieldPlanInstanceRequest: CreateShieldPlanInstanceRequest,
     ScanSetInfo: ScanSetInfo,
     AppScanSet: AppScanSet,
@@ -2666,7 +2821,8 @@ module.exports = {
     DescribeScanInstancesRequest: DescribeScanInstancesRequest,
     DescribeResourceInstancesResponse: DescribeResourceInstancesResponse,
     DescribeScanResultsRequest: DescribeScanResultsRequest,
-    CreateScanInstancesRequest: CreateScanInstancesRequest,
+    CreateCosSecKeyInstanceResponse: CreateCosSecKeyInstanceResponse,
+    VirusInfo: VirusInfo,
     PlanInfo: PlanInfo,
     DescribeShieldResultResponse: DescribeShieldResultResponse,
     CreateBindInstanceResponse: CreateBindInstanceResponse,
