@@ -137,7 +137,7 @@ class BatchClient extends AbstractClient {
      */
     DescribeComputeEnv(req, cb) {
         let resp = new DescribeComputeEnvResponse();
-        this.request("DescribeComputeEnv", req, resp, cb);
+        this.request("DescribeComputeEnv", req, resp, options, cb);
     }
 
     /**
@@ -148,7 +148,7 @@ class BatchClient extends AbstractClient {
      */
     CreateTaskTemplate(req, cb) {
         let resp = new CreateTaskTemplateResponse();
-        this.request("CreateTaskTemplate", req, resp, cb);
+        this.request("CreateTaskTemplate", req, resp, options, cb);
     }
 
     /**
@@ -160,7 +160,7 @@ class BatchClient extends AbstractClient {
      */
     TerminateComputeNode(req, cb) {
         let resp = new TerminateComputeNodeResponse();
-        this.request("TerminateComputeNode", req, resp, cb);
+        this.request("TerminateComputeNode", req, resp, options, cb);
     }
 
     /**
@@ -171,7 +171,7 @@ class BatchClient extends AbstractClient {
      */
     DescribeJobs(req, cb) {
         let resp = new DescribeJobsResponse();
-        this.request("DescribeJobs", req, resp, cb);
+        this.request("DescribeJobs", req, resp, options, cb);
     }
 
     /**
@@ -182,7 +182,7 @@ class BatchClient extends AbstractClient {
      */
     DescribeAvailableCvmInstanceTypes(req, cb) {
         let resp = new DescribeAvailableCvmInstanceTypesResponse();
-        this.request("DescribeAvailableCvmInstanceTypes", req, resp, cb);
+        this.request("DescribeAvailableCvmInstanceTypes", req, resp, options, cb);
     }
 
     /**
@@ -193,7 +193,7 @@ class BatchClient extends AbstractClient {
      */
     CreateComputeEnv(req, cb) {
         let resp = new CreateComputeEnvResponse();
-        this.request("CreateComputeEnv", req, resp, cb);
+        this.request("CreateComputeEnv", req, resp, options, cb);
     }
 
     /**
@@ -204,7 +204,7 @@ class BatchClient extends AbstractClient {
      */
     DeleteComputeEnv(req, cb) {
         let resp = new DeleteComputeEnvResponse();
-        this.request("DeleteComputeEnv", req, resp, cb);
+        this.request("DeleteComputeEnv", req, resp, options, cb);
     }
 
     /**
@@ -215,19 +215,20 @@ class BatchClient extends AbstractClient {
      */
     DescribeTaskLogs(req, cb) {
         let resp = new DescribeTaskLogsResponse();
-        this.request("DescribeTaskLogs", req, resp, cb);
+        this.request("DescribeTaskLogs", req, resp, options, cb);
     }
 
     /**
      * 用于终止作业。
-终止作业的效果相当于所含的所有任务实例进行TerminateTaskInstance操作。具体效果和用法可参考TerminateTaskInstance。
+当作业处于“SUBMITTED”状态时，禁止终止操作；当作业处于“SUCCEED”状态时，终止操作不会生效。
+终止作业是一个异步过程。整个终止过程的耗时和任务总数成正比。终止的效果相当于所含的所有任务实例进行TerminateTaskInstance操作。具体效果和用法可参考TerminateTaskInstance。
      * @param {TerminateJobRequest} req
      * @param {function(string, TerminateJobResponse):void} cb
      * @public
      */
     TerminateJob(req, cb) {
         let resp = new TerminateJobResponse();
-        this.request("TerminateJob", req, resp, cb);
+        this.request("TerminateJob", req, resp, options, cb);
     }
 
     /**
@@ -238,7 +239,7 @@ class BatchClient extends AbstractClient {
      */
     DescribeTask(req, cb) {
         let resp = new DescribeTaskResponse();
-        this.request("DescribeTask", req, resp, cb);
+        this.request("DescribeTask", req, resp, options, cb);
     }
 
     /**
@@ -249,7 +250,7 @@ class BatchClient extends AbstractClient {
      */
     DescribeCvmZoneInstanceConfigInfos(req, cb) {
         let resp = new DescribeCvmZoneInstanceConfigInfosResponse();
-        this.request("DescribeCvmZoneInstanceConfigInfos", req, resp, cb);
+        this.request("DescribeCvmZoneInstanceConfigInfos", req, resp, options, cb);
     }
 
     /**
@@ -260,7 +261,7 @@ class BatchClient extends AbstractClient {
      */
     DescribeJob(req, cb) {
         let resp = new DescribeJobResponse();
-        this.request("DescribeJob", req, resp, cb);
+        this.request("DescribeJob", req, resp, options, cb);
     }
 
     /**
@@ -271,7 +272,7 @@ class BatchClient extends AbstractClient {
      */
     SubmitJob(req, cb) {
         let resp = new SubmitJobResponse();
-        this.request("SubmitJob", req, resp, cb);
+        this.request("SubmitJob", req, resp, options, cb);
     }
 
     /**
@@ -282,7 +283,7 @@ class BatchClient extends AbstractClient {
      */
     TerminateComputeNodes(req, cb) {
         let resp = new TerminateComputeNodesResponse();
-        this.request("TerminateComputeNodes", req, resp, cb);
+        this.request("TerminateComputeNodes", req, resp, options, cb);
     }
 
     /**
@@ -293,7 +294,7 @@ class BatchClient extends AbstractClient {
      */
     DescribeTaskTemplates(req, cb) {
         let resp = new DescribeTaskTemplatesResponse();
-        this.request("DescribeTaskTemplates", req, resp, cb);
+        this.request("DescribeTaskTemplates", req, resp, options, cb);
     }
 
     /**
@@ -304,23 +305,22 @@ class BatchClient extends AbstractClient {
      */
     DeleteTaskTemplates(req, cb) {
         let resp = new DeleteTaskTemplatesResponse();
-        this.request("DeleteTaskTemplates", req, resp, cb);
+        this.request("DeleteTaskTemplates", req, resp, options, cb);
     }
 
     /**
-     * 用于终止任务实例
-对于状态已经为SUCCEED、FAILED的TaskInstance，batch不做处理。
-对于状态为SUBMITTED、PENDING、RUNNABLE的TaskInstance，batch会将其置为FAILED状态。
-对于状态为STARTING、RUNNING、FAILED_INTERRUPTED的TaskInstance，batch会先终止CVM，然后将状态置为FAILED，因此具有一定耗时。特别是如果CVM正在创建中，此时无法立即销毁CVM，Batch会在旁路注册一个定时销毁操作，在CVM创建好之后异步销毁。
-对于状态为FAILED_INTERRUPTED的TaskInstance，TerminateTaskInstance操作实际成功之后，相关资源和配额才会释放。
-本接口只支持提交到匿名计算环境的作业（SubmitJob指定ComputeEnv，不指定EnvId）。对于提交到具名计算环境的作业（SubmitJob指定EnvId，不指定ComputeEnv），不支持TerminateTaskInstance和TerminateJob操作。
+     * 用于终止任务实例。
+对于状态已经为“SUCCEED”和“FAILED”的任务实例，不做处理。
+对于状态为“SUBMITTED”、“PENDING”、“RUNNABLE”的任务实例，状态将置为“FAILED”状态。
+对于状态为“STARTING”、“RUNNING”、“FAILED_INTERRUPTED”的任务实例，分区两种情况：如果未显示指定计算环境，会先销毁CVM服务器，然后将状态置为“FAILED”，具有一定耗时；如果指定了计算环境EnvId，任务实例状态置为“FAILED”，并重启执行该任务的CVM服务器，具有一定的耗时。
+对于状态为“FAILED_INTERRUPTED”的任务实例，终止操作实际成功之后，相关资源和配额才会释放。
      * @param {TerminateTaskInstanceRequest} req
      * @param {function(string, TerminateTaskInstanceResponse):void} cb
      * @public
      */
     TerminateTaskInstance(req, cb) {
         let resp = new TerminateTaskInstanceResponse();
-        this.request("TerminateTaskInstance", req, resp, cb);
+        this.request("TerminateTaskInstance", req, resp, options, cb);
     }
 
     /**
@@ -331,7 +331,7 @@ class BatchClient extends AbstractClient {
      */
     ModifyComputeEnv(req, cb) {
         let resp = new ModifyComputeEnvResponse();
-        this.request("ModifyComputeEnv", req, resp, cb);
+        this.request("ModifyComputeEnv", req, resp, options, cb);
     }
 
     /**
@@ -342,7 +342,7 @@ class BatchClient extends AbstractClient {
      */
     DescribeJobSubmitInfo(req, cb) {
         let resp = new DescribeJobSubmitInfoResponse();
-        this.request("DescribeJobSubmitInfo", req, resp, cb);
+        this.request("DescribeJobSubmitInfo", req, resp, options, cb);
     }
 
     /**
@@ -353,7 +353,7 @@ class BatchClient extends AbstractClient {
      */
     DescribeComputeEnvCreateInfo(req, cb) {
         let resp = new DescribeComputeEnvCreateInfoResponse();
-        this.request("DescribeComputeEnvCreateInfo", req, resp, cb);
+        this.request("DescribeComputeEnvCreateInfo", req, resp, options, cb);
     }
 
     /**
@@ -364,7 +364,7 @@ class BatchClient extends AbstractClient {
      */
     DescribeComputeEnvActivities(req, cb) {
         let resp = new DescribeComputeEnvActivitiesResponse();
-        this.request("DescribeComputeEnvActivities", req, resp, cb);
+        this.request("DescribeComputeEnvActivities", req, resp, options, cb);
     }
 
     /**
@@ -375,7 +375,7 @@ class BatchClient extends AbstractClient {
      */
     DescribeComputeEnvCreateInfos(req, cb) {
         let resp = new DescribeComputeEnvCreateInfosResponse();
-        this.request("DescribeComputeEnvCreateInfos", req, resp, cb);
+        this.request("DescribeComputeEnvCreateInfos", req, resp, options, cb);
     }
 
     /**
@@ -388,7 +388,7 @@ class BatchClient extends AbstractClient {
      */
     DeleteJob(req, cb) {
         let resp = new DeleteJobResponse();
-        this.request("DeleteJob", req, resp, cb);
+        this.request("DeleteJob", req, resp, options, cb);
     }
 
     /**
@@ -399,7 +399,7 @@ class BatchClient extends AbstractClient {
      */
     DescribeComputeEnvs(req, cb) {
         let resp = new DescribeComputeEnvsResponse();
-        this.request("DescribeComputeEnvs", req, resp, cb);
+        this.request("DescribeComputeEnvs", req, resp, options, cb);
     }
 
     /**
@@ -410,7 +410,7 @@ class BatchClient extends AbstractClient {
      */
     ModifyTaskTemplate(req, cb) {
         let resp = new ModifyTaskTemplateResponse();
-        this.request("ModifyTaskTemplate", req, resp, cb);
+        this.request("ModifyTaskTemplate", req, resp, options, cb);
     }
 
 

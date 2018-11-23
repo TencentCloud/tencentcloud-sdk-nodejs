@@ -742,7 +742,7 @@ class RunInstancesRequest extends  AbstractModel {
         super();
 
         /**
-         * 实例所在的位置。通过该参数可以指定实例所属可用区，所属项目，专用宿主机（对于独享母机付费模式的实例创建）等属性。
+         * 实例所在的位置。通过该参数可以指定实例所属可用区，所属项目，所属宿主机（在专用宿主机上创建子机时指定）等属性。
          * @type {Placement || null}
          */
         this.Placement = null;
@@ -754,7 +754,7 @@ class RunInstancesRequest extends  AbstractModel {
         this.ImageId = null;
 
         /**
-         * 实例[计费类型](https://cloud.tencent.com/document/product/213/2180)。<br><li>PREPAID：预付费，即包年包月<br><li>POSTPAID_BY_HOUR：按小时后付费<br><li>CDHPAID：独享母机付费（基于专用宿主机创建，宿主机部分的资源不收费）<br><li>SPOTPAID：竞价付费<br>默认值：POSTPAID_BY_HOUR。
+         * 实例[计费类型](https://cloud.tencent.com/document/product/213/2180)。<br><li>PREPAID：预付费，即包年包月<br><li>POSTPAID_BY_HOUR：按小时后付费<br><li>CDHPAID：独享子机（基于专用宿主机创建，宿主机部分的资源不收费）<br><li>SPOTPAID：竞价付费<br>默认值：POSTPAID_BY_HOUR。
          * @type {string || null}
          */
         this.InstanceChargeType = null;
@@ -797,7 +797,7 @@ class RunInstancesRequest extends  AbstractModel {
         this.InternetAccessible = null;
 
         /**
-         * 购买实例数量。取值范围：[1，100]。默认取值：1。指定购买实例的数量不能超过用户所能购买的剩余配额数量，具体配额相关限制详见[CVM实例购买限制](https://cloud.tencent.com/document/product/213/2664)。
+         * 购买实例数量。包年包月实例取值范围：[1，300]，按量计费实例取值范围：[1，100]。默认取值：1。指定购买实例的数量不能超过用户所能购买的剩余配额数量，具体配额相关限制详见[CVM实例购买限制](https://cloud.tencent.com/document/product/213/2664)。
          * @type {number || null}
          */
         this.InstanceCount = null;
@@ -815,7 +815,7 @@ class RunInstancesRequest extends  AbstractModel {
         this.LoginSettings = null;
 
         /**
-         * 实例所属安全组。该参数可以通过调用 [DescribeSecurityGroups](https://cloud.tencent.com/document/api/215/15808) 的返回值中的sgId字段来获取。若不指定该参数，则默认不绑定安全组。
+         * 实例所属安全组。该参数可以通过调用 [DescribeSecurityGroups](https://cloud.tencent.com/document/api/215/15808) 的返回值中的sgId字段来获取。若不指定该参数，则绑定默认安全组。
          * @type {Array.<string> || null}
          */
         this.SecurityGroupIds = null;
@@ -1276,18 +1276,6 @@ class InstanceTypeConfig extends  AbstractModel {
          */
         this.Memory = null;
 
-        /**
-         * 是否支持云硬盘。取值范围：<br><li>`TRUE`：表示支持云硬盘；<br><li>`FALSE`：表示不支持云硬盘。
-         * @type {string || null}
-         */
-        this.CbsSupport = null;
-
-        /**
-         * 机型状态。取值范围：<br><li>`AVAILABLE`：表示机型可用；<br><li>`UNAVAILABLE`：表示机型不可用。
-         * @type {string || null}
-         */
-        this.InstanceTypeState = null;
-
     }
 
     /**
@@ -1303,8 +1291,6 @@ class InstanceTypeConfig extends  AbstractModel {
         this.GPU = params.GPU || null;
         this.CPU = params.CPU || null;
         this.Memory = params.Memory || null;
-        this.CbsSupport = params.CbsSupport || null;
-        this.InstanceTypeState = params.InstanceTypeState || null;
 
     }
 }
@@ -3758,6 +3744,12 @@ class CreateImageRequest extends  AbstractModel {
          */
         this.Reboot = null;
 
+        /**
+         * DryRun
+         * @type {boolean || null}
+         */
+        this.DryRun = null;
+
     }
 
     /**
@@ -3773,6 +3765,7 @@ class CreateImageRequest extends  AbstractModel {
         this.ForcePoweroff = params.ForcePoweroff || null;
         this.Sysprep = params.Sysprep || null;
         this.Reboot = params.Reboot || null;
+        this.DryRun = params.DryRun || null;
 
     }
 }
@@ -6635,13 +6628,13 @@ class VirtualPrivateCloud extends  AbstractModel {
         super();
 
         /**
-         * 私有网络ID，形如`vpc-xxx`。有效的VpcId可通过登录[控制台](https://console.cloud.tencent.com/vpc/vpc?rid=1)查询；也可以调用接口 [DescribeVpcEx](/document/api/215/1372) ，从接口返回中的`unVpcId`字段获取。
+         * 私有网络ID，形如`vpc-xxx`。有效的VpcId可通过登录[控制台](https://console.cloud.tencent.com/vpc/vpc?rid=1)查询；也可以调用接口 [DescribeVpcEx](/document/api/215/1372) ，从接口返回中的`unVpcId`字段获取。若在创建子机时VpcId与SubnetId同时传入`DEFAULT`，则强制使用默认vpc网络。
          * @type {string || null}
          */
         this.VpcId = null;
 
         /**
-         * 私有网络子网ID，形如`subnet-xxx`。有效的私有网络子网ID可通过登录[控制台](https://console.cloud.tencent.com/vpc/subnet?rid=1)查询；也可以调用接口  [DescribeSubnets](/document/api/215/15784) ，从接口返回中的`unSubnetId`字段获取。
+         * 私有网络子网ID，形如`subnet-xxx`。有效的私有网络子网ID可通过登录[控制台](https://console.cloud.tencent.com/vpc/subnet?rid=1)查询；也可以调用接口  [DescribeSubnets](/document/api/215/15784) ，从接口返回中的`unSubnetId`字段获取。若在创建子机时SubnetId与VpcId同时传入`DEFAULT`，则强制使用默认vpc网络。
          * @type {string || null}
          */
         this.SubnetId = null;

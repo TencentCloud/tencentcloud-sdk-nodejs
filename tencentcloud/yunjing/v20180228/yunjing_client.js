@@ -163,7 +163,7 @@ class YunjingClient extends AbstractClient {
      */
     DescribeVulScanResult(req, cb) {
         let resp = new DescribeVulScanResultResponse();
-        this.request("DescribeVulScanResult", req, resp, cb);
+        this.request("DescribeVulScanResult", req, resp, options, cb);
     }
 
     /**
@@ -174,7 +174,7 @@ class YunjingClient extends AbstractClient {
      */
     TrustMalwares(req, cb) {
         let resp = new TrustMalwaresResponse();
-        this.request("TrustMalwares", req, resp, cb);
+        this.request("TrustMalwares", req, resp, options, cb);
     }
 
     /**
@@ -185,7 +185,7 @@ class YunjingClient extends AbstractClient {
      */
     RecoverMalwares(req, cb) {
         let resp = new RecoverMalwaresResponse();
-        this.request("RecoverMalwares", req, resp, cb);
+        this.request("RecoverMalwares", req, resp, options, cb);
     }
 
     /**
@@ -196,7 +196,7 @@ class YunjingClient extends AbstractClient {
      */
     DescribeComponentStatistics(req, cb) {
         let resp = new DescribeComponentStatisticsResponse();
-        this.request("DescribeComponentStatistics", req, resp, cb);
+        this.request("DescribeComponentStatistics", req, resp, options, cb);
     }
 
     /**
@@ -207,7 +207,7 @@ class YunjingClient extends AbstractClient {
      */
     DescribeHistoryAccounts(req, cb) {
         let resp = new DescribeHistoryAccountsResponse();
-        this.request("DescribeHistoryAccounts", req, resp, cb);
+        this.request("DescribeHistoryAccounts", req, resp, options, cb);
     }
 
     /**
@@ -218,7 +218,7 @@ class YunjingClient extends AbstractClient {
      */
     DeleteMalwares(req, cb) {
         let resp = new DeleteMalwaresResponse();
-        this.request("DeleteMalwares", req, resp, cb);
+        this.request("DeleteMalwares", req, resp, options, cb);
     }
 
     /**
@@ -229,7 +229,7 @@ class YunjingClient extends AbstractClient {
      */
     DescribeWeeklyReportBruteAttacks(req, cb) {
         let resp = new DescribeWeeklyReportBruteAttacksResponse();
-        this.request("DescribeWeeklyReportBruteAttacks", req, resp, cb);
+        this.request("DescribeWeeklyReportBruteAttacks", req, resp, options, cb);
     }
 
     /**
@@ -240,7 +240,7 @@ class YunjingClient extends AbstractClient {
      */
     DescribeBruteAttacks(req, cb) {
         let resp = new DescribeBruteAttacksResponse();
-        this.request("DescribeBruteAttacks", req, resp, cb);
+        this.request("DescribeBruteAttacks", req, resp, options, cb);
     }
 
     /**
@@ -252,7 +252,7 @@ class YunjingClient extends AbstractClient {
      */
     DescribeWeeklyReportVuls(req, cb) {
         let resp = new DescribeWeeklyReportVulsResponse();
-        this.request("DescribeWeeklyReportVuls", req, resp, cb);
+        this.request("DescribeWeeklyReportVuls", req, resp, options, cb);
     }
 
     /**
@@ -263,7 +263,7 @@ class YunjingClient extends AbstractClient {
      */
     UntrustMalwares(req, cb) {
         let resp = new UntrustMalwaresResponse();
-        this.request("UntrustMalwares", req, resp, cb);
+        this.request("UntrustMalwares", req, resp, options, cb);
     }
 
     /**
@@ -274,7 +274,7 @@ class YunjingClient extends AbstractClient {
      */
     DescribeWeeklyReportMalwares(req, cb) {
         let resp = new DescribeWeeklyReportMalwaresResponse();
-        this.request("DescribeWeeklyReportMalwares", req, resp, cb);
+        this.request("DescribeWeeklyReportMalwares", req, resp, options, cb);
     }
 
     /**
@@ -285,7 +285,7 @@ class YunjingClient extends AbstractClient {
      */
     DescribeComponentInfo(req, cb) {
         let resp = new DescribeComponentInfoResponse();
-        this.request("DescribeComponentInfo", req, resp, cb);
+        this.request("DescribeComponentInfo", req, resp, options, cb);
     }
 
     /**
@@ -296,7 +296,7 @@ class YunjingClient extends AbstractClient {
      */
     DescribeVulInfo(req, cb) {
         let resp = new DescribeVulInfoResponse();
-        this.request("DescribeVulInfo", req, resp, cb);
+        this.request("DescribeVulInfo", req, resp, options, cb);
     }
 
     /**
@@ -307,7 +307,7 @@ class YunjingClient extends AbstractClient {
      */
     DeleteUsualLoginPlaces(req, cb) {
         let resp = new DeleteUsualLoginPlacesResponse();
-        this.request("DeleteUsualLoginPlaces", req, resp, cb);
+        this.request("DeleteUsualLoginPlaces", req, resp, options, cb);
     }
 
     /**
@@ -318,7 +318,7 @@ class YunjingClient extends AbstractClient {
      */
     DeleteNonlocalLoginPlaces(req, cb) {
         let resp = new DeleteNonlocalLoginPlacesResponse();
-        this.request("DeleteNonlocalLoginPlaces", req, resp, cb);
+        this.request("DeleteNonlocalLoginPlaces", req, resp, options, cb);
     }
 
     /**
@@ -330,7 +330,7 @@ class YunjingClient extends AbstractClient {
      */
     DescribeOpenPorts(req, cb) {
         let resp = new DescribeOpenPortsResponse();
-        this.request("DescribeOpenPorts", req, resp, cb);
+        this.request("DescribeOpenPorts", req, resp, options, cb);
     }
 
     /**
@@ -341,7 +341,7 @@ class YunjingClient extends AbstractClient {
      */
     MisAlarmNonlocalLoginPlaces(req, cb) {
         let resp = new MisAlarmNonlocalLoginPlacesResponse();
-        this.request("MisAlarmNonlocalLoginPlaces", req, resp, cb);
+        this.request("MisAlarmNonlocalLoginPlaces", req, resp, options, cb);
     }
 
     /**
@@ -352,7 +352,7 @@ class YunjingClient extends AbstractClient {
      */
     DescribeOpenPortStatistics(req, cb) {
         let resp = new DescribeOpenPortStatisticsResponse();
-        this.request("DescribeOpenPortStatistics", req, resp, cb);
+        this.request("DescribeOpenPortStatistics", req, resp, options, cb);
     }
 
     /**
@@ -363,7 +363,7 @@ class YunjingClient extends AbstractClient {
      */
     SeparateMalwares(req, cb) {
         let resp = new SeparateMalwaresResponse();
-        this.request("SeparateMalwares", req, resp, cb);
+        this.request("SeparateMalwares", req, resp, options, cb);
     }
 
     /**
@@ -374,7 +374,7 @@ class YunjingClient extends AbstractClient {
      */
     DescribeNonlocalLoginPlaces(req, cb) {
         let resp = new DescribeNonlocalLoginPlacesResponse();
-        this.request("DescribeNonlocalLoginPlaces", req, resp, cb);
+        this.request("DescribeNonlocalLoginPlaces", req, resp, options, cb);
     }
 
     /**
@@ -385,7 +385,7 @@ class YunjingClient extends AbstractClient {
      */
     DeleteMachine(req, cb) {
         let resp = new DeleteMachineResponse();
-        this.request("DeleteMachine", req, resp, cb);
+        this.request("DeleteMachine", req, resp, options, cb);
     }
 
     /**
@@ -396,7 +396,7 @@ class YunjingClient extends AbstractClient {
      */
     DescribeProcessTaskStatus(req, cb) {
         let resp = new DescribeProcessTaskStatusResponse();
-        this.request("DescribeProcessTaskStatus", req, resp, cb);
+        this.request("DescribeProcessTaskStatus", req, resp, options, cb);
     }
 
     /**
@@ -407,7 +407,7 @@ class YunjingClient extends AbstractClient {
      */
     DescribeOverviewStatistics(req, cb) {
         let resp = new DescribeOverviewStatisticsResponse();
-        this.request("DescribeOverviewStatistics", req, resp, cb);
+        this.request("DescribeOverviewStatistics", req, resp, options, cb);
     }
 
     /**
@@ -418,7 +418,7 @@ class YunjingClient extends AbstractClient {
      */
     DescribeUsualLoginPlaces(req, cb) {
         let resp = new DescribeUsualLoginPlacesResponse();
-        this.request("DescribeUsualLoginPlaces", req, resp, cb);
+        this.request("DescribeUsualLoginPlaces", req, resp, options, cb);
     }
 
     /**
@@ -429,7 +429,7 @@ class YunjingClient extends AbstractClient {
      */
     DescribeProcessStatistics(req, cb) {
         let resp = new DescribeProcessStatisticsResponse();
-        this.request("DescribeProcessStatistics", req, resp, cb);
+        this.request("DescribeProcessStatistics", req, resp, options, cb);
     }
 
     /**
@@ -440,7 +440,7 @@ class YunjingClient extends AbstractClient {
      */
     DescribeWeeklyReportInfo(req, cb) {
         let resp = new DescribeWeeklyReportInfoResponse();
-        this.request("DescribeWeeklyReportInfo", req, resp, cb);
+        this.request("DescribeWeeklyReportInfo", req, resp, options, cb);
     }
 
     /**
@@ -451,7 +451,7 @@ class YunjingClient extends AbstractClient {
      */
     DescribeSecurityDynamics(req, cb) {
         let resp = new DescribeSecurityDynamicsResponse();
-        this.request("DescribeSecurityDynamics", req, resp, cb);
+        this.request("DescribeSecurityDynamics", req, resp, options, cb);
     }
 
     /**
@@ -462,7 +462,7 @@ class YunjingClient extends AbstractClient {
      */
     RescanImpactedHost(req, cb) {
         let resp = new RescanImpactedHostResponse();
-        this.request("RescanImpactedHost", req, resp, cb);
+        this.request("RescanImpactedHost", req, resp, options, cb);
     }
 
     /**
@@ -473,7 +473,7 @@ class YunjingClient extends AbstractClient {
      */
     DescribeImpactedHosts(req, cb) {
         let resp = new DescribeImpactedHostsResponse();
-        this.request("DescribeImpactedHosts", req, resp, cb);
+        this.request("DescribeImpactedHosts", req, resp, options, cb);
     }
 
     /**
@@ -484,7 +484,7 @@ class YunjingClient extends AbstractClient {
      */
     ModifyAutoOpenProVersionConfig(req, cb) {
         let resp = new ModifyAutoOpenProVersionConfigResponse();
-        this.request("ModifyAutoOpenProVersionConfig", req, resp, cb);
+        this.request("ModifyAutoOpenProVersionConfig", req, resp, options, cb);
     }
 
     /**
@@ -495,7 +495,7 @@ class YunjingClient extends AbstractClient {
      */
     DescribeSecurityTrends(req, cb) {
         let resp = new DescribeSecurityTrendsResponse();
-        this.request("DescribeSecurityTrends", req, resp, cb);
+        this.request("DescribeSecurityTrends", req, resp, options, cb);
     }
 
     /**
@@ -506,7 +506,7 @@ class YunjingClient extends AbstractClient {
      */
     DescribeAgentVuls(req, cb) {
         let resp = new DescribeAgentVulsResponse();
-        this.request("DescribeAgentVuls", req, resp, cb);
+        this.request("DescribeAgentVuls", req, resp, options, cb);
     }
 
     /**
@@ -517,7 +517,7 @@ class YunjingClient extends AbstractClient {
      */
     DeleteBruteAttacks(req, cb) {
         let resp = new DeleteBruteAttacksResponse();
-        this.request("DeleteBruteAttacks", req, resp, cb);
+        this.request("DeleteBruteAttacks", req, resp, options, cb);
     }
 
     /**
@@ -528,7 +528,7 @@ class YunjingClient extends AbstractClient {
      */
     DescribeWeeklyReportNonlocalLoginPlaces(req, cb) {
         let resp = new DescribeWeeklyReportNonlocalLoginPlacesResponse();
-        this.request("DescribeWeeklyReportNonlocalLoginPlaces", req, resp, cb);
+        this.request("DescribeWeeklyReportNonlocalLoginPlaces", req, resp, options, cb);
     }
 
     /**
@@ -539,7 +539,7 @@ class YunjingClient extends AbstractClient {
      */
     DescribeAccounts(req, cb) {
         let resp = new DescribeAccountsResponse();
-        this.request("DescribeAccounts", req, resp, cb);
+        this.request("DescribeAccounts", req, resp, options, cb);
     }
 
     /**
@@ -550,7 +550,7 @@ class YunjingClient extends AbstractClient {
      */
     DescribeVuls(req, cb) {
         let resp = new DescribeVulsResponse();
-        this.request("DescribeVuls", req, resp, cb);
+        this.request("DescribeVuls", req, resp, options, cb);
     }
 
     /**
@@ -561,7 +561,7 @@ class YunjingClient extends AbstractClient {
      */
     DescribeWeeklyReports(req, cb) {
         let resp = new DescribeWeeklyReportsResponse();
-        this.request("DescribeWeeklyReports", req, resp, cb);
+        this.request("DescribeWeeklyReports", req, resp, options, cb);
     }
 
     /**
@@ -572,7 +572,7 @@ class YunjingClient extends AbstractClient {
      */
     DescribeProVersionInfo(req, cb) {
         let resp = new DescribeProVersionInfoResponse();
-        this.request("DescribeProVersionInfo", req, resp, cb);
+        this.request("DescribeProVersionInfo", req, resp, options, cb);
     }
 
     /**
@@ -583,7 +583,7 @@ class YunjingClient extends AbstractClient {
      */
     IgnoreImpactedHosts(req, cb) {
         let resp = new IgnoreImpactedHostsResponse();
-        this.request("IgnoreImpactedHosts", req, resp, cb);
+        this.request("IgnoreImpactedHosts", req, resp, options, cb);
     }
 
     /**
@@ -594,7 +594,7 @@ class YunjingClient extends AbstractClient {
      */
     CloseProVersion(req, cb) {
         let resp = new CloseProVersionResponse();
-        this.request("CloseProVersion", req, resp, cb);
+        this.request("CloseProVersion", req, resp, options, cb);
     }
 
     /**
@@ -605,7 +605,7 @@ class YunjingClient extends AbstractClient {
      */
     DescribeAccountStatistics(req, cb) {
         let resp = new DescribeAccountStatisticsResponse();
-        this.request("DescribeAccountStatistics", req, resp, cb);
+        this.request("DescribeAccountStatistics", req, resp, options, cb);
     }
 
     /**
@@ -616,7 +616,7 @@ class YunjingClient extends AbstractClient {
      */
     CreateProcessTask(req, cb) {
         let resp = new CreateProcessTaskResponse();
-        this.request("CreateProcessTask", req, resp, cb);
+        this.request("CreateProcessTask", req, resp, options, cb);
     }
 
     /**
@@ -627,7 +627,7 @@ class YunjingClient extends AbstractClient {
      */
     ModifyAlarmAttribute(req, cb) {
         let resp = new ModifyAlarmAttributeResponse();
-        this.request("ModifyAlarmAttribute", req, resp, cb);
+        this.request("ModifyAlarmAttribute", req, resp, options, cb);
     }
 
     /**
@@ -638,7 +638,7 @@ class YunjingClient extends AbstractClient {
      */
     DescribeMachineInfo(req, cb) {
         let resp = new DescribeMachineInfoResponse();
-        this.request("DescribeMachineInfo", req, resp, cb);
+        this.request("DescribeMachineInfo", req, resp, options, cb);
     }
 
     /**
@@ -649,7 +649,7 @@ class YunjingClient extends AbstractClient {
      */
     DescribeAlarmAttribute(req, cb) {
         let resp = new DescribeAlarmAttributeResponse();
-        this.request("DescribeAlarmAttribute", req, resp, cb);
+        this.request("DescribeAlarmAttribute", req, resp, options, cb);
     }
 
     /**
@@ -660,7 +660,7 @@ class YunjingClient extends AbstractClient {
      */
     DescribeMachines(req, cb) {
         let resp = new DescribeMachinesResponse();
-        this.request("DescribeMachines", req, resp, cb);
+        this.request("DescribeMachines", req, resp, options, cb);
     }
 
     /**
@@ -671,7 +671,7 @@ class YunjingClient extends AbstractClient {
      */
     CreateUsualLoginPlaces(req, cb) {
         let resp = new CreateUsualLoginPlacesResponse();
-        this.request("CreateUsualLoginPlaces", req, resp, cb);
+        this.request("CreateUsualLoginPlaces", req, resp, options, cb);
     }
 
     /**
@@ -682,7 +682,7 @@ class YunjingClient extends AbstractClient {
      */
     DescribeComponents(req, cb) {
         let resp = new DescribeComponentsResponse();
-        this.request("DescribeComponents", req, resp, cb);
+        this.request("DescribeComponents", req, resp, options, cb);
     }
 
     /**
@@ -693,7 +693,7 @@ class YunjingClient extends AbstractClient {
      */
     DescribeProcesses(req, cb) {
         let resp = new DescribeProcessesResponse();
-        this.request("DescribeProcesses", req, resp, cb);
+        this.request("DescribeProcesses", req, resp, options, cb);
     }
 
     /**
@@ -704,7 +704,7 @@ class YunjingClient extends AbstractClient {
      */
     DescribeMalwares(req, cb) {
         let resp = new DescribeMalwaresResponse();
-        this.request("DescribeMalwares", req, resp, cb);
+        this.request("DescribeMalwares", req, resp, options, cb);
     }
 
 

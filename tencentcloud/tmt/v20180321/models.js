@@ -418,7 +418,7 @@ class SpeechTranslateRequest extends  AbstractModel {
         this.IsEnd = null;
 
         /**
-         * 语音分片内容的base64字符串
+         * 语音分片内容的base64字符串，音频内容应含有效并可识别的文本
          * @type {string || null}
          */
         this.Data = null;
@@ -522,7 +522,7 @@ class TextTranslateRequest extends  AbstractModel {
         super();
 
         /**
-         * 待翻译的文本，文本统一使用utf-8格式编码，非utf-8格式编码字符会翻译失败
+         * 待翻译的文本，文本统一使用utf-8格式编码，非utf-8格式编码字符会翻译失败，请传入有效文本，html标记等非常规翻译文本会翻译失败
          * @type {string || null}
          */
         this.SourceText = null;

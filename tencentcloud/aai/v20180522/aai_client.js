@@ -44,7 +44,7 @@ class AaiClient extends AbstractClient {
      */
     SimultaneousInterpreting(req, cb) {
         let resp = new SimultaneousInterpretingResponse();
-        this.request("SimultaneousInterpreting", req, resp, cb);
+        this.request("SimultaneousInterpreting", req, resp, options, cb);
     }
 
     /**
@@ -55,7 +55,7 @@ class AaiClient extends AbstractClient {
      */
     SentenceRecognition(req, cb) {
         let resp = new SentenceRecognitionResponse();
-        this.request("SentenceRecognition", req, resp, cb);
+        this.request("SentenceRecognition", req, resp, options, cb);
     }
 
     /**
@@ -66,7 +66,7 @@ class AaiClient extends AbstractClient {
      */
     Chat(req, cb) {
         let resp = new ChatResponse();
-        this.request("Chat", req, resp, cb);
+        this.request("Chat", req, resp, options, cb);
     }
 
     /**
@@ -79,7 +79,7 @@ class AaiClient extends AbstractClient {
      */
     TextToVoice(req, cb) {
         let resp = new TextToVoiceResponse();
-        this.request("TextToVoice", req, resp, cb);
+        this.request("TextToVoice", req, resp, options, cb);
     }
 
 

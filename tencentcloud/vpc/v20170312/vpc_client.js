@@ -19,10 +19,12 @@ const AbstractClient = require('../../common/abstract_client')
 const CreateDirectConnectGatewayResponse = models.CreateDirectConnectGatewayResponse;
 const DescribeBandwidthPackagesRequest = models.DescribeBandwidthPackagesRequest;
 const DeleteDirectConnectGatewayCcnRoutesResponse = models.DeleteDirectConnectGatewayCcnRoutesResponse;
+const HaVipDisassociateAddressIpRequest = models.HaVipDisassociateAddressIpRequest;
 const Subnet = models.Subnet;
 const ModifyAddressTemplateGroupAttributeRequest = models.ModifyAddressTemplateGroupAttributeRequest;
 const ModifyAddressTemplateAttributeResponse = models.ModifyAddressTemplateAttributeResponse;
 const ServiceTemplateGroup = models.ServiceTemplateGroup;
+const AcceptAttachCcnInstancesRequest = models.AcceptAttachCcnInstancesRequest;
 const RouteConflict = models.RouteConflict;
 const CreateNetworkInterfaceRequest = models.CreateNetworkInterfaceRequest;
 const CreateRoutesRequest = models.CreateRoutesRequest;
@@ -32,12 +34,13 @@ const SecurityGroupAssociationStatistics = models.SecurityGroupAssociationStatis
 const CcnRoute = models.CcnRoute;
 const DeleteServiceTemplateResponse = models.DeleteServiceTemplateResponse;
 const CreateServiceTemplateRequest = models.CreateServiceTemplateRequest;
-const DeleteSecurityGroupPoliciesRequest = models.DeleteSecurityGroupPoliciesRequest;
+const DeleteHaVipResponse = models.DeleteHaVipResponse;
 const VpnConnection = models.VpnConnection;
 const RejectAttachCcnInstancesResponse = models.RejectAttachCcnInstancesResponse;
 const CreateDirectConnectGatewayRequest = models.CreateDirectConnectGatewayRequest;
 const DescribeCcnsRequest = models.DescribeCcnsRequest;
 const TransformAddressResponse = models.TransformAddressResponse;
+const DescribeVpnConnectionsRequest = models.DescribeVpnConnectionsRequest;
 const CreateAddressTemplateGroupRequest = models.CreateAddressTemplateGroupRequest;
 const DescribeNetworkInterfacesRequest = models.DescribeNetworkInterfacesRequest;
 const DescribeSubnetsRequest = models.DescribeSubnetsRequest;
@@ -45,7 +48,7 @@ const CreateSubnetRequest = models.CreateSubnetRequest;
 const AddressTemplateGroup = models.AddressTemplateGroup;
 const DownloadCustomerGatewayConfigurationRequest = models.DownloadCustomerGatewayConfigurationRequest;
 const DeleteBandwidthPackageRequest = models.DeleteBandwidthPackageRequest;
-const ModifyNetworkInterfaceAttributeResponse = models.ModifyNetworkInterfaceAttributeResponse;
+const HaVip = models.HaVip;
 const CreateDefaultVpcRequest = models.CreateDefaultVpcRequest;
 const DeleteSubnetResponse = models.DeleteSubnetResponse;
 const ModifyAddressesBandwidthResponse = models.ModifyAddressesBandwidthResponse;
@@ -53,8 +56,9 @@ const DescribeCustomerGatewaysRequest = models.DescribeCustomerGatewaysRequest;
 const Vpc = models.Vpc;
 const CreateVpnGatewayResponse = models.CreateVpnGatewayResponse;
 const ResetVpnConnectionRequest = models.ResetVpnConnectionRequest;
-const SetCcnRegionBandwidthLimitsResponse = models.SetCcnRegionBandwidthLimitsResponse;
+const ModifyVpnConnectionAttributeResponse = models.ModifyVpnConnectionAttributeResponse;
 const DescribeCustomerGatewaysResponse = models.DescribeCustomerGatewaysResponse;
+const ModifyNetworkInterfaceAttributeResponse = models.ModifyNetworkInterfaceAttributeResponse;
 const NetworkInterface = models.NetworkInterface;
 const DescribeAccountAttributesRequest = models.DescribeAccountAttributesRequest;
 const ModifyServiceTemplateGroupAttributeRequest = models.ModifyServiceTemplateGroupAttributeRequest;
@@ -75,6 +79,7 @@ const DeleteSubnetRequest = models.DeleteSubnetRequest;
 const InquiryPriceRenewVpnGatewayResponse = models.InquiryPriceRenewVpnGatewayResponse;
 const DescribeAddressTemplateGroupsRequest = models.DescribeAddressTemplateGroupsRequest;
 const ResetVpnGatewayInternetMaxBandwidthRequest = models.ResetVpnGatewayInternetMaxBandwidthRequest;
+const UnassignPrivateIpAddressesResponse = models.UnassignPrivateIpAddressesResponse;
 const RenewVpnGatewayRequest = models.RenewVpnGatewayRequest;
 const SecurityGroupPolicySet = models.SecurityGroupPolicySet;
 const ResetAttachCcnInstancesResponse = models.ResetAttachCcnInstancesResponse;
@@ -89,10 +94,12 @@ const ReplaceRoutesResponse = models.ReplaceRoutesResponse;
 const DeleteBandwidthPackageResponse = models.DeleteBandwidthPackageResponse;
 const DirectConnectGatewayCcnRoute = models.DirectConnectGatewayCcnRoute;
 const DeleteVpcRequest = models.DeleteVpcRequest;
-const ModifyServiceTemplateAttributeResponse = models.ModifyServiceTemplateAttributeResponse;
+const ModifyRouteTableAttributeRequest = models.ModifyRouteTableAttributeRequest;
+const ModifyDirectConnectGatewayAttributeRequest = models.ModifyDirectConnectGatewayAttributeRequest;
 const DescribeCcnsResponse = models.DescribeCcnsResponse;
 const MigratePrivateIpAddressRequest = models.MigratePrivateIpAddressRequest;
 const DescribeServiceTemplatesRequest = models.DescribeServiceTemplatesRequest;
+const DescribeHaVipsResponse = models.DescribeHaVipsResponse;
 const DeleteRouteTableRequest = models.DeleteRouteTableRequest;
 const CreateSubnetResponse = models.CreateSubnetResponse;
 const DescribeSecurityGroupPoliciesResponse = models.DescribeSecurityGroupPoliciesResponse;
@@ -104,6 +111,7 @@ const DescribeServiceTemplatesResponse = models.DescribeServiceTemplatesResponse
 const CreateVpcResponse = models.CreateVpcResponse;
 const CreateCustomerGatewayResponse = models.CreateCustomerGatewayResponse;
 const ModifyRouteTableAttributeResponse = models.ModifyRouteTableAttributeResponse;
+const SetCcnRegionBandwidthLimitsResponse = models.SetCcnRegionBandwidthLimitsResponse;
 const CreateBandwidthPackageResponse = models.CreateBandwidthPackageResponse;
 const DeleteVpnGatewayRequest = models.DeleteVpnGatewayRequest;
 const ModifySubnetAttributeResponse = models.ModifySubnetAttributeResponse;
@@ -113,21 +121,24 @@ const AttachCcnInstancesRequest = models.AttachCcnInstancesRequest;
 const ReleaseAddressesResponse = models.ReleaseAddressesResponse;
 const AddressTemplate = models.AddressTemplate;
 const CcnInstance = models.CcnInstance;
-const DisassociateAddressRequest = models.DisassociateAddressRequest;
+const DeleteSecurityGroupPoliciesRequest = models.DeleteSecurityGroupPoliciesRequest;
 const InquiryPriceResetVpnGatewayInternetMaxBandwidthRequest = models.InquiryPriceResetVpnGatewayInternetMaxBandwidthRequest;
 const ItemPrice = models.ItemPrice;
 const DeleteVpnConnectionResponse = models.DeleteVpnConnectionResponse;
 const ReplaceSecurityGroupPolicyResponse = models.ReplaceSecurityGroupPolicyResponse;
 const ModifyCustomerGatewayAttributeResponse = models.ModifyCustomerGatewayAttributeResponse;
 const ModifyPrivateIpAddressesAttributeResponse = models.ModifyPrivateIpAddressesAttributeResponse;
+const ModifyHaVipAttributeResponse = models.ModifyHaVipAttributeResponse;
 const CreateCcnResponse = models.CreateCcnResponse;
 const EnableCcnRoutesRequest = models.EnableCcnRoutesRequest;
 const DisableCcnRoutesRequest = models.DisableCcnRoutesRequest;
-const DescribeVpnConnectionsRequest = models.DescribeVpnConnectionsRequest;
+const DescribeDirectConnectGatewaysRequest = models.DescribeDirectConnectGatewaysRequest;
 const DefaultVpcSubnet = models.DefaultVpcSubnet;
+const ModifyHaVipAttributeRequest = models.ModifyHaVipAttributeRequest;
 const DeleteSecurityGroupResponse = models.DeleteSecurityGroupResponse;
 const DescribeCcnRegionBandwidthLimitsResponse = models.DescribeCcnRegionBandwidthLimitsResponse;
 const CreateNetworkInterfaceResponse = models.CreateNetworkInterfaceResponse;
+const HaVipAssociateAddressIpRequest = models.HaVipAssociateAddressIpRequest;
 const ModifyVpnGatewayAttributeRequest = models.ModifyVpnGatewayAttributeRequest;
 const DescribeAddressQuotaRequest = models.DescribeAddressQuotaRequest;
 const ModifyBandwidthPackageAttributeRequest = models.ModifyBandwidthPackageAttributeRequest;
@@ -135,7 +146,7 @@ const DeleteRoutesRequest = models.DeleteRoutesRequest;
 const InquiryPriceCreateVpnGatewayResponse = models.InquiryPriceCreateVpnGatewayResponse;
 const DescribeAddressesResponse = models.DescribeAddressesResponse;
 const CreateRoutesResponse = models.CreateRoutesResponse;
-const ModifyVpnConnectionAttributeResponse = models.ModifyVpnConnectionAttributeResponse;
+const ModifyServiceTemplateAttributeResponse = models.ModifyServiceTemplateAttributeResponse;
 const DescribeSecurityGroupsResponse = models.DescribeSecurityGroupsResponse;
 const ModifyBandwidthPackageAttributeResponse = models.ModifyBandwidthPackageAttributeResponse;
 const DetachNetworkInterfaceResponse = models.DetachNetworkInterfaceResponse;
@@ -179,21 +190,23 @@ const DeleteCustomerGatewayResponse = models.DeleteCustomerGatewayResponse;
 const AssociateAddressRequest = models.AssociateAddressRequest;
 const ModifySecurityGroupPoliciesResponse = models.ModifySecurityGroupPoliciesResponse;
 const CreateAddressTemplateResponse = models.CreateAddressTemplateResponse;
-const AcceptAttachCcnInstancesRequest = models.AcceptAttachCcnInstancesRequest;
+const CreateBandwidthPackageRequest = models.CreateBandwidthPackageRequest;
 const DeleteAddressTemplateGroupRequest = models.DeleteAddressTemplateGroupRequest;
 const AttachNetworkInterfaceResponse = models.AttachNetworkInterfaceResponse;
 const ServiceTemplateSpecification = models.ServiceTemplateSpecification;
 const DescribeRouteConflictsResponse = models.DescribeRouteConflictsResponse;
-const CreateBandwidthPackageRequest = models.CreateBandwidthPackageRequest;
+const DeleteDirectConnectGatewayResponse = models.DeleteDirectConnectGatewayResponse;
 const DescribeRouteTablesRequest = models.DescribeRouteTablesRequest;
 const ResetAttachCcnInstancesRequest = models.ResetAttachCcnInstancesRequest;
-const ModifyRouteTableAttributeRequest = models.ModifyRouteTableAttributeRequest;
+const CreateHaVipResponse = models.CreateHaVipResponse;
+const ModifyDirectConnectGatewayAttributeResponse = models.ModifyDirectConnectGatewayAttributeResponse;
 const DescribeVpnGatewaysRequest = models.DescribeVpnGatewaysRequest;
 const ClassicLinkInstance = models.ClassicLinkInstance;
 const CreateVpnGatewayRequest = models.CreateVpnGatewayRequest;
 const DescribeSubnetsResponse = models.DescribeSubnetsResponse;
 const ModifyNetworkInterfaceAttributeRequest = models.ModifyNetworkInterfaceAttributeRequest;
-const ModifyAddressesBandwidthRequest = models.ModifyAddressesBandwidthRequest;
+const ModifyAddressTemplateAttributeRequest = models.ModifyAddressTemplateAttributeRequest;
+const HaVipDisassociateAddressIpResponse = models.HaVipDisassociateAddressIpResponse;
 const EnableRoutesRequest = models.EnableRoutesRequest;
 const DescribeAddressTemplateGroupsResponse = models.DescribeAddressTemplateGroupsResponse;
 const SetCcnRegionBandwidthLimitsRequest = models.SetCcnRegionBandwidthLimitsRequest;
@@ -207,6 +220,7 @@ const Filter = models.Filter;
 const CreateDirectConnectGatewayCcnRoutesResponse = models.CreateDirectConnectGatewayCcnRoutesResponse;
 const CreateRouteTableRequest = models.CreateRouteTableRequest;
 const ResetVpnConnectionResponse = models.ResetVpnConnectionResponse;
+const CreateHaVipRequest = models.CreateHaVipRequest;
 const DescribeAddressesRequest = models.DescribeAddressesRequest;
 const DescribeSecurityGroupPoliciesRequest = models.DescribeSecurityGroupPoliciesRequest;
 const MigrateNetworkInterfaceRequest = models.MigrateNetworkInterfaceRequest;
@@ -243,6 +257,7 @@ const CustomerGatewayVendor = models.CustomerGatewayVendor;
 const DescribeAddressTemplatesRequest = models.DescribeAddressTemplatesRequest;
 const RenewVpnGatewayResponse = models.RenewVpnGatewayResponse;
 const ModifyCcnAttributeRequest = models.ModifyCcnAttributeRequest;
+const ModifyAddressesBandwidthRequest = models.ModifyAddressesBandwidthRequest;
 const AddBandwidthPackageResourcesResponse = models.AddBandwidthPackageResourcesResponse;
 const ModifyAddressTemplateGroupAttributeResponse = models.ModifyAddressTemplateGroupAttributeResponse;
 const DeleteSecurityGroupPoliciesResponse = models.DeleteSecurityGroupPoliciesResponse;
@@ -254,14 +269,16 @@ const RejectAttachCcnInstancesRequest = models.RejectAttachCcnInstancesRequest;
 const DirectConnectGateway = models.DirectConnectGateway;
 const DeleteVpnGatewayResponse = models.DeleteVpnGatewayResponse;
 const DescribeAddressTemplatesResponse = models.DescribeAddressTemplatesResponse;
+const DescribeHaVipsRequest = models.DescribeHaVipsRequest;
 const Quota = models.Quota;
 const Route = models.Route;
-const UnassignPrivateIpAddressesResponse = models.UnassignPrivateIpAddressesResponse;
+const DescribeDirectConnectGatewaysResponse = models.DescribeDirectConnectGatewaysResponse;
 const Address = models.Address;
 const ModifyVpnGatewayAttributeResponse = models.ModifyVpnGatewayAttributeResponse;
 const DeleteAddressTemplateResponse = models.DeleteAddressTemplateResponse;
 const DescribeNetworkInterfacesResponse = models.DescribeNetworkInterfacesResponse;
 const EnableRoutesResponse = models.EnableRoutesResponse;
+const DeleteHaVipRequest = models.DeleteHaVipRequest;
 const AssignPrivateIpAddressesRequest = models.AssignPrivateIpAddressesRequest;
 const DescribeServiceTemplateGroupsRequest = models.DescribeServiceTemplateGroupsRequest;
 const CreateVpcRequest = models.CreateVpcRequest;
@@ -277,6 +294,7 @@ const CustomerGateway = models.CustomerGateway;
 const AllocateAddressesResponse = models.AllocateAddressesResponse;
 const TransformAddressRequest = models.TransformAddressRequest;
 const ReplaceDirectConnectGatewayCcnRoutesRequest = models.ReplaceDirectConnectGatewayCcnRoutesRequest;
+const DisassociateAddressRequest = models.DisassociateAddressRequest;
 const EnableCcnRoutesResponse = models.EnableCcnRoutesResponse;
 const BandwidthPackage = models.BandwidthPackage;
 const AttachNetworkInterfaceRequest = models.AttachNetworkInterfaceRequest;
@@ -287,7 +305,7 @@ const MigrateNetworkInterfaceResponse = models.MigrateNetworkInterfaceResponse;
 const InstanceChargePrepaid = models.InstanceChargePrepaid;
 const DescribeCcnAttachedInstancesRequest = models.DescribeCcnAttachedInstancesRequest;
 const DescribeVpcsResponse = models.DescribeVpcsResponse;
-const ModifyAddressTemplateAttributeRequest = models.ModifyAddressTemplateAttributeRequest;
+const DeleteDirectConnectGatewayRequest = models.DeleteDirectConnectGatewayRequest;
 const ModifySecurityGroupAttributeRequest = models.ModifySecurityGroupAttributeRequest;
 const CreateAddressTemplateGroupResponse = models.CreateAddressTemplateGroupResponse;
 const CcnAttachedInstance = models.CcnAttachedInstance;
@@ -297,6 +315,7 @@ const AcceptAttachCcnInstancesResponse = models.AcceptAttachCcnInstancesResponse
 const DeleteServiceTemplateGroupRequest = models.DeleteServiceTemplateGroupRequest;
 const DescribeRouteConflictsRequest = models.DescribeRouteConflictsRequest;
 const Price = models.Price;
+const HaVipAssociateAddressIpResponse = models.HaVipAssociateAddressIpResponse;
 
 
 /**
@@ -317,7 +336,7 @@ class VpcClient extends AbstractClient {
      */
     DownloadCustomerGatewayConfiguration(req, cb) {
         let resp = new DownloadCustomerGatewayConfigurationResponse();
-        this.request("DownloadCustomerGatewayConfiguration", req, resp, cb);
+        this.request("DownloadCustomerGatewayConfiguration", req, resp, options, cb);
     }
 
     /**
@@ -328,7 +347,7 @@ class VpcClient extends AbstractClient {
      */
     DescribeCustomerGateways(req, cb) {
         let resp = new DescribeCustomerGatewaysResponse();
-        this.request("DescribeCustomerGateways", req, resp, cb);
+        this.request("DescribeCustomerGateways", req, resp, options, cb);
     }
 
     /**
@@ -340,7 +359,7 @@ class VpcClient extends AbstractClient {
      */
     ReplaceSecurityGroupPolicy(req, cb) {
         let resp = new ReplaceSecurityGroupPolicyResponse();
-        this.request("ReplaceSecurityGroupPolicy", req, resp, cb);
+        this.request("ReplaceSecurityGroupPolicy", req, resp, options, cb);
     }
 
     /**
@@ -351,7 +370,7 @@ class VpcClient extends AbstractClient {
      */
     DescribeServiceTemplateGroups(req, cb) {
         let resp = new DescribeServiceTemplateGroupsResponse();
-        this.request("DescribeServiceTemplateGroups", req, resp, cb);
+        this.request("DescribeServiceTemplateGroups", req, resp, options, cb);
     }
 
     /**
@@ -362,7 +381,7 @@ class VpcClient extends AbstractClient {
      */
     DescribeRouteTables(req, cb) {
         let resp = new DescribeRouteTablesResponse();
-        this.request("DescribeRouteTables", req, resp, cb);
+        this.request("DescribeRouteTables", req, resp, options, cb);
     }
 
     /**
@@ -373,7 +392,7 @@ class VpcClient extends AbstractClient {
      */
     CreateBandwidthPackage(req, cb) {
         let resp = new CreateBandwidthPackageResponse();
-        this.request("CreateBandwidthPackage", req, resp, cb);
+        this.request("CreateBandwidthPackage", req, resp, options, cb);
     }
 
     /**
@@ -385,7 +404,7 @@ class VpcClient extends AbstractClient {
      */
     CreateRouteTable(req, cb) {
         let resp = new CreateRouteTableResponse();
-        this.request("CreateRouteTable", req, resp, cb);
+        this.request("CreateRouteTable", req, resp, options, cb);
     }
 
     /**
@@ -397,7 +416,7 @@ class VpcClient extends AbstractClient {
      */
     ReplaceRouteTableAssociation(req, cb) {
         let resp = new ReplaceRouteTableAssociationResponse();
-        this.request("ReplaceRouteTableAssociation", req, resp, cb);
+        this.request("ReplaceRouteTableAssociation", req, resp, options, cb);
     }
 
     /**
@@ -409,7 +428,7 @@ class VpcClient extends AbstractClient {
      */
     EnableCcnRoutes(req, cb) {
         let resp = new EnableCcnRoutesResponse();
-        this.request("EnableCcnRoutes", req, resp, cb);
+        this.request("EnableCcnRoutes", req, resp, options, cb);
     }
 
     /**
@@ -420,7 +439,7 @@ class VpcClient extends AbstractClient {
      */
     ModifyServiceTemplateGroupAttribute(req, cb) {
         let resp = new ModifyServiceTemplateGroupAttributeResponse();
-        this.request("ModifyServiceTemplateGroupAttribute", req, resp, cb);
+        this.request("ModifyServiceTemplateGroupAttribute", req, resp, options, cb);
     }
 
     /**
@@ -431,7 +450,7 @@ class VpcClient extends AbstractClient {
      */
     DescribeCcnAttachedInstances(req, cb) {
         let resp = new DescribeCcnAttachedInstancesResponse();
-        this.request("DescribeCcnAttachedInstances", req, resp, cb);
+        this.request("DescribeCcnAttachedInstances", req, resp, options, cb);
     }
 
     /**
@@ -443,7 +462,7 @@ class VpcClient extends AbstractClient {
      */
     ResetRoutes(req, cb) {
         let resp = new ResetRoutesResponse();
-        this.request("ResetRoutes", req, resp, cb);
+        this.request("ResetRoutes", req, resp, options, cb);
     }
 
     /**
@@ -454,7 +473,7 @@ class VpcClient extends AbstractClient {
      */
     ModifyPrivateIpAddressesAttribute(req, cb) {
         let resp = new ModifyPrivateIpAddressesAttributeResponse();
-        this.request("ModifyPrivateIpAddressesAttribute", req, resp, cb);
+        this.request("ModifyPrivateIpAddressesAttribute", req, resp, options, cb);
     }
 
     /**
@@ -465,7 +484,7 @@ class VpcClient extends AbstractClient {
      */
     DeleteVpnConnection(req, cb) {
         let resp = new DeleteVpnConnectionResponse();
-        this.request("DeleteVpnConnection", req, resp, cb);
+        this.request("DeleteVpnConnection", req, resp, options, cb);
     }
 
     /**
@@ -476,7 +495,7 @@ class VpcClient extends AbstractClient {
      */
     ModifyAddressTemplateGroupAttribute(req, cb) {
         let resp = new ModifyAddressTemplateGroupAttributeResponse();
-        this.request("ModifyAddressTemplateGroupAttribute", req, resp, cb);
+        this.request("ModifyAddressTemplateGroupAttribute", req, resp, options, cb);
     }
 
     /**
@@ -487,7 +506,7 @@ class VpcClient extends AbstractClient {
      */
     DescribeCustomerGatewayVendors(req, cb) {
         let resp = new DescribeCustomerGatewayVendorsResponse();
-        this.request("DescribeCustomerGatewayVendors", req, resp, cb);
+        this.request("DescribeCustomerGatewayVendors", req, resp, options, cb);
     }
 
     /**
@@ -499,7 +518,7 @@ class VpcClient extends AbstractClient {
      */
     DescribeAddresses(req, cb) {
         let resp = new DescribeAddressesResponse();
-        this.request("DescribeAddresses", req, resp, cb);
+        this.request("DescribeAddresses", req, resp, options, cb);
     }
 
     /**
@@ -510,7 +529,7 @@ class VpcClient extends AbstractClient {
      */
     ModifyServiceTemplateAttribute(req, cb) {
         let resp = new ModifyServiceTemplateAttributeResponse();
-        this.request("ModifyServiceTemplateAttribute", req, resp, cb);
+        this.request("ModifyServiceTemplateAttribute", req, resp, options, cb);
     }
 
     /**
@@ -522,7 +541,7 @@ class VpcClient extends AbstractClient {
      */
     DetachCcnInstances(req, cb) {
         let resp = new DetachCcnInstancesResponse();
-        this.request("DetachCcnInstances", req, resp, cb);
+        this.request("DetachCcnInstances", req, resp, options, cb);
     }
 
     /**
@@ -533,7 +552,7 @@ class VpcClient extends AbstractClient {
      */
     CreateDirectConnectGatewayCcnRoutes(req, cb) {
         let resp = new CreateDirectConnectGatewayCcnRoutesResponse();
-        this.request("CreateDirectConnectGatewayCcnRoutes", req, resp, cb);
+        this.request("CreateDirectConnectGatewayCcnRoutes", req, resp, options, cb);
     }
 
     /**
@@ -544,7 +563,7 @@ class VpcClient extends AbstractClient {
      */
     RemoveBandwidthPackageResources(req, cb) {
         let resp = new RemoveBandwidthPackageResourcesResponse();
-        this.request("RemoveBandwidthPackageResources", req, resp, cb);
+        this.request("RemoveBandwidthPackageResources", req, resp, options, cb);
     }
 
     /**
@@ -555,12 +574,12 @@ class VpcClient extends AbstractClient {
      */
     InquiryPriceRenewVpnGateway(req, cb) {
         let resp = new InquiryPriceRenewVpnGatewayResponse();
-        this.request("InquiryPriceRenewVpnGateway", req, resp, cb);
+        this.request("InquiryPriceRenewVpnGateway", req, resp, options, cb);
     }
 
     /**
      * 本接口（AssignPrivateIpAddresses）用于弹性网卡申请内网 IP。
-* 一个弹性网卡支持绑定的IP地址是有限制的，更多资源限制信息详见<a href="https://cloud.tencent.com/document/product/215/6513">弹性网卡使用限制</a>。
+* 一个弹性网卡支持绑定的IP地址是有限制的，更多资源限制信息详见<a href="/document/product/576/18527">弹性网卡使用限制</a>。
 * 可以指定内网IP地址申请，内网IP地址类型不能为主IP，主IP已存在，不能修改，内网IP必须要弹性网卡所在子网内，而且不能被占用。
 * 在弹性网卡上申请一个到多个辅助内网IP，接口会在弹性网卡所在子网网段内返回指定数量的辅助内网IP。
      * @param {AssignPrivateIpAddressesRequest} req
@@ -569,7 +588,7 @@ class VpcClient extends AbstractClient {
      */
     AssignPrivateIpAddresses(req, cb) {
         let resp = new AssignPrivateIpAddressesResponse();
-        this.request("AssignPrivateIpAddresses", req, resp, cb);
+        this.request("AssignPrivateIpAddresses", req, resp, options, cb);
     }
 
     /**
@@ -580,7 +599,7 @@ class VpcClient extends AbstractClient {
      */
     DescribeVpcs(req, cb) {
         let resp = new DescribeVpcsResponse();
-        this.request("DescribeVpcs", req, resp, cb);
+        this.request("DescribeVpcs", req, resp, options, cb);
     }
 
     /**
@@ -591,7 +610,7 @@ class VpcClient extends AbstractClient {
      */
     InquiryPriceResetVpnGatewayInternetMaxBandwidth(req, cb) {
         let resp = new InquiryPriceResetVpnGatewayInternetMaxBandwidthResponse();
-        this.request("InquiryPriceResetVpnGatewayInternetMaxBandwidth", req, resp, cb);
+        this.request("InquiryPriceResetVpnGatewayInternetMaxBandwidth", req, resp, options, cb);
     }
 
     /**
@@ -602,7 +621,7 @@ class VpcClient extends AbstractClient {
      */
     DeleteDirectConnectGatewayCcnRoutes(req, cb) {
         let resp = new DeleteDirectConnectGatewayCcnRoutesResponse();
-        this.request("DeleteDirectConnectGatewayCcnRoutes", req, resp, cb);
+        this.request("DeleteDirectConnectGatewayCcnRoutes", req, resp, options, cb);
     }
 
     /**
@@ -614,21 +633,18 @@ class VpcClient extends AbstractClient {
      */
     RejectAttachCcnInstances(req, cb) {
         let resp = new RejectAttachCcnInstancesResponse();
-        this.request("RejectAttachCcnInstances", req, resp, cb);
+        this.request("RejectAttachCcnInstances", req, resp, options, cb);
     }
 
     /**
-     * 本接口（DeleteSecurityGroup）用于删除安全组（SecurityGroup）。
-* 只有当前账号下的安全组允许被删除。
-* 安全组实例ID如果在其他安全组的规则中被引用，则无法直接删除。这种情况下，需要先进行规则修改，再删除安全组。
-* 删除的安全组无法再找回，请谨慎调用。
-     * @param {DeleteSecurityGroupRequest} req
-     * @param {function(string, DeleteSecurityGroupResponse):void} cb
+     * 本接口（MigrateNetworkInterface）用于弹性网卡迁移。
+     * @param {MigrateNetworkInterfaceRequest} req
+     * @param {function(string, MigrateNetworkInterfaceResponse):void} cb
      * @public
      */
-    DeleteSecurityGroup(req, cb) {
-        let resp = new DeleteSecurityGroupResponse();
-        this.request("DeleteSecurityGroup", req, resp, cb);
+    MigrateNetworkInterface(req, cb) {
+        let resp = new MigrateNetworkInterfaceResponse();
+        this.request("MigrateNetworkInterface", req, resp, options, cb);
     }
 
     /**
@@ -639,7 +655,7 @@ class VpcClient extends AbstractClient {
      */
     ModifyAddressesBandwidth(req, cb) {
         let resp = new ModifyAddressesBandwidthResponse();
-        this.request("ModifyAddressesBandwidth", req, resp, cb);
+        this.request("ModifyAddressesBandwidth", req, resp, options, cb);
     }
 
     /**
@@ -650,7 +666,7 @@ class VpcClient extends AbstractClient {
      */
     DescribeVpnConnections(req, cb) {
         let resp = new DescribeVpnConnectionsResponse();
-        this.request("DescribeVpnConnections", req, resp, cb);
+        this.request("DescribeVpnConnections", req, resp, options, cb);
     }
 
     /**
@@ -666,7 +682,7 @@ class VpcClient extends AbstractClient {
      */
     CreateSubnet(req, cb) {
         let resp = new CreateSubnetResponse();
-        this.request("CreateSubnet", req, resp, cb);
+        this.request("CreateSubnet", req, resp, options, cb);
     }
 
     /**
@@ -677,7 +693,7 @@ class VpcClient extends AbstractClient {
      */
     ModifyAddressTemplateAttribute(req, cb) {
         let resp = new ModifyAddressTemplateAttributeResponse();
-        this.request("ModifyAddressTemplateAttribute", req, resp, cb);
+        this.request("ModifyAddressTemplateAttribute", req, resp, options, cb);
     }
 
     /**
@@ -688,7 +704,7 @@ class VpcClient extends AbstractClient {
      */
     AcceptAttachCcnInstances(req, cb) {
         let resp = new AcceptAttachCcnInstancesResponse();
-        this.request("AcceptAttachCcnInstances", req, resp, cb);
+        this.request("AcceptAttachCcnInstances", req, resp, options, cb);
     }
 
     /**
@@ -699,7 +715,7 @@ class VpcClient extends AbstractClient {
      */
     DeleteServiceTemplateGroup(req, cb) {
         let resp = new DeleteServiceTemplateGroupResponse();
-        this.request("DeleteServiceTemplateGroup", req, resp, cb);
+        this.request("DeleteServiceTemplateGroup", req, resp, options, cb);
     }
 
     /**
@@ -712,7 +728,7 @@ class VpcClient extends AbstractClient {
      */
     DisassociateAddress(req, cb) {
         let resp = new DisassociateAddressResponse();
-        this.request("DisassociateAddress", req, resp, cb);
+        this.request("DisassociateAddress", req, resp, options, cb);
     }
 
     /**
@@ -723,7 +739,7 @@ class VpcClient extends AbstractClient {
      */
     ResetAttachCcnInstances(req, cb) {
         let resp = new ResetAttachCcnInstancesResponse();
-        this.request("ResetAttachCcnInstances", req, resp, cb);
+        this.request("ResetAttachCcnInstances", req, resp, options, cb);
     }
 
     /**
@@ -736,7 +752,7 @@ class VpcClient extends AbstractClient {
      */
     CreateVpc(req, cb) {
         let resp = new CreateVpcResponse();
-        this.request("CreateVpc", req, resp, cb);
+        this.request("CreateVpc", req, resp, options, cb);
     }
 
     /**
@@ -747,7 +763,7 @@ class VpcClient extends AbstractClient {
      */
     AddBandwidthPackageResources(req, cb) {
         let resp = new AddBandwidthPackageResourcesResponse();
-        this.request("AddBandwidthPackageResources", req, resp, cb);
+        this.request("AddBandwidthPackageResources", req, resp, options, cb);
     }
 
     /**
@@ -761,7 +777,7 @@ class VpcClient extends AbstractClient {
      */
     AllocateAddresses(req, cb) {
         let resp = new AllocateAddressesResponse();
-        this.request("AllocateAddresses", req, resp, cb);
+        this.request("AllocateAddresses", req, resp, options, cb);
     }
 
     /**
@@ -772,7 +788,7 @@ class VpcClient extends AbstractClient {
      */
     RenewVpnGateway(req, cb) {
         let resp = new RenewVpnGatewayResponse();
-        this.request("RenewVpnGateway", req, resp, cb);
+        this.request("RenewVpnGateway", req, resp, options, cb);
     }
 
     /**
@@ -784,7 +800,7 @@ class VpcClient extends AbstractClient {
      */
     AttachCcnInstances(req, cb) {
         let resp = new AttachCcnInstancesResponse();
-        this.request("AttachCcnInstances", req, resp, cb);
+        this.request("AttachCcnInstances", req, resp, options, cb);
     }
 
     /**
@@ -800,7 +816,7 @@ class VpcClient extends AbstractClient {
      */
     AssociateAddress(req, cb) {
         let resp = new AssociateAddressResponse();
-        this.request("AssociateAddress", req, resp, cb);
+        this.request("AssociateAddress", req, resp, options, cb);
     }
 
     /**
@@ -811,7 +827,7 @@ class VpcClient extends AbstractClient {
      */
     DeleteCustomerGateway(req, cb) {
         let resp = new DeleteCustomerGatewayResponse();
-        this.request("DeleteCustomerGateway", req, resp, cb);
+        this.request("DeleteCustomerGateway", req, resp, options, cb);
     }
 
     /**
@@ -823,7 +839,7 @@ class VpcClient extends AbstractClient {
      */
     DeleteSubnet(req, cb) {
         let resp = new DeleteSubnetResponse();
-        this.request("DeleteSubnet", req, resp, cb);
+        this.request("DeleteSubnet", req, resp, options, cb);
     }
 
     /**
@@ -836,7 +852,21 @@ class VpcClient extends AbstractClient {
      */
     AttachClassicLinkVpc(req, cb) {
         let resp = new AttachClassicLinkVpcResponse();
-        this.request("AttachClassicLinkVpc", req, resp, cb);
+        this.request("AttachClassicLinkVpc", req, resp, options, cb);
+    }
+
+    /**
+     * 本接口（DeleteDirectConnectGateway）用于删除专线网关。
+<li>如果是 NAT 网关，删除专线网关后，NAT 规则以及 ACL 策略都被清理了。</li>
+<li>删除专线网关后，系统会删除路由表中跟该专线网关相关的路由策略。</li>
+本接口是异步完成，如需查询异步任务执行结果，请使用本接口返回的`RequestId`轮询`QueryTask`接口
+     * @param {DeleteDirectConnectGatewayRequest} req
+     * @param {function(string, DeleteDirectConnectGatewayResponse):void} cb
+     * @public
+     */
+    DeleteDirectConnectGateway(req, cb) {
+        let resp = new DeleteDirectConnectGatewayResponse();
+        this.request("DeleteDirectConnectGateway", req, resp, options, cb);
     }
 
     /**
@@ -847,13 +877,14 @@ class VpcClient extends AbstractClient {
      */
     DescribeDirectConnectGatewayCcnRoutes(req, cb) {
         let resp = new DescribeDirectConnectGatewayCcnRoutesResponse();
-        this.request("DescribeDirectConnectGatewayCcnRoutes", req, resp, cb);
+        this.request("DescribeDirectConnectGatewayCcnRoutes", req, resp, options, cb);
     }
 
     /**
      * 本接口（CreateNetworkInterface）用于创建弹性网卡。
 * 创建弹性网卡时可以指定内网IP，并且可以指定一个主IP，指定的内网IP必须在弹性网卡所在子网内，而且不能被占用。
 * 创建弹性网卡时可以指定需要申请的内网IP数量，系统会随机生成内网IP地址。
+* 一个弹性网卡支持绑定的IP地址是有限制的，更多资源限制信息详见<a href="/document/product/576/18527">弹性网卡使用限制</a>。
 * 创建弹性网卡同时可以绑定已有安全组。
      * @param {CreateNetworkInterfaceRequest} req
      * @param {function(string, CreateNetworkInterfaceResponse):void} cb
@@ -861,7 +892,7 @@ class VpcClient extends AbstractClient {
      */
     CreateNetworkInterface(req, cb) {
         let resp = new CreateNetworkInterfaceResponse();
-        this.request("CreateNetworkInterface", req, resp, cb);
+        this.request("CreateNetworkInterface", req, resp, options, cb);
     }
 
     /**
@@ -872,268 +903,7 @@ class VpcClient extends AbstractClient {
      */
     DeleteBandwidthPackage(req, cb) {
         let resp = new DeleteBandwidthPackageResponse();
-        this.request("DeleteBandwidthPackage", req, resp, cb);
-    }
-
-    /**
-     * 本接口（DescribeCcns）用于查询云联网（CCN）列表。
-     * @param {DescribeCcnsRequest} req
-     * @param {function(string, DescribeCcnsResponse):void} cb
-     * @public
-     */
-    DescribeCcns(req, cb) {
-        let resp = new DescribeCcnsResponse();
-        this.request("DescribeCcns", req, resp, cb);
-    }
-
-    /**
-     * 本接口（DeleteCcn）用于删除云联网。
-* 删除后，云联网关联的所有实例间路由将被删除，网络将会中断，请务必确认
-* 删除云联网是不可逆的操作，请谨慎处理。
-
-     * @param {DeleteCcnRequest} req
-     * @param {function(string, DeleteCcnResponse):void} cb
-     * @public
-     */
-    DeleteCcn(req, cb) {
-        let resp = new DeleteCcnResponse();
-        this.request("DeleteCcn", req, resp, cb);
-    }
-
-    /**
-     * 本接口(ResetVpnConnection)用于重置VPN通道。
-     * @param {ResetVpnConnectionRequest} req
-     * @param {function(string, ResetVpnConnectionResponse):void} cb
-     * @public
-     */
-    ResetVpnConnection(req, cb) {
-        let resp = new ResetVpnConnectionResponse();
-        this.request("ResetVpnConnection", req, resp, cb);
-    }
-
-    /**
-     * 本接口（DetachNetworkInterface）用于弹性网卡解绑云主机。
-     * @param {DetachNetworkInterfaceRequest} req
-     * @param {function(string, DetachNetworkInterfaceResponse):void} cb
-     * @public
-     */
-    DetachNetworkInterface(req, cb) {
-        let resp = new DetachNetworkInterfaceResponse();
-        this.request("DetachNetworkInterface", req, resp, cb);
-    }
-
-    /**
-     * 本接口（DeleteNetworkInterface）用于创建弹性网卡。
-* 弹性网卡上绑定了云主机时，不能被删除。
-* 删除指定弹性网卡，弹性网卡必须先和子机解绑才能删除。删除之后弹性网卡上所有内网IP都将被退还。
-     * @param {DeleteNetworkInterfaceRequest} req
-     * @param {function(string, DeleteNetworkInterfaceResponse):void} cb
-     * @public
-     */
-    DeleteNetworkInterface(req, cb) {
-        let resp = new DeleteNetworkInterfaceResponse();
-        this.request("DeleteNetworkInterface", req, resp, cb);
-    }
-
-    /**
-     * 本接口（ReplaceRoutes）根据路由策略ID（RouteId）修改指定的路由策略（Route），支持批量修改。
-     * @param {ReplaceRoutesRequest} req
-     * @param {function(string, ReplaceRoutesResponse):void} cb
-     * @public
-     */
-    ReplaceRoutes(req, cb) {
-        let resp = new ReplaceRoutesResponse();
-        this.request("ReplaceRoutes", req, resp, cb);
-    }
-
-    /**
-     * 本接口（DescribeRouteConflicts）用于查询自定义路由策略与云联网路由策略冲突列表
-     * @param {DescribeRouteConflictsRequest} req
-     * @param {function(string, DescribeRouteConflictsResponse):void} cb
-     * @public
-     */
-    DescribeRouteConflicts(req, cb) {
-        let resp = new DescribeRouteConflictsResponse();
-        this.request("DescribeRouteConflicts", req, resp, cb);
-    }
-
-    /**
-     * 本接口（DisableRoutes）用于禁用已启用的子网路由
-     * @param {DisableRoutesRequest} req
-     * @param {function(string, DisableRoutesResponse):void} cb
-     * @public
-     */
-    DisableRoutes(req, cb) {
-        let resp = new DisableRoutesResponse();
-        this.request("DisableRoutes", req, resp, cb);
-    }
-
-    /**
-     * 本接口（DescribeCcnRegionBandwidthLimits）用于查询云联网各地域出带宽上限，该接口只返回已关联网络实例包含的地域
-     * @param {DescribeCcnRegionBandwidthLimitsRequest} req
-     * @param {function(string, DescribeCcnRegionBandwidthLimitsResponse):void} cb
-     * @public
-     */
-    DescribeCcnRegionBandwidthLimits(req, cb) {
-        let resp = new DescribeCcnRegionBandwidthLimitsResponse();
-        this.request("DescribeCcnRegionBandwidthLimits", req, resp, cb);
-    }
-
-    /**
-     * 删除协议端口模板
-     * @param {DeleteServiceTemplateRequest} req
-     * @param {function(string, DeleteServiceTemplateResponse):void} cb
-     * @public
-     */
-    DeleteServiceTemplate(req, cb) {
-        let resp = new DeleteServiceTemplateResponse();
-        this.request("DeleteServiceTemplate", req, resp, cb);
-    }
-
-    /**
-     * 本接口（UnassignPrivateIpAddresses）用于弹性网卡退还内网 IP。
-* 退还弹性网卡上的辅助内网IP，接口自动解关联弹性公网 IP。不能退还弹性网卡的主内网IP。
-     * @param {UnassignPrivateIpAddressesRequest} req
-     * @param {function(string, UnassignPrivateIpAddressesResponse):void} cb
-     * @public
-     */
-    UnassignPrivateIpAddresses(req, cb) {
-        let resp = new UnassignPrivateIpAddressesResponse();
-        this.request("UnassignPrivateIpAddresses", req, resp, cb);
-    }
-
-    /**
-     * 删除IP地址模板集合
-     * @param {DeleteAddressTemplateGroupRequest} req
-     * @param {function(string, DeleteAddressTemplateGroupResponse):void} cb
-     * @public
-     */
-    DeleteAddressTemplateGroup(req, cb) {
-        let resp = new DeleteAddressTemplateGroupResponse();
-        this.request("DeleteAddressTemplateGroup", req, resp, cb);
-    }
-
-    /**
-     * 本接口（DescribeCcnRoutes）用于查询已加入云联网（CCN）的路由
-     * @param {DescribeCcnRoutesRequest} req
-     * @param {function(string, DescribeCcnRoutesResponse):void} cb
-     * @public
-     */
-    DescribeCcnRoutes(req, cb) {
-        let resp = new DescribeCcnRoutesResponse();
-        this.request("DescribeCcnRoutes", req, resp, cb);
-    }
-
-    /**
-     * 本接口（CreateDefaultVpc）用于创建默认私有网络(VPC）。
-
-默认VPC适用于快速入门和启动公共实例，您可以像使用任何其他VPC一样使用默认VPC。如果你想创建标准VPC，即指定VPC名称、VPC网段、子网网段、子网可用区，请使用常规创建VPC接口（CreateVpc）
-
-正常情况，本接口并不一定生产默认VPC，而是根据用户账号的网络属性（DescribeAccountAttributes）来决定的
-* 支持基础网络、VPC，返回VpcId为0
-* 只支持VPC，返回默认VPC信息
-
-你也可以通过 Force 参数，强制返回默认VPC
-     * @param {CreateDefaultVpcRequest} req
-     * @param {function(string, CreateDefaultVpcResponse):void} cb
-     * @public
-     */
-    CreateDefaultVpc(req, cb) {
-        let resp = new CreateDefaultVpcResponse();
-        this.request("CreateDefaultVpc", req, resp, cb);
-    }
-
-    /**
-     * 本接口（AttachNetworkInterface）用于弹性网卡绑定云主机。
-* 一个云主机可以绑定多个弹性网卡，但只能绑定一个主网卡。更多限制信息详见<a href="https://cloud.tencent.com/document/product/215/6513">弹性网卡使用限制</a>。
-* 一个弹性网卡只能同时绑定一个云主机。
-* 只有运行中或者已关机状态的云主机才能绑定弹性网卡，查看云主机状态详见<a href="https://cloud.tencent.com/document/api/213/9452#instance_state">腾讯云主机信息</a>。
-* 弹性网卡绑定的云主机必须是私有网络的，而且云主机所在可用区必须和弹性网卡子网的可用区相同。
-     * @param {AttachNetworkInterfaceRequest} req
-     * @param {function(string, AttachNetworkInterfaceResponse):void} cb
-     * @public
-     */
-    AttachNetworkInterface(req, cb) {
-        let resp = new AttachNetworkInterfaceResponse();
-        this.request("AttachNetworkInterface", req, resp, cb);
-    }
-
-    /**
-     * 本接口（ReplaceDirectConnectGatewayCcnRoutes）根据路由ID（RouteId）修改指定的路由（Route），支持批量修改。
-     * @param {ReplaceDirectConnectGatewayCcnRoutesRequest} req
-     * @param {function(string, ReplaceDirectConnectGatewayCcnRoutesResponse):void} cb
-     * @public
-     */
-    ReplaceDirectConnectGatewayCcnRoutes(req, cb) {
-        let resp = new ReplaceDirectConnectGatewayCcnRoutesResponse();
-        this.request("ReplaceDirectConnectGatewayCcnRoutes", req, resp, cb);
-    }
-
-    /**
-     * 本接口（DeleteSecurityGroupPolicies）用于用于删除安全组规则（SecurityGroupPolicy）。
-* SecurityGroupPolicySet.Version 用于指定要操作的安全组的版本。传入 Version 版本号若不等于当前安全组的最新版本，将返回失败；若不传 Version 则直接删除指定PolicyIndex的规则。
-     * @param {DeleteSecurityGroupPoliciesRequest} req
-     * @param {function(string, DeleteSecurityGroupPoliciesResponse):void} cb
-     * @public
-     */
-    DeleteSecurityGroupPolicies(req, cb) {
-        let resp = new DeleteSecurityGroupPoliciesResponse();
-        this.request("DeleteSecurityGroupPolicies", req, resp, cb);
-    }
-
-    /**
-     * 本接口（ModifySecurityGroupAttribute）用于修改安全组（SecurityGroupPolicy）属性。
-     * @param {ModifySecurityGroupAttributeRequest} req
-     * @param {function(string, ModifySecurityGroupAttributeResponse):void} cb
-     * @public
-     */
-    ModifySecurityGroupAttribute(req, cb) {
-        let resp = new ModifySecurityGroupAttributeResponse();
-        this.request("ModifySecurityGroupAttribute", req, resp, cb);
-    }
-
-    /**
-     * 删除IP地址模板
-     * @param {DeleteAddressTemplateRequest} req
-     * @param {function(string, DeleteAddressTemplateResponse):void} cb
-     * @public
-     */
-    DeleteAddressTemplate(req, cb) {
-        let resp = new DeleteAddressTemplateResponse();
-        this.request("DeleteAddressTemplate", req, resp, cb);
-    }
-
-    /**
-     * 本接口（DeleteVpnGateway）用于删除VPN网关。目前只支持删除运行中的按量计费的IPSEC网关实例。
-     * @param {DeleteVpnGatewayRequest} req
-     * @param {function(string, DeleteVpnGatewayResponse):void} cb
-     * @public
-     */
-    DeleteVpnGateway(req, cb) {
-        let resp = new DeleteVpnGatewayResponse();
-        this.request("DeleteVpnGateway", req, resp, cb);
-    }
-
-    /**
-     * 创建协议端口模板
-     * @param {CreateServiceTemplateRequest} req
-     * @param {function(string, CreateServiceTemplateResponse):void} cb
-     * @public
-     */
-    CreateServiceTemplate(req, cb) {
-        let resp = new CreateServiceTemplateResponse();
-        this.request("CreateServiceTemplate", req, resp, cb);
-    }
-
-    /**
-     * 本接口(DeleteRoutes)用于对某个路由表批量删除路由策略（Route）。
-     * @param {DeleteRoutesRequest} req
-     * @param {function(string, DeleteRoutesResponse):void} cb
-     * @public
-     */
-    DeleteRoutes(req, cb) {
-        let resp = new DeleteRoutesResponse();
-        this.request("DeleteRoutes", req, resp, cb);
+        this.request("DeleteBandwidthPackage", req, resp, options, cb);
     }
 
     /**
@@ -1153,7 +923,281 @@ class VpcClient extends AbstractClient {
      */
     ModifySecurityGroupPolicies(req, cb) {
         let resp = new ModifySecurityGroupPoliciesResponse();
-        this.request("ModifySecurityGroupPolicies", req, resp, cb);
+        this.request("ModifySecurityGroupPolicies", req, resp, options, cb);
+    }
+
+    /**
+     * 本接口（DescribeCcns）用于查询云联网（CCN）列表。
+     * @param {DescribeCcnsRequest} req
+     * @param {function(string, DescribeCcnsResponse):void} cb
+     * @public
+     */
+    DescribeCcns(req, cb) {
+        let resp = new DescribeCcnsResponse();
+        this.request("DescribeCcns", req, resp, options, cb);
+    }
+
+    /**
+     * 本接口（DeleteCcn）用于删除云联网。
+* 删除后，云联网关联的所有实例间路由将被删除，网络将会中断，请务必确认
+* 删除云联网是不可逆的操作，请谨慎处理。
+
+     * @param {DeleteCcnRequest} req
+     * @param {function(string, DeleteCcnResponse):void} cb
+     * @public
+     */
+    DeleteCcn(req, cb) {
+        let resp = new DeleteCcnResponse();
+        this.request("DeleteCcn", req, resp, options, cb);
+    }
+
+    /**
+     * 本接口（HaVipDisassociateAddressIp）用于将高可用虚拟IP（HAVIP）已绑定的弹性公网IP（EIP）解除绑定<br />
+本接口是异步完成，如需查询异步任务执行结果，请使用本接口返回的`RequestId`轮询`QueryTask`接口
+     * @param {HaVipDisassociateAddressIpRequest} req
+     * @param {function(string, HaVipDisassociateAddressIpResponse):void} cb
+     * @public
+     */
+    HaVipDisassociateAddressIp(req, cb) {
+        let resp = new HaVipDisassociateAddressIpResponse();
+        this.request("HaVipDisassociateAddressIp", req, resp, options, cb);
+    }
+
+    /**
+     * 本接口（DetachNetworkInterface）用于弹性网卡解绑云主机。
+     * @param {DetachNetworkInterfaceRequest} req
+     * @param {function(string, DetachNetworkInterfaceResponse):void} cb
+     * @public
+     */
+    DetachNetworkInterface(req, cb) {
+        let resp = new DetachNetworkInterfaceResponse();
+        this.request("DetachNetworkInterface", req, resp, options, cb);
+    }
+
+    /**
+     * 本接口（DeleteNetworkInterface）用于创建弹性网卡。
+* 弹性网卡上绑定了云主机时，不能被删除。
+* 删除指定弹性网卡，弹性网卡必须先和子机解绑才能删除。删除之后弹性网卡上所有内网IP都将被退还。
+     * @param {DeleteNetworkInterfaceRequest} req
+     * @param {function(string, DeleteNetworkInterfaceResponse):void} cb
+     * @public
+     */
+    DeleteNetworkInterface(req, cb) {
+        let resp = new DeleteNetworkInterfaceResponse();
+        this.request("DeleteNetworkInterface", req, resp, options, cb);
+    }
+
+    /**
+     * 本接口（ReplaceRoutes）根据路由策略ID（RouteId）修改指定的路由策略（Route），支持批量修改。
+     * @param {ReplaceRoutesRequest} req
+     * @param {function(string, ReplaceRoutesResponse):void} cb
+     * @public
+     */
+    ReplaceRoutes(req, cb) {
+        let resp = new ReplaceRoutesResponse();
+        this.request("ReplaceRoutes", req, resp, options, cb);
+    }
+
+    /**
+     * 本接口（DescribeRouteConflicts）用于查询自定义路由策略与云联网路由策略冲突列表
+     * @param {DescribeRouteConflictsRequest} req
+     * @param {function(string, DescribeRouteConflictsResponse):void} cb
+     * @public
+     */
+    DescribeRouteConflicts(req, cb) {
+        let resp = new DescribeRouteConflictsResponse();
+        this.request("DescribeRouteConflicts", req, resp, options, cb);
+    }
+
+    /**
+     * 本接口（DisableRoutes）用于禁用已启用的子网路由
+     * @param {DisableRoutesRequest} req
+     * @param {function(string, DisableRoutesResponse):void} cb
+     * @public
+     */
+    DisableRoutes(req, cb) {
+        let resp = new DisableRoutesResponse();
+        this.request("DisableRoutes", req, resp, options, cb);
+    }
+
+    /**
+     * 本接口（DescribeCcnRegionBandwidthLimits）用于查询云联网各地域出带宽上限，该接口只返回已关联网络实例包含的地域
+     * @param {DescribeCcnRegionBandwidthLimitsRequest} req
+     * @param {function(string, DescribeCcnRegionBandwidthLimitsResponse):void} cb
+     * @public
+     */
+    DescribeCcnRegionBandwidthLimits(req, cb) {
+        let resp = new DescribeCcnRegionBandwidthLimitsResponse();
+        this.request("DescribeCcnRegionBandwidthLimits", req, resp, options, cb);
+    }
+
+    /**
+     * 删除协议端口模板
+     * @param {DeleteServiceTemplateRequest} req
+     * @param {function(string, DeleteServiceTemplateResponse):void} cb
+     * @public
+     */
+    DeleteServiceTemplate(req, cb) {
+        let resp = new DeleteServiceTemplateResponse();
+        this.request("DeleteServiceTemplate", req, resp, options, cb);
+    }
+
+    /**
+     * 本接口（UnassignPrivateIpAddresses）用于弹性网卡退还内网 IP。
+* 退还弹性网卡上的辅助内网IP，接口自动解关联弹性公网 IP。不能退还弹性网卡的主内网IP。
+     * @param {UnassignPrivateIpAddressesRequest} req
+     * @param {function(string, UnassignPrivateIpAddressesResponse):void} cb
+     * @public
+     */
+    UnassignPrivateIpAddresses(req, cb) {
+        let resp = new UnassignPrivateIpAddressesResponse();
+        this.request("UnassignPrivateIpAddresses", req, resp, options, cb);
+    }
+
+    /**
+     * 删除IP地址模板集合
+     * @param {DeleteAddressTemplateGroupRequest} req
+     * @param {function(string, DeleteAddressTemplateGroupResponse):void} cb
+     * @public
+     */
+    DeleteAddressTemplateGroup(req, cb) {
+        let resp = new DeleteAddressTemplateGroupResponse();
+        this.request("DeleteAddressTemplateGroup", req, resp, options, cb);
+    }
+
+    /**
+     * 本接口（DescribeCcnRoutes）用于查询已加入云联网（CCN）的路由
+     * @param {DescribeCcnRoutesRequest} req
+     * @param {function(string, DescribeCcnRoutesResponse):void} cb
+     * @public
+     */
+    DescribeCcnRoutes(req, cb) {
+        let resp = new DescribeCcnRoutesResponse();
+        this.request("DescribeCcnRoutes", req, resp, options, cb);
+    }
+
+    /**
+     * 本接口（CreateDefaultVpc）用于创建默认私有网络(VPC）。
+
+默认VPC适用于快速入门和启动公共实例，您可以像使用任何其他VPC一样使用默认VPC。如果你想创建标准VPC，即指定VPC名称、VPC网段、子网网段、子网可用区，请使用常规创建VPC接口（CreateVpc）
+
+正常情况，本接口并不一定生产默认VPC，而是根据用户账号的网络属性（DescribeAccountAttributes）来决定的
+* 支持基础网络、VPC，返回VpcId为0
+* 只支持VPC，返回默认VPC信息
+
+你也可以通过 Force 参数，强制返回默认VPC
+     * @param {CreateDefaultVpcRequest} req
+     * @param {function(string, CreateDefaultVpcResponse):void} cb
+     * @public
+     */
+    CreateDefaultVpc(req, cb) {
+        let resp = new CreateDefaultVpcResponse();
+        this.request("CreateDefaultVpc", req, resp, options, cb);
+    }
+
+    /**
+     * 本接口（AttachNetworkInterface）用于弹性网卡绑定云主机。
+* 一个云主机可以绑定多个弹性网卡，但只能绑定一个主网卡。更多限制信息详见<a href="https://cloud.tencent.com/document/product/215/6513">弹性网卡使用限制</a>。
+* 一个弹性网卡只能同时绑定一个云主机。
+* 只有运行中或者已关机状态的云主机才能绑定弹性网卡，查看云主机状态详见<a href="https://cloud.tencent.com/document/api/213/9452#instance_state">腾讯云主机信息</a>。
+* 弹性网卡绑定的云主机必须是私有网络的，而且云主机所在可用区必须和弹性网卡子网的可用区相同。
+     * @param {AttachNetworkInterfaceRequest} req
+     * @param {function(string, AttachNetworkInterfaceResponse):void} cb
+     * @public
+     */
+    AttachNetworkInterface(req, cb) {
+        let resp = new AttachNetworkInterfaceResponse();
+        this.request("AttachNetworkInterface", req, resp, options, cb);
+    }
+
+    /**
+     * 本接口（ReplaceDirectConnectGatewayCcnRoutes）根据路由ID（RouteId）修改指定的路由（Route），支持批量修改。
+     * @param {ReplaceDirectConnectGatewayCcnRoutesRequest} req
+     * @param {function(string, ReplaceDirectConnectGatewayCcnRoutesResponse):void} cb
+     * @public
+     */
+    ReplaceDirectConnectGatewayCcnRoutes(req, cb) {
+        let resp = new ReplaceDirectConnectGatewayCcnRoutesResponse();
+        this.request("ReplaceDirectConnectGatewayCcnRoutes", req, resp, options, cb);
+    }
+
+    /**
+     * 本接口（DeleteSecurityGroupPolicies）用于用于删除安全组规则（SecurityGroupPolicy）。
+* SecurityGroupPolicySet.Version 用于指定要操作的安全组的版本。传入 Version 版本号若不等于当前安全组的最新版本，将返回失败；若不传 Version 则直接删除指定PolicyIndex的规则。
+     * @param {DeleteSecurityGroupPoliciesRequest} req
+     * @param {function(string, DeleteSecurityGroupPoliciesResponse):void} cb
+     * @public
+     */
+    DeleteSecurityGroupPolicies(req, cb) {
+        let resp = new DeleteSecurityGroupPoliciesResponse();
+        this.request("DeleteSecurityGroupPolicies", req, resp, options, cb);
+    }
+
+    /**
+     * 本接口（ModifySecurityGroupAttribute）用于修改安全组（SecurityGroupPolicy）属性。
+     * @param {ModifySecurityGroupAttributeRequest} req
+     * @param {function(string, ModifySecurityGroupAttributeResponse):void} cb
+     * @public
+     */
+    ModifySecurityGroupAttribute(req, cb) {
+        let resp = new ModifySecurityGroupAttributeResponse();
+        this.request("ModifySecurityGroupAttribute", req, resp, options, cb);
+    }
+
+    /**
+     * 删除IP地址模板
+     * @param {DeleteAddressTemplateRequest} req
+     * @param {function(string, DeleteAddressTemplateResponse):void} cb
+     * @public
+     */
+    DeleteAddressTemplate(req, cb) {
+        let resp = new DeleteAddressTemplateResponse();
+        this.request("DeleteAddressTemplate", req, resp, options, cb);
+    }
+
+    /**
+     * 本接口（DeleteVpnGateway）用于删除VPN网关。目前只支持删除运行中的按量计费的IPSEC网关实例。
+     * @param {DeleteVpnGatewayRequest} req
+     * @param {function(string, DeleteVpnGatewayResponse):void} cb
+     * @public
+     */
+    DeleteVpnGateway(req, cb) {
+        let resp = new DeleteVpnGatewayResponse();
+        this.request("DeleteVpnGateway", req, resp, options, cb);
+    }
+
+    /**
+     * 创建协议端口模板
+     * @param {CreateServiceTemplateRequest} req
+     * @param {function(string, CreateServiceTemplateResponse):void} cb
+     * @public
+     */
+    CreateServiceTemplate(req, cb) {
+        let resp = new CreateServiceTemplateResponse();
+        this.request("CreateServiceTemplate", req, resp, options, cb);
+    }
+
+    /**
+     * 本接口(DeleteRoutes)用于对某个路由表批量删除路由策略（Route）。
+     * @param {DeleteRoutesRequest} req
+     * @param {function(string, DeleteRoutesResponse):void} cb
+     * @public
+     */
+    DeleteRoutes(req, cb) {
+        let resp = new DeleteRoutesResponse();
+        this.request("DeleteRoutes", req, resp, options, cb);
+    }
+
+    /**
+     * 本接口（ModifyDirectConnectGatewayAttribute）用于修改专线网关属性
+
+     * @param {ModifyDirectConnectGatewayAttributeRequest} req
+     * @param {function(string, ModifyDirectConnectGatewayAttributeResponse):void} cb
+     * @public
+     */
+    ModifyDirectConnectGatewayAttribute(req, cb) {
+        let resp = new ModifyDirectConnectGatewayAttributeResponse();
+        this.request("ModifyDirectConnectGatewayAttribute", req, resp, options, cb);
     }
 
     /**
@@ -1164,7 +1208,7 @@ class VpcClient extends AbstractClient {
      */
     ModifySubnetAttribute(req, cb) {
         let resp = new ModifySubnetAttributeResponse();
-        this.request("ModifySubnetAttribute", req, resp, cb);
+        this.request("ModifySubnetAttribute", req, resp, options, cb);
     }
 
     /**
@@ -1175,7 +1219,7 @@ class VpcClient extends AbstractClient {
      */
     DescribeNetworkInterfaces(req, cb) {
         let resp = new DescribeNetworkInterfacesResponse();
-        this.request("DescribeNetworkInterfaces", req, resp, cb);
+        this.request("DescribeNetworkInterfaces", req, resp, options, cb);
     }
 
     /**
@@ -1186,7 +1230,7 @@ class VpcClient extends AbstractClient {
      */
     DisableCcnRoutes(req, cb) {
         let resp = new DisableCcnRoutesResponse();
-        this.request("DisableCcnRoutes", req, resp, cb);
+        this.request("DisableCcnRoutes", req, resp, options, cb);
     }
 
     /**
@@ -1197,7 +1241,18 @@ class VpcClient extends AbstractClient {
      */
     InquiryPriceCreateVpnGateway(req, cb) {
         let resp = new InquiryPriceCreateVpnGatewayResponse();
-        this.request("InquiryPriceCreateVpnGateway", req, resp, cb);
+        this.request("InquiryPriceCreateVpnGateway", req, resp, options, cb);
+    }
+
+    /**
+     * 本接口(ResetVpnConnection)用于重置VPN通道。
+     * @param {ResetVpnConnectionRequest} req
+     * @param {function(string, ResetVpnConnectionResponse):void} cb
+     * @public
+     */
+    ResetVpnConnection(req, cb) {
+        let resp = new ResetVpnConnectionResponse();
+        this.request("ResetVpnConnection", req, resp, options, cb);
     }
 
     /**
@@ -1208,7 +1263,7 @@ class VpcClient extends AbstractClient {
      */
     CreateCustomerGateway(req, cb) {
         let resp = new CreateCustomerGatewayResponse();
-        this.request("CreateCustomerGateway", req, resp, cb);
+        this.request("CreateCustomerGateway", req, resp, options, cb);
     }
 
     /**
@@ -1219,7 +1274,7 @@ class VpcClient extends AbstractClient {
      */
     CreateAddressTemplateGroup(req, cb) {
         let resp = new CreateAddressTemplateGroupResponse();
-        this.request("CreateAddressTemplateGroup", req, resp, cb);
+        this.request("CreateAddressTemplateGroup", req, resp, options, cb);
     }
 
     /**
@@ -1230,7 +1285,7 @@ class VpcClient extends AbstractClient {
      */
     CreateAddressTemplate(req, cb) {
         let resp = new CreateAddressTemplateResponse();
-        this.request("CreateAddressTemplate", req, resp, cb);
+        this.request("CreateAddressTemplate", req, resp, options, cb);
     }
 
     /**
@@ -1243,7 +1298,7 @@ class VpcClient extends AbstractClient {
      */
     CreateSecurityGroup(req, cb) {
         let resp = new CreateSecurityGroupResponse();
-        this.request("CreateSecurityGroup", req, resp, cb);
+        this.request("CreateSecurityGroup", req, resp, options, cb);
     }
 
     /**
@@ -1254,7 +1309,7 @@ class VpcClient extends AbstractClient {
      */
     ModifyNetworkInterfaceAttribute(req, cb) {
         let resp = new ModifyNetworkInterfaceAttributeResponse();
-        this.request("ModifyNetworkInterfaceAttribute", req, resp, cb);
+        this.request("ModifyNetworkInterfaceAttribute", req, resp, options, cb);
     }
 
     /**
@@ -1265,7 +1320,7 @@ class VpcClient extends AbstractClient {
      */
     DescribeVpnGateways(req, cb) {
         let resp = new DescribeVpnGatewaysResponse();
-        this.request("DescribeVpnGateways", req, resp, cb);
+        this.request("DescribeVpnGateways", req, resp, options, cb);
     }
 
     /**
@@ -1276,7 +1331,18 @@ class VpcClient extends AbstractClient {
      */
     DeleteRouteTable(req, cb) {
         let resp = new DeleteRouteTableResponse();
-        this.request("DeleteRouteTable", req, resp, cb);
+        this.request("DeleteRouteTable", req, resp, options, cb);
+    }
+
+    /**
+     * 本接口（DescribeDirectConnectGateways）用于查询专线网关。
+     * @param {DescribeDirectConnectGatewaysRequest} req
+     * @param {function(string, DescribeDirectConnectGatewaysResponse):void} cb
+     * @public
+     */
+    DescribeDirectConnectGateways(req, cb) {
+        let resp = new DescribeDirectConnectGatewaysResponse();
+        this.request("DescribeDirectConnectGateways", req, resp, options, cb);
     }
 
     /**
@@ -1287,7 +1353,7 @@ class VpcClient extends AbstractClient {
      */
     DescribeAccountAttributes(req, cb) {
         let resp = new DescribeAccountAttributesResponse();
-        this.request("DescribeAccountAttributes", req, resp, cb);
+        this.request("DescribeAccountAttributes", req, resp, options, cb);
     }
 
     /**
@@ -1301,7 +1367,7 @@ class VpcClient extends AbstractClient {
      */
     MigratePrivateIpAddress(req, cb) {
         let resp = new MigratePrivateIpAddressResponse();
-        this.request("MigratePrivateIpAddress", req, resp, cb);
+        this.request("MigratePrivateIpAddress", req, resp, options, cb);
     }
 
     /**
@@ -1312,7 +1378,42 @@ class VpcClient extends AbstractClient {
      */
     DescribeServiceTemplates(req, cb) {
         let resp = new DescribeServiceTemplatesResponse();
-        this.request("DescribeServiceTemplates", req, resp, cb);
+        this.request("DescribeServiceTemplates", req, resp, options, cb);
+    }
+
+    /**
+     * 本接口（HaVipAssociateAddressIp）用于高可用虚拟IP（HAVIP）绑定弹性公网IP（EIP）<br />
+本接口是异步完成，如需查询异步任务执行结果，请使用本接口返回的`RequestId`轮询`QueryTask`接口
+     * @param {HaVipAssociateAddressIpRequest} req
+     * @param {function(string, HaVipAssociateAddressIpResponse):void} cb
+     * @public
+     */
+    HaVipAssociateAddressIp(req, cb) {
+        let resp = new HaVipAssociateAddressIpResponse();
+        this.request("HaVipAssociateAddressIp", req, resp, options, cb);
+    }
+
+    /**
+     * 本接口（DescribeHaVips）用于查询高可用虚拟IP（HAVIP）列表。
+     * @param {DescribeHaVipsRequest} req
+     * @param {function(string, DescribeHaVipsResponse):void} cb
+     * @public
+     */
+    DescribeHaVips(req, cb) {
+        let resp = new DescribeHaVipsResponse();
+        this.request("DescribeHaVips", req, resp, options, cb);
+    }
+
+    /**
+     * 本接口（DeleteHaVip）用于删除高可用虚拟IP（HAVIP）<br />
+本接口是异步完成，如需查询异步任务执行结果，请使用本接口返回的`RequestId`轮询`QueryTask`接口
+     * @param {DeleteHaVipRequest} req
+     * @param {function(string, DeleteHaVipResponse):void} cb
+     * @public
+     */
+    DeleteHaVip(req, cb) {
+        let resp = new DeleteHaVipResponse();
+        this.request("DeleteHaVip", req, resp, options, cb);
     }
 
     /**
@@ -1323,7 +1424,7 @@ class VpcClient extends AbstractClient {
      */
     ModifyBandwidthPackageAttribute(req, cb) {
         let resp = new ModifyBandwidthPackageAttributeResponse();
-        this.request("ModifyBandwidthPackageAttribute", req, resp, cb);
+        this.request("ModifyBandwidthPackageAttribute", req, resp, options, cb);
     }
 
     /**
@@ -1334,7 +1435,7 @@ class VpcClient extends AbstractClient {
      */
     DescribeAddressQuota(req, cb) {
         let resp = new DescribeAddressQuotaResponse();
-        this.request("DescribeAddressQuota", req, resp, cb);
+        this.request("DescribeAddressQuota", req, resp, options, cb);
     }
 
     /**
@@ -1345,7 +1446,7 @@ class VpcClient extends AbstractClient {
      */
     ModifyVpnGatewayAttribute(req, cb) {
         let resp = new ModifyVpnGatewayAttributeResponse();
-        this.request("ModifyVpnGatewayAttribute", req, resp, cb);
+        this.request("ModifyVpnGatewayAttribute", req, resp, options, cb);
     }
 
     /**
@@ -1356,7 +1457,7 @@ class VpcClient extends AbstractClient {
      */
     ResetVpnGatewayInternetMaxBandwidth(req, cb) {
         let resp = new ResetVpnGatewayInternetMaxBandwidthResponse();
-        this.request("ResetVpnGatewayInternetMaxBandwidth", req, resp, cb);
+        this.request("ResetVpnGatewayInternetMaxBandwidth", req, resp, options, cb);
     }
 
     /**
@@ -1369,7 +1470,7 @@ class VpcClient extends AbstractClient {
      */
     DeleteVpc(req, cb) {
         let resp = new DeleteVpcResponse();
-        this.request("DeleteVpc", req, resp, cb);
+        this.request("DeleteVpc", req, resp, options, cb);
     }
 
     /**
@@ -1380,7 +1481,7 @@ class VpcClient extends AbstractClient {
      */
     DescribeSubnets(req, cb) {
         let resp = new DescribeSubnetsResponse();
-        this.request("DescribeSubnets", req, resp, cb);
+        this.request("DescribeSubnets", req, resp, options, cb);
     }
 
     /**
@@ -1392,7 +1493,7 @@ class VpcClient extends AbstractClient {
      */
     CreateCcn(req, cb) {
         let resp = new CreateCcnResponse();
-        this.request("CreateCcn", req, resp, cb);
+        this.request("CreateCcn", req, resp, options, cb);
     }
 
     /**
@@ -1403,7 +1504,7 @@ class VpcClient extends AbstractClient {
      */
     ModifyCustomerGatewayAttribute(req, cb) {
         let resp = new ModifyCustomerGatewayAttributeResponse();
-        this.request("ModifyCustomerGatewayAttribute", req, resp, cb);
+        this.request("ModifyCustomerGatewayAttribute", req, resp, options, cb);
     }
 
     /**
@@ -1414,7 +1515,7 @@ class VpcClient extends AbstractClient {
      */
     ModifyVpnConnectionAttribute(req, cb) {
         let resp = new ModifyVpnConnectionAttributeResponse();
-        this.request("ModifyVpnConnectionAttribute", req, resp, cb);
+        this.request("ModifyVpnConnectionAttribute", req, resp, options, cb);
     }
 
     /**
@@ -1425,7 +1526,7 @@ class VpcClient extends AbstractClient {
      */
     DescribeSecurityGroups(req, cb) {
         let resp = new DescribeSecurityGroupsResponse();
-        this.request("DescribeSecurityGroups", req, resp, cb);
+        this.request("DescribeSecurityGroups", req, resp, options, cb);
     }
 
     /**
@@ -1436,7 +1537,7 @@ class VpcClient extends AbstractClient {
      */
     CreateVpnGateway(req, cb) {
         let resp = new CreateVpnGatewayResponse();
-        this.request("CreateVpnGateway", req, resp, cb);
+        this.request("CreateVpnGateway", req, resp, options, cb);
     }
 
     /**
@@ -1447,7 +1548,7 @@ class VpcClient extends AbstractClient {
      */
     DescribeSecurityGroupPolicies(req, cb) {
         let resp = new DescribeSecurityGroupPoliciesResponse();
-        this.request("DescribeSecurityGroupPolicies", req, resp, cb);
+        this.request("DescribeSecurityGroupPolicies", req, resp, options, cb);
     }
 
     /**
@@ -1458,7 +1559,7 @@ class VpcClient extends AbstractClient {
      */
     CreateDirectConnectGateway(req, cb) {
         let resp = new CreateDirectConnectGatewayResponse();
-        this.request("CreateDirectConnectGateway", req, resp, cb);
+        this.request("CreateDirectConnectGateway", req, resp, options, cb);
     }
 
     /**
@@ -1469,7 +1570,7 @@ class VpcClient extends AbstractClient {
      */
     DescribeClassicLinkInstances(req, cb) {
         let resp = new DescribeClassicLinkInstancesResponse();
-        this.request("DescribeClassicLinkInstances", req, resp, cb);
+        this.request("DescribeClassicLinkInstances", req, resp, options, cb);
     }
 
     /**
@@ -1481,7 +1582,7 @@ class VpcClient extends AbstractClient {
      */
     TransformAddress(req, cb) {
         let resp = new TransformAddressResponse();
-        this.request("TransformAddress", req, resp, cb);
+        this.request("TransformAddress", req, resp, options, cb);
     }
 
     /**
@@ -1493,7 +1594,7 @@ class VpcClient extends AbstractClient {
      */
     EnableRoutes(req, cb) {
         let resp = new EnableRoutesResponse();
-        this.request("EnableRoutes", req, resp, cb);
+        this.request("EnableRoutes", req, resp, options, cb);
     }
 
     /**
@@ -1504,18 +1605,32 @@ class VpcClient extends AbstractClient {
      */
     SetCcnRegionBandwidthLimits(req, cb) {
         let resp = new SetCcnRegionBandwidthLimitsResponse();
-        this.request("SetCcnRegionBandwidthLimits", req, resp, cb);
+        this.request("SetCcnRegionBandwidthLimits", req, resp, options, cb);
     }
 
     /**
-     * 本接口（MigrateNetworkInterface）用于弹性网卡迁移。
-     * @param {MigrateNetworkInterfaceRequest} req
-     * @param {function(string, MigrateNetworkInterfaceResponse):void} cb
+     * 本接口（CreateHaVip）用于创建高可用虚拟IP（HAVIP）
+     * @param {CreateHaVipRequest} req
+     * @param {function(string, CreateHaVipResponse):void} cb
      * @public
      */
-    MigrateNetworkInterface(req, cb) {
-        let resp = new MigrateNetworkInterfaceResponse();
-        this.request("MigrateNetworkInterface", req, resp, cb);
+    CreateHaVip(req, cb) {
+        let resp = new CreateHaVipResponse();
+        this.request("CreateHaVip", req, resp, options, cb);
+    }
+
+    /**
+     * 本接口（DeleteSecurityGroup）用于删除安全组（SecurityGroup）。
+* 只有当前账号下的安全组允许被删除。
+* 安全组实例ID如果在其他安全组的规则中被引用，则无法直接删除。这种情况下，需要先进行规则修改，再删除安全组。
+* 删除的安全组无法再找回，请谨慎调用。
+     * @param {DeleteSecurityGroupRequest} req
+     * @param {function(string, DeleteSecurityGroupResponse):void} cb
+     * @public
+     */
+    DeleteSecurityGroup(req, cb) {
+        let resp = new DeleteSecurityGroupResponse();
+        this.request("DeleteSecurityGroup", req, resp, options, cb);
     }
 
     /**
@@ -1526,7 +1641,7 @@ class VpcClient extends AbstractClient {
      */
     ModifyRouteTableAttribute(req, cb) {
         let resp = new ModifyRouteTableAttributeResponse();
-        this.request("ModifyRouteTableAttribute", req, resp, cb);
+        this.request("ModifyRouteTableAttribute", req, resp, options, cb);
     }
 
     /**
@@ -1538,7 +1653,7 @@ class VpcClient extends AbstractClient {
      */
     CreateRoutes(req, cb) {
         let resp = new CreateRoutesResponse();
-        this.request("CreateRoutes", req, resp, cb);
+        this.request("CreateRoutes", req, resp, options, cb);
     }
 
     /**
@@ -1549,7 +1664,18 @@ class VpcClient extends AbstractClient {
      */
     DescribeBandwidthPackageQuota(req, cb) {
         let resp = new DescribeBandwidthPackageQuotaResponse();
-        this.request("DescribeBandwidthPackageQuota", req, resp, cb);
+        this.request("DescribeBandwidthPackageQuota", req, resp, options, cb);
+    }
+
+    /**
+     * 本接口（ModifyHaVipAttribute）用于修改高可用虚拟IP（HAVIP）属性
+     * @param {ModifyHaVipAttributeRequest} req
+     * @param {function(string, ModifyHaVipAttributeResponse):void} cb
+     * @public
+     */
+    ModifyHaVipAttribute(req, cb) {
+        let resp = new ModifyHaVipAttributeResponse();
+        this.request("ModifyHaVipAttribute", req, resp, options, cb);
     }
 
     /**
@@ -1562,7 +1688,7 @@ class VpcClient extends AbstractClient {
      */
     ReleaseAddresses(req, cb) {
         let resp = new ReleaseAddressesResponse();
-        this.request("ReleaseAddresses", req, resp, cb);
+        this.request("ReleaseAddresses", req, resp, options, cb);
     }
 
     /**
@@ -1573,7 +1699,7 @@ class VpcClient extends AbstractClient {
      */
     DescribeBandwidthPackages(req, cb) {
         let resp = new DescribeBandwidthPackagesResponse();
-        this.request("DescribeBandwidthPackages", req, resp, cb);
+        this.request("DescribeBandwidthPackages", req, resp, options, cb);
     }
 
     /**
@@ -1584,7 +1710,7 @@ class VpcClient extends AbstractClient {
      */
     CreateServiceTemplateGroup(req, cb) {
         let resp = new CreateServiceTemplateGroupResponse();
-        this.request("CreateServiceTemplateGroup", req, resp, cb);
+        this.request("CreateServiceTemplateGroup", req, resp, options, cb);
     }
 
     /**
@@ -1595,7 +1721,7 @@ class VpcClient extends AbstractClient {
      */
     ModifyCcnAttribute(req, cb) {
         let resp = new ModifyCcnAttributeResponse();
-        this.request("ModifyCcnAttribute", req, resp, cb);
+        this.request("ModifyCcnAttribute", req, resp, options, cb);
     }
 
     /**
@@ -1606,7 +1732,7 @@ class VpcClient extends AbstractClient {
      */
     DescribeSecurityGroupAssociationStatistics(req, cb) {
         let resp = new DescribeSecurityGroupAssociationStatisticsResponse();
-        this.request("DescribeSecurityGroupAssociationStatistics", req, resp, cb);
+        this.request("DescribeSecurityGroupAssociationStatistics", req, resp, options, cb);
     }
 
     /**
@@ -1617,7 +1743,7 @@ class VpcClient extends AbstractClient {
      */
     DescribeAddressTemplates(req, cb) {
         let resp = new DescribeAddressTemplatesResponse();
-        this.request("DescribeAddressTemplates", req, resp, cb);
+        this.request("DescribeAddressTemplates", req, resp, options, cb);
     }
 
     /**
@@ -1628,7 +1754,7 @@ class VpcClient extends AbstractClient {
      */
     CreateVpnConnection(req, cb) {
         let resp = new CreateVpnConnectionResponse();
-        this.request("CreateVpnConnection", req, resp, cb);
+        this.request("CreateVpnConnection", req, resp, options, cb);
     }
 
     /**
@@ -1639,7 +1765,7 @@ class VpcClient extends AbstractClient {
      */
     ModifyAddressAttribute(req, cb) {
         let resp = new ModifyAddressAttributeResponse();
-        this.request("ModifyAddressAttribute", req, resp, cb);
+        this.request("ModifyAddressAttribute", req, resp, options, cb);
     }
 
     /**
@@ -1650,7 +1776,7 @@ class VpcClient extends AbstractClient {
      */
     DescribeAddressTemplateGroups(req, cb) {
         let resp = new DescribeAddressTemplateGroupsResponse();
-        this.request("DescribeAddressTemplateGroups", req, resp, cb);
+        this.request("DescribeAddressTemplateGroups", req, resp, options, cb);
     }
 
     /**
@@ -1661,7 +1787,7 @@ class VpcClient extends AbstractClient {
      */
     DetachClassicLinkVpc(req, cb) {
         let resp = new DetachClassicLinkVpcResponse();
-        this.request("DetachClassicLinkVpc", req, resp, cb);
+        this.request("DetachClassicLinkVpc", req, resp, options, cb);
     }
 
     /**
@@ -1681,7 +1807,7 @@ class VpcClient extends AbstractClient {
      */
     CreateSecurityGroupPolicies(req, cb) {
         let resp = new CreateSecurityGroupPoliciesResponse();
-        this.request("CreateSecurityGroupPolicies", req, resp, cb);
+        this.request("CreateSecurityGroupPolicies", req, resp, options, cb);
     }
 
     /**
@@ -1692,7 +1818,7 @@ class VpcClient extends AbstractClient {
      */
     ModifyVpcAttribute(req, cb) {
         let resp = new ModifyVpcAttributeResponse();
-        this.request("ModifyVpcAttribute", req, resp, cb);
+        this.request("ModifyVpcAttribute", req, resp, options, cb);
     }
 
 

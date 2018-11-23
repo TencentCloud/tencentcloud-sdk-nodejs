@@ -68,7 +68,7 @@ class BmClient extends AbstractClient {
      */
     UnbindPsaTag(req, cb) {
         let resp = new UnbindPsaTagResponse();
-        this.request("UnbindPsaTag", req, resp, cb);
+        this.request("UnbindPsaTag", req, resp, options, cb);
     }
 
     /**
@@ -79,7 +79,7 @@ class BmClient extends AbstractClient {
      */
     CreateSpotDevice(req, cb) {
         let resp = new CreateSpotDeviceResponse();
-        this.request("CreateSpotDevice", req, resp, cb);
+        this.request("CreateSpotDevice", req, resp, options, cb);
     }
 
     /**
@@ -90,7 +90,7 @@ class BmClient extends AbstractClient {
      */
     ModifyPsaRegulation(req, cb) {
         let resp = new ModifyPsaRegulationResponse();
-        this.request("ModifyPsaRegulation", req, resp, cb);
+        this.request("ModifyPsaRegulation", req, resp, options, cb);
     }
 
     /**
@@ -101,7 +101,7 @@ class BmClient extends AbstractClient {
      */
     DescribePsaRegulations(req, cb) {
         let resp = new DescribePsaRegulationsResponse();
-        this.request("DescribePsaRegulations", req, resp, cb);
+        this.request("DescribePsaRegulations", req, resp, options, cb);
     }
 
     /**
@@ -112,7 +112,7 @@ class BmClient extends AbstractClient {
      */
     DescribeDevices(req, cb) {
         let resp = new DescribeDevicesResponse();
-        this.request("DescribeDevices", req, resp, cb);
+        this.request("DescribeDevices", req, resp, options, cb);
     }
 
     /**
@@ -123,7 +123,7 @@ class BmClient extends AbstractClient {
      */
     DescribeRepairTaskConstant(req, cb) {
         let resp = new DescribeRepairTaskConstantResponse();
-        this.request("DescribeRepairTaskConstant", req, resp, cb);
+        this.request("DescribeRepairTaskConstant", req, resp, options, cb);
     }
 
     /**
@@ -134,7 +134,7 @@ class BmClient extends AbstractClient {
      */
     BindPsaTag(req, cb) {
         let resp = new BindPsaTagResponse();
-        this.request("BindPsaTag", req, resp, cb);
+        this.request("BindPsaTag", req, resp, options, cb);
     }
 
     /**
@@ -145,7 +145,7 @@ class BmClient extends AbstractClient {
      */
     DescribeTaskOperationLog(req, cb) {
         let resp = new DescribeTaskOperationLogResponse();
-        this.request("DescribeTaskOperationLog", req, resp, cb);
+        this.request("DescribeTaskOperationLog", req, resp, options, cb);
     }
 
     /**
@@ -156,7 +156,7 @@ class BmClient extends AbstractClient {
      */
     DeletePsaRegulation(req, cb) {
         let resp = new DeletePsaRegulationResponse();
-        this.request("DeletePsaRegulation", req, resp, cb);
+        this.request("DeletePsaRegulation", req, resp, options, cb);
     }
 
     /**
@@ -167,7 +167,7 @@ class BmClient extends AbstractClient {
      */
     CreateUserCmd(req, cb) {
         let resp = new CreateUserCmdResponse();
-        this.request("CreateUserCmd", req, resp, cb);
+        this.request("CreateUserCmd", req, resp, options, cb);
     }
 
     /**
@@ -186,7 +186,7 @@ TaskStatus（任务状态ID）与状态中文名的对应关系如下：<br>
      */
     DescribeTaskInfo(req, cb) {
         let resp = new DescribeTaskInfoResponse();
-        this.request("DescribeTaskInfo", req, resp, cb);
+        this.request("DescribeTaskInfo", req, resp, options, cb);
     }
 
     /**
@@ -217,7 +217,7 @@ ConfirmUnRecovered（维修完成后，确认故障未恢复）<br>
      */
     RepairTaskControl(req, cb) {
         let resp = new RepairTaskControlResponse();
-        this.request("RepairTaskControl", req, resp, cb);
+        this.request("RepairTaskControl", req, resp, options, cb);
     }
 
     /**
@@ -228,7 +228,7 @@ ConfirmUnRecovered（维修完成后，确认故障未恢复）<br>
      */
     CreatePsaRegulation(req, cb) {
         let resp = new CreatePsaRegulationResponse();
-        this.request("CreatePsaRegulation", req, resp, cb);
+        this.request("CreatePsaRegulation", req, resp, options, cb);
     }
 
 

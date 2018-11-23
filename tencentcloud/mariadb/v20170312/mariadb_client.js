@@ -134,7 +134,7 @@ class MariadbClient extends AbstractClient {
      */
     DescribeAccountPrivileges(req, cb) {
         let resp = new DescribeAccountPrivilegesResponse();
-        this.request("DescribeAccountPrivileges", req, resp, cb);
+        this.request("DescribeAccountPrivileges", req, resp, options, cb);
     }
 
     /**
@@ -145,7 +145,7 @@ class MariadbClient extends AbstractClient {
      */
     DescribeRenewalPrice(req, cb) {
         let resp = new DescribeRenewalPriceResponse();
-        this.request("DescribeRenewalPrice", req, resp, cb);
+        this.request("DescribeRenewalPrice", req, resp, options, cb);
     }
 
     /**
@@ -156,7 +156,7 @@ class MariadbClient extends AbstractClient {
      */
     DescribeOrders(req, cb) {
         let resp = new DescribeOrdersResponse();
-        this.request("DescribeOrders", req, resp, cb);
+        this.request("DescribeOrders", req, resp, options, cb);
     }
 
     /**
@@ -167,7 +167,7 @@ class MariadbClient extends AbstractClient {
      */
     DescribeSaleInfo(req, cb) {
         let resp = new DescribeSaleInfoResponse();
-        this.request("DescribeSaleInfo", req, resp, cb);
+        this.request("DescribeSaleInfo", req, resp, options, cb);
     }
 
     /**
@@ -179,7 +179,7 @@ class MariadbClient extends AbstractClient {
      */
     ModifyAccountDescription(req, cb) {
         let resp = new ModifyAccountDescriptionResponse();
-        this.request("ModifyAccountDescription", req, resp, cb);
+        this.request("ModifyAccountDescription", req, resp, options, cb);
     }
 
     /**
@@ -190,7 +190,7 @@ class MariadbClient extends AbstractClient {
      */
     DescribeBackupTime(req, cb) {
         let resp = new DescribeBackupTimeResponse();
-        this.request("DescribeBackupTime", req, resp, cb);
+        this.request("DescribeBackupTime", req, resp, options, cb);
     }
 
     /**
@@ -201,7 +201,7 @@ class MariadbClient extends AbstractClient {
      */
     DescribeDBResourceUsageDetails(req, cb) {
         let resp = new DescribeDBResourceUsageDetailsResponse();
-        this.request("DescribeDBResourceUsageDetails", req, resp, cb);
+        this.request("DescribeDBResourceUsageDetails", req, resp, options, cb);
     }
 
     /**
@@ -213,7 +213,7 @@ class MariadbClient extends AbstractClient {
      */
     ResetAccountPassword(req, cb) {
         let resp = new ResetAccountPasswordResponse();
-        this.request("ResetAccountPassword", req, resp, cb);
+        this.request("ResetAccountPassword", req, resp, options, cb);
     }
 
     /**
@@ -224,7 +224,7 @@ class MariadbClient extends AbstractClient {
      */
     ModifyDBParameters(req, cb) {
         let resp = new ModifyDBParametersResponse();
-        this.request("ModifyDBParameters", req, resp, cb);
+        this.request("ModifyDBParameters", req, resp, options, cb);
     }
 
     /**
@@ -235,7 +235,7 @@ class MariadbClient extends AbstractClient {
      */
     DescribeSqlLogs(req, cb) {
         let resp = new DescribeSqlLogsResponse();
-        this.request("DescribeSqlLogs", req, resp, cb);
+        this.request("DescribeSqlLogs", req, resp, options, cb);
     }
 
     /**
@@ -246,7 +246,7 @@ class MariadbClient extends AbstractClient {
      */
     DescribeDBSlowLogs(req, cb) {
         let resp = new DescribeDBSlowLogsResponse();
-        this.request("DescribeDBSlowLogs", req, resp, cb);
+        this.request("DescribeDBSlowLogs", req, resp, options, cb);
     }
 
     /**
@@ -257,7 +257,7 @@ class MariadbClient extends AbstractClient {
      */
     DescribeFlow(req, cb) {
         let resp = new DescribeFlowResponse();
-        this.request("DescribeFlow", req, resp, cb);
+        this.request("DescribeFlow", req, resp, options, cb);
     }
 
     /**
@@ -268,7 +268,7 @@ class MariadbClient extends AbstractClient {
      */
     ModifyDBInstanceName(req, cb) {
         let resp = new ModifyDBInstanceNameResponse();
-        this.request("ModifyDBInstanceName", req, resp, cb);
+        this.request("ModifyDBInstanceName", req, resp, options, cb);
     }
 
     /**
@@ -280,7 +280,7 @@ class MariadbClient extends AbstractClient {
      */
     GrantAccountPrivileges(req, cb) {
         let resp = new GrantAccountPrivilegesResponse();
-        this.request("GrantAccountPrivileges", req, resp, cb);
+        this.request("GrantAccountPrivileges", req, resp, options, cb);
     }
 
     /**
@@ -291,7 +291,7 @@ class MariadbClient extends AbstractClient {
      */
     DeleteAccount(req, cb) {
         let resp = new DeleteAccountResponse();
-        this.request("DeleteAccount", req, resp, cb);
+        this.request("DeleteAccount", req, resp, options, cb);
     }
 
     /**
@@ -302,7 +302,7 @@ class MariadbClient extends AbstractClient {
      */
     DescribeDBParameters(req, cb) {
         let resp = new DescribeDBParametersResponse();
-        this.request("DescribeDBParameters", req, resp, cb);
+        this.request("DescribeDBParameters", req, resp, options, cb);
     }
 
     /**
@@ -313,7 +313,7 @@ class MariadbClient extends AbstractClient {
      */
     ModifyDBInstancesProject(req, cb) {
         let resp = new ModifyDBInstancesProjectResponse();
-        this.request("ModifyDBInstancesProject", req, resp, cb);
+        this.request("ModifyDBInstancesProject", req, resp, options, cb);
     }
 
     /**
@@ -324,7 +324,7 @@ class MariadbClient extends AbstractClient {
      */
     DescribeDBPerformanceDetails(req, cb) {
         let resp = new DescribeDBPerformanceDetailsResponse();
-        this.request("DescribeDBPerformanceDetails", req, resp, cb);
+        this.request("DescribeDBPerformanceDetails", req, resp, options, cb);
     }
 
     /**
@@ -335,7 +335,7 @@ class MariadbClient extends AbstractClient {
      */
     DescribeDBLogFiles(req, cb) {
         let resp = new DescribeDBLogFilesResponse();
-        this.request("DescribeDBLogFiles", req, resp, cb);
+        this.request("DescribeDBLogFiles", req, resp, options, cb);
     }
 
     /**
@@ -346,7 +346,7 @@ class MariadbClient extends AbstractClient {
      */
     DescribeDBInstanceSpecs(req, cb) {
         let resp = new DescribeDBInstanceSpecsResponse();
-        this.request("DescribeDBInstanceSpecs", req, resp, cb);
+        this.request("DescribeDBInstanceSpecs", req, resp, options, cb);
     }
 
     /**
@@ -358,7 +358,7 @@ class MariadbClient extends AbstractClient {
      */
     DescribeDBInstances(req, cb) {
         let resp = new DescribeDBInstancesResponse();
-        this.request("DescribeDBInstances", req, resp, cb);
+        this.request("DescribeDBInstances", req, resp, options, cb);
     }
 
     /**
@@ -369,7 +369,7 @@ class MariadbClient extends AbstractClient {
      */
     RenewDBInstance(req, cb) {
         let resp = new RenewDBInstanceResponse();
-        this.request("RenewDBInstance", req, resp, cb);
+        this.request("RenewDBInstance", req, resp, options, cb);
     }
 
     /**
@@ -380,7 +380,7 @@ class MariadbClient extends AbstractClient {
      */
     DescribeUpgradePrice(req, cb) {
         let resp = new DescribeUpgradePriceResponse();
-        this.request("DescribeUpgradePrice", req, resp, cb);
+        this.request("DescribeUpgradePrice", req, resp, options, cb);
     }
 
     /**
@@ -391,7 +391,7 @@ class MariadbClient extends AbstractClient {
      */
     ModifyBackupTime(req, cb) {
         let resp = new ModifyBackupTimeResponse();
-        this.request("ModifyBackupTime", req, resp, cb);
+        this.request("ModifyBackupTime", req, resp, options, cb);
     }
 
     /**
@@ -402,7 +402,7 @@ class MariadbClient extends AbstractClient {
      */
     CreateAccount(req, cb) {
         let resp = new CreateAccountResponse();
-        this.request("CreateAccount", req, resp, cb);
+        this.request("CreateAccount", req, resp, options, cb);
     }
 
     /**
@@ -413,7 +413,7 @@ class MariadbClient extends AbstractClient {
      */
     OpenDBExtranetAccess(req, cb) {
         let resp = new OpenDBExtranetAccessResponse();
-        this.request("OpenDBExtranetAccess", req, resp, cb);
+        this.request("OpenDBExtranetAccess", req, resp, options, cb);
     }
 
     /**
@@ -424,7 +424,7 @@ class MariadbClient extends AbstractClient {
      */
     InitDBInstances(req, cb) {
         let resp = new InitDBInstancesResponse();
-        this.request("InitDBInstances", req, resp, cb);
+        this.request("InitDBInstances", req, resp, options, cb);
     }
 
     /**
@@ -435,7 +435,7 @@ class MariadbClient extends AbstractClient {
      */
     CreateDBInstance(req, cb) {
         let resp = new CreateDBInstanceResponse();
-        this.request("CreateDBInstance", req, resp, cb);
+        this.request("CreateDBInstance", req, resp, options, cb);
     }
 
     /**
@@ -446,7 +446,7 @@ class MariadbClient extends AbstractClient {
      */
     CloseDBExtranetAccess(req, cb) {
         let resp = new CloseDBExtranetAccessResponse();
-        this.request("CloseDBExtranetAccess", req, resp, cb);
+        this.request("CloseDBExtranetAccess", req, resp, options, cb);
     }
 
     /**
@@ -457,7 +457,7 @@ class MariadbClient extends AbstractClient {
      */
     DescribeAccounts(req, cb) {
         let resp = new DescribeAccountsResponse();
-        this.request("DescribeAccounts", req, resp, cb);
+        this.request("DescribeAccounts", req, resp, options, cb);
     }
 
     /**
@@ -469,7 +469,7 @@ class MariadbClient extends AbstractClient {
      */
     CopyAccountPrivileges(req, cb) {
         let resp = new CopyAccountPrivilegesResponse();
-        this.request("CopyAccountPrivileges", req, resp, cb);
+        this.request("CopyAccountPrivileges", req, resp, options, cb);
     }
 
     /**
@@ -480,7 +480,7 @@ class MariadbClient extends AbstractClient {
      */
     DescribePrice(req, cb) {
         let resp = new DescribePriceResponse();
-        this.request("DescribePrice", req, resp, cb);
+        this.request("DescribePrice", req, resp, options, cb);
     }
 
     /**
@@ -491,7 +491,7 @@ class MariadbClient extends AbstractClient {
      */
     CloneAccount(req, cb) {
         let resp = new CloneAccountResponse();
-        this.request("CloneAccount", req, resp, cb);
+        this.request("CloneAccount", req, resp, options, cb);
     }
 
     /**
@@ -502,7 +502,7 @@ class MariadbClient extends AbstractClient {
      */
     UpgradeDBInstance(req, cb) {
         let resp = new UpgradeDBInstanceResponse();
-        this.request("UpgradeDBInstance", req, resp, cb);
+        this.request("UpgradeDBInstance", req, resp, options, cb);
     }
 
     /**
@@ -513,7 +513,7 @@ class MariadbClient extends AbstractClient {
      */
     DescribeDBPerformance(req, cb) {
         let resp = new DescribeDBPerformanceResponse();
-        this.request("DescribeDBPerformance", req, resp, cb);
+        this.request("DescribeDBPerformance", req, resp, options, cb);
     }
 
     /**
@@ -524,7 +524,7 @@ class MariadbClient extends AbstractClient {
      */
     DescribeLogFileRetentionPeriod(req, cb) {
         let resp = new DescribeLogFileRetentionPeriodResponse();
-        this.request("DescribeLogFileRetentionPeriod", req, resp, cb);
+        this.request("DescribeLogFileRetentionPeriod", req, resp, options, cb);
     }
 
     /**
@@ -535,7 +535,7 @@ class MariadbClient extends AbstractClient {
      */
     DescribeDBResourceUsage(req, cb) {
         let resp = new DescribeDBResourceUsageResponse();
-        this.request("DescribeDBResourceUsage", req, resp, cb);
+        this.request("DescribeDBResourceUsage", req, resp, options, cb);
     }
 
     /**
@@ -546,7 +546,7 @@ class MariadbClient extends AbstractClient {
      */
     ModifyLogFileRetentionPeriod(req, cb) {
         let resp = new ModifyLogFileRetentionPeriodResponse();
-        this.request("ModifyLogFileRetentionPeriod", req, resp, cb);
+        this.request("ModifyLogFileRetentionPeriod", req, resp, options, cb);
     }
 
 
