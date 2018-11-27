@@ -69,7 +69,7 @@ class TbmClient extends AbstractClient {
      */
     DescribeUserPortrait(req, cb) {
         let resp = new DescribeUserPortraitResponse();
-        this.request("DescribeUserPortrait", req, resp, options, cb);
+        this.request("DescribeUserPortrait", req, resp, cb);
     }
 
     /**
@@ -80,7 +80,7 @@ class TbmClient extends AbstractClient {
      */
     DescribeBrandPosComments(req, cb) {
         let resp = new DescribeBrandPosCommentsResponse();
-        this.request("DescribeBrandPosComments", req, resp, options, cb);
+        this.request("DescribeBrandPosComments", req, resp, cb);
     }
 
     /**
@@ -91,7 +91,7 @@ class TbmClient extends AbstractClient {
      */
     DescribeIndustryNews(req, cb) {
         let resp = new DescribeIndustryNewsResponse();
-        this.request("DescribeIndustryNews", req, resp, options, cb);
+        this.request("DescribeIndustryNews", req, resp, cb);
     }
 
     /**
@@ -102,7 +102,7 @@ class TbmClient extends AbstractClient {
      */
     DescribeBrandMediaReport(req, cb) {
         let resp = new DescribeBrandMediaReportResponse();
-        this.request("DescribeBrandMediaReport", req, resp, options, cb);
+        this.request("DescribeBrandMediaReport", req, resp, cb);
     }
 
     /**
@@ -113,7 +113,7 @@ class TbmClient extends AbstractClient {
      */
     DescribeBrandNegComments(req, cb) {
         let resp = new DescribeBrandNegCommentsResponse();
-        this.request("DescribeBrandNegComments", req, resp, options, cb);
+        this.request("DescribeBrandNegComments", req, resp, cb);
     }
 
     /**
@@ -124,7 +124,7 @@ class TbmClient extends AbstractClient {
      */
     DescribeBrandSocialReport(req, cb) {
         let resp = new DescribeBrandSocialReportResponse();
-        this.request("DescribeBrandSocialReport", req, resp, options, cb);
+        this.request("DescribeBrandSocialReport", req, resp, cb);
     }
 
     /**
@@ -135,7 +135,7 @@ class TbmClient extends AbstractClient {
      */
     DescribeBrandSocialOpinion(req, cb) {
         let resp = new DescribeBrandSocialOpinionResponse();
-        this.request("DescribeBrandSocialOpinion", req, resp, options, cb);
+        this.request("DescribeBrandSocialOpinion", req, resp, cb);
     }
 
     /**
@@ -146,7 +146,7 @@ class TbmClient extends AbstractClient {
      */
     DescribeBrandCommentCount(req, cb) {
         let resp = new DescribeBrandCommentCountResponse();
-        this.request("DescribeBrandCommentCount", req, resp, options, cb);
+        this.request("DescribeBrandCommentCount", req, resp, cb);
     }
 
     /**
@@ -157,7 +157,7 @@ class TbmClient extends AbstractClient {
      */
     DescribeBrandExposure(req, cb) {
         let resp = new DescribeBrandExposureResponse();
-        this.request("DescribeBrandExposure", req, resp, options, cb);
+        this.request("DescribeBrandExposure", req, resp, cb);
     }
 
 

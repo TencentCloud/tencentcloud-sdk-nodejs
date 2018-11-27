@@ -65,7 +65,7 @@ class ScfClient extends AbstractClient {
      */
     Invoke(req, cb) {
         let resp = new InvokeResponse();
-        this.request("Invoke", req, resp, options, cb);
+        this.request("Invoke", req, resp, cb);
     }
 
     /**
@@ -76,7 +76,7 @@ class ScfClient extends AbstractClient {
      */
     GetFunction(req, cb) {
         let resp = new GetFunctionResponse();
-        this.request("GetFunction", req, resp, options, cb);
+        this.request("GetFunction", req, resp, cb);
     }
 
     /**
@@ -87,7 +87,7 @@ class ScfClient extends AbstractClient {
      */
     CreateFunction(req, cb) {
         let resp = new CreateFunctionResponse();
-        this.request("CreateFunction", req, resp, options, cb);
+        this.request("CreateFunction", req, resp, cb);
     }
 
     /**
@@ -98,7 +98,7 @@ class ScfClient extends AbstractClient {
      */
     DeleteFunction(req, cb) {
         let resp = new DeleteFunctionResponse();
-        this.request("DeleteFunction", req, resp, options, cb);
+        this.request("DeleteFunction", req, resp, cb);
     }
 
     /**
@@ -109,7 +109,7 @@ class ScfClient extends AbstractClient {
      */
     ListFunctions(req, cb) {
         let resp = new ListFunctionsResponse();
-        this.request("ListFunctions", req, resp, options, cb);
+        this.request("ListFunctions", req, resp, cb);
     }
 
     /**
@@ -120,7 +120,7 @@ class ScfClient extends AbstractClient {
      */
     CreateTrigger(req, cb) {
         let resp = new CreateTriggerResponse();
-        this.request("CreateTrigger", req, resp, options, cb);
+        this.request("CreateTrigger", req, resp, cb);
     }
 
     /**
@@ -131,7 +131,7 @@ class ScfClient extends AbstractClient {
      */
     UpdateFunctionConfiguration(req, cb) {
         let resp = new UpdateFunctionConfigurationResponse();
-        this.request("UpdateFunctionConfiguration", req, resp, options, cb);
+        this.request("UpdateFunctionConfiguration", req, resp, cb);
     }
 
     /**
@@ -142,7 +142,7 @@ class ScfClient extends AbstractClient {
      */
     DeleteTrigger(req, cb) {
         let resp = new DeleteTriggerResponse();
-        this.request("DeleteTrigger", req, resp, options, cb);
+        this.request("DeleteTrigger", req, resp, cb);
     }
 
     /**
@@ -153,7 +153,7 @@ class ScfClient extends AbstractClient {
      */
     GetFunctionLogs(req, cb) {
         let resp = new GetFunctionLogsResponse();
-        this.request("GetFunctionLogs", req, resp, options, cb);
+        this.request("GetFunctionLogs", req, resp, cb);
     }
 
     /**
@@ -164,7 +164,7 @@ class ScfClient extends AbstractClient {
      */
     UpdateFunctionCode(req, cb) {
         let resp = new UpdateFunctionCodeResponse();
-        this.request("UpdateFunctionCode", req, resp, options, cb);
+        this.request("UpdateFunctionCode", req, resp, cb);
     }
 
 

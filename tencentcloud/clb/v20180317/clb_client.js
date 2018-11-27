@@ -83,7 +83,7 @@ class ClbClient extends AbstractClient {
      */
     DescribeTargets(req, cb) {
         let resp = new DescribeTargetsResponse();
-        this.request("DescribeTargets", req, resp, options, cb);
+        this.request("DescribeTargets", req, resp, cb);
     }
 
     /**
@@ -95,7 +95,7 @@ class ClbClient extends AbstractClient {
      */
     RegisterTargets(req, cb) {
         let resp = new RegisterTargetsResponse();
-        this.request("RegisterTargets", req, resp, options, cb);
+        this.request("RegisterTargets", req, resp, cb);
     }
 
     /**
@@ -107,7 +107,7 @@ class ClbClient extends AbstractClient {
      */
     CreateListener(req, cb) {
         let resp = new CreateListenerResponse();
-        this.request("CreateListener", req, resp, options, cb);
+        this.request("CreateListener", req, resp, cb);
     }
 
     /**
@@ -119,7 +119,7 @@ class ClbClient extends AbstractClient {
      */
     ModifyTargetWeight(req, cb) {
         let resp = new ModifyTargetWeightResponse();
-        this.request("ModifyTargetWeight", req, resp, options, cb);
+        this.request("ModifyTargetWeight", req, resp, cb);
     }
 
     /**
@@ -131,7 +131,7 @@ class ClbClient extends AbstractClient {
      */
     ModifyListener(req, cb) {
         let resp = new ModifyListenerResponse();
-        this.request("ModifyListener", req, resp, options, cb);
+        this.request("ModifyListener", req, resp, cb);
     }
 
     /**
@@ -143,7 +143,7 @@ class ClbClient extends AbstractClient {
      */
     DeleteLoadBalancer(req, cb) {
         let resp = new DeleteLoadBalancerResponse();
-        this.request("DeleteLoadBalancer", req, resp, options, cb);
+        this.request("DeleteLoadBalancer", req, resp, cb);
     }
 
     /**
@@ -155,7 +155,7 @@ class ClbClient extends AbstractClient {
      */
     ModifyLoadBalancerAttributes(req, cb) {
         let resp = new ModifyLoadBalancerAttributesResponse();
-        this.request("ModifyLoadBalancerAttributes", req, resp, options, cb);
+        this.request("ModifyLoadBalancerAttributes", req, resp, cb);
     }
 
     /**
@@ -166,7 +166,7 @@ class ClbClient extends AbstractClient {
      */
     DescribeTaskStatus(req, cb) {
         let resp = new DescribeTaskStatusResponse();
-        this.request("DescribeTaskStatus", req, resp, options, cb);
+        this.request("DescribeTaskStatus", req, resp, cb);
     }
 
     /**
@@ -178,7 +178,7 @@ class ClbClient extends AbstractClient {
      */
     DeleteRule(req, cb) {
         let resp = new DeleteRuleResponse();
-        this.request("DeleteRule", req, resp, options, cb);
+        this.request("DeleteRule", req, resp, cb);
     }
 
     /**
@@ -190,7 +190,7 @@ class ClbClient extends AbstractClient {
      */
     DeleteListener(req, cb) {
         let resp = new DeleteListenerResponse();
-        this.request("DeleteListener", req, resp, options, cb);
+        this.request("DeleteListener", req, resp, cb);
     }
 
     /**
@@ -202,7 +202,7 @@ class ClbClient extends AbstractClient {
      */
     ModifyTargetPort(req, cb) {
         let resp = new ModifyTargetPortResponse();
-        this.request("ModifyTargetPort", req, resp, options, cb);
+        this.request("ModifyTargetPort", req, resp, cb);
     }
 
     /**
@@ -214,7 +214,7 @@ class ClbClient extends AbstractClient {
      */
     ModifyRule(req, cb) {
         let resp = new ModifyRuleResponse();
-        this.request("ModifyRule", req, resp, options, cb);
+        this.request("ModifyRule", req, resp, cb);
     }
 
     /**
@@ -226,7 +226,7 @@ class ClbClient extends AbstractClient {
      */
     CreateRule(req, cb) {
         let resp = new CreateRuleResponse();
-        this.request("CreateRule", req, resp, options, cb);
+        this.request("CreateRule", req, resp, cb);
     }
 
     /**
@@ -238,7 +238,7 @@ class ClbClient extends AbstractClient {
      */
     ModifyDomain(req, cb) {
         let resp = new ModifyDomainResponse();
-        this.request("ModifyDomain", req, resp, options, cb);
+        this.request("ModifyDomain", req, resp, cb);
     }
 
     /**
@@ -249,7 +249,7 @@ class ClbClient extends AbstractClient {
      */
     DescribeListeners(req, cb) {
         let resp = new DescribeListenersResponse();
-        this.request("DescribeListeners", req, resp, options, cb);
+        this.request("DescribeListeners", req, resp, cb);
     }
 
     /**
@@ -261,7 +261,7 @@ class ClbClient extends AbstractClient {
      */
     CreateLoadBalancer(req, cb) {
         let resp = new CreateLoadBalancerResponse();
-        this.request("CreateLoadBalancer", req, resp, options, cb);
+        this.request("CreateLoadBalancer", req, resp, cb);
     }
 
     /**
@@ -273,7 +273,7 @@ class ClbClient extends AbstractClient {
      */
     DescribeLoadBalancers(req, cb) {
         let resp = new DescribeLoadBalancersResponse();
-        this.request("DescribeLoadBalancers", req, resp, options, cb);
+        this.request("DescribeLoadBalancers", req, resp, cb);
     }
 
     /**
@@ -285,7 +285,7 @@ class ClbClient extends AbstractClient {
      */
     DeregisterTargets(req, cb) {
         let resp = new DeregisterTargetsResponse();
-        this.request("DeregisterTargets", req, resp, options, cb);
+        this.request("DeregisterTargets", req, resp, cb);
     }
 
 

@@ -48,7 +48,7 @@ class DrmClient extends AbstractClient {
      */
     CreateLicense(req, cb) {
         let resp = new CreateLicenseResponse();
-        this.request("CreateLicense", req, resp, options, cb);
+        this.request("CreateLicense", req, resp, cb);
     }
 
     /**
@@ -59,7 +59,7 @@ class DrmClient extends AbstractClient {
      */
     StartEncryption(req, cb) {
         let resp = new StartEncryptionResponse();
-        this.request("StartEncryption", req, resp, options, cb);
+        this.request("StartEncryption", req, resp, cb);
     }
 
     /**
@@ -72,7 +72,7 @@ class DrmClient extends AbstractClient {
      */
     DescribeKeys(req, cb) {
         let resp = new DescribeKeysResponse();
-        this.request("DescribeKeys", req, resp, options, cb);
+        this.request("DescribeKeys", req, resp, cb);
     }
 
 

@@ -59,7 +59,7 @@ class TiaClient extends AbstractClient {
      */
     CreateModel(req, cb) {
         let resp = new CreateModelResponse();
-        this.request("CreateModel", req, resp, options, cb);
+        this.request("CreateModel", req, resp, cb);
     }
 
     /**
@@ -70,7 +70,7 @@ class TiaClient extends AbstractClient {
      */
     ListJobs(req, cb) {
         let resp = new ListJobsResponse();
-        this.request("ListJobs", req, resp, options, cb);
+        this.request("ListJobs", req, resp, cb);
     }
 
     /**
@@ -81,7 +81,7 @@ class TiaClient extends AbstractClient {
      */
     CreateJob(req, cb) {
         let resp = new CreateJobResponse();
-        this.request("CreateJob", req, resp, options, cb);
+        this.request("CreateJob", req, resp, cb);
     }
 
     /**
@@ -92,7 +92,7 @@ class TiaClient extends AbstractClient {
      */
     DescribeModel(req, cb) {
         let resp = new DescribeModelResponse();
-        this.request("DescribeModel", req, resp, options, cb);
+        this.request("DescribeModel", req, resp, cb);
     }
 
     /**
@@ -103,7 +103,7 @@ class TiaClient extends AbstractClient {
      */
     QueryLogs(req, cb) {
         let resp = new QueryLogsResponse();
-        this.request("QueryLogs", req, resp, options, cb);
+        this.request("QueryLogs", req, resp, cb);
     }
 
     /**
@@ -114,7 +114,7 @@ class TiaClient extends AbstractClient {
      */
     ListModels(req, cb) {
         let resp = new ListModelsResponse();
-        this.request("ListModels", req, resp, options, cb);
+        this.request("ListModels", req, resp, cb);
     }
 
     /**
@@ -125,7 +125,7 @@ class TiaClient extends AbstractClient {
      */
     DeleteJob(req, cb) {
         let resp = new DeleteJobResponse();
-        this.request("DeleteJob", req, resp, options, cb);
+        this.request("DeleteJob", req, resp, cb);
     }
 
     /**
@@ -136,7 +136,7 @@ class TiaClient extends AbstractClient {
      */
     DeleteModel(req, cb) {
         let resp = new DeleteModelResponse();
-        this.request("DeleteModel", req, resp, options, cb);
+        this.request("DeleteModel", req, resp, cb);
     }
 
     /**
@@ -147,7 +147,7 @@ class TiaClient extends AbstractClient {
      */
     DescribeJob(req, cb) {
         let resp = new DescribeJobResponse();
-        this.request("DescribeJob", req, resp, options, cb);
+        this.request("DescribeJob", req, resp, cb);
     }
 
     /**
@@ -158,7 +158,7 @@ class TiaClient extends AbstractClient {
      */
     InstallAgent(req, cb) {
         let resp = new InstallAgentResponse();
-        this.request("InstallAgent", req, resp, options, cb);
+        this.request("InstallAgent", req, resp, cb);
     }
 
 

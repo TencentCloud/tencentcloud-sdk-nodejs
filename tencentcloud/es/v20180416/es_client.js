@@ -51,7 +51,7 @@ class EsClient extends AbstractClient {
      */
     UpdateInstance(req, cb) {
         let resp = new UpdateInstanceResponse();
-        this.request("UpdateInstance", req, resp, options, cb);
+        this.request("UpdateInstance", req, resp, cb);
     }
 
     /**
@@ -62,7 +62,7 @@ class EsClient extends AbstractClient {
      */
     CreateInstance(req, cb) {
         let resp = new CreateInstanceResponse();
-        this.request("CreateInstance", req, resp, options, cb);
+        this.request("CreateInstance", req, resp, cb);
     }
 
     /**
@@ -73,7 +73,7 @@ class EsClient extends AbstractClient {
      */
     DescribeInstances(req, cb) {
         let resp = new DescribeInstancesResponse();
-        this.request("DescribeInstances", req, resp, options, cb);
+        this.request("DescribeInstances", req, resp, cb);
     }
 
     /**
@@ -84,7 +84,7 @@ class EsClient extends AbstractClient {
      */
     DeleteInstance(req, cb) {
         let resp = new DeleteInstanceResponse();
-        this.request("DeleteInstance", req, resp, options, cb);
+        this.request("DeleteInstance", req, resp, cb);
     }
 
     /**
@@ -95,7 +95,7 @@ class EsClient extends AbstractClient {
      */
     RestartInstance(req, cb) {
         let resp = new RestartInstanceResponse();
-        this.request("RestartInstance", req, resp, options, cb);
+        this.request("RestartInstance", req, resp, cb);
     }
 
 

@@ -47,7 +47,7 @@ class MonitorClient extends AbstractClient {
      */
     DescribeBaseMetrics(req, cb) {
         let resp = new DescribeBaseMetricsResponse();
-        this.request("DescribeBaseMetrics", req, resp, options, cb);
+        this.request("DescribeBaseMetrics", req, resp, cb);
     }
 
     /**
@@ -60,7 +60,7 @@ class MonitorClient extends AbstractClient {
      */
     GetMonitorData(req, cb) {
         let resp = new GetMonitorDataResponse();
-        this.request("GetMonitorData", req, resp, options, cb);
+        this.request("GetMonitorData", req, resp, cb);
     }
 
 

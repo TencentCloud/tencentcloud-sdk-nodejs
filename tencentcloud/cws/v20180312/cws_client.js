@@ -82,7 +82,7 @@ class CwsClient extends AbstractClient {
      */
     CreateVulsReport(req, cb) {
         let resp = new CreateVulsReportResponse();
-        this.request("CreateVulsReport", req, resp, options, cb);
+        this.request("CreateVulsReport", req, resp, cb);
     }
 
     /**
@@ -93,7 +93,7 @@ class CwsClient extends AbstractClient {
      */
     DescribeVuls(req, cb) {
         let resp = new DescribeVulsResponse();
-        this.request("DescribeVuls", req, resp, options, cb);
+        this.request("DescribeVuls", req, resp, cb);
     }
 
     /**
@@ -104,7 +104,7 @@ class CwsClient extends AbstractClient {
      */
     ModifyMonitorAttribute(req, cb) {
         let resp = new ModifyMonitorAttributeResponse();
-        this.request("ModifyMonitorAttribute", req, resp, options, cb);
+        this.request("ModifyMonitorAttribute", req, resp, cb);
     }
 
     /**
@@ -115,7 +115,7 @@ class CwsClient extends AbstractClient {
      */
     CreateSitesScans(req, cb) {
         let resp = new CreateSitesScansResponse();
-        this.request("CreateSitesScans", req, resp, options, cb);
+        this.request("CreateSitesScans", req, resp, cb);
     }
 
     /**
@@ -126,7 +126,7 @@ class CwsClient extends AbstractClient {
      */
     CreateSites(req, cb) {
         let resp = new CreateSitesResponse();
-        this.request("CreateSites", req, resp, options, cb);
+        this.request("CreateSites", req, resp, cb);
     }
 
     /**
@@ -137,7 +137,7 @@ class CwsClient extends AbstractClient {
      */
     CreateVulsMisinformation(req, cb) {
         let resp = new CreateVulsMisinformationResponse();
-        this.request("CreateVulsMisinformation", req, resp, options, cb);
+        this.request("CreateVulsMisinformation", req, resp, cb);
     }
 
     /**
@@ -148,7 +148,7 @@ class CwsClient extends AbstractClient {
      */
     DescribeConfig(req, cb) {
         let resp = new DescribeConfigResponse();
-        this.request("DescribeConfig", req, resp, options, cb);
+        this.request("DescribeConfig", req, resp, cb);
     }
 
     /**
@@ -159,7 +159,7 @@ class CwsClient extends AbstractClient {
      */
     DescribeSites(req, cb) {
         let resp = new DescribeSitesResponse();
-        this.request("DescribeSites", req, resp, options, cb);
+        this.request("DescribeSites", req, resp, cb);
     }
 
     /**
@@ -170,7 +170,7 @@ class CwsClient extends AbstractClient {
      */
     DescribeSitesVerification(req, cb) {
         let resp = new DescribeSitesVerificationResponse();
-        this.request("DescribeSitesVerification", req, resp, options, cb);
+        this.request("DescribeSitesVerification", req, resp, cb);
     }
 
     /**
@@ -181,7 +181,7 @@ class CwsClient extends AbstractClient {
      */
     ModifySiteAttribute(req, cb) {
         let resp = new ModifySiteAttributeResponse();
-        this.request("ModifySiteAttribute", req, resp, options, cb);
+        this.request("ModifySiteAttribute", req, resp, cb);
     }
 
     /**
@@ -192,7 +192,7 @@ class CwsClient extends AbstractClient {
      */
     ModifyConfigAttribute(req, cb) {
         let resp = new ModifyConfigAttributeResponse();
-        this.request("ModifyConfigAttribute", req, resp, options, cb);
+        this.request("ModifyConfigAttribute", req, resp, cb);
     }
 
     /**
@@ -203,7 +203,7 @@ class CwsClient extends AbstractClient {
      */
     DescribeVulsNumberTimeline(req, cb) {
         let resp = new DescribeVulsNumberTimelineResponse();
-        this.request("DescribeVulsNumberTimeline", req, resp, options, cb);
+        this.request("DescribeVulsNumberTimeline", req, resp, cb);
     }
 
     /**
@@ -214,7 +214,7 @@ class CwsClient extends AbstractClient {
      */
     VerifySites(req, cb) {
         let resp = new VerifySitesResponse();
-        this.request("VerifySites", req, resp, options, cb);
+        this.request("VerifySites", req, resp, cb);
     }
 
     /**
@@ -225,7 +225,7 @@ class CwsClient extends AbstractClient {
      */
     DeleteMonitors(req, cb) {
         let resp = new DeleteMonitorsResponse();
-        this.request("DeleteMonitors", req, resp, options, cb);
+        this.request("DeleteMonitors", req, resp, cb);
     }
 
     /**
@@ -236,7 +236,7 @@ class CwsClient extends AbstractClient {
      */
     CreateMonitors(req, cb) {
         let resp = new CreateMonitorsResponse();
-        this.request("CreateMonitors", req, resp, options, cb);
+        this.request("CreateMonitors", req, resp, cb);
     }
 
     /**
@@ -247,7 +247,7 @@ class CwsClient extends AbstractClient {
      */
     DeleteSites(req, cb) {
         let resp = new DeleteSitesResponse();
-        this.request("DeleteSites", req, resp, options, cb);
+        this.request("DeleteSites", req, resp, cb);
     }
 
     /**
@@ -258,7 +258,7 @@ class CwsClient extends AbstractClient {
      */
     DescribeVulsNumber(req, cb) {
         let resp = new DescribeVulsNumberResponse();
-        this.request("DescribeVulsNumber", req, resp, options, cb);
+        this.request("DescribeVulsNumber", req, resp, cb);
     }
 
     /**
@@ -269,7 +269,7 @@ class CwsClient extends AbstractClient {
      */
     DescribeMonitors(req, cb) {
         let resp = new DescribeMonitorsResponse();
-        this.request("DescribeMonitors", req, resp, options, cb);
+        this.request("DescribeMonitors", req, resp, cb);
     }
 
     /**
@@ -280,7 +280,7 @@ class CwsClient extends AbstractClient {
      */
     DescribeSiteQuota(req, cb) {
         let resp = new DescribeSiteQuotaResponse();
-        this.request("DescribeSiteQuota", req, resp, options, cb);
+        this.request("DescribeSiteQuota", req, resp, cb);
     }
 
 

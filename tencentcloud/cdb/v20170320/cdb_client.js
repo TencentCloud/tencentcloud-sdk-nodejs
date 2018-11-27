@@ -194,7 +194,7 @@ class CdbClient extends AbstractClient {
      */
     DescribeDBInstanceGTID(req, cb) {
         let resp = new DescribeDBInstanceGTIDResponse();
-        this.request("DescribeDBInstanceGTID", req, resp, options, cb);
+        this.request("DescribeDBInstanceGTID", req, resp, cb);
     }
 
     /**
@@ -205,7 +205,7 @@ class CdbClient extends AbstractClient {
      */
     DescribeAccountPrivileges(req, cb) {
         let resp = new DescribeAccountPrivilegesResponse();
-        this.request("DescribeAccountPrivileges", req, resp, options, cb);
+        this.request("DescribeAccountPrivileges", req, resp, cb);
     }
 
     /**
@@ -216,7 +216,7 @@ class CdbClient extends AbstractClient {
      */
     DeleteAccounts(req, cb) {
         let resp = new DeleteAccountsResponse();
-        this.request("DeleteAccounts", req, resp, options, cb);
+        this.request("DeleteAccounts", req, resp, cb);
     }
 
     /**
@@ -227,7 +227,7 @@ class CdbClient extends AbstractClient {
      */
     DescribeProjectSecurityGroups(req, cb) {
         let resp = new DescribeProjectSecurityGroupsResponse();
-        this.request("DescribeProjectSecurityGroups", req, resp, options, cb);
+        this.request("DescribeProjectSecurityGroups", req, resp, cb);
     }
 
     /**
@@ -240,7 +240,7 @@ class CdbClient extends AbstractClient {
      */
     CreateDBImportJob(req, cb) {
         let resp = new CreateDBImportJobResponse();
-        this.request("CreateDBImportJob", req, resp, options, cb);
+        this.request("CreateDBImportJob", req, resp, cb);
     }
 
     /**
@@ -251,7 +251,7 @@ class CdbClient extends AbstractClient {
      */
     DescribeRollbackRangeTime(req, cb) {
         let resp = new DescribeRollbackRangeTimeResponse();
-        this.request("DescribeRollbackRangeTime", req, resp, options, cb);
+        this.request("DescribeRollbackRangeTime", req, resp, cb);
     }
 
     /**
@@ -262,7 +262,7 @@ class CdbClient extends AbstractClient {
      */
     DeleteBackup(req, cb) {
         let resp = new DeleteBackupResponse();
-        this.request("DeleteBackup", req, resp, options, cb);
+        this.request("DeleteBackup", req, resp, cb);
     }
 
     /**
@@ -273,7 +273,7 @@ class CdbClient extends AbstractClient {
      */
     OpenDBInstanceGTID(req, cb) {
         let resp = new OpenDBInstanceGTIDResponse();
-        this.request("OpenDBInstanceGTID", req, resp, options, cb);
+        this.request("OpenDBInstanceGTID", req, resp, cb);
     }
 
     /**
@@ -284,7 +284,7 @@ class CdbClient extends AbstractClient {
      */
     ModifyAccountDescription(req, cb) {
         let resp = new ModifyAccountDescriptionResponse();
-        this.request("ModifyAccountDescription", req, resp, options, cb);
+        this.request("ModifyAccountDescription", req, resp, cb);
     }
 
     /**
@@ -295,7 +295,7 @@ class CdbClient extends AbstractClient {
      */
     IsolateDBInstance(req, cb) {
         let resp = new IsolateDBInstanceResponse();
-        this.request("IsolateDBInstance", req, resp, options, cb);
+        this.request("IsolateDBInstance", req, resp, cb);
     }
 
     /**
@@ -306,7 +306,7 @@ class CdbClient extends AbstractClient {
      */
     ModifyBackupConfig(req, cb) {
         let resp = new ModifyBackupConfigResponse();
-        this.request("ModifyBackupConfig", req, resp, options, cb);
+        this.request("ModifyBackupConfig", req, resp, cb);
     }
 
     /**
@@ -317,7 +317,7 @@ class CdbClient extends AbstractClient {
      */
     ModifyInstanceParam(req, cb) {
         let resp = new ModifyInstanceParamResponse();
-        this.request("ModifyInstanceParam", req, resp, options, cb);
+        this.request("ModifyInstanceParam", req, resp, cb);
     }
 
     /**
@@ -328,7 +328,7 @@ class CdbClient extends AbstractClient {
      */
     ModifyDBInstanceProject(req, cb) {
         let resp = new ModifyDBInstanceProjectResponse();
-        this.request("ModifyDBInstanceProject", req, resp, options, cb);
+        this.request("ModifyDBInstanceProject", req, resp, cb);
     }
 
     /**
@@ -339,7 +339,7 @@ class CdbClient extends AbstractClient {
      */
     DescribeBackups(req, cb) {
         let resp = new DescribeBackupsResponse();
-        this.request("DescribeBackups", req, resp, options, cb);
+        this.request("DescribeBackups", req, resp, cb);
     }
 
     /**
@@ -350,7 +350,7 @@ class CdbClient extends AbstractClient {
      */
     DescribeAsyncRequestInfo(req, cb) {
         let resp = new DescribeAsyncRequestInfoResponse();
-        this.request("DescribeAsyncRequestInfo", req, resp, options, cb);
+        this.request("DescribeAsyncRequestInfo", req, resp, cb);
     }
 
     /**
@@ -361,7 +361,7 @@ class CdbClient extends AbstractClient {
      */
     DescribeBackupDatabases(req, cb) {
         let resp = new DescribeBackupDatabasesResponse();
-        this.request("DescribeBackupDatabases", req, resp, options, cb);
+        this.request("DescribeBackupDatabases", req, resp, cb);
     }
 
     /**
@@ -372,7 +372,7 @@ class CdbClient extends AbstractClient {
      */
     InitDBInstances(req, cb) {
         let resp = new InitDBInstancesResponse();
-        this.request("InitDBInstances", req, resp, options, cb);
+        this.request("InitDBInstances", req, resp, cb);
     }
 
     /**
@@ -390,7 +390,7 @@ class CdbClient extends AbstractClient {
      */
     CreateDBInstanceHour(req, cb) {
         let resp = new CreateDBInstanceHourResponse();
-        this.request("CreateDBInstanceHour", req, resp, options, cb);
+        this.request("CreateDBInstanceHour", req, resp, cb);
     }
 
     /**
@@ -401,7 +401,7 @@ class CdbClient extends AbstractClient {
      */
     ModifyDBInstanceName(req, cb) {
         let resp = new ModifyDBInstanceNameResponse();
-        this.request("ModifyDBInstanceName", req, resp, options, cb);
+        this.request("ModifyDBInstanceName", req, resp, cb);
     }
 
     /**
@@ -412,7 +412,7 @@ class CdbClient extends AbstractClient {
      */
     DescribeDBZoneConfig(req, cb) {
         let resp = new DescribeDBZoneConfigResponse();
-        this.request("DescribeDBZoneConfig", req, resp, options, cb);
+        this.request("DescribeDBZoneConfig", req, resp, cb);
     }
 
     /**
@@ -423,7 +423,7 @@ class CdbClient extends AbstractClient {
      */
     CreateBackup(req, cb) {
         let resp = new CreateBackupResponse();
-        this.request("CreateBackup", req, resp, options, cb);
+        this.request("CreateBackup", req, resp, cb);
     }
 
     /**
@@ -434,7 +434,7 @@ class CdbClient extends AbstractClient {
      */
     ModifyDBInstanceVipVport(req, cb) {
         let resp = new ModifyDBInstanceVipVportResponse();
-        this.request("ModifyDBInstanceVipVport", req, resp, options, cb);
+        this.request("ModifyDBInstanceVipVport", req, resp, cb);
     }
 
     /**
@@ -445,7 +445,7 @@ class CdbClient extends AbstractClient {
      */
     DescribeDBInstanceConfig(req, cb) {
         let resp = new DescribeDBInstanceConfigResponse();
-        this.request("DescribeDBInstanceConfig", req, resp, options, cb);
+        this.request("DescribeDBInstanceConfig", req, resp, cb);
     }
 
     /**
@@ -456,7 +456,7 @@ class CdbClient extends AbstractClient {
      */
     ModifyAutoRenewFlag(req, cb) {
         let resp = new ModifyAutoRenewFlagResponse();
-        this.request("ModifyAutoRenewFlag", req, resp, options, cb);
+        this.request("ModifyAutoRenewFlag", req, resp, cb);
     }
 
     /**
@@ -467,7 +467,7 @@ class CdbClient extends AbstractClient {
      */
     DescribeDBInstanceRebootTime(req, cb) {
         let resp = new DescribeDBInstanceRebootTimeResponse();
-        this.request("DescribeDBInstanceRebootTime", req, resp, options, cb);
+        this.request("DescribeDBInstanceRebootTime", req, resp, cb);
     }
 
     /**
@@ -478,7 +478,7 @@ class CdbClient extends AbstractClient {
      */
     DescribeBackupTables(req, cb) {
         let resp = new DescribeBackupTablesResponse();
-        this.request("DescribeBackupTables", req, resp, options, cb);
+        this.request("DescribeBackupTables", req, resp, cb);
     }
 
     /**
@@ -493,7 +493,7 @@ class CdbClient extends AbstractClient {
      */
     RestartDBInstances(req, cb) {
         let resp = new RestartDBInstancesResponse();
-        this.request("RestartDBInstances", req, resp, options, cb);
+        this.request("RestartDBInstances", req, resp, cb);
     }
 
     /**
@@ -504,7 +504,7 @@ class CdbClient extends AbstractClient {
      */
     DescribeDBInstances(req, cb) {
         let resp = new DescribeDBInstancesResponse();
-        this.request("DescribeDBInstances", req, resp, options, cb);
+        this.request("DescribeDBInstances", req, resp, cb);
     }
 
     /**
@@ -515,7 +515,7 @@ class CdbClient extends AbstractClient {
      */
     VerifyRootAccount(req, cb) {
         let resp = new VerifyRootAccountResponse();
-        this.request("VerifyRootAccount", req, resp, options, cb);
+        this.request("VerifyRootAccount", req, resp, cb);
     }
 
     /**
@@ -526,7 +526,7 @@ class CdbClient extends AbstractClient {
      */
     RenewDBInstance(req, cb) {
         let resp = new RenewDBInstanceResponse();
-        this.request("RenewDBInstance", req, resp, options, cb);
+        this.request("RenewDBInstance", req, resp, cb);
     }
 
     /**
@@ -537,7 +537,7 @@ class CdbClient extends AbstractClient {
      */
     DescribeDBInstanceCharset(req, cb) {
         let resp = new DescribeDBInstanceCharsetResponse();
-        this.request("DescribeDBInstanceCharset", req, resp, options, cb);
+        this.request("DescribeDBInstanceCharset", req, resp, cb);
     }
 
     /**
@@ -548,7 +548,7 @@ class CdbClient extends AbstractClient {
      */
     StartBatchRollback(req, cb) {
         let resp = new StartBatchRollbackResponse();
-        this.request("StartBatchRollback", req, resp, options, cb);
+        this.request("StartBatchRollback", req, resp, cb);
     }
 
     /**
@@ -559,7 +559,7 @@ class CdbClient extends AbstractClient {
      */
     AssociateSecurityGroups(req, cb) {
         let resp = new AssociateSecurityGroupsResponse();
-        this.request("AssociateSecurityGroups", req, resp, options, cb);
+        this.request("AssociateSecurityGroups", req, resp, cb);
     }
 
     /**
@@ -570,7 +570,7 @@ class CdbClient extends AbstractClient {
      */
     DescribeSlowLogs(req, cb) {
         let resp = new DescribeSlowLogsResponse();
-        this.request("DescribeSlowLogs", req, resp, options, cb);
+        this.request("DescribeSlowLogs", req, resp, cb);
     }
 
     /**
@@ -581,7 +581,7 @@ class CdbClient extends AbstractClient {
      */
     DescribeDBPrice(req, cb) {
         let resp = new DescribeDBPriceResponse();
-        this.request("DescribeDBPrice", req, resp, options, cb);
+        this.request("DescribeDBPrice", req, resp, cb);
     }
 
     /**
@@ -592,7 +592,7 @@ class CdbClient extends AbstractClient {
      */
     OpenWanService(req, cb) {
         let resp = new OpenWanServiceResponse();
-        this.request("OpenWanService", req, resp, options, cb);
+        this.request("OpenWanService", req, resp, cb);
     }
 
     /**
@@ -610,7 +610,7 @@ class CdbClient extends AbstractClient {
      */
     CreateDBInstance(req, cb) {
         let resp = new CreateDBInstanceResponse();
-        this.request("CreateDBInstance", req, resp, options, cb);
+        this.request("CreateDBInstance", req, resp, cb);
     }
 
     /**
@@ -621,7 +621,7 @@ class CdbClient extends AbstractClient {
      */
     ModifyAccountPrivileges(req, cb) {
         let resp = new ModifyAccountPrivilegesResponse();
-        this.request("ModifyAccountPrivileges", req, resp, options, cb);
+        this.request("ModifyAccountPrivileges", req, resp, cb);
     }
 
     /**
@@ -632,7 +632,7 @@ class CdbClient extends AbstractClient {
      */
     ModifyDBInstanceSecurityGroups(req, cb) {
         let resp = new ModifyDBInstanceSecurityGroupsResponse();
-        this.request("ModifyDBInstanceSecurityGroups", req, resp, options, cb);
+        this.request("ModifyDBInstanceSecurityGroups", req, resp, cb);
     }
 
     /**
@@ -643,7 +643,7 @@ class CdbClient extends AbstractClient {
      */
     DescribeDBImportRecords(req, cb) {
         let resp = new DescribeDBImportRecordsResponse();
-        this.request("DescribeDBImportRecords", req, resp, options, cb);
+        this.request("DescribeDBImportRecords", req, resp, cb);
     }
 
     /**
@@ -654,7 +654,7 @@ class CdbClient extends AbstractClient {
      */
     DescribeDBSwitchRecords(req, cb) {
         let resp = new DescribeDBSwitchRecordsResponse();
-        this.request("DescribeDBSwitchRecords", req, resp, options, cb);
+        this.request("DescribeDBSwitchRecords", req, resp, cb);
     }
 
     /**
@@ -665,7 +665,7 @@ class CdbClient extends AbstractClient {
      */
     SwitchForUpgrade(req, cb) {
         let resp = new SwitchForUpgradeResponse();
-        this.request("SwitchForUpgrade", req, resp, options, cb);
+        this.request("SwitchForUpgrade", req, resp, cb);
     }
 
     /**
@@ -676,7 +676,7 @@ class CdbClient extends AbstractClient {
      */
     DescribeTasks(req, cb) {
         let resp = new DescribeTasksResponse();
-        this.request("DescribeTasks", req, resp, options, cb);
+        this.request("DescribeTasks", req, resp, cb);
     }
 
     /**
@@ -687,7 +687,7 @@ class CdbClient extends AbstractClient {
      */
     DescribeBackupConfig(req, cb) {
         let resp = new DescribeBackupConfigResponse();
-        this.request("DescribeBackupConfig", req, resp, options, cb);
+        this.request("DescribeBackupConfig", req, resp, cb);
     }
 
     /**
@@ -698,7 +698,7 @@ class CdbClient extends AbstractClient {
      */
     DescribeAccounts(req, cb) {
         let resp = new DescribeAccountsResponse();
-        this.request("DescribeAccounts", req, resp, options, cb);
+        this.request("DescribeAccounts", req, resp, cb);
     }
 
     /**
@@ -709,7 +709,7 @@ class CdbClient extends AbstractClient {
      */
     CloseWanService(req, cb) {
         let resp = new CloseWanServiceResponse();
-        this.request("CloseWanService", req, resp, options, cb);
+        this.request("CloseWanService", req, resp, cb);
     }
 
     /**
@@ -720,7 +720,7 @@ class CdbClient extends AbstractClient {
      */
     StopDBImportJob(req, cb) {
         let resp = new StopDBImportJobResponse();
-        this.request("StopDBImportJob", req, resp, options, cb);
+        this.request("StopDBImportJob", req, resp, cb);
     }
 
     /**
@@ -731,7 +731,7 @@ class CdbClient extends AbstractClient {
      */
     ModifyAccountPassword(req, cb) {
         let resp = new ModifyAccountPasswordResponse();
-        this.request("ModifyAccountPassword", req, resp, options, cb);
+        this.request("ModifyAccountPassword", req, resp, cb);
     }
 
     /**
@@ -742,7 +742,7 @@ class CdbClient extends AbstractClient {
      */
     DescribeBinlogs(req, cb) {
         let resp = new DescribeBinlogsResponse();
-        this.request("DescribeBinlogs", req, resp, options, cb);
+        this.request("DescribeBinlogs", req, resp, cb);
     }
 
     /**
@@ -753,7 +753,7 @@ class CdbClient extends AbstractClient {
      */
     DescribeDatabases(req, cb) {
         let resp = new DescribeDatabasesResponse();
-        this.request("DescribeDatabases", req, resp, options, cb);
+        this.request("DescribeDatabases", req, resp, cb);
     }
 
     /**
@@ -764,7 +764,7 @@ class CdbClient extends AbstractClient {
      */
     CreateAccounts(req, cb) {
         let resp = new CreateAccountsResponse();
-        this.request("CreateAccounts", req, resp, options, cb);
+        this.request("CreateAccounts", req, resp, cb);
     }
 
     /**
@@ -775,7 +775,7 @@ class CdbClient extends AbstractClient {
      */
     DescribeDBSecurityGroups(req, cb) {
         let resp = new DescribeDBSecurityGroupsResponse();
-        this.request("DescribeDBSecurityGroups", req, resp, options, cb);
+        this.request("DescribeDBSecurityGroups", req, resp, cb);
     }
 
     /**
@@ -786,7 +786,7 @@ class CdbClient extends AbstractClient {
      */
     DescribeInstanceParams(req, cb) {
         let resp = new DescribeInstanceParamsResponse();
-        this.request("DescribeInstanceParams", req, resp, options, cb);
+        this.request("DescribeInstanceParams", req, resp, cb);
     }
 
     /**
@@ -797,7 +797,7 @@ class CdbClient extends AbstractClient {
      */
     DescribeUploadedFiles(req, cb) {
         let resp = new DescribeUploadedFilesResponse();
-        this.request("DescribeUploadedFiles", req, resp, options, cb);
+        this.request("DescribeUploadedFiles", req, resp, cb);
     }
 
     /**
@@ -808,7 +808,7 @@ class CdbClient extends AbstractClient {
      */
     UpgradeDBInstance(req, cb) {
         let resp = new UpgradeDBInstanceResponse();
-        this.request("UpgradeDBInstance", req, resp, options, cb);
+        this.request("UpgradeDBInstance", req, resp, cb);
     }
 
     /**
@@ -819,7 +819,7 @@ class CdbClient extends AbstractClient {
      */
     UpgradeDBInstanceEngineVersion(req, cb) {
         let resp = new UpgradeDBInstanceEngineVersionResponse();
-        this.request("UpgradeDBInstanceEngineVersion", req, resp, options, cb);
+        this.request("UpgradeDBInstanceEngineVersion", req, resp, cb);
     }
 
     /**
@@ -830,7 +830,7 @@ class CdbClient extends AbstractClient {
      */
     DisassociateSecurityGroups(req, cb) {
         let resp = new DisassociateSecurityGroupsResponse();
-        this.request("DisassociateSecurityGroups", req, resp, options, cb);
+        this.request("DisassociateSecurityGroups", req, resp, cb);
     }
 
     /**
@@ -841,7 +841,7 @@ class CdbClient extends AbstractClient {
      */
     DescribeTables(req, cb) {
         let resp = new DescribeTablesResponse();
-        this.request("DescribeTables", req, resp, options, cb);
+        this.request("DescribeTables", req, resp, cb);
     }
 
 

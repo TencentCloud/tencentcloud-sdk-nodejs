@@ -85,7 +85,7 @@ class MsClient extends AbstractClient {
      */
     CreateScanInstances(req, cb) {
         let resp = new CreateScanInstancesResponse();
-        this.request("CreateScanInstances", req, resp, options, cb);
+        this.request("CreateScanInstances", req, resp, cb);
     }
 
     /**
@@ -96,7 +96,7 @@ class MsClient extends AbstractClient {
      */
     DescribeShieldResult(req, cb) {
         let resp = new DescribeShieldResultResponse();
-        this.request("DescribeShieldResult", req, resp, options, cb);
+        this.request("DescribeShieldResult", req, resp, cb);
     }
 
     /**
@@ -107,7 +107,7 @@ class MsClient extends AbstractClient {
      */
     DeleteScanInstances(req, cb) {
         let resp = new DeleteScanInstancesResponse();
-        this.request("DeleteScanInstances", req, resp, options, cb);
+        this.request("DeleteScanInstances", req, resp, cb);
     }
 
     /**
@@ -118,7 +118,7 @@ class MsClient extends AbstractClient {
      */
     CreateResourceInstances(req, cb) {
         let resp = new CreateResourceInstancesResponse();
-        this.request("CreateResourceInstances", req, resp, options, cb);
+        this.request("CreateResourceInstances", req, resp, cb);
     }
 
     /**
@@ -129,7 +129,7 @@ class MsClient extends AbstractClient {
      */
     CreateBindInstance(req, cb) {
         let resp = new CreateBindInstanceResponse();
-        this.request("CreateBindInstance", req, resp, options, cb);
+        this.request("CreateBindInstance", req, resp, cb);
     }
 
     /**
@@ -140,7 +140,7 @@ class MsClient extends AbstractClient {
      */
     CreateCosSecKeyInstance(req, cb) {
         let resp = new CreateCosSecKeyInstanceResponse();
-        this.request("CreateCosSecKeyInstance", req, resp, options, cb);
+        this.request("CreateCosSecKeyInstance", req, resp, cb);
     }
 
     /**
@@ -151,7 +151,7 @@ class MsClient extends AbstractClient {
      */
     DescribeResourceInstances(req, cb) {
         let resp = new DescribeResourceInstancesResponse();
-        this.request("DescribeResourceInstances", req, resp, options, cb);
+        this.request("DescribeResourceInstances", req, resp, cb);
     }
 
     /**
@@ -162,7 +162,7 @@ class MsClient extends AbstractClient {
      */
     DescribeScanResults(req, cb) {
         let resp = new DescribeScanResultsResponse();
-        this.request("DescribeScanResults", req, resp, options, cb);
+        this.request("DescribeScanResults", req, resp, cb);
     }
 
     /**
@@ -173,7 +173,7 @@ class MsClient extends AbstractClient {
      */
     DescribeShieldPlanInstance(req, cb) {
         let resp = new DescribeShieldPlanInstanceResponse();
-        this.request("DescribeShieldPlanInstance", req, resp, options, cb);
+        this.request("DescribeShieldPlanInstance", req, resp, cb);
     }
 
     /**
@@ -184,7 +184,7 @@ class MsClient extends AbstractClient {
      */
     CreateShieldInstance(req, cb) {
         let resp = new CreateShieldInstanceResponse();
-        this.request("CreateShieldInstance", req, resp, options, cb);
+        this.request("CreateShieldInstance", req, resp, cb);
     }
 
     /**
@@ -197,7 +197,7 @@ class MsClient extends AbstractClient {
      */
     DescribeShieldInstances(req, cb) {
         let resp = new DescribeShieldInstancesResponse();
-        this.request("DescribeShieldInstances", req, resp, options, cb);
+        this.request("DescribeShieldInstances", req, resp, cb);
     }
 
     /**
@@ -208,7 +208,7 @@ class MsClient extends AbstractClient {
      */
     CreateShieldPlanInstance(req, cb) {
         let resp = new CreateShieldPlanInstanceResponse();
-        this.request("CreateShieldPlanInstance", req, resp, options, cb);
+        this.request("CreateShieldPlanInstance", req, resp, cb);
     }
 
     /**
@@ -220,7 +220,7 @@ class MsClient extends AbstractClient {
      */
     DescribeScanInstances(req, cb) {
         let resp = new DescribeScanInstancesResponse();
-        this.request("DescribeScanInstances", req, resp, options, cb);
+        this.request("DescribeScanInstances", req, resp, cb);
     }
 
     /**
@@ -231,7 +231,7 @@ class MsClient extends AbstractClient {
      */
     DeleteShieldInstances(req, cb) {
         let resp = new DeleteShieldInstancesResponse();
-        this.request("DeleteShieldInstances", req, resp, options, cb);
+        this.request("DeleteShieldInstances", req, resp, cb);
     }
 
 

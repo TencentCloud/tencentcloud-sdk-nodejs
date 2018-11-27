@@ -52,7 +52,7 @@ class DcClient extends AbstractClient {
      */
     CreateDirectConnectTunnel(req, cb) {
         let resp = new CreateDirectConnectTunnelResponse();
-        this.request("CreateDirectConnectTunnel", req, resp, options, cb);
+        this.request("CreateDirectConnectTunnel", req, resp, cb);
     }
 
     /**
@@ -63,7 +63,7 @@ class DcClient extends AbstractClient {
      */
     DescribeDirectConnectTunnels(req, cb) {
         let resp = new DescribeDirectConnectTunnelsResponse();
-        this.request("DescribeDirectConnectTunnels", req, resp, options, cb);
+        this.request("DescribeDirectConnectTunnels", req, resp, cb);
     }
 
     /**
@@ -74,7 +74,7 @@ class DcClient extends AbstractClient {
      */
     AcceptDirectConnectTunnel(req, cb) {
         let resp = new AcceptDirectConnectTunnelResponse();
-        this.request("AcceptDirectConnectTunnel", req, resp, options, cb);
+        this.request("AcceptDirectConnectTunnel", req, resp, cb);
     }
 
     /**
@@ -85,7 +85,7 @@ class DcClient extends AbstractClient {
      */
     DeleteDirectConnectTunnel(req, cb) {
         let resp = new DeleteDirectConnectTunnelResponse();
-        this.request("DeleteDirectConnectTunnel", req, resp, options, cb);
+        this.request("DeleteDirectConnectTunnel", req, resp, cb);
     }
 
     /**
@@ -96,7 +96,7 @@ class DcClient extends AbstractClient {
      */
     RejectDirectConnectTunnel(req, cb) {
         let resp = new RejectDirectConnectTunnelResponse();
-        this.request("RejectDirectConnectTunnel", req, resp, options, cb);
+        this.request("RejectDirectConnectTunnel", req, resp, cb);
     }
 
     /**
@@ -107,7 +107,7 @@ class DcClient extends AbstractClient {
      */
     ModifyDirectConnectTunnelAttribute(req, cb) {
         let resp = new ModifyDirectConnectTunnelAttributeResponse();
-        this.request("ModifyDirectConnectTunnelAttribute", req, resp, options, cb);
+        this.request("ModifyDirectConnectTunnelAttribute", req, resp, cb);
     }
 
 

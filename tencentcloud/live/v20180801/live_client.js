@@ -94,7 +94,7 @@ class LiveClient extends AbstractClient {
      */
     DropLiveStream(req, cb) {
         let resp = new DropLiveStreamResponse();
-        this.request("DropLiveStream", req, resp, options, cb);
+        this.request("DropLiveStream", req, resp, cb);
     }
 
     /**
@@ -105,7 +105,7 @@ class LiveClient extends AbstractClient {
      */
     DescribeLiveWatermarks(req, cb) {
         let resp = new DescribeLiveWatermarksResponse();
-        this.request("DescribeLiveWatermarks", req, resp, options, cb);
+        this.request("DescribeLiveWatermarks", req, resp, cb);
     }
 
     /**
@@ -128,7 +128,7 @@ class LiveClient extends AbstractClient {
      */
     CreateLiveRecord(req, cb) {
         let resp = new CreateLiveRecordResponse();
-        this.request("CreateLiveRecord", req, resp, options, cb);
+        this.request("CreateLiveRecord", req, resp, cb);
     }
 
     /**
@@ -139,7 +139,7 @@ class LiveClient extends AbstractClient {
      */
     UpdateLiveWatermark(req, cb) {
         let resp = new UpdateLiveWatermarkResponse();
-        this.request("UpdateLiveWatermark", req, resp, options, cb);
+        this.request("UpdateLiveWatermark", req, resp, cb);
     }
 
     /**
@@ -150,7 +150,7 @@ class LiveClient extends AbstractClient {
      */
     StopLiveRecord(req, cb) {
         let resp = new StopLiveRecordResponse();
-        this.request("StopLiveRecord", req, resp, options, cb);
+        this.request("StopLiveRecord", req, resp, cb);
     }
 
     /**
@@ -161,7 +161,7 @@ class LiveClient extends AbstractClient {
      */
     ModifyLivePlayAuthKey(req, cb) {
         let resp = new ModifyLivePlayAuthKeyResponse();
-        this.request("ModifyLivePlayAuthKey", req, resp, options, cb);
+        this.request("ModifyLivePlayAuthKey", req, resp, cb);
     }
 
     /**
@@ -172,7 +172,7 @@ class LiveClient extends AbstractClient {
      */
     SetLiveWatermarkStatus(req, cb) {
         let resp = new SetLiveWatermarkStatusResponse();
-        this.request("SetLiveWatermarkStatus", req, resp, options, cb);
+        this.request("SetLiveWatermarkStatus", req, resp, cb);
     }
 
     /**
@@ -183,7 +183,7 @@ class LiveClient extends AbstractClient {
      */
     ModifyLivePushAuthKey(req, cb) {
         let resp = new ModifyLivePushAuthKeyResponse();
-        this.request("ModifyLivePushAuthKey", req, resp, options, cb);
+        this.request("ModifyLivePushAuthKey", req, resp, cb);
     }
 
     /**
@@ -194,7 +194,7 @@ class LiveClient extends AbstractClient {
      */
     DescribePullStreamConfigs(req, cb) {
         let resp = new DescribePullStreamConfigsResponse();
-        this.request("DescribePullStreamConfigs", req, resp, options, cb);
+        this.request("DescribePullStreamConfigs", req, resp, cb);
     }
 
     /**
@@ -205,7 +205,7 @@ class LiveClient extends AbstractClient {
      */
     DeleteLiveRecord(req, cb) {
         let resp = new DeleteLiveRecordResponse();
-        this.request("DeleteLiveRecord", req, resp, options, cb);
+        this.request("DeleteLiveRecord", req, resp, cb);
     }
 
     /**
@@ -216,7 +216,7 @@ class LiveClient extends AbstractClient {
      */
     AddDelayLiveStream(req, cb) {
         let resp = new AddDelayLiveStreamResponse();
-        this.request("AddDelayLiveStream", req, resp, options, cb);
+        this.request("AddDelayLiveStream", req, resp, cb);
     }
 
     /**
@@ -227,7 +227,7 @@ class LiveClient extends AbstractClient {
      */
     DescribeLiveStreamState(req, cb) {
         let resp = new DescribeLiveStreamStateResponse();
-        this.request("DescribeLiveStreamState", req, resp, options, cb);
+        this.request("DescribeLiveStreamState", req, resp, cb);
     }
 
     /**
@@ -238,7 +238,7 @@ class LiveClient extends AbstractClient {
      */
     DescribeLiveStreamOnlineInfo(req, cb) {
         let resp = new DescribeLiveStreamOnlineInfoResponse();
-        this.request("DescribeLiveStreamOnlineInfo", req, resp, options, cb);
+        this.request("DescribeLiveStreamOnlineInfo", req, resp, cb);
     }
 
     /**
@@ -249,7 +249,7 @@ class LiveClient extends AbstractClient {
      */
     DescribeLivePlayAuthKey(req, cb) {
         let resp = new DescribeLivePlayAuthKeyResponse();
-        this.request("DescribeLivePlayAuthKey", req, resp, options, cb);
+        this.request("DescribeLivePlayAuthKey", req, resp, cb);
     }
 
     /**
@@ -260,7 +260,7 @@ class LiveClient extends AbstractClient {
      */
     DescribeLiveStreamPublishedList(req, cb) {
         let resp = new DescribeLiveStreamPublishedListResponse();
-        this.request("DescribeLiveStreamPublishedList", req, resp, options, cb);
+        this.request("DescribeLiveStreamPublishedList", req, resp, cb);
     }
 
     /**
@@ -271,7 +271,7 @@ class LiveClient extends AbstractClient {
      */
     ModifyPullStreamStatus(req, cb) {
         let resp = new ModifyPullStreamStatusResponse();
-        this.request("ModifyPullStreamStatus", req, resp, options, cb);
+        this.request("ModifyPullStreamStatus", req, resp, cb);
     }
 
     /**
@@ -282,7 +282,7 @@ class LiveClient extends AbstractClient {
      */
     DeleteLiveWatermark(req, cb) {
         let resp = new DeleteLiveWatermarkResponse();
-        this.request("DeleteLiveWatermark", req, resp, options, cb);
+        this.request("DeleteLiveWatermark", req, resp, cb);
     }
 
     /**
@@ -293,7 +293,7 @@ class LiveClient extends AbstractClient {
      */
     ResumeDelayLiveStream(req, cb) {
         let resp = new ResumeDelayLiveStreamResponse();
-        this.request("ResumeDelayLiveStream", req, resp, options, cb);
+        this.request("ResumeDelayLiveStream", req, resp, cb);
     }
 
     /**
@@ -304,7 +304,7 @@ class LiveClient extends AbstractClient {
      */
     ModifyPullStreamConfig(req, cb) {
         let resp = new ModifyPullStreamConfigResponse();
-        this.request("ModifyPullStreamConfig", req, resp, options, cb);
+        this.request("ModifyPullStreamConfig", req, resp, cb);
     }
 
     /**
@@ -315,7 +315,7 @@ class LiveClient extends AbstractClient {
      */
     AddLiveWatermark(req, cb) {
         let resp = new AddLiveWatermarkResponse();
-        this.request("AddLiveWatermark", req, resp, options, cb);
+        this.request("AddLiveWatermark", req, resp, cb);
     }
 
     /**
@@ -326,7 +326,7 @@ class LiveClient extends AbstractClient {
      */
     ForbidLiveStream(req, cb) {
         let resp = new ForbidLiveStreamResponse();
-        this.request("ForbidLiveStream", req, resp, options, cb);
+        this.request("ForbidLiveStream", req, resp, cb);
     }
 
     /**
@@ -337,7 +337,7 @@ class LiveClient extends AbstractClient {
      */
     ResumeLiveStream(req, cb) {
         let resp = new ResumeLiveStreamResponse();
-        this.request("ResumeLiveStream", req, resp, options, cb);
+        this.request("ResumeLiveStream", req, resp, cb);
     }
 
     /**
@@ -348,7 +348,7 @@ class LiveClient extends AbstractClient {
      */
     DescribeLiveStreamOnlineList(req, cb) {
         let resp = new DescribeLiveStreamOnlineListResponse();
-        this.request("DescribeLiveStreamOnlineList", req, resp, options, cb);
+        this.request("DescribeLiveStreamOnlineList", req, resp, cb);
     }
 
     /**
@@ -359,7 +359,7 @@ class LiveClient extends AbstractClient {
      */
     CreatePullStreamConfig(req, cb) {
         let resp = new CreatePullStreamConfigResponse();
-        this.request("CreatePullStreamConfig", req, resp, options, cb);
+        this.request("CreatePullStreamConfig", req, resp, cb);
     }
 
     /**
@@ -370,7 +370,7 @@ class LiveClient extends AbstractClient {
      */
     DescribeLivePushAuthKey(req, cb) {
         let resp = new DescribeLivePushAuthKeyResponse();
-        this.request("DescribeLivePushAuthKey", req, resp, options, cb);
+        this.request("DescribeLivePushAuthKey", req, resp, cb);
     }
 
 

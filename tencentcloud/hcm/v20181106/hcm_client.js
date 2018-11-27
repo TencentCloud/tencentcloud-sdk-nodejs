@@ -40,7 +40,7 @@ class HcmClient extends AbstractClient {
      */
     Evaluation(req, cb) {
         let resp = new EvaluationResponse();
-        this.request("Evaluation", req, resp, options, cb);
+        this.request("Evaluation", req, resp, cb);
     }
 
 
