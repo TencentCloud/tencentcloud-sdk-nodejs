@@ -42,7 +42,7 @@ class SoeClient extends AbstractClient {
      */
     InitOralProcess(req, cb) {
         let resp = new InitOralProcessResponse();
-        this.request("InitOralProcess", req, resp, options, cb);
+        this.request("InitOralProcess", req, resp, cb);
     }
 
     /**
@@ -53,7 +53,7 @@ class SoeClient extends AbstractClient {
      */
     TransmitOralProcess(req, cb) {
         let resp = new TransmitOralProcessResponse();
-        this.request("TransmitOralProcess", req, resp, options, cb);
+        this.request("TransmitOralProcess", req, resp, cb);
     }
 
 

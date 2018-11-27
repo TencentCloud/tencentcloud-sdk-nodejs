@@ -58,7 +58,7 @@ class CisClient extends AbstractClient {
      */
     DescribeContainerInstances(req, cb) {
         let resp = new DescribeContainerInstancesResponse();
-        this.request("DescribeContainerInstances", req, resp, options, cb);
+        this.request("DescribeContainerInstances", req, resp, cb);
     }
 
     /**
@@ -69,7 +69,7 @@ class CisClient extends AbstractClient {
      */
     CreateContainerInstance(req, cb) {
         let resp = new CreateContainerInstanceResponse();
-        this.request("CreateContainerInstance", req, resp, options, cb);
+        this.request("CreateContainerInstance", req, resp, cb);
     }
 
     /**
@@ -80,7 +80,7 @@ class CisClient extends AbstractClient {
      */
     InquiryPriceCreateCis(req, cb) {
         let resp = new InquiryPriceCreateCisResponse();
-        this.request("InquiryPriceCreateCis", req, resp, options, cb);
+        this.request("InquiryPriceCreateCis", req, resp, cb);
     }
 
     /**
@@ -91,7 +91,7 @@ class CisClient extends AbstractClient {
      */
     DescribeContainerInstance(req, cb) {
         let resp = new DescribeContainerInstanceResponse();
-        this.request("DescribeContainerInstance", req, resp, options, cb);
+        this.request("DescribeContainerInstance", req, resp, cb);
     }
 
     /**
@@ -102,7 +102,7 @@ class CisClient extends AbstractClient {
      */
     DescribeContainerInstanceEvents(req, cb) {
         let resp = new DescribeContainerInstanceEventsResponse();
-        this.request("DescribeContainerInstanceEvents", req, resp, options, cb);
+        this.request("DescribeContainerInstanceEvents", req, resp, cb);
     }
 
     /**
@@ -113,7 +113,7 @@ class CisClient extends AbstractClient {
      */
     DeleteContainerInstance(req, cb) {
         let resp = new DeleteContainerInstanceResponse();
-        this.request("DeleteContainerInstance", req, resp, options, cb);
+        this.request("DeleteContainerInstance", req, resp, cb);
     }
 
     /**
@@ -124,7 +124,7 @@ class CisClient extends AbstractClient {
      */
     DescribeContainerLog(req, cb) {
         let resp = new DescribeContainerLogResponse();
-        this.request("DescribeContainerLog", req, resp, options, cb);
+        this.request("DescribeContainerLog", req, resp, cb);
     }
 
 

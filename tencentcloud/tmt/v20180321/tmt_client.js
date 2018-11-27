@@ -47,7 +47,7 @@ class TmtClient extends AbstractClient {
      */
     TextTranslate(req, cb) {
         let resp = new TextTranslateResponse();
-        this.request("TextTranslate", req, resp, options, cb);
+        this.request("TextTranslate", req, resp, cb);
     }
 
     /**
@@ -58,7 +58,7 @@ class TmtClient extends AbstractClient {
      */
     ImageTranslate(req, cb) {
         let resp = new ImageTranslateResponse();
-        this.request("ImageTranslate", req, resp, options, cb);
+        this.request("ImageTranslate", req, resp, cb);
     }
 
     /**
@@ -71,7 +71,7 @@ class TmtClient extends AbstractClient {
      */
     SpeechTranslate(req, cb) {
         let resp = new SpeechTranslateResponse();
-        this.request("SpeechTranslate", req, resp, options, cb);
+        this.request("SpeechTranslate", req, resp, cb);
     }
 
     /**
@@ -82,7 +82,7 @@ class TmtClient extends AbstractClient {
      */
     LanguageDetect(req, cb) {
         let resp = new LanguageDetectResponse();
-        this.request("LanguageDetect", req, resp, options, cb);
+        this.request("LanguageDetect", req, resp, cb);
     }
 
 

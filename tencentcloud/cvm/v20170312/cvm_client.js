@@ -193,7 +193,7 @@ class CvmClient extends AbstractClient {
      */
     DescribeImageQuota(req, cb) {
         let resp = new DescribeImageQuotaResponse();
-        this.request("DescribeImageQuota", req, resp, options, cb);
+        this.request("DescribeImageQuota", req, resp, cb);
     }
 
     /**
@@ -209,7 +209,7 @@ class CvmClient extends AbstractClient {
      */
     StopInstances(req, cb) {
         let resp = new StopInstancesResponse();
-        this.request("StopInstances", req, resp, options, cb);
+        this.request("StopInstances", req, resp, cb);
     }
 
     /**
@@ -223,7 +223,7 @@ class CvmClient extends AbstractClient {
      */
     DescribeInstancesStatus(req, cb) {
         let resp = new DescribeInstancesStatusResponse();
-        this.request("DescribeInstancesStatus", req, resp, options, cb);
+        this.request("DescribeInstancesStatus", req, resp, cb);
     }
 
     /**
@@ -240,7 +240,7 @@ class CvmClient extends AbstractClient {
      */
     ModifyImageSharePermission(req, cb) {
         let resp = new ModifyImageSharePermissionResponse();
-        this.request("ModifyImageSharePermission", req, resp, options, cb);
+        this.request("ModifyImageSharePermission", req, resp, cb);
     }
 
     /**
@@ -251,7 +251,7 @@ class CvmClient extends AbstractClient {
      */
     DescribeImageSharePermission(req, cb) {
         let resp = new DescribeImageSharePermissionResponse();
-        this.request("DescribeImageSharePermission", req, resp, options, cb);
+        this.request("DescribeImageSharePermission", req, resp, cb);
     }
 
     /**
@@ -265,7 +265,7 @@ class CvmClient extends AbstractClient {
      */
     InquiryPriceModifyInstancesChargeType(req, cb) {
         let resp = new InquiryPriceModifyInstancesChargeTypeResponse();
-        this.request("InquiryPriceModifyInstancesChargeType", req, resp, options, cb);
+        this.request("InquiryPriceModifyInstancesChargeType", req, resp, cb);
     }
 
     /**
@@ -276,7 +276,7 @@ class CvmClient extends AbstractClient {
      */
     ModifyHostsAttribute(req, cb) {
         let resp = new ModifyHostsAttributeResponse();
-        this.request("ModifyHostsAttribute", req, resp, options, cb);
+        this.request("ModifyHostsAttribute", req, resp, cb);
     }
 
     /**
@@ -290,7 +290,7 @@ class CvmClient extends AbstractClient {
      */
     DescribeImages(req, cb) {
         let resp = new DescribeImagesResponse();
-        this.request("DescribeImages", req, resp, options, cb);
+        this.request("DescribeImages", req, resp, cb);
     }
 
     /**
@@ -305,7 +305,7 @@ class CvmClient extends AbstractClient {
      */
     ModifyKeyPairAttribute(req, cb) {
         let resp = new ModifyKeyPairAttributeResponse();
-        this.request("ModifyKeyPairAttribute", req, resp, options, cb);
+        this.request("ModifyKeyPairAttribute", req, resp, cb);
     }
 
     /**
@@ -316,7 +316,7 @@ class CvmClient extends AbstractClient {
      */
     DescribeZoneInstanceConfigInfos(req, cb) {
         let resp = new DescribeZoneInstanceConfigInfosResponse();
-        this.request("DescribeZoneInstanceConfigInfos", req, resp, options, cb);
+        this.request("DescribeZoneInstanceConfigInfos", req, resp, cb);
     }
 
     /**
@@ -331,7 +331,7 @@ class CvmClient extends AbstractClient {
      */
     ModifyInstancesAttribute(req, cb) {
         let resp = new ModifyInstancesAttributeResponse();
-        this.request("ModifyInstancesAttribute", req, resp, options, cb);
+        this.request("ModifyInstancesAttribute", req, resp, cb);
     }
 
     /**
@@ -342,7 +342,7 @@ class CvmClient extends AbstractClient {
      */
     DescribeRegions(req, cb) {
         let resp = new DescribeRegionsResponse();
-        this.request("DescribeRegions", req, resp, options, cb);
+        this.request("DescribeRegions", req, resp, cb);
     }
 
     /**
@@ -360,7 +360,7 @@ class CvmClient extends AbstractClient {
      */
     InquiryPriceResetInstancesInternetMaxBandwidth(req, cb) {
         let resp = new InquiryPriceResetInstancesInternetMaxBandwidthResponse();
-        this.request("InquiryPriceResetInstancesInternetMaxBandwidth", req, resp, options, cb);
+        this.request("InquiryPriceResetInstancesInternetMaxBandwidth", req, resp, cb);
     }
 
     /**
@@ -376,7 +376,7 @@ class CvmClient extends AbstractClient {
      */
     DisassociateInstancesKeyPairs(req, cb) {
         let resp = new DisassociateInstancesKeyPairsResponse();
-        this.request("DisassociateInstancesKeyPairs", req, resp, options, cb);
+        this.request("DisassociateInstancesKeyPairs", req, resp, cb);
     }
 
     /**
@@ -392,7 +392,7 @@ class CvmClient extends AbstractClient {
      */
     CreateKeyPair(req, cb) {
         let resp = new CreateKeyPairResponse();
-        this.request("CreateKeyPair", req, resp, options, cb);
+        this.request("CreateKeyPair", req, resp, cb);
     }
 
     /**
@@ -406,7 +406,7 @@ class CvmClient extends AbstractClient {
      */
     DeleteKeyPairs(req, cb) {
         let resp = new DeleteKeyPairsResponse();
-        this.request("DeleteKeyPairs", req, resp, options, cb);
+        this.request("DeleteKeyPairs", req, resp, cb);
     }
 
     /**
@@ -417,7 +417,7 @@ class CvmClient extends AbstractClient {
      */
     CreateDisasterRecoverGroup(req, cb) {
         let resp = new CreateDisasterRecoverGroupResponse();
-        this.request("CreateDisasterRecoverGroup", req, resp, options, cb);
+        this.request("CreateDisasterRecoverGroup", req, resp, cb);
     }
 
     /**
@@ -431,7 +431,7 @@ class CvmClient extends AbstractClient {
      */
     DescribeInstances(req, cb) {
         let resp = new DescribeInstancesResponse();
-        this.request("DescribeInstances", req, resp, options, cb);
+        this.request("DescribeInstances", req, resp, cb);
     }
 
     /**
@@ -446,7 +446,7 @@ class CvmClient extends AbstractClient {
      */
     ImportKeyPair(req, cb) {
         let resp = new ImportKeyPairResponse();
-        this.request("ImportKeyPair", req, resp, options, cb);
+        this.request("ImportKeyPair", req, resp, cb);
     }
 
     /**
@@ -461,7 +461,7 @@ class CvmClient extends AbstractClient {
      */
     SyncImages(req, cb) {
         let resp = new SyncImagesResponse();
-        this.request("SyncImages", req, resp, options, cb);
+        this.request("SyncImages", req, resp, cb);
     }
 
     /**
@@ -475,7 +475,7 @@ class CvmClient extends AbstractClient {
      */
     DescribeInstanceInternetBandwidthConfigs(req, cb) {
         let resp = new DescribeInstanceInternetBandwidthConfigsResponse();
-        this.request("DescribeInstanceInternetBandwidthConfigs", req, resp, options, cb);
+        this.request("DescribeInstanceInternetBandwidthConfigs", req, resp, cb);
     }
 
     /**
@@ -491,7 +491,7 @@ class CvmClient extends AbstractClient {
      */
     AssociateInstancesKeyPairs(req, cb) {
         let resp = new AssociateInstancesKeyPairsResponse();
-        this.request("AssociateInstancesKeyPairs", req, resp, options, cb);
+        this.request("AssociateInstancesKeyPairs", req, resp, cb);
     }
 
     /**
@@ -507,7 +507,7 @@ class CvmClient extends AbstractClient {
      */
     RunInstances(req, cb) {
         let resp = new RunInstancesResponse();
-        this.request("RunInstances", req, resp, options, cb);
+        this.request("RunInstances", req, resp, cb);
     }
 
     /**
@@ -522,7 +522,7 @@ class CvmClient extends AbstractClient {
      */
     DeleteImages(req, cb) {
         let resp = new DeleteImagesResponse();
-        this.request("DeleteImages", req, resp, options, cb);
+        this.request("DeleteImages", req, resp, cb);
     }
 
     /**
@@ -536,7 +536,7 @@ class CvmClient extends AbstractClient {
      */
     InquiryPriceResizeInstanceDisks(req, cb) {
         let resp = new InquiryPriceResizeInstanceDisksResponse();
-        this.request("InquiryPriceResizeInstanceDisks", req, resp, options, cb);
+        this.request("InquiryPriceResizeInstanceDisks", req, resp, cb);
     }
 
     /**
@@ -551,7 +551,7 @@ class CvmClient extends AbstractClient {
      */
     TerminateInstances(req, cb) {
         let resp = new TerminateInstancesResponse();
-        this.request("TerminateInstances", req, resp, options, cb);
+        this.request("TerminateInstances", req, resp, cb);
     }
 
     /**
@@ -564,7 +564,7 @@ class CvmClient extends AbstractClient {
      */
     ModifyInstancesVpcAttribute(req, cb) {
         let resp = new ModifyInstancesVpcAttributeResponse();
-        this.request("ModifyInstancesVpcAttribute", req, resp, options, cb);
+        this.request("ModifyInstancesVpcAttribute", req, resp, cb);
     }
 
     /**
@@ -575,7 +575,7 @@ class CvmClient extends AbstractClient {
      */
     InquiryPriceResetInstance(req, cb) {
         let resp = new InquiryPriceResetInstanceResponse();
-        this.request("InquiryPriceResetInstance", req, resp, options, cb);
+        this.request("InquiryPriceResetInstance", req, resp, cb);
     }
 
     /**
@@ -586,7 +586,7 @@ class CvmClient extends AbstractClient {
      */
     DescribeDisasterRecoverGroupQuota(req, cb) {
         let resp = new DescribeDisasterRecoverGroupQuotaResponse();
-        this.request("DescribeDisasterRecoverGroupQuota", req, resp, options, cb);
+        this.request("DescribeDisasterRecoverGroupQuota", req, resp, cb);
     }
 
     /**
@@ -601,7 +601,7 @@ class CvmClient extends AbstractClient {
      */
     ResetInstancesPassword(req, cb) {
         let resp = new ResetInstancesPasswordResponse();
-        this.request("ResetInstancesPassword", req, resp, options, cb);
+        this.request("ResetInstancesPassword", req, resp, cb);
     }
 
     /**
@@ -615,7 +615,7 @@ class CvmClient extends AbstractClient {
      */
     ModifyInstancesRenewFlag(req, cb) {
         let resp = new ModifyInstancesRenewFlagResponse();
-        this.request("ModifyInstancesRenewFlag", req, resp, options, cb);
+        this.request("ModifyInstancesRenewFlag", req, resp, cb);
     }
 
     /**
@@ -633,7 +633,7 @@ class CvmClient extends AbstractClient {
      */
     ResetInstance(req, cb) {
         let resp = new ResetInstanceResponse();
-        this.request("ResetInstance", req, resp, options, cb);
+        this.request("ResetInstance", req, resp, cb);
     }
 
     /**
@@ -648,7 +648,7 @@ class CvmClient extends AbstractClient {
      */
     ResizeInstanceDisks(req, cb) {
         let resp = new ResizeInstanceDisksResponse();
-        this.request("ResizeInstanceDisks", req, resp, options, cb);
+        this.request("ResizeInstanceDisks", req, resp, cb);
     }
 
     /**
@@ -659,7 +659,7 @@ class CvmClient extends AbstractClient {
      */
     DescribeZones(req, cb) {
         let resp = new DescribeZonesResponse();
-        this.request("DescribeZones", req, resp, options, cb);
+        this.request("DescribeZones", req, resp, cb);
     }
 
     /**
@@ -670,7 +670,7 @@ class CvmClient extends AbstractClient {
      */
     CreateImage(req, cb) {
         let resp = new CreateImageResponse();
-        this.request("CreateImage", req, resp, options, cb);
+        this.request("CreateImage", req, resp, cb);
     }
 
     /**
@@ -683,7 +683,7 @@ class CvmClient extends AbstractClient {
      */
     ResetInstancesType(req, cb) {
         let resp = new ResetInstancesTypeResponse();
-        this.request("ResetInstancesType", req, resp, options, cb);
+        this.request("ResetInstancesType", req, resp, cb);
     }
 
     /**
@@ -696,7 +696,7 @@ class CvmClient extends AbstractClient {
      */
     ModifyImageAttribute(req, cb) {
         let resp = new ModifyImageAttributeResponse();
-        this.request("ModifyImageAttribute", req, resp, options, cb);
+        this.request("ModifyImageAttribute", req, resp, cb);
     }
 
     /**
@@ -712,7 +712,7 @@ class CvmClient extends AbstractClient {
      */
     InquiryPriceResetInstancesType(req, cb) {
         let resp = new InquiryPriceResetInstancesTypeResponse();
-        this.request("InquiryPriceResetInstancesType", req, resp, options, cb);
+        this.request("InquiryPriceResetInstancesType", req, resp, cb);
     }
 
     /**
@@ -723,7 +723,7 @@ class CvmClient extends AbstractClient {
      */
     DescribeInstanceFamilyConfigs(req, cb) {
         let resp = new DescribeInstanceFamilyConfigsResponse();
-        this.request("DescribeInstanceFamilyConfigs", req, resp, options, cb);
+        this.request("DescribeInstanceFamilyConfigs", req, resp, cb);
     }
 
     /**
@@ -734,7 +734,7 @@ class CvmClient extends AbstractClient {
      */
     DeleteDisasterRecoverGroups(req, cb) {
         let resp = new DeleteDisasterRecoverGroupsResponse();
-        this.request("DeleteDisasterRecoverGroups", req, resp, options, cb);
+        this.request("DeleteDisasterRecoverGroups", req, resp, cb);
     }
 
     /**
@@ -745,7 +745,7 @@ class CvmClient extends AbstractClient {
      */
     DescribeImportImageOs(req, cb) {
         let resp = new DescribeImportImageOsResponse();
-        this.request("DescribeImportImageOs", req, resp, options, cb);
+        this.request("DescribeImportImageOs", req, resp, cb);
     }
 
     /**
@@ -761,7 +761,7 @@ class CvmClient extends AbstractClient {
      */
     ModifyInstancesProject(req, cb) {
         let resp = new ModifyInstancesProjectResponse();
-        this.request("ModifyInstancesProject", req, resp, options, cb);
+        this.request("ModifyInstancesProject", req, resp, cb);
     }
 
     /**
@@ -774,7 +774,7 @@ class CvmClient extends AbstractClient {
      */
     InquiryPriceRenewInstances(req, cb) {
         let resp = new InquiryPriceRenewInstancesResponse();
-        this.request("InquiryPriceRenewInstances", req, resp, options, cb);
+        this.request("InquiryPriceRenewInstances", req, resp, cb);
     }
 
     /**
@@ -785,7 +785,7 @@ class CvmClient extends AbstractClient {
      */
     InquiryPriceRunInstances(req, cb) {
         let resp = new InquiryPriceRunInstancesResponse();
-        this.request("InquiryPriceRunInstances", req, resp, options, cb);
+        this.request("InquiryPriceRunInstances", req, resp, cb);
     }
 
     /**
@@ -796,7 +796,7 @@ class CvmClient extends AbstractClient {
      */
     ImportImage(req, cb) {
         let resp = new ImportImageResponse();
-        this.request("ImportImage", req, resp, options, cb);
+        this.request("ImportImage", req, resp, cb);
     }
 
     /**
@@ -810,7 +810,7 @@ class CvmClient extends AbstractClient {
      */
     RenewInstances(req, cb) {
         let resp = new RenewInstancesResponse();
-        this.request("RenewInstances", req, resp, options, cb);
+        this.request("RenewInstances", req, resp, cb);
     }
 
     /**
@@ -821,7 +821,7 @@ class CvmClient extends AbstractClient {
      */
     ModifyDisasterRecoverGroupAttribute(req, cb) {
         let resp = new ModifyDisasterRecoverGroupAttributeResponse();
-        this.request("ModifyDisasterRecoverGroupAttribute", req, resp, options, cb);
+        this.request("ModifyDisasterRecoverGroupAttribute", req, resp, cb);
     }
 
     /**
@@ -846,7 +846,7 @@ https://img.qcloud.com/qcloud/app/active_vnc/index.html?InstanceVncUrl=wss%3A%2F
      */
     DescribeInstanceVncUrl(req, cb) {
         let resp = new DescribeInstanceVncUrlResponse();
-        this.request("DescribeInstanceVncUrl", req, resp, options, cb);
+        this.request("DescribeInstanceVncUrl", req, resp, cb);
     }
 
     /**
@@ -860,7 +860,7 @@ https://img.qcloud.com/qcloud/app/active_vnc/index.html?InstanceVncUrl=wss%3A%2F
      */
     ModifyInstancesChargeType(req, cb) {
         let resp = new ModifyInstancesChargeTypeResponse();
-        this.request("ModifyInstancesChargeType", req, resp, options, cb);
+        this.request("ModifyInstancesChargeType", req, resp, cb);
     }
 
     /**
@@ -874,7 +874,7 @@ https://img.qcloud.com/qcloud/app/active_vnc/index.html?InstanceVncUrl=wss%3A%2F
      */
     RenewHosts(req, cb) {
         let resp = new RenewHostsResponse();
-        this.request("RenewHosts", req, resp, options, cb);
+        this.request("RenewHosts", req, resp, cb);
     }
 
     /**
@@ -885,7 +885,7 @@ https://img.qcloud.com/qcloud/app/active_vnc/index.html?InstanceVncUrl=wss%3A%2F
      */
     DescribeDisasterRecoverGroups(req, cb) {
         let resp = new DescribeDisasterRecoverGroupsResponse();
-        this.request("DescribeDisasterRecoverGroups", req, resp, options, cb);
+        this.request("DescribeDisasterRecoverGroups", req, resp, cb);
     }
 
     /**
@@ -900,7 +900,7 @@ https://img.qcloud.com/qcloud/app/active_vnc/index.html?InstanceVncUrl=wss%3A%2F
      */
     StartInstances(req, cb) {
         let resp = new StartInstancesResponse();
-        this.request("StartInstances", req, resp, options, cb);
+        this.request("StartInstances", req, resp, cb);
     }
 
     /**
@@ -918,7 +918,7 @@ https://img.qcloud.com/qcloud/app/active_vnc/index.html?InstanceVncUrl=wss%3A%2F
      */
     ResetInstancesInternetMaxBandwidth(req, cb) {
         let resp = new ResetInstancesInternetMaxBandwidthResponse();
-        this.request("ResetInstancesInternetMaxBandwidth", req, resp, options, cb);
+        this.request("ResetInstancesInternetMaxBandwidth", req, resp, cb);
     }
 
     /**
@@ -931,7 +931,7 @@ https://img.qcloud.com/qcloud/app/active_vnc/index.html?InstanceVncUrl=wss%3A%2F
      */
     DescribeKeyPairs(req, cb) {
         let resp = new DescribeKeyPairsResponse();
-        this.request("DescribeKeyPairs", req, resp, options, cb);
+        this.request("DescribeKeyPairs", req, resp, cb);
     }
 
     /**
@@ -942,7 +942,7 @@ https://img.qcloud.com/qcloud/app/active_vnc/index.html?InstanceVncUrl=wss%3A%2F
      */
     DescribeHosts(req, cb) {
         let resp = new DescribeHostsResponse();
-        this.request("DescribeHosts", req, resp, options, cb);
+        this.request("DescribeHosts", req, resp, cb);
     }
 
     /**
@@ -954,7 +954,7 @@ https://img.qcloud.com/qcloud/app/active_vnc/index.html?InstanceVncUrl=wss%3A%2F
      */
     AllocateHosts(req, cb) {
         let resp = new AllocateHostsResponse();
-        this.request("AllocateHosts", req, resp, options, cb);
+        this.request("AllocateHosts", req, resp, cb);
     }
 
     /**
@@ -965,7 +965,7 @@ https://img.qcloud.com/qcloud/app/active_vnc/index.html?InstanceVncUrl=wss%3A%2F
      */
     DescribeInternetChargeTypeConfigs(req, cb) {
         let resp = new DescribeInternetChargeTypeConfigsResponse();
-        this.request("DescribeInternetChargeTypeConfigs", req, resp, options, cb);
+        this.request("DescribeInternetChargeTypeConfigs", req, resp, cb);
     }
 
     /**
@@ -981,7 +981,7 @@ https://img.qcloud.com/qcloud/app/active_vnc/index.html?InstanceVncUrl=wss%3A%2F
      */
     RebootInstances(req, cb) {
         let resp = new RebootInstancesResponse();
-        this.request("RebootInstances", req, resp, options, cb);
+        this.request("RebootInstances", req, resp, cb);
     }
 
     /**
@@ -995,7 +995,7 @@ https://img.qcloud.com/qcloud/app/active_vnc/index.html?InstanceVncUrl=wss%3A%2F
      */
     DescribeInstanceTypeConfigs(req, cb) {
         let resp = new DescribeInstanceTypeConfigsResponse();
-        this.request("DescribeInstanceTypeConfigs", req, resp, options, cb);
+        this.request("DescribeInstanceTypeConfigs", req, resp, cb);
     }
 
 

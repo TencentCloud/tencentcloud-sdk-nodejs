@@ -70,7 +70,7 @@ class RedisClient extends AbstractClient {
      */
     ResetPassword(req, cb) {
         let resp = new ResetPasswordResponse();
-        this.request("ResetPassword", req, resp, options, cb);
+        this.request("ResetPassword", req, resp, cb);
     }
 
     /**
@@ -81,7 +81,7 @@ class RedisClient extends AbstractClient {
      */
     UpgradeInstance(req, cb) {
         let resp = new UpgradeInstanceResponse();
-        this.request("UpgradeInstance", req, resp, options, cb);
+        this.request("UpgradeInstance", req, resp, cb);
     }
 
     /**
@@ -92,7 +92,7 @@ class RedisClient extends AbstractClient {
      */
     RenewInstance(req, cb) {
         let resp = new RenewInstanceResponse();
-        this.request("RenewInstance", req, resp, options, cb);
+        this.request("RenewInstance", req, resp, cb);
     }
 
     /**
@@ -103,7 +103,7 @@ class RedisClient extends AbstractClient {
      */
     DescribeInstances(req, cb) {
         let resp = new DescribeInstancesResponse();
-        this.request("DescribeInstances", req, resp, options, cb);
+        this.request("DescribeInstances", req, resp, cb);
     }
 
     /**
@@ -114,7 +114,7 @@ class RedisClient extends AbstractClient {
      */
     ManualBackupInstance(req, cb) {
         let resp = new ManualBackupInstanceResponse();
-        this.request("ManualBackupInstance", req, resp, options, cb);
+        this.request("ManualBackupInstance", req, resp, cb);
     }
 
     /**
@@ -125,7 +125,7 @@ class RedisClient extends AbstractClient {
      */
     ModfiyInstancePassword(req, cb) {
         let resp = new ModfiyInstancePasswordResponse();
-        this.request("ModfiyInstancePassword", req, resp, options, cb);
+        this.request("ModfiyInstancePassword", req, resp, cb);
     }
 
     /**
@@ -136,7 +136,7 @@ class RedisClient extends AbstractClient {
      */
     DescribeAutoBackupConfig(req, cb) {
         let resp = new DescribeAutoBackupConfigResponse();
-        this.request("DescribeAutoBackupConfig", req, resp, options, cb);
+        this.request("DescribeAutoBackupConfig", req, resp, cb);
     }
 
     /**
@@ -147,7 +147,7 @@ class RedisClient extends AbstractClient {
      */
     ClearInstance(req, cb) {
         let resp = new ClearInstanceResponse();
-        this.request("ClearInstance", req, resp, options, cb);
+        this.request("ClearInstance", req, resp, cb);
     }
 
     /**
@@ -158,7 +158,7 @@ class RedisClient extends AbstractClient {
      */
     DescribeInstanceBackups(req, cb) {
         let resp = new DescribeInstanceBackupsResponse();
-        this.request("DescribeInstanceBackups", req, resp, options, cb);
+        this.request("DescribeInstanceBackups", req, resp, cb);
     }
 
     /**
@@ -169,7 +169,7 @@ class RedisClient extends AbstractClient {
      */
     DescribeInstanceDealDetail(req, cb) {
         let resp = new DescribeInstanceDealDetailResponse();
-        this.request("DescribeInstanceDealDetail", req, resp, options, cb);
+        this.request("DescribeInstanceDealDetail", req, resp, cb);
     }
 
     /**
@@ -180,7 +180,7 @@ class RedisClient extends AbstractClient {
      */
     DescribeProductInfo(req, cb) {
         let resp = new DescribeProductInfoResponse();
-        this.request("DescribeProductInfo", req, resp, options, cb);
+        this.request("DescribeProductInfo", req, resp, cb);
     }
 
     /**
@@ -191,7 +191,7 @@ class RedisClient extends AbstractClient {
      */
     DescribeTaskInfo(req, cb) {
         let resp = new DescribeTaskInfoResponse();
-        this.request("DescribeTaskInfo", req, resp, options, cb);
+        this.request("DescribeTaskInfo", req, resp, cb);
     }
 
     /**
@@ -202,7 +202,7 @@ class RedisClient extends AbstractClient {
      */
     ModifyAutoBackupConfig(req, cb) {
         let resp = new ModifyAutoBackupConfigResponse();
-        this.request("ModifyAutoBackupConfig", req, resp, options, cb);
+        this.request("ModifyAutoBackupConfig", req, resp, cb);
     }
 
     /**
@@ -213,7 +213,7 @@ class RedisClient extends AbstractClient {
      */
     CreateInstances(req, cb) {
         let resp = new CreateInstancesResponse();
-        this.request("CreateInstances", req, resp, options, cb);
+        this.request("CreateInstances", req, resp, cb);
     }
 
 

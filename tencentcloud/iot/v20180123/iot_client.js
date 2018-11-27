@@ -151,7 +151,7 @@ class IotClient extends AbstractClient {
      */
     GetDataHistory(req, cb) {
         let resp = new GetDataHistoryResponse();
-        this.request("GetDataHistory", req, resp, options, cb);
+        this.request("GetDataHistory", req, resp, cb);
     }
 
     /**
@@ -162,7 +162,7 @@ class IotClient extends AbstractClient {
      */
     ResetDevice(req, cb) {
         let resp = new ResetDeviceResponse();
-        this.request("ResetDevice", req, resp, options, cb);
+        this.request("ResetDevice", req, resp, cb);
     }
 
     /**
@@ -173,7 +173,7 @@ class IotClient extends AbstractClient {
      */
     GetDeviceStatistics(req, cb) {
         let resp = new GetDeviceStatisticsResponse();
-        this.request("GetDeviceStatistics", req, resp, options, cb);
+        this.request("GetDeviceStatistics", req, resp, cb);
     }
 
     /**
@@ -184,7 +184,7 @@ class IotClient extends AbstractClient {
      */
     AppSecureAddDevice(req, cb) {
         let resp = new AppSecureAddDeviceResponse();
-        this.request("AppSecureAddDevice", req, resp, options, cb);
+        this.request("AppSecureAddDevice", req, resp, cb);
     }
 
     /**
@@ -195,7 +195,7 @@ class IotClient extends AbstractClient {
      */
     IssueDeviceControl(req, cb) {
         let resp = new IssueDeviceControlResponse();
-        this.request("IssueDeviceControl", req, resp, options, cb);
+        this.request("IssueDeviceControl", req, resp, cb);
     }
 
     /**
@@ -206,7 +206,7 @@ class IotClient extends AbstractClient {
      */
     GetDebugLog(req, cb) {
         let resp = new GetDebugLogResponse();
-        this.request("GetDebugLog", req, resp, options, cb);
+        this.request("GetDebugLog", req, resp, cb);
     }
 
     /**
@@ -217,7 +217,7 @@ class IotClient extends AbstractClient {
      */
     DeactivateRule(req, cb) {
         let resp = new DeactivateRuleResponse();
-        this.request("DeactivateRule", req, resp, options, cb);
+        this.request("DeactivateRule", req, resp, cb);
     }
 
     /**
@@ -228,7 +228,7 @@ class IotClient extends AbstractClient {
      */
     GetDevices(req, cb) {
         let resp = new GetDevicesResponse();
-        this.request("GetDevices", req, resp, options, cb);
+        this.request("GetDevices", req, resp, cb);
     }
 
     /**
@@ -239,7 +239,7 @@ class IotClient extends AbstractClient {
      */
     AddTopic(req, cb) {
         let resp = new AddTopicResponse();
-        this.request("AddTopic", req, resp, options, cb);
+        this.request("AddTopic", req, resp, cb);
     }
 
     /**
@@ -250,7 +250,7 @@ class IotClient extends AbstractClient {
      */
     AppGetDeviceStatuses(req, cb) {
         let resp = new AppGetDeviceStatusesResponse();
-        this.request("AppGetDeviceStatuses", req, resp, options, cb);
+        this.request("AppGetDeviceStatuses", req, resp, cb);
     }
 
     /**
@@ -261,7 +261,7 @@ class IotClient extends AbstractClient {
      */
     GetProducts(req, cb) {
         let resp = new GetProductsResponse();
-        this.request("GetProducts", req, resp, options, cb);
+        this.request("GetProducts", req, resp, cb);
     }
 
     /**
@@ -272,7 +272,7 @@ class IotClient extends AbstractClient {
      */
     AppGetToken(req, cb) {
         let resp = new AppGetTokenResponse();
-        this.request("AppGetToken", req, resp, options, cb);
+        this.request("AppGetToken", req, resp, cb);
     }
 
     /**
@@ -283,7 +283,7 @@ class IotClient extends AbstractClient {
      */
     AppUpdateUser(req, cb) {
         let resp = new AppUpdateUserResponse();
-        this.request("AppUpdateUser", req, resp, options, cb);
+        this.request("AppUpdateUser", req, resp, cb);
     }
 
     /**
@@ -294,7 +294,7 @@ class IotClient extends AbstractClient {
      */
     AddRule(req, cb) {
         let resp = new AddRuleResponse();
-        this.request("AddRule", req, resp, options, cb);
+        this.request("AddRule", req, resp, cb);
     }
 
     /**
@@ -305,7 +305,7 @@ class IotClient extends AbstractClient {
      */
     UnassociateSubDeviceFromGatewayProduct(req, cb) {
         let resp = new UnassociateSubDeviceFromGatewayProductResponse();
-        this.request("UnassociateSubDeviceFromGatewayProduct", req, resp, options, cb);
+        this.request("UnassociateSubDeviceFromGatewayProduct", req, resp, cb);
     }
 
     /**
@@ -316,7 +316,7 @@ class IotClient extends AbstractClient {
      */
     GetDeviceSignatures(req, cb) {
         let resp = new GetDeviceSignaturesResponse();
-        this.request("GetDeviceSignatures", req, resp, options, cb);
+        this.request("GetDeviceSignatures", req, resp, cb);
     }
 
     /**
@@ -327,7 +327,7 @@ class IotClient extends AbstractClient {
      */
     DeleteRule(req, cb) {
         let resp = new DeleteRuleResponse();
-        this.request("DeleteRule", req, resp, options, cb);
+        this.request("DeleteRule", req, resp, cb);
     }
 
     /**
@@ -338,7 +338,7 @@ class IotClient extends AbstractClient {
      */
     AddProduct(req, cb) {
         let resp = new AddProductResponse();
-        this.request("AddProduct", req, resp, options, cb);
+        this.request("AddProduct", req, resp, cb);
     }
 
     /**
@@ -349,7 +349,7 @@ class IotClient extends AbstractClient {
      */
     DeleteDevice(req, cb) {
         let resp = new DeleteDeviceResponse();
-        this.request("DeleteDevice", req, resp, options, cb);
+        this.request("DeleteDevice", req, resp, cb);
     }
 
     /**
@@ -360,7 +360,7 @@ class IotClient extends AbstractClient {
      */
     PublishMsg(req, cb) {
         let resp = new PublishMsgResponse();
-        this.request("PublishMsg", req, resp, options, cb);
+        this.request("PublishMsg", req, resp, cb);
     }
 
     /**
@@ -371,7 +371,7 @@ class IotClient extends AbstractClient {
      */
     UpdateRule(req, cb) {
         let resp = new UpdateRuleResponse();
-        this.request("UpdateRule", req, resp, options, cb);
+        this.request("UpdateRule", req, resp, cb);
     }
 
     /**
@@ -382,7 +382,7 @@ class IotClient extends AbstractClient {
      */
     AppDeleteDevice(req, cb) {
         let resp = new AppDeleteDeviceResponse();
-        this.request("AppDeleteDevice", req, resp, options, cb);
+        this.request("AppDeleteDevice", req, resp, cb);
     }
 
     /**
@@ -393,7 +393,7 @@ class IotClient extends AbstractClient {
      */
     GetDeviceStatuses(req, cb) {
         let resp = new GetDeviceStatusesResponse();
-        this.request("GetDeviceStatuses", req, resp, options, cb);
+        this.request("GetDeviceStatuses", req, resp, cb);
     }
 
     /**
@@ -404,7 +404,7 @@ class IotClient extends AbstractClient {
      */
     GetRules(req, cb) {
         let resp = new GetRulesResponse();
-        this.request("GetRules", req, resp, options, cb);
+        this.request("GetRules", req, resp, cb);
     }
 
     /**
@@ -415,7 +415,7 @@ class IotClient extends AbstractClient {
      */
     DeleteProduct(req, cb) {
         let resp = new DeleteProductResponse();
-        this.request("DeleteProduct", req, resp, options, cb);
+        this.request("DeleteProduct", req, resp, cb);
     }
 
     /**
@@ -426,7 +426,7 @@ class IotClient extends AbstractClient {
      */
     AppGetUser(req, cb) {
         let resp = new AppGetUserResponse();
-        this.request("AppGetUser", req, resp, options, cb);
+        this.request("AppGetUser", req, resp, cb);
     }
 
     /**
@@ -437,7 +437,7 @@ class IotClient extends AbstractClient {
      */
     AppGetDevices(req, cb) {
         let resp = new AppGetDevicesResponse();
-        this.request("AppGetDevices", req, resp, options, cb);
+        this.request("AppGetDevices", req, resp, cb);
     }
 
     /**
@@ -448,7 +448,7 @@ class IotClient extends AbstractClient {
      */
     AppAddUser(req, cb) {
         let resp = new AppAddUserResponse();
-        this.request("AppAddUser", req, resp, options, cb);
+        this.request("AppAddUser", req, resp, cb);
     }
 
     /**
@@ -459,7 +459,7 @@ class IotClient extends AbstractClient {
      */
     UpdateProduct(req, cb) {
         let resp = new UpdateProductResponse();
-        this.request("UpdateProduct", req, resp, options, cb);
+        this.request("UpdateProduct", req, resp, cb);
     }
 
     /**
@@ -470,7 +470,7 @@ class IotClient extends AbstractClient {
      */
     AppIssueDeviceControl(req, cb) {
         let resp = new AppIssueDeviceControlResponse();
-        this.request("AppIssueDeviceControl", req, resp, options, cb);
+        this.request("AppIssueDeviceControl", req, resp, cb);
     }
 
     /**
@@ -481,7 +481,7 @@ class IotClient extends AbstractClient {
      */
     GetTopic(req, cb) {
         let resp = new GetTopicResponse();
-        this.request("GetTopic", req, resp, options, cb);
+        this.request("GetTopic", req, resp, cb);
     }
 
     /**
@@ -492,7 +492,7 @@ class IotClient extends AbstractClient {
      */
     AppGetDeviceData(req, cb) {
         let resp = new AppGetDeviceDataResponse();
-        this.request("AppGetDeviceData", req, resp, options, cb);
+        this.request("AppGetDeviceData", req, resp, cb);
     }
 
     /**
@@ -503,7 +503,7 @@ class IotClient extends AbstractClient {
      */
     GetDevice(req, cb) {
         let resp = new GetDeviceResponse();
-        this.request("GetDevice", req, resp, options, cb);
+        this.request("GetDevice", req, resp, cb);
     }
 
     /**
@@ -514,7 +514,7 @@ class IotClient extends AbstractClient {
      */
     AppGetDevice(req, cb) {
         let resp = new AppGetDeviceResponse();
-        this.request("AppGetDevice", req, resp, options, cb);
+        this.request("AppGetDevice", req, resp, cb);
     }
 
     /**
@@ -525,7 +525,7 @@ class IotClient extends AbstractClient {
      */
     GetDeviceData(req, cb) {
         let resp = new GetDeviceDataResponse();
-        this.request("GetDeviceData", req, resp, options, cb);
+        this.request("GetDeviceData", req, resp, cb);
     }
 
     /**
@@ -536,7 +536,7 @@ class IotClient extends AbstractClient {
      */
     GetRule(req, cb) {
         let resp = new GetRuleResponse();
-        this.request("GetRule", req, resp, options, cb);
+        this.request("GetRule", req, resp, cb);
     }
 
     /**
@@ -547,7 +547,7 @@ class IotClient extends AbstractClient {
      */
     GetDeviceLog(req, cb) {
         let resp = new GetDeviceLogResponse();
-        this.request("GetDeviceLog", req, resp, options, cb);
+        this.request("GetDeviceLog", req, resp, cb);
     }
 
     /**
@@ -558,7 +558,7 @@ class IotClient extends AbstractClient {
      */
     GetTopics(req, cb) {
         let resp = new GetTopicsResponse();
-        this.request("GetTopics", req, resp, options, cb);
+        this.request("GetTopics", req, resp, cb);
     }
 
     /**
@@ -569,7 +569,7 @@ class IotClient extends AbstractClient {
      */
     AddDevice(req, cb) {
         let resp = new AddDeviceResponse();
-        this.request("AddDevice", req, resp, options, cb);
+        this.request("AddDevice", req, resp, cb);
     }
 
     /**
@@ -580,7 +580,7 @@ class IotClient extends AbstractClient {
      */
     GetProduct(req, cb) {
         let resp = new GetProductResponse();
-        this.request("GetProduct", req, resp, options, cb);
+        this.request("GetProduct", req, resp, cb);
     }
 
     /**
@@ -591,7 +591,7 @@ class IotClient extends AbstractClient {
      */
     AppResetPassword(req, cb) {
         let resp = new AppResetPasswordResponse();
-        this.request("AppResetPassword", req, resp, options, cb);
+        this.request("AppResetPassword", req, resp, cb);
     }
 
     /**
@@ -602,7 +602,7 @@ class IotClient extends AbstractClient {
      */
     ActivateRule(req, cb) {
         let resp = new ActivateRuleResponse();
-        this.request("ActivateRule", req, resp, options, cb);
+        this.request("ActivateRule", req, resp, cb);
     }
 
     /**
@@ -613,7 +613,7 @@ class IotClient extends AbstractClient {
      */
     AssociateSubDeviceToGatewayProduct(req, cb) {
         let resp = new AssociateSubDeviceToGatewayProductResponse();
-        this.request("AssociateSubDeviceToGatewayProduct", req, resp, options, cb);
+        this.request("AssociateSubDeviceToGatewayProduct", req, resp, cb);
     }
 
     /**
@@ -624,7 +624,7 @@ class IotClient extends AbstractClient {
      */
     DeleteTopic(req, cb) {
         let resp = new DeleteTopicResponse();
-        this.request("DeleteTopic", req, resp, options, cb);
+        this.request("DeleteTopic", req, resp, cb);
     }
 
     /**
@@ -635,7 +635,7 @@ class IotClient extends AbstractClient {
      */
     AppUpdateDevice(req, cb) {
         let resp = new AppUpdateDeviceResponse();
-        this.request("AppUpdateDevice", req, resp, options, cb);
+        this.request("AppUpdateDevice", req, resp, cb);
     }
 
 

@@ -336,7 +336,7 @@ class VpcClient extends AbstractClient {
      */
     DownloadCustomerGatewayConfiguration(req, cb) {
         let resp = new DownloadCustomerGatewayConfigurationResponse();
-        this.request("DownloadCustomerGatewayConfiguration", req, resp, options, cb);
+        this.request("DownloadCustomerGatewayConfiguration", req, resp, cb);
     }
 
     /**
@@ -347,7 +347,7 @@ class VpcClient extends AbstractClient {
      */
     DescribeCustomerGateways(req, cb) {
         let resp = new DescribeCustomerGatewaysResponse();
-        this.request("DescribeCustomerGateways", req, resp, options, cb);
+        this.request("DescribeCustomerGateways", req, resp, cb);
     }
 
     /**
@@ -359,7 +359,7 @@ class VpcClient extends AbstractClient {
      */
     ReplaceSecurityGroupPolicy(req, cb) {
         let resp = new ReplaceSecurityGroupPolicyResponse();
-        this.request("ReplaceSecurityGroupPolicy", req, resp, options, cb);
+        this.request("ReplaceSecurityGroupPolicy", req, resp, cb);
     }
 
     /**
@@ -370,7 +370,7 @@ class VpcClient extends AbstractClient {
      */
     DescribeServiceTemplateGroups(req, cb) {
         let resp = new DescribeServiceTemplateGroupsResponse();
-        this.request("DescribeServiceTemplateGroups", req, resp, options, cb);
+        this.request("DescribeServiceTemplateGroups", req, resp, cb);
     }
 
     /**
@@ -381,7 +381,7 @@ class VpcClient extends AbstractClient {
      */
     DescribeRouteTables(req, cb) {
         let resp = new DescribeRouteTablesResponse();
-        this.request("DescribeRouteTables", req, resp, options, cb);
+        this.request("DescribeRouteTables", req, resp, cb);
     }
 
     /**
@@ -392,7 +392,7 @@ class VpcClient extends AbstractClient {
      */
     CreateBandwidthPackage(req, cb) {
         let resp = new CreateBandwidthPackageResponse();
-        this.request("CreateBandwidthPackage", req, resp, options, cb);
+        this.request("CreateBandwidthPackage", req, resp, cb);
     }
 
     /**
@@ -404,7 +404,7 @@ class VpcClient extends AbstractClient {
      */
     CreateRouteTable(req, cb) {
         let resp = new CreateRouteTableResponse();
-        this.request("CreateRouteTable", req, resp, options, cb);
+        this.request("CreateRouteTable", req, resp, cb);
     }
 
     /**
@@ -416,7 +416,7 @@ class VpcClient extends AbstractClient {
      */
     ReplaceRouteTableAssociation(req, cb) {
         let resp = new ReplaceRouteTableAssociationResponse();
-        this.request("ReplaceRouteTableAssociation", req, resp, options, cb);
+        this.request("ReplaceRouteTableAssociation", req, resp, cb);
     }
 
     /**
@@ -428,7 +428,7 @@ class VpcClient extends AbstractClient {
      */
     EnableCcnRoutes(req, cb) {
         let resp = new EnableCcnRoutesResponse();
-        this.request("EnableCcnRoutes", req, resp, options, cb);
+        this.request("EnableCcnRoutes", req, resp, cb);
     }
 
     /**
@@ -439,7 +439,7 @@ class VpcClient extends AbstractClient {
      */
     ModifyServiceTemplateGroupAttribute(req, cb) {
         let resp = new ModifyServiceTemplateGroupAttributeResponse();
-        this.request("ModifyServiceTemplateGroupAttribute", req, resp, options, cb);
+        this.request("ModifyServiceTemplateGroupAttribute", req, resp, cb);
     }
 
     /**
@@ -450,7 +450,7 @@ class VpcClient extends AbstractClient {
      */
     DescribeCcnAttachedInstances(req, cb) {
         let resp = new DescribeCcnAttachedInstancesResponse();
-        this.request("DescribeCcnAttachedInstances", req, resp, options, cb);
+        this.request("DescribeCcnAttachedInstances", req, resp, cb);
     }
 
     /**
@@ -462,7 +462,7 @@ class VpcClient extends AbstractClient {
      */
     ResetRoutes(req, cb) {
         let resp = new ResetRoutesResponse();
-        this.request("ResetRoutes", req, resp, options, cb);
+        this.request("ResetRoutes", req, resp, cb);
     }
 
     /**
@@ -473,7 +473,7 @@ class VpcClient extends AbstractClient {
      */
     ModifyPrivateIpAddressesAttribute(req, cb) {
         let resp = new ModifyPrivateIpAddressesAttributeResponse();
-        this.request("ModifyPrivateIpAddressesAttribute", req, resp, options, cb);
+        this.request("ModifyPrivateIpAddressesAttribute", req, resp, cb);
     }
 
     /**
@@ -484,7 +484,7 @@ class VpcClient extends AbstractClient {
      */
     DeleteVpnConnection(req, cb) {
         let resp = new DeleteVpnConnectionResponse();
-        this.request("DeleteVpnConnection", req, resp, options, cb);
+        this.request("DeleteVpnConnection", req, resp, cb);
     }
 
     /**
@@ -495,7 +495,7 @@ class VpcClient extends AbstractClient {
      */
     ModifyAddressTemplateGroupAttribute(req, cb) {
         let resp = new ModifyAddressTemplateGroupAttributeResponse();
-        this.request("ModifyAddressTemplateGroupAttribute", req, resp, options, cb);
+        this.request("ModifyAddressTemplateGroupAttribute", req, resp, cb);
     }
 
     /**
@@ -506,7 +506,7 @@ class VpcClient extends AbstractClient {
      */
     DescribeCustomerGatewayVendors(req, cb) {
         let resp = new DescribeCustomerGatewayVendorsResponse();
-        this.request("DescribeCustomerGatewayVendors", req, resp, options, cb);
+        this.request("DescribeCustomerGatewayVendors", req, resp, cb);
     }
 
     /**
@@ -518,7 +518,7 @@ class VpcClient extends AbstractClient {
      */
     DescribeAddresses(req, cb) {
         let resp = new DescribeAddressesResponse();
-        this.request("DescribeAddresses", req, resp, options, cb);
+        this.request("DescribeAddresses", req, resp, cb);
     }
 
     /**
@@ -529,7 +529,7 @@ class VpcClient extends AbstractClient {
      */
     ModifyServiceTemplateAttribute(req, cb) {
         let resp = new ModifyServiceTemplateAttributeResponse();
-        this.request("ModifyServiceTemplateAttribute", req, resp, options, cb);
+        this.request("ModifyServiceTemplateAttribute", req, resp, cb);
     }
 
     /**
@@ -541,7 +541,7 @@ class VpcClient extends AbstractClient {
      */
     DetachCcnInstances(req, cb) {
         let resp = new DetachCcnInstancesResponse();
-        this.request("DetachCcnInstances", req, resp, options, cb);
+        this.request("DetachCcnInstances", req, resp, cb);
     }
 
     /**
@@ -552,7 +552,7 @@ class VpcClient extends AbstractClient {
      */
     CreateDirectConnectGatewayCcnRoutes(req, cb) {
         let resp = new CreateDirectConnectGatewayCcnRoutesResponse();
-        this.request("CreateDirectConnectGatewayCcnRoutes", req, resp, options, cb);
+        this.request("CreateDirectConnectGatewayCcnRoutes", req, resp, cb);
     }
 
     /**
@@ -563,7 +563,7 @@ class VpcClient extends AbstractClient {
      */
     RemoveBandwidthPackageResources(req, cb) {
         let resp = new RemoveBandwidthPackageResourcesResponse();
-        this.request("RemoveBandwidthPackageResources", req, resp, options, cb);
+        this.request("RemoveBandwidthPackageResources", req, resp, cb);
     }
 
     /**
@@ -574,7 +574,7 @@ class VpcClient extends AbstractClient {
      */
     InquiryPriceRenewVpnGateway(req, cb) {
         let resp = new InquiryPriceRenewVpnGatewayResponse();
-        this.request("InquiryPriceRenewVpnGateway", req, resp, options, cb);
+        this.request("InquiryPriceRenewVpnGateway", req, resp, cb);
     }
 
     /**
@@ -588,7 +588,7 @@ class VpcClient extends AbstractClient {
      */
     AssignPrivateIpAddresses(req, cb) {
         let resp = new AssignPrivateIpAddressesResponse();
-        this.request("AssignPrivateIpAddresses", req, resp, options, cb);
+        this.request("AssignPrivateIpAddresses", req, resp, cb);
     }
 
     /**
@@ -599,7 +599,7 @@ class VpcClient extends AbstractClient {
      */
     DescribeVpcs(req, cb) {
         let resp = new DescribeVpcsResponse();
-        this.request("DescribeVpcs", req, resp, options, cb);
+        this.request("DescribeVpcs", req, resp, cb);
     }
 
     /**
@@ -610,7 +610,7 @@ class VpcClient extends AbstractClient {
      */
     InquiryPriceResetVpnGatewayInternetMaxBandwidth(req, cb) {
         let resp = new InquiryPriceResetVpnGatewayInternetMaxBandwidthResponse();
-        this.request("InquiryPriceResetVpnGatewayInternetMaxBandwidth", req, resp, options, cb);
+        this.request("InquiryPriceResetVpnGatewayInternetMaxBandwidth", req, resp, cb);
     }
 
     /**
@@ -621,7 +621,7 @@ class VpcClient extends AbstractClient {
      */
     DeleteDirectConnectGatewayCcnRoutes(req, cb) {
         let resp = new DeleteDirectConnectGatewayCcnRoutesResponse();
-        this.request("DeleteDirectConnectGatewayCcnRoutes", req, resp, options, cb);
+        this.request("DeleteDirectConnectGatewayCcnRoutes", req, resp, cb);
     }
 
     /**
@@ -633,7 +633,7 @@ class VpcClient extends AbstractClient {
      */
     RejectAttachCcnInstances(req, cb) {
         let resp = new RejectAttachCcnInstancesResponse();
-        this.request("RejectAttachCcnInstances", req, resp, options, cb);
+        this.request("RejectAttachCcnInstances", req, resp, cb);
     }
 
     /**
@@ -644,7 +644,7 @@ class VpcClient extends AbstractClient {
      */
     MigrateNetworkInterface(req, cb) {
         let resp = new MigrateNetworkInterfaceResponse();
-        this.request("MigrateNetworkInterface", req, resp, options, cb);
+        this.request("MigrateNetworkInterface", req, resp, cb);
     }
 
     /**
@@ -655,7 +655,7 @@ class VpcClient extends AbstractClient {
      */
     ModifyAddressesBandwidth(req, cb) {
         let resp = new ModifyAddressesBandwidthResponse();
-        this.request("ModifyAddressesBandwidth", req, resp, options, cb);
+        this.request("ModifyAddressesBandwidth", req, resp, cb);
     }
 
     /**
@@ -666,7 +666,7 @@ class VpcClient extends AbstractClient {
      */
     DescribeVpnConnections(req, cb) {
         let resp = new DescribeVpnConnectionsResponse();
-        this.request("DescribeVpnConnections", req, resp, options, cb);
+        this.request("DescribeVpnConnections", req, resp, cb);
     }
 
     /**
@@ -682,7 +682,7 @@ class VpcClient extends AbstractClient {
      */
     CreateSubnet(req, cb) {
         let resp = new CreateSubnetResponse();
-        this.request("CreateSubnet", req, resp, options, cb);
+        this.request("CreateSubnet", req, resp, cb);
     }
 
     /**
@@ -693,7 +693,7 @@ class VpcClient extends AbstractClient {
      */
     ModifyAddressTemplateAttribute(req, cb) {
         let resp = new ModifyAddressTemplateAttributeResponse();
-        this.request("ModifyAddressTemplateAttribute", req, resp, options, cb);
+        this.request("ModifyAddressTemplateAttribute", req, resp, cb);
     }
 
     /**
@@ -704,7 +704,7 @@ class VpcClient extends AbstractClient {
      */
     AcceptAttachCcnInstances(req, cb) {
         let resp = new AcceptAttachCcnInstancesResponse();
-        this.request("AcceptAttachCcnInstances", req, resp, options, cb);
+        this.request("AcceptAttachCcnInstances", req, resp, cb);
     }
 
     /**
@@ -715,7 +715,7 @@ class VpcClient extends AbstractClient {
      */
     DeleteServiceTemplateGroup(req, cb) {
         let resp = new DeleteServiceTemplateGroupResponse();
-        this.request("DeleteServiceTemplateGroup", req, resp, options, cb);
+        this.request("DeleteServiceTemplateGroup", req, resp, cb);
     }
 
     /**
@@ -728,7 +728,7 @@ class VpcClient extends AbstractClient {
      */
     DisassociateAddress(req, cb) {
         let resp = new DisassociateAddressResponse();
-        this.request("DisassociateAddress", req, resp, options, cb);
+        this.request("DisassociateAddress", req, resp, cb);
     }
 
     /**
@@ -739,7 +739,7 @@ class VpcClient extends AbstractClient {
      */
     ResetAttachCcnInstances(req, cb) {
         let resp = new ResetAttachCcnInstancesResponse();
-        this.request("ResetAttachCcnInstances", req, resp, options, cb);
+        this.request("ResetAttachCcnInstances", req, resp, cb);
     }
 
     /**
@@ -752,7 +752,7 @@ class VpcClient extends AbstractClient {
      */
     CreateVpc(req, cb) {
         let resp = new CreateVpcResponse();
-        this.request("CreateVpc", req, resp, options, cb);
+        this.request("CreateVpc", req, resp, cb);
     }
 
     /**
@@ -763,7 +763,7 @@ class VpcClient extends AbstractClient {
      */
     AddBandwidthPackageResources(req, cb) {
         let resp = new AddBandwidthPackageResourcesResponse();
-        this.request("AddBandwidthPackageResources", req, resp, options, cb);
+        this.request("AddBandwidthPackageResources", req, resp, cb);
     }
 
     /**
@@ -777,7 +777,7 @@ class VpcClient extends AbstractClient {
      */
     AllocateAddresses(req, cb) {
         let resp = new AllocateAddressesResponse();
-        this.request("AllocateAddresses", req, resp, options, cb);
+        this.request("AllocateAddresses", req, resp, cb);
     }
 
     /**
@@ -788,7 +788,7 @@ class VpcClient extends AbstractClient {
      */
     RenewVpnGateway(req, cb) {
         let resp = new RenewVpnGatewayResponse();
-        this.request("RenewVpnGateway", req, resp, options, cb);
+        this.request("RenewVpnGateway", req, resp, cb);
     }
 
     /**
@@ -800,7 +800,7 @@ class VpcClient extends AbstractClient {
      */
     AttachCcnInstances(req, cb) {
         let resp = new AttachCcnInstancesResponse();
-        this.request("AttachCcnInstances", req, resp, options, cb);
+        this.request("AttachCcnInstances", req, resp, cb);
     }
 
     /**
@@ -816,7 +816,7 @@ class VpcClient extends AbstractClient {
      */
     AssociateAddress(req, cb) {
         let resp = new AssociateAddressResponse();
-        this.request("AssociateAddress", req, resp, options, cb);
+        this.request("AssociateAddress", req, resp, cb);
     }
 
     /**
@@ -827,7 +827,7 @@ class VpcClient extends AbstractClient {
      */
     DeleteCustomerGateway(req, cb) {
         let resp = new DeleteCustomerGatewayResponse();
-        this.request("DeleteCustomerGateway", req, resp, options, cb);
+        this.request("DeleteCustomerGateway", req, resp, cb);
     }
 
     /**
@@ -839,7 +839,7 @@ class VpcClient extends AbstractClient {
      */
     DeleteSubnet(req, cb) {
         let resp = new DeleteSubnetResponse();
-        this.request("DeleteSubnet", req, resp, options, cb);
+        this.request("DeleteSubnet", req, resp, cb);
     }
 
     /**
@@ -852,7 +852,7 @@ class VpcClient extends AbstractClient {
      */
     AttachClassicLinkVpc(req, cb) {
         let resp = new AttachClassicLinkVpcResponse();
-        this.request("AttachClassicLinkVpc", req, resp, options, cb);
+        this.request("AttachClassicLinkVpc", req, resp, cb);
     }
 
     /**
@@ -866,7 +866,7 @@ class VpcClient extends AbstractClient {
      */
     DeleteDirectConnectGateway(req, cb) {
         let resp = new DeleteDirectConnectGatewayResponse();
-        this.request("DeleteDirectConnectGateway", req, resp, options, cb);
+        this.request("DeleteDirectConnectGateway", req, resp, cb);
     }
 
     /**
@@ -877,7 +877,7 @@ class VpcClient extends AbstractClient {
      */
     DescribeDirectConnectGatewayCcnRoutes(req, cb) {
         let resp = new DescribeDirectConnectGatewayCcnRoutesResponse();
-        this.request("DescribeDirectConnectGatewayCcnRoutes", req, resp, options, cb);
+        this.request("DescribeDirectConnectGatewayCcnRoutes", req, resp, cb);
     }
 
     /**
@@ -892,7 +892,7 @@ class VpcClient extends AbstractClient {
      */
     CreateNetworkInterface(req, cb) {
         let resp = new CreateNetworkInterfaceResponse();
-        this.request("CreateNetworkInterface", req, resp, options, cb);
+        this.request("CreateNetworkInterface", req, resp, cb);
     }
 
     /**
@@ -903,7 +903,7 @@ class VpcClient extends AbstractClient {
      */
     DeleteBandwidthPackage(req, cb) {
         let resp = new DeleteBandwidthPackageResponse();
-        this.request("DeleteBandwidthPackage", req, resp, options, cb);
+        this.request("DeleteBandwidthPackage", req, resp, cb);
     }
 
     /**
@@ -923,7 +923,7 @@ class VpcClient extends AbstractClient {
      */
     ModifySecurityGroupPolicies(req, cb) {
         let resp = new ModifySecurityGroupPoliciesResponse();
-        this.request("ModifySecurityGroupPolicies", req, resp, options, cb);
+        this.request("ModifySecurityGroupPolicies", req, resp, cb);
     }
 
     /**
@@ -934,7 +934,7 @@ class VpcClient extends AbstractClient {
      */
     DescribeCcns(req, cb) {
         let resp = new DescribeCcnsResponse();
-        this.request("DescribeCcns", req, resp, options, cb);
+        this.request("DescribeCcns", req, resp, cb);
     }
 
     /**
@@ -948,7 +948,7 @@ class VpcClient extends AbstractClient {
      */
     DeleteCcn(req, cb) {
         let resp = new DeleteCcnResponse();
-        this.request("DeleteCcn", req, resp, options, cb);
+        this.request("DeleteCcn", req, resp, cb);
     }
 
     /**
@@ -960,7 +960,7 @@ class VpcClient extends AbstractClient {
      */
     HaVipDisassociateAddressIp(req, cb) {
         let resp = new HaVipDisassociateAddressIpResponse();
-        this.request("HaVipDisassociateAddressIp", req, resp, options, cb);
+        this.request("HaVipDisassociateAddressIp", req, resp, cb);
     }
 
     /**
@@ -971,7 +971,7 @@ class VpcClient extends AbstractClient {
      */
     DetachNetworkInterface(req, cb) {
         let resp = new DetachNetworkInterfaceResponse();
-        this.request("DetachNetworkInterface", req, resp, options, cb);
+        this.request("DetachNetworkInterface", req, resp, cb);
     }
 
     /**
@@ -984,7 +984,7 @@ class VpcClient extends AbstractClient {
      */
     DeleteNetworkInterface(req, cb) {
         let resp = new DeleteNetworkInterfaceResponse();
-        this.request("DeleteNetworkInterface", req, resp, options, cb);
+        this.request("DeleteNetworkInterface", req, resp, cb);
     }
 
     /**
@@ -995,7 +995,7 @@ class VpcClient extends AbstractClient {
      */
     ReplaceRoutes(req, cb) {
         let resp = new ReplaceRoutesResponse();
-        this.request("ReplaceRoutes", req, resp, options, cb);
+        this.request("ReplaceRoutes", req, resp, cb);
     }
 
     /**
@@ -1006,7 +1006,7 @@ class VpcClient extends AbstractClient {
      */
     DescribeRouteConflicts(req, cb) {
         let resp = new DescribeRouteConflictsResponse();
-        this.request("DescribeRouteConflicts", req, resp, options, cb);
+        this.request("DescribeRouteConflicts", req, resp, cb);
     }
 
     /**
@@ -1017,7 +1017,7 @@ class VpcClient extends AbstractClient {
      */
     DisableRoutes(req, cb) {
         let resp = new DisableRoutesResponse();
-        this.request("DisableRoutes", req, resp, options, cb);
+        this.request("DisableRoutes", req, resp, cb);
     }
 
     /**
@@ -1028,7 +1028,7 @@ class VpcClient extends AbstractClient {
      */
     DescribeCcnRegionBandwidthLimits(req, cb) {
         let resp = new DescribeCcnRegionBandwidthLimitsResponse();
-        this.request("DescribeCcnRegionBandwidthLimits", req, resp, options, cb);
+        this.request("DescribeCcnRegionBandwidthLimits", req, resp, cb);
     }
 
     /**
@@ -1039,7 +1039,7 @@ class VpcClient extends AbstractClient {
      */
     DeleteServiceTemplate(req, cb) {
         let resp = new DeleteServiceTemplateResponse();
-        this.request("DeleteServiceTemplate", req, resp, options, cb);
+        this.request("DeleteServiceTemplate", req, resp, cb);
     }
 
     /**
@@ -1051,7 +1051,7 @@ class VpcClient extends AbstractClient {
      */
     UnassignPrivateIpAddresses(req, cb) {
         let resp = new UnassignPrivateIpAddressesResponse();
-        this.request("UnassignPrivateIpAddresses", req, resp, options, cb);
+        this.request("UnassignPrivateIpAddresses", req, resp, cb);
     }
 
     /**
@@ -1062,7 +1062,7 @@ class VpcClient extends AbstractClient {
      */
     DeleteAddressTemplateGroup(req, cb) {
         let resp = new DeleteAddressTemplateGroupResponse();
-        this.request("DeleteAddressTemplateGroup", req, resp, options, cb);
+        this.request("DeleteAddressTemplateGroup", req, resp, cb);
     }
 
     /**
@@ -1073,7 +1073,7 @@ class VpcClient extends AbstractClient {
      */
     DescribeCcnRoutes(req, cb) {
         let resp = new DescribeCcnRoutesResponse();
-        this.request("DescribeCcnRoutes", req, resp, options, cb);
+        this.request("DescribeCcnRoutes", req, resp, cb);
     }
 
     /**
@@ -1092,7 +1092,7 @@ class VpcClient extends AbstractClient {
      */
     CreateDefaultVpc(req, cb) {
         let resp = new CreateDefaultVpcResponse();
-        this.request("CreateDefaultVpc", req, resp, options, cb);
+        this.request("CreateDefaultVpc", req, resp, cb);
     }
 
     /**
@@ -1107,7 +1107,7 @@ class VpcClient extends AbstractClient {
      */
     AttachNetworkInterface(req, cb) {
         let resp = new AttachNetworkInterfaceResponse();
-        this.request("AttachNetworkInterface", req, resp, options, cb);
+        this.request("AttachNetworkInterface", req, resp, cb);
     }
 
     /**
@@ -1118,7 +1118,7 @@ class VpcClient extends AbstractClient {
      */
     ReplaceDirectConnectGatewayCcnRoutes(req, cb) {
         let resp = new ReplaceDirectConnectGatewayCcnRoutesResponse();
-        this.request("ReplaceDirectConnectGatewayCcnRoutes", req, resp, options, cb);
+        this.request("ReplaceDirectConnectGatewayCcnRoutes", req, resp, cb);
     }
 
     /**
@@ -1130,7 +1130,7 @@ class VpcClient extends AbstractClient {
      */
     DeleteSecurityGroupPolicies(req, cb) {
         let resp = new DeleteSecurityGroupPoliciesResponse();
-        this.request("DeleteSecurityGroupPolicies", req, resp, options, cb);
+        this.request("DeleteSecurityGroupPolicies", req, resp, cb);
     }
 
     /**
@@ -1141,7 +1141,7 @@ class VpcClient extends AbstractClient {
      */
     ModifySecurityGroupAttribute(req, cb) {
         let resp = new ModifySecurityGroupAttributeResponse();
-        this.request("ModifySecurityGroupAttribute", req, resp, options, cb);
+        this.request("ModifySecurityGroupAttribute", req, resp, cb);
     }
 
     /**
@@ -1152,7 +1152,7 @@ class VpcClient extends AbstractClient {
      */
     DeleteAddressTemplate(req, cb) {
         let resp = new DeleteAddressTemplateResponse();
-        this.request("DeleteAddressTemplate", req, resp, options, cb);
+        this.request("DeleteAddressTemplate", req, resp, cb);
     }
 
     /**
@@ -1163,7 +1163,7 @@ class VpcClient extends AbstractClient {
      */
     DeleteVpnGateway(req, cb) {
         let resp = new DeleteVpnGatewayResponse();
-        this.request("DeleteVpnGateway", req, resp, options, cb);
+        this.request("DeleteVpnGateway", req, resp, cb);
     }
 
     /**
@@ -1174,7 +1174,7 @@ class VpcClient extends AbstractClient {
      */
     CreateServiceTemplate(req, cb) {
         let resp = new CreateServiceTemplateResponse();
-        this.request("CreateServiceTemplate", req, resp, options, cb);
+        this.request("CreateServiceTemplate", req, resp, cb);
     }
 
     /**
@@ -1185,7 +1185,7 @@ class VpcClient extends AbstractClient {
      */
     DeleteRoutes(req, cb) {
         let resp = new DeleteRoutesResponse();
-        this.request("DeleteRoutes", req, resp, options, cb);
+        this.request("DeleteRoutes", req, resp, cb);
     }
 
     /**
@@ -1197,7 +1197,7 @@ class VpcClient extends AbstractClient {
      */
     ModifyDirectConnectGatewayAttribute(req, cb) {
         let resp = new ModifyDirectConnectGatewayAttributeResponse();
-        this.request("ModifyDirectConnectGatewayAttribute", req, resp, options, cb);
+        this.request("ModifyDirectConnectGatewayAttribute", req, resp, cb);
     }
 
     /**
@@ -1208,7 +1208,7 @@ class VpcClient extends AbstractClient {
      */
     ModifySubnetAttribute(req, cb) {
         let resp = new ModifySubnetAttributeResponse();
-        this.request("ModifySubnetAttribute", req, resp, options, cb);
+        this.request("ModifySubnetAttribute", req, resp, cb);
     }
 
     /**
@@ -1219,7 +1219,7 @@ class VpcClient extends AbstractClient {
      */
     DescribeNetworkInterfaces(req, cb) {
         let resp = new DescribeNetworkInterfacesResponse();
-        this.request("DescribeNetworkInterfaces", req, resp, options, cb);
+        this.request("DescribeNetworkInterfaces", req, resp, cb);
     }
 
     /**
@@ -1230,7 +1230,7 @@ class VpcClient extends AbstractClient {
      */
     DisableCcnRoutes(req, cb) {
         let resp = new DisableCcnRoutesResponse();
-        this.request("DisableCcnRoutes", req, resp, options, cb);
+        this.request("DisableCcnRoutes", req, resp, cb);
     }
 
     /**
@@ -1241,7 +1241,7 @@ class VpcClient extends AbstractClient {
      */
     InquiryPriceCreateVpnGateway(req, cb) {
         let resp = new InquiryPriceCreateVpnGatewayResponse();
-        this.request("InquiryPriceCreateVpnGateway", req, resp, options, cb);
+        this.request("InquiryPriceCreateVpnGateway", req, resp, cb);
     }
 
     /**
@@ -1252,7 +1252,7 @@ class VpcClient extends AbstractClient {
      */
     ResetVpnConnection(req, cb) {
         let resp = new ResetVpnConnectionResponse();
-        this.request("ResetVpnConnection", req, resp, options, cb);
+        this.request("ResetVpnConnection", req, resp, cb);
     }
 
     /**
@@ -1263,7 +1263,7 @@ class VpcClient extends AbstractClient {
      */
     CreateCustomerGateway(req, cb) {
         let resp = new CreateCustomerGatewayResponse();
-        this.request("CreateCustomerGateway", req, resp, options, cb);
+        this.request("CreateCustomerGateway", req, resp, cb);
     }
 
     /**
@@ -1274,7 +1274,7 @@ class VpcClient extends AbstractClient {
      */
     CreateAddressTemplateGroup(req, cb) {
         let resp = new CreateAddressTemplateGroupResponse();
-        this.request("CreateAddressTemplateGroup", req, resp, options, cb);
+        this.request("CreateAddressTemplateGroup", req, resp, cb);
     }
 
     /**
@@ -1285,7 +1285,7 @@ class VpcClient extends AbstractClient {
      */
     CreateAddressTemplate(req, cb) {
         let resp = new CreateAddressTemplateResponse();
-        this.request("CreateAddressTemplate", req, resp, options, cb);
+        this.request("CreateAddressTemplate", req, resp, cb);
     }
 
     /**
@@ -1298,7 +1298,7 @@ class VpcClient extends AbstractClient {
      */
     CreateSecurityGroup(req, cb) {
         let resp = new CreateSecurityGroupResponse();
-        this.request("CreateSecurityGroup", req, resp, options, cb);
+        this.request("CreateSecurityGroup", req, resp, cb);
     }
 
     /**
@@ -1309,7 +1309,7 @@ class VpcClient extends AbstractClient {
      */
     ModifyNetworkInterfaceAttribute(req, cb) {
         let resp = new ModifyNetworkInterfaceAttributeResponse();
-        this.request("ModifyNetworkInterfaceAttribute", req, resp, options, cb);
+        this.request("ModifyNetworkInterfaceAttribute", req, resp, cb);
     }
 
     /**
@@ -1320,7 +1320,7 @@ class VpcClient extends AbstractClient {
      */
     DescribeVpnGateways(req, cb) {
         let resp = new DescribeVpnGatewaysResponse();
-        this.request("DescribeVpnGateways", req, resp, options, cb);
+        this.request("DescribeVpnGateways", req, resp, cb);
     }
 
     /**
@@ -1331,7 +1331,7 @@ class VpcClient extends AbstractClient {
      */
     DeleteRouteTable(req, cb) {
         let resp = new DeleteRouteTableResponse();
-        this.request("DeleteRouteTable", req, resp, options, cb);
+        this.request("DeleteRouteTable", req, resp, cb);
     }
 
     /**
@@ -1342,7 +1342,7 @@ class VpcClient extends AbstractClient {
      */
     DescribeDirectConnectGateways(req, cb) {
         let resp = new DescribeDirectConnectGatewaysResponse();
-        this.request("DescribeDirectConnectGateways", req, resp, options, cb);
+        this.request("DescribeDirectConnectGateways", req, resp, cb);
     }
 
     /**
@@ -1353,7 +1353,7 @@ class VpcClient extends AbstractClient {
      */
     DescribeAccountAttributes(req, cb) {
         let resp = new DescribeAccountAttributesResponse();
-        this.request("DescribeAccountAttributes", req, resp, options, cb);
+        this.request("DescribeAccountAttributes", req, resp, cb);
     }
 
     /**
@@ -1367,7 +1367,7 @@ class VpcClient extends AbstractClient {
      */
     MigratePrivateIpAddress(req, cb) {
         let resp = new MigratePrivateIpAddressResponse();
-        this.request("MigratePrivateIpAddress", req, resp, options, cb);
+        this.request("MigratePrivateIpAddress", req, resp, cb);
     }
 
     /**
@@ -1378,7 +1378,7 @@ class VpcClient extends AbstractClient {
      */
     DescribeServiceTemplates(req, cb) {
         let resp = new DescribeServiceTemplatesResponse();
-        this.request("DescribeServiceTemplates", req, resp, options, cb);
+        this.request("DescribeServiceTemplates", req, resp, cb);
     }
 
     /**
@@ -1390,7 +1390,7 @@ class VpcClient extends AbstractClient {
      */
     HaVipAssociateAddressIp(req, cb) {
         let resp = new HaVipAssociateAddressIpResponse();
-        this.request("HaVipAssociateAddressIp", req, resp, options, cb);
+        this.request("HaVipAssociateAddressIp", req, resp, cb);
     }
 
     /**
@@ -1401,7 +1401,7 @@ class VpcClient extends AbstractClient {
      */
     DescribeHaVips(req, cb) {
         let resp = new DescribeHaVipsResponse();
-        this.request("DescribeHaVips", req, resp, options, cb);
+        this.request("DescribeHaVips", req, resp, cb);
     }
 
     /**
@@ -1413,7 +1413,7 @@ class VpcClient extends AbstractClient {
      */
     DeleteHaVip(req, cb) {
         let resp = new DeleteHaVipResponse();
-        this.request("DeleteHaVip", req, resp, options, cb);
+        this.request("DeleteHaVip", req, resp, cb);
     }
 
     /**
@@ -1424,7 +1424,7 @@ class VpcClient extends AbstractClient {
      */
     ModifyBandwidthPackageAttribute(req, cb) {
         let resp = new ModifyBandwidthPackageAttributeResponse();
-        this.request("ModifyBandwidthPackageAttribute", req, resp, options, cb);
+        this.request("ModifyBandwidthPackageAttribute", req, resp, cb);
     }
 
     /**
@@ -1435,7 +1435,7 @@ class VpcClient extends AbstractClient {
      */
     DescribeAddressQuota(req, cb) {
         let resp = new DescribeAddressQuotaResponse();
-        this.request("DescribeAddressQuota", req, resp, options, cb);
+        this.request("DescribeAddressQuota", req, resp, cb);
     }
 
     /**
@@ -1446,7 +1446,7 @@ class VpcClient extends AbstractClient {
      */
     ModifyVpnGatewayAttribute(req, cb) {
         let resp = new ModifyVpnGatewayAttributeResponse();
-        this.request("ModifyVpnGatewayAttribute", req, resp, options, cb);
+        this.request("ModifyVpnGatewayAttribute", req, resp, cb);
     }
 
     /**
@@ -1457,7 +1457,7 @@ class VpcClient extends AbstractClient {
      */
     ResetVpnGatewayInternetMaxBandwidth(req, cb) {
         let resp = new ResetVpnGatewayInternetMaxBandwidthResponse();
-        this.request("ResetVpnGatewayInternetMaxBandwidth", req, resp, options, cb);
+        this.request("ResetVpnGatewayInternetMaxBandwidth", req, resp, cb);
     }
 
     /**
@@ -1470,7 +1470,7 @@ class VpcClient extends AbstractClient {
      */
     DeleteVpc(req, cb) {
         let resp = new DeleteVpcResponse();
-        this.request("DeleteVpc", req, resp, options, cb);
+        this.request("DeleteVpc", req, resp, cb);
     }
 
     /**
@@ -1481,7 +1481,7 @@ class VpcClient extends AbstractClient {
      */
     DescribeSubnets(req, cb) {
         let resp = new DescribeSubnetsResponse();
-        this.request("DescribeSubnets", req, resp, options, cb);
+        this.request("DescribeSubnets", req, resp, cb);
     }
 
     /**
@@ -1493,7 +1493,7 @@ class VpcClient extends AbstractClient {
      */
     CreateCcn(req, cb) {
         let resp = new CreateCcnResponse();
-        this.request("CreateCcn", req, resp, options, cb);
+        this.request("CreateCcn", req, resp, cb);
     }
 
     /**
@@ -1504,7 +1504,7 @@ class VpcClient extends AbstractClient {
      */
     ModifyCustomerGatewayAttribute(req, cb) {
         let resp = new ModifyCustomerGatewayAttributeResponse();
-        this.request("ModifyCustomerGatewayAttribute", req, resp, options, cb);
+        this.request("ModifyCustomerGatewayAttribute", req, resp, cb);
     }
 
     /**
@@ -1515,7 +1515,7 @@ class VpcClient extends AbstractClient {
      */
     ModifyVpnConnectionAttribute(req, cb) {
         let resp = new ModifyVpnConnectionAttributeResponse();
-        this.request("ModifyVpnConnectionAttribute", req, resp, options, cb);
+        this.request("ModifyVpnConnectionAttribute", req, resp, cb);
     }
 
     /**
@@ -1526,7 +1526,7 @@ class VpcClient extends AbstractClient {
      */
     DescribeSecurityGroups(req, cb) {
         let resp = new DescribeSecurityGroupsResponse();
-        this.request("DescribeSecurityGroups", req, resp, options, cb);
+        this.request("DescribeSecurityGroups", req, resp, cb);
     }
 
     /**
@@ -1537,7 +1537,7 @@ class VpcClient extends AbstractClient {
      */
     CreateVpnGateway(req, cb) {
         let resp = new CreateVpnGatewayResponse();
-        this.request("CreateVpnGateway", req, resp, options, cb);
+        this.request("CreateVpnGateway", req, resp, cb);
     }
 
     /**
@@ -1548,7 +1548,7 @@ class VpcClient extends AbstractClient {
      */
     DescribeSecurityGroupPolicies(req, cb) {
         let resp = new DescribeSecurityGroupPoliciesResponse();
-        this.request("DescribeSecurityGroupPolicies", req, resp, options, cb);
+        this.request("DescribeSecurityGroupPolicies", req, resp, cb);
     }
 
     /**
@@ -1559,7 +1559,7 @@ class VpcClient extends AbstractClient {
      */
     CreateDirectConnectGateway(req, cb) {
         let resp = new CreateDirectConnectGatewayResponse();
-        this.request("CreateDirectConnectGateway", req, resp, options, cb);
+        this.request("CreateDirectConnectGateway", req, resp, cb);
     }
 
     /**
@@ -1570,7 +1570,7 @@ class VpcClient extends AbstractClient {
      */
     DescribeClassicLinkInstances(req, cb) {
         let resp = new DescribeClassicLinkInstancesResponse();
-        this.request("DescribeClassicLinkInstances", req, resp, options, cb);
+        this.request("DescribeClassicLinkInstances", req, resp, cb);
     }
 
     /**
@@ -1582,7 +1582,7 @@ class VpcClient extends AbstractClient {
      */
     TransformAddress(req, cb) {
         let resp = new TransformAddressResponse();
-        this.request("TransformAddress", req, resp, options, cb);
+        this.request("TransformAddress", req, resp, cb);
     }
 
     /**
@@ -1594,7 +1594,7 @@ class VpcClient extends AbstractClient {
      */
     EnableRoutes(req, cb) {
         let resp = new EnableRoutesResponse();
-        this.request("EnableRoutes", req, resp, options, cb);
+        this.request("EnableRoutes", req, resp, cb);
     }
 
     /**
@@ -1605,7 +1605,7 @@ class VpcClient extends AbstractClient {
      */
     SetCcnRegionBandwidthLimits(req, cb) {
         let resp = new SetCcnRegionBandwidthLimitsResponse();
-        this.request("SetCcnRegionBandwidthLimits", req, resp, options, cb);
+        this.request("SetCcnRegionBandwidthLimits", req, resp, cb);
     }
 
     /**
@@ -1616,7 +1616,7 @@ class VpcClient extends AbstractClient {
      */
     CreateHaVip(req, cb) {
         let resp = new CreateHaVipResponse();
-        this.request("CreateHaVip", req, resp, options, cb);
+        this.request("CreateHaVip", req, resp, cb);
     }
 
     /**
@@ -1630,7 +1630,7 @@ class VpcClient extends AbstractClient {
      */
     DeleteSecurityGroup(req, cb) {
         let resp = new DeleteSecurityGroupResponse();
-        this.request("DeleteSecurityGroup", req, resp, options, cb);
+        this.request("DeleteSecurityGroup", req, resp, cb);
     }
 
     /**
@@ -1641,7 +1641,7 @@ class VpcClient extends AbstractClient {
      */
     ModifyRouteTableAttribute(req, cb) {
         let resp = new ModifyRouteTableAttributeResponse();
-        this.request("ModifyRouteTableAttribute", req, resp, options, cb);
+        this.request("ModifyRouteTableAttribute", req, resp, cb);
     }
 
     /**
@@ -1653,7 +1653,7 @@ class VpcClient extends AbstractClient {
      */
     CreateRoutes(req, cb) {
         let resp = new CreateRoutesResponse();
-        this.request("CreateRoutes", req, resp, options, cb);
+        this.request("CreateRoutes", req, resp, cb);
     }
 
     /**
@@ -1664,7 +1664,7 @@ class VpcClient extends AbstractClient {
      */
     DescribeBandwidthPackageQuota(req, cb) {
         let resp = new DescribeBandwidthPackageQuotaResponse();
-        this.request("DescribeBandwidthPackageQuota", req, resp, options, cb);
+        this.request("DescribeBandwidthPackageQuota", req, resp, cb);
     }
 
     /**
@@ -1675,7 +1675,7 @@ class VpcClient extends AbstractClient {
      */
     ModifyHaVipAttribute(req, cb) {
         let resp = new ModifyHaVipAttributeResponse();
-        this.request("ModifyHaVipAttribute", req, resp, options, cb);
+        this.request("ModifyHaVipAttribute", req, resp, cb);
     }
 
     /**
@@ -1688,7 +1688,7 @@ class VpcClient extends AbstractClient {
      */
     ReleaseAddresses(req, cb) {
         let resp = new ReleaseAddressesResponse();
-        this.request("ReleaseAddresses", req, resp, options, cb);
+        this.request("ReleaseAddresses", req, resp, cb);
     }
 
     /**
@@ -1699,7 +1699,7 @@ class VpcClient extends AbstractClient {
      */
     DescribeBandwidthPackages(req, cb) {
         let resp = new DescribeBandwidthPackagesResponse();
-        this.request("DescribeBandwidthPackages", req, resp, options, cb);
+        this.request("DescribeBandwidthPackages", req, resp, cb);
     }
 
     /**
@@ -1710,7 +1710,7 @@ class VpcClient extends AbstractClient {
      */
     CreateServiceTemplateGroup(req, cb) {
         let resp = new CreateServiceTemplateGroupResponse();
-        this.request("CreateServiceTemplateGroup", req, resp, options, cb);
+        this.request("CreateServiceTemplateGroup", req, resp, cb);
     }
 
     /**
@@ -1721,7 +1721,7 @@ class VpcClient extends AbstractClient {
      */
     ModifyCcnAttribute(req, cb) {
         let resp = new ModifyCcnAttributeResponse();
-        this.request("ModifyCcnAttribute", req, resp, options, cb);
+        this.request("ModifyCcnAttribute", req, resp, cb);
     }
 
     /**
@@ -1732,7 +1732,7 @@ class VpcClient extends AbstractClient {
      */
     DescribeSecurityGroupAssociationStatistics(req, cb) {
         let resp = new DescribeSecurityGroupAssociationStatisticsResponse();
-        this.request("DescribeSecurityGroupAssociationStatistics", req, resp, options, cb);
+        this.request("DescribeSecurityGroupAssociationStatistics", req, resp, cb);
     }
 
     /**
@@ -1743,7 +1743,7 @@ class VpcClient extends AbstractClient {
      */
     DescribeAddressTemplates(req, cb) {
         let resp = new DescribeAddressTemplatesResponse();
-        this.request("DescribeAddressTemplates", req, resp, options, cb);
+        this.request("DescribeAddressTemplates", req, resp, cb);
     }
 
     /**
@@ -1754,7 +1754,7 @@ class VpcClient extends AbstractClient {
      */
     CreateVpnConnection(req, cb) {
         let resp = new CreateVpnConnectionResponse();
-        this.request("CreateVpnConnection", req, resp, options, cb);
+        this.request("CreateVpnConnection", req, resp, cb);
     }
 
     /**
@@ -1765,7 +1765,7 @@ class VpcClient extends AbstractClient {
      */
     ModifyAddressAttribute(req, cb) {
         let resp = new ModifyAddressAttributeResponse();
-        this.request("ModifyAddressAttribute", req, resp, options, cb);
+        this.request("ModifyAddressAttribute", req, resp, cb);
     }
 
     /**
@@ -1776,7 +1776,7 @@ class VpcClient extends AbstractClient {
      */
     DescribeAddressTemplateGroups(req, cb) {
         let resp = new DescribeAddressTemplateGroupsResponse();
-        this.request("DescribeAddressTemplateGroups", req, resp, options, cb);
+        this.request("DescribeAddressTemplateGroups", req, resp, cb);
     }
 
     /**
@@ -1787,7 +1787,7 @@ class VpcClient extends AbstractClient {
      */
     DetachClassicLinkVpc(req, cb) {
         let resp = new DetachClassicLinkVpcResponse();
-        this.request("DetachClassicLinkVpc", req, resp, options, cb);
+        this.request("DetachClassicLinkVpc", req, resp, cb);
     }
 
     /**
@@ -1807,7 +1807,7 @@ class VpcClient extends AbstractClient {
      */
     CreateSecurityGroupPolicies(req, cb) {
         let resp = new CreateSecurityGroupPoliciesResponse();
-        this.request("CreateSecurityGroupPolicies", req, resp, options, cb);
+        this.request("CreateSecurityGroupPolicies", req, resp, cb);
     }
 
     /**
@@ -1818,7 +1818,7 @@ class VpcClient extends AbstractClient {
      */
     ModifyVpcAttribute(req, cb) {
         let resp = new ModifyVpcAttributeResponse();
-        this.request("ModifyVpcAttribute", req, resp, options, cb);
+        this.request("ModifyVpcAttribute", req, resp, cb);
     }
 
 

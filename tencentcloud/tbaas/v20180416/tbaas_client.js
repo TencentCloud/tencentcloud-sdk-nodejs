@@ -43,7 +43,7 @@ class TbaasClient extends AbstractClient {
      */
     Query(req, cb) {
         let resp = new QueryResponse();
-        this.request("Query", req, resp, options, cb);
+        this.request("Query", req, resp, cb);
     }
 
     /**
@@ -54,7 +54,7 @@ class TbaasClient extends AbstractClient {
      */
     GetInvokeTx(req, cb) {
         let resp = new GetInvokeTxResponse();
-        this.request("GetInvokeTx", req, resp, options, cb);
+        this.request("GetInvokeTx", req, resp, cb);
     }
 
     /**
@@ -65,7 +65,7 @@ class TbaasClient extends AbstractClient {
      */
     Invoke(req, cb) {
         let resp = new InvokeResponse();
-        this.request("Invoke", req, resp, options, cb);
+        this.request("Invoke", req, resp, cb);
     }
 
 
