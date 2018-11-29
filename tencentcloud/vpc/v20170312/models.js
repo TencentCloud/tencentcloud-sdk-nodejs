@@ -644,6 +644,12 @@ class CCN extends  AbstractModel {
          */
         this.State = null;
 
+        /**
+         * 实例服务质量，’PT’：白金，'AU'：金，'AG'：银。
+         * @type {string || null}
+         */
+        this.QosLevel = null;
+
     }
 
     /**
@@ -659,6 +665,7 @@ class CCN extends  AbstractModel {
         this.InstanceCount = params.InstanceCount || null;
         this.CreateTime = params.CreateTime || null;
         this.State = params.State || null;
+        this.QosLevel = params.QosLevel || null;
 
     }
 }

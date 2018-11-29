@@ -3916,6 +3916,13 @@ class Instance extends  AbstractModel {
          */
         this.Tags = null;
 
+        /**
+         * 实例的关机计费模式。
+取值范围：<br><li>KEEP_CHARGING：关机继续收费<br><li>STOP_CHARGING：关机停止收费<li>NOT_APPLICABLE：实例处于非关机状态或者不适用关机停止计费的条件<br>
+         * @type {string || null}
+         */
+        this.StopChargingMode = null;
+
     }
 
     /**
@@ -3989,6 +3996,7 @@ class Instance extends  AbstractModel {
                 this.Tags.push(obj);
             }
         }
+        this.StopChargingMode = params.StopChargingMode || null;
 
     }
 }
@@ -6040,6 +6048,7 @@ class DescribeInstancesRequest extends  AbstractModel {
 <li> project-id - Integer - 是否必填：否 -（过滤条件）按照项目ID过滤。可通过调用[DescribeProject](https://cloud.tencent.com/document/api/378/4400)查询已创建的项目列表或登录[控制台](https://console.cloud.tencent.com/cvm/index)进行查看；也可以调用[AddProject](https://cloud.tencent.com/document/api/378/4398)创建新的项目。</li>
 <li> host-id - String - 是否必填：否 - （过滤条件）按照[CDH](https://cloud.tencent.com/document/product/416) ID过滤。[CDH](https://cloud.tencent.com/document/product/416) ID形如：host-xxxxxxxx。</li>
 <li> vpc-id - String - 是否必填：否 - （过滤条件）按照VPC ID进行过滤。VPC ID形如：vpc-xxxxxxxx。</li>
+<li> subnet-id - String - 是否必填：否 - （过滤条件）按照子网ID进行过滤。子网ID形如：subnet-xxxxxxxx。</li>
 <li> instance-id - String - 是否必填：否 - （过滤条件）按照实例ID过滤。实例ID形如：ins-xxxxxxxx。</li>
 <li> security-group-id - String - 是否必填：否 - （过滤条件）按照安全组ID过滤，安全组ID形如: sg-8jlk3f3r。</li>
 <li> instance-name - String - 是否必填：否 - （过滤条件）按照实例名称过滤。</li>

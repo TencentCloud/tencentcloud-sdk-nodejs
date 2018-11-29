@@ -17,11 +17,19 @@
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const DescribeTaskStatusRequest = models.DescribeTaskStatusRequest;
+const ApplyBlackListRequest = models.ApplyBlackListRequest;
 const DownloadReportResponse = models.DownloadReportResponse;
 const UploadFileResponse = models.UploadFileResponse;
+const ApplyBlackListResponse = models.ApplyBlackListResponse;
+const DescribeRecordsRequest = models.DescribeRecordsRequest;
 const DescribeTaskStatusResponse = models.DescribeTaskStatusResponse;
 const UploadFileRequest = models.UploadFileRequest;
 const DownloadReportRequest = models.DownloadReportRequest;
+const DescribeRecordsResponse = models.DescribeRecordsResponse;
+const UploadDataFileResponse = models.UploadDataFileResponse;
+const SingleBlackApply = models.SingleBlackApply;
+const UploadDataFileRequest = models.UploadDataFileRequest;
+const SingleRecord = models.SingleRecord;
 
 
 /**
@@ -46,14 +54,14 @@ class CrClient extends AbstractClient {
     }
 
     /**
-     * 客户调用该接口查看任务执行状态。输入任务ID，输出任务执行状态或者结果
-     * @param {DescribeTaskStatusRequest} req
-     * @param {function(string, DescribeTaskStatusResponse):void} cb
+     * 查询录音，返回录音列表。
+     * @param {DescribeRecordsRequest} req
+     * @param {function(string, DescribeRecordsResponse):void} cb
      * @public
      */
-    DescribeTaskStatus(req, cb) {
-        let resp = new DescribeTaskStatusResponse();
-        this.request("DescribeTaskStatus", req, resp, cb);
+    DescribeRecords(req, cb) {
+        let resp = new DescribeRecordsResponse();
+        this.request("DescribeRecords", req, resp, cb);
     }
 
     /**
@@ -65,6 +73,42 @@ class CrClient extends AbstractClient {
     UploadFile(req, cb) {
         let resp = new UploadFileResponse();
         this.request("UploadFile", req, resp, cb);
+    }
+
+    /**
+     * 客户调用该接口查看任务执行状态。输入任务ID，输出任务执行状态或者结果
+     * @param {DescribeTaskStatusRequest} req
+     * @param {function(string, DescribeTaskStatusResponse):void} cb
+     * @public
+     */
+    DescribeTaskStatus(req, cb) {
+        let resp = new DescribeTaskStatusResponse();
+        this.request("DescribeTaskStatus", req, resp, cb);
+    }
+
+    /**
+     * 客户通过调用该接口上传需催收文档或还款文档，接口返回任务ID。
+     * @param {UploadDataFileRequest} req
+     * @param {function(string, UploadDataFileResponse):void} cb
+     * @public
+     */
+    UploadDataFile(req, cb) {
+        let resp = new UploadDataFileResponse();
+        let options = {
+            multipart: true
+        };
+        this.request("UploadDataFile", req, resp, cb);
+    }
+
+    /**
+     * 提交黑名单申请。
+     * @param {ApplyBlackListRequest} req
+     * @param {function(string, ApplyBlackListResponse):void} cb
+     * @public
+     */
+    ApplyBlackList(req, cb) {
+        let resp = new ApplyBlackListResponse();
+        this.request("ApplyBlackList", req, resp, cb);
     }
 
 

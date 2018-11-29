@@ -352,7 +352,7 @@ class LiveClient extends AbstractClient {
     }
 
     /**
-     * 添加拉流配置
+     * 添加拉流配置，目前限制添加10条任务。
      * @param {CreatePullStreamConfigRequest} req
      * @param {function(string, CreatePullStreamConfigResponse):void} cb
      * @public
