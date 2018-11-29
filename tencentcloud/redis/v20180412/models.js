@@ -49,7 +49,7 @@ class ZoneCapacityConf extends  AbstractModel {
         this.IsDefault = null;
 
         /**
-         * 网络类型
+         * 网络类型：basenet -- 基础网络；vpcnet -- VPC网络
          * @type {Array.<string> || null}
          */
         this.NetWorkType = null;
@@ -417,7 +417,7 @@ class CreateInstancesRequest extends  AbstractModel {
         this.ZoneId = null;
 
         /**
-         * 实例类型：2 – 主从版，5-单机版
+         * 实例类型：2 – Redis2.8主从版，3 – Redis3.2主从版(CKV主从版)，4 – Redis3.2集群版(CKV集群版)，5-Redis2.8单机版，7 – Redis4.0集群版，
          * @type {number || null}
          */
         this.TypeId = null;
@@ -453,13 +453,13 @@ class CreateInstancesRequest extends  AbstractModel {
         this.BillingMode = null;
 
         /**
-         * 私有网络ID，如果不传则默认选择基础网络，请使用私有网络列表 查询
+         * 私有网络ID，如果不传则默认选择基础网络，请使用私有网络列表查询，如：vpc-sad23jfdfk
          * @type {string || null}
          */
         this.VpcId = null;
 
         /**
-         * 基础网络下， subnetId无效； vpc子网下，取值以查询查询子网列表
+         * 基础网络下， subnetId无效； vpc子网下，取值以查询子网列表，如：subnet-fdj24n34j2
          * @type {string || null}
          */
         this.SubnetId = null;
@@ -488,6 +488,24 @@ class CreateInstancesRequest extends  AbstractModel {
          */
         this.VPort = null;
 
+        /**
+         * 实例分片数量，Redis2.8主从版、CKV主从版和Redis2.8单机版不需要填写
+         * @type {number || null}
+         */
+        this.RedisShardNum = null;
+
+        /**
+         * 实例副本数量，Redis2.8主从版、CKV主从版和Redis2.8单机版不需要填写
+         * @type {number || null}
+         */
+        this.RedisReplicasNum = null;
+
+        /**
+         * 是否支持副本只读，Redis2.8主从版、CKV主从版和Redis2.8单机版不需要填写
+         * @type {boolean || null}
+         */
+        this.ReplicasReadonly = null;
+
     }
 
     /**
@@ -510,6 +528,9 @@ class CreateInstancesRequest extends  AbstractModel {
         this.AutoRenew = params.AutoRenew || null;
         this.SecurityGroupIdList = params.SecurityGroupIdList || null;
         this.VPort = params.VPort || null;
+        this.RedisShardNum = params.RedisShardNum || null;
+        this.RedisReplicasNum = params.RedisReplicasNum || null;
+        this.ReplicasReadonly = params.ReplicasReadonly || null;
 
     }
 }
@@ -1010,7 +1031,7 @@ class DescribeInstancesRequest extends  AbstractModel {
         super();
 
         /**
-         * 实例列表大小
+         * 实例列表的大小，参数默认值20
          * @type {number || null}
          */
         this.Limit = null;
@@ -1022,7 +1043,7 @@ class DescribeInstancesRequest extends  AbstractModel {
         this.Offset = null;
 
         /**
-         * 实例Id
+         * 实例Id，如：crs-6ubhgouj
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -1040,13 +1061,13 @@ class DescribeInstancesRequest extends  AbstractModel {
         this.OrderType = null;
 
         /**
-         * 私有网络ID数组，数组下标从0开始，如果不传则默认选择基础网络
+         * 私有网络ID数组，数组下标从0开始，如果不传则默认选择基础网络，如：47525
          * @type {Array.<string> || null}
          */
         this.VpcIds = null;
 
         /**
-         * 子网ID数组，数组下标从0开始
+         * 子网ID数组，数组下标从0开始，如：56854
          * @type {Array.<string> || null}
          */
         this.SubnetIds = null;
@@ -1064,16 +1085,28 @@ class DescribeInstancesRequest extends  AbstractModel {
         this.SearchKey = null;
 
         /**
-         * 查询的Region的列表。
-         * @type {Array.<number> || null}
-         */
-        this.RegionIds = null;
-
-        /**
          * 实例名称
          * @type {string || null}
          */
         this.InstanceName = null;
+
+        /**
+         * 私有网络ID数组，数组下标从0开始，如果不传则默认选择基础网络，如：vpc-sad23jfdfk
+         * @type {Array.<string> || null}
+         */
+        this.UniqVpcIds = null;
+
+        /**
+         * 子网ID数组，数组下标从0开始，如：subnet-fdj24n34j2
+         * @type {Array.<string> || null}
+         */
+        this.UniqSubnetIds = null;
+
+        /**
+         * 地域ID，已经弃用，可通过公共参数Region查询对应地域
+         * @type {Array.<number> || null}
+         */
+        this.RegionIds = null;
 
     }
 
@@ -1093,8 +1126,10 @@ class DescribeInstancesRequest extends  AbstractModel {
         this.SubnetIds = params.SubnetIds || null;
         this.ProjectIds = params.ProjectIds || null;
         this.SearchKey = params.SearchKey || null;
-        this.RegionIds = params.RegionIds || null;
         this.InstanceName = params.InstanceName || null;
+        this.UniqVpcIds = params.UniqVpcIds || null;
+        this.UniqSubnetIds = params.UniqSubnetIds || null;
+        this.RegionIds = params.RegionIds || null;
 
     }
 }
@@ -1108,7 +1143,7 @@ class ClearInstanceRequest extends  AbstractModel {
         super();
 
         /**
-         * 实例id
+         * 实例Id
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -1248,7 +1283,7 @@ class DescribeInstanceBackupsRequest extends  AbstractModel {
         this.InstanceId = null;
 
         /**
-         * 实例列表大小
+         * 实例列表大小，默认大小20
          * @type {number || null}
          */
         this.Limit = null;
@@ -1543,16 +1578,28 @@ class UpgradeInstanceRequest extends  AbstractModel {
         super();
 
         /**
-         * 升级的实例Id
+         * 实例Id
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * 规格 单位 MB
+         * 分片大小 单位 MB
          * @type {number || null}
          */
         this.MemSize = null;
+
+        /**
+         * 分片数量，Redis2.8主从版、CKV主从版和Redis2.8单机版不需要填写
+         * @type {number || null}
+         */
+        this.RedisShardNum = null;
+
+        /**
+         * 副本数量，Redis2.8主从版、CKV主从版和Redis2.8单机版不需要填写
+         * @type {number || null}
+         */
+        this.RedisReplicasNum = null;
 
     }
 
@@ -1565,6 +1612,8 @@ class UpgradeInstanceRequest extends  AbstractModel {
         }
         this.InstanceId = params.InstanceId || null;
         this.MemSize = params.MemSize || null;
+        this.RedisShardNum = params.RedisShardNum || null;
+        this.RedisReplicasNum = params.RedisReplicasNum || null;
 
     }
 }
@@ -1654,25 +1703,25 @@ class InstanceSet extends  AbstractModel {
         this.InstanceName = null;
 
         /**
-         * 实例串号
+         * 实例Id
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * appid
+         * 用户的Appid
          * @type {number || null}
          */
         this.Appid = null;
 
         /**
-         * 项目id
+         * 项目Id
          * @type {number || null}
          */
         this.ProjectId = null;
 
         /**
-         * 地域id 1--广州 4--上海 5-- 香港 6--多伦多 7--上海金融 8--北京 9-- 新加坡 11--深圳金融 15--美西（硅谷）
+         * 地域id 1--广州 4--上海 5-- 香港 6--多伦多 7--上海金融 8--北京 9-- 新加坡 11--深圳金融 15--美西（硅谷）16--成都 17--德国 18--韩国 19--重庆 21--印度 22--美东（弗吉尼亚）23--泰国 24--俄罗斯 25--日本
          * @type {number || null}
          */
         this.RegionId = null;
@@ -1696,7 +1745,7 @@ class InstanceSet extends  AbstractModel {
         this.SubnetId = null;
 
         /**
-         * 实例当前状态，0：待初始化；1：实例在流程中；2：实例运行中；-2：实例已隔离
+         * 实例当前状态，0：待初始化；1：实例在流程中；2：实例运行中；-2：实例已隔离；-3：实例待删除
          * @type {number || null}
          */
         this.Status = null;
@@ -1732,7 +1781,7 @@ class InstanceSet extends  AbstractModel {
         this.SizeUsed = null;
 
         /**
-         * 实例类型，1：集群版；2：主从版
+         * 实例类型，1：Redis2.8集群版；2：Redis2.8主从版；3：CKV主从版（Redis3.2）；4：CKV集群版（Redis3.2）；5：Redis2.8单机版；7：Redis4.0集群版；
          * @type {number || null}
          */
         this.Type = null;
@@ -1756,7 +1805,7 @@ class InstanceSet extends  AbstractModel {
         this.Engine = null;
 
         /**
-         * 产品类型：Redis2.8集群版、Redis2.8主从版、Redis3.2主从版、Redis3.2集群版、Redis2.8单机版、Redis4.0集群版
+         * 产品类型：Redis2.8集群版、Redis2.8主从版、Redis3.2主从版（CKV主从版）、Redis3.2集群版（CKV集群版）、Redis2.8单机版、Redis4.0集群版
          * @type {string || null}
          */
         this.ProductType = null;

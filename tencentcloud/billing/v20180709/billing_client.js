@@ -21,6 +21,7 @@ const Deal = models.Deal;
 const DescribeDealsByCondResponse = models.DescribeDealsByCondResponse;
 const DescribeAccountBalanceRequest = models.DescribeAccountBalanceRequest;
 const DescribeBillDetailRequest = models.DescribeBillDetailRequest;
+const ProductInfo = models.ProductInfo;
 const DescribeBillResourceSummaryResponse = models.DescribeBillResourceSummaryResponse;
 const DescribeBillResourceSummaryRequest = models.DescribeBillResourceSummaryRequest;
 const DescribeAccountBalanceResponse = models.DescribeAccountBalanceResponse;

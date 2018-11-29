@@ -6,6 +6,7 @@ module.exports = {
     bm: require("./bm"),
     cbs: require("./cbs"),
     cdb: require("./cdb"),
+    cdn: require("./cdn"),
     cis: require("./cis"),
     clb: require("./clb"),
     common: require("./common"),

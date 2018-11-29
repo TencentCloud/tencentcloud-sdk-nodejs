@@ -31,7 +31,7 @@ class DescribeBillDetailResponse extends  AbstractModel {
         this.DetailSet = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -121,6 +121,48 @@ class Deal extends  AbstractModel {
          */
         this.GoodsCategoryId = null;
 
+        /**
+         * 产品详情
+         * @type {Array.<ProductInfo> || null}
+         */
+        this.ProductInfo = null;
+
+        /**
+         * 时长
+         * @type {number || null}
+         */
+        this.TimeSpan = null;
+
+        /**
+         * 时间单位
+         * @type {string || null}
+         */
+        this.TimeUnit = null;
+
+        /**
+         * 货币单位
+         * @type {string || null}
+         */
+        this.Currency = null;
+
+        /**
+         * 折扣率
+         * @type {number || null}
+         */
+        this.Policy = null;
+
+        /**
+         * 单价（分）
+         * @type {number || null}
+         */
+        this.Price = null;
+
+        /**
+         * 原价（分）
+         * @type {number || null}
+         */
+        this.TotalCost = null;
+
     }
 
     /**
@@ -139,6 +181,21 @@ class Deal extends  AbstractModel {
         this.VoucherDecline = params.VoucherDecline || null;
         this.ProjectId = params.ProjectId || null;
         this.GoodsCategoryId = params.GoodsCategoryId || null;
+
+        if (params.ProductInfo) {
+            this.ProductInfo = new Array();
+            for (let z in params.ProductInfo) {
+                let obj = new ProductInfo();
+                obj.deserialize(params.ProductInfo[z]);
+                this.ProductInfo.push(obj);
+            }
+        }
+        this.TimeSpan = params.TimeSpan || null;
+        this.TimeUnit = params.TimeUnit || null;
+        this.Currency = params.Currency || null;
+        this.Policy = params.Policy || null;
+        this.Price = params.Price || null;
+        this.TotalCost = params.TotalCost || null;
 
     }
 }
@@ -164,7 +221,7 @@ class DescribeDealsByCondResponse extends  AbstractModel {
         this.TotalCount = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -246,6 +303,18 @@ class DescribeBillDetailRequest extends  AbstractModel {
          */
         this.Month = null;
 
+        /**
+         * 周期开始时间，格式为Y-m-d H:i:s，如果有该字段则Month字段无效。BeginTime和EndTime必须一起传
+         * @type {string || null}
+         */
+        this.BeginTime = null;
+
+        /**
+         * 周期结束时间，格式为Y-m-d H:i:s，如果有该字段则Month字段无效。BeginTime和EndTime必须一起传
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
     }
 
     /**
@@ -259,6 +328,43 @@ class DescribeBillDetailRequest extends  AbstractModel {
         this.Limit = params.Limit || null;
         this.PeriodType = params.PeriodType || null;
         this.Month = params.Month || null;
+        this.BeginTime = params.BeginTime || null;
+        this.EndTime = params.EndTime || null;
+
+    }
+}
+
+/**
+ * 商品详细信息
+ * @class
+ */
+class ProductInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 商品详情名称标识
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 商品详情
+         * @type {string || null}
+         */
+        this.Value = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = params.Name || null;
+        this.Value = params.Value || null;
 
     }
 }
@@ -278,7 +384,7 @@ class DescribeBillResourceSummaryResponse extends  AbstractModel {
         this.ResourceSummarySet = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -370,7 +476,7 @@ class DescribeAccountBalanceResponse extends  AbstractModel {
         this.Balance = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -411,7 +517,7 @@ class PayDealsResponse extends  AbstractModel {
         this.ResourceIds = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -920,6 +1026,24 @@ class BillDetail extends  AbstractModel {
          */
         this.ComponentSet = null;
 
+        /**
+         * 支付者UIN
+         * @type {string || null}
+         */
+        this.PayerUin = null;
+
+        /**
+         * 使用者UIN
+         * @type {string || null}
+         */
+        this.OwnerUin = null;
+
+        /**
+         * 操作者UIN
+         * @type {string || null}
+         */
+        this.OperateUin = null;
+
     }
 
     /**
@@ -952,6 +1076,9 @@ class BillDetail extends  AbstractModel {
                 this.ComponentSet.push(obj);
             }
         }
+        this.PayerUin = params.PayerUin || null;
+        this.OwnerUin = params.OwnerUin || null;
+        this.OperateUin = params.OperateUin || null;
 
     }
 }
@@ -1004,6 +1131,7 @@ module.exports = {
     DescribeDealsByCondResponse: DescribeDealsByCondResponse,
     DescribeAccountBalanceRequest: DescribeAccountBalanceRequest,
     DescribeBillDetailRequest: DescribeBillDetailRequest,
+    ProductInfo: ProductInfo,
     DescribeBillResourceSummaryResponse: DescribeBillResourceSummaryResponse,
     DescribeBillResourceSummaryRequest: DescribeBillResourceSummaryRequest,
     DescribeAccountBalanceResponse: DescribeAccountBalanceResponse,
