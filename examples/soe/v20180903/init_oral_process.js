@@ -1,4 +1,4 @@
-const tencentcloud = require("../../../../tencentcloud-sdk-nodejs");
+const tencentcloud = require("../../../../tencentcloud-sdk-nodejs-master");
 
 //导入对应产品模块的client models。
 const SoeClient = tencentcloud.soe.v20180724.Client;
@@ -15,7 +15,7 @@ let cred = new Credential("secretId", "secretKey");
 let httpProfile = new HttpProfile();
 httpProfile.reqMethod = "POST";
 httpProfile.reqTimeout = 30;
-httpProfile.endpoint = "soe.ap-shanghai.tencentcloudapi.com";
+httpProfile.endpoint = "soe.tencentcloudapi.com";
 
 // 实例化一个client选项，可选的，没有特殊需求可以跳过。
 let clientProfile = new ClientProfile();
@@ -23,14 +23,14 @@ clientProfile.signMethod = "HmacSHA256";
 clientProfile.httpProfile = httpProfile;
 
 // 实例化要请求产品的client对象。clientProfile可选。
-let client = new SoeClient(cred, "ap-shanghai", clientProfile);
+let client = new SoeClient(cred, "", clientProfile);
 
 // 实例化一个请求对象,并填充参数
 req = new models.InitOralProcessRequest();
 req.SessionId = "stress_test_956938";
-req.RefText = "again";
+req.RefText = "since";
 req.WorkMode = 0;
-req.EvalMode = 0;
+req.EvalMode = 1;
 req.ScoreCoeff = 3.5;
 
 // 通过client对象调用想要访问的接口，需要传入请求对象以及响应回调函数
