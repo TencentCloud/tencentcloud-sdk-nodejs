@@ -55,7 +55,7 @@ class InitOralProcessRequest extends  AbstractModel {
         this.ScoreCoeff = null;
 
         /**
-         * 业务应用ID，与账号应用APPID无关，是用来方便客户管理服务的参数，需要结合[控制台](https://console.cloud.tencent.com/soe)使用。
+         * 业务应用ID，与账号应用APPID无关，是用来方便客户管理服务的参数，新的 SoeAppId 可以在[控制台](https://console.cloud.tencent.com/soe)【应用管理】下新建。
          * @type {string || null}
          */
         this.SoeAppId = null;
@@ -65,6 +65,12 @@ class InitOralProcessRequest extends  AbstractModel {
          * @type {number || null}
          */
         this.IsLongLifeSession = null;
+
+        /**
+         * 音频存储模式，0：不存储，1：存储到公共对象存储
+         * @type {number || null}
+         */
+        this.StorageMode = null;
 
     }
 
@@ -82,6 +88,7 @@ class InitOralProcessRequest extends  AbstractModel {
         this.ScoreCoeff = params.ScoreCoeff || null;
         this.SoeAppId = params.SoeAppId || null;
         this.IsLongLifeSession = params.IsLongLifeSession || null;
+        this.StorageMode = params.StorageMode || null;
 
     }
 }
@@ -119,7 +126,7 @@ class TransmitOralProcessRequest extends  AbstractModel {
         this.VoiceEncodeType = null;
 
         /**
-         * 当前数据包数据, 流式模式下数据包大小可以按需设置，数据包大小必须 >= 4K，编码格式要求为BASE64。
+         * 当前数据包数据, 流式模式下数据包大小可以按需设置，数据包大小必须 >= 4K，且必须保证分片帧完整（16bit的数据必须保证音频长度为偶数），编码格式要求为BASE64。
          * @type {string || null}
          */
         this.UserVoiceData = null;
@@ -131,7 +138,7 @@ class TransmitOralProcessRequest extends  AbstractModel {
         this.SessionId = null;
 
         /**
-         * 业务应用ID，与账号应用APPID无关，是用来方便客户管理服务的参数，需要结合[控制台](https://console.cloud.tencent.com/soe)使用。
+         * 业务应用ID，与账号应用APPID无关，是用来方便客户管理服务的参数，新的 SoeAppId 可以在[控制台](https://console.cloud.tencent.com/soe)【应用管理】下新建。
          * @type {string || null}
          */
         this.SoeAppId = null;
@@ -202,6 +209,12 @@ class TransmitOralProcessResponse extends  AbstractModel {
         this.SessionId = null;
 
         /**
+         * 保存语音音频文件下载地址
+         * @type {string || null}
+         */
+        this.AudioUrl = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -229,6 +242,7 @@ class TransmitOralProcessResponse extends  AbstractModel {
             }
         }
         this.SessionId = params.SessionId || null;
+        this.AudioUrl = params.AudioUrl || null;
         this.RequestId = params.RequestId || null;
 
     }
