@@ -20,6 +20,7 @@ module.exports = {
     dts: require("./dts"),
     es: require("./es"),
     facefusion: require("./facefusion"),
+    faceid: require("./faceid"),
     hcm: require("./hcm"),
     iot: require("./iot"),
     iotcloud: require("./iotcloud"),

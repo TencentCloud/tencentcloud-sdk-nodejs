@@ -3220,7 +3220,7 @@ class InquiryPriceOpenProVersionPrepaidResponse extends  AbstractModel {
          * 预支费用的原价，单位：元。
          * @type {number || null}
          */
-        this.DiscountPrice = null;
+        this.OriginalPrice = null;
 
         /**
          * 预支费用的折扣价，单位：元。
@@ -3243,7 +3243,7 @@ class InquiryPriceOpenProVersionPrepaidResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.DiscountPrice = params.DiscountPrice || null;
+        this.OriginalPrice = params.OriginalPrice || null;
         this.DiscountPrice = params.DiscountPrice || null;
         this.RequestId = params.RequestId || null;
 
