@@ -19,6 +19,7 @@ const AbstractClient = require('../../common/abstract_client')
 const RemoveInstancesResponse = models.RemoveInstancesResponse;
 const DisableAutoScalingGroupResponse = models.DisableAutoScalingGroupResponse;
 const SystemDisk = models.SystemDisk;
+const ModifyLaunchConfigurationAttributesRequest = models.ModifyLaunchConfigurationAttributesRequest;
 const DisableAutoScalingGroupRequest = models.DisableAutoScalingGroupRequest;
 const DeleteAutoScalingGroupResponse = models.DeleteAutoScalingGroupResponse;
 const AutoScalingGroupAbstract = models.AutoScalingGroupAbstract;
@@ -61,6 +62,7 @@ const DescribeLaunchConfigurationsRequest = models.DescribeLaunchConfigurationsR
 const ModifyDesiredCapacityResponse = models.ModifyDesiredCapacityResponse;
 const CreateAutoScalingGroupResponse = models.CreateAutoScalingGroupResponse;
 const RunMonitorServiceEnabled = models.RunMonitorServiceEnabled;
+const ModifyLaunchConfigurationAttributesResponse = models.ModifyLaunchConfigurationAttributesResponse;
 const TargetAttribute = models.TargetAttribute;
 const DetachInstancesRequest = models.DetachInstancesRequest;
 const Instance = models.Instance;
@@ -115,6 +117,20 @@ class AsClient extends AbstractClient {
     DeleteScheduledAction(req, cb) {
         let resp = new DeleteScheduledActionResponse();
         this.request("DeleteScheduledAction", req, resp, cb);
+    }
+
+    /**
+     * 本接口（ModifyLaunchConfigurationAttributes）用于修改启动配置部分属性。
+
+* 修改启动配置后，已经使用该启动配置扩容的存量实例不会发生变更，此后使用该启动配置的新增实例会按照新的配置进行扩容。
+* 本接口支持修改部分简单类型。
+     * @param {ModifyLaunchConfigurationAttributesRequest} req
+     * @param {function(string, ModifyLaunchConfigurationAttributesResponse):void} cb
+     * @public
+     */
+    ModifyLaunchConfigurationAttributes(req, cb) {
+        let resp = new ModifyLaunchConfigurationAttributesResponse();
+        this.request("ModifyLaunchConfigurationAttributes", req, resp, cb);
     }
 
     /**

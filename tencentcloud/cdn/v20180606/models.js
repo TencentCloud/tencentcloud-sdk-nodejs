@@ -296,75 +296,24 @@ class ListTopDataResponse extends  AbstractModel {
 }
 
 /**
- * DescribeOriginData请求参数结构体
+ * DescribeMapInfo返回参数结构体
  * @class
  */
-class DescribeOriginDataRequest extends  AbstractModel {
+class DescribeMapInfoResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 查询起始时间，如：2018-09-04 10:40:00，返回结果大于等于指定时间
-根据指定时间粒度不同，会进行向前归整，如 2018-09-04 10:40:00 在按 1 小时的时间粒度查询时，返回的第一个数据对应时间点为 2018-09-04 10:00:00
-起始时间与结束时间间隔小于等于 90 天
+         * 映射关系数组。
+         * @type {Array.<MapInfo> || null}
+         */
+        this.MapInfoList = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.StartTime = null;
-
-        /**
-         * 查询结束时间，如：2018-09-04 10:40:00，返回结果小于等于指定时间
-根据指定时间粒度不同，会进行向前归整，如 2018-09-04 10:40:00 在按 1 小时的时间粒度查询时，返回的最后一个数据对应时间点为 2018-09-04 10:00:00
-起始时间与结束时间间隔小于等于 90 天
-         * @type {string || null}
-         */
-        this.EndTime = null;
-
-        /**
-         * 指定查询指标，支持的类型有：
-flux：回源流量，单位为 byte
-bandwidth：回源带宽，单位为 bps
-request：回源请求数，单位为 次
-failRequest：回源失败请求数，单位为 次
-failRate：回源失败率，单位为 %
-statusCode：回源状态码，返回 2XX、3XX、4XX、5XX 汇总数据，单位为 个
-2XX：返回 2XX 回源状态码汇总及各 2 开头回源状态码数据，单位为 个
-3XX：返回 3XX 回源状态码汇总及各 3 开头回源状态码数据，单位为 个
-4XX：返回 4XX 回源状态码汇总及各 4 开头回源状态码数据，单位为 个
-5XX：返回 5XX 回源状态码汇总及各 5 开头回源状态码数据，单位为 个
-支持指定具体状态码查询，若未产生过，则返回为空
-         * @type {string || null}
-         */
-        this.Metric = null;
-
-        /**
-         * 指定查询域名列表，最多可一次性查询 30 个加速域名明细
-         * @type {Array.<string> || null}
-         */
-        this.Domains = null;
-
-        /**
-         * 指定要查询的项目 ID，[前往查看项目 ID](https://console.cloud.tencent.com/project)
-未填充域名情况下，指定项目查询，若填充了具体域名信息，以域名为主
-         * @type {number || null}
-         */
-        this.Project = null;
-
-        /**
-         * 时间粒度，支持以下几种模式：
-min：1 分钟粒度，指定查询区间 24 小时内（含 24 小时），可返回 1 分钟粒度明细数据
-5min：5 分钟粒度，指定查询区间 31 天内（含 31 天），可返回 5 分钟粒度明细数据
-hour：1 小时粒度，指定查询区间 31 天内（含 31 天），可返回 1 小时粒度明细数据
-day：天粒度，指定查询区间大于 31 天，可返回天粒度明细数据
-         * @type {string || null}
-         */
-        this.Interval = null;
-
-        /**
-         * Domains 传入多个时，默认（false)返回多个域名的汇总数据
-可按需指定为 true，返回每一个 Domain 的明细数据（statusCode 指标暂不支持）
-         * @type {boolean || null}
-         */
-        this.Detail = null;
+        this.RequestId = null;
 
     }
 
@@ -375,13 +324,16 @@ day：天粒度，指定查询区间大于 31 天，可返回天粒度明细数�
         if (!params) {
             return;
         }
-        this.StartTime = params.StartTime || null;
-        this.EndTime = params.EndTime || null;
-        this.Metric = params.Metric || null;
-        this.Domains = params.Domains || null;
-        this.Project = params.Project || null;
-        this.Interval = params.Interval || null;
-        this.Detail = params.Detail || null;
+
+        if (params.MapInfoList) {
+            this.MapInfoList = new Array();
+            for (let z in params.MapInfoList) {
+                let obj = new MapInfo();
+                obj.deserialize(params.MapInfoList[z]);
+                this.MapInfoList.push(obj);
+            }
+        }
+        this.RequestId = params.RequestId || null;
 
     }
 }
@@ -486,30 +438,75 @@ Metric 为 Url、Path、District、Isp，Filter 为 flux、reqeust 时，可设�
 }
 
 /**
- * DescribeOriginData返回参数结构体
+ * DescribeOriginData请求参数结构体
  * @class
  */
-class DescribeOriginDataResponse extends  AbstractModel {
+class DescribeOriginDataRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 数据统计的时间粒度，支持min, 5min, hour, day，分别表示1分钟，5分钟，1小时和1天的时间粒度。
+         * 查询起始时间，如：2018-09-04 10:40:00，返回结果大于等于指定时间
+根据指定时间粒度不同，会进行向前归整，如 2018-09-04 10:40:00 在按 1 小时的时间粒度查询时，返回的第一个数据对应时间点为 2018-09-04 10:00:00
+起始时间与结束时间间隔小于等于 90 天
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * 查询结束时间，如：2018-09-04 10:40:00，返回结果小于等于指定时间
+根据指定时间粒度不同，会进行向前归整，如 2018-09-04 10:40:00 在按 1 小时的时间粒度查询时，返回的最后一个数据对应时间点为 2018-09-04 10:00:00
+起始时间与结束时间间隔小于等于 90 天
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * 指定查询指标，支持的类型有：
+flux：回源流量，单位为 byte
+bandwidth：回源带宽，单位为 bps
+request：回源请求数，单位为 次
+failRequest：回源失败请求数，单位为 次
+failRate：回源失败率，单位为 %
+statusCode：回源状态码，返回 2XX、3XX、4XX、5XX 汇总数据，单位为 个
+2XX：返回 2XX 回源状态码汇总及各 2 开头回源状态码数据，单位为 个
+3XX：返回 3XX 回源状态码汇总及各 3 开头回源状态码数据，单位为 个
+4XX：返回 4XX 回源状态码汇总及各 4 开头回源状态码数据，单位为 个
+5XX：返回 5XX 回源状态码汇总及各 5 开头回源状态码数据，单位为 个
+支持指定具体状态码查询，若未产生过，则返回为空
+         * @type {string || null}
+         */
+        this.Metric = null;
+
+        /**
+         * 指定查询域名列表，最多可一次性查询 30 个加速域名明细
+         * @type {Array.<string> || null}
+         */
+        this.Domains = null;
+
+        /**
+         * 指定要查询的项目 ID，[前往查看项目 ID](https://console.cloud.tencent.com/project)
+未填充域名情况下，指定项目查询，若填充了具体域名信息，以域名为主
+         * @type {number || null}
+         */
+        this.Project = null;
+
+        /**
+         * 时间粒度，支持以下几种模式：
+min：1 分钟粒度，指定查询区间 24 小时内（含 24 小时），可返回 1 分钟粒度明细数据
+5min：5 分钟粒度，指定查询区间 31 天内（含 31 天），可返回 5 分钟粒度明细数据
+hour：1 小时粒度，指定查询区间 31 天内（含 31 天），可返回 1 小时粒度明细数据
+day：天粒度，指定查询区间大于 31 天，可返回天粒度明细数据
          * @type {string || null}
          */
         this.Interval = null;
 
         /**
-         * 各个资源的回源数据详情。
-         * @type {Array.<ResourceOriginData> || null}
+         * Domains 传入多个时，默认（false)返回多个域名的汇总数据
+可按需指定为 true，返回每一个 Domain 的明细数据（statusCode 指标暂不支持）
+         * @type {boolean || null}
          */
-        this.Data = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
+        this.Detail = null;
 
     }
 
@@ -520,17 +517,125 @@ class DescribeOriginDataResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.StartTime = params.StartTime || null;
+        this.EndTime = params.EndTime || null;
+        this.Metric = params.Metric || null;
+        this.Domains = params.Domains || null;
+        this.Project = params.Project || null;
         this.Interval = params.Interval || null;
+        this.Detail = params.Detail || null;
 
-        if (params.Data) {
-            this.Data = new Array();
-            for (let z in params.Data) {
-                let obj = new ResourceOriginData();
-                obj.deserialize(params.Data[z]);
-                this.Data.push(obj);
+    }
+}
+
+/**
+ * DescribeMapInfo请求参数结构体
+ * @class
+ */
+class DescribeMapInfoRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 映射查询类别：
+ips：运营商映射查询
+district：省份映射查询
+         * @type {string || null}
+         */
+        this.Name = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = params.Name || null;
+
+    }
+}
+
+/**
+ * 查询对象及其对应的回源明细数据
+ * @class
+ */
+class ResourceOriginData extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 资源名称，根据查询条件不同分为以下几类：
+具体域名：表示该域名明细数据
+multiDomains：表示多域名汇总明细数据
+项目 ID：指定项目查询时，显示为项目 ID
+all：账号维度明细数据
+         * @type {string || null}
+         */
+        this.Resource = null;
+
+        /**
+         * 回源数据详情
+         * @type {Array.<CdnData> || null}
+         */
+        this.OriginData = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Resource = params.Resource || null;
+
+        if (params.OriginData) {
+            this.OriginData = new Array();
+            for (let z in params.OriginData) {
+                let obj = new CdnData();
+                obj.deserialize(params.OriginData[z]);
+                this.OriginData.push(obj);
             }
         }
-        this.RequestId = params.RequestId || null;
+
+    }
+}
+
+/**
+ * 名称与ID映射关系
+ * @class
+ */
+class MapInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 对象 Id
+         * @type {number || null}
+         */
+        this.Id = null;
+
+        /**
+         * 对象名称
+         * @type {string || null}
+         */
+        this.Name = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Id = params.Id || null;
+        this.Name = params.Name || null;
 
     }
 }
@@ -654,28 +759,12 @@ all：账号维度明细数据
 }
 
 /**
- * 查询对象及其对应的回源明细数据
+ * DescribePayType请求参数结构体
  * @class
  */
-class ResourceOriginData extends  AbstractModel {
+class DescribePayTypeRequest extends  AbstractModel {
     constructor(){
         super();
-
-        /**
-         * 资源名称，根据查询条件不同分为以下几类：
-具体域名：表示该域名明细数据
-multiDomains：表示多域名汇总明细数据
-项目 ID：指定项目查询时，显示为项目 ID
-all：账号维度明细数据
-         * @type {string || null}
-         */
-        this.Resource = null;
-
-        /**
-         * 回源数据详情
-         * @type {Array.<CdnData> || null}
-         */
-        this.OriginData = null;
 
     }
 
@@ -686,16 +775,56 @@ all：账号维度明细数据
         if (!params) {
             return;
         }
-        this.Resource = params.Resource || null;
 
-        if (params.OriginData) {
-            this.OriginData = new Array();
-            for (let z in params.OriginData) {
-                let obj = new CdnData();
-                obj.deserialize(params.OriginData[z]);
-                this.OriginData.push(obj);
+    }
+}
+
+/**
+ * DescribeOriginData返回参数结构体
+ * @class
+ */
+class DescribeOriginDataResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 数据统计的时间粒度，支持min, 5min, hour, day，分别表示1分钟，5分钟，1小时和1天的时间粒度。
+         * @type {string || null}
+         */
+        this.Interval = null;
+
+        /**
+         * 各个资源的回源数据详情。
+         * @type {Array.<ResourceOriginData> || null}
+         */
+        this.Data = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Interval = params.Interval || null;
+
+        if (params.Data) {
+            this.Data = new Array();
+            for (let z in params.Data) {
+                let obj = new ResourceOriginData();
+                obj.deserialize(params.Data[z]);
+                this.Data.push(obj);
             }
         }
+        this.RequestId = params.RequestId || null;
 
     }
 }
@@ -854,6 +983,64 @@ day：天粒度，查询时间区间大于 1 天时，默认返回天粒度活�
 }
 
 /**
+ * DescribePayType返回参数结构体
+ * @class
+ */
+class DescribePayTypeResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 计费类型：
+flux：流量计费
+bandwidth：带宽计费
+         * @type {string || null}
+         */
+        this.PayType = null;
+
+        /**
+         * 计费周期：
+day：日结计费
+month：月结计费
+         * @type {string || null}
+         */
+        this.BillingCycle = null;
+
+        /**
+         * 计费方式：
+monthMax：日峰值月平均计费，月结模式
+day95：日 95 带宽计费，月结模式
+month95：月95带宽计费，月结模式
+sum：总流量计费，日结与月结均有流量计费模式
+max：峰值带宽计费，日结模式
+         * @type {string || null}
+         */
+        this.StatType = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PayType = params.PayType || null;
+        this.BillingCycle = params.BillingCycle || null;
+        this.StatType = params.StatType || null;
+        this.RequestId = params.RequestId || null;
+
+    }
+}
+
+/**
  * DescribeIpVisit返回参数结构体
  * @class
  */
@@ -908,16 +1095,21 @@ module.exports = {
     CdnData: CdnData,
     ResourceData: ResourceData,
     ListTopDataResponse: ListTopDataResponse,
-    DescribeOriginDataRequest: DescribeOriginDataRequest,
+    DescribeMapInfoResponse: DescribeMapInfoResponse,
     ListTopDataRequest: ListTopDataRequest,
-    DescribeOriginDataResponse: DescribeOriginDataResponse,
+    DescribeOriginDataRequest: DescribeOriginDataRequest,
+    DescribeMapInfoRequest: DescribeMapInfoRequest,
+    ResourceOriginData: ResourceOriginData,
+    MapInfo: MapInfo,
     TopDetailData: TopDetailData,
     TimestampData: TimestampData,
     TopData: TopData,
-    ResourceOriginData: ResourceOriginData,
+    DescribePayTypeRequest: DescribePayTypeRequest,
+    DescribeOriginDataResponse: DescribeOriginDataResponse,
     DescribeCdnDataResponse: DescribeCdnDataResponse,
     SummarizedData: SummarizedData,
     DescribeIpVisitRequest: DescribeIpVisitRequest,
+    DescribePayTypeResponse: DescribePayTypeResponse,
     DescribeIpVisitResponse: DescribeIpVisitResponse,
 
 }

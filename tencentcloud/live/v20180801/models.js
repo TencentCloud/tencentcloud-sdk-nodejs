@@ -205,6 +205,12 @@ class PlayAuthKeyInfo extends  AbstractModel {
          */
         this.AuthDelta = null;
 
+        /**
+         * 鉴权BackKey。
+         * @type {string || null}
+         */
+        this.AuthBackKey = null;
+
     }
 
     /**
@@ -218,6 +224,7 @@ class PlayAuthKeyInfo extends  AbstractModel {
         this.Enable = params.Enable || null;
         this.AuthKey = params.AuthKey || null;
         this.AuthDelta = params.AuthDelta || null;
+        this.AuthBackKey = params.AuthBackKey || null;
 
     }
 }
@@ -300,24 +307,18 @@ class PullStreamConfig extends  AbstractModel {
 }
 
 /**
- * CreateLiveRecord返回参数结构体
+ * DeletePullStreamConfig请求参数结构体
  * @class
  */
-class CreateLiveRecordResponse extends  AbstractModel {
+class DeletePullStreamConfigRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 任务ID，全局唯一标识录制任务。
-         * @type {number || null}
-         */
-        this.TaskId = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * 配置id。
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.ConfigId = null;
 
     }
 
@@ -328,8 +329,7 @@ class CreateLiveRecordResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TaskId = params.TaskId || null;
-        this.RequestId = params.RequestId || null;
+        this.ConfigId = params.ConfigId || null;
 
     }
 }
@@ -965,6 +965,12 @@ class ModifyLivePlayAuthKeyRequest extends  AbstractModel {
          */
         this.AuthDelta = null;
 
+        /**
+         * 鉴权backkey。
+         * @type {string || null}
+         */
+        this.AuthBackKey = null;
+
     }
 
     /**
@@ -978,6 +984,7 @@ class ModifyLivePlayAuthKeyRequest extends  AbstractModel {
         this.Enable = params.Enable || null;
         this.AuthKey = params.AuthKey || null;
         this.AuthDelta = params.AuthDelta || null;
+        this.AuthBackKey = params.AuthBackKey || null;
 
     }
 }
@@ -1349,6 +1356,34 @@ class StopLiveRecordRequest extends  AbstractModel {
 }
 
 /**
+ * DeletePullStreamConfig返回参数结构体
+ * @class
+ */
+class DeletePullStreamConfigResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = params.RequestId || null;
+
+    }
+}
+
+/**
  * ModifyLivePushAuthKey请求参数结构体
  * @class
  */
@@ -1426,18 +1461,30 @@ class DescribeLiveWatermarksRequest extends  AbstractModel {
 }
 
 /**
- * SetLiveWatermarkStatus返回参数结构体
+ * DescribeLiveStreamState请求参数结构体
  * @class
  */
-class SetLiveWatermarkStatusResponse extends  AbstractModel {
+class DescribeLiveStreamStateRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * 应用名称。
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.AppName = null;
+
+        /**
+         * 您的加速域名。
+         * @type {string || null}
+         */
+        this.DomainName = null;
+
+        /**
+         * 流名称。
+         * @type {string || null}
+         */
+        this.StreamName = null;
 
     }
 
@@ -1448,7 +1495,9 @@ class SetLiveWatermarkStatusResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.AppName = params.AppName || null;
+        this.DomainName = params.DomainName || null;
+        this.StreamName = params.StreamName || null;
 
     }
 }
@@ -1831,30 +1880,24 @@ class ModifyLivePushAuthKeyResponse extends  AbstractModel {
 }
 
 /**
- * DescribeLiveStreamState请求参数结构体
+ * CreateLiveRecord返回参数结构体
  * @class
  */
-class DescribeLiveStreamStateRequest extends  AbstractModel {
+class CreateLiveRecordResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 应用名称。
-         * @type {string || null}
+         * 任务ID，全局唯一标识录制任务。
+         * @type {number || null}
          */
-        this.AppName = null;
+        this.TaskId = null;
 
         /**
-         * 您的加速域名。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.DomainName = null;
-
-        /**
-         * 流名称。
-         * @type {string || null}
-         */
-        this.StreamName = null;
+        this.RequestId = null;
 
     }
 
@@ -1865,9 +1908,8 @@ class DescribeLiveStreamStateRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.AppName = params.AppName || null;
-        this.DomainName = params.DomainName || null;
-        this.StreamName = params.StreamName || null;
+        this.TaskId = params.TaskId || null;
+        this.RequestId = params.RequestId || null;
 
     }
 }
@@ -2374,6 +2416,34 @@ class DescribeLivePushAuthKeyRequest extends  AbstractModel {
 }
 
 /**
+ * SetLiveWatermarkStatus返回参数结构体
+ * @class
+ */
+class SetLiveWatermarkStatusResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = params.RequestId || null;
+
+    }
+}
+
+/**
  * AddDelayLiveStream请求参数结构体
  * @class
  */
@@ -2528,7 +2598,7 @@ module.exports = {
     ModifyPullStreamConfigRequest: ModifyPullStreamConfigRequest,
     PlayAuthKeyInfo: PlayAuthKeyInfo,
     PullStreamConfig: PullStreamConfig,
-    CreateLiveRecordResponse: CreateLiveRecordResponse,
+    DeletePullStreamConfigRequest: DeletePullStreamConfigRequest,
     UpdateLiveWatermarkResponse: UpdateLiveWatermarkResponse,
     ModifyLivePlayAuthKeyResponse: ModifyLivePlayAuthKeyResponse,
     DescribeLiveWatermarksResponse: DescribeLiveWatermarksResponse,
@@ -2552,9 +2622,10 @@ module.exports = {
     DropLiveStreamResponse: DropLiveStreamResponse,
     DescribeLiveStreamStateResponse: DescribeLiveStreamStateResponse,
     StopLiveRecordRequest: StopLiveRecordRequest,
+    DeletePullStreamConfigResponse: DeletePullStreamConfigResponse,
     ModifyLivePushAuthKeyRequest: ModifyLivePushAuthKeyRequest,
     DescribeLiveWatermarksRequest: DescribeLiveWatermarksRequest,
-    SetLiveWatermarkStatusResponse: SetLiveWatermarkStatusResponse,
+    DescribeLiveStreamStateRequest: DescribeLiveStreamStateRequest,
     DescribeLivePlayAuthKeyResponse: DescribeLivePlayAuthKeyResponse,
     DeleteLiveWatermarkResponse: DeleteLiveWatermarkResponse,
     DescribeLivePushAuthKeyResponse: DescribeLivePushAuthKeyResponse,
@@ -2565,7 +2636,7 @@ module.exports = {
     DescribeLiveStreamPublishedListRequest: DescribeLiveStreamPublishedListRequest,
     ModifyPullStreamConfigResponse: ModifyPullStreamConfigResponse,
     ModifyLivePushAuthKeyResponse: ModifyLivePushAuthKeyResponse,
-    DescribeLiveStreamStateRequest: DescribeLiveStreamStateRequest,
+    CreateLiveRecordResponse: CreateLiveRecordResponse,
     AddLiveWatermarkResponse: AddLiveWatermarkResponse,
     DescribePullStreamConfigsResponse: DescribePullStreamConfigsResponse,
     StreamName: StreamName,
@@ -2577,6 +2648,7 @@ module.exports = {
     AddLiveWatermarkRequest: AddLiveWatermarkRequest,
     DeleteLiveRecordRequest: DeleteLiveRecordRequest,
     DescribeLivePushAuthKeyRequest: DescribeLivePushAuthKeyRequest,
+    SetLiveWatermarkStatusResponse: SetLiveWatermarkStatusResponse,
     AddDelayLiveStreamRequest: AddDelayLiveStreamRequest,
     DescribePullStreamConfigsRequest: DescribePullStreamConfigsRequest,
     DescribeLiveStreamPublishedListResponse: DescribeLiveStreamPublishedListResponse,

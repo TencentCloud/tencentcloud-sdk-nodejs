@@ -17,89 +17,91 @@
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const DescribeClusterPersonArrivedMallResponse = models.DescribeClusterPersonArrivedMallResponse;
-const DescribePersonRequest = models.DescribePersonRequest;
-const DescribeClusterPersonArrivedMallRequest = models.DescribeClusterPersonArrivedMallRequest;
-const PersonTraceRoute = models.PersonTraceRoute;
-const ZoneFlowAndAvrStayTime = models.ZoneFlowAndAvrStayTime;
-const DescribeZoneTrafficInfoResponse = models.DescribeZoneTrafficInfoResponse;
 const DescribeShopTrafficInfoRequest = models.DescribeShopTrafficInfoRequest;
-const HourTrafficInfoDetail = models.HourTrafficInfoDetail;
-const DeletePersonFeatureRequest = models.DeletePersonFeatureRequest;
-const ZoneTrafficInfo = models.ZoneTrafficInfo;
-const PersonProfile = models.PersonProfile;
-const DescribePersonInfoRequest = models.DescribePersonInfoRequest;
-const ZoneAgeGroupAvrStayTime = models.ZoneAgeGroupAvrStayTime;
-const ZoneTrafficInfoDetail = models.ZoneTrafficInfoDetail;
-const PersonTracePoint = models.PersonTracePoint;
-const ZoneHourFlow = models.ZoneHourFlow;
 const GenderAgeTrafficDetail = models.GenderAgeTrafficDetail;
-const RegisterCallbackResponse = models.RegisterCallbackResponse;
-const DescribeFaceIdByTempIdRequest = models.DescribeFaceIdByTempIdRequest;
 const DescribeZoneFlowAndStayTimeResponse = models.DescribeZoneFlowAndStayTimeResponse;
-const DescribeZoneFlowHourlyByZoneIdResponse = models.DescribeZoneFlowHourlyByZoneIdResponse;
 const DescribePersonArrivedMallResponse = models.DescribePersonArrivedMallResponse;
-const NetworkAndShopInfo = models.NetworkAndShopInfo;
-const NetworkInfo = models.NetworkInfo;
-const DescribePersonInfoResponse = models.DescribePersonInfoResponse;
 const ModifyPersonTypeResponse = models.ModifyPersonTypeResponse;
-const DescribeTrajectoryDataRequest = models.DescribeTrajectoryDataRequest;
-const DailyTracePoint = models.DailyTracePoint;
-const DescribeNetworkInfoResponse = models.DescribeNetworkInfoResponse;
+const HourTrafficInfoDetail = models.HourTrafficInfoDetail;
+const DescribeZoneFlowDailyByZoneIdResponse = models.DescribeZoneFlowDailyByZoneIdResponse;
+const DescribeZoneFlowAgeInfoByZoneIdResponse = models.DescribeZoneFlowAgeInfoByZoneIdResponse;
+const DescribeClusterPersonTraceResponse = models.DescribeClusterPersonTraceResponse;
+const DescribePersonInfoRequest = models.DescribePersonInfoRequest;
+const DescribePersonInfoByFacePictureResponse = models.DescribePersonInfoByFacePictureResponse;
+const DescribePersonTraceDetailRequest = models.DescribePersonTraceDetailRequest;
+const CreateAccountRequest = models.CreateAccountRequest;
+const NetworkLastInfo = models.NetworkLastInfo;
+const DescribeZoneFlowGenderAvrStayTimeByZoneIdResponse = models.DescribeZoneFlowGenderAvrStayTimeByZoneIdResponse;
+const DeletePersonFeatureResponse = models.DeletePersonFeatureResponse;
+const DescribeCameraPersonResponse = models.DescribeCameraPersonResponse;
+const ModifyPersonTagInfoResponse = models.ModifyPersonTagInfoResponse;
+const DescribeShopHourTrafficInfoResponse = models.DescribeShopHourTrafficInfoResponse;
+const RegisterCallbackResponse = models.RegisterCallbackResponse;
+const NetworkInfo = models.NetworkInfo;
+const DescribeClusterPersonArrivedMallRequest = models.DescribeClusterPersonArrivedMallRequest;
+const DescribeZoneFlowGenderInfoByZoneIdResponse = models.DescribeZoneFlowGenderInfoByZoneIdResponse;
+const DescribeHistoryNetworkInfoRequest = models.DescribeHistoryNetworkInfoRequest;
+const DescribePersonTraceDetailResponse = models.DescribePersonTraceDetailResponse;
+const PersonVisitInfo = models.PersonVisitInfo;
 const DescribePersonVisitInfoRequest = models.DescribePersonVisitInfoRequest;
-const NetworkHistoryInfo = models.NetworkHistoryInfo;
+const DescribeZoneTrafficInfoResponse = models.DescribeZoneTrafficInfoResponse;
+const DeletePersonFeatureRequest = models.DeletePersonFeatureRequest;
+const DescribeFaceIdByTempIdRequest = models.DescribeFaceIdByTempIdRequest;
+const PersonProfile = models.PersonProfile;
+const DescribePersonResponse = models.DescribePersonResponse;
+const DescribeTrajectoryDataRequest = models.DescribeTrajectoryDataRequest;
+const DescribeZoneTrafficInfoRequest = models.DescribeZoneTrafficInfoRequest;
+const ZoneTrafficInfoDetail = models.ZoneTrafficInfoDetail;
+const DescribeZoneFlowGenderAvrStayTimeByZoneIdRequest = models.DescribeZoneFlowGenderAvrStayTimeByZoneIdRequest;
+const ZoneFlowAndAvrStayTime = models.ZoneFlowAndAvrStayTime;
+const SceneInfo = models.SceneInfo;
+const CameraPersonInfo = models.CameraPersonInfo;
+const DescribePersonVisitInfoResponse = models.DescribePersonVisitInfoResponse;
+const DescribeNetworkInfoRequest = models.DescribeNetworkInfoRequest;
+const DescribeZoneFlowAndStayTimeRequest = models.DescribeZoneFlowAndStayTimeRequest;
+const DescribeZoneFlowHourlyByZoneIdRequest = models.DescribeZoneFlowHourlyByZoneIdRequest;
+const DescribeFaceIdByTempIdResponse = models.DescribeFaceIdByTempIdResponse;
+const TrajectorySunData = models.TrajectorySunData;
+const ModifyPersonTagInfoRequest = models.ModifyPersonTagInfoRequest;
+const ShopDayTrafficInfo = models.ShopDayTrafficInfo;
+const DescribePersonRequest = models.DescribePersonRequest;
+const DescribePersonTraceResponse = models.DescribePersonTraceResponse;
+const PersonTraceRoute = models.PersonTraceRoute;
+const PersonTracePoint = models.PersonTracePoint;
+const ZoneTrafficInfo = models.ZoneTrafficInfo;
+const DescribeNetworkInfoResponse = models.DescribeNetworkInfoResponse;
+const NetworkAndShopInfo = models.NetworkAndShopInfo;
 const DescribeZoneFlowGenderInfoByZoneIdRequest = models.DescribeZoneFlowGenderInfoByZoneIdRequest;
+const DescribeShopHourTrafficInfoRequest = models.DescribeShopHourTrafficInfoRequest;
+const RegisterCallbackRequest = models.RegisterCallbackRequest;
+const DescribeShopInfoRequest = models.DescribeShopInfoRequest;
+const NetworkHistoryInfo = models.NetworkHistoryInfo;
+const PersonInfo = models.PersonInfo;
+const PersonTagInfo = models.PersonTagInfo;
+const ZoneHourFlow = models.ZoneHourFlow;
+const ShopHourTrafficInfo = models.ShopHourTrafficInfo;
+const DescribeClusterPersonTraceRequest = models.DescribeClusterPersonTraceRequest;
+const PersonCoordinate = models.PersonCoordinate;
+const ZoneDayFlow = models.ZoneDayFlow;
+const DescribePersonTraceRequest = models.DescribePersonTraceRequest;
+const DescribeZoneFlowHourlyByZoneIdResponse = models.DescribeZoneFlowHourlyByZoneIdResponse;
+const DescribeZoneFlowDailyByZoneIdRequest = models.DescribeZoneFlowDailyByZoneIdRequest;
+const DescribePersonInfoResponse = models.DescribePersonInfoResponse;
+const DailyTracePoint = models.DailyTracePoint;
 const CreateAccountResponse = models.CreateAccountResponse;
 const DescribeHistoryNetworkInfoResponse = models.DescribeHistoryNetworkInfoResponse;
 const CreateFacePictureResponse = models.CreateFacePictureResponse;
-const DescribeZoneFlowGenderAvrStayTimeByZoneIdRequest = models.DescribeZoneFlowGenderAvrStayTimeByZoneIdRequest;
 const DescribeShopInfoResponse = models.DescribeShopInfoResponse;
-const ShopInfo = models.ShopInfo;
-const DescribeZoneFlowDailyByZoneIdResponse = models.DescribeZoneFlowDailyByZoneIdResponse;
-const DescribePersonTraceResponse = models.DescribePersonTraceResponse;
-const DescribeShopHourTrafficInfoRequest = models.DescribeShopHourTrafficInfoRequest;
-const DescribeZoneFlowAgeInfoByZoneIdResponse = models.DescribeZoneFlowAgeInfoByZoneIdResponse;
-const DescribePersonResponse = models.DescribePersonResponse;
-const PersonVisitInfo = models.PersonVisitInfo;
-const DescribeClusterPersonTraceResponse = models.DescribeClusterPersonTraceResponse;
-const DescribeShopInfoRequest = models.DescribeShopInfoRequest;
+const DescribePersonInfoByFacePictureRequest = models.DescribePersonInfoByFacePictureRequest;
 const CreateFacePictureRequest = models.CreateFacePictureRequest;
 const DescribeZoneFlowAgeInfoByZoneIdRequest = models.DescribeZoneFlowAgeInfoByZoneIdRequest;
-const DescribePersonTraceDetailRequest = models.DescribePersonTraceDetailRequest;
-const CreateAccountRequest = models.CreateAccountRequest;
-const DescribeShopTrafficInfoResponse = models.DescribeShopTrafficInfoResponse;
+const ShopInfo = models.ShopInfo;
 const ModifyPersonTypeRequest = models.ModifyPersonTypeRequest;
-const DescribeZoneFlowGenderAvrStayTimeByZoneIdResponse = models.DescribeZoneFlowGenderAvrStayTimeByZoneIdResponse;
 const ArrivedMallInfo = models.ArrivedMallInfo;
-const PersonInfo = models.PersonInfo;
-const PersonCoordinate = models.PersonCoordinate;
-const DescribeFaceIdByTempIdResponse = models.DescribeFaceIdByTempIdResponse;
-const SceneInfo = models.SceneInfo;
-const DeletePersonFeatureResponse = models.DeletePersonFeatureResponse;
-const DescribeZoneTrafficInfoRequest = models.DescribeZoneTrafficInfoRequest;
-const DescribeCameraPersonResponse = models.DescribeCameraPersonResponse;
-const ShopHourTrafficInfo = models.ShopHourTrafficInfo;
-const ModifyPersonTagInfoResponse = models.ModifyPersonTagInfoResponse;
-const CameraPersonInfo = models.CameraPersonInfo;
-const DescribeClusterPersonTraceRequest = models.DescribeClusterPersonTraceRequest;
-const PersonTagInfo = models.PersonTagInfo;
-const ZoneDayFlow = models.ZoneDayFlow;
-const DescribeShopHourTrafficInfoResponse = models.DescribeShopHourTrafficInfoResponse;
-const DescribePersonVisitInfoResponse = models.DescribePersonVisitInfoResponse;
-const DescribeNetworkInfoRequest = models.DescribeNetworkInfoRequest;
-const DescribeHistoryNetworkInfoRequest = models.DescribeHistoryNetworkInfoRequest;
-const DescribeZoneFlowHourlyByZoneIdRequest = models.DescribeZoneFlowHourlyByZoneIdRequest;
-const DescribeCameraPersonRequest = models.DescribeCameraPersonRequest;
-const DescribeZoneFlowDailyByZoneIdRequest = models.DescribeZoneFlowDailyByZoneIdRequest;
-const TrajectorySunData = models.TrajectorySunData;
-const DescribeZoneFlowGenderInfoByZoneIdResponse = models.DescribeZoneFlowGenderInfoByZoneIdResponse;
-const ModifyPersonTagInfoRequest = models.ModifyPersonTagInfoRequest;
-const RegisterCallbackRequest = models.RegisterCallbackRequest;
-const DescribePersonTraceRequest = models.DescribePersonTraceRequest;
-const DescribeZoneFlowAndStayTimeRequest = models.DescribeZoneFlowAndStayTimeRequest;
-const DescribePersonTraceDetailResponse = models.DescribePersonTraceDetailResponse;
-const ShopDayTrafficInfo = models.ShopDayTrafficInfo;
+const ZoneAgeGroupAvrStayTime = models.ZoneAgeGroupAvrStayTime;
 const DescribePersonArrivedMallRequest = models.DescribePersonArrivedMallRequest;
-const NetworkLastInfo = models.NetworkLastInfo;
+const DescribeCameraPersonRequest = models.DescribeCameraPersonRequest;
+const DescribeShopTrafficInfoResponse = models.DescribeShopTrafficInfoResponse;
 const DescribeTrajectoryDataResponse = models.DescribeTrajectoryDataResponse;
 
 
@@ -235,14 +237,14 @@ class YoumallClient extends AbstractClient {
     }
 
     /**
-     * 查询客户单次到场轨迹明细
-     * @param {DescribePersonTraceDetailRequest} req
-     * @param {function(string, DescribePersonTraceDetailResponse):void} cb
+     * 获取指定区域性别占比
+     * @param {DescribeZoneFlowGenderInfoByZoneIdRequest} req
+     * @param {function(string, DescribeZoneFlowGenderInfoByZoneIdResponse):void} cb
      * @public
      */
-    DescribePersonTraceDetail(req, cb) {
-        let resp = new DescribePersonTraceDetailResponse();
-        this.request("DescribePersonTraceDetail", req, resp, cb);
+    DescribeZoneFlowGenderInfoByZoneId(req, cb) {
+        let resp = new DescribeZoneFlowGenderInfoByZoneIdResponse();
+        this.request("DescribeZoneFlowGenderInfoByZoneId", req, resp, cb);
     }
 
     /**
@@ -254,6 +256,17 @@ class YoumallClient extends AbstractClient {
     DescribeShopTrafficInfo(req, cb) {
         let resp = new DescribeShopTrafficInfoResponse();
         this.request("DescribeShopTrafficInfo", req, resp, cb);
+    }
+
+    /**
+     * 通过上传人脸图片检索系统face id、顾客身份信息及底图
+     * @param {DescribePersonInfoByFacePictureRequest} req
+     * @param {function(string, DescribePersonInfoByFacePictureResponse):void} cb
+     * @public
+     */
+    DescribePersonInfoByFacePicture(req, cb) {
+        let resp = new DescribePersonInfoByFacePictureResponse();
+        this.request("DescribePersonInfoByFacePicture", req, resp, cb);
     }
 
     /**
@@ -336,14 +349,14 @@ class YoumallClient extends AbstractClient {
     }
 
     /**
-     * 查询指定某一卖场的用户信息
-     * @param {DescribePersonRequest} req
-     * @param {function(string, DescribePersonResponse):void} cb
+     * 查询客户单次到场轨迹明细
+     * @param {DescribePersonTraceDetailRequest} req
+     * @param {function(string, DescribePersonTraceDetailResponse):void} cb
      * @public
      */
-    DescribePerson(req, cb) {
-        let resp = new DescribePersonResponse();
-        this.request("DescribePerson", req, resp, cb);
+    DescribePersonTraceDetail(req, cb) {
+        let resp = new DescribePersonTraceDetailResponse();
+        this.request("DescribePersonTraceDetail", req, resp, cb);
     }
 
     /**
@@ -403,14 +416,14 @@ class YoumallClient extends AbstractClient {
     }
 
     /**
-     * 获取指定区域性别占比
-     * @param {DescribeZoneFlowGenderInfoByZoneIdRequest} req
-     * @param {function(string, DescribeZoneFlowGenderInfoByZoneIdResponse):void} cb
+     * 查询指定某一卖场的用户信息
+     * @param {DescribePersonRequest} req
+     * @param {function(string, DescribePersonResponse):void} cb
      * @public
      */
-    DescribeZoneFlowGenderInfoByZoneId(req, cb) {
-        let resp = new DescribeZoneFlowGenderInfoByZoneIdResponse();
-        this.request("DescribeZoneFlowGenderInfoByZoneId", req, resp, cb);
+    DescribePerson(req, cb) {
+        let resp = new DescribePersonResponse();
+        this.request("DescribePerson", req, resp, cb);
     }
 
     /**

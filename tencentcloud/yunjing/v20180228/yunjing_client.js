@@ -29,33 +29,41 @@ const CreateUsualLoginPlacesRequest = models.CreateUsualLoginPlacesRequest;
 const DescribeProcessTaskStatusRequest = models.DescribeProcessTaskStatusRequest;
 const ModifyAlarmAttributeRequest = models.ModifyAlarmAttributeRequest;
 const ComponentStatistics = models.ComponentStatistics;
+const InquiryPriceOpenProVersionPrepaidRequest = models.InquiryPriceOpenProVersionPrepaidRequest;
 const DescribeBruteAttacksRequest = models.DescribeBruteAttacksRequest;
-const DescribeWeeklyReportMalwaresResponse = models.DescribeWeeklyReportMalwaresResponse;
+const DescribeSecurityTrendsRequest = models.DescribeSecurityTrendsRequest;
 const Account = models.Account;
 const RescanImpactedHostRequest = models.RescanImpactedHostRequest;
 const BruteAttack = models.BruteAttack;
 const DescribeOpenPortsRequest = models.DescribeOpenPortsRequest;
 const DescribeImpactedHostsRequest = models.DescribeImpactedHostsRequest;
+const DescribeMaliciousRequestsResponse = models.DescribeMaliciousRequestsResponse;
 const NonLocalLoginPlace = models.NonLocalLoginPlace;
 const CreateProcessTaskResponse = models.CreateProcessTaskResponse;
+const RenewProVersionRequest = models.RenewProVersionRequest;
 const DescribeComponentsRequest = models.DescribeComponentsRequest;
 const DescribeNonlocalLoginPlacesRequest = models.DescribeNonlocalLoginPlacesRequest;
 const OpenPortStatistics = models.OpenPortStatistics;
 const DescribeHistoryAccountsResponse = models.DescribeHistoryAccountsResponse;
 const DescribeVulScanResultResponse = models.DescribeVulScanResultResponse;
 const UntrustMalwaresRequest = models.UntrustMalwaresRequest;
+const DescribeWeeklyReportVulsRequest = models.DescribeWeeklyReportVulsRequest;
 const TrustMalwaresRequest = models.TrustMalwaresRequest;
 const UntrustMalwaresResponse = models.UntrustMalwaresResponse;
+const UntrustMaliciousRequestRequest = models.UntrustMaliciousRequestRequest;
 const DescribeComponentInfoResponse = models.DescribeComponentInfoResponse;
 const DescribeAccountStatisticsResponse = models.DescribeAccountStatisticsResponse;
+const OpenProVersionPrepaidRequest = models.OpenProVersionPrepaidRequest;
 const OpenPort = models.OpenPort;
 const DescribeProVersionInfoRequest = models.DescribeProVersionInfoRequest;
 const CreateProcessTaskRequest = models.CreateProcessTaskRequest;
+const DeleteMaliciousRequestsResponse = models.DeleteMaliciousRequestsResponse;
 const DeleteMachineResponse = models.DeleteMachineResponse;
 const MisAlarmNonlocalLoginPlacesResponse = models.MisAlarmNonlocalLoginPlacesResponse;
 const WeeklyReportNonlocalLoginPlace = models.WeeklyReportNonlocalLoginPlace;
 const DescribeOverviewStatisticsResponse = models.DescribeOverviewStatisticsResponse;
 const RecoverMalwaresRequest = models.RecoverMalwaresRequest;
+const MaliciousRequest = models.MaliciousRequest;
 const TrustMalwaresResponse = models.TrustMalwaresResponse;
 const DescribeWeeklyReportInfoRequest = models.DescribeWeeklyReportInfoRequest;
 const DescribeProcessesResponse = models.DescribeProcessesResponse;
@@ -73,57 +81,70 @@ const DeleteUsualLoginPlacesResponse = models.DeleteUsualLoginPlacesResponse;
 const DeleteNonlocalLoginPlacesResponse = models.DeleteNonlocalLoginPlacesResponse;
 const DescribeNonlocalLoginPlacesResponse = models.DescribeNonlocalLoginPlacesResponse;
 const DescribeWeeklyReportNonlocalLoginPlacesRequest = models.DescribeWeeklyReportNonlocalLoginPlacesRequest;
-const CloseProVersionRequest = models.CloseProVersionRequest;
+const InquiryPriceOpenProVersionPrepaidResponse = models.InquiryPriceOpenProVersionPrepaidResponse;
+const DescribeMachineInfoResponse = models.DescribeMachineInfoResponse;
 const DescribeUsualLoginPlacesResponse = models.DescribeUsualLoginPlacesResponse;
 const DescribeComponentInfoRequest = models.DescribeComponentInfoRequest;
 const MisAlarmNonlocalLoginPlacesRequest = models.MisAlarmNonlocalLoginPlacesRequest;
+const TrustMaliciousRequestRequest = models.TrustMaliciousRequestRequest;
 const DescribeWeeklyReportMalwaresRequest = models.DescribeWeeklyReportMalwaresRequest;
 const DescribeBruteAttacksResponse = models.DescribeBruteAttacksResponse;
 const DescribeComponentStatisticsRequest = models.DescribeComponentStatisticsRequest;
 const DescribeOverviewStatisticsRequest = models.DescribeOverviewStatisticsRequest;
 const DescribeOpenPortStatisticsResponse = models.DescribeOpenPortStatisticsResponse;
+const UntrustMaliciousRequestResponse = models.UntrustMaliciousRequestResponse;
 const SecurityDynamic = models.SecurityDynamic;
 const DescribeVulInfoResponse = models.DescribeVulInfoResponse;
 const DescribeProVersionInfoResponse = models.DescribeProVersionInfoResponse;
 const DeleteBruteAttacksRequest = models.DeleteBruteAttacksRequest;
 const DescribeWeeklyReportNonlocalLoginPlacesResponse = models.DescribeWeeklyReportNonlocalLoginPlacesResponse;
 const SeparateMalwaresRequest = models.SeparateMalwaresRequest;
+const RenewProVersionResponse = models.RenewProVersionResponse;
 const DescribeSecurityTrendsResponse = models.DescribeSecurityTrendsResponse;
+const ProVersionMachine = models.ProVersionMachine;
+const ExportMaliciousRequestsResponse = models.ExportMaliciousRequestsResponse;
 const DescribeWeeklyReportInfoResponse = models.DescribeWeeklyReportInfoResponse;
 const DescribeSecurityDynamicsResponse = models.DescribeSecurityDynamicsResponse;
+const TrustMaliciousRequestResponse = models.TrustMaliciousRequestResponse;
 const CloseProVersionResponse = models.CloseProVersionResponse;
 const DescribeOpenPortsResponse = models.DescribeOpenPortsResponse;
 const DescribeMachineInfoRequest = models.DescribeMachineInfoRequest;
+const DescribeMaliciousRequestsRequest = models.DescribeMaliciousRequestsRequest;
 const DescribeProcessesRequest = models.DescribeProcessesRequest;
 const DeleteUsualLoginPlacesRequest = models.DeleteUsualLoginPlacesRequest;
 const WeeklyReport = models.WeeklyReport;
 const Filter = models.Filter;
 const DescribeAccountStatisticsRequest = models.DescribeAccountStatisticsRequest;
+const OpenProVersionPrepaidResponse = models.OpenProVersionPrepaidResponse;
 const DeleteMalwaresResponse = models.DeleteMalwaresResponse;
+const ChargePrepaid = models.ChargePrepaid;
 const SeparateMalwaresResponse = models.SeparateMalwaresResponse;
 const ProcessStatistics = models.ProcessStatistics;
 const Process = models.Process;
 const DescribeVulScanResultRequest = models.DescribeVulScanResultRequest;
-const DescribeSecurityTrendsRequest = models.DescribeSecurityTrendsRequest;
+const DescribeWeeklyReportMalwaresResponse = models.DescribeWeeklyReportMalwaresResponse;
 const DescribeSecurityDynamicsRequest = models.DescribeSecurityDynamicsRequest;
 const ImpactedHost = models.ImpactedHost;
 const DescribeProcessStatisticsResponse = models.DescribeProcessStatisticsResponse;
 const DeleteNonlocalLoginPlacesRequest = models.DeleteNonlocalLoginPlacesRequest;
 const Malware = models.Malware;
+const ExportMaliciousRequestsRequest = models.ExportMaliciousRequestsRequest;
 const AccountStatistics = models.AccountStatistics;
 const DescribeMachinesResponse = models.DescribeMachinesResponse;
 const CreateUsualLoginPlacesResponse = models.CreateUsualLoginPlacesResponse;
+const ModifyProVersionRenewFlagResponse = models.ModifyProVersionRenewFlagResponse;
 const Machine = models.Machine;
 const DescribeWeeklyReportVulsResponse = models.DescribeWeeklyReportVulsResponse;
 const WeeklyReportBruteAttack = models.WeeklyReportBruteAttack;
 const HistoryAccount = models.HistoryAccount;
+const ModifyProVersionRenewFlagRequest = models.ModifyProVersionRenewFlagRequest;
 const DescribeUsualLoginPlacesRequest = models.DescribeUsualLoginPlacesRequest;
 const Component = models.Component;
 const DescribeVulsRequest = models.DescribeVulsRequest;
 const DescribeAgentVulsResponse = models.DescribeAgentVulsResponse;
 const DescribeProcessStatisticsRequest = models.DescribeProcessStatisticsRequest;
 const DescribeHistoryAccountsRequest = models.DescribeHistoryAccountsRequest;
-const DescribeMachineInfoResponse = models.DescribeMachineInfoResponse;
+const CloseProVersionRequest = models.CloseProVersionRequest;
 const ModifyAlarmAttributeResponse = models.ModifyAlarmAttributeResponse;
 const IgnoreImpactedHostsResponse = models.IgnoreImpactedHostsResponse;
 const DescribeComponentsResponse = models.DescribeComponentsResponse;
@@ -132,14 +153,14 @@ const SecurityTrend = models.SecurityTrend;
 const Vul = models.Vul;
 const DescribeWeeklyReportsResponse = models.DescribeWeeklyReportsResponse;
 const DescribeAccountsResponse = models.DescribeAccountsResponse;
-const DeleteMalwaresRequest = models.DeleteMalwaresRequest;
 const ModifyAutoOpenProVersionConfigResponse = models.ModifyAutoOpenProVersionConfigResponse;
 const RecoverMalwaresResponse = models.RecoverMalwaresResponse;
 const IgnoreImpactedHostsRequest = models.IgnoreImpactedHostsRequest;
 const DescribeAlarmAttributeRequest = models.DescribeAlarmAttributeRequest;
 const DescribeMalwaresRequest = models.DescribeMalwaresRequest;
+const DeleteMaliciousRequestsRequest = models.DeleteMaliciousRequestsRequest;
 const DescribeMachinesRequest = models.DescribeMachinesRequest;
-const DescribeWeeklyReportVulsRequest = models.DescribeWeeklyReportVulsRequest;
+const DeleteMalwaresRequest = models.DeleteMalwaresRequest;
 const DescribeMalwaresResponse = models.DescribeMalwaresResponse;
 const DeleteBruteAttacksResponse = models.DeleteBruteAttacksResponse;
 
@@ -267,6 +288,17 @@ class YunjingClient extends AbstractClient {
     }
 
     /**
+     * 本接口 (OpenProVersionPrepaid) 用于开通专业版(包年包月)。
+     * @param {OpenProVersionPrepaidRequest} req
+     * @param {function(string, OpenProVersionPrepaidResponse):void} cb
+     * @public
+     */
+    OpenProVersionPrepaid(req, cb) {
+        let resp = new OpenProVersionPrepaidResponse();
+        this.request("OpenProVersionPrepaid", req, resp, cb);
+    }
+
+    /**
      * 本接口 (DescribeWeeklyReportMalwares) 用于获取专业周报木马数据。
      * @param {DescribeWeeklyReportMalwaresRequest} req
      * @param {function(string, DescribeWeeklyReportMalwaresResponse):void} cb
@@ -275,6 +307,17 @@ class YunjingClient extends AbstractClient {
     DescribeWeeklyReportMalwares(req, cb) {
         let resp = new DescribeWeeklyReportMalwaresResponse();
         this.request("DescribeWeeklyReportMalwares", req, resp, cb);
+    }
+
+    /**
+     * 本接口 (DescribeWeeklyReportInfo) 用于获取专业周报详情数据。
+     * @param {DescribeWeeklyReportInfoRequest} req
+     * @param {function(string, DescribeWeeklyReportInfoResponse):void} cb
+     * @public
+     */
+    DescribeWeeklyReportInfo(req, cb) {
+        let resp = new DescribeWeeklyReportInfoResponse();
+        this.request("DescribeWeeklyReportInfo", req, resp, cb);
     }
 
     /**
@@ -297,6 +340,17 @@ class YunjingClient extends AbstractClient {
     DescribeVulInfo(req, cb) {
         let resp = new DescribeVulInfoResponse();
         this.request("DescribeVulInfo", req, resp, cb);
+    }
+
+    /**
+     * 本接口 (ModifyProVersionRenewFlag) 用于修改专业版包年包月续费标识。
+     * @param {ModifyProVersionRenewFlagRequest} req
+     * @param {function(string, ModifyProVersionRenewFlagResponse):void} cb
+     * @public
+     */
+    ModifyProVersionRenewFlag(req, cb) {
+        let resp = new ModifyProVersionRenewFlagResponse();
+        this.request("ModifyProVersionRenewFlag", req, resp, cb);
     }
 
     /**
@@ -356,6 +410,17 @@ class YunjingClient extends AbstractClient {
     }
 
     /**
+     * 本接口 (ExportMaliciousRequests) 用于导出下载恶意请求文件。
+     * @param {ExportMaliciousRequestsRequest} req
+     * @param {function(string, ExportMaliciousRequestsResponse):void} cb
+     * @public
+     */
+    ExportMaliciousRequests(req, cb) {
+        let resp = new ExportMaliciousRequestsResponse();
+        this.request("ExportMaliciousRequests", req, resp, cb);
+    }
+
+    /**
      * 本接口（SeparateMalwares）用于隔离木马。
      * @param {SeparateMalwaresRequest} req
      * @param {function(string, SeparateMalwaresResponse):void} cb
@@ -411,6 +476,17 @@ class YunjingClient extends AbstractClient {
     }
 
     /**
+     * 本接口 (UntrustMaliciousRequest) 用于取消信任恶意请求。
+     * @param {UntrustMaliciousRequestRequest} req
+     * @param {function(string, UntrustMaliciousRequestResponse):void} cb
+     * @public
+     */
+    UntrustMaliciousRequest(req, cb) {
+        let resp = new UntrustMaliciousRequestResponse();
+        this.request("UntrustMaliciousRequest", req, resp, cb);
+    }
+
+    /**
      * 此接口（DescribeUsualLoginPlaces）用于查询常用登录地。
      * @param {DescribeUsualLoginPlacesRequest} req
      * @param {function(string, DescribeUsualLoginPlacesResponse):void} cb
@@ -433,14 +509,14 @@ class YunjingClient extends AbstractClient {
     }
 
     /**
-     * 本接口 (DescribeWeeklyReportInfo) 用于获取专业周报详情数据。
-     * @param {DescribeWeeklyReportInfoRequest} req
-     * @param {function(string, DescribeWeeklyReportInfoResponse):void} cb
+     * 本接口 (DescribeMaliciousRequests) 用于获取恶意请求数据。
+     * @param {DescribeMaliciousRequestsRequest} req
+     * @param {function(string, DescribeMaliciousRequestsResponse):void} cb
      * @public
      */
-    DescribeWeeklyReportInfo(req, cb) {
-        let resp = new DescribeWeeklyReportInfoResponse();
-        this.request("DescribeWeeklyReportInfo", req, resp, cb);
+    DescribeMaliciousRequests(req, cb) {
+        let resp = new DescribeMaliciousRequestsResponse();
+        this.request("DescribeMaliciousRequests", req, resp, cb);
     }
 
     /**
@@ -452,6 +528,17 @@ class YunjingClient extends AbstractClient {
     DescribeSecurityDynamics(req, cb) {
         let resp = new DescribeSecurityDynamicsResponse();
         this.request("DescribeSecurityDynamics", req, resp, cb);
+    }
+
+    /**
+     * 本接口 (DeleteMaliciousRequests) 用于删除恶意请求记录。
+     * @param {DeleteMaliciousRequestsRequest} req
+     * @param {function(string, DeleteMaliciousRequestsResponse):void} cb
+     * @public
+     */
+    DeleteMaliciousRequests(req, cb) {
+        let resp = new DeleteMaliciousRequestsResponse();
+        this.request("DeleteMaliciousRequests", req, resp, cb);
     }
 
     /**
@@ -562,6 +649,17 @@ class YunjingClient extends AbstractClient {
     DescribeWeeklyReports(req, cb) {
         let resp = new DescribeWeeklyReportsResponse();
         this.request("DescribeWeeklyReports", req, resp, cb);
+    }
+
+    /**
+     * 本接口 (InquiryPriceOpenProVersionPrepaid) 用于开通专业版询价(预付费)。
+     * @param {InquiryPriceOpenProVersionPrepaidRequest} req
+     * @param {function(string, InquiryPriceOpenProVersionPrepaidResponse):void} cb
+     * @public
+     */
+    InquiryPriceOpenProVersionPrepaid(req, cb) {
+        let resp = new InquiryPriceOpenProVersionPrepaidResponse();
+        this.request("InquiryPriceOpenProVersionPrepaid", req, resp, cb);
     }
 
     /**
@@ -686,6 +784,17 @@ class YunjingClient extends AbstractClient {
     }
 
     /**
+     * 本接口 (RenewProVersion) 用于续费专业版(包年包月)。
+     * @param {RenewProVersionRequest} req
+     * @param {function(string, RenewProVersionResponse):void} cb
+     * @public
+     */
+    RenewProVersion(req, cb) {
+        let resp = new RenewProVersionResponse();
+        this.request("RenewProVersion", req, resp, cb);
+    }
+
+    /**
      * 本接口 (DescribeProcesses) 用于获取进程列表数据。
      * @param {DescribeProcessesRequest} req
      * @param {function(string, DescribeProcessesResponse):void} cb
@@ -694,6 +803,17 @@ class YunjingClient extends AbstractClient {
     DescribeProcesses(req, cb) {
         let resp = new DescribeProcessesResponse();
         this.request("DescribeProcesses", req, resp, cb);
+    }
+
+    /**
+     * 本接口 (TrustMaliciousRequest) 用于恶意请求添加信任。
+     * @param {TrustMaliciousRequestRequest} req
+     * @param {function(string, TrustMaliciousRequestResponse):void} cb
+     * @public
+     */
+    TrustMaliciousRequest(req, cb) {
+        let resp = new TrustMaliciousRequestResponse();
+        this.request("TrustMaliciousRequest", req, resp, cb);
     }
 
     /**
