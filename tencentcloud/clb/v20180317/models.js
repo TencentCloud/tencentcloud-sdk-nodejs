@@ -146,7 +146,7 @@ class CertificateInput extends  AbstractModel {
         super();
 
         /**
-         * 认证类型，unidirectional：单向认证，mutual：双向认证
+         * 认证类型，UNIDIRECTIONAL：单向认证，MUTUAL：双向认证
          * @type {string || null}
          */
         this.SSLMode = null;
@@ -1445,7 +1445,7 @@ class HealthCheck extends  AbstractModel {
         super();
 
         /**
-         * 是否开启健康检查：1（开启）、0（关闭）。默认值 1，表示打开。
+         * 是否开启健康检查：1（开启）、0（关闭）。
          * @type {number || null}
          */
         this.HealthSwitch = null;
@@ -1907,7 +1907,7 @@ OPEN：公网属性， INTERNAL：内网属性。
         this.LoadBalancerType = null;
 
         /**
-         * 1：应用型，0：传统型，-1：全部类型。
+         * 1：应用型，0：传统型。
          * @type {number || null}
          */
         this.Forward = null;

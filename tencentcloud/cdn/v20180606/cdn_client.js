@@ -20,16 +20,21 @@ const DescribeCdnDataRequest = models.DescribeCdnDataRequest;
 const CdnData = models.CdnData;
 const ResourceData = models.ResourceData;
 const ListTopDataResponse = models.ListTopDataResponse;
-const DescribeOriginDataRequest = models.DescribeOriginDataRequest;
+const DescribeMapInfoResponse = models.DescribeMapInfoResponse;
 const ListTopDataRequest = models.ListTopDataRequest;
-const DescribeOriginDataResponse = models.DescribeOriginDataResponse;
+const DescribeOriginDataRequest = models.DescribeOriginDataRequest;
+const DescribeMapInfoRequest = models.DescribeMapInfoRequest;
+const ResourceOriginData = models.ResourceOriginData;
+const MapInfo = models.MapInfo;
 const TopDetailData = models.TopDetailData;
 const TimestampData = models.TimestampData;
 const TopData = models.TopData;
-const ResourceOriginData = models.ResourceOriginData;
+const DescribePayTypeRequest = models.DescribePayTypeRequest;
+const DescribeOriginDataResponse = models.DescribeOriginDataResponse;
 const DescribeCdnDataResponse = models.DescribeCdnDataResponse;
 const SummarizedData = models.SummarizedData;
 const DescribeIpVisitRequest = models.DescribeIpVisitRequest;
+const DescribePayTypeResponse = models.DescribePayTypeResponse;
 const DescribeIpVisitResponse = models.DescribeIpVisitResponse;
 
 
@@ -79,6 +84,28 @@ class CdnClient extends AbstractClient {
     DescribeOriginData(req, cb) {
         let resp = new DescribeOriginDataResponse();
         this.request("DescribeOriginData", req, resp, cb);
+    }
+
+    /**
+     * DescribeMapInfo 用于查询省份对应的 ID，运营商对应的 ID 信息。
+     * @param {DescribeMapInfoRequest} req
+     * @param {function(string, DescribeMapInfoResponse):void} cb
+     * @public
+     */
+    DescribeMapInfo(req, cb) {
+        let resp = new DescribeMapInfoResponse();
+        this.request("DescribeMapInfo", req, resp, cb);
+    }
+
+    /**
+     * DescribePayType 用于查询用户的计费类型，计费周期等信息。
+     * @param {DescribePayTypeRequest} req
+     * @param {function(string, DescribePayTypeResponse):void} cb
+     * @public
+     */
+    DescribePayType(req, cb) {
+        let resp = new DescribePayTypeResponse();
+        this.request("DescribePayType", req, resp, cb);
     }
 
     /**

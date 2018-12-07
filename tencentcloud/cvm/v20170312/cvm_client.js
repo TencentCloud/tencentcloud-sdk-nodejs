@@ -30,7 +30,7 @@ const ModifyInstancesChargeTypeResponse = models.ModifyInstancesChargeTypeRespon
 const CreateDisasterRecoverGroupResponse = models.CreateDisasterRecoverGroupResponse;
 const InquiryPriceResetInstancesInternetMaxBandwidthResponse = models.InquiryPriceResetInstancesInternetMaxBandwidthResponse;
 const ModifyKeyPairAttributeRequest = models.ModifyKeyPairAttributeRequest;
-const DescribeImportImageOsResponse = models.DescribeImportImageOsResponse;
+const AssociateSecurityGroupsRequest = models.AssociateSecurityGroupsRequest;
 const ResetInstancesTypeRequest = models.ResetInstancesTypeRequest;
 const InquiryPriceResetInstanceRequest = models.InquiryPriceResetInstanceRequest;
 const RunInstancesRequest = models.RunInstancesRequest;
@@ -51,7 +51,7 @@ const DescribeInstancesStatusResponse = models.DescribeInstancesStatusResponse;
 const ZoneInfo = models.ZoneInfo;
 const InquiryPriceModifyInstancesChargeTypeResponse = models.InquiryPriceModifyInstancesChargeTypeResponse;
 const DescribeKeyPairsResponse = models.DescribeKeyPairsResponse;
-const Tag = models.Tag;
+const ResetInstancesPasswordRequest = models.ResetInstancesPasswordRequest;
 const InternetChargeTypeConfig = models.InternetChargeTypeConfig;
 const DescribeImagesResponse = models.DescribeImagesResponse;
 const ModifyInstancesVpcAttributeResponse = models.ModifyInstancesVpcAttributeResponse;
@@ -72,24 +72,25 @@ const ModifyInstancesAttributeRequest = models.ModifyInstancesAttributeRequest;
 const RenewHostsRequest = models.RenewHostsRequest;
 const DescribeZonesRequest = models.DescribeZonesRequest;
 const StartInstancesRequest = models.StartInstancesRequest;
+const Tag = models.Tag;
 const DescribeInstanceInternetBandwidthConfigsResponse = models.DescribeInstanceInternetBandwidthConfigsResponse;
 const Placement = models.Placement;
 const DescribeDisasterRecoverGroupsRequest = models.DescribeDisasterRecoverGroupsRequest;
 const SyncImagesRequest = models.SyncImagesRequest;
 const DisassociateInstancesKeyPairsRequest = models.DisassociateInstancesKeyPairsRequest;
 const DescribeImageQuotaRequest = models.DescribeImageQuotaRequest;
-const InstanceFamilyConfig = models.InstanceFamilyConfig;
+const DescribeInstanceFamilyConfigsResponse = models.DescribeInstanceFamilyConfigsResponse;
 const CreateImageResponse = models.CreateImageResponse;
 const StopInstancesResponse = models.StopInstancesResponse;
 const InstanceMarketOptionsRequest = models.InstanceMarketOptionsRequest;
 const InquiryPriceResetInstancesInternetMaxBandwidthRequest = models.InquiryPriceResetInstancesInternetMaxBandwidthRequest;
 const ResetInstancesPasswordResponse = models.ResetInstancesPasswordResponse;
 const InquiryPriceRunInstancesRequest = models.InquiryPriceRunInstancesRequest;
-const InquiryPriceRunInstancesResponse = models.InquiryPriceRunInstancesResponse;
+const Image = models.Image;
 const DescribeDisasterRecoverGroupQuotaResponse = models.DescribeDisasterRecoverGroupQuotaResponse;
-const DescribeInstanceFamilyConfigsResponse = models.DescribeInstanceFamilyConfigsResponse;
 const DescribeRegionsRequest = models.DescribeRegionsRequest;
 const CreateDisasterRecoverGroupRequest = models.CreateDisasterRecoverGroupRequest;
+const DescribeImportImageOsResponse = models.DescribeImportImageOsResponse;
 const DataDisk = models.DataDisk;
 const DescribeKeyPairsRequest = models.DescribeKeyPairsRequest;
 const DeleteDisasterRecoverGroupsResponse = models.DeleteDisasterRecoverGroupsResponse;
@@ -106,14 +107,15 @@ const RunSecurityServiceEnabled = models.RunSecurityServiceEnabled;
 const ActionTimer = models.ActionTimer;
 const TagSpecification = models.TagSpecification;
 const ResetInstancesInternetMaxBandwidthRequest = models.ResetInstancesInternetMaxBandwidthRequest;
-const AllocateHostsResponse = models.AllocateHostsResponse;
+const InstanceFamilyConfig = models.InstanceFamilyConfig;
+const AssociateSecurityGroupsResponse = models.AssociateSecurityGroupsResponse;
 const ImportImageRequest = models.ImportImageRequest;
 const SpotMarketOptions = models.SpotMarketOptions;
 const DescribeImportImageOsRequest = models.DescribeImportImageOsRequest;
 const CreateKeyPairRequest = models.CreateKeyPairRequest;
 const InstanceStatus = models.InstanceStatus;
 const InquiryPriceRenewInstancesResponse = models.InquiryPriceRenewInstancesResponse;
-const ResetInstancesPasswordRequest = models.ResetInstancesPasswordRequest;
+const AllocateHostsResponse = models.AllocateHostsResponse;
 const DescribeImageSharePermissionRequest = models.DescribeImageSharePermissionRequest;
 const DisasterRecoverGroup = models.DisasterRecoverGroup;
 const InquiryPriceResetInstanceResponse = models.InquiryPriceResetInstanceResponse;
@@ -130,7 +132,7 @@ const DescribeZonesResponse = models.DescribeZonesResponse;
 const ItemPrice = models.ItemPrice;
 const InstanceTypeQuotaItem = models.InstanceTypeQuotaItem;
 const ImageOsList = models.ImageOsList;
-const Image = models.Image;
+const InquiryPriceRunInstancesResponse = models.InquiryPriceRunInstancesResponse;
 const DescribeHostsRequest = models.DescribeHostsRequest;
 const ModifyInstancesRenewFlagResponse = models.ModifyInstancesRenewFlagResponse;
 const DescribeInstancesStatusRequest = models.DescribeInstancesStatusRequest;
@@ -153,6 +155,8 @@ const DescribeImagesRequest = models.DescribeImagesRequest;
 const ModifyImageAttributeRequest = models.ModifyImageAttributeRequest;
 const ResizeInstanceDisksResponse = models.ResizeInstanceDisksResponse;
 const ModifyInstancesRenewFlagRequest = models.ModifyInstancesRenewFlagRequest;
+const DisassociateSecurityGroupsRequest = models.DisassociateSecurityGroupsRequest;
+const ModifyHostsAttributeRequest = models.ModifyHostsAttributeRequest;
 const ImportKeyPairRequest = models.ImportKeyPairRequest;
 const KeyPair = models.KeyPair;
 const RenewInstancesResponse = models.RenewInstancesResponse;
@@ -169,7 +173,7 @@ const DescribeInstanceInternetBandwidthConfigsRequest = models.DescribeInstanceI
 const StorageBlock = models.StorageBlock;
 const InternetAccessible = models.InternetAccessible;
 const RenewHostsResponse = models.RenewHostsResponse;
-const ModifyHostsAttributeRequest = models.ModifyHostsAttributeRequest;
+const DisassociateSecurityGroupsResponse = models.DisassociateSecurityGroupsResponse;
 const ModifyInstancesProjectResponse = models.ModifyInstancesProjectResponse;
 const InstanceChargePrepaid = models.InstanceChargePrepaid;
 const Price = models.Price;
@@ -674,6 +678,17 @@ class CvmClient extends AbstractClient {
     }
 
     /**
+     * 本接口 (AssociateSecurityGroups) 用于绑定安全组到指定实例。
+     * @param {AssociateSecurityGroupsRequest} req
+     * @param {function(string, AssociateSecurityGroupsResponse):void} cb
+     * @public
+     */
+    AssociateSecurityGroups(req, cb) {
+        let resp = new AssociateSecurityGroupsResponse();
+        this.request("AssociateSecurityGroups", req, resp, cb);
+    }
+
+    /**
      * 本接口 (ResetInstancesType) 用于调整实例的机型。
 * 目前只支持[系统盘类型](/document/api/213/9452#block_device)是`CLOUD_BASIC`、`CLOUD_PREMIUM`、`CLOUD_SSD`类型的实例使用该接口进行机型调整。
 * 目前不支持[CDH](https://cloud.tencent.com/document/product/416)实例使用该接口调整机型。* 目前不支持跨机型系统来调整机型，即使用该接口时指定的`InstanceType`和实例原来的机型需要属于同一系列。* 对于包年包月实例，使用该接口会涉及扣费，请确保账户余额充足。可通过[`DescribeAccountBalance`](https://cloud.tencent.com/document/product/378/4397)接口查询账户余额。
@@ -996,6 +1011,17 @@ https://img.qcloud.com/qcloud/app/active_vnc/index.html?InstanceVncUrl=wss%3A%2F
     DescribeInstanceTypeConfigs(req, cb) {
         let resp = new DescribeInstanceTypeConfigsResponse();
         this.request("DescribeInstanceTypeConfigs", req, resp, cb);
+    }
+
+    /**
+     * 本接口 (DisassociateSecurityGroups) 用于解绑实例的指定安全组。
+     * @param {DisassociateSecurityGroupsRequest} req
+     * @param {function(string, DisassociateSecurityGroupsResponse):void} cb
+     * @public
+     */
+    DisassociateSecurityGroups(req, cb) {
+        let resp = new DisassociateSecurityGroupsResponse();
+        this.request("DisassociateSecurityGroups", req, resp, cb);
     }
 
 

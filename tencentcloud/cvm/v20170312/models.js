@@ -566,30 +566,24 @@ class ModifyKeyPairAttributeRequest extends  AbstractModel {
 }
 
 /**
- * DescribeImportImageOs返回参数结构体
+ * AssociateSecurityGroups请求参数结构体
  * @class
  */
-class DescribeImportImageOsResponse extends  AbstractModel {
+class AssociateSecurityGroupsRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 支持的导入镜像的操作系统类型。
-         * @type {ImageOsList || null}
+         * 要绑定的`安全组ID`，类似sg-efil73jd，支持绑定多个安全组。
+         * @type {Array.<string> || null}
          */
-        this.ImportImageOsListSupported = null;
+        this.SecurityGroupIds = null;
 
         /**
-         * 支持的导入镜像的操作系统版本。
-         * @type {Array.<OsVersion> || null}
+         * 被绑定的`实例ID`，类似ins-lesecurk，只支持指定单个实例。
+         * @type {Array.<string> || null}
          */
-        this.ImportImageOsVersionSet = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
+        this.InstanceIds = null;
 
     }
 
@@ -600,22 +594,8 @@ class DescribeImportImageOsResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.ImportImageOsListSupported) {
-            let obj = new ImageOsList();
-            obj.deserialize(params.ImportImageOsListSupported)
-            this.ImportImageOsListSupported = obj;
-        }
-
-        if (params.ImportImageOsVersionSet) {
-            this.ImportImageOsVersionSet = new Array();
-            for (let z in params.ImportImageOsVersionSet) {
-                let obj = new OsVersion();
-                obj.deserialize(params.ImportImageOsVersionSet[z]);
-                this.ImportImageOsVersionSet.push(obj);
-            }
-        }
-        this.RequestId = params.RequestId || null;
+        this.SecurityGroupIds = params.SecurityGroupIds || null;
+        this.InstanceIds = params.InstanceIds || null;
 
     }
 }
@@ -1516,7 +1496,7 @@ class AssociateInstancesKeyPairsRequest extends  AbstractModel {
         this.KeyIds = null;
 
         /**
-         * 是否对运行中的实例选择强制关机。建议对运行中的实例先手动关机，然后再重置用户密码。取值范围：<br><li>TRUE：表示在正常关机失败后进行强制关机。<br><li>FALSE：表示在正常关机失败后不进行强制关机。<br>默认取值：FALSE。
+         * 是否对运行中的实例选择强制关机。建议对运行中的实例先手动关机，然后再绑定密钥。取值范围：<br><li>TRUE：表示在正常关机失败后进行强制关机。<br><li>FALSE：表示在正常关机失败后不进行强制关机。<br>默认取值：FALSE。
          * @type {boolean || null}
          */
         this.ForceStop = null;
@@ -1762,24 +1742,36 @@ class DescribeKeyPairsResponse extends  AbstractModel {
 }
 
 /**
- * 标签键值对
+ * ResetInstancesPassword请求参数结构体
  * @class
  */
-class Tag extends  AbstractModel {
+class ResetInstancesPasswordRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 标签键
-         * @type {string || null}
+         * 一个或多个待操作的实例ID。可通过[`DescribeInstances`](https://cloud.tencent.com/document/api/213/15728) API返回值中的`InstanceId`获取。每次请求允许操作的实例数量上限是100。
+         * @type {Array.<string> || null}
          */
-        this.Key = null;
+        this.InstanceIds = null;
 
         /**
-         * 标签值
+         * 实例登录密码。不同操作系统类型密码复杂度限制不一样，具体如下：<br><li>`Linux`实例密码必须8到16位，至少包括两项`[a-z，A-Z]、[0-9]`和`[( ) ~ ~ ! @ # $ % ^ & * - + = _ | { } [ ] : ; ' < > , . ? /]`中的符号。密码不允许以`/`符号开头。<br><li>`Windows`实例密码必须12到16位，至少包括三项`[a-z]，[A-Z]，[0-9]`和`[( ) ~ ~ ! @ # $ % ^ & * - + = _ | { } [ ] : ; ' < > , . ? /]`中的符号。密码不允许以`/`符号开头。<br><li>如果实例即包含`Linux`实例又包含`Windows`实例，则密码复杂度限制按照`Windows`实例的限制。
          * @type {string || null}
          */
-        this.Value = null;
+        this.Password = null;
+
+        /**
+         * 待重置密码的实例操作系统用户名。不得超过64个字符。
+         * @type {string || null}
+         */
+        this.UserName = null;
+
+        /**
+         * 是否对运行中的实例选择强制关机。建议对运行中的实例先手动关机，然后再重置用户密码。取值范围：<br><li>TRUE：表示在正常关机失败后进行强制关机<br><li>FALSE：表示在正常关机失败后不进行强制关机<br><br>默认取值：FALSE。<br><br>强制关机的效果等同于关闭物理计算机的电源开关。强制关机可能会导致数据丢失或文件系统损坏，请仅在服务器不能正常关机时使用。
+         * @type {boolean || null}
+         */
+        this.ForceStop = null;
 
     }
 
@@ -1790,8 +1782,10 @@ class Tag extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Key = params.Key || null;
-        this.Value = params.Value || null;
+        this.InstanceIds = params.InstanceIds || null;
+        this.Password = params.Password || null;
+        this.UserName = params.UserName || null;
+        this.ForceStop = params.ForceStop || null;
 
     }
 }
@@ -2494,6 +2488,41 @@ class StartInstancesRequest extends  AbstractModel {
 }
 
 /**
+ * 标签键值对
+ * @class
+ */
+class Tag extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 标签键
+         * @type {string || null}
+         */
+        this.Key = null;
+
+        /**
+         * 标签值
+         * @type {string || null}
+         */
+        this.Value = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Key = params.Key || null;
+        this.Value = params.Value || null;
+
+    }
+}
+
+/**
  * DescribeInstanceInternetBandwidthConfigs返回参数结构体
  * @class
  */
@@ -2683,7 +2712,7 @@ class DisassociateInstancesKeyPairsRequest extends  AbstractModel {
         this.KeyIds = null;
 
         /**
-         * 是否对运行中的实例选择强制关机。建议对运行中的实例先手动关机，然后再重置用户密码。取值范围：<br><li>TRUE：表示在正常关机失败后进行强制关机。<br><li>FALSE：表示在正常关机失败后不进行强制关机。<br><br>默认取值：FALSE。
+         * 是否对运行中的实例选择强制关机。建议对运行中的实例先手动关机，然后再解绑密钥。取值范围：<br><li>TRUE：表示在正常关机失败后进行强制关机。<br><li>FALSE：表示在正常关机失败后不进行强制关机。<br><br>默认取值：FALSE。
          * @type {boolean || null}
          */
         this.ForceStop = null;
@@ -2726,25 +2755,24 @@ class DescribeImageQuotaRequest extends  AbstractModel {
 }
 
 /**
- * 描述实例的机型族配置信息
-形如：{'InstanceFamilyName': '标准型S1', 'InstanceFamily': 'S1'}、{'InstanceFamilyName': '网络优化型N1', 'InstanceFamily': 'N1'}、{'InstanceFamilyName': '高IO型I1', 'InstanceFamily': 'I1'}等。
+ * DescribeInstanceFamilyConfigs返回参数结构体
  * @class
  */
-class InstanceFamilyConfig extends  AbstractModel {
+class DescribeInstanceFamilyConfigsResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 机型族名称的中文全称。
-         * @type {string || null}
+         * 实例机型组配置的列表信息
+         * @type {Array.<InstanceFamilyConfig> || null}
          */
-        this.InstanceFamilyName = null;
+        this.InstanceFamilyConfigSet = null;
 
         /**
-         * 机型族名称的英文简称。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.InstanceFamily = null;
+        this.RequestId = null;
 
     }
 
@@ -2755,8 +2783,16 @@ class InstanceFamilyConfig extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceFamilyName = params.InstanceFamilyName || null;
-        this.InstanceFamily = params.InstanceFamily || null;
+
+        if (params.InstanceFamilyConfigSet) {
+            this.InstanceFamilyConfigSet = new Array();
+            for (let z in params.InstanceFamilyConfigSet) {
+                let obj = new InstanceFamilyConfig();
+                obj.deserialize(params.InstanceFamilyConfigSet[z]);
+                this.InstanceFamilyConfigSet.push(obj);
+            }
+        }
+        this.RequestId = params.RequestId || null;
 
     }
 }
@@ -3143,24 +3179,96 @@ class InquiryPriceRunInstancesRequest extends  AbstractModel {
 }
 
 /**
- * InquiryPriceRunInstances返回参数结构体
+ * 一个关于镜像详细信息的结构体，主要包括镜像的主要状态与属性。
  * @class
  */
-class InquiryPriceRunInstancesResponse extends  AbstractModel {
+class Image extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 该参数表示对应配置实例的价格。
-         * @type {Price || null}
-         */
-        this.Price = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * 镜像ID
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.ImageId = null;
+
+        /**
+         * 镜像操作系统
+         * @type {string || null}
+         */
+        this.OsName = null;
+
+        /**
+         * 镜像类型
+         * @type {string || null}
+         */
+        this.ImageType = null;
+
+        /**
+         * 镜像创建时间
+         * @type {string || null}
+         */
+        this.CreatedTime = null;
+
+        /**
+         * 镜像名称
+         * @type {string || null}
+         */
+        this.ImageName = null;
+
+        /**
+         * 镜像描述
+         * @type {string || null}
+         */
+        this.ImageDescription = null;
+
+        /**
+         * 镜像大小
+         * @type {number || null}
+         */
+        this.ImageSize = null;
+
+        /**
+         * 镜像架构
+         * @type {string || null}
+         */
+        this.Architecture = null;
+
+        /**
+         * 镜像状态
+         * @type {string || null}
+         */
+        this.ImageState = null;
+
+        /**
+         * 镜像来源平台
+         * @type {string || null}
+         */
+        this.Platform = null;
+
+        /**
+         * 镜像创建者
+         * @type {string || null}
+         */
+        this.ImageCreator = null;
+
+        /**
+         * 镜像来源
+         * @type {string || null}
+         */
+        this.ImageSource = null;
+
+        /**
+         * 同步百分比
+         * @type {number || null}
+         */
+        this.SyncPercent = null;
+
+        /**
+         * 镜像是否支持cloud-init
+         * @type {boolean || null}
+         */
+        this.IsSupportCloudinit = null;
 
     }
 
@@ -3171,13 +3279,20 @@ class InquiryPriceRunInstancesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.Price) {
-            let obj = new Price();
-            obj.deserialize(params.Price)
-            this.Price = obj;
-        }
-        this.RequestId = params.RequestId || null;
+        this.ImageId = params.ImageId || null;
+        this.OsName = params.OsName || null;
+        this.ImageType = params.ImageType || null;
+        this.CreatedTime = params.CreatedTime || null;
+        this.ImageName = params.ImageName || null;
+        this.ImageDescription = params.ImageDescription || null;
+        this.ImageSize = params.ImageSize || null;
+        this.Architecture = params.Architecture || null;
+        this.ImageState = params.ImageState || null;
+        this.Platform = params.Platform || null;
+        this.ImageCreator = params.ImageCreator || null;
+        this.ImageSource = params.ImageSource || null;
+        this.SyncPercent = params.SyncPercent || null;
+        this.IsSupportCloudinit = params.IsSupportCloudinit || null;
 
     }
 }
@@ -3246,49 +3361,6 @@ class DescribeDisasterRecoverGroupQuotaResponse extends  AbstractModel {
 }
 
 /**
- * DescribeInstanceFamilyConfigs返回参数结构体
- * @class
- */
-class DescribeInstanceFamilyConfigsResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 实例机型组配置的列表信息
-         * @type {Array.<InstanceFamilyConfig> || null}
-         */
-        this.InstanceFamilyConfigSet = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-        if (params.InstanceFamilyConfigSet) {
-            this.InstanceFamilyConfigSet = new Array();
-            for (let z in params.InstanceFamilyConfigSet) {
-                let obj = new InstanceFamilyConfig();
-                obj.deserialize(params.InstanceFamilyConfigSet[z]);
-                this.InstanceFamilyConfigSet.push(obj);
-            }
-        }
-        this.RequestId = params.RequestId || null;
-
-    }
-}
-
-/**
  * DescribeRegions请求参数结构体
  * @class
  */
@@ -3347,6 +3419,61 @@ class CreateDisasterRecoverGroupRequest extends  AbstractModel {
         this.Name = params.Name || null;
         this.Type = params.Type || null;
         this.ClientToken = params.ClientToken || null;
+
+    }
+}
+
+/**
+ * DescribeImportImageOs返回参数结构体
+ * @class
+ */
+class DescribeImportImageOsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 支持的导入镜像的操作系统类型。
+         * @type {ImageOsList || null}
+         */
+        this.ImportImageOsListSupported = null;
+
+        /**
+         * 支持的导入镜像的操作系统版本。
+         * @type {Array.<OsVersion> || null}
+         */
+        this.ImportImageOsVersionSet = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.ImportImageOsListSupported) {
+            let obj = new ImageOsList();
+            obj.deserialize(params.ImportImageOsListSupported)
+            this.ImportImageOsListSupported = obj;
+        }
+
+        if (params.ImportImageOsVersionSet) {
+            this.ImportImageOsVersionSet = new Array();
+            for (let z in params.ImportImageOsVersionSet) {
+                let obj = new OsVersion();
+                obj.deserialize(params.ImportImageOsVersionSet[z]);
+                this.ImportImageOsVersionSet.push(obj);
+            }
+        }
+        this.RequestId = params.RequestId || null;
 
     }
 }
@@ -3709,16 +3836,16 @@ class CreateImageRequest extends  AbstractModel {
         super();
 
         /**
-         * 需要制作镜像的实例ID
-         * @type {string || null}
-         */
-        this.InstanceId = null;
-
-        /**
          * 镜像名称
          * @type {string || null}
          */
         this.ImageName = null;
+
+        /**
+         * 需要制作镜像的实例ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
 
         /**
          * 镜像描述
@@ -3745,6 +3872,18 @@ class CreateImageRequest extends  AbstractModel {
         this.Reboot = null;
 
         /**
+         * 实例需要制作镜像的数据盘Id
+         * @type {Array.<string> || null}
+         */
+        this.DataDiskIds = null;
+
+        /**
+         * 需要制作镜像的快照Id,必须包含一个系统盘快照
+         * @type {Array.<string> || null}
+         */
+        this.SnapshotIds = null;
+
+        /**
          * DryRun
          * @type {boolean || null}
          */
@@ -3759,12 +3898,14 @@ class CreateImageRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = params.InstanceId || null;
         this.ImageName = params.ImageName || null;
+        this.InstanceId = params.InstanceId || null;
         this.ImageDescription = params.ImageDescription || null;
         this.ForcePoweroff = params.ForcePoweroff || null;
         this.Sysprep = params.Sysprep || null;
         this.Reboot = params.Reboot || null;
+        this.DataDiskIds = params.DataDiskIds || null;
+        this.SnapshotIds = params.SnapshotIds || null;
         this.DryRun = params.DryRun || null;
 
     }
@@ -4346,18 +4487,48 @@ class ResetInstancesInternetMaxBandwidthRequest extends  AbstractModel {
 }
 
 /**
- * AllocateHosts返回参数结构体
+ * 描述实例的机型族配置信息
+形如：{'InstanceFamilyName': '标准型S1', 'InstanceFamily': 'S1'}、{'InstanceFamilyName': '网络优化型N1', 'InstanceFamily': 'N1'}、{'InstanceFamilyName': '高IO型I1', 'InstanceFamily': 'I1'}等。
  * @class
  */
-class AllocateHostsResponse extends  AbstractModel {
+class InstanceFamilyConfig extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 新创建云子机的实例id列表。
-         * @type {Array.<string> || null}
+         * 机型族名称的中文全称。
+         * @type {string || null}
          */
-        this.HostIdSet = null;
+        this.InstanceFamilyName = null;
+
+        /**
+         * 机型族名称的英文简称。
+         * @type {string || null}
+         */
+        this.InstanceFamily = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceFamilyName = params.InstanceFamilyName || null;
+        this.InstanceFamily = params.InstanceFamily || null;
+
+    }
+}
+
+/**
+ * AssociateSecurityGroups返回参数结构体
+ * @class
+ */
+class AssociateSecurityGroupsResponse extends  AbstractModel {
+    constructor(){
+        super();
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -4374,7 +4545,6 @@ class AllocateHostsResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.HostIdSet = params.HostIdSet || null;
         this.RequestId = params.RequestId || null;
 
     }
@@ -4627,36 +4797,24 @@ class InquiryPriceRenewInstancesResponse extends  AbstractModel {
 }
 
 /**
- * ResetInstancesPassword请求参数结构体
+ * AllocateHosts返回参数结构体
  * @class
  */
-class ResetInstancesPasswordRequest extends  AbstractModel {
+class AllocateHostsResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 一个或多个待操作的实例ID。可通过[`DescribeInstances`](https://cloud.tencent.com/document/api/213/15728) API返回值中的`InstanceId`获取。每次请求允许操作的实例数量上限是100。
+         * 新创建云子机的实例id列表。
          * @type {Array.<string> || null}
          */
-        this.InstanceIds = null;
+        this.HostIdSet = null;
 
         /**
-         * 实例登录密码。不同操作系统类型密码复杂度限制不一样，具体如下：<br><li>`Linux`实例密码必须8到16位，至少包括两项`[a-z，A-Z]、[0-9]`和`[( ) ~ ~ ! @ # $ % ^ & * - + = _ | { } [ ] : ; ' < > , . ? /]`中的符号。密码不允许以`/`符号开头。<br><li>`Windows`实例密码必须12到16位，至少包括三项`[a-z]，[A-Z]，[0-9]`和`[( ) ~ ~ ! @ # $ % ^ & * - + = _ | { } [ ] : ; ' < > , . ? /]`中的符号。密码不允许以`/`符号开头。<br><li>如果实例即包含`Linux`实例又包含`Windows`实例，则密码复杂度限制按照`Windows`实例的限制。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.Password = null;
-
-        /**
-         * 待重置密码的实例操作系统用户名。不得超过64个字符。
-         * @type {string || null}
-         */
-        this.UserName = null;
-
-        /**
-         * 是否对运行中的实例选择强制关机。建议对运行中的实例先手动关机，然后再重置用户密码。取值范围：<br><li>TRUE：表示在正常关机失败后进行强制关机<br><li>FALSE：表示在正常关机失败后不进行强制关机<br><br>默认取值：FALSE。<br><br>强制关机的效果等同于关闭物理计算机的电源开关。强制关机可能会导致数据丢失或文件系统损坏，请仅在服务器不能正常关机时使用。
-         * @type {boolean || null}
-         */
-        this.ForceStop = null;
+        this.RequestId = null;
 
     }
 
@@ -4667,10 +4825,8 @@ class ResetInstancesPasswordRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceIds = params.InstanceIds || null;
-        this.Password = params.Password || null;
-        this.UserName = params.UserName || null;
-        this.ForceStop = params.ForceStop || null;
+        this.HostIdSet = params.HostIdSet || null;
+        this.RequestId = params.RequestId || null;
 
     }
 }
@@ -5399,96 +5555,24 @@ class ImageOsList extends  AbstractModel {
 }
 
 /**
- * 一个关于镜像详细信息的结构体，主要包括镜像的主要状态与属性。
+ * InquiryPriceRunInstances返回参数结构体
  * @class
  */
-class Image extends  AbstractModel {
+class InquiryPriceRunInstancesResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 镜像ID
+         * 该参数表示对应配置实例的价格。
+         * @type {Price || null}
+         */
+        this.Price = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.ImageId = null;
-
-        /**
-         * 镜像操作系统
-         * @type {string || null}
-         */
-        this.OsName = null;
-
-        /**
-         * 镜像类型
-         * @type {string || null}
-         */
-        this.ImageType = null;
-
-        /**
-         * 镜像创建时间
-         * @type {string || null}
-         */
-        this.CreatedTime = null;
-
-        /**
-         * 镜像名称
-         * @type {string || null}
-         */
-        this.ImageName = null;
-
-        /**
-         * 镜像描述
-         * @type {string || null}
-         */
-        this.ImageDescription = null;
-
-        /**
-         * 镜像大小
-         * @type {number || null}
-         */
-        this.ImageSize = null;
-
-        /**
-         * 镜像架构
-         * @type {string || null}
-         */
-        this.Architecture = null;
-
-        /**
-         * 镜像状态
-         * @type {string || null}
-         */
-        this.ImageState = null;
-
-        /**
-         * 镜像来源平台
-         * @type {string || null}
-         */
-        this.Platform = null;
-
-        /**
-         * 镜像创建者
-         * @type {string || null}
-         */
-        this.ImageCreator = null;
-
-        /**
-         * 镜像来源
-         * @type {string || null}
-         */
-        this.ImageSource = null;
-
-        /**
-         * 同步百分比
-         * @type {number || null}
-         */
-        this.SyncPercent = null;
-
-        /**
-         * 镜像是否支持cloud-init
-         * @type {boolean || null}
-         */
-        this.IsSupportCloudinit = null;
+        this.RequestId = null;
 
     }
 
@@ -5499,20 +5583,13 @@ class Image extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ImageId = params.ImageId || null;
-        this.OsName = params.OsName || null;
-        this.ImageType = params.ImageType || null;
-        this.CreatedTime = params.CreatedTime || null;
-        this.ImageName = params.ImageName || null;
-        this.ImageDescription = params.ImageDescription || null;
-        this.ImageSize = params.ImageSize || null;
-        this.Architecture = params.Architecture || null;
-        this.ImageState = params.ImageState || null;
-        this.Platform = params.Platform || null;
-        this.ImageCreator = params.ImageCreator || null;
-        this.ImageSource = params.ImageSource || null;
-        this.SyncPercent = params.SyncPercent || null;
-        this.IsSupportCloudinit = params.IsSupportCloudinit || null;
+
+        if (params.Price) {
+            let obj = new Price();
+            obj.deserialize(params.Price)
+            this.Price = obj;
+        }
+        this.RequestId = params.RequestId || null;
 
     }
 }
@@ -6378,6 +6455,83 @@ class ModifyInstancesRenewFlagRequest extends  AbstractModel {
 }
 
 /**
+ * DisassociateSecurityGroups请求参数结构体
+ * @class
+ */
+class DisassociateSecurityGroupsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 要解绑的`安全组ID`，类似sg-efil73jd，支持解绑多个安全组。
+         * @type {Array.<string> || null}
+         */
+        this.SecurityGroupIds = null;
+
+        /**
+         * 被解绑的`实例ID`，类似ins-lesecurk 。
+         * @type {Array.<string> || null}
+         */
+        this.InstanceIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SecurityGroupIds = params.SecurityGroupIds || null;
+        this.InstanceIds = params.InstanceIds || null;
+
+    }
+}
+
+/**
+ * ModifyHostsAttribute请求参数结构体
+ * @class
+ */
+class ModifyHostsAttributeRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 一个或多个待操作的CDH实例ID。
+         * @type {Array.<string> || null}
+         */
+        this.HostIds = null;
+
+        /**
+         * CDH实例显示名称。可任意命名，但不得超过60个字符。
+         * @type {string || null}
+         */
+        this.HostName = null;
+
+        /**
+         * 自动续费标识。取值范围：<br><li>NOTIFY_AND_AUTO_RENEW：通知过期且自动续费<br><li>NOTIFY_AND_MANUAL_RENEW：通知过期不自动续费<br><li>DISABLE_NOTIFY_AND_MANUAL_RENEW：不通知过期不自动续费<br><br>若该参数指定为NOTIFY_AND_AUTO_RENEW，在账户余额充足的情况下，实例到期后将按月自动续费。
+         * @type {string || null}
+         */
+        this.RenewFlag = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.HostIds = params.HostIds || null;
+        this.HostName = params.HostName || null;
+        this.RenewFlag = params.RenewFlag || null;
+
+    }
+}
+
+/**
  * ImportKeyPair请求参数结构体
  * @class
  */
@@ -7007,30 +7161,18 @@ class RenewHostsResponse extends  AbstractModel {
 }
 
 /**
- * ModifyHostsAttribute请求参数结构体
+ * DisassociateSecurityGroups返回参数结构体
  * @class
  */
-class ModifyHostsAttributeRequest extends  AbstractModel {
+class DisassociateSecurityGroupsResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 一个或多个待操作的CDH实例ID。
-         * @type {Array.<string> || null}
-         */
-        this.HostIds = null;
-
-        /**
-         * CDH实例显示名称。可任意命名，但不得超过60个字符。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.HostName = null;
-
-        /**
-         * 自动续费标识。取值范围：<br><li>NOTIFY_AND_AUTO_RENEW：通知过期且自动续费<br><li>NOTIFY_AND_MANUAL_RENEW：通知过期不自动续费<br><li>DISABLE_NOTIFY_AND_MANUAL_RENEW：不通知过期不自动续费<br><br>若该参数指定为NOTIFY_AND_AUTO_RENEW，在账户余额充足的情况下，实例到期后将按月自动续费。
-         * @type {string || null}
-         */
-        this.RenewFlag = null;
+        this.RequestId = null;
 
     }
 
@@ -7041,9 +7183,7 @@ class ModifyHostsAttributeRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.HostIds = params.HostIds || null;
-        this.HostName = params.HostName || null;
-        this.RenewFlag = params.RenewFlag || null;
+        this.RequestId = params.RequestId || null;
 
     }
 }
@@ -7171,7 +7311,7 @@ module.exports = {
     CreateDisasterRecoverGroupResponse: CreateDisasterRecoverGroupResponse,
     InquiryPriceResetInstancesInternetMaxBandwidthResponse: InquiryPriceResetInstancesInternetMaxBandwidthResponse,
     ModifyKeyPairAttributeRequest: ModifyKeyPairAttributeRequest,
-    DescribeImportImageOsResponse: DescribeImportImageOsResponse,
+    AssociateSecurityGroupsRequest: AssociateSecurityGroupsRequest,
     ResetInstancesTypeRequest: ResetInstancesTypeRequest,
     InquiryPriceResetInstanceRequest: InquiryPriceResetInstanceRequest,
     RunInstancesRequest: RunInstancesRequest,
@@ -7192,7 +7332,7 @@ module.exports = {
     ZoneInfo: ZoneInfo,
     InquiryPriceModifyInstancesChargeTypeResponse: InquiryPriceModifyInstancesChargeTypeResponse,
     DescribeKeyPairsResponse: DescribeKeyPairsResponse,
-    Tag: Tag,
+    ResetInstancesPasswordRequest: ResetInstancesPasswordRequest,
     InternetChargeTypeConfig: InternetChargeTypeConfig,
     DescribeImagesResponse: DescribeImagesResponse,
     ModifyInstancesVpcAttributeResponse: ModifyInstancesVpcAttributeResponse,
@@ -7213,24 +7353,25 @@ module.exports = {
     RenewHostsRequest: RenewHostsRequest,
     DescribeZonesRequest: DescribeZonesRequest,
     StartInstancesRequest: StartInstancesRequest,
+    Tag: Tag,
     DescribeInstanceInternetBandwidthConfigsResponse: DescribeInstanceInternetBandwidthConfigsResponse,
     Placement: Placement,
     DescribeDisasterRecoverGroupsRequest: DescribeDisasterRecoverGroupsRequest,
     SyncImagesRequest: SyncImagesRequest,
     DisassociateInstancesKeyPairsRequest: DisassociateInstancesKeyPairsRequest,
     DescribeImageQuotaRequest: DescribeImageQuotaRequest,
-    InstanceFamilyConfig: InstanceFamilyConfig,
+    DescribeInstanceFamilyConfigsResponse: DescribeInstanceFamilyConfigsResponse,
     CreateImageResponse: CreateImageResponse,
     StopInstancesResponse: StopInstancesResponse,
     InstanceMarketOptionsRequest: InstanceMarketOptionsRequest,
     InquiryPriceResetInstancesInternetMaxBandwidthRequest: InquiryPriceResetInstancesInternetMaxBandwidthRequest,
     ResetInstancesPasswordResponse: ResetInstancesPasswordResponse,
     InquiryPriceRunInstancesRequest: InquiryPriceRunInstancesRequest,
-    InquiryPriceRunInstancesResponse: InquiryPriceRunInstancesResponse,
+    Image: Image,
     DescribeDisasterRecoverGroupQuotaResponse: DescribeDisasterRecoverGroupQuotaResponse,
-    DescribeInstanceFamilyConfigsResponse: DescribeInstanceFamilyConfigsResponse,
     DescribeRegionsRequest: DescribeRegionsRequest,
     CreateDisasterRecoverGroupRequest: CreateDisasterRecoverGroupRequest,
+    DescribeImportImageOsResponse: DescribeImportImageOsResponse,
     DataDisk: DataDisk,
     DescribeKeyPairsRequest: DescribeKeyPairsRequest,
     DeleteDisasterRecoverGroupsResponse: DeleteDisasterRecoverGroupsResponse,
@@ -7247,14 +7388,15 @@ module.exports = {
     ActionTimer: ActionTimer,
     TagSpecification: TagSpecification,
     ResetInstancesInternetMaxBandwidthRequest: ResetInstancesInternetMaxBandwidthRequest,
-    AllocateHostsResponse: AllocateHostsResponse,
+    InstanceFamilyConfig: InstanceFamilyConfig,
+    AssociateSecurityGroupsResponse: AssociateSecurityGroupsResponse,
     ImportImageRequest: ImportImageRequest,
     SpotMarketOptions: SpotMarketOptions,
     DescribeImportImageOsRequest: DescribeImportImageOsRequest,
     CreateKeyPairRequest: CreateKeyPairRequest,
     InstanceStatus: InstanceStatus,
     InquiryPriceRenewInstancesResponse: InquiryPriceRenewInstancesResponse,
-    ResetInstancesPasswordRequest: ResetInstancesPasswordRequest,
+    AllocateHostsResponse: AllocateHostsResponse,
     DescribeImageSharePermissionRequest: DescribeImageSharePermissionRequest,
     DisasterRecoverGroup: DisasterRecoverGroup,
     InquiryPriceResetInstanceResponse: InquiryPriceResetInstanceResponse,
@@ -7271,7 +7413,7 @@ module.exports = {
     ItemPrice: ItemPrice,
     InstanceTypeQuotaItem: InstanceTypeQuotaItem,
     ImageOsList: ImageOsList,
-    Image: Image,
+    InquiryPriceRunInstancesResponse: InquiryPriceRunInstancesResponse,
     DescribeHostsRequest: DescribeHostsRequest,
     ModifyInstancesRenewFlagResponse: ModifyInstancesRenewFlagResponse,
     DescribeInstancesStatusRequest: DescribeInstancesStatusRequest,
@@ -7294,6 +7436,8 @@ module.exports = {
     ModifyImageAttributeRequest: ModifyImageAttributeRequest,
     ResizeInstanceDisksResponse: ResizeInstanceDisksResponse,
     ModifyInstancesRenewFlagRequest: ModifyInstancesRenewFlagRequest,
+    DisassociateSecurityGroupsRequest: DisassociateSecurityGroupsRequest,
+    ModifyHostsAttributeRequest: ModifyHostsAttributeRequest,
     ImportKeyPairRequest: ImportKeyPairRequest,
     KeyPair: KeyPair,
     RenewInstancesResponse: RenewInstancesResponse,
@@ -7310,7 +7454,7 @@ module.exports = {
     StorageBlock: StorageBlock,
     InternetAccessible: InternetAccessible,
     RenewHostsResponse: RenewHostsResponse,
-    ModifyHostsAttributeRequest: ModifyHostsAttributeRequest,
+    DisassociateSecurityGroupsResponse: DisassociateSecurityGroupsResponse,
     ModifyInstancesProjectResponse: ModifyInstancesProjectResponse,
     InstanceChargePrepaid: InstanceChargePrepaid,
     Price: Price,

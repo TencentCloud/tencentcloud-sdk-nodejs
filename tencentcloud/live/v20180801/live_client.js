@@ -22,7 +22,7 @@ const StopLiveRecordResponse = models.StopLiveRecordResponse;
 const ModifyPullStreamConfigRequest = models.ModifyPullStreamConfigRequest;
 const PlayAuthKeyInfo = models.PlayAuthKeyInfo;
 const PullStreamConfig = models.PullStreamConfig;
-const CreateLiveRecordResponse = models.CreateLiveRecordResponse;
+const DeletePullStreamConfigRequest = models.DeletePullStreamConfigRequest;
 const UpdateLiveWatermarkResponse = models.UpdateLiveWatermarkResponse;
 const ModifyLivePlayAuthKeyResponse = models.ModifyLivePlayAuthKeyResponse;
 const DescribeLiveWatermarksResponse = models.DescribeLiveWatermarksResponse;
@@ -46,9 +46,10 @@ const CreateLiveRecordRequest = models.CreateLiveRecordRequest;
 const DropLiveStreamResponse = models.DropLiveStreamResponse;
 const DescribeLiveStreamStateResponse = models.DescribeLiveStreamStateResponse;
 const StopLiveRecordRequest = models.StopLiveRecordRequest;
+const DeletePullStreamConfigResponse = models.DeletePullStreamConfigResponse;
 const ModifyLivePushAuthKeyRequest = models.ModifyLivePushAuthKeyRequest;
 const DescribeLiveWatermarksRequest = models.DescribeLiveWatermarksRequest;
-const SetLiveWatermarkStatusResponse = models.SetLiveWatermarkStatusResponse;
+const DescribeLiveStreamStateRequest = models.DescribeLiveStreamStateRequest;
 const DescribeLivePlayAuthKeyResponse = models.DescribeLivePlayAuthKeyResponse;
 const DeleteLiveWatermarkResponse = models.DeleteLiveWatermarkResponse;
 const DescribeLivePushAuthKeyResponse = models.DescribeLivePushAuthKeyResponse;
@@ -59,7 +60,7 @@ const ResumeLiveStreamRequest = models.ResumeLiveStreamRequest;
 const DescribeLiveStreamPublishedListRequest = models.DescribeLiveStreamPublishedListRequest;
 const ModifyPullStreamConfigResponse = models.ModifyPullStreamConfigResponse;
 const ModifyLivePushAuthKeyResponse = models.ModifyLivePushAuthKeyResponse;
-const DescribeLiveStreamStateRequest = models.DescribeLiveStreamStateRequest;
+const CreateLiveRecordResponse = models.CreateLiveRecordResponse;
 const AddLiveWatermarkResponse = models.AddLiveWatermarkResponse;
 const DescribePullStreamConfigsResponse = models.DescribePullStreamConfigsResponse;
 const StreamName = models.StreamName;
@@ -71,6 +72,7 @@ const DescribeLiveStreamOnlineInfoRequest = models.DescribeLiveStreamOnlineInfoR
 const AddLiveWatermarkRequest = models.AddLiveWatermarkRequest;
 const DeleteLiveRecordRequest = models.DeleteLiveRecordRequest;
 const DescribeLivePushAuthKeyRequest = models.DescribeLivePushAuthKeyRequest;
+const SetLiveWatermarkStatusResponse = models.SetLiveWatermarkStatusResponse;
 const AddDelayLiveStreamRequest = models.AddDelayLiveStreamRequest;
 const DescribePullStreamConfigsRequest = models.DescribePullStreamConfigsRequest;
 const DescribeLiveStreamPublishedListResponse = models.DescribeLiveStreamPublishedListResponse;
@@ -154,14 +156,14 @@ class LiveClient extends AbstractClient {
     }
 
     /**
-     * 修改播放鉴权key
-     * @param {ModifyLivePlayAuthKeyRequest} req
-     * @param {function(string, ModifyLivePlayAuthKeyResponse):void} cb
+     * 删除水印
+     * @param {DeleteLiveWatermarkRequest} req
+     * @param {function(string, DeleteLiveWatermarkResponse):void} cb
      * @public
      */
-    ModifyLivePlayAuthKey(req, cb) {
-        let resp = new ModifyLivePlayAuthKeyResponse();
-        this.request("ModifyLivePlayAuthKey", req, resp, cb);
+    DeleteLiveWatermark(req, cb) {
+        let resp = new DeleteLiveWatermarkResponse();
+        this.request("DeleteLiveWatermark", req, resp, cb);
     }
 
     /**
@@ -275,14 +277,14 @@ class LiveClient extends AbstractClient {
     }
 
     /**
-     * 删除水印
-     * @param {DeleteLiveWatermarkRequest} req
-     * @param {function(string, DeleteLiveWatermarkResponse):void} cb
+     * 修改播放鉴权key
+     * @param {ModifyLivePlayAuthKeyRequest} req
+     * @param {function(string, ModifyLivePlayAuthKeyResponse):void} cb
      * @public
      */
-    DeleteLiveWatermark(req, cb) {
-        let resp = new DeleteLiveWatermarkResponse();
-        this.request("DeleteLiveWatermark", req, resp, cb);
+    ModifyLivePlayAuthKey(req, cb) {
+        let resp = new ModifyLivePlayAuthKeyResponse();
+        this.request("ModifyLivePlayAuthKey", req, resp, cb);
     }
 
     /**
@@ -297,14 +299,14 @@ class LiveClient extends AbstractClient {
     }
 
     /**
-     * 更新拉流配置
-     * @param {ModifyPullStreamConfigRequest} req
-     * @param {function(string, ModifyPullStreamConfigResponse):void} cb
+     * 恢复某条流的推送。
+     * @param {ResumeLiveStreamRequest} req
+     * @param {function(string, ResumeLiveStreamResponse):void} cb
      * @public
      */
-    ModifyPullStreamConfig(req, cb) {
-        let resp = new ModifyPullStreamConfigResponse();
-        this.request("ModifyPullStreamConfig", req, resp, cb);
+    ResumeLiveStream(req, cb) {
+        let resp = new ResumeLiveStreamResponse();
+        this.request("ResumeLiveStream", req, resp, cb);
     }
 
     /**
@@ -330,14 +332,14 @@ class LiveClient extends AbstractClient {
     }
 
     /**
-     * 恢复某条流的推送。
-     * @param {ResumeLiveStreamRequest} req
-     * @param {function(string, ResumeLiveStreamResponse):void} cb
+     * 更新拉流配置
+     * @param {ModifyPullStreamConfigRequest} req
+     * @param {function(string, ModifyPullStreamConfigResponse):void} cb
      * @public
      */
-    ResumeLiveStream(req, cb) {
-        let resp = new ResumeLiveStreamResponse();
-        this.request("ResumeLiveStream", req, resp, cb);
+    ModifyPullStreamConfig(req, cb) {
+        let resp = new ModifyPullStreamConfigResponse();
+        this.request("ModifyPullStreamConfig", req, resp, cb);
     }
 
     /**
@@ -371,6 +373,17 @@ class LiveClient extends AbstractClient {
     DescribeLivePushAuthKey(req, cb) {
         let resp = new DescribeLivePushAuthKeyResponse();
         this.request("DescribeLivePushAuthKey", req, resp, cb);
+    }
+
+    /**
+     * 删除直播拉流配置
+     * @param {DeletePullStreamConfigRequest} req
+     * @param {function(string, DeletePullStreamConfigResponse):void} cb
+     * @public
+     */
+    DeletePullStreamConfig(req, cb) {
+        let resp = new DeletePullStreamConfigResponse();
+        this.request("DeletePullStreamConfig", req, resp, cb);
     }
 
 

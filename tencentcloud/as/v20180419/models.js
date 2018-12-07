@@ -108,6 +108,68 @@ class SystemDisk extends  AbstractModel {
 }
 
 /**
+ * ModifyLaunchConfigurationAttributes请求参数结构体
+ * @class
+ */
+class ModifyLaunchConfigurationAttributesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 启动配置ID
+         * @type {string || null}
+         */
+        this.LaunchConfigurationId = null;
+
+        /**
+         * 指定有效的[镜像](https://cloud.tencent.com/document/product/213/4940)ID，格式形如`img-8toqc6s3`。镜像类型分为四种：<br/><li>公共镜像</li><li>自定义镜像</li><li>共享镜像</li><li>服务市场镜像</li><br/>可通过以下方式获取可用的镜像ID：<br/><li>`公共镜像`、`自定义镜像`、`共享镜像`的镜像ID可通过登录[控制台](https://console.cloud.tencent.com/cvm/image?rid=1&imageType=PUBLIC_IMAGE)查询；`服务镜像市场`的镜像ID可通过[云市场](https://market.cloud.tencent.com/list)查询。</li><li>通过调用接口 [DescribeImages](https://cloud.tencent.com/document/api/213/15715) ，取返回信息中的`ImageId`字段。</li>
+         * @type {string || null}
+         */
+        this.ImageId = null;
+
+        /**
+         * 实例类型列表，不同实例机型指定了不同的资源规格，最多支持5中实例机型。
+启动配置，通过 InstanceType 表示单一实例类型，通过 InstanceTypes 表示多实例类型。指定 InstanceTypes 成功启动配置后，原有的 InstanceType 自动失效。
+         * @type {Array.<string> || null}
+         */
+        this.InstanceTypes = null;
+
+        /**
+         * 实例类型校验策略，在实际修改 InstanceTypes 时发挥作用，取值包括 ALL 和 ANY，默认取值为ANY。
+<br><li> ALL，所有实例类型（InstanceType）都可用则通过校验，否则校验报错。
+<br><li> ANY，存在任何一个实例类型（InstanceType）可用则通过校验，否则校验报错。
+
+实例类型不可用的常见原因包括该实例类型售罄、对应云盘售罄等。
+如果 InstanceTypes 中一款机型不存在或者已下线，则无论 InstanceTypesCheckPolicy 采用何种取值，都会校验报错。
+         * @type {string || null}
+         */
+        this.InstanceTypesCheckPolicy = null;
+
+        /**
+         * 启动配置显示名称。名称仅支持中文、英文、数字、下划线、分隔符"-"、小数点，最大长度不能超60个字节。
+         * @type {string || null}
+         */
+        this.LaunchConfigurationName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LaunchConfigurationId = params.LaunchConfigurationId || null;
+        this.ImageId = params.ImageId || null;
+        this.InstanceTypes = params.InstanceTypes || null;
+        this.InstanceTypesCheckPolicy = params.InstanceTypesCheckPolicy || null;
+        this.LaunchConfigurationName = params.LaunchConfigurationName || null;
+
+    }
+}
+
+/**
  * DisableAutoScalingGroup请求参数结构体
  * @class
  */
@@ -317,7 +379,9 @@ class ModifyAutoScalingGroupRequest extends  AbstractModel {
         this.SubnetIds = null;
 
         /**
-         * 销毁策略，目前长度上限为1
+         * 销毁策略，目前长度上限为1。取值包括 OLDEST_INSTANCE 和 NEWEST_INSTANCE。
+<br><li> OLDEST_INSTANCE 优先销毁伸缩组中最旧的实例。
+<br><li> NEWEST_INSTANCE，优先销毁伸缩组中最新的实例。
          * @type {Array.<string> || null}
          */
         this.TerminationPolicies = null;
@@ -342,6 +406,17 @@ class ModifyAutoScalingGroupRequest extends  AbstractModel {
          */
         this.RetryPolicy = null;
 
+        /**
+         * 可用区校验策略，取值包括 ALL 和 ANY，默认取值为ANY。在伸缩组实际变更资源相关字段时（启动配置、可用区、子网）发挥作用。
+<br><li> ALL，所有可用区（Zone）或子网（SubnetId）都可用则通过校验，否则校验报错。
+<br><li> ANY，存在任何一个可用区（Zone）或子网（SubnetId）可用则通过校验，否则校验报错。
+
+可用区或子网不可用的常见原因包括该可用区CVM实例类型售罄、该可用区CBS云盘售罄、该可用区配额不足、该子网IP不足等。
+如果 Zones/SubnetIds 中可用区或者子网不存在，则无论 ZonesCheckPolicy 采用何种取值，都会校验报错。
+         * @type {string || null}
+         */
+        this.ZonesCheckPolicy = null;
+
     }
 
     /**
@@ -364,6 +439,7 @@ class ModifyAutoScalingGroupRequest extends  AbstractModel {
         this.VpcId = params.VpcId || null;
         this.Zones = params.Zones || null;
         this.RetryPolicy = params.RetryPolicy || null;
+        this.ZonesCheckPolicy = params.ZonesCheckPolicy || null;
 
     }
 }
@@ -464,6 +540,17 @@ class CreateLaunchConfigurationRequest extends  AbstractModel {
          */
         this.InstanceTypes = null;
 
+        /**
+         * 实例类型校验策略，取值包括 ALL 和 ANY，默认取值为ANY。
+<br><li> ALL，所有实例类型（InstanceType）都可用则通过校验，否则校验报错。
+<br><li> ANY，存在任何一个实例类型（InstanceType）可用则通过校验，否则校验报错。
+
+实例类型不可用的常见原因包括该实例类型售罄、对应云盘售罄等。
+如果 InstanceTypes 中一款机型不存在或者已下线，则无论 InstanceTypesCheckPolicy 采用何种取值，都会校验报错。
+         * @type {string || null}
+         */
+        this.InstanceTypesCheckPolicy = null;
+
     }
 
     /**
@@ -520,6 +607,7 @@ class CreateLaunchConfigurationRequest extends  AbstractModel {
             this.InstanceMarketOptions = obj;
         }
         this.InstanceTypes = params.InstanceTypes || null;
+        this.InstanceTypesCheckPolicy = params.InstanceTypesCheckPolicy || null;
 
     }
 }
@@ -2250,6 +2338,34 @@ class RunMonitorServiceEnabled extends  AbstractModel {
 }
 
 /**
+ * ModifyLaunchConfigurationAttributes返回参数结构体
+ * @class
+ */
+class ModifyLaunchConfigurationAttributesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = params.RequestId || null;
+
+    }
+}
+
+/**
  * 负载均衡器目标属性
  * @class
  */
@@ -2542,7 +2658,9 @@ class CreateAutoScalingGroupRequest extends  AbstractModel {
         this.SubnetIds = null;
 
         /**
-         * 销毁策略，目前长度上限为1
+         * 销毁策略，目前长度上限为1。取值包括 OLDEST_INSTANCE 和 NEWEST_INSTANCE，默认取值为 OLDEST_INSTANCE。
+<br><li> OLDEST_INSTANCE 优先销毁伸缩组中最旧的实例。
+<br><li> NEWEST_INSTANCE，优先销毁伸缩组中最新的实例。
          * @type {Array.<string> || null}
          */
         this.TerminationPolicies = null;
@@ -2560,6 +2678,17 @@ class CreateAutoScalingGroupRequest extends  AbstractModel {
          * @type {string || null}
          */
         this.RetryPolicy = null;
+
+        /**
+         * 可用区校验策略，取值包括 ALL 和 ANY，默认取值为ANY。
+<br><li> ALL，所有可用区（Zone）或子网（SubnetId）都可用则通过校验，否则校验报错。
+<br><li> ANY，存在任何一个可用区（Zone）或子网（SubnetId）可用则通过校验，否则校验报错。
+
+可用区或子网不可用的常见原因包括该可用区CVM实例类型售罄、该可用区CBS云盘售罄、该可用区配额不足、该子网IP不足等。
+如果 Zones/SubnetIds 中可用区或者子网不存在，则无论 ZonesCheckPolicy 采用何种取值，都会校验报错。
+         * @type {string || null}
+         */
+        this.ZonesCheckPolicy = null;
 
     }
 
@@ -2592,6 +2721,7 @@ class CreateAutoScalingGroupRequest extends  AbstractModel {
         this.TerminationPolicies = params.TerminationPolicies || null;
         this.Zones = params.Zones || null;
         this.RetryPolicy = params.RetryPolicy || null;
+        this.ZonesCheckPolicy = params.ZonesCheckPolicy || null;
 
     }
 }
@@ -2870,6 +3000,7 @@ module.exports = {
     RemoveInstancesResponse: RemoveInstancesResponse,
     DisableAutoScalingGroupResponse: DisableAutoScalingGroupResponse,
     SystemDisk: SystemDisk,
+    ModifyLaunchConfigurationAttributesRequest: ModifyLaunchConfigurationAttributesRequest,
     DisableAutoScalingGroupRequest: DisableAutoScalingGroupRequest,
     DeleteAutoScalingGroupResponse: DeleteAutoScalingGroupResponse,
     AutoScalingGroupAbstract: AutoScalingGroupAbstract,
@@ -2912,6 +3043,7 @@ module.exports = {
     ModifyDesiredCapacityResponse: ModifyDesiredCapacityResponse,
     CreateAutoScalingGroupResponse: CreateAutoScalingGroupResponse,
     RunMonitorServiceEnabled: RunMonitorServiceEnabled,
+    ModifyLaunchConfigurationAttributesResponse: ModifyLaunchConfigurationAttributesResponse,
     TargetAttribute: TargetAttribute,
     DetachInstancesRequest: DetachInstancesRequest,
     Instance: Instance,

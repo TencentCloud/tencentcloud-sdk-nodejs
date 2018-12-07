@@ -18,27 +18,52 @@ const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const ModifyPsaRegulationResponse = models.ModifyPsaRegulationResponse;
 const DescribeTaskOperationLogRequest = models.DescribeTaskOperationLogRequest;
+const UserCmdTask = models.UserCmdTask;
 const TaskOperationLog = models.TaskOperationLog;
 const CreatePsaRegulationRequest = models.CreatePsaRegulationRequest;
-const PsaRegulation = models.PsaRegulation;
-const DescribeTaskOperationLogResponse = models.DescribeTaskOperationLogResponse;
-const RepairTaskControlResponse = models.RepairTaskControlResponse;
+const DescribeUserCmdTasksResponse = models.DescribeUserCmdTasksResponse;
 const UnbindPsaTagRequest = models.UnbindPsaTagRequest;
+const PsaRegulation = models.PsaRegulation;
+const FailedTaskInfo = models.FailedTaskInfo;
+const DescribeUserCmdsRequest = models.DescribeUserCmdsRequest;
+const DeleteUserCmdsResponse = models.DeleteUserCmdsResponse;
+const RebootDevicesResponse = models.RebootDevicesResponse;
+const ResetDevicePasswordRequest = models.ResetDevicePasswordRequest;
+const ModifyDeviceAliasesRequest = models.ModifyDeviceAliasesRequest;
+const ModifyPayModePre2PostResponse = models.ModifyPayModePre2PostResponse;
+const SuccessTaskInfo = models.SuccessTaskInfo;
+const DescribeTaskOperationLogResponse = models.DescribeTaskOperationLogResponse;
+const BindPsaTagResponse = models.BindPsaTagResponse;
+const ModifyDeviceAliasesResponse = models.ModifyDeviceAliasesResponse;
+const RepairTaskControlResponse = models.RepairTaskControlResponse;
+const UnbindPsaTagResponse = models.UnbindPsaTagResponse;
+const DeviceAlias = models.DeviceAlias;
+const DescribeUserCmdTaskInfoResponse = models.DescribeUserCmdTaskInfoResponse;
+const RunUserCmdRequest = models.RunUserCmdRequest;
 const DescribeDevicesResponse = models.DescribeDevicesResponse;
+const UserCmdTaskInfo = models.UserCmdTaskInfo;
+const UserCmd = models.UserCmd;
 const DescribeRepairTaskConstantRequest = models.DescribeRepairTaskConstantRequest;
 const DeletePsaRegulationRequest = models.DeletePsaRegulationRequest;
 const DescribeTaskInfoResponse = models.DescribeTaskInfoResponse;
 const CreateSpotDeviceRequest = models.CreateSpotDeviceRequest;
-const CreateUserCmdResponse = models.CreateUserCmdResponse;
+const DeleteUserCmdsRequest = models.DeleteUserCmdsRequest;
+const ModifyUserCmdResponse = models.ModifyUserCmdResponse;
 const CreateUserCmdRequest = models.CreateUserCmdRequest;
-const UnbindPsaTagResponse = models.UnbindPsaTagResponse;
-const BindPsaTagResponse = models.BindPsaTagResponse;
+const ModifyPayModePre2PostRequest = models.ModifyPayModePre2PostRequest;
+const DescribeDevicePriceInfoResponse = models.DescribeDevicePriceInfoResponse;
 const DescribeRepairTaskConstantResponse = models.DescribeRepairTaskConstantResponse;
-const TaskType = models.TaskType;
+const DevicePriceInfo = models.DevicePriceInfo;
+const RebootDevicesRequest = models.RebootDevicesRequest;
 const DescribePsaRegulationsResponse = models.DescribePsaRegulationsResponse;
 const DescribeDevicesRequest = models.DescribeDevicesRequest;
+const ModifyUserCmdRequest = models.ModifyUserCmdRequest;
 const CreatePsaRegulationResponse = models.CreatePsaRegulationResponse;
 const ModifyPsaRegulationRequest = models.ModifyPsaRegulationRequest;
+const DescribeUserCmdsResponse = models.DescribeUserCmdsResponse;
+const RunUserCmdResponse = models.RunUserCmdResponse;
+const DescribeUserCmdTaskInfoRequest = models.DescribeUserCmdTaskInfoRequest;
+const ResetDevicePasswordResponse = models.ResetDevicePasswordResponse;
 const BindPsaTagRequest = models.BindPsaTagRequest;
 const DescribeTaskInfoRequest = models.DescribeTaskInfoRequest;
 const RepairTaskControlRequest = models.RepairTaskControlRequest;
@@ -47,6 +72,10 @@ const DeviceInfo = models.DeviceInfo;
 const DescribePsaRegulationsRequest = models.DescribePsaRegulationsRequest;
 const Tag = models.Tag;
 const DeletePsaRegulationResponse = models.DeletePsaRegulationResponse;
+const DescribeUserCmdTasksRequest = models.DescribeUserCmdTasksRequest;
+const DescribeDevicePriceInfoRequest = models.DescribeDevicePriceInfoRequest;
+const CreateUserCmdResponse = models.CreateUserCmdResponse;
+const TaskType = models.TaskType;
 const TaskInfo = models.TaskInfo;
 
 
@@ -61,25 +90,14 @@ class BmClient extends AbstractClient {
     }
     
     /**
-     * 解除标签与预授权规则的绑定
-     * @param {UnbindPsaTagRequest} req
-     * @param {function(string, UnbindPsaTagResponse):void} cb
+     * 获取自定义脚本信息列表
+     * @param {DescribeUserCmdsRequest} req
+     * @param {function(string, DescribeUserCmdsResponse):void} cb
      * @public
      */
-    UnbindPsaTag(req, cb) {
-        let resp = new UnbindPsaTagResponse();
-        this.request("UnbindPsaTag", req, resp, cb);
-    }
-
-    /**
-     * 创建黑石竞价实例
-     * @param {CreateSpotDeviceRequest} req
-     * @param {function(string, CreateSpotDeviceResponse):void} cb
-     * @public
-     */
-    CreateSpotDevice(req, cb) {
-        let resp = new CreateSpotDeviceResponse();
-        this.request("CreateSpotDevice", req, resp, cb);
+    DescribeUserCmds(req, cb) {
+        let resp = new DescribeUserCmdsResponse();
+        this.request("DescribeUserCmds", req, resp, cb);
     }
 
     /**
@@ -105,25 +123,58 @@ class BmClient extends AbstractClient {
     }
 
     /**
-     * 查询物理服务器，可以按照实例，业务IP等过滤
-     * @param {DescribeDevicesRequest} req
-     * @param {function(string, DescribeDevicesResponse):void} cb
+     * 运行自定义脚本
+     * @param {RunUserCmdRequest} req
+     * @param {function(string, RunUserCmdResponse):void} cb
      * @public
      */
-    DescribeDevices(req, cb) {
-        let resp = new DescribeDevicesResponse();
-        this.request("DescribeDevices", req, resp, cb);
+    RunUserCmd(req, cb) {
+        let resp = new RunUserCmdResponse();
+        this.request("RunUserCmd", req, resp, cb);
     }
 
     /**
-     * 维修任务配置获取
-     * @param {DescribeRepairTaskConstantRequest} req
-     * @param {function(string, DescribeRepairTaskConstantResponse):void} cb
+     * 获取自定义脚本任务列表
+     * @param {DescribeUserCmdTasksRequest} req
+     * @param {function(string, DescribeUserCmdTasksResponse):void} cb
      * @public
      */
-    DescribeRepairTaskConstant(req, cb) {
-        let resp = new DescribeRepairTaskConstantResponse();
-        this.request("DescribeRepairTaskConstant", req, resp, cb);
+    DescribeUserCmdTasks(req, cb) {
+        let resp = new DescribeUserCmdTasksResponse();
+        this.request("DescribeUserCmdTasks", req, resp, cb);
+    }
+
+    /**
+     * 创建预授权规则
+     * @param {CreatePsaRegulationRequest} req
+     * @param {function(string, CreatePsaRegulationResponse):void} cb
+     * @public
+     */
+    CreatePsaRegulation(req, cb) {
+        let resp = new CreatePsaRegulationResponse();
+        this.request("CreatePsaRegulation", req, resp, cb);
+    }
+
+    /**
+     * 修改自定义脚本
+     * @param {ModifyUserCmdRequest} req
+     * @param {function(string, ModifyUserCmdResponse):void} cb
+     * @public
+     */
+    ModifyUserCmd(req, cb) {
+        let resp = new ModifyUserCmdResponse();
+        this.request("ModifyUserCmd", req, resp, cb);
+    }
+
+    /**
+     * 删除自定义脚本
+     * @param {DeleteUserCmdsRequest} req
+     * @param {function(string, DeleteUserCmdsResponse):void} cb
+     * @public
+     */
+    DeleteUserCmds(req, cb) {
+        let resp = new DeleteUserCmdsResponse();
+        this.request("DeleteUserCmds", req, resp, cb);
     }
 
     /**
@@ -135,17 +186,6 @@ class BmClient extends AbstractClient {
     BindPsaTag(req, cb) {
         let resp = new BindPsaTagResponse();
         this.request("BindPsaTag", req, resp, cb);
-    }
-
-    /**
-     * 获取维修任务操作日志
-     * @param {DescribeTaskOperationLogRequest} req
-     * @param {function(string, DescribeTaskOperationLogResponse):void} cb
-     * @public
-     */
-    DescribeTaskOperationLog(req, cb) {
-        let resp = new DescribeTaskOperationLogResponse();
-        this.request("DescribeTaskOperationLog", req, resp, cb);
     }
 
     /**
@@ -190,6 +230,94 @@ TaskStatus（任务状态ID）与状态中文名的对应关系如下：<br>
     }
 
     /**
+     * 重启机器
+     * @param {RebootDevicesRequest} req
+     * @param {function(string, RebootDevicesResponse):void} cb
+     * @public
+     */
+    RebootDevices(req, cb) {
+        let resp = new RebootDevicesResponse();
+        this.request("RebootDevices", req, resp, cb);
+    }
+
+    /**
+     * 获取自定义脚本任务详细信息
+     * @param {DescribeUserCmdTaskInfoRequest} req
+     * @param {function(string, DescribeUserCmdTaskInfoResponse):void} cb
+     * @public
+     */
+    DescribeUserCmdTaskInfo(req, cb) {
+        let resp = new DescribeUserCmdTaskInfoResponse();
+        this.request("DescribeUserCmdTaskInfo", req, resp, cb);
+    }
+
+    /**
+     * 查询服务器价格信息，支持设备的批量查找，支持标准机型和弹性机型的混合查找
+     * @param {DescribeDevicePriceInfoRequest} req
+     * @param {function(string, DescribeDevicePriceInfoResponse):void} cb
+     * @public
+     */
+    DescribeDevicePriceInfo(req, cb) {
+        let resp = new DescribeDevicePriceInfoResponse();
+        this.request("DescribeDevicePriceInfo", req, resp, cb);
+    }
+
+    /**
+     * 获取维修任务操作日志
+     * @param {DescribeTaskOperationLogRequest} req
+     * @param {function(string, DescribeTaskOperationLogResponse):void} cb
+     * @public
+     */
+    DescribeTaskOperationLog(req, cb) {
+        let resp = new DescribeTaskOperationLogResponse();
+        this.request("DescribeTaskOperationLog", req, resp, cb);
+    }
+
+    /**
+     * 将设备的预付费模式修改为后付费计费模式，支持批量转换。（前提是客户要加入黑石物理机后付费计费的白名单，申请黑石物理机后付费可以联系腾讯云客服）
+     * @param {ModifyPayModePre2PostRequest} req
+     * @param {function(string, ModifyPayModePre2PostResponse):void} cb
+     * @public
+     */
+    ModifyPayModePre2Post(req, cb) {
+        let resp = new ModifyPayModePre2PostResponse();
+        this.request("ModifyPayModePre2Post", req, resp, cb);
+    }
+
+    /**
+     * 解除标签与预授权规则的绑定
+     * @param {UnbindPsaTagRequest} req
+     * @param {function(string, UnbindPsaTagResponse):void} cb
+     * @public
+     */
+    UnbindPsaTag(req, cb) {
+        let resp = new UnbindPsaTagResponse();
+        this.request("UnbindPsaTag", req, resp, cb);
+    }
+
+    /**
+     * 创建黑石竞价实例
+     * @param {CreateSpotDeviceRequest} req
+     * @param {function(string, CreateSpotDeviceResponse):void} cb
+     * @public
+     */
+    CreateSpotDevice(req, cb) {
+        let resp = new CreateSpotDeviceResponse();
+        this.request("CreateSpotDevice", req, resp, cb);
+    }
+
+    /**
+     * 修改服务器名称
+     * @param {ModifyDeviceAliasesRequest} req
+     * @param {function(string, ModifyDeviceAliasesResponse):void} cb
+     * @public
+     */
+    ModifyDeviceAliases(req, cb) {
+        let resp = new ModifyDeviceAliasesResponse();
+        this.request("ModifyDeviceAliases", req, resp, cb);
+    }
+
+    /**
      * 此接口用于操作维修任务<br>
 入参TaskId为维修任务ID<br>
 入参Operate表示对维修任务的操作，支持如下取值：<br>
@@ -221,14 +349,36 @@ ConfirmUnRecovered（维修完成后，确认故障未恢复）<br>
     }
 
     /**
-     * 创建预授权规则
-     * @param {CreatePsaRegulationRequest} req
-     * @param {function(string, CreatePsaRegulationResponse):void} cb
+     * 查询物理服务器，可以按照实例，业务IP等过滤
+     * @param {DescribeDevicesRequest} req
+     * @param {function(string, DescribeDevicesResponse):void} cb
      * @public
      */
-    CreatePsaRegulation(req, cb) {
-        let resp = new CreatePsaRegulationResponse();
-        this.request("CreatePsaRegulation", req, resp, cb);
+    DescribeDevices(req, cb) {
+        let resp = new DescribeDevicesResponse();
+        this.request("DescribeDevices", req, resp, cb);
+    }
+
+    /**
+     * 维修任务配置获取
+     * @param {DescribeRepairTaskConstantRequest} req
+     * @param {function(string, DescribeRepairTaskConstantResponse):void} cb
+     * @public
+     */
+    DescribeRepairTaskConstant(req, cb) {
+        let resp = new DescribeRepairTaskConstantResponse();
+        this.request("DescribeRepairTaskConstant", req, resp, cb);
+    }
+
+    /**
+     * 重置服务器密码
+     * @param {ResetDevicePasswordRequest} req
+     * @param {function(string, ResetDevicePasswordResponse):void} cb
+     * @public
+     */
+    ResetDevicePassword(req, cb) {
+        let resp = new ResetDevicePasswordResponse();
+        this.request("ResetDevicePassword", req, resp, cb);
     }
 
 
