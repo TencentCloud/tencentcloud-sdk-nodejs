@@ -16,6 +16,7 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
+const SentenceInfo = models.SentenceInfo;
 const InitOralProcessRequest = models.InitOralProcessRequest;
 const TransmitOralProcessRequest = models.TransmitOralProcessRequest;
 const TransmitOralProcessResponse = models.TransmitOralProcessResponse;

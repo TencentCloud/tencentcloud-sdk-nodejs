@@ -31,7 +31,7 @@ class QueryRequest extends  AbstractModel {
         this.Module = null;
 
         /**
-         * 操作名，固定地段：query
+         * 操作名，固定字段：query
          * @type {string || null}
          */
         this.Operation = null;
@@ -158,7 +158,7 @@ class InvokeRequest extends  AbstractModel {
         this.Module = null;
 
         /**
-         * 操作名，固定地段：invoke
+         * 操作名，固定字段：invoke
          * @type {string || null}
          */
         this.Operation = null;
@@ -285,7 +285,7 @@ class GetInvokeTxRequest extends  AbstractModel {
         this.Module = null;
 
         /**
-         * 操作名，固定地段：invoke
+         * 操作名，固定字段：query_txid
          * @type {string || null}
          */
         this.Operation = null;

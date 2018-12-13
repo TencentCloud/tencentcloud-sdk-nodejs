@@ -17,6 +17,70 @@
 const AbstractModel = require("../../common/abstract_model");
 
 /**
+ * 语音过程中断句的中间结果
+ * @class
+ */
+class SentenceInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 句子序号，在段落、自由说模式下有效，表示断句序号，最后的综合结果的为-1.
+         * @type {number || null}
+         */
+        this.SentenceId = null;
+
+        /**
+         * 详细发音评估结果
+         * @type {Array.<WordRsp> || null}
+         */
+        this.Words = null;
+
+        /**
+         * 发音精准度，取值范围[-1, 100]，当取-1时指完全不匹配，当为句子模式时，是所有已识别单词准确度的加权平均值。当为流式模式且请求中IsEnd未置1时，取值无意义
+         * @type {number || null}
+         */
+        this.PronAccuracy = null;
+
+        /**
+         * 发音流利度，取值范围[0, 1]，当为词模式时，取值无意义；当为流式模式且请求中IsEnd未置1时，取值无意义
+         * @type {number || null}
+         */
+        this.PronFluency = null;
+
+        /**
+         * 发音完整度，取值范围[0, 1]，当为词模式时，取值无意义；当为流式模式且请求中IsEnd未置1时，取值无意义
+         * @type {number || null}
+         */
+        this.PronCompletion = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SentenceId = params.SentenceId || null;
+
+        if (params.Words) {
+            this.Words = new Array();
+            for (let z in params.Words) {
+                let obj = new WordRsp();
+                obj.deserialize(params.Words[z]);
+                this.Words.push(obj);
+            }
+        }
+        this.PronAccuracy = params.PronAccuracy || null;
+        this.PronFluency = params.PronFluency || null;
+        this.PronCompletion = params.PronCompletion || null;
+
+    }
+}
+
+/**
  * InitOralProcess请求参数结构体
  * @class
  */
@@ -31,19 +95,19 @@ class InitOralProcessRequest extends  AbstractModel {
         this.SessionId = null;
 
         /**
-         * 被评估语音对应的文本，不支持ascii大于128以上的字符，会统一替换成空格。
+         * 被评估语音对应的文本，句子模式下不超过个 20 单词或者中文文字，段落模式不超过 120 单词或者中文文字，会统一替换成空格，中文评估使用 utf-8 编码，自由说模式该值传空。
          * @type {string || null}
          */
         this.RefText = null;
 
         /**
-         * 语音输入模式，0流式分片，1非流式一次性评估
+         * 语音输入模式，0：流式分片，1：非流式一次性评估
          * @type {number || null}
          */
         this.WorkMode = null;
 
         /**
-         * 评估模式，0:词模式, 1:句子模式，当为词模式评估时，能够提供每个音节的评估信息，当为句子模式时，能够提供完整度和流利度信息。
+         * 评估模式，0：词模式，,1：:句子模式，2：段落模式，3：自由说模式，当为词模式评估时，能够提供每个音节的评估信息，当为句子模式时，能够提供完整度和流利度信息。
          * @type {number || null}
          */
         this.EvalMode = null;
@@ -67,10 +131,22 @@ class InitOralProcessRequest extends  AbstractModel {
         this.IsLongLifeSession = null;
 
         /**
-         * 音频存储模式，0：不存储，1：存储到公共对象存储
+         * 音频存储模式，0：不存储，1：存储到公共对象存储，输出结果为该会话最后一个分片TransmitOralProcess 返回结果 AudioUrl 字段。
          * @type {number || null}
          */
         this.StorageMode = null;
+
+        /**
+         * 输出断句中间结果标识，0：不输出，1：输出，通过设置该参数，可以在评估过程中的分片传输请求中，返回已经评估断句的中间结果，中间结果可用于客户端 UI 更新，输出结果为TransmitOralProcess请求返回结果 SentenceInfoSet 字段。
+         * @type {number || null}
+         */
+        this.SentenceInfoEnabled = null;
+
+        /**
+         * 评估语言，0：英文，1：中文。
+         * @type {number || null}
+         */
+        this.ServerType = null;
 
     }
 
@@ -89,6 +165,8 @@ class InitOralProcessRequest extends  AbstractModel {
         this.SoeAppId = params.SoeAppId || null;
         this.IsLongLifeSession = params.IsLongLifeSession || null;
         this.StorageMode = params.StorageMode || null;
+        this.SentenceInfoEnabled = params.SentenceInfoEnabled || null;
+        this.ServerType = params.ServerType || null;
 
     }
 }
@@ -215,6 +293,12 @@ class TransmitOralProcessResponse extends  AbstractModel {
         this.AudioUrl = null;
 
         /**
+         * 断句中间结果，中间结果是局部最优而非全局最优的结果，所以中间结果有可能和最终整体结果对应部分不一致；中间结果的输出便于客户端UI更新；待用户发音完全结束后，系统会给出一个综合所有句子的整体结果。
+         * @type {Array.<SentenceInfo> || null}
+         */
+        this.SentenceInfoSet = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -243,6 +327,15 @@ class TransmitOralProcessResponse extends  AbstractModel {
         }
         this.SessionId = params.SessionId || null;
         this.AudioUrl = params.AudioUrl || null;
+
+        if (params.SentenceInfoSet) {
+            this.SentenceInfoSet = new Array();
+            for (let z in params.SentenceInfoSet) {
+                let obj = new SentenceInfo();
+                obj.deserialize(params.SentenceInfoSet[z]);
+                this.SentenceInfoSet.push(obj);
+            }
+        }
         this.RequestId = params.RequestId || null;
 
     }
@@ -425,6 +518,7 @@ class PhoneInfo extends  AbstractModel {
 }
 
 module.exports = {
+    SentenceInfo: SentenceInfo,
     InitOralProcessRequest: InitOralProcessRequest,
     TransmitOralProcessRequest: TransmitOralProcessRequest,
     TransmitOralProcessResponse: TransmitOralProcessResponse,
