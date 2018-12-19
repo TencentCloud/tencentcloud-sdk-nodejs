@@ -40,6 +40,7 @@ const DescribeLaunchConfigurationsResponse = models.DescribeLaunchConfigurations
 const CreateLaunchConfigurationResponse = models.CreateLaunchConfigurationResponse;
 const ForwardLoadBalancer = models.ForwardLoadBalancer;
 const DeleteScheduledActionRequest = models.DeleteScheduledActionRequest;
+const DescribeAutoScalingActivitiesRequest = models.DescribeAutoScalingActivitiesRequest;
 const ModifyDesiredCapacityRequest = models.ModifyDesiredCapacityRequest;
 const InstanceMarketOptionsRequest = models.InstanceMarketOptionsRequest;
 const CreateScheduledActionResponse = models.CreateScheduledActionResponse;
@@ -54,11 +55,12 @@ const DeleteLaunchConfigurationRequest = models.DeleteLaunchConfigurationRequest
 const AttachInstancesRequest = models.AttachInstancesRequest;
 const SpotMarketOptions = models.SpotMarketOptions;
 const RunSecurityServiceEnabled = models.RunSecurityServiceEnabled;
+const DescribeAutoScalingInstancesResponse = models.DescribeAutoScalingInstancesResponse;
 const LoginSettings = models.LoginSettings;
 const Filter = models.Filter;
 const ModifyScheduledActionResponse = models.ModifyScheduledActionResponse;
 const EnableAutoScalingGroupResponse = models.EnableAutoScalingGroupResponse;
-const DescribeLaunchConfigurationsRequest = models.DescribeLaunchConfigurationsRequest;
+const Activity = models.Activity;
 const ModifyDesiredCapacityResponse = models.ModifyDesiredCapacityResponse;
 const CreateAutoScalingGroupResponse = models.CreateAutoScalingGroupResponse;
 const RunMonitorServiceEnabled = models.RunMonitorServiceEnabled;
@@ -66,11 +68,13 @@ const ModifyLaunchConfigurationAttributesResponse = models.ModifyLaunchConfigura
 const TargetAttribute = models.TargetAttribute;
 const DetachInstancesRequest = models.DetachInstancesRequest;
 const Instance = models.Instance;
-const DescribeAutoScalingInstancesResponse = models.DescribeAutoScalingInstancesResponse;
+const ActivtyRelatedInstance = models.ActivtyRelatedInstance;
 const CreateAutoScalingGroupRequest = models.CreateAutoScalingGroupRequest;
 const InternetAccessible = models.InternetAccessible;
+const DescribeLaunchConfigurationsRequest = models.DescribeLaunchConfigurationsRequest;
 const DeleteScheduledActionResponse = models.DeleteScheduledActionResponse;
 const DescribeAutoScalingInstancesRequest = models.DescribeAutoScalingInstancesRequest;
+const DescribeAutoScalingActivitiesResponse = models.DescribeAutoScalingActivitiesResponse;
 const LimitedLoginSettings = models.LimitedLoginSettings;
 const ModifyScheduledActionRequest = models.ModifyScheduledActionRequest;
 const DataDisk = models.DataDisk;
@@ -95,6 +99,17 @@ class AsClient extends AbstractClient {
     RemoveInstances(req, cb) {
         let resp = new RemoveInstancesResponse();
         this.request("RemoveInstances", req, resp, cb);
+    }
+
+    /**
+     * 本接口（ModifyAutoScalingGroup）用于修改伸缩组。
+     * @param {ModifyAutoScalingGroupRequest} req
+     * @param {function(string, ModifyAutoScalingGroupResponse):void} cb
+     * @public
+     */
+    ModifyAutoScalingGroup(req, cb) {
+        let resp = new ModifyAutoScalingGroupResponse();
+        this.request("ModifyAutoScalingGroup", req, resp, cb);
     }
 
     /**
@@ -183,14 +198,14 @@ class AsClient extends AbstractClient {
     }
 
     /**
-     * 本接口（ModifyAutoScalingGroup）用于修改伸缩组。
-     * @param {ModifyAutoScalingGroupRequest} req
-     * @param {function(string, ModifyAutoScalingGroupResponse):void} cb
+     * 本接口（DescribeAutoScalingActivities）用于查询伸缩组的伸缩活动记录。
+     * @param {DescribeAutoScalingActivitiesRequest} req
+     * @param {function(string, DescribeAutoScalingActivitiesResponse):void} cb
      * @public
      */
-    ModifyAutoScalingGroup(req, cb) {
-        let resp = new ModifyAutoScalingGroupResponse();
-        this.request("ModifyAutoScalingGroup", req, resp, cb);
+    DescribeAutoScalingActivities(req, cb) {
+        let resp = new DescribeAutoScalingActivitiesResponse();
+        this.request("DescribeAutoScalingActivities", req, resp, cb);
     }
 
     /**

@@ -21,6 +21,7 @@ module.exports = {
     es: require("./es"),
     facefusion: require("./facefusion"),
     faceid: require("./faceid"),
+    habo: require("./habo"),
     hcm: require("./hcm"),
     iot: require("./iot"),
     iotcloud: require("./iotcloud"),
@@ -38,7 +39,9 @@ module.exports = {
     tbaas: require("./tbaas"),
     tbm: require("./tbm"),
     tia: require("./tia"),
+    tics: require("./tics"),
     tmt: require("./tmt"),
+    vod: require("./vod"),
     vpc: require("./vpc"),
     youmall: require("./youmall"),
     yunjing: require("./yunjing")
