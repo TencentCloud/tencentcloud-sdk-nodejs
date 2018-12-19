@@ -1465,6 +1465,68 @@ class DeleteScheduledActionRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeAutoScalingActivities请求参数结构体
+ * @class
+ */
+class DescribeAutoScalingActivitiesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 按照一个或者多个伸缩活动ID查询。伸缩活动ID形如：`asa-5l2ejpfo`。每次请求的上限为100。参数不支持同时指定`ActivityIds`和`Filters`。
+         * @type {Array.<string> || null}
+         */
+        this.ActivityIds = null;
+
+        /**
+         * 过滤条件。
+<li> auto-scaling-group-id - String - 是否必填：否 -（过滤条件）按照伸缩组ID过滤。</li>
+<li> activity-status-code - String - 是否必填：否 -（过滤条件）按照伸缩活动状态过滤。（INIT：初始化中|RUNNING：运行中|SUCCESSFUL：活动成功|PARTIALLY_SUCCESSFUL：活动部分成功|FAILED：活动失败|CANCELLED：活动取消）</li>
+<li> activity-type - String - 是否必填：否 -（过滤条件）按照伸缩活动类型过滤。（SCALE_OUT：扩容活动|SCALE_IN：缩容活动|ATTACH_INSTANCES：添加实例|REMOVE_INSTANCES：销毁实例|DETACH_INSTANCES：移出实例|TERMINATE_INSTANCES_UNEXPECTEDLY：实例在CVM控制台被销毁|REPLACE_UNHEALTHY_INSTANCE：替换不健康实例）</li>
+<li> activity-id - String - 是否必填：否 -（过滤条件）按照伸缩活动ID过滤。</li>
+每次请求的`Filters`的上限为10，`Filter.Values`的上限为5。参数不支持同时指定`ActivityIds`和`Filters`。
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * 返回数量，默认为20，最大值为100。关于`Limit`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/15688)中的相关小节。
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 偏移量，默认为0。关于`Offset`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/15688)中的相关小节。
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ActivityIds = params.ActivityIds || null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.Limit = params.Limit || null;
+        this.Offset = params.Offset || null;
+
+    }
+}
+
+/**
  * ModifyDesiredCapacity请求参数结构体
  * @class
  */
@@ -2043,6 +2105,56 @@ class RunSecurityServiceEnabled extends  AbstractModel {
 }
 
 /**
+ * DescribeAutoScalingInstances返回参数结构体
+ * @class
+ */
+class DescribeAutoScalingInstancesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例详细信息列表。
+         * @type {Array.<Instance> || null}
+         */
+        this.AutoScalingInstanceSet = null;
+
+        /**
+         * 符合条件的实例数量。
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.AutoScalingInstanceSet) {
+            this.AutoScalingInstanceSet = new Array();
+            for (let z in params.AutoScalingInstanceSet) {
+                let obj = new Instance();
+                obj.deserialize(params.AutoScalingInstanceSet[z]);
+                this.AutoScalingInstanceSet.push(obj);
+            }
+        }
+        this.TotalCount = params.TotalCount || null;
+        this.RequestId = params.RequestId || null;
+
+    }
+}
+
+/**
  * 描述了实例登录相关配置与信息。
  * @class
  */
@@ -2187,39 +2299,91 @@ class EnableAutoScalingGroupResponse extends  AbstractModel {
 }
 
 /**
- * DescribeLaunchConfigurations请求参数结构体
+ * 符合条件的伸缩活动相关信息。
  * @class
  */
-class DescribeLaunchConfigurationsRequest extends  AbstractModel {
+class Activity extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 按照一个或者多个启动配置ID查询。启动配置ID形如：`asc-ouy1ax38`。每次请求的上限为100。参数不支持同时指定`LaunchConfigurationIds`和`Filters`。
-         * @type {Array.<string> || null}
+         * 伸缩组ID。
+         * @type {string || null}
          */
-        this.LaunchConfigurationIds = null;
+        this.AutoScalingGroupId = null;
 
         /**
-         * 过滤条件。
-<li> launch-configuration-id - String - 是否必填：否 -（过滤条件）按照启动配置ID过滤。</li>
-<li> launch-configuration-name - String - 是否必填：否 -（过滤条件）按照启动配置名称过滤。</li>
-每次请求的`Filters`的上限为10，`Filter.Values`的上限为5。参数不支持同时指定`LaunchConfigurationIds`和`Filters`。
-         * @type {Array.<Filter> || null}
+         * 伸缩活动ID。
+         * @type {string || null}
          */
-        this.Filters = null;
+        this.ActivityId = null;
 
         /**
-         * 返回数量，默认为20，最大值为100。关于`Limit`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/15688)中的相关小节。
-         * @type {number || null}
+         * 伸缩活动类型。取值如下：<br>
+<li>SCALE_OUT：扩容活动<li>SCALE_IN：缩容活动<li>ATTACH_INSTANCES：添加实例<li>REMOVE_INSTANCES：销毁实例<li>DETACH_INSTANCES：移出实例<li>TERMINATE_INSTANCES_UNEXPECTEDLY：实例在CVM控制台被销毁<li>REPLACE_UNHEALTHY_INSTANCE：替换不健康实例）
+         * @type {string || null}
          */
-        this.Limit = null;
+        this.ActivityType = null;
 
         /**
-         * 偏移量，默认为0。关于`Offset`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/15688)中的相关小节。
-         * @type {number || null}
+         * 伸缩活动状态。取值如下：<br>
+<li>INIT：初始化中
+<li>RUNNING：运行中
+<li>SUCCESSFUL：活动成功
+<li>PARTIALLY_SUCCESSFUL：活动部分成功
+<li>FAILED：活动失败
+<li>CANCELLED：活动取消
+         * @type {string || null}
          */
-        this.Offset = null;
+        this.StatusCode = null;
+
+        /**
+         * 伸缩活动状态描述。
+         * @type {string || null}
+         */
+        this.StatusMessage = null;
+
+        /**
+         * 伸缩活动起因。
+         * @type {string || null}
+         */
+        this.Cause = null;
+
+        /**
+         * 伸缩活动描述。
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * 伸缩活动开始时间。
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * 伸缩活动结束时间。
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * 伸缩活动创建时间。
+         * @type {string || null}
+         */
+        this.CreatedTime = null;
+
+        /**
+         * 伸缩活动相关实例信息集合。
+         * @type {Array.<ActivtyRelatedInstance> || null}
+         */
+        this.ActivityRelatedInstanceSet = null;
+
+        /**
+         * 伸缩活动状态简要描述。
+         * @type {string || null}
+         */
+        this.StatusMessageSimplified = null;
 
     }
 
@@ -2230,18 +2394,26 @@ class DescribeLaunchConfigurationsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.LaunchConfigurationIds = params.LaunchConfigurationIds || null;
+        this.AutoScalingGroupId = params.AutoScalingGroupId || null;
+        this.ActivityId = params.ActivityId || null;
+        this.ActivityType = params.ActivityType || null;
+        this.StatusCode = params.StatusCode || null;
+        this.StatusMessage = params.StatusMessage || null;
+        this.Cause = params.Cause || null;
+        this.Description = params.Description || null;
+        this.StartTime = params.StartTime || null;
+        this.EndTime = params.EndTime || null;
+        this.CreatedTime = params.CreatedTime || null;
 
-        if (params.Filters) {
-            this.Filters = new Array();
-            for (let z in params.Filters) {
-                let obj = new Filter();
-                obj.deserialize(params.Filters[z]);
-                this.Filters.push(obj);
+        if (params.ActivityRelatedInstanceSet) {
+            this.ActivityRelatedInstanceSet = new Array();
+            for (let z in params.ActivityRelatedInstanceSet) {
+                let obj = new ActivtyRelatedInstance();
+                obj.deserialize(params.ActivityRelatedInstanceSet[z]);
+                this.ActivityRelatedInstanceSet.push(obj);
             }
         }
-        this.Limit = params.Limit || null;
-        this.Offset = params.Offset || null;
+        this.StatusMessageSimplified = params.StatusMessageSimplified || null;
 
     }
 }
@@ -2534,30 +2706,26 @@ class Instance extends  AbstractModel {
 }
 
 /**
- * DescribeAutoScalingInstances返回参数结构体
+ * 与本次伸缩活动相关的实例信息。
  * @class
  */
-class DescribeAutoScalingInstancesResponse extends  AbstractModel {
+class ActivtyRelatedInstance extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 实例详细信息列表。
-         * @type {Array.<Instance> || null}
-         */
-        this.AutoScalingInstanceSet = null;
-
-        /**
-         * 符合条件的实例数量。
-         * @type {number || null}
-         */
-        this.TotalCount = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * 实例ID。
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.InstanceId = null;
+
+        /**
+         * 实例在伸缩活动中的状态。取值如下：
+<li>SUCCESSFUL：活动成功
+<li>FAILED：活动失败
+         * @type {string || null}
+         */
+        this.InstanceStatus = null;
 
     }
 
@@ -2568,17 +2736,8 @@ class DescribeAutoScalingInstancesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.AutoScalingInstanceSet) {
-            this.AutoScalingInstanceSet = new Array();
-            for (let z in params.AutoScalingInstanceSet) {
-                let obj = new Instance();
-                obj.deserialize(params.AutoScalingInstanceSet[z]);
-                this.AutoScalingInstanceSet.push(obj);
-            }
-        }
-        this.TotalCount = params.TotalCount || null;
-        this.RequestId = params.RequestId || null;
+        this.InstanceId = params.InstanceId || null;
+        this.InstanceStatus = params.InstanceStatus || null;
 
     }
 }
@@ -2769,6 +2928,66 @@ class InternetAccessible extends  AbstractModel {
 }
 
 /**
+ * DescribeLaunchConfigurations请求参数结构体
+ * @class
+ */
+class DescribeLaunchConfigurationsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 按照一个或者多个启动配置ID查询。启动配置ID形如：`asc-ouy1ax38`。每次请求的上限为100。参数不支持同时指定`LaunchConfigurationIds`和`Filters`。
+         * @type {Array.<string> || null}
+         */
+        this.LaunchConfigurationIds = null;
+
+        /**
+         * 过滤条件。
+<li> launch-configuration-id - String - 是否必填：否 -（过滤条件）按照启动配置ID过滤。</li>
+<li> launch-configuration-name - String - 是否必填：否 -（过滤条件）按照启动配置名称过滤。</li>
+每次请求的`Filters`的上限为10，`Filter.Values`的上限为5。参数不支持同时指定`LaunchConfigurationIds`和`Filters`。
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * 返回数量，默认为20，最大值为100。关于`Limit`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/15688)中的相关小节。
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 偏移量，默认为0。关于`Offset`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/15688)中的相关小节。
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LaunchConfigurationIds = params.LaunchConfigurationIds || null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.Limit = params.Limit || null;
+        this.Offset = params.Offset || null;
+
+    }
+}
+
+/**
  * DeleteScheduledAction返回参数结构体
  * @class
  */
@@ -2852,6 +3071,56 @@ class DescribeAutoScalingInstancesRequest extends  AbstractModel {
         }
         this.Offset = params.Offset || null;
         this.Limit = params.Limit || null;
+
+    }
+}
+
+/**
+ * DescribeAutoScalingActivities返回参数结构体
+ * @class
+ */
+class DescribeAutoScalingActivitiesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 符合条件的伸缩活动数量。
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 符合条件的伸缩活动信息集合。
+         * @type {Array.<Activity> || null}
+         */
+        this.ActivitySet = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = params.TotalCount || null;
+
+        if (params.ActivitySet) {
+            this.ActivitySet = new Array();
+            for (let z in params.ActivitySet) {
+                let obj = new Activity();
+                obj.deserialize(params.ActivitySet[z]);
+                this.ActivitySet.push(obj);
+            }
+        }
+        this.RequestId = params.RequestId || null;
 
     }
 }
@@ -3021,6 +3290,7 @@ module.exports = {
     CreateLaunchConfigurationResponse: CreateLaunchConfigurationResponse,
     ForwardLoadBalancer: ForwardLoadBalancer,
     DeleteScheduledActionRequest: DeleteScheduledActionRequest,
+    DescribeAutoScalingActivitiesRequest: DescribeAutoScalingActivitiesRequest,
     ModifyDesiredCapacityRequest: ModifyDesiredCapacityRequest,
     InstanceMarketOptionsRequest: InstanceMarketOptionsRequest,
     CreateScheduledActionResponse: CreateScheduledActionResponse,
@@ -3035,11 +3305,12 @@ module.exports = {
     AttachInstancesRequest: AttachInstancesRequest,
     SpotMarketOptions: SpotMarketOptions,
     RunSecurityServiceEnabled: RunSecurityServiceEnabled,
+    DescribeAutoScalingInstancesResponse: DescribeAutoScalingInstancesResponse,
     LoginSettings: LoginSettings,
     Filter: Filter,
     ModifyScheduledActionResponse: ModifyScheduledActionResponse,
     EnableAutoScalingGroupResponse: EnableAutoScalingGroupResponse,
-    DescribeLaunchConfigurationsRequest: DescribeLaunchConfigurationsRequest,
+    Activity: Activity,
     ModifyDesiredCapacityResponse: ModifyDesiredCapacityResponse,
     CreateAutoScalingGroupResponse: CreateAutoScalingGroupResponse,
     RunMonitorServiceEnabled: RunMonitorServiceEnabled,
@@ -3047,11 +3318,13 @@ module.exports = {
     TargetAttribute: TargetAttribute,
     DetachInstancesRequest: DetachInstancesRequest,
     Instance: Instance,
-    DescribeAutoScalingInstancesResponse: DescribeAutoScalingInstancesResponse,
+    ActivtyRelatedInstance: ActivtyRelatedInstance,
     CreateAutoScalingGroupRequest: CreateAutoScalingGroupRequest,
     InternetAccessible: InternetAccessible,
+    DescribeLaunchConfigurationsRequest: DescribeLaunchConfigurationsRequest,
     DeleteScheduledActionResponse: DeleteScheduledActionResponse,
     DescribeAutoScalingInstancesRequest: DescribeAutoScalingInstancesRequest,
+    DescribeAutoScalingActivitiesResponse: DescribeAutoScalingActivitiesResponse,
     LimitedLoginSettings: LimitedLoginSettings,
     ModifyScheduledActionRequest: ModifyScheduledActionRequest,
     DataDisk: DataDisk,
