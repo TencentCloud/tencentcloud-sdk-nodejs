@@ -151,6 +151,7 @@ const ModifyDBInstanceVipVportRequest = models.ModifyDBInstanceVipVportRequest;
 const ModifyBackupConfigResponse = models.ModifyBackupConfigResponse;
 const DescribeDBImportRecordsRequest = models.DescribeDBImportRecordsRequest;
 const CreateDBImportJobResponse = models.CreateDBImportJobResponse;
+const TagInfo = models.TagInfo;
 const DescribeDBInstancesResponse = models.DescribeDBInstancesResponse;
 const InitDBInstancesResponse = models.InitDBInstancesResponse;
 const RestartDBInstancesRequest = models.RestartDBInstancesRequest;

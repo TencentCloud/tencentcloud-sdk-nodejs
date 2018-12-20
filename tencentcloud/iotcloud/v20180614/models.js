@@ -225,24 +225,18 @@ class ReplaceTopicRuleRequest extends  AbstractModel {
 }
 
 /**
- * CreateMultiDevice返回参数结构体
+ * DeleteTopicRule请求参数结构体
  * @class
  */
-class CreateMultiDeviceResponse extends  AbstractModel {
+class DeleteTopicRuleRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 任务ID，腾讯云生成全局唯一的任务 ID，有效期一个月，一个月之后任务失效。可以调用获取创建多设备任务状态接口获取该任务的执行状态，当状态为成功时，可以调用获取创建多设备任务结果接口获取该任务的结果
+         * 规则名
          * @type {string || null}
          */
-        this.TaskId = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
+        this.RuleName = null;
 
     }
 
@@ -253,8 +247,7 @@ class CreateMultiDeviceResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TaskId = params.TaskId || null;
-        this.RequestId = params.RequestId || null;
+        this.RuleName = params.RuleName || null;
 
     }
 }
@@ -722,6 +715,56 @@ class DeleteProductResponse extends  AbstractModel {
 }
 
 /**
+ * 创建规则请求包体
+ * @class
+ */
+class TopicRulePayload extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 规则的SQL语句，base64编码
+         * @type {string || null}
+         */
+        this.Sql = null;
+
+        /**
+         * 行为的JSON字符串，大部分种类举例如下：
+[{"republish":{"topic":"TEST/test"}},{"forward":{"api":"http://127.0.0.1:8080"}},{"ckafka":{"instance":{"id":"ckafka-test","name":""},"topic":{"id":"topic-test","name":"test"},"region":"gz"}},{"cmqqueue":{"queuename":"queue-test-TEST","region":"gz"}},{"mysql":{"instanceid":"cdb-test","region":"gz","username":"test","userpwd":"*****","dbname":"d_mqtt","tablename":"t_test","fieldpairs":[{"field":"test","value":"test"}],"devicetype":"CUSTOM"}}]
+         * @type {string || null}
+         */
+        this.Actions = null;
+
+        /**
+         * 规则描述
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * 规则不生效
+         * @type {boolean || null}
+         */
+        this.RuleDisabled = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Sql = params.Sql || null;
+        this.Actions = params.Actions || null;
+        this.Description = params.Description || null;
+        this.RuleDisabled = params.RuleDisabled || null;
+
+    }
+}
+
+/**
  * DescribeMultiDevTask返回参数结构体
  * @class
  */
@@ -759,6 +802,67 @@ class DescribeMultiDevTaskResponse extends  AbstractModel {
         this.TaskId = params.TaskId || null;
         this.TaskStatus = params.TaskStatus || null;
         this.RequestId = params.RequestId || null;
+
+    }
+}
+
+/**
+ * UpdateTopicPolicy请求参数结构体
+ * @class
+ */
+class UpdateTopicPolicyRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 产品ID
+         * @type {string || null}
+         */
+        this.ProductID = null;
+
+        /**
+         * 更新前Topic名
+         * @type {string || null}
+         */
+        this.TopicName = null;
+
+        /**
+         * 更新后Topic名
+         * @type {string || null}
+         */
+        this.NewTopicName = null;
+
+        /**
+         * Topic权限
+         * @type {number || null}
+         */
+        this.Privilege = null;
+
+        /**
+         * 代理订阅信息
+         * @type {BrokerSubscribe || null}
+         */
+        this.BrokerSubscribe = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ProductID = params.ProductID || null;
+        this.TopicName = params.TopicName || null;
+        this.NewTopicName = params.NewTopicName || null;
+        this.Privilege = params.Privilege || null;
+
+        if (params.BrokerSubscribe) {
+            let obj = new BrokerSubscribe();
+            obj.deserialize(params.BrokerSubscribe)
+            this.BrokerSubscribe = obj;
+        }
 
     }
 }
@@ -1051,18 +1155,36 @@ class Task extends  AbstractModel {
 }
 
 /**
- * EnableTopicRule返回参数结构体
+ * CreateTopicPolicy请求参数结构体
  * @class
  */
-class EnableTopicRuleResponse extends  AbstractModel {
+class CreateTopicPolicyRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * 产品ID
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.ProductID = null;
+
+        /**
+         * Topic名称
+         * @type {string || null}
+         */
+        this.TopicName = null;
+
+        /**
+         * Topic权限，1发布，2订阅，3订阅和发布
+         * @type {number || null}
+         */
+        this.Privilege = null;
+
+        /**
+         * 代理订阅信息
+         * @type {BrokerSubscribe || null}
+         */
+        this.BrokerSubscribe = null;
 
     }
 
@@ -1073,7 +1195,15 @@ class EnableTopicRuleResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.ProductID = params.ProductID || null;
+        this.TopicName = params.TopicName || null;
+        this.Privilege = params.Privilege || null;
+
+        if (params.BrokerSubscribe) {
+            let obj = new BrokerSubscribe();
+            obj.deserialize(params.BrokerSubscribe)
+            this.BrokerSubscribe = obj;
+        }
 
     }
 }
@@ -1178,6 +1308,34 @@ class DescribeTasksResponse extends  AbstractModel {
                 obj.deserialize(params.Tasks[z]);
                 this.Tasks.push(obj);
             }
+        }
+        this.RequestId = params.RequestId || null;
+
+    }
+}
+
+/**
+ * EnableTopicRule返回参数结构体
+ * @class
+ */
+class EnableTopicRuleResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
         }
         this.RequestId = params.RequestId || null;
 
@@ -1338,6 +1496,41 @@ class DescribeDevicesRequest extends  AbstractModel {
 }
 
 /**
+ * 代理订阅信息
+ * @class
+ */
+class BrokerSubscribe extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 产品ID
+         * @type {string || null}
+         */
+        this.ProductId = null;
+
+        /**
+         * 设备名
+         * @type {string || null}
+         */
+        this.DeviceName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ProductId = params.ProductId || null;
+        this.DeviceName = params.DeviceName || null;
+
+    }
+}
+
+/**
  * CreateTask请求参数结构体
  * @class
  */
@@ -1434,37 +1627,18 @@ class DisableTopicRuleRequest extends  AbstractModel {
 }
 
 /**
- * 创建规则请求包体
+ * CreateTopicPolicy返回参数结构体
  * @class
  */
-class TopicRulePayload extends  AbstractModel {
+class CreateTopicPolicyResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 规则的SQL语句，base64编码
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.Sql = null;
-
-        /**
-         * 行为的JSON字符串，大部分种类举例如下：
-[{"republish":{"topic":"TEST/test"}},{"forward":{"api":"http://127.0.0.1:8080"}},{"ckafka":{"instance":{"id":"ckafka-test","name":""},"topic":{"id":"topic-test","name":"test"},"region":"gz"}},{"cmqqueue":{"queuename":"queue-test-TEST","region":"gz"}},{"mysql":{"instanceid":"cdb-test","region":"gz","username":"test","userpwd":"*****","dbname":"d_mqtt","tablename":"t_test","fieldpairs":[{"field":"test","value":"test"}],"devicetype":"CUSTOM"}}]
-         * @type {string || null}
-         */
-        this.Actions = null;
-
-        /**
-         * 规则描述
-         * @type {string || null}
-         */
-        this.Description = null;
-
-        /**
-         * 规则不生效
-         * @type {boolean || null}
-         */
-        this.RuleDisabled = null;
+        this.RequestId = null;
 
     }
 
@@ -1475,10 +1649,7 @@ class TopicRulePayload extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Sql = params.Sql || null;
-        this.Actions = params.Actions || null;
-        this.Description = params.Description || null;
-        this.RuleDisabled = params.RuleDisabled || null;
+        this.RequestId = params.RequestId || null;
 
     }
 }
@@ -2167,18 +2338,24 @@ class DeviceInfo extends  AbstractModel {
 }
 
 /**
- * DeleteTopicRule请求参数结构体
+ * CreateMultiDevice返回参数结构体
  * @class
  */
-class DeleteTopicRuleRequest extends  AbstractModel {
+class CreateMultiDeviceResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 规则名
+         * 任务ID，腾讯云生成全局唯一的任务 ID，有效期一个月，一个月之后任务失效。可以调用获取创建多设备任务状态接口获取该任务的执行状态，当状态为成功时，可以调用获取创建多设备任务结果接口获取该任务的结果
          * @type {string || null}
          */
-        this.RuleName = null;
+        this.TaskId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
 
     }
 
@@ -2189,7 +2366,8 @@ class DeleteTopicRuleRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RuleName = params.RuleName || null;
+        this.TaskId = params.TaskId || null;
+        this.RequestId = params.RequestId || null;
 
     }
 }
@@ -2638,6 +2816,34 @@ class DescribeMultiDevicesResponse extends  AbstractModel {
 }
 
 /**
+ * UpdateTopicPolicy返回参数结构体
+ * @class
+ */
+class UpdateTopicPolicyResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = params.RequestId || null;
+
+    }
+}
+
+/**
  * 任务列表详细信息
  * @class
  */
@@ -2720,7 +2926,7 @@ module.exports = {
     DescribeTasksRequest: DescribeTasksRequest,
     DisableTopicRuleResponse: DisableTopicRuleResponse,
     ReplaceTopicRuleRequest: ReplaceTopicRuleRequest,
-    CreateMultiDeviceResponse: CreateMultiDeviceResponse,
+    DeleteTopicRuleRequest: DeleteTopicRuleRequest,
     DescribeMultiDevicesRequest: DescribeMultiDevicesRequest,
     MultiDevicesInfo: MultiDevicesInfo,
     UpdateDeviceShadowResponse: UpdateDeviceShadowResponse,
@@ -2731,7 +2937,9 @@ module.exports = {
     BatchUpdateShadow: BatchUpdateShadow,
     DeleteDeviceRequest: DeleteDeviceRequest,
     DeleteProductResponse: DeleteProductResponse,
+    TopicRulePayload: TopicRulePayload,
     DescribeMultiDevTaskResponse: DescribeMultiDevTaskResponse,
+    UpdateTopicPolicyRequest: UpdateTopicPolicyRequest,
     ProductInfo: ProductInfo,
     DescribeDevicesResponse: DescribeDevicesResponse,
     DeviceTag: DeviceTag,
@@ -2739,16 +2947,18 @@ module.exports = {
     DescribeDeviceRequest: DescribeDeviceRequest,
     DescribeTaskRequest: DescribeTaskRequest,
     Task: Task,
-    EnableTopicRuleResponse: EnableTopicRuleResponse,
+    CreateTopicPolicyRequest: CreateTopicPolicyRequest,
     PublishMessageResponse: PublishMessageResponse,
     ProductMetadata: ProductMetadata,
     DescribeTasksResponse: DescribeTasksResponse,
+    EnableTopicRuleResponse: EnableTopicRuleResponse,
     CreateProductResponse: CreateProductResponse,
     DescribeProductsRequest: DescribeProductsRequest,
     DescribeDevicesRequest: DescribeDevicesRequest,
+    BrokerSubscribe: BrokerSubscribe,
     CreateTaskRequest: CreateTaskRequest,
     DisableTopicRuleRequest: DisableTopicRuleRequest,
-    TopicRulePayload: TopicRulePayload,
+    CreateTopicPolicyResponse: CreateTopicPolicyResponse,
     DescribeMultiDevTaskRequest: DescribeMultiDevTaskRequest,
     CreateTopicRuleResponse: CreateTopicRuleResponse,
     CancelTaskResponse: CancelTaskResponse,
@@ -2762,7 +2972,7 @@ module.exports = {
     Attribute: Attribute,
     DeleteDeviceResponse: DeleteDeviceResponse,
     DeviceInfo: DeviceInfo,
-    DeleteTopicRuleRequest: DeleteTopicRuleRequest,
+    CreateMultiDeviceResponse: CreateMultiDeviceResponse,
     ReplaceTopicRuleResponse: ReplaceTopicRuleResponse,
     DescribeDeviceShadowResponse: DescribeDeviceShadowResponse,
     ProductProperties: ProductProperties,
@@ -2771,6 +2981,7 @@ module.exports = {
     DescribeDeviceResponse: DescribeDeviceResponse,
     DescribeDeviceShadowRequest: DescribeDeviceShadowRequest,
     DescribeMultiDevicesResponse: DescribeMultiDevicesResponse,
+    UpdateTopicPolicyResponse: UpdateTopicPolicyResponse,
     TaskInfo: TaskInfo,
 
 }

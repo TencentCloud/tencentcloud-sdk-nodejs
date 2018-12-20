@@ -27,6 +27,7 @@ module.exports = {
     iotcloud: require("./iotcloud"),
     live: require("./live"),
     mariadb: require("./mariadb"),
+    mongodb: require("./mongodb"),
     monitor: require("./monitor"),
     ms: require("./ms"),
     msp: require("./msp"),

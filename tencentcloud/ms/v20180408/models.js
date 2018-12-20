@@ -621,6 +621,55 @@ class CreateScanInstancesRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeUserBaseInfoInstance返回参数结构体
+ * @class
+ */
+class DescribeUserBaseInfoInstanceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 用户uin信息
+         * @type {number || null}
+         */
+        this.UserUin = null;
+
+        /**
+         * 用户APPID信息
+         * @type {number || null}
+         */
+        this.UserAppid = null;
+
+        /**
+         * 系统时间戳
+         * @type {number || null}
+         */
+        this.TimeStamp = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.UserUin = params.UserUin || null;
+        this.UserAppid = params.UserAppid || null;
+        this.TimeStamp = params.TimeStamp || null;
+        this.RequestId = params.RequestId || null;
+
+    }
+}
+
+/**
  * CreateShieldPlanInstance请求参数结构体
  * @class
  */
@@ -2176,6 +2225,27 @@ class DescribeScanInstancesRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeUserBaseInfoInstance请求参数结构体
+ * @class
+ */
+class DescribeUserBaseInfoInstanceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+    }
+}
+
+/**
  * DescribeResourceInstances返回参数结构体
  * @class
  */
@@ -2792,6 +2862,7 @@ module.exports = {
     CreateCosSecKeyInstanceRequest: CreateCosSecKeyInstanceRequest,
     DescribeScanResultsResponse: DescribeScanResultsResponse,
     CreateScanInstancesRequest: CreateScanInstancesRequest,
+    DescribeUserBaseInfoInstanceResponse: DescribeUserBaseInfoInstanceResponse,
     CreateShieldPlanInstanceRequest: CreateShieldPlanInstanceRequest,
     ScanSetInfo: ScanSetInfo,
     AppScanSet: AppScanSet,
@@ -2819,6 +2890,7 @@ module.exports = {
     Filter: Filter,
     DeleteShieldInstancesResponse: DeleteShieldInstancesResponse,
     DescribeScanInstancesRequest: DescribeScanInstancesRequest,
+    DescribeUserBaseInfoInstanceRequest: DescribeUserBaseInfoInstanceRequest,
     DescribeResourceInstancesResponse: DescribeResourceInstancesResponse,
     DescribeScanResultsRequest: DescribeScanResultsRequest,
     CreateCosSecKeyInstanceResponse: CreateCosSecKeyInstanceResponse,

@@ -574,13 +574,13 @@ class AssociateSecurityGroupsRequest extends  AbstractModel {
         super();
 
         /**
-         * 要绑定的`安全组ID`，类似sg-efil73jd，支持绑定多个安全组。
+         * 要绑定的`安全组ID`，类似sg-efil73jd，只支持绑定单个安全组。
          * @type {Array.<string> || null}
          */
         this.SecurityGroupIds = null;
 
         /**
-         * 被绑定的`实例ID`，类似ins-lesecurk，只支持指定单个实例。
+         * 被绑定的`实例ID`，类似ins-lesecurk，支持指定多个实例。
          * @type {Array.<string> || null}
          */
         this.InstanceIds = null;
@@ -5137,7 +5137,7 @@ class ModifyInstancesVpcAttributeRequest extends  AbstractModel {
         super();
 
         /**
-         * 待操作的实例ID数组。可通过[`DescribeInstances`](document/api/213/9388)接口返回值中的`InstanceId`获取。
+         * 待操作的实例ID数组。可通过[`DescribeInstances`](document/api/213/15728)接口返回值中的`InstanceId`获取。
          * @type {Array.<string> || null}
          */
         this.InstanceIds = null;
@@ -5465,7 +5465,7 @@ class InstanceTypeQuotaItem extends  AbstractModel {
         this.LocalDiskTypeList = null;
 
         /**
-         * 实例是否售卖。
+         * 实例是否售卖。取值范围： <br><li>SELL：表示实例可购买<br><li>SOLD_OUT：表示实例已售罄。
          * @type {string || null}
          */
         this.Status = null;
@@ -6245,6 +6245,14 @@ class StopInstancesRequest extends  AbstractModel {
          */
         this.StopType = null;
 
+        /**
+         * 按量计费实例关机收费模式。
+取值范围：<br><li>KEEP_CHARGING：关机继续收费<br><li>STOP_CHARGING：关机停止收费<br>默认取值：KEEP_CHARGING。
+该参数只针对部分按量计费云硬盘实例生效，详情参考[按量计费实例关机不收费说明](https://cloud.tencent.com/document/product/213/19918)
+         * @type {string || null}
+         */
+        this.StoppedMode = null;
+
     }
 
     /**
@@ -6257,6 +6265,7 @@ class StopInstancesRequest extends  AbstractModel {
         this.InstanceIds = params.InstanceIds || null;
         this.ForceStop = params.ForceStop || null;
         this.StopType = params.StopType || null;
+        this.StoppedMode = params.StoppedMode || null;
 
     }
 }
@@ -6463,13 +6472,13 @@ class DisassociateSecurityGroupsRequest extends  AbstractModel {
         super();
 
         /**
-         * 要解绑的`安全组ID`，类似sg-efil73jd，支持解绑多个安全组。
+         * 要解绑的`安全组ID`，类似sg-efil73jd，只支持解绑单个安全组。
          * @type {Array.<string> || null}
          */
         this.SecurityGroupIds = null;
 
         /**
-         * 被解绑的`实例ID`，类似ins-lesecurk 。
+         * 被解绑的`实例ID`，类似ins-lesecurk，支持指定多个实例 。
          * @type {Array.<string> || null}
          */
         this.InstanceIds = null;

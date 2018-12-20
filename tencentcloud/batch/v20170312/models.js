@@ -3382,6 +3382,41 @@ class RunSecurityServiceEnabled extends  AbstractModel {
 }
 
 /**
+ * CreateTaskTemplate返回参数结构体
+ * @class
+ */
+class CreateTaskTemplateResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 任务模板ID
+         * @type {string || null}
+         */
+        this.TaskTemplateId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskTemplateId = params.TaskTemplateId || null;
+        this.RequestId = params.RequestId || null;
+
+    }
+}
+
+/**
  * DescribeJob请求参数结构体
  * @class
  */
@@ -3877,6 +3912,67 @@ class Placement extends  AbstractModel {
 }
 
 /**
+ * ModifyComputeEnv请求参数结构体
+ * @class
+ */
+class ModifyComputeEnvRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 计算环境ID
+         * @type {string || null}
+         */
+        this.EnvId = null;
+
+        /**
+         * 计算节点期望个数
+         * @type {number || null}
+         */
+        this.DesiredComputeNodeCount = null;
+
+        /**
+         * 计算环境名称
+         * @type {string || null}
+         */
+        this.EnvName = null;
+
+        /**
+         * 计算环境描述
+         * @type {string || null}
+         */
+        this.EnvDescription = null;
+
+        /**
+         * 计算环境属性数据
+         * @type {ComputeEnvData || null}
+         */
+        this.EnvData = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.EnvId = params.EnvId || null;
+        this.DesiredComputeNodeCount = params.DesiredComputeNodeCount || null;
+        this.EnvName = params.EnvName || null;
+        this.EnvDescription = params.EnvDescription || null;
+
+        if (params.EnvData) {
+            let obj = new ComputeEnvData();
+            obj.deserialize(params.EnvData)
+            this.EnvData = obj;
+        }
+
+    }
+}
+
+/**
  * 计算节点
  * @class
  */
@@ -4085,7 +4181,7 @@ class InstanceTypeQuotaItem extends  AbstractModel {
         this.LocalDiskTypeList = null;
 
         /**
-         * 实例是否售卖。
+         * 实例是否售卖。取值范围： <br><li>SELL：表示实例可购买<br><li>SOLD_OUT：表示实例已售罄。
          * @type {string || null}
          */
         this.Status = null;
@@ -4140,18 +4236,12 @@ class InstanceTypeQuotaItem extends  AbstractModel {
 }
 
 /**
- * CreateTaskTemplate返回参数结构体
+ * RetryJobs返回参数结构体
  * @class
  */
-class CreateTaskTemplateResponse extends  AbstractModel {
+class RetryJobsResponse extends  AbstractModel {
     constructor(){
         super();
-
-        /**
-         * 任务模板ID
-         * @type {string || null}
-         */
-        this.TaskTemplateId = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -4168,7 +4258,6 @@ class CreateTaskTemplateResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TaskTemplateId = params.TaskTemplateId || null;
         this.RequestId = params.RequestId || null;
 
     }
@@ -4463,42 +4552,18 @@ class TerminateTaskInstanceResponse extends  AbstractModel {
 }
 
 /**
- * ModifyComputeEnv请求参数结构体
+ * RetryJobs请求参数结构体
  * @class
  */
-class ModifyComputeEnvRequest extends  AbstractModel {
+class RetryJobsRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 计算环境ID
-         * @type {string || null}
+         * 作业ID列表。
+         * @type {Array.<string> || null}
          */
-        this.EnvId = null;
-
-        /**
-         * 计算节点期望个数
-         * @type {number || null}
-         */
-        this.DesiredComputeNodeCount = null;
-
-        /**
-         * 计算环境名称
-         * @type {string || null}
-         */
-        this.EnvName = null;
-
-        /**
-         * 计算环境描述
-         * @type {string || null}
-         */
-        this.EnvDescription = null;
-
-        /**
-         * 计算环境属性数据
-         * @type {ComputeEnvData || null}
-         */
-        this.EnvData = null;
+        this.JobIds = null;
 
     }
 
@@ -4509,16 +4574,7 @@ class ModifyComputeEnvRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.EnvId = params.EnvId || null;
-        this.DesiredComputeNodeCount = params.DesiredComputeNodeCount || null;
-        this.EnvName = params.EnvName || null;
-        this.EnvDescription = params.EnvDescription || null;
-
-        if (params.EnvData) {
-            let obj = new ComputeEnvData();
-            obj.deserialize(params.EnvData)
-            this.EnvData = obj;
-        }
+        this.JobIds = params.JobIds || null;
 
     }
 }
@@ -5613,6 +5669,7 @@ module.exports = {
     DescribeJobSubmitInfoResponse: DescribeJobSubmitInfoResponse,
     DescribeComputeEnvCreateInfosResponse: DescribeComputeEnvCreateInfosResponse,
     RunSecurityServiceEnabled: RunSecurityServiceEnabled,
+    CreateTaskTemplateResponse: CreateTaskTemplateResponse,
     DescribeJobRequest: DescribeJobRequest,
     RedirectInfo: RedirectInfo,
     ModifyTaskTemplateResponse: ModifyTaskTemplateResponse,
@@ -5626,10 +5683,11 @@ module.exports = {
     Docker: Docker,
     ModifyComputeEnvResponse: ModifyComputeEnvResponse,
     Placement: Placement,
+    ModifyComputeEnvRequest: ModifyComputeEnvRequest,
     ComputeNode: ComputeNode,
     ItemPrice: ItemPrice,
     InstanceTypeQuotaItem: InstanceTypeQuotaItem,
-    CreateTaskTemplateResponse: CreateTaskTemplateResponse,
+    RetryJobsResponse: RetryJobsResponse,
     TerminateJobResponse: TerminateJobResponse,
     DescribeJobsRequest: DescribeJobsRequest,
     TaskTemplateView: TaskTemplateView,
@@ -5637,7 +5695,7 @@ module.exports = {
     DescribeCvmZoneInstanceConfigInfosRequest: DescribeCvmZoneInstanceConfigInfosRequest,
     TerminateTaskInstanceRequest: TerminateTaskInstanceRequest,
     TerminateTaskInstanceResponse: TerminateTaskInstanceResponse,
-    ModifyComputeEnvRequest: ModifyComputeEnvRequest,
+    RetryJobsRequest: RetryJobsRequest,
     TaskInstanceView: TaskInstanceView,
     DescribeAvailableCvmInstanceTypesResponse: DescribeAvailableCvmInstanceTypesResponse,
     DescribeTaskResponse: DescribeTaskResponse,

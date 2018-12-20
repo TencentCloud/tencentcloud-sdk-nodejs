@@ -16,10 +16,20 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
-const GetDetectInfoRequest = models.GetDetectInfoRequest;
-const DetectAuthRequest = models.DetectAuthRequest;
+const GetLiveCodeResponse = models.GetLiveCodeResponse;
 const DetectAuthResponse = models.DetectAuthResponse;
+const ImageRecognitionResponse = models.ImageRecognitionResponse;
+const GetActionSequenceRequest = models.GetActionSequenceRequest;
 const GetDetectInfoResponse = models.GetDetectInfoResponse;
+const LivenessCompareResponse = models.LivenessCompareResponse;
+const DetectAuthRequest = models.DetectAuthRequest;
+const GetDetectInfoRequest = models.GetDetectInfoRequest;
+const GetLiveCodeRequest = models.GetLiveCodeRequest;
+const ImageRecognitionRequest = models.ImageRecognitionRequest;
+const LivenessCompareRequest = models.LivenessCompareRequest;
+const GetActionSequenceResponse = models.GetActionSequenceResponse;
+const LivenessRecognitionResponse = models.LivenessRecognitionResponse;
+const LivenessRecognitionRequest = models.LivenessRecognitionRequest;
 
 
 /**
@@ -33,7 +43,7 @@ class FaceidClient extends AbstractClient {
     }
     
     /**
-     * 获取实名核身结果信息
+     * 完成验证后，用BizToken调用本接口获取结果信息，BizToken生成后三天内（3\*24\*3,600秒）可多次拉取。
      * @param {GetDetectInfoRequest} req
      * @param {function(string, GetDetectInfoResponse):void} cb
      * @public
@@ -44,7 +54,62 @@ class FaceidClient extends AbstractClient {
     }
 
     /**
-     * 实名核身鉴权。用于获取一次核身流程的BizToken。如果是微信平台，会同时返回一个URL，用作微信平台的跳转。
+     * 使用数字活体检测模式前，需调用本接口获取数字验证码。
+     * @param {GetLiveCodeRequest} req
+     * @param {function(string, GetLiveCodeResponse):void} cb
+     * @public
+     */
+    GetLiveCode(req, cb) {
+        let resp = new GetLiveCodeResponse();
+        this.request("GetLiveCode", req, resp, cb);
+    }
+
+    /**
+     * 使用动作活体检测模式前，需调用本接口获取动作顺序。
+     * @param {GetActionSequenceRequest} req
+     * @param {function(string, GetActionSequenceResponse):void} cb
+     * @public
+     */
+    GetActionSequence(req, cb) {
+        let resp = new GetActionSequenceResponse();
+        this.request("GetActionSequence", req, resp, cb);
+    }
+
+    /**
+     * 传入视频和照片，先判断视频中是否为真人，判断为真人后，再判断该视频中的人与上传照片是否属于同一个人。
+     * @param {LivenessCompareRequest} req
+     * @param {function(string, LivenessCompareResponse):void} cb
+     * @public
+     */
+    LivenessCompare(req, cb) {
+        let resp = new LivenessCompareResponse();
+        this.request("LivenessCompare", req, resp, cb);
+    }
+
+    /**
+     * 传入视频和身份信息，先判断视频中是否为真人，判断为真人后，再判断该视频中的人与公安权威库的证件照是否属于同一个人。
+     * @param {LivenessRecognitionRequest} req
+     * @param {function(string, LivenessRecognitionResponse):void} cb
+     * @public
+     */
+    LivenessRecognition(req, cb) {
+        let resp = new LivenessRecognitionResponse();
+        this.request("LivenessRecognition", req, resp, cb);
+    }
+
+    /**
+     * 传入照片和身份信息，判断该照片与公安权威库的证件照是否属于同一个人。
+     * @param {ImageRecognitionRequest} req
+     * @param {function(string, ImageRecognitionResponse):void} cb
+     * @public
+     */
+    ImageRecognition(req, cb) {
+        let resp = new ImageRecognitionResponse();
+        this.request("ImageRecognition", req, resp, cb);
+    }
+
+    /**
+     * 每次开始核身前，需先调用本接口获取BizToken，用来串联核身流程，在核身完成后，用于获取验证结果信息。
      * @param {DetectAuthRequest} req
      * @param {function(string, DetectAuthResponse):void} cb
      * @public

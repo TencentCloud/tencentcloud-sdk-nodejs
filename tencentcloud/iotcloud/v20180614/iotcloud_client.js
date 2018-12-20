@@ -21,7 +21,7 @@ const DeleteProductRequest = models.DeleteProductRequest;
 const DescribeTasksRequest = models.DescribeTasksRequest;
 const DisableTopicRuleResponse = models.DisableTopicRuleResponse;
 const ReplaceTopicRuleRequest = models.ReplaceTopicRuleRequest;
-const CreateMultiDeviceResponse = models.CreateMultiDeviceResponse;
+const DeleteTopicRuleRequest = models.DeleteTopicRuleRequest;
 const DescribeMultiDevicesRequest = models.DescribeMultiDevicesRequest;
 const MultiDevicesInfo = models.MultiDevicesInfo;
 const UpdateDeviceShadowResponse = models.UpdateDeviceShadowResponse;
@@ -32,7 +32,9 @@ const BatchPublishMessage = models.BatchPublishMessage;
 const BatchUpdateShadow = models.BatchUpdateShadow;
 const DeleteDeviceRequest = models.DeleteDeviceRequest;
 const DeleteProductResponse = models.DeleteProductResponse;
+const TopicRulePayload = models.TopicRulePayload;
 const DescribeMultiDevTaskResponse = models.DescribeMultiDevTaskResponse;
+const UpdateTopicPolicyRequest = models.UpdateTopicPolicyRequest;
 const ProductInfo = models.ProductInfo;
 const DescribeDevicesResponse = models.DescribeDevicesResponse;
 const DeviceTag = models.DeviceTag;
@@ -40,16 +42,18 @@ const DeleteTopicRuleResponse = models.DeleteTopicRuleResponse;
 const DescribeDeviceRequest = models.DescribeDeviceRequest;
 const DescribeTaskRequest = models.DescribeTaskRequest;
 const Task = models.Task;
-const EnableTopicRuleResponse = models.EnableTopicRuleResponse;
+const CreateTopicPolicyRequest = models.CreateTopicPolicyRequest;
 const PublishMessageResponse = models.PublishMessageResponse;
 const ProductMetadata = models.ProductMetadata;
 const DescribeTasksResponse = models.DescribeTasksResponse;
+const EnableTopicRuleResponse = models.EnableTopicRuleResponse;
 const CreateProductResponse = models.CreateProductResponse;
 const DescribeProductsRequest = models.DescribeProductsRequest;
 const DescribeDevicesRequest = models.DescribeDevicesRequest;
+const BrokerSubscribe = models.BrokerSubscribe;
 const CreateTaskRequest = models.CreateTaskRequest;
 const DisableTopicRuleRequest = models.DisableTopicRuleRequest;
-const TopicRulePayload = models.TopicRulePayload;
+const CreateTopicPolicyResponse = models.CreateTopicPolicyResponse;
 const DescribeMultiDevTaskRequest = models.DescribeMultiDevTaskRequest;
 const CreateTopicRuleResponse = models.CreateTopicRuleResponse;
 const CancelTaskResponse = models.CancelTaskResponse;
@@ -63,7 +67,7 @@ const CreateProductRequest = models.CreateProductRequest;
 const Attribute = models.Attribute;
 const DeleteDeviceResponse = models.DeleteDeviceResponse;
 const DeviceInfo = models.DeviceInfo;
-const DeleteTopicRuleRequest = models.DeleteTopicRuleRequest;
+const CreateMultiDeviceResponse = models.CreateMultiDeviceResponse;
 const ReplaceTopicRuleResponse = models.ReplaceTopicRuleResponse;
 const DescribeDeviceShadowResponse = models.DescribeDeviceShadowResponse;
 const ProductProperties = models.ProductProperties;
@@ -72,6 +76,7 @@ const EnableTopicRuleRequest = models.EnableTopicRuleRequest;
 const DescribeDeviceResponse = models.DescribeDeviceResponse;
 const DescribeDeviceShadowRequest = models.DescribeDeviceShadowRequest;
 const DescribeMultiDevicesResponse = models.DescribeMultiDevicesResponse;
+const UpdateTopicPolicyResponse = models.UpdateTopicPolicyResponse;
 const TaskInfo = models.TaskInfo;
 
 
@@ -174,6 +179,17 @@ class IotcloudClient extends AbstractClient {
     }
 
     /**
+     * 本接口（CreateTopicPolicy）用于创建一个Topic
+     * @param {CreateTopicPolicyRequest} req
+     * @param {function(string, CreateTopicPolicyResponse):void} cb
+     * @public
+     */
+    CreateTopicPolicy(req, cb) {
+        let resp = new CreateTopicPolicyResponse();
+        this.request("CreateTopicPolicy", req, resp, cb);
+    }
+
+    /**
      * 本接口（CreateProduct）用于创建一个新的物联网通信产品
      * @param {CreateProductRequest} req
      * @param {function(string, CreateProductResponse):void} cb
@@ -270,6 +286,17 @@ class IotcloudClient extends AbstractClient {
     DescribeMultiDevices(req, cb) {
         let resp = new DescribeMultiDevicesResponse();
         this.request("DescribeMultiDevices", req, resp, cb);
+    }
+
+    /**
+     * 本接口（UpdateTopicPolicy）用于更新Topic信息
+     * @param {UpdateTopicPolicyRequest} req
+     * @param {function(string, UpdateTopicPolicyResponse):void} cb
+     * @public
+     */
+    UpdateTopicPolicy(req, cb) {
+        let resp = new UpdateTopicPolicyResponse();
+        this.request("UpdateTopicPolicy", req, resp, cb);
     }
 
     /**

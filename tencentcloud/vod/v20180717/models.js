@@ -94,6 +94,57 @@ class TempCertificate extends  AbstractModel {
 }
 
 /**
+ * SearchMedia返回参数结构体
+ * @class
+ */
+class SearchMediaResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 符合搜索条件的记录总数
+<li>最大值：5000，即，当命中记录数超过 5000，该字段将返回 5000，而非实际命中总数。</li>
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 媒体文件信息列表，只包含基础信息（BasicInfo）
+         * @type {Array.<MediaInfo> || null}
+         */
+        this.MediaInfoSet = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = params.TotalCount || null;
+
+        if (params.MediaInfoSet) {
+            this.MediaInfoSet = new Array();
+            for (let z in params.MediaInfoSet) {
+                let obj = new MediaInfo();
+                obj.deserialize(params.MediaInfoSet[z]);
+                this.MediaInfoSet.push(obj);
+            }
+        }
+        this.RequestId = params.RequestId || null;
+
+    }
+}
+
+/**
  * ModifyMediaInfo返回参数结构体
  * @class
  */
@@ -1323,6 +1374,126 @@ class MediaMetaData extends  AbstractModel {
 }
 
 /**
+ * SearchMedia请求参数结构体
+ * @class
+ */
+class SearchMediaRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 搜索文本，模糊匹配媒体文件名称或描述信息，匹配项越多，匹配度越高，排序越优先。长度限制：64 个字符。
+         * @type {string || null}
+         */
+        this.Text = null;
+
+        /**
+         * 标签集合，匹配集合中任意元素。
+<li>单个标签长度限制：8 个字符</li>
+<li>数组长度限制：10</li>
+         * @type {Array.<string> || null}
+         */
+        this.Tags = null;
+
+        /**
+         * 分类 ID 集合，匹配集合指定 ID 的分类及其所有子类。数组长度限制：10。
+         * @type {Array.<number> || null}
+         */
+        this.ClassIds = null;
+
+        /**
+         * 创建时间的开始时间
+<li>大于等于开始时间</li>
+<li>格式按照 ISO 8601 标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F)。</li>
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * 创建时间的结束时间
+<li>小于结束时间</li>
+<li>格式按照 ISO 8601 标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F)。</li>
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * 媒体文件来源
+         * @type {number || null}
+         */
+        this.SourceType = null;
+
+        /**
+         * 推流[直播码](https://cloud.tencent.com/document/product/267/5959)
+         * @type {string || null}
+         */
+        this.StreamId = null;
+
+        /**
+         * 直播录制文件的唯一标识
+         * @type {string || null}
+         */
+        this.Vid = null;
+
+        /**
+         * 排序方式
+<li>Sort.Field 可选值：CreateTime</li>
+<li>指定 Text 搜索时，将根据匹配度排序，该字段无效</li>
+         * @type {SortBy || null}
+         */
+        this.Sort = null;
+
+        /**
+         * 偏移量
+<li>默认值：0</li>
+<li>取值范围：Offset + Limit 不超过5000</li>
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 返回记录条数，默认值：10。
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Text = params.Text || null;
+        this.Tags = params.Tags || null;
+        this.ClassIds = params.ClassIds || null;
+        this.StartTime = params.StartTime || null;
+        this.EndTime = params.EndTime || null;
+        this.SourceType = params.SourceType || null;
+        this.StreamId = params.StreamId || null;
+        this.Vid = params.Vid || null;
+
+        if (params.Sort) {
+            let obj = new SortBy();
+            obj.deserialize(params.Sort)
+            this.Sort = obj;
+        }
+        this.Offset = params.Offset || null;
+        this.Limit = params.Limit || null;
+        this.SubAppId = params.SubAppId || null;
+
+    }
+}
+
+/**
  * ApplyUpload返回参数结构体
  * @class
  */
@@ -2049,6 +2220,41 @@ class MediaAnimatedGraphicsItem extends  AbstractModel {
 }
 
 /**
+ * 排序依据
+ * @class
+ */
+class SortBy extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 排序字段
+         * @type {string || null}
+         */
+        this.Field = null;
+
+        /**
+         * 排序方式，可选值：Asc（升序）、Desc（降序）
+         * @type {string || null}
+         */
+        this.Order = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Field = params.Field || null;
+        this.Order = params.Order || null;
+
+    }
+}
+
+/**
  * 点播文件转码信息
  * @class
  */
@@ -2187,6 +2393,7 @@ class DescribeMediaInfosResponse extends  AbstractModel {
 module.exports = {
     DeleteMediaResponse: DeleteMediaResponse,
     TempCertificate: TempCertificate,
+    SearchMediaResponse: SearchMediaResponse,
     ModifyMediaInfoResponse: ModifyMediaInfoResponse,
     ModifyClassRequest: ModifyClassRequest,
     DescribeAllClassRequest: DescribeAllClassRequest,
@@ -2211,6 +2418,7 @@ module.exports = {
     ModifyMediaInfoRequest: ModifyMediaInfoRequest,
     MediaAnimatedGraphicsInfo: MediaAnimatedGraphicsInfo,
     MediaMetaData: MediaMetaData,
+    SearchMediaRequest: SearchMediaRequest,
     ApplyUploadResponse: ApplyUploadResponse,
     DeleteClassRequest: DeleteClassRequest,
     DescribeAllClassResponse: DescribeAllClassResponse,
@@ -2222,6 +2430,7 @@ module.exports = {
     MediaBasicInfo: MediaBasicInfo,
     MediaInfo: MediaInfo,
     MediaAnimatedGraphicsItem: MediaAnimatedGraphicsItem,
+    SortBy: SortBy,
     MediaTranscodeInfo: MediaTranscodeInfo,
     DeleteMediaRequest: DeleteMediaRequest,
     DescribeMediaInfosResponse: DescribeMediaInfosResponse,

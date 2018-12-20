@@ -28,6 +28,7 @@ const CreateShieldInstanceRequest = models.CreateShieldInstanceRequest;
 const CreateCosSecKeyInstanceRequest = models.CreateCosSecKeyInstanceRequest;
 const DescribeScanResultsResponse = models.DescribeScanResultsResponse;
 const CreateScanInstancesRequest = models.CreateScanInstancesRequest;
+const DescribeUserBaseInfoInstanceResponse = models.DescribeUserBaseInfoInstanceResponse;
 const CreateShieldPlanInstanceRequest = models.CreateShieldPlanInstanceRequest;
 const ScanSetInfo = models.ScanSetInfo;
 const AppScanSet = models.AppScanSet;
@@ -55,6 +56,7 @@ const DeleteScanInstancesResponse = models.DeleteScanInstancesResponse;
 const Filter = models.Filter;
 const DeleteShieldInstancesResponse = models.DeleteShieldInstancesResponse;
 const DescribeScanInstancesRequest = models.DescribeScanInstancesRequest;
+const DescribeUserBaseInfoInstanceRequest = models.DescribeUserBaseInfoInstanceRequest;
 const DescribeResourceInstancesResponse = models.DescribeResourceInstancesResponse;
 const DescribeScanResultsRequest = models.DescribeScanResultsRequest;
 const CreateCosSecKeyInstanceResponse = models.CreateCosSecKeyInstanceResponse;
@@ -209,6 +211,17 @@ class MsClient extends AbstractClient {
     CreateShieldPlanInstance(req, cb) {
         let resp = new CreateShieldPlanInstanceResponse();
         this.request("CreateShieldPlanInstance", req, resp, cb);
+    }
+
+    /**
+     * 获取用户基础信息
+     * @param {DescribeUserBaseInfoInstanceRequest} req
+     * @param {function(string, DescribeUserBaseInfoInstanceResponse):void} cb
+     * @public
+     */
+    DescribeUserBaseInfoInstance(req, cb) {
+        let resp = new DescribeUserBaseInfoInstanceResponse();
+        this.request("DescribeUserBaseInfoInstance", req, resp, cb);
     }
 
     /**
