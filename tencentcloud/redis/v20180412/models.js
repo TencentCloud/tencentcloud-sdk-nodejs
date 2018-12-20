@@ -17,6 +17,34 @@
 const AbstractModel = require("../../common/abstract_model");
 
 /**
+ * ModifyInstance返回参数结构体
+ * @class
+ */
+class ModifyInstanceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = params.RequestId || null;
+
+    }
+}
+
+/**
  * 可用区内产品信息
  * @class
  */
@@ -721,6 +749,48 @@ class ProductConf extends  AbstractModel {
         this.ShardNum = params.ShardNum || null;
         this.PayMode = params.PayMode || null;
         this.EnableRepicaReadOnly = params.EnableRepicaReadOnly || null;
+
+    }
+}
+
+/**
+ * ModifyInstance请求参数结构体
+ * @class
+ */
+class ModifyInstanceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 修改实例操作，如填写：rename（表示实例重命名）
+         * @type {string || null}
+         */
+        this.Operation = null;
+
+        /**
+         * 实例Id
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 实例的新名称
+         * @type {string || null}
+         */
+        this.InstanceName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Operation = params.Operation || null;
+        this.InstanceId = params.InstanceId || null;
+        this.InstanceName = params.InstanceName || null;
 
     }
 }
@@ -1899,6 +1969,7 @@ class ClearInstanceResponse extends  AbstractModel {
 }
 
 module.exports = {
+    ModifyInstanceResponse: ModifyInstanceResponse,
     ZoneCapacityConf: ZoneCapacityConf,
     DescribeAutoBackupConfigResponse: DescribeAutoBackupConfigResponse,
     TradeDealDetail: TradeDealDetail,
@@ -1909,6 +1980,7 @@ module.exports = {
     DescribeProductInfoResponse: DescribeProductInfoResponse,
     ResetPasswordRequest: ResetPasswordRequest,
     ProductConf: ProductConf,
+    ModifyInstanceRequest: ModifyInstanceRequest,
     RenewInstanceResponse: RenewInstanceResponse,
     DescribeInstanceBackupsResponse: DescribeInstanceBackupsResponse,
     DescribeInstanceDealDetailRequest: DescribeInstanceDealDetailRequest,

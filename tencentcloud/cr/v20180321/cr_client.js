@@ -87,7 +87,7 @@ class CrClient extends AbstractClient {
     }
 
     /**
-     * 客户通过调用该接口上传需催收文档或还款文档，接口返回任务ID。
+     * 客户通过调用该接口上传需催收文档或还款文档，接口返回数据任务ID，支持xlsx、xls、csv、zip格式，文档大小不超过50MB。
      * @param {UploadDataFileRequest} req
      * @param {function(string, UploadDataFileResponse):void} cb
      * @public

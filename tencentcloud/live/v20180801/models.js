@@ -1294,7 +1294,10 @@ class DescribeLiveStreamStateResponse extends  AbstractModel {
         super();
 
         /**
-         * 流状态
+         * 流状态，
+active：活跃，
+inactive：非活跃，
+forbid：禁播。
          * @type {string || null}
          */
         this.StreamState = null;

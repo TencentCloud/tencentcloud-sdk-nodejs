@@ -16,6 +16,7 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
+const ModifyInstanceResponse = models.ModifyInstanceResponse;
 const ZoneCapacityConf = models.ZoneCapacityConf;
 const DescribeAutoBackupConfigResponse = models.DescribeAutoBackupConfigResponse;
 const TradeDealDetail = models.TradeDealDetail;
@@ -26,6 +27,7 @@ const CreateInstancesRequest = models.CreateInstancesRequest;
 const DescribeProductInfoResponse = models.DescribeProductInfoResponse;
 const ResetPasswordRequest = models.ResetPasswordRequest;
 const ProductConf = models.ProductConf;
+const ModifyInstanceRequest = models.ModifyInstanceRequest;
 const RenewInstanceResponse = models.RenewInstanceResponse;
 const DescribeInstanceBackupsResponse = models.DescribeInstanceBackupsResponse;
 const DescribeInstanceDealDetailRequest = models.DescribeInstanceDealDetailRequest;
@@ -137,6 +139,17 @@ class RedisClient extends AbstractClient {
     DescribeAutoBackupConfig(req, cb) {
         let resp = new DescribeAutoBackupConfigResponse();
         this.request("DescribeAutoBackupConfig", req, resp, cb);
+    }
+
+    /**
+     * 修改实例相关信息（目前支持：实例重命名）
+     * @param {ModifyInstanceRequest} req
+     * @param {function(string, ModifyInstanceResponse):void} cb
+     * @public
+     */
+    ModifyInstance(req, cb) {
+        let resp = new ModifyInstanceResponse();
+        this.request("ModifyInstance", req, resp, cb);
     }
 
     /**

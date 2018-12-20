@@ -74,6 +74,7 @@ const EnhancedService = models.EnhancedService;
 const DescribeJobSubmitInfoResponse = models.DescribeJobSubmitInfoResponse;
 const DescribeComputeEnvCreateInfosResponse = models.DescribeComputeEnvCreateInfosResponse;
 const RunSecurityServiceEnabled = models.RunSecurityServiceEnabled;
+const CreateTaskTemplateResponse = models.CreateTaskTemplateResponse;
 const DescribeJobRequest = models.DescribeJobRequest;
 const RedirectInfo = models.RedirectInfo;
 const ModifyTaskTemplateResponse = models.ModifyTaskTemplateResponse;
@@ -87,10 +88,11 @@ const CreateComputeEnvResponse = models.CreateComputeEnvResponse;
 const Docker = models.Docker;
 const ModifyComputeEnvResponse = models.ModifyComputeEnvResponse;
 const Placement = models.Placement;
+const ModifyComputeEnvRequest = models.ModifyComputeEnvRequest;
 const ComputeNode = models.ComputeNode;
 const ItemPrice = models.ItemPrice;
 const InstanceTypeQuotaItem = models.InstanceTypeQuotaItem;
-const CreateTaskTemplateResponse = models.CreateTaskTemplateResponse;
+const RetryJobsResponse = models.RetryJobsResponse;
 const TerminateJobResponse = models.TerminateJobResponse;
 const DescribeJobsRequest = models.DescribeJobsRequest;
 const TaskTemplateView = models.TaskTemplateView;
@@ -98,7 +100,7 @@ const DeleteTaskTemplatesResponse = models.DeleteTaskTemplatesResponse;
 const DescribeCvmZoneInstanceConfigInfosRequest = models.DescribeCvmZoneInstanceConfigInfosRequest;
 const TerminateTaskInstanceRequest = models.TerminateTaskInstanceRequest;
 const TerminateTaskInstanceResponse = models.TerminateTaskInstanceResponse;
-const ModifyComputeEnvRequest = models.ModifyComputeEnvRequest;
+const RetryJobsRequest = models.RetryJobsRequest;
 const TaskInstanceView = models.TaskInstanceView;
 const DescribeAvailableCvmInstanceTypesResponse = models.DescribeAvailableCvmInstanceTypesResponse;
 const DescribeTaskResponse = models.DescribeTaskResponse;
@@ -411,6 +413,18 @@ class BatchClient extends AbstractClient {
     ModifyTaskTemplate(req, cb) {
         let resp = new ModifyTaskTemplateResponse();
         this.request("ModifyTaskTemplate", req, resp, cb);
+    }
+
+    /**
+     * 用于重试作业中失败的任务实例。
+当且仅当作业处于“FAILED”状态，支持重试操作。重试操作成功后，作业会按照“DAG”中指定的任务依赖关系，依次重试各个任务中失败的任务实例。任务实例的历史信息将被重置，如同首次运行一样，参与后续的调度和执行。
+     * @param {RetryJobsRequest} req
+     * @param {function(string, RetryJobsResponse):void} cb
+     * @public
+     */
+    RetryJobs(req, cb) {
+        let resp = new RetryJobsResponse();
+        this.request("RetryJobs", req, resp, cb);
     }
 
 

@@ -212,6 +212,12 @@ class CreateDBInstanceRequest extends  AbstractModel {
          */
         this.InstanceName = null;
 
+        /**
+         * 实例要绑定的标签
+         * @type {Array.<TagInfo> || null}
+         */
+        this.ResourceTags = null;
+
     }
 
     /**
@@ -257,6 +263,15 @@ class CreateDBInstanceRequest extends  AbstractModel {
             this.RoGroup = obj;
         }
         this.InstanceName = params.InstanceName || null;
+
+        if (params.ResourceTags) {
+            this.ResourceTags = new Array();
+            for (let z in params.ResourceTags) {
+                let obj = new TagInfo();
+                obj.deserialize(params.ResourceTags[z]);
+                this.ResourceTags.push(obj);
+            }
+        }
 
     }
 }
@@ -2720,6 +2735,12 @@ class CreateDBInstanceHourRequest extends  AbstractModel {
          */
         this.InstanceName = null;
 
+        /**
+         * 实例标签
+         * @type {Array.<TagInfo> || null}
+         */
+        this.ResourceTags = null;
+
     }
 
     /**
@@ -2764,6 +2785,15 @@ class CreateDBInstanceHourRequest extends  AbstractModel {
         }
         this.AutoRenewFlag = params.AutoRenewFlag || null;
         this.InstanceName = params.InstanceName || null;
+
+        if (params.ResourceTags) {
+            this.ResourceTags = new Array();
+            for (let z in params.ResourceTags) {
+                let obj = new TagInfo();
+                obj.deserialize(params.ResourceTags[z]);
+                this.ResourceTags.push(obj);
+            }
+        }
 
     }
 }
@@ -3079,7 +3109,7 @@ class DescribeDBInstancesRequest extends  AbstractModel {
         this.InstanceNames = null;
 
         /**
-         * 实例任务状态，可能取值：<br>0-没有任务<br>1-升级中<br>2-数据导入中<br>3-开放Slave中<br>4-外网访问开通中<br>5-批量操作执行中<br>6-回档中<br>7-外网访问关闭中<br>8-密码修改中<br>9-实例名修改中<br>10-重启中<br>12-自建迁移中<br>13-删除库表中<br>14-灾备实例创建同步中
+         * 实例任务状态，可能取值：<br>0-没有任务<br>1-升级中<br>2-数据导入中<br>3-开放Slave中<br>4-外网访问开通中<br>5-批量操作执行中<br>6-回档中<br>7-外网访问关闭中<br>8-密码修改中<br>9-实例名修改中<br>10-重启中<br>12-自建迁移中<br>13-删除库表中<br>14-灾备实例创建同步中<br>15-升级待切换<br>16-升级切换中<br>17-升级切换完成
          * @type {Array.<number> || null}
          */
         this.TaskStatus = null;
@@ -5327,6 +5357,12 @@ class InstanceInfo extends  AbstractModel {
          */
         this.PhysicalId = null;
 
+        /**
+         * 核心数
+         * @type {number || null}
+         */
+        this.Cpu = null;
+
     }
 
     /**
@@ -5402,6 +5438,7 @@ class InstanceInfo extends  AbstractModel {
         this.UniqVpcId = params.UniqVpcId || null;
         this.UniqSubnetId = params.UniqSubnetId || null;
         this.PhysicalId = params.PhysicalId || null;
+        this.Cpu = params.Cpu || null;
 
     }
 }
@@ -7180,6 +7217,41 @@ class CreateDBImportJobResponse extends  AbstractModel {
 }
 
 /**
+ * 标签信息
+ * @class
+ */
+class TagInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 标签键
+         * @type {string || null}
+         */
+        this.TagKey = null;
+
+        /**
+         * 标签值
+         * @type {Array.<string> || null}
+         */
+        this.TagValue = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TagKey = params.TagKey || null;
+        this.TagValue = params.TagValue || null;
+
+    }
+}
+
+/**
  * DescribeDBInstances返回参数结构体
  * @class
  */
@@ -8231,6 +8303,7 @@ module.exports = {
     ModifyBackupConfigResponse: ModifyBackupConfigResponse,
     DescribeDBImportRecordsRequest: DescribeDBImportRecordsRequest,
     CreateDBImportJobResponse: CreateDBImportJobResponse,
+    TagInfo: TagInfo,
     DescribeDBInstancesResponse: DescribeDBInstancesResponse,
     InitDBInstancesResponse: InitDBInstancesResponse,
     RestartDBInstancesRequest: RestartDBInstancesRequest,

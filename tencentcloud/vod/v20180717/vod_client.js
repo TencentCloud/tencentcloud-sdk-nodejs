@@ -18,6 +18,7 @@ const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const DeleteMediaResponse = models.DeleteMediaResponse;
 const TempCertificate = models.TempCertificate;
+const SearchMediaResponse = models.SearchMediaResponse;
 const ModifyMediaInfoResponse = models.ModifyMediaInfoResponse;
 const ModifyClassRequest = models.ModifyClassRequest;
 const DescribeAllClassRequest = models.DescribeAllClassRequest;
@@ -42,6 +43,7 @@ const ModifyClassResponse = models.ModifyClassResponse;
 const ModifyMediaInfoRequest = models.ModifyMediaInfoRequest;
 const MediaAnimatedGraphicsInfo = models.MediaAnimatedGraphicsInfo;
 const MediaMetaData = models.MediaMetaData;
+const SearchMediaRequest = models.SearchMediaRequest;
 const ApplyUploadResponse = models.ApplyUploadResponse;
 const DeleteClassRequest = models.DeleteClassRequest;
 const DescribeAllClassResponse = models.DescribeAllClassResponse;
@@ -53,6 +55,7 @@ const MediaSnapshotByTimeOffsetItem = models.MediaSnapshotByTimeOffsetItem;
 const MediaBasicInfo = models.MediaBasicInfo;
 const MediaInfo = models.MediaInfo;
 const MediaAnimatedGraphicsItem = models.MediaAnimatedGraphicsItem;
+const SortBy = models.SortBy;
 const MediaTranscodeInfo = models.MediaTranscodeInfo;
 const DeleteMediaRequest = models.DeleteMediaRequest;
 const DescribeMediaInfosResponse = models.DescribeMediaInfosResponse;
@@ -97,6 +100,19 @@ class VodClient extends AbstractClient {
     DescribeMediaInfos(req, cb) {
         let resp = new DescribeMediaInfosResponse();
         this.request("DescribeMediaInfos", req, resp, cb);
+    }
+
+    /**
+     * 搜索媒体信息，支持文本模糊搜索及条件过滤。
+<li>该接口单次请求最多返回100条数据。</li>
+<li>搜索结果超过 5000条，不再支持分页查询超过 5000 部分的数据。</li>
+     * @param {SearchMediaRequest} req
+     * @param {function(string, SearchMediaResponse):void} cb
+     * @public
+     */
+    SearchMedia(req, cb) {
+        let resp = new SearchMediaResponse();
+        this.request("SearchMedia", req, resp, cb);
     }
 
     /**
