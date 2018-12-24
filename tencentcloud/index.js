@@ -41,6 +41,7 @@ module.exports = {
     tbm: require("./tbm"),
     tia: require("./tia"),
     tics: require("./tics"),
+    tke: require("./tke"),
     tmt: require("./tmt"),
     vod: require("./vod"),
     vpc: require("./vpc"),
