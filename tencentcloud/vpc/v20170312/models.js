@@ -387,49 +387,6 @@ class ServiceTemplateGroup extends  AbstractModel {
 }
 
 /**
- * AcceptAttachCcnInstances请求参数结构体
- * @class
- */
-class AcceptAttachCcnInstancesRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * CCN实例ID。形如：ccn-f49l6u0z。
-         * @type {string || null}
-         */
-        this.CcnId = null;
-
-        /**
-         * 接受关联实例列表。
-         * @type {Array.<CcnInstance> || null}
-         */
-        this.Instances = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.CcnId = params.CcnId || null;
-
-        if (params.Instances) {
-            this.Instances = new Array();
-            for (let z in params.Instances) {
-                let obj = new CcnInstance();
-                obj.deserialize(params.Instances[z]);
-                this.Instances.push(obj);
-            }
-        }
-
-    }
-}
-
-/**
  * 路由冲突对象
  * @class
  */
@@ -809,6 +766,12 @@ class SecurityGroupAssociationStatistics extends  AbstractModel {
          */
         this.CLB = null;
 
+        /**
+         * 全量实例的绑定统计。
+         * @type {Array.<string> || null}
+         */
+        this.InstanceStatistics = null;
+
     }
 
     /**
@@ -824,6 +787,7 @@ class SecurityGroupAssociationStatistics extends  AbstractModel {
         this.ENI = params.ENI || null;
         this.SG = params.SG || null;
         this.CLB = params.CLB || null;
+        this.InstanceStatistics = params.InstanceStatistics || null;
 
     }
 }
@@ -1874,18 +1838,36 @@ class DeleteSubnetResponse extends  AbstractModel {
 }
 
 /**
- * ModifyAddressesBandwidth返回参数结构体
+ * ModifyAddressesBandwidth请求参数结构体
  * @class
  */
-class ModifyAddressesBandwidthResponse extends  AbstractModel {
+class ModifyAddressesBandwidthRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * EIP唯一标识id，形如'eip-xxxx'
+         * @type {Array.<string> || null}
+         */
+        this.AddressIds = null;
+
+        /**
+         * 调整带宽目标值
+         * @type {number || null}
+         */
+        this.InternetMaxBandwidthOut = null;
+
+        /**
+         * 包月带宽起始时间
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.StartTime = null;
+
+        /**
+         * 包月带宽结束时间
+         * @type {string || null}
+         */
+        this.EndTime = null;
 
     }
 
@@ -1896,7 +1878,10 @@ class ModifyAddressesBandwidthResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.AddressIds = params.AddressIds || null;
+        this.InternetMaxBandwidthOut = params.InternetMaxBandwidthOut || null;
+        this.StartTime = params.StartTime || null;
+        this.EndTime = params.EndTime || null;
 
     }
 }
@@ -2020,6 +2005,12 @@ class Vpc extends  AbstractModel {
          */
         this.DhcpOptionsId = null;
 
+        /**
+         * 是否开启DHCP。
+         * @type {boolean || null}
+         */
+        this.EnableDhcp = null;
+
     }
 
     /**
@@ -2038,6 +2029,7 @@ class Vpc extends  AbstractModel {
         this.DnsServerSet = params.DnsServerSet || null;
         this.DomainName = params.DomainName || null;
         this.DhcpOptionsId = params.DhcpOptionsId || null;
+        this.EnableDhcp = params.EnableDhcp || null;
 
     }
 }
@@ -2561,6 +2553,12 @@ class CcnRegionBandwidthLimit extends  AbstractModel {
          */
         this.BandwidthLimit = null;
 
+        /**
+         * 是否黑石地域，默认`false`。
+         * @type {boolean || null}
+         */
+        this.IsBm = null;
+
     }
 
     /**
@@ -2572,6 +2570,7 @@ class CcnRegionBandwidthLimit extends  AbstractModel {
         }
         this.Region = params.Region || null;
         this.BandwidthLimit = params.BandwidthLimit || null;
+        this.IsBm = params.IsBm || null;
 
     }
 }
@@ -2598,7 +2597,6 @@ class DescribeCcnRoutesRequest extends  AbstractModel {
 
         /**
          * 过滤条件，参数不支持同时指定RouteIds和Filters。
-<li>ccn-id - String -（过滤条件）CCN实例ID。</li>
 <li>route-id - String -（过滤条件）路由策略ID。</li>
 <li>cidr-block - String -（过滤条件）目的端。</li>
 <li>instance-type - String -（过滤条件）下一跳类型。</li>
@@ -5107,6 +5105,55 @@ class ModifyPrivateIpAddressesAttributeResponse extends  AbstractModel {
 }
 
 /**
+ * 子网对象
+ * @class
+ */
+class SubnetInput extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 子网的`CIDR`。
+         * @type {string || null}
+         */
+        this.CidrBlock = null;
+
+        /**
+         * 子网名称。
+         * @type {string || null}
+         */
+        this.SubnetName = null;
+
+        /**
+         * 可用区。形如：`ap-guangzhou-2`。
+         * @type {string || null}
+         */
+        this.Zone = null;
+
+        /**
+         * 指定关联路由表，形如：`rtb-3ryrwzuu`。
+         * @type {string || null}
+         */
+        this.RouteTableId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CidrBlock = params.CidrBlock || null;
+        this.SubnetName = params.SubnetName || null;
+        this.Zone = params.Zone || null;
+        this.RouteTableId = params.RouteTableId || null;
+
+    }
+}
+
+/**
  * ModifyHaVipAttribute返回参数结构体
  * @class
  */
@@ -5265,8 +5312,8 @@ class DescribeDirectConnectGatewaysRequest extends  AbstractModel {
 <li>direct-connect-gateway-ip - String - 专线网关`IP`。</li>
 <li>gateway-type - String - 网关类型，可选值：`NORMAL`（普通型）、`NAT`（NAT型）。</li>
 <li>network-type- String - 网络类型，可选值：`VPC`（私有网络类型）、`CCN`（云联网类型）。</li>
-<li>ccn-id - String - 专线网关所在私有网络`ID`。</li>
-<li>vpc-id - String - 专线网关所在云联网`ID`。</li>
+<li>ccn-id - String - 专线网关所在云联网`ID`。</li>
+<li>vpc-id - String - 专线网关所在私有网络`ID`。</li>
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
@@ -5442,6 +5489,49 @@ class DescribeCcnRegionBandwidthLimitsResponse extends  AbstractModel {
                 let obj = new CcnRegionBandwidthLimit();
                 obj.deserialize(params.CcnRegionBandwidthLimitSet[z]);
                 this.CcnRegionBandwidthLimitSet.push(obj);
+            }
+        }
+        this.RequestId = params.RequestId || null;
+
+    }
+}
+
+/**
+ * CreateSubnets返回参数结构体
+ * @class
+ */
+class CreateSubnetsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 新创建的子网列表。
+         * @type {Array.<Subnet> || null}
+         */
+        this.SubnetSet = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.SubnetSet) {
+            this.SubnetSet = new Array();
+            for (let z in params.SubnetSet) {
+                let obj = new Subnet();
+                obj.deserialize(params.SubnetSet[z]);
+                this.SubnetSet.push(obj);
             }
         }
         this.RequestId = params.RequestId || null;
@@ -7414,42 +7504,24 @@ class CreateAddressTemplateResponse extends  AbstractModel {
 }
 
 /**
- * CreateBandwidthPackage请求参数结构体
+ * AcceptAttachCcnInstances请求参数结构体
  * @class
  */
-class CreateBandwidthPackageRequest extends  AbstractModel {
+class AcceptAttachCcnInstancesRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 带宽包类型，包括'BGP'，'SINGLEISP'，'ANYCAST'
+         * CCN实例ID。形如：ccn-f49l6u0z。
          * @type {string || null}
          */
-        this.NetworkType = null;
+        this.CcnId = null;
 
         /**
-         * 带宽包计费类型，包括‘TOP5_POSTPAID_BY_MONTH’，‘PERCENT95_POSTPAID_BY_MONTH’
-         * @type {string || null}
+         * 接受关联实例列表。
+         * @type {Array.<CcnInstance> || null}
          */
-        this.ChargeType = null;
-
-        /**
-         * 带宽包名字
-         * @type {string || null}
-         */
-        this.BandwidthPackageName = null;
-
-        /**
-         * 带宽包数量(非上移账户只能填1)
-         * @type {number || null}
-         */
-        this.BandwidthPackageCount = null;
-
-        /**
-         * 带宽包限速大小。单位：Mbps，-1表示不限速。
-         * @type {number || null}
-         */
-        this.InternetMaxBandwidth = null;
+        this.Instances = null;
 
     }
 
@@ -7460,11 +7532,16 @@ class CreateBandwidthPackageRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.NetworkType = params.NetworkType || null;
-        this.ChargeType = params.ChargeType || null;
-        this.BandwidthPackageName = params.BandwidthPackageName || null;
-        this.BandwidthPackageCount = params.BandwidthPackageCount || null;
-        this.InternetMaxBandwidth = params.InternetMaxBandwidth || null;
+        this.CcnId = params.CcnId || null;
+
+        if (params.Instances) {
+            this.Instances = new Array();
+            for (let z in params.Instances) {
+                let obj = new CcnInstance();
+                obj.deserialize(params.Instances[z]);
+                this.Instances.push(obj);
+            }
+        }
 
     }
 }
@@ -7604,18 +7681,42 @@ class DescribeRouteConflictsResponse extends  AbstractModel {
 }
 
 /**
- * DeleteDirectConnectGateway返回参数结构体
+ * CreateBandwidthPackage请求参数结构体
  * @class
  */
-class DeleteDirectConnectGatewayResponse extends  AbstractModel {
+class CreateBandwidthPackageRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * 带宽包类型，包括'BGP'，'SINGLEISP'，'ANYCAST'
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.NetworkType = null;
+
+        /**
+         * 带宽包计费类型，包括‘TOP5_POSTPAID_BY_MONTH’，‘PERCENT95_POSTPAID_BY_MONTH’
+         * @type {string || null}
+         */
+        this.ChargeType = null;
+
+        /**
+         * 带宽包名字
+         * @type {string || null}
+         */
+        this.BandwidthPackageName = null;
+
+        /**
+         * 带宽包数量(非上移账户只能填1)
+         * @type {number || null}
+         */
+        this.BandwidthPackageCount = null;
+
+        /**
+         * 带宽包限速大小。单位：Mbps，-1表示不限速。
+         * @type {number || null}
+         */
+        this.InternetMaxBandwidth = null;
 
     }
 
@@ -7626,7 +7727,11 @@ class DeleteDirectConnectGatewayResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.NetworkType = params.NetworkType || null;
+        this.ChargeType = params.ChargeType || null;
+        this.BandwidthPackageName = params.BandwidthPackageName || null;
+        this.BandwidthPackageCount = params.BandwidthPackageCount || null;
+        this.InternetMaxBandwidth = params.InternetMaxBandwidth || null;
 
     }
 }
@@ -8147,24 +8252,24 @@ class HaVipDisassociateAddressIpResponse extends  AbstractModel {
 }
 
 /**
- * EnableRoutes请求参数结构体
+ * CreateSubnets请求参数结构体
  * @class
  */
-class EnableRoutesRequest extends  AbstractModel {
+class CreateSubnetsRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 路由表唯一ID。
+         * `VPC`实例`ID`。形如：`vpc-6v2ht8q5`
          * @type {string || null}
          */
-        this.RouteTableId = null;
+        this.VpcId = null;
 
         /**
-         * 路由策略唯一ID。
-         * @type {Array.<number> || null}
+         * 子网对象列表。
+         * @type {Array.<SubnetInput> || null}
          */
-        this.RouteIds = null;
+        this.Subnets = null;
 
     }
 
@@ -8175,8 +8280,16 @@ class EnableRoutesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RouteTableId = params.RouteTableId || null;
-        this.RouteIds = params.RouteIds || null;
+        this.VpcId = params.VpcId || null;
+
+        if (params.Subnets) {
+            this.Subnets = new Array();
+            for (let z in params.Subnets) {
+                let obj = new SubnetInput();
+                obj.deserialize(params.Subnets[z]);
+                this.Subnets.push(obj);
+            }
+        }
 
     }
 }
@@ -9029,7 +9142,7 @@ class ReplaceRoutesRequest extends  AbstractModel {
         this.RouteTableId = null;
 
         /**
-         * 路由策略对象。只需要指定路由策略ID（RouteId）。
+         * 路由策略对象。需要指定路由策略ID（RouteId）。
          * @type {Array.<Route> || null}
          */
         this.Routes = null;
@@ -9145,6 +9258,12 @@ class CreateCcnRequest extends  AbstractModel {
          */
         this.CcnDescription = null;
 
+        /**
+         * CCN服务质量，'PT'：白金，'AU'：金，'AG'：银，默认为‘AU’。
+         * @type {string || null}
+         */
+        this.QosLevel = null;
+
     }
 
     /**
@@ -9156,6 +9275,7 @@ class CreateCcnRequest extends  AbstractModel {
         }
         this.CcnName = params.CcnName || null;
         this.CcnDescription = params.CcnDescription || null;
+        this.QosLevel = params.QosLevel || null;
 
     }
 }
@@ -9928,6 +10048,34 @@ class DescribeBandwidthPackageQuotaResponse extends  AbstractModel {
 }
 
 /**
+ * ModifyAddressTemplateGroupAttribute返回参数结构体
+ * @class
+ */
+class ModifyAddressTemplateGroupAttributeResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = params.RequestId || null;
+
+    }
+}
+
+/**
  * DeleteServiceTemplateGroup返回参数结构体
  * @class
  */
@@ -10120,36 +10268,18 @@ class ModifyCcnAttributeRequest extends  AbstractModel {
 }
 
 /**
- * ModifyAddressesBandwidth请求参数结构体
+ * DeleteDirectConnectGateway返回参数结构体
  * @class
  */
-class ModifyAddressesBandwidthRequest extends  AbstractModel {
+class DeleteDirectConnectGatewayResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * EIP唯一标识id，形如'eip-xxxx'
-         * @type {Array.<string> || null}
-         */
-        this.AddressIds = null;
-
-        /**
-         * 调整带宽目标值
-         * @type {number || null}
-         */
-        this.InternetMaxBandwidthOut = null;
-
-        /**
-         * 包月带宽起始时间
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.StartTime = null;
-
-        /**
-         * 包月带宽结束时间
-         * @type {string || null}
-         */
-        this.EndTime = null;
+        this.RequestId = null;
 
     }
 
@@ -10160,10 +10290,7 @@ class ModifyAddressesBandwidthRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.AddressIds = params.AddressIds || null;
-        this.InternetMaxBandwidthOut = params.InternetMaxBandwidthOut || null;
-        this.StartTime = params.StartTime || null;
-        this.EndTime = params.EndTime || null;
+        this.RequestId = params.RequestId || null;
 
     }
 }
@@ -10197,18 +10324,24 @@ class AddBandwidthPackageResourcesResponse extends  AbstractModel {
 }
 
 /**
- * ModifyAddressTemplateGroupAttribute返回参数结构体
+ * EnableRoutes请求参数结构体
  * @class
  */
-class ModifyAddressTemplateGroupAttributeResponse extends  AbstractModel {
+class EnableRoutesRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * 路由表唯一ID。
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.RouteTableId = null;
+
+        /**
+         * 路由策略唯一ID。
+         * @type {Array.<number> || null}
+         */
+        this.RouteIds = null;
 
     }
 
@@ -10219,7 +10352,8 @@ class ModifyAddressTemplateGroupAttributeResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RouteTableId = params.RouteTableId || null;
+        this.RouteIds = params.RouteIds || null;
 
     }
 }
@@ -12478,8 +12612,10 @@ class CcnAttachedInstance extends  AbstractModel {
 <li>`EXPIRED`：已过期</li>
 <li>`REJECTED`：已拒绝</li>
 <li>`DELETED`：已删除</li>
+<li>`FAILED`：失败的（2小时后将异步强制解关联）</li>
 <li>`ATTACHING`：关联中</li>
 <li>`DETACHING`：解关联中</li>
+<li>`DETACHFAILED`：解关联失败（2小时后将异步强制解关联）</li>
          * @type {string || null}
          */
         this.State = null;
@@ -12653,6 +12789,34 @@ class DeleteServiceTemplateGroupRequest extends  AbstractModel {
 }
 
 /**
+ * ModifyAddressesBandwidth返回参数结构体
+ * @class
+ */
+class ModifyAddressesBandwidthResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = params.RequestId || null;
+
+    }
+}
+
+/**
  * DescribeRouteConflicts请求参数结构体
  * @class
  */
@@ -12769,7 +12933,6 @@ module.exports = {
     ModifyAddressTemplateGroupAttributeRequest: ModifyAddressTemplateGroupAttributeRequest,
     ModifyAddressTemplateAttributeResponse: ModifyAddressTemplateAttributeResponse,
     ServiceTemplateGroup: ServiceTemplateGroup,
-    AcceptAttachCcnInstancesRequest: AcceptAttachCcnInstancesRequest,
     RouteConflict: RouteConflict,
     CreateNetworkInterfaceRequest: CreateNetworkInterfaceRequest,
     CreateRoutesRequest: CreateRoutesRequest,
@@ -12796,7 +12959,7 @@ module.exports = {
     HaVip: HaVip,
     CreateDefaultVpcRequest: CreateDefaultVpcRequest,
     DeleteSubnetResponse: DeleteSubnetResponse,
-    ModifyAddressesBandwidthResponse: ModifyAddressesBandwidthResponse,
+    ModifyAddressesBandwidthRequest: ModifyAddressesBandwidthRequest,
     DescribeCustomerGatewaysRequest: DescribeCustomerGatewaysRequest,
     Vpc: Vpc,
     CreateVpnGatewayResponse: CreateVpnGatewayResponse,
@@ -12873,6 +13036,7 @@ module.exports = {
     ReplaceSecurityGroupPolicyResponse: ReplaceSecurityGroupPolicyResponse,
     ModifyCustomerGatewayAttributeResponse: ModifyCustomerGatewayAttributeResponse,
     ModifyPrivateIpAddressesAttributeResponse: ModifyPrivateIpAddressesAttributeResponse,
+    SubnetInput: SubnetInput,
     ModifyHaVipAttributeResponse: ModifyHaVipAttributeResponse,
     CreateCcnResponse: CreateCcnResponse,
     EnableCcnRoutesRequest: EnableCcnRoutesRequest,
@@ -12882,6 +13046,7 @@ module.exports = {
     ModifyHaVipAttributeRequest: ModifyHaVipAttributeRequest,
     DeleteSecurityGroupResponse: DeleteSecurityGroupResponse,
     DescribeCcnRegionBandwidthLimitsResponse: DescribeCcnRegionBandwidthLimitsResponse,
+    CreateSubnetsResponse: CreateSubnetsResponse,
     CreateNetworkInterfaceResponse: CreateNetworkInterfaceResponse,
     HaVipAssociateAddressIpRequest: HaVipAssociateAddressIpRequest,
     ModifyVpnGatewayAttributeRequest: ModifyVpnGatewayAttributeRequest,
@@ -12935,12 +13100,12 @@ module.exports = {
     AssociateAddressRequest: AssociateAddressRequest,
     ModifySecurityGroupPoliciesResponse: ModifySecurityGroupPoliciesResponse,
     CreateAddressTemplateResponse: CreateAddressTemplateResponse,
-    CreateBandwidthPackageRequest: CreateBandwidthPackageRequest,
+    AcceptAttachCcnInstancesRequest: AcceptAttachCcnInstancesRequest,
     DeleteAddressTemplateGroupRequest: DeleteAddressTemplateGroupRequest,
     AttachNetworkInterfaceResponse: AttachNetworkInterfaceResponse,
     ServiceTemplateSpecification: ServiceTemplateSpecification,
     DescribeRouteConflictsResponse: DescribeRouteConflictsResponse,
-    DeleteDirectConnectGatewayResponse: DeleteDirectConnectGatewayResponse,
+    CreateBandwidthPackageRequest: CreateBandwidthPackageRequest,
     DescribeRouteTablesRequest: DescribeRouteTablesRequest,
     ResetAttachCcnInstancesRequest: ResetAttachCcnInstancesRequest,
     CreateHaVipResponse: CreateHaVipResponse,
@@ -12952,7 +13117,7 @@ module.exports = {
     ModifyNetworkInterfaceAttributeRequest: ModifyNetworkInterfaceAttributeRequest,
     ModifyAddressTemplateAttributeRequest: ModifyAddressTemplateAttributeRequest,
     HaVipDisassociateAddressIpResponse: HaVipDisassociateAddressIpResponse,
-    EnableRoutesRequest: EnableRoutesRequest,
+    CreateSubnetsRequest: CreateSubnetsRequest,
     DescribeAddressTemplateGroupsResponse: DescribeAddressTemplateGroupsResponse,
     SetCcnRegionBandwidthLimitsRequest: SetCcnRegionBandwidthLimitsRequest,
     DetachClassicLinkVpcResponse: DetachClassicLinkVpcResponse,
@@ -12997,14 +13162,15 @@ module.exports = {
     DescribeCustomerGatewayVendorsResponse: DescribeCustomerGatewayVendorsResponse,
     AssignPrivateIpAddressesResponse: AssignPrivateIpAddressesResponse,
     DescribeBandwidthPackageQuotaResponse: DescribeBandwidthPackageQuotaResponse,
+    ModifyAddressTemplateGroupAttributeResponse: ModifyAddressTemplateGroupAttributeResponse,
     DeleteServiceTemplateGroupResponse: DeleteServiceTemplateGroupResponse,
     CustomerGatewayVendor: CustomerGatewayVendor,
     DescribeAddressTemplatesRequest: DescribeAddressTemplatesRequest,
     RenewVpnGatewayResponse: RenewVpnGatewayResponse,
     ModifyCcnAttributeRequest: ModifyCcnAttributeRequest,
-    ModifyAddressesBandwidthRequest: ModifyAddressesBandwidthRequest,
+    DeleteDirectConnectGatewayResponse: DeleteDirectConnectGatewayResponse,
     AddBandwidthPackageResourcesResponse: AddBandwidthPackageResourcesResponse,
-    ModifyAddressTemplateGroupAttributeResponse: ModifyAddressTemplateGroupAttributeResponse,
+    EnableRoutesRequest: EnableRoutesRequest,
     DeleteSecurityGroupPoliciesResponse: DeleteSecurityGroupPoliciesResponse,
     ModifyAddressAttributeRequest: ModifyAddressAttributeRequest,
     InquiryPriceCreateVpnGatewayRequest: InquiryPriceCreateVpnGatewayRequest,
@@ -13058,6 +13224,7 @@ module.exports = {
     SecurityPolicyDatabase: SecurityPolicyDatabase,
     AcceptAttachCcnInstancesResponse: AcceptAttachCcnInstancesResponse,
     DeleteServiceTemplateGroupRequest: DeleteServiceTemplateGroupRequest,
+    ModifyAddressesBandwidthResponse: ModifyAddressesBandwidthResponse,
     DescribeRouteConflictsRequest: DescribeRouteConflictsRequest,
     Price: Price,
     HaVipAssociateAddressIpResponse: HaVipAssociateAddressIpResponse,

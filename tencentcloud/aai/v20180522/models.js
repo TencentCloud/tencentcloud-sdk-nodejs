@@ -73,7 +73,7 @@ class SentenceRecognitionResponse extends  AbstractModel {
         this.Result = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -114,7 +114,7 @@ class SimultaneousInterpretingResponse extends  AbstractModel {
         this.NmtText = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -156,7 +156,7 @@ class TextToVoiceResponse extends  AbstractModel {
         this.SessionId = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -417,7 +417,7 @@ class TextToVoiceRequest extends  AbstractModel {
         this.VoiceType = null;
 
         /**
-         * 主语言类型<li>1-中文(包括粤语)，最大100字符</li><li>2-英文，最大支持400字符</li>
+         * 主语言类型<li>1-中文，最大100个汉字（标点符号算一个汉子）</li><li>2-英文，最大支持400个字母（标点符号算一个字母）</li>
          * @type {number || null}
          */
         this.PrimaryLanguage = null;
@@ -465,7 +465,7 @@ class ChatResponse extends  AbstractModel {
         this.Answer = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
