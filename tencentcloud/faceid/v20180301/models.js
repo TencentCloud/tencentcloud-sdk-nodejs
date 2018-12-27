@@ -293,7 +293,7 @@ class DetectAuthRequest extends  AbstractModel {
         this.IdCard = null;
 
         /**
-         * 姓名。最长长度32位。
+         * 姓名。最长长度32位。中文请使用UTF-8编码。
          * @type {string || null}
          */
         this.Name = null;
@@ -416,7 +416,7 @@ class ImageRecognitionRequest extends  AbstractModel {
         this.IdCard = null;
 
         /**
-         * 姓名
+         * 姓名。中文请使用UTF-8编码。
          * @type {string || null}
          */
         this.Name = null;
@@ -481,8 +481,8 @@ LIP为数字模式，ACTION为动作模式，SILENT为静默模式，三种模�
         this.LivenessType = null;
 
         /**
-         * 数字模式传参：唇语验证码(1234)，需先获取唇语验证码；
-动作模式传参：传动作顺序(12,21)，需先获取动作顺序；
+         * 数字模式传参：数字验证码(1234)，需先调用接口获取数字验证码；
+动作模式传参：传动作顺序(2,1 or 1,2)，需先调用接口获取动作顺序；
 静默模式传参：空。
          * @type {string || null}
          */
@@ -604,7 +604,7 @@ class LivenessRecognitionRequest extends  AbstractModel {
         this.IdCard = null;
 
         /**
-         * 姓名
+         * 姓名。中文请使用UTF-8编码。
          * @type {string || null}
          */
         this.Name = null;
@@ -624,8 +624,8 @@ LIP为数字模式，ACTION为动作模式，SILENT为静默模式，三种模�
         this.LivenessType = null;
 
         /**
-         * 数字模式传参：唇语验证码(1234)，需先获取唇语验证码；
-动作模式传参：传动作顺序(12,21)，需先获取动作顺序；
+         * 数字模式传参：数字验证码(1234)，需先调用接口获取数字验证码；
+动作模式传参：传动作顺序(2,1 or 1,2)，需先调用接口获取动作顺序；
 静默模式传参：空。
          * @type {string || null}
          */

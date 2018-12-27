@@ -1478,7 +1478,7 @@ class DescribeLiveStreamStateRequest extends  AbstractModel {
         this.AppName = null;
 
         /**
-         * 您的加速域名。
+         * 您的推流域名。
          * @type {string || null}
          */
         this.DomainName = null;
@@ -2269,9 +2269,8 @@ class DescribeLiveStreamOnlineInfoRequest extends  AbstractModel {
 
         /**
          * 分页大小。
-
 最大值：100。
-取值范围：1~100 之前的任意整数。
+取值范围：10~100 之前的任意整数。
 默认值：10
          * @type {number || null}
          */
@@ -2478,6 +2477,13 @@ class AddDelayLiveStreamRequest extends  AbstractModel {
          */
         this.DelayTime = null;
 
+        /**
+         * 延播设置的过期时间。UTC 格式，例如：2018-11-29T19:00:00Z。
+注意：默认7天后过期，且最长支持7天内生效。
+         * @type {string || null}
+         */
+        this.ExpireTime = null;
+
     }
 
     /**
@@ -2491,6 +2497,7 @@ class AddDelayLiveStreamRequest extends  AbstractModel {
         this.DomainName = params.DomainName || null;
         this.StreamName = params.StreamName || null;
         this.DelayTime = params.DelayTime || null;
+        this.ExpireTime = params.ExpireTime || null;
 
     }
 }

@@ -2131,7 +2131,7 @@ class InquiryPriceResizeInstanceDisksRequest extends  AbstractModel {
         this.InstanceId = null;
 
         /**
-         * 待扩容的数据盘配置信息。只支持扩容随实例购买的数据盘，且[数据盘类型](/document/api/213/9452#block_device)为：`CLOUD_BASIC`、`CLOUD_PREMIUM`、`CLOUD_SSD`。数据盘容量单位：GB。最小扩容步长：10G。关于数据盘类型的选择请参考硬盘产品简介。可选数据盘类型受到实例类型`InstanceType`限制。另外允许扩容的最大容量也因数据盘类型的不同而有所差异。
+         * 待扩容的数据盘配置信息。只支持扩容非弹性数据盘（[`DescribeDisks`](https://cloud.tencent.com/document/api/362/16315)接口返回值中的`Portable`为`false`表示非弹性），且[数据盘类型](/document/api/213/9452#block_device)为：`CLOUD_BASIC`、`CLOUD_PREMIUM`、`CLOUD_SSD`。数据盘容量单位：GB。最小扩容步长：10G。关于数据盘类型的选择请参考硬盘产品简介。可选数据盘类型受到实例类型`InstanceType`限制。另外允许扩容的最大容量也因数据盘类型的不同而有所差异。
          * @type {Array.<DataDisk> || null}
          */
         this.DataDisks = null;
@@ -2862,16 +2862,16 @@ class InstanceMarketOptionsRequest extends  AbstractModel {
         super();
 
         /**
-         * 市场选项类型，当前只支持取值：spot
-         * @type {string || null}
-         */
-        this.MarketType = null;
-
-        /**
          * 竞价相关选项
          * @type {SpotMarketOptions || null}
          */
         this.SpotOptions = null;
+
+        /**
+         * 市场选项类型，当前只支持取值：spot
+         * @type {string || null}
+         */
+        this.MarketType = null;
 
     }
 
@@ -2882,13 +2882,13 @@ class InstanceMarketOptionsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.MarketType = params.MarketType || null;
 
         if (params.SpotOptions) {
             let obj = new SpotMarketOptions();
             obj.deserialize(params.SpotOptions)
             this.SpotOptions = obj;
         }
+        this.MarketType = params.MarketType || null;
 
     }
 }
@@ -3506,7 +3506,7 @@ class DataDisk extends  AbstractModel {
 
         /**
          * 数据盘是否随子机销毁。取值范围：
-<li>TRUE：子机销毁时，销毁数据盘
+<li>TRUE：子机销毁时，销毁数据盘，只支持按小时后付费云盘
 <li>FALSE：子机销毁时，保留数据盘<br>
 默认取值：TRUE<br>
 该参数目前仅用于 `RunInstances` 接口。
@@ -6973,7 +6973,7 @@ class ResizeInstanceDisksRequest extends  AbstractModel {
         this.InstanceId = null;
 
         /**
-         * 待扩容的数据盘配置信息。只支持扩容随实例购买的数据盘，且[数据盘类型](/document/api/213/9452#block_device)为：`CLOUD_BASIC`、`CLOUD_PREMIUM`、`CLOUD_SSD`。数据盘容量单位：GB。最小扩容步长：10G。关于数据盘类型的选择请参考硬盘产品简介。可选数据盘类型受到实例类型`InstanceType`限制。另外允许扩容的最大容量也因数据盘类型的不同而有所差异。
+         * 待扩容的数据盘配置信息。只支持扩容非弹性数据盘（[`DescribeDisks`](https://cloud.tencent.com/document/api/362/16315)接口返回值中的`Portable`为`false`表示非弹性），且[数据盘类型](/document/api/213/9452#block_device)为：`CLOUD_BASIC`、`CLOUD_PREMIUM`、`CLOUD_SSD`。数据盘容量单位：GB。最小扩容步长：10G。关于数据盘类型的选择请参考硬盘产品简介。可选数据盘类型受到实例类型`InstanceType`限制。另外允许扩容的最大容量也因数据盘类型的不同而有所差异。
          * @type {Array.<DataDisk> || null}
          */
         this.DataDisks = null;

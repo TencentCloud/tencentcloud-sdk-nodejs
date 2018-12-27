@@ -211,7 +211,9 @@ class LiveClient extends AbstractClient {
     }
 
     /**
-     * 对流设置延播
+     * 对流设置延播时间
+注意：如果在推流前设置延播，需要提前5分钟设置。
+
      * @param {AddDelayLiveStreamRequest} req
      * @param {function(string, AddDelayLiveStreamResponse):void} cb
      * @public

@@ -1389,8 +1389,8 @@ class SearchMediaRequest extends  AbstractModel {
 
         /**
          * 标签集合，匹配集合中任意元素。
-<li>单个标签长度限制：8 个字符</li>
-<li>数组长度限制：10</li>
+<li>单个标签长度限制：8 个字符。</li>
+<li>数组长度限制：10。</li>
          * @type {Array.<string> || null}
          */
         this.Tags = null;
@@ -1402,41 +1402,41 @@ class SearchMediaRequest extends  AbstractModel {
         this.ClassIds = null;
 
         /**
-         * 创建时间的开始时间
-<li>大于等于开始时间</li>
+         * 创建时间的开始时间。
+<li>大于等于开始时间。</li>
 <li>格式按照 ISO 8601 标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F)。</li>
          * @type {string || null}
          */
         this.StartTime = null;
 
         /**
-         * 创建时间的结束时间
-<li>小于结束时间</li>
+         * 创建时间的结束时间。
+<li>小于结束时间。</li>
 <li>格式按照 ISO 8601 标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F)。</li>
          * @type {string || null}
          */
         this.EndTime = null;
 
         /**
-         * 媒体文件来源
-         * @type {number || null}
+         * 媒体文件来源，来源取值参见 [SourceType](https://cloud.tencent.com/document/product/266/31773#MediaSourceData)。
+         * @type {string || null}
          */
         this.SourceType = null;
 
         /**
-         * 推流[直播码](https://cloud.tencent.com/document/product/267/5959)
+         * 推流[直播码](https://cloud.tencent.com/document/product/267/5959)。
          * @type {string || null}
          */
         this.StreamId = null;
 
         /**
-         * 直播录制文件的唯一标识
+         * 直播录制文件的唯一标识。
          * @type {string || null}
          */
         this.Vid = null;
 
         /**
-         * 排序方式
+         * 排序方式。
 <li>Sort.Field 可选值：CreateTime</li>
 <li>指定 Text 搜索时，将根据匹配度排序，该字段无效</li>
          * @type {SortBy || null}
@@ -1444,9 +1444,9 @@ class SearchMediaRequest extends  AbstractModel {
         this.Sort = null;
 
         /**
-         * 偏移量
-<li>默认值：0</li>
-<li>取值范围：Offset + Limit 不超过5000</li>
+         * 偏移量。
+<li>默认值：0。</li>
+<li>取值范围：Offset + Limit 不超过 5000。</li>
          * @type {number || null}
          */
         this.Offset = null;

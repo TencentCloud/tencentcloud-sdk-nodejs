@@ -128,7 +128,7 @@ class ModifyLaunchConfigurationAttributesRequest extends  AbstractModel {
         this.ImageId = null;
 
         /**
-         * 实例类型列表，不同实例机型指定了不同的资源规格，最多支持5中实例机型。
+         * 实例类型列表，不同实例机型指定了不同的资源规格，最多支持5种实例机型。
 启动配置，通过 InstanceType 表示单一实例类型，通过 InstanceTypes 表示多实例类型。指定 InstanceTypes 成功启动配置后，原有的 InstanceType 自动失效。
          * @type {Array.<string> || null}
          */
@@ -534,7 +534,7 @@ class CreateLaunchConfigurationRequest extends  AbstractModel {
         this.InstanceMarketOptions = null;
 
         /**
-         * 实例机型列表，不同实例机型指定了不同的资源规格，最多支持5中实例机型。
+         * 实例机型列表，不同实例机型指定了不同的资源规格，最多支持5种实例机型。
 `InstanceType`和`InstanceTypes`参数互斥，二者必填一个且只能填写一个。
          * @type {Array.<string> || null}
          */
@@ -2936,7 +2936,7 @@ class DescribeLaunchConfigurationsRequest extends  AbstractModel {
         super();
 
         /**
-         * 按照一个或者多个启动配置ID查询。启动配置ID形如：`asc-ouy1ax38`。每次请求的上限为100。参数不支持同时指定`LaunchConfigurationIds`和`Filters`。
+         * 按照一个或者多个启动配置ID查询。启动配置ID形如：`asc-ouy1ax38`。每次请求的上限为100。参数不支持同时指定`LaunchConfigurationIds`和`Filters`
          * @type {Array.<string> || null}
          */
         this.LaunchConfigurationIds = null;
@@ -3024,7 +3024,7 @@ class DescribeAutoScalingInstancesRequest extends  AbstractModel {
         super();
 
         /**
-         * 待查询的云主机（CVM）实例ID。参数不支持同时指定InstanceIds和Filters。
+         * 待查询云服务器（CVM）的实例ID。参数不支持同时指定InstanceIds和Filters。
          * @type {Array.<string> || null}
          */
         this.InstanceIds = null;
@@ -3250,6 +3250,12 @@ class DataDisk extends  AbstractModel {
          */
         this.DiskSize = null;
 
+        /**
+         * 数据盘快照 ID，类似 `snap-l8psqwnt`。
+         * @type {string || null}
+         */
+        this.SnapshotId = null;
+
     }
 
     /**
@@ -3261,6 +3267,7 @@ class DataDisk extends  AbstractModel {
         }
         this.DiskType = params.DiskType || null;
         this.DiskSize = params.DiskSize || null;
+        this.SnapshotId = params.SnapshotId || null;
 
     }
 }

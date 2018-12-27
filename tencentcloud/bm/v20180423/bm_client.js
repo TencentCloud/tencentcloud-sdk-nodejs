@@ -22,53 +22,73 @@ const UserCmdTask = models.UserCmdTask;
 const TaskOperationLog = models.TaskOperationLog;
 const CreatePsaRegulationRequest = models.CreatePsaRegulationRequest;
 const DescribeUserCmdTasksResponse = models.DescribeUserCmdTasksResponse;
-const UnbindPsaTagRequest = models.UnbindPsaTagRequest;
-const PsaRegulation = models.PsaRegulation;
+const DescribeDeviceOperationLogRequest = models.DescribeDeviceOperationLogRequest;
+const DescribeDeviceInventoryResponse = models.DescribeDeviceInventoryResponse;
+const DescribeOsInfoResponse = models.DescribeOsInfoResponse;
+const DescribeOsInfoRequest = models.DescribeOsInfoRequest;
 const FailedTaskInfo = models.FailedTaskInfo;
-const DescribeUserCmdsRequest = models.DescribeUserCmdsRequest;
+const DescribeDevicePositionResponse = models.DescribeDevicePositionResponse;
 const DeleteUserCmdsResponse = models.DeleteUserCmdsResponse;
+const DescribeDevicesRequest = models.DescribeDevicesRequest;
 const RebootDevicesResponse = models.RebootDevicesResponse;
 const ResetDevicePasswordRequest = models.ResetDevicePasswordRequest;
 const ModifyDeviceAliasesRequest = models.ModifyDeviceAliasesRequest;
+const UnbindPsaTagRequest = models.UnbindPsaTagRequest;
 const ModifyPayModePre2PostResponse = models.ModifyPayModePre2PostResponse;
+const PsaRegulation = models.PsaRegulation;
 const SuccessTaskInfo = models.SuccessTaskInfo;
 const DescribeTaskOperationLogResponse = models.DescribeTaskOperationLogResponse;
-const BindPsaTagResponse = models.BindPsaTagResponse;
+const DescribeDeviceInventoryRequest = models.DescribeDeviceInventoryRequest;
+const DescribeDevicePriceInfoResponse = models.DescribeDevicePriceInfoResponse;
 const ModifyDeviceAliasesResponse = models.ModifyDeviceAliasesResponse;
-const RepairTaskControlResponse = models.RepairTaskControlResponse;
-const UnbindPsaTagResponse = models.UnbindPsaTagResponse;
+const DescribeUserCmdsRequest = models.DescribeUserCmdsRequest;
+const ModifyDeviceAutoRenewFlagRequest = models.ModifyDeviceAutoRenewFlagRequest;
 const DeviceAlias = models.DeviceAlias;
 const DescribeUserCmdTaskInfoResponse = models.DescribeUserCmdTaskInfoResponse;
 const RunUserCmdRequest = models.RunUserCmdRequest;
 const DescribeDevicesResponse = models.DescribeDevicesResponse;
+const ResetDevicePasswordResponse = models.ResetDevicePasswordResponse;
+const DescribeDevicePositionRequest = models.DescribeDevicePositionRequest;
 const UserCmdTaskInfo = models.UserCmdTaskInfo;
 const UserCmd = models.UserCmd;
+const DeviceClass = models.DeviceClass;
 const DescribeRepairTaskConstantRequest = models.DescribeRepairTaskConstantRequest;
 const DeletePsaRegulationRequest = models.DeletePsaRegulationRequest;
 const DescribeTaskInfoResponse = models.DescribeTaskInfoResponse;
 const CreateSpotDeviceRequest = models.CreateSpotDeviceRequest;
 const DeleteUserCmdsRequest = models.DeleteUserCmdsRequest;
+const OsInfo = models.OsInfo;
 const ModifyUserCmdResponse = models.ModifyUserCmdResponse;
 const CreateUserCmdRequest = models.CreateUserCmdRequest;
 const ModifyPayModePre2PostRequest = models.ModifyPayModePre2PostRequest;
-const DescribeDevicePriceInfoResponse = models.DescribeDevicePriceInfoResponse;
+const BindPsaTagResponse = models.BindPsaTagResponse;
+const DeviceOperationLog = models.DeviceOperationLog;
 const DescribeRepairTaskConstantResponse = models.DescribeRepairTaskConstantResponse;
+const RepairTaskControlResponse = models.RepairTaskControlResponse;
 const DevicePriceInfo = models.DevicePriceInfo;
 const RebootDevicesRequest = models.RebootDevicesRequest;
+const DescribeDeviceClassResponse = models.DescribeDeviceClassResponse;
 const DescribePsaRegulationsResponse = models.DescribePsaRegulationsResponse;
-const DescribeDevicesRequest = models.DescribeDevicesRequest;
+const DescribeDeviceOperationLogResponse = models.DescribeDeviceOperationLogResponse;
+const UnbindPsaTagResponse = models.UnbindPsaTagResponse;
 const ModifyUserCmdRequest = models.ModifyUserCmdRequest;
+const SetOutBandVpnAuthPasswordResponse = models.SetOutBandVpnAuthPasswordResponse;
+const OfflineDevicesResponse = models.OfflineDevicesResponse;
 const CreatePsaRegulationResponse = models.CreatePsaRegulationResponse;
 const ModifyPsaRegulationRequest = models.ModifyPsaRegulationRequest;
 const DescribeUserCmdsResponse = models.DescribeUserCmdsResponse;
 const RunUserCmdResponse = models.RunUserCmdResponse;
+const ModifyDeviceAutoRenewFlagResponse = models.ModifyDeviceAutoRenewFlagResponse;
+const SetOutBandVpnAuthPasswordRequest = models.SetOutBandVpnAuthPasswordRequest;
+const DescribeDeviceClassRequest = models.DescribeDeviceClassRequest;
 const DescribeUserCmdTaskInfoRequest = models.DescribeUserCmdTaskInfoRequest;
-const ResetDevicePasswordResponse = models.ResetDevicePasswordResponse;
+const DevicePositionInfo = models.DevicePositionInfo;
 const BindPsaTagRequest = models.BindPsaTagRequest;
 const DescribeTaskInfoRequest = models.DescribeTaskInfoRequest;
 const RepairTaskControlRequest = models.RepairTaskControlRequest;
 const CreateSpotDeviceResponse = models.CreateSpotDeviceResponse;
 const DeviceInfo = models.DeviceInfo;
+const OfflineDevicesRequest = models.OfflineDevicesRequest;
 const DescribePsaRegulationsRequest = models.DescribePsaRegulationsRequest;
 const Tag = models.Tag;
 const DeletePsaRegulationResponse = models.DeletePsaRegulationResponse;
@@ -123,6 +143,28 @@ class BmClient extends AbstractClient {
     }
 
     /**
+     * 修改物理机服务器自动续费标志
+     * @param {ModifyDeviceAutoRenewFlagRequest} req
+     * @param {function(string, ModifyDeviceAutoRenewFlagResponse):void} cb
+     * @public
+     */
+    ModifyDeviceAutoRenewFlag(req, cb) {
+        let resp = new ModifyDeviceAutoRenewFlagResponse();
+        this.request("ModifyDeviceAutoRenewFlag", req, resp, cb);
+    }
+
+    /**
+     * 用于销毁可退还的服务器
+     * @param {OfflineDevicesRequest} req
+     * @param {function(string, OfflineDevicesResponse):void} cb
+     * @public
+     */
+    OfflineDevices(req, cb) {
+        let resp = new OfflineDevicesResponse();
+        this.request("OfflineDevices", req, resp, cb);
+    }
+
+    /**
      * 运行自定义脚本
      * @param {RunUserCmdRequest} req
      * @param {function(string, RunUserCmdResponse):void} cb
@@ -153,6 +195,17 @@ class BmClient extends AbstractClient {
     CreatePsaRegulation(req, cb) {
         let resp = new CreatePsaRegulationResponse();
         this.request("CreatePsaRegulation", req, resp, cb);
+    }
+
+    /**
+     * 获取获取设备类型
+     * @param {DescribeDeviceClassRequest} req
+     * @param {function(string, DescribeDeviceClassResponse):void} cb
+     * @public
+     */
+    DescribeDeviceClass(req, cb) {
+        let resp = new DescribeDeviceClassResponse();
+        this.request("DescribeDeviceClass", req, resp, cb);
     }
 
     /**
@@ -241,6 +294,28 @@ TaskStatus（任务状态ID）与状态中文名的对应关系如下：<br>
     }
 
     /**
+     * 查询指定机型所支持的操作系统
+     * @param {DescribeOsInfoRequest} req
+     * @param {function(string, DescribeOsInfoResponse):void} cb
+     * @public
+     */
+    DescribeOsInfo(req, cb) {
+        let resp = new DescribeOsInfoResponse();
+        this.request("DescribeOsInfo", req, resp, cb);
+    }
+
+    /**
+     * 查询服务器所在的位置，如机架，上联交换机等信息
+     * @param {DescribeDevicePositionRequest} req
+     * @param {function(string, DescribeDevicePositionResponse):void} cb
+     * @public
+     */
+    DescribeDevicePosition(req, cb) {
+        let resp = new DescribeDevicePositionResponse();
+        this.request("DescribeDevicePosition", req, resp, cb);
+    }
+
+    /**
      * 获取自定义脚本任务详细信息
      * @param {DescribeUserCmdTaskInfoRequest} req
      * @param {function(string, DescribeUserCmdTaskInfoResponse):void} cb
@@ -307,14 +382,36 @@ TaskStatus（任务状态ID）与状态中文名的对应关系如下：<br>
     }
 
     /**
-     * 修改服务器名称
-     * @param {ModifyDeviceAliasesRequest} req
-     * @param {function(string, ModifyDeviceAliasesResponse):void} cb
+     * 重置服务器密码
+     * @param {ResetDevicePasswordRequest} req
+     * @param {function(string, ResetDevicePasswordResponse):void} cb
      * @public
      */
-    ModifyDeviceAliases(req, cb) {
-        let resp = new ModifyDeviceAliasesResponse();
-        this.request("ModifyDeviceAliases", req, resp, cb);
+    ResetDevicePassword(req, cb) {
+        let resp = new ResetDevicePasswordResponse();
+        this.request("ResetDevicePassword", req, resp, cb);
+    }
+
+    /**
+     * 查询设备库存
+     * @param {DescribeDeviceInventoryRequest} req
+     * @param {function(string, DescribeDeviceInventoryResponse):void} cb
+     * @public
+     */
+    DescribeDeviceInventory(req, cb) {
+        let resp = new DescribeDeviceInventoryResponse();
+        this.request("DescribeDeviceInventory", req, resp, cb);
+    }
+
+    /**
+     * 查询设备操作日志， 如设备重启，重装，设置密码等操作
+     * @param {DescribeDeviceOperationLogRequest} req
+     * @param {function(string, DescribeDeviceOperationLogResponse):void} cb
+     * @public
+     */
+    DescribeDeviceOperationLog(req, cb) {
+        let resp = new DescribeDeviceOperationLogResponse();
+        this.request("DescribeDeviceOperationLog", req, resp, cb);
     }
 
     /**
@@ -371,14 +468,25 @@ ConfirmUnRecovered（维修完成后，确认故障未恢复）<br>
     }
 
     /**
-     * 重置服务器密码
-     * @param {ResetDevicePasswordRequest} req
-     * @param {function(string, ResetDevicePasswordResponse):void} cb
+     * 设置带外VPN认证用户密码
+     * @param {SetOutBandVpnAuthPasswordRequest} req
+     * @param {function(string, SetOutBandVpnAuthPasswordResponse):void} cb
      * @public
      */
-    ResetDevicePassword(req, cb) {
-        let resp = new ResetDevicePasswordResponse();
-        this.request("ResetDevicePassword", req, resp, cb);
+    SetOutBandVpnAuthPassword(req, cb) {
+        let resp = new SetOutBandVpnAuthPasswordResponse();
+        this.request("SetOutBandVpnAuthPassword", req, resp, cb);
+    }
+
+    /**
+     * 修改服务器名称
+     * @param {ModifyDeviceAliasesRequest} req
+     * @param {function(string, ModifyDeviceAliasesResponse):void} cb
+     * @public
+     */
+    ModifyDeviceAliases(req, cb) {
+        let resp = new ModifyDeviceAliasesResponse();
+        this.request("ModifyDeviceAliases", req, resp, cb);
     }
 
 
