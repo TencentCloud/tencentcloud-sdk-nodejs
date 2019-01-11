@@ -51,9 +51,9 @@ class ChatRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Text = params.Text || null;
-        this.ProjectId = params.ProjectId || null;
-        this.User = params.User || null;
+        this.Text = 'Text' in params ? params.Text : null;
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+        this.User = 'User' in params ? params.User : null;
 
     }
 }
@@ -87,8 +87,8 @@ class SentenceRecognitionResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Result = params.Result || null;
-        this.RequestId = params.RequestId || null;
+        this.Result = 'Result' in params ? params.Result : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -128,9 +128,9 @@ class SimultaneousInterpretingResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.AsrText = params.AsrText || null;
-        this.NmtText = params.NmtText || null;
-        this.RequestId = params.RequestId || null;
+        this.AsrText = 'AsrText' in params ? params.AsrText : null;
+        this.NmtText = 'NmtText' in params ? params.NmtText : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -170,9 +170,9 @@ class TextToVoiceResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Audio = params.Audio || null;
-        this.SessionId = params.SessionId || null;
-        this.RequestId = params.RequestId || null;
+        this.Audio = 'Audio' in params ? params.Audio : null;
+        this.SessionId = 'SessionId' in params ? params.SessionId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -266,18 +266,18 @@ class SimultaneousInterpretingRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ProjectId = params.ProjectId || null;
-        this.SubServiceType = params.SubServiceType || null;
-        this.RecEngineModelType = params.RecEngineModelType || null;
-        this.Data = params.Data || null;
-        this.DataLen = params.DataLen || null;
-        this.VoiceId = params.VoiceId || null;
-        this.IsEnd = params.IsEnd || null;
-        this.VoiceFormat = params.VoiceFormat || null;
-        this.OpenTranslate = params.OpenTranslate || null;
-        this.SourceLanguage = params.SourceLanguage || null;
-        this.TargetLanguage = params.TargetLanguage || null;
-        this.Seq = params.Seq || null;
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+        this.SubServiceType = 'SubServiceType' in params ? params.SubServiceType : null;
+        this.RecEngineModelType = 'RecEngineModelType' in params ? params.RecEngineModelType : null;
+        this.Data = 'Data' in params ? params.Data : null;
+        this.DataLen = 'DataLen' in params ? params.DataLen : null;
+        this.VoiceId = 'VoiceId' in params ? params.VoiceId : null;
+        this.IsEnd = 'IsEnd' in params ? params.IsEnd : null;
+        this.VoiceFormat = 'VoiceFormat' in params ? params.VoiceFormat : null;
+        this.OpenTranslate = 'OpenTranslate' in params ? params.OpenTranslate : null;
+        this.SourceLanguage = 'SourceLanguage' in params ? params.SourceLanguage : null;
+        this.TargetLanguage = 'TargetLanguage' in params ? params.TargetLanguage : null;
+        this.Seq = 'Seq' in params ? params.Seq : null;
 
     }
 }
@@ -353,15 +353,15 @@ class SentenceRecognitionRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ProjectId = params.ProjectId || null;
-        this.SubServiceType = params.SubServiceType || null;
-        this.EngSerViceType = params.EngSerViceType || null;
-        this.SourceType = params.SourceType || null;
-        this.VoiceFormat = params.VoiceFormat || null;
-        this.UsrAudioKey = params.UsrAudioKey || null;
-        this.Url = params.Url || null;
-        this.Data = params.Data || null;
-        this.DataLen = params.DataLen || null;
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+        this.SubServiceType = 'SubServiceType' in params ? params.SubServiceType : null;
+        this.EngSerViceType = 'EngSerViceType' in params ? params.EngSerViceType : null;
+        this.SourceType = 'SourceType' in params ? params.SourceType : null;
+        this.VoiceFormat = 'VoiceFormat' in params ? params.VoiceFormat : null;
+        this.UsrAudioKey = 'UsrAudioKey' in params ? params.UsrAudioKey : null;
+        this.Url = 'Url' in params ? params.Url : null;
+        this.Data = 'Data' in params ? params.Data : null;
+        this.DataLen = 'DataLen' in params ? params.DataLen : null;
 
     }
 }
@@ -437,15 +437,15 @@ class TextToVoiceRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Text = params.Text || null;
-        this.SessionId = params.SessionId || null;
-        this.ModelType = params.ModelType || null;
-        this.Volume = params.Volume || null;
-        this.Speed = params.Speed || null;
-        this.ProjectId = params.ProjectId || null;
-        this.VoiceType = params.VoiceType || null;
-        this.PrimaryLanguage = params.PrimaryLanguage || null;
-        this.SampleRate = params.SampleRate || null;
+        this.Text = 'Text' in params ? params.Text : null;
+        this.SessionId = 'SessionId' in params ? params.SessionId : null;
+        this.ModelType = 'ModelType' in params ? params.ModelType : null;
+        this.Volume = 'Volume' in params ? params.Volume : null;
+        this.Speed = 'Speed' in params ? params.Speed : null;
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+        this.VoiceType = 'VoiceType' in params ? params.VoiceType : null;
+        this.PrimaryLanguage = 'PrimaryLanguage' in params ? params.PrimaryLanguage : null;
+        this.SampleRate = 'SampleRate' in params ? params.SampleRate : null;
 
     }
 }
@@ -479,8 +479,8 @@ class ChatResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Answer = params.Answer || null;
-        this.RequestId = params.RequestId || null;
+        this.Answer = 'Answer' in params ? params.Answer : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }

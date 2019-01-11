@@ -63,16 +63,16 @@ class ImageTranslateResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.SessionUuid = params.SessionUuid || null;
-        this.Source = params.Source || null;
-        this.Target = params.Target || null;
+        this.SessionUuid = 'SessionUuid' in params ? params.SessionUuid : null;
+        this.Source = 'Source' in params ? params.Source : null;
+        this.Target = 'Target' in params ? params.Target : null;
 
         if (params.ImageRecord) {
             let obj = new ImageRecord();
             obj.deserialize(params.ImageRecord)
             this.ImageRecord = obj;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -142,14 +142,14 @@ class SpeechTranslateResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.SessionUuid = params.SessionUuid || null;
-        this.RecognizeStatus = params.RecognizeStatus || null;
-        this.SourceText = params.SourceText || null;
-        this.TargetText = params.TargetText || null;
-        this.Seq = params.Seq || null;
-        this.Source = params.Source || null;
-        this.Target = params.Target || null;
-        this.RequestId = params.RequestId || null;
+        this.SessionUuid = 'SessionUuid' in params ? params.SessionUuid : null;
+        this.RecognizeStatus = 'RecognizeStatus' in params ? params.RecognizeStatus : null;
+        this.SourceText = 'SourceText' in params ? params.SourceText : null;
+        this.TargetText = 'TargetText' in params ? params.TargetText : null;
+        this.Seq = 'Seq' in params ? params.Seq : null;
+        this.Source = 'Source' in params ? params.Source : null;
+        this.Target = 'Target' in params ? params.Target : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -219,8 +219,8 @@ class LanguageDetectRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Text = params.Text || null;
-        this.ProjectId = params.ProjectId || null;
+        this.Text = 'Text' in params ? params.Text : null;
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
 
     }
 }
@@ -255,8 +255,8 @@ class LanguageDetectResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Lang = params.Lang || null;
-        this.RequestId = params.RequestId || null;
+        this.Lang = 'Lang' in params ? params.Lang : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -314,12 +314,12 @@ class ItemValue extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.SourceText = params.SourceText || null;
-        this.TargetText = params.TargetText || null;
-        this.X = params.X || null;
-        this.Y = params.Y || null;
-        this.W = params.W || null;
-        this.H = params.H || null;
+        this.SourceText = 'SourceText' in params ? params.SourceText : null;
+        this.TargetText = 'TargetText' in params ? params.TargetText : null;
+        this.X = 'X' in params ? params.X : null;
+        this.Y = 'Y' in params ? params.Y : null;
+        this.W = 'W' in params ? params.W : null;
+        this.H = 'H' in params ? params.H : null;
 
     }
 }
@@ -365,10 +365,10 @@ class TextTranslateResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TargetText = params.TargetText || null;
-        this.Source = params.Source || null;
-        this.Target = params.Target || null;
-        this.RequestId = params.RequestId || null;
+        this.TargetText = 'TargetText' in params ? params.TargetText : null;
+        this.Source = 'Source' in params ? params.Source : null;
+        this.Target = 'Target' in params ? params.Target : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -438,14 +438,14 @@ class SpeechTranslateRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.SessionUuid = params.SessionUuid || null;
-        this.Source = params.Source || null;
-        this.Target = params.Target || null;
-        this.AudioFormat = params.AudioFormat || null;
-        this.Seq = params.Seq || null;
-        this.IsEnd = params.IsEnd || null;
-        this.Data = params.Data || null;
-        this.ProjectId = params.ProjectId || null;
+        this.SessionUuid = 'SessionUuid' in params ? params.SessionUuid : null;
+        this.Source = 'Source' in params ? params.Source : null;
+        this.Target = 'Target' in params ? params.Target : null;
+        this.AudioFormat = 'AudioFormat' in params ? params.AudioFormat : null;
+        this.Seq = 'Seq' in params ? params.Seq : null;
+        this.IsEnd = 'IsEnd' in params ? params.IsEnd : null;
+        this.Data = 'Data' in params ? params.Data : null;
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
 
     }
 }
@@ -503,12 +503,12 @@ class ImageTranslateRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.SessionUuid = params.SessionUuid || null;
-        this.Scene = params.Scene || null;
-        this.Data = params.Data || null;
-        this.Source = params.Source || null;
-        this.Target = params.Target || null;
-        this.ProjectId = params.ProjectId || null;
+        this.SessionUuid = 'SessionUuid' in params ? params.SessionUuid : null;
+        this.Scene = 'Scene' in params ? params.Scene : null;
+        this.Data = 'Data' in params ? params.Data : null;
+        this.Source = 'Source' in params ? params.Source : null;
+        this.Target = 'Target' in params ? params.Target : null;
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
 
     }
 }
@@ -555,10 +555,10 @@ class TextTranslateRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.SourceText = params.SourceText || null;
-        this.Source = params.Source || null;
-        this.Target = params.Target || null;
-        this.ProjectId = params.ProjectId || null;
+        this.SourceText = 'SourceText' in params ? params.SourceText : null;
+        this.Source = 'Source' in params ? params.Source : null;
+        this.Target = 'Target' in params ? params.Target : null;
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
 
     }
 }

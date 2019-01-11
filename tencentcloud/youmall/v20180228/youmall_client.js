@@ -42,7 +42,7 @@ const DescribeClusterPersonArrivedMallRequest = models.DescribeClusterPersonArri
 const DescribeZoneFlowGenderInfoByZoneIdResponse = models.DescribeZoneFlowGenderInfoByZoneIdResponse;
 const DescribeHistoryNetworkInfoRequest = models.DescribeHistoryNetworkInfoRequest;
 const DescribePersonTraceDetailResponse = models.DescribePersonTraceDetailResponse;
-const PersonVisitInfo = models.PersonVisitInfo;
+const DescribePersonInfoByFacePictureRequest = models.DescribePersonInfoByFacePictureRequest;
 const DescribePersonVisitInfoRequest = models.DescribePersonVisitInfoRequest;
 const DescribeZoneTrafficInfoResponse = models.DescribeZoneTrafficInfoResponse;
 const DeletePersonFeatureRequest = models.DeletePersonFeatureRequest;
@@ -51,6 +51,7 @@ const PersonProfile = models.PersonProfile;
 const DescribePersonResponse = models.DescribePersonResponse;
 const DescribeTrajectoryDataRequest = models.DescribeTrajectoryDataRequest;
 const DescribeZoneTrafficInfoRequest = models.DescribeZoneTrafficInfoRequest;
+const ModifyPersonFeatureInfoResponse = models.ModifyPersonFeatureInfoResponse;
 const ZoneTrafficInfoDetail = models.ZoneTrafficInfoDetail;
 const DescribeZoneFlowGenderAvrStayTimeByZoneIdRequest = models.DescribeZoneFlowGenderAvrStayTimeByZoneIdRequest;
 const ZoneFlowAndAvrStayTime = models.ZoneFlowAndAvrStayTime;
@@ -82,6 +83,7 @@ const ZoneHourFlow = models.ZoneHourFlow;
 const ShopHourTrafficInfo = models.ShopHourTrafficInfo;
 const DescribeClusterPersonTraceRequest = models.DescribeClusterPersonTraceRequest;
 const PersonCoordinate = models.PersonCoordinate;
+const ModifyPersonFeatureInfoRequest = models.ModifyPersonFeatureInfoRequest;
 const ZoneDayFlow = models.ZoneDayFlow;
 const DescribePersonTraceRequest = models.DescribePersonTraceRequest;
 const DescribeZoneFlowHourlyByZoneIdResponse = models.DescribeZoneFlowHourlyByZoneIdResponse;
@@ -92,7 +94,7 @@ const CreateAccountResponse = models.CreateAccountResponse;
 const DescribeHistoryNetworkInfoResponse = models.DescribeHistoryNetworkInfoResponse;
 const CreateFacePictureResponse = models.CreateFacePictureResponse;
 const DescribeShopInfoResponse = models.DescribeShopInfoResponse;
-const DescribePersonInfoByFacePictureRequest = models.DescribePersonInfoByFacePictureRequest;
+const PersonVisitInfo = models.PersonVisitInfo;
 const CreateFacePictureRequest = models.CreateFacePictureRequest;
 const DescribeZoneFlowAgeInfoByZoneIdRequest = models.DescribeZoneFlowAgeInfoByZoneIdRequest;
 const ShopInfo = models.ShopInfo;
@@ -368,6 +370,17 @@ class YoumallClient extends AbstractClient {
     ModifyPersonType(req, cb) {
         let resp = new ModifyPersonTypeResponse();
         this.request("ModifyPersonType", req, resp, cb);
+    }
+
+    /**
+     * 支持修改黑白名单类型的顾客特征
+     * @param {ModifyPersonFeatureInfoRequest} req
+     * @param {function(string, ModifyPersonFeatureInfoResponse):void} cb
+     * @public
+     */
+    ModifyPersonFeatureInfo(req, cb) {
+        let resp = new ModifyPersonFeatureInfoResponse();
+        this.request("ModifyPersonFeatureInfo", req, resp, cb);
     }
 
     /**

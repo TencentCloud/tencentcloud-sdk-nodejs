@@ -69,8 +69,8 @@ class GetMonitorDataRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Namespace = params.Namespace || null;
-        this.MetricName = params.MetricName || null;
+        this.Namespace = 'Namespace' in params ? params.Namespace : null;
+        this.MetricName = 'MetricName' in params ? params.MetricName : null;
 
         if (params.Instances) {
             this.Instances = new Array();
@@ -80,9 +80,9 @@ class GetMonitorDataRequest extends  AbstractModel {
                 this.Instances.push(obj);
             }
         }
-        this.Period = params.Period || null;
-        this.StartTime = params.StartTime || null;
-        this.EndTime = params.EndTime || null;
+        this.Period = 'Period' in params ? params.Period : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
 
     }
 }
@@ -152,8 +152,8 @@ class PeriodsSt extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Period = params.Period || null;
-        this.StatType = params.StatType || null;
+        this.Period = 'Period' in params ? params.Period : null;
+        this.StatType = 'StatType' in params ? params.StatType : null;
 
     }
 }
@@ -187,8 +187,8 @@ class Dimension extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Name = params.Name || null;
-        this.Value = params.Value || null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Value = 'Value' in params ? params.Value : null;
 
     }
 }
@@ -222,8 +222,8 @@ class DescribeBaseMetricsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Namespace = params.Namespace || null;
-        this.MetricName = params.MetricName || null;
+        this.Namespace = 'Namespace' in params ? params.Namespace : null;
+        this.MetricName = 'MetricName' in params ? params.MetricName : null;
 
     }
 }
@@ -281,8 +281,8 @@ class GetMonitorDataResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Period = params.Period || null;
-        this.MetricName = params.MetricName || null;
+        this.Period = 'Period' in params ? params.Period : null;
+        this.MetricName = 'MetricName' in params ? params.MetricName : null;
 
         if (params.DataPoints) {
             this.DataPoints = new Array();
@@ -292,9 +292,9 @@ class GetMonitorDataResponse extends  AbstractModel {
                 this.DataPoints.push(obj);
             }
         }
-        this.StartTime = params.StartTime || null;
-        this.EndTime = params.EndTime || null;
-        this.RequestId = params.RequestId || null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -364,11 +364,11 @@ class MetricSet extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Namespace = params.Namespace || null;
-        this.MetricName = params.MetricName || null;
-        this.Unit = params.Unit || null;
-        this.UnitCname = params.UnitCname || null;
-        this.Period = params.Period || null;
+        this.Namespace = 'Namespace' in params ? params.Namespace : null;
+        this.MetricName = 'MetricName' in params ? params.MetricName : null;
+        this.Unit = 'Unit' in params ? params.Unit : null;
+        this.UnitCname = 'UnitCname' in params ? params.UnitCname : null;
+        this.Period = 'Period' in params ? params.Period : null;
 
         if (params.Periods) {
             this.Periods = new Array();
@@ -441,8 +441,8 @@ class DataPoint extends  AbstractModel {
                 this.Dimensions.push(obj);
             }
         }
-        this.Timestamps = params.Timestamps || null;
-        this.Values = params.Values || null;
+        this.Timestamps = 'Timestamps' in params ? params.Timestamps : null;
+        this.Values = 'Values' in params ? params.Values : null;
 
     }
 }
@@ -476,8 +476,8 @@ class MetricObjectMeaning extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.En = params.En || null;
-        this.Zh = params.Zh || null;
+        this.En = 'En' in params ? params.En : null;
+        this.Zh = 'Zh' in params ? params.Zh : null;
 
     }
 }
@@ -505,7 +505,7 @@ class DimensionsDesc extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Dimensions = params.Dimensions || null;
+        this.Dimensions = 'Dimensions' in params ? params.Dimensions : null;
 
     }
 }
@@ -548,7 +548,7 @@ class DescribeBaseMetricsResponse extends  AbstractModel {
                 this.MetricSet.push(obj);
             }
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }

@@ -39,7 +39,7 @@ class ModifyInstanceResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -103,11 +103,11 @@ class ZoneCapacityConf extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ZoneId = params.ZoneId || null;
-        this.ZoneName = params.ZoneName || null;
-        this.IsSaleout = params.IsSaleout || null;
-        this.IsDefault = params.IsDefault || null;
-        this.NetWorkType = params.NetWorkType || null;
+        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
+        this.ZoneName = 'ZoneName' in params ? params.ZoneName : null;
+        this.IsSaleout = 'IsSaleout' in params ? params.IsSaleout : null;
+        this.IsDefault = 'IsDefault' in params ? params.IsDefault : null;
+        this.NetWorkType = 'NetWorkType' in params ? params.NetWorkType : null;
 
         if (params.ProductSet) {
             this.ProductSet = new Array();
@@ -117,7 +117,7 @@ class ZoneCapacityConf extends  AbstractModel {
                 this.ProductSet.push(obj);
             }
         }
-        this.OldZoneId = params.OldZoneId || null;
+        this.OldZoneId = 'OldZoneId' in params ? params.OldZoneId : null;
 
     }
 }
@@ -163,10 +163,10 @@ class DescribeAutoBackupConfigResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.AutoBackupType = params.AutoBackupType || null;
-        this.WeekDays = params.WeekDays || null;
-        this.TimePeriod = params.TimePeriod || null;
-        this.RequestId = params.RequestId || null;
+        this.AutoBackupType = 'AutoBackupType' in params ? params.AutoBackupType : null;
+        this.WeekDays = 'WeekDays' in params ? params.WeekDays : null;
+        this.TimePeriod = 'TimePeriod' in params ? params.TimePeriod : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -260,18 +260,18 @@ class TradeDealDetail extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.DealId = params.DealId || null;
-        this.DealName = params.DealName || null;
-        this.ZoneId = params.ZoneId || null;
-        this.GoodsNum = params.GoodsNum || null;
-        this.Creater = params.Creater || null;
-        this.CreatTime = params.CreatTime || null;
-        this.OverdueTime = params.OverdueTime || null;
-        this.EndTime = params.EndTime || null;
-        this.Status = params.Status || null;
-        this.Description = params.Description || null;
-        this.Price = params.Price || null;
-        this.InstanceIds = params.InstanceIds || null;
+        this.DealId = 'DealId' in params ? params.DealId : null;
+        this.DealName = 'DealName' in params ? params.DealName : null;
+        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
+        this.GoodsNum = 'GoodsNum' in params ? params.GoodsNum : null;
+        this.Creater = 'Creater' in params ? params.Creater : null;
+        this.CreatTime = 'CreatTime' in params ? params.CreatTime : null;
+        this.OverdueTime = 'OverdueTime' in params ? params.OverdueTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.Price = 'Price' in params ? params.Price : null;
+        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
 
     }
 }
@@ -329,12 +329,12 @@ class RedisBackupSet extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.StartTime = params.StartTime || null;
-        this.BackupId = params.BackupId || null;
-        this.BackupType = params.BackupType || null;
-        this.Status = params.Status || null;
-        this.Remark = params.Remark || null;
-        this.Locked = params.Locked || null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.BackupId = 'BackupId' in params ? params.BackupId : null;
+        this.BackupType = 'BackupType' in params ? params.BackupType : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.Remark = 'Remark' in params ? params.Remark : null;
+        this.Locked = 'Locked' in params ? params.Locked : null;
 
     }
 }
@@ -374,9 +374,9 @@ class ModfiyInstancePasswordRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = params.InstanceId || null;
-        this.OldPassword = params.OldPassword || null;
-        this.Password = params.Password || null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.OldPassword = 'OldPassword' in params ? params.OldPassword : null;
+        this.Password = 'Password' in params ? params.Password : null;
 
     }
 }
@@ -422,10 +422,10 @@ class ModifyAutoBackupConfigResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.AutoBackupType = params.AutoBackupType || null;
-        this.WeekDays = params.WeekDays || null;
-        this.TimePeriod = params.TimePeriod || null;
-        this.RequestId = params.RequestId || null;
+        this.AutoBackupType = 'AutoBackupType' in params ? params.AutoBackupType : null;
+        this.WeekDays = 'WeekDays' in params ? params.WeekDays : null;
+        this.TimePeriod = 'TimePeriod' in params ? params.TimePeriod : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -543,22 +543,22 @@ class CreateInstancesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ZoneId = params.ZoneId || null;
-        this.TypeId = params.TypeId || null;
-        this.MemSize = params.MemSize || null;
-        this.GoodsNum = params.GoodsNum || null;
-        this.Period = params.Period || null;
-        this.Password = params.Password || null;
-        this.BillingMode = params.BillingMode || null;
-        this.VpcId = params.VpcId || null;
-        this.SubnetId = params.SubnetId || null;
-        this.ProjectId = params.ProjectId || null;
-        this.AutoRenew = params.AutoRenew || null;
-        this.SecurityGroupIdList = params.SecurityGroupIdList || null;
-        this.VPort = params.VPort || null;
-        this.RedisShardNum = params.RedisShardNum || null;
-        this.RedisReplicasNum = params.RedisReplicasNum || null;
-        this.ReplicasReadonly = params.ReplicasReadonly || null;
+        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
+        this.TypeId = 'TypeId' in params ? params.TypeId : null;
+        this.MemSize = 'MemSize' in params ? params.MemSize : null;
+        this.GoodsNum = 'GoodsNum' in params ? params.GoodsNum : null;
+        this.Period = 'Period' in params ? params.Period : null;
+        this.Password = 'Password' in params ? params.Password : null;
+        this.BillingMode = 'BillingMode' in params ? params.BillingMode : null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+        this.AutoRenew = 'AutoRenew' in params ? params.AutoRenew : null;
+        this.SecurityGroupIdList = 'SecurityGroupIdList' in params ? params.SecurityGroupIdList : null;
+        this.VPort = 'VPort' in params ? params.VPort : null;
+        this.RedisShardNum = 'RedisShardNum' in params ? params.RedisShardNum : null;
+        this.RedisReplicasNum = 'RedisReplicasNum' in params ? params.RedisReplicasNum : null;
+        this.ReplicasReadonly = 'ReplicasReadonly' in params ? params.ReplicasReadonly : null;
 
     }
 }
@@ -601,7 +601,7 @@ class DescribeProductInfoResponse extends  AbstractModel {
                 this.RegionSet.push(obj);
             }
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -635,8 +635,8 @@ class ResetPasswordRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Password = params.Password || null;
-        this.InstanceId = params.InstanceId || null;
+        this.Password = 'Password' in params ? params.Password : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
 
     }
 }
@@ -736,19 +736,19 @@ class ProductConf extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Type = params.Type || null;
-        this.TypeName = params.TypeName || null;
-        this.MinBuyNum = params.MinBuyNum || null;
-        this.MaxBuyNum = params.MaxBuyNum || null;
-        this.Saleout = params.Saleout || null;
-        this.Engine = params.Engine || null;
-        this.Version = params.Version || null;
-        this.TotalSize = params.TotalSize || null;
-        this.ShardSize = params.ShardSize || null;
-        this.ReplicaNum = params.ReplicaNum || null;
-        this.ShardNum = params.ShardNum || null;
-        this.PayMode = params.PayMode || null;
-        this.EnableRepicaReadOnly = params.EnableRepicaReadOnly || null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.TypeName = 'TypeName' in params ? params.TypeName : null;
+        this.MinBuyNum = 'MinBuyNum' in params ? params.MinBuyNum : null;
+        this.MaxBuyNum = 'MaxBuyNum' in params ? params.MaxBuyNum : null;
+        this.Saleout = 'Saleout' in params ? params.Saleout : null;
+        this.Engine = 'Engine' in params ? params.Engine : null;
+        this.Version = 'Version' in params ? params.Version : null;
+        this.TotalSize = 'TotalSize' in params ? params.TotalSize : null;
+        this.ShardSize = 'ShardSize' in params ? params.ShardSize : null;
+        this.ReplicaNum = 'ReplicaNum' in params ? params.ReplicaNum : null;
+        this.ShardNum = 'ShardNum' in params ? params.ShardNum : null;
+        this.PayMode = 'PayMode' in params ? params.PayMode : null;
+        this.EnableRepicaReadOnly = 'EnableRepicaReadOnly' in params ? params.EnableRepicaReadOnly : null;
 
     }
 }
@@ -788,9 +788,9 @@ class ModifyInstanceRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Operation = params.Operation || null;
-        this.InstanceId = params.InstanceId || null;
-        this.InstanceName = params.InstanceName || null;
+        this.Operation = 'Operation' in params ? params.Operation : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
 
     }
 }
@@ -824,8 +824,8 @@ class RenewInstanceResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.DealId = params.DealId || null;
-        this.RequestId = params.RequestId || null;
+        this.DealId = 'DealId' in params ? params.DealId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -865,7 +865,7 @@ class DescribeInstanceBackupsResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = params.TotalCount || null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
 
         if (params.BackupSet) {
             this.BackupSet = new Array();
@@ -875,7 +875,7 @@ class DescribeInstanceBackupsResponse extends  AbstractModel {
                 this.BackupSet.push(obj);
             }
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -903,7 +903,7 @@ class DescribeInstanceDealDetailRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.DealIds = params.DealIds || null;
+        this.DealIds = 'DealIds' in params ? params.DealIds : null;
 
     }
 }
@@ -937,8 +937,8 @@ class ManualBackupInstanceResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TaskId = params.TaskId || null;
-        this.RequestId = params.RequestId || null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -978,7 +978,7 @@ class DescribeInstancesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = params.TotalCount || null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
 
         if (params.InstanceSet) {
             this.InstanceSet = new Array();
@@ -988,7 +988,7 @@ class DescribeInstancesResponse extends  AbstractModel {
                 this.InstanceSet.push(obj);
             }
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1031,7 +1031,7 @@ class DescribeInstanceDealDetailResponse extends  AbstractModel {
                 this.DealDetails.push(obj);
             }
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1086,8 +1086,8 @@ class ResetPasswordResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TaskId = params.TaskId || null;
-        this.RequestId = params.RequestId || null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1187,19 +1187,19 @@ class DescribeInstancesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Limit = params.Limit || null;
-        this.Offset = params.Offset || null;
-        this.InstanceId = params.InstanceId || null;
-        this.OrderBy = params.OrderBy || null;
-        this.OrderType = params.OrderType || null;
-        this.VpcIds = params.VpcIds || null;
-        this.SubnetIds = params.SubnetIds || null;
-        this.ProjectIds = params.ProjectIds || null;
-        this.SearchKey = params.SearchKey || null;
-        this.InstanceName = params.InstanceName || null;
-        this.UniqVpcIds = params.UniqVpcIds || null;
-        this.UniqSubnetIds = params.UniqSubnetIds || null;
-        this.RegionIds = params.RegionIds || null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.OrderBy = 'OrderBy' in params ? params.OrderBy : null;
+        this.OrderType = 'OrderType' in params ? params.OrderType : null;
+        this.VpcIds = 'VpcIds' in params ? params.VpcIds : null;
+        this.SubnetIds = 'SubnetIds' in params ? params.SubnetIds : null;
+        this.ProjectIds = 'ProjectIds' in params ? params.ProjectIds : null;
+        this.SearchKey = 'SearchKey' in params ? params.SearchKey : null;
+        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
+        this.UniqVpcIds = 'UniqVpcIds' in params ? params.UniqVpcIds : null;
+        this.UniqSubnetIds = 'UniqSubnetIds' in params ? params.UniqSubnetIds : null;
+        this.RegionIds = 'RegionIds' in params ? params.RegionIds : null;
 
     }
 }
@@ -1233,8 +1233,8 @@ class ClearInstanceRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = params.InstanceId || null;
-        this.Password = params.Password || null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Password = 'Password' in params ? params.Password : null;
 
     }
 }
@@ -1286,10 +1286,10 @@ class RegionConf extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RegionId = params.RegionId || null;
-        this.RegionName = params.RegionName || null;
-        this.RegionShortName = params.RegionShortName || null;
-        this.Area = params.Area || null;
+        this.RegionId = 'RegionId' in params ? params.RegionId : null;
+        this.RegionName = 'RegionName' in params ? params.RegionName : null;
+        this.RegionShortName = 'RegionShortName' in params ? params.RegionShortName : null;
+        this.Area = 'Area' in params ? params.Area : null;
 
         if (params.ZoneSet) {
             this.ZoneSet = new Array();
@@ -1332,8 +1332,8 @@ class RenewInstanceRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Period = params.Period || null;
-        this.InstanceId = params.InstanceId || null;
+        this.Period = 'Period' in params ? params.Period : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
 
     }
 }
@@ -1391,12 +1391,12 @@ class DescribeInstanceBackupsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = params.InstanceId || null;
-        this.Limit = params.Limit || null;
-        this.Offset = params.Offset || null;
-        this.BeginTime = params.BeginTime || null;
-        this.EndTime = params.EndTime || null;
-        this.Status = params.Status || null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.BeginTime = 'BeginTime' in params ? params.BeginTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.Status = 'Status' in params ? params.Status : null;
 
     }
 }
@@ -1454,12 +1454,12 @@ class DescribeTaskInfoResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Status = params.Status || null;
-        this.StartTime = params.StartTime || null;
-        this.TaskType = params.TaskType || null;
-        this.InstanceId = params.InstanceId || null;
-        this.TaskMessage = params.TaskMessage || null;
-        this.RequestId = params.RequestId || null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.TaskType = 'TaskType' in params ? params.TaskType : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.TaskMessage = 'TaskMessage' in params ? params.TaskMessage : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1487,7 +1487,7 @@ class DescribeAutoBackupConfigRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = params.InstanceId || null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
 
     }
 }
@@ -1533,10 +1533,10 @@ class ModifyAutoBackupConfigRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = params.InstanceId || null;
-        this.WeekDays = params.WeekDays || null;
-        this.TimePeriod = params.TimePeriod || null;
-        this.AutoBackupType = params.AutoBackupType || null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.WeekDays = 'WeekDays' in params ? params.WeekDays : null;
+        this.TimePeriod = 'TimePeriod' in params ? params.TimePeriod : null;
+        this.AutoBackupType = 'AutoBackupType' in params ? params.AutoBackupType : null;
 
     }
 }
@@ -1570,8 +1570,8 @@ class CreateInstancesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.DealId = params.DealId || null;
-        this.RequestId = params.RequestId || null;
+        this.DealId = 'DealId' in params ? params.DealId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1599,7 +1599,7 @@ class DescribeTaskInfoRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TaskId = params.TaskId || null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
 
     }
 }
@@ -1633,8 +1633,8 @@ class UpgradeInstanceResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.DealId = params.DealId || null;
-        this.RequestId = params.RequestId || null;
+        this.DealId = 'DealId' in params ? params.DealId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1680,10 +1680,10 @@ class UpgradeInstanceRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = params.InstanceId || null;
-        this.MemSize = params.MemSize || null;
-        this.RedisShardNum = params.RedisShardNum || null;
-        this.RedisReplicasNum = params.RedisReplicasNum || null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.MemSize = 'MemSize' in params ? params.MemSize : null;
+        this.RedisShardNum = 'RedisShardNum' in params ? params.RedisShardNum : null;
+        this.RedisReplicasNum = 'RedisReplicasNum' in params ? params.RedisReplicasNum : null;
 
     }
 }
@@ -1717,8 +1717,8 @@ class ManualBackupInstanceRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = params.InstanceId || null;
-        this.Remark = params.Remark || null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Remark = 'Remark' in params ? params.Remark : null;
 
     }
 }
@@ -1752,8 +1752,8 @@ class ModfiyInstancePasswordResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TaskId = params.TaskId || null;
-        this.RequestId = params.RequestId || null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1907,28 +1907,28 @@ class InstanceSet extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceName = params.InstanceName || null;
-        this.InstanceId = params.InstanceId || null;
-        this.Appid = params.Appid || null;
-        this.ProjectId = params.ProjectId || null;
-        this.RegionId = params.RegionId || null;
-        this.ZoneId = params.ZoneId || null;
-        this.VpcId = params.VpcId || null;
-        this.SubnetId = params.SubnetId || null;
-        this.Status = params.Status || null;
-        this.WanIp = params.WanIp || null;
-        this.Port = params.Port || null;
-        this.Createtime = params.Createtime || null;
-        this.Size = params.Size || null;
-        this.SizeUsed = params.SizeUsed || null;
-        this.Type = params.Type || null;
-        this.AutoRenewFlag = params.AutoRenewFlag || null;
-        this.DeadlineTime = params.DeadlineTime || null;
-        this.Engine = params.Engine || null;
-        this.ProductType = params.ProductType || null;
-        this.UniqVpcId = params.UniqVpcId || null;
-        this.UniqSubnetId = params.UniqSubnetId || null;
-        this.BillingMode = params.BillingMode || null;
+        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Appid = 'Appid' in params ? params.Appid : null;
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+        this.RegionId = 'RegionId' in params ? params.RegionId : null;
+        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.WanIp = 'WanIp' in params ? params.WanIp : null;
+        this.Port = 'Port' in params ? params.Port : null;
+        this.Createtime = 'Createtime' in params ? params.Createtime : null;
+        this.Size = 'Size' in params ? params.Size : null;
+        this.SizeUsed = 'SizeUsed' in params ? params.SizeUsed : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.AutoRenewFlag = 'AutoRenewFlag' in params ? params.AutoRenewFlag : null;
+        this.DeadlineTime = 'DeadlineTime' in params ? params.DeadlineTime : null;
+        this.Engine = 'Engine' in params ? params.Engine : null;
+        this.ProductType = 'ProductType' in params ? params.ProductType : null;
+        this.UniqVpcId = 'UniqVpcId' in params ? params.UniqVpcId : null;
+        this.UniqSubnetId = 'UniqSubnetId' in params ? params.UniqSubnetId : null;
+        this.BillingMode = 'BillingMode' in params ? params.BillingMode : null;
 
     }
 }
@@ -1962,8 +1962,8 @@ class ClearInstanceResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TaskId = params.TaskId || null;
-        this.RequestId = params.RequestId || null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }

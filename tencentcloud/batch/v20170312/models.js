@@ -45,8 +45,8 @@ class EventVar extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Name = params.Name || null;
-        this.Value = params.Value || null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Value = 'Value' in params ? params.Value : null;
 
     }
 }
@@ -92,7 +92,7 @@ class AnonymousComputeEnv extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.EnvType = params.EnvType || null;
+        this.EnvType = 'EnvType' in params ? params.EnvType : null;
 
         if (params.EnvData) {
             let obj = new EnvData();
@@ -141,7 +141,7 @@ class DeleteComputeEnvResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -193,7 +193,7 @@ class SubmitJobRequest extends  AbstractModel {
             obj.deserialize(params.Job)
             this.Job = obj;
         }
-        this.ClientToken = params.ClientToken || null;
+        this.ClientToken = 'ClientToken' in params ? params.ClientToken : null;
 
     }
 }
@@ -221,7 +221,7 @@ class ComputeEnvData extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceTypes = params.InstanceTypes || null;
+        this.InstanceTypes = 'InstanceTypes' in params ? params.InstanceTypes : null;
 
     }
 }
@@ -261,9 +261,9 @@ class Authentication extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Scene = params.Scene || null;
-        this.SecretId = params.SecretId || null;
-        this.SecretKey = params.SecretKey || null;
+        this.Scene = 'Scene' in params ? params.Scene : null;
+        this.SecretId = 'SecretId' in params ? params.SecretId : null;
+        this.SecretKey = 'SecretKey' in params ? params.SecretKey : null;
 
     }
 }
@@ -297,8 +297,8 @@ class TerminateComputeNodeRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.EnvId = params.EnvId || null;
-        this.ComputeNodeId = params.ComputeNodeId || null;
+        this.EnvId = 'EnvId' in params ? params.EnvId : null;
+        this.ComputeNodeId = 'ComputeNodeId' in params ? params.ComputeNodeId : null;
 
     }
 }
@@ -350,11 +350,11 @@ class DescribeTaskLogsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.JobId = params.JobId || null;
-        this.TaskName = params.TaskName || null;
-        this.TaskInstanceIndexes = params.TaskInstanceIndexes || null;
-        this.Offset = params.Offset || null;
-        this.Limit = params.Limit || null;
+        this.JobId = 'JobId' in params ? params.JobId : null;
+        this.TaskName = 'TaskName' in params ? params.TaskName : null;
+        this.TaskInstanceIndexes = 'TaskInstanceIndexes' in params ? params.TaskInstanceIndexes : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
 
     }
 }
@@ -394,9 +394,9 @@ class AgentRunningMode extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Scene = params.Scene || null;
-        this.User = params.User || null;
-        this.Session = params.Session || null;
+        this.Scene = 'Scene' in params ? params.Scene : null;
+        this.User = 'User' in params ? params.User : null;
+        this.Session = 'Session' in params ? params.Session : null;
 
     }
 }
@@ -496,8 +496,8 @@ class EnvData extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceType = params.InstanceType || null;
-        this.ImageId = params.ImageId || null;
+        this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
+        this.ImageId = 'ImageId' in params ? params.ImageId : null;
 
         if (params.SystemDisk) {
             let obj = new SystemDisk();
@@ -525,28 +525,28 @@ class EnvData extends  AbstractModel {
             obj.deserialize(params.InternetAccessible)
             this.InternetAccessible = obj;
         }
-        this.InstanceName = params.InstanceName || null;
+        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
 
         if (params.LoginSettings) {
             let obj = new LoginSettings();
             obj.deserialize(params.LoginSettings)
             this.LoginSettings = obj;
         }
-        this.SecurityGroupIds = params.SecurityGroupIds || null;
+        this.SecurityGroupIds = 'SecurityGroupIds' in params ? params.SecurityGroupIds : null;
 
         if (params.EnhancedService) {
             let obj = new EnhancedService();
             obj.deserialize(params.EnhancedService)
             this.EnhancedService = obj;
         }
-        this.InstanceChargeType = params.InstanceChargeType || null;
+        this.InstanceChargeType = 'InstanceChargeType' in params ? params.InstanceChargeType : null;
 
         if (params.InstanceMarketOptions) {
             let obj = new InstanceMarketOptionsRequest();
             obj.deserialize(params.InstanceMarketOptions)
             this.InstanceMarketOptions = obj;
         }
-        this.InstanceTypes = params.InstanceTypes || null;
+        this.InstanceTypes = 'InstanceTypes' in params ? params.InstanceTypes : null;
 
     }
 }
@@ -593,7 +593,7 @@ class DescribeTaskTemplatesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TaskTemplateIds = params.TaskTemplateIds || null;
+        this.TaskTemplateIds = 'TaskTemplateIds' in params ? params.TaskTemplateIds : null;
 
         if (params.Filters) {
             this.Filters = new Array();
@@ -603,8 +603,8 @@ class DescribeTaskTemplatesRequest extends  AbstractModel {
                 this.Filters.push(obj);
             }
         }
-        this.Offset = params.Offset || null;
-        this.Limit = params.Limit || null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
 
     }
 }
@@ -638,7 +638,7 @@ class Notification extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TopicName = params.TopicName || null;
+        this.TopicName = 'TopicName' in params ? params.TopicName : null;
 
         if (params.EventConfigs) {
             this.EventConfigs = new Array();
@@ -687,9 +687,9 @@ class SystemDisk extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.DiskType = params.DiskType || null;
-        this.DiskId = params.DiskId || null;
-        this.DiskSize = params.DiskSize || null;
+        this.DiskType = 'DiskType' in params ? params.DiskType : null;
+        this.DiskId = 'DiskId' in params ? params.DiskId : null;
+        this.DiskSize = 'DiskSize' in params ? params.DiskSize : null;
 
     }
 }
@@ -807,15 +807,15 @@ class Task extends  AbstractModel {
             obj.deserialize(params.Application)
             this.Application = obj;
         }
-        this.TaskName = params.TaskName || null;
-        this.TaskInstanceNum = params.TaskInstanceNum || null;
+        this.TaskName = 'TaskName' in params ? params.TaskName : null;
+        this.TaskInstanceNum = 'TaskInstanceNum' in params ? params.TaskInstanceNum : null;
 
         if (params.ComputeEnv) {
             let obj = new AnonymousComputeEnv();
             obj.deserialize(params.ComputeEnv)
             this.ComputeEnv = obj;
         }
-        this.EnvId = params.EnvId || null;
+        this.EnvId = 'EnvId' in params ? params.EnvId : null;
 
         if (params.RedirectInfo) {
             let obj = new RedirectInfo();
@@ -873,9 +873,9 @@ class Task extends  AbstractModel {
                 this.Authentications.push(obj);
             }
         }
-        this.FailedAction = params.FailedAction || null;
-        this.MaxRetryCount = params.MaxRetryCount || null;
-        this.Timeout = params.Timeout || null;
+        this.FailedAction = 'FailedAction' in params ? params.FailedAction : null;
+        this.MaxRetryCount = 'MaxRetryCount' in params ? params.MaxRetryCount : null;
+        this.Timeout = 'Timeout' in params ? params.Timeout : null;
 
     }
 }
@@ -927,11 +927,11 @@ class InstanceTypeConfig extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Mem = params.Mem || null;
-        this.Cpu = params.Cpu || null;
-        this.InstanceType = params.InstanceType || null;
-        this.Zone = params.Zone || null;
-        this.InstanceFamily = params.InstanceFamily || null;
+        this.Mem = 'Mem' in params ? params.Mem : null;
+        this.Cpu = 'Cpu' in params ? params.Cpu : null;
+        this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
+        this.Zone = 'Zone' in params ? params.Zone : null;
+        this.InstanceFamily = 'InstanceFamily' in params ? params.InstanceFamily : null;
 
     }
 }
@@ -971,9 +971,9 @@ class LoginSettings extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Password = params.Password || null;
-        this.KeyIds = params.KeyIds || null;
-        this.KeepImageLogin = params.KeepImageLogin || null;
+        this.Password = 'Password' in params ? params.Password : null;
+        this.KeyIds = 'KeyIds' in params ? params.KeyIds : null;
+        this.KeepImageLogin = 'KeepImageLogin' in params ? params.KeepImageLogin : null;
 
     }
 }
@@ -1001,7 +1001,7 @@ class TerminateComputeNodesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1050,8 +1050,8 @@ class DescribeComputeEnvActivitiesResponse extends  AbstractModel {
                 this.ActivitySet.push(obj);
             }
         }
-        this.TotalCount = params.TotalCount || null;
-        this.RequestId = params.RequestId || null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1121,14 +1121,14 @@ class TaskInstanceMetrics extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.SubmittedCount = params.SubmittedCount || null;
-        this.PendingCount = params.PendingCount || null;
-        this.RunnableCount = params.RunnableCount || null;
-        this.StartingCount = params.StartingCount || null;
-        this.RunningCount = params.RunningCount || null;
-        this.SucceedCount = params.SucceedCount || null;
-        this.FailedInterruptedCount = params.FailedInterruptedCount || null;
-        this.FailedCount = params.FailedCount || null;
+        this.SubmittedCount = 'SubmittedCount' in params ? params.SubmittedCount : null;
+        this.PendingCount = 'PendingCount' in params ? params.PendingCount : null;
+        this.RunnableCount = 'RunnableCount' in params ? params.RunnableCount : null;
+        this.StartingCount = 'StartingCount' in params ? params.StartingCount : null;
+        this.RunningCount = 'RunningCount' in params ? params.RunningCount : null;
+        this.SucceedCount = 'SucceedCount' in params ? params.SucceedCount : null;
+        this.FailedInterruptedCount = 'FailedInterruptedCount' in params ? params.FailedInterruptedCount : null;
+        this.FailedCount = 'FailedCount' in params ? params.FailedCount : null;
 
     }
 }
@@ -1192,13 +1192,13 @@ class TaskInstanceLog extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TaskInstanceIndex = params.TaskInstanceIndex || null;
-        this.StdoutLog = params.StdoutLog || null;
-        this.StderrLog = params.StderrLog || null;
-        this.StdoutRedirectPath = params.StdoutRedirectPath || null;
-        this.StderrRedirectPath = params.StderrRedirectPath || null;
-        this.StdoutRedirectFileName = params.StdoutRedirectFileName || null;
-        this.StderrRedirectFileName = params.StderrRedirectFileName || null;
+        this.TaskInstanceIndex = 'TaskInstanceIndex' in params ? params.TaskInstanceIndex : null;
+        this.StdoutLog = 'StdoutLog' in params ? params.StdoutLog : null;
+        this.StderrLog = 'StderrLog' in params ? params.StderrLog : null;
+        this.StdoutRedirectPath = 'StdoutRedirectPath' in params ? params.StdoutRedirectPath : null;
+        this.StderrRedirectPath = 'StderrRedirectPath' in params ? params.StderrRedirectPath : null;
+        this.StdoutRedirectFileName = 'StdoutRedirectFileName' in params ? params.StdoutRedirectFileName : null;
+        this.StderrRedirectFileName = 'StderrRedirectFileName' in params ? params.StderrRedirectFileName : null;
 
     }
 }
@@ -1232,8 +1232,8 @@ class MountDataDisk extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.LocalPath = params.LocalPath || null;
-        this.FileSystemType = params.FileSystemType || null;
+        this.LocalPath = 'LocalPath' in params ? params.LocalPath : null;
+        this.FileSystemType = 'FileSystemType' in params ? params.FileSystemType : null;
 
     }
 }
@@ -1279,10 +1279,10 @@ class TaskView extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TaskName = params.TaskName || null;
-        this.TaskState = params.TaskState || null;
-        this.CreateTime = params.CreateTime || null;
-        this.EndTime = params.EndTime || null;
+        this.TaskName = 'TaskName' in params ? params.TaskName : null;
+        this.TaskState = 'TaskState' in params ? params.TaskState : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
 
     }
 }
@@ -1358,15 +1358,15 @@ class DescribeComputeEnvResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.EnvId = params.EnvId || null;
-        this.EnvName = params.EnvName || null;
+        this.EnvId = 'EnvId' in params ? params.EnvId : null;
+        this.EnvName = 'EnvName' in params ? params.EnvName : null;
 
         if (params.Placement) {
             let obj = new Placement();
             obj.deserialize(params.Placement)
             this.Placement = obj;
         }
-        this.CreateTime = params.CreateTime || null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
 
         if (params.ComputeNodeSet) {
             this.ComputeNodeSet = new Array();
@@ -1382,9 +1382,9 @@ class DescribeComputeEnvResponse extends  AbstractModel {
             obj.deserialize(params.ComputeNodeMetrics)
             this.ComputeNodeMetrics = obj;
         }
-        this.DesiredComputeNodeCount = params.DesiredComputeNodeCount || null;
-        this.EnvType = params.EnvType || null;
-        this.RequestId = params.RequestId || null;
+        this.DesiredComputeNodeCount = 'DesiredComputeNodeCount' in params ? params.DesiredComputeNodeCount : null;
+        this.EnvType = 'EnvType' in params ? params.EnvType : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1412,7 +1412,7 @@ class TerminateJobRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.JobId = params.JobId || null;
+        this.JobId = 'JobId' in params ? params.JobId : null;
 
     }
 }
@@ -1458,9 +1458,9 @@ class Application extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Command = params.Command || null;
-        this.DeliveryForm = params.DeliveryForm || null;
-        this.PackagePath = params.PackagePath || null;
+        this.Command = 'Command' in params ? params.Command : null;
+        this.DeliveryForm = 'DeliveryForm' in params ? params.DeliveryForm : null;
+        this.PackagePath = 'PackagePath' in params ? params.PackagePath : null;
 
         if (params.Docker) {
             let obj = new Docker();
@@ -1506,9 +1506,9 @@ class OutputMappingConfig extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Scene = params.Scene || null;
-        this.WorkerNum = params.WorkerNum || null;
-        this.WorkerPartSize = params.WorkerPartSize || null;
+        this.Scene = 'Scene' in params ? params.Scene : null;
+        this.WorkerNum = 'WorkerNum' in params ? params.WorkerNum : null;
+        this.WorkerPartSize = 'WorkerPartSize' in params ? params.WorkerPartSize : null;
 
     }
 }
@@ -1572,13 +1572,13 @@ class ComputeNodeMetrics extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.SubmittedCount = params.SubmittedCount || null;
-        this.CreatingCount = params.CreatingCount || null;
-        this.CreationFailedCount = params.CreationFailedCount || null;
-        this.CreatedCount = params.CreatedCount || null;
-        this.RunningCount = params.RunningCount || null;
-        this.DeletingCount = params.DeletingCount || null;
-        this.AbnormalCount = params.AbnormalCount || null;
+        this.SubmittedCount = 'SubmittedCount' in params ? params.SubmittedCount : null;
+        this.CreatingCount = 'CreatingCount' in params ? params.CreatingCount : null;
+        this.CreationFailedCount = 'CreationFailedCount' in params ? params.CreationFailedCount : null;
+        this.CreatedCount = 'CreatedCount' in params ? params.CreatedCount : null;
+        this.RunningCount = 'RunningCount' in params ? params.RunningCount : null;
+        this.DeletingCount = 'DeletingCount' in params ? params.DeletingCount : null;
+        this.AbnormalCount = 'AbnormalCount' in params ? params.AbnormalCount : null;
 
     }
 }
@@ -1648,14 +1648,14 @@ class TaskMetrics extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.SubmittedCount = params.SubmittedCount || null;
-        this.PendingCount = params.PendingCount || null;
-        this.RunnableCount = params.RunnableCount || null;
-        this.StartingCount = params.StartingCount || null;
-        this.RunningCount = params.RunningCount || null;
-        this.SucceedCount = params.SucceedCount || null;
-        this.FailedInterruptedCount = params.FailedInterruptedCount || null;
-        this.FailedCount = params.FailedCount || null;
+        this.SubmittedCount = 'SubmittedCount' in params ? params.SubmittedCount : null;
+        this.PendingCount = 'PendingCount' in params ? params.PendingCount : null;
+        this.RunnableCount = 'RunnableCount' in params ? params.RunnableCount : null;
+        this.StartingCount = 'StartingCount' in params ? params.StartingCount : null;
+        this.RunningCount = 'RunningCount' in params ? params.RunningCount : null;
+        this.SucceedCount = 'SucceedCount' in params ? params.SucceedCount : null;
+        this.FailedInterruptedCount = 'FailedInterruptedCount' in params ? params.FailedInterruptedCount : null;
+        this.FailedCount = 'FailedCount' in params ? params.FailedCount : null;
 
     }
 }
@@ -1689,8 +1689,8 @@ class TerminateComputeNodesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.EnvId = params.EnvId || null;
-        this.ComputeNodeIds = params.ComputeNodeIds || null;
+        this.EnvId = 'EnvId' in params ? params.EnvId : null;
+        this.ComputeNodeIds = 'ComputeNodeIds' in params ? params.ComputeNodeIds : null;
 
     }
 }
@@ -1736,10 +1736,10 @@ class LocalDiskType extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Type = params.Type || null;
-        this.PartitionType = params.PartitionType || null;
-        this.MinSize = params.MinSize || null;
-        this.MaxSize = params.MaxSize || null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.PartitionType = 'PartitionType' in params ? params.PartitionType : null;
+        this.MinSize = 'MinSize' in params ? params.MinSize : null;
+        this.MaxSize = 'MaxSize' in params ? params.MaxSize : null;
 
     }
 }
@@ -1786,9 +1786,9 @@ class DescribeComputeEnvActivitiesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.EnvId = params.EnvId || null;
-        this.Offset = params.Offset || null;
-        this.Limit = params.Limit || null;
+        this.EnvId = 'EnvId' in params ? params.EnvId : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
 
         if (params.Filters) {
             let obj = new Filter();
@@ -1834,14 +1834,14 @@ class CreateTaskTemplateRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TaskTemplateName = params.TaskTemplateName || null;
+        this.TaskTemplateName = 'TaskTemplateName' in params ? params.TaskTemplateName : null;
 
         if (params.TaskTemplateInfo) {
             let obj = new Task();
             obj.deserialize(params.TaskTemplateInfo)
             this.TaskTemplateInfo = obj;
         }
-        this.TaskTemplateDescription = params.TaskTemplateDescription || null;
+        this.TaskTemplateDescription = 'TaskTemplateDescription' in params ? params.TaskTemplateDescription : null;
 
     }
 }
@@ -1920,9 +1920,9 @@ class Job extends  AbstractModel {
                 this.Tasks.push(obj);
             }
         }
-        this.JobName = params.JobName || null;
-        this.JobDescription = params.JobDescription || null;
-        this.Priority = params.Priority || null;
+        this.JobName = 'JobName' in params ? params.JobName : null;
+        this.JobDescription = 'JobDescription' in params ? params.JobDescription : null;
+        this.Priority = 'Priority' in params ? params.Priority : null;
 
         if (params.Dependences) {
             this.Dependences = new Array();
@@ -1941,8 +1941,8 @@ class Job extends  AbstractModel {
                 this.Notifications.push(obj);
             }
         }
-        this.TaskExecutionDependOn = params.TaskExecutionDependOn || null;
-        this.StateIfCreateCvmFailed = params.StateIfCreateCvmFailed || null;
+        this.TaskExecutionDependOn = 'TaskExecutionDependOn' in params ? params.TaskExecutionDependOn : null;
+        this.StateIfCreateCvmFailed = 'StateIfCreateCvmFailed' in params ? params.StateIfCreateCvmFailed : null;
 
     }
 }
@@ -1970,7 +1970,7 @@ class DeleteComputeEnvRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.EnvId = params.EnvId || null;
+        this.EnvId = 'EnvId' in params ? params.EnvId : null;
 
     }
 }
@@ -2022,7 +2022,7 @@ class CreateComputeEnvRequest extends  AbstractModel {
             obj.deserialize(params.Placement)
             this.Placement = obj;
         }
-        this.ClientToken = params.ClientToken || null;
+        this.ClientToken = 'ClientToken' in params ? params.ClientToken : null;
 
     }
 }
@@ -2110,10 +2110,10 @@ class DescribeComputeEnvCreateInfoResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.EnvId = params.EnvId || null;
-        this.EnvName = params.EnvName || null;
-        this.EnvDescription = params.EnvDescription || null;
-        this.EnvType = params.EnvType || null;
+        this.EnvId = 'EnvId' in params ? params.EnvId : null;
+        this.EnvName = 'EnvName' in params ? params.EnvName : null;
+        this.EnvDescription = 'EnvDescription' in params ? params.EnvDescription : null;
+        this.EnvType = 'EnvType' in params ? params.EnvType : null;
 
         if (params.EnvData) {
             let obj = new EnvData();
@@ -2156,8 +2156,8 @@ class DescribeComputeEnvCreateInfoResponse extends  AbstractModel {
                 this.Notifications.push(obj);
             }
         }
-        this.DesiredComputeNodeCount = params.DesiredComputeNodeCount || null;
-        this.RequestId = params.RequestId || null;
+        this.DesiredComputeNodeCount = 'DesiredComputeNodeCount' in params ? params.DesiredComputeNodeCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2239,10 +2239,10 @@ class ComputeEnvCreateInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.EnvId = params.EnvId || null;
-        this.EnvName = params.EnvName || null;
-        this.EnvDescription = params.EnvDescription || null;
-        this.EnvType = params.EnvType || null;
+        this.EnvId = 'EnvId' in params ? params.EnvId : null;
+        this.EnvName = 'EnvName' in params ? params.EnvName : null;
+        this.EnvDescription = 'EnvDescription' in params ? params.EnvDescription : null;
+        this.EnvType = 'EnvType' in params ? params.EnvType : null;
 
         if (params.EnvData) {
             let obj = new EnvData();
@@ -2285,7 +2285,7 @@ class ComputeEnvCreateInfo extends  AbstractModel {
                 this.Notifications.push(obj);
             }
         }
-        this.DesiredComputeNodeCount = params.DesiredComputeNodeCount || null;
+        this.DesiredComputeNodeCount = 'DesiredComputeNodeCount' in params ? params.DesiredComputeNodeCount : null;
 
     }
 }
@@ -2334,7 +2334,7 @@ class DescribeComputeEnvCreateInfosRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.EnvIds = params.EnvIds || null;
+        this.EnvIds = 'EnvIds' in params ? params.EnvIds : null;
 
         if (params.Filters) {
             this.Filters = new Array();
@@ -2344,8 +2344,8 @@ class DescribeComputeEnvCreateInfosRequest extends  AbstractModel {
                 this.Filters.push(obj);
             }
         }
-        this.Offset = params.Offset || null;
-        this.Limit = params.Limit || null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
 
     }
 }
@@ -2373,7 +2373,7 @@ class DescribeComputeEnvRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.EnvId = params.EnvId || null;
+        this.EnvId = 'EnvId' in params ? params.EnvId : null;
 
     }
 }
@@ -2407,7 +2407,7 @@ class InstanceMarketOptionsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.MarketType = params.MarketType || null;
+        this.MarketType = 'MarketType' in params ? params.MarketType : null;
 
         if (params.SpotOptions) {
             let obj = new SpotMarketOptions();
@@ -2462,8 +2462,8 @@ class DescribeTaskTemplatesResponse extends  AbstractModel {
                 this.TaskTemplateSet.push(obj);
             }
         }
-        this.TotalCount = params.TotalCount || null;
-        this.RequestId = params.RequestId || null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2491,7 +2491,7 @@ class DeleteJobRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.JobId = params.JobId || null;
+        this.JobId = 'JobId' in params ? params.JobId : null;
 
     }
 }
@@ -2531,7 +2531,7 @@ class DescribeTaskLogsResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = params.TotalCount || null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
 
         if (params.TaskInstanceLogSet) {
             this.TaskInstanceLogSet = new Array();
@@ -2541,7 +2541,7 @@ class DescribeTaskLogsResponse extends  AbstractModel {
                 this.TaskInstanceLogSet.push(obj);
             }
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2569,7 +2569,7 @@ class DeleteTaskTemplatesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TaskTemplateIds = params.TaskTemplateIds || null;
+        this.TaskTemplateIds = 'TaskTemplateIds' in params ? params.TaskTemplateIds : null;
 
     }
 }
@@ -2669,13 +2669,13 @@ class DescribeJobResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.JobId = params.JobId || null;
-        this.JobName = params.JobName || null;
-        this.Zone = params.Zone || null;
-        this.Priority = params.Priority || null;
-        this.JobState = params.JobState || null;
-        this.CreateTime = params.CreateTime || null;
-        this.EndTime = params.EndTime || null;
+        this.JobId = 'JobId' in params ? params.JobId : null;
+        this.JobName = 'JobName' in params ? params.JobName : null;
+        this.Zone = 'Zone' in params ? params.Zone : null;
+        this.Priority = 'Priority' in params ? params.Priority : null;
+        this.JobState = 'JobState' in params ? params.JobState : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
 
         if (params.TaskSet) {
             this.TaskSet = new Array();
@@ -2706,8 +2706,8 @@ class DescribeJobResponse extends  AbstractModel {
             obj.deserialize(params.TaskInstanceMetrics)
             this.TaskInstanceMetrics = obj;
         }
-        this.StateReason = params.StateReason || null;
-        this.RequestId = params.RequestId || null;
+        this.StateReason = 'StateReason' in params ? params.StateReason : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2735,7 +2735,7 @@ class DescribeComputeEnvCreateInfoRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.EnvId = params.EnvId || null;
+        this.EnvId = 'EnvId' in params ? params.EnvId : null;
 
     }
 }
@@ -2781,9 +2781,9 @@ class ModifyTaskTemplateRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TaskTemplateId = params.TaskTemplateId || null;
-        this.TaskTemplateName = params.TaskTemplateName || null;
-        this.TaskTemplateDescription = params.TaskTemplateDescription || null;
+        this.TaskTemplateId = 'TaskTemplateId' in params ? params.TaskTemplateId : null;
+        this.TaskTemplateName = 'TaskTemplateName' in params ? params.TaskTemplateName : null;
+        this.TaskTemplateDescription = 'TaskTemplateDescription' in params ? params.TaskTemplateDescription : null;
 
         if (params.TaskTemplateInfo) {
             let obj = new Task();
@@ -2839,10 +2839,10 @@ class DataDisk extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.DiskSize = params.DiskSize || null;
-        this.DiskType = params.DiskType || null;
-        this.DiskId = params.DiskId || null;
-        this.DeleteWithInstance = params.DeleteWithInstance || null;
+        this.DiskSize = 'DiskSize' in params ? params.DiskSize : null;
+        this.DiskType = 'DiskType' in params ? params.DiskType : null;
+        this.DiskId = 'DiskId' in params ? params.DiskId : null;
+        this.DeleteWithInstance = 'DeleteWithInstance' in params ? params.DeleteWithInstance : null;
 
     }
 }
@@ -2930,10 +2930,10 @@ class NamedComputeEnv extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.EnvName = params.EnvName || null;
-        this.DesiredComputeNodeCount = params.DesiredComputeNodeCount || null;
-        this.EnvDescription = params.EnvDescription || null;
-        this.EnvType = params.EnvType || null;
+        this.EnvName = 'EnvName' in params ? params.EnvName : null;
+        this.DesiredComputeNodeCount = 'DesiredComputeNodeCount' in params ? params.DesiredComputeNodeCount : null;
+        this.EnvDescription = 'EnvDescription' in params ? params.EnvDescription : null;
+        this.EnvType = 'EnvType' in params ? params.EnvType : null;
 
         if (params.EnvData) {
             let obj = new EnvData();
@@ -2979,7 +2979,7 @@ class NamedComputeEnv extends  AbstractModel {
             obj.deserialize(params.Notifications)
             this.Notifications = obj;
         }
-        this.ActionIfComputeNodeInactive = params.ActionIfComputeNodeInactive || null;
+        this.ActionIfComputeNodeInactive = 'ActionIfComputeNodeInactive' in params ? params.ActionIfComputeNodeInactive : null;
 
     }
 }
@@ -3007,7 +3007,7 @@ class DeleteJobResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3041,7 +3041,7 @@ class EventConfig extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.EventName = params.EventName || null;
+        this.EventName = 'EventName' in params ? params.EventName : null;
 
         if (params.EventVars) {
             this.EventVars = new Array();
@@ -3084,8 +3084,8 @@ class SpotMarketOptions extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.MaxPrice = params.MaxPrice || null;
-        this.SpotInstanceType = params.SpotInstanceType || null;
+        this.MaxPrice = 'MaxPrice' in params ? params.MaxPrice : null;
+        this.SpotInstanceType = 'SpotInstanceType' in params ? params.SpotInstanceType : null;
 
     }
 }
@@ -3125,8 +3125,8 @@ class Externals extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ReleaseAddress = params.ReleaseAddress || null;
-        this.UnsupportNetworks = params.UnsupportNetworks || null;
+        this.ReleaseAddress = 'ReleaseAddress' in params ? params.ReleaseAddress : null;
+        this.UnsupportNetworks = 'UnsupportNetworks' in params ? params.UnsupportNetworks : null;
 
         if (params.StorageBlockAttr) {
             let obj = new StorageBlock();
@@ -3166,8 +3166,8 @@ class OutputMapping extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.SourcePath = params.SourcePath || null;
-        this.DestinationPath = params.DestinationPath || null;
+        this.SourcePath = 'SourcePath' in params ? params.SourcePath : null;
+        this.DestinationPath = 'DestinationPath' in params ? params.DestinationPath : null;
 
     }
 }
@@ -3276,10 +3276,10 @@ class DescribeJobSubmitInfoResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.JobId = params.JobId || null;
-        this.JobName = params.JobName || null;
-        this.JobDescription = params.JobDescription || null;
-        this.Priority = params.Priority || null;
+        this.JobId = 'JobId' in params ? params.JobId : null;
+        this.JobName = 'JobName' in params ? params.JobName : null;
+        this.JobDescription = 'JobDescription' in params ? params.JobDescription : null;
+        this.Priority = 'Priority' in params ? params.Priority : null;
 
         if (params.Tasks) {
             this.Tasks = new Array();
@@ -3298,7 +3298,7 @@ class DescribeJobSubmitInfoResponse extends  AbstractModel {
                 this.Dependences.push(obj);
             }
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3338,7 +3338,7 @@ class DescribeComputeEnvCreateInfosResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = params.TotalCount || null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
 
         if (params.ComputeEnvCreateInfoSet) {
             this.ComputeEnvCreateInfoSet = new Array();
@@ -3348,7 +3348,7 @@ class DescribeComputeEnvCreateInfosResponse extends  AbstractModel {
                 this.ComputeEnvCreateInfoSet.push(obj);
             }
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3376,7 +3376,7 @@ class RunSecurityServiceEnabled extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Enabled = params.Enabled || null;
+        this.Enabled = 'Enabled' in params ? params.Enabled : null;
 
     }
 }
@@ -3410,8 +3410,8 @@ class CreateTaskTemplateResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TaskTemplateId = params.TaskTemplateId || null;
-        this.RequestId = params.RequestId || null;
+        this.TaskTemplateId = 'TaskTemplateId' in params ? params.TaskTemplateId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3439,7 +3439,7 @@ class DescribeJobRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.JobId = params.JobId || null;
+        this.JobId = 'JobId' in params ? params.JobId : null;
 
     }
 }
@@ -3486,10 +3486,10 @@ class RedirectInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.StdoutRedirectPath = params.StdoutRedirectPath || null;
-        this.StderrRedirectPath = params.StderrRedirectPath || null;
-        this.StdoutRedirectFileName = params.StdoutRedirectFileName || null;
-        this.StderrRedirectFileName = params.StderrRedirectFileName || null;
+        this.StdoutRedirectPath = 'StdoutRedirectPath' in params ? params.StdoutRedirectPath : null;
+        this.StderrRedirectPath = 'StderrRedirectPath' in params ? params.StderrRedirectPath : null;
+        this.StdoutRedirectFileName = 'StdoutRedirectFileName' in params ? params.StdoutRedirectFileName : null;
+        this.StderrRedirectFileName = 'StderrRedirectFileName' in params ? params.StderrRedirectFileName : null;
 
     }
 }
@@ -3517,7 +3517,7 @@ class ModifyTaskTemplateResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3551,8 +3551,8 @@ class SubmitJobResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.JobId = params.JobId || null;
-        this.RequestId = params.RequestId || null;
+        this.JobId = 'JobId' in params ? params.JobId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3592,9 +3592,9 @@ class InputMapping extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.SourcePath = params.SourcePath || null;
-        this.DestinationPath = params.DestinationPath || null;
-        this.MountOptionParameter = params.MountOptionParameter || null;
+        this.SourcePath = 'SourcePath' in params ? params.SourcePath : null;
+        this.DestinationPath = 'DestinationPath' in params ? params.DestinationPath : null;
+        this.MountOptionParameter = 'MountOptionParameter' in params ? params.MountOptionParameter : null;
 
     }
 }
@@ -3640,10 +3640,10 @@ class RedirectLocalInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.StdoutLocalPath = params.StdoutLocalPath || null;
-        this.StderrLocalPath = params.StderrLocalPath || null;
-        this.StdoutLocalFileName = params.StdoutLocalFileName || null;
-        this.StderrLocalFileName = params.StderrLocalFileName || null;
+        this.StdoutLocalPath = 'StdoutLocalPath' in params ? params.StdoutLocalPath : null;
+        this.StderrLocalPath = 'StderrLocalPath' in params ? params.StderrLocalPath : null;
+        this.StdoutLocalFileName = 'StdoutLocalFileName' in params ? params.StdoutLocalFileName : null;
+        this.StderrLocalFileName = 'StderrLocalFileName' in params ? params.StderrLocalFileName : null;
 
     }
 }
@@ -3671,7 +3671,7 @@ class DescribeJobSubmitInfoRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.JobId = params.JobId || null;
+        this.JobId = 'JobId' in params ? params.JobId : null;
 
     }
 }
@@ -3705,8 +3705,8 @@ class Dependence extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.StartTask = params.StartTask || null;
-        this.EndTask = params.EndTask || null;
+        this.StartTask = 'StartTask' in params ? params.StartTask : null;
+        this.EndTask = 'EndTask' in params ? params.EndTask : null;
 
     }
 }
@@ -3751,8 +3751,8 @@ class Filter extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Name = params.Name || null;
-        this.Values = params.Values || null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Values = 'Values' in params ? params.Values : null;
 
     }
 }
@@ -3786,8 +3786,8 @@ class CreateComputeEnvResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.EnvId = params.EnvId || null;
-        this.RequestId = params.RequestId || null;
+        this.EnvId = 'EnvId' in params ? params.EnvId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3833,10 +3833,10 @@ class Docker extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.User = params.User || null;
-        this.Password = params.Password || null;
-        this.Image = params.Image || null;
-        this.Server = params.Server || null;
+        this.User = 'User' in params ? params.User : null;
+        this.Password = 'Password' in params ? params.Password : null;
+        this.Image = 'Image' in params ? params.Image : null;
+        this.Server = 'Server' in params ? params.Server : null;
 
     }
 }
@@ -3864,7 +3864,7 @@ class ModifyComputeEnvResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3904,9 +3904,9 @@ class Placement extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Zone = params.Zone || null;
-        this.ProjectId = params.ProjectId || null;
-        this.HostIds = params.HostIds || null;
+        this.Zone = 'Zone' in params ? params.Zone : null;
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+        this.HostIds = 'HostIds' in params ? params.HostIds : null;
 
     }
 }
@@ -3958,10 +3958,10 @@ class ModifyComputeEnvRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.EnvId = params.EnvId || null;
-        this.DesiredComputeNodeCount = params.DesiredComputeNodeCount || null;
-        this.EnvName = params.EnvName || null;
-        this.EnvDescription = params.EnvDescription || null;
+        this.EnvId = 'EnvId' in params ? params.EnvId : null;
+        this.DesiredComputeNodeCount = 'DesiredComputeNodeCount' in params ? params.DesiredComputeNodeCount : null;
+        this.EnvName = 'EnvName' in params ? params.EnvName : null;
+        this.EnvDescription = 'EnvDescription' in params ? params.EnvDescription : null;
 
         if (params.EnvData) {
             let obj = new ComputeEnvData();
@@ -4049,16 +4049,16 @@ class ComputeNode extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ComputeNodeId = params.ComputeNodeId || null;
-        this.ComputeNodeInstanceId = params.ComputeNodeInstanceId || null;
-        this.ComputeNodeState = params.ComputeNodeState || null;
-        this.Cpu = params.Cpu || null;
-        this.Mem = params.Mem || null;
-        this.ResourceCreatedTime = params.ResourceCreatedTime || null;
-        this.TaskInstanceNumAvailable = params.TaskInstanceNumAvailable || null;
-        this.AgentVersion = params.AgentVersion || null;
-        this.PrivateIpAddresses = params.PrivateIpAddresses || null;
-        this.PublicIpAddresses = params.PublicIpAddresses || null;
+        this.ComputeNodeId = 'ComputeNodeId' in params ? params.ComputeNodeId : null;
+        this.ComputeNodeInstanceId = 'ComputeNodeInstanceId' in params ? params.ComputeNodeInstanceId : null;
+        this.ComputeNodeState = 'ComputeNodeState' in params ? params.ComputeNodeState : null;
+        this.Cpu = 'Cpu' in params ? params.Cpu : null;
+        this.Mem = 'Mem' in params ? params.Mem : null;
+        this.ResourceCreatedTime = 'ResourceCreatedTime' in params ? params.ResourceCreatedTime : null;
+        this.TaskInstanceNumAvailable = 'TaskInstanceNumAvailable' in params ? params.TaskInstanceNumAvailable : null;
+        this.AgentVersion = 'AgentVersion' in params ? params.AgentVersion : null;
+        this.PrivateIpAddresses = 'PrivateIpAddresses' in params ? params.PrivateIpAddresses : null;
+        this.PublicIpAddresses = 'PublicIpAddresses' in params ? params.PublicIpAddresses : null;
 
     }
 }
@@ -4104,10 +4104,10 @@ class ItemPrice extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.UnitPrice = params.UnitPrice || null;
-        this.ChargeUnit = params.ChargeUnit || null;
-        this.OriginalPrice = params.OriginalPrice || null;
-        this.DiscountPrice = params.DiscountPrice || null;
+        this.UnitPrice = 'UnitPrice' in params ? params.UnitPrice : null;
+        this.ChargeUnit = 'ChargeUnit' in params ? params.ChargeUnit : null;
+        this.OriginalPrice = 'OriginalPrice' in params ? params.OriginalPrice : null;
+        this.DiscountPrice = 'DiscountPrice' in params ? params.DiscountPrice : null;
 
     }
 }
@@ -4201,20 +4201,20 @@ class InstanceTypeQuotaItem extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Zone = params.Zone || null;
-        this.InstanceType = params.InstanceType || null;
-        this.InstanceChargeType = params.InstanceChargeType || null;
-        this.NetworkCard = params.NetworkCard || null;
+        this.Zone = 'Zone' in params ? params.Zone : null;
+        this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
+        this.InstanceChargeType = 'InstanceChargeType' in params ? params.InstanceChargeType : null;
+        this.NetworkCard = 'NetworkCard' in params ? params.NetworkCard : null;
 
         if (params.Externals) {
             let obj = new Externals();
             obj.deserialize(params.Externals)
             this.Externals = obj;
         }
-        this.Cpu = params.Cpu || null;
-        this.Memory = params.Memory || null;
-        this.InstanceFamily = params.InstanceFamily || null;
-        this.TypeName = params.TypeName || null;
+        this.Cpu = 'Cpu' in params ? params.Cpu : null;
+        this.Memory = 'Memory' in params ? params.Memory : null;
+        this.InstanceFamily = 'InstanceFamily' in params ? params.InstanceFamily : null;
+        this.TypeName = 'TypeName' in params ? params.TypeName : null;
 
         if (params.LocalDiskTypeList) {
             this.LocalDiskTypeList = new Array();
@@ -4224,7 +4224,7 @@ class InstanceTypeQuotaItem extends  AbstractModel {
                 this.LocalDiskTypeList.push(obj);
             }
         }
-        this.Status = params.Status || null;
+        this.Status = 'Status' in params ? params.Status : null;
 
         if (params.Price) {
             let obj = new ItemPrice();
@@ -4258,7 +4258,7 @@ class RetryJobsResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -4286,7 +4286,7 @@ class TerminateJobResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -4336,7 +4336,7 @@ class DescribeJobsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.JobIds = params.JobIds || null;
+        this.JobIds = 'JobIds' in params ? params.JobIds : null;
 
         if (params.Filters) {
             this.Filters = new Array();
@@ -4346,8 +4346,8 @@ class DescribeJobsRequest extends  AbstractModel {
                 this.Filters.push(obj);
             }
         }
-        this.Offset = params.Offset || null;
-        this.Limit = params.Limit || null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
 
     }
 }
@@ -4399,16 +4399,16 @@ class TaskTemplateView extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TaskTemplateId = params.TaskTemplateId || null;
-        this.TaskTemplateName = params.TaskTemplateName || null;
-        this.TaskTemplateDescription = params.TaskTemplateDescription || null;
+        this.TaskTemplateId = 'TaskTemplateId' in params ? params.TaskTemplateId : null;
+        this.TaskTemplateName = 'TaskTemplateName' in params ? params.TaskTemplateName : null;
+        this.TaskTemplateDescription = 'TaskTemplateDescription' in params ? params.TaskTemplateDescription : null;
 
         if (params.TaskTemplateInfo) {
             let obj = new Task();
             obj.deserialize(params.TaskTemplateInfo)
             this.TaskTemplateInfo = obj;
         }
-        this.CreateTime = params.CreateTime || null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
 
     }
 }
@@ -4436,7 +4436,7 @@ class DeleteTaskTemplatesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -4516,9 +4516,9 @@ class TerminateTaskInstanceRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.JobId = params.JobId || null;
-        this.TaskName = params.TaskName || null;
-        this.TaskInstanceIndex = params.TaskInstanceIndex || null;
+        this.JobId = 'JobId' in params ? params.JobId : null;
+        this.TaskName = 'TaskName' in params ? params.TaskName : null;
+        this.TaskInstanceIndex = 'TaskInstanceIndex' in params ? params.TaskInstanceIndex : null;
 
     }
 }
@@ -4546,7 +4546,7 @@ class TerminateTaskInstanceResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -4574,7 +4574,7 @@ class RetryJobsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.JobIds = params.JobIds || null;
+        this.JobIds = 'JobIds' in params ? params.JobIds : null;
 
     }
 }
@@ -4662,22 +4662,22 @@ class TaskInstanceView extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TaskInstanceIndex = params.TaskInstanceIndex || null;
-        this.TaskInstanceState = params.TaskInstanceState || null;
-        this.ExitCode = params.ExitCode || null;
-        this.StateReason = params.StateReason || null;
-        this.ComputeNodeInstanceId = params.ComputeNodeInstanceId || null;
-        this.CreateTime = params.CreateTime || null;
-        this.LaunchTime = params.LaunchTime || null;
-        this.RunningTime = params.RunningTime || null;
-        this.EndTime = params.EndTime || null;
+        this.TaskInstanceIndex = 'TaskInstanceIndex' in params ? params.TaskInstanceIndex : null;
+        this.TaskInstanceState = 'TaskInstanceState' in params ? params.TaskInstanceState : null;
+        this.ExitCode = 'ExitCode' in params ? params.ExitCode : null;
+        this.StateReason = 'StateReason' in params ? params.StateReason : null;
+        this.ComputeNodeInstanceId = 'ComputeNodeInstanceId' in params ? params.ComputeNodeInstanceId : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.LaunchTime = 'LaunchTime' in params ? params.LaunchTime : null;
+        this.RunningTime = 'RunningTime' in params ? params.RunningTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
 
         if (params.RedirectInfo) {
             let obj = new RedirectInfo();
             obj.deserialize(params.RedirectInfo)
             this.RedirectInfo = obj;
         }
-        this.StateDetailedReason = params.StateDetailedReason || null;
+        this.StateDetailedReason = 'StateDetailedReason' in params ? params.StateDetailedReason : null;
 
     }
 }
@@ -4720,7 +4720,7 @@ class DescribeAvailableCvmInstanceTypesResponse extends  AbstractModel {
                 this.InstanceTypeConfigSet.push(obj);
             }
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -4796,12 +4796,12 @@ class DescribeTaskResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.JobId = params.JobId || null;
-        this.TaskName = params.TaskName || null;
-        this.TaskState = params.TaskState || null;
-        this.CreateTime = params.CreateTime || null;
-        this.EndTime = params.EndTime || null;
-        this.TaskInstanceTotalCount = params.TaskInstanceTotalCount || null;
+        this.JobId = 'JobId' in params ? params.JobId : null;
+        this.TaskName = 'TaskName' in params ? params.TaskName : null;
+        this.TaskState = 'TaskState' in params ? params.TaskState : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.TaskInstanceTotalCount = 'TaskInstanceTotalCount' in params ? params.TaskInstanceTotalCount : null;
 
         if (params.TaskInstanceSet) {
             this.TaskInstanceSet = new Array();
@@ -4817,7 +4817,7 @@ class DescribeTaskResponse extends  AbstractModel {
             obj.deserialize(params.TaskInstanceMetrics)
             this.TaskInstanceMetrics = obj;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -4881,23 +4881,23 @@ class ComputeEnvView extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.EnvId = params.EnvId || null;
-        this.EnvName = params.EnvName || null;
+        this.EnvId = 'EnvId' in params ? params.EnvId : null;
+        this.EnvName = 'EnvName' in params ? params.EnvName : null;
 
         if (params.Placement) {
             let obj = new Placement();
             obj.deserialize(params.Placement)
             this.Placement = obj;
         }
-        this.CreateTime = params.CreateTime || null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
 
         if (params.ComputeNodeMetrics) {
             let obj = new ComputeNodeMetrics();
             obj.deserialize(params.ComputeNodeMetrics)
             this.ComputeNodeMetrics = obj;
         }
-        this.EnvType = params.EnvType || null;
-        this.DesiredComputeNodeCount = params.DesiredComputeNodeCount || null;
+        this.EnvType = 'EnvType' in params ? params.EnvType : null;
+        this.DesiredComputeNodeCount = 'DesiredComputeNodeCount' in params ? params.DesiredComputeNodeCount : null;
 
     }
 }
@@ -4946,8 +4946,8 @@ class DescribeComputeEnvsResponse extends  AbstractModel {
                 this.ComputeEnvSet.push(obj);
             }
         }
-        this.TotalCount = params.TotalCount || null;
-        this.RequestId = params.RequestId || null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -5000,10 +5000,10 @@ class DescribeTaskRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.JobId = params.JobId || null;
-        this.TaskName = params.TaskName || null;
-        this.Offset = params.Offset || null;
-        this.Limit = params.Limit || null;
+        this.JobId = 'JobId' in params ? params.JobId : null;
+        this.TaskName = 'TaskName' in params ? params.TaskName : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
 
         if (params.Filters) {
             this.Filters = new Array();
@@ -5061,7 +5061,7 @@ class DescribeComputeEnvsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.EnvIds = params.EnvIds || null;
+        this.EnvIds = 'EnvIds' in params ? params.EnvIds : null;
 
         if (params.Filters) {
             this.Filters = new Array();
@@ -5071,8 +5071,8 @@ class DescribeComputeEnvsRequest extends  AbstractModel {
                 this.Filters.push(obj);
             }
         }
-        this.Offset = params.Offset || null;
-        this.Limit = params.Limit || null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
 
     }
 }
@@ -5115,7 +5115,7 @@ class DescribeCvmZoneInstanceConfigInfosResponse extends  AbstractModel {
                 this.InstanceTypeQuotaSet.push(obj);
             }
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -5164,8 +5164,8 @@ class DescribeJobsResponse extends  AbstractModel {
                 this.JobSet.push(obj);
             }
         }
-        this.TotalCount = params.TotalCount || null;
-        this.RequestId = params.RequestId || null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -5247,16 +5247,16 @@ class Activity extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ActivityId = params.ActivityId || null;
-        this.ComputeNodeId = params.ComputeNodeId || null;
-        this.ComputeNodeActivityType = params.ComputeNodeActivityType || null;
-        this.EnvId = params.EnvId || null;
-        this.Cause = params.Cause || null;
-        this.ActivityState = params.ActivityState || null;
-        this.StateReason = params.StateReason || null;
-        this.StartTime = params.StartTime || null;
-        this.EndTime = params.EndTime || null;
-        this.InstanceId = params.InstanceId || null;
+        this.ActivityId = 'ActivityId' in params ? params.ActivityId : null;
+        this.ComputeNodeId = 'ComputeNodeId' in params ? params.ComputeNodeId : null;
+        this.ComputeNodeActivityType = 'ComputeNodeActivityType' in params ? params.ComputeNodeActivityType : null;
+        this.EnvId = 'EnvId' in params ? params.EnvId : null;
+        this.Cause = 'Cause' in params ? params.Cause : null;
+        this.ActivityState = 'ActivityState' in params ? params.ActivityState : null;
+        this.StateReason = 'StateReason' in params ? params.StateReason : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
 
     }
 }
@@ -5284,7 +5284,7 @@ class RunMonitorServiceEnabled extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Enabled = params.Enabled || null;
+        this.Enabled = 'Enabled' in params ? params.Enabled : null;
 
     }
 }
@@ -5312,7 +5312,7 @@ class TerminateComputeNodeResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -5358,10 +5358,10 @@ class VirtualPrivateCloud extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.VpcId = params.VpcId || null;
-        this.SubnetId = params.SubnetId || null;
-        this.AsVpcGateway = params.AsVpcGateway || null;
-        this.PrivateIpAddresses = params.PrivateIpAddresses || null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
+        this.AsVpcGateway = 'AsVpcGateway' in params ? params.AsVpcGateway : null;
+        this.PrivateIpAddresses = 'PrivateIpAddresses' in params ? params.PrivateIpAddresses : null;
 
     }
 }
@@ -5439,9 +5439,9 @@ class StorageBlock extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Type = params.Type || null;
-        this.MinSize = params.MinSize || null;
-        this.MaxSize = params.MaxSize || null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.MinSize = 'MinSize' in params ? params.MinSize : null;
+        this.MaxSize = 'MaxSize' in params ? params.MaxSize : null;
 
     }
 }
@@ -5481,9 +5481,9 @@ class InternetAccessible extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InternetChargeType = params.InternetChargeType || null;
-        this.InternetMaxBandwidthOut = params.InternetMaxBandwidthOut || null;
-        this.PublicIpAssigned = params.PublicIpAssigned || null;
+        this.InternetChargeType = 'InternetChargeType' in params ? params.InternetChargeType : null;
+        this.InternetMaxBandwidthOut = 'InternetMaxBandwidthOut' in params ? params.InternetMaxBandwidthOut : null;
+        this.PublicIpAssigned = 'PublicIpAssigned' in params ? params.PublicIpAssigned : null;
 
     }
 }
@@ -5553,18 +5553,18 @@ class JobView extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.JobId = params.JobId || null;
-        this.JobName = params.JobName || null;
-        this.JobState = params.JobState || null;
-        this.Priority = params.Priority || null;
+        this.JobId = 'JobId' in params ? params.JobId : null;
+        this.JobName = 'JobName' in params ? params.JobName : null;
+        this.JobState = 'JobState' in params ? params.JobState : null;
+        this.Priority = 'Priority' in params ? params.Priority : null;
 
         if (params.Placement) {
             let obj = new Placement();
             obj.deserialize(params.Placement)
             this.Placement = obj;
         }
-        this.CreateTime = params.CreateTime || null;
-        this.EndTime = params.EndTime || null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
 
         if (params.TaskMetrics) {
             let obj = new TaskMetrics();
@@ -5604,8 +5604,8 @@ class EnvVar extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Name = params.Name || null;
-        this.Value = params.Value || null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Value = 'Value' in params ? params.Value : null;
 
     }
 }

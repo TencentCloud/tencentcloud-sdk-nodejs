@@ -45,8 +45,8 @@ class Filter extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Name = params.Name || null;
-        this.Values = params.Values || null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Values = 'Values' in params ? params.Values : null;
 
     }
 }
@@ -80,8 +80,8 @@ class CreateDirectConnectTunnelResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.DirectConnectTunnelIdSet = params.DirectConnectTunnelIdSet || null;
-        this.RequestId = params.RequestId || null;
+        this.DirectConnectTunnelIdSet = 'DirectConnectTunnelIdSet' in params ? params.DirectConnectTunnelIdSet : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -109,7 +109,7 @@ class DeleteDirectConnectTunnelRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.DirectConnectTunnelId = params.DirectConnectTunnelId || null;
+        this.DirectConnectTunnelId = 'DirectConnectTunnelId' in params ? params.DirectConnectTunnelId : null;
 
     }
 }
@@ -137,7 +137,7 @@ class DeleteDirectConnectTunnelResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -196,9 +196,9 @@ class DescribeDirectConnectTunnelsRequest extends  AbstractModel {
                 this.Filters.push(obj);
             }
         }
-        this.DirectConnectTunnelIds = params.DirectConnectTunnelIds || null;
-        this.Offset = params.Offset || null;
-        this.Limit = params.Limit || null;
+        this.DirectConnectTunnelIds = 'DirectConnectTunnelIds' in params ? params.DirectConnectTunnelIds : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
 
     }
 }
@@ -232,8 +232,8 @@ class BgpPeer extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Asn = params.Asn || null;
-        this.AuthKey = params.AuthKey || null;
+        this.Asn = 'Asn' in params ? params.Asn : null;
+        this.AuthKey = 'AuthKey' in params ? params.AuthKey : null;
 
     }
 }
@@ -282,8 +282,8 @@ class DescribeDirectConnectTunnelsResponse extends  AbstractModel {
                 this.DirectConnectTunnelSet.push(obj);
             }
         }
-        this.TotalCount = params.TotalCount || null;
-        this.RequestId = params.RequestId || null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -347,8 +347,8 @@ class ModifyDirectConnectTunnelAttributeRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.DirectConnectTunnelId = params.DirectConnectTunnelId || null;
-        this.DirectConnectTunnelName = params.DirectConnectTunnelName || null;
+        this.DirectConnectTunnelId = 'DirectConnectTunnelId' in params ? params.DirectConnectTunnelId : null;
+        this.DirectConnectTunnelName = 'DirectConnectTunnelName' in params ? params.DirectConnectTunnelName : null;
 
         if (params.BgpPeer) {
             let obj = new BgpPeer();
@@ -364,9 +364,9 @@ class ModifyDirectConnectTunnelAttributeRequest extends  AbstractModel {
                 this.RouteFilterPrefixes.push(obj);
             }
         }
-        this.TencentAddress = params.TencentAddress || null;
-        this.CustomerAddress = params.CustomerAddress || null;
-        this.Bandwidth = params.Bandwidth || null;
+        this.TencentAddress = 'TencentAddress' in params ? params.TencentAddress : null;
+        this.CustomerAddress = 'CustomerAddress' in params ? params.CustomerAddress : null;
+        this.Bandwidth = 'Bandwidth' in params ? params.Bandwidth : null;
 
     }
 }
@@ -394,7 +394,7 @@ class RouteFilterPrefix extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Cidr = params.Cidr || null;
+        this.Cidr = 'Cidr' in params ? params.Cidr : null;
 
     }
 }
@@ -422,7 +422,7 @@ class RejectDirectConnectTunnelRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.DirectConnectTunnelId = params.DirectConnectTunnelId || null;
+        this.DirectConnectTunnelId = 'DirectConnectTunnelId' in params ? params.DirectConnectTunnelId : null;
 
     }
 }
@@ -450,7 +450,7 @@ class AcceptDirectConnectTunnelRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.DirectConnectTunnelId = params.DirectConnectTunnelId || null;
+        this.DirectConnectTunnelId = 'DirectConnectTunnelId' in params ? params.DirectConnectTunnelId : null;
 
     }
 }
@@ -478,7 +478,7 @@ class ModifyDirectConnectTunnelAttributeResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -593,15 +593,15 @@ STATIC：静态
         if (!params) {
             return;
         }
-        this.DirectConnectId = params.DirectConnectId || null;
-        this.DirectConnectTunnelName = params.DirectConnectTunnelName || null;
-        this.DirectConnectOwnerAccount = params.DirectConnectOwnerAccount || null;
-        this.NetworkType = params.NetworkType || null;
-        this.NetworkRegion = params.NetworkRegion || null;
-        this.VpcId = params.VpcId || null;
-        this.DirectConnectGatewayId = params.DirectConnectGatewayId || null;
-        this.Bandwidth = params.Bandwidth || null;
-        this.RouteType = params.RouteType || null;
+        this.DirectConnectId = 'DirectConnectId' in params ? params.DirectConnectId : null;
+        this.DirectConnectTunnelName = 'DirectConnectTunnelName' in params ? params.DirectConnectTunnelName : null;
+        this.DirectConnectOwnerAccount = 'DirectConnectOwnerAccount' in params ? params.DirectConnectOwnerAccount : null;
+        this.NetworkType = 'NetworkType' in params ? params.NetworkType : null;
+        this.NetworkRegion = 'NetworkRegion' in params ? params.NetworkRegion : null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.DirectConnectGatewayId = 'DirectConnectGatewayId' in params ? params.DirectConnectGatewayId : null;
+        this.Bandwidth = 'Bandwidth' in params ? params.Bandwidth : null;
+        this.RouteType = 'RouteType' in params ? params.RouteType : null;
 
         if (params.BgpPeer) {
             let obj = new BgpPeer();
@@ -617,9 +617,9 @@ STATIC：静态
                 this.RouteFilterPrefixes.push(obj);
             }
         }
-        this.Vlan = params.Vlan || null;
-        this.TencentAddress = params.TencentAddress || null;
-        this.CustomerAddress = params.CustomerAddress || null;
+        this.Vlan = 'Vlan' in params ? params.Vlan : null;
+        this.TencentAddress = 'TencentAddress' in params ? params.TencentAddress : null;
+        this.CustomerAddress = 'CustomerAddress' in params ? params.CustomerAddress : null;
 
     }
 }
@@ -647,7 +647,7 @@ class RejectDirectConnectTunnelResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -787,16 +787,16 @@ REJECTED:拒绝
         if (!params) {
             return;
         }
-        this.DirectConnectTunnelId = params.DirectConnectTunnelId || null;
-        this.DirectConnectId = params.DirectConnectId || null;
-        this.State = params.State || null;
-        this.DirectConnectOwnerAccount = params.DirectConnectOwnerAccount || null;
-        this.OwnerAccount = params.OwnerAccount || null;
-        this.NetworkType = params.NetworkType || null;
-        this.NetworkRegion = params.NetworkRegion || null;
-        this.VpcId = params.VpcId || null;
-        this.DirectConnectGatewayId = params.DirectConnectGatewayId || null;
-        this.RouteType = params.RouteType || null;
+        this.DirectConnectTunnelId = 'DirectConnectTunnelId' in params ? params.DirectConnectTunnelId : null;
+        this.DirectConnectId = 'DirectConnectId' in params ? params.DirectConnectId : null;
+        this.State = 'State' in params ? params.State : null;
+        this.DirectConnectOwnerAccount = 'DirectConnectOwnerAccount' in params ? params.DirectConnectOwnerAccount : null;
+        this.OwnerAccount = 'OwnerAccount' in params ? params.OwnerAccount : null;
+        this.NetworkType = 'NetworkType' in params ? params.NetworkType : null;
+        this.NetworkRegion = 'NetworkRegion' in params ? params.NetworkRegion : null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.DirectConnectGatewayId = 'DirectConnectGatewayId' in params ? params.DirectConnectGatewayId : null;
+        this.RouteType = 'RouteType' in params ? params.RouteType : null;
 
         if (params.BgpPeer) {
             let obj = new BgpPeer();
@@ -812,12 +812,12 @@ REJECTED:拒绝
                 this.RouteFilterPrefixes.push(obj);
             }
         }
-        this.Vlan = params.Vlan || null;
-        this.TencentAddress = params.TencentAddress || null;
-        this.CustomerAddress = params.CustomerAddress || null;
-        this.DirectConnectTunnelName = params.DirectConnectTunnelName || null;
-        this.CreatedTime = params.CreatedTime || null;
-        this.Bandwidth = params.Bandwidth || null;
+        this.Vlan = 'Vlan' in params ? params.Vlan : null;
+        this.TencentAddress = 'TencentAddress' in params ? params.TencentAddress : null;
+        this.CustomerAddress = 'CustomerAddress' in params ? params.CustomerAddress : null;
+        this.DirectConnectTunnelName = 'DirectConnectTunnelName' in params ? params.DirectConnectTunnelName : null;
+        this.CreatedTime = 'CreatedTime' in params ? params.CreatedTime : null;
+        this.Bandwidth = 'Bandwidth' in params ? params.Bandwidth : null;
 
     }
 }
@@ -845,7 +845,7 @@ class AcceptDirectConnectTunnelResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }

@@ -75,13 +75,13 @@ class AgentClientElem extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Uin = params.Uin || null;
-        this.ClientUin = params.ClientUin || null;
-        this.ApplyTime = params.ApplyTime || null;
-        this.ClientFlag = params.ClientFlag || null;
-        this.Mail = params.Mail || null;
-        this.Phone = params.Phone || null;
-        this.HasOverdueBill = params.HasOverdueBill || null;
+        this.Uin = 'Uin' in params ? params.Uin : null;
+        this.ClientUin = 'ClientUin' in params ? params.ClientUin : null;
+        this.ApplyTime = 'ApplyTime' in params ? params.ApplyTime : null;
+        this.ClientFlag = 'ClientFlag' in params ? params.ClientFlag : null;
+        this.Mail = 'Mail' in params ? params.Mail : null;
+        this.Phone = 'Phone' in params ? params.Phone : null;
+        this.HasOverdueBill = 'HasOverdueBill' in params ? params.HasOverdueBill : null;
 
     }
 }
@@ -157,15 +157,15 @@ class DescribeAgentAuditedClientsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ClientUin = params.ClientUin || null;
-        this.ClientName = params.ClientName || null;
-        this.ClientFlag = params.ClientFlag || null;
-        this.OrderDirection = params.OrderDirection || null;
-        this.ClientUins = params.ClientUins || null;
-        this.HasOverdueBill = params.HasOverdueBill || null;
-        this.ClientRemark = params.ClientRemark || null;
-        this.Offset = params.Offset || null;
-        this.Limit = params.Limit || null;
+        this.ClientUin = 'ClientUin' in params ? params.ClientUin : null;
+        this.ClientName = 'ClientName' in params ? params.ClientName : null;
+        this.ClientFlag = 'ClientFlag' in params ? params.ClientFlag : null;
+        this.OrderDirection = 'OrderDirection' in params ? params.OrderDirection : null;
+        this.ClientUins = 'ClientUins' in params ? params.ClientUins : null;
+        this.HasOverdueBill = 'HasOverdueBill' in params ? params.HasOverdueBill : null;
+        this.ClientRemark = 'ClientRemark' in params ? params.ClientRemark : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
 
     }
 }
@@ -205,9 +205,9 @@ class AgentPayDealsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.OwnerUin = params.OwnerUin || null;
-        this.AgentPay = params.AgentPay || null;
-        this.DealNames = params.DealNames || null;
+        this.OwnerUin = 'OwnerUin' in params ? params.OwnerUin : null;
+        this.AgentPay = 'AgentPay' in params ? params.AgentPay : null;
+        this.DealNames = 'DealNames' in params ? params.DealNames : null;
 
     }
 }
@@ -265,12 +265,12 @@ class RebateInfoElem extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Uin = params.Uin || null;
-        this.RebateMonth = params.RebateMonth || null;
-        this.Amt = params.Amt || null;
-        this.MonthSales = params.MonthSales || null;
-        this.QuarterSales = params.QuarterSales || null;
-        this.ExceptionFlag = params.ExceptionFlag || null;
+        this.Uin = 'Uin' in params ? params.Uin : null;
+        this.RebateMonth = 'RebateMonth' in params ? params.RebateMonth : null;
+        this.Amt = 'Amt' in params ? params.Amt : null;
+        this.MonthSales = 'MonthSales' in params ? params.MonthSales : null;
+        this.QuarterSales = 'QuarterSales' in params ? params.QuarterSales : null;
+        this.ExceptionFlag = 'ExceptionFlag' in params ? params.ExceptionFlag : null;
 
     }
 }
@@ -304,8 +304,8 @@ class DescribeClientBalanceResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Balance = params.Balance || null;
-        this.RequestId = params.RequestId || null;
+        this.Balance = 'Balance' in params ? params.Balance : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -339,8 +339,8 @@ class AgentTransferMoneyRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ClientUin = params.ClientUin || null;
-        this.Amount = params.Amount || null;
+        this.ClientUin = 'ClientUin' in params ? params.ClientUin : null;
+        this.Amount = 'Amount' in params ? params.Amount : null;
 
     }
 }
@@ -368,7 +368,7 @@ class DescribeClientBalanceRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ClientUin = params.ClientUin || null;
+        this.ClientUin = 'ClientUin' in params ? params.ClientUin : null;
 
     }
 }
@@ -408,9 +408,9 @@ class DescribeRebateInfosRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RebateMonth = params.RebateMonth || null;
-        this.Offset = params.Offset || null;
-        this.Limit = params.Limit || null;
+        this.RebateMonth = 'RebateMonth' in params ? params.RebateMonth : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
 
     }
 }
@@ -459,8 +459,8 @@ class DescribeAgentAuditedClientsResponse extends  AbstractModel {
                 this.AgentClientSet.push(obj);
             }
         }
-        this.TotalCount = params.TotalCount || null;
-        this.RequestId = params.RequestId || null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -500,7 +500,7 @@ class DescribeAgentBillsResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = params.TotalCount || null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
 
         if (params.AgentBillSet) {
             this.AgentBillSet = new Array();
@@ -510,7 +510,7 @@ class DescribeAgentBillsResponse extends  AbstractModel {
                 this.AgentBillSet.push(obj);
             }
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -550,9 +550,9 @@ class AuditApplyClientRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ClientUin = params.ClientUin || null;
-        this.AuditResult = params.AuditResult || null;
-        this.Note = params.Note || null;
+        this.ClientUin = 'ClientUin' in params ? params.ClientUin : null;
+        this.AuditResult = 'AuditResult' in params ? params.AuditResult : null;
+        this.Note = 'Note' in params ? params.Note : null;
 
     }
 }
@@ -580,7 +580,7 @@ class ModifyClientRemarkResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -629,8 +629,8 @@ class DescribeAgentClientsResponse extends  AbstractModel {
                 this.AgentClientSet.push(obj);
             }
         }
-        this.TotalCount = params.TotalCount || null;
-        this.RequestId = params.RequestId || null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -688,12 +688,12 @@ class DescribeAgentClientsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ClientUin = params.ClientUin || null;
-        this.ClientName = params.ClientName || null;
-        this.ClientFlag = params.ClientFlag || null;
-        this.OrderDirection = params.OrderDirection || null;
-        this.Offset = params.Offset || null;
-        this.Limit = params.Limit || null;
+        this.ClientUin = 'ClientUin' in params ? params.ClientUin : null;
+        this.ClientName = 'ClientName' in params ? params.ClientName : null;
+        this.ClientFlag = 'ClientFlag' in params ? params.ClientFlag : null;
+        this.OrderDirection = 'OrderDirection' in params ? params.OrderDirection : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
 
     }
 }
@@ -781,17 +781,17 @@ class AgentAuditedClient extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Uin = params.Uin || null;
-        this.ClientUin = params.ClientUin || null;
-        this.AgentTime = params.AgentTime || null;
-        this.ClientFlag = params.ClientFlag || null;
-        this.ClientRemark = params.ClientRemark || null;
-        this.ClientName = params.ClientName || null;
-        this.AuthType = params.AuthType || null;
-        this.AppId = params.AppId || null;
-        this.LastMonthAmt = params.LastMonthAmt || null;
-        this.ThisMonthAmt = params.ThisMonthAmt || null;
-        this.HasOverdueBill = params.HasOverdueBill || null;
+        this.Uin = 'Uin' in params ? params.Uin : null;
+        this.ClientUin = 'ClientUin' in params ? params.ClientUin : null;
+        this.AgentTime = 'AgentTime' in params ? params.AgentTime : null;
+        this.ClientFlag = 'ClientFlag' in params ? params.ClientFlag : null;
+        this.ClientRemark = 'ClientRemark' in params ? params.ClientRemark : null;
+        this.ClientName = 'ClientName' in params ? params.ClientName : null;
+        this.AuthType = 'AuthType' in params ? params.AuthType : null;
+        this.AppId = 'AppId' in params ? params.AppId : null;
+        this.LastMonthAmt = 'LastMonthAmt' in params ? params.LastMonthAmt : null;
+        this.ThisMonthAmt = 'ThisMonthAmt' in params ? params.ThisMonthAmt : null;
+        this.HasOverdueBill = 'HasOverdueBill' in params ? params.HasOverdueBill : null;
 
     }
 }
@@ -825,8 +825,8 @@ class ModifyClientRemarkRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ClientRemark = params.ClientRemark || null;
-        this.ClientUin = params.ClientUin || null;
+        this.ClientRemark = 'ClientRemark' in params ? params.ClientRemark : null;
+        this.ClientUin = 'ClientUin' in params ? params.ClientUin : null;
 
     }
 }
@@ -854,7 +854,7 @@ class AgentTransferMoneyResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -936,16 +936,16 @@ class AgentBillElem extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Uin = params.Uin || null;
-        this.OrderId = params.OrderId || null;
-        this.ClientUin = params.ClientUin || null;
-        this.ClientRemark = params.ClientRemark || null;
-        this.PayTime = params.PayTime || null;
-        this.GoodsType = params.GoodsType || null;
-        this.PayMode = params.PayMode || null;
-        this.SettleMonth = params.SettleMonth || null;
-        this.Amt = params.Amt || null;
-        this.PayerMode = params.PayerMode || null;
+        this.Uin = 'Uin' in params ? params.Uin : null;
+        this.OrderId = 'OrderId' in params ? params.OrderId : null;
+        this.ClientUin = 'ClientUin' in params ? params.ClientUin : null;
+        this.ClientRemark = 'ClientRemark' in params ? params.ClientRemark : null;
+        this.PayTime = 'PayTime' in params ? params.PayTime : null;
+        this.GoodsType = 'GoodsType' in params ? params.GoodsType : null;
+        this.PayMode = 'PayMode' in params ? params.PayMode : null;
+        this.SettleMonth = 'SettleMonth' in params ? params.SettleMonth : null;
+        this.Amt = 'Amt' in params ? params.Amt : null;
+        this.PayerMode = 'PayerMode' in params ? params.PayerMode : null;
 
     }
 }
@@ -997,11 +997,11 @@ class AuditApplyClientResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Uin = params.Uin || null;
-        this.ClientUin = params.ClientUin || null;
-        this.AuditResult = params.AuditResult || null;
-        this.AgentTime = params.AgentTime || null;
-        this.RequestId = params.RequestId || null;
+        this.Uin = 'Uin' in params ? params.Uin : null;
+        this.ClientUin = 'ClientUin' in params ? params.ClientUin : null;
+        this.AuditResult = 'AuditResult' in params ? params.AuditResult : null;
+        this.AgentTime = 'AgentTime' in params ? params.AgentTime : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1065,13 +1065,13 @@ class DescribeAgentBillsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.SettleMonth = params.SettleMonth || null;
-        this.ClientUin = params.ClientUin || null;
-        this.PayMode = params.PayMode || null;
-        this.OrderId = params.OrderId || null;
-        this.ClientRemark = params.ClientRemark || null;
-        this.Offset = params.Offset || null;
-        this.Limit = params.Limit || null;
+        this.SettleMonth = 'SettleMonth' in params ? params.SettleMonth : null;
+        this.ClientUin = 'ClientUin' in params ? params.ClientUin : null;
+        this.PayMode = 'PayMode' in params ? params.PayMode : null;
+        this.OrderId = 'OrderId' in params ? params.OrderId : null;
+        this.ClientRemark = 'ClientRemark' in params ? params.ClientRemark : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
 
     }
 }
@@ -1099,7 +1099,7 @@ class AgentPayDealsResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1148,8 +1148,8 @@ class DescribeRebateInfosResponse extends  AbstractModel {
                 this.RebateInfoSet.push(obj);
             }
         }
-        this.TotalCount = params.TotalCount || null;
-        this.RequestId = params.RequestId || null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }

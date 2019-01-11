@@ -97,10 +97,10 @@ malware IP = 恶意IP
         if (!params) {
             return;
         }
-        this.ReturnCode = params.ReturnCode || null;
-        this.Result = params.Result || null;
-        this.Confidence = params.Confidence || null;
-        this.ThreatTypes = params.ThreatTypes || null;
+        this.ReturnCode = 'ReturnCode' in params ? params.ReturnCode : null;
+        this.Result = 'Result' in params ? params.Result : null;
+        this.Confidence = 'Confidence' in params ? params.Confidence : null;
+        this.ThreatTypes = 'ThreatTypes' in params ? params.ThreatTypes : null;
 
         if (params.Tags) {
             this.Tags = new Array();
@@ -119,8 +119,8 @@ malware IP = 恶意IP
                 this.Intelligences.push(obj);
             }
         }
-        this.Context = params.Context || null;
-        this.RequestId = params.RequestId || null;
+        this.Context = 'Context' in params ? params.Context : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -154,8 +154,8 @@ class DescribeIpInfoRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Key = params.Key || null;
-        this.Option = params.Option || null;
+        this.Key = 'Key' in params ? params.Key : null;
+        this.Option = 'Option' in params ? params.Option : null;
 
     }
 }
@@ -247,14 +247,14 @@ expired = 过期
         if (!params) {
             return;
         }
-        this.ReturnCode = params.ReturnCode || null;
-        this.Result = params.Result || null;
-        this.Confidence = params.Confidence || null;
-        this.ThreatTypes = params.ThreatTypes || null;
-        this.Tags = params.Tags || null;
-        this.Status = params.Status || null;
-        this.Context = params.Context || null;
-        this.RequestId = params.RequestId || null;
+        this.ReturnCode = 'ReturnCode' in params ? params.ReturnCode : null;
+        this.Result = 'Result' in params ? params.Result : null;
+        this.Confidence = 'Confidence' in params ? params.Confidence : null;
+        this.ThreatTypes = 'ThreatTypes' in params ? params.ThreatTypes : null;
+        this.Tags = 'Tags' in params ? params.Tags : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.Context = 'Context' in params ? params.Context : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -288,8 +288,8 @@ class DescribeDomainInfoRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Key = params.Key || null;
-        this.Option = params.Option || null;
+        this.Key = 'Key' in params ? params.Key : null;
+        this.Option = 'Option' in params ? params.Option : null;
 
     }
 }
@@ -329,9 +329,9 @@ class IntelligenceType extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Source = params.Source || null;
-        this.Stamp = params.Stamp || null;
-        this.Time = params.Time || null;
+        this.Source = 'Source' in params ? params.Source : null;
+        this.Stamp = 'Stamp' in params ? params.Stamp : null;
+        this.Time = 'Time' in params ? params.Time : null;
 
     }
 }
@@ -461,24 +461,24 @@ class FileInfoType extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.DetectId = params.DetectId || null;
-        this.DetectPriority = params.DetectPriority || null;
-        this.EnginePriority = params.EnginePriority || null;
-        this.FileExist = params.FileExist || null;
-        this.FileForceUpload = params.FileForceUpload || null;
-        this.FileSize = params.FileSize || null;
-        this.FileupTime = params.FileupTime || null;
-        this.FullVirusName = params.FullVirusName || null;
-        this.IdcPosition = params.IdcPosition || null;
-        this.Md5Type = params.Md5Type || null;
-        this.PeExist = params.PeExist || null;
-        this.PeForceUpload = params.PeForceUpload || null;
-        this.SafeLevel = params.SafeLevel || null;
-        this.ScanModiTime = params.ScanModiTime || null;
-        this.SubdetectId = params.SubdetectId || null;
-        this.UserDefName = params.UserDefName || null;
-        this.VirusType = params.VirusType || null;
-        this.WhiteScore = params.WhiteScore || null;
+        this.DetectId = 'DetectId' in params ? params.DetectId : null;
+        this.DetectPriority = 'DetectPriority' in params ? params.DetectPriority : null;
+        this.EnginePriority = 'EnginePriority' in params ? params.EnginePriority : null;
+        this.FileExist = 'FileExist' in params ? params.FileExist : null;
+        this.FileForceUpload = 'FileForceUpload' in params ? params.FileForceUpload : null;
+        this.FileSize = 'FileSize' in params ? params.FileSize : null;
+        this.FileupTime = 'FileupTime' in params ? params.FileupTime : null;
+        this.FullVirusName = 'FullVirusName' in params ? params.FullVirusName : null;
+        this.IdcPosition = 'IdcPosition' in params ? params.IdcPosition : null;
+        this.Md5Type = 'Md5Type' in params ? params.Md5Type : null;
+        this.PeExist = 'PeExist' in params ? params.PeExist : null;
+        this.PeForceUpload = 'PeForceUpload' in params ? params.PeForceUpload : null;
+        this.SafeLevel = 'SafeLevel' in params ? params.SafeLevel : null;
+        this.ScanModiTime = 'ScanModiTime' in params ? params.ScanModiTime : null;
+        this.SubdetectId = 'SubdetectId' in params ? params.SubdetectId : null;
+        this.UserDefName = 'UserDefName' in params ? params.UserDefName : null;
+        this.VirusType = 'VirusType' in params ? params.VirusType : null;
+        this.WhiteScore = 'WhiteScore' in params ? params.WhiteScore : null;
 
     }
 }
@@ -512,8 +512,8 @@ class TagType extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Tag = params.Tag || null;
-        this.Desc = params.Desc || null;
+        this.Tag = 'Tag' in params ? params.Tag : null;
+        this.Desc = 'Desc' in params ? params.Desc : null;
 
     }
 }
@@ -585,9 +585,9 @@ class DescribeFileInfoResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ReturnCode = params.ReturnCode || null;
-        this.Result = params.Result || null;
-        this.Confidence = params.Confidence || null;
+        this.ReturnCode = 'ReturnCode' in params ? params.ReturnCode : null;
+        this.Result = 'Result' in params ? params.Result : null;
+        this.Confidence = 'Confidence' in params ? params.Confidence : null;
 
         if (params.FileInfo) {
             this.FileInfo = new Array();
@@ -615,8 +615,8 @@ class DescribeFileInfoResponse extends  AbstractModel {
                 this.Intelligences.push(obj);
             }
         }
-        this.Context = params.Context || null;
-        this.RequestId = params.RequestId || null;
+        this.Context = 'Context' in params ? params.Context : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -656,9 +656,9 @@ class DescribeThreatInfoRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Key = params.Key || null;
-        this.Type = params.Type || null;
-        this.Option = params.Option || null;
+        this.Key = 'Key' in params ? params.Key : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Option = 'Option' in params ? params.Option : null;
 
     }
 }
@@ -692,8 +692,8 @@ class DescribeFileInfoRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Key = params.Key || null;
-        this.Option = params.Option || null;
+        this.Key = 'Key' in params ? params.Key : null;
+        this.Option = 'Option' in params ? params.Option : null;
 
     }
 }
@@ -779,10 +779,10 @@ malware IP = 恶意IP
         if (!params) {
             return;
         }
-        this.ReturnCode = params.ReturnCode || null;
-        this.Result = params.Result || null;
-        this.Confidence = params.Confidence || null;
-        this.ThreatTypes = params.ThreatTypes || null;
+        this.ReturnCode = 'ReturnCode' in params ? params.ReturnCode : null;
+        this.Result = 'Result' in params ? params.Result : null;
+        this.Confidence = 'Confidence' in params ? params.Confidence : null;
+        this.ThreatTypes = 'ThreatTypes' in params ? params.ThreatTypes : null;
 
         if (params.Tags) {
             this.Tags = new Array();
@@ -801,8 +801,8 @@ malware IP = 恶意IP
                 this.Intelligences.push(obj);
             }
         }
-        this.Context = params.Context || null;
-        this.RequestId = params.RequestId || null;
+        this.Context = 'Context' in params ? params.Context : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }

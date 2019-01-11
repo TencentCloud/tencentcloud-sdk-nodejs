@@ -21,12 +21,13 @@ const DescribeDiskOperationLogsResponse = models.DescribeDiskOperationLogsRespon
 const ResizeDiskRequest = models.ResizeDiskRequest;
 const ModifyDiskAttributesResponse = models.ModifyDiskAttributesResponse;
 const TerminateDisksRequest = models.TerminateDisksRequest;
-const DescribeDisksRequest = models.DescribeDisksRequest;
+const DescribeSnapshotOperationLogsResponse = models.DescribeSnapshotOperationLogsResponse;
 const DescribeInstancesDiskNumRequest = models.DescribeInstancesDiskNumRequest;
 const Placement = models.Placement;
+const DescribeSnapshotOperationLogsRequest = models.DescribeSnapshotOperationLogsRequest;
 const ModifySnapshotAttributeRequest = models.ModifySnapshotAttributeRequest;
 const InquiryPriceRenewDisksRequest = models.InquiryPriceRenewDisksRequest;
-const InquiryPriceRenewDisksResponse = models.InquiryPriceRenewDisksResponse;
+const DescribeDisksRequest = models.DescribeDisksRequest;
 const Price = models.Price;
 const InquiryPriceCreateDisksResponse = models.InquiryPriceCreateDisksResponse;
 const DiskConfig = models.DiskConfig;
@@ -46,6 +47,7 @@ const Filter = models.Filter;
 const InquiryPriceCreateDisksRequest = models.InquiryPriceCreateDisksRequest;
 const DescribeSnapshotsResponse = models.DescribeSnapshotsResponse;
 const Snapshot = models.Snapshot;
+const SnapshotOperationLog = models.SnapshotOperationLog;
 const CreateDisksResponse = models.CreateDisksResponse;
 const AttachDisksResponse = models.AttachDisksResponse;
 const RenewDiskRequest = models.RenewDiskRequest;
@@ -63,8 +65,9 @@ const CreateSnapshotRequest = models.CreateSnapshotRequest;
 const AttachDetail = models.AttachDetail;
 const InquiryPriceResizeDiskResponse = models.InquiryPriceResizeDiskResponse;
 const DescribeInstancesDiskNumResponse = models.DescribeInstancesDiskNumResponse;
-const DetachDisksResponse = models.DetachDisksResponse;
 const ResizeDiskResponse = models.ResizeDiskResponse;
+const DetachDisksResponse = models.DetachDisksResponse;
+const InquiryPriceRenewDisksResponse = models.InquiryPriceRenewDisksResponse;
 const Disk = models.Disk;
 const ApplySnapshotRequest = models.ApplySnapshotRequest;
 
@@ -215,6 +218,20 @@ class CbsClient extends AbstractClient {
     ApplySnapshot(req, cb) {
         let resp = new ApplySnapshotResponse();
         this.request("ApplySnapshot", req, resp, cb);
+    }
+
+    /**
+     * 本接口（DescribeSnapshotOperationLogs）用于查询快照操作日志列表。
+
+可根据快照ID过滤。快照ID形如：snap-a1kmcp13。
+
+     * @param {DescribeSnapshotOperationLogsRequest} req
+     * @param {function(string, DescribeSnapshotOperationLogsResponse):void} cb
+     * @public
+     */
+    DescribeSnapshotOperationLogs(req, cb) {
+        let resp = new DescribeSnapshotOperationLogsResponse();
+        this.request("DescribeSnapshotOperationLogs", req, resp, cb);
     }
 
     /**

@@ -69,12 +69,12 @@ class FaceFusionRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ProjectId = params.ProjectId || null;
-        this.ModelId = params.ModelId || null;
-        this.Image = params.Image || null;
-        this.RspImgType = params.RspImgType || null;
-        this.PornDetect = params.PornDetect || null;
-        this.CelebrityIdentify = params.CelebrityIdentify || null;
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+        this.ModelId = 'ModelId' in params ? params.ModelId : null;
+        this.Image = 'Image' in params ? params.Image : null;
+        this.RspImgType = 'RspImgType' in params ? params.RspImgType : null;
+        this.PornDetect = 'PornDetect' in params ? params.PornDetect : null;
+        this.CelebrityIdentify = 'CelebrityIdentify' in params ? params.CelebrityIdentify : null;
 
     }
 }
@@ -114,7 +114,7 @@ class FaceFusionResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Image = params.Image || null;
+        this.Image = 'Image' in params ? params.Image : null;
 
         if (params.ReviewResultSet) {
             this.ReviewResultSet = new Array();
@@ -124,7 +124,7 @@ class FaceFusionResponse extends  AbstractModel {
                 this.ReviewResultSet.push(obj);
             }
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -182,11 +182,11 @@ class FuseFaceReviewResult extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Category = params.Category || null;
-        this.Code = params.Code || null;
-        this.CodeDescription = params.CodeDescription || null;
-        this.Confidence = params.Confidence || null;
-        this.Suggestion = params.Suggestion || null;
+        this.Category = 'Category' in params ? params.Category : null;
+        this.Code = 'Code' in params ? params.Code : null;
+        this.CodeDescription = 'CodeDescription' in params ? params.CodeDescription : null;
+        this.Confidence = 'Confidence' in params ? params.Confidence : null;
+        this.Suggestion = 'Suggestion' in params ? params.Suggestion : null;
 
         if (params.DetailSet) {
             this.DetailSet = new Array();
@@ -241,10 +241,10 @@ class FuseFaceReviewDetail extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Field = params.Field || null;
-        this.Label = params.Label || null;
-        this.Confidence = params.Confidence || null;
-        this.Suggestion = params.Suggestion || null;
+        this.Field = 'Field' in params ? params.Field : null;
+        this.Label = 'Label' in params ? params.Label : null;
+        this.Confidence = 'Confidence' in params ? params.Confidence : null;
+        this.Suggestion = 'Suggestion' in params ? params.Suggestion : null;
 
     }
 }

@@ -39,7 +39,7 @@ class DetachDisksRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.DiskIds = params.DiskIds || null;
+        this.DiskIds = 'DiskIds' in params ? params.DiskIds : null;
 
     }
 }
@@ -82,7 +82,7 @@ class DescribeDiskOperationLogsResponse extends  AbstractModel {
                 this.DiskOperationLogSet.push(obj);
             }
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -116,8 +116,8 @@ class ResizeDiskRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.DiskId = params.DiskId || null;
-        this.DiskSize = params.DiskSize || null;
+        this.DiskId = 'DiskId' in params ? params.DiskId : null;
+        this.DiskSize = 'DiskSize' in params ? params.DiskSize : null;
 
     }
 }
@@ -145,7 +145,7 @@ class ModifyDiskAttributesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -173,7 +173,249 @@ class TerminateDisksRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.DiskIds = params.DiskIds || null;
+        this.DiskIds = 'DiskIds' in params ? params.DiskIds : null;
+
+    }
+}
+
+/**
+ * DescribeSnapshotOperationLogs返回参数结构体
+ * @class
+ */
+class DescribeSnapshotOperationLogsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 快照操作日志列表。
+         * @type {Array.<SnapshotOperationLog> || null}
+         */
+        this.SnapshotOperationLogSet = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.SnapshotOperationLogSet) {
+            this.SnapshotOperationLogSet = new Array();
+            for (let z in params.SnapshotOperationLogSet) {
+                let obj = new SnapshotOperationLog();
+                obj.deserialize(params.SnapshotOperationLogSet[z]);
+                this.SnapshotOperationLogSet.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeInstancesDiskNum请求参数结构体
+ * @class
+ */
+class DescribeInstancesDiskNumRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 云服务器实例ID，通过[DescribeInstances](/document/product/213/15728)接口查询。
+         * @type {Array.<string> || null}
+         */
+        this.InstanceIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
+
+    }
+}
+
+/**
+ * 描述了实例的抽象位置，包括其所在的可用区，所属的项目
+ * @class
+ */
+class Placement extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例所属的[可用区](/document/api/213/9452#zone)ID。该参数也可以通过调用  [DescribeZones](/document/product/213/15707) 的返回值中的Zone字段来获取。
+         * @type {string || null}
+         */
+        this.Zone = null;
+
+        /**
+         * 实例所属项目ID。该参数可以通过调用 [DescribeProject](/document/api/378/4400) 的返回值中的 projectId 字段来获取。不填为默认项目。
+         * @type {number || null}
+         */
+        this.ProjectId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Zone = 'Zone' in params ? params.Zone : null;
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+
+    }
+}
+
+/**
+ * DescribeSnapshotOperationLogs请求参数结构体
+ * @class
+ */
+class DescribeSnapshotOperationLogsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 过滤条件。支持以下条件：
+<li>snapshot-id - Array of String - 是否必填：是 - 按快照ID过滤，每个请求最多可指定10个快照ID。
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * ModifySnapshotAttribute请求参数结构体
+ * @class
+ */
+class ModifySnapshotAttributeRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 快照ID, 可通过[DescribeSnapshots](/document/product/362/15647)查询。
+         * @type {string || null}
+         */
+        this.SnapshotId = null;
+
+        /**
+         * 新的快照名称。最长为60个字符。
+         * @type {string || null}
+         */
+        this.SnapshotName = null;
+
+        /**
+         * 快照的保留时间，FALSE表示非永久保留，TRUE表示永久保留。仅支持将非永久快照修改为永久快照。
+         * @type {boolean || null}
+         */
+        this.IsPermanent = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SnapshotId = 'SnapshotId' in params ? params.SnapshotId : null;
+        this.SnapshotName = 'SnapshotName' in params ? params.SnapshotName : null;
+        this.IsPermanent = 'IsPermanent' in params ? params.IsPermanent : null;
+
+    }
+}
+
+/**
+ * InquiryPriceRenewDisks请求参数结构体
+ * @class
+ */
+class InquiryPriceRenewDisksRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 云硬盘ID， 通过[DescribeDisks](/document/product/362/16315)接口查询。
+         * @type {Array.<string> || null}
+         */
+        this.DiskIds = null;
+
+        /**
+         * 预付费模式，即包年包月相关参数设置。通过该参数可以指定包年包月云盘的购买时长。如果在该参数中指定CurInstanceDeadline，则会按对齐到子机到期时间来续费。如果是批量续费询价，该参数与Disks参数一一对应，元素数量需保持一致。
+         * @type {Array.<DiskChargePrepaid> || null}
+         */
+        this.DiskChargePrepaids = null;
+
+        /**
+         * 指定云盘新的到期时间，形式如：2017-12-17 00:00:00。参数`NewDeadline`和`DiskChargePrepaids`是两种指定询价时长的方式，两者必传一个。
+         * @type {string || null}
+         */
+        this.NewDeadline = null;
+
+        /**
+         * 云盘所属项目ID。 如传入则仅用于鉴权。
+         * @type {number || null}
+         */
+        this.ProjectId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DiskIds = 'DiskIds' in params ? params.DiskIds : null;
+
+        if (params.DiskChargePrepaids) {
+            this.DiskChargePrepaids = new Array();
+            for (let z in params.DiskChargePrepaids) {
+                let obj = new DiskChargePrepaid();
+                obj.deserialize(params.DiskChargePrepaids[z]);
+                this.DiskChargePrepaids.push(obj);
+            }
+        }
+        this.NewDeadline = 'NewDeadline' in params ? params.NewDeadline : null;
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
 
     }
 }
@@ -237,7 +479,7 @@ class DescribeDisksRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.DiskIds = params.DiskIds || null;
+        this.DiskIds = 'DiskIds' in params ? params.DiskIds : null;
 
         if (params.Filters) {
             this.Filters = new Array();
@@ -247,213 +489,11 @@ class DescribeDisksRequest extends  AbstractModel {
                 this.Filters.push(obj);
             }
         }
-        this.Offset = params.Offset || null;
-        this.Limit = params.Limit || null;
-        this.Order = params.Order || null;
-        this.OrderField = params.OrderField || null;
-        this.ReturnBindAutoSnapshotPolicy = params.ReturnBindAutoSnapshotPolicy || null;
-
-    }
-}
-
-/**
- * DescribeInstancesDiskNum请求参数结构体
- * @class
- */
-class DescribeInstancesDiskNumRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 云服务器实例ID，通过[DescribeInstances](/document/product/213/15728)接口查询。
-         * @type {Array.<string> || null}
-         */
-        this.InstanceIds = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.InstanceIds = params.InstanceIds || null;
-
-    }
-}
-
-/**
- * 描述了实例的抽象位置，包括其所在的可用区，所属的项目
- * @class
- */
-class Placement extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 实例所属的[可用区](/document/api/213/9452#zone)ID。该参数也可以通过调用  [DescribeZones](/document/product/213/15707) 的返回值中的Zone字段来获取。
-         * @type {string || null}
-         */
-        this.Zone = null;
-
-        /**
-         * 实例所属项目ID。该参数可以通过调用 [DescribeProject](/document/api/378/4400) 的返回值中的 projectId 字段来获取。不填为默认项目。
-         * @type {number || null}
-         */
-        this.ProjectId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Zone = params.Zone || null;
-        this.ProjectId = params.ProjectId || null;
-
-    }
-}
-
-/**
- * ModifySnapshotAttribute请求参数结构体
- * @class
- */
-class ModifySnapshotAttributeRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 快照ID, 可通过[DescribeSnapshots](/document/product/362/15647)查询。
-         * @type {string || null}
-         */
-        this.SnapshotId = null;
-
-        /**
-         * 新的快照名称。最长为60个字符。
-         * @type {string || null}
-         */
-        this.SnapshotName = null;
-
-        /**
-         * 快照的保留时间，FALSE表示非永久保留，TRUE表示永久保留。仅支持将非永久快照修改为永久快照。
-         * @type {boolean || null}
-         */
-        this.IsPermanent = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.SnapshotId = params.SnapshotId || null;
-        this.SnapshotName = params.SnapshotName || null;
-        this.IsPermanent = params.IsPermanent || null;
-
-    }
-}
-
-/**
- * InquiryPriceRenewDisks请求参数结构体
- * @class
- */
-class InquiryPriceRenewDisksRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 云硬盘ID， 通过[DescribeDisks](/document/product/362/16315)接口查询。
-         * @type {Array.<string> || null}
-         */
-        this.DiskIds = null;
-
-        /**
-         * 预付费模式，即包年包月相关参数设置。通过该参数可以指定包年包月云盘的购买时长。如果在该参数中指定CurInstanceDeadline，则会按对齐到子机到期时间来续费。如果是批量续费询价，该参数与Disks参数一一对应，元素数量需保持一致。
-         * @type {Array.<DiskChargePrepaid> || null}
-         */
-        this.DiskChargePrepaids = null;
-
-        /**
-         * 指定云盘新的到期时间，形式如：2017-12-17 00:00:00。参数`NewDeadline`和`DiskChargePrepaids`是两种指定询价时长的方式，两者必传一个。
-         * @type {string || null}
-         */
-        this.NewDeadline = null;
-
-        /**
-         * 云盘所属项目ID。 如传入则仅用于鉴权。
-         * @type {number || null}
-         */
-        this.ProjectId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.DiskIds = params.DiskIds || null;
-
-        if (params.DiskChargePrepaids) {
-            this.DiskChargePrepaids = new Array();
-            for (let z in params.DiskChargePrepaids) {
-                let obj = new DiskChargePrepaid();
-                obj.deserialize(params.DiskChargePrepaids[z]);
-                this.DiskChargePrepaids.push(obj);
-            }
-        }
-        this.NewDeadline = params.NewDeadline || null;
-        this.ProjectId = params.ProjectId || null;
-
-    }
-}
-
-/**
- * InquiryPriceRenewDisks返回参数结构体
- * @class
- */
-class InquiryPriceRenewDisksResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 描述了续费云盘的价格。
-         * @type {PrepayPrice || null}
-         */
-        this.DiskPrice = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-        if (params.DiskPrice) {
-            let obj = new PrepayPrice();
-            obj.deserialize(params.DiskPrice)
-            this.DiskPrice = obj;
-        }
-        this.RequestId = params.RequestId || null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Order = 'Order' in params ? params.Order : null;
+        this.OrderField = 'OrderField' in params ? params.OrderField : null;
+        this.ReturnBindAutoSnapshotPolicy = 'ReturnBindAutoSnapshotPolicy' in params ? params.ReturnBindAutoSnapshotPolicy : null;
 
     }
 }
@@ -479,7 +519,7 @@ class Price extends  AbstractModel {
         this.DiscountPrice = null;
 
         /**
-         * 后付费云盘的单价，单位：元。
+         * 后付费云盘原单价，单位：元。
          * @type {number || null}
          */
         this.UnitPrice = null;
@@ -490,6 +530,12 @@ class Price extends  AbstractModel {
          */
         this.ChargeUnit = null;
 
+        /**
+         * 后付费云盘折扣单价，单位：元。
+         * @type {number || null}
+         */
+        this.UnitPriceDiscount = null;
+
     }
 
     /**
@@ -499,10 +545,11 @@ class Price extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.OriginalPrice = params.OriginalPrice || null;
-        this.DiscountPrice = params.DiscountPrice || null;
-        this.UnitPrice = params.UnitPrice || null;
-        this.ChargeUnit = params.ChargeUnit || null;
+        this.OriginalPrice = 'OriginalPrice' in params ? params.OriginalPrice : null;
+        this.DiscountPrice = 'DiscountPrice' in params ? params.DiscountPrice : null;
+        this.UnitPrice = 'UnitPrice' in params ? params.UnitPrice : null;
+        this.ChargeUnit = 'ChargeUnit' in params ? params.ChargeUnit : null;
+        this.UnitPriceDiscount = 'UnitPriceDiscount' in params ? params.UnitPriceDiscount : null;
 
     }
 }
@@ -542,7 +589,7 @@ class InquiryPriceCreateDisksResponse extends  AbstractModel {
             obj.deserialize(params.DiskPrice)
             this.DiskPrice = obj;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -618,15 +665,15 @@ class DiskConfig extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Available = params.Available || null;
-        this.DiskType = params.DiskType || null;
-        this.DiskUsage = params.DiskUsage || null;
-        this.DiskChargeType = params.DiskChargeType || null;
-        this.MaxDiskSize = params.MaxDiskSize || null;
-        this.MinDiskSize = params.MinDiskSize || null;
-        this.Zone = params.Zone || null;
-        this.DeviceClass = params.DeviceClass || null;
-        this.InstanceFamily = params.InstanceFamily || null;
+        this.Available = 'Available' in params ? params.Available : null;
+        this.DiskType = 'DiskType' in params ? params.DiskType : null;
+        this.DiskUsage = 'DiskUsage' in params ? params.DiskUsage : null;
+        this.DiskChargeType = 'DiskChargeType' in params ? params.DiskChargeType : null;
+        this.MaxDiskSize = 'MaxDiskSize' in params ? params.MaxDiskSize : null;
+        this.MinDiskSize = 'MinDiskSize' in params ? params.MinDiskSize : null;
+        this.Zone = 'Zone' in params ? params.Zone : null;
+        this.DeviceClass = 'DeviceClass' in params ? params.DeviceClass : null;
+        this.InstanceFamily = 'InstanceFamily' in params ? params.InstanceFamily : null;
 
     }
 }
@@ -660,8 +707,8 @@ class CreateSnapshotResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.SnapshotId = params.SnapshotId || null;
-        this.RequestId = params.RequestId || null;
+        this.SnapshotId = 'SnapshotId' in params ? params.SnapshotId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -689,7 +736,7 @@ class DeleteSnapshotsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.SnapshotIds = params.SnapshotIds || null;
+        this.SnapshotIds = 'SnapshotIds' in params ? params.SnapshotIds : null;
 
     }
 }
@@ -759,14 +806,14 @@ class DescribeDiskConfigQuotaRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InquiryType = params.InquiryType || null;
-        this.Zones = params.Zones || null;
-        this.DiskChargeType = params.DiskChargeType || null;
-        this.DiskTypes = params.DiskTypes || null;
-        this.DiskUsage = params.DiskUsage || null;
-        this.InstanceFamilies = params.InstanceFamilies || null;
-        this.CPU = params.CPU || null;
-        this.Memory = params.Memory || null;
+        this.InquiryType = 'InquiryType' in params ? params.InquiryType : null;
+        this.Zones = 'Zones' in params ? params.Zones : null;
+        this.DiskChargeType = 'DiskChargeType' in params ? params.DiskChargeType : null;
+        this.DiskTypes = 'DiskTypes' in params ? params.DiskTypes : null;
+        this.DiskUsage = 'DiskUsage' in params ? params.DiskUsage : null;
+        this.InstanceFamilies = 'InstanceFamilies' in params ? params.InstanceFamilies : null;
+        this.CPU = 'CPU' in params ? params.CPU : null;
+        this.Memory = 'Memory' in params ? params.Memory : null;
 
     }
 }
@@ -794,7 +841,7 @@ class ModifyDisksRenewFlagResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -820,7 +867,7 @@ class DiskChargePrepaid extends  AbstractModel {
         this.RenewFlag = null;
 
         /**
-         * 需要将云盘的到期时间与挂载的子机对齐时，可传入该参数。该参数表示子机当前的到期时间，此时Period如果传入，则表示子机需要续费的时长，云盘会自动按对齐到子机续费后的到期时间续费。
+         * 需要将云盘的到期时间与挂载的子机对齐时，可传入该参数。该参数表示子机当前的到期时间，此时Period如果传入，则表示子机需要续费的时长，云盘会自动按对齐到子机续费后的到期时间续费，示例取值：2018-03-30 20:15:03。
          * @type {string || null}
          */
         this.CurInstanceDeadline = null;
@@ -834,9 +881,9 @@ class DiskChargePrepaid extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Period = params.Period || null;
-        this.RenewFlag = params.RenewFlag || null;
-        this.CurInstanceDeadline = params.CurInstanceDeadline || null;
+        this.Period = 'Period' in params ? params.Period : null;
+        this.RenewFlag = 'RenewFlag' in params ? params.RenewFlag : null;
+        this.CurInstanceDeadline = 'CurInstanceDeadline' in params ? params.CurInstanceDeadline : null;
 
     }
 }
@@ -876,9 +923,9 @@ class InquiryPriceResizeDiskRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.DiskId = params.DiskId || null;
-        this.DiskSize = params.DiskSize || null;
-        this.ProjectId = params.ProjectId || null;
+        this.DiskId = 'DiskId' in params ? params.DiskId : null;
+        this.DiskSize = 'DiskSize' in params ? params.DiskSize : null;
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
 
     }
 }
@@ -906,7 +953,7 @@ class ApplySnapshotResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -946,7 +993,7 @@ class DescribeDisksResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = params.TotalCount || null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
 
         if (params.DiskSet) {
             this.DiskSet = new Array();
@@ -956,7 +1003,7 @@ class DescribeDisksResponse extends  AbstractModel {
                 this.DiskSet.push(obj);
             }
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -984,7 +1031,7 @@ class ModifySnapshotAttributeResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1018,8 +1065,8 @@ class PrepayPrice extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.OriginalPrice = params.OriginalPrice || null;
-        this.DiscountPrice = params.DiscountPrice || null;
+        this.OriginalPrice = 'OriginalPrice' in params ? params.OriginalPrice : null;
+        this.DiscountPrice = 'DiscountPrice' in params ? params.DiscountPrice : null;
 
     }
 }
@@ -1047,7 +1094,7 @@ class DeleteSnapshotsResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1081,8 +1128,8 @@ class ModifyDisksRenewFlagRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.DiskIds = params.DiskIds || null;
-        this.RenewFlag = params.RenewFlag || null;
+        this.DiskIds = 'DiskIds' in params ? params.DiskIds : null;
+        this.RenewFlag = 'RenewFlag' in params ? params.RenewFlag : null;
 
     }
 }
@@ -1116,8 +1163,8 @@ class Filter extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Name = params.Name || null;
-        this.Values = params.Values || null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Values = 'Values' in params ? params.Values : null;
 
     }
 }
@@ -1175,17 +1222,17 @@ class InquiryPriceCreateDisksRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.DiskType = params.DiskType || null;
-        this.DiskSize = params.DiskSize || null;
-        this.DiskChargeType = params.DiskChargeType || null;
+        this.DiskType = 'DiskType' in params ? params.DiskType : null;
+        this.DiskSize = 'DiskSize' in params ? params.DiskSize : null;
+        this.DiskChargeType = 'DiskChargeType' in params ? params.DiskChargeType : null;
 
         if (params.DiskChargePrepaid) {
             let obj = new DiskChargePrepaid();
             obj.deserialize(params.DiskChargePrepaid)
             this.DiskChargePrepaid = obj;
         }
-        this.DiskCount = params.DiskCount || null;
-        this.ProjectId = params.ProjectId || null;
+        this.DiskCount = 'DiskCount' in params ? params.DiskCount : null;
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
 
     }
 }
@@ -1225,7 +1272,7 @@ class DescribeSnapshotsResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = params.TotalCount || null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
 
         if (params.SnapshotSet) {
             this.SnapshotSet = new Array();
@@ -1235,7 +1282,7 @@ class DescribeSnapshotsResponse extends  AbstractModel {
                 this.SnapshotSet.push(obj);
             }
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1332,6 +1379,12 @@ class Snapshot extends  AbstractModel {
          */
         this.CopyFromRemote = null;
 
+        /**
+         * 快照关联的镜像ID列表。
+         * @type {Array.<string> || null}
+         */
+        this.ImageIds = null;
+
     }
 
     /**
@@ -1341,25 +1394,99 @@ class Snapshot extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.SnapshotId = params.SnapshotId || null;
+        this.SnapshotId = 'SnapshotId' in params ? params.SnapshotId : null;
 
         if (params.Placement) {
             let obj = new Placement();
             obj.deserialize(params.Placement)
             this.Placement = obj;
         }
-        this.DiskUsage = params.DiskUsage || null;
-        this.DiskId = params.DiskId || null;
-        this.DiskSize = params.DiskSize || null;
-        this.SnapshotState = params.SnapshotState || null;
-        this.SnapshotName = params.SnapshotName || null;
-        this.Percent = params.Percent || null;
-        this.CreateTime = params.CreateTime || null;
-        this.DeadlineTime = params.DeadlineTime || null;
-        this.Encrypt = params.Encrypt || null;
-        this.IsPermanent = params.IsPermanent || null;
-        this.CopyingToRegions = params.CopyingToRegions || null;
-        this.CopyFromRemote = params.CopyFromRemote || null;
+        this.DiskUsage = 'DiskUsage' in params ? params.DiskUsage : null;
+        this.DiskId = 'DiskId' in params ? params.DiskId : null;
+        this.DiskSize = 'DiskSize' in params ? params.DiskSize : null;
+        this.SnapshotState = 'SnapshotState' in params ? params.SnapshotState : null;
+        this.SnapshotName = 'SnapshotName' in params ? params.SnapshotName : null;
+        this.Percent = 'Percent' in params ? params.Percent : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.DeadlineTime = 'DeadlineTime' in params ? params.DeadlineTime : null;
+        this.Encrypt = 'Encrypt' in params ? params.Encrypt : null;
+        this.IsPermanent = 'IsPermanent' in params ? params.IsPermanent : null;
+        this.CopyingToRegions = 'CopyingToRegions' in params ? params.CopyingToRegions : null;
+        this.CopyFromRemote = 'CopyFromRemote' in params ? params.CopyFromRemote : null;
+        this.ImageIds = 'ImageIds' in params ? params.ImageIds : null;
+
+    }
+}
+
+/**
+ * 快照操作日志。
+ * @class
+ */
+class SnapshotOperationLog extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 操作者的UIN。
+         * @type {string || null}
+         */
+        this.Operator = null;
+
+        /**
+         * 操作类型。取值范围：
+SNAP_OPERATION_DELETE：删除快照
+SNAP_OPERATION_ROLLBACK：回滚快照
+SNAP_OPERATION_MODIFY：修改快照属性
+SNAP_OPERATION_CREATE：创建快照
+SNAP_OPERATION_COPY：跨地域复制快照
+ASP_OPERATION_CREATE_SNAP：由定期快照策略创建快照
+ASP_OPERATION_DELETE_SNAP：由定期快照策略删除快照
+         * @type {string || null}
+         */
+        this.Operation = null;
+
+        /**
+         * 操作的快照ID。
+         * @type {string || null}
+         */
+        this.SnapshotId = null;
+
+        /**
+         * 操作的状态。取值范围：
+SUCCESS :表示操作成功 
+FAILED :表示操作失败 
+PROCESSING :表示操作中。
+         * @type {string || null}
+         */
+        this.OperationState = null;
+
+        /**
+         * 开始时间。
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * 结束时间。
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Operator = 'Operator' in params ? params.Operator : null;
+        this.Operation = 'Operation' in params ? params.Operation : null;
+        this.SnapshotId = 'SnapshotId' in params ? params.SnapshotId : null;
+        this.OperationState = 'OperationState' in params ? params.OperationState : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
 
     }
 }
@@ -1393,8 +1520,8 @@ class CreateDisksResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.DiskIdSet = params.DiskIdSet || null;
-        this.RequestId = params.RequestId || null;
+        this.DiskIdSet = 'DiskIdSet' in params ? params.DiskIdSet : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1422,7 +1549,7 @@ class AttachDisksResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1462,7 +1589,7 @@ class RenewDiskRequest extends  AbstractModel {
             obj.deserialize(params.DiskChargePrepaid)
             this.DiskChargePrepaid = obj;
         }
-        this.DiskId = params.DiskId || null;
+        this.DiskId = 'DiskId' in params ? params.DiskId : null;
 
     }
 }
@@ -1532,12 +1659,12 @@ PROCESSING :表示操作中。
         if (!params) {
             return;
         }
-        this.Operator = params.Operator || null;
-        this.Operation = params.Operation || null;
-        this.DiskId = params.DiskId || null;
-        this.OperationState = params.OperationState || null;
-        this.StartTime = params.StartTime || null;
-        this.EndTime = params.EndTime || null;
+        this.Operator = 'Operator' in params ? params.Operator : null;
+        this.Operation = 'Operation' in params ? params.Operation : null;
+        this.DiskId = 'DiskId' in params ? params.DiskId : null;
+        this.OperationState = 'OperationState' in params ? params.OperationState : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
 
     }
 }
@@ -1565,7 +1692,7 @@ class RenewDiskResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1659,26 +1786,26 @@ class CreateDisksRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.DiskType = params.DiskType || null;
-        this.DiskChargeType = params.DiskChargeType || null;
+        this.DiskType = 'DiskType' in params ? params.DiskType : null;
+        this.DiskChargeType = 'DiskChargeType' in params ? params.DiskChargeType : null;
 
         if (params.Placement) {
             let obj = new Placement();
             obj.deserialize(params.Placement)
             this.Placement = obj;
         }
-        this.DiskName = params.DiskName || null;
-        this.DiskCount = params.DiskCount || null;
+        this.DiskName = 'DiskName' in params ? params.DiskName : null;
+        this.DiskCount = 'DiskCount' in params ? params.DiskCount : null;
 
         if (params.DiskChargePrepaid) {
             let obj = new DiskChargePrepaid();
             obj.deserialize(params.DiskChargePrepaid)
             this.DiskChargePrepaid = obj;
         }
-        this.DiskSize = params.DiskSize || null;
-        this.SnapshotId = params.SnapshotId || null;
-        this.ClientToken = params.ClientToken || null;
-        this.Encrypt = params.Encrypt || null;
+        this.DiskSize = 'DiskSize' in params ? params.DiskSize : null;
+        this.SnapshotId = 'SnapshotId' in params ? params.SnapshotId : null;
+        this.ClientToken = 'ClientToken' in params ? params.ClientToken : null;
+        this.Encrypt = 'Encrypt' in params ? params.Encrypt : null;
 
         if (params.Tags) {
             this.Tags = new Array();
@@ -1688,7 +1815,7 @@ class CreateDisksRequest extends  AbstractModel {
                 this.Tags.push(obj);
             }
         }
-        this.DeleteWithInstance = params.DeleteWithInstance || null;
+        this.DeleteWithInstance = 'DeleteWithInstance' in params ? params.DeleteWithInstance : null;
 
     }
 }
@@ -1728,9 +1855,9 @@ class AttachDisksRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.DiskIds = params.DiskIds || null;
-        this.InstanceId = params.InstanceId || null;
-        this.DeleteWithInstance = params.DeleteWithInstance || null;
+        this.DiskIds = 'DiskIds' in params ? params.DiskIds : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.DeleteWithInstance = 'DeleteWithInstance' in params ? params.DeleteWithInstance : null;
 
     }
 }
@@ -1801,8 +1928,8 @@ class Tag extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Key = params.Key || null;
-        this.Value = params.Value || null;
+        this.Key = 'Key' in params ? params.Key : null;
+        this.Value = 'Value' in params ? params.Value : null;
 
     }
 }
@@ -1860,7 +1987,7 @@ class DescribeSnapshotsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.SnapshotIds = params.SnapshotIds || null;
+        this.SnapshotIds = 'SnapshotIds' in params ? params.SnapshotIds : null;
 
         if (params.Filters) {
             this.Filters = new Array();
@@ -1870,10 +1997,10 @@ class DescribeSnapshotsRequest extends  AbstractModel {
                 this.Filters.push(obj);
             }
         }
-        this.Offset = params.Offset || null;
-        this.Limit = params.Limit || null;
-        this.Order = params.Order || null;
-        this.OrderField = params.OrderField || null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Order = 'Order' in params ? params.Order : null;
+        this.OrderField = 'OrderField' in params ? params.OrderField : null;
 
     }
 }
@@ -1901,7 +2028,7 @@ class TerminateDisksResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1944,7 +2071,7 @@ class DescribeDiskConfigQuotaResponse extends  AbstractModel {
                 this.DiskConfigSet.push(obj);
             }
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1996,11 +2123,11 @@ class ModifyDiskAttributesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.DiskIds = params.DiskIds || null;
-        this.ProjectId = params.ProjectId || null;
-        this.DiskName = params.DiskName || null;
-        this.Portable = params.Portable || null;
-        this.DeleteWithInstance = params.DeleteWithInstance || null;
+        this.DiskIds = 'DiskIds' in params ? params.DiskIds : null;
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+        this.DiskName = 'DiskName' in params ? params.DiskName : null;
+        this.Portable = 'Portable' in params ? params.Portable : null;
+        this.DeleteWithInstance = 'DeleteWithInstance' in params ? params.DeleteWithInstance : null;
 
     }
 }
@@ -2034,8 +2161,8 @@ class CreateSnapshotRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.DiskId = params.DiskId || null;
-        this.SnapshotName = params.SnapshotName || null;
+        this.DiskId = 'DiskId' in params ? params.DiskId : null;
+        this.SnapshotName = 'SnapshotName' in params ? params.SnapshotName : null;
 
     }
 }
@@ -2075,9 +2202,9 @@ class AttachDetail extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = params.InstanceId || null;
-        this.AttachedDiskCount = params.AttachedDiskCount || null;
-        this.MaxAttachCount = params.MaxAttachCount || null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.AttachedDiskCount = 'AttachedDiskCount' in params ? params.AttachedDiskCount : null;
+        this.MaxAttachCount = 'MaxAttachCount' in params ? params.MaxAttachCount : null;
 
     }
 }
@@ -2117,7 +2244,7 @@ class InquiryPriceResizeDiskResponse extends  AbstractModel {
             obj.deserialize(params.DiskPrice)
             this.DiskPrice = obj;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2160,35 +2287,7 @@ class DescribeInstancesDiskNumResponse extends  AbstractModel {
                 this.AttachDetail.push(obj);
             }
         }
-        this.RequestId = params.RequestId || null;
-
-    }
-}
-
-/**
- * DetachDisks返回参数结构体
- * @class
- */
-class DetachDisksResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2216,7 +2315,75 @@ class ResizeDiskResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DetachDisks返回参数结构体
+ * @class
+ */
+class DetachDisksResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * InquiryPriceRenewDisks返回参数结构体
+ * @class
+ */
+class InquiryPriceRenewDisksResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 描述了续费云盘的价格。
+         * @type {PrepayPrice || null}
+         */
+        this.DiskPrice = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.DiskPrice) {
+            let obj = new PrepayPrice();
+            obj.deserialize(params.DiskPrice)
+            this.DiskPrice = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2278,7 +2445,7 @@ class Disk extends  AbstractModel {
         this.DiskSize = null;
 
         /**
-         * 云盘状态。取值范围：<br><li>UNATTACHED：未挂载<br><li>ATTACHING：挂载中<br><li>ATTACHED：已挂载<br><li>DETACHING：解挂中<br><li>EXPANDING：扩容中<br><li>ROLLBACKING：回滚中。
+         * 云盘状态。取值范围：<br><li>UNATTACHED：未挂载<br><li>ATTACHING：挂载中<br><li>ATTACHED：已挂载<br><li>DETACHING：解挂中<br><li>EXPANDING：扩容中<br><li>ROLLBACKING：回滚中<br><li>TORECYCLE：待回收<br><li>DUMPING：拷贝硬盘中。
          * @type {string || null}
          */
         this.DiskState = null;
@@ -2385,6 +2552,18 @@ class Disk extends  AbstractModel {
          */
         this.DifferDaysOfDeadline = null;
 
+        /**
+         * 云盘是否处于类型变更中。取值范围：<br><li>false:表示云盘不处于类型变更中<br><li>true:表示云盘已发起类型变更，正处于迁移中。
+         * @type {boolean || null}
+         */
+        this.Migrating = null;
+
+        /**
+         * 云盘类型变更的迁移进度，取值0到100。
+         * @type {number || null}
+         */
+        this.MigratePercent = null;
+
     }
 
     /**
@@ -2394,34 +2573,34 @@ class Disk extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.DiskId = params.DiskId || null;
-        this.DiskUsage = params.DiskUsage || null;
-        this.DiskChargeType = params.DiskChargeType || null;
-        this.Portable = params.Portable || null;
+        this.DiskId = 'DiskId' in params ? params.DiskId : null;
+        this.DiskUsage = 'DiskUsage' in params ? params.DiskUsage : null;
+        this.DiskChargeType = 'DiskChargeType' in params ? params.DiskChargeType : null;
+        this.Portable = 'Portable' in params ? params.Portable : null;
 
         if (params.Placement) {
             let obj = new Placement();
             obj.deserialize(params.Placement)
             this.Placement = obj;
         }
-        this.SnapshotAbility = params.SnapshotAbility || null;
-        this.DiskName = params.DiskName || null;
-        this.DiskSize = params.DiskSize || null;
-        this.DiskState = params.DiskState || null;
-        this.DiskType = params.DiskType || null;
-        this.Attached = params.Attached || null;
-        this.InstanceId = params.InstanceId || null;
-        this.CreateTime = params.CreateTime || null;
-        this.DeadlineTime = params.DeadlineTime || null;
-        this.Rollbacking = params.Rollbacking || null;
-        this.RollbackPercent = params.RollbackPercent || null;
-        this.Encrypt = params.Encrypt || null;
-        this.AutoRenewFlagError = params.AutoRenewFlagError || null;
-        this.RenewFlag = params.RenewFlag || null;
-        this.DeadlineError = params.DeadlineError || null;
-        this.IsReturnable = params.IsReturnable || null;
-        this.ReturnFailCode = params.ReturnFailCode || null;
-        this.AutoSnapshotPolicyIds = params.AutoSnapshotPolicyIds || null;
+        this.SnapshotAbility = 'SnapshotAbility' in params ? params.SnapshotAbility : null;
+        this.DiskName = 'DiskName' in params ? params.DiskName : null;
+        this.DiskSize = 'DiskSize' in params ? params.DiskSize : null;
+        this.DiskState = 'DiskState' in params ? params.DiskState : null;
+        this.DiskType = 'DiskType' in params ? params.DiskType : null;
+        this.Attached = 'Attached' in params ? params.Attached : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.DeadlineTime = 'DeadlineTime' in params ? params.DeadlineTime : null;
+        this.Rollbacking = 'Rollbacking' in params ? params.Rollbacking : null;
+        this.RollbackPercent = 'RollbackPercent' in params ? params.RollbackPercent : null;
+        this.Encrypt = 'Encrypt' in params ? params.Encrypt : null;
+        this.AutoRenewFlagError = 'AutoRenewFlagError' in params ? params.AutoRenewFlagError : null;
+        this.RenewFlag = 'RenewFlag' in params ? params.RenewFlag : null;
+        this.DeadlineError = 'DeadlineError' in params ? params.DeadlineError : null;
+        this.IsReturnable = 'IsReturnable' in params ? params.IsReturnable : null;
+        this.ReturnFailCode = 'ReturnFailCode' in params ? params.ReturnFailCode : null;
+        this.AutoSnapshotPolicyIds = 'AutoSnapshotPolicyIds' in params ? params.AutoSnapshotPolicyIds : null;
 
         if (params.Tags) {
             this.Tags = new Array();
@@ -2431,8 +2610,10 @@ class Disk extends  AbstractModel {
                 this.Tags.push(obj);
             }
         }
-        this.DeleteWithInstance = params.DeleteWithInstance || null;
-        this.DifferDaysOfDeadline = params.DifferDaysOfDeadline || null;
+        this.DeleteWithInstance = 'DeleteWithInstance' in params ? params.DeleteWithInstance : null;
+        this.DifferDaysOfDeadline = 'DifferDaysOfDeadline' in params ? params.DifferDaysOfDeadline : null;
+        this.Migrating = 'Migrating' in params ? params.Migrating : null;
+        this.MigratePercent = 'MigratePercent' in params ? params.MigratePercent : null;
 
     }
 }
@@ -2466,8 +2647,8 @@ class ApplySnapshotRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.SnapshotId = params.SnapshotId || null;
-        this.DiskId = params.DiskId || null;
+        this.SnapshotId = 'SnapshotId' in params ? params.SnapshotId : null;
+        this.DiskId = 'DiskId' in params ? params.DiskId : null;
 
     }
 }
@@ -2478,12 +2659,13 @@ module.exports = {
     ResizeDiskRequest: ResizeDiskRequest,
     ModifyDiskAttributesResponse: ModifyDiskAttributesResponse,
     TerminateDisksRequest: TerminateDisksRequest,
-    DescribeDisksRequest: DescribeDisksRequest,
+    DescribeSnapshotOperationLogsResponse: DescribeSnapshotOperationLogsResponse,
     DescribeInstancesDiskNumRequest: DescribeInstancesDiskNumRequest,
     Placement: Placement,
+    DescribeSnapshotOperationLogsRequest: DescribeSnapshotOperationLogsRequest,
     ModifySnapshotAttributeRequest: ModifySnapshotAttributeRequest,
     InquiryPriceRenewDisksRequest: InquiryPriceRenewDisksRequest,
-    InquiryPriceRenewDisksResponse: InquiryPriceRenewDisksResponse,
+    DescribeDisksRequest: DescribeDisksRequest,
     Price: Price,
     InquiryPriceCreateDisksResponse: InquiryPriceCreateDisksResponse,
     DiskConfig: DiskConfig,
@@ -2503,6 +2685,7 @@ module.exports = {
     InquiryPriceCreateDisksRequest: InquiryPriceCreateDisksRequest,
     DescribeSnapshotsResponse: DescribeSnapshotsResponse,
     Snapshot: Snapshot,
+    SnapshotOperationLog: SnapshotOperationLog,
     CreateDisksResponse: CreateDisksResponse,
     AttachDisksResponse: AttachDisksResponse,
     RenewDiskRequest: RenewDiskRequest,
@@ -2520,8 +2703,9 @@ module.exports = {
     AttachDetail: AttachDetail,
     InquiryPriceResizeDiskResponse: InquiryPriceResizeDiskResponse,
     DescribeInstancesDiskNumResponse: DescribeInstancesDiskNumResponse,
-    DetachDisksResponse: DetachDisksResponse,
     ResizeDiskResponse: ResizeDiskResponse,
+    DetachDisksResponse: DetachDisksResponse,
+    InquiryPriceRenewDisksResponse: InquiryPriceRenewDisksResponse,
     Disk: Disk,
     ApplySnapshotRequest: ApplySnapshotRequest,
 

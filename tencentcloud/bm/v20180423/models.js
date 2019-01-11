@@ -39,7 +39,7 @@ class ModifyPsaRegulationResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -79,9 +79,9 @@ class DescribeTaskOperationLogRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TaskId = params.TaskId || null;
-        this.OrderField = params.OrderField || null;
-        this.Order = params.Order || null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.OrderField = 'OrderField' in params ? params.OrderField : null;
+        this.Order = 'Order' in params ? params.Order : null;
 
     }
 }
@@ -157,15 +157,15 @@ class UserCmdTask extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TaskId = params.TaskId || null;
-        this.Status = params.Status || null;
-        this.Alias = params.Alias || null;
-        this.CmdId = params.CmdId || null;
-        this.InstanceCount = params.InstanceCount || null;
-        this.SuccessCount = params.SuccessCount || null;
-        this.FailureCount = params.FailureCount || null;
-        this.RunBeginTime = params.RunBeginTime || null;
-        this.RunEndTime = params.RunEndTime || null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.Alias = 'Alias' in params ? params.Alias : null;
+        this.CmdId = 'CmdId' in params ? params.CmdId : null;
+        this.InstanceCount = 'InstanceCount' in params ? params.InstanceCount : null;
+        this.SuccessCount = 'SuccessCount' in params ? params.SuccessCount : null;
+        this.FailureCount = 'FailureCount' in params ? params.FailureCount : null;
+        this.RunBeginTime = 'RunBeginTime' in params ? params.RunBeginTime : null;
+        this.RunEndTime = 'RunEndTime' in params ? params.RunEndTime : null;
 
     }
 }
@@ -211,10 +211,10 @@ class TaskOperationLog extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TaskStep = params.TaskStep || null;
-        this.Operator = params.Operator || null;
-        this.OperationDetail = params.OperationDetail || null;
-        this.OperationTime = params.OperationTime || null;
+        this.TaskStep = 'TaskStep' in params ? params.TaskStep : null;
+        this.Operator = 'Operator' in params ? params.Operator : null;
+        this.OperationDetail = 'OperationDetail' in params ? params.OperationDetail : null;
+        this.OperationTime = 'OperationTime' in params ? params.OperationTime : null;
 
     }
 }
@@ -260,10 +260,10 @@ class CreatePsaRegulationRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.PsaName = params.PsaName || null;
-        this.TaskTypeIds = params.TaskTypeIds || null;
-        this.RepairLimit = params.RepairLimit || null;
-        this.PsaDescription = params.PsaDescription || null;
+        this.PsaName = 'PsaName' in params ? params.PsaName : null;
+        this.TaskTypeIds = 'TaskTypeIds' in params ? params.TaskTypeIds : null;
+        this.RepairLimit = 'RepairLimit' in params ? params.RepairLimit : null;
+        this.PsaDescription = 'PsaDescription' in params ? params.PsaDescription : null;
 
     }
 }
@@ -303,7 +303,7 @@ class DescribeUserCmdTasksResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = params.TotalCount || null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
 
         if (params.UserCmdTasks) {
             this.UserCmdTasks = new Array();
@@ -313,7 +313,7 @@ class DescribeUserCmdTasksResponse extends  AbstractModel {
                 this.UserCmdTasks.push(obj);
             }
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -365,11 +365,11 @@ class DescribeDeviceOperationLogRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = params.InstanceId || null;
-        this.StartTime = params.StartTime || null;
-        this.EndTime = params.EndTime || null;
-        this.Offset = params.Offset || null;
-        this.Limit = params.Limit || null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
 
     }
 }
@@ -403,8 +403,8 @@ class DescribeDeviceInventoryResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.DeviceCount = params.DeviceCount || null;
-        this.RequestId = params.RequestId || null;
+        this.DeviceCount = 'DeviceCount' in params ? params.DeviceCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -447,7 +447,7 @@ class DescribeOsInfoResponse extends  AbstractModel {
                 this.OsInfoSet.push(obj);
             }
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -475,7 +475,7 @@ class DescribeOsInfoRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.DeviceClassCode = params.DeviceClassCode || null;
+        this.DeviceClassCode = 'DeviceClassCode' in params ? params.DeviceClassCode : null;
 
     }
 }
@@ -509,8 +509,8 @@ class FailedTaskInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = params.InstanceId || null;
-        this.ErrorMsg = params.ErrorMsg || null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.ErrorMsg = 'ErrorMsg' in params ? params.ErrorMsg : null;
 
     }
 }
@@ -550,7 +550,7 @@ class DescribeDevicePositionResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = params.TotalCount || null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
 
         if (params.DevicePositionInfoSet) {
             this.DevicePositionInfoSet = new Array();
@@ -560,7 +560,7 @@ class DescribeDevicePositionResponse extends  AbstractModel {
                 this.DevicePositionInfoSet.push(obj);
             }
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -588,7 +588,7 @@ class DeleteUserCmdsResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -718,19 +718,19 @@ class DescribeDevicesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Offset = params.Offset || null;
-        this.Limit = params.Limit || null;
-        this.DeviceClassCode = params.DeviceClassCode || null;
-        this.InstanceIds = params.InstanceIds || null;
-        this.WanIps = params.WanIps || null;
-        this.LanIps = params.LanIps || null;
-        this.Alias = params.Alias || null;
-        this.VagueIp = params.VagueIp || null;
-        this.DeadlineStartTime = params.DeadlineStartTime || null;
-        this.DeadlineEndTime = params.DeadlineEndTime || null;
-        this.AutoRenewFlag = params.AutoRenewFlag || null;
-        this.VpcId = params.VpcId || null;
-        this.SubnetId = params.SubnetId || null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.DeviceClassCode = 'DeviceClassCode' in params ? params.DeviceClassCode : null;
+        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
+        this.WanIps = 'WanIps' in params ? params.WanIps : null;
+        this.LanIps = 'LanIps' in params ? params.LanIps : null;
+        this.Alias = 'Alias' in params ? params.Alias : null;
+        this.VagueIp = 'VagueIp' in params ? params.VagueIp : null;
+        this.DeadlineStartTime = 'DeadlineStartTime' in params ? params.DeadlineStartTime : null;
+        this.DeadlineEndTime = 'DeadlineEndTime' in params ? params.DeadlineEndTime : null;
+        this.AutoRenewFlag = 'AutoRenewFlag' in params ? params.AutoRenewFlag : null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
 
         if (params.Tags) {
             this.Tags = new Array();
@@ -740,10 +740,10 @@ class DescribeDevicesRequest extends  AbstractModel {
                 this.Tags.push(obj);
             }
         }
-        this.DeviceType = params.DeviceType || null;
-        this.IsLuckyDevice = params.IsLuckyDevice || null;
-        this.OrderField = params.OrderField || null;
-        this.Order = params.Order || null;
+        this.DeviceType = 'DeviceType' in params ? params.DeviceType : null;
+        this.IsLuckyDevice = 'IsLuckyDevice' in params ? params.IsLuckyDevice : null;
+        this.OrderField = 'OrderField' in params ? params.OrderField : null;
+        this.Order = 'Order' in params ? params.Order : null;
 
     }
 }
@@ -777,8 +777,8 @@ class RebootDevicesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TaskId = params.TaskId || null;
-        this.RequestId = params.RequestId || null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -812,8 +812,8 @@ class ResetDevicePasswordRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceIds = params.InstanceIds || null;
-        this.Password = params.Password || null;
+        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
+        this.Password = 'Password' in params ? params.Password : null;
 
     }
 }
@@ -889,9 +889,9 @@ class UnbindPsaTagRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.PsaId = params.PsaId || null;
-        this.TagKey = params.TagKey || null;
-        this.TagValue = params.TagValue || null;
+        this.PsaId = 'PsaId' in params ? params.PsaId : null;
+        this.TagKey = 'TagKey' in params ? params.TagKey : null;
+        this.TagValue = 'TagValue' in params ? params.TagValue : null;
 
     }
 }
@@ -919,7 +919,7 @@ class ModifyPayModePre2PostResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1001,14 +1001,14 @@ class PsaRegulation extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.PsaId = params.PsaId || null;
-        this.PsaName = params.PsaName || null;
-        this.TagCount = params.TagCount || null;
-        this.InstanceCount = params.InstanceCount || null;
-        this.RepairCount = params.RepairCount || null;
-        this.RepairLimit = params.RepairLimit || null;
-        this.CreateTime = params.CreateTime || null;
-        this.PsaDescription = params.PsaDescription || null;
+        this.PsaId = 'PsaId' in params ? params.PsaId : null;
+        this.PsaName = 'PsaName' in params ? params.PsaName : null;
+        this.TagCount = 'TagCount' in params ? params.TagCount : null;
+        this.InstanceCount = 'InstanceCount' in params ? params.InstanceCount : null;
+        this.RepairCount = 'RepairCount' in params ? params.RepairCount : null;
+        this.RepairLimit = 'RepairLimit' in params ? params.RepairLimit : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.PsaDescription = 'PsaDescription' in params ? params.PsaDescription : null;
 
         if (params.Tags) {
             this.Tags = new Array();
@@ -1018,7 +1018,7 @@ class PsaRegulation extends  AbstractModel {
                 this.Tags.push(obj);
             }
         }
-        this.TaskTypeIds = params.TaskTypeIds || null;
+        this.TaskTypeIds = 'TaskTypeIds' in params ? params.TaskTypeIds : null;
 
     }
 }
@@ -1052,8 +1052,8 @@ class SuccessTaskInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = params.InstanceId || null;
-        this.TaskId = params.TaskId || null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
 
     }
 }
@@ -1102,8 +1102,8 @@ class DescribeTaskOperationLogResponse extends  AbstractModel {
                 this.TaskOperationLogSet.push(obj);
             }
         }
-        this.TotalCount = params.TotalCount || null;
-        this.RequestId = params.RequestId || null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1185,16 +1185,16 @@ class DescribeDeviceInventoryRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Zone = params.Zone || null;
-        this.DeviceClassCode = params.DeviceClassCode || null;
-        this.VpcId = params.VpcId || null;
-        this.SubnetId = params.SubnetId || null;
-        this.CpuId = params.CpuId || null;
-        this.DiskType = params.DiskType || null;
-        this.DiskSize = params.DiskSize || null;
-        this.DiskNum = params.DiskNum || null;
-        this.Mem = params.Mem || null;
-        this.HaveRaidCard = params.HaveRaidCard || null;
+        this.Zone = 'Zone' in params ? params.Zone : null;
+        this.DeviceClassCode = 'DeviceClassCode' in params ? params.DeviceClassCode : null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
+        this.CpuId = 'CpuId' in params ? params.CpuId : null;
+        this.DiskType = 'DiskType' in params ? params.DiskType : null;
+        this.DiskSize = 'DiskSize' in params ? params.DiskSize : null;
+        this.DiskNum = 'DiskNum' in params ? params.DiskNum : null;
+        this.Mem = 'Mem' in params ? params.Mem : null;
+        this.HaveRaidCard = 'HaveRaidCard' in params ? params.HaveRaidCard : null;
 
     }
 }
@@ -1237,7 +1237,7 @@ class DescribeDevicePriceInfoResponse extends  AbstractModel {
                 this.DevicePriceInfoSet.push(obj);
             }
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1265,7 +1265,7 @@ class ModifyDeviceAliasesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1323,12 +1323,12 @@ class DescribeUserCmdsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Offset = params.Offset || null;
-        this.Limit = params.Limit || null;
-        this.OrderField = params.OrderField || null;
-        this.Order = params.Order || null;
-        this.SearchKey = params.SearchKey || null;
-        this.CmdId = params.CmdId || null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.OrderField = 'OrderField' in params ? params.OrderField : null;
+        this.Order = 'Order' in params ? params.Order : null;
+        this.SearchKey = 'SearchKey' in params ? params.SearchKey : null;
+        this.CmdId = 'CmdId' in params ? params.CmdId : null;
 
     }
 }
@@ -1362,8 +1362,8 @@ class ModifyDeviceAutoRenewFlagRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.AutoRenewFlag = params.AutoRenewFlag || null;
-        this.InstanceIds = params.InstanceIds || null;
+        this.AutoRenewFlag = 'AutoRenewFlag' in params ? params.AutoRenewFlag : null;
+        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
 
     }
 }
@@ -1397,8 +1397,8 @@ class DeviceAlias extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = params.InstanceId || null;
-        this.Alias = params.Alias || null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Alias = 'Alias' in params ? params.Alias : null;
 
     }
 }
@@ -1438,7 +1438,7 @@ class DescribeUserCmdTaskInfoResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = params.TotalCount || null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
 
         if (params.UserCmdTaskInfoSet) {
             this.UserCmdTaskInfoSet = new Array();
@@ -1448,7 +1448,7 @@ class DescribeUserCmdTaskInfoResponse extends  AbstractModel {
                 this.UserCmdTaskInfoSet.push(obj);
             }
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1500,11 +1500,11 @@ class RunUserCmdRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.CmdId = params.CmdId || null;
-        this.UserName = params.UserName || null;
-        this.Password = params.Password || null;
-        this.InstanceIds = params.InstanceIds || null;
-        this.CmdParam = params.CmdParam || null;
+        this.CmdId = 'CmdId' in params ? params.CmdId : null;
+        this.UserName = 'UserName' in params ? params.UserName : null;
+        this.Password = 'Password' in params ? params.Password : null;
+        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
+        this.CmdParam = 'CmdParam' in params ? params.CmdParam : null;
 
     }
 }
@@ -1544,7 +1544,7 @@ class DescribeDevicesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = params.TotalCount || null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
 
         if (params.DeviceInfoSet) {
             this.DeviceInfoSet = new Array();
@@ -1554,7 +1554,7 @@ class DescribeDevicesResponse extends  AbstractModel {
                 this.DeviceInfoSet.push(obj);
             }
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1588,8 +1588,8 @@ class ResetDevicePasswordResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TaskId = params.TaskId || null;
-        this.RequestId = params.RequestId || null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1647,12 +1647,12 @@ class DescribeDevicePositionRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Offset = params.Offset || null;
-        this.Limit = params.Limit || null;
-        this.VpcId = params.VpcId || null;
-        this.SubnetId = params.SubnetId || null;
-        this.InstanceIds = params.InstanceIds || null;
-        this.Alias = params.Alias || null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
+        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
+        this.Alias = 'Alias' in params ? params.Alias : null;
 
     }
 }
@@ -1788,25 +1788,25 @@ class UserCmdTaskInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.AutoId = params.AutoId || null;
-        this.TaskId = params.TaskId || null;
-        this.RunBeginTime = params.RunBeginTime || null;
-        this.RunEndTime = params.RunEndTime || null;
-        this.Status = params.Status || null;
-        this.InstanceName = params.InstanceName || null;
-        this.InstanceId = params.InstanceId || null;
-        this.VpcName = params.VpcName || null;
-        this.VpcId = params.VpcId || null;
-        this.VpcCidrBlock = params.VpcCidrBlock || null;
-        this.SubnetName = params.SubnetName || null;
-        this.SubnetId = params.SubnetId || null;
-        this.SubnetCidrBlock = params.SubnetCidrBlock || null;
-        this.LanIp = params.LanIp || null;
-        this.CmdContent = params.CmdContent || null;
-        this.CmdParam = params.CmdParam || null;
-        this.CmdResult = params.CmdResult || null;
-        this.AppId = params.AppId || null;
-        this.LastShellExit = params.LastShellExit || null;
+        this.AutoId = 'AutoId' in params ? params.AutoId : null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.RunBeginTime = 'RunBeginTime' in params ? params.RunBeginTime : null;
+        this.RunEndTime = 'RunEndTime' in params ? params.RunEndTime : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.VpcName = 'VpcName' in params ? params.VpcName : null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.VpcCidrBlock = 'VpcCidrBlock' in params ? params.VpcCidrBlock : null;
+        this.SubnetName = 'SubnetName' in params ? params.SubnetName : null;
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
+        this.SubnetCidrBlock = 'SubnetCidrBlock' in params ? params.SubnetCidrBlock : null;
+        this.LanIp = 'LanIp' in params ? params.LanIp : null;
+        this.CmdContent = 'CmdContent' in params ? params.CmdContent : null;
+        this.CmdParam = 'CmdParam' in params ? params.CmdParam : null;
+        this.CmdResult = 'CmdResult' in params ? params.CmdResult : null;
+        this.AppId = 'AppId' in params ? params.AppId : null;
+        this.LastShellExit = 'LastShellExit' in params ? params.LastShellExit : null;
 
     }
 }
@@ -1876,14 +1876,14 @@ class UserCmd extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Alias = params.Alias || null;
-        this.AppId = params.AppId || null;
-        this.AutoId = params.AutoId || null;
-        this.CmdId = params.CmdId || null;
-        this.Content = params.Content || null;
-        this.CreateTime = params.CreateTime || null;
-        this.ModifyTime = params.ModifyTime || null;
-        this.OsType = params.OsType || null;
+        this.Alias = 'Alias' in params ? params.Alias : null;
+        this.AppId = 'AppId' in params ? params.AppId : null;
+        this.AutoId = 'AutoId' in params ? params.AutoId : null;
+        this.CmdId = 'CmdId' in params ? params.CmdId : null;
+        this.Content = 'Content' in params ? params.Content : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.ModifyTime = 'ModifyTime' in params ? params.ModifyTime : null;
+        this.OsType = 'OsType' in params ? params.OsType : null;
 
     }
 }
@@ -1983,19 +1983,19 @@ class DeviceClass extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.DeviceClassCode = params.DeviceClassCode || null;
-        this.CpuDescription = params.CpuDescription || null;
-        this.MemDescription = params.MemDescription || null;
-        this.DiskDescription = params.DiskDescription || null;
-        this.HaveRaidCard = params.HaveRaidCard || null;
-        this.NicDescription = params.NicDescription || null;
-        this.GpuDescription = params.GpuDescription || null;
-        this.Discount = params.Discount || null;
-        this.UnitPrice = params.UnitPrice || null;
-        this.RealPrice = params.RealPrice || null;
-        this.NormalPrice = params.NormalPrice || null;
-        this.DeviceType = params.DeviceType || null;
-        this.Series = params.Series || null;
+        this.DeviceClassCode = 'DeviceClassCode' in params ? params.DeviceClassCode : null;
+        this.CpuDescription = 'CpuDescription' in params ? params.CpuDescription : null;
+        this.MemDescription = 'MemDescription' in params ? params.MemDescription : null;
+        this.DiskDescription = 'DiskDescription' in params ? params.DiskDescription : null;
+        this.HaveRaidCard = 'HaveRaidCard' in params ? params.HaveRaidCard : null;
+        this.NicDescription = 'NicDescription' in params ? params.NicDescription : null;
+        this.GpuDescription = 'GpuDescription' in params ? params.GpuDescription : null;
+        this.Discount = 'Discount' in params ? params.Discount : null;
+        this.UnitPrice = 'UnitPrice' in params ? params.UnitPrice : null;
+        this.RealPrice = 'RealPrice' in params ? params.RealPrice : null;
+        this.NormalPrice = 'NormalPrice' in params ? params.NormalPrice : null;
+        this.DeviceType = 'DeviceType' in params ? params.DeviceType : null;
+        this.Series = 'Series' in params ? params.Series : null;
 
     }
 }
@@ -2044,7 +2044,7 @@ class DeletePsaRegulationRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.PsaId = params.PsaId || null;
+        this.PsaId = 'PsaId' in params ? params.PsaId : null;
 
     }
 }
@@ -2084,7 +2084,7 @@ class DescribeTaskInfoResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = params.TotalCount || null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
 
         if (params.TaskInfoSet) {
             this.TaskInfoSet = new Array();
@@ -2094,7 +2094,7 @@ class DescribeTaskInfoResponse extends  AbstractModel {
                 this.TaskInfoSet.push(obj);
             }
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2170,15 +2170,15 @@ class CreateSpotDeviceRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Zone = params.Zone || null;
-        this.ComputeType = params.ComputeType || null;
-        this.OsTypeId = params.OsTypeId || null;
-        this.VpcId = params.VpcId || null;
-        this.SubnetId = params.SubnetId || null;
-        this.GoodsNum = params.GoodsNum || null;
-        this.SpotStrategy = params.SpotStrategy || null;
-        this.SpotPriceLimit = params.SpotPriceLimit || null;
-        this.Passwd = params.Passwd || null;
+        this.Zone = 'Zone' in params ? params.Zone : null;
+        this.ComputeType = 'ComputeType' in params ? params.ComputeType : null;
+        this.OsTypeId = 'OsTypeId' in params ? params.OsTypeId : null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
+        this.GoodsNum = 'GoodsNum' in params ? params.GoodsNum : null;
+        this.SpotStrategy = 'SpotStrategy' in params ? params.SpotStrategy : null;
+        this.SpotPriceLimit = 'SpotPriceLimit' in params ? params.SpotPriceLimit : null;
+        this.Passwd = 'Passwd' in params ? params.Passwd : null;
 
     }
 }
@@ -2206,7 +2206,7 @@ class DeleteUserCmdsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.CmdIds = params.CmdIds || null;
+        this.CmdIds = 'CmdIds' in params ? params.CmdIds : null;
 
     }
 }
@@ -2270,13 +2270,13 @@ class OsInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.OsTypeId = params.OsTypeId || null;
-        this.OsName = params.OsName || null;
-        this.OsDescription = params.OsDescription || null;
-        this.OsEnglishDescription = params.OsEnglishDescription || null;
-        this.OsClass = params.OsClass || null;
-        this.ImageTag = params.ImageTag || null;
-        this.MaxPartitionSize = params.MaxPartitionSize || null;
+        this.OsTypeId = 'OsTypeId' in params ? params.OsTypeId : null;
+        this.OsName = 'OsName' in params ? params.OsName : null;
+        this.OsDescription = 'OsDescription' in params ? params.OsDescription : null;
+        this.OsEnglishDescription = 'OsEnglishDescription' in params ? params.OsEnglishDescription : null;
+        this.OsClass = 'OsClass' in params ? params.OsClass : null;
+        this.ImageTag = 'ImageTag' in params ? params.ImageTag : null;
+        this.MaxPartitionSize = 'MaxPartitionSize' in params ? params.MaxPartitionSize : null;
 
     }
 }
@@ -2304,7 +2304,7 @@ class ModifyUserCmdResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2344,9 +2344,9 @@ class CreateUserCmdRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Alias = params.Alias || null;
-        this.OsType = params.OsType || null;
-        this.Content = params.Content || null;
+        this.Alias = 'Alias' in params ? params.Alias : null;
+        this.OsType = 'OsType' in params ? params.OsType : null;
+        this.Content = 'Content' in params ? params.Content : null;
 
     }
 }
@@ -2374,7 +2374,7 @@ class ModifyPayModePre2PostRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceIds = params.InstanceIds || null;
+        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
 
     }
 }
@@ -2402,7 +2402,7 @@ class BindPsaTagResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2484,16 +2484,16 @@ class DeviceOperationLog extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Id = params.Id || null;
-        this.InstanceId = params.InstanceId || null;
-        this.TaskId = params.TaskId || null;
-        this.TaskName = params.TaskName || null;
-        this.TaskDescription = params.TaskDescription || null;
-        this.StartTime = params.StartTime || null;
-        this.EndTime = params.EndTime || null;
-        this.Status = params.Status || null;
-        this.OpUin = params.OpUin || null;
-        this.LogDescription = params.LogDescription || null;
+        this.Id = 'Id' in params ? params.Id : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.TaskName = 'TaskName' in params ? params.TaskName : null;
+        this.TaskDescription = 'TaskDescription' in params ? params.TaskDescription : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.OpUin = 'OpUin' in params ? params.OpUin : null;
+        this.LogDescription = 'LogDescription' in params ? params.LogDescription : null;
 
     }
 }
@@ -2536,7 +2536,7 @@ class DescribeRepairTaskConstantResponse extends  AbstractModel {
                 this.TaskTypeSet.push(obj);
             }
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2571,8 +2571,8 @@ class RepairTaskControlResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TaskId = params.TaskId || null;
-        this.RequestId = params.RequestId || null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2696,23 +2696,23 @@ class DevicePriceInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = params.InstanceId || null;
-        this.DeviceClassCode = params.DeviceClassCode || null;
-        this.IsElastic = params.IsElastic || null;
-        this.CpmPayMode = params.CpmPayMode || null;
-        this.CpuDescription = params.CpuDescription || null;
-        this.MemDescription = params.MemDescription || null;
-        this.DiskDescription = params.DiskDescription || null;
-        this.NicDescription = params.NicDescription || null;
-        this.GpuDescription = params.GpuDescription || null;
-        this.RaidDescription = params.RaidDescription || null;
-        this.Price = params.Price || null;
-        this.NormalPrice = params.NormalPrice || null;
-        this.TotalCost = params.TotalCost || null;
-        this.RealTotalCost = params.RealTotalCost || null;
-        this.TimeSpan = params.TimeSpan || null;
-        this.TimeUnit = params.TimeUnit || null;
-        this.GoodsCount = params.GoodsCount || null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.DeviceClassCode = 'DeviceClassCode' in params ? params.DeviceClassCode : null;
+        this.IsElastic = 'IsElastic' in params ? params.IsElastic : null;
+        this.CpmPayMode = 'CpmPayMode' in params ? params.CpmPayMode : null;
+        this.CpuDescription = 'CpuDescription' in params ? params.CpuDescription : null;
+        this.MemDescription = 'MemDescription' in params ? params.MemDescription : null;
+        this.DiskDescription = 'DiskDescription' in params ? params.DiskDescription : null;
+        this.NicDescription = 'NicDescription' in params ? params.NicDescription : null;
+        this.GpuDescription = 'GpuDescription' in params ? params.GpuDescription : null;
+        this.RaidDescription = 'RaidDescription' in params ? params.RaidDescription : null;
+        this.Price = 'Price' in params ? params.Price : null;
+        this.NormalPrice = 'NormalPrice' in params ? params.NormalPrice : null;
+        this.TotalCost = 'TotalCost' in params ? params.TotalCost : null;
+        this.RealTotalCost = 'RealTotalCost' in params ? params.RealTotalCost : null;
+        this.TimeSpan = 'TimeSpan' in params ? params.TimeSpan : null;
+        this.TimeUnit = 'TimeUnit' in params ? params.TimeUnit : null;
+        this.GoodsCount = 'GoodsCount' in params ? params.GoodsCount : null;
 
     }
 }
@@ -2740,7 +2740,7 @@ class RebootDevicesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceIds = params.InstanceIds || null;
+        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
 
     }
 }
@@ -2783,7 +2783,7 @@ class DescribeDeviceClassResponse extends  AbstractModel {
                 this.DeviceClassSet.push(obj);
             }
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2823,7 +2823,7 @@ class DescribePsaRegulationsResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = params.TotalCount || null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
 
         if (params.PsaRegulations) {
             this.PsaRegulations = new Array();
@@ -2833,7 +2833,7 @@ class DescribePsaRegulationsResponse extends  AbstractModel {
                 this.PsaRegulations.push(obj);
             }
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2882,8 +2882,8 @@ class DescribeDeviceOperationLogResponse extends  AbstractModel {
                 this.DeviceOperationLogSet.push(obj);
             }
         }
-        this.TotalCount = params.TotalCount || null;
-        this.RequestId = params.RequestId || null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2911,7 +2911,7 @@ class UnbindPsaTagResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2957,10 +2957,10 @@ class ModifyUserCmdRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.CmdId = params.CmdId || null;
-        this.Alias = params.Alias || null;
-        this.OsType = params.OsType || null;
-        this.Content = params.Content || null;
+        this.CmdId = 'CmdId' in params ? params.CmdId : null;
+        this.Alias = 'Alias' in params ? params.Alias : null;
+        this.OsType = 'OsType' in params ? params.OsType : null;
+        this.Content = 'Content' in params ? params.Content : null;
 
     }
 }
@@ -2988,7 +2988,7 @@ class SetOutBandVpnAuthPasswordResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3022,8 +3022,8 @@ class OfflineDevicesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TaskId = params.TaskId || null;
-        this.RequestId = params.RequestId || null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3057,8 +3057,8 @@ class CreatePsaRegulationResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.PsaId = params.PsaId || null;
-        this.RequestId = params.RequestId || null;
+        this.PsaId = 'PsaId' in params ? params.PsaId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3110,11 +3110,11 @@ class ModifyPsaRegulationRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.PsaId = params.PsaId || null;
-        this.PsaName = params.PsaName || null;
-        this.RepairLimit = params.RepairLimit || null;
-        this.PsaDescription = params.PsaDescription || null;
-        this.TaskTypeIds = params.TaskTypeIds || null;
+        this.PsaId = 'PsaId' in params ? params.PsaId : null;
+        this.PsaName = 'PsaName' in params ? params.PsaName : null;
+        this.RepairLimit = 'RepairLimit' in params ? params.RepairLimit : null;
+        this.PsaDescription = 'PsaDescription' in params ? params.PsaDescription : null;
+        this.TaskTypeIds = 'TaskTypeIds' in params ? params.TaskTypeIds : null;
 
     }
 }
@@ -3154,7 +3154,7 @@ class DescribeUserCmdsResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = params.TotalCount || null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
 
         if (params.UserCmds) {
             this.UserCmds = new Array();
@@ -3164,7 +3164,7 @@ class DescribeUserCmdsResponse extends  AbstractModel {
                 this.UserCmds.push(obj);
             }
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3222,7 +3222,7 @@ class RunUserCmdResponse extends  AbstractModel {
                 this.FailedTaskInfoSet.push(obj);
             }
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3250,7 +3250,7 @@ class ModifyDeviceAutoRenewFlagResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3284,8 +3284,8 @@ class SetOutBandVpnAuthPasswordRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Password = params.Password || null;
-        this.Operate = params.Operate || null;
+        this.Password = 'Password' in params ? params.Password : null;
+        this.Operate = 'Operate' in params ? params.Operate : null;
 
     }
 }
@@ -3364,12 +3364,12 @@ class DescribeUserCmdTaskInfoRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TaskId = params.TaskId || null;
-        this.Offset = params.Offset || null;
-        this.Limit = params.Limit || null;
-        this.OrderField = params.OrderField || null;
-        this.Order = params.Order || null;
-        this.SearchKey = params.SearchKey || null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.OrderField = 'OrderField' in params ? params.OrderField : null;
+        this.Order = 'Order' in params ? params.Order : null;
+        this.SearchKey = 'SearchKey' in params ? params.SearchKey : null;
 
     }
 }
@@ -3457,17 +3457,17 @@ class DevicePositionInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = params.InstanceId || null;
-        this.Zone = params.Zone || null;
-        this.VpcId = params.VpcId || null;
-        this.SubnetId = params.SubnetId || null;
-        this.LanIp = params.LanIp || null;
-        this.Alias = params.Alias || null;
-        this.RckName = params.RckName || null;
-        this.PosCode = params.PosCode || null;
-        this.SwitchName = params.SwitchName || null;
-        this.DeliverTime = params.DeliverTime || null;
-        this.Deadline = params.Deadline || null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Zone = 'Zone' in params ? params.Zone : null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
+        this.LanIp = 'LanIp' in params ? params.LanIp : null;
+        this.Alias = 'Alias' in params ? params.Alias : null;
+        this.RckName = 'RckName' in params ? params.RckName : null;
+        this.PosCode = 'PosCode' in params ? params.PosCode : null;
+        this.SwitchName = 'SwitchName' in params ? params.SwitchName : null;
+        this.DeliverTime = 'DeliverTime' in params ? params.DeliverTime : null;
+        this.Deadline = 'Deadline' in params ? params.Deadline : null;
 
     }
 }
@@ -3507,9 +3507,9 @@ class BindPsaTagRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.PsaId = params.PsaId || null;
-        this.TagKey = params.TagKey || null;
-        this.TagValue = params.TagValue || null;
+        this.PsaId = 'PsaId' in params ? params.PsaId : null;
+        this.TagKey = 'TagKey' in params ? params.TagKey : null;
+        this.TagValue = 'TagValue' in params ? params.TagValue : null;
 
     }
 }
@@ -3597,17 +3597,17 @@ class DescribeTaskInfoRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Offset = params.Offset || null;
-        this.Limit = params.Limit || null;
-        this.StartDate = params.StartDate || null;
-        this.EndDate = params.EndDate || null;
-        this.TaskStatus = params.TaskStatus || null;
-        this.OrderField = params.OrderField || null;
-        this.Order = params.Order || null;
-        this.TaskIds = params.TaskIds || null;
-        this.InstanceIds = params.InstanceIds || null;
-        this.Aliases = params.Aliases || null;
-        this.TaskTypeIds = params.TaskTypeIds || null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.StartDate = 'StartDate' in params ? params.StartDate : null;
+        this.EndDate = 'EndDate' in params ? params.EndDate : null;
+        this.TaskStatus = 'TaskStatus' in params ? params.TaskStatus : null;
+        this.OrderField = 'OrderField' in params ? params.OrderField : null;
+        this.Order = 'Order' in params ? params.Order : null;
+        this.TaskIds = 'TaskIds' in params ? params.TaskIds : null;
+        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
+        this.Aliases = 'Aliases' in params ? params.Aliases : null;
+        this.TaskTypeIds = 'TaskTypeIds' in params ? params.TaskTypeIds : null;
 
     }
 }
@@ -3641,8 +3641,8 @@ class RepairTaskControlRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TaskId = params.TaskId || null;
-        this.Operate = params.Operate || null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.Operate = 'Operate' in params ? params.Operate : null;
 
     }
 }
@@ -3682,9 +3682,9 @@ class CreateSpotDeviceResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ResourceIds = params.ResourceIds || null;
-        this.FlowId = params.FlowId || null;
-        this.RequestId = params.RequestId || null;
+        this.ResourceIds = 'ResourceIds' in params ? params.ResourceIds : null;
+        this.FlowId = 'FlowId' in params ? params.FlowId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3850,22 +3850,22 @@ class DeviceInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = params.InstanceId || null;
-        this.VpcId = params.VpcId || null;
-        this.SubnetId = params.SubnetId || null;
-        this.DeviceStatus = params.DeviceStatus || null;
-        this.OperateStatus = params.OperateStatus || null;
-        this.OsTypeId = params.OsTypeId || null;
-        this.RaidId = params.RaidId || null;
-        this.Alias = params.Alias || null;
-        this.AppId = params.AppId || null;
-        this.Zone = params.Zone || null;
-        this.WanIp = params.WanIp || null;
-        this.LanIp = params.LanIp || null;
-        this.DeliverTime = params.DeliverTime || null;
-        this.Deadline = params.Deadline || null;
-        this.AutoRenewFlag = params.AutoRenewFlag || null;
-        this.DeviceClassCode = params.DeviceClassCode || null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
+        this.DeviceStatus = 'DeviceStatus' in params ? params.DeviceStatus : null;
+        this.OperateStatus = 'OperateStatus' in params ? params.OperateStatus : null;
+        this.OsTypeId = 'OsTypeId' in params ? params.OsTypeId : null;
+        this.RaidId = 'RaidId' in params ? params.RaidId : null;
+        this.Alias = 'Alias' in params ? params.Alias : null;
+        this.AppId = 'AppId' in params ? params.AppId : null;
+        this.Zone = 'Zone' in params ? params.Zone : null;
+        this.WanIp = 'WanIp' in params ? params.WanIp : null;
+        this.LanIp = 'LanIp' in params ? params.LanIp : null;
+        this.DeliverTime = 'DeliverTime' in params ? params.DeliverTime : null;
+        this.Deadline = 'Deadline' in params ? params.Deadline : null;
+        this.AutoRenewFlag = 'AutoRenewFlag' in params ? params.AutoRenewFlag : null;
+        this.DeviceClassCode = 'DeviceClassCode' in params ? params.DeviceClassCode : null;
 
         if (params.Tags) {
             this.Tags = new Array();
@@ -3875,13 +3875,13 @@ class DeviceInfo extends  AbstractModel {
                 this.Tags.push(obj);
             }
         }
-        this.CpmPayMode = params.CpmPayMode || null;
-        this.DhcpIp = params.DhcpIp || null;
-        this.VpcName = params.VpcName || null;
-        this.SubnetName = params.SubnetName || null;
-        this.VpcCidrBlock = params.VpcCidrBlock || null;
-        this.SubnetCidrBlock = params.SubnetCidrBlock || null;
-        this.IsLuckyDevice = params.IsLuckyDevice || null;
+        this.CpmPayMode = 'CpmPayMode' in params ? params.CpmPayMode : null;
+        this.DhcpIp = 'DhcpIp' in params ? params.DhcpIp : null;
+        this.VpcName = 'VpcName' in params ? params.VpcName : null;
+        this.SubnetName = 'SubnetName' in params ? params.SubnetName : null;
+        this.VpcCidrBlock = 'VpcCidrBlock' in params ? params.VpcCidrBlock : null;
+        this.SubnetCidrBlock = 'SubnetCidrBlock' in params ? params.SubnetCidrBlock : null;
+        this.IsLuckyDevice = 'IsLuckyDevice' in params ? params.IsLuckyDevice : null;
 
     }
 }
@@ -3909,7 +3909,7 @@ class OfflineDevicesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceIds = params.InstanceIds || null;
+        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
 
     }
 }
@@ -3973,10 +3973,10 @@ class DescribePsaRegulationsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Limit = params.Limit || null;
-        this.Offset = params.Offset || null;
-        this.PsaIds = params.PsaIds || null;
-        this.PsaNames = params.PsaNames || null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.PsaIds = 'PsaIds' in params ? params.PsaIds : null;
+        this.PsaNames = 'PsaNames' in params ? params.PsaNames : null;
 
         if (params.Tags) {
             this.Tags = new Array();
@@ -3986,8 +3986,8 @@ class DescribePsaRegulationsRequest extends  AbstractModel {
                 this.Tags.push(obj);
             }
         }
-        this.OrderField = params.OrderField || null;
-        this.Order = params.Order || null;
+        this.OrderField = 'OrderField' in params ? params.OrderField : null;
+        this.Order = 'Order' in params ? params.Order : null;
 
     }
 }
@@ -4021,8 +4021,8 @@ class Tag extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TagKey = params.TagKey || null;
-        this.TagValues = params.TagValues || null;
+        this.TagKey = 'TagKey' in params ? params.TagKey : null;
+        this.TagValues = 'TagValues' in params ? params.TagValues : null;
 
     }
 }
@@ -4050,7 +4050,7 @@ class DeletePsaRegulationResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -4096,10 +4096,10 @@ class DescribeUserCmdTasksRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Offset = params.Offset || null;
-        this.Limit = params.Limit || null;
-        this.OrderField = params.OrderField || null;
-        this.Order = params.Order || null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.OrderField = 'OrderField' in params ? params.OrderField : null;
+        this.Order = 'Order' in params ? params.Order : null;
 
     }
 }
@@ -4139,9 +4139,9 @@ class DescribeDevicePriceInfoRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceIds = params.InstanceIds || null;
-        this.TimeUnit = params.TimeUnit || null;
-        this.TimeSpan = params.TimeSpan || null;
+        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
+        this.TimeUnit = 'TimeUnit' in params ? params.TimeUnit : null;
+        this.TimeSpan = 'TimeSpan' in params ? params.TimeSpan : null;
 
     }
 }
@@ -4175,8 +4175,8 @@ class CreateUserCmdResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.CmdId = params.CmdId || null;
-        this.RequestId = params.RequestId || null;
+        this.CmdId = 'CmdId' in params ? params.CmdId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -4216,9 +4216,9 @@ class TaskType extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TypeId = params.TypeId || null;
-        this.TypeName = params.TypeName || null;
-        this.TaskSubType = params.TaskSubType || null;
+        this.TypeId = 'TypeId' in params ? params.TypeId : null;
+        this.TypeName = 'TypeName' in params ? params.TypeName : null;
+        this.TaskSubType = 'TaskSubType' in params ? params.TaskSubType : null;
 
     }
 }
@@ -4372,28 +4372,28 @@ class TaskInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TaskId = params.TaskId || null;
-        this.InstanceId = params.InstanceId || null;
-        this.Alias = params.Alias || null;
-        this.TaskTypeId = params.TaskTypeId || null;
-        this.TaskStatus = params.TaskStatus || null;
-        this.CreateTime = params.CreateTime || null;
-        this.AuthTime = params.AuthTime || null;
-        this.EndTime = params.EndTime || null;
-        this.TaskDetail = params.TaskDetail || null;
-        this.DeviceStatus = params.DeviceStatus || null;
-        this.OperateStatus = params.OperateStatus || null;
-        this.Zone = params.Zone || null;
-        this.Region = params.Region || null;
-        this.VpcId = params.VpcId || null;
-        this.SubnetId = params.SubnetId || null;
-        this.SubnetName = params.SubnetName || null;
-        this.VpcName = params.VpcName || null;
-        this.VpcCidrBlock = params.VpcCidrBlock || null;
-        this.SubnetCidrBlock = params.SubnetCidrBlock || null;
-        this.WanIp = params.WanIp || null;
-        this.LanIp = params.LanIp || null;
-        this.MgtIp = params.MgtIp || null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Alias = 'Alias' in params ? params.Alias : null;
+        this.TaskTypeId = 'TaskTypeId' in params ? params.TaskTypeId : null;
+        this.TaskStatus = 'TaskStatus' in params ? params.TaskStatus : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.AuthTime = 'AuthTime' in params ? params.AuthTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.TaskDetail = 'TaskDetail' in params ? params.TaskDetail : null;
+        this.DeviceStatus = 'DeviceStatus' in params ? params.DeviceStatus : null;
+        this.OperateStatus = 'OperateStatus' in params ? params.OperateStatus : null;
+        this.Zone = 'Zone' in params ? params.Zone : null;
+        this.Region = 'Region' in params ? params.Region : null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
+        this.SubnetName = 'SubnetName' in params ? params.SubnetName : null;
+        this.VpcName = 'VpcName' in params ? params.VpcName : null;
+        this.VpcCidrBlock = 'VpcCidrBlock' in params ? params.VpcCidrBlock : null;
+        this.SubnetCidrBlock = 'SubnetCidrBlock' in params ? params.SubnetCidrBlock : null;
+        this.WanIp = 'WanIp' in params ? params.WanIp : null;
+        this.LanIp = 'LanIp' in params ? params.LanIp : null;
+        this.MgtIp = 'MgtIp' in params ? params.MgtIp : null;
 
     }
 }

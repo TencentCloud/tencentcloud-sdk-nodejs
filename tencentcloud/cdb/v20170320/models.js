@@ -51,8 +51,8 @@ class SellType extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TypeName = params.TypeName || null;
-        this.EngineVersion = params.EngineVersion || null;
+        this.TypeName = 'TypeName' in params ? params.TypeName : null;
+        this.EngineVersion = 'EngineVersion' in params ? params.EngineVersion : null;
 
         if (params.Configs) {
             this.Configs = new Array();
@@ -227,22 +227,22 @@ class CreateDBInstanceRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Memory = params.Memory || null;
-        this.Volume = params.Volume || null;
-        this.Period = params.Period || null;
-        this.GoodsNum = params.GoodsNum || null;
-        this.Zone = params.Zone || null;
-        this.UniqVpcId = params.UniqVpcId || null;
-        this.UniqSubnetId = params.UniqSubnetId || null;
-        this.ProjectId = params.ProjectId || null;
-        this.Port = params.Port || null;
-        this.InstanceRole = params.InstanceRole || null;
-        this.MasterInstanceId = params.MasterInstanceId || null;
-        this.EngineVersion = params.EngineVersion || null;
-        this.Password = params.Password || null;
-        this.ProtectMode = params.ProtectMode || null;
-        this.DeployMode = params.DeployMode || null;
-        this.SlaveZone = params.SlaveZone || null;
+        this.Memory = 'Memory' in params ? params.Memory : null;
+        this.Volume = 'Volume' in params ? params.Volume : null;
+        this.Period = 'Period' in params ? params.Period : null;
+        this.GoodsNum = 'GoodsNum' in params ? params.GoodsNum : null;
+        this.Zone = 'Zone' in params ? params.Zone : null;
+        this.UniqVpcId = 'UniqVpcId' in params ? params.UniqVpcId : null;
+        this.UniqSubnetId = 'UniqSubnetId' in params ? params.UniqSubnetId : null;
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+        this.Port = 'Port' in params ? params.Port : null;
+        this.InstanceRole = 'InstanceRole' in params ? params.InstanceRole : null;
+        this.MasterInstanceId = 'MasterInstanceId' in params ? params.MasterInstanceId : null;
+        this.EngineVersion = 'EngineVersion' in params ? params.EngineVersion : null;
+        this.Password = 'Password' in params ? params.Password : null;
+        this.ProtectMode = 'ProtectMode' in params ? params.ProtectMode : null;
+        this.DeployMode = 'DeployMode' in params ? params.DeployMode : null;
+        this.SlaveZone = 'SlaveZone' in params ? params.SlaveZone : null;
 
         if (params.ParamList) {
             this.ParamList = new Array();
@@ -252,17 +252,17 @@ class CreateDBInstanceRequest extends  AbstractModel {
                 this.ParamList.push(obj);
             }
         }
-        this.BackupZone = params.BackupZone || null;
-        this.AutoRenewFlag = params.AutoRenewFlag || null;
-        this.MasterRegion = params.MasterRegion || null;
-        this.SecurityGroup = params.SecurityGroup || null;
+        this.BackupZone = 'BackupZone' in params ? params.BackupZone : null;
+        this.AutoRenewFlag = 'AutoRenewFlag' in params ? params.AutoRenewFlag : null;
+        this.MasterRegion = 'MasterRegion' in params ? params.MasterRegion : null;
+        this.SecurityGroup = 'SecurityGroup' in params ? params.SecurityGroup : null;
 
         if (params.RoGroup) {
             let obj = new RoGroup();
             obj.deserialize(params.RoGroup)
             this.RoGroup = obj;
         }
-        this.InstanceName = params.InstanceName || null;
+        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
 
         if (params.ResourceTags) {
             this.ResourceTags = new Array();
@@ -323,7 +323,7 @@ class DescribeAccountPrivilegesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.GlobalPrivileges = params.GlobalPrivileges || null;
+        this.GlobalPrivileges = 'GlobalPrivileges' in params ? params.GlobalPrivileges : null;
 
         if (params.DatabasePrivileges) {
             this.DatabasePrivileges = new Array();
@@ -351,7 +351,7 @@ class DescribeAccountPrivilegesResponse extends  AbstractModel {
                 this.ColumnPrivileges.push(obj);
             }
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -403,11 +403,11 @@ class CreateDBImportJobRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = params.InstanceId || null;
-        this.FileName = params.FileName || null;
-        this.User = params.User || null;
-        this.Password = params.Password || null;
-        this.DbName = params.DbName || null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.FileName = 'FileName' in params ? params.FileName : null;
+        this.User = 'User' in params ? params.User : null;
+        this.Password = 'Password' in params ? params.Password : null;
+        this.DbName = 'DbName' in params ? params.DbName : null;
 
     }
 }
@@ -453,10 +453,10 @@ class DescribeDatabasesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = params.InstanceId || null;
-        this.Offset = params.Offset || null;
-        this.Limit = params.Limit || null;
-        this.DatabaseRegexp = params.DatabaseRegexp || null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.DatabaseRegexp = 'DatabaseRegexp' in params ? params.DatabaseRegexp : null;
 
     }
 }
@@ -484,7 +484,7 @@ class DescribeBackupConfigRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = params.InstanceId || null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
 
     }
 }
@@ -536,11 +536,11 @@ class RoVipInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RoVipStatus = params.RoVipStatus || null;
-        this.RoSubnetId = params.RoSubnetId || null;
-        this.RoVpcId = params.RoVpcId || null;
-        this.RoVport = params.RoVport || null;
-        this.RoVip = params.RoVip || null;
+        this.RoVipStatus = 'RoVipStatus' in params ? params.RoVipStatus : null;
+        this.RoSubnetId = 'RoSubnetId' in params ? params.RoSubnetId : null;
+        this.RoVpcId = 'RoVpcId' in params ? params.RoVpcId : null;
+        this.RoVport = 'RoVport' in params ? params.RoVport : null;
+        this.RoVip = 'RoVip' in params ? params.RoVip : null;
 
     }
 }
@@ -580,9 +580,9 @@ class DescribeAccountsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = params.InstanceId || null;
-        this.Offset = params.Offset || null;
-        this.Limit = params.Limit || null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
 
     }
 }
@@ -610,7 +610,7 @@ class StopDBImportJobRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.AsyncRequestId = params.AsyncRequestId || null;
+        this.AsyncRequestId = 'AsyncRequestId' in params ? params.AsyncRequestId : null;
 
     }
 }
@@ -638,7 +638,7 @@ class StopDBImportJobResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -672,8 +672,8 @@ class Parameter extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Name = params.Name || null;
-        this.CurrentValue = params.CurrentValue || null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.CurrentValue = 'CurrentValue' in params ? params.CurrentValue : null;
 
     }
 }
@@ -701,7 +701,7 @@ class DescribeDBInstanceRebootTimeRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceIds = params.InstanceIds || null;
+        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
 
     }
 }
@@ -741,9 +741,9 @@ class DescribeSlowLogsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = params.InstanceId || null;
-        this.Offset = params.Offset || null;
-        this.Limit = params.Limit || null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
 
     }
 }
@@ -795,11 +795,11 @@ class Inbound extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Action = params.Action || null;
-        this.CidrIp = params.CidrIp || null;
-        this.PortRange = params.PortRange || null;
-        this.IpProtocol = params.IpProtocol || null;
-        this.Dir = params.Dir || null;
+        this.Action = 'Action' in params ? params.Action : null;
+        this.CidrIp = 'CidrIp' in params ? params.CidrIp : null;
+        this.PortRange = 'PortRange' in params ? params.PortRange : null;
+        this.IpProtocol = 'IpProtocol' in params ? params.IpProtocol : null;
+        this.Dir = 'Dir' in params ? params.Dir : null;
 
     }
 }
@@ -833,8 +833,8 @@ class AssociateSecurityGroupsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.SecurityGroupId = params.SecurityGroupId || null;
-        this.InstanceIds = params.InstanceIds || null;
+        this.SecurityGroupId = 'SecurityGroupId' in params ? params.SecurityGroupId : null;
+        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
 
     }
 }
@@ -868,8 +868,8 @@ class CreateAccountsResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.AsyncRequestId = params.AsyncRequestId || null;
-        this.RequestId = params.RequestId || null;
+        this.AsyncRequestId = 'AsyncRequestId' in params ? params.AsyncRequestId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -921,10 +921,10 @@ class RegionSellConf extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RegionName = params.RegionName || null;
-        this.Area = params.Area || null;
-        this.IsDefaultRegion = params.IsDefaultRegion || null;
-        this.Region = params.Region || null;
+        this.RegionName = 'RegionName' in params ? params.RegionName : null;
+        this.Area = 'Area' in params ? params.Area : null;
+        this.IsDefaultRegion = 'IsDefaultRegion' in params ? params.IsDefaultRegion : null;
+        this.Region = 'Region' in params ? params.Region : null;
 
         if (params.ZonesConf) {
             this.ZonesConf = new Array();
@@ -979,9 +979,9 @@ class InstanceRollbackRangeTime extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Code = params.Code || null;
-        this.Message = params.Message || null;
-        this.InstanceId = params.InstanceId || null;
+        this.Code = 'Code' in params ? params.Code : null;
+        this.Message = 'Message' in params ? params.Message : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
 
         if (params.Times) {
             this.Times = new Array();
@@ -1048,17 +1048,17 @@ class SqlFileInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.UploadTime = params.UploadTime || null;
+        this.UploadTime = 'UploadTime' in params ? params.UploadTime : null;
 
         if (params.UploadInfo) {
             let obj = new UploadInfo();
             obj.deserialize(params.UploadInfo)
             this.UploadInfo = obj;
         }
-        this.FileName = params.FileName || null;
-        this.FileSize = params.FileSize || null;
-        this.IsUploadFinished = params.IsUploadFinished || null;
-        this.FileId = params.FileId || null;
+        this.FileName = 'FileName' in params ? params.FileName : null;
+        this.FileSize = 'FileSize' in params ? params.FileSize : null;
+        this.IsUploadFinished = 'IsUploadFinished' in params ? params.IsUploadFinished : null;
+        this.FileId = 'FileId' in params ? params.FileId : null;
 
     }
 }
@@ -1098,9 +1098,9 @@ class DescribeTablesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = params.TotalCount || null;
-        this.Items = params.Items || null;
-        this.RequestId = params.RequestId || null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.Items = 'Items' in params ? params.Items : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1200,19 +1200,19 @@ class SellConfig extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Device = params.Device || null;
-        this.Type = params.Type || null;
-        this.CdbType = params.CdbType || null;
-        this.Memory = params.Memory || null;
-        this.Cpu = params.Cpu || null;
-        this.VolumeMin = params.VolumeMin || null;
-        this.VolumeMax = params.VolumeMax || null;
-        this.VolumeStep = params.VolumeStep || null;
-        this.Connection = params.Connection || null;
-        this.Qps = params.Qps || null;
-        this.Iops = params.Iops || null;
-        this.Info = params.Info || null;
-        this.Status = params.Status || null;
+        this.Device = 'Device' in params ? params.Device : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.CdbType = 'CdbType' in params ? params.CdbType : null;
+        this.Memory = 'Memory' in params ? params.Memory : null;
+        this.Cpu = 'Cpu' in params ? params.Cpu : null;
+        this.VolumeMin = 'VolumeMin' in params ? params.VolumeMin : null;
+        this.VolumeMax = 'VolumeMax' in params ? params.VolumeMax : null;
+        this.VolumeStep = 'VolumeStep' in params ? params.VolumeStep : null;
+        this.Connection = 'Connection' in params ? params.Connection : null;
+        this.Qps = 'Qps' in params ? params.Qps : null;
+        this.Iops = 'Iops' in params ? params.Iops : null;
+        this.Info = 'Info' in params ? params.Info : null;
+        this.Status = 'Status' in params ? params.Status : null;
 
     }
 }
@@ -1255,7 +1255,7 @@ class DescribeDBSecurityGroupsResponse extends  AbstractModel {
                 this.Groups.push(obj);
             }
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1385,24 +1385,24 @@ class MasterInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Region = params.Region || null;
-        this.RegionId = params.RegionId || null;
-        this.ZoneId = params.ZoneId || null;
-        this.Zone = params.Zone || null;
-        this.InstanceId = params.InstanceId || null;
-        this.ResourceId = params.ResourceId || null;
-        this.Status = params.Status || null;
-        this.InstanceName = params.InstanceName || null;
-        this.InstanceType = params.InstanceType || null;
-        this.TaskStatus = params.TaskStatus || null;
-        this.Memory = params.Memory || null;
-        this.Volume = params.Volume || null;
-        this.DeviceType = params.DeviceType || null;
-        this.Qps = params.Qps || null;
-        this.VpcId = params.VpcId || null;
-        this.SubnetId = params.SubnetId || null;
-        this.ExClusterId = params.ExClusterId || null;
-        this.ExClusterName = params.ExClusterName || null;
+        this.Region = 'Region' in params ? params.Region : null;
+        this.RegionId = 'RegionId' in params ? params.RegionId : null;
+        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
+        this.Zone = 'Zone' in params ? params.Zone : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.ResourceId = 'ResourceId' in params ? params.ResourceId : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
+        this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
+        this.TaskStatus = 'TaskStatus' in params ? params.TaskStatus : null;
+        this.Memory = 'Memory' in params ? params.Memory : null;
+        this.Volume = 'Volume' in params ? params.Volume : null;
+        this.DeviceType = 'DeviceType' in params ? params.DeviceType : null;
+        this.Qps = 'Qps' in params ? params.Qps : null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
+        this.ExClusterId = 'ExClusterId' in params ? params.ExClusterId : null;
+        this.ExClusterName = 'ExClusterName' in params ? params.ExClusterName : null;
 
     }
 }
@@ -1442,7 +1442,7 @@ class DescribeBinlogsResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = params.TotalCount || null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
 
         if (params.Items) {
             this.Items = new Array();
@@ -1452,7 +1452,7 @@ class DescribeBinlogsResponse extends  AbstractModel {
                 this.Items.push(obj);
             }
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1486,8 +1486,8 @@ class DBSwitchInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.SwitchTime = params.SwitchTime || null;
-        this.SwitchType = params.SwitchType || null;
+        this.SwitchTime = 'SwitchTime' in params ? params.SwitchTime : null;
+        this.SwitchType = 'SwitchType' in params ? params.SwitchType : null;
 
     }
 }
@@ -1527,9 +1527,9 @@ class DescribeDBPriceResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Price = params.Price || null;
-        this.OriginalPrice = params.OriginalPrice || null;
-        this.RequestId = params.RequestId || null;
+        this.Price = 'Price' in params ? params.Price : null;
+        this.OriginalPrice = 'OriginalPrice' in params ? params.OriginalPrice : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1569,9 +1569,9 @@ class DescribeTasksResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = params.TotalCount || null;
-        this.Items = params.Items || null;
-        this.RequestId = params.RequestId || null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.Items = 'Items' in params ? params.Items : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1599,7 +1599,7 @@ class DescribeRollbackRangeTimeRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceIds = params.InstanceIds || null;
+        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
 
     }
 }
@@ -1639,9 +1639,9 @@ class DescribeBackupsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = params.InstanceId || null;
-        this.Offset = params.Offset || null;
-        this.Limit = params.Limit || null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
 
     }
 }
@@ -1669,7 +1669,7 @@ class ModifyDBInstanceProjectResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1703,8 +1703,8 @@ class IsolateDBInstanceResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.AsyncRequestId = params.AsyncRequestId || null;
-        this.RequestId = params.RequestId || null;
+        this.AsyncRequestId = 'AsyncRequestId' in params ? params.AsyncRequestId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1738,8 +1738,8 @@ class DescribeDBInstanceGTIDResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.IsGTIDOpen = params.IsGTIDOpen || null;
-        this.RequestId = params.RequestId || null;
+        this.IsGTIDOpen = 'IsGTIDOpen' in params ? params.IsGTIDOpen : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1773,8 +1773,8 @@ class OpenDBInstanceGTIDResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.AsyncRequestId = params.AsyncRequestId || null;
-        this.RequestId = params.RequestId || null;
+        this.AsyncRequestId = 'AsyncRequestId' in params ? params.AsyncRequestId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1835,7 +1835,7 @@ class DescribeDBInstanceRebootTimeResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = params.TotalCount || null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
 
         if (params.Items) {
             this.Items = new Array();
@@ -1845,7 +1845,7 @@ class DescribeDBInstanceRebootTimeResponse extends  AbstractModel {
                 this.Items.push(obj);
             }
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1909,13 +1909,13 @@ class DrInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Status = params.Status || null;
-        this.Zone = params.Zone || null;
-        this.InstanceId = params.InstanceId || null;
-        this.Region = params.Region || null;
-        this.SyncStatus = params.SyncStatus || null;
-        this.InstanceName = params.InstanceName || null;
-        this.InstanceType = params.InstanceType || null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.Zone = 'Zone' in params ? params.Zone : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Region = 'Region' in params ? params.Region : null;
+        this.SyncStatus = 'SyncStatus' in params ? params.SyncStatus : null;
+        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
+        this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
 
     }
 }
@@ -2003,14 +2003,14 @@ class RoGroup extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RoGroupMode = params.RoGroupMode || null;
-        this.RoGroupId = params.RoGroupId || null;
-        this.RoGroupName = params.RoGroupName || null;
-        this.RoOfflineDelay = params.RoOfflineDelay || null;
-        this.RoMaxDelayTime = params.RoMaxDelayTime || null;
-        this.MinRoInGroup = params.MinRoInGroup || null;
-        this.WeightMode = params.WeightMode || null;
-        this.Weight = params.Weight || null;
+        this.RoGroupMode = 'RoGroupMode' in params ? params.RoGroupMode : null;
+        this.RoGroupId = 'RoGroupId' in params ? params.RoGroupId : null;
+        this.RoGroupName = 'RoGroupName' in params ? params.RoGroupName : null;
+        this.RoOfflineDelay = 'RoOfflineDelay' in params ? params.RoOfflineDelay : null;
+        this.RoMaxDelayTime = 'RoMaxDelayTime' in params ? params.RoMaxDelayTime : null;
+        this.MinRoInGroup = 'MinRoInGroup' in params ? params.MinRoInGroup : null;
+        this.WeightMode = 'WeightMode' in params ? params.WeightMode : null;
+        this.Weight = 'Weight' in params ? params.Weight : null;
 
         if (params.RoInstances) {
             this.RoInstances = new Array();
@@ -2020,8 +2020,8 @@ class RoGroup extends  AbstractModel {
                 this.RoInstances.push(obj);
             }
         }
-        this.Vip = params.Vip || null;
-        this.Vport = params.Vport || null;
+        this.Vip = 'Vip' in params ? params.Vip : null;
+        this.Vport = 'Vport' in params ? params.Vport : null;
 
     }
 }
@@ -2097,15 +2097,15 @@ class ParameterDetail extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Name = params.Name || null;
-        this.ParamType = params.ParamType || null;
-        this.Default = params.Default || null;
-        this.Description = params.Description || null;
-        this.CurrentValue = params.CurrentValue || null;
-        this.NeedReboot = params.NeedReboot || null;
-        this.Max = params.Max || null;
-        this.Min = params.Min || null;
-        this.EnumValue = params.EnumValue || null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.ParamType = 'ParamType' in params ? params.ParamType : null;
+        this.Default = 'Default' in params ? params.Default : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.CurrentValue = 'CurrentValue' in params ? params.CurrentValue : null;
+        this.NeedReboot = 'NeedReboot' in params ? params.NeedReboot : null;
+        this.Max = 'Max' in params ? params.Max : null;
+        this.Min = 'Min' in params ? params.Min : null;
+        this.EnumValue = 'EnumValue' in params ? params.EnumValue : null;
 
     }
 }
@@ -2139,8 +2139,8 @@ class ModifyAccountDescriptionResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.AsyncRequestId = params.AsyncRequestId || null;
-        this.RequestId = params.RequestId || null;
+        this.AsyncRequestId = 'AsyncRequestId' in params ? params.AsyncRequestId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2168,7 +2168,7 @@ class SwitchForUpgradeRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = params.InstanceId || null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
 
     }
 }
@@ -2202,7 +2202,7 @@ class ModifyInstanceParamRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceIds = params.InstanceIds || null;
+        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
 
         if (params.ParamList) {
             this.ParamList = new Array();
@@ -2251,9 +2251,9 @@ class CreateDBInstanceHourResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.DealIds = params.DealIds || null;
-        this.InstanceIds = params.InstanceIds || null;
-        this.RequestId = params.RequestId || null;
+        this.DealIds = 'DealIds' in params ? params.DealIds : null;
+        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2311,12 +2311,12 @@ class BinlogInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Name = params.Name || null;
-        this.Size = params.Size || null;
-        this.Date = params.Date || null;
-        this.IntranetUrl = params.IntranetUrl || null;
-        this.InternetUrl = params.InternetUrl || null;
-        this.Type = params.Type || null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Size = 'Size' in params ? params.Size : null;
+        this.Date = 'Date' in params ? params.Date : null;
+        this.IntranetUrl = 'IntranetUrl' in params ? params.IntranetUrl : null;
+        this.InternetUrl = 'InternetUrl' in params ? params.InternetUrl : null;
+        this.Type = 'Type' in params ? params.Type : null;
 
     }
 }
@@ -2386,14 +2386,14 @@ class DescribeTasksRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = params.InstanceId || null;
-        this.AsyncRequestId = params.AsyncRequestId || null;
-        this.TaskTypes = params.TaskTypes || null;
-        this.TaskStatus = params.TaskStatus || null;
-        this.StartTimeBegin = params.StartTimeBegin || null;
-        this.StartTimeEnd = params.StartTimeEnd || null;
-        this.Offset = params.Offset || null;
-        this.Limit = params.Limit || null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.AsyncRequestId = 'AsyncRequestId' in params ? params.AsyncRequestId : null;
+        this.TaskTypes = 'TaskTypes' in params ? params.TaskTypes : null;
+        this.TaskStatus = 'TaskStatus' in params ? params.TaskStatus : null;
+        this.StartTimeBegin = 'StartTimeBegin' in params ? params.StartTimeBegin : null;
+        this.StartTimeEnd = 'StartTimeEnd' in params ? params.StartTimeEnd : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
 
     }
 }
@@ -2421,7 +2421,7 @@ class OpenDBInstanceGTIDRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = params.InstanceId || null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
 
     }
 }
@@ -2521,19 +2521,19 @@ class ImportRecord extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Status = params.Status || null;
-        this.Code = params.Code || null;
-        this.CostTime = params.CostTime || null;
-        this.InstanceId = params.InstanceId || null;
-        this.WorkId = params.WorkId || null;
-        this.FileName = params.FileName || null;
-        this.Process = params.Process || null;
-        this.CreateTime = params.CreateTime || null;
-        this.FileSize = params.FileSize || null;
-        this.Message = params.Message || null;
-        this.JobId = params.JobId || null;
-        this.DbName = params.DbName || null;
-        this.AsyncRequestId = params.AsyncRequestId || null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.Code = 'Code' in params ? params.Code : null;
+        this.CostTime = 'CostTime' in params ? params.CostTime : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.WorkId = 'WorkId' in params ? params.WorkId : null;
+        this.FileName = 'FileName' in params ? params.FileName : null;
+        this.Process = 'Process' in params ? params.Process : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.FileSize = 'FileSize' in params ? params.FileSize : null;
+        this.Message = 'Message' in params ? params.Message : null;
+        this.JobId = 'JobId' in params ? params.JobId : null;
+        this.DbName = 'DbName' in params ? params.DbName : null;
+        this.AsyncRequestId = 'AsyncRequestId' in params ? params.AsyncRequestId : null;
 
     }
 }
@@ -2579,7 +2579,7 @@ class CreateAccountsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = params.InstanceId || null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
 
         if (params.Accounts) {
             this.Accounts = new Array();
@@ -2589,8 +2589,8 @@ class CreateAccountsRequest extends  AbstractModel {
                 this.Accounts.push(obj);
             }
         }
-        this.Password = params.Password || null;
-        this.Description = params.Description || null;
+        this.Password = 'Password' in params ? params.Password : null;
+        this.Description = 'Description' in params ? params.Description : null;
 
     }
 }
@@ -2750,19 +2750,19 @@ class CreateDBInstanceHourRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.GoodsNum = params.GoodsNum || null;
-        this.Memory = params.Memory || null;
-        this.Volume = params.Volume || null;
-        this.EngineVersion = params.EngineVersion || null;
-        this.UniqVpcId = params.UniqVpcId || null;
-        this.UniqSubnetId = params.UniqSubnetId || null;
-        this.ProjectId = params.ProjectId || null;
-        this.Zone = params.Zone || null;
-        this.MasterInstanceId = params.MasterInstanceId || null;
-        this.InstanceRole = params.InstanceRole || null;
-        this.MasterRegion = params.MasterRegion || null;
-        this.Port = params.Port || null;
-        this.Password = params.Password || null;
+        this.GoodsNum = 'GoodsNum' in params ? params.GoodsNum : null;
+        this.Memory = 'Memory' in params ? params.Memory : null;
+        this.Volume = 'Volume' in params ? params.Volume : null;
+        this.EngineVersion = 'EngineVersion' in params ? params.EngineVersion : null;
+        this.UniqVpcId = 'UniqVpcId' in params ? params.UniqVpcId : null;
+        this.UniqSubnetId = 'UniqSubnetId' in params ? params.UniqSubnetId : null;
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+        this.Zone = 'Zone' in params ? params.Zone : null;
+        this.MasterInstanceId = 'MasterInstanceId' in params ? params.MasterInstanceId : null;
+        this.InstanceRole = 'InstanceRole' in params ? params.InstanceRole : null;
+        this.MasterRegion = 'MasterRegion' in params ? params.MasterRegion : null;
+        this.Port = 'Port' in params ? params.Port : null;
+        this.Password = 'Password' in params ? params.Password : null;
 
         if (params.ParamList) {
             this.ParamList = new Array();
@@ -2772,19 +2772,19 @@ class CreateDBInstanceHourRequest extends  AbstractModel {
                 this.ParamList.push(obj);
             }
         }
-        this.ProtectMode = params.ProtectMode || null;
-        this.DeployMode = params.DeployMode || null;
-        this.SlaveZone = params.SlaveZone || null;
-        this.BackupZone = params.BackupZone || null;
-        this.SecurityGroup = params.SecurityGroup || null;
+        this.ProtectMode = 'ProtectMode' in params ? params.ProtectMode : null;
+        this.DeployMode = 'DeployMode' in params ? params.DeployMode : null;
+        this.SlaveZone = 'SlaveZone' in params ? params.SlaveZone : null;
+        this.BackupZone = 'BackupZone' in params ? params.BackupZone : null;
+        this.SecurityGroup = 'SecurityGroup' in params ? params.SecurityGroup : null;
 
         if (params.RoGroup) {
             let obj = new RoGroup();
             obj.deserialize(params.RoGroup)
             this.RoGroup = obj;
         }
-        this.AutoRenewFlag = params.AutoRenewFlag || null;
-        this.InstanceName = params.InstanceName || null;
+        this.AutoRenewFlag = 'AutoRenewFlag' in params ? params.AutoRenewFlag : null;
+        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
 
         if (params.ResourceTags) {
             this.ResourceTags = new Array();
@@ -2833,7 +2833,7 @@ class DescribeSlowLogsResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = params.TotalCount || null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
 
         if (params.Items) {
             this.Items = new Array();
@@ -2843,7 +2843,7 @@ class DescribeSlowLogsResponse extends  AbstractModel {
                 this.Items.push(obj);
             }
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2895,9 +2895,9 @@ class RollbackInstancesInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = params.InstanceId || null;
-        this.Strategy = params.Strategy || null;
-        this.RollbackTime = params.RollbackTime || null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Strategy = 'Strategy' in params ? params.Strategy : null;
+        this.RollbackTime = 'RollbackTime' in params ? params.RollbackTime : null;
 
         if (params.Databases) {
             this.Databases = new Array();
@@ -2997,16 +2997,16 @@ class BackupInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Name = params.Name || null;
-        this.Size = params.Size || null;
-        this.Date = params.Date || null;
-        this.IntranetUrl = params.IntranetUrl || null;
-        this.InternetUrl = params.InternetUrl || null;
-        this.Type = params.Type || null;
-        this.BackupId = params.BackupId || null;
-        this.Status = params.Status || null;
-        this.FinishTime = params.FinishTime || null;
-        this.Creator = params.Creator || null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Size = 'Size' in params ? params.Size : null;
+        this.Date = 'Date' in params ? params.Date : null;
+        this.IntranetUrl = 'IntranetUrl' in params ? params.IntranetUrl : null;
+        this.InternetUrl = 'InternetUrl' in params ? params.InternetUrl : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.BackupId = 'BackupId' in params ? params.BackupId : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.FinishTime = 'FinishTime' in params ? params.FinishTime : null;
+        this.Creator = 'Creator' in params ? params.Creator : null;
 
     }
 }
@@ -3040,8 +3040,8 @@ class CloseWanServiceResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.AsyncRequestId = params.AsyncRequestId || null;
-        this.RequestId = params.RequestId || null;
+        this.AsyncRequestId = 'AsyncRequestId' in params ? params.AsyncRequestId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3213,31 +3213,31 @@ class DescribeDBInstancesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ProjectId = params.ProjectId || null;
-        this.InstanceTypes = params.InstanceTypes || null;
-        this.Vips = params.Vips || null;
-        this.Status = params.Status || null;
-        this.Offset = params.Offset || null;
-        this.Limit = params.Limit || null;
-        this.SecurityGroupId = params.SecurityGroupId || null;
-        this.PayTypes = params.PayTypes || null;
-        this.InstanceNames = params.InstanceNames || null;
-        this.TaskStatus = params.TaskStatus || null;
-        this.EngineVersions = params.EngineVersions || null;
-        this.VpcIds = params.VpcIds || null;
-        this.ZoneIds = params.ZoneIds || null;
-        this.SubnetIds = params.SubnetIds || null;
-        this.CdbErrors = params.CdbErrors || null;
-        this.OrderBy = params.OrderBy || null;
-        this.OrderDirection = params.OrderDirection || null;
-        this.WithSecurityGroup = params.WithSecurityGroup || null;
-        this.WithExCluster = params.WithExCluster || null;
-        this.ExClusterId = params.ExClusterId || null;
-        this.InstanceIds = params.InstanceIds || null;
-        this.InitFlag = params.InitFlag || null;
-        this.WithDr = params.WithDr || null;
-        this.WithRo = params.WithRo || null;
-        this.WithMaster = params.WithMaster || null;
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+        this.InstanceTypes = 'InstanceTypes' in params ? params.InstanceTypes : null;
+        this.Vips = 'Vips' in params ? params.Vips : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.SecurityGroupId = 'SecurityGroupId' in params ? params.SecurityGroupId : null;
+        this.PayTypes = 'PayTypes' in params ? params.PayTypes : null;
+        this.InstanceNames = 'InstanceNames' in params ? params.InstanceNames : null;
+        this.TaskStatus = 'TaskStatus' in params ? params.TaskStatus : null;
+        this.EngineVersions = 'EngineVersions' in params ? params.EngineVersions : null;
+        this.VpcIds = 'VpcIds' in params ? params.VpcIds : null;
+        this.ZoneIds = 'ZoneIds' in params ? params.ZoneIds : null;
+        this.SubnetIds = 'SubnetIds' in params ? params.SubnetIds : null;
+        this.CdbErrors = 'CdbErrors' in params ? params.CdbErrors : null;
+        this.OrderBy = 'OrderBy' in params ? params.OrderBy : null;
+        this.OrderDirection = 'OrderDirection' in params ? params.OrderDirection : null;
+        this.WithSecurityGroup = 'WithSecurityGroup' in params ? params.WithSecurityGroup : null;
+        this.WithExCluster = 'WithExCluster' in params ? params.WithExCluster : null;
+        this.ExClusterId = 'ExClusterId' in params ? params.ExClusterId : null;
+        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
+        this.InitFlag = 'InitFlag' in params ? params.InitFlag : null;
+        this.WithDr = 'WithDr' in params ? params.WithDr : null;
+        this.WithRo = 'WithRo' in params ? params.WithRo : null;
+        this.WithMaster = 'WithMaster' in params ? params.WithMaster : null;
 
     }
 }
@@ -3265,7 +3265,7 @@ class DescribeDBSecurityGroupsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = params.InstanceId || null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
 
     }
 }
@@ -3299,8 +3299,8 @@ class ModifyDBInstanceVipVportResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.AsyncRequestId = params.AsyncRequestId || null;
-        this.RequestId = params.RequestId || null;
+        this.AsyncRequestId = 'AsyncRequestId' in params ? params.AsyncRequestId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3340,7 +3340,7 @@ class DescribeDBSwitchRecordsResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = params.TotalCount || null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
 
         if (params.Items) {
             this.Items = new Array();
@@ -3350,7 +3350,7 @@ class DescribeDBSwitchRecordsResponse extends  AbstractModel {
                 this.Items.push(obj);
             }
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3378,7 +3378,7 @@ class TableName extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TableName = params.TableName || null;
+        this.TableName = 'TableName' in params ? params.TableName : null;
 
     }
 }
@@ -3412,8 +3412,8 @@ class RenewDBInstanceRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = params.InstanceId || null;
-        this.TimeSpan = params.TimeSpan || null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.TimeSpan = 'TimeSpan' in params ? params.TimeSpan : null;
 
     }
 }
@@ -3471,12 +3471,12 @@ class SlowLogInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Name = params.Name || null;
-        this.Size = params.Size || null;
-        this.Date = params.Date || null;
-        this.IntranetUrl = params.IntranetUrl || null;
-        this.InternetUrl = params.InternetUrl || null;
-        this.Type = params.Type || null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Size = 'Size' in params ? params.Size : null;
+        this.Date = 'Date' in params ? params.Date : null;
+        this.IntranetUrl = 'IntranetUrl' in params ? params.IntranetUrl : null;
+        this.InternetUrl = 'InternetUrl' in params ? params.InternetUrl : null;
+        this.Type = 'Type' in params ? params.Type : null;
 
     }
 }
@@ -3504,7 +3504,7 @@ class DeleteBackupResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3544,9 +3544,9 @@ class TablePrivilege extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Database = params.Database || null;
-        this.Table = params.Table || null;
-        this.Privileges = params.Privileges || null;
+        this.Database = 'Database' in params ? params.Database : null;
+        this.Table = 'Table' in params ? params.Table : null;
+        this.Privileges = 'Privileges' in params ? params.Privileges : null;
 
     }
 }
@@ -3589,7 +3589,7 @@ class DescribeProjectSecurityGroupsResponse extends  AbstractModel {
                 this.Groups.push(obj);
             }
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3623,8 +3623,8 @@ class UploadInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.AllSliceNum = params.AllSliceNum || null;
-        this.CompleteNum = params.CompleteNum || null;
+        this.AllSliceNum = 'AllSliceNum' in params ? params.AllSliceNum : null;
+        this.CompleteNum = 'CompleteNum' in params ? params.CompleteNum : null;
 
     }
 }
@@ -3658,8 +3658,8 @@ class ModifyAccountPasswordResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.AsyncRequestId = params.AsyncRequestId || null;
-        this.RequestId = params.RequestId || null;
+        this.AsyncRequestId = 'AsyncRequestId' in params ? params.AsyncRequestId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3699,9 +3699,9 @@ class DescribeDBSwitchRecordsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = params.InstanceId || null;
-        this.Offset = params.Offset || null;
-        this.Limit = params.Limit || null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
 
     }
 }
@@ -3741,9 +3741,9 @@ class DescribeAsyncRequestInfoResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Status = params.Status || null;
-        this.Info = params.Info || null;
-        this.RequestId = params.RequestId || null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.Info = 'Info' in params ? params.Info : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3783,9 +3783,9 @@ class CreateDBInstanceResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.DealIds = params.DealIds || null;
-        this.InstanceIds = params.InstanceIds || null;
-        this.RequestId = params.RequestId || null;
+        this.DealIds = 'DealIds' in params ? params.DealIds : null;
+        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3819,8 +3819,8 @@ class RollbackTableName extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TableName = params.TableName || null;
-        this.NewTableName = params.NewTableName || null;
+        this.TableName = 'TableName' in params ? params.TableName : null;
+        this.NewTableName = 'NewTableName' in params ? params.NewTableName : null;
 
     }
 }
@@ -3848,7 +3848,7 @@ class CloseWanServiceRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = params.InstanceId || null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
 
     }
 }
@@ -3882,8 +3882,8 @@ class DeleteAccountsResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.AsyncRequestId = params.AsyncRequestId || null;
-        this.RequestId = params.RequestId || null;
+        this.AsyncRequestId = 'AsyncRequestId' in params ? params.AsyncRequestId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3917,8 +3917,8 @@ class DescribeDBInstanceCharsetResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Charset = params.Charset || null;
-        this.RequestId = params.RequestId || null;
+        this.Charset = 'Charset' in params ? params.Charset : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3952,8 +3952,8 @@ class RestartDBInstancesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.AsyncRequestId = params.AsyncRequestId || null;
-        this.RequestId = params.RequestId || null;
+        this.AsyncRequestId = 'AsyncRequestId' in params ? params.AsyncRequestId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3993,7 +3993,7 @@ class DescribeBackupDatabasesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = params.TotalCount || null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
 
         if (params.Items) {
             this.Items = new Array();
@@ -4003,7 +4003,7 @@ class DescribeBackupDatabasesResponse extends  AbstractModel {
                 this.Items.push(obj);
             }
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -4031,7 +4031,7 @@ class ModifyAutoRenewFlagResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -4071,7 +4071,7 @@ class DescribeBackupsResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = params.TotalCount || null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
 
         if (params.Items) {
             this.Items = new Array();
@@ -4081,7 +4081,7 @@ class DescribeBackupsResponse extends  AbstractModel {
                 this.Items.push(obj);
             }
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -4121,7 +4121,7 @@ class DescribeDBImportRecordsResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = params.TotalCount || null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
 
         if (params.Items) {
             this.Items = new Array();
@@ -4131,7 +4131,7 @@ class DescribeDBImportRecordsResponse extends  AbstractModel {
                 this.Items.push(obj);
             }
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -4159,7 +4159,7 @@ class OpenWanServiceRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = params.InstanceId || null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
 
     }
 }
@@ -4187,7 +4187,7 @@ class DatabaseName extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.DatabaseName = params.DatabaseName || null;
+        this.DatabaseName = 'DatabaseName' in params ? params.DatabaseName : null;
 
     }
 }
@@ -4215,7 +4215,7 @@ class DescribeInstanceParamsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = params.InstanceId || null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
 
     }
 }
@@ -4249,8 +4249,8 @@ class ModifyDBInstanceSecurityGroupsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = params.InstanceId || null;
-        this.SecurityGroupIds = params.SecurityGroupIds || null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.SecurityGroupIds = 'SecurityGroupIds' in params ? params.SecurityGroupIds : null;
 
     }
 }
@@ -4290,7 +4290,7 @@ class DescribeBackupTablesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = params.TotalCount || null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
 
         if (params.Items) {
             this.Items = new Array();
@@ -4300,7 +4300,7 @@ class DescribeBackupTablesResponse extends  AbstractModel {
                 this.Items.push(obj);
             }
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -4352,11 +4352,11 @@ class Outbound extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Action = params.Action || null;
-        this.CidrIp = params.CidrIp || null;
-        this.PortRange = params.PortRange || null;
-        this.IpProtocol = params.IpProtocol || null;
-        this.Dir = params.Dir || null;
+        this.Action = 'Action' in params ? params.Action : null;
+        this.CidrIp = 'CidrIp' in params ? params.CidrIp : null;
+        this.PortRange = 'PortRange' in params ? params.PortRange : null;
+        this.IpProtocol = 'IpProtocol' in params ? params.IpProtocol : null;
+        this.Dir = 'Dir' in params ? params.Dir : null;
 
     }
 }
@@ -4402,10 +4402,10 @@ class SlaveInstanceInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Vport = params.Vport || null;
-        this.Region = params.Region || null;
-        this.Vip = params.Vip || null;
-        this.Zone = params.Zone || null;
+        this.Vport = 'Vport' in params ? params.Vport : null;
+        this.Region = 'Region' in params ? params.Region : null;
+        this.Vip = 'Vip' in params ? params.Vip : null;
+        this.Zone = 'Zone' in params ? params.Zone : null;
 
     }
 }
@@ -4439,8 +4439,8 @@ class ParamInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Name = params.Name || null;
-        this.Value = params.Value || null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Value = 'Value' in params ? params.Value : null;
 
     }
 }
@@ -4468,7 +4468,7 @@ class DescribeProjectSecurityGroupsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ProjectId = params.ProjectId || null;
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
 
     }
 }
@@ -4568,8 +4568,8 @@ class SecurityGroup extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ProjectId = params.ProjectId || null;
-        this.CreateTime = params.CreateTime || null;
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
 
         if (params.Inbound) {
             this.Inbound = new Array();
@@ -4588,9 +4588,9 @@ class SecurityGroup extends  AbstractModel {
                 this.Outbound.push(obj);
             }
         }
-        this.SecurityGroupId = params.SecurityGroupId || null;
-        this.SecurityGroupName = params.SecurityGroupName || null;
-        this.SecurityGroupRemark = params.SecurityGroupRemark || null;
+        this.SecurityGroupId = 'SecurityGroupId' in params ? params.SecurityGroupId : null;
+        this.SecurityGroupName = 'SecurityGroupName' in params ? params.SecurityGroupName : null;
+        this.SecurityGroupRemark = 'SecurityGroupRemark' in params ? params.SecurityGroupRemark : null;
 
     }
 }
@@ -4636,10 +4636,10 @@ class ZoneConf extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.DeployMode = params.DeployMode || null;
-        this.MasterZone = params.MasterZone || null;
-        this.SlaveZone = params.SlaveZone || null;
-        this.BackupZone = params.BackupZone || null;
+        this.DeployMode = 'DeployMode' in params ? params.DeployMode : null;
+        this.MasterZone = 'MasterZone' in params ? params.MasterZone : null;
+        this.SlaveZone = 'SlaveZone' in params ? params.SlaveZone : null;
+        this.BackupZone = 'BackupZone' in params ? params.BackupZone : null;
 
     }
 }
@@ -4718,8 +4718,8 @@ class ModifyDBInstanceNameRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = params.InstanceId || null;
-        this.InstanceName = params.InstanceName || null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
 
     }
 }
@@ -4753,8 +4753,8 @@ class UpgradeDBInstanceEngineVersionResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.AsyncRequestId = params.AsyncRequestId || null;
-        this.RequestId = params.RequestId || null;
+        this.AsyncRequestId = 'AsyncRequestId' in params ? params.AsyncRequestId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -4782,7 +4782,7 @@ class DescribeAsyncRequestInfoRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.AsyncRequestId = params.AsyncRequestId || null;
+        this.AsyncRequestId = 'AsyncRequestId' in params ? params.AsyncRequestId : null;
 
     }
 }
@@ -4816,8 +4816,8 @@ class ModifyInstanceParamResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.AsyncRequestId = params.AsyncRequestId || null;
-        this.RequestId = params.RequestId || null;
+        this.AsyncRequestId = 'AsyncRequestId' in params ? params.AsyncRequestId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -4899,16 +4899,16 @@ class UpgradeDBInstanceRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = params.InstanceId || null;
-        this.Memory = params.Memory || null;
-        this.Volume = params.Volume || null;
-        this.ProtectMode = params.ProtectMode || null;
-        this.DeployMode = params.DeployMode || null;
-        this.SlaveZone = params.SlaveZone || null;
-        this.EngineVersion = params.EngineVersion || null;
-        this.WaitSwitch = params.WaitSwitch || null;
-        this.BackupZone = params.BackupZone || null;
-        this.InstanceRole = params.InstanceRole || null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Memory = 'Memory' in params ? params.Memory : null;
+        this.Volume = 'Volume' in params ? params.Volume : null;
+        this.ProtectMode = 'ProtectMode' in params ? params.ProtectMode : null;
+        this.DeployMode = 'DeployMode' in params ? params.DeployMode : null;
+        this.SlaveZone = 'SlaveZone' in params ? params.SlaveZone : null;
+        this.EngineVersion = 'EngineVersion' in params ? params.EngineVersion : null;
+        this.WaitSwitch = 'WaitSwitch' in params ? params.WaitSwitch : null;
+        this.BackupZone = 'BackupZone' in params ? params.BackupZone : null;
+        this.InstanceRole = 'InstanceRole' in params ? params.InstanceRole : null;
 
     }
 }
@@ -4954,10 +4954,10 @@ class ColumnPrivilege extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Database = params.Database || null;
-        this.Table = params.Table || null;
-        this.Column = params.Column || null;
-        this.Privileges = params.Privileges || null;
+        this.Database = 'Database' in params ? params.Database : null;
+        this.Table = 'Table' in params ? params.Table : null;
+        this.Column = 'Column' in params ? params.Column : null;
+        this.Privileges = 'Privileges' in params ? params.Privileges : null;
 
     }
 }
@@ -4997,9 +4997,9 @@ class DescribeUploadedFilesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Path = params.Path || null;
-        this.Offset = params.Offset || null;
-        this.Limit = params.Limit || null;
+        this.Path = 'Path' in params ? params.Path : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
 
     }
 }
@@ -5039,7 +5039,7 @@ class DescribeUploadedFilesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = params.TotalCount || null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
 
         if (params.Items) {
             this.Items = new Array();
@@ -5049,7 +5049,7 @@ class DescribeUploadedFilesResponse extends  AbstractModel {
                 this.Items.push(obj);
             }
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -5095,8 +5095,8 @@ class InitDBInstancesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceIds = params.InstanceIds || null;
-        this.NewPassword = params.NewPassword || null;
+        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
+        this.NewPassword = 'NewPassword' in params ? params.NewPassword : null;
 
         if (params.Parameters) {
             this.Parameters = new Array();
@@ -5106,7 +5106,7 @@ class InitDBInstancesRequest extends  AbstractModel {
                 this.Parameters.push(obj);
             }
         }
-        this.Vport = params.Vport || null;
+        this.Vport = 'Vport' in params ? params.Vport : null;
 
     }
 }
@@ -5134,7 +5134,7 @@ class AssociateSecurityGroupsResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -5372,28 +5372,28 @@ class InstanceInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.WanStatus = params.WanStatus || null;
-        this.Zone = params.Zone || null;
-        this.InitFlag = params.InitFlag || null;
+        this.WanStatus = 'WanStatus' in params ? params.WanStatus : null;
+        this.Zone = 'Zone' in params ? params.Zone : null;
+        this.InitFlag = 'InitFlag' in params ? params.InitFlag : null;
 
         if (params.RoVipInfo) {
             let obj = new RoVipInfo();
             obj.deserialize(params.RoVipInfo)
             this.RoVipInfo = obj;
         }
-        this.Memory = params.Memory || null;
-        this.Status = params.Status || null;
-        this.VpcId = params.VpcId || null;
+        this.Memory = 'Memory' in params ? params.Memory : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
 
         if (params.SlaveInfo) {
             let obj = new SlaveInfo();
             obj.deserialize(params.SlaveInfo)
             this.SlaveInfo = obj;
         }
-        this.InstanceId = params.InstanceId || null;
-        this.Volume = params.Volume || null;
-        this.AutoRenew = params.AutoRenew || null;
-        this.ProtectMode = params.ProtectMode || null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Volume = 'Volume' in params ? params.Volume : null;
+        this.AutoRenew = 'AutoRenew' in params ? params.AutoRenew : null;
+        this.ProtectMode = 'ProtectMode' in params ? params.ProtectMode : null;
 
         if (params.RoGroups) {
             this.RoGroups = new Array();
@@ -5403,22 +5403,22 @@ class InstanceInfo extends  AbstractModel {
                 this.RoGroups.push(obj);
             }
         }
-        this.SubnetId = params.SubnetId || null;
-        this.InstanceType = params.InstanceType || null;
-        this.ProjectId = params.ProjectId || null;
-        this.Region = params.Region || null;
-        this.DeadlineTime = params.DeadlineTime || null;
-        this.DeployMode = params.DeployMode || null;
-        this.TaskStatus = params.TaskStatus || null;
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
+        this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+        this.Region = 'Region' in params ? params.Region : null;
+        this.DeadlineTime = 'DeadlineTime' in params ? params.DeadlineTime : null;
+        this.DeployMode = 'DeployMode' in params ? params.DeployMode : null;
+        this.TaskStatus = 'TaskStatus' in params ? params.TaskStatus : null;
 
         if (params.MasterInfo) {
             let obj = new MasterInfo();
             obj.deserialize(params.MasterInfo)
             this.MasterInfo = obj;
         }
-        this.DeviceType = params.DeviceType || null;
-        this.EngineVersion = params.EngineVersion || null;
-        this.InstanceName = params.InstanceName || null;
+        this.DeviceType = 'DeviceType' in params ? params.DeviceType : null;
+        this.EngineVersion = 'EngineVersion' in params ? params.EngineVersion : null;
+        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
 
         if (params.DrInfo) {
             this.DrInfo = new Array();
@@ -5428,17 +5428,17 @@ class InstanceInfo extends  AbstractModel {
                 this.DrInfo.push(obj);
             }
         }
-        this.WanDomain = params.WanDomain || null;
-        this.WanPort = params.WanPort || null;
-        this.PayType = params.PayType || null;
-        this.CreateTime = params.CreateTime || null;
-        this.Vip = params.Vip || null;
-        this.Vport = params.Vport || null;
-        this.CdbError = params.CdbError || null;
-        this.UniqVpcId = params.UniqVpcId || null;
-        this.UniqSubnetId = params.UniqSubnetId || null;
-        this.PhysicalId = params.PhysicalId || null;
-        this.Cpu = params.Cpu || null;
+        this.WanDomain = 'WanDomain' in params ? params.WanDomain : null;
+        this.WanPort = 'WanPort' in params ? params.WanPort : null;
+        this.PayType = 'PayType' in params ? params.PayType : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.Vip = 'Vip' in params ? params.Vip : null;
+        this.Vport = 'Vport' in params ? params.Vport : null;
+        this.CdbError = 'CdbError' in params ? params.CdbError : null;
+        this.UniqVpcId = 'UniqVpcId' in params ? params.UniqVpcId : null;
+        this.UniqSubnetId = 'UniqSubnetId' in params ? params.UniqSubnetId : null;
+        this.PhysicalId = 'PhysicalId' in params ? params.PhysicalId : null;
+        this.Cpu = 'Cpu' in params ? params.Cpu : null;
 
     }
 }
@@ -5472,8 +5472,8 @@ class CreateBackupResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.BackupId = params.BackupId || null;
-        this.RequestId = params.RequestId || null;
+        this.BackupId = 'BackupId' in params ? params.BackupId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -5543,14 +5543,14 @@ class DescribeDBPriceRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Zone = params.Zone || null;
-        this.GoodsNum = params.GoodsNum || null;
-        this.Memory = params.Memory || null;
-        this.Volume = params.Volume || null;
-        this.PayType = params.PayType || null;
-        this.Period = params.Period || null;
-        this.InstanceRole = params.InstanceRole || null;
-        this.ProtectMode = params.ProtectMode || null;
+        this.Zone = 'Zone' in params ? params.Zone : null;
+        this.GoodsNum = 'GoodsNum' in params ? params.GoodsNum : null;
+        this.Memory = 'Memory' in params ? params.Memory : null;
+        this.Volume = 'Volume' in params ? params.Volume : null;
+        this.PayType = 'PayType' in params ? params.PayType : null;
+        this.Period = 'Period' in params ? params.Period : null;
+        this.InstanceRole = 'InstanceRole' in params ? params.InstanceRole : null;
+        this.ProtectMode = 'ProtectMode' in params ? params.ProtectMode : null;
 
     }
 }
@@ -5584,8 +5584,8 @@ class SlaveConfig extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ReplicationMode = params.ReplicationMode || null;
-        this.Zone = params.Zone || null;
+        this.ReplicationMode = 'ReplicationMode' in params ? params.ReplicationMode : null;
+        this.Zone = 'Zone' in params ? params.Zone : null;
 
     }
 }
@@ -5619,8 +5619,8 @@ class ModifyAccountPrivilegesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.AsyncRequestId = params.AsyncRequestId || null;
-        this.RequestId = params.RequestId || null;
+        this.AsyncRequestId = 'AsyncRequestId' in params ? params.AsyncRequestId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -5666,10 +5666,10 @@ class BackupConfig extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ReplicationMode = params.ReplicationMode || null;
-        this.Zone = params.Zone || null;
-        this.Vip = params.Vip || null;
-        this.Vport = params.Vport || null;
+        this.ReplicationMode = 'ReplicationMode' in params ? params.ReplicationMode : null;
+        this.Zone = 'Zone' in params ? params.Zone : null;
+        this.Vip = 'Vip' in params ? params.Vip : null;
+        this.Vport = 'Vport' in params ? params.Vport : null;
 
     }
 }
@@ -5703,8 +5703,8 @@ class VerifyRootAccountResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.AsyncRequestId = params.AsyncRequestId || null;
-        this.RequestId = params.RequestId || null;
+        this.AsyncRequestId = 'AsyncRequestId' in params ? params.AsyncRequestId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -5732,7 +5732,7 @@ class DescribeDBInstanceConfigRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = params.InstanceId || null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
 
     }
 }
@@ -5790,12 +5790,12 @@ class DescribeBackupTablesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = params.InstanceId || null;
-        this.StartTime = params.StartTime || null;
-        this.DatabaseName = params.DatabaseName || null;
-        this.SearchTable = params.SearchTable || null;
-        this.Offset = params.Offset || null;
-        this.Limit = params.Limit || null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.DatabaseName = 'DatabaseName' in params ? params.DatabaseName : null;
+        this.SearchTable = 'SearchTable' in params ? params.SearchTable : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
 
     }
 }
@@ -5829,8 +5829,8 @@ class DatabasePrivilege extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Privileges = params.Privileges || null;
-        this.Database = params.Database || null;
+        this.Privileges = 'Privileges' in params ? params.Privileges : null;
+        this.Database = 'Database' in params ? params.Database : null;
 
     }
 }
@@ -5858,7 +5858,7 @@ class ModifyDBInstanceSecurityGroupsResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -5886,7 +5886,7 @@ class ModifyDBInstanceNameResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -5926,7 +5926,7 @@ class ModifyAccountDescriptionRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = params.InstanceId || null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
 
         if (params.Accounts) {
             this.Accounts = new Array();
@@ -5936,7 +5936,7 @@ class ModifyAccountDescriptionRequest extends  AbstractModel {
                 this.Accounts.push(obj);
             }
         }
-        this.Description = params.Description || null;
+        this.Description = 'Description' in params ? params.Description : null;
 
     }
 }
@@ -5976,8 +5976,8 @@ class ModifyAccountPasswordRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = params.InstanceId || null;
-        this.NewPassword = params.NewPassword || null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.NewPassword = 'NewPassword' in params ? params.NewPassword : null;
 
         if (params.Accounts) {
             this.Accounts = new Array();
@@ -6038,11 +6038,11 @@ class DescribeTablesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = params.InstanceId || null;
-        this.Database = params.Database || null;
-        this.Offset = params.Offset || null;
-        this.Limit = params.Limit || null;
-        this.TableRegexp = params.TableRegexp || null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Database = 'Database' in params ? params.Database : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.TableRegexp = 'TableRegexp' in params ? params.TableRegexp : null;
 
     }
 }
@@ -6076,8 +6076,8 @@ class InstanceRebootTime extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = params.InstanceId || null;
-        this.TimeInSeconds = params.TimeInSeconds || null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.TimeInSeconds = 'TimeInSeconds' in params ? params.TimeInSeconds : null;
 
     }
 }
@@ -6111,8 +6111,8 @@ class RenewDBInstanceResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.DealId = params.DealId || null;
-        this.RequestId = params.RequestId || null;
+        this.DealId = 'DealId' in params ? params.DealId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -6152,9 +6152,9 @@ class DescribeDatabasesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = params.TotalCount || null;
-        this.Items = params.Items || null;
-        this.RequestId = params.RequestId || null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.Items = 'Items' in params ? params.Items : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -6254,17 +6254,17 @@ class ZoneSellConf extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Status = params.Status || null;
-        this.ZoneName = params.ZoneName || null;
-        this.IsCustom = params.IsCustom || null;
-        this.IsSupportDr = params.IsSupportDr || null;
-        this.IsSupportVpc = params.IsSupportVpc || null;
-        this.HourInstanceSaleMaxNum = params.HourInstanceSaleMaxNum || null;
-        this.IsDefaultZone = params.IsDefaultZone || null;
-        this.IsBm = params.IsBm || null;
-        this.PayType = params.PayType || null;
-        this.ProtectMode = params.ProtectMode || null;
-        this.Zone = params.Zone || null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.ZoneName = 'ZoneName' in params ? params.ZoneName : null;
+        this.IsCustom = 'IsCustom' in params ? params.IsCustom : null;
+        this.IsSupportDr = 'IsSupportDr' in params ? params.IsSupportDr : null;
+        this.IsSupportVpc = 'IsSupportVpc' in params ? params.IsSupportVpc : null;
+        this.HourInstanceSaleMaxNum = 'HourInstanceSaleMaxNum' in params ? params.HourInstanceSaleMaxNum : null;
+        this.IsDefaultZone = 'IsDefaultZone' in params ? params.IsDefaultZone : null;
+        this.IsBm = 'IsBm' in params ? params.IsBm : null;
+        this.PayType = 'PayType' in params ? params.PayType : null;
+        this.ProtectMode = 'ProtectMode' in params ? params.ProtectMode : null;
+        this.Zone = 'Zone' in params ? params.Zone : null;
 
         if (params.SellType) {
             this.SellType = new Array();
@@ -6337,9 +6337,9 @@ class DescribeDBInstanceConfigResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ProtectMode = params.ProtectMode || null;
-        this.DeployMode = params.DeployMode || null;
-        this.Zone = params.Zone || null;
+        this.ProtectMode = 'ProtectMode' in params ? params.ProtectMode : null;
+        this.DeployMode = 'DeployMode' in params ? params.DeployMode : null;
+        this.Zone = 'Zone' in params ? params.Zone : null;
 
         if (params.SlaveConfig) {
             let obj = new SlaveConfig();
@@ -6352,7 +6352,7 @@ class DescribeDBInstanceConfigResponse extends  AbstractModel {
             obj.deserialize(params.BackupConfig)
             this.BackupConfig = obj;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -6512,29 +6512,29 @@ class RoInstanceInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.MasterInstanceId = params.MasterInstanceId || null;
-        this.RoStatus = params.RoStatus || null;
-        this.OfflineTime = params.OfflineTime || null;
-        this.Weight = params.Weight || null;
-        this.Region = params.Region || null;
-        this.Zone = params.Zone || null;
-        this.InstanceId = params.InstanceId || null;
-        this.Status = params.Status || null;
-        this.InstanceType = params.InstanceType || null;
-        this.InstanceName = params.InstanceName || null;
-        this.HourFeeStatus = params.HourFeeStatus || null;
-        this.TaskStatus = params.TaskStatus || null;
-        this.Memory = params.Memory || null;
-        this.Volume = params.Volume || null;
-        this.Qps = params.Qps || null;
-        this.Vip = params.Vip || null;
-        this.Vport = params.Vport || null;
-        this.VpcId = params.VpcId || null;
-        this.SubnetId = params.SubnetId || null;
-        this.DeviceType = params.DeviceType || null;
-        this.EngineVersion = params.EngineVersion || null;
-        this.DeadlineTime = params.DeadlineTime || null;
-        this.PayType = params.PayType || null;
+        this.MasterInstanceId = 'MasterInstanceId' in params ? params.MasterInstanceId : null;
+        this.RoStatus = 'RoStatus' in params ? params.RoStatus : null;
+        this.OfflineTime = 'OfflineTime' in params ? params.OfflineTime : null;
+        this.Weight = 'Weight' in params ? params.Weight : null;
+        this.Region = 'Region' in params ? params.Region : null;
+        this.Zone = 'Zone' in params ? params.Zone : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
+        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
+        this.HourFeeStatus = 'HourFeeStatus' in params ? params.HourFeeStatus : null;
+        this.TaskStatus = 'TaskStatus' in params ? params.TaskStatus : null;
+        this.Memory = 'Memory' in params ? params.Memory : null;
+        this.Volume = 'Volume' in params ? params.Volume : null;
+        this.Qps = 'Qps' in params ? params.Qps : null;
+        this.Vip = 'Vip' in params ? params.Vip : null;
+        this.Vport = 'Vport' in params ? params.Vport : null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
+        this.DeviceType = 'DeviceType' in params ? params.DeviceType : null;
+        this.EngineVersion = 'EngineVersion' in params ? params.EngineVersion : null;
+        this.DeadlineTime = 'DeadlineTime' in params ? params.DeadlineTime : null;
+        this.PayType = 'PayType' in params ? params.PayType : null;
 
     }
 }
@@ -6562,7 +6562,7 @@ class IsolateDBInstanceRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = params.InstanceId || null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
 
     }
 }
@@ -6620,7 +6620,7 @@ class ModifyAccountPrivilegesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = params.InstanceId || null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
 
         if (params.Accounts) {
             this.Accounts = new Array();
@@ -6630,7 +6630,7 @@ class ModifyAccountPrivilegesRequest extends  AbstractModel {
                 this.Accounts.push(obj);
             }
         }
-        this.GlobalPrivileges = params.GlobalPrivileges || null;
+        this.GlobalPrivileges = 'GlobalPrivileges' in params ? params.GlobalPrivileges : null;
 
         if (params.DatabasePrivileges) {
             this.DatabasePrivileges = new Array();
@@ -6691,8 +6691,8 @@ class Account extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.User = params.User || null;
-        this.Host = params.Host || null;
+        this.User = 'User' in params ? params.User : null;
+        this.Host = 'Host' in params ? params.Host : null;
 
     }
 }
@@ -6726,8 +6726,8 @@ class CreateBackupRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = params.InstanceId || null;
-        this.BackupMethod = params.BackupMethod || null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.BackupMethod = 'BackupMethod' in params ? params.BackupMethod : null;
 
     }
 }
@@ -6785,12 +6785,12 @@ class AccountInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Notes = params.Notes || null;
-        this.Host = params.Host || null;
-        this.User = params.User || null;
-        this.ModifyTime = params.ModifyTime || null;
-        this.ModifyPasswordTime = params.ModifyPasswordTime || null;
-        this.CreateTime = params.CreateTime || null;
+        this.Notes = 'Notes' in params ? params.Notes : null;
+        this.Host = 'Host' in params ? params.Host : null;
+        this.User = 'User' in params ? params.User : null;
+        this.ModifyTime = 'ModifyTime' in params ? params.ModifyTime : null;
+        this.ModifyPasswordTime = 'ModifyPasswordTime' in params ? params.ModifyPasswordTime : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
 
     }
 }
@@ -6818,7 +6818,7 @@ class DescribeDBInstanceCharsetRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = params.InstanceId || null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
 
     }
 }
@@ -6852,7 +6852,7 @@ class RollbackTables extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Database = params.Database || null;
+        this.Database = 'Database' in params ? params.Database : null;
 
         if (params.Table) {
             this.Table = new Array();
@@ -6913,11 +6913,11 @@ class DescribeBackupDatabasesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = params.InstanceId || null;
-        this.StartTime = params.StartTime || null;
-        this.SearchDatabase = params.SearchDatabase || null;
-        this.Offset = params.Offset || null;
-        this.Limit = params.Limit || null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.SearchDatabase = 'SearchDatabase' in params ? params.SearchDatabase : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
 
     }
 }
@@ -6951,8 +6951,8 @@ class ModifyAutoRenewFlagRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceIds = params.InstanceIds || null;
-        this.AutoRenew = params.AutoRenew || null;
+        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
+        this.AutoRenew = 'AutoRenew' in params ? params.AutoRenew : null;
 
     }
 }
@@ -6992,9 +6992,9 @@ class UpgradeDBInstanceEngineVersionRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = params.InstanceId || null;
-        this.EngineVersion = params.EngineVersion || null;
-        this.WaitSwitch = params.WaitSwitch || null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.EngineVersion = 'EngineVersion' in params ? params.EngineVersion : null;
+        this.WaitSwitch = 'WaitSwitch' in params ? params.WaitSwitch : null;
 
     }
 }
@@ -7034,9 +7034,9 @@ class UpgradeDBInstanceResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.DealIds = params.DealIds || null;
-        this.AsyncRequestId = params.AsyncRequestId || null;
-        this.RequestId = params.RequestId || null;
+        this.DealIds = 'DealIds' in params ? params.DealIds : null;
+        this.AsyncRequestId = 'AsyncRequestId' in params ? params.AsyncRequestId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -7088,11 +7088,11 @@ class ModifyDBInstanceVipVportRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = params.InstanceId || null;
-        this.DstIp = params.DstIp || null;
-        this.DstPort = params.DstPort || null;
-        this.UniqVpcId = params.UniqVpcId || null;
-        this.UniqSubnetId = params.UniqSubnetId || null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.DstIp = 'DstIp' in params ? params.DstIp : null;
+        this.DstPort = 'DstPort' in params ? params.DstPort : null;
+        this.UniqVpcId = 'UniqVpcId' in params ? params.UniqVpcId : null;
+        this.UniqSubnetId = 'UniqSubnetId' in params ? params.UniqSubnetId : null;
 
     }
 }
@@ -7120,7 +7120,7 @@ class ModifyBackupConfigResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -7172,11 +7172,11 @@ class DescribeDBImportRecordsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = params.InstanceId || null;
-        this.StartTime = params.StartTime || null;
-        this.EndTime = params.EndTime || null;
-        this.Offset = params.Offset || null;
-        this.Limit = params.Limit || null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
 
     }
 }
@@ -7210,8 +7210,8 @@ class CreateDBImportJobResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.AsyncRequestId = params.AsyncRequestId || null;
-        this.RequestId = params.RequestId || null;
+        this.AsyncRequestId = 'AsyncRequestId' in params ? params.AsyncRequestId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -7245,8 +7245,8 @@ class TagInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TagKey = params.TagKey || null;
-        this.TagValue = params.TagValue || null;
+        this.TagKey = 'TagKey' in params ? params.TagKey : null;
+        this.TagValue = 'TagValue' in params ? params.TagValue : null;
 
     }
 }
@@ -7286,7 +7286,7 @@ class DescribeDBInstancesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = params.TotalCount || null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
 
         if (params.Items) {
             this.Items = new Array();
@@ -7296,7 +7296,7 @@ class DescribeDBInstancesResponse extends  AbstractModel {
                 this.Items.push(obj);
             }
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -7330,8 +7330,8 @@ class InitDBInstancesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.AsyncRequestIds = params.AsyncRequestIds || null;
-        this.RequestId = params.RequestId || null;
+        this.AsyncRequestIds = 'AsyncRequestIds' in params ? params.AsyncRequestIds : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -7359,7 +7359,7 @@ class RestartDBInstancesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceIds = params.InstanceIds || null;
+        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
 
     }
 }
@@ -7399,7 +7399,7 @@ class DescribeInstanceParamsResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = params.TotalCount || null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
 
         if (params.Items) {
             this.Items = new Array();
@@ -7409,7 +7409,7 @@ class DescribeInstanceParamsResponse extends  AbstractModel {
                 this.Items.push(obj);
             }
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -7449,7 +7449,7 @@ class DescribeDBZoneConfigResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = params.TotalCount || null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
 
         if (params.Items) {
             this.Items = new Array();
@@ -7459,7 +7459,7 @@ class DescribeDBZoneConfigResponse extends  AbstractModel {
                 this.Items.push(obj);
             }
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -7493,8 +7493,8 @@ class ModifyDBInstanceProjectRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceIds = params.InstanceIds || null;
-        this.NewProjectId = params.NewProjectId || null;
+        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
+        this.NewProjectId = 'NewProjectId' in params ? params.NewProjectId : null;
 
     }
 }
@@ -7528,8 +7528,8 @@ class DisassociateSecurityGroupsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.SecurityGroupId = params.SecurityGroupId || null;
-        this.InstanceIds = params.InstanceIds || null;
+        this.SecurityGroupId = 'SecurityGroupId' in params ? params.SecurityGroupId : null;
+        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
 
     }
 }
@@ -7563,7 +7563,7 @@ class DeleteAccountsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = params.InstanceId || null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
 
         if (params.Accounts) {
             this.Accounts = new Array();
@@ -7600,7 +7600,7 @@ class SwitchForUpgradeResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -7640,9 +7640,9 @@ class DescribeAccountPrivilegesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = params.InstanceId || null;
-        this.User = params.User || null;
-        this.Host = params.Host || null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.User = 'User' in params ? params.User : null;
+        this.Host = 'Host' in params ? params.Host : null;
 
     }
 }
@@ -7682,7 +7682,7 @@ class DescribeAccountsResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = params.TotalCount || null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
 
         if (params.Items) {
             this.Items = new Array();
@@ -7692,7 +7692,7 @@ class DescribeAccountsResponse extends  AbstractModel {
                 this.Items.push(obj);
             }
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -7726,8 +7726,8 @@ class RollbackTimeRange extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Begin = params.Begin || null;
-        this.End = params.End || null;
+        this.Begin = 'Begin' in params ? params.Begin : null;
+        this.End = 'End' in params ? params.End : null;
 
     }
 }
@@ -7761,8 +7761,8 @@ class DeleteBackupRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = params.InstanceId || null;
-        this.BackupId = params.BackupId || null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.BackupId = 'BackupId' in params ? params.BackupId : null;
 
     }
 }
@@ -7820,12 +7820,12 @@ class DescribeBackupConfigResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.StartTimeMin = params.StartTimeMin || null;
-        this.StartTimeMax = params.StartTimeMax || null;
-        this.BackupExpireDays = params.BackupExpireDays || null;
-        this.BackupMethod = params.BackupMethod || null;
-        this.BinlogExpireDays = params.BinlogExpireDays || null;
-        this.RequestId = params.RequestId || null;
+        this.StartTimeMin = 'StartTimeMin' in params ? params.StartTimeMin : null;
+        this.StartTimeMax = 'StartTimeMax' in params ? params.StartTimeMax : null;
+        this.BackupExpireDays = 'BackupExpireDays' in params ? params.BackupExpireDays : null;
+        this.BackupMethod = 'BackupMethod' in params ? params.BackupMethod : null;
+        this.BinlogExpireDays = 'BinlogExpireDays' in params ? params.BinlogExpireDays : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -7859,8 +7859,8 @@ class StartBatchRollbackResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.AsyncRequestId = params.AsyncRequestId || null;
-        this.RequestId = params.RequestId || null;
+        this.AsyncRequestId = 'AsyncRequestId' in params ? params.AsyncRequestId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -7900,7 +7900,7 @@ class DescribeRollbackRangeTimeResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = params.TotalCount || null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
 
         if (params.Items) {
             this.Items = new Array();
@@ -7910,7 +7910,7 @@ class DescribeRollbackRangeTimeResponse extends  AbstractModel {
                 this.Items.push(obj);
             }
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -7944,8 +7944,8 @@ class VerifyRootAccountRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = params.InstanceId || null;
-        this.Password = params.Password || null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Password = 'Password' in params ? params.Password : null;
 
     }
 }
@@ -7979,8 +7979,8 @@ class OpenWanServiceResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.AsyncRequestId = params.AsyncRequestId || null;
-        this.RequestId = params.RequestId || null;
+        this.AsyncRequestId = 'AsyncRequestId' in params ? params.AsyncRequestId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -8026,10 +8026,10 @@ class ModifyBackupConfigRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = params.InstanceId || null;
-        this.ExpireDays = params.ExpireDays || null;
-        this.StartTime = params.StartTime || null;
-        this.BackupMethod = params.BackupMethod || null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.ExpireDays = 'ExpireDays' in params ? params.ExpireDays : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.BackupMethod = 'BackupMethod' in params ? params.BackupMethod : null;
 
     }
 }
@@ -8069,9 +8069,9 @@ class DescribeBinlogsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = params.InstanceId || null;
-        this.Offset = params.Offset || null;
-        this.Limit = params.Limit || null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
 
     }
 }
@@ -8099,7 +8099,7 @@ class DisassociateSecurityGroupsResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -8127,7 +8127,7 @@ class DescribeDBInstanceGTIDRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = params.InstanceId || null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
 
     }
 }
@@ -8161,8 +8161,8 @@ class RollbackDBName extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.DatabaseName = params.DatabaseName || null;
-        this.NewDatabaseName = params.NewDatabaseName || null;
+        this.DatabaseName = 'DatabaseName' in params ? params.DatabaseName : null;
+        this.NewDatabaseName = 'NewDatabaseName' in params ? params.NewDatabaseName : null;
 
     }
 }

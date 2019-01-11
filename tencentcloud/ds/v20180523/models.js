@@ -39,7 +39,7 @@ class SendVcodeResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -79,9 +79,9 @@ class DeleteAccountRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Module = params.Module || null;
-        this.Operation = params.Operation || null;
-        this.AccountList = params.AccountList || null;
+        this.Module = 'Module' in params ? params.Module : null;
+        this.Operation = 'Operation' in params ? params.Operation : null;
+        this.AccountList = 'AccountList' in params ? params.AccountList : null;
 
     }
 }
@@ -127,10 +127,10 @@ class CreateSealRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Module = params.Module || null;
-        this.Operation = params.Operation || null;
-        this.AccountResId = params.AccountResId || null;
-        this.ImgUrl = params.ImgUrl || null;
+        this.Module = 'Module' in params ? params.Module : null;
+        this.Operation = 'Operation' in params ? params.Operation : null;
+        this.AccountResId = 'AccountResId' in params ? params.AccountResId : null;
+        this.ImgUrl = 'ImgUrl' in params ? params.ImgUrl : null;
 
     }
 }
@@ -164,8 +164,8 @@ class CreateSealResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.SealResId = params.SealResId || null;
-        this.RequestId = params.RequestId || null;
+        this.SealResId = 'SealResId' in params ? params.SealResId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -217,11 +217,11 @@ class SignKeyword extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Keyword = params.Keyword || null;
-        this.OffsetCoordX = params.OffsetCoordX || null;
-        this.OffsetCoordY = params.OffsetCoordY || null;
-        this.ImageWidth = params.ImageWidth || null;
-        this.ImageHeight = params.ImageHeight || null;
+        this.Keyword = 'Keyword' in params ? params.Keyword : null;
+        this.OffsetCoordX = 'OffsetCoordX' in params ? params.OffsetCoordX : null;
+        this.OffsetCoordY = 'OffsetCoordY' in params ? params.OffsetCoordY : null;
+        this.ImageWidth = 'ImageWidth' in params ? params.ImageWidth : null;
+        this.ImageHeight = 'ImageHeight' in params ? params.ImageHeight : null;
 
     }
 }
@@ -261,9 +261,9 @@ class DescribeTaskStatusResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TaskResult = params.TaskResult || null;
-        this.TaskType = params.TaskType || null;
-        this.RequestId = params.RequestId || null;
+        this.TaskResult = 'TaskResult' in params ? params.TaskResult : null;
+        this.TaskType = 'TaskType' in params ? params.TaskType : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -315,11 +315,11 @@ class CheckVcodeRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Module = params.Module || null;
-        this.Operation = params.Operation || null;
-        this.AccountResId = params.AccountResId || null;
-        this.ContractResId = params.ContractResId || null;
-        this.VerifyCode = params.VerifyCode || null;
+        this.Module = 'Module' in params ? params.Module : null;
+        this.Operation = 'Operation' in params ? params.Operation : null;
+        this.AccountResId = 'AccountResId' in params ? params.AccountResId : null;
+        this.ContractResId = 'ContractResId' in params ? params.ContractResId : null;
+        this.VerifyCode = 'VerifyCode' in params ? params.VerifyCode : null;
 
     }
 }
@@ -347,7 +347,7 @@ class CheckVcodeResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -381,8 +381,8 @@ class DownloadContractResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TaskId = params.TaskId || null;
-        this.RequestId = params.RequestId || null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -434,11 +434,11 @@ class SignLocation extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.SignOnPage = params.SignOnPage || null;
-        this.SignLocationLBX = params.SignLocationLBX || null;
-        this.SignLocationLBY = params.SignLocationLBY || null;
-        this.SignLocationRUX = params.SignLocationRUX || null;
-        this.SignLocationRUY = params.SignLocationRUY || null;
+        this.SignOnPage = 'SignOnPage' in params ? params.SignOnPage : null;
+        this.SignLocationLBX = 'SignLocationLBX' in params ? params.SignLocationLBX : null;
+        this.SignLocationLBY = 'SignLocationLBY' in params ? params.SignLocationLBY : null;
+        this.SignLocationRUX = 'SignLocationRUX' in params ? params.SignLocationRUX : null;
+        this.SignLocationRUY = 'SignLocationRUY' in params ? params.SignLocationRUY : null;
 
     }
 }
@@ -466,7 +466,7 @@ class SignContractByKeywordResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -524,12 +524,12 @@ class SignInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.AccountResId = params.AccountResId || null;
-        this.AuthorizationTime = params.AuthorizationTime || null;
-        this.Location = params.Location || null;
-        this.SealId = params.SealId || null;
-        this.ImageData = params.ImageData || null;
-        this.CertType = params.CertType || null;
+        this.AccountResId = 'AccountResId' in params ? params.AccountResId : null;
+        this.AuthorizationTime = 'AuthorizationTime' in params ? params.AuthorizationTime : null;
+        this.Location = 'Location' in params ? params.Location : null;
+        this.SealId = 'SealId' in params ? params.SealId : null;
+        this.ImageData = 'ImageData' in params ? params.ImageData : null;
+        this.CertType = 'CertType' in params ? params.CertType : null;
 
     }
 }
@@ -575,10 +575,10 @@ class DeleteSealRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Module = params.Module || null;
-        this.Operation = params.Operation || null;
-        this.AccountResId = params.AccountResId || null;
-        this.SealResId = params.SealResId || null;
+        this.Module = 'Module' in params ? params.Module : null;
+        this.Operation = 'Operation' in params ? params.Operation : null;
+        this.AccountResId = 'AccountResId' in params ? params.AccountResId : null;
+        this.SealResId = 'SealResId' in params ? params.SealResId : null;
 
     }
 }
@@ -618,9 +618,9 @@ class DownloadContractRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Module = params.Module || null;
-        this.Operation = params.Operation || null;
-        this.ContractResId = params.ContractResId || null;
+        this.Module = 'Module' in params ? params.Module : null;
+        this.Operation = 'Operation' in params ? params.Operation : null;
+        this.ContractResId = 'ContractResId' in params ? params.ContractResId : null;
 
     }
 }
@@ -654,8 +654,8 @@ class CreateEnterpriseAccountResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.AccountResId = params.AccountResId || null;
-        this.RequestId = params.RequestId || null;
+        this.AccountResId = 'AccountResId' in params ? params.AccountResId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -689,8 +689,8 @@ class CreatePersonalAccountResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.AccountResId = params.AccountResId || null;
-        this.RequestId = params.RequestId || null;
+        this.AccountResId = 'AccountResId' in params ? params.AccountResId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -772,16 +772,16 @@ class CreateEnterpriseAccountRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Module = params.Module || null;
-        this.Operation = params.Operation || null;
-        this.Name = params.Name || null;
-        this.IdentType = params.IdentType || null;
-        this.IdentNo = params.IdentNo || null;
-        this.MobilePhone = params.MobilePhone || null;
-        this.TransactorName = params.TransactorName || null;
-        this.TransactorIdentType = params.TransactorIdentType || null;
-        this.TransactorIdentNo = params.TransactorIdentNo || null;
-        this.TransactorPhone = params.TransactorPhone || null;
+        this.Module = 'Module' in params ? params.Module : null;
+        this.Operation = 'Operation' in params ? params.Operation : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.IdentType = 'IdentType' in params ? params.IdentType : null;
+        this.IdentNo = 'IdentNo' in params ? params.IdentNo : null;
+        this.MobilePhone = 'MobilePhone' in params ? params.MobilePhone : null;
+        this.TransactorName = 'TransactorName' in params ? params.TransactorName : null;
+        this.TransactorIdentType = 'TransactorIdentType' in params ? params.TransactorIdentType : null;
+        this.TransactorIdentNo = 'TransactorIdentNo' in params ? params.TransactorIdentNo : null;
+        this.TransactorPhone = 'TransactorPhone' in params ? params.TransactorPhone : null;
 
     }
 }
@@ -845,8 +845,8 @@ class CreateContractByUploadRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Module = params.Module || null;
-        this.Operation = params.Operation || null;
+        this.Module = 'Module' in params ? params.Module : null;
+        this.Operation = 'Operation' in params ? params.Operation : null;
 
         if (params.SignInfos) {
             this.SignInfos = new Array();
@@ -856,10 +856,10 @@ class CreateContractByUploadRequest extends  AbstractModel {
                 this.SignInfos.push(obj);
             }
         }
-        this.ContractFile = params.ContractFile || null;
-        this.ContractName = params.ContractName || null;
-        this.Remarks = params.Remarks || null;
-        this.Initiator = params.Initiator || null;
+        this.ContractFile = 'ContractFile' in params ? params.ContractFile : null;
+        this.ContractName = 'ContractName' in params ? params.ContractName : null;
+        this.Remarks = 'Remarks' in params ? params.Remarks : null;
+        this.Initiator = 'Initiator' in params ? params.Initiator : null;
 
     }
 }
@@ -893,8 +893,8 @@ class CreateContractByUploadResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TaskId = params.TaskId || null;
-        this.RequestId = params.RequestId || null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -928,8 +928,8 @@ class DeleteSealResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.SealResId = params.SealResId || null;
-        this.RequestId = params.RequestId || null;
+        this.SealResId = 'SealResId' in params ? params.SealResId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -987,12 +987,12 @@ class CreatePersonalAccountRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Module = params.Module || null;
-        this.Operation = params.Operation || null;
-        this.Name = params.Name || null;
-        this.IdentType = params.IdentType || null;
-        this.IdentNo = params.IdentNo || null;
-        this.MobilePhone = params.MobilePhone || null;
+        this.Module = 'Module' in params ? params.Module : null;
+        this.Operation = 'Operation' in params ? params.Operation : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.IdentType = 'IdentType' in params ? params.IdentType : null;
+        this.IdentNo = 'IdentNo' in params ? params.IdentNo : null;
+        this.MobilePhone = 'MobilePhone' in params ? params.MobilePhone : null;
 
     }
 }
@@ -1032,9 +1032,9 @@ class DescribeTaskStatusRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Module = params.Module || null;
-        this.Operation = params.Operation || null;
-        this.TaskId = params.TaskId || null;
+        this.Module = 'Module' in params ? params.Module : null;
+        this.Operation = 'Operation' in params ? params.Operation : null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
 
     }
 }
@@ -1104,13 +1104,13 @@ class SignContractByKeywordRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Module = params.Module || null;
-        this.Operation = params.Operation || null;
-        this.ContractResId = params.ContractResId || null;
-        this.AccountResId = params.AccountResId || null;
-        this.AuthorizationTime = params.AuthorizationTime || null;
-        this.Position = params.Position || null;
-        this.SealResId = params.SealResId || null;
+        this.Module = 'Module' in params ? params.Module : null;
+        this.Operation = 'Operation' in params ? params.Operation : null;
+        this.ContractResId = 'ContractResId' in params ? params.ContractResId : null;
+        this.AccountResId = 'AccountResId' in params ? params.AccountResId : null;
+        this.AuthorizationTime = 'AuthorizationTime' in params ? params.AuthorizationTime : null;
+        this.Position = 'Position' in params ? params.Position : null;
+        this.SealResId = 'SealResId' in params ? params.SealResId : null;
 
         if (params.SignKeyword) {
             let obj = new SignKeyword();
@@ -1162,10 +1162,10 @@ class SendVcodeRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Module = params.Module || null;
-        this.Operation = params.Operation || null;
-        this.ContractResId = params.ContractResId || null;
-        this.AccountResId = params.AccountResId || null;
+        this.Module = 'Module' in params ? params.Module : null;
+        this.Operation = 'Operation' in params ? params.Operation : null;
+        this.ContractResId = 'ContractResId' in params ? params.ContractResId : null;
+        this.AccountResId = 'AccountResId' in params ? params.AccountResId : null;
 
     }
 }
@@ -1235,12 +1235,12 @@ class SignContractByCoordinateRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Module = params.Module || null;
-        this.Operation = params.Operation || null;
-        this.ContractResId = params.ContractResId || null;
-        this.AccountResId = params.AccountResId || null;
-        this.AuthorizationTime = params.AuthorizationTime || null;
-        this.Position = params.Position || null;
+        this.Module = 'Module' in params ? params.Module : null;
+        this.Operation = 'Operation' in params ? params.Operation : null;
+        this.ContractResId = 'ContractResId' in params ? params.ContractResId : null;
+        this.AccountResId = 'AccountResId' in params ? params.AccountResId : null;
+        this.AuthorizationTime = 'AuthorizationTime' in params ? params.AuthorizationTime : null;
+        this.Position = 'Position' in params ? params.Position : null;
 
         if (params.SignLocations) {
             this.SignLocations = new Array();
@@ -1250,7 +1250,7 @@ class SignContractByCoordinateRequest extends  AbstractModel {
                 this.SignLocations.push(obj);
             }
         }
-        this.SealResId = params.SealResId || null;
+        this.SealResId = 'SealResId' in params ? params.SealResId : null;
 
     }
 }
@@ -1278,7 +1278,7 @@ class SignContractByCoordinateResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1318,9 +1318,9 @@ class DeleteAccountResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.DelSuccessList = params.DelSuccessList || null;
-        this.DelFailedList = params.DelFailedList || null;
-        this.RequestId = params.RequestId || null;
+        this.DelSuccessList = 'DelSuccessList' in params ? params.DelSuccessList : null;
+        this.DelFailedList = 'DelFailedList' in params ? params.DelFailedList : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }

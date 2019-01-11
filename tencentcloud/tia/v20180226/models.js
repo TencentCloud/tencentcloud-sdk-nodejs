@@ -51,9 +51,9 @@ class DeleteModelRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Name = params.Name || null;
-        this.Cluster = params.Cluster || null;
-        this.ServType = params.ServType || null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Cluster = 'Cluster' in params ? params.Cluster : null;
+        this.ServType = 'ServType' in params ? params.ServType : null;
 
     }
 }
@@ -111,12 +111,12 @@ class Log extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ContainerName = params.ContainerName || null;
-        this.Log = params.Log || null;
-        this.Namespace = params.Namespace || null;
-        this.PodId = params.PodId || null;
-        this.PodName = params.PodName || null;
-        this.Time = params.Time || null;
+        this.ContainerName = 'ContainerName' in params ? params.ContainerName : null;
+        this.Log = 'Log' in params ? params.Log : null;
+        this.Namespace = 'Namespace' in params ? params.Namespace : null;
+        this.PodId = 'PodId' in params ? params.PodId : null;
+        this.PodName = 'PodName' in params ? params.PodName : null;
+        this.Time = 'Time' in params ? params.Time : null;
 
     }
 }
@@ -144,7 +144,7 @@ class DeleteJobResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -250,20 +250,20 @@ class CreateJobRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Name = params.Name || null;
-        this.Cluster = params.Cluster || null;
-        this.RuntimeVersion = params.RuntimeVersion || null;
-        this.PackageDir = params.PackageDir || null;
-        this.Command = params.Command || null;
-        this.Args = params.Args || null;
-        this.ScaleTier = params.ScaleTier || null;
-        this.MasterType = params.MasterType || null;
-        this.WorkerType = params.WorkerType || null;
-        this.ParameterServerType = params.ParameterServerType || null;
-        this.WorkerCount = params.WorkerCount || null;
-        this.ParameterServerCount = params.ParameterServerCount || null;
-        this.Debug = params.Debug || null;
-        this.RuntimeConf = params.RuntimeConf || null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Cluster = 'Cluster' in params ? params.Cluster : null;
+        this.RuntimeVersion = 'RuntimeVersion' in params ? params.RuntimeVersion : null;
+        this.PackageDir = 'PackageDir' in params ? params.PackageDir : null;
+        this.Command = 'Command' in params ? params.Command : null;
+        this.Args = 'Args' in params ? params.Args : null;
+        this.ScaleTier = 'ScaleTier' in params ? params.ScaleTier : null;
+        this.MasterType = 'MasterType' in params ? params.MasterType : null;
+        this.WorkerType = 'WorkerType' in params ? params.WorkerType : null;
+        this.ParameterServerType = 'ParameterServerType' in params ? params.ParameterServerType : null;
+        this.WorkerCount = 'WorkerCount' in params ? params.WorkerCount : null;
+        this.ParameterServerCount = 'ParameterServerCount' in params ? params.ParameterServerCount : null;
+        this.Debug = 'Debug' in params ? params.Debug : null;
+        this.RuntimeConf = 'RuntimeConf' in params ? params.RuntimeConf : null;
 
     }
 }
@@ -303,7 +303,7 @@ class CreateJobResponse extends  AbstractModel {
             obj.deserialize(params.Job)
             this.Job = obj;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -337,8 +337,8 @@ class InstallAgentResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TiaVersion = params.TiaVersion || null;
-        this.RequestId = params.RequestId || null;
+        this.TiaVersion = 'TiaVersion' in params ? params.TiaVersion : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -378,7 +378,7 @@ class DescribeModelResponse extends  AbstractModel {
             obj.deserialize(params.Model)
             this.Model = obj;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -418,9 +418,9 @@ class DescribeModelRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Name = params.Name || null;
-        this.Cluster = params.Cluster || null;
-        this.ServType = params.ServType || null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Cluster = 'Cluster' in params ? params.Cluster : null;
+        this.ServType = 'ServType' in params ? params.ServType : null;
 
     }
 }
@@ -454,8 +454,8 @@ class DescribeJobRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Name = params.Name || null;
-        this.Cluster = params.Cluster || null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Cluster = 'Cluster' in params ? params.Cluster : null;
 
     }
 }
@@ -495,9 +495,9 @@ class ListJobsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Cluster = params.Cluster || null;
-        this.Limit = params.Limit || null;
-        this.Offset = params.Offset || null;
+        this.Cluster = 'Cluster' in params ? params.Cluster : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
 
     }
 }
@@ -657,29 +657,29 @@ class Job extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Name = params.Name || null;
-        this.CreateTime = params.CreateTime || null;
-        this.StartTime = params.StartTime || null;
-        this.EndTime = params.EndTime || null;
-        this.State = params.State || null;
-        this.Message = params.Message || null;
-        this.ScaleTier = params.ScaleTier || null;
-        this.MasterType = params.MasterType || null;
-        this.WorkerType = params.WorkerType || null;
-        this.ParameterServerType = params.ParameterServerType || null;
-        this.WorkerCount = params.WorkerCount || null;
-        this.ParameterServerCount = params.ParameterServerCount || null;
-        this.PackageDir = params.PackageDir || null;
-        this.Command = params.Command || null;
-        this.Args = params.Args || null;
-        this.Cluster = params.Cluster || null;
-        this.RuntimeVersion = params.RuntimeVersion || null;
-        this.DelTime = params.DelTime || null;
-        this.AppId = params.AppId || null;
-        this.Uin = params.Uin || null;
-        this.Debug = params.Debug || null;
-        this.RuntimeConf = params.RuntimeConf || null;
-        this.Id = params.Id || null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.State = 'State' in params ? params.State : null;
+        this.Message = 'Message' in params ? params.Message : null;
+        this.ScaleTier = 'ScaleTier' in params ? params.ScaleTier : null;
+        this.MasterType = 'MasterType' in params ? params.MasterType : null;
+        this.WorkerType = 'WorkerType' in params ? params.WorkerType : null;
+        this.ParameterServerType = 'ParameterServerType' in params ? params.ParameterServerType : null;
+        this.WorkerCount = 'WorkerCount' in params ? params.WorkerCount : null;
+        this.ParameterServerCount = 'ParameterServerCount' in params ? params.ParameterServerCount : null;
+        this.PackageDir = 'PackageDir' in params ? params.PackageDir : null;
+        this.Command = 'Command' in params ? params.Command : null;
+        this.Args = 'Args' in params ? params.Args : null;
+        this.Cluster = 'Cluster' in params ? params.Cluster : null;
+        this.RuntimeVersion = 'RuntimeVersion' in params ? params.RuntimeVersion : null;
+        this.DelTime = 'DelTime' in params ? params.DelTime : null;
+        this.AppId = 'AppId' in params ? params.AppId : null;
+        this.Uin = 'Uin' in params ? params.Uin : null;
+        this.Debug = 'Debug' in params ? params.Debug : null;
+        this.RuntimeConf = 'RuntimeConf' in params ? params.RuntimeConf : null;
+        this.Id = 'Id' in params ? params.Id : null;
 
     }
 }
@@ -719,7 +719,7 @@ class CreateModelResponse extends  AbstractModel {
             obj.deserialize(params.Model)
             this.Model = obj;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -765,10 +765,10 @@ class ListModelsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Cluster = params.Cluster || null;
-        this.Limit = params.Limit || null;
-        this.Offset = params.Offset || null;
-        this.ServType = params.ServType || null;
+        this.Cluster = 'Cluster' in params ? params.Cluster : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.ServType = 'ServType' in params ? params.ServType : null;
 
     }
 }
@@ -814,7 +814,7 @@ class QueryLogsResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Context = params.Context || null;
+        this.Context = 'Context' in params ? params.Context : null;
 
         if (params.Logs) {
             this.Logs = new Array();
@@ -824,8 +824,8 @@ class QueryLogsResponse extends  AbstractModel {
                 this.Logs.push(obj);
             }
         }
-        this.Listover = params.Listover || null;
-        this.RequestId = params.RequestId || null;
+        this.Listover = 'Listover' in params ? params.Listover : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -865,9 +865,9 @@ class InstallAgentRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Cluster = params.Cluster || null;
-        this.TiaVersion = params.TiaVersion || null;
-        this.Update = params.Update || null;
+        this.Cluster = 'Cluster' in params ? params.Cluster : null;
+        this.TiaVersion = 'TiaVersion' in params ? params.TiaVersion : null;
+        this.Update = 'Update' in params ? params.Update : null;
 
     }
 }
@@ -910,7 +910,7 @@ class ListJobsResponse extends  AbstractModel {
                 this.Jobs.push(obj);
             }
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -968,12 +968,12 @@ class QueryLogsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.JobName = params.JobName || null;
-        this.Cluster = params.Cluster || null;
-        this.StartTime = params.StartTime || null;
-        this.EndTime = params.EndTime || null;
-        this.Limit = params.Limit || null;
-        this.Context = params.Context || null;
+        this.JobName = 'JobName' in params ? params.JobName : null;
+        this.Cluster = 'Cluster' in params ? params.Cluster : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Context = 'Context' in params ? params.Context : null;
 
     }
 }
@@ -1086,19 +1086,19 @@ class Model extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Name = params.Name || null;
-        this.Description = params.Description || null;
-        this.Cluster = params.Cluster || null;
-        this.Model = params.Model || null;
-        this.RuntimeVersion = params.RuntimeVersion || null;
-        this.CreateTime = params.CreateTime || null;
-        this.State = params.State || null;
-        this.ServingUrl = params.ServingUrl || null;
-        this.Message = params.Message || null;
-        this.AppId = params.AppId || null;
-        this.ServType = params.ServType || null;
-        this.Expose = params.Expose || null;
-        this.Replicas = params.Replicas || null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.Cluster = 'Cluster' in params ? params.Cluster : null;
+        this.Model = 'Model' in params ? params.Model : null;
+        this.RuntimeVersion = 'RuntimeVersion' in params ? params.RuntimeVersion : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.State = 'State' in params ? params.State : null;
+        this.ServingUrl = 'ServingUrl' in params ? params.ServingUrl : null;
+        this.Message = 'Message' in params ? params.Message : null;
+        this.AppId = 'AppId' in params ? params.AppId : null;
+        this.ServType = 'ServType' in params ? params.ServType : null;
+        this.Expose = 'Expose' in params ? params.Expose : null;
+        this.Replicas = 'Replicas' in params ? params.Replicas : null;
 
     }
 }
@@ -1126,7 +1126,7 @@ class DeleteModelResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1169,7 +1169,7 @@ class ListModelsResponse extends  AbstractModel {
                 this.Models.push(obj);
             }
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1203,8 +1203,8 @@ class DeleteJobRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Name = params.Name || null;
-        this.Cluster = params.Cluster || null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Cluster = 'Cluster' in params ? params.Cluster : null;
 
     }
 }
@@ -1280,15 +1280,15 @@ class CreateModelRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Name = params.Name || null;
-        this.Model = params.Model || null;
-        this.Description = params.Description || null;
-        this.Cluster = params.Cluster || null;
-        this.RuntimeVersion = params.RuntimeVersion || null;
-        this.Replicas = params.Replicas || null;
-        this.Expose = params.Expose || null;
-        this.ServType = params.ServType || null;
-        this.RuntimeConf = params.RuntimeConf || null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Model = 'Model' in params ? params.Model : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.Cluster = 'Cluster' in params ? params.Cluster : null;
+        this.RuntimeVersion = 'RuntimeVersion' in params ? params.RuntimeVersion : null;
+        this.Replicas = 'Replicas' in params ? params.Replicas : null;
+        this.Expose = 'Expose' in params ? params.Expose : null;
+        this.ServType = 'ServType' in params ? params.ServType : null;
+        this.RuntimeConf = 'RuntimeConf' in params ? params.RuntimeConf : null;
 
     }
 }
@@ -1328,7 +1328,7 @@ class DescribeJobResponse extends  AbstractModel {
             obj.deserialize(params.Job)
             this.Job = obj;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }

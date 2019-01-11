@@ -51,7 +51,7 @@ class DescribeSyncJobsResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = params.TotalCount || null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
 
         if (params.JobList) {
             this.JobList = new Array();
@@ -61,7 +61,7 @@ class DescribeSyncJobsResponse extends  AbstractModel {
                 this.JobList.push(obj);
             }
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -101,7 +101,7 @@ class DescribeMigrateJobsResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = params.TotalCount || null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
 
         if (params.JobList) {
             this.JobList = new Array();
@@ -111,7 +111,7 @@ class DescribeMigrateJobsResponse extends  AbstractModel {
                 this.JobList.push(obj);
             }
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -175,12 +175,12 @@ class MigrateDetailInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.StepAll = params.StepAll || null;
-        this.StepNow = params.StepNow || null;
-        this.Progress = params.Progress || null;
-        this.CurrentStepProgress = params.CurrentStepProgress || null;
-        this.MasterSlaveDistance = params.MasterSlaveDistance || null;
-        this.SecondsBehindMaster = params.SecondsBehindMaster || null;
+        this.StepAll = 'StepAll' in params ? params.StepAll : null;
+        this.StepNow = 'StepNow' in params ? params.StepNow : null;
+        this.Progress = 'Progress' in params ? params.Progress : null;
+        this.CurrentStepProgress = 'CurrentStepProgress' in params ? params.CurrentStepProgress : null;
+        this.MasterSlaveDistance = 'MasterSlaveDistance' in params ? params.MasterSlaveDistance : null;
+        this.SecondsBehindMaster = 'SecondsBehindMaster' in params ? params.SecondsBehindMaster : null;
 
         if (params.StepInfo) {
             this.StepInfo = new Array();
@@ -217,7 +217,7 @@ class DeleteMigrateJobResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -245,7 +245,7 @@ class CreateMigrateCheckJobRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.JobId = params.JobId || null;
+        this.JobId = 'JobId' in params ? params.JobId : null;
 
     }
 }
@@ -279,8 +279,8 @@ class SyncInstanceInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Region = params.Region || null;
-        this.InstanceId = params.InstanceId || null;
+        this.Region = 'Region' in params ? params.Region : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
 
     }
 }
@@ -314,8 +314,8 @@ class CreateSyncJobResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.JobId = params.JobId || null;
-        this.RequestId = params.RequestId || null;
+        this.JobId = 'JobId' in params ? params.JobId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -343,7 +343,7 @@ class DescribeMigrateCheckJobRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.JobId = params.JobId || null;
+        this.JobId = 'JobId' in params ? params.JobId : null;
 
     }
 }
@@ -371,7 +371,7 @@ class StartMigrateJobRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.JobId = params.JobId || null;
+        this.JobId = 'JobId' in params ? params.JobId : null;
 
     }
 }
@@ -411,7 +411,7 @@ class SwitchDrToMasterRequest extends  AbstractModel {
             obj.deserialize(params.DstInfo)
             this.DstInfo = obj;
         }
-        this.DatabaseType = params.DatabaseType || null;
+        this.DatabaseType = 'DatabaseType' in params ? params.DatabaseType : null;
 
     }
 }
@@ -439,7 +439,7 @@ class StartSyncJobRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.JobId = params.JobId || null;
+        this.JobId = 'JobId' in params ? params.JobId : null;
 
     }
 }
@@ -523,30 +523,30 @@ Schema:s1}]
         if (!params) {
             return;
         }
-        this.JobName = params.JobName || null;
+        this.JobName = 'JobName' in params ? params.JobName : null;
 
         if (params.MigrateOption) {
             let obj = new MigrateOption();
             obj.deserialize(params.MigrateOption)
             this.MigrateOption = obj;
         }
-        this.SrcDatabaseType = params.SrcDatabaseType || null;
-        this.SrcAccessType = params.SrcAccessType || null;
+        this.SrcDatabaseType = 'SrcDatabaseType' in params ? params.SrcDatabaseType : null;
+        this.SrcAccessType = 'SrcAccessType' in params ? params.SrcAccessType : null;
 
         if (params.SrcInfo) {
             let obj = new SrcInfo();
             obj.deserialize(params.SrcInfo)
             this.SrcInfo = obj;
         }
-        this.DstDatabaseType = params.DstDatabaseType || null;
-        this.DstAccessType = params.DstAccessType || null;
+        this.DstDatabaseType = 'DstDatabaseType' in params ? params.DstDatabaseType : null;
+        this.DstAccessType = 'DstAccessType' in params ? params.DstAccessType : null;
 
         if (params.DstInfo) {
             let obj = new DstInfo();
             obj.deserialize(params.DstInfo)
             this.DstInfo = obj;
         }
-        this.DatabaseInfo = params.DatabaseInfo || null;
+        this.DatabaseInfo = 'DatabaseInfo' in params ? params.DatabaseInfo : null;
 
     }
 }
@@ -658,24 +658,24 @@ class SyncJobInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.JobId = params.JobId || null;
-        this.JobName = params.JobName || null;
+        this.JobId = 'JobId' in params ? params.JobId : null;
+        this.JobName = 'JobName' in params ? params.JobName : null;
 
         if (params.SyncOption) {
             let obj = new SyncOption();
             obj.deserialize(params.SyncOption)
             this.SyncOption = obj;
         }
-        this.SrcAccessType = params.SrcAccessType || null;
-        this.SrcDatabaseType = params.SrcDatabaseType || null;
+        this.SrcAccessType = 'SrcAccessType' in params ? params.SrcAccessType : null;
+        this.SrcDatabaseType = 'SrcDatabaseType' in params ? params.SrcDatabaseType : null;
 
         if (params.SrcInfo) {
             let obj = new SyncInstanceInfo();
             obj.deserialize(params.SrcInfo)
             this.SrcInfo = obj;
         }
-        this.DstAccessType = params.DstAccessType || null;
-        this.DstDatabaseType = params.DstDatabaseType || null;
+        this.DstAccessType = 'DstAccessType' in params ? params.DstAccessType : null;
+        this.DstDatabaseType = 'DstDatabaseType' in params ? params.DstDatabaseType : null;
 
         if (params.DstInfo) {
             let obj = new SyncInstanceInfo();
@@ -688,11 +688,11 @@ class SyncJobInfo extends  AbstractModel {
             obj.deserialize(params.Detail)
             this.Detail = obj;
         }
-        this.Status = params.Status || null;
-        this.DatabaseInfo = params.DatabaseInfo || null;
-        this.CreateTime = params.CreateTime || null;
-        this.StartTime = params.StartTime || null;
-        this.EndTime = params.EndTime || null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.DatabaseInfo = 'DatabaseInfo' in params ? params.DatabaseInfo : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
 
     }
 }
@@ -744,11 +744,11 @@ class DstInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = params.InstanceId || null;
-        this.Ip = params.Ip || null;
-        this.Port = params.Port || null;
-        this.Region = params.Region || null;
-        this.ReadOnly = params.ReadOnly || null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Ip = 'Ip' in params ? params.Ip : null;
+        this.Port = 'Port' in params ? params.Port : null;
+        this.Region = 'Region' in params ? params.Region : null;
+        this.ReadOnly = 'ReadOnly' in params ? params.ReadOnly : null;
 
     }
 }
@@ -776,7 +776,7 @@ class ModifyMigrateJobResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -882,20 +882,20 @@ class SrcInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.AccessKey = params.AccessKey || null;
-        this.Ip = params.Ip || null;
-        this.Port = params.Port || null;
-        this.User = params.User || null;
-        this.Password = params.Password || null;
-        this.RdsInstanceId = params.RdsInstanceId || null;
-        this.CvmInstanceId = params.CvmInstanceId || null;
-        this.UniqDcgId = params.UniqDcgId || null;
-        this.VpcId = params.VpcId || null;
-        this.SubnetId = params.SubnetId || null;
-        this.UniqVpnGwId = params.UniqVpnGwId || null;
-        this.InstanceId = params.InstanceId || null;
-        this.Region = params.Region || null;
-        this.Supplier = params.Supplier || null;
+        this.AccessKey = 'AccessKey' in params ? params.AccessKey : null;
+        this.Ip = 'Ip' in params ? params.Ip : null;
+        this.Port = 'Port' in params ? params.Port : null;
+        this.User = 'User' in params ? params.User : null;
+        this.Password = 'Password' in params ? params.Password : null;
+        this.RdsInstanceId = 'RdsInstanceId' in params ? params.RdsInstanceId : null;
+        this.CvmInstanceId = 'CvmInstanceId' in params ? params.CvmInstanceId : null;
+        this.UniqDcgId = 'UniqDcgId' in params ? params.UniqDcgId : null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
+        this.UniqVpnGwId = 'UniqVpnGwId' in params ? params.UniqVpnGwId : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Region = 'Region' in params ? params.Region : null;
+        this.Supplier = 'Supplier' in params ? params.Supplier : null;
 
     }
 }
@@ -935,9 +935,9 @@ class ConsistencyParams extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.SelectRowsPerTable = params.SelectRowsPerTable || null;
-        this.TablesSelectAll = params.TablesSelectAll || null;
-        this.TablesSelectCount = params.TablesSelectCount || null;
+        this.SelectRowsPerTable = 'SelectRowsPerTable' in params ? params.SelectRowsPerTable : null;
+        this.TablesSelectAll = 'TablesSelectAll' in params ? params.TablesSelectAll : null;
+        this.TablesSelectCount = 'TablesSelectCount' in params ? params.TablesSelectCount : null;
 
     }
 }
@@ -983,10 +983,10 @@ class SyncOption extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.SyncObject = params.SyncObject || null;
-        this.RunMode = params.RunMode || null;
-        this.SyncType = params.SyncType || null;
-        this.ConsistencyType = params.ConsistencyType || null;
+        this.SyncObject = 'SyncObject' in params ? params.SyncObject : null;
+        this.RunMode = 'RunMode' in params ? params.RunMode : null;
+        this.SyncType = 'SyncType' in params ? params.SyncType : null;
+        this.ConsistencyType = 'ConsistencyType' in params ? params.ConsistencyType : null;
 
     }
 }
@@ -1070,13 +1070,13 @@ MongoDB可定义如下的参数:
         if (!params) {
             return;
         }
-        this.RunMode = params.RunMode || null;
-        this.ExpectTime = params.ExpectTime || null;
-        this.MigrateType = params.MigrateType || null;
-        this.MigrateObject = params.MigrateObject || null;
-        this.ConsistencyType = params.ConsistencyType || null;
-        this.IsOverrideRoot = params.IsOverrideRoot || null;
-        this.ExternParams = params.ExternParams || null;
+        this.RunMode = 'RunMode' in params ? params.RunMode : null;
+        this.ExpectTime = 'ExpectTime' in params ? params.ExpectTime : null;
+        this.MigrateType = 'MigrateType' in params ? params.MigrateType : null;
+        this.MigrateObject = 'MigrateObject' in params ? params.MigrateObject : null;
+        this.ConsistencyType = 'ConsistencyType' in params ? params.ConsistencyType : null;
+        this.IsOverrideRoot = 'IsOverrideRoot' in params ? params.IsOverrideRoot : null;
+        this.ExternParams = 'ExternParams' in params ? params.ExternParams : null;
 
         if (params.ConsistencyParams) {
             let obj = new ConsistencyParams();
@@ -1110,7 +1110,7 @@ class CreateMigrateCheckJobResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1156,10 +1156,10 @@ class MigrateStepDetailInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.StepNo = params.StepNo || null;
-        this.StepName = params.StepName || null;
-        this.StepId = params.StepId || null;
-        this.Status = params.Status || null;
+        this.StepNo = 'StepNo' in params ? params.StepNo : null;
+        this.StepName = 'StepName' in params ? params.StepName : null;
+        this.StepId = 'StepId' in params ? params.StepId : null;
+        this.Status = 'Status' in params ? params.Status : null;
 
     }
 }
@@ -1217,12 +1217,12 @@ class DescribeMigrateCheckJobResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Status = params.Status || null;
-        this.ErrorCode = params.ErrorCode || null;
-        this.ErrorMessage = params.ErrorMessage || null;
-        this.Progress = params.Progress || null;
-        this.CheckFlag = params.CheckFlag || null;
-        this.RequestId = params.RequestId || null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.ErrorCode = 'ErrorCode' in params ? params.ErrorCode : null;
+        this.ErrorMessage = 'ErrorMessage' in params ? params.ErrorMessage : null;
+        this.Progress = 'Progress' in params ? params.Progress : null;
+        this.CheckFlag = 'CheckFlag' in params ? params.CheckFlag : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1250,7 +1250,7 @@ class StartSyncJobResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1278,7 +1278,7 @@ class CreateSyncCheckJobResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1306,7 +1306,7 @@ class DescribeSyncCheckJobRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.JobId = params.JobId || null;
+        this.JobId = 'JobId' in params ? params.JobId : null;
 
     }
 }
@@ -1334,7 +1334,7 @@ class StopMigrateJobRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.JobId = params.JobId || null;
+        this.JobId = 'JobId' in params ? params.JobId : null;
 
     }
 }
@@ -1362,7 +1362,7 @@ class ModifySyncJobResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1439,29 +1439,29 @@ class ModifyMigrateJobRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.JobId = params.JobId || null;
-        this.JobName = params.JobName || null;
+        this.JobId = 'JobId' in params ? params.JobId : null;
+        this.JobName = 'JobName' in params ? params.JobName : null;
 
         if (params.MigrateOption) {
             let obj = new MigrateOption();
             obj.deserialize(params.MigrateOption)
             this.MigrateOption = obj;
         }
-        this.SrcAccessType = params.SrcAccessType || null;
+        this.SrcAccessType = 'SrcAccessType' in params ? params.SrcAccessType : null;
 
         if (params.SrcInfo) {
             let obj = new SrcInfo();
             obj.deserialize(params.SrcInfo)
             this.SrcInfo = obj;
         }
-        this.DstAccessType = params.DstAccessType || null;
+        this.DstAccessType = 'DstAccessType' in params ? params.DstAccessType : null;
 
         if (params.DstInfo) {
             let obj = new DstInfo();
             obj.deserialize(params.DstInfo)
             this.DstInfo = obj;
         }
-        this.DatabaseInfo = params.DatabaseInfo || null;
+        this.DatabaseInfo = 'DatabaseInfo' in params ? params.DatabaseInfo : null;
 
     }
 }
@@ -1489,7 +1489,7 @@ class CompleteMigrateJobRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.JobId = params.JobId || null;
+        this.JobId = 'JobId' in params ? params.JobId : null;
 
     }
 }
@@ -1535,10 +1535,10 @@ class SyncCheckStepInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.StepNo = params.StepNo || null;
-        this.StepName = params.StepName || null;
-        this.StepCode = params.StepCode || null;
-        this.StepMessage = params.StepMessage || null;
+        this.StepNo = 'StepNo' in params ? params.StepNo : null;
+        this.StepName = 'StepName' in params ? params.StepName : null;
+        this.StepCode = 'StepCode' in params ? params.StepCode : null;
+        this.StepMessage = 'StepMessage' in params ? params.StepMessage : null;
 
     }
 }
@@ -1616,30 +1616,30 @@ class CreateSyncJobRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.JobName = params.JobName || null;
+        this.JobName = 'JobName' in params ? params.JobName : null;
 
         if (params.SyncOption) {
             let obj = new SyncOption();
             obj.deserialize(params.SyncOption)
             this.SyncOption = obj;
         }
-        this.SrcDatabaseType = params.SrcDatabaseType || null;
-        this.SrcAccessType = params.SrcAccessType || null;
+        this.SrcDatabaseType = 'SrcDatabaseType' in params ? params.SrcDatabaseType : null;
+        this.SrcAccessType = 'SrcAccessType' in params ? params.SrcAccessType : null;
 
         if (params.SrcInfo) {
             let obj = new SyncInstanceInfo();
             obj.deserialize(params.SrcInfo)
             this.SrcInfo = obj;
         }
-        this.DstDatabaseType = params.DstDatabaseType || null;
-        this.DstAccessType = params.DstAccessType || null;
+        this.DstDatabaseType = 'DstDatabaseType' in params ? params.DstDatabaseType : null;
+        this.DstAccessType = 'DstAccessType' in params ? params.DstAccessType : null;
 
         if (params.DstInfo) {
             let obj = new SyncInstanceInfo();
             obj.deserialize(params.DstInfo)
             this.DstInfo = obj;
         }
-        this.DatabaseInfo = params.DatabaseInfo || null;
+        this.DatabaseInfo = 'DatabaseInfo' in params ? params.DatabaseInfo : null;
 
     }
 }
@@ -1697,12 +1697,12 @@ class DescribeSyncJobsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.JobId = params.JobId || null;
-        this.JobName = params.JobName || null;
-        this.Order = params.Order || null;
-        this.OrderSeq = params.OrderSeq || null;
-        this.Offset = params.Offset || null;
-        this.Limit = params.Limit || null;
+        this.JobId = 'JobId' in params ? params.JobId : null;
+        this.JobName = 'JobName' in params ? params.JobName : null;
+        this.Order = 'Order' in params ? params.Order : null;
+        this.OrderSeq = 'OrderSeq' in params ? params.OrderSeq : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
 
     }
 }
@@ -1760,12 +1760,12 @@ class DescribeMigrateJobsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.JobId = params.JobId || null;
-        this.JobName = params.JobName || null;
-        this.Order = params.Order || null;
-        this.OrderSeq = params.OrderSeq || null;
-        this.Offset = params.Offset || null;
-        this.Limit = params.Limit || null;
+        this.JobId = 'JobId' in params ? params.JobId : null;
+        this.JobName = 'JobName' in params ? params.JobName : null;
+        this.Order = 'Order' in params ? params.Order : null;
+        this.OrderSeq = 'OrderSeq' in params ? params.OrderSeq : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
 
     }
 }
@@ -1829,12 +1829,12 @@ class SyncDetailInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.StepAll = params.StepAll || null;
-        this.StepNow = params.StepNow || null;
-        this.Progress = params.Progress || null;
-        this.CurrentStepProgress = params.CurrentStepProgress || null;
-        this.MasterSlaveDistance = params.MasterSlaveDistance || null;
-        this.SecondsBehindMaster = params.SecondsBehindMaster || null;
+        this.StepAll = 'StepAll' in params ? params.StepAll : null;
+        this.StepNow = 'StepNow' in params ? params.StepNow : null;
+        this.Progress = 'Progress' in params ? params.Progress : null;
+        this.CurrentStepProgress = 'CurrentStepProgress' in params ? params.CurrentStepProgress : null;
+        this.MasterSlaveDistance = 'MasterSlaveDistance' in params ? params.MasterSlaveDistance : null;
+        this.SecondsBehindMaster = 'SecondsBehindMaster' in params ? params.SecondsBehindMaster : null;
 
         if (params.StepInfo) {
             this.StepInfo = new Array();
@@ -1889,10 +1889,10 @@ class SyncStepDetailInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.StepNo = params.StepNo || null;
-        this.StepName = params.StepName || null;
-        this.CanStop = params.CanStop || null;
-        this.StepId = params.StepId || null;
+        this.StepNo = 'StepNo' in params ? params.StepNo : null;
+        this.StepName = 'StepName' in params ? params.StepName : null;
+        this.CanStop = 'CanStop' in params ? params.CanStop : null;
+        this.StepId = 'StepId' in params ? params.StepId : null;
 
     }
 }
@@ -1920,7 +1920,7 @@ class StopMigrateJobResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1948,7 +1948,7 @@ class DeleteSyncJobResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1976,7 +1976,7 @@ class CreateSyncCheckJobRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.JobId = params.JobId || null;
+        this.JobId = 'JobId' in params ? params.JobId : null;
 
     }
 }
@@ -2010,8 +2010,8 @@ class SwitchDrToMasterResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.AsyncRequestId = params.AsyncRequestId || null;
-        this.RequestId = params.RequestId || null;
+        this.AsyncRequestId = 'AsyncRequestId' in params ? params.AsyncRequestId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2039,7 +2039,7 @@ class CompleteMigrateJobResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2067,7 +2067,7 @@ class StartMigrateJobResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2101,8 +2101,8 @@ class CreateMigrateJobResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.JobId = params.JobId || null;
-        this.RequestId = params.RequestId || null;
+        this.JobId = 'JobId' in params ? params.JobId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2130,7 +2130,7 @@ class DeleteMigrateJobRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.JobId = params.JobId || null;
+        this.JobId = 'JobId' in params ? params.JobId : null;
 
     }
 }
@@ -2158,7 +2158,7 @@ class DeleteSyncJobRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.JobId = params.JobId || null;
+        this.JobId = 'JobId' in params ? params.JobId : null;
 
     }
 }
@@ -2270,35 +2270,35 @@ class MigrateJobInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.JobId = params.JobId || null;
-        this.JobName = params.JobName || null;
+        this.JobId = 'JobId' in params ? params.JobId : null;
+        this.JobName = 'JobName' in params ? params.JobName : null;
 
         if (params.MigrateOption) {
             let obj = new MigrateOption();
             obj.deserialize(params.MigrateOption)
             this.MigrateOption = obj;
         }
-        this.SrcDatabaseType = params.SrcDatabaseType || null;
-        this.SrcAccessType = params.SrcAccessType || null;
+        this.SrcDatabaseType = 'SrcDatabaseType' in params ? params.SrcDatabaseType : null;
+        this.SrcAccessType = 'SrcAccessType' in params ? params.SrcAccessType : null;
 
         if (params.SrcInfo) {
             let obj = new SrcInfo();
             obj.deserialize(params.SrcInfo)
             this.SrcInfo = obj;
         }
-        this.DstDatabaseType = params.DstDatabaseType || null;
-        this.DstAccessType = params.DstAccessType || null;
+        this.DstDatabaseType = 'DstDatabaseType' in params ? params.DstDatabaseType : null;
+        this.DstAccessType = 'DstAccessType' in params ? params.DstAccessType : null;
 
         if (params.DstInfo) {
             let obj = new DstInfo();
             obj.deserialize(params.DstInfo)
             this.DstInfo = obj;
         }
-        this.DatabaseInfo = params.DatabaseInfo || null;
-        this.CreateTime = params.CreateTime || null;
-        this.StartTime = params.StartTime || null;
-        this.EndTime = params.EndTime || null;
-        this.Status = params.Status || null;
+        this.DatabaseInfo = 'DatabaseInfo' in params ? params.DatabaseInfo : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.Status = 'Status' in params ? params.Status : null;
 
         if (params.Detail) {
             let obj = new MigrateDetailInfo();
@@ -2352,15 +2352,15 @@ class ModifySyncJobRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.JobId = params.JobId || null;
-        this.JobName = params.JobName || null;
+        this.JobId = 'JobId' in params ? params.JobId : null;
+        this.JobName = 'JobName' in params ? params.JobName : null;
 
         if (params.SyncOption) {
             let obj = new SyncOption();
             obj.deserialize(params.SyncOption)
             this.SyncOption = obj;
         }
-        this.DatabaseInfo = params.DatabaseInfo || null;
+        this.DatabaseInfo = 'DatabaseInfo' in params ? params.DatabaseInfo : null;
 
     }
 }
@@ -2418,9 +2418,9 @@ class DescribeSyncCheckJobResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Status = params.Status || null;
-        this.ErrorCode = params.ErrorCode || null;
-        this.ErrorMessage = params.ErrorMessage || null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.ErrorCode = 'ErrorCode' in params ? params.ErrorCode : null;
+        this.ErrorMessage = 'ErrorMessage' in params ? params.ErrorMessage : null;
 
         if (params.StepInfo) {
             this.StepInfo = new Array();
@@ -2430,8 +2430,8 @@ class DescribeSyncCheckJobResponse extends  AbstractModel {
                 this.StepInfo.push(obj);
             }
         }
-        this.CheckFlag = params.CheckFlag || null;
-        this.RequestId = params.RequestId || null;
+        this.CheckFlag = 'CheckFlag' in params ? params.CheckFlag : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }

@@ -51,7 +51,7 @@ class CreateDirectConnectGatewayResponse extends  AbstractModel {
             obj.deserialize(params.DirectConnectGateway)
             this.DirectConnectGateway = obj;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -104,7 +104,7 @@ class DescribeBandwidthPackagesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.BandwidthPackageIds = params.BandwidthPackageIds || null;
+        this.BandwidthPackageIds = 'BandwidthPackageIds' in params ? params.BandwidthPackageIds : null;
 
         if (params.Filters) {
             this.Filters = new Array();
@@ -114,8 +114,8 @@ class DescribeBandwidthPackagesRequest extends  AbstractModel {
                 this.Filters.push(obj);
             }
         }
-        this.Offset = params.Offset || null;
-        this.Limit = params.Limit || null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
 
     }
 }
@@ -143,7 +143,7 @@ class DeleteDirectConnectGatewayCcnRoutesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -171,7 +171,7 @@ class HaVipDisassociateAddressIpRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.HaVipId = params.HaVipId || null;
+        this.HaVipId = 'HaVipId' in params ? params.HaVipId : null;
 
     }
 }
@@ -253,16 +253,16 @@ class Subnet extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.VpcId = params.VpcId || null;
-        this.SubnetId = params.SubnetId || null;
-        this.SubnetName = params.SubnetName || null;
-        this.CidrBlock = params.CidrBlock || null;
-        this.IsDefault = params.IsDefault || null;
-        this.EnableBroadcast = params.EnableBroadcast || null;
-        this.Zone = params.Zone || null;
-        this.RouteTableId = params.RouteTableId || null;
-        this.CreatedTime = params.CreatedTime || null;
-        this.AvailableIpAddressCount = params.AvailableIpAddressCount || null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
+        this.SubnetName = 'SubnetName' in params ? params.SubnetName : null;
+        this.CidrBlock = 'CidrBlock' in params ? params.CidrBlock : null;
+        this.IsDefault = 'IsDefault' in params ? params.IsDefault : null;
+        this.EnableBroadcast = 'EnableBroadcast' in params ? params.EnableBroadcast : null;
+        this.Zone = 'Zone' in params ? params.Zone : null;
+        this.RouteTableId = 'RouteTableId' in params ? params.RouteTableId : null;
+        this.CreatedTime = 'CreatedTime' in params ? params.CreatedTime : null;
+        this.AvailableIpAddressCount = 'AvailableIpAddressCount' in params ? params.AvailableIpAddressCount : null;
 
     }
 }
@@ -302,9 +302,9 @@ class ModifyAddressTemplateGroupAttributeRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.AddressTemplateGroupId = params.AddressTemplateGroupId || null;
-        this.AddressTemplateGroupName = params.AddressTemplateGroupName || null;
-        this.AddressTemplateIds = params.AddressTemplateIds || null;
+        this.AddressTemplateGroupId = 'AddressTemplateGroupId' in params ? params.AddressTemplateGroupId : null;
+        this.AddressTemplateGroupName = 'AddressTemplateGroupName' in params ? params.AddressTemplateGroupName : null;
+        this.AddressTemplateIds = 'AddressTemplateIds' in params ? params.AddressTemplateIds : null;
 
     }
 }
@@ -332,7 +332,7 @@ class ModifyAddressTemplateAttributeResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -378,10 +378,10 @@ class ServiceTemplateGroup extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ServiceTemplateGroupId = params.ServiceTemplateGroupId || null;
-        this.ServiceTemplateGroupName = params.ServiceTemplateGroupName || null;
-        this.ServiceTemplateIdSet = params.ServiceTemplateIdSet || null;
-        this.CreatedTime = params.CreatedTime || null;
+        this.ServiceTemplateGroupId = 'ServiceTemplateGroupId' in params ? params.ServiceTemplateGroupId : null;
+        this.ServiceTemplateGroupName = 'ServiceTemplateGroupName' in params ? params.ServiceTemplateGroupName : null;
+        this.ServiceTemplateIdSet = 'ServiceTemplateIdSet' in params ? params.ServiceTemplateIdSet : null;
+        this.CreatedTime = 'CreatedTime' in params ? params.CreatedTime : null;
 
     }
 }
@@ -421,8 +421,8 @@ class RouteConflict extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RouteTableId = params.RouteTableId || null;
-        this.DestinationCidrBlock = params.DestinationCidrBlock || null;
+        this.RouteTableId = 'RouteTableId' in params ? params.RouteTableId : null;
+        this.DestinationCidrBlock = 'DestinationCidrBlock' in params ? params.DestinationCidrBlock : null;
 
         if (params.ConflictSet) {
             this.ConflictSet = new Array();
@@ -495,12 +495,12 @@ class CreateNetworkInterfaceRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.VpcId = params.VpcId || null;
-        this.NetworkInterfaceName = params.NetworkInterfaceName || null;
-        this.SubnetId = params.SubnetId || null;
-        this.NetworkInterfaceDescription = params.NetworkInterfaceDescription || null;
-        this.SecondaryPrivateIpAddressCount = params.SecondaryPrivateIpAddressCount || null;
-        this.SecurityGroupIds = params.SecurityGroupIds || null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.NetworkInterfaceName = 'NetworkInterfaceName' in params ? params.NetworkInterfaceName : null;
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
+        this.NetworkInterfaceDescription = 'NetworkInterfaceDescription' in params ? params.NetworkInterfaceDescription : null;
+        this.SecondaryPrivateIpAddressCount = 'SecondaryPrivateIpAddressCount' in params ? params.SecondaryPrivateIpAddressCount : null;
+        this.SecurityGroupIds = 'SecurityGroupIds' in params ? params.SecurityGroupIds : null;
 
         if (params.PrivateIpAddresses) {
             this.PrivateIpAddresses = new Array();
@@ -543,7 +543,7 @@ class CreateRoutesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RouteTableId = params.RouteTableId || null;
+        this.RouteTableId = 'RouteTableId' in params ? params.RouteTableId : null;
 
         if (params.Routes) {
             this.Routes = new Array();
@@ -616,13 +616,13 @@ class CCN extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.CcnId = params.CcnId || null;
-        this.CcnName = params.CcnName || null;
-        this.CcnDescription = params.CcnDescription || null;
-        this.InstanceCount = params.InstanceCount || null;
-        this.CreateTime = params.CreateTime || null;
-        this.State = params.State || null;
-        this.QosLevel = params.QosLevel || null;
+        this.CcnId = 'CcnId' in params ? params.CcnId : null;
+        this.CcnName = 'CcnName' in params ? params.CcnName : null;
+        this.CcnDescription = 'CcnDescription' in params ? params.CcnDescription : null;
+        this.InstanceCount = 'InstanceCount' in params ? params.InstanceCount : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.State = 'State' in params ? params.State : null;
+        this.QosLevel = 'QosLevel' in params ? params.QosLevel : null;
 
     }
 }
@@ -692,11 +692,11 @@ class CreateVpnConnectionRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.VpcId = params.VpcId || null;
-        this.VpnGatewayId = params.VpnGatewayId || null;
-        this.CustomerGatewayId = params.CustomerGatewayId || null;
-        this.VpnConnectionName = params.VpnConnectionName || null;
-        this.PreShareKey = params.PreShareKey || null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.VpnGatewayId = 'VpnGatewayId' in params ? params.VpnGatewayId : null;
+        this.CustomerGatewayId = 'CustomerGatewayId' in params ? params.CustomerGatewayId : null;
+        this.VpnConnectionName = 'VpnConnectionName' in params ? params.VpnConnectionName : null;
+        this.PreShareKey = 'PreShareKey' in params ? params.PreShareKey : null;
 
         if (params.SecurityPolicyDatabases) {
             this.SecurityPolicyDatabases = new Array();
@@ -781,13 +781,13 @@ class SecurityGroupAssociationStatistics extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.SecurityGroupId = params.SecurityGroupId || null;
-        this.CVM = params.CVM || null;
-        this.CDB = params.CDB || null;
-        this.ENI = params.ENI || null;
-        this.SG = params.SG || null;
-        this.CLB = params.CLB || null;
-        this.InstanceStatistics = params.InstanceStatistics || null;
+        this.SecurityGroupId = 'SecurityGroupId' in params ? params.SecurityGroupId : null;
+        this.CVM = 'CVM' in params ? params.CVM : null;
+        this.CDB = 'CDB' in params ? params.CDB : null;
+        this.ENI = 'ENI' in params ? params.ENI : null;
+        this.SG = 'SG' in params ? params.SG : null;
+        this.CLB = 'CLB' in params ? params.CLB : null;
+        this.InstanceStatistics = 'InstanceStatistics' in params ? params.InstanceStatistics : null;
 
     }
 }
@@ -863,15 +863,15 @@ class CcnRoute extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RouteId = params.RouteId || null;
-        this.DestinationCidrBlock = params.DestinationCidrBlock || null;
-        this.InstanceType = params.InstanceType || null;
-        this.InstanceId = params.InstanceId || null;
-        this.InstanceName = params.InstanceName || null;
-        this.InstanceRegion = params.InstanceRegion || null;
-        this.UpdateTime = params.UpdateTime || null;
-        this.Enabled = params.Enabled || null;
-        this.InstanceUin = params.InstanceUin || null;
+        this.RouteId = 'RouteId' in params ? params.RouteId : null;
+        this.DestinationCidrBlock = 'DestinationCidrBlock' in params ? params.DestinationCidrBlock : null;
+        this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
+        this.InstanceRegion = 'InstanceRegion' in params ? params.InstanceRegion : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.Enabled = 'Enabled' in params ? params.Enabled : null;
+        this.InstanceUin = 'InstanceUin' in params ? params.InstanceUin : null;
 
     }
 }
@@ -899,7 +899,7 @@ class DeleteServiceTemplateResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -933,8 +933,8 @@ class CreateServiceTemplateRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ServiceTemplateName = params.ServiceTemplateName || null;
-        this.Services = params.Services || null;
+        this.ServiceTemplateName = 'ServiceTemplateName' in params ? params.ServiceTemplateName : null;
+        this.Services = 'Services' in params ? params.Services : null;
 
     }
 }
@@ -962,7 +962,7 @@ class DeleteHaVipResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1074,18 +1074,18 @@ class VpnConnection extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.VpnConnectionId = params.VpnConnectionId || null;
-        this.VpnConnectionName = params.VpnConnectionName || null;
-        this.VpcId = params.VpcId || null;
-        this.VpnGatewayId = params.VpnGatewayId || null;
-        this.CustomerGatewayId = params.CustomerGatewayId || null;
-        this.PreShareKey = params.PreShareKey || null;
-        this.VpnProto = params.VpnProto || null;
-        this.EncryptProto = params.EncryptProto || null;
-        this.RouteType = params.RouteType || null;
-        this.CreatedTime = params.CreatedTime || null;
-        this.State = params.State || null;
-        this.NetStatus = params.NetStatus || null;
+        this.VpnConnectionId = 'VpnConnectionId' in params ? params.VpnConnectionId : null;
+        this.VpnConnectionName = 'VpnConnectionName' in params ? params.VpnConnectionName : null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.VpnGatewayId = 'VpnGatewayId' in params ? params.VpnGatewayId : null;
+        this.CustomerGatewayId = 'CustomerGatewayId' in params ? params.CustomerGatewayId : null;
+        this.PreShareKey = 'PreShareKey' in params ? params.PreShareKey : null;
+        this.VpnProto = 'VpnProto' in params ? params.VpnProto : null;
+        this.EncryptProto = 'EncryptProto' in params ? params.EncryptProto : null;
+        this.RouteType = 'RouteType' in params ? params.RouteType : null;
+        this.CreatedTime = 'CreatedTime' in params ? params.CreatedTime : null;
+        this.State = 'State' in params ? params.State : null;
+        this.NetStatus = 'NetStatus' in params ? params.NetStatus : null;
 
         if (params.SecurityPolicyDatabaseSet) {
             this.SecurityPolicyDatabaseSet = new Array();
@@ -1134,7 +1134,7 @@ class RejectAttachCcnInstancesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1185,10 +1185,10 @@ class CreateDirectConnectGatewayRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.DirectConnectGatewayName = params.DirectConnectGatewayName || null;
-        this.NetworkType = params.NetworkType || null;
-        this.NetworkInstanceId = params.NetworkInstanceId || null;
-        this.GatewayType = params.GatewayType || null;
+        this.DirectConnectGatewayName = 'DirectConnectGatewayName' in params ? params.DirectConnectGatewayName : null;
+        this.NetworkType = 'NetworkType' in params ? params.NetworkType : null;
+        this.NetworkInstanceId = 'NetworkInstanceId' in params ? params.NetworkInstanceId : null;
+        this.GatewayType = 'GatewayType' in params ? params.GatewayType : null;
 
     }
 }
@@ -1238,7 +1238,7 @@ class DescribeCcnsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.CcnIds = params.CcnIds || null;
+        this.CcnIds = 'CcnIds' in params ? params.CcnIds : null;
 
         if (params.Filters) {
             this.Filters = new Array();
@@ -1248,8 +1248,8 @@ class DescribeCcnsRequest extends  AbstractModel {
                 this.Filters.push(obj);
             }
         }
-        this.Offset = params.Offset || null;
-        this.Limit = params.Limit || null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
 
     }
 }
@@ -1277,7 +1277,7 @@ class TransformAddressResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1323,7 +1323,7 @@ class DescribeVpnConnectionsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.VpnConnectionIds = params.VpnConnectionIds || null;
+        this.VpnConnectionIds = 'VpnConnectionIds' in params ? params.VpnConnectionIds : null;
 
         if (params.Filters) {
             this.Filters = new Array();
@@ -1333,8 +1333,8 @@ class DescribeVpnConnectionsRequest extends  AbstractModel {
                 this.Filters.push(obj);
             }
         }
-        this.Offset = params.Offset || null;
-        this.Limit = params.Limit || null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
 
     }
 }
@@ -1368,8 +1368,8 @@ class CreateAddressTemplateGroupRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.AddressTemplateGroupName = params.AddressTemplateGroupName || null;
-        this.AddressTemplateIds = params.AddressTemplateIds || null;
+        this.AddressTemplateGroupName = 'AddressTemplateGroupName' in params ? params.AddressTemplateGroupName : null;
+        this.AddressTemplateIds = 'AddressTemplateIds' in params ? params.AddressTemplateIds : null;
 
     }
 }
@@ -1422,7 +1422,7 @@ class DescribeNetworkInterfacesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.NetworkInterfaceIds = params.NetworkInterfaceIds || null;
+        this.NetworkInterfaceIds = 'NetworkInterfaceIds' in params ? params.NetworkInterfaceIds : null;
 
         if (params.Filters) {
             this.Filters = new Array();
@@ -1432,8 +1432,8 @@ class DescribeNetworkInterfacesRequest extends  AbstractModel {
                 this.Filters.push(obj);
             }
         }
-        this.Offset = params.Offset || null;
-        this.Limit = params.Limit || null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
 
     }
 }
@@ -1485,7 +1485,7 @@ class DescribeSubnetsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.SubnetIds = params.SubnetIds || null;
+        this.SubnetIds = 'SubnetIds' in params ? params.SubnetIds : null;
 
         if (params.Filters) {
             this.Filters = new Array();
@@ -1495,8 +1495,8 @@ class DescribeSubnetsRequest extends  AbstractModel {
                 this.Filters.push(obj);
             }
         }
-        this.Offset = params.Offset || null;
-        this.Limit = params.Limit || null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
 
     }
 }
@@ -1542,10 +1542,10 @@ class CreateSubnetRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.VpcId = params.VpcId || null;
-        this.SubnetName = params.SubnetName || null;
-        this.CidrBlock = params.CidrBlock || null;
-        this.Zone = params.Zone || null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.SubnetName = 'SubnetName' in params ? params.SubnetName : null;
+        this.CidrBlock = 'CidrBlock' in params ? params.CidrBlock : null;
+        this.Zone = 'Zone' in params ? params.Zone : null;
 
     }
 }
@@ -1591,10 +1591,10 @@ class AddressTemplateGroup extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.AddressTemplateGroupName = params.AddressTemplateGroupName || null;
-        this.AddressTemplateGroupId = params.AddressTemplateGroupId || null;
-        this.AddressTemplateIdSet = params.AddressTemplateIdSet || null;
-        this.CreatedTime = params.CreatedTime || null;
+        this.AddressTemplateGroupName = 'AddressTemplateGroupName' in params ? params.AddressTemplateGroupName : null;
+        this.AddressTemplateGroupId = 'AddressTemplateGroupId' in params ? params.AddressTemplateGroupId : null;
+        this.AddressTemplateIdSet = 'AddressTemplateIdSet' in params ? params.AddressTemplateIdSet : null;
+        this.CreatedTime = 'CreatedTime' in params ? params.CreatedTime : null;
 
     }
 }
@@ -1640,15 +1640,15 @@ class DownloadCustomerGatewayConfigurationRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.VpnGatewayId = params.VpnGatewayId || null;
-        this.VpnConnectionId = params.VpnConnectionId || null;
+        this.VpnGatewayId = 'VpnGatewayId' in params ? params.VpnGatewayId : null;
+        this.VpnConnectionId = 'VpnConnectionId' in params ? params.VpnConnectionId : null;
 
         if (params.CustomerGatewayVendor) {
             let obj = new CustomerGatewayVendor();
             obj.deserialize(params.CustomerGatewayVendor)
             this.CustomerGatewayVendor = obj;
         }
-        this.InterfaceName = params.InterfaceName || null;
+        this.InterfaceName = 'InterfaceName' in params ? params.InterfaceName : null;
 
     }
 }
@@ -1676,7 +1676,7 @@ class DeleteBandwidthPackageRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.BandwidthPackageId = params.BandwidthPackageId || null;
+        this.BandwidthPackageId = 'BandwidthPackageId' in params ? params.BandwidthPackageId : null;
 
     }
 }
@@ -1760,16 +1760,16 @@ class HaVip extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.HaVipId = params.HaVipId || null;
-        this.HaVipName = params.HaVipName || null;
-        this.Vip = params.Vip || null;
-        this.VpcId = params.VpcId || null;
-        this.SubnetId = params.SubnetId || null;
-        this.NetworkInterfaceId = params.NetworkInterfaceId || null;
-        this.InstanceId = params.InstanceId || null;
-        this.AddressIp = params.AddressIp || null;
-        this.State = params.State || null;
-        this.CreatedTime = params.CreatedTime || null;
+        this.HaVipId = 'HaVipId' in params ? params.HaVipId : null;
+        this.HaVipName = 'HaVipName' in params ? params.HaVipName : null;
+        this.Vip = 'Vip' in params ? params.Vip : null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
+        this.NetworkInterfaceId = 'NetworkInterfaceId' in params ? params.NetworkInterfaceId : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.AddressIp = 'AddressIp' in params ? params.AddressIp : null;
+        this.State = 'State' in params ? params.State : null;
+        this.CreatedTime = 'CreatedTime' in params ? params.CreatedTime : null;
 
     }
 }
@@ -1803,8 +1803,8 @@ class CreateDefaultVpcRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Zone = params.Zone || null;
-        this.Force = params.Force || null;
+        this.Zone = 'Zone' in params ? params.Zone : null;
+        this.Force = 'Force' in params ? params.Force : null;
 
     }
 }
@@ -1832,7 +1832,7 @@ class DeleteSubnetResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1878,10 +1878,10 @@ class ModifyAddressesBandwidthRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.AddressIds = params.AddressIds || null;
-        this.InternetMaxBandwidthOut = params.InternetMaxBandwidthOut || null;
-        this.StartTime = params.StartTime || null;
-        this.EndTime = params.EndTime || null;
+        this.AddressIds = 'AddressIds' in params ? params.AddressIds : null;
+        this.InternetMaxBandwidthOut = 'InternetMaxBandwidthOut' in params ? params.InternetMaxBandwidthOut : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
 
     }
 }
@@ -1927,7 +1927,7 @@ class DescribeCustomerGatewaysRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.CustomerGatewayIds = params.CustomerGatewayIds || null;
+        this.CustomerGatewayIds = 'CustomerGatewayIds' in params ? params.CustomerGatewayIds : null;
 
         if (params.Filters) {
             this.Filters = new Array();
@@ -1937,8 +1937,8 @@ class DescribeCustomerGatewaysRequest extends  AbstractModel {
                 this.Filters.push(obj);
             }
         }
-        this.Offset = params.Offset || null;
-        this.Limit = params.Limit || null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
 
     }
 }
@@ -2020,16 +2020,16 @@ class Vpc extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.VpcName = params.VpcName || null;
-        this.VpcId = params.VpcId || null;
-        this.CidrBlock = params.CidrBlock || null;
-        this.IsDefault = params.IsDefault || null;
-        this.EnableMulticast = params.EnableMulticast || null;
-        this.CreatedTime = params.CreatedTime || null;
-        this.DnsServerSet = params.DnsServerSet || null;
-        this.DomainName = params.DomainName || null;
-        this.DhcpOptionsId = params.DhcpOptionsId || null;
-        this.EnableDhcp = params.EnableDhcp || null;
+        this.VpcName = 'VpcName' in params ? params.VpcName : null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.CidrBlock = 'CidrBlock' in params ? params.CidrBlock : null;
+        this.IsDefault = 'IsDefault' in params ? params.IsDefault : null;
+        this.EnableMulticast = 'EnableMulticast' in params ? params.EnableMulticast : null;
+        this.CreatedTime = 'CreatedTime' in params ? params.CreatedTime : null;
+        this.DnsServerSet = 'DnsServerSet' in params ? params.DnsServerSet : null;
+        this.DomainName = 'DomainName' in params ? params.DomainName : null;
+        this.DhcpOptionsId = 'DhcpOptionsId' in params ? params.DhcpOptionsId : null;
+        this.EnableDhcp = 'EnableDhcp' in params ? params.EnableDhcp : null;
 
     }
 }
@@ -2069,7 +2069,7 @@ class CreateVpnGatewayResponse extends  AbstractModel {
             obj.deserialize(params.VpnGateway)
             this.VpnGateway = obj;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2103,8 +2103,8 @@ class ResetVpnConnectionRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.VpnGatewayId = params.VpnGatewayId || null;
-        this.VpnConnectionId = params.VpnConnectionId || null;
+        this.VpnGatewayId = 'VpnGatewayId' in params ? params.VpnGatewayId : null;
+        this.VpnConnectionId = 'VpnConnectionId' in params ? params.VpnConnectionId : null;
 
     }
 }
@@ -2132,7 +2132,7 @@ class ModifyVpnConnectionAttributeResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2181,8 +2181,8 @@ class DescribeCustomerGatewaysResponse extends  AbstractModel {
                 this.CustomerGatewaySet.push(obj);
             }
         }
-        this.TotalCount = params.TotalCount || null;
-        this.RequestId = params.RequestId || null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2210,7 +2210,7 @@ class ModifyNetworkInterfaceAttributeResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2315,15 +2315,15 @@ class NetworkInterface extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.NetworkInterfaceId = params.NetworkInterfaceId || null;
-        this.NetworkInterfaceName = params.NetworkInterfaceName || null;
-        this.NetworkInterfaceDescription = params.NetworkInterfaceDescription || null;
-        this.SubnetId = params.SubnetId || null;
-        this.VpcId = params.VpcId || null;
-        this.GroupSet = params.GroupSet || null;
-        this.Primary = params.Primary || null;
-        this.MacAddress = params.MacAddress || null;
-        this.State = params.State || null;
+        this.NetworkInterfaceId = 'NetworkInterfaceId' in params ? params.NetworkInterfaceId : null;
+        this.NetworkInterfaceName = 'NetworkInterfaceName' in params ? params.NetworkInterfaceName : null;
+        this.NetworkInterfaceDescription = 'NetworkInterfaceDescription' in params ? params.NetworkInterfaceDescription : null;
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.GroupSet = 'GroupSet' in params ? params.GroupSet : null;
+        this.Primary = 'Primary' in params ? params.Primary : null;
+        this.MacAddress = 'MacAddress' in params ? params.MacAddress : null;
+        this.State = 'State' in params ? params.State : null;
 
         if (params.PrivateIpAddressSet) {
             this.PrivateIpAddressSet = new Array();
@@ -2339,8 +2339,8 @@ class NetworkInterface extends  AbstractModel {
             obj.deserialize(params.Attachment)
             this.Attachment = obj;
         }
-        this.Zone = params.Zone || null;
-        this.CreatedTime = params.CreatedTime || null;
+        this.Zone = 'Zone' in params ? params.Zone : null;
+        this.CreatedTime = 'CreatedTime' in params ? params.CreatedTime : null;
 
     }
 }
@@ -2401,9 +2401,9 @@ class ModifyServiceTemplateGroupAttributeRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ServiceTemplateGroupId = params.ServiceTemplateGroupId || null;
-        this.ServiceTemplateGroupName = params.ServiceTemplateGroupName || null;
-        this.ServiceTemplateIds = params.ServiceTemplateIds || null;
+        this.ServiceTemplateGroupId = 'ServiceTemplateGroupId' in params ? params.ServiceTemplateGroupId : null;
+        this.ServiceTemplateGroupName = 'ServiceTemplateGroupName' in params ? params.ServiceTemplateGroupName : null;
+        this.ServiceTemplateIds = 'ServiceTemplateIds' in params ? params.ServiceTemplateIds : null;
 
     }
 }
@@ -2437,7 +2437,7 @@ class InquiryPriceRenewVpnGatewayRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.VpnGatewayId = params.VpnGatewayId || null;
+        this.VpnGatewayId = 'VpnGatewayId' in params ? params.VpnGatewayId : null;
 
         if (params.InstanceChargePrepaid) {
             let obj = new InstanceChargePrepaid();
@@ -2483,7 +2483,7 @@ class DescribeVpnGatewaysResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = params.TotalCount || null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
 
         if (params.VpnGatewaySet) {
             this.VpnGatewaySet = new Array();
@@ -2493,7 +2493,7 @@ class DescribeVpnGatewaysResponse extends  AbstractModel {
                 this.VpnGatewaySet.push(obj);
             }
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2527,8 +2527,8 @@ class CreateCustomerGatewayRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.CustomerGatewayName = params.CustomerGatewayName || null;
-        this.IpAddress = params.IpAddress || null;
+        this.CustomerGatewayName = 'CustomerGatewayName' in params ? params.CustomerGatewayName : null;
+        this.IpAddress = 'IpAddress' in params ? params.IpAddress : null;
 
     }
 }
@@ -2559,6 +2559,18 @@ class CcnRegionBandwidthLimit extends  AbstractModel {
          */
         this.IsBm = null;
 
+        /**
+         * 目的地域，例如：ap-shanghai
+         * @type {string || null}
+         */
+        this.DstRegion = null;
+
+        /**
+         * 目的地域是否为黑石地域，默认`false`。
+         * @type {boolean || null}
+         */
+        this.DstIsBm = null;
+
     }
 
     /**
@@ -2568,9 +2580,11 @@ class CcnRegionBandwidthLimit extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Region = params.Region || null;
-        this.BandwidthLimit = params.BandwidthLimit || null;
-        this.IsBm = params.IsBm || null;
+        this.Region = 'Region' in params ? params.Region : null;
+        this.BandwidthLimit = 'BandwidthLimit' in params ? params.BandwidthLimit : null;
+        this.IsBm = 'IsBm' in params ? params.IsBm : null;
+        this.DstRegion = 'DstRegion' in params ? params.DstRegion : null;
+        this.DstIsBm = 'DstIsBm' in params ? params.DstIsBm : null;
 
     }
 }
@@ -2627,8 +2641,8 @@ class DescribeCcnRoutesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.CcnId = params.CcnId || null;
-        this.RouteIds = params.RouteIds || null;
+        this.CcnId = 'CcnId' in params ? params.CcnId : null;
+        this.RouteIds = 'RouteIds' in params ? params.RouteIds : null;
 
         if (params.Filters) {
             this.Filters = new Array();
@@ -2638,8 +2652,8 @@ class DescribeCcnRoutesRequest extends  AbstractModel {
                 this.Filters.push(obj);
             }
         }
-        this.Offset = params.Offset || null;
-        this.Limit = params.Limit || null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
 
     }
 }
@@ -2679,9 +2693,9 @@ class ModifyServiceTemplateAttributeRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ServiceTemplateId = params.ServiceTemplateId || null;
-        this.ServiceTemplateName = params.ServiceTemplateName || null;
-        this.Services = params.Services || null;
+        this.ServiceTemplateId = 'ServiceTemplateId' in params ? params.ServiceTemplateId : null;
+        this.ServiceTemplateName = 'ServiceTemplateName' in params ? params.ServiceTemplateName : null;
+        this.Services = 'Services' in params ? params.Services : null;
 
     }
 }
@@ -2721,7 +2735,7 @@ class DescribeServiceTemplateGroupsResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = params.TotalCount || null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
 
         if (params.ServiceTemplateGroupSet) {
             this.ServiceTemplateGroupSet = new Array();
@@ -2731,7 +2745,7 @@ class DescribeServiceTemplateGroupsResponse extends  AbstractModel {
                 this.ServiceTemplateGroupSet.push(obj);
             }
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2759,7 +2773,7 @@ class DetachCcnInstancesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2793,8 +2807,8 @@ class ReplaceRouteTableAssociationRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.SubnetId = params.SubnetId || null;
-        this.RouteTableId = params.RouteTableId || null;
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
+        this.RouteTableId = 'RouteTableId' in params ? params.RouteTableId : null;
 
     }
 }
@@ -2822,7 +2836,7 @@ class ModifyServiceTemplateGroupAttributeResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2934,21 +2948,21 @@ class VpnGateway extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.VpnGatewayId = params.VpnGatewayId || null;
-        this.VpcId = params.VpcId || null;
-        this.VpnGatewayName = params.VpnGatewayName || null;
-        this.Type = params.Type || null;
-        this.State = params.State || null;
-        this.PublicIpAddress = params.PublicIpAddress || null;
-        this.RenewFlag = params.RenewFlag || null;
-        this.InstanceChargeType = params.InstanceChargeType || null;
-        this.InternetMaxBandwidthOut = params.InternetMaxBandwidthOut || null;
-        this.CreatedTime = params.CreatedTime || null;
-        this.ExpiredTime = params.ExpiredTime || null;
-        this.IsAddressBlocked = params.IsAddressBlocked || null;
-        this.NewPurchasePlan = params.NewPurchasePlan || null;
-        this.RestrictState = params.RestrictState || null;
-        this.Zone = params.Zone || null;
+        this.VpnGatewayId = 'VpnGatewayId' in params ? params.VpnGatewayId : null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.VpnGatewayName = 'VpnGatewayName' in params ? params.VpnGatewayName : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.State = 'State' in params ? params.State : null;
+        this.PublicIpAddress = 'PublicIpAddress' in params ? params.PublicIpAddress : null;
+        this.RenewFlag = 'RenewFlag' in params ? params.RenewFlag : null;
+        this.InstanceChargeType = 'InstanceChargeType' in params ? params.InstanceChargeType : null;
+        this.InternetMaxBandwidthOut = 'InternetMaxBandwidthOut' in params ? params.InternetMaxBandwidthOut : null;
+        this.CreatedTime = 'CreatedTime' in params ? params.CreatedTime : null;
+        this.ExpiredTime = 'ExpiredTime' in params ? params.ExpiredTime : null;
+        this.IsAddressBlocked = 'IsAddressBlocked' in params ? params.IsAddressBlocked : null;
+        this.NewPurchasePlan = 'NewPurchasePlan' in params ? params.NewPurchasePlan : null;
+        this.RestrictState = 'RestrictState' in params ? params.RestrictState : null;
+        this.Zone = 'Zone' in params ? params.Zone : null;
 
     }
 }
@@ -3024,25 +3038,25 @@ class SecurityGroupPolicy extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.PolicyIndex = params.PolicyIndex || null;
-        this.Protocol = params.Protocol || null;
-        this.Port = params.Port || null;
+        this.PolicyIndex = 'PolicyIndex' in params ? params.PolicyIndex : null;
+        this.Protocol = 'Protocol' in params ? params.Protocol : null;
+        this.Port = 'Port' in params ? params.Port : null;
 
         if (params.ServiceTemplate) {
             let obj = new ServiceTemplateSpecification();
             obj.deserialize(params.ServiceTemplate)
             this.ServiceTemplate = obj;
         }
-        this.CidrBlock = params.CidrBlock || null;
-        this.SecurityGroupId = params.SecurityGroupId || null;
+        this.CidrBlock = 'CidrBlock' in params ? params.CidrBlock : null;
+        this.SecurityGroupId = 'SecurityGroupId' in params ? params.SecurityGroupId : null;
 
         if (params.AddressTemplate) {
             let obj = new AddressTemplateSpecification();
             obj.deserialize(params.AddressTemplate)
             this.AddressTemplate = obj;
         }
-        this.Action = params.Action || null;
-        this.PolicyDescription = params.PolicyDescription || null;
+        this.Action = 'Action' in params ? params.Action : null;
+        this.PolicyDescription = 'PolicyDescription' in params ? params.PolicyDescription : null;
 
     }
 }
@@ -3076,8 +3090,8 @@ class DownloadCustomerGatewayConfigurationResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.CustomerGatewayConfiguration = params.CustomerGatewayConfiguration || null;
-        this.RequestId = params.RequestId || null;
+        this.CustomerGatewayConfiguration = 'CustomerGatewayConfiguration' in params ? params.CustomerGatewayConfiguration : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3105,7 +3119,7 @@ class DeleteSubnetRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.SubnetId = params.SubnetId || null;
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
 
     }
 }
@@ -3145,7 +3159,7 @@ class InquiryPriceRenewVpnGatewayResponse extends  AbstractModel {
             obj.deserialize(params.Price)
             this.Price = obj;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3196,8 +3210,8 @@ class DescribeAddressTemplateGroupsRequest extends  AbstractModel {
                 this.Filters.push(obj);
             }
         }
-        this.Offset = params.Offset || null;
-        this.Limit = params.Limit || null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
 
     }
 }
@@ -3231,8 +3245,8 @@ class ResetVpnGatewayInternetMaxBandwidthRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.VpnGatewayId = params.VpnGatewayId || null;
-        this.InternetMaxBandwidthOut = params.InternetMaxBandwidthOut || null;
+        this.VpnGatewayId = 'VpnGatewayId' in params ? params.VpnGatewayId : null;
+        this.InternetMaxBandwidthOut = 'InternetMaxBandwidthOut' in params ? params.InternetMaxBandwidthOut : null;
 
     }
 }
@@ -3260,7 +3274,7 @@ class UnassignPrivateIpAddressesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3294,7 +3308,7 @@ class RenewVpnGatewayRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.VpnGatewayId = params.VpnGatewayId || null;
+        this.VpnGatewayId = 'VpnGatewayId' in params ? params.VpnGatewayId : null;
 
         if (params.InstanceChargePrepaid) {
             let obj = new InstanceChargePrepaid();
@@ -3340,7 +3354,7 @@ class SecurityGroupPolicySet extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Version = params.Version || null;
+        this.Version = 'Version' in params ? params.Version : null;
 
         if (params.Egress) {
             this.Egress = new Array();
@@ -3386,7 +3400,7 @@ class ResetAttachCcnInstancesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3414,7 +3428,7 @@ class AllocateAddressesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.AddressCount = params.AddressCount || null;
+        this.AddressCount = 'AddressCount' in params ? params.AddressCount : null;
 
     }
 }
@@ -3460,10 +3474,10 @@ class NetworkInterfaceAttachment extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = params.InstanceId || null;
-        this.DeviceIndex = params.DeviceIndex || null;
-        this.InstanceAccountId = params.InstanceAccountId || null;
-        this.AttachTime = params.AttachTime || null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.DeviceIndex = 'DeviceIndex' in params ? params.DeviceIndex : null;
+        this.InstanceAccountId = 'InstanceAccountId' in params ? params.InstanceAccountId : null;
+        this.AttachTime = 'AttachTime' in params ? params.AttachTime : null;
 
     }
 }
@@ -3527,9 +3541,9 @@ class RouteTable extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.VpcId = params.VpcId || null;
-        this.RouteTableId = params.RouteTableId || null;
-        this.RouteTableName = params.RouteTableName || null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.RouteTableId = 'RouteTableId' in params ? params.RouteTableId : null;
+        this.RouteTableName = 'RouteTableName' in params ? params.RouteTableName : null;
 
         if (params.AssociationSet) {
             this.AssociationSet = new Array();
@@ -3548,8 +3562,8 @@ class RouteTable extends  AbstractModel {
                 this.RouteSet.push(obj);
             }
         }
-        this.Main = params.Main || null;
-        this.CreatedTime = params.CreatedTime || null;
+        this.Main = 'Main' in params ? params.Main : null;
+        this.CreatedTime = 'CreatedTime' in params ? params.CreatedTime : null;
 
     }
 }
@@ -3577,7 +3591,7 @@ class DeleteNetworkInterfaceRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.NetworkInterfaceId = params.NetworkInterfaceId || null;
+        this.NetworkInterfaceId = 'NetworkInterfaceId' in params ? params.NetworkInterfaceId : null;
 
     }
 }
@@ -3617,7 +3631,7 @@ class InquiryPriceResetVpnGatewayInternetMaxBandwidthResponse extends  AbstractM
             obj.deserialize(params.Price)
             this.Price = obj;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3651,8 +3665,8 @@ class DetachClassicLinkVpcRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.VpcId = params.VpcId || null;
-        this.InstanceIds = params.InstanceIds || null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
 
     }
 }
@@ -3680,7 +3694,7 @@ class DeleteAddressTemplateGroupResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3708,7 +3722,7 @@ class ReplaceRoutesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3736,7 +3750,7 @@ class DeleteBandwidthPackageResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3776,9 +3790,9 @@ class DirectConnectGatewayCcnRoute extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RouteId = params.RouteId || null;
-        this.DestinationCidrBlock = params.DestinationCidrBlock || null;
-        this.ASPath = params.ASPath || null;
+        this.RouteId = 'RouteId' in params ? params.RouteId : null;
+        this.DestinationCidrBlock = 'DestinationCidrBlock' in params ? params.DestinationCidrBlock : null;
+        this.ASPath = 'ASPath' in params ? params.ASPath : null;
 
     }
 }
@@ -3806,7 +3820,7 @@ class DeleteVpcRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.VpcId = params.VpcId || null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
 
     }
 }
@@ -3840,8 +3854,8 @@ class ModifyRouteTableAttributeRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RouteTableId = params.RouteTableId || null;
-        this.RouteTableName = params.RouteTableName || null;
+        this.RouteTableId = 'RouteTableId' in params ? params.RouteTableId : null;
+        this.RouteTableName = 'RouteTableName' in params ? params.RouteTableName : null;
 
     }
 }
@@ -3881,9 +3895,9 @@ class ModifyDirectConnectGatewayAttributeRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.DirectConnectGatewayId = params.DirectConnectGatewayId || null;
-        this.DirectConnectGatewayName = params.DirectConnectGatewayName || null;
-        this.CcnRouteType = params.CcnRouteType || null;
+        this.DirectConnectGatewayId = 'DirectConnectGatewayId' in params ? params.DirectConnectGatewayId : null;
+        this.DirectConnectGatewayName = 'DirectConnectGatewayName' in params ? params.DirectConnectGatewayName : null;
+        this.CcnRouteType = 'CcnRouteType' in params ? params.CcnRouteType : null;
 
     }
 }
@@ -3923,7 +3937,7 @@ class DescribeCcnsResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = params.TotalCount || null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
 
         if (params.CcnSet) {
             this.CcnSet = new Array();
@@ -3933,7 +3947,7 @@ class DescribeCcnsResponse extends  AbstractModel {
                 this.CcnSet.push(obj);
             }
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3973,9 +3987,9 @@ class MigratePrivateIpAddressRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.SourceNetworkInterfaceId = params.SourceNetworkInterfaceId || null;
-        this.DestinationNetworkInterfaceId = params.DestinationNetworkInterfaceId || null;
-        this.PrivateIpAddress = params.PrivateIpAddress || null;
+        this.SourceNetworkInterfaceId = 'SourceNetworkInterfaceId' in params ? params.SourceNetworkInterfaceId : null;
+        this.DestinationNetworkInterfaceId = 'DestinationNetworkInterfaceId' in params ? params.DestinationNetworkInterfaceId : null;
+        this.PrivateIpAddress = 'PrivateIpAddress' in params ? params.PrivateIpAddress : null;
 
     }
 }
@@ -4026,8 +4040,8 @@ class DescribeServiceTemplatesRequest extends  AbstractModel {
                 this.Filters.push(obj);
             }
         }
-        this.Offset = params.Offset || null;
-        this.Limit = params.Limit || null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
 
     }
 }
@@ -4067,7 +4081,7 @@ class DescribeHaVipsResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = params.TotalCount || null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
 
         if (params.HaVipSet) {
             this.HaVipSet = new Array();
@@ -4077,7 +4091,7 @@ class DescribeHaVipsResponse extends  AbstractModel {
                 this.HaVipSet.push(obj);
             }
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -4105,7 +4119,7 @@ class DeleteRouteTableRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RouteTableId = params.RouteTableId || null;
+        this.RouteTableId = 'RouteTableId' in params ? params.RouteTableId : null;
 
     }
 }
@@ -4145,7 +4159,7 @@ class CreateSubnetResponse extends  AbstractModel {
             obj.deserialize(params.Subnet)
             this.Subnet = obj;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -4185,7 +4199,7 @@ class DescribeSecurityGroupPoliciesResponse extends  AbstractModel {
             obj.deserialize(params.SecurityGroupPolicySet)
             this.SecurityGroupPolicySet = obj;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -4231,10 +4245,10 @@ class AddBandwidthPackageResourcesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ResourceIds = params.ResourceIds || null;
-        this.BandwidthPackageId = params.BandwidthPackageId || null;
-        this.NetworkType = params.NetworkType || null;
-        this.ResourceType = params.ResourceType || null;
+        this.ResourceIds = 'ResourceIds' in params ? params.ResourceIds : null;
+        this.BandwidthPackageId = 'BandwidthPackageId' in params ? params.BandwidthPackageId : null;
+        this.NetworkType = 'NetworkType' in params ? params.NetworkType : null;
+        this.ResourceType = 'ResourceType' in params ? params.ResourceType : null;
 
     }
 }
@@ -4268,7 +4282,7 @@ class ModifySecurityGroupPoliciesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.SecurityGroupId = params.SecurityGroupId || null;
+        this.SecurityGroupId = 'SecurityGroupId' in params ? params.SecurityGroupId : null;
 
         if (params.SecurityGroupPolicySet) {
             let obj = new SecurityGroupPolicySet();
@@ -4302,7 +4316,7 @@ class ModifyAddressAttributeResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -4336,8 +4350,8 @@ class AttachClassicLinkVpcRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.VpcId = params.VpcId || null;
-        this.InstanceIds = params.InstanceIds || null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
 
     }
 }
@@ -4377,7 +4391,7 @@ class DescribeServiceTemplatesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = params.TotalCount || null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
 
         if (params.ServiceTemplateSet) {
             this.ServiceTemplateSet = new Array();
@@ -4387,7 +4401,7 @@ class DescribeServiceTemplatesResponse extends  AbstractModel {
                 this.ServiceTemplateSet.push(obj);
             }
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -4427,7 +4441,7 @@ class CreateVpcResponse extends  AbstractModel {
             obj.deserialize(params.Vpc)
             this.Vpc = obj;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -4467,7 +4481,7 @@ class CreateCustomerGatewayResponse extends  AbstractModel {
             obj.deserialize(params.CustomerGateway)
             this.CustomerGateway = obj;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -4495,7 +4509,7 @@ class ModifyRouteTableAttributeResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -4523,7 +4537,7 @@ class SetCcnRegionBandwidthLimitsResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -4563,9 +4577,9 @@ class CreateBandwidthPackageResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.BandwidthPackageId = params.BandwidthPackageId || null;
-        this.BandwidthPackageIds = params.BandwidthPackageIds || null;
-        this.RequestId = params.RequestId || null;
+        this.BandwidthPackageId = 'BandwidthPackageId' in params ? params.BandwidthPackageId : null;
+        this.BandwidthPackageIds = 'BandwidthPackageIds' in params ? params.BandwidthPackageIds : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -4593,7 +4607,7 @@ class DeleteVpnGatewayRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.VpnGatewayId = params.VpnGatewayId || null;
+        this.VpnGatewayId = 'VpnGatewayId' in params ? params.VpnGatewayId : null;
 
     }
 }
@@ -4621,7 +4635,7 @@ class ModifySubnetAttributeResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -4649,7 +4663,7 @@ class ReplaceRouteTableAssociationResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -4689,9 +4703,9 @@ class Resource extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ResourceType = params.ResourceType || null;
-        this.ResourceId = params.ResourceId || null;
-        this.AddressIp = params.AddressIp || null;
+        this.ResourceType = 'ResourceType' in params ? params.ResourceType : null;
+        this.ResourceId = 'ResourceId' in params ? params.ResourceId : null;
+        this.AddressIp = 'AddressIp' in params ? params.AddressIp : null;
 
     }
 }
@@ -4731,7 +4745,7 @@ class AttachCcnInstancesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.CcnId = params.CcnId || null;
+        this.CcnId = 'CcnId' in params ? params.CcnId : null;
 
         if (params.Instances) {
             this.Instances = new Array();
@@ -4741,7 +4755,7 @@ class AttachCcnInstancesRequest extends  AbstractModel {
                 this.Instances.push(obj);
             }
         }
-        this.CcnUin = params.CcnUin || null;
+        this.CcnUin = 'CcnUin' in params ? params.CcnUin : null;
 
     }
 }
@@ -4769,7 +4783,7 @@ class ReleaseAddressesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -4815,10 +4829,10 @@ class AddressTemplate extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.AddressTemplateName = params.AddressTemplateName || null;
-        this.AddressTemplateId = params.AddressTemplateId || null;
-        this.AddressSet = params.AddressSet || null;
-        this.CreatedTime = params.CreatedTime || null;
+        this.AddressTemplateName = 'AddressTemplateName' in params ? params.AddressTemplateName : null;
+        this.AddressTemplateId = 'AddressTemplateId' in params ? params.AddressTemplateId : null;
+        this.AddressSet = 'AddressSet' in params ? params.AddressSet : null;
+        this.CreatedTime = 'CreatedTime' in params ? params.CreatedTime : null;
 
     }
 }
@@ -4861,9 +4875,9 @@ class CcnInstance extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = params.InstanceId || null;
-        this.InstanceRegion = params.InstanceRegion || null;
-        this.InstanceType = params.InstanceType || null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.InstanceRegion = 'InstanceRegion' in params ? params.InstanceRegion : null;
+        this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
 
     }
 }
@@ -4897,7 +4911,7 @@ class DeleteSecurityGroupPoliciesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.SecurityGroupId = params.SecurityGroupId || null;
+        this.SecurityGroupId = 'SecurityGroupId' in params ? params.SecurityGroupId : null;
 
         if (params.SecurityGroupPolicySet) {
             let obj = new SecurityGroupPolicySet();
@@ -4937,8 +4951,8 @@ class InquiryPriceResetVpnGatewayInternetMaxBandwidthRequest extends  AbstractMo
         if (!params) {
             return;
         }
-        this.VpnGatewayId = params.VpnGatewayId || null;
-        this.InternetMaxBandwidthOut = params.InternetMaxBandwidthOut || null;
+        this.VpnGatewayId = 'VpnGatewayId' in params ? params.VpnGatewayId : null;
+        this.InternetMaxBandwidthOut = 'InternetMaxBandwidthOut' in params ? params.InternetMaxBandwidthOut : null;
 
     }
 }
@@ -4984,10 +4998,10 @@ class ItemPrice extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.UnitPrice = params.UnitPrice || null;
-        this.ChargeUnit = params.ChargeUnit || null;
-        this.OriginalPrice = params.OriginalPrice || null;
-        this.DiscountPrice = params.DiscountPrice || null;
+        this.UnitPrice = 'UnitPrice' in params ? params.UnitPrice : null;
+        this.ChargeUnit = 'ChargeUnit' in params ? params.ChargeUnit : null;
+        this.OriginalPrice = 'OriginalPrice' in params ? params.OriginalPrice : null;
+        this.DiscountPrice = 'DiscountPrice' in params ? params.DiscountPrice : null;
 
     }
 }
@@ -5015,7 +5029,7 @@ class DeleteVpnConnectionResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -5043,7 +5057,7 @@ class ReplaceSecurityGroupPolicyResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -5071,7 +5085,7 @@ class ModifyCustomerGatewayAttributeResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -5099,7 +5113,7 @@ class ModifyPrivateIpAddressesAttributeResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -5145,10 +5159,10 @@ class SubnetInput extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.CidrBlock = params.CidrBlock || null;
-        this.SubnetName = params.SubnetName || null;
-        this.Zone = params.Zone || null;
-        this.RouteTableId = params.RouteTableId || null;
+        this.CidrBlock = 'CidrBlock' in params ? params.CidrBlock : null;
+        this.SubnetName = 'SubnetName' in params ? params.SubnetName : null;
+        this.Zone = 'Zone' in params ? params.Zone : null;
+        this.RouteTableId = 'RouteTableId' in params ? params.RouteTableId : null;
 
     }
 }
@@ -5176,7 +5190,7 @@ class ModifyHaVipAttributeResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -5216,7 +5230,7 @@ class CreateCcnResponse extends  AbstractModel {
             obj.deserialize(params.Ccn)
             this.Ccn = obj;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -5250,8 +5264,8 @@ class EnableCcnRoutesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.CcnId = params.CcnId || null;
-        this.RouteIds = params.RouteIds || null;
+        this.CcnId = 'CcnId' in params ? params.CcnId : null;
+        this.RouteIds = 'RouteIds' in params ? params.RouteIds : null;
 
     }
 }
@@ -5285,8 +5299,8 @@ class DisableCcnRoutesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.CcnId = params.CcnId || null;
-        this.RouteIds = params.RouteIds || null;
+        this.CcnId = 'CcnId' in params ? params.CcnId : null;
+        this.RouteIds = 'RouteIds' in params ? params.RouteIds : null;
 
     }
 }
@@ -5339,7 +5353,7 @@ class DescribeDirectConnectGatewaysRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.DirectConnectGatewayIds = params.DirectConnectGatewayIds || null;
+        this.DirectConnectGatewayIds = 'DirectConnectGatewayIds' in params ? params.DirectConnectGatewayIds : null;
 
         if (params.Filters) {
             this.Filters = new Array();
@@ -5349,8 +5363,8 @@ class DescribeDirectConnectGatewaysRequest extends  AbstractModel {
                 this.Filters.push(obj);
             }
         }
-        this.Offset = params.Offset || null;
-        this.Limit = params.Limit || null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
 
     }
 }
@@ -5384,8 +5398,8 @@ class DefaultVpcSubnet extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.VpcId = params.VpcId || null;
-        this.SubnetId = params.SubnetId || null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
 
     }
 }
@@ -5419,8 +5433,8 @@ class ModifyHaVipAttributeRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.HaVipId = params.HaVipId || null;
-        this.HaVipName = params.HaVipName || null;
+        this.HaVipId = 'HaVipId' in params ? params.HaVipId : null;
+        this.HaVipName = 'HaVipName' in params ? params.HaVipName : null;
 
     }
 }
@@ -5448,7 +5462,7 @@ class DeleteSecurityGroupResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -5491,7 +5505,7 @@ class DescribeCcnRegionBandwidthLimitsResponse extends  AbstractModel {
                 this.CcnRegionBandwidthLimitSet.push(obj);
             }
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -5534,7 +5548,7 @@ class CreateSubnetsResponse extends  AbstractModel {
                 this.SubnetSet.push(obj);
             }
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -5574,7 +5588,7 @@ class CreateNetworkInterfaceResponse extends  AbstractModel {
             obj.deserialize(params.NetworkInterface)
             this.NetworkInterface = obj;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -5608,8 +5622,8 @@ class HaVipAssociateAddressIpRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.HaVipId = params.HaVipId || null;
-        this.AddressIp = params.AddressIp || null;
+        this.HaVipId = 'HaVipId' in params ? params.HaVipId : null;
+        this.AddressIp = 'AddressIp' in params ? params.AddressIp : null;
 
     }
 }
@@ -5649,9 +5663,9 @@ class ModifyVpnGatewayAttributeRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.VpnGatewayId = params.VpnGatewayId || null;
-        this.VpnGatewayName = params.VpnGatewayName || null;
-        this.InstanceChargeType = params.InstanceChargeType || null;
+        this.VpnGatewayId = 'VpnGatewayId' in params ? params.VpnGatewayId : null;
+        this.VpnGatewayName = 'VpnGatewayName' in params ? params.VpnGatewayName : null;
+        this.InstanceChargeType = 'InstanceChargeType' in params ? params.InstanceChargeType : null;
 
     }
 }
@@ -5706,8 +5720,8 @@ class ModifyBandwidthPackageAttributeRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.BandwidthPackageId = params.BandwidthPackageId || null;
-        this.BandwidthPackageName = params.BandwidthPackageName || null;
+        this.BandwidthPackageId = 'BandwidthPackageId' in params ? params.BandwidthPackageId : null;
+        this.BandwidthPackageName = 'BandwidthPackageName' in params ? params.BandwidthPackageName : null;
 
     }
 }
@@ -5741,7 +5755,7 @@ class DeleteRoutesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RouteTableId = params.RouteTableId || null;
+        this.RouteTableId = 'RouteTableId' in params ? params.RouteTableId : null;
 
         if (params.Routes) {
             this.Routes = new Array();
@@ -5790,7 +5804,7 @@ class InquiryPriceCreateVpnGatewayResponse extends  AbstractModel {
             obj.deserialize(params.Price)
             this.Price = obj;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -5830,7 +5844,7 @@ class DescribeAddressesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = params.TotalCount || null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
 
         if (params.AddressSet) {
             this.AddressSet = new Array();
@@ -5840,7 +5854,7 @@ class DescribeAddressesResponse extends  AbstractModel {
                 this.AddressSet.push(obj);
             }
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -5868,7 +5882,7 @@ class CreateRoutesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -5896,7 +5910,7 @@ class ModifyServiceTemplateAttributeResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -5945,8 +5959,8 @@ class DescribeSecurityGroupsResponse extends  AbstractModel {
                 this.SecurityGroupSet.push(obj);
             }
         }
-        this.TotalCount = params.TotalCount || null;
-        this.RequestId = params.RequestId || null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -5974,7 +5988,7 @@ class ModifyBandwidthPackageAttributeResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -6002,7 +6016,7 @@ class DetachNetworkInterfaceResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -6042,9 +6056,9 @@ class ModifySubnetAttributeRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.SubnetId = params.SubnetId || null;
-        this.SubnetName = params.SubnetName || null;
-        this.EnableBroadcast = params.EnableBroadcast || null;
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
+        this.SubnetName = 'SubnetName' in params ? params.SubnetName : null;
+        this.EnableBroadcast = 'EnableBroadcast' in params ? params.EnableBroadcast : null;
 
     }
 }
@@ -6072,7 +6086,7 @@ class ResetRoutesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -6127,8 +6141,8 @@ class FilterObject extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Name = params.Name || null;
-        this.Values = params.Values || null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Values = 'Values' in params ? params.Values : null;
 
     }
 }
@@ -6178,7 +6192,7 @@ class DescribeVpcsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.VpcIds = params.VpcIds || null;
+        this.VpcIds = 'VpcIds' in params ? params.VpcIds : null;
 
         if (params.Filters) {
             this.Filters = new Array();
@@ -6188,8 +6202,8 @@ class DescribeVpcsRequest extends  AbstractModel {
                 this.Filters.push(obj);
             }
         }
-        this.Offset = params.Offset || null;
-        this.Limit = params.Limit || null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
 
     }
 }
@@ -6241,11 +6255,11 @@ class ModifyVpcAttributeRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.VpcId = params.VpcId || null;
-        this.VpcName = params.VpcName || null;
-        this.EnableMulticast = params.EnableMulticast || null;
-        this.DnsServers = params.DnsServers || null;
-        this.DomainName = params.DomainName || null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.VpcName = 'VpcName' in params ? params.VpcName : null;
+        this.EnableMulticast = 'EnableMulticast' in params ? params.EnableMulticast : null;
+        this.DnsServers = 'DnsServers' in params ? params.DnsServers : null;
+        this.DomainName = 'DomainName' in params ? params.DomainName : null;
 
     }
 }
@@ -6285,8 +6299,8 @@ class ResetRoutesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RouteTableId = params.RouteTableId || null;
-        this.RouteTableName = params.RouteTableName || null;
+        this.RouteTableId = 'RouteTableId' in params ? params.RouteTableId : null;
+        this.RouteTableName = 'RouteTableName' in params ? params.RouteTableName : null;
 
         if (params.Routes) {
             this.Routes = new Array();
@@ -6323,7 +6337,7 @@ class DisableRoutesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -6351,7 +6365,7 @@ class ResetVpnGatewayInternetMaxBandwidthResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -6391,7 +6405,7 @@ class CreateVpnConnectionResponse extends  AbstractModel {
             obj.deserialize(params.VpnConnection)
             this.VpnConnection = obj;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -6425,8 +6439,8 @@ class DetachNetworkInterfaceRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.NetworkInterfaceId = params.NetworkInterfaceId || null;
-        this.InstanceId = params.InstanceId || null;
+        this.NetworkInterfaceId = 'NetworkInterfaceId' in params ? params.NetworkInterfaceId : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
 
     }
 }
@@ -6460,8 +6474,8 @@ class AddressTemplateSpecification extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.AddressId = params.AddressId || null;
-        this.AddressGroupId = params.AddressGroupId || null;
+        this.AddressId = 'AddressId' in params ? params.AddressId : null;
+        this.AddressGroupId = 'AddressGroupId' in params ? params.AddressGroupId : null;
 
     }
 }
@@ -6489,7 +6503,7 @@ class RemoveBandwidthPackageResourcesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -6523,8 +6537,8 @@ class RouteTableAssociation extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.SubnetId = params.SubnetId || null;
-        this.RouteTableId = params.RouteTableId || null;
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
+        this.RouteTableId = 'RouteTableId' in params ? params.RouteTableId : null;
 
     }
 }
@@ -6558,8 +6572,8 @@ class ModifyCustomerGatewayAttributeRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.CustomerGatewayId = params.CustomerGatewayId || null;
-        this.CustomerGatewayName = params.CustomerGatewayName || null;
+        this.CustomerGatewayId = 'CustomerGatewayId' in params ? params.CustomerGatewayId : null;
+        this.CustomerGatewayName = 'CustomerGatewayName' in params ? params.CustomerGatewayName : null;
 
     }
 }
@@ -6587,7 +6601,7 @@ class AttachClassicLinkVpcResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -6627,7 +6641,7 @@ class CreateServiceTemplateGroupResponse extends  AbstractModel {
             obj.deserialize(params.ServiceTemplateGroup)
             this.ServiceTemplateGroup = obj;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -6661,8 +6675,8 @@ class CreateAddressTemplateRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.AddressTemplateName = params.AddressTemplateName || null;
-        this.Addresses = params.Addresses || null;
+        this.AddressTemplateName = 'AddressTemplateName' in params ? params.AddressTemplateName : null;
+        this.Addresses = 'Addresses' in params ? params.Addresses : null;
 
     }
 }
@@ -6711,7 +6725,7 @@ class AttachCcnInstancesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -6751,7 +6765,7 @@ class CreateDefaultVpcResponse extends  AbstractModel {
             obj.deserialize(params.Vpc)
             this.Vpc = obj;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -6779,7 +6793,7 @@ class ModifyVpcAttributeResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -6807,7 +6821,7 @@ class DeleteCcnResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -6853,10 +6867,10 @@ class ServiceTemplate extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ServiceTemplateId = params.ServiceTemplateId || null;
-        this.ServiceTemplateName = params.ServiceTemplateName || null;
-        this.ServiceSet = params.ServiceSet || null;
-        this.CreatedTime = params.CreatedTime || null;
+        this.ServiceTemplateId = 'ServiceTemplateId' in params ? params.ServiceTemplateId : null;
+        this.ServiceTemplateName = 'ServiceTemplateName' in params ? params.ServiceTemplateName : null;
+        this.ServiceSet = 'ServiceSet' in params ? params.ServiceSet : null;
+        this.CreatedTime = 'CreatedTime' in params ? params.CreatedTime : null;
 
     }
 }
@@ -6884,7 +6898,7 @@ class DeleteVpcResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -6924,7 +6938,7 @@ class DescribeCcnRoutesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = params.TotalCount || null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
 
         if (params.RouteSet) {
             this.RouteSet = new Array();
@@ -6934,7 +6948,7 @@ class DescribeCcnRoutesResponse extends  AbstractModel {
                 this.RouteSet.push(obj);
             }
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -7002,13 +7016,13 @@ AVAILABLE：可用的
         if (!params) {
             return;
         }
-        this.PrivateIpAddress = params.PrivateIpAddress || null;
-        this.Primary = params.Primary || null;
-        this.PublicIpAddress = params.PublicIpAddress || null;
-        this.AddressId = params.AddressId || null;
-        this.Description = params.Description || null;
-        this.IsWanIpBlocked = params.IsWanIpBlocked || null;
-        this.State = params.State || null;
+        this.PrivateIpAddress = 'PrivateIpAddress' in params ? params.PrivateIpAddress : null;
+        this.Primary = 'Primary' in params ? params.Primary : null;
+        this.PublicIpAddress = 'PublicIpAddress' in params ? params.PublicIpAddress : null;
+        this.AddressId = 'AddressId' in params ? params.AddressId : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.IsWanIpBlocked = 'IsWanIpBlocked' in params ? params.IsWanIpBlocked : null;
+        this.State = 'State' in params ? params.State : null;
 
     }
 }
@@ -7036,7 +7050,7 @@ class ModifySecurityGroupAttributeResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -7094,12 +7108,12 @@ class SecurityGroup extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.SecurityGroupId = params.SecurityGroupId || null;
-        this.SecurityGroupName = params.SecurityGroupName || null;
-        this.SecurityGroupDesc = params.SecurityGroupDesc || null;
-        this.ProjectId = params.ProjectId || null;
-        this.IsDefault = params.IsDefault || null;
-        this.CreatedTime = params.CreatedTime || null;
+        this.SecurityGroupId = 'SecurityGroupId' in params ? params.SecurityGroupId : null;
+        this.SecurityGroupName = 'SecurityGroupName' in params ? params.SecurityGroupName : null;
+        this.SecurityGroupDesc = 'SecurityGroupDesc' in params ? params.SecurityGroupDesc : null;
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+        this.IsDefault = 'IsDefault' in params ? params.IsDefault : null;
+        this.CreatedTime = 'CreatedTime' in params ? params.CreatedTime : null;
 
     }
 }
@@ -7127,7 +7141,7 @@ class MigratePrivateIpAddressResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -7155,7 +7169,7 @@ class DeleteRouteTableResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -7195,7 +7209,7 @@ class DescribeBandwidthPackagesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = params.TotalCount || null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
 
         if (params.BandwidthPackageSet) {
             this.BandwidthPackageSet = new Array();
@@ -7205,7 +7219,7 @@ class DescribeBandwidthPackagesResponse extends  AbstractModel {
                 this.BandwidthPackageSet.push(obj);
             }
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -7239,8 +7253,8 @@ class AccountAttribute extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.AttributeName = params.AttributeName || null;
-        this.AttributeValues = params.AttributeValues || null;
+        this.AttributeName = 'AttributeName' in params ? params.AttributeName : null;
+        this.AttributeValues = 'AttributeValues' in params ? params.AttributeValues : null;
 
     }
 }
@@ -7268,7 +7282,7 @@ class DisassociateAddressResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -7302,8 +7316,8 @@ class DeleteDirectConnectGatewayCcnRoutesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.DirectConnectGatewayId = params.DirectConnectGatewayId || null;
-        this.RouteIds = params.RouteIds || null;
+        this.DirectConnectGatewayId = 'DirectConnectGatewayId' in params ? params.DirectConnectGatewayId : null;
+        this.RouteIds = 'RouteIds' in params ? params.RouteIds : null;
 
     }
 }
@@ -7343,7 +7357,7 @@ class DescribeCcnAttachedInstancesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = params.TotalCount || null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
 
         if (params.InstanceSet) {
             this.InstanceSet = new Array();
@@ -7353,7 +7367,7 @@ class DescribeCcnAttachedInstancesResponse extends  AbstractModel {
                 this.InstanceSet.push(obj);
             }
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -7381,7 +7395,7 @@ class DeleteCustomerGatewayResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -7427,10 +7441,10 @@ class AssociateAddressRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.AddressId = params.AddressId || null;
-        this.InstanceId = params.InstanceId || null;
-        this.NetworkInterfaceId = params.NetworkInterfaceId || null;
-        this.PrivateIpAddress = params.PrivateIpAddress || null;
+        this.AddressId = 'AddressId' in params ? params.AddressId : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.NetworkInterfaceId = 'NetworkInterfaceId' in params ? params.NetworkInterfaceId : null;
+        this.PrivateIpAddress = 'PrivateIpAddress' in params ? params.PrivateIpAddress : null;
 
     }
 }
@@ -7458,7 +7472,7 @@ class ModifySecurityGroupPoliciesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -7498,7 +7512,7 @@ class CreateAddressTemplateResponse extends  AbstractModel {
             obj.deserialize(params.AddressTemplate)
             this.AddressTemplate = obj;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -7532,7 +7546,7 @@ class AcceptAttachCcnInstancesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.CcnId = params.CcnId || null;
+        this.CcnId = 'CcnId' in params ? params.CcnId : null;
 
         if (params.Instances) {
             this.Instances = new Array();
@@ -7569,7 +7583,7 @@ class DeleteAddressTemplateGroupRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.AddressTemplateGroupId = params.AddressTemplateGroupId || null;
+        this.AddressTemplateGroupId = 'AddressTemplateGroupId' in params ? params.AddressTemplateGroupId : null;
 
     }
 }
@@ -7597,7 +7611,7 @@ class AttachNetworkInterfaceResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -7631,8 +7645,8 @@ class ServiceTemplateSpecification extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ServiceId = params.ServiceId || null;
-        this.ServiceGroupId = params.ServiceGroupId || null;
+        this.ServiceId = 'ServiceId' in params ? params.ServiceId : null;
+        this.ServiceGroupId = 'ServiceGroupId' in params ? params.ServiceGroupId : null;
 
     }
 }
@@ -7675,7 +7689,7 @@ class DescribeRouteConflictsResponse extends  AbstractModel {
                 this.RouteConflictSet.push(obj);
             }
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -7727,11 +7741,11 @@ class CreateBandwidthPackageRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.NetworkType = params.NetworkType || null;
-        this.ChargeType = params.ChargeType || null;
-        this.BandwidthPackageName = params.BandwidthPackageName || null;
-        this.BandwidthPackageCount = params.BandwidthPackageCount || null;
-        this.InternetMaxBandwidth = params.InternetMaxBandwidth || null;
+        this.NetworkType = 'NetworkType' in params ? params.NetworkType : null;
+        this.ChargeType = 'ChargeType' in params ? params.ChargeType : null;
+        this.BandwidthPackageName = 'BandwidthPackageName' in params ? params.BandwidthPackageName : null;
+        this.BandwidthPackageCount = 'BandwidthPackageCount' in params ? params.BandwidthPackageCount : null;
+        this.InternetMaxBandwidth = 'InternetMaxBandwidth' in params ? params.InternetMaxBandwidth : null;
 
     }
 }
@@ -7781,7 +7795,7 @@ class DescribeRouteTablesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RouteTableIds = params.RouteTableIds || null;
+        this.RouteTableIds = 'RouteTableIds' in params ? params.RouteTableIds : null;
 
         if (params.Filters) {
             this.Filters = new Array();
@@ -7791,8 +7805,8 @@ class DescribeRouteTablesRequest extends  AbstractModel {
                 this.Filters.push(obj);
             }
         }
-        this.Offset = params.Offset || null;
-        this.Limit = params.Limit || null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
 
     }
 }
@@ -7832,8 +7846,8 @@ class ResetAttachCcnInstancesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.CcnId = params.CcnId || null;
-        this.CcnUin = params.CcnUin || null;
+        this.CcnId = 'CcnId' in params ? params.CcnId : null;
+        this.CcnUin = 'CcnUin' in params ? params.CcnUin : null;
 
         if (params.Instances) {
             this.Instances = new Array();
@@ -7882,7 +7896,7 @@ class CreateHaVipResponse extends  AbstractModel {
             obj.deserialize(params.HaVip)
             this.HaVip = obj;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -7910,7 +7924,7 @@ class ModifyDirectConnectGatewayAttributeResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -7963,7 +7977,7 @@ class DescribeVpnGatewaysRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.VpnGatewayIds = params.VpnGatewayIds || null;
+        this.VpnGatewayIds = 'VpnGatewayIds' in params ? params.VpnGatewayIds : null;
 
         if (params.Filters) {
             this.Filters = new Array();
@@ -7973,8 +7987,8 @@ class DescribeVpnGatewaysRequest extends  AbstractModel {
                 this.Filters.push(obj);
             }
         }
-        this.Offset = params.Offset || null;
-        this.Limit = params.Limit || null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
 
     }
 }
@@ -8008,8 +8022,8 @@ class ClassicLinkInstance extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.VpcId = params.VpcId || null;
-        this.InstanceId = params.InstanceId || null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
 
     }
 }
@@ -8067,17 +8081,17 @@ class CreateVpnGatewayRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.VpcId = params.VpcId || null;
-        this.VpnGatewayName = params.VpnGatewayName || null;
-        this.InternetMaxBandwidthOut = params.InternetMaxBandwidthOut || null;
-        this.InstanceChargeType = params.InstanceChargeType || null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.VpnGatewayName = 'VpnGatewayName' in params ? params.VpnGatewayName : null;
+        this.InternetMaxBandwidthOut = 'InternetMaxBandwidthOut' in params ? params.InternetMaxBandwidthOut : null;
+        this.InstanceChargeType = 'InstanceChargeType' in params ? params.InstanceChargeType : null;
 
         if (params.InstanceChargePrepaid) {
             let obj = new InstanceChargePrepaid();
             obj.deserialize(params.InstanceChargePrepaid)
             this.InstanceChargePrepaid = obj;
         }
-        this.Zone = params.Zone || null;
+        this.Zone = 'Zone' in params ? params.Zone : null;
 
     }
 }
@@ -8117,7 +8131,7 @@ class DescribeSubnetsResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = params.TotalCount || null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
 
         if (params.SubnetSet) {
             this.SubnetSet = new Array();
@@ -8127,7 +8141,7 @@ class DescribeSubnetsResponse extends  AbstractModel {
                 this.SubnetSet.push(obj);
             }
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -8173,10 +8187,10 @@ class ModifyNetworkInterfaceAttributeRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.NetworkInterfaceId = params.NetworkInterfaceId || null;
-        this.NetworkInterfaceName = params.NetworkInterfaceName || null;
-        this.NetworkInterfaceDescription = params.NetworkInterfaceDescription || null;
-        this.SecurityGroupIds = params.SecurityGroupIds || null;
+        this.NetworkInterfaceId = 'NetworkInterfaceId' in params ? params.NetworkInterfaceId : null;
+        this.NetworkInterfaceName = 'NetworkInterfaceName' in params ? params.NetworkInterfaceName : null;
+        this.NetworkInterfaceDescription = 'NetworkInterfaceDescription' in params ? params.NetworkInterfaceDescription : null;
+        this.SecurityGroupIds = 'SecurityGroupIds' in params ? params.SecurityGroupIds : null;
 
     }
 }
@@ -8216,9 +8230,9 @@ class ModifyAddressTemplateAttributeRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.AddressTemplateId = params.AddressTemplateId || null;
-        this.AddressTemplateName = params.AddressTemplateName || null;
-        this.Addresses = params.Addresses || null;
+        this.AddressTemplateId = 'AddressTemplateId' in params ? params.AddressTemplateId : null;
+        this.AddressTemplateName = 'AddressTemplateName' in params ? params.AddressTemplateName : null;
+        this.Addresses = 'Addresses' in params ? params.Addresses : null;
 
     }
 }
@@ -8246,7 +8260,7 @@ class HaVipDisassociateAddressIpResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -8280,7 +8294,7 @@ class CreateSubnetsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.VpcId = params.VpcId || null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
 
         if (params.Subnets) {
             this.Subnets = new Array();
@@ -8329,7 +8343,7 @@ class DescribeAddressTemplateGroupsResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = params.TotalCount || null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
 
         if (params.AddressTemplateGroupSet) {
             this.AddressTemplateGroupSet = new Array();
@@ -8339,7 +8353,7 @@ class DescribeAddressTemplateGroupsResponse extends  AbstractModel {
                 this.AddressTemplateGroupSet.push(obj);
             }
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -8373,7 +8387,7 @@ class SetCcnRegionBandwidthLimitsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.CcnId = params.CcnId || null;
+        this.CcnId = 'CcnId' in params ? params.CcnId : null;
 
         if (params.CcnRegionBandwidthLimits) {
             this.CcnRegionBandwidthLimits = new Array();
@@ -8410,7 +8424,7 @@ class DetachClassicLinkVpcResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -8444,7 +8458,7 @@ class ReplaceSecurityGroupPolicyRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.SecurityGroupId = params.SecurityGroupId || null;
+        this.SecurityGroupId = 'SecurityGroupId' in params ? params.SecurityGroupId : null;
 
         if (params.SecurityGroupPolicySet) {
             let obj = new SecurityGroupPolicySet();
@@ -8478,7 +8492,7 @@ class ReleaseAddressesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.AddressIds = params.AddressIds || null;
+        this.AddressIds = 'AddressIds' in params ? params.AddressIds : null;
 
     }
 }
@@ -8512,7 +8526,7 @@ class CreateDirectConnectGatewayCcnRoutesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.DirectConnectGatewayId = params.DirectConnectGatewayId || null;
+        this.DirectConnectGatewayId = 'DirectConnectGatewayId' in params ? params.DirectConnectGatewayId : null;
 
         if (params.Routes) {
             this.Routes = new Array();
@@ -8555,7 +8569,7 @@ class UnassignPrivateIpAddressesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.NetworkInterfaceId = params.NetworkInterfaceId || null;
+        this.NetworkInterfaceId = 'NetworkInterfaceId' in params ? params.NetworkInterfaceId : null;
 
         if (params.PrivateIpAddresses) {
             this.PrivateIpAddresses = new Array();
@@ -8592,7 +8606,7 @@ class AssociateAddressResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -8626,8 +8640,8 @@ class Filter extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Name = params.Name || null;
-        this.Values = params.Values || null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Values = 'Values' in params ? params.Values : null;
 
     }
 }
@@ -8655,7 +8669,7 @@ class CreateDirectConnectGatewayCcnRoutesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -8689,8 +8703,8 @@ class CreateRouteTableRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.VpcId = params.VpcId || null;
-        this.RouteTableName = params.RouteTableName || null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.RouteTableName = 'RouteTableName' in params ? params.RouteTableName : null;
 
     }
 }
@@ -8718,7 +8732,7 @@ class ResetVpnConnectionResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -8764,10 +8778,10 @@ class CreateHaVipRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.VpcId = params.VpcId || null;
-        this.SubnetId = params.SubnetId || null;
-        this.HaVipName = params.HaVipName || null;
-        this.Vip = params.Vip || null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
+        this.HaVipName = 'HaVipName' in params ? params.HaVipName : null;
+        this.Vip = 'Vip' in params ? params.Vip : null;
 
     }
 }
@@ -8821,7 +8835,7 @@ class DescribeAddressesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.AddressIds = params.AddressIds || null;
+        this.AddressIds = 'AddressIds' in params ? params.AddressIds : null;
 
         if (params.Filters) {
             this.Filters = new Array();
@@ -8831,8 +8845,8 @@ class DescribeAddressesRequest extends  AbstractModel {
                 this.Filters.push(obj);
             }
         }
-        this.Offset = params.Offset || null;
-        this.Limit = params.Limit || null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
 
     }
 }
@@ -8860,7 +8874,7 @@ class DescribeSecurityGroupPoliciesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.SecurityGroupId = params.SecurityGroupId || null;
+        this.SecurityGroupId = 'SecurityGroupId' in params ? params.SecurityGroupId : null;
 
     }
 }
@@ -8900,9 +8914,9 @@ class MigrateNetworkInterfaceRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.NetworkInterfaceId = params.NetworkInterfaceId || null;
-        this.SourceInstanceId = params.SourceInstanceId || null;
-        this.DestinationInstanceId = params.DestinationInstanceId || null;
+        this.NetworkInterfaceId = 'NetworkInterfaceId' in params ? params.NetworkInterfaceId : null;
+        this.SourceInstanceId = 'SourceInstanceId' in params ? params.SourceInstanceId : null;
+        this.DestinationInstanceId = 'DestinationInstanceId' in params ? params.DestinationInstanceId : null;
 
     }
 }
@@ -8945,7 +8959,7 @@ class DescribeAddressQuotaResponse extends  AbstractModel {
                 this.QuotaSet.push(obj);
             }
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -8973,7 +8987,7 @@ class CreateSecurityGroupPoliciesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -9013,7 +9027,7 @@ class CreateSecurityGroupResponse extends  AbstractModel {
             obj.deserialize(params.SecurityGroup)
             this.SecurityGroup = obj;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -9041,7 +9055,7 @@ class DeleteSecurityGroupRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.SecurityGroupId = params.SecurityGroupId || null;
+        this.SecurityGroupId = 'SecurityGroupId' in params ? params.SecurityGroupId : null;
 
     }
 }
@@ -9099,9 +9113,9 @@ class ModifyVpnConnectionAttributeRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.VpnConnectionId = params.VpnConnectionId || null;
-        this.VpnConnectionName = params.VpnConnectionName || null;
-        this.PreShareKey = params.PreShareKey || null;
+        this.VpnConnectionId = 'VpnConnectionId' in params ? params.VpnConnectionId : null;
+        this.VpnConnectionName = 'VpnConnectionName' in params ? params.VpnConnectionName : null;
+        this.PreShareKey = 'PreShareKey' in params ? params.PreShareKey : null;
 
         if (params.SecurityPolicyDatabases) {
             this.SecurityPolicyDatabases = new Array();
@@ -9156,7 +9170,7 @@ class ReplaceRoutesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RouteTableId = params.RouteTableId || null;
+        this.RouteTableId = 'RouteTableId' in params ? params.RouteTableId : null;
 
         if (params.Routes) {
             this.Routes = new Array();
@@ -9205,7 +9219,7 @@ class CreateRouteTableResponse extends  AbstractModel {
             obj.deserialize(params.RouteTable)
             this.RouteTable = obj;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -9233,7 +9247,7 @@ class DeleteRoutesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -9273,9 +9287,9 @@ class CreateCcnRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.CcnName = params.CcnName || null;
-        this.CcnDescription = params.CcnDescription || null;
-        this.QosLevel = params.QosLevel || null;
+        this.CcnName = 'CcnName' in params ? params.CcnName : null;
+        this.CcnDescription = 'CcnDescription' in params ? params.CcnDescription : null;
+        this.QosLevel = 'QosLevel' in params ? params.QosLevel : null;
 
     }
 }
@@ -9318,7 +9332,7 @@ class DescribeSecurityGroupAssociationStatisticsResponse extends  AbstractModel 
                 this.SecurityGroupAssociationStatisticsSet.push(obj);
             }
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -9358,7 +9372,7 @@ class DescribeDirectConnectGatewayCcnRoutesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = params.TotalCount || null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
 
         if (params.RouteSet) {
             this.RouteSet = new Array();
@@ -9368,7 +9382,7 @@ class DescribeDirectConnectGatewayCcnRoutesResponse extends  AbstractModel {
                 this.RouteSet.push(obj);
             }
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -9402,7 +9416,7 @@ class ModifyPrivateIpAddressesAttributeRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.NetworkInterfaceId = params.NetworkInterfaceId || null;
+        this.NetworkInterfaceId = 'NetworkInterfaceId' in params ? params.NetworkInterfaceId : null;
 
         if (params.PrivateIpAddresses) {
             this.PrivateIpAddresses = new Array();
@@ -9445,8 +9459,8 @@ class DisableRoutesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RouteTableId = params.RouteTableId || null;
-        this.RouteIds = params.RouteIds || null;
+        this.RouteTableId = 'RouteTableId' in params ? params.RouteTableId : null;
+        this.RouteIds = 'RouteIds' in params ? params.RouteIds : null;
 
     }
 }
@@ -9480,8 +9494,8 @@ class DeleteVpnConnectionRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.VpnGatewayId = params.VpnGatewayId || null;
-        this.VpnConnectionId = params.VpnConnectionId || null;
+        this.VpnGatewayId = 'VpnGatewayId' in params ? params.VpnGatewayId : null;
+        this.VpnConnectionId = 'VpnConnectionId' in params ? params.VpnConnectionId : null;
 
     }
 }
@@ -9521,9 +9535,9 @@ class CreateSecurityGroupRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.GroupName = params.GroupName || null;
-        this.GroupDescription = params.GroupDescription || null;
-        this.ProjectId = params.ProjectId || null;
+        this.GroupName = 'GroupName' in params ? params.GroupName : null;
+        this.GroupDescription = 'GroupDescription' in params ? params.GroupDescription : null;
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
 
     }
 }
@@ -9551,7 +9565,7 @@ class ModifyCcnAttributeResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -9579,7 +9593,7 @@ class DeleteCcnRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.CcnId = params.CcnId || null;
+        this.CcnId = 'CcnId' in params ? params.CcnId : null;
 
     }
 }
@@ -9627,7 +9641,7 @@ class DescribeSecurityGroupsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.SecurityGroupIds = params.SecurityGroupIds || null;
+        this.SecurityGroupIds = 'SecurityGroupIds' in params ? params.SecurityGroupIds : null;
 
         if (params.Filters) {
             this.Filters = new Array();
@@ -9637,8 +9651,8 @@ class DescribeSecurityGroupsRequest extends  AbstractModel {
                 this.Filters.push(obj);
             }
         }
-        this.Offset = params.Offset || null;
-        this.Limit = params.Limit || null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
 
     }
 }
@@ -9689,8 +9703,8 @@ class DescribeClassicLinkInstancesRequest extends  AbstractModel {
                 this.Filters.push(obj);
             }
         }
-        this.Offset = params.Offset || null;
-        this.Limit = params.Limit || null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
 
     }
 }
@@ -9730,7 +9744,7 @@ class CreateServiceTemplateResponse extends  AbstractModel {
             obj.deserialize(params.ServiceTemplate)
             this.ServiceTemplate = obj;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -9758,7 +9772,7 @@ class DeleteNetworkInterfaceResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -9786,7 +9800,7 @@ class DisableCcnRoutesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -9814,7 +9828,7 @@ class DescribeCcnRegionBandwidthLimitsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.CcnId = params.CcnId || null;
+        this.CcnId = 'CcnId' in params ? params.CcnId : null;
 
     }
 }
@@ -9866,11 +9880,11 @@ class IPSECOptionsSpecification extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.EncryptAlgorithm = params.EncryptAlgorithm || null;
-        this.IntegrityAlgorith = params.IntegrityAlgorith || null;
-        this.IPSECSaLifetimeSeconds = params.IPSECSaLifetimeSeconds || null;
-        this.PfsDhGroup = params.PfsDhGroup || null;
-        this.IPSECSaLifetimeTraffic = params.IPSECSaLifetimeTraffic || null;
+        this.EncryptAlgorithm = 'EncryptAlgorithm' in params ? params.EncryptAlgorithm : null;
+        this.IntegrityAlgorith = 'IntegrityAlgorith' in params ? params.IntegrityAlgorith : null;
+        this.IPSECSaLifetimeSeconds = 'IPSECSaLifetimeSeconds' in params ? params.IPSECSaLifetimeSeconds : null;
+        this.PfsDhGroup = 'PfsDhGroup' in params ? params.PfsDhGroup : null;
+        this.IPSECSaLifetimeTraffic = 'IPSECSaLifetimeTraffic' in params ? params.IPSECSaLifetimeTraffic : null;
 
     }
 }
@@ -9913,7 +9927,7 @@ class DescribeAccountAttributesResponse extends  AbstractModel {
                 this.AccountAttributeSet.push(obj);
             }
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -9956,7 +9970,7 @@ class DescribeCustomerGatewayVendorsResponse extends  AbstractModel {
                 this.CustomerGatewayVendorSet.push(obj);
             }
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -9999,7 +10013,7 @@ class AssignPrivateIpAddressesResponse extends  AbstractModel {
                 this.PrivateIpAddressSet.push(obj);
             }
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -10042,7 +10056,7 @@ class DescribeBandwidthPackageQuotaResponse extends  AbstractModel {
                 this.QuotaSet.push(obj);
             }
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -10070,7 +10084,7 @@ class ModifyAddressTemplateGroupAttributeResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -10098,7 +10112,7 @@ class DeleteServiceTemplateGroupResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -10138,9 +10152,9 @@ class CustomerGatewayVendor extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Platform = params.Platform || null;
-        this.SoftwareVersion = params.SoftwareVersion || null;
-        this.VendorName = params.VendorName || null;
+        this.Platform = 'Platform' in params ? params.Platform : null;
+        this.SoftwareVersion = 'SoftwareVersion' in params ? params.SoftwareVersion : null;
+        this.VendorName = 'VendorName' in params ? params.VendorName : null;
 
     }
 }
@@ -10191,8 +10205,8 @@ class DescribeAddressTemplatesRequest extends  AbstractModel {
                 this.Filters.push(obj);
             }
         }
-        this.Offset = params.Offset || null;
-        this.Limit = params.Limit || null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
 
     }
 }
@@ -10220,7 +10234,7 @@ class RenewVpnGatewayResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -10260,9 +10274,9 @@ class ModifyCcnAttributeRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.CcnId = params.CcnId || null;
-        this.CcnName = params.CcnName || null;
-        this.CcnDescription = params.CcnDescription || null;
+        this.CcnId = 'CcnId' in params ? params.CcnId : null;
+        this.CcnName = 'CcnName' in params ? params.CcnName : null;
+        this.CcnDescription = 'CcnDescription' in params ? params.CcnDescription : null;
 
     }
 }
@@ -10290,7 +10304,7 @@ class DeleteDirectConnectGatewayResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -10318,7 +10332,7 @@ class AddBandwidthPackageResourcesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -10352,8 +10366,8 @@ class EnableRoutesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RouteTableId = params.RouteTableId || null;
-        this.RouteIds = params.RouteIds || null;
+        this.RouteTableId = 'RouteTableId' in params ? params.RouteTableId : null;
+        this.RouteIds = 'RouteIds' in params ? params.RouteIds : null;
 
     }
 }
@@ -10381,7 +10395,7 @@ class DeleteSecurityGroupPoliciesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -10415,8 +10429,8 @@ class ModifyAddressAttributeRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.AddressId = params.AddressId || null;
-        this.AddressName = params.AddressName || null;
+        this.AddressId = 'AddressId' in params ? params.AddressId : null;
+        this.AddressName = 'AddressName' in params ? params.AddressName : null;
 
     }
 }
@@ -10456,8 +10470,8 @@ class InquiryPriceCreateVpnGatewayRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InternetMaxBandwidthOut = params.InternetMaxBandwidthOut || null;
-        this.InstanceChargeType = params.InstanceChargeType || null;
+        this.InternetMaxBandwidthOut = 'InternetMaxBandwidthOut' in params ? params.InternetMaxBandwidthOut : null;
+        this.InstanceChargeType = 'InstanceChargeType' in params ? params.InstanceChargeType : null;
 
         if (params.InstanceChargePrepaid) {
             let obj = new InstanceChargePrepaid();
@@ -10503,7 +10517,7 @@ class DescribeVpnConnectionsResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = params.TotalCount || null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
 
         if (params.VpnConnectionSet) {
             this.VpnConnectionSet = new Array();
@@ -10513,7 +10527,7 @@ class DescribeVpnConnectionsResponse extends  AbstractModel {
                 this.VpnConnectionSet.push(obj);
             }
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -10541,7 +10555,7 @@ class DeleteCustomerGatewayRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.CustomerGatewayId = params.CustomerGatewayId || null;
+        this.CustomerGatewayId = 'CustomerGatewayId' in params ? params.CustomerGatewayId : null;
 
     }
 }
@@ -10575,7 +10589,7 @@ class RejectAttachCcnInstancesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.CcnId = params.CcnId || null;
+        this.CcnId = 'CcnId' in params ? params.CcnId : null;
 
         if (params.Instances) {
             this.Instances = new Array();
@@ -10681,17 +10695,17 @@ NAT类型支持网络地址转换配置，类型确定后不能修改；一个�
         if (!params) {
             return;
         }
-        this.DirectConnectGatewayId = params.DirectConnectGatewayId || null;
-        this.DirectConnectGatewayName = params.DirectConnectGatewayName || null;
-        this.VpcId = params.VpcId || null;
-        this.NetworkType = params.NetworkType || null;
-        this.NetworkInstanceId = params.NetworkInstanceId || null;
-        this.GatewayType = params.GatewayType || null;
-        this.CreateTime = params.CreateTime || null;
-        this.DirectConnectGatewayIp = params.DirectConnectGatewayIp || null;
-        this.CcnId = params.CcnId || null;
-        this.CcnRouteType = params.CcnRouteType || null;
-        this.EnableBGP = params.EnableBGP || null;
+        this.DirectConnectGatewayId = 'DirectConnectGatewayId' in params ? params.DirectConnectGatewayId : null;
+        this.DirectConnectGatewayName = 'DirectConnectGatewayName' in params ? params.DirectConnectGatewayName : null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.NetworkType = 'NetworkType' in params ? params.NetworkType : null;
+        this.NetworkInstanceId = 'NetworkInstanceId' in params ? params.NetworkInstanceId : null;
+        this.GatewayType = 'GatewayType' in params ? params.GatewayType : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.DirectConnectGatewayIp = 'DirectConnectGatewayIp' in params ? params.DirectConnectGatewayIp : null;
+        this.CcnId = 'CcnId' in params ? params.CcnId : null;
+        this.CcnRouteType = 'CcnRouteType' in params ? params.CcnRouteType : null;
+        this.EnableBGP = 'EnableBGP' in params ? params.EnableBGP : null;
 
     }
 }
@@ -10719,7 +10733,7 @@ class DeleteVpnGatewayResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -10759,7 +10773,7 @@ class DescribeAddressTemplatesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = params.TotalCount || null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
 
         if (params.AddressTemplateSet) {
             this.AddressTemplateSet = new Array();
@@ -10769,7 +10783,7 @@ class DescribeAddressTemplatesResponse extends  AbstractModel {
                 this.AddressTemplateSet.push(obj);
             }
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -10820,7 +10834,7 @@ class DescribeHaVipsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.HaVipIds = params.HaVipIds || null;
+        this.HaVipIds = 'HaVipIds' in params ? params.HaVipIds : null;
 
         if (params.Filters) {
             this.Filters = new Array();
@@ -10830,8 +10844,8 @@ class DescribeHaVipsRequest extends  AbstractModel {
                 this.Filters.push(obj);
             }
         }
-        this.Offset = params.Offset || null;
-        this.Limit = params.Limit || null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
 
     }
 }
@@ -10871,9 +10885,9 @@ class Quota extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.QuotaId = params.QuotaId || null;
-        this.QuotaCurrent = params.QuotaCurrent || null;
-        this.QuotaLimit = params.QuotaLimit || null;
+        this.QuotaId = 'QuotaId' in params ? params.QuotaId : null;
+        this.QuotaCurrent = 'QuotaCurrent' in params ? params.QuotaCurrent : null;
+        this.QuotaLimit = 'QuotaLimit' in params ? params.QuotaLimit : null;
 
     }
 }
@@ -10951,13 +10965,13 @@ CCN：云联网路由，系统默认下发，不可编辑与删除。
         if (!params) {
             return;
         }
-        this.DestinationCidrBlock = params.DestinationCidrBlock || null;
-        this.GatewayType = params.GatewayType || null;
-        this.GatewayId = params.GatewayId || null;
-        this.RouteId = params.RouteId || null;
-        this.RouteDescription = params.RouteDescription || null;
-        this.Enabled = params.Enabled || null;
-        this.RouteType = params.RouteType || null;
+        this.DestinationCidrBlock = 'DestinationCidrBlock' in params ? params.DestinationCidrBlock : null;
+        this.GatewayType = 'GatewayType' in params ? params.GatewayType : null;
+        this.GatewayId = 'GatewayId' in params ? params.GatewayId : null;
+        this.RouteId = 'RouteId' in params ? params.RouteId : null;
+        this.RouteDescription = 'RouteDescription' in params ? params.RouteDescription : null;
+        this.Enabled = 'Enabled' in params ? params.Enabled : null;
+        this.RouteType = 'RouteType' in params ? params.RouteType : null;
 
     }
 }
@@ -10997,7 +11011,7 @@ class DescribeDirectConnectGatewaysResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = params.TotalCount || null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
 
         if (params.DirectConnectGatewaySet) {
             this.DirectConnectGatewaySet = new Array();
@@ -11007,7 +11021,7 @@ class DescribeDirectConnectGatewaysResponse extends  AbstractModel {
                 this.DirectConnectGatewaySet.push(obj);
             }
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -11107,19 +11121,19 @@ class Address extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.AddressId = params.AddressId || null;
-        this.AddressName = params.AddressName || null;
-        this.AddressStatus = params.AddressStatus || null;
-        this.AddressIp = params.AddressIp || null;
-        this.InstanceId = params.InstanceId || null;
-        this.CreatedTime = params.CreatedTime || null;
-        this.NetworkInterfaceId = params.NetworkInterfaceId || null;
-        this.PrivateAddressIp = params.PrivateAddressIp || null;
-        this.IsArrears = params.IsArrears || null;
-        this.IsBlocked = params.IsBlocked || null;
-        this.IsEipDirectConnection = params.IsEipDirectConnection || null;
-        this.AddressType = params.AddressType || null;
-        this.CascadeRelease = params.CascadeRelease || null;
+        this.AddressId = 'AddressId' in params ? params.AddressId : null;
+        this.AddressName = 'AddressName' in params ? params.AddressName : null;
+        this.AddressStatus = 'AddressStatus' in params ? params.AddressStatus : null;
+        this.AddressIp = 'AddressIp' in params ? params.AddressIp : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.CreatedTime = 'CreatedTime' in params ? params.CreatedTime : null;
+        this.NetworkInterfaceId = 'NetworkInterfaceId' in params ? params.NetworkInterfaceId : null;
+        this.PrivateAddressIp = 'PrivateAddressIp' in params ? params.PrivateAddressIp : null;
+        this.IsArrears = 'IsArrears' in params ? params.IsArrears : null;
+        this.IsBlocked = 'IsBlocked' in params ? params.IsBlocked : null;
+        this.IsEipDirectConnection = 'IsEipDirectConnection' in params ? params.IsEipDirectConnection : null;
+        this.AddressType = 'AddressType' in params ? params.AddressType : null;
+        this.CascadeRelease = 'CascadeRelease' in params ? params.CascadeRelease : null;
 
     }
 }
@@ -11147,7 +11161,7 @@ class ModifyVpnGatewayAttributeResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -11175,7 +11189,7 @@ class DeleteAddressTemplateResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -11224,8 +11238,8 @@ class DescribeNetworkInterfacesResponse extends  AbstractModel {
                 this.NetworkInterfaceSet.push(obj);
             }
         }
-        this.TotalCount = params.TotalCount || null;
-        this.RequestId = params.RequestId || null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -11253,7 +11267,7 @@ class EnableRoutesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -11281,7 +11295,7 @@ class DeleteHaVipRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.HaVipId = params.HaVipId || null;
+        this.HaVipId = 'HaVipId' in params ? params.HaVipId : null;
 
     }
 }
@@ -11321,7 +11335,7 @@ class AssignPrivateIpAddressesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.NetworkInterfaceId = params.NetworkInterfaceId || null;
+        this.NetworkInterfaceId = 'NetworkInterfaceId' in params ? params.NetworkInterfaceId : null;
 
         if (params.PrivateIpAddresses) {
             this.PrivateIpAddresses = new Array();
@@ -11331,7 +11345,7 @@ class AssignPrivateIpAddressesRequest extends  AbstractModel {
                 this.PrivateIpAddresses.push(obj);
             }
         }
-        this.SecondaryPrivateIpAddressCount = params.SecondaryPrivateIpAddressCount || null;
+        this.SecondaryPrivateIpAddressCount = 'SecondaryPrivateIpAddressCount' in params ? params.SecondaryPrivateIpAddressCount : null;
 
     }
 }
@@ -11382,8 +11396,8 @@ class DescribeServiceTemplateGroupsRequest extends  AbstractModel {
                 this.Filters.push(obj);
             }
         }
-        this.Offset = params.Offset || null;
-        this.Limit = params.Limit || null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
 
     }
 }
@@ -11435,11 +11449,11 @@ class CreateVpcRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.VpcName = params.VpcName || null;
-        this.CidrBlock = params.CidrBlock || null;
-        this.EnableMulticast = params.EnableMulticast || null;
-        this.DnsServers = params.DnsServers || null;
-        this.DomainName = params.DomainName || null;
+        this.VpcName = 'VpcName' in params ? params.VpcName : null;
+        this.CidrBlock = 'CidrBlock' in params ? params.CidrBlock : null;
+        this.EnableMulticast = 'EnableMulticast' in params ? params.EnableMulticast : null;
+        this.DnsServers = 'DnsServers' in params ? params.DnsServers : null;
+        this.DomainName = 'DomainName' in params ? params.DomainName : null;
 
     }
 }
@@ -11467,7 +11481,7 @@ class ReplaceDirectConnectGatewayCcnRoutesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -11501,8 +11515,8 @@ class CreateServiceTemplateGroupRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ServiceTemplateGroupName = params.ServiceTemplateGroupName || null;
-        this.ServiceTemplateIds = params.ServiceTemplateIds || null;
+        this.ServiceTemplateGroupName = 'ServiceTemplateGroupName' in params ? params.ServiceTemplateGroupName : null;
+        this.ServiceTemplateIds = 'ServiceTemplateIds' in params ? params.ServiceTemplateIds : null;
 
     }
 }
@@ -11530,7 +11544,7 @@ class DeleteServiceTemplateRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ServiceTemplateId = params.ServiceTemplateId || null;
+        this.ServiceTemplateId = 'ServiceTemplateId' in params ? params.ServiceTemplateId : null;
 
     }
 }
@@ -11558,7 +11572,7 @@ class DescribeSecurityGroupAssociationStatisticsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.SecurityGroupIds = params.SecurityGroupIds || null;
+        this.SecurityGroupIds = 'SecurityGroupIds' in params ? params.SecurityGroupIds : null;
 
     }
 }
@@ -11606,10 +11620,10 @@ class DescribeDirectConnectGatewayCcnRoutesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.DirectConnectGatewayId = params.DirectConnectGatewayId || null;
-        this.CcnRouteType = params.CcnRouteType || null;
-        this.Offset = params.Offset || null;
-        this.Limit = params.Limit || null;
+        this.DirectConnectGatewayId = 'DirectConnectGatewayId' in params ? params.DirectConnectGatewayId : null;
+        this.CcnRouteType = 'CcnRouteType' in params ? params.CcnRouteType : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
 
     }
 }
@@ -11649,7 +11663,7 @@ class DescribeClassicLinkInstancesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = params.TotalCount || null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
 
         if (params.ClassicLinkInstanceSet) {
             this.ClassicLinkInstanceSet = new Array();
@@ -11659,7 +11673,7 @@ class DescribeClassicLinkInstancesResponse extends  AbstractModel {
                 this.ClassicLinkInstanceSet.push(obj);
             }
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -11699,7 +11713,7 @@ class DescribeRouteTablesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = params.TotalCount || null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
 
         if (params.RouteTableSet) {
             this.RouteTableSet = new Array();
@@ -11709,7 +11723,7 @@ class DescribeRouteTablesResponse extends  AbstractModel {
                 this.RouteTableSet.push(obj);
             }
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -11737,7 +11751,7 @@ class DeleteAddressTemplateRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.AddressTemplateId = params.AddressTemplateId || null;
+        this.AddressTemplateId = 'AddressTemplateId' in params ? params.AddressTemplateId : null;
 
     }
 }
@@ -11783,10 +11797,10 @@ class CustomerGateway extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.CustomerGatewayId = params.CustomerGatewayId || null;
-        this.CustomerGatewayName = params.CustomerGatewayName || null;
-        this.IpAddress = params.IpAddress || null;
-        this.CreatedTime = params.CreatedTime || null;
+        this.CustomerGatewayId = 'CustomerGatewayId' in params ? params.CustomerGatewayId : null;
+        this.CustomerGatewayName = 'CustomerGatewayName' in params ? params.CustomerGatewayName : null;
+        this.IpAddress = 'IpAddress' in params ? params.IpAddress : null;
+        this.CreatedTime = 'CreatedTime' in params ? params.CreatedTime : null;
 
     }
 }
@@ -11820,8 +11834,8 @@ class AllocateAddressesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.AddressSet = params.AddressSet || null;
-        this.RequestId = params.RequestId || null;
+        this.AddressSet = 'AddressSet' in params ? params.AddressSet : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -11849,7 +11863,7 @@ class TransformAddressRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = params.InstanceId || null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
 
     }
 }
@@ -11883,7 +11897,7 @@ class ReplaceDirectConnectGatewayCcnRoutesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.DirectConnectGatewayId = params.DirectConnectGatewayId || null;
+        this.DirectConnectGatewayId = 'DirectConnectGatewayId' in params ? params.DirectConnectGatewayId : null;
 
         if (params.Routes) {
             this.Routes = new Array();
@@ -11926,8 +11940,8 @@ class DisassociateAddressRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.AddressId = params.AddressId || null;
-        this.ReallocateNormalPublicIp = params.ReallocateNormalPublicIp || null;
+        this.AddressId = 'AddressId' in params ? params.AddressId : null;
+        this.ReallocateNormalPublicIp = 'ReallocateNormalPublicIp' in params ? params.ReallocateNormalPublicIp : null;
 
     }
 }
@@ -11955,7 +11969,7 @@ class EnableCcnRoutesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -12025,12 +12039,12 @@ class BandwidthPackage extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.BandwidthPackageId = params.BandwidthPackageId || null;
-        this.NetworkType = params.NetworkType || null;
-        this.ChargeType = params.ChargeType || null;
-        this.BandwidthPackageName = params.BandwidthPackageName || null;
-        this.CreatedTime = params.CreatedTime || null;
-        this.Status = params.Status || null;
+        this.BandwidthPackageId = 'BandwidthPackageId' in params ? params.BandwidthPackageId : null;
+        this.NetworkType = 'NetworkType' in params ? params.NetworkType : null;
+        this.ChargeType = 'ChargeType' in params ? params.ChargeType : null;
+        this.BandwidthPackageName = 'BandwidthPackageName' in params ? params.BandwidthPackageName : null;
+        this.CreatedTime = 'CreatedTime' in params ? params.CreatedTime : null;
+        this.Status = 'Status' in params ? params.Status : null;
 
         if (params.ResourceSet) {
             this.ResourceSet = new Array();
@@ -12040,7 +12054,7 @@ class BandwidthPackage extends  AbstractModel {
                 this.ResourceSet.push(obj);
             }
         }
-        this.Bandwidth = params.Bandwidth || null;
+        this.Bandwidth = 'Bandwidth' in params ? params.Bandwidth : null;
 
     }
 }
@@ -12074,8 +12088,8 @@ class AttachNetworkInterfaceRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.NetworkInterfaceId = params.NetworkInterfaceId || null;
-        this.InstanceId = params.InstanceId || null;
+        this.NetworkInterfaceId = 'NetworkInterfaceId' in params ? params.NetworkInterfaceId : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
 
     }
 }
@@ -12109,7 +12123,7 @@ class DetachCcnInstancesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.CcnId = params.CcnId || null;
+        this.CcnId = 'CcnId' in params ? params.CcnId : null;
 
         if (params.Instances) {
             this.Instances = new Array();
@@ -12152,7 +12166,7 @@ class CreateSecurityGroupPoliciesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.SecurityGroupId = params.SecurityGroupId || null;
+        this.SecurityGroupId = 'SecurityGroupId' in params ? params.SecurityGroupId : null;
 
         if (params.SecurityGroupPolicySet) {
             let obj = new SecurityGroupPolicySet();
@@ -12252,18 +12266,18 @@ class IKEOptionsSpecification extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.PropoEncryAlgorithm = params.PropoEncryAlgorithm || null;
-        this.PropoAuthenAlgorithm = params.PropoAuthenAlgorithm || null;
-        this.ExchangeMode = params.ExchangeMode || null;
-        this.LocalIdentity = params.LocalIdentity || null;
-        this.RemoteIdentity = params.RemoteIdentity || null;
-        this.LocalAddress = params.LocalAddress || null;
-        this.RemoteAddress = params.RemoteAddress || null;
-        this.LocalFqdnName = params.LocalFqdnName || null;
-        this.RemoteFqdnName = params.RemoteFqdnName || null;
-        this.DhGroupName = params.DhGroupName || null;
-        this.IKESaLifetimeSeconds = params.IKESaLifetimeSeconds || null;
-        this.IKEVersion = params.IKEVersion || null;
+        this.PropoEncryAlgorithm = 'PropoEncryAlgorithm' in params ? params.PropoEncryAlgorithm : null;
+        this.PropoAuthenAlgorithm = 'PropoAuthenAlgorithm' in params ? params.PropoAuthenAlgorithm : null;
+        this.ExchangeMode = 'ExchangeMode' in params ? params.ExchangeMode : null;
+        this.LocalIdentity = 'LocalIdentity' in params ? params.LocalIdentity : null;
+        this.RemoteIdentity = 'RemoteIdentity' in params ? params.RemoteIdentity : null;
+        this.LocalAddress = 'LocalAddress' in params ? params.LocalAddress : null;
+        this.RemoteAddress = 'RemoteAddress' in params ? params.RemoteAddress : null;
+        this.LocalFqdnName = 'LocalFqdnName' in params ? params.LocalFqdnName : null;
+        this.RemoteFqdnName = 'RemoteFqdnName' in params ? params.RemoteFqdnName : null;
+        this.DhGroupName = 'DhGroupName' in params ? params.DhGroupName : null;
+        this.IKESaLifetimeSeconds = 'IKESaLifetimeSeconds' in params ? params.IKESaLifetimeSeconds : null;
+        this.IKEVersion = 'IKEVersion' in params ? params.IKEVersion : null;
 
     }
 }
@@ -12291,7 +12305,7 @@ class MigrateNetworkInterfaceResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -12325,8 +12339,8 @@ class InstanceChargePrepaid extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Period = params.Period || null;
-        this.RenewFlag = params.RenewFlag || null;
+        this.Period = 'Period' in params ? params.Period : null;
+        this.RenewFlag = 'RenewFlag' in params ? params.RenewFlag : null;
 
     }
 }
@@ -12376,8 +12390,8 @@ class DescribeCcnAttachedInstancesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Offset = params.Offset || null;
-        this.Limit = params.Limit || null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
 
         if (params.Filters) {
             this.Filters = new Array();
@@ -12387,7 +12401,7 @@ class DescribeCcnAttachedInstancesRequest extends  AbstractModel {
                 this.Filters.push(obj);
             }
         }
-        this.CcnId = params.CcnId || null;
+        this.CcnId = 'CcnId' in params ? params.CcnId : null;
 
     }
 }
@@ -12427,7 +12441,7 @@ class DescribeVpcsResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = params.TotalCount || null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
 
         if (params.VpcSet) {
             this.VpcSet = new Array();
@@ -12437,7 +12451,7 @@ class DescribeVpcsResponse extends  AbstractModel {
                 this.VpcSet.push(obj);
             }
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -12465,7 +12479,7 @@ class DeleteDirectConnectGatewayRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.DirectConnectGatewayId = params.DirectConnectGatewayId || null;
+        this.DirectConnectGatewayId = 'DirectConnectGatewayId' in params ? params.DirectConnectGatewayId : null;
 
     }
 }
@@ -12505,9 +12519,9 @@ class ModifySecurityGroupAttributeRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.SecurityGroupId = params.SecurityGroupId || null;
-        this.GroupName = params.GroupName || null;
-        this.GroupDescription = params.GroupDescription || null;
+        this.SecurityGroupId = 'SecurityGroupId' in params ? params.SecurityGroupId : null;
+        this.GroupName = 'GroupName' in params ? params.GroupName : null;
+        this.GroupDescription = 'GroupDescription' in params ? params.GroupDescription : null;
 
     }
 }
@@ -12547,7 +12561,7 @@ class CreateAddressTemplateGroupResponse extends  AbstractModel {
             obj.deserialize(params.AddressTemplateGroup)
             this.AddressTemplateGroup = obj;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -12641,16 +12655,16 @@ class CcnAttachedInstance extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.CcnId = params.CcnId || null;
-        this.InstanceType = params.InstanceType || null;
-        this.InstanceId = params.InstanceId || null;
-        this.InstanceName = params.InstanceName || null;
-        this.InstanceRegion = params.InstanceRegion || null;
-        this.InstanceUin = params.InstanceUin || null;
-        this.CidrBlock = params.CidrBlock || null;
-        this.State = params.State || null;
-        this.AttachedTime = params.AttachedTime || null;
-        this.CcnUin = params.CcnUin || null;
+        this.CcnId = 'CcnId' in params ? params.CcnId : null;
+        this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
+        this.InstanceRegion = 'InstanceRegion' in params ? params.InstanceRegion : null;
+        this.InstanceUin = 'InstanceUin' in params ? params.InstanceUin : null;
+        this.CidrBlock = 'CidrBlock' in params ? params.CidrBlock : null;
+        this.State = 'State' in params ? params.State : null;
+        this.AttachedTime = 'AttachedTime' in params ? params.AttachedTime : null;
+        this.CcnUin = 'CcnUin' in params ? params.CcnUin : null;
 
     }
 }
@@ -12690,9 +12704,9 @@ class RemoveBandwidthPackageResourcesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.BandwidthPackageId = params.BandwidthPackageId || null;
-        this.ResourceType = params.ResourceType || null;
-        this.ResourceIds = params.ResourceIds || null;
+        this.BandwidthPackageId = 'BandwidthPackageId' in params ? params.BandwidthPackageId : null;
+        this.ResourceType = 'ResourceType' in params ? params.ResourceType : null;
+        this.ResourceIds = 'ResourceIds' in params ? params.ResourceIds : null;
 
     }
 }
@@ -12726,8 +12740,8 @@ class SecurityPolicyDatabase extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.LocalCidrBlock = params.LocalCidrBlock || null;
-        this.RemoteCidrBlock = params.RemoteCidrBlock || null;
+        this.LocalCidrBlock = 'LocalCidrBlock' in params ? params.LocalCidrBlock : null;
+        this.RemoteCidrBlock = 'RemoteCidrBlock' in params ? params.RemoteCidrBlock : null;
 
     }
 }
@@ -12755,7 +12769,7 @@ class AcceptAttachCcnInstancesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -12783,7 +12797,7 @@ class DeleteServiceTemplateGroupRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ServiceTemplateGroupId = params.ServiceTemplateGroupId || null;
+        this.ServiceTemplateGroupId = 'ServiceTemplateGroupId' in params ? params.ServiceTemplateGroupId : null;
 
     }
 }
@@ -12811,7 +12825,7 @@ class ModifyAddressesBandwidthResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -12845,8 +12859,8 @@ class DescribeRouteConflictsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RouteTableId = params.RouteTableId || null;
-        this.DestinationCidrBlocks = params.DestinationCidrBlocks || null;
+        this.RouteTableId = 'RouteTableId' in params ? params.RouteTableId : null;
+        this.DestinationCidrBlocks = 'DestinationCidrBlocks' in params ? params.DestinationCidrBlocks : null;
 
     }
 }
@@ -12919,7 +12933,7 @@ class HaVipAssociateAddressIpResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }

@@ -51,9 +51,9 @@ class DescribeTaskStatusRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Module = params.Module || null;
-        this.Operation = params.Operation || null;
-        this.TaskId = params.TaskId || null;
+        this.Module = 'Module' in params ? params.Module : null;
+        this.Operation = 'Operation' in params ? params.Operation : null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
 
     }
 }
@@ -93,8 +93,8 @@ class ApplyBlackListRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Module = params.Module || null;
-        this.Operation = params.Operation || null;
+        this.Module = 'Module' in params ? params.Module : null;
+        this.Operation = 'Operation' in params ? params.Operation : null;
 
         if (params.BlackList) {
             this.BlackList = new Array();
@@ -149,10 +149,10 @@ class DownloadReportResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.DailyReportUrl = params.DailyReportUrl || null;
-        this.ResultReportUrl = params.ResultReportUrl || null;
-        this.DetailReportUrl = params.DetailReportUrl || null;
-        this.RequestId = params.RequestId || null;
+        this.DailyReportUrl = 'DailyReportUrl' in params ? params.DailyReportUrl : null;
+        this.ResultReportUrl = 'ResultReportUrl' in params ? params.ResultReportUrl : null;
+        this.DetailReportUrl = 'DetailReportUrl' in params ? params.DetailReportUrl : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -186,8 +186,8 @@ class UploadFileResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TaskId = params.TaskId || null;
-        this.RequestId = params.RequestId || null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -215,7 +215,7 @@ class ApplyBlackListResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -291,15 +291,15 @@ class DescribeRecordsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Module = params.Module || null;
-        this.Operation = params.Operation || null;
-        this.ProductId = params.ProductId || null;
-        this.AccountNum = params.AccountNum || null;
-        this.CalledPhone = params.CalledPhone || null;
-        this.StartBizDate = params.StartBizDate || null;
-        this.EndBizDate = params.EndBizDate || null;
-        this.Offset = params.Offset || null;
-        this.Limit = params.Limit || null;
+        this.Module = 'Module' in params ? params.Module : null;
+        this.Operation = 'Operation' in params ? params.Operation : null;
+        this.ProductId = 'ProductId' in params ? params.ProductId : null;
+        this.AccountNum = 'AccountNum' in params ? params.AccountNum : null;
+        this.CalledPhone = 'CalledPhone' in params ? params.CalledPhone : null;
+        this.StartBizDate = 'StartBizDate' in params ? params.StartBizDate : null;
+        this.EndBizDate = 'EndBizDate' in params ? params.EndBizDate : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
 
     }
 }
@@ -339,9 +339,9 @@ class DescribeTaskStatusResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TaskResult = params.TaskResult || null;
-        this.TaskType = params.TaskType || null;
-        this.RequestId = params.RequestId || null;
+        this.TaskResult = 'TaskResult' in params ? params.TaskResult : null;
+        this.TaskType = 'TaskType' in params ? params.TaskType : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -393,11 +393,11 @@ class UploadFileRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Module = params.Module || null;
-        this.Operation = params.Operation || null;
-        this.FileUrl = params.FileUrl || null;
-        this.FileName = params.FileName || null;
-        this.FileDate = params.FileDate || null;
+        this.Module = 'Module' in params ? params.Module : null;
+        this.Operation = 'Operation' in params ? params.Operation : null;
+        this.FileUrl = 'FileUrl' in params ? params.FileUrl : null;
+        this.FileName = 'FileName' in params ? params.FileName : null;
+        this.FileDate = 'FileDate' in params ? params.FileDate : null;
 
     }
 }
@@ -437,9 +437,9 @@ class DownloadReportRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Module = params.Module || null;
-        this.Operation = params.Operation || null;
-        this.ReportDate = params.ReportDate || null;
+        this.Module = 'Module' in params ? params.Module : null;
+        this.Operation = 'Operation' in params ? params.Operation : null;
+        this.ReportDate = 'ReportDate' in params ? params.ReportDate : null;
 
     }
 }
@@ -488,8 +488,8 @@ class DescribeRecordsResponse extends  AbstractModel {
                 this.RecordList.push(obj);
             }
         }
-        this.TotalCount = params.TotalCount || null;
-        this.RequestId = params.RequestId || null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -523,8 +523,8 @@ class UploadDataFileResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.DataResId = params.DataResId || null;
-        this.RequestId = params.RequestId || null;
+        this.DataResId = 'DataResId' in params ? params.DataResId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -570,10 +570,10 @@ class SingleBlackApply extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.BlackType = params.BlackType || null;
-        this.OperationType = params.OperationType || null;
-        this.BlackValue = params.BlackValue || null;
-        this.BlackDescription = params.BlackDescription || null;
+        this.BlackType = 'BlackType' in params ? params.BlackType : null;
+        this.OperationType = 'OperationType' in params ? params.OperationType : null;
+        this.BlackValue = 'BlackValue' in params ? params.BlackValue : null;
+        this.BlackDescription = 'BlackDescription' in params ? params.BlackDescription : null;
 
     }
 }
@@ -631,12 +631,12 @@ class UploadDataFileRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Module = params.Module || null;
-        this.Operation = params.Operation || null;
-        this.FileName = params.FileName || null;
-        this.UploadModel = params.UploadModel || null;
-        this.File = params.File || null;
-        this.FileUrl = params.FileUrl || null;
+        this.Module = 'Module' in params ? params.Module : null;
+        this.Operation = 'Operation' in params ? params.Operation : null;
+        this.FileName = 'FileName' in params ? params.FileName : null;
+        this.UploadModel = 'UploadModel' in params ? params.UploadModel : null;
+        this.File = 'File' in params ? params.File : null;
+        this.FileUrl = 'FileUrl' in params ? params.FileUrl : null;
 
     }
 }
@@ -706,14 +706,14 @@ class SingleRecord extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.AccountNum = params.AccountNum || null;
-        this.BizDate = params.BizDate || null;
-        this.CallStartTime = params.CallStartTime || null;
-        this.CallerPhone = params.CallerPhone || null;
-        this.Direction = params.Direction || null;
-        this.Duration = params.Duration || null;
-        this.ProductId = params.ProductId || null;
-        this.RecordCosUrl = params.RecordCosUrl || null;
+        this.AccountNum = 'AccountNum' in params ? params.AccountNum : null;
+        this.BizDate = 'BizDate' in params ? params.BizDate : null;
+        this.CallStartTime = 'CallStartTime' in params ? params.CallStartTime : null;
+        this.CallerPhone = 'CallerPhone' in params ? params.CallerPhone : null;
+        this.Direction = 'Direction' in params ? params.Direction : null;
+        this.Duration = 'Duration' in params ? params.Duration : null;
+        this.ProductId = 'ProductId' in params ? params.ProductId : null;
+        this.RecordCosUrl = 'RecordCosUrl' in params ? params.RecordCosUrl : null;
 
     }
 }

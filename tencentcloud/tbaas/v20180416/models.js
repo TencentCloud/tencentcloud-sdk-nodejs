@@ -81,11 +81,11 @@ class QueryRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Module = params.Module || null;
-        this.Operation = params.Operation || null;
-        this.ClusterId = params.ClusterId || null;
-        this.ChaincodeName = params.ChaincodeName || null;
-        this.ChannelName = params.ChannelName || null;
+        this.Module = 'Module' in params ? params.Module : null;
+        this.Operation = 'Operation' in params ? params.Operation : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.ChaincodeName = 'ChaincodeName' in params ? params.ChaincodeName : null;
+        this.ChannelName = 'ChannelName' in params ? params.ChannelName : null;
 
         if (params.Peers) {
             this.Peers = new Array();
@@ -95,8 +95,8 @@ class QueryRequest extends  AbstractModel {
                 this.Peers.push(obj);
             }
         }
-        this.FuncName = params.FuncName || null;
-        this.Args = params.Args || null;
+        this.FuncName = 'FuncName' in params ? params.FuncName : null;
+        this.Args = 'Args' in params ? params.Args : null;
 
     }
 }
@@ -136,9 +136,9 @@ class GetInvokeTxResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TxValidationCode = params.TxValidationCode || null;
-        this.TxValidationMsg = params.TxValidationMsg || null;
-        this.RequestId = params.RequestId || null;
+        this.TxValidationCode = 'TxValidationCode' in params ? params.TxValidationCode : null;
+        this.TxValidationMsg = 'TxValidationMsg' in params ? params.TxValidationMsg : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -214,11 +214,11 @@ class InvokeRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Module = params.Module || null;
-        this.Operation = params.Operation || null;
-        this.ClusterId = params.ClusterId || null;
-        this.ChaincodeName = params.ChaincodeName || null;
-        this.ChannelName = params.ChannelName || null;
+        this.Module = 'Module' in params ? params.Module : null;
+        this.Operation = 'Operation' in params ? params.Operation : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.ChaincodeName = 'ChaincodeName' in params ? params.ChaincodeName : null;
+        this.ChannelName = 'ChannelName' in params ? params.ChannelName : null;
 
         if (params.Peers) {
             this.Peers = new Array();
@@ -228,9 +228,9 @@ class InvokeRequest extends  AbstractModel {
                 this.Peers.push(obj);
             }
         }
-        this.FuncName = params.FuncName || null;
-        this.Args = params.Args || null;
-        this.AsyncFlag = params.AsyncFlag || null;
+        this.FuncName = 'FuncName' in params ? params.FuncName : null;
+        this.Args = 'Args' in params ? params.Args : null;
+        this.AsyncFlag = 'AsyncFlag' in params ? params.AsyncFlag : null;
 
     }
 }
@@ -264,8 +264,8 @@ class PeerSet extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.PeerName = params.PeerName || null;
-        this.OrgName = params.OrgName || null;
+        this.PeerName = 'PeerName' in params ? params.PeerName : null;
+        this.OrgName = 'OrgName' in params ? params.OrgName : null;
 
     }
 }
@@ -329,13 +329,13 @@ class GetInvokeTxRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Module = params.Module || null;
-        this.Operation = params.Operation || null;
-        this.ClusterId = params.ClusterId || null;
-        this.ChannelName = params.ChannelName || null;
-        this.PeerName = params.PeerName || null;
-        this.PeerGroup = params.PeerGroup || null;
-        this.TxId = params.TxId || null;
+        this.Module = 'Module' in params ? params.Module : null;
+        this.Operation = 'Operation' in params ? params.Operation : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.ChannelName = 'ChannelName' in params ? params.ChannelName : null;
+        this.PeerName = 'PeerName' in params ? params.PeerName : null;
+        this.PeerGroup = 'PeerGroup' in params ? params.PeerGroup : null;
+        this.TxId = 'TxId' in params ? params.TxId : null;
 
     }
 }
@@ -375,9 +375,9 @@ class InvokeResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Txid = params.Txid || null;
-        this.Events = params.Events || null;
-        this.RequestId = params.RequestId || null;
+        this.Txid = 'Txid' in params ? params.Txid : null;
+        this.Events = 'Events' in params ? params.Events : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -411,8 +411,8 @@ class QueryResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Data = params.Data || null;
-        this.RequestId = params.RequestId || null;
+        this.Data = 'Data' in params ? params.Data : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }

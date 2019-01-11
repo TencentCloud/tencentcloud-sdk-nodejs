@@ -57,9 +57,9 @@ class PlanDetailInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.IsDefault = params.IsDefault || null;
-        this.PlanId = params.PlanId || null;
-        this.PlanName = params.PlanName || null;
+        this.IsDefault = 'IsDefault' in params ? params.IsDefault : null;
+        this.PlanId = 'PlanId' in params ? params.PlanId : null;
+        this.PlanName = 'PlanName' in params ? params.PlanName : null;
 
         if (params.PlanInfo) {
             let obj = new PlanInfo();
@@ -177,21 +177,21 @@ class AppSetInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ItemId = params.ItemId || null;
-        this.AppName = params.AppName || null;
-        this.AppPkgName = params.AppPkgName || null;
-        this.AppVersion = params.AppVersion || null;
-        this.AppMd5 = params.AppMd5 || null;
-        this.AppSize = params.AppSize || null;
-        this.ServiceEdition = params.ServiceEdition || null;
-        this.ShieldCode = params.ShieldCode || null;
-        this.AppUrl = params.AppUrl || null;
-        this.TaskStatus = params.TaskStatus || null;
-        this.ClientIp = params.ClientIp || null;
-        this.TaskTime = params.TaskTime || null;
-        this.AppIconUrl = params.AppIconUrl || null;
-        this.ShieldMd5 = params.ShieldMd5 || null;
-        this.ShieldSize = params.ShieldSize || null;
+        this.ItemId = 'ItemId' in params ? params.ItemId : null;
+        this.AppName = 'AppName' in params ? params.AppName : null;
+        this.AppPkgName = 'AppPkgName' in params ? params.AppPkgName : null;
+        this.AppVersion = 'AppVersion' in params ? params.AppVersion : null;
+        this.AppMd5 = 'AppMd5' in params ? params.AppMd5 : null;
+        this.AppSize = 'AppSize' in params ? params.AppSize : null;
+        this.ServiceEdition = 'ServiceEdition' in params ? params.ServiceEdition : null;
+        this.ShieldCode = 'ShieldCode' in params ? params.ShieldCode : null;
+        this.AppUrl = 'AppUrl' in params ? params.AppUrl : null;
+        this.TaskStatus = 'TaskStatus' in params ? params.TaskStatus : null;
+        this.ClientIp = 'ClientIp' in params ? params.ClientIp : null;
+        this.TaskTime = 'TaskTime' in params ? params.TaskTime : null;
+        this.AppIconUrl = 'AppIconUrl' in params ? params.AppIconUrl : null;
+        this.ShieldMd5 = 'ShieldMd5' in params ? params.ShieldMd5 : null;
+        this.ShieldSize = 'ShieldSize' in params ? params.ShieldSize : null;
 
     }
 }
@@ -231,9 +231,9 @@ class CreateShieldPlanInstanceResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.PlanId = params.PlanId || null;
-        this.Progress = params.Progress || null;
-        this.RequestId = params.RequestId || null;
+        this.PlanId = 'PlanId' in params ? params.PlanId : null;
+        this.Progress = 'Progress' in params ? params.Progress : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -267,8 +267,8 @@ class ScanInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.CallbackUrl = params.CallbackUrl || null;
-        this.ScanTypes = params.ScanTypes || null;
+        this.CallbackUrl = 'CallbackUrl' in params ? params.CallbackUrl : null;
+        this.ScanTypes = 'ScanTypes' in params ? params.ScanTypes : null;
 
     }
 }
@@ -314,10 +314,10 @@ class CreateResourceInstancesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Pid = params.Pid || null;
-        this.TimeUnit = params.TimeUnit || null;
-        this.TimeSpan = params.TimeSpan || null;
-        this.ResourceNum = params.ResourceNum || null;
+        this.Pid = 'Pid' in params ? params.Pid : null;
+        this.TimeUnit = 'TimeUnit' in params ? params.TimeUnit : null;
+        this.TimeSpan = 'TimeSpan' in params ? params.TimeSpan : null;
+        this.ResourceNum = 'ResourceNum' in params ? params.ResourceNum : null;
 
     }
 }
@@ -357,7 +357,7 @@ class DescribeShieldInstancesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = params.TotalCount || null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
 
         if (params.AppSet) {
             this.AppSet = new Array();
@@ -367,7 +367,7 @@ class DescribeShieldInstancesResponse extends  AbstractModel {
                 this.AppSet.push(obj);
             }
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -407,9 +407,9 @@ class PluginInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.PluginType = params.PluginType || null;
-        this.PluginName = params.PluginName || null;
-        this.PluginDesc = params.PluginDesc || null;
+        this.PluginType = 'PluginType' in params ? params.PluginType : null;
+        this.PluginName = 'PluginName' in params ? params.PluginName : null;
+        this.PluginDesc = 'PluginDesc' in params ? params.PluginDesc : null;
 
     }
 }
@@ -437,7 +437,7 @@ class DescribeShieldResultRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ItemId = params.ItemId || null;
+        this.ItemId = 'ItemId' in params ? params.ItemId : null;
 
     }
 }
@@ -516,8 +516,8 @@ class CreateCosSecKeyInstanceRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.CosRegion = params.CosRegion || null;
-        this.Duration = params.Duration || null;
+        this.CosRegion = 'CosRegion' in params ? params.CosRegion : null;
+        this.Duration = 'Duration' in params ? params.Duration : null;
 
     }
 }
@@ -566,8 +566,8 @@ class DescribeScanResultsResponse extends  AbstractModel {
                 this.ScanSet.push(obj);
             }
         }
-        this.TotalCount = params.TotalCount || null;
-        this.RequestId = params.RequestId || null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -661,10 +661,10 @@ class DescribeUserBaseInfoInstanceResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.UserUin = params.UserUin || null;
-        this.UserAppid = params.UserAppid || null;
-        this.TimeStamp = params.TimeStamp || null;
-        this.RequestId = params.RequestId || null;
+        this.UserUin = 'UserUin' in params ? params.UserUin : null;
+        this.UserAppid = 'UserAppid' in params ? params.UserAppid : null;
+        this.TimeStamp = 'TimeStamp' in params ? params.TimeStamp : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -704,8 +704,8 @@ class CreateShieldPlanInstanceRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ResourceId = params.ResourceId || null;
-        this.PlanName = params.PlanName || null;
+        this.ResourceId = 'ResourceId' in params ? params.ResourceId : null;
+        this.PlanName = 'PlanName' in params ? params.PlanName : null;
 
         if (params.PlanInfo) {
             let obj = new PlanInfo();
@@ -787,7 +787,7 @@ class ScanSetInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TaskStatus = params.TaskStatus || null;
+        this.TaskStatus = 'TaskStatus' in params ? params.TaskStatus : null;
 
         if (params.AppDetailInfo) {
             let obj = new AppDetailInfo();
@@ -812,10 +812,10 @@ class ScanSetInfo extends  AbstractModel {
             obj.deserialize(params.AdInfo)
             this.AdInfo = obj;
         }
-        this.TaskTime = params.TaskTime || null;
-        this.StatusCode = params.StatusCode || null;
-        this.StatusDesc = params.StatusDesc || null;
-        this.StatusRef = params.StatusRef || null;
+        this.TaskTime = 'TaskTime' in params ? params.TaskTime : null;
+        this.StatusCode = 'StatusCode' in params ? params.StatusCode : null;
+        this.StatusDesc = 'StatusDesc' in params ? params.StatusDesc : null;
+        this.StatusRef = 'StatusRef' in params ? params.StatusRef : null;
 
     }
 }
@@ -915,19 +915,19 @@ class AppScanSet extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ItemId = params.ItemId || null;
-        this.AppName = params.AppName || null;
-        this.AppPkgName = params.AppPkgName || null;
-        this.AppVersion = params.AppVersion || null;
-        this.AppMd5 = params.AppMd5 || null;
-        this.AppSize = params.AppSize || null;
-        this.ScanCode = params.ScanCode || null;
-        this.TaskStatus = params.TaskStatus || null;
-        this.TaskTime = params.TaskTime || null;
-        this.AppIconUrl = params.AppIconUrl || null;
-        this.AppSid = params.AppSid || null;
-        this.SafeType = params.SafeType || null;
-        this.VulCount = params.VulCount || null;
+        this.ItemId = 'ItemId' in params ? params.ItemId : null;
+        this.AppName = 'AppName' in params ? params.AppName : null;
+        this.AppPkgName = 'AppPkgName' in params ? params.AppPkgName : null;
+        this.AppVersion = 'AppVersion' in params ? params.AppVersion : null;
+        this.AppMd5 = 'AppMd5' in params ? params.AppMd5 : null;
+        this.AppSize = 'AppSize' in params ? params.AppSize : null;
+        this.ScanCode = 'ScanCode' in params ? params.ScanCode : null;
+        this.TaskStatus = 'TaskStatus' in params ? params.TaskStatus : null;
+        this.TaskTime = 'TaskTime' in params ? params.TaskTime : null;
+        this.AppIconUrl = 'AppIconUrl' in params ? params.AppIconUrl : null;
+        this.AppSid = 'AppSid' in params ? params.AppSid : null;
+        this.SafeType = 'SafeType' in params ? params.SafeType : null;
+        this.VulCount = 'VulCount' in params ? params.VulCount : null;
 
     }
 }
@@ -961,7 +961,7 @@ class ShieldPlanInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = params.TotalCount || null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
 
         if (params.PlanSet) {
             this.PlanSet = new Array();
@@ -1016,10 +1016,10 @@ class CreateBindInstanceRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ResourceId = params.ResourceId || null;
-        this.AppIconUrl = params.AppIconUrl || null;
-        this.AppName = params.AppName || null;
-        this.AppPkgName = params.AppPkgName || null;
+        this.ResourceId = 'ResourceId' in params ? params.ResourceId : null;
+        this.AppIconUrl = 'AppIconUrl' in params ? params.AppIconUrl : null;
+        this.AppName = 'AppName' in params ? params.AppName : null;
+        this.AppPkgName = 'AppPkgName' in params ? params.AppPkgName : null;
 
     }
 }
@@ -1059,9 +1059,9 @@ class CreateShieldInstanceResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Progress = params.Progress || null;
-        this.ItemId = params.ItemId || null;
-        this.RequestId = params.RequestId || null;
+        this.Progress = 'Progress' in params ? params.Progress : null;
+        this.ItemId = 'ItemId' in params ? params.ItemId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1089,7 +1089,7 @@ class DeleteShieldInstancesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ItemIds = params.ItemIds || null;
+        this.ItemIds = 'ItemIds' in params ? params.ItemIds : null;
 
     }
 }
@@ -1153,18 +1153,18 @@ class ResourceInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ResourceId = params.ResourceId || null;
-        this.Pid = params.Pid || null;
-        this.CreateTime = params.CreateTime || null;
-        this.ExpireTime = params.ExpireTime || null;
-        this.IsBind = params.IsBind || null;
+        this.ResourceId = 'ResourceId' in params ? params.ResourceId : null;
+        this.Pid = 'Pid' in params ? params.Pid : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.ExpireTime = 'ExpireTime' in params ? params.ExpireTime : null;
+        this.IsBind = 'IsBind' in params ? params.IsBind : null;
 
         if (params.BindInfo) {
             let obj = new BindInfo();
             obj.deserialize(params.BindInfo)
             this.BindInfo = obj;
         }
-        this.ResourceName = params.ResourceName || null;
+        this.ResourceName = 'ResourceName' in params ? params.ResourceName : null;
 
     }
 }
@@ -1231,11 +1231,11 @@ class DescribeShieldInstancesRequest extends  AbstractModel {
                 this.Filters.push(obj);
             }
         }
-        this.Offset = params.Offset || null;
-        this.Limit = params.Limit || null;
-        this.ItemIds = params.ItemIds || null;
-        this.OrderField = params.OrderField || null;
-        this.OrderDirection = params.OrderDirection || null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.ItemIds = 'ItemIds' in params ? params.ItemIds : null;
+        this.OrderField = 'OrderField' in params ? params.OrderField : null;
+        this.OrderDirection = 'OrderDirection' in params ? params.OrderDirection : null;
 
     }
 }
@@ -1293,12 +1293,12 @@ class CreateScanInstancesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ItemId = params.ItemId || null;
-        this.Progress = params.Progress || null;
-        this.AppMd5s = params.AppMd5s || null;
-        this.LimitCount = params.LimitCount || null;
-        this.LimitTime = params.LimitTime || null;
-        this.RequestId = params.RequestId || null;
+        this.ItemId = 'ItemId' in params ? params.ItemId : null;
+        this.Progress = 'Progress' in params ? params.Progress : null;
+        this.AppMd5s = 'AppMd5s' in params ? params.AppMd5s : null;
+        this.LimitCount = 'LimitCount' in params ? params.LimitCount : null;
+        this.LimitTime = 'LimitTime' in params ? params.LimitTime : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1338,7 +1338,7 @@ class DescribeScanInstancesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = params.TotalCount || null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
 
         if (params.ScanSet) {
             this.ScanSet = new Array();
@@ -1348,7 +1348,7 @@ class DescribeScanInstancesResponse extends  AbstractModel {
                 this.ScanSet.push(obj);
             }
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1391,7 +1391,7 @@ class VulInfo extends  AbstractModel {
                 this.VulList.push(obj);
             }
         }
-        this.VulFileScore = params.VulFileScore || null;
+        this.VulFileScore = 'VulFileScore' in params ? params.VulFileScore : null;
 
     }
 }
@@ -1461,14 +1461,14 @@ class AppInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.AppUrl = params.AppUrl || null;
-        this.AppMd5 = params.AppMd5 || null;
-        this.AppSize = params.AppSize || null;
-        this.FileName = params.FileName || null;
-        this.AppPkgName = params.AppPkgName || null;
-        this.AppVersion = params.AppVersion || null;
-        this.AppIconUrl = params.AppIconUrl || null;
-        this.AppName = params.AppName || null;
+        this.AppUrl = 'AppUrl' in params ? params.AppUrl : null;
+        this.AppMd5 = 'AppMd5' in params ? params.AppMd5 : null;
+        this.AppSize = 'AppSize' in params ? params.AppSize : null;
+        this.FileName = 'FileName' in params ? params.FileName : null;
+        this.AppPkgName = 'AppPkgName' in params ? params.AppPkgName : null;
+        this.AppVersion = 'AppVersion' in params ? params.AppVersion : null;
+        this.AppIconUrl = 'AppIconUrl' in params ? params.AppIconUrl : null;
+        this.AppName = 'AppName' in params ? params.AppName : null;
 
     }
 }
@@ -1514,10 +1514,10 @@ class ServiceInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ServiceEdition = params.ServiceEdition || null;
-        this.CallbackUrl = params.CallbackUrl || null;
-        this.SubmitSource = params.SubmitSource || null;
-        this.PlanId = params.PlanId || null;
+        this.ServiceEdition = 'ServiceEdition' in params ? params.ServiceEdition : null;
+        this.CallbackUrl = 'CallbackUrl' in params ? params.CallbackUrl : null;
+        this.SubmitSource = 'SubmitSource' in params ? params.SubmitSource : null;
+        this.PlanId = 'PlanId' in params ? params.PlanId : null;
 
     }
 }
@@ -1545,7 +1545,7 @@ class SoInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.SoFileNames = params.SoFileNames || null;
+        this.SoFileNames = 'SoFileNames' in params ? params.SoFileNames : null;
 
     }
 }
@@ -1609,7 +1609,7 @@ class DescribeShieldPlanInstanceResponse extends  AbstractModel {
             obj.deserialize(params.ResourceServiceInfo)
             this.ResourceServiceInfo = obj;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1649,9 +1649,9 @@ class ResourceServiceInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.CreateTime = params.CreateTime || null;
-        this.ExpireTime = params.ExpireTime || null;
-        this.ResourceName = params.ResourceName || null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.ExpireTime = 'ExpireTime' in params ? params.ExpireTime : null;
+        this.ResourceName = 'ResourceName' in params ? params.ResourceName : null;
 
     }
 }
@@ -1709,7 +1709,7 @@ class DescribeResourceInstancesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Pids = params.Pids || null;
+        this.Pids = 'Pids' in params ? params.Pids : null;
 
         if (params.Filters) {
             this.Filters = new Array();
@@ -1719,10 +1719,10 @@ class DescribeResourceInstancesRequest extends  AbstractModel {
                 this.Filters.push(obj);
             }
         }
-        this.Offset = params.Offset || null;
-        this.Limit = params.Limit || null;
-        this.OrderField = params.OrderField || null;
-        this.OrderDirection = params.OrderDirection || null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.OrderField = 'OrderField' in params ? params.OrderField : null;
+        this.OrderDirection = 'OrderDirection' in params ? params.OrderDirection : null;
 
     }
 }
@@ -1867,8 +1867,8 @@ class DescribeShieldPlanInstanceRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ResourceId = params.ResourceId || null;
-        this.Pid = params.Pid || null;
+        this.ResourceId = 'ResourceId' in params ? params.ResourceId : null;
+        this.Pid = 'Pid' in params ? params.Pid : null;
 
     }
 }
@@ -1932,13 +1932,13 @@ class ShieldInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ShieldCode = params.ShieldCode || null;
-        this.ShieldSize = params.ShieldSize || null;
-        this.ShieldMd5 = params.ShieldMd5 || null;
-        this.AppUrl = params.AppUrl || null;
-        this.TaskTime = params.TaskTime || null;
-        this.ItemId = params.ItemId || null;
-        this.ServiceEdition = params.ServiceEdition || null;
+        this.ShieldCode = 'ShieldCode' in params ? params.ShieldCode : null;
+        this.ShieldSize = 'ShieldSize' in params ? params.ShieldSize : null;
+        this.ShieldMd5 = 'ShieldMd5' in params ? params.ShieldMd5 : null;
+        this.AppUrl = 'AppUrl' in params ? params.AppUrl : null;
+        this.TaskTime = 'TaskTime' in params ? params.TaskTime : null;
+        this.ItemId = 'ItemId' in params ? params.ItemId : null;
+        this.ServiceEdition = 'ServiceEdition' in params ? params.ServiceEdition : null;
 
     }
 }
@@ -1972,8 +1972,8 @@ class CreateResourceInstancesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ResourceSet = params.ResourceSet || null;
-        this.RequestId = params.RequestId || null;
+        this.ResourceSet = 'ResourceSet' in params ? params.ResourceSet : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2037,13 +2037,13 @@ class AppDetailInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.AppName = params.AppName || null;
-        this.AppPkgName = params.AppPkgName || null;
-        this.AppVersion = params.AppVersion || null;
-        this.AppSize = params.AppSize || null;
-        this.AppMd5 = params.AppMd5 || null;
-        this.AppIconUrl = params.AppIconUrl || null;
-        this.FileName = params.FileName || null;
+        this.AppName = 'AppName' in params ? params.AppName : null;
+        this.AppPkgName = 'AppPkgName' in params ? params.AppPkgName : null;
+        this.AppVersion = 'AppVersion' in params ? params.AppVersion : null;
+        this.AppSize = 'AppSize' in params ? params.AppSize : null;
+        this.AppMd5 = 'AppMd5' in params ? params.AppMd5 : null;
+        this.AppIconUrl = 'AppIconUrl' in params ? params.AppIconUrl : null;
+        this.FileName = 'FileName' in params ? params.FileName : null;
 
     }
 }
@@ -2077,8 +2077,8 @@ class DeleteScanInstancesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Progress = params.Progress || null;
-        this.RequestId = params.RequestId || null;
+        this.Progress = 'Progress' in params ? params.Progress : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2112,8 +2112,8 @@ class Filter extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Name = params.Name || null;
-        this.Value = params.Value || null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Value = 'Value' in params ? params.Value : null;
 
     }
 }
@@ -2147,8 +2147,8 @@ class DeleteShieldInstancesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Progress = params.Progress || null;
-        this.RequestId = params.RequestId || null;
+        this.Progress = 'Progress' in params ? params.Progress : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2215,11 +2215,11 @@ class DescribeScanInstancesRequest extends  AbstractModel {
                 this.Filters.push(obj);
             }
         }
-        this.Offset = params.Offset || null;
-        this.Limit = params.Limit || null;
-        this.ItemIds = params.ItemIds || null;
-        this.OrderField = params.OrderField || null;
-        this.OrderDirection = params.OrderDirection || null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.ItemIds = 'ItemIds' in params ? params.ItemIds : null;
+        this.OrderField = 'OrderField' in params ? params.OrderField : null;
+        this.OrderDirection = 'OrderDirection' in params ? params.OrderDirection : null;
 
     }
 }
@@ -2280,7 +2280,7 @@ class DescribeResourceInstancesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = params.TotalCount || null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
 
         if (params.ResourceSet) {
             this.ResourceSet = new Array();
@@ -2290,7 +2290,7 @@ class DescribeResourceInstancesResponse extends  AbstractModel {
                 this.ResourceSet.push(obj);
             }
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2324,8 +2324,8 @@ class DescribeScanResultsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ItemId = params.ItemId || null;
-        this.AppMd5s = params.AppMd5s || null;
+        this.ItemId = 'ItemId' in params ? params.ItemId : null;
+        this.AppMd5s = 'AppMd5s' in params ? params.AppMd5s : null;
 
     }
 }
@@ -2401,15 +2401,15 @@ class CreateCosSecKeyInstanceResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.CosAppid = params.CosAppid || null;
-        this.CosBucket = params.CosBucket || null;
-        this.CosRegion = params.CosRegion || null;
-        this.ExpireTime = params.ExpireTime || null;
-        this.CosId = params.CosId || null;
-        this.CosKey = params.CosKey || null;
-        this.CosTocken = params.CosTocken || null;
-        this.CosPrefix = params.CosPrefix || null;
-        this.RequestId = params.RequestId || null;
+        this.CosAppid = 'CosAppid' in params ? params.CosAppid : null;
+        this.CosBucket = 'CosBucket' in params ? params.CosBucket : null;
+        this.CosRegion = 'CosRegion' in params ? params.CosRegion : null;
+        this.ExpireTime = 'ExpireTime' in params ? params.ExpireTime : null;
+        this.CosId = 'CosId' in params ? params.CosId : null;
+        this.CosKey = 'CosKey' in params ? params.CosKey : null;
+        this.CosTocken = 'CosTocken' in params ? params.CosTocken : null;
+        this.CosPrefix = 'CosPrefix' in params ? params.CosPrefix : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2449,9 +2449,9 @@ class VirusInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.SafeType = params.SafeType || null;
-        this.VirusName = params.VirusName || null;
-        this.VirusDesc = params.VirusDesc || null;
+        this.SafeType = 'SafeType' in params ? params.SafeType : null;
+        this.VirusName = 'VirusName' in params ? params.VirusName : null;
+        this.VirusDesc = 'VirusDesc' in params ? params.VirusDesc : null;
 
     }
 }
@@ -2569,27 +2569,27 @@ class PlanInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ApkSizeOpt = params.ApkSizeOpt || null;
-        this.Dex = params.Dex || null;
-        this.So = params.So || null;
-        this.Bugly = params.Bugly || null;
-        this.AntiRepack = params.AntiRepack || null;
-        this.SeperateDex = params.SeperateDex || null;
-        this.Db = params.Db || null;
-        this.DexSig = params.DexSig || null;
+        this.ApkSizeOpt = 'ApkSizeOpt' in params ? params.ApkSizeOpt : null;
+        this.Dex = 'Dex' in params ? params.Dex : null;
+        this.So = 'So' in params ? params.So : null;
+        this.Bugly = 'Bugly' in params ? params.Bugly : null;
+        this.AntiRepack = 'AntiRepack' in params ? params.AntiRepack : null;
+        this.SeperateDex = 'SeperateDex' in params ? params.SeperateDex : null;
+        this.Db = 'Db' in params ? params.Db : null;
+        this.DexSig = 'DexSig' in params ? params.DexSig : null;
 
         if (params.SoInfo) {
             let obj = new SoInfo();
             obj.deserialize(params.SoInfo)
             this.SoInfo = obj;
         }
-        this.AntiVMP = params.AntiVMP || null;
-        this.SoType = params.SoType || null;
-        this.AntiLogLeak = params.AntiLogLeak || null;
-        this.AntiQemuRoot = params.AntiQemuRoot || null;
-        this.AntiAssets = params.AntiAssets || null;
-        this.AntiScreenshot = params.AntiScreenshot || null;
-        this.AntiSSL = params.AntiSSL || null;
+        this.AntiVMP = 'AntiVMP' in params ? params.AntiVMP : null;
+        this.SoType = 'SoType' in params ? params.SoType : null;
+        this.AntiLogLeak = 'AntiLogLeak' in params ? params.AntiLogLeak : null;
+        this.AntiQemuRoot = 'AntiQemuRoot' in params ? params.AntiQemuRoot : null;
+        this.AntiAssets = 'AntiAssets' in params ? params.AntiAssets : null;
+        this.AntiScreenshot = 'AntiScreenshot' in params ? params.AntiScreenshot : null;
+        this.AntiSSL = 'AntiSSL' in params ? params.AntiSSL : null;
 
     }
 }
@@ -2647,7 +2647,7 @@ class DescribeShieldResultResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TaskStatus = params.TaskStatus || null;
+        this.TaskStatus = 'TaskStatus' in params ? params.TaskStatus : null;
 
         if (params.AppDetailInfo) {
             let obj = new AppDetailInfo();
@@ -2660,9 +2660,9 @@ class DescribeShieldResultResponse extends  AbstractModel {
             obj.deserialize(params.ShieldInfo)
             this.ShieldInfo = obj;
         }
-        this.StatusDesc = params.StatusDesc || null;
-        this.StatusRef = params.StatusRef || null;
-        this.RequestId = params.RequestId || null;
+        this.StatusDesc = 'StatusDesc' in params ? params.StatusDesc : null;
+        this.StatusRef = 'StatusRef' in params ? params.StatusRef : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2696,8 +2696,8 @@ class CreateBindInstanceResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Progress = params.Progress || null;
-        this.RequestId = params.RequestId || null;
+        this.Progress = 'Progress' in params ? params.Progress : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2767,14 +2767,14 @@ class VulList extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.VulId = params.VulId || null;
-        this.VulName = params.VulName || null;
-        this.VulCode = params.VulCode || null;
-        this.VulDesc = params.VulDesc || null;
-        this.VulSolution = params.VulSolution || null;
-        this.VulSrcType = params.VulSrcType || null;
-        this.VulFilepath = params.VulFilepath || null;
-        this.RiskLevel = params.RiskLevel || null;
+        this.VulId = 'VulId' in params ? params.VulId : null;
+        this.VulName = 'VulName' in params ? params.VulName : null;
+        this.VulCode = 'VulCode' in params ? params.VulCode : null;
+        this.VulDesc = 'VulDesc' in params ? params.VulDesc : null;
+        this.VulSolution = 'VulSolution' in params ? params.VulSolution : null;
+        this.VulSrcType = 'VulSrcType' in params ? params.VulSrcType : null;
+        this.VulFilepath = 'VulFilepath' in params ? params.VulFilepath : null;
+        this.RiskLevel = 'RiskLevel' in params ? params.RiskLevel : null;
 
     }
 }
@@ -2814,9 +2814,9 @@ class BindInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.AppIconUrl = params.AppIconUrl || null;
-        this.AppName = params.AppName || null;
-        this.AppPkgName = params.AppPkgName || null;
+        this.AppIconUrl = 'AppIconUrl' in params ? params.AppIconUrl : null;
+        this.AppName = 'AppName' in params ? params.AppName : null;
+        this.AppPkgName = 'AppPkgName' in params ? params.AppPkgName : null;
 
     }
 }
@@ -2844,7 +2844,7 @@ class DeleteScanInstancesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.AppSids = params.AppSids || null;
+        this.AppSids = 'AppSids' in params ? params.AppSids : null;
 
     }
 }

@@ -51,8 +51,8 @@ class Item extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Item = params.Item || null;
-        this.ItemString = params.ItemString || null;
+        this.Item = 'Item' in params ? params.Item : null;
+        this.ItemString = 'ItemString' in params ? params.ItemString : null;
 
         if (params.ItemCoord) {
             let obj = new ItemCoord();
@@ -92,8 +92,8 @@ class EvaluationRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.SessionId = params.SessionId || null;
-        this.Image = params.Image || null;
+        this.SessionId = 'SessionId' in params ? params.SessionId : null;
+        this.Image = 'Image' in params ? params.Image : null;
 
     }
 }
@@ -133,7 +133,7 @@ class EvaluationResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.SessionId = params.SessionId || null;
+        this.SessionId = 'SessionId' in params ? params.SessionId : null;
 
         if (params.Items) {
             this.Items = new Array();
@@ -143,7 +143,7 @@ class EvaluationResponse extends  AbstractModel {
                 this.Items.push(obj);
             }
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -189,10 +189,10 @@ class ItemCoord extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Height = params.Height || null;
-        this.Width = params.Width || null;
-        this.X = params.X || null;
-        this.Y = params.Y || null;
+        this.Height = 'Height' in params ? params.Height : null;
+        this.Width = 'Width' in params ? params.Width : null;
+        this.X = 'X' in params ? params.X : null;
+        this.Y = 'Y' in params ? params.Y : null;
 
     }
 }
