@@ -87,24 +87,24 @@ class CreateFunctionRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.FunctionName = params.FunctionName || null;
+        this.FunctionName = 'FunctionName' in params ? params.FunctionName : null;
 
         if (params.Code) {
             let obj = new Code();
             obj.deserialize(params.Code)
             this.Code = obj;
         }
-        this.Handler = params.Handler || null;
-        this.Description = params.Description || null;
-        this.MemorySize = params.MemorySize || null;
-        this.Timeout = params.Timeout || null;
+        this.Handler = 'Handler' in params ? params.Handler : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.MemorySize = 'MemorySize' in params ? params.MemorySize : null;
+        this.Timeout = 'Timeout' in params ? params.Timeout : null;
 
         if (params.Environment) {
             let obj = new Environment();
             obj.deserialize(params.Environment)
             this.Environment = obj;
         }
-        this.Runtime = params.Runtime || null;
+        this.Runtime = 'Runtime' in params ? params.Runtime : null;
 
         if (params.VpcConfig) {
             let obj = new VpcConfig();
@@ -138,7 +138,7 @@ class DeleteFunctionRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.FunctionName = params.FunctionName || null;
+        this.FunctionName = 'FunctionName' in params ? params.FunctionName : null;
 
     }
 }
@@ -178,9 +178,9 @@ class GetFunctionRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.FunctionName = params.FunctionName || null;
-        this.Qualifier = params.Qualifier || null;
-        this.ShowCode = params.ShowCode || null;
+        this.FunctionName = 'FunctionName' in params ? params.FunctionName : null;
+        this.Qualifier = 'Qualifier' in params ? params.Qualifier : null;
+        this.ShowCode = 'ShowCode' in params ? params.ShowCode : null;
 
     }
 }
@@ -268,11 +268,11 @@ class Trigger extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ModTime = params.ModTime || null;
-        this.Type = params.Type || null;
-        this.TriggerDesc = params.TriggerDesc || null;
-        this.TriggerName = params.TriggerName || null;
-        this.AddTime = params.AddTime || null;
+        this.ModTime = 'ModTime' in params ? params.ModTime : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.TriggerDesc = 'TriggerDesc' in params ? params.TriggerDesc : null;
+        this.TriggerName = 'TriggerName' in params ? params.TriggerName : null;
+        this.AddTime = 'AddTime' in params ? params.AddTime : null;
 
     }
 }
@@ -312,7 +312,7 @@ class InvokeResponse extends  AbstractModel {
             obj.deserialize(params.Result)
             this.Result = obj;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -340,7 +340,7 @@ class CreateFunctionResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -398,12 +398,12 @@ class Function extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ModTime = params.ModTime || null;
-        this.AddTime = params.AddTime || null;
-        this.Runtime = params.Runtime || null;
-        this.FunctionName = params.FunctionName || null;
-        this.FunctionId = params.FunctionId || null;
-        this.Namespace = params.Namespace || null;
+        this.ModTime = 'ModTime' in params ? params.ModTime : null;
+        this.AddTime = 'AddTime' in params ? params.AddTime : null;
+        this.Runtime = 'Runtime' in params ? params.Runtime : null;
+        this.FunctionName = 'FunctionName' in params ? params.FunctionName : null;
+        this.FunctionId = 'FunctionId' in params ? params.FunctionId : null;
+        this.Namespace = 'Namespace' in params ? params.Namespace : null;
 
     }
 }
@@ -461,12 +461,12 @@ class InvokeRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.FunctionName = params.FunctionName || null;
-        this.InvocationType = params.InvocationType || null;
-        this.Qualifier = params.Qualifier || null;
-        this.ClientContext = params.ClientContext || null;
-        this.LogType = params.LogType || null;
-        this.Namespace = params.Namespace || null;
+        this.FunctionName = 'FunctionName' in params ? params.FunctionName : null;
+        this.InvocationType = 'InvocationType' in params ? params.InvocationType : null;
+        this.Qualifier = 'Qualifier' in params ? params.Qualifier : null;
+        this.ClientContext = 'ClientContext' in params ? params.ClientContext : null;
+        this.LogType = 'LogType' in params ? params.LogType : null;
+        this.Namespace = 'Namespace' in params ? params.Namespace : null;
 
     }
 }
@@ -530,11 +530,11 @@ class UpdateFunctionConfigurationRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.FunctionName = params.FunctionName || null;
-        this.Description = params.Description || null;
-        this.MemorySize = params.MemorySize || null;
-        this.Timeout = params.Timeout || null;
-        this.Runtime = params.Runtime || null;
+        this.FunctionName = 'FunctionName' in params ? params.FunctionName : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.MemorySize = 'MemorySize' in params ? params.MemorySize : null;
+        this.Timeout = 'Timeout' in params ? params.Timeout : null;
+        this.Runtime = 'Runtime' in params ? params.Runtime : null;
 
         if (params.Environment) {
             let obj = new Environment();
@@ -580,8 +580,8 @@ class VpcConfig extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.VpcId = params.VpcId || null;
-        this.SubnetId = params.SubnetId || null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
 
     }
 }
@@ -630,8 +630,8 @@ class ListFunctionsResponse extends  AbstractModel {
                 this.Functions.push(obj);
             }
         }
-        this.TotalCount = params.TotalCount || null;
-        this.RequestId = params.RequestId || null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -659,7 +659,7 @@ class CreateTriggerResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -729,14 +729,14 @@ class Result extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Log = params.Log || null;
-        this.RetMsg = params.RetMsg || null;
-        this.ErrMsg = params.ErrMsg || null;
-        this.MemUsage = params.MemUsage || null;
-        this.Duration = params.Duration || null;
-        this.BillDuration = params.BillDuration || null;
-        this.FunctionRequestId = params.FunctionRequestId || null;
-        this.InvokeResult = params.InvokeResult || null;
+        this.Log = 'Log' in params ? params.Log : null;
+        this.RetMsg = 'RetMsg' in params ? params.RetMsg : null;
+        this.ErrMsg = 'ErrMsg' in params ? params.ErrMsg : null;
+        this.MemUsage = 'MemUsage' in params ? params.MemUsage : null;
+        this.Duration = 'Duration' in params ? params.Duration : null;
+        this.BillDuration = 'BillDuration' in params ? params.BillDuration : null;
+        this.FunctionRequestId = 'FunctionRequestId' in params ? params.FunctionRequestId : null;
+        this.InvokeResult = 'InvokeResult' in params ? params.InvokeResult : null;
 
     }
 }
@@ -764,7 +764,7 @@ class UpdateFunctionConfigurationResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -792,7 +792,7 @@ class Filter extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RetCode = params.RetCode || null;
+        this.RetCode = 'RetCode' in params ? params.RetCode : null;
 
     }
 }
@@ -826,8 +826,8 @@ class Variable extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Key = params.Key || null;
-        this.Value = params.Value || null;
+        this.Key = 'Key' in params ? params.Key : null;
+        this.Value = 'Value' in params ? params.Value : null;
 
     }
 }
@@ -969,9 +969,9 @@ class GetFunctionResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ModTime = params.ModTime || null;
-        this.CodeInfo = params.CodeInfo || null;
-        this.Description = params.Description || null;
+        this.ModTime = 'ModTime' in params ? params.ModTime : null;
+        this.CodeInfo = 'CodeInfo' in params ? params.CodeInfo : null;
+        this.Description = 'Description' in params ? params.Description : null;
 
         if (params.Triggers) {
             this.Triggers = new Array();
@@ -981,32 +981,32 @@ class GetFunctionResponse extends  AbstractModel {
                 this.Triggers.push(obj);
             }
         }
-        this.Handler = params.Handler || null;
-        this.CodeSize = params.CodeSize || null;
-        this.Timeout = params.Timeout || null;
-        this.FunctionVersion = params.FunctionVersion || null;
-        this.MemorySize = params.MemorySize || null;
-        this.Runtime = params.Runtime || null;
-        this.FunctionName = params.FunctionName || null;
+        this.Handler = 'Handler' in params ? params.Handler : null;
+        this.CodeSize = 'CodeSize' in params ? params.CodeSize : null;
+        this.Timeout = 'Timeout' in params ? params.Timeout : null;
+        this.FunctionVersion = 'FunctionVersion' in params ? params.FunctionVersion : null;
+        this.MemorySize = 'MemorySize' in params ? params.MemorySize : null;
+        this.Runtime = 'Runtime' in params ? params.Runtime : null;
+        this.FunctionName = 'FunctionName' in params ? params.FunctionName : null;
 
         if (params.VpcConfig) {
             let obj = new VpcConfig();
             obj.deserialize(params.VpcConfig)
             this.VpcConfig = obj;
         }
-        this.UseGpu = params.UseGpu || null;
+        this.UseGpu = 'UseGpu' in params ? params.UseGpu : null;
 
         if (params.Environment) {
             let obj = new Environment();
             obj.deserialize(params.Environment)
             this.Environment = obj;
         }
-        this.CodeResult = params.CodeResult || null;
-        this.CodeError = params.CodeError || null;
-        this.ErrNo = params.ErrNo || null;
-        this.Namespace = params.Namespace || null;
-        this.Role = params.Role || null;
-        this.RequestId = params.RequestId || null;
+        this.CodeResult = 'CodeResult' in params ? params.CodeResult : null;
+        this.CodeError = 'CodeError' in params ? params.CodeError : null;
+        this.ErrNo = 'ErrNo' in params ? params.ErrNo : null;
+        this.Namespace = 'Namespace' in params ? params.Namespace : null;
+        this.Role = 'Role' in params ? params.Role : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1046,7 +1046,7 @@ class GetFunctionLogsResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = params.TotalCount || null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
 
         if (params.Data) {
             this.Data = new Array();
@@ -1056,7 +1056,7 @@ class GetFunctionLogsResponse extends  AbstractModel {
                 this.Data.push(obj);
             }
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1108,11 +1108,11 @@ class ListFunctionsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Order = params.Order || null;
-        this.Orderby = params.Orderby || null;
-        this.Offset = params.Offset || null;
-        this.Limit = params.Limit || null;
-        this.SearchKey = params.SearchKey || null;
+        this.Order = 'Order' in params ? params.Order : null;
+        this.Orderby = 'Orderby' in params ? params.Orderby : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.SearchKey = 'SearchKey' in params ? params.SearchKey : null;
 
     }
 }
@@ -1140,7 +1140,7 @@ class DeleteTriggerResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1192,11 +1192,11 @@ class DeleteTriggerRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.FunctionName = params.FunctionName || null;
-        this.TriggerName = params.TriggerName || null;
-        this.Type = params.Type || null;
-        this.TriggerDesc = params.TriggerDesc || null;
-        this.Qualifier = params.Qualifier || null;
+        this.FunctionName = 'FunctionName' in params ? params.FunctionName : null;
+        this.TriggerName = 'TriggerName' in params ? params.TriggerName : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.TriggerDesc = 'TriggerDesc' in params ? params.TriggerDesc : null;
+        this.Qualifier = 'Qualifier' in params ? params.Qualifier : null;
 
     }
 }
@@ -1242,10 +1242,10 @@ class Code extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.CosBucketName = params.CosBucketName || null;
-        this.CosObjectName = params.CosObjectName || null;
-        this.ZipFile = params.ZipFile || null;
-        this.CosBucketRegion = params.CosBucketRegion || null;
+        this.CosBucketName = 'CosBucketName' in params ? params.CosBucketName : null;
+        this.CosObjectName = 'CosObjectName' in params ? params.CosObjectName : null;
+        this.ZipFile = 'ZipFile' in params ? params.ZipFile : null;
+        this.CosBucketRegion = 'CosBucketRegion' in params ? params.CosBucketRegion : null;
 
     }
 }
@@ -1303,12 +1303,12 @@ class UpdateFunctionCodeRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Handler = params.Handler || null;
-        this.FunctionName = params.FunctionName || null;
-        this.CosBucketName = params.CosBucketName || null;
-        this.CosObjectName = params.CosObjectName || null;
-        this.ZipFile = params.ZipFile || null;
-        this.CosBucketRegion = params.CosBucketRegion || null;
+        this.Handler = 'Handler' in params ? params.Handler : null;
+        this.FunctionName = 'FunctionName' in params ? params.FunctionName : null;
+        this.CosBucketName = 'CosBucketName' in params ? params.CosBucketName : null;
+        this.CosObjectName = 'CosObjectName' in params ? params.CosObjectName : null;
+        this.ZipFile = 'ZipFile' in params ? params.ZipFile : null;
+        this.CosBucketRegion = 'CosBucketRegion' in params ? params.CosBucketRegion : null;
 
     }
 }
@@ -1390,21 +1390,21 @@ class GetFunctionLogsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.FunctionName = params.FunctionName || null;
-        this.Offset = params.Offset || null;
-        this.Limit = params.Limit || null;
-        this.Order = params.Order || null;
-        this.OrderBy = params.OrderBy || null;
+        this.FunctionName = 'FunctionName' in params ? params.FunctionName : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Order = 'Order' in params ? params.Order : null;
+        this.OrderBy = 'OrderBy' in params ? params.OrderBy : null;
 
         if (params.Filter) {
             let obj = new Filter();
             obj.deserialize(params.Filter)
             this.Filter = obj;
         }
-        this.Qualifier = params.Qualifier || null;
-        this.FunctionRequestId = params.FunctionRequestId || null;
-        this.StartTime = params.StartTime || null;
-        this.EndTime = params.EndTime || null;
+        this.Qualifier = 'Qualifier' in params ? params.Qualifier : null;
+        this.FunctionRequestId = 'FunctionRequestId' in params ? params.FunctionRequestId : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
 
     }
 }
@@ -1456,11 +1456,11 @@ class CreateTriggerRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.FunctionName = params.FunctionName || null;
-        this.TriggerName = params.TriggerName || null;
-        this.Type = params.Type || null;
-        this.TriggerDesc = params.TriggerDesc || null;
-        this.Qualifier = params.Qualifier || null;
+        this.FunctionName = 'FunctionName' in params ? params.FunctionName : null;
+        this.TriggerName = 'TriggerName' in params ? params.TriggerName : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.TriggerDesc = 'TriggerDesc' in params ? params.TriggerDesc : null;
+        this.Qualifier = 'Qualifier' in params ? params.Qualifier : null;
 
     }
 }
@@ -1488,7 +1488,7 @@ class DeleteFunctionResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1570,16 +1570,16 @@ class FunctionLog extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.FunctionName = params.FunctionName || null;
-        this.RetMsg = params.RetMsg || null;
-        this.RequestId = params.RequestId || null;
-        this.StartTime = params.StartTime || null;
-        this.RetCode = params.RetCode || null;
-        this.InvokeFinished = params.InvokeFinished || null;
-        this.Duration = params.Duration || null;
-        this.BillDuration = params.BillDuration || null;
-        this.MemUsage = params.MemUsage || null;
-        this.Log = params.Log || null;
+        this.FunctionName = 'FunctionName' in params ? params.FunctionName : null;
+        this.RetMsg = 'RetMsg' in params ? params.RetMsg : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.RetCode = 'RetCode' in params ? params.RetCode : null;
+        this.InvokeFinished = 'InvokeFinished' in params ? params.InvokeFinished : null;
+        this.Duration = 'Duration' in params ? params.Duration : null;
+        this.BillDuration = 'BillDuration' in params ? params.BillDuration : null;
+        this.MemUsage = 'MemUsage' in params ? params.MemUsage : null;
+        this.Log = 'Log' in params ? params.Log : null;
 
     }
 }
@@ -1607,7 +1607,7 @@ class UpdateFunctionCodeResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }

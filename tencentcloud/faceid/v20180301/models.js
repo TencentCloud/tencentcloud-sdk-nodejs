@@ -45,8 +45,8 @@ class GetLiveCodeResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.LiveCode = params.LiveCode || null;
-        this.RequestId = params.RequestId || null;
+        this.LiveCode = 'LiveCode' in params ? params.LiveCode : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -87,9 +87,9 @@ class DetectAuthResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Url = params.Url || null;
-        this.BizToken = params.BizToken || null;
-        this.RequestId = params.RequestId || null;
+        this.Url = 'Url' in params ? params.Url : null;
+        this.BizToken = 'BizToken' in params ? params.BizToken : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -123,8 +123,8 @@ class ImageRecognitionResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Sim = params.Sim || null;
-        this.RequestId = params.RequestId || null;
+        this.Sim = 'Sim' in params ? params.Sim : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -217,8 +217,8 @@ class GetDetectInfoResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.DetectInfo = params.DetectInfo || null;
-        this.RequestId = params.RequestId || null;
+        this.DetectInfo = 'DetectInfo' in params ? params.DetectInfo : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -258,9 +258,9 @@ class LivenessCompareResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.BestFrameBase64 = params.BestFrameBase64 || null;
-        this.Sim = params.Sim || null;
-        this.RequestId = params.RequestId || null;
+        this.BestFrameBase64 = 'BestFrameBase64' in params ? params.BestFrameBase64 : null;
+        this.Sim = 'Sim' in params ? params.Sim : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -326,13 +326,13 @@ BASE64编码后的图片数据大小不超过3M，仅支持jpg、png格式。
         if (!params) {
             return;
         }
-        this.RuleId = params.RuleId || null;
-        this.TerminalType = params.TerminalType || null;
-        this.IdCard = params.IdCard || null;
-        this.Name = params.Name || null;
-        this.RedirectUrl = params.RedirectUrl || null;
-        this.Extra = params.Extra || null;
-        this.ImageBase64 = params.ImageBase64 || null;
+        this.RuleId = 'RuleId' in params ? params.RuleId : null;
+        this.TerminalType = 'TerminalType' in params ? params.TerminalType : null;
+        this.IdCard = 'IdCard' in params ? params.IdCard : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.RedirectUrl = 'RedirectUrl' in params ? params.RedirectUrl : null;
+        this.Extra = 'Extra' in params ? params.Extra : null;
+        this.ImageBase64 = 'ImageBase64' in params ? params.ImageBase64 : null;
 
     }
 }
@@ -373,9 +373,9 @@ class GetDetectInfoRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.BizToken = params.BizToken || null;
-        this.RuleId = params.RuleId || null;
-        this.InfoType = params.InfoType || null;
+        this.BizToken = 'BizToken' in params ? params.BizToken : null;
+        this.RuleId = 'RuleId' in params ? params.RuleId : null;
+        this.InfoType = 'InfoType' in params ? params.InfoType : null;
 
     }
 }
@@ -443,10 +443,10 @@ BASE64编码后的图片数据大小不超过3M，仅支持jpg、png格式。
         if (!params) {
             return;
         }
-        this.IdCard = params.IdCard || null;
-        this.Name = params.Name || null;
-        this.ImageBase64 = params.ImageBase64 || null;
-        this.Optional = params.Optional || null;
+        this.IdCard = 'IdCard' in params ? params.IdCard : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.ImageBase64 = 'ImageBase64' in params ? params.ImageBase64 : null;
+        this.Optional = 'Optional' in params ? params.Optional : null;
 
     }
 }
@@ -503,11 +503,11 @@ LIP为数字模式，ACTION为动作模式，SILENT为静默模式，三种模�
         if (!params) {
             return;
         }
-        this.ImageBase64 = params.ImageBase64 || null;
-        this.VideoBase64 = params.VideoBase64 || null;
-        this.LivenessType = params.LivenessType || null;
-        this.ValidateData = params.ValidateData || null;
-        this.Optional = params.Optional || null;
+        this.ImageBase64 = 'ImageBase64' in params ? params.ImageBase64 : null;
+        this.VideoBase64 = 'VideoBase64' in params ? params.VideoBase64 : null;
+        this.LivenessType = 'LivenessType' in params ? params.LivenessType : null;
+        this.ValidateData = 'ValidateData' in params ? params.ValidateData : null;
+        this.Optional = 'Optional' in params ? params.Optional : null;
 
     }
 }
@@ -541,8 +541,8 @@ class GetActionSequenceResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ActionSequence = params.ActionSequence || null;
-        this.RequestId = params.RequestId || null;
+        this.ActionSequence = 'ActionSequence' in params ? params.ActionSequence : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -582,9 +582,9 @@ class LivenessRecognitionResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.BestFrameBase64 = params.BestFrameBase64 || null;
-        this.Sim = params.Sim || null;
-        this.RequestId = params.RequestId || null;
+        this.BestFrameBase64 = 'BestFrameBase64' in params ? params.BestFrameBase64 : null;
+        this.Sim = 'Sim' in params ? params.Sim : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -646,12 +646,12 @@ LIP为数字模式，ACTION为动作模式，SILENT为静默模式，三种模�
         if (!params) {
             return;
         }
-        this.IdCard = params.IdCard || null;
-        this.Name = params.Name || null;
-        this.VideoBase64 = params.VideoBase64 || null;
-        this.LivenessType = params.LivenessType || null;
-        this.ValidateData = params.ValidateData || null;
-        this.Optional = params.Optional || null;
+        this.IdCard = 'IdCard' in params ? params.IdCard : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.VideoBase64 = 'VideoBase64' in params ? params.VideoBase64 : null;
+        this.LivenessType = 'LivenessType' in params ? params.LivenessType : null;
+        this.ValidateData = 'ValidateData' in params ? params.ValidateData : null;
+        this.Optional = 'Optional' in params ? params.Optional : null;
 
     }
 }

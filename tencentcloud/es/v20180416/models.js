@@ -69,12 +69,12 @@ class MasterNodeInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.EnableDedicatedMaster = params.EnableDedicatedMaster || null;
-        this.MasterNodeType = params.MasterNodeType || null;
-        this.MasterNodeNum = params.MasterNodeNum || null;
-        this.MasterNodeCpuNum = params.MasterNodeCpuNum || null;
-        this.MasterNodeMemSize = params.MasterNodeMemSize || null;
-        this.MasterNodeDiskSize = params.MasterNodeDiskSize || null;
+        this.EnableDedicatedMaster = 'EnableDedicatedMaster' in params ? params.EnableDedicatedMaster : null;
+        this.MasterNodeType = 'MasterNodeType' in params ? params.MasterNodeType : null;
+        this.MasterNodeNum = 'MasterNodeNum' in params ? params.MasterNodeNum : null;
+        this.MasterNodeCpuNum = 'MasterNodeCpuNum' in params ? params.MasterNodeCpuNum : null;
+        this.MasterNodeMemSize = 'MasterNodeMemSize' in params ? params.MasterNodeMemSize : null;
+        this.MasterNodeDiskSize = 'MasterNodeDiskSize' in params ? params.MasterNodeDiskSize : null;
 
     }
 }
@@ -108,8 +108,8 @@ class CreateInstanceResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = params.InstanceId || null;
-        this.RequestId = params.RequestId || null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -137,7 +137,7 @@ class RestartInstanceRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = params.InstanceId || null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
 
     }
 }
@@ -165,7 +165,7 @@ class DeleteInstanceRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = params.InstanceId || null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
 
     }
 }
@@ -229,13 +229,13 @@ class DescribeInstancesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Zone = params.Zone || null;
-        this.InstanceIds = params.InstanceIds || null;
-        this.InstanceNames = params.InstanceNames || null;
-        this.Offset = params.Offset || null;
-        this.Limit = params.Limit || null;
-        this.OrderByKey = params.OrderByKey || null;
-        this.OrderByType = params.OrderByType || null;
+        this.Zone = 'Zone' in params ? params.Zone : null;
+        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
+        this.InstanceNames = 'InstanceNames' in params ? params.InstanceNames : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.OrderByKey = 'OrderByKey' in params ? params.OrderByKey : null;
+        this.OrderByType = 'OrderByType' in params ? params.OrderByType : null;
 
     }
 }
@@ -314,7 +314,7 @@ class UpdateInstanceResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -348,8 +348,8 @@ class EsAcl extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.BlackIpList = params.BlackIpList || null;
-        this.WhiteIpList = params.WhiteIpList || null;
+        this.BlackIpList = 'BlackIpList' in params ? params.BlackIpList : null;
+        this.WhiteIpList = 'WhiteIpList' in params ? params.WhiteIpList : null;
 
     }
 }
@@ -425,19 +425,19 @@ ES.S1.4XLARGE64: 16 核 64G
         if (!params) {
             return;
         }
-        this.InstanceId = params.InstanceId || null;
-        this.InstanceName = params.InstanceName || null;
-        this.NodeNum = params.NodeNum || null;
-        this.EsConfig = params.EsConfig || null;
-        this.Password = params.Password || null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
+        this.NodeNum = 'NodeNum' in params ? params.NodeNum : null;
+        this.EsConfig = 'EsConfig' in params ? params.EsConfig : null;
+        this.Password = 'Password' in params ? params.Password : null;
 
         if (params.EsAcl) {
             let obj = new EsAcl();
             obj.deserialize(params.EsAcl)
             this.EsAcl = obj;
         }
-        this.DiskSize = params.DiskSize || null;
-        this.NodeType = params.NodeType || null;
+        this.DiskSize = 'DiskSize' in params ? params.DiskSize : null;
+        this.NodeType = 'NodeType' in params ? params.NodeType : null;
 
     }
 }
@@ -571,22 +571,22 @@ CLOUD_SSD: SSD云硬盘
         if (!params) {
             return;
         }
-        this.Zone = params.Zone || null;
-        this.NodeNum = params.NodeNum || null;
-        this.EsVersion = params.EsVersion || null;
-        this.NodeType = params.NodeType || null;
-        this.DiskSize = params.DiskSize || null;
-        this.VpcId = params.VpcId || null;
-        this.SubnetId = params.SubnetId || null;
-        this.Password = params.Password || null;
-        this.InstanceName = params.InstanceName || null;
-        this.ChargeType = params.ChargeType || null;
-        this.ChargePeriod = params.ChargePeriod || null;
-        this.RenewFlag = params.RenewFlag || null;
-        this.DiskType = params.DiskType || null;
-        this.TimeUnit = params.TimeUnit || null;
-        this.AutoVoucher = params.AutoVoucher || null;
-        this.VoucherIds = params.VoucherIds || null;
+        this.Zone = 'Zone' in params ? params.Zone : null;
+        this.NodeNum = 'NodeNum' in params ? params.NodeNum : null;
+        this.EsVersion = 'EsVersion' in params ? params.EsVersion : null;
+        this.NodeType = 'NodeType' in params ? params.NodeType : null;
+        this.DiskSize = 'DiskSize' in params ? params.DiskSize : null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
+        this.Password = 'Password' in params ? params.Password : null;
+        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
+        this.ChargeType = 'ChargeType' in params ? params.ChargeType : null;
+        this.ChargePeriod = 'ChargePeriod' in params ? params.ChargePeriod : null;
+        this.RenewFlag = 'RenewFlag' in params ? params.RenewFlag : null;
+        this.DiskType = 'DiskType' in params ? params.DiskType : null;
+        this.TimeUnit = 'TimeUnit' in params ? params.TimeUnit : null;
+        this.AutoVoucher = 'AutoVoucher' in params ? params.AutoVoucher : null;
+        this.VoucherIds = 'VoucherIds' in params ? params.VoucherIds : null;
 
     }
 }
@@ -794,40 +794,40 @@ class InstanceInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = params.InstanceId || null;
-        this.InstanceName = params.InstanceName || null;
-        this.Region = params.Region || null;
-        this.Zone = params.Zone || null;
-        this.AppId = params.AppId || null;
-        this.Uin = params.Uin || null;
-        this.VpcUid = params.VpcUid || null;
-        this.SubnetUid = params.SubnetUid || null;
-        this.Status = params.Status || null;
-        this.ChargeType = params.ChargeType || null;
-        this.ChargePeriod = params.ChargePeriod || null;
-        this.RenewFlag = params.RenewFlag || null;
-        this.NodeType = params.NodeType || null;
-        this.NodeNum = params.NodeNum || null;
-        this.CpuNum = params.CpuNum || null;
-        this.MemSize = params.MemSize || null;
-        this.DiskType = params.DiskType || null;
-        this.DiskSize = params.DiskSize || null;
-        this.EsDomain = params.EsDomain || null;
-        this.EsVip = params.EsVip || null;
-        this.EsPort = params.EsPort || null;
-        this.KibanaUrl = params.KibanaUrl || null;
-        this.EsVersion = params.EsVersion || null;
-        this.EsConfig = params.EsConfig || null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
+        this.Region = 'Region' in params ? params.Region : null;
+        this.Zone = 'Zone' in params ? params.Zone : null;
+        this.AppId = 'AppId' in params ? params.AppId : null;
+        this.Uin = 'Uin' in params ? params.Uin : null;
+        this.VpcUid = 'VpcUid' in params ? params.VpcUid : null;
+        this.SubnetUid = 'SubnetUid' in params ? params.SubnetUid : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.ChargeType = 'ChargeType' in params ? params.ChargeType : null;
+        this.ChargePeriod = 'ChargePeriod' in params ? params.ChargePeriod : null;
+        this.RenewFlag = 'RenewFlag' in params ? params.RenewFlag : null;
+        this.NodeType = 'NodeType' in params ? params.NodeType : null;
+        this.NodeNum = 'NodeNum' in params ? params.NodeNum : null;
+        this.CpuNum = 'CpuNum' in params ? params.CpuNum : null;
+        this.MemSize = 'MemSize' in params ? params.MemSize : null;
+        this.DiskType = 'DiskType' in params ? params.DiskType : null;
+        this.DiskSize = 'DiskSize' in params ? params.DiskSize : null;
+        this.EsDomain = 'EsDomain' in params ? params.EsDomain : null;
+        this.EsVip = 'EsVip' in params ? params.EsVip : null;
+        this.EsPort = 'EsPort' in params ? params.EsPort : null;
+        this.KibanaUrl = 'KibanaUrl' in params ? params.KibanaUrl : null;
+        this.EsVersion = 'EsVersion' in params ? params.EsVersion : null;
+        this.EsConfig = 'EsConfig' in params ? params.EsConfig : null;
 
         if (params.EsAcl) {
             let obj = new EsAcl();
             obj.deserialize(params.EsAcl)
             this.EsAcl = obj;
         }
-        this.CreateTime = params.CreateTime || null;
-        this.UpdateTime = params.UpdateTime || null;
-        this.Deadline = params.Deadline || null;
-        this.InstanceType = params.InstanceType || null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.Deadline = 'Deadline' in params ? params.Deadline : null;
+        this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
 
         if (params.IkConfig) {
             let obj = new EsDictionaryInfo();
@@ -867,7 +867,7 @@ class RestartInstanceResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -895,7 +895,7 @@ class DeleteInstanceResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -935,9 +935,9 @@ class DictInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Key = params.Key || null;
-        this.Name = params.Name || null;
-        this.Size = params.Size || null;
+        this.Key = 'Key' in params ? params.Key : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Size = 'Size' in params ? params.Size : null;
 
     }
 }
@@ -977,7 +977,7 @@ class DescribeInstancesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = params.TotalCount || null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
 
         if (params.InstanceList) {
             this.InstanceList = new Array();
@@ -987,7 +987,7 @@ class DescribeInstancesResponse extends  AbstractModel {
                 this.InstanceList.push(obj);
             }
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }

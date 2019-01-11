@@ -39,7 +39,7 @@ class DeleteMediaResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -85,10 +85,10 @@ class TempCertificate extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.SecretId = params.SecretId || null;
-        this.SecretKey = params.SecretKey || null;
-        this.Token = params.Token || null;
-        this.ExpiredTime = params.ExpiredTime || null;
+        this.SecretId = 'SecretId' in params ? params.SecretId : null;
+        this.SecretKey = 'SecretKey' in params ? params.SecretKey : null;
+        this.Token = 'Token' in params ? params.Token : null;
+        this.ExpiredTime = 'ExpiredTime' in params ? params.ExpiredTime : null;
 
     }
 }
@@ -129,7 +129,7 @@ class SearchMediaResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = params.TotalCount || null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
 
         if (params.MediaInfoSet) {
             this.MediaInfoSet = new Array();
@@ -139,7 +139,7 @@ class SearchMediaResponse extends  AbstractModel {
                 this.MediaInfoSet.push(obj);
             }
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -174,8 +174,8 @@ class ModifyMediaInfoResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.CoverUrl = params.CoverUrl || null;
-        this.RequestId = params.RequestId || null;
+        this.CoverUrl = 'CoverUrl' in params ? params.CoverUrl : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -215,9 +215,9 @@ class ModifyClassRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ClassId = params.ClassId || null;
-        this.ClassName = params.ClassName || null;
-        this.SubAppId = params.SubAppId || null;
+        this.ClassId = 'ClassId' in params ? params.ClassId : null;
+        this.ClassName = 'ClassName' in params ? params.ClassName : null;
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
 
     }
 }
@@ -245,7 +245,7 @@ class DescribeAllClassRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.SubAppId = params.SubAppId || null;
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
 
     }
 }
@@ -333,15 +333,15 @@ class MediaTranscodeItem extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Url = params.Url || null;
-        this.Definition = params.Definition || null;
-        this.Bitrate = params.Bitrate || null;
-        this.Height = params.Height || null;
-        this.Width = params.Width || null;
-        this.Size = params.Size || null;
-        this.Duration = params.Duration || null;
-        this.Container = params.Container || null;
-        this.Md5 = params.Md5 || null;
+        this.Url = 'Url' in params ? params.Url : null;
+        this.Definition = 'Definition' in params ? params.Definition : null;
+        this.Bitrate = 'Bitrate' in params ? params.Bitrate : null;
+        this.Height = 'Height' in params ? params.Height : null;
+        this.Width = 'Width' in params ? params.Width : null;
+        this.Size = 'Size' in params ? params.Size : null;
+        this.Duration = 'Duration' in params ? params.Duration : null;
+        this.Container = 'Container' in params ? params.Container : null;
+        this.Md5 = 'Md5' in params ? params.Md5 : null;
 
         if (params.AudioStreamSet) {
             this.AudioStreamSet = new Array();
@@ -397,8 +397,8 @@ class MediaDeleteItem extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Type = params.Type || null;
-        this.Definition = params.Definition || null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Definition = 'Definition' in params ? params.Definition : null;
 
     }
 }
@@ -438,9 +438,9 @@ class MediaAudioStreamItem extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Bitrate = params.Bitrate || null;
-        this.SamplingRate = params.SamplingRate || null;
-        this.Codec = params.Codec || null;
+        this.Bitrate = 'Bitrate' in params ? params.Bitrate : null;
+        this.SamplingRate = 'SamplingRate' in params ? params.SamplingRate : null;
+        this.Codec = 'Codec' in params ? params.Codec : null;
 
     }
 }
@@ -518,8 +518,8 @@ class DescribeMediaInfosRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.FileIds = params.FileIds || null;
-        this.Filters = params.Filters || null;
+        this.FileIds = 'FileIds' in params ? params.FileIds : null;
+        this.Filters = 'Filters' in params ? params.Filters : null;
 
     }
 }
@@ -559,9 +559,9 @@ class MediaSnapshotByTimePicInfoItem extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TimeOffset = params.TimeOffset || null;
-        this.Url = params.Url || null;
-        this.WaterMarkDefinition = params.WaterMarkDefinition || null;
+        this.TimeOffset = 'TimeOffset' in params ? params.TimeOffset : null;
+        this.Url = 'Url' in params ? params.Url : null;
+        this.WaterMarkDefinition = 'WaterMarkDefinition' in params ? params.WaterMarkDefinition : null;
 
     }
 }
@@ -617,11 +617,11 @@ class MediaSampleSnapshotItem extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Definition = params.Definition || null;
-        this.SampleType = params.SampleType || null;
-        this.Interval = params.Interval || null;
-        this.ImageUrlSet = params.ImageUrlSet || null;
-        this.WaterMarkDefinition = params.WaterMarkDefinition || null;
+        this.Definition = 'Definition' in params ? params.Definition : null;
+        this.SampleType = 'SampleType' in params ? params.SampleType : null;
+        this.Interval = 'Interval' in params ? params.Interval : null;
+        this.ImageUrlSet = 'ImageUrlSet' in params ? params.ImageUrlSet : null;
+        this.WaterMarkDefinition = 'WaterMarkDefinition' in params ? params.WaterMarkDefinition : null;
 
     }
 }
@@ -661,9 +661,9 @@ class CreateClassRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ParentId = params.ParentId || null;
-        this.ClassName = params.ClassName || null;
-        this.SubAppId = params.SubAppId || null;
+        this.ParentId = 'ParentId' in params ? params.ParentId : null;
+        this.ClassName = 'ClassName' in params ? params.ClassName : null;
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
 
     }
 }
@@ -757,12 +757,12 @@ class MediaImageSpriteItem extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Definition = params.Definition || null;
-        this.Height = params.Height || null;
-        this.Width = params.Width || null;
-        this.TotalCount = params.TotalCount || null;
-        this.ImageUrlSet = params.ImageUrlSet || null;
-        this.WebVttUrl = params.WebVttUrl || null;
+        this.Definition = 'Definition' in params ? params.Definition : null;
+        this.Height = 'Height' in params ? params.Height : null;
+        this.Width = 'Width' in params ? params.Width : null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.ImageUrlSet = 'ImageUrlSet' in params ? params.ImageUrlSet : null;
+        this.WebVttUrl = 'WebVttUrl' in params ? params.WebVttUrl : null;
 
     }
 }
@@ -832,8 +832,8 @@ class MediaKeyFrameDescItem extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TimeOffset = params.TimeOffset || null;
-        this.Content = params.Content || null;
+        this.TimeOffset = 'TimeOffset' in params ? params.TimeOffset : null;
+        this.Content = 'Content' in params ? params.Content : null;
 
     }
 }
@@ -879,10 +879,10 @@ class CommitUploadResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.FileId = params.FileId || null;
-        this.MediaUrl = params.MediaUrl || null;
-        this.CoverUrl = params.CoverUrl || null;
-        this.RequestId = params.RequestId || null;
+        this.FileId = 'FileId' in params ? params.FileId : null;
+        this.MediaUrl = 'MediaUrl' in params ? params.MediaUrl : null;
+        this.CoverUrl = 'CoverUrl' in params ? params.CoverUrl : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -920,8 +920,8 @@ class MediaSourceData extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.SourceType = params.SourceType || null;
-        this.SourceContext = params.SourceContext || null;
+        this.SourceType = 'SourceType' in params ? params.SourceType : null;
+        this.SourceContext = 'SourceContext' in params ? params.SourceContext : null;
 
     }
 }
@@ -955,8 +955,8 @@ class CreateClassResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ClassId = params.ClassId || null;
-        this.RequestId = params.RequestId || null;
+        this.ClassId = 'ClassId' in params ? params.ClassId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1008,11 +1008,11 @@ class MediaClassInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ClassId = params.ClassId || null;
-        this.ParentId = params.ParentId || null;
-        this.ClassName = params.ClassName || null;
-        this.Level = params.Level || null;
-        this.SubClassIdSet = params.SubClassIdSet || null;
+        this.ClassId = 'ClassId' in params ? params.ClassId : null;
+        this.ParentId = 'ParentId' in params ? params.ParentId : null;
+        this.ClassName = 'ClassName' in params ? params.ClassName : null;
+        this.Level = 'Level' in params ? params.Level : null;
+        this.SubClassIdSet = 'SubClassIdSet' in params ? params.SubClassIdSet : null;
 
     }
 }
@@ -1064,11 +1064,11 @@ class MediaVideoStreamItem extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Bitrate = params.Bitrate || null;
-        this.Height = params.Height || null;
-        this.Width = params.Width || null;
-        this.Codec = params.Codec || null;
-        this.Fps = params.Fps || null;
+        this.Bitrate = 'Bitrate' in params ? params.Bitrate : null;
+        this.Height = 'Height' in params ? params.Height : null;
+        this.Width = 'Width' in params ? params.Width : null;
+        this.Codec = 'Codec' in params ? params.Codec : null;
+        this.Fps = 'Fps' in params ? params.Fps : null;
 
     }
 }
@@ -1096,7 +1096,7 @@ class ModifyClassResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1198,12 +1198,12 @@ class ModifyMediaInfoRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.FileId = params.FileId || null;
-        this.Name = params.Name || null;
-        this.Description = params.Description || null;
-        this.ClassId = params.ClassId || null;
-        this.ExpireTime = params.ExpireTime || null;
-        this.CoverData = params.CoverData || null;
+        this.FileId = 'FileId' in params ? params.FileId : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.ClassId = 'ClassId' in params ? params.ClassId : null;
+        this.ExpireTime = 'ExpireTime' in params ? params.ExpireTime : null;
+        this.CoverData = 'CoverData' in params ? params.CoverData : null;
 
         if (params.AddKeyFrameDescs) {
             this.AddKeyFrameDescs = new Array();
@@ -1213,12 +1213,12 @@ class ModifyMediaInfoRequest extends  AbstractModel {
                 this.AddKeyFrameDescs.push(obj);
             }
         }
-        this.DeleteKeyFrameDescs = params.DeleteKeyFrameDescs || null;
-        this.ClearKeyFrameDescs = params.ClearKeyFrameDescs || null;
-        this.AddTags = params.AddTags || null;
-        this.DeleteTags = params.DeleteTags || null;
-        this.ClearTags = params.ClearTags || null;
-        this.SubAppId = params.SubAppId || null;
+        this.DeleteKeyFrameDescs = 'DeleteKeyFrameDescs' in params ? params.DeleteKeyFrameDescs : null;
+        this.ClearKeyFrameDescs = 'ClearKeyFrameDescs' in params ? params.ClearKeyFrameDescs : null;
+        this.AddTags = 'AddTags' in params ? params.AddTags : null;
+        this.DeleteTags = 'DeleteTags' in params ? params.DeleteTags : null;
+        this.ClearTags = 'ClearTags' in params ? params.ClearTags : null;
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
 
     }
 }
@@ -1342,13 +1342,13 @@ class MediaMetaData extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Size = params.Size || null;
-        this.Container = params.Container || null;
-        this.Bitrate = params.Bitrate || null;
-        this.Height = params.Height || null;
-        this.Width = params.Width || null;
-        this.Duration = params.Duration || null;
-        this.Rotate = params.Rotate || null;
+        this.Size = 'Size' in params ? params.Size : null;
+        this.Container = 'Container' in params ? params.Container : null;
+        this.Bitrate = 'Bitrate' in params ? params.Bitrate : null;
+        this.Height = 'Height' in params ? params.Height : null;
+        this.Width = 'Width' in params ? params.Width : null;
+        this.Duration = 'Duration' in params ? params.Duration : null;
+        this.Rotate = 'Rotate' in params ? params.Rotate : null;
 
         if (params.VideoStreamSet) {
             this.VideoStreamSet = new Array();
@@ -1367,8 +1367,8 @@ class MediaMetaData extends  AbstractModel {
                 this.AudioStreamSet.push(obj);
             }
         }
-        this.VideoDuration = params.VideoDuration || null;
-        this.AudioDuration = params.AudioDuration || null;
+        this.VideoDuration = 'VideoDuration' in params ? params.VideoDuration : null;
+        this.AudioDuration = 'AudioDuration' in params ? params.AudioDuration : null;
 
     }
 }
@@ -1472,23 +1472,23 @@ class SearchMediaRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Text = params.Text || null;
-        this.Tags = params.Tags || null;
-        this.ClassIds = params.ClassIds || null;
-        this.StartTime = params.StartTime || null;
-        this.EndTime = params.EndTime || null;
-        this.SourceType = params.SourceType || null;
-        this.StreamId = params.StreamId || null;
-        this.Vid = params.Vid || null;
+        this.Text = 'Text' in params ? params.Text : null;
+        this.Tags = 'Tags' in params ? params.Tags : null;
+        this.ClassIds = 'ClassIds' in params ? params.ClassIds : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.SourceType = 'SourceType' in params ? params.SourceType : null;
+        this.StreamId = 'StreamId' in params ? params.StreamId : null;
+        this.Vid = 'Vid' in params ? params.Vid : null;
 
         if (params.Sort) {
             let obj = new SortBy();
             obj.deserialize(params.Sort)
             this.Sort = obj;
         }
-        this.Offset = params.Offset || null;
-        this.Limit = params.Limit || null;
-        this.SubAppId = params.SubAppId || null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
 
     }
 }
@@ -1552,18 +1552,18 @@ class ApplyUploadResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.StorageBucket = params.StorageBucket || null;
-        this.StorageRegion = params.StorageRegion || null;
-        this.VodSessionKey = params.VodSessionKey || null;
-        this.MediaStoragePath = params.MediaStoragePath || null;
-        this.CoverStoragePath = params.CoverStoragePath || null;
+        this.StorageBucket = 'StorageBucket' in params ? params.StorageBucket : null;
+        this.StorageRegion = 'StorageRegion' in params ? params.StorageRegion : null;
+        this.VodSessionKey = 'VodSessionKey' in params ? params.VodSessionKey : null;
+        this.MediaStoragePath = 'MediaStoragePath' in params ? params.MediaStoragePath : null;
+        this.CoverStoragePath = 'CoverStoragePath' in params ? params.CoverStoragePath : null;
 
         if (params.TempCertificate) {
             let obj = new TempCertificate();
             obj.deserialize(params.TempCertificate)
             this.TempCertificate = obj;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1597,8 +1597,8 @@ class DeleteClassRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ClassId = params.ClassId || null;
-        this.SubAppId = params.SubAppId || null;
+        this.ClassId = 'ClassId' in params ? params.ClassId : null;
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
 
     }
 }
@@ -1641,7 +1641,7 @@ class DescribeAllClassResponse extends  AbstractModel {
                 this.ClassInfoSet.push(obj);
             }
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1669,7 +1669,7 @@ class DeleteClassResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1746,15 +1746,15 @@ class ApplyUploadRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.MediaType = params.MediaType || null;
-        this.MediaName = params.MediaName || null;
-        this.CoverType = params.CoverType || null;
-        this.Procedure = params.Procedure || null;
-        this.ExpireTime = params.ExpireTime || null;
-        this.StorageRegion = params.StorageRegion || null;
-        this.ClassId = params.ClassId || null;
-        this.SourceContext = params.SourceContext || null;
-        this.SubAppId = params.SubAppId || null;
+        this.MediaType = 'MediaType' in params ? params.MediaType : null;
+        this.MediaName = 'MediaName' in params ? params.MediaName : null;
+        this.CoverType = 'CoverType' in params ? params.CoverType : null;
+        this.Procedure = 'Procedure' in params ? params.Procedure : null;
+        this.ExpireTime = 'ExpireTime' in params ? params.ExpireTime : null;
+        this.StorageRegion = 'StorageRegion' in params ? params.StorageRegion : null;
+        this.ClassId = 'ClassId' in params ? params.ClassId : null;
+        this.SourceContext = 'SourceContext' in params ? params.SourceContext : null;
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
 
     }
 }
@@ -1824,8 +1824,8 @@ class CommitUploadRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.VodSessionKey = params.VodSessionKey || null;
-        this.SubAppId = params.SubAppId || null;
+        this.VodSessionKey = 'VodSessionKey' in params ? params.VodSessionKey : null;
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
 
     }
 }
@@ -1859,7 +1859,7 @@ class MediaSnapshotByTimeOffsetItem extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Definition = params.Definition || null;
+        this.Definition = 'Definition' in params ? params.Definition : null;
 
         if (params.PicInfoSet) {
             this.PicInfoSet = new Array();
@@ -1980,26 +1980,26 @@ class MediaBasicInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Name = params.Name || null;
-        this.Description = params.Description || null;
-        this.CreateTime = params.CreateTime || null;
-        this.UpdateTime = params.UpdateTime || null;
-        this.ExpireTime = params.ExpireTime || null;
-        this.ClassId = params.ClassId || null;
-        this.ClassName = params.ClassName || null;
-        this.ClassPath = params.ClassPath || null;
-        this.CoverUrl = params.CoverUrl || null;
-        this.Type = params.Type || null;
-        this.MediaUrl = params.MediaUrl || null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.ExpireTime = 'ExpireTime' in params ? params.ExpireTime : null;
+        this.ClassId = 'ClassId' in params ? params.ClassId : null;
+        this.ClassName = 'ClassName' in params ? params.ClassName : null;
+        this.ClassPath = 'ClassPath' in params ? params.ClassPath : null;
+        this.CoverUrl = 'CoverUrl' in params ? params.CoverUrl : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.MediaUrl = 'MediaUrl' in params ? params.MediaUrl : null;
 
         if (params.SourceInfo) {
             let obj = new MediaSourceData();
             obj.deserialize(params.SourceInfo)
             this.SourceInfo = obj;
         }
-        this.StorageRegion = params.StorageRegion || null;
-        this.TagSet = params.TagSet || null;
-        this.Vid = params.Vid || null;
+        this.StorageRegion = 'StorageRegion' in params ? params.StorageRegion : null;
+        this.TagSet = 'TagSet' in params ? params.TagSet : null;
+        this.Vid = 'Vid' in params ? params.Vid : null;
 
     }
 }
@@ -2123,7 +2123,7 @@ class MediaInfo extends  AbstractModel {
             obj.deserialize(params.KeyFrameDescInfo)
             this.KeyFrameDescInfo = obj;
         }
-        this.FileId = params.FileId || null;
+        this.FileId = 'FileId' in params ? params.FileId : null;
 
     }
 }
@@ -2205,16 +2205,16 @@ class MediaAnimatedGraphicsItem extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Url = params.Url || null;
-        this.Definition = params.Definition || null;
-        this.Container = params.Container || null;
-        this.Height = params.Height || null;
-        this.Width = params.Width || null;
-        this.Bitrate = params.Bitrate || null;
-        this.Size = params.Size || null;
-        this.Md5 = params.Md5 || null;
-        this.StartTimeOffset = params.StartTimeOffset || null;
-        this.EndTimeOffset = params.EndTimeOffset || null;
+        this.Url = 'Url' in params ? params.Url : null;
+        this.Definition = 'Definition' in params ? params.Definition : null;
+        this.Container = 'Container' in params ? params.Container : null;
+        this.Height = 'Height' in params ? params.Height : null;
+        this.Width = 'Width' in params ? params.Width : null;
+        this.Bitrate = 'Bitrate' in params ? params.Bitrate : null;
+        this.Size = 'Size' in params ? params.Size : null;
+        this.Md5 = 'Md5' in params ? params.Md5 : null;
+        this.StartTimeOffset = 'StartTimeOffset' in params ? params.StartTimeOffset : null;
+        this.EndTimeOffset = 'EndTimeOffset' in params ? params.EndTimeOffset : null;
 
     }
 }
@@ -2248,8 +2248,8 @@ class SortBy extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Field = params.Field || null;
-        this.Order = params.Order || null;
+        this.Field = 'Field' in params ? params.Field : null;
+        this.Order = 'Order' in params ? params.Order : null;
 
     }
 }
@@ -2325,7 +2325,7 @@ class DeleteMediaRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.FileId = params.FileId || null;
+        this.FileId = 'FileId' in params ? params.FileId : null;
 
         if (params.DeleteParts) {
             this.DeleteParts = new Array();
@@ -2335,7 +2335,7 @@ class DeleteMediaRequest extends  AbstractModel {
                 this.DeleteParts.push(obj);
             }
         }
-        this.SubAppId = params.SubAppId || null;
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
 
     }
 }
@@ -2384,8 +2384,8 @@ class DescribeMediaInfosResponse extends  AbstractModel {
                 this.MediaInfoSet.push(obj);
             }
         }
-        this.NotExistFileIdSet = params.NotExistFileIdSet || null;
-        this.RequestId = params.RequestId || null;
+        this.NotExistFileIdSet = 'NotExistFileIdSet' in params ? params.NotExistFileIdSet : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }

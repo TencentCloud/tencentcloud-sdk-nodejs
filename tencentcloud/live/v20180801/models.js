@@ -39,7 +39,7 @@ class DeleteLiveRecordResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -67,7 +67,7 @@ class AddDelayLiveStreamResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -95,7 +95,7 @@ class StopLiveRecordResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -140,6 +140,8 @@ class ModifyPullStreamConfigRequest extends  AbstractModel {
 
         /**
          * 开始时间。
+使用UTC格式时间，
+例如：2019-01-08T10:00:00Z。
          * @type {string || null}
          */
         this.StartTime = null;
@@ -149,6 +151,9 @@ class ModifyPullStreamConfigRequest extends  AbstractModel {
 1. 结束时间必须大于开始时间；
 2. 结束时间和开始时间必须大于当前时间；
 3. 结束时间 和 开始时间 间隔必须小于七天。
+
+使用UTC格式时间，
+例如：2019-01-08T10:00:00Z。
          * @type {string || null}
          */
         this.EndTime = null;
@@ -162,13 +167,13 @@ class ModifyPullStreamConfigRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ConfigId = params.ConfigId || null;
-        this.FromUrl = params.FromUrl || null;
-        this.ToUrl = params.ToUrl || null;
-        this.AreaId = params.AreaId || null;
-        this.IspId = params.IspId || null;
-        this.StartTime = params.StartTime || null;
-        this.EndTime = params.EndTime || null;
+        this.ConfigId = 'ConfigId' in params ? params.ConfigId : null;
+        this.FromUrl = 'FromUrl' in params ? params.FromUrl : null;
+        this.ToUrl = 'ToUrl' in params ? params.ToUrl : null;
+        this.AreaId = 'AreaId' in params ? params.AreaId : null;
+        this.IspId = 'IspId' in params ? params.IspId : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
 
     }
 }
@@ -220,11 +225,11 @@ class PlayAuthKeyInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.DomainName = params.DomainName || null;
-        this.Enable = params.Enable || null;
-        this.AuthKey = params.AuthKey || null;
-        this.AuthDelta = params.AuthDelta || null;
-        this.AuthBackKey = params.AuthBackKey || null;
+        this.DomainName = 'DomainName' in params ? params.DomainName : null;
+        this.Enable = 'Enable' in params ? params.Enable : null;
+        this.AuthKey = 'AuthKey' in params ? params.AuthKey : null;
+        this.AuthDelta = 'AuthDelta' in params ? params.AuthDelta : null;
+        this.AuthBackKey = 'AuthBackKey' in params ? params.AuthBackKey : null;
 
     }
 }
@@ -269,12 +274,17 @@ class PullStreamConfig extends  AbstractModel {
 
         /**
          * 开始时间。
+UTC格式时间，
+例如：2019-01-08T10:00:00Z。
          * @type {string || null}
          */
         this.StartTime = null;
 
         /**
          * 结束时间。
+
+UTC格式时间，
+例如：2019-01-08T10:00:00Z。
          * @type {string || null}
          */
         this.EndTime = null;
@@ -294,14 +304,14 @@ class PullStreamConfig extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ConfigId = params.ConfigId || null;
-        this.FromUrl = params.FromUrl || null;
-        this.ToUrl = params.ToUrl || null;
-        this.AreaName = params.AreaName || null;
-        this.IspName = params.IspName || null;
-        this.StartTime = params.StartTime || null;
-        this.EndTime = params.EndTime || null;
-        this.Status = params.Status || null;
+        this.ConfigId = 'ConfigId' in params ? params.ConfigId : null;
+        this.FromUrl = 'FromUrl' in params ? params.FromUrl : null;
+        this.ToUrl = 'ToUrl' in params ? params.ToUrl : null;
+        this.AreaName = 'AreaName' in params ? params.AreaName : null;
+        this.IspName = 'IspName' in params ? params.IspName : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.Status = 'Status' in params ? params.Status : null;
 
     }
 }
@@ -329,7 +339,7 @@ class DeletePullStreamConfigRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ConfigId = params.ConfigId || null;
+        this.ConfigId = 'ConfigId' in params ? params.ConfigId : null;
 
     }
 }
@@ -357,7 +367,7 @@ class UpdateLiveWatermarkResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -385,7 +395,7 @@ class ModifyLivePlayAuthKeyResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -425,7 +435,7 @@ class DescribeLiveWatermarksResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalNum = params.TotalNum || null;
+        this.TotalNum = 'TotalNum' in params ? params.TotalNum : null;
 
         if (params.WatermarkList) {
             this.WatermarkList = new Array();
@@ -435,7 +445,7 @@ class DescribeLiveWatermarksResponse extends  AbstractModel {
                 this.WatermarkList.push(obj);
             }
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -469,8 +479,8 @@ class ModifyPullStreamStatusRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ConfigIds = params.ConfigIds || null;
-        this.Status = params.Status || null;
+        this.ConfigIds = 'ConfigIds' in params ? params.ConfigIds : null;
+        this.Status = 'Status' in params ? params.Status : null;
 
     }
 }
@@ -504,8 +514,8 @@ class CreatePullStreamConfigResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ConfigId = params.ConfigId || null;
-        this.RequestId = params.RequestId || null;
+        this.ConfigId = 'ConfigId' in params ? params.ConfigId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -533,7 +543,7 @@ class ResumeDelayLiveStreamResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -561,7 +571,7 @@ class ModifyPullStreamStatusResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -626,13 +636,13 @@ class WatermarkInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.WatermarkId = params.WatermarkId || null;
-        this.PictureUrl = params.PictureUrl || null;
-        this.XPosition = params.XPosition || null;
-        this.YPosition = params.YPosition || null;
-        this.WatermarkName = params.WatermarkName || null;
-        this.Status = params.Status || null;
-        this.CreateTime = params.CreateTime || null;
+        this.WatermarkId = 'WatermarkId' in params ? params.WatermarkId : null;
+        this.PictureUrl = 'PictureUrl' in params ? params.PictureUrl : null;
+        this.XPosition = 'XPosition' in params ? params.XPosition : null;
+        this.YPosition = 'YPosition' in params ? params.YPosition : null;
+        this.WatermarkName = 'WatermarkName' in params ? params.WatermarkName : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
 
     }
 }
@@ -684,11 +694,11 @@ class PushAuthKeyInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.DomainName = params.DomainName || null;
-        this.Enable = params.Enable || null;
-        this.MasterAuthKey = params.MasterAuthKey || null;
-        this.BackupAuthKey = params.BackupAuthKey || null;
-        this.AuthDelta = params.AuthDelta || null;
+        this.DomainName = 'DomainName' in params ? params.DomainName : null;
+        this.Enable = 'Enable' in params ? params.Enable : null;
+        this.MasterAuthKey = 'MasterAuthKey' in params ? params.MasterAuthKey : null;
+        this.BackupAuthKey = 'BackupAuthKey' in params ? params.BackupAuthKey : null;
+        this.AuthDelta = 'AuthDelta' in params ? params.AuthDelta : null;
 
     }
 }
@@ -716,7 +726,7 @@ class ForbidLiveStreamResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -774,10 +784,10 @@ class DescribeLiveStreamOnlineInfoResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.PageNum = params.PageNum || null;
-        this.PageSize = params.PageSize || null;
-        this.TotalNum = params.TotalNum || null;
-        this.TotalPage = params.TotalPage || null;
+        this.PageNum = 'PageNum' in params ? params.PageNum : null;
+        this.PageSize = 'PageSize' in params ? params.PageSize : null;
+        this.TotalNum = 'TotalNum' in params ? params.TotalNum : null;
+        this.TotalPage = 'TotalPage' in params ? params.TotalPage : null;
 
         if (params.StreamInfoList) {
             this.StreamInfoList = new Array();
@@ -787,7 +797,7 @@ class DescribeLiveStreamOnlineInfoResponse extends  AbstractModel {
                 this.StreamInfoList.push(obj);
             }
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -815,7 +825,7 @@ class DescribeLivePlayAuthKeyRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.DomainName = params.DomainName || null;
+        this.DomainName = 'DomainName' in params ? params.DomainName : null;
 
     }
 }
@@ -873,10 +883,10 @@ class DescribeLiveStreamOnlineListResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalNum = params.TotalNum || null;
-        this.TotalPage = params.TotalPage || null;
-        this.PageNum = params.PageNum || null;
-        this.PageSize = params.PageSize || null;
+        this.TotalNum = 'TotalNum' in params ? params.TotalNum : null;
+        this.TotalPage = 'TotalPage' in params ? params.TotalPage : null;
+        this.PageNum = 'PageNum' in params ? params.PageNum : null;
+        this.PageSize = 'PageSize' in params ? params.PageSize : null;
 
         if (params.OnlineInfo) {
             this.OnlineInfo = new Array();
@@ -886,7 +896,7 @@ class DescribeLiveStreamOnlineListResponse extends  AbstractModel {
                 this.OnlineInfo.push(obj);
             }
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -926,9 +936,9 @@ class ResumeDelayLiveStreamRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.AppName = params.AppName || null;
-        this.DomainName = params.DomainName || null;
-        this.StreamName = params.StreamName || null;
+        this.AppName = 'AppName' in params ? params.AppName : null;
+        this.DomainName = 'DomainName' in params ? params.DomainName : null;
+        this.StreamName = 'StreamName' in params ? params.StreamName : null;
 
     }
 }
@@ -980,11 +990,11 @@ class ModifyLivePlayAuthKeyRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.DomainName = params.DomainName || null;
-        this.Enable = params.Enable || null;
-        this.AuthKey = params.AuthKey || null;
-        this.AuthDelta = params.AuthDelta || null;
-        this.AuthBackKey = params.AuthBackKey || null;
+        this.DomainName = 'DomainName' in params ? params.DomainName : null;
+        this.Enable = 'Enable' in params ? params.Enable : null;
+        this.AuthKey = 'AuthKey' in params ? params.AuthKey : null;
+        this.AuthDelta = 'AuthDelta' in params ? params.AuthDelta : null;
+        this.AuthBackKey = 'AuthBackKey' in params ? params.AuthBackKey : null;
 
     }
 }
@@ -1018,8 +1028,8 @@ class SetLiveWatermarkStatusRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.WatermarkId = params.WatermarkId || null;
-        this.Status = params.Status || null;
+        this.WatermarkId = 'WatermarkId' in params ? params.WatermarkId : null;
+        this.Status = 'Status' in params ? params.Status : null;
 
     }
 }
@@ -1067,10 +1077,10 @@ class DescribeLiveStreamOnlineListRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.DomainName = params.DomainName || null;
-        this.AppName = params.AppName || null;
-        this.PageNum = params.PageNum || null;
-        this.PageSize = params.PageSize || null;
+        this.DomainName = 'DomainName' in params ? params.DomainName : null;
+        this.AppName = 'AppName' in params ? params.AppName : null;
+        this.PageNum = 'PageNum' in params ? params.PageNum : null;
+        this.PageSize = 'PageSize' in params ? params.PageSize : null;
 
     }
 }
@@ -1122,11 +1132,11 @@ class UpdateLiveWatermarkRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.WatermarkId = params.WatermarkId || null;
-        this.PictureUrl = params.PictureUrl || null;
-        this.XPosition = params.XPosition || null;
-        this.YPosition = params.YPosition || null;
-        this.WatermarkName = params.WatermarkName || null;
+        this.WatermarkId = 'WatermarkId' in params ? params.WatermarkId : null;
+        this.PictureUrl = 'PictureUrl' in params ? params.PictureUrl : null;
+        this.XPosition = 'XPosition' in params ? params.XPosition : null;
+        this.YPosition = 'YPosition' in params ? params.YPosition : null;
+        this.WatermarkName = 'WatermarkName' in params ? params.WatermarkName : null;
 
     }
 }
@@ -1154,7 +1164,7 @@ class DeleteLiveWatermarkRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.WatermarkId = params.WatermarkId || null;
+        this.WatermarkId = 'WatermarkId' in params ? params.WatermarkId : null;
 
     }
 }
@@ -1174,7 +1184,7 @@ class CreateLiveRecordRequest extends  AbstractModel {
         this.StreamName = null;
 
         /**
-         * 直播流所属应用名称。
+         * 推流App名。
          * @type {string || null}
          */
         this.AppName = null;
@@ -1186,13 +1196,13 @@ class CreateLiveRecordRequest extends  AbstractModel {
         this.DomainName = null;
 
         /**
-         * 任务起始时间，中国标准时间，需要URLEncode。如 2017-01-01 10:10:01，编码为：2017-01-01+10%3a10%3a01。录制视频为精彩视频时，忽略此字段。
+         * 录制开始时间。非精彩视频录制，必须设置该字段。中国标准时间，需要URLEncode。如 2017-01-01 10:10:01，编码为：2017-01-01+10%3a10%3a01。
          * @type {string || null}
          */
         this.StartTime = null;
 
         /**
-         * 任务结束时间，中国标准时间，需要URLEncode。如 2017-01-01 10:30:01，编码为：2017-01-01+10%3a30%3a01。若指定精彩视频录制，结束时间不超过当前时间+30分钟，如果超过或小于起始时间，则实际结束时间为当前时间+30分钟。
+         * 录制结束时间。非精彩视频录制，必须设置该字段。中国标准时间，需要URLEncode。如 2017-01-01 10:30:01，编码为：2017-01-01+10%3a30%3a01。如果通过Highlight参数，设置录制为精彩视频录制，结束时间不应超过当前时间+30分钟，如果结束时间超过当前时间+30分钟或小于当前时间，则实际结束时间为当前时间+30分钟。
          * @type {string || null}
          */
         this.EndTime = null;
@@ -1213,22 +1223,22 @@ class CreateLiveRecordRequest extends  AbstractModel {
         this.FileFormat = null;
 
         /**
-         * 精彩视频标志。0：普通视频【默认】；1：精彩视频。
+         * 开启精彩视频录制标志；0：不开启精彩视频录制【默认】；1：开启精彩视频录制。
          * @type {number || null}
          */
         this.Highlight = null;
 
         /**
-         * A+B=C混流标志。0：非A+B=C混流录制【默认】；1：标示为A+B=C混流录制。
+         * 开启A+B=C混流C流录制标志。0：不开启A+B=C混流C流录制【默认】；1：开启A+B=C混流C流录制。
          * @type {number || null}
          */
         this.MixStream = null;
 
         /**
-         * 录制流参数，当前支持以下参数： 
-interval 录制分片时长，单位 秒，0 - 7200
-storage_time 录制文件存储时长，单位 秒
-eg. interval=3600&storage_time=7200
+         * 录制流参数。当前支持以下参数：
+record_interval - 录制分片时长，单位 秒，1800 - 7200
+storage_time - 录制文件存储时长，单位 秒
+eg. record_interval=3600&storage_time=7200
 注：参数需要url encode。
          * @type {string || null}
          */
@@ -1243,16 +1253,16 @@ eg. interval=3600&storage_time=7200
         if (!params) {
             return;
         }
-        this.StreamName = params.StreamName || null;
-        this.AppName = params.AppName || null;
-        this.DomainName = params.DomainName || null;
-        this.StartTime = params.StartTime || null;
-        this.EndTime = params.EndTime || null;
-        this.RecordType = params.RecordType || null;
-        this.FileFormat = params.FileFormat || null;
-        this.Highlight = params.Highlight || null;
-        this.MixStream = params.MixStream || null;
-        this.StreamParam = params.StreamParam || null;
+        this.StreamName = 'StreamName' in params ? params.StreamName : null;
+        this.AppName = 'AppName' in params ? params.AppName : null;
+        this.DomainName = 'DomainName' in params ? params.DomainName : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.RecordType = 'RecordType' in params ? params.RecordType : null;
+        this.FileFormat = 'FileFormat' in params ? params.FileFormat : null;
+        this.Highlight = 'Highlight' in params ? params.Highlight : null;
+        this.MixStream = 'MixStream' in params ? params.MixStream : null;
+        this.StreamParam = 'StreamParam' in params ? params.StreamParam : null;
 
     }
 }
@@ -1280,7 +1290,7 @@ class DropLiveStreamResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1317,8 +1327,8 @@ forbid：禁播。
         if (!params) {
             return;
         }
-        this.StreamState = params.StreamState || null;
-        this.RequestId = params.RequestId || null;
+        this.StreamState = 'StreamState' in params ? params.StreamState : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1352,8 +1362,8 @@ class StopLiveRecordRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.StreamName = params.StreamName || null;
-        this.TaskId = params.TaskId || null;
+        this.StreamName = 'StreamName' in params ? params.StreamName : null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
 
     }
 }
@@ -1381,7 +1391,7 @@ class DeletePullStreamConfigResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1433,11 +1443,11 @@ class ModifyLivePushAuthKeyRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.DomainName = params.DomainName || null;
-        this.Enable = params.Enable || null;
-        this.MasterAuthKey = params.MasterAuthKey || null;
-        this.BackupAuthKey = params.BackupAuthKey || null;
-        this.AuthDelta = params.AuthDelta || null;
+        this.DomainName = 'DomainName' in params ? params.DomainName : null;
+        this.Enable = 'Enable' in params ? params.Enable : null;
+        this.MasterAuthKey = 'MasterAuthKey' in params ? params.MasterAuthKey : null;
+        this.BackupAuthKey = 'BackupAuthKey' in params ? params.BackupAuthKey : null;
+        this.AuthDelta = 'AuthDelta' in params ? params.AuthDelta : null;
 
     }
 }
@@ -1498,9 +1508,9 @@ class DescribeLiveStreamStateRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.AppName = params.AppName || null;
-        this.DomainName = params.DomainName || null;
-        this.StreamName = params.StreamName || null;
+        this.AppName = 'AppName' in params ? params.AppName : null;
+        this.DomainName = 'DomainName' in params ? params.DomainName : null;
+        this.StreamName = 'StreamName' in params ? params.StreamName : null;
 
     }
 }
@@ -1540,7 +1550,7 @@ class DescribeLivePlayAuthKeyResponse extends  AbstractModel {
             obj.deserialize(params.PlayAuthKeyInfo)
             this.PlayAuthKeyInfo = obj;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1568,7 +1578,7 @@ class DeleteLiveWatermarkResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1608,7 +1618,7 @@ class DescribeLivePushAuthKeyResponse extends  AbstractModel {
             obj.deserialize(params.PushAuthKeyInfo)
             this.PushAuthKeyInfo = obj;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1648,9 +1658,9 @@ class DropLiveStreamRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.StreamName = params.StreamName || null;
-        this.DomainName = params.DomainName || null;
-        this.AppName = params.AppName || null;
+        this.StreamName = 'StreamName' in params ? params.StreamName : null;
+        this.DomainName = 'DomainName' in params ? params.DomainName : null;
+        this.AppName = 'AppName' in params ? params.AppName : null;
 
     }
 }
@@ -1679,7 +1689,7 @@ UTC 格式，例如：2018-06-29T19:00:00Z。
         if (!params) {
             return;
         }
-        this.PublishTime = params.PublishTime || null;
+        this.PublishTime = 'PublishTime' in params ? params.PublishTime : null;
 
     }
 }
@@ -1707,7 +1717,7 @@ class ResumeLiveStreamResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1747,9 +1757,9 @@ class ResumeLiveStreamRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.AppName = params.AppName || null;
-        this.DomainName = params.DomainName || null;
-        this.StreamName = params.StreamName || null;
+        this.AppName = 'AppName' in params ? params.AppName : null;
+        this.DomainName = 'DomainName' in params ? params.DomainName : null;
+        this.StreamName = 'StreamName' in params ? params.StreamName : null;
 
     }
 }
@@ -1816,12 +1826,12 @@ UTC 格式，例如：2016-06-29T19:00:00Z。
         if (!params) {
             return;
         }
-        this.DomainName = params.DomainName || null;
-        this.EndTime = params.EndTime || null;
-        this.StartTime = params.StartTime || null;
-        this.AppName = params.AppName || null;
-        this.PageNum = params.PageNum || null;
-        this.PageSize = params.PageSize || null;
+        this.DomainName = 'DomainName' in params ? params.DomainName : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.AppName = 'AppName' in params ? params.AppName : null;
+        this.PageNum = 'PageNum' in params ? params.PageNum : null;
+        this.PageSize = 'PageSize' in params ? params.PageSize : null;
 
     }
 }
@@ -1849,7 +1859,7 @@ class ModifyPullStreamConfigResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1877,7 +1887,7 @@ class ModifyLivePushAuthKeyResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1911,8 +1921,8 @@ class CreateLiveRecordResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TaskId = params.TaskId || null;
-        this.RequestId = params.RequestId || null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1946,8 +1956,8 @@ class AddLiveWatermarkResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.WatermarkId = params.WatermarkId || null;
-        this.RequestId = params.RequestId || null;
+        this.WatermarkId = 'WatermarkId' in params ? params.WatermarkId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1990,7 +2000,7 @@ class DescribePullStreamConfigsResponse extends  AbstractModel {
                 this.PullStreamConfigs.push(obj);
             }
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2018,7 +2028,7 @@ class StreamName extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.StreamName = params.StreamName || null;
+        this.StreamName = 'StreamName' in params ? params.StreamName : null;
 
     }
 }
@@ -2065,10 +2075,10 @@ class ForbidLiveStreamRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.AppName = params.AppName || null;
-        this.DomainName = params.DomainName || null;
-        this.StreamName = params.StreamName || null;
-        this.ResumeTime = params.ResumeTime || null;
+        this.AppName = 'AppName' in params ? params.AppName : null;
+        this.DomainName = 'DomainName' in params ? params.DomainName : null;
+        this.StreamName = 'StreamName' in params ? params.StreamName : null;
+        this.ResumeTime = 'ResumeTime' in params ? params.ResumeTime : null;
 
     }
 }
@@ -2093,6 +2103,12 @@ class StreamOnlineInfo extends  AbstractModel {
          */
         this.PublishTimeList = null;
 
+        /**
+         * 应用名称。
+         * @type {string || null}
+         */
+        this.AppName = null;
+
     }
 
     /**
@@ -2102,7 +2118,7 @@ class StreamOnlineInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.StreamName = params.StreamName || null;
+        this.StreamName = 'StreamName' in params ? params.StreamName : null;
 
         if (params.PublishTimeList) {
             this.PublishTimeList = new Array();
@@ -2112,6 +2128,7 @@ class StreamOnlineInfo extends  AbstractModel {
                 this.PublishTimeList.push(obj);
             }
         }
+        this.AppName = 'AppName' in params ? params.AppName : null;
 
     }
 }
@@ -2175,13 +2192,13 @@ class StreamInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.AppName = params.AppName || null;
-        this.CreateMode = params.CreateMode || null;
-        this.CreateTime = params.CreateTime || null;
-        this.Status = params.Status || null;
-        this.StreamId = params.StreamId || null;
-        this.StreamName = params.StreamName || null;
-        this.WaterMarkId = params.WaterMarkId || null;
+        this.AppName = 'AppName' in params ? params.AppName : null;
+        this.CreateMode = 'CreateMode' in params ? params.CreateMode : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.StreamId = 'StreamId' in params ? params.StreamId : null;
+        this.StreamName = 'StreamName' in params ? params.StreamName : null;
+        this.WaterMarkId = 'WaterMarkId' in params ? params.WaterMarkId : null;
 
     }
 }
@@ -2220,6 +2237,8 @@ class CreatePullStreamConfigRequest extends  AbstractModel {
 
         /**
          * 开始时间。
+使用UTC格式时间，
+例如：2019-01-08T10:00:00Z。
          * @type {string || null}
          */
         this.StartTime = null;
@@ -2229,6 +2248,8 @@ class CreatePullStreamConfigRequest extends  AbstractModel {
 1. 结束时间必须大于开始时间；
 2. 结束时间和开始时间必须大于当前时间；
 3. 结束时间 和 开始时间 间隔必须小于七天。
+使用UTC格式时间，
+例如：2019-01-08T10:00:00Z。
          * @type {string || null}
          */
         this.EndTime = null;
@@ -2242,12 +2263,12 @@ class CreatePullStreamConfigRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.FromUrl = params.FromUrl || null;
-        this.ToUrl = params.ToUrl || null;
-        this.AreaId = params.AreaId || null;
-        this.IspId = params.IspId || null;
-        this.StartTime = params.StartTime || null;
-        this.EndTime = params.EndTime || null;
+        this.FromUrl = 'FromUrl' in params ? params.FromUrl : null;
+        this.ToUrl = 'ToUrl' in params ? params.ToUrl : null;
+        this.AreaId = 'AreaId' in params ? params.AreaId : null;
+        this.IspId = 'IspId' in params ? params.IspId : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
 
     }
 }
@@ -2297,10 +2318,10 @@ class DescribeLiveStreamOnlineInfoRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.PageNum = params.PageNum || null;
-        this.PageSize = params.PageSize || null;
-        this.Status = params.Status || null;
-        this.StreamName = params.StreamName || null;
+        this.PageNum = 'PageNum' in params ? params.PageNum : null;
+        this.PageSize = 'PageSize' in params ? params.PageSize : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.StreamName = 'StreamName' in params ? params.StreamName : null;
 
     }
 }
@@ -2346,10 +2367,10 @@ class AddLiveWatermarkRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.PictureUrl = params.PictureUrl || null;
-        this.WatermarkName = params.WatermarkName || null;
-        this.XPosition = params.XPosition || null;
-        this.YPosition = params.YPosition || null;
+        this.PictureUrl = 'PictureUrl' in params ? params.PictureUrl : null;
+        this.WatermarkName = 'WatermarkName' in params ? params.WatermarkName : null;
+        this.XPosition = 'XPosition' in params ? params.XPosition : null;
+        this.YPosition = 'YPosition' in params ? params.YPosition : null;
 
     }
 }
@@ -2383,8 +2404,8 @@ class DeleteLiveRecordRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.StreamName = params.StreamName || null;
-        this.TaskId = params.TaskId || null;
+        this.StreamName = 'StreamName' in params ? params.StreamName : null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
 
     }
 }
@@ -2412,7 +2433,7 @@ class DescribeLivePushAuthKeyRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.DomainName = params.DomainName || null;
+        this.DomainName = 'DomainName' in params ? params.DomainName : null;
 
     }
 }
@@ -2440,7 +2461,7 @@ class SetLiveWatermarkStatusResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2493,11 +2514,11 @@ class AddDelayLiveStreamRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.AppName = params.AppName || null;
-        this.DomainName = params.DomainName || null;
-        this.StreamName = params.StreamName || null;
-        this.DelayTime = params.DelayTime || null;
-        this.ExpireTime = params.ExpireTime || null;
+        this.AppName = 'AppName' in params ? params.AppName : null;
+        this.DomainName = 'DomainName' in params ? params.DomainName : null;
+        this.StreamName = 'StreamName' in params ? params.StreamName : null;
+        this.DelayTime = 'DelayTime' in params ? params.DelayTime : null;
+        this.ExpireTime = 'ExpireTime' in params ? params.ExpireTime : null;
 
     }
 }
@@ -2525,7 +2546,7 @@ class DescribePullStreamConfigsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ConfigId = params.ConfigId || null;
+        this.ConfigId = 'ConfigId' in params ? params.ConfigId : null;
 
     }
 }
@@ -2592,11 +2613,11 @@ class DescribeLiveStreamPublishedListResponse extends  AbstractModel {
                 this.PublishInfo.push(obj);
             }
         }
-        this.PageNum = params.PageNum || null;
-        this.PageSize = params.PageSize || null;
-        this.TotalNum = params.TotalNum || null;
-        this.TotalPage = params.TotalPage || null;
-        this.RequestId = params.RequestId || null;
+        this.PageNum = 'PageNum' in params ? params.PageNum : null;
+        this.PageSize = 'PageSize' in params ? params.PageSize : null;
+        this.TotalNum = 'TotalNum' in params ? params.TotalNum : null;
+        this.TotalPage = 'TotalPage' in params ? params.TotalPage : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }

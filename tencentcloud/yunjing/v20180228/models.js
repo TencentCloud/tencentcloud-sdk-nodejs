@@ -41,7 +41,7 @@ class ModifyAutoOpenProVersionConfigRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Status = params.Status || null;
+        this.Status = 'Status' in params ? params.Status : null;
 
     }
 }
@@ -79,8 +79,8 @@ class DescribeProcessTaskStatusResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Status = params.Status || null;
-        this.RequestId = params.RequestId || null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -140,11 +140,11 @@ class DescribeAlarmAttributeResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Offline = params.Offline || null;
-        this.Malware = params.Malware || null;
-        this.NonlocalLogin = params.NonlocalLogin || null;
-        this.CrackSuccess = params.CrackSuccess || null;
-        this.RequestId = params.RequestId || null;
+        this.Offline = 'Offline' in params ? params.Offline : null;
+        this.Malware = 'Malware' in params ? params.Malware : null;
+        this.NonlocalLogin = 'NonlocalLogin' in params ? params.NonlocalLogin : null;
+        this.CrackSuccess = 'CrackSuccess' in params ? params.CrackSuccess : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -193,8 +193,8 @@ class DescribeWeeklyReportBruteAttacksResponse extends  AbstractModel {
                 this.WeeklyReportBruteAttacks.push(obj);
             }
         }
-        this.TotalCount = params.TotalCount || null;
-        this.RequestId = params.RequestId || null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -250,10 +250,10 @@ class DescribeAgentVulsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.VulType = params.VulType || null;
-        this.Uuid = params.Uuid || null;
-        this.Limit = params.Limit || null;
-        this.Offset = params.Offset || null;
+        this.VulType = 'VulType' in params ? params.VulType : null;
+        this.Uuid = 'Uuid' in params ? params.Uuid : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
 
         if (params.Filters) {
             this.Filters = new Array();
@@ -314,11 +314,11 @@ class UsualPlace extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Id = params.Id || null;
-        this.Uuid = params.Uuid || null;
-        this.CountryId = params.CountryId || null;
-        this.ProvinceId = params.ProvinceId || null;
-        this.CityId = params.CityId || null;
+        this.Id = 'Id' in params ? params.Id : null;
+        this.Uuid = 'Uuid' in params ? params.Uuid : null;
+        this.CountryId = 'CountryId' in params ? params.CountryId : null;
+        this.ProvinceId = 'ProvinceId' in params ? params.ProvinceId : null;
+        this.CityId = 'CityId' in params ? params.CityId : null;
 
     }
 }
@@ -373,10 +373,10 @@ class DescribeAccountsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Uuid = params.Uuid || null;
-        this.Username = params.Username || null;
-        this.Limit = params.Limit || null;
-        this.Offset = params.Offset || null;
+        this.Uuid = 'Uuid' in params ? params.Uuid : null;
+        this.Username = 'Username' in params ? params.Username : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
 
         if (params.Filters) {
             this.Filters = new Array();
@@ -449,12 +449,12 @@ class WeeklyReportVul extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.MachineIp = params.MachineIp || null;
-        this.VulName = params.VulName || null;
-        this.VulType = params.VulType || null;
-        this.Description = params.Description || null;
-        this.VulStatus = params.VulStatus || null;
-        this.LastScanTime = params.LastScanTime || null;
+        this.MachineIp = 'MachineIp' in params ? params.MachineIp : null;
+        this.VulName = 'VulName' in params ? params.VulName : null;
+        this.VulType = 'VulType' in params ? params.VulType : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.VulStatus = 'VulStatus' in params ? params.VulStatus : null;
+        this.LastScanTime = 'LastScanTime' in params ? params.LastScanTime : null;
 
     }
 }
@@ -494,9 +494,9 @@ class DescribeWeeklyReportBruteAttacksRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.BeginDate = params.BeginDate || null;
-        this.Limit = params.Limit || null;
-        this.Offset = params.Offset || null;
+        this.BeginDate = 'BeginDate' in params ? params.BeginDate : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
 
     }
 }
@@ -530,7 +530,7 @@ class CreateUsualLoginPlacesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Uuids = params.Uuids || null;
+        this.Uuids = 'Uuids' in params ? params.Uuids : null;
 
         if (params.Places) {
             this.Places = new Array();
@@ -567,7 +567,7 @@ class DescribeProcessTaskStatusRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Uuid = params.Uuid || null;
+        this.Uuid = 'Uuid' in params ? params.Uuid : null;
 
     }
 }
@@ -607,8 +607,8 @@ class ModifyAlarmAttributeRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Attribute = params.Attribute || null;
-        this.Value = params.Value || null;
+        this.Attribute = 'Attribute' in params ? params.Attribute : null;
+        this.Value = 'Value' in params ? params.Value : null;
 
     }
 }
@@ -662,11 +662,11 @@ class ComponentStatistics extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Id = params.Id || null;
-        this.MachineNum = params.MachineNum || null;
-        this.ComponentName = params.ComponentName || null;
-        this.ComponentType = params.ComponentType || null;
-        this.Description = params.Description || null;
+        this.Id = 'Id' in params ? params.Id : null;
+        this.MachineNum = 'MachineNum' in params ? params.MachineNum : null;
+        this.ComponentName = 'ComponentName' in params ? params.ComponentName : null;
+        this.ComponentType = 'ComponentType' in params ? params.ComponentType : null;
+        this.Description = 'Description' in params ? params.Description : null;
 
     }
 }
@@ -762,8 +762,8 @@ class DescribeBruteAttacksRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Uuid = params.Uuid || null;
-        this.Offset = params.Offset || null;
+        this.Uuid = 'Uuid' in params ? params.Uuid : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
 
         if (params.Filters) {
             this.Filters = new Array();
@@ -773,7 +773,7 @@ class DescribeBruteAttacksRequest extends  AbstractModel {
                 this.Filters.push(obj);
             }
         }
-        this.Limit = params.Limit || null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
 
     }
 }
@@ -807,8 +807,8 @@ class DescribeSecurityTrendsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.BeginDate = params.BeginDate || null;
-        this.EndDate = params.EndDate || null;
+        this.BeginDate = 'BeginDate' in params ? params.BeginDate : null;
+        this.EndDate = 'EndDate' in params ? params.EndDate : null;
 
     }
 }
@@ -886,15 +886,15 @@ class Account extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Id = params.Id || null;
-        this.Uuid = params.Uuid || null;
-        this.MachineIp = params.MachineIp || null;
-        this.MachineName = params.MachineName || null;
-        this.Username = params.Username || null;
-        this.Groups = params.Groups || null;
-        this.Privilege = params.Privilege || null;
-        this.AccountCreateTime = params.AccountCreateTime || null;
-        this.LastLoginTime = params.LastLoginTime || null;
+        this.Id = 'Id' in params ? params.Id : null;
+        this.Uuid = 'Uuid' in params ? params.Uuid : null;
+        this.MachineIp = 'MachineIp' in params ? params.MachineIp : null;
+        this.MachineName = 'MachineName' in params ? params.MachineName : null;
+        this.Username = 'Username' in params ? params.Username : null;
+        this.Groups = 'Groups' in params ? params.Groups : null;
+        this.Privilege = 'Privilege' in params ? params.Privilege : null;
+        this.AccountCreateTime = 'AccountCreateTime' in params ? params.AccountCreateTime : null;
+        this.LastLoginTime = 'LastLoginTime' in params ? params.LastLoginTime : null;
 
     }
 }
@@ -922,7 +922,7 @@ class RescanImpactedHostRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Id = params.Id || null;
+        this.Id = 'Id' in params ? params.Id : null;
 
     }
 }
@@ -1019,18 +1019,18 @@ class BruteAttack extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Id = params.Id || null;
-        this.MachineIp = params.MachineIp || null;
-        this.Status = params.Status || null;
-        this.UserName = params.UserName || null;
-        this.City = params.City || null;
-        this.Country = params.Country || null;
-        this.Province = params.Province || null;
-        this.SrcIp = params.SrcIp || null;
-        this.Count = params.Count || null;
-        this.CreateTime = params.CreateTime || null;
-        this.MachineName = params.MachineName || null;
-        this.Uuid = params.Uuid || null;
+        this.Id = 'Id' in params ? params.Id : null;
+        this.MachineIp = 'MachineIp' in params ? params.MachineIp : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.UserName = 'UserName' in params ? params.UserName : null;
+        this.City = 'City' in params ? params.City : null;
+        this.Country = 'Country' in params ? params.Country : null;
+        this.Province = 'Province' in params ? params.Province : null;
+        this.SrcIp = 'SrcIp' in params ? params.SrcIp : null;
+        this.Count = 'Count' in params ? params.Count : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.MachineName = 'MachineName' in params ? params.MachineName : null;
+        this.Uuid = 'Uuid' in params ? params.Uuid : null;
 
     }
 }
@@ -1085,10 +1085,10 @@ class DescribeOpenPortsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Uuid = params.Uuid || null;
-        this.Port = params.Port || null;
-        this.Limit = params.Limit || null;
-        this.Offset = params.Offset || null;
+        this.Uuid = 'Uuid' in params ? params.Uuid : null;
+        this.Port = 'Port' in params ? params.Port : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
 
         if (params.Filters) {
             this.Filters = new Array();
@@ -1144,9 +1144,9 @@ class DescribeImpactedHostsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.VulId = params.VulId || null;
-        this.Limit = params.Limit || null;
-        this.Offset = params.Offset || null;
+        this.VulId = 'VulId' in params ? params.VulId : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
 
         if (params.Filters) {
             this.Filters = new Array();
@@ -1195,7 +1195,7 @@ class DescribeMaliciousRequestsResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = params.TotalCount || null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
 
         if (params.MaliciousRequests) {
             this.MaliciousRequests = new Array();
@@ -1205,7 +1205,7 @@ class DescribeMaliciousRequestsResponse extends  AbstractModel {
                 this.MaliciousRequests.push(obj);
             }
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1295,17 +1295,17 @@ class NonLocalLoginPlace extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Id = params.Id || null;
-        this.MachineIp = params.MachineIp || null;
-        this.Status = params.Status || null;
-        this.UserName = params.UserName || null;
-        this.City = params.City || null;
-        this.Country = params.Country || null;
-        this.Province = params.Province || null;
-        this.SrcIp = params.SrcIp || null;
-        this.MachineName = params.MachineName || null;
-        this.LoginTime = params.LoginTime || null;
-        this.Uuid = params.Uuid || null;
+        this.Id = 'Id' in params ? params.Id : null;
+        this.MachineIp = 'MachineIp' in params ? params.MachineIp : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.UserName = 'UserName' in params ? params.UserName : null;
+        this.City = 'City' in params ? params.City : null;
+        this.Country = 'Country' in params ? params.Country : null;
+        this.Province = 'Province' in params ? params.Province : null;
+        this.SrcIp = 'SrcIp' in params ? params.SrcIp : null;
+        this.MachineName = 'MachineName' in params ? params.MachineName : null;
+        this.LoginTime = 'LoginTime' in params ? params.LoginTime : null;
+        this.Uuid = 'Uuid' in params ? params.Uuid : null;
 
     }
 }
@@ -1333,7 +1333,7 @@ class CreateProcessTaskResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1373,7 +1373,7 @@ class RenewProVersionRequest extends  AbstractModel {
             obj.deserialize(params.ChargePrepaid)
             this.ChargePrepaid = obj;
         }
-        this.Quuid = params.Quuid || null;
+        this.Quuid = 'Quuid' in params ? params.Quuid : null;
 
     }
 }
@@ -1427,10 +1427,10 @@ class DescribeComponentsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Uuid = params.Uuid || null;
-        this.ComponentId = params.ComponentId || null;
-        this.Limit = params.Limit || null;
-        this.Offset = params.Offset || null;
+        this.Uuid = 'Uuid' in params ? params.Uuid : null;
+        this.ComponentId = 'ComponentId' in params ? params.ComponentId : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
 
         if (params.Filters) {
             this.Filters = new Array();
@@ -1487,9 +1487,9 @@ class DescribeNonlocalLoginPlacesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Uuid = params.Uuid || null;
-        this.Limit = params.Limit || null;
-        this.Offset = params.Offset || null;
+        this.Uuid = 'Uuid' in params ? params.Uuid : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
 
         if (params.Filters) {
             this.Filters = new Array();
@@ -1532,8 +1532,8 @@ class OpenPortStatistics extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Port = params.Port || null;
-        this.MachineNum = params.MachineNum || null;
+        this.Port = 'Port' in params ? params.Port : null;
+        this.MachineNum = 'MachineNum' in params ? params.MachineNum : null;
 
     }
 }
@@ -1573,7 +1573,7 @@ class DescribeHistoryAccountsResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = params.TotalCount || null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
 
         if (params.HistoryAccounts) {
             this.HistoryAccounts = new Array();
@@ -1583,7 +1583,7 @@ class DescribeHistoryAccountsResponse extends  AbstractModel {
                 this.HistoryAccounts.push(obj);
             }
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1629,10 +1629,10 @@ class DescribeVulScanResultResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.VulNum = params.VulNum || null;
-        this.ProVersionNum = params.ProVersionNum || null;
-        this.ImpactedHostNum = params.ImpactedHostNum || null;
-        this.RequestId = params.RequestId || null;
+        this.VulNum = 'VulNum' in params ? params.VulNum : null;
+        this.ProVersionNum = 'ProVersionNum' in params ? params.ProVersionNum : null;
+        this.ImpactedHostNum = 'ImpactedHostNum' in params ? params.ImpactedHostNum : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1660,7 +1660,7 @@ class UntrustMalwaresRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Ids = params.Ids || null;
+        this.Ids = 'Ids' in params ? params.Ids : null;
 
     }
 }
@@ -1700,9 +1700,9 @@ class DescribeWeeklyReportVulsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.BeginDate = params.BeginDate || null;
-        this.Limit = params.Limit || null;
-        this.Offset = params.Offset || null;
+        this.BeginDate = 'BeginDate' in params ? params.BeginDate : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
 
     }
 }
@@ -1730,7 +1730,7 @@ class TrustMalwaresRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Ids = params.Ids || null;
+        this.Ids = 'Ids' in params ? params.Ids : null;
 
     }
 }
@@ -1758,7 +1758,7 @@ class UntrustMalwaresResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1786,7 +1786,7 @@ class UntrustMaliciousRequestRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Id = params.Id || null;
+        this.Id = 'Id' in params ? params.Id : null;
 
     }
 }
@@ -1846,12 +1846,12 @@ class DescribeComponentInfoResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Id = params.Id || null;
-        this.ComponentName = params.ComponentName || null;
-        this.ComponentType = params.ComponentType || null;
-        this.Homepage = params.Homepage || null;
-        this.Description = params.Description || null;
-        this.RequestId = params.RequestId || null;
+        this.Id = 'Id' in params ? params.Id : null;
+        this.ComponentName = 'ComponentName' in params ? params.ComponentName : null;
+        this.ComponentType = 'ComponentType' in params ? params.ComponentType : null;
+        this.Homepage = 'Homepage' in params ? params.Homepage : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1891,7 +1891,7 @@ class DescribeAccountStatisticsResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = params.TotalCount || null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
 
         if (params.AccountStatistics) {
             this.AccountStatistics = new Array();
@@ -1901,7 +1901,7 @@ class DescribeAccountStatisticsResponse extends  AbstractModel {
                 this.AccountStatistics.push(obj);
             }
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2025,15 +2025,15 @@ class OpenPort extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Id = params.Id || null;
-        this.Uuid = params.Uuid || null;
-        this.Port = params.Port || null;
-        this.MachineIp = params.MachineIp || null;
-        this.MachineName = params.MachineName || null;
-        this.ProcessName = params.ProcessName || null;
-        this.Pid = params.Pid || null;
-        this.CreateTime = params.CreateTime || null;
-        this.ModifyTime = params.ModifyTime || null;
+        this.Id = 'Id' in params ? params.Id : null;
+        this.Uuid = 'Uuid' in params ? params.Uuid : null;
+        this.Port = 'Port' in params ? params.Port : null;
+        this.MachineIp = 'MachineIp' in params ? params.MachineIp : null;
+        this.MachineName = 'MachineName' in params ? params.MachineName : null;
+        this.ProcessName = 'ProcessName' in params ? params.ProcessName : null;
+        this.Pid = 'Pid' in params ? params.Pid : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.ModifyTime = 'ModifyTime' in params ? params.ModifyTime : null;
 
     }
 }
@@ -2082,7 +2082,7 @@ class CreateProcessTaskRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Uuid = params.Uuid || null;
+        this.Uuid = 'Uuid' in params ? params.Uuid : null;
 
     }
 }
@@ -2110,7 +2110,7 @@ class DeleteMaliciousRequestsResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2138,7 +2138,7 @@ class DeleteMachineResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2166,7 +2166,7 @@ class MisAlarmNonlocalLoginPlacesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2230,13 +2230,13 @@ class WeeklyReportNonlocalLoginPlace extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.MachineIp = params.MachineIp || null;
-        this.Username = params.Username || null;
-        this.SrcIp = params.SrcIp || null;
-        this.Country = params.Country || null;
-        this.Province = params.Province || null;
-        this.City = params.City || null;
-        this.LoginTime = params.LoginTime || null;
+        this.MachineIp = 'MachineIp' in params ? params.MachineIp : null;
+        this.Username = 'Username' in params ? params.Username : null;
+        this.SrcIp = 'SrcIp' in params ? params.SrcIp : null;
+        this.Country = 'Country' in params ? params.Country : null;
+        this.Province = 'Province' in params ? params.Province : null;
+        this.City = 'City' in params ? params.City : null;
+        this.LoginTime = 'LoginTime' in params ? params.LoginTime : null;
 
     }
 }
@@ -2306,14 +2306,14 @@ class DescribeOverviewStatisticsResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.OnlineMachineNum = params.OnlineMachineNum || null;
-        this.ProVersionMachineNum = params.ProVersionMachineNum || null;
-        this.MalwareNum = params.MalwareNum || null;
-        this.NonlocalLoginNum = params.NonlocalLoginNum || null;
-        this.BruteAttackSuccessNum = params.BruteAttackSuccessNum || null;
-        this.VulNum = params.VulNum || null;
-        this.BaseLineNum = params.BaseLineNum || null;
-        this.RequestId = params.RequestId || null;
+        this.OnlineMachineNum = 'OnlineMachineNum' in params ? params.OnlineMachineNum : null;
+        this.ProVersionMachineNum = 'ProVersionMachineNum' in params ? params.ProVersionMachineNum : null;
+        this.MalwareNum = 'MalwareNum' in params ? params.MalwareNum : null;
+        this.NonlocalLoginNum = 'NonlocalLoginNum' in params ? params.NonlocalLoginNum : null;
+        this.BruteAttackSuccessNum = 'BruteAttackSuccessNum' in params ? params.BruteAttackSuccessNum : null;
+        this.VulNum = 'VulNum' in params ? params.VulNum : null;
+        this.BaseLineNum = 'BaseLineNum' in params ? params.BaseLineNum : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2341,7 +2341,7 @@ class RecoverMalwaresRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Ids = params.Ids || null;
+        this.Ids = 'Ids' in params ? params.Ids : null;
 
     }
 }
@@ -2457,21 +2457,21 @@ class MaliciousRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Id = params.Id || null;
-        this.Uuid = params.Uuid || null;
-        this.MachineIp = params.MachineIp || null;
-        this.MachineName = params.MachineName || null;
-        this.Domain = params.Domain || null;
-        this.Count = params.Count || null;
-        this.ProcessName = params.ProcessName || null;
-        this.Status = params.Status || null;
-        this.Description = params.Description || null;
-        this.Reference = params.Reference || null;
-        this.CreateTime = params.CreateTime || null;
-        this.MergeTime = params.MergeTime || null;
-        this.ProcessMd5 = params.ProcessMd5 || null;
-        this.CmdLine = params.CmdLine || null;
-        this.Pid = params.Pid || null;
+        this.Id = 'Id' in params ? params.Id : null;
+        this.Uuid = 'Uuid' in params ? params.Uuid : null;
+        this.MachineIp = 'MachineIp' in params ? params.MachineIp : null;
+        this.MachineName = 'MachineName' in params ? params.MachineName : null;
+        this.Domain = 'Domain' in params ? params.Domain : null;
+        this.Count = 'Count' in params ? params.Count : null;
+        this.ProcessName = 'ProcessName' in params ? params.ProcessName : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.Reference = 'Reference' in params ? params.Reference : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.MergeTime = 'MergeTime' in params ? params.MergeTime : null;
+        this.ProcessMd5 = 'ProcessMd5' in params ? params.ProcessMd5 : null;
+        this.CmdLine = 'CmdLine' in params ? params.CmdLine : null;
+        this.Pid = 'Pid' in params ? params.Pid : null;
 
     }
 }
@@ -2499,7 +2499,7 @@ class TrustMalwaresResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2527,7 +2527,7 @@ class DescribeWeeklyReportInfoRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.BeginDate = params.BeginDate || null;
+        this.BeginDate = 'BeginDate' in params ? params.BeginDate : null;
 
     }
 }
@@ -2567,7 +2567,7 @@ class DescribeProcessesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = params.TotalCount || null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
 
         if (params.Processes) {
             this.Processes = new Array();
@@ -2577,7 +2577,7 @@ class DescribeProcessesResponse extends  AbstractModel {
                 this.Processes.push(obj);
             }
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2634,11 +2634,11 @@ class WeeklyReportMalware extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.MachineIp = params.MachineIp || null;
-        this.FilePath = params.FilePath || null;
-        this.Md5 = params.Md5 || null;
-        this.FindTime = params.FindTime || null;
-        this.Status = params.Status || null;
+        this.MachineIp = 'MachineIp' in params ? params.MachineIp : null;
+        this.FilePath = 'FilePath' in params ? params.FilePath : null;
+        this.Md5 = 'Md5' in params ? params.Md5 : null;
+        this.FindTime = 'FindTime' in params ? params.FindTime : null;
+        this.Status = 'Status' in params ? params.Status : null;
 
     }
 }
@@ -2672,8 +2672,8 @@ class DescribeWeeklyReportsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Limit = params.Limit || null;
-        this.Offset = params.Offset || null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
 
     }
 }
@@ -2713,7 +2713,7 @@ class DescribeVulsResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = params.TotalCount || null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
 
         if (params.Vuls) {
             this.Vuls = new Array();
@@ -2723,7 +2723,7 @@ class DescribeVulsResponse extends  AbstractModel {
                 this.Vuls.push(obj);
             }
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2763,7 +2763,7 @@ class DescribeImpactedHostsResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = params.TotalCount || null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
 
         if (params.ImpactedHosts) {
             this.ImpactedHosts = new Array();
@@ -2773,7 +2773,7 @@ class DescribeImpactedHostsResponse extends  AbstractModel {
                 this.ImpactedHosts.push(obj);
             }
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2849,14 +2849,14 @@ class AgentVul extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Id = params.Id || null;
-        this.MachineIp = params.MachineIp || null;
-        this.VulName = params.VulName || null;
-        this.VulLevel = params.VulLevel || null;
-        this.LastScanTime = params.LastScanTime || null;
-        this.Description = params.Description || null;
-        this.VulId = params.VulId || null;
-        this.VulStatus = params.VulStatus || null;
+        this.Id = 'Id' in params ? params.Id : null;
+        this.MachineIp = 'MachineIp' in params ? params.MachineIp : null;
+        this.VulName = 'VulName' in params ? params.VulName : null;
+        this.VulLevel = 'VulLevel' in params ? params.VulLevel : null;
+        this.LastScanTime = 'LastScanTime' in params ? params.LastScanTime : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.VulId = 'VulId' in params ? params.VulId : null;
+        this.VulStatus = 'VulStatus' in params ? params.VulStatus : null;
 
     }
 }
@@ -2897,8 +2897,8 @@ class DescribeOpenPortStatisticsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Limit = params.Limit || null;
-        this.Offset = params.Offset || null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
 
         if (params.Filters) {
             this.Filters = new Array();
@@ -2935,7 +2935,7 @@ class DeleteMachineRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Uuid = params.Uuid || null;
+        this.Uuid = 'Uuid' in params ? params.Uuid : null;
 
     }
 }
@@ -2963,7 +2963,7 @@ class DescribeVulInfoRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.VulId = params.VulId || null;
+        this.VulId = 'VulId' in params ? params.VulId : null;
 
     }
 }
@@ -3003,7 +3003,7 @@ class DescribeComponentStatisticsResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = params.TotalCount || null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
 
         if (params.ComponentStatistics) {
             this.ComponentStatistics = new Array();
@@ -3013,7 +3013,7 @@ class DescribeComponentStatisticsResponse extends  AbstractModel {
                 this.ComponentStatistics.push(obj);
             }
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3053,9 +3053,9 @@ class Place extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.CityId = params.CityId || null;
-        this.ProvinceId = params.ProvinceId || null;
-        this.CountryId = params.CountryId || null;
+        this.CityId = 'CityId' in params ? params.CityId : null;
+        this.ProvinceId = 'ProvinceId' in params ? params.ProvinceId : null;
+        this.CountryId = 'CountryId' in params ? params.CountryId : null;
 
     }
 }
@@ -3083,7 +3083,7 @@ class DeleteUsualLoginPlacesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3111,7 +3111,7 @@ class DeleteNonlocalLoginPlacesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3151,7 +3151,7 @@ class DescribeNonlocalLoginPlacesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = params.TotalCount || null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
 
         if (params.NonLocalLoginPlaces) {
             this.NonLocalLoginPlaces = new Array();
@@ -3161,7 +3161,7 @@ class DescribeNonlocalLoginPlacesResponse extends  AbstractModel {
                 this.NonLocalLoginPlaces.push(obj);
             }
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3201,9 +3201,9 @@ class DescribeWeeklyReportNonlocalLoginPlacesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.BeginDate = params.BeginDate || null;
-        this.Limit = params.Limit || null;
-        this.Offset = params.Offset || null;
+        this.BeginDate = 'BeginDate' in params ? params.BeginDate : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
 
     }
 }
@@ -3243,9 +3243,9 @@ class InquiryPriceOpenProVersionPrepaidResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.OriginalPrice = params.OriginalPrice || null;
-        this.DiscountPrice = params.DiscountPrice || null;
-        this.RequestId = params.RequestId || null;
+        this.OriginalPrice = 'OriginalPrice' in params ? params.OriginalPrice : null;
+        this.DiscountPrice = 'DiscountPrice' in params ? params.DiscountPrice : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3365,21 +3365,21 @@ class DescribeMachineInfoResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.MachineIp = params.MachineIp || null;
-        this.ProtectDays = params.ProtectDays || null;
-        this.MachineOs = params.MachineOs || null;
-        this.MachineName = params.MachineName || null;
-        this.MachineStatus = params.MachineStatus || null;
-        this.InstanceId = params.InstanceId || null;
-        this.MachineWanIp = params.MachineWanIp || null;
-        this.Quuid = params.Quuid || null;
-        this.Uuid = params.Uuid || null;
-        this.IsProVersion = params.IsProVersion || null;
-        this.ProVersionOpenDate = params.ProVersionOpenDate || null;
-        this.MachineType = params.MachineType || null;
-        this.MachineRegion = params.MachineRegion || null;
-        this.PayMode = params.PayMode || null;
-        this.RequestId = params.RequestId || null;
+        this.MachineIp = 'MachineIp' in params ? params.MachineIp : null;
+        this.ProtectDays = 'ProtectDays' in params ? params.ProtectDays : null;
+        this.MachineOs = 'MachineOs' in params ? params.MachineOs : null;
+        this.MachineName = 'MachineName' in params ? params.MachineName : null;
+        this.MachineStatus = 'MachineStatus' in params ? params.MachineStatus : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.MachineWanIp = 'MachineWanIp' in params ? params.MachineWanIp : null;
+        this.Quuid = 'Quuid' in params ? params.Quuid : null;
+        this.Uuid = 'Uuid' in params ? params.Uuid : null;
+        this.IsProVersion = 'IsProVersion' in params ? params.IsProVersion : null;
+        this.ProVersionOpenDate = 'ProVersionOpenDate' in params ? params.ProVersionOpenDate : null;
+        this.MachineType = 'MachineType' in params ? params.MachineType : null;
+        this.MachineRegion = 'MachineRegion' in params ? params.MachineRegion : null;
+        this.PayMode = 'PayMode' in params ? params.PayMode : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3422,7 +3422,7 @@ class DescribeUsualLoginPlacesResponse extends  AbstractModel {
                 this.UsualLoginPlaces.push(obj);
             }
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3450,7 +3450,7 @@ class DescribeComponentInfoRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ComponentId = params.ComponentId || null;
+        this.ComponentId = 'ComponentId' in params ? params.ComponentId : null;
 
     }
 }
@@ -3478,7 +3478,7 @@ class MisAlarmNonlocalLoginPlacesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Ids = params.Ids || null;
+        this.Ids = 'Ids' in params ? params.Ids : null;
 
     }
 }
@@ -3506,7 +3506,7 @@ class TrustMaliciousRequestRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Id = params.Id || null;
+        this.Id = 'Id' in params ? params.Id : null;
 
     }
 }
@@ -3546,9 +3546,9 @@ class DescribeWeeklyReportMalwaresRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.BeginDate = params.BeginDate || null;
-        this.Limit = params.Limit || null;
-        this.Offset = params.Offset || null;
+        this.BeginDate = 'BeginDate' in params ? params.BeginDate : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
 
     }
 }
@@ -3588,7 +3588,7 @@ class DescribeBruteAttacksResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = params.TotalCount || null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
 
         if (params.BruteAttacks) {
             this.BruteAttacks = new Array();
@@ -3598,7 +3598,7 @@ class DescribeBruteAttacksResponse extends  AbstractModel {
                 this.BruteAttacks.push(obj);
             }
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3639,8 +3639,8 @@ ComponentName - String - 是否必填：否 - 组件名称
         if (!params) {
             return;
         }
-        this.Limit = params.Limit || null;
-        this.Offset = params.Offset || null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
 
         if (params.Filters) {
             this.Filters = new Array();
@@ -3710,7 +3710,7 @@ class DescribeOpenPortStatisticsResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = params.TotalCount || null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
 
         if (params.OpenPortStatistics) {
             this.OpenPortStatistics = new Array();
@@ -3720,7 +3720,7 @@ class DescribeOpenPortStatisticsResponse extends  AbstractModel {
                 this.OpenPortStatistics.push(obj);
             }
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3748,7 +3748,7 @@ class UntrustMaliciousRequestResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3799,10 +3799,10 @@ class SecurityDynamic extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Uuid = params.Uuid || null;
-        this.EventTime = params.EventTime || null;
-        this.EventType = params.EventType || null;
-        this.Message = params.Message || null;
+        this.Uuid = 'Uuid' in params ? params.Uuid : null;
+        this.EventTime = 'EventTime' in params ? params.EventTime : null;
+        this.EventType = 'EventType' in params ? params.EventType : null;
+        this.Message = 'Message' in params ? params.Message : null;
 
     }
 }
@@ -3878,15 +3878,15 @@ class DescribeVulInfoResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.VulId = params.VulId || null;
-        this.VulName = params.VulName || null;
-        this.VulLevel = params.VulLevel || null;
-        this.VulType = params.VulType || null;
-        this.Description = params.Description || null;
-        this.RepairPlan = params.RepairPlan || null;
-        this.CveId = params.CveId || null;
-        this.Reference = params.Reference || null;
-        this.RequestId = params.RequestId || null;
+        this.VulId = 'VulId' in params ? params.VulId : null;
+        this.VulName = 'VulName' in params ? params.VulName : null;
+        this.VulLevel = 'VulLevel' in params ? params.VulLevel : null;
+        this.VulType = 'VulType' in params ? params.VulType : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.RepairPlan = 'RepairPlan' in params ? params.RepairPlan : null;
+        this.CveId = 'CveId' in params ? params.CveId : null;
+        this.Reference = 'Reference' in params ? params.Reference : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3932,10 +3932,10 @@ class DescribeProVersionInfoResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.PostPayCost = params.PostPayCost || null;
-        this.IsAutoOpenProVersion = params.IsAutoOpenProVersion || null;
-        this.ProVersionNum = params.ProVersionNum || null;
-        this.RequestId = params.RequestId || null;
+        this.PostPayCost = 'PostPayCost' in params ? params.PostPayCost : null;
+        this.IsAutoOpenProVersion = 'IsAutoOpenProVersion' in params ? params.IsAutoOpenProVersion : null;
+        this.ProVersionNum = 'ProVersionNum' in params ? params.ProVersionNum : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3963,7 +3963,7 @@ class DeleteBruteAttacksRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Ids = params.Ids || null;
+        this.Ids = 'Ids' in params ? params.Ids : null;
 
     }
 }
@@ -4012,8 +4012,8 @@ class DescribeWeeklyReportNonlocalLoginPlacesResponse extends  AbstractModel {
                 this.WeeklyReportNonlocalLoginPlaces.push(obj);
             }
         }
-        this.TotalCount = params.TotalCount || null;
-        this.RequestId = params.RequestId || null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -4041,7 +4041,7 @@ class SeparateMalwaresRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Ids = params.Ids || null;
+        this.Ids = 'Ids' in params ? params.Ids : null;
 
     }
 }
@@ -4069,7 +4069,7 @@ class RenewProVersionResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -4172,7 +4172,7 @@ class DescribeSecurityTrendsResponse extends  AbstractModel {
                 this.BaseLines.push(obj);
             }
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -4216,9 +4216,9 @@ class ProVersionMachine extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.MachineType = params.MachineType || null;
-        this.MachineRegion = params.MachineRegion || null;
-        this.Quuid = params.Quuid || null;
+        this.MachineType = 'MachineType' in params ? params.MachineType : null;
+        this.MachineRegion = 'MachineRegion' in params ? params.MachineRegion : null;
+        this.Quuid = 'Quuid' in params ? params.Quuid : null;
 
     }
 }
@@ -4252,8 +4252,8 @@ class ExportMaliciousRequestsResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.DownloadUrl = params.DownloadUrl || null;
-        this.RequestId = params.RequestId || null;
+        this.DownloadUrl = 'DownloadUrl' in params ? params.DownloadUrl : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -4356,19 +4356,19 @@ class DescribeWeeklyReportInfoResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.CompanyName = params.CompanyName || null;
-        this.MachineNum = params.MachineNum || null;
-        this.OnlineMachineNum = params.OnlineMachineNum || null;
-        this.OfflineMachineNum = params.OfflineMachineNum || null;
-        this.ProVersionMachineNum = params.ProVersionMachineNum || null;
-        this.BeginDate = params.BeginDate || null;
-        this.EndDate = params.EndDate || null;
-        this.Level = params.Level || null;
-        this.MalwareNum = params.MalwareNum || null;
-        this.NonlocalLoginNum = params.NonlocalLoginNum || null;
-        this.BruteAttackSuccessNum = params.BruteAttackSuccessNum || null;
-        this.VulNum = params.VulNum || null;
-        this.RequestId = params.RequestId || null;
+        this.CompanyName = 'CompanyName' in params ? params.CompanyName : null;
+        this.MachineNum = 'MachineNum' in params ? params.MachineNum : null;
+        this.OnlineMachineNum = 'OnlineMachineNum' in params ? params.OnlineMachineNum : null;
+        this.OfflineMachineNum = 'OfflineMachineNum' in params ? params.OfflineMachineNum : null;
+        this.ProVersionMachineNum = 'ProVersionMachineNum' in params ? params.ProVersionMachineNum : null;
+        this.BeginDate = 'BeginDate' in params ? params.BeginDate : null;
+        this.EndDate = 'EndDate' in params ? params.EndDate : null;
+        this.Level = 'Level' in params ? params.Level : null;
+        this.MalwareNum = 'MalwareNum' in params ? params.MalwareNum : null;
+        this.NonlocalLoginNum = 'NonlocalLoginNum' in params ? params.NonlocalLoginNum : null;
+        this.BruteAttackSuccessNum = 'BruteAttackSuccessNum' in params ? params.BruteAttackSuccessNum : null;
+        this.VulNum = 'VulNum' in params ? params.VulNum : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -4417,8 +4417,8 @@ class DescribeSecurityDynamicsResponse extends  AbstractModel {
                 this.SecurityDynamics.push(obj);
             }
         }
-        this.TotalCount = params.TotalCount || null;
-        this.RequestId = params.RequestId || null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -4446,7 +4446,7 @@ class TrustMaliciousRequestResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -4474,7 +4474,7 @@ class CloseProVersionResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -4514,7 +4514,7 @@ class DescribeOpenPortsResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = params.TotalCount || null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
 
         if (params.OpenPorts) {
             this.OpenPorts = new Array();
@@ -4524,7 +4524,7 @@ class DescribeOpenPortsResponse extends  AbstractModel {
                 this.OpenPorts.push(obj);
             }
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -4552,7 +4552,7 @@ class DescribeMachineInfoRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Uuid = params.Uuid || null;
+        this.Uuid = 'Uuid' in params ? params.Uuid : null;
 
     }
 }
@@ -4601,8 +4601,8 @@ class DescribeMaliciousRequestsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Limit = params.Limit || null;
-        this.Offset = params.Offset || null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
 
         if (params.Filters) {
             this.Filters = new Array();
@@ -4612,7 +4612,7 @@ class DescribeMaliciousRequestsRequest extends  AbstractModel {
                 this.Filters.push(obj);
             }
         }
-        this.Uuid = params.Uuid || null;
+        this.Uuid = 'Uuid' in params ? params.Uuid : null;
 
     }
 }
@@ -4666,10 +4666,10 @@ class DescribeProcessesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Uuid = params.Uuid || null;
-        this.ProcessName = params.ProcessName || null;
-        this.Limit = params.Limit || null;
-        this.Offset = params.Offset || null;
+        this.Uuid = 'Uuid' in params ? params.Uuid : null;
+        this.ProcessName = 'ProcessName' in params ? params.ProcessName : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
 
         if (params.Filters) {
             this.Filters = new Array();
@@ -4712,8 +4712,8 @@ class DeleteUsualLoginPlacesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Uuid = params.Uuid || null;
-        this.CityIds = params.CityIds || null;
+        this.Uuid = 'Uuid' in params ? params.Uuid : null;
+        this.CityIds = 'CityIds' in params ? params.CityIds : null;
 
     }
 }
@@ -4747,8 +4747,8 @@ class WeeklyReport extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.BeginDate = params.BeginDate || null;
-        this.EndDate = params.EndDate || null;
+        this.BeginDate = 'BeginDate' in params ? params.BeginDate : null;
+        this.EndDate = 'EndDate' in params ? params.EndDate : null;
 
     }
 }
@@ -4789,8 +4789,8 @@ class Filter extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Name = params.Name || null;
-        this.Values = params.Values || null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Values = 'Values' in params ? params.Values : null;
 
     }
 }
@@ -4831,8 +4831,8 @@ class DescribeAccountStatisticsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Limit = params.Limit || null;
-        this.Offset = params.Offset || null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
 
         if (params.Filters) {
             this.Filters = new Array();
@@ -4875,8 +4875,8 @@ class OpenProVersionPrepaidResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.DealIds = params.DealIds || null;
-        this.RequestId = params.RequestId || null;
+        this.DealIds = 'DealIds' in params ? params.DealIds : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -4904,7 +4904,7 @@ class DeleteMalwaresResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -4943,8 +4943,8 @@ class ChargePrepaid extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Period = params.Period || null;
-        this.RenewFlag = params.RenewFlag || null;
+        this.Period = 'Period' in params ? params.Period : null;
+        this.RenewFlag = 'RenewFlag' in params ? params.RenewFlag : null;
 
     }
 }
@@ -4984,9 +4984,9 @@ class SeparateMalwaresResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.SuccessIds = params.SuccessIds || null;
-        this.FailedIds = params.FailedIds || null;
-        this.RequestId = params.RequestId || null;
+        this.SuccessIds = 'SuccessIds' in params ? params.SuccessIds : null;
+        this.FailedIds = 'FailedIds' in params ? params.FailedIds : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -5020,8 +5020,8 @@ class ProcessStatistics extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ProcessName = params.ProcessName || null;
-        this.MachineNum = params.MachineNum || null;
+        this.ProcessName = 'ProcessName' in params ? params.ProcessName : null;
+        this.MachineNum = 'MachineNum' in params ? params.MachineNum : null;
 
     }
 }
@@ -5113,17 +5113,17 @@ class Process extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Id = params.Id || null;
-        this.Uuid = params.Uuid || null;
-        this.MachineIp = params.MachineIp || null;
-        this.MachineName = params.MachineName || null;
-        this.Pid = params.Pid || null;
-        this.Ppid = params.Ppid || null;
-        this.ProcessName = params.ProcessName || null;
-        this.Username = params.Username || null;
-        this.Platform = params.Platform || null;
-        this.FullPath = params.FullPath || null;
-        this.CreateTime = params.CreateTime || null;
+        this.Id = 'Id' in params ? params.Id : null;
+        this.Uuid = 'Uuid' in params ? params.Uuid : null;
+        this.MachineIp = 'MachineIp' in params ? params.MachineIp : null;
+        this.MachineName = 'MachineName' in params ? params.MachineName : null;
+        this.Pid = 'Pid' in params ? params.Pid : null;
+        this.Ppid = 'Ppid' in params ? params.Ppid : null;
+        this.ProcessName = 'ProcessName' in params ? params.ProcessName : null;
+        this.Username = 'Username' in params ? params.Username : null;
+        this.Platform = 'Platform' in params ? params.Platform : null;
+        this.FullPath = 'FullPath' in params ? params.FullPath : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
 
     }
 }
@@ -5193,8 +5193,8 @@ class DescribeWeeklyReportMalwaresResponse extends  AbstractModel {
                 this.WeeklyReportMalwares.push(obj);
             }
         }
-        this.TotalCount = params.TotalCount || null;
-        this.RequestId = params.RequestId || null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -5228,8 +5228,8 @@ class DescribeSecurityDynamicsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Limit = params.Limit || null;
-        this.Offset = params.Offset || null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
 
     }
 }
@@ -5302,14 +5302,14 @@ class ImpactedHost extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Id = params.Id || null;
-        this.MachineIp = params.MachineIp || null;
-        this.MachineName = params.MachineName || null;
-        this.LastScanTime = params.LastScanTime || null;
-        this.VulStatus = params.VulStatus || null;
-        this.Uuid = params.Uuid || null;
-        this.Description = params.Description || null;
-        this.VulId = params.VulId || null;
+        this.Id = 'Id' in params ? params.Id : null;
+        this.MachineIp = 'MachineIp' in params ? params.MachineIp : null;
+        this.MachineName = 'MachineName' in params ? params.MachineName : null;
+        this.LastScanTime = 'LastScanTime' in params ? params.LastScanTime : null;
+        this.VulStatus = 'VulStatus' in params ? params.VulStatus : null;
+        this.Uuid = 'Uuid' in params ? params.Uuid : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.VulId = 'VulId' in params ? params.VulId : null;
 
     }
 }
@@ -5349,7 +5349,7 @@ class DescribeProcessStatisticsResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = params.TotalCount || null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
 
         if (params.ProcessStatistics) {
             this.ProcessStatistics = new Array();
@@ -5359,7 +5359,7 @@ class DescribeProcessStatisticsResponse extends  AbstractModel {
                 this.ProcessStatistics.push(obj);
             }
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -5387,7 +5387,7 @@ class DeleteNonlocalLoginPlacesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Ids = params.Ids || null;
+        this.Ids = 'Ids' in params ? params.Ids : null;
 
     }
 }
@@ -5465,15 +5465,15 @@ class Malware extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Id = params.Id || null;
-        this.MachineIp = params.MachineIp || null;
-        this.Status = params.Status || null;
-        this.FilePath = params.FilePath || null;
-        this.Description = params.Description || null;
-        this.MachineName = params.MachineName || null;
-        this.FileCreateTime = params.FileCreateTime || null;
-        this.ModifyTime = params.ModifyTime || null;
-        this.Uuid = params.Uuid || null;
+        this.Id = 'Id' in params ? params.Id : null;
+        this.MachineIp = 'MachineIp' in params ? params.MachineIp : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.FilePath = 'FilePath' in params ? params.FilePath : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.MachineName = 'MachineName' in params ? params.MachineName : null;
+        this.FileCreateTime = 'FileCreateTime' in params ? params.FileCreateTime : null;
+        this.ModifyTime = 'ModifyTime' in params ? params.ModifyTime : null;
+        this.Uuid = 'Uuid' in params ? params.Uuid : null;
 
     }
 }
@@ -5528,8 +5528,8 @@ class AccountStatistics extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Username = params.Username || null;
-        this.MachineNum = params.MachineNum || null;
+        this.Username = 'Username' in params ? params.Username : null;
+        this.MachineNum = 'MachineNum' in params ? params.MachineNum : null;
 
     }
 }
@@ -5578,8 +5578,8 @@ class DescribeMachinesResponse extends  AbstractModel {
                 this.Machines.push(obj);
             }
         }
-        this.TotalCount = params.TotalCount || null;
-        this.RequestId = params.RequestId || null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -5607,7 +5607,7 @@ class CreateUsualLoginPlacesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -5635,7 +5635,7 @@ class ModifyProVersionRenewFlagResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -5723,16 +5723,16 @@ class Machine extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.MachineName = params.MachineName || null;
-        this.MachineOs = params.MachineOs || null;
-        this.MachineStatus = params.MachineStatus || null;
-        this.Uuid = params.Uuid || null;
-        this.Quuid = params.Quuid || null;
-        this.VulNum = params.VulNum || null;
-        this.MachineIp = params.MachineIp || null;
-        this.IsProVersion = params.IsProVersion || null;
-        this.MachineWanIp = params.MachineWanIp || null;
-        this.PayMode = params.PayMode || null;
+        this.MachineName = 'MachineName' in params ? params.MachineName : null;
+        this.MachineOs = 'MachineOs' in params ? params.MachineOs : null;
+        this.MachineStatus = 'MachineStatus' in params ? params.MachineStatus : null;
+        this.Uuid = 'Uuid' in params ? params.Uuid : null;
+        this.Quuid = 'Quuid' in params ? params.Quuid : null;
+        this.VulNum = 'VulNum' in params ? params.VulNum : null;
+        this.MachineIp = 'MachineIp' in params ? params.MachineIp : null;
+        this.IsProVersion = 'IsProVersion' in params ? params.IsProVersion : null;
+        this.MachineWanIp = 'MachineWanIp' in params ? params.MachineWanIp : null;
+        this.PayMode = 'PayMode' in params ? params.PayMode : null;
 
     }
 }
@@ -5781,8 +5781,8 @@ class DescribeWeeklyReportVulsResponse extends  AbstractModel {
                 this.WeeklyReportVuls.push(obj);
             }
         }
-        this.TotalCount = params.TotalCount || null;
-        this.RequestId = params.RequestId || null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -5834,11 +5834,11 @@ class WeeklyReportBruteAttack extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.MachineIp = params.MachineIp || null;
-        this.Username = params.Username || null;
-        this.SrcIp = params.SrcIp || null;
-        this.Count = params.Count || null;
-        this.AttackTime = params.AttackTime || null;
+        this.MachineIp = 'MachineIp' in params ? params.MachineIp : null;
+        this.Username = 'Username' in params ? params.Username : null;
+        this.SrcIp = 'SrcIp' in params ? params.SrcIp : null;
+        this.Count = 'Count' in params ? params.Count : null;
+        this.AttackTime = 'AttackTime' in params ? params.AttackTime : null;
 
     }
 }
@@ -5905,13 +5905,13 @@ class HistoryAccount extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Id = params.Id || null;
-        this.Uuid = params.Uuid || null;
-        this.MachineIp = params.MachineIp || null;
-        this.MachineName = params.MachineName || null;
-        this.Username = params.Username || null;
-        this.ModifyType = params.ModifyType || null;
-        this.ModifyTime = params.ModifyTime || null;
+        this.Id = 'Id' in params ? params.Id : null;
+        this.Uuid = 'Uuid' in params ? params.Uuid : null;
+        this.MachineIp = 'MachineIp' in params ? params.MachineIp : null;
+        this.MachineName = 'MachineName' in params ? params.MachineName : null;
+        this.Username = 'Username' in params ? params.Username : null;
+        this.ModifyType = 'ModifyType' in params ? params.ModifyType : null;
+        this.ModifyTime = 'ModifyTime' in params ? params.ModifyTime : null;
 
     }
 }
@@ -5948,8 +5948,8 @@ class ModifyProVersionRenewFlagRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RenewFlag = params.RenewFlag || null;
-        this.Quuid = params.Quuid || null;
+        this.RenewFlag = 'RenewFlag' in params ? params.RenewFlag : null;
+        this.Quuid = 'Quuid' in params ? params.Quuid : null;
 
     }
 }
@@ -5977,7 +5977,7 @@ class DescribeUsualLoginPlacesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Uuid = params.Uuid || null;
+        this.Uuid = 'Uuid' in params ? params.Uuid : null;
 
     }
 }
@@ -6049,14 +6049,14 @@ class Component extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Id = params.Id || null;
-        this.Uuid = params.Uuid || null;
-        this.MachineIp = params.MachineIp || null;
-        this.MachineName = params.MachineName || null;
-        this.ComponentVersion = params.ComponentVersion || null;
-        this.ComponentType = params.ComponentType || null;
-        this.ComponentName = params.ComponentName || null;
-        this.ModifyTime = params.ModifyTime || null;
+        this.Id = 'Id' in params ? params.Id : null;
+        this.Uuid = 'Uuid' in params ? params.Uuid : null;
+        this.MachineIp = 'MachineIp' in params ? params.MachineIp : null;
+        this.MachineName = 'MachineName' in params ? params.MachineName : null;
+        this.ComponentVersion = 'ComponentVersion' in params ? params.ComponentVersion : null;
+        this.ComponentType = 'ComponentType' in params ? params.ComponentType : null;
+        this.ComponentName = 'ComponentName' in params ? params.ComponentName : null;
+        this.ModifyTime = 'ModifyTime' in params ? params.ModifyTime : null;
 
     }
 }
@@ -6108,9 +6108,9 @@ Status过滤条件值只能取其一，不能是“或”逻辑。
         if (!params) {
             return;
         }
-        this.VulType = params.VulType || null;
-        this.Limit = params.Limit || null;
-        this.Offset = params.Offset || null;
+        this.VulType = 'VulType' in params ? params.VulType : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
 
         if (params.Filters) {
             this.Filters = new Array();
@@ -6159,7 +6159,7 @@ class DescribeAgentVulsResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = params.TotalCount || null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
 
         if (params.AgentVuls) {
             this.AgentVuls = new Array();
@@ -6169,7 +6169,7 @@ class DescribeAgentVulsResponse extends  AbstractModel {
                 this.AgentVuls.push(obj);
             }
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -6210,8 +6210,8 @@ class DescribeProcessStatisticsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Limit = params.Limit || null;
-        this.Offset = params.Offset || null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
 
         if (params.Filters) {
             this.Filters = new Array();
@@ -6267,9 +6267,9 @@ class DescribeHistoryAccountsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Uuid = params.Uuid || null;
-        this.Limit = params.Limit || null;
-        this.Offset = params.Offset || null;
+        this.Uuid = 'Uuid' in params ? params.Uuid : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
 
         if (params.Filters) {
             this.Filters = new Array();
@@ -6307,7 +6307,7 @@ class CloseProVersionRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Quuid = params.Quuid || null;
+        this.Quuid = 'Quuid' in params ? params.Quuid : null;
 
     }
 }
@@ -6335,7 +6335,7 @@ class ModifyAlarmAttributeResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -6363,7 +6363,7 @@ class IgnoreImpactedHostsResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -6403,7 +6403,7 @@ class DescribeComponentsResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = params.TotalCount || null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
 
         if (params.Components) {
             this.Components = new Array();
@@ -6413,7 +6413,7 @@ class DescribeComponentsResponse extends  AbstractModel {
                 this.Components.push(obj);
             }
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -6441,7 +6441,7 @@ class RescanImpactedHostResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -6475,8 +6475,8 @@ class SecurityTrend extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Date = params.Date || null;
-        this.EventNum = params.EventNum || null;
+        this.Date = 'Date' in params ? params.Date : null;
+        this.EventNum = 'EventNum' in params ? params.EventNum : null;
 
     }
 }
@@ -6540,12 +6540,12 @@ NOTICE：提示
         if (!params) {
             return;
         }
-        this.VulId = params.VulId || null;
-        this.VulName = params.VulName || null;
-        this.VulLevel = params.VulLevel || null;
-        this.LastScanTime = params.LastScanTime || null;
-        this.ImpactedHostNum = params.ImpactedHostNum || null;
-        this.VulStatus = params.VulStatus || null;
+        this.VulId = 'VulId' in params ? params.VulId : null;
+        this.VulName = 'VulName' in params ? params.VulName : null;
+        this.VulLevel = 'VulLevel' in params ? params.VulLevel : null;
+        this.LastScanTime = 'LastScanTime' in params ? params.LastScanTime : null;
+        this.ImpactedHostNum = 'ImpactedHostNum' in params ? params.ImpactedHostNum : null;
+        this.VulStatus = 'VulStatus' in params ? params.VulStatus : null;
 
     }
 }
@@ -6594,8 +6594,8 @@ class DescribeWeeklyReportsResponse extends  AbstractModel {
                 this.WeeklyReports.push(obj);
             }
         }
-        this.TotalCount = params.TotalCount || null;
-        this.RequestId = params.RequestId || null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -6635,7 +6635,7 @@ class DescribeAccountsResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = params.TotalCount || null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
 
         if (params.Accounts) {
             this.Accounts = new Array();
@@ -6645,7 +6645,7 @@ class DescribeAccountsResponse extends  AbstractModel {
                 this.Accounts.push(obj);
             }
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -6673,7 +6673,7 @@ class ModifyAutoOpenProVersionConfigResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -6713,9 +6713,9 @@ class RecoverMalwaresResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.SuccessIds = params.SuccessIds || null;
-        this.FailedIds = params.FailedIds || null;
-        this.RequestId = params.RequestId || null;
+        this.SuccessIds = 'SuccessIds' in params ? params.SuccessIds : null;
+        this.FailedIds = 'FailedIds' in params ? params.FailedIds : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -6743,7 +6743,7 @@ class IgnoreImpactedHostsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Ids = params.Ids || null;
+        this.Ids = 'Ids' in params ? params.Ids : null;
 
     }
 }
@@ -6813,9 +6813,9 @@ class DescribeMalwaresRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Uuid = params.Uuid || null;
-        this.Limit = params.Limit || null;
-        this.Offset = params.Offset || null;
+        this.Uuid = 'Uuid' in params ? params.Uuid : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
 
         if (params.Filters) {
             this.Filters = new Array();
@@ -6852,7 +6852,7 @@ class DeleteMaliciousRequestsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Ids = params.Ids || null;
+        this.Ids = 'Ids' in params ? params.Ids : null;
 
     }
 }
@@ -6910,10 +6910,10 @@ class DescribeMachinesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.MachineType = params.MachineType || null;
-        this.MachineRegion = params.MachineRegion || null;
-        this.Limit = params.Limit || null;
-        this.Offset = params.Offset || null;
+        this.MachineType = 'MachineType' in params ? params.MachineType : null;
+        this.MachineRegion = 'MachineRegion' in params ? params.MachineRegion : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
 
         if (params.Filters) {
             this.Filters = new Array();
@@ -6950,7 +6950,7 @@ class DeleteMalwaresRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Ids = params.Ids || null;
+        this.Ids = 'Ids' in params ? params.Ids : null;
 
     }
 }
@@ -6990,7 +6990,7 @@ class DescribeMalwaresResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = params.TotalCount || null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
 
         if (params.Malwares) {
             this.Malwares = new Array();
@@ -7000,7 +7000,7 @@ class DescribeMalwaresResponse extends  AbstractModel {
                 this.Malwares.push(obj);
             }
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -7028,7 +7028,7 @@ class DeleteBruteAttacksResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }

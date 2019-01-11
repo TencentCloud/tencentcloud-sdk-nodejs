@@ -125,17 +125,17 @@ https：指定查询 HTTPS 对应指标
         if (!params) {
             return;
         }
-        this.StartTime = params.StartTime || null;
-        this.EndTime = params.EndTime || null;
-        this.Metric = params.Metric || null;
-        this.Domains = params.Domains || null;
-        this.Project = params.Project || null;
-        this.Interval = params.Interval || null;
-        this.Detail = params.Detail || null;
-        this.Isp = params.Isp || null;
-        this.District = params.District || null;
-        this.Protocol = params.Protocol || null;
-        this.DataSource = params.DataSource || null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.Metric = 'Metric' in params ? params.Metric : null;
+        this.Domains = 'Domains' in params ? params.Domains : null;
+        this.Project = 'Project' in params ? params.Project : null;
+        this.Interval = 'Interval' in params ? params.Interval : null;
+        this.Detail = 'Detail' in params ? params.Detail : null;
+        this.Isp = 'Isp' in params ? params.Isp : null;
+        this.District = 'District' in params ? params.District : null;
+        this.Protocol = 'Protocol' in params ? params.Protocol : null;
+        this.DataSource = 'DataSource' in params ? params.DataSource : null;
 
     }
 }
@@ -185,7 +185,7 @@ statusCode：状态码，返回 2XX、3XX、4XX、5XX 汇总数据，单位为 �
         if (!params) {
             return;
         }
-        this.Metric = params.Metric || null;
+        this.Metric = 'Metric' in params ? params.Metric : null;
 
         if (params.DetailData) {
             this.DetailData = new Array();
@@ -238,7 +238,7 @@ all：账号维度明细数据
         if (!params) {
             return;
         }
-        this.Resource = params.Resource || null;
+        this.Resource = 'Resource' in params ? params.Resource : null;
 
         if (params.CdnData) {
             this.CdnData = new Array();
@@ -290,7 +290,7 @@ class ListTopDataResponse extends  AbstractModel {
                 this.Data.push(obj);
             }
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -333,7 +333,7 @@ class DescribeMapInfoResponse extends  AbstractModel {
                 this.MapInfoList.push(obj);
             }
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -425,14 +425,14 @@ Metric 为 Url、Path、District、Isp，Filter 为 flux、reqeust 时，可设�
         if (!params) {
             return;
         }
-        this.StartTime = params.StartTime || null;
-        this.EndTime = params.EndTime || null;
-        this.Metric = params.Metric || null;
-        this.Filter = params.Filter || null;
-        this.Domains = params.Domains || null;
-        this.Project = params.Project || null;
-        this.Detail = params.Detail || null;
-        this.Code = params.Code || null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.Metric = 'Metric' in params ? params.Metric : null;
+        this.Filter = 'Filter' in params ? params.Filter : null;
+        this.Domains = 'Domains' in params ? params.Domains : null;
+        this.Project = 'Project' in params ? params.Project : null;
+        this.Detail = 'Detail' in params ? params.Detail : null;
+        this.Code = 'Code' in params ? params.Code : null;
 
     }
 }
@@ -517,13 +517,13 @@ day：天粒度，指定查询区间大于 31 天，可返回天粒度明细数�
         if (!params) {
             return;
         }
-        this.StartTime = params.StartTime || null;
-        this.EndTime = params.EndTime || null;
-        this.Metric = params.Metric || null;
-        this.Domains = params.Domains || null;
-        this.Project = params.Project || null;
-        this.Interval = params.Interval || null;
-        this.Detail = params.Detail || null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.Metric = 'Metric' in params ? params.Metric : null;
+        this.Domains = 'Domains' in params ? params.Domains : null;
+        this.Project = 'Project' in params ? params.Project : null;
+        this.Interval = 'Interval' in params ? params.Interval : null;
+        this.Detail = 'Detail' in params ? params.Detail : null;
 
     }
 }
@@ -553,7 +553,7 @@ district：省份映射查询
         if (!params) {
             return;
         }
-        this.Name = params.Name || null;
+        this.Name = 'Name' in params ? params.Name : null;
 
     }
 }
@@ -591,7 +591,7 @@ all：账号维度明细数据
         if (!params) {
             return;
         }
-        this.Resource = params.Resource || null;
+        this.Resource = 'Resource' in params ? params.Resource : null;
 
         if (params.OriginData) {
             this.OriginData = new Array();
@@ -634,8 +634,8 @@ class MapInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Id = params.Id || null;
-        this.Name = params.Name || null;
+        this.Id = 'Id' in params ? params.Id : null;
+        this.Name = 'Name' in params ? params.Name : null;
 
     }
 }
@@ -669,8 +669,8 @@ class TopDetailData extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Name = params.Name || null;
-        this.Value = params.Value || null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Value = 'Value' in params ? params.Value : null;
 
     }
 }
@@ -705,8 +705,8 @@ class TimestampData extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Time = params.Time || null;
-        this.Value = params.Value || null;
+        this.Time = 'Time' in params ? params.Time : null;
+        this.Value = 'Value' in params ? params.Value : null;
 
     }
 }
@@ -744,7 +744,7 @@ all：账号维度明细数据
         if (!params) {
             return;
         }
-        this.Resource = params.Resource || null;
+        this.Resource = 'Resource' in params ? params.Resource : null;
 
         if (params.DetailData) {
             this.DetailData = new Array();
@@ -814,7 +814,7 @@ class DescribeOriginDataResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Interval = params.Interval || null;
+        this.Interval = 'Interval' in params ? params.Interval : null;
 
         if (params.Data) {
             this.Data = new Array();
@@ -824,7 +824,7 @@ class DescribeOriginDataResponse extends  AbstractModel {
                 this.Data.push(obj);
             }
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -868,7 +868,7 @@ day：天粒度
         if (!params) {
             return;
         }
-        this.Interval = params.Interval || null;
+        this.Interval = 'Interval' in params ? params.Interval : null;
 
         if (params.Data) {
             this.Data = new Array();
@@ -878,7 +878,7 @@ day：天粒度
                 this.Data.push(obj);
             }
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -915,8 +915,8 @@ avg：平均值
         if (!params) {
             return;
         }
-        this.Name = params.Name || null;
-        this.Value = params.Value || null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Value = 'Value' in params ? params.Value : null;
 
     }
 }
@@ -973,11 +973,11 @@ day：天粒度，查询时间区间大于 1 天时，默认返回天粒度活�
         if (!params) {
             return;
         }
-        this.StartTime = params.StartTime || null;
-        this.EndTime = params.EndTime || null;
-        this.Domains = params.Domains || null;
-        this.Project = params.Project || null;
-        this.Interval = params.Interval || null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.Domains = 'Domains' in params ? params.Domains : null;
+        this.Project = 'Project' in params ? params.Project : null;
+        this.Interval = 'Interval' in params ? params.Interval : null;
 
     }
 }
@@ -1032,10 +1032,10 @@ max：峰值带宽计费，日结模式
         if (!params) {
             return;
         }
-        this.PayType = params.PayType || null;
-        this.BillingCycle = params.BillingCycle || null;
-        this.StatType = params.StatType || null;
-        this.RequestId = params.RequestId || null;
+        this.PayType = 'PayType' in params ? params.PayType : null;
+        this.BillingCycle = 'BillingCycle' in params ? params.BillingCycle : null;
+        this.StatType = 'StatType' in params ? params.StatType : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1075,7 +1075,7 @@ class DescribeIpVisitResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Interval = params.Interval || null;
+        this.Interval = 'Interval' in params ? params.Interval : null;
 
         if (params.Data) {
             this.Data = new Array();
@@ -1085,7 +1085,7 @@ class DescribeIpVisitResponse extends  AbstractModel {
                 this.Data.push(obj);
             }
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }

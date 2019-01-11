@@ -54,7 +54,7 @@ class DescribeBillDetailResponse extends  AbstractModel {
                 this.DetailSet.push(obj);
             }
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -172,15 +172,15 @@ class Deal extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.OrderId = params.OrderId || null;
-        this.Status = params.Status || null;
-        this.Payer = params.Payer || null;
-        this.CreateTime = params.CreateTime || null;
-        this.Creator = params.Creator || null;
-        this.RealTotalCost = params.RealTotalCost || null;
-        this.VoucherDecline = params.VoucherDecline || null;
-        this.ProjectId = params.ProjectId || null;
-        this.GoodsCategoryId = params.GoodsCategoryId || null;
+        this.OrderId = 'OrderId' in params ? params.OrderId : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.Payer = 'Payer' in params ? params.Payer : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.Creator = 'Creator' in params ? params.Creator : null;
+        this.RealTotalCost = 'RealTotalCost' in params ? params.RealTotalCost : null;
+        this.VoucherDecline = 'VoucherDecline' in params ? params.VoucherDecline : null;
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+        this.GoodsCategoryId = 'GoodsCategoryId' in params ? params.GoodsCategoryId : null;
 
         if (params.ProductInfo) {
             this.ProductInfo = new Array();
@@ -190,12 +190,12 @@ class Deal extends  AbstractModel {
                 this.ProductInfo.push(obj);
             }
         }
-        this.TimeSpan = params.TimeSpan || null;
-        this.TimeUnit = params.TimeUnit || null;
-        this.Currency = params.Currency || null;
-        this.Policy = params.Policy || null;
-        this.Price = params.Price || null;
-        this.TotalCost = params.TotalCost || null;
+        this.TimeSpan = 'TimeSpan' in params ? params.TimeSpan : null;
+        this.TimeUnit = 'TimeUnit' in params ? params.TimeUnit : null;
+        this.Currency = 'Currency' in params ? params.Currency : null;
+        this.Policy = 'Policy' in params ? params.Policy : null;
+        this.Price = 'Price' in params ? params.Price : null;
+        this.TotalCost = 'TotalCost' in params ? params.TotalCost : null;
 
     }
 }
@@ -244,8 +244,8 @@ class DescribeDealsByCondResponse extends  AbstractModel {
                 this.Deals.push(obj);
             }
         }
-        this.TotalCount = params.TotalCount || null;
-        this.RequestId = params.RequestId || null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -324,12 +324,12 @@ class DescribeBillDetailRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Offset = params.Offset || null;
-        this.Limit = params.Limit || null;
-        this.PeriodType = params.PeriodType || null;
-        this.Month = params.Month || null;
-        this.BeginTime = params.BeginTime || null;
-        this.EndTime = params.EndTime || null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.PeriodType = 'PeriodType' in params ? params.PeriodType : null;
+        this.Month = 'Month' in params ? params.Month : null;
+        this.BeginTime = 'BeginTime' in params ? params.BeginTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
 
     }
 }
@@ -363,8 +363,8 @@ class ProductInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Name = params.Name || null;
-        this.Value = params.Value || null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Value = 'Value' in params ? params.Value : null;
 
     }
 }
@@ -407,7 +407,7 @@ class DescribeBillResourceSummaryResponse extends  AbstractModel {
                 this.ResourceSummarySet.push(obj);
             }
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -453,10 +453,10 @@ class DescribeBillResourceSummaryRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Offset = params.Offset || null;
-        this.Limit = params.Limit || null;
-        this.PeriodType = params.PeriodType || null;
-        this.Month = params.Month || null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.PeriodType = 'PeriodType' in params ? params.PeriodType : null;
+        this.Month = 'Month' in params ? params.Month : null;
 
     }
 }
@@ -490,8 +490,8 @@ class DescribeAccountBalanceResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Balance = params.Balance || null;
-        this.RequestId = params.RequestId || null;
+        this.Balance = 'Balance' in params ? params.Balance : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -531,9 +531,9 @@ class PayDealsResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.OrderIds = params.OrderIds || null;
-        this.ResourceIds = params.ResourceIds || null;
-        this.RequestId = params.RequestId || null;
+        this.OrderIds = 'OrderIds' in params ? params.OrderIds : null;
+        this.ResourceIds = 'ResourceIds' in params ? params.ResourceIds : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -603,12 +603,12 @@ class DescribeDealsByCondRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.StartTime = params.StartTime || null;
-        this.EndTime = params.EndTime || null;
-        this.Limit = params.Limit || null;
-        this.Offset = params.Offset || null;
-        this.Status = params.Status || null;
-        this.OrderId = params.OrderId || null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.OrderId = 'OrderId' in params ? params.OrderId : null;
 
     }
 }
@@ -726,22 +726,22 @@ class BillDetailComponent extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ComponentCodeName = params.ComponentCodeName || null;
-        this.ItemCodeName = params.ItemCodeName || null;
-        this.SinglePrice = params.SinglePrice || null;
-        this.SpecifiedPrice = params.SpecifiedPrice || null;
-        this.PriceUnit = params.PriceUnit || null;
-        this.UsedAmount = params.UsedAmount || null;
-        this.UsedAmountUnit = params.UsedAmountUnit || null;
-        this.TimeSpan = params.TimeSpan || null;
-        this.TimeUnitName = params.TimeUnitName || null;
-        this.Cost = params.Cost || null;
-        this.Discount = params.Discount || null;
-        this.ReduceType = params.ReduceType || null;
-        this.RealCost = params.RealCost || null;
-        this.VoucherPayAmount = params.VoucherPayAmount || null;
-        this.CashPayAmount = params.CashPayAmount || null;
-        this.IncentivePayAmount = params.IncentivePayAmount || null;
+        this.ComponentCodeName = 'ComponentCodeName' in params ? params.ComponentCodeName : null;
+        this.ItemCodeName = 'ItemCodeName' in params ? params.ItemCodeName : null;
+        this.SinglePrice = 'SinglePrice' in params ? params.SinglePrice : null;
+        this.SpecifiedPrice = 'SpecifiedPrice' in params ? params.SpecifiedPrice : null;
+        this.PriceUnit = 'PriceUnit' in params ? params.PriceUnit : null;
+        this.UsedAmount = 'UsedAmount' in params ? params.UsedAmount : null;
+        this.UsedAmountUnit = 'UsedAmountUnit' in params ? params.UsedAmountUnit : null;
+        this.TimeSpan = 'TimeSpan' in params ? params.TimeSpan : null;
+        this.TimeUnitName = 'TimeUnitName' in params ? params.TimeUnitName : null;
+        this.Cost = 'Cost' in params ? params.Cost : null;
+        this.Discount = 'Discount' in params ? params.Discount : null;
+        this.ReduceType = 'ReduceType' in params ? params.ReduceType : null;
+        this.RealCost = 'RealCost' in params ? params.RealCost : null;
+        this.VoucherPayAmount = 'VoucherPayAmount' in params ? params.VoucherPayAmount : null;
+        this.CashPayAmount = 'CashPayAmount' in params ? params.CashPayAmount : null;
+        this.IncentivePayAmount = 'IncentivePayAmount' in params ? params.IncentivePayAmount : null;
 
     }
 }
@@ -901,29 +901,29 @@ class BillResourceSummary extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.BusinessCodeName = params.BusinessCodeName || null;
-        this.ProductCodeName = params.ProductCodeName || null;
-        this.PayModeName = params.PayModeName || null;
-        this.ProjectName = params.ProjectName || null;
-        this.RegionName = params.RegionName || null;
-        this.ZoneName = params.ZoneName || null;
-        this.ResourceId = params.ResourceId || null;
-        this.ResourceName = params.ResourceName || null;
-        this.ActionTypeName = params.ActionTypeName || null;
-        this.OrderId = params.OrderId || null;
-        this.PayTime = params.PayTime || null;
-        this.FeeBeginTime = params.FeeBeginTime || null;
-        this.FeeEndTime = params.FeeEndTime || null;
-        this.ConfigDesc = params.ConfigDesc || null;
-        this.ExtendField1 = params.ExtendField1 || null;
-        this.ExtendField2 = params.ExtendField2 || null;
-        this.TotalCost = params.TotalCost || null;
-        this.Discount = params.Discount || null;
-        this.ReduceType = params.ReduceType || null;
-        this.RealTotalCost = params.RealTotalCost || null;
-        this.VoucherPayAmount = params.VoucherPayAmount || null;
-        this.CashPayAmount = params.CashPayAmount || null;
-        this.IncentivePayAmount = params.IncentivePayAmount || null;
+        this.BusinessCodeName = 'BusinessCodeName' in params ? params.BusinessCodeName : null;
+        this.ProductCodeName = 'ProductCodeName' in params ? params.ProductCodeName : null;
+        this.PayModeName = 'PayModeName' in params ? params.PayModeName : null;
+        this.ProjectName = 'ProjectName' in params ? params.ProjectName : null;
+        this.RegionName = 'RegionName' in params ? params.RegionName : null;
+        this.ZoneName = 'ZoneName' in params ? params.ZoneName : null;
+        this.ResourceId = 'ResourceId' in params ? params.ResourceId : null;
+        this.ResourceName = 'ResourceName' in params ? params.ResourceName : null;
+        this.ActionTypeName = 'ActionTypeName' in params ? params.ActionTypeName : null;
+        this.OrderId = 'OrderId' in params ? params.OrderId : null;
+        this.PayTime = 'PayTime' in params ? params.PayTime : null;
+        this.FeeBeginTime = 'FeeBeginTime' in params ? params.FeeBeginTime : null;
+        this.FeeEndTime = 'FeeEndTime' in params ? params.FeeEndTime : null;
+        this.ConfigDesc = 'ConfigDesc' in params ? params.ConfigDesc : null;
+        this.ExtendField1 = 'ExtendField1' in params ? params.ExtendField1 : null;
+        this.ExtendField2 = 'ExtendField2' in params ? params.ExtendField2 : null;
+        this.TotalCost = 'TotalCost' in params ? params.TotalCost : null;
+        this.Discount = 'Discount' in params ? params.Discount : null;
+        this.ReduceType = 'ReduceType' in params ? params.ReduceType : null;
+        this.RealTotalCost = 'RealTotalCost' in params ? params.RealTotalCost : null;
+        this.VoucherPayAmount = 'VoucherPayAmount' in params ? params.VoucherPayAmount : null;
+        this.CashPayAmount = 'CashPayAmount' in params ? params.CashPayAmount : null;
+        this.IncentivePayAmount = 'IncentivePayAmount' in params ? params.IncentivePayAmount : null;
 
     }
 }
@@ -1053,20 +1053,20 @@ class BillDetail extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.BusinessCodeName = params.BusinessCodeName || null;
-        this.ProductCodeName = params.ProductCodeName || null;
-        this.PayModeName = params.PayModeName || null;
-        this.ProjectName = params.ProjectName || null;
-        this.RegionName = params.RegionName || null;
-        this.ZoneName = params.ZoneName || null;
-        this.ResourceId = params.ResourceId || null;
-        this.ResourceName = params.ResourceName || null;
-        this.ActionTypeName = params.ActionTypeName || null;
-        this.OrderId = params.OrderId || null;
-        this.BillId = params.BillId || null;
-        this.PayTime = params.PayTime || null;
-        this.FeeBeginTime = params.FeeBeginTime || null;
-        this.FeeEndTime = params.FeeEndTime || null;
+        this.BusinessCodeName = 'BusinessCodeName' in params ? params.BusinessCodeName : null;
+        this.ProductCodeName = 'ProductCodeName' in params ? params.ProductCodeName : null;
+        this.PayModeName = 'PayModeName' in params ? params.PayModeName : null;
+        this.ProjectName = 'ProjectName' in params ? params.ProjectName : null;
+        this.RegionName = 'RegionName' in params ? params.RegionName : null;
+        this.ZoneName = 'ZoneName' in params ? params.ZoneName : null;
+        this.ResourceId = 'ResourceId' in params ? params.ResourceId : null;
+        this.ResourceName = 'ResourceName' in params ? params.ResourceName : null;
+        this.ActionTypeName = 'ActionTypeName' in params ? params.ActionTypeName : null;
+        this.OrderId = 'OrderId' in params ? params.OrderId : null;
+        this.BillId = 'BillId' in params ? params.BillId : null;
+        this.PayTime = 'PayTime' in params ? params.PayTime : null;
+        this.FeeBeginTime = 'FeeBeginTime' in params ? params.FeeBeginTime : null;
+        this.FeeEndTime = 'FeeEndTime' in params ? params.FeeEndTime : null;
 
         if (params.ComponentSet) {
             this.ComponentSet = new Array();
@@ -1076,9 +1076,9 @@ class BillDetail extends  AbstractModel {
                 this.ComponentSet.push(obj);
             }
         }
-        this.PayerUin = params.PayerUin || null;
-        this.OwnerUin = params.OwnerUin || null;
-        this.OperateUin = params.OperateUin || null;
+        this.PayerUin = 'PayerUin' in params ? params.PayerUin : null;
+        this.OwnerUin = 'OwnerUin' in params ? params.OwnerUin : null;
+        this.OperateUin = 'OperateUin' in params ? params.OperateUin : null;
 
     }
 }
@@ -1118,9 +1118,9 @@ class PayDealsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.OrderIds = params.OrderIds || null;
-        this.AutoVoucher = params.AutoVoucher || null;
-        this.VoucherIds = params.VoucherIds || null;
+        this.OrderIds = 'OrderIds' in params ? params.OrderIds : null;
+        this.AutoVoucher = 'AutoVoucher' in params ? params.AutoVoucher : null;
+        this.VoucherIds = 'VoucherIds' in params ? params.VoucherIds : null;
 
     }
 }

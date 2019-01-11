@@ -57,10 +57,10 @@ class InstanceAdvancedSettings extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.MountTarget = params.MountTarget || null;
-        this.DockerGraphPath = params.DockerGraphPath || null;
-        this.UserScript = params.UserScript || null;
-        this.Unschedulable = params.Unschedulable || null;
+        this.MountTarget = 'MountTarget' in params ? params.MountTarget : null;
+        this.DockerGraphPath = 'DockerGraphPath' in params ? params.DockerGraphPath : null;
+        this.UserScript = 'UserScript' in params ? params.UserScript : null;
+        this.Unschedulable = 'Unschedulable' in params ? params.Unschedulable : null;
 
     }
 }
@@ -88,7 +88,7 @@ class RunSecurityServiceEnabled extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Enabled = params.Enabled || null;
+        this.Enabled = 'Enabled' in params ? params.Enabled : null;
 
     }
 }
@@ -129,9 +129,9 @@ class DescribeClustersRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ClusterIds = params.ClusterIds || null;
-        this.Offset = params.Offset || null;
-        this.Limit = params.Limit || null;
+        this.ClusterIds = 'ClusterIds' in params ? params.ClusterIds : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
 
     }
 }
@@ -171,9 +171,9 @@ class DeleteClusterInstancesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ClusterId = params.ClusterId || null;
-        this.InstanceIds = params.InstanceIds || null;
-        this.InstanceDeleteMode = params.InstanceDeleteMode || null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
+        this.InstanceDeleteMode = 'InstanceDeleteMode' in params ? params.InstanceDeleteMode : null;
 
     }
 }
@@ -201,7 +201,7 @@ class DeleteClusterInstancesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -259,10 +259,10 @@ class Instance extends  AbstractModel {
             obj.deserialize(params.InstanceAdvanceSettings)
             this.InstanceAdvanceSettings = obj;
         }
-        this.InstanceId = params.InstanceId || null;
-        this.InstanceRole = params.InstanceRole || null;
-        this.FailedReason = params.FailedReason || null;
-        this.InstanceState = params.InstanceState || null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.InstanceRole = 'InstanceRole' in params ? params.InstanceRole : null;
+        this.FailedReason = 'FailedReason' in params ? params.FailedReason : null;
+        this.InstanceState = 'InstanceState' in params ? params.InstanceState : null;
 
     }
 }
@@ -347,9 +347,9 @@ class LoginSettings extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Password = params.Password || null;
-        this.KeyIds = params.KeyIds || null;
-        this.KeepImageLogin = params.KeepImageLogin || null;
+        this.Password = 'Password' in params ? params.Password : null;
+        this.KeyIds = 'KeyIds' in params ? params.KeyIds : null;
+        this.KeepImageLogin = 'KeepImageLogin' in params ? params.KeepImageLogin : null;
 
     }
 }
@@ -407,8 +407,8 @@ class AddExistedInstancesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ClusterId = params.ClusterId || null;
-        this.InstanceIds = params.InstanceIds || null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
 
         if (params.InstanceAdvancedSettings) {
             let obj = new InstanceAdvancedSettings();
@@ -427,7 +427,7 @@ class AddExistedInstancesRequest extends  AbstractModel {
             obj.deserialize(params.LoginSettings)
             this.LoginSettings = obj;
         }
-        this.SecurityGroupIds = params.SecurityGroupIds || null;
+        this.SecurityGroupIds = 'SecurityGroupIds' in params ? params.SecurityGroupIds : null;
 
     }
 }
@@ -491,12 +491,12 @@ class Cluster extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ClusterId = params.ClusterId || null;
-        this.ClusterName = params.ClusterName || null;
-        this.ClusterDescription = params.ClusterDescription || null;
-        this.ClusterVersion = params.ClusterVersion || null;
-        this.ClusterOs = params.ClusterOs || null;
-        this.ClusterType = params.ClusterType || null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.ClusterName = 'ClusterName' in params ? params.ClusterName : null;
+        this.ClusterDescription = 'ClusterDescription' in params ? params.ClusterDescription : null;
+        this.ClusterVersion = 'ClusterVersion' in params ? params.ClusterVersion : null;
+        this.ClusterOs = 'ClusterOs' in params ? params.ClusterOs : null;
+        this.ClusterType = 'ClusterType' in params ? params.ClusterType : null;
 
         if (params.ClusterNetworkSettings) {
             let obj = new ClusterNetworkSettings();
@@ -542,7 +542,7 @@ class DescribeClustersResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = params.TotalCount || null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
 
         if (params.Clusters) {
             this.Clusters = new Array();
@@ -552,7 +552,7 @@ class DescribeClustersResponse extends  AbstractModel {
                 this.Clusters.push(obj);
             }
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -592,7 +592,7 @@ class DescribeClusterInstancesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = params.TotalCount || null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
 
         if (params.InstanceSet) {
             this.InstanceSet = new Array();
@@ -602,7 +602,7 @@ class DescribeClusterInstancesResponse extends  AbstractModel {
                 this.InstanceSet.push(obj);
             }
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -660,12 +660,12 @@ class ClusterNetworkSettings extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ClusterCIDR = params.ClusterCIDR || null;
-        this.IgnoreClusterCIDRConflict = params.IgnoreClusterCIDRConflict || null;
-        this.MaxNodePodNum = params.MaxNodePodNum || null;
-        this.MaxClusterServiceNum = params.MaxClusterServiceNum || null;
-        this.IPVS = params.IPVS || null;
-        this.VpcId = params.VpcId || null;
+        this.ClusterCIDR = 'ClusterCIDR' in params ? params.ClusterCIDR : null;
+        this.IgnoreClusterCIDRConflict = 'IgnoreClusterCIDRConflict' in params ? params.IgnoreClusterCIDRConflict : null;
+        this.MaxNodePodNum = 'MaxNodePodNum' in params ? params.MaxNodePodNum : null;
+        this.MaxClusterServiceNum = 'MaxClusterServiceNum' in params ? params.MaxClusterServiceNum : null;
+        this.IPVS = 'IPVS' in params ? params.IPVS : null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
 
     }
 }
@@ -693,7 +693,7 @@ class RunMonitorServiceEnabled extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Enabled = params.Enabled || null;
+        this.Enabled = 'Enabled' in params ? params.Enabled : null;
 
     }
 }
@@ -721,7 +721,7 @@ class AddExistedInstancesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -767,10 +767,10 @@ class DescribeClusterInstancesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ClusterId = params.ClusterId || null;
-        this.Offset = params.Offset || null;
-        this.Limit = params.Limit || null;
-        this.InstanceIds = params.InstanceIds || null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
 
     }
 }

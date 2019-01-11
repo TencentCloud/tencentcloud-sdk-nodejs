@@ -1552,7 +1552,7 @@ class VpcClient extends AbstractClient {
     }
 
     /**
-     * 本接口（CreateVpnGateways）用于创建VPN网关。
+     * 本接口（CreateVpnGateway）用于创建VPN网关。
      * @param {CreateVpnGatewayRequest} req
      * @param {function(string, CreateVpnGatewayResponse):void} cb
      * @public

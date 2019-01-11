@@ -105,8 +105,8 @@ class Container extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Command = params.Command || null;
-        this.Args = params.Args || null;
+        this.Command = 'Command' in params ? params.Command : null;
+        this.Args = 'Args' in params ? params.Args : null;
 
         if (params.EnvironmentVars) {
             this.EnvironmentVars = new Array();
@@ -116,11 +116,11 @@ class Container extends  AbstractModel {
                 this.EnvironmentVars.push(obj);
             }
         }
-        this.Image = params.Image || null;
-        this.Name = params.Name || null;
-        this.Cpu = params.Cpu || null;
-        this.Memory = params.Memory || null;
-        this.RestartCount = params.RestartCount || null;
+        this.Image = 'Image' in params ? params.Image : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Cpu = 'Cpu' in params ? params.Cpu : null;
+        this.Memory = 'Memory' in params ? params.Memory : null;
+        this.RestartCount = 'RestartCount' in params ? params.RestartCount : null;
 
         if (params.CurrentState) {
             let obj = new ContainerState();
@@ -133,8 +133,8 @@ class Container extends  AbstractModel {
             obj.deserialize(params.PreviousState)
             this.PreviousState = obj;
         }
-        this.WorkingDir = params.WorkingDir || null;
-        this.ContainerId = params.ContainerId || null;
+        this.WorkingDir = 'WorkingDir' in params ? params.WorkingDir : null;
+        this.ContainerId = 'ContainerId' in params ? params.ContainerId : null;
 
     }
 }
@@ -174,7 +174,7 @@ class InquiryPriceCreateCisResponse extends  AbstractModel {
             obj.deserialize(params.Price)
             this.Price = obj;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -220,10 +220,10 @@ class DescribeContainerLogRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceName = params.InstanceName || null;
-        this.ContainerName = params.ContainerName || null;
-        this.Tail = params.Tail || null;
-        this.SinceTime = params.SinceTime || null;
+        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
+        this.ContainerName = 'ContainerName' in params ? params.ContainerName : null;
+        this.Tail = 'Tail' in params ? params.Tail : null;
+        this.SinceTime = 'SinceTime' in params ? params.SinceTime : null;
 
     }
 }
@@ -281,11 +281,11 @@ class CreateContainerInstanceRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Zone = params.Zone || null;
-        this.VpcId = params.VpcId || null;
-        this.SubnetId = params.SubnetId || null;
-        this.InstanceName = params.InstanceName || null;
-        this.RestartPolicy = params.RestartPolicy || null;
+        this.Zone = 'Zone' in params ? params.Zone : null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
+        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
+        this.RestartPolicy = 'RestartPolicy' in params ? params.RestartPolicy : null;
 
         if (params.Containers) {
             this.Containers = new Array();
@@ -346,11 +346,11 @@ class ContainerState extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.StartTime = params.StartTime || null;
-        this.State = params.State || null;
-        this.Reason = params.Reason || null;
-        this.FinishTime = params.FinishTime || null;
-        this.ExitCode = params.ExitCode || null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.State = 'State' in params ? params.State : null;
+        this.Reason = 'Reason' in params ? params.Reason : null;
+        this.FinishTime = 'FinishTime' in params ? params.FinishTime : null;
+        this.ExitCode = 'ExitCode' in params ? params.ExitCode : null;
 
     }
 }
@@ -390,9 +390,9 @@ class InquiryPriceCreateCisRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Zone = params.Zone || null;
-        this.Cpu = params.Cpu || null;
-        this.Memory = params.Memory || null;
+        this.Zone = 'Zone' in params ? params.Zone : null;
+        this.Cpu = 'Cpu' in params ? params.Cpu : null;
+        this.Memory = 'Memory' in params ? params.Memory : null;
 
     }
 }
@@ -426,8 +426,8 @@ class EnvironmentVar extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Name = params.Name || null;
-        this.Value = params.Value || null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Value = 'Value' in params ? params.Value : null;
 
     }
 }
@@ -461,8 +461,8 @@ class Price extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.DiscountPrice = params.DiscountPrice || null;
-        this.OriginalPrice = params.OriginalPrice || null;
+        this.DiscountPrice = 'DiscountPrice' in params ? params.DiscountPrice : null;
+        this.OriginalPrice = 'OriginalPrice' in params ? params.OriginalPrice : null;
 
     }
 }
@@ -511,8 +511,8 @@ class DescribeContainerInstancesResponse extends  AbstractModel {
                 this.ContainerInstanceList.push(obj);
             }
         }
-        this.TotalCount = params.TotalCount || null;
-        this.RequestId = params.RequestId || null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -546,8 +546,8 @@ class DeleteContainerInstanceResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Msg = params.Msg || null;
-        this.RequestId = params.RequestId || null;
+        this.Msg = 'Msg' in params ? params.Msg : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -590,8 +590,8 @@ class DescribeContainerInstancesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Offset = params.Offset || null;
-        this.Limit = params.Limit || null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
 
         if (params.Filters) {
             this.Filters = new Array();
@@ -634,8 +634,8 @@ class Filter extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Name = params.Name || null;
-        this.ValueList = params.ValueList || null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.ValueList = 'ValueList' in params ? params.ValueList : null;
 
     }
 }
@@ -669,8 +669,8 @@ class CreateContainerInstanceResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = params.InstanceId || null;
-        this.RequestId = params.RequestId || null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -698,7 +698,7 @@ class DescribeContainerInstanceRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceName = params.InstanceName || null;
+        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
 
     }
 }
@@ -738,7 +738,7 @@ class DescribeContainerInstanceResponse extends  AbstractModel {
             obj.deserialize(params.ContainerInstance)
             this.ContainerInstance = obj;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -778,9 +778,9 @@ class ContainerLog extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Name = params.Name || null;
-        this.Log = params.Log || null;
-        this.Time = params.Time || null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Log = 'Log' in params ? params.Log : null;
+        this.Time = 'Time' in params ? params.Time : null;
 
     }
 }
@@ -823,7 +823,7 @@ class DescribeContainerInstanceEventsResponse extends  AbstractModel {
                 this.EventList.push(obj);
             }
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -881,12 +881,12 @@ class Event extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.FirstSeen = params.FirstSeen || null;
-        this.LastSeen = params.LastSeen || null;
-        this.Level = params.Level || null;
-        this.Count = params.Count || null;
-        this.Reason = params.Reason || null;
-        this.Message = params.Message || null;
+        this.FirstSeen = 'FirstSeen' in params ? params.FirstSeen : null;
+        this.LastSeen = 'LastSeen' in params ? params.LastSeen : null;
+        this.Level = 'Level' in params ? params.Level : null;
+        this.Count = 'Count' in params ? params.Count : null;
+        this.Reason = 'Reason' in params ? params.Reason : null;
+        this.Message = 'Message' in params ? params.Message : null;
 
     }
 }
@@ -914,7 +914,7 @@ class DescribeContainerInstanceEventsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceName = params.InstanceName || null;
+        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
 
     }
 }
@@ -957,7 +957,7 @@ class DescribeContainerLogResponse extends  AbstractModel {
                 this.ContainerLogList.push(obj);
             }
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -985,7 +985,7 @@ class DeleteContainerInstanceRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceName = params.InstanceName || null;
+        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
 
     }
 }
@@ -1097,11 +1097,11 @@ class ContainerInstance extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = params.InstanceId || null;
-        this.InstanceName = params.InstanceName || null;
-        this.VpcId = params.VpcId || null;
-        this.SubnetId = params.SubnetId || null;
-        this.State = params.State || null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
+        this.State = 'State' in params ? params.State : null;
 
         if (params.Containers) {
             this.Containers = new Array();
@@ -1111,15 +1111,15 @@ class ContainerInstance extends  AbstractModel {
                 this.Containers.push(obj);
             }
         }
-        this.RestartPolicy = params.RestartPolicy || null;
-        this.CreateTime = params.CreateTime || null;
-        this.StartTime = params.StartTime || null;
-        this.Zone = params.Zone || null;
-        this.VpcName = params.VpcName || null;
-        this.VpcCidr = params.VpcCidr || null;
-        this.SubnetName = params.SubnetName || null;
-        this.SubnetCidr = params.SubnetCidr || null;
-        this.LanIp = params.LanIp || null;
+        this.RestartPolicy = 'RestartPolicy' in params ? params.RestartPolicy : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.Zone = 'Zone' in params ? params.Zone : null;
+        this.VpcName = 'VpcName' in params ? params.VpcName : null;
+        this.VpcCidr = 'VpcCidr' in params ? params.VpcCidr : null;
+        this.SubnetName = 'SubnetName' in params ? params.SubnetName : null;
+        this.SubnetCidr = 'SubnetCidr' in params ? params.SubnetCidr : null;
+        this.LanIp = 'LanIp' in params ? params.LanIp : null;
 
     }
 }

@@ -39,7 +39,7 @@ class DescribeClassicalLBTargetsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.LoadBalancerId = params.LoadBalancerId || null;
+        this.LoadBalancerId = 'LoadBalancerId' in params ? params.LoadBalancerId : null;
 
     }
 }
@@ -103,10 +103,10 @@ class RuleOutput extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.LocationId = params.LocationId || null;
-        this.Domain = params.Domain || null;
-        this.Url = params.Url || null;
-        this.SessionExpireTime = params.SessionExpireTime || null;
+        this.LocationId = 'LocationId' in params ? params.LocationId : null;
+        this.Domain = 'Domain' in params ? params.Domain : null;
+        this.Url = 'Url' in params ? params.Url : null;
+        this.SessionExpireTime = 'SessionExpireTime' in params ? params.SessionExpireTime : null;
 
         if (params.HealthCheck) {
             let obj = new HealthCheck();
@@ -119,7 +119,7 @@ class RuleOutput extends  AbstractModel {
             obj.deserialize(params.Certificate)
             this.Certificate = obj;
         }
-        this.Scheduler = params.Scheduler || null;
+        this.Scheduler = 'Scheduler' in params ? params.Scheduler : null;
 
     }
 }
@@ -249,24 +249,24 @@ class ClassicalListener extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ListenerId = params.ListenerId || null;
-        this.ListenerPort = params.ListenerPort || null;
-        this.InstancePort = params.InstancePort || null;
-        this.ListenerName = params.ListenerName || null;
-        this.Protocol = params.Protocol || null;
-        this.SessionExpire = params.SessionExpire || null;
-        this.HealthSwitch = params.HealthSwitch || null;
-        this.TimeOut = params.TimeOut || null;
-        this.IntervalTime = params.IntervalTime || null;
-        this.HealthNum = params.HealthNum || null;
-        this.UnhealthNum = params.UnhealthNum || null;
-        this.HttpHash = params.HttpHash || null;
-        this.HttpCode = params.HttpCode || null;
-        this.HttpCheckPath = params.HttpCheckPath || null;
-        this.SSLMode = params.SSLMode || null;
-        this.CertId = params.CertId || null;
-        this.CertCaId = params.CertCaId || null;
-        this.Status = params.Status || null;
+        this.ListenerId = 'ListenerId' in params ? params.ListenerId : null;
+        this.ListenerPort = 'ListenerPort' in params ? params.ListenerPort : null;
+        this.InstancePort = 'InstancePort' in params ? params.InstancePort : null;
+        this.ListenerName = 'ListenerName' in params ? params.ListenerName : null;
+        this.Protocol = 'Protocol' in params ? params.Protocol : null;
+        this.SessionExpire = 'SessionExpire' in params ? params.SessionExpire : null;
+        this.HealthSwitch = 'HealthSwitch' in params ? params.HealthSwitch : null;
+        this.TimeOut = 'TimeOut' in params ? params.TimeOut : null;
+        this.IntervalTime = 'IntervalTime' in params ? params.IntervalTime : null;
+        this.HealthNum = 'HealthNum' in params ? params.HealthNum : null;
+        this.UnhealthNum = 'UnhealthNum' in params ? params.UnhealthNum : null;
+        this.HttpHash = 'HttpHash' in params ? params.HttpHash : null;
+        this.HttpCode = 'HttpCode' in params ? params.HttpCode : null;
+        this.HttpCheckPath = 'HttpCheckPath' in params ? params.HttpCheckPath : null;
+        this.SSLMode = 'SSLMode' in params ? params.SSLMode : null;
+        this.CertId = 'CertId' in params ? params.CertId : null;
+        this.CertCaId = 'CertCaId' in params ? params.CertCaId : null;
+        this.Status = 'Status' in params ? params.Status : null;
 
     }
 }
@@ -330,8 +330,8 @@ class ModifyTargetPortRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.LoadBalancerId = params.LoadBalancerId || null;
-        this.ListenerId = params.ListenerId || null;
+        this.LoadBalancerId = 'LoadBalancerId' in params ? params.LoadBalancerId : null;
+        this.ListenerId = 'ListenerId' in params ? params.ListenerId : null;
 
         if (params.Targets) {
             this.Targets = new Array();
@@ -341,10 +341,10 @@ class ModifyTargetPortRequest extends  AbstractModel {
                 this.Targets.push(obj);
             }
         }
-        this.NewPort = params.NewPort || null;
-        this.LocationId = params.LocationId || null;
-        this.Domain = params.Domain || null;
-        this.Url = params.Url || null;
+        this.NewPort = 'NewPort' in params ? params.NewPort : null;
+        this.LocationId = 'LocationId' in params ? params.LocationId : null;
+        this.Domain = 'Domain' in params ? params.Domain : null;
+        this.Url = 'Url' in params ? params.Url : null;
 
     }
 }
@@ -387,7 +387,7 @@ class DescribeListenersResponse extends  AbstractModel {
                 this.Listeners.push(obj);
             }
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -457,14 +457,14 @@ class CertificateInput extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.SSLMode = params.SSLMode || null;
-        this.CertId = params.CertId || null;
-        this.CertCaId = params.CertCaId || null;
-        this.CertName = params.CertName || null;
-        this.CertKey = params.CertKey || null;
-        this.CertContent = params.CertContent || null;
-        this.CertCaName = params.CertCaName || null;
-        this.CertCaContent = params.CertCaContent || null;
+        this.SSLMode = 'SSLMode' in params ? params.SSLMode : null;
+        this.CertId = 'CertId' in params ? params.CertId : null;
+        this.CertCaId = 'CertCaId' in params ? params.CertCaId : null;
+        this.CertName = 'CertName' in params ? params.CertName : null;
+        this.CertKey = 'CertKey' in params ? params.CertKey : null;
+        this.CertContent = 'CertContent' in params ? params.CertContent : null;
+        this.CertCaName = 'CertCaName' in params ? params.CertCaName : null;
+        this.CertCaContent = 'CertCaContent' in params ? params.CertCaContent : null;
 
     }
 }
@@ -492,7 +492,7 @@ class DeleteRuleResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -544,11 +544,11 @@ class DeleteRuleRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.LoadBalancerId = params.LoadBalancerId || null;
-        this.ListenerId = params.ListenerId || null;
-        this.LocationIds = params.LocationIds || null;
-        this.Domain = params.Domain || null;
-        this.Url = params.Url || null;
+        this.LoadBalancerId = 'LoadBalancerId' in params ? params.LoadBalancerId : null;
+        this.ListenerId = 'ListenerId' in params ? params.ListenerId : null;
+        this.LocationIds = 'LocationIds' in params ? params.LocationIds : null;
+        this.Domain = 'Domain' in params ? params.Domain : null;
+        this.Url = 'Url' in params ? params.Url : null;
 
     }
 }
@@ -582,7 +582,7 @@ class RegisterTargetsWithClassicalLBRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.LoadBalancerId = params.LoadBalancerId || null;
+        this.LoadBalancerId = 'LoadBalancerId' in params ? params.LoadBalancerId : null;
 
         if (params.Targets) {
             this.Targets = new Array();
@@ -619,7 +619,7 @@ class ModifyTargetPortResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -679,12 +679,12 @@ OPEN：公网属性， INTERNAL：内网属性。
         if (!params) {
             return;
         }
-        this.LoadBalancerType = params.LoadBalancerType || null;
-        this.Forward = params.Forward || null;
-        this.LoadBalancerName = params.LoadBalancerName || null;
-        this.VpcId = params.VpcId || null;
-        this.SubnetId = params.SubnetId || null;
-        this.ProjectId = params.ProjectId || null;
+        this.LoadBalancerType = 'LoadBalancerType' in params ? params.LoadBalancerType : null;
+        this.Forward = 'Forward' in params ? params.Forward : null;
+        this.LoadBalancerName = 'LoadBalancerName' in params ? params.LoadBalancerName : null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
 
     }
 }
@@ -718,8 +718,8 @@ class DescribeTaskStatusResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Status = params.Status || null;
-        this.RequestId = params.RequestId || null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -753,8 +753,8 @@ class CreateListenerResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ListenerIds = params.ListenerIds || null;
-        this.RequestId = params.RequestId || null;
+        this.ListenerIds = 'ListenerIds' in params ? params.ListenerIds : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -788,8 +788,8 @@ class ModifyLoadBalancerAttributesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.LoadBalancerId = params.LoadBalancerId || null;
-        this.LoadBalancerName = params.LoadBalancerName || null;
+        this.LoadBalancerId = 'LoadBalancerId' in params ? params.LoadBalancerId : null;
+        this.LoadBalancerName = 'LoadBalancerName' in params ? params.LoadBalancerName : null;
 
     }
 }
@@ -835,10 +835,10 @@ class Target extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = params.InstanceId || null;
-        this.Port = params.Port || null;
-        this.Type = params.Type || null;
-        this.Weight = params.Weight || null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Port = 'Port' in params ? params.Port : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Weight = 'Weight' in params ? params.Weight : null;
 
     }
 }
@@ -872,8 +872,8 @@ class ClassicalLoadBalancerInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = params.InstanceId || null;
-        this.LoadBalancerIds = params.LoadBalancerIds || null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.LoadBalancerIds = 'LoadBalancerIds' in params ? params.LoadBalancerIds : null;
 
     }
 }
@@ -937,18 +937,18 @@ class ModifyRuleRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.LoadBalancerId = params.LoadBalancerId || null;
-        this.ListenerId = params.ListenerId || null;
-        this.LocationId = params.LocationId || null;
-        this.Url = params.Url || null;
+        this.LoadBalancerId = 'LoadBalancerId' in params ? params.LoadBalancerId : null;
+        this.ListenerId = 'ListenerId' in params ? params.ListenerId : null;
+        this.LocationId = 'LocationId' in params ? params.LocationId : null;
+        this.Url = 'Url' in params ? params.Url : null;
 
         if (params.HealthCheck) {
             let obj = new HealthCheck();
             obj.deserialize(params.HealthCheck)
             this.HealthCheck = obj;
         }
-        this.Scheduler = params.Scheduler || null;
-        this.SessionExpireTime = params.SessionExpireTime || null;
+        this.Scheduler = 'Scheduler' in params ? params.Scheduler : null;
+        this.SessionExpireTime = 'SessionExpireTime' in params ? params.SessionExpireTime : null;
 
     }
 }
@@ -991,7 +991,7 @@ class DescribeTargetsResponse extends  AbstractModel {
                 this.Listeners.push(obj);
             }
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1037,10 +1037,10 @@ class DescribeTargetsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.LoadBalancerId = params.LoadBalancerId || null;
-        this.ListenerIds = params.ListenerIds || null;
-        this.Protocol = params.Protocol || null;
-        this.Port = params.Port || null;
+        this.LoadBalancerId = 'LoadBalancerId' in params ? params.LoadBalancerId : null;
+        this.ListenerIds = 'ListenerIds' in params ? params.ListenerIds : null;
+        this.Protocol = 'Protocol' in params ? params.Protocol : null;
+        this.Port = 'Port' in params ? params.Port : null;
 
     }
 }
@@ -1083,7 +1083,7 @@ class DescribeClassicalLBHealthStatusResponse extends  AbstractModel {
                 this.HealthList.push(obj);
             }
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1111,7 +1111,7 @@ class DeleteLoadBalancerRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.LoadBalancerIds = params.LoadBalancerIds || null;
+        this.LoadBalancerIds = 'LoadBalancerIds' in params ? params.LoadBalancerIds : null;
 
     }
 }
@@ -1151,8 +1151,8 @@ class CreateRuleRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.LoadBalancerId = params.LoadBalancerId || null;
-        this.ListenerId = params.ListenerId || null;
+        this.LoadBalancerId = 'LoadBalancerId' in params ? params.LoadBalancerId : null;
+        this.ListenerId = 'ListenerId' in params ? params.ListenerId : null;
 
         if (params.Rules) {
             this.Rules = new Array();
@@ -1189,7 +1189,7 @@ class ModifyListenerResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1241,9 +1241,9 @@ class ListenerBackend extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ListenerId = params.ListenerId || null;
-        this.Protocol = params.Protocol || null;
-        this.Port = params.Port || null;
+        this.ListenerId = 'ListenerId' in params ? params.ListenerId : null;
+        this.Protocol = 'Protocol' in params ? params.Protocol : null;
+        this.Port = 'Port' in params ? params.Port : null;
 
         if (params.Rules) {
             this.Rules = new Array();
@@ -1343,9 +1343,9 @@ class Listener extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ListenerId = params.ListenerId || null;
-        this.Protocol = params.Protocol || null;
-        this.Port = params.Port || null;
+        this.ListenerId = 'ListenerId' in params ? params.ListenerId : null;
+        this.Protocol = 'Protocol' in params ? params.Protocol : null;
+        this.Port = 'Port' in params ? params.Port : null;
 
         if (params.Certificate) {
             let obj = new CertificateOutput();
@@ -1358,9 +1358,9 @@ class Listener extends  AbstractModel {
             obj.deserialize(params.HealthCheck)
             this.HealthCheck = obj;
         }
-        this.Scheduler = params.Scheduler || null;
-        this.SessionExpireTime = params.SessionExpireTime || null;
-        this.SniSwitch = params.SniSwitch || null;
+        this.Scheduler = 'Scheduler' in params ? params.Scheduler : null;
+        this.SessionExpireTime = 'SessionExpireTime' in params ? params.SessionExpireTime : null;
+        this.SniSwitch = 'SniSwitch' in params ? params.SniSwitch : null;
 
         if (params.Rules) {
             this.Rules = new Array();
@@ -1370,7 +1370,7 @@ class Listener extends  AbstractModel {
                 this.Rules.push(obj);
             }
         }
-        this.ListenerName = params.ListenerName || null;
+        this.ListenerName = 'ListenerName' in params ? params.ListenerName : null;
 
     }
 }
@@ -1398,7 +1398,7 @@ class ModifyLoadBalancerAttributesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1426,7 +1426,7 @@ class RegisterTargetsResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1472,9 +1472,9 @@ class RuleTargets extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.LocationId = params.LocationId || null;
-        this.Domain = params.Domain || null;
-        this.Url = params.Url || null;
+        this.LocationId = 'LocationId' in params ? params.LocationId : null;
+        this.Domain = 'Domain' in params ? params.Domain : null;
+        this.Url = 'Url' in params ? params.Url : null;
 
         if (params.Targets) {
             this.Targets = new Array();
@@ -1526,7 +1526,7 @@ class DescribeClassicalLBListenersResponse extends  AbstractModel {
                 this.Listeners.push(obj);
             }
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1639,21 +1639,21 @@ OPEN：公网属性， INTERNAL：内网属性。
         if (!params) {
             return;
         }
-        this.LoadBalancerIds = params.LoadBalancerIds || null;
-        this.LoadBalancerType = params.LoadBalancerType || null;
-        this.Forward = params.Forward || null;
-        this.LoadBalancerName = params.LoadBalancerName || null;
-        this.Domain = params.Domain || null;
-        this.LoadBalancerVips = params.LoadBalancerVips || null;
-        this.BackendPublicIps = params.BackendPublicIps || null;
-        this.BackendPrivateIps = params.BackendPrivateIps || null;
-        this.Offset = params.Offset || null;
-        this.Limit = params.Limit || null;
-        this.OrderBy = params.OrderBy || null;
-        this.OrderType = params.OrderType || null;
-        this.SearchKey = params.SearchKey || null;
-        this.ProjectId = params.ProjectId || null;
-        this.WithRs = params.WithRs || null;
+        this.LoadBalancerIds = 'LoadBalancerIds' in params ? params.LoadBalancerIds : null;
+        this.LoadBalancerType = 'LoadBalancerType' in params ? params.LoadBalancerType : null;
+        this.Forward = 'Forward' in params ? params.Forward : null;
+        this.LoadBalancerName = 'LoadBalancerName' in params ? params.LoadBalancerName : null;
+        this.Domain = 'Domain' in params ? params.Domain : null;
+        this.LoadBalancerVips = 'LoadBalancerVips' in params ? params.LoadBalancerVips : null;
+        this.BackendPublicIps = 'BackendPublicIps' in params ? params.BackendPublicIps : null;
+        this.BackendPrivateIps = 'BackendPrivateIps' in params ? params.BackendPrivateIps : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.OrderBy = 'OrderBy' in params ? params.OrderBy : null;
+        this.OrderType = 'OrderType' in params ? params.OrderType : null;
+        this.SearchKey = 'SearchKey' in params ? params.SearchKey : null;
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+        this.WithRs = 'WithRs' in params ? params.WithRs : null;
 
     }
 }
@@ -1718,13 +1718,13 @@ class ClassicalTarget extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Type = params.Type || null;
-        this.InstanceId = params.InstanceId || null;
-        this.Weight = params.Weight || null;
-        this.PublicIpAddresses = params.PublicIpAddresses || null;
-        this.PrivateIpAddresses = params.PrivateIpAddresses || null;
-        this.InstanceName = params.InstanceName || null;
-        this.RunFlag = params.RunFlag || null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Weight = 'Weight' in params ? params.Weight : null;
+        this.PublicIpAddresses = 'PublicIpAddresses' in params ? params.PublicIpAddresses : null;
+        this.PrivateIpAddresses = 'PrivateIpAddresses' in params ? params.PrivateIpAddresses : null;
+        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
+        this.RunFlag = 'RunFlag' in params ? params.RunFlag : null;
 
     }
 }
@@ -1789,10 +1789,10 @@ class ModifyListenerRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.LoadBalancerId = params.LoadBalancerId || null;
-        this.ListenerId = params.ListenerId || null;
-        this.ListenerName = params.ListenerName || null;
-        this.SessionExpireTime = params.SessionExpireTime || null;
+        this.LoadBalancerId = 'LoadBalancerId' in params ? params.LoadBalancerId : null;
+        this.ListenerId = 'ListenerId' in params ? params.ListenerId : null;
+        this.ListenerName = 'ListenerName' in params ? params.ListenerName : null;
+        this.SessionExpireTime = 'SessionExpireTime' in params ? params.SessionExpireTime : null;
 
         if (params.HealthCheck) {
             let obj = new HealthCheck();
@@ -1805,7 +1805,7 @@ class ModifyListenerRequest extends  AbstractModel {
             obj.deserialize(params.Certificate)
             this.Certificate = obj;
         }
-        this.Scheduler = params.Scheduler || null;
+        this.Scheduler = 'Scheduler' in params ? params.Scheduler : null;
 
     }
 }
@@ -1839,8 +1839,8 @@ class CreateLoadBalancerResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.LoadBalancerIds = params.LoadBalancerIds || null;
-        this.RequestId = params.RequestId || null;
+        this.LoadBalancerIds = 'LoadBalancerIds' in params ? params.LoadBalancerIds : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1874,8 +1874,8 @@ class DeregisterTargetsFromClassicalLBRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.LoadBalancerId = params.LoadBalancerId || null;
-        this.InstanceIds = params.InstanceIds || null;
+        this.LoadBalancerId = 'LoadBalancerId' in params ? params.LoadBalancerId : null;
+        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
 
     }
 }
@@ -1933,8 +1933,8 @@ class RegisterTargetsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.LoadBalancerId = params.LoadBalancerId || null;
-        this.ListenerId = params.ListenerId || null;
+        this.LoadBalancerId = 'LoadBalancerId' in params ? params.LoadBalancerId : null;
+        this.ListenerId = 'ListenerId' in params ? params.ListenerId : null;
 
         if (params.Targets) {
             this.Targets = new Array();
@@ -1944,9 +1944,9 @@ class RegisterTargetsRequest extends  AbstractModel {
                 this.Targets.push(obj);
             }
         }
-        this.LocationId = params.LocationId || null;
-        this.Domain = params.Domain || null;
-        this.Url = params.Url || null;
+        this.LocationId = 'LocationId' in params ? params.LocationId : null;
+        this.Domain = 'Domain' in params ? params.Domain : null;
+        this.Url = 'Url' in params ? params.Url : null;
 
     }
 }
@@ -2023,15 +2023,15 @@ class HealthCheck extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.HealthSwitch = params.HealthSwitch || null;
-        this.TimeOut = params.TimeOut || null;
-        this.IntervalTime = params.IntervalTime || null;
-        this.HealthNum = params.HealthNum || null;
-        this.UnHealthNum = params.UnHealthNum || null;
-        this.HttpCode = params.HttpCode || null;
-        this.HttpCheckPath = params.HttpCheckPath || null;
-        this.HttpCheckDomain = params.HttpCheckDomain || null;
-        this.HttpCheckMethod = params.HttpCheckMethod || null;
+        this.HealthSwitch = 'HealthSwitch' in params ? params.HealthSwitch : null;
+        this.TimeOut = 'TimeOut' in params ? params.TimeOut : null;
+        this.IntervalTime = 'IntervalTime' in params ? params.IntervalTime : null;
+        this.HealthNum = 'HealthNum' in params ? params.HealthNum : null;
+        this.UnHealthNum = 'UnHealthNum' in params ? params.UnHealthNum : null;
+        this.HttpCode = 'HttpCode' in params ? params.HttpCode : null;
+        this.HttpCheckPath = 'HttpCheckPath' in params ? params.HttpCheckPath : null;
+        this.HttpCheckDomain = 'HttpCheckDomain' in params ? params.HttpCheckDomain : null;
+        this.HttpCheckMethod = 'HttpCheckMethod' in params ? params.HttpCheckMethod : null;
 
     }
 }
@@ -2108,10 +2108,10 @@ class CreateListenerRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.LoadBalancerId = params.LoadBalancerId || null;
-        this.Ports = params.Ports || null;
-        this.Protocol = params.Protocol || null;
-        this.ListenerNames = params.ListenerNames || null;
+        this.LoadBalancerId = 'LoadBalancerId' in params ? params.LoadBalancerId : null;
+        this.Ports = 'Ports' in params ? params.Ports : null;
+        this.Protocol = 'Protocol' in params ? params.Protocol : null;
+        this.ListenerNames = 'ListenerNames' in params ? params.ListenerNames : null;
 
         if (params.HealthCheck) {
             let obj = new HealthCheck();
@@ -2124,9 +2124,9 @@ class CreateListenerRequest extends  AbstractModel {
             obj.deserialize(params.Certificate)
             this.Certificate = obj;
         }
-        this.SessionExpireTime = params.SessionExpireTime || null;
-        this.Scheduler = params.Scheduler || null;
-        this.SniSwitch = params.SniSwitch || null;
+        this.SessionExpireTime = 'SessionExpireTime' in params ? params.SessionExpireTime : null;
+        this.Scheduler = 'Scheduler' in params ? params.Scheduler : null;
+        this.SniSwitch = 'SniSwitch' in params ? params.SniSwitch : null;
 
     }
 }
@@ -2184,9 +2184,9 @@ class RuleInput extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Domain = params.Domain || null;
-        this.Url = params.Url || null;
-        this.SessionExpireTime = params.SessionExpireTime || null;
+        this.Domain = 'Domain' in params ? params.Domain : null;
+        this.Url = 'Url' in params ? params.Url : null;
+        this.SessionExpireTime = 'SessionExpireTime' in params ? params.SessionExpireTime : null;
 
         if (params.HealthCheck) {
             let obj = new HealthCheck();
@@ -2199,7 +2199,7 @@ class RuleInput extends  AbstractModel {
             obj.deserialize(params.Certificate)
             this.Certificate = obj;
         }
-        this.Scheduler = params.Scheduler || null;
+        this.Scheduler = 'Scheduler' in params ? params.Scheduler : null;
 
     }
 }
@@ -2233,8 +2233,8 @@ class DeleteListenerRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.LoadBalancerId = params.LoadBalancerId || null;
-        this.ListenerId = params.ListenerId || null;
+        this.LoadBalancerId = 'LoadBalancerId' in params ? params.LoadBalancerId : null;
+        this.ListenerId = 'ListenerId' in params ? params.ListenerId : null;
 
     }
 }
@@ -2286,11 +2286,11 @@ class ClassicalHealth extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.IP = params.IP || null;
-        this.Port = params.Port || null;
-        this.ListenerPort = params.ListenerPort || null;
-        this.Protocol = params.Protocol || null;
-        this.HealthStatus = params.HealthStatus || null;
+        this.IP = 'IP' in params ? params.IP : null;
+        this.Port = 'Port' in params ? params.Port : null;
+        this.ListenerPort = 'ListenerPort' in params ? params.ListenerPort : null;
+        this.Protocol = 'Protocol' in params ? params.Protocol : null;
+        this.HealthStatus = 'HealthStatus' in params ? params.HealthStatus : null;
 
     }
 }
@@ -2318,7 +2318,7 @@ class ModifyDomainResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2364,10 +2364,10 @@ class DescribeListenersRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.LoadBalancerId = params.LoadBalancerId || null;
-        this.ListenerIds = params.ListenerIds || null;
-        this.Protocol = params.Protocol || null;
-        this.Port = params.Port || null;
+        this.LoadBalancerId = 'LoadBalancerId' in params ? params.LoadBalancerId : null;
+        this.ListenerIds = 'ListenerIds' in params ? params.ListenerIds : null;
+        this.Protocol = 'Protocol' in params ? params.Protocol : null;
+        this.Port = 'Port' in params ? params.Port : null;
 
     }
 }
@@ -2410,7 +2410,7 @@ class DescribeClassicalLBTargetsResponse extends  AbstractModel {
                 this.Targets.push(obj);
             }
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2453,7 +2453,7 @@ class DescribeClassicalLBByInstanceIdResponse extends  AbstractModel {
                 this.LoadBalancerInfoList.push(obj);
             }
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2481,7 +2481,7 @@ class DeregisterTargetsFromClassicalLBResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2509,7 +2509,7 @@ class CreateRuleResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2537,7 +2537,7 @@ class DescribeClassicalLBByInstanceIdRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceIds = params.InstanceIds || null;
+        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
 
     }
 }
@@ -2595,8 +2595,8 @@ class DeregisterTargetsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.LoadBalancerId = params.LoadBalancerId || null;
-        this.ListenerId = params.ListenerId || null;
+        this.LoadBalancerId = 'LoadBalancerId' in params ? params.LoadBalancerId : null;
+        this.ListenerId = 'ListenerId' in params ? params.ListenerId : null;
 
         if (params.Targets) {
             this.Targets = new Array();
@@ -2606,9 +2606,9 @@ class DeregisterTargetsRequest extends  AbstractModel {
                 this.Targets.push(obj);
             }
         }
-        this.LocationId = params.LocationId || null;
-        this.Domain = params.Domain || null;
-        this.Url = params.Url || null;
+        this.LocationId = 'LocationId' in params ? params.LocationId : null;
+        this.Domain = 'Domain' in params ? params.Domain : null;
+        this.Url = 'Url' in params ? params.Url : null;
 
     }
 }
@@ -2648,7 +2648,7 @@ class DescribeLoadBalancersResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = params.TotalCount || null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
 
         if (params.LoadBalancerSet) {
             this.LoadBalancerSet = new Array();
@@ -2658,7 +2658,7 @@ class DescribeLoadBalancersResponse extends  AbstractModel {
                 this.LoadBalancerSet.push(obj);
             }
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2686,7 +2686,7 @@ class DeleteLoadBalancerResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2714,7 +2714,7 @@ class DeleteListenerResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2748,8 +2748,8 @@ class ClassicalTargetInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = params.InstanceId || null;
-        this.Weight = params.Weight || null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Weight = 'Weight' in params ? params.Weight : null;
 
     }
 }
@@ -2777,7 +2777,7 @@ class DeregisterTargetsResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2805,7 +2805,7 @@ class DescribeTaskStatusRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TaskId = params.TaskId || null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
 
     }
 }
@@ -2833,7 +2833,7 @@ class RegisterTargetsWithClassicalLBResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2861,7 +2861,7 @@ class ModifyTargetWeightResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2901,9 +2901,9 @@ class CertificateOutput extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.SSLMode = params.SSLMode || null;
-        this.CertId = params.CertId || null;
-        this.CertCaId = params.CertCaId || null;
+        this.SSLMode = 'SSLMode' in params ? params.SSLMode : null;
+        this.CertId = 'CertId' in params ? params.CertId : null;
+        this.CertCaId = 'CertCaId' in params ? params.CertCaId : null;
 
     }
 }
@@ -2955,11 +2955,11 @@ class DescribeClassicalLBListenersRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.LoadBalancerId = params.LoadBalancerId || null;
-        this.ListenerIds = params.ListenerIds || null;
-        this.Protocol = params.Protocol || null;
-        this.ListenerPort = params.ListenerPort || null;
-        this.Status = params.Status || null;
+        this.LoadBalancerId = 'LoadBalancerId' in params ? params.LoadBalancerId : null;
+        this.ListenerIds = 'ListenerIds' in params ? params.ListenerIds : null;
+        this.Protocol = 'Protocol' in params ? params.Protocol : null;
+        this.ListenerPort = 'ListenerPort' in params ? params.ListenerPort : null;
+        this.Status = 'Status' in params ? params.Status : null;
 
     }
 }
@@ -3023,12 +3023,12 @@ class ModifyTargetWeightRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.LoadBalancerId = params.LoadBalancerId || null;
-        this.ListenerId = params.ListenerId || null;
-        this.Weight = params.Weight || null;
-        this.LocationId = params.LocationId || null;
-        this.Domain = params.Domain || null;
-        this.Url = params.Url || null;
+        this.LoadBalancerId = 'LoadBalancerId' in params ? params.LoadBalancerId : null;
+        this.ListenerId = 'ListenerId' in params ? params.ListenerId : null;
+        this.Weight = 'Weight' in params ? params.Weight : null;
+        this.LocationId = 'LocationId' in params ? params.LocationId : null;
+        this.Domain = 'Domain' in params ? params.Domain : null;
+        this.Url = 'Url' in params ? params.Url : null;
 
         if (params.Targets) {
             this.Targets = new Array();
@@ -3071,8 +3071,8 @@ class DescribeClassicalLBHealthStatusRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.LoadBalancerId = params.LoadBalancerId || null;
-        this.ListenerId = params.ListenerId || null;
+        this.LoadBalancerId = 'LoadBalancerId' in params ? params.LoadBalancerId : null;
+        this.ListenerId = 'ListenerId' in params ? params.ListenerId : null;
 
     }
 }
@@ -3118,10 +3118,10 @@ class ModifyDomainRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.LoadBalancerId = params.LoadBalancerId || null;
-        this.ListenerId = params.ListenerId || null;
-        this.Domain = params.Domain || null;
-        this.NewDomain = params.NewDomain || null;
+        this.LoadBalancerId = 'LoadBalancerId' in params ? params.LoadBalancerId : null;
+        this.ListenerId = 'ListenerId' in params ? params.ListenerId : null;
+        this.Domain = 'Domain' in params ? params.Domain : null;
+        this.NewDomain = 'NewDomain' in params ? params.NewDomain : null;
 
     }
 }
@@ -3149,7 +3149,7 @@ class ModifyRuleResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3269,22 +3269,22 @@ OPEN：公网属性， INTERNAL：内网属性。
         if (!params) {
             return;
         }
-        this.LoadBalancerId = params.LoadBalancerId || null;
-        this.LoadBalancerName = params.LoadBalancerName || null;
-        this.LoadBalancerType = params.LoadBalancerType || null;
-        this.Forward = params.Forward || null;
-        this.Domain = params.Domain || null;
-        this.LoadBalancerVips = params.LoadBalancerVips || null;
-        this.Status = params.Status || null;
-        this.CreateTime = params.CreateTime || null;
-        this.StatusTime = params.StatusTime || null;
-        this.ProjectId = params.ProjectId || null;
-        this.VpcId = params.VpcId || null;
-        this.OpenBgp = params.OpenBgp || null;
-        this.Snat = params.Snat || null;
-        this.Isolation = params.Isolation || null;
-        this.Log = params.Log || null;
-        this.SubnetId = params.SubnetId || null;
+        this.LoadBalancerId = 'LoadBalancerId' in params ? params.LoadBalancerId : null;
+        this.LoadBalancerName = 'LoadBalancerName' in params ? params.LoadBalancerName : null;
+        this.LoadBalancerType = 'LoadBalancerType' in params ? params.LoadBalancerType : null;
+        this.Forward = 'Forward' in params ? params.Forward : null;
+        this.Domain = 'Domain' in params ? params.Domain : null;
+        this.LoadBalancerVips = 'LoadBalancerVips' in params ? params.LoadBalancerVips : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.StatusTime = 'StatusTime' in params ? params.StatusTime : null;
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.OpenBgp = 'OpenBgp' in params ? params.OpenBgp : null;
+        this.Snat = 'Snat' in params ? params.Snat : null;
+        this.Isolation = 'Isolation' in params ? params.Isolation : null;
+        this.Log = 'Log' in params ? params.Log : null;
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
 
     }
 }
@@ -3354,14 +3354,14 @@ class Backend extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Type = params.Type || null;
-        this.InstanceId = params.InstanceId || null;
-        this.Port = params.Port || null;
-        this.Weight = params.Weight || null;
-        this.PublicIpAddresses = params.PublicIpAddresses || null;
-        this.PrivateIpAddresses = params.PrivateIpAddresses || null;
-        this.InstanceName = params.InstanceName || null;
-        this.RegisteredTime = params.RegisteredTime || null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Port = 'Port' in params ? params.Port : null;
+        this.Weight = 'Weight' in params ? params.Weight : null;
+        this.PublicIpAddresses = 'PublicIpAddresses' in params ? params.PublicIpAddresses : null;
+        this.PrivateIpAddresses = 'PrivateIpAddresses' in params ? params.PrivateIpAddresses : null;
+        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
+        this.RegisteredTime = 'RegisteredTime' in params ? params.RegisteredTime : null;
 
     }
 }

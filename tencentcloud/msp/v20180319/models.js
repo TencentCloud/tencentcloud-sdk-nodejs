@@ -57,10 +57,10 @@ class DstInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Region = params.Region || null;
-        this.Ip = params.Ip || null;
-        this.Port = params.Port || null;
-        this.InstanceId = params.InstanceId || null;
+        this.Region = 'Region' in params ? params.Region : null;
+        this.Ip = 'Ip' in params ? params.Ip : null;
+        this.Port = 'Port' in params ? params.Port : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
 
     }
 }
@@ -106,10 +106,10 @@ class SrcInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Region = params.Region || null;
-        this.Ip = params.Ip || null;
-        this.Port = params.Port || null;
-        this.InstanceId = params.InstanceId || null;
+        this.Region = 'Region' in params ? params.Region : null;
+        this.Ip = 'Ip' in params ? params.Ip : null;
+        this.Port = 'Port' in params ? params.Port : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
 
     }
 }
@@ -137,7 +137,7 @@ class DescribeMigrationTaskRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TaskId = params.TaskId || null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
 
     }
 }
@@ -171,8 +171,8 @@ class TimeObj extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.CreateTime = params.CreateTime || null;
-        this.EndTime = params.EndTime || null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
 
     }
 }
@@ -206,8 +206,8 @@ class ModifyMigrationTaskBelongToProjectRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TaskId = params.TaskId || null;
-        this.ProjectId = params.ProjectId || null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
 
     }
 }
@@ -247,9 +247,9 @@ class TaskStatus extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Status = params.Status || null;
-        this.Progress = params.Progress || null;
-        this.UpdateTime = params.UpdateTime || null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.Progress = 'Progress' in params ? params.Progress : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
 
     }
 }
@@ -277,7 +277,7 @@ class ModifyMigrationTaskStatusResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -317,9 +317,9 @@ class ListMigrationTaskRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Offset = params.Offset || null;
-        this.Limit = params.Limit || null;
-        this.ProjectId = params.ProjectId || null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
 
     }
 }
@@ -347,7 +347,7 @@ class DeregisterMigrationTaskResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -381,8 +381,8 @@ class Project extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ProjectId = params.ProjectId || null;
-        this.ProjectName = params.ProjectName || null;
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+        this.ProjectName = 'ProjectName' in params ? params.ProjectName : null;
 
     }
 }
@@ -410,7 +410,7 @@ class ModifyMigrationTaskBelongToProjectResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -459,8 +459,8 @@ class ListMigrationProjectResponse extends  AbstractModel {
                 this.Projects.push(obj);
             }
         }
-        this.TotalCount = params.TotalCount || null;
-        this.RequestId = params.RequestId || null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -542,12 +542,12 @@ class Task extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TaskId = params.TaskId || null;
-        this.TaskName = params.TaskName || null;
-        this.MigrationType = params.MigrationType || null;
-        this.Status = params.Status || null;
-        this.ProjectId = params.ProjectId || null;
-        this.ProjectName = params.ProjectName || null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.TaskName = 'TaskName' in params ? params.TaskName : null;
+        this.MigrationType = 'MigrationType' in params ? params.MigrationType : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+        this.ProjectName = 'ProjectName' in params ? params.ProjectName : null;
 
         if (params.SrcInfo) {
             let obj = new SrcInfo();
@@ -560,7 +560,7 @@ class Task extends  AbstractModel {
             obj.deserialize(params.MigrationTimeLine)
             this.MigrationTimeLine = obj;
         }
-        this.Updated = params.Updated || null;
+        this.Updated = 'Updated' in params ? params.Updated : null;
 
         if (params.DstInfo) {
             let obj = new DstInfo();
@@ -600,8 +600,8 @@ class RegisterMigrationTaskResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TaskId = params.TaskId || null;
-        this.RequestId = params.RequestId || null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -635,8 +635,8 @@ class ModifyMigrationTaskStatusRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Status = params.Status || null;
-        this.TaskId = params.TaskId || null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
 
     }
 }
@@ -670,8 +670,8 @@ class ListMigrationProjectRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Offset = params.Offset || null;
-        this.Limit = params.Limit || null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
 
     }
 }
@@ -699,7 +699,7 @@ class DeregisterMigrationTaskRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TaskId = params.TaskId || null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
 
     }
 }
@@ -739,7 +739,7 @@ class ListMigrationTaskResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = params.TotalCount || null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
 
         if (params.Tasks) {
             this.Tasks = new Array();
@@ -749,7 +749,7 @@ class ListMigrationTaskResponse extends  AbstractModel {
                 this.Tasks.push(obj);
             }
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -792,7 +792,7 @@ class DescribeMigrationTaskResponse extends  AbstractModel {
                 this.TaskStatus.push(obj);
             }
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -886,9 +886,9 @@ class RegisterMigrationTaskRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TaskType = params.TaskType || null;
-        this.TaskName = params.TaskName || null;
-        this.ServiceSupplier = params.ServiceSupplier || null;
+        this.TaskType = 'TaskType' in params ? params.TaskType : null;
+        this.TaskName = 'TaskName' in params ? params.TaskName : null;
+        this.ServiceSupplier = 'ServiceSupplier' in params ? params.ServiceSupplier : null;
 
         if (params.SrcInfo) {
             let obj = new SrcInfo();
@@ -901,13 +901,13 @@ class RegisterMigrationTaskRequest extends  AbstractModel {
             obj.deserialize(params.DstInfo)
             this.DstInfo = obj;
         }
-        this.CreateTime = params.CreateTime || null;
-        this.UpdateTime = params.UpdateTime || null;
-        this.MigrateClass = params.MigrateClass || null;
-        this.SrcAccessType = params.SrcAccessType || null;
-        this.SrcDatabaseType = params.SrcDatabaseType || null;
-        this.DstAccessType = params.DstAccessType || null;
-        this.DstDatabaseType = params.DstDatabaseType || null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.MigrateClass = 'MigrateClass' in params ? params.MigrateClass : null;
+        this.SrcAccessType = 'SrcAccessType' in params ? params.SrcAccessType : null;
+        this.SrcDatabaseType = 'SrcDatabaseType' in params ? params.SrcDatabaseType : null;
+        this.DstAccessType = 'DstAccessType' in params ? params.DstAccessType : null;
+        this.DstDatabaseType = 'DstDatabaseType' in params ? params.DstDatabaseType : null;
 
     }
 }

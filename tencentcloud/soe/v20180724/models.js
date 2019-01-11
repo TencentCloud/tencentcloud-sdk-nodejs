@@ -63,7 +63,7 @@ class SentenceInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.SentenceId = params.SentenceId || null;
+        this.SentenceId = 'SentenceId' in params ? params.SentenceId : null;
 
         if (params.Words) {
             this.Words = new Array();
@@ -73,9 +73,9 @@ class SentenceInfo extends  AbstractModel {
                 this.Words.push(obj);
             }
         }
-        this.PronAccuracy = params.PronAccuracy || null;
-        this.PronFluency = params.PronFluency || null;
-        this.PronCompletion = params.PronCompletion || null;
+        this.PronAccuracy = 'PronAccuracy' in params ? params.PronAccuracy : null;
+        this.PronFluency = 'PronFluency' in params ? params.PronFluency : null;
+        this.PronCompletion = 'PronCompletion' in params ? params.PronCompletion : null;
 
     }
 }
@@ -157,16 +157,16 @@ class InitOralProcessRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.SessionId = params.SessionId || null;
-        this.RefText = params.RefText || null;
-        this.WorkMode = params.WorkMode || null;
-        this.EvalMode = params.EvalMode || null;
-        this.ScoreCoeff = params.ScoreCoeff || null;
-        this.SoeAppId = params.SoeAppId || null;
-        this.IsLongLifeSession = params.IsLongLifeSession || null;
-        this.StorageMode = params.StorageMode || null;
-        this.SentenceInfoEnabled = params.SentenceInfoEnabled || null;
-        this.ServerType = params.ServerType || null;
+        this.SessionId = 'SessionId' in params ? params.SessionId : null;
+        this.RefText = 'RefText' in params ? params.RefText : null;
+        this.WorkMode = 'WorkMode' in params ? params.WorkMode : null;
+        this.EvalMode = 'EvalMode' in params ? params.EvalMode : null;
+        this.ScoreCoeff = 'ScoreCoeff' in params ? params.ScoreCoeff : null;
+        this.SoeAppId = 'SoeAppId' in params ? params.SoeAppId : null;
+        this.IsLongLifeSession = 'IsLongLifeSession' in params ? params.IsLongLifeSession : null;
+        this.StorageMode = 'StorageMode' in params ? params.StorageMode : null;
+        this.SentenceInfoEnabled = 'SentenceInfoEnabled' in params ? params.SentenceInfoEnabled : null;
+        this.ServerType = 'ServerType' in params ? params.ServerType : null;
 
     }
 }
@@ -236,14 +236,14 @@ class TransmitOralProcessRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.SeqId = params.SeqId || null;
-        this.IsEnd = params.IsEnd || null;
-        this.VoiceFileType = params.VoiceFileType || null;
-        this.VoiceEncodeType = params.VoiceEncodeType || null;
-        this.UserVoiceData = params.UserVoiceData || null;
-        this.SessionId = params.SessionId || null;
-        this.SoeAppId = params.SoeAppId || null;
-        this.IsLongLifeSession = params.IsLongLifeSession || null;
+        this.SeqId = 'SeqId' in params ? params.SeqId : null;
+        this.IsEnd = 'IsEnd' in params ? params.IsEnd : null;
+        this.VoiceFileType = 'VoiceFileType' in params ? params.VoiceFileType : null;
+        this.VoiceEncodeType = 'VoiceEncodeType' in params ? params.VoiceEncodeType : null;
+        this.UserVoiceData = 'UserVoiceData' in params ? params.UserVoiceData : null;
+        this.SessionId = 'SessionId' in params ? params.SessionId : null;
+        this.SoeAppId = 'SoeAppId' in params ? params.SoeAppId : null;
+        this.IsLongLifeSession = 'IsLongLifeSession' in params ? params.IsLongLifeSession : null;
 
     }
 }
@@ -313,9 +313,9 @@ class TransmitOralProcessResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.PronAccuracy = params.PronAccuracy || null;
-        this.PronFluency = params.PronFluency || null;
-        this.PronCompletion = params.PronCompletion || null;
+        this.PronAccuracy = 'PronAccuracy' in params ? params.PronAccuracy : null;
+        this.PronFluency = 'PronFluency' in params ? params.PronFluency : null;
+        this.PronCompletion = 'PronCompletion' in params ? params.PronCompletion : null;
 
         if (params.Words) {
             this.Words = new Array();
@@ -325,8 +325,8 @@ class TransmitOralProcessResponse extends  AbstractModel {
                 this.Words.push(obj);
             }
         }
-        this.SessionId = params.SessionId || null;
-        this.AudioUrl = params.AudioUrl || null;
+        this.SessionId = 'SessionId' in params ? params.SessionId : null;
+        this.AudioUrl = 'AudioUrl' in params ? params.AudioUrl : null;
 
         if (params.SentenceInfoSet) {
             this.SentenceInfoSet = new Array();
@@ -336,7 +336,7 @@ class TransmitOralProcessResponse extends  AbstractModel {
                 this.SentenceInfoSet.push(obj);
             }
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -370,8 +370,8 @@ class InitOralProcessResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.SessionId = params.SessionId || null;
-        this.RequestId = params.RequestId || null;
+        this.SessionId = 'SessionId' in params ? params.SessionId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -435,12 +435,12 @@ class WordRsp extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.MemBeginTime = params.MemBeginTime || null;
-        this.MemEndTime = params.MemEndTime || null;
-        this.PronAccuracy = params.PronAccuracy || null;
-        this.PronFluency = params.PronFluency || null;
-        this.Word = params.Word || null;
-        this.MatchTag = params.MatchTag || null;
+        this.MemBeginTime = 'MemBeginTime' in params ? params.MemBeginTime : null;
+        this.MemEndTime = 'MemEndTime' in params ? params.MemEndTime : null;
+        this.PronAccuracy = 'PronAccuracy' in params ? params.PronAccuracy : null;
+        this.PronFluency = 'PronFluency' in params ? params.PronFluency : null;
+        this.Word = 'Word' in params ? params.Word : null;
+        this.MatchTag = 'MatchTag' in params ? params.MatchTag : null;
 
         if (params.PhoneInfos) {
             this.PhoneInfos = new Array();
@@ -507,12 +507,12 @@ class PhoneInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.MemBeginTime = params.MemBeginTime || null;
-        this.MemEndTime = params.MemEndTime || null;
-        this.PronAccuracy = params.PronAccuracy || null;
-        this.DetectedStress = params.DetectedStress || null;
-        this.Phone = params.Phone || null;
-        this.Stress = params.Stress || null;
+        this.MemBeginTime = 'MemBeginTime' in params ? params.MemBeginTime : null;
+        this.MemEndTime = 'MemEndTime' in params ? params.MemEndTime : null;
+        this.PronAccuracy = 'PronAccuracy' in params ? params.PronAccuracy : null;
+        this.DetectedStress = 'DetectedStress' in params ? params.DetectedStress : null;
+        this.Phone = 'Phone' in params ? params.Phone : null;
+        this.Stress = 'Stress' in params ? params.Stress : null;
 
     }
 }

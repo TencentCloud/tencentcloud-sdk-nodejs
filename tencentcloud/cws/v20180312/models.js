@@ -75,13 +75,13 @@ class ModifySiteAttributeRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.SiteId = params.SiteId || null;
-        this.Name = params.Name || null;
-        this.NeedLogin = params.NeedLogin || null;
-        this.LoginCookie = params.LoginCookie || null;
-        this.LoginCheckUrl = params.LoginCheckUrl || null;
-        this.LoginCheckKw = params.LoginCheckKw || null;
-        this.ScanDisallow = params.ScanDisallow || null;
+        this.SiteId = 'SiteId' in params ? params.SiteId : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.NeedLogin = 'NeedLogin' in params ? params.NeedLogin : null;
+        this.LoginCookie = 'LoginCookie' in params ? params.LoginCookie : null;
+        this.LoginCheckUrl = 'LoginCheckUrl' in params ? params.LoginCheckUrl : null;
+        this.LoginCheckKw = 'LoginCheckKw' in params ? params.LoginCheckKw : null;
+        this.ScanDisallow = 'ScanDisallow' in params ? params.ScanDisallow : null;
 
     }
 }
@@ -169,8 +169,8 @@ class MonitorsDetail extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Progress = params.Progress || null;
-        this.PageCount = params.PageCount || null;
+        this.Progress = 'Progress' in params ? params.Progress : null;
+        this.PageCount = 'PageCount' in params ? params.PageCount : null;
 
         if (params.Basic) {
             let obj = new Monitor();
@@ -186,7 +186,7 @@ class MonitorsDetail extends  AbstractModel {
                 this.Sites.push(obj);
             }
         }
-        this.SiteNumber = params.SiteNumber || null;
+        this.SiteNumber = 'SiteNumber' in params ? params.SiteNumber : null;
 
         if (params.ImpactSites) {
             this.ImpactSites = new Array();
@@ -196,11 +196,11 @@ class MonitorsDetail extends  AbstractModel {
                 this.ImpactSites.push(obj);
             }
         }
-        this.ImpactSiteNumber = params.ImpactSiteNumber || null;
-        this.VulsHighNumber = params.VulsHighNumber || null;
-        this.VulsMiddleNumber = params.VulsMiddleNumber || null;
-        this.VulsLowNumber = params.VulsLowNumber || null;
-        this.VulsNoticeNumber = params.VulsNoticeNumber || null;
+        this.ImpactSiteNumber = 'ImpactSiteNumber' in params ? params.ImpactSiteNumber : null;
+        this.VulsHighNumber = 'VulsHighNumber' in params ? params.VulsHighNumber : null;
+        this.VulsMiddleNumber = 'VulsMiddleNumber' in params ? params.VulsMiddleNumber : null;
+        this.VulsLowNumber = 'VulsLowNumber' in params ? params.VulsLowNumber : null;
+        this.VulsNoticeNumber = 'VulsNoticeNumber' in params ? params.VulsNoticeNumber : null;
 
     }
 }
@@ -240,7 +240,7 @@ class DescribeSitesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = params.TotalCount || null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
 
         if (params.Sites) {
             this.Sites = new Array();
@@ -250,7 +250,7 @@ class DescribeSitesResponse extends  AbstractModel {
                 this.Sites.push(obj);
             }
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -299,8 +299,8 @@ class DescribeMonitorsResponse extends  AbstractModel {
                 this.Monitors.push(obj);
             }
         }
-        this.TotalCount = params.TotalCount || null;
-        this.RequestId = params.RequestId || null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -328,7 +328,7 @@ class DeleteSitesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.SiteIds = params.SiteIds || null;
+        this.SiteIds = 'SiteIds' in params ? params.SiteIds : null;
 
     }
 }
@@ -401,8 +401,8 @@ class DescribeVulsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.SiteId = params.SiteId || null;
-        this.MonitorId = params.MonitorId || null;
+        this.SiteId = 'SiteId' in params ? params.SiteId : null;
+        this.MonitorId = 'MonitorId' in params ? params.MonitorId : null;
 
         if (params.Filters) {
             this.Filters = new Array();
@@ -412,8 +412,8 @@ class DescribeVulsRequest extends  AbstractModel {
                 this.Filters.push(obj);
             }
         }
-        this.Offset = params.Offset || null;
-        this.Limit = params.Limit || null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
 
     }
 }
@@ -441,7 +441,7 @@ class ModifyConfigAttributeResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -475,8 +475,8 @@ class CreateSitesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Number = params.Number || null;
-        this.RequestId = params.RequestId || null;
+        this.Number = 'Number' in params ? params.Number : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -525,7 +525,7 @@ class ModifyMonitorAttributeResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -553,7 +553,7 @@ class ModifySiteAttributeResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -587,8 +587,8 @@ class CreateVulsReportRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.SiteId = params.SiteId || null;
-        this.MonitorId = params.MonitorId || null;
+        this.SiteId = 'SiteId' in params ? params.SiteId : null;
+        this.MonitorId = 'MonitorId' in params ? params.MonitorId : null;
 
     }
 }
@@ -616,7 +616,7 @@ class CreateSitesScansResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -704,17 +704,17 @@ class SitesVerification extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Id = params.Id || null;
-        this.Appid = params.Appid || null;
-        this.VerifyUrl = params.VerifyUrl || null;
-        this.VerifyFileUrl = params.VerifyFileUrl || null;
-        this.Domain = params.Domain || null;
-        this.TxtName = params.TxtName || null;
-        this.TxtText = params.TxtText || null;
-        this.ValidTo = params.ValidTo || null;
-        this.VerifyStatus = params.VerifyStatus || null;
-        this.CreatedAt = params.CreatedAt || null;
-        this.UpdatedAt = params.UpdatedAt || null;
+        this.Id = 'Id' in params ? params.Id : null;
+        this.Appid = 'Appid' in params ? params.Appid : null;
+        this.VerifyUrl = 'VerifyUrl' in params ? params.VerifyUrl : null;
+        this.VerifyFileUrl = 'VerifyFileUrl' in params ? params.VerifyFileUrl : null;
+        this.Domain = 'Domain' in params ? params.Domain : null;
+        this.TxtName = 'TxtName' in params ? params.TxtName : null;
+        this.TxtText = 'TxtText' in params ? params.TxtText : null;
+        this.ValidTo = 'ValidTo' in params ? params.ValidTo : null;
+        this.VerifyStatus = 'VerifyStatus' in params ? params.VerifyStatus : null;
+        this.CreatedAt = 'CreatedAt' in params ? params.CreatedAt : null;
+        this.UpdatedAt = 'UpdatedAt' in params ? params.UpdatedAt : null;
 
     }
 }
@@ -760,10 +760,10 @@ class DescribeSiteQuotaResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Total = params.Total || null;
-        this.Used = params.Used || null;
-        this.Available = params.Available || null;
-        this.RequestId = params.RequestId || null;
+        this.Total = 'Total' in params ? params.Total : null;
+        this.Used = 'Used' in params ? params.Used : null;
+        this.Available = 'Available' in params ? params.Available : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -845,13 +845,13 @@ class DescribeVulsNumberResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ImpactSiteNumber = params.ImpactSiteNumber || null;
-        this.SiteNumber = params.SiteNumber || null;
-        this.VulsHighNumber = params.VulsHighNumber || null;
-        this.VulsMiddleNumber = params.VulsMiddleNumber || null;
-        this.VulsLowNumber = params.VulsLowNumber || null;
-        this.VulsNoticeNumber = params.VulsNoticeNumber || null;
-        this.PageCount = params.PageCount || null;
+        this.ImpactSiteNumber = 'ImpactSiteNumber' in params ? params.ImpactSiteNumber : null;
+        this.SiteNumber = 'SiteNumber' in params ? params.SiteNumber : null;
+        this.VulsHighNumber = 'VulsHighNumber' in params ? params.VulsHighNumber : null;
+        this.VulsMiddleNumber = 'VulsMiddleNumber' in params ? params.VulsMiddleNumber : null;
+        this.VulsLowNumber = 'VulsLowNumber' in params ? params.VulsLowNumber : null;
+        this.VulsNoticeNumber = 'VulsNoticeNumber' in params ? params.VulsNoticeNumber : null;
+        this.PageCount = 'PageCount' in params ? params.PageCount : null;
 
         if (params.Sites) {
             this.Sites = new Array();
@@ -870,7 +870,7 @@ class DescribeVulsNumberResponse extends  AbstractModel {
                 this.ImpactSites.push(obj);
             }
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -898,7 +898,7 @@ class CreateVulsMisinformationRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.VulIds = params.VulIds || null;
+        this.VulIds = 'VulIds' in params ? params.VulIds : null;
 
     }
 }
@@ -953,8 +953,8 @@ class MonitorMiniSite extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.SiteId = params.SiteId || null;
-        this.Url = params.Url || null;
+        this.SiteId = 'SiteId' in params ? params.SiteId : null;
+        this.Url = 'Url' in params ? params.Url : null;
 
     }
 }
@@ -994,9 +994,9 @@ class CreateSitesScansRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.SiteIds = params.SiteIds || null;
-        this.ScannerType = params.ScannerType || null;
-        this.RateLimit = params.RateLimit || null;
+        this.SiteIds = 'SiteIds' in params ? params.SiteIds : null;
+        this.ScannerType = 'ScannerType' in params ? params.ScannerType : null;
+        this.RateLimit = 'RateLimit' in params ? params.RateLimit : null;
 
     }
 }
@@ -1024,7 +1024,7 @@ class CreateMonitorsResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1064,7 +1064,7 @@ class DescribeVulsResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = params.TotalCount || null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
 
         if (params.Vuls) {
             this.Vuls = new Array();
@@ -1074,7 +1074,7 @@ class DescribeVulsResponse extends  AbstractModel {
                 this.Vuls.push(obj);
             }
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1114,9 +1114,9 @@ class VerifySitesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.SuccessNumber = params.SuccessNumber || null;
-        this.FailNumber = params.FailNumber || null;
-        this.RequestId = params.RequestId || null;
+        this.SuccessNumber = 'SuccessNumber' in params ? params.SuccessNumber : null;
+        this.FailNumber = 'FailNumber' in params ? params.FailNumber : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1174,12 +1174,12 @@ class CreateMonitorsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Urls = params.Urls || null;
-        this.Name = params.Name || null;
-        this.ScannerType = params.ScannerType || null;
-        this.Crontab = params.Crontab || null;
-        this.RateLimit = params.RateLimit || null;
-        this.FirstScanStartTime = params.FirstScanStartTime || null;
+        this.Urls = 'Urls' in params ? params.Urls : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.ScannerType = 'ScannerType' in params ? params.ScannerType : null;
+        this.Crontab = 'Crontab' in params ? params.Crontab : null;
+        this.RateLimit = 'RateLimit' in params ? params.RateLimit : null;
+        this.FirstScanStartTime = 'FirstScanStartTime' in params ? params.FirstScanStartTime : null;
 
     }
 }
@@ -1207,7 +1207,7 @@ class DeleteMonitorsResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1313,20 +1313,20 @@ class Monitor extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Appid = params.Appid || null;
-        this.Id = params.Id || null;
-        this.Name = params.Name || null;
-        this.MonitorStatus = params.MonitorStatus || null;
-        this.ScannerType = params.ScannerType || null;
-        this.Crontab = params.Crontab || null;
-        this.IncludedVulsTypes = params.IncludedVulsTypes || null;
-        this.RateLimit = params.RateLimit || null;
-        this.FirstScanStartTime = params.FirstScanStartTime || null;
-        this.ScanStatus = params.ScanStatus || null;
-        this.LastScanFinishTime = params.LastScanFinishTime || null;
-        this.CurrentScanStartTime = params.CurrentScanStartTime || null;
-        this.CreatedAt = params.CreatedAt || null;
-        this.UpdatedAt = params.UpdatedAt || null;
+        this.Appid = 'Appid' in params ? params.Appid : null;
+        this.Id = 'Id' in params ? params.Id : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.MonitorStatus = 'MonitorStatus' in params ? params.MonitorStatus : null;
+        this.ScannerType = 'ScannerType' in params ? params.ScannerType : null;
+        this.Crontab = 'Crontab' in params ? params.Crontab : null;
+        this.IncludedVulsTypes = 'IncludedVulsTypes' in params ? params.IncludedVulsTypes : null;
+        this.RateLimit = 'RateLimit' in params ? params.RateLimit : null;
+        this.FirstScanStartTime = 'FirstScanStartTime' in params ? params.FirstScanStartTime : null;
+        this.ScanStatus = 'ScanStatus' in params ? params.ScanStatus : null;
+        this.LastScanFinishTime = 'LastScanFinishTime' in params ? params.LastScanFinishTime : null;
+        this.CurrentScanStartTime = 'CurrentScanStartTime' in params ? params.CurrentScanStartTime : null;
+        this.CreatedAt = 'CreatedAt' in params ? params.CreatedAt : null;
+        this.UpdatedAt = 'UpdatedAt' in params ? params.UpdatedAt : null;
 
     }
 }
@@ -1456,24 +1456,24 @@ class Vul extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.IsReported = params.IsReported || null;
-        this.Appid = params.Appid || null;
-        this.Uin = params.Uin || null;
-        this.Id = params.Id || null;
-        this.SiteId = params.SiteId || null;
-        this.TaskId = params.TaskId || null;
-        this.Level = params.Level || null;
-        this.Name = params.Name || null;
-        this.Url = params.Url || null;
-        this.Html = params.Html || null;
-        this.Nickname = params.Nickname || null;
-        this.Harm = params.Harm || null;
-        this.Describe = params.Describe || null;
-        this.Solution = params.Solution || null;
-        this.From = params.From || null;
-        this.Parameter = params.Parameter || null;
-        this.CreatedAt = params.CreatedAt || null;
-        this.UpdatedAt = params.UpdatedAt || null;
+        this.IsReported = 'IsReported' in params ? params.IsReported : null;
+        this.Appid = 'Appid' in params ? params.Appid : null;
+        this.Uin = 'Uin' in params ? params.Uin : null;
+        this.Id = 'Id' in params ? params.Id : null;
+        this.SiteId = 'SiteId' in params ? params.SiteId : null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.Level = 'Level' in params ? params.Level : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Url = 'Url' in params ? params.Url : null;
+        this.Html = 'Html' in params ? params.Html : null;
+        this.Nickname = 'Nickname' in params ? params.Nickname : null;
+        this.Harm = 'Harm' in params ? params.Harm : null;
+        this.Describe = 'Describe' in params ? params.Describe : null;
+        this.Solution = 'Solution' in params ? params.Solution : null;
+        this.From = 'From' in params ? params.From : null;
+        this.Parameter = 'Parameter' in params ? params.Parameter : null;
+        this.CreatedAt = 'CreatedAt' in params ? params.CreatedAt : null;
+        this.UpdatedAt = 'UpdatedAt' in params ? params.UpdatedAt : null;
 
     }
 }
@@ -1567,18 +1567,18 @@ class VulsTimeline extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Id = params.Id || null;
-        this.Appid = params.Appid || null;
-        this.Date = params.Date || null;
-        this.PageCount = params.PageCount || null;
-        this.SiteNum = params.SiteNum || null;
-        this.ImpactSiteNum = params.ImpactSiteNum || null;
-        this.VulsHighNum = params.VulsHighNum || null;
-        this.VulsMiddleNum = params.VulsMiddleNum || null;
-        this.VulsLowNum = params.VulsLowNum || null;
-        this.VulsNoticeNum = params.VulsNoticeNum || null;
-        this.CreatedAt = params.CreatedAt || null;
-        this.UpdatedAt = params.UpdatedAt || null;
+        this.Id = 'Id' in params ? params.Id : null;
+        this.Appid = 'Appid' in params ? params.Appid : null;
+        this.Date = 'Date' in params ? params.Date : null;
+        this.PageCount = 'PageCount' in params ? params.PageCount : null;
+        this.SiteNum = 'SiteNum' in params ? params.SiteNum : null;
+        this.ImpactSiteNum = 'ImpactSiteNum' in params ? params.ImpactSiteNum : null;
+        this.VulsHighNum = 'VulsHighNum' in params ? params.VulsHighNum : null;
+        this.VulsMiddleNum = 'VulsMiddleNum' in params ? params.VulsMiddleNum : null;
+        this.VulsLowNum = 'VulsLowNum' in params ? params.VulsLowNum : null;
+        this.VulsNoticeNum = 'VulsNoticeNum' in params ? params.VulsNoticeNum : null;
+        this.CreatedAt = 'CreatedAt' in params ? params.CreatedAt : null;
+        this.UpdatedAt = 'UpdatedAt' in params ? params.UpdatedAt : null;
 
     }
 }
@@ -1606,7 +1606,7 @@ class CreateVulsMisinformationResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1634,7 +1634,7 @@ class VerifySitesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Urls = params.Urls || null;
+        this.Urls = 'Urls' in params ? params.Urls : null;
 
     }
 }
@@ -1704,14 +1704,14 @@ class ModifyMonitorAttributeRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.MonitorId = params.MonitorId || null;
-        this.Urls = params.Urls || null;
-        this.Name = params.Name || null;
-        this.ScannerType = params.ScannerType || null;
-        this.Crontab = params.Crontab || null;
-        this.RateLimit = params.RateLimit || null;
-        this.FirstScanStartTime = params.FirstScanStartTime || null;
-        this.MonitorStatus = params.MonitorStatus || null;
+        this.MonitorId = 'MonitorId' in params ? params.MonitorId : null;
+        this.Urls = 'Urls' in params ? params.Urls : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.ScannerType = 'ScannerType' in params ? params.ScannerType : null;
+        this.Crontab = 'Crontab' in params ? params.Crontab : null;
+        this.RateLimit = 'RateLimit' in params ? params.RateLimit : null;
+        this.FirstScanStartTime = 'FirstScanStartTime' in params ? params.FirstScanStartTime : null;
+        this.MonitorStatus = 'MonitorStatus' in params ? params.MonitorStatus : null;
 
     }
 }
@@ -1751,7 +1751,7 @@ class DescribeVulsNumberTimelineResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = params.TotalCount || null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
 
         if (params.VulsTimeline) {
             this.VulsTimeline = new Array();
@@ -1761,7 +1761,7 @@ class DescribeVulsNumberTimelineResponse extends  AbstractModel {
                 this.VulsTimeline.push(obj);
             }
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1795,8 +1795,8 @@ class CreateVulsReportResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ReportFileUrl = params.ReportFileUrl || null;
-        this.RequestId = params.RequestId || null;
+        this.ReportFileUrl = 'ReportFileUrl' in params ? params.ReportFileUrl : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1830,8 +1830,8 @@ class CreateSitesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Urls = params.Urls || null;
-        this.UserAgent = params.UserAgent || null;
+        this.Urls = 'Urls' in params ? params.Urls : null;
+        this.UserAgent = 'UserAgent' in params ? params.UserAgent : null;
 
     }
 }
@@ -1859,7 +1859,7 @@ class ModifyConfigAttributeRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.NoticeLevel = params.NoticeLevel || null;
+        this.NoticeLevel = 'NoticeLevel' in params ? params.NoticeLevel : null;
 
     }
 }
@@ -1896,8 +1896,8 @@ class Filter extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Name = params.Name || null;
-        this.Values = params.Values || null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Values = 'Values' in params ? params.Values : null;
 
     }
 }
@@ -1943,7 +1943,7 @@ class DescribeMonitorsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.MonitorIds = params.MonitorIds || null;
+        this.MonitorIds = 'MonitorIds' in params ? params.MonitorIds : null;
 
         if (params.Filters) {
             this.Filters = new Array();
@@ -1953,8 +1953,8 @@ class DescribeMonitorsRequest extends  AbstractModel {
                 this.Filters.push(obj);
             }
         }
-        this.Offset = params.Offset || null;
-        this.Limit = params.Limit || null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
 
     }
 }
@@ -1982,7 +1982,7 @@ class DeleteSitesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2010,7 +2010,7 @@ class DeleteMonitorsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.MonitorIds = params.MonitorIds || null;
+        this.MonitorIds = 'MonitorIds' in params ? params.MonitorIds : null;
 
     }
 }
@@ -2050,7 +2050,7 @@ class DescribeSitesVerificationResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = params.TotalCount || null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
 
         if (params.SitesVerification) {
             this.SitesVerification = new Array();
@@ -2060,7 +2060,7 @@ class DescribeSitesVerificationResponse extends  AbstractModel {
                 this.SitesVerification.push(obj);
             }
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2274,38 +2274,38 @@ class Site extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Progress = params.Progress || null;
-        this.Appid = params.Appid || null;
-        this.Uin = params.Uin || null;
-        this.NeedLogin = params.NeedLogin || null;
-        this.LoginCookie = params.LoginCookie || null;
-        this.LoginCookieValid = params.LoginCookieValid || null;
-        this.LoginCheckUrl = params.LoginCheckUrl || null;
-        this.LoginCheckKw = params.LoginCheckKw || null;
-        this.ScanDisallow = params.ScanDisallow || null;
-        this.UserAgent = params.UserAgent || null;
-        this.Id = params.Id || null;
-        this.MonitorId = params.MonitorId || null;
-        this.Url = params.Url || null;
-        this.Name = params.Name || null;
-        this.VerifyStatus = params.VerifyStatus || null;
-        this.MonitorStatus = params.MonitorStatus || null;
-        this.ScanStatus = params.ScanStatus || null;
-        this.LastScanTaskId = params.LastScanTaskId || null;
-        this.LastScanStartTime = params.LastScanStartTime || null;
-        this.LastScanFinishTime = params.LastScanFinishTime || null;
-        this.LastScanCancelTime = params.LastScanCancelTime || null;
-        this.LastScanPageCount = params.LastScanPageCount || null;
-        this.LastScanScannerType = params.LastScanScannerType || null;
-        this.LastScanVulsHighNum = params.LastScanVulsHighNum || null;
-        this.LastScanVulsMiddleNum = params.LastScanVulsMiddleNum || null;
-        this.LastScanVulsLowNum = params.LastScanVulsLowNum || null;
-        this.LastScanVulsNoticeNum = params.LastScanVulsNoticeNum || null;
-        this.CreatedAt = params.CreatedAt || null;
-        this.UpdatedAt = params.UpdatedAt || null;
-        this.LastScanRateLimit = params.LastScanRateLimit || null;
-        this.LastScanVulsNum = params.LastScanVulsNum || null;
-        this.LastScanNoticeNum = params.LastScanNoticeNum || null;
+        this.Progress = 'Progress' in params ? params.Progress : null;
+        this.Appid = 'Appid' in params ? params.Appid : null;
+        this.Uin = 'Uin' in params ? params.Uin : null;
+        this.NeedLogin = 'NeedLogin' in params ? params.NeedLogin : null;
+        this.LoginCookie = 'LoginCookie' in params ? params.LoginCookie : null;
+        this.LoginCookieValid = 'LoginCookieValid' in params ? params.LoginCookieValid : null;
+        this.LoginCheckUrl = 'LoginCheckUrl' in params ? params.LoginCheckUrl : null;
+        this.LoginCheckKw = 'LoginCheckKw' in params ? params.LoginCheckKw : null;
+        this.ScanDisallow = 'ScanDisallow' in params ? params.ScanDisallow : null;
+        this.UserAgent = 'UserAgent' in params ? params.UserAgent : null;
+        this.Id = 'Id' in params ? params.Id : null;
+        this.MonitorId = 'MonitorId' in params ? params.MonitorId : null;
+        this.Url = 'Url' in params ? params.Url : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.VerifyStatus = 'VerifyStatus' in params ? params.VerifyStatus : null;
+        this.MonitorStatus = 'MonitorStatus' in params ? params.MonitorStatus : null;
+        this.ScanStatus = 'ScanStatus' in params ? params.ScanStatus : null;
+        this.LastScanTaskId = 'LastScanTaskId' in params ? params.LastScanTaskId : null;
+        this.LastScanStartTime = 'LastScanStartTime' in params ? params.LastScanStartTime : null;
+        this.LastScanFinishTime = 'LastScanFinishTime' in params ? params.LastScanFinishTime : null;
+        this.LastScanCancelTime = 'LastScanCancelTime' in params ? params.LastScanCancelTime : null;
+        this.LastScanPageCount = 'LastScanPageCount' in params ? params.LastScanPageCount : null;
+        this.LastScanScannerType = 'LastScanScannerType' in params ? params.LastScanScannerType : null;
+        this.LastScanVulsHighNum = 'LastScanVulsHighNum' in params ? params.LastScanVulsHighNum : null;
+        this.LastScanVulsMiddleNum = 'LastScanVulsMiddleNum' in params ? params.LastScanVulsMiddleNum : null;
+        this.LastScanVulsLowNum = 'LastScanVulsLowNum' in params ? params.LastScanVulsLowNum : null;
+        this.LastScanVulsNoticeNum = 'LastScanVulsNoticeNum' in params ? params.LastScanVulsNoticeNum : null;
+        this.CreatedAt = 'CreatedAt' in params ? params.CreatedAt : null;
+        this.UpdatedAt = 'UpdatedAt' in params ? params.UpdatedAt : null;
+        this.LastScanRateLimit = 'LastScanRateLimit' in params ? params.LastScanRateLimit : null;
+        this.LastScanVulsNum = 'LastScanVulsNum' in params ? params.LastScanVulsNum : null;
+        this.LastScanNoticeNum = 'LastScanNoticeNum' in params ? params.LastScanNoticeNum : null;
 
     }
 }
@@ -2363,12 +2363,12 @@ class DescribeConfigResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.NoticeLevel = params.NoticeLevel || null;
-        this.Id = params.Id || null;
-        this.CreatedAt = params.CreatedAt || null;
-        this.UpdatedAt = params.UpdatedAt || null;
-        this.Appid = params.Appid || null;
-        this.RequestId = params.RequestId || null;
+        this.NoticeLevel = 'NoticeLevel' in params ? params.NoticeLevel : null;
+        this.Id = 'Id' in params ? params.Id : null;
+        this.CreatedAt = 'CreatedAt' in params ? params.CreatedAt : null;
+        this.UpdatedAt = 'UpdatedAt' in params ? params.UpdatedAt : null;
+        this.Appid = 'Appid' in params ? params.Appid : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2414,7 +2414,7 @@ class DescribeSitesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.SiteIds = params.SiteIds || null;
+        this.SiteIds = 'SiteIds' in params ? params.SiteIds : null;
 
         if (params.Filters) {
             this.Filters = new Array();
@@ -2424,8 +2424,8 @@ class DescribeSitesRequest extends  AbstractModel {
                 this.Filters.push(obj);
             }
         }
-        this.Offset = params.Offset || null;
-        this.Limit = params.Limit || null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
 
     }
 }
@@ -2474,7 +2474,7 @@ class DescribeSitesVerificationRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Urls = params.Urls || null;
+        this.Urls = 'Urls' in params ? params.Urls : null;
 
     }
 }

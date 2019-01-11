@@ -63,11 +63,11 @@ class DescribeBrandPosCommentsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.BrandId = params.BrandId || null;
-        this.StartDate = params.StartDate || null;
-        this.EndDate = params.EndDate || null;
-        this.Limit = params.Limit || null;
-        this.Offset = params.Offset || null;
+        this.BrandId = 'BrandId' in params ? params.BrandId : null;
+        this.StartDate = 'StartDate' in params ? params.StartDate : null;
+        this.EndDate = 'EndDate' in params ? params.EndDate : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
 
     }
 }
@@ -143,15 +143,15 @@ class BrandReportArticle extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Title = params.Title || null;
-        this.Url = params.Url || null;
-        this.FromSite = params.FromSite || null;
-        this.PubTime = params.PubTime || null;
-        this.Flag = params.Flag || null;
-        this.Hot = params.Hot || null;
-        this.Level = params.Level || null;
-        this.Abstract = params.Abstract || null;
-        this.ArticleId = params.ArticleId || null;
+        this.Title = 'Title' in params ? params.Title : null;
+        this.Url = 'Url' in params ? params.Url : null;
+        this.FromSite = 'FromSite' in params ? params.FromSite : null;
+        this.PubTime = 'PubTime' in params ? params.PubTime : null;
+        this.Flag = 'Flag' in params ? params.Flag : null;
+        this.Hot = 'Hot' in params ? params.Hot : null;
+        this.Level = 'Level' in params ? params.Level : null;
+        this.Abstract = 'Abstract' in params ? params.Abstract : null;
+        this.ArticleId = 'ArticleId' in params ? params.ArticleId : null;
 
     }
 }
@@ -203,9 +203,9 @@ class DescribeBrandSocialOpinionResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ArticleCount = params.ArticleCount || null;
-        this.FromCount = params.FromCount || null;
-        this.AdverseCount = params.AdverseCount || null;
+        this.ArticleCount = 'ArticleCount' in params ? params.ArticleCount : null;
+        this.FromCount = 'FromCount' in params ? params.FromCount : null;
+        this.AdverseCount = 'AdverseCount' in params ? params.AdverseCount : null;
 
         if (params.ArticleSet) {
             this.ArticleSet = new Array();
@@ -215,7 +215,7 @@ class DescribeBrandSocialOpinionResponse extends  AbstractModel {
                 this.ArticleSet.push(obj);
             }
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -255,7 +255,7 @@ class DescribeBrandExposureResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = params.TotalCount || null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
 
         if (params.DateCountSet) {
             this.DateCountSet = new Array();
@@ -265,7 +265,7 @@ class DescribeBrandExposureResponse extends  AbstractModel {
                 this.DateCountSet.push(obj);
             }
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -314,8 +314,8 @@ class DescribeBrandPosCommentsResponse extends  AbstractModel {
                 this.BrandCommentSet.push(obj);
             }
         }
-        this.TotalComments = params.TotalComments || null;
-        this.RequestId = params.RequestId || null;
+        this.TotalComments = 'TotalComments' in params ? params.TotalComments : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -373,12 +373,12 @@ class DescribeIndustryNewsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.IndustryId = params.IndustryId || null;
-        this.StartDate = params.StartDate || null;
-        this.EndDate = params.EndDate || null;
-        this.ShowList = params.ShowList || null;
-        this.Offset = params.Offset || null;
-        this.Limit = params.Limit || null;
+        this.IndustryId = 'IndustryId' in params ? params.IndustryId : null;
+        this.StartDate = 'StartDate' in params ? params.StartDate : null;
+        this.EndDate = 'EndDate' in params ? params.EndDate : null;
+        this.ShowList = 'ShowList' in params ? params.ShowList : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
 
     }
 }
@@ -436,12 +436,12 @@ class DescribeBrandSocialOpinionRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.BrandId = params.BrandId || null;
-        this.StartDate = params.StartDate || null;
-        this.EndDate = params.EndDate || null;
-        this.Offset = params.Offset || null;
-        this.Limit = params.Limit || null;
-        this.ShowList = params.ShowList || null;
+        this.BrandId = 'BrandId' in params ? params.BrandId : null;
+        this.StartDate = 'StartDate' in params ? params.StartDate : null;
+        this.EndDate = 'EndDate' in params ? params.EndDate : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.ShowList = 'ShowList' in params ? params.ShowList : null;
 
     }
 }
@@ -481,9 +481,9 @@ class DescribeBrandSocialReportRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.BrandId = params.BrandId || null;
-        this.StartDate = params.StartDate || null;
-        this.EndDate = params.EndDate || null;
+        this.BrandId = 'BrandId' in params ? params.BrandId : null;
+        this.StartDate = 'StartDate' in params ? params.StartDate : null;
+        this.EndDate = 'EndDate' in params ? params.EndDate : null;
 
     }
 }
@@ -523,7 +523,7 @@ class DescribeBrandSocialReportResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = params.TotalCount || null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
 
         if (params.DateCountSet) {
             this.DateCountSet = new Array();
@@ -533,7 +533,7 @@ class DescribeBrandSocialReportResponse extends  AbstractModel {
                 this.DateCountSet.push(obj);
             }
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -573,9 +573,9 @@ class DescribeBrandExposureRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.BrandId = params.BrandId || null;
-        this.StartDate = params.StartDate || null;
-        this.EndDate = params.EndDate || null;
+        this.BrandId = 'BrandId' in params ? params.BrandId : null;
+        this.StartDate = 'StartDate' in params ? params.StartDate : null;
+        this.EndDate = 'EndDate' in params ? params.EndDate : null;
 
     }
 }
@@ -609,8 +609,8 @@ class CommentInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Comment = params.Comment || null;
-        this.Date = params.Date || null;
+        this.Comment = 'Comment' in params ? params.Comment : null;
+        this.Date = 'Date' in params ? params.Date : null;
 
     }
 }
@@ -644,8 +644,8 @@ class StarPortrait extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Name = params.Name || null;
-        this.Percent = params.Percent || null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Percent = 'Percent' in params ? params.Percent : null;
 
     }
 }
@@ -679,8 +679,8 @@ class DateCount extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Date = params.Date || null;
-        this.Count = params.Count || null;
+        this.Date = 'Date' in params ? params.Date : null;
+        this.Count = 'Count' in params ? params.Count : null;
 
     }
 }
@@ -792,15 +792,15 @@ class IndustryNews extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.IndustryId = params.IndustryId || null;
-        this.PubTime = params.PubTime || null;
-        this.FromSite = params.FromSite || null;
-        this.Title = params.Title || null;
-        this.Url = params.Url || null;
-        this.Level = params.Level || null;
-        this.Hot = params.Hot || null;
-        this.Flag = params.Flag || null;
-        this.Abstract = params.Abstract || null;
+        this.IndustryId = 'IndustryId' in params ? params.IndustryId : null;
+        this.PubTime = 'PubTime' in params ? params.PubTime : null;
+        this.FromSite = 'FromSite' in params ? params.FromSite : null;
+        this.Title = 'Title' in params ? params.Title : null;
+        this.Url = 'Url' in params ? params.Url : null;
+        this.Level = 'Level' in params ? params.Level : null;
+        this.Hot = 'Hot' in params ? params.Hot : null;
+        this.Flag = 'Flag' in params ? params.Flag : null;
+        this.Abstract = 'Abstract' in params ? params.Abstract : null;
 
     }
 }
@@ -834,8 +834,8 @@ class ProvincePortrait extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Province = params.Province || null;
-        this.Percent = params.Percent || null;
+        this.Province = 'Province' in params ? params.Province : null;
+        this.Percent = 'Percent' in params ? params.Percent : null;
 
     }
 }
@@ -995,7 +995,7 @@ class DescribeUserPortraitResponse extends  AbstractModel {
             obj.deserialize(params.Star)
             this.Star = obj;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1035,9 +1035,9 @@ class DescribeBrandCommentCountRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.BrandId = params.BrandId || null;
-        this.StartDate = params.StartDate || null;
-        this.EndDate = params.EndDate || null;
+        this.BrandId = 'BrandId' in params ? params.BrandId : null;
+        this.StartDate = 'StartDate' in params ? params.StartDate : null;
+        this.EndDate = 'EndDate' in params ? params.EndDate : null;
 
     }
 }
@@ -1077,9 +1077,9 @@ class DescribeBrandMediaReportRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.BrandId = params.BrandId || null;
-        this.StartDate = params.StartDate || null;
-        this.EndDate = params.EndDate || null;
+        this.BrandId = 'BrandId' in params ? params.BrandId : null;
+        this.StartDate = 'StartDate' in params ? params.StartDate : null;
+        this.EndDate = 'EndDate' in params ? params.EndDate : null;
 
     }
 }
@@ -1119,7 +1119,7 @@ class DescribeBrandMediaReportResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = params.TotalCount || null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
 
         if (params.DateCountSet) {
             this.DateCountSet = new Array();
@@ -1129,7 +1129,7 @@ class DescribeBrandMediaReportResponse extends  AbstractModel {
                 this.DateCountSet.push(obj);
             }
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1169,9 +1169,9 @@ class Comment extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Date = params.Date || null;
-        this.NegCommentCount = params.NegCommentCount || null;
-        this.PosCommentCount = params.PosCommentCount || null;
+        this.Date = 'Date' in params ? params.Date : null;
+        this.NegCommentCount = 'NegCommentCount' in params ? params.NegCommentCount : null;
+        this.PosCommentCount = 'PosCommentCount' in params ? params.PosCommentCount : null;
 
     }
 }
@@ -1250,7 +1250,7 @@ class DescribeBrandCommentCountResponse extends  AbstractModel {
                 this.CommentSet.push(obj);
             }
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1284,8 +1284,8 @@ class MoviePortrait extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Name = params.Name || null;
-        this.Percent = params.Percent || null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Percent = 'Percent' in params ? params.Percent : null;
 
     }
 }
@@ -1343,9 +1343,9 @@ class DescribeIndustryNewsResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.NewsCount = params.NewsCount || null;
-        this.FromCount = params.FromCount || null;
-        this.AdverseCount = params.AdverseCount || null;
+        this.NewsCount = 'NewsCount' in params ? params.NewsCount : null;
+        this.FromCount = 'FromCount' in params ? params.FromCount : null;
+        this.AdverseCount = 'AdverseCount' in params ? params.AdverseCount : null;
 
         if (params.NewsSet) {
             this.NewsSet = new Array();
@@ -1364,7 +1364,7 @@ class DescribeIndustryNewsResponse extends  AbstractModel {
                 this.DateCountSet.push(obj);
             }
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1413,8 +1413,8 @@ class DescribeBrandNegCommentsResponse extends  AbstractModel {
                 this.BrandCommentSet.push(obj);
             }
         }
-        this.TotalComments = params.TotalComments || null;
-        this.RequestId = params.RequestId || null;
+        this.TotalComments = 'TotalComments' in params ? params.TotalComments : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1442,7 +1442,7 @@ class DescribeUserPortraitRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.BrandId = params.BrandId || null;
+        this.BrandId = 'BrandId' in params ? params.BrandId : null;
 
     }
 }
@@ -1494,11 +1494,11 @@ class DescribeBrandNegCommentsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.BrandId = params.BrandId || null;
-        this.StartDate = params.StartDate || null;
-        this.EndDate = params.EndDate || null;
-        this.Limit = params.Limit || null;
-        this.Offset = params.Offset || null;
+        this.BrandId = 'BrandId' in params ? params.BrandId : null;
+        this.StartDate = 'StartDate' in params ? params.StartDate : null;
+        this.EndDate = 'EndDate' in params ? params.EndDate : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
 
     }
 }
@@ -1532,8 +1532,8 @@ class AgePortrait extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.AgeRange = params.AgeRange || null;
-        this.Percent = params.Percent || null;
+        this.AgeRange = 'AgeRange' in params ? params.AgeRange : null;
+        this.Percent = 'Percent' in params ? params.Percent : null;
 
     }
 }
@@ -1603,8 +1603,8 @@ class GenderPortrait extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Gender = params.Gender || null;
-        this.Percent = params.Percent || null;
+        this.Gender = 'Gender' in params ? params.Gender : null;
+        this.Percent = 'Percent' in params ? params.Percent : null;
 
     }
 }

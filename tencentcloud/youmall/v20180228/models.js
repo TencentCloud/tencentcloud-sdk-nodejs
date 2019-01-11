@@ -63,9 +63,9 @@ class DescribeClusterPersonArrivedMallResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.MallId = params.MallId || null;
-        this.MallCode = params.MallCode || null;
-        this.PersonId = params.PersonId || null;
+        this.MallId = 'MallId' in params ? params.MallId : null;
+        this.MallCode = 'MallCode' in params ? params.MallCode : null;
+        this.PersonId = 'PersonId' in params ? params.PersonId : null;
 
         if (params.ArrivedMallSet) {
             this.ArrivedMallSet = new Array();
@@ -75,7 +75,7 @@ class DescribeClusterPersonArrivedMallResponse extends  AbstractModel {
                 this.ArrivedMallSet.push(obj);
             }
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -133,12 +133,12 @@ class DescribeShopTrafficInfoRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.CompanyId = params.CompanyId || null;
-        this.ShopId = params.ShopId || null;
-        this.StartDate = params.StartDate || null;
-        this.EndDate = params.EndDate || null;
-        this.Offset = params.Offset || null;
-        this.Limit = params.Limit || null;
+        this.CompanyId = 'CompanyId' in params ? params.CompanyId : null;
+        this.ShopId = 'ShopId' in params ? params.ShopId : null;
+        this.StartDate = 'StartDate' in params ? params.StartDate : null;
+        this.EndDate = 'EndDate' in params ? params.EndDate : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
 
     }
 }
@@ -178,9 +178,9 @@ class GenderAgeTrafficDetail extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Gender = params.Gender || null;
-        this.AgeGap = params.AgeGap || null;
-        this.TrafficCount = params.TrafficCount || null;
+        this.Gender = 'Gender' in params ? params.Gender : null;
+        this.AgeGap = 'AgeGap' in params ? params.AgeGap : null;
+        this.TrafficCount = 'TrafficCount' in params ? params.TrafficCount : null;
 
     }
 }
@@ -226,8 +226,8 @@ class DescribeZoneFlowAndStayTimeResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.CompanyId = params.CompanyId || null;
-        this.ShopId = params.ShopId || null;
+        this.CompanyId = 'CompanyId' in params ? params.CompanyId : null;
+        this.ShopId = 'ShopId' in params ? params.ShopId : null;
 
         if (params.Data) {
             this.Data = new Array();
@@ -237,7 +237,7 @@ class DescribeZoneFlowAndStayTimeResponse extends  AbstractModel {
                 this.Data.push(obj);
             }
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -289,9 +289,9 @@ class DescribePersonArrivedMallResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.MallId = params.MallId || null;
-        this.MallCode = params.MallCode || null;
-        this.PersonId = params.PersonId || null;
+        this.MallId = 'MallId' in params ? params.MallId : null;
+        this.MallCode = 'MallCode' in params ? params.MallCode : null;
+        this.PersonId = 'PersonId' in params ? params.PersonId : null;
 
         if (params.ArrivedMallSet) {
             this.ArrivedMallSet = new Array();
@@ -301,7 +301,7 @@ class DescribePersonArrivedMallResponse extends  AbstractModel {
                 this.ArrivedMallSet.push(obj);
             }
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -329,7 +329,7 @@ class ModifyPersonTypeResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -363,8 +363,8 @@ class HourTrafficInfoDetail extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Hour = params.Hour || null;
-        this.HourTrafficTotalCount = params.HourTrafficTotalCount || null;
+        this.Hour = 'Hour' in params ? params.Hour : null;
+        this.HourTrafficTotalCount = 'HourTrafficTotalCount' in params ? params.HourTrafficTotalCount : null;
 
     }
 }
@@ -422,10 +422,10 @@ class DescribeZoneFlowDailyByZoneIdResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.CompanyId = params.CompanyId || null;
-        this.ShopId = params.ShopId || null;
-        this.ZoneId = params.ZoneId || null;
-        this.ZoneName = params.ZoneName || null;
+        this.CompanyId = 'CompanyId' in params ? params.CompanyId : null;
+        this.ShopId = 'ShopId' in params ? params.ShopId : null;
+        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
+        this.ZoneName = 'ZoneName' in params ? params.ZoneName : null;
 
         if (params.Data) {
             this.Data = new Array();
@@ -435,7 +435,7 @@ class DescribeZoneFlowDailyByZoneIdResponse extends  AbstractModel {
                 this.Data.push(obj);
             }
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -493,12 +493,12 @@ class DescribeZoneFlowAgeInfoByZoneIdResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.CompanyId = params.CompanyId || null;
-        this.ShopId = params.ShopId || null;
-        this.ZoneId = params.ZoneId || null;
-        this.ZoneName = params.ZoneName || null;
-        this.Data = params.Data || null;
-        this.RequestId = params.RequestId || null;
+        this.CompanyId = 'CompanyId' in params ? params.CompanyId : null;
+        this.ShopId = 'ShopId' in params ? params.ShopId : null;
+        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
+        this.ZoneName = 'ZoneName' in params ? params.ZoneName : null;
+        this.Data = 'Data' in params ? params.Data : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -550,9 +550,9 @@ class DescribeClusterPersonTraceResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.MallId = params.MallId || null;
-        this.MallCode = params.MallCode || null;
-        this.PersonId = params.PersonId || null;
+        this.MallId = 'MallId' in params ? params.MallId : null;
+        this.MallCode = 'MallCode' in params ? params.MallCode : null;
+        this.PersonId = 'PersonId' in params ? params.PersonId : null;
 
         if (params.TracePointSet) {
             this.TracePointSet = new Array();
@@ -562,7 +562,7 @@ class DescribeClusterPersonTraceResponse extends  AbstractModel {
                 this.TracePointSet.push(obj);
             }
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -626,13 +626,13 @@ class DescribePersonInfoRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.CompanyId = params.CompanyId || null;
-        this.ShopId = params.ShopId || null;
-        this.StartPersonId = params.StartPersonId || null;
-        this.Offset = params.Offset || null;
-        this.Limit = params.Limit || null;
-        this.PictureExpires = params.PictureExpires || null;
-        this.PersonType = params.PersonType || null;
+        this.CompanyId = 'CompanyId' in params ? params.CompanyId : null;
+        this.ShopId = 'ShopId' in params ? params.ShopId : null;
+        this.StartPersonId = 'StartPersonId' in params ? params.StartPersonId : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.PictureExpires = 'PictureExpires' in params ? params.PictureExpires : null;
+        this.PersonType = 'PersonType' in params ? params.PersonType : null;
 
     }
 }
@@ -702,14 +702,14 @@ class DescribePersonInfoByFacePictureResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.CompanyId = params.CompanyId || null;
-        this.ShopId = params.ShopId || null;
-        this.PersonId = params.PersonId || null;
-        this.PictureUrl = params.PictureUrl || null;
-        this.PersonType = params.PersonType || null;
-        this.FirstVisitTime = params.FirstVisitTime || null;
-        this.VisitTimes = params.VisitTimes || null;
-        this.RequestId = params.RequestId || null;
+        this.CompanyId = 'CompanyId' in params ? params.CompanyId : null;
+        this.ShopId = 'ShopId' in params ? params.ShopId : null;
+        this.PersonId = 'PersonId' in params ? params.PersonId : null;
+        this.PictureUrl = 'PictureUrl' in params ? params.PictureUrl : null;
+        this.PersonType = 'PersonType' in params ? params.PersonType : null;
+        this.FirstVisitTime = 'FirstVisitTime' in params ? params.FirstVisitTime : null;
+        this.VisitTimes = 'VisitTimes' in params ? params.VisitTimes : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -749,9 +749,9 @@ class DescribePersonTraceDetailRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.MallId = params.MallId || null;
-        this.PersonId = params.PersonId || null;
-        this.TraceId = params.TraceId || null;
+        this.MallId = 'MallId' in params ? params.MallId : null;
+        this.PersonId = 'PersonId' in params ? params.PersonId : null;
+        this.TraceId = 'TraceId' in params ? params.TraceId : null;
 
     }
 }
@@ -803,11 +803,11 @@ class CreateAccountRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.CompanyId = params.CompanyId || null;
-        this.Name = params.Name || null;
-        this.Password = params.Password || null;
-        this.ShopCode = params.ShopCode || null;
-        this.Remark = params.Remark || null;
+        this.CompanyId = 'CompanyId' in params ? params.CompanyId : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Password = 'Password' in params ? params.Password : null;
+        this.ShopCode = 'ShopCode' in params ? params.ShopCode : null;
+        this.Remark = 'Remark' in params ? params.Remark : null;
 
     }
 }
@@ -841,7 +841,7 @@ class NetworkLastInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Count = params.Count || null;
+        this.Count = 'Count' in params ? params.Count : null;
 
         if (params.Infos) {
             this.Infos = new Array();
@@ -908,10 +908,10 @@ class DescribeZoneFlowGenderAvrStayTimeByZoneIdResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.CompanyId = params.CompanyId || null;
-        this.ShopId = params.ShopId || null;
-        this.ZoneId = params.ZoneId || null;
-        this.ZoneName = params.ZoneName || null;
+        this.CompanyId = 'CompanyId' in params ? params.CompanyId : null;
+        this.ShopId = 'ShopId' in params ? params.ShopId : null;
+        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
+        this.ZoneName = 'ZoneName' in params ? params.ZoneName : null;
 
         if (params.Data) {
             this.Data = new Array();
@@ -921,7 +921,7 @@ class DescribeZoneFlowGenderAvrStayTimeByZoneIdResponse extends  AbstractModel {
                 this.Data.push(obj);
             }
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -949,7 +949,7 @@ class DeletePersonFeatureResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1007,10 +1007,10 @@ class DescribeCameraPersonResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.CompanyId = params.CompanyId || null;
-        this.ShopId = params.ShopId || null;
-        this.CameraId = params.CameraId || null;
-        this.PosId = params.PosId || null;
+        this.CompanyId = 'CompanyId' in params ? params.CompanyId : null;
+        this.ShopId = 'ShopId' in params ? params.ShopId : null;
+        this.CameraId = 'CameraId' in params ? params.CameraId : null;
+        this.PosId = 'PosId' in params ? params.PosId : null;
 
         if (params.Infos) {
             this.Infos = new Array();
@@ -1020,7 +1020,7 @@ class DescribeCameraPersonResponse extends  AbstractModel {
                 this.Infos.push(obj);
             }
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1048,7 +1048,7 @@ class ModifyPersonTagInfoResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1100,9 +1100,9 @@ class DescribeShopHourTrafficInfoResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.CompanyId = params.CompanyId || null;
-        this.ShopId = params.ShopId || null;
-        this.TotalCount = params.TotalCount || null;
+        this.CompanyId = 'CompanyId' in params ? params.CompanyId : null;
+        this.ShopId = 'ShopId' in params ? params.ShopId : null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
 
         if (params.ShopHourTrafficInfoSet) {
             this.ShopHourTrafficInfoSet = new Array();
@@ -1112,7 +1112,7 @@ class DescribeShopHourTrafficInfoResponse extends  AbstractModel {
                 this.ShopHourTrafficInfoSet.push(obj);
             }
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1140,7 +1140,7 @@ class RegisterCallbackResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1216,15 +1216,15 @@ class NetworkInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Upload = params.Upload || null;
-        this.Download = params.Download || null;
-        this.MinRtt = params.MinRtt || null;
-        this.AvgRtt = params.AvgRtt || null;
-        this.MaxRtt = params.MaxRtt || null;
-        this.MdevRtt = params.MdevRtt || null;
-        this.Loss = params.Loss || null;
-        this.UpdateTime = params.UpdateTime || null;
-        this.Mac = params.Mac || null;
+        this.Upload = 'Upload' in params ? params.Upload : null;
+        this.Download = 'Download' in params ? params.Download : null;
+        this.MinRtt = 'MinRtt' in params ? params.MinRtt : null;
+        this.AvgRtt = 'AvgRtt' in params ? params.AvgRtt : null;
+        this.MaxRtt = 'MaxRtt' in params ? params.MaxRtt : null;
+        this.MdevRtt = 'MdevRtt' in params ? params.MdevRtt : null;
+        this.Loss = 'Loss' in params ? params.Loss : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.Mac = 'Mac' in params ? params.Mac : null;
 
     }
 }
@@ -1270,10 +1270,10 @@ class DescribeClusterPersonArrivedMallRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.MallId = params.MallId || null;
-        this.PersonId = params.PersonId || null;
-        this.StartTime = params.StartTime || null;
-        this.EndTime = params.EndTime || null;
+        this.MallId = 'MallId' in params ? params.MallId : null;
+        this.PersonId = 'PersonId' in params ? params.PersonId : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
 
     }
 }
@@ -1337,13 +1337,13 @@ class DescribeZoneFlowGenderInfoByZoneIdResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.CompanyId = params.CompanyId || null;
-        this.ShopId = params.ShopId || null;
-        this.ZoneId = params.ZoneId || null;
-        this.ZoneName = params.ZoneName || null;
-        this.MalePercent = params.MalePercent || null;
-        this.FemalePercent = params.FemalePercent || null;
-        this.RequestId = params.RequestId || null;
+        this.CompanyId = 'CompanyId' in params ? params.CompanyId : null;
+        this.ShopId = 'ShopId' in params ? params.ShopId : null;
+        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
+        this.ZoneName = 'ZoneName' in params ? params.ZoneName : null;
+        this.MalePercent = 'MalePercent' in params ? params.MalePercent : null;
+        this.FemalePercent = 'FemalePercent' in params ? params.FemalePercent : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1407,13 +1407,13 @@ class DescribeHistoryNetworkInfoRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Time = params.Time || null;
-        this.CompanyId = params.CompanyId || null;
-        this.ShopId = params.ShopId || null;
-        this.StartDay = params.StartDay || null;
-        this.EndDay = params.EndDay || null;
-        this.Limit = params.Limit || null;
-        this.Offset = params.Offset || null;
+        this.Time = 'Time' in params ? params.Time : null;
+        this.CompanyId = 'CompanyId' in params ? params.CompanyId : null;
+        this.ShopId = 'ShopId' in params ? params.ShopId : null;
+        this.StartDay = 'StartDay' in params ? params.StartDay : null;
+        this.EndDay = 'EndDay' in params ? params.EndDay : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
 
     }
 }
@@ -1465,9 +1465,9 @@ class DescribePersonTraceDetailResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.MallId = params.MallId || null;
-        this.PersonId = params.PersonId || null;
-        this.TraceId = params.TraceId || null;
+        this.MallId = 'MallId' in params ? params.MallId : null;
+        this.PersonId = 'PersonId' in params ? params.PersonId : null;
+        this.TraceId = 'TraceId' in params ? params.TraceId : null;
 
         if (params.CoordinateSet) {
             this.CoordinateSet = new Array();
@@ -1477,72 +1477,36 @@ class DescribePersonTraceDetailResponse extends  AbstractModel {
                 this.CoordinateSet.push(obj);
             }
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
 
 /**
- * 用户到访明细
+ * DescribePersonInfoByFacePicture请求参数结构体
  * @class
  */
-class PersonVisitInfo extends  AbstractModel {
+class DescribePersonInfoByFacePictureRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 用户ID
-         * @type {number || null}
-         */
-        this.PersonId = null;
-
-        /**
-         * 用户到访ID
-         * @type {number || null}
-         */
-        this.VisitId = null;
-
-        /**
-         * 到访时间：Unix时间戳
-         * @type {number || null}
-         */
-        this.InTime = null;
-
-        /**
-         * 抓拍到的头像Base64内容，已弃用，返回默认空值
+         * 优mall集团id，通过"指定身份标识获取客户门店列表"接口获取
          * @type {string || null}
          */
-        this.CapturedPicture = null;
+        this.CompanyId = null;
 
         /**
-         * 口罩类型：0不戴口罩，1戴口罩
+         * 优mall店铺id，通过"指定身份标识获取客户门店列表"接口获取
          * @type {number || null}
          */
-        this.MaskType = null;
+        this.ShopId = null;
 
         /**
-         * 眼镜类型：0不戴眼镜，1普通眼镜 , 2墨镜
-         * @type {number || null}
-         */
-        this.GlassType = null;
-
-        /**
-         * 发型：0 短发,  1长发
-         * @type {number || null}
-         */
-        this.HairType = null;
-
-        /**
-         * 抓拍到的头像Url，在有效期内可以访问下载
+         * 人脸图片BASE编码
          * @type {string || null}
          */
-        this.CapturedPictureUrl = null;
-
-        /**
-         * 抓拍头像的场景图信息
-         * @type {SceneInfo || null}
-         */
-        this.SceneInfo = null;
+        this.Picture = null;
 
     }
 
@@ -1553,20 +1517,9 @@ class PersonVisitInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.PersonId = params.PersonId || null;
-        this.VisitId = params.VisitId || null;
-        this.InTime = params.InTime || null;
-        this.CapturedPicture = params.CapturedPicture || null;
-        this.MaskType = params.MaskType || null;
-        this.GlassType = params.GlassType || null;
-        this.HairType = params.HairType || null;
-        this.CapturedPictureUrl = params.CapturedPictureUrl || null;
-
-        if (params.SceneInfo) {
-            let obj = new SceneInfo();
-            obj.deserialize(params.SceneInfo)
-            this.SceneInfo = obj;
-        }
+        this.CompanyId = 'CompanyId' in params ? params.CompanyId : null;
+        this.ShopId = 'ShopId' in params ? params.ShopId : null;
+        this.Picture = 'Picture' in params ? params.Picture : null;
 
     }
 }
@@ -1642,15 +1595,15 @@ class DescribePersonVisitInfoRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.CompanyId = params.CompanyId || null;
-        this.ShopId = params.ShopId || null;
-        this.Offset = params.Offset || null;
-        this.Limit = params.Limit || null;
-        this.StartDate = params.StartDate || null;
-        this.EndDate = params.EndDate || null;
-        this.PictureExpires = params.PictureExpires || null;
-        this.StartDateTime = params.StartDateTime || null;
-        this.EndDateTime = params.EndDateTime || null;
+        this.CompanyId = 'CompanyId' in params ? params.CompanyId : null;
+        this.ShopId = 'ShopId' in params ? params.ShopId : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.StartDate = 'StartDate' in params ? params.StartDate : null;
+        this.EndDate = 'EndDate' in params ? params.EndDate : null;
+        this.PictureExpires = 'PictureExpires' in params ? params.PictureExpires : null;
+        this.StartDateTime = 'StartDateTime' in params ? params.StartDateTime : null;
+        this.EndDateTime = 'EndDateTime' in params ? params.EndDateTime : null;
 
     }
 }
@@ -1702,9 +1655,9 @@ class DescribeZoneTrafficInfoResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.CompanyId = params.CompanyId || null;
-        this.ShopId = params.ShopId || null;
-        this.TotalCount = params.TotalCount || null;
+        this.CompanyId = 'CompanyId' in params ? params.CompanyId : null;
+        this.ShopId = 'ShopId' in params ? params.ShopId : null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
 
         if (params.ZoneTrafficInfoSet) {
             this.ZoneTrafficInfoSet = new Array();
@@ -1714,7 +1667,7 @@ class DescribeZoneTrafficInfoResponse extends  AbstractModel {
                 this.ZoneTrafficInfoSet.push(obj);
             }
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1754,9 +1707,9 @@ class DeletePersonFeatureRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.CompanyId = params.CompanyId || null;
-        this.ShopId = params.ShopId || null;
-        this.PersonId = params.PersonId || null;
+        this.CompanyId = 'CompanyId' in params ? params.CompanyId : null;
+        this.ShopId = 'ShopId' in params ? params.ShopId : null;
+        this.PersonId = 'PersonId' in params ? params.PersonId : null;
 
     }
 }
@@ -1814,12 +1767,12 @@ class DescribeFaceIdByTempIdRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.CompanyId = params.CompanyId || null;
-        this.ShopId = params.ShopId || null;
-        this.TempId = params.TempId || null;
-        this.CameraId = params.CameraId || null;
-        this.PosId = params.PosId || null;
-        this.PictureExpires = params.PictureExpires || null;
+        this.CompanyId = 'CompanyId' in params ? params.CompanyId : null;
+        this.ShopId = 'ShopId' in params ? params.ShopId : null;
+        this.TempId = 'TempId' in params ? params.TempId : null;
+        this.CameraId = 'CameraId' in params ? params.CameraId : null;
+        this.PosId = 'PosId' in params ? params.PosId : null;
+        this.PictureExpires = 'PictureExpires' in params ? params.PictureExpires : null;
 
     }
 }
@@ -1883,13 +1836,13 @@ class PersonProfile extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.PersonId = params.PersonId || null;
-        this.Gender = params.Gender || null;
-        this.Age = params.Age || null;
-        this.FirstArrivedTime = params.FirstArrivedTime || null;
-        this.ArrivedCount = params.ArrivedCount || null;
-        this.PicUrl = params.PicUrl || null;
-        this.Similarity = params.Similarity || null;
+        this.PersonId = 'PersonId' in params ? params.PersonId : null;
+        this.Gender = 'Gender' in params ? params.Gender : null;
+        this.Age = 'Age' in params ? params.Age : null;
+        this.FirstArrivedTime = 'FirstArrivedTime' in params ? params.FirstArrivedTime : null;
+        this.ArrivedCount = 'ArrivedCount' in params ? params.ArrivedCount : null;
+        this.PicUrl = 'PicUrl' in params ? params.PicUrl : null;
+        this.Similarity = 'Similarity' in params ? params.Similarity : null;
 
     }
 }
@@ -1929,7 +1882,7 @@ class DescribePersonResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = params.TotalCount || null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
 
         if (params.PersonSet) {
             this.PersonSet = new Array();
@@ -1939,7 +1892,7 @@ class DescribePersonResponse extends  AbstractModel {
                 this.PersonSet.push(obj);
             }
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1997,12 +1950,12 @@ class DescribeTrajectoryDataRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.CompanyId = params.CompanyId || null;
-        this.ShopId = params.ShopId || null;
-        this.StartDate = params.StartDate || null;
-        this.EndDate = params.EndDate || null;
-        this.Limit = params.Limit || null;
-        this.Gender = params.Gender || null;
+        this.CompanyId = 'CompanyId' in params ? params.CompanyId : null;
+        this.ShopId = 'ShopId' in params ? params.ShopId : null;
+        this.StartDate = 'StartDate' in params ? params.StartDate : null;
+        this.EndDate = 'EndDate' in params ? params.EndDate : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Gender = 'Gender' in params ? params.Gender : null;
 
     }
 }
@@ -2060,12 +2013,82 @@ class DescribeZoneTrafficInfoRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.CompanyId = params.CompanyId || null;
-        this.ShopId = params.ShopId || null;
-        this.StartDate = params.StartDate || null;
-        this.EndDate = params.EndDate || null;
-        this.Offset = params.Offset || null;
-        this.Limit = params.Limit || null;
+        this.CompanyId = 'CompanyId' in params ? params.CompanyId : null;
+        this.ShopId = 'ShopId' in params ? params.ShopId : null;
+        this.StartDate = 'StartDate' in params ? params.StartDate : null;
+        this.EndDate = 'EndDate' in params ? params.EndDate : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+
+    }
+}
+
+/**
+ * ModifyPersonFeatureInfo返回参数结构体
+ * @class
+ */
+class ModifyPersonFeatureInfoResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 集团ID
+         * @type {string || null}
+         */
+        this.CompanyId = null;
+
+        /**
+         * 店铺ID，如果不填表示操作集团身份库
+         * @type {number || null}
+         */
+        this.ShopId = null;
+
+        /**
+         * 请求的顾客id
+         * @type {number || null}
+         */
+        this.PersonId = null;
+
+        /**
+         * 图片实际绑定person_id，可能与请求的person_id不同，以此id为准
+         * @type {number || null}
+         */
+        this.PersonIdBind = null;
+
+        /**
+         * 请求的顾客类型
+         * @type {number || null}
+         */
+        this.PersonType = null;
+
+        /**
+         * 与请求的person_id类型相同、与请求图片特征相似的一个或多个person_id，需要额外确认这些id是否是同一个人
+         * @type {Array.<number> || null}
+         */
+        this.SimilarPersonIds = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CompanyId = 'CompanyId' in params ? params.CompanyId : null;
+        this.ShopId = 'ShopId' in params ? params.ShopId : null;
+        this.PersonId = 'PersonId' in params ? params.PersonId : null;
+        this.PersonIdBind = 'PersonIdBind' in params ? params.PersonIdBind : null;
+        this.PersonType = 'PersonType' in params ? params.PersonType : null;
+        this.SimilarPersonIds = 'SimilarPersonIds' in params ? params.SimilarPersonIds : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2111,10 +2134,10 @@ class ZoneTrafficInfoDetail extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ZoneId = params.ZoneId || null;
-        this.ZoneName = params.ZoneName || null;
-        this.TrafficTotalCount = params.TrafficTotalCount || null;
-        this.AvgStayTime = params.AvgStayTime || null;
+        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
+        this.ZoneName = 'ZoneName' in params ? params.ZoneName : null;
+        this.TrafficTotalCount = 'TrafficTotalCount' in params ? params.TrafficTotalCount : null;
+        this.AvgStayTime = 'AvgStayTime' in params ? params.AvgStayTime : null;
 
     }
 }
@@ -2166,11 +2189,11 @@ class DescribeZoneFlowGenderAvrStayTimeByZoneIdRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.CompanyId = params.CompanyId || null;
-        this.ShopId = params.ShopId || null;
-        this.ZoneId = params.ZoneId || null;
-        this.StartDate = params.StartDate || null;
-        this.EndDate = params.EndDate || null;
+        this.CompanyId = 'CompanyId' in params ? params.CompanyId : null;
+        this.ShopId = 'ShopId' in params ? params.ShopId : null;
+        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
+        this.StartDate = 'StartDate' in params ? params.StartDate : null;
+        this.EndDate = 'EndDate' in params ? params.EndDate : null;
 
     }
 }
@@ -2216,10 +2239,10 @@ class ZoneFlowAndAvrStayTime extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ZoneId = params.ZoneId || null;
-        this.ZoneName = params.ZoneName || null;
-        this.FlowCount = params.FlowCount || null;
-        this.AvrStayTime = params.AvrStayTime || null;
+        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
+        this.ZoneName = 'ZoneName' in params ? params.ZoneName : null;
+        this.FlowCount = 'FlowCount' in params ? params.FlowCount : null;
+        this.AvrStayTime = 'AvrStayTime' in params ? params.AvrStayTime : null;
 
     }
 }
@@ -2271,11 +2294,11 @@ class SceneInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ScenePictureURL = params.ScenePictureURL || null;
-        this.HeadX = params.HeadX || null;
-        this.HeadY = params.HeadY || null;
-        this.HeadWidth = params.HeadWidth || null;
-        this.HeadHeight = params.HeadHeight || null;
+        this.ScenePictureURL = 'ScenePictureURL' in params ? params.ScenePictureURL : null;
+        this.HeadX = 'HeadX' in params ? params.HeadX : null;
+        this.HeadY = 'HeadY' in params ? params.HeadY : null;
+        this.HeadWidth = 'HeadWidth' in params ? params.HeadWidth : null;
+        this.HeadHeight = 'HeadHeight' in params ? params.HeadHeight : null;
 
     }
 }
@@ -2318,6 +2341,12 @@ class CameraPersonInfo extends  AbstractModel {
          */
         this.Time = null;
 
+        /**
+         * 当前的person基本信息，图片以FacePic为准，结构体内未填
+         * @type {PersonInfo || null}
+         */
+        this.PersonInfo = null;
+
     }
 
     /**
@@ -2327,11 +2356,17 @@ class CameraPersonInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TempId = params.TempId || null;
-        this.FaceId = params.FaceId || null;
-        this.IdType = params.IdType || null;
-        this.FacePic = params.FacePic || null;
-        this.Time = params.Time || null;
+        this.TempId = 'TempId' in params ? params.TempId : null;
+        this.FaceId = 'FaceId' in params ? params.FaceId : null;
+        this.IdType = 'IdType' in params ? params.IdType : null;
+        this.FacePic = 'FacePic' in params ? params.FacePic : null;
+        this.Time = 'Time' in params ? params.Time : null;
+
+        if (params.PersonInfo) {
+            let obj = new PersonInfo();
+            obj.deserialize(params.PersonInfo)
+            this.PersonInfo = obj;
+        }
 
     }
 }
@@ -2383,9 +2418,9 @@ class DescribePersonVisitInfoResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.CompanyId = params.CompanyId || null;
-        this.ShopId = params.ShopId || null;
-        this.TotalCount = params.TotalCount || null;
+        this.CompanyId = 'CompanyId' in params ? params.CompanyId : null;
+        this.ShopId = 'ShopId' in params ? params.ShopId : null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
 
         if (params.PersonVisitInfoSet) {
             this.PersonVisitInfoSet = new Array();
@@ -2395,7 +2430,7 @@ class DescribePersonVisitInfoResponse extends  AbstractModel {
                 this.PersonVisitInfoSet.push(obj);
             }
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2435,9 +2470,9 @@ class DescribeNetworkInfoRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Time = params.Time || null;
-        this.CompanyId = params.CompanyId || null;
-        this.ShopId = params.ShopId || null;
+        this.Time = 'Time' in params ? params.Time : null;
+        this.CompanyId = 'CompanyId' in params ? params.CompanyId : null;
+        this.ShopId = 'ShopId' in params ? params.ShopId : null;
 
     }
 }
@@ -2483,10 +2518,10 @@ class DescribeZoneFlowAndStayTimeRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.CompanyId = params.CompanyId || null;
-        this.ShopId = params.ShopId || null;
-        this.StartDate = params.StartDate || null;
-        this.EndDate = params.EndDate || null;
+        this.CompanyId = 'CompanyId' in params ? params.CompanyId : null;
+        this.ShopId = 'ShopId' in params ? params.ShopId : null;
+        this.StartDate = 'StartDate' in params ? params.StartDate : null;
+        this.EndDate = 'EndDate' in params ? params.EndDate : null;
 
     }
 }
@@ -2538,11 +2573,11 @@ class DescribeZoneFlowHourlyByZoneIdRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.CompanyId = params.CompanyId || null;
-        this.ShopId = params.ShopId || null;
-        this.ZoneId = params.ZoneId || null;
-        this.StartDate = params.StartDate || null;
-        this.EndDate = params.EndDate || null;
+        this.CompanyId = 'CompanyId' in params ? params.CompanyId : null;
+        this.ShopId = 'ShopId' in params ? params.ShopId : null;
+        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
+        this.StartDate = 'StartDate' in params ? params.StartDate : null;
+        this.EndDate = 'EndDate' in params ? params.EndDate : null;
 
     }
 }
@@ -2612,19 +2647,19 @@ class DescribeFaceIdByTempIdResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.CompanyId = params.CompanyId || null;
-        this.ShopId = params.ShopId || null;
-        this.CameraId = params.CameraId || null;
-        this.PosId = params.PosId || null;
-        this.TempId = params.TempId || null;
-        this.FaceId = params.FaceId || null;
+        this.CompanyId = 'CompanyId' in params ? params.CompanyId : null;
+        this.ShopId = 'ShopId' in params ? params.ShopId : null;
+        this.CameraId = 'CameraId' in params ? params.CameraId : null;
+        this.PosId = 'PosId' in params ? params.PosId : null;
+        this.TempId = 'TempId' in params ? params.TempId : null;
+        this.FaceId = 'FaceId' in params ? params.FaceId : null;
 
         if (params.PersonInfo) {
             let obj = new PersonInfo();
             obj.deserialize(params.PersonInfo)
             this.PersonInfo = obj;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2664,9 +2699,9 @@ class TrajectorySunData extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Zones = params.Zones || null;
-        this.Count = params.Count || null;
-        this.AvgStayTime = params.AvgStayTime || null;
+        this.Zones = 'Zones' in params ? params.Zones : null;
+        this.Count = 'Count' in params ? params.Count : null;
+        this.AvgStayTime = 'AvgStayTime' in params ? params.AvgStayTime : null;
 
     }
 }
@@ -2706,8 +2741,8 @@ class ModifyPersonTagInfoRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.CompanyId = params.CompanyId || null;
-        this.ShopId = params.ShopId || null;
+        this.CompanyId = 'CompanyId' in params ? params.CompanyId : null;
+        this.ShopId = 'ShopId' in params ? params.ShopId : null;
 
         if (params.Tags) {
             this.Tags = new Array();
@@ -2756,8 +2791,8 @@ class ShopDayTrafficInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Date = params.Date || null;
-        this.DayTrafficTotalCount = params.DayTrafficTotalCount || null;
+        this.Date = 'Date' in params ? params.Date : null;
+        this.DayTrafficTotalCount = 'DayTrafficTotalCount' in params ? params.DayTrafficTotalCount : null;
 
         if (params.GenderAgeTrafficDetailSet) {
             this.GenderAgeTrafficDetailSet = new Array();
@@ -2806,9 +2841,9 @@ class DescribePersonRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.MallId = params.MallId || null;
-        this.Offset = params.Offset || null;
-        this.Limit = params.Limit || null;
+        this.MallId = 'MallId' in params ? params.MallId : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
 
     }
 }
@@ -2860,9 +2895,9 @@ class DescribePersonTraceResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.MallId = params.MallId || null;
-        this.MallCode = params.MallCode || null;
-        this.PersonId = params.PersonId || null;
+        this.MallId = 'MallId' in params ? params.MallId : null;
+        this.MallCode = 'MallCode' in params ? params.MallCode : null;
+        this.PersonId = 'PersonId' in params ? params.PersonId : null;
 
         if (params.TraceRouteSet) {
             this.TraceRouteSet = new Array();
@@ -2872,7 +2907,7 @@ class DescribePersonTraceResponse extends  AbstractModel {
                 this.TraceRouteSet.push(obj);
             }
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2906,7 +2941,7 @@ class PersonTraceRoute extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TraceId = params.TraceId || null;
+        this.TraceId = 'TraceId' in params ? params.TraceId : null;
 
         if (params.TracePointSet) {
             this.TracePointSet = new Array();
@@ -2964,6 +2999,18 @@ class PersonTracePoint extends  AbstractModel {
          */
         this.CapPic = null;
 
+        /**
+         * 购物袋类型
+         * @type {number || null}
+         */
+        this.ShoppingBagType = null;
+
+        /**
+         * 购物袋数量
+         * @type {number || null}
+         */
+        this.ShoppingBagCount = null;
+
     }
 
     /**
@@ -2973,12 +3020,14 @@ class PersonTracePoint extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.MallAreaId = params.MallAreaId || null;
-        this.ShopId = params.ShopId || null;
-        this.MallAreaType = params.MallAreaType || null;
-        this.TraceEventType = params.TraceEventType || null;
-        this.TraceEventTime = params.TraceEventTime || null;
-        this.CapPic = params.CapPic || null;
+        this.MallAreaId = 'MallAreaId' in params ? params.MallAreaId : null;
+        this.ShopId = 'ShopId' in params ? params.ShopId : null;
+        this.MallAreaType = 'MallAreaType' in params ? params.MallAreaType : null;
+        this.TraceEventType = 'TraceEventType' in params ? params.TraceEventType : null;
+        this.TraceEventTime = 'TraceEventTime' in params ? params.TraceEventTime : null;
+        this.CapPic = 'CapPic' in params ? params.CapPic : null;
+        this.ShoppingBagType = 'ShoppingBagType' in params ? params.ShoppingBagType : null;
+        this.ShoppingBagCount = 'ShoppingBagCount' in params ? params.ShoppingBagCount : null;
 
     }
 }
@@ -3012,7 +3061,7 @@ class ZoneTrafficInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Date = params.Date || null;
+        this.Date = 'Date' in params ? params.Date : null;
 
         if (params.ZoneTrafficInfoDetailSet) {
             this.ZoneTrafficInfoDetailSet = new Array();
@@ -3061,7 +3110,7 @@ class DescribeNetworkInfoResponse extends  AbstractModel {
             obj.deserialize(params.InstanceSet)
             this.InstanceSet = obj;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3167,20 +3216,20 @@ class NetworkAndShopInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.CompanyId = params.CompanyId || null;
-        this.ShopId = params.ShopId || null;
-        this.Province = params.Province || null;
-        this.City = params.City || null;
-        this.ShopName = params.ShopName || null;
-        this.Upload = params.Upload || null;
-        this.Download = params.Download || null;
-        this.MinRtt = params.MinRtt || null;
-        this.AvgRtt = params.AvgRtt || null;
-        this.MaxRtt = params.MaxRtt || null;
-        this.MdevRtt = params.MdevRtt || null;
-        this.Loss = params.Loss || null;
-        this.UpdateTime = params.UpdateTime || null;
-        this.Mac = params.Mac || null;
+        this.CompanyId = 'CompanyId' in params ? params.CompanyId : null;
+        this.ShopId = 'ShopId' in params ? params.ShopId : null;
+        this.Province = 'Province' in params ? params.Province : null;
+        this.City = 'City' in params ? params.City : null;
+        this.ShopName = 'ShopName' in params ? params.ShopName : null;
+        this.Upload = 'Upload' in params ? params.Upload : null;
+        this.Download = 'Download' in params ? params.Download : null;
+        this.MinRtt = 'MinRtt' in params ? params.MinRtt : null;
+        this.AvgRtt = 'AvgRtt' in params ? params.AvgRtt : null;
+        this.MaxRtt = 'MaxRtt' in params ? params.MaxRtt : null;
+        this.MdevRtt = 'MdevRtt' in params ? params.MdevRtt : null;
+        this.Loss = 'Loss' in params ? params.Loss : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.Mac = 'Mac' in params ? params.Mac : null;
 
     }
 }
@@ -3232,11 +3281,11 @@ class DescribeZoneFlowGenderInfoByZoneIdRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.CompanyId = params.CompanyId || null;
-        this.ShopId = params.ShopId || null;
-        this.ZoneId = params.ZoneId || null;
-        this.StartDate = params.StartDate || null;
-        this.EndDate = params.EndDate || null;
+        this.CompanyId = 'CompanyId' in params ? params.CompanyId : null;
+        this.ShopId = 'ShopId' in params ? params.ShopId : null;
+        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
+        this.StartDate = 'StartDate' in params ? params.StartDate : null;
+        this.EndDate = 'EndDate' in params ? params.EndDate : null;
 
     }
 }
@@ -3294,12 +3343,12 @@ class DescribeShopHourTrafficInfoRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.CompanyId = params.CompanyId || null;
-        this.ShopId = params.ShopId || null;
-        this.StartDate = params.StartDate || null;
-        this.EndDate = params.EndDate || null;
-        this.Offset = params.Offset || null;
-        this.Limit = params.Limit || null;
+        this.CompanyId = 'CompanyId' in params ? params.CompanyId : null;
+        this.ShopId = 'ShopId' in params ? params.ShopId : null;
+        this.StartDate = 'StartDate' in params ? params.StartDate : null;
+        this.EndDate = 'EndDate' in params ? params.EndDate : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
 
     }
 }
@@ -3345,10 +3394,10 @@ class RegisterCallbackRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.CompanyId = params.CompanyId || null;
-        this.BackUrl = params.BackUrl || null;
-        this.Time = params.Time || null;
-        this.NeedFacePic = params.NeedFacePic || null;
+        this.CompanyId = 'CompanyId' in params ? params.CompanyId : null;
+        this.BackUrl = 'BackUrl' in params ? params.BackUrl : null;
+        this.Time = 'Time' in params ? params.Time : null;
+        this.NeedFacePic = 'NeedFacePic' in params ? params.NeedFacePic : null;
 
     }
 }
@@ -3382,8 +3431,8 @@ class DescribeShopInfoRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Offset = params.Offset || null;
-        this.Limit = params.Limit || null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
 
     }
 }
@@ -3447,12 +3496,12 @@ class NetworkHistoryInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Count = params.Count || null;
-        this.CompanyId = params.CompanyId || null;
-        this.ShopId = params.ShopId || null;
-        this.Province = params.Province || null;
-        this.City = params.City || null;
-        this.ShopName = params.ShopName || null;
+        this.Count = 'Count' in params ? params.Count : null;
+        this.CompanyId = 'CompanyId' in params ? params.CompanyId : null;
+        this.ShopId = 'ShopId' in params ? params.ShopId : null;
+        this.Province = 'Province' in params ? params.Province : null;
+        this.City = 'City' in params ? params.City : null;
+        this.ShopName = 'ShopName' in params ? params.ShopName : null;
 
         if (params.Infos) {
             this.Infos = new Array();
@@ -3519,6 +3568,18 @@ PersonType=2时(黑名单)，0普通黑名单，1小偷)
          */
         this.PersonSubType = null;
 
+        /**
+         * 到访次数，-1表示未知
+         * @type {number || null}
+         */
+        this.VisitTimes = null;
+
+        /**
+         * 到访天数，-1表示未知
+         * @type {number || null}
+         */
+        this.VisitDays = null;
+
     }
 
     /**
@@ -3528,13 +3589,15 @@ PersonType=2时(黑名单)，0普通黑名单，1小偷)
         if (!params) {
             return;
         }
-        this.PersonId = params.PersonId || null;
-        this.PersonPicture = params.PersonPicture || null;
-        this.Gender = params.Gender || null;
-        this.Age = params.Age || null;
-        this.PersonType = params.PersonType || null;
-        this.PersonPictureUrl = params.PersonPictureUrl || null;
-        this.PersonSubType = params.PersonSubType || null;
+        this.PersonId = 'PersonId' in params ? params.PersonId : null;
+        this.PersonPicture = 'PersonPicture' in params ? params.PersonPicture : null;
+        this.Gender = 'Gender' in params ? params.Gender : null;
+        this.Age = 'Age' in params ? params.Age : null;
+        this.PersonType = 'PersonType' in params ? params.PersonType : null;
+        this.PersonPictureUrl = 'PersonPictureUrl' in params ? params.PersonPictureUrl : null;
+        this.PersonSubType = 'PersonSubType' in params ? params.PersonSubType : null;
+        this.VisitTimes = 'VisitTimes' in params ? params.VisitTimes : null;
+        this.VisitDays = 'VisitDays' in params ? params.VisitDays : null;
 
     }
 }
@@ -3574,9 +3637,9 @@ class PersonTagInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.OldType = params.OldType || null;
-        this.NewType = params.NewType || null;
-        this.PersonId = params.PersonId || null;
+        this.OldType = 'OldType' in params ? params.OldType : null;
+        this.NewType = 'NewType' in params ? params.NewType : null;
+        this.PersonId = 'PersonId' in params ? params.PersonId : null;
 
     }
 }
@@ -3610,8 +3673,8 @@ class ZoneHourFlow extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Hour = params.Hour || null;
-        this.FlowCount = params.FlowCount || null;
+        this.Hour = 'Hour' in params ? params.Hour : null;
+        this.FlowCount = 'FlowCount' in params ? params.FlowCount : null;
 
     }
 }
@@ -3645,7 +3708,7 @@ class ShopHourTrafficInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Date = params.Date || null;
+        this.Date = 'Date' in params ? params.Date : null;
 
         if (params.HourTrafficInfoDetailSet) {
             this.HourTrafficInfoDetailSet = new Array();
@@ -3700,10 +3763,10 @@ class DescribeClusterPersonTraceRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.MallId = params.MallId || null;
-        this.PersonId = params.PersonId || null;
-        this.StartTime = params.StartTime || null;
-        this.EndTime = params.EndTime || null;
+        this.MallId = 'MallId' in params ? params.MallId : null;
+        this.PersonId = 'PersonId' in params ? params.PersonId : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
 
     }
 }
@@ -3773,14 +3836,77 @@ class PersonCoordinate extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.CADX = params.CADX || null;
-        this.CADY = params.CADY || null;
-        this.CapTime = params.CapTime || null;
-        this.CapPic = params.CapPic || null;
-        this.MallAreaType = params.MallAreaType || null;
-        this.PosId = params.PosId || null;
-        this.ShopId = params.ShopId || null;
-        this.Event = params.Event || null;
+        this.CADX = 'CADX' in params ? params.CADX : null;
+        this.CADY = 'CADY' in params ? params.CADY : null;
+        this.CapTime = 'CapTime' in params ? params.CapTime : null;
+        this.CapPic = 'CapPic' in params ? params.CapPic : null;
+        this.MallAreaType = 'MallAreaType' in params ? params.MallAreaType : null;
+        this.PosId = 'PosId' in params ? params.PosId : null;
+        this.ShopId = 'ShopId' in params ? params.ShopId : null;
+        this.Event = 'Event' in params ? params.Event : null;
+
+    }
+}
+
+/**
+ * ModifyPersonFeatureInfo请求参数结构体
+ * @class
+ */
+class ModifyPersonFeatureInfoRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 集团ID
+         * @type {string || null}
+         */
+        this.CompanyId = null;
+
+        /**
+         * 需要修改的顾客id
+         * @type {number || null}
+         */
+        this.PersonId = null;
+
+        /**
+         * 图片BASE编码
+         * @type {string || null}
+         */
+        this.Picture = null;
+
+        /**
+         * 图片名称（尽量不要重复）
+         * @type {string || null}
+         */
+        this.PictureName = null;
+
+        /**
+         * 人物类型，仅能操作黑白名单顾客（1 白名单，2 表示黑名单，101表示集团白名单，102表示集团黑名单）
+         * @type {number || null}
+         */
+        this.PersonType = null;
+
+        /**
+         * 店铺ID，如果不填表示操作集团身份库
+         * @type {number || null}
+         */
+        this.ShopId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CompanyId = 'CompanyId' in params ? params.CompanyId : null;
+        this.PersonId = 'PersonId' in params ? params.PersonId : null;
+        this.Picture = 'Picture' in params ? params.Picture : null;
+        this.PictureName = 'PictureName' in params ? params.PictureName : null;
+        this.PersonType = 'PersonType' in params ? params.PersonType : null;
+        this.ShopId = 'ShopId' in params ? params.ShopId : null;
 
     }
 }
@@ -3814,8 +3940,8 @@ class ZoneDayFlow extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Day = params.Day || null;
-        this.FlowCount = params.FlowCount || null;
+        this.Day = 'Day' in params ? params.Day : null;
+        this.FlowCount = 'FlowCount' in params ? params.FlowCount : null;
 
     }
 }
@@ -3861,10 +3987,10 @@ class DescribePersonTraceRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.MallId = params.MallId || null;
-        this.PersonId = params.PersonId || null;
-        this.StartTime = params.StartTime || null;
-        this.EndTime = params.EndTime || null;
+        this.MallId = 'MallId' in params ? params.MallId : null;
+        this.PersonId = 'PersonId' in params ? params.PersonId : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
 
     }
 }
@@ -3922,10 +4048,10 @@ class DescribeZoneFlowHourlyByZoneIdResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.CompanyId = params.CompanyId || null;
-        this.ShopId = params.ShopId || null;
-        this.ZoneId = params.ZoneId || null;
-        this.ZoneName = params.ZoneName || null;
+        this.CompanyId = 'CompanyId' in params ? params.CompanyId : null;
+        this.ShopId = 'ShopId' in params ? params.ShopId : null;
+        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
+        this.ZoneName = 'ZoneName' in params ? params.ZoneName : null;
 
         if (params.Data) {
             this.Data = new Array();
@@ -3935,7 +4061,7 @@ class DescribeZoneFlowHourlyByZoneIdResponse extends  AbstractModel {
                 this.Data.push(obj);
             }
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3987,11 +4113,11 @@ class DescribeZoneFlowDailyByZoneIdRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.CompanyId = params.CompanyId || null;
-        this.ShopId = params.ShopId || null;
-        this.ZoneId = params.ZoneId || null;
-        this.StartDate = params.StartDate || null;
-        this.EndDate = params.EndDate || null;
+        this.CompanyId = 'CompanyId' in params ? params.CompanyId : null;
+        this.ShopId = 'ShopId' in params ? params.ShopId : null;
+        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
+        this.StartDate = 'StartDate' in params ? params.StartDate : null;
+        this.EndDate = 'EndDate' in params ? params.EndDate : null;
 
     }
 }
@@ -4043,9 +4169,9 @@ class DescribePersonInfoResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.CompanyId = params.CompanyId || null;
-        this.ShopId = params.ShopId || null;
-        this.TotalCount = params.TotalCount || null;
+        this.CompanyId = 'CompanyId' in params ? params.CompanyId : null;
+        this.ShopId = 'ShopId' in params ? params.ShopId : null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
 
         if (params.PersonInfoSet) {
             this.PersonInfoSet = new Array();
@@ -4055,7 +4181,7 @@ class DescribePersonInfoResponse extends  AbstractModel {
                 this.PersonInfoSet.push(obj);
             }
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -4089,7 +4215,7 @@ class DailyTracePoint extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TraceDate = params.TraceDate || null;
+        this.TraceDate = 'TraceDate' in params ? params.TraceDate : null;
 
         if (params.TracePointSet) {
             this.TracePointSet = new Array();
@@ -4126,7 +4252,7 @@ class CreateAccountResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -4166,7 +4292,7 @@ class DescribeHistoryNetworkInfoResponse extends  AbstractModel {
             obj.deserialize(params.InstanceSet)
             this.InstanceSet = obj;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -4212,10 +4338,10 @@ class CreateFacePictureResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.PersonId = params.PersonId || null;
-        this.Status = params.Status || null;
-        this.PictureUrl = params.PictureUrl || null;
-        this.RequestId = params.RequestId || null;
+        this.PersonId = 'PersonId' in params ? params.PersonId : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.PictureUrl = 'PictureUrl' in params ? params.PictureUrl : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -4255,7 +4381,7 @@ class DescribeShopInfoResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = params.TotalCount || null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
 
         if (params.ShopInfoSet) {
             this.ShopInfoSet = new Array();
@@ -4265,36 +4391,72 @@ class DescribeShopInfoResponse extends  AbstractModel {
                 this.ShopInfoSet.push(obj);
             }
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
 
 /**
- * DescribePersonInfoByFacePicture请求参数结构体
+ * 用户到访明细
  * @class
  */
-class DescribePersonInfoByFacePictureRequest extends  AbstractModel {
+class PersonVisitInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 优mall集团id，通过"指定身份标识获取客户门店列表"接口获取
-         * @type {string || null}
-         */
-        this.CompanyId = null;
-
-        /**
-         * 优mall店铺id，通过"指定身份标识获取客户门店列表"接口获取
+         * 用户ID
          * @type {number || null}
          */
-        this.ShopId = null;
+        this.PersonId = null;
 
         /**
-         * 人脸图片BASE编码
+         * 用户到访ID
+         * @type {number || null}
+         */
+        this.VisitId = null;
+
+        /**
+         * 到访时间：Unix时间戳
+         * @type {number || null}
+         */
+        this.InTime = null;
+
+        /**
+         * 抓拍到的头像Base64内容，已弃用，返回默认空值
          * @type {string || null}
          */
-        this.Picture = null;
+        this.CapturedPicture = null;
+
+        /**
+         * 口罩类型：0不戴口罩，1戴口罩
+         * @type {number || null}
+         */
+        this.MaskType = null;
+
+        /**
+         * 眼镜类型：0不戴眼镜，1普通眼镜 , 2墨镜
+         * @type {number || null}
+         */
+        this.GlassType = null;
+
+        /**
+         * 发型：0 短发,  1长发
+         * @type {number || null}
+         */
+        this.HairType = null;
+
+        /**
+         * 抓拍到的头像Url，在有效期内可以访问下载
+         * @type {string || null}
+         */
+        this.CapturedPictureUrl = null;
+
+        /**
+         * 抓拍头像的场景图信息
+         * @type {SceneInfo || null}
+         */
+        this.SceneInfo = null;
 
     }
 
@@ -4305,9 +4467,20 @@ class DescribePersonInfoByFacePictureRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.CompanyId = params.CompanyId || null;
-        this.ShopId = params.ShopId || null;
-        this.Picture = params.Picture || null;
+        this.PersonId = 'PersonId' in params ? params.PersonId : null;
+        this.VisitId = 'VisitId' in params ? params.VisitId : null;
+        this.InTime = 'InTime' in params ? params.InTime : null;
+        this.CapturedPicture = 'CapturedPicture' in params ? params.CapturedPicture : null;
+        this.MaskType = 'MaskType' in params ? params.MaskType : null;
+        this.GlassType = 'GlassType' in params ? params.GlassType : null;
+        this.HairType = 'HairType' in params ? params.HairType : null;
+        this.CapturedPictureUrl = 'CapturedPictureUrl' in params ? params.CapturedPictureUrl : null;
+
+        if (params.SceneInfo) {
+            let obj = new SceneInfo();
+            obj.deserialize(params.SceneInfo)
+            this.SceneInfo = obj;
+        }
 
     }
 }
@@ -4365,12 +4538,12 @@ class CreateFacePictureRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.CompanyId = params.CompanyId || null;
-        this.PersonType = params.PersonType || null;
-        this.Picture = params.Picture || null;
-        this.PictureName = params.PictureName || null;
-        this.ShopId = params.ShopId || null;
-        this.IsForceUpload = params.IsForceUpload || null;
+        this.CompanyId = 'CompanyId' in params ? params.CompanyId : null;
+        this.PersonType = 'PersonType' in params ? params.PersonType : null;
+        this.Picture = 'Picture' in params ? params.Picture : null;
+        this.PictureName = 'PictureName' in params ? params.PictureName : null;
+        this.ShopId = 'ShopId' in params ? params.ShopId : null;
+        this.IsForceUpload = 'IsForceUpload' in params ? params.IsForceUpload : null;
 
     }
 }
@@ -4422,11 +4595,11 @@ class DescribeZoneFlowAgeInfoByZoneIdRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.CompanyId = params.CompanyId || null;
-        this.ShopId = params.ShopId || null;
-        this.ZoneId = params.ZoneId || null;
-        this.StartDate = params.StartDate || null;
-        this.EndDate = params.EndDate || null;
+        this.CompanyId = 'CompanyId' in params ? params.CompanyId : null;
+        this.ShopId = 'ShopId' in params ? params.ShopId : null;
+        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
+        this.StartDate = 'StartDate' in params ? params.StartDate : null;
+        this.EndDate = 'EndDate' in params ? params.EndDate : null;
 
     }
 }
@@ -4490,13 +4663,13 @@ class ShopInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.CompanyId = params.CompanyId || null;
-        this.ShopId = params.ShopId || null;
-        this.ShopName = params.ShopName || null;
-        this.ShopCode = params.ShopCode || null;
-        this.Province = params.Province || null;
-        this.City = params.City || null;
-        this.CompanyName = params.CompanyName || null;
+        this.CompanyId = 'CompanyId' in params ? params.CompanyId : null;
+        this.ShopId = 'ShopId' in params ? params.ShopId : null;
+        this.ShopName = 'ShopName' in params ? params.ShopName : null;
+        this.ShopCode = 'ShopCode' in params ? params.ShopCode : null;
+        this.Province = 'Province' in params ? params.Province : null;
+        this.City = 'City' in params ? params.City : null;
+        this.CompanyName = 'CompanyName' in params ? params.CompanyName : null;
 
     }
 }
@@ -4536,7 +4709,7 @@ class ModifyPersonTypeRequest extends  AbstractModel {
         /**
          * 身份子类型:
 PersonType=0时(普通顾客)，0普通顾客
-PersonType=1时(白名单)，0店员，1商场人员，2其他类型人员，3区域经理，4注册用户，5VIP用户
+PersonType=1时(白名单)，0店员，1商场人员，2其他类型人员，3区域经理，4注册会员，5VIP用户
 PersonType=2时(黑名单)，0普通黑名单，1小偷)
          * @type {number || null}
          */
@@ -4551,11 +4724,11 @@ PersonType=2时(黑名单)，0普通黑名单，1小偷)
         if (!params) {
             return;
         }
-        this.CompanyId = params.CompanyId || null;
-        this.ShopId = params.ShopId || null;
-        this.PersonId = params.PersonId || null;
-        this.PersonType = params.PersonType || null;
-        this.PersonSubType = params.PersonSubType || null;
+        this.CompanyId = 'CompanyId' in params ? params.CompanyId : null;
+        this.ShopId = 'ShopId' in params ? params.ShopId : null;
+        this.PersonId = 'PersonId' in params ? params.PersonId : null;
+        this.PersonType = 'PersonType' in params ? params.PersonType : null;
+        this.PersonSubType = 'PersonSubType' in params ? params.PersonSubType : null;
 
     }
 }
@@ -4613,12 +4786,12 @@ class ArrivedMallInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ArrivedTime = params.ArrivedTime || null;
-        this.LeaveTime = params.LeaveTime || null;
-        this.StaySecond = params.StaySecond || null;
-        this.InCapPic = params.InCapPic || null;
-        this.OutCapPic = params.OutCapPic || null;
-        this.TraceId = params.TraceId || null;
+        this.ArrivedTime = 'ArrivedTime' in params ? params.ArrivedTime : null;
+        this.LeaveTime = 'LeaveTime' in params ? params.LeaveTime : null;
+        this.StaySecond = 'StaySecond' in params ? params.StaySecond : null;
+        this.InCapPic = 'InCapPic' in params ? params.InCapPic : null;
+        this.OutCapPic = 'OutCapPic' in params ? params.OutCapPic : null;
+        this.TraceId = 'TraceId' in params ? params.TraceId : null;
 
     }
 }
@@ -4652,8 +4825,8 @@ class ZoneAgeGroupAvrStayTime extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.MaleAvrStayTime = params.MaleAvrStayTime || null;
-        this.FemaleAvrStayTime = params.FemaleAvrStayTime || null;
+        this.MaleAvrStayTime = 'MaleAvrStayTime' in params ? params.MaleAvrStayTime : null;
+        this.FemaleAvrStayTime = 'FemaleAvrStayTime' in params ? params.FemaleAvrStayTime : null;
 
     }
 }
@@ -4699,10 +4872,10 @@ class DescribePersonArrivedMallRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.MallId = params.MallId || null;
-        this.PersonId = params.PersonId || null;
-        this.StartTime = params.StartTime || null;
-        this.EndTime = params.EndTime || null;
+        this.MallId = 'MallId' in params ? params.MallId : null;
+        this.PersonId = 'PersonId' in params ? params.PersonId : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
 
     }
 }
@@ -4772,14 +4945,14 @@ class DescribeCameraPersonRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.CompanyId = params.CompanyId || null;
-        this.ShopId = params.ShopId || null;
-        this.CameraId = params.CameraId || null;
-        this.StartTime = params.StartTime || null;
-        this.EndTime = params.EndTime || null;
-        this.PosId = params.PosId || null;
-        this.Num = params.Num || null;
-        this.IsNeedPic = params.IsNeedPic || null;
+        this.CompanyId = 'CompanyId' in params ? params.CompanyId : null;
+        this.ShopId = 'ShopId' in params ? params.ShopId : null;
+        this.CameraId = 'CameraId' in params ? params.CameraId : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.PosId = 'PosId' in params ? params.PosId : null;
+        this.Num = 'Num' in params ? params.Num : null;
+        this.IsNeedPic = 'IsNeedPic' in params ? params.IsNeedPic : null;
 
     }
 }
@@ -4831,9 +5004,9 @@ class DescribeShopTrafficInfoResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.CompanyId = params.CompanyId || null;
-        this.ShopId = params.ShopId || null;
-        this.TotalCount = params.TotalCount || null;
+        this.CompanyId = 'CompanyId' in params ? params.CompanyId : null;
+        this.ShopId = 'ShopId' in params ? params.ShopId : null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
 
         if (params.ShopDayTrafficInfoSet) {
             this.ShopDayTrafficInfoSet = new Array();
@@ -4843,7 +5016,7 @@ class DescribeShopTrafficInfoResponse extends  AbstractModel {
                 this.ShopDayTrafficInfoSet.push(obj);
             }
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -4913,12 +5086,12 @@ class DescribeTrajectoryDataResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.CompanyId = params.CompanyId || null;
-        this.ShopId = params.ShopId || null;
-        this.TotalPerson = params.TotalPerson || null;
-        this.TotalTrajectory = params.TotalTrajectory || null;
-        this.Person = params.Person || null;
-        this.Trajectory = params.Trajectory || null;
+        this.CompanyId = 'CompanyId' in params ? params.CompanyId : null;
+        this.ShopId = 'ShopId' in params ? params.ShopId : null;
+        this.TotalPerson = 'TotalPerson' in params ? params.TotalPerson : null;
+        this.TotalTrajectory = 'TotalTrajectory' in params ? params.TotalTrajectory : null;
+        this.Person = 'Person' in params ? params.Person : null;
+        this.Trajectory = 'Trajectory' in params ? params.Trajectory : null;
 
         if (params.Data) {
             this.Data = new Array();
@@ -4928,7 +5101,7 @@ class DescribeTrajectoryDataResponse extends  AbstractModel {
                 this.Data.push(obj);
             }
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -4960,7 +5133,7 @@ module.exports = {
     DescribeZoneFlowGenderInfoByZoneIdResponse: DescribeZoneFlowGenderInfoByZoneIdResponse,
     DescribeHistoryNetworkInfoRequest: DescribeHistoryNetworkInfoRequest,
     DescribePersonTraceDetailResponse: DescribePersonTraceDetailResponse,
-    PersonVisitInfo: PersonVisitInfo,
+    DescribePersonInfoByFacePictureRequest: DescribePersonInfoByFacePictureRequest,
     DescribePersonVisitInfoRequest: DescribePersonVisitInfoRequest,
     DescribeZoneTrafficInfoResponse: DescribeZoneTrafficInfoResponse,
     DeletePersonFeatureRequest: DeletePersonFeatureRequest,
@@ -4969,6 +5142,7 @@ module.exports = {
     DescribePersonResponse: DescribePersonResponse,
     DescribeTrajectoryDataRequest: DescribeTrajectoryDataRequest,
     DescribeZoneTrafficInfoRequest: DescribeZoneTrafficInfoRequest,
+    ModifyPersonFeatureInfoResponse: ModifyPersonFeatureInfoResponse,
     ZoneTrafficInfoDetail: ZoneTrafficInfoDetail,
     DescribeZoneFlowGenderAvrStayTimeByZoneIdRequest: DescribeZoneFlowGenderAvrStayTimeByZoneIdRequest,
     ZoneFlowAndAvrStayTime: ZoneFlowAndAvrStayTime,
@@ -5000,6 +5174,7 @@ module.exports = {
     ShopHourTrafficInfo: ShopHourTrafficInfo,
     DescribeClusterPersonTraceRequest: DescribeClusterPersonTraceRequest,
     PersonCoordinate: PersonCoordinate,
+    ModifyPersonFeatureInfoRequest: ModifyPersonFeatureInfoRequest,
     ZoneDayFlow: ZoneDayFlow,
     DescribePersonTraceRequest: DescribePersonTraceRequest,
     DescribeZoneFlowHourlyByZoneIdResponse: DescribeZoneFlowHourlyByZoneIdResponse,
@@ -5010,7 +5185,7 @@ module.exports = {
     DescribeHistoryNetworkInfoResponse: DescribeHistoryNetworkInfoResponse,
     CreateFacePictureResponse: CreateFacePictureResponse,
     DescribeShopInfoResponse: DescribeShopInfoResponse,
-    DescribePersonInfoByFacePictureRequest: DescribePersonInfoByFacePictureRequest,
+    PersonVisitInfo: PersonVisitInfo,
     CreateFacePictureRequest: CreateFacePictureRequest,
     DescribeZoneFlowAgeInfoByZoneIdRequest: DescribeZoneFlowAgeInfoByZoneIdRequest,
     ShopInfo: ShopInfo,

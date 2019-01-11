@@ -45,8 +45,8 @@ class CreateLicenseResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.License = params.License || null;
-        this.RequestId = params.RequestId || null;
+        this.License = 'License' in params ? params.License : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -80,8 +80,8 @@ class PlaybackPolicy extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.LicenseDurationSeconds = params.LicenseDurationSeconds || null;
-        this.PlaybackDurationSeconds = params.PlaybackDurationSeconds || null;
+        this.LicenseDurationSeconds = 'LicenseDurationSeconds' in params ? params.LicenseDurationSeconds : null;
+        this.PlaybackDurationSeconds = 'PlaybackDurationSeconds' in params ? params.PlaybackDurationSeconds : null;
 
     }
 }
@@ -139,10 +139,10 @@ class StartEncryptionRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.CosEndPoint = params.CosEndPoint || null;
-        this.CosSecretId = params.CosSecretId || null;
-        this.CosSecretKey = params.CosSecretKey || null;
-        this.DrmType = params.DrmType || null;
+        this.CosEndPoint = 'CosEndPoint' in params ? params.CosEndPoint : null;
+        this.CosSecretId = 'CosSecretId' in params ? params.CosSecretId : null;
+        this.CosSecretKey = 'CosSecretKey' in params ? params.CosSecretKey : null;
+        this.DrmType = 'DrmType' in params ? params.DrmType : null;
 
         if (params.SourceObject) {
             let obj = new DrmSourceObject();
@@ -221,10 +221,10 @@ Fairplay方案无该值。
                 this.Keys.push(obj);
             }
         }
-        this.SessionKey = params.SessionKey || null;
-        this.ContentId = params.ContentId || null;
-        this.Pssh = params.Pssh || null;
-        this.RequestId = params.RequestId || null;
+        this.SessionKey = 'SessionKey' in params ? params.SessionKey : null;
+        this.ContentId = 'ContentId' in params ? params.ContentId : null;
+        this.Pssh = 'Pssh' in params ? params.Pssh : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -258,8 +258,8 @@ class DrmOutputPara extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Type = params.Type || null;
-        this.Language = params.Language || null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Language = 'Language' in params ? params.Language : null;
 
     }
 }
@@ -312,10 +312,10 @@ class CreateLicenseRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.DrmType = params.DrmType || null;
-        this.LicenseRequest = params.LicenseRequest || null;
-        this.ContentType = params.ContentType || null;
-        this.Tracks = params.Tracks || null;
+        this.DrmType = 'DrmType' in params ? params.DrmType : null;
+        this.LicenseRequest = 'LicenseRequest' in params ? params.LicenseRequest : null;
+        this.ContentType = 'ContentType' in params ? params.ContentType : null;
+        this.Tracks = 'Tracks' in params ? params.Tracks : null;
 
         if (params.PlaybackPolicy) {
             let obj = new PlaybackPolicy();
@@ -349,7 +349,7 @@ class StartEncryptionResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -395,10 +395,10 @@ class Key extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Track = params.Track || null;
-        this.KeyId = params.KeyId || null;
-        this.Key = params.Key || null;
-        this.Iv = params.Iv || null;
+        this.Track = 'Track' in params ? params.Track : null;
+        this.KeyId = 'KeyId' in params ? params.KeyId : null;
+        this.Key = 'Key' in params ? params.Key : null;
+        this.Iv = 'Iv' in params ? params.Iv : null;
 
     }
 }
@@ -452,11 +452,11 @@ class DescribeKeysRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.DrmType = params.DrmType || null;
-        this.Tracks = params.Tracks || null;
-        this.ContentType = params.ContentType || null;
-        this.RsaPublicKey = params.RsaPublicKey || null;
-        this.ContentId = params.ContentId || null;
+        this.DrmType = 'DrmType' in params ? params.DrmType : null;
+        this.Tracks = 'Tracks' in params ? params.Tracks : null;
+        this.ContentType = 'ContentType' in params ? params.ContentType : null;
+        this.RsaPublicKey = 'RsaPublicKey' in params ? params.RsaPublicKey : null;
+        this.ContentId = 'ContentId' in params ? params.ContentId : null;
 
     }
 }
@@ -490,8 +490,8 @@ class DrmSourceObject extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.BucketName = params.BucketName || null;
-        this.ObjectName = params.ObjectName || null;
+        this.BucketName = 'BucketName' in params ? params.BucketName : null;
+        this.ObjectName = 'ObjectName' in params ? params.ObjectName : null;
 
     }
 }
@@ -531,8 +531,8 @@ class DrmOutputObject extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.BucketName = params.BucketName || null;
-        this.ObjectName = params.ObjectName || null;
+        this.BucketName = 'BucketName' in params ? params.BucketName : null;
+        this.ObjectName = 'ObjectName' in params ? params.ObjectName : null;
 
         if (params.Para) {
             let obj = new DrmOutputPara();

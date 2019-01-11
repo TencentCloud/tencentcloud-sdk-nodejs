@@ -45,8 +45,8 @@ class DescribeStatusRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Pk = params.Pk || null;
-        this.Md5 = params.Md5 || null;
+        this.Pk = 'Pk' in params ? params.Pk : null;
+        this.Md5 = 'Md5' in params ? params.Md5 : null;
 
     }
 }
@@ -92,10 +92,10 @@ class StartAnalyseResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Status = params.Status || null;
-        this.Info = params.Info || null;
-        this.Data = params.Data || null;
-        this.RequestId = params.RequestId || null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.Info = 'Info' in params ? params.Info : null;
+        this.Data = 'Data' in params ? params.Data : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -135,9 +135,9 @@ class StartAnalyseRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Pk = params.Pk || null;
-        this.Md5 = params.Md5 || null;
-        this.DlUrl = params.DlUrl || null;
+        this.Pk = 'Pk' in params ? params.Pk : null;
+        this.Md5 = 'Md5' in params ? params.Md5 : null;
+        this.DlUrl = 'DlUrl' in params ? params.DlUrl : null;
 
     }
 }
@@ -183,10 +183,10 @@ class DescribeStatusResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Status = params.Status || null;
-        this.Info = params.Info || null;
-        this.Data = params.Data || null;
-        this.RequestId = params.RequestId || null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.Info = 'Info' in params ? params.Info : null;
+        this.Data = 'Data' in params ? params.Data : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }

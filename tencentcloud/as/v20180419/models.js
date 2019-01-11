@@ -39,7 +39,7 @@ class RemoveInstancesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -67,7 +67,7 @@ class DisableAutoScalingGroupResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -101,8 +101,8 @@ class SystemDisk extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.DiskType = params.DiskType || null;
-        this.DiskSize = params.DiskSize || null;
+        this.DiskType = 'DiskType' in params ? params.DiskType : null;
+        this.DiskSize = 'DiskSize' in params ? params.DiskSize : null;
 
     }
 }
@@ -160,11 +160,11 @@ class ModifyLaunchConfigurationAttributesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.LaunchConfigurationId = params.LaunchConfigurationId || null;
-        this.ImageId = params.ImageId || null;
-        this.InstanceTypes = params.InstanceTypes || null;
-        this.InstanceTypesCheckPolicy = params.InstanceTypesCheckPolicy || null;
-        this.LaunchConfigurationName = params.LaunchConfigurationName || null;
+        this.LaunchConfigurationId = 'LaunchConfigurationId' in params ? params.LaunchConfigurationId : null;
+        this.ImageId = 'ImageId' in params ? params.ImageId : null;
+        this.InstanceTypes = 'InstanceTypes' in params ? params.InstanceTypes : null;
+        this.InstanceTypesCheckPolicy = 'InstanceTypesCheckPolicy' in params ? params.InstanceTypesCheckPolicy : null;
+        this.LaunchConfigurationName = 'LaunchConfigurationName' in params ? params.LaunchConfigurationName : null;
 
     }
 }
@@ -192,7 +192,7 @@ class DisableAutoScalingGroupRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.AutoScalingGroupId = params.AutoScalingGroupId || null;
+        this.AutoScalingGroupId = 'AutoScalingGroupId' in params ? params.AutoScalingGroupId : null;
 
     }
 }
@@ -220,7 +220,7 @@ class DeleteAutoScalingGroupResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -254,8 +254,8 @@ class AutoScalingGroupAbstract extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.AutoScalingGroupId = params.AutoScalingGroupId || null;
-        this.AutoScalingGroupName = params.AutoScalingGroupName || null;
+        this.AutoScalingGroupId = 'AutoScalingGroupId' in params ? params.AutoScalingGroupId : null;
+        this.AutoScalingGroupName = 'AutoScalingGroupName' in params ? params.AutoScalingGroupName : null;
 
     }
 }
@@ -283,7 +283,7 @@ class DetachInstancesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -311,7 +311,7 @@ class EnableAutoScalingGroupRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.AutoScalingGroupId = params.AutoScalingGroupId || null;
+        this.AutoScalingGroupId = 'AutoScalingGroupId' in params ? params.AutoScalingGroupId : null;
 
     }
 }
@@ -426,20 +426,20 @@ class ModifyAutoScalingGroupRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.AutoScalingGroupId = params.AutoScalingGroupId || null;
-        this.AutoScalingGroupName = params.AutoScalingGroupName || null;
-        this.DefaultCooldown = params.DefaultCooldown || null;
-        this.DesiredCapacity = params.DesiredCapacity || null;
-        this.LaunchConfigurationId = params.LaunchConfigurationId || null;
-        this.MaxSize = params.MaxSize || null;
-        this.MinSize = params.MinSize || null;
-        this.ProjectId = params.ProjectId || null;
-        this.SubnetIds = params.SubnetIds || null;
-        this.TerminationPolicies = params.TerminationPolicies || null;
-        this.VpcId = params.VpcId || null;
-        this.Zones = params.Zones || null;
-        this.RetryPolicy = params.RetryPolicy || null;
-        this.ZonesCheckPolicy = params.ZonesCheckPolicy || null;
+        this.AutoScalingGroupId = 'AutoScalingGroupId' in params ? params.AutoScalingGroupId : null;
+        this.AutoScalingGroupName = 'AutoScalingGroupName' in params ? params.AutoScalingGroupName : null;
+        this.DefaultCooldown = 'DefaultCooldown' in params ? params.DefaultCooldown : null;
+        this.DesiredCapacity = 'DesiredCapacity' in params ? params.DesiredCapacity : null;
+        this.LaunchConfigurationId = 'LaunchConfigurationId' in params ? params.LaunchConfigurationId : null;
+        this.MaxSize = 'MaxSize' in params ? params.MaxSize : null;
+        this.MinSize = 'MinSize' in params ? params.MinSize : null;
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+        this.SubnetIds = 'SubnetIds' in params ? params.SubnetIds : null;
+        this.TerminationPolicies = 'TerminationPolicies' in params ? params.TerminationPolicies : null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.Zones = 'Zones' in params ? params.Zones : null;
+        this.RetryPolicy = 'RetryPolicy' in params ? params.RetryPolicy : null;
+        this.ZonesCheckPolicy = 'ZonesCheckPolicy' in params ? params.ZonesCheckPolicy : null;
 
     }
 }
@@ -560,10 +560,10 @@ class CreateLaunchConfigurationRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.LaunchConfigurationName = params.LaunchConfigurationName || null;
-        this.ImageId = params.ImageId || null;
-        this.ProjectId = params.ProjectId || null;
-        this.InstanceType = params.InstanceType || null;
+        this.LaunchConfigurationName = 'LaunchConfigurationName' in params ? params.LaunchConfigurationName : null;
+        this.ImageId = 'ImageId' in params ? params.ImageId : null;
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+        this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
 
         if (params.SystemDisk) {
             let obj = new SystemDisk();
@@ -591,23 +591,23 @@ class CreateLaunchConfigurationRequest extends  AbstractModel {
             obj.deserialize(params.LoginSettings)
             this.LoginSettings = obj;
         }
-        this.SecurityGroupIds = params.SecurityGroupIds || null;
+        this.SecurityGroupIds = 'SecurityGroupIds' in params ? params.SecurityGroupIds : null;
 
         if (params.EnhancedService) {
             let obj = new EnhancedService();
             obj.deserialize(params.EnhancedService)
             this.EnhancedService = obj;
         }
-        this.UserData = params.UserData || null;
-        this.InstanceChargeType = params.InstanceChargeType || null;
+        this.UserData = 'UserData' in params ? params.UserData : null;
+        this.InstanceChargeType = 'InstanceChargeType' in params ? params.InstanceChargeType : null;
 
         if (params.InstanceMarketOptions) {
             let obj = new InstanceMarketOptionsRequest();
             obj.deserialize(params.InstanceMarketOptions)
             this.InstanceMarketOptions = obj;
         }
-        this.InstanceTypes = params.InstanceTypes || null;
-        this.InstanceTypesCheckPolicy = params.InstanceTypesCheckPolicy || null;
+        this.InstanceTypes = 'InstanceTypes' in params ? params.InstanceTypes : null;
+        this.InstanceTypesCheckPolicy = 'InstanceTypesCheckPolicy' in params ? params.InstanceTypesCheckPolicy : null;
 
     }
 }
@@ -755,13 +755,13 @@ class AutoScalingGroup extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.AutoScalingGroupId = params.AutoScalingGroupId || null;
-        this.AutoScalingGroupName = params.AutoScalingGroupName || null;
-        this.AutoScalingGroupStatus = params.AutoScalingGroupStatus || null;
-        this.CreatedTime = params.CreatedTime || null;
-        this.DefaultCooldown = params.DefaultCooldown || null;
-        this.DesiredCapacity = params.DesiredCapacity || null;
-        this.EnabledStatus = params.EnabledStatus || null;
+        this.AutoScalingGroupId = 'AutoScalingGroupId' in params ? params.AutoScalingGroupId : null;
+        this.AutoScalingGroupName = 'AutoScalingGroupName' in params ? params.AutoScalingGroupName : null;
+        this.AutoScalingGroupStatus = 'AutoScalingGroupStatus' in params ? params.AutoScalingGroupStatus : null;
+        this.CreatedTime = 'CreatedTime' in params ? params.CreatedTime : null;
+        this.DefaultCooldown = 'DefaultCooldown' in params ? params.DefaultCooldown : null;
+        this.DesiredCapacity = 'DesiredCapacity' in params ? params.DesiredCapacity : null;
+        this.EnabledStatus = 'EnabledStatus' in params ? params.EnabledStatus : null;
 
         if (params.ForwardLoadBalancerSet) {
             this.ForwardLoadBalancerSet = new Array();
@@ -771,19 +771,19 @@ class AutoScalingGroup extends  AbstractModel {
                 this.ForwardLoadBalancerSet.push(obj);
             }
         }
-        this.InstanceCount = params.InstanceCount || null;
-        this.InServiceInstanceCount = params.InServiceInstanceCount || null;
-        this.LaunchConfigurationId = params.LaunchConfigurationId || null;
-        this.LaunchConfigurationName = params.LaunchConfigurationName || null;
-        this.LoadBalancerIdSet = params.LoadBalancerIdSet || null;
-        this.MaxSize = params.MaxSize || null;
-        this.MinSize = params.MinSize || null;
-        this.ProjectId = params.ProjectId || null;
-        this.SubnetIdSet = params.SubnetIdSet || null;
-        this.TerminationPolicySet = params.TerminationPolicySet || null;
-        this.VpcId = params.VpcId || null;
-        this.ZoneSet = params.ZoneSet || null;
-        this.RetryPolicy = params.RetryPolicy || null;
+        this.InstanceCount = 'InstanceCount' in params ? params.InstanceCount : null;
+        this.InServiceInstanceCount = 'InServiceInstanceCount' in params ? params.InServiceInstanceCount : null;
+        this.LaunchConfigurationId = 'LaunchConfigurationId' in params ? params.LaunchConfigurationId : null;
+        this.LaunchConfigurationName = 'LaunchConfigurationName' in params ? params.LaunchConfigurationName : null;
+        this.LoadBalancerIdSet = 'LoadBalancerIdSet' in params ? params.LoadBalancerIdSet : null;
+        this.MaxSize = 'MaxSize' in params ? params.MaxSize : null;
+        this.MinSize = 'MinSize' in params ? params.MinSize : null;
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+        this.SubnetIdSet = 'SubnetIdSet' in params ? params.SubnetIdSet : null;
+        this.TerminationPolicySet = 'TerminationPolicySet' in params ? params.TerminationPolicySet : null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.ZoneSet = 'ZoneSet' in params ? params.ZoneSet : null;
+        this.RetryPolicy = 'RetryPolicy' in params ? params.RetryPolicy : null;
 
     }
 }
@@ -853,14 +853,14 @@ class CreateScheduledActionRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.AutoScalingGroupId = params.AutoScalingGroupId || null;
-        this.ScheduledActionName = params.ScheduledActionName || null;
-        this.MaxSize = params.MaxSize || null;
-        this.MinSize = params.MinSize || null;
-        this.DesiredCapacity = params.DesiredCapacity || null;
-        this.StartTime = params.StartTime || null;
-        this.EndTime = params.EndTime || null;
-        this.Recurrence = params.Recurrence || null;
+        this.AutoScalingGroupId = 'AutoScalingGroupId' in params ? params.AutoScalingGroupId : null;
+        this.ScheduledActionName = 'ScheduledActionName' in params ? params.ScheduledActionName : null;
+        this.MaxSize = 'MaxSize' in params ? params.MaxSize : null;
+        this.MinSize = 'MinSize' in params ? params.MinSize : null;
+        this.DesiredCapacity = 'DesiredCapacity' in params ? params.DesiredCapacity : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.Recurrence = 'Recurrence' in params ? params.Recurrence : null;
 
     }
 }
@@ -933,7 +933,7 @@ class AttachInstancesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -961,7 +961,7 @@ class DeleteLaunchConfigurationResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1011,7 +1011,7 @@ class DescribeAutoScalingGroupsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.AutoScalingGroupIds = params.AutoScalingGroupIds || null;
+        this.AutoScalingGroupIds = 'AutoScalingGroupIds' in params ? params.AutoScalingGroupIds : null;
 
         if (params.Filters) {
             this.Filters = new Array();
@@ -1021,8 +1021,8 @@ class DescribeAutoScalingGroupsRequest extends  AbstractModel {
                 this.Filters.push(obj);
             }
         }
-        this.Limit = params.Limit || null;
-        this.Offset = params.Offset || null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
 
     }
 }
@@ -1154,10 +1154,10 @@ class LaunchConfiguration extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ProjectId = params.ProjectId || null;
-        this.LaunchConfigurationId = params.LaunchConfigurationId || null;
-        this.LaunchConfigurationName = params.LaunchConfigurationName || null;
-        this.InstanceType = params.InstanceType || null;
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+        this.LaunchConfigurationId = 'LaunchConfigurationId' in params ? params.LaunchConfigurationId : null;
+        this.LaunchConfigurationName = 'LaunchConfigurationName' in params ? params.LaunchConfigurationName : null;
+        this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
 
         if (params.SystemDisk) {
             let obj = new SystemDisk();
@@ -1185,7 +1185,7 @@ class LaunchConfiguration extends  AbstractModel {
             obj.deserialize(params.InternetAccessible)
             this.InternetAccessible = obj;
         }
-        this.SecurityGroupIds = params.SecurityGroupIds || null;
+        this.SecurityGroupIds = 'SecurityGroupIds' in params ? params.SecurityGroupIds : null;
 
         if (params.AutoScalingGroupAbstractSet) {
             this.AutoScalingGroupAbstractSet = new Array();
@@ -1195,24 +1195,24 @@ class LaunchConfiguration extends  AbstractModel {
                 this.AutoScalingGroupAbstractSet.push(obj);
             }
         }
-        this.UserData = params.UserData || null;
-        this.CreatedTime = params.CreatedTime || null;
+        this.UserData = 'UserData' in params ? params.UserData : null;
+        this.CreatedTime = 'CreatedTime' in params ? params.CreatedTime : null;
 
         if (params.EnhancedService) {
             let obj = new EnhancedService();
             obj.deserialize(params.EnhancedService)
             this.EnhancedService = obj;
         }
-        this.ImageId = params.ImageId || null;
-        this.LaunchConfigurationStatus = params.LaunchConfigurationStatus || null;
-        this.InstanceChargeType = params.InstanceChargeType || null;
+        this.ImageId = 'ImageId' in params ? params.ImageId : null;
+        this.LaunchConfigurationStatus = 'LaunchConfigurationStatus' in params ? params.LaunchConfigurationStatus : null;
+        this.InstanceChargeType = 'InstanceChargeType' in params ? params.InstanceChargeType : null;
 
         if (params.InstanceMarketOptions) {
             let obj = new InstanceMarketOptionsRequest();
             obj.deserialize(params.InstanceMarketOptions)
             this.InstanceMarketOptions = obj;
         }
-        this.InstanceTypes = params.InstanceTypes || null;
+        this.InstanceTypes = 'InstanceTypes' in params ? params.InstanceTypes : null;
 
     }
 }
@@ -1285,11 +1285,11 @@ class DescribeAccountLimitsResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.MaxNumberOfLaunchConfigurations = params.MaxNumberOfLaunchConfigurations || null;
-        this.NumberOfLaunchConfigurations = params.NumberOfLaunchConfigurations || null;
-        this.MaxNumberOfAutoScalingGroups = params.MaxNumberOfAutoScalingGroups || null;
-        this.NumberOfAutoScalingGroups = params.NumberOfAutoScalingGroups || null;
-        this.RequestId = params.RequestId || null;
+        this.MaxNumberOfLaunchConfigurations = 'MaxNumberOfLaunchConfigurations' in params ? params.MaxNumberOfLaunchConfigurations : null;
+        this.NumberOfLaunchConfigurations = 'NumberOfLaunchConfigurations' in params ? params.NumberOfLaunchConfigurations : null;
+        this.MaxNumberOfAutoScalingGroups = 'MaxNumberOfAutoScalingGroups' in params ? params.MaxNumberOfAutoScalingGroups : null;
+        this.NumberOfAutoScalingGroups = 'NumberOfAutoScalingGroups' in params ? params.NumberOfAutoScalingGroups : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1329,7 +1329,7 @@ class DescribeLaunchConfigurationsResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = params.TotalCount || null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
 
         if (params.LaunchConfigurationSet) {
             this.LaunchConfigurationSet = new Array();
@@ -1339,7 +1339,7 @@ class DescribeLaunchConfigurationsResponse extends  AbstractModel {
                 this.LaunchConfigurationSet.push(obj);
             }
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1373,8 +1373,8 @@ class CreateLaunchConfigurationResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.LaunchConfigurationId = params.LaunchConfigurationId || null;
-        this.RequestId = params.RequestId || null;
+        this.LaunchConfigurationId = 'LaunchConfigurationId' in params ? params.LaunchConfigurationId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1420,8 +1420,8 @@ class ForwardLoadBalancer extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.LoadBalancerId = params.LoadBalancerId || null;
-        this.ListenerId = params.ListenerId || null;
+        this.LoadBalancerId = 'LoadBalancerId' in params ? params.LoadBalancerId : null;
+        this.ListenerId = 'ListenerId' in params ? params.ListenerId : null;
 
         if (params.TargetAttributes) {
             this.TargetAttributes = new Array();
@@ -1431,7 +1431,7 @@ class ForwardLoadBalancer extends  AbstractModel {
                 this.TargetAttributes.push(obj);
             }
         }
-        this.LocationId = params.LocationId || null;
+        this.LocationId = 'LocationId' in params ? params.LocationId : null;
 
     }
 }
@@ -1459,7 +1459,7 @@ class DeleteScheduledActionRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ScheduledActionId = params.ScheduledActionId || null;
+        this.ScheduledActionId = 'ScheduledActionId' in params ? params.ScheduledActionId : null;
 
     }
 }
@@ -1510,7 +1510,7 @@ class DescribeAutoScalingActivitiesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ActivityIds = params.ActivityIds || null;
+        this.ActivityIds = 'ActivityIds' in params ? params.ActivityIds : null;
 
         if (params.Filters) {
             this.Filters = new Array();
@@ -1520,8 +1520,8 @@ class DescribeAutoScalingActivitiesRequest extends  AbstractModel {
                 this.Filters.push(obj);
             }
         }
-        this.Limit = params.Limit || null;
-        this.Offset = params.Offset || null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
 
     }
 }
@@ -1555,8 +1555,8 @@ class ModifyDesiredCapacityRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.AutoScalingGroupId = params.AutoScalingGroupId || null;
-        this.DesiredCapacity = params.DesiredCapacity || null;
+        this.AutoScalingGroupId = 'AutoScalingGroupId' in params ? params.AutoScalingGroupId : null;
+        this.DesiredCapacity = 'DesiredCapacity' in params ? params.DesiredCapacity : null;
 
     }
 }
@@ -1596,7 +1596,7 @@ class InstanceMarketOptionsRequest extends  AbstractModel {
             obj.deserialize(params.SpotOptions)
             this.SpotOptions = obj;
         }
-        this.MarketType = params.MarketType || null;
+        this.MarketType = 'MarketType' in params ? params.MarketType : null;
 
     }
 }
@@ -1630,8 +1630,8 @@ class CreateScheduledActionResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ScheduledActionId = params.ScheduledActionId || null;
-        this.RequestId = params.RequestId || null;
+        this.ScheduledActionId = 'ScheduledActionId' in params ? params.ScheduledActionId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1671,7 +1671,7 @@ class DescribeScheduledActionsResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = params.TotalCount || null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
 
         if (params.ScheduledActionSet) {
             this.ScheduledActionSet = new Array();
@@ -1681,7 +1681,7 @@ class DescribeScheduledActionsResponse extends  AbstractModel {
                 this.ScheduledActionSet.push(obj);
             }
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1730,8 +1730,8 @@ class DescribeAutoScalingGroupsResponse extends  AbstractModel {
                 this.AutoScalingGroupSet.push(obj);
             }
         }
-        this.TotalCount = params.TotalCount || null;
-        this.RequestId = params.RequestId || null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1759,7 +1759,7 @@ class DeleteAutoScalingGroupRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.AutoScalingGroupId = params.AutoScalingGroupId || null;
+        this.AutoScalingGroupId = 'AutoScalingGroupId' in params ? params.AutoScalingGroupId : null;
 
     }
 }
@@ -1808,7 +1808,7 @@ class DescribeScheduledActionsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ScheduledActionIds = params.ScheduledActionIds || null;
+        this.ScheduledActionIds = 'ScheduledActionIds' in params ? params.ScheduledActionIds : null;
 
         if (params.Filters) {
             this.Filters = new Array();
@@ -1818,8 +1818,8 @@ class DescribeScheduledActionsRequest extends  AbstractModel {
                 this.Filters.push(obj);
             }
         }
-        this.Offset = params.Offset || null;
-        this.Limit = params.Limit || null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
 
     }
 }
@@ -1901,16 +1901,16 @@ class ScheduledAction extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ScheduledActionId = params.ScheduledActionId || null;
-        this.ScheduledActionName = params.ScheduledActionName || null;
-        this.AutoScalingGroupId = params.AutoScalingGroupId || null;
-        this.StartTime = params.StartTime || null;
-        this.Recurrence = params.Recurrence || null;
-        this.EndTime = params.EndTime || null;
-        this.MaxSize = params.MaxSize || null;
-        this.DesiredCapacity = params.DesiredCapacity || null;
-        this.MinSize = params.MinSize || null;
-        this.CreatedTime = params.CreatedTime || null;
+        this.ScheduledActionId = 'ScheduledActionId' in params ? params.ScheduledActionId : null;
+        this.ScheduledActionName = 'ScheduledActionName' in params ? params.ScheduledActionName : null;
+        this.AutoScalingGroupId = 'AutoScalingGroupId' in params ? params.AutoScalingGroupId : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.Recurrence = 'Recurrence' in params ? params.Recurrence : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.MaxSize = 'MaxSize' in params ? params.MaxSize : null;
+        this.DesiredCapacity = 'DesiredCapacity' in params ? params.DesiredCapacity : null;
+        this.MinSize = 'MinSize' in params ? params.MinSize : null;
+        this.CreatedTime = 'CreatedTime' in params ? params.CreatedTime : null;
 
     }
 }
@@ -1944,8 +1944,8 @@ class RemoveInstancesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.AutoScalingGroupId = params.AutoScalingGroupId || null;
-        this.InstanceIds = params.InstanceIds || null;
+        this.AutoScalingGroupId = 'AutoScalingGroupId' in params ? params.AutoScalingGroupId : null;
+        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
 
     }
 }
@@ -1973,7 +1973,7 @@ class ModifyAutoScalingGroupResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2001,7 +2001,7 @@ class DeleteLaunchConfigurationRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.LaunchConfigurationId = params.LaunchConfigurationId || null;
+        this.LaunchConfigurationId = 'LaunchConfigurationId' in params ? params.LaunchConfigurationId : null;
 
     }
 }
@@ -2035,8 +2035,8 @@ class AttachInstancesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.AutoScalingGroupId = params.AutoScalingGroupId || null;
-        this.InstanceIds = params.InstanceIds || null;
+        this.AutoScalingGroupId = 'AutoScalingGroupId' in params ? params.AutoScalingGroupId : null;
+        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
 
     }
 }
@@ -2070,8 +2070,8 @@ class SpotMarketOptions extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.MaxPrice = params.MaxPrice || null;
-        this.SpotInstanceType = params.SpotInstanceType || null;
+        this.MaxPrice = 'MaxPrice' in params ? params.MaxPrice : null;
+        this.SpotInstanceType = 'SpotInstanceType' in params ? params.SpotInstanceType : null;
 
     }
 }
@@ -2099,7 +2099,7 @@ class RunSecurityServiceEnabled extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Enabled = params.Enabled || null;
+        this.Enabled = 'Enabled' in params ? params.Enabled : null;
 
     }
 }
@@ -2148,8 +2148,8 @@ class DescribeAutoScalingInstancesResponse extends  AbstractModel {
                 this.AutoScalingInstanceSet.push(obj);
             }
         }
-        this.TotalCount = params.TotalCount || null;
-        this.RequestId = params.RequestId || null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2189,9 +2189,9 @@ class LoginSettings extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Password = params.Password || null;
-        this.KeyIds = params.KeyIds || null;
-        this.KeepImageLogin = params.KeepImageLogin || null;
+        this.Password = 'Password' in params ? params.Password : null;
+        this.KeyIds = 'KeyIds' in params ? params.KeyIds : null;
+        this.KeepImageLogin = 'KeepImageLogin' in params ? params.KeepImageLogin : null;
 
     }
 }
@@ -2236,8 +2236,8 @@ class Filter extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Name = params.Name || null;
-        this.Values = params.Values || null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Values = 'Values' in params ? params.Values : null;
 
     }
 }
@@ -2265,7 +2265,7 @@ class ModifyScheduledActionResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2293,7 +2293,7 @@ class EnableAutoScalingGroupResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2394,16 +2394,16 @@ class Activity extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.AutoScalingGroupId = params.AutoScalingGroupId || null;
-        this.ActivityId = params.ActivityId || null;
-        this.ActivityType = params.ActivityType || null;
-        this.StatusCode = params.StatusCode || null;
-        this.StatusMessage = params.StatusMessage || null;
-        this.Cause = params.Cause || null;
-        this.Description = params.Description || null;
-        this.StartTime = params.StartTime || null;
-        this.EndTime = params.EndTime || null;
-        this.CreatedTime = params.CreatedTime || null;
+        this.AutoScalingGroupId = 'AutoScalingGroupId' in params ? params.AutoScalingGroupId : null;
+        this.ActivityId = 'ActivityId' in params ? params.ActivityId : null;
+        this.ActivityType = 'ActivityType' in params ? params.ActivityType : null;
+        this.StatusCode = 'StatusCode' in params ? params.StatusCode : null;
+        this.StatusMessage = 'StatusMessage' in params ? params.StatusMessage : null;
+        this.Cause = 'Cause' in params ? params.Cause : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.CreatedTime = 'CreatedTime' in params ? params.CreatedTime : null;
 
         if (params.ActivityRelatedInstanceSet) {
             this.ActivityRelatedInstanceSet = new Array();
@@ -2413,7 +2413,7 @@ class Activity extends  AbstractModel {
                 this.ActivityRelatedInstanceSet.push(obj);
             }
         }
-        this.StatusMessageSimplified = params.StatusMessageSimplified || null;
+        this.StatusMessageSimplified = 'StatusMessageSimplified' in params ? params.StatusMessageSimplified : null;
 
     }
 }
@@ -2441,7 +2441,7 @@ class ModifyDesiredCapacityResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2475,8 +2475,8 @@ class CreateAutoScalingGroupResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.AutoScalingGroupId = params.AutoScalingGroupId || null;
-        this.RequestId = params.RequestId || null;
+        this.AutoScalingGroupId = 'AutoScalingGroupId' in params ? params.AutoScalingGroupId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2504,7 +2504,7 @@ class RunMonitorServiceEnabled extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Enabled = params.Enabled || null;
+        this.Enabled = 'Enabled' in params ? params.Enabled : null;
 
     }
 }
@@ -2532,7 +2532,7 @@ class ModifyLaunchConfigurationAttributesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2566,8 +2566,8 @@ class TargetAttribute extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Port = params.Port || null;
-        this.Weight = params.Weight || null;
+        this.Port = 'Port' in params ? params.Port : null;
+        this.Weight = 'Weight' in params ? params.Weight : null;
 
     }
 }
@@ -2601,8 +2601,8 @@ class DetachInstancesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.AutoScalingGroupId = params.AutoScalingGroupId || null;
-        this.InstanceIds = params.InstanceIds || null;
+        this.AutoScalingGroupId = 'AutoScalingGroupId' in params ? params.AutoScalingGroupId : null;
+        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
 
     }
 }
@@ -2690,17 +2690,17 @@ class Instance extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = params.InstanceId || null;
-        this.AutoScalingGroupId = params.AutoScalingGroupId || null;
-        this.LaunchConfigurationId = params.LaunchConfigurationId || null;
-        this.LaunchConfigurationName = params.LaunchConfigurationName || null;
-        this.LifeCycleState = params.LifeCycleState || null;
-        this.HealthStatus = params.HealthStatus || null;
-        this.ProtectedFromScaleIn = params.ProtectedFromScaleIn || null;
-        this.Zone = params.Zone || null;
-        this.CreationType = params.CreationType || null;
-        this.AddTime = params.AddTime || null;
-        this.InstanceType = params.InstanceType || null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.AutoScalingGroupId = 'AutoScalingGroupId' in params ? params.AutoScalingGroupId : null;
+        this.LaunchConfigurationId = 'LaunchConfigurationId' in params ? params.LaunchConfigurationId : null;
+        this.LaunchConfigurationName = 'LaunchConfigurationName' in params ? params.LaunchConfigurationName : null;
+        this.LifeCycleState = 'LifeCycleState' in params ? params.LifeCycleState : null;
+        this.HealthStatus = 'HealthStatus' in params ? params.HealthStatus : null;
+        this.ProtectedFromScaleIn = 'ProtectedFromScaleIn' in params ? params.ProtectedFromScaleIn : null;
+        this.Zone = 'Zone' in params ? params.Zone : null;
+        this.CreationType = 'CreationType' in params ? params.CreationType : null;
+        this.AddTime = 'AddTime' in params ? params.AddTime : null;
+        this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
 
     }
 }
@@ -2736,8 +2736,8 @@ class ActivtyRelatedInstance extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = params.InstanceId || null;
-        this.InstanceStatus = params.InstanceStatus || null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.InstanceStatus = 'InstanceStatus' in params ? params.InstanceStatus : null;
 
     }
 }
@@ -2858,15 +2858,15 @@ class CreateAutoScalingGroupRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.AutoScalingGroupName = params.AutoScalingGroupName || null;
-        this.LaunchConfigurationId = params.LaunchConfigurationId || null;
-        this.MaxSize = params.MaxSize || null;
-        this.MinSize = params.MinSize || null;
-        this.VpcId = params.VpcId || null;
-        this.DefaultCooldown = params.DefaultCooldown || null;
-        this.DesiredCapacity = params.DesiredCapacity || null;
-        this.LoadBalancerIds = params.LoadBalancerIds || null;
-        this.ProjectId = params.ProjectId || null;
+        this.AutoScalingGroupName = 'AutoScalingGroupName' in params ? params.AutoScalingGroupName : null;
+        this.LaunchConfigurationId = 'LaunchConfigurationId' in params ? params.LaunchConfigurationId : null;
+        this.MaxSize = 'MaxSize' in params ? params.MaxSize : null;
+        this.MinSize = 'MinSize' in params ? params.MinSize : null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.DefaultCooldown = 'DefaultCooldown' in params ? params.DefaultCooldown : null;
+        this.DesiredCapacity = 'DesiredCapacity' in params ? params.DesiredCapacity : null;
+        this.LoadBalancerIds = 'LoadBalancerIds' in params ? params.LoadBalancerIds : null;
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
 
         if (params.ForwardLoadBalancers) {
             this.ForwardLoadBalancers = new Array();
@@ -2876,11 +2876,11 @@ class CreateAutoScalingGroupRequest extends  AbstractModel {
                 this.ForwardLoadBalancers.push(obj);
             }
         }
-        this.SubnetIds = params.SubnetIds || null;
-        this.TerminationPolicies = params.TerminationPolicies || null;
-        this.Zones = params.Zones || null;
-        this.RetryPolicy = params.RetryPolicy || null;
-        this.ZonesCheckPolicy = params.ZonesCheckPolicy || null;
+        this.SubnetIds = 'SubnetIds' in params ? params.SubnetIds : null;
+        this.TerminationPolicies = 'TerminationPolicies' in params ? params.TerminationPolicies : null;
+        this.Zones = 'Zones' in params ? params.Zones : null;
+        this.RetryPolicy = 'RetryPolicy' in params ? params.RetryPolicy : null;
+        this.ZonesCheckPolicy = 'ZonesCheckPolicy' in params ? params.ZonesCheckPolicy : null;
 
     }
 }
@@ -2920,9 +2920,9 @@ class InternetAccessible extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InternetChargeType = params.InternetChargeType || null;
-        this.InternetMaxBandwidthOut = params.InternetMaxBandwidthOut || null;
-        this.PublicIpAssigned = params.PublicIpAssigned || null;
+        this.InternetChargeType = 'InternetChargeType' in params ? params.InternetChargeType : null;
+        this.InternetMaxBandwidthOut = 'InternetMaxBandwidthOut' in params ? params.InternetMaxBandwidthOut : null;
+        this.PublicIpAssigned = 'PublicIpAssigned' in params ? params.PublicIpAssigned : null;
 
     }
 }
@@ -2971,7 +2971,7 @@ class DescribeLaunchConfigurationsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.LaunchConfigurationIds = params.LaunchConfigurationIds || null;
+        this.LaunchConfigurationIds = 'LaunchConfigurationIds' in params ? params.LaunchConfigurationIds : null;
 
         if (params.Filters) {
             this.Filters = new Array();
@@ -2981,8 +2981,8 @@ class DescribeLaunchConfigurationsRequest extends  AbstractModel {
                 this.Filters.push(obj);
             }
         }
-        this.Limit = params.Limit || null;
-        this.Offset = params.Offset || null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
 
     }
 }
@@ -3010,7 +3010,7 @@ class DeleteScheduledActionResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3059,7 +3059,7 @@ class DescribeAutoScalingInstancesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceIds = params.InstanceIds || null;
+        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
 
         if (params.Filters) {
             this.Filters = new Array();
@@ -3069,8 +3069,8 @@ class DescribeAutoScalingInstancesRequest extends  AbstractModel {
                 this.Filters.push(obj);
             }
         }
-        this.Offset = params.Offset || null;
-        this.Limit = params.Limit || null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
 
     }
 }
@@ -3110,7 +3110,7 @@ class DescribeAutoScalingActivitiesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = params.TotalCount || null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
 
         if (params.ActivitySet) {
             this.ActivitySet = new Array();
@@ -3120,7 +3120,7 @@ class DescribeAutoScalingActivitiesResponse extends  AbstractModel {
                 this.ActivitySet.push(obj);
             }
         }
-        this.RequestId = params.RequestId || null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3148,7 +3148,7 @@ class LimitedLoginSettings extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.KeyIds = params.KeyIds || null;
+        this.KeyIds = 'KeyIds' in params ? params.KeyIds : null;
 
     }
 }
@@ -3218,14 +3218,14 @@ class ModifyScheduledActionRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ScheduledActionId = params.ScheduledActionId || null;
-        this.ScheduledActionName = params.ScheduledActionName || null;
-        this.MaxSize = params.MaxSize || null;
-        this.MinSize = params.MinSize || null;
-        this.DesiredCapacity = params.DesiredCapacity || null;
-        this.StartTime = params.StartTime || null;
-        this.EndTime = params.EndTime || null;
-        this.Recurrence = params.Recurrence || null;
+        this.ScheduledActionId = 'ScheduledActionId' in params ? params.ScheduledActionId : null;
+        this.ScheduledActionName = 'ScheduledActionName' in params ? params.ScheduledActionName : null;
+        this.MaxSize = 'MaxSize' in params ? params.MaxSize : null;
+        this.MinSize = 'MinSize' in params ? params.MinSize : null;
+        this.DesiredCapacity = 'DesiredCapacity' in params ? params.DesiredCapacity : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.Recurrence = 'Recurrence' in params ? params.Recurrence : null;
 
     }
 }
@@ -3265,9 +3265,9 @@ class DataDisk extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.DiskType = params.DiskType || null;
-        this.DiskSize = params.DiskSize || null;
-        this.SnapshotId = params.SnapshotId || null;
+        this.DiskType = 'DiskType' in params ? params.DiskType : null;
+        this.DiskSize = 'DiskSize' in params ? params.DiskSize : null;
+        this.SnapshotId = 'SnapshotId' in params ? params.SnapshotId : null;
 
     }
 }
