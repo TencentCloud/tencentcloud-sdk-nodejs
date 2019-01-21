@@ -109,6 +109,18 @@ class ImageRecognitionResponse extends  AbstractModel {
         this.Sim = null;
 
         /**
+         * 业务错误码，成功情况返回Success, 错误情况请参考下方错误码 列表中FailedOperation部分
+         * @type {string || null}
+         */
+        this.Result = null;
+
+        /**
+         * 业务错误描述
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -124,6 +136,8 @@ class ImageRecognitionResponse extends  AbstractModel {
             return;
         }
         this.Sim = 'Sim' in params ? params.Sim : null;
+        this.Result = 'Result' in params ? params.Result : null;
+        this.Description = 'Description' in params ? params.Description : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -244,6 +258,18 @@ class LivenessCompareResponse extends  AbstractModel {
         this.Sim = null;
 
         /**
+         * 业务错误码，成功情况返回Success, 错误情况请参考下方错误码 列表中FailedOperation部分
+         * @type {string || null}
+         */
+        this.Result = null;
+
+        /**
+         * 业务错误描述
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -260,6 +286,8 @@ class LivenessCompareResponse extends  AbstractModel {
         }
         this.BestFrameBase64 = 'BestFrameBase64' in params ? params.BestFrameBase64 : null;
         this.Sim = 'Sim' in params ? params.Sim : null;
+        this.Result = 'Result' in params ? params.Result : null;
+        this.Description = 'Description' in params ? params.Description : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -568,6 +596,18 @@ class LivenessRecognitionResponse extends  AbstractModel {
         this.Sim = null;
 
         /**
+         * 业务错误码，成功情况返回Success, 错误情况请参考下方错误码 列表中FailedOperation部分
+         * @type {string || null}
+         */
+        this.Result = null;
+
+        /**
+         * 业务错误描述
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -584,6 +624,8 @@ class LivenessRecognitionResponse extends  AbstractModel {
         }
         this.BestFrameBase64 = 'BestFrameBase64' in params ? params.BestFrameBase64 : null;
         this.Sim = 'Sim' in params ? params.Sim : null;
+        this.Result = 'Result' in params ? params.Result : null;
+        this.Description = 'Description' in params ? params.Description : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }

@@ -78,10 +78,22 @@ class EvaluationRequest extends  AbstractModel {
         this.SessionId = null;
 
         /**
-         * 图片数据，需要使用base64对图片的二进制数据进行编码；
+         * 图片数据，需要使用base64对图片的二进制数据进行编码，与url参数二者填一即可；
          * @type {string || null}
          */
         this.Image = null;
+
+        /**
+         * 业务应用ID，与账号应用APPID无关，是用来方便客户管理服务的参数，新的 HcmAppId 可以在[控制台](https://console.cloud.tencent.com/hcm)【应用管理】下新建。
+         * @type {string || null}
+         */
+        this.HcmAppid = null;
+
+        /**
+         * 图片url，与Image参数二者填一即可；
+         * @type {string || null}
+         */
+        this.Url = null;
 
     }
 
@@ -94,6 +106,8 @@ class EvaluationRequest extends  AbstractModel {
         }
         this.SessionId = 'SessionId' in params ? params.SessionId : null;
         this.Image = 'Image' in params ? params.Image : null;
+        this.HcmAppid = 'HcmAppid' in params ? params.HcmAppid : null;
+        this.Url = 'Url' in params ? params.Url : null;
 
     }
 }

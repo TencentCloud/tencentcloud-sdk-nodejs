@@ -23,6 +23,8 @@ const TransmitOralProcessResponse = models.TransmitOralProcessResponse;
 const InitOralProcessResponse = models.InitOralProcessResponse;
 const WordRsp = models.WordRsp;
 const PhoneInfo = models.PhoneInfo;
+const TransmitOralProcessWithInitRequest = models.TransmitOralProcessWithInitRequest;
+const TransmitOralProcessWithInitResponse = models.TransmitOralProcessWithInitResponse;
 
 
 /**
@@ -55,6 +57,17 @@ class SoeClient extends AbstractClient {
     TransmitOralProcess(req, cb) {
         let resp = new TransmitOralProcessResponse();
         this.request("TransmitOralProcess", req, resp, cb);
+    }
+
+    /**
+     * 初始化并传输音频数据，分片传输时，尽量保证SeqId顺序传输。音频源目前仅支持16k采样率16bit单声道编码方式，如有不一致可能导致评估不准确或失败。
+     * @param {TransmitOralProcessWithInitRequest} req
+     * @param {function(string, TransmitOralProcessWithInitResponse):void} cb
+     * @public
+     */
+    TransmitOralProcessWithInit(req, cb) {
+        let resp = new TransmitOralProcessWithInitResponse();
+        this.request("TransmitOralProcessWithInit", req, resp, cb);
     }
 
 

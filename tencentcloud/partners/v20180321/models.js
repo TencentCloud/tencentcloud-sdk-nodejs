@@ -66,6 +66,12 @@ class AgentClientElem extends  AbstractModel {
          */
         this.HasOverdueBill = null;
 
+        /**
+         * 1:待代理商审核;2:待腾讯云审核
+         * @type {number || null}
+         */
+        this.Status = null;
+
     }
 
     /**
@@ -82,6 +88,7 @@ class AgentClientElem extends  AbstractModel {
         this.Mail = 'Mail' in params ? params.Mail : null;
         this.Phone = 'Phone' in params ? params.Phone : null;
         this.HasOverdueBill = 'HasOverdueBill' in params ? params.HasOverdueBill : null;
+        this.Status = 'Status' in params ? params.Status : null;
 
     }
 }
@@ -290,7 +297,7 @@ class DescribeClientBalanceResponse extends  AbstractModel {
         this.Balance = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -436,7 +443,7 @@ class DescribeAgentAuditedClientsResponse extends  AbstractModel {
         this.TotalCount = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -486,7 +493,7 @@ class DescribeAgentBillsResponse extends  AbstractModel {
         this.AgentBillSet = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -566,7 +573,7 @@ class ModifyClientRemarkResponse extends  AbstractModel {
         super();
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -606,7 +613,7 @@ class DescribeAgentClientsResponse extends  AbstractModel {
         this.TotalCount = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -840,7 +847,7 @@ class AgentTransferMoneyResponse extends  AbstractModel {
         super();
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -983,7 +990,7 @@ class AuditApplyClientResponse extends  AbstractModel {
         this.AgentTime = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -1085,7 +1092,7 @@ class AgentPayDealsResponse extends  AbstractModel {
         super();
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -1125,7 +1132,7 @@ class DescribeRebateInfosResponse extends  AbstractModel {
         this.TotalCount = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
