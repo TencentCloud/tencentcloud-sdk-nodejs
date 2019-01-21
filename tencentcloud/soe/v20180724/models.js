@@ -148,6 +148,12 @@ class InitOralProcessRequest extends  AbstractModel {
          */
         this.ServerType = null;
 
+        /**
+         * 异步模式标识，0：同步模式，1：异步模式。
+         * @type {number || null}
+         */
+        this.IsAsync = null;
+
     }
 
     /**
@@ -167,6 +173,7 @@ class InitOralProcessRequest extends  AbstractModel {
         this.StorageMode = 'StorageMode' in params ? params.StorageMode : null;
         this.SentenceInfoEnabled = 'SentenceInfoEnabled' in params ? params.SentenceInfoEnabled : null;
         this.ServerType = 'ServerType' in params ? params.ServerType : null;
+        this.IsAsync = 'IsAsync' in params ? params.IsAsync : null;
 
     }
 }
@@ -227,6 +234,12 @@ class TransmitOralProcessRequest extends  AbstractModel {
          */
         this.IsLongLifeSession = null;
 
+        /**
+         * 查询标识，当该参数为1时，该请求为查询请求，请求返回该 Session 的评估结果。
+         * @type {number || null}
+         */
+        this.IsQuery = null;
+
     }
 
     /**
@@ -244,6 +257,7 @@ class TransmitOralProcessRequest extends  AbstractModel {
         this.SessionId = 'SessionId' in params ? params.SessionId : null;
         this.SoeAppId = 'SoeAppId' in params ? params.SoeAppId : null;
         this.IsLongLifeSession = 'IsLongLifeSession' in params ? params.IsLongLifeSession : null;
+        this.IsQuery = 'IsQuery' in params ? params.IsQuery : null;
 
     }
 }
@@ -299,6 +313,12 @@ class TransmitOralProcessResponse extends  AbstractModel {
         this.SentenceInfoSet = null;
 
         /**
+         * 评估 session 状态，“Evaluating"：评估中、"Failed"：评估失败、"Finished"：评估完成
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -336,6 +356,7 @@ class TransmitOralProcessResponse extends  AbstractModel {
                 this.SentenceInfoSet.push(obj);
             }
         }
+        this.Status = 'Status' in params ? params.Status : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -517,6 +538,239 @@ class PhoneInfo extends  AbstractModel {
     }
 }
 
+/**
+ * TransmitOralProcessWithInit请求参数结构体
+ * @class
+ */
+class TransmitOralProcessWithInitRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 流式数据包的序号，从1开始，当IsEnd字段为1后后续序号无意义，当IsLongLifeSession不为1且为非流式模式时无意义。
+         * @type {number || null}
+         */
+        this.SeqId = null;
+
+        /**
+         * 是否传输完毕标志，若为0表示未完毕，若为1则传输完毕开始评估，非流式模式下无意义。
+         * @type {number || null}
+         */
+        this.IsEnd = null;
+
+        /**
+         * 语音文件类型 	1:raw, 2:wav, 3:mp3(三种格式目前仅支持16k采样率16bit编码单声道，如有不一致可能导致评估不准确或失败)。
+         * @type {number || null}
+         */
+        this.VoiceFileType = null;
+
+        /**
+         * 语音编码类型	1:pcm。
+         * @type {number || null}
+         */
+        this.VoiceEncodeType = null;
+
+        /**
+         * 当前数据包数据, 流式模式下数据包大小可以按需设置，数据包大小必须 >= 4K，且必须保证分片帧完整（16bit的数据必须保证音频长度为偶数），编码格式要求为BASE64。
+         * @type {string || null}
+         */
+        this.UserVoiceData = null;
+
+        /**
+         * 语音段唯一标识，一个完整语音一个SessionId。
+         * @type {string || null}
+         */
+        this.SessionId = null;
+
+        /**
+         * 被评估语音对应的文本，句子模式下不超过个 20 单词或者中文文字，段落模式不超过 120 单词或者中文文字，中文评估使用 utf-8 编码，自由说模式该值传空。
+         * @type {string || null}
+         */
+        this.RefText = null;
+
+        /**
+         * 语音输入模式，0：流式分片，1：非流式一次性评估
+         * @type {number || null}
+         */
+        this.WorkMode = null;
+
+        /**
+         * 评估模式，0：词模式，,1：:句子模式，2：段落模式，3：自由说模式，当为词模式评估时，能够提供每个音节的评估信息，当为句子模式时，能够提供完整度和流利度信息。
+         * @type {number || null}
+         */
+        this.EvalMode = null;
+
+        /**
+         * 评价苛刻指数，取值为[1.0 - 4.0]范围内的浮点数，用于平滑不同年龄段的分数，1.0为小年龄段，4.0为最高年龄段
+         * @type {number || null}
+         */
+        this.ScoreCoeff = null;
+
+        /**
+         * 业务应用ID，与账号应用APPID无关，是用来方便客户管理服务的参数，新的 SoeAppId 可以在[控制台](https://console.cloud.tencent.com/soe)【应用管理】下新建。
+         * @type {string || null}
+         */
+        this.SoeAppId = null;
+
+        /**
+         * 音频存储模式，0：不存储，1：存储到公共对象存储，输出结果为该会话最后一个分片TransmitOralProcess 返回结果 AudioUrl 字段。
+         * @type {number || null}
+         */
+        this.StorageMode = null;
+
+        /**
+         * 输出断句中间结果标识，0：不输出，1：输出，通过设置该参数，可以在评估过程中的分片传输请求中，返回已经评估断句的中间结果，中间结果可用于客户端 UI 更新，输出结果为TransmitOralProcess请求返回结果 SentenceInfoSet 字段。
+         * @type {number || null}
+         */
+        this.SentenceInfoEnabled = null;
+
+        /**
+         * 评估语言，0：英文，1：中文。
+         * @type {number || null}
+         */
+        this.ServerType = null;
+
+        /**
+         * 异步模式标识，0：同步模式，1：异步模式。
+         * @type {number || null}
+         */
+        this.IsAsync = null;
+
+        /**
+         * 查询标识，当该参数为1时，该请求为查询请求，请求返回该 Session 评估结果。
+         * @type {number || null}
+         */
+        this.IsQuery = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SeqId = 'SeqId' in params ? params.SeqId : null;
+        this.IsEnd = 'IsEnd' in params ? params.IsEnd : null;
+        this.VoiceFileType = 'VoiceFileType' in params ? params.VoiceFileType : null;
+        this.VoiceEncodeType = 'VoiceEncodeType' in params ? params.VoiceEncodeType : null;
+        this.UserVoiceData = 'UserVoiceData' in params ? params.UserVoiceData : null;
+        this.SessionId = 'SessionId' in params ? params.SessionId : null;
+        this.RefText = 'RefText' in params ? params.RefText : null;
+        this.WorkMode = 'WorkMode' in params ? params.WorkMode : null;
+        this.EvalMode = 'EvalMode' in params ? params.EvalMode : null;
+        this.ScoreCoeff = 'ScoreCoeff' in params ? params.ScoreCoeff : null;
+        this.SoeAppId = 'SoeAppId' in params ? params.SoeAppId : null;
+        this.StorageMode = 'StorageMode' in params ? params.StorageMode : null;
+        this.SentenceInfoEnabled = 'SentenceInfoEnabled' in params ? params.SentenceInfoEnabled : null;
+        this.ServerType = 'ServerType' in params ? params.ServerType : null;
+        this.IsAsync = 'IsAsync' in params ? params.IsAsync : null;
+        this.IsQuery = 'IsQuery' in params ? params.IsQuery : null;
+
+    }
+}
+
+/**
+ * TransmitOralProcessWithInit返回参数结构体
+ * @class
+ */
+class TransmitOralProcessWithInitResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 发音精准度，取值范围[-1, 100]，当取-1时指完全不匹配，当为句子模式时，是所有已识别单词准确度的加权平均值。当为流式模式且请求中IsEnd未置1时，取值无意义
+         * @type {number || null}
+         */
+        this.PronAccuracy = null;
+
+        /**
+         * 发音流利度，取值范围[0, 1]，当为词模式时，取值无意义；当为流式模式且请求中IsEnd未置1时，取值无意义
+         * @type {number || null}
+         */
+        this.PronFluency = null;
+
+        /**
+         * 发音完整度，取值范围[0, 1]，当为词模式时，取值无意义；当为流式模式且请求中IsEnd未置1时，取值无意义
+         * @type {number || null}
+         */
+        this.PronCompletion = null;
+
+        /**
+         * 详细发音评估结果
+         * @type {Array.<WordRsp> || null}
+         */
+        this.Words = null;
+
+        /**
+         * 语音段唯一标识，一段语音一个SessionId
+         * @type {string || null}
+         */
+        this.SessionId = null;
+
+        /**
+         * 保存语音音频文件下载地址
+         * @type {string || null}
+         */
+        this.AudioUrl = null;
+
+        /**
+         * 断句中间结果，中间结果是局部最优而非全局最优的结果，所以中间结果有可能和最终整体结果对应部分不一致；中间结果的输出便于客户端UI更新；待用户发音完全结束后，系统会给出一个综合所有句子的整体结果。
+         * @type {Array.<SentenceInfo> || null}
+         */
+        this.SentenceInfoSet = null;
+
+        /**
+         * 评估 session 状态，“Evaluating"：评估中、"Failed"：评估失败、"Finished"：评估完成
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PronAccuracy = 'PronAccuracy' in params ? params.PronAccuracy : null;
+        this.PronFluency = 'PronFluency' in params ? params.PronFluency : null;
+        this.PronCompletion = 'PronCompletion' in params ? params.PronCompletion : null;
+
+        if (params.Words) {
+            this.Words = new Array();
+            for (let z in params.Words) {
+                let obj = new WordRsp();
+                obj.deserialize(params.Words[z]);
+                this.Words.push(obj);
+            }
+        }
+        this.SessionId = 'SessionId' in params ? params.SessionId : null;
+        this.AudioUrl = 'AudioUrl' in params ? params.AudioUrl : null;
+
+        if (params.SentenceInfoSet) {
+            this.SentenceInfoSet = new Array();
+            for (let z in params.SentenceInfoSet) {
+                let obj = new SentenceInfo();
+                obj.deserialize(params.SentenceInfoSet[z]);
+                this.SentenceInfoSet.push(obj);
+            }
+        }
+        this.Status = 'Status' in params ? params.Status : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
 module.exports = {
     SentenceInfo: SentenceInfo,
     InitOralProcessRequest: InitOralProcessRequest,
@@ -525,5 +779,7 @@ module.exports = {
     InitOralProcessResponse: InitOralProcessResponse,
     WordRsp: WordRsp,
     PhoneInfo: PhoneInfo,
+    TransmitOralProcessWithInitRequest: TransmitOralProcessWithInitRequest,
+    TransmitOralProcessWithInitResponse: TransmitOralProcessWithInitResponse,
 
 }

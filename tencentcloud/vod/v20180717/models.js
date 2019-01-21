@@ -45,36 +45,42 @@ class DeleteMediaResponse extends  AbstractModel {
 }
 
 /**
- * 临时凭证
+ * 点播文件视频流信息
  * @class
  */
-class TempCertificate extends  AbstractModel {
+class MediaVideoStreamItem extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 临时安全证书 Id。
-         * @type {string || null}
-         */
-        this.SecretId = null;
-
-        /**
-         * 临时安全证书 Key。
-         * @type {string || null}
-         */
-        this.SecretKey = null;
-
-        /**
-         * Token 值。
-         * @type {string || null}
-         */
-        this.Token = null;
-
-        /**
-         * 证书无效的时间，返回 Unix 时间戳，精确到秒。
+         * 视频流的码率，单位：bps。
          * @type {number || null}
          */
-        this.ExpiredTime = null;
+        this.Bitrate = null;
+
+        /**
+         * 视频流的高度，单位：px。
+         * @type {number || null}
+         */
+        this.Height = null;
+
+        /**
+         * 视频流的宽度，单位：px。
+         * @type {number || null}
+         */
+        this.Width = null;
+
+        /**
+         * 视频流的编码格式，例如 h264。
+         * @type {string || null}
+         */
+        this.Codec = null;
+
+        /**
+         * 帧率，单位：hz。
+         * @type {number || null}
+         */
+        this.Fps = null;
 
     }
 
@@ -85,10 +91,11 @@ class TempCertificate extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.SecretId = 'SecretId' in params ? params.SecretId : null;
-        this.SecretKey = 'SecretKey' in params ? params.SecretKey : null;
-        this.Token = 'Token' in params ? params.Token : null;
-        this.ExpiredTime = 'ExpiredTime' in params ? params.ExpiredTime : null;
+        this.Bitrate = 'Bitrate' in params ? params.Bitrate : null;
+        this.Height = 'Height' in params ? params.Height : null;
+        this.Width = 'Width' in params ? params.Width : null;
+        this.Codec = 'Codec' in params ? params.Codec : null;
+        this.Fps = 'Fps' in params ? params.Fps : null;
 
     }
 }
@@ -399,6 +406,55 @@ class MediaDeleteItem extends  AbstractModel {
         }
         this.Type = 'Type' in params ? params.Type : null;
         this.Definition = 'Definition' in params ? params.Definition : null;
+
+    }
+}
+
+/**
+ * 临时凭证
+ * @class
+ */
+class TempCertificate extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 临时安全证书 Id。
+         * @type {string || null}
+         */
+        this.SecretId = null;
+
+        /**
+         * 临时安全证书 Key。
+         * @type {string || null}
+         */
+        this.SecretKey = null;
+
+        /**
+         * Token 值。
+         * @type {string || null}
+         */
+        this.Token = null;
+
+        /**
+         * 证书无效的时间，返回 Unix 时间戳，精确到秒。
+         * @type {number || null}
+         */
+        this.ExpiredTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SecretId = 'SecretId' in params ? params.SecretId : null;
+        this.SecretKey = 'SecretKey' in params ? params.SecretKey : null;
+        this.Token = 'Token' in params ? params.Token : null;
+        this.ExpiredTime = 'ExpiredTime' in params ? params.ExpiredTime : null;
 
     }
 }
@@ -804,6 +860,55 @@ class MediaSnapshotByTimeOffsetInfo extends  AbstractModel {
 }
 
 /**
+ * LiveRealTimeClip返回参数结构体
+ * @class
+ */
+class LiveRealTimeClipResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 剪辑后的视频播放 URL。
+         * @type {string || null}
+         */
+        this.Url = null;
+
+        /**
+         * 剪辑固化后的视频的媒体文件的唯一标识。
+         * @type {string || null}
+         */
+        this.FileId = null;
+
+        /**
+         * 剪辑固化后的视频任务流 ID。
+         * @type {string || null}
+         */
+        this.VodTaskId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Url = 'Url' in params ? params.Url : null;
+        this.FileId = 'FileId' in params ? params.FileId : null;
+        this.VodTaskId = 'VodTaskId' in params ? params.VodTaskId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * 视频打点信息
  * @class
  */
@@ -1018,42 +1123,48 @@ class MediaClassInfo extends  AbstractModel {
 }
 
 /**
- * 点播文件视频流信息
+ * LiveRealTimeClip请求参数结构体
  * @class
  */
-class MediaVideoStreamItem extends  AbstractModel {
+class LiveRealTimeClipRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 视频流的码率，单位：bps。
-         * @type {number || null}
-         */
-        this.Bitrate = null;
-
-        /**
-         * 视频流的高度，单位：px。
-         * @type {number || null}
-         */
-        this.Height = null;
-
-        /**
-         * 视频流的宽度，单位：px。
-         * @type {number || null}
-         */
-        this.Width = null;
-
-        /**
-         * 视频流的编码格式，例如 h264。
+         * 推流[直播码](https://cloud.tencent.com/document/product/267/5959)。
          * @type {string || null}
          */
-        this.Codec = null;
+        this.StreamId = null;
 
         /**
-         * 帧率，单位：hz。
+         * 流剪辑的开始时间，格式参照 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F)。
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * 流剪辑的结束时间，格式参照 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F)。
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * 是否固化。0 不固化，1 固化。默认不固化。
          * @type {number || null}
          */
-        this.Fps = null;
+        this.IsPersistence = null;
+
+        /**
+         * 剪辑固化后的视频存储过期时间。格式参照 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F)。填“9999-12-31T23:59:59Z”表示永不过期。过期后该媒体文件及其相关资源（转码结果、雪碧图等）将被永久删除。仅 IsPersistence 为 1 时有效，默认剪辑固化的视频永不过期。
+         * @type {string || null}
+         */
+        this.ExpireTime = null;
+
+        /**
+         * 剪辑固化后的视频点播任务流处理，详见[上传指定任务流](https://cloud.tencent.com/document/product/266/9759)。仅 IsPersistence 为 1 时有效。
+         * @type {string || null}
+         */
+        this.Procedure = null;
 
     }
 
@@ -1064,11 +1175,12 @@ class MediaVideoStreamItem extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Bitrate = 'Bitrate' in params ? params.Bitrate : null;
-        this.Height = 'Height' in params ? params.Height : null;
-        this.Width = 'Width' in params ? params.Width : null;
-        this.Codec = 'Codec' in params ? params.Codec : null;
-        this.Fps = 'Fps' in params ? params.Fps : null;
+        this.StreamId = 'StreamId' in params ? params.StreamId : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.IsPersistence = 'IsPersistence' in params ? params.IsPersistence : null;
+        this.ExpireTime = 'ExpireTime' in params ? params.ExpireTime : null;
+        this.Procedure = 'Procedure' in params ? params.Procedure : null;
 
     }
 }
@@ -2392,13 +2504,14 @@ class DescribeMediaInfosResponse extends  AbstractModel {
 
 module.exports = {
     DeleteMediaResponse: DeleteMediaResponse,
-    TempCertificate: TempCertificate,
+    MediaVideoStreamItem: MediaVideoStreamItem,
     SearchMediaResponse: SearchMediaResponse,
     ModifyMediaInfoResponse: ModifyMediaInfoResponse,
     ModifyClassRequest: ModifyClassRequest,
     DescribeAllClassRequest: DescribeAllClassRequest,
     MediaTranscodeItem: MediaTranscodeItem,
     MediaDeleteItem: MediaDeleteItem,
+    TempCertificate: TempCertificate,
     MediaAudioStreamItem: MediaAudioStreamItem,
     MediaKeyFrameDescInfo: MediaKeyFrameDescInfo,
     DescribeMediaInfosRequest: DescribeMediaInfosRequest,
@@ -2408,12 +2521,13 @@ module.exports = {
     MediaImageSpriteInfo: MediaImageSpriteInfo,
     MediaImageSpriteItem: MediaImageSpriteItem,
     MediaSnapshotByTimeOffsetInfo: MediaSnapshotByTimeOffsetInfo,
+    LiveRealTimeClipResponse: LiveRealTimeClipResponse,
     MediaKeyFrameDescItem: MediaKeyFrameDescItem,
     CommitUploadResponse: CommitUploadResponse,
     MediaSourceData: MediaSourceData,
     CreateClassResponse: CreateClassResponse,
     MediaClassInfo: MediaClassInfo,
-    MediaVideoStreamItem: MediaVideoStreamItem,
+    LiveRealTimeClipRequest: LiveRealTimeClipRequest,
     ModifyClassResponse: ModifyClassResponse,
     ModifyMediaInfoRequest: ModifyMediaInfoRequest,
     MediaAnimatedGraphicsInfo: MediaAnimatedGraphicsInfo,

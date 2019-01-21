@@ -1061,7 +1061,7 @@ class DescribeDeviceRequest extends  AbstractModel {
         this.ProductID = null;
 
         /**
-         * 产品名
+         * 设备名
          * @type {string || null}
          */
         this.DeviceName = null;
@@ -2224,7 +2224,7 @@ class DeviceInfo extends  AbstractModel {
         this.Online = null;
 
         /**
-         * 设备登陆时间
+         * 设备登录时间
          * @type {number || null}
          */
         this.LoginTime = null;

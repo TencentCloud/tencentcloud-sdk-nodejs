@@ -18,6 +18,7 @@ const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const SellType = models.SellType;
 const CreateDBInstanceRequest = models.CreateDBInstanceRequest;
+const DeviceDiskInfo = models.DeviceDiskInfo;
 const DescribeAccountPrivilegesResponse = models.DescribeAccountPrivilegesResponse;
 const CreateDBImportJobRequest = models.CreateDBImportJobRequest;
 const DescribeDatabasesRequest = models.DescribeDatabasesRequest;
@@ -40,13 +41,15 @@ const SellConfig = models.SellConfig;
 const DescribeDBSecurityGroupsResponse = models.DescribeDBSecurityGroupsResponse;
 const MasterInfo = models.MasterInfo;
 const DescribeBinlogsResponse = models.DescribeBinlogsResponse;
+const DescribeDefaultParamsRequest = models.DescribeDefaultParamsRequest;
 const DBSwitchInfo = models.DBSwitchInfo;
 const DescribeDBPriceResponse = models.DescribeDBPriceResponse;
 const DescribeTasksResponse = models.DescribeTasksResponse;
+const DescribeParamTemplatesRequest = models.DescribeParamTemplatesRequest;
 const DescribeRollbackRangeTimeRequest = models.DescribeRollbackRangeTimeRequest;
 const DescribeBackupsRequest = models.DescribeBackupsRequest;
 const ModifyDBInstanceProjectResponse = models.ModifyDBInstanceProjectResponse;
-const IsolateDBInstanceResponse = models.IsolateDBInstanceResponse;
+const DescribeInstanceParamRecordsResponse = models.DescribeInstanceParamRecordsResponse;
 const DescribeDBInstanceGTIDResponse = models.DescribeDBInstanceGTIDResponse;
 const OpenDBInstanceGTIDResponse = models.OpenDBInstanceGTIDResponse;
 const DescribeDBZoneConfigRequest = models.DescribeDBZoneConfigRequest;
@@ -56,16 +59,19 @@ const RoGroup = models.RoGroup;
 const ParameterDetail = models.ParameterDetail;
 const ModifyAccountDescriptionResponse = models.ModifyAccountDescriptionResponse;
 const SwitchForUpgradeRequest = models.SwitchForUpgradeRequest;
-const ModifyInstanceParamRequest = models.ModifyInstanceParamRequest;
+const CreateParamTemplateResponse = models.CreateParamTemplateResponse;
 const CreateDBInstanceHourResponse = models.CreateDBInstanceHourResponse;
 const BinlogInfo = models.BinlogInfo;
 const DescribeTasksRequest = models.DescribeTasksRequest;
-const OpenDBInstanceGTIDRequest = models.OpenDBInstanceGTIDRequest;
+const IsolateDBInstanceResponse = models.IsolateDBInstanceResponse;
+const SlaveConfig = models.SlaveConfig;
+const DeviceCpuInfo = models.DeviceCpuInfo;
 const ImportRecord = models.ImportRecord;
-const CreateAccountsRequest = models.CreateAccountsRequest;
+const CreateParamTemplateRequest = models.CreateParamTemplateRequest;
 const CreateDBInstanceHourRequest = models.CreateDBInstanceHourRequest;
 const DescribeSlowLogsResponse = models.DescribeSlowLogsResponse;
 const RollbackInstancesInfo = models.RollbackInstancesInfo;
+const DescribeParamTemplateInfoRequest = models.DescribeParamTemplateInfoRequest;
 const BackupInfo = models.BackupInfo;
 const CloseWanServiceResponse = models.CloseWanServiceResponse;
 const DescribeDBInstancesRequest = models.DescribeDBInstancesRequest;
@@ -74,21 +80,24 @@ const ModifyDBInstanceVipVportResponse = models.ModifyDBInstanceVipVportResponse
 const DescribeDBSwitchRecordsResponse = models.DescribeDBSwitchRecordsResponse;
 const TableName = models.TableName;
 const RenewDBInstanceRequest = models.RenewDBInstanceRequest;
-const SlowLogInfo = models.SlowLogInfo;
+const RollbackTableName = models.RollbackTableName;
 const DeleteBackupResponse = models.DeleteBackupResponse;
-const TablePrivilege = models.TablePrivilege;
+const ModifyInstanceParamRequest = models.ModifyInstanceParamRequest;
 const DescribeProjectSecurityGroupsResponse = models.DescribeProjectSecurityGroupsResponse;
 const UploadInfo = models.UploadInfo;
 const ModifyAccountPasswordResponse = models.ModifyAccountPasswordResponse;
+const ModifyInstanceTagResponse = models.ModifyInstanceTagResponse;
 const DescribeDBSwitchRecordsRequest = models.DescribeDBSwitchRecordsRequest;
 const DescribeAsyncRequestInfoResponse = models.DescribeAsyncRequestInfoResponse;
 const CreateDBInstanceResponse = models.CreateDBInstanceResponse;
-const RollbackTableName = models.RollbackTableName;
+const ModifyInstanceTagRequest = models.ModifyInstanceTagRequest;
 const CloseWanServiceRequest = models.CloseWanServiceRequest;
 const DeleteAccountsResponse = models.DeleteAccountsResponse;
 const DescribeDBInstanceCharsetResponse = models.DescribeDBInstanceCharsetResponse;
 const RestartDBInstancesResponse = models.RestartDBInstancesResponse;
+const ParamTemplateInfo = models.ParamTemplateInfo;
 const DescribeBackupDatabasesResponse = models.DescribeBackupDatabasesResponse;
+const DescribeInstanceParamRecordsRequest = models.DescribeInstanceParamRecordsRequest;
 const ModifyAutoRenewFlagResponse = models.ModifyAutoRenewFlagResponse;
 const DescribeBackupsResponse = models.DescribeBackupsResponse;
 const DescribeDBImportRecordsResponse = models.DescribeDBImportRecordsResponse;
@@ -96,34 +105,43 @@ const OpenWanServiceRequest = models.OpenWanServiceRequest;
 const DatabaseName = models.DatabaseName;
 const DescribeInstanceParamsRequest = models.DescribeInstanceParamsRequest;
 const ModifyDBInstanceSecurityGroupsRequest = models.ModifyDBInstanceSecurityGroupsRequest;
+const DescribeParamTemplatesResponse = models.DescribeParamTemplatesResponse;
 const DescribeBackupTablesResponse = models.DescribeBackupTablesResponse;
 const Outbound = models.Outbound;
 const SlaveInstanceInfo = models.SlaveInstanceInfo;
+const ModifyParamTemplateResponse = models.ModifyParamTemplateResponse;
 const ParamInfo = models.ParamInfo;
 const DescribeProjectSecurityGroupsRequest = models.DescribeProjectSecurityGroupsRequest;
 const StartBatchRollbackRequest = models.StartBatchRollbackRequest;
 const SecurityGroup = models.SecurityGroup;
 const ZoneConf = models.ZoneConf;
+const DeviceNetInfo = models.DeviceNetInfo;
 const SlaveInfo = models.SlaveInfo;
 const ModifyDBInstanceNameRequest = models.ModifyDBInstanceNameRequest;
+const TagInfoUnit = models.TagInfoUnit;
 const UpgradeDBInstanceEngineVersionResponse = models.UpgradeDBInstanceEngineVersionResponse;
+const InquiryPriceUpgradeInstancesRequest = models.InquiryPriceUpgradeInstancesRequest;
 const DescribeAsyncRequestInfoRequest = models.DescribeAsyncRequestInfoRequest;
 const ModifyInstanceParamResponse = models.ModifyInstanceParamResponse;
 const UpgradeDBInstanceRequest = models.UpgradeDBInstanceRequest;
 const ColumnPrivilege = models.ColumnPrivilege;
 const DescribeUploadedFilesRequest = models.DescribeUploadedFilesRequest;
-const DescribeUploadedFilesResponse = models.DescribeUploadedFilesResponse;
-const InitDBInstancesRequest = models.InitDBInstancesRequest;
-const AssociateSecurityGroupsResponse = models.AssociateSecurityGroupsResponse;
-const InstanceInfo = models.InstanceInfo;
-const CreateBackupResponse = models.CreateBackupResponse;
+const DescribeDeviceMonitorInfoRequest = models.DescribeDeviceMonitorInfoRequest;
 const DescribeDBPriceRequest = models.DescribeDBPriceRequest;
-const SlaveConfig = models.SlaveConfig;
+const AssociateSecurityGroupsResponse = models.AssociateSecurityGroupsResponse;
+const TagsInfoOfInstance = models.TagsInfoOfInstance;
+const DescribeUploadedFilesResponse = models.DescribeUploadedFilesResponse;
+const CreateBackupResponse = models.CreateBackupResponse;
+const DescribeDBInstanceConfigResponse = models.DescribeDBInstanceConfigResponse;
+const DescribeDefaultParamsResponse = models.DescribeDefaultParamsResponse;
 const ModifyAccountPrivilegesResponse = models.ModifyAccountPrivilegesResponse;
 const BackupConfig = models.BackupConfig;
+const OpenDBInstanceGTIDRequest = models.OpenDBInstanceGTIDRequest;
+const DescribeTagsOfInstanceIdsResponse = models.DescribeTagsOfInstanceIdsResponse;
 const VerifyRootAccountResponse = models.VerifyRootAccountResponse;
 const DescribeDBInstanceConfigRequest = models.DescribeDBInstanceConfigRequest;
 const DescribeBackupTablesRequest = models.DescribeBackupTablesRequest;
+const InstanceInfo = models.InstanceInfo;
 const DatabasePrivilege = models.DatabasePrivilege;
 const ModifyDBInstanceSecurityGroupsResponse = models.ModifyDBInstanceSecurityGroupsResponse;
 const ModifyDBInstanceNameResponse = models.ModifyDBInstanceNameResponse;
@@ -133,10 +151,13 @@ const DescribeTablesRequest = models.DescribeTablesRequest;
 const InstanceRebootTime = models.InstanceRebootTime;
 const RenewDBInstanceResponse = models.RenewDBInstanceResponse;
 const DescribeDatabasesResponse = models.DescribeDatabasesResponse;
+const ModifyParamTemplateRequest = models.ModifyParamTemplateRequest;
 const ZoneSellConf = models.ZoneSellConf;
-const DescribeDBInstanceConfigResponse = models.DescribeDBInstanceConfigResponse;
+const InitDBInstancesRequest = models.InitDBInstancesRequest;
 const RoInstanceInfo = models.RoInstanceInfo;
+const CreateAccountsRequest = models.CreateAccountsRequest;
 const IsolateDBInstanceRequest = models.IsolateDBInstanceRequest;
+const DeviceCpuRateInfo = models.DeviceCpuRateInfo;
 const ModifyAccountPrivilegesRequest = models.ModifyAccountPrivilegesRequest;
 const Account = models.Account;
 const CreateBackupRequest = models.CreateBackupRequest;
@@ -144,6 +165,7 @@ const AccountInfo = models.AccountInfo;
 const DescribeDBInstanceCharsetRequest = models.DescribeDBInstanceCharsetRequest;
 const RollbackTables = models.RollbackTables;
 const DescribeBackupDatabasesRequest = models.DescribeBackupDatabasesRequest;
+const DeviceMemInfo = models.DeviceMemInfo;
 const ModifyAutoRenewFlagRequest = models.ModifyAutoRenewFlagRequest;
 const UpgradeDBInstanceEngineVersionRequest = models.UpgradeDBInstanceEngineVersionRequest;
 const UpgradeDBInstanceResponse = models.UpgradeDBInstanceResponse;
@@ -151,9 +173,14 @@ const ModifyDBInstanceVipVportRequest = models.ModifyDBInstanceVipVportRequest;
 const ModifyBackupConfigResponse = models.ModifyBackupConfigResponse;
 const DescribeDBImportRecordsRequest = models.DescribeDBImportRecordsRequest;
 const CreateDBImportJobResponse = models.CreateDBImportJobResponse;
+const DescribeTagsOfInstanceIdsRequest = models.DescribeTagsOfInstanceIdsRequest;
 const TagInfo = models.TagInfo;
 const DescribeDBInstancesResponse = models.DescribeDBInstancesResponse;
+const TablePrivilege = models.TablePrivilege;
+const SlowLogInfo = models.SlowLogInfo;
 const InitDBInstancesResponse = models.InitDBInstancesResponse;
+const DescribeParamTemplateInfoResponse = models.DescribeParamTemplateInfoResponse;
+const ParamRecord = models.ParamRecord;
 const RestartDBInstancesRequest = models.RestartDBInstancesRequest;
 const DescribeInstanceParamsResponse = models.DescribeInstanceParamsResponse;
 const DescribeDBZoneConfigResponse = models.DescribeDBZoneConfigResponse;
@@ -167,6 +194,7 @@ const RollbackTimeRange = models.RollbackTimeRange;
 const DeleteBackupRequest = models.DeleteBackupRequest;
 const DescribeBackupConfigResponse = models.DescribeBackupConfigResponse;
 const StartBatchRollbackResponse = models.StartBatchRollbackResponse;
+const DescribeDeviceMonitorInfoResponse = models.DescribeDeviceMonitorInfoResponse;
 const DescribeRollbackRangeTimeResponse = models.DescribeRollbackRangeTimeResponse;
 const VerifyRootAccountRequest = models.VerifyRootAccountRequest;
 const OpenWanServiceResponse = models.OpenWanServiceResponse;
@@ -175,6 +203,7 @@ const DescribeBinlogsRequest = models.DescribeBinlogsRequest;
 const DisassociateSecurityGroupsResponse = models.DisassociateSecurityGroupsResponse;
 const DescribeDBInstanceGTIDRequest = models.DescribeDBInstanceGTIDRequest;
 const RollbackDBName = models.RollbackDBName;
+const InquiryPriceUpgradeInstancesResponse = models.InquiryPriceUpgradeInstancesResponse;
 
 
 /**
@@ -221,6 +250,17 @@ class CdbClient extends AbstractClient {
     }
 
     /**
+     * 本接口(UpgradeDBInstance)用于升级云数据库实例，实例类型支持主实例、灾备实例和只读实例
+     * @param {UpgradeDBInstanceRequest} req
+     * @param {function(string, UpgradeDBInstanceResponse):void} cb
+     * @public
+     */
+    UpgradeDBInstance(req, cb) {
+        let resp = new UpgradeDBInstanceResponse();
+        this.request("UpgradeDBInstance", req, resp, cb);
+    }
+
+    /**
      * 本接口(DescribeProjectSecurityGroups)用于查询项目的安全组详情。
      * @param {DescribeProjectSecurityGroupsRequest} req
      * @param {function(string, DescribeProjectSecurityGroupsResponse):void} cb
@@ -253,6 +293,17 @@ class CdbClient extends AbstractClient {
     DescribeRollbackRangeTime(req, cb) {
         let resp = new DescribeRollbackRangeTimeResponse();
         this.request("DescribeRollbackRangeTime", req, resp, cb);
+    }
+
+    /**
+     * 该接口（DescribeParamTemplates）查询参数模板列表。
+     * @param {DescribeParamTemplatesRequest} req
+     * @param {function(string, DescribeParamTemplatesResponse):void} cb
+     * @public
+     */
+    DescribeParamTemplates(req, cb) {
+        let resp = new DescribeParamTemplatesResponse();
+        this.request("DescribeParamTemplates", req, resp, cb);
     }
 
     /**
@@ -333,6 +384,17 @@ class CdbClient extends AbstractClient {
     }
 
     /**
+     * 可以对实例标签进行添加、修改或者删除
+     * @param {ModifyInstanceTagRequest} req
+     * @param {function(string, ModifyInstanceTagResponse):void} cb
+     * @public
+     */
+    ModifyInstanceTag(req, cb) {
+        let resp = new ModifyInstanceTagResponse();
+        this.request("ModifyInstanceTag", req, resp, cb);
+    }
+
+    /**
      * 本接口(DescribeBackups)用于查询云数据库实例的备份数据。
      * @param {DescribeBackupsRequest} req
      * @param {function(string, DescribeBackupsResponse):void} cb
@@ -355,14 +417,14 @@ class CdbClient extends AbstractClient {
     }
 
     /**
-     * 本接口(DescribeBackupDatabases)用于查询备份数据库列表。
-     * @param {DescribeBackupDatabasesRequest} req
-     * @param {function(string, DescribeBackupDatabasesResponse):void} cb
+     * 该接口（CreateParamTemplate）用于创建参数模板。
+     * @param {CreateParamTemplateRequest} req
+     * @param {function(string, CreateParamTemplateResponse):void} cb
      * @public
      */
-    DescribeBackupDatabases(req, cb) {
-        let resp = new DescribeBackupDatabasesResponse();
-        this.request("DescribeBackupDatabases", req, resp, cb);
+    CreateParamTemplate(req, cb) {
+        let resp = new CreateParamTemplateResponse();
+        this.request("CreateParamTemplate", req, resp, cb);
     }
 
     /**
@@ -392,6 +454,17 @@ class CdbClient extends AbstractClient {
     CreateDBInstanceHour(req, cb) {
         let resp = new CreateDBInstanceHourResponse();
         this.request("CreateDBInstanceHour", req, resp, cb);
+    }
+
+    /**
+     * 本接口(StopDBImportJob)用于终止数据导入任务。
+     * @param {StopDBImportJobRequest} req
+     * @param {function(string, StopDBImportJobResponse):void} cb
+     * @public
+     */
+    StopDBImportJob(req, cb) {
+        let resp = new StopDBImportJobResponse();
+        this.request("StopDBImportJob", req, resp, cb);
     }
 
     /**
@@ -575,6 +648,17 @@ class CdbClient extends AbstractClient {
     }
 
     /**
+     * 本接口(InquiryPriceUpgradeInstances)用于查询云数据库实例升级的价格，支持查询按量计费或者包年包月实例的升级价格，实例类型支持主实例、灾备实例和只读实例。
+     * @param {InquiryPriceUpgradeInstancesRequest} req
+     * @param {function(string, InquiryPriceUpgradeInstancesResponse):void} cb
+     * @public
+     */
+    InquiryPriceUpgradeInstances(req, cb) {
+        let resp = new InquiryPriceUpgradeInstancesResponse();
+        this.request("InquiryPriceUpgradeInstances", req, resp, cb);
+    }
+
+    /**
      * 本接口(DescribeDBPrice)用于查询云数据库实例的价格，支持查询按量计费或者包年包月的价格。可传入实例类型、购买时长、购买数量、内存大小、硬盘大小和可用区信息等来查询实例价格。
      * @param {DescribeDBPriceRequest} req
      * @param {function(string, DescribeDBPriceResponse):void} cb
@@ -586,14 +670,25 @@ class CdbClient extends AbstractClient {
     }
 
     /**
-     * 本接口(OpenWanService)用于开通实例外网访问
-     * @param {OpenWanServiceRequest} req
-     * @param {function(string, OpenWanServiceResponse):void} cb
+     * 本接口（DescribeDeviceMonitorInfo）用于查询云数据库物理机当天的监控信息，暂只支持内存488G、硬盘6T的实例查询。
+     * @param {DescribeDeviceMonitorInfoRequest} req
+     * @param {function(string, DescribeDeviceMonitorInfoResponse):void} cb
      * @public
      */
-    OpenWanService(req, cb) {
-        let resp = new OpenWanServiceResponse();
-        this.request("OpenWanService", req, resp, cb);
+    DescribeDeviceMonitorInfo(req, cb) {
+        let resp = new DescribeDeviceMonitorInfoResponse();
+        this.request("DescribeDeviceMonitorInfo", req, resp, cb);
+    }
+
+    /**
+     * 该接口（ModifyParamTemplate）用于修改参数模板。
+     * @param {ModifyParamTemplateRequest} req
+     * @param {function(string, ModifyParamTemplateResponse):void} cb
+     * @public
+     */
+    ModifyParamTemplate(req, cb) {
+        let resp = new ModifyParamTemplateResponse();
+        this.request("ModifyParamTemplate", req, resp, cb);
     }
 
     /**
@@ -714,14 +809,25 @@ class CdbClient extends AbstractClient {
     }
 
     /**
-     * 本接口(StopDBImportJob)用于终止数据导入任务。
-     * @param {StopDBImportJobRequest} req
-     * @param {function(string, StopDBImportJobResponse):void} cb
+     * 该接口（DescribeDefaultParams）用于查询默认的可设置参数列表。
+     * @param {DescribeDefaultParamsRequest} req
+     * @param {function(string, DescribeDefaultParamsResponse):void} cb
      * @public
      */
-    StopDBImportJob(req, cb) {
-        let resp = new StopDBImportJobResponse();
-        this.request("StopDBImportJob", req, resp, cb);
+    DescribeDefaultParams(req, cb) {
+        let resp = new DescribeDefaultParamsResponse();
+        this.request("DescribeDefaultParams", req, resp, cb);
+    }
+
+    /**
+     * 获取实例绑定的标签
+     * @param {DescribeTagsOfInstanceIdsRequest} req
+     * @param {function(string, DescribeTagsOfInstanceIdsResponse):void} cb
+     * @public
+     */
+    DescribeTagsOfInstanceIds(req, cb) {
+        let resp = new DescribeTagsOfInstanceIdsResponse();
+        this.request("DescribeTagsOfInstanceIds", req, resp, cb);
     }
 
     /**
@@ -802,14 +908,27 @@ class CdbClient extends AbstractClient {
     }
 
     /**
-     * 本接口(UpgradeDBInstance)用于升级云数据库实例，实例类型支持主实例、灾备实例和只读实例
-     * @param {UpgradeDBInstanceRequest} req
-     * @param {function(string, UpgradeDBInstanceResponse):void} cb
+     * 该接口（DescribeInstanceParamRecords）用于查询实例参数修改历史。
+     * @param {DescribeInstanceParamRecordsRequest} req
+     * @param {function(string, DescribeInstanceParamRecordsResponse):void} cb
      * @public
      */
-    UpgradeDBInstance(req, cb) {
-        let resp = new UpgradeDBInstanceResponse();
-        this.request("UpgradeDBInstance", req, resp, cb);
+    DescribeInstanceParamRecords(req, cb) {
+        let resp = new DescribeInstanceParamRecordsResponse();
+        this.request("DescribeInstanceParamRecords", req, resp, cb);
+    }
+
+    /**
+     * 本接口(OpenWanService)用于开通实例外网访问。
+
+注意，实例开通外网访问之前，需要先将实例进行[实例初始化](https://cloud.tencent.com/document/api/236/15873)操作。
+     * @param {OpenWanServiceRequest} req
+     * @param {function(string, OpenWanServiceResponse):void} cb
+     * @public
+     */
+    OpenWanService(req, cb) {
+        let resp = new OpenWanServiceResponse();
+        this.request("OpenWanService", req, resp, cb);
     }
 
     /**
@@ -824,6 +943,17 @@ class CdbClient extends AbstractClient {
     }
 
     /**
+     * 该接口（DescribeParamTemplateInfo）用于查询参数模板详情。
+     * @param {DescribeParamTemplateInfoRequest} req
+     * @param {function(string, DescribeParamTemplateInfoResponse):void} cb
+     * @public
+     */
+    DescribeParamTemplateInfo(req, cb) {
+        let resp = new DescribeParamTemplateInfoResponse();
+        this.request("DescribeParamTemplateInfo", req, resp, cb);
+    }
+
+    /**
      * 本接口(DisassociateSecurityGroups)用于安全组批量解绑实例。
      * @param {DisassociateSecurityGroupsRequest} req
      * @param {function(string, DisassociateSecurityGroupsResponse):void} cb
@@ -832,6 +962,17 @@ class CdbClient extends AbstractClient {
     DisassociateSecurityGroups(req, cb) {
         let resp = new DisassociateSecurityGroupsResponse();
         this.request("DisassociateSecurityGroups", req, resp, cb);
+    }
+
+    /**
+     * 本接口(DescribeBackupDatabases)用于查询备份数据库列表。
+     * @param {DescribeBackupDatabasesRequest} req
+     * @param {function(string, DescribeBackupDatabasesResponse):void} cb
+     * @public
+     */
+    DescribeBackupDatabases(req, cb) {
+        let resp = new DescribeBackupDatabasesResponse();
+        this.request("DescribeBackupDatabases", req, resp, cb);
     }
 
     /**
