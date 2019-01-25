@@ -2842,102 +2842,36 @@ class ModifyServiceTemplateGroupAttributeResponse extends  AbstractModel {
 }
 
 /**
- * VPN网关对象。
+ * 单项计费价格信息
  * @class
  */
-class VpnGateway extends  AbstractModel {
+class ItemPrice extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 网关实例ID。
-         * @type {string || null}
-         */
-        this.VpnGatewayId = null;
-
-        /**
-         * VPC实例ID。
-         * @type {string || null}
-         */
-        this.VpcId = null;
-
-        /**
-         * 网关实例名称。
-         * @type {string || null}
-         */
-        this.VpnGatewayName = null;
-
-        /**
-         * 网关实例类型：'IPSEC', 'SSL'。
-         * @type {string || null}
-         */
-        this.Type = null;
-
-        /**
-         * 网关实例状态， 'PENDING'：生产中，'DELETING'：删除中，'AVAILABLE'：运行中。
-         * @type {string || null}
-         */
-        this.State = null;
-
-        /**
-         * 网关公网IP。
-         * @type {string || null}
-         */
-        this.PublicIpAddress = null;
-
-        /**
-         * 网关续费类型：'NOTIFY_AND_MANUAL_RENEW'：手动续费，'NOTIFY_AND_AUTO_RENEW'：自动续费
-         * @type {string || null}
-         */
-        this.RenewFlag = null;
-
-        /**
-         * 网关付费类型：POSTPAID_BY_HOUR：按小时后付费，PREPAID：包年包月预付费，
-         * @type {string || null}
-         */
-        this.InstanceChargeType = null;
-
-        /**
-         * 网关出带宽。
+         * 按量计费后付费单价，单位：元。
          * @type {number || null}
          */
-        this.InternetMaxBandwidthOut = null;
+        this.UnitPrice = null;
 
         /**
-         * 创建时间。
+         * 按量计费后付费计价单元，可取值范围： HOUR：表示计价单元是按每小时来计算。当前涉及该计价单元的场景有：实例按小时后付费（POSTPAID_BY_HOUR）、带宽按小时后付费（BANDWIDTH_POSTPAID_BY_HOUR）： GB：表示计价单元是按每GB来计算。当前涉及该计价单元的场景有：流量按小时后付费（TRAFFIC_POSTPAID_BY_HOUR）。
          * @type {string || null}
          */
-        this.CreatedTime = null;
+        this.ChargeUnit = null;
 
         /**
-         * 预付费网关过期时间。
-         * @type {string || null}
+         * 预付费商品的原价，单位：元。
+         * @type {number || null}
          */
-        this.ExpiredTime = null;
+        this.OriginalPrice = null;
 
         /**
-         * 公网IP是否被封堵。
-         * @type {boolean || null}
+         * 预付费商品的折扣价，单位：元。
+         * @type {number || null}
          */
-        this.IsAddressBlocked = null;
-
-        /**
-         * 计费模式变更，PREPAID_TO_POSTPAID：包年包月预付费到期转按小时后付费。
-         * @type {string || null}
-         */
-        this.NewPurchasePlan = null;
-
-        /**
-         * 网关计费装，PROTECTIVELY_ISOLATED：被安全隔离的实例，NORMAL：正常。
-         * @type {string || null}
-         */
-        this.RestrictState = null;
-
-        /**
-         * 可用区，如：ap-guangzhou-2
-         * @type {string || null}
-         */
-        this.Zone = null;
+        this.DiscountPrice = null;
 
     }
 
@@ -2948,21 +2882,10 @@ class VpnGateway extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.VpnGatewayId = 'VpnGatewayId' in params ? params.VpnGatewayId : null;
-        this.VpcId = 'VpcId' in params ? params.VpcId : null;
-        this.VpnGatewayName = 'VpnGatewayName' in params ? params.VpnGatewayName : null;
-        this.Type = 'Type' in params ? params.Type : null;
-        this.State = 'State' in params ? params.State : null;
-        this.PublicIpAddress = 'PublicIpAddress' in params ? params.PublicIpAddress : null;
-        this.RenewFlag = 'RenewFlag' in params ? params.RenewFlag : null;
-        this.InstanceChargeType = 'InstanceChargeType' in params ? params.InstanceChargeType : null;
-        this.InternetMaxBandwidthOut = 'InternetMaxBandwidthOut' in params ? params.InternetMaxBandwidthOut : null;
-        this.CreatedTime = 'CreatedTime' in params ? params.CreatedTime : null;
-        this.ExpiredTime = 'ExpiredTime' in params ? params.ExpiredTime : null;
-        this.IsAddressBlocked = 'IsAddressBlocked' in params ? params.IsAddressBlocked : null;
-        this.NewPurchasePlan = 'NewPurchasePlan' in params ? params.NewPurchasePlan : null;
-        this.RestrictState = 'RestrictState' in params ? params.RestrictState : null;
-        this.Zone = 'Zone' in params ? params.Zone : null;
+        this.UnitPrice = 'UnitPrice' in params ? params.UnitPrice : null;
+        this.ChargeUnit = 'ChargeUnit' in params ? params.ChargeUnit : null;
+        this.OriginalPrice = 'OriginalPrice' in params ? params.OriginalPrice : null;
+        this.DiscountPrice = 'DiscountPrice' in params ? params.DiscountPrice : null;
 
     }
 }
@@ -3434,6 +3357,67 @@ class AllocateAddressesRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeIp6Translators请求参数结构体
+ * @class
+ */
+class DescribeIp6TranslatorsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * IPV6转换实例唯一ID数组，形如ip6-xxxxxxxx
+         * @type {Array.<string> || null}
+         */
+        this.Ip6TranslatorIds = null;
+
+        /**
+         * 每次请求的`Filters`的上限为10，`Filter.Values`的上限为5。参数不支持同时指定`Ip6TranslatorIds`和`Filters`。详细的过滤条件如下：
+<li> ip6-translator-id - String - 是否必填：否 - （过滤条件）按照IPV6转换实例的唯一ID过滤,形如ip6-xxxxxxx。</li>
+<li> ip6-translator-vip6 - String - 是否必填：否 - （过滤条件）按照IPV6地址过滤。不支持模糊过滤。</li>
+<li> ip6-translator-name - String - 是否必填：否 - （过滤条件）按照IPV6转换实例名称过滤。不支持模糊过滤。</li>
+<li> ip6-translator-status - String - 是否必填：否 - （过滤条件）按照IPV6转换实例的状态过滤。状态取值范围为"CREATING","RUNNING","DELETING","MODIFYING"
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * 偏移量，默认为0。关于`Offset`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/11646)中的相关小节。
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 返回数量，默认为20，最大值为100。关于`Limit`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/11646)中的相关小节。
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Ip6TranslatorIds = 'Ip6TranslatorIds' in params ? params.Ip6TranslatorIds : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+
+    }
+}
+
+/**
  * 弹性网卡绑定关系
  * @class
  */
@@ -3672,12 +3656,18 @@ class DetachClassicLinkVpcRequest extends  AbstractModel {
 }
 
 /**
- * DeleteAddressTemplateGroup返回参数结构体
+ * CreateRouteTable返回参数结构体
  * @class
  */
-class DeleteAddressTemplateGroupResponse extends  AbstractModel {
+class CreateRouteTableResponse extends  AbstractModel {
     constructor(){
         super();
+
+        /**
+         * 路由表对象。
+         * @type {RouteTable || null}
+         */
+        this.RouteTable = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -3693,6 +3683,12 @@ class DeleteAddressTemplateGroupResponse extends  AbstractModel {
     deserialize(params) {
         if (!params) {
             return;
+        }
+
+        if (params.RouteTable) {
+            let obj = new RouteTable();
+            obj.deserialize(params.RouteTable)
+            this.RouteTable = obj;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -4254,6 +4250,49 @@ class AddBandwidthPackageResourcesRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeVpcPrivateIpAddresses返回参数结构体
+ * @class
+ */
+class DescribeVpcPrivateIpAddressesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 内网`IP`地址信息列表。
+         * @type {Array.<VpcPrivateIpAddress> || null}
+         */
+        this.VpcPrivateIpAddressSet = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.VpcPrivateIpAddressSet) {
+            this.VpcPrivateIpAddressSet = new Array();
+            for (let z in params.VpcPrivateIpAddressSet) {
+                let obj = new VpcPrivateIpAddress();
+                obj.deserialize(params.VpcPrivateIpAddressSet[z]);
+                this.VpcPrivateIpAddressSet.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * ModifySecurityGroupPolicies请求参数结构体
  * @class
  */
@@ -4352,6 +4391,34 @@ class AttachClassicLinkVpcRequest extends  AbstractModel {
         }
         this.VpcId = 'VpcId' in params ? params.VpcId : null;
         this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
+
+    }
+}
+
+/**
+ * RemoveIp6Rules返回参数结构体
+ * @class
+ */
+class RemoveIp6RulesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -4958,36 +5025,18 @@ class InquiryPriceResetVpnGatewayInternetMaxBandwidthRequest extends  AbstractMo
 }
 
 /**
- * 单项计费价格信息
+ * ResetRoutes返回参数结构体
  * @class
  */
-class ItemPrice extends  AbstractModel {
+class ResetRoutesResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 按量计费后付费单价，单位：元。
-         * @type {number || null}
-         */
-        this.UnitPrice = null;
-
-        /**
-         * 按量计费后付费计价单元，可取值范围： HOUR：表示计价单元是按每小时来计算。当前涉及该计价单元的场景有：实例按小时后付费（POSTPAID_BY_HOUR）、带宽按小时后付费（BANDWIDTH_POSTPAID_BY_HOUR）： GB：表示计价单元是按每GB来计算。当前涉及该计价单元的场景有：流量按小时后付费（TRAFFIC_POSTPAID_BY_HOUR）。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.ChargeUnit = null;
-
-        /**
-         * 预付费商品的原价，单位：元。
-         * @type {number || null}
-         */
-        this.OriginalPrice = null;
-
-        /**
-         * 预付费商品的折扣价，单位：元。
-         * @type {number || null}
-         */
-        this.DiscountPrice = null;
+        this.RequestId = null;
 
     }
 
@@ -4998,10 +5047,35 @@ class ItemPrice extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.UnitPrice = 'UnitPrice' in params ? params.UnitPrice : null;
-        this.ChargeUnit = 'ChargeUnit' in params ? params.ChargeUnit : null;
-        this.OriginalPrice = 'OriginalPrice' in params ? params.OriginalPrice : null;
-        this.DiscountPrice = 'DiscountPrice' in params ? params.DiscountPrice : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DeleteAddressTemplateGroup返回参数结构体
+ * @class
+ */
+class DeleteAddressTemplateGroupResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -5236,6 +5310,41 @@ class CreateCcnResponse extends  AbstractModel {
 }
 
 /**
+ * CreateIp6Translators返回参数结构体
+ * @class
+ */
+class CreateIp6TranslatorsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 转换实例的唯一ID数组，形如"ip6-xxxxxxxx"
+         * @type {Array.<string> || null}
+         */
+        this.Ip6TranslatorSet = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Ip6TranslatorSet = 'Ip6TranslatorSet' in params ? params.Ip6TranslatorSet : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * EnableCcnRoutes请求参数结构体
  * @class
  */
@@ -5463,6 +5572,90 @@ class DeleteSecurityGroupResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DeleteIp6Translators请求参数结构体
+ * @class
+ */
+class DeleteIp6TranslatorsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 待释放的IPV6转换实例的唯一ID，形如‘ip6-xxxxxxxx’
+         * @type {Array.<string> || null}
+         */
+        this.Ip6TranslatorIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Ip6TranslatorIds = 'Ip6TranslatorIds' in params ? params.Ip6TranslatorIds : null;
+
+    }
+}
+
+/**
+ * ModifyIp6Rule请求参数结构体
+ * @class
+ */
+class ModifyIp6RuleRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * IPV6转换实例唯一ID，形如ip6-xxxxxxxx
+         * @type {string || null}
+         */
+        this.Ip6TranslatorId = null;
+
+        /**
+         * IPV6转换规则唯一ID，形如rule6-xxxxxxxx
+         * @type {string || null}
+         */
+        this.Ip6RuleId = null;
+
+        /**
+         * IPV6转换规则修改后的名称
+         * @type {string || null}
+         */
+        this.Ip6RuleName = null;
+
+        /**
+         * IPV6转换规则修改后的IPV4地址
+         * @type {string || null}
+         */
+        this.Vip = null;
+
+        /**
+         * IPV6转换规则修改后的IPV4端口号
+         * @type {number || null}
+         */
+        this.Vport = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Ip6TranslatorId = 'Ip6TranslatorId' in params ? params.Ip6TranslatorId : null;
+        this.Ip6RuleId = 'Ip6RuleId' in params ? params.Ip6RuleId : null;
+        this.Ip6RuleName = 'Ip6RuleName' in params ? params.Ip6RuleName : null;
+        this.Vip = 'Vip' in params ? params.Vip : null;
+        this.Vport = 'Vport' in params ? params.Vport : null;
 
     }
 }
@@ -6064,10 +6257,10 @@ class ModifySubnetAttributeRequest extends  AbstractModel {
 }
 
 /**
- * ResetRoutes返回参数结构体
+ * ReplaceDirectConnectGatewayCcnRoutes返回参数结构体
  * @class
  */
-class ResetRoutesResponse extends  AbstractModel {
+class ReplaceDirectConnectGatewayCcnRoutesResponse extends  AbstractModel {
     constructor(){
         super();
 
@@ -6209,42 +6402,18 @@ class DescribeVpcsRequest extends  AbstractModel {
 }
 
 /**
- * ModifyVpcAttribute请求参数结构体
+ * ModifySecurityGroupPolicies返回参数结构体
  * @class
  */
-class ModifyVpcAttributeRequest extends  AbstractModel {
+class ModifySecurityGroupPoliciesResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * VPC实例ID。形如：vpc-f49l6u0z。每次请求的实例的上限为100。参数不支持同时指定VpcIds和Filters。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.VpcId = null;
-
-        /**
-         * 私有网络名称，可任意命名，但不得超过60个字符。
-         * @type {string || null}
-         */
-        this.VpcName = null;
-
-        /**
-         * 是否开启组播。true: 开启, false: 关闭。
-         * @type {string || null}
-         */
-        this.EnableMulticast = null;
-
-        /**
-         * DNS地址，最多支持4个，第1个默认为主，其余为备
-         * @type {Array.<string> || null}
-         */
-        this.DnsServers = null;
-
-        /**
-         * 域名
-         * @type {string || null}
-         */
-        this.DomainName = null;
+        this.RequestId = null;
 
     }
 
@@ -6255,11 +6424,7 @@ class ModifyVpcAttributeRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.VpcId = 'VpcId' in params ? params.VpcId : null;
-        this.VpcName = 'VpcName' in params ? params.VpcName : null;
-        this.EnableMulticast = 'EnableMulticast' in params ? params.EnableMulticast : null;
-        this.DnsServers = 'DnsServers' in params ? params.DnsServers : null;
-        this.DomainName = 'DomainName' in params ? params.DomainName : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -6366,6 +6531,41 @@ class ResetVpnGatewayInternetMaxBandwidthResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifyIp6Translator请求参数结构体
+ * @class
+ */
+class ModifyIp6TranslatorRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * IPV6转换实例唯一ID，形如ip6-xxxxxxxxx
+         * @type {string || null}
+         */
+        this.Ip6TranslatorId = null;
+
+        /**
+         * IPV6转换实例修改名称
+         * @type {string || null}
+         */
+        this.Ip6TranslatorName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Ip6TranslatorId = 'Ip6TranslatorId' in params ? params.Ip6TranslatorId : null;
+        this.Ip6TranslatorName = 'Ip6TranslatorName' in params ? params.Ip6TranslatorName : null;
 
     }
 }
@@ -6509,6 +6709,91 @@ class RemoveBandwidthPackageResourcesResponse extends  AbstractModel {
 }
 
 /**
+ * IPV6转换实例信息
+ * @class
+ */
+class Ip6Translator extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * IPV6转换实例唯一ID，形如ip6-xxxxxxxx
+         * @type {string || null}
+         */
+        this.Ip6TranslatorId = null;
+
+        /**
+         * IPV6转换实例名称
+         * @type {string || null}
+         */
+        this.Ip6TranslatorName = null;
+
+        /**
+         * IPV6地址
+         * @type {string || null}
+         */
+        this.Vip6 = null;
+
+        /**
+         * IPV6转换地址所属运营商
+         * @type {string || null}
+         */
+        this.IspName = null;
+
+        /**
+         * 转换实例状态，限于CREATING,RUNNING,DELETING,MODIFYING
+         * @type {string || null}
+         */
+        this.TranslatorStatus = null;
+
+        /**
+         * IPV6转换实例创建时间
+         * @type {string || null}
+         */
+        this.CreatedTime = null;
+
+        /**
+         * 绑定的IPV6转换规则数量
+         * @type {number || null}
+         */
+        this.Ip6RuleCount = null;
+
+        /**
+         * IPV6转换规则信息
+         * @type {Array.<Ip6Rule> || null}
+         */
+        this.IP6RuleSet = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Ip6TranslatorId = 'Ip6TranslatorId' in params ? params.Ip6TranslatorId : null;
+        this.Ip6TranslatorName = 'Ip6TranslatorName' in params ? params.Ip6TranslatorName : null;
+        this.Vip6 = 'Vip6' in params ? params.Vip6 : null;
+        this.IspName = 'IspName' in params ? params.IspName : null;
+        this.TranslatorStatus = 'TranslatorStatus' in params ? params.TranslatorStatus : null;
+        this.CreatedTime = 'CreatedTime' in params ? params.CreatedTime : null;
+        this.Ip6RuleCount = 'Ip6RuleCount' in params ? params.Ip6RuleCount : null;
+
+        if (params.IP6RuleSet) {
+            this.IP6RuleSet = new Array();
+            for (let z in params.IP6RuleSet) {
+                let obj = new Ip6Rule();
+                obj.deserialize(params.IP6RuleSet[z]);
+                this.IP6RuleSet.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * 路由表关联关系
  * @class
  */
@@ -6544,24 +6829,66 @@ class RouteTableAssociation extends  AbstractModel {
 }
 
 /**
- * ModifyCustomerGatewayAttribute请求参数结构体
+ * IPV6转换规则
  * @class
  */
-class ModifyCustomerGatewayAttributeRequest extends  AbstractModel {
+class Ip6Rule extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 对端网关ID，例如：cgw-2wqq41m9，可通过DescribeCustomerGateways接口查询对端网关。
+         * IPV6转换规则唯一ID，形如rule6-xxxxxxxx
          * @type {string || null}
          */
-        this.CustomerGatewayId = null;
+        this.Ip6RuleId = null;
 
         /**
-         * 对端网关名称，可任意命名，但不得超过60个字符。
+         * IPV6转换规则名称
          * @type {string || null}
          */
-        this.CustomerGatewayName = null;
+        this.Ip6RuleName = null;
+
+        /**
+         * IPV6地址
+         * @type {string || null}
+         */
+        this.Vip6 = null;
+
+        /**
+         * IPV6端口号
+         * @type {number || null}
+         */
+        this.Vport6 = null;
+
+        /**
+         * 协议类型，支持TCP/UDP
+         * @type {string || null}
+         */
+        this.Protocol = null;
+
+        /**
+         * IPV4地址
+         * @type {string || null}
+         */
+        this.Vip = null;
+
+        /**
+         * IPV4端口号
+         * @type {number || null}
+         */
+        this.Vport = null;
+
+        /**
+         * 转换规则状态，限于CREATING,RUNNING,DELETING,MODIFYING
+         * @type {string || null}
+         */
+        this.RuleStatus = null;
+
+        /**
+         * 转换规则创建时间
+         * @type {string || null}
+         */
+        this.CreatedTime = null;
 
     }
 
@@ -6572,8 +6899,15 @@ class ModifyCustomerGatewayAttributeRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.CustomerGatewayId = 'CustomerGatewayId' in params ? params.CustomerGatewayId : null;
-        this.CustomerGatewayName = 'CustomerGatewayName' in params ? params.CustomerGatewayName : null;
+        this.Ip6RuleId = 'Ip6RuleId' in params ? params.Ip6RuleId : null;
+        this.Ip6RuleName = 'Ip6RuleName' in params ? params.Ip6RuleName : null;
+        this.Vip6 = 'Vip6' in params ? params.Vip6 : null;
+        this.Vport6 = 'Vport6' in params ? params.Vport6 : null;
+        this.Protocol = 'Protocol' in params ? params.Protocol : null;
+        this.Vip = 'Vip' in params ? params.Vip : null;
+        this.Vport = 'Vport' in params ? params.Vport : null;
+        this.RuleStatus = 'RuleStatus' in params ? params.RuleStatus : null;
+        this.CreatedTime = 'CreatedTime' in params ? params.CreatedTime : null;
 
     }
 }
@@ -6946,6 +7280,56 @@ class DescribeCcnRoutesResponse extends  AbstractModel {
                 let obj = new CcnRoute();
                 obj.deserialize(params.RouteSet[z]);
                 this.RouteSet.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeVpcs返回参数结构体
+ * @class
+ */
+class DescribeVpcsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 符合条件的对象数。
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * VPC对象。
+         * @type {Array.<Vpc> || null}
+         */
+        this.VpcSet = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.VpcSet) {
+            this.VpcSet = new Array();
+            for (let z in params.VpcSet) {
+                let obj = new Vpc();
+                obj.deserialize(params.VpcSet[z]);
+                this.VpcSet.push(obj);
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
@@ -7450,10 +7834,10 @@ class AssociateAddressRequest extends  AbstractModel {
 }
 
 /**
- * ModifySecurityGroupPolicies返回参数结构体
+ * ModifyIp6Translator返回参数结构体
  * @class
  */
-class ModifySecurityGroupPoliciesResponse extends  AbstractModel {
+class ModifyIp6TranslatorResponse extends  AbstractModel {
     constructor(){
         super();
 
@@ -7593,6 +7977,34 @@ class DeleteAddressTemplateGroupRequest extends  AbstractModel {
  * @class
  */
 class AttachNetworkInterfaceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DeleteIp6Translators返回参数结构体
+ * @class
+ */
+class DeleteIp6TranslatorsResponse extends  AbstractModel {
     constructor(){
         super();
 
@@ -8738,6 +9150,62 @@ class ResetVpnConnectionResponse extends  AbstractModel {
 }
 
 /**
+ * IPSec配置，腾讯云提供IPSec安全会话设置
+ * @class
+ */
+class IPSECOptionsSpecification extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 加密算法，可选值：'3DES-CBC', 'AES-CBC-128', 'AES-CBC-192', 'AES-CBC-256', 'DES-CBC', 'NULL'， 默认为AES-CBC-128
+         * @type {string || null}
+         */
+        this.EncryptAlgorithm = null;
+
+        /**
+         * 认证算法：可选值：'MD5', 'SHA1'，默认为
+         * @type {string || null}
+         */
+        this.IntegrityAlgorith = null;
+
+        /**
+         * IPsec SA lifetime(s)：单位秒，取值范围：180-604800
+         * @type {number || null}
+         */
+        this.IPSECSaLifetimeSeconds = null;
+
+        /**
+         * PFS：可选值：'NULL', 'DH-GROUP1', 'DH-GROUP2', 'DH-GROUP5', 'DH-GROUP14', 'DH-GROUP24'，默认为NULL
+         * @type {string || null}
+         */
+        this.PfsDhGroup = null;
+
+        /**
+         * IPsec SA lifetime(KB)：单位KB，取值范围：2560-604800
+         * @type {number || null}
+         */
+        this.IPSECSaLifetimeTraffic = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.EncryptAlgorithm = 'EncryptAlgorithm' in params ? params.EncryptAlgorithm : null;
+        this.IntegrityAlgorith = 'IntegrityAlgorith' in params ? params.IntegrityAlgorith : null;
+        this.IPSECSaLifetimeSeconds = 'IPSECSaLifetimeSeconds' in params ? params.IPSECSaLifetimeSeconds : null;
+        this.PfsDhGroup = 'PfsDhGroup' in params ? params.PfsDhGroup : null;
+        this.IPSECSaLifetimeTraffic = 'IPSECSaLifetimeTraffic' in params ? params.IPSECSaLifetimeTraffic : null;
+
+    }
+}
+
+/**
  * CreateHaVip请求参数结构体
  * @class
  */
@@ -9185,24 +9653,30 @@ class ReplaceRoutesRequest extends  AbstractModel {
 }
 
 /**
- * CreateRouteTable返回参数结构体
+ * CreateIp6Translators请求参数结构体
  * @class
  */
-class CreateRouteTableResponse extends  AbstractModel {
+class CreateIp6TranslatorsRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 路由表对象。
-         * @type {RouteTable || null}
-         */
-        this.RouteTable = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * 转换实例名称
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.Ip6TranslatorName = null;
+
+        /**
+         * 创建转换实例数量，默认是1个
+         * @type {number || null}
+         */
+        this.Ip6TranslatorCount = null;
+
+        /**
+         * 转换实例运营商属性，可取"CMCC","CTCC","CUCC","BGP"
+         * @type {string || null}
+         */
+        this.Ip6InternetServiceProvider = null;
 
     }
 
@@ -9213,13 +9687,9 @@ class CreateRouteTableResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.RouteTable) {
-            let obj = new RouteTable();
-            obj.deserialize(params.RouteTable)
-            this.RouteTable = obj;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.Ip6TranslatorName = 'Ip6TranslatorName' in params ? params.Ip6TranslatorName : null;
+        this.Ip6TranslatorCount = 'Ip6TranslatorCount' in params ? params.Ip6TranslatorCount : null;
+        this.Ip6InternetServiceProvider = 'Ip6InternetServiceProvider' in params ? params.Ip6InternetServiceProvider : null;
 
     }
 }
@@ -9466,6 +9936,41 @@ class DisableRoutesRequest extends  AbstractModel {
 }
 
 /**
+ * RemoveIp6Rules请求参数结构体
+ * @class
+ */
+class RemoveIp6RulesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * IPV6转换规则所属的转换实例唯一ID，形如ip6-xxxxxxxx
+         * @type {string || null}
+         */
+        this.Ip6TranslatorId = null;
+
+        /**
+         * 待删除IPV6转换规则，形如rule6-xxxxxxxx
+         * @type {Array.<string> || null}
+         */
+        this.Ip6RuleIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Ip6TranslatorId = 'Ip6TranslatorId' in params ? params.Ip6TranslatorId : null;
+        this.Ip6RuleIds = 'Ip6RuleIds' in params ? params.Ip6RuleIds : null;
+
+    }
+}
+
+/**
  * DeleteVpnConnection请求参数结构体
  * @class
  */
@@ -9496,6 +10001,62 @@ class DeleteVpnConnectionRequest extends  AbstractModel {
         }
         this.VpnGatewayId = 'VpnGatewayId' in params ? params.VpnGatewayId : null;
         this.VpnConnectionId = 'VpnConnectionId' in params ? params.VpnConnectionId : null;
+
+    }
+}
+
+/**
+ * ModifyVpcAttribute请求参数结构体
+ * @class
+ */
+class ModifyVpcAttributeRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * VPC实例ID。形如：vpc-f49l6u0z。每次请求的实例的上限为100。参数不支持同时指定VpcIds和Filters。
+         * @type {string || null}
+         */
+        this.VpcId = null;
+
+        /**
+         * 私有网络名称，可任意命名，但不得超过60个字符。
+         * @type {string || null}
+         */
+        this.VpcName = null;
+
+        /**
+         * 是否开启组播。true: 开启, false: 关闭。
+         * @type {string || null}
+         */
+        this.EnableMulticast = null;
+
+        /**
+         * DNS地址，最多支持4个，第1个默认为主，其余为备
+         * @type {Array.<string> || null}
+         */
+        this.DnsServers = null;
+
+        /**
+         * 域名
+         * @type {string || null}
+         */
+        this.DomainName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.VpcName = 'VpcName' in params ? params.VpcName : null;
+        this.EnableMulticast = 'EnableMulticast' in params ? params.EnableMulticast : null;
+        this.DnsServers = 'DnsServers' in params ? params.DnsServers : null;
+        this.DomainName = 'DomainName' in params ? params.DomainName : null;
 
     }
 }
@@ -9710,6 +10271,132 @@ class DescribeClassicLinkInstancesRequest extends  AbstractModel {
 }
 
 /**
+ * VPN网关对象。
+ * @class
+ */
+class VpnGateway extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 网关实例ID。
+         * @type {string || null}
+         */
+        this.VpnGatewayId = null;
+
+        /**
+         * VPC实例ID。
+         * @type {string || null}
+         */
+        this.VpcId = null;
+
+        /**
+         * 网关实例名称。
+         * @type {string || null}
+         */
+        this.VpnGatewayName = null;
+
+        /**
+         * 网关实例类型：'IPSEC', 'SSL'。
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * 网关实例状态， 'PENDING'：生产中，'DELETING'：删除中，'AVAILABLE'：运行中。
+         * @type {string || null}
+         */
+        this.State = null;
+
+        /**
+         * 网关公网IP。
+         * @type {string || null}
+         */
+        this.PublicIpAddress = null;
+
+        /**
+         * 网关续费类型：'NOTIFY_AND_MANUAL_RENEW'：手动续费，'NOTIFY_AND_AUTO_RENEW'：自动续费，'NOT_NOTIFY_AND_NOT_RENEW'：到期不续费。
+         * @type {string || null}
+         */
+        this.RenewFlag = null;
+
+        /**
+         * 网关付费类型：POSTPAID_BY_HOUR：按小时后付费，PREPAID：包年包月预付费，
+         * @type {string || null}
+         */
+        this.InstanceChargeType = null;
+
+        /**
+         * 网关出带宽。
+         * @type {number || null}
+         */
+        this.InternetMaxBandwidthOut = null;
+
+        /**
+         * 创建时间。
+         * @type {string || null}
+         */
+        this.CreatedTime = null;
+
+        /**
+         * 预付费网关过期时间。
+         * @type {string || null}
+         */
+        this.ExpiredTime = null;
+
+        /**
+         * 公网IP是否被封堵。
+         * @type {boolean || null}
+         */
+        this.IsAddressBlocked = null;
+
+        /**
+         * 计费模式变更，PREPAID_TO_POSTPAID：包年包月预付费到期转按小时后付费。
+         * @type {string || null}
+         */
+        this.NewPurchasePlan = null;
+
+        /**
+         * 网关计费装，PROTECTIVELY_ISOLATED：被安全隔离的实例，NORMAL：正常。
+         * @type {string || null}
+         */
+        this.RestrictState = null;
+
+        /**
+         * 可用区，如：ap-guangzhou-2
+         * @type {string || null}
+         */
+        this.Zone = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.VpnGatewayId = 'VpnGatewayId' in params ? params.VpnGatewayId : null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.VpnGatewayName = 'VpnGatewayName' in params ? params.VpnGatewayName : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.State = 'State' in params ? params.State : null;
+        this.PublicIpAddress = 'PublicIpAddress' in params ? params.PublicIpAddress : null;
+        this.RenewFlag = 'RenewFlag' in params ? params.RenewFlag : null;
+        this.InstanceChargeType = 'InstanceChargeType' in params ? params.InstanceChargeType : null;
+        this.InternetMaxBandwidthOut = 'InternetMaxBandwidthOut' in params ? params.InternetMaxBandwidthOut : null;
+        this.CreatedTime = 'CreatedTime' in params ? params.CreatedTime : null;
+        this.ExpiredTime = 'ExpiredTime' in params ? params.ExpiredTime : null;
+        this.IsAddressBlocked = 'IsAddressBlocked' in params ? params.IsAddressBlocked : null;
+        this.NewPurchasePlan = 'NewPurchasePlan' in params ? params.NewPurchasePlan : null;
+        this.RestrictState = 'RestrictState' in params ? params.RestrictState : null;
+        this.Zone = 'Zone' in params ? params.Zone : null;
+
+    }
+}
+
+/**
  * CreateServiceTemplate返回参数结构体
  * @class
  */
@@ -9834,42 +10521,30 @@ class DescribeCcnRegionBandwidthLimitsRequest extends  AbstractModel {
 }
 
 /**
- * IPSec配置，腾讯云提供IPSec安全会话设置
+ * AddIp6Rules请求参数结构体
  * @class
  */
-class IPSECOptionsSpecification extends  AbstractModel {
+class AddIp6RulesRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 加密算法，可选值：'3DES-CBC', 'AES-CBC-128', 'AES-CBC-192', 'AES-CBC-256', 'DES-CBC', 'NULL'， 默认为AES-CBC-128
+         * IPV6转换实例唯一ID，形如ip6-xxxxxxxx
          * @type {string || null}
          */
-        this.EncryptAlgorithm = null;
+        this.Ip6TranslatorId = null;
 
         /**
-         * 认证算法：可选值：'MD5', 'SHA1'，默认为
+         * IPV6转换规则信息
+         * @type {Array.<Ip6RuleInfo> || null}
+         */
+        this.Ip6RuleInfos = null;
+
+        /**
+         * IPV6转换规则名称
          * @type {string || null}
          */
-        this.IntegrityAlgorith = null;
-
-        /**
-         * IPsec SA lifetime(s)：单位秒，取值范围：180-604800
-         * @type {number || null}
-         */
-        this.IPSECSaLifetimeSeconds = null;
-
-        /**
-         * PFS：可选值：'NULL', 'DH-GROUP1', 'DH-GROUP2', 'DH-GROUP5', 'DH-GROUP14', 'DH-GROUP24'，默认为NULL
-         * @type {string || null}
-         */
-        this.PfsDhGroup = null;
-
-        /**
-         * IPsec SA lifetime(KB)：单位KB，取值范围：2560-604800
-         * @type {number || null}
-         */
-        this.IPSECSaLifetimeTraffic = null;
+        this.Ip6RuleName = null;
 
     }
 
@@ -9880,11 +10555,17 @@ class IPSECOptionsSpecification extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.EncryptAlgorithm = 'EncryptAlgorithm' in params ? params.EncryptAlgorithm : null;
-        this.IntegrityAlgorith = 'IntegrityAlgorith' in params ? params.IntegrityAlgorith : null;
-        this.IPSECSaLifetimeSeconds = 'IPSECSaLifetimeSeconds' in params ? params.IPSECSaLifetimeSeconds : null;
-        this.PfsDhGroup = 'PfsDhGroup' in params ? params.PfsDhGroup : null;
-        this.IPSECSaLifetimeTraffic = 'IPSECSaLifetimeTraffic' in params ? params.IPSECSaLifetimeTraffic : null;
+        this.Ip6TranslatorId = 'Ip6TranslatorId' in params ? params.Ip6TranslatorId : null;
+
+        if (params.Ip6RuleInfos) {
+            this.Ip6RuleInfos = new Array();
+            for (let z in params.Ip6RuleInfos) {
+                let obj = new Ip6RuleInfo();
+                obj.deserialize(params.Ip6RuleInfos[z]);
+                this.Ip6RuleInfos.push(obj);
+            }
+        }
+        this.Ip6RuleName = 'Ip6RuleName' in params ? params.Ip6RuleName : null;
 
     }
 }
@@ -9971,6 +10652,49 @@ class DescribeCustomerGatewayVendorsResponse extends  AbstractModel {
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DetachCcnInstances请求参数结构体
+ * @class
+ */
+class DetachCcnInstancesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * CCN实例ID。形如：ccn-f49l6u0z。
+         * @type {string || null}
+         */
+        this.CcnId = null;
+
+        /**
+         * 要解关联网络实例列表
+         * @type {Array.<CcnInstance> || null}
+         */
+        this.Instances = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CcnId = 'CcnId' in params ? params.CcnId : null;
+
+        if (params.Instances) {
+            this.Instances = new Array();
+            for (let z in params.Instances) {
+                let obj = new CcnInstance();
+                obj.deserialize(params.Instances[z]);
+                this.Instances.push(obj);
+            }
+        }
 
     }
 }
@@ -10977,6 +11701,34 @@ CCN：云联网路由，系统默认下发，不可编辑与删除。
 }
 
 /**
+ * ModifyIp6Rule返回参数结构体
+ * @class
+ */
+class ModifyIp6RuleResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeDirectConnectGateways返回参数结构体
  * @class
  */
@@ -11022,6 +11774,55 @@ class DescribeDirectConnectGatewaysResponse extends  AbstractModel {
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * IPV6转换规则
+ * @class
+ */
+class Ip6RuleInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * IPV6端口号，可在0~65535范围取值
+         * @type {number || null}
+         */
+        this.Vport6 = null;
+
+        /**
+         * 协议类型，支持TCP/UDP
+         * @type {string || null}
+         */
+        this.Protocol = null;
+
+        /**
+         * IPV4地址
+         * @type {string || null}
+         */
+        this.Vip = null;
+
+        /**
+         * IPV4端口号，可在0~65535范围取值
+         * @type {number || null}
+         */
+        this.Vport = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Vport6 = 'Vport6' in params ? params.Vport6 : null;
+        this.Protocol = 'Protocol' in params ? params.Protocol : null;
+        this.Vip = 'Vip' in params ? params.Vip : null;
+        this.Vport = 'Vport' in params ? params.Vport : null;
 
     }
 }
@@ -11459,18 +12260,24 @@ class CreateVpcRequest extends  AbstractModel {
 }
 
 /**
- * ReplaceDirectConnectGatewayCcnRoutes返回参数结构体
+ * ModifyCustomerGatewayAttribute请求参数结构体
  * @class
  */
-class ReplaceDirectConnectGatewayCcnRoutesResponse extends  AbstractModel {
+class ModifyCustomerGatewayAttributeRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * 对端网关ID，例如：cgw-2wqq41m9，可通过DescribeCustomerGateways接口查询对端网关。
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.CustomerGatewayId = null;
+
+        /**
+         * 对端网关名称，可任意命名，但不得超过60个字符。
+         * @type {string || null}
+         */
+        this.CustomerGatewayName = null;
 
     }
 
@@ -11481,7 +12288,8 @@ class ReplaceDirectConnectGatewayCcnRoutesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.CustomerGatewayId = 'CustomerGatewayId' in params ? params.CustomerGatewayId : null;
+        this.CustomerGatewayName = 'CustomerGatewayName' in params ? params.CustomerGatewayName : null;
 
     }
 }
@@ -11912,6 +12720,41 @@ class ReplaceDirectConnectGatewayCcnRoutesRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeVpcPrivateIpAddresses请求参数结构体
+ * @class
+ */
+class DescribeVpcPrivateIpAddressesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * `VPC`实例`ID`，形如：`vpc-f49l6u0z`。
+         * @type {string || null}
+         */
+        this.VpcId = null;
+
+        /**
+         * 内网`IP`地址列表，批量查询单次请求最多支持`10`个。
+         * @type {Array.<string> || null}
+         */
+        this.PrivateIpAddresses = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.PrivateIpAddresses = 'PrivateIpAddresses' in params ? params.PrivateIpAddresses : null;
+
+    }
+}
+
+/**
  * DisassociateAddress请求参数结构体
  * @class
  */
@@ -12095,24 +12938,30 @@ class AttachNetworkInterfaceRequest extends  AbstractModel {
 }
 
 /**
- * DetachCcnInstances请求参数结构体
+ * DescribeIp6Translators返回参数结构体
  * @class
  */
-class DetachCcnInstancesRequest extends  AbstractModel {
+class DescribeIp6TranslatorsResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * CCN实例ID。形如：ccn-f49l6u0z。
-         * @type {string || null}
+         * 符合过滤条件的IPV6转换实例数量。
+         * @type {number || null}
          */
-        this.CcnId = null;
+        this.TotalCount = null;
 
         /**
-         * 要解关联网络实例列表
-         * @type {Array.<CcnInstance> || null}
+         * 符合过滤条件的IPV6转换实例详细信息
+         * @type {Array.<Ip6Translator> || null}
          */
-        this.Instances = null;
+        this.Ip6TranslatorSet = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
 
     }
 
@@ -12123,16 +12972,17 @@ class DetachCcnInstancesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.CcnId = 'CcnId' in params ? params.CcnId : null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
 
-        if (params.Instances) {
-            this.Instances = new Array();
-            for (let z in params.Instances) {
-                let obj = new CcnInstance();
-                obj.deserialize(params.Instances[z]);
-                this.Instances.push(obj);
+        if (params.Ip6TranslatorSet) {
+            this.Ip6TranslatorSet = new Array();
+            for (let z in params.Ip6TranslatorSet) {
+                let obj = new Ip6Translator();
+                obj.deserialize(params.Ip6TranslatorSet[z]);
+                this.Ip6TranslatorSet.push(obj);
             }
         }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -12381,6 +13231,18 @@ class DescribeCcnAttachedInstancesRequest extends  AbstractModel {
          */
         this.CcnId = null;
 
+        /**
+         * 排序字段。支持：`CcnId` `InstanceType` `InstanceId` `InstanceName` `InstanceRegion` `AttachedTime` `State`。
+         * @type {string || null}
+         */
+        this.OrderField = null;
+
+        /**
+         * 排序方法。顺序：`ASC`，倒序：`DESC`。
+         * @type {string || null}
+         */
+        this.OrderDirection = null;
+
     }
 
     /**
@@ -12402,35 +13264,25 @@ class DescribeCcnAttachedInstancesRequest extends  AbstractModel {
             }
         }
         this.CcnId = 'CcnId' in params ? params.CcnId : null;
+        this.OrderField = 'OrderField' in params ? params.OrderField : null;
+        this.OrderDirection = 'OrderDirection' in params ? params.OrderDirection : null;
 
     }
 }
 
 /**
- * DescribeVpcs返回参数结构体
+ * DescribeIp6TranslatorQuota请求参数结构体
  * @class
  */
-class DescribeVpcsResponse extends  AbstractModel {
+class DescribeIp6TranslatorQuotaRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 符合条件的对象数。
-         * @type {number || null}
+         * 待查询IPV6转换实例的唯一ID列表，形如ip6-xxxxxxxx
+         * @type {Array.<string> || null}
          */
-        this.TotalCount = null;
-
-        /**
-         * VPC对象。
-         * @type {Array.<Vpc> || null}
-         */
-        this.VpcSet = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
+        this.Ip6TranslatorIds = null;
 
     }
 
@@ -12441,17 +13293,56 @@ class DescribeVpcsResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.Ip6TranslatorIds = 'Ip6TranslatorIds' in params ? params.Ip6TranslatorIds : null;
 
-        if (params.VpcSet) {
-            this.VpcSet = new Array();
-            for (let z in params.VpcSet) {
-                let obj = new Vpc();
-                obj.deserialize(params.VpcSet[z]);
-                this.VpcSet.push(obj);
-            }
+    }
+}
+
+/**
+ * VPC内网IP对象。
+ * @class
+ */
+class VpcPrivateIpAddress extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * `VPC`内网`IP`。
+         * @type {string || null}
+         */
+        this.PrivateIpAddress = null;
+
+        /**
+         * 所属子网`CIDR`。
+         * @type {string || null}
+         */
+        this.CidrBlock = null;
+
+        /**
+         * 内网`IP`类型。
+         * @type {string || null}
+         */
+        this.PrivateIpAddressType = null;
+
+        /**
+         * `IP`申请时间。
+         * @type {string || null}
+         */
+        this.CreatedTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.PrivateIpAddress = 'PrivateIpAddress' in params ? params.PrivateIpAddress : null;
+        this.CidrBlock = 'CidrBlock' in params ? params.CidrBlock : null;
+        this.PrivateIpAddressType = 'PrivateIpAddressType' in params ? params.PrivateIpAddressType : null;
+        this.CreatedTime = 'CreatedTime' in params ? params.CreatedTime : null;
 
     }
 }
@@ -12522,6 +13413,41 @@ class ModifySecurityGroupAttributeRequest extends  AbstractModel {
         this.SecurityGroupId = 'SecurityGroupId' in params ? params.SecurityGroupId : null;
         this.GroupName = 'GroupName' in params ? params.GroupName : null;
         this.GroupDescription = 'GroupDescription' in params ? params.GroupDescription : null;
+
+    }
+}
+
+/**
+ * AddIp6Rules返回参数结构体
+ * @class
+ */
+class AddIp6RulesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * IPV6转换规则唯一ID数组，形如rule6-xxxxxxxx
+         * @type {Array.<string> || null}
+         */
+        this.Ip6RuleSet = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Ip6RuleSet = 'Ip6RuleSet' in params ? params.Ip6RuleSet : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -12707,6 +13633,50 @@ class RemoveBandwidthPackageResourcesRequest extends  AbstractModel {
         this.BandwidthPackageId = 'BandwidthPackageId' in params ? params.BandwidthPackageId : null;
         this.ResourceType = 'ResourceType' in params ? params.ResourceType : null;
         this.ResourceIds = 'ResourceIds' in params ? params.ResourceIds : null;
+
+    }
+}
+
+/**
+ * DescribeIp6TranslatorQuota返回参数结构体
+ * @class
+ */
+class DescribeIp6TranslatorQuotaResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 账户在指定地域的IPV6转换实例及规则配额信息
+QUOTAID属性是TOTAL_TRANSLATOR_QUOTA，表示账户在指定地域的IPV6转换实例配额信息；QUOTAID属性是IPV6转转换实例唯一ID（形如ip6-xxxxxxxx），表示账户在该转换实例允许创建的转换规则配额
+         * @type {Array.<Quota> || null}
+         */
+        this.QuotaSet = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.QuotaSet) {
+            this.QuotaSet = new Array();
+            for (let z in params.QuotaSet) {
+                let obj = new Quota();
+                obj.deserialize(params.QuotaSet[z]);
+                this.QuotaSet.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -12994,7 +13964,7 @@ module.exports = {
     DetachCcnInstancesResponse: DetachCcnInstancesResponse,
     ReplaceRouteTableAssociationRequest: ReplaceRouteTableAssociationRequest,
     ModifyServiceTemplateGroupAttributeResponse: ModifyServiceTemplateGroupAttributeResponse,
-    VpnGateway: VpnGateway,
+    ItemPrice: ItemPrice,
     SecurityGroupPolicy: SecurityGroupPolicy,
     DownloadCustomerGatewayConfigurationResponse: DownloadCustomerGatewayConfigurationResponse,
     DeleteSubnetRequest: DeleteSubnetRequest,
@@ -13006,12 +13976,13 @@ module.exports = {
     SecurityGroupPolicySet: SecurityGroupPolicySet,
     ResetAttachCcnInstancesResponse: ResetAttachCcnInstancesResponse,
     AllocateAddressesRequest: AllocateAddressesRequest,
+    DescribeIp6TranslatorsRequest: DescribeIp6TranslatorsRequest,
     NetworkInterfaceAttachment: NetworkInterfaceAttachment,
     RouteTable: RouteTable,
     DeleteNetworkInterfaceRequest: DeleteNetworkInterfaceRequest,
     InquiryPriceResetVpnGatewayInternetMaxBandwidthResponse: InquiryPriceResetVpnGatewayInternetMaxBandwidthResponse,
     DetachClassicLinkVpcRequest: DetachClassicLinkVpcRequest,
-    DeleteAddressTemplateGroupResponse: DeleteAddressTemplateGroupResponse,
+    CreateRouteTableResponse: CreateRouteTableResponse,
     ReplaceRoutesResponse: ReplaceRoutesResponse,
     DeleteBandwidthPackageResponse: DeleteBandwidthPackageResponse,
     DirectConnectGatewayCcnRoute: DirectConnectGatewayCcnRoute,
@@ -13026,9 +13997,11 @@ module.exports = {
     CreateSubnetResponse: CreateSubnetResponse,
     DescribeSecurityGroupPoliciesResponse: DescribeSecurityGroupPoliciesResponse,
     AddBandwidthPackageResourcesRequest: AddBandwidthPackageResourcesRequest,
+    DescribeVpcPrivateIpAddressesResponse: DescribeVpcPrivateIpAddressesResponse,
     ModifySecurityGroupPoliciesRequest: ModifySecurityGroupPoliciesRequest,
     ModifyAddressAttributeResponse: ModifyAddressAttributeResponse,
     AttachClassicLinkVpcRequest: AttachClassicLinkVpcRequest,
+    RemoveIp6RulesResponse: RemoveIp6RulesResponse,
     DescribeServiceTemplatesResponse: DescribeServiceTemplatesResponse,
     CreateVpcResponse: CreateVpcResponse,
     CreateCustomerGatewayResponse: CreateCustomerGatewayResponse,
@@ -13045,7 +14018,8 @@ module.exports = {
     CcnInstance: CcnInstance,
     DeleteSecurityGroupPoliciesRequest: DeleteSecurityGroupPoliciesRequest,
     InquiryPriceResetVpnGatewayInternetMaxBandwidthRequest: InquiryPriceResetVpnGatewayInternetMaxBandwidthRequest,
-    ItemPrice: ItemPrice,
+    ResetRoutesResponse: ResetRoutesResponse,
+    DeleteAddressTemplateGroupResponse: DeleteAddressTemplateGroupResponse,
     DeleteVpnConnectionResponse: DeleteVpnConnectionResponse,
     ReplaceSecurityGroupPolicyResponse: ReplaceSecurityGroupPolicyResponse,
     ModifyCustomerGatewayAttributeResponse: ModifyCustomerGatewayAttributeResponse,
@@ -13053,12 +14027,15 @@ module.exports = {
     SubnetInput: SubnetInput,
     ModifyHaVipAttributeResponse: ModifyHaVipAttributeResponse,
     CreateCcnResponse: CreateCcnResponse,
+    CreateIp6TranslatorsResponse: CreateIp6TranslatorsResponse,
     EnableCcnRoutesRequest: EnableCcnRoutesRequest,
     DisableCcnRoutesRequest: DisableCcnRoutesRequest,
     DescribeDirectConnectGatewaysRequest: DescribeDirectConnectGatewaysRequest,
     DefaultVpcSubnet: DefaultVpcSubnet,
     ModifyHaVipAttributeRequest: ModifyHaVipAttributeRequest,
     DeleteSecurityGroupResponse: DeleteSecurityGroupResponse,
+    DeleteIp6TranslatorsRequest: DeleteIp6TranslatorsRequest,
+    ModifyIp6RuleRequest: ModifyIp6RuleRequest,
     DescribeCcnRegionBandwidthLimitsResponse: DescribeCcnRegionBandwidthLimitsResponse,
     CreateSubnetsResponse: CreateSubnetsResponse,
     CreateNetworkInterfaceResponse: CreateNetworkInterfaceResponse,
@@ -13075,20 +14052,22 @@ module.exports = {
     ModifyBandwidthPackageAttributeResponse: ModifyBandwidthPackageAttributeResponse,
     DetachNetworkInterfaceResponse: DetachNetworkInterfaceResponse,
     ModifySubnetAttributeRequest: ModifySubnetAttributeRequest,
-    ResetRoutesResponse: ResetRoutesResponse,
+    ReplaceDirectConnectGatewayCcnRoutesResponse: ReplaceDirectConnectGatewayCcnRoutesResponse,
     DescribeCustomerGatewayVendorsRequest: DescribeCustomerGatewayVendorsRequest,
     FilterObject: FilterObject,
     DescribeVpcsRequest: DescribeVpcsRequest,
-    ModifyVpcAttributeRequest: ModifyVpcAttributeRequest,
+    ModifySecurityGroupPoliciesResponse: ModifySecurityGroupPoliciesResponse,
     ResetRoutesRequest: ResetRoutesRequest,
     DisableRoutesResponse: DisableRoutesResponse,
     ResetVpnGatewayInternetMaxBandwidthResponse: ResetVpnGatewayInternetMaxBandwidthResponse,
+    ModifyIp6TranslatorRequest: ModifyIp6TranslatorRequest,
     CreateVpnConnectionResponse: CreateVpnConnectionResponse,
     DetachNetworkInterfaceRequest: DetachNetworkInterfaceRequest,
     AddressTemplateSpecification: AddressTemplateSpecification,
     RemoveBandwidthPackageResourcesResponse: RemoveBandwidthPackageResourcesResponse,
+    Ip6Translator: Ip6Translator,
     RouteTableAssociation: RouteTableAssociation,
-    ModifyCustomerGatewayAttributeRequest: ModifyCustomerGatewayAttributeRequest,
+    Ip6Rule: Ip6Rule,
     AttachClassicLinkVpcResponse: AttachClassicLinkVpcResponse,
     CreateServiceTemplateGroupResponse: CreateServiceTemplateGroupResponse,
     CreateAddressTemplateRequest: CreateAddressTemplateRequest,
@@ -13100,6 +14079,7 @@ module.exports = {
     ServiceTemplate: ServiceTemplate,
     DeleteVpcResponse: DeleteVpcResponse,
     DescribeCcnRoutesResponse: DescribeCcnRoutesResponse,
+    DescribeVpcsResponse: DescribeVpcsResponse,
     PrivateIpAddressSpecification: PrivateIpAddressSpecification,
     ModifySecurityGroupAttributeResponse: ModifySecurityGroupAttributeResponse,
     SecurityGroup: SecurityGroup,
@@ -13112,11 +14092,12 @@ module.exports = {
     DescribeCcnAttachedInstancesResponse: DescribeCcnAttachedInstancesResponse,
     DeleteCustomerGatewayResponse: DeleteCustomerGatewayResponse,
     AssociateAddressRequest: AssociateAddressRequest,
-    ModifySecurityGroupPoliciesResponse: ModifySecurityGroupPoliciesResponse,
+    ModifyIp6TranslatorResponse: ModifyIp6TranslatorResponse,
     CreateAddressTemplateResponse: CreateAddressTemplateResponse,
     AcceptAttachCcnInstancesRequest: AcceptAttachCcnInstancesRequest,
     DeleteAddressTemplateGroupRequest: DeleteAddressTemplateGroupRequest,
     AttachNetworkInterfaceResponse: AttachNetworkInterfaceResponse,
+    DeleteIp6TranslatorsResponse: DeleteIp6TranslatorsResponse,
     ServiceTemplateSpecification: ServiceTemplateSpecification,
     DescribeRouteConflictsResponse: DescribeRouteConflictsResponse,
     CreateBandwidthPackageRequest: CreateBandwidthPackageRequest,
@@ -13144,6 +14125,7 @@ module.exports = {
     CreateDirectConnectGatewayCcnRoutesResponse: CreateDirectConnectGatewayCcnRoutesResponse,
     CreateRouteTableRequest: CreateRouteTableRequest,
     ResetVpnConnectionResponse: ResetVpnConnectionResponse,
+    IPSECOptionsSpecification: IPSECOptionsSpecification,
     CreateHaVipRequest: CreateHaVipRequest,
     DescribeAddressesRequest: DescribeAddressesRequest,
     DescribeSecurityGroupPoliciesRequest: DescribeSecurityGroupPoliciesRequest,
@@ -13154,26 +14136,30 @@ module.exports = {
     DeleteSecurityGroupRequest: DeleteSecurityGroupRequest,
     ModifyVpnConnectionAttributeRequest: ModifyVpnConnectionAttributeRequest,
     ReplaceRoutesRequest: ReplaceRoutesRequest,
-    CreateRouteTableResponse: CreateRouteTableResponse,
+    CreateIp6TranslatorsRequest: CreateIp6TranslatorsRequest,
     DeleteRoutesResponse: DeleteRoutesResponse,
     CreateCcnRequest: CreateCcnRequest,
     DescribeSecurityGroupAssociationStatisticsResponse: DescribeSecurityGroupAssociationStatisticsResponse,
     DescribeDirectConnectGatewayCcnRoutesResponse: DescribeDirectConnectGatewayCcnRoutesResponse,
     ModifyPrivateIpAddressesAttributeRequest: ModifyPrivateIpAddressesAttributeRequest,
     DisableRoutesRequest: DisableRoutesRequest,
+    RemoveIp6RulesRequest: RemoveIp6RulesRequest,
     DeleteVpnConnectionRequest: DeleteVpnConnectionRequest,
+    ModifyVpcAttributeRequest: ModifyVpcAttributeRequest,
     CreateSecurityGroupRequest: CreateSecurityGroupRequest,
     ModifyCcnAttributeResponse: ModifyCcnAttributeResponse,
     DeleteCcnRequest: DeleteCcnRequest,
     DescribeSecurityGroupsRequest: DescribeSecurityGroupsRequest,
     DescribeClassicLinkInstancesRequest: DescribeClassicLinkInstancesRequest,
+    VpnGateway: VpnGateway,
     CreateServiceTemplateResponse: CreateServiceTemplateResponse,
     DeleteNetworkInterfaceResponse: DeleteNetworkInterfaceResponse,
     DisableCcnRoutesResponse: DisableCcnRoutesResponse,
     DescribeCcnRegionBandwidthLimitsRequest: DescribeCcnRegionBandwidthLimitsRequest,
-    IPSECOptionsSpecification: IPSECOptionsSpecification,
+    AddIp6RulesRequest: AddIp6RulesRequest,
     DescribeAccountAttributesResponse: DescribeAccountAttributesResponse,
     DescribeCustomerGatewayVendorsResponse: DescribeCustomerGatewayVendorsResponse,
+    DetachCcnInstancesRequest: DetachCcnInstancesRequest,
     AssignPrivateIpAddressesResponse: AssignPrivateIpAddressesResponse,
     DescribeBandwidthPackageQuotaResponse: DescribeBandwidthPackageQuotaResponse,
     ModifyAddressTemplateGroupAttributeResponse: ModifyAddressTemplateGroupAttributeResponse,
@@ -13197,7 +14183,9 @@ module.exports = {
     DescribeHaVipsRequest: DescribeHaVipsRequest,
     Quota: Quota,
     Route: Route,
+    ModifyIp6RuleResponse: ModifyIp6RuleResponse,
     DescribeDirectConnectGatewaysResponse: DescribeDirectConnectGatewaysResponse,
+    Ip6RuleInfo: Ip6RuleInfo,
     Address: Address,
     ModifyVpnGatewayAttributeResponse: ModifyVpnGatewayAttributeResponse,
     DeleteAddressTemplateResponse: DeleteAddressTemplateResponse,
@@ -13207,7 +14195,7 @@ module.exports = {
     AssignPrivateIpAddressesRequest: AssignPrivateIpAddressesRequest,
     DescribeServiceTemplateGroupsRequest: DescribeServiceTemplateGroupsRequest,
     CreateVpcRequest: CreateVpcRequest,
-    ReplaceDirectConnectGatewayCcnRoutesResponse: ReplaceDirectConnectGatewayCcnRoutesResponse,
+    ModifyCustomerGatewayAttributeRequest: ModifyCustomerGatewayAttributeRequest,
     CreateServiceTemplateGroupRequest: CreateServiceTemplateGroupRequest,
     DeleteServiceTemplateRequest: DeleteServiceTemplateRequest,
     DescribeSecurityGroupAssociationStatisticsRequest: DescribeSecurityGroupAssociationStatisticsRequest,
@@ -13219,22 +14207,26 @@ module.exports = {
     AllocateAddressesResponse: AllocateAddressesResponse,
     TransformAddressRequest: TransformAddressRequest,
     ReplaceDirectConnectGatewayCcnRoutesRequest: ReplaceDirectConnectGatewayCcnRoutesRequest,
+    DescribeVpcPrivateIpAddressesRequest: DescribeVpcPrivateIpAddressesRequest,
     DisassociateAddressRequest: DisassociateAddressRequest,
     EnableCcnRoutesResponse: EnableCcnRoutesResponse,
     BandwidthPackage: BandwidthPackage,
     AttachNetworkInterfaceRequest: AttachNetworkInterfaceRequest,
-    DetachCcnInstancesRequest: DetachCcnInstancesRequest,
+    DescribeIp6TranslatorsResponse: DescribeIp6TranslatorsResponse,
     CreateSecurityGroupPoliciesRequest: CreateSecurityGroupPoliciesRequest,
     IKEOptionsSpecification: IKEOptionsSpecification,
     MigrateNetworkInterfaceResponse: MigrateNetworkInterfaceResponse,
     InstanceChargePrepaid: InstanceChargePrepaid,
     DescribeCcnAttachedInstancesRequest: DescribeCcnAttachedInstancesRequest,
-    DescribeVpcsResponse: DescribeVpcsResponse,
+    DescribeIp6TranslatorQuotaRequest: DescribeIp6TranslatorQuotaRequest,
+    VpcPrivateIpAddress: VpcPrivateIpAddress,
     DeleteDirectConnectGatewayRequest: DeleteDirectConnectGatewayRequest,
     ModifySecurityGroupAttributeRequest: ModifySecurityGroupAttributeRequest,
+    AddIp6RulesResponse: AddIp6RulesResponse,
     CreateAddressTemplateGroupResponse: CreateAddressTemplateGroupResponse,
     CcnAttachedInstance: CcnAttachedInstance,
     RemoveBandwidthPackageResourcesRequest: RemoveBandwidthPackageResourcesRequest,
+    DescribeIp6TranslatorQuotaResponse: DescribeIp6TranslatorQuotaResponse,
     SecurityPolicyDatabase: SecurityPolicyDatabase,
     AcceptAttachCcnInstancesResponse: AcceptAttachCcnInstancesResponse,
     DeleteServiceTemplateGroupRequest: DeleteServiceTemplateGroupRequest,

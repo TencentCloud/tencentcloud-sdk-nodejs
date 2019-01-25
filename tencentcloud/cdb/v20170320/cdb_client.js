@@ -41,6 +41,7 @@ const SellConfig = models.SellConfig;
 const DescribeDBSecurityGroupsResponse = models.DescribeDBSecurityGroupsResponse;
 const MasterInfo = models.MasterInfo;
 const DescribeBinlogsResponse = models.DescribeBinlogsResponse;
+const DeleteParamTemplateResponse = models.DeleteParamTemplateResponse;
 const DescribeDefaultParamsRequest = models.DescribeDefaultParamsRequest;
 const DBSwitchInfo = models.DBSwitchInfo;
 const DescribeDBPriceResponse = models.DescribeDBPriceResponse;
@@ -54,6 +55,7 @@ const DescribeDBInstanceGTIDResponse = models.DescribeDBInstanceGTIDResponse;
 const OpenDBInstanceGTIDResponse = models.OpenDBInstanceGTIDResponse;
 const DescribeDBZoneConfigRequest = models.DescribeDBZoneConfigRequest;
 const DescribeDBInstanceRebootTimeResponse = models.DescribeDBInstanceRebootTimeResponse;
+const DeleteParamTemplateRequest = models.DeleteParamTemplateRequest;
 const DrInfo = models.DrInfo;
 const RoGroup = models.RoGroup;
 const ParameterDetail = models.ParameterDetail;
@@ -88,6 +90,7 @@ const UploadInfo = models.UploadInfo;
 const ModifyAccountPasswordResponse = models.ModifyAccountPasswordResponse;
 const ModifyInstanceTagResponse = models.ModifyInstanceTagResponse;
 const DescribeDBSwitchRecordsRequest = models.DescribeDBSwitchRecordsRequest;
+const DescribeSupportedPrivilegesRequest = models.DescribeSupportedPrivilegesRequest;
 const DescribeAsyncRequestInfoResponse = models.DescribeAsyncRequestInfoResponse;
 const CreateDBInstanceResponse = models.CreateDBInstanceResponse;
 const ModifyInstanceTagRequest = models.ModifyInstanceTagRequest;
@@ -117,6 +120,7 @@ const SecurityGroup = models.SecurityGroup;
 const ZoneConf = models.ZoneConf;
 const DeviceNetInfo = models.DeviceNetInfo;
 const SlaveInfo = models.SlaveInfo;
+const DescribeSupportedPrivilegesResponse = models.DescribeSupportedPrivilegesResponse;
 const ModifyDBInstanceNameRequest = models.ModifyDBInstanceNameRequest;
 const TagInfoUnit = models.TagInfoUnit;
 const UpgradeDBInstanceEngineVersionResponse = models.UpgradeDBInstanceEngineVersionResponse;
@@ -395,6 +399,17 @@ class CdbClient extends AbstractClient {
     }
 
     /**
+     * 该接口（DeleteParamTemplate）用于删除参数模板。
+     * @param {DeleteParamTemplateRequest} req
+     * @param {function(string, DeleteParamTemplateResponse):void} cb
+     * @public
+     */
+    DeleteParamTemplate(req, cb) {
+        let resp = new DeleteParamTemplateResponse();
+        this.request("DeleteParamTemplate", req, resp, cb);
+    }
+
+    /**
      * 本接口(DescribeBackups)用于查询云数据库实例的备份数据。
      * @param {DescribeBackupsRequest} req
      * @param {function(string, DescribeBackupsResponse):void} cb
@@ -414,6 +429,17 @@ class CdbClient extends AbstractClient {
     DescribeAsyncRequestInfo(req, cb) {
         let resp = new DescribeAsyncRequestInfoResponse();
         this.request("DescribeAsyncRequestInfo", req, resp, cb);
+    }
+
+    /**
+     * 本接口(DescribeSupportedPrivileges)用于查询云数据库的支持的权限信息，包括全局权限，数据库权限，表权限以及列权限。
+     * @param {DescribeSupportedPrivilegesRequest} req
+     * @param {function(string, DescribeSupportedPrivilegesResponse):void} cb
+     * @public
+     */
+    DescribeSupportedPrivileges(req, cb) {
+        let resp = new DescribeSupportedPrivilegesResponse();
+        this.request("DescribeSupportedPrivileges", req, resp, cb);
     }
 
     /**
@@ -660,6 +686,8 @@ class CdbClient extends AbstractClient {
 
     /**
      * 本接口(DescribeDBPrice)用于查询云数据库实例的价格，支持查询按量计费或者包年包月的价格。可传入实例类型、购买时长、购买数量、内存大小、硬盘大小和可用区信息等来查询实例价格。
+
+注意：对某个地域进行询价，请使用对应地域的接入点，接入点信息请参照<a href="https://cloud.tencent.com/document/api/236/15832">服务地址</a>文档。例如：对广州地域进行询价，请把请求发到：cdb.ap-guangzhou.tencentcloudapi.com。同理对上海地域询价，把请求发到：cdb.ap-shanghai.tencentcloudapi.com
      * @param {DescribeDBPriceRequest} req
      * @param {function(string, DescribeDBPriceResponse):void} cb
      * @public

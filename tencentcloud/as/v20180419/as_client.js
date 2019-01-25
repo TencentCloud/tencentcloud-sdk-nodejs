@@ -16,6 +16,7 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
+const ModifyLoadBalancersRequest = models.ModifyLoadBalancersRequest;
 const RemoveInstancesResponse = models.RemoveInstancesResponse;
 const DisableAutoScalingGroupResponse = models.DisableAutoScalingGroupResponse;
 const SystemDisk = models.SystemDisk;
@@ -43,6 +44,7 @@ const DeleteScheduledActionRequest = models.DeleteScheduledActionRequest;
 const DescribeAutoScalingActivitiesRequest = models.DescribeAutoScalingActivitiesRequest;
 const ModifyDesiredCapacityRequest = models.ModifyDesiredCapacityRequest;
 const InstanceMarketOptionsRequest = models.InstanceMarketOptionsRequest;
+const ModifyLoadBalancersResponse = models.ModifyLoadBalancersResponse;
 const CreateScheduledActionResponse = models.CreateScheduledActionResponse;
 const DescribeScheduledActionsResponse = models.DescribeScheduledActionsResponse;
 const DescribeAutoScalingGroupsResponse = models.DescribeAutoScalingGroupsResponse;
@@ -91,28 +93,6 @@ class AsClient extends AbstractClient {
     }
     
     /**
-     * 本接口（RemoveInstances）用于从伸缩组删除 CVM 实例。根据当前的产品逻辑，如果实例由弹性伸缩自动创建，则实例会被销毁；如果实例系创建后加入伸缩组的，则会从伸缩组中移除，保留实例。
-     * @param {RemoveInstancesRequest} req
-     * @param {function(string, RemoveInstancesResponse):void} cb
-     * @public
-     */
-    RemoveInstances(req, cb) {
-        let resp = new RemoveInstancesResponse();
-        this.request("RemoveInstances", req, resp, cb);
-    }
-
-    /**
-     * 本接口（ModifyAutoScalingGroup）用于修改伸缩组。
-     * @param {ModifyAutoScalingGroupRequest} req
-     * @param {function(string, ModifyAutoScalingGroupResponse):void} cb
-     * @public
-     */
-    ModifyAutoScalingGroup(req, cb) {
-        let resp = new ModifyAutoScalingGroupResponse();
-        this.request("ModifyAutoScalingGroup", req, resp, cb);
-    }
-
-    /**
      * 本接口（CreateAutoScalingGroup）用于创建伸缩组
      * @param {CreateAutoScalingGroupRequest} req
      * @param {function(string, CreateAutoScalingGroupResponse):void} cb
@@ -124,6 +104,29 @@ class AsClient extends AbstractClient {
     }
 
     /**
+     * 本接口（DeleteAutoScalingGroup）用于删除指定伸缩组，删除前提是伸缩组内无实例且当前未在执行伸缩活动。
+     * @param {DeleteAutoScalingGroupRequest} req
+     * @param {function(string, DeleteAutoScalingGroupResponse):void} cb
+     * @public
+     */
+    DeleteAutoScalingGroup(req, cb) {
+        let resp = new DeleteAutoScalingGroupResponse();
+        this.request("DeleteAutoScalingGroup", req, resp, cb);
+    }
+
+    /**
+     * 本接口（AttachInstances）用于将 CVM 实例添加到伸缩组。
+
+     * @param {AttachInstancesRequest} req
+     * @param {function(string, AttachInstancesResponse):void} cb
+     * @public
+     */
+    AttachInstances(req, cb) {
+        let resp = new AttachInstancesResponse();
+        this.request("AttachInstances", req, resp, cb);
+    }
+
+    /**
      * 本接口（DeleteScheduledAction）用于删除特定的定时任务。
      * @param {DeleteScheduledActionRequest} req
      * @param {function(string, DeleteScheduledActionResponse):void} cb
@@ -132,20 +135,6 @@ class AsClient extends AbstractClient {
     DeleteScheduledAction(req, cb) {
         let resp = new DeleteScheduledActionResponse();
         this.request("DeleteScheduledAction", req, resp, cb);
-    }
-
-    /**
-     * 本接口（ModifyLaunchConfigurationAttributes）用于修改启动配置部分属性。
-
-* 修改启动配置后，已经使用该启动配置扩容的存量实例不会发生变更，此后使用该启动配置的新增实例会按照新的配置进行扩容。
-* 本接口支持修改部分简单类型。
-     * @param {ModifyLaunchConfigurationAttributesRequest} req
-     * @param {function(string, ModifyLaunchConfigurationAttributesResponse):void} cb
-     * @public
-     */
-    ModifyLaunchConfigurationAttributes(req, cb) {
-        let resp = new ModifyLaunchConfigurationAttributesResponse();
-        this.request("ModifyLaunchConfigurationAttributes", req, resp, cb);
     }
 
     /**
@@ -171,14 +160,40 @@ class AsClient extends AbstractClient {
     }
 
     /**
-     * 本接口（ModifyScheduledAction）用于修改定时任务。
-     * @param {ModifyScheduledActionRequest} req
-     * @param {function(string, ModifyScheduledActionResponse):void} cb
+     * 本接口（RemoveInstances）用于从伸缩组删除 CVM 实例。根据当前的产品逻辑，如果实例由弹性伸缩自动创建，则实例会被销毁；如果实例系创建后加入伸缩组的，则会从伸缩组中移除，保留实例。
+     * @param {RemoveInstancesRequest} req
+     * @param {function(string, RemoveInstancesResponse):void} cb
      * @public
      */
-    ModifyScheduledAction(req, cb) {
-        let resp = new ModifyScheduledActionResponse();
-        this.request("ModifyScheduledAction", req, resp, cb);
+    RemoveInstances(req, cb) {
+        let resp = new RemoveInstancesResponse();
+        this.request("RemoveInstances", req, resp, cb);
+    }
+
+    /**
+     * 本接口（ModifyLoadBalancers）用于修改伸缩组的负载均衡器。
+
+* 本接口用于为伸缩组指定新的负载均衡器配置，采用“完全覆盖”风格，无论之前配置如何，统一按照接口参数配置为新的负载均衡器。
+* 如果要为伸缩组清空负载均衡器，则在调用本接口时仅指定伸缩组ID，不指定具体负载均衡器。
+* 本接口会立即修改伸缩组的负载均衡器，并生成一个伸缩活动，异步修改存量实例的负载均衡器。
+     * @param {ModifyLoadBalancersRequest} req
+     * @param {function(string, ModifyLoadBalancersResponse):void} cb
+     * @public
+     */
+    ModifyLoadBalancers(req, cb) {
+        let resp = new ModifyLoadBalancersResponse();
+        this.request("ModifyLoadBalancers", req, resp, cb);
+    }
+
+    /**
+     * 本接口（ModifyDesiredCapacity）用于修改指定伸缩组的期望实例数
+     * @param {ModifyDesiredCapacityRequest} req
+     * @param {function(string, ModifyDesiredCapacityResponse):void} cb
+     * @public
+     */
+    ModifyDesiredCapacity(req, cb) {
+        let resp = new ModifyDesiredCapacityResponse();
+        this.request("ModifyDesiredCapacity", req, resp, cb);
     }
 
     /**
@@ -198,25 +213,14 @@ class AsClient extends AbstractClient {
     }
 
     /**
-     * 本接口（DescribeAutoScalingActivities）用于查询伸缩组的伸缩活动记录。
-     * @param {DescribeAutoScalingActivitiesRequest} req
-     * @param {function(string, DescribeAutoScalingActivitiesResponse):void} cb
+     * 本接口（ModifyAutoScalingGroup）用于修改伸缩组。
+     * @param {ModifyAutoScalingGroupRequest} req
+     * @param {function(string, ModifyAutoScalingGroupResponse):void} cb
      * @public
      */
-    DescribeAutoScalingActivities(req, cb) {
-        let resp = new DescribeAutoScalingActivitiesResponse();
-        this.request("DescribeAutoScalingActivities", req, resp, cb);
-    }
-
-    /**
-     * 本接口（EnableAutoScalingGroup）用于启用指定伸缩组。
-     * @param {EnableAutoScalingGroupRequest} req
-     * @param {function(string, EnableAutoScalingGroupResponse):void} cb
-     * @public
-     */
-    EnableAutoScalingGroup(req, cb) {
-        let resp = new EnableAutoScalingGroupResponse();
-        this.request("EnableAutoScalingGroup", req, resp, cb);
+    ModifyAutoScalingGroup(req, cb) {
+        let resp = new ModifyAutoScalingGroupResponse();
+        this.request("ModifyAutoScalingGroup", req, resp, cb);
     }
 
     /**
@@ -231,59 +235,6 @@ class AsClient extends AbstractClient {
     DescribeAutoScalingInstances(req, cb) {
         let resp = new DescribeAutoScalingInstancesResponse();
         this.request("DescribeAutoScalingInstances", req, resp, cb);
-    }
-
-    /**
-     * 本接口（DescribeAutoScalingGroups）用于查询伸缩组信息。
-
-* 可以根据伸缩组ID、伸缩组名称或者启动配置ID等信息来查询伸缩组的详细信息。过滤信息详细请见过滤器`Filter`。
-* 如果参数为空，返回当前用户一定数量（`Limit`所指定的数量，默认为20）的伸缩组。
-     * @param {DescribeAutoScalingGroupsRequest} req
-     * @param {function(string, DescribeAutoScalingGroupsResponse):void} cb
-     * @public
-     */
-    DescribeAutoScalingGroups(req, cb) {
-        let resp = new DescribeAutoScalingGroupsResponse();
-        this.request("DescribeAutoScalingGroups", req, resp, cb);
-    }
-
-    /**
-     * 本接口 (DescribeScheduledActions) 用于查询一个或多个定时任务的详细信息。
-
-* 可以根据定时任务ID、定时任务名称或者伸缩组ID等信息来查询定时任务的详细信息。过滤信息详细请见过滤器`Filter`。
-* 如果参数为空，返回当前用户一定数量（Limit所指定的数量，默认为20）的定时任务。
-     * @param {DescribeScheduledActionsRequest} req
-     * @param {function(string, DescribeScheduledActionsResponse):void} cb
-     * @public
-     */
-    DescribeScheduledActions(req, cb) {
-        let resp = new DescribeScheduledActionsResponse();
-        this.request("DescribeScheduledActions", req, resp, cb);
-    }
-
-    /**
-     * 本接口（DeleteAutoScalingGroup）用于删除指定伸缩组，删除前提是伸缩组内无实例且当前未在执行伸缩活动。
-     * @param {DeleteAutoScalingGroupRequest} req
-     * @param {function(string, DeleteAutoScalingGroupResponse):void} cb
-     * @public
-     */
-    DeleteAutoScalingGroup(req, cb) {
-        let resp = new DeleteAutoScalingGroupResponse();
-        this.request("DeleteAutoScalingGroup", req, resp, cb);
-    }
-
-    /**
-     * 本接口（DeleteLaunchConfiguration）用于删除启动配置。
-
-* 若启动配置在伸缩组中属于生效状态，则该启动配置不允许删除。
-
-     * @param {DeleteLaunchConfigurationRequest} req
-     * @param {function(string, DeleteLaunchConfigurationResponse):void} cb
-     * @public
-     */
-    DeleteLaunchConfiguration(req, cb) {
-        let resp = new DeleteLaunchConfigurationResponse();
-        this.request("DeleteLaunchConfiguration", req, resp, cb);
     }
 
     /**
@@ -312,6 +263,31 @@ class AsClient extends AbstractClient {
     }
 
     /**
+     * 本接口（DeleteLaunchConfiguration）用于删除启动配置。
+
+* 若启动配置在伸缩组中属于生效状态，则该启动配置不允许删除。
+
+     * @param {DeleteLaunchConfigurationRequest} req
+     * @param {function(string, DeleteLaunchConfigurationResponse):void} cb
+     * @public
+     */
+    DeleteLaunchConfiguration(req, cb) {
+        let resp = new DeleteLaunchConfigurationResponse();
+        this.request("DeleteLaunchConfiguration", req, resp, cb);
+    }
+
+    /**
+     * 本接口（EnableAutoScalingGroup）用于启用指定伸缩组。
+     * @param {EnableAutoScalingGroupRequest} req
+     * @param {function(string, EnableAutoScalingGroupResponse):void} cb
+     * @public
+     */
+    EnableAutoScalingGroup(req, cb) {
+        let resp = new EnableAutoScalingGroupResponse();
+        this.request("EnableAutoScalingGroup", req, resp, cb);
+    }
+
+    /**
      * 本接口（DescribeAccountLimits）用于查询用户账户在弹性伸缩中的资源限制。
      * @param {DescribeAccountLimitsRequest} req
      * @param {function(string, DescribeAccountLimitsResponse):void} cb
@@ -323,26 +299,67 @@ class AsClient extends AbstractClient {
     }
 
     /**
-     * 本接口（AttachInstances）用于将 CVM 实例添加到伸缩组。
+     * 本接口（DescribeAutoScalingGroups）用于查询伸缩组信息。
 
-     * @param {AttachInstancesRequest} req
-     * @param {function(string, AttachInstancesResponse):void} cb
+* 可以根据伸缩组ID、伸缩组名称或者启动配置ID等信息来查询伸缩组的详细信息。过滤信息详细请见过滤器`Filter`。
+* 如果参数为空，返回当前用户一定数量（`Limit`所指定的数量，默认为20）的伸缩组。
+     * @param {DescribeAutoScalingGroupsRequest} req
+     * @param {function(string, DescribeAutoScalingGroupsResponse):void} cb
      * @public
      */
-    AttachInstances(req, cb) {
-        let resp = new AttachInstancesResponse();
-        this.request("AttachInstances", req, resp, cb);
+    DescribeAutoScalingGroups(req, cb) {
+        let resp = new DescribeAutoScalingGroupsResponse();
+        this.request("DescribeAutoScalingGroups", req, resp, cb);
     }
 
     /**
-     * 本接口（ModifyDesiredCapacity）用于修改指定伸缩组的期望实例数
-     * @param {ModifyDesiredCapacityRequest} req
-     * @param {function(string, ModifyDesiredCapacityResponse):void} cb
+     * 本接口（ModifyScheduledAction）用于修改定时任务。
+     * @param {ModifyScheduledActionRequest} req
+     * @param {function(string, ModifyScheduledActionResponse):void} cb
      * @public
      */
-    ModifyDesiredCapacity(req, cb) {
-        let resp = new ModifyDesiredCapacityResponse();
-        this.request("ModifyDesiredCapacity", req, resp, cb);
+    ModifyScheduledAction(req, cb) {
+        let resp = new ModifyScheduledActionResponse();
+        this.request("ModifyScheduledAction", req, resp, cb);
+    }
+
+    /**
+     * 本接口（DescribeAutoScalingActivities）用于查询伸缩组的伸缩活动记录。
+     * @param {DescribeAutoScalingActivitiesRequest} req
+     * @param {function(string, DescribeAutoScalingActivitiesResponse):void} cb
+     * @public
+     */
+    DescribeAutoScalingActivities(req, cb) {
+        let resp = new DescribeAutoScalingActivitiesResponse();
+        this.request("DescribeAutoScalingActivities", req, resp, cb);
+    }
+
+    /**
+     * 本接口 (DescribeScheduledActions) 用于查询一个或多个定时任务的详细信息。
+
+* 可以根据定时任务ID、定时任务名称或者伸缩组ID等信息来查询定时任务的详细信息。过滤信息详细请见过滤器`Filter`。
+* 如果参数为空，返回当前用户一定数量（Limit所指定的数量，默认为20）的定时任务。
+     * @param {DescribeScheduledActionsRequest} req
+     * @param {function(string, DescribeScheduledActionsResponse):void} cb
+     * @public
+     */
+    DescribeScheduledActions(req, cb) {
+        let resp = new DescribeScheduledActionsResponse();
+        this.request("DescribeScheduledActions", req, resp, cb);
+    }
+
+    /**
+     * 本接口（ModifyLaunchConfigurationAttributes）用于修改启动配置部分属性。
+
+* 修改启动配置后，已经使用该启动配置扩容的存量实例不会发生变更，此后使用该启动配置的新增实例会按照新的配置进行扩容。
+* 本接口支持修改部分简单类型。
+     * @param {ModifyLaunchConfigurationAttributesRequest} req
+     * @param {function(string, ModifyLaunchConfigurationAttributesResponse):void} cb
+     * @public
+     */
+    ModifyLaunchConfigurationAttributes(req, cb) {
+        let resp = new ModifyLaunchConfigurationAttributesResponse();
+        this.request("ModifyLaunchConfigurationAttributes", req, resp, cb);
     }
 
 

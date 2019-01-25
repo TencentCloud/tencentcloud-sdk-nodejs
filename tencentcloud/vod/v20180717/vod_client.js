@@ -18,6 +18,7 @@ const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const DeleteMediaResponse = models.DeleteMediaResponse;
 const MediaVideoStreamItem = models.MediaVideoStreamItem;
+const SimpleHlsClipRequest = models.SimpleHlsClipRequest;
 const SearchMediaResponse = models.SearchMediaResponse;
 const ModifyMediaInfoResponse = models.ModifyMediaInfoResponse;
 const ModifyClassRequest = models.ModifyClassRequest;
@@ -47,6 +48,7 @@ const MediaAnimatedGraphicsInfo = models.MediaAnimatedGraphicsInfo;
 const MediaMetaData = models.MediaMetaData;
 const SearchMediaRequest = models.SearchMediaRequest;
 const ApplyUploadResponse = models.ApplyUploadResponse;
+const SimpleHlsClipResponse = models.SimpleHlsClipResponse;
 const DeleteClassRequest = models.DeleteClassRequest;
 const DescribeAllClassResponse = models.DescribeAllClassResponse;
 const DeleteClassResponse = models.DeleteClassResponse;
@@ -102,6 +104,19 @@ class VodClient extends AbstractClient {
     DescribeMediaInfos(req, cb) {
         let resp = new DescribeMediaInfosResponse();
         this.request("DescribeMediaInfos", req, resp, cb);
+    }
+
+    /**
+     * 对 HLS 视频进行按时间段裁剪。
+
+注意：裁剪出来的视频与原始视频共用 ts，仅生成新的 m3u8。原始视频删除后，该裁剪视频也会被删除。
+     * @param {SimpleHlsClipRequest} req
+     * @param {function(string, SimpleHlsClipResponse):void} cb
+     * @public
+     */
+    SimpleHlsClip(req, cb) {
+        let resp = new SimpleHlsClipResponse();
+        this.request("SimpleHlsClip", req, resp, cb);
     }
 
     /**

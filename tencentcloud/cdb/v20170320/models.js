@@ -1507,6 +1507,34 @@ class DescribeBinlogsResponse extends  AbstractModel {
 }
 
 /**
+ * DeleteParamTemplate返回参数结构体
+ * @class
+ */
+class DeleteParamTemplateResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeDefaultParams请求参数结构体
  * @class
  */
@@ -1959,6 +1987,34 @@ class DescribeDBInstanceRebootTimeResponse extends  AbstractModel {
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DeleteParamTemplate请求参数结构体
+ * @class
+ */
+class DeleteParamTemplateRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 参数模板ID。
+         * @type {number || null}
+         */
+        this.TemplateId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TemplateId = 'TemplateId' in params ? params.TemplateId : null;
 
     }
 }
@@ -3933,6 +3989,34 @@ class DescribeDBSwitchRecordsRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeSupportedPrivileges请求参数结构体
+ * @class
+ */
+class DescribeSupportedPrivilegesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例ID相同。
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+    }
+}
+
+/**
  * DescribeAsyncRequestInfo返回参数结构体
  * @class
  */
@@ -5164,6 +5248,62 @@ class SlaveInfo extends  AbstractModel {
 }
 
 /**
+ * DescribeSupportedPrivileges返回参数结构体
+ * @class
+ */
+class DescribeSupportedPrivilegesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例支持的全局权限。
+         * @type {Array.<string> || null}
+         */
+        this.GlobalSupportedPrivileges = null;
+
+        /**
+         * 实例支持的数据库权限。
+         * @type {Array.<string> || null}
+         */
+        this.DatabaseSupportedPrivileges = null;
+
+        /**
+         * 实例支持的数据库表权限。
+         * @type {Array.<string> || null}
+         */
+        this.TableSupportedPrivileges = null;
+
+        /**
+         * 实例支持的数据库列权限。
+         * @type {Array.<string> || null}
+         */
+        this.ColumnSupportedPrivileges = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.GlobalSupportedPrivileges = 'GlobalSupportedPrivileges' in params ? params.GlobalSupportedPrivileges : null;
+        this.DatabaseSupportedPrivileges = 'DatabaseSupportedPrivileges' in params ? params.DatabaseSupportedPrivileges : null;
+        this.TableSupportedPrivileges = 'TableSupportedPrivileges' in params ? params.TableSupportedPrivileges : null;
+        this.ColumnSupportedPrivileges = 'ColumnSupportedPrivileges' in params ? params.ColumnSupportedPrivileges : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * ModifyDBInstanceName请求参数结构体
  * @class
  */
@@ -5613,7 +5753,7 @@ class DescribeDBPriceRequest extends  AbstractModel {
         super();
 
         /**
-         * 可用区信息，格式如"ap-guangzhou-1"
+         * 可用区信息，格式如"ap-guangzhou-2"。具体能设置的值请通过<a href="https://cloud.tencent.com/document/api/236/17229">DescribeDBZoneConfig</a>接口查询。
          * @type {string || null}
          */
         this.Zone = null;
@@ -9519,6 +9659,7 @@ module.exports = {
     DescribeDBSecurityGroupsResponse: DescribeDBSecurityGroupsResponse,
     MasterInfo: MasterInfo,
     DescribeBinlogsResponse: DescribeBinlogsResponse,
+    DeleteParamTemplateResponse: DeleteParamTemplateResponse,
     DescribeDefaultParamsRequest: DescribeDefaultParamsRequest,
     DBSwitchInfo: DBSwitchInfo,
     DescribeDBPriceResponse: DescribeDBPriceResponse,
@@ -9532,6 +9673,7 @@ module.exports = {
     OpenDBInstanceGTIDResponse: OpenDBInstanceGTIDResponse,
     DescribeDBZoneConfigRequest: DescribeDBZoneConfigRequest,
     DescribeDBInstanceRebootTimeResponse: DescribeDBInstanceRebootTimeResponse,
+    DeleteParamTemplateRequest: DeleteParamTemplateRequest,
     DrInfo: DrInfo,
     RoGroup: RoGroup,
     ParameterDetail: ParameterDetail,
@@ -9566,6 +9708,7 @@ module.exports = {
     ModifyAccountPasswordResponse: ModifyAccountPasswordResponse,
     ModifyInstanceTagResponse: ModifyInstanceTagResponse,
     DescribeDBSwitchRecordsRequest: DescribeDBSwitchRecordsRequest,
+    DescribeSupportedPrivilegesRequest: DescribeSupportedPrivilegesRequest,
     DescribeAsyncRequestInfoResponse: DescribeAsyncRequestInfoResponse,
     CreateDBInstanceResponse: CreateDBInstanceResponse,
     ModifyInstanceTagRequest: ModifyInstanceTagRequest,
@@ -9595,6 +9738,7 @@ module.exports = {
     ZoneConf: ZoneConf,
     DeviceNetInfo: DeviceNetInfo,
     SlaveInfo: SlaveInfo,
+    DescribeSupportedPrivilegesResponse: DescribeSupportedPrivilegesResponse,
     ModifyDBInstanceNameRequest: ModifyDBInstanceNameRequest,
     TagInfoUnit: TagInfoUnit,
     UpgradeDBInstanceEngineVersionResponse: UpgradeDBInstanceEngineVersionResponse,

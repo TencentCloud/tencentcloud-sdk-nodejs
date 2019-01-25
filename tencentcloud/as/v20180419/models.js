@@ -17,6 +17,56 @@
 const AbstractModel = require("../../common/abstract_model");
 
 /**
+ * ModifyLoadBalancers请求参数结构体
+ * @class
+ */
+class ModifyLoadBalancersRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 伸缩组ID
+         * @type {string || null}
+         */
+        this.AutoScalingGroupId = null;
+
+        /**
+         * 传统负载均衡器ID列表，目前长度上限为1，LoadBalancerIds 和 ForwardLoadBalancers 二者同时最多只能指定一个
+         * @type {Array.<string> || null}
+         */
+        this.LoadBalancerIds = null;
+
+        /**
+         * 应用型负载均衡器列表，目前长度上限为1，LoadBalancerIds 和 ForwardLoadBalancers 二者同时最多只能指定一个
+         * @type {Array.<ForwardLoadBalancer> || null}
+         */
+        this.ForwardLoadBalancers = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AutoScalingGroupId = 'AutoScalingGroupId' in params ? params.AutoScalingGroupId : null;
+        this.LoadBalancerIds = 'LoadBalancerIds' in params ? params.LoadBalancerIds : null;
+
+        if (params.ForwardLoadBalancers) {
+            this.ForwardLoadBalancers = new Array();
+            for (let z in params.ForwardLoadBalancers) {
+                let obj = new ForwardLoadBalancer();
+                obj.deserialize(params.ForwardLoadBalancers[z]);
+                this.ForwardLoadBalancers.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * RemoveInstances返回参数结构体
  * @class
  */
@@ -151,6 +201,12 @@ class ModifyLaunchConfigurationAttributesRequest extends  AbstractModel {
          */
         this.LaunchConfigurationName = null;
 
+        /**
+         * 经过 Base64 编码后的自定义数据，最大长度不超过16KB。如果要清空UserData，则指定其为空字符串''
+         * @type {string || null}
+         */
+        this.UserData = null;
+
     }
 
     /**
@@ -165,6 +221,7 @@ class ModifyLaunchConfigurationAttributesRequest extends  AbstractModel {
         this.InstanceTypes = 'InstanceTypes' in params ? params.InstanceTypes : null;
         this.InstanceTypesCheckPolicy = 'InstanceTypesCheckPolicy' in params ? params.InstanceTypesCheckPolicy : null;
         this.LaunchConfigurationName = 'LaunchConfigurationName' in params ? params.LaunchConfigurationName : null;
+        this.UserData = 'UserData' in params ? params.UserData : null;
 
     }
 }
@@ -1482,7 +1539,7 @@ class DescribeAutoScalingActivitiesRequest extends  AbstractModel {
          * 过滤条件。
 <li> auto-scaling-group-id - String - 是否必填：否 -（过滤条件）按照伸缩组ID过滤。</li>
 <li> activity-status-code - String - 是否必填：否 -（过滤条件）按照伸缩活动状态过滤。（INIT：初始化中|RUNNING：运行中|SUCCESSFUL：活动成功|PARTIALLY_SUCCESSFUL：活动部分成功|FAILED：活动失败|CANCELLED：活动取消）</li>
-<li> activity-type - String - 是否必填：否 -（过滤条件）按照伸缩活动类型过滤。（SCALE_OUT：扩容活动|SCALE_IN：缩容活动|ATTACH_INSTANCES：添加实例|REMOVE_INSTANCES：销毁实例|DETACH_INSTANCES：移出实例|TERMINATE_INSTANCES_UNEXPECTEDLY：实例在CVM控制台被销毁|REPLACE_UNHEALTHY_INSTANCE：替换不健康实例）</li>
+<li> activity-type - String - 是否必填：否 -（过滤条件）按照伸缩活动类型过滤。（SCALE_OUT：扩容活动|SCALE_IN：缩容活动|ATTACH_INSTANCES：添加实例|REMOVE_INSTANCES：销毁实例|DETACH_INSTANCES：移出实例|TERMINATE_INSTANCES_UNEXPECTEDLY：实例在CVM控制台被销毁|REPLACE_UNHEALTHY_INSTANCE：替换不健康实例|UPDATE_LOAD_BALANCERS：更新负载均衡器）</li>
 <li> activity-id - String - 是否必填：否 -（过滤条件）按照伸缩活动ID过滤。</li>
 每次请求的`Filters`的上限为10，`Filter.Values`的上限为5。参数不支持同时指定`ActivityIds`和`Filters`。
          * @type {Array.<Filter> || null}
@@ -1597,6 +1654,41 @@ class InstanceMarketOptionsRequest extends  AbstractModel {
             this.SpotOptions = obj;
         }
         this.MarketType = 'MarketType' in params ? params.MarketType : null;
+
+    }
+}
+
+/**
+ * ModifyLoadBalancers返回参数结构体
+ * @class
+ */
+class ModifyLoadBalancersResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 伸缩活动ID
+         * @type {string || null}
+         */
+        this.ActivityId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ActivityId = 'ActivityId' in params ? params.ActivityId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3273,6 +3365,7 @@ class DataDisk extends  AbstractModel {
 }
 
 module.exports = {
+    ModifyLoadBalancersRequest: ModifyLoadBalancersRequest,
     RemoveInstancesResponse: RemoveInstancesResponse,
     DisableAutoScalingGroupResponse: DisableAutoScalingGroupResponse,
     SystemDisk: SystemDisk,
@@ -3300,6 +3393,7 @@ module.exports = {
     DescribeAutoScalingActivitiesRequest: DescribeAutoScalingActivitiesRequest,
     ModifyDesiredCapacityRequest: ModifyDesiredCapacityRequest,
     InstanceMarketOptionsRequest: InstanceMarketOptionsRequest,
+    ModifyLoadBalancersResponse: ModifyLoadBalancersResponse,
     CreateScheduledActionResponse: CreateScheduledActionResponse,
     DescribeScheduledActionsResponse: DescribeScheduledActionsResponse,
     DescribeAutoScalingGroupsResponse: DescribeAutoScalingGroupsResponse,
