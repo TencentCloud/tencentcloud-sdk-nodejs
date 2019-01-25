@@ -101,6 +101,48 @@ class MediaVideoStreamItem extends  AbstractModel {
 }
 
 /**
+ * SimpleHlsClip请求参数结构体
+ * @class
+ */
+class SimpleHlsClipRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 需要裁剪的腾讯云点播 HLS 视频 URL。
+         * @type {string || null}
+         */
+        this.Url = null;
+
+        /**
+         * 裁剪的开始偏移时间，单位秒。默认 0，即从视频开头开始裁剪。负数表示距离视频结束多少秒开始裁剪。比如 -10 表示从倒数第 10 秒开始裁剪。
+         * @type {number || null}
+         */
+        this.StartTimeOffset = null;
+
+        /**
+         * 裁剪的结束偏移时间，单位秒。默认 0，即裁剪到视频尾部。负数表示距离视频结束多少秒结束裁剪。比如 -10 表示到倒数第 10 秒结束裁剪。
+         * @type {number || null}
+         */
+        this.EndTimeOffset = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Url = 'Url' in params ? params.Url : null;
+        this.StartTimeOffset = 'StartTimeOffset' in params ? params.StartTimeOffset : null;
+        this.EndTimeOffset = 'EndTimeOffset' in params ? params.EndTimeOffset : null;
+
+    }
+}
+
+/**
  * SearchMedia返回参数结构体
  * @class
  */
@@ -1681,6 +1723,53 @@ class ApplyUploadResponse extends  AbstractModel {
 }
 
 /**
+ * SimpleHlsClip返回参数结构体
+ * @class
+ */
+class SimpleHlsClipResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 裁剪后的视频地址。
+         * @type {string || null}
+         */
+        this.Url = null;
+
+        /**
+         * 裁剪后的视频元信息。目前`Size`，`Rotate`，`VideoDuration`，`AudioDuration` 几个字段暂时缺省，没有真实数据。
+         * @type {MediaMetaData || null}
+         */
+        this.MetaData = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Url = 'Url' in params ? params.Url : null;
+
+        if (params.MetaData) {
+            let obj = new MediaMetaData();
+            obj.deserialize(params.MetaData)
+            this.MetaData = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DeleteClass请求参数结构体
  * @class
  */
@@ -2505,6 +2594,7 @@ class DescribeMediaInfosResponse extends  AbstractModel {
 module.exports = {
     DeleteMediaResponse: DeleteMediaResponse,
     MediaVideoStreamItem: MediaVideoStreamItem,
+    SimpleHlsClipRequest: SimpleHlsClipRequest,
     SearchMediaResponse: SearchMediaResponse,
     ModifyMediaInfoResponse: ModifyMediaInfoResponse,
     ModifyClassRequest: ModifyClassRequest,
@@ -2534,6 +2624,7 @@ module.exports = {
     MediaMetaData: MediaMetaData,
     SearchMediaRequest: SearchMediaRequest,
     ApplyUploadResponse: ApplyUploadResponse,
+    SimpleHlsClipResponse: SimpleHlsClipResponse,
     DeleteClassRequest: DeleteClassRequest,
     DescribeAllClassResponse: DescribeAllClassResponse,
     DeleteClassResponse: DeleteClassResponse,
