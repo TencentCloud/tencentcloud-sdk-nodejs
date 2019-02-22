@@ -31,13 +31,13 @@ class DeleteModelRequest extends  AbstractModel {
         this.Name = null;
 
         /**
-         * 要删除的模型所在的集群名称
+         * 要删除的模型所在的集群名称，`集群模式` 必填
          * @type {string || null}
          */
         this.Cluster = null;
 
         /**
-         * 模型类型
+         * 模型类型，取值 `serverless` 即为 `无服务器模式`，否则为 `集群模式`
          * @type {string || null}
          */
         this.ServType = null;
@@ -130,7 +130,7 @@ class DeleteJobResponse extends  AbstractModel {
         super();
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -164,19 +164,19 @@ class CreateJobRequest extends  AbstractModel {
         this.Name = null;
 
         /**
-         * 运行任务的集群
+         * 运行任务的集群，详见 [使用集群](https://cloud.tencent.com/document/product/851/17317)
          * @type {string || null}
          */
         this.Cluster = null;
 
         /**
-         * 运行任务的环境
+         * 运行任务的环境，详见 [运行环境](https://cloud.tencent.com/document/product/851/17320)
          * @type {string || null}
          */
         this.RuntimeVersion = null;
 
         /**
-         * 挂载的路径，支持nfs,cos(cos只在tia运行环境中支持)
+         * 挂载的路径，支持 NFS，[CFS](https://cloud.tencent.com/product/cfs) 和 [COS](https://cloud.tencent.com/product/cos)，其中 COS 只在 [TI-A 定制环境](https://cloud.tencent.com/document/product/851/17320#ti-a-.E5.AE.9A.E5.88.B6.E7.8E.AF.E5.A2.83) 中支持
          * @type {Array.<string> || null}
          */
         this.PackageDir = null;
@@ -194,43 +194,43 @@ class CreateJobRequest extends  AbstractModel {
         this.Args = null;
 
         /**
-         * 运行任务的配置信息
+         * 运行任务的配置信息，详见 [训练规模](https://cloud.tencent.com/document/product/851/17319)
          * @type {string || null}
          */
         this.ScaleTier = null;
 
         /**
-         * （ScaleTier为Custom时）master机器类型
+         * Master 机器类型，ScaleTier 取值为 `CUSTOM` 时必填，详见 [训练规模](https://cloud.tencent.com/document/product/851/17319)
          * @type {string || null}
          */
         this.MasterType = null;
 
         /**
-         * （ScaleTier为Custom时）worker机器类型
+         * Worker 机器类型，ScaleTier 取值为 `CUSTOM` 时必填，详见 [训练规模](https://cloud.tencent.com/document/product/851/17319)
          * @type {string || null}
          */
         this.WorkerType = null;
 
         /**
-         * （ScaleTier为Custom时）parameter server机器类型
+         * Parameter server 机器类型，ScaleTier 取值为 `CUSTOM` 时必填,详见 [训练规模](https://cloud.tencent.com/document/product/851/17319)
          * @type {string || null}
          */
         this.ParameterServerType = null;
 
         /**
-         * （ScaleTier为Custom时）worker机器数量
+         * Worker 机器数量，ScaleTier 取值为 `CUSTOM` 时必填,详见 [训练规模](https://cloud.tencent.com/document/product/851/17319)
          * @type {number || null}
          */
         this.WorkerCount = null;
 
         /**
-         * （ScaleTier为Custom时）parameter server机器数量
+         * Parameter server 机器数量，ScaleTier 取值为 `CUSTOM` 时必填,详见 [训练规模](https://cloud.tencent.com/document/product/851/17319)
          * @type {number || null}
          */
         this.ParameterServerCount = null;
 
         /**
-         * 启动debug mode，默认为false
+         * 启动 debug 模式，默认为 false
          * @type {boolean || null}
          */
         this.Debug = null;
@@ -283,7 +283,7 @@ class CreateJobResponse extends  AbstractModel {
         this.Job = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -323,7 +323,7 @@ class InstallAgentResponse extends  AbstractModel {
         this.TiaVersion = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -358,7 +358,7 @@ class DescribeModelResponse extends  AbstractModel {
         this.Model = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -398,13 +398,13 @@ class DescribeModelRequest extends  AbstractModel {
         this.Name = null;
 
         /**
-         * 模型所在集群名称
+         * 模型所在集群名称，`集群模式` 必填
          * @type {string || null}
          */
         this.Cluster = null;
 
         /**
-         * 模型类型
+         * 模型类型，取值 `serverless` 即为 `无服务器模式`，否则为 `集群模式`
          * @type {string || null}
          */
         this.ServType = null;
@@ -699,7 +699,7 @@ class CreateModelResponse extends  AbstractModel {
         this.Model = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -733,25 +733,25 @@ class ListModelsRequest extends  AbstractModel {
         super();
 
         /**
-         * 部署模型的集群
+         * 部署模型的集群， `集群模式` 必填
          * @type {string || null}
          */
         this.Cluster = null;
 
         /**
-         * 分页参数，返回数量
+         * 分页参数，返回数量上限
          * @type {number || null}
          */
         this.Limit = null;
 
         /**
-         * 分页参数，起始位置
+         * 分页参数，分页起始位置
          * @type {number || null}
          */
         this.Offset = null;
 
         /**
-         * 模型类型
+         * 部署类型，取值 `serverless` 即为 `无服务器模式`，否则为 `集群模式`。
          * @type {string || null}
          */
         this.ServType = null;
@@ -800,7 +800,7 @@ class QueryLogsResponse extends  AbstractModel {
         this.Listover = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -887,7 +887,7 @@ class ListJobsResponse extends  AbstractModel {
         this.Jobs = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -924,37 +924,37 @@ class QueryLogsRequest extends  AbstractModel {
         super();
 
         /**
-         * 任务名称
+         * 任务的名称
          * @type {string || null}
          */
         this.JobName = null;
 
         /**
-         * 集群名称
+         * 任务所在集群的名称
          * @type {string || null}
          */
         this.Cluster = null;
 
         /**
-         * 查询日志的开始时间
+         * 查询日志的开始时间，格式：2019-01-01 00:00:00
          * @type {string || null}
          */
         this.StartTime = null;
 
         /**
-         * 查询日志的结束时间
+         * 查询日志的结束时间，格式：2019-01-01 00:00:00
          * @type {string || null}
          */
         this.EndTime = null;
 
         /**
-         * 单次要返回的日志条数
+         * 单次要返回的日志条数上限
          * @type {number || null}
          */
         this.Limit = null;
 
         /**
-         * 加载更多使用，透传上次返回的context值，获取后续的日志内容，使用context翻页最多能获取10000条日志
+         * 加载更多日志时使用，透传上次返回的 Context 值，获取后续的日志内容；使用 Context 翻页最多能获取 10000 条日志
          * @type {string || null}
          */
         this.Context = null;
@@ -1077,6 +1077,24 @@ class Model extends  AbstractModel {
          */
         this.Replicas = null;
 
+        /**
+         * 模型Id
+         * @type {string || null}
+         */
+        this.Id = null;
+
+        /**
+         * 创建任务的Uin
+         * @type {string || null}
+         */
+        this.Uin = null;
+
+        /**
+         * 模型删除时间，格式为：2006-01-02 15:04:05.999999999 -0700 MST
+         * @type {string || null}
+         */
+        this.DelTime = null;
+
     }
 
     /**
@@ -1099,6 +1117,9 @@ class Model extends  AbstractModel {
         this.ServType = 'ServType' in params ? params.ServType : null;
         this.Expose = 'Expose' in params ? params.Expose : null;
         this.Replicas = 'Replicas' in params ? params.Replicas : null;
+        this.Id = 'Id' in params ? params.Id : null;
+        this.Uin = 'Uin' in params ? params.Uin : null;
+        this.DelTime = 'DelTime' in params ? params.DelTime : null;
 
     }
 }
@@ -1112,7 +1133,7 @@ class DeleteModelResponse extends  AbstractModel {
         super();
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -1140,13 +1161,13 @@ class ListModelsResponse extends  AbstractModel {
         super();
 
         /**
-         * Model数组，用以显示所有模型的信息
+         * Model 数组，用以显示所有模型的信息
          * @type {Array.<Model> || null}
          */
         this.Models = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -1224,7 +1245,7 @@ class CreateModelRequest extends  AbstractModel {
         this.Name = null;
 
         /**
-         * 要部署模型的路径名
+         * 要部署的模型文件路径名
          * @type {string || null}
          */
         this.Model = null;
@@ -1236,37 +1257,37 @@ class CreateModelRequest extends  AbstractModel {
         this.Description = null;
 
         /**
-         * 指定集群的名称（集群模式下必填）
+         * 部署目标集群的名称，`集群模式` 必填
          * @type {string || null}
          */
         this.Cluster = null;
 
         /**
-         * 运行环境镜像的标签
+         * 运行环境镜像的标签，详见 [Serving 环境](https://cloud.tencent.com/document/product/851/17320#serving-.E7.8E.AF.E5.A2.83)
          * @type {string || null}
          */
         this.RuntimeVersion = null;
 
         /**
-         * 要部署的模型副本数目（集群模式下选填）
+         * 要部署的模型副本数目，`集群模式` 选填
          * @type {number || null}
          */
         this.Replicas = null;
 
         /**
-         * 暴露外网或内网，默认暴露外网（集群模式下选填）
+         * 暴露外网或内网，默认暴露外网，`集群模式` 选填
          * @type {string || null}
          */
         this.Expose = null;
 
         /**
-         * 部署模式（无服务器函数模式/集群模式）
+         * 部署模式，取值 `serverless` 即为 `无服务器模式`，否则为 `集群模式` 下服务的运行规模，形如 `2U4G1P`，详见 [自定义的训练规模](https://cloud.tencent.com/document/product/851/17319#.E8.87.AA.E5.AE.9A.E4.B9.89.E7.9A.84.E8.AE.AD.E7.BB.83.E8.A7.84.E6.A8.A1)
          * @type {string || null}
          */
         this.ServType = null;
 
         /**
-         * 部署模型的其他配置信息
+         * `无服务器模式` 可选的其他配置信息，详见 [利用无服务器函数部署](https://cloud.tencent.com/document/product/851/17049#.E5.88.A9.E7.94.A8.E6.97.A0.E6.9C.8D.E5.8A.A1.E5.99.A8.E5.87.BD.E6.95.B0.E9.83.A8.E7.BD.B2)
          * @type {Array.<string> || null}
          */
         this.RuntimeConf = null;
@@ -1308,7 +1329,7 @@ class DescribeJobResponse extends  AbstractModel {
         this.Job = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;

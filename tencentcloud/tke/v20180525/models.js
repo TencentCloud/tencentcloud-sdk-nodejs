@@ -66,18 +66,24 @@ class InstanceAdvancedSettings extends  AbstractModel {
 }
 
 /**
- * 描述了 “云安全” 服务相关的信息
+ * 过滤器
  * @class
  */
-class RunSecurityServiceEnabled extends  AbstractModel {
+class Filter extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 是否开启[云安全](/document/product/296)服务。取值范围：<br><li>TRUE：表示开启云安全服务<br><li>FALSE：表示不开启云安全服务<br><br>默认取值：TRUE。
-         * @type {boolean || null}
+         * 属性名称, 若存在多个Filter时，Filter间的关系为逻辑与（AND）关系。
+         * @type {string || null}
          */
-        this.Enabled = null;
+        this.Name = null;
+
+        /**
+         * 属性值, 若同一个Filter存在多个Values，同一Filter下Values间的关系为逻辑或（OR）关系。
+         * @type {Array.<string> || null}
+         */
+        this.Values = null;
 
     }
 
@@ -88,7 +94,8 @@ class RunSecurityServiceEnabled extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Enabled = 'Enabled' in params ? params.Enabled : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Values = 'Values' in params ? params.Values : null;
 
     }
 }
@@ -120,6 +127,12 @@ class DescribeClustersRequest extends  AbstractModel {
          */
         this.Limit = null;
 
+        /**
+         * 过滤条件,当前只支持按照单个条件ClusterName进行过滤
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
     }
 
     /**
@@ -132,6 +145,15 @@ class DescribeClustersRequest extends  AbstractModel {
         this.ClusterIds = 'ClusterIds' in params ? params.ClusterIds : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
 
     }
 }
@@ -355,6 +377,34 @@ class LoginSettings extends  AbstractModel {
 }
 
 /**
+ * 描述了 “云安全” 服务相关的信息
+ * @class
+ */
+class RunSecurityServiceEnabled extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 是否开启[云安全](/document/product/296)服务。取值范围：<br><li>TRUE：表示开启云安全服务<br><li>FALSE：表示不开启云安全服务<br><br>默认取值：TRUE。
+         * @type {boolean || null}
+         */
+        this.Enabled = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Enabled = 'Enabled' in params ? params.Enabled : null;
+
+    }
+}
+
+/**
  * AddExistedInstances请求参数结构体
  * @class
  */
@@ -454,7 +504,7 @@ class Cluster extends  AbstractModel {
 
         /**
          * 集群描述
-         * @type {Array.<string> || null}
+         * @type {string || null}
          */
         this.ClusterDescription = null;
 
@@ -482,6 +532,12 @@ class Cluster extends  AbstractModel {
          */
         this.ClusterNetworkSettings = null;
 
+        /**
+         * 集群当前node数量
+         * @type {number || null}
+         */
+        this.ClusterNodeNum = null;
+
     }
 
     /**
@@ -503,6 +559,7 @@ class Cluster extends  AbstractModel {
             obj.deserialize(params.ClusterNetworkSettings)
             this.ClusterNetworkSettings = obj;
         }
+        this.ClusterNodeNum = 'ClusterNodeNum' in params ? params.ClusterNodeNum : null;
 
     }
 }
@@ -643,7 +700,7 @@ class ClusterNetworkSettings extends  AbstractModel {
          * 是否启用IPVS(默认不开启)
          * @type {boolean || null}
          */
-        this.IPVS = null;
+        this.Ipvs = null;
 
         /**
          * 集群的VPCID（如果创建空集群，为必传值，否则自动设置为和集群的节点保持一致）
@@ -664,7 +721,7 @@ class ClusterNetworkSettings extends  AbstractModel {
         this.IgnoreClusterCIDRConflict = 'IgnoreClusterCIDRConflict' in params ? params.IgnoreClusterCIDRConflict : null;
         this.MaxNodePodNum = 'MaxNodePodNum' in params ? params.MaxNodePodNum : null;
         this.MaxClusterServiceNum = 'MaxClusterServiceNum' in params ? params.MaxClusterServiceNum : null;
-        this.IPVS = 'IPVS' in params ? params.IPVS : null;
+        this.Ipvs = 'Ipvs' in params ? params.Ipvs : null;
         this.VpcId = 'VpcId' in params ? params.VpcId : null;
 
     }
@@ -777,13 +834,14 @@ class DescribeClusterInstancesRequest extends  AbstractModel {
 
 module.exports = {
     InstanceAdvancedSettings: InstanceAdvancedSettings,
-    RunSecurityServiceEnabled: RunSecurityServiceEnabled,
+    Filter: Filter,
     DescribeClustersRequest: DescribeClustersRequest,
     DeleteClusterInstancesRequest: DeleteClusterInstancesRequest,
     DeleteClusterInstancesResponse: DeleteClusterInstancesResponse,
     Instance: Instance,
     EnhancedService: EnhancedService,
     LoginSettings: LoginSettings,
+    RunSecurityServiceEnabled: RunSecurityServiceEnabled,
     AddExistedInstancesRequest: AddExistedInstancesRequest,
     Cluster: Cluster,
     DescribeClustersResponse: DescribeClustersResponse,

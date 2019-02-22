@@ -250,7 +250,7 @@ class DescribeInstancesDiskNumRequest extends  AbstractModel {
 }
 
 /**
- * 描述了实例的抽象位置，包括其所在的可用区，所属的项目
+ * 描述了实例的抽象位置，包括其所在的可用区，所属的项目，以及所属的独享集群的ID和名字。
  * @class
  */
 class Placement extends  AbstractModel {
@@ -269,6 +269,24 @@ class Placement extends  AbstractModel {
          */
         this.ProjectId = null;
 
+        /**
+         * 实例所属的独享集群ID。作为入参时，表示对指定的CdcId独享集群的资源进行操作，可为空。 作为出参时，表示资源所属的独享集群的ID，可为空。
+         * @type {string || null}
+         */
+        this.CdcId = null;
+
+        /**
+         * 围笼Id。作为入参时，表示对指定的CageId的资源进行操作，可为空。 作为出参时，表示资源所属围笼ID，可为空。
+         * @type {string || null}
+         */
+        this.CageId = null;
+
+        /**
+         * 独享集群名字。作为入参时，忽略。作为出参时，表示云硬盘所属的独享集群名，可为空。
+         * @type {string || null}
+         */
+        this.CdcName = null;
+
     }
 
     /**
@@ -280,6 +298,9 @@ class Placement extends  AbstractModel {
         }
         this.Zone = 'Zone' in params ? params.Zone : null;
         this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+        this.CdcId = 'CdcId' in params ? params.CdcId : null;
+        this.CageId = 'CageId' in params ? params.CageId : null;
+        this.CdcName = 'CdcName' in params ? params.CdcName : null;
 
     }
 }
@@ -1380,10 +1401,16 @@ class Snapshot extends  AbstractModel {
         this.CopyFromRemote = null;
 
         /**
-         * 快照关联的镜像ID列表。
-         * @type {Array.<string> || null}
+         * 快照关联的镜像列表。
+         * @type {Array.<Image> || null}
          */
-        this.ImageIds = null;
+        this.Images = null;
+
+        /**
+         * 快照关联的镜像个数。
+         * @type {number || null}
+         */
+        this.ImageCount = null;
 
     }
 
@@ -1413,7 +1440,16 @@ class Snapshot extends  AbstractModel {
         this.IsPermanent = 'IsPermanent' in params ? params.IsPermanent : null;
         this.CopyingToRegions = 'CopyingToRegions' in params ? params.CopyingToRegions : null;
         this.CopyFromRemote = 'CopyFromRemote' in params ? params.CopyFromRemote : null;
-        this.ImageIds = 'ImageIds' in params ? params.ImageIds : null;
+
+        if (params.Images) {
+            this.Images = new Array();
+            for (let z in params.Images) {
+                let obj = new Image();
+                obj.deserialize(params.Images[z]);
+                this.Images.push(obj);
+            }
+        }
+        this.ImageCount = 'ImageCount' in params ? params.ImageCount : null;
 
     }
 }
@@ -2006,18 +2042,24 @@ class DescribeSnapshotsRequest extends  AbstractModel {
 }
 
 /**
- * TerminateDisks返回参数结构体
+ * 镜像。
  * @class
  */
-class TerminateDisksResponse extends  AbstractModel {
+class Image extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * 镜像实例ID。
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.ImageId = null;
+
+        /**
+         * 镜像名称。
+         * @type {string || null}
+         */
+        this.ImageName = null;
 
     }
 
@@ -2028,7 +2070,8 @@ class TerminateDisksResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.ImageId = 'ImageId' in params ? params.ImageId : null;
+        this.ImageName = 'ImageName' in params ? params.ImageName : null;
 
     }
 }
@@ -2114,6 +2157,12 @@ class ModifyDiskAttributesRequest extends  AbstractModel {
          */
         this.DeleteWithInstance = null;
 
+        /**
+         * 变更云盘类型时，可传入该参数，表示变更的目标类型，取值范围：<br><li>CLOUD_PREMIUM：表示高性能云硬盘<br><li>CLOUD_SSD：表示SSD云硬盘。<br>当前不支持批量变更类型，即传入DiskType时，DiskIds仅支持传入一块云盘；<br>变更云盘类型时不支持同时变更其他属性。
+         * @type {string || null}
+         */
+        this.DiskType = null;
+
     }
 
     /**
@@ -2128,6 +2177,7 @@ class ModifyDiskAttributesRequest extends  AbstractModel {
         this.DiskName = 'DiskName' in params ? params.DiskName : null;
         this.Portable = 'Portable' in params ? params.Portable : null;
         this.DeleteWithInstance = 'DeleteWithInstance' in params ? params.DeleteWithInstance : null;
+        this.DiskType = 'DiskType' in params ? params.DiskType : null;
 
     }
 }
@@ -2451,7 +2501,7 @@ class Disk extends  AbstractModel {
         this.DiskState = null;
 
         /**
-         * 云盘介质类型。取值范围：<br><li>CLOUD_BASIC：表示普通云硬<br><li>CLOUD_PREMIUM：表示高性能云硬盘<br><li>CLOUD_SSD：SSD表示SSD云硬盘。
+         * 云盘介质类型。取值范围：<br><li>CLOUD_BASIC：表示普通云硬盘<br><li>CLOUD_PREMIUM：表示高性能云硬盘<br><li>CLOUD_SSD：SSD表示SSD云硬盘。
          * @type {string || null}
          */
         this.DiskType = null;
@@ -2619,6 +2669,34 @@ class Disk extends  AbstractModel {
 }
 
 /**
+ * TerminateDisks返回参数结构体
+ * @class
+ */
+class TerminateDisksResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * ApplySnapshot请求参数结构体
  * @class
  */
@@ -2696,7 +2774,7 @@ module.exports = {
     DescribeDiskOperationLogsRequest: DescribeDiskOperationLogsRequest,
     Tag: Tag,
     DescribeSnapshotsRequest: DescribeSnapshotsRequest,
-    TerminateDisksResponse: TerminateDisksResponse,
+    Image: Image,
     DescribeDiskConfigQuotaResponse: DescribeDiskConfigQuotaResponse,
     ModifyDiskAttributesRequest: ModifyDiskAttributesRequest,
     CreateSnapshotRequest: CreateSnapshotRequest,
@@ -2707,6 +2785,7 @@ module.exports = {
     DetachDisksResponse: DetachDisksResponse,
     InquiryPriceRenewDisksResponse: InquiryPriceRenewDisksResponse,
     Disk: Disk,
+    TerminateDisksResponse: TerminateDisksResponse,
     ApplySnapshotRequest: ApplySnapshotRequest,
 
 }

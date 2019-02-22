@@ -25,6 +25,8 @@ const LivenessCompareResponse = models.LivenessCompareResponse;
 const DetectAuthRequest = models.DetectAuthRequest;
 const GetDetectInfoRequest = models.GetDetectInfoRequest;
 const GetLiveCodeRequest = models.GetLiveCodeRequest;
+const IdCardVerificationResponse = models.IdCardVerificationResponse;
+const IdCardVerificationRequest = models.IdCardVerificationRequest;
 const ImageRecognitionRequest = models.ImageRecognitionRequest;
 const LivenessCompareRequest = models.LivenessCompareRequest;
 const GetActionSequenceResponse = models.GetActionSequenceResponse;
@@ -95,6 +97,17 @@ class FaceidClient extends AbstractClient {
     LivenessRecognition(req, cb) {
         let resp = new LivenessRecognitionResponse();
         this.request("LivenessRecognition", req, resp, cb);
+    }
+
+    /**
+     * 传入姓名和身份证号，校验两者的真实性和一致性。
+     * @param {IdCardVerificationRequest} req
+     * @param {function(string, IdCardVerificationResponse):void} cb
+     * @public
+     */
+    IdCardVerification(req, cb) {
+        let resp = new IdCardVerificationResponse();
+        this.request("IdCardVerification", req, resp, cb);
     }
 
     /**
