@@ -64,6 +64,7 @@ const DeleteLiveRecordTemplateResponse = models.DeleteLiveRecordTemplateResponse
 const DescribeLiveWatermarkRequest = models.DescribeLiveWatermarkRequest;
 const AddDelayLiveStreamRequest = models.AddDelayLiveStreamRequest;
 const DescribeLiveDomainCertRequest = models.DescribeLiveDomainCertRequest;
+const DescribeLiveStreamEventListRequest = models.DescribeLiveStreamEventListRequest;
 const DescribePullStreamConfigsRequest = models.DescribePullStreamConfigsRequest;
 const CallBackTemplateInfo = models.CallBackTemplateInfo;
 const UnBindLiveDomainCertRequest = models.UnBindLiveDomainCertRequest;
@@ -87,6 +88,7 @@ const DropLiveStreamResponse = models.DropLiveStreamResponse;
 const DescribeLiveStreamStateResponse = models.DescribeLiveStreamStateResponse;
 const DeletePullStreamConfigResponse = models.DeletePullStreamConfigResponse;
 const DeleteLiveWatermarkRuleRequest = models.DeleteLiveWatermarkRuleRequest;
+const StreamEventInfo = models.StreamEventInfo;
 const DescribeLiveWatermarksRequest = models.DescribeLiveWatermarksRequest;
 const CreateLiveTranscodeRuleRequest = models.CreateLiveTranscodeRuleRequest;
 const DescribeLiveWatermarkRulesRequest = models.DescribeLiveWatermarkRulesRequest;
@@ -101,11 +103,13 @@ const DescribeLiveCertsRequest = models.DescribeLiveCertsRequest;
 const DescribeLiveCertResponse = models.DescribeLiveCertResponse;
 const ModifyPullStreamConfigResponse = models.ModifyPullStreamConfigResponse;
 const DeleteLiveCallbackTemplateResponse = models.DeleteLiveCallbackTemplateResponse;
+const DescribeLiveForbidStreamListResponse = models.DescribeLiveForbidStreamListResponse;
 const DescribeLiveWatermarkResponse = models.DescribeLiveWatermarkResponse;
 const ResumeLiveStreamResponse = models.ResumeLiveStreamResponse;
 const DeletePullStreamConfigRequest = models.DeletePullStreamConfigRequest;
 const DescribeLiveTranscodeTemplatesRequest = models.DescribeLiveTranscodeTemplatesRequest;
 const DescribeLiveWatermarksResponse = models.DescribeLiveWatermarksResponse;
+const DescribeLiveForbidStreamListRequest = models.DescribeLiveForbidStreamListRequest;
 const CreatePullStreamConfigResponse = models.CreatePullStreamConfigResponse;
 const BindLiveDomainCertRequest = models.BindLiveDomainCertRequest;
 const CreateLiveCallbackRuleRequest = models.CreateLiveCallbackRuleRequest;
@@ -168,8 +172,10 @@ const CreateLiveWatermarkRuleRequest = models.CreateLiveWatermarkRuleRequest;
 const DescribeLiveRecordTemplatesRequest = models.DescribeLiveRecordTemplatesRequest;
 const StopLiveRecordResponse = models.StopLiveRecordResponse;
 const CreateLiveSnapshotRuleResponse = models.CreateLiveSnapshotRuleResponse;
+const DescribeLiveStreamEventListResponse = models.DescribeLiveStreamEventListResponse;
 const DescribePullStreamConfigsResponse = models.DescribePullStreamConfigsResponse;
 const DescribeLiveCallbackRulesResponse = models.DescribeLiveCallbackRulesResponse;
+const ForbidStreamInfo = models.ForbidStreamInfo;
 const ResumeDelayLiveStreamResponse = models.ResumeDelayLiveStreamResponse;
 const DescribeLiveSnapshotRulesRequest = models.DescribeLiveSnapshotRulesRequest;
 const DeleteLiveCertRequest = models.DeleteLiveCertRequest;
@@ -238,7 +244,7 @@ class LiveClient extends AbstractClient {
 
 - 模式说明
   该接口支持两种录制模式：
-  1. 定时录制模式。
+  1. 定时录制模式【默认模式】。
     需要传入开始时间与结束时间，录制任务根据时间自动开始与结束。
   2. 实时视频录制模式。
     忽略传入的开始时间，在录制任务创建后立即开始录制，录制时长支持最大为30分钟，如果传入的结束时间与当前时间差大于30分钟，则按30分钟计算，实时视频录制主要用于录制精彩视频场景，时长建议控制在5分钟以内。
@@ -343,14 +349,14 @@ class LiveClient extends AbstractClient {
     }
 
     /**
-     * 获取水印规则列表
-     * @param {DescribeLiveWatermarkRulesRequest} req
-     * @param {function(string, DescribeLiveWatermarkRulesResponse):void} cb
+     * 查询推断流事件
+     * @param {DescribeLiveStreamEventListRequest} req
+     * @param {function(string, DescribeLiveStreamEventListResponse):void} cb
      * @public
      */
-    DescribeLiveWatermarkRules(req, cb) {
-        let resp = new DescribeLiveWatermarkRulesResponse();
-        this.request("DescribeLiveWatermarkRules", req, resp, cb);
+    DescribeLiveStreamEventList(req, cb) {
+        let resp = new DescribeLiveStreamEventListResponse();
+        this.request("DescribeLiveStreamEventList", req, resp, cb);
     }
 
     /**
@@ -543,14 +549,14 @@ class LiveClient extends AbstractClient {
     }
 
     /**
-     * 返回直播中、无推流或者禁播等状态
-     * @param {DescribeLiveStreamStateRequest} req
-     * @param {function(string, DescribeLiveStreamStateResponse):void} cb
+     * 获取禁推流列表
+     * @param {DescribeLiveForbidStreamListRequest} req
+     * @param {function(string, DescribeLiveForbidStreamListResponse):void} cb
      * @public
      */
-    DescribeLiveStreamState(req, cb) {
-        let resp = new DescribeLiveStreamStateResponse();
-        this.request("DescribeLiveStreamState", req, resp, cb);
+    DescribeLiveForbidStreamList(req, cb) {
+        let resp = new DescribeLiveForbidStreamListResponse();
+        this.request("DescribeLiveForbidStreamList", req, resp, cb);
     }
 
     /**
@@ -749,6 +755,28 @@ class LiveClient extends AbstractClient {
     UnBindLiveDomainCert(req, cb) {
         let resp = new UnBindLiveDomainCertResponse();
         this.request("UnBindLiveDomainCert", req, resp, cb);
+    }
+
+    /**
+     * 获取水印规则列表
+     * @param {DescribeLiveWatermarkRulesRequest} req
+     * @param {function(string, DescribeLiveWatermarkRulesResponse):void} cb
+     * @public
+     */
+    DescribeLiveWatermarkRules(req, cb) {
+        let resp = new DescribeLiveWatermarkRulesResponse();
+        this.request("DescribeLiveWatermarkRules", req, resp, cb);
+    }
+
+    /**
+     * 返回直播中、无推流或者禁播等状态
+     * @param {DescribeLiveStreamStateRequest} req
+     * @param {function(string, DescribeLiveStreamStateResponse):void} cb
+     * @public
+     */
+    DescribeLiveStreamState(req, cb) {
+        let resp = new DescribeLiveStreamStateResponse();
+        this.request("DescribeLiveStreamState", req, resp, cb);
     }
 
     /**

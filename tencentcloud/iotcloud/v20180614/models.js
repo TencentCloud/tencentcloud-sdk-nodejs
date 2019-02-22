@@ -2450,7 +2450,7 @@ class ProductProperties extends  AbstractModel {
         this.ProductDescription = null;
 
         /**
-         * 加密类型，1表示非对称加密，2表示对称加密。如不填写，默认值是1
+         * 加密类型，1表示证书认证，2表示签名认证。如不填写，默认值是1
          * @type {string || null}
          */
         this.EncryptionType = null;
@@ -2462,7 +2462,8 @@ class ProductProperties extends  AbstractModel {
         this.Region = null;
 
         /**
-         * 产品类型，0表示正常设备，2表示NB-IoT设备，默认值是0
+         * 产品类型，各个类型值代表的节点-类型如下：
+0 普通产品，2 NB-IoT产品，4 LoRa产品，3 LoRa网关产品，5 普通网关产品   默认值是0
          * @type {number || null}
          */
         this.ProductType = null;
@@ -2497,6 +2498,12 @@ class ProductProperties extends  AbstractModel {
          */
         this.ModelName = null;
 
+        /**
+         * 产品秘钥，suite产品才会有
+         * @type {string || null}
+         */
+        this.ProductKey = null;
+
     }
 
     /**
@@ -2515,6 +2522,7 @@ class ProductProperties extends  AbstractModel {
         this.Appeui = 'Appeui' in params ? params.Appeui : null;
         this.ModelId = 'ModelId' in params ? params.ModelId : null;
         this.ModelName = 'ModelName' in params ? params.ModelName : null;
+        this.ProductKey = 'ProductKey' in params ? params.ProductKey : null;
 
     }
 }

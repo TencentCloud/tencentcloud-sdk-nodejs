@@ -16,6 +16,7 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
+const DescribeScheduledActionsRequest = models.DescribeScheduledActionsRequest;
 const ModifyLoadBalancersRequest = models.ModifyLoadBalancersRequest;
 const RemoveInstancesResponse = models.RemoveInstancesResponse;
 const DisableAutoScalingGroupResponse = models.DisableAutoScalingGroupResponse;
@@ -23,15 +24,20 @@ const SystemDisk = models.SystemDisk;
 const ModifyLaunchConfigurationAttributesRequest = models.ModifyLaunchConfigurationAttributesRequest;
 const DisableAutoScalingGroupRequest = models.DisableAutoScalingGroupRequest;
 const DeleteAutoScalingGroupResponse = models.DeleteAutoScalingGroupResponse;
+const SpotMarketOptions = models.SpotMarketOptions;
+const SetInstancesProtectionRequest = models.SetInstancesProtectionRequest;
 const AutoScalingGroupAbstract = models.AutoScalingGroupAbstract;
+const DeleteNotificationConfigurationResponse = models.DeleteNotificationConfigurationResponse;
 const DetachInstancesResponse = models.DetachInstancesResponse;
 const EnableAutoScalingGroupRequest = models.EnableAutoScalingGroupRequest;
 const ModifyAutoScalingGroupRequest = models.ModifyAutoScalingGroupRequest;
 const CreateLaunchConfigurationRequest = models.CreateLaunchConfigurationRequest;
 const AutoScalingGroup = models.AutoScalingGroup;
-const CreateScheduledActionRequest = models.CreateScheduledActionRequest;
+const AutoScalingNotification = models.AutoScalingNotification;
 const EnhancedService = models.EnhancedService;
 const AttachInstancesResponse = models.AttachInstancesResponse;
+const MetricAlarm = models.MetricAlarm;
+const Instance = models.Instance;
 const DeleteLaunchConfigurationResponse = models.DeleteLaunchConfigurationResponse;
 const DescribeAutoScalingGroupsRequest = models.DescribeAutoScalingGroupsRequest;
 const LaunchConfiguration = models.LaunchConfiguration;
@@ -41,42 +47,57 @@ const DescribeLaunchConfigurationsResponse = models.DescribeLaunchConfigurations
 const CreateLaunchConfigurationResponse = models.CreateLaunchConfigurationResponse;
 const ForwardLoadBalancer = models.ForwardLoadBalancer;
 const DeleteScheduledActionRequest = models.DeleteScheduledActionRequest;
+const ScalingPolicy = models.ScalingPolicy;
 const DescribeAutoScalingActivitiesRequest = models.DescribeAutoScalingActivitiesRequest;
 const ModifyDesiredCapacityRequest = models.ModifyDesiredCapacityRequest;
 const InstanceMarketOptionsRequest = models.InstanceMarketOptionsRequest;
 const ModifyLoadBalancersResponse = models.ModifyLoadBalancersResponse;
 const CreateScheduledActionResponse = models.CreateScheduledActionResponse;
+const CreateNotificationConfigurationRequest = models.CreateNotificationConfigurationRequest;
 const DescribeScheduledActionsResponse = models.DescribeScheduledActionsResponse;
+const TargetAttribute = models.TargetAttribute;
+const ModifyScheduledActionResponse = models.ModifyScheduledActionResponse;
+const ModifyNotificationConfigurationResponse = models.ModifyNotificationConfigurationResponse;
 const DescribeAutoScalingGroupsResponse = models.DescribeAutoScalingGroupsResponse;
-const DeleteAutoScalingGroupRequest = models.DeleteAutoScalingGroupRequest;
-const DescribeScheduledActionsRequest = models.DescribeScheduledActionsRequest;
+const CreateScheduledActionRequest = models.CreateScheduledActionRequest;
+const CreateScalingPolicyResponse = models.CreateScalingPolicyResponse;
 const ScheduledAction = models.ScheduledAction;
 const RemoveInstancesRequest = models.RemoveInstancesRequest;
 const ModifyAutoScalingGroupResponse = models.ModifyAutoScalingGroupResponse;
 const DeleteLaunchConfigurationRequest = models.DeleteLaunchConfigurationRequest;
 const AttachInstancesRequest = models.AttachInstancesRequest;
-const SpotMarketOptions = models.SpotMarketOptions;
+const DeleteScalingPolicyRequest = models.DeleteScalingPolicyRequest;
 const RunSecurityServiceEnabled = models.RunSecurityServiceEnabled;
+const ModifyScalingPolicyRequest = models.ModifyScalingPolicyRequest;
+const DescribeScalingPoliciesRequest = models.DescribeScalingPoliciesRequest;
 const DescribeAutoScalingInstancesResponse = models.DescribeAutoScalingInstancesResponse;
 const LoginSettings = models.LoginSettings;
 const Filter = models.Filter;
-const ModifyScheduledActionResponse = models.ModifyScheduledActionResponse;
-const EnableAutoScalingGroupResponse = models.EnableAutoScalingGroupResponse;
+const ModifyLaunchConfigurationAttributesResponse = models.ModifyLaunchConfigurationAttributesResponse;
+const DescribeNotificationConfigurationsRequest = models.DescribeNotificationConfigurationsRequest;
+const DescribeScalingPoliciesResponse = models.DescribeScalingPoliciesResponse;
 const Activity = models.Activity;
 const ModifyDesiredCapacityResponse = models.ModifyDesiredCapacityResponse;
 const CreateAutoScalingGroupResponse = models.CreateAutoScalingGroupResponse;
 const RunMonitorServiceEnabled = models.RunMonitorServiceEnabled;
-const ModifyLaunchConfigurationAttributesResponse = models.ModifyLaunchConfigurationAttributesResponse;
-const TargetAttribute = models.TargetAttribute;
+const DeleteAutoScalingGroupRequest = models.DeleteAutoScalingGroupRequest;
+const SetInstancesProtectionResponse = models.SetInstancesProtectionResponse;
+const ModifyScalingPolicyResponse = models.ModifyScalingPolicyResponse;
 const DetachInstancesRequest = models.DetachInstancesRequest;
-const Instance = models.Instance;
+const CreateNotificationConfigurationResponse = models.CreateNotificationConfigurationResponse;
+const ModifyNotificationConfigurationRequest = models.ModifyNotificationConfigurationRequest;
 const ActivtyRelatedInstance = models.ActivtyRelatedInstance;
 const CreateAutoScalingGroupRequest = models.CreateAutoScalingGroupRequest;
+const CreateScalingPolicyRequest = models.CreateScalingPolicyRequest;
 const InternetAccessible = models.InternetAccessible;
+const DeleteScalingPolicyResponse = models.DeleteScalingPolicyResponse;
+const EnableAutoScalingGroupResponse = models.EnableAutoScalingGroupResponse;
 const DescribeLaunchConfigurationsRequest = models.DescribeLaunchConfigurationsRequest;
+const DeleteNotificationConfigurationRequest = models.DeleteNotificationConfigurationRequest;
 const DeleteScheduledActionResponse = models.DeleteScheduledActionResponse;
 const DescribeAutoScalingInstancesRequest = models.DescribeAutoScalingInstancesRequest;
 const DescribeAutoScalingActivitiesResponse = models.DescribeAutoScalingActivitiesResponse;
+const DescribeNotificationConfigurationsResponse = models.DescribeNotificationConfigurationsResponse;
 const LimitedLoginSettings = models.LimitedLoginSettings;
 const ModifyScheduledActionRequest = models.ModifyScheduledActionRequest;
 const DataDisk = models.DataDisk;
@@ -104,6 +125,31 @@ class AsClient extends AbstractClient {
     }
 
     /**
+     * 本接口（ModifyScalingPolicy）用于修改告警触发策略。
+     * @param {ModifyScalingPolicyRequest} req
+     * @param {function(string, ModifyScalingPolicyResponse):void} cb
+     * @public
+     */
+    ModifyScalingPolicy(req, cb) {
+        let resp = new ModifyScalingPolicyResponse();
+        this.request("ModifyScalingPolicy", req, resp, cb);
+    }
+
+    /**
+     * 本接口 (DescribeNotificationConfigurations) 用于查询一个或多个通知的详细信息。
+
+可以根据通知ID、伸缩组ID等信息来查询通知的详细信息。过滤信息详细请见过滤器`Filter`。
+如果参数为空，返回当前用户一定数量（Limit所指定的数量，默认为20）的通知。
+     * @param {DescribeNotificationConfigurationsRequest} req
+     * @param {function(string, DescribeNotificationConfigurationsResponse):void} cb
+     * @public
+     */
+    DescribeNotificationConfigurations(req, cb) {
+        let resp = new DescribeNotificationConfigurationsResponse();
+        this.request("DescribeNotificationConfigurations", req, resp, cb);
+    }
+
+    /**
      * 本接口（DeleteAutoScalingGroup）用于删除指定伸缩组，删除前提是伸缩组内无实例且当前未在执行伸缩活动。
      * @param {DeleteAutoScalingGroupRequest} req
      * @param {function(string, DeleteAutoScalingGroupResponse):void} cb
@@ -124,6 +170,17 @@ class AsClient extends AbstractClient {
     AttachInstances(req, cb) {
         let resp = new AttachInstancesResponse();
         this.request("AttachInstances", req, resp, cb);
+    }
+
+    /**
+     * 本接口（DescribeScalingPolicies）用于查询告警触发策略。
+     * @param {DescribeScalingPoliciesRequest} req
+     * @param {function(string, DescribeScalingPoliciesResponse):void} cb
+     * @public
+     */
+    DescribeScalingPolicies(req, cb) {
+        let resp = new DescribeScalingPoliciesResponse();
+        this.request("DescribeScalingPolicies", req, resp, cb);
     }
 
     /**
@@ -171,6 +228,17 @@ class AsClient extends AbstractClient {
     }
 
     /**
+     * 本接口（DeleteScalingPolicy）用于删除告警触发策略。
+     * @param {DeleteScalingPolicyRequest} req
+     * @param {function(string, DeleteScalingPolicyResponse):void} cb
+     * @public
+     */
+    DeleteScalingPolicy(req, cb) {
+        let resp = new DeleteScalingPolicyResponse();
+        this.request("DeleteScalingPolicy", req, resp, cb);
+    }
+
+    /**
      * 本接口（ModifyLoadBalancers）用于修改伸缩组的负载均衡器。
 
 * 本接口用于为伸缩组指定新的负载均衡器配置，采用“完全覆盖”风格，无论之前配置如何，统一按照接口参数配置为新的负载均衡器。
@@ -194,6 +262,29 @@ class AsClient extends AbstractClient {
     ModifyDesiredCapacity(req, cb) {
         let resp = new ModifyDesiredCapacityResponse();
         this.request("ModifyDesiredCapacity", req, resp, cb);
+    }
+
+    /**
+     * 本接口（SetInstancesProtection）用于设置实例移除保护。
+子机设置为移除保护之后，当发生不健康替换、报警策略、期望值变更等触发缩容时，将不对此子机缩容操作。
+     * @param {SetInstancesProtectionRequest} req
+     * @param {function(string, SetInstancesProtectionResponse):void} cb
+     * @public
+     */
+    SetInstancesProtection(req, cb) {
+        let resp = new SetInstancesProtectionResponse();
+        this.request("SetInstancesProtection", req, resp, cb);
+    }
+
+    /**
+     * 本接口（ModifyNotificationConfiguration）用于修改通知。
+     * @param {ModifyNotificationConfigurationRequest} req
+     * @param {function(string, ModifyNotificationConfigurationResponse):void} cb
+     * @public
+     */
+    ModifyNotificationConfiguration(req, cb) {
+        let resp = new ModifyNotificationConfigurationResponse();
+        this.request("ModifyNotificationConfiguration", req, resp, cb);
     }
 
     /**
@@ -221,6 +312,17 @@ class AsClient extends AbstractClient {
     ModifyAutoScalingGroup(req, cb) {
         let resp = new ModifyAutoScalingGroupResponse();
         this.request("ModifyAutoScalingGroup", req, resp, cb);
+    }
+
+    /**
+     * 本接口（CreateNotificationConfiguration）用于创建通知。
+     * @param {CreateNotificationConfigurationRequest} req
+     * @param {function(string, CreateNotificationConfigurationResponse):void} cb
+     * @public
+     */
+    CreateNotificationConfiguration(req, cb) {
+        let resp = new CreateNotificationConfigurationResponse();
+        this.request("CreateNotificationConfiguration", req, resp, cb);
     }
 
     /**
@@ -260,6 +362,17 @@ class AsClient extends AbstractClient {
     DescribeLaunchConfigurations(req, cb) {
         let resp = new DescribeLaunchConfigurationsResponse();
         this.request("DescribeLaunchConfigurations", req, resp, cb);
+    }
+
+    /**
+     * 本接口（CreateScalingPolicy）用于创建告警触发策略。
+     * @param {CreateScalingPolicyRequest} req
+     * @param {function(string, CreateScalingPolicyResponse):void} cb
+     * @public
+     */
+    CreateScalingPolicy(req, cb) {
+        let resp = new CreateScalingPolicyResponse();
+        this.request("CreateScalingPolicy", req, resp, cb);
     }
 
     /**
@@ -332,6 +445,17 @@ class AsClient extends AbstractClient {
     DescribeAutoScalingActivities(req, cb) {
         let resp = new DescribeAutoScalingActivitiesResponse();
         this.request("DescribeAutoScalingActivities", req, resp, cb);
+    }
+
+    /**
+     * 本接口（DeleteNotificationConfiguration）用于删除特定的通知。
+     * @param {DeleteNotificationConfigurationRequest} req
+     * @param {function(string, DeleteNotificationConfigurationResponse):void} cb
+     * @public
+     */
+    DeleteNotificationConfiguration(req, cb) {
+        let resp = new DeleteNotificationConfigurationResponse();
+        this.request("DeleteNotificationConfiguration", req, resp, cb);
     }
 
     /**

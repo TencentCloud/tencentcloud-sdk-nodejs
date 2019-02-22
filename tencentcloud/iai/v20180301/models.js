@@ -730,7 +730,9 @@ class CreatePersonRequest extends  AbstractModel {
         this.PersonExDescriptionInfos = null;
 
         /**
-         * 图片 base64 数据。支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。
+         * 图片 base64 数据。
+若图片中包含多张人脸，只选取其中人脸面积最大的人脸。
+支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。
          * @type {string || null}
          */
         this.Image = null;
@@ -739,6 +741,7 @@ class CreatePersonRequest extends  AbstractModel {
          * 图片的 Url、Image必须提供一个，如果都提供，只使用 Url。
 图片存储于腾讯云的Url可保障更高下载速度和稳定性，建议图片存储于腾讯云。 
 非腾讯云存储的Url速度和稳定性可能受一定影响。
+若图片中包含多张人脸，只选取其中人脸面积最大的人脸。
 支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。
          * @type {string || null}
          */
@@ -821,7 +824,7 @@ class CreateFaceResponse extends  AbstractModel {
         this.SucFaceIds = null;
 
         /**
-         * 每张人脸图片添加结果的返回码
+         * 每张人脸图片添加结果，-1101 代表未检测到人脸，-1102 代表图片解码失败，其他非 0 值代表算法服务异常。
          * @type {Array.<number> || null}
          */
         this.RetCode = null;
@@ -1111,6 +1114,7 @@ class CreateFaceRequest extends  AbstractModel {
 
         /**
          * 图片 base64 数据。人员人脸总数量不可超过5张。
+若图片中包含多张人脸，只选取其中人脸面积最大的人脸。
 支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。
          * @type {Array.<string> || null}
          */
@@ -1121,6 +1125,7 @@ class CreateFaceRequest extends  AbstractModel {
 图片存储于腾讯云的Url可保障更高下载速度和稳定性，建议图片存储于腾讯云。 
 非腾讯云存储的Url速度和稳定性可能受一定影响。 
 人员人脸总数量不可超过5张。
+若图片中包含多张人脸，只选取其中人脸面积最大的人脸。
 支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。
          * @type {Array.<string> || null}
          */
@@ -1508,13 +1513,17 @@ class CompareFaceRequest extends  AbstractModel {
         super();
 
         /**
-         * A 图片 base64 数据。支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。
+         * A 图片 base64 数据。
+若图片中包含多张人脸，只选取其中人脸面积最大的人脸。
+支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。
          * @type {string || null}
          */
         this.ImageA = null;
 
         /**
-         * B 图片 base64 数据。支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。
+         * B 图片 base64 数据。
+若图片中包含多张人脸，只选取其中人脸面积最大的人脸。
+支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。
          * @type {string || null}
          */
         this.ImageB = null;
@@ -1523,6 +1532,7 @@ class CompareFaceRequest extends  AbstractModel {
          * A 图片的 Url 。A 图片的 Url、Image必须提供一个，如果都提供，只使用 Url。 
 图片存储于腾讯云的Url可保障更高下载速度和稳定性，建议图片存储于腾讯云。 
 非腾讯云存储的Url速度和稳定性可能受一定影响。
+若图片中包含多张人脸，只选取其中人脸面积最大的人脸。
 支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。
          * @type {string || null}
          */
@@ -1532,6 +1542,7 @@ class CompareFaceRequest extends  AbstractModel {
          * B 图片的 Url 。B 图片的 Url、Image必须提供一个，如果都提供，只使用 Url。 
 图片存储于腾讯云的Url可保障更高下载速度和稳定性，建议图片存储于腾讯云。 
 非腾讯云存储的Url速度和稳定性可能受一定影响。
+若图片中包含多张人脸，只选取其中人脸面积最大的人脸。
 支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。
          * @type {string || null}
          */
@@ -2363,7 +2374,9 @@ class VerifyFaceRequest extends  AbstractModel {
         this.PersonId = null;
 
         /**
-         * 图片 base64 数据。支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。
+         * 图片 base64 数据。
+若图片中包含多张人脸，只选取其中人脸面积最大的人脸。
+支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。
          * @type {string || null}
          */
         this.Image = null;
@@ -2372,6 +2385,7 @@ class VerifyFaceRequest extends  AbstractModel {
          * 图片的 Url 。 图片的 Url、Image必须提供一个，如果都提供，只使用 Url。 
 图片存储于腾讯云的Url可保障更高下载速度和稳定性，建议图片存储于腾讯云。 
 非腾讯云存储的Url速度和稳定性可能受一定影响。
+若图片中包含多张人脸，只选取其中人脸面积最大的人脸。
 支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。
          * @type {string || null}
          */

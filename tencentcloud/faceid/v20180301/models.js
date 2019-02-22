@@ -430,6 +430,88 @@ class GetLiveCodeRequest extends  AbstractModel {
 }
 
 /**
+ * IdCardVerification返回参数结构体
+ * @class
+ */
+class IdCardVerificationResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 认证结果码。
+0: 姓名和身份证号一致
+-1: 姓名和身份证号不一致
+-2: 身份证号错误
+-3: 姓名错误
+-4: 认证出错
+         * @type {string || null}
+         */
+        this.Result = null;
+
+        /**
+         * 认证结果信息。
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Result = 'Result' in params ? params.Result : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * IdCardVerification请求参数结构体
+ * @class
+ */
+class IdCardVerificationRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 身份证号
+         * @type {string || null}
+         */
+        this.IdCard = null;
+
+        /**
+         * 姓名
+         * @type {string || null}
+         */
+        this.Name = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.IdCard = 'IdCard' in params ? params.IdCard : null;
+        this.Name = 'Name' in params ? params.Name : null;
+
+    }
+}
+
+/**
  * ImageRecognition请求参数结构体
  * @class
  */
@@ -708,6 +790,8 @@ module.exports = {
     DetectAuthRequest: DetectAuthRequest,
     GetDetectInfoRequest: GetDetectInfoRequest,
     GetLiveCodeRequest: GetLiveCodeRequest,
+    IdCardVerificationResponse: IdCardVerificationResponse,
+    IdCardVerificationRequest: IdCardVerificationRequest,
     ImageRecognitionRequest: ImageRecognitionRequest,
     LivenessCompareRequest: LivenessCompareRequest,
     GetActionSequenceResponse: GetActionSequenceResponse,
