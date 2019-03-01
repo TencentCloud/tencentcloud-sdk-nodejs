@@ -46,60 +46,6 @@ class GetFederationTokenRequest extends  AbstractModel {
          */
         this.DurationSeconds = null;
 
-        /**
-         * 兼容uin名单
-         * @type {number || null}
-         */
-        this.OpenUin = null;
-
-        /**
-         * 兼容OwnerUin名单
-         * @type {number || null}
-         */
-        this.OpenOwnerUin = null;
-
-        /**
-         * ua
-         * @type {string || null}
-         */
-        this.Ua = null;
-
-        /**
-         * mfa
-         * @type {number || null}
-         */
-        this.Mfa = null;
-
-        /**
-         * interfaceName
-         * @type {string || null}
-         */
-        this.InterfaceName = null;
-
-        /**
-         * extraInfo
-         * @type {string || null}
-         */
-        this.ExtraInfo = null;
-
-        /**
-         * thUin
-         * @type {number || null}
-         */
-        this.ThUin = null;
-
-        /**
-         * thOwnerUin
-         * @type {number || null}
-         */
-        this.ThOwnerUin = null;
-
-        /**
-         * codeMode
-         * @type {string || null}
-         */
-        this.CodeMode = null;
-
     }
 
     /**
@@ -112,15 +58,6 @@ class GetFederationTokenRequest extends  AbstractModel {
         this.Name = 'Name' in params ? params.Name : null;
         this.Policy = 'Policy' in params ? params.Policy : null;
         this.DurationSeconds = 'DurationSeconds' in params ? params.DurationSeconds : null;
-        this.OpenUin = 'OpenUin' in params ? params.OpenUin : null;
-        this.OpenOwnerUin = 'OpenOwnerUin' in params ? params.OpenOwnerUin : null;
-        this.Ua = 'Ua' in params ? params.Ua : null;
-        this.Mfa = 'Mfa' in params ? params.Mfa : null;
-        this.InterfaceName = 'InterfaceName' in params ? params.InterfaceName : null;
-        this.ExtraInfo = 'ExtraInfo' in params ? params.ExtraInfo : null;
-        this.ThUin = 'ThUin' in params ? params.ThUin : null;
-        this.ThOwnerUin = 'ThOwnerUin' in params ? params.ThOwnerUin : null;
-        this.CodeMode = 'CodeMode' in params ? params.CodeMode : null;
 
     }
 }

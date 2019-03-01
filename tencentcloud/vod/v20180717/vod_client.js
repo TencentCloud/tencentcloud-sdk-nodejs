@@ -16,53 +16,145 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
-const DeleteMediaResponse = models.DeleteMediaResponse;
-const MediaVideoStreamItem = models.MediaVideoStreamItem;
-const SimpleHlsClipRequest = models.SimpleHlsClipRequest;
-const SearchMediaResponse = models.SearchMediaResponse;
-const ModifyMediaInfoResponse = models.ModifyMediaInfoResponse;
-const ModifyClassRequest = models.ModifyClassRequest;
+const TranscodePlayInfo2017 = models.TranscodePlayInfo2017;
 const DescribeAllClassRequest = models.DescribeAllClassRequest;
-const MediaTranscodeItem = models.MediaTranscodeItem;
-const MediaDeleteItem = models.MediaDeleteItem;
-const TempCertificate = models.TempCertificate;
-const MediaAudioStreamItem = models.MediaAudioStreamItem;
+const AnimatedGraphicTaskInput = models.AnimatedGraphicTaskInput;
+const DescribeTaskDetailResponse = models.DescribeTaskDetailResponse;
 const MediaKeyFrameDescInfo = models.MediaKeyFrameDescInfo;
-const DescribeMediaInfosRequest = models.DescribeMediaInfosRequest;
-const MediaSnapshotByTimePicInfoItem = models.MediaSnapshotByTimePicInfoItem;
+const AiAnalysisTaskClassificationInput = models.AiAnalysisTaskClassificationInput;
 const MediaSampleSnapshotItem = models.MediaSampleSnapshotItem;
 const CreateClassRequest = models.CreateClassRequest;
-const MediaImageSpriteInfo = models.MediaImageSpriteInfo;
-const MediaImageSpriteItem = models.MediaImageSpriteItem;
+const ClipTask2017 = models.ClipTask2017;
 const MediaSnapshotByTimeOffsetInfo = models.MediaSnapshotByTimeOffsetInfo;
-const LiveRealTimeClipResponse = models.LiveRealTimeClipResponse;
 const MediaKeyFrameDescItem = models.MediaKeyFrameDescItem;
-const CommitUploadResponse = models.CommitUploadResponse;
-const MediaSourceData = models.MediaSourceData;
-const CreateClassResponse = models.CreateClassResponse;
-const MediaClassInfo = models.MediaClassInfo;
 const LiveRealTimeClipRequest = models.LiveRealTimeClipRequest;
-const ModifyClassResponse = models.ModifyClassResponse;
-const ModifyMediaInfoRequest = models.ModifyMediaInfoRequest;
-const MediaAnimatedGraphicsInfo = models.MediaAnimatedGraphicsInfo;
-const MediaMetaData = models.MediaMetaData;
-const SearchMediaRequest = models.SearchMediaRequest;
-const ApplyUploadResponse = models.ApplyUploadResponse;
+const ConfirmEventsRequest = models.ConfirmEventsRequest;
+const DescribeTasksResponse = models.DescribeTasksResponse;
+const AiReviewTerrorismTaskOutput = models.AiReviewTerrorismTaskOutput;
+const AiReviewPoliticalTaskOutput = models.AiReviewPoliticalTaskOutput;
+const AiReviewTaskPoliticalResult = models.AiReviewTaskPoliticalResult;
 const SimpleHlsClipResponse = models.SimpleHlsClipResponse;
-const DeleteClassRequest = models.DeleteClassRequest;
+const AiReviewPoliticalOcrTaskInput = models.AiReviewPoliticalOcrTaskInput;
+const ProcedureTask = models.ProcedureTask;
+const AiAnalysisResult = models.AiAnalysisResult;
+const ConcatFileInfo2017 = models.ConcatFileInfo2017;
+const MediaProcessTaskImageSpriteResult = models.MediaProcessTaskImageSpriteResult;
+const MediaTranscodeInfo = models.MediaTranscodeInfo;
+const CreateImageSpriteTask2017 = models.CreateImageSpriteTask2017;
+const DescribeMediaInfosResponse = models.DescribeMediaInfosResponse;
+const TempCertificate = models.TempCertificate;
+const DescribeTasksRequest = models.DescribeTasksRequest;
+const AiAnalysisTaskTagInput = models.AiAnalysisTaskTagInput;
+const MediaContentReviewOcrTextSegmentItem = models.MediaContentReviewOcrTextSegmentItem;
+const AiReviewTaskPoliticalOcrResult = models.AiReviewTaskPoliticalOcrResult;
+const PullEventsResponse = models.PullEventsResponse;
+const SnapshotByTimeOffset2017 = models.SnapshotByTimeOffset2017;
+const MediaProcessTaskInput = models.MediaProcessTaskInput;
+const AiReviewTerrorismTaskInput = models.AiReviewTerrorismTaskInput;
+const MediaAudioStreamItem = models.MediaAudioStreamItem;
+const AiReviewTaskTerrorismResult = models.AiReviewTaskTerrorismResult;
+const ProcessMediaByUrlResponse = models.ProcessMediaByUrlResponse;
+const TranscodeTask2017 = models.TranscodeTask2017;
+const MediaContentReviewAsrTextSegmentItem = models.MediaContentReviewAsrTextSegmentItem;
 const DescribeAllClassResponse = models.DescribeAllClassResponse;
-const DeleteClassResponse = models.DeleteClassResponse;
+const MediaContentReviewPoliticalSegmentItem = models.MediaContentReviewPoliticalSegmentItem;
+const MediaInputInfo = models.MediaInputInfo;
+const EditMediaStreamInfo = models.EditMediaStreamInfo;
+const LiveRealTimeClipResponse = models.LiveRealTimeClipResponse;
+const CommitUploadResponse = models.CommitUploadResponse;
+const AiReviewPoliticalTaskInput = models.AiReviewPoliticalTaskInput;
+const AiContentReviewTaskInput = models.AiContentReviewTaskInput;
+const AiAnalysisTaskInput = models.AiAnalysisTaskInput;
+const AiReviewTaskPornOcrResult = models.AiReviewTaskPornOcrResult;
+const AiAnalysisTaskCoverOutput = models.AiAnalysisTaskCoverOutput;
+const TaskSimpleInfo = models.TaskSimpleInfo;
+const MediaAiAnalysisClassificationItem = models.MediaAiAnalysisClassificationItem;
+const AiContentReviewResult = models.AiContentReviewResult;
+const ApplyUploadResponse = models.ApplyUploadResponse;
+const CoverBySnapshotTaskInput = models.CoverBySnapshotTaskInput;
+const DeleteClassRequest = models.DeleteClassRequest;
+const AiReviewPornOcrTaskOutput = models.AiReviewPornOcrTaskOutput;
 const ApplyUploadRequest = models.ApplyUploadRequest;
-const MediaSampleSnapshotInfo = models.MediaSampleSnapshotInfo;
-const CommitUploadRequest = models.CommitUploadRequest;
+const AiReviewPornOcrTaskInput = models.AiReviewPornOcrTaskInput;
+const MediaVideoStreamItem = models.MediaVideoStreamItem;
 const MediaSnapshotByTimeOffsetItem = models.MediaSnapshotByTimeOffsetItem;
 const MediaBasicInfo = models.MediaBasicInfo;
-const MediaInfo = models.MediaInfo;
+const AiReviewPoliticalAsrTaskInput = models.AiReviewPoliticalAsrTaskInput;
 const MediaAnimatedGraphicsItem = models.MediaAnimatedGraphicsItem;
 const SortBy = models.SortBy;
-const MediaTranscodeInfo = models.MediaTranscodeInfo;
+const ModifyMediaInfoRequest = models.ModifyMediaInfoRequest;
+const WatermarkInput = models.WatermarkInput;
+const AiReviewPornAsrTaskInput = models.AiReviewPornAsrTaskInput;
+const MediaProcessTaskAnimatedGraphicResult = models.MediaProcessTaskAnimatedGraphicResult;
+const DeleteMediaResponse = models.DeleteMediaResponse;
+const MediaAiAnalysisTagItem = models.MediaAiAnalysisTagItem;
+const AiAnalysisTaskTagResult = models.AiAnalysisTaskTagResult;
+const SearchMediaResponse = models.SearchMediaResponse;
+const ConfirmEventsResponse = models.ConfirmEventsResponse;
+const AiAnalysisTaskTagOutput = models.AiAnalysisTaskTagOutput;
+const EventContent = models.EventContent;
+const AiReviewTaskPoliticalAsrResult = models.AiReviewTaskPoliticalAsrResult;
+const MediaTranscodeItem = models.MediaTranscodeItem;
+const ProcessMediaRequest = models.ProcessMediaRequest;
+const MediaContentReviewSegmentItem = models.MediaContentReviewSegmentItem;
+const PullEventsRequest = models.PullEventsRequest;
+const ModifyMediaInfoResponse = models.ModifyMediaInfoResponse;
+const AiReviewTaskPornResult = models.AiReviewTaskPornResult;
+const AiReviewPornTaskInput = models.AiReviewPornTaskInput;
+const SearchMediaRequest = models.SearchMediaRequest;
+const CreateClassResponse = models.CreateClassResponse;
+const MediaClassInfo = models.MediaClassInfo;
+const MediaProcessTaskSnapshotByTimeOffsetResult = models.MediaProcessTaskSnapshotByTimeOffsetResult;
+const AiReviewTaskPornAsrResult = models.AiReviewTaskPornAsrResult;
+const ModifyClassResponse = models.ModifyClassResponse;
+const EditMediaFileInfo = models.EditMediaFileInfo;
+const MediaAiAnalysisCoverItem = models.MediaAiAnalysisCoverItem;
+const TranscodeTaskInput = models.TranscodeTaskInput;
+const ConcatTask2017 = models.ConcatTask2017;
+const FileUploadTask = models.FileUploadTask;
+const EditMediaTask = models.EditMediaTask;
+const WechatPublishTask = models.WechatPublishTask;
+const AiAnalysisTaskCoverResult = models.AiAnalysisTaskCoverResult;
+const AiReviewPoliticalOcrTaskOutput = models.AiReviewPoliticalOcrTaskOutput;
+const ClipFileInfo2017 = models.ClipFileInfo2017;
+const CommitUploadRequest = models.CommitUploadRequest;
+const MediaProcessTaskTranscodeResult = models.MediaProcessTaskTranscodeResult;
+const SnapshotByTimeOffsetTask2017 = models.SnapshotByTimeOffsetTask2017;
+const MediaSourceData = models.MediaSourceData;
+const AiAnalysisTaskClassificationOutput = models.AiAnalysisTaskClassificationOutput;
+const SnapshotByTimeOffsetTaskInput = models.SnapshotByTimeOffsetTaskInput;
+const ImageSpriteTaskInput = models.ImageSpriteTaskInput;
 const DeleteMediaRequest = models.DeleteMediaRequest;
-const DescribeMediaInfosResponse = models.DescribeMediaInfosResponse;
+const FileDeleteTask = models.FileDeleteTask;
+const MediaProcessTaskSampleSnapshotResult = models.MediaProcessTaskSampleSnapshotResult;
+const EditMediaTaskInput = models.EditMediaTaskInput;
+const SampleSnapshotTaskInput = models.SampleSnapshotTaskInput;
+const AiReviewPoliticalAsrTaskOutput = models.AiReviewPoliticalAsrTaskOutput;
+const ModifyClassRequest = models.ModifyClassRequest;
+const SimpleHlsClipRequest = models.SimpleHlsClipRequest;
+const MediaDeleteItem = models.MediaDeleteItem;
+const DescribeMediaInfosRequest = models.DescribeMediaInfosRequest;
+const MediaSnapshotByTimePicInfoItem = models.MediaSnapshotByTimePicInfoItem;
+const AiAnalysisTaskClassificationResult = models.AiAnalysisTaskClassificationResult;
+const CoverBySnapshotTaskOutput = models.CoverBySnapshotTaskOutput;
+const MediaImageSpriteInfo = models.MediaImageSpriteInfo;
+const MediaImageSpriteItem = models.MediaImageSpriteItem;
+const AiAnalysisTaskCoverInput = models.AiAnalysisTaskCoverInput;
+const DescribeTaskDetailRequest = models.DescribeTaskDetailRequest;
+const AiReviewPornTaskOutput = models.AiReviewPornTaskOutput;
+const PullFileTask = models.PullFileTask;
+const ProcessMediaByUrlRequest = models.ProcessMediaByUrlRequest;
+const MediaProcessTaskResult = models.MediaProcessTaskResult;
+const MediaOutputInfo = models.MediaOutputInfo;
+const MediaAnimatedGraphicsInfo = models.MediaAnimatedGraphicsInfo;
+const MediaMetaData = models.MediaMetaData;
+const EditMediaTaskOutput = models.EditMediaTaskOutput;
+const MediaProcessTaskCoverBySnapshotResult = models.MediaProcessTaskCoverBySnapshotResult;
+const DeleteClassResponse = models.DeleteClassResponse;
+const MediaSampleSnapshotInfo = models.MediaSampleSnapshotInfo;
+const MediaInfo = models.MediaInfo;
+const AiReviewPornAsrTaskOutput = models.AiReviewPornAsrTaskOutput;
+const ProcessMediaResponse = models.ProcessMediaResponse;
 
 
 /**
@@ -104,6 +196,33 @@ class VodClient extends AbstractClient {
     DescribeMediaInfos(req, cb) {
         let resp = new DescribeMediaInfosResponse();
         this.request("DescribeMediaInfos", req, resp, cb);
+    }
+
+    /**
+     * * 该接口用于从点播服务端获取事件通知，详见[服务端事件通知](https://cloud.tencent.com/document/product/266/7829)；
+* 接口为长轮询模式，即：如果服务端存在未消费事件，则立即返回给请求方；如果服务端没有未消费事件，则后台会将请求挂起，直到有新的事件产生为止；
+* 请求最多挂起 5 秒，建议请求方将超时时间设置为 10 秒；
+* 若该接口有事件返回，调用方必须再调用[确认事件通知]接口，确认事件通知已经处理，否则该事件通知后续会再次被拉取到。
+     * @param {PullEventsRequest} req
+     * @param {function(string, PullEventsResponse):void} cb
+     * @public
+     */
+    PullEvents(req, cb) {
+        let resp = new PullEventsResponse();
+        this.request("PullEvents", req, resp, cb);
+    }
+
+    /**
+     * * 该接口用于查询任务列表；
+* 当列表数据比较多时，单次接口调用无法拉取整个列表，可通过 ScrollToken 参数，分批拉取；
+* 只能查询到最近三天（72 小时）内的任务。
+     * @param {DescribeTasksRequest} req
+     * @param {function(string, DescribeTasksResponse):void} cb
+     * @public
+     */
+    DescribeTasks(req, cb) {
+        let resp = new DescribeTasksResponse();
+        this.request("DescribeTasks", req, resp, cb);
     }
 
     /**
@@ -154,6 +273,20 @@ class VodClient extends AbstractClient {
     }
 
     /**
+     * 对来源为 URL 的音视频媒体发起处理任务，功能包括：
+
+1. 智能内容审核（鉴黄、鉴恐、鉴政）；
+2. 智能内容分析（标签、分类、封面）。
+     * @param {ProcessMediaByUrlRequest} req
+     * @param {function(string, ProcessMediaByUrlResponse):void} cb
+     * @public
+     */
+    ProcessMediaByUrl(req, cb) {
+        let resp = new ProcessMediaByUrlResponse();
+        this.request("ProcessMediaByUrl", req, resp, cb);
+    }
+
+    /**
      * 搜索媒体信息，支持各种条件筛选，以及对返回结果进行排序、过滤等功能，具体包括：
 - 根据媒体文件名或描述信息进行文本模糊搜索。
 - 根据媒体分类、标签进行检索。
@@ -178,6 +311,25 @@ class VodClient extends AbstractClient {
     }
 
     /**
+     * 对点播中的音视频媒体发起处理任务，功能包括：
+1. 视频转码（带水印）；
+2. 视频转动图；
+3. 对视频按指定时间点截图；
+4. 对视频采样截图；
+5. 对视频截图雪碧图；
+6. 对视频截取一张图做封面；
+7. 智能内容审核（鉴黄、鉴恐、鉴政）；
+8. 智能内容分析（标签、分类、封面）。
+     * @param {ProcessMediaRequest} req
+     * @param {function(string, ProcessMediaResponse):void} cb
+     * @public
+     */
+    ProcessMedia(req, cb) {
+        let resp = new ProcessMediaResponse();
+        this.request("ProcessMedia", req, resp, cb);
+    }
+
+    /**
      * 修改媒体分类属性。
      * @param {ModifyClassRequest} req
      * @param {function(string, ModifyClassResponse):void} cb
@@ -186,6 +338,17 @@ class VodClient extends AbstractClient {
     ModifyClass(req, cb) {
         let resp = new ModifyClassResponse();
         this.request("ModifyClass", req, resp, cb);
+    }
+
+    /**
+     * 通过任务 ID 查询任务的执行状态和结果的详细信息（最多可以查询3天之内提交的任务）
+     * @param {DescribeTaskDetailRequest} req
+     * @param {function(string, DescribeTaskDetailResponse):void} cb
+     * @public
+     */
+    DescribeTaskDetail(req, cb) {
+        let resp = new DescribeTaskDetailResponse();
+        this.request("DescribeTaskDetail", req, resp, cb);
     }
 
     /**
@@ -209,6 +372,19 @@ class VodClient extends AbstractClient {
     ModifyMediaInfo(req, cb) {
         let resp = new ModifyMediaInfoResponse();
         this.request("ModifyMediaInfo", req, resp, cb);
+    }
+
+    /**
+     * * 开发者调用拉取事件通知，获取到事件后，必须调用该接口来确认消息已经收到；
+* 开发者获取到事件句柄后，等待确认的有效时间为 30 秒，超出 30 秒会报参数错误（4000）；
+* 更多参考[服务端事件通知](https://cloud.tencent.com/document/product/266/7829)。
+     * @param {ConfirmEventsRequest} req
+     * @param {function(string, ConfirmEventsResponse):void} cb
+     * @public
+     */
+    ConfirmEvents(req, cb) {
+        let resp = new ConfirmEventsResponse();
+        this.request("ConfirmEvents", req, resp, cb);
     }
 
     /**

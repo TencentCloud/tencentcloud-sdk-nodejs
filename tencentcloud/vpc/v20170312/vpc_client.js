@@ -20,8 +20,10 @@ const CreateDirectConnectGatewayResponse = models.CreateDirectConnectGatewayResp
 const DescribeBandwidthPackagesRequest = models.DescribeBandwidthPackagesRequest;
 const DeleteDirectConnectGatewayCcnRoutesResponse = models.DeleteDirectConnectGatewayCcnRoutesResponse;
 const HaVipDisassociateAddressIpRequest = models.HaVipDisassociateAddressIpRequest;
+const Ipv6Address = models.Ipv6Address;
 const Subnet = models.Subnet;
 const ModifyAddressTemplateGroupAttributeRequest = models.ModifyAddressTemplateGroupAttributeRequest;
+const ModifyVpnGatewayAttributeRequest = models.ModifyVpnGatewayAttributeRequest;
 const ModifyAddressTemplateAttributeResponse = models.ModifyAddressTemplateAttributeResponse;
 const ServiceTemplateGroup = models.ServiceTemplateGroup;
 const RouteConflict = models.RouteConflict;
@@ -108,7 +110,7 @@ const DescribeVpcPrivateIpAddressesResponse = models.DescribeVpcPrivateIpAddress
 const ModifySecurityGroupPoliciesRequest = models.ModifySecurityGroupPoliciesRequest;
 const ModifyAddressAttributeResponse = models.ModifyAddressAttributeResponse;
 const AttachClassicLinkVpcRequest = models.AttachClassicLinkVpcRequest;
-const RemoveIp6RulesResponse = models.RemoveIp6RulesResponse;
+const GatewayFlowMonitorDetail = models.GatewayFlowMonitorDetail;
 const DescribeServiceTemplatesResponse = models.DescribeServiceTemplatesResponse;
 const CreateVpcResponse = models.CreateVpcResponse;
 const CreateCustomerGatewayResponse = models.CreateCustomerGatewayResponse;
@@ -147,7 +149,7 @@ const DescribeCcnRegionBandwidthLimitsResponse = models.DescribeCcnRegionBandwid
 const CreateSubnetsResponse = models.CreateSubnetsResponse;
 const CreateNetworkInterfaceResponse = models.CreateNetworkInterfaceResponse;
 const HaVipAssociateAddressIpRequest = models.HaVipAssociateAddressIpRequest;
-const ModifyVpnGatewayAttributeRequest = models.ModifyVpnGatewayAttributeRequest;
+const DescribeGatewayFlowMonitorDetailRequest = models.DescribeGatewayFlowMonitorDetailRequest;
 const DescribeAddressQuotaRequest = models.DescribeAddressQuotaRequest;
 const ModifyBandwidthPackageAttributeRequest = models.ModifyBandwidthPackageAttributeRequest;
 const DeleteRoutesRequest = models.DeleteRoutesRequest;
@@ -211,7 +213,7 @@ const CreateBandwidthPackageRequest = models.CreateBandwidthPackageRequest;
 const DescribeRouteTablesRequest = models.DescribeRouteTablesRequest;
 const ResetAttachCcnInstancesRequest = models.ResetAttachCcnInstancesRequest;
 const CreateHaVipResponse = models.CreateHaVipResponse;
-const ModifyDirectConnectGatewayAttributeResponse = models.ModifyDirectConnectGatewayAttributeResponse;
+const DescribeGatewayFlowMonitorDetailResponse = models.DescribeGatewayFlowMonitorDetailResponse;
 const DescribeVpnGatewaysRequest = models.DescribeVpnGatewaysRequest;
 const ClassicLinkInstance = models.ClassicLinkInstance;
 const CreateVpnGatewayRequest = models.CreateVpnGatewayRequest;
@@ -289,6 +291,7 @@ const DeleteVpnGatewayResponse = models.DeleteVpnGatewayResponse;
 const DescribeAddressTemplatesResponse = models.DescribeAddressTemplatesResponse;
 const DescribeHaVipsRequest = models.DescribeHaVipsRequest;
 const Quota = models.Quota;
+const RemoveIp6RulesResponse = models.RemoveIp6RulesResponse;
 const Route = models.Route;
 const ModifyIp6RuleResponse = models.ModifyIp6RuleResponse;
 const DescribeDirectConnectGatewaysResponse = models.DescribeDirectConnectGatewaysResponse;
@@ -337,6 +340,7 @@ const DescribeIp6TranslatorQuotaResponse = models.DescribeIp6TranslatorQuotaResp
 const SecurityPolicyDatabase = models.SecurityPolicyDatabase;
 const AcceptAttachCcnInstancesResponse = models.AcceptAttachCcnInstancesResponse;
 const DeleteServiceTemplateGroupRequest = models.DeleteServiceTemplateGroupRequest;
+const ModifyDirectConnectGatewayAttributeResponse = models.ModifyDirectConnectGatewayAttributeResponse;
 const ModifyAddressesBandwidthResponse = models.ModifyAddressesBandwidthResponse;
 const DescribeRouteConflictsRequest = models.DescribeRouteConflictsRequest;
 const Price = models.Price;
@@ -499,6 +503,19 @@ class VpcClient extends AbstractClient {
     ModifyPrivateIpAddressesAttribute(req, cb) {
         let resp = new ModifyPrivateIpAddressesAttributeResponse();
         this.request("ModifyPrivateIpAddressesAttribute", req, resp, cb);
+    }
+
+    /**
+     * 本接口（DescribeGatewayFlowMonitorDetail）用于查询网关流量监控明细。
+* 只支持单个网关实例查询。即入参 `VpnId` `DirectConnectGatewayId` `PeeringConnectionId` `NatId` 最多只支持传一个，且必须传一个。
+* 如果网关有流量，但调用本接口没有返回数据，请在控制台对应网关详情页确认是否开启网关流量监控。
+     * @param {DescribeGatewayFlowMonitorDetailRequest} req
+     * @param {function(string, DescribeGatewayFlowMonitorDetailResponse):void} cb
+     * @public
+     */
+    DescribeGatewayFlowMonitorDetail(req, cb) {
+        let resp = new DescribeGatewayFlowMonitorDetailResponse();
+        this.request("DescribeGatewayFlowMonitorDetail", req, resp, cb);
     }
 
     /**

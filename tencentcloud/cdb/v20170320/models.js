@@ -7215,6 +7215,12 @@ class ZoneSellConf extends  AbstractModel {
          */
         this.ZoneConf = null;
 
+        /**
+         * 可支持的灾备可用区信息
+         * @type {Array.<string> || null}
+         */
+        this.DrZone = null;
+
     }
 
     /**
@@ -7250,6 +7256,7 @@ class ZoneSellConf extends  AbstractModel {
             obj.deserialize(params.ZoneConf)
             this.ZoneConf = obj;
         }
+        this.DrZone = 'DrZone' in params ? params.DrZone : null;
 
     }
 }

@@ -3122,31 +3122,36 @@ class CreateLiveCallbackTemplateRequest extends  AbstractModel {
         this.Description = null;
 
         /**
-         * 开播回调URL。
+         * 开播回调URL，
+相关协议文档：[事件消息通知](/document/product/267/32744)。
          * @type {string || null}
          */
         this.StreamBeginNotifyUrl = null;
 
         /**
-         * 断流回调URL。
+         * 断流回调URL，
+相关协议文档：[事件消息通知](/document/product/267/32744)。
          * @type {string || null}
          */
         this.StreamEndNotifyUrl = null;
 
         /**
-         * 录制回调URL。
+         * 录制回调URL，
+相关协议文档：[事件消息通知](/document/product/267/32744)。
          * @type {string || null}
          */
         this.RecordNotifyUrl = null;
 
         /**
-         * 截图回调URL。
+         * 截图回调URL，
+相关协议文档：[事件消息通知](/document/product/267/32744)。
          * @type {string || null}
          */
         this.SnapshotNotifyUrl = null;
 
         /**
-         * 鉴黄回调URL。
+         * 鉴黄回调URL，
+相关协议文档：[事件消息通知](/document/product/267/32741)。
          * @type {string || null}
          */
         this.PornCensorshipNotifyUrl = null;
@@ -6846,7 +6851,7 @@ class CreateLiveWatermarkRuleRequest extends  AbstractModel {
         this.StreamName = null;
 
         /**
-         * 水印Id。
+         * 水印Id，即调用[AddLiveWatermark](/document/product/267/30154)接口返回的WatermarkId。
          * @type {number || null}
          */
         this.TemplateId = null;
