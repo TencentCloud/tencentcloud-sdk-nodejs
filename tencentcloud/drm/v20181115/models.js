@@ -31,6 +31,12 @@ class CreateLicenseResponse extends  AbstractModel {
         this.License = null;
 
         /**
+         * 加密内容的内容ID
+         * @type {string || null}
+         */
+        this.ContentId = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -46,6 +52,7 @@ class CreateLicenseResponse extends  AbstractModel {
             return;
         }
         this.License = 'License' in params ? params.License : null;
+        this.ContentId = 'ContentId' in params ? params.ContentId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }

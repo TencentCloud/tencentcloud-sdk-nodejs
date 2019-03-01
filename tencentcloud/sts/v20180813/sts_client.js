@@ -34,7 +34,7 @@ class StsClient extends AbstractClient {
     }
     
     /**
-     * 获取临时证书
+     * 获取联合身份临时访问凭证
      * @param {GetFederationTokenRequest} req
      * @param {function(string, GetFederationTokenResponse):void} cb
      * @public

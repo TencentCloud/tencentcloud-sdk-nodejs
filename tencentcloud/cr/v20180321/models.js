@@ -84,6 +84,12 @@ class ApplyBlackListRequest extends  AbstractModel {
          */
         this.BlackList = null;
 
+        /**
+         * 实例ID，不传默认为系统分配的初始实例
+         * @type {string || null}
+         */
+        this.InstId = null;
+
     }
 
     /**
@@ -104,6 +110,7 @@ class ApplyBlackListRequest extends  AbstractModel {
                 this.BlackList.push(obj);
             }
         }
+        this.InstId = 'InstId' in params ? params.InstId : null;
 
     }
 }
@@ -282,6 +289,12 @@ class DescribeRecordsRequest extends  AbstractModel {
          */
         this.Limit = null;
 
+        /**
+         * 实例ID，不传默认为系统分配的初始实例
+         * @type {string || null}
+         */
+        this.InstId = null;
+
     }
 
     /**
@@ -300,6 +313,7 @@ class DescribeRecordsRequest extends  AbstractModel {
         this.EndBizDate = 'EndBizDate' in params ? params.EndBizDate : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
+        this.InstId = 'InstId' in params ? params.InstId : null;
 
     }
 }
@@ -622,6 +636,12 @@ class UploadDataFileRequest extends  AbstractModel {
          */
         this.FileUrl = null;
 
+        /**
+         * 实例ID，不传默认为系统分配的初始实例。
+         * @type {string || null}
+         */
+        this.InstId = null;
+
     }
 
     /**
@@ -637,6 +657,7 @@ class UploadDataFileRequest extends  AbstractModel {
         this.UploadModel = 'UploadModel' in params ? params.UploadModel : null;
         this.File = 'File' in params ? params.File : null;
         this.FileUrl = 'FileUrl' in params ? params.FileUrl : null;
+        this.InstId = 'InstId' in params ? params.InstId : null;
 
     }
 }
