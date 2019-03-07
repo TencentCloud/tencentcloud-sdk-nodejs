@@ -24,6 +24,7 @@ const DescribeInstancesRequest = models.DescribeInstancesRequest;
 const EsDictionaryInfo = models.EsDictionaryInfo;
 const UpdateInstanceResponse = models.UpdateInstanceResponse;
 const EsAcl = models.EsAcl;
+const CosBackup = models.CosBackup;
 const UpdateInstanceRequest = models.UpdateInstanceRequest;
 const CreateInstanceRequest = models.CreateInstanceRequest;
 const InstanceInfo = models.InstanceInfo;
@@ -44,7 +45,7 @@ class EsClient extends AbstractClient {
     }
     
     /**
-     * 对已存在的集群进行扩缩容，修改实例名称，修改配置，重置密码， 添加Kibana黑白名单等操作 
+     * 对已存在的集群进行扩缩容，修改实例名称，修改配置，重置密码， 添加Kibana黑白名单等操作
      * @param {UpdateInstanceRequest} req
      * @param {function(string, UpdateInstanceResponse):void} cb
      * @public

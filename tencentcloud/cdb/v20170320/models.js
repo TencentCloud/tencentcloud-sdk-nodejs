@@ -2116,13 +2116,13 @@ class RoGroup extends  AbstractModel {
         this.RoGroupName = null;
 
         /**
-         * 是否启用延迟超限剔除功能，启用该功能后，只读实例与主实例的延迟超过延迟阀值，只读实例将被隔离。可选值：1-启用；0-不启用
+         * 是否启用延迟超限剔除功能，启用该功能后，只读实例与主实例的延迟超过延迟阈值，只读实例将被隔离。可选值：1-启用；0-不启用
          * @type {number || null}
          */
         this.RoOfflineDelay = null;
 
         /**
-         * 延迟阀值
+         * 延迟阈值
          * @type {number || null}
          */
         this.RoMaxDelayTime = null;
