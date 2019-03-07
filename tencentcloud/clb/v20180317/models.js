@@ -60,12 +60,14 @@ class RuleOutput extends  AbstractModel {
 
         /**
          * 转发规则的域名。
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.Domain = null;
 
         /**
          * 转发规则的路径。
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.Url = null;
@@ -78,12 +80,14 @@ class RuleOutput extends  AbstractModel {
 
         /**
          * 健康检查信息
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {HealthCheck || null}
          */
         this.HealthCheck = null;
 
         /**
          * 证书信息
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {CertificateOutput || null}
          */
         this.Certificate = null;
@@ -804,18 +808,21 @@ class Target extends  AbstractModel {
 
         /**
          * 云服务器的唯一 ID，可通过 DescribeInstances 接口返回字段中的 unInstanceId 字段获取
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
          * 后端云服务器监听端口
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.Port = null;
 
         /**
          * 转发目标的类型，目前仅可取值为 CVM
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.Type = null;
@@ -859,6 +866,7 @@ class ClassicalLoadBalancerInfo extends  AbstractModel {
 
         /**
          * 负载均衡实例ID列表
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<string> || null}
          */
         this.LoadBalancerIds = null;
@@ -1055,6 +1063,7 @@ class DescribeClassicalLBHealthStatusResponse extends  AbstractModel {
 
         /**
          * 后端健康状态列表
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<ClassicalHealth> || null}
          */
         this.HealthList = null;
@@ -1222,12 +1231,14 @@ class ListenerBackend extends  AbstractModel {
 
         /**
          * 监听器下的规则信息（仅适用于HTTP/HTTPS监听器）
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<RuleTargets> || null}
          */
         this.Rules = null;
 
         /**
          * 监听器上注册的机器列表（仅适用于TCP/UDP/TCP_SSL监听器）
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<Backend> || null}
          */
         this.Targets = null;
@@ -1294,42 +1305,49 @@ class Listener extends  AbstractModel {
 
         /**
          * 监听器绑定的证书信息
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {CertificateOutput || null}
          */
         this.Certificate = null;
 
         /**
          * 监听器的健康检查信息
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {HealthCheck || null}
          */
         this.HealthCheck = null;
 
         /**
          * 请求调度方式
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.Scheduler = null;
 
         /**
          * 会话保持时间
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.SessionExpireTime = null;
 
         /**
          * 是否开启SNI特性（本参数仅对于HTTPS监听器有意义）
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.SniSwitch = null;
 
         /**
          * 监听器下的全部转发规则（本参数仅对于HTTP/HTTPS监听器有意义）
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<RuleOutput> || null}
          */
         this.Rules = null;
 
         /**
          * 监听器的名称
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.ListenerName = null;
@@ -1459,6 +1477,7 @@ class RuleTargets extends  AbstractModel {
 
         /**
          * 后端机器的信息
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<Backend> || null}
          */
         this.Targets = null;
@@ -1498,6 +1517,7 @@ class DescribeClassicalLBListenersResponse extends  AbstractModel {
 
         /**
          * 监听器列表
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<ClassicalListener> || null}
          */
         this.Listeners = null;
@@ -1686,18 +1706,21 @@ class ClassicalTarget extends  AbstractModel {
 
         /**
          * 云服务器的外网 IP
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<string> || null}
          */
         this.PublicIpAddresses = null;
 
         /**
          * 云服务器的内网 IP
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<string> || null}
          */
         this.PrivateIpAddresses = null;
 
         /**
          * 云服务器实例名称
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.InstanceName = null;
@@ -1705,6 +1728,7 @@ class ClassicalTarget extends  AbstractModel {
         /**
          * 云服务器状态
 1：故障，2：运行中，3：创建中，4：已关机，5：已退还，6：退还中， 7：重启中，8：开机中，9：关机中，10：密码重置中，11：格式化中，12：镜像制作中，13：带宽设置中，14：重装系统中，19：升级中，21：热迁移中
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.RunFlag = null;
@@ -1967,24 +1991,28 @@ class HealthCheck extends  AbstractModel {
 
         /**
          * 健康检查的响应超时时间，可选值：2~60，默认值：2，单位：秒。响应超时时间要小于检查间隔时间。
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.TimeOut = null;
 
         /**
          * 健康检查探测间隔时间，默认值：5，可选值：5~300，单位：秒。
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.IntervalTime = null;
 
         /**
          * 健康阈值，默认值：3，表示当连续探测三次健康则表示该转发正常，可选值：2~10，单位：次。
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.HealthNum = null;
 
         /**
          * 不健康阈值，默认值：3，表示当连续探测三次不健康则表示该转发异常，可选值：2~10，单位：次。
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.UnHealthNum = null;
@@ -1992,24 +2020,28 @@ class HealthCheck extends  AbstractModel {
         /**
          * 健康检查状态码（仅适用于HTTP/HTTPS转发规则）。可选值：1~31，默认 31。
 1 表示探测后返回值 1xx 表示健康，2 表示返回 2xx 表示健康，4 表示返回 3xx 表示健康，8 表示返回 4xx 表示健康，16 表示返回 5xx 表示健康。若希望多种码都表示健康，则将相应的值相加。
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.HttpCode = null;
 
         /**
          * 健康检查路径（仅适用于HTTP/HTTPS转发规则）。
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.HttpCheckPath = null;
 
         /**
          * 健康检查域名（仅适用于HTTP/HTTPS转发规则）。
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.HttpCheckDomain = null;
 
         /**
          * 健康检查方法（仅适用于HTTP/HTTPS转发规则），取值为HEAD或GET。
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.HttpCheckMethod = null;
@@ -2057,7 +2089,7 @@ class CreateListenerRequest extends  AbstractModel {
         this.Ports = null;
 
         /**
-         * 监听器协议：HTTP | HTTPS | TCP | TCP_SSL
+         * 监听器协议： TCP | UDP | HTTP | HTTPS | TCP_SSL（TCP_SSL 正在内测中，如需使用请通过工单申请）
          * @type {string || null}
          */
         this.Protocol = null;
@@ -2382,6 +2414,7 @@ class DescribeClassicalLBTargetsResponse extends  AbstractModel {
 
         /**
          * 后端服务列表
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<ClassicalTarget> || null}
          */
         this.Targets = null;
@@ -2888,6 +2921,7 @@ class CertificateOutput extends  AbstractModel {
 
         /**
          * 客户端证书的 ID。
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.CertCaId = null;
@@ -3189,12 +3223,14 @@ OPEN：公网属性， INTERNAL：内网属性。
 
         /**
          * 负载均衡实例的域名，内网类型负载均衡以及应用型负载均衡实例不提供该字段
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.Domain = null;
 
         /**
          * 负载均衡实例的 VIP 列表。
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<string> || null}
          */
         this.LoadBalancerVips = null;
@@ -3202,18 +3238,21 @@ OPEN：公网属性， INTERNAL：内网属性。
         /**
          * 负载均衡实例的状态，包括
 0：创建中，1：正常运行。
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.Status = null;
 
         /**
          * 负载均衡实例的创建时间。
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.CreateTime = null;
 
         /**
          * 负载均衡实例的上次状态转换时间。
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.StatusTime = null;
@@ -3226,36 +3265,42 @@ OPEN：公网属性， INTERNAL：内网属性。
 
         /**
          * 私有网络的 ID
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.VpcId = null;
 
         /**
          * 高防 LB 的标识，1：高防负载均衡 0：非高防负载均衡。
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.OpenBgp = null;
 
         /**
          * 在 2016 年 12 月份之前的传统型内网负载均衡都是开启了 snat 的。
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {boolean || null}
          */
         this.Snat = null;
 
         /**
          * 0：表示未被隔离，1：表示被隔离。
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.Isolation = null;
 
         /**
          * 用户开启日志的信息，日志只有公网属性创建了 HTTP 、HTTPS 监听器的负载均衡才会有日志。
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.Log = null;
 
         /**
          * 负载均衡实例所在的子网（仅对内网VPC型LB有意义）
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.SubnetId = null;
@@ -3323,24 +3368,28 @@ class Backend extends  AbstractModel {
 
         /**
          * 云服务器的外网 IP
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<string> || null}
          */
         this.PublicIpAddresses = null;
 
         /**
          * 云服务器的内网 IP
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<string> || null}
          */
         this.PrivateIpAddresses = null;
 
         /**
          * 云服务器实例名称
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.InstanceName = null;
 
         /**
          * 云服务器被绑定到监听器的时间
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.RegisteredTime = null;

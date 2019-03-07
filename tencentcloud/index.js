@@ -34,6 +34,7 @@ module.exports = {
     monitor: require("./monitor"),
     ms: require("./ms"),
     msp: require("./msp"),
+    ocr: require("./ocr"),
     partners: require("./partners"),
     postgres: require("./postgres"),
     redis: require("./redis"),

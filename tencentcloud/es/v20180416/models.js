@@ -60,6 +60,12 @@ class MasterNodeInfo extends  AbstractModel {
          */
         this.MasterNodeDiskSize = null;
 
+        /**
+         * 专用主节点磁盘类型
+         * @type {string || null}
+         */
+        this.MasterNodeDiskType = null;
+
     }
 
     /**
@@ -75,6 +81,7 @@ class MasterNodeInfo extends  AbstractModel {
         this.MasterNodeCpuNum = 'MasterNodeCpuNum' in params ? params.MasterNodeCpuNum : null;
         this.MasterNodeMemSize = 'MasterNodeMemSize' in params ? params.MasterNodeMemSize : null;
         this.MasterNodeDiskSize = 'MasterNodeDiskSize' in params ? params.MasterNodeDiskSize : null;
+        this.MasterNodeDiskType = 'MasterNodeDiskType' in params ? params.MasterNodeDiskType : null;
 
     }
 }
@@ -128,6 +135,12 @@ class RestartInstanceRequest extends  AbstractModel {
          */
         this.InstanceId = null;
 
+        /**
+         * 是否强制重启
+         * @type {boolean || null}
+         */
+        this.ForceRestart = null;
+
     }
 
     /**
@@ -138,6 +151,7 @@ class RestartInstanceRequest extends  AbstractModel {
             return;
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.ForceRestart = 'ForceRestart' in params ? params.ForceRestart : null;
 
     }
 }
@@ -355,6 +369,41 @@ class EsAcl extends  AbstractModel {
 }
 
 /**
+ * ES cos自动备份信息
+ * @class
+ */
+class CosBackup extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 是否开启cos自动备份
+         * @type {boolean || null}
+         */
+        this.IsAutoBackup = null;
+
+        /**
+         * 自动备份时间
+         * @type {string || null}
+         */
+        this.BackupTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.IsAutoBackup = 'IsAutoBackup' in params ? params.IsAutoBackup : null;
+        this.BackupTime = 'BackupTime' in params ? params.BackupTime : null;
+
+    }
+}
+
+/**
  * UpdateInstance请求参数结构体
  * @class
  */
@@ -416,6 +465,30 @@ ES.S1.4XLARGE64: 16 核 64G
          */
         this.NodeType = null;
 
+        /**
+         * 专用主节点个数
+         * @type {number || null}
+         */
+        this.MasterNodeNum = null;
+
+        /**
+         * 专用主节点规格
+         * @type {string || null}
+         */
+        this.MasterNodeType = null;
+
+        /**
+         * 专用主节点磁盘大小
+         * @type {number || null}
+         */
+        this.MasterNodeDiskSize = null;
+
+        /**
+         * 更新配置时是否强制重启
+         * @type {boolean || null}
+         */
+        this.ForceRestart = null;
+
     }
 
     /**
@@ -438,6 +511,10 @@ ES.S1.4XLARGE64: 16 核 64G
         }
         this.DiskSize = 'DiskSize' in params ? params.DiskSize : null;
         this.NodeType = 'NodeType' in params ? params.NodeType : null;
+        this.MasterNodeNum = 'MasterNodeNum' in params ? params.MasterNodeNum : null;
+        this.MasterNodeType = 'MasterNodeType' in params ? params.MasterNodeType : null;
+        this.MasterNodeDiskSize = 'MasterNodeDiskSize' in params ? params.MasterNodeDiskSize : null;
+        this.ForceRestart = 'ForceRestart' in params ? params.ForceRestart : null;
 
     }
 }
@@ -562,6 +639,30 @@ CLOUD_SSD: SSD云硬盘
          */
         this.VoucherIds = null;
 
+        /**
+         * 是否创建专用主节点
+         * @type {boolean || null}
+         */
+        this.EnableDedicatedMaster = null;
+
+        /**
+         * 专用主节点个数
+         * @type {number || null}
+         */
+        this.MasterNodeNum = null;
+
+        /**
+         * 专用主节点类型
+         * @type {string || null}
+         */
+        this.MasterNodeType = null;
+
+        /**
+         * 专用主节点磁盘大小
+         * @type {number || null}
+         */
+        this.MasterNodeDiskSize = null;
+
     }
 
     /**
@@ -587,6 +688,10 @@ CLOUD_SSD: SSD云硬盘
         this.TimeUnit = 'TimeUnit' in params ? params.TimeUnit : null;
         this.AutoVoucher = 'AutoVoucher' in params ? params.AutoVoucher : null;
         this.VoucherIds = 'VoucherIds' in params ? params.VoucherIds : null;
+        this.EnableDedicatedMaster = 'EnableDedicatedMaster' in params ? params.EnableDedicatedMaster : null;
+        this.MasterNodeNum = 'MasterNodeNum' in params ? params.MasterNodeNum : null;
+        this.MasterNodeType = 'MasterNodeType' in params ? params.MasterNodeType : null;
+        this.MasterNodeDiskSize = 'MasterNodeDiskSize' in params ? params.MasterNodeDiskSize : null;
 
     }
 }
@@ -785,6 +890,18 @@ class InstanceInfo extends  AbstractModel {
          */
         this.MasterNodeInfo = null;
 
+        /**
+         * cos自动备份配置
+         * @type {CosBackup || null}
+         */
+        this.CosBackup = null;
+
+        /**
+         * 是否允许cos自动备份
+         * @type {boolean || null}
+         */
+        this.AllowCosBackup = null;
+
     }
 
     /**
@@ -840,6 +957,13 @@ class InstanceInfo extends  AbstractModel {
             obj.deserialize(params.MasterNodeInfo)
             this.MasterNodeInfo = obj;
         }
+
+        if (params.CosBackup) {
+            let obj = new CosBackup();
+            obj.deserialize(params.CosBackup)
+            this.CosBackup = obj;
+        }
+        this.AllowCosBackup = 'AllowCosBackup' in params ? params.AllowCosBackup : null;
 
     }
 }
@@ -1001,6 +1125,7 @@ module.exports = {
     EsDictionaryInfo: EsDictionaryInfo,
     UpdateInstanceResponse: UpdateInstanceResponse,
     EsAcl: EsAcl,
+    CosBackup: CosBackup,
     UpdateInstanceRequest: UpdateInstanceRequest,
     CreateInstanceRequest: CreateInstanceRequest,
     InstanceInfo: InstanceInfo,
