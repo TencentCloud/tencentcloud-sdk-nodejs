@@ -192,12 +192,14 @@ class SystemDisk extends  AbstractModel {
 
         /**
          * 系统盘类型。系统盘类型限制详见[CVM实例配置](https://cloud.tencent.com/document/product/213/2177)。取值范围：<br><li>LOCAL_BASIC：本地硬盘<br><li>LOCAL_SSD：本地SSD硬盘<br><li>CLOUD_BASIC：普通云硬盘<br><li>CLOUD_PREMIUM：高性能云硬盘<br><li>CLOUD_SSD：SSD云硬盘<br><br>默认取值：LOCAL_BASIC。
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.DiskType = null;
 
         /**
          * 系统盘大小，单位：GB。默认值为 50
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.DiskSize = null;
@@ -358,6 +360,7 @@ class SpotMarketOptions extends  AbstractModel {
 
         /**
          * 竞价请求类型，当前仅支持类型：one-time，默认值为one-time
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.SpotInstanceType = null;
@@ -855,7 +858,7 @@ class AutoScalingGroup extends  AbstractModel {
         this.AutoScalingGroupName = null;
 
         /**
-         * 伸缩组状态
+         * 伸缩组当前状态。取值范围：<br><li>NORMAL：正常<br><li>CVM_ABNORMAL：启动配置异常<br><li>LB_ABNORMAL：负载均衡器异常<br><li>VPC_ABNORMAL：VPC网络异常<br><li>INSUFFICIENT_BALANCE：余额不足<br>
          * @type {string || null}
          */
         this.AutoScalingGroupStatus = null;
@@ -968,6 +971,12 @@ class AutoScalingGroup extends  AbstractModel {
          */
         this.RetryPolicy = null;
 
+        /**
+         * 伸缩组是否处于伸缩活动中，`IN_ACTIVITY`表示处于伸缩活动中，`NOT_IN_ACTIVITY`表示不处于伸缩活动中。
+         * @type {string || null}
+         */
+        this.InActivityStatus = null;
+
     }
 
     /**
@@ -1006,6 +1015,7 @@ class AutoScalingGroup extends  AbstractModel {
         this.VpcId = 'VpcId' in params ? params.VpcId : null;
         this.ZoneSet = 'ZoneSet' in params ? params.ZoneSet : null;
         this.RetryPolicy = 'RetryPolicy' in params ? params.RetryPolicy : null;
+        this.InActivityStatus = 'InActivityStatus' in params ? params.InActivityStatus : null;
 
     }
 }
@@ -1452,6 +1462,7 @@ class LaunchConfiguration extends  AbstractModel {
 
         /**
          * 自定义数据。
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.UserData = null;
@@ -1490,6 +1501,7 @@ class LaunchConfiguration extends  AbstractModel {
 
         /**
          * 实例的市场相关选项，如竞价实例相关参数，若指定实例的付费模式为竞价付费则该参数必传。
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {InstanceMarketOptionsRequest || null}
          */
         this.InstanceMarketOptions = null;
@@ -2028,6 +2040,7 @@ class InstanceMarketOptionsRequest extends  AbstractModel {
 
         /**
          * 市场选项类型，当前只支持取值：spot
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.MarketType = null;
@@ -2728,6 +2741,7 @@ class RunSecurityServiceEnabled extends  AbstractModel {
 
         /**
          * 是否开启[云安全](https://cloud.tencent.com/document/product/296)服务。取值范围：<br><li>TRUE：表示开启云安全服务<br><li>FALSE：表示不开启云安全服务<br><br>默认取值：TRUE。
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {boolean || null}
          */
         this.Enabled = null;
@@ -2943,6 +2957,7 @@ class LoginSettings extends  AbstractModel {
 
         /**
          * 实例登录密码。不同操作系统类型密码复杂度限制不一样，具体如下：<br><li>Linux实例密码必须8到16位，至少包括两项[a-z，A-Z]、[0-9] 和 [( ) ` ~ ! @ # $ % ^ & * - + = | { } [ ] : ; ' , . ? / ]中的特殊符号。<br><li>Windows实例密码必须12到16位，至少包括三项[a-z]，[A-Z]，[0-9] 和 [( ) ` ~ ! @ # $ % ^ & * - + = { } [ ] : ; ' , . ? /]中的特殊符号。<br><br>若不指定该参数，则由系统随机生成密码，并通过站内信方式通知到用户。
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.Password = null;
@@ -2955,6 +2970,7 @@ class LoginSettings extends  AbstractModel {
 
         /**
          * 保持镜像的原始设置。该参数与Password或KeyIds.N不能同时指定。只有使用自定义镜像、共享镜像或外部导入镜像创建实例时才能指定该参数为TRUE。取值范围：<br><li>TRUE：表示保持镜像的登录设置<br><li>FALSE：表示不保持镜像的登录设置<br><br>默认取值：FALSE。
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {boolean || null}
          */
         this.KeepImageLogin = null;
@@ -3352,6 +3368,7 @@ class RunMonitorServiceEnabled extends  AbstractModel {
 
         /**
          * 是否开启[云监控](https://cloud.tencent.com/document/product/248)服务。取值范围：<br><li>TRUE：表示开启云监控服务<br><li>FALSE：表示不开启云监控服务<br><br>默认取值：TRUE。
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {boolean || null}
          */
         this.Enabled = null;
@@ -3837,18 +3854,21 @@ class InternetAccessible extends  AbstractModel {
 
         /**
          * 网络计费类型。取值范围：<br><li>BANDWIDTH_PREPAID：预付费按带宽结算<br><li>TRAFFIC_POSTPAID_BY_HOUR：流量按小时后付费<br><li>BANDWIDTH_POSTPAID_BY_HOUR：带宽按小时后付费<br><li>BANDWIDTH_PACKAGE：带宽包用户<br>默认取值：TRAFFIC_POSTPAID_BY_HOUR。
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.InternetChargeType = null;
 
         /**
          * 公网出带宽上限，单位：Mbps。默认值：0Mbps。不同机型带宽上限范围不一致，具体限制详见[购买网络带宽](https://cloud.tencent.com/document/product/213/509)。
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.InternetMaxBandwidthOut = null;
 
         /**
          * 是否分配公网IP。取值范围：<br><li>TRUE：表示分配公网IP<br><li>FALSE：表示不分配公网IP<br><br>当公网带宽大于0Mbps时，可自由选择开通与否，默认开通公网IP；当公网带宽为0，则不允许分配公网IP。
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {boolean || null}
          */
         this.PublicIpAssigned = null;
@@ -4316,18 +4336,21 @@ class DataDisk extends  AbstractModel {
 
         /**
          * 数据盘类型。数据盘类型限制详见[CVM实例配置](https://cloud.tencent.com/document/product/213/2177)。取值范围：<br><li>LOCAL_BASIC：本地硬盘<br><li>LOCAL_SSD：本地SSD硬盘<br><li>CLOUD_BASIC：普通云硬盘<br><li>CLOUD_PREMIUM：高性能云硬盘<br><li>CLOUD_SSD：SSD云硬盘<br><br>默认取值：LOCAL_BASIC。
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.DiskType = null;
 
         /**
          * 数据盘大小，单位：GB。最小调整步长为10G，不同数据盘类型取值范围不同，具体限制详见：[CVM实例配置](https://cloud.tencent.com/document/product/213/2177)。默认值为0，表示不购买数据盘。更多限制详见产品文档。
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.DiskSize = null;
 
         /**
          * 数据盘快照 ID，类似 `snap-l8psqwnt`。
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.SnapshotId = null;

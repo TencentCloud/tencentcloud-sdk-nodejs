@@ -723,7 +723,7 @@ class TopicRulePayload extends  AbstractModel {
         super();
 
         /**
-         * 规则的SQL语句，base64编码
+         * 规则的SQL语句，如： SELECT * FROM 'pid/dname/event'，然后对其进行base64编码，得：U0VMRUNUICogRlJPTSAncGlkL2RuYW1lL2V2ZW50Jw==
          * @type {string || null}
          */
         this.Sql = null;
@@ -742,7 +742,7 @@ class TopicRulePayload extends  AbstractModel {
         this.Description = null;
 
         /**
-         * 规则不生效
+         * 是否禁用规则
          * @type {boolean || null}
          */
         this.RuleDisabled = null;
@@ -2301,6 +2301,34 @@ class DeviceInfo extends  AbstractModel {
          */
         this.LoraMoteType = null;
 
+        /**
+         * 首次上线时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.FirstOnlineTime = null;
+
+        /**
+         * 最近下线时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.LastOfflineTime = null;
+
+        /**
+         * 设备创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * 设备日志级别
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.LogLevel = null;
+
     }
 
     /**
@@ -2333,6 +2361,10 @@ class DeviceInfo extends  AbstractModel {
         this.LastUpdateTime = 'LastUpdateTime' in params ? params.LastUpdateTime : null;
         this.LoraDevEui = 'LoraDevEui' in params ? params.LoraDevEui : null;
         this.LoraMoteType = 'LoraMoteType' in params ? params.LoraMoteType : null;
+        this.FirstOnlineTime = 'FirstOnlineTime' in params ? params.FirstOnlineTime : null;
+        this.LastOfflineTime = 'LastOfflineTime' in params ? params.LastOfflineTime : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.LogLevel = 'LogLevel' in params ? params.LogLevel : null;
 
     }
 }
@@ -2499,7 +2531,7 @@ class ProductProperties extends  AbstractModel {
         this.ModelName = null;
 
         /**
-         * 产品秘钥，suite产品才会有
+         * 产品密钥，suite产品才会有
          * @type {string || null}
          */
         this.ProductKey = null;
@@ -2611,7 +2643,7 @@ class DescribeDeviceResponse extends  AbstractModel {
         this.Online = null;
 
         /**
-         * 设备登陆时间
+         * 设备登录时间
          * @type {number || null}
          */
         this.LoginTime = null;

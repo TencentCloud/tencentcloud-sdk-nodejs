@@ -77,13 +77,13 @@ class Credentials extends  AbstractModel {
         this.Token = null;
 
         /**
-         * 临时证书秘钥ID
+         * 临时证书密钥ID
          * @type {string || null}
          */
         this.TmpSecretId = null;
 
         /**
-         * 临时证书秘钥Key
+         * 临时证书密钥Key
          * @type {string || null}
          */
         this.TmpSecretKey = null;

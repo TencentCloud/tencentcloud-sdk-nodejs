@@ -144,7 +144,7 @@ class TextToVoiceResponse extends  AbstractModel {
         super();
 
         /**
-         * base编码的wav音频
+         * base64编码的wav音频
          * @type {string || null}
          */
         this.Audio = null;
@@ -333,7 +333,7 @@ class SentenceRecognitionRequest extends  AbstractModel {
         this.Url = null;
 
         /**
-         * 语音数据，当SourceType 值为1时必须填写，为0可不写。要base64编码(采用python语言时注意读取文件应该为string而不是byte，以byte格式读取后要decode()。编码后的数据不可带有回车换行符)。音频数据要小于900k。
+         * 语音数据，当SourceType 值为1时必须填写，为0可不写。要base64编码(采用python语言时注意读取文件应该为string而不是byte，以byte格式读取后要decode()。编码后的数据不可带有回车换行符)。音频数据要小于600kB。
          * @type {string || null}
          */
         this.Data = null;

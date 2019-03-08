@@ -394,12 +394,14 @@ class DescribeDBResourceUsageDetailsResponse extends  AbstractModel {
 
         /**
          * 备机1资源使用情况监控数据
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {ResourceUsageMonitorSet || null}
          */
         this.Slave1 = null;
 
         /**
          * 备机2资源使用情况监控数据
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {ResourceUsageMonitorSet || null}
          */
         this.Slave2 = null;
@@ -1179,6 +1181,7 @@ class ParamConstraint extends  AbstractModel {
 
         /**
          * 约束类型为section时的范围
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {ConstraintRange || null}
          */
         this.Range = null;
@@ -1959,6 +1962,7 @@ class CreateDBInstanceResponse extends  AbstractModel {
 
         /**
          * 订单对应的实例 ID 列表，如果此处没有返回实例 ID，可以通过订单查询接口获取。还可通过实例查询接口查询实例是否创建完成。
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<string> || null}
          */
         this.InstanceIds = null;
@@ -2090,6 +2094,7 @@ class Deal extends  AbstractModel {
 
         /**
          * 只有创建实例的订单会填充该字段，表示该订单创建的实例的 ID。
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<string> || null}
          */
         this.InstanceIds = null;
@@ -2146,7 +2151,7 @@ class GrantAccountPrivilegesRequest extends  AbstractModel {
         this.Host = null;
 
         /**
-         * 数据库名。如果为 \*，表示设置全局权限（即 \*.\*），此时忽略 Type 和 Object 参数
+         * 数据库名。如果为 \*，表示设置全局权限（即 \*.\*），此时忽略 Type 和 Object 参数。当DbName不为\*时，需要传入参 Type。
          * @type {string || null}
          */
         this.DbName = null;
@@ -2967,18 +2972,21 @@ class DBInstance extends  AbstractModel {
 
         /**
          * 付费模式
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.Paymode = null;
 
         /**
          * 实例处于异步任务时的异步任务流程ID
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.Locker = null;
 
         /**
          * 实例目前运行状态描述
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.StatusDesc = null;
@@ -2988,6 +2996,18 @@ class DBInstance extends  AbstractModel {
          * @type {number || null}
          */
         this.WanStatus = null;
+
+        /**
+         * 该实例是否支持审计。1-支持；0-不支持
+         * @type {number || null}
+         */
+        this.IsAuditSupported = null;
+
+        /**
+         * 机器型号
+         * @type {string || null}
+         */
+        this.Machine = null;
 
     }
 
@@ -3033,6 +3053,8 @@ class DBInstance extends  AbstractModel {
         this.Locker = 'Locker' in params ? params.Locker : null;
         this.StatusDesc = 'StatusDesc' in params ? params.StatusDesc : null;
         this.WanStatus = 'WanStatus' in params ? params.WanStatus : null;
+        this.IsAuditSupported = 'IsAuditSupported' in params ? params.IsAuditSupported : null;
+        this.Machine = 'Machine' in params ? params.Machine : null;
 
     }
 }
@@ -3404,6 +3426,7 @@ class DescribeBackupTimeResponse extends  AbstractModel {
 
         /**
          * 实例备份时间配置信息
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {DBBackupTimeConfig || null}
          */
         this.Items = null;
@@ -4106,6 +4129,7 @@ class ParamDesc extends  AbstractModel {
 
         /**
          * 设置过的值，参数生效后，该值和value一样。未设置过就不返回该字段。
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.SetValue = null;
@@ -4509,6 +4533,7 @@ class DBAccount extends  AbstractModel {
 
         /**
          * 该字段对只读帐号有意义，表示选择主备延迟小于该值的备机
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.DelayThresh = null;
