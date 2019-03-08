@@ -32,6 +32,7 @@ class GetPersonGroupInfoResponse extends  AbstractModel {
 
         /**
          * 人员库总数量
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.GroupNum = null;
@@ -283,6 +284,7 @@ class GetGroupListResponse extends  AbstractModel {
 
         /**
          * 人员库总数量
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.GroupNum = null;
@@ -339,12 +341,14 @@ class GroupInfo extends  AbstractModel {
 
         /**
          * 人员库自定义描述字段
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<string> || null}
          */
         this.GroupExDescriptions = null;
 
         /**
          * 人员库信息备注
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.Tag = null;
@@ -382,12 +386,14 @@ class GetPersonListResponse extends  AbstractModel {
 
         /**
          * 该人员库的人员数量
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.PersonNum = null;
 
         /**
          * 该人员库的人脸数量
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.FaceNum = null;
@@ -434,6 +440,7 @@ class FaceQualityCompleteness extends  AbstractModel {
         /**
          * 眉毛的遮挡分数[0,100]，分数越高遮挡越少。 
 参考范围：[0,80]表示发生遮挡。
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.Eyebrow = null;
@@ -441,6 +448,7 @@ class FaceQualityCompleteness extends  AbstractModel {
         /**
          * 眼睛的遮挡分数[0,100],分数越高遮挡越少。 
 参考范围：[0,80]表示发生遮挡。
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.Eye = null;
@@ -448,6 +456,7 @@ class FaceQualityCompleteness extends  AbstractModel {
         /**
          * 鼻子的遮挡分数[0,100],分数越高遮挡越少。 
 参考范围：[0,60]表示发生遮挡。
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.Nose = null;
@@ -455,6 +464,7 @@ class FaceQualityCompleteness extends  AbstractModel {
         /**
          * 脸颊的遮挡分数[0,100],分数越高遮挡越少。 
 参考范围：[0,70]表示发生遮挡。
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.Cheek = null;
@@ -462,6 +472,7 @@ class FaceQualityCompleteness extends  AbstractModel {
         /**
          * 嘴巴的遮挡分数[0,100],分数越高遮挡越少。 
 参考范围：[0,50]表示发生遮挡。
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.Mouth = null;
@@ -469,6 +480,7 @@ class FaceQualityCompleteness extends  AbstractModel {
         /**
          * 下巴的遮挡分数[0,100],分数越高遮挡越少。 
 参考范围：[0,70]表示发生遮挡。
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.Chin = null;
@@ -554,18 +566,21 @@ class FaceAttributesInfo extends  AbstractModel {
 
         /**
          * 是否有帽子 [true,false]。NeedFaceAttributes 不为1 或检测超过 5 张人脸时，此参数仍返回，但不具备参考意义。
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {boolean || null}
          */
         this.Hat = null;
 
         /**
          * 是否有口罩 [true,false]。NeedFaceAttributes 不为1 或检测超过 5 张人脸时，此参数仍返回，但不具备参考意义。
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {boolean || null}
          */
         this.Mask = null;
 
         /**
          * 头发信息，包含头发长度（length）、有无刘海（bang）、头发颜色（color）。
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {FaceHairAttributesInfo || null}
          */
         this.Hair = null;
@@ -1387,6 +1402,7 @@ class FaceInfo extends  AbstractModel {
 
         /**
          * 人脸质量信息，包含质量分（score）、模糊分（sharpness）、光照分（brightness）、遮挡分（completeness）。只有当NeedFaceDetection设为1时才返回有效信息。
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {FaceQualityInfo || null}
          */
         this.FaceQualityInfo = null;
@@ -1460,6 +1476,7 @@ class FaceQualityInfo extends  AbstractModel {
          * 质量分: [0,100]，综合评价图像质量是否适合人脸识别，分数越高质量越好。 
 参考范围：[0,40]较差，[40,60] 一般，[60,80]较好，[80,100]很好。 
 建议：人脸入库选取70以上的图片。
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.Score = null;
@@ -1468,6 +1485,7 @@ class FaceQualityInfo extends  AbstractModel {
          * 清晰分：[0,100]，评价图片清晰程度，分数越高越清晰。 
 参考范围：[0,40]特别模糊，[40,60]模糊，[60,80]一般，[80,100]清晰。 
 建议：人脸入库选取80以上的图片。
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.Sharpness = null;
@@ -1476,12 +1494,14 @@ class FaceQualityInfo extends  AbstractModel {
          * 光照分：[0,100]，评价图片光照程度，分数越高越亮。 
 参考范围： [0,30]偏暗，[30,70]光照正常，[70,100]偏亮。 
 建议：人脸入库选取[30,70]的图片。
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.Brightness = null;
 
         /**
          * 五官遮挡分，评价眉毛（Eyebrow）、眼睛（Eye）、鼻子（Nose）、脸颊（Cheek）、嘴巴（Mouth）、下巴（Chin）的被遮挡程度。
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {FaceQualityCompleteness || null}
          */
         this.Completeness = null;
@@ -2031,18 +2051,21 @@ class FaceHairAttributesInfo extends  AbstractModel {
 
         /**
          * 0：光头，1：短发，2：中发，3：长发，4：绑发
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.Length = null;
 
         /**
          * 0：有刘海，1：无刘海
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.Bang = null;
 
         /**
          * 0：黑色，1：金色，2：棕色，3：灰白色
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.Color = null;

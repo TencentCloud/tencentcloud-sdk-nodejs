@@ -1358,18 +1358,21 @@ class LoginSettings extends  AbstractModel {
 
         /**
          * 实例登录密码。不同操作系统类型密码复杂度限制不一样，具体如下：<br><li>Linux实例密码必须8到16位，至少包括两项[a-z，A-Z]、[0-9] 和 [( ) ` ~ ! @ # $ % ^ & * - + = | { } [ ] : ; ' , . ? / ]中的特殊符号。<br><li>Windows实例密码必须12到16位，至少包括三项[a-z]，[A-Z]，[0-9] 和 [( ) ` ~ ! @ # $ % ^ & * - + = { } [ ] : ; ' , . ? /]中的特殊符号。<br><br>若不指定该参数，则由系统随机生成密码，并通过站内信方式通知到用户。
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.Password = null;
 
         /**
          * 密钥ID列表。关联密钥后，就可以通过对应的私钥来访问实例；KeyId可通过接口DescribeKeyPairs获取，密钥与密码不能同时指定，同时Windows操作系统不支持指定密钥。当前仅支持购买的时候指定一个密钥。
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<string> || null}
          */
         this.KeyIds = null;
 
         /**
          * 保持镜像的原始设置。该参数与Password或KeyIds.N不能同时指定。只有使用自定义镜像、共享镜像或外部导入镜像创建实例时才能指定该参数为TRUE。取值范围：<br><li>TRUE：表示保持镜像的登录设置<br><li>FALSE：表示不保持镜像的登录设置<br><br>默认取值：FALSE。
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.KeepImageLogin = null;
@@ -3260,12 +3263,14 @@ class Image extends  AbstractModel {
 
         /**
          * 同步百分比
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.SyncPercent = null;
 
         /**
          * 镜像是否支持cloud-init
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {boolean || null}
          */
         this.IsSupportCloudinit = null;
@@ -3510,6 +3515,7 @@ class DataDisk extends  AbstractModel {
 <li>FALSE：子机销毁时，保留数据盘<br>
 默认取值：TRUE<br>
 该参数目前仅用于 `RunInstances` 接口。
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {boolean || null}
          */
         this.DeleteWithInstance = null;
@@ -3743,18 +3749,21 @@ class Externals extends  AbstractModel {
 
         /**
          * 释放地址
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {boolean || null}
          */
         this.ReleaseAddress = null;
 
         /**
          * 不支持的网络类型
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<string> || null}
          */
         this.UnsupportNetworks = null;
 
         /**
          * HDD本地存储属性
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {StorageBlock || null}
          */
         this.StorageBlockAttr = null;
@@ -3884,7 +3893,7 @@ class CreateImageRequest extends  AbstractModel {
         this.SnapshotIds = null;
 
         /**
-         * DryRun
+         * 检测请求的合法性，但不会对操作的资源产生任何影响
          * @type {boolean || null}
          */
         this.DryRun = null;
@@ -3987,6 +3996,7 @@ class Instance extends  AbstractModel {
 
         /**
          * 实例主网卡的公网`IP`列表。
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<string> || null}
          */
         this.PublicIpAddresses = null;
@@ -4899,12 +4909,14 @@ class DisasterRecoverGroup extends  AbstractModel {
 
         /**
          * 分散置放群组内，云主机id列表。
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<string> || null}
          */
         this.InstanceIds = null;
 
         /**
          * 分散置放群组创建时间。
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.CreateTime = null;
@@ -5357,24 +5369,28 @@ class ItemPrice extends  AbstractModel {
 
         /**
          * 后续单价，单位：元。
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.UnitPrice = null;
 
         /**
          * 后续计价单元，可取值范围： <br><li>HOUR：表示计价单元是按每小时来计算。当前涉及该计价单元的场景有：实例按小时后付费（POSTPAID_BY_HOUR）、带宽按小时后付费（BANDWIDTH_POSTPAID_BY_HOUR）：<br><li>GB：表示计价单元是按每GB来计算。当前涉及该计价单元的场景有：流量按小时后付费（TRAFFIC_POSTPAID_BY_HOUR）。
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.ChargeUnit = null;
 
         /**
          * 预支费用的原价，单位：元。
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.OriginalPrice = null;
 
         /**
          * 预支费用的折扣价，单位：元。
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.DiscountPrice = null;
@@ -5430,6 +5446,7 @@ class InstanceTypeQuotaItem extends  AbstractModel {
 
         /**
          * 扩展属性。
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {Externals || null}
          */
         this.Externals = null;
@@ -5529,12 +5546,14 @@ class ImageOsList extends  AbstractModel {
 
         /**
          * 支持的windows操作系统。
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<string> || null}
          */
         this.Windows = null;
 
         /**
          * 支持的linux操作系统
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<string> || null}
          */
         this.Linux = null;
@@ -7067,18 +7086,21 @@ class StorageBlock extends  AbstractModel {
 
         /**
          * HDD本地存储类型，值为：LOCAL_PRO.
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.Type = null;
 
         /**
          * HDD本地存储的最小容量
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.MinSize = null;
 
         /**
          * HDD本地存储的最大容量
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.MaxSize = null;

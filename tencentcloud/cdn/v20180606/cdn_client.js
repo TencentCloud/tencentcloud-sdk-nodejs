@@ -16,26 +16,34 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
-const DescribeCdnDataRequest = models.DescribeCdnDataRequest;
 const CdnData = models.CdnData;
 const ResourceData = models.ResourceData;
+const UrlRecord = models.UrlRecord;
+const DescribeOriginDataRequest = models.DescribeOriginDataRequest;
+const TimestampData = models.TimestampData;
+const MapInfo = models.MapInfo;
+const CacheOptResult = models.CacheOptResult;
 const ListTopDataResponse = models.ListTopDataResponse;
 const DescribeMapInfoResponse = models.DescribeMapInfoResponse;
-const ListTopDataRequest = models.ListTopDataRequest;
-const DescribeOriginDataRequest = models.DescribeOriginDataRequest;
 const DescribeMapInfoRequest = models.DescribeMapInfoRequest;
-const ResourceOriginData = models.ResourceOriginData;
-const MapInfo = models.MapInfo;
-const TopDetailData = models.TopDetailData;
-const TimestampData = models.TimestampData;
-const TopData = models.TopData;
+const EnableCachesResponse = models.EnableCachesResponse;
 const DescribePayTypeRequest = models.DescribePayTypeRequest;
-const DescribeOriginDataResponse = models.DescribeOriginDataResponse;
 const DescribeCdnDataResponse = models.DescribeCdnDataResponse;
-const SummarizedData = models.SummarizedData;
-const DescribeIpVisitRequest = models.DescribeIpVisitRequest;
-const DescribePayTypeResponse = models.DescribePayTypeResponse;
 const DescribeIpVisitResponse = models.DescribeIpVisitResponse;
+const DescribePayTypeResponse = models.DescribePayTypeResponse;
+const GetDisableRecordsRequest = models.GetDisableRecordsRequest;
+const ListTopDataRequest = models.ListTopDataRequest;
+const DisableCachesResponse = models.DisableCachesResponse;
+const ResourceOriginData = models.ResourceOriginData;
+const DescribeOriginDataResponse = models.DescribeOriginDataResponse;
+const DescribeIpVisitRequest = models.DescribeIpVisitRequest;
+const DisableCachesRequest = models.DisableCachesRequest;
+const DescribeCdnDataRequest = models.DescribeCdnDataRequest;
+const TopData = models.TopData;
+const EnableCachesRequest = models.EnableCachesRequest;
+const TopDetailData = models.TopDetailData;
+const GetDisableRecordsResponse = models.GetDisableRecordsResponse;
+const SummarizedData = models.SummarizedData;
 
 
 /**
@@ -52,9 +60,9 @@ class CdnClient extends AbstractClient {
      * ListTopData 通过入参 Metric 和 Filter 组合不同，可以查询以下排序数据：
 
 + 依据总流量、总请求数对访问 URL 排序，从大至小返回 TOP 1000 URL
-+ 依据总流量、总请求数对客户端省份排序，从大至小返回省份列表
++ 依据总流量、总请求数对客户端省份排序，从大至小返回省份列表
 + 依据总流量、总请求数对客户端运营商排序，从大至小返回运营商列表
-+ 依据总流量、峰值带宽、总请求数、平均命中率、2XX/3XX/4XX/5XX 状态码对域名排序，从大至小返回域名列表
++ 依据总流量、峰值带宽、总请求数、平均命中率、2XX/3XX/4XX/5XX 状态码对域名排序，从大至小返回域名列表
 + 依据总回源流量、回源峰值带宽、总回源请求数、平均回源失败率、2XX/3XX/4XX/5XX 回源状态码对域名排序，从大至小返回域名列表
      * @param {ListTopDataRequest} req
      * @param {function(string, ListTopDataResponse):void} cb
@@ -73,10 +81,10 @@ class CdnClient extends AbstractClient {
 + 回源请求数（单位为 次）
 + 回源失败请求数（单位为 次）
 + 回源失败率（单位为 %，小数点后保留两位）
-+ 回源状态码 2XX 汇总及各 2 开头回源状态码明细（单位为 个）
-+ 回源状态码 3XX 汇总及各 3 开头回源状态码明细（单位为 个）
-+ 回源状态码 4XX 汇总及各 4 开头回源状态码明细（单位为 个）
-+ 回源状态码 5XX 汇总及各 5 开头回源状态码明细（单位为 个）
++ 回源状态码 2xx 汇总及各 2 开头回源状态码明细（单位为 个）
++ 回源状态码 3xx 汇总及各 3 开头回源状态码明细（单位为 个）
++ 回源状态码 4xx 汇总及各 4 开头回源状态码明细（单位为 个）
++ 回源状态码 5xx 汇总及各 5 开头回源状态码明细（单位为 个）
      * @param {DescribeOriginDataRequest} req
      * @param {function(string, DescribeOriginDataResponse):void} cb
      * @public
@@ -95,6 +103,17 @@ class CdnClient extends AbstractClient {
     DescribeMapInfo(req, cb) {
         let resp = new DescribeMapInfoResponse();
         this.request("DescribeMapInfo", req, resp, cb);
+    }
+
+    /**
+     * GetDisableRecords 用户查询资源禁用历史，及 URL 当前状态。（接口尚在内测中，暂未全量开放使用）
+     * @param {GetDisableRecordsRequest} req
+     * @param {function(string, GetDisableRecordsResponse):void} cb
+     * @public
+     */
+    GetDisableRecords(req, cb) {
+        let resp = new GetDisableRecordsResponse();
+        this.request("GetDisableRecords", req, resp, cb);
     }
 
     /**
@@ -129,10 +148,10 @@ class CdnClient extends AbstractClient {
 + 带宽（单位为 bps）
 + 请求数（单位为 次）
 + 流量命中率（单位为 %，小数点后保留两位）
-+ 状态码 2XX 汇总及各 2 开头状态码明细（单位为 个）
-+ 状态码 3XX 汇总及各 3 开头状态码明细（单位为 个）
-+ 状态码 4XX 汇总及各 4 开头状态码明细（单位为 个）
-+ 状态码 5XX 汇总及各 5 开头状态码明细（单位为 个）
++ 状态码 2xx 汇总及各 2 开头状态码明细（单位为 个）
++ 状态码 3xx 汇总及各 3 开头状态码明细（单位为 个）
++ 状态码 4xx 汇总及各 4 开头状态码明细（单位为 个）
++ 状态码 5xx 汇总及各 5 开头状态码明细（单位为 个）
      * @param {DescribeCdnDataRequest} req
      * @param {function(string, DescribeCdnDataResponse):void} cb
      * @public
@@ -140,6 +159,28 @@ class CdnClient extends AbstractClient {
     DescribeCdnData(req, cb) {
         let resp = new DescribeCdnDataResponse();
         this.request("DescribeCdnData", req, resp, cb);
+    }
+
+    /**
+     * DisableCaches 用于禁用 CDN 上指定 URL 的访问，禁用完成后，全网访问会直接返回 403。（接口尚在内测中，暂未全量开放使用）
+     * @param {DisableCachesRequest} req
+     * @param {function(string, DisableCachesResponse):void} cb
+     * @public
+     */
+    DisableCaches(req, cb) {
+        let resp = new DisableCachesResponse();
+        this.request("DisableCaches", req, resp, cb);
+    }
+
+    /**
+     * EnableCaches 用于解禁手工封禁的 URL，解禁成功后，全网生效时间约 5~10 分钟。（接口尚在内测中，暂未全量开放使用）
+     * @param {EnableCachesRequest} req
+     * @param {function(string, EnableCachesResponse):void} cb
+     * @public
+     */
+    EnableCaches(req, cb) {
+        let resp = new EnableCachesResponse();
+        this.request("EnableCaches", req, resp, cb);
     }
 
 

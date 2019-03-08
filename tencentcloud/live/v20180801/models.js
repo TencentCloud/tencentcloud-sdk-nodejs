@@ -2312,6 +2312,12 @@ class CallBackTemplateInfo extends  AbstractModel {
          */
         this.PornCensorshipNotifyUrl = null;
 
+        /**
+         * 回调的鉴权key
+         * @type {string || null}
+         */
+        this.CallbackKey = null;
+
     }
 
     /**
@@ -2330,6 +2336,7 @@ class CallBackTemplateInfo extends  AbstractModel {
         this.RecordNotifyUrl = 'RecordNotifyUrl' in params ? params.RecordNotifyUrl : null;
         this.SnapshotNotifyUrl = 'SnapshotNotifyUrl' in params ? params.SnapshotNotifyUrl : null;
         this.PornCensorshipNotifyUrl = 'PornCensorshipNotifyUrl' in params ? params.PornCensorshipNotifyUrl : null;
+        this.CallbackKey = 'CallbackKey' in params ? params.CallbackKey : null;
 
     }
 }
@@ -3156,6 +3163,12 @@ class CreateLiveCallbackTemplateRequest extends  AbstractModel {
          */
         this.PornCensorshipNotifyUrl = null;
 
+        /**
+         * 回调key，回调URL公用，鉴权回调说明详见回调格式文档
+         * @type {string || null}
+         */
+        this.CallbackKey = null;
+
     }
 
     /**
@@ -3172,6 +3185,7 @@ class CreateLiveCallbackTemplateRequest extends  AbstractModel {
         this.RecordNotifyUrl = 'RecordNotifyUrl' in params ? params.RecordNotifyUrl : null;
         this.SnapshotNotifyUrl = 'SnapshotNotifyUrl' in params ? params.SnapshotNotifyUrl : null;
         this.PornCensorshipNotifyUrl = 'PornCensorshipNotifyUrl' in params ? params.PornCensorshipNotifyUrl : null;
+        this.CallbackKey = 'CallbackKey' in params ? params.CallbackKey : null;
 
     }
 }
@@ -6312,7 +6326,7 @@ class DescribeLiveStreamOnlineListRequest extends  AbstractModel {
 
         /**
          * 每页大小，最大100。 
-取值：1~100之前的任意整数。
+取值：10~100之间的任意整数。
 默认值：10。
          * @type {number || null}
          */
@@ -6426,6 +6440,12 @@ class ModifyLiveCallbackTemplateRequest extends  AbstractModel {
          */
         this.PornCensorshipNotifyUrl = null;
 
+        /**
+         * 回调key，回调URL公用，鉴权回调说明详见回调格式文档
+         * @type {string || null}
+         */
+        this.CallbackKey = null;
+
     }
 
     /**
@@ -6443,6 +6463,7 @@ class ModifyLiveCallbackTemplateRequest extends  AbstractModel {
         this.RecordNotifyUrl = 'RecordNotifyUrl' in params ? params.RecordNotifyUrl : null;
         this.SnapshotNotifyUrl = 'SnapshotNotifyUrl' in params ? params.SnapshotNotifyUrl : null;
         this.PornCensorshipNotifyUrl = 'PornCensorshipNotifyUrl' in params ? params.PornCensorshipNotifyUrl : null;
+        this.CallbackKey = 'CallbackKey' in params ? params.CallbackKey : null;
 
     }
 }

@@ -32,20 +32,27 @@ const DeviceClass = models.DeviceClass;
 const DescribeRepairTaskConstantRequest = models.DescribeRepairTaskConstantRequest;
 const DeletePsaRegulationRequest = models.DeletePsaRegulationRequest;
 const DescribeCustomImageProcessRequest = models.DescribeCustomImageProcessRequest;
+const CpuInfo = models.CpuInfo;
 const CustomImage = models.CustomImage;
 const ModifyDeviceAutoRenewFlagRequest = models.ModifyDeviceAutoRenewFlagRequest;
 const BindPsaTagRequest = models.BindPsaTagRequest;
+const DescribeRegionsResponse = models.DescribeRegionsResponse;
 const DevicePartition = models.DevicePartition;
 const OfflineDevicesResponse = models.OfflineDevicesResponse;
 const ModifyPsaRegulationRequest = models.ModifyPsaRegulationRequest;
+const RecoverDevicesRequest = models.RecoverDevicesRequest;
 const DescribeDeviceClassPartitionRequest = models.DescribeDeviceClassPartitionRequest;
+const ZoneInfo = models.ZoneInfo;
 const CreateSpotDeviceResponse = models.CreateSpotDeviceResponse;
 const BuyDevicesRequest = models.BuyDevicesRequest;
+const DescribeHardwareSpecificationRequest = models.DescribeHardwareSpecificationRequest;
 const Tag = models.Tag;
 const CreateCustomImageResponse = models.CreateCustomImageResponse;
-const TaskInfo = models.TaskInfo;
+const HostedDeviceOutBandInfo = models.HostedDeviceOutBandInfo;
+const ReturnDevicesRequest = models.ReturnDevicesRequest;
 const PsaRegulation = models.PsaRegulation;
 const DescribeDevicePartitionResponse = models.DescribeDevicePartitionResponse;
+const DescribeHostedDeviceOutBandInfoRequest = models.DescribeHostedDeviceOutBandInfoRequest;
 const RebootDevicesResponse = models.RebootDevicesResponse;
 const ResetDevicePasswordRequest = models.ResetDevicePasswordRequest;
 const SubtaskStatus = models.SubtaskStatus;
@@ -61,16 +68,19 @@ const TaskType = models.TaskType;
 const DeleteUserCmdsRequest = models.DeleteUserCmdsRequest;
 const DeviceDiskSizeInfo = models.DeviceDiskSizeInfo;
 const DescribeDeviceClassResponse = models.DescribeDeviceClassResponse;
+const DescribeDeviceHardwareInfoResponse = models.DescribeDeviceHardwareInfoResponse;
 const ModifyUserCmdRequest = models.ModifyUserCmdRequest;
 const DescribeDevicePriceInfoResponse = models.DescribeDevicePriceInfoResponse;
 const RunUserCmdResponse = models.RunUserCmdResponse;
 const DescribeUserCmdsRequest = models.DescribeUserCmdsRequest;
 const DescribeTaskInfoRequest = models.DescribeTaskInfoRequest;
 const RepairTaskControlResponse = models.RepairTaskControlResponse;
+const DescribeRegionsRequest = models.DescribeRegionsRequest;
 const DescribePsaRegulationsRequest = models.DescribePsaRegulationsRequest;
 const UnbindPsaTagResponse = models.UnbindPsaTagResponse;
 const DescribeDevicePriceInfoRequest = models.DescribeDevicePriceInfoRequest;
 const DescribeDevicePartitionRequest = models.DescribeDevicePartitionRequest;
+const TaskInfo = models.TaskInfo;
 const ModifyPsaRegulationResponse = models.ModifyPsaRegulationResponse;
 const UserCmdTask = models.UserCmdTask;
 const TaskOperationLog = models.TaskOperationLog;
@@ -82,6 +92,8 @@ const ModifyPayModePre2PostResponse = models.ModifyPayModePre2PostResponse;
 const SuccessTaskInfo = models.SuccessTaskInfo;
 const SetOutBandVpnAuthPasswordRequest = models.SetOutBandVpnAuthPasswordRequest;
 const OfflineDevicesRequest = models.OfflineDevicesRequest;
+const DeviceHardwareInfo = models.DeviceHardwareInfo;
+const DiskInfo = models.DiskInfo;
 const SetOutBandVpnAuthPasswordResponse = models.SetOutBandVpnAuthPasswordResponse;
 const DescribeTaskInfoResponse = models.DescribeTaskInfoResponse;
 const DescribeUserCmdTaskInfoRequest = models.DescribeUserCmdTaskInfoRequest;
@@ -103,25 +115,31 @@ const DescribeTaskOperationLogRequest = models.DescribeTaskOperationLogRequest;
 const DescribeDeviceOperationLogRequest = models.DescribeDeviceOperationLogRequest;
 const DescribeOperationResultRequest = models.DescribeOperationResultRequest;
 const DeviceClassPartitionInfo = models.DeviceClassPartitionInfo;
+const RecoverDevicesResponse = models.RecoverDevicesResponse;
 const ModifyDeviceAliasesResponse = models.ModifyDeviceAliasesResponse;
 const ShutdownDevicesRequest = models.ShutdownDevicesRequest;
 const UnbindPsaTagRequest = models.UnbindPsaTagRequest;
 const ModifyCustomImageAttributeResponse = models.ModifyCustomImageAttributeResponse;
+const RegionInfo = models.RegionInfo;
 const UserCmd = models.UserCmd;
 const CustomImageProcess = models.CustomImageProcess;
 const CreateSpotDeviceRequest = models.CreateSpotDeviceRequest;
 const OsInfo = models.OsInfo;
 const CreateUserCmdRequest = models.CreateUserCmdRequest;
+const ReturnDevicesResponse = models.ReturnDevicesResponse;
 const BindPsaTagResponse = models.BindPsaTagResponse;
+const DescribeHostedDeviceOutBandInfoResponse = models.DescribeHostedDeviceOutBandInfoResponse;
 const DevicePriceInfo = models.DevicePriceInfo;
 const RebootDevicesRequest = models.RebootDevicesRequest;
 const DeleteCustomImagesResponse = models.DeleteCustomImagesResponse;
 const DescribeDevicesRequest = models.DescribeDevicesRequest;
+const DescribeHardwareSpecificationResponse = models.DescribeHardwareSpecificationResponse;
 const CreatePsaRegulationResponse = models.CreatePsaRegulationResponse;
 const DescribeCustomImageProcessResponse = models.DescribeCustomImageProcessResponse;
-const DevicePositionInfo = models.DevicePositionInfo;
+const DescribeDeviceHardwareInfoRequest = models.DescribeDeviceHardwareInfoRequest;
 const DescribeDeviceOperationLogResponse = models.DescribeDeviceOperationLogResponse;
 const RepairTaskControlRequest = models.RepairTaskControlRequest;
+const DevicePositionInfo = models.DevicePositionInfo;
 const DeviceInfo = models.DeviceInfo;
 const ResetDevicePasswordResponse = models.ResetDevicePasswordResponse;
 const DescribeUserCmdTasksRequest = models.DescribeUserCmdTasksRequest;
@@ -183,7 +201,7 @@ class BmClient extends AbstractClient {
     }
 
     /**
-     * 用于销毁可退还的服务器
+     * 销毁黑石物理机实例：可以销毁物理机列表中的竞价实例，或回收站列表中所有计费模式的实例
      * @param {OfflineDevicesRequest} req
      * @param {function(string, OfflineDevicesResponse):void} cb
      * @public
@@ -224,6 +242,17 @@ class BmClient extends AbstractClient {
     DescribeCustomImageProcess(req, cb) {
         let resp = new DescribeCustomImageProcessResponse();
         this.request("DescribeCustomImageProcess", req, resp, cb);
+    }
+
+    /**
+     * 查询设备硬件配置信息，如 CPU 型号，内存大小，磁盘大小和数量
+     * @param {DescribeDeviceHardwareInfoRequest} req
+     * @param {function(string, DescribeDeviceHardwareInfoResponse):void} cb
+     * @public
+     */
+    DescribeDeviceHardwareInfo(req, cb) {
+        let resp = new DescribeDeviceHardwareInfoResponse();
+        this.request("DescribeDeviceHardwareInfo", req, resp, cb);
     }
 
     /**
@@ -293,6 +322,17 @@ class BmClient extends AbstractClient {
     }
 
     /**
+     * 查询托管设备带外信息
+     * @param {DescribeHostedDeviceOutBandInfoRequest} req
+     * @param {function(string, DescribeHostedDeviceOutBandInfoResponse):void} cb
+     * @public
+     */
+    DescribeHostedDeviceOutBandInfo(req, cb) {
+        let resp = new DescribeHostedDeviceOutBandInfoResponse();
+        this.request("DescribeHostedDeviceOutBandInfo", req, resp, cb);
+    }
+
+    /**
      * 为预授权规则绑定标签
      * @param {BindPsaTagRequest} req
      * @param {function(string, BindPsaTagResponse):void} cb
@@ -338,22 +378,14 @@ class BmClient extends AbstractClient {
     }
 
     /**
-     * 获取用户维修任务列表及详细信息<br>
-<br>
-TaskStatus（任务状态ID）与状态中文名的对应关系如下：<br>
-1：未授权<br>
-2：处理中<br>
-3：待确认<br>
-4：未授权-暂不处理<br>
-5：已恢复<br>
-6：待确认-未恢复<br>
-     * @param {DescribeTaskInfoRequest} req
-     * @param {function(string, DescribeTaskInfoResponse):void} cb
+     * 查询自定义机型部件信息，包括CpuId对应的型号，DiskTypeId对应的磁盘类型
+     * @param {DescribeHardwareSpecificationRequest} req
+     * @param {function(string, DescribeHardwareSpecificationResponse):void} cb
      * @public
      */
-    DescribeTaskInfo(req, cb) {
-        let resp = new DescribeTaskInfoResponse();
-        this.request("DescribeTaskInfo", req, resp, cb);
+    DescribeHardwareSpecification(req, cb) {
+        let resp = new DescribeHardwareSpecificationResponse();
+        this.request("DescribeHardwareSpecification", req, resp, cb);
     }
 
     /**
@@ -412,6 +444,17 @@ TaskStatus（任务状态ID）与状态中文名的对应关系如下：<br>
     }
 
     /**
+     * 查询地域以及可用区
+     * @param {DescribeRegionsRequest} req
+     * @param {function(string, DescribeRegionsResponse):void} cb
+     * @public
+     */
+    DescribeRegions(req, cb) {
+        let resp = new DescribeRegionsResponse();
+        this.request("DescribeRegions", req, resp, cb);
+    }
+
+    /**
      * 获取自定义脚本任务详细信息
      * @param {DescribeUserCmdTaskInfoRequest} req
      * @param {function(string, DescribeUserCmdTaskInfoResponse):void} cb
@@ -431,6 +474,17 @@ TaskStatus（任务状态ID）与状态中文名的对应关系如下：<br>
     DescribeDevicePriceInfo(req, cb) {
         let resp = new DescribeDevicePriceInfoResponse();
         this.request("DescribeDevicePriceInfo", req, resp, cb);
+    }
+
+    /**
+     * 退回物理机至回收站，支持批量退还不同计费模式的物理机（包括预付费、后付费、预付费转后付费）
+     * @param {ReturnDevicesRequest} req
+     * @param {function(string, ReturnDevicesResponse):void} cb
+     * @public
+     */
+    ReturnDevices(req, cb) {
+        let resp = new ReturnDevicesResponse();
+        this.request("ReturnDevices", req, resp, cb);
     }
 
     /**
@@ -511,6 +565,25 @@ TaskStatus（任务状态ID）与状态中文名的对应关系如下：<br>
     }
 
     /**
+     * 获取用户维修任务列表及详细信息<br>
+<br>
+TaskStatus（任务状态ID）与状态中文名的对应关系如下：<br>
+1：未授权<br>
+2：处理中<br>
+3：待确认<br>
+4：未授权-暂不处理<br>
+5：已恢复<br>
+6：待确认-未恢复<br>
+     * @param {DescribeTaskInfoRequest} req
+     * @param {function(string, DescribeTaskInfoResponse):void} cb
+     * @public
+     */
+    DescribeTaskInfo(req, cb) {
+        let resp = new DescribeTaskInfoResponse();
+        this.request("DescribeTaskInfo", req, resp, cb);
+    }
+
+    /**
      * 此接口用于操作维修任务<br>
 入参TaskId为维修任务ID<br>
 入参Operate表示对维修任务的操作，支持如下取值：<br>
@@ -583,6 +656,17 @@ ConfirmUnRecovered（维修完成后，确认故障未恢复）<br>
     DescribeCustomImages(req, cb) {
         let resp = new DescribeCustomImagesResponse();
         this.request("DescribeCustomImages", req, resp, cb);
+    }
+
+    /**
+     * 恢复回收站中的物理机（仅限后付费的物理机）
+     * @param {RecoverDevicesRequest} req
+     * @param {function(string, RecoverDevicesResponse):void} cb
+     * @public
+     */
+    RecoverDevices(req, cb) {
+        let resp = new RecoverDevicesResponse();
+        this.request("RecoverDevices", req, resp, cb);
     }
 
     /**

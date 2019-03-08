@@ -791,6 +791,55 @@ class DescribeCustomImageProcessRequest extends  AbstractModel {
 }
 
 /**
+ * cpu信息
+ * @class
+ */
+class CpuInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * CPU的ID
+         * @type {number || null}
+         */
+        this.CpuId = null;
+
+        /**
+         * CPU型号描述
+         * @type {string || null}
+         */
+        this.CpuDescription = null;
+
+        /**
+         * 机型序列
+         * @type {number || null}
+         */
+        this.Series = null;
+
+        /**
+         * 支持的RAID方式，0：有RAID卡，1：没有RAID卡
+         * @type {Array.<number> || null}
+         */
+        this.ContainRaidCard = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CpuId = 'CpuId' in params ? params.CpuId : null;
+        this.CpuDescription = 'CpuDescription' in params ? params.CpuDescription : null;
+        this.Series = 'Series' in params ? params.Series : null;
+        this.ContainRaidCard = 'ContainRaidCard' in params ? params.ContainRaidCard : null;
+
+    }
+}
+
+/**
  * 自定义镜像信息
  * @class
  */
@@ -981,6 +1030,49 @@ class BindPsaTagRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeRegions返回参数结构体
+ * @class
+ */
+class DescribeRegionsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 地域信息
+         * @type {Array.<RegionInfo> || null}
+         */
+        this.RegionInfoSet = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.RegionInfoSet) {
+            this.RegionInfoSet = new Array();
+            for (let z in params.RegionInfoSet) {
+                let obj = new RegionInfo();
+                obj.deserialize(params.RegionInfoSet[z]);
+                this.RegionInfoSet.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * 物理机分区格式
  * @class
  */
@@ -1142,6 +1234,34 @@ class ModifyPsaRegulationRequest extends  AbstractModel {
 }
 
 /**
+ * RecoverDevices请求参数结构体
+ * @class
+ */
+class RecoverDevicesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 需要恢复的物理机ID列表
+         * @type {Array.<string> || null}
+         */
+        this.InstanceIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
+
+    }
+}
+
+/**
  * DescribeDeviceClassPartition请求参数结构体
  * @class
  */
@@ -1172,6 +1292,48 @@ class DescribeDeviceClassPartitionRequest extends  AbstractModel {
         }
         this.DeviceClassCode = 'DeviceClassCode' in params ? params.DeviceClassCode : null;
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+    }
+}
+
+/**
+ * 可用区信息
+ * @class
+ */
+class ZoneInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 可用区ID
+         * @type {string || null}
+         */
+        this.Zone = null;
+
+        /**
+         * 可用区整型ID
+         * @type {number || null}
+         */
+        this.ZoneId = null;
+
+        /**
+         * 可用区描述
+         * @type {string || null}
+         */
+        this.ZoneDescription = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Zone = 'Zone' in params ? params.Zone : null;
+        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
+        this.ZoneDescription = 'ZoneDescription' in params ? params.ZoneDescription : null;
 
     }
 }
@@ -1501,6 +1663,27 @@ class BuyDevicesRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeHardwareSpecification请求参数结构体
+ * @class
+ */
+class DescribeHardwareSpecificationRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+    }
+}
+
+/**
  * 标签键与值
  * @class
  */
@@ -1571,144 +1754,36 @@ class CreateCustomImageResponse extends  AbstractModel {
 }
 
 /**
- * 维护平台维修任务信息
+ * 托管设备带外信息
  * @class
  */
-class TaskInfo extends  AbstractModel {
+class HostedDeviceOutBandInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 任务id
-         * @type {string || null}
-         */
-        this.TaskId = null;
-
-        /**
-         * 主机id
+         * 物理机ID
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * 主机别名
+         * 带外IP
          * @type {string || null}
          */
-        this.Alias = null;
+        this.OutBandIp = null;
 
         /**
-         * 故障类型id
+         * VPN的IP
+         * @type {string || null}
+         */
+        this.VpnIp = null;
+
+        /**
+         * VPN的端口
          * @type {number || null}
          */
-        this.TaskTypeId = null;
-
-        /**
-         * 任务状态id
-         * @type {number || null}
-         */
-        this.TaskStatus = null;
-
-        /**
-         * 创建时间
-         * @type {string || null}
-         */
-        this.CreateTime = null;
-
-        /**
-         * 授权时间
-         * @type {string || null}
-         */
-        this.AuthTime = null;
-
-        /**
-         * 结束时间
-         * @type {string || null}
-         */
-        this.EndTime = null;
-
-        /**
-         * 任务详情
-         * @type {string || null}
-         */
-        this.TaskDetail = null;
-
-        /**
-         * 设备状态
-         * @type {number || null}
-         */
-        this.DeviceStatus = null;
-
-        /**
-         * 设备操作状态
-         * @type {number || null}
-         */
-        this.OperateStatus = null;
-
-        /**
-         * 可用区
-         * @type {string || null}
-         */
-        this.Zone = null;
-
-        /**
-         * 地域
-         * @type {string || null}
-         */
-        this.Region = null;
-
-        /**
-         * 所属网络
-         * @type {string || null}
-         */
-        this.VpcId = null;
-
-        /**
-         * 所在子网
-         * @type {string || null}
-         */
-        this.SubnetId = null;
-
-        /**
-         * 子网名
-         * @type {string || null}
-         */
-        this.SubnetName = null;
-
-        /**
-         * VPC名
-         * @type {string || null}
-         */
-        this.VpcName = null;
-
-        /**
-         * VpcCidrBlock
-         * @type {string || null}
-         */
-        this.VpcCidrBlock = null;
-
-        /**
-         * SubnetCidrBlock
-         * @type {string || null}
-         */
-        this.SubnetCidrBlock = null;
-
-        /**
-         * 公网ip
-         * @type {string || null}
-         */
-        this.WanIp = null;
-
-        /**
-         * 内网IP
-         * @type {string || null}
-         */
-        this.LanIp = null;
-
-        /**
-         * 管理IP
-         * @type {string || null}
-         */
-        this.MgtIp = null;
+        this.VpnPort = null;
 
     }
 
@@ -1719,28 +1794,38 @@ class TaskInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TaskId = 'TaskId' in params ? params.TaskId : null;
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.Alias = 'Alias' in params ? params.Alias : null;
-        this.TaskTypeId = 'TaskTypeId' in params ? params.TaskTypeId : null;
-        this.TaskStatus = 'TaskStatus' in params ? params.TaskStatus : null;
-        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
-        this.AuthTime = 'AuthTime' in params ? params.AuthTime : null;
-        this.EndTime = 'EndTime' in params ? params.EndTime : null;
-        this.TaskDetail = 'TaskDetail' in params ? params.TaskDetail : null;
-        this.DeviceStatus = 'DeviceStatus' in params ? params.DeviceStatus : null;
-        this.OperateStatus = 'OperateStatus' in params ? params.OperateStatus : null;
-        this.Zone = 'Zone' in params ? params.Zone : null;
-        this.Region = 'Region' in params ? params.Region : null;
-        this.VpcId = 'VpcId' in params ? params.VpcId : null;
-        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
-        this.SubnetName = 'SubnetName' in params ? params.SubnetName : null;
-        this.VpcName = 'VpcName' in params ? params.VpcName : null;
-        this.VpcCidrBlock = 'VpcCidrBlock' in params ? params.VpcCidrBlock : null;
-        this.SubnetCidrBlock = 'SubnetCidrBlock' in params ? params.SubnetCidrBlock : null;
-        this.WanIp = 'WanIp' in params ? params.WanIp : null;
-        this.LanIp = 'LanIp' in params ? params.LanIp : null;
-        this.MgtIp = 'MgtIp' in params ? params.MgtIp : null;
+        this.OutBandIp = 'OutBandIp' in params ? params.OutBandIp : null;
+        this.VpnIp = 'VpnIp' in params ? params.VpnIp : null;
+        this.VpnPort = 'VpnPort' in params ? params.VpnPort : null;
+
+    }
+}
+
+/**
+ * ReturnDevices请求参数结构体
+ * @class
+ */
+class ReturnDevicesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 需要退还的物理机ID列表
+         * @type {Array.<string> || null}
+         */
+        this.InstanceIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
 
     }
 }
@@ -1880,6 +1965,41 @@ class DescribeDevicePartitionResponse extends  AbstractModel {
             this.DevicePartition = obj;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeHostedDeviceOutBandInfo请求参数结构体
+ * @class
+ */
+class DescribeHostedDeviceOutBandInfoRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 托管设备的唯一ID数组,数组个数不超过20
+         * @type {Array.<string> || null}
+         */
+        this.InstanceIds = null;
+
+        /**
+         * 可用区ID
+         * @type {string || null}
+         */
+        this.Zone = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
+        this.Zone = 'Zone' in params ? params.Zone : null;
 
     }
 }
@@ -2636,6 +2756,49 @@ class DescribeDeviceClassResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeDeviceHardwareInfo返回参数结构体
+ * @class
+ */
+class DescribeDeviceHardwareInfoResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 设备硬件配置信息
+         * @type {Array.<DeviceHardwareInfo> || null}
+         */
+        this.DeviceHardwareInfoSet = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.DeviceHardwareInfoSet) {
+            this.DeviceHardwareInfoSet = new Array();
+            for (let z in params.DeviceHardwareInfoSet) {
+                let obj = new DeviceHardwareInfo();
+                obj.deserialize(params.DeviceHardwareInfoSet[z]);
+                this.DeviceHardwareInfoSet.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * ModifyUserCmd请求参数结构体
  * @class
  */
@@ -2983,6 +3146,34 @@ class RepairTaskControlResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeRegions请求参数结构体
+ * @class
+ */
+class DescribeRegionsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 地域整型ID，目前黑石可用地域包括：8-北京，4-上海，1-广州， 19-重庆
+         * @type {number || null}
+         */
+        this.RegionId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RegionId = 'RegionId' in params ? params.RegionId : null;
+
+    }
+}
+
+/**
  * DescribePsaRegulations请求参数结构体
  * @class
  */
@@ -3154,6 +3345,181 @@ class DescribeDevicePartitionRequest extends  AbstractModel {
             return;
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+    }
+}
+
+/**
+ * 维护平台维修任务信息
+ * @class
+ */
+class TaskInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 任务id
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * 主机id
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 主机别名
+         * @type {string || null}
+         */
+        this.Alias = null;
+
+        /**
+         * 故障类型id
+         * @type {number || null}
+         */
+        this.TaskTypeId = null;
+
+        /**
+         * 任务状态id
+         * @type {number || null}
+         */
+        this.TaskStatus = null;
+
+        /**
+         * 创建时间
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * 授权时间
+         * @type {string || null}
+         */
+        this.AuthTime = null;
+
+        /**
+         * 结束时间
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * 任务详情
+         * @type {string || null}
+         */
+        this.TaskDetail = null;
+
+        /**
+         * 设备状态
+         * @type {number || null}
+         */
+        this.DeviceStatus = null;
+
+        /**
+         * 设备操作状态
+         * @type {number || null}
+         */
+        this.OperateStatus = null;
+
+        /**
+         * 可用区
+         * @type {string || null}
+         */
+        this.Zone = null;
+
+        /**
+         * 地域
+         * @type {string || null}
+         */
+        this.Region = null;
+
+        /**
+         * 所属网络
+         * @type {string || null}
+         */
+        this.VpcId = null;
+
+        /**
+         * 所在子网
+         * @type {string || null}
+         */
+        this.SubnetId = null;
+
+        /**
+         * 子网名
+         * @type {string || null}
+         */
+        this.SubnetName = null;
+
+        /**
+         * VPC名
+         * @type {string || null}
+         */
+        this.VpcName = null;
+
+        /**
+         * VpcCidrBlock
+         * @type {string || null}
+         */
+        this.VpcCidrBlock = null;
+
+        /**
+         * SubnetCidrBlock
+         * @type {string || null}
+         */
+        this.SubnetCidrBlock = null;
+
+        /**
+         * 公网ip
+         * @type {string || null}
+         */
+        this.WanIp = null;
+
+        /**
+         * 内网IP
+         * @type {string || null}
+         */
+        this.LanIp = null;
+
+        /**
+         * 管理IP
+         * @type {string || null}
+         */
+        this.MgtIp = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Alias = 'Alias' in params ? params.Alias : null;
+        this.TaskTypeId = 'TaskTypeId' in params ? params.TaskTypeId : null;
+        this.TaskStatus = 'TaskStatus' in params ? params.TaskStatus : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.AuthTime = 'AuthTime' in params ? params.AuthTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.TaskDetail = 'TaskDetail' in params ? params.TaskDetail : null;
+        this.DeviceStatus = 'DeviceStatus' in params ? params.DeviceStatus : null;
+        this.OperateStatus = 'OperateStatus' in params ? params.OperateStatus : null;
+        this.Zone = 'Zone' in params ? params.Zone : null;
+        this.Region = 'Region' in params ? params.Region : null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
+        this.SubnetName = 'SubnetName' in params ? params.SubnetName : null;
+        this.VpcName = 'VpcName' in params ? params.VpcName : null;
+        this.VpcCidrBlock = 'VpcCidrBlock' in params ? params.VpcCidrBlock : null;
+        this.SubnetCidrBlock = 'SubnetCidrBlock' in params ? params.SubnetCidrBlock : null;
+        this.WanIp = 'WanIp' in params ? params.WanIp : null;
+        this.LanIp = 'LanIp' in params ? params.LanIp : null;
+        this.MgtIp = 'MgtIp' in params ? params.MgtIp : null;
 
     }
 }
@@ -3546,7 +3912,7 @@ class SetOutBandVpnAuthPasswordRequest extends  AbstractModel {
         this.Password = null;
 
         /**
-         * 操作字段，取值为：create（创建）或update（修改）
+         * 操作字段，取值为：Create（创建）或Update（修改）
          * @type {string || null}
          */
         this.Operate = null;
@@ -3590,6 +3956,174 @@ class OfflineDevicesRequest extends  AbstractModel {
             return;
         }
         this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
+
+    }
+}
+
+/**
+ * 设备硬件配置信息
+ * @class
+ */
+class DeviceHardwareInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 设备实例 ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 是否自定义机型
+         * @type {number || null}
+         */
+        this.IsElastic = null;
+
+        /**
+         * 机型计费模式，1 为预付费，2 为后付费
+         * @type {number || null}
+         */
+        this.CpmPayMode = null;
+
+        /**
+         * 自定义机型，CPU 型号 ID（非自定义机型返回0）
+         * @type {number || null}
+         */
+        this.CpuId = null;
+
+        /**
+         * 自定义机型，内存大小, 单位 GB（非自定义机型返回0）
+         * @type {number || null}
+         */
+        this.Mem = null;
+
+        /**
+         * 是否有 RAID 卡，0：没有 RAID 卡； 1：有 RAID 卡
+         * @type {number || null}
+         */
+        this.ContainRaidCard = null;
+
+        /**
+         * 自定义机型系统盘类型ID（若没有则返回0）
+         * @type {number || null}
+         */
+        this.SystemDiskTypeId = null;
+
+        /**
+         * 自定义机型系统盘数量（若没有则返回0）
+         * @type {number || null}
+         */
+        this.SystemDiskCount = null;
+
+        /**
+         * 自定义机型数据盘类型 ID（若没有则返回0）
+         * @type {number || null}
+         */
+        this.DataDiskTypeId = null;
+
+        /**
+         * 自定义机型数据盘数量（若没有则返回0）
+         * @type {number || null}
+         */
+        this.DataDiskCount = null;
+
+        /**
+         * CPU 型号描述
+         * @type {string || null}
+         */
+        this.CpuDescription = null;
+
+        /**
+         * 内存描述
+         * @type {string || null}
+         */
+        this.MemDescription = null;
+
+        /**
+         * 磁盘描述
+         * @type {string || null}
+         */
+        this.DiskDescription = null;
+
+        /**
+         * 网卡描述
+         * @type {string || null}
+         */
+        this.NicDescription = null;
+
+        /**
+         * 是否支持 RAID 的描述
+         * @type {string || null}
+         */
+        this.RaidDescription = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.IsElastic = 'IsElastic' in params ? params.IsElastic : null;
+        this.CpmPayMode = 'CpmPayMode' in params ? params.CpmPayMode : null;
+        this.CpuId = 'CpuId' in params ? params.CpuId : null;
+        this.Mem = 'Mem' in params ? params.Mem : null;
+        this.ContainRaidCard = 'ContainRaidCard' in params ? params.ContainRaidCard : null;
+        this.SystemDiskTypeId = 'SystemDiskTypeId' in params ? params.SystemDiskTypeId : null;
+        this.SystemDiskCount = 'SystemDiskCount' in params ? params.SystemDiskCount : null;
+        this.DataDiskTypeId = 'DataDiskTypeId' in params ? params.DataDiskTypeId : null;
+        this.DataDiskCount = 'DataDiskCount' in params ? params.DataDiskCount : null;
+        this.CpuDescription = 'CpuDescription' in params ? params.CpuDescription : null;
+        this.MemDescription = 'MemDescription' in params ? params.MemDescription : null;
+        this.DiskDescription = 'DiskDescription' in params ? params.DiskDescription : null;
+        this.NicDescription = 'NicDescription' in params ? params.NicDescription : null;
+        this.RaidDescription = 'RaidDescription' in params ? params.RaidDescription : null;
+
+    }
+}
+
+/**
+ * 自定义机型磁盘的描述
+ * @class
+ */
+class DiskInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 磁盘ID
+         * @type {number || null}
+         */
+        this.DiskTypeId = null;
+
+        /**
+         * 磁盘的容量，单位为G
+         * @type {number || null}
+         */
+        this.Size = null;
+
+        /**
+         * 磁盘信息描述
+         * @type {string || null}
+         */
+        this.DiskDescription = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DiskTypeId = 'DiskTypeId' in params ? params.DiskTypeId : null;
+        this.Size = 'Size' in params ? params.Size : null;
+        this.DiskDescription = 'DiskDescription' in params ? params.DiskDescription : null;
 
     }
 }
@@ -4539,6 +5073,41 @@ class DeviceClassPartitionInfo extends  AbstractModel {
 }
 
 /**
+ * RecoverDevices返回参数结构体
+ * @class
+ */
+class RecoverDevicesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 黑石异步任务ID
+         * @type {number || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * ModifyDeviceAliases返回参数结构体
  * @class
  */
@@ -4660,6 +5229,63 @@ class ModifyCustomImageAttributeResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 地域信息
+ * @class
+ */
+class RegionInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 地域ID
+         * @type {string || null}
+         */
+        this.Region = null;
+
+        /**
+         * 地域整型ID
+         * @type {number || null}
+         */
+        this.RegionId = null;
+
+        /**
+         * 地域描述
+         * @type {string || null}
+         */
+        this.RegionDescription = null;
+
+        /**
+         * 该地域下的可用区信息
+         * @type {Array.<ZoneInfo> || null}
+         */
+        this.ZoneInfoSet = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Region = 'Region' in params ? params.Region : null;
+        this.RegionId = 'RegionId' in params ? params.RegionId : null;
+        this.RegionDescription = 'RegionDescription' in params ? params.RegionDescription : null;
+
+        if (params.ZoneInfoSet) {
+            this.ZoneInfoSet = new Array();
+            for (let z in params.ZoneInfoSet) {
+                let obj = new ZoneInfo();
+                obj.deserialize(params.ZoneInfoSet[z]);
+                this.ZoneInfoSet.push(obj);
+            }
+        }
 
     }
 }
@@ -4980,6 +5606,41 @@ class CreateUserCmdRequest extends  AbstractModel {
 }
 
 /**
+ * ReturnDevices返回参数结构体
+ * @class
+ */
+class ReturnDevicesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 黑石异步任务ID
+         * @type {number || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * BindPsaTag返回参数结构体
  * @class
  */
@@ -5001,6 +5662,49 @@ class BindPsaTagResponse extends  AbstractModel {
     deserialize(params) {
         if (!params) {
             return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeHostedDeviceOutBandInfo返回参数结构体
+ * @class
+ */
+class DescribeHostedDeviceOutBandInfoResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 托管设备带外信息
+         * @type {Array.<HostedDeviceOutBandInfo> || null}
+         */
+        this.HostedDeviceOutBandInfoSet = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.HostedDeviceOutBandInfoSet) {
+            this.HostedDeviceOutBandInfoSet = new Array();
+            for (let z in params.HostedDeviceOutBandInfoSet) {
+                let obj = new HostedDeviceOutBandInfo();
+                obj.deserialize(params.HostedDeviceOutBandInfoSet[z]);
+                this.HostedDeviceOutBandInfoSet.push(obj);
+            }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -5366,6 +6070,71 @@ class DescribeDevicesRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeHardwareSpecification返回参数结构体
+ * @class
+ */
+class DescribeHardwareSpecificationResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * CPU型号列表
+         * @type {Array.<CpuInfo> || null}
+         */
+        this.CpuInfoSet = null;
+
+        /**
+         * 内存的取值，单位为G
+         * @type {Array.<number> || null}
+         */
+        this.MemSet = null;
+
+        /**
+         * 硬盘型号列表
+         * @type {Array.<DiskInfo> || null}
+         */
+        this.DiskInfoSet = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.CpuInfoSet) {
+            this.CpuInfoSet = new Array();
+            for (let z in params.CpuInfoSet) {
+                let obj = new CpuInfo();
+                obj.deserialize(params.CpuInfoSet[z]);
+                this.CpuInfoSet.push(obj);
+            }
+        }
+        this.MemSet = 'MemSet' in params ? params.MemSet : null;
+
+        if (params.DiskInfoSet) {
+            this.DiskInfoSet = new Array();
+            for (let z in params.DiskInfoSet) {
+                let obj = new DiskInfo();
+                obj.deserialize(params.DiskInfoSet[z]);
+                this.DiskInfoSet.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * CreatePsaRegulation返回参数结构体
  * @class
  */
@@ -5439,6 +6208,119 @@ class DescribeCustomImageProcessResponse extends  AbstractModel {
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeDeviceHardwareInfo请求参数结构体
+ * @class
+ */
+class DescribeDeviceHardwareInfoRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 设备 ID 列表
+         * @type {Array.<string> || null}
+         */
+        this.InstanceIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
+
+    }
+}
+
+/**
+ * DescribeDeviceOperationLog返回参数结构体
+ * @class
+ */
+class DescribeDeviceOperationLogResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 操作日志列表
+         * @type {Array.<DeviceOperationLog> || null}
+         */
+        this.DeviceOperationLogSet = null;
+
+        /**
+         * 返回数目
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.DeviceOperationLogSet) {
+            this.DeviceOperationLogSet = new Array();
+            for (let z in params.DeviceOperationLogSet) {
+                let obj = new DeviceOperationLog();
+                obj.deserialize(params.DeviceOperationLogSet[z]);
+                this.DeviceOperationLogSet.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * RepairTaskControl请求参数结构体
+ * @class
+ */
+class RepairTaskControlRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 维修任务ID
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * 操作
+         * @type {string || null}
+         */
+        this.Operate = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.Operate = 'Operate' in params ? params.Operate : null;
 
     }
 }
@@ -5537,91 +6419,6 @@ class DevicePositionInfo extends  AbstractModel {
         this.SwitchName = 'SwitchName' in params ? params.SwitchName : null;
         this.DeliverTime = 'DeliverTime' in params ? params.DeliverTime : null;
         this.Deadline = 'Deadline' in params ? params.Deadline : null;
-
-    }
-}
-
-/**
- * DescribeDeviceOperationLog返回参数结构体
- * @class
- */
-class DescribeDeviceOperationLogResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 操作日志列表
-         * @type {Array.<DeviceOperationLog> || null}
-         */
-        this.DeviceOperationLogSet = null;
-
-        /**
-         * 返回数目
-         * @type {number || null}
-         */
-        this.TotalCount = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-        if (params.DeviceOperationLogSet) {
-            this.DeviceOperationLogSet = new Array();
-            for (let z in params.DeviceOperationLogSet) {
-                let obj = new DeviceOperationLog();
-                obj.deserialize(params.DeviceOperationLogSet[z]);
-                this.DeviceOperationLogSet.push(obj);
-            }
-        }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * RepairTaskControl请求参数结构体
- * @class
- */
-class RepairTaskControlRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 维修任务ID
-         * @type {string || null}
-         */
-        this.TaskId = null;
-
-        /**
-         * 操作
-         * @type {string || null}
-         */
-        this.Operate = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.TaskId = 'TaskId' in params ? params.TaskId : null;
-        this.Operate = 'Operate' in params ? params.Operate : null;
 
     }
 }
@@ -5967,20 +6764,27 @@ module.exports = {
     DescribeRepairTaskConstantRequest: DescribeRepairTaskConstantRequest,
     DeletePsaRegulationRequest: DeletePsaRegulationRequest,
     DescribeCustomImageProcessRequest: DescribeCustomImageProcessRequest,
+    CpuInfo: CpuInfo,
     CustomImage: CustomImage,
     ModifyDeviceAutoRenewFlagRequest: ModifyDeviceAutoRenewFlagRequest,
     BindPsaTagRequest: BindPsaTagRequest,
+    DescribeRegionsResponse: DescribeRegionsResponse,
     DevicePartition: DevicePartition,
     OfflineDevicesResponse: OfflineDevicesResponse,
     ModifyPsaRegulationRequest: ModifyPsaRegulationRequest,
+    RecoverDevicesRequest: RecoverDevicesRequest,
     DescribeDeviceClassPartitionRequest: DescribeDeviceClassPartitionRequest,
+    ZoneInfo: ZoneInfo,
     CreateSpotDeviceResponse: CreateSpotDeviceResponse,
     BuyDevicesRequest: BuyDevicesRequest,
+    DescribeHardwareSpecificationRequest: DescribeHardwareSpecificationRequest,
     Tag: Tag,
     CreateCustomImageResponse: CreateCustomImageResponse,
-    TaskInfo: TaskInfo,
+    HostedDeviceOutBandInfo: HostedDeviceOutBandInfo,
+    ReturnDevicesRequest: ReturnDevicesRequest,
     PsaRegulation: PsaRegulation,
     DescribeDevicePartitionResponse: DescribeDevicePartitionResponse,
+    DescribeHostedDeviceOutBandInfoRequest: DescribeHostedDeviceOutBandInfoRequest,
     RebootDevicesResponse: RebootDevicesResponse,
     ResetDevicePasswordRequest: ResetDevicePasswordRequest,
     SubtaskStatus: SubtaskStatus,
@@ -5996,16 +6800,19 @@ module.exports = {
     DeleteUserCmdsRequest: DeleteUserCmdsRequest,
     DeviceDiskSizeInfo: DeviceDiskSizeInfo,
     DescribeDeviceClassResponse: DescribeDeviceClassResponse,
+    DescribeDeviceHardwareInfoResponse: DescribeDeviceHardwareInfoResponse,
     ModifyUserCmdRequest: ModifyUserCmdRequest,
     DescribeDevicePriceInfoResponse: DescribeDevicePriceInfoResponse,
     RunUserCmdResponse: RunUserCmdResponse,
     DescribeUserCmdsRequest: DescribeUserCmdsRequest,
     DescribeTaskInfoRequest: DescribeTaskInfoRequest,
     RepairTaskControlResponse: RepairTaskControlResponse,
+    DescribeRegionsRequest: DescribeRegionsRequest,
     DescribePsaRegulationsRequest: DescribePsaRegulationsRequest,
     UnbindPsaTagResponse: UnbindPsaTagResponse,
     DescribeDevicePriceInfoRequest: DescribeDevicePriceInfoRequest,
     DescribeDevicePartitionRequest: DescribeDevicePartitionRequest,
+    TaskInfo: TaskInfo,
     ModifyPsaRegulationResponse: ModifyPsaRegulationResponse,
     UserCmdTask: UserCmdTask,
     TaskOperationLog: TaskOperationLog,
@@ -6017,6 +6824,8 @@ module.exports = {
     SuccessTaskInfo: SuccessTaskInfo,
     SetOutBandVpnAuthPasswordRequest: SetOutBandVpnAuthPasswordRequest,
     OfflineDevicesRequest: OfflineDevicesRequest,
+    DeviceHardwareInfo: DeviceHardwareInfo,
+    DiskInfo: DiskInfo,
     SetOutBandVpnAuthPasswordResponse: SetOutBandVpnAuthPasswordResponse,
     DescribeTaskInfoResponse: DescribeTaskInfoResponse,
     DescribeUserCmdTaskInfoRequest: DescribeUserCmdTaskInfoRequest,
@@ -6038,25 +6847,31 @@ module.exports = {
     DescribeDeviceOperationLogRequest: DescribeDeviceOperationLogRequest,
     DescribeOperationResultRequest: DescribeOperationResultRequest,
     DeviceClassPartitionInfo: DeviceClassPartitionInfo,
+    RecoverDevicesResponse: RecoverDevicesResponse,
     ModifyDeviceAliasesResponse: ModifyDeviceAliasesResponse,
     ShutdownDevicesRequest: ShutdownDevicesRequest,
     UnbindPsaTagRequest: UnbindPsaTagRequest,
     ModifyCustomImageAttributeResponse: ModifyCustomImageAttributeResponse,
+    RegionInfo: RegionInfo,
     UserCmd: UserCmd,
     CustomImageProcess: CustomImageProcess,
     CreateSpotDeviceRequest: CreateSpotDeviceRequest,
     OsInfo: OsInfo,
     CreateUserCmdRequest: CreateUserCmdRequest,
+    ReturnDevicesResponse: ReturnDevicesResponse,
     BindPsaTagResponse: BindPsaTagResponse,
+    DescribeHostedDeviceOutBandInfoResponse: DescribeHostedDeviceOutBandInfoResponse,
     DevicePriceInfo: DevicePriceInfo,
     RebootDevicesRequest: RebootDevicesRequest,
     DeleteCustomImagesResponse: DeleteCustomImagesResponse,
     DescribeDevicesRequest: DescribeDevicesRequest,
+    DescribeHardwareSpecificationResponse: DescribeHardwareSpecificationResponse,
     CreatePsaRegulationResponse: CreatePsaRegulationResponse,
     DescribeCustomImageProcessResponse: DescribeCustomImageProcessResponse,
-    DevicePositionInfo: DevicePositionInfo,
+    DescribeDeviceHardwareInfoRequest: DescribeDeviceHardwareInfoRequest,
     DescribeDeviceOperationLogResponse: DescribeDeviceOperationLogResponse,
     RepairTaskControlRequest: RepairTaskControlRequest,
+    DevicePositionInfo: DevicePositionInfo,
     DeviceInfo: DeviceInfo,
     ResetDevicePasswordResponse: ResetDevicePasswordResponse,
     DescribeUserCmdTasksRequest: DescribeUserCmdTasksRequest,
