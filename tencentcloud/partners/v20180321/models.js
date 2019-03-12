@@ -155,6 +155,18 @@ class DescribeAgentAuditedClientsRequest extends  AbstractModel {
          */
         this.Limit = null;
 
+        /**
+         * 客户类型：可以为new(新拓)/assign(指定)/old(存量)/空
+         * @type {string || null}
+         */
+        this.ClientType = null;
+
+        /**
+         * 项目类型：可以为self(自拓项目)/platform(合作项目)/repeat(复算项目  )/空
+         * @type {string || null}
+         */
+        this.ProjectType = null;
+
     }
 
     /**
@@ -173,6 +185,8 @@ class DescribeAgentAuditedClientsRequest extends  AbstractModel {
         this.ClientRemark = 'ClientRemark' in params ? params.ClientRemark : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
+        this.ClientType = 'ClientType' in params ? params.ClientType : null;
+        this.ProjectType = 'ProjectType' in params ? params.ProjectType : null;
 
     }
 }
@@ -779,6 +793,18 @@ class AgentAuditedClient extends  AbstractModel {
          */
         this.HasOverdueBill = null;
 
+        /**
+         * 客户类型：可以为new(新拓)/assign(指定)/old(存量)/空
+         * @type {string || null}
+         */
+        this.ClientType = null;
+
+        /**
+         * 项目类型：可以为self(自拓项目)/platform(合作项目)/repeat(复算项目  )/空
+         * @type {string || null}
+         */
+        this.ProjectType = null;
+
     }
 
     /**
@@ -799,6 +825,8 @@ class AgentAuditedClient extends  AbstractModel {
         this.LastMonthAmt = 'LastMonthAmt' in params ? params.LastMonthAmt : null;
         this.ThisMonthAmt = 'ThisMonthAmt' in params ? params.ThisMonthAmt : null;
         this.HasOverdueBill = 'HasOverdueBill' in params ? params.HasOverdueBill : null;
+        this.ClientType = 'ClientType' in params ? params.ClientType : null;
+        this.ProjectType = 'ProjectType' in params ? params.ProjectType : null;
 
     }
 }
