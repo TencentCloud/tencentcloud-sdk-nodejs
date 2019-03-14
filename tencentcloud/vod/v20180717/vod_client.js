@@ -16,13 +16,15 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
+const ModifyWatermarkTemplateRequest = models.ModifyWatermarkTemplateRequest;
 const TranscodePlayInfo2017 = models.TranscodePlayInfo2017;
 const DescribeAllClassRequest = models.DescribeAllClassRequest;
+const AiAnalysisTaskInput = models.AiAnalysisTaskInput;
 const AnimatedGraphicTaskInput = models.AnimatedGraphicTaskInput;
 const DescribeTaskDetailResponse = models.DescribeTaskDetailResponse;
 const MediaKeyFrameDescInfo = models.MediaKeyFrameDescInfo;
 const AiAnalysisTaskClassificationInput = models.AiAnalysisTaskClassificationInput;
-const MediaSampleSnapshotItem = models.MediaSampleSnapshotItem;
+const CreateTranscodeTemplateRequest = models.CreateTranscodeTemplateRequest;
 const CreateClassRequest = models.CreateClassRequest;
 const ClipTask2017 = models.ClipTask2017;
 const MediaSnapshotByTimeOffsetInfo = models.MediaSnapshotByTimeOffsetInfo;
@@ -30,6 +32,7 @@ const MediaKeyFrameDescItem = models.MediaKeyFrameDescItem;
 const LiveRealTimeClipRequest = models.LiveRealTimeClipRequest;
 const ConfirmEventsRequest = models.ConfirmEventsRequest;
 const DescribeTasksResponse = models.DescribeTasksResponse;
+const CreateWatermarkTemplateResponse = models.CreateWatermarkTemplateResponse;
 const AiReviewTerrorismTaskOutput = models.AiReviewTerrorismTaskOutput;
 const AiReviewPoliticalTaskOutput = models.AiReviewPoliticalTaskOutput;
 const AiReviewTaskPoliticalResult = models.AiReviewTaskPoliticalResult;
@@ -40,49 +43,57 @@ const AiAnalysisResult = models.AiAnalysisResult;
 const ConcatFileInfo2017 = models.ConcatFileInfo2017;
 const MediaProcessTaskImageSpriteResult = models.MediaProcessTaskImageSpriteResult;
 const MediaTranscodeInfo = models.MediaTranscodeInfo;
-const CreateImageSpriteTask2017 = models.CreateImageSpriteTask2017;
+const ImageWatermarkTemplate = models.ImageWatermarkTemplate;
 const DescribeMediaInfosResponse = models.DescribeMediaInfosResponse;
 const TempCertificate = models.TempCertificate;
 const DescribeTasksRequest = models.DescribeTasksRequest;
-const AiAnalysisTaskTagInput = models.AiAnalysisTaskTagInput;
+const CreateTranscodeTemplateResponse = models.CreateTranscodeTemplateResponse;
 const MediaContentReviewOcrTextSegmentItem = models.MediaContentReviewOcrTextSegmentItem;
 const AiReviewTaskPoliticalOcrResult = models.AiReviewTaskPoliticalOcrResult;
 const PullEventsResponse = models.PullEventsResponse;
 const SnapshotByTimeOffset2017 = models.SnapshotByTimeOffset2017;
 const MediaProcessTaskInput = models.MediaProcessTaskInput;
 const AiReviewTerrorismTaskInput = models.AiReviewTerrorismTaskInput;
+const ImageWatermarkInput = models.ImageWatermarkInput;
 const MediaAudioStreamItem = models.MediaAudioStreamItem;
 const AiReviewTaskTerrorismResult = models.AiReviewTaskTerrorismResult;
 const ProcessMediaByUrlResponse = models.ProcessMediaByUrlResponse;
 const TranscodeTask2017 = models.TranscodeTask2017;
+const TranscodeTemplate = models.TranscodeTemplate;
 const MediaContentReviewAsrTextSegmentItem = models.MediaContentReviewAsrTextSegmentItem;
 const DescribeAllClassResponse = models.DescribeAllClassResponse;
 const MediaContentReviewPoliticalSegmentItem = models.MediaContentReviewPoliticalSegmentItem;
+const DeleteWatermarkTemplateRequest = models.DeleteWatermarkTemplateRequest;
 const MediaInputInfo = models.MediaInputInfo;
 const EditMediaStreamInfo = models.EditMediaStreamInfo;
 const LiveRealTimeClipResponse = models.LiveRealTimeClipResponse;
 const CommitUploadResponse = models.CommitUploadResponse;
 const AiReviewPoliticalTaskInput = models.AiReviewPoliticalTaskInput;
-const AiContentReviewTaskInput = models.AiContentReviewTaskInput;
-const AiAnalysisTaskInput = models.AiAnalysisTaskInput;
-const AiReviewTaskPornOcrResult = models.AiReviewTaskPornOcrResult;
 const AiAnalysisTaskCoverOutput = models.AiAnalysisTaskCoverOutput;
+const AiContentReviewTaskInput = models.AiContentReviewTaskInput;
+const AiReviewPornTaskInput = models.AiReviewPornTaskInput;
+const VideoTemplateInfo = models.VideoTemplateInfo;
+const AiAnalysisTaskClassificationOutput = models.AiAnalysisTaskClassificationOutput;
+const AiReviewTaskPornOcrResult = models.AiReviewTaskPornOcrResult;
+const DescribeWatermarkTemplatesRequest = models.DescribeWatermarkTemplatesRequest;
 const TaskSimpleInfo = models.TaskSimpleInfo;
 const MediaAiAnalysisClassificationItem = models.MediaAiAnalysisClassificationItem;
 const AiContentReviewResult = models.AiContentReviewResult;
 const ApplyUploadResponse = models.ApplyUploadResponse;
 const CoverBySnapshotTaskInput = models.CoverBySnapshotTaskInput;
 const DeleteClassRequest = models.DeleteClassRequest;
+const DescribeTranscodeTemplatesRequest = models.DescribeTranscodeTemplatesRequest;
 const AiReviewPornOcrTaskOutput = models.AiReviewPornOcrTaskOutput;
 const ApplyUploadRequest = models.ApplyUploadRequest;
+const ProcessMediaResponse = models.ProcessMediaResponse;
 const AiReviewPornOcrTaskInput = models.AiReviewPornOcrTaskInput;
-const MediaVideoStreamItem = models.MediaVideoStreamItem;
+const CreateImageSpriteTask2017 = models.CreateImageSpriteTask2017;
 const MediaSnapshotByTimeOffsetItem = models.MediaSnapshotByTimeOffsetItem;
 const MediaBasicInfo = models.MediaBasicInfo;
-const AiReviewPoliticalAsrTaskInput = models.AiReviewPoliticalAsrTaskInput;
+const AudioTemplateInfo = models.AudioTemplateInfo;
 const MediaAnimatedGraphicsItem = models.MediaAnimatedGraphicsItem;
 const SortBy = models.SortBy;
-const ModifyMediaInfoRequest = models.ModifyMediaInfoRequest;
+const DescribeWatermarkTemplatesResponse = models.DescribeWatermarkTemplatesResponse;
 const WatermarkInput = models.WatermarkInput;
 const AiReviewPornAsrTaskInput = models.AiReviewPornAsrTaskInput;
 const MediaProcessTaskAnimatedGraphicResult = models.MediaProcessTaskAnimatedGraphicResult;
@@ -92,20 +103,23 @@ const AiAnalysisTaskTagResult = models.AiAnalysisTaskTagResult;
 const SearchMediaResponse = models.SearchMediaResponse;
 const ConfirmEventsResponse = models.ConfirmEventsResponse;
 const AiAnalysisTaskTagOutput = models.AiAnalysisTaskTagOutput;
+const DeleteTranscodeTemplateResponse = models.DeleteTranscodeTemplateResponse;
 const EventContent = models.EventContent;
 const AiReviewTaskPoliticalAsrResult = models.AiReviewTaskPoliticalAsrResult;
 const MediaTranscodeItem = models.MediaTranscodeItem;
 const ProcessMediaRequest = models.ProcessMediaRequest;
 const MediaContentReviewSegmentItem = models.MediaContentReviewSegmentItem;
+const TextWatermarkTemplate = models.TextWatermarkTemplate;
 const PullEventsRequest = models.PullEventsRequest;
 const ModifyMediaInfoResponse = models.ModifyMediaInfoResponse;
 const AiReviewTaskPornResult = models.AiReviewTaskPornResult;
-const AiReviewPornTaskInput = models.AiReviewPornTaskInput;
+const AiAnalysisTaskTagInput = models.AiAnalysisTaskTagInput;
 const SearchMediaRequest = models.SearchMediaRequest;
 const CreateClassResponse = models.CreateClassResponse;
 const MediaClassInfo = models.MediaClassInfo;
 const MediaProcessTaskSnapshotByTimeOffsetResult = models.MediaProcessTaskSnapshotByTimeOffsetResult;
 const AiReviewTaskPornAsrResult = models.AiReviewTaskPornAsrResult;
+const DeleteClassResponse = models.DeleteClassResponse;
 const ModifyClassResponse = models.ModifyClassResponse;
 const EditMediaFileInfo = models.EditMediaFileInfo;
 const MediaAiAnalysisCoverItem = models.MediaAiAnalysisCoverItem;
@@ -121,13 +135,15 @@ const CommitUploadRequest = models.CommitUploadRequest;
 const MediaProcessTaskTranscodeResult = models.MediaProcessTaskTranscodeResult;
 const SnapshotByTimeOffsetTask2017 = models.SnapshotByTimeOffsetTask2017;
 const MediaSourceData = models.MediaSourceData;
-const AiAnalysisTaskClassificationOutput = models.AiAnalysisTaskClassificationOutput;
+const DescribeTranscodeTemplatesResponse = models.DescribeTranscodeTemplatesResponse;
 const SnapshotByTimeOffsetTaskInput = models.SnapshotByTimeOffsetTaskInput;
 const ImageSpriteTaskInput = models.ImageSpriteTaskInput;
 const DeleteMediaRequest = models.DeleteMediaRequest;
 const FileDeleteTask = models.FileDeleteTask;
 const MediaProcessTaskSampleSnapshotResult = models.MediaProcessTaskSampleSnapshotResult;
+const ModifyTranscodeTemplateRequest = models.ModifyTranscodeTemplateRequest;
 const EditMediaTaskInput = models.EditMediaTaskInput;
+const AiReviewPoliticalAsrTaskInput = models.AiReviewPoliticalAsrTaskInput;
 const SampleSnapshotTaskInput = models.SampleSnapshotTaskInput;
 const AiReviewPoliticalAsrTaskOutput = models.AiReviewPoliticalAsrTaskOutput;
 const ModifyClassRequest = models.ModifyClassRequest;
@@ -144,17 +160,24 @@ const DescribeTaskDetailRequest = models.DescribeTaskDetailRequest;
 const AiReviewPornTaskOutput = models.AiReviewPornTaskOutput;
 const PullFileTask = models.PullFileTask;
 const ProcessMediaByUrlRequest = models.ProcessMediaByUrlRequest;
+const MediaVideoStreamItem = models.MediaVideoStreamItem;
+const ModifyMediaInfoRequest = models.ModifyMediaInfoRequest;
 const MediaProcessTaskResult = models.MediaProcessTaskResult;
+const DeleteTranscodeTemplateRequest = models.DeleteTranscodeTemplateRequest;
 const MediaOutputInfo = models.MediaOutputInfo;
 const MediaAnimatedGraphicsInfo = models.MediaAnimatedGraphicsInfo;
 const MediaMetaData = models.MediaMetaData;
 const EditMediaTaskOutput = models.EditMediaTaskOutput;
 const MediaProcessTaskCoverBySnapshotResult = models.MediaProcessTaskCoverBySnapshotResult;
-const DeleteClassResponse = models.DeleteClassResponse;
+const CreateWatermarkTemplateRequest = models.CreateWatermarkTemplateRequest;
+const WatermarkTemplate = models.WatermarkTemplate;
+const DeleteWatermarkTemplateResponse = models.DeleteWatermarkTemplateResponse;
+const ModifyTranscodeTemplateResponse = models.ModifyTranscodeTemplateResponse;
 const MediaSampleSnapshotInfo = models.MediaSampleSnapshotInfo;
 const MediaInfo = models.MediaInfo;
 const AiReviewPornAsrTaskOutput = models.AiReviewPornAsrTaskOutput;
-const ProcessMediaResponse = models.ProcessMediaResponse;
+const ModifyWatermarkTemplateResponse = models.ModifyWatermarkTemplateResponse;
+const MediaSampleSnapshotItem = models.MediaSampleSnapshotItem;
 
 
 /**
@@ -167,6 +190,42 @@ class VodClient extends AbstractClient {
         super("vod.tencentcloudapi.com", "2018-07-17", credential, region, profile);
     }
     
+    /**
+     * * 开发者调用拉取事件通知，获取到事件后，必须调用该接口来确认消息已经收到；
+* 开发者获取到事件句柄后，等待确认的有效时间为 30 秒，超出 30 秒会报参数错误（4000）；
+* 更多参考[服务端事件通知](https://cloud.tencent.com/document/product/266/7829)。
+     * @param {ConfirmEventsRequest} req
+     * @param {function(string, ConfirmEventsResponse):void} cb
+     * @public
+     */
+    ConfirmEvents(req, cb) {
+        let resp = new ConfirmEventsResponse();
+        this.request("ConfirmEvents", req, resp, cb);
+    }
+
+    /**
+     * * 该接口用于申请媒体文件（和封面文件）的上传，获取文件上传到腾讯云点播的元信息（包括上传路径、上传签名等），用于后续上传接口。
+* 上传流程请参考[服务端上传综述](https://cloud.tencent.com/document/product/266/9759#.E4.B8.8A.E4.BC.A0.E6.B5.81.E7.A8.8B)。
+     * @param {ApplyUploadRequest} req
+     * @param {function(string, ApplyUploadResponse):void} cb
+     * @public
+     */
+    ApplyUpload(req, cb) {
+        let resp = new ApplyUploadResponse();
+        this.request("ApplyUpload", req, resp, cb);
+    }
+
+    /**
+     * 修改用户自定义转码模板信息。
+     * @param {ModifyTranscodeTemplateRequest} req
+     * @param {function(string, ModifyTranscodeTemplateResponse):void} cb
+     * @public
+     */
+    ModifyTranscodeTemplate(req, cb) {
+        let resp = new ModifyTranscodeTemplateResponse();
+        this.request("ModifyTranscodeTemplate", req, resp, cb);
+    }
+
     /**
      * 该接口用于确认媒体文件（和封面文件）上传到腾讯云点播的结果，并存储媒体信息，返回文件的播放地址和文件 ID。
      * @param {CommitUploadRequest} req
@@ -210,32 +269,6 @@ class VodClient extends AbstractClient {
     PullEvents(req, cb) {
         let resp = new PullEventsResponse();
         this.request("PullEvents", req, resp, cb);
-    }
-
-    /**
-     * * 该接口用于查询任务列表；
-* 当列表数据比较多时，单次接口调用无法拉取整个列表，可通过 ScrollToken 参数，分批拉取；
-* 只能查询到最近三天（72 小时）内的任务。
-     * @param {DescribeTasksRequest} req
-     * @param {function(string, DescribeTasksResponse):void} cb
-     * @public
-     */
-    DescribeTasks(req, cb) {
-        let resp = new DescribeTasksResponse();
-        this.request("DescribeTasks", req, resp, cb);
-    }
-
-    /**
-     * 对 HLS 视频进行按时间段裁剪。
-
-注意：裁剪出来的视频与原始视频共用 ts，仅生成新的 m3u8。原始视频删除后，该裁剪视频也会被删除。
-     * @param {SimpleHlsClipRequest} req
-     * @param {function(string, SimpleHlsClipResponse):void} cb
-     * @public
-     */
-    SimpleHlsClip(req, cb) {
-        let resp = new SimpleHlsClipResponse();
-        this.request("SimpleHlsClip", req, resp, cb);
     }
 
     /**
@@ -311,6 +344,50 @@ class VodClient extends AbstractClient {
     }
 
     /**
+     * 删除用户自定义水印模板。
+     * @param {DeleteWatermarkTemplateRequest} req
+     * @param {function(string, DeleteWatermarkTemplateResponse):void} cb
+     * @public
+     */
+    DeleteWatermarkTemplate(req, cb) {
+        let resp = new DeleteWatermarkTemplateResponse();
+        this.request("DeleteWatermarkTemplate", req, resp, cb);
+    }
+
+    /**
+     * 删除用户自定义转码模板。
+     * @param {DeleteTranscodeTemplateRequest} req
+     * @param {function(string, DeleteTranscodeTemplateResponse):void} cb
+     * @public
+     */
+    DeleteTranscodeTemplate(req, cb) {
+        let resp = new DeleteTranscodeTemplateResponse();
+        this.request("DeleteTranscodeTemplate", req, resp, cb);
+    }
+
+    /**
+     * 通过任务 ID 查询任务的执行状态和结果的详细信息（最多可以查询3天之内提交的任务）
+     * @param {DescribeTaskDetailRequest} req
+     * @param {function(string, DescribeTaskDetailResponse):void} cb
+     * @public
+     */
+    DescribeTaskDetail(req, cb) {
+        let resp = new DescribeTaskDetailResponse();
+        this.request("DescribeTaskDetail", req, resp, cb);
+    }
+
+    /**
+     * 修改用户自定义水印模板，水印类型不允许修改。
+     * @param {ModifyWatermarkTemplateRequest} req
+     * @param {function(string, ModifyWatermarkTemplateResponse):void} cb
+     * @public
+     */
+    ModifyWatermarkTemplate(req, cb) {
+        let resp = new ModifyWatermarkTemplateResponse();
+        this.request("ModifyWatermarkTemplate", req, resp, cb);
+    }
+
+    /**
      * 对点播中的音视频媒体发起处理任务，功能包括：
 1. 视频转码（带水印）；
 2. 视频转动图；
@@ -330,6 +407,30 @@ class VodClient extends AbstractClient {
     }
 
     /**
+     * 创建用户自定义水印模板，数量上限：1000。
+     * @param {CreateWatermarkTemplateRequest} req
+     * @param {function(string, CreateWatermarkTemplateResponse):void} cb
+     * @public
+     */
+    CreateWatermarkTemplate(req, cb) {
+        let resp = new CreateWatermarkTemplateResponse();
+        this.request("CreateWatermarkTemplate", req, resp, cb);
+    }
+
+    /**
+     * 对 HLS 视频进行按时间段裁剪。
+
+注意：裁剪出来的视频与原始视频共用 ts，仅生成新的 m3u8。原始视频删除后，该裁剪视频也会被删除。
+     * @param {SimpleHlsClipRequest} req
+     * @param {function(string, SimpleHlsClipResponse):void} cb
+     * @public
+     */
+    SimpleHlsClip(req, cb) {
+        let resp = new SimpleHlsClipResponse();
+        this.request("SimpleHlsClip", req, resp, cb);
+    }
+
+    /**
      * 修改媒体分类属性。
      * @param {ModifyClassRequest} req
      * @param {function(string, ModifyClassResponse):void} cb
@@ -341,14 +442,53 @@ class VodClient extends AbstractClient {
     }
 
     /**
-     * 通过任务 ID 查询任务的执行状态和结果的详细信息（最多可以查询3天之内提交的任务）
-     * @param {DescribeTaskDetailRequest} req
-     * @param {function(string, DescribeTaskDetailResponse):void} cb
+     * * 删除媒体及其对应的视频处理文件（如转码视频、雪碧图、截图、微信发布视频等）；
+* 可单独删除指定 ID 的视频文件下的转码，或者微信发布文件；
+     * @param {DeleteMediaRequest} req
+     * @param {function(string, DeleteMediaResponse):void} cb
      * @public
      */
-    DescribeTaskDetail(req, cb) {
-        let resp = new DescribeTaskDetailResponse();
-        this.request("DescribeTaskDetail", req, resp, cb);
+    DeleteMedia(req, cb) {
+        let resp = new DeleteMediaResponse();
+        this.request("DeleteMedia", req, resp, cb);
+    }
+
+    /**
+     * * 该接口用于查询任务列表；
+* 当列表数据比较多时，单次接口调用无法拉取整个列表，可通过 ScrollToken 参数，分批拉取；
+* 只能查询到最近三天（72 小时）内的任务。
+     * @param {DescribeTasksRequest} req
+     * @param {function(string, DescribeTasksResponse):void} cb
+     * @public
+     */
+    DescribeTasks(req, cb) {
+        let resp = new DescribeTasksResponse();
+        this.request("DescribeTasks", req, resp, cb);
+    }
+
+    /**
+     * * 用于对媒体进行分类管理；
+* 该接口不影响既有媒体的分类，如需修改媒体分类，请调用[修改媒体文件属性](/document/product/266/31762)接口。
+* 分类层次不可超过 4 层。
+* 每个分类的子类数量不可超过 500 个。
+     * @param {CreateClassRequest} req
+     * @param {function(string, CreateClassResponse):void} cb
+     * @public
+     */
+    CreateClass(req, cb) {
+        let resp = new CreateClassResponse();
+        this.request("CreateClass", req, resp, cb);
+    }
+
+    /**
+     * 创建用户自定义转码模板，数量上限：1000。
+     * @param {CreateTranscodeTemplateRequest} req
+     * @param {function(string, CreateTranscodeTemplateResponse):void} cb
+     * @public
+     */
+    CreateTranscodeTemplate(req, cb) {
+        let resp = new CreateTranscodeTemplateResponse();
+        this.request("CreateTranscodeTemplate", req, resp, cb);
     }
 
     /**
@@ -375,19 +515,6 @@ class VodClient extends AbstractClient {
     }
 
     /**
-     * * 开发者调用拉取事件通知，获取到事件后，必须调用该接口来确认消息已经收到；
-* 开发者获取到事件句柄后，等待确认的有效时间为 30 秒，超出 30 秒会报参数错误（4000）；
-* 更多参考[服务端事件通知](https://cloud.tencent.com/document/product/266/7829)。
-     * @param {ConfirmEventsRequest} req
-     * @param {function(string, ConfirmEventsResponse):void} cb
-     * @public
-     */
-    ConfirmEvents(req, cb) {
-        let resp = new ConfirmEventsResponse();
-        this.request("ConfirmEvents", req, resp, cb);
-    }
-
-    /**
      * * 获得用户的所有分类信息。
      * @param {DescribeAllClassRequest} req
      * @param {function(string, DescribeAllClassResponse):void} cb
@@ -399,41 +526,25 @@ class VodClient extends AbstractClient {
     }
 
     /**
-     * * 删除媒体及其对应的视频处理文件（如转码视频、雪碧图、截图、微信发布视频等）；
-* 可单独删除指定 ID 的视频文件下的转码，或者微信发布文件；
-     * @param {DeleteMediaRequest} req
-     * @param {function(string, DeleteMediaResponse):void} cb
+     * 查询用户自定义水印模板，支持根据条件，分页查询。
+     * @param {DescribeWatermarkTemplatesRequest} req
+     * @param {function(string, DescribeWatermarkTemplatesResponse):void} cb
      * @public
      */
-    DeleteMedia(req, cb) {
-        let resp = new DeleteMediaResponse();
-        this.request("DeleteMedia", req, resp, cb);
+    DescribeWatermarkTemplates(req, cb) {
+        let resp = new DescribeWatermarkTemplatesResponse();
+        this.request("DescribeWatermarkTemplates", req, resp, cb);
     }
 
     /**
-     * * 该接口用于申请媒体文件（和封面文件）的上传，获取文件上传到腾讯云点播的元信息（包括上传路径、上传签名等），用于后续上传接口。
-* 上传流程请参考[服务端上传综述](https://cloud.tencent.com/document/product/266/9759#.E4.B8.8A.E4.BC.A0.E6.B5.81.E7.A8.8B)。
-     * @param {ApplyUploadRequest} req
-     * @param {function(string, ApplyUploadResponse):void} cb
+     * 根据转码模板唯一标识，获取转码模板详情列表。返回结果包含符合条件的所有用户自定义模板及[系统预置转码模板](https://cloud.tencent.com/document/product/266/11701#.E9.A2.84.E7.BD.AE.E8.BD.AC.E7.A0.81.E6.A8.A1.E6.9D.BF)。
+     * @param {DescribeTranscodeTemplatesRequest} req
+     * @param {function(string, DescribeTranscodeTemplatesResponse):void} cb
      * @public
      */
-    ApplyUpload(req, cb) {
-        let resp = new ApplyUploadResponse();
-        this.request("ApplyUpload", req, resp, cb);
-    }
-
-    /**
-     * * 用于对媒体进行分类管理；
-* 该接口不影响既有媒体的分类，如需修改媒体分类，请调用[修改媒体文件属性](/document/product/266/31762)接口。
-* 分类层次不可超过 4 层。
-* 每个分类的子类数量不可超过 500 个。
-     * @param {CreateClassRequest} req
-     * @param {function(string, CreateClassResponse):void} cb
-     * @public
-     */
-    CreateClass(req, cb) {
-        let resp = new CreateClassResponse();
-        this.request("CreateClass", req, resp, cb);
+    DescribeTranscodeTemplates(req, cb) {
+        let resp = new DescribeTranscodeTemplatesResponse();
+        this.request("DescribeTranscodeTemplates", req, resp, cb);
     }
 
 

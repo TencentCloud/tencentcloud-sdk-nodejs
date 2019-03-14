@@ -128,6 +128,12 @@ class SpeechTranslateResponse extends  AbstractModel {
         this.Target = null;
 
         /**
+         * 当请求的Mode参数填写bvad是，启动VadSeq。此时Seq会被设置为后台vad（静音检测）后的新序号，而VadSeq代表客户端原始Seq值
+         * @type {number || null}
+         */
+        this.VadSeq = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -149,6 +155,7 @@ class SpeechTranslateResponse extends  AbstractModel {
         this.Seq = 'Seq' in params ? params.Seq : null;
         this.Source = 'Source' in params ? params.Source : null;
         this.Target = 'Target' in params ? params.Target : null;
+        this.VadSeq = 'VadSeq' in params ? params.VadSeq : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -429,6 +436,12 @@ class SpeechTranslateRequest extends  AbstractModel {
          */
         this.ProjectId = null;
 
+        /**
+         * 识别模式，不填则由调用放进行vad(静音检测)，填bvad则由服务放进行vad，前者适合段语音翻译（收到所有语音分片后翻译），后者适合长语音翻译（在完成一个断句识别后就会返回部分结果）
+         * @type {string || null}
+         */
+        this.Mode = null;
+
     }
 
     /**
@@ -446,6 +459,7 @@ class SpeechTranslateRequest extends  AbstractModel {
         this.IsEnd = 'IsEnd' in params ? params.IsEnd : null;
         this.Data = 'Data' in params ? params.Data : null;
         this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+        this.Mode = 'Mode' in params ? params.Mode : null;
 
     }
 }
@@ -471,7 +485,7 @@ class ImageTranslateRequest extends  AbstractModel {
         this.Scene = null;
 
         /**
-         * 图片数据的Base64字符串
+         * 图片数据的Base64字符串，图片大小上限为4M，建议对源图片进行一定程度压缩
          * @type {string || null}
          */
         this.Data = null;

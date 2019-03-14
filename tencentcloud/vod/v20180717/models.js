@@ -17,6 +17,109 @@
 const AbstractModel = require("../../common/abstract_model");
 
 /**
+ * ModifyWatermarkTemplate请求参数结构体
+ * @class
+ */
+class ModifyWatermarkTemplateRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 水印模板唯一标识。
+         * @type {number || null}
+         */
+        this.Definition = null;
+
+        /**
+         * 水印模板名称，长度限制：64 个字符。
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 模板描述信息，长度限制：256 个字符。
+         * @type {string || null}
+         */
+        this.Comment = null;
+
+        /**
+         * 原点位置，可选值：
+<li>topLeft：表示坐标原点位于视频图像左上角，水印原点为图片或文字的左上角；</li>
+<li>topRight：表示坐标原点位于视频图像的右上角，水印原点为图片或文字的右上角；</li>
+<li>bottomLeft：表示坐标原点位于视频图像的左下角，水印原点为图片或文字的左下角；</li>
+<li>bottomRight：表示坐标原点位于视频图像的右下角，水印原点为图片或文字的右下角。</li>
+目前，当 Type 为 image，该字段仅支持 topLeft。
+         * @type {string || null}
+         */
+        this.CoordinateOrigin = null;
+
+        /**
+         * 水印原点距离视频图像坐标原点的水平位置。支持 %、px 两种格式：
+<li>当字符串以 % 结尾，表示水印 Left 为视频宽度指定百分比的位置，如 10% 表示 Left 为视频宽度的 10%；</li>
+<li>当字符串以 px 结尾，表示水印 Left 为视频宽度指定像素的位置，如 100px 表示 Left 为 100 像素。</li>
+         * @type {string || null}
+         */
+        this.XPos = null;
+
+        /**
+         * 水印原点距离视频图像坐标原点的垂直位置。支持 %、px 两种格式：
+<li>当字符串以 % 结尾，表示水印 Top 为视频高度指定百分比的位置，如 10% 表示 Top 为视频高度的 10%；</li>
+<li>当字符串以 px 结尾，表示水印 Top 为视频高度指定像素的位置，如 100px 表示 Top 为 100 像素。</li>
+         * @type {string || null}
+         */
+        this.YPos = null;
+
+        /**
+         * 图片水印模板，该字段仅对图片水印模板有效。
+         * @type {ImageWatermarkInput || null}
+         */
+        this.ImageTemplate = null;
+
+        /**
+         * 文字水印模板，该字段仅对文字水印模板有效。
+         * @type {TextWatermarkTemplate || null}
+         */
+        this.TextTemplate = null;
+
+        /**
+         * 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Definition = 'Definition' in params ? params.Definition : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Comment = 'Comment' in params ? params.Comment : null;
+        this.CoordinateOrigin = 'CoordinateOrigin' in params ? params.CoordinateOrigin : null;
+        this.XPos = 'XPos' in params ? params.XPos : null;
+        this.YPos = 'YPos' in params ? params.YPos : null;
+
+        if (params.ImageTemplate) {
+            let obj = new ImageWatermarkInput();
+            obj.deserialize(params.ImageTemplate)
+            this.ImageTemplate = obj;
+        }
+
+        if (params.TextTemplate) {
+            let obj = new TextWatermarkTemplate();
+            obj.deserialize(params.TextTemplate)
+            this.TextTemplate = obj;
+        }
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
+
+    }
+}
+
+/**
  * 视频转码播放信息（2017 版）
  * @class
  */
@@ -96,6 +199,34 @@ class DescribeAllClassRequest extends  AbstractModel {
             return;
         }
         this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
+
+    }
+}
+
+/**
+ * AI 视频智能分析输入参数类型
+ * @class
+ */
+class AiAnalysisTaskInput extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 视频内容分析模板 ID ，固定为 10，同时进行智能分类、智能标签分析、智能封面分析。
+         * @type {number || null}
+         */
+        this.Definition = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Definition = 'Definition' in params ? params.Definition : null;
 
     }
 }
@@ -387,51 +518,66 @@ class AiAnalysisTaskClassificationInput extends  AbstractModel {
 }
 
 /**
- * 采样截图信息
+ * CreateTranscodeTemplate请求参数结构体
  * @class
  */
-class MediaSampleSnapshotItem extends  AbstractModel {
+class CreateTranscodeTemplateRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 采样截图规格 ID，参见[采样截图参数模板](https://cloud.tencent.com/document/product/266/11702#.E9.87.87.E6.A0.B7.E6.88.AA.E5.9B.BE.E6.A8.A1.E6.9D.BF)。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.Definition = null;
-
-        /**
-         * 采样方式，取值范围：
-<li>Percent：根据百分比间隔采样。</li>
-<li>Time：根据时间间隔采样。</li>
-注意：此字段可能返回 null，表示取不到有效值。
+         * 封装格式，可选值：mp4、flv、hls、mp3、flac、ogg。其中，mp3、flac、ogg 为纯音频文件。
          * @type {string || null}
          */
-        this.SampleType = null;
+        this.Container = null;
 
         /**
-         * 采样间隔
-<li>当 SampleType 为 Percent 时，该值表示多少百分比一张图。</li>
-<li>当 SampleType 为 Time 时，该值表示多少时间间隔一张图，单位秒， 第一张图均为视频首帧。</li>
-注意：此字段可能返回 null，表示取不到有效值。
+         * 转码模板名称，长度限制：64 个字符。
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 模板描述信息，长度限制：256 个字符。
+         * @type {string || null}
+         */
+        this.Comment = null;
+
+        /**
+         * 是否去除视频数据，可选值：
+<li>0：保留</li>
+<li>1：去除</li>
+默认值：0。
          * @type {number || null}
          */
-        this.Interval = null;
+        this.RemoveVideo = null;
 
         /**
-         * 生成的截图 url 列表。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {Array.<string> || null}
+         * 是否去除音频数据，可选值：
+<li>0：保留</li>
+<li>1：去除</li>
+默认值：0。
+         * @type {number || null}
          */
-        this.ImageUrlSet = null;
+        this.RemoveAudio = null;
 
         /**
-         * 截图如果被打上了水印，被打水印的模板 ID 列表。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {Array.<number> || null}
+         * 视频流配置参数，当 RemoveVideo 为 0，该字段必填。
+         * @type {VideoTemplateInfo || null}
          */
-        this.WaterMarkDefinition = null;
+        this.VideoTemplate = null;
+
+        /**
+         * 音频流配置参数，当 RemoveAudio 为 0，该字段必填。
+         * @type {AudioTemplateInfo || null}
+         */
+        this.AudioTemplate = null;
+
+        /**
+         * 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
+         * @type {number || null}
+         */
+        this.SubAppId = null;
 
     }
 
@@ -442,11 +588,24 @@ class MediaSampleSnapshotItem extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Definition = 'Definition' in params ? params.Definition : null;
-        this.SampleType = 'SampleType' in params ? params.SampleType : null;
-        this.Interval = 'Interval' in params ? params.Interval : null;
-        this.ImageUrlSet = 'ImageUrlSet' in params ? params.ImageUrlSet : null;
-        this.WaterMarkDefinition = 'WaterMarkDefinition' in params ? params.WaterMarkDefinition : null;
+        this.Container = 'Container' in params ? params.Container : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Comment = 'Comment' in params ? params.Comment : null;
+        this.RemoveVideo = 'RemoveVideo' in params ? params.RemoveVideo : null;
+        this.RemoveAudio = 'RemoveAudio' in params ? params.RemoveAudio : null;
+
+        if (params.VideoTemplate) {
+            let obj = new VideoTemplateInfo();
+            obj.deserialize(params.VideoTemplate)
+            this.VideoTemplate = obj;
+        }
+
+        if (params.AudioTemplate) {
+            let obj = new AudioTemplateInfo();
+            obj.deserialize(params.AudioTemplate)
+            this.AudioTemplate = obj;
+        }
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
 
     }
 }
@@ -757,6 +916,49 @@ class DescribeTasksResponse extends  AbstractModel {
             }
         }
         this.ScrollToken = 'ScrollToken' in params ? params.ScrollToken : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CreateWatermarkTemplate返回参数结构体
+ * @class
+ */
+class CreateWatermarkTemplateResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 水印模板唯一标识。
+         * @type {number || null}
+         */
+        this.Definition = null;
+
+        /**
+         * 水印图片地址，仅当 Type 为 image，该字段有值。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ImageUrl = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Definition = 'Definition' in params ? params.Definition : null;
+        this.ImageUrl = 'ImageUrl' in params ? params.ImageUrl : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -1450,69 +1652,35 @@ class MediaTranscodeInfo extends  AbstractModel {
 }
 
 /**
- * 视频截取雪碧图任务，该结构仅用于对 2017 版[截取雪碧图](https://cloud.tencent.com/document/product/266/8101)接口发起的任务。
+ * 图片水印模板
  * @class
  */
-class CreateImageSpriteTask2017 extends  AbstractModel {
+class ImageWatermarkTemplate extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 截图雪碧图任务 ID。
+         * 水印图片地址。
          * @type {string || null}
          */
-        this.TaskId = null;
+        this.ImageUrl = null;
 
         /**
-         * 错误码
-<li>0：成功；</li>
-<li>其他值：失败。</li>
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.ErrCode = null;
-
-        /**
-         * 错误信息。
-注意：此字段可能返回 null，表示取不到有效值。
+         * 水印的宽度。支持 %、px 两种格式：
+<li>当字符串以 % 结尾，表示水印 Width 为视频宽度的百分比大小，如 10% 表示 Width 为视频宽度的 10%；</li>
+<li>当字符串以 px 结尾，表示水印 Width 单位为像素，如 100px 表示 Width 为 100 像素。</li>
          * @type {string || null}
          */
-        this.Message = null;
+        this.Width = null;
 
         /**
-         * 截取雪碧图文件 ID。
-注意：此字段可能返回 null，表示取不到有效值。
+         * 水印的高度。支持 %、px 两种格式：
+<li>当字符串以 % 结尾，表示水印 Height 为视频高度的百分比大小，如 10% 表示 Height 为视频高度的 10%；</li>
+<li>当字符串以 px 结尾，表示水印 Width 单位为像素，如 100px 表示 Width 为 100 像素；</li>
+0px：表示 Height 按照 Width 对视频宽度的比例缩放。
          * @type {string || null}
          */
-        this.FileId = null;
-
-        /**
-         * 雪碧图规格，参见[雪碧图截图模板](https://cloud.tencent.com/document/product/266/11702#.E9.9B.AA.E7.A2.A7.E5.9B.BE.E6.88.AA.E5.9B.BE.E6.A8.A1.E6.9D.BF)。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.Definition = null;
-
-        /**
-         * 雪碧图小图总数量。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.TotalCount = null;
-
-        /**
-         * 截取雪碧图输出的地址。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {Array.<string> || null}
-         */
-        this.ImageSpriteUrlSet = null;
-
-        /**
-         * 雪碧图子图位置与时间关系 WebVtt 文件地址。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.WebVttUrl = null;
+        this.Height = null;
 
     }
 
@@ -1523,14 +1691,9 @@ class CreateImageSpriteTask2017 extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TaskId = 'TaskId' in params ? params.TaskId : null;
-        this.ErrCode = 'ErrCode' in params ? params.ErrCode : null;
-        this.Message = 'Message' in params ? params.Message : null;
-        this.FileId = 'FileId' in params ? params.FileId : null;
-        this.Definition = 'Definition' in params ? params.Definition : null;
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
-        this.ImageSpriteUrlSet = 'ImageSpriteUrlSet' in params ? params.ImageSpriteUrlSet : null;
-        this.WebVttUrl = 'WebVttUrl' in params ? params.WebVttUrl : null;
+        this.ImageUrl = 'ImageUrl' in params ? params.ImageUrl : null;
+        this.Width = 'Width' in params ? params.Width : null;
+        this.Height = 'Height' in params ? params.Height : null;
 
     }
 }
@@ -1693,18 +1856,24 @@ class DescribeTasksRequest extends  AbstractModel {
 }
 
 /**
- * 智能标签任务输入类型
+ * CreateTranscodeTemplate返回参数结构体
  * @class
  */
-class AiAnalysisTaskTagInput extends  AbstractModel {
+class CreateTranscodeTemplateResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 视频智能分类模板 ID ，固定为 10 。
+         * 转码模板唯一标识。
          * @type {number || null}
          */
         this.Definition = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
 
     }
 
@@ -1716,6 +1885,7 @@ class AiAnalysisTaskTagInput extends  AbstractModel {
             return;
         }
         this.Definition = 'Definition' in params ? params.Definition : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2098,6 +2268,54 @@ class AiReviewTerrorismTaskInput extends  AbstractModel {
 }
 
 /**
+ * 图片水印模板输入参数
+ * @class
+ */
+class ImageWatermarkInput extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 水印图片 [Base64](https://tools.ietf.org/html/rfc4648) 编码后的字符串。支持 jpeg、png 图片格式。
+         * @type {string || null}
+         */
+        this.ImageContent = null;
+
+        /**
+         * 水印的宽度。支持 %、px 两种格式：
+<li>当字符串以 % 结尾，表示水印 Width 为视频宽度的百分比大小，如 10% 表示 Width 为视频宽度的 10%；</li>
+<li>当字符串以 px 结尾，表示水印 Width 单位为像素，如 100px 表示 Width 为 100 像素。</li>
+默认值：10%。
+         * @type {string || null}
+         */
+        this.Width = null;
+
+        /**
+         * 水印的高度。支持 %、px 两种格式：
+<li>当字符串以 % 结尾，表示水印 Height 为视频高度的百分比大小，如 10% 表示 Height 为视频高度的 10%；</li>
+<li>当字符串以 px 结尾，表示水印 Width 单位为像素，如 100px 表示 Width 为 100 像素。</li>
+默认值：0px，表示 Height 按照 Width 对视频宽度的比例缩放。
+         * @type {string || null}
+         */
+        this.Height = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ImageContent = 'ImageContent' in params ? params.ImageContent : null;
+        this.Width = 'Width' in params ? params.Width : null;
+        this.Height = 'Height' in params ? params.Height : null;
+
+    }
+}
+
+/**
  * 点播文件音频流信息
  * @class
  */
@@ -2341,6 +2559,133 @@ class TranscodeTask2017 extends  AbstractModel {
 }
 
 /**
+ * 转码模板详情
+ * @class
+ */
+class TranscodeTemplate extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 转码模板唯一标识。
+         * @type {string || null}
+         */
+        this.Definition = null;
+
+        /**
+         * 封装格式，取值：mp4、flv、hls、mp3、flac、ogg。
+         * @type {string || null}
+         */
+        this.Container = null;
+
+        /**
+         * 转码模板名称。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 模板描述信息。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Comment = null;
+
+        /**
+         * 模板类型，取值：
+<li>Preset：系统预置模板；</li>
+<li>Custom：用户自定义模板。</li>
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * 是否去除视频数据，取值：
+<li>0：保留；</li>
+<li>1：去除。</li>
+         * @type {number || null}
+         */
+        this.RemoveVideo = null;
+
+        /**
+         * 是否去除音频数据，取值：
+<li>0：保留；</li>
+<li>1：去除。</li>
+         * @type {number || null}
+         */
+        this.RemoveAudio = null;
+
+        /**
+         * 视频流配置参数，仅当 RemoveVideo 为 0，该字段有效。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {VideoTemplateInfo || null}
+         */
+        this.VideoTemplate = null;
+
+        /**
+         * 音频流配置参数，仅当 RemoveAudio 为 0，该字段有效 。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {AudioTemplateInfo || null}
+         */
+        this.AudioTemplate = null;
+
+        /**
+         * 封装格式过滤条件，可选值：
+<li>Video：视频格式，可以同时包含视频流和音频流的封装格式；</li>
+<li>PureAudio：纯音频格式，只能包含音频流的封装格式板。</li>
+         * @type {string || null}
+         */
+        this.ContainerType = null;
+
+        /**
+         * 模板创建时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F)。
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * 模板最后修改时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F)。
+         * @type {string || null}
+         */
+        this.UpdateTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Definition = 'Definition' in params ? params.Definition : null;
+        this.Container = 'Container' in params ? params.Container : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Comment = 'Comment' in params ? params.Comment : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.RemoveVideo = 'RemoveVideo' in params ? params.RemoveVideo : null;
+        this.RemoveAudio = 'RemoveAudio' in params ? params.RemoveAudio : null;
+
+        if (params.VideoTemplate) {
+            let obj = new VideoTemplateInfo();
+            obj.deserialize(params.VideoTemplate)
+            this.VideoTemplate = obj;
+        }
+
+        if (params.AudioTemplate) {
+            let obj = new AudioTemplateInfo();
+            obj.deserialize(params.AudioTemplate)
+            this.AudioTemplate = obj;
+        }
+        this.ContainerType = 'ContainerType' in params ? params.ContainerType : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+
+    }
+}
+
+/**
  * 内容审核 Asr 文字审核嫌疑片段
  * @class
  */
@@ -2541,6 +2886,41 @@ class MediaContentReviewPoliticalSegmentItem extends  AbstractModel {
         this.Url = 'Url' in params ? params.Url : null;
         this.AreaCoordSet = 'AreaCoordSet' in params ? params.AreaCoordSet : null;
         this.PicUrlExpireTimeStamp = 'PicUrlExpireTimeStamp' in params ? params.PicUrlExpireTimeStamp : null;
+
+    }
+}
+
+/**
+ * DeleteWatermarkTemplate请求参数结构体
+ * @class
+ */
+class DeleteWatermarkTemplateRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 水印模板唯一标识。
+         * @type {number || null}
+         */
+        this.Definition = null;
+
+        /**
+         * 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Definition = 'Definition' in params ? params.Definition : null;
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
 
     }
 }
@@ -2762,6 +3142,43 @@ class AiReviewPoliticalTaskInput extends  AbstractModel {
 }
 
 /**
+ * 智能封面结果信息
+ * @class
+ */
+class AiAnalysisTaskCoverOutput extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 智能封面列表。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<MediaAiAnalysisCoverItem> || null}
+         */
+        this.CoverSet = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.CoverSet) {
+            this.CoverSet = new Array();
+            for (let z in params.CoverSet) {
+                let obj = new MediaAiAnalysisCoverItem();
+                obj.deserialize(params.CoverSet[z]);
+                this.CoverSet.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * 智能内容审核任务类型
  * @class
  */
@@ -2790,15 +3207,15 @@ class AiContentReviewTaskInput extends  AbstractModel {
 }
 
 /**
- * AI 视频智能分析输入参数类型
+ * 内容审核鉴黄任务输入参数类型
  * @class
  */
-class AiAnalysisTaskInput extends  AbstractModel {
+class AiReviewPornTaskInput extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 视频内容分析模板 ID ，固定为 10，同时进行智能分类、智能标签分析、智能封面分析。
+         * 鉴黄模板 ID。
          * @type {number || null}
          */
         this.Definition = null;
@@ -2813,6 +3230,127 @@ class AiAnalysisTaskInput extends  AbstractModel {
             return;
         }
         this.Definition = 'Definition' in params ? params.Definition : null;
+
+    }
+}
+
+/**
+ * 视频流配置参数
+ * @class
+ */
+class VideoTemplateInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 视频流的编码格式，可选值：
+<li>libx264：H.264 编码</li>
+<li>libx265：H.265 编码</li>
+目前 H.265 编码必须指定分辨率，并且需要在 640*480 以内。
+         * @type {string || null}
+         */
+        this.Codec = null;
+
+        /**
+         * 视频帧率，取值范围：[0, 60],单位：Hz。
+当取值为 0，表示帧率和原始视频保持一致。
+         * @type {number || null}
+         */
+        this.Fps = null;
+
+        /**
+         * 视频流的码率，取值范围：0 和 [128, 35000]，单位：kbps。
+当取值为 0，表示视频码率和原始视频保持一致。
+         * @type {number || null}
+         */
+        this.Bitrate = null;
+
+        /**
+         * 分辨率自适应，可选值：
+<li>open：开启，此时，Width 代表视频的宽度，Height 表示视频的高度；</li>
+<li>close：关闭，此时，Width 代表视频的长边，Height 表示视频的短边。</li>
+默认值：open。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ResolutionAdaptive = null;
+
+        /**
+         * 视频流宽度（或长边）的最大值，取值范围：0 和 [128, 4096]，单位：px。
+<li>当 Width、Height 均为 0，则分辨率同源；</li>
+<li>当 Width 为 0，Height 非 0，则 Width 按比例缩放；</li>
+<li>当 Width 非 0，Height 为 0，则 Height 按比例缩放；</li>
+<li>当 Width、Height 均非 0，则分辨率按用户指定。</li>
+默认值：0。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Width = null;
+
+        /**
+         * 视频流高度（或短边）的最大值，取值范围：0 和 [128, 4096]，单位：px。
+<li>当 Width、Height 均为 0，则分辨率同源；</li>
+<li>当 Width 为 0，Height 非 0，则 Width 按比例缩放；</li>
+<li>当 Width 非 0，Height 为 0，则 Height 按比例缩放；</li>
+<li>当 Width、Height 均非 0，则分辨率按用户指定。</li>
+默认值：0。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Height = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Codec = 'Codec' in params ? params.Codec : null;
+        this.Fps = 'Fps' in params ? params.Fps : null;
+        this.Bitrate = 'Bitrate' in params ? params.Bitrate : null;
+        this.ResolutionAdaptive = 'ResolutionAdaptive' in params ? params.ResolutionAdaptive : null;
+        this.Width = 'Width' in params ? params.Width : null;
+        this.Height = 'Height' in params ? params.Height : null;
+
+    }
+}
+
+/**
+ * 智能分类结果信息
+ * @class
+ */
+class AiAnalysisTaskClassificationOutput extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 视频智能分类列表。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<MediaAiAnalysisClassificationItem> || null}
+         */
+        this.ClassificationSet = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.ClassificationSet) {
+            this.ClassificationSet = new Array();
+            for (let z in params.ClassificationSet) {
+                let obj = new MediaAiAnalysisClassificationItem();
+                obj.deserialize(params.ClassificationSet[z]);
+                this.ClassificationSet.push(obj);
+            }
+        }
 
     }
 }
@@ -2887,19 +3425,46 @@ class AiReviewTaskPornOcrResult extends  AbstractModel {
 }
 
 /**
- * 智能封面结果信息
+ * DescribeWatermarkTemplates请求参数结构体
  * @class
  */
-class AiAnalysisTaskCoverOutput extends  AbstractModel {
+class DescribeWatermarkTemplatesRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 智能封面列表。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {Array.<MediaAiAnalysisCoverItem> || null}
+         * 水印模板唯一标识过滤条件，数组长度限制：100。
+         * @type {Array.<number> || null}
          */
-        this.CoverSet = null;
+        this.Definitions = null;
+
+        /**
+         * 水印类型过滤条件，可选值：
+<li>image：图片水印；</li>
+<li>text：文字水印。</li>
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * 分页偏移量，默认值：0。
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 返回记录条数
+<li>默认值：10；</li>
+<li>最大值：100。</li>
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
+         * @type {number || null}
+         */
+        this.SubAppId = null;
 
     }
 
@@ -2910,15 +3475,11 @@ class AiAnalysisTaskCoverOutput extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.CoverSet) {
-            this.CoverSet = new Array();
-            for (let z in params.CoverSet) {
-                let obj = new MediaAiAnalysisCoverItem();
-                obj.deserialize(params.CoverSet[z]);
-                this.CoverSet.push(obj);
-            }
-        }
+        this.Definitions = 'Definitions' in params ? params.Definitions : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
 
     }
 }
@@ -3328,6 +3889,73 @@ class DeleteClassRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeTranscodeTemplates请求参数结构体
+ * @class
+ */
+class DescribeTranscodeTemplatesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 转码模板唯一标识过滤条件，数组长度限制：100。
+         * @type {Array.<number> || null}
+         */
+        this.Definitions = null;
+
+        /**
+         * 模板类型过滤条件，可选值：
+<li>Preset：系统预置模板；</li>
+<li>Custom：用户自定义模板。</li>
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * 封装格式过滤条件，可选值：
+<li>Video：视频格式，可以同时包含视频流和音频流的封装格式板；</li>
+<li>PureAudio：纯音频格式，只能包含音频流的封装格式。</li>
+         * @type {string || null}
+         */
+        this.ContainerType = null;
+
+        /**
+         * 分页偏移量，默认值：0。
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 返回记录条数，默认值：10，最大值：100。
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Definitions = 'Definitions' in params ? params.Definitions : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.ContainerType = 'ContainerType' in params ? params.ContainerType : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
+
+    }
+}
+
+/**
  * Ocr 文字涉黄信息
  * @class
  */
@@ -3469,6 +4097,41 @@ class ApplyUploadRequest extends  AbstractModel {
 }
 
 /**
+ * ProcessMedia返回参数结构体
+ * @class
+ */
+class ProcessMediaResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 任务 ID
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * 内容审核 Ocr 文字鉴黄任务输入参数类型
  * @class
  */
@@ -3497,47 +4160,69 @@ class AiReviewPornOcrTaskInput extends  AbstractModel {
 }
 
 /**
- * 点播文件视频流信息
+ * 视频截取雪碧图任务，该结构仅用于对 2017 版[截取雪碧图](https://cloud.tencent.com/document/product/266/8101)接口发起的任务。
  * @class
  */
-class MediaVideoStreamItem extends  AbstractModel {
+class CreateImageSpriteTask2017 extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 视频流的码率，单位：bps。
+         * 截图雪碧图任务 ID。
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * 错误码
+<li>0：成功；</li>
+<li>其他值：失败。</li>
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
-        this.Bitrate = null;
+        this.ErrCode = null;
 
         /**
-         * 视频流的高度，单位：px。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.Height = null;
-
-        /**
-         * 视频流的宽度，单位：px。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.Width = null;
-
-        /**
-         * 视频流的编码格式，例如 h264。
+         * 错误信息。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
-        this.Codec = null;
+        this.Message = null;
 
         /**
-         * 帧率，单位：hz。
+         * 截取雪碧图文件 ID。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.FileId = null;
+
+        /**
+         * 雪碧图规格，参见[雪碧图截图模板](https://cloud.tencent.com/document/product/266/11702#.E9.9B.AA.E7.A2.A7.E5.9B.BE.E6.88.AA.E5.9B.BE.E6.A8.A1.E6.9D.BF)。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
-        this.Fps = null;
+        this.Definition = null;
+
+        /**
+         * 雪碧图小图总数量。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 截取雪碧图输出的地址。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
+         */
+        this.ImageSpriteUrlSet = null;
+
+        /**
+         * 雪碧图子图位置与时间关系 WebVtt 文件地址。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.WebVttUrl = null;
 
     }
 
@@ -3548,11 +4233,14 @@ class MediaVideoStreamItem extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Bitrate = 'Bitrate' in params ? params.Bitrate : null;
-        this.Height = 'Height' in params ? params.Height : null;
-        this.Width = 'Width' in params ? params.Width : null;
-        this.Codec = 'Codec' in params ? params.Codec : null;
-        this.Fps = 'Fps' in params ? params.Fps : null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.ErrCode = 'ErrCode' in params ? params.ErrCode : null;
+        this.Message = 'Message' in params ? params.Message : null;
+        this.FileId = 'FileId' in params ? params.FileId : null;
+        this.Definition = 'Definition' in params ? params.Definition : null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.ImageSpriteUrlSet = 'ImageSpriteUrlSet' in params ? params.ImageSpriteUrlSet : null;
+        this.WebVttUrl = 'WebVttUrl' in params ? params.WebVttUrl : null;
 
     }
 }
@@ -3749,18 +4437,48 @@ class MediaBasicInfo extends  AbstractModel {
 }
 
 /**
- * 内容审核 Asr 文字鉴政、敏感任务输入参数类型
+ * 音频流配置参数
  * @class
  */
-class AiReviewPoliticalAsrTaskInput extends  AbstractModel {
+class AudioTemplateInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 鉴政模板 ID。
+         * 音频流的编码格式，可选值：
+<li>libfdk_aac：更适合 mp4 和 hls；</li>
+<li>libmp3lame：更适合 flv；</li>
+<li>mp2。</li>
+         * @type {string || null}
+         */
+        this.Codec = null;
+
+        /**
+         * 音频流的码率，取值范围：0 和 [26, 256]，单位：kbps。
+当取值为 0，表示音频码率和原始音频保持一致。
          * @type {number || null}
          */
-        this.Definition = null;
+        this.Bitrate = null;
+
+        /**
+         * 音频流的采样率，可选值：
+<li>32000</li>
+<li>44100</li>
+<li>48000</li>
+单位：Hz。
+         * @type {number || null}
+         */
+        this.SampleRate = null;
+
+        /**
+         * 音频通道方式，可选值：
+<li>1：单通道</li>
+<li>2：双通道</li>
+<li>6：立体声</li>
+默认值：2。
+         * @type {number || null}
+         */
+        this.AudioChannel = null;
 
     }
 
@@ -3771,7 +4489,10 @@ class AiReviewPoliticalAsrTaskInput extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Definition = 'Definition' in params ? params.Definition : null;
+        this.Codec = 'Codec' in params ? params.Codec : null;
+        this.Bitrate = 'Bitrate' in params ? params.Bitrate : null;
+        this.SampleRate = 'SampleRate' in params ? params.SampleRate : null;
+        this.AudioChannel = 'AudioChannel' in params ? params.AudioChannel : null;
 
     }
 }
@@ -3913,92 +4634,31 @@ class SortBy extends  AbstractModel {
 }
 
 /**
- * ModifyMediaInfo请求参数结构体
+ * DescribeWatermarkTemplates返回参数结构体
  * @class
  */
-class ModifyMediaInfoRequest extends  AbstractModel {
+class DescribeWatermarkTemplatesResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 媒体文件唯一标识。
-         * @type {string || null}
-         */
-        this.FileId = null;
-
-        /**
-         * 媒体文件名称，最长 64 个字符。
-         * @type {string || null}
-         */
-        this.Name = null;
-
-        /**
-         * 媒体文件描述，最长 128 个字符。
-         * @type {string || null}
-         */
-        this.Description = null;
-
-        /**
-         * 媒体文件分类 ID。
+         * 符合过滤条件的记录总数。
          * @type {number || null}
          */
-        this.ClassId = null;
+        this.TotalCount = null;
 
         /**
-         * 媒体文件过期时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F)。填“9999-12-31T23:59:59Z”表示永不过期。过期后该媒体文件及其相关资源（转码结果、雪碧图等）将被永久删除。
+         * 水印模板详情列表。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<WatermarkTemplate> || null}
+         */
+        this.WatermarkTemplateSet = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.ExpireTime = null;
-
-        /**
-         * 视频封面图片文件（如 jpeg, png 等）进行 [Base64](https://tools.ietf.org/html/rfc4648) 编码后的字符串，仅支持 gif、jpeg、png 三种图片格式。
-         * @type {string || null}
-         */
-        this.CoverData = null;
-
-        /**
-         * 新增的一组视频打点信息，如果某个偏移时间已存在打点，则会进行覆盖操作，单个媒体文件最多 100 个打点信息。同一个请求里，AddKeyFrameDescs 的时间偏移参数必须与 DeleteKeyFrameDescs 都不同。
-         * @type {Array.<MediaKeyFrameDescItem> || null}
-         */
-        this.AddKeyFrameDescs = null;
-
-        /**
-         * 要删除的一组视频打点信息的时间偏移，单位：秒。同一个请求里，AddKeyFrameDescs 的时间偏移参数必须与 DeleteKeyFrameDescs 都不同。
-         * @type {Array.<number> || null}
-         */
-        this.DeleteKeyFrameDescs = null;
-
-        /**
-         * 取值 1 表示清空视频打点信息，其他值无意义。
-同一个请求里，ClearKeyFrameDescs 与 AddKeyFrameDescs 不能同时出现。
-         * @type {number || null}
-         */
-        this.ClearKeyFrameDescs = null;
-
-        /**
-         * 新增的一组标签，单个媒体文件最多 16 个标签，单个标签最多 16 个字符。同一个请求里，AddTags 参数必须与 DeleteTags 都不同。
-         * @type {Array.<string> || null}
-         */
-        this.AddTags = null;
-
-        /**
-         * 要删除的一组标签。同一个请求里，AddTags 参数必须与 DeleteTags 都不同。
-         * @type {Array.<string> || null}
-         */
-        this.DeleteTags = null;
-
-        /**
-         * 取值 1 表示清空媒体文件所有标签，其他值无意义。
-同一个请求里，ClearTags 与 AddTags 不能同时出现。
-         * @type {number || null}
-         */
-        this.ClearTags = null;
-
-        /**
-         * 点播[子应用](/document/product/266/14574) ID 。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
-         * @type {number || null}
-         */
-        this.SubAppId = null;
+        this.RequestId = null;
 
     }
 
@@ -4009,27 +4669,17 @@ class ModifyMediaInfoRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.FileId = 'FileId' in params ? params.FileId : null;
-        this.Name = 'Name' in params ? params.Name : null;
-        this.Description = 'Description' in params ? params.Description : null;
-        this.ClassId = 'ClassId' in params ? params.ClassId : null;
-        this.ExpireTime = 'ExpireTime' in params ? params.ExpireTime : null;
-        this.CoverData = 'CoverData' in params ? params.CoverData : null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
 
-        if (params.AddKeyFrameDescs) {
-            this.AddKeyFrameDescs = new Array();
-            for (let z in params.AddKeyFrameDescs) {
-                let obj = new MediaKeyFrameDescItem();
-                obj.deserialize(params.AddKeyFrameDescs[z]);
-                this.AddKeyFrameDescs.push(obj);
+        if (params.WatermarkTemplateSet) {
+            this.WatermarkTemplateSet = new Array();
+            for (let z in params.WatermarkTemplateSet) {
+                let obj = new WatermarkTemplate();
+                obj.deserialize(params.WatermarkTemplateSet[z]);
+                this.WatermarkTemplateSet.push(obj);
             }
         }
-        this.DeleteKeyFrameDescs = 'DeleteKeyFrameDescs' in params ? params.DeleteKeyFrameDescs : null;
-        this.ClearKeyFrameDescs = 'ClearKeyFrameDescs' in params ? params.ClearKeyFrameDescs : null;
-        this.AddTags = 'AddTags' in params ? params.AddTags : null;
-        this.DeleteTags = 'DeleteTags' in params ? params.DeleteTags : null;
-        this.ClearTags = 'ClearTags' in params ? params.ClearTags : null;
-        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -4413,6 +5063,34 @@ class AiAnalysisTaskTagOutput extends  AbstractModel {
             obj.deserialize(params.TagSet)
             this.TagSet = obj;
         }
+
+    }
+}
+
+/**
+ * DeleteTranscodeTemplate返回参数结构体
+ * @class
+ */
+class DeleteTranscodeTemplateResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -4981,6 +5659,58 @@ class MediaContentReviewSegmentItem extends  AbstractModel {
 }
 
 /**
+ * 文字水印模板
+ * @class
+ */
+class TextWatermarkTemplate extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 字体类型，目前仅支持 arial.ttf。
+         * @type {string || null}
+         */
+        this.FontType = null;
+
+        /**
+         * 字体大小，格式：Npx，N 为数值。
+         * @type {string || null}
+         */
+        this.FontSize = null;
+
+        /**
+         * 字体颜色，格式：0xRRGGBB，默认值：0xFFFFFF（黑色）。
+         * @type {string || null}
+         */
+        this.FontColor = null;
+
+        /**
+         * 文字透明度，取值范围：(0, 1]
+<li>0：完全透明</li>
+<li>1：完全不透明</li>
+默认值：1。
+         * @type {number || null}
+         */
+        this.FontAlpha = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FontType = 'FontType' in params ? params.FontType : null;
+        this.FontSize = 'FontSize' in params ? params.FontSize : null;
+        this.FontColor = 'FontColor' in params ? params.FontColor : null;
+        this.FontAlpha = 'FontAlpha' in params ? params.FontAlpha : null;
+
+    }
+}
+
+/**
  * PullEvents请求参数结构体
  * @class
  */
@@ -5115,15 +5845,15 @@ class AiReviewTaskPornResult extends  AbstractModel {
 }
 
 /**
- * 内容审核鉴黄任务输入参数类型
+ * 智能标签任务输入类型
  * @class
  */
-class AiReviewPornTaskInput extends  AbstractModel {
+class AiAnalysisTaskTagInput extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 鉴黄模板 ID。
+         * 视频智能分类模板 ID ，固定为 10 。
          * @type {number || null}
          */
         this.Definition = null;
@@ -5488,6 +6218,34 @@ class AiReviewTaskPornAsrResult extends  AbstractModel {
             obj.deserialize(params.Output)
             this.Output = obj;
         }
+
+    }
+}
+
+/**
+ * DeleteClass返回参数结构体
+ * @class
+ */
+class DeleteClassResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -6322,19 +7080,31 @@ class MediaSourceData extends  AbstractModel {
 }
 
 /**
- * 智能分类结果信息
+ * DescribeTranscodeTemplates返回参数结构体
  * @class
  */
-class AiAnalysisTaskClassificationOutput extends  AbstractModel {
+class DescribeTranscodeTemplatesResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 视频智能分类列表。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {Array.<MediaAiAnalysisClassificationItem> || null}
+         * 符合过滤条件的记录总数。
+         * @type {number || null}
          */
-        this.ClassificationSet = null;
+        this.TotalCount = null;
+
+        /**
+         * 转码模板详情列表。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<TranscodeTemplate> || null}
+         */
+        this.TranscodeTemplateSet = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
 
     }
 
@@ -6345,15 +7115,17 @@ class AiAnalysisTaskClassificationOutput extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
 
-        if (params.ClassificationSet) {
-            this.ClassificationSet = new Array();
-            for (let z in params.ClassificationSet) {
-                let obj = new MediaAiAnalysisClassificationItem();
-                obj.deserialize(params.ClassificationSet[z]);
-                this.ClassificationSet.push(obj);
+        if (params.TranscodeTemplateSet) {
+            this.TranscodeTemplateSet = new Array();
+            for (let z in params.TranscodeTemplateSet) {
+                let obj = new TranscodeTemplate();
+                obj.deserialize(params.TranscodeTemplateSet[z]);
+                this.TranscodeTemplateSet.push(obj);
             }
         }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -6586,6 +7358,104 @@ class MediaProcessTaskSampleSnapshotResult extends  AbstractModel {
 }
 
 /**
+ * ModifyTranscodeTemplate请求参数结构体
+ * @class
+ */
+class ModifyTranscodeTemplateRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 转码模板唯一标识。
+         * @type {number || null}
+         */
+        this.Definition = null;
+
+        /**
+         * 封装格式，可选值：mp4、flv、hls、mp3、flac、ogg。其中，mp3、flac、ogg 为纯音频文件。
+         * @type {string || null}
+         */
+        this.Container = null;
+
+        /**
+         * 转码模板名称，长度限制：64 个字符。
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 模板描述信息，长度限制：256 个字节。
+         * @type {string || null}
+         */
+        this.Comment = null;
+
+        /**
+         * 是否去除视频数据，可选值：
+<li>0：保留</li>
+<li>1：去除</li>
+         * @type {number || null}
+         */
+        this.RemoveVideo = null;
+
+        /**
+         * 是否去除音频数据，可选值：
+<li>0：保留</li>
+<li>1：去除</li>
+         * @type {number || null}
+         */
+        this.RemoveAudio = null;
+
+        /**
+         * 视频流配置参数。
+         * @type {VideoTemplateInfo || null}
+         */
+        this.VideoTemplate = null;
+
+        /**
+         * 音频流配置参数。
+         * @type {AudioTemplateInfo || null}
+         */
+        this.AudioTemplate = null;
+
+        /**
+         * 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Definition = 'Definition' in params ? params.Definition : null;
+        this.Container = 'Container' in params ? params.Container : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Comment = 'Comment' in params ? params.Comment : null;
+        this.RemoveVideo = 'RemoveVideo' in params ? params.RemoveVideo : null;
+        this.RemoveAudio = 'RemoveAudio' in params ? params.RemoveAudio : null;
+
+        if (params.VideoTemplate) {
+            let obj = new VideoTemplateInfo();
+            obj.deserialize(params.VideoTemplate)
+            this.VideoTemplate = obj;
+        }
+
+        if (params.AudioTemplate) {
+            let obj = new AudioTemplateInfo();
+            obj.deserialize(params.AudioTemplate)
+            this.AudioTemplate = obj;
+        }
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
+
+    }
+}
+
+/**
  * 编辑视频任务的输入。
  * @class
  */
@@ -6641,6 +7511,34 @@ class EditMediaTaskInput extends  AbstractModel {
                 this.StreamInfoSet.push(obj);
             }
         }
+
+    }
+}
+
+/**
+ * 内容审核 Asr 文字鉴政、敏感任务输入参数类型
+ * @class
+ */
+class AiReviewPoliticalAsrTaskInput extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 鉴政模板 ID。
+         * @type {number || null}
+         */
+        this.Definition = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Definition = 'Definition' in params ? params.Definition : null;
 
     }
 }
@@ -7472,6 +8370,189 @@ class ProcessMediaByUrlRequest extends  AbstractModel {
 }
 
 /**
+ * 点播文件视频流信息
+ * @class
+ */
+class MediaVideoStreamItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 视频流的码率，单位：bps。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Bitrate = null;
+
+        /**
+         * 视频流的高度，单位：px。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Height = null;
+
+        /**
+         * 视频流的宽度，单位：px。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Width = null;
+
+        /**
+         * 视频流的编码格式，例如 h264。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Codec = null;
+
+        /**
+         * 帧率，单位：hz。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Fps = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Bitrate = 'Bitrate' in params ? params.Bitrate : null;
+        this.Height = 'Height' in params ? params.Height : null;
+        this.Width = 'Width' in params ? params.Width : null;
+        this.Codec = 'Codec' in params ? params.Codec : null;
+        this.Fps = 'Fps' in params ? params.Fps : null;
+
+    }
+}
+
+/**
+ * ModifyMediaInfo请求参数结构体
+ * @class
+ */
+class ModifyMediaInfoRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 媒体文件唯一标识。
+         * @type {string || null}
+         */
+        this.FileId = null;
+
+        /**
+         * 媒体文件名称，最长 64 个字符。
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 媒体文件描述，最长 128 个字符。
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * 媒体文件分类 ID。
+         * @type {number || null}
+         */
+        this.ClassId = null;
+
+        /**
+         * 媒体文件过期时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F)。填“9999-12-31T23:59:59Z”表示永不过期。过期后该媒体文件及其相关资源（转码结果、雪碧图等）将被永久删除。
+         * @type {string || null}
+         */
+        this.ExpireTime = null;
+
+        /**
+         * 视频封面图片文件（如 jpeg, png 等）进行 [Base64](https://tools.ietf.org/html/rfc4648) 编码后的字符串，仅支持 gif、jpeg、png 三种图片格式。
+         * @type {string || null}
+         */
+        this.CoverData = null;
+
+        /**
+         * 新增的一组视频打点信息，如果某个偏移时间已存在打点，则会进行覆盖操作，单个媒体文件最多 100 个打点信息。同一个请求里，AddKeyFrameDescs 的时间偏移参数必须与 DeleteKeyFrameDescs 都不同。
+         * @type {Array.<MediaKeyFrameDescItem> || null}
+         */
+        this.AddKeyFrameDescs = null;
+
+        /**
+         * 要删除的一组视频打点信息的时间偏移，单位：秒。同一个请求里，AddKeyFrameDescs 的时间偏移参数必须与 DeleteKeyFrameDescs 都不同。
+         * @type {Array.<number> || null}
+         */
+        this.DeleteKeyFrameDescs = null;
+
+        /**
+         * 取值 1 表示清空视频打点信息，其他值无意义。
+同一个请求里，ClearKeyFrameDescs 与 AddKeyFrameDescs 不能同时出现。
+         * @type {number || null}
+         */
+        this.ClearKeyFrameDescs = null;
+
+        /**
+         * 新增的一组标签，单个媒体文件最多 16 个标签，单个标签最多 16 个字符。同一个请求里，AddTags 参数必须与 DeleteTags 都不同。
+         * @type {Array.<string> || null}
+         */
+        this.AddTags = null;
+
+        /**
+         * 要删除的一组标签。同一个请求里，AddTags 参数必须与 DeleteTags 都不同。
+         * @type {Array.<string> || null}
+         */
+        this.DeleteTags = null;
+
+        /**
+         * 取值 1 表示清空媒体文件所有标签，其他值无意义。
+同一个请求里，ClearTags 与 AddTags 不能同时出现。
+         * @type {number || null}
+         */
+        this.ClearTags = null;
+
+        /**
+         * 点播[子应用](/document/product/266/14574) ID 。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FileId = 'FileId' in params ? params.FileId : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.ClassId = 'ClassId' in params ? params.ClassId : null;
+        this.ExpireTime = 'ExpireTime' in params ? params.ExpireTime : null;
+        this.CoverData = 'CoverData' in params ? params.CoverData : null;
+
+        if (params.AddKeyFrameDescs) {
+            this.AddKeyFrameDescs = new Array();
+            for (let z in params.AddKeyFrameDescs) {
+                let obj = new MediaKeyFrameDescItem();
+                obj.deserialize(params.AddKeyFrameDescs[z]);
+                this.AddKeyFrameDescs.push(obj);
+            }
+        }
+        this.DeleteKeyFrameDescs = 'DeleteKeyFrameDescs' in params ? params.DeleteKeyFrameDescs : null;
+        this.ClearKeyFrameDescs = 'ClearKeyFrameDescs' in params ? params.ClearKeyFrameDescs : null;
+        this.AddTags = 'AddTags' in params ? params.AddTags : null;
+        this.DeleteTags = 'DeleteTags' in params ? params.DeleteTags : null;
+        this.ClearTags = 'ClearTags' in params ? params.ClearTags : null;
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
+
+    }
+}
+
+/**
  * 任务查询结果类型
  * @class
  */
@@ -7579,6 +8660,41 @@ class MediaProcessTaskResult extends  AbstractModel {
             obj.deserialize(params.CoverBySnapshotTask)
             this.CoverBySnapshotTask = obj;
         }
+
+    }
+}
+
+/**
+ * DeleteTranscodeTemplate请求参数结构体
+ * @class
+ */
+class DeleteTranscodeTemplateRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 转码模板唯一标识。
+         * @type {number || null}
+         */
+        this.Definition = null;
+
+        /**
+         * 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Definition = 'Definition' in params ? params.Definition : null;
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
 
     }
 }
@@ -7901,10 +9017,266 @@ class MediaProcessTaskCoverBySnapshotResult extends  AbstractModel {
 }
 
 /**
- * DeleteClass返回参数结构体
+ * CreateWatermarkTemplate请求参数结构体
  * @class
  */
-class DeleteClassResponse extends  AbstractModel {
+class CreateWatermarkTemplateRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 水印类型，可选值：
+<li>image：图片水印；</li>
+<li>text：文字水印。</li>
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * 水印模板名称，长度限制：64 个字符。
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 模板描述信息，长度限制：256 个字符。
+         * @type {string || null}
+         */
+        this.Comment = null;
+
+        /**
+         * 原点位置，可选值：
+<li>topLeft：表示坐标原点位于视频图像左上角，水印原点为图片或文字的左上角；</li>
+<li>topRight：表示坐标原点位于视频图像的右上角，水印原点为图片或文字的右上角；</li>
+<li>bottomLeft：表示坐标原点位于视频图像的左下角，水印原点为图片或文字的左下角；</li>
+<li>bottomRight：表示坐标原点位于视频图像的右下角，水印原点为图片或文字的右下角。</li>
+默认值：topLeft。目前，当 Type 为 image，该字段仅支持 topLeft。
+         * @type {string || null}
+         */
+        this.CoordinateOrigin = null;
+
+        /**
+         * 水印原点距离视频图像坐标原点的水平位置。支持 %、px 两种格式：
+<li>当字符串以 % 结尾，表示水印 Left 为视频宽度指定百分比的位置，如 10% 表示 Left 为视频宽度的 10%；</li>
+<li>当字符串以 px 结尾，表示水印 Left 为视频宽度指定像素的位置，如 100px 表示 Left 为 100 像素。</li>
+默认值：0px。
+         * @type {string || null}
+         */
+        this.XPos = null;
+
+        /**
+         * 水印原点距离视频图像坐标原点的垂直位置。支持 %、px 两种格式：
+<li>当字符串以 % 结尾，表示水印 Top 为视频高度指定百分比的位置，如 10% 表示 Top 为视频高度的 10%；</li>
+<li>当字符串以 px 结尾，表示水印 Top 为视频高度指定像素的位置，如 100px 表示 Top 为 100 像素。</li>
+默认值：0px。
+         * @type {string || null}
+         */
+        this.YPos = null;
+
+        /**
+         * 图片水印模板，当 Type 为 image，该字段必填。当 Type 为 text，该字段无效。
+         * @type {ImageWatermarkInput || null}
+         */
+        this.ImageTemplate = null;
+
+        /**
+         * 文字水印模板，当 Type 为 text，该字段必填。当 Type 为 image，该字段无效。
+         * @type {TextWatermarkTemplate || null}
+         */
+        this.TextTemplate = null;
+
+        /**
+         * 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Comment = 'Comment' in params ? params.Comment : null;
+        this.CoordinateOrigin = 'CoordinateOrigin' in params ? params.CoordinateOrigin : null;
+        this.XPos = 'XPos' in params ? params.XPos : null;
+        this.YPos = 'YPos' in params ? params.YPos : null;
+
+        if (params.ImageTemplate) {
+            let obj = new ImageWatermarkInput();
+            obj.deserialize(params.ImageTemplate)
+            this.ImageTemplate = obj;
+        }
+
+        if (params.TextTemplate) {
+            let obj = new TextWatermarkTemplate();
+            obj.deserialize(params.TextTemplate)
+            this.TextTemplate = obj;
+        }
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
+
+    }
+}
+
+/**
+ * 水印模板详情
+ * @class
+ */
+class WatermarkTemplate extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 水印模板唯一标识。
+         * @type {number || null}
+         */
+        this.Definition = null;
+
+        /**
+         * 水印类型，取值：
+<li>image：图片水印；</li>
+<li>text：文字水印。</li>
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * 水印模板名称。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 模板描述信息。
+         * @type {string || null}
+         */
+        this.Comment = null;
+
+        /**
+         * 水印图片原点距离视频图像原点的水平位置。
+<li>当字符串以 % 结尾，表示水印 Left 为视频宽度指定百分比的位置，如 10% 表示 Left 为视频宽度的 10%；</li>
+<li>当字符串以 px 结尾，表示水印 Left 为视频宽度指定像素的位置，如 100px 表示 Left 为 100 像素。</li>
+         * @type {string || null}
+         */
+        this.XPos = null;
+
+        /**
+         * 水印图片原点距离视频图像原点的垂直位置。
+<li>当字符串以 % 结尾，表示水印 Top 为视频高度指定百分比的位置，如 10% 表示 Top 为视频高度的 10%；</li>
+<li>当字符串以 px 结尾，表示水印 Top 为视频高度指定像素的位置，如 100px 表示 Top 为 100 像素。</li>
+         * @type {string || null}
+         */
+        this.YPos = null;
+
+        /**
+         * 图片水印模板，仅当 Type 为 image，该字段有值。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {ImageWatermarkTemplate || null}
+         */
+        this.ImageTemplate = null;
+
+        /**
+         * 文字水印模板，仅当 Type 为 text，该字段有值。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {TextWatermarkTemplate || null}
+         */
+        this.TextTemplate = null;
+
+        /**
+         * 模板创建时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F)。
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * 模板最后修改时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F)。
+         * @type {string || null}
+         */
+        this.UpdateTime = null;
+
+        /**
+         * 原点位置，可选值：
+<li>topLeft：表示坐标原点位于视频图像左上角，水印原点为图片或文字的左上角；</li>
+<li>topRight：表示坐标原点位于视频图像的右上角，水印原点为图片或文字的右上角；</li>
+<li>bottomLeft：表示坐标原点位于视频图像的左下角，水印原点为图片或文字的左下角；</li>
+<li>bottomRight：表示坐标原点位于视频图像的右下角，水印原点为图片或文字的右下。；</li>
+         * @type {string || null}
+         */
+        this.CoordinateOrigin = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Definition = 'Definition' in params ? params.Definition : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Comment = 'Comment' in params ? params.Comment : null;
+        this.XPos = 'XPos' in params ? params.XPos : null;
+        this.YPos = 'YPos' in params ? params.YPos : null;
+
+        if (params.ImageTemplate) {
+            let obj = new ImageWatermarkTemplate();
+            obj.deserialize(params.ImageTemplate)
+            this.ImageTemplate = obj;
+        }
+
+        if (params.TextTemplate) {
+            let obj = new TextWatermarkTemplate();
+            obj.deserialize(params.TextTemplate)
+            this.TextTemplate = obj;
+        }
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.CoordinateOrigin = 'CoordinateOrigin' in params ? params.CoordinateOrigin : null;
+
+    }
+}
+
+/**
+ * DeleteWatermarkTemplate返回参数结构体
+ * @class
+ */
+class DeleteWatermarkTemplateResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifyTranscodeTemplate返回参数结构体
+ * @class
+ */
+class ModifyTranscodeTemplateResponse extends  AbstractModel {
     constructor(){
         super();
 
@@ -8154,18 +9526,19 @@ class AiReviewPornAsrTaskOutput extends  AbstractModel {
 }
 
 /**
- * ProcessMedia返回参数结构体
+ * ModifyWatermarkTemplate返回参数结构体
  * @class
  */
-class ProcessMediaResponse extends  AbstractModel {
+class ModifyWatermarkTemplateResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 任务 ID
+         * 图片水印地址，仅当 ImageTemplate.ImageContent 非空，该字段有值。
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
-        this.TaskId = null;
+        this.ImageUrl = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -8182,20 +9555,87 @@ class ProcessMediaResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.ImageUrl = 'ImageUrl' in params ? params.ImageUrl : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
 
+/**
+ * 采样截图信息
+ * @class
+ */
+class MediaSampleSnapshotItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 采样截图规格 ID，参见[采样截图参数模板](https://cloud.tencent.com/document/product/266/11702#.E9.87.87.E6.A0.B7.E6.88.AA.E5.9B.BE.E6.A8.A1.E6.9D.BF)。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Definition = null;
+
+        /**
+         * 采样方式，取值范围：
+<li>Percent：根据百分比间隔采样。</li>
+<li>Time：根据时间间隔采样。</li>
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.SampleType = null;
+
+        /**
+         * 采样间隔
+<li>当 SampleType 为 Percent 时，该值表示多少百分比一张图。</li>
+<li>当 SampleType 为 Time 时，该值表示多少时间间隔一张图，单位秒， 第一张图均为视频首帧。</li>
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Interval = null;
+
+        /**
+         * 生成的截图 url 列表。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
+         */
+        this.ImageUrlSet = null;
+
+        /**
+         * 截图如果被打上了水印，被打水印的模板 ID 列表。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<number> || null}
+         */
+        this.WaterMarkDefinition = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Definition = 'Definition' in params ? params.Definition : null;
+        this.SampleType = 'SampleType' in params ? params.SampleType : null;
+        this.Interval = 'Interval' in params ? params.Interval : null;
+        this.ImageUrlSet = 'ImageUrlSet' in params ? params.ImageUrlSet : null;
+        this.WaterMarkDefinition = 'WaterMarkDefinition' in params ? params.WaterMarkDefinition : null;
+
+    }
+}
+
 module.exports = {
+    ModifyWatermarkTemplateRequest: ModifyWatermarkTemplateRequest,
     TranscodePlayInfo2017: TranscodePlayInfo2017,
     DescribeAllClassRequest: DescribeAllClassRequest,
+    AiAnalysisTaskInput: AiAnalysisTaskInput,
     AnimatedGraphicTaskInput: AnimatedGraphicTaskInput,
     DescribeTaskDetailResponse: DescribeTaskDetailResponse,
     MediaKeyFrameDescInfo: MediaKeyFrameDescInfo,
     AiAnalysisTaskClassificationInput: AiAnalysisTaskClassificationInput,
-    MediaSampleSnapshotItem: MediaSampleSnapshotItem,
+    CreateTranscodeTemplateRequest: CreateTranscodeTemplateRequest,
     CreateClassRequest: CreateClassRequest,
     ClipTask2017: ClipTask2017,
     MediaSnapshotByTimeOffsetInfo: MediaSnapshotByTimeOffsetInfo,
@@ -8203,6 +9643,7 @@ module.exports = {
     LiveRealTimeClipRequest: LiveRealTimeClipRequest,
     ConfirmEventsRequest: ConfirmEventsRequest,
     DescribeTasksResponse: DescribeTasksResponse,
+    CreateWatermarkTemplateResponse: CreateWatermarkTemplateResponse,
     AiReviewTerrorismTaskOutput: AiReviewTerrorismTaskOutput,
     AiReviewPoliticalTaskOutput: AiReviewPoliticalTaskOutput,
     AiReviewTaskPoliticalResult: AiReviewTaskPoliticalResult,
@@ -8213,49 +9654,57 @@ module.exports = {
     ConcatFileInfo2017: ConcatFileInfo2017,
     MediaProcessTaskImageSpriteResult: MediaProcessTaskImageSpriteResult,
     MediaTranscodeInfo: MediaTranscodeInfo,
-    CreateImageSpriteTask2017: CreateImageSpriteTask2017,
+    ImageWatermarkTemplate: ImageWatermarkTemplate,
     DescribeMediaInfosResponse: DescribeMediaInfosResponse,
     TempCertificate: TempCertificate,
     DescribeTasksRequest: DescribeTasksRequest,
-    AiAnalysisTaskTagInput: AiAnalysisTaskTagInput,
+    CreateTranscodeTemplateResponse: CreateTranscodeTemplateResponse,
     MediaContentReviewOcrTextSegmentItem: MediaContentReviewOcrTextSegmentItem,
     AiReviewTaskPoliticalOcrResult: AiReviewTaskPoliticalOcrResult,
     PullEventsResponse: PullEventsResponse,
     SnapshotByTimeOffset2017: SnapshotByTimeOffset2017,
     MediaProcessTaskInput: MediaProcessTaskInput,
     AiReviewTerrorismTaskInput: AiReviewTerrorismTaskInput,
+    ImageWatermarkInput: ImageWatermarkInput,
     MediaAudioStreamItem: MediaAudioStreamItem,
     AiReviewTaskTerrorismResult: AiReviewTaskTerrorismResult,
     ProcessMediaByUrlResponse: ProcessMediaByUrlResponse,
     TranscodeTask2017: TranscodeTask2017,
+    TranscodeTemplate: TranscodeTemplate,
     MediaContentReviewAsrTextSegmentItem: MediaContentReviewAsrTextSegmentItem,
     DescribeAllClassResponse: DescribeAllClassResponse,
     MediaContentReviewPoliticalSegmentItem: MediaContentReviewPoliticalSegmentItem,
+    DeleteWatermarkTemplateRequest: DeleteWatermarkTemplateRequest,
     MediaInputInfo: MediaInputInfo,
     EditMediaStreamInfo: EditMediaStreamInfo,
     LiveRealTimeClipResponse: LiveRealTimeClipResponse,
     CommitUploadResponse: CommitUploadResponse,
     AiReviewPoliticalTaskInput: AiReviewPoliticalTaskInput,
-    AiContentReviewTaskInput: AiContentReviewTaskInput,
-    AiAnalysisTaskInput: AiAnalysisTaskInput,
-    AiReviewTaskPornOcrResult: AiReviewTaskPornOcrResult,
     AiAnalysisTaskCoverOutput: AiAnalysisTaskCoverOutput,
+    AiContentReviewTaskInput: AiContentReviewTaskInput,
+    AiReviewPornTaskInput: AiReviewPornTaskInput,
+    VideoTemplateInfo: VideoTemplateInfo,
+    AiAnalysisTaskClassificationOutput: AiAnalysisTaskClassificationOutput,
+    AiReviewTaskPornOcrResult: AiReviewTaskPornOcrResult,
+    DescribeWatermarkTemplatesRequest: DescribeWatermarkTemplatesRequest,
     TaskSimpleInfo: TaskSimpleInfo,
     MediaAiAnalysisClassificationItem: MediaAiAnalysisClassificationItem,
     AiContentReviewResult: AiContentReviewResult,
     ApplyUploadResponse: ApplyUploadResponse,
     CoverBySnapshotTaskInput: CoverBySnapshotTaskInput,
     DeleteClassRequest: DeleteClassRequest,
+    DescribeTranscodeTemplatesRequest: DescribeTranscodeTemplatesRequest,
     AiReviewPornOcrTaskOutput: AiReviewPornOcrTaskOutput,
     ApplyUploadRequest: ApplyUploadRequest,
+    ProcessMediaResponse: ProcessMediaResponse,
     AiReviewPornOcrTaskInput: AiReviewPornOcrTaskInput,
-    MediaVideoStreamItem: MediaVideoStreamItem,
+    CreateImageSpriteTask2017: CreateImageSpriteTask2017,
     MediaSnapshotByTimeOffsetItem: MediaSnapshotByTimeOffsetItem,
     MediaBasicInfo: MediaBasicInfo,
-    AiReviewPoliticalAsrTaskInput: AiReviewPoliticalAsrTaskInput,
+    AudioTemplateInfo: AudioTemplateInfo,
     MediaAnimatedGraphicsItem: MediaAnimatedGraphicsItem,
     SortBy: SortBy,
-    ModifyMediaInfoRequest: ModifyMediaInfoRequest,
+    DescribeWatermarkTemplatesResponse: DescribeWatermarkTemplatesResponse,
     WatermarkInput: WatermarkInput,
     AiReviewPornAsrTaskInput: AiReviewPornAsrTaskInput,
     MediaProcessTaskAnimatedGraphicResult: MediaProcessTaskAnimatedGraphicResult,
@@ -8265,20 +9714,23 @@ module.exports = {
     SearchMediaResponse: SearchMediaResponse,
     ConfirmEventsResponse: ConfirmEventsResponse,
     AiAnalysisTaskTagOutput: AiAnalysisTaskTagOutput,
+    DeleteTranscodeTemplateResponse: DeleteTranscodeTemplateResponse,
     EventContent: EventContent,
     AiReviewTaskPoliticalAsrResult: AiReviewTaskPoliticalAsrResult,
     MediaTranscodeItem: MediaTranscodeItem,
     ProcessMediaRequest: ProcessMediaRequest,
     MediaContentReviewSegmentItem: MediaContentReviewSegmentItem,
+    TextWatermarkTemplate: TextWatermarkTemplate,
     PullEventsRequest: PullEventsRequest,
     ModifyMediaInfoResponse: ModifyMediaInfoResponse,
     AiReviewTaskPornResult: AiReviewTaskPornResult,
-    AiReviewPornTaskInput: AiReviewPornTaskInput,
+    AiAnalysisTaskTagInput: AiAnalysisTaskTagInput,
     SearchMediaRequest: SearchMediaRequest,
     CreateClassResponse: CreateClassResponse,
     MediaClassInfo: MediaClassInfo,
     MediaProcessTaskSnapshotByTimeOffsetResult: MediaProcessTaskSnapshotByTimeOffsetResult,
     AiReviewTaskPornAsrResult: AiReviewTaskPornAsrResult,
+    DeleteClassResponse: DeleteClassResponse,
     ModifyClassResponse: ModifyClassResponse,
     EditMediaFileInfo: EditMediaFileInfo,
     MediaAiAnalysisCoverItem: MediaAiAnalysisCoverItem,
@@ -8294,13 +9746,15 @@ module.exports = {
     MediaProcessTaskTranscodeResult: MediaProcessTaskTranscodeResult,
     SnapshotByTimeOffsetTask2017: SnapshotByTimeOffsetTask2017,
     MediaSourceData: MediaSourceData,
-    AiAnalysisTaskClassificationOutput: AiAnalysisTaskClassificationOutput,
+    DescribeTranscodeTemplatesResponse: DescribeTranscodeTemplatesResponse,
     SnapshotByTimeOffsetTaskInput: SnapshotByTimeOffsetTaskInput,
     ImageSpriteTaskInput: ImageSpriteTaskInput,
     DeleteMediaRequest: DeleteMediaRequest,
     FileDeleteTask: FileDeleteTask,
     MediaProcessTaskSampleSnapshotResult: MediaProcessTaskSampleSnapshotResult,
+    ModifyTranscodeTemplateRequest: ModifyTranscodeTemplateRequest,
     EditMediaTaskInput: EditMediaTaskInput,
+    AiReviewPoliticalAsrTaskInput: AiReviewPoliticalAsrTaskInput,
     SampleSnapshotTaskInput: SampleSnapshotTaskInput,
     AiReviewPoliticalAsrTaskOutput: AiReviewPoliticalAsrTaskOutput,
     ModifyClassRequest: ModifyClassRequest,
@@ -8317,16 +9771,23 @@ module.exports = {
     AiReviewPornTaskOutput: AiReviewPornTaskOutput,
     PullFileTask: PullFileTask,
     ProcessMediaByUrlRequest: ProcessMediaByUrlRequest,
+    MediaVideoStreamItem: MediaVideoStreamItem,
+    ModifyMediaInfoRequest: ModifyMediaInfoRequest,
     MediaProcessTaskResult: MediaProcessTaskResult,
+    DeleteTranscodeTemplateRequest: DeleteTranscodeTemplateRequest,
     MediaOutputInfo: MediaOutputInfo,
     MediaAnimatedGraphicsInfo: MediaAnimatedGraphicsInfo,
     MediaMetaData: MediaMetaData,
     EditMediaTaskOutput: EditMediaTaskOutput,
     MediaProcessTaskCoverBySnapshotResult: MediaProcessTaskCoverBySnapshotResult,
-    DeleteClassResponse: DeleteClassResponse,
+    CreateWatermarkTemplateRequest: CreateWatermarkTemplateRequest,
+    WatermarkTemplate: WatermarkTemplate,
+    DeleteWatermarkTemplateResponse: DeleteWatermarkTemplateResponse,
+    ModifyTranscodeTemplateResponse: ModifyTranscodeTemplateResponse,
     MediaSampleSnapshotInfo: MediaSampleSnapshotInfo,
     MediaInfo: MediaInfo,
     AiReviewPornAsrTaskOutput: AiReviewPornAsrTaskOutput,
-    ProcessMediaResponse: ProcessMediaResponse,
+    ModifyWatermarkTemplateResponse: ModifyWatermarkTemplateResponse,
+    MediaSampleSnapshotItem: MediaSampleSnapshotItem,
 
 }
