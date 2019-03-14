@@ -37,7 +37,7 @@ class DescribeSyncJobsResponse extends  AbstractModel {
         this.JobList = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -87,7 +87,7 @@ class DescribeMigrateJobsResponse extends  AbstractModel {
         this.JobList = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -203,7 +203,7 @@ class DeleteMigrateJobResponse extends  AbstractModel {
         super();
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -300,7 +300,7 @@ class CreateSyncJobResponse extends  AbstractModel {
         this.JobId = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -762,7 +762,7 @@ class ModifyMigrateJobResponse extends  AbstractModel {
         super();
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -963,13 +963,13 @@ class SyncOption extends  AbstractModel {
         this.RunMode = null;
 
         /**
-         * 同步模式， 3-增量同步
+         * 同步模式， 3-全量且增量同步
          * @type {number || null}
          */
         this.SyncType = null;
 
         /**
-         * 数据一致性检测， 1-不配置
+         * 数据一致性检测， 1-无需配置
          * @type {number || null}
          */
         this.ConsistencyType = null;
@@ -1096,7 +1096,7 @@ class CreateMigrateCheckJobResponse extends  AbstractModel {
         super();
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -1203,7 +1203,7 @@ class DescribeMigrateCheckJobResponse extends  AbstractModel {
         this.CheckFlag = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -1236,7 +1236,7 @@ class StartSyncJobResponse extends  AbstractModel {
         super();
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -1264,7 +1264,7 @@ class CreateSyncCheckJobResponse extends  AbstractModel {
         super();
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -1348,7 +1348,7 @@ class ModifySyncJobResponse extends  AbstractModel {
         super();
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -1906,7 +1906,7 @@ class StopMigrateJobResponse extends  AbstractModel {
         super();
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -1934,7 +1934,7 @@ class DeleteSyncJobResponse extends  AbstractModel {
         super();
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -1996,7 +1996,7 @@ class SwitchDrToMasterResponse extends  AbstractModel {
         this.AsyncRequestId = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -2025,7 +2025,7 @@ class CompleteMigrateJobResponse extends  AbstractModel {
         super();
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -2053,7 +2053,7 @@ class StartMigrateJobResponse extends  AbstractModel {
         super();
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -2087,7 +2087,7 @@ class CreateMigrateJobResponse extends  AbstractModel {
         this.JobId = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -2374,7 +2374,7 @@ class DescribeSyncCheckJobResponse extends  AbstractModel {
         super();
 
         /**
-         * 任务校验状态
+         * 任务校验状态： starting(开始中)，running(校验中)，finished(校验完成)
          * @type {string || null}
          */
         this.Status = null;
@@ -2398,13 +2398,13 @@ class DescribeSyncCheckJobResponse extends  AbstractModel {
         this.StepInfo = null;
 
         /**
-         * 校验标志
+         * 校验标志：0（尚未校验成功） ， 1（校验成功）
          * @type {number || null}
          */
         this.CheckFlag = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;

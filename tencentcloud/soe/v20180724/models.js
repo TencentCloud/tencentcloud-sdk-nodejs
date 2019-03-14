@@ -154,6 +154,12 @@ class InitOralProcessRequest extends  AbstractModel {
          */
         this.IsAsync = null;
 
+        /**
+         * 输入文本模式，0: 普通文本，1: 音素结构文本
+         * @type {number || null}
+         */
+        this.TextMode = null;
+
     }
 
     /**
@@ -174,6 +180,7 @@ class InitOralProcessRequest extends  AbstractModel {
         this.SentenceInfoEnabled = 'SentenceInfoEnabled' in params ? params.SentenceInfoEnabled : null;
         this.ServerType = 'ServerType' in params ? params.ServerType : null;
         this.IsAsync = 'IsAsync' in params ? params.IsAsync : null;
+        this.TextMode = 'TextMode' in params ? params.TextMode : null;
 
     }
 }
@@ -642,6 +649,12 @@ class TransmitOralProcessWithInitRequest extends  AbstractModel {
          */
         this.IsQuery = null;
 
+        /**
+         * 输入文本模式，0: 普通文本，1: 音素结构文本
+         * @type {number || null}
+         */
+        this.TextMode = null;
+
     }
 
     /**
@@ -667,6 +680,7 @@ class TransmitOralProcessWithInitRequest extends  AbstractModel {
         this.ServerType = 'ServerType' in params ? params.ServerType : null;
         this.IsAsync = 'IsAsync' in params ? params.IsAsync : null;
         this.IsQuery = 'IsQuery' in params ? params.IsQuery : null;
+        this.TextMode = 'TextMode' in params ? params.TextMode : null;
 
     }
 }

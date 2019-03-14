@@ -16,22 +16,32 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
-const MasterNodeInfo = models.MasterNodeInfo;
+const InstanceLog = models.InstanceLog;
+const TaskDetail = models.TaskDetail;
+const DescribeInstanceOperationsRequest = models.DescribeInstanceOperationsRequest;
+const OperationDetail = models.OperationDetail;
+const RestartInstanceResponse = models.RestartInstanceResponse;
+const DictInfo = models.DictInfo;
 const CreateInstanceResponse = models.CreateInstanceResponse;
-const RestartInstanceRequest = models.RestartInstanceRequest;
-const DeleteInstanceRequest = models.DeleteInstanceRequest;
-const DescribeInstancesRequest = models.DescribeInstancesRequest;
-const EsDictionaryInfo = models.EsDictionaryInfo;
-const UpdateInstanceResponse = models.UpdateInstanceResponse;
-const EsAcl = models.EsAcl;
+const DescribeInstanceLogsRequest = models.DescribeInstanceLogsRequest;
 const CosBackup = models.CosBackup;
-const UpdateInstanceRequest = models.UpdateInstanceRequest;
+const KeyValue = models.KeyValue;
 const CreateInstanceRequest = models.CreateInstanceRequest;
 const InstanceInfo = models.InstanceInfo;
-const RestartInstanceResponse = models.RestartInstanceResponse;
 const DeleteInstanceResponse = models.DeleteInstanceResponse;
-const DictInfo = models.DictInfo;
 const DescribeInstancesResponse = models.DescribeInstancesResponse;
+const DescribeInstanceLogsResponse = models.DescribeInstanceLogsResponse;
+const RestartInstanceRequest = models.RestartInstanceRequest;
+const DescribeInstancesRequest = models.DescribeInstancesRequest;
+const UpdateInstanceRequest = models.UpdateInstanceRequest;
+const EsDictionaryInfo = models.EsDictionaryInfo;
+const DescribeInstanceOperationsResponse = models.DescribeInstanceOperationsResponse;
+const EsAcl = models.EsAcl;
+const MasterNodeInfo = models.MasterNodeInfo;
+const DeleteInstanceRequest = models.DeleteInstanceRequest;
+const SubTaskDetail = models.SubTaskDetail;
+const UpdateInstanceResponse = models.UpdateInstanceResponse;
+const Operation = models.Operation;
 
 
 /**
@@ -45,14 +55,25 @@ class EsClient extends AbstractClient {
     }
     
     /**
-     * 对已存在的集群进行扩缩容，修改实例名称，修改配置，重置密码， 添加Kibana黑白名单等操作
-     * @param {UpdateInstanceRequest} req
-     * @param {function(string, UpdateInstanceResponse):void} cb
+     * 查询实例指定条件下的操作记录
+     * @param {DescribeInstanceOperationsRequest} req
+     * @param {function(string, DescribeInstanceOperationsResponse):void} cb
      * @public
      */
-    UpdateInstance(req, cb) {
-        let resp = new UpdateInstanceResponse();
-        this.request("UpdateInstance", req, resp, cb);
+    DescribeInstanceOperations(req, cb) {
+        let resp = new DescribeInstanceOperationsResponse();
+        this.request("DescribeInstanceOperations", req, resp, cb);
+    }
+
+    /**
+     * 查询用户该地域下符合条件的所有实例
+     * @param {DescribeInstancesRequest} req
+     * @param {function(string, DescribeInstancesResponse):void} cb
+     * @public
+     */
+    DescribeInstances(req, cb) {
+        let resp = new DescribeInstancesResponse();
+        this.request("DescribeInstances", req, resp, cb);
     }
 
     /**
@@ -67,14 +88,24 @@ class EsClient extends AbstractClient {
     }
 
     /**
-     * 查询用户该地域下符合条件的所有实例
-     * @param {DescribeInstancesRequest} req
-     * @param {function(string, DescribeInstancesResponse):void} cb
+     * 对集群进行扩缩容，修改实例名称，修改配置，重置密码， 添加Kibana黑白名单等操作。参数中InstanceId为必传参数，ForceRestart为选填参数，剩余参数传递组合及含义如下：<br>
+  InstanceName：修改实例名称(仅用于标识实例)<br>
+  NodeNum：集群数据节点横向扩缩容<br>
+  NodeType, DiskSize：集群数据节点纵向扩缩容<br>
+  MasterNodeNum: 集群专用主节点横向扩缩容<br>
+  MasterNodeType, MasterNodeDiskSize: 集群专用主节点纵向扩缩容<br>
+  EsConfig：修改集群配置<br>
+  Password：修改集群密码<br>
+  EsAcl：修改Kibana密码<br>
+  CosBackUp: 设置集群COS自动备份信息<br>
+以上参数组合只能传递一种，多传或少传均会导致请求失败<br>
+     * @param {UpdateInstanceRequest} req
+     * @param {function(string, UpdateInstanceResponse):void} cb
      * @public
      */
-    DescribeInstances(req, cb) {
-        let resp = new DescribeInstancesResponse();
-        this.request("DescribeInstances", req, resp, cb);
+    UpdateInstance(req, cb) {
+        let resp = new UpdateInstanceResponse();
+        this.request("UpdateInstance", req, resp, cb);
     }
 
     /**
@@ -97,6 +128,17 @@ class EsClient extends AbstractClient {
     RestartInstance(req, cb) {
         let resp = new RestartInstanceResponse();
         this.request("RestartInstance", req, resp, cb);
+    }
+
+    /**
+     * 查询用户该地域下符合条件的ES集群的日志
+     * @param {DescribeInstanceLogsRequest} req
+     * @param {function(string, DescribeInstanceLogsResponse):void} cb
+     * @public
+     */
+    DescribeInstanceLogs(req, cb) {
+        let resp = new DescribeInstanceLogsResponse();
+        this.request("DescribeInstanceLogs", req, resp, cb);
     }
 
 
