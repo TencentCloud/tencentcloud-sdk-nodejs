@@ -16,16 +16,20 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
+const DescribeCreditResultRequest = models.DescribeCreditResultRequest;
 const DescribeTaskStatusRequest = models.DescribeTaskStatusRequest;
 const ApplyBlackListRequest = models.ApplyBlackListRequest;
+const ApplyCreditAuditRequest = models.ApplyCreditAuditRequest;
 const DownloadReportResponse = models.DownloadReportResponse;
+const DescribeCreditResultResponse = models.DescribeCreditResultResponse;
+const UploadFileRequest = models.UploadFileRequest;
 const UploadFileResponse = models.UploadFileResponse;
 const ApplyBlackListResponse = models.ApplyBlackListResponse;
 const DescribeRecordsRequest = models.DescribeRecordsRequest;
 const DescribeTaskStatusResponse = models.DescribeTaskStatusResponse;
-const UploadFileRequest = models.UploadFileRequest;
-const DownloadReportRequest = models.DownloadReportRequest;
 const DescribeRecordsResponse = models.DescribeRecordsResponse;
+const DownloadReportRequest = models.DownloadReportRequest;
+const ApplyCreditAuditResponse = models.ApplyCreditAuditResponse;
 const UploadDataFileResponse = models.UploadDataFileResponse;
 const SingleBlackApply = models.SingleBlackApply;
 const UploadDataFileRequest = models.UploadDataFileRequest;
@@ -43,7 +47,7 @@ class CrClient extends AbstractClient {
     }
     
     /**
-     * 用于下载当日催收结果报表，当日23:00后，可获取当日催收结果。
+     * 用于下载当日催收和回访结果报表。当日23:00后，可获取当日催收结果，次日00:30后，可获取昨日回访结果。
      * @param {DownloadReportRequest} req
      * @param {function(string, DownloadReportResponse):void} cb
      * @public
@@ -62,6 +66,17 @@ class CrClient extends AbstractClient {
     DescribeRecords(req, cb) {
         let resp = new DescribeRecordsResponse();
         this.request("DescribeRecords", req, resp, cb);
+    }
+
+    /**
+     * 根据信审任务ID和请求日期，获取相关信审结果。
+     * @param {DescribeCreditResultRequest} req
+     * @param {function(string, DescribeCreditResultResponse):void} cb
+     * @public
+     */
+    DescribeCreditResult(req, cb) {
+        let resp = new DescribeCreditResultResponse();
+        this.request("DescribeCreditResult", req, resp, cb);
     }
 
     /**
@@ -114,6 +129,17 @@ class CrClient extends AbstractClient {
     ApplyBlackList(req, cb) {
         let resp = new ApplyBlackListResponse();
         this.request("ApplyBlackList", req, resp, cb);
+    }
+
+    /**
+     * 提交信审外呼申请，返回当次请求日期。
+     * @param {ApplyCreditAuditRequest} req
+     * @param {function(string, ApplyCreditAuditResponse):void} cb
+     * @public
+     */
+    ApplyCreditAudit(req, cb) {
+        let resp = new ApplyCreditAuditResponse();
+        this.request("ApplyCreditAudit", req, resp, cb);
     }
 
 

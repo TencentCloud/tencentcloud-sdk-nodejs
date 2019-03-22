@@ -78,6 +78,18 @@ class CreateFunctionRequest extends  AbstractModel {
          */
         this.VpcConfig = null;
 
+        /**
+         * 函数日志投递到的CLS LogsetID
+         * @type {string || null}
+         */
+        this.ClsLogsetId = null;
+
+        /**
+         * 函数日志投递到的CLS TopicID
+         * @type {string || null}
+         */
+        this.ClsTopicId = null;
+
     }
 
     /**
@@ -111,6 +123,8 @@ class CreateFunctionRequest extends  AbstractModel {
             obj.deserialize(params.VpcConfig)
             this.VpcConfig = obj;
         }
+        this.ClsLogsetId = 'ClsLogsetId' in params ? params.ClsLogsetId : null;
+        this.ClsTopicId = 'ClsTopicId' in params ? params.ClsTopicId : null;
 
     }
 }
@@ -139,6 +153,34 @@ class DeleteFunctionRequest extends  AbstractModel {
             return;
         }
         this.FunctionName = 'FunctionName' in params ? params.FunctionName : null;
+
+    }
+}
+
+/**
+ * CopyFunction返回参数结构体
+ * @class
+ */
+class CopyFunctionResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -259,6 +301,18 @@ class Trigger extends  AbstractModel {
          */
         this.AddTime = null;
 
+        /**
+         * 使能开关
+         * @type {number || null}
+         */
+        this.Enable = null;
+
+        /**
+         * 客户自定义参数
+         * @type {string || null}
+         */
+        this.CustomArgument = null;
+
     }
 
     /**
@@ -273,6 +327,8 @@ class Trigger extends  AbstractModel {
         this.TriggerDesc = 'TriggerDesc' in params ? params.TriggerDesc : null;
         this.TriggerName = 'TriggerName' in params ? params.TriggerName : null;
         this.AddTime = 'AddTime' in params ? params.AddTime : null;
+        this.Enable = 'Enable' in params ? params.Enable : null;
+        this.CustomArgument = 'CustomArgument' in params ? params.CustomArgument : null;
 
     }
 }
@@ -292,7 +348,7 @@ class InvokeResponse extends  AbstractModel {
         this.Result = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -326,7 +382,7 @@ class CreateFunctionResponse extends  AbstractModel {
         super();
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -389,6 +445,30 @@ class Function extends  AbstractModel {
          */
         this.Namespace = null;
 
+        /**
+         * 函数状态
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * 函数状态详情
+         * @type {string || null}
+         */
+        this.StatusDesc = null;
+
+        /**
+         * 函数描述
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * 函数标签
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
     }
 
     /**
@@ -404,6 +484,18 @@ class Function extends  AbstractModel {
         this.FunctionName = 'FunctionName' in params ? params.FunctionName : null;
         this.FunctionId = 'FunctionId' in params ? params.FunctionId : null;
         this.Namespace = 'Namespace' in params ? params.Namespace : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.StatusDesc = 'StatusDesc' in params ? params.StatusDesc : null;
+        this.Description = 'Description' in params ? params.Description : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
 
     }
 }
@@ -607,7 +699,7 @@ class ListFunctionsResponse extends  AbstractModel {
         this.TotalCount = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -645,7 +737,13 @@ class CreateTriggerResponse extends  AbstractModel {
         super();
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 触发器信息
+         * @type {Trigger || null}
+         */
+        this.TriggerInfo = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -658,6 +756,12 @@ class CreateTriggerResponse extends  AbstractModel {
     deserialize(params) {
         if (!params) {
             return;
+        }
+
+        if (params.TriggerInfo) {
+            let obj = new Trigger();
+            obj.deserialize(params.TriggerInfo)
+            this.TriggerInfo = obj;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -742,6 +846,69 @@ class Result extends  AbstractModel {
 }
 
 /**
+ * CopyFunction请求参数结构体
+ * @class
+ */
+class CopyFunctionRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 函数名
+         * @type {string || null}
+         */
+        this.FunctionName = null;
+
+        /**
+         * 新函数的名称
+         * @type {string || null}
+         */
+        this.NewFunctionName = null;
+
+        /**
+         * 命名空间，默认为default
+         * @type {string || null}
+         */
+        this.Namespace = null;
+
+        /**
+         * 将函数复制到的命名空间，默认为default
+         * @type {string || null}
+         */
+        this.TargetNamespace = null;
+
+        /**
+         * 函数描述
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * 要将函数复制到的地域，不填则默认为当前地域
+         * @type {string || null}
+         */
+        this.TargetRegion = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FunctionName = 'FunctionName' in params ? params.FunctionName : null;
+        this.NewFunctionName = 'NewFunctionName' in params ? params.NewFunctionName : null;
+        this.Namespace = 'Namespace' in params ? params.Namespace : null;
+        this.TargetNamespace = 'TargetNamespace' in params ? params.TargetNamespace : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.TargetRegion = 'TargetRegion' in params ? params.TargetRegion : null;
+
+    }
+}
+
+/**
  * UpdateFunctionConfiguration返回参数结构体
  * @class
  */
@@ -750,7 +917,7 @@ class UpdateFunctionConfigurationResponse extends  AbstractModel {
         super();
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -770,7 +937,9 @@ class UpdateFunctionConfigurationResponse extends  AbstractModel {
 }
 
 /**
- * 日志过滤条件，用于区分正确与错误日志
+ * 描述键值对过滤器，用于条件过滤查询。例如过滤ID、名称、状态等
+若存在多个Filter时，Filter间的关系为逻辑与（AND）关系。
+若同一个Filter存在多个Values，同一Filter下Values间的关系为逻辑或（OR）关系。
  * @class
  */
 class Filter extends  AbstractModel {
@@ -778,10 +947,16 @@ class Filter extends  AbstractModel {
         super();
 
         /**
-         * filter.RetCode=not0 表示只返回错误日志，filter.RetCode=is0 表示只返回正确日志，无输入则返回所有日志。
+         * 需要过滤的字段。
          * @type {string || null}
          */
-        this.RetCode = null;
+        this.Name = null;
+
+        /**
+         * 字段的过滤值。
+         * @type {Array.<string> || null}
+         */
+        this.Values = null;
 
     }
 
@@ -792,7 +967,8 @@ class Filter extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RetCode = 'RetCode' in params ? params.RetCode : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Values = 'Values' in params ? params.Values : null;
 
     }
 }
@@ -955,7 +1131,49 @@ class GetFunctionResponse extends  AbstractModel {
         this.Role = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 是否自动安装依赖
+         * @type {string || null}
+         */
+        this.InstallDependency = null;
+
+        /**
+         * 函数状态
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * 状态描述
+         * @type {string || null}
+         */
+        this.StatusDesc = null;
+
+        /**
+         * 日志投递到的Cls日志集
+         * @type {string || null}
+         */
+        this.ClsLogsetId = null;
+
+        /**
+         * 日志投递到的Cls Topic
+         * @type {string || null}
+         */
+        this.ClsTopicId = null;
+
+        /**
+         * 函数ID
+         * @type {string || null}
+         */
+        this.FunctionId = null;
+
+        /**
+         * 函数的标签列表
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -1006,6 +1224,21 @@ class GetFunctionResponse extends  AbstractModel {
         this.ErrNo = 'ErrNo' in params ? params.ErrNo : null;
         this.Namespace = 'Namespace' in params ? params.Namespace : null;
         this.Role = 'Role' in params ? params.Role : null;
+        this.InstallDependency = 'InstallDependency' in params ? params.InstallDependency : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.StatusDesc = 'StatusDesc' in params ? params.StatusDesc : null;
+        this.ClsLogsetId = 'ClsLogsetId' in params ? params.ClsLogsetId : null;
+        this.ClsTopicId = 'ClsTopicId' in params ? params.ClsTopicId : null;
+        this.FunctionId = 'FunctionId' in params ? params.FunctionId : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -1032,7 +1265,7 @@ class GetFunctionLogsResponse extends  AbstractModel {
         this.Data = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -1099,6 +1332,21 @@ class ListFunctionsRequest extends  AbstractModel {
          */
         this.SearchKey = null;
 
+        /**
+         * 函数描述，支持模糊搜索
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * 过滤条件。
+- tag:tag-key - String - 是否必填：否 - （过滤条件）按照标签键值对进行过滤。 tag-key使用具体的标签键进行替换。
+
+每次请求的Filters的上限为10，Filter.Values的上限为5。
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
     }
 
     /**
@@ -1113,6 +1361,16 @@ class ListFunctionsRequest extends  AbstractModel {
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.SearchKey = 'SearchKey' in params ? params.SearchKey : null;
+        this.Description = 'Description' in params ? params.Description : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
 
     }
 }
@@ -1126,7 +1384,7 @@ class DeleteTriggerResponse extends  AbstractModel {
         super();
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -1233,6 +1491,18 @@ class Code extends  AbstractModel {
          */
         this.CosBucketRegion = null;
 
+        /**
+         * 如果是通过Demo创建的话，需要传入DemoId
+         * @type {string || null}
+         */
+        this.DemoId = null;
+
+        /**
+         * 如果是从TempCos创建的话，需要传入TempCosObjectName
+         * @type {string || null}
+         */
+        this.TempCosObjectName = null;
+
     }
 
     /**
@@ -1246,6 +1516,8 @@ class Code extends  AbstractModel {
         this.CosObjectName = 'CosObjectName' in params ? params.CosObjectName : null;
         this.ZipFile = 'ZipFile' in params ? params.ZipFile : null;
         this.CosBucketRegion = 'CosBucketRegion' in params ? params.CosBucketRegion : null;
+        this.DemoId = 'DemoId' in params ? params.DemoId : null;
+        this.TempCosObjectName = 'TempCosObjectName' in params ? params.TempCosObjectName : null;
 
     }
 }
@@ -1289,7 +1561,7 @@ class UpdateFunctionCodeRequest extends  AbstractModel {
         this.ZipFile = null;
 
         /**
-         * 对象存储的地域，地域为北京时需要传入ap-beijing,北京一区时需要传递ap-beijing-1，其他的地域不需要传递。
+         * 对象存储的地域，注：北京分为ap-beijing和ap-beijing-1
          * @type {string || null}
          */
         this.CosBucketRegion = null;
@@ -1340,20 +1612,20 @@ class GetFunctionLogsRequest extends  AbstractModel {
         this.Limit = null;
 
         /**
-         * 以升序还是降序的方式对日志进行排序，可选值 desc和 acs
+         * 以升序还是降序的方式对日志进行排序，可选值 desc和 asc
          * @type {string || null}
          */
         this.Order = null;
 
         /**
-         * 根据某个字段排序日志,支持以下字段：startTime、functionName、requestId、duration和 memUsage
+         * 根据某个字段排序日志,支持以下字段：function_name, duration, mem_usage, start_time
          * @type {string || null}
          */
         this.OrderBy = null;
 
         /**
          * 日志过滤条件。可用来区分正确和错误日志，filter.retCode=not0 表示只返回错误日志，filter.retCode=is0 表示只返回正确日志，不传，则返回所有日志
-         * @type {Filter || null}
+         * @type {LogFilter || null}
          */
         this.Filter = null;
 
@@ -1397,7 +1669,7 @@ class GetFunctionLogsRequest extends  AbstractModel {
         this.OrderBy = 'OrderBy' in params ? params.OrderBy : null;
 
         if (params.Filter) {
-            let obj = new Filter();
+            let obj = new LogFilter();
             obj.deserialize(params.Filter)
             this.Filter = obj;
         }
@@ -1430,7 +1702,7 @@ class CreateTriggerRequest extends  AbstractModel {
         this.TriggerName = null;
 
         /**
-         * 触发器类型，目前支持 cos 、cmq、 timers、 ckafka类型
+         * 触发器类型，目前支持 cos 、cmq、 timer、 ckafka类型
          * @type {string || null}
          */
         this.Type = null;
@@ -1447,6 +1719,12 @@ class CreateTriggerRequest extends  AbstractModel {
          */
         this.Qualifier = null;
 
+        /**
+         * 触发器的初始是能状态 OPEN表示开启 CLOSE表示关闭
+         * @type {string || null}
+         */
+        this.Enable = null;
+
     }
 
     /**
@@ -1461,6 +1739,7 @@ class CreateTriggerRequest extends  AbstractModel {
         this.Type = 'Type' in params ? params.Type : null;
         this.TriggerDesc = 'TriggerDesc' in params ? params.TriggerDesc : null;
         this.Qualifier = 'Qualifier' in params ? params.Qualifier : null;
+        this.Enable = 'Enable' in params ? params.Enable : null;
 
     }
 }
@@ -1474,7 +1753,7 @@ class DeleteFunctionResponse extends  AbstractModel {
         super();
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -1489,6 +1768,41 @@ class DeleteFunctionResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 函数标签
+ * @class
+ */
+class Tag extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 标签的key
+         * @type {string || null}
+         */
+        this.Key = null;
+
+        /**
+         * 标签的value
+         * @type {string || null}
+         */
+        this.Value = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Key = 'Key' in params ? params.Key : null;
+        this.Value = 'Value' in params ? params.Value : null;
 
     }
 }
@@ -1593,7 +1907,7 @@ class UpdateFunctionCodeResponse extends  AbstractModel {
         super();
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -1612,9 +1926,38 @@ class UpdateFunctionCodeResponse extends  AbstractModel {
     }
 }
 
+/**
+ * 日志过滤条件，用于区分正确与错误日志
+ * @class
+ */
+class LogFilter extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * filter.RetCode=not0 表示只返回错误日志，filter.RetCode=is0 表示只返回正确日志，无输入则返回所有日志。
+         * @type {string || null}
+         */
+        this.RetCode = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RetCode = 'RetCode' in params ? params.RetCode : null;
+
+    }
+}
+
 module.exports = {
     CreateFunctionRequest: CreateFunctionRequest,
     DeleteFunctionRequest: DeleteFunctionRequest,
+    CopyFunctionResponse: CopyFunctionResponse,
     GetFunctionRequest: GetFunctionRequest,
     Environment: Environment,
     Trigger: Trigger,
@@ -1627,6 +1970,7 @@ module.exports = {
     ListFunctionsResponse: ListFunctionsResponse,
     CreateTriggerResponse: CreateTriggerResponse,
     Result: Result,
+    CopyFunctionRequest: CopyFunctionRequest,
     UpdateFunctionConfigurationResponse: UpdateFunctionConfigurationResponse,
     Filter: Filter,
     Variable: Variable,
@@ -1640,7 +1984,9 @@ module.exports = {
     GetFunctionLogsRequest: GetFunctionLogsRequest,
     CreateTriggerRequest: CreateTriggerRequest,
     DeleteFunctionResponse: DeleteFunctionResponse,
+    Tag: Tag,
     FunctionLog: FunctionLog,
     UpdateFunctionCodeResponse: UpdateFunctionCodeResponse,
+    LogFilter: LogFilter,
 
 }

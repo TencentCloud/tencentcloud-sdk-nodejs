@@ -962,6 +962,20 @@ class AgentBillElem extends  AbstractModel {
          */
         this.PayerMode = null;
 
+        /**
+         * 客户类型：可以为new(新拓)/assign(指定)/old(存量)/空
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ClientType = null;
+
+        /**
+         * 项目类型：可以为self(自拓项目)/platform(合作项目)/repeat(复算项目  )/空
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ProjectType = null;
+
     }
 
     /**
@@ -981,6 +995,8 @@ class AgentBillElem extends  AbstractModel {
         this.SettleMonth = 'SettleMonth' in params ? params.SettleMonth : null;
         this.Amt = 'Amt' in params ? params.Amt : null;
         this.PayerMode = 'PayerMode' in params ? params.PayerMode : null;
+        this.ClientType = 'ClientType' in params ? params.ClientType : null;
+        this.ProjectType = 'ProjectType' in params ? params.ProjectType : null;
 
     }
 }

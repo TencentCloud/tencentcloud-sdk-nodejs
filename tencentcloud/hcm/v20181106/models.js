@@ -42,6 +42,12 @@ class Item extends  AbstractModel {
          */
         this.ItemCoord = null;
 
+        /**
+         * 推荐的答案
+         * @type {string || null}
+         */
+        this.Answer = null;
+
     }
 
     /**
@@ -59,6 +65,7 @@ class Item extends  AbstractModel {
             obj.deserialize(params.ItemCoord)
             this.ItemCoord = obj;
         }
+        this.Answer = 'Answer' in params ? params.Answer : null;
 
     }
 }

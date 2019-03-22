@@ -477,6 +477,66 @@ class IdCardVerificationResponse extends  AbstractModel {
 }
 
 /**
+ * BankCardVerification返回参数结构体
+ * @class
+ */
+class BankCardVerificationResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 认证结果码。
+'0': '认证通过'
+'-1': '认证未通过'
+'-2': '姓名校验不通过'
+'-3': '身份证号码有误'
+'-4': '银行卡号码有误'
+'-5': '持卡人信息有误'
+'-6': '未开通无卡支付'
+'-7': '此卡被没收'
+'-8': '无效卡号'
+'-9': '此卡无对应发卡行'
+'-10': '该卡未初始化或睡眠卡'
+'-11': '作弊卡、吞卡'
+'-12': '此卡已挂失'
+'-13': '该卡已过期'
+'-14': '受限制的卡'
+'-15': '密码错误次数超限'
+'-16': '发卡行不支持此交易'
+'-17': '服务繁忙'
+         * @type {string || null}
+         */
+        this.Result = null;
+
+        /**
+         * 认证结果信息。
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Result = 'Result' in params ? params.Result : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * IdCardVerification请求参数结构体
  * @class
  */
@@ -507,6 +567,48 @@ class IdCardVerificationRequest extends  AbstractModel {
         }
         this.IdCard = 'IdCard' in params ? params.IdCard : null;
         this.Name = 'Name' in params ? params.Name : null;
+
+    }
+}
+
+/**
+ * BankCardVerification请求参数结构体
+ * @class
+ */
+class BankCardVerificationRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 身份证号
+         * @type {string || null}
+         */
+        this.IdCard = null;
+
+        /**
+         * 姓名
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 银行卡
+         * @type {string || null}
+         */
+        this.BankCard = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.IdCard = 'IdCard' in params ? params.IdCard : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.BankCard = 'BankCard' in params ? params.BankCard : null;
 
     }
 }
@@ -791,7 +893,9 @@ module.exports = {
     GetDetectInfoRequest: GetDetectInfoRequest,
     GetLiveCodeRequest: GetLiveCodeRequest,
     IdCardVerificationResponse: IdCardVerificationResponse,
+    BankCardVerificationResponse: BankCardVerificationResponse,
     IdCardVerificationRequest: IdCardVerificationRequest,
+    BankCardVerificationRequest: BankCardVerificationRequest,
     ImageRecognitionRequest: ImageRecognitionRequest,
     LivenessCompareRequest: LivenessCompareRequest,
     GetActionSequenceResponse: GetActionSequenceResponse,
