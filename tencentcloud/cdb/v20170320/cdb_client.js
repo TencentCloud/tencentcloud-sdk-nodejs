@@ -44,6 +44,7 @@ const DescribeBinlogsResponse = models.DescribeBinlogsResponse;
 const DeleteParamTemplateResponse = models.DeleteParamTemplateResponse;
 const DescribeDefaultParamsRequest = models.DescribeDefaultParamsRequest;
 const DBSwitchInfo = models.DBSwitchInfo;
+const ModifyTimeWindowResponse = models.ModifyTimeWindowResponse;
 const DescribeDBPriceResponse = models.DescribeDBPriceResponse;
 const DescribeTasksResponse = models.DescribeTasksResponse;
 const DescribeParamTemplatesRequest = models.DescribeParamTemplatesRequest;
@@ -67,9 +68,9 @@ const BinlogInfo = models.BinlogInfo;
 const DescribeTasksRequest = models.DescribeTasksRequest;
 const IsolateDBInstanceResponse = models.IsolateDBInstanceResponse;
 const SlaveConfig = models.SlaveConfig;
-const DeviceCpuInfo = models.DeviceCpuInfo;
+const AddTimeWindowRequest = models.AddTimeWindowRequest;
 const ImportRecord = models.ImportRecord;
-const CreateParamTemplateRequest = models.CreateParamTemplateRequest;
+const CreateAccountsRequest = models.CreateAccountsRequest;
 const CreateDBInstanceHourRequest = models.CreateDBInstanceHourRequest;
 const DescribeSlowLogsResponse = models.DescribeSlowLogsResponse;
 const RollbackInstancesInfo = models.RollbackInstancesInfo;
@@ -102,9 +103,11 @@ const ParamTemplateInfo = models.ParamTemplateInfo;
 const DescribeBackupDatabasesResponse = models.DescribeBackupDatabasesResponse;
 const DescribeInstanceParamRecordsRequest = models.DescribeInstanceParamRecordsRequest;
 const ModifyAutoRenewFlagResponse = models.ModifyAutoRenewFlagResponse;
+const DeleteTimeWindowResponse = models.DeleteTimeWindowResponse;
 const DescribeBackupsResponse = models.DescribeBackupsResponse;
+const DescribeTimeWindowRequest = models.DescribeTimeWindowRequest;
 const DescribeDBImportRecordsResponse = models.DescribeDBImportRecordsResponse;
-const OpenWanServiceRequest = models.OpenWanServiceRequest;
+const DescribeTimeWindowResponse = models.DescribeTimeWindowResponse;
 const DatabaseName = models.DatabaseName;
 const DescribeInstanceParamsRequest = models.DescribeInstanceParamsRequest;
 const ModifyDBInstanceSecurityGroupsRequest = models.ModifyDBInstanceSecurityGroupsRequest;
@@ -120,9 +123,11 @@ const SecurityGroup = models.SecurityGroup;
 const ZoneConf = models.ZoneConf;
 const DeviceNetInfo = models.DeviceNetInfo;
 const SlaveInfo = models.SlaveInfo;
+const TagInfo = models.TagInfo;
 const DescribeSupportedPrivilegesResponse = models.DescribeSupportedPrivilegesResponse;
 const ModifyDBInstanceNameRequest = models.ModifyDBInstanceNameRequest;
 const TagInfoUnit = models.TagInfoUnit;
+const OpenDBInstanceGTIDRequest = models.OpenDBInstanceGTIDRequest;
 const UpgradeDBInstanceEngineVersionResponse = models.UpgradeDBInstanceEngineVersionResponse;
 const InquiryPriceUpgradeInstancesRequest = models.InquiryPriceUpgradeInstancesRequest;
 const DescribeAsyncRequestInfoRequest = models.DescribeAsyncRequestInfoRequest;
@@ -140,7 +145,7 @@ const DescribeDBInstanceConfigResponse = models.DescribeDBInstanceConfigResponse
 const DescribeDefaultParamsResponse = models.DescribeDefaultParamsResponse;
 const ModifyAccountPrivilegesResponse = models.ModifyAccountPrivilegesResponse;
 const BackupConfig = models.BackupConfig;
-const OpenDBInstanceGTIDRequest = models.OpenDBInstanceGTIDRequest;
+const DeviceCpuInfo = models.DeviceCpuInfo;
 const DescribeTagsOfInstanceIdsResponse = models.DescribeTagsOfInstanceIdsResponse;
 const VerifyRootAccountResponse = models.VerifyRootAccountResponse;
 const DescribeDBInstanceConfigRequest = models.DescribeDBInstanceConfigRequest;
@@ -156,10 +161,11 @@ const InstanceRebootTime = models.InstanceRebootTime;
 const RenewDBInstanceResponse = models.RenewDBInstanceResponse;
 const DescribeDatabasesResponse = models.DescribeDatabasesResponse;
 const ModifyParamTemplateRequest = models.ModifyParamTemplateRequest;
+const AddTimeWindowResponse = models.AddTimeWindowResponse;
 const ZoneSellConf = models.ZoneSellConf;
 const InitDBInstancesRequest = models.InitDBInstancesRequest;
 const RoInstanceInfo = models.RoInstanceInfo;
-const CreateAccountsRequest = models.CreateAccountsRequest;
+const CreateParamTemplateRequest = models.CreateParamTemplateRequest;
 const IsolateDBInstanceRequest = models.IsolateDBInstanceRequest;
 const DeviceCpuRateInfo = models.DeviceCpuRateInfo;
 const ModifyAccountPrivilegesRequest = models.ModifyAccountPrivilegesRequest;
@@ -178,7 +184,8 @@ const ModifyBackupConfigResponse = models.ModifyBackupConfigResponse;
 const DescribeDBImportRecordsRequest = models.DescribeDBImportRecordsRequest;
 const CreateDBImportJobResponse = models.CreateDBImportJobResponse;
 const DescribeTagsOfInstanceIdsRequest = models.DescribeTagsOfInstanceIdsRequest;
-const TagInfo = models.TagInfo;
+const OpenWanServiceRequest = models.OpenWanServiceRequest;
+const DeleteTimeWindowRequest = models.DeleteTimeWindowRequest;
 const DescribeDBInstancesResponse = models.DescribeDBInstancesResponse;
 const TablePrivilege = models.TablePrivilege;
 const SlowLogInfo = models.SlowLogInfo;
@@ -196,6 +203,7 @@ const DescribeAccountPrivilegesRequest = models.DescribeAccountPrivilegesRequest
 const DescribeAccountsResponse = models.DescribeAccountsResponse;
 const RollbackTimeRange = models.RollbackTimeRange;
 const DeleteBackupRequest = models.DeleteBackupRequest;
+const ModifyTimeWindowRequest = models.ModifyTimeWindowRequest;
 const DescribeBackupConfigResponse = models.DescribeBackupConfigResponse;
 const StartBatchRollbackResponse = models.StartBatchRollbackResponse;
 const DescribeDeviceMonitorInfoResponse = models.DescribeDeviceMonitorInfoResponse;
@@ -265,6 +273,17 @@ class CdbClient extends AbstractClient {
     }
 
     /**
+     * 本接口(DescribeTimeWindow)用于查询云数据库实例的维护时间窗口。
+     * @param {DescribeTimeWindowRequest} req
+     * @param {function(string, DescribeTimeWindowResponse):void} cb
+     * @public
+     */
+    DescribeTimeWindow(req, cb) {
+        let resp = new DescribeTimeWindowResponse();
+        this.request("DescribeTimeWindow", req, resp, cb);
+    }
+
+    /**
      * 本接口(DescribeProjectSecurityGroups)用于查询项目的安全组详情。
      * @param {DescribeProjectSecurityGroupsRequest} req
      * @param {function(string, DescribeProjectSecurityGroupsResponse):void} cb
@@ -322,6 +341,17 @@ class CdbClient extends AbstractClient {
     }
 
     /**
+     * 本接口(ModifyTimeWindow)用于更新云数据库实例的维护时间窗口。
+     * @param {ModifyTimeWindowRequest} req
+     * @param {function(string, ModifyTimeWindowResponse):void} cb
+     * @public
+     */
+    ModifyTimeWindow(req, cb) {
+        let resp = new ModifyTimeWindowResponse();
+        this.request("ModifyTimeWindow", req, resp, cb);
+    }
+
+    /**
      * 本接口(OpenDBInstanceGTID)用于开启云数据库实例的GTID，只支持版本为5.6以及以上的实例。
      * @param {OpenDBInstanceGTIDRequest} req
      * @param {function(string, OpenDBInstanceGTIDResponse):void} cb
@@ -374,6 +404,17 @@ class CdbClient extends AbstractClient {
     ModifyInstanceParam(req, cb) {
         let resp = new ModifyInstanceParamResponse();
         this.request("ModifyInstanceParam", req, resp, cb);
+    }
+
+    /**
+     * 本接口(StopDBImportJob)用于终止数据导入任务。
+     * @param {StopDBImportJobRequest} req
+     * @param {function(string, StopDBImportJobResponse):void} cb
+     * @public
+     */
+    StopDBImportJob(req, cb) {
+        let resp = new StopDBImportJobResponse();
+        this.request("StopDBImportJob", req, resp, cb);
     }
 
     /**
@@ -484,14 +525,14 @@ class CdbClient extends AbstractClient {
     }
 
     /**
-     * 本接口(StopDBImportJob)用于终止数据导入任务。
-     * @param {StopDBImportJobRequest} req
-     * @param {function(string, StopDBImportJobResponse):void} cb
+     * 本接口(AddTimeWindow)用于添加云数据库实例的维护时间窗口，以指定实例在哪些时间段可以自动执行切换访问操作。
+     * @param {AddTimeWindowRequest} req
+     * @param {function(string, AddTimeWindowResponse):void} cb
      * @public
      */
-    StopDBImportJob(req, cb) {
-        let resp = new StopDBImportJobResponse();
-        this.request("StopDBImportJob", req, resp, cb);
+    AddTimeWindow(req, cb) {
+        let resp = new AddTimeWindowResponse();
+        this.request("AddTimeWindow", req, resp, cb);
     }
 
     /**
@@ -995,14 +1036,14 @@ class CdbClient extends AbstractClient {
     }
 
     /**
-     * 本接口(DescribeBackupDatabases)用于查询备份数据库列表。
-     * @param {DescribeBackupDatabasesRequest} req
-     * @param {function(string, DescribeBackupDatabasesResponse):void} cb
+     * 本接口(DeleteTimeWindow)用于删除云数据库实例的维护时间窗口。删除实例维护时间窗口之后，默认的维护时间窗为 03:00-04:00，即当选择在维护时间窗口内切换访问新实例时，默认会在03:00-04:00点进行切换访问新实例。
+     * @param {DeleteTimeWindowRequest} req
+     * @param {function(string, DeleteTimeWindowResponse):void} cb
      * @public
      */
-    DescribeBackupDatabases(req, cb) {
-        let resp = new DescribeBackupDatabasesResponse();
-        this.request("DescribeBackupDatabases", req, resp, cb);
+    DeleteTimeWindow(req, cb) {
+        let resp = new DeleteTimeWindowResponse();
+        this.request("DeleteTimeWindow", req, resp, cb);
     }
 
     /**
@@ -1014,6 +1055,17 @@ class CdbClient extends AbstractClient {
     DescribeTables(req, cb) {
         let resp = new DescribeTablesResponse();
         this.request("DescribeTables", req, resp, cb);
+    }
+
+    /**
+     * 本接口(DescribeBackupDatabases)用于查询备份数据库列表。
+     * @param {DescribeBackupDatabasesRequest} req
+     * @param {function(string, DescribeBackupDatabasesResponse):void} cb
+     * @public
+     */
+    DescribeBackupDatabases(req, cb) {
+        let resp = new DescribeBackupDatabasesResponse();
+        this.request("DescribeBackupDatabases", req, resp, cb);
     }
 
 

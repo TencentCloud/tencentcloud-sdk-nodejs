@@ -17,12 +17,16 @@
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const CreateLiveSnapshotRuleRequest = models.CreateLiveSnapshotRuleRequest;
+const DescribeLiveSnapshotRulesResponse = models.DescribeLiveSnapshotRulesResponse;
 const CreateLiveCertRequest = models.CreateLiveCertRequest;
 const DescribeLiveCallbackTemplatesRequest = models.DescribeLiveCallbackTemplatesRequest;
 const DeleteLiveRecordRuleRequest = models.DeleteLiveRecordRuleRequest;
 const ResumeLiveStreamRequest = models.ResumeLiveStreamRequest;
 const DeleteLiveTranscodeTemplateResponse = models.DeleteLiveTranscodeTemplateResponse;
+const TemplateInfo = models.TemplateInfo;
 const DeleteLiveCallbackRuleResponse = models.DeleteLiveCallbackRuleResponse;
+const CreateLiveDomainStrategyResponse = models.CreateLiveDomainStrategyResponse;
+const ResumeDelayLiveStreamRequest = models.ResumeDelayLiveStreamRequest;
 const DescribeLiveWatermarkRulesResponse = models.DescribeLiveWatermarkRulesResponse;
 const DescribeLiveCallbackTemplateResponse = models.DescribeLiveCallbackTemplateResponse;
 const DeleteLiveSnapshotTemplateRequest = models.DeleteLiveSnapshotTemplateRequest;
@@ -30,29 +34,34 @@ const PushAuthKeyInfo = models.PushAuthKeyInfo;
 const ModifyPullStreamStatusRequest = models.ModifyPullStreamStatusRequest;
 const DescribeLiveStreamOnlineInfoResponse = models.DescribeLiveStreamOnlineInfoResponse;
 const DeleteLiveRecordTemplateRequest = models.DeleteLiveRecordTemplateRequest;
-const DescribeLivePlayAuthKeyRequest = models.DescribeLivePlayAuthKeyRequest;
+const DeleteLiveCallbackTemplateResponse = models.DeleteLiveCallbackTemplateResponse;
 const DescribeLiveStreamOnlineListResponse = models.DescribeLiveStreamOnlineListResponse;
 const ModifyLivePlayAuthKeyRequest = models.ModifyLivePlayAuthKeyRequest;
 const DomainCertInfo = models.DomainCertInfo;
 const RecordTemplateInfo = models.RecordTemplateInfo;
 const DeleteLiveTranscodeRuleResponse = models.DeleteLiveTranscodeRuleResponse;
+const DescribeStreamPlayInfoListResponse = models.DescribeStreamPlayInfoListResponse;
 const ModifyLiveSnapshotTemplateResponse = models.ModifyLiveSnapshotTemplateResponse;
 const ModifyLivePushAuthKeyRequest = models.ModifyLivePushAuthKeyRequest;
-const DeleteLiveSnapshotTemplateResponse = models.DeleteLiveSnapshotTemplateResponse;
+const DeleteLiveCallbackTemplateRequest = models.DeleteLiveCallbackTemplateRequest;
 const DescribeLiveStreamStateRequest = models.DescribeLiveStreamStateRequest;
 const DescribeLivePlayAuthKeyResponse = models.DescribeLivePlayAuthKeyResponse;
 const DescribeLiveSnapshotTemplateRequest = models.DescribeLiveSnapshotTemplateRequest;
+const DomainInfo = models.DomainInfo;
 const DescribeLiveTranscodeRulesRequest = models.DescribeLiveTranscodeRulesRequest;
+const EnableLiveDomainResponse = models.EnableLiveDomainResponse;
 const DeleteLiveSnapshotRuleRequest = models.DeleteLiveSnapshotRuleRequest;
 const ModifyPullStreamConfigRequest = models.ModifyPullStreamConfigRequest;
-const DescribeLiveSnapshotRulesResponse = models.DescribeLiveSnapshotRulesResponse;
+const DescribeLiveDomainStrategysRequest = models.DescribeLiveDomainStrategysRequest;
+const DescribeLiveTranscodeDetailInfoResponse = models.DescribeLiveTranscodeDetailInfoResponse;
+const DescribeLiveDomainRequest = models.DescribeLiveDomainRequest;
 const DescribeLiveStreamPublishedListRequest = models.DescribeLiveStreamPublishedListRequest;
 const DeleteLiveTranscodeRuleRequest = models.DeleteLiveTranscodeRuleRequest;
 const CreateLiveRecordRuleRequest = models.CreateLiveRecordRuleRequest;
 const DescribeLiveSnapshotTemplatesRequest = models.DescribeLiveSnapshotTemplatesRequest;
 const AddLiveWatermarkResponse = models.AddLiveWatermarkResponse;
 const DescribeLiveDomainCertResponse = models.DescribeLiveDomainCertResponse;
-const CreateLiveRecordTemplateResponse = models.CreateLiveRecordTemplateResponse;
+const DescribeLiveRecordTemplateRequest = models.DescribeLiveRecordTemplateRequest;
 const ModifyLiveDomainCertRequest = models.ModifyLiveDomainCertRequest;
 const StreamOnlineInfo = models.StreamOnlineInfo;
 const CreateLiveWatermarkRuleResponse = models.CreateLiveWatermarkRuleResponse;
@@ -60,6 +69,7 @@ const ForbidLiveStreamRequest = models.ForbidLiveStreamRequest;
 const StreamInfo = models.StreamInfo;
 const AddLiveWatermarkRequest = models.AddLiveWatermarkRequest;
 const ModifyLiveRecordTemplateResponse = models.ModifyLiveRecordTemplateResponse;
+const ModifyLivePlayDomainRequest = models.ModifyLivePlayDomainRequest;
 const DeleteLiveRecordTemplateResponse = models.DeleteLiveRecordTemplateResponse;
 const DescribeLiveWatermarkRequest = models.DescribeLiveWatermarkRequest;
 const AddDelayLiveStreamRequest = models.AddDelayLiveStreamRequest;
@@ -69,21 +79,24 @@ const DescribePullStreamConfigsRequest = models.DescribePullStreamConfigsRequest
 const CallBackTemplateInfo = models.CallBackTemplateInfo;
 const UnBindLiveDomainCertRequest = models.UnBindLiveDomainCertRequest;
 const DeleteLiveRecordResponse = models.DeleteLiveRecordResponse;
-const TemplateInfo = models.TemplateInfo;
+const DescribeLiveDomainsResponse = models.DescribeLiveDomainsResponse;
 const PullStreamConfig = models.PullStreamConfig;
 const CreateLiveRecordResponse = models.CreateLiveRecordResponse;
 const RuleInfo = models.RuleInfo;
 const UpdateLiveWatermarkResponse = models.UpdateLiveWatermarkResponse;
 const CreateLiveTranscodeTemplateResponse = models.CreateLiveTranscodeTemplateResponse;
-const SetLiveWatermarkStatusRequest = models.SetLiveWatermarkStatusRequest;
+const DayStreamPlayInfo = models.DayStreamPlayInfo;
 const ModifyPullStreamStatusResponse = models.ModifyPullStreamStatusResponse;
-const WatermarkInfo = models.WatermarkInfo;
+const ModifyLivePlayDomainResponse = models.ModifyLivePlayDomainResponse;
+const ForbidLiveDomainResponse = models.ForbidLiveDomainResponse;
 const DescribeLiveCertsResponse = models.DescribeLiveCertsResponse;
-const ResumeDelayLiveStreamRequest = models.ResumeDelayLiveStreamRequest;
+const DescribeStreamPlayInfoListRequest = models.DescribeStreamPlayInfoListRequest;
 const DescribeLiveRecordTemplatesResponse = models.DescribeLiveRecordTemplatesResponse;
 const DescribeLiveCertRequest = models.DescribeLiveCertRequest;
 const DeleteLiveWatermarkResponse = models.DeleteLiveWatermarkResponse;
+const ModifyLivePlayAuthKeyResponse = models.ModifyLivePlayAuthKeyResponse;
 const CreateLiveCallbackTemplateRequest = models.CreateLiveCallbackTemplateRequest;
+const StrategyInfo = models.StrategyInfo;
 const DropLiveStreamResponse = models.DropLiveStreamResponse;
 const DescribeLiveStreamStateResponse = models.DescribeLiveStreamStateResponse;
 const DeletePullStreamConfigResponse = models.DeletePullStreamConfigResponse;
@@ -93,22 +106,26 @@ const DescribeLiveWatermarksRequest = models.DescribeLiveWatermarksRequest;
 const CreateLiveTranscodeRuleRequest = models.CreateLiveTranscodeRuleRequest;
 const DescribeLiveWatermarkRulesRequest = models.DescribeLiveWatermarkRulesRequest;
 const DropLiveStreamRequest = models.DropLiveStreamRequest;
+const StopLiveRecordResponse = models.StopLiveRecordResponse;
 const CreateLiveCertResponse = models.CreateLiveCertResponse;
 const ModifyLiveCertResponse = models.ModifyLiveCertResponse;
+const TranscodeDetailInfo = models.TranscodeDetailInfo;
 const DescribeLiveSnapshotTemplateResponse = models.DescribeLiveSnapshotTemplateResponse;
 const DescribeLiveTranscodeRulesResponse = models.DescribeLiveTranscodeRulesResponse;
+const AddLiveDomainRequest = models.AddLiveDomainRequest;
 const StreamName = models.StreamName;
 const CreatePullStreamConfigRequest = models.CreatePullStreamConfigRequest;
 const DescribeLiveCertsRequest = models.DescribeLiveCertsRequest;
 const DescribeLiveCertResponse = models.DescribeLiveCertResponse;
+const AddLiveDomainResponse = models.AddLiveDomainResponse;
 const ModifyPullStreamConfigResponse = models.ModifyPullStreamConfigResponse;
-const DeleteLiveCallbackTemplateResponse = models.DeleteLiveCallbackTemplateResponse;
+const DescribeLivePlayAuthKeyRequest = models.DescribeLivePlayAuthKeyRequest;
 const DescribeLiveForbidStreamListResponse = models.DescribeLiveForbidStreamListResponse;
 const DescribeLiveWatermarkResponse = models.DescribeLiveWatermarkResponse;
 const ResumeLiveStreamResponse = models.ResumeLiveStreamResponse;
 const DeletePullStreamConfigRequest = models.DeletePullStreamConfigRequest;
-const DescribeLiveTranscodeTemplatesRequest = models.DescribeLiveTranscodeTemplatesRequest;
 const DescribeLiveWatermarksResponse = models.DescribeLiveWatermarksResponse;
+const WatermarkInfo = models.WatermarkInfo;
 const DescribeLiveForbidStreamListRequest = models.DescribeLiveForbidStreamListRequest;
 const CreatePullStreamConfigResponse = models.CreatePullStreamConfigResponse;
 const BindLiveDomainCertRequest = models.BindLiveDomainCertRequest;
@@ -116,7 +133,9 @@ const CreateLiveCallbackRuleRequest = models.CreateLiveCallbackRuleRequest;
 const DeleteLiveWatermarkRuleResponse = models.DeleteLiveWatermarkRuleResponse;
 const PublishTime = models.PublishTime;
 const ModifyLiveTranscodeTemplateResponse = models.ModifyLiveTranscodeTemplateResponse;
+const DescribeLiveTranscodeDetailInfoRequest = models.DescribeLiveTranscodeDetailInfoRequest;
 const DeleteLiveWatermarkRequest = models.DeleteLiveWatermarkRequest;
+const DescribeLiveDomainsRequest = models.DescribeLiveDomainsRequest;
 const UpdateLiveWatermarkRequest = models.UpdateLiveWatermarkRequest;
 const DeleteLiveSnapshotRuleResponse = models.DeleteLiveSnapshotRuleResponse;
 const CreateLiveRecordRequest = models.CreateLiveRecordRequest;
@@ -130,8 +149,9 @@ const DescribeLiveTranscodeTemplateResponse = models.DescribeLiveTranscodeTempla
 const CreateLiveSnapshotTemplateResponse = models.CreateLiveSnapshotTemplateResponse;
 const ModifyLiveCertRequest = models.ModifyLiveCertRequest;
 const UnBindLiveDomainCertResponse = models.UnBindLiveDomainCertResponse;
+const ForbidLiveDomainRequest = models.ForbidLiveDomainRequest;
 const DescribeLiveRecordRulesRequest = models.DescribeLiveRecordRulesRequest;
-const DescribeLiveRecordTemplateRequest = models.DescribeLiveRecordTemplateRequest;
+const CreateLiveRecordTemplateResponse = models.CreateLiveRecordTemplateResponse;
 const RecordParam = models.RecordParam;
 const ModifyLiveRecordTemplateRequest = models.ModifyLiveRecordTemplateRequest;
 const DescribeLiveStreamOnlineInfoRequest = models.DescribeLiveStreamOnlineInfoRequest;
@@ -139,29 +159,35 @@ const DeleteLiveRecordRequest = models.DeleteLiveRecordRequest;
 const StopLiveRecordRequest = models.StopLiveRecordRequest;
 const CreateLiveTranscodeTemplateRequest = models.CreateLiveTranscodeTemplateRequest;
 const DescribeLiveStreamPublishedListResponse = models.DescribeLiveStreamPublishedListResponse;
+const DeleteLiveDomainRequest = models.DeleteLiveDomainRequest;
+const DescribeLiveDomainStrategysResponse = models.DescribeLiveDomainStrategysResponse;
 const AddDelayLiveStreamResponse = models.AddDelayLiveStreamResponse;
 const DescribeLiveTranscodeTemplatesResponse = models.DescribeLiveTranscodeTemplatesResponse;
 const DeleteLiveCallbackRuleRequest = models.DeleteLiveCallbackRuleRequest;
 const PlayAuthKeyInfo = models.PlayAuthKeyInfo;
 const ModifyLiveTranscodeTemplateRequest = models.ModifyLiveTranscodeTemplateRequest;
+const DeleteLiveDomainStrategyResponse = models.DeleteLiveDomainStrategyResponse;
 const ModifyLiveDomainCertResponse = models.ModifyLiveDomainCertResponse;
-const ModifyLivePlayAuthKeyResponse = models.ModifyLivePlayAuthKeyResponse;
+const EnableLiveDomainRequest = models.EnableLiveDomainRequest;
+const DescribeLiveSnapshotRulesRequest = models.DescribeLiveSnapshotRulesRequest;
 const CreateLiveTranscodeRuleResponse = models.CreateLiveTranscodeRuleResponse;
 const SetLiveWatermarkStatusResponse = models.SetLiveWatermarkStatusResponse;
 const CreateLiveCallbackRuleResponse = models.CreateLiveCallbackRuleResponse;
 const DescribeLiveRecordTemplateResponse = models.DescribeLiveRecordTemplateResponse;
 const BindLiveDomainCertResponse = models.BindLiveDomainCertResponse;
 const CallBackRuleInfo = models.CallBackRuleInfo;
-const CreateLiveRecordTemplateRequest = models.CreateLiveRecordTemplateRequest;
+const DescribeLiveTranscodeTemplatesRequest = models.DescribeLiveTranscodeTemplatesRequest;
 const DescribeLiveRecordRulesResponse = models.DescribeLiveRecordRulesResponse;
 const CreateLiveSnapshotTemplateRequest = models.CreateLiveSnapshotTemplateRequest;
+const SetLiveWatermarkStatusRequest = models.SetLiveWatermarkStatusRequest;
 const DescribeLiveStreamOnlineListRequest = models.DescribeLiveStreamOnlineListRequest;
-const DeleteLiveCallbackTemplateRequest = models.DeleteLiveCallbackTemplateRequest;
+const DeleteLiveSnapshotTemplateResponse = models.DeleteLiveSnapshotTemplateResponse;
 const ModifyLiveCallbackTemplateRequest = models.ModifyLiveCallbackTemplateRequest;
 const DeleteLiveCertResponse = models.DeleteLiveCertResponse;
 const CreateLiveCallbackTemplateResponse = models.CreateLiveCallbackTemplateResponse;
 const DescribeLivePushAuthKeyRequest = models.DescribeLivePushAuthKeyRequest;
 const DescribeLiveCallbackTemplateRequest = models.DescribeLiveCallbackTemplateRequest;
+const CreateLiveDomainStrategyRequest = models.CreateLiveDomainStrategyRequest;
 const ModifyLiveSnapshotTemplateRequest = models.ModifyLiveSnapshotTemplateRequest;
 const CreateLiveRecordRuleResponse = models.CreateLiveRecordRuleResponse;
 const DescribeLiveTranscodeTemplateRequest = models.DescribeLiveTranscodeTemplateRequest;
@@ -170,14 +196,16 @@ const DescribeLiveCallbackTemplatesResponse = models.DescribeLiveCallbackTemplat
 const DescribeLivePushAuthKeyResponse = models.DescribeLivePushAuthKeyResponse;
 const CreateLiveWatermarkRuleRequest = models.CreateLiveWatermarkRuleRequest;
 const DescribeLiveRecordTemplatesRequest = models.DescribeLiveRecordTemplatesRequest;
-const StopLiveRecordResponse = models.StopLiveRecordResponse;
+const DescribeLiveDomainResponse = models.DescribeLiveDomainResponse;
+const DeleteLiveDomainStrategyRequest = models.DeleteLiveDomainStrategyRequest;
 const CreateLiveSnapshotRuleResponse = models.CreateLiveSnapshotRuleResponse;
 const DescribeLiveStreamEventListResponse = models.DescribeLiveStreamEventListResponse;
 const DescribePullStreamConfigsResponse = models.DescribePullStreamConfigsResponse;
 const DescribeLiveCallbackRulesResponse = models.DescribeLiveCallbackRulesResponse;
 const ForbidStreamInfo = models.ForbidStreamInfo;
 const ResumeDelayLiveStreamResponse = models.ResumeDelayLiveStreamResponse;
-const DescribeLiveSnapshotRulesRequest = models.DescribeLiveSnapshotRulesRequest;
+const DeleteLiveDomainResponse = models.DeleteLiveDomainResponse;
+const CreateLiveRecordTemplateRequest = models.CreateLiveRecordTemplateRequest;
 const DeleteLiveCertRequest = models.DeleteLiveCertRequest;
 const SnapshotTemplateInfo = models.SnapshotTemplateInfo;
 const DeleteLiveRecordRuleResponse = models.DeleteLiveRecordRuleResponse;
@@ -205,6 +233,17 @@ class LiveClient extends AbstractClient {
     }
 
     /**
+     * 获取域名证书信息
+     * @param {DescribeLiveDomainCertRequest} req
+     * @param {function(string, DescribeLiveDomainCertResponse):void} cb
+     * @public
+     */
+    DescribeLiveDomainCert(req, cb) {
+        let resp = new DescribeLiveDomainCertResponse();
+        this.request("DescribeLiveDomainCert", req, resp, cb);
+    }
+
+    /**
      * 断开推流连接，但可以重新推流
      * @param {DropLiveStreamRequest} req
      * @param {function(string, DropLiveStreamResponse):void} cb
@@ -213,6 +252,17 @@ class LiveClient extends AbstractClient {
     DropLiveStream(req, cb) {
         let resp = new DropLiveStreamResponse();
         this.request("DropLiveStream", req, resp, cb);
+    }
+
+    /**
+     * 停用使用某个直播域名
+     * @param {ForbidLiveDomainRequest} req
+     * @param {function(string, ForbidLiveDomainResponse):void} cb
+     * @public
+     */
+    ForbidLiveDomain(req, cb) {
+        let resp = new ForbidLiveDomainResponse();
+        this.request("ForbidLiveDomain", req, resp, cb);
     }
 
     /**
@@ -431,14 +481,15 @@ class LiveClient extends AbstractClient {
     }
 
     /**
-     * 修改截图模板配置
-     * @param {ModifyLiveSnapshotTemplateRequest} req
-     * @param {function(string, ModifyLiveSnapshotTemplateResponse):void} cb
+     * 支持查询某天的转码详细信息。
+注意：当前只支持查询近30天内某天的详细数据。
+     * @param {DescribeLiveTranscodeDetailInfoRequest} req
+     * @param {function(string, DescribeLiveTranscodeDetailInfoResponse):void} cb
      * @public
      */
-    ModifyLiveSnapshotTemplate(req, cb) {
-        let resp = new ModifyLiveSnapshotTemplateResponse();
-        this.request("ModifyLiveSnapshotTemplate", req, resp, cb);
+    DescribeLiveTranscodeDetailInfo(req, cb) {
+        let resp = new DescribeLiveTranscodeDetailInfoResponse();
+        this.request("DescribeLiveTranscodeDetailInfo", req, resp, cb);
     }
 
     /**
@@ -486,14 +537,14 @@ class LiveClient extends AbstractClient {
     }
 
     /**
-     * 查询在线推流信息列表
-     * @param {DescribeLiveStreamOnlineInfoRequest} req
-     * @param {function(string, DescribeLiveStreamOnlineInfoResponse):void} cb
+     * 该接口用于删除已新增的播放和推流域名映射关系
+     * @param {DeleteLiveDomainStrategyRequest} req
+     * @param {function(string, DeleteLiveDomainStrategyResponse):void} cb
      * @public
      */
-    DescribeLiveStreamOnlineInfo(req, cb) {
-        let resp = new DescribeLiveStreamOnlineInfoResponse();
-        this.request("DescribeLiveStreamOnlineInfo", req, resp, cb);
+    DeleteLiveDomainStrategy(req, cb) {
+        let resp = new DeleteLiveDomainStrategyResponse();
+        this.request("DeleteLiveDomainStrategy", req, resp, cb);
     }
 
     /**
@@ -505,6 +556,17 @@ class LiveClient extends AbstractClient {
     DescribeLiveWatermarks(req, cb) {
         let resp = new DescribeLiveWatermarksResponse();
         this.request("DescribeLiveWatermarks", req, resp, cb);
+    }
+
+    /**
+     * 修改播放域名信息
+     * @param {ModifyLivePlayDomainRequest} req
+     * @param {function(string, ModifyLivePlayDomainResponse):void} cb
+     * @public
+     */
+    ModifyLivePlayDomain(req, cb) {
+        let resp = new ModifyLivePlayDomainResponse();
+        this.request("ModifyLivePlayDomain", req, resp, cb);
     }
 
     /**
@@ -541,6 +603,17 @@ class LiveClient extends AbstractClient {
     }
 
     /**
+     * 解绑域名证书
+     * @param {UnBindLiveDomainCertRequest} req
+     * @param {function(string, UnBindLiveDomainCertResponse):void} cb
+     * @public
+     */
+    UnBindLiveDomainCert(req, cb) {
+        let resp = new UnBindLiveDomainCertResponse();
+        this.request("UnBindLiveDomainCert", req, resp, cb);
+    }
+
+    /**
      * 查询播放鉴权key
      * @param {DescribeLivePlayAuthKeyRequest} req
      * @param {function(string, DescribeLivePlayAuthKeyResponse):void} cb
@@ -571,6 +644,17 @@ class LiveClient extends AbstractClient {
     DeleteLiveRecordRule(req, cb) {
         let resp = new DeleteLiveRecordRuleResponse();
         this.request("DeleteLiveRecordRule", req, resp, cb);
+    }
+
+    /**
+     * 查询直播域名信息
+     * @param {DescribeLiveDomainRequest} req
+     * @param {function(string, DescribeLiveDomainResponse):void} cb
+     * @public
+     */
+    DescribeLiveDomain(req, cb) {
+        let resp = new DescribeLiveDomainResponse();
+        this.request("DescribeLiveDomain", req, resp, cb);
     }
 
     /**
@@ -674,14 +758,25 @@ class LiveClient extends AbstractClient {
     }
 
     /**
-     * 设置水印是否启用
-     * @param {SetLiveWatermarkStatusRequest} req
-     * @param {function(string, SetLiveWatermarkStatusResponse):void} cb
+     * 修改截图模板配置
+     * @param {ModifyLiveSnapshotTemplateRequest} req
+     * @param {function(string, ModifyLiveSnapshotTemplateResponse):void} cb
      * @public
      */
-    SetLiveWatermarkStatus(req, cb) {
-        let resp = new SetLiveWatermarkStatusResponse();
-        this.request("SetLiveWatermarkStatus", req, resp, cb);
+    ModifyLiveSnapshotTemplate(req, cb) {
+        let resp = new ModifyLiveSnapshotTemplateResponse();
+        this.request("ModifyLiveSnapshotTemplate", req, resp, cb);
+    }
+
+    /**
+     * 删除回调规则
+     * @param {DeleteLiveCallbackRuleRequest} req
+     * @param {function(string, DeleteLiveCallbackRuleResponse):void} cb
+     * @public
+     */
+    DeleteLiveCallbackRule(req, cb) {
+        let resp = new DeleteLiveCallbackRuleResponse();
+        this.request("DeleteLiveCallbackRule", req, resp, cb);
     }
 
     /**
@@ -696,14 +791,25 @@ class LiveClient extends AbstractClient {
     }
 
     /**
-     * 获取域名证书信息
-     * @param {DescribeLiveDomainCertRequest} req
-     * @param {function(string, DescribeLiveDomainCertResponse):void} cb
+     * 根据域名状态、类型等信息查询用户的域名信息
+     * @param {DescribeLiveDomainsRequest} req
+     * @param {function(string, DescribeLiveDomainsResponse):void} cb
      * @public
      */
-    DescribeLiveDomainCert(req, cb) {
-        let resp = new DescribeLiveDomainCertResponse();
-        this.request("DescribeLiveDomainCert", req, resp, cb);
+    DescribeLiveDomains(req, cb) {
+        let resp = new DescribeLiveDomainsResponse();
+        this.request("DescribeLiveDomains", req, resp, cb);
+    }
+
+    /**
+     * 该接口用于新增直播推流和播放的域名映射
+     * @param {CreateLiveDomainStrategyRequest} req
+     * @param {function(string, CreateLiveDomainStrategyResponse):void} cb
+     * @public
+     */
+    CreateLiveDomainStrategy(req, cb) {
+        let resp = new CreateLiveDomainStrategyResponse();
+        this.request("CreateLiveDomainStrategy", req, resp, cb);
     }
 
     /**
@@ -752,14 +858,14 @@ class LiveClient extends AbstractClient {
     }
 
     /**
-     * 解绑域名证书
-     * @param {UnBindLiveDomainCertRequest} req
-     * @param {function(string, UnBindLiveDomainCertResponse):void} cb
+     * 查询在线推流信息列表
+     * @param {DescribeLiveStreamOnlineInfoRequest} req
+     * @param {function(string, DescribeLiveStreamOnlineInfoResponse):void} cb
      * @public
      */
-    UnBindLiveDomainCert(req, cb) {
-        let resp = new UnBindLiveDomainCertResponse();
-        this.request("UnBindLiveDomainCert", req, resp, cb);
+    DescribeLiveStreamOnlineInfo(req, cb) {
+        let resp = new DescribeLiveStreamOnlineInfoResponse();
+        this.request("DescribeLiveStreamOnlineInfo", req, resp, cb);
     }
 
     /**
@@ -771,6 +877,17 @@ class LiveClient extends AbstractClient {
     DescribeLiveWatermarkRules(req, cb) {
         let resp = new DescribeLiveWatermarkRulesResponse();
         this.request("DescribeLiveWatermarkRules", req, resp, cb);
+    }
+
+    /**
+     * 启用状态为停用的直播域名
+     * @param {EnableLiveDomainRequest} req
+     * @param {function(string, EnableLiveDomainResponse):void} cb
+     * @public
+     */
+    EnableLiveDomain(req, cb) {
+        let resp = new EnableLiveDomainResponse();
+        this.request("EnableLiveDomain", req, resp, cb);
     }
 
     /**
@@ -829,14 +946,14 @@ class LiveClient extends AbstractClient {
     }
 
     /**
-     * 删除回调规则
-     * @param {DeleteLiveCallbackRuleRequest} req
-     * @param {function(string, DeleteLiveCallbackRuleResponse):void} cb
+     * 添加域名，一次只能提交一个域名。域名必须已备案。
+     * @param {AddLiveDomainRequest} req
+     * @param {function(string, AddLiveDomainResponse):void} cb
      * @public
      */
-    DeleteLiveCallbackRule(req, cb) {
-        let resp = new DeleteLiveCallbackRuleResponse();
-        this.request("DeleteLiveCallbackRule", req, resp, cb);
+    AddLiveDomain(req, cb) {
+        let resp = new AddLiveDomainResponse();
+        this.request("AddLiveDomain", req, resp, cb);
     }
 
     /**
@@ -874,6 +991,17 @@ class LiveClient extends AbstractClient {
     }
 
     /**
+     * 删除已添加的直播域名
+     * @param {DeleteLiveDomainRequest} req
+     * @param {function(string, DeleteLiveDomainResponse):void} cb
+     * @public
+     */
+    DeleteLiveDomain(req, cb) {
+        let resp = new DeleteLiveDomainResponse();
+        this.request("DeleteLiveDomain", req, resp, cb);
+    }
+
+    /**
      * 返回正在直播中的流列表
      * @param {DescribeLiveStreamOnlineListRequest} req
      * @param {function(string, DescribeLiveStreamOnlineListResponse):void} cb
@@ -882,6 +1010,28 @@ class LiveClient extends AbstractClient {
     DescribeLiveStreamOnlineList(req, cb) {
         let resp = new DescribeLiveStreamOnlineListResponse();
         this.request("DescribeLiveStreamOnlineList", req, resp, cb);
+    }
+
+    /**
+     * 该接口用于查询已有域名策略
+     * @param {DescribeLiveDomainStrategysRequest} req
+     * @param {function(string, DescribeLiveDomainStrategysResponse):void} cb
+     * @public
+     */
+    DescribeLiveDomainStrategys(req, cb) {
+        let resp = new DescribeLiveDomainStrategysResponse();
+        this.request("DescribeLiveDomainStrategys", req, resp, cb);
+    }
+
+    /**
+     * 设置水印是否启用
+     * @param {SetLiveWatermarkStatusRequest} req
+     * @param {function(string, SetLiveWatermarkStatusResponse):void} cb
+     * @public
+     */
+    SetLiveWatermarkStatus(req, cb) {
+        let resp = new SetLiveWatermarkStatusResponse();
+        this.request("SetLiveWatermarkStatus", req, resp, cb);
     }
 
     /**
@@ -904,6 +1054,17 @@ class LiveClient extends AbstractClient {
     DeleteLiveCallbackTemplate(req, cb) {
         let resp = new DeleteLiveCallbackTemplateResponse();
         this.request("DeleteLiveCallbackTemplate", req, resp, cb);
+    }
+
+    /**
+     * 查询播放数据，支持按流名称查询详细播放数据，也可按播放域名查询详细总数据。
+     * @param {DescribeStreamPlayInfoListRequest} req
+     * @param {function(string, DescribeStreamPlayInfoListResponse):void} cb
+     * @public
+     */
+    DescribeStreamPlayInfoList(req, cb) {
+        let resp = new DescribeStreamPlayInfoListResponse();
+        this.request("DescribeStreamPlayInfoList", req, resp, cb);
     }
 
     /**

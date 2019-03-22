@@ -37,7 +37,7 @@ class FaceFusionRequest extends  AbstractModel {
         this.ModelId = null;
 
         /**
-         * 图片 base64 数据。请确保人脸为正脸，无旋转。若某些手机拍摄后人脸被旋转，请使用图片的 EXIF 信息对图片进行旋转处理。
+         * 图片 base64 数据。请确保人脸为正脸，无旋转。若某些手机拍摄后人脸被旋转，请使用图片的 EXIF 信息对图片进行旋转处理；请勿在 base64 数据中包含头部，如“data:image/jpeg;base64,”。
          * @type {string || null}
          */
         this.Image = null;

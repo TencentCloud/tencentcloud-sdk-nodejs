@@ -4446,7 +4446,7 @@ class TrafficMirror extends  AbstractModel {
         this.HealthNum = null;
 
         /**
-         * 不健康阀值。
+         * 不健康阈值。
          * @type {number || null}
          */
         this.UnhealthNum = null;

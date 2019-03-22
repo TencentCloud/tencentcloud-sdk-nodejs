@@ -17,6 +17,69 @@
 const AbstractModel = require("../../common/abstract_model");
 
 /**
+ * DescribeCreditResult请求参数结构体
+ * @class
+ */
+class DescribeCreditResultRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 模块
+         * @type {string || null}
+         */
+        this.Module = null;
+
+        /**
+         * 操作
+         * @type {string || null}
+         */
+        this.Operation = null;
+
+        /**
+         * 实例ID
+         * @type {string || null}
+         */
+        this.InstId = null;
+
+        /**
+         * 产品ID，形如P******。
+         * @type {string || null}
+         */
+        this.ProductId = null;
+
+        /**
+         * 信审任务ID
+         * @type {string || null}
+         */
+        this.CaseId = null;
+
+        /**
+         * 请求日期
+         * @type {string || null}
+         */
+        this.RequestDate = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Module = 'Module' in params ? params.Module : null;
+        this.Operation = 'Operation' in params ? params.Operation : null;
+        this.InstId = 'InstId' in params ? params.InstId : null;
+        this.ProductId = 'ProductId' in params ? params.ProductId : null;
+        this.CaseId = 'CaseId' in params ? params.CaseId : null;
+        this.RequestDate = 'RequestDate' in params ? params.RequestDate : null;
+
+    }
+}
+
+/**
  * DescribeTaskStatus请求参数结构体
  * @class
  */
@@ -116,6 +179,76 @@ class ApplyBlackListRequest extends  AbstractModel {
 }
 
 /**
+ * ApplyCreditAudit请求参数结构体
+ * @class
+ */
+class ApplyCreditAuditRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 模块
+         * @type {string || null}
+         */
+        this.Module = null;
+
+        /**
+         * 操作
+         * @type {string || null}
+         */
+        this.Operation = null;
+
+        /**
+         * 实例ID
+         * @type {string || null}
+         */
+        this.InstId = null;
+
+        /**
+         * 产品ID，形如P******。
+         * @type {string || null}
+         */
+        this.ProductId = null;
+
+        /**
+         * 信审任务ID，同一天内，同一InstId下，同一CaseId只能调用一次。
+         * @type {string || null}
+         */
+        this.CaseId = null;
+
+        /**
+         * 回调地址
+         * @type {string || null}
+         */
+        this.CallbackUrl = null;
+
+        /**
+         * JSON格式的业务字段。
+         * @type {string || null}
+         */
+        this.Data = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Module = 'Module' in params ? params.Module : null;
+        this.Operation = 'Operation' in params ? params.Operation : null;
+        this.InstId = 'InstId' in params ? params.InstId : null;
+        this.ProductId = 'ProductId' in params ? params.ProductId : null;
+        this.CaseId = 'CaseId' in params ? params.CaseId : null;
+        this.CallbackUrl = 'CallbackUrl' in params ? params.CallbackUrl : null;
+        this.Data = 'Data' in params ? params.Data : null;
+
+    }
+}
+
+/**
  * DownloadReport返回参数结构体
  * @class
  */
@@ -124,22 +257,46 @@ class DownloadReportResponse extends  AbstractModel {
         super();
 
         /**
-         * 日报下载地址
+         * 催收日报下载地址
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.DailyReportUrl = null;
 
         /**
-         * 结果下载地址
+         * 催收结果下载地址
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.ResultReportUrl = null;
 
         /**
-         * 明细下载地址
+         * 催收明细下载地址
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.DetailReportUrl = null;
+
+        /**
+         * 回访日报下载地址
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.CallbackDailyReportUrl = null;
+
+        /**
+         * 回访结果下载地址
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.CallbackResultReportUrl = null;
+
+        /**
+         * 回访明细下载地址
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.CallbackDetailReportUrl = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -159,7 +316,149 @@ class DownloadReportResponse extends  AbstractModel {
         this.DailyReportUrl = 'DailyReportUrl' in params ? params.DailyReportUrl : null;
         this.ResultReportUrl = 'ResultReportUrl' in params ? params.ResultReportUrl : null;
         this.DetailReportUrl = 'DetailReportUrl' in params ? params.DetailReportUrl : null;
+        this.CallbackDailyReportUrl = 'CallbackDailyReportUrl' in params ? params.CallbackDailyReportUrl : null;
+        this.CallbackResultReportUrl = 'CallbackResultReportUrl' in params ? params.CallbackResultReportUrl : null;
+        this.CallbackDetailReportUrl = 'CallbackDetailReportUrl' in params ? params.CallbackDetailReportUrl : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeCreditResult返回参数结构体
+ * @class
+ */
+class DescribeCreditResultResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 呼叫结果，取值范围：
+<li>NON：接通
+<li>DBU：号码忙
+<li>DRF：不在服务区
+<li>ANA：欠费未接听
+<li>REJ：拒接
+<li>SHU：关机
+<li>NAN：空号
+<li>HAL：停机
+<li>DAD：未接听
+<li>EXE：其他异常
+         * @type {string || null}
+         */
+        this.ResultCode = null;
+
+        /**
+         * 客户标识代码，多个标识码以英文逗号分隔，ResultCode为NON时才有。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ClientCode = null;
+
+        /**
+         * 开始振铃时间，ResultCode为NON或DAD时才有此字段。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.RingStartTime = null;
+
+        /**
+         * 振铃时长
+         * @type {number || null}
+         */
+        this.RingDuration = null;
+
+        /**
+         * 接通时长
+         * @type {number || null}
+         */
+        this.AnswerDuration = null;
+
+        /**
+         * JSON格式的扩展信息字段，ResultCode为NON时才有。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ContextValue = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ResultCode = 'ResultCode' in params ? params.ResultCode : null;
+        this.ClientCode = 'ClientCode' in params ? params.ClientCode : null;
+        this.RingStartTime = 'RingStartTime' in params ? params.RingStartTime : null;
+        this.RingDuration = 'RingDuration' in params ? params.RingDuration : null;
+        this.AnswerDuration = 'AnswerDuration' in params ? params.AnswerDuration : null;
+        this.ContextValue = 'ContextValue' in params ? params.ContextValue : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * UploadFile请求参数结构体
+ * @class
+ */
+class UploadFileRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 模块名
+         * @type {string || null}
+         */
+        this.Module = null;
+
+        /**
+         * 操作名
+         * @type {string || null}
+         */
+        this.Operation = null;
+
+        /**
+         * 文件上传地址，要求地址协议为HTTPS，且URL端口必须为443
+         * @type {string || null}
+         */
+        this.FileUrl = null;
+
+        /**
+         * 文件名
+         * @type {string || null}
+         */
+        this.FileName = null;
+
+        /**
+         * 文件日期
+         * @type {string || null}
+         */
+        this.FileDate = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Module = 'Module' in params ? params.Module : null;
+        this.Operation = 'Operation' in params ? params.Operation : null;
+        this.FileUrl = 'FileUrl' in params ? params.FileUrl : null;
+        this.FileName = 'FileName' in params ? params.FileName : null;
+        this.FileDate = 'FileDate' in params ? params.FileDate : null;
 
     }
 }
@@ -361,104 +660,6 @@ class DescribeTaskStatusResponse extends  AbstractModel {
 }
 
 /**
- * UploadFile请求参数结构体
- * @class
- */
-class UploadFileRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 模块名
-         * @type {string || null}
-         */
-        this.Module = null;
-
-        /**
-         * 操作名
-         * @type {string || null}
-         */
-        this.Operation = null;
-
-        /**
-         * 文件上传地址，要求地址协议为HTTPS，且URL端口必须为443
-         * @type {string || null}
-         */
-        this.FileUrl = null;
-
-        /**
-         * 文件名
-         * @type {string || null}
-         */
-        this.FileName = null;
-
-        /**
-         * 文件日期
-         * @type {string || null}
-         */
-        this.FileDate = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Module = 'Module' in params ? params.Module : null;
-        this.Operation = 'Operation' in params ? params.Operation : null;
-        this.FileUrl = 'FileUrl' in params ? params.FileUrl : null;
-        this.FileName = 'FileName' in params ? params.FileName : null;
-        this.FileDate = 'FileDate' in params ? params.FileDate : null;
-
-    }
-}
-
-/**
- * DownloadReport请求参数结构体
- * @class
- */
-class DownloadReportRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 模块名
-         * @type {string || null}
-         */
-        this.Module = null;
-
-        /**
-         * 操作名
-         * @type {string || null}
-         */
-        this.Operation = null;
-
-        /**
-         * 报告日期
-         * @type {string || null}
-         */
-        this.ReportDate = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Module = 'Module' in params ? params.Module : null;
-        this.Operation = 'Operation' in params ? params.Operation : null;
-        this.ReportDate = 'ReportDate' in params ? params.ReportDate : null;
-
-    }
-}
-
-/**
  * DescribeRecords返回参数结构体
  * @class
  */
@@ -468,6 +669,7 @@ class DescribeRecordsResponse extends  AbstractModel {
 
         /**
          * 录音列表。
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<SingleRecord> || null}
          */
         this.RecordList = null;
@@ -503,6 +705,90 @@ class DescribeRecordsResponse extends  AbstractModel {
             }
         }
         this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DownloadReport请求参数结构体
+ * @class
+ */
+class DownloadReportRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 模块名
+         * @type {string || null}
+         */
+        this.Module = null;
+
+        /**
+         * 操作名
+         * @type {string || null}
+         */
+        this.Operation = null;
+
+        /**
+         * 报告日期
+         * @type {string || null}
+         */
+        this.ReportDate = null;
+
+        /**
+         * 实例ID，不传默认为系统分配的初始实例。
+         * @type {string || null}
+         */
+        this.InstId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Module = 'Module' in params ? params.Module : null;
+        this.Operation = 'Operation' in params ? params.Operation : null;
+        this.ReportDate = 'ReportDate' in params ? params.ReportDate : null;
+        this.InstId = 'InstId' in params ? params.InstId : null;
+
+    }
+}
+
+/**
+ * ApplyCreditAudit返回参数结构体
+ * @class
+ */
+class ApplyCreditAuditResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 请求日期
+         * @type {string || null}
+         */
+        this.RequestDate = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestDate = 'RequestDate' in params ? params.RequestDate : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -708,12 +994,14 @@ class SingleRecord extends  AbstractModel {
 
         /**
          * 产品ID。
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.ProductId = null;
 
         /**
          * 录音下载链接。
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.RecordCosUrl = null;
@@ -740,16 +1028,20 @@ class SingleRecord extends  AbstractModel {
 }
 
 module.exports = {
+    DescribeCreditResultRequest: DescribeCreditResultRequest,
     DescribeTaskStatusRequest: DescribeTaskStatusRequest,
     ApplyBlackListRequest: ApplyBlackListRequest,
+    ApplyCreditAuditRequest: ApplyCreditAuditRequest,
     DownloadReportResponse: DownloadReportResponse,
+    DescribeCreditResultResponse: DescribeCreditResultResponse,
+    UploadFileRequest: UploadFileRequest,
     UploadFileResponse: UploadFileResponse,
     ApplyBlackListResponse: ApplyBlackListResponse,
     DescribeRecordsRequest: DescribeRecordsRequest,
     DescribeTaskStatusResponse: DescribeTaskStatusResponse,
-    UploadFileRequest: UploadFileRequest,
-    DownloadReportRequest: DownloadReportRequest,
     DescribeRecordsResponse: DescribeRecordsResponse,
+    DownloadReportRequest: DownloadReportRequest,
+    ApplyCreditAuditResponse: ApplyCreditAuditResponse,
     UploadDataFileResponse: UploadDataFileResponse,
     SingleBlackApply: SingleBlackApply,
     UploadDataFileRequest: UploadDataFileRequest,

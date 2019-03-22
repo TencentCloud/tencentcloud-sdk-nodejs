@@ -26,7 +26,9 @@ const DetectAuthRequest = models.DetectAuthRequest;
 const GetDetectInfoRequest = models.GetDetectInfoRequest;
 const GetLiveCodeRequest = models.GetLiveCodeRequest;
 const IdCardVerificationResponse = models.IdCardVerificationResponse;
+const BankCardVerificationResponse = models.BankCardVerificationResponse;
 const IdCardVerificationRequest = models.IdCardVerificationRequest;
+const BankCardVerificationRequest = models.BankCardVerificationRequest;
 const ImageRecognitionRequest = models.ImageRecognitionRequest;
 const LivenessCompareRequest = models.LivenessCompareRequest;
 const GetActionSequenceResponse = models.GetActionSequenceResponse;
@@ -86,6 +88,17 @@ class FaceidClient extends AbstractClient {
     LivenessCompare(req, cb) {
         let resp = new LivenessCompareResponse();
         this.request("LivenessCompare", req, resp, cb);
+    }
+
+    /**
+     * 银行卡核验
+     * @param {BankCardVerificationRequest} req
+     * @param {function(string, BankCardVerificationResponse):void} cb
+     * @public
+     */
+    BankCardVerification(req, cb) {
+        let resp = new BankCardVerificationResponse();
+        this.request("BankCardVerification", req, resp, cb);
     }
 
     /**
