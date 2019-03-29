@@ -1565,6 +1565,20 @@ class ProcedureTask extends  AbstractModel {
          */
         this.TasksNotifyMode = null;
 
+        /**
+         * 来源上下文，用于透传用户请求信息，任务流状态变更回调将返回该字段值，最长 250 个字符。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.SessionContext = null;
+
+        /**
+         * 用于去重的识别码，如果七天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.SessionId = null;
+
     }
 
     /**
@@ -1616,6 +1630,8 @@ class ProcedureTask extends  AbstractModel {
         }
         this.TasksPriority = 'TasksPriority' in params ? params.TasksPriority : null;
         this.TasksNotifyMode = 'TasksNotifyMode' in params ? params.TasksNotifyMode : null;
+        this.SessionContext = 'SessionContext' in params ? params.SessionContext : null;
+        this.SessionId = 'SessionId' in params ? params.SessionId : null;
 
     }
 }
@@ -4121,7 +4137,7 @@ class AiContentReviewResult extends  AbstractModel {
         this.TerrorismTask = null;
 
         /**
-         * 视频内容审核智能画面鉴恐任务的查询结果，当任务类型为 Political 时有效。
+         * 视频内容审核智能画面鉴政任务的查询结果，当任务类型为 Political 时有效。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {AiReviewTaskPoliticalResult || null}
          */

@@ -60,6 +60,57 @@ class DescribeBillDetailResponse extends  AbstractModel {
 }
 
 /**
+ * 由域名和使用明细组成的数据结构
+ * @class
+ */
+class DetailSet extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 域名
+         * @type {string || null}
+         */
+        this.Domain = null;
+
+        /**
+         * 使用数据明细
+         * @type {Array.<DetailPoint> || null}
+         */
+        this.DetailPoints = null;
+
+        /**
+         * 实例ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.InstanceID = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Domain = 'Domain' in params ? params.Domain : null;
+
+        if (params.DetailPoints) {
+            this.DetailPoints = new Array();
+            for (let z in params.DetailPoints) {
+                let obj = new DetailPoint();
+                obj.deserialize(params.DetailPoints[z]);
+                this.DetailPoints.push(obj);
+            }
+        }
+        this.InstanceID = 'InstanceID' in params ? params.InstanceID : null;
+
+    }
+}
+
+/**
  * 订单数据对象
  * @class
  */
@@ -335,6 +386,77 @@ class DescribeBillDetailRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeDosageDetailByDate请求参数结构体
+ * @class
+ */
+class DescribeDosageDetailByDateRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 查询账单开始日期，如 2019-01-01
+         * @type {string || null}
+         */
+        this.StartDate = null;
+
+        /**
+         * 查询账单结束日期，如 2019-01-01
+         * @type {string || null}
+         */
+        this.EndDate = null;
+
+        /**
+         * 视频业务：
+10194   互动直播-核心机房           :
+10195   互动直播-边缘机房
+
+cdn业务：
+10180：CDN静态加速流量(国内)
+10181：CDN静态加速带宽(国内)
+10182：CDN静态加速普通流量
+10183：CDN静态加速普通带宽
+10231：CDN静态加速流量(海外)
+10232：CDN静态加速带宽(海外)
+
+100967：弹性公网IP-按流量计费
+101065：公网负载均衡-按流量计费
+         * @type {string || null}
+         */
+        this.ProductCode = null;
+
+        /**
+         * 查询域名 例如 www.qq.com
+非CDN业务查询时可以设置为空
+         * @type {string || null}
+         */
+        this.Domain = null;
+
+        /**
+         * 1、如果为空，则返回EIP或CLB所有实例的明细；
+2、如果传入实例名，则返回该实例明细
+         * @type {string || null}
+         */
+        this.InstanceID = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.StartDate = 'StartDate' in params ? params.StartDate : null;
+        this.EndDate = 'EndDate' in params ? params.EndDate : null;
+        this.ProductCode = 'ProductCode' in params ? params.ProductCode : null;
+        this.Domain = 'Domain' in params ? params.Domain : null;
+        this.InstanceID = 'InstanceID' in params ? params.InstanceID : null;
+
+    }
+}
+
+/**
  * 商品详细信息
  * @class
  */
@@ -365,6 +487,74 @@ class ProductInfo extends  AbstractModel {
         }
         this.Name = 'Name' in params ? params.Name : null;
         this.Value = 'Value' in params ? params.Value : null;
+
+    }
+}
+
+/**
+ * DescribeDosageDetailByDate返回参数结构体
+ * @class
+ */
+class DescribeDosageDetailByDateResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 计量单位
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Unit = null;
+
+        /**
+         * 用量数组
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<DetailSet> || null}
+         */
+        this.DetailSets = null;
+
+        /**
+         * 错误码
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.RetCode = null;
+
+        /**
+         * 错误信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.RetMsg = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Unit = 'Unit' in params ? params.Unit : null;
+
+        if (params.DetailSets) {
+            this.DetailSets = new Array();
+            for (let z in params.DetailSets) {
+                let obj = new DetailSet();
+                obj.deserialize(params.DetailSets[z]);
+                this.DetailSets.push(obj);
+            }
+        }
+        this.RetCode = 'RetCode' in params ? params.RetCode : null;
+        this.RetMsg = 'RetMsg' in params ? params.RetMsg : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -457,6 +647,41 @@ class DescribeBillResourceSummaryRequest extends  AbstractModel {
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.PeriodType = 'PeriodType' in params ? params.PeriodType : null;
         this.Month = 'Month' in params ? params.Month : null;
+
+    }
+}
+
+/**
+ * 由时间和值组成的数据结构
+ * @class
+ */
+class DetailPoint extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 时间
+         * @type {string || null}
+         */
+        this.Time = null;
+
+        /**
+         * 值
+         * @type {string || null}
+         */
+        this.Value = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Time = 'Time' in params ? params.Time : null;
+        this.Value = 'Value' in params ? params.Value : null;
 
     }
 }
@@ -1127,13 +1352,17 @@ class PayDealsRequest extends  AbstractModel {
 
 module.exports = {
     DescribeBillDetailResponse: DescribeBillDetailResponse,
+    DetailSet: DetailSet,
     Deal: Deal,
     DescribeDealsByCondResponse: DescribeDealsByCondResponse,
     DescribeAccountBalanceRequest: DescribeAccountBalanceRequest,
     DescribeBillDetailRequest: DescribeBillDetailRequest,
+    DescribeDosageDetailByDateRequest: DescribeDosageDetailByDateRequest,
     ProductInfo: ProductInfo,
+    DescribeDosageDetailByDateResponse: DescribeDosageDetailByDateResponse,
     DescribeBillResourceSummaryResponse: DescribeBillResourceSummaryResponse,
     DescribeBillResourceSummaryRequest: DescribeBillResourceSummaryRequest,
+    DetailPoint: DetailPoint,
     DescribeAccountBalanceResponse: DescribeAccountBalanceResponse,
     PayDealsResponse: PayDealsResponse,
     DescribeDealsByCondRequest: DescribeDealsByCondRequest,

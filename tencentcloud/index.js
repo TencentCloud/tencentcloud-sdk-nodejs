@@ -21,6 +21,7 @@ module.exports = {
     drm: require("./drm"),
     ds: require("./ds"),
     dts: require("./dts"),
+    emr: require("./emr"),
     es: require("./es"),
     facefusion: require("./facefusion"),
     faceid: require("./faceid"),

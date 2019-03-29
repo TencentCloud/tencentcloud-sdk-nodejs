@@ -28,6 +28,7 @@ const ModifyAddressTemplateAttributeResponse = models.ModifyAddressTemplateAttri
 const ServiceTemplateGroup = models.ServiceTemplateGroup;
 const RouteConflict = models.RouteConflict;
 const CreateNetworkInterfaceRequest = models.CreateNetworkInterfaceRequest;
+const InstanceStatistic = models.InstanceStatistic;
 const CreateRoutesRequest = models.CreateRoutesRequest;
 const CCN = models.CCN;
 const CreateVpnConnectionRequest = models.CreateVpnConnectionRequest;
@@ -392,7 +393,7 @@ class VpcClient extends AbstractClient {
     }
 
     /**
-     * 查询协议端口模板集合
+     * 本接口（DescribeServiceTemplateGroups）用于查询协议端口模板集合
      * @param {DescribeServiceTemplateGroupsRequest} req
      * @param {function(string, DescribeServiceTemplateGroupsResponse):void} cb
      * @public
@@ -530,7 +531,7 @@ class VpcClient extends AbstractClient {
     }
 
     /**
-     * 修改IP地址模板集合
+     * 本接口（ModifyAddressTemplateGroupAttribute）用于修改IP地址模板集合
      * @param {ModifyAddressTemplateGroupAttributeRequest} req
      * @param {function(string, ModifyAddressTemplateGroupAttributeResponse):void} cb
      * @public
@@ -564,7 +565,7 @@ class VpcClient extends AbstractClient {
     }
 
     /**
-     * 修改协议端口模板
+     * 本接口（ModifyServiceTemplateAttribute）用于修改协议端口模板
      * @param {ModifyServiceTemplateAttributeRequest} req
      * @param {function(string, ModifyServiceTemplateAttributeResponse):void} cb
      * @public
@@ -706,7 +707,7 @@ class VpcClient extends AbstractClient {
     }
 
     /**
-     * 接口用于调整[弹性公网IP](https://cloud.tencent.com/document/product/213/1941)(简称EIP)带宽，包括后付费EIP, 预付费EIP和带宽包EIP
+     * 本接口（ModifyAddressesBandwidth）用于调整[弹性公网IP](https://cloud.tencent.com/document/product/213/1941)(简称EIP)带宽，包括后付费EIP, 预付费EIP和带宽包EIP
      * @param {ModifyAddressesBandwidthRequest} req
      * @param {function(string, ModifyAddressesBandwidthResponse):void} cb
      * @public
@@ -744,7 +745,7 @@ class VpcClient extends AbstractClient {
     }
 
     /**
-     * 修改IP地址模板
+     * 本接口（ModifyAddressTemplateAttribute）用于修改IP地址模板
      * @param {ModifyAddressTemplateAttributeRequest} req
      * @param {function(string, ModifyAddressTemplateAttributeResponse):void} cb
      * @public
@@ -766,7 +767,7 @@ class VpcClient extends AbstractClient {
     }
 
     /**
-     * 删除协议端口模板集合
+     * 本接口（DeleteServiceTemplateGroup）用于删除协议端口模板集合
      * @param {DeleteServiceTemplateGroupRequest} req
      * @param {function(string, DeleteServiceTemplateGroupResponse):void} cb
      * @public
@@ -1126,7 +1127,7 @@ class VpcClient extends AbstractClient {
     }
 
     /**
-     * 删除协议端口模板
+     * 本接口（DeleteServiceTemplate）用于删除协议端口模板
      * @param {DeleteServiceTemplateRequest} req
      * @param {function(string, DeleteServiceTemplateResponse):void} cb
      * @public
@@ -1149,7 +1150,7 @@ class VpcClient extends AbstractClient {
     }
 
     /**
-     * 删除IP地址模板集合
+     * 本接口（DeleteAddressTemplateGroup）用于删除IP地址模板集合
      * @param {DeleteAddressTemplateGroupRequest} req
      * @param {function(string, DeleteAddressTemplateGroupResponse):void} cb
      * @public
@@ -1251,7 +1252,7 @@ class VpcClient extends AbstractClient {
     }
 
     /**
-     * 删除IP地址模板
+     * 本接口（DeleteAddressTemplate）用于删除IP地址模板
      * @param {DeleteAddressTemplateRequest} req
      * @param {function(string, DeleteAddressTemplateResponse):void} cb
      * @public
@@ -1273,7 +1274,7 @@ class VpcClient extends AbstractClient {
     }
 
     /**
-     * 创建协议端口模板
+     * 本接口（CreateServiceTemplate）用于创建协议端口模板
      * @param {CreateServiceTemplateRequest} req
      * @param {function(string, CreateServiceTemplateResponse):void} cb
      * @public
@@ -1373,7 +1374,7 @@ class VpcClient extends AbstractClient {
     }
 
     /**
-     * 创建IP地址模版集合
+     * 本接口（CreateAddressTemplateGroup）用于创建IP地址模版集合
      * @param {CreateAddressTemplateGroupRequest} req
      * @param {function(string, CreateAddressTemplateGroupResponse):void} cb
      * @public
@@ -1384,7 +1385,7 @@ class VpcClient extends AbstractClient {
     }
 
     /**
-     * 创建IP地址模版
+     * 本接口（CreateAddressTemplate）用于创建IP地址模版
      * @param {CreateAddressTemplateRequest} req
      * @param {function(string, CreateAddressTemplateResponse):void} cb
      * @public
@@ -1503,7 +1504,7 @@ class VpcClient extends AbstractClient {
     }
 
     /**
-     * 查询协议端口模板
+     * 本接口（DescribeServiceTemplates）用于查询协议端口模板
      * @param {DescribeServiceTemplatesRequest} req
      * @param {function(string, DescribeServiceTemplatesResponse):void} cb
      * @public
@@ -1847,7 +1848,7 @@ class VpcClient extends AbstractClient {
     }
 
     /**
-     * 创建协议端口模板集合
+     * 本接口（CreateServiceTemplateGroup）用于创建协议端口模板集合
      * @param {CreateServiceTemplateGroupRequest} req
      * @param {function(string, CreateServiceTemplateGroupResponse):void} cb
      * @public
@@ -1892,7 +1893,7 @@ class VpcClient extends AbstractClient {
     }
 
     /**
-     * 查询IP地址模板
+     * 本接口（DescribeAddressTemplates）用于查询IP地址模板
      * @param {DescribeAddressTemplatesRequest} req
      * @param {function(string, DescribeAddressTemplatesResponse):void} cb
      * @public
@@ -1925,7 +1926,7 @@ class VpcClient extends AbstractClient {
     }
 
     /**
-     * 查询IP地址模板集合
+     * 本接口（DescribeAddressTemplateGroups）用于查询IP地址模板集合
      * @param {DescribeAddressTemplateGroupsRequest} req
      * @param {function(string, DescribeAddressTemplateGroupsResponse):void} cb
      * @public

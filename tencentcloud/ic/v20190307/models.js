@@ -432,7 +432,7 @@ class CardInfo extends  AbstractModel {
         this.AllowArrears = null;
 
         /**
-         * 是否开通短息
+         * 是否开通短信0:未开短信 1:开通短信
          * @type {number || null}
          */
         this.NeedSms = null;
