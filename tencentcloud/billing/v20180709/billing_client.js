@@ -17,13 +17,17 @@
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const DescribeBillDetailResponse = models.DescribeBillDetailResponse;
+const DetailSet = models.DetailSet;
 const Deal = models.Deal;
 const DescribeDealsByCondResponse = models.DescribeDealsByCondResponse;
 const DescribeAccountBalanceRequest = models.DescribeAccountBalanceRequest;
 const DescribeBillDetailRequest = models.DescribeBillDetailRequest;
+const DescribeDosageDetailByDateRequest = models.DescribeDosageDetailByDateRequest;
 const ProductInfo = models.ProductInfo;
+const DescribeDosageDetailByDateResponse = models.DescribeDosageDetailByDateResponse;
 const DescribeBillResourceSummaryResponse = models.DescribeBillResourceSummaryResponse;
 const DescribeBillResourceSummaryRequest = models.DescribeBillResourceSummaryRequest;
+const DetailPoint = models.DetailPoint;
 const DescribeAccountBalanceResponse = models.DescribeAccountBalanceResponse;
 const PayDealsResponse = models.PayDealsResponse;
 const DescribeDealsByCondRequest = models.DescribeDealsByCondRequest;
@@ -44,17 +48,6 @@ class BillingClient extends AbstractClient {
     }
     
     /**
-     * 查询账单明细数据
-     * @param {DescribeBillDetailRequest} req
-     * @param {function(string, DescribeBillDetailResponse):void} cb
-     * @public
-     */
-    DescribeBillDetail(req, cb) {
-        let resp = new DescribeBillDetailResponse();
-        this.request("DescribeBillDetail", req, resp, cb);
-    }
-
-    /**
      * 获取云账户余额信息。
      * @param {DescribeAccountBalanceRequest} req
      * @param {function(string, DescribeAccountBalanceResponse):void} cb
@@ -66,14 +59,25 @@ class BillingClient extends AbstractClient {
     }
 
     /**
-     * 支付订单
-     * @param {PayDealsRequest} req
-     * @param {function(string, PayDealsResponse):void} cb
+     * 按日期获取产品用量明细
+     * @param {DescribeDosageDetailByDateRequest} req
+     * @param {function(string, DescribeDosageDetailByDateResponse):void} cb
      * @public
      */
-    PayDeals(req, cb) {
-        let resp = new PayDealsResponse();
-        this.request("PayDeals", req, resp, cb);
+    DescribeDosageDetailByDate(req, cb) {
+        let resp = new DescribeDosageDetailByDateResponse();
+        this.request("DescribeDosageDetailByDate", req, resp, cb);
+    }
+
+    /**
+     * 查询账单明细数据
+     * @param {DescribeBillDetailRequest} req
+     * @param {function(string, DescribeBillDetailResponse):void} cb
+     * @public
+     */
+    DescribeBillDetail(req, cb) {
+        let resp = new DescribeBillDetailResponse();
+        this.request("DescribeBillDetail", req, resp, cb);
     }
 
     /**
@@ -96,6 +100,17 @@ class BillingClient extends AbstractClient {
     DescribeBillResourceSummary(req, cb) {
         let resp = new DescribeBillResourceSummaryResponse();
         this.request("DescribeBillResourceSummary", req, resp, cb);
+    }
+
+    /**
+     * 支付订单
+     * @param {PayDealsRequest} req
+     * @param {function(string, PayDealsResponse):void} cb
+     * @public
+     */
+    PayDeals(req, cb) {
+        let resp = new PayDealsResponse();
+        this.request("PayDeals", req, resp, cb);
     }
 
 

@@ -631,6 +631,41 @@ class CreateNetworkInterfaceRequest extends  AbstractModel {
 }
 
 /**
+ * 用于描述实例的统计信息
+ * @class
+ */
+class InstanceStatistic extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例的类型
+         * @type {string || null}
+         */
+        this.InstanceType = null;
+
+        /**
+         * 实例的个数
+         * @type {number || null}
+         */
+        this.InstanceCount = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
+        this.InstanceCount = 'InstanceCount' in params ? params.InstanceCount : null;
+
+    }
+}
+
+/**
  * CreateRoutes请求参数结构体
  * @class
  */
@@ -725,12 +760,14 @@ class CCN extends  AbstractModel {
 
         /**
          * 付费类型，PREPAID为预付费，POSTPAID为后付费。
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.InstanceChargeType = null;
 
         /**
          * 限速类型，INTER_REGION_LIMIT为地域间限速；OUTER_REGION_LIMIT为地域出口限速。
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.BandwidthLimitType = null;
@@ -898,7 +935,7 @@ class SecurityGroupAssociationStatistics extends  AbstractModel {
 
         /**
          * 全量实例的绑定统计。
-         * @type {Array.<string> || null}
+         * @type {Array.<InstanceStatistic> || null}
          */
         this.InstanceStatistics = null;
 
@@ -917,7 +954,15 @@ class SecurityGroupAssociationStatistics extends  AbstractModel {
         this.ENI = 'ENI' in params ? params.ENI : null;
         this.SG = 'SG' in params ? params.SG : null;
         this.CLB = 'CLB' in params ? params.CLB : null;
-        this.InstanceStatistics = 'InstanceStatistics' in params ? params.InstanceStatistics : null;
+
+        if (params.InstanceStatistics) {
+            this.InstanceStatistics = new Array();
+            for (let z in params.InstanceStatistics) {
+                let obj = new InstanceStatistic();
+                obj.deserialize(params.InstanceStatistics[z]);
+                this.InstanceStatistics.push(obj);
+            }
+        }
 
     }
 }
@@ -1428,6 +1473,11 @@ class DescribeVpnConnectionsRequest extends  AbstractModel {
 
         /**
          * 过滤条件，详见下表：实例过滤条件表。每次请求的Filters的上限为10，Filter.Values的上限为5。参数不支持同时指定VpnConnectionIds和Filters。
+<li>vpc-id - String - VPC实例ID，形如：`vpc-0a36uwkr`。</li>
+<li>vpn-gateway-id - String - VPN网关实例ID，形如：`vpngw-p4lmqawn`。</li>
+<li>customer-gateway-id - String - 对端网关实例ID，形如：`cgw-l4rblw63`。</li>
+<li>vpn-connection-name - String - 通道名称，形如：`test-vpn`。</li>
+<li>vpn-connection-id - String - 通道实例ID，形如：`vpnx-5p7vkch8"`。</li>
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
@@ -2032,6 +2082,9 @@ class DescribeCustomerGatewaysRequest extends  AbstractModel {
 
         /**
          * 过滤条件，详见下表：实例过滤条件表。每次请求的Filters的上限为10，Filter.Values的上限为5。参数不支持同时指定CustomerGatewayIds和Filters。
+<li>customer-gateway-id - String - （过滤条件）用户网关唯一ID形如：`cgw-mgp33pll`。</li>
+<li>customer-gateway-name - String - （过滤条件）用户网关名称形如：`test-cgw`。</li>
+<li>ip-address - String - （过滤条件）公网地址形如：`58.211.1.12`。</li>
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
@@ -2427,6 +2480,7 @@ class NetworkInterface extends  AbstractModel {
 
         /**
          * 绑定的云服务器对象。
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {NetworkInterfaceAttachment || null}
          */
         this.Attachment = null;
@@ -2713,6 +2767,7 @@ class CcnRegionBandwidthLimit extends  AbstractModel {
 
         /**
          * 目的地域，例如：ap-shanghai
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.DstRegion = null;
@@ -13441,7 +13496,7 @@ class InstanceChargePrepaid extends  AbstractModel {
         super();
 
         /**
-         * 购买实例的时长，单位：月。取值范围：1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36。
+         * 购买实例的时长，单位：月。取值范围：1, 2, 3, 4, 5, 6, 7, 8, 9, 12, 24, 36。
          * @type {number || null}
          */
         this.Period = null;
@@ -14221,6 +14276,7 @@ module.exports = {
     ServiceTemplateGroup: ServiceTemplateGroup,
     RouteConflict: RouteConflict,
     CreateNetworkInterfaceRequest: CreateNetworkInterfaceRequest,
+    InstanceStatistic: InstanceStatistic,
     CreateRoutesRequest: CreateRoutesRequest,
     CCN: CCN,
     CreateVpnConnectionRequest: CreateVpnConnectionRequest,
