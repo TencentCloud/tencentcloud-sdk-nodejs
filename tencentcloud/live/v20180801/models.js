@@ -784,7 +784,7 @@ class DeleteLiveRecordTemplateRequest extends  AbstractModel {
         super();
 
         /**
-         * 模板Id。
+         * 模板ID。
          * @type {number || null}
          */
         this.TemplateId = null;
@@ -2501,6 +2501,48 @@ class DescribeLiveWatermarkRequest extends  AbstractModel {
             return;
         }
         this.WatermarkId = 'WatermarkId' in params ? params.WatermarkId : null;
+
+    }
+}
+
+/**
+ * 日志url信息
+ * @class
+ */
+class LogInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 日志名称。
+         * @type {string || null}
+         */
+        this.LogName = null;
+
+        /**
+         * 日志Url。
+         * @type {string || null}
+         */
+        this.LogUrl = null;
+
+        /**
+         * 日志生成时间
+         * @type {string || null}
+         */
+        this.LogTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LogName = 'LogName' in params ? params.LogName : null;
+        this.LogUrl = 'LogUrl' in params ? params.LogUrl : null;
+        this.LogTime = 'LogTime' in params ? params.LogTime : null;
 
     }
 }
@@ -5285,7 +5327,7 @@ class CreateLiveCallbackRuleRequest extends  AbstractModel {
         this.AppName = null;
 
         /**
-         * 模板ID
+         * 模板ID。
          * @type {number || null}
          */
         this.TemplateId = null;
@@ -5782,6 +5824,56 @@ class DescribeLiveSnapshotTemplatesResponse extends  AbstractModel {
                 this.Templates.push(obj);
             }
         }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeLogDownloadList返回参数结构体
+ * @class
+ */
+class DescribeLogDownloadListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 日志信息列表。
+         * @type {Array.<LogInfo> || null}
+         */
+        this.LogInfoList = null;
+
+        /**
+         * 总条数。
+         * @type {number || null}
+         */
+        this.TotalNum = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.LogInfoList) {
+            this.LogInfoList = new Array();
+            for (let z in params.LogInfoList) {
+                let obj = new LogInfo();
+                obj.deserialize(params.LogInfoList[z]);
+                this.LogInfoList.push(obj);
+            }
+        }
+        this.TotalNum = 'TotalNum' in params ? params.TotalNum : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -6626,7 +6718,7 @@ class CreateLiveTranscodeTemplateRequest extends  AbstractModel {
         this.TemplateName = null;
 
         /**
-         * 视频码率。
+         * 视频码率。范围：100-8000。
          * @type {number || null}
          */
         this.VideoBitrate = null;
@@ -6646,7 +6738,7 @@ class CreateLiveTranscodeTemplateRequest extends  AbstractModel {
         this.Acodec = null;
 
         /**
-         * 音频码率：默认0。0-500
+         * 音频码率：默认0。0-500。
          * @type {number || null}
          */
         this.AudioBitrate = null;
@@ -6658,7 +6750,7 @@ class CreateLiveTranscodeTemplateRequest extends  AbstractModel {
         this.Description = null;
 
         /**
-         * 款，默认0。
+         * 宽，默认0。
          * @type {number || null}
          */
         this.Width = null;
@@ -7196,6 +7288,34 @@ class ModifyLiveDomainCertResponse extends  AbstractModel {
 }
 
 /**
+ * ModifyLiveCallbackTemplate返回参数结构体
+ * @class
+ */
+class ModifyLiveCallbackTemplateResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * EnableLiveDomain请求参数结构体
  * @class
  */
@@ -7525,7 +7645,7 @@ class CreateLiveSnapshotTemplateRequest extends  AbstractModel {
         super();
 
         /**
-         * 模板名称。非空的字符串
+         * 模板名称。非空的字符串。
          * @type {string || null}
          */
         this.TemplateName = null;
@@ -7561,19 +7681,19 @@ class CreateLiveSnapshotTemplateRequest extends  AbstractModel {
         this.SnapshotInterval = null;
 
         /**
-         * 截图宽度。默认：0（原始高）
+         * 截图宽度。默认：0（原始宽）。
          * @type {number || null}
          */
         this.Width = null;
 
         /**
-         * 截图高度。默认：0（原始宽）
+         * 截图高度。默认：0（原始高）。
          * @type {number || null}
          */
         this.Height = null;
 
         /**
-         * 是否开启鉴黄，0：不开启，1：开启。默认：0.
+         * 是否开启鉴黄，0：不开启，1：开启。默认：0。
          * @type {number || null}
          */
         this.PornFlag = null;
@@ -7842,7 +7962,7 @@ class CreateLiveCallbackTemplateResponse extends  AbstractModel {
         super();
 
         /**
-         * 模板Id。
+         * 模板ID。
          * @type {number || null}
          */
         this.TemplateId = null;
@@ -8163,18 +8283,33 @@ class DescribeLiveTranscodeTemplateRequest extends  AbstractModel {
 }
 
 /**
- * ModifyLiveCallbackTemplate返回参数结构体
+ * DescribeLogDownloadList请求参数结构体
  * @class
  */
-class ModifyLiveCallbackTemplateResponse extends  AbstractModel {
+class DescribeLogDownloadListRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * 开始时间，北京时间。
+格式：yyyy-mm-dd HH:MM:SS。
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.StartTime = null;
+
+        /**
+         * 结束时间，北京时间。
+格式：yyyy-mm-dd HH:MM:SS。
+注意：结束时间 - 开始时间 <=7天。
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * 域名列表。
+         * @type {Array.<string> || null}
+         */
+        this.PlayDomains = null;
 
     }
 
@@ -8185,7 +8320,9 @@ class ModifyLiveCallbackTemplateResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.PlayDomains = 'PlayDomains' in params ? params.PlayDomains : null;
 
     }
 }
@@ -9129,6 +9266,7 @@ module.exports = {
     ModifyLivePlayDomainRequest: ModifyLivePlayDomainRequest,
     DeleteLiveRecordTemplateResponse: DeleteLiveRecordTemplateResponse,
     DescribeLiveWatermarkRequest: DescribeLiveWatermarkRequest,
+    LogInfo: LogInfo,
     AddDelayLiveStreamRequest: AddDelayLiveStreamRequest,
     DescribeLiveDomainCertRequest: DescribeLiveDomainCertRequest,
     DescribeLiveStreamEventListRequest: DescribeLiveStreamEventListRequest,
@@ -9202,6 +9340,7 @@ module.exports = {
     CreateLiveRecordRequest: CreateLiveRecordRequest,
     ForbidLiveStreamResponse: ForbidLiveStreamResponse,
     DescribeLiveSnapshotTemplatesResponse: DescribeLiveSnapshotTemplatesResponse,
+    DescribeLogDownloadListResponse: DescribeLogDownloadListResponse,
     CertInfo: CertInfo,
     ModifyLivePushAuthKeyResponse: ModifyLivePushAuthKeyResponse,
     DeleteLiveTranscodeTemplateRequest: DeleteLiveTranscodeTemplateRequest,
@@ -9229,6 +9368,7 @@ module.exports = {
     PlayAuthKeyInfo: PlayAuthKeyInfo,
     ModifyLiveTranscodeTemplateRequest: ModifyLiveTranscodeTemplateRequest,
     ModifyLiveDomainCertResponse: ModifyLiveDomainCertResponse,
+    ModifyLiveCallbackTemplateResponse: ModifyLiveCallbackTemplateResponse,
     EnableLiveDomainRequest: EnableLiveDomainRequest,
     DescribeLiveSnapshotRulesRequest: DescribeLiveSnapshotRulesRequest,
     CreateLiveTranscodeRuleResponse: CreateLiveTranscodeRuleResponse,
@@ -9252,7 +9392,7 @@ module.exports = {
     ModifyLiveSnapshotTemplateRequest: ModifyLiveSnapshotTemplateRequest,
     CreateLiveRecordRuleResponse: CreateLiveRecordRuleResponse,
     DescribeLiveTranscodeTemplateRequest: DescribeLiveTranscodeTemplateRequest,
-    ModifyLiveCallbackTemplateResponse: ModifyLiveCallbackTemplateResponse,
+    DescribeLogDownloadListRequest: DescribeLogDownloadListRequest,
     DescribeLiveCallbackTemplatesResponse: DescribeLiveCallbackTemplatesResponse,
     DescribeLivePushAuthKeyResponse: DescribeLivePushAuthKeyResponse,
     CreateLiveWatermarkRuleRequest: CreateLiveWatermarkRuleRequest,

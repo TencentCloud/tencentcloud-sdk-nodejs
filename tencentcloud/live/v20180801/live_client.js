@@ -70,6 +70,7 @@ const ModifyLiveRecordTemplateResponse = models.ModifyLiveRecordTemplateResponse
 const ModifyLivePlayDomainRequest = models.ModifyLivePlayDomainRequest;
 const DeleteLiveRecordTemplateResponse = models.DeleteLiveRecordTemplateResponse;
 const DescribeLiveWatermarkRequest = models.DescribeLiveWatermarkRequest;
+const LogInfo = models.LogInfo;
 const AddDelayLiveStreamRequest = models.AddDelayLiveStreamRequest;
 const DescribeLiveDomainCertRequest = models.DescribeLiveDomainCertRequest;
 const DescribeLiveStreamEventListRequest = models.DescribeLiveStreamEventListRequest;
@@ -143,6 +144,7 @@ const DeleteLiveSnapshotRuleResponse = models.DeleteLiveSnapshotRuleResponse;
 const CreateLiveRecordRequest = models.CreateLiveRecordRequest;
 const ForbidLiveStreamResponse = models.ForbidLiveStreamResponse;
 const DescribeLiveSnapshotTemplatesResponse = models.DescribeLiveSnapshotTemplatesResponse;
+const DescribeLogDownloadListResponse = models.DescribeLogDownloadListResponse;
 const CertInfo = models.CertInfo;
 const ModifyLivePushAuthKeyResponse = models.ModifyLivePushAuthKeyResponse;
 const DeleteLiveTranscodeTemplateRequest = models.DeleteLiveTranscodeTemplateRequest;
@@ -170,6 +172,7 @@ const DeleteLiveCallbackRuleRequest = models.DeleteLiveCallbackRuleRequest;
 const PlayAuthKeyInfo = models.PlayAuthKeyInfo;
 const ModifyLiveTranscodeTemplateRequest = models.ModifyLiveTranscodeTemplateRequest;
 const ModifyLiveDomainCertResponse = models.ModifyLiveDomainCertResponse;
+const ModifyLiveCallbackTemplateResponse = models.ModifyLiveCallbackTemplateResponse;
 const EnableLiveDomainRequest = models.EnableLiveDomainRequest;
 const DescribeLiveSnapshotRulesRequest = models.DescribeLiveSnapshotRulesRequest;
 const CreateLiveTranscodeRuleResponse = models.CreateLiveTranscodeRuleResponse;
@@ -193,7 +196,7 @@ const DescribeLiveCallbackTemplateRequest = models.DescribeLiveCallbackTemplateR
 const ModifyLiveSnapshotTemplateRequest = models.ModifyLiveSnapshotTemplateRequest;
 const CreateLiveRecordRuleResponse = models.CreateLiveRecordRuleResponse;
 const DescribeLiveTranscodeTemplateRequest = models.DescribeLiveTranscodeTemplateRequest;
-const ModifyLiveCallbackTemplateResponse = models.ModifyLiveCallbackTemplateResponse;
+const DescribeLogDownloadListRequest = models.DescribeLogDownloadListRequest;
 const DescribeLiveCallbackTemplatesResponse = models.DescribeLiveCallbackTemplatesResponse;
 const DescribeLivePushAuthKeyResponse = models.DescribeLivePushAuthKeyResponse;
 const CreateLiveWatermarkRuleRequest = models.CreateLiveWatermarkRuleRequest;
@@ -879,6 +882,17 @@ class LiveClient extends AbstractClient {
     DescribeLiveTranscodeDetailInfo(req, cb) {
         let resp = new DescribeLiveTranscodeDetailInfoResponse();
         this.request("DescribeLiveTranscodeDetailInfo", req, resp, cb);
+    }
+
+    /**
+     * 批量获取日志URL。
+     * @param {DescribeLogDownloadListRequest} req
+     * @param {function(string, DescribeLogDownloadListResponse):void} cb
+     * @public
+     */
+    DescribeLogDownloadList(req, cb) {
+        let resp = new DescribeLogDownloadListResponse();
+        this.request("DescribeLogDownloadList", req, resp, cb);
     }
 
     /**

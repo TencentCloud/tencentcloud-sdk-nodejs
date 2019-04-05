@@ -825,7 +825,7 @@ class RunInstancesRequest extends  AbstractModel {
         this.ActionTimer = null;
 
         /**
-         * 容灾组id，仅支持指定一个。
+         * 置放群组id，仅支持指定一个。
          * @type {Array.<string> || null}
          */
         this.DisasterRecoverGroupIds = null;
@@ -3704,6 +3704,13 @@ class HostItem extends  AbstractModel {
          */
         this.HostResource = null;
 
+        /**
+         * 专用宿主机所属的围笼ID。该字段仅对金融专区围笼内的专用宿主机有效。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.CageId = null;
+
     }
 
     /**
@@ -3735,6 +3742,7 @@ class HostItem extends  AbstractModel {
             obj.deserialize(params.HostResource)
             this.HostResource = obj;
         }
+        this.CageId = 'CageId' in params ? params.CageId : null;
 
     }
 }
@@ -4217,12 +4225,6 @@ class InquiryPriceResetInstancesTypeRequest extends  AbstractModel {
          */
         this.InstanceType = null;
 
-        /**
-         * 是否对运行中的实例选择强制关机。建议对运行中的实例先手动关机，然后再重置用户密码。取值范围：<br><li>TRUE：表示在正常关机失败后进行强制关机<br><li>FALSE：表示在正常关机失败后不进行强制关机<br><br>默认取值：FALSE。<br><br>强制关机的效果等同于关闭物理计算机的电源开关。强制关机可能会导致数据丢失或文件系统损坏，请仅在服务器不能正常关机时使用。
-         * @type {boolean || null}
-         */
-        this.ForceStop = null;
-
     }
 
     /**
@@ -4234,7 +4236,6 @@ class InquiryPriceResetInstancesTypeRequest extends  AbstractModel {
         }
         this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
         this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
-        this.ForceStop = 'ForceStop' in params ? params.ForceStop : null;
 
     }
 }

@@ -206,7 +206,7 @@ class LanguageDetectRequest extends  AbstractModel {
         super();
 
         /**
-         * 待识别的文本，文本统一使用utf-8格式编码，非utf-8格式编码字符会翻译失败
+         * 待识别的文本，文本统一使用utf-8格式编码，非utf-8格式编码字符会翻译失败。单次请求的文本长度需要低于2000。
          * @type {string || null}
          */
         this.Text = null;
@@ -536,7 +536,7 @@ class TextTranslateRequest extends  AbstractModel {
         super();
 
         /**
-         * 待翻译的文本，文本统一使用utf-8格式编码，非utf-8格式编码字符会翻译失败，请传入有效文本，html标记等非常规翻译文本会翻译失败
+         * 待翻译的文本，文本统一使用utf-8格式编码，非utf-8格式编码字符会翻译失败，请传入有效文本，html标记等非常规翻译文本会翻译失败。单次请求的文本长度需要低于2000。
          * @type {string || null}
          */
         this.SourceText = null;
