@@ -310,7 +310,7 @@ class CardInfo extends  AbstractModel {
         this.Teleoperator = null;
 
         /**
-         * 卡片状态
+         * 卡片状态 1:未激活 2：激活 3：停卡 5：销卡
          * @type {number || null}
          */
         this.CardStatus = null;
