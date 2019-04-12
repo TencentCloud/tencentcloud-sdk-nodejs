@@ -96,6 +96,7 @@ const RetryJobsResponse = models.RetryJobsResponse;
 const TerminateJobResponse = models.TerminateJobResponse;
 const DescribeJobsRequest = models.DescribeJobsRequest;
 const TaskTemplateView = models.TaskTemplateView;
+const InstanceTypeOptions = models.InstanceTypeOptions;
 const DeleteTaskTemplatesResponse = models.DeleteTaskTemplatesResponse;
 const DescribeCvmZoneInstanceConfigInfosRequest = models.DescribeCvmZoneInstanceConfigInfosRequest;
 const TerminateTaskInstanceRequest = models.TerminateTaskInstanceRequest;

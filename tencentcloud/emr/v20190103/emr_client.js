@@ -16,12 +16,33 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
-const ResourceSpec = models.ResourceSpec;
-const Placement = models.Placement;
-const InquiryPriceCreateInstanceResponse = models.InquiryPriceCreateInstanceResponse;
-const NodeSpec = models.NodeSpec;
+const CreateInstanceResult = models.CreateInstanceResult;
+const LoginSettings = models.LoginSettings;
 const VPCSettings = models.VPCSettings;
+const TerminateTasksResponse = models.TerminateTasksResponse;
+const ScaleOutInstanceResponse = models.ScaleOutInstanceResponse;
 const InquiryPriceCreateInstanceRequest = models.InquiryPriceCreateInstanceRequest;
+const ClusterInstanceInfo = models.ClusterInstanceInfo;
+const ClusterInfoResult = models.ClusterInfoResult;
+const ResourceSpec = models.ResourceSpec;
+const CreateInstanceResponse = models.CreateInstanceResponse;
+const ScaleOutInstanceResult = models.ScaleOutInstanceResult;
+const InquiryPriceCreateInstanceResponse = models.InquiryPriceCreateInstanceResponse;
+const PreExecuteFileSettings = models.PreExecuteFileSettings;
+const CreateInstanceRequest = models.CreateInstanceRequest;
+const DescribeInstancesResponse = models.DescribeInstancesResponse;
+const InquiryPriceScaleOutInstanceRequest = models.InquiryPriceScaleOutInstanceRequest;
+const Placement = models.Placement;
+const DescribeInstancesRequest = models.DescribeInstancesRequest;
+const COSSettings = models.COSSettings;
+const ScaleOutInstanceRequest = models.ScaleOutInstanceRequest;
+const InquiryPriceScaleOutInstanceResponse = models.InquiryPriceScaleOutInstanceResponse;
+const TerminateTasksRequest = models.TerminateTasksRequest;
+const EMRProductConfigSettings = models.EMRProductConfigSettings;
+const NodeSpec = models.NodeSpec;
+const TerminateInstanceRequest = models.TerminateInstanceRequest;
+const TerminateInstanceResponse = models.TerminateInstanceResponse;
+const TerminateResult = models.TerminateResult;
 const InquiryPriceResult = models.InquiryPriceResult;
 
 
@@ -36,6 +57,50 @@ class EmrClient extends AbstractClient {
     }
     
     /**
+     * 缩容Task节点
+     * @param {TerminateTasksRequest} req
+     * @param {function(string, TerminateTasksResponse):void} cb
+     * @public
+     */
+    TerminateTasks(req, cb) {
+        let resp = new TerminateTasksResponse();
+        this.request("TerminateTasks", req, resp, cb);
+    }
+
+    /**
+     * 查询EMR实例
+     * @param {DescribeInstancesRequest} req
+     * @param {function(string, DescribeInstancesResponse):void} cb
+     * @public
+     */
+    DescribeInstances(req, cb) {
+        let resp = new DescribeInstancesResponse();
+        this.request("DescribeInstances", req, resp, cb);
+    }
+
+    /**
+     * 销毁EMR实例
+     * @param {TerminateInstanceRequest} req
+     * @param {function(string, TerminateInstanceResponse):void} cb
+     * @public
+     */
+    TerminateInstance(req, cb) {
+        let resp = new TerminateInstanceResponse();
+        this.request("TerminateInstance", req, resp, cb);
+    }
+
+    /**
+     * 创建EMR实例
+     * @param {CreateInstanceRequest} req
+     * @param {function(string, CreateInstanceResponse):void} cb
+     * @public
+     */
+    CreateInstance(req, cb) {
+        let resp = new CreateInstanceResponse();
+        this.request("CreateInstance", req, resp, cb);
+    }
+
+    /**
      * 创建实例询价
      * @param {InquiryPriceCreateInstanceRequest} req
      * @param {function(string, InquiryPriceCreateInstanceResponse):void} cb
@@ -44,6 +109,28 @@ class EmrClient extends AbstractClient {
     InquiryPriceCreateInstance(req, cb) {
         let resp = new InquiryPriceCreateInstanceResponse();
         this.request("InquiryPriceCreateInstance", req, resp, cb);
+    }
+
+    /**
+     * 扩容询价. 当扩容时候，请通过该接口查询价格。
+     * @param {InquiryPriceScaleOutInstanceRequest} req
+     * @param {function(string, InquiryPriceScaleOutInstanceResponse):void} cb
+     * @public
+     */
+    InquiryPriceScaleOutInstance(req, cb) {
+        let resp = new InquiryPriceScaleOutInstanceResponse();
+        this.request("InquiryPriceScaleOutInstance", req, resp, cb);
+    }
+
+    /**
+     * 实例扩容
+     * @param {ScaleOutInstanceRequest} req
+     * @param {function(string, ScaleOutInstanceResponse):void} cb
+     * @public
+     */
+    ScaleOutInstance(req, cb) {
+        let resp = new ScaleOutInstanceResponse();
+        this.request("ScaleOutInstance", req, resp, cb);
     }
 
 

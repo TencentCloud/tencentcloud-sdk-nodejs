@@ -410,7 +410,7 @@ class EnvData extends  AbstractModel {
         super();
 
         /**
-         * CVM实例类型，不能与InstanceTypes同时出现。
+         * CVM实例类型，不能与InstanceTypes和InstanceTypeOptions同时出现。
          * @type {string || null}
          */
         this.InstanceType = null;
@@ -482,10 +482,16 @@ class EnvData extends  AbstractModel {
         this.InstanceMarketOptions = null;
 
         /**
-         * CVM实例类型列表，不能与InstanceType同时出现。指定该字段后，计算节点按照机型先后顺序依次尝试创建，直到实例创建成功，结束遍历过程。最多支持10个机型。
+         * CVM实例类型列表，不能与InstanceType和InstanceTypeOptions同时出现。指定该字段后，计算节点按照机型先后顺序依次尝试创建，直到实例创建成功，结束遍历过程。最多支持10个机型。
          * @type {Array.<string> || null}
          */
         this.InstanceTypes = null;
+
+        /**
+         * CVM实例机型配置。不能与InstanceType和InstanceTypes同时出现。
+         * @type {InstanceTypeOptions || null}
+         */
+        this.InstanceTypeOptions = null;
 
     }
 
@@ -547,6 +553,12 @@ class EnvData extends  AbstractModel {
             this.InstanceMarketOptions = obj;
         }
         this.InstanceTypes = 'InstanceTypes' in params ? params.InstanceTypes : null;
+
+        if (params.InstanceTypeOptions) {
+            let obj = new InstanceTypeOptions();
+            obj.deserialize(params.InstanceTypeOptions)
+            this.InstanceTypeOptions = obj;
+        }
 
     }
 }
@@ -792,6 +804,12 @@ class Task extends  AbstractModel {
          */
         this.Timeout = null;
 
+        /**
+         * 任务最大并发数限制，默认没有限制。
+         * @type {number || null}
+         */
+        this.MaxConcurrentNum = null;
+
     }
 
     /**
@@ -876,6 +894,7 @@ class Task extends  AbstractModel {
         this.FailedAction = 'FailedAction' in params ? params.FailedAction : null;
         this.MaxRetryCount = 'MaxRetryCount' in params ? params.MaxRetryCount : null;
         this.Timeout = 'Timeout' in params ? params.Timeout : null;
+        this.MaxConcurrentNum = 'MaxConcurrentNum' in params ? params.MaxConcurrentNum : null;
 
     }
 }
@@ -946,18 +965,21 @@ class LoginSettings extends  AbstractModel {
 
         /**
          * 实例登录密码。不同操作系统类型密码复杂度限制不一样，具体如下：<br><li>Linux实例密码必须8到16位，至少包括两项[a-z，A-Z]、[0-9] 和 [( ) ` ~ ! @ # $ % ^ & * - + = | { } [ ] : ; ' , . ? / ]中的特殊符号。<br><li>Windows实例密码必须12到16位，至少包括三项[a-z]，[A-Z]，[0-9] 和 [( ) ` ~ ! @ # $ % ^ & * - + = { } [ ] : ; ' , . ? /]中的特殊符号。<br><br>若不指定该参数，则由系统随机生成密码，并通过站内信方式通知到用户。
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.Password = null;
 
         /**
          * 密钥ID列表。关联密钥后，就可以通过对应的私钥来访问实例；KeyId可通过接口DescribeKeyPairs获取，密钥与密码不能同时指定，同时Windows操作系统不支持指定密钥。当前仅支持购买的时候指定一个密钥。
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<string> || null}
          */
         this.KeyIds = null;
 
         /**
          * 保持镜像的原始设置。该参数与Password或KeyIds.N不能同时指定。只有使用自定义镜像、共享镜像或外部导入镜像创建实例时才能指定该参数为TRUE。取值范围：<br><li>TRUE：表示保持镜像的登录设置<br><li>FALSE：表示不保持镜像的登录设置<br><br>默认取值：FALSE。
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.KeepImageLogin = null;
@@ -1149,36 +1171,42 @@ class TaskInstanceLog extends  AbstractModel {
 
         /**
          * 标准输出日志（Base64编码）
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.StdoutLog = null;
 
         /**
          * 标准错误日志（Base64编码）
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.StderrLog = null;
 
         /**
          * 标准输出重定向路径
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.StdoutRedirectPath = null;
 
         /**
          * 标准错误重定向路径
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.StderrRedirectPath = null;
 
         /**
          * 标准输出重定向文件名
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.StdoutRedirectFileName = null;
 
         /**
          * 标准错误重定向文件名
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.StderrRedirectFileName = null;
@@ -1266,6 +1294,7 @@ class TaskView extends  AbstractModel {
 
         /**
          * 结束时间
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.EndTime = null;
@@ -2049,6 +2078,7 @@ class DescribeComputeEnvCreateInfoResponse extends  AbstractModel {
 
         /**
          * 计算环境描述
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.EnvDescription = null;
@@ -2178,12 +2208,14 @@ class ComputeEnvCreateInfo extends  AbstractModel {
 
         /**
          * 计算环境名称
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.EnvName = null;
 
         /**
          * 计算环境描述
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.EnvDescription = null;
@@ -2202,24 +2234,28 @@ class ComputeEnvCreateInfo extends  AbstractModel {
 
         /**
          * 数据盘挂载选项
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<MountDataDisk> || null}
          */
         this.MountDataDisks = null;
 
         /**
          * 输入映射
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<InputMapping> || null}
          */
         this.InputMappings = null;
 
         /**
          * 授权信息
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<Authentication> || null}
          */
         this.Authentications = null;
 
         /**
          * 通知信息
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<Notification> || null}
          */
         this.Notifications = null;
@@ -2387,16 +2423,16 @@ class InstanceMarketOptionsRequest extends  AbstractModel {
         super();
 
         /**
-         * 市场选项类型，当前只支持取值：spot
-         * @type {string || null}
-         */
-        this.MarketType = null;
-
-        /**
          * 竞价相关选项
          * @type {SpotMarketOptions || null}
          */
         this.SpotOptions = null;
+
+        /**
+         * 市场选项类型，当前只支持取值：spot
+         * @type {string || null}
+         */
+        this.MarketType = null;
 
     }
 
@@ -2407,13 +2443,13 @@ class InstanceMarketOptionsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.MarketType = 'MarketType' in params ? params.MarketType : null;
 
         if (params.SpotOptions) {
             let obj = new SpotMarketOptions();
             obj.deserialize(params.SpotOptions)
             this.SpotOptions = obj;
         }
+        this.MarketType = 'MarketType' in params ? params.MarketType : null;
 
     }
 }
@@ -2822,10 +2858,11 @@ class DataDisk extends  AbstractModel {
 
         /**
          * 数据盘是否随子机销毁。取值范围：
-<li>TRUE：子机销毁时，销毁数据盘
+<li>TRUE：子机销毁时，销毁数据盘，只支持按小时后付费云盘
 <li>FALSE：子机销毁时，保留数据盘<br>
 默认取值：TRUE<br>
 该参数目前仅用于 `RunInstances` 接口。
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {boolean || null}
          */
         this.DeleteWithInstance = null;
@@ -3100,18 +3137,21 @@ class Externals extends  AbstractModel {
 
         /**
          * 释放地址
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {boolean || null}
          */
         this.ReleaseAddress = null;
 
         /**
          * 不支持的网络类型
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<string> || null}
          */
         this.UnsupportNetworks = null;
 
         /**
          * HDD本地存储属性
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {StorageBlock || null}
          */
         this.StorageBlockAttr = null;
@@ -4073,24 +4113,28 @@ class ItemPrice extends  AbstractModel {
 
         /**
          * 后续单价，单位：元。
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.UnitPrice = null;
 
         /**
          * 后续计价单元，可取值范围： <br><li>HOUR：表示计价单元是按每小时来计算。当前涉及该计价单元的场景有：实例按小时后付费（POSTPAID_BY_HOUR）、带宽按小时后付费（BANDWIDTH_POSTPAID_BY_HOUR）：<br><li>GB：表示计价单元是按每GB来计算。当前涉及该计价单元的场景有：流量按小时后付费（TRAFFIC_POSTPAID_BY_HOUR）。
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.ChargeUnit = null;
 
         /**
          * 预支费用的原价，单位：元。
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.OriginalPrice = null;
 
         /**
          * 预支费用的折扣价，单位：元。
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.DiscountPrice = null;
@@ -4146,6 +4190,7 @@ class InstanceTypeQuotaItem extends  AbstractModel {
 
         /**
          * 扩展属性。
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {Externals || null}
          */
         this.Externals = null;
@@ -4414,6 +4459,48 @@ class TaskTemplateView extends  AbstractModel {
 }
 
 /**
+ * 实例机型配置。
+ * @class
+ */
+class InstanceTypeOptions extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * CPU核数。
+         * @type {number || null}
+         */
+        this.CPU = null;
+
+        /**
+         * 内存值，单位GB。
+         * @type {number || null}
+         */
+        this.Memory = null;
+
+        /**
+         * 实例机型类别，可选参数：“ALL”、“GENERAL_2”、“GENERAL_3”、“COMPUTE_2”和“COMPUTE_3”。默认值“ALL”。
+         * @type {Array.<string> || null}
+         */
+        this.InstanceCategories = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CPU = 'CPU' in params ? params.CPU : null;
+        this.Memory = 'Memory' in params ? params.Memory : null;
+        this.InstanceCategories = 'InstanceCategories' in params ? params.InstanceCategories : null;
+
+    }
+}
+
+/**
  * DeleteTaskTemplates返回参数结构体
  * @class
  */
@@ -4601,6 +4688,7 @@ class TaskInstanceView extends  AbstractModel {
 
         /**
          * 应用程序执行结束的exit code
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.ExitCode = null;
@@ -4613,6 +4701,7 @@ class TaskInstanceView extends  AbstractModel {
 
         /**
          * 任务实例运行时所在计算节点（例如CVM）的InstanceId。任务实例未运行或者完结时，本字段为空。任务实例重试时，本字段会随之变化
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.ComputeNodeInstanceId = null;
@@ -4625,18 +4714,21 @@ class TaskInstanceView extends  AbstractModel {
 
         /**
          * 启动时间
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.LaunchTime = null;
 
         /**
          * 开始运行时间
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.RunningTime = null;
 
         /**
          * 结束时间
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.EndTime = null;
@@ -5228,12 +5320,14 @@ class Activity extends  AbstractModel {
 
         /**
          * 活动结束时间
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.EndTime = null;
 
         /**
          * 云服务器实例ID
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -5414,18 +5508,21 @@ class StorageBlock extends  AbstractModel {
 
         /**
          * HDD本地存储类型，值为：LOCAL_PRO.
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.Type = null;
 
         /**
          * HDD本地存储的最小容量
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.MinSize = null;
 
         /**
          * HDD本地存储的最大容量
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.MaxSize = null;
@@ -5472,6 +5569,12 @@ class InternetAccessible extends  AbstractModel {
          */
         this.PublicIpAssigned = null;
 
+        /**
+         * 带宽包ID。可通过[`DescribeBandwidthPackages`](https://cloud.tencent.com/document/api/215/19209)接口返回值中的`BandwidthPackageId`获取。
+         * @type {string || null}
+         */
+        this.BandwidthPackageId = null;
+
     }
 
     /**
@@ -5484,6 +5587,7 @@ class InternetAccessible extends  AbstractModel {
         this.InternetChargeType = 'InternetChargeType' in params ? params.InternetChargeType : null;
         this.InternetMaxBandwidthOut = 'InternetMaxBandwidthOut' in params ? params.InternetMaxBandwidthOut : null;
         this.PublicIpAssigned = 'PublicIpAssigned' in params ? params.PublicIpAssigned : null;
+        this.BandwidthPackageId = 'BandwidthPackageId' in params ? params.BandwidthPackageId : null;
 
     }
 }
@@ -5522,6 +5626,7 @@ class JobView extends  AbstractModel {
 
         /**
          * 位置信息
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {Placement || null}
          */
         this.Placement = null;
@@ -5534,6 +5639,7 @@ class JobView extends  AbstractModel {
 
         /**
          * 结束时间
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.EndTime = null;
@@ -5691,6 +5797,7 @@ module.exports = {
     TerminateJobResponse: TerminateJobResponse,
     DescribeJobsRequest: DescribeJobsRequest,
     TaskTemplateView: TaskTemplateView,
+    InstanceTypeOptions: InstanceTypeOptions,
     DeleteTaskTemplatesResponse: DeleteTaskTemplatesResponse,
     DescribeCvmZoneInstanceConfigInfosRequest: DescribeCvmZoneInstanceConfigInfosRequest,
     TerminateTaskInstanceRequest: TerminateTaskInstanceRequest,

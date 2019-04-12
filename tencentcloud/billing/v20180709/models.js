@@ -1117,6 +1117,24 @@ class BillResourceSummary extends  AbstractModel {
          */
         this.IncentivePayAmount = null;
 
+        /**
+         * 扩展字段3
+         * @type {string || null}
+         */
+        this.ExtendField3 = null;
+
+        /**
+         * 扩展字段4
+         * @type {string || null}
+         */
+        this.ExtendField4 = null;
+
+        /**
+         * 扩展字段5
+         * @type {string || null}
+         */
+        this.ExtendField5 = null;
+
     }
 
     /**
@@ -1149,6 +1167,9 @@ class BillResourceSummary extends  AbstractModel {
         this.VoucherPayAmount = 'VoucherPayAmount' in params ? params.VoucherPayAmount : null;
         this.CashPayAmount = 'CashPayAmount' in params ? params.CashPayAmount : null;
         this.IncentivePayAmount = 'IncentivePayAmount' in params ? params.IncentivePayAmount : null;
+        this.ExtendField3 = 'ExtendField3' in params ? params.ExtendField3 : null;
+        this.ExtendField4 = 'ExtendField4' in params ? params.ExtendField4 : null;
+        this.ExtendField5 = 'ExtendField5' in params ? params.ExtendField5 : null;
 
     }
 }

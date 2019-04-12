@@ -929,7 +929,7 @@ class LiveClient extends AbstractClient {
     }
 
     /**
-     * 查询直播域名信息
+     * 查询直播域名信息。
      * @param {DescribeLiveDomainRequest} req
      * @param {function(string, DescribeLiveDomainResponse):void} cb
      * @public

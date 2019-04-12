@@ -4749,6 +4749,41 @@ class DescribeTimeWindowResponse extends  AbstractModel {
 }
 
 /**
+ * 创建备份时，指定需要备份的库表信息
+ * @class
+ */
+class BackupItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 需要备份的库名
+         * @type {string || null}
+         */
+        this.Db = null;
+
+        /**
+         * 需要备份的表名。 如果传该参数，表示备份该库中的指定表。如果不传该参数则备份该db库
+         * @type {string || null}
+         */
+        this.Table = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Db = 'Db' in params ? params.Db : null;
+        this.Table = 'Table' in params ? params.Table : null;
+
+    }
+}
+
+/**
  * 数据库表名
  * @class
  */
@@ -5801,7 +5836,7 @@ class UpgradeDBInstanceRequest extends  AbstractModel {
         this.EngineVersion = null;
 
         /**
-         * 切换访问新实例的方式，默认为0，升级主实例时，可指定该参数，升级只读实例或者灾备实例时指定该参数无意义，支持值包括：0-立刻切换，1-时间窗切换；当该值为1时，升级中过程中，切换访问新实例的流程将会在时间窗内进行，或者用户主动调用接口[切换访问新实例](https://cloud.tencent.com/document/product/236/15864)触发该流程
+         * 切换访问新实例的方式，默认为0。支持值包括：0-立刻切换，1-时间窗切换；当该值为1时，升级中过程中，切换访问新实例的流程将会在时间窗内进行，或者用户主动调用接口[切换访问新实例](https://cloud.tencent.com/document/product/236/15864)触发该流程
          * @type {number || null}
          */
         this.WaitSwitch = null;
@@ -6386,7 +6421,7 @@ class BackupConfig extends  AbstractModel {
 
         /**
          * 第二个从库访问端口
-         * @type {string || null}
+         * @type {number || null}
          */
         this.Vport = null;
 
@@ -8043,6 +8078,13 @@ class CreateBackupRequest extends  AbstractModel {
          */
         this.BackupMethod = null;
 
+        /**
+         * 需要备份的库表信息，如果不设置该参数，则默认整实例备份。在 BackupMethod=logical 逻辑备份中才可设置该参数。指定的库表必须存在，否则可能导致备份失败。
+例：如果需要备份 db1 库的 tb1、tb2表 和 db2 库。则该参数设置为 [{"Db": "db1", "Table": "tb1"}, {"Db": "db1", "Table": "tb2"}, {"Db": "db2"} ]
+         * @type {Array.<BackupItem> || null}
+         */
+        this.BackupDBTableList = null;
+
     }
 
     /**
@@ -8054,6 +8096,15 @@ class CreateBackupRequest extends  AbstractModel {
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
         this.BackupMethod = 'BackupMethod' in params ? params.BackupMethod : null;
+
+        if (params.BackupDBTableList) {
+            this.BackupDBTableList = new Array();
+            for (let z in params.BackupDBTableList) {
+                let obj = new BackupItem();
+                obj.deserialize(params.BackupDBTableList[z]);
+                this.BackupDBTableList.push(obj);
+            }
+        }
 
     }
 }
@@ -8339,7 +8390,7 @@ class UpgradeDBInstanceEngineVersionRequest extends  AbstractModel {
         this.EngineVersion = null;
 
         /**
-         * 切换访问新实例的方式，默认为0，升级主实例时，可指定该参数，升级只读实例或者灾备实例时指定该参数无意义，支持值包括：0-立刻切换，1-时间窗切换；当该值为1时，升级中过程中，切换访问新实例的流程将会在时间窗内进行，或者用户主动调用接口[切换访问新实例](https://cloud.tencent.com/document/product/236/15864)触发该流程
+         * 切换访问新实例的方式，默认为0。支持值包括：0-立刻切换，1-时间窗切换；当该值为1时，升级中过程中，切换访问新实例的流程将会在时间窗内进行，或者用户主动调用接口[切换访问新实例](https://cloud.tencent.com/document/product/236/15864)触发该流程
          * @type {number || null}
          */
         this.WaitSwitch = null;
@@ -10083,6 +10134,7 @@ module.exports = {
     DescribeTimeWindowRequest: DescribeTimeWindowRequest,
     DescribeDBImportRecordsResponse: DescribeDBImportRecordsResponse,
     DescribeTimeWindowResponse: DescribeTimeWindowResponse,
+    BackupItem: BackupItem,
     DatabaseName: DatabaseName,
     DescribeInstanceParamsRequest: DescribeInstanceParamsRequest,
     ModifyDBInstanceSecurityGroupsRequest: ModifyDBInstanceSecurityGroupsRequest,
