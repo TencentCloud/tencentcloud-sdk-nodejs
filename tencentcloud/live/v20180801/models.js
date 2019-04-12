@@ -4447,22 +4447,34 @@ class AddLiveDomainRequest extends  AbstractModel {
         super();
 
         /**
-         * 域名名称
+         * 域名名称。
          * @type {string || null}
          */
         this.DomainName = null;
 
         /**
-         * 域名类型。0-推流域名，1-播放域名
+         * 域名类型，
+0：推流域名，
+1：播放域名。
          * @type {number || null}
          */
         this.DomainType = null;
 
         /**
-         * 拉流域名类型。1-国内；2-全球；3-境外
+         * 拉流域名类型：
+1：国内，
+2：全球，
+3：境外。
          * @type {number || null}
          */
         this.PlayType = null;
+
+        /**
+         * 默认 0 ：普通直播，
+1：慢直播。
+         * @type {number || null}
+         */
+        this.IsDelayLive = null;
 
     }
 
@@ -4476,6 +4488,7 @@ class AddLiveDomainRequest extends  AbstractModel {
         this.DomainName = 'DomainName' in params ? params.DomainName : null;
         this.DomainType = 'DomainType' in params ? params.DomainType : null;
         this.PlayType = 'PlayType' in params ? params.PlayType : null;
+        this.IsDelayLive = 'IsDelayLive' in params ? params.IsDelayLive : null;
 
     }
 }
@@ -5553,6 +5566,12 @@ class DescribeLiveDomainsRequest extends  AbstractModel {
          */
         this.PageNum = null;
 
+        /**
+         * 0 普通直播 1慢直播 默认0
+         * @type {number || null}
+         */
+        this.IsDelayLive = null;
+
     }
 
     /**
@@ -5566,6 +5585,7 @@ class DescribeLiveDomainsRequest extends  AbstractModel {
         this.DomainType = 'DomainType' in params ? params.DomainType : null;
         this.PageSize = 'PageSize' in params ? params.PageSize : null;
         this.PageNum = 'PageNum' in params ? params.PageNum : null;
+        this.IsDelayLive = 'IsDelayLive' in params ? params.IsDelayLive : null;
 
     }
 }
@@ -8032,6 +8052,13 @@ class CreateLiveRecordTemplateRequest extends  AbstractModel {
          */
         this.AacParam = null;
 
+        /**
+         * 0：普通直播，
+1：慢直播。
+         * @type {number || null}
+         */
+        this.IsDelayLive = null;
+
     }
 
     /**
@@ -8067,6 +8094,7 @@ class CreateLiveRecordTemplateRequest extends  AbstractModel {
             obj.deserialize(params.AacParam)
             this.AacParam = obj;
         }
+        this.IsDelayLive = 'IsDelayLive' in params ? params.IsDelayLive : null;
 
     }
 }
@@ -8467,6 +8495,12 @@ class DescribeLiveRecordTemplatesRequest extends  AbstractModel {
     constructor(){
         super();
 
+        /**
+         * 是否属于慢直播模板
+         * @type {number || null}
+         */
+        this.IsDelayLive = null;
+
     }
 
     /**
@@ -8476,6 +8510,7 @@ class DescribeLiveRecordTemplatesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.IsDelayLive = 'IsDelayLive' in params ? params.IsDelayLive : null;
 
     }
 }

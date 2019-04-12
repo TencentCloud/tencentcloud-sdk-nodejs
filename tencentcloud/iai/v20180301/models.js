@@ -579,11 +579,18 @@ class FaceAttributesInfo extends  AbstractModel {
         this.Mask = null;
 
         /**
-         * 头发信息，包含头发长度（length）、有无刘海（bang）、头发颜色（color）。
+         * 头发信息，包含头发长度（length）、有无刘海（bang）、头发颜色（color）。NeedFaceAttributes 不为1 或检测超过 5 张人脸时，此参数仍返回，但不具备参考意义。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {FaceHairAttributesInfo || null}
          */
         this.Hair = null;
+
+        /**
+         * 双眼是否睁开 [true,false]。只要有超过一只眼睛闭眼，就返回false。 NeedFaceAttributes 不为1 或检测超过 5 张人脸时，此参数仍返回，但不具备参考意义。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.EyeOpen = null;
 
     }
 
@@ -610,6 +617,7 @@ class FaceAttributesInfo extends  AbstractModel {
             obj.deserialize(params.Hair)
             this.Hair = obj;
         }
+        this.EyeOpen = 'EyeOpen' in params ? params.EyeOpen : null;
 
     }
 }

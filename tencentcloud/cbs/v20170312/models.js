@@ -392,7 +392,7 @@ class Policy extends  AbstractModel {
         super();
 
         /**
-         * 选定周一到周日中需要创建快照的日期，取值范围：[0, 6]。0表示周一触发，依此类推。
+         * 指定每周从周一到周日需要触发定期快照的日期，取值范围：[0, 6]。0表示周日触发，1-6分别表示周一至周六。
          * @type {Array.<number> || null}
          */
         this.DayOfWeek = null;
@@ -3229,6 +3229,18 @@ class Disk extends  AbstractModel {
          */
         this.MigratePercent = null;
 
+        /**
+         * 云盘是否为共享型云盘。
+         * @type {boolean || null}
+         */
+        this.Shareable = null;
+
+        /**
+         * 对于非共享型云盘，该参数为空数组。对于共享型云盘，则表示该云盘当前被挂载到的CVM实例InstanceId
+         * @type {Array.<string> || null}
+         */
+        this.InstanceIdList = null;
+
     }
 
     /**
@@ -3279,6 +3291,8 @@ class Disk extends  AbstractModel {
         this.DifferDaysOfDeadline = 'DifferDaysOfDeadline' in params ? params.DifferDaysOfDeadline : null;
         this.Migrating = 'Migrating' in params ? params.Migrating : null;
         this.MigratePercent = 'MigratePercent' in params ? params.MigratePercent : null;
+        this.Shareable = 'Shareable' in params ? params.Shareable : null;
+        this.InstanceIdList = 'InstanceIdList' in params ? params.InstanceIdList : null;
 
     }
 }

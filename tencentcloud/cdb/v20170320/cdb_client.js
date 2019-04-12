@@ -108,6 +108,7 @@ const DescribeBackupsResponse = models.DescribeBackupsResponse;
 const DescribeTimeWindowRequest = models.DescribeTimeWindowRequest;
 const DescribeDBImportRecordsResponse = models.DescribeDBImportRecordsResponse;
 const DescribeTimeWindowResponse = models.DescribeTimeWindowResponse;
+const BackupItem = models.BackupItem;
 const DatabaseName = models.DatabaseName;
 const DescribeInstanceParamsRequest = models.DescribeInstanceParamsRequest;
 const ModifyDBInstanceSecurityGroupsRequest = models.ModifyDBInstanceSecurityGroupsRequest;

@@ -622,7 +622,7 @@ class DescribeTaskStatusResponse extends  AbstractModel {
         this.TaskResult = null;
 
         /**
-         * 任务类型，001为报告下载，002为数据上传，003为还款数据上传。
+         * <p>任务类型：</p><ul style="margin-bottom:0px;"><li>报告下载：001</li><li>催收数据上传：002</li><li>还款数据上传：003</li><li>回访数据上传：004</li></ul>
          * @type {string || null}
          */
         this.TaskType = null;
