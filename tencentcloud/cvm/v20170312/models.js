@@ -1319,6 +1319,12 @@ class AllocateHostsRequest extends  AbstractModel {
          */
         this.HostCount = null;
 
+        /**
+         * 标签描述列表。通过指定该参数可以同时绑定标签到相应的资源实例。
+         * @type {Array.<TagSpecification> || null}
+         */
+        this.TagSpecification = null;
+
     }
 
     /**
@@ -1344,6 +1350,15 @@ class AllocateHostsRequest extends  AbstractModel {
         this.HostChargeType = 'HostChargeType' in params ? params.HostChargeType : null;
         this.HostType = 'HostType' in params ? params.HostType : null;
         this.HostCount = 'HostCount' in params ? params.HostCount : null;
+
+        if (params.TagSpecification) {
+            this.TagSpecification = new Array();
+            for (let z in params.TagSpecification) {
+                let obj = new TagSpecification();
+                obj.deserialize(params.TagSpecification[z]);
+                this.TagSpecification.push(obj);
+            }
+        }
 
     }
 }
@@ -1947,18 +1962,25 @@ class CreateKeyPairResponse extends  AbstractModel {
 }
 
 /**
- * ModifyKeyPairAttribute返回参数结构体
+ * DescribeInstancesOperationLimit请求参数结构体
  * @class
  */
-class ModifyKeyPairAttributeResponse extends  AbstractModel {
+class DescribeInstancesOperationLimitRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * 按照一个或者多个实例ID查询，可通过[DescribeInstances](https://cloud.tencent.com/document/api/213/9388)API返回值中的InstanceId获取。实例ID形如：ins-xxxxxxxx。（此参数的具体格式可参考API[简介](https://cloud.tencent.com/document/api/213/15688)的id.N一节）。每次请求的实例的上限为100。
+         * @type {Array.<string> || null}
+         */
+        this.InstanceIds = null;
+
+        /**
+         * 实例操作。
+<li> INSTANCE_DEGRADE：实例降配操作</li>
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.Operation = null;
 
     }
 
@@ -1969,7 +1991,8 @@ class ModifyKeyPairAttributeResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
+        this.Operation = 'Operation' in params ? params.Operation : null;
 
     }
 }
@@ -2282,6 +2305,49 @@ class ModifyImageSharePermissionResponse extends  AbstractModel {
     deserialize(params) {
         if (!params) {
             return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeInstancesOperationLimit返回参数结构体
+ * @class
+ */
+class DescribeInstancesOperationLimitResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 该参数表示调整配置操作（降配）限制次数查询。
+         * @type {Array.<OperationCountLimit> || null}
+         */
+        this.InstanceOperationLimitSet = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.InstanceOperationLimitSet) {
+            this.InstanceOperationLimitSet = new Array();
+            for (let z in params.InstanceOperationLimitSet) {
+                let obj = new OperationCountLimit();
+                obj.deserialize(params.InstanceOperationLimitSet[z]);
+                this.InstanceOperationLimitSet.push(obj);
+            }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -3484,6 +3550,34 @@ class DescribeImportImageOsResponse extends  AbstractModel {
 }
 
 /**
+ * ModifyKeyPairAttribute返回参数结构体
+ * @class
+ */
+class ModifyKeyPairAttributeResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * 描述了数据盘的信息
  * @class
  */
@@ -3592,6 +3686,55 @@ class DescribeKeyPairsRequest extends  AbstractModel {
         }
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
+
+    }
+}
+
+/**
+ * 描述了单台实例操作次数限制
+ * @class
+ */
+class OperationCountLimit extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例操作。
+         * @type {string || null}
+         */
+        this.Operation = null;
+
+        /**
+         * 实例ID。
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 当前已使用次数，如果返回值为-1表示该操作无次数限制。
+         * @type {number || null}
+         */
+        this.CurrentCount = null;
+
+        /**
+         * 操作次数最高额度，如果返回值为-1表示该操作无次数限制，如果返回值为0表示不支持调整配置。
+         * @type {number || null}
+         */
+        this.LimitCount = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Operation = 'Operation' in params ? params.Operation : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.CurrentCount = 'CurrentCount' in params ? params.CurrentCount : null;
+        this.LimitCount = 'LimitCount' in params ? params.LimitCount : null;
 
     }
 }
@@ -7376,7 +7519,7 @@ module.exports = {
     DescribeImagesResponse: DescribeImagesResponse,
     ModifyInstancesVpcAttributeResponse: ModifyInstancesVpcAttributeResponse,
     CreateKeyPairResponse: CreateKeyPairResponse,
-    ModifyKeyPairAttributeResponse: ModifyKeyPairAttributeResponse,
+    DescribeInstancesOperationLimitRequest: DescribeInstancesOperationLimitRequest,
     ModifyInstancesChargeTypeRequest: ModifyInstancesChargeTypeRequest,
     DescribeInstanceVncUrlRequest: DescribeInstanceVncUrlRequest,
     ModifyImageSharePermissionRequest: ModifyImageSharePermissionRequest,
@@ -7386,6 +7529,7 @@ module.exports = {
     ResetInstancesInternetMaxBandwidthResponse: ResetInstancesInternetMaxBandwidthResponse,
     ModifyInstancesAttributeResponse: ModifyInstancesAttributeResponse,
     ModifyImageSharePermissionResponse: ModifyImageSharePermissionResponse,
+    DescribeInstancesOperationLimitResponse: DescribeInstancesOperationLimitResponse,
     SyncImagesResponse: SyncImagesResponse,
     DescribeZoneInstanceConfigInfosResponse: DescribeZoneInstanceConfigInfosResponse,
     ModifyInstancesAttributeRequest: ModifyInstancesAttributeRequest,
@@ -7411,8 +7555,10 @@ module.exports = {
     DescribeRegionsRequest: DescribeRegionsRequest,
     CreateDisasterRecoverGroupRequest: CreateDisasterRecoverGroupRequest,
     DescribeImportImageOsResponse: DescribeImportImageOsResponse,
+    ModifyKeyPairAttributeResponse: ModifyKeyPairAttributeResponse,
     DataDisk: DataDisk,
     DescribeKeyPairsRequest: DescribeKeyPairsRequest,
+    OperationCountLimit: OperationCountLimit,
     DeleteDisasterRecoverGroupsResponse: DeleteDisasterRecoverGroupsResponse,
     HostItem: HostItem,
     Externals: Externals,
