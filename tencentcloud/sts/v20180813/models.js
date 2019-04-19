@@ -125,7 +125,7 @@ class AssumeRoleRequest extends  AbstractModel {
         this.RoleSessionName = null;
 
         /**
-         * 指定临时证书的有效期，单位：秒，默认 1800 秒，最长可设定有效期为 7200 秒
+         * 指定临时证书的有效期，单位：秒，默认 7200 秒，最长可设定有效期为 43200 秒
          * @type {number || null}
          */
         this.DurationSeconds = null;

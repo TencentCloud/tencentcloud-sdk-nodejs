@@ -56,7 +56,7 @@ const InternetChargeTypeConfig = models.InternetChargeTypeConfig;
 const DescribeImagesResponse = models.DescribeImagesResponse;
 const ModifyInstancesVpcAttributeResponse = models.ModifyInstancesVpcAttributeResponse;
 const CreateKeyPairResponse = models.CreateKeyPairResponse;
-const ModifyKeyPairAttributeResponse = models.ModifyKeyPairAttributeResponse;
+const DescribeInstancesOperationLimitRequest = models.DescribeInstancesOperationLimitRequest;
 const ModifyInstancesChargeTypeRequest = models.ModifyInstancesChargeTypeRequest;
 const DescribeInstanceVncUrlRequest = models.DescribeInstanceVncUrlRequest;
 const ModifyImageSharePermissionRequest = models.ModifyImageSharePermissionRequest;
@@ -66,6 +66,7 @@ const RunInstancesResponse = models.RunInstancesResponse;
 const ResetInstancesInternetMaxBandwidthResponse = models.ResetInstancesInternetMaxBandwidthResponse;
 const ModifyInstancesAttributeResponse = models.ModifyInstancesAttributeResponse;
 const ModifyImageSharePermissionResponse = models.ModifyImageSharePermissionResponse;
+const DescribeInstancesOperationLimitResponse = models.DescribeInstancesOperationLimitResponse;
 const SyncImagesResponse = models.SyncImagesResponse;
 const DescribeZoneInstanceConfigInfosResponse = models.DescribeZoneInstanceConfigInfosResponse;
 const ModifyInstancesAttributeRequest = models.ModifyInstancesAttributeRequest;
@@ -91,8 +92,10 @@ const DescribeDisasterRecoverGroupQuotaResponse = models.DescribeDisasterRecover
 const DescribeRegionsRequest = models.DescribeRegionsRequest;
 const CreateDisasterRecoverGroupRequest = models.CreateDisasterRecoverGroupRequest;
 const DescribeImportImageOsResponse = models.DescribeImportImageOsResponse;
+const ModifyKeyPairAttributeResponse = models.ModifyKeyPairAttributeResponse;
 const DataDisk = models.DataDisk;
 const DescribeKeyPairsRequest = models.DescribeKeyPairsRequest;
+const OperationCountLimit = models.OperationCountLimit;
 const DeleteDisasterRecoverGroupsResponse = models.DeleteDisasterRecoverGroupsResponse;
 const HostItem = models.HostItem;
 const Externals = models.Externals;
@@ -713,6 +716,19 @@ class CvmClient extends AbstractClient {
     ModifyImageAttribute(req, cb) {
         let resp = new ModifyImageAttributeResponse();
         this.request("ModifyImageAttribute", req, resp, cb);
+    }
+
+    /**
+     * 本接口（DescribeInstancesOperationLimit）用于查询实例操作限制。
+
+* 目前支持调整配置操作限制次数查询。
+     * @param {DescribeInstancesOperationLimitRequest} req
+     * @param {function(string, DescribeInstancesOperationLimitResponse):void} cb
+     * @public
+     */
+    DescribeInstancesOperationLimit(req, cb) {
+        let resp = new DescribeInstancesOperationLimitResponse();
+        this.request("DescribeInstancesOperationLimit", req, resp, cb);
     }
 
     /**

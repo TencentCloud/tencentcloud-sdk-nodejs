@@ -19,12 +19,13 @@ const AbstractClient = require('../../common/abstract_client')
 const DescribeClassicalLBTargetsRequest = models.DescribeClassicalLBTargetsRequest;
 const RuleOutput = models.RuleOutput;
 const ClassicalListener = models.ClassicalListener;
+const TargetRegionInfo = models.TargetRegionInfo;
 const ModifyTargetPortRequest = models.ModifyTargetPortRequest;
 const DescribeListenersResponse = models.DescribeListenersResponse;
 const CertificateInput = models.CertificateInput;
 const DeleteRuleResponse = models.DeleteRuleResponse;
 const DeleteRuleRequest = models.DeleteRuleRequest;
-const RegisterTargetsWithClassicalLBRequest = models.RegisterTargetsWithClassicalLBRequest;
+const BatchModifyTargetWeightResponse = models.BatchModifyTargetWeightResponse;
 const ModifyTargetPortResponse = models.ModifyTargetPortResponse;
 const CreateLoadBalancerRequest = models.CreateLoadBalancerRequest;
 const DescribeTaskStatusResponse = models.DescribeTaskStatusResponse;
@@ -34,6 +35,7 @@ const Target = models.Target;
 const ClassicalLoadBalancerInfo = models.ClassicalLoadBalancerInfo;
 const ModifyRuleRequest = models.ModifyRuleRequest;
 const DescribeTargetsResponse = models.DescribeTargetsResponse;
+const RegisterTargetsWithClassicalLBRequest = models.RegisterTargetsWithClassicalLBRequest;
 const DescribeTargetsRequest = models.DescribeTargetsRequest;
 const DescribeClassicalLBHealthStatusResponse = models.DescribeClassicalLBHealthStatusResponse;
 const DeleteLoadBalancerRequest = models.DeleteLoadBalancerRequest;
@@ -42,12 +44,14 @@ const ModifyListenerResponse = models.ModifyListenerResponse;
 const ListenerBackend = models.ListenerBackend;
 const Listener = models.Listener;
 const ModifyLoadBalancerAttributesResponse = models.ModifyLoadBalancerAttributesResponse;
+const TagInfo = models.TagInfo;
 const RegisterTargetsResponse = models.RegisterTargetsResponse;
 const RuleTargets = models.RuleTargets;
 const DescribeClassicalLBListenersResponse = models.DescribeClassicalLBListenersResponse;
 const DescribeLoadBalancersRequest = models.DescribeLoadBalancersRequest;
 const ClassicalTarget = models.ClassicalTarget;
 const ModifyListenerRequest = models.ModifyListenerRequest;
+const RsWeightRule = models.RsWeightRule;
 const CreateLoadBalancerResponse = models.CreateLoadBalancerResponse;
 const DeregisterTargetsFromClassicalLBRequest = models.DeregisterTargetsFromClassicalLBRequest;
 const RegisterTargetsRequest = models.RegisterTargetsRequest;
@@ -72,11 +76,13 @@ const DeregisterTargetsResponse = models.DeregisterTargetsResponse;
 const DescribeTaskStatusRequest = models.DescribeTaskStatusRequest;
 const RegisterTargetsWithClassicalLBResponse = models.RegisterTargetsWithClassicalLBResponse;
 const ModifyTargetWeightResponse = models.ModifyTargetWeightResponse;
+const RewriteTarget = models.RewriteTarget;
 const CertificateOutput = models.CertificateOutput;
 const DescribeClassicalLBListenersRequest = models.DescribeClassicalLBListenersRequest;
 const ModifyTargetWeightRequest = models.ModifyTargetWeightRequest;
 const DescribeClassicalLBHealthStatusRequest = models.DescribeClassicalLBHealthStatusRequest;
 const ModifyDomainRequest = models.ModifyDomainRequest;
+const BatchModifyTargetWeightRequest = models.BatchModifyTargetWeightRequest;
 const ModifyRuleResponse = models.ModifyRuleResponse;
 const LoadBalancer = models.LoadBalancer;
 const Backend = models.Backend;
@@ -357,6 +363,18 @@ class ClbClient extends AbstractClient {
     DescribeClassicalLBByInstanceId(req, cb) {
         let resp = new DescribeClassicalLBByInstanceIdResponse();
         this.request("DescribeClassicalLBByInstanceId", req, resp, cb);
+    }
+
+    /**
+     * BatchModifyTargetWeight接口用于批量修改监听器绑定的后端机器的转发权重，当前接口只支持应用型HTTP/HTTPS监听器。
+本接口为异步接口，本接口返回成功后需以返回的RequestID为入参，调用DescribeTaskStatus接口查询本次任务是否成功。
+     * @param {BatchModifyTargetWeightRequest} req
+     * @param {function(string, BatchModifyTargetWeightResponse):void} cb
+     * @public
+     */
+    BatchModifyTargetWeight(req, cb) {
+        let resp = new BatchModifyTargetWeightResponse();
+        this.request("BatchModifyTargetWeight", req, resp, cb);
     }
 
     /**

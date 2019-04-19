@@ -123,7 +123,7 @@ class UnbindIpsFromNatGatewayResponse extends  AbstractModel {
 }
 
 /**
- * IKE配置（Internet Key Exchange，因特网密钥交换），IKE具有一套自保护机制，用户配置网络安全协议
+ * IKE配置（Internet Key Exchange，因特网密钥交换），IKE具有一套自我保护机制，用户配置网络安全协议
  * @class
  */
 class IKEOptionsSpecification extends  AbstractModel {
@@ -3888,7 +3888,7 @@ class ModifyVpnConnectionAttributeRequest extends  AbstractModel {
         this.SecurityPolicyDatabases = null;
 
         /**
-         * IKE配置（Internet Key Exchange，因特网密钥交换），IKE具有一套自保护机制，用户配置网络安全协议。
+         * IKE配置（Internet Key Exchange，因特网密钥交换），IKE具有一套自我保护机制，用户配置网络安全协议。
          * @type {IKEOptionsSpecification || null}
          */
         this.IKEOptionsSpecification = null;
