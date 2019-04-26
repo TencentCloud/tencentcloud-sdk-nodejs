@@ -37,7 +37,7 @@ class SentenceInfo extends  AbstractModel {
         this.Words = null;
 
         /**
-         * 发音精准度，取值范围[-1, 100]，当取-1时指完全不匹配，当为句子模式时，是所有已识别单词准确度的加权平均值。当为流式模式且请求中IsEnd未置1时，取值无意义
+         * 发音精准度，取值范围[-1, 100]，当取-1时指完全不匹配，当为句子模式时，是所有已识别单词准确度的加权平均值，在reftext中但未识别出来的词不计入分数中。
          * @type {number || null}
          */
         this.PronAccuracy = null;
@@ -53,6 +53,12 @@ class SentenceInfo extends  AbstractModel {
          * @type {number || null}
          */
         this.PronCompletion = null;
+
+        /**
+         * 建议评分，取值范围[0,100]，评分方式为建议评分 = 准确度（PronAccuracyfloat）* 完整度（PronCompletionfloat）*（2 - 完整度（PronCompletionfloat）），如若评分策略不符合请参考Words数组中的详细分数自定义评分逻辑。
+         * @type {number || null}
+         */
+        this.SuggestedScore = null;
 
     }
 
@@ -76,6 +82,7 @@ class SentenceInfo extends  AbstractModel {
         this.PronAccuracy = 'PronAccuracy' in params ? params.PronAccuracy : null;
         this.PronFluency = 'PronFluency' in params ? params.PronFluency : null;
         this.PronCompletion = 'PronCompletion' in params ? params.PronCompletion : null;
+        this.SuggestedScore = 'SuggestedScore' in params ? params.SuggestedScore : null;
 
     }
 }
@@ -107,7 +114,7 @@ class InitOralProcessRequest extends  AbstractModel {
         this.WorkMode = null;
 
         /**
-         * 评估模式，0：词模式，,1：:句子模式，2：段落模式，3：自由说模式，当为词模式评估时，能够提供每个音节的评估信息，当为句子模式时，能够提供完整度和流利度信息。
+         * 评估模式，0：词模式（中文评测模式下为文字模式），1：句子模式，2：段落模式，3：自由说模式，当为词模式评估时，能够提供每个音节的评估信息，当为句子模式时，能够提供完整度和流利度信息。
          * @type {number || null}
          */
         this.EvalMode = null;
@@ -218,7 +225,7 @@ class TransmitOralProcessRequest extends  AbstractModel {
         this.VoiceEncodeType = null;
 
         /**
-         * 当前数据包数据, 流式模式下数据包大小可以按需设置，数据包大小必须 >= 4K，且必须保证分片帧完整（16bit的数据必须保证音频长度为偶数），编码格式要求为BASE64。
+         * 当前数据包数据, 流式模式下数据包大小可以按需设置，在网络稳定时，分片大小建议设置0.5k，且必须保证分片帧完整（16bit的数据必须保证音频长度为偶数），编码格式要求为BASE64。
          * @type {string || null}
          */
         this.UserVoiceData = null;
@@ -278,7 +285,7 @@ class TransmitOralProcessResponse extends  AbstractModel {
         super();
 
         /**
-         * 发音精准度，取值范围[-1, 100]，当取-1时指完全不匹配，当为句子模式时，是所有已识别单词准确度的加权平均值。当为流式模式且请求中IsEnd未置1时，取值无意义
+         * 发音精准度，取值范围[-1, 100]，当取-1时指完全不匹配，当为句子模式时，是所有已识别单词准确度的加权平均值，在reftext中但未识别出来的词不计入分数中。当为流式模式且请求中IsEnd未置1时，取值无意义。
          * @type {number || null}
          */
         this.PronAccuracy = null;
@@ -326,6 +333,12 @@ class TransmitOralProcessResponse extends  AbstractModel {
         this.Status = null;
 
         /**
+         * 建议评分，取值范围[0,100]，评分方式为建议评分 = 准确度（PronAccuracyfloat）* 完整度（PronCompletionfloat）*（2 - 完整度（PronCompletionfloat）），如若评分策略不符合请参考Words数组中的详细分数自定义评分逻辑。
+         * @type {number || null}
+         */
+        this.SuggestedScore = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -364,6 +377,7 @@ class TransmitOralProcessResponse extends  AbstractModel {
             }
         }
         this.Status = 'Status' in params ? params.Status : null;
+        this.SuggestedScore = 'SuggestedScore' in params ? params.SuggestedScore : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -578,7 +592,7 @@ class TransmitOralProcessWithInitRequest extends  AbstractModel {
         this.VoiceEncodeType = null;
 
         /**
-         * 当前数据包数据, 流式模式下数据包大小可以按需设置，数据包大小必须 >= 4K，且必须保证分片帧完整（16bit的数据必须保证音频长度为偶数），编码格式要求为BASE64。
+         * 当前数据包数据, 流式模式下数据包大小可以按需设置，在网络良好的情况下，建议设置为0.5k，且必须保证分片帧完整（16bit的数据必须保证音频长度为偶数），编码格式要求为BASE64。
          * @type {string || null}
          */
         this.UserVoiceData = null;
@@ -602,7 +616,7 @@ class TransmitOralProcessWithInitRequest extends  AbstractModel {
         this.WorkMode = null;
 
         /**
-         * 评估模式，0：词模式，,1：:句子模式，2：段落模式，3：自由说模式，当为词模式评估时，能够提供每个音节的评估信息，当为句子模式时，能够提供完整度和流利度信息。
+         * 评估模式，0：词模式（中文评测模式下为文字模式），1：句子模式，2：段落模式，3：自由说模式，当为词模式评估时，能够提供每个音节的评估信息，当为句子模式时，能够提供完整度和流利度信息。
          * @type {number || null}
          */
         this.EvalMode = null;
@@ -694,7 +708,7 @@ class TransmitOralProcessWithInitResponse extends  AbstractModel {
         super();
 
         /**
-         * 发音精准度，取值范围[-1, 100]，当取-1时指完全不匹配，当为句子模式时，是所有已识别单词准确度的加权平均值。当为流式模式且请求中IsEnd未置1时，取值无意义
+         * 发音精准度，取值范围[-1, 100]，当取-1时指完全不匹配，当为句子模式时，是所有已识别单词准确度的加权平均值，在reftext中但未识别出来的词不计入分数中。当为流式模式且请求中IsEnd未置1时，取值无意义。
          * @type {number || null}
          */
         this.PronAccuracy = null;
@@ -742,6 +756,12 @@ class TransmitOralProcessWithInitResponse extends  AbstractModel {
         this.Status = null;
 
         /**
+         * 建议评分，取值范围[0,100]，评分方式为建议评分 = 准确度（PronAccuracyfloat）* 完整度（PronCompletionfloat）*（2 - 完整度（PronCompletionfloat）），如若评分策略不符合请参考Words数组中的详细分数自定义评分逻辑。
+         * @type {number || null}
+         */
+        this.SuggestedScore = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -780,6 +800,7 @@ class TransmitOralProcessWithInitResponse extends  AbstractModel {
             }
         }
         this.Status = 'Status' in params ? params.Status : null;
+        this.SuggestedScore = 'SuggestedScore' in params ? params.SuggestedScore : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }

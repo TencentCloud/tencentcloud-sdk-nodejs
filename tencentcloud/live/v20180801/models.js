@@ -1101,6 +1101,12 @@ class RecordTemplateInfo extends  AbstractModel {
          */
         this.IsDelayLive = null;
 
+        /**
+         * HLS录制定制参数
+         * @type {HlsSpecialParam || null}
+         */
+        this.HlsSpecialParam = null;
+
     }
 
     /**
@@ -1138,6 +1144,12 @@ class RecordTemplateInfo extends  AbstractModel {
             this.AacParam = obj;
         }
         this.IsDelayLive = 'IsDelayLive' in params ? params.IsDelayLive : null;
+
+        if (params.HlsSpecialParam) {
+            let obj = new HlsSpecialParam();
+            obj.deserialize(params.HlsSpecialParam)
+            this.HlsSpecialParam = obj;
+        }
 
     }
 }
@@ -1932,6 +1944,12 @@ class CreateLiveRecordRuleRequest extends  AbstractModel {
         this.DomainName = null;
 
         /**
+         * 模板Id。
+         * @type {number || null}
+         */
+        this.TemplateId = null;
+
+        /**
          * 推流路径。
          * @type {string || null}
          */
@@ -1939,15 +1957,10 @@ class CreateLiveRecordRuleRequest extends  AbstractModel {
 
         /**
          * 流名称。
+注：如果本参数设置为非空字符串，规则将只对此推流起作用。
          * @type {string || null}
          */
         this.StreamName = null;
-
-        /**
-         * 模板Id。
-         * @type {number || null}
-         */
-        this.TemplateId = null;
 
     }
 
@@ -1959,9 +1972,9 @@ class CreateLiveRecordRuleRequest extends  AbstractModel {
             return;
         }
         this.DomainName = 'DomainName' in params ? params.DomainName : null;
+        this.TemplateId = 'TemplateId' in params ? params.TemplateId : null;
         this.AppName = 'AppName' in params ? params.AppName : null;
         this.StreamName = 'StreamName' in params ? params.StreamName : null;
-        this.TemplateId = 'TemplateId' in params ? params.TemplateId : null;
 
     }
 }
@@ -6679,14 +6692,14 @@ class DescribeStreamPlayInfoListRequest extends  AbstractModel {
         super();
 
         /**
-         * 开始时间，北京时间，
+         * 开始时间，北京时间，格式为yyyy-mm-dd HH:MM:SS，
 当前时间 和 开始时间 间隔不超过30天。
          * @type {string || null}
          */
         this.StartTime = null;
 
         /**
-         * 结束时间，北京时间，
+         * 结束时间，北京时间，格式为yyyy-mm-dd HH:MM:SS，
 结束时间 和 开始时间  必须在同一天内。
          * @type {string || null}
          */
@@ -6706,6 +6719,13 @@ class DescribeStreamPlayInfoListRequest extends  AbstractModel {
          */
         this.StreamName = null;
 
+        /**
+         * 播放路径，精确匹配，不支持。
+若不填，则为查询总体播放数据。
+         * @type {string || null}
+         */
+        this.AppName = null;
+
     }
 
     /**
@@ -6719,6 +6739,7 @@ class DescribeStreamPlayInfoListRequest extends  AbstractModel {
         this.EndTime = 'EndTime' in params ? params.EndTime : null;
         this.PlayDomain = 'PlayDomain' in params ? params.PlayDomain : null;
         this.StreamName = 'StreamName' in params ? params.StreamName : null;
+        this.AppName = 'AppName' in params ? params.AppName : null;
 
     }
 }
@@ -7614,6 +7635,34 @@ class DescribeLiveTranscodeTemplatesRequest extends  AbstractModel {
 }
 
 /**
+ * HLS专属录制参数
+ * @class
+ */
+class HlsSpecialParam extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * HLS续流超时时间。
+         * @type {number || null}
+         */
+        this.FlowContinueDuration = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FlowContinueDuration = 'FlowContinueDuration' in params ? params.FlowContinueDuration : null;
+
+    }
+}
+
+/**
  * DescribeLiveRecordRules返回参数结构体
  * @class
  */
@@ -8059,6 +8108,12 @@ class CreateLiveRecordTemplateRequest extends  AbstractModel {
          */
         this.IsDelayLive = null;
 
+        /**
+         * HLS专属录制参数。
+         * @type {HlsSpecialParam || null}
+         */
+        this.HlsSpecialParam = null;
+
     }
 
     /**
@@ -8095,6 +8150,12 @@ class CreateLiveRecordTemplateRequest extends  AbstractModel {
             this.AacParam = obj;
         }
         this.IsDelayLive = 'IsDelayLive' in params ? params.IsDelayLive : null;
+
+        if (params.HlsSpecialParam) {
+            let obj = new HlsSpecialParam();
+            obj.deserialize(params.HlsSpecialParam)
+            this.HlsSpecialParam = obj;
+        }
 
     }
 }
@@ -9413,6 +9474,7 @@ module.exports = {
     BindLiveDomainCertResponse: BindLiveDomainCertResponse,
     CallBackRuleInfo: CallBackRuleInfo,
     DescribeLiveTranscodeTemplatesRequest: DescribeLiveTranscodeTemplatesRequest,
+    HlsSpecialParam: HlsSpecialParam,
     DescribeLiveRecordRulesResponse: DescribeLiveRecordRulesResponse,
     CreateLiveSnapshotTemplateRequest: CreateLiveSnapshotTemplateRequest,
     SetLiveWatermarkStatusRequest: SetLiveWatermarkStatusRequest,

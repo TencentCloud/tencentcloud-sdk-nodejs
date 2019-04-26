@@ -59,7 +59,7 @@ class CreateInstanceResult extends  AbstractModel {
 }
 
 /**
- * 登陆设置
+ * 登录设置
  * @class
  */
 class LoginSettings extends  AbstractModel {
