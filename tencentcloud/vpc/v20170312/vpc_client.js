@@ -16,336 +16,354 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
-const CreateDirectConnectGatewayResponse = models.CreateDirectConnectGatewayResponse;
-const DescribeBandwidthPackagesRequest = models.DescribeBandwidthPackagesRequest;
-const DeleteDirectConnectGatewayCcnRoutesResponse = models.DeleteDirectConnectGatewayCcnRoutesResponse;
-const HaVipDisassociateAddressIpRequest = models.HaVipDisassociateAddressIpRequest;
-const Ipv6Address = models.Ipv6Address;
-const Subnet = models.Subnet;
-const ModifyAddressTemplateGroupAttributeRequest = models.ModifyAddressTemplateGroupAttributeRequest;
-const ModifyVpnGatewayAttributeRequest = models.ModifyVpnGatewayAttributeRequest;
 const ModifyAddressTemplateAttributeResponse = models.ModifyAddressTemplateAttributeResponse;
 const ServiceTemplateGroup = models.ServiceTemplateGroup;
-const RouteConflict = models.RouteConflict;
-const CreateNetworkInterfaceRequest = models.CreateNetworkInterfaceRequest;
-const InstanceStatistic = models.InstanceStatistic;
 const CreateRoutesRequest = models.CreateRoutesRequest;
-const CCN = models.CCN;
-const CreateVpnConnectionRequest = models.CreateVpnConnectionRequest;
-const SecurityGroupAssociationStatistics = models.SecurityGroupAssociationStatistics;
-const CcnRoute = models.CcnRoute;
+const DescribeHaVipsResponse = models.DescribeHaVipsResponse;
 const DeleteServiceTemplateResponse = models.DeleteServiceTemplateResponse;
 const CreateServiceTemplateRequest = models.CreateServiceTemplateRequest;
-const DeleteHaVipResponse = models.DeleteHaVipResponse;
-const VpnConnection = models.VpnConnection;
-const RejectAttachCcnInstancesResponse = models.RejectAttachCcnInstancesResponse;
-const CreateDirectConnectGatewayRequest = models.CreateDirectConnectGatewayRequest;
-const DescribeCcnsRequest = models.DescribeCcnsRequest;
+const IKEOptionsSpecification = models.IKEOptionsSpecification;
 const TransformAddressResponse = models.TransformAddressResponse;
-const DescribeVpnConnectionsRequest = models.DescribeVpnConnectionsRequest;
-const CreateAddressTemplateGroupRequest = models.CreateAddressTemplateGroupRequest;
 const DescribeNetworkInterfacesRequest = models.DescribeNetworkInterfacesRequest;
+const DescribeVpcIpv6AddressesRequest = models.DescribeVpcIpv6AddressesRequest;
+const DescribeCustomerGatewaysRequest = models.DescribeCustomerGatewaysRequest;
+const ModifyIp6RuleResponse = models.ModifyIp6RuleResponse;
+const DescribeVpnGatewaysResponse = models.DescribeVpnGatewaysResponse;
+const DefaultVpcSubnet = models.DefaultVpcSubnet;
+const InquiryPriceRenewVpnGatewayResponse = models.InquiryPriceRenewVpnGatewayResponse;
+const ResetAttachCcnInstancesResponse = models.ResetAttachCcnInstancesResponse;
+const DescribeServiceTemplateGroupsResponse = models.DescribeServiceTemplateGroupsResponse;
+const DetachClassicLinkVpcRequest = models.DetachClassicLinkVpcRequest;
+const DeleteBandwidthPackageResponse = models.DeleteBandwidthPackageResponse;
+const ModifyDirectConnectGatewayAttributeRequest = models.ModifyDirectConnectGatewayAttributeRequest;
+const AddBandwidthPackageResourcesRequest = models.AddBandwidthPackageResourcesRequest;
+const AssignIpv6SubnetCidrBlockRequest = models.AssignIpv6SubnetCidrBlockRequest;
+const CreateVpcResponse = models.CreateVpcResponse;
+const DescribeVpcPrivateIpAddressesRequest = models.DescribeVpcPrivateIpAddressesRequest;
+const AddressTemplate = models.AddressTemplate;
+const DescribeIp6TranslatorQuotaResponse = models.DescribeIp6TranslatorQuotaResponse;
+const UnassignIpv6AddressesResponse = models.UnassignIpv6AddressesResponse;
+const CreateIp6TranslatorsResponse = models.CreateIp6TranslatorsResponse;
+const ModifyBandwidthPackageAttributeRequest = models.ModifyBandwidthPackageAttributeRequest;
+const ResetRoutesRequest = models.ResetRoutesRequest;
+const ModifyBandwidthPackageAttributeResponse = models.ModifyBandwidthPackageAttributeResponse;
+const ModifyCustomerGatewayAttributeRequest = models.ModifyCustomerGatewayAttributeRequest;
+const DescribeRouteTablesResponse = models.DescribeRouteTablesResponse;
+const RejectAttachCcnInstancesResponse = models.RejectAttachCcnInstancesResponse;
+const ServiceTemplate = models.ServiceTemplate;
+const DescribeCcnAttachedInstancesRequest = models.DescribeCcnAttachedInstancesRequest;
+const DescribeBandwidthPackagesResponse = models.DescribeBandwidthPackagesResponse;
+const DescribeDirectConnectGatewaysRequest = models.DescribeDirectConnectGatewaysRequest;
+const ModifyIp6TranslatorResponse = models.ModifyIp6TranslatorResponse;
+const DeleteIp6TranslatorsResponse = models.DeleteIp6TranslatorsResponse;
+const DescribeRouteConflictsResponse = models.DescribeRouteConflictsResponse;
+const AcceptAttachCcnInstancesRequest = models.AcceptAttachCcnInstancesRequest;
+const DescribeGatewayFlowMonitorDetailResponse = models.DescribeGatewayFlowMonitorDetailResponse;
+const HaVipDisassociateAddressIpResponse = models.HaVipDisassociateAddressIpResponse;
+const AttachNetworkInterfaceRequest = models.AttachNetworkInterfaceRequest;
+const AssignIpv6CidrBlockRequest = models.AssignIpv6CidrBlockRequest;
+const CreateSecurityGroupPoliciesResponse = models.CreateSecurityGroupPoliciesResponse;
+const HaVipAssociateAddressIpRequest = models.HaVipAssociateAddressIpRequest;
+const DeleteRoutesResponse = models.DeleteRoutesResponse;
+const DescribeSecurityGroupAssociationStatisticsResponse = models.DescribeSecurityGroupAssociationStatisticsResponse;
+const AddIp6RulesRequest = models.AddIp6RulesRequest;
+const DescribeAccountAttributesResponse = models.DescribeAccountAttributesResponse;
+const AssignPrivateIpAddressesResponse = models.AssignPrivateIpAddressesResponse;
+const DescribeSecurityGroupsRequest = models.DescribeSecurityGroupsRequest;
+const AddBandwidthPackageResourcesResponse = models.AddBandwidthPackageResourcesResponse;
+const SetCcnRegionBandwidthLimitsRequest = models.SetCcnRegionBandwidthLimitsRequest;
+const DescribeDirectConnectGatewaysResponse = models.DescribeDirectConnectGatewaysResponse;
+const Ip6RuleInfo = models.Ip6RuleInfo;
+const DeleteAddressTemplateResponse = models.DeleteAddressTemplateResponse;
+const ModifySubnetAttributeResponse = models.ModifySubnetAttributeResponse;
+const DeleteAddressTemplateRequest = models.DeleteAddressTemplateRequest;
+const NetworkInterface = models.NetworkInterface;
+const TransformAddressRequest = models.TransformAddressRequest;
+const ReplaceDirectConnectGatewayCcnRoutesRequest = models.ReplaceDirectConnectGatewayCcnRoutesRequest;
+const ModifyAddressTemplateAttributeRequest = models.ModifyAddressTemplateAttributeRequest;
+const DescribeVpcsResponse = models.DescribeVpcsResponse;
+const ModifySecurityGroupAttributeRequest = models.ModifySecurityGroupAttributeRequest;
+const RemoveBandwidthPackageResourcesRequest = models.RemoveBandwidthPackageResourcesRequest;
+const HaVipAssociateAddressIpResponse = models.HaVipAssociateAddressIpResponse;
+const DescribeBandwidthPackagesRequest = models.DescribeBandwidthPackagesRequest;
+const DeleteDirectConnectGatewayCcnRoutesResponse = models.DeleteDirectConnectGatewayCcnRoutesResponse;
+const InstanceStatistic = models.InstanceStatistic;
+const CreateVpnConnectionRequest = models.CreateVpnConnectionRequest;
+const CcnRoute = models.CcnRoute;
+const DeleteSecurityGroupPoliciesRequest = models.DeleteSecurityGroupPoliciesRequest;
+const VpnConnection = models.VpnConnection;
+const DescribeCcnsRequest = models.DescribeCcnsRequest;
+const CreateAddressTemplateGroupRequest = models.CreateAddressTemplateGroupRequest;
+const DescribeCustomerGatewayVendorsResponse = models.DescribeCustomerGatewayVendorsResponse;
+const RouteConflict = models.RouteConflict;
+const DeleteSubnetResponse = models.DeleteSubnetResponse;
+const Vpc = models.Vpc;
+const CreateVpnGatewayResponse = models.CreateVpnGatewayResponse;
+const DescribeVpcIpv6AddressesResponse = models.DescribeVpcIpv6AddressesResponse;
+const RejectAttachCcnInstancesRequest = models.RejectAttachCcnInstancesRequest;
+const ModifyIp6RuleRequest = models.ModifyIp6RuleRequest;
+const ReplaceRouteTableAssociationRequest = models.ReplaceRouteTableAssociationRequest;
+const RenewVpnGatewayRequest = models.RenewVpnGatewayRequest;
+const SecurityGroupPolicy = models.SecurityGroupPolicy;
+const DeleteVpcRequest = models.DeleteVpcRequest;
+const ModifyServiceTemplateAttributeResponse = models.ModifyServiceTemplateAttributeResponse;
+const DescribeCcnsResponse = models.DescribeCcnsResponse;
+const CreateSubnetResponse = models.CreateSubnetResponse;
+const DescribeSecurityGroupPoliciesResponse = models.DescribeSecurityGroupPoliciesResponse;
+const ModifySecurityGroupPoliciesRequest = models.ModifySecurityGroupPoliciesRequest;
+const RemoveIp6RulesResponse = models.RemoveIp6RulesResponse;
+const ReplaceRoutesRequest = models.ReplaceRoutesRequest;
+const CreateCustomerGatewayResponse = models.CreateCustomerGatewayResponse;
+const ModifySubnetAttributeRequest = models.ModifySubnetAttributeRequest;
+const DisassociateAddressRequest = models.DisassociateAddressRequest;
+const DeleteVpnConnectionResponse = models.DeleteVpnConnectionResponse;
+const CreateCcnResponse = models.CreateCcnResponse;
+const EnableCcnRoutesRequest = models.EnableCcnRoutesRequest;
+const DescribeVpcPrivateIpAddressesResponse = models.DescribeVpcPrivateIpAddressesResponse;
+const ModifyServiceTemplateAttributeRequest = models.ModifyServiceTemplateAttributeRequest;
+const DescribeIp6TranslatorsRequest = models.DescribeIp6TranslatorsRequest;
+const CreateSubnetsResponse = models.CreateSubnetsResponse;
+const DescribeGatewayFlowMonitorDetailRequest = models.DescribeGatewayFlowMonitorDetailRequest;
+const InquiryPriceCreateVpnGatewayResponse = models.InquiryPriceCreateVpnGatewayResponse;
+const FilterObject = models.FilterObject;
+const SecurityGroupAssociationStatistics = models.SecurityGroupAssociationStatistics;
+const DetachNetworkInterfaceResponse = models.DetachNetworkInterfaceResponse;
+const ResetRoutesResponse = models.ResetRoutesResponse;
+const DescribeVpcsRequest = models.DescribeVpcsRequest;
+const UnassignIpv6SubnetCidrBlockRequest = models.UnassignIpv6SubnetCidrBlockRequest;
+const ModifyIp6TranslatorRequest = models.ModifyIp6TranslatorRequest;
+const CreateVpnConnectionResponse = models.CreateVpnConnectionResponse;
+const AddressTemplateSpecification = models.AddressTemplateSpecification;
+const VpcIpv6Address = models.VpcIpv6Address;
+const AssignIpv6AddressesRequest = models.AssignIpv6AddressesRequest;
+const CreateServiceTemplateGroupResponse = models.CreateServiceTemplateGroupResponse;
+const ModifyIpv6AddressesAttributeResponse = models.ModifyIpv6AddressesAttributeResponse;
+const ReplaceSecurityGroupPolicyRequest = models.ReplaceSecurityGroupPolicyRequest;
+const DescribeVpnConnectionsRequest = models.DescribeVpnConnectionsRequest;
+const DeleteCustomerGatewayResponse = models.DeleteCustomerGatewayResponse;
+const CreateAddressTemplateResponse = models.CreateAddressTemplateResponse;
+const DeleteDirectConnectGatewayResponse = models.DeleteDirectConnectGatewayResponse;
+const DeleteAddressTemplateGroupRequest = models.DeleteAddressTemplateGroupRequest;
+const CreateBandwidthPackageRequest = models.CreateBandwidthPackageRequest;
+const ModifyRouteTableAttributeRequest = models.ModifyRouteTableAttributeRequest;
+const ModifyDirectConnectGatewayAttributeResponse = models.ModifyDirectConnectGatewayAttributeResponse;
+const DescribeVpnGatewaysRequest = models.DescribeVpnGatewaysRequest;
+const CreateSubnetsRequest = models.CreateSubnetsRequest;
+const AssociateAddressResponse = models.AssociateAddressResponse;
+const ResetVpnConnectionResponse = models.ResetVpnConnectionResponse;
+const DescribeAddressesRequest = models.DescribeAddressesRequest;
+const DescribeSecurityGroupPoliciesRequest = models.DescribeSecurityGroupPoliciesRequest;
+const ModifyNetworkInterfaceAttributeResponse = models.ModifyNetworkInterfaceAttributeResponse;
+const CreateSecurityGroupResponse = models.CreateSecurityGroupResponse;
+const DescribeIp6TranslatorQuotaRequest = models.DescribeIp6TranslatorQuotaRequest;
+const AssignIpv6CidrBlockResponse = models.AssignIpv6CidrBlockResponse;
+const CreateCcnRequest = models.CreateCcnRequest;
+const RemoveIp6RulesRequest = models.RemoveIp6RulesRequest;
+const DeleteVpnConnectionRequest = models.DeleteVpnConnectionRequest;
+const RenewVpnGatewayResponse = models.RenewVpnGatewayResponse;
+const ModifyAddressesBandwidthRequest = models.ModifyAddressesBandwidthRequest;
+const ResetVpnGatewayInternetMaxBandwidthRequest = models.ResetVpnGatewayInternetMaxBandwidthRequest;
+const DirectConnectGateway = models.DirectConnectGateway;
+const Price = models.Price;
+const HaVipDisassociateAddressIpRequest = models.HaVipDisassociateAddressIpRequest;
+const ModifyVpnGatewayAttributeResponse = models.ModifyVpnGatewayAttributeResponse;
+const UnassignIpv6CidrBlockResponse = models.UnassignIpv6CidrBlockResponse;
+const CreateServiceTemplateGroupRequest = models.CreateServiceTemplateGroupRequest;
+const DescribeClassicLinkInstancesResponse = models.DescribeClassicLinkInstancesResponse;
+const DetachCcnInstancesRequest = models.DetachCcnInstancesRequest;
+const MigrateNetworkInterfaceResponse = models.MigrateNetworkInterfaceResponse;
+const DeleteDirectConnectGatewayRequest = models.DeleteDirectConnectGatewayRequest;
+const CcnAttachedInstance = models.CcnAttachedInstance;
+const SecurityPolicyDatabase = models.SecurityPolicyDatabase;
+const Ipv6Address = models.Ipv6Address;
+const CreateNetworkInterfaceRequest = models.CreateNetworkInterfaceRequest;
+const DeleteHaVipResponse = models.DeleteHaVipResponse;
+const CreateDirectConnectGatewayRequest = models.CreateDirectConnectGatewayRequest;
+const VpcPrivateIpAddress = models.VpcPrivateIpAddress;
+const DescribeCcnAttachedInstancesResponse = models.DescribeCcnAttachedInstancesResponse;
 const DescribeSubnetsRequest = models.DescribeSubnetsRequest;
 const CreateSubnetRequest = models.CreateSubnetRequest;
 const AddressTemplateGroup = models.AddressTemplateGroup;
 const DownloadCustomerGatewayConfigurationRequest = models.DownloadCustomerGatewayConfigurationRequest;
 const DeleteBandwidthPackageRequest = models.DeleteBandwidthPackageRequest;
 const HaVip = models.HaVip;
-const CreateDefaultVpcRequest = models.CreateDefaultVpcRequest;
-const DeleteSubnetResponse = models.DeleteSubnetResponse;
-const ModifyAddressesBandwidthRequest = models.ModifyAddressesBandwidthRequest;
-const DescribeCustomerGatewaysRequest = models.DescribeCustomerGatewaysRequest;
-const Vpc = models.Vpc;
-const CreateVpnGatewayResponse = models.CreateVpnGatewayResponse;
-const ResetVpnConnectionRequest = models.ResetVpnConnectionRequest;
-const ModifyVpnConnectionAttributeResponse = models.ModifyVpnConnectionAttributeResponse;
-const DescribeCustomerGatewaysResponse = models.DescribeCustomerGatewaysResponse;
-const ModifyNetworkInterfaceAttributeResponse = models.ModifyNetworkInterfaceAttributeResponse;
-const NetworkInterface = models.NetworkInterface;
+const ModifyAddressesBandwidthResponse = models.ModifyAddressesBandwidthResponse;
+const SetCcnRegionBandwidthLimitsResponse = models.SetCcnRegionBandwidthLimitsResponse;
 const DescribeAccountAttributesRequest = models.DescribeAccountAttributesRequest;
-const ModifyServiceTemplateGroupAttributeRequest = models.ModifyServiceTemplateGroupAttributeRequest;
-const InquiryPriceRenewVpnGatewayRequest = models.InquiryPriceRenewVpnGatewayRequest;
-const DescribeVpnGatewaysResponse = models.DescribeVpnGatewaysResponse;
-const CreateCustomerGatewayRequest = models.CreateCustomerGatewayRequest;
-const CcnRegionBandwidthLimit = models.CcnRegionBandwidthLimit;
 const DescribeCcnRoutesRequest = models.DescribeCcnRoutesRequest;
-const ModifyServiceTemplateAttributeRequest = models.ModifyServiceTemplateAttributeRequest;
-const DescribeServiceTemplateGroupsResponse = models.DescribeServiceTemplateGroupsResponse;
-const DetachCcnInstancesResponse = models.DetachCcnInstancesResponse;
-const ReplaceRouteTableAssociationRequest = models.ReplaceRouteTableAssociationRequest;
-const ModifyServiceTemplateGroupAttributeResponse = models.ModifyServiceTemplateGroupAttributeResponse;
-const ItemPrice = models.ItemPrice;
-const SecurityGroupPolicy = models.SecurityGroupPolicy;
 const DownloadCustomerGatewayConfigurationResponse = models.DownloadCustomerGatewayConfigurationResponse;
-const DeleteSubnetRequest = models.DeleteSubnetRequest;
-const InquiryPriceRenewVpnGatewayResponse = models.InquiryPriceRenewVpnGatewayResponse;
-const DescribeAddressTemplateGroupsRequest = models.DescribeAddressTemplateGroupsRequest;
-const ResetVpnGatewayInternetMaxBandwidthRequest = models.ResetVpnGatewayInternetMaxBandwidthRequest;
-const UnassignPrivateIpAddressesResponse = models.UnassignPrivateIpAddressesResponse;
-const RenewVpnGatewayRequest = models.RenewVpnGatewayRequest;
-const SecurityGroupPolicySet = models.SecurityGroupPolicySet;
-const ResetAttachCcnInstancesResponse = models.ResetAttachCcnInstancesResponse;
 const AllocateAddressesRequest = models.AllocateAddressesRequest;
-const DescribeIp6TranslatorsRequest = models.DescribeIp6TranslatorsRequest;
-const NetworkInterfaceAttachment = models.NetworkInterfaceAttachment;
-const RouteTable = models.RouteTable;
-const DeleteNetworkInterfaceRequest = models.DeleteNetworkInterfaceRequest;
-const InquiryPriceResetVpnGatewayInternetMaxBandwidthResponse = models.InquiryPriceResetVpnGatewayInternetMaxBandwidthResponse;
-const DetachClassicLinkVpcRequest = models.DetachClassicLinkVpcRequest;
 const CreateRouteTableResponse = models.CreateRouteTableResponse;
-const ReplaceRoutesResponse = models.ReplaceRoutesResponse;
-const DeleteBandwidthPackageResponse = models.DeleteBandwidthPackageResponse;
-const DirectConnectGatewayCcnRoute = models.DirectConnectGatewayCcnRoute;
-const DeleteVpcRequest = models.DeleteVpcRequest;
-const ModifyRouteTableAttributeRequest = models.ModifyRouteTableAttributeRequest;
-const ModifyDirectConnectGatewayAttributeRequest = models.ModifyDirectConnectGatewayAttributeRequest;
-const DescribeCcnsResponse = models.DescribeCcnsResponse;
-const MigratePrivateIpAddressRequest = models.MigratePrivateIpAddressRequest;
-const DescribeServiceTemplatesRequest = models.DescribeServiceTemplatesRequest;
-const DescribeHaVipsResponse = models.DescribeHaVipsResponse;
-const DeleteRouteTableRequest = models.DeleteRouteTableRequest;
-const CreateSubnetResponse = models.CreateSubnetResponse;
-const DescribeSecurityGroupPoliciesResponse = models.DescribeSecurityGroupPoliciesResponse;
-const AddBandwidthPackageResourcesRequest = models.AddBandwidthPackageResourcesRequest;
-const DescribeVpcPrivateIpAddressesResponse = models.DescribeVpcPrivateIpAddressesResponse;
-const ModifySecurityGroupPoliciesRequest = models.ModifySecurityGroupPoliciesRequest;
+const ModifySecurityGroupAttributeResponse = models.ModifySecurityGroupAttributeResponse;
 const ModifyAddressAttributeResponse = models.ModifyAddressAttributeResponse;
 const AttachClassicLinkVpcRequest = models.AttachClassicLinkVpcRequest;
 const GatewayFlowMonitorDetail = models.GatewayFlowMonitorDetail;
-const DescribeServiceTemplatesResponse = models.DescribeServiceTemplatesResponse;
-const CreateVpcResponse = models.CreateVpcResponse;
-const CreateCustomerGatewayResponse = models.CreateCustomerGatewayResponse;
-const ModifyRouteTableAttributeResponse = models.ModifyRouteTableAttributeResponse;
-const SetCcnRegionBandwidthLimitsResponse = models.SetCcnRegionBandwidthLimitsResponse;
-const CreateBandwidthPackageResponse = models.CreateBandwidthPackageResponse;
 const DeleteVpnGatewayRequest = models.DeleteVpnGatewayRequest;
-const ModifySubnetAttributeResponse = models.ModifySubnetAttributeResponse;
 const ReplaceRouteTableAssociationResponse = models.ReplaceRouteTableAssociationResponse;
-const Resource = models.Resource;
 const AttachCcnInstancesRequest = models.AttachCcnInstancesRequest;
-const ReleaseAddressesResponse = models.ReleaseAddressesResponse;
-const AddressTemplate = models.AddressTemplate;
+const DescribeDirectConnectGatewayCcnRoutesRequest = models.DescribeDirectConnectGatewayCcnRoutesRequest;
 const CcnInstance = models.CcnInstance;
-const DeleteSecurityGroupPoliciesRequest = models.DeleteSecurityGroupPoliciesRequest;
-const InquiryPriceResetVpnGatewayInternetMaxBandwidthRequest = models.InquiryPriceResetVpnGatewayInternetMaxBandwidthRequest;
-const ResetRoutesResponse = models.ResetRoutesResponse;
-const DeleteAddressTemplateGroupResponse = models.DeleteAddressTemplateGroupResponse;
-const DeleteVpnConnectionResponse = models.DeleteVpnConnectionResponse;
-const ReplaceSecurityGroupPolicyResponse = models.ReplaceSecurityGroupPolicyResponse;
 const ModifyCustomerGatewayAttributeResponse = models.ModifyCustomerGatewayAttributeResponse;
-const ModifyPrivateIpAddressesAttributeResponse = models.ModifyPrivateIpAddressesAttributeResponse;
-const SubnetInput = models.SubnetInput;
-const ModifyHaVipAttributeResponse = models.ModifyHaVipAttributeResponse;
-const CreateCcnResponse = models.CreateCcnResponse;
-const CreateIp6TranslatorsResponse = models.CreateIp6TranslatorsResponse;
-const EnableCcnRoutesRequest = models.EnableCcnRoutesRequest;
-const DisableCcnRoutesRequest = models.DisableCcnRoutesRequest;
-const DescribeDirectConnectGatewaysRequest = models.DescribeDirectConnectGatewaysRequest;
-const DefaultVpcSubnet = models.DefaultVpcSubnet;
-const ModifyHaVipAttributeRequest = models.ModifyHaVipAttributeRequest;
-const DeleteSecurityGroupResponse = models.DeleteSecurityGroupResponse;
-const DeleteIp6TranslatorsRequest = models.DeleteIp6TranslatorsRequest;
-const ModifyIp6RuleRequest = models.ModifyIp6RuleRequest;
+const AssignIpv6SubnetCidrBlockResponse = models.AssignIpv6SubnetCidrBlockResponse;
 const DescribeCcnRegionBandwidthLimitsResponse = models.DescribeCcnRegionBandwidthLimitsResponse;
-const CreateSubnetsResponse = models.CreateSubnetsResponse;
-const CreateNetworkInterfaceResponse = models.CreateNetworkInterfaceResponse;
-const HaVipAssociateAddressIpRequest = models.HaVipAssociateAddressIpRequest;
-const DescribeGatewayFlowMonitorDetailRequest = models.DescribeGatewayFlowMonitorDetailRequest;
-const DescribeAddressQuotaRequest = models.DescribeAddressQuotaRequest;
-const ModifyBandwidthPackageAttributeRequest = models.ModifyBandwidthPackageAttributeRequest;
-const DeleteRoutesRequest = models.DeleteRoutesRequest;
-const InquiryPriceCreateVpnGatewayResponse = models.InquiryPriceCreateVpnGatewayResponse;
 const DescribeAddressesResponse = models.DescribeAddressesResponse;
-const CreateRoutesResponse = models.CreateRoutesResponse;
-const ModifyServiceTemplateAttributeResponse = models.ModifyServiceTemplateAttributeResponse;
-const DescribeSecurityGroupsResponse = models.DescribeSecurityGroupsResponse;
-const ModifyBandwidthPackageAttributeResponse = models.ModifyBandwidthPackageAttributeResponse;
-const DetachNetworkInterfaceResponse = models.DetachNetworkInterfaceResponse;
-const ModifySubnetAttributeRequest = models.ModifySubnetAttributeRequest;
-const ReplaceDirectConnectGatewayCcnRoutesResponse = models.ReplaceDirectConnectGatewayCcnRoutesResponse;
+const ModifyIpv6AddressesAttributeRequest = models.ModifyIpv6AddressesAttributeRequest;
 const DescribeCustomerGatewayVendorsRequest = models.DescribeCustomerGatewayVendorsRequest;
-const FilterObject = models.FilterObject;
-const DescribeVpcsRequest = models.DescribeVpcsRequest;
-const ModifySecurityGroupPoliciesResponse = models.ModifySecurityGroupPoliciesResponse;
-const ResetRoutesRequest = models.ResetRoutesRequest;
 const DisableRoutesResponse = models.DisableRoutesResponse;
 const ResetVpnGatewayInternetMaxBandwidthResponse = models.ResetVpnGatewayInternetMaxBandwidthResponse;
-const ModifyIp6TranslatorRequest = models.ModifyIp6TranslatorRequest;
-const CreateVpnConnectionResponse = models.CreateVpnConnectionResponse;
-const DetachNetworkInterfaceRequest = models.DetachNetworkInterfaceRequest;
-const AddressTemplateSpecification = models.AddressTemplateSpecification;
-const RemoveBandwidthPackageResourcesResponse = models.RemoveBandwidthPackageResourcesResponse;
-const Ip6Translator = models.Ip6Translator;
-const RouteTableAssociation = models.RouteTableAssociation;
-const Ip6Rule = models.Ip6Rule;
-const AttachClassicLinkVpcResponse = models.AttachClassicLinkVpcResponse;
-const CreateServiceTemplateGroupResponse = models.CreateServiceTemplateGroupResponse;
-const CreateAddressTemplateRequest = models.CreateAddressTemplateRequest;
-const DescribeBandwidthPackageQuotaRequest = models.DescribeBandwidthPackageQuotaRequest;
 const AttachCcnInstancesResponse = models.AttachCcnInstancesResponse;
 const CreateDefaultVpcResponse = models.CreateDefaultVpcResponse;
 const ModifyVpcAttributeResponse = models.ModifyVpcAttributeResponse;
-const DeleteCcnResponse = models.DeleteCcnResponse;
-const ServiceTemplate = models.ServiceTemplate;
-const DeleteVpcResponse = models.DeleteVpcResponse;
-const DescribeCcnRoutesResponse = models.DescribeCcnRoutesResponse;
-const DescribeVpcsResponse = models.DescribeVpcsResponse;
+const ModifyVpnConnectionAttributeResponse = models.ModifyVpnConnectionAttributeResponse;
 const PrivateIpAddressSpecification = models.PrivateIpAddressSpecification;
-const ModifySecurityGroupAttributeResponse = models.ModifySecurityGroupAttributeResponse;
-const SecurityGroup = models.SecurityGroup;
 const MigratePrivateIpAddressResponse = models.MigratePrivateIpAddressResponse;
 const DeleteRouteTableResponse = models.DeleteRouteTableResponse;
-const DescribeBandwidthPackagesResponse = models.DescribeBandwidthPackagesResponse;
 const AccountAttribute = models.AccountAttribute;
-const DisassociateAddressResponse = models.DisassociateAddressResponse;
-const DeleteDirectConnectGatewayCcnRoutesRequest = models.DeleteDirectConnectGatewayCcnRoutesRequest;
-const DescribeCcnAttachedInstancesResponse = models.DescribeCcnAttachedInstancesResponse;
-const DeleteCustomerGatewayResponse = models.DeleteCustomerGatewayResponse;
-const AssociateAddressRequest = models.AssociateAddressRequest;
-const ModifyIp6TranslatorResponse = models.ModifyIp6TranslatorResponse;
-const CreateAddressTemplateResponse = models.CreateAddressTemplateResponse;
-const AcceptAttachCcnInstancesRequest = models.AcceptAttachCcnInstancesRequest;
-const DeleteAddressTemplateGroupRequest = models.DeleteAddressTemplateGroupRequest;
+const ModifyHaVipAttributeResponse = models.ModifyHaVipAttributeResponse;
+const RemoveBandwidthPackageResourcesResponse = models.RemoveBandwidthPackageResourcesResponse;
+const ModifySecurityGroupPoliciesResponse = models.ModifySecurityGroupPoliciesResponse;
 const AttachNetworkInterfaceResponse = models.AttachNetworkInterfaceResponse;
-const DeleteIp6TranslatorsResponse = models.DeleteIp6TranslatorsResponse;
-const ServiceTemplateSpecification = models.ServiceTemplateSpecification;
-const DescribeRouteConflictsResponse = models.DescribeRouteConflictsResponse;
-const CreateBandwidthPackageRequest = models.CreateBandwidthPackageRequest;
+const DescribeServiceTemplatesResponse = models.DescribeServiceTemplatesResponse;
 const DescribeRouteTablesRequest = models.DescribeRouteTablesRequest;
 const ResetAttachCcnInstancesRequest = models.ResetAttachCcnInstancesRequest;
 const CreateHaVipResponse = models.CreateHaVipResponse;
-const DescribeGatewayFlowMonitorDetailResponse = models.DescribeGatewayFlowMonitorDetailResponse;
-const DescribeVpnGatewaysRequest = models.DescribeVpnGatewaysRequest;
-const ClassicLinkInstance = models.ClassicLinkInstance;
-const CreateVpnGatewayRequest = models.CreateVpnGatewayRequest;
-const DescribeSubnetsResponse = models.DescribeSubnetsResponse;
-const ModifyNetworkInterfaceAttributeRequest = models.ModifyNetworkInterfaceAttributeRequest;
-const ModifyAddressTemplateAttributeRequest = models.ModifyAddressTemplateAttributeRequest;
-const HaVipDisassociateAddressIpResponse = models.HaVipDisassociateAddressIpResponse;
-const CreateSubnetsRequest = models.CreateSubnetsRequest;
+const DisableRoutesRequest = models.DisableRoutesRequest;
+const EnableRoutesRequest = models.EnableRoutesRequest;
 const DescribeAddressTemplateGroupsResponse = models.DescribeAddressTemplateGroupsResponse;
-const SetCcnRegionBandwidthLimitsRequest = models.SetCcnRegionBandwidthLimitsRequest;
-const DetachClassicLinkVpcResponse = models.DetachClassicLinkVpcResponse;
-const ReplaceSecurityGroupPolicyRequest = models.ReplaceSecurityGroupPolicyRequest;
 const ReleaseAddressesRequest = models.ReleaseAddressesRequest;
 const CreateDirectConnectGatewayCcnRoutesRequest = models.CreateDirectConnectGatewayCcnRoutesRequest;
-const UnassignPrivateIpAddressesRequest = models.UnassignPrivateIpAddressesRequest;
-const AssociateAddressResponse = models.AssociateAddressResponse;
-const Filter = models.Filter;
 const CreateDirectConnectGatewayCcnRoutesResponse = models.CreateDirectConnectGatewayCcnRoutesResponse;
 const CreateRouteTableRequest = models.CreateRouteTableRequest;
-const ResetVpnConnectionResponse = models.ResetVpnConnectionResponse;
-const IPSECOptionsSpecification = models.IPSECOptionsSpecification;
-const CreateHaVipRequest = models.CreateHaVipRequest;
-const DescribeAddressesRequest = models.DescribeAddressesRequest;
-const DescribeSecurityGroupPoliciesRequest = models.DescribeSecurityGroupPoliciesRequest;
 const MigrateNetworkInterfaceRequest = models.MigrateNetworkInterfaceRequest;
+const DisableCcnRoutesRequest = models.DisableCcnRoutesRequest;
+const ModifyAddressAttributeRequest = models.ModifyAddressAttributeRequest;
+const SubnetInput = models.SubnetInput;
+const UnassignIpv6SubnetCidrBlockResponse = models.UnassignIpv6SubnetCidrBlockResponse;
+const DeleteCcnRequest = models.DeleteCcnRequest;
+const ModifyVpnGatewayAttributeRequest = models.ModifyVpnGatewayAttributeRequest;
+const IPSECOptionsSpecification = models.IPSECOptionsSpecification;
+const UnassignIpv6AddressesRequest = models.UnassignIpv6AddressesRequest;
+const ModifyCcnAttributeRequest = models.ModifyCcnAttributeRequest;
+const DeleteSecurityGroupPoliciesResponse = models.DeleteSecurityGroupPoliciesResponse;
+const DeleteVpnGatewayResponse = models.DeleteVpnGatewayResponse;
+const DescribeHaVipsRequest = models.DescribeHaVipsRequest;
+const UnassignPrivateIpAddressesResponse = models.UnassignPrivateIpAddressesResponse;
+const Address = models.Address;
+const VpnGateway = models.VpnGateway;
+const Resource = models.Resource;
+const CustomerGateway = models.CustomerGateway;
+const AllocateAddressesResponse = models.AllocateAddressesResponse;
+const BandwidthPackage = models.BandwidthPackage;
+const DescribeIp6TranslatorsResponse = models.DescribeIp6TranslatorsResponse;
+const CreateSecurityGroupPoliciesRequest = models.CreateSecurityGroupPoliciesRequest;
+const ModifyRouteTableAttributeResponse = models.ModifyRouteTableAttributeResponse;
+const AddIp6RulesResponse = models.AddIp6RulesResponse;
+const CreateAddressTemplateGroupResponse = models.CreateAddressTemplateGroupResponse;
+const DescribeBandwidthPackageQuotaResponse = models.DescribeBandwidthPackageQuotaResponse;
+const DeleteServiceTemplateGroupRequest = models.DeleteServiceTemplateGroupRequest;
+const CreateDirectConnectGatewayResponse = models.CreateDirectConnectGatewayResponse;
+const ModifyAddressTemplateGroupAttributeRequest = models.ModifyAddressTemplateGroupAttributeRequest;
+const ModifyServiceTemplateGroupAttributeRequest = models.ModifyServiceTemplateGroupAttributeRequest;
+const UnassignIpv6CidrBlockRequest = models.UnassignIpv6CidrBlockRequest;
+const CCN = models.CCN;
+const DeleteIp6TranslatorsRequest = models.DeleteIp6TranslatorsRequest;
+const Ip6Translator = models.Ip6Translator;
+const CreateDefaultVpcRequest = models.CreateDefaultVpcRequest;
+const DescribeSubnetsResponse = models.DescribeSubnetsResponse;
+const DescribeCustomerGatewaysResponse = models.DescribeCustomerGatewaysResponse;
+const InquiryPriceRenewVpnGatewayRequest = models.InquiryPriceRenewVpnGatewayRequest;
+const EnableCcnRoutesResponse = models.EnableCcnRoutesResponse;
+const DetachCcnInstancesResponse = models.DetachCcnInstancesResponse;
+const ModifyServiceTemplateGroupAttributeResponse = models.ModifyServiceTemplateGroupAttributeResponse;
+const DeleteSubnetRequest = models.DeleteSubnetRequest;
+const DescribeAddressTemplateGroupsRequest = models.DescribeAddressTemplateGroupsRequest;
+const RouteTable = models.RouteTable;
+const DeleteNetworkInterfaceRequest = models.DeleteNetworkInterfaceRequest;
+const InquiryPriceResetVpnGatewayInternetMaxBandwidthResponse = models.InquiryPriceResetVpnGatewayInternetMaxBandwidthResponse;
+const DeleteAddressTemplateGroupResponse = models.DeleteAddressTemplateGroupResponse;
+const ReplaceRoutesResponse = models.ReplaceRoutesResponse;
+const DirectConnectGatewayCcnRoute = models.DirectConnectGatewayCcnRoute;
+const DeleteHaVipRequest = models.DeleteHaVipRequest;
+const MigratePrivateIpAddressRequest = models.MigratePrivateIpAddressRequest;
+const DescribeServiceTemplatesRequest = models.DescribeServiceTemplatesRequest;
+const DeleteRouteTableRequest = models.DeleteRouteTableRequest;
+const NetworkInterfaceAttachment = models.NetworkInterfaceAttachment;
+const CreateBandwidthPackageResponse = models.CreateBandwidthPackageResponse;
+const ResetVpnConnectionRequest = models.ResetVpnConnectionRequest;
+const ReleaseAddressesResponse = models.ReleaseAddressesResponse;
+const InquiryPriceResetVpnGatewayInternetMaxBandwidthRequest = models.InquiryPriceResetVpnGatewayInternetMaxBandwidthRequest;
+const DeleteCcnResponse = models.DeleteCcnResponse;
+const ReplaceSecurityGroupPolicyResponse = models.ReplaceSecurityGroupPolicyResponse;
+const ModifyPrivateIpAddressesAttributeResponse = models.ModifyPrivateIpAddressesAttributeResponse;
+const DeleteDirectConnectGatewayCcnRoutesRequest = models.DeleteDirectConnectGatewayCcnRoutesRequest;
+const DeleteSecurityGroupResponse = models.DeleteSecurityGroupResponse;
+const CreateNetworkInterfaceResponse = models.CreateNetworkInterfaceResponse;
+const DescribeAddressQuotaRequest = models.DescribeAddressQuotaRequest;
+const SecurityGroupPolicySet = models.SecurityGroupPolicySet;
+const AssignIpv6AddressesResponse = models.AssignIpv6AddressesResponse;
+const CreateRoutesResponse = models.CreateRoutesResponse;
+const DescribeSecurityGroupsResponse = models.DescribeSecurityGroupsResponse;
+const ReplaceDirectConnectGatewayCcnRoutesResponse = models.ReplaceDirectConnectGatewayCcnRoutesResponse;
+const ModifyVpcAttributeRequest = models.ModifyVpcAttributeRequest;
+const ServiceTemplateSpecification = models.ServiceTemplateSpecification;
+const DetachNetworkInterfaceRequest = models.DetachNetworkInterfaceRequest;
+const Ip6Rule = models.Ip6Rule;
+const AttachClassicLinkVpcResponse = models.AttachClassicLinkVpcResponse;
+const CreateAddressTemplateRequest = models.CreateAddressTemplateRequest;
+const DescribeRouteConflictsRequest = models.DescribeRouteConflictsRequest;
+const Subnet = models.Subnet;
+const DeleteVpcResponse = models.DeleteVpcResponse;
+const DescribeCcnRoutesResponse = models.DescribeCcnRoutesResponse;
+const SecurityGroup = models.SecurityGroup;
+const DisassociateAddressResponse = models.DisassociateAddressResponse;
+const DeleteRoutesRequest = models.DeleteRoutesRequest;
+const AssociateAddressRequest = models.AssociateAddressRequest;
+const CcnRegionBandwidthLimit = models.CcnRegionBandwidthLimit;
+const ClassicLinkInstance = models.ClassicLinkInstance;
+const CreateVpnGatewayRequest = models.CreateVpnGatewayRequest;
+const ModifyNetworkInterfaceAttributeRequest = models.ModifyNetworkInterfaceAttributeRequest;
+const ModifyHaVipAttributeRequest = models.ModifyHaVipAttributeRequest;
+const ModifyAddressTemplateGroupAttributeResponse = models.ModifyAddressTemplateGroupAttributeResponse;
+const DetachClassicLinkVpcResponse = models.DetachClassicLinkVpcResponse;
+const UnassignPrivateIpAddressesRequest = models.UnassignPrivateIpAddressesRequest;
+const Filter = models.Filter;
+const CreateHaVipRequest = models.CreateHaVipRequest;
+const Ipv6SubnetCidrBlock = models.Ipv6SubnetCidrBlock;
 const DescribeAddressQuotaResponse = models.DescribeAddressQuotaResponse;
-const CreateSecurityGroupPoliciesResponse = models.CreateSecurityGroupPoliciesResponse;
-const CreateSecurityGroupResponse = models.CreateSecurityGroupResponse;
+const CreateCustomerGatewayRequest = models.CreateCustomerGatewayRequest;
 const DeleteSecurityGroupRequest = models.DeleteSecurityGroupRequest;
 const ModifyVpnConnectionAttributeRequest = models.ModifyVpnConnectionAttributeRequest;
-const ReplaceRoutesRequest = models.ReplaceRoutesRequest;
 const CreateIp6TranslatorsRequest = models.CreateIp6TranslatorsRequest;
-const DeleteRoutesResponse = models.DeleteRoutesResponse;
-const CreateCcnRequest = models.CreateCcnRequest;
-const DescribeSecurityGroupAssociationStatisticsResponse = models.DescribeSecurityGroupAssociationStatisticsResponse;
+const ItemPrice = models.ItemPrice;
 const DescribeDirectConnectGatewayCcnRoutesResponse = models.DescribeDirectConnectGatewayCcnRoutesResponse;
 const ModifyPrivateIpAddressesAttributeRequest = models.ModifyPrivateIpAddressesAttributeRequest;
-const DisableRoutesRequest = models.DisableRoutesRequest;
-const RemoveIp6RulesRequest = models.RemoveIp6RulesRequest;
-const DeleteVpnConnectionRequest = models.DeleteVpnConnectionRequest;
-const ModifyVpcAttributeRequest = models.ModifyVpcAttributeRequest;
 const CreateSecurityGroupRequest = models.CreateSecurityGroupRequest;
 const ModifyCcnAttributeResponse = models.ModifyCcnAttributeResponse;
-const DeleteCcnRequest = models.DeleteCcnRequest;
-const DescribeSecurityGroupsRequest = models.DescribeSecurityGroupsRequest;
 const DescribeClassicLinkInstancesRequest = models.DescribeClassicLinkInstancesRequest;
-const VpnGateway = models.VpnGateway;
 const CreateServiceTemplateResponse = models.CreateServiceTemplateResponse;
 const DeleteNetworkInterfaceResponse = models.DeleteNetworkInterfaceResponse;
 const DisableCcnRoutesResponse = models.DisableCcnRoutesResponse;
 const DescribeCcnRegionBandwidthLimitsRequest = models.DescribeCcnRegionBandwidthLimitsRequest;
-const AddIp6RulesRequest = models.AddIp6RulesRequest;
-const DescribeAccountAttributesResponse = models.DescribeAccountAttributesResponse;
-const DescribeCustomerGatewayVendorsResponse = models.DescribeCustomerGatewayVendorsResponse;
-const DetachCcnInstancesRequest = models.DetachCcnInstancesRequest;
-const AssignPrivateIpAddressesResponse = models.AssignPrivateIpAddressesResponse;
-const DescribeBandwidthPackageQuotaResponse = models.DescribeBandwidthPackageQuotaResponse;
-const ModifyAddressTemplateGroupAttributeResponse = models.ModifyAddressTemplateGroupAttributeResponse;
-const DeleteServiceTemplateGroupResponse = models.DeleteServiceTemplateGroupResponse;
+const InquiryPriceCreateVpnGatewayRequest = models.InquiryPriceCreateVpnGatewayRequest;
 const CustomerGatewayVendor = models.CustomerGatewayVendor;
 const DescribeAddressTemplatesRequest = models.DescribeAddressTemplatesRequest;
-const RenewVpnGatewayResponse = models.RenewVpnGatewayResponse;
-const ModifyCcnAttributeRequest = models.ModifyCcnAttributeRequest;
-const DeleteDirectConnectGatewayResponse = models.DeleteDirectConnectGatewayResponse;
-const AddBandwidthPackageResourcesResponse = models.AddBandwidthPackageResourcesResponse;
-const EnableRoutesRequest = models.EnableRoutesRequest;
-const DeleteSecurityGroupPoliciesResponse = models.DeleteSecurityGroupPoliciesResponse;
-const ModifyAddressAttributeRequest = models.ModifyAddressAttributeRequest;
-const InquiryPriceCreateVpnGatewayRequest = models.InquiryPriceCreateVpnGatewayRequest;
 const DescribeVpnConnectionsResponse = models.DescribeVpnConnectionsResponse;
 const DeleteCustomerGatewayRequest = models.DeleteCustomerGatewayRequest;
-const RejectAttachCcnInstancesRequest = models.RejectAttachCcnInstancesRequest;
-const DirectConnectGateway = models.DirectConnectGateway;
-const DeleteVpnGatewayResponse = models.DeleteVpnGatewayResponse;
 const DescribeAddressTemplatesResponse = models.DescribeAddressTemplatesResponse;
-const DescribeHaVipsRequest = models.DescribeHaVipsRequest;
 const Quota = models.Quota;
-const RemoveIp6RulesResponse = models.RemoveIp6RulesResponse;
-const Route = models.Route;
-const ModifyIp6RuleResponse = models.ModifyIp6RuleResponse;
-const DescribeDirectConnectGatewaysResponse = models.DescribeDirectConnectGatewaysResponse;
-const Ip6RuleInfo = models.Ip6RuleInfo;
-const Address = models.Address;
-const ModifyVpnGatewayAttributeResponse = models.ModifyVpnGatewayAttributeResponse;
-const DeleteAddressTemplateResponse = models.DeleteAddressTemplateResponse;
 const DescribeNetworkInterfacesResponse = models.DescribeNetworkInterfacesResponse;
 const EnableRoutesResponse = models.EnableRoutesResponse;
-const DeleteHaVipRequest = models.DeleteHaVipRequest;
 const AssignPrivateIpAddressesRequest = models.AssignPrivateIpAddressesRequest;
 const DescribeServiceTemplateGroupsRequest = models.DescribeServiceTemplateGroupsRequest;
 const CreateVpcRequest = models.CreateVpcRequest;
-const ModifyCustomerGatewayAttributeRequest = models.ModifyCustomerGatewayAttributeRequest;
-const CreateServiceTemplateGroupRequest = models.CreateServiceTemplateGroupRequest;
 const DeleteServiceTemplateRequest = models.DeleteServiceTemplateRequest;
 const DescribeSecurityGroupAssociationStatisticsRequest = models.DescribeSecurityGroupAssociationStatisticsRequest;
-const DescribeDirectConnectGatewayCcnRoutesRequest = models.DescribeDirectConnectGatewayCcnRoutesRequest;
-const DescribeClassicLinkInstancesResponse = models.DescribeClassicLinkInstancesResponse;
-const DescribeRouteTablesResponse = models.DescribeRouteTablesResponse;
-const DeleteAddressTemplateRequest = models.DeleteAddressTemplateRequest;
-const CustomerGateway = models.CustomerGateway;
-const AllocateAddressesResponse = models.AllocateAddressesResponse;
-const TransformAddressRequest = models.TransformAddressRequest;
-const ReplaceDirectConnectGatewayCcnRoutesRequest = models.ReplaceDirectConnectGatewayCcnRoutesRequest;
-const DescribeVpcPrivateIpAddressesRequest = models.DescribeVpcPrivateIpAddressesRequest;
-const DisassociateAddressRequest = models.DisassociateAddressRequest;
-const EnableCcnRoutesResponse = models.EnableCcnRoutesResponse;
-const BandwidthPackage = models.BandwidthPackage;
-const AttachNetworkInterfaceRequest = models.AttachNetworkInterfaceRequest;
-const DescribeIp6TranslatorsResponse = models.DescribeIp6TranslatorsResponse;
-const CreateSecurityGroupPoliciesRequest = models.CreateSecurityGroupPoliciesRequest;
-const IKEOptionsSpecification = models.IKEOptionsSpecification;
-const MigrateNetworkInterfaceResponse = models.MigrateNetworkInterfaceResponse;
-const InstanceChargePrepaid = models.InstanceChargePrepaid;
-const DescribeCcnAttachedInstancesRequest = models.DescribeCcnAttachedInstancesRequest;
-const DescribeIp6TranslatorQuotaRequest = models.DescribeIp6TranslatorQuotaRequest;
-const VpcPrivateIpAddress = models.VpcPrivateIpAddress;
-const DeleteDirectConnectGatewayRequest = models.DeleteDirectConnectGatewayRequest;
-const ModifySecurityGroupAttributeRequest = models.ModifySecurityGroupAttributeRequest;
-const AddIp6RulesResponse = models.AddIp6RulesResponse;
-const CreateAddressTemplateGroupResponse = models.CreateAddressTemplateGroupResponse;
-const CcnAttachedInstance = models.CcnAttachedInstance;
-const RemoveBandwidthPackageResourcesRequest = models.RemoveBandwidthPackageResourcesRequest;
-const DescribeIp6TranslatorQuotaResponse = models.DescribeIp6TranslatorQuotaResponse;
-const SecurityPolicyDatabase = models.SecurityPolicyDatabase;
+const Route = models.Route;
+const DeleteServiceTemplateGroupResponse = models.DeleteServiceTemplateGroupResponse;
+const DescribeBandwidthPackageQuotaRequest = models.DescribeBandwidthPackageQuotaRequest;
+const RouteTableAssociation = models.RouteTableAssociation;
 const AcceptAttachCcnInstancesResponse = models.AcceptAttachCcnInstancesResponse;
-const DeleteServiceTemplateGroupRequest = models.DeleteServiceTemplateGroupRequest;
-const ModifyDirectConnectGatewayAttributeResponse = models.ModifyDirectConnectGatewayAttributeResponse;
-const ModifyAddressesBandwidthResponse = models.ModifyAddressesBandwidthResponse;
-const DescribeRouteConflictsRequest = models.DescribeRouteConflictsRequest;
-const Price = models.Price;
-const HaVipAssociateAddressIpResponse = models.HaVipAssociateAddressIpResponse;
+const InstanceChargePrepaid = models.InstanceChargePrepaid;
 
 
 /**
@@ -438,15 +456,16 @@ class VpcClient extends AbstractClient {
     }
 
     /**
-     * 本接口（ReplaceRouteTableAssociation)用于修改子网（Subnet）关联的路由表（RouteTable）。
-* 一个子网只能关联一个路由表。
-     * @param {ReplaceRouteTableAssociationRequest} req
-     * @param {function(string, ReplaceRouteTableAssociationResponse):void} cb
+     * 本接口（AssignIpv6CidrBlock）用于分配IPv6网段。
+* 使用本接口前，你需要已有VPC实例，如果没有可通过接口<a href="https://cloud.tencent.com/document/api/215/15774" title="CreateVpc" target="_blank">CreateVpc</a>创建。
+* 每个VPC只能申请一个IPv6网段
+     * @param {AssignIpv6CidrBlockRequest} req
+     * @param {function(string, AssignIpv6CidrBlockResponse):void} cb
      * @public
      */
-    ReplaceRouteTableAssociation(req, cb) {
-        let resp = new ReplaceRouteTableAssociationResponse();
-        this.request("ReplaceRouteTableAssociation", req, resp, cb);
+    AssignIpv6CidrBlock(req, cb) {
+        let resp = new AssignIpv6CidrBlockResponse();
+        this.request("AssignIpv6CidrBlock", req, resp, cb);
     }
 
     /**
@@ -517,6 +536,18 @@ class VpcClient extends AbstractClient {
     DescribeGatewayFlowMonitorDetail(req, cb) {
         let resp = new DescribeGatewayFlowMonitorDetailResponse();
         this.request("DescribeGatewayFlowMonitorDetail", req, resp, cb);
+    }
+
+    /**
+     * 本接口（UnassignIpv6Addresses）用于释放弹性网卡`IPv6`地址。<br />
+本接口是异步完成，如需查询异步任务执行结果，请使用本接口返回的`RequestId`轮询`QueryTask`接口。
+     * @param {UnassignIpv6AddressesRequest} req
+     * @param {function(string, UnassignIpv6AddressesResponse):void} cb
+     * @public
+     */
+    UnassignIpv6Addresses(req, cb) {
+        let resp = new UnassignIpv6AddressesResponse();
+        this.request("UnassignIpv6Addresses", req, resp, cb);
     }
 
     /**
@@ -648,6 +679,18 @@ class VpcClient extends AbstractClient {
     CreateSubnets(req, cb) {
         let resp = new CreateSubnetsResponse();
         this.request("CreateSubnets", req, resp, cb);
+    }
+
+    /**
+     * 本接口（ReplaceRouteTableAssociation)用于修改子网（Subnet）关联的路由表（RouteTable）。
+* 一个子网只能关联一个路由表。
+     * @param {ReplaceRouteTableAssociationRequest} req
+     * @param {function(string, ReplaceRouteTableAssociationResponse):void} cb
+     * @public
+     */
+    ReplaceRouteTableAssociation(req, cb) {
+        let resp = new ReplaceRouteTableAssociationResponse();
+        this.request("ReplaceRouteTableAssociation", req, resp, cb);
     }
 
     /**
@@ -836,6 +879,19 @@ class VpcClient extends AbstractClient {
     }
 
     /**
+     * 本接口（AssignIpv6SubnetCidrBlock）用于分配IPv6子网段。
+* 给子网分配 `IPv6` 网段，要求子网所属 `VPC` 已获得 `IPv6` 网段。如果尚未分配，请先通过接口 `AssignIpv6CidrBlock` 给子网所属 `VPC` 分配一个 `IPv6` 网段。否则无法分配 `IPv6` 子网段。
+* 每个子网只能分配一个IPv6网段。
+     * @param {AssignIpv6SubnetCidrBlockRequest} req
+     * @param {function(string, AssignIpv6SubnetCidrBlockResponse):void} cb
+     * @public
+     */
+    AssignIpv6SubnetCidrBlock(req, cb) {
+        let resp = new AssignIpv6SubnetCidrBlockResponse();
+        this.request("AssignIpv6SubnetCidrBlock", req, resp, cb);
+    }
+
+    /**
      * 本接口 (AllocateAddresses) 用于申请一个或多个[弹性公网IP](https://cloud.tencent.com/document/product/213/1941)（简称 EIP）。
 * EIP 是专为动态云计算设计的静态 IP 地址。借助 EIP，您可以快速将 EIP 重新映射到您的另一个实例上，从而屏蔽实例故障。
 * 您的 EIP 与腾讯云账户相关联，而不是与某个实例相关联。在您选择显式释放该地址，或欠费超过七天之前，它会一直与您的腾讯云账户保持关联。
@@ -847,6 +903,18 @@ class VpcClient extends AbstractClient {
     AllocateAddresses(req, cb) {
         let resp = new AllocateAddressesResponse();
         this.request("AllocateAddresses", req, resp, cb);
+    }
+
+    /**
+     * 本接口（DescribeVpcIpv6Addresses）用于查询 `VPC` `IPv6` 信息。
+只能查询已使用的`IPv6`信息，当查询未使用的IP时，本接口不会报错，但不会出现在返回结果里。
+     * @param {DescribeVpcIpv6AddressesRequest} req
+     * @param {function(string, DescribeVpcIpv6AddressesResponse):void} cb
+     * @public
+     */
+    DescribeVpcIpv6Addresses(req, cb) {
+        let resp = new DescribeVpcIpv6AddressesResponse();
+        this.request("DescribeVpcIpv6Addresses", req, resp, cb);
     }
 
     /**
@@ -1078,6 +1146,18 @@ class VpcClient extends AbstractClient {
     ReplaceRoutes(req, cb) {
         let resp = new ReplaceRoutesResponse();
         this.request("ReplaceRoutes", req, resp, cb);
+    }
+
+    /**
+     * 本接口（UnassignIpv6SubnetCidrBlock）用于释放IPv6子网段。<br />
+子网段如果还有IP占用且未回收，则子网段无法释放。
+     * @param {UnassignIpv6SubnetCidrBlockRequest} req
+     * @param {function(string, UnassignIpv6SubnetCidrBlockResponse):void} cb
+     * @public
+     */
+    UnassignIpv6SubnetCidrBlock(req, cb) {
+        let resp = new UnassignIpv6SubnetCidrBlockResponse();
+        this.request("UnassignIpv6SubnetCidrBlock", req, resp, cb);
     }
 
     /**
@@ -1457,6 +1537,17 @@ class VpcClient extends AbstractClient {
     }
 
     /**
+     * 本接口（ModifyIpv6AddressesAttribute）用于修改弹性网卡内网IPv6地址属性。
+     * @param {ModifyIpv6AddressesAttributeRequest} req
+     * @param {function(string, ModifyIpv6AddressesAttributeResponse):void} cb
+     * @public
+     */
+    ModifyIpv6AddressesAttribute(req, cb) {
+        let resp = new ModifyIpv6AddressesAttributeResponse();
+        this.request("ModifyIpv6AddressesAttribute", req, resp, cb);
+    }
+
+    /**
      * 本接口（DescribeDirectConnectGateways）用于查询专线网关。
      * @param {DescribeDirectConnectGatewaysRequest} req
      * @param {function(string, DescribeDirectConnectGatewaysResponse):void} cb
@@ -1490,6 +1581,22 @@ class VpcClient extends AbstractClient {
     }
 
     /**
+     * 本接口（AssignIpv6Addresses）用于弹性网卡申请`IPv6`地址。<br />
+本接口是异步完成，如需查询异步任务执行结果，请使用本接口返回的`RequestId`轮询`QueryTask`接口。
+* 一个弹性网卡支持绑定的IP地址是有限制的，更多资源限制信息详见<a href="/document/product/576/18527">弹性网卡使用限制</a>。
+* 可以指定`IPv6`地址申请，地址类型不能为主`IP`，`IPv6`地址暂时只支持作为辅助`IP`。
+* 地址必须要在弹性网卡所在子网内，而且不能被占用。
+* 在弹性网卡上申请一个到多个辅助`IPv6`地址，接口会在弹性网卡所在子网段内返回指定数量的辅助`IPv6`地址。
+     * @param {AssignIpv6AddressesRequest} req
+     * @param {function(string, AssignIpv6AddressesResponse):void} cb
+     * @public
+     */
+    AssignIpv6Addresses(req, cb) {
+        let resp = new AssignIpv6AddressesResponse();
+        this.request("AssignIpv6Addresses", req, resp, cb);
+    }
+
+    /**
      *  本接口（MigratePrivateIpAddress）用于弹性网卡内网IP迁移。
 
 * 该接口用于将一个内网IP从一个弹性网卡上迁移到另外一个弹性网卡，主IP地址不支持迁移。
@@ -1512,6 +1619,18 @@ class VpcClient extends AbstractClient {
     DescribeServiceTemplates(req, cb) {
         let resp = new DescribeServiceTemplatesResponse();
         this.request("DescribeServiceTemplates", req, resp, cb);
+    }
+
+    /**
+     * 本接口（UnassignIpv6CidrBlock）用于释放IPv6网段。<br />
+网段如果还有IP占用且未回收，则网段无法释放。
+     * @param {UnassignIpv6CidrBlockRequest} req
+     * @param {function(string, UnassignIpv6CidrBlockResponse):void} cb
+     * @public
+     */
+    UnassignIpv6CidrBlock(req, cb) {
+        let resp = new UnassignIpv6CidrBlockResponse();
+        this.request("UnassignIpv6CidrBlock", req, resp, cb);
     }
 
     /**

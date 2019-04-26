@@ -67,6 +67,12 @@ class QueryRequest extends  AbstractModel {
         this.FuncName = null;
 
         /**
+         * 调用合约的组织名称，可以在组织管理列表中获取当前组织的名称
+         * @type {string || null}
+         */
+        this.GroupName = null;
+
+        /**
          * 被调用的函数参数列表
          * @type {Array.<string> || null}
          */
@@ -96,6 +102,7 @@ class QueryRequest extends  AbstractModel {
             }
         }
         this.FuncName = 'FuncName' in params ? params.FuncName : null;
+        this.GroupName = 'GroupName' in params ? params.GroupName : null;
         this.Args = 'Args' in params ? params.Args : null;
 
     }
@@ -194,6 +201,12 @@ class InvokeRequest extends  AbstractModel {
         this.FuncName = null;
 
         /**
+         * 调用合约的组织名称，可以在组织管理列表中获取当前组织的名称
+         * @type {string || null}
+         */
+        this.GroupName = null;
+
+        /**
          * 被调用的函数参数列表
          * @type {Array.<string> || null}
          */
@@ -229,6 +242,7 @@ class InvokeRequest extends  AbstractModel {
             }
         }
         this.FuncName = 'FuncName' in params ? params.FuncName : null;
+        this.GroupName = 'GroupName' in params ? params.GroupName : null;
         this.Args = 'Args' in params ? params.Args : null;
         this.AsyncFlag = 'AsyncFlag' in params ? params.AsyncFlag : null;
 
@@ -320,6 +334,12 @@ class GetInvokeTxRequest extends  AbstractModel {
          */
         this.TxId = null;
 
+        /**
+         * 调用合约的组织名称，可以在组织管理列表中获取当前组织的名称
+         * @type {string || null}
+         */
+        this.GroupName = null;
+
     }
 
     /**
@@ -336,6 +356,7 @@ class GetInvokeTxRequest extends  AbstractModel {
         this.PeerName = 'PeerName' in params ? params.PeerName : null;
         this.PeerGroup = 'PeerGroup' in params ? params.PeerGroup : null;
         this.TxId = 'TxId' in params ? params.TxId : null;
+        this.GroupName = 'GroupName' in params ? params.GroupName : null;
 
     }
 }
