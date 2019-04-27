@@ -149,7 +149,7 @@ class IDCardOCRResponse extends  AbstractModel {
         this.ValidDate = null;
 
         /**
-         * 扩展信息，根据请求的可选字段返回对应内容，不请求则不返回。目前支持的扩展字段为：
+         * 扩展信息，根据请求的可选字段返回对应内容，不请求则不返回，具体输入参考示例3。目前支持的扩展字段为：
 IdCard身份证照片，请求CropIdCard时返回；
 Portrait人像照片，请求CropPortrait时返回；
 WarnInfos告警信息（Code告警码，Msg告警信息），识别出翻拍件或复印件时返回。
@@ -271,11 +271,17 @@ BACK为身份证有国徽的一面（反面）
         this.CardSide = null;
 
         /**
-         * 可选字段，根据需要选择是否请求对应字段。目前包含的字段为：
-CropIdCard-身份证照片裁剪，
-CropPortrait-人像照片裁剪，
-CopyWarn-复印件告警，
-ReshootWarn-翻拍告警。
+         * 可选字段，根据需要选择是否请求对应字段。
+目前包含的字段为：
+CropIdCard-身份证照片裁剪，bool类型，
+CropPortrait-人像照片裁剪，bool类型，
+CopyWarn-复印件告警，bool类型，
+ReshootWarn-翻拍告警，bool类型。
+
+SDK设置方式参考：
+Config = Json.stringify({"CropIdCard":true,"CropPortrait":true})
+API 3.0 Explorer设置方式参考：
+Config = {"CropIdCard":true,"CropPortrait":true}
          * @type {string || null}
          */
         this.Config = null;
@@ -433,6 +439,12 @@ class GeneralBasicOCRRequest extends  AbstractModel {
          */
         this.ImageUrl = null;
 
+        /**
+         * 保留字段。
+         * @type {string || null}
+         */
+        this.Scene = null;
+
     }
 
     /**
@@ -444,6 +456,7 @@ class GeneralBasicOCRRequest extends  AbstractModel {
         }
         this.ImageBase64 = 'ImageBase64' in params ? params.ImageBase64 : null;
         this.ImageUrl = 'ImageUrl' in params ? params.ImageUrl : null;
+        this.Scene = 'Scene' in params ? params.Scene : null;
 
     }
 }

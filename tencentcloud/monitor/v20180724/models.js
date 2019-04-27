@@ -31,7 +31,7 @@ class GetMonitorDataRequest extends  AbstractModel {
         this.Namespace = null;
 
         /**
-         * 指标名称
+         * 指标名称，各个云产品的详细指标说明请参阅各个产品[监控接口](<https://cloud.tencent.com/document/product/248/30384>)文档
          * @type {string || null}
          */
         this.MetricName = null;
