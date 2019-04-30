@@ -7,6 +7,7 @@ module.exports = {
     bmeip: require("./bmeip"),
     bmlb: require("./bmlb"),
     bmvpc: require("./bmvpc"),
+    cam: require("./cam"),
     cbs: require("./cbs"),
     cdb: require("./cdb"),
     cdn: require("./cdn"),
