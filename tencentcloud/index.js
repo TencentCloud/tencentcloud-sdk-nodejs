@@ -52,6 +52,7 @@ module.exports = {
     tav: require("./tav"),
     tbaas: require("./tbaas"),
     tbm: require("./tbm"),
+    tbp: require("./tbp"),
     tia: require("./tia"),
     ticm: require("./ticm"),
     tics: require("./tics"),

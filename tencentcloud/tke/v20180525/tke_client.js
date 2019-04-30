@@ -16,23 +16,31 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
-const InstanceAdvancedSettings = models.InstanceAdvancedSettings;
-const Filter = models.Filter;
 const DescribeClustersRequest = models.DescribeClustersRequest;
-const DeleteClusterInstancesRequest = models.DeleteClusterInstancesRequest;
 const DeleteClusterInstancesResponse = models.DeleteClusterInstancesResponse;
+const LoginSettings = models.LoginSettings;
+const AddExistedInstancesRequest = models.AddExistedInstancesRequest;
 const Instance = models.Instance;
 const EnhancedService = models.EnhancedService;
-const LoginSettings = models.LoginSettings;
+const ExistedInstancesForNode = models.ExistedInstancesForNode;
+const CreateClusterResponse = models.CreateClusterResponse;
 const RunSecurityServiceEnabled = models.RunSecurityServiceEnabled;
-const AddExistedInstancesRequest = models.AddExistedInstancesRequest;
+const ClusterBasicSettings = models.ClusterBasicSettings;
+const CreateClusterRequest = models.CreateClusterRequest;
+const DeleteClusterInstancesRequest = models.DeleteClusterInstancesRequest;
+const DescribeClusterInstancesRequest = models.DescribeClusterInstancesRequest;
+const ClusterCIDRSettings = models.ClusterCIDRSettings;
+const InstanceAdvancedSettings = models.InstanceAdvancedSettings;
+const RunInstancesForNode = models.RunInstancesForNode;
+const ExistedInstancesPara = models.ExistedInstancesPara;
+const Filter = models.Filter;
+const ClusterNetworkSettings = models.ClusterNetworkSettings;
+const RunMonitorServiceEnabled = models.RunMonitorServiceEnabled;
+const ClusterAdvancedSettings = models.ClusterAdvancedSettings;
 const Cluster = models.Cluster;
 const DescribeClustersResponse = models.DescribeClustersResponse;
 const DescribeClusterInstancesResponse = models.DescribeClusterInstancesResponse;
-const ClusterNetworkSettings = models.ClusterNetworkSettings;
-const RunMonitorServiceEnabled = models.RunMonitorServiceEnabled;
 const AddExistedInstancesResponse = models.AddExistedInstancesResponse;
-const DescribeClusterInstancesRequest = models.DescribeClusterInstancesRequest;
 
 
 /**
@@ -54,6 +62,17 @@ class TkeClient extends AbstractClient {
     AddExistedInstances(req, cb) {
         let resp = new AddExistedInstancesResponse();
         this.request("AddExistedInstances", req, resp, cb);
+    }
+
+    /**
+     *  查询集群下节点实例信息 
+     * @param {DescribeClusterInstancesRequest} req
+     * @param {function(string, DescribeClusterInstancesResponse):void} cb
+     * @public
+     */
+    DescribeClusterInstances(req, cb) {
+        let resp = new DescribeClusterInstancesResponse();
+        this.request("DescribeClusterInstances", req, resp, cb);
     }
 
     /**
@@ -79,14 +98,14 @@ class TkeClient extends AbstractClient {
     }
 
     /**
-     *  查询集群下节点实例信息 
-     * @param {DescribeClusterInstancesRequest} req
-     * @param {function(string, DescribeClusterInstancesResponse):void} cb
+     * 创建集群
+     * @param {CreateClusterRequest} req
+     * @param {function(string, CreateClusterResponse):void} cb
      * @public
      */
-    DescribeClusterInstances(req, cb) {
-        let resp = new DescribeClusterInstancesResponse();
-        this.request("DescribeClusterInstances", req, resp, cb);
+    CreateCluster(req, cb) {
+        let resp = new CreateClusterResponse();
+        this.request("CreateCluster", req, resp, cb);
     }
 
 

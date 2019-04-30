@@ -35,6 +35,7 @@ const DescribeCustomImageProcessRequest = models.DescribeCustomImageProcessReque
 const CpuInfo = models.CpuInfo;
 const CustomImage = models.CustomImage;
 const ModifyDeviceAutoRenewFlagRequest = models.ModifyDeviceAutoRenewFlagRequest;
+const StartDevicesResponse = models.StartDevicesResponse;
 const BindPsaTagRequest = models.BindPsaTagRequest;
 const DescribeRegionsResponse = models.DescribeRegionsResponse;
 const DevicePartition = models.DevicePartition;
@@ -105,6 +106,7 @@ const DescribeRepairTaskConstantResponse = models.DescribeRepairTaskConstantResp
 const BuyDevicesResponse = models.BuyDevicesResponse;
 const ModifyLanIpResponse = models.ModifyLanIpResponse;
 const DescribePsaRegulationsResponse = models.DescribePsaRegulationsResponse;
+const StartDevicesRequest = models.StartDevicesRequest;
 const DescribeUserCmdsResponse = models.DescribeUserCmdsResponse;
 const ModifyDeviceAutoRenewFlagResponse = models.ModifyDeviceAutoRenewFlagResponse;
 const DescribeOperationResultResponse = models.DescribeOperationResultResponse;
@@ -242,6 +244,17 @@ class BmClient extends AbstractClient {
     DescribeCustomImageProcess(req, cb) {
         let resp = new DescribeCustomImageProcessResponse();
         this.request("DescribeCustomImageProcess", req, resp, cb);
+    }
+
+    /**
+     * 开启服务器
+     * @param {StartDevicesRequest} req
+     * @param {function(string, StartDevicesResponse):void} cb
+     * @public
+     */
+    StartDevices(req, cb) {
+        let resp = new StartDevicesResponse();
+        this.request("StartDevices", req, resp, cb);
     }
 
     /**
