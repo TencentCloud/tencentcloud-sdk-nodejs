@@ -52,6 +52,7 @@ const Job = models.Job;
 const DeleteComputeEnvRequest = models.DeleteComputeEnvRequest;
 const CreateComputeEnvRequest = models.CreateComputeEnvRequest;
 const DescribeComputeEnvCreateInfoResponse = models.DescribeComputeEnvCreateInfoResponse;
+const TerminateJobResponse = models.TerminateJobResponse;
 const ComputeEnvCreateInfo = models.ComputeEnvCreateInfo;
 const DescribeComputeEnvCreateInfosRequest = models.DescribeComputeEnvCreateInfosRequest;
 const DescribeComputeEnvRequest = models.DescribeComputeEnvRequest;
@@ -77,6 +78,7 @@ const RunSecurityServiceEnabled = models.RunSecurityServiceEnabled;
 const CreateTaskTemplateResponse = models.CreateTaskTemplateResponse;
 const DescribeJobRequest = models.DescribeJobRequest;
 const RedirectInfo = models.RedirectInfo;
+const DescribeInstanceCategoriesResponse = models.DescribeInstanceCategoriesResponse;
 const ModifyTaskTemplateResponse = models.ModifyTaskTemplateResponse;
 const SubmitJobResponse = models.SubmitJobResponse;
 const InputMapping = models.InputMapping;
@@ -88,12 +90,11 @@ const CreateComputeEnvResponse = models.CreateComputeEnvResponse;
 const Docker = models.Docker;
 const ModifyComputeEnvResponse = models.ModifyComputeEnvResponse;
 const Placement = models.Placement;
-const ModifyComputeEnvRequest = models.ModifyComputeEnvRequest;
 const ComputeNode = models.ComputeNode;
 const ItemPrice = models.ItemPrice;
 const InstanceTypeQuotaItem = models.InstanceTypeQuotaItem;
 const RetryJobsResponse = models.RetryJobsResponse;
-const TerminateJobResponse = models.TerminateJobResponse;
+const StorageBlock = models.StorageBlock;
 const DescribeJobsRequest = models.DescribeJobsRequest;
 const TaskTemplateView = models.TaskTemplateView;
 const InstanceTypeOptions = models.InstanceTypeOptions;
@@ -105,6 +106,7 @@ const RetryJobsRequest = models.RetryJobsRequest;
 const TaskInstanceView = models.TaskInstanceView;
 const DescribeAvailableCvmInstanceTypesResponse = models.DescribeAvailableCvmInstanceTypesResponse;
 const DescribeTaskResponse = models.DescribeTaskResponse;
+const InstanceCategoryItem = models.InstanceCategoryItem;
 const ComputeEnvView = models.ComputeEnvView;
 const DescribeComputeEnvsResponse = models.DescribeComputeEnvsResponse;
 const DescribeTaskRequest = models.DescribeTaskRequest;
@@ -116,7 +118,8 @@ const RunMonitorServiceEnabled = models.RunMonitorServiceEnabled;
 const TerminateComputeNodeResponse = models.TerminateComputeNodeResponse;
 const VirtualPrivateCloud = models.VirtualPrivateCloud;
 const DescribeAvailableCvmInstanceTypesRequest = models.DescribeAvailableCvmInstanceTypesRequest;
-const StorageBlock = models.StorageBlock;
+const DescribeInstanceCategoriesRequest = models.DescribeInstanceCategoriesRequest;
+const ModifyComputeEnvRequest = models.ModifyComputeEnvRequest;
 const InternetAccessible = models.InternetAccessible;
 const JobView = models.JobView;
 const EnvVar = models.EnvVar;
@@ -298,6 +301,17 @@ class BatchClient extends AbstractClient {
     DescribeTaskTemplates(req, cb) {
         let resp = new DescribeTaskTemplatesResponse();
         this.request("DescribeTaskTemplates", req, resp, cb);
+    }
+
+    /**
+     * 目前对CVM现有实例族划分为四类，每一类包含若干实例族。该接口用于查询实例分类信息。
+     * @param {DescribeInstanceCategoriesRequest} req
+     * @param {function(string, DescribeInstanceCategoriesResponse):void} cb
+     * @public
+     */
+    DescribeInstanceCategories(req, cb) {
+        let resp = new DescribeInstanceCategoriesResponse();
+        this.request("DescribeInstanceCategories", req, resp, cb);
     }
 
     /**

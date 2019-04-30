@@ -988,6 +988,41 @@ class ModifyDeviceAutoRenewFlagRequest extends  AbstractModel {
 }
 
 /**
+ * StartDevices返回参数结构体
+ * @class
+ */
+class StartDevicesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 异步任务ID
+         * @type {number || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * BindPsaTag请求参数结构体
  * @class
  */
@@ -1605,6 +1640,12 @@ class BuyDevicesRequest extends  AbstractModel {
          */
         this.Tags = null;
 
+        /**
+         * 指定数据盘的文件系统格式，当前支持 EXT4和XFS选项， 默认为EXT4。 参数适用于数据盘和Linux， 且在IsZoning为1时生效
+         * @type {string || null}
+         */
+        this.FileSystem = null;
+
     }
 
     /**
@@ -1658,6 +1699,7 @@ class BuyDevicesRequest extends  AbstractModel {
                 this.Tags.push(obj);
             }
         }
+        this.FileSystem = 'FileSystem' in params ? params.FileSystem : null;
 
     }
 }
@@ -3882,6 +3924,12 @@ class SuccessTaskInfo extends  AbstractModel {
          */
         this.TaskId = null;
 
+        /**
+         * 黑石自定义脚本运行任务ID
+         * @type {string || null}
+         */
+        this.CmdTaskId = null;
+
     }
 
     /**
@@ -3893,6 +3941,7 @@ class SuccessTaskInfo extends  AbstractModel {
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
         this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.CmdTaskId = 'CmdTaskId' in params ? params.CmdTaskId : null;
 
     }
 }
@@ -4610,6 +4659,34 @@ class DescribePsaRegulationsResponse extends  AbstractModel {
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * StartDevices请求参数结构体
+ * @class
+ */
+class StartDevicesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 需要开机的设备ID列表
+         * @type {Array.<string> || null}
+         */
+        this.InstanceIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
 
     }
 }
@@ -6450,25 +6527,26 @@ class DeviceInfo extends  AbstractModel {
         this.SubnetId = null;
 
         /**
-         * 设备状态ID
+         * 设备状态ID，取值：<li>1：申领设备中</li><li>2：初始化中</li><li>4：运营中</li><li>7：隔离中</li><li>8：已隔离</li><li>10：解隔离中</li><li>16：故障中</li>
          * @type {number || null}
          */
         this.DeviceStatus = null;
 
         /**
-         * 设备操作状态
+         * 设备操作状态ID，取值：
+<li>1：运行中</li><li>2：正在关机</li><li>3：已关机</li><li>5：正在开机</li><li>7：重启中</li><li>9：重装中</li><li>12：绑定EIP</li><li>13：解绑EIP</li><li>14：绑定LB</li><li>15：解绑LB</li><li>19：更换IP中</li><li>20：制作镜像中</li><li>21：制作镜像失败</li>
          * @type {number || null}
          */
         this.OperateStatus = null;
 
         /**
-         * 操作系统ID
+         * 操作系统ID，参考接口[查询操作系统信息(DescribeOsInfo)](https://cloud.tencent.com/document/product/386/32902)
          * @type {number || null}
          */
         this.OsTypeId = null;
 
         /**
-         * RAID类型ID
+         * RAID类型ID，参考接口[查询机型RAID方式以及系统盘大小(DescribeDeviceClassPartition)](https://cloud.tencent.com/document/product/386/32910)
          * @type {number || null}
          */
         this.RaidId = null;
@@ -6767,6 +6845,7 @@ module.exports = {
     CpuInfo: CpuInfo,
     CustomImage: CustomImage,
     ModifyDeviceAutoRenewFlagRequest: ModifyDeviceAutoRenewFlagRequest,
+    StartDevicesResponse: StartDevicesResponse,
     BindPsaTagRequest: BindPsaTagRequest,
     DescribeRegionsResponse: DescribeRegionsResponse,
     DevicePartition: DevicePartition,
@@ -6837,6 +6916,7 @@ module.exports = {
     BuyDevicesResponse: BuyDevicesResponse,
     ModifyLanIpResponse: ModifyLanIpResponse,
     DescribePsaRegulationsResponse: DescribePsaRegulationsResponse,
+    StartDevicesRequest: StartDevicesRequest,
     DescribeUserCmdsResponse: DescribeUserCmdsResponse,
     ModifyDeviceAutoRenewFlagResponse: ModifyDeviceAutoRenewFlagResponse,
     DescribeOperationResultResponse: DescribeOperationResultResponse,

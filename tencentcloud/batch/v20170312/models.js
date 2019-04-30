@@ -434,7 +434,7 @@ class EnvData extends  AbstractModel {
         this.DataDisks = null;
 
         /**
-         * 私有网络相关信息配置
+         * 私有网络相关信息配置，与Zones和VirtualPrivateClouds不能同时指定。
          * @type {VirtualPrivateCloud || null}
          */
         this.VirtualPrivateCloud = null;
@@ -492,6 +492,18 @@ class EnvData extends  AbstractModel {
          * @type {InstanceTypeOptions || null}
          */
         this.InstanceTypeOptions = null;
+
+        /**
+         * 可用区列表，支持跨可用区创建CVM实例。与VirtualPrivateCloud和VirtualPrivateClouds不能同时指定。
+         * @type {Array.<string> || null}
+         */
+        this.Zones = null;
+
+        /**
+         * 私有网络列表，支持跨私有网络创建CVM实例。与VirtualPrivateCloud和Zones不能同时指定。
+         * @type {Array.<VirtualPrivateCloud> || null}
+         */
+        this.VirtualPrivateClouds = null;
 
     }
 
@@ -558,6 +570,16 @@ class EnvData extends  AbstractModel {
             let obj = new InstanceTypeOptions();
             obj.deserialize(params.InstanceTypeOptions)
             this.InstanceTypeOptions = obj;
+        }
+        this.Zones = 'Zones' in params ? params.Zones : null;
+
+        if (params.VirtualPrivateClouds) {
+            this.VirtualPrivateClouds = new Array();
+            for (let z in params.VirtualPrivateClouds) {
+                let obj = new VirtualPrivateCloud();
+                obj.deserialize(params.VirtualPrivateClouds[z]);
+                this.VirtualPrivateClouds.push(obj);
+            }
         }
 
     }
@@ -2193,6 +2215,34 @@ class DescribeComputeEnvCreateInfoResponse extends  AbstractModel {
 }
 
 /**
+ * TerminateJob返回参数结构体
+ * @class
+ */
+class TerminateJobResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * 计算环境创建信息。
  * @class
  */
@@ -3535,6 +3585,49 @@ class RedirectInfo extends  AbstractModel {
 }
 
 /**
+ * DescribeInstanceCategories返回参数结构体
+ * @class
+ */
+class DescribeInstanceCategoriesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * CVM实例分类列表
+         * @type {Array.<InstanceCategoryItem> || null}
+         */
+        this.InstanceCategorySet = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.InstanceCategorySet) {
+            this.InstanceCategorySet = new Array();
+            for (let z in params.InstanceCategorySet) {
+                let obj = new InstanceCategoryItem();
+                obj.deserialize(params.InstanceCategorySet[z]);
+                this.InstanceCategorySet.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * ModifyTaskTemplate返回参数结构体
  * @class
  */
@@ -3952,67 +4045,6 @@ class Placement extends  AbstractModel {
 }
 
 /**
- * ModifyComputeEnv请求参数结构体
- * @class
- */
-class ModifyComputeEnvRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 计算环境ID
-         * @type {string || null}
-         */
-        this.EnvId = null;
-
-        /**
-         * 计算节点期望个数
-         * @type {number || null}
-         */
-        this.DesiredComputeNodeCount = null;
-
-        /**
-         * 计算环境名称
-         * @type {string || null}
-         */
-        this.EnvName = null;
-
-        /**
-         * 计算环境描述
-         * @type {string || null}
-         */
-        this.EnvDescription = null;
-
-        /**
-         * 计算环境属性数据
-         * @type {ComputeEnvData || null}
-         */
-        this.EnvData = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.EnvId = 'EnvId' in params ? params.EnvId : null;
-        this.DesiredComputeNodeCount = 'DesiredComputeNodeCount' in params ? params.DesiredComputeNodeCount : null;
-        this.EnvName = 'EnvName' in params ? params.EnvName : null;
-        this.EnvDescription = 'EnvDescription' in params ? params.EnvDescription : null;
-
-        if (params.EnvData) {
-            let obj = new ComputeEnvData();
-            obj.deserialize(params.EnvData)
-            this.EnvData = obj;
-        }
-
-    }
-}
-
-/**
  * 计算节点
  * @class
  */
@@ -4309,18 +4341,33 @@ class RetryJobsResponse extends  AbstractModel {
 }
 
 /**
- * TerminateJob返回参数结构体
+ * HDD的本地存储信息
  * @class
  */
-class TerminateJobResponse extends  AbstractModel {
+class StorageBlock extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * HDD本地存储类型，值为：LOCAL_PRO.
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.Type = null;
+
+        /**
+         * HDD本地存储的最小容量
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.MinSize = null;
+
+        /**
+         * HDD本地存储的最大容量
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.MaxSize = null;
 
     }
 
@@ -4331,7 +4378,9 @@ class TerminateJobResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.MinSize = 'MinSize' in params ? params.MinSize : null;
+        this.MaxSize = 'MaxSize' in params ? params.MaxSize : null;
 
     }
 }
@@ -4910,6 +4959,41 @@ class DescribeTaskResponse extends  AbstractModel {
             this.TaskInstanceMetrics = obj;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 实例分类列表
+ * @class
+ */
+class InstanceCategoryItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例类型名
+         * @type {string || null}
+         */
+        this.InstanceCategory = null;
+
+        /**
+         * 实例族列表
+         * @type {Array.<string> || null}
+         */
+        this.InstanceFamilySet = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceCategory = 'InstanceCategory' in params ? params.InstanceCategory : null;
+        this.InstanceFamilySet = 'InstanceFamilySet' in params ? params.InstanceFamilySet : null;
 
     }
 }
@@ -5499,33 +5583,12 @@ class DescribeAvailableCvmInstanceTypesRequest extends  AbstractModel {
 }
 
 /**
- * HDD的本地存储信息
+ * DescribeInstanceCategories请求参数结构体
  * @class
  */
-class StorageBlock extends  AbstractModel {
+class DescribeInstanceCategoriesRequest extends  AbstractModel {
     constructor(){
         super();
-
-        /**
-         * HDD本地存储类型，值为：LOCAL_PRO.
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.Type = null;
-
-        /**
-         * HDD本地存储的最小容量
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.MinSize = null;
-
-        /**
-         * HDD本地存储的最大容量
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.MaxSize = null;
 
     }
 
@@ -5536,9 +5599,67 @@ class StorageBlock extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Type = 'Type' in params ? params.Type : null;
-        this.MinSize = 'MinSize' in params ? params.MinSize : null;
-        this.MaxSize = 'MaxSize' in params ? params.MaxSize : null;
+
+    }
+}
+
+/**
+ * ModifyComputeEnv请求参数结构体
+ * @class
+ */
+class ModifyComputeEnvRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 计算环境ID
+         * @type {string || null}
+         */
+        this.EnvId = null;
+
+        /**
+         * 计算节点期望个数
+         * @type {number || null}
+         */
+        this.DesiredComputeNodeCount = null;
+
+        /**
+         * 计算环境名称
+         * @type {string || null}
+         */
+        this.EnvName = null;
+
+        /**
+         * 计算环境描述
+         * @type {string || null}
+         */
+        this.EnvDescription = null;
+
+        /**
+         * 计算环境属性数据
+         * @type {ComputeEnvData || null}
+         */
+        this.EnvData = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.EnvId = 'EnvId' in params ? params.EnvId : null;
+        this.DesiredComputeNodeCount = 'DesiredComputeNodeCount' in params ? params.DesiredComputeNodeCount : null;
+        this.EnvName = 'EnvName' in params ? params.EnvName : null;
+        this.EnvDescription = 'EnvDescription' in params ? params.EnvDescription : null;
+
+        if (params.EnvData) {
+            let obj = new ComputeEnvData();
+            obj.deserialize(params.EnvData)
+            this.EnvData = obj;
+        }
 
     }
 }
@@ -5753,6 +5874,7 @@ module.exports = {
     DeleteComputeEnvRequest: DeleteComputeEnvRequest,
     CreateComputeEnvRequest: CreateComputeEnvRequest,
     DescribeComputeEnvCreateInfoResponse: DescribeComputeEnvCreateInfoResponse,
+    TerminateJobResponse: TerminateJobResponse,
     ComputeEnvCreateInfo: ComputeEnvCreateInfo,
     DescribeComputeEnvCreateInfosRequest: DescribeComputeEnvCreateInfosRequest,
     DescribeComputeEnvRequest: DescribeComputeEnvRequest,
@@ -5778,6 +5900,7 @@ module.exports = {
     CreateTaskTemplateResponse: CreateTaskTemplateResponse,
     DescribeJobRequest: DescribeJobRequest,
     RedirectInfo: RedirectInfo,
+    DescribeInstanceCategoriesResponse: DescribeInstanceCategoriesResponse,
     ModifyTaskTemplateResponse: ModifyTaskTemplateResponse,
     SubmitJobResponse: SubmitJobResponse,
     InputMapping: InputMapping,
@@ -5789,12 +5912,11 @@ module.exports = {
     Docker: Docker,
     ModifyComputeEnvResponse: ModifyComputeEnvResponse,
     Placement: Placement,
-    ModifyComputeEnvRequest: ModifyComputeEnvRequest,
     ComputeNode: ComputeNode,
     ItemPrice: ItemPrice,
     InstanceTypeQuotaItem: InstanceTypeQuotaItem,
     RetryJobsResponse: RetryJobsResponse,
-    TerminateJobResponse: TerminateJobResponse,
+    StorageBlock: StorageBlock,
     DescribeJobsRequest: DescribeJobsRequest,
     TaskTemplateView: TaskTemplateView,
     InstanceTypeOptions: InstanceTypeOptions,
@@ -5806,6 +5928,7 @@ module.exports = {
     TaskInstanceView: TaskInstanceView,
     DescribeAvailableCvmInstanceTypesResponse: DescribeAvailableCvmInstanceTypesResponse,
     DescribeTaskResponse: DescribeTaskResponse,
+    InstanceCategoryItem: InstanceCategoryItem,
     ComputeEnvView: ComputeEnvView,
     DescribeComputeEnvsResponse: DescribeComputeEnvsResponse,
     DescribeTaskRequest: DescribeTaskRequest,
@@ -5817,7 +5940,8 @@ module.exports = {
     TerminateComputeNodeResponse: TerminateComputeNodeResponse,
     VirtualPrivateCloud: VirtualPrivateCloud,
     DescribeAvailableCvmInstanceTypesRequest: DescribeAvailableCvmInstanceTypesRequest,
-    StorageBlock: StorageBlock,
+    DescribeInstanceCategoriesRequest: DescribeInstanceCategoriesRequest,
+    ModifyComputeEnvRequest: ModifyComputeEnvRequest,
     InternetAccessible: InternetAccessible,
     JobView: JobView,
     EnvVar: EnvVar,
