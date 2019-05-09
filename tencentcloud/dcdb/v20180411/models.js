@@ -200,6 +200,7 @@ class ParamDesc extends  AbstractModel {
 
         /**
          * 设置过的值，参数生效后，该值和value一样。未设置过就不返回该字段。
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.SetValue = null;
@@ -686,6 +687,7 @@ class CreateDCDBInstanceResponse extends  AbstractModel {
 
         /**
          * 订单对应的实例 ID 列表，如果此处没有返回实例 ID，可以通过订单查询接口获取。还可通过实例查询接口查询实例是否创建完成。
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<string> || null}
          */
         this.InstanceIds = null;
@@ -734,6 +736,7 @@ class ParamConstraint extends  AbstractModel {
 
         /**
          * 约束类型为section时的范围
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {ConstraintRange || null}
          */
         this.Range = null;
@@ -1246,7 +1249,7 @@ class DescribeSqlLogsRequest extends  AbstractModel {
         this.Offset = null;
 
         /**
-         * 拉取数量（0-1000，为0时拉取总数信息）。
+         * 拉取数量（0-10000，为0时拉取总数信息）。
          * @type {number || null}
          */
         this.Limit = null;
@@ -1517,6 +1520,7 @@ class Deal extends  AbstractModel {
 
         /**
          * 只有创建实例的订单会填充该字段，表示该订单创建的实例的 ID。
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<string> || null}
          */
         this.InstanceIds = null;
@@ -2079,6 +2083,7 @@ class DCDBInstanceInfo extends  AbstractModel {
 
         /**
          * 实例处于异步任务状态时，表示异步任务流程ID
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.Locker = null;
@@ -2088,6 +2093,12 @@ class DCDBInstanceInfo extends  AbstractModel {
          * @type {number || null}
          */
         this.WanStatus = null;
+
+        /**
+         * 该实例是否支持审计。1-支持；0-不支持
+         * @type {number || null}
+         */
+        this.IsAuditSupported = null;
 
     }
 
@@ -2143,6 +2154,7 @@ class DCDBInstanceInfo extends  AbstractModel {
         this.Paymode = 'Paymode' in params ? params.Paymode : null;
         this.Locker = 'Locker' in params ? params.Locker : null;
         this.WanStatus = 'WanStatus' in params ? params.WanStatus : null;
+        this.IsAuditSupported = 'IsAuditSupported' in params ? params.IsAuditSupported : null;
 
     }
 }
@@ -3398,7 +3410,7 @@ class InitDCDBInstancesRequest extends  AbstractModel {
         this.InstanceIds = null;
 
         /**
-         * 参数列表。本接口的可选值为：character_set_server（字符集，必传），lower_case_table_names（表名大小写敏感，必传），innodb_page_size（innodb数据页，默认16K），sync_mode（同步模式：0 - 异步； 1 - 强同步；2 - 强同步可退化。默认为强同步）。
+         * 参数列表。本接口的可选值为：character_set_server（字符集，必传），lower_case_table_names（表名大小写敏感，必传，0 - 敏感；1-不敏感），innodb_page_size（innodb数据页，默认16K），sync_mode（同步模式：0 - 异步； 1 - 强同步；2 - 强同步可退化。默认为强同步）。
          * @type {Array.<DBParamValue> || null}
          */
         this.Params = null;
@@ -3668,7 +3680,11 @@ class CreateDCDBInstanceRequest extends  AbstractModel {
         this.SubnetId = null;
 
         /**
-         * 数据库引擎版本，当前可选：10.0.10，10.1.9，5.7.17
+         * 数据库引擎版本，当前可选：10.0.10，10.1.9，5.7.17。
+10.0.10 - Mariadb 10.0.10；
+10.1.9 - Mariadb 10.1.9；
+5.7.17 - Percona 5.7.17。
+如果不填的话，默认为10.1.9，表示Mariadb 10.1.9。
          * @type {string || null}
          */
         this.DbVersionId = null;
@@ -4202,6 +4218,12 @@ class LogFileInfo extends  AbstractModel {
          */
         this.Uri = null;
 
+        /**
+         * 文件名
+         * @type {string || null}
+         */
+        this.FileName = null;
+
     }
 
     /**
@@ -4214,6 +4236,7 @@ class LogFileInfo extends  AbstractModel {
         this.Mtime = 'Mtime' in params ? params.Mtime : null;
         this.Length = 'Length' in params ? params.Length : null;
         this.Uri = 'Uri' in params ? params.Uri : null;
+        this.FileName = 'FileName' in params ? params.FileName : null;
 
     }
 }
@@ -4530,6 +4553,7 @@ class DescribeAccountsResponse extends  AbstractModel {
 
         /**
          * 实例用户列表。
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<DBAccount> || null}
          */
         this.Users = null;

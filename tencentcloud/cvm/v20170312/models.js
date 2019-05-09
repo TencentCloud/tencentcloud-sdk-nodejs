@@ -108,7 +108,7 @@ class RenewInstancesRequest extends  AbstractModel {
         this.InstanceIds = null;
 
         /**
-         * 预付费模式，即包年包月相关参数设置。通过该参数可以指定包年包月实例的续费时长、是否设置自动续费等属性。
+         * 预付费模式，即包年包月相关参数设置。通过该参数可以指定包年包月实例的续费时长、是否设置自动续费等属性。包年包月实例该参数为必传参数。
          * @type {InstanceChargePrepaid || null}
          */
         this.InstanceChargePrepaid = null;
@@ -1157,6 +1157,7 @@ class ResetInstanceRequest extends  AbstractModel {
 
         /**
          * 指定有效的[镜像](https://cloud.tencent.com/document/product/213/4940)ID，格式形如`img-xxx`。镜像类型分为四种：<br/><li>公共镜像</li><li>自定义镜像</li><li>共享镜像</li><li>服务市场镜像</li><br/>可通过以下方式获取可用的镜像ID：<br/><li>`公共镜像`、`自定义镜像`、`共享镜像`的镜像ID可通过登录[控制台](https://console.cloud.tencent.com/cvm/image?rid=1&imageType=PUBLIC_IMAGE)查询；`服务镜像市场`的镜像ID可通过[云市场](https://market.cloud.tencent.com/list)查询。</li><li>通过调用接口 [DescribeImages](https://cloud.tencent.com/document/api/213/9418) ，取返回信息中的`ImageId`字段。</li>
+<br>默认取值：默认使用当前镜像。
          * @type {string || null}
          */
         this.ImageId = null;
@@ -1178,6 +1179,12 @@ class ResetInstanceRequest extends  AbstractModel {
          * @type {EnhancedService || null}
          */
         this.EnhancedService = null;
+
+        /**
+         * 重装系统时，可以指定修改实例的HostName。
+         * @type {string || null}
+         */
+        this.HostName = null;
 
     }
 
@@ -1208,6 +1215,7 @@ class ResetInstanceRequest extends  AbstractModel {
             obj.deserialize(params.EnhancedService)
             this.EnhancedService = obj;
         }
+        this.HostName = 'HostName' in params ? params.HostName : null;
 
     }
 }
@@ -3341,6 +3349,13 @@ class Image extends  AbstractModel {
          */
         this.IsSupportCloudinit = null;
 
+        /**
+         * 镜像关联的快照信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<Snapshot> || null}
+         */
+        this.SnapshotSet = null;
+
     }
 
     /**
@@ -3364,6 +3379,15 @@ class Image extends  AbstractModel {
         this.ImageSource = 'ImageSource' in params ? params.ImageSource : null;
         this.SyncPercent = 'SyncPercent' in params ? params.SyncPercent : null;
         this.IsSupportCloudinit = 'IsSupportCloudinit' in params ? params.IsSupportCloudinit : null;
+
+        if (params.SnapshotSet) {
+            this.SnapshotSet = new Array();
+            for (let z in params.SnapshotSet) {
+                let obj = new Snapshot();
+                obj.deserialize(params.SnapshotSet[z]);
+                this.SnapshotSet.push(obj);
+            }
+        }
 
     }
 }
@@ -5310,6 +5334,12 @@ class ModifyInstancesVpcAttributeRequest extends  AbstractModel {
          */
         this.ForceStop = null;
 
+        /**
+         * 是否保留主机名。默认为FALSE。
+         * @type {boolean || null}
+         */
+        this.ReserveHostName = null;
+
     }
 
     /**
@@ -5327,6 +5357,7 @@ class ModifyInstancesVpcAttributeRequest extends  AbstractModel {
             this.VirtualPrivateCloud = obj;
         }
         this.ForceStop = 'ForceStop' in params ? params.ForceStop : null;
+        this.ReserveHostName = 'ReserveHostName' in params ? params.ReserveHostName : null;
 
     }
 }
@@ -7371,6 +7402,50 @@ class DisassociateSecurityGroupsResponse extends  AbstractModel {
 }
 
 /**
+ * 描述镜像关联的快照信息
+ * @class
+ */
+class Snapshot extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 快照Id。
+         * @type {string || null}
+         */
+        this.SnapshotId = null;
+
+        /**
+         * 创建此快照的云硬盘类型。取值范围：
+SYSTEM_DISK：系统盘
+DATA_DISK：数据盘。
+         * @type {string || null}
+         */
+        this.DiskUsage = null;
+
+        /**
+         * 创建此快照的云硬盘大小，单位GB。
+         * @type {number || null}
+         */
+        this.DiskSize = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SnapshotId = 'SnapshotId' in params ? params.SnapshotId : null;
+        this.DiskUsage = 'DiskUsage' in params ? params.DiskUsage : null;
+        this.DiskSize = 'DiskSize' in params ? params.DiskSize : null;
+
+    }
+}
+
+/**
  * ModifyInstancesProject返回参数结构体
  * @class
  */
@@ -7640,6 +7715,7 @@ module.exports = {
     InternetAccessible: InternetAccessible,
     RenewHostsResponse: RenewHostsResponse,
     DisassociateSecurityGroupsResponse: DisassociateSecurityGroupsResponse,
+    Snapshot: Snapshot,
     ModifyInstancesProjectResponse: ModifyInstancesProjectResponse,
     InstanceChargePrepaid: InstanceChargePrepaid,
     Price: Price,

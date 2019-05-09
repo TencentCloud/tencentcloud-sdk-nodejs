@@ -212,7 +212,7 @@ class LanguageDetectRequest extends  AbstractModel {
         this.Text = null;
 
         /**
-         * 项目id
+         * 项目ID，可以根据控制台-账号中心-项目管理中的配置填写，如无配置请填写默认项目ID:0
          * @type {number || null}
          */
         this.ProjectId = null;
@@ -431,7 +431,7 @@ class SpeechTranslateRequest extends  AbstractModel {
         this.Data = null;
 
         /**
-         * 项目id，用户可自定义
+         * 项目ID，可以根据控制台-账号中心-项目管理中的配置填写，如无配置请填写默认项目ID:0
          * @type {number || null}
          */
         this.ProjectId = null;
@@ -503,7 +503,7 @@ class ImageTranslateRequest extends  AbstractModel {
         this.Target = null;
 
         /**
-         * 项目id
+         * 项目ID，可以根据控制台-账号中心-项目管理中的配置填写，如无配置请填写默认项目ID:0
          * @type {number || null}
          */
         this.ProjectId = null;
@@ -555,7 +555,7 @@ class TextTranslateRequest extends  AbstractModel {
         this.Target = null;
 
         /**
-         * 项目id
+         * 项目ID，可以根据控制台-账号中心-项目管理中的配置填写，如无配置请填写默认项目ID:0
          * @type {number || null}
          */
         this.ProjectId = null;

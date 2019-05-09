@@ -25,7 +25,7 @@ class SendVcodeResponse extends  AbstractModel {
         super();
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -53,13 +53,13 @@ class DeleteAccountRequest extends  AbstractModel {
         super();
 
         /**
-         * 模块名
+         * 模块名AccountMng
          * @type {string || null}
          */
         this.Module = null;
 
         /**
-         * 操作名
+         * 操作名DeleteAccount
          * @type {string || null}
          */
         this.Operation = null;
@@ -95,13 +95,13 @@ class CreateSealRequest extends  AbstractModel {
         super();
 
         /**
-         * 模块名
+         * 模块名SealMng
          * @type {string || null}
          */
         this.Module = null;
 
         /**
-         * 操作名
+         * 操作名CreateSeal
          * @type {string || null}
          */
         this.Operation = null;
@@ -118,6 +118,12 @@ class CreateSealRequest extends  AbstractModel {
          */
         this.ImgUrl = null;
 
+        /**
+         * 图片数据，base64编码
+         * @type {string || null}
+         */
+        this.ImgData = null;
+
     }
 
     /**
@@ -131,6 +137,7 @@ class CreateSealRequest extends  AbstractModel {
         this.Operation = 'Operation' in params ? params.Operation : null;
         this.AccountResId = 'AccountResId' in params ? params.AccountResId : null;
         this.ImgUrl = 'ImgUrl' in params ? params.ImgUrl : null;
+        this.ImgData = 'ImgData' in params ? params.ImgData : null;
 
     }
 }
@@ -150,7 +157,7 @@ class CreateSealResponse extends  AbstractModel {
         this.SealResId = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -247,7 +254,7 @@ class DescribeTaskStatusResponse extends  AbstractModel {
         this.TaskType = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -277,13 +284,13 @@ class CheckVcodeRequest extends  AbstractModel {
         super();
 
         /**
-         * 模块名
+         * 模块名VerifyCode
          * @type {string || null}
          */
         this.Module = null;
 
         /**
-         * 操作名
+         * 操作名CheckVcode
          * @type {string || null}
          */
         this.Operation = null;
@@ -333,7 +340,7 @@ class CheckVcodeResponse extends  AbstractModel {
         super();
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -367,7 +374,7 @@ class DownloadContractResponse extends  AbstractModel {
         this.TaskId = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -452,7 +459,7 @@ class SignContractByKeywordResponse extends  AbstractModel {
         super();
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -515,6 +522,12 @@ class SignInfo extends  AbstractModel {
          */
         this.CertType = null;
 
+        /**
+         * 签名域的标签值
+         * @type {string || null}
+         */
+        this.SignLocation = null;
+
     }
 
     /**
@@ -530,6 +543,7 @@ class SignInfo extends  AbstractModel {
         this.SealId = 'SealId' in params ? params.SealId : null;
         this.ImageData = 'ImageData' in params ? params.ImageData : null;
         this.CertType = 'CertType' in params ? params.CertType : null;
+        this.SignLocation = 'SignLocation' in params ? params.SignLocation : null;
 
     }
 }
@@ -543,13 +557,13 @@ class DeleteSealRequest extends  AbstractModel {
         super();
 
         /**
-         * 模块名
+         * 模块名SealMng
          * @type {string || null}
          */
         this.Module = null;
 
         /**
-         * 操作名
+         * 操作名DeleteSeal
          * @type {string || null}
          */
         this.Operation = null;
@@ -592,13 +606,13 @@ class DownloadContractRequest extends  AbstractModel {
         super();
 
         /**
-         * 模块名
+         * 模块名ContractMng
          * @type {string || null}
          */
         this.Module = null;
 
         /**
-         * 操作名
+         * 操作名DownloadContract
          * @type {string || null}
          */
         this.Operation = null;
@@ -640,7 +654,7 @@ class CreateEnterpriseAccountResponse extends  AbstractModel {
         this.AccountResId = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -675,7 +689,7 @@ class CreatePersonalAccountResponse extends  AbstractModel {
         this.AccountResId = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -704,13 +718,13 @@ class CreateEnterpriseAccountRequest extends  AbstractModel {
         super();
 
         /**
-         * 模块名
+         * 模块名AccountMng
          * @type {string || null}
          */
         this.Module = null;
 
         /**
-         * 操作名
+         * 操作名CreateEnterpriseAccount
          * @type {string || null}
          */
         this.Operation = null;
@@ -734,7 +748,7 @@ class CreateEnterpriseAccountRequest extends  AbstractModel {
         this.IdentNo = null;
 
         /**
-         * 企业联系电话
+         * 企业联系人手机号
          * @type {string || null}
          */
         this.MobilePhone = null;
@@ -795,13 +809,13 @@ class CreateContractByUploadRequest extends  AbstractModel {
         super();
 
         /**
-         * 模块名
+         * 模块名ContractMng
          * @type {string || null}
          */
         this.Module = null;
 
         /**
-         * 操作名
+         * 操作名CreateContractByUpload
          * @type {string || null}
          */
         this.Operation = null;
@@ -825,16 +839,22 @@ class CreateContractByUploadRequest extends  AbstractModel {
         this.ContractName = null;
 
         /**
+         * 合同发起方帐号ID
+         * @type {string || null}
+         */
+        this.Initiator = null;
+
+        /**
          * 备注
          * @type {string || null}
          */
         this.Remarks = null;
 
         /**
-         * 合同发起方帐号ID
+         * 过期时间
          * @type {string || null}
          */
-        this.Initiator = null;
+        this.ExpireTime = null;
 
     }
 
@@ -858,8 +878,9 @@ class CreateContractByUploadRequest extends  AbstractModel {
         }
         this.ContractFile = 'ContractFile' in params ? params.ContractFile : null;
         this.ContractName = 'ContractName' in params ? params.ContractName : null;
-        this.Remarks = 'Remarks' in params ? params.Remarks : null;
         this.Initiator = 'Initiator' in params ? params.Initiator : null;
+        this.Remarks = 'Remarks' in params ? params.Remarks : null;
+        this.ExpireTime = 'ExpireTime' in params ? params.ExpireTime : null;
 
     }
 }
@@ -879,7 +900,7 @@ class CreateContractByUploadResponse extends  AbstractModel {
         this.TaskId = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -914,7 +935,7 @@ class DeleteSealResponse extends  AbstractModel {
         this.SealResId = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -943,13 +964,13 @@ class CreatePersonalAccountRequest extends  AbstractModel {
         super();
 
         /**
-         * 模块名
+         * 模块名AccountMng
          * @type {string || null}
          */
         this.Module = null;
 
         /**
-         * 操作名
+         * 操作名CreatePersonalAccount
          * @type {string || null}
          */
         this.Operation = null;
@@ -1006,13 +1027,13 @@ class DescribeTaskStatusRequest extends  AbstractModel {
         super();
 
         /**
-         * 模块名
+         * 模块名CommonMng
          * @type {string || null}
          */
         this.Module = null;
 
         /**
-         * 操作名
+         * 操作名DescribeTaskStatus
          * @type {string || null}
          */
         this.Operation = null;
@@ -1048,13 +1069,13 @@ class SignContractByKeywordRequest extends  AbstractModel {
         super();
 
         /**
-         * 模块名
+         * 模块名ContractMng
          * @type {string || null}
          */
         this.Module = null;
 
         /**
-         * 操作名
+         * 操作名SignContractByKeyword
          * @type {string || null}
          */
         this.Operation = null;
@@ -1084,16 +1105,28 @@ class SignContractByKeywordRequest extends  AbstractModel {
         this.Position = null;
 
         /**
+         * 签署关键字，偏移坐标原点为关键字中心
+         * @type {SignKeyword || null}
+         */
+        this.SignKeyword = null;
+
+        /**
          * 签章ID
          * @type {string || null}
          */
         this.SealResId = null;
 
         /**
-         * 签署关键字，坐标和范围不得超过合同文件边界
-         * @type {SignKeyword || null}
+         * 选用证书类型：1  表示RSA证书， 2 表示国密证书， 参数不传时默认为1
+         * @type {number || null}
          */
-        this.SignKeyword = null;
+        this.CertType = null;
+
+        /**
+         * 签名图片，base64编码
+         * @type {string || null}
+         */
+        this.ImageData = null;
 
     }
 
@@ -1110,13 +1143,15 @@ class SignContractByKeywordRequest extends  AbstractModel {
         this.AccountResId = 'AccountResId' in params ? params.AccountResId : null;
         this.AuthorizationTime = 'AuthorizationTime' in params ? params.AuthorizationTime : null;
         this.Position = 'Position' in params ? params.Position : null;
-        this.SealResId = 'SealResId' in params ? params.SealResId : null;
 
         if (params.SignKeyword) {
             let obj = new SignKeyword();
             obj.deserialize(params.SignKeyword)
             this.SignKeyword = obj;
         }
+        this.SealResId = 'SealResId' in params ? params.SealResId : null;
+        this.CertType = 'CertType' in params ? params.CertType : null;
+        this.ImageData = 'ImageData' in params ? params.ImageData : null;
 
     }
 }
@@ -1130,13 +1165,13 @@ class SendVcodeRequest extends  AbstractModel {
         super();
 
         /**
-         * 模块名
+         * 模块名VerifyCode
          * @type {string || null}
          */
         this.Module = null;
 
         /**
-         * 操作名
+         * 操作名SendVcode
          * @type {string || null}
          */
         this.Operation = null;
@@ -1179,13 +1214,13 @@ class SignContractByCoordinateRequest extends  AbstractModel {
         super();
 
         /**
-         * 模块名
+         * 模块名ContractMng
          * @type {string || null}
          */
         this.Module = null;
 
         /**
-         * 操作名
+         * 操作名SignContractByCoordinate
          * @type {string || null}
          */
         this.Operation = null;
@@ -1215,7 +1250,7 @@ class SignContractByCoordinateRequest extends  AbstractModel {
         this.Position = null;
 
         /**
-         * 签署坐标，坐标不得超过合同文件边界
+         * 签署坐标，坐标原点在文件左下角，坐标单位为磅，坐标不得超过合同文件边界
          * @type {Array.<SignLocation> || null}
          */
         this.SignLocations = null;
@@ -1225,6 +1260,18 @@ class SignContractByCoordinateRequest extends  AbstractModel {
          * @type {string || null}
          */
         this.SealResId = null;
+
+        /**
+         * 选用证书类型：1  表示RSA证书， 2 表示国密证书， 参数不传时默认为1
+         * @type {number || null}
+         */
+        this.CertType = null;
+
+        /**
+         * 签名图片，base64编码
+         * @type {string || null}
+         */
+        this.ImageData = null;
 
     }
 
@@ -1251,6 +1298,8 @@ class SignContractByCoordinateRequest extends  AbstractModel {
             }
         }
         this.SealResId = 'SealResId' in params ? params.SealResId : null;
+        this.CertType = 'CertType' in params ? params.CertType : null;
+        this.ImageData = 'ImageData' in params ? params.ImageData : null;
 
     }
 }
@@ -1264,7 +1313,7 @@ class SignContractByCoordinateResponse extends  AbstractModel {
         super();
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -1304,7 +1353,7 @@ class DeleteAccountResponse extends  AbstractModel {
         this.DelFailedList = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;

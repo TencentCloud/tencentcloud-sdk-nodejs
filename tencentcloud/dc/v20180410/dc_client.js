@@ -16,22 +16,34 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
-const Filter = models.Filter;
-const CreateDirectConnectTunnelResponse = models.CreateDirectConnectTunnelResponse;
-const DeleteDirectConnectTunnelRequest = models.DeleteDirectConnectTunnelRequest;
-const DeleteDirectConnectTunnelResponse = models.DeleteDirectConnectTunnelResponse;
-const DescribeDirectConnectTunnelsRequest = models.DescribeDirectConnectTunnelsRequest;
 const BgpPeer = models.BgpPeer;
-const DescribeDirectConnectTunnelsResponse = models.DescribeDirectConnectTunnelsResponse;
-const ModifyDirectConnectTunnelAttributeRequest = models.ModifyDirectConnectTunnelAttributeRequest;
-const RouteFilterPrefix = models.RouteFilterPrefix;
 const RejectDirectConnectTunnelRequest = models.RejectDirectConnectTunnelRequest;
-const AcceptDirectConnectTunnelRequest = models.AcceptDirectConnectTunnelRequest;
-const ModifyDirectConnectTunnelAttributeResponse = models.ModifyDirectConnectTunnelAttributeResponse;
-const CreateDirectConnectTunnelRequest = models.CreateDirectConnectTunnelRequest;
-const RejectDirectConnectTunnelResponse = models.RejectDirectConnectTunnelResponse;
-const DirectConnectTunnel = models.DirectConnectTunnel;
+const ModifyDirectConnectAttributeRequest = models.ModifyDirectConnectAttributeRequest;
+const DeleteDirectConnectTunnelRequest = models.DeleteDirectConnectTunnelRequest;
+const CreateDirectConnectResponse = models.CreateDirectConnectResponse;
+const DirectConnect = models.DirectConnect;
+const DescribeAccessPointsResponse = models.DescribeAccessPointsResponse;
 const AcceptDirectConnectTunnelResponse = models.AcceptDirectConnectTunnelResponse;
+const DescribeDirectConnectTunnelsRequest = models.DescribeDirectConnectTunnelsRequest;
+const ModifyDirectConnectTunnelAttributeResponse = models.ModifyDirectConnectTunnelAttributeResponse;
+const RouteFilterPrefix = models.RouteFilterPrefix;
+const AcceptDirectConnectTunnelRequest = models.AcceptDirectConnectTunnelRequest;
+const CreateDirectConnectTunnelRequest = models.CreateDirectConnectTunnelRequest;
+const DeleteDirectConnectResponse = models.DeleteDirectConnectResponse;
+const DescribeDirectConnectsResponse = models.DescribeDirectConnectsResponse;
+const DescribeAccessPointsRequest = models.DescribeAccessPointsRequest;
+const DescribeDirectConnectsRequest = models.DescribeDirectConnectsRequest;
+const ModifyDirectConnectTunnelAttributeRequest = models.ModifyDirectConnectTunnelAttributeRequest;
+const Filter = models.Filter;
+const CreateDirectConnectRequest = models.CreateDirectConnectRequest;
+const ModifyDirectConnectAttributeResponse = models.ModifyDirectConnectAttributeResponse;
+const RejectDirectConnectTunnelResponse = models.RejectDirectConnectTunnelResponse;
+const CreateDirectConnectTunnelResponse = models.CreateDirectConnectTunnelResponse;
+const DeleteDirectConnectTunnelResponse = models.DeleteDirectConnectTunnelResponse;
+const AccessPoint = models.AccessPoint;
+const DeleteDirectConnectRequest = models.DeleteDirectConnectRequest;
+const DescribeDirectConnectTunnelsResponse = models.DescribeDirectConnectTunnelsResponse;
+const DirectConnectTunnel = models.DirectConnectTunnel;
 
 
 /**
@@ -45,6 +57,17 @@ class DcClient extends AbstractClient {
     }
     
     /**
+     * 修改物理专线的属性。
+     * @param {ModifyDirectConnectAttributeRequest} req
+     * @param {function(string, ModifyDirectConnectAttributeResponse):void} cb
+     * @public
+     */
+    ModifyDirectConnectAttribute(req, cb) {
+        let resp = new ModifyDirectConnectAttributeResponse();
+        this.request("ModifyDirectConnectAttribute", req, resp, cb);
+    }
+
+    /**
      * 用于创建专用通道的接口
      * @param {CreateDirectConnectTunnelRequest} req
      * @param {function(string, CreateDirectConnectTunnelResponse):void} cb
@@ -56,14 +79,15 @@ class DcClient extends AbstractClient {
     }
 
     /**
-     * 用于查询专用通道列表。
-     * @param {DescribeDirectConnectTunnelsRequest} req
-     * @param {function(string, DescribeDirectConnectTunnelsResponse):void} cb
+     * 删除物理专线。
+只能删除处于状态的物理专线。
+     * @param {DeleteDirectConnectRequest} req
+     * @param {function(string, DeleteDirectConnectResponse):void} cb
      * @public
      */
-    DescribeDirectConnectTunnels(req, cb) {
-        let resp = new DescribeDirectConnectTunnelsResponse();
-        this.request("DescribeDirectConnectTunnels", req, resp, cb);
+    DeleteDirectConnect(req, cb) {
+        let resp = new DeleteDirectConnectResponse();
+        this.request("DeleteDirectConnect", req, resp, cb);
     }
 
     /**
@@ -89,6 +113,43 @@ class DcClient extends AbstractClient {
     }
 
     /**
+     * 查询物理专线接入点
+
+     * @param {DescribeAccessPointsRequest} req
+     * @param {function(string, DescribeAccessPointsResponse):void} cb
+     * @public
+     */
+    DescribeAccessPoints(req, cb) {
+        let resp = new DescribeAccessPointsResponse();
+        this.request("DescribeAccessPoints", req, resp, cb);
+    }
+
+    /**
+     * 用于查询专用通道列表。
+     * @param {DescribeDirectConnectTunnelsRequest} req
+     * @param {function(string, DescribeDirectConnectTunnelsResponse):void} cb
+     * @public
+     */
+    DescribeDirectConnectTunnels(req, cb) {
+        let resp = new DescribeDirectConnectTunnelsResponse();
+        this.request("DescribeDirectConnectTunnels", req, resp, cb);
+    }
+
+    /**
+     * 申请物理专线接入。
+调用该接口时，请注意：
+账号要进行实名认证，否则不允许申请物理专线；
+若账户下存在欠费状态的物理专线，则不能申请更多的物理专线。
+     * @param {CreateDirectConnectRequest} req
+     * @param {function(string, CreateDirectConnectResponse):void} cb
+     * @public
+     */
+    CreateDirectConnect(req, cb) {
+        let resp = new CreateDirectConnectResponse();
+        this.request("CreateDirectConnect", req, resp, cb);
+    }
+
+    /**
      * 拒绝专用通道申请
      * @param {RejectDirectConnectTunnelRequest} req
      * @param {function(string, RejectDirectConnectTunnelResponse):void} cb
@@ -97,6 +158,17 @@ class DcClient extends AbstractClient {
     RejectDirectConnectTunnel(req, cb) {
         let resp = new RejectDirectConnectTunnelResponse();
         this.request("RejectDirectConnectTunnel", req, resp, cb);
+    }
+
+    /**
+     * 查询物理专线列表。
+     * @param {DescribeDirectConnectsRequest} req
+     * @param {function(string, DescribeDirectConnectsResponse):void} cb
+     * @public
+     */
+    DescribeDirectConnects(req, cb) {
+        let resp = new DescribeDirectConnectsResponse();
+        this.request("DescribeDirectConnects", req, resp, cb);
     }
 
     /**

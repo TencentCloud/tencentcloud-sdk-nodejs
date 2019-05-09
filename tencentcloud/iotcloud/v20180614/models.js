@@ -49,7 +49,7 @@ class PublishMessageRequest extends  AbstractModel {
         this.DeviceName = null;
 
         /**
-         * 服务质量等级，取值为0， 1
+         * 服务质量等级，取值为0或1
          * @type {number || null}
          */
         this.Qos = null;
@@ -365,6 +365,55 @@ class MultiDevicesInfo extends  AbstractModel {
 }
 
 /**
+ * PublishAsDevice请求参数结构体
+ * @class
+ */
+class PublishAsDeviceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 产品id
+         * @type {string || null}
+         */
+        this.ProductId = null;
+
+        /**
+         * 设备名称
+         * @type {string || null}
+         */
+        this.DeviceName = null;
+
+        /**
+         * LoRa 设备端口
+         * @type {number || null}
+         */
+        this.Port = null;
+
+        /**
+         * 消息内容
+         * @type {string || null}
+         */
+        this.Payload = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ProductId = 'ProductId' in params ? params.ProductId : null;
+        this.DeviceName = 'DeviceName' in params ? params.DeviceName : null;
+        this.Port = 'Port' in params ? params.Port : null;
+        this.Payload = 'Payload' in params ? params.Payload : null;
+
+    }
+}
+
+/**
  * UpdateDeviceShadow返回参数结构体
  * @class
  */
@@ -547,6 +596,34 @@ class CancelTaskRequest extends  AbstractModel {
 }
 
 /**
+ * PublishToDevice返回参数结构体
+ * @class
+ */
+class PublishToDeviceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * CreateTask返回参数结构体
  * @class
  */
@@ -640,6 +717,41 @@ class BatchUpdateShadow extends  AbstractModel {
             return;
         }
         this.Desired = 'Desired' in params ? params.Desired : null;
+
+    }
+}
+
+/**
+ * 描述键值对过滤器，用于条件过滤查询。例如过滤ID、名称、状态等
+ * @class
+ */
+class Filter extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 过滤键的名称
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 一个或者多个过滤值
+         * @type {Array.<string> || null}
+         */
+        this.Values = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Values = 'Values' in params ? params.Values : null;
 
     }
 }
@@ -1047,6 +1159,34 @@ class DeleteTopicRuleResponse extends  AbstractModel {
 }
 
 /**
+ * DeleteLoraDevice返回参数结构体
+ * @class
+ */
+class DeleteLoraDeviceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeDevice请求参数结构体
  * @class
  */
@@ -1077,6 +1217,83 @@ class DescribeDeviceRequest extends  AbstractModel {
         }
         this.ProductID = 'ProductID' in params ? params.ProductID : null;
         this.DeviceName = 'DeviceName' in params ? params.DeviceName : null;
+
+    }
+}
+
+/**
+ * CreateLoraDevice请求参数结构体
+ * @class
+ */
+class CreateLoraDeviceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 产品 ID ，创建产品时腾讯云为用户分配全局唯一的 ID
+         * @type {string || null}
+         */
+        this.ProductId = null;
+
+        /**
+         * 设备名称
+         * @type {string || null}
+         */
+        this.DeviceName = null;
+
+        /**
+         * 设备类型 ，目前支持A、B、C三种
+         * @type {string || null}
+         */
+        this.DeviceType = null;
+
+        /**
+         * LoRa应用UUID
+         * @type {string || null}
+         */
+        this.AppEui = null;
+
+        /**
+         * LoRa设备UUID
+         * @type {string || null}
+         */
+        this.DeviceEui = null;
+
+        /**
+         * LoRa应用密钥
+         * @type {string || null}
+         */
+        this.AppKey = null;
+
+        /**
+         * LoRa设备验证密钥
+         * @type {string || null}
+         */
+        this.AuthKey = null;
+
+        /**
+         * 设备备注
+         * @type {string || null}
+         */
+        this.Memo = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ProductId = 'ProductId' in params ? params.ProductId : null;
+        this.DeviceName = 'DeviceName' in params ? params.DeviceName : null;
+        this.DeviceType = 'DeviceType' in params ? params.DeviceType : null;
+        this.AppEui = 'AppEui' in params ? params.AppEui : null;
+        this.DeviceEui = 'DeviceEui' in params ? params.DeviceEui : null;
+        this.AppKey = 'AppKey' in params ? params.AppKey : null;
+        this.AuthKey = 'AuthKey' in params ? params.AuthKey : null;
+        this.Memo = 'Memo' in params ? params.Memo : null;
 
     }
 }
@@ -1237,6 +1454,55 @@ class PublishMessageResponse extends  AbstractModel {
 }
 
 /**
+ * PublishToDevice请求参数结构体
+ * @class
+ */
+class PublishToDeviceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 产品id
+         * @type {string || null}
+         */
+        this.ProductId = null;
+
+        /**
+         * 设备名称
+         * @type {string || null}
+         */
+        this.DeviceName = null;
+
+        /**
+         * LoRa 端口
+         * @type {number || null}
+         */
+        this.Port = null;
+
+        /**
+         * 消息内容
+         * @type {string || null}
+         */
+        this.Payload = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ProductId = 'ProductId' in params ? params.ProductId : null;
+        this.DeviceName = 'DeviceName' in params ? params.DeviceName : null;
+        this.Port = 'Port' in params ? params.Port : null;
+        this.Payload = 'Payload' in params ? params.Payload : null;
+
+    }
+}
+
+/**
  * 产品元数据
  * @class
  */
@@ -1260,6 +1526,76 @@ class ProductMetadata extends  AbstractModel {
             return;
         }
         this.CreationDate = 'CreationDate' in params ? params.CreationDate : null;
+
+    }
+}
+
+/**
+ * DescribeLoraDevice返回参数结构体
+ * @class
+ */
+class DescribeLoraDeviceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 设备名称
+         * @type {string || null}
+         */
+        this.DeviceName = null;
+
+        /**
+         * LoRa应用UUID
+         * @type {string || null}
+         */
+        this.AppEui = null;
+
+        /**
+         * LoRa设备UUID
+         * @type {string || null}
+         */
+        this.DeviceEui = null;
+
+        /**
+         * LoRa应用密钥
+         * @type {string || null}
+         */
+        this.AppKey = null;
+
+        /**
+         * 设备类型,目前支持A、B、C三种
+         * @type {string || null}
+         */
+        this.ClassType = null;
+
+        /**
+         * 设备所属产品id
+         * @type {string || null}
+         */
+        this.ProductId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DeviceName = 'DeviceName' in params ? params.DeviceName : null;
+        this.AppEui = 'AppEui' in params ? params.AppEui : null;
+        this.DeviceEui = 'DeviceEui' in params ? params.DeviceEui : null;
+        this.AppKey = 'AppKey' in params ? params.AppKey : null;
+        this.ClassType = 'ClassType' in params ? params.ClassType : null;
+        this.ProductId = 'ProductId' in params ? params.ProductId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1870,24 +2206,24 @@ class CreateTopicRuleRequest extends  AbstractModel {
 }
 
 /**
- * 描述键值对过滤器，用于条件过滤查询。例如过滤ID、名称、状态等
+ * DeleteLoraDevice请求参数结构体
  * @class
  */
-class Filter extends  AbstractModel {
+class DeleteLoraDeviceRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 过滤键的名称
+         * 设备所属产品id
          * @type {string || null}
          */
-        this.Name = null;
+        this.ProductId = null;
 
         /**
-         * 一个或者多个过滤值
-         * @type {Array.<string> || null}
+         * 设备名称
+         * @type {string || null}
          */
-        this.Values = null;
+        this.DeviceName = null;
 
     }
 
@@ -1898,8 +2234,8 @@ class Filter extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Name = 'Name' in params ? params.Name : null;
-        this.Values = 'Values' in params ? params.Values : null;
+        this.ProductId = 'ProductId' in params ? params.ProductId : null;
+        this.DeviceName = 'DeviceName' in params ? params.DeviceName : null;
 
     }
 }
@@ -1966,6 +2302,12 @@ class CreateDeviceRequest extends  AbstractModel {
          */
         this.Skey = null;
 
+        /**
+         * LoRa设备的AppKey
+         * @type {string || null}
+         */
+        this.LoraAppKey = null;
+
     }
 
     /**
@@ -1989,6 +2331,7 @@ class CreateDeviceRequest extends  AbstractModel {
         this.LoraDevEui = 'LoraDevEui' in params ? params.LoraDevEui : null;
         this.LoraMoteType = 'LoraMoteType' in params ? params.LoraMoteType : null;
         this.Skey = 'Skey' in params ? params.Skey : null;
+        this.LoraAppKey = 'LoraAppKey' in params ? params.LoraAppKey : null;
 
     }
 }
@@ -2198,6 +2541,62 @@ class DeleteDeviceResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CreateLoraDevice返回参数结构体
+ * @class
+ */
+class CreateLoraDeviceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * LoRa应用UUID
+         * @type {string || null}
+         */
+        this.AppEui = null;
+
+        /**
+         * LoRa设备UUID
+         * @type {string || null}
+         */
+        this.DeviceEui = null;
+
+        /**
+         * 设备类型,目前支持A、B、C三种
+         * @type {string || null}
+         */
+        this.ClassType = null;
+
+        /**
+         * 设备名称
+         * @type {string || null}
+         */
+        this.DeviceName = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AppEui = 'AppEui' in params ? params.AppEui : null;
+        this.DeviceEui = 'DeviceEui' in params ? params.DeviceEui : null;
+        this.ClassType = 'ClassType' in params ? params.ClassType : null;
+        this.DeviceName = 'DeviceName' in params ? params.DeviceName : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -2433,6 +2832,41 @@ class ReplaceTopicRuleResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeLoraDevice请求参数结构体
+ * @class
+ */
+class DescribeLoraDeviceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 产品id
+         * @type {string || null}
+         */
+        this.ProductId = null;
+
+        /**
+         * 设备名称
+         * @type {string || null}
+         */
+        this.DeviceName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ProductId = 'ProductId' in params ? params.ProductId : null;
+        this.DeviceName = 'DeviceName' in params ? params.DeviceName : null;
+
+    }
+}
+
+/**
  * DescribeDeviceShadow返回参数结构体
  * @class
  */
@@ -2536,6 +2970,24 @@ class ProductProperties extends  AbstractModel {
          */
         this.ProductKey = null;
 
+        /**
+         * 动态注册类型 0-关闭, 1-预定义设备名 2-动态定义设备名
+         * @type {number || null}
+         */
+        this.RegisterType = null;
+
+        /**
+         * 动态注册产品秘钥
+         * @type {string || null}
+         */
+        this.ProductSecret = null;
+
+        /**
+         * RegisterType为2时，设备动态创建的限制数量
+         * @type {number || null}
+         */
+        this.RegisterLimit = null;
+
     }
 
     /**
@@ -2555,6 +3007,37 @@ class ProductProperties extends  AbstractModel {
         this.ModelId = 'ModelId' in params ? params.ModelId : null;
         this.ModelName = 'ModelName' in params ? params.ModelName : null;
         this.ProductKey = 'ProductKey' in params ? params.ProductKey : null;
+        this.RegisterType = 'RegisterType' in params ? params.RegisterType : null;
+        this.ProductSecret = 'ProductSecret' in params ? params.ProductSecret : null;
+        this.RegisterLimit = 'RegisterLimit' in params ? params.RegisterLimit : null;
+
+    }
+}
+
+/**
+ * PublishAsDevice返回参数结构体
+ * @class
+ */
+class PublishAsDeviceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2721,6 +3204,13 @@ class DescribeDeviceResponse extends  AbstractModel {
         this.LoraMoteType = null;
 
         /**
+         * 设备的sdk日志等级
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.LogLevel = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -2758,6 +3248,7 @@ class DescribeDeviceResponse extends  AbstractModel {
         this.NbiotDeviceID = 'NbiotDeviceID' in params ? params.NbiotDeviceID : null;
         this.LoraDevEui = 'LoraDevEui' in params ? params.LoraDevEui : null;
         this.LoraMoteType = 'LoraMoteType' in params ? params.LoraMoteType : null;
+        this.LogLevel = 'LogLevel' in params ? params.LogLevel : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -2969,12 +3460,15 @@ module.exports = {
     DeleteTopicRuleRequest: DeleteTopicRuleRequest,
     DescribeMultiDevicesRequest: DescribeMultiDevicesRequest,
     MultiDevicesInfo: MultiDevicesInfo,
+    PublishAsDeviceRequest: PublishAsDeviceRequest,
     UpdateDeviceShadowResponse: UpdateDeviceShadowResponse,
     DescribeTaskResponse: DescribeTaskResponse,
     CancelTaskRequest: CancelTaskRequest,
+    PublishToDeviceResponse: PublishToDeviceResponse,
     CreateTaskResponse: CreateTaskResponse,
     BatchPublishMessage: BatchPublishMessage,
     BatchUpdateShadow: BatchUpdateShadow,
+    Filter: Filter,
     DeleteDeviceRequest: DeleteDeviceRequest,
     DeleteProductResponse: DeleteProductResponse,
     TopicRulePayload: TopicRulePayload,
@@ -2984,12 +3478,16 @@ module.exports = {
     DescribeDevicesResponse: DescribeDevicesResponse,
     DeviceTag: DeviceTag,
     DeleteTopicRuleResponse: DeleteTopicRuleResponse,
+    DeleteLoraDeviceResponse: DeleteLoraDeviceResponse,
     DescribeDeviceRequest: DescribeDeviceRequest,
+    CreateLoraDeviceRequest: CreateLoraDeviceRequest,
     DescribeTaskRequest: DescribeTaskRequest,
     Task: Task,
     CreateTopicPolicyRequest: CreateTopicPolicyRequest,
     PublishMessageResponse: PublishMessageResponse,
+    PublishToDeviceRequest: PublishToDeviceRequest,
     ProductMetadata: ProductMetadata,
+    DescribeLoraDeviceResponse: DescribeLoraDeviceResponse,
     DescribeTasksResponse: DescribeTasksResponse,
     EnableTopicRuleResponse: EnableTopicRuleResponse,
     CreateProductResponse: CreateProductResponse,
@@ -3004,18 +3502,21 @@ module.exports = {
     CancelTaskResponse: CancelTaskResponse,
     CreateDeviceResponse: CreateDeviceResponse,
     CreateTopicRuleRequest: CreateTopicRuleRequest,
-    Filter: Filter,
+    DeleteLoraDeviceRequest: DeleteLoraDeviceRequest,
     CreateDeviceRequest: CreateDeviceRequest,
     DescribeProductsResponse: DescribeProductsResponse,
     UpdateDeviceShadowRequest: UpdateDeviceShadowRequest,
     CreateProductRequest: CreateProductRequest,
     Attribute: Attribute,
     DeleteDeviceResponse: DeleteDeviceResponse,
+    CreateLoraDeviceResponse: CreateLoraDeviceResponse,
     DeviceInfo: DeviceInfo,
     CreateMultiDeviceResponse: CreateMultiDeviceResponse,
     ReplaceTopicRuleResponse: ReplaceTopicRuleResponse,
+    DescribeLoraDeviceRequest: DescribeLoraDeviceRequest,
     DescribeDeviceShadowResponse: DescribeDeviceShadowResponse,
     ProductProperties: ProductProperties,
+    PublishAsDeviceResponse: PublishAsDeviceResponse,
     CreateMultiDeviceRequest: CreateMultiDeviceRequest,
     EnableTopicRuleRequest: EnableTopicRuleRequest,
     DescribeDeviceResponse: DescribeDeviceResponse,
