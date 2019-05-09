@@ -2382,6 +2382,18 @@ class AddLiveWatermarkRequest extends  AbstractModel {
          */
         this.YPosition = null;
 
+        /**
+         * 水印宽度，占直播原始画面宽度百分比，建议高宽只设置一项，另外一项会自适应缩放，避免变形。
+         * @type {number || null}
+         */
+        this.Width = null;
+
+        /**
+         * 水印高度，占直播原始画面宽度百分比，建议高宽只设置一项，另外一项会自适应缩放，避免变形。
+         * @type {number || null}
+         */
+        this.Height = null;
+
     }
 
     /**
@@ -2395,6 +2407,8 @@ class AddLiveWatermarkRequest extends  AbstractModel {
         this.WatermarkName = 'WatermarkName' in params ? params.WatermarkName : null;
         this.XPosition = 'XPosition' in params ? params.XPosition : null;
         this.YPosition = 'YPosition' in params ? params.YPosition : null;
+        this.Width = 'Width' in params ? params.Width : null;
+        this.Height = 'Height' in params ? params.Height : null;
 
     }
 }
@@ -5149,6 +5163,18 @@ class WatermarkInfo extends  AbstractModel {
          */
         this.CreateTime = null;
 
+        /**
+         * 水印宽
+         * @type {number || null}
+         */
+        this.Width = null;
+
+        /**
+         * 水印高
+         * @type {number || null}
+         */
+        this.Height = null;
+
     }
 
     /**
@@ -5165,6 +5191,8 @@ class WatermarkInfo extends  AbstractModel {
         this.WatermarkName = 'WatermarkName' in params ? params.WatermarkName : null;
         this.Status = 'Status' in params ? params.Status : null;
         this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.Width = 'Width' in params ? params.Width : null;
+        this.Height = 'Height' in params ? params.Height : null;
 
     }
 }
@@ -5641,6 +5669,18 @@ class UpdateLiveWatermarkRequest extends  AbstractModel {
          */
         this.WatermarkName = null;
 
+        /**
+         * 水印宽度，占直播原始画面宽度百分比，建议高宽只设置一项，另外一项会自适应缩放，避免变形。
+         * @type {number || null}
+         */
+        this.Width = null;
+
+        /**
+         * 水印高度，占直播原始画面宽度百分比，建议高宽只设置一项，另外一项会自适应缩放，避免变形。
+         * @type {number || null}
+         */
+        this.Height = null;
+
     }
 
     /**
@@ -5655,6 +5695,8 @@ class UpdateLiveWatermarkRequest extends  AbstractModel {
         this.XPosition = 'XPosition' in params ? params.XPosition : null;
         this.YPosition = 'YPosition' in params ? params.YPosition : null;
         this.WatermarkName = 'WatermarkName' in params ? params.WatermarkName : null;
+        this.Width = 'Width' in params ? params.Width : null;
+        this.Height = 'Height' in params ? params.Height : null;
 
     }
 }
@@ -6484,6 +6526,12 @@ class ModifyLiveRecordTemplateRequest extends  AbstractModel {
          */
         this.AacParam = null;
 
+        /**
+         * HLS录制定制参数
+         * @type {HlsSpecialParam || null}
+         */
+        this.HlsSpecialParam = null;
+
     }
 
     /**
@@ -6519,6 +6567,12 @@ class ModifyLiveRecordTemplateRequest extends  AbstractModel {
             let obj = new RecordParam();
             obj.deserialize(params.AacParam)
             this.AacParam = obj;
+        }
+
+        if (params.HlsSpecialParam) {
+            let obj = new HlsSpecialParam();
+            obj.deserialize(params.HlsSpecialParam)
+            this.HlsSpecialParam = obj;
         }
 
     }

@@ -177,6 +177,7 @@ const StorageBlock = models.StorageBlock;
 const InternetAccessible = models.InternetAccessible;
 const RenewHostsResponse = models.RenewHostsResponse;
 const DisassociateSecurityGroupsResponse = models.DisassociateSecurityGroupsResponse;
+const Snapshot = models.Snapshot;
 const ModifyInstancesProjectResponse = models.ModifyInstancesProjectResponse;
 const InstanceChargePrepaid = models.InstanceChargePrepaid;
 const Price = models.Price;

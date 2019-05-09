@@ -76,13 +76,13 @@ class CreateDBInstanceRequest extends  AbstractModel {
         this.VoucherIds = null;
 
         /**
-         * 虚拟私有网络 ID，不传或传 0 表示创建为基础网络
+         * 虚拟私有网络 ID，不传表示创建为基础网络
          * @type {string || null}
          */
         this.VpcId = null;
 
         /**
-         * 虚拟私有网络子网 ID，VpcId 不为0时必填
+         * 虚拟私有网络子网 ID，VpcId 不为空时必填
          * @type {string || null}
          */
         this.SubnetId = null;
@@ -94,7 +94,7 @@ class CreateDBInstanceRequest extends  AbstractModel {
         this.ProjectId = null;
 
         /**
-         * 数据库引擎版本，当前可选：10.0.10，10.1.9，5.7.17
+         * 数据库引擎版本，当前可选：10.0.10，10.1.9，5.7.17。如果不传的话，默认为 Mariadb 10.1.9。
          * @type {string || null}
          */
         this.DbVersionId = null;
@@ -543,6 +543,12 @@ class DescribeDBSlowLogsRequest extends  AbstractModel {
          */
         this.OrderByType = null;
 
+        /**
+         * 是否查询从机的慢查询，0-主机; 1-从机
+         * @type {number || null}
+         */
+        this.Slave = null;
+
     }
 
     /**
@@ -560,6 +566,7 @@ class DescribeDBSlowLogsRequest extends  AbstractModel {
         this.Db = 'Db' in params ? params.Db : null;
         this.OrderBy = 'OrderBy' in params ? params.OrderBy : null;
         this.OrderByType = 'OrderByType' in params ? params.OrderByType : null;
+        this.Slave = 'Slave' in params ? params.Slave : null;
 
     }
 }
@@ -754,7 +761,7 @@ class ResourceUsageMonitorSet extends  AbstractModel {
 
         /**
          * 磁盘可用空间,单位GB
-         * @type {MonitorIntData || null}
+         * @type {MonitorData || null}
          */
         this.DataDiskAvailable = null;
 
@@ -787,7 +794,7 @@ class ResourceUsageMonitorSet extends  AbstractModel {
         }
 
         if (params.DataDiskAvailable) {
-            let obj = new MonitorIntData();
+            let obj = new MonitorData();
             obj.deserialize(params.DataDiskAvailable)
             this.DataDiskAvailable = obj;
         }
@@ -1143,6 +1150,12 @@ class DescribeDBResourceUsageRequest extends  AbstractModel {
          */
         this.EndTime = null;
 
+        /**
+         * 拉取的指标名称，支持的值为：data_disk_available,binlog_disk_available,mem_available,cpu_usage_rate
+         * @type {string || null}
+         */
+        this.MetricName = null;
+
     }
 
     /**
@@ -1155,6 +1168,7 @@ class DescribeDBResourceUsageRequest extends  AbstractModel {
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
         this.StartTime = 'StartTime' in params ? params.StartTime : null;
         this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.MetricName = 'MetricName' in params ? params.MetricName : null;
 
     }
 }
@@ -1707,10 +1721,16 @@ class DescribeDBInstancesRequest extends  AbstractModel {
         this.IsFilterExcluster = null;
 
         /**
-         * 1非独享集群，2独享集群， 0全部
+         * 实例所属独享集群类型。取值范围：1-非独享集群，2-独享集群， 0-全部
          * @type {number || null}
          */
         this.ExclusterType = null;
+
+        /**
+         * 按独享集群Id过滤实例，独享集群Id形如dbdc-4ih6uct9
+         * @type {Array.<string> || null}
+         */
+        this.ExclusterIds = null;
 
     }
 
@@ -1735,6 +1755,7 @@ class DescribeDBInstancesRequest extends  AbstractModel {
         this.OriginSerialIds = 'OriginSerialIds' in params ? params.OriginSerialIds : null;
         this.IsFilterExcluster = 'IsFilterExcluster' in params ? params.IsFilterExcluster : null;
         this.ExclusterType = 'ExclusterType' in params ? params.ExclusterType : null;
+        this.ExclusterIds = 'ExclusterIds' in params ? params.ExclusterIds : null;
 
     }
 }
@@ -1830,7 +1851,7 @@ class DescribeSqlLogsRequest extends  AbstractModel {
         this.Offset = null;
 
         /**
-         * 拉取数量（0-1000，为0时拉取总数信息）。
+         * 拉取数量（0-10000，为0时拉取总数信息）。
          * @type {number || null}
          */
         this.Limit = null;
@@ -2735,48 +2756,6 @@ class DescribeUpgradePriceResponse extends  AbstractModel {
 }
 
 /**
- * 整形监控数据
- * @class
- */
-class MonitorIntData extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 起始时间
-         * @type {string || null}
-         */
-        this.StartTime = null;
-
-        /**
-         * 结束时间
-         * @type {string || null}
-         */
-        this.EndTime = null;
-
-        /**
-         * 监控数据
-         * @type {number || null}
-         */
-        this.Data = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.StartTime = 'StartTime' in params ? params.StartTime : null;
-        this.EndTime = 'EndTime' in params ? params.EndTime : null;
-        this.Data = 'Data' in params ? params.Data : null;
-
-    }
-}
-
-/**
  * 描述云数据库实例的详细信息。
  * @class
  */
@@ -3009,6 +2988,12 @@ class DBInstance extends  AbstractModel {
          */
         this.Machine = null;
 
+        /**
+         * 是否支持数据加密。1-支持；0-不支持
+         * @type {number || null}
+         */
+        this.IsEncryptSupported = null;
+
     }
 
     /**
@@ -3055,6 +3040,7 @@ class DBInstance extends  AbstractModel {
         this.WanStatus = 'WanStatus' in params ? params.WanStatus : null;
         this.IsAuditSupported = 'IsAuditSupported' in params ? params.IsAuditSupported : null;
         this.Machine = 'Machine' in params ? params.Machine : null;
+        this.IsEncryptSupported = 'IsEncryptSupported' in params ? params.IsEncryptSupported : null;
 
     }
 }
@@ -3116,7 +3102,7 @@ class InitDBInstancesRequest extends  AbstractModel {
         this.InstanceIds = null;
 
         /**
-         * 参数列表。本接口的可选值为：character_set_server（字符集，必传），lower_case_table_names（表名大小写敏感，必传），innodb_page_size（innodb数据页，默认16K），sync_mode（同步模式：0 - 异步； 1 - 强同步；2 - 强同步可退化。默认为强同步）。
+         * 参数列表。本接口的可选值为：character_set_server（字符集，必传），lower_case_table_names（表名大小写敏感，必传，0 - 敏感；1-不敏感），innodb_page_size（innodb数据页，默认16K），sync_mode（同步模式：0 - 异步； 1 - 强同步；2 - 强同步可退化。默认为强同步）。
          * @type {Array.<DBParamValue> || null}
          */
         this.Params = null;
@@ -3394,6 +3380,12 @@ class DescribeDBPerformanceDetailsRequest extends  AbstractModel {
          */
         this.EndTime = null;
 
+        /**
+         * 拉取的指标名，支持的值为：long_query,select_total,update_total,insert_total,delete_total,mem_hit_rate,disk_iops,conn_active,is_master_switched,slave_delay
+         * @type {string || null}
+         */
+        this.MetricName = null;
+
     }
 
     /**
@@ -3406,6 +3398,7 @@ class DescribeDBPerformanceDetailsRequest extends  AbstractModel {
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
         this.StartTime = 'StartTime' in params ? params.StartTime : null;
         this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.MetricName = 'MetricName' in params ? params.MetricName : null;
 
     }
 }
@@ -3427,7 +3420,7 @@ class DescribeBackupTimeResponse extends  AbstractModel {
         /**
          * 实例备份时间配置信息
 注意：此字段可能返回 null，表示取不到有效值。
-         * @type {DBBackupTimeConfig || null}
+         * @type {Array.<DBBackupTimeConfig> || null}
          */
         this.Items = null;
 
@@ -3449,9 +3442,12 @@ class DescribeBackupTimeResponse extends  AbstractModel {
         this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
 
         if (params.Items) {
-            let obj = new DBBackupTimeConfig();
-            obj.deserialize(params.Items)
-            this.Items = obj;
+            this.Items = new Array();
+            for (let z in params.Items) {
+                let obj = new DBBackupTimeConfig();
+                obj.deserialize(params.Items[z]);
+                this.Items.push(obj);
+            }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -3486,67 +3482,67 @@ class SlowLogData extends  AbstractModel {
 
         /**
          * 平均的锁时间
-         * @type {number || null}
+         * @type {string || null}
          */
         this.LockTimeAvg = null;
 
         /**
          * 最大锁时间
-         * @type {number || null}
+         * @type {string || null}
          */
         this.LockTimeMax = null;
 
         /**
          * 最小锁时间
-         * @type {number || null}
+         * @type {string || null}
          */
         this.LockTimeMin = null;
 
         /**
          * 锁时间总和
-         * @type {number || null}
+         * @type {string || null}
          */
         this.LockTimeSum = null;
 
         /**
          * 查询次数
-         * @type {number || null}
+         * @type {string || null}
          */
         this.QueryCount = null;
 
         /**
          * 平均查询时间
-         * @type {number || null}
+         * @type {string || null}
          */
         this.QueryTimeAvg = null;
 
         /**
          * 最大查询时间
-         * @type {number || null}
+         * @type {string || null}
          */
         this.QueryTimeMax = null;
 
         /**
          * 最小查询时间
-         * @type {number || null}
+         * @type {string || null}
          */
         this.QueryTimeMin = null;
 
         /**
          * 查询时间总和
-         * @type {number || null}
+         * @type {string || null}
          */
         this.QueryTimeSum = null;
 
         /**
          * 扫描行数
-         * @type {number || null}
+         * @type {string || null}
          */
         this.RowsExaminedSum = null;
 
         /**
          * 发送行数
-         * @type {number || null}
+         * @type {string || null}
          */
         this.RowsSentSum = null;
 
@@ -4128,7 +4124,7 @@ class ParamDesc extends  AbstractModel {
         this.Value = null;
 
         /**
-         * 设置过的值，参数生效后，该值和value一样。未设置过就不返回该字段。
+         * 设置过的值，参数生效后，该值和value一样。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
@@ -4145,6 +4141,12 @@ class ParamDesc extends  AbstractModel {
          * @type {ParamConstraint || null}
          */
         this.Constraint = null;
+
+        /**
+         * 是否有设置过值，false:没有设置过值，true:有设置过值。
+         * @type {boolean || null}
+         */
+        this.HaveSetValue = null;
 
     }
 
@@ -4165,6 +4167,7 @@ class ParamDesc extends  AbstractModel {
             obj.deserialize(params.Constraint)
             this.Constraint = obj;
         }
+        this.HaveSetValue = 'HaveSetValue' in params ? params.HaveSetValue : null;
 
     }
 }
@@ -4429,6 +4432,12 @@ class LogFileInfo extends  AbstractModel {
          */
         this.Uri = null;
 
+        /**
+         * 文件名
+         * @type {string || null}
+         */
+        this.FileName = null;
+
     }
 
     /**
@@ -4441,6 +4450,7 @@ class LogFileInfo extends  AbstractModel {
         this.Mtime = 'Mtime' in params ? params.Mtime : null;
         this.Length = 'Length' in params ? params.Length : null;
         this.Uri = 'Uri' in params ? params.Uri : null;
+        this.FileName = 'FileName' in params ? params.FileName : null;
 
     }
 }
@@ -4471,6 +4481,12 @@ class DescribeDBResourceUsageDetailsRequest extends  AbstractModel {
          */
         this.EndTime = null;
 
+        /**
+         * 拉取的指标名称，支持的值为：data_disk_available,binlog_disk_available,mem_available,cpu_usage_rate
+         * @type {string || null}
+         */
+        this.MetricName = null;
+
     }
 
     /**
@@ -4483,6 +4499,7 @@ class DescribeDBResourceUsageDetailsRequest extends  AbstractModel {
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
         this.StartTime = 'StartTime' in params ? params.StartTime : null;
         this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.MetricName = 'MetricName' in params ? params.MetricName : null;
 
     }
 }
@@ -4644,12 +4661,14 @@ class DescribeDBPerformanceDetailsResponse extends  AbstractModel {
 
         /**
          * 备机1性能监控数据
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {PerformanceMonitorSet || null}
          */
         this.Slave1 = null;
 
         /**
          * 备机2性能监控数据，如果实例是一主一从，则没有该字段
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {PerformanceMonitorSet || null}
          */
         this.Slave2 = null;
@@ -5106,6 +5125,12 @@ class DescribeDBPerformanceRequest extends  AbstractModel {
          */
         this.EndTime = null;
 
+        /**
+         * 拉取的指标名，支持的值为：long_query,select_total,update_total,insert_total,delete_total,mem_hit_rate,disk_iops,conn_active,is_master_switched,slave_delay
+         * @type {string || null}
+         */
+        this.MetricName = null;
+
     }
 
     /**
@@ -5118,6 +5143,7 @@ class DescribeDBPerformanceRequest extends  AbstractModel {
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
         this.StartTime = 'StartTime' in params ? params.StartTime : null;
         this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.MetricName = 'MetricName' in params ? params.MetricName : null;
 
     }
 }
@@ -5204,7 +5230,6 @@ module.exports = {
     ModifyBackupTimeRequest: ModifyBackupTimeRequest,
     UpgradeDBInstanceRequest: UpgradeDBInstanceRequest,
     DescribeUpgradePriceResponse: DescribeUpgradePriceResponse,
-    MonitorIntData: MonitorIntData,
     DBInstance: DBInstance,
     DescribePriceResponse: DescribePriceResponse,
     InitDBInstancesRequest: InitDBInstancesRequest,

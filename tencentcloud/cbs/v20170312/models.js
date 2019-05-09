@@ -2272,7 +2272,7 @@ class CreateDisksRequest extends  AbstractModel {
         this.DiskType = null;
 
         /**
-         * 云硬盘计费类型。<br><li>PREPAID：预付费，即包年包月<br><li>POSTPAID_BY_HOUR：按小时后付费<br>各类型价格请参考云硬盘[价格总览](/document/product/362/2413)。
+         * 云硬盘计费类型。<br><li>PREPAID：预付费，即包年包月<br><li>POSTPAID_BY_HOUR：按小时后付费<br><li>CDCPAID：独享集群付费<br>各类型价格请参考云硬盘[价格总览](/document/product/362/2413)。
          * @type {string || null}
          */
         this.DiskChargeType = null;
@@ -2332,10 +2332,16 @@ class CreateDisksRequest extends  AbstractModel {
         this.Tags = null;
 
         /**
-         * 可选参数，不传该参数则仅执行挂载操作。传入True时，新创建的云盘将设置为随云主机销毁模式，仅对按量计费云硬盘有效。
+         * 可选参数。传入True时，新创建的云盘将设置为随云主机销毁模式，仅对按量计费云硬盘有效。
          * @type {boolean || null}
          */
         this.DeleteWithInstance = null;
+
+        /**
+         * 可选参数，默认为False。传入True时，云盘将创建为共享型云盘。
+         * @type {boolean || null}
+         */
+        this.Shareable = null;
 
     }
 
@@ -2376,6 +2382,7 @@ class CreateDisksRequest extends  AbstractModel {
             }
         }
         this.DeleteWithInstance = 'DeleteWithInstance' in params ? params.DeleteWithInstance : null;
+        this.Shareable = 'Shareable' in params ? params.Shareable : null;
 
     }
 }

@@ -1574,43 +1574,43 @@ class ComputeNodeMetrics extends  AbstractModel {
 
         /**
          * 已经完成提交的计算节点数量
-         * @type {string || null}
+         * @type {number || null}
          */
         this.SubmittedCount = null;
 
         /**
          * 创建中的计算节点数量
-         * @type {string || null}
+         * @type {number || null}
          */
         this.CreatingCount = null;
 
         /**
          * 创建失败的计算节点数量
-         * @type {string || null}
+         * @type {number || null}
          */
         this.CreationFailedCount = null;
 
         /**
          * 完成创建的计算节点数量
-         * @type {string || null}
+         * @type {number || null}
          */
         this.CreatedCount = null;
 
         /**
          * 运行中的计算节点数量
-         * @type {string || null}
+         * @type {number || null}
          */
         this.RunningCount = null;
 
         /**
          * 销毁中的计算节点数量
-         * @type {string || null}
+         * @type {number || null}
          */
         this.DeletingCount = null;
 
         /**
          * 异常的计算节点数量
-         * @type {string || null}
+         * @type {number || null}
          */
         this.AbnormalCount = null;
 

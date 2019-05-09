@@ -69,7 +69,6 @@ const ModifyDBInstanceNameRequest = models.ModifyDBInstanceNameRequest;
 const ModifyBackupTimeRequest = models.ModifyBackupTimeRequest;
 const UpgradeDBInstanceRequest = models.UpgradeDBInstanceRequest;
 const DescribeUpgradePriceResponse = models.DescribeUpgradePriceResponse;
-const MonitorIntData = models.MonitorIntData;
 const DBInstance = models.DBInstance;
 const DescribePriceResponse = models.DescribePriceResponse;
 const InitDBInstancesRequest = models.InitDBInstancesRequest;
