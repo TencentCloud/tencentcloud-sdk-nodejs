@@ -3169,6 +3169,12 @@ class Instance extends  AbstractModel {
          */
         this.InstanceType = null;
 
+        /**
+         * 版本号
+         * @type {number || null}
+         */
+        this.VersionNumber = null;
+
     }
 
     /**
@@ -3189,6 +3195,7 @@ class Instance extends  AbstractModel {
         this.CreationType = 'CreationType' in params ? params.CreationType : null;
         this.AddTime = 'AddTime' in params ? params.AddTime : null;
         this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
+        this.VersionNumber = 'VersionNumber' in params ? params.VersionNumber : null;
 
     }
 }
@@ -3621,7 +3628,7 @@ class CreateLifecycleHookRequest extends  AbstractModel {
         this.AutoScalingGroupId = null;
 
         /**
-         * 生命周期挂钩名称
+         * 生命周期挂钩名称。名称仅支持中文、英文、数字、下划线、分隔符"-"、小数点，最大长度不能超128个字节。
          * @type {string || null}
          */
         this.LifecycleHookName = null;
@@ -3645,7 +3652,7 @@ class CreateLifecycleHookRequest extends  AbstractModel {
         this.HeartbeatTimeout = null;
 
         /**
-         * 弹性伸缩向通知目标发送的附加信息，默认值为''
+         * 弹性伸缩向通知目标发送的附加信息，默认值为''。最大长度不能超过1024个字节。
          * @type {string || null}
          */
         this.NotificationMetadata = null;
@@ -4037,6 +4044,18 @@ class LaunchConfiguration extends  AbstractModel {
          */
         this.InstanceTags = null;
 
+        /**
+         * 版本号。
+         * @type {number || null}
+         */
+        this.VersionNumber = null;
+
+        /**
+         * 更新时间
+         * @type {string || null}
+         */
+        this.UpdatedTime = null;
+
     }
 
     /**
@@ -4114,6 +4133,8 @@ class LaunchConfiguration extends  AbstractModel {
                 this.InstanceTags.push(obj);
             }
         }
+        this.VersionNumber = 'VersionNumber' in params ? params.VersionNumber : null;
+        this.UpdatedTime = 'UpdatedTime' in params ? params.UpdatedTime : null;
 
     }
 }

@@ -25,7 +25,7 @@ class DescribeSdkAppidResponse extends  AbstractModel {
         super();
 
         /**
-         * 表示appid对应的SdkAppid的数据
+         * 表示 appid 对应的 SdkAppid 的数据
          * @type {Array.<number> || null}
          */
         this.SdkAppids = null;

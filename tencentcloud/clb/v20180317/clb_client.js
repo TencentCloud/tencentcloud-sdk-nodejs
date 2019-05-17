@@ -16,76 +16,93 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
-const DescribeClassicalLBTargetsRequest = models.DescribeClassicalLBTargetsRequest;
-const RuleOutput = models.RuleOutput;
-const ClassicalListener = models.ClassicalListener;
-const TargetRegionInfo = models.TargetRegionInfo;
+const DeleteRewriteRequest = models.DeleteRewriteRequest;
 const ModifyTargetPortRequest = models.ModifyTargetPortRequest;
-const DescribeListenersResponse = models.DescribeListenersResponse;
-const CertificateInput = models.CertificateInput;
-const DeleteRuleResponse = models.DeleteRuleResponse;
-const DeleteRuleRequest = models.DeleteRuleRequest;
+const SetLoadBalancerSecurityGroupsResponse = models.SetLoadBalancerSecurityGroupsResponse;
+const RsWeightRule = models.RsWeightRule;
 const BatchModifyTargetWeightResponse = models.BatchModifyTargetWeightResponse;
-const ModifyTargetPortResponse = models.ModifyTargetPortResponse;
 const CreateLoadBalancerRequest = models.CreateLoadBalancerRequest;
-const DescribeTaskStatusResponse = models.DescribeTaskStatusResponse;
-const CreateListenerResponse = models.CreateListenerResponse;
+const DeleteRuleRequest = models.DeleteRuleRequest;
 const ModifyLoadBalancerAttributesRequest = models.ModifyLoadBalancerAttributesRequest;
-const Target = models.Target;
-const ClassicalLoadBalancerInfo = models.ClassicalLoadBalancerInfo;
 const ModifyRuleRequest = models.ModifyRuleRequest;
-const DescribeTargetsResponse = models.DescribeTargetsResponse;
-const RegisterTargetsWithClassicalLBRequest = models.RegisterTargetsWithClassicalLBRequest;
+const DescribeClassicalLBByInstanceIdResponse = models.DescribeClassicalLBByInstanceIdResponse;
+const DescribeRewriteRequest = models.DescribeRewriteRequest;
+const ClassicalTarget = models.ClassicalTarget;
+const DeregisterTargetsFromClassicalLBRequest = models.DeregisterTargetsFromClassicalLBRequest;
+const ModifyTargetWeightResponse = models.ModifyTargetWeightResponse;
+const DescribeTaskStatusRequest = models.DescribeTaskStatusRequest;
+const DescribeRewriteResponse = models.DescribeRewriteResponse;
+const CreateRuleResponse = models.CreateRuleResponse;
+const ClassicalTargetInfo = models.ClassicalTargetInfo;
 const DescribeTargetsRequest = models.DescribeTargetsRequest;
+const RegisterTargetsWithClassicalLBResponse = models.RegisterTargetsWithClassicalLBResponse;
+const LoadBalancerHealth = models.LoadBalancerHealth;
+const ModifyRuleResponse = models.ModifyRuleResponse;
+const DescribeClassicalLBTargetsRequest = models.DescribeClassicalLBTargetsRequest;
+const DescribeListenersResponse = models.DescribeListenersResponse;
+const AutoRewriteRequest = models.AutoRewriteRequest;
+const DescribeTaskStatusResponse = models.DescribeTaskStatusResponse;
+const DescribeTargetHealthRequest = models.DescribeTargetHealthRequest;
+const TargetHealth = models.TargetHealth;
 const DescribeClassicalLBHealthStatusResponse = models.DescribeClassicalLBHealthStatusResponse;
-const DeleteLoadBalancerRequest = models.DeleteLoadBalancerRequest;
-const CreateRuleRequest = models.CreateRuleRequest;
-const ModifyListenerResponse = models.ModifyListenerResponse;
-const ListenerBackend = models.ListenerBackend;
+const RuleHealth = models.RuleHealth;
 const Listener = models.Listener;
 const ModifyLoadBalancerAttributesResponse = models.ModifyLoadBalancerAttributesResponse;
-const TagInfo = models.TagInfo;
-const RegisterTargetsResponse = models.RegisterTargetsResponse;
-const RuleTargets = models.RuleTargets;
-const DescribeClassicalLBListenersResponse = models.DescribeClassicalLBListenersResponse;
-const DescribeLoadBalancersRequest = models.DescribeLoadBalancersRequest;
-const ClassicalTarget = models.ClassicalTarget;
+const RegisterTargetsWithClassicalLBRequest = models.RegisterTargetsWithClassicalLBRequest;
 const ModifyListenerRequest = models.ModifyListenerRequest;
-const RsWeightRule = models.RsWeightRule;
-const CreateLoadBalancerResponse = models.CreateLoadBalancerResponse;
-const DeregisterTargetsFromClassicalLBRequest = models.DeregisterTargetsFromClassicalLBRequest;
+const Target = models.Target;
 const RegisterTargetsRequest = models.RegisterTargetsRequest;
 const HealthCheck = models.HealthCheck;
-const CreateListenerRequest = models.CreateListenerRequest;
-const RuleInput = models.RuleInput;
 const DeleteListenerRequest = models.DeleteListenerRequest;
 const ClassicalHealth = models.ClassicalHealth;
-const ModifyDomainResponse = models.ModifyDomainResponse;
-const DescribeListenersRequest = models.DescribeListenersRequest;
-const DescribeClassicalLBTargetsResponse = models.DescribeClassicalLBTargetsResponse;
-const DescribeClassicalLBByInstanceIdResponse = models.DescribeClassicalLBByInstanceIdResponse;
-const DeregisterTargetsFromClassicalLBResponse = models.DeregisterTargetsFromClassicalLBResponse;
-const CreateRuleResponse = models.CreateRuleResponse;
+const ModifyTargetPortResponse = models.ModifyTargetPortResponse;
 const DescribeClassicalLBByInstanceIdRequest = models.DescribeClassicalLBByInstanceIdRequest;
-const DeregisterTargetsRequest = models.DeregisterTargetsRequest;
-const DescribeLoadBalancersResponse = models.DescribeLoadBalancersResponse;
+const ManualRewriteResponse = models.ManualRewriteResponse;
+const ModifyTargetWeightRequest = models.ModifyTargetWeightRequest;
+const ModifyDomainRequest = models.ModifyDomainRequest;
+const Backend = models.Backend;
+const ClassicalListener = models.ClassicalListener;
+const CertificateInput = models.CertificateInput;
+const CreateListenerResponse = models.CreateListenerResponse;
+const ClassicalLoadBalancerInfo = models.ClassicalLoadBalancerInfo;
+const RuleOutput = models.RuleOutput;
+const DeleteLoadBalancerRequest = models.DeleteLoadBalancerRequest;
+const CreateRuleRequest = models.CreateRuleRequest;
+const RuleTargets = models.RuleTargets;
+const ManualRewriteRequest = models.ManualRewriteRequest;
+const ModifyListenerResponse = models.ModifyListenerResponse;
+const DescribeTargetHealthResponse = models.DescribeTargetHealthResponse;
+const CreateListenerRequest = models.CreateListenerRequest;
+const RewriteLocationMap = models.RewriteLocationMap;
+const ModifyDomainResponse = models.ModifyDomainResponse;
+const RegisterTargetsResponse = models.RegisterTargetsResponse;
+const DeregisterTargetsFromClassicalLBResponse = models.DeregisterTargetsFromClassicalLBResponse;
+const DescribeLoadBalancersRequest = models.DescribeLoadBalancersRequest;
 const DeleteLoadBalancerResponse = models.DeleteLoadBalancerResponse;
-const DeleteListenerResponse = models.DeleteListenerResponse;
-const ClassicalTargetInfo = models.ClassicalTargetInfo;
+const AutoRewriteResponse = models.AutoRewriteResponse;
 const DeregisterTargetsResponse = models.DeregisterTargetsResponse;
-const DescribeTaskStatusRequest = models.DescribeTaskStatusRequest;
-const RegisterTargetsWithClassicalLBResponse = models.RegisterTargetsWithClassicalLBResponse;
-const ModifyTargetWeightResponse = models.ModifyTargetWeightResponse;
 const RewriteTarget = models.RewriteTarget;
+const DescribeTargetsResponse = models.DescribeTargetsResponse;
+const BatchModifyTargetWeightRequest = models.BatchModifyTargetWeightRequest;
+const DeleteRewriteResponse = models.DeleteRewriteResponse;
+const TargetRegionInfo = models.TargetRegionInfo;
+const DeleteRuleResponse = models.DeleteRuleResponse;
+const DeregisterTargetsRequest = models.DeregisterTargetsRequest;
+const ListenerBackend = models.ListenerBackend;
+const TagInfo = models.TagInfo;
+const DescribeClassicalLBListenersResponse = models.DescribeClassicalLBListenersResponse;
+const DescribeClassicalLBHealthStatusRequest = models.DescribeClassicalLBHealthStatusRequest;
+const CreateLoadBalancerResponse = models.CreateLoadBalancerResponse;
+const DescribeListenersRequest = models.DescribeListenersRequest;
+const SetLoadBalancerSecurityGroupsRequest = models.SetLoadBalancerSecurityGroupsRequest;
+const DescribeClassicalLBTargetsResponse = models.DescribeClassicalLBTargetsResponse;
+const RuleInput = models.RuleInput;
+const DescribeLoadBalancersResponse = models.DescribeLoadBalancersResponse;
+const DeleteListenerResponse = models.DeleteListenerResponse;
 const CertificateOutput = models.CertificateOutput;
 const DescribeClassicalLBListenersRequest = models.DescribeClassicalLBListenersRequest;
-const ModifyTargetWeightRequest = models.ModifyTargetWeightRequest;
-const DescribeClassicalLBHealthStatusRequest = models.DescribeClassicalLBHealthStatusRequest;
-const ModifyDomainRequest = models.ModifyDomainRequest;
-const BatchModifyTargetWeightRequest = models.BatchModifyTargetWeightRequest;
-const ModifyRuleResponse = models.ModifyRuleResponse;
+const ListenerHealth = models.ListenerHealth;
 const LoadBalancer = models.LoadBalancer;
-const Backend = models.Backend;
 
 
 /**
@@ -108,6 +125,19 @@ class ClbClient extends AbstractClient {
     RegisterTargets(req, cb) {
         let resp = new RegisterTargetsResponse();
         this.request("RegisterTargets", req, resp, cb);
+    }
+
+    /**
+     * SetLoadBalancerSecurityGroups 接口支持对一个负载均衡实例执行设置（绑定、解绑）安全组操作，查询一个负载均衡实例目前已绑定的安全组，可使用 DescribeLoadBalancers 接口。
+绑定操作时，入参需要传入负载均衡实例要绑定的所有安全组（已绑定的+新增绑定的）。
+解绑操作时，入参需要传入负载均衡实例执行解绑后所绑定的所有安全组；如果要解绑所有安全组，可传入空数组。
+     * @param {SetLoadBalancerSecurityGroupsRequest} req
+     * @param {function(string, SetLoadBalancerSecurityGroupsResponse):void} cb
+     * @public
+     */
+    SetLoadBalancerSecurityGroups(req, cb) {
+        let resp = new SetLoadBalancerSecurityGroupsResponse();
+        this.request("SetLoadBalancerSecurityGroups", req, resp, cb);
     }
 
     /**
@@ -143,6 +173,17 @@ class ClbClient extends AbstractClient {
     CreateRule(req, cb) {
         let resp = new CreateRuleResponse();
         this.request("CreateRule", req, resp, cb);
+    }
+
+    /**
+     * 系统自动为已存在的HTTPS:443监听器创建HTTP监听器进行转发，默认使用80端口。创建成功后可以通过HTTP:80地址自动跳转为HTTPS:443地址进行访问。
+     * @param {AutoRewriteRequest} req
+     * @param {function(string, AutoRewriteResponse):void} cb
+     * @public
+     */
+    AutoRewrite(req, cb) {
+        let resp = new AutoRewriteResponse();
+        this.request("AutoRewrite", req, resp, cb);
     }
 
     /**
@@ -297,6 +338,17 @@ class ClbClient extends AbstractClient {
     }
 
     /**
+     * DeleteRewrite 接口支持删除指定转发规则之间的重定向关系。
+     * @param {DeleteRewriteRequest} req
+     * @param {function(string, DeleteRewriteResponse):void} cb
+     * @public
+     */
+    DeleteRewrite(req, cb) {
+        let resp = new DeleteRewriteResponse();
+        this.request("DeleteRewrite", req, resp, cb);
+    }
+
+    /**
      * DescribeTargets 接口用来查询应用型负载均衡实例的某些监听器后端绑定的机器列表。
      * @param {DescribeTargetsRequest} req
      * @param {function(string, DescribeTargetsResponse):void} cb
@@ -316,6 +368,17 @@ class ClbClient extends AbstractClient {
     RegisterTargetsWithClassicalLB(req, cb) {
         let resp = new RegisterTargetsWithClassicalLBResponse();
         this.request("RegisterTargetsWithClassicalLB", req, resp, cb);
+    }
+
+    /**
+     * DescribeRewrite 接口可根据负载均衡实例ID，查询一个负载均衡实例下转发规则的重定向关系。如果不指定监听器ID或转发规则ID，则返回该负载均衡实例下的所有重定向关系。
+     * @param {DescribeRewriteRequest} req
+     * @param {function(string, DescribeRewriteResponse):void} cb
+     * @public
+     */
+    DescribeRewrite(req, cb) {
+        let resp = new DescribeRewriteResponse();
+        this.request("DescribeRewrite", req, resp, cb);
     }
 
     /**
@@ -343,7 +406,7 @@ class ClbClient extends AbstractClient {
     }
 
     /**
-     * 修改负载均衡实例的属性，目前仅用于修改负载均衡实例的名称。
+     * 修改负载均衡实例的属性，支持修改负载均衡实例的名称、设置负载均衡的跨域属性。
 本接口为异步接口，本接口返回成功后需以返回的RequestID为入参，调用DescribeTaskStatus接口查询本次任务是否成功。
      * @param {ModifyLoadBalancerAttributesRequest} req
      * @param {function(string, ModifyLoadBalancerAttributesResponse):void} cb
@@ -378,6 +441,17 @@ class ClbClient extends AbstractClient {
     }
 
     /**
+     * DescribeTargetHealth 接口用来获取应用型负载均衡后端的健康检查结果。
+     * @param {DescribeTargetHealthRequest} req
+     * @param {function(string, DescribeTargetHealthResponse):void} cb
+     * @public
+     */
+    DescribeTargetHealth(req, cb) {
+        let resp = new DescribeTargetHealthResponse();
+        this.request("DescribeTargetHealth", req, resp, cb);
+    }
+
+    /**
      * CreateLoadBalancer 接口用来创建负载均衡实例。为了使用负载均衡服务，您必须要购买一个或者多个负载均衡实例。通过成功调用该接口，会返回负载均衡实例的唯一 ID。用户可以购买的负载均衡实例类型分为：公网（应用型）、内网（应用型）。可以参考产品说明的产品类型。
 本接口成功返回后，可使用查询负载均衡实例列表接口DescribeLoadBalancers查询负载均衡实例的状态，以确定是否创建成功。
      * @param {CreateLoadBalancerRequest} req
@@ -387,6 +461,17 @@ class ClbClient extends AbstractClient {
     CreateLoadBalancer(req, cb) {
         let resp = new CreateLoadBalancerResponse();
         this.request("CreateLoadBalancer", req, resp, cb);
+    }
+
+    /**
+     * 用户手动配置原访问地址和重定向地址，系统自动将原访问地址的请求重定向至对应路径的目的地址。同一域名下可以配置多条路径作为重定向策略，实现http/https之间请求的自动跳转。
+     * @param {ManualRewriteRequest} req
+     * @param {function(string, ManualRewriteResponse):void} cb
+     * @public
+     */
+    ManualRewrite(req, cb) {
+        let resp = new ManualRewriteResponse();
+        this.request("ManualRewrite", req, resp, cb);
     }
 
 

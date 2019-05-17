@@ -418,7 +418,7 @@ class GroupIdOfUidInfo extends  AbstractModel {
         super();
 
         /**
-         * 子用户 ID
+         * 子用户 UID
          * @type {number || null}
          */
         this.Uid = null;
@@ -769,7 +769,7 @@ class AddUserToGroupRequest extends  AbstractModel {
         super();
 
         /**
-         * 添加的子用户 ID 和用户组 ID 关联关系
+         * 添加的子用户 UID 和用户组 ID 关联关系
          * @type {Array.<GroupIdOfUidInfo> || null}
          */
         this.Info = null;
@@ -2086,7 +2086,7 @@ class AddUserResponse extends  AbstractModel {
         super();
 
         /**
-         * 子用户用户 ID
+         * 子用户 UIN
          * @type {number || null}
          */
         this.Uin = null;
@@ -2116,6 +2116,12 @@ class AddUserResponse extends  AbstractModel {
         this.SecretKey = null;
 
         /**
+         * 子用户 UID
+         * @type {number || null}
+         */
+        this.Uid = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -2135,6 +2141,7 @@ class AddUserResponse extends  AbstractModel {
         this.Password = 'Password' in params ? params.Password : null;
         this.SecretId = 'SecretId' in params ? params.SecretId : null;
         this.SecretKey = 'SecretKey' in params ? params.SecretKey : null;
+        this.Uid = 'Uid' in params ? params.Uid : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }

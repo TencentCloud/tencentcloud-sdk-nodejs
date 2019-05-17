@@ -35,6 +35,7 @@ module.exports = {
     ic: require("./ic"),
     iot: require("./iot"),
     iotcloud: require("./iotcloud"),
+    iotexplorer: require("./iotexplorer"),
     kms: require("./kms"),
     live: require("./live"),
     mariadb: require("./mariadb"),

@@ -1668,25 +1668,25 @@ class FaceShape extends  AbstractModel {
         this.FaceProfile = null;
 
         /**
-         * 描述左测眼睛轮廓的 8 点。
+         * 描述左侧眼睛轮廓的 8 点。
          * @type {Array.<Point> || null}
          */
         this.LeftEye = null;
 
         /**
-         * 描述右测眼睛轮廓的 8 点。
+         * 描述右侧眼睛轮廓的 8 点。
          * @type {Array.<Point> || null}
          */
         this.RightEye = null;
 
         /**
-         * 描述左测眉毛轮廓的 8 点。
+         * 描述左侧眉毛轮廓的 8 点。
          * @type {Array.<Point> || null}
          */
         this.LeftEyeBrow = null;
 
         /**
-         * 描述右测眉毛轮廓的 8 点。
+         * 描述右侧眉毛轮廓的 8 点。
          * @type {Array.<Point> || null}
          */
         this.RightEyeBrow = null;
@@ -2647,7 +2647,7 @@ class FaceRect extends  AbstractModel {
         super();
 
         /**
-         * 人脸框左上角纵坐标。 
+         * 人脸框左上角横坐标。 
 人脸框包含人脸五官位置并在此基础上进行一定的扩展，若人脸框超出图片范围，会导致坐标负值。 
 若需截取完整人脸，可以在完整分completess满足需求的情况下，将负值坐标取0。
          * @type {number || null}
