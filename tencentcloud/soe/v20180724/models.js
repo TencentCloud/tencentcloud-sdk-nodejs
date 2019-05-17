@@ -102,7 +102,7 @@ class InitOralProcessRequest extends  AbstractModel {
         this.SessionId = null;
 
         /**
-         * 被评估语音对应的文本，句子模式下不超过个 20 单词或者中文文字，段落模式不超过 120 单词或者中文文字，中文评估使用 utf-8 编码，自由说模式该值传空。
+         * 被评估语音对应的文本，句子模式下不超过个 20 单词或者中文文字，段落模式不超过 120 单词或者中文文字，中文评估使用 utf-8 编码，自由说模式该值传空。如需要在单词模式和句子模式下使用自定义音素，可以通过设置 TextMode 使用[音素标注](https://cloud.tencent.com/document/product/884/33698)。
          * @type {string || null}
          */
         this.RefText = null;
@@ -156,13 +156,13 @@ class InitOralProcessRequest extends  AbstractModel {
         this.ServerType = null;
 
         /**
-         * 异步模式标识，0：同步模式，1：异步模式。
+         * 异步模式标识，0：同步模式，1：异步模式，可选值参考[服务模式](https://cloud.tencent.com/document/product/884/33697)。
          * @type {number || null}
          */
         this.IsAsync = null;
 
         /**
-         * 输入文本模式，0: 普通文本，1: 音素结构文本
+         * 输入文本模式，0: 普通文本，1：[音素结构](https://cloud.tencent.com/document/product/884/33698)文本。
          * @type {number || null}
          */
         this.TextMode = null;
@@ -333,7 +333,7 @@ class TransmitOralProcessResponse extends  AbstractModel {
         this.Status = null;
 
         /**
-         * 建议评分，取值范围[0,100]，评分方式为建议评分 = 准确度（PronAccuracyfloat）* 完整度（PronCompletionfloat）*（2 - 完整度（PronCompletionfloat）），如若评分策略不符合请参考Words数组中的详细分数自定义评分逻辑。
+         * 建议评分，取值范围[0,100]，评分方式为建议评分 = 准确度（PronAccuracyfloat）× 完整度（PronCompletionfloat）×（2 - 完整度（PronCompletionfloat）），如若评分策略不符合请参考Words数组中的详细分数自定义评分逻辑。
          * @type {number || null}
          */
         this.SuggestedScore = null;
@@ -457,7 +457,7 @@ class WordRsp extends  AbstractModel {
         this.Word = null;
 
         /**
-         * 当前词与输入语句的匹配情况，0:匹配单词、1：新增单词、2：缺少单词
+         * 当前词与输入语句的匹配情况，0：匹配单词、1：新增单词、2：缺少单词、3：错读的词、4：未录入单词。
          * @type {number || null}
          */
         this.MatchTag = null;
@@ -604,7 +604,7 @@ class TransmitOralProcessWithInitRequest extends  AbstractModel {
         this.SessionId = null;
 
         /**
-         * 被评估语音对应的文本，句子模式下不超过个 20 单词或者中文文字，段落模式不超过 120 单词或者中文文字，中文评估使用 utf-8 编码，自由说模式该值传空。
+         * 被评估语音对应的文本，句子模式下不超过个 20 单词或者中文文字，段落模式不超过 120 单词或者中文文字，中文评估使用 utf-8 编码，自由说模式该值无效。如需要在单词模式和句子模式下使用自定义音素，可以通过设置 TextMode 使用[音素标注](https://cloud.tencent.com/document/product/884/33698)。
          * @type {string || null}
          */
         this.RefText = null;
@@ -652,7 +652,7 @@ class TransmitOralProcessWithInitRequest extends  AbstractModel {
         this.ServerType = null;
 
         /**
-         * 异步模式标识，0：同步模式，1：异步模式。
+         * 异步模式标识，0：同步模式，1：异步模式，可选值参考[服务模式](https://cloud.tencent.com/document/product/884/33697)。
          * @type {number || null}
          */
         this.IsAsync = null;
@@ -664,7 +664,7 @@ class TransmitOralProcessWithInitRequest extends  AbstractModel {
         this.IsQuery = null;
 
         /**
-         * 输入文本模式，0: 普通文本，1: 音素结构文本
+         * 输入文本模式，0: 普通文本，1：[音素结构](https://cloud.tencent.com/document/product/884/33698)文本。
          * @type {number || null}
          */
         this.TextMode = null;
@@ -756,7 +756,7 @@ class TransmitOralProcessWithInitResponse extends  AbstractModel {
         this.Status = null;
 
         /**
-         * 建议评分，取值范围[0,100]，评分方式为建议评分 = 准确度（PronAccuracyfloat）* 完整度（PronCompletionfloat）*（2 - 完整度（PronCompletionfloat）），如若评分策略不符合请参考Words数组中的详细分数自定义评分逻辑。
+         * 建议评分，取值范围[0,100]，评分方式为建议评分 = 准确度（PronAccuracyfloat）× 完整度（PronCompletionfloat）×（2 - 完整度（PronCompletionfloat）），如若评分策略不符合请参考Words数组中的详细分数自定义评分逻辑。
          * @type {number || null}
          */
         this.SuggestedScore = null;

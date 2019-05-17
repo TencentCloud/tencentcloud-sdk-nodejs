@@ -804,7 +804,7 @@ class CreateInstanceRequest extends  AbstractModel {
         this.TimeUnit = null;
 
         /**
-         * 登陆配置
+         * 登录配置
          * @type {LoginSettings || null}
          */
         this.LoginSettings = null;
@@ -838,6 +838,12 @@ class CreateInstanceRequest extends  AbstractModel {
          * @type {number || null}
          */
         this.AutoRenew = null;
+
+        /**
+         * 是否需要外网Ip。支持填NEED_MASTER_WAN，不支持使用NOT_NEED_MASTER_WAN，默认使用NEED_MASTER_WAN
+         * @type {string || null}
+         */
+        this.NeedMasterWan = null;
 
     }
 
@@ -894,6 +900,7 @@ class CreateInstanceRequest extends  AbstractModel {
             this.PreExecutedFileSettings = obj;
         }
         this.AutoRenew = 'AutoRenew' in params ? params.AutoRenew : null;
+        this.NeedMasterWan = 'NeedMasterWan' in params ? params.NeedMasterWan : null;
 
     }
 }
@@ -1489,6 +1496,13 @@ class NodeSpec extends  AbstractModel {
          */
         this.SpecName = null;
 
+        /**
+         * 多云盘参数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<MultiDisk> || null}
+         */
+        this.MultiDisks = null;
+
     }
 
     /**
@@ -1506,6 +1520,15 @@ class NodeSpec extends  AbstractModel {
         this.RootDiskVolume = 'RootDiskVolume' in params ? params.RootDiskVolume : null;
         this.StorageType = 'StorageType' in params ? params.StorageType : null;
         this.SpecName = 'SpecName' in params ? params.SpecName : null;
+
+        if (params.MultiDisks) {
+            this.MultiDisks = new Array();
+            for (let z in params.MultiDisks) {
+                let obj = new MultiDisk();
+                obj.deserialize(params.MultiDisks[z]);
+                this.MultiDisks.push(obj);
+            }
+        }
 
     }
 }
@@ -1579,41 +1602,6 @@ class TerminateInstanceResponse extends  AbstractModel {
 }
 
 /**
- * 退单请求描述描述
- * @class
- */
-class TerminateResult extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 退单集群ID
-         * @type {string || null}
-         */
-        this.InstanceId = null;
-
-        /**
-         * 资源资源ID
-         * @type {Array.<string> || null}
-         */
-        this.ResourceIds = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.ResourceIds = 'ResourceIds' in params ? params.ResourceIds : null;
-
-    }
-}
-
-/**
  * 用于询价输出
  * @class
  */
@@ -1662,6 +1650,76 @@ class InquiryPriceResult extends  AbstractModel {
     }
 }
 
+/**
+ * 退单请求描述描述
+ * @class
+ */
+class TerminateResult extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 退单集群ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 资源资源ID
+         * @type {Array.<string> || null}
+         */
+        this.ResourceIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.ResourceIds = 'ResourceIds' in params ? params.ResourceIds : null;
+
+    }
+}
+
+/**
+ * 多云盘参数
+ * @class
+ */
+class MultiDisk extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 云盘类型("CLOUD_PREMIUM","CLOUD_SSD","CLOUD_BASIC")的一种
+         * @type {string || null}
+         */
+        this.DiskType = null;
+
+        /**
+         * 云盘大小
+         * @type {number || null}
+         */
+        this.Volume = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DiskType = 'DiskType' in params ? params.DiskType : null;
+        this.Volume = 'Volume' in params ? params.Volume : null;
+
+    }
+}
+
 module.exports = {
     CreateInstanceResult: CreateInstanceResult,
     LoginSettings: LoginSettings,
@@ -1689,7 +1747,8 @@ module.exports = {
     NodeSpec: NodeSpec,
     TerminateInstanceRequest: TerminateInstanceRequest,
     TerminateInstanceResponse: TerminateInstanceResponse,
-    TerminateResult: TerminateResult,
     InquiryPriceResult: InquiryPriceResult,
+    TerminateResult: TerminateResult,
+    MultiDisk: MultiDisk,
 
 }

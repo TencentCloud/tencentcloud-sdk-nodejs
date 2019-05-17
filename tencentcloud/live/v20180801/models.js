@@ -6852,14 +6852,12 @@ class CreateLiveTranscodeTemplateRequest extends  AbstractModel {
 
         /**
          * 是否保留视频，0：否，1：是。默认1。
-注意：当前该参数未生效，待后续支持！
          * @type {number || null}
          */
         this.NeedVideo = null;
 
         /**
          * 是否保留音频，0：否，1：是。默认1。
-注意：当前该参数未生效，待后续支持！
          * @type {number || null}
          */
         this.NeedAudio = null;

@@ -42,8 +42,9 @@ const EMRProductConfigSettings = models.EMRProductConfigSettings;
 const NodeSpec = models.NodeSpec;
 const TerminateInstanceRequest = models.TerminateInstanceRequest;
 const TerminateInstanceResponse = models.TerminateInstanceResponse;
-const TerminateResult = models.TerminateResult;
 const InquiryPriceResult = models.InquiryPriceResult;
+const TerminateResult = models.TerminateResult;
+const MultiDisk = models.MultiDisk;
 
 
 /**

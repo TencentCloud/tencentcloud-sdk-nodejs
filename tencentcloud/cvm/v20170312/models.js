@@ -1655,7 +1655,7 @@ class ZoneInfo extends  AbstractModel {
         this.ZoneId = null;
 
         /**
-         * 可用区状态
+         * 可用区状态，包含AVAILABLE和UNAVAILABLE。AVAILABLE代表可用，UNAVAILABLE代表不可用。
          * @type {string || null}
          */
         this.ZoneState = null;
@@ -3638,6 +3638,13 @@ class DataDisk extends  AbstractModel {
          */
         this.DeleteWithInstance = null;
 
+        /**
+         * 数据盘快照ID。选择的数据盘快照大小需小于数据盘大小。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.SnapshotId = null;
+
     }
 
     /**
@@ -3651,6 +3658,7 @@ class DataDisk extends  AbstractModel {
         this.DiskType = 'DiskType' in params ? params.DiskType : null;
         this.DiskId = 'DiskId' in params ? params.DiskId : null;
         this.DeleteWithInstance = 'DeleteWithInstance' in params ? params.DeleteWithInstance : null;
+        this.SnapshotId = 'SnapshotId' in params ? params.SnapshotId : null;
 
     }
 }
@@ -5651,7 +5659,7 @@ class InstanceTypeQuotaItem extends  AbstractModel {
         this.TypeName = null;
 
         /**
-         * 本地磁盘规格列表。
+         * 本地磁盘规格列表。当该参数返回为空值时，表示当前情况下无法创建本地盘。
          * @type {Array.<LocalDiskType> || null}
          */
         this.LocalDiskTypeList = null;
