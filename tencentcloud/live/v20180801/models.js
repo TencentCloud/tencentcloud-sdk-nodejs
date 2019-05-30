@@ -31,22 +31,23 @@ class CreateLiveSnapshotRuleRequest extends  AbstractModel {
         this.DomainName = null;
 
         /**
-         * 推流路径。
+         * 模板Id。
+         * @type {number || null}
+         */
+        this.TemplateId = null;
+
+        /**
+         * 推流路径，与推流和播放地址中的AppName保持一致，默认为 live。
          * @type {string || null}
          */
         this.AppName = null;
 
         /**
          * 流名称。
+注：如果本参数设置为非空字符串，规则将只对此推流起作用。
          * @type {string || null}
          */
         this.StreamName = null;
-
-        /**
-         * 模板Id。
-         * @type {number || null}
-         */
-        this.TemplateId = null;
 
     }
 
@@ -58,9 +59,9 @@ class CreateLiveSnapshotRuleRequest extends  AbstractModel {
             return;
         }
         this.DomainName = 'DomainName' in params ? params.DomainName : null;
+        this.TemplateId = 'TemplateId' in params ? params.TemplateId : null;
         this.AppName = 'AppName' in params ? params.AppName : null;
         this.StreamName = 'StreamName' in params ? params.StreamName : null;
-        this.TemplateId = 'TemplateId' in params ? params.TemplateId : null;
 
     }
 }
@@ -179,19 +180,22 @@ class DeleteLiveRecordRuleRequest extends  AbstractModel {
         super();
 
         /**
-         * 推流域名。域名+AppName+StreamName唯一标识单个转码规则，如需删除需要强匹配，比如AppName为空也需要传空字符串进行强匹配
+         * 推流域名。
+域名+AppName+StreamName唯一标识单个转码规则，如需删除需要强匹配，比如AppName为空也需要传空字符串进行强匹配。
          * @type {string || null}
          */
         this.DomainName = null;
 
         /**
-         * 推流路径。域名+AppName+StreamName唯一标识单个转码规则，如需删除需要强匹配，比如AppName为空也需要传空字符串进行强匹配
+         * 推流路径，与推流和播放地址中的AppName保持一致，默认为 live。
+域名+AppName+StreamName唯一标识单个转码规则，如需删除需要强匹配，比如AppName为空也需要传空字符串进行强匹配。
          * @type {string || null}
          */
         this.AppName = null;
 
         /**
-         * 流名称。域名+AppName+StreamName唯一标识单个转码规则，如需删除需要强匹配，比如AppName为空也需要传空字符串进行强匹配
+         * 流名称。
+域名+AppName+StreamName唯一标识单个转码规则，如需删除需要强匹配，比如AppName为空也需要传空字符串进行强匹配。
          * @type {string || null}
          */
         this.StreamName = null;
@@ -221,7 +225,7 @@ class ResumeLiveStreamRequest extends  AbstractModel {
         super();
 
         /**
-         * 应用名称。
+         * 推流路径，与推流和播放地址中的AppName保持一致，默认为 live。
          * @type {string || null}
          */
         this.AppName = null;
@@ -469,13 +473,13 @@ class ResumeDelayLiveStreamRequest extends  AbstractModel {
         super();
 
         /**
-         * 应用名称。
+         * 推流路径，与推流和播放地址中的AppName保持一致，默认为live。
          * @type {string || null}
          */
         this.AppName = null;
 
         /**
-         * 您的加速域名。
+         * 推流域名。
          * @type {string || null}
          */
         this.DomainName = null;
@@ -1346,7 +1350,7 @@ class DescribeLiveStreamStateRequest extends  AbstractModel {
         super();
 
         /**
-         * 应用名称。
+         * 推流路径，与推流和播放地址中的AppName保持一致，默认为 live。
          * @type {string || null}
          */
         this.AppName = null;
@@ -1562,7 +1566,7 @@ class DeleteLiveSnapshotRuleRequest extends  AbstractModel {
         this.DomainName = null;
 
         /**
-         * 推流路径。
+         * 推流路径，与推流和播放地址中的AppName保持一致，默认为 live。
          * @type {string || null}
          */
         this.AppName = null;
@@ -1840,7 +1844,7 @@ UTC 格式，例如：2016-06-29T19:00:00Z。
         this.StartTime = null;
 
         /**
-         * 直播流所属应用名称。
+         * 推流路径，与推流和播放地址中的AppName保持一致，默认为 live。
          * @type {string || null}
          */
         this.AppName = null;
@@ -1889,25 +1893,29 @@ class DeleteLiveTranscodeRuleRequest extends  AbstractModel {
         super();
 
         /**
-         * 推流域名。域名维度转码，域名+AppName+StreamName唯一标识单个转码规则，如需删除需要强匹配，比如AppName为空也需要传空字符串进行强匹配
+         * 推流域名。
+域名维度转码，域名+AppName+StreamName唯一标识单个转码规则，如需删除需要强匹配，比如AppName为空也需要传空字符串进行强匹配。
          * @type {string || null}
          */
         this.DomainName = null;
 
         /**
-         * 推流路径。域名+AppName+StreamName+TemplateId唯一标识单个转码规则，如需删除需要强匹配，比如AppName为空也需要传空字符串进行强匹配
+         * 推流路径，与推流和播放地址中的AppName保持一致，默认为 live。
+域名+AppName+StreamName+TemplateId唯一标识单个转码规则，如需删除需要强匹配，比如AppName为空也需要传空字符串进行强匹配。
          * @type {string || null}
          */
         this.AppName = null;
 
         /**
-         * 流名称。域名+AppName+StreamName+TemplateId唯一标识单个转码规则，如需删除需要强匹配，比如AppName为空也需要传空字符串进行强匹配
+         * 流名称。
+域名+AppName+StreamName+TemplateId唯一标识单个转码规则，如需删除需要强匹配，比如AppName为空也需要传空字符串进行强匹配。
          * @type {string || null}
          */
         this.StreamName = null;
 
         /**
-         * 模板ID域名+AppName+StreamName+TemplateId唯一标识单个转码规则，如需删除需要强匹配，比如AppName为空也需要传空字符串进行强匹配
+         * 模板ID。
+域名+AppName+StreamName+TemplateId唯一标识单个转码规则，如需删除需要强匹配，比如AppName为空也需要传空字符串进行强匹配。
          * @type {number || null}
          */
         this.TemplateId = null;
@@ -1950,7 +1958,7 @@ class CreateLiveRecordRuleRequest extends  AbstractModel {
         this.TemplateId = null;
 
         /**
-         * 推流路径。
+         * 推流路径，与推流和播放地址中的AppName保持一致，默认为 live。
          * @type {string || null}
          */
         this.AppName = null;
@@ -2239,7 +2247,7 @@ class ForbidLiveStreamRequest extends  AbstractModel {
         super();
 
         /**
-         * 应用名称。
+         * 推流路径，与推流和播放地址中的AppName保持一致，默认为 live。
          * @type {string || null}
          */
         this.AppName = null;
@@ -2583,13 +2591,13 @@ class AddDelayLiveStreamRequest extends  AbstractModel {
         super();
 
         /**
-         * 应用名称。
+         * 推流路径，与推流和播放地址中的AppName保持一致，默认为live。
          * @type {string || null}
          */
         this.AppName = null;
 
         /**
-         * 您的加速域名。
+         * 推流域名。
          * @type {string || null}
          */
         this.DomainName = null;
@@ -2684,7 +2692,7 @@ UTC 格式，例如：2018-12-29T20:00:00Z。
         this.EndTime = null;
 
         /**
-         * 应用名称。
+         * 推流路径，与推流和播放地址中的AppName保持一致，默认为 live。
          * @type {string || null}
          */
         this.AppName = null;
@@ -3967,13 +3975,13 @@ class CreateLiveTranscodeRuleRequest extends  AbstractModel {
         super();
 
         /**
-         * 推流域名。
+         * 播放域名。
          * @type {string || null}
          */
         this.DomainName = null;
 
         /**
-         * 推流路径。
+         * 推流路径，与推流和播放地址中的AppName保持一致，默认为 live。
          * @type {string || null}
          */
         this.AppName = null;
@@ -4049,7 +4057,7 @@ class DropLiveStreamRequest extends  AbstractModel {
         this.DomainName = null;
 
         /**
-         * 应用名称。
+         * 推流路径，与推流和播放地址中的AppName保持一致，默认为 live。
          * @type {string || null}
          */
         this.AppName = null;
@@ -5024,7 +5032,7 @@ class DescribeLiveStreamPushInfoListRequest extends  AbstractModel {
         this.PushDomain = null;
 
         /**
-         * 推流路径。
+         * 推流路径，与推流和播放地址中的AppName保持一致，默认为live。
          * @type {string || null}
          */
         this.AppName = null;
@@ -5375,7 +5383,7 @@ class CreateLiveCallbackRuleRequest extends  AbstractModel {
         this.DomainName = null;
 
         /**
-         * 推流路径。
+         * 推流路径，与推流和播放地址中的AppName保持一致，默认为live。
          * @type {string || null}
          */
         this.AppName = null;
@@ -5744,7 +5752,7 @@ class CreateLiveRecordRequest extends  AbstractModel {
         this.StreamName = null;
 
         /**
-         * 推流App名。
+         * 推流路径，与推流和播放地址中的AppName保持一致，默认为 live。
          * @type {string || null}
          */
         this.AppName = null;
@@ -6774,7 +6782,7 @@ class DescribeStreamPlayInfoListRequest extends  AbstractModel {
         this.StreamName = null;
 
         /**
-         * 播放路径，精确匹配，不支持。
+         * 推流路径，与推流和播放地址中的AppName保持一致，默认为live。精确匹配，不支持。
 若不填，则为查询总体播放数据。
          * @type {string || null}
          */
@@ -7133,7 +7141,7 @@ class DeleteLiveCallbackRuleRequest extends  AbstractModel {
         this.DomainName = null;
 
         /**
-         * 推流路径。
+         * 推流路径，与推流和播放地址中的AppName保持一致，默认为live。
          * @type {string || null}
          */
         this.AppName = null;
@@ -7891,7 +7899,7 @@ class DescribeLiveStreamOnlineListRequest extends  AbstractModel {
         this.DomainName = null;
 
         /**
-         * 应用名称。
+         * 推流路径，与推流和播放地址中的AppName保持一致，默认为 live。
          * @type {string || null}
          */
         this.AppName = null;
@@ -7911,7 +7919,7 @@ class DescribeLiveStreamOnlineListRequest extends  AbstractModel {
         this.PageSize = null;
 
         /**
-         * 流名称，精确查询。
+         * 流名称，用于精确查询。
          * @type {string || null}
          */
         this.StreamName = null;
@@ -8566,7 +8574,7 @@ class CreateLiveWatermarkRuleRequest extends  AbstractModel {
         this.DomainName = null;
 
         /**
-         * 推流路径。
+         * 推流路径，与推流和播放地址中的AppName保持一致，默认为live。
          * @type {string || null}
          */
         this.AppName = null;

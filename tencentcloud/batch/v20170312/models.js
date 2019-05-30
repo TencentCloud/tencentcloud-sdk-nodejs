@@ -832,6 +832,12 @@ class Task extends  AbstractModel {
          */
         this.MaxConcurrentNum = null;
 
+        /**
+         * 任务完成后，重启计算节点。适用于指定计算环境执行任务。
+         * @type {boolean || null}
+         */
+        this.RestartComputeNode = null;
+
     }
 
     /**
@@ -917,6 +923,7 @@ class Task extends  AbstractModel {
         this.MaxRetryCount = 'MaxRetryCount' in params ? params.MaxRetryCount : null;
         this.Timeout = 'Timeout' in params ? params.Timeout : null;
         this.MaxConcurrentNum = 'MaxConcurrentNum' in params ? params.MaxConcurrentNum : null;
+        this.RestartComputeNode = 'RestartComputeNode' in params ? params.RestartComputeNode : null;
 
     }
 }
@@ -2917,6 +2924,13 @@ class DataDisk extends  AbstractModel {
          */
         this.DeleteWithInstance = null;
 
+        /**
+         * 数据盘快照ID。选择的数据盘快照大小需小于数据盘大小。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.SnapshotId = null;
+
     }
 
     /**
@@ -2930,6 +2944,7 @@ class DataDisk extends  AbstractModel {
         this.DiskType = 'DiskType' in params ? params.DiskType : null;
         this.DiskId = 'DiskId' in params ? params.DiskId : null;
         this.DeleteWithInstance = 'DeleteWithInstance' in params ? params.DeleteWithInstance : null;
+        this.SnapshotId = 'SnapshotId' in params ? params.SnapshotId : null;
 
     }
 }
@@ -4003,7 +4018,7 @@ class ModifyComputeEnvResponse extends  AbstractModel {
 }
 
 /**
- * 描述了实例的抽象位置，包括其所在的可用区，所属的项目，宿主机等（仅CDH产品可用）
+ * 描述了实例的抽象位置，包括其所在的可用区，所属的项目，宿主机（仅CDH产品可用），母机ip等
  * @class
  */
 class Placement extends  AbstractModel {
@@ -4028,6 +4043,12 @@ class Placement extends  AbstractModel {
          */
         this.HostIds = null;
 
+        /**
+         * 指定母机ip生产子机
+         * @type {Array.<string> || null}
+         */
+        this.HostIps = null;
+
     }
 
     /**
@@ -4040,6 +4061,7 @@ class Placement extends  AbstractModel {
         this.Zone = 'Zone' in params ? params.Zone : null;
         this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
         this.HostIds = 'HostIds' in params ? params.HostIds : null;
+        this.HostIps = 'HostIps' in params ? params.HostIps : null;
 
     }
 }
@@ -4252,7 +4274,7 @@ class InstanceTypeQuotaItem extends  AbstractModel {
         this.TypeName = null;
 
         /**
-         * 本地磁盘规格列表。
+         * 本地磁盘规格列表。当该参数返回为空值时，表示当前情况下无法创建本地盘。
          * @type {Array.<LocalDiskType> || null}
          */
         this.LocalDiskTypeList = null;

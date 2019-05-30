@@ -400,13 +400,13 @@ class DescribeDosageDetailByDateRequest extends  AbstractModel {
         this.StartDate = null;
 
         /**
-         * 查询账单结束日期，如 2019-01-01
+         * 查询账单结束日期，如 2019-01-01， 时间跨度不超过7天
          * @type {string || null}
          */
         this.EndDate = null;
 
         /**
-         * 视频业务：
+         * 互动直播：
 10194   互动直播-核心机房           :
 10195   互动直播-边缘机房
 
@@ -420,13 +420,19 @@ cdn业务：
 
 100967：弹性公网IP-按流量计费
 101065：公网负载均衡-按流量计费
+
+视频直播
+10226 视频直播流量(国内)
+10227 视频直播带宽(国内)
+100763 视频直播流量(海外)
+100762 视频直播宽带(海外)
          * @type {string || null}
          */
         this.ProductCode = null;
 
         /**
          * 查询域名 例如 www.qq.com
-非CDN业务查询时可以设置为空
+非CDN业务查询时值为空
          * @type {string || null}
          */
         this.Domain = null;
@@ -574,6 +580,13 @@ class DescribeBillResourceSummaryResponse extends  AbstractModel {
         this.ResourceSummarySet = null;
 
         /**
+         * 资源汇总列表总数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Total = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -597,6 +610,7 @@ class DescribeBillResourceSummaryResponse extends  AbstractModel {
                 this.ResourceSummarySet.push(obj);
             }
         }
+        this.Total = 'Total' in params ? params.Total : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -634,6 +648,13 @@ class DescribeBillResourceSummaryRequest extends  AbstractModel {
          */
         this.Month = null;
 
+        /**
+         * 是否需要访问列表的总记录数，用于前端分页
+1-表示需要， 0-表示不需要
+         * @type {number || null}
+         */
+        this.NeedRecordNum = null;
+
     }
 
     /**
@@ -647,6 +668,7 @@ class DescribeBillResourceSummaryRequest extends  AbstractModel {
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.PeriodType = 'PeriodType' in params ? params.PeriodType : null;
         this.Month = 'Month' in params ? params.Month : null;
+        this.NeedRecordNum = 'NeedRecordNum' in params ? params.NeedRecordNum : null;
 
     }
 }

@@ -17,6 +17,8 @@
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const AgentClientElem = models.AgentClientElem;
+const DescribeAgentDealsCacheRequest = models.DescribeAgentDealsCacheRequest;
+const DescribeSalesmansRequest = models.DescribeSalesmansRequest;
 const DescribeAgentAuditedClientsRequest = models.DescribeAgentAuditedClientsRequest;
 const AgentPayDealsRequest = models.AgentPayDealsRequest;
 const RebateInfoElem = models.RebateInfoElem;
@@ -26,17 +28,24 @@ const DescribeClientBalanceRequest = models.DescribeClientBalanceRequest;
 const DescribeRebateInfosRequest = models.DescribeRebateInfosRequest;
 const DescribeAgentAuditedClientsResponse = models.DescribeAgentAuditedClientsResponse;
 const DescribeAgentBillsResponse = models.DescribeAgentBillsResponse;
+const DescribeAgentPayDealsRequest = models.DescribeAgentPayDealsRequest;
 const AuditApplyClientRequest = models.AuditApplyClientRequest;
 const ModifyClientRemarkResponse = models.ModifyClientRemarkResponse;
 const DescribeAgentClientsResponse = models.DescribeAgentClientsResponse;
 const DescribeAgentClientsRequest = models.DescribeAgentClientsRequest;
+const DescribeSalesmansResponse = models.DescribeSalesmansResponse;
 const AgentAuditedClient = models.AgentAuditedClient;
+const DescribeAgentPayDealsResponse = models.DescribeAgentPayDealsResponse;
+const DealGoodsPriceElem = models.DealGoodsPriceElem;
 const ModifyClientRemarkRequest = models.ModifyClientRemarkRequest;
 const AgentTransferMoneyResponse = models.AgentTransferMoneyResponse;
 const AgentBillElem = models.AgentBillElem;
 const AuditApplyClientResponse = models.AuditApplyClientResponse;
+const DescribeAgentDealsCacheResponse = models.DescribeAgentDealsCacheResponse;
 const DescribeAgentBillsRequest = models.DescribeAgentBillsRequest;
 const AgentPayDealsResponse = models.AgentPayDealsResponse;
+const AgentDealElem = models.AgentDealElem;
+const AgentSalesmanElem = models.AgentSalesmanElem;
 const DescribeRebateInfosResponse = models.DescribeRebateInfosResponse;
 
 
@@ -50,6 +59,17 @@ class PartnersClient extends AbstractClient {
         super("partners.tencentcloudapi.com", "2018-03-21", credential, region, profile);
     }
     
+    /**
+     * 供超大型代理商（代客数量>=3000 ）拉取缓存的全量客户订单。
+     * @param {DescribeAgentDealsCacheRequest} req
+     * @param {function(string, DescribeAgentDealsCacheResponse):void} cb
+     * @public
+     */
+    DescribeAgentDealsCache(req, cb) {
+        let resp = new DescribeAgentDealsCacheResponse();
+        this.request("DescribeAgentDealsCache", req, resp, cb);
+    }
+
     /**
      * 代理商支付订单接口，支持自付/代付
      * @param {AgentPayDealsRequest} req
@@ -95,6 +115,17 @@ class PartnersClient extends AbstractClient {
     }
 
     /**
+     * 代理商查询名下业务员列表信息
+     * @param {DescribeSalesmansRequest} req
+     * @param {function(string, DescribeSalesmansResponse):void} cb
+     * @public
+     */
+    DescribeSalesmans(req, cb) {
+        let resp = new DescribeSalesmansResponse();
+        this.request("DescribeSalesmans", req, resp, cb);
+    }
+
+    /**
      * 代理商可以对名下客户添加备注、修改备注
      * @param {ModifyClientRemarkRequest} req
      * @param {function(string, ModifyClientRemarkResponse):void} cb
@@ -103,6 +134,17 @@ class PartnersClient extends AbstractClient {
     ModifyClientRemark(req, cb) {
         let resp = new ModifyClientRemarkResponse();
         this.request("ModifyClientRemark", req, resp, cb);
+    }
+
+    /**
+     * 可以查询代理商代付的所有订单
+     * @param {DescribeAgentPayDealsRequest} req
+     * @param {function(string, DescribeAgentPayDealsResponse):void} cb
+     * @public
+     */
+    DescribeAgentPayDeals(req, cb) {
+        let resp = new DescribeAgentPayDealsResponse();
+        this.request("DescribeAgentPayDeals", req, resp, cb);
     }
 
     /**

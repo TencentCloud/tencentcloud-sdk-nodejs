@@ -18,6 +18,7 @@ const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const PublishMessageRequest = models.PublishMessageRequest;
 const DeleteProductRequest = models.DeleteProductRequest;
+const UpdateDeviceShadowResponse = models.UpdateDeviceShadowResponse;
 const DescribeTasksRequest = models.DescribeTasksRequest;
 const DisableTopicRuleResponse = models.DisableTopicRuleResponse;
 const ReplaceTopicRuleRequest = models.ReplaceTopicRuleRequest;
@@ -25,7 +26,7 @@ const DeleteTopicRuleRequest = models.DeleteTopicRuleRequest;
 const DescribeMultiDevicesRequest = models.DescribeMultiDevicesRequest;
 const MultiDevicesInfo = models.MultiDevicesInfo;
 const PublishAsDeviceRequest = models.PublishAsDeviceRequest;
-const UpdateDeviceShadowResponse = models.UpdateDeviceShadowResponse;
+const DescribeDeviceClientKeyRequest = models.DescribeDeviceClientKeyRequest;
 const DescribeTaskResponse = models.DescribeTaskResponse;
 const CancelTaskRequest = models.CancelTaskRequest;
 const PublishToDeviceResponse = models.PublishToDeviceResponse;
@@ -35,18 +36,21 @@ const BatchUpdateShadow = models.BatchUpdateShadow;
 const Filter = models.Filter;
 const DeleteDeviceRequest = models.DeleteDeviceRequest;
 const DeleteProductResponse = models.DeleteProductResponse;
-const TopicRulePayload = models.TopicRulePayload;
+const ResetDeviceStateResponse = models.ResetDeviceStateResponse;
 const DescribeMultiDevTaskResponse = models.DescribeMultiDevTaskResponse;
+const TopicRulePayload = models.TopicRulePayload;
 const UpdateTopicPolicyRequest = models.UpdateTopicPolicyRequest;
 const ProductInfo = models.ProductInfo;
 const DescribeDevicesResponse = models.DescribeDevicesResponse;
 const DeviceTag = models.DeviceTag;
 const DeleteTopicRuleResponse = models.DeleteTopicRuleResponse;
+const ProductProperties = models.ProductProperties;
 const DeleteLoraDeviceResponse = models.DeleteLoraDeviceResponse;
 const DescribeDeviceRequest = models.DescribeDeviceRequest;
 const CreateLoraDeviceRequest = models.CreateLoraDeviceRequest;
 const DescribeTaskRequest = models.DescribeTaskRequest;
 const Task = models.Task;
+const ResetDeviceStateRequest = models.ResetDeviceStateRequest;
 const CreateTopicPolicyRequest = models.CreateTopicPolicyRequest;
 const PublishMessageResponse = models.PublishMessageResponse;
 const PublishToDeviceRequest = models.PublishToDeviceRequest;
@@ -79,7 +83,7 @@ const CreateMultiDeviceResponse = models.CreateMultiDeviceResponse;
 const ReplaceTopicRuleResponse = models.ReplaceTopicRuleResponse;
 const DescribeLoraDeviceRequest = models.DescribeLoraDeviceRequest;
 const DescribeDeviceShadowResponse = models.DescribeDeviceShadowResponse;
-const ProductProperties = models.ProductProperties;
+const DescribeDeviceClientKeyResponse = models.DescribeDeviceClientKeyResponse;
 const PublishAsDeviceResponse = models.PublishAsDeviceResponse;
 const CreateMultiDeviceRequest = models.CreateMultiDeviceRequest;
 const EnableTopicRuleRequest = models.EnableTopicRuleRequest;
@@ -233,6 +237,17 @@ class IotcloudClient extends AbstractClient {
     }
 
     /**
+     * 获取证书认证类型设备的私钥，刚生成或者重置设备后仅可调用一次
+     * @param {DescribeDeviceClientKeyRequest} req
+     * @param {function(string, DescribeDeviceClientKeyResponse):void} cb
+     * @public
+     */
+    DescribeDeviceClientKey(req, cb) {
+        let resp = new DescribeDeviceClientKeyResponse();
+        this.request("DescribeDeviceClientKey", req, resp, cb);
+    }
+
+    /**
      * 本接口（DescribeProducts）用于列出产品列表。
      * @param {DescribeProductsRequest} req
      * @param {function(string, DescribeProductsResponse):void} cb
@@ -307,6 +322,17 @@ class IotcloudClient extends AbstractClient {
     DeleteProduct(req, cb) {
         let resp = new DeleteProductResponse();
         this.request("DeleteProduct", req, resp, cb);
+    }
+
+    /**
+     * 重置设备的连接状态
+     * @param {ResetDeviceStateRequest} req
+     * @param {function(string, ResetDeviceStateResponse):void} cb
+     * @public
+     */
+    ResetDeviceState(req, cb) {
+        let resp = new ResetDeviceStateResponse();
+        this.request("ResetDeviceState", req, resp, cb);
     }
 
     /**

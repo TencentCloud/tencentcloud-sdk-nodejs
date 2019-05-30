@@ -43,10 +43,17 @@ class Item extends  AbstractModel {
         this.ItemCoord = null;
 
         /**
-         * 推荐的答案
+         * 推荐的答案，暂不支持多个关系运算符、无关系运算符、单位换算错题的推荐答案返回。
          * @type {string || null}
          */
         this.Answer = null;
+
+        /**
+         * 算式题型编号，如加减乘除四则题型，具体题型及编号如下：1 加减乘除四则 2 加减乘除已知结果求运算因子3 判断大小 4 约等于估算 5 带余数除法 6 分数四则运算 7 单位换算 8 竖式加减法 9 竖式乘除法 10 脱式计算 11 解方程
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ExpressionType = null;
 
     }
 
@@ -66,6 +73,7 @@ class Item extends  AbstractModel {
             this.ItemCoord = obj;
         }
         this.Answer = 'Answer' in params ? params.Answer : null;
+        this.ExpressionType = 'ExpressionType' in params ? params.ExpressionType : null;
 
     }
 }
@@ -91,7 +99,7 @@ class EvaluationRequest extends  AbstractModel {
         this.Image = null;
 
         /**
-         * 业务应用ID，与账号应用APPID无关，是用来方便客户管理服务的参数，新的 HcmAppId 可以在[控制台](https://console.cloud.tencent.com/hcm)【应用管理】下新建。
+         * 业务应用ID，与账号应用APPID无关，是用来方便客户管理服务的参数，新的 HcmAppid 可以在[控制台](https://console.cloud.tencent.com/hcm)【应用管理】下新建。
          * @type {string || null}
          */
         this.HcmAppid = null;
@@ -101,6 +109,18 @@ class EvaluationRequest extends  AbstractModel {
          * @type {string || null}
          */
         this.Url = null;
+
+        /**
+         * 横屏拍摄开关，若开启则支持传输横屏拍摄的图片；
+         * @type {boolean || null}
+         */
+        this.SupportHorizontalImage = null;
+
+        /**
+         * 拒绝非速算图（如风景图、人物图）开关，若开启，则遇到非速算图会快速返回拒绝的结果，但极端情况下可能会影响评估结果（比如算式截图贴到风景画里可能被判为非速算图直接返回了）。
+         * @type {boolean || null}
+         */
+        this.RejectNonArithmeticImage = null;
 
     }
 
@@ -115,6 +135,8 @@ class EvaluationRequest extends  AbstractModel {
         this.Image = 'Image' in params ? params.Image : null;
         this.HcmAppid = 'HcmAppid' in params ? params.HcmAppid : null;
         this.Url = 'Url' in params ? params.Url : null;
+        this.SupportHorizontalImage = 'SupportHorizontalImage' in params ? params.SupportHorizontalImage : null;
+        this.RejectNonArithmeticImage = 'RejectNonArithmeticImage' in params ? params.RejectNonArithmeticImage : null;
 
     }
 }

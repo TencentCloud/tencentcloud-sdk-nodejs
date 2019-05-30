@@ -616,16 +616,23 @@ class DescribeTaskStatusResponse extends  AbstractModel {
         super();
 
         /**
-         * 任务结果
+         * 任务结果，例如上传成功时返回“File Uploading Task Success.”
          * @type {string || null}
          */
         this.TaskResult = null;
 
         /**
-         * <p>任务类型：</p><ul style="margin-bottom:0px;"><li>报告下载：001</li><li>催收数据上传：002</li><li>还款数据上传：003</li><li>回访数据上传：004</li></ul>
+         * <p>任务类型：</p><ul style="margin-bottom:0px;"><li>报告下载：001</li><li>催收数据上传：002</li><li>还款数据上传：003</li><li>回访数据上传：004</li><li>停拨数据上传：005</li></ul>
          * @type {string || null}
          */
         this.TaskType = null;
+
+        /**
+         * 过滤文件下载链接，有过滤数据时才存在。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.TaskFileUrl = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -644,6 +651,7 @@ class DescribeTaskStatusResponse extends  AbstractModel {
         }
         this.TaskResult = 'TaskResult' in params ? params.TaskResult : null;
         this.TaskType = 'TaskType' in params ? params.TaskType : null;
+        this.TaskFileUrl = 'TaskFileUrl' in params ? params.TaskFileUrl : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -851,6 +859,12 @@ class SingleBlackApply extends  AbstractModel {
          */
         this.BlackDescription = null;
 
+        /**
+         * 黑名单生效截止日期，格式为YYYY-MM-DD，不填默认为永久。
+         * @type {string || null}
+         */
+        this.BlackValidDate = null;
+
     }
 
     /**
@@ -864,6 +878,7 @@ class SingleBlackApply extends  AbstractModel {
         this.OperationType = 'OperationType' in params ? params.OperationType : null;
         this.BlackValue = 'BlackValue' in params ? params.BlackValue : null;
         this.BlackDescription = 'BlackDescription' in params ? params.BlackDescription : null;
+        this.BlackValidDate = 'BlackValidDate' in params ? params.BlackValidDate : null;
 
     }
 }

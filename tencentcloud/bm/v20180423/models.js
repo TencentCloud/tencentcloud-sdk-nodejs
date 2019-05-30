@@ -1157,6 +1157,12 @@ class DevicePartition extends  AbstractModel {
          */
         this.SysDataSpace = null;
 
+        /**
+         * 硬盘大小详情
+         * @type {Array.<DeviceDiskSizeInfo> || null}
+         */
+        this.DeviceDiskSizeInfoSet = null;
+
     }
 
     /**
@@ -1173,6 +1179,15 @@ class DevicePartition extends  AbstractModel {
         this.SysSwaporuefiSpace = 'SysSwaporuefiSpace' in params ? params.SysSwaporuefiSpace : null;
         this.SysUsrlocalSpace = 'SysUsrlocalSpace' in params ? params.SysUsrlocalSpace : null;
         this.SysDataSpace = 'SysDataSpace' in params ? params.SysDataSpace : null;
+
+        if (params.DeviceDiskSizeInfoSet) {
+            this.DeviceDiskSizeInfoSet = new Array();
+            for (let z in params.DeviceDiskSizeInfoSet) {
+                let obj = new DeviceDiskSizeInfo();
+                obj.deserialize(params.DeviceDiskSizeInfoSet[z]);
+                this.DeviceDiskSizeInfoSet.push(obj);
+            }
+        }
 
     }
 }
@@ -1593,7 +1608,7 @@ class BuyDevicesRequest extends  AbstractModel {
 
         /**
          * CPU型号ID，自定义机型需要传入，取值：
-<br/><li>1: E5-2620v3 (6核) &#42; 2</li><li>2: E5-2680v4 (14核) &#42; 2</li><li>3: E5-2670v3 (12核) &#42; 2</li><li>4: E5-2620v4 (8核) &#42; 2</li><li>5: 4110 (8核) &#42; 2</li><li>6: 6133 (20核) &#42; 2</li><br/>
+<br/><li>1: E5-2620v3 (6核) * 2</li><li>2: E5-2680v4 (14核) * 2</li><li>3: E5-2670v3 (12核) * 2</li><li>4: E5-2620v4 (8核) * 2</li><li>5: 4110 (8核) * 2</li><li>6: 6133 (20核) * 2</li><br/>
          * @type {number || null}
          */
         this.CpuId = null;

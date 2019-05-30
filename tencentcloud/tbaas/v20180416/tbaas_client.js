@@ -16,13 +16,21 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
-const QueryRequest = models.QueryRequest;
-const GetInvokeTxResponse = models.GetInvokeTxResponse;
-const InvokeRequest = models.InvokeRequest;
+const GetBlockListRequest = models.GetBlockListRequest;
 const PeerSet = models.PeerSet;
+const InvokeRequest = models.InvokeRequest;
+const GetInvokeTxResponse = models.GetInvokeTxResponse;
+const GetBlockListResponse = models.GetBlockListResponse;
+const TransactionItem = models.TransactionItem;
+const QueryRequest = models.QueryRequest;
+const GetClusterSummaryResponse = models.GetClusterSummaryResponse;
+const GetLatesdTransactionListRequest = models.GetLatesdTransactionListRequest;
 const GetInvokeTxRequest = models.GetInvokeTxRequest;
+const GetLatesdTransactionListResponse = models.GetLatesdTransactionListResponse;
 const InvokeResponse = models.InvokeResponse;
 const QueryResponse = models.QueryResponse;
+const GetClusterSummaryRequest = models.GetClusterSummaryRequest;
+const Block = models.Block;
 
 
 /**
@@ -36,14 +44,25 @@ class TbaasClient extends AbstractClient {
     }
     
     /**
-     * 查询交易
-     * @param {QueryRequest} req
-     * @param {function(string, QueryResponse):void} cb
+     * 新增交易
+     * @param {InvokeRequest} req
+     * @param {function(string, InvokeResponse):void} cb
      * @public
      */
-    Query(req, cb) {
-        let resp = new QueryResponse();
-        this.request("Query", req, resp, cb);
+    Invoke(req, cb) {
+        let resp = new InvokeResponse();
+        this.request("Invoke", req, resp, cb);
+    }
+
+    /**
+     * 获取区块链网络概要
+     * @param {GetClusterSummaryRequest} req
+     * @param {function(string, GetClusterSummaryResponse):void} cb
+     * @public
+     */
+    GetClusterSummary(req, cb) {
+        let resp = new GetClusterSummaryResponse();
+        this.request("GetClusterSummary", req, resp, cb);
     }
 
     /**
@@ -58,14 +77,36 @@ class TbaasClient extends AbstractClient {
     }
 
     /**
-     * 新增交易
-     * @param {InvokeRequest} req
-     * @param {function(string, InvokeResponse):void} cb
+     * 查看当前网络下的所有区块列表，分页展示
+     * @param {GetBlockListRequest} req
+     * @param {function(string, GetBlockListResponse):void} cb
      * @public
      */
-    Invoke(req, cb) {
-        let resp = new InvokeResponse();
-        this.request("Invoke", req, resp, cb);
+    GetBlockList(req, cb) {
+        let resp = new GetBlockListResponse();
+        this.request("GetBlockList", req, resp, cb);
+    }
+
+    /**
+     * 查询交易
+     * @param {QueryRequest} req
+     * @param {function(string, QueryResponse):void} cb
+     * @public
+     */
+    Query(req, cb) {
+        let resp = new QueryResponse();
+        this.request("Query", req, resp, cb);
+    }
+
+    /**
+     * 获取最新交易列表
+     * @param {GetLatesdTransactionListRequest} req
+     * @param {function(string, GetLatesdTransactionListResponse):void} cb
+     * @public
+     */
+    GetLatesdTransactionList(req, cb) {
+        let resp = new GetLatesdTransactionListResponse();
+        this.request("GetLatesdTransactionList", req, resp, cb);
     }
 
 

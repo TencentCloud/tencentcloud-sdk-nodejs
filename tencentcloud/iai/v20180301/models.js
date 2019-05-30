@@ -514,7 +514,7 @@ class FaceAttributesInfo extends  AbstractModel {
         super();
 
         /**
-         * 性别 [0(female)~100(male)]。 NeedFaceAttributes 不为 1 或检测超过 5 张人脸时，此参数仍返回，但不具备参考意义。
+         * 性别 [0(female，女性)~100(male，男性)]。 NeedFaceAttributes 不为 1 或检测超过 5 张人脸时，此参数仍返回，但不具备参考意义。
          * @type {number || null}
          */
         this.Gender = null;
@@ -526,7 +526,7 @@ class FaceAttributesInfo extends  AbstractModel {
         this.Age = null;
 
         /**
-         * 微笑[0(normal)~50(smile)~100(laugh)]。NeedFaceAttributes 不为1 或检测超过 5 张人脸时，此参数仍返回，但不具备参考意义。
+         * 微笑[0(normal，正常)~50(smile，微笑)~100(laugh，大笑)]。NeedFaceAttributes 不为1 或检测超过 5 张人脸时，此参数仍返回，但不具备参考意义。
          * @type {number || null}
          */
         this.Expression = null;
@@ -2183,7 +2183,7 @@ class DetectFaceRequest extends  AbstractModel {
         super();
 
         /**
-         * 最多处理的人脸数目。默认值为1（仅检测图片中面积最大的那张人脸），最大值为30。 
+         * 最多处理的人脸数目。默认值为1（仅检测图片中面积最大的那张人脸），最大值为120。 
 此参数用于控制处理待检测图片中的人脸个数，值越小，处理速度越快。
          * @type {number || null}
          */
@@ -2221,7 +2221,8 @@ class DetectFaceRequest extends  AbstractModel {
 
         /**
          * 是否开启质量检测。0 为关闭，1 为开启。默认为 0。 
-非 1 值均视为不进行质量检测。  
+非 1 值均视为不进行质量检测。
+最多返回面积最大的 5 张人脸质量分信息，超过 5 张人脸（第 6 张及以后的人脸）的 FaceQualityInfo不具备参考意义。  
 建议：人脸入库操作建议开启此功能。
          * @type {number || null}
          */
