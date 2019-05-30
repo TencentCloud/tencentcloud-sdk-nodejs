@@ -596,7 +596,7 @@ Code 告警码列表和释义：
 }
 
 /**
- * 文本识别结果
+ * 英文识别结果
  * @class
  */
 class TextDetectionEn extends  AbstractModel {

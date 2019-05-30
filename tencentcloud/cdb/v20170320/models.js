@@ -171,7 +171,7 @@ class CreateDBInstanceRequest extends  AbstractModel {
         this.SlaveZone = null;
 
         /**
-         * 参数列表，参数格式如ParamList.0.Name=auto_increment&ParamList.0.Value=1。可通过[查询实例的可设置参数列表](https://cloud.tencent.com/document/api/236/20411)查询支持设置的参数
+         * 参数列表，参数格式如ParamList.0.Name=auto_increment&ParamList.0.Value=1。可通过[查询默认的可设置参数列表](https://cloud.tencent.com/document/api/236/32662)查询支持设置的参数
          * @type {Array.<ParamInfo> || null}
          */
         this.ParamList = null;
@@ -2990,7 +2990,7 @@ class CreateDBInstanceHourRequest extends  AbstractModel {
         this.Password = null;
 
         /**
-         * 参数列表，参数格式如ParamList.0.Name=auto_increment&ParamList.0.Value=1。可通过[查询实例的可设置参数列表](https://cloud.tencent.com/document/api/236/20411)查询支持设置的参数
+         * 参数列表，参数格式如ParamList.0.Name=auto_increment&ParamList.0.Value=1。可通过[查询默认的可设置参数列表](https://cloud.tencent.com/document/api/236/32662)查询支持设置的参数
          * @type {Array.<ParamInfo> || null}
          */
         this.ParamList = null;
@@ -7142,7 +7142,7 @@ class ModifyAccountPasswordRequest extends  AbstractModel {
         this.InstanceId = null;
 
         /**
-         * 数据库账号的新密码。
+         * 数据库账号的新密码。密码应至少包含字母、数字和字符（_+-&=!@#$%^*()）中的两种，长度为8-64个字符。
          * @type {string || null}
          */
         this.NewPassword = null;

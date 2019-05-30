@@ -25,6 +25,7 @@ const DictInfo = models.DictInfo;
 const CreateInstanceResponse = models.CreateInstanceResponse;
 const DescribeInstanceLogsRequest = models.DescribeInstanceLogsRequest;
 const CosBackup = models.CosBackup;
+const TagInfo = models.TagInfo;
 const KeyValue = models.KeyValue;
 const CreateInstanceRequest = models.CreateInstanceRequest;
 const InstanceInfo = models.InstanceInfo;
@@ -33,8 +34,9 @@ const DescribeInstancesResponse = models.DescribeInstancesResponse;
 const DescribeInstanceLogsResponse = models.DescribeInstanceLogsResponse;
 const RestartInstanceRequest = models.RestartInstanceRequest;
 const DescribeInstancesRequest = models.DescribeInstancesRequest;
-const UpdateInstanceRequest = models.UpdateInstanceRequest;
 const EsDictionaryInfo = models.EsDictionaryInfo;
+const UpdateInstanceRequest = models.UpdateInstanceRequest;
+const MultiZoneInfo = models.MultiZoneInfo;
 const DescribeInstanceOperationsResponse = models.DescribeInstanceOperationsResponse;
 const EsAcl = models.EsAcl;
 const MasterNodeInfo = models.MasterNodeInfo;
@@ -88,17 +90,17 @@ class EsClient extends AbstractClient {
     }
 
     /**
-     * 对集群进行扩缩容，修改实例名称，修改配置，重置密码， 添加Kibana黑白名单等操作。参数中InstanceId为必传参数，ForceRestart为选填参数，剩余参数传递组合及含义如下：<br>
-  InstanceName：修改实例名称(仅用于标识实例)<br>
-  NodeNum：集群数据节点横向扩缩容<br>
-  NodeType, DiskSize：集群数据节点纵向扩缩容<br>
-  MasterNodeNum: 集群专用主节点横向扩缩容<br>
-  MasterNodeType, MasterNodeDiskSize: 集群专用主节点纵向扩缩容<br>
-  EsConfig：修改集群配置<br>
-  Password：修改集群密码<br>
-  EsAcl：修改Kibana密码<br>
-  CosBackUp: 设置集群COS自动备份信息<br>
-以上参数组合只能传递一种，多传或少传均会导致请求失败<br>
+     * 对集群进行扩缩容，修改实例名称，修改配置，重置密码， 添加Kibana黑白名单等操作。参数中InstanceId为必传参数，ForceRestart为选填参数，剩余参数传递组合及含义如下：
+- InstanceName：修改实例名称(仅用于标识实例)
+- NodeNum：集群数据节点横向扩缩容
+- NodeType, DiskSize：集群数据节点纵向扩缩容
+- MasterNodeNum: 集群专用主节点横向扩缩容
+- MasterNodeType, MasterNodeDiskSize: 集群专用主节点纵向扩缩容
+- EsConfig：修改集群配置
+- Password：修改默认用户elastic的密码
+- EsAcl：修改访问控制列表
+- CosBackUp: 设置集群COS自动备份信息
+以上参数组合只能传递一种，多传或少传均会导致请求失败
      * @param {UpdateInstanceRequest} req
      * @param {function(string, UpdateInstanceResponse):void} cb
      * @public

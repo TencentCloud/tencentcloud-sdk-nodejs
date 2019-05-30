@@ -1355,6 +1355,12 @@ class RemoveInstancesResponse extends  AbstractModel {
         super();
 
         /**
+         * 伸缩活动ID
+         * @type {string || null}
+         */
+        this.ActivityId = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -1369,6 +1375,7 @@ class RemoveInstancesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.ActivityId = 'ActivityId' in params ? params.ActivityId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -1481,6 +1488,12 @@ class DetachInstancesResponse extends  AbstractModel {
         super();
 
         /**
+         * 伸缩活动ID
+         * @type {string || null}
+         */
+        this.ActivityId = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -1495,6 +1508,7 @@ class DetachInstancesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.ActivityId = 'ActivityId' in params ? params.ActivityId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -1875,6 +1889,12 @@ class AttachInstancesResponse extends  AbstractModel {
         super();
 
         /**
+         * 伸缩活动ID
+         * @type {string || null}
+         */
+        this.ActivityId = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -1889,6 +1909,7 @@ class AttachInstancesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.ActivityId = 'ActivityId' in params ? params.ActivityId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -2087,7 +2108,7 @@ class ScalingPolicy extends  AbstractModel {
 
         /**
          * 告警触发后，期望实例数的调整值。
-         * @type {string || null}
+         * @type {number || null}
          */
         this.AdjustmentValue = null;
 
@@ -2813,6 +2834,187 @@ class DeleteScheduledActionResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * UpgradeLaunchConfiguration请求参数结构体
+ * @class
+ */
+class UpgradeLaunchConfigurationRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 启动配置ID。
+         * @type {string || null}
+         */
+        this.LaunchConfigurationId = null;
+
+        /**
+         * 指定有效的[镜像](https://cloud.tencent.com/document/product/213/4940)ID，格式形如`img-8toqc6s3`。镜像类型分为四种：<br/><li>公共镜像</li><li>自定义镜像</li><li>共享镜像</li><li>服务市场镜像</li><br/>可通过以下方式获取可用的镜像ID：<br/><li>`公共镜像`、`自定义镜像`、`共享镜像`的镜像ID可通过登录[控制台](https://console.cloud.tencent.com/cvm/image?rid=1&imageType=PUBLIC_IMAGE)查询；`服务镜像市场`的镜像ID可通过[云市场](https://market.cloud.tencent.com/list)查询。</li><li>通过调用接口 [DescribeImages](https://cloud.tencent.com/document/api/213/15715) ，取返回信息中的`ImageId`字段。</li>
+         * @type {string || null}
+         */
+        this.ImageId = null;
+
+        /**
+         * 实例机型列表，不同实例机型指定了不同的资源规格，最多支持5种实例机型。
+         * @type {Array.<string> || null}
+         */
+        this.InstanceTypes = null;
+
+        /**
+         * 启动配置显示名称。名称仅支持中文、英文、数字、下划线、分隔符"-"、小数点，最大长度不能超60个字节。
+         * @type {string || null}
+         */
+        this.LaunchConfigurationName = null;
+
+        /**
+         * 实例数据盘配置信息。若不指定该参数，则默认不购买数据盘，最多支持指定11块数据盘。
+         * @type {Array.<DataDisk> || null}
+         */
+        this.DataDisks = null;
+
+        /**
+         * 增强服务。通过该参数可以指定是否开启云安全、云监控等服务。若不指定该参数，则默认开启云监控、云安全服务。
+         * @type {EnhancedService || null}
+         */
+        this.EnhancedService = null;
+
+        /**
+         * 实例计费类型，CVM默认值按照POSTPAID_BY_HOUR处理。
+<br><li>POSTPAID_BY_HOUR：按小时后付费
+<br><li>SPOTPAID：竞价付费
+         * @type {string || null}
+         */
+        this.InstanceChargeType = null;
+
+        /**
+         * 实例的市场相关选项，如竞价实例相关参数，若指定实例的付费模式为竞价付费则该参数必传。
+         * @type {InstanceMarketOptionsRequest || null}
+         */
+        this.InstanceMarketOptions = null;
+
+        /**
+         * 实例类型校验策略，取值包括 ALL 和 ANY，默认取值为ANY。
+<br><li> ALL，所有实例类型（InstanceType）都可用则通过校验，否则校验报错。
+<br><li> ANY，存在任何一个实例类型（InstanceType）可用则通过校验，否则校验报错。
+
+实例类型不可用的常见原因包括该实例类型售罄、对应云盘售罄等。
+如果 InstanceTypes 中一款机型不存在或者已下线，则无论 InstanceTypesCheckPolicy 采用何种取值，都会校验报错。
+         * @type {string || null}
+         */
+        this.InstanceTypesCheckPolicy = null;
+
+        /**
+         * 公网带宽相关信息设置。若不指定该参数，则默认公网带宽为0Mbps。
+         * @type {InternetAccessible || null}
+         */
+        this.InternetAccessible = null;
+
+        /**
+         * 实例登录设置。通过该参数可以设置实例的登录方式密码、密钥或保持镜像的原始登录设置。默认情况下会随机生成密码，并以站内信方式知会到用户。
+         * @type {LoginSettings || null}
+         */
+        this.LoginSettings = null;
+
+        /**
+         * 实例所属项目ID。该参数可以通过调用 [DescribeProject](https://cloud.tencent.com/document/api/378/4400) 的返回值中的`projectId`字段来获取。不填为默认项目。
+         * @type {number || null}
+         */
+        this.ProjectId = null;
+
+        /**
+         * 实例所属安全组。该参数可以通过调用 [DescribeSecurityGroups](https://cloud.tencent.com/document/api/215/15808) 的返回值中的`SecurityGroupId`字段来获取。若不指定该参数，则默认不绑定安全组。
+         * @type {Array.<string> || null}
+         */
+        this.SecurityGroupIds = null;
+
+        /**
+         * 实例系统盘配置信息。若不指定该参数，则按照系统默认值进行分配。
+         * @type {SystemDisk || null}
+         */
+        this.SystemDisk = null;
+
+        /**
+         * 经过 Base64 编码后的自定义数据，最大长度不超过16KB。
+         * @type {string || null}
+         */
+        this.UserData = null;
+
+        /**
+         * 标签列表。通过指定该参数，可以为扩容的实例绑定标签。最多支持指定10个标签。
+         * @type {Array.<InstanceTag> || null}
+         */
+        this.InstanceTags = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LaunchConfigurationId = 'LaunchConfigurationId' in params ? params.LaunchConfigurationId : null;
+        this.ImageId = 'ImageId' in params ? params.ImageId : null;
+        this.InstanceTypes = 'InstanceTypes' in params ? params.InstanceTypes : null;
+        this.LaunchConfigurationName = 'LaunchConfigurationName' in params ? params.LaunchConfigurationName : null;
+
+        if (params.DataDisks) {
+            this.DataDisks = new Array();
+            for (let z in params.DataDisks) {
+                let obj = new DataDisk();
+                obj.deserialize(params.DataDisks[z]);
+                this.DataDisks.push(obj);
+            }
+        }
+
+        if (params.EnhancedService) {
+            let obj = new EnhancedService();
+            obj.deserialize(params.EnhancedService)
+            this.EnhancedService = obj;
+        }
+        this.InstanceChargeType = 'InstanceChargeType' in params ? params.InstanceChargeType : null;
+
+        if (params.InstanceMarketOptions) {
+            let obj = new InstanceMarketOptionsRequest();
+            obj.deserialize(params.InstanceMarketOptions)
+            this.InstanceMarketOptions = obj;
+        }
+        this.InstanceTypesCheckPolicy = 'InstanceTypesCheckPolicy' in params ? params.InstanceTypesCheckPolicy : null;
+
+        if (params.InternetAccessible) {
+            let obj = new InternetAccessible();
+            obj.deserialize(params.InternetAccessible)
+            this.InternetAccessible = obj;
+        }
+
+        if (params.LoginSettings) {
+            let obj = new LoginSettings();
+            obj.deserialize(params.LoginSettings)
+            this.LoginSettings = obj;
+        }
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+        this.SecurityGroupIds = 'SecurityGroupIds' in params ? params.SecurityGroupIds : null;
+
+        if (params.SystemDisk) {
+            let obj = new SystemDisk();
+            obj.deserialize(params.SystemDisk)
+            this.SystemDisk = obj;
+        }
+        this.UserData = 'UserData' in params ? params.UserData : null;
+
+        if (params.InstanceTags) {
+            this.InstanceTags = new Array();
+            for (let z in params.InstanceTags) {
+                let obj = new InstanceTag();
+                obj.deserialize(params.InstanceTags[z]);
+                this.InstanceTags.push(obj);
+            }
+        }
 
     }
 }
@@ -4627,7 +4829,7 @@ class MetricAlarm extends  AbstractModel {
         this.Threshold = null;
 
         /**
-         * 时间周期。单位：秒
+         * 时间周期，单位：秒，取值枚举值为60、300。
          * @type {number || null}
          */
         this.Period = null;
@@ -4781,7 +4983,7 @@ class LifecycleHook extends  AbstractModel {
 
         /**
          * 通知目标
-         * @type {string || null}
+         * @type {NotificationTarget || null}
          */
         this.NotificationTarget = null;
 
@@ -4802,7 +5004,12 @@ class LifecycleHook extends  AbstractModel {
         this.LifecycleTransition = 'LifecycleTransition' in params ? params.LifecycleTransition : null;
         this.NotificationMetadata = 'NotificationMetadata' in params ? params.NotificationMetadata : null;
         this.CreatedTime = 'CreatedTime' in params ? params.CreatedTime : null;
-        this.NotificationTarget = 'NotificationTarget' in params ? params.NotificationTarget : null;
+
+        if (params.NotificationTarget) {
+            let obj = new NotificationTarget();
+            obj.deserialize(params.NotificationTarget)
+            this.NotificationTarget = obj;
+        }
 
     }
 }
@@ -5436,6 +5643,34 @@ class DescribePaiInstancesResponse extends  AbstractModel {
     }
 }
 
+/**
+ * UpgradeLaunchConfiguration返回参数结构体
+ * @class
+ */
+class UpgradeLaunchConfigurationResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
 module.exports = {
     DisableAutoScalingGroupResponse: DisableAutoScalingGroupResponse,
     ModifyLaunchConfigurationAttributesRequest: ModifyLaunchConfigurationAttributesRequest,
@@ -5492,6 +5727,7 @@ module.exports = {
     PaiInstance: PaiInstance,
     CreateAutoScalingGroupRequest: CreateAutoScalingGroupRequest,
     DeleteScheduledActionResponse: DeleteScheduledActionResponse,
+    UpgradeLaunchConfigurationRequest: UpgradeLaunchConfigurationRequest,
     DescribeAutoScalingActivitiesResponse: DescribeAutoScalingActivitiesResponse,
     ModifyNotificationConfigurationRequest: ModifyNotificationConfigurationRequest,
     DataDisk: DataDisk,
@@ -5543,5 +5779,6 @@ module.exports = {
     EnableAutoScalingGroupResponse: EnableAutoScalingGroupResponse,
     InstanceChargePrepaid: InstanceChargePrepaid,
     DescribePaiInstancesResponse: DescribePaiInstancesResponse,
+    UpgradeLaunchConfigurationResponse: UpgradeLaunchConfigurationResponse,
 
 }

@@ -26,10 +26,10 @@ class DescribeDatabaseACLResponse extends  AbstractModel {
 
         /**
          * 权限标签。取值范围：
-<li> READONLY ： 公有读，私有写 </li>
-<li> PRIVATE  ：私有读写 </li>
-<li> ADMINWRITE ： 仅管理员可写 </li>
-<li> ADMINONLY ： 仅管理员可操作 </li>
+<li> READONLY：所有用户可读，仅创建者和管理员可写</li>
+<li> PRIVATE：仅创建者及管理员可读写</li>
+<li> ADMINWRITE：所有用户可读，仅管理员可写</li>
+<li> ADMINONLY：仅管理员可读写</li>
          * @type {string || null}
          */
         this.AclTag = null;
@@ -161,7 +161,7 @@ class ModifyEnvRequest extends  AbstractModel {
         super();
 
         /**
-         * 环境唯一标识
+         * 环境ID
          * @type {string || null}
          */
         this.EnvId = null;
@@ -210,7 +210,7 @@ class EnvInfo extends  AbstractModel {
         this.Source = null;
 
         /**
-         * 备注名
+         * 环境别名，要以a-z开头，不能包含 a-zA-z0-9- 以外的字符
          * @type {string || null}
          */
         this.Alias = null;
@@ -255,24 +255,14 @@ class EnvInfo extends  AbstractModel {
         this.Functions = null;
 
         /**
-         * 套餐ID。包含以下取值：
-<li>baisc ：表示基础版</li>
-<li>professional ：表示专业版</li>
-<li>business ： 表示企业版</li>
-<li>flagship：表示旗舰版</li>
-<li>supremacy：表示至尊版</li>
+         * tcb产品套餐ID，参考DescribePackages接口的返回值。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.PackageId = null;
 
         /**
-         * 套餐中文名称。包含以下取值：
-<li>基础版</li>
-<li>专业版</li>
-<li>企业版</li>
-<li>旗舰版</li>
-<li>至尊版</li>
+         * 套餐中文名称，参考DescribePackages接口的返回值。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
@@ -412,10 +402,10 @@ class ModifyDatabaseACLRequest extends  AbstractModel {
 
         /**
          * 权限标签。取值范围：
-<li> READONLY ： 公有读，私有写 </li>
-<li> PRIVATE  ：私有读写 </li>
-<li> ADMINWRITE ： 仅管理员可写 </li>
-<li> ADMINONLY ： 仅管理员可操作 </li>
+<li> READONLY：所有用户可读，仅创建者和管理员可写</li>
+<li> PRIVATE：仅创建者及管理员可读写</li>
+<li> ADMINWRITE：所有用户可读，仅管理员可写</li>
+<li> ADMINONLY：仅管理员可读写</li>
          * @type {string || null}
          */
         this.AclTag = null;
