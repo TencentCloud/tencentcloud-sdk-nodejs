@@ -692,6 +692,48 @@ class L4ListenerInfo extends  AbstractModel {
          */
         this.AddTimestamp = null;
 
+        /**
+         * 是否开启自定义健康检查：1（开启）、0（关闭）。默认值0，表示关闭。（该字段在健康检查开启的情况下才生效）
+         * @type {number || null}
+         */
+        this.CustomHealthSwitch = null;
+
+        /**
+         * 自定义健康探测内容类型，可选值：text（文本）、hexadecimal（十六进制）。
+         * @type {string || null}
+         */
+        this.InputType = null;
+
+        /**
+         * 探测内容类型为文本方式时，针对请求文本中换行替换方式。可选值：1（替换为LF）、2（替换为CR）、3（替换为LF+CR）。
+         * @type {number || null}
+         */
+        this.LineSeparatorType = null;
+
+        /**
+         * 自定义探测请求内容。
+         * @type {string || null}
+         */
+        this.HealthRequest = null;
+
+        /**
+         * 自定义探测返回内容。
+         * @type {string || null}
+         */
+        this.HealthResponse = null;
+
+        /**
+         * 是否开启toa：1（开启）、0（关闭）。
+         * @type {number || null}
+         */
+        this.ToaFlag = null;
+
+        /**
+         * 转发后端服务器调度类型。
+         * @type {string || null}
+         */
+        this.BalanceMode = null;
+
     }
 
     /**
@@ -715,6 +757,13 @@ class L4ListenerInfo extends  AbstractModel {
         this.UnhealthNum = 'UnhealthNum' in params ? params.UnhealthNum : null;
         this.Status = 'Status' in params ? params.Status : null;
         this.AddTimestamp = 'AddTimestamp' in params ? params.AddTimestamp : null;
+        this.CustomHealthSwitch = 'CustomHealthSwitch' in params ? params.CustomHealthSwitch : null;
+        this.InputType = 'InputType' in params ? params.InputType : null;
+        this.LineSeparatorType = 'LineSeparatorType' in params ? params.LineSeparatorType : null;
+        this.HealthRequest = 'HealthRequest' in params ? params.HealthRequest : null;
+        this.HealthResponse = 'HealthResponse' in params ? params.HealthResponse : null;
+        this.ToaFlag = 'ToaFlag' in params ? params.ToaFlag : null;
+        this.BalanceMode = 'BalanceMode' in params ? params.BalanceMode : null;
 
     }
 }
@@ -1136,7 +1185,7 @@ class ModifyL7ListenerResponse extends  AbstractModel {
 
         /**
          * 任务ID。该接口为异步任务，可根据本参数调用[DescribeLoadBalancerTaskResult](/document/product/386/9308)接口来查询任务操作结果
-         * @type {number || null}
+         * @type {string || null}
          */
         this.TaskId = null;
 
@@ -2360,7 +2409,7 @@ class CreateL4ListenersResponse extends  AbstractModel {
 
         /**
          * 任务ID。该接口为异步任务，可根据本参数调用DescribeLoadBalancerTaskResult接口来查询任务操作结果
-         * @type {number || null}
+         * @type {string || null}
          */
         this.TaskId = null;
 
@@ -5036,7 +5085,7 @@ class DeleteLoadBalancerResponse extends  AbstractModel {
 
         /**
          * 任务ID。该接口为异步任务，可根据本参数调用DescribeLoadBalancerTaskResult接口来查询任务操作结果。
-         * @type {number || null}
+         * @type {string || null}
          */
         this.TaskId = null;
 
@@ -7899,12 +7948,6 @@ class LoadBalancer extends  AbstractModel {
          */
         this.BzL7Metrics = null;
 
-        /**
-         * Isp类型。5:腾讯CAP;7:内网。
-         * @type {string || null}
-         */
-        this.IspId = null;
-
     }
 
     /**
@@ -7940,7 +7983,6 @@ class LoadBalancer extends  AbstractModel {
         this.BzPayMode = 'BzPayMode' in params ? params.BzPayMode : null;
         this.BzL4Metrics = 'BzL4Metrics' in params ? params.BzL4Metrics : null;
         this.BzL7Metrics = 'BzL7Metrics' in params ? params.BzL7Metrics : null;
-        this.IspId = 'IspId' in params ? params.IspId : null;
 
     }
 }

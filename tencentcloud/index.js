@@ -16,6 +16,7 @@ module.exports = {
     cim: require("./cim"),
     cis: require("./cis"),
     clb: require("./clb"),
+    cloudaudit: require("./cloudaudit"),
     cms: require("./cms"),
     common: require("./common"),
     cr: require("./cr"),
@@ -53,6 +54,7 @@ module.exports = {
     soe: require("./soe"),
     sqlserver: require("./sqlserver"),
     sts: require("./sts"),
+    tag: require("./tag"),
     tav: require("./tav"),
     tbaas: require("./tbaas"),
     tbm: require("./tbm"),
@@ -66,6 +68,7 @@ module.exports = {
     vod: require("./vod"),
     vpc: require("./vpc"),
     youmall: require("./youmall"),
-    yunjing: require("./yunjing")
+    yunjing: require("./yunjing"),
+    yunsou: require("./yunsou")
 };
 

@@ -16,6 +16,7 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
+const LivenessRequest = models.LivenessRequest;
 const GetLiveCodeResponse = models.GetLiveCodeResponse;
 const DetectAuthResponse = models.DetectAuthResponse;
 const ImageRecognitionResponse = models.ImageRecognitionResponse;
@@ -31,6 +32,7 @@ const IdCardVerificationRequest = models.IdCardVerificationRequest;
 const BankCardVerificationRequest = models.BankCardVerificationRequest;
 const ImageRecognitionRequest = models.ImageRecognitionRequest;
 const LivenessCompareRequest = models.LivenessCompareRequest;
+const LivenessResponse = models.LivenessResponse;
 const GetActionSequenceResponse = models.GetActionSequenceResponse;
 const LivenessRecognitionResponse = models.LivenessRecognitionResponse;
 const LivenessRecognitionRequest = models.LivenessRecognitionRequest;
@@ -102,6 +104,17 @@ class FaceidClient extends AbstractClient {
     }
 
     /**
+     * 活体检测
+     * @param {LivenessRequest} req
+     * @param {function(string, LivenessResponse):void} cb
+     * @public
+     */
+    Liveness(req, cb) {
+        let resp = new LivenessResponse();
+        this.request("Liveness", req, resp, cb);
+    }
+
+    /**
      * 传入视频和身份信息，先判断视频中是否为真人，判断为真人后，再判断该视频中的人与公安权威库的证件照是否属于同一个人。
      * @param {LivenessRecognitionRequest} req
      * @param {function(string, LivenessRecognitionResponse):void} cb
@@ -135,7 +148,7 @@ class FaceidClient extends AbstractClient {
     }
 
     /**
-     * 每次开始核身前，需先调用本接口获取BizToken，用来串联核身流程，在核身完成后，用于获取验证结果信息。
+     * 每次调用人脸核身SaaS化服务前，需先调用本接口获取BizToken，用来串联核身流程，在验证完成后，用于获取验证结果信息。
      * @param {DetectAuthRequest} req
      * @param {function(string, DetectAuthResponse):void} cb
      * @public

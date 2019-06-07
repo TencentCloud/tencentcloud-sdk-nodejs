@@ -17,6 +17,59 @@
 const AbstractModel = require("../../common/abstract_model");
 
 /**
+ * Liveness请求参数结构体
+ * @class
+ */
+class LivenessRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 用于活体检测的视频，视频的BASE64值；
+BASE64编码后的大小不超过5M，支持mp4、avi、flv格式。
+         * @type {string || null}
+         */
+        this.VideoBase64 = null;
+
+        /**
+         * 活体检测类型，取值：LIP/ACTION/SILENT。
+LIP为数字模式，ACTION为动作模式，SILENT为静默模式，三种模式选择一种传入。
+         * @type {string || null}
+         */
+        this.LivenessType = null;
+
+        /**
+         * 数字模式传参：数字验证码(1234)，需先调用接口获取数字验证码；
+动作模式传参：传动作顺序(2,1 or 1,2)，需先调用接口获取动作顺序；
+静默模式传参：不需要传递此参数。
+         * @type {string || null}
+         */
+        this.ValidateData = null;
+
+        /**
+         * 本接口不需要传递此参数。
+         * @type {string || null}
+         */
+        this.Optional = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.VideoBase64 = 'VideoBase64' in params ? params.VideoBase64 : null;
+        this.LivenessType = 'LivenessType' in params ? params.LivenessType : null;
+        this.ValidateData = 'ValidateData' in params ? params.ValidateData : null;
+        this.Optional = 'Optional' in params ? params.Optional : null;
+
+    }
+}
+
+/**
  * GetLiveCode返回参数结构体
  * @class
  */
@@ -178,7 +231,7 @@ class GetDetectInfoResponse extends  AbstractModel {
   // 文本类信息
   "Text": {
     "ErrCode": null,      // 本次核身最终结果。0为成功
-    "ErrMsg": null,       // 本次核身的错误信息。
+    "ErrMsg": null,       // 本次核身最终结果信息描述。
     "IdCard": "",         // 本次核身最终获得的身份证号。
     "Name": "",           // 本次核身最终获得的姓名。
     "OcrNation": null,    // ocr阶段获取的民族
@@ -193,6 +246,7 @@ class GetDetectInfoResponse extends  AbstractModel {
     "LiveMsg": null,      // 活体检测阶段的错误信息
     "Comparestatus": null,// 一比一阶段的错误码。0为成功
     "Comparemsg": null,   // 一比一阶段的错误信息
+    "Location": null, // 地理位置信息
     "Extra": "",          // DetectAuth结果传进来的Extra信息
     "Detail": {           // 活体一比一信息详情
       "LivenessData": []
@@ -302,7 +356,7 @@ class DetectAuthRequest extends  AbstractModel {
         super();
 
         /**
-         * 用于细分客户使用场景，由腾讯侧在线下对接时分配。
+         * 用于细分客户使用场景，申请开通服务后，可以在腾讯云慧眼人脸核身控制台（https://console.cloud.tencent.com/faceid） 自助接入里面创建，审核通过后即可调用。如有疑问，请加慧眼小助手微信（faceid001）进行咨询。
          * @type {string || null}
          */
         this.RuleId = null;
@@ -597,6 +651,20 @@ class BankCardVerificationRequest extends  AbstractModel {
          */
         this.BankCard = null;
 
+        /**
+         * 证件类型（不填默认0）
+0 身份证
+1 军官证
+2 护照
+3 港澳证
+4 台胞证
+5 警官证
+6 士兵证
+7 其它证件
+         * @type {number || null}
+         */
+        this.CertType = null;
+
     }
 
     /**
@@ -609,6 +677,7 @@ class BankCardVerificationRequest extends  AbstractModel {
         this.IdCard = 'IdCard' in params ? params.IdCard : null;
         this.Name = 'Name' in params ? params.Name : null;
         this.BankCard = 'BankCard' in params ? params.BankCard : null;
+        this.CertType = 'CertType' in params ? params.CertType : null;
 
     }
 }
@@ -720,6 +789,55 @@ LIP为数字模式，ACTION为动作模式，SILENT为静默模式，三种模�
         this.LivenessType = 'LivenessType' in params ? params.LivenessType : null;
         this.ValidateData = 'ValidateData' in params ? params.ValidateData : null;
         this.Optional = 'Optional' in params ? params.Optional : null;
+
+    }
+}
+
+/**
+ * Liveness返回参数结构体
+ * @class
+ */
+class LivenessResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 验证通过后的视频最佳截图照片，照片为BASE64编码后的值，jpg格式。
+         * @type {string || null}
+         */
+        this.BestFrameBase64 = null;
+
+        /**
+         * 业务错误码，成功情况返回Success, 错误情况请参考下方错误码 列表中FailedOperation部分
+         * @type {string || null}
+         */
+        this.Result = null;
+
+        /**
+         * 业务错误描述
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.BestFrameBase64 = 'BestFrameBase64' in params ? params.BestFrameBase64 : null;
+        this.Result = 'Result' in params ? params.Result : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -883,6 +1001,7 @@ LIP为数字模式，ACTION为动作模式，SILENT为静默模式，三种模�
 }
 
 module.exports = {
+    LivenessRequest: LivenessRequest,
     GetLiveCodeResponse: GetLiveCodeResponse,
     DetectAuthResponse: DetectAuthResponse,
     ImageRecognitionResponse: ImageRecognitionResponse,
@@ -898,6 +1017,7 @@ module.exports = {
     BankCardVerificationRequest: BankCardVerificationRequest,
     ImageRecognitionRequest: ImageRecognitionRequest,
     LivenessCompareRequest: LivenessCompareRequest,
+    LivenessResponse: LivenessResponse,
     GetActionSequenceResponse: GetActionSequenceResponse,
     LivenessRecognitionResponse: LivenessRecognitionResponse,
     LivenessRecognitionRequest: LivenessRecognitionRequest,

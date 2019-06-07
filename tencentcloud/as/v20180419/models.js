@@ -414,6 +414,9 @@ class DescribeAutoScalingGroupsRequest extends  AbstractModel {
 <li> auto-scaling-group-id - String - 是否必填：否 -（过滤条件）按照伸缩组ID过滤。</li>
 <li> auto-scaling-group-name - String - 是否必填：否 -（过滤条件）按照伸缩组名称过滤。</li>
 <li> launch-configuration-id - String - 是否必填：否 -（过滤条件）按照启动配置ID过滤。</li>
+<li> tag-key - String - 是否必填：否 -（过滤条件）按照标签键进行过滤。</li>
+<li> tag-value - String - 是否必填：否 -（过滤条件）按照标签值进行过滤。</li>
+<li> tag:tag-key - String - 是否必填：否 -（过滤条件）按照标签键值对进行过滤。 tag-key使用具体的标签键进行替换。使用请参考示例2</li>
 每次请求的`Filters`的上限为10，`Filter.Values`的上限为5。参数不支持同时指定`AutoScalingGroupIds`和`Filters`。
          * @type {Array.<Filter> || null}
          */
@@ -1231,6 +1234,49 @@ class DeleteScalingPolicyResponse extends  AbstractModel {
 }
 
 /**
+ * 资源类型及标签键值对
+ * @class
+ */
+class Tag extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 标签键
+         * @type {string || null}
+         */
+        this.Key = null;
+
+        /**
+         * 标签值
+         * @type {string || null}
+         */
+        this.Value = null;
+
+        /**
+         * 标签绑定的资源类型，当前支持类型："auto-scaling-group
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ResourceType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Key = 'Key' in params ? params.Key : null;
+        this.Value = 'Value' in params ? params.Value : null;
+        this.ResourceType = 'ResourceType' in params ? params.ResourceType : null;
+
+    }
+}
+
+/**
  * DescribeAutoScalingInstances请求参数结构体
  * @class
  */
@@ -1837,6 +1883,12 @@ class AutoScalingGroup extends  AbstractModel {
          */
         this.InActivityStatus = null;
 
+        /**
+         * 伸缩组标签列表
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
     }
 
     /**
@@ -1876,6 +1928,15 @@ class AutoScalingGroup extends  AbstractModel {
         this.ZoneSet = 'ZoneSet' in params ? params.ZoneSet : null;
         this.RetryPolicy = 'RetryPolicy' in params ? params.RetryPolicy : null;
         this.InActivityStatus = 'InActivityStatus' in params ? params.InActivityStatus : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
 
     }
 }
@@ -2774,6 +2835,12 @@ class CreateAutoScalingGroupRequest extends  AbstractModel {
          */
         this.ZonesCheckPolicy = null;
 
+        /**
+         * 标签描述列表。通过指定该参数可以支持绑定标签到伸缩组。同时绑定标签到相应的资源实例，
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
     }
 
     /**
@@ -2806,6 +2873,15 @@ class CreateAutoScalingGroupRequest extends  AbstractModel {
         this.Zones = 'Zones' in params ? params.Zones : null;
         this.RetryPolicy = 'RetryPolicy' in params ? params.RetryPolicy : null;
         this.ZonesCheckPolicy = 'ZonesCheckPolicy' in params ? params.ZonesCheckPolicy : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
 
     }
 }
@@ -5697,6 +5773,7 @@ module.exports = {
     CreateNotificationConfigurationResponse: CreateNotificationConfigurationResponse,
     DescribeLaunchConfigurationsResponse: DescribeLaunchConfigurationsResponse,
     DeleteScalingPolicyResponse: DeleteScalingPolicyResponse,
+    Tag: Tag,
     DescribeAutoScalingInstancesRequest: DescribeAutoScalingInstancesRequest,
     LimitedLoginSettings: LimitedLoginSettings,
     ModifyAutoScalingGroupResponse: ModifyAutoScalingGroupResponse,
