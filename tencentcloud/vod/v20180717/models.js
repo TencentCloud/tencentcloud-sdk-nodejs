@@ -1397,6 +1397,41 @@ class AudioTransform extends  AbstractModel {
 }
 
 /**
+ * ComposeMedia返回参数结构体
+ * @class
+ */
+class ComposeMediaResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 制作媒体文件的任务 ID，可以通过该 ID 查询制作任务（任务类型为 MakeMedia）的状态。
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * 智能分类任务控制参数
  * @class
  */
@@ -1735,6 +1770,66 @@ class CoverConfigureInfo extends  AbstractModel {
             return;
         }
         this.Switch = 'Switch' in params ? params.Switch : null;
+
+    }
+}
+
+/**
+ * ComposeMedia请求参数结构体
+ * @class
+ */
+class ComposeMediaRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 输入的媒体轨道列表，包括视频、音频、图片等素材组成的多个轨道信息。输入的多个轨道在时间轴上和输出媒体文件的时间轴对齐，时间轴上相同时间点的各个轨道的素材进行重叠，视频或者图片按轨道顺序进行图像的叠加，轨道顺序高的素材叠加在上面；音频素材进行混音。
+         * @type {Array.<MediaTrack> || null}
+         */
+        this.Tracks = null;
+
+        /**
+         * 输出的媒体文件信息。
+         * @type {ComposeMediaOutput || null}
+         */
+        this.Output = null;
+
+        /**
+         * 制作视频文件时使用的画布。
+         * @type {Canvas || null}
+         */
+        this.Canvas = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Tracks) {
+            this.Tracks = new Array();
+            for (let z in params.Tracks) {
+                let obj = new MediaTrack();
+                obj.deserialize(params.Tracks[z]);
+                this.Tracks.push(obj);
+            }
+        }
+
+        if (params.Output) {
+            let obj = new ComposeMediaOutput();
+            obj.deserialize(params.Output)
+            this.Output = obj;
+        }
+
+        if (params.Canvas) {
+            let obj = new Canvas();
+            obj.deserialize(params.Canvas)
+            this.Canvas = obj;
+        }
 
     }
 }
@@ -3579,7 +3674,7 @@ class ProcessMediaByUrlRequest extends  AbstractModel {
         this.TasksNotifyMode = null;
 
         /**
-         * 来源上下文，用于透传用户请求信息，任务流状态变更回调将返回该字段值，最长 250 个字符。
+         * 来源上下文，用于透传用户请求信息，任务流状态变更回调将返回该字段值，最长 1000 个字符。
          * @type {string || null}
          */
         this.SessionContext = null;
@@ -6844,6 +6939,73 @@ class DeleteMediaResponse extends  AbstractModel {
 }
 
 /**
+ * 物体识别结果。
+ * @class
+ */
+class AiRecognitionTaskObjectResult extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 任务状态，有 PROCESSING，SUCCESS 和 FAIL 三种。
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * 错误码，0：成功，其他值：失败。
+         * @type {number || null}
+         */
+        this.ErrCode = null;
+
+        /**
+         * 错误信息。
+         * @type {string || null}
+         */
+        this.Message = null;
+
+        /**
+         * 物体识别任务输入信息。
+         * @type {AiRecognitionTaskObjectResultInput || null}
+         */
+        this.Input = null;
+
+        /**
+         * 物体识别任务输出信息。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {AiRecognitionTaskObjectResultOutput || null}
+         */
+        this.Output = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Status = 'Status' in params ? params.Status : null;
+        this.ErrCode = 'ErrCode' in params ? params.ErrCode : null;
+        this.Message = 'Message' in params ? params.Message : null;
+
+        if (params.Input) {
+            let obj = new AiRecognitionTaskObjectResultInput();
+            obj.deserialize(params.Input)
+            this.Input = obj;
+        }
+
+        if (params.Output) {
+            let obj = new AiRecognitionTaskObjectResultOutput();
+            obj.deserialize(params.Output)
+            this.Output = obj;
+        }
+
+    }
+}
+
+/**
  * 智能标签结果类型
  * @class
  */
@@ -7049,7 +7211,7 @@ class ProcessMediaRequest extends  AbstractModel {
         this.TasksNotifyMode = null;
 
         /**
-         * 来源上下文，用于透传用户请求信息，任务流状态变更回调将返回该字段值，最长 250 个字符。
+         * 来源上下文，用于透传用户请求信息，任务流状态变更回调将返回该字段值，最长 1000 个字符。
          * @type {string || null}
          */
         this.SessionContext = null;
@@ -8321,83 +8483,6 @@ class TerrorismConfigureInfoForUpdate extends  AbstractModel {
             obj.deserialize(params.ImgReviewInfo)
             this.ImgReviewInfo = obj;
         }
-
-    }
-}
-
-/**
- * 微信小程序发布任务信息
- * @class
- */
-class WechatMiniProgramPublishTask extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 任务 ID。
-         * @type {string || null}
-         */
-        this.TaskId = null;
-
-        /**
-         * 任务状态，取值：
-WAITING：等待中；
-PROCESSING：处理中；
-FINISH：已完成。
-         * @type {string || null}
-         */
-        this.Status = null;
-
-        /**
-         * 错误码
-<li>0：成功；</li>
-<li>其他值：失败。</li>
-         * @type {number || null}
-         */
-        this.ErrCode = null;
-
-        /**
-         * 错误信息。
-         * @type {string || null}
-         */
-        this.Message = null;
-
-        /**
-         * 发布视频文件 ID。
-         * @type {string || null}
-         */
-        this.FileId = null;
-
-        /**
-         * 发布视频所对应的转码模板 ID，为 0 代表原始视频。
-         * @type {number || null}
-         */
-        this.SourceDefinition = null;
-
-        /**
-         * 微信小程序视频发布状态，取值：
-<li>Pass：成功；</li>
-<li>Rejected：审核未通过。</li>
-         * @type {string || null}
-         */
-        this.PublishResult = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.TaskId = 'TaskId' in params ? params.TaskId : null;
-        this.Status = 'Status' in params ? params.Status : null;
-        this.ErrCode = 'ErrCode' in params ? params.ErrCode : null;
-        this.Message = 'Message' in params ? params.Message : null;
-        this.FileId = 'FileId' in params ? params.FileId : null;
-        this.SourceDefinition = 'SourceDefinition' in params ? params.SourceDefinition : null;
-        this.PublishResult = 'PublishResult' in params ? params.PublishResult : null;
 
     }
 }
@@ -10926,6 +11011,48 @@ class AiRecognitionTaskAsrWordsSegmentItem extends  AbstractModel {
 }
 
 /**
+ * DescribeReviewDetails请求参数结构体
+ * @class
+ */
+class DescribeReviewDetailsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 起始日期。使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F)。
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * 结束日期，需大于开始日期。使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F)。
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
+
+    }
+}
+
+/**
  * 鉴黄任务控制参数。
  * @class
  */
@@ -11796,6 +11923,45 @@ class ClipFileInfo2017 extends  AbstractModel {
 }
 
 /**
+ * 统计数据
+ * @class
+ */
+class StatDataItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 数据所在时间区间的开始时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F)。如：当时间粒度为天，2018-12-01T00:00:00+08:00，表示2018年12月1日（含）到2018年12月2日（不含）区间。
+         * @type {string || null}
+         */
+        this.Time = null;
+
+        /**
+         * 数据大小。
+<li>存储空间的数据，单位是字节。</li>
+<li>转码时长的数据，单位是秒。</li>
+<li>流量数据，单位是字节。</li>
+<li>带宽数据，单位是比特每秒。</li>
+         * @type {number || null}
+         */
+        this.Value = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Time = 'Time' in params ? params.Time : null;
+        this.Value = 'Value' in params ? params.Value : null;
+
+    }
+}
+
+/**
  * 来源文件信息
  * @class
  */
@@ -12058,13 +12224,6 @@ class EventContent extends  AbstractModel {
          */
         this.ComposeMediaCompleteEvent = null;
 
-        /**
-         * 微信小程序视频发布完成事件，当事件类型为 WechatMiniProgramPublishComplete 时有效。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {WechatMiniProgramPublishTask || null}
-         */
-        this.WechatMiniProgramPublishEvent = null;
-
     }
 
     /**
@@ -12147,12 +12306,6 @@ class EventContent extends  AbstractModel {
             let obj = new ComposeMediaTask();
             obj.deserialize(params.ComposeMediaCompleteEvent)
             this.ComposeMediaCompleteEvent = obj;
-        }
-
-        if (params.WechatMiniProgramPublishEvent) {
-            let obj = new WechatMiniProgramPublishTask();
-            obj.deserialize(params.WechatMiniProgramPublishEvent)
-            this.WechatMiniProgramPublishEvent = obj;
         }
 
     }
@@ -12282,7 +12435,6 @@ class OutputAudioStream extends  AbstractModel {
         /**
          * 音频流的编码格式，可选值：
 <li>libfdk_aac：适合 mp4 文件。</li>
-<li>libmp3lame：适合 mp3 文件。</li>
 默认值：libfdk_aac。
          * @type {string || null}
          */
@@ -14132,7 +14284,8 @@ class DescribeTaskDetailResponse extends  AbstractModel {
          * 任务类型，取值：
 <li>Procedure：视频处理任务；</li>
 <li>EditMedia：视频编辑任务；</li>
-<li>WechatPublish：微信发布任务。</li>
+<li>WechatPublish：微信发布任务；</li>
+<li>ComposeMedia：制作媒体文件任务。</li>
 兼容 2017 版的任务类型：
 <li>Transcode：视频转码任务；</li>
 <li>SnapshotByTimeOffset：视频截图任务；</li>
@@ -14227,6 +14380,13 @@ class DescribeTaskDetailResponse extends  AbstractModel {
         this.CreateImageSpriteTask = null;
 
         /**
+         * 制作媒体文件任务信息，仅当 TaskType 为 ComposeMedia，该字段有值。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {ComposeMediaTask || null}
+         */
+        this.ComposeMediaTask = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -14293,6 +14453,12 @@ class DescribeTaskDetailResponse extends  AbstractModel {
             let obj = new CreateImageSpriteTask2017();
             obj.deserialize(params.CreateImageSpriteTask)
             this.CreateImageSpriteTask = obj;
+        }
+
+        if (params.ComposeMediaTask) {
+            let obj = new ComposeMediaTask();
+            obj.deserialize(params.ComposeMediaTask)
+            this.ComposeMediaTask = obj;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -15155,51 +15321,36 @@ class DescribeTasksRequest extends  AbstractModel {
 }
 
 /**
- * 人脸识别任务控制参数
+ * DescribeReviewDetails返回参数结构体
  * @class
  */
-class FaceConfigureInfoForUpdate extends  AbstractModel {
+class DescribeReviewDetailsResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 人脸识别任务开关，可选值：
-<li>ON：开启智能人脸识别任务；</li>
-<li>OFF：关闭智能人脸识别任务。</li>
-         * @type {string || null}
-         */
-        this.Switch = null;
-
-        /**
-         * 人脸识别过滤分数，当识别结果达到该分数以上，返回识别结果。取值范围：0-100。
+         * 发起内容审核次数。
          * @type {number || null}
          */
-        this.Score = null;
+        this.TotalCount = null;
 
         /**
-         * 默认人物过滤标签，指定需要返回的默认人物的标签。如果未填或者为空，则全部默认人物结果都返回。标签可选值：
-<li>entertainments：娱乐明星；</li>
-<li>sports：体育明星；</li>
-<li>politician：政治人物。</li>
-         * @type {Array.<string> || null}
+         * 内容审核总时长。
+         * @type {number || null}
          */
-        this.DefaultLibraryLabelSet = null;
+        this.TotalDuration = null;
 
         /**
-         * 用户自定义人物过滤标签，指定需要返回的用户自定义人物的标签。如果未填或者为空，则全部自定义人物结果都返回。
-标签个数最多 10 个，每个标签长度最多 16 个字符。
-         * @type {Array.<string> || null}
+         * 内容审核时长统计数据，每天一个数据。
+         * @type {Array.<StatDataItem> || null}
          */
-        this.UserDefineLibraryLabelSet = null;
+        this.Data = null;
 
         /**
-         * 人物库选择，可选值：
-<li>Default：使用默认人物库；</li>
-<li>UserDefine：使用用户自定义人物库。</li>
-<li>All：同时使用默认人物库和用户自定义人物库。</li>
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.FaceLibrary = null;
+        this.RequestId = null;
 
     }
 
@@ -15210,11 +15361,18 @@ class FaceConfigureInfoForUpdate extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Switch = 'Switch' in params ? params.Switch : null;
-        this.Score = 'Score' in params ? params.Score : null;
-        this.DefaultLibraryLabelSet = 'DefaultLibraryLabelSet' in params ? params.DefaultLibraryLabelSet : null;
-        this.UserDefineLibraryLabelSet = 'UserDefineLibraryLabelSet' in params ? params.UserDefineLibraryLabelSet : null;
-        this.FaceLibrary = 'FaceLibrary' in params ? params.FaceLibrary : null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.TotalDuration = 'TotalDuration' in params ? params.TotalDuration : null;
+
+        if (params.Data) {
+            this.Data = new Array();
+            for (let z in params.Data) {
+                let obj = new StatDataItem();
+                obj.deserialize(params.Data[z]);
+                this.Data.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -16805,7 +16963,7 @@ class ProcessMediaByProcedureRequest extends  AbstractModel {
         this.TasksNotifyMode = null;
 
         /**
-         * 来源上下文，用于透传用户请求信息，任务流状态变更回调将返回该字段值，最长 250 个字符。
+         * 来源上下文，用于透传用户请求信息，任务流状态变更回调将返回该字段值，最长 1000 个字符。
          * @type {string || null}
          */
         this.SessionContext = null;
@@ -17070,43 +17228,51 @@ class MediaProcessTaskCoverBySnapshotResult extends  AbstractModel {
 }
 
 /**
- * 物体识别结果。
+ * 人脸识别任务控制参数
  * @class
  */
-class AiRecognitionTaskObjectResult extends  AbstractModel {
+class FaceConfigureInfoForUpdate extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 任务状态，有 PROCESSING，SUCCESS 和 FAIL 三种。
+         * 人脸识别任务开关，可选值：
+<li>ON：开启智能人脸识别任务；</li>
+<li>OFF：关闭智能人脸识别任务。</li>
          * @type {string || null}
          */
-        this.Status = null;
+        this.Switch = null;
 
         /**
-         * 错误码，0：成功，其他值：失败。
+         * 人脸识别过滤分数，当识别结果达到该分数以上，返回识别结果。取值范围：0-100。
          * @type {number || null}
          */
-        this.ErrCode = null;
+        this.Score = null;
 
         /**
-         * 错误信息。
+         * 默认人物过滤标签，指定需要返回的默认人物的标签。如果未填或者为空，则全部默认人物结果都返回。标签可选值：
+<li>entertainments：娱乐明星；</li>
+<li>sports：体育明星；</li>
+<li>politician：政治人物。</li>
+         * @type {Array.<string> || null}
+         */
+        this.DefaultLibraryLabelSet = null;
+
+        /**
+         * 用户自定义人物过滤标签，指定需要返回的用户自定义人物的标签。如果未填或者为空，则全部自定义人物结果都返回。
+标签个数最多 10 个，每个标签长度最多 16 个字符。
+         * @type {Array.<string> || null}
+         */
+        this.UserDefineLibraryLabelSet = null;
+
+        /**
+         * 人物库选择，可选值：
+<li>Default：使用默认人物库；</li>
+<li>UserDefine：使用用户自定义人物库。</li>
+<li>All：同时使用默认人物库和用户自定义人物库。</li>
          * @type {string || null}
          */
-        this.Message = null;
-
-        /**
-         * 物体识别任务输入信息。
-         * @type {AiRecognitionTaskObjectResultInput || null}
-         */
-        this.Input = null;
-
-        /**
-         * 物体识别任务输出信息。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {AiRecognitionTaskObjectResultOutput || null}
-         */
-        this.Output = null;
+        this.FaceLibrary = null;
 
     }
 
@@ -17117,21 +17283,11 @@ class AiRecognitionTaskObjectResult extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Status = 'Status' in params ? params.Status : null;
-        this.ErrCode = 'ErrCode' in params ? params.ErrCode : null;
-        this.Message = 'Message' in params ? params.Message : null;
-
-        if (params.Input) {
-            let obj = new AiRecognitionTaskObjectResultInput();
-            obj.deserialize(params.Input)
-            this.Input = obj;
-        }
-
-        if (params.Output) {
-            let obj = new AiRecognitionTaskObjectResultOutput();
-            obj.deserialize(params.Output)
-            this.Output = obj;
-        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+        this.Score = 'Score' in params ? params.Score : null;
+        this.DefaultLibraryLabelSet = 'DefaultLibraryLabelSet' in params ? params.DefaultLibraryLabelSet : null;
+        this.UserDefineLibraryLabelSet = 'UserDefineLibraryLabelSet' in params ? params.UserDefineLibraryLabelSet : null;
+        this.FaceLibrary = 'FaceLibrary' in params ? params.FaceLibrary : null;
 
     }
 }
@@ -19235,6 +19391,7 @@ module.exports = {
     DeleteContentReviewTemplateRequest: DeleteContentReviewTemplateRequest,
     AiReviewPoliticalTaskInput: AiReviewPoliticalTaskInput,
     AudioTransform: AudioTransform,
+    ComposeMediaResponse: ComposeMediaResponse,
     ClassificationConfigureInfo: ClassificationConfigureInfo,
     MediaAiAnalysisClassificationItem: MediaAiAnalysisClassificationItem,
     AudioTemplateInfoForUpdate: AudioTemplateInfoForUpdate,
@@ -19243,6 +19400,7 @@ module.exports = {
     AiRecognitionTaskInput: AiRecognitionTaskInput,
     AudioTemplateInfo: AudioTemplateInfo,
     CoverConfigureInfo: CoverConfigureInfo,
+    ComposeMediaRequest: ComposeMediaRequest,
     AIRecognitionTemplateItem: AIRecognitionTemplateItem,
     AiReviewPornAsrTaskInput: AiReviewPornAsrTaskInput,
     AiRecognitionTaskFaceResult: AiRecognitionTaskFaceResult,
@@ -19335,6 +19493,7 @@ module.exports = {
     ModifyWordSampleRequest: ModifyWordSampleRequest,
     MediaProcessTaskAnimatedGraphicResult: MediaProcessTaskAnimatedGraphicResult,
     DeleteMediaResponse: DeleteMediaResponse,
+    AiRecognitionTaskObjectResult: AiRecognitionTaskObjectResult,
     AiAnalysisTaskTagResult: AiAnalysisTaskTagResult,
     SearchMediaResponse: SearchMediaResponse,
     AiAnalysisTaskTagOutput: AiAnalysisTaskTagOutput,
@@ -19364,7 +19523,6 @@ module.exports = {
     PullEventsRequest: PullEventsRequest,
     CreateWatermarkTemplateRequest: CreateWatermarkTemplateRequest,
     TerrorismConfigureInfoForUpdate: TerrorismConfigureInfoForUpdate,
-    WechatMiniProgramPublishTask: WechatMiniProgramPublishTask,
     ComposeMediaTask: ComposeMediaTask,
     HeadTailConfigureInfoForUpdate: HeadTailConfigureInfoForUpdate,
     TranscodePlayInfo2017: TranscodePlayInfo2017,
@@ -19411,6 +19569,7 @@ module.exports = {
     PornOcrReviewTemplateInfo: PornOcrReviewTemplateInfo,
     AiReviewTaskPoliticalAsrResult: AiReviewTaskPoliticalAsrResult,
     AiRecognitionTaskAsrWordsSegmentItem: AiRecognitionTaskAsrWordsSegmentItem,
+    DescribeReviewDetailsRequest: DescribeReviewDetailsRequest,
     PornConfigureInfoForUpdate: PornConfigureInfoForUpdate,
     MediaContentReviewSegmentItem: MediaContentReviewSegmentItem,
     AiReviewTaskPornResult: AiReviewTaskPornResult,
@@ -19425,6 +19584,7 @@ module.exports = {
     ModifyAIRecognitionTemplateRequest: ModifyAIRecognitionTemplateRequest,
     WechatPublishTask: WechatPublishTask,
     ClipFileInfo2017: ClipFileInfo2017,
+    StatDataItem: StatDataItem,
     MediaSourceData: MediaSourceData,
     CreateAIAnalysisTemplateResponse: CreateAIAnalysisTemplateResponse,
     MediaProcessTaskSampleSnapshotResult: MediaProcessTaskSampleSnapshotResult,
@@ -19480,7 +19640,7 @@ module.exports = {
     TaskSimpleInfo: TaskSimpleInfo,
     MediaVideoStreamItem: MediaVideoStreamItem,
     DescribeTasksRequest: DescribeTasksRequest,
-    FaceConfigureInfoForUpdate: FaceConfigureInfoForUpdate,
+    DescribeReviewDetailsResponse: DescribeReviewDetailsResponse,
     CreateTranscodeTemplateResponse: CreateTranscodeTemplateResponse,
     SnapshotByTimeOffset2017: SnapshotByTimeOffset2017,
     CreateAIAnalysisTemplateRequest: CreateAIAnalysisTemplateRequest,
@@ -19514,7 +19674,7 @@ module.exports = {
     PornConfigureInfo: PornConfigureInfo,
     AiRecognitionTaskObjectSeqmentItem: AiRecognitionTaskObjectSeqmentItem,
     MediaProcessTaskCoverBySnapshotResult: MediaProcessTaskCoverBySnapshotResult,
-    AiRecognitionTaskObjectResult: AiRecognitionTaskObjectResult,
+    FaceConfigureInfoForUpdate: FaceConfigureInfoForUpdate,
     DescribeAIAnalysisTemplatesResponse: DescribeAIAnalysisTemplatesResponse,
     AiRecognitionTaskAsrWordsResult: AiRecognitionTaskAsrWordsResult,
     DescribeProcedureTemplatesResponse: DescribeProcedureTemplatesResponse,

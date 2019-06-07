@@ -42,6 +42,7 @@ const DeleteAIRecognitionTemplateResponse = models.DeleteAIRecognitionTemplateRe
 const DeleteContentReviewTemplateRequest = models.DeleteContentReviewTemplateRequest;
 const AiReviewPoliticalTaskInput = models.AiReviewPoliticalTaskInput;
 const AudioTransform = models.AudioTransform;
+const ComposeMediaResponse = models.ComposeMediaResponse;
 const ClassificationConfigureInfo = models.ClassificationConfigureInfo;
 const MediaAiAnalysisClassificationItem = models.MediaAiAnalysisClassificationItem;
 const AudioTemplateInfoForUpdate = models.AudioTemplateInfoForUpdate;
@@ -50,6 +51,7 @@ const MediaSampleSnapshotItem = models.MediaSampleSnapshotItem;
 const AiRecognitionTaskInput = models.AiRecognitionTaskInput;
 const AudioTemplateInfo = models.AudioTemplateInfo;
 const CoverConfigureInfo = models.CoverConfigureInfo;
+const ComposeMediaRequest = models.ComposeMediaRequest;
 const AIRecognitionTemplateItem = models.AIRecognitionTemplateItem;
 const AiReviewPornAsrTaskInput = models.AiReviewPornAsrTaskInput;
 const AiRecognitionTaskFaceResult = models.AiRecognitionTaskFaceResult;
@@ -142,6 +144,7 @@ const MediaAnimatedGraphicsItem = models.MediaAnimatedGraphicsItem;
 const ModifyWordSampleRequest = models.ModifyWordSampleRequest;
 const MediaProcessTaskAnimatedGraphicResult = models.MediaProcessTaskAnimatedGraphicResult;
 const DeleteMediaResponse = models.DeleteMediaResponse;
+const AiRecognitionTaskObjectResult = models.AiRecognitionTaskObjectResult;
 const AiAnalysisTaskTagResult = models.AiAnalysisTaskTagResult;
 const SearchMediaResponse = models.SearchMediaResponse;
 const AiAnalysisTaskTagOutput = models.AiAnalysisTaskTagOutput;
@@ -171,7 +174,6 @@ const AiRecognitionTaskHeadTailResultOutput = models.AiRecognitionTaskHeadTailRe
 const PullEventsRequest = models.PullEventsRequest;
 const CreateWatermarkTemplateRequest = models.CreateWatermarkTemplateRequest;
 const TerrorismConfigureInfoForUpdate = models.TerrorismConfigureInfoForUpdate;
-const WechatMiniProgramPublishTask = models.WechatMiniProgramPublishTask;
 const ComposeMediaTask = models.ComposeMediaTask;
 const HeadTailConfigureInfoForUpdate = models.HeadTailConfigureInfoForUpdate;
 const TranscodePlayInfo2017 = models.TranscodePlayInfo2017;
@@ -218,6 +220,7 @@ const TranscodeTemplate = models.TranscodeTemplate;
 const PornOcrReviewTemplateInfo = models.PornOcrReviewTemplateInfo;
 const AiReviewTaskPoliticalAsrResult = models.AiReviewTaskPoliticalAsrResult;
 const AiRecognitionTaskAsrWordsSegmentItem = models.AiRecognitionTaskAsrWordsSegmentItem;
+const DescribeReviewDetailsRequest = models.DescribeReviewDetailsRequest;
 const PornConfigureInfoForUpdate = models.PornConfigureInfoForUpdate;
 const MediaContentReviewSegmentItem = models.MediaContentReviewSegmentItem;
 const AiReviewTaskPornResult = models.AiReviewTaskPornResult;
@@ -232,6 +235,7 @@ const TranscodeTaskInput = models.TranscodeTaskInput;
 const ModifyAIRecognitionTemplateRequest = models.ModifyAIRecognitionTemplateRequest;
 const WechatPublishTask = models.WechatPublishTask;
 const ClipFileInfo2017 = models.ClipFileInfo2017;
+const StatDataItem = models.StatDataItem;
 const MediaSourceData = models.MediaSourceData;
 const CreateAIAnalysisTemplateResponse = models.CreateAIAnalysisTemplateResponse;
 const MediaProcessTaskSampleSnapshotResult = models.MediaProcessTaskSampleSnapshotResult;
@@ -287,7 +291,7 @@ const ProcedureTask = models.ProcedureTask;
 const TaskSimpleInfo = models.TaskSimpleInfo;
 const MediaVideoStreamItem = models.MediaVideoStreamItem;
 const DescribeTasksRequest = models.DescribeTasksRequest;
-const FaceConfigureInfoForUpdate = models.FaceConfigureInfoForUpdate;
+const DescribeReviewDetailsResponse = models.DescribeReviewDetailsResponse;
 const CreateTranscodeTemplateResponse = models.CreateTranscodeTemplateResponse;
 const SnapshotByTimeOffset2017 = models.SnapshotByTimeOffset2017;
 const CreateAIAnalysisTemplateRequest = models.CreateAIAnalysisTemplateRequest;
@@ -321,7 +325,7 @@ const DescribePersonSamplesResponse = models.DescribePersonSamplesResponse;
 const PornConfigureInfo = models.PornConfigureInfo;
 const AiRecognitionTaskObjectSeqmentItem = models.AiRecognitionTaskObjectSeqmentItem;
 const MediaProcessTaskCoverBySnapshotResult = models.MediaProcessTaskCoverBySnapshotResult;
-const AiRecognitionTaskObjectResult = models.AiRecognitionTaskObjectResult;
+const FaceConfigureInfoForUpdate = models.FaceConfigureInfoForUpdate;
 const DescribeAIAnalysisTemplatesResponse = models.DescribeAIAnalysisTemplatesResponse;
 const AiRecognitionTaskAsrWordsResult = models.AiRecognitionTaskAsrWordsResult;
 const DescribeProcedureTemplatesResponse = models.DescribeProcedureTemplatesResponse;
@@ -380,6 +384,17 @@ class VodClient extends AbstractClient {
     DescribeAIRecognitionTemplates(req, cb) {
         let resp = new DescribeAIRecognitionTemplatesResponse();
         this.request("DescribeAIRecognitionTemplates", req, resp, cb);
+    }
+
+    /**
+     * 修改用户自定义视频内容审核模板。
+     * @param {ModifyContentReviewTemplateRequest} req
+     * @param {function(string, ModifyContentReviewTemplateResponse):void} cb
+     * @public
+     */
+    ModifyContentReviewTemplate(req, cb) {
+        let resp = new ModifyContentReviewTemplateResponse();
+        this.request("ModifyContentReviewTemplate", req, resp, cb);
     }
 
     /**
@@ -685,6 +700,20 @@ class VodClient extends AbstractClient {
     }
 
     /**
+     * 该接口返回查询时间范围内每天使用的视频内容审核时长数据，单位： 秒。
+
+1. 可以查询最近 90 天内的转码时长统计数据。
+2. 查询时间跨度不超过 60 天。
+     * @param {DescribeReviewDetailsRequest} req
+     * @param {function(string, DescribeReviewDetailsResponse):void} cb
+     * @public
+     */
+    DescribeReviewDetails(req, cb) {
+        let resp = new DescribeReviewDetailsResponse();
+        this.request("DescribeReviewDetails", req, resp, cb);
+    }
+
+    /**
      * 该接口用于根据应用场景、关键词、标签，分页查询关键词样本信息。
      * @param {DescribeWordSamplesRequest} req
      * @param {function(string, DescribeWordSamplesResponse):void} cb
@@ -915,14 +944,18 @@ class VodClient extends AbstractClient {
     }
 
     /**
-     * 修改用户自定义视频内容审核模板。
-     * @param {ModifyContentReviewTemplateRequest} req
-     * @param {function(string, ModifyContentReviewTemplateResponse):void} cb
+     * 该接口用于制作媒体文件，可以
+
+1. 对一个媒体文件进行剪辑，生成一个新的媒体文件；
+2. 对多个媒体文件进行裁剪拼接，生成一个新的媒体文件；
+3. 对多个媒体文件的媒体流进行裁剪拼接，生成一个新的媒体文件；
+     * @param {ComposeMediaRequest} req
+     * @param {function(string, ComposeMediaResponse):void} cb
      * @public
      */
-    ModifyContentReviewTemplate(req, cb) {
-        let resp = new ModifyContentReviewTemplateResponse();
-        this.request("ModifyContentReviewTemplate", req, resp, cb);
+    ComposeMedia(req, cb) {
+        let resp = new ComposeMediaResponse();
+        this.request("ComposeMedia", req, resp, cb);
     }
 
     /**

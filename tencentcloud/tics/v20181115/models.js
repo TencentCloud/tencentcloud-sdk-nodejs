@@ -134,7 +134,7 @@ class DescribeIpInfoRequest extends  AbstractModel {
         super();
 
         /**
-         * 要查询的域名
+         * 要查询的IP
          * @type {string || null}
          */
         this.Key = null;

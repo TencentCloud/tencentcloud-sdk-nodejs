@@ -711,7 +711,7 @@ class DescribeAgentPayDealsRequest extends  AbstractModel {
         this.Limit = null;
 
         /**
-         * 下单时间范围起始点
+         * 下单时间范围起始点(不传时会默认查15天内订单，传值时需要传15天内的起始时间)
          * @type {string || null}
          */
         this.CreatTimeRangeStart = null;
