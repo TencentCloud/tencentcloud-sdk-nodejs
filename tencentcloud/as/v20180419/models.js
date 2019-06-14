@@ -981,6 +981,41 @@ class ModifyScheduledActionResponse extends  AbstractModel {
 }
 
 /**
+ * ExecuteScalingPolicy返回参数结构体
+ * @class
+ */
+class ExecuteScalingPolicyResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 伸缩活动ID
+         * @type {string || null}
+         */
+        this.ActivityId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ActivityId = 'ActivityId' in params ? params.ActivityId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * ModifyLaunchConfigurationAttributes返回参数结构体
  * @class
  */
@@ -5635,6 +5670,34 @@ class EnableAutoScalingGroupResponse extends  AbstractModel {
 }
 
 /**
+ * UpgradeLaunchConfiguration返回参数结构体
+ * @class
+ */
+class UpgradeLaunchConfigurationResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * 描述了了实例的计费模式
  * @class
  */
@@ -5720,18 +5783,24 @@ class DescribePaiInstancesResponse extends  AbstractModel {
 }
 
 /**
- * UpgradeLaunchConfiguration返回参数结构体
+ * ExecuteScalingPolicy请求参数结构体
  * @class
  */
-class UpgradeLaunchConfigurationResponse extends  AbstractModel {
+class ExecuteScalingPolicyRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * 告警伸缩策略ID
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.AutoScalingPolicyId = null;
+
+        /**
+         * 是否检查伸缩组活动处于冷却时间内，默认值为false
+         * @type {boolean || null}
+         */
+        this.HonorCooldown = null;
 
     }
 
@@ -5742,7 +5811,8 @@ class UpgradeLaunchConfigurationResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.AutoScalingPolicyId = 'AutoScalingPolicyId' in params ? params.AutoScalingPolicyId : null;
+        this.HonorCooldown = 'HonorCooldown' in params ? params.HonorCooldown : null;
 
     }
 }
@@ -5766,6 +5836,7 @@ module.exports = {
     SpotMarketOptions: SpotMarketOptions,
     DescribeScalingPoliciesRequest: DescribeScalingPoliciesRequest,
     ModifyScheduledActionResponse: ModifyScheduledActionResponse,
+    ExecuteScalingPolicyResponse: ExecuteScalingPolicyResponse,
     ModifyLaunchConfigurationAttributesResponse: ModifyLaunchConfigurationAttributesResponse,
     SetInstancesProtectionResponse: SetInstancesProtectionResponse,
     CompleteLifecycleActionRequest: CompleteLifecycleActionRequest,
@@ -5854,8 +5925,9 @@ module.exports = {
     ActivtyRelatedInstance: ActivtyRelatedInstance,
     InternetAccessible: InternetAccessible,
     EnableAutoScalingGroupResponse: EnableAutoScalingGroupResponse,
+    UpgradeLaunchConfigurationResponse: UpgradeLaunchConfigurationResponse,
     InstanceChargePrepaid: InstanceChargePrepaid,
     DescribePaiInstancesResponse: DescribePaiInstancesResponse,
-    UpgradeLaunchConfigurationResponse: UpgradeLaunchConfigurationResponse,
+    ExecuteScalingPolicyRequest: ExecuteScalingPolicyRequest,
 
 }

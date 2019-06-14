@@ -34,6 +34,7 @@ const SystemDisk = models.SystemDisk;
 const SpotMarketOptions = models.SpotMarketOptions;
 const DescribeScalingPoliciesRequest = models.DescribeScalingPoliciesRequest;
 const ModifyScheduledActionResponse = models.ModifyScheduledActionResponse;
+const ExecuteScalingPolicyResponse = models.ExecuteScalingPolicyResponse;
 const ModifyLaunchConfigurationAttributesResponse = models.ModifyLaunchConfigurationAttributesResponse;
 const SetInstancesProtectionResponse = models.SetInstancesProtectionResponse;
 const CompleteLifecycleActionRequest = models.CompleteLifecycleActionRequest;
@@ -122,9 +123,10 @@ const DescribeNotificationConfigurationsResponse = models.DescribeNotificationCo
 const ActivtyRelatedInstance = models.ActivtyRelatedInstance;
 const InternetAccessible = models.InternetAccessible;
 const EnableAutoScalingGroupResponse = models.EnableAutoScalingGroupResponse;
+const UpgradeLaunchConfigurationResponse = models.UpgradeLaunchConfigurationResponse;
 const InstanceChargePrepaid = models.InstanceChargePrepaid;
 const DescribePaiInstancesResponse = models.DescribePaiInstancesResponse;
-const UpgradeLaunchConfigurationResponse = models.UpgradeLaunchConfigurationResponse;
+const ExecuteScalingPolicyRequest = models.ExecuteScalingPolicyRequest;
 
 
 /**
@@ -137,6 +139,20 @@ class AsClient extends AbstractClient {
         super("as.tencentcloudapi.com", "2018-04-19", credential, region, profile);
     }
     
+    /**
+     * 本接口（ExecuteScalingPolicy）用于执行伸缩策略。
+
+* 可以根据伸缩策略ID执行伸缩策略。
+* 伸缩策略所属伸缩组处于伸缩活动时，会拒绝执行伸缩策略。
+     * @param {ExecuteScalingPolicyRequest} req
+     * @param {function(string, ExecuteScalingPolicyResponse):void} cb
+     * @public
+     */
+    ExecuteScalingPolicy(req, cb) {
+        let resp = new ExecuteScalingPolicyResponse();
+        this.request("ExecuteScalingPolicy", req, resp, cb);
+    }
+
     /**
      * 本接口（CreateAutoScalingGroup）用于创建伸缩组
      * @param {CreateAutoScalingGroupRequest} req

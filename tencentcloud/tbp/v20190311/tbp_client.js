@@ -16,13 +16,11 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
-const PostAudioResponse = models.PostAudioResponse;
 const SlotInfo = models.SlotInfo;
+const ResetResponse = models.ResetResponse;
 const ResetRequest = models.ResetRequest;
 const PostTextRequest = models.PostTextRequest;
-const ResetResponse = models.ResetResponse;
 const PostTextResponse = models.PostTextResponse;
-const PostAudioRequest = models.PostAudioRequest;
 
 
 /**
@@ -55,17 +53,6 @@ class TbpClient extends AbstractClient {
     PostText(req, cb) {
         let resp = new PostTextResponse();
         this.request("PostText", req, resp, cb);
-    }
-
-    /**
-     * 机器人会话接口，接收音频信息，传递给后台机器人
-     * @param {PostAudioRequest} req
-     * @param {function(string, PostAudioResponse):void} cb
-     * @public
-     */
-    PostAudio(req, cb) {
-        let resp = new PostAudioResponse();
-        this.request("PostAudio", req, resp, cb);
     }
 
 

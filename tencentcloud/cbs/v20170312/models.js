@@ -130,6 +130,34 @@ class ResizeDiskRequest extends  AbstractModel {
 }
 
 /**
+ * TerminateDisks返回参数结构体
+ * @class
+ */
+class TerminateDisksResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * ModifyDiskAttributes返回参数结构体
  * @class
  */
@@ -434,7 +462,10 @@ class Placement extends  AbstractModel {
         super();
 
         /**
-         * 云硬盘所属的[可用区](/document/product/213/15753#ZoneInfo)ID。该参数也可以通过调用  [DescribeZones](/document/product/213/15707) 的返回值中的Zone字段来获取。
+         * 所在[可用区](/document/api/213/9452#zone)。
+
+
+云硬盘所属的[可用区](/document/product/213/15753#ZoneInfo)。该参数也可以通过调用  [DescribeZones](/document/product/213/15707) 的返回值中的Zone字段来获取。
          * @type {string || null}
          */
         this.Zone = null;
@@ -724,6 +755,34 @@ class ModifyDisksRenewFlagRequest extends  AbstractModel {
 }
 
 /**
+ * ModifyAutoSnapshotPolicyAttribute返回参数结构体
+ * @class
+ */
+class ModifyAutoSnapshotPolicyAttributeResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * 描述预付费或后付费云盘的价格。
  * @class
  */
@@ -897,7 +956,7 @@ class DiskConfig extends  AbstractModel {
         this.MinDiskSize = null;
 
         /**
-         * 所在[可用区](/document/api/213/9452#zone)。
+         * 云硬盘所属的[可用区](/document/product/213/15753#ZoneInfo)。
          * @type {string || null}
          */
         this.Zone = null;
@@ -3305,18 +3364,48 @@ class Disk extends  AbstractModel {
 }
 
 /**
- * TerminateDisks返回参数结构体
+ * ModifyAutoSnapshotPolicyAttribute请求参数结构体
  * @class
  */
-class TerminateDisksResponse extends  AbstractModel {
+class ModifyAutoSnapshotPolicyAttributeRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * 定期快照策略ID。
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.AutoSnapshotPolicyId = null;
+
+        /**
+         * 定期快照的执行策略。
+         * @type {Array.<Policy> || null}
+         */
+        this.Policy = null;
+
+        /**
+         * 要创建的定期快照策略名。不传则默认为“未命名”。最大长度不能超60个字节。
+         * @type {string || null}
+         */
+        this.AutoSnapshotPolicyName = null;
+
+        /**
+         * 是否激活定期快照策略，FALSE表示未激活，TRUE表示激活，默认为TRUE。
+         * @type {boolean || null}
+         */
+        this.IsActivated = null;
+
+        /**
+         * 通过该定期快照策略创建的快照是否永久保留。FALSE表示非永久保留，TRUE表示永久保留，默认为FALSE。
+         * @type {boolean || null}
+         */
+        this.IsPermanent = null;
+
+        /**
+         * 通过该定期快照策略创建的快照保留天数，该参数不可与`IsPermanent`参数冲突，即若定期快照策略设置为永久保留，`RetentionDays`应置0。
+         * @type {number || null}
+         */
+        this.RetentionDays = null;
 
     }
 
@@ -3327,7 +3416,20 @@ class TerminateDisksResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.AutoSnapshotPolicyId = 'AutoSnapshotPolicyId' in params ? params.AutoSnapshotPolicyId : null;
+
+        if (params.Policy) {
+            this.Policy = new Array();
+            for (let z in params.Policy) {
+                let obj = new Policy();
+                obj.deserialize(params.Policy[z]);
+                this.Policy.push(obj);
+            }
+        }
+        this.AutoSnapshotPolicyName = 'AutoSnapshotPolicyName' in params ? params.AutoSnapshotPolicyName : null;
+        this.IsActivated = 'IsActivated' in params ? params.IsActivated : null;
+        this.IsPermanent = 'IsPermanent' in params ? params.IsPermanent : null;
+        this.RetentionDays = 'RetentionDays' in params ? params.RetentionDays : null;
 
     }
 }
@@ -3406,6 +3508,7 @@ module.exports = {
     DetachDisksRequest: DetachDisksRequest,
     DescribeDiskOperationLogsResponse: DescribeDiskOperationLogsResponse,
     ResizeDiskRequest: ResizeDiskRequest,
+    TerminateDisksResponse: TerminateDisksResponse,
     ModifyDiskAttributesResponse: ModifyDiskAttributesResponse,
     TerminateDisksRequest: TerminateDisksRequest,
     DescribeDisksRequest: DescribeDisksRequest,
@@ -3419,6 +3522,7 @@ module.exports = {
     RenewDiskResponse: RenewDiskResponse,
     InquiryPriceRenewDisksResponse: InquiryPriceRenewDisksResponse,
     ModifyDisksRenewFlagRequest: ModifyDisksRenewFlagRequest,
+    ModifyAutoSnapshotPolicyAttributeResponse: ModifyAutoSnapshotPolicyAttributeResponse,
     Price: Price,
     UnbindAutoSnapshotPolicyResponse: UnbindAutoSnapshotPolicyResponse,
     InquiryPriceCreateDisksResponse: InquiryPriceCreateDisksResponse,
@@ -3469,7 +3573,7 @@ module.exports = {
     ResizeDiskResponse: ResizeDiskResponse,
     CreateAutoSnapshotPolicyRequest: CreateAutoSnapshotPolicyRequest,
     Disk: Disk,
-    TerminateDisksResponse: TerminateDisksResponse,
+    ModifyAutoSnapshotPolicyAttributeRequest: ModifyAutoSnapshotPolicyAttributeRequest,
     Tag: Tag,
     ApplySnapshotRequest: ApplySnapshotRequest,
 

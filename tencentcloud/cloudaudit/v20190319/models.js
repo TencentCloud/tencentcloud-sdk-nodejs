@@ -337,12 +337,6 @@ class LookUpEventsRequest extends  AbstractModel {
         this.LookupAttributes = null;
 
         /**
-         * 是否调用新的查询接口
-         * @type {number || null}
-         */
-        this.IsApiV3 = null;
-
-        /**
          * 返回日志的最大条数
          * @type {number || null}
          */
@@ -374,7 +368,6 @@ class LookUpEventsRequest extends  AbstractModel {
                 this.LookupAttributes.push(obj);
             }
         }
-        this.IsApiV3 = 'IsApiV3' in params ? params.IsApiV3 : null;
         this.MaxResults = 'MaxResults' in params ? params.MaxResults : null;
         this.NextToken = 'NextToken' in params ? params.NextToken : null;
 
@@ -880,7 +873,7 @@ class CreateAuditRequest extends  AbstractModel {
         this.IsCreateNewQueue = null;
 
         /**
-         * 日志文件前缀。3-40个字符，只能包含 ASCII 编码字母 a-z，A-Z，数字 0-9。可以不填，默认以账号ID做为日志前缀。
+         * 日志文件前缀。3-40个字符，只能包含 ASCII 编码字母 a-z，A-Z，数字 0-9。可以不填，默认以账号ID作为日志前缀。
          * @type {string || null}
          */
         this.LogFilePrefix = null;

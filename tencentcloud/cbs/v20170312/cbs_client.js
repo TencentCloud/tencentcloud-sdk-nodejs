@@ -19,6 +19,7 @@ const AbstractClient = require('../../common/abstract_client')
 const DetachDisksRequest = models.DetachDisksRequest;
 const DescribeDiskOperationLogsResponse = models.DescribeDiskOperationLogsResponse;
 const ResizeDiskRequest = models.ResizeDiskRequest;
+const TerminateDisksResponse = models.TerminateDisksResponse;
 const ModifyDiskAttributesResponse = models.ModifyDiskAttributesResponse;
 const TerminateDisksRequest = models.TerminateDisksRequest;
 const DescribeDisksRequest = models.DescribeDisksRequest;
@@ -32,6 +33,7 @@ const InquiryPriceRenewDisksRequest = models.InquiryPriceRenewDisksRequest;
 const RenewDiskResponse = models.RenewDiskResponse;
 const InquiryPriceRenewDisksResponse = models.InquiryPriceRenewDisksResponse;
 const ModifyDisksRenewFlagRequest = models.ModifyDisksRenewFlagRequest;
+const ModifyAutoSnapshotPolicyAttributeResponse = models.ModifyAutoSnapshotPolicyAttributeResponse;
 const Price = models.Price;
 const UnbindAutoSnapshotPolicyResponse = models.UnbindAutoSnapshotPolicyResponse;
 const InquiryPriceCreateDisksResponse = models.InquiryPriceCreateDisksResponse;
@@ -82,7 +84,7 @@ const DescribeSnapshotsRequest = models.DescribeSnapshotsRequest;
 const ResizeDiskResponse = models.ResizeDiskResponse;
 const CreateAutoSnapshotPolicyRequest = models.CreateAutoSnapshotPolicyRequest;
 const Disk = models.Disk;
-const TerminateDisksResponse = models.TerminateDisksResponse;
+const ModifyAutoSnapshotPolicyAttributeRequest = models.ModifyAutoSnapshotPolicyAttributeRequest;
 const Tag = models.Tag;
 const ApplySnapshotRequest = models.ApplySnapshotRequest;
 
@@ -175,6 +177,20 @@ class CbsClient extends AbstractClient {
     ModifyDisksRenewFlag(req, cb) {
         let resp = new ModifyDisksRenewFlagResponse();
         this.request("ModifyDisksRenewFlag", req, resp, cb);
+    }
+
+    /**
+     * 本接口（ModifyAutoSnapshotPolicyAttribute）用于修改定期快照策略属性。
+
+* 可通过该接口修改定期快照策略的执行策略、名称、是否激活等属性。
+* 修改保留天数时必须保证不与是否永久保留属性冲突，否则整个操作失败，以特定的错误码返回。
+     * @param {ModifyAutoSnapshotPolicyAttributeRequest} req
+     * @param {function(string, ModifyAutoSnapshotPolicyAttributeResponse):void} cb
+     * @public
+     */
+    ModifyAutoSnapshotPolicyAttribute(req, cb) {
+        let resp = new ModifyAutoSnapshotPolicyAttributeResponse();
+        this.request("ModifyAutoSnapshotPolicyAttribute", req, resp, cb);
     }
 
     /**
