@@ -1745,6 +1745,42 @@ class AudioTemplateInfo extends  AbstractModel {
 }
 
 /**
+ * ExecuteFunction返回参数结构体
+ * @class
+ */
+class ExecuteFunctionResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 处理结果打包后的字符串，具体与后台一同协调。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Result = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Result = 'Result' in params ? params.Result : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * 智能封面任务控制参数
  * @class
  */
@@ -2107,6 +2143,34 @@ class AiRecognitionTaskHeadTailResultInput extends  AbstractModel {
             return;
         }
         this.Definition = 'Definition' in params ? params.Definition : null;
+
+    }
+}
+
+/**
+ * PushUrlCache返回参数结构体
+ * @class
+ */
+class PushUrlCacheResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -11481,7 +11545,9 @@ class PoliticalImgReviewTemplateInfoForUpdate extends  AbstractModel {
         /**
          * 画面鉴政过滤标签，审核结果包含选择的标签则返回结果，如果过滤标签为空，则审核结果全部返回，可选值为：
 <li>violation_photo：违规图标；</li>
-<li>politician：政治人物。</li>
+<li>politician：政治人物；</li>
+<li>entertainment：娱乐明星；</li>
+<li>sport：体育明星。</li>
          * @type {Array.<string> || null}
          */
         this.LabelSet = null;
@@ -11998,6 +12064,41 @@ class MediaSourceData extends  AbstractModel {
         }
         this.SourceType = 'SourceType' in params ? params.SourceType : null;
         this.SourceContext = 'SourceContext' in params ? params.SourceContext : null;
+
+    }
+}
+
+/**
+ * PushUrlCache请求参数结构体
+ * @class
+ */
+class PushUrlCacheRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 预热的 URL 列表，单次最多指定20个 URL。
+         * @type {Array.<string> || null}
+         */
+        this.Urls = null;
+
+        /**
+         * 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Urls = 'Urls' in params ? params.Urls : null;
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
 
     }
 }
@@ -13150,7 +13251,9 @@ class PoliticalImgReviewTemplateInfo extends  AbstractModel {
         /**
          * 画面鉴政过滤标签，审核结果包含选择的标签则返回结果，如果过滤标签为空，则审核结果全部返回，可选值为：
 <li>violation_photo：违规图标；</li>
-<li>politician：政治人物。</li>
+<li>politician：政治人物；</li>
+<li>entertainment：娱乐明星；</li>
+<li>sport：体育明星。</li>
          * @type {Array.<string> || null}
          */
         this.LabelSet = null;
@@ -16692,6 +16795,48 @@ class FrameTagConfigureInfo extends  AbstractModel {
 }
 
 /**
+ * ExecuteFunction请求参数结构体
+ * @class
+ */
+class ExecuteFunctionRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 调用后端接口名称。
+         * @type {string || null}
+         */
+        this.FunctionName = null;
+
+        /**
+         * 接口参数，具体参数格式调用时与后端协调。
+         * @type {string || null}
+         */
+        this.FunctionArg = null;
+
+        /**
+         * 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FunctionName = 'FunctionName' in params ? params.FunctionName : null;
+        this.FunctionArg = 'FunctionArg' in params ? params.FunctionArg : null;
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
+
+    }
+}
+
+/**
  * ConfirmEvents返回参数结构体
  * @class
  */
@@ -17251,8 +17396,8 @@ class FaceConfigureInfoForUpdate extends  AbstractModel {
 
         /**
          * 默认人物过滤标签，指定需要返回的默认人物的标签。如果未填或者为空，则全部默认人物结果都返回。标签可选值：
-<li>entertainments：娱乐明星；</li>
-<li>sports：体育明星；</li>
+<li>entertainment：娱乐明星；</li>
+<li>sport：体育明星；</li>
 <li>politician：政治人物。</li>
          * @type {Array.<string> || null}
          */
@@ -17814,15 +17959,15 @@ class FaceConfigureInfo extends  AbstractModel {
         this.Switch = null;
 
         /**
-         * 人脸识别过滤分数，当识别结果达到该分数以上，返回识别结果。默认 90 分。取值范围：0 - 100。
+         * 人脸识别过滤分数，当识别结果达到该分数以上，返回识别结果。默认 95 分。取值范围：0 - 100。
          * @type {number || null}
          */
         this.Score = null;
 
         /**
          * 默认人物过滤标签，指定需要返回的默认人物的标签。如果未填或者为空，则全部默认人物结果都返回。标签可选值：
-<li>entertainments：娱乐明星；</li>
-<li>sports：体育明星；</li>
+<li>entertainment：娱乐明星；</li>
+<li>sport：体育明星；</li>
 <li>politician：政治人物。</li>
          * @type {Array.<string> || null}
          */
@@ -18819,9 +18964,9 @@ class PullFileTask extends  AbstractModel {
         this.FileId = null;
 
         /**
-         * 上传完成后生成的媒体文件基础信息。
+         * 转拉完成后生成的媒体文件基础信息。
 注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
+         * @type {MediaBasicInfo || null}
          */
         this.MediaBasicInfo = null;
 
@@ -18850,7 +18995,12 @@ class PullFileTask extends  AbstractModel {
         this.ErrCode = 'ErrCode' in params ? params.ErrCode : null;
         this.Message = 'Message' in params ? params.Message : null;
         this.FileId = 'FileId' in params ? params.FileId : null;
-        this.MediaBasicInfo = 'MediaBasicInfo' in params ? params.MediaBasicInfo : null;
+
+        if (params.MediaBasicInfo) {
+            let obj = new MediaBasicInfo();
+            obj.deserialize(params.MediaBasicInfo)
+            this.MediaBasicInfo = obj;
+        }
         this.FileUrl = 'FileUrl' in params ? params.FileUrl : null;
         this.ProcedureTaskId = 'ProcedureTaskId' in params ? params.ProcedureTaskId : null;
 
@@ -19399,12 +19549,14 @@ module.exports = {
     MediaSampleSnapshotItem: MediaSampleSnapshotItem,
     AiRecognitionTaskInput: AiRecognitionTaskInput,
     AudioTemplateInfo: AudioTemplateInfo,
+    ExecuteFunctionResponse: ExecuteFunctionResponse,
     CoverConfigureInfo: CoverConfigureInfo,
     ComposeMediaRequest: ComposeMediaRequest,
     AIRecognitionTemplateItem: AIRecognitionTemplateItem,
     AiReviewPornAsrTaskInput: AiReviewPornAsrTaskInput,
     AiRecognitionTaskFaceResult: AiRecognitionTaskFaceResult,
     AiRecognitionTaskHeadTailResultInput: AiRecognitionTaskHeadTailResultInput,
+    PushUrlCacheResponse: PushUrlCacheResponse,
     HeadTailConfigureInfo: HeadTailConfigureInfo,
     TerrorismImgReviewTemplateInfoForUpdate: TerrorismImgReviewTemplateInfoForUpdate,
     AiRecognitionTaskOcrFullTextResultOutput: AiRecognitionTaskOcrFullTextResultOutput,
@@ -19586,6 +19738,7 @@ module.exports = {
     ClipFileInfo2017: ClipFileInfo2017,
     StatDataItem: StatDataItem,
     MediaSourceData: MediaSourceData,
+    PushUrlCacheRequest: PushUrlCacheRequest,
     CreateAIAnalysisTemplateResponse: CreateAIAnalysisTemplateResponse,
     MediaProcessTaskSampleSnapshotResult: MediaProcessTaskSampleSnapshotResult,
     EventContent: EventContent,
@@ -19665,6 +19818,7 @@ module.exports = {
     DescribeWatermarkTemplatesResponse: DescribeWatermarkTemplatesResponse,
     ImageTransform: ImageTransform,
     FrameTagConfigureInfo: FrameTagConfigureInfo,
+    ExecuteFunctionRequest: ExecuteFunctionRequest,
     ConfirmEventsResponse: ConfirmEventsResponse,
     ModifyPersonSampleResponse: ModifyPersonSampleResponse,
     VideoTrackItem: VideoTrackItem,

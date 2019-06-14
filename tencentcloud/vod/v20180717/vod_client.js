@@ -50,12 +50,14 @@ const DeletePersonSampleRequest = models.DeletePersonSampleRequest;
 const MediaSampleSnapshotItem = models.MediaSampleSnapshotItem;
 const AiRecognitionTaskInput = models.AiRecognitionTaskInput;
 const AudioTemplateInfo = models.AudioTemplateInfo;
+const ExecuteFunctionResponse = models.ExecuteFunctionResponse;
 const CoverConfigureInfo = models.CoverConfigureInfo;
 const ComposeMediaRequest = models.ComposeMediaRequest;
 const AIRecognitionTemplateItem = models.AIRecognitionTemplateItem;
 const AiReviewPornAsrTaskInput = models.AiReviewPornAsrTaskInput;
 const AiRecognitionTaskFaceResult = models.AiRecognitionTaskFaceResult;
 const AiRecognitionTaskHeadTailResultInput = models.AiRecognitionTaskHeadTailResultInput;
+const PushUrlCacheResponse = models.PushUrlCacheResponse;
 const HeadTailConfigureInfo = models.HeadTailConfigureInfo;
 const TerrorismImgReviewTemplateInfoForUpdate = models.TerrorismImgReviewTemplateInfoForUpdate;
 const AiRecognitionTaskOcrFullTextResultOutput = models.AiRecognitionTaskOcrFullTextResultOutput;
@@ -237,6 +239,7 @@ const WechatPublishTask = models.WechatPublishTask;
 const ClipFileInfo2017 = models.ClipFileInfo2017;
 const StatDataItem = models.StatDataItem;
 const MediaSourceData = models.MediaSourceData;
+const PushUrlCacheRequest = models.PushUrlCacheRequest;
 const CreateAIAnalysisTemplateResponse = models.CreateAIAnalysisTemplateResponse;
 const MediaProcessTaskSampleSnapshotResult = models.MediaProcessTaskSampleSnapshotResult;
 const EventContent = models.EventContent;
@@ -316,6 +319,7 @@ const PoliticalConfigureInfoForUpdate = models.PoliticalConfigureInfoForUpdate;
 const DescribeWatermarkTemplatesResponse = models.DescribeWatermarkTemplatesResponse;
 const ImageTransform = models.ImageTransform;
 const FrameTagConfigureInfo = models.FrameTagConfigureInfo;
+const ExecuteFunctionRequest = models.ExecuteFunctionRequest;
 const ConfirmEventsResponse = models.ConfirmEventsResponse;
 const ModifyPersonSampleResponse = models.ModifyPersonSampleResponse;
 const VideoTrackItem = models.VideoTrackItem;
@@ -850,6 +854,19 @@ class VodClient extends AbstractClient {
     }
 
     /**
+     * 1. 预热指定的 URL 列表。
+2. URL 的域名必须已在云点播中注册。
+3. 单次请求最多指定20个 URL。
+     * @param {PushUrlCacheRequest} req
+     * @param {function(string, PushUrlCacheResponse):void} cb
+     * @public
+     */
+    PushUrlCache(req, cb) {
+        let resp = new PushUrlCacheResponse();
+        this.request("PushUrlCache", req, resp, cb);
+    }
+
+    /**
      * * 删除媒体及其对应的视频处理文件（如转码视频、雪碧图、截图、微信发布视频等）；
 * 可单独删除指定 ID 的视频文件下的转码，或者微信发布文件；
      * @param {DeleteMediaRequest} req
@@ -905,6 +922,17 @@ class VodClient extends AbstractClient {
     ResetProcedureTemplate(req, cb) {
         let resp = new ResetProcedureTemplateResponse();
         this.request("ResetProcedureTemplate", req, resp, cb);
+    }
+
+    /**
+     * 本接口仅用于定制开发的特殊场景，除非云点播客服人员主动告知您需要使用本接口，其它情况请勿调用。
+     * @param {ExecuteFunctionRequest} req
+     * @param {function(string, ExecuteFunctionResponse):void} cb
+     * @public
+     */
+    ExecuteFunction(req, cb) {
+        let resp = new ExecuteFunctionResponse();
+        this.request("ExecuteFunction", req, resp, cb);
     }
 
     /**
