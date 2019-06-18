@@ -22,7 +22,7 @@ httpProfile.endpoint = "cvm.ap-shanghai.tencentcloudapi.com";
 
 // 实例化一个client选项，可选的，没有特殊需求可以跳过。
 let clientProfile = new ClientProfile();
-clientProfile.signMethod = "HmacSHA256";
+clientProfile.signMethod = "TC3-HMAC-SHA256";
 clientProfile.httpProfile = httpProfile;
 
 // 实例化要请求产品(以cvm为例)的client对象。clientProfile可选。
