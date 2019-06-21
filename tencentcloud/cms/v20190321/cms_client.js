@@ -18,22 +18,31 @@ const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const AudioModerationResponse = models.AudioModerationResponse;
 const DescribeModerationOverviewRequest = models.DescribeModerationOverviewRequest;
-const AudioModerationRequest = models.AudioModerationRequest;
-const ImageData = models.ImageData;
-const OverviewRecord = models.OverviewRecord;
-const Similar = models.Similar;
-const ImagePornDetect = models.ImagePornDetect;
-const TextData = models.TextData;
-const ImageTerrorDetect = models.ImageTerrorDetect;
-const ImageIllegalDetect = models.ImageIllegalDetect;
-const ImageModerationRequest = models.ImageModerationRequest;
-const VideoModerationRequest = models.VideoModerationRequest;
-const DescribeModerationOverviewResponse = models.DescribeModerationOverviewResponse;
-const VideoModerationResponse = models.VideoModerationResponse;
-const ImagePolityDetect = models.ImagePolityDetect;
-const ImageModerationResponse = models.ImageModerationResponse;
 const TextModerationResponse = models.TextModerationResponse;
+const TextData = models.TextData;
+const VideoModerationResponse = models.VideoModerationResponse;
+const ImageModerationResponse = models.ImageModerationResponse;
+const ImageModerationRequest = models.ImageModerationRequest;
+const ImageData = models.ImageData;
+const ImagePornDetect = models.ImagePornDetect;
+const DeleteTextSampleResponse = models.DeleteTextSampleResponse;
+const CreateTextSampleResponse = models.CreateTextSampleResponse;
+const ImagePolityDetect = models.ImagePolityDetect;
+const ImageTerrorDetect = models.ImageTerrorDetect;
+const DescribeTextSampleResponse = models.DescribeTextSampleResponse;
+const TextSample = models.TextSample;
+const OverviewRecord = models.OverviewRecord;
+const CreateTextSampleRequest = models.CreateTextSampleRequest;
 const TextModerationRequest = models.TextModerationRequest;
+const Filter = models.Filter;
+const DescribeModerationOverviewResponse = models.DescribeModerationOverviewResponse;
+const Similar = models.Similar;
+const ImageHotDetect = models.ImageHotDetect;
+const DescribeTextSampleRequest = models.DescribeTextSampleRequest;
+const AudioModerationRequest = models.AudioModerationRequest;
+const ImageIllegalDetect = models.ImageIllegalDetect;
+const VideoModerationRequest = models.VideoModerationRequest;
+const DeleteTextSampleRequest = models.DeleteTextSampleRequest;
 
 
 /**
@@ -58,9 +67,40 @@ class CmsClient extends AbstractClient {
     }
 
     /**
-     * 音频内容检测（Audio Moderation, AM）服务使用了波形分析、声纹分析等技术，能识别涉黄、涉政、涉恐等违规音频，同时支持用户配置音频黑库，打击自定义的违规内容。
+     * 删除文字样本库，暂时只支持单个删除
+     * @param {DeleteTextSampleRequest} req
+     * @param {function(string, DeleteTextSampleResponse):void} cb
+     * @public
+     */
+    DeleteTextSample(req, cb) {
+        let resp = new DeleteTextSampleResponse();
+        this.request("DeleteTextSample", req, resp, cb);
+    }
 
-通过API直接上传音频即可进行检测，对于高危部分直接屏蔽，可疑部分人工复审，从而节省审核人力，释放业务风险。
+    /**
+     * 新增文本类型样本库
+     * @param {CreateTextSampleRequest} req
+     * @param {function(string, CreateTextSampleResponse):void} cb
+     * @public
+     */
+    CreateTextSample(req, cb) {
+        let resp = new CreateTextSampleResponse();
+        this.request("CreateTextSample", req, resp, cb);
+    }
+
+    /**
+     * 视频内容检测（Video Moderation, VM）服务能识别涉黄、涉政、涉恐等违规视频，同时支持用户配置视频黑库，打击自定义的违规内容。
+     * @param {VideoModerationRequest} req
+     * @param {function(string, VideoModerationResponse):void} cb
+     * @public
+     */
+    VideoModeration(req, cb) {
+        let resp = new VideoModerationResponse();
+        this.request("VideoModeration", req, resp, cb);
+    }
+
+    /**
+     * 音频内容检测（Audio Moderation, AM）服务使用了波形分析、声纹分析等技术，能识别涉黄、涉政、涉恐等违规音频，同时支持用户配置音频黑库，打击自定义的违规内容。
      * @param {AudioModerationRequest} req
      * @param {function(string, AudioModerationResponse):void} cb
      * @public
@@ -71,8 +111,18 @@ class CmsClient extends AbstractClient {
     }
 
     /**
+     * 支持批量查询文字样本库
+     * @param {DescribeTextSampleRequest} req
+     * @param {function(string, DescribeTextSampleResponse):void} cb
+     * @public
+     */
+    DescribeTextSample(req, cb) {
+        let resp = new DescribeTextSampleResponse();
+        this.request("DescribeTextSample", req, resp, cb);
+    }
+
+    /**
      * 文本内容检测（Text Moderation）服务使用了深度学习技术，识别涉黄、涉政、涉恐等有害内容，同时支持用户配置词库，打击自定义的违规文本。
-通过API接口，能检测内容的危险等级，对于高危部分直接过滤，可疑部分人工复审，从而节省审核人力，释放业务风险。
      * @param {TextModerationRequest} req
      * @param {function(string, TextModerationResponse):void} cb
      * @public
@@ -84,7 +134,6 @@ class CmsClient extends AbstractClient {
 
     /**
      * 图片内容检测服务（Image Moderation, IM）能自动扫描图片，识别涉黄、涉恐、涉政、涉毒等有害内容，同时支持用户配置图片黑名单，打击自定义的违规图片。
-通过API获取检测的标签及置信度，可直接采信高置信度的结果，人工复审低置信度的结果，从而降低人工成本，提高审核效率。
      * @param {ImageModerationRequest} req
      * @param {function(string, ImageModerationResponse):void} cb
      * @public
@@ -92,18 +141,6 @@ class CmsClient extends AbstractClient {
     ImageModeration(req, cb) {
         let resp = new ImageModerationResponse();
         this.request("ImageModeration", req, resp, cb);
-    }
-
-    /**
-     * 视频内容检测（Video Moderation, VM）服务能识别涉黄、涉政、涉恐等违规视频，同时支持用户配置视频黑库，打击自定义的违规内容。
-通过API直接上传视频即可进行检测，对于高危部分直接过滤，可疑部分人工复审，从而节省审核人力，释放业务风险。
-     * @param {VideoModerationRequest} req
-     * @param {function(string, VideoModerationResponse):void} cb
-     * @public
-     */
-    VideoModeration(req, cb) {
-        let resp = new VideoModerationResponse();
-        this.request("VideoModeration", req, resp, cb);
     }
 
 

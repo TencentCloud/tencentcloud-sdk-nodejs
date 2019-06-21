@@ -102,33 +102,213 @@ class DescribeModerationOverviewRequest extends  AbstractModel {
 }
 
 /**
- * AudioModeration请求参数结构体
+ * TextModeration返回参数结构体
  * @class
  */
-class AudioModerationRequest extends  AbstractModel {
+class TextModerationResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 回调url
-         * @type {string || null}
+         * 识别结果
+         * @type {TextData || null}
          */
-        this.CallbackUrl = null;
+        this.Data = null;
 
         /**
-         * 音频内容的base64
+         * 业务返回码
+         * @type {number || null}
+         */
+        this.BusinessCode = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Data) {
+            let obj = new TextData();
+            obj.deserialize(params.Data)
+            this.Data = obj;
+        }
+        this.BusinessCode = 'BusinessCode' in params ? params.BusinessCode : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 文本识别结果详情
+ * @class
+ */
+class TextData extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 是否恶意 0：正常 1：可疑
+         * @type {number || null}
+         */
+        this.EvilFlag = null;
+
+        /**
+         * 恶意类型
+100：正常
+20001：政治
+20002：色情 
+20006：涉毒违法
+20007：谩骂 
+24001：暴恐
+21000：综合
+         * @type {number || null}
+         */
+        this.EvilType = null;
+
+        /**
+         * 命中的关键词
+         * @type {Array.<string> || null}
+         */
+        this.Keywords = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.EvilFlag = 'EvilFlag' in params ? params.EvilFlag : null;
+        this.EvilType = 'EvilType' in params ? params.EvilType : null;
+        this.Keywords = 'Keywords' in params ? params.Keywords : null;
+
+    }
+}
+
+/**
+ * VideoModeration返回参数结构体
+ * @class
+ */
+class VideoModerationResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 业务返回码
+60001：成功请求回调任务
+         * @type {number || null}
+         */
+        this.BusinessCode = null;
+
+        /**
+         * 识别返回结果
+         * @type {string || null}
+         */
+        this.Data = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.BusinessCode = 'BusinessCode' in params ? params.BusinessCode : null;
+        this.Data = 'Data' in params ? params.Data : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ImageModeration返回参数结构体
+ * @class
+ */
+class ImageModerationResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 识别结果
+         * @type {ImageData || null}
+         */
+        this.Data = null;
+
+        /**
+         * 业务返回码
+         * @type {number || null}
+         */
+        this.BusinessCode = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Data) {
+            let obj = new ImageData();
+            obj.deserialize(params.Data)
+            this.Data = obj;
+        }
+        this.BusinessCode = 'BusinessCode' in params ? params.BusinessCode : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ImageModeration请求参数结构体
+ * @class
+ */
+class ImageModerationRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 文件内容 Base64,与FileUrl必须二填一
          * @type {string || null}
          */
         this.FileContent = null;
 
         /**
-         * 音频文件的MD5值
+         * 文件MD5值
          * @type {string || null}
          */
         this.FileMD5 = null;
 
         /**
-         * 音频内容Url ，其中FileUrl和FileContent二选一
+         * 文件地址
          * @type {string || null}
          */
         this.FileUrl = null;
@@ -142,7 +322,6 @@ class AudioModerationRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.CallbackUrl = 'CallbackUrl' in params ? params.CallbackUrl : null;
         this.FileContent = 'FileContent' in params ? params.FileContent : null;
         this.FileMD5 = 'FileMD5' in params ? params.FileMD5 : null;
         this.FileUrl = 'FileUrl' in params ? params.FileUrl : null;
@@ -176,6 +355,12 @@ class ImageData extends  AbstractModel {
          * @type {number || null}
          */
         this.EvilType = null;
+
+        /**
+         * 图片性感详情
+         * @type {ImageHotDetect || null}
+         */
+        this.HotDetect = null;
 
         /**
          * 图片违法详情
@@ -219,6 +404,12 @@ class ImageData extends  AbstractModel {
         this.EvilFlag = 'EvilFlag' in params ? params.EvilFlag : null;
         this.EvilType = 'EvilType' in params ? params.EvilType : null;
 
+        if (params.HotDetect) {
+            let obj = new ImageHotDetect();
+            obj.deserialize(params.HotDetect)
+            this.HotDetect = obj;
+        }
+
         if (params.IllegalDetect) {
             let obj = new ImageIllegalDetect();
             obj.deserialize(params.IllegalDetect)
@@ -248,104 +439,6 @@ class ImageData extends  AbstractModel {
             obj.deserialize(params.TerrorDetect)
             this.TerrorDetect = obj;
         }
-
-    }
-}
-
-/**
- * 概览数据
- * @class
- */
-class OverviewRecord extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 调用恶意量
-         * @type {number || null}
-         */
-        this.EvilCount = null;
-
-        /**
-         * Text表示文本，Image表示图片，Audio表示音频，Video表示视频
-         * @type {string || null}
-         */
-        this.ServiceType = null;
-
-        /**
-         * 调用总量
-         * @type {number || null}
-         */
-        this.TotalCount = null;
-
-        /**
-         * 恶意量同比增长率
-         * @type {string || null}
-         */
-        this.Yoy = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.EvilCount = 'EvilCount' in params ? params.EvilCount : null;
-        this.ServiceType = 'ServiceType' in params ? params.ServiceType : null;
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
-        this.Yoy = 'Yoy' in params ? params.Yoy : null;
-
-    }
-}
-
-/**
- * 相似度详情
- * @class
- */
-class Similar extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 恶意类型
-100：正常 
-20001：政治
-20002：色情 
-20006：涉毒违法
-20007：谩骂 
-24001：暴恐
-21000：综合
-         * @type {number || null}
-         */
-        this.EvilType = null;
-
-        /**
-         * 处置判定 0：未匹配到 1：恶意 2：白样本
-         * @type {number || null}
-         */
-        this.HitFlag = null;
-
-        /**
-         * 返回的种子url
-         * @type {string || null}
-         */
-        this.SeedUrl = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.EvilType = 'EvilType' in params ? params.EvilType : null;
-        this.HitFlag = 'HitFlag' in params ? params.HitFlag : null;
-        this.SeedUrl = 'SeedUrl' in params ? params.SeedUrl : null;
 
     }
 }
@@ -414,22 +507,90 @@ class ImagePornDetect extends  AbstractModel {
 }
 
 /**
- * 文本识别结果详情
+ * DeleteTextSample返回参数结构体
  * @class
  */
-class TextData extends  AbstractModel {
+class DeleteTextSampleResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 是否恶意 0：正常 1：可疑
+         * 任务状态
+1：已完成
+2：处理中
          * @type {number || null}
          */
-        this.EvilFlag = null;
+        this.Progress = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Progress = 'Progress' in params ? params.Progress : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CreateTextSample返回参数结构体
+ * @class
+ */
+class CreateTextSampleResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 任务状态
+1：已完成
+2：处理中
+         * @type {number || null}
+         */
+        this.Progress = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Progress = 'Progress' in params ? params.Progress : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 图片涉政详情
+ * @class
+ */
+class ImagePolityDetect extends  AbstractModel {
+    constructor(){
+        super();
 
         /**
          * 恶意类型
-100：正常
+100：正常 
 20001：政治
 20002：色情 
 20006：涉毒违法
@@ -441,10 +602,34 @@ class TextData extends  AbstractModel {
         this.EvilType = null;
 
         /**
-         * 命中的关键词
+         * 处置判定  0：正常 1：可疑
+         * @type {number || null}
+         */
+        this.HitFlag = null;
+
+        /**
+         * 命中的人脸名称
+         * @type {Array.<string> || null}
+         */
+        this.FaceNames = null;
+
+        /**
+         * 关键词明细
          * @type {Array.<string> || null}
          */
         this.Keywords = null;
+
+        /**
+         * 命中的政治物品名称
+         * @type {Array.<string> || null}
+         */
+        this.PolityItems = null;
+
+        /**
+         * 政治（人脸）分：分值范围 0-100，分数越高可疑程度越高
+         * @type {number || null}
+         */
+        this.Score = null;
 
     }
 
@@ -455,9 +640,12 @@ class TextData extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.EvilFlag = 'EvilFlag' in params ? params.EvilFlag : null;
         this.EvilType = 'EvilType' in params ? params.EvilType : null;
+        this.HitFlag = 'HitFlag' in params ? params.HitFlag : null;
+        this.FaceNames = 'FaceNames' in params ? params.FaceNames : null;
         this.Keywords = 'Keywords' in params ? params.Keywords : null;
+        this.PolityItems = 'PolityItems' in params ? params.PolityItems : null;
+        this.Score = 'Score' in params ? params.Score : null;
 
     }
 }
@@ -526,6 +714,569 @@ class ImageTerrorDetect extends  AbstractModel {
 }
 
 /**
+ * DescribeTextSample返回参数结构体
+ * @class
+ */
+class DescribeTextSampleResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 符合要求的样本的信息
+         * @type {Array.<TextSample> || null}
+         */
+        this.TextSampleSet = null;
+
+        /**
+         * 符合要求的样本的数量
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.TextSampleSet) {
+            this.TextSampleSet = new Array();
+            for (let z in params.TextSampleSet) {
+                let obj = new TextSample();
+                obj.deserialize(params.TextSampleSet[z]);
+                this.TextSampleSet.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 文字样本信息
+ * @class
+ */
+class TextSample extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 处理错误码
+         * @type {number || null}
+         */
+        this.Code = null;
+
+        /**
+         * 关键词
+         * @type {string || null}
+         */
+        this.Content = null;
+
+        /**
+         * 创建时间戳
+         * @type {number || null}
+         */
+        this.CreatedAt = null;
+
+        /**
+         * 恶意类型
+100：正常
+20001：政治
+20002：色情 
+20006：涉毒违法
+20007：谩骂 
+24001：暴恐
+21000：综合
+         * @type {number || null}
+         */
+        this.EvilType = null;
+
+        /**
+         * 唯一标识
+         * @type {string || null}
+         */
+        this.Id = null;
+
+        /**
+         * 样本类型
+1：黑库
+2：白库
+         * @type {number || null}
+         */
+        this.Label = null;
+
+        /**
+         * 任务状态
+1：已完成
+2：处理中
+         * @type {number || null}
+         */
+        this.Status = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Code = 'Code' in params ? params.Code : null;
+        this.Content = 'Content' in params ? params.Content : null;
+        this.CreatedAt = 'CreatedAt' in params ? params.CreatedAt : null;
+        this.EvilType = 'EvilType' in params ? params.EvilType : null;
+        this.Id = 'Id' in params ? params.Id : null;
+        this.Label = 'Label' in params ? params.Label : null;
+        this.Status = 'Status' in params ? params.Status : null;
+
+    }
+}
+
+/**
+ * 概览数据
+ * @class
+ */
+class OverviewRecord extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 调用恶意量
+         * @type {number || null}
+         */
+        this.EvilCount = null;
+
+        /**
+         * Text表示文本，Image表示图片，Audio表示音频，Video表示视频
+         * @type {string || null}
+         */
+        this.ServiceType = null;
+
+        /**
+         * 调用总量
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 恶意量同比增长率
+         * @type {string || null}
+         */
+        this.Yoy = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.EvilCount = 'EvilCount' in params ? params.EvilCount : null;
+        this.ServiceType = 'ServiceType' in params ? params.ServiceType : null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.Yoy = 'Yoy' in params ? params.Yoy : null;
+
+    }
+}
+
+/**
+ * CreateTextSample请求参数结构体
+ * @class
+ */
+class CreateTextSampleRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 关键词数组
+         * @type {Array.<string> || null}
+         */
+        this.Contents = null;
+
+        /**
+         * 恶意类型
+100：正常
+20001：政治
+20002：色情 
+20006：涉毒违法
+20007：谩骂 
+24001：暴恐
+21000：综合
+20105：广告引流
+         * @type {number || null}
+         */
+        this.EvilType = null;
+
+        /**
+         * 样本类型
+1：黑库
+2：白库
+         * @type {number || null}
+         */
+        this.Label = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Contents = 'Contents' in params ? params.Contents : null;
+        this.EvilType = 'EvilType' in params ? params.EvilType : null;
+        this.Label = 'Label' in params ? params.Label : null;
+
+    }
+}
+
+/**
+ * TextModeration请求参数结构体
+ * @class
+ */
+class TextModerationRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 文本内容Base64编码
+         * @type {string || null}
+         */
+        this.Content = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Content = 'Content' in params ? params.Content : null;
+
+    }
+}
+
+/**
+ * 筛选数据结构
+ * @class
+ */
+class Filter extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 需要过滤的字段
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 需要过滤字段的值
+         * @type {string || null}
+         */
+        this.Value = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Value = 'Value' in params ? params.Value : null;
+
+    }
+}
+
+/**
+ * DescribeModerationOverview返回参数结构体
+ * @class
+ */
+class DescribeModerationOverviewResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 概览数据集合
+         * @type {Array.<OverviewRecord> || null}
+         */
+        this.Results = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Results) {
+            this.Results = new Array();
+            for (let z in params.Results) {
+                let obj = new OverviewRecord();
+                obj.deserialize(params.Results[z]);
+                this.Results.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 相似度详情
+ * @class
+ */
+class Similar extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 恶意类型
+100：正常 
+20001：政治
+20002：色情 
+20006：涉毒违法
+20007：谩骂 
+24001：暴恐
+21000：综合
+         * @type {number || null}
+         */
+        this.EvilType = null;
+
+        /**
+         * 处置判定 0：未匹配到 1：恶意 2：白样本
+         * @type {number || null}
+         */
+        this.HitFlag = null;
+
+        /**
+         * 返回的种子url
+         * @type {string || null}
+         */
+        this.SeedUrl = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.EvilType = 'EvilType' in params ? params.EvilType : null;
+        this.HitFlag = 'HitFlag' in params ? params.HitFlag : null;
+        this.SeedUrl = 'SeedUrl' in params ? params.SeedUrl : null;
+
+    }
+}
+
+/**
+ * 图片性感详情
+ * @class
+ */
+class ImageHotDetect extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 恶意类型
+100：正常 
+20001：政治
+20002：色情 
+20006：涉毒违法
+20007：谩骂 
+24001：暴恐
+21000：综合
+         * @type {number || null}
+         */
+        this.EvilType = null;
+
+        /**
+         * 处置判定 0：正常 1：可疑
+         * @type {number || null}
+         */
+        this.HitFlag = null;
+
+        /**
+         * 关键词明细
+         * @type {Array.<string> || null}
+         */
+        this.Keywords = null;
+
+        /**
+         * 性感标签：性感特征中文描述
+         * @type {Array.<string> || null}
+         */
+        this.Labels = null;
+
+        /**
+         * 性感分：分值范围 0-100，分数越高性感倾向越明显
+         * @type {number || null}
+         */
+        this.Score = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.EvilType = 'EvilType' in params ? params.EvilType : null;
+        this.HitFlag = 'HitFlag' in params ? params.HitFlag : null;
+        this.Keywords = 'Keywords' in params ? params.Keywords : null;
+        this.Labels = 'Labels' in params ? params.Labels : null;
+        this.Score = 'Score' in params ? params.Score : null;
+
+    }
+}
+
+/**
+ * DescribeTextSample请求参数结构体
+ * @class
+ */
+class DescribeTextSampleRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 支持通过标签值进行筛选
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * 数量限制，默认为20，最大值为100
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 偏移量，默认为0
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 升序（asc）还是降序（desc），默认：desc
+         * @type {string || null}
+         */
+        this.OrderDirection = null;
+
+        /**
+         * 按某个字段排序，目前仅支持CreatedAt排序
+         * @type {string || null}
+         */
+        this.OrderField = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.OrderDirection = 'OrderDirection' in params ? params.OrderDirection : null;
+        this.OrderField = 'OrderField' in params ? params.OrderField : null;
+
+    }
+}
+
+/**
+ * AudioModeration请求参数结构体
+ * @class
+ */
+class AudioModerationRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 回调url
+         * @type {string || null}
+         */
+        this.CallbackUrl = null;
+
+        /**
+         * 音频内容的base64
+         * @type {string || null}
+         */
+        this.FileContent = null;
+
+        /**
+         * 音频文件的MD5值
+         * @type {string || null}
+         */
+        this.FileMD5 = null;
+
+        /**
+         * 音频内容Url ，其中FileUrl和FileContent二选一
+         * @type {string || null}
+         */
+        this.FileUrl = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CallbackUrl = 'CallbackUrl' in params ? params.CallbackUrl : null;
+        this.FileContent = 'FileContent' in params ? params.FileContent : null;
+        this.FileMD5 = 'FileMD5' in params ? params.FileMD5 : null;
+        this.FileUrl = 'FileUrl' in params ? params.FileUrl : null;
+
+    }
+}
+
+/**
  * 图片违法详情
  * @class
  */
@@ -589,48 +1340,6 @@ class ImageIllegalDetect extends  AbstractModel {
 }
 
 /**
- * ImageModeration请求参数结构体
- * @class
- */
-class ImageModerationRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 文件内容 Base64,与FileUrl必须二填一
-         * @type {string || null}
-         */
-        this.FileContent = null;
-
-        /**
-         * 文件MD5值
-         * @type {string || null}
-         */
-        this.FileMD5 = null;
-
-        /**
-         * 文件地址
-         * @type {string || null}
-         */
-        this.FileUrl = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.FileContent = 'FileContent' in params ? params.FileContent : null;
-        this.FileMD5 = 'FileMD5' in params ? params.FileMD5 : null;
-        this.FileUrl = 'FileUrl' in params ? params.FileUrl : null;
-
-    }
-}
-
-/**
  * VideoModeration请求参数结构体
  * @class
  */
@@ -680,135 +1389,18 @@ class VideoModerationRequest extends  AbstractModel {
 }
 
 /**
- * DescribeModerationOverview返回参数结构体
+ * DeleteTextSample请求参数结构体
  * @class
  */
-class DescribeModerationOverviewResponse extends  AbstractModel {
+class DeleteTextSampleRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 概览数据集合
-         * @type {Array.<OverviewRecord> || null}
-         */
-        this.Results = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-        if (params.Results) {
-            this.Results = new Array();
-            for (let z in params.Results) {
-                let obj = new OverviewRecord();
-                obj.deserialize(params.Results[z]);
-                this.Results.push(obj);
-            }
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * VideoModeration返回参数结构体
- * @class
- */
-class VideoModerationResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 业务返回码
-60001：成功请求回调任务
-         * @type {number || null}
-         */
-        this.BusinessCode = null;
-
-        /**
-         * 识别返回结果
-         * @type {string || null}
-         */
-        this.Data = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.BusinessCode = 'BusinessCode' in params ? params.BusinessCode : null;
-        this.Data = 'Data' in params ? params.Data : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * 图片涉政详情
- * @class
- */
-class ImagePolityDetect extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 恶意类型
-100：正常 
-20001：政治
-20002：色情 
-20006：涉毒违法
-20007：谩骂 
-24001：暴恐
-21000：综合
-         * @type {number || null}
-         */
-        this.EvilType = null;
-
-        /**
-         * 处置判定  0：正常 1：可疑
-         * @type {number || null}
-         */
-        this.HitFlag = null;
-
-        /**
-         * 命中的人脸名称
+         * 唯一标识数组，目前暂时只支持单个删除
          * @type {Array.<string> || null}
          */
-        this.FaceNames = null;
-
-        /**
-         * 关键词明细
-         * @type {Array.<string> || null}
-         */
-        this.Keywords = null;
-
-        /**
-         * 政治（人脸）分：分值范围 0-100，分数越高可疑程度越高
-         * @type {number || null}
-         */
-        this.Score = null;
+        this.Ids = null;
 
     }
 
@@ -819,133 +1411,7 @@ class ImagePolityDetect extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.EvilType = 'EvilType' in params ? params.EvilType : null;
-        this.HitFlag = 'HitFlag' in params ? params.HitFlag : null;
-        this.FaceNames = 'FaceNames' in params ? params.FaceNames : null;
-        this.Keywords = 'Keywords' in params ? params.Keywords : null;
-        this.Score = 'Score' in params ? params.Score : null;
-
-    }
-}
-
-/**
- * ImageModeration返回参数结构体
- * @class
- */
-class ImageModerationResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 识别结果
-         * @type {ImageData || null}
-         */
-        this.Data = null;
-
-        /**
-         * 业务返回码
-         * @type {number || null}
-         */
-        this.BusinessCode = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-        if (params.Data) {
-            let obj = new ImageData();
-            obj.deserialize(params.Data)
-            this.Data = obj;
-        }
-        this.BusinessCode = 'BusinessCode' in params ? params.BusinessCode : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * TextModeration返回参数结构体
- * @class
- */
-class TextModerationResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 识别结果
-         * @type {TextData || null}
-         */
-        this.Data = null;
-
-        /**
-         * 业务返回码
-         * @type {number || null}
-         */
-        this.BusinessCode = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-        if (params.Data) {
-            let obj = new TextData();
-            obj.deserialize(params.Data)
-            this.Data = obj;
-        }
-        this.BusinessCode = 'BusinessCode' in params ? params.BusinessCode : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * TextModeration请求参数结构体
- * @class
- */
-class TextModerationRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 文本内容Base64编码
-         * @type {string || null}
-         */
-        this.Content = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Content = 'Content' in params ? params.Content : null;
+        this.Ids = 'Ids' in params ? params.Ids : null;
 
     }
 }
@@ -953,21 +1419,30 @@ class TextModerationRequest extends  AbstractModel {
 module.exports = {
     AudioModerationResponse: AudioModerationResponse,
     DescribeModerationOverviewRequest: DescribeModerationOverviewRequest,
-    AudioModerationRequest: AudioModerationRequest,
-    ImageData: ImageData,
-    OverviewRecord: OverviewRecord,
-    Similar: Similar,
-    ImagePornDetect: ImagePornDetect,
-    TextData: TextData,
-    ImageTerrorDetect: ImageTerrorDetect,
-    ImageIllegalDetect: ImageIllegalDetect,
-    ImageModerationRequest: ImageModerationRequest,
-    VideoModerationRequest: VideoModerationRequest,
-    DescribeModerationOverviewResponse: DescribeModerationOverviewResponse,
-    VideoModerationResponse: VideoModerationResponse,
-    ImagePolityDetect: ImagePolityDetect,
-    ImageModerationResponse: ImageModerationResponse,
     TextModerationResponse: TextModerationResponse,
+    TextData: TextData,
+    VideoModerationResponse: VideoModerationResponse,
+    ImageModerationResponse: ImageModerationResponse,
+    ImageModerationRequest: ImageModerationRequest,
+    ImageData: ImageData,
+    ImagePornDetect: ImagePornDetect,
+    DeleteTextSampleResponse: DeleteTextSampleResponse,
+    CreateTextSampleResponse: CreateTextSampleResponse,
+    ImagePolityDetect: ImagePolityDetect,
+    ImageTerrorDetect: ImageTerrorDetect,
+    DescribeTextSampleResponse: DescribeTextSampleResponse,
+    TextSample: TextSample,
+    OverviewRecord: OverviewRecord,
+    CreateTextSampleRequest: CreateTextSampleRequest,
     TextModerationRequest: TextModerationRequest,
+    Filter: Filter,
+    DescribeModerationOverviewResponse: DescribeModerationOverviewResponse,
+    Similar: Similar,
+    ImageHotDetect: ImageHotDetect,
+    DescribeTextSampleRequest: DescribeTextSampleRequest,
+    AudioModerationRequest: AudioModerationRequest,
+    ImageIllegalDetect: ImageIllegalDetect,
+    VideoModerationRequest: VideoModerationRequest,
+    DeleteTextSampleRequest: DeleteTextSampleRequest,
 
 }

@@ -16,11 +16,13 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
+const TextProcessResponse = models.TextProcessResponse;
 const SlotInfo = models.SlotInfo;
-const ResetResponse = models.ResetResponse;
+const TextResetRequest = models.TextResetRequest;
 const ResetRequest = models.ResetRequest;
-const PostTextRequest = models.PostTextRequest;
-const PostTextResponse = models.PostTextResponse;
+const TextResetResponse = models.TextResetResponse;
+const ResetResponse = models.ResetResponse;
+const TextProcessRequest = models.TextProcessRequest;
 
 
 /**
@@ -45,14 +47,25 @@ class TbpClient extends AbstractClient {
     }
 
     /**
-     * 机器人会话接口，接收文本信息，传递给后台机器人
-     * @param {PostTextRequest} req
-     * @param {function(string, PostTextResponse):void} cb
+     * 会话重置接口
+     * @param {TextResetRequest} req
+     * @param {function(string, TextResetResponse):void} cb
      * @public
      */
-    PostText(req, cb) {
-        let resp = new PostTextResponse();
-        this.request("PostText", req, resp, cb);
+    TextReset(req, cb) {
+        let resp = new TextResetResponse();
+        this.request("TextReset", req, resp, cb);
+    }
+
+    /**
+     * 接收调用侧的文本输入，返回应答文本。
+     * @param {TextProcessRequest} req
+     * @param {function(string, TextProcessResponse):void} cb
+     * @public
+     */
+    TextProcess(req, cb) {
+        let resp = new TextProcessResponse();
+        this.request("TextProcess", req, resp, cb);
     }
 
 

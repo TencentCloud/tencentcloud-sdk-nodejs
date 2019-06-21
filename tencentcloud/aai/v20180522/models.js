@@ -412,7 +412,7 @@ class TextToVoiceRequest extends  AbstractModel {
         this.ProjectId = null;
 
         /**
-         * 音色<li>0-亲和女声默认)</li><li>1-亲和男声</li><li>2-成熟男声</li><li>3-活力男声</li><li>4-温暖女声</li><li>5-情感女声</li><li>6-情感男声</li>
+         * 音色<li>0-亲和女声(默认)</li><li>1-亲和男声</li><li>2-成熟男声</li><li>3-活力男声</li><li>4-温暖女声</li><li>5-情感女声</li><li>6-情感男声</li>
          * @type {number || null}
          */
         this.VoiceType = null;
@@ -428,6 +428,12 @@ class TextToVoiceRequest extends  AbstractModel {
          * @type {number || null}
          */
         this.SampleRate = null;
+
+        /**
+         * 返回音频格式，可取值：wav（默认），mp3
+         * @type {string || null}
+         */
+        this.Codec = null;
 
     }
 
@@ -447,6 +453,7 @@ class TextToVoiceRequest extends  AbstractModel {
         this.VoiceType = 'VoiceType' in params ? params.VoiceType : null;
         this.PrimaryLanguage = 'PrimaryLanguage' in params ? params.PrimaryLanguage : null;
         this.SampleRate = 'SampleRate' in params ? params.SampleRate : null;
+        this.Codec = 'Codec' in params ? params.Codec : null;
 
     }
 }

@@ -6904,6 +6904,13 @@ class InstanceInfo extends  AbstractModel {
          */
         this.ZoneName = null;
 
+        /**
+         * 物理机型
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.DeviceClass = null;
+
     }
 
     /**
@@ -6982,6 +6989,7 @@ class InstanceInfo extends  AbstractModel {
         this.Cpu = 'Cpu' in params ? params.Cpu : null;
         this.Qps = 'Qps' in params ? params.Qps : null;
         this.ZoneName = 'ZoneName' in params ? params.ZoneName : null;
+        this.DeviceClass = 'DeviceClass' in params ? params.DeviceClass : null;
 
     }
 }

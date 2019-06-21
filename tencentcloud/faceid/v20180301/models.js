@@ -434,7 +434,7 @@ class GetDetectInfoRequest extends  AbstractModel {
         this.BizToken = null;
 
         /**
-         * 用于细分客户使用场景，由腾讯侧在线下对接时分配。
+         * 用于细分客户使用场景，申请开通服务后，可以在腾讯云慧眼人脸核身控制台（https://console.cloud.tencent.com/faceid） 自助接入里面创建，审核通过后即可调用。如有疑问，请加慧眼小助手微信（faceid001）进行咨询。
          * @type {string || null}
          */
         this.RuleId = null;
@@ -652,7 +652,7 @@ class BankCardVerificationRequest extends  AbstractModel {
         this.BankCard = null;
 
         /**
-         * 证件类型（不填默认0）
+         * 证件类型，请确认该证件为开户时使用的证件类型，未用于开户的证件信息不支持验证。（不填默认0）
 0 身份证
 1 军官证
 2 护照

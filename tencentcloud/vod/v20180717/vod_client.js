@@ -36,7 +36,7 @@ const TempCertificate = models.TempCertificate;
 const AiReviewTaskPoliticalOcrResult = models.AiReviewTaskPoliticalOcrResult;
 const AiSampleWord = models.AiSampleWord;
 const MediaSnapshotByTimePicInfoItem = models.MediaSnapshotByTimePicInfoItem;
-const PornOcrReviewTemplateInfoForUpdate = models.PornOcrReviewTemplateInfoForUpdate;
+const UserDefineFaceReviewTemplateInfo = models.UserDefineFaceReviewTemplateInfo;
 const ContentReviewTemplateItem = models.ContentReviewTemplateItem;
 const DeleteAIRecognitionTemplateResponse = models.DeleteAIRecognitionTemplateResponse;
 const DeleteContentReviewTemplateRequest = models.DeleteContentReviewTemplateRequest;
@@ -132,7 +132,7 @@ const EmptyTrackItem = models.EmptyTrackItem;
 const StickerTrackItem = models.StickerTrackItem;
 const VideoTemplateInfo = models.VideoTemplateInfo;
 const PoliticalOcrReviewTemplateInfo = models.PoliticalOcrReviewTemplateInfo;
-const UserDefineFaceReviewTemplateInfo = models.UserDefineFaceReviewTemplateInfo;
+const PornOcrReviewTemplateInfoForUpdate = models.PornOcrReviewTemplateInfoForUpdate;
 const AiReviewTaskPornOcrResult = models.AiReviewTaskPornOcrResult;
 const ModifyContentReviewTemplateResponse = models.ModifyContentReviewTemplateResponse;
 const DescribeWatermarkTemplatesRequest = models.DescribeWatermarkTemplatesRequest;
@@ -216,6 +216,7 @@ const ApplyUploadRequest = models.ApplyUploadRequest;
 const DeleteContentReviewTemplateResponse = models.DeleteContentReviewTemplateResponse;
 const MediaBasicInfo = models.MediaBasicInfo;
 const AiReviewPoliticalAsrTaskInput = models.AiReviewPoliticalAsrTaskInput;
+const PullUploadRequest = models.PullUploadRequest;
 const SortBy = models.SortBy;
 const MediaAiAnalysisTagItem = models.MediaAiAnalysisTagItem;
 const TranscodeTemplate = models.TranscodeTemplate;
@@ -339,6 +340,7 @@ const AiReviewTaskPornAsrResult = models.AiReviewTaskPornAsrResult;
 const ModifyClassResponse = models.ModifyClassResponse;
 const EditMediaFileInfo = models.EditMediaFileInfo;
 const ProcessMediaByProcedureResponse = models.ProcessMediaByProcedureResponse;
+const PullUploadResponse = models.PullUploadResponse;
 const FaceConfigureInfo = models.FaceConfigureInfo;
 const AiRecognitionTaskFaceResultOutput = models.AiRecognitionTaskFaceResultOutput;
 const PornImgReviewTemplateInfoForUpdate = models.PornImgReviewTemplateInfoForUpdate;
@@ -357,12 +359,12 @@ const MediaImageSpriteItem = models.MediaImageSpriteItem;
 const DescribePersonSamplesRequest = models.DescribePersonSamplesRequest;
 const AiRecognitionTaskFaceResultItem = models.AiRecognitionTaskFaceResultItem;
 const AiAnalysisTaskCoverInput = models.AiAnalysisTaskCoverInput;
-const PullFileTask = models.PullFileTask;
 const MediaTrack = models.MediaTrack;
 const MediaOutputInfo = models.MediaOutputInfo;
 const EditMediaTaskOutput = models.EditMediaTaskOutput;
 const DeleteWatermarkTemplateResponse = models.DeleteWatermarkTemplateResponse;
 const ComposeMediaOutput = models.ComposeMediaOutput;
+const PullUploadTask = models.PullUploadTask;
 const FrameTagConfigureInfoForUpdate = models.FrameTagConfigureInfoForUpdate;
 const DescribeAIRecognitionTemplatesRequest = models.DescribeAIRecognitionTemplatesRequest;
 const ModifyWatermarkTemplateResponse = models.ModifyWatermarkTemplateResponse;
@@ -548,7 +550,7 @@ class VodClient extends AbstractClient {
     }
 
     /**
-     * * 该接口用于从点播服务端获取事件通知，详见[服务端事件通知](https://cloud.tencent.com/document/product/266/7829)；
+     * * 该接口用于业务服务器以[可靠回调](https://cloud.tencent.com/document/product/266/33779#.E5.8F.AF.E9.9D.A0.E5.9B.9E.E8.B0.83)的方式获取事件通知；
 * 接口为长轮询模式，即：如果服务端存在未消费事件，则立即返回给请求方；如果服务端没有未消费事件，则后台会将请求挂起，直到有新的事件产生为止；
 * 请求最多挂起 5 秒，建议请求方将超时时间设置为 10 秒；
 * 若该接口有事件返回，调用方必须再调用[确认事件通知](https://cloud.tencent.com/document/product/266/33434)接口，确认事件通知已经处理，否则该事件通知后续会再次被拉取到。
@@ -559,6 +561,19 @@ class VodClient extends AbstractClient {
     PullEvents(req, cb) {
         let resp = new PullEventsResponse();
         this.request("PullEvents", req, resp, cb);
+    }
+
+    /**
+     * 对 HLS 视频进行按时间段裁剪。
+
+注意：裁剪出来的视频与原始视频共用 ts，仅生成新的 m3u8。原始视频删除后，该裁剪视频也会被删除。
+     * @param {SimpleHlsClipRequest} req
+     * @param {function(string, SimpleHlsClipResponse):void} cb
+     * @public
+     */
+    SimpleHlsClip(req, cb) {
+        let resp = new SimpleHlsClipResponse();
+        this.request("SimpleHlsClip", req, resp, cb);
     }
 
     /**
@@ -706,8 +721,8 @@ class VodClient extends AbstractClient {
     /**
      * 该接口返回查询时间范围内每天使用的视频内容审核时长数据，单位： 秒。
 
-1. 可以查询最近 90 天内的转码时长统计数据。
-2. 查询时间跨度不超过 60 天。
+1. 可以查询最近90天内的视频内容审核时长统计数据。
+2. 查询时间跨度不超过60天。
      * @param {DescribeReviewDetailsRequest} req
      * @param {function(string, DescribeReviewDetailsResponse):void} cb
      * @public
@@ -819,16 +834,14 @@ class VodClient extends AbstractClient {
     }
 
     /**
-     * 对 HLS 视频进行按时间段裁剪。
-
-注意：裁剪出来的视频与原始视频共用 ts，仅生成新的 m3u8。原始视频删除后，该裁剪视频也会被删除。
-     * @param {SimpleHlsClipRequest} req
-     * @param {function(string, SimpleHlsClipResponse):void} cb
+     * 该接口用于将一个网络上的视频拉取到云点播平台。
+     * @param {PullUploadRequest} req
+     * @param {function(string, PullUploadResponse):void} cb
      * @public
      */
-    SimpleHlsClip(req, cb) {
-        let resp = new SimpleHlsClipResponse();
-        this.request("SimpleHlsClip", req, resp, cb);
+    PullUpload(req, cb) {
+        let resp = new PullUploadResponse();
+        this.request("PullUpload", req, resp, cb);
     }
 
     /**
