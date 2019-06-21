@@ -1,6 +1,7 @@
 module.exports = {
     aai: require("./aai"),
     as: require("./as"),
+    asr: require("./asr"),
     batch: require("./batch"),
     billing: require("./billing"),
     bizlive: require("./bizlive"),
@@ -8,6 +9,7 @@ module.exports = {
     bmeip: require("./bmeip"),
     bmlb: require("./bmlb"),
     bmvpc: require("./bmvpc"),
+    bri: require("./bri"),
     cam: require("./cam"),
     cbs: require("./cbs"),
     cdb: require("./cdb"),
@@ -40,6 +42,7 @@ module.exports = {
     iot: require("./iot"),
     iotcloud: require("./iotcloud"),
     iotexplorer: require("./iotexplorer"),
+    iottid: require("./iottid"),
     kms: require("./kms"),
     live: require("./live"),
     mariadb: require("./mariadb"),

@@ -462,10 +462,7 @@ class Placement extends  AbstractModel {
         super();
 
         /**
-         * 所在[可用区](/document/api/213/9452#zone)。
-
-
-云硬盘所属的[可用区](/document/product/213/15753#ZoneInfo)。该参数也可以通过调用  [DescribeZones](/document/product/213/15707) 的返回值中的Zone字段来获取。
+         * 云硬盘所属的[可用区](/document/product/213/15753#ZoneInfo)。该参数也可以通过调用  [DescribeZones](/document/product/213/15707) 的返回值中的Zone字段来获取。
          * @type {string || null}
          */
         this.Zone = null;

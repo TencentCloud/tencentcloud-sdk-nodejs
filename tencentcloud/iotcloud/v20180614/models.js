@@ -2667,7 +2667,7 @@ class CreateProductRequest extends  AbstractModel {
         this.ProductProperties = null;
 
         /**
-         * 创建LoRa产品需要的Skey
+         * 创建CLAA产品时，需要Skey
          * @type {string || null}
          */
         this.Skey = null;
@@ -2946,6 +2946,13 @@ class DeviceInfo extends  AbstractModel {
          */
         this.CertState = null;
 
+        /**
+         * 设备可用状态，0禁用，1启用
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.EnableState = null;
+
     }
 
     /**
@@ -2983,6 +2990,7 @@ class DeviceInfo extends  AbstractModel {
         this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
         this.LogLevel = 'LogLevel' in params ? params.LogLevel : null;
         this.CertState = 'CertState' in params ? params.CertState : null;
+        this.EnableState = 'EnableState' in params ? params.EnableState : null;
 
     }
 }
@@ -3352,6 +3360,41 @@ class DescribeDeviceResponse extends  AbstractModel {
         this.LogLevel = null;
 
         /**
+         * 首次上线时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.FirstOnlineTime = null;
+
+        /**
+         * 最近下线时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.LastOfflineTime = null;
+
+        /**
+         * 设备创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * 设备证书获取状态，0 未获取过设备密钥, 1 已获取过设备密钥
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.CertState = null;
+
+        /**
+         * 设备启用状态
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.EnableState = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -3390,6 +3433,11 @@ class DescribeDeviceResponse extends  AbstractModel {
         this.LoraDevEui = 'LoraDevEui' in params ? params.LoraDevEui : null;
         this.LoraMoteType = 'LoraMoteType' in params ? params.LoraMoteType : null;
         this.LogLevel = 'LogLevel' in params ? params.LogLevel : null;
+        this.FirstOnlineTime = 'FirstOnlineTime' in params ? params.FirstOnlineTime : null;
+        this.LastOfflineTime = 'LastOfflineTime' in params ? params.LastOfflineTime : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.CertState = 'CertState' in params ? params.CertState : null;
+        this.EnableState = 'EnableState' in params ? params.EnableState : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }

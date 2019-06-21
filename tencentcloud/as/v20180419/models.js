@@ -2485,13 +2485,13 @@ class ModifyLoadBalancersRequest extends  AbstractModel {
         this.AutoScalingGroupId = null;
 
         /**
-         * 传统负载均衡器ID列表，目前长度上限为1，LoadBalancerIds 和 ForwardLoadBalancers 二者同时最多只能指定一个
+         * 传统负载均衡器ID列表，目前长度上限为5，LoadBalancerIds 和 ForwardLoadBalancers 二者同时最多只能指定一个
          * @type {Array.<string> || null}
          */
         this.LoadBalancerIds = null;
 
         /**
-         * 应用型负载均衡器列表，目前长度上限为1，LoadBalancerIds 和 ForwardLoadBalancers 二者同时最多只能指定一个
+         * 应用型负载均衡器列表，目前长度上限为5，LoadBalancerIds 和 ForwardLoadBalancers 二者同时最多只能指定一个
          * @type {Array.<ForwardLoadBalancer> || null}
          */
         this.ForwardLoadBalancers = null;
@@ -2814,7 +2814,7 @@ class CreateAutoScalingGroupRequest extends  AbstractModel {
         this.DesiredCapacity = null;
 
         /**
-         * 传统负载均衡器ID列表，目前长度上限为1，LoadBalancerIds 和 ForwardLoadBalancers 二者同时最多只能指定一个
+         * 传统负载均衡器ID列表，目前长度上限为5，LoadBalancerIds 和 ForwardLoadBalancers 二者同时最多只能指定一个
          * @type {Array.<string> || null}
          */
         this.LoadBalancerIds = null;
@@ -2826,7 +2826,7 @@ class CreateAutoScalingGroupRequest extends  AbstractModel {
         this.ProjectId = null;
 
         /**
-         * 应用型负载均衡器列表，目前长度上限为1，LoadBalancerIds 和 ForwardLoadBalancers 二者同时最多只能指定一个
+         * 应用型负载均衡器列表，目前长度上限为5，LoadBalancerIds 和 ForwardLoadBalancers 二者同时最多只能指定一个
          * @type {Array.<ForwardLoadBalancer> || null}
          */
         this.ForwardLoadBalancers = null;

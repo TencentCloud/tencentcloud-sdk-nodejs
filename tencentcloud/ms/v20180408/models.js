@@ -253,7 +253,7 @@ class ScanInfo extends  AbstractModel {
         this.CallbackUrl = null;
 
         /**
-         * VULSCAN-漏洞扫描信息，VIRUSSCAN-返回病毒扫描信息， ADSCAN-广告扫描信息，PLUGINSCAN-插件扫描信息，可以自由组合
+         * VULSCAN-漏洞扫描信息，VIRUSSCAN-返回病毒扫描信息， ADSCAN-广告扫描信息，PLUGINSCAN-插件扫描信息，PERMISSION-系统权限信息，SENSITIVE-敏感词信息，可以自由组合
          * @type {Array.<string> || null}
          */
         this.ScanTypes = null;
@@ -410,6 +410,42 @@ class PluginInfo extends  AbstractModel {
         this.PluginType = 'PluginType' in params ? params.PluginType : null;
         this.PluginName = 'PluginName' in params ? params.PluginName : null;
         this.PluginDesc = 'PluginDesc' in params ? params.PluginDesc : null;
+
+    }
+}
+
+/**
+ * 安全扫描敏感词列表
+ * @class
+ */
+class ScanSensitiveList extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 敏感词列表
+         * @type {Array.<ScanSensitiveInfo> || null}
+         */
+        this.SensitiveList = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.SensitiveList) {
+            this.SensitiveList = new Array();
+            for (let z in params.SensitiveList) {
+                let obj = new ScanSensitiveInfo();
+                obj.deserialize(params.SensitiveList[z]);
+                this.SensitiveList.push(obj);
+            }
+        }
 
     }
 }
@@ -778,6 +814,18 @@ class ScanSetInfo extends  AbstractModel {
          */
         this.StatusRef = null;
 
+        /**
+         * 系统权限信息
+         * @type {ScanPermissionList || null}
+         */
+        this.PermissionInfo = null;
+
+        /**
+         * 敏感词列表
+         * @type {ScanSensitiveList || null}
+         */
+        this.SensitiveInfo = null;
+
     }
 
     /**
@@ -816,6 +864,18 @@ class ScanSetInfo extends  AbstractModel {
         this.StatusCode = 'StatusCode' in params ? params.StatusCode : null;
         this.StatusDesc = 'StatusDesc' in params ? params.StatusDesc : null;
         this.StatusRef = 'StatusRef' in params ? params.StatusRef : null;
+
+        if (params.PermissionInfo) {
+            let obj = new ScanPermissionList();
+            obj.deserialize(params.PermissionInfo)
+            this.PermissionInfo = obj;
+        }
+
+        if (params.SensitiveInfo) {
+            let obj = new ScanSensitiveList();
+            obj.deserialize(params.SensitiveInfo)
+            this.SensitiveInfo = obj;
+        }
 
     }
 }
@@ -1429,7 +1489,7 @@ class AppInfo extends  AbstractModel {
         this.FileName = null;
 
         /**
-         * app的包名，如果是专业版加固和企业版本加固，需要正确的传递此字段
+         * app的包名，需要正确的传递此字段
          * @type {string || null}
          */
         this.AppPkgName = null;
@@ -1610,6 +1670,48 @@ class DescribeShieldPlanInstanceResponse extends  AbstractModel {
             this.ResourceServiceInfo = obj;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 安全扫描敏感词
+ * @class
+ */
+class ScanSensitiveInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 敏感词
+         * @type {Array.<string> || null}
+         */
+        this.WordList = null;
+
+        /**
+         * 敏感词对应的文件信息
+         * @type {string || null}
+         */
+        this.FilePath = null;
+
+        /**
+         * 文件sha1值
+         * @type {string || null}
+         */
+        this.FileSha = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.WordList = 'WordList' in params ? params.WordList : null;
+        this.FilePath = 'FilePath' in params ? params.FilePath : null;
+        this.FileSha = 'FileSha' in params ? params.FileSha : null;
 
     }
 }
@@ -1939,6 +2041,42 @@ class ShieldInfo extends  AbstractModel {
         this.TaskTime = 'TaskTime' in params ? params.TaskTime : null;
         this.ItemId = 'ItemId' in params ? params.ItemId : null;
         this.ServiceEdition = 'ServiceEdition' in params ? params.ServiceEdition : null;
+
+    }
+}
+
+/**
+ * 安全扫描系统权限信息
+ * @class
+ */
+class ScanPermissionList extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 系统权限信息
+         * @type {Array.<ScanPermissionInfo> || null}
+         */
+        this.PermissionList = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.PermissionList) {
+            this.PermissionList = new Array();
+            for (let z in params.PermissionList) {
+                let obj = new ScanPermissionInfo();
+                obj.deserialize(params.PermissionList[z]);
+                this.PermissionList.push(obj);
+            }
+        }
 
     }
 }
@@ -2457,6 +2595,34 @@ class VirusInfo extends  AbstractModel {
 }
 
 /**
+ * 安全扫描系统权限信息
+ * @class
+ */
+class ScanPermissionInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 系统权限
+         * @type {string || null}
+         */
+        this.Permission = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Permission = 'Permission' in params ? params.Permission : null;
+
+    }
+}
+
+/**
  * 加固策略信息
  * @class
  */
@@ -2857,6 +3023,7 @@ module.exports = {
     CreateResourceInstancesRequest: CreateResourceInstancesRequest,
     DescribeShieldInstancesResponse: DescribeShieldInstancesResponse,
     PluginInfo: PluginInfo,
+    ScanSensitiveList: ScanSensitiveList,
     DescribeShieldResultRequest: DescribeShieldResultRequest,
     CreateShieldInstanceRequest: CreateShieldInstanceRequest,
     CreateCosSecKeyInstanceRequest: CreateCosSecKeyInstanceRequest,
@@ -2879,11 +3046,13 @@ module.exports = {
     ServiceInfo: ServiceInfo,
     SoInfo: SoInfo,
     DescribeShieldPlanInstanceResponse: DescribeShieldPlanInstanceResponse,
+    ScanSensitiveInfo: ScanSensitiveInfo,
     ResourceServiceInfo: ResourceServiceInfo,
     DescribeResourceInstancesRequest: DescribeResourceInstancesRequest,
     AdInfo: AdInfo,
     DescribeShieldPlanInstanceRequest: DescribeShieldPlanInstanceRequest,
     ShieldInfo: ShieldInfo,
+    ScanPermissionList: ScanPermissionList,
     CreateResourceInstancesResponse: CreateResourceInstancesResponse,
     AppDetailInfo: AppDetailInfo,
     DeleteScanInstancesResponse: DeleteScanInstancesResponse,
@@ -2895,6 +3064,7 @@ module.exports = {
     DescribeScanResultsRequest: DescribeScanResultsRequest,
     CreateCosSecKeyInstanceResponse: CreateCosSecKeyInstanceResponse,
     VirusInfo: VirusInfo,
+    ScanPermissionInfo: ScanPermissionInfo,
     PlanInfo: PlanInfo,
     DescribeShieldResultResponse: DescribeShieldResultResponse,
     CreateBindInstanceResponse: CreateBindInstanceResponse,
