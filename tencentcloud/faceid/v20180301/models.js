@@ -70,18 +70,36 @@ LIP为数字模式，ACTION为动作模式，SILENT为静默模式，三种模�
 }
 
 /**
- * GetLiveCode返回参数结构体
+ * LivenessCompare返回参数结构体
  * @class
  */
-class GetLiveCodeResponse extends  AbstractModel {
+class LivenessCompareResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 数字验证码，如：1234
+         * 验证通过后的视频最佳截图照片，照片为BASE64编码后的值，jpg格式。
          * @type {string || null}
          */
-        this.LiveCode = null;
+        this.BestFrameBase64 = null;
+
+        /**
+         * 相似度，取值范围 [0.00, 100.00]。推荐相似度大于等于70时可判断为同一人，可根据具体场景自行调整阈值（阈值70的误通过率为千分之一，阈值80的误通过率是万分之一）。
+         * @type {number || null}
+         */
+        this.Sim = null;
+
+        /**
+         * 业务错误码，成功情况返回Success, 错误情况请参考下方错误码 列表中FailedOperation部分
+         * @type {string || null}
+         */
+        this.Result = null;
+
+        /**
+         * 业务错误描述
+         * @type {string || null}
+         */
+        this.Description = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -98,8 +116,124 @@ class GetLiveCodeResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.LiveCode = 'LiveCode' in params ? params.LiveCode : null;
+        this.BestFrameBase64 = 'BestFrameBase64' in params ? params.BestFrameBase64 : null;
+        this.Sim = 'Sim' in params ? params.Sim : null;
+        this.Result = 'Result' in params ? params.Result : null;
+        this.Description = 'Description' in params ? params.Description : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * GetLiveCode请求参数结构体
+ * @class
+ */
+class GetLiveCodeRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+    }
+}
+
+/**
+ * IdCardVerification请求参数结构体
+ * @class
+ */
+class IdCardVerificationRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 身份证号
+         * @type {string || null}
+         */
+        this.IdCard = null;
+
+        /**
+         * 姓名
+         * @type {string || null}
+         */
+        this.Name = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.IdCard = 'IdCard' in params ? params.IdCard : null;
+        this.Name = 'Name' in params ? params.Name : null;
+
+    }
+}
+
+/**
+ * BankCardVerification请求参数结构体
+ * @class
+ */
+class BankCardVerificationRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 身份证号
+         * @type {string || null}
+         */
+        this.IdCard = null;
+
+        /**
+         * 姓名
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 银行卡
+         * @type {string || null}
+         */
+        this.BankCard = null;
+
+        /**
+         * 证件类型，请确认该证件为开户时使用的证件类型，未用于开户的证件信息不支持验证。（不填默认0）
+0 身份证
+1 军官证
+2 护照
+3 港澳证
+4 台胞证
+5 警官证
+6 士兵证
+7 其它证件
+         * @type {number || null}
+         */
+        this.CertType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.IdCard = 'IdCard' in params ? params.IdCard : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.BankCard = 'BankCard' in params ? params.BankCard : null;
+        this.CertType = 'CertType' in params ? params.CertType : null;
 
     }
 }
@@ -142,6 +276,506 @@ class DetectAuthResponse extends  AbstractModel {
         }
         this.Url = 'Url' in params ? params.Url : null;
         this.BizToken = 'BizToken' in params ? params.BizToken : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * BankCard4EVerification返回参数结构体
+ * @class
+ */
+class BankCard4EVerificationResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 认证结果码。
+  '0': '认证通过'
+  '-1': '认证未通过'
+  '-2': '姓名校验不通过'
+  '-3': '身份证号码有误'
+  '-4': '银行卡号码有误'
+  '-5': '手机号码不合法'
+  '-6': '持卡人信息有误'
+  '-7': '未开通无卡支付'
+  '-8': '此卡被没收'
+  '-9': '无效卡号'
+  '-10': '此卡无对应发卡行'
+  '-11': '该卡未初始化或睡眠卡'
+  '-12': '作弊卡、吞卡'
+  '-13': '此卡已挂失'
+  '-14': '该卡已过期'
+  '-15': '受限制的卡'
+  '-16': '密码错误次数超限'
+  '-17': '发卡行不支持此交易'
+  '-18': '服务繁忙'
+         * @type {string || null}
+         */
+        this.Result = null;
+
+        /**
+         * 认证结果信息。
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Result = 'Result' in params ? params.Result : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * BankCard2EVerification请求参数结构体
+ * @class
+ */
+class BankCard2EVerificationRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 姓名
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 银行卡
+         * @type {string || null}
+         */
+        this.BankCard = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.BankCard = 'BankCard' in params ? params.BankCard : null;
+
+    }
+}
+
+/**
+ * LivenessRecognition请求参数结构体
+ * @class
+ */
+class LivenessRecognitionRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 身份证号
+         * @type {string || null}
+         */
+        this.IdCard = null;
+
+        /**
+         * 姓名。中文请使用UTF-8编码。
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 用于活体检测的视频，视频的BASE64值；
+BASE64编码后的大小不超过5M，支持mp4、avi、flv格式。
+         * @type {string || null}
+         */
+        this.VideoBase64 = null;
+
+        /**
+         * 活体检测类型，取值：LIP/ACTION/SILENT。
+LIP为数字模式，ACTION为动作模式，SILENT为静默模式，三种模式选择一种传入。
+         * @type {string || null}
+         */
+        this.LivenessType = null;
+
+        /**
+         * 数字模式传参：数字验证码(1234)，需先调用接口获取数字验证码；
+动作模式传参：传动作顺序(2,1 or 1,2)，需先调用接口获取动作顺序；
+静默模式传参：空。
+         * @type {string || null}
+         */
+        this.ValidateData = null;
+
+        /**
+         * 本接口不需要传递此参数。
+         * @type {string || null}
+         */
+        this.Optional = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.IdCard = 'IdCard' in params ? params.IdCard : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.VideoBase64 = 'VideoBase64' in params ? params.VideoBase64 : null;
+        this.LivenessType = 'LivenessType' in params ? params.LivenessType : null;
+        this.ValidateData = 'ValidateData' in params ? params.ValidateData : null;
+        this.Optional = 'Optional' in params ? params.Optional : null;
+
+    }
+}
+
+/**
+ * LivenessRecognition返回参数结构体
+ * @class
+ */
+class LivenessRecognitionResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 验证通过后的视频最佳截图照片，照片为BASE64编码后的值，jpg格式。
+         * @type {string || null}
+         */
+        this.BestFrameBase64 = null;
+
+        /**
+         * 相似度，取值范围 [0.00, 100.00]。推荐相似度大于等于70时可判断为同一人，可根据具体场景自行调整阈值（阈值70的误通过率为千分之一，阈值80的误通过率是万分之一）
+         * @type {number || null}
+         */
+        this.Sim = null;
+
+        /**
+         * 业务错误码，成功情况返回Success, 错误情况请参考下方错误码 列表中FailedOperation部分
+         * @type {string || null}
+         */
+        this.Result = null;
+
+        /**
+         * 业务错误描述
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.BestFrameBase64 = 'BestFrameBase64' in params ? params.BestFrameBase64 : null;
+        this.Sim = 'Sim' in params ? params.Sim : null;
+        this.Result = 'Result' in params ? params.Result : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DetectAuth请求参数结构体
+ * @class
+ */
+class DetectAuthRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 用于细分客户使用场景，申请开通服务后，可以在腾讯云慧眼人脸核身控制台（https://console.cloud.tencent.com/faceid） 自助接入里面创建，审核通过后即可调用。如有疑问，请加慧眼小助手微信（faceid001）进行咨询。
+         * @type {string || null}
+         */
+        this.RuleId = null;
+
+        /**
+         * 本接口不需要传递此参数。
+         * @type {string || null}
+         */
+        this.TerminalType = null;
+
+        /**
+         * 身份标识（与公安权威库比对时必须是身份证号）。
+规则：a-zA-Z0-9组合。最长长度32位。
+         * @type {string || null}
+         */
+        this.IdCard = null;
+
+        /**
+         * 姓名。最长长度32位。中文请使用UTF-8编码。
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 认证结束后重定向的回调链接地址。最长长度1024位。
+         * @type {string || null}
+         */
+        this.RedirectUrl = null;
+
+        /**
+         * 透传字段，在获取验证结果时返回。
+         * @type {string || null}
+         */
+        this.Extra = null;
+
+        /**
+         * 用于人脸比对的照片，图片的BASE64值；
+BASE64编码后的图片数据大小不超过3M，仅支持jpg、png格式。
+         * @type {string || null}
+         */
+        this.ImageBase64 = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RuleId = 'RuleId' in params ? params.RuleId : null;
+        this.TerminalType = 'TerminalType' in params ? params.TerminalType : null;
+        this.IdCard = 'IdCard' in params ? params.IdCard : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.RedirectUrl = 'RedirectUrl' in params ? params.RedirectUrl : null;
+        this.Extra = 'Extra' in params ? params.Extra : null;
+        this.ImageBase64 = 'ImageBase64' in params ? params.ImageBase64 : null;
+
+    }
+}
+
+/**
+ * BankCardVerification返回参数结构体
+ * @class
+ */
+class BankCardVerificationResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 认证结果码。
+'0': '认证通过'
+'-1': '认证未通过'
+'-2': '姓名校验不通过'
+'-3': '身份证号码有误'
+'-4': '银行卡号码有误'
+'-5': '持卡人信息有误'
+'-6': '未开通无卡支付'
+'-7': '此卡被没收'
+'-8': '无效卡号'
+'-9': '此卡无对应发卡行'
+'-10': '该卡未初始化或睡眠卡'
+'-11': '作弊卡、吞卡'
+'-12': '此卡已挂失'
+'-13': '该卡已过期'
+'-14': '受限制的卡'
+'-15': '密码错误次数超限'
+'-16': '发卡行不支持此交易'
+'-17': '服务繁忙'
+         * @type {string || null}
+         */
+        this.Result = null;
+
+        /**
+         * 认证结果信息。
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Result = 'Result' in params ? params.Result : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ImageRecognition请求参数结构体
+ * @class
+ */
+class ImageRecognitionRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 身份证号
+         * @type {string || null}
+         */
+        this.IdCard = null;
+
+        /**
+         * 姓名。中文请使用UTF-8编码。
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 用于人脸比对的照片，图片的BASE64值；
+BASE64编码后的图片数据大小不超过3M，仅支持jpg、png格式。
+         * @type {string || null}
+         */
+        this.ImageBase64 = null;
+
+        /**
+         * 本接口不需要传递此参数。
+         * @type {string || null}
+         */
+        this.Optional = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.IdCard = 'IdCard' in params ? params.IdCard : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.ImageBase64 = 'ImageBase64' in params ? params.ImageBase64 : null;
+        this.Optional = 'Optional' in params ? params.Optional : null;
+
+    }
+}
+
+/**
+ * BankCard4EVerification请求参数结构体
+ * @class
+ */
+class BankCard4EVerificationRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 姓名
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 银行卡
+         * @type {string || null}
+         */
+        this.BankCard = null;
+
+        /**
+         * 手机号码
+         * @type {string || null}
+         */
+        this.Phone = null;
+
+        /**
+         * 身份证号码
+         * @type {string || null}
+         */
+        this.IdCard = null;
+
+        /**
+         * 证件类型，请确认该证件为开户时使用的证件类型，未用于开户的证件信息不支持验证。（不填默认0）
+0 身份证
+1 军官证
+2 护照
+3 港澳证
+4 台胞证
+5 警官证
+6 士兵证
+7 其它证件
+         * @type {number || null}
+         */
+        this.CertType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.BankCard = 'BankCard' in params ? params.BankCard : null;
+        this.Phone = 'Phone' in params ? params.Phone : null;
+        this.IdCard = 'IdCard' in params ? params.IdCard : null;
+        this.CertType = 'CertType' in params ? params.CertType : null;
+
+    }
+}
+
+/**
+ * GetActionSequence返回参数结构体
+ * @class
+ */
+class GetActionSequenceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 动作顺序(2,1 or 1,2) 。1代表张嘴，2代表闭眼。
+         * @type {string || null}
+         */
+        this.ActionSequence = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ActionSequence = 'ActionSequence' in params ? params.ActionSequence : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -292,36 +926,18 @@ class GetDetectInfoResponse extends  AbstractModel {
 }
 
 /**
- * LivenessCompare返回参数结构体
+ * GetLiveCode返回参数结构体
  * @class
  */
-class LivenessCompareResponse extends  AbstractModel {
+class GetLiveCodeResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 验证通过后的视频最佳截图照片，照片为BASE64编码后的值，jpg格式。
+         * 数字验证码，如：1234
          * @type {string || null}
          */
-        this.BestFrameBase64 = null;
-
-        /**
-         * 相似度，取值范围 [0.00, 100.00]。推荐相似度大于等于70时可判断为同一人，可根据具体场景自行调整阈值（阈值70的误通过率为千分之一，阈值80的误通过率是万分之一）。
-         * @type {number || null}
-         */
-        this.Sim = null;
-
-        /**
-         * 业务错误码，成功情况返回Success, 错误情况请参考下方错误码 列表中FailedOperation部分
-         * @type {string || null}
-         */
-        this.Result = null;
-
-        /**
-         * 业务错误描述
-         * @type {string || null}
-         */
-        this.Description = null;
+        this.LiveCode = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -338,83 +954,8 @@ class LivenessCompareResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.BestFrameBase64 = 'BestFrameBase64' in params ? params.BestFrameBase64 : null;
-        this.Sim = 'Sim' in params ? params.Sim : null;
-        this.Result = 'Result' in params ? params.Result : null;
-        this.Description = 'Description' in params ? params.Description : null;
+        this.LiveCode = 'LiveCode' in params ? params.LiveCode : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * DetectAuth请求参数结构体
- * @class
- */
-class DetectAuthRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 用于细分客户使用场景，申请开通服务后，可以在腾讯云慧眼人脸核身控制台（https://console.cloud.tencent.com/faceid） 自助接入里面创建，审核通过后即可调用。如有疑问，请加慧眼小助手微信（faceid001）进行咨询。
-         * @type {string || null}
-         */
-        this.RuleId = null;
-
-        /**
-         * 本接口不需要传递此参数。
-         * @type {string || null}
-         */
-        this.TerminalType = null;
-
-        /**
-         * 身份标识（与公安权威库比对时必须是身份证号）。
-规则：a-zA-Z0-9组合。最长长度32位。
-         * @type {string || null}
-         */
-        this.IdCard = null;
-
-        /**
-         * 姓名。最长长度32位。中文请使用UTF-8编码。
-         * @type {string || null}
-         */
-        this.Name = null;
-
-        /**
-         * 认证结束后重定向的回调链接地址。最长长度1024位。
-         * @type {string || null}
-         */
-        this.RedirectUrl = null;
-
-        /**
-         * 透传字段，在获取验证结果时返回。
-         * @type {string || null}
-         */
-        this.Extra = null;
-
-        /**
-         * 用于人脸比对的照片，图片的BASE64值；
-BASE64编码后的图片数据大小不超过3M，仅支持jpg、png格式。
-         * @type {string || null}
-         */
-        this.ImageBase64 = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RuleId = 'RuleId' in params ? params.RuleId : null;
-        this.TerminalType = 'TerminalType' in params ? params.TerminalType : null;
-        this.IdCard = 'IdCard' in params ? params.IdCard : null;
-        this.Name = 'Name' in params ? params.Name : null;
-        this.RedirectUrl = 'RedirectUrl' in params ? params.RedirectUrl : null;
-        this.Extra = 'Extra' in params ? params.Extra : null;
-        this.ImageBase64 = 'ImageBase64' in params ? params.ImageBase64 : null;
 
     }
 }
@@ -463,12 +1004,47 @@ class GetDetectInfoRequest extends  AbstractModel {
 }
 
 /**
- * GetLiveCode请求参数结构体
+ * BankCard2EVerification返回参数结构体
  * @class
  */
-class GetLiveCodeRequest extends  AbstractModel {
+class BankCard2EVerificationResponse extends  AbstractModel {
     constructor(){
         super();
+
+        /**
+         * 认证结果码。
+  '0': '认证通过'
+  '-1': '认证未通过'
+  '-2': '姓名校验不通过'
+  '-3': '银行卡号码有误'
+  '-4': '持卡人信息有误'
+  '-5': '未开通无卡支付'
+  '-6': '此卡被没收'
+  '-7': '无效卡号'
+  '-8': '此卡无对应发卡行'
+  '-9': '该卡未初始化或睡眠卡'
+  '-10': '作弊卡、吞卡'
+  '-11': '此卡已挂失'
+  '-12': '该卡已过期'
+  '-13': '受限制的卡'
+  '-14': '密码错误次数超限'
+  '-15': '发卡行不支持此交易'
+  '-16': '服务繁忙'
+         * @type {string || null}
+         */
+        this.Result = null;
+
+        /**
+         * 认证结果信息。
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
 
     }
 
@@ -479,6 +1055,9 @@ class GetLiveCodeRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.Result = 'Result' in params ? params.Result : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -526,208 +1105,6 @@ class IdCardVerificationResponse extends  AbstractModel {
         this.Result = 'Result' in params ? params.Result : null;
         this.Description = 'Description' in params ? params.Description : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * BankCardVerification返回参数结构体
- * @class
- */
-class BankCardVerificationResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 认证结果码。
-'0': '认证通过'
-'-1': '认证未通过'
-'-2': '姓名校验不通过'
-'-3': '身份证号码有误'
-'-4': '银行卡号码有误'
-'-5': '持卡人信息有误'
-'-6': '未开通无卡支付'
-'-7': '此卡被没收'
-'-8': '无效卡号'
-'-9': '此卡无对应发卡行'
-'-10': '该卡未初始化或睡眠卡'
-'-11': '作弊卡、吞卡'
-'-12': '此卡已挂失'
-'-13': '该卡已过期'
-'-14': '受限制的卡'
-'-15': '密码错误次数超限'
-'-16': '发卡行不支持此交易'
-'-17': '服务繁忙'
-         * @type {string || null}
-         */
-        this.Result = null;
-
-        /**
-         * 认证结果信息。
-         * @type {string || null}
-         */
-        this.Description = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Result = 'Result' in params ? params.Result : null;
-        this.Description = 'Description' in params ? params.Description : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * IdCardVerification请求参数结构体
- * @class
- */
-class IdCardVerificationRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 身份证号
-         * @type {string || null}
-         */
-        this.IdCard = null;
-
-        /**
-         * 姓名
-         * @type {string || null}
-         */
-        this.Name = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.IdCard = 'IdCard' in params ? params.IdCard : null;
-        this.Name = 'Name' in params ? params.Name : null;
-
-    }
-}
-
-/**
- * BankCardVerification请求参数结构体
- * @class
- */
-class BankCardVerificationRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 身份证号
-         * @type {string || null}
-         */
-        this.IdCard = null;
-
-        /**
-         * 姓名
-         * @type {string || null}
-         */
-        this.Name = null;
-
-        /**
-         * 银行卡
-         * @type {string || null}
-         */
-        this.BankCard = null;
-
-        /**
-         * 证件类型，请确认该证件为开户时使用的证件类型，未用于开户的证件信息不支持验证。（不填默认0）
-0 身份证
-1 军官证
-2 护照
-3 港澳证
-4 台胞证
-5 警官证
-6 士兵证
-7 其它证件
-         * @type {number || null}
-         */
-        this.CertType = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.IdCard = 'IdCard' in params ? params.IdCard : null;
-        this.Name = 'Name' in params ? params.Name : null;
-        this.BankCard = 'BankCard' in params ? params.BankCard : null;
-        this.CertType = 'CertType' in params ? params.CertType : null;
-
-    }
-}
-
-/**
- * ImageRecognition请求参数结构体
- * @class
- */
-class ImageRecognitionRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 身份证号
-         * @type {string || null}
-         */
-        this.IdCard = null;
-
-        /**
-         * 姓名。中文请使用UTF-8编码。
-         * @type {string || null}
-         */
-        this.Name = null;
-
-        /**
-         * 用于人脸比对的照片，图片的BASE64值；
-BASE64编码后的图片数据大小不超过3M，仅支持jpg、png格式。
-         * @type {string || null}
-         */
-        this.ImageBase64 = null;
-
-        /**
-         * 本接口不需要传递此参数。
-         * @type {string || null}
-         */
-        this.Optional = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.IdCard = 'IdCard' in params ? params.IdCard : null;
-        this.Name = 'Name' in params ? params.Name : null;
-        this.ImageBase64 = 'ImageBase64' in params ? params.ImageBase64 : null;
-        this.Optional = 'Optional' in params ? params.Optional : null;
 
     }
 }
@@ -842,184 +1219,30 @@ class LivenessResponse extends  AbstractModel {
     }
 }
 
-/**
- * GetActionSequence返回参数结构体
- * @class
- */
-class GetActionSequenceResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 动作顺序(2,1 or 1,2) 。1代表张嘴，2代表闭眼。
-         * @type {string || null}
-         */
-        this.ActionSequence = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.ActionSequence = 'ActionSequence' in params ? params.ActionSequence : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * LivenessRecognition返回参数结构体
- * @class
- */
-class LivenessRecognitionResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 验证通过后的视频最佳截图照片，照片为BASE64编码后的值，jpg格式。
-         * @type {string || null}
-         */
-        this.BestFrameBase64 = null;
-
-        /**
-         * 相似度，取值范围 [0.00, 100.00]。推荐相似度大于等于70时可判断为同一人，可根据具体场景自行调整阈值（阈值70的误通过率为千分之一，阈值80的误通过率是万分之一）
-         * @type {number || null}
-         */
-        this.Sim = null;
-
-        /**
-         * 业务错误码，成功情况返回Success, 错误情况请参考下方错误码 列表中FailedOperation部分
-         * @type {string || null}
-         */
-        this.Result = null;
-
-        /**
-         * 业务错误描述
-         * @type {string || null}
-         */
-        this.Description = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.BestFrameBase64 = 'BestFrameBase64' in params ? params.BestFrameBase64 : null;
-        this.Sim = 'Sim' in params ? params.Sim : null;
-        this.Result = 'Result' in params ? params.Result : null;
-        this.Description = 'Description' in params ? params.Description : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * LivenessRecognition请求参数结构体
- * @class
- */
-class LivenessRecognitionRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 身份证号
-         * @type {string || null}
-         */
-        this.IdCard = null;
-
-        /**
-         * 姓名。中文请使用UTF-8编码。
-         * @type {string || null}
-         */
-        this.Name = null;
-
-        /**
-         * 用于活体检测的视频，视频的BASE64值；
-BASE64编码后的大小不超过5M，支持mp4、avi、flv格式。
-         * @type {string || null}
-         */
-        this.VideoBase64 = null;
-
-        /**
-         * 活体检测类型，取值：LIP/ACTION/SILENT。
-LIP为数字模式，ACTION为动作模式，SILENT为静默模式，三种模式选择一种传入。
-         * @type {string || null}
-         */
-        this.LivenessType = null;
-
-        /**
-         * 数字模式传参：数字验证码(1234)，需先调用接口获取数字验证码；
-动作模式传参：传动作顺序(2,1 or 1,2)，需先调用接口获取动作顺序；
-静默模式传参：空。
-         * @type {string || null}
-         */
-        this.ValidateData = null;
-
-        /**
-         * 本接口不需要传递此参数。
-         * @type {string || null}
-         */
-        this.Optional = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.IdCard = 'IdCard' in params ? params.IdCard : null;
-        this.Name = 'Name' in params ? params.Name : null;
-        this.VideoBase64 = 'VideoBase64' in params ? params.VideoBase64 : null;
-        this.LivenessType = 'LivenessType' in params ? params.LivenessType : null;
-        this.ValidateData = 'ValidateData' in params ? params.ValidateData : null;
-        this.Optional = 'Optional' in params ? params.Optional : null;
-
-    }
-}
-
 module.exports = {
     LivenessRequest: LivenessRequest,
-    GetLiveCodeResponse: GetLiveCodeResponse,
+    LivenessCompareResponse: LivenessCompareResponse,
+    GetLiveCodeRequest: GetLiveCodeRequest,
+    IdCardVerificationRequest: IdCardVerificationRequest,
+    BankCardVerificationRequest: BankCardVerificationRequest,
     DetectAuthResponse: DetectAuthResponse,
+    BankCard4EVerificationResponse: BankCard4EVerificationResponse,
+    BankCard2EVerificationRequest: BankCard2EVerificationRequest,
+    LivenessRecognitionRequest: LivenessRecognitionRequest,
+    LivenessRecognitionResponse: LivenessRecognitionResponse,
+    DetectAuthRequest: DetectAuthRequest,
+    BankCardVerificationResponse: BankCardVerificationResponse,
+    ImageRecognitionRequest: ImageRecognitionRequest,
+    BankCard4EVerificationRequest: BankCard4EVerificationRequest,
+    GetActionSequenceResponse: GetActionSequenceResponse,
     ImageRecognitionResponse: ImageRecognitionResponse,
     GetActionSequenceRequest: GetActionSequenceRequest,
     GetDetectInfoResponse: GetDetectInfoResponse,
-    LivenessCompareResponse: LivenessCompareResponse,
-    DetectAuthRequest: DetectAuthRequest,
+    GetLiveCodeResponse: GetLiveCodeResponse,
     GetDetectInfoRequest: GetDetectInfoRequest,
-    GetLiveCodeRequest: GetLiveCodeRequest,
+    BankCard2EVerificationResponse: BankCard2EVerificationResponse,
     IdCardVerificationResponse: IdCardVerificationResponse,
-    BankCardVerificationResponse: BankCardVerificationResponse,
-    IdCardVerificationRequest: IdCardVerificationRequest,
-    BankCardVerificationRequest: BankCardVerificationRequest,
-    ImageRecognitionRequest: ImageRecognitionRequest,
     LivenessCompareRequest: LivenessCompareRequest,
     LivenessResponse: LivenessResponse,
-    GetActionSequenceResponse: GetActionSequenceResponse,
-    LivenessRecognitionResponse: LivenessRecognitionResponse,
-    LivenessRecognitionRequest: LivenessRecognitionRequest,
 
 }

@@ -1844,6 +1844,12 @@ class ComposeMediaRequest extends  AbstractModel {
          */
         this.Canvas = null;
 
+        /**
+         * 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
     }
 
     /**
@@ -1874,6 +1880,7 @@ class ComposeMediaRequest extends  AbstractModel {
             obj.deserialize(params.Canvas)
             this.Canvas = obj;
         }
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
 
     }
 }
@@ -8556,6 +8563,84 @@ class TerrorismConfigureInfoForUpdate extends  AbstractModel {
 }
 
 /**
+ * 微信小程序发布任务信息
+ * @class
+ */
+class WechatMiniProgramPublishTask extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 任务 ID。
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * 任务状态，取值：
+WAITING：等待中；
+PROCESSING：处理中；
+FINISH：已完成。
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * 错误码
+<li>0：成功；</li>
+<li>其他值：失败。</li>
+         * @type {number || null}
+         */
+        this.ErrCode = null;
+
+        /**
+         * 错误信息。
+         * @type {string || null}
+         */
+        this.Message = null;
+
+        /**
+         * 发布视频文件 ID。
+         * @type {string || null}
+         */
+        this.FileId = null;
+
+        /**
+         * 发布视频所对应的转码模板 ID，为 0 代表原始视频。
+         * @type {number || null}
+         */
+        this.SourceDefinition = null;
+
+        /**
+         * 微信小程序视频发布状态，取值：
+<li>Pass：发布成功；</li>
+<li>Failed：发布失败；</li>
+<li>Rejected：审核未通过。</li>
+         * @type {string || null}
+         */
+        this.PublishResult = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.ErrCode = 'ErrCode' in params ? params.ErrCode : null;
+        this.Message = 'Message' in params ? params.Message : null;
+        this.FileId = 'FileId' in params ? params.FileId : null;
+        this.SourceDefinition = 'SourceDefinition' in params ? params.SourceDefinition : null;
+        this.PublishResult = 'PublishResult' in params ? params.PublishResult : null;
+
+    }
+}
+
+/**
  * 制作媒体文件任务信息
  * @class
  */
@@ -10749,8 +10834,7 @@ class PullUploadRequest extends  AbstractModel {
         this.MediaName = null;
 
         /**
-         * 要拉取的视频封面 URL。
-<li>URL 里文件名需要包括扩展名, 比如 ```https://xxxx.jpg``` ，扩展名为 jpg，支持的扩展名详见[封面类型](https://cloud.tencent.com/document/product/266/9760#.E5.B0.81.E9.9D.A2.E7.B1.BB.E5.9E.8B)。</li>
+         * 要拉取的视频封面 URL。仅支持 gif、jpeg、png 三种图片格式。
          * @type {string || null}
          */
         this.CoverUrl = null;
@@ -12425,6 +12509,13 @@ class EventContent extends  AbstractModel {
          */
         this.ComposeMediaCompleteEvent = null;
 
+        /**
+         * 微信小程序发布任务完成事件，当事件类型为 WechatMiniProgramPublishComplete 时有效。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {WechatMiniProgramPublishTask || null}
+         */
+        this.WechatMiniProgramPublishCompleteEvent = null;
+
     }
 
     /**
@@ -12507,6 +12598,12 @@ class EventContent extends  AbstractModel {
             let obj = new ComposeMediaTask();
             obj.deserialize(params.ComposeMediaCompleteEvent)
             this.ComposeMediaCompleteEvent = obj;
+        }
+
+        if (params.WechatMiniProgramPublishCompleteEvent) {
+            let obj = new WechatMiniProgramPublishTask();
+            obj.deserialize(params.WechatMiniProgramPublishCompleteEvent)
+            this.WechatMiniProgramPublishCompleteEvent = obj;
         }
 
     }
@@ -19866,6 +19963,7 @@ module.exports = {
     PullEventsRequest: PullEventsRequest,
     CreateWatermarkTemplateRequest: CreateWatermarkTemplateRequest,
     TerrorismConfigureInfoForUpdate: TerrorismConfigureInfoForUpdate,
+    WechatMiniProgramPublishTask: WechatMiniProgramPublishTask,
     ComposeMediaTask: ComposeMediaTask,
     HeadTailConfigureInfoForUpdate: HeadTailConfigureInfoForUpdate,
     TranscodePlayInfo2017: TranscodePlayInfo2017,

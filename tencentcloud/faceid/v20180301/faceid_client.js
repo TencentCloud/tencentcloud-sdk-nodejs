@@ -17,25 +17,29 @@
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const LivenessRequest = models.LivenessRequest;
-const GetLiveCodeResponse = models.GetLiveCodeResponse;
+const LivenessCompareResponse = models.LivenessCompareResponse;
+const GetLiveCodeRequest = models.GetLiveCodeRequest;
+const IdCardVerificationRequest = models.IdCardVerificationRequest;
+const BankCardVerificationRequest = models.BankCardVerificationRequest;
 const DetectAuthResponse = models.DetectAuthResponse;
+const BankCard4EVerificationResponse = models.BankCard4EVerificationResponse;
+const BankCard2EVerificationRequest = models.BankCard2EVerificationRequest;
+const LivenessRecognitionRequest = models.LivenessRecognitionRequest;
+const LivenessRecognitionResponse = models.LivenessRecognitionResponse;
+const DetectAuthRequest = models.DetectAuthRequest;
+const BankCardVerificationResponse = models.BankCardVerificationResponse;
+const ImageRecognitionRequest = models.ImageRecognitionRequest;
+const BankCard4EVerificationRequest = models.BankCard4EVerificationRequest;
+const GetActionSequenceResponse = models.GetActionSequenceResponse;
 const ImageRecognitionResponse = models.ImageRecognitionResponse;
 const GetActionSequenceRequest = models.GetActionSequenceRequest;
 const GetDetectInfoResponse = models.GetDetectInfoResponse;
-const LivenessCompareResponse = models.LivenessCompareResponse;
-const DetectAuthRequest = models.DetectAuthRequest;
+const GetLiveCodeResponse = models.GetLiveCodeResponse;
 const GetDetectInfoRequest = models.GetDetectInfoRequest;
-const GetLiveCodeRequest = models.GetLiveCodeRequest;
+const BankCard2EVerificationResponse = models.BankCard2EVerificationResponse;
 const IdCardVerificationResponse = models.IdCardVerificationResponse;
-const BankCardVerificationResponse = models.BankCardVerificationResponse;
-const IdCardVerificationRequest = models.IdCardVerificationRequest;
-const BankCardVerificationRequest = models.BankCardVerificationRequest;
-const ImageRecognitionRequest = models.ImageRecognitionRequest;
 const LivenessCompareRequest = models.LivenessCompareRequest;
 const LivenessResponse = models.LivenessResponse;
-const GetActionSequenceResponse = models.GetActionSequenceResponse;
-const LivenessRecognitionResponse = models.LivenessRecognitionResponse;
-const LivenessRecognitionRequest = models.LivenessRecognitionRequest;
 
 
 /**
@@ -137,14 +141,14 @@ class FaceidClient extends AbstractClient {
     }
 
     /**
-     * 传入照片和身份信息，判断该照片与公安权威库的证件照是否属于同一个人。
-     * @param {ImageRecognitionRequest} req
-     * @param {function(string, ImageRecognitionResponse):void} cb
+     * 银行卡四要素核验
+     * @param {BankCard4EVerificationRequest} req
+     * @param {function(string, BankCard4EVerificationResponse):void} cb
      * @public
      */
-    ImageRecognition(req, cb) {
-        let resp = new ImageRecognitionResponse();
-        this.request("ImageRecognition", req, resp, cb);
+    BankCard4EVerification(req, cb) {
+        let resp = new BankCard4EVerificationResponse();
+        this.request("BankCard4EVerification", req, resp, cb);
     }
 
     /**
@@ -156,6 +160,28 @@ class FaceidClient extends AbstractClient {
     DetectAuth(req, cb) {
         let resp = new DetectAuthResponse();
         this.request("DetectAuth", req, resp, cb);
+    }
+
+    /**
+     * 传入照片和身份信息，判断该照片与公安权威库的证件照是否属于同一个人。
+     * @param {ImageRecognitionRequest} req
+     * @param {function(string, ImageRecognitionResponse):void} cb
+     * @public
+     */
+    ImageRecognition(req, cb) {
+        let resp = new ImageRecognitionResponse();
+        this.request("ImageRecognition", req, resp, cb);
+    }
+
+    /**
+     * 银行卡二要素核验
+     * @param {BankCard2EVerificationRequest} req
+     * @param {function(string, BankCard2EVerificationResponse):void} cb
+     * @public
+     */
+    BankCard2EVerification(req, cb) {
+        let resp = new BankCard2EVerificationResponse();
+        this.request("BankCard2EVerification", req, resp, cb);
     }
 
 

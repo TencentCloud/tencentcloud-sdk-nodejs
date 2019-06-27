@@ -17,6 +17,217 @@
 const AbstractModel = require("../../common/abstract_model");
 
 /**
+ * AssumeRoleWithSAML返回参数结构体
+ * @class
+ */
+class AssumeRoleWithSAMLResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 对象里面包含 Token，TmpSecretId，TmpSecretKey 三元组
+         * @type {Credentials || null}
+         */
+        this.Credentials = null;
+
+        /**
+         * 证书无效的时间，返回 Unix 时间戳，精确到秒
+         * @type {number || null}
+         */
+        this.ExpiredTime = null;
+
+        /**
+         * 证书无效的时间，以 ISO8601 格式的 UTC 时间表示
+         * @type {string || null}
+         */
+        this.Expiration = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Credentials) {
+            let obj = new Credentials();
+            obj.deserialize(params.Credentials)
+            this.Credentials = obj;
+        }
+        this.ExpiredTime = 'ExpiredTime' in params ? params.ExpiredTime : null;
+        this.Expiration = 'Expiration' in params ? params.Expiration : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * AssumeRoleWithSAML请求参数结构体
+ * @class
+ */
+class AssumeRoleWithSAMLRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * base64 编码的 SAML 断言信息
+         * @type {string || null}
+         */
+        this.SAMLAssertion = null;
+
+        /**
+         * 扮演者访问描述名
+         * @type {string || null}
+         */
+        this.PrincipalArn = null;
+
+        /**
+         * 角色访问描述名
+         * @type {string || null}
+         */
+        this.RoleArn = null;
+
+        /**
+         * 会话名称
+         * @type {string || null}
+         */
+        this.RoleSessionName = null;
+
+        /**
+         * 指定临时证书的有效期，单位：秒，默认 7200 秒，最长可设定有效期为 7200 秒
+         * @type {number || null}
+         */
+        this.DurationSeconds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SAMLAssertion = 'SAMLAssertion' in params ? params.SAMLAssertion : null;
+        this.PrincipalArn = 'PrincipalArn' in params ? params.PrincipalArn : null;
+        this.RoleArn = 'RoleArn' in params ? params.RoleArn : null;
+        this.RoleSessionName = 'RoleSessionName' in params ? params.RoleSessionName : null;
+        this.DurationSeconds = 'DurationSeconds' in params ? params.DurationSeconds : null;
+
+    }
+}
+
+/**
+ * GetFederationToken返回参数结构体
+ * @class
+ */
+class GetFederationTokenResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 临时证书
+         * @type {Credentials || null}
+         */
+        this.Credentials = null;
+
+        /**
+         * 临时证书有效的时间，返回 Unix 时间戳，精确到秒
+         * @type {number || null}
+         */
+        this.ExpiredTime = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Credentials) {
+            let obj = new Credentials();
+            obj.deserialize(params.Credentials)
+            this.Credentials = obj;
+        }
+        this.ExpiredTime = 'ExpiredTime' in params ? params.ExpiredTime : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * AssumeRole返回参数结构体
+ * @class
+ */
+class AssumeRoleResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 临时安全证书
+         * @type {Credentials || null}
+         */
+        this.Credentials = null;
+
+        /**
+         * 证书无效的时间，返回 Unix 时间戳，精确到秒
+         * @type {number || null}
+         */
+        this.ExpiredTime = null;
+
+        /**
+         * 证书无效的时间，以 iso8601 格式的 UTC 时间表示
+         * @type {string || null}
+         */
+        this.Expiration = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Credentials) {
+            let obj = new Credentials();
+            obj.deserialize(params.Credentials)
+            this.Credentials = obj;
+        }
+        this.ExpiredTime = 'ExpiredTime' in params ? params.ExpiredTime : null;
+        this.Expiration = 'Expiration' in params ? params.Expiration : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * GetFederationToken请求参数结构体
  * @class
  */
@@ -130,6 +341,16 @@ class AssumeRoleRequest extends  AbstractModel {
          */
         this.DurationSeconds = null;
 
+        /**
+         * 策略描述
+注意：
+1、policy 需要做 urlencode（如果通过 GET 方法请求云 API，发送请求前，所有参数都需要按照云 API 规范再 urlencode 一次）。
+2、策略语法参照 CAM 策略语法。
+3、策略中不能包含 principal 元素。
+         * @type {string || null}
+         */
+        this.Policy = null;
+
     }
 
     /**
@@ -142,116 +363,18 @@ class AssumeRoleRequest extends  AbstractModel {
         this.RoleArn = 'RoleArn' in params ? params.RoleArn : null;
         this.RoleSessionName = 'RoleSessionName' in params ? params.RoleSessionName : null;
         this.DurationSeconds = 'DurationSeconds' in params ? params.DurationSeconds : null;
-
-    }
-}
-
-/**
- * AssumeRole返回参数结构体
- * @class
- */
-class AssumeRoleResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 临时安全证书
-         * @type {Credentials || null}
-         */
-        this.Credentials = null;
-
-        /**
-         * 证书无效的时间，返回 Unix 时间戳，精确到秒
-         * @type {number || null}
-         */
-        this.ExpiredTime = null;
-
-        /**
-         * 证书无效的时间，以 iso8601 格式的 UTC 时间表示
-         * @type {string || null}
-         */
-        this.Expiration = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-        if (params.Credentials) {
-            let obj = new Credentials();
-            obj.deserialize(params.Credentials)
-            this.Credentials = obj;
-        }
-        this.ExpiredTime = 'ExpiredTime' in params ? params.ExpiredTime : null;
-        this.Expiration = 'Expiration' in params ? params.Expiration : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * GetFederationToken返回参数结构体
- * @class
- */
-class GetFederationTokenResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 临时证书
-         * @type {Credentials || null}
-         */
-        this.Credentials = null;
-
-        /**
-         * 临时证书有效的时间，返回 Unix 时间戳，精确到秒
-         * @type {number || null}
-         */
-        this.ExpiredTime = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-        if (params.Credentials) {
-            let obj = new Credentials();
-            obj.deserialize(params.Credentials)
-            this.Credentials = obj;
-        }
-        this.ExpiredTime = 'ExpiredTime' in params ? params.ExpiredTime : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.Policy = 'Policy' in params ? params.Policy : null;
 
     }
 }
 
 module.exports = {
+    AssumeRoleWithSAMLResponse: AssumeRoleWithSAMLResponse,
+    AssumeRoleWithSAMLRequest: AssumeRoleWithSAMLRequest,
+    GetFederationTokenResponse: GetFederationTokenResponse,
+    AssumeRoleResponse: AssumeRoleResponse,
     GetFederationTokenRequest: GetFederationTokenRequest,
     Credentials: Credentials,
     AssumeRoleRequest: AssumeRoleRequest,
-    AssumeRoleResponse: AssumeRoleResponse,
-    GetFederationTokenResponse: GetFederationTokenResponse,
 
 }

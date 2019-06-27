@@ -16,11 +16,13 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
+const AssumeRoleWithSAMLResponse = models.AssumeRoleWithSAMLResponse;
+const AssumeRoleWithSAMLRequest = models.AssumeRoleWithSAMLRequest;
+const GetFederationTokenResponse = models.GetFederationTokenResponse;
+const AssumeRoleResponse = models.AssumeRoleResponse;
 const GetFederationTokenRequest = models.GetFederationTokenRequest;
 const Credentials = models.Credentials;
 const AssumeRoleRequest = models.AssumeRoleRequest;
-const AssumeRoleResponse = models.AssumeRoleResponse;
-const GetFederationTokenResponse = models.GetFederationTokenResponse;
 
 
 /**
@@ -42,6 +44,17 @@ class StsClient extends AbstractClient {
     GetFederationToken(req, cb) {
         let resp = new GetFederationTokenResponse();
         this.request("GetFederationToken", req, resp, cb);
+    }
+
+    /**
+     * 本接口（AssumeRoleWithSAML）用于根据 SAML 断言申请角色临时凭证。
+     * @param {AssumeRoleWithSAMLRequest} req
+     * @param {function(string, AssumeRoleWithSAMLResponse):void} cb
+     * @public
+     */
+    AssumeRoleWithSAML(req, cb) {
+        let resp = new AssumeRoleWithSAMLResponse();
+        this.request("AssumeRoleWithSAML", req, resp, cb);
     }
 
     /**
