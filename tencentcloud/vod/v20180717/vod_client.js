@@ -176,6 +176,7 @@ const AiRecognitionTaskHeadTailResultOutput = models.AiRecognitionTaskHeadTailRe
 const PullEventsRequest = models.PullEventsRequest;
 const CreateWatermarkTemplateRequest = models.CreateWatermarkTemplateRequest;
 const TerrorismConfigureInfoForUpdate = models.TerrorismConfigureInfoForUpdate;
+const WechatMiniProgramPublishTask = models.WechatMiniProgramPublishTask;
 const ComposeMediaTask = models.ComposeMediaTask;
 const HeadTailConfigureInfoForUpdate = models.HeadTailConfigureInfoForUpdate;
 const TranscodePlayInfo2017 = models.TranscodePlayInfo2017;

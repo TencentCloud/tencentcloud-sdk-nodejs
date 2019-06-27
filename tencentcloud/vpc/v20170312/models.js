@@ -3926,6 +3926,18 @@ class DescribeCcnsRequest extends  AbstractModel {
          */
         this.Limit = null;
 
+        /**
+         * 排序字段。支持：`CcnId` `CcnName` `CreateTime` `State` `QosLevel`
+         * @type {string || null}
+         */
+        this.OrderField = null;
+
+        /**
+         * 排序方法。顺序：`ASC`，倒序：`DESC`。
+         * @type {string || null}
+         */
+        this.OrderDirection = null;
+
     }
 
     /**
@@ -3947,6 +3959,8 @@ class DescribeCcnsRequest extends  AbstractModel {
         }
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
+        this.OrderField = 'OrderField' in params ? params.OrderField : null;
+        this.OrderDirection = 'OrderDirection' in params ? params.OrderDirection : null;
 
     }
 }
@@ -4181,6 +4195,12 @@ class Vpc extends  AbstractModel {
          */
         this.Ipv6CidrBlock = null;
 
+        /**
+         * 标签键值对
+         * @type {Array.<Tag> || null}
+         */
+        this.TagSet = null;
+
     }
 
     /**
@@ -4201,6 +4221,15 @@ class Vpc extends  AbstractModel {
         this.DhcpOptionsId = 'DhcpOptionsId' in params ? params.DhcpOptionsId : null;
         this.EnableDhcp = 'EnableDhcp' in params ? params.EnableDhcp : null;
         this.Ipv6CidrBlock = 'Ipv6CidrBlock' in params ? params.Ipv6CidrBlock : null;
+
+        if (params.TagSet) {
+            this.TagSet = new Array();
+            for (let z in params.TagSet) {
+                let obj = new Tag();
+                obj.deserialize(params.TagSet[z]);
+                this.TagSet.push(obj);
+            }
+        }
 
     }
 }
@@ -5076,6 +5105,43 @@ class EnableCcnRoutesRequest extends  AbstractModel {
         }
         this.CcnId = 'CcnId' in params ? params.CcnId : null;
         this.RouteIds = 'RouteIds' in params ? params.RouteIds : null;
+
+    }
+}
+
+/**
+ * 标签键值对
+ * @class
+ */
+class Tag extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 标签键
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Key = null;
+
+        /**
+         * 标签值
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Value = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Key = 'Key' in params ? params.Key : null;
+        this.Value = 'Value' in params ? params.Value : null;
 
     }
 }
@@ -12823,6 +12889,18 @@ class CreateRoutesResponse extends  AbstractModel {
         super();
 
         /**
+         * 新增的实例个数。
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 路由表对象。
+         * @type {Array.<RouteTable> || null}
+         */
+        this.RouteTableSet = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -12836,6 +12914,16 @@ class CreateRoutesResponse extends  AbstractModel {
     deserialize(params) {
         if (!params) {
             return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.RouteTableSet) {
+            this.RouteTableSet = new Array();
+            for (let z in params.RouteTableSet) {
+                let obj = new RouteTable();
+                obj.deserialize(params.RouteTableSet[z]);
+                this.RouteTableSet.push(obj);
+            }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -15668,6 +15756,7 @@ module.exports = {
     DeleteVpnConnectionResponse: DeleteVpnConnectionResponse,
     CreateCcnResponse: CreateCcnResponse,
     EnableCcnRoutesRequest: EnableCcnRoutesRequest,
+    Tag: Tag,
     DescribeVpcPrivateIpAddressesResponse: DescribeVpcPrivateIpAddressesResponse,
     ModifyServiceTemplateAttributeRequest: ModifyServiceTemplateAttributeRequest,
     DescribeIp6TranslatorsRequest: DescribeIp6TranslatorsRequest,

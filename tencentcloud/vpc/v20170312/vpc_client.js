@@ -127,6 +127,7 @@ const DisassociateAddressRequest = models.DisassociateAddressRequest;
 const DeleteVpnConnectionResponse = models.DeleteVpnConnectionResponse;
 const CreateCcnResponse = models.CreateCcnResponse;
 const EnableCcnRoutesRequest = models.EnableCcnRoutesRequest;
+const Tag = models.Tag;
 const DescribeVpcPrivateIpAddressesResponse = models.DescribeVpcPrivateIpAddressesResponse;
 const ModifyServiceTemplateAttributeRequest = models.ModifyServiceTemplateAttributeRequest;
 const DescribeIp6TranslatorsRequest = models.DescribeIp6TranslatorsRequest;
