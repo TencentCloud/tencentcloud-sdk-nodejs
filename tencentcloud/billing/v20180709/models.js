@@ -1672,6 +1672,13 @@ class DescribeBillDetailResponse extends  AbstractModel {
         this.DetailSet = null;
 
         /**
+         * 总记录数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Total = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -1695,6 +1702,7 @@ class DescribeBillDetailResponse extends  AbstractModel {
                 this.DetailSet.push(obj);
             }
         }
+        this.Total = 'Total' in params ? params.Total : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }

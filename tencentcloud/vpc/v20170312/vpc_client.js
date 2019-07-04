@@ -56,6 +56,7 @@ const DescribeRouteTablesResponse = models.DescribeRouteTablesResponse;
 const RejectAttachCcnInstancesResponse = models.RejectAttachCcnInstancesResponse;
 const ServiceTemplate = models.ServiceTemplate;
 const DescribeCcnAttachedInstancesRequest = models.DescribeCcnAttachedInstancesRequest;
+const DescribeNatGatewaysRequest = models.DescribeNatGatewaysRequest;
 const ModifyFlowLogAttributeResponse = models.ModifyFlowLogAttributeResponse;
 const DescribeBandwidthPackagesResponse = models.DescribeBandwidthPackagesResponse;
 const DescribeDirectConnectGatewaysRequest = models.DescribeDirectConnectGatewaysRequest;
@@ -91,6 +92,7 @@ const ModifyAddressTemplateAttributeRequest = models.ModifyAddressTemplateAttrib
 const DescribeVpcsResponse = models.DescribeVpcsResponse;
 const ModifySecurityGroupAttributeRequest = models.ModifySecurityGroupAttributeRequest;
 const RemoveBandwidthPackageResourcesRequest = models.RemoveBandwidthPackageResourcesRequest;
+const DescribeNatGatewaysResponse = models.DescribeNatGatewaysResponse;
 const DescribeFlowLogResponse = models.DescribeFlowLogResponse;
 const HaVipAssociateAddressIpResponse = models.HaVipAssociateAddressIpResponse;
 const DescribeBandwidthPackagesRequest = models.DescribeBandwidthPackagesRequest;
@@ -148,6 +150,7 @@ const AssignIpv6AddressesRequest = models.AssignIpv6AddressesRequest;
 const CreateServiceTemplateGroupResponse = models.CreateServiceTemplateGroupResponse;
 const ModifyIpv6AddressesAttributeResponse = models.ModifyIpv6AddressesAttributeResponse;
 const ReplaceSecurityGroupPolicyRequest = models.ReplaceSecurityGroupPolicyRequest;
+const NatGateway = models.NatGateway;
 const DescribeVpnConnectionsRequest = models.DescribeVpnConnectionsRequest;
 const DeleteCustomerGatewayResponse = models.DeleteCustomerGatewayResponse;
 const CreateAddressTemplateResponse = models.CreateAddressTemplateResponse;
@@ -202,6 +205,7 @@ const DescribeAccountAttributesRequest = models.DescribeAccountAttributesRequest
 const DescribeCcnRoutesRequest = models.DescribeCcnRoutesRequest;
 const DownloadCustomerGatewayConfigurationResponse = models.DownloadCustomerGatewayConfigurationResponse;
 const AllocateAddressesRequest = models.AllocateAddressesRequest;
+const ModifyVpnConnectionAttributeRequest = models.ModifyVpnConnectionAttributeRequest;
 const CreateRouteTableResponse = models.CreateRouteTableResponse;
 const ModifySecurityGroupAttributeResponse = models.ModifySecurityGroupAttributeResponse;
 const ModifyAddressAttributeResponse = models.ModifyAddressAttributeResponse;
@@ -279,6 +283,7 @@ const UnassignIpv6CidrBlockRequest = models.UnassignIpv6CidrBlockRequest;
 const CCN = models.CCN;
 const DeleteIp6TranslatorsRequest = models.DeleteIp6TranslatorsRequest;
 const Ip6Translator = models.Ip6Translator;
+const DestinationIpPortTranslationNatRule = models.DestinationIpPortTranslationNatRule;
 const CreateDefaultVpcRequest = models.CreateDefaultVpcRequest;
 const DescribeSubnetsResponse = models.DescribeSubnetsResponse;
 const DescribeCustomerGatewaysResponse = models.DescribeCustomerGatewaysResponse;
@@ -344,7 +349,7 @@ const Ipv6SubnetCidrBlock = models.Ipv6SubnetCidrBlock;
 const DescribeAddressQuotaResponse = models.DescribeAddressQuotaResponse;
 const CreateCustomerGatewayRequest = models.CreateCustomerGatewayRequest;
 const DeleteSecurityGroupRequest = models.DeleteSecurityGroupRequest;
-const ModifyVpnConnectionAttributeRequest = models.ModifyVpnConnectionAttributeRequest;
+const NatGatewayAddress = models.NatGatewayAddress;
 const CreateIp6TranslatorsRequest = models.CreateIp6TranslatorsRequest;
 const ItemPrice = models.ItemPrice;
 const DescribeDirectConnectGatewayCcnRoutesResponse = models.DescribeDirectConnectGatewayCcnRoutesResponse;
@@ -708,6 +713,17 @@ class VpcClient extends AbstractClient {
     AssignPrivateIpAddresses(req, cb) {
         let resp = new AssignPrivateIpAddressesResponse();
         this.request("AssignPrivateIpAddresses", req, resp, cb);
+    }
+
+    /**
+     * 本接口（DescribeNatGateways）用于查询 NAT 网关。
+     * @param {DescribeNatGatewaysRequest} req
+     * @param {function(string, DescribeNatGatewaysResponse):void} cb
+     * @public
+     */
+    DescribeNatGateways(req, cb) {
+        let resp = new DescribeNatGatewaysResponse();
+        this.request("DescribeNatGateways", req, resp, cb);
     }
 
     /**
