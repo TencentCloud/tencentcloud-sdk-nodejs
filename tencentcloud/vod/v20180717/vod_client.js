@@ -21,6 +21,7 @@ const ModifyWatermarkTemplateRequest = models.ModifyWatermarkTemplateRequest;
 const AiRecognitionTaskAsrFullTextSegmentItem = models.AiRecognitionTaskAsrFullTextSegmentItem;
 const UserDefineOcrTextReviewTemplateInfoForUpdate = models.UserDefineOcrTextReviewTemplateInfoForUpdate;
 const DescribeAllClassRequest = models.DescribeAllClassRequest;
+const WeChatMiniProgramPublishRequest = models.WeChatMiniProgramPublishRequest;
 const AiAnalysisTaskClassificationInput = models.AiAnalysisTaskClassificationInput;
 const SvgWatermarkInput = models.SvgWatermarkInput;
 const CreateTranscodeTemplateRequest = models.CreateTranscodeTemplateRequest;
@@ -319,6 +320,7 @@ const DeleteClassRequest = models.DeleteClassRequest;
 const DescribeTranscodeTemplatesRequest = models.DescribeTranscodeTemplatesRequest;
 const PoliticalConfigureInfoForUpdate = models.PoliticalConfigureInfoForUpdate;
 const DescribeWatermarkTemplatesResponse = models.DescribeWatermarkTemplatesResponse;
+const WeChatMiniProgramPublishResponse = models.WeChatMiniProgramPublishResponse;
 const ImageTransform = models.ImageTransform;
 const FrameTagConfigureInfo = models.FrameTagConfigureInfo;
 const ExecuteFunctionRequest = models.ExecuteFunctionRequest;
@@ -821,6 +823,17 @@ class VodClient extends AbstractClient {
     DescribePersonSamples(req, cb) {
         let resp = new DescribePersonSamplesResponse();
         this.request("DescribePersonSamples", req, resp, cb);
+    }
+
+    /**
+     * 将点播视频发布到微信小程序，供微信小程序播放器播放。
+     * @param {WeChatMiniProgramPublishRequest} req
+     * @param {function(string, WeChatMiniProgramPublishResponse):void} cb
+     * @public
+     */
+    WeChatMiniProgramPublish(req, cb) {
+        let resp = new WeChatMiniProgramPublishResponse();
+        this.request("WeChatMiniProgramPublish", req, resp, cb);
     }
 
     /**

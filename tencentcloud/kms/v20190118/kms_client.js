@@ -19,40 +19,44 @@ const AbstractClient = require('../../common/abstract_client')
 const DisableKeysRequest = models.DisableKeysRequest;
 const UpdateAliasRequest = models.UpdateAliasRequest;
 const ReEncryptRequest = models.ReEncryptRequest;
-const UpdateKeyDescriptionResponse = models.UpdateKeyDescriptionResponse;
+const GenerateDataKeyRequest = models.GenerateDataKeyRequest;
 const GenerateDataKeyResponse = models.GenerateDataKeyResponse;
 const EnableKeyRotationRequest = models.EnableKeyRotationRequest;
 const EnableKeyRotationResponse = models.EnableKeyRotationResponse;
 const CreateKeyRequest = models.CreateKeyRequest;
 const EnableKeysResponse = models.EnableKeysResponse;
 const DisableKeyResponse = models.DisableKeyResponse;
-const CreateKeyResponse = models.CreateKeyResponse;
+const DecryptResponse = models.DecryptResponse;
 const ReEncryptResponse = models.ReEncryptResponse;
-const EncryptResponse = models.EncryptResponse;
+const DescribeKeyRequest = models.DescribeKeyRequest;
+const CancelKeyDeletionRequest = models.CancelKeyDeletionRequest;
 const EnableKeyResponse = models.EnableKeyResponse;
+const ScheduleKeyDeletionRequest = models.ScheduleKeyDeletionRequest;
 const GetServiceStatusResponse = models.GetServiceStatusResponse;
 const Key = models.Key;
 const GetKeyRotationStatusResponse = models.GetKeyRotationStatusResponse;
 const EnableKeysRequest = models.EnableKeysRequest;
+const UpdateKeyDescriptionResponse = models.UpdateKeyDescriptionResponse;
 const EncryptRequest = models.EncryptRequest;
-const DecryptResponse = models.DecryptResponse;
+const CreateKeyResponse = models.CreateKeyResponse;
 const EnableKeyRequest = models.EnableKeyRequest;
 const GetKeyRotationStatusRequest = models.GetKeyRotationStatusRequest;
 const DescribeKeysResponse = models.DescribeKeysResponse;
 const ListKeyDetailResponse = models.ListKeyDetailResponse;
-const GenerateDataKeyRequest = models.GenerateDataKeyRequest;
+const CancelKeyDeletionResponse = models.CancelKeyDeletionResponse;
 const ListKeysRequest = models.ListKeysRequest;
 const ListKeysResponse = models.ListKeysResponse;
 const KeyMetadata = models.KeyMetadata;
 const DisableKeysResponse = models.DisableKeysResponse;
 const DisableKeyRotationResponse = models.DisableKeyRotationResponse;
 const UpdateAliasResponse = models.UpdateAliasResponse;
+const ScheduleKeyDeletionResponse = models.ScheduleKeyDeletionResponse;
 const DecryptRequest = models.DecryptRequest;
 const ListKeyDetailRequest = models.ListKeyDetailRequest;
 const UpdateKeyDescriptionRequest = models.UpdateKeyDescriptionRequest;
 const DisableKeyRequest = models.DisableKeyRequest;
 const DescribeKeyResponse = models.DescribeKeyResponse;
-const DescribeKeyRequest = models.DescribeKeyRequest;
+const EncryptResponse = models.EncryptResponse;
 const DescribeKeysRequest = models.DescribeKeysRequest;
 const GetServiceStatusRequest = models.GetServiceStatusRequest;
 const DisableKeyRotationRequest = models.DisableKeyRotationRequest;
@@ -68,6 +72,17 @@ class KmsClient extends AbstractClient {
         super("kms.tencentcloudapi.com", "2019-01-18", credential, region, profile);
     }
     
+    /**
+     * 取消CMK的计划删除操作
+     * @param {CancelKeyDeletionRequest} req
+     * @param {function(string, CancelKeyDeletionResponse):void} cb
+     * @public
+     */
+    CancelKeyDeletion(req, cb) {
+        let resp = new CancelKeyDeletionResponse();
+        this.request("CancelKeyDeletion", req, resp, cb);
+    }
+
     /**
      * 查询指定的CMK是否开启了密钥轮换功能。
      * @param {GetKeyRotationStatusRequest} req
@@ -110,6 +125,17 @@ class KmsClient extends AbstractClient {
     EnableKeyRotation(req, cb) {
         let resp = new EnableKeyRotationResponse();
         this.request("EnableKeyRotation", req, resp, cb);
+    }
+
+    /**
+     * CMK计划删除接口，用于指定CMK删除的时间，可选时间区间为[7,30]天
+     * @param {ScheduleKeyDeletionRequest} req
+     * @param {function(string, ScheduleKeyDeletionResponse):void} cb
+     * @public
+     */
+    ScheduleKeyDeletion(req, cb) {
+        let resp = new ScheduleKeyDeletionResponse();
+        this.request("ScheduleKeyDeletion", req, resp, cb);
     }
 
     /**

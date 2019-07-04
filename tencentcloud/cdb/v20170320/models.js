@@ -75,145 +75,145 @@ class CreateDBInstanceRequest extends  AbstractModel {
         super();
 
         /**
-         * 实例内存大小，单位：MB，请使用[获取云数据库可售卖规格](https://cloud.tencent.com/document/api/236/17229)接口获取可创建的内存规格
+         * 实例内存大小，单位：MB，请使用 [获取云数据库可售卖规格](https://cloud.tencent.com/document/api/236/17229) 接口获取可创建的内存规格。
          * @type {number || null}
          */
         this.Memory = null;
 
         /**
-         * 实例硬盘大小，单位：GB，请使用[获取云数据库可售卖规格](https://cloud.tencent.com/document/api/236/17229)接口获取可创建的硬盘范围
+         * 实例硬盘大小，单位：GB，请使用 [获取云数据库可售卖规格](https://cloud.tencent.com/document/api/236/17229) 接口获取可创建的硬盘范围。
          * @type {number || null}
          */
         this.Volume = null;
 
         /**
-         * 实例时长，单位：月，可选值包括[1,2,3,4,5,6,7,8,9,10,11,12,24,36]
+         * 实例时长，单位：月，可选值包括 [1,2,3,4,5,6,7,8,9,10,11,12,24,36]。
          * @type {number || null}
          */
         this.Period = null;
 
         /**
-         * 实例数量，默认值为1, 最小值1，最大值为100
+         * 实例数量，默认值为1, 最小值1，最大值为100。
          * @type {number || null}
          */
         this.GoodsNum = null;
 
         /**
-         * 可用区信息，该参数缺省时，系统会自动选择一个可用区，请使用[获取云数据库可售卖规格](https://cloud.tencent.com/document/api/236/17229)接口获取可创建的可用区
+         * 可用区信息，该参数缺省时，系统会自动选择一个可用区，请使用 [获取云数据库可售卖规格](https://cloud.tencent.com/document/api/236/17229) 接口获取可创建的可用区。
          * @type {string || null}
          */
         this.Zone = null;
 
         /**
-         * 私有网络ID，如果不传则默认选择基础网络，请使用[查询私有网络列表](/document/api/215/15778)
+         * 私有网络 ID，如果不传则默认选择基础网络，请使用 [查询私有网络列表](/document/api/215/15778) 。
          * @type {string || null}
          */
         this.UniqVpcId = null;
 
         /**
-         * 私有网络下的子网ID，如果设置了 UniqVpcId，则 UniqSubnetId 必填，请使用[查询子网列表](/document/api/215/15784)
+         * 私有网络下的子网 ID，如果设置了 UniqVpcId，则 UniqSubnetId 必填，请使用 [查询子网列表](/document/api/215/15784)。
          * @type {string || null}
          */
         this.UniqSubnetId = null;
 
         /**
-         * 项目ID，不填为默认项目。请使用[查询项目列表](https://cloud.tencent.com/document/product/378/4400)接口获取项目ID
+         * 项目 ID，不填为默认项目。请使用 [查询项目列表](https://cloud.tencent.com/document/product/378/4400) 接口获取项目 ID。购买只读实例和灾备实例时，项目 ID 默认和主实例保持一致。
          * @type {number || null}
          */
         this.ProjectId = null;
 
         /**
-         * 自定义端口，端口支持范围：[ 1024-65535 ]
+         * 自定义端口，端口支持范围：[ 1024-65535 ]。
          * @type {number || null}
          */
         this.Port = null;
 
         /**
-         * 实例类型，默认为 master，支持值包括：master-表示主实例，dr-表示灾备实例，ro-表示只读实例
+         * 实例类型，默认为 master，支持值包括：master - 表示主实例，dr - 表示灾备实例，ro - 表示只读实例。
          * @type {string || null}
          */
         this.InstanceRole = null;
 
         /**
-         * 实例ID，购买只读实例时必填，该字段表示只读实例的主实例ID，请使用[查询实例列表](https://cloud.tencent.com/document/api/236/15872)接口查询云数据库实例ID
+         * 实例 ID，购买只读实例时必填，该字段表示只读实例的主实例ID，请使用 [查询实例列表](https://cloud.tencent.com/document/api/236/15872) 接口查询云数据库实例 ID。
          * @type {string || null}
          */
         this.MasterInstanceId = null;
 
         /**
-         * MySQL版本，值包括：5.5、5.6和5.7，请使用[获取云数据库可售卖规格](https://cloud.tencent.com/document/api/236/17229)接口获取可创建的实例版本
+         * MySQL 版本，值包括：5.5、5.6 和 5.7，请使用 [获取云数据库可售卖规格](https://cloud.tencent.com/document/api/236/17229) 接口获取可创建的实例版本。
          * @type {string || null}
          */
         this.EngineVersion = null;
 
         /**
-         * 设置root帐号密码，密码规则：8-64个字符，至少包含字母、数字、字符（支持的字符：_+-&=!@#$%^*()）中的两种，购买主实例时可指定该参数，购买只读实例或者灾备实例时指定该参数无意义
+         * 设置 root 帐号密码，密码规则：8 - 64 个字符，至少包含字母、数字、字符（支持的字符：_+-&=!@#$%^*()）中的两种，购买主实例时可指定该参数，购买只读实例或者灾备实例时指定该参数无意义。
          * @type {string || null}
          */
         this.Password = null;
 
         /**
-         * 数据复制方式，默认为0，支持值包括：0-表示异步复制，1-表示半同步复制，2-表示强同步复制
+         * 数据复制方式，默认为 0，支持值包括：0 - 表示异步复制，1 - 表示半同步复制，2 - 表示强同步复制。
          * @type {number || null}
          */
         this.ProtectMode = null;
 
         /**
-         * 多可用区域，默认为0，支持值包括：0-表示单可用区，1-表示多可用区
+         * 多可用区域，默认为 0，支持值包括：0 - 表示单可用区，1 - 表示多可用区。
          * @type {number || null}
          */
         this.DeployMode = null;
 
         /**
-         * 备库1的可用区信息，默认为zone的值
+         * 备库 1 的可用区信息，默认为 Zone 的值。
          * @type {string || null}
          */
         this.SlaveZone = null;
 
         /**
-         * 参数列表，参数格式如ParamList.0.Name=auto_increment&ParamList.0.Value=1。可通过[查询默认的可设置参数列表](https://cloud.tencent.com/document/api/236/32662)查询支持设置的参数
+         * 参数列表，参数格式如 ParamList.0.Name=auto_increment&ParamList.0.Value=1。可通过 [查询默认的可设置参数列表](https://cloud.tencent.com/document/api/236/32662) 查询支持设置的参数。
          * @type {Array.<ParamInfo> || null}
          */
         this.ParamList = null;
 
         /**
-         * 备库2的可用区ID，默认为0，购买主实例时可指定该参数，购买只读实例或者灾备实例时指定该参数无意义
+         * 备库 2 的可用区信息，默认为空，购买强同步主实例时可指定该参数，购买其他类型实例时指定该参数无意义。
          * @type {string || null}
          */
         this.BackupZone = null;
 
         /**
-         * 自动续费标记，可选值为：0-不自动续费；1-自动续费
+         * 自动续费标记，可选值为：0 - 不自动续费；1 - 自动续费。
          * @type {number || null}
          */
         this.AutoRenewFlag = null;
 
         /**
-         * 主实例地域信息，购买灾备实例时，该字段必填
+         * 主实例地域信息，购买灾备实例时，该字段必填。
          * @type {string || null}
          */
         this.MasterRegion = null;
 
         /**
-         * 安全组参数，可使用[查询项目安全组信息](https://cloud.tencent.com/document/api/236/15850)接口查询某个项目的安全组详情
+         * 安全组参数，可使用 [查询项目安全组信息](https://cloud.tencent.com/document/api/236/15850) 接口查询某个项目的安全组详情。
          * @type {Array.<string> || null}
          */
         this.SecurityGroup = null;
 
         /**
-         * 只读实例参数
+         * 只读实例参数。购买只读实例时，该参数必传。
          * @type {RoGroup || null}
          */
         this.RoGroup = null;
 
         /**
-         * 实例名称
+         * 实例名称。
          * @type {string || null}
          */
         this.InstanceName = null;
 
         /**
-         * 实例要绑定的标签
+         * 实例标签信息。
          * @type {Array.<TagInfo> || null}
          */
         this.ResourceTags = null;
@@ -414,7 +414,7 @@ class CreateDBImportJobRequest extends  AbstractModel {
         super();
 
         /**
-         * 实例的ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例ID相同。
+         * 实例的 ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同。
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -432,7 +432,7 @@ class CreateDBImportJobRequest extends  AbstractModel {
         this.User = null;
 
         /**
-         * 云数据库实例User账号的密码。
+         * 云数据库实例 User 账号的密码。
          * @type {string || null}
          */
         this.Password = null;
@@ -470,7 +470,7 @@ class DescribeDatabasesRequest extends  AbstractModel {
         super();
 
         /**
-         * 实例ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例ID相同。
+         * 实例 ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同。
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -488,7 +488,7 @@ class DescribeDatabasesRequest extends  AbstractModel {
         this.Limit = null;
 
         /**
-         * 匹配数据库库名的正则表达式，规则同MySQL官网
+         * 匹配数据库库名的正则表达式，规则同 MySQL 官网
          * @type {string || null}
          */
         this.DatabaseRegexp = null;
@@ -519,7 +519,7 @@ class DescribeBackupConfigRequest extends  AbstractModel {
         super();
 
         /**
-         * 实例短实例ID，格式如：cdb-c1nl9rpv。与云数据库控制台页面中显示的实例ID相同。
+         * 实例短实例 ID，格式如：cdb-c1nl9rpv。与云数据库控制台页面中显示的实例 ID 相同。
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -603,7 +603,7 @@ class DescribeAccountsRequest extends  AbstractModel {
         super();
 
         /**
-         * 实例ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例ID相同。
+         * 实例 ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同。
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -645,7 +645,7 @@ class StopDBImportJobRequest extends  AbstractModel {
         super();
 
         /**
-         * 异步任务的请求ID。
+         * 异步任务的请求 ID。
          * @type {string || null}
          */
         this.AsyncRequestId = null;
@@ -736,7 +736,7 @@ class DescribeDBInstanceRebootTimeRequest extends  AbstractModel {
         super();
 
         /**
-         * 实例的ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例ID相同。
+         * 实例的 ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同。
          * @type {Array.<string> || null}
          */
         this.InstanceIds = null;
@@ -764,7 +764,7 @@ class DescribeSlowLogsRequest extends  AbstractModel {
         super();
 
         /**
-         * 实例ID，格式如：cdb-c1nl9rpv。与云数据库控制台页面中显示的实例ID相同。
+         * 实例 ID，格式如：cdb-c1nl9rpv。与云数据库控制台页面中显示的实例 ID 相同。
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -806,13 +806,13 @@ class Inbound extends  AbstractModel {
         super();
 
         /**
-         * 策略，ACCEPT或者DROP
+         * 策略，ACCEPT 或者 DROP
          * @type {string || null}
          */
         this.Action = null;
 
         /**
-         * 来源Ip或Ip段，例如192.168.0.0/16
+         * 来源 IP 或 IP 段，例如192.168.0.0/16
          * @type {string || null}
          */
         this.CidrIp = null;
@@ -824,13 +824,13 @@ class Inbound extends  AbstractModel {
         this.PortRange = null;
 
         /**
-         * 网络协议，支持udp、tcp等
+         * 网络协议，支持 UDP、TCP 等
          * @type {string || null}
          */
         this.IpProtocol = null;
 
         /**
-         * 规则限定的方向，进站规则为INPUT
+         * 规则限定的方向，进站规则为 INPUT
          * @type {string || null}
          */
         this.Dir = null;
@@ -862,13 +862,13 @@ class AssociateSecurityGroupsRequest extends  AbstractModel {
         super();
 
         /**
-         * 安全组Id。
+         * 安全组 ID。
          * @type {string || null}
          */
         this.SecurityGroupId = null;
 
         /**
-         * 实例ID列表，一个或者多个实例Id组成的数组。
+         * 实例 ID 列表，一个或者多个实例 ID 组成的数组。
          * @type {Array.<string> || null}
          */
         this.InstanceIds = null;
@@ -897,7 +897,7 @@ class CreateAccountsResponse extends  AbstractModel {
         super();
 
         /**
-         * 异步任务的请求ID，可使用此ID查询异步任务的执行结果。
+         * 异步任务的请求 ID，可使用此 ID 查询异步任务的执行结果。
          * @type {string || null}
          */
         this.AsyncRequestId = null;
@@ -1465,13 +1465,13 @@ class DescribeBinlogsResponse extends  AbstractModel {
         super();
 
         /**
-         * 符合查询条件的日志文件总数
+         * 符合查询条件的日志文件总数。
          * @type {number || null}
          */
         this.TotalCount = null;
 
         /**
-         * 符合查询条件的二进制日志文件详情
+         * 符合查询条件的二进制日志文件详情。
          * @type {Array.<BinlogInfo> || null}
          */
         this.Items = null;
@@ -1543,7 +1543,7 @@ class DescribeDefaultParamsRequest extends  AbstractModel {
         super();
 
         /**
-         * mysql版本，目前支持["5.1", "5.5", "5.6", "5.7"]
+         * mysql版本，目前支持 ["5.1", "5.5", "5.6", "5.7"]。
          * @type {string || null}
          */
         this.EngineVersion = null;
@@ -1634,13 +1634,13 @@ class DescribeDBPriceResponse extends  AbstractModel {
         super();
 
         /**
-         * 实例价格，单位：分（人民币）
+         * 实例价格，单位：分（人民币）。
          * @type {number || null}
          */
         this.Price = null;
 
         /**
-         * 实例原价，单位：分（人民币）
+         * 实例原价，单位：分（人民币）。
          * @type {number || null}
          */
         this.OriginalPrice = null;
@@ -1676,13 +1676,13 @@ class DescribeTasksResponse extends  AbstractModel {
         super();
 
         /**
-         * 符合查询条件的实例总数
+         * 符合查询条件的实例总数。
          * @type {number || null}
          */
         this.TotalCount = null;
 
         /**
-         * 返回的实例任务信息
+         * 返回的实例任务信息。
          * @type {Array.<string> || null}
          */
         this.Items = null;
@@ -1739,7 +1739,7 @@ class DescribeRollbackRangeTimeRequest extends  AbstractModel {
         super();
 
         /**
-         * 实例ID列表，单个实例Id的格式如：cdb-c1nl9rpv。与云数据库控制台页面中显示的实例ID相同。
+         * 实例 ID 列表，单个实例Id的格式如：cdb-c1nl9rpv。与云数据库控制台页面中显示的实例 ID 相同。
          * @type {Array.<string> || null}
          */
         this.InstanceIds = null;
@@ -1767,7 +1767,7 @@ class DescribeBackupsRequest extends  AbstractModel {
         super();
 
         /**
-         * 实例ID，格式如：cdb-c1nl9rpv。与云数据库控制台页面中显示的实例ID相同。
+         * 实例ID，格式如：cdb-c1nl9rpv。与云数据库控制台页面中显示的实例 ID 相同。
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -1837,13 +1837,13 @@ class DescribeInstanceParamRecordsResponse extends  AbstractModel {
         super();
 
         /**
-         * 符合条件的记录数
+         * 符合条件的记录数。
          * @type {number || null}
          */
         this.TotalCount = null;
 
         /**
-         * 参数修改记录
+         * 参数修改记录。
          * @type {Array.<ParamRecord> || null}
          */
         this.Items = null;
@@ -1887,7 +1887,7 @@ class DescribeDBInstanceGTIDResponse extends  AbstractModel {
         super();
 
         /**
-         * GTID是否开通的标记：0-未开通，1-已开通。
+         * GTID 是否开通的标记，可能的取值为：0 - 未开通，1 - 已开通。
          * @type {number || null}
          */
         this.IsGTIDOpen = null;
@@ -1922,7 +1922,7 @@ class OpenDBInstanceGTIDResponse extends  AbstractModel {
         super();
 
         /**
-         * 异步任务的请求ID，可使用此ID查询异步任务的执行结果。
+         * 异步任务的请求 ID，可使用此 ID 查询异步任务的执行结果。
          * @type {string || null}
          */
         this.AsyncRequestId = null;
@@ -2316,7 +2316,7 @@ class ModifyAccountDescriptionResponse extends  AbstractModel {
         super();
 
         /**
-         * 异步任务的请求ID，可使用此ID查询异步任务的执行结果。
+         * 异步任务的请求 ID，可使用此 ID 查询异步任务的执行结果。
          * @type {string || null}
          */
         this.AsyncRequestId = null;
@@ -2351,7 +2351,7 @@ class SwitchForUpgradeRequest extends  AbstractModel {
         super();
 
         /**
-         * 实例ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例ID相同
+         * 实例 ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同。
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -2414,13 +2414,13 @@ class CreateDBInstanceHourResponse extends  AbstractModel {
         super();
 
         /**
-         * 短订单ID
+         * 短订单 ID。
          * @type {Array.<string> || null}
          */
         this.DealIds = null;
 
         /**
-         * 实例ID列表
+         * 实例 ID 列表。
          * @type {Array.<string> || null}
          */
         this.InstanceIds = null;
@@ -2519,49 +2519,49 @@ class DescribeTasksRequest extends  AbstractModel {
         super();
 
         /**
-         * 实例ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例ID相同，可使用[查询实例列表](https://cloud.tencent.com/document/api/236/15872) 接口获取，其值为输出参数中字段 InstanceId 的值
+         * 实例 ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同，可使用 [查询实例列表](https://cloud.tencent.com/document/api/236/15872) 接口获取，其值为输出参数中字段 InstanceId 的值。
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * 异步任务请求ID，执行 CDB 相关操作返回的 AsyncRequestId
+         * 异步任务请求 ID，执行 CDB 相关操作返回的 AsyncRequestId。
          * @type {string || null}
          */
         this.AsyncRequestId = null;
 
         /**
-         * 任务类型，不传值则查询所有任务类型，可能的值：1-数据库回档；2-SQL操作；3-数据导入；5-参数设置；6-初始化；7-重启；8-开启GTID；9-只读实例升级；10-数据库批量回档；11-主实例升级；12-删除库表；13-切换为主实例；
+         * 任务类型，不传值则查询所有任务类型，可能的值：1-数据库回档；2-SQL操作；3-数据导入；5-参数设置；6-初始化；7-重启；8-开启GTID；9-只读实例升级；10-数据库批量回档；11-主实例升级；12-删除库表；13-切换为主实例。
          * @type {Array.<number> || null}
          */
         this.TaskTypes = null;
 
         /**
-         * 任务状态，不传值则查询所有任务状态，可能的值：-1-未定义；0-初始化; 1-运行中；2-执行成功；3-执行失败；4-已终止；5-已删除；6-已暂停；
+         * 任务状态，不传值则查询所有任务状态，可能的值：-1-未定义；0-初始化; 1-运行中；2-执行成功；3-执行失败；4-已终止；5-已删除；6-已暂停。
          * @type {Array.<number> || null}
          */
         this.TaskStatus = null;
 
         /**
-         * 第一个任务的开始时间，用于范围查询，时间格式如：2017-12-31 10:40:01
+         * 第一个任务的开始时间，用于范围查询，时间格式如：2017-12-31 10:40:01。
          * @type {string || null}
          */
         this.StartTimeBegin = null;
 
         /**
-         * 最后一个任务的开始时间，用于范围查询，时间格式如：2017-12-31 10:40:01
+         * 最后一个任务的开始时间，用于范围查询，时间格式如：2017-12-31 10:40:01。
          * @type {string || null}
          */
         this.StartTimeEnd = null;
 
         /**
-         * 记录偏移量，默认值为0
+         * 记录偏移量，默认值为0。
          * @type {number || null}
          */
         this.Offset = null;
 
         /**
-         * 单次请求返回的数量，默认值为20，最大值为100
+         * 单次请求返回的数量，默认值为20，最大值为100。
          * @type {number || null}
          */
         this.Limit = null;
@@ -2596,7 +2596,7 @@ class IsolateDBInstanceResponse extends  AbstractModel {
         super();
 
         /**
-         * 异步任务的请求ID，可使用此ID查询异步任务的执行结果
+         * 异步任务的请求 ID，可使用此 ID 查询异步任务的执行结果。
          * @type {string || null}
          */
         this.AsyncRequestId = null;
@@ -2666,7 +2666,7 @@ class AddTimeWindowRequest extends  AbstractModel {
         super();
 
         /**
-         * 实例ID，格式如：cdb-c1nl9rpv或者cdbro-c1nl9rpv，与云数据库控制台页面中显示的实例ID相同。
+         * 实例ID，格式如：cdb-c1nl9rpv 或者 cdbro-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同。
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -2855,7 +2855,7 @@ class CreateAccountsRequest extends  AbstractModel {
         super();
 
         /**
-         * 实例ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例ID相同。
+         * 实例 ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同。
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -2912,139 +2912,139 @@ class CreateDBInstanceHourRequest extends  AbstractModel {
         super();
 
         /**
-         * 实例数量，默认值为1, 最小值1，最大值为100
+         * 实例数量，默认值为 1，最小值 1，最大值为 100。
          * @type {number || null}
          */
         this.GoodsNum = null;
 
         /**
-         * 实例内存大小，单位：MB，请使用[获取云数据库可售卖规格](https://cloud.tencent.com/document/api/236/17229)接口获取可创建的内存规格
+         * 实例内存大小，单位：MB，请使用 [获取云数据库可售卖规格](https://cloud.tencent.com/document/api/236/17229) 接口获取可创建的内存规格。
          * @type {number || null}
          */
         this.Memory = null;
 
         /**
-         * 实例硬盘大小，单位：GB，请使用[获取云数据库可售卖规格](https://cloud.tencent.com/document/api/236/17229)接口获取可创建的硬盘范围
+         * 实例硬盘大小，单位：GB，请使用 [获取云数据库可售卖规格](https://cloud.tencent.com/document/api/236/17229) 接口获取可创建的硬盘范围。
          * @type {number || null}
          */
         this.Volume = null;
 
         /**
-         * MySQL版本，值包括：5.5、5.6和5.7，请使用[获取云数据库可售卖规格](https://cloud.tencent.com/document/api/236/17229)接口获取可创建的实例版本
+         * MySQL 版本，值包括：5.5、5.6 和 5.7，请使用 [获取云数据库可售卖规格](https://cloud.tencent.com/document/api/236/17229) 接口获取可创建的实例版本。
          * @type {string || null}
          */
         this.EngineVersion = null;
 
         /**
-         * 私有网络ID，如果不传则默认选择基础网络，请使用[查询私有网络列表](/document/api/215/15778)
+         * 私有网络 ID，如果不传则默认选择基础网络，请使用 [查询私有网络列表](/document/api/215/15778) 。
          * @type {string || null}
          */
         this.UniqVpcId = null;
 
         /**
-         * 私有网络下的子网ID，如果设置了 UniqVpcId，则 UniqSubnetId 必填，请使用[查询子网列表](/document/api/215/15784)
+         * 私有网络下的子网 ID，如果设置了 UniqVpcId，则 UniqSubnetId 必填，请使用[查询子网列表](/document/api/215/15784)。
          * @type {string || null}
          */
         this.UniqSubnetId = null;
 
         /**
-         * 项目ID，不填为默认项目。请使用[查询项目列表](https://cloud.tencent.com/document/product/378/4400)接口获取项目ID
+         * 项目 ID，不填为默认项目。请使用 [查询项目列表](https://cloud.tencent.com/document/product/378/4400) 接口获取项目 ID。
          * @type {number || null}
          */
         this.ProjectId = null;
 
         /**
-         * 可用区信息，该参数缺省时，系统会自动选择一个可用区，请使用[获取云数据库可售卖规格](https://cloud.tencent.com/document/api/236/17229)接口获取可创建的可用区
+         * 可用区信息，该参数缺省时，系统会自动选择一个可用区，请使用 [获取云数据库可售卖规格](https://cloud.tencent.com/document/api/236/17229) 接口获取可创建的可用区。
          * @type {string || null}
          */
         this.Zone = null;
 
         /**
-         * 实例ID，购买只读实例或者灾备实例时必填，该字段表示只读实例或者灾备实例的主实例ID，请使用[查询实例列表](https://cloud.tencent.com/document/api/236/15872)接口查询云数据库实例ID
+         * 实例 ID，购买只读实例或者灾备实例时必填，该字段表示只读实例或者灾备实例的主实例 ID，请使用 [查询实例列表](https://cloud.tencent.com/document/api/236/15872) 接口查询云数据库实例 ID。
          * @type {string || null}
          */
         this.MasterInstanceId = null;
 
         /**
-         * 实例类型，默认为 master，支持值包括：master-表示主实例，dr-表示灾备实例，ro-表示只读实例
+         * 实例类型，默认为 master，支持值包括：master - 表示主实例，dr - 表示灾备实例，ro - 表示只读实例。
          * @type {string || null}
          */
         this.InstanceRole = null;
 
         /**
-         * 主实例的可用区信息，购买灾备实例时必填
+         * 主实例的可用区信息，购买灾备实例时必填。
          * @type {string || null}
          */
         this.MasterRegion = null;
 
         /**
-         * 自定义端口，端口支持范围：[ 1024-65535 ]
+         * 自定义端口，端口支持范围：[ 1024-65535 ] 。
          * @type {number || null}
          */
         this.Port = null;
 
         /**
-         * 设置root帐号密码，密码规则：8-64个字符，至少包含字母、数字、字符（支持的字符：_+-&=!@#$%^*()）中的两种，购买主实例时可指定该参数，购买只读实例或者灾备实例时指定该参数无意义
+         * 设置 root 帐号密码，密码规则：8 - 64 个字符，至少包含字母、数字、字符（支持的字符：_+-&=!@#$%^*()）中的两种，购买主实例时可指定该参数，购买只读实例或者灾备实例时指定该参数无意义。
          * @type {string || null}
          */
         this.Password = null;
 
         /**
-         * 参数列表，参数格式如ParamList.0.Name=auto_increment&ParamList.0.Value=1。可通过[查询默认的可设置参数列表](https://cloud.tencent.com/document/api/236/32662)查询支持设置的参数
+         * 参数列表，参数格式如 ParamList.0.Name=auto_increment&ParamList.0.Value=1。可通过 [查询默认的可设置参数列表](https://cloud.tencent.com/document/api/236/32662) 查询支持设置的参数。
          * @type {Array.<ParamInfo> || null}
          */
         this.ParamList = null;
 
         /**
-         * 数据复制方式，默认为0，支持值包括：0-表示异步复制，1-表示半同步复制，2-表示强同步复制，购买主实例时可指定该参数，购买只读实例或者灾备实例时指定该参数无意义
+         * 数据复制方式，默认为 0，支持值包括：0 - 表示异步复制，1 - 表示半同步复制，2 - 表示强同步复制，购买主实例时可指定该参数，购买只读实例或者灾备实例时指定该参数无意义。
          * @type {number || null}
          */
         this.ProtectMode = null;
 
         /**
-         * 多可用区域，默认为0，支持值包括：0-表示单可用区，1-表示多可用区，购买主实例时可指定该参数，购买只读实例或者灾备实例时指定该参数无意义
+         * 多可用区域，默认为 0，支持值包括：0 - 表示单可用区，1 - 表示多可用区，购买主实例时可指定该参数，购买只读实例或者灾备实例时指定该参数无意义。
          * @type {number || null}
          */
         this.DeployMode = null;
 
         /**
-         * 备库1的可用区ID，默认为zoneId的值，购买主实例时可指定该参数，购买只读实例或者灾备实例时指定该参数无意义
+         * 备库 1 的可用区信息，默认为 Zone 的值，购买主实例时可指定该参数，购买只读实例或者灾备实例时指定该参数无意义。
          * @type {string || null}
          */
         this.SlaveZone = null;
 
         /**
-         * 备库2的可用区ID，默认为0，购买主实例时可指定该参数，购买只读实例或者灾备实例时指定该参数无意义
+         * 备库 2 的可用区信息，默认为空，购买强同步主实例时可指定该参数，购买其他类型实例时指定该参数无意义。
          * @type {string || null}
          */
         this.BackupZone = null;
 
         /**
-         * 安全组参数，可使用[查询项目安全组信息](https://cloud.tencent.com/document/api/236/15850)接口查询某个项目的安全组详情
+         * 安全组参数，可使用 [查询项目安全组信息](https://cloud.tencent.com/document/api/236/15850) 接口查询某个项目的安全组详情。
          * @type {Array.<string> || null}
          */
         this.SecurityGroup = null;
 
         /**
-         * 只读实例信息
+         * 只读实例信息。购买只读实例时，该参数必传。
          * @type {RoGroup || null}
          */
         this.RoGroup = null;
 
         /**
-         * 自动续费标记，值为0或1。购买按量计费实例该字段无意义
+         * 购买按量计费实例该字段无意义。
          * @type {number || null}
          */
         this.AutoRenewFlag = null;
 
         /**
-         * 实例名称
+         * 实例名称。
          * @type {string || null}
          */
         this.InstanceName = null;
 
         /**
-         * 实例标签
+         * 实例标签信息。
          * @type {Array.<TagInfo> || null}
          */
         this.ResourceTags = null;
@@ -3115,13 +3115,13 @@ class DescribeSlowLogsResponse extends  AbstractModel {
         super();
 
         /**
-         * 符合查询条件的慢查询日志总数
+         * 符合查询条件的慢查询日志总数。
          * @type {number || null}
          */
         this.TotalCount = null;
 
         /**
-         * 符合查询条件的慢查询日志详情
+         * 符合查询条件的慢查询日志详情。
          * @type {Array.<SlowLogInfo> || null}
          */
         this.Items = null;
@@ -3237,7 +3237,7 @@ class DescribeParamTemplateInfoRequest extends  AbstractModel {
         super();
 
         /**
-         * 参数模板Id。
+         * 参数模板 ID。
          * @type {number || null}
          */
         this.TemplateId = null;
@@ -3356,7 +3356,7 @@ class CloseWanServiceResponse extends  AbstractModel {
         super();
 
         /**
-         * 异步任务的请求ID，可使用此ID查询异步任务的执行结果。
+         * 异步任务的请求 ID，可使用此 ID 查询异步任务的执行结果。
          * @type {string || null}
          */
         this.AsyncRequestId = null;
@@ -3391,151 +3391,151 @@ class DescribeDBInstancesRequest extends  AbstractModel {
         super();
 
         /**
-         * 项目ID，可使用[查询项目列表](https://cloud.tencent.com/document/product/378/4400)接口查询项目ID
+         * 项目 ID，可使用 [查询项目列表](https://cloud.tencent.com/document/product/378/4400) 接口查询项目 ID。
          * @type {number || null}
          */
         this.ProjectId = null;
 
         /**
-         * 实例类型，可取值：1-主实例，2-灾备实例，3-只读实例
+         * 实例类型，可取值：1 - 主实例，2 - 灾备实例，3 - 只读实例。
          * @type {Array.<number> || null}
          */
         this.InstanceTypes = null;
 
         /**
-         * 实例的内网IP地址
+         * 实例的内网 IP 地址。
          * @type {Array.<string> || null}
          */
         this.Vips = null;
 
         /**
-         * 实例状态，可取值：0-创建中，1-运行中，4-隔离中，5-已隔离
+         * 实例状态，可取值：<br>0 - 创建中<br>1 - 运行中<br>4 - 正在进行隔离操作<br>5 - 隔离中（可在回收站恢复开机）
          * @type {Array.<number> || null}
          */
         this.Status = null;
 
         /**
-         * 偏移量，默认值为0
+         * 偏移量，默认值为 0。
          * @type {number || null}
          */
         this.Offset = null;
 
         /**
-         * 单次请求返回的数量，默认值为20，最大值为2000
+         * 单次请求返回的数量，默认值为 20，最大值为 2000。
          * @type {number || null}
          */
         this.Limit = null;
 
         /**
-         * 安全组ID
+         * 安全组 ID。
          * @type {string || null}
          */
         this.SecurityGroupId = null;
 
         /**
-         * 付费类型，可取值：0-包年包月，1-小时计费
+         * 付费类型，可取值：0 - 包年包月，1 - 小时计费。
          * @type {Array.<number> || null}
          */
         this.PayTypes = null;
 
         /**
-         * 实例名称
+         * 实例名称。
          * @type {Array.<string> || null}
          */
         this.InstanceNames = null;
 
         /**
-         * 实例任务状态，可能取值：<br>0-没有任务<br>1-升级中<br>2-数据导入中<br>3-开放Slave中<br>4-外网访问开通中<br>5-批量操作执行中<br>6-回档中<br>7-外网访问关闭中<br>8-密码修改中<br>9-实例名修改中<br>10-重启中<br>12-自建迁移中<br>13-删除库表中<br>14-灾备实例创建同步中<br>15-升级待切换<br>16-升级切换中<br>17-升级切换完成
+         * 实例任务状态，可能取值：<br>0 - 没有任务<br>1 - 升级中<br>2 - 数据导入中<br>3 - 开放Slave中<br>4 - 外网访问开通中<br>5 - 批量操作执行中<br>6 - 回档中<br>7 - 外网访问关闭中<br>8 - 密码修改中<br>9 - 实例名修改中<br>10 - 重启中<br>12 - 自建迁移中<br>13 - 删除库表中<br>14 - 灾备实例创建同步中<br>15 - 升级待切换<br>16 - 升级切换中<br>17 - 升级切换完成
          * @type {Array.<number> || null}
          */
         this.TaskStatus = null;
 
         /**
-         * 实例数据库引擎版本，可能取值：5.1、5.5、5.6和5.7
+         * 实例数据库引擎版本，可能取值：5.1、5.5、5.6 和 5.7。
          * @type {Array.<string> || null}
          */
         this.EngineVersions = null;
 
         /**
-         * 私有网络的ID
+         * 私有网络的 ID。
          * @type {Array.<number> || null}
          */
         this.VpcIds = null;
 
         /**
-         * 可用区的ID
+         * 可用区的 ID。
          * @type {Array.<number> || null}
          */
         this.ZoneIds = null;
 
         /**
-         * 子网ID
+         * 子网 ID。
          * @type {Array.<number> || null}
          */
         this.SubnetIds = null;
 
         /**
-         * 是否锁定标记
+         * 是否锁定标记。
          * @type {Array.<number> || null}
          */
         this.CdbErrors = null;
 
         /**
-         * 返回结果集排序的字段，目前支持："InstanceId", "InstanceName", "CreateTime", "DeadlineTime"
+         * 返回结果集排序的字段，目前支持："InstanceId"，"InstanceName"，"CreateTime"，"DeadlineTime"。
          * @type {string || null}
          */
         this.OrderBy = null;
 
         /**
-         * 返回结果集排序方式，目前支持："ASC"或者"DESC"
+         * 返回结果集排序方式，目前支持："ASC" 或者 "DESC"。
          * @type {string || null}
          */
         this.OrderDirection = null;
 
         /**
-         * 是否包含安全组详细信息，可取值：0-不包含，1-包含
+         * 是否包含安全组详细信息，可取值：0 - 不包含，1 - 包含。
          * @type {number || null}
          */
         this.WithSecurityGroup = null;
 
         /**
-         * 是否包含独享集群详细信息，可取值：0-不包含，1-包含
+         * 是否包含独享集群详细信息，可取值：0 - 不包含，1 - 包含。
          * @type {number || null}
          */
         this.WithExCluster = null;
 
         /**
-         * 独享集群ID
+         * 独享集群 ID。
          * @type {string || null}
          */
         this.ExClusterId = null;
 
         /**
-         * 实例ID
+         * 实例 ID。
          * @type {Array.<string> || null}
          */
         this.InstanceIds = null;
 
         /**
-         * 初始化标记，可取值：0-未初始化，1-初始化
+         * 初始化标记，可取值：0 - 未初始化，1 - 初始化。
          * @type {number || null}
          */
         this.InitFlag = null;
 
         /**
-         * 是否包含灾备实例，可取值：0-不包含，1-包含
+         * 是否包含灾备实例，可取值：0 - 不包含，1 - 包含。
          * @type {number || null}
          */
         this.WithDr = null;
 
         /**
-         * 是否包含只读实例，可取值：0-不包含，1-包含
+         * 是否包含只读实例，可取值：0 - 不包含，1 - 包含。
          * @type {number || null}
          */
         this.WithRo = null;
 
         /**
-         * 是否包含主实例，可取值：0-不包含，1-包含
+         * 是否包含主实例，可取值：0 - 不包含，1 - 包含。
          * @type {number || null}
          */
         this.WithMaster = null;
@@ -3728,13 +3728,13 @@ class RenewDBInstanceRequest extends  AbstractModel {
         super();
 
         /**
-         * 待续费的实例ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例ID相同，可使用[查询实例列表](https://cloud.tencent.com/document/api/236/15872)
+         * 待续费的实例 ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同，可使用 [查询实例列表](https://cloud.tencent.com/document/api/236/15872)。
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * 续费时长，单位：月，可选值包括[1,2,3,4,5,6,7,8,9,10,11,12,24,36]
+         * 续费时长，单位：月，可选值包括 [1,2,3,4,5,6,7,8,9,10,11,12,24,36]。
          * @type {number || null}
          */
         this.TimeSpan = null;
@@ -3826,13 +3826,13 @@ class ModifyInstanceParamRequest extends  AbstractModel {
         super();
 
         /**
-         * 实例短Id列表。
+         * 实例短 ID 列表。
          * @type {Array.<string> || null}
          */
         this.InstanceIds = null;
 
         /**
-         * 要修改的参数列表。每一个元素是name和currentValue的组合。name是参数名，currentValue是要修改成的值。
+         * 要修改的参数列表。每一个元素是 Name 和 CurrentValue 的组合。Name 是参数名，CurrentValue 是要修改成的值。
          * @type {Array.<Parameter> || null}
          */
         this.ParamList = null;
@@ -3947,7 +3947,7 @@ class ModifyAccountPasswordResponse extends  AbstractModel {
         super();
 
         /**
-         * 异步任务的请求ID，可使用此ID查询异步任务的执行结果。
+         * 异步任务的请求 ID，可使用此 ID 查询异步任务的执行结果。
          * @type {string || null}
          */
         this.AsyncRequestId = null;
@@ -4010,7 +4010,7 @@ class DescribeDBSwitchRecordsRequest extends  AbstractModel {
         super();
 
         /**
-         * 实例ID，格式如：cdb-c1nl9rpv或者cdbro-c1nl9rpv，与云数据库控制台页面中显示的实例ID相同。
+         * 实例 ID，格式如：cdb-c1nl9rpv 或者 cdbro-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同。
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -4022,7 +4022,7 @@ class DescribeDBSwitchRecordsRequest extends  AbstractModel {
         this.Offset = null;
 
         /**
-         * 分页大小，默认值为50，最小值为1，最大值为2000。
+         * 分页大小，默认值为 50，最小值为 1，最大值为 2000。
          * @type {number || null}
          */
         this.Limit = null;
@@ -4052,7 +4052,7 @@ class DescribeSupportedPrivilegesRequest extends  AbstractModel {
         super();
 
         /**
-         * 实例ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例ID相同。
+         * 实例 ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同。
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -4122,13 +4122,13 @@ class CreateDBInstanceResponse extends  AbstractModel {
         super();
 
         /**
-         * 短订单ID
+         * 短订单 ID。
          * @type {Array.<string> || null}
          */
         this.DealIds = null;
 
         /**
-         * 实例ID列表
+         * 实例 ID 列表。
          * @type {Array.<string> || null}
          */
         this.InstanceIds = null;
@@ -4164,19 +4164,19 @@ class ModifyInstanceTagRequest extends  AbstractModel {
         super();
 
         /**
-         * 实例ID
+         * 实例 ID。
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * 要增加或修改的标签
+         * 要增加或修改的标签。
          * @type {Array.<TagInfo> || null}
          */
         this.ReplaceTags = null;
 
         /**
-         * 要删除的标签
+         * 要删除的标签。
          * @type {Array.<TagInfo> || null}
          */
         this.DeleteTags = null;
@@ -4222,7 +4222,7 @@ class CloseWanServiceRequest extends  AbstractModel {
         super();
 
         /**
-         * 实例ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例ID相同，可使用[查询实例列表](https://cloud.tencent.com/document/api/236/15872) 接口获取，其值为输出参数中字段 InstanceId 的值。
+         * 实例 ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同，可使用 [查询实例列表](https://cloud.tencent.com/document/api/236/15872) 接口获取，其值为输出参数中字段 InstanceId 的值。
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -4250,7 +4250,7 @@ class DeleteAccountsResponse extends  AbstractModel {
         super();
 
         /**
-         * 异步任务的请求ID，可使用此ID查询异步任务的执行结果。
+         * 异步任务的请求 ID，可使用此 ID 查询异步任务的执行结果。
          * @type {string || null}
          */
         this.AsyncRequestId = null;
@@ -4285,7 +4285,7 @@ class DescribeDBInstanceCharsetResponse extends  AbstractModel {
         super();
 
         /**
-         * 实例的默认字符集，如"latin1", "utf8"等。
+         * 实例的默认字符集，如 "latin1"，"utf8" 等。
          * @type {string || null}
          */
         this.Charset = null;
@@ -4320,7 +4320,7 @@ class RestartDBInstancesResponse extends  AbstractModel {
         super();
 
         /**
-         * 异步任务的请求ID，可使用此ID查询异步任务的执行结果。
+         * 异步任务的请求 ID，可使用此 ID 查询异步任务的执行结果。
          * @type {string || null}
          */
         this.AsyncRequestId = null;
@@ -4404,13 +4404,13 @@ class DescribeBackupDatabasesResponse extends  AbstractModel {
         super();
 
         /**
-         * 返回的数据个数
+         * 返回的数据个数。
          * @type {number || null}
          */
         this.TotalCount = null;
 
         /**
-         * 符合查询条件的数据库数组
+         * 符合查询条件的数据库数组。
          * @type {Array.<DatabaseName> || null}
          */
         this.Items = null;
@@ -4454,7 +4454,7 @@ class DescribeInstanceParamRecordsRequest extends  AbstractModel {
         super();
 
         /**
-         * 实例ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例ID相同，可使用[查询实例列表](https://cloud.tencent.com/document/api/236/15872) 接口获取，其值为输出参数中字段 InstanceId 的值。
+         * 实例 ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同，可使用 [查询实例列表](https://cloud.tencent.com/document/api/236/15872) 接口获取，其值为输出参数中字段 InstanceId 的值。
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -4552,13 +4552,13 @@ class DescribeBackupsResponse extends  AbstractModel {
         super();
 
         /**
-         * 符合查询条件的实例总数
+         * 符合查询条件的实例总数。
          * @type {number || null}
          */
         this.TotalCount = null;
 
         /**
-         * 符合查询条件的备份信息详情
+         * 符合查询条件的备份信息详情。
          * @type {Array.<BackupInfo> || null}
          */
         this.Items = null;
@@ -4820,7 +4820,7 @@ class DescribeInstanceParamsRequest extends  AbstractModel {
         super();
 
         /**
-         * 实例ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例ID相同，可使用[查询实例列表](https://cloud.tencent.com/document/api/236/15872) 接口获取，其值为输出参数中字段 InstanceId 的值
+         * 实例 ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同，可使用 [查询实例列表](https://cloud.tencent.com/document/api/236/15872) 接口获取，其值为输出参数中字段 InstanceId 的值。
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -4848,13 +4848,13 @@ class ModifyDBInstanceSecurityGroupsRequest extends  AbstractModel {
         super();
 
         /**
-         * 实例ID，格式如：cdb-c1nl9rpv或者cdbro-c1nl9rpv，与云数据库控制台页面中显示的实例ID相同。
+         * 实例 ID，格式如：cdb-c1nl9rpv 或者 cdbro-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同。
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * 要修改的安全组ID列表，一个或者多个安全组Id组成的数组。
+         * 要修改的安全组 ID 列表，一个或者多个安全组 ID 组成的数组。
          * @type {Array.<string> || null}
          */
         this.SecurityGroupIds = null;
@@ -4983,13 +4983,13 @@ class Outbound extends  AbstractModel {
         super();
 
         /**
-         * 策略，ACCEPT或者DROP
+         * 策略，ACCEPT 或者 DROP
          * @type {string || null}
          */
         this.Action = null;
 
         /**
-         * 目的Ip或Ip段，例如172.16.0.0/12
+         * 目的 IP 或 IP 段，例如172.16.0.0/12
          * @type {string || null}
          */
         this.CidrIp = null;
@@ -5001,13 +5001,13 @@ class Outbound extends  AbstractModel {
         this.PortRange = null;
 
         /**
-         * 网络协议，支持udp、tcp等
+         * 网络协议，支持 UDP、TCP等
          * @type {string || null}
          */
         this.IpProtocol = null;
 
         /**
-         * 规则限定的方向，进站规则为OUTPUT
+         * 规则限定的方向，进站规则为 OUTPUT
          * @type {string || null}
          */
         this.Dir = null;
@@ -5051,7 +5051,7 @@ class SlaveInstanceInfo extends  AbstractModel {
         this.Region = null;
 
         /**
-         * 虚拟Ip信息
+         * 虚拟 IP 信息
          * @type {string || null}
          */
         this.Vip = null;
@@ -5179,7 +5179,7 @@ class StartBatchRollbackRequest extends  AbstractModel {
         super();
 
         /**
-         * 用于回档的实例详情信息
+         * 用于回档的实例详情信息。
          * @type {Array.<RollbackInstancesInfo> || null}
          */
         this.Instances = null;
@@ -5542,7 +5542,7 @@ class ModifyDBInstanceNameRequest extends  AbstractModel {
         super();
 
         /**
-         * 实例ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例ID相同，可使用[查询实例列表](https://cloud.tencent.com/document/api/236/15872) 接口获取，其值为输出参数中字段 InstanceId 的值。
+         * 实例 ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同，可使用 [查询实例列表](https://cloud.tencent.com/document/api/236/15872) 接口获取，其值为输出参数中字段 InstanceId 的值。
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -5612,7 +5612,7 @@ class OpenDBInstanceGTIDRequest extends  AbstractModel {
         super();
 
         /**
-         * 实例ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例ID相同。
+         * 实例 ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同。
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -5640,7 +5640,7 @@ class UpgradeDBInstanceEngineVersionResponse extends  AbstractModel {
         super();
 
         /**
-         * 异步任务ID，可使用[查询异步任务的执行结果](https://cloud.tencent.com/document/api/236/20410)获取其执行情况。
+         * 异步任务 ID，可使用 [查询异步任务的执行结果](https://cloud.tencent.com/document/api/236/20410) 获取其执行情况。
          * @type {string || null}
          */
         this.AsyncRequestId = null;
@@ -5675,31 +5675,31 @@ class InquiryPriceUpgradeInstancesRequest extends  AbstractModel {
         super();
 
         /**
-         * 实例ID，格式如：cdb-c1nl9rpv或者cdbro-c1nl9rpv。与云数据库控制台页面中显示的实例ID相同，可使用[查询实例列表](https://cloud.tencent.com/document/api/236/15872) 接口获取，其值为输出参数中字段 InstanceId 的值
+         * 实例 ID，格式如：cdb-c1nl9rpv 或者 cdbro-c1nl9rpv。与云数据库控制台页面中显示的实例 ID 相同，可使用 [查询实例列表](https://cloud.tencent.com/document/api/236/15872) 接口获取，其值为输出参数中字段 InstanceId 的值。
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * 升级后的内存大小，单位：MB，为保证传入 Memory 值有效，请使用[获取云数据库可售卖规格](https://cloud.tencent.com/document/product/236/17229)接口获取可升级的内存规格
+         * 升级后的内存大小，单位：MB，为保证传入 Memory 值有效，请使用 [获取云数据库可售卖规格](https://cloud.tencent.com/document/product/236/17229) 接口获取可升级的内存规格。
          * @type {number || null}
          */
         this.Memory = null;
 
         /**
-         * 升级后的硬盘大小，单位：GB，为保证传入 Volume 值有效，请使用[获取云数据库可售卖规格](https://cloud.tencent.com/document/product/236/17229)接口获取可升级的硬盘范围
+         * 升级后的硬盘大小，单位：GB，为保证传入 Volume 值有效，请使用 [获取云数据库可售卖规格](https://cloud.tencent.com/document/product/236/17229) 接口获取可升级的硬盘范围。
          * @type {number || null}
          */
         this.Volume = null;
 
         /**
-         * 升级后的核心数目，单位：核，为保证传入 CPU 值有效，请使用[获取云数据库可售卖规格](https://cloud.tencent.com/document/product/236/17229)接口获取可升级的核心数目，当未指定该值时，将按照 Memory 大小补全一个默认值
+         * 升级后的核心数目，单位：核，为保证传入 CPU 值有效，请使用 [获取云数据库可售卖规格](https://cloud.tencent.com/document/product/236/17229) 接口获取可升级的核心数目，当未指定该值时，将按照 Memory 大小补全一个默认值。
          * @type {number || null}
          */
         this.Cpu = null;
 
         /**
-         * 数据复制方式，支持值包括：0-异步复制，1-半同步复制，2-强同步复制，升级主实例时可指定该参数，升级只读实例或者灾备实例时指定该参数无意义
+         * 数据复制方式，支持值包括：0 - 异步复制，1 - 半同步复制，2 - 强同步复制，升级主实例时可指定该参数，升级只读实例或者灾备实例时指定该参数无意义。
          * @type {number || null}
          */
         this.ProtectMode = null;
@@ -5731,7 +5731,7 @@ class DescribeAsyncRequestInfoRequest extends  AbstractModel {
         super();
 
         /**
-         * 异步任务的请求ID。
+         * 异步任务的请求 ID。
          * @type {string || null}
          */
         this.AsyncRequestId = null;
@@ -5759,7 +5759,7 @@ class ModifyInstanceParamResponse extends  AbstractModel {
         super();
 
         /**
-         * 异步任务Id，可用于查询任务进度。
+         * 异步任务 ID，可用于查询任务进度。
          * @type {string || null}
          */
         this.AsyncRequestId = null;
@@ -5794,61 +5794,61 @@ class UpgradeDBInstanceRequest extends  AbstractModel {
         super();
 
         /**
-         * 实例ID，格式如：cdb-c1nl9rpv或者cdbro-c1nl9rpv。与云数据库控制台页面中显示的实例ID相同，可使用[查询实例列表](https://cloud.tencent.com/document/api/236/15872) 接口获取，其值为输出参数中字段 InstanceId 的值
+         * 实例 ID，格式如：cdb-c1nl9rpv 或者 cdbro-c1nl9rpv。与云数据库控制台页面中显示的实例 ID 相同，可使用 [查询实例列表](https://cloud.tencent.com/document/api/236/15872) 接口获取，其值为输出参数中字段 InstanceId 的值。
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * 升级后的内存大小，单位：MB，为保证传入 Memory 值有效，请使用[获取云数据库可售卖规格](https://cloud.tencent.com/document/product/236/17229)接口获取可升级的内存规格
+         * 升级后的内存大小，单位：MB，为保证传入 Memory 值有效，请使用 [获取云数据库可售卖规格](https://cloud.tencent.com/document/product/236/17229) 接口获取可升级的内存规格。
          * @type {number || null}
          */
         this.Memory = null;
 
         /**
-         * 升级后的硬盘大小，单位：GB，为保证传入 Volume 值有效，请使用[获取云数据库可售卖规格](https://cloud.tencent.com/document/product/236/17229)接口获取可升级的硬盘范围
+         * 升级后的硬盘大小，单位：GB，为保证传入 Volume 值有效，请使用 [获取云数据库可售卖规格](https://cloud.tencent.com/document/product/236/17229) 接口获取可升级的硬盘范围。
          * @type {number || null}
          */
         this.Volume = null;
 
         /**
-         * 数据复制方式，支持值包括：0-异步复制，1-半同步复制，2-强同步复制，升级主实例时可指定该参数，升级只读实例或者灾备实例时指定该参数无意义
+         * 数据复制方式，支持值包括：0 - 异步复制，1 - 半同步复制，2 - 强同步复制，升级主实例时可指定该参数，升级只读实例或者灾备实例时指定该参数无意义。
          * @type {number || null}
          */
         this.ProtectMode = null;
 
         /**
-         * 部署模式，默认为0，支持值包括：0-单可用区部署，1-多可用区部署，升级主实例时可指定该参数，升级只读实例或者灾备实例时指定该参数无意义
+         * 部署模式，默认为 0，支持值包括：0 - 单可用区部署，1 - 多可用区部署，升级主实例时可指定该参数，升级只读实例或者灾备实例时指定该参数无意义。
          * @type {number || null}
          */
         this.DeployMode = null;
 
         /**
-         * 备库1的可用区信息，默认和实例的Zone参数一致，升级主实例为多可用区部署时可指定该参数，升级只读实例或者灾备实例时指定该参数无意义。可通过[获取云数据库可售卖规格](https://cloud.tencent.com/document/product/236/17229)接口查询支持的可用区
+         * 备库1的可用区信息，默认和实例的 Zone 参数一致，升级主实例为多可用区部署时可指定该参数，升级只读实例或者灾备实例时指定该参数无意义。可通过 [获取云数据库可售卖规格](https://cloud.tencent.com/document/product/236/17229) 接口查询支持的可用区。
          * @type {string || null}
          */
         this.SlaveZone = null;
 
         /**
-         * 主实例数据库引擎版本，支持值包括：5.5、5.6和5.7
+         * 主实例数据库引擎版本，支持值包括：5.5、5.6 和 5.7。
          * @type {string || null}
          */
         this.EngineVersion = null;
 
         /**
-         * 切换访问新实例的方式，默认为0。支持值包括：0-立刻切换，1-时间窗切换；当该值为1时，升级中过程中，切换访问新实例的流程将会在时间窗内进行，或者用户主动调用接口[切换访问新实例](https://cloud.tencent.com/document/product/236/15864)触发该流程
+         * 切换访问新实例的方式，默认为 0。支持值包括：0 - 立刻切换，1 - 时间窗切换；当该值为 1 时，升级中过程中，切换访问新实例的流程将会在时间窗内进行，或者用户主动调用接口 [切换访问新实例](https://cloud.tencent.com/document/product/236/15864) 触发该流程。
          * @type {number || null}
          */
         this.WaitSwitch = null;
 
         /**
-         * 备库2的可用区ID，默认为0，升级主实例时可指定该参数，升级只读实例或者灾备实例时指定该参数无意义
+         * 备库 2 的可用区信息，默认为空，升级主实例时可指定该参数，升级只读实例或者灾备实例时指定该参数无意义。
          * @type {string || null}
          */
         this.BackupZone = null;
 
         /**
-         * 实例类型，默认为 master，支持值包括：master-表示主实例，dr-表示灾备实例，ro-表示只读实例
+         * 实例类型，默认为 master，支持值包括：master - 表示主实例，dr - 表示灾备实例，ro - 表示只读实例。
          * @type {string || null}
          */
         this.InstanceRole = null;
@@ -6011,49 +6011,49 @@ class DescribeDBPriceRequest extends  AbstractModel {
         super();
 
         /**
-         * 可用区信息，格式如"ap-guangzhou-2"。具体能设置的值请通过<a href="https://cloud.tencent.com/document/api/236/17229">DescribeDBZoneConfig</a>接口查询。
+         * 可用区信息，格式如 "ap-guangzhou-2"。具体能设置的值请通过 <a href="https://cloud.tencent.com/document/api/236/17229">DescribeDBZoneConfig</a> 接口查询。
          * @type {string || null}
          */
         this.Zone = null;
 
         /**
-         * 实例数量，默认值为1, 最小值1，最大值为100
+         * 实例数量，默认值为 1，最小值 1，最大值为 100。
          * @type {number || null}
          */
         this.GoodsNum = null;
 
         /**
-         * 实例内存大小，单位：MB
+         * 实例内存大小，单位：MB。
          * @type {number || null}
          */
         this.Memory = null;
 
         /**
-         * 实例硬盘大小，单位：GB
+         * 实例硬盘大小，单位：GB。
          * @type {number || null}
          */
         this.Volume = null;
 
         /**
-         * 付费类型，支持值包括：PRE_PAID - 包年包月，HOUR_PAID - 按量计费
+         * 付费类型，支持值包括：PRE_PAID - 包年包月，HOUR_PAID - 按量计费。
          * @type {string || null}
          */
         this.PayType = null;
 
         /**
-         * 实例时长，单位：月，最小值1，最大值为36；查询按量计费价格时，该字段无效
+         * 实例时长，单位：月，最小值 1，最大值为 36；查询按量计费价格时，该字段无效。
          * @type {number || null}
          */
         this.Period = null;
 
         /**
-         * 实例类型，默认为 master，支持值包括：master-表示主实例，ro-表示只读实例，dr-表示灾备实例
+         * 实例类型，默认为 master，支持值包括：master - 表示主实例，ro - 表示只读实例，dr - 表示灾备实例。
          * @type {string || null}
          */
         this.InstanceRole = null;
 
         /**
-         * 数据复制方式，默认为0，支持值包括：0-表示异步复制，1-表示半同步复制，2-表示强同步复制
+         * 数据复制方式，默认为 0，支持值包括：0 - 表示异步复制，1 - 表示半同步复制，2 - 表示强同步复制。
          * @type {number || null}
          */
         this.ProtectMode = null;
@@ -6209,7 +6209,7 @@ class CreateBackupResponse extends  AbstractModel {
         super();
 
         /**
-         * 备份任务ID。
+         * 备份任务 ID。
          * @type {number || null}
          */
         this.BackupId = null;
@@ -6244,31 +6244,31 @@ class DescribeDBInstanceConfigResponse extends  AbstractModel {
         super();
 
         /**
-         * 主库数据保护方式，主实例属性，可能的返回值：0-异步复制方式，1-半同步复制方式，2-强同步复制方式。
+         * 主实例数据保护方式，可能的返回值：0 - 异步复制方式，1 - 半同步复制方式，2 - 强同步复制方式。
          * @type {number || null}
          */
         this.ProtectMode = null;
 
         /**
-         * 主库部署方式，主实例属性，可能的返回值：0-单可用部署，1-多可用区部署。
+         * 主实例部署方式，可能的返回值：0 - 单可用部署，1 - 多可用区部署。
          * @type {number || null}
          */
         this.DeployMode = null;
 
         /**
-         * 主库可用区的正式名称，如ap-shanghai-1。
+         * 实例可用区信息，格式如 "ap-shanghai-1"。
          * @type {string || null}
          */
         this.Zone = null;
 
         /**
-         * 从库的配置信息。
+         * 备库的配置信息。
          * @type {SlaveConfig || null}
          */
         this.SlaveConfig = null;
 
         /**
-         * ECDB第二个从库的配置信息，只有ECDB实例才有这个字段。
+         * 强同步实例第二备库的配置信息。
          * @type {BackupConfig || null}
          */
         this.BackupConfig = null;
@@ -6317,13 +6317,13 @@ class DescribeDefaultParamsResponse extends  AbstractModel {
         super();
 
         /**
-         * 参数个数
+         * 参数个数。
          * @type {number || null}
          */
         this.TotalCount = null;
 
         /**
-         * 参数详情
+         * 参数详情。
          * @type {Array.<ParameterDetail> || null}
          */
         this.Items = null;
@@ -6367,7 +6367,7 @@ class ModifyAccountPrivilegesResponse extends  AbstractModel {
         super();
 
         /**
-         * 异步任务的请求ID，可使用此ID查询异步任务的执行结果。
+         * 异步任务的请求 ID，可使用此 ID 查询异步任务的执行结果。
          * @type {string || null}
          */
         this.AsyncRequestId = null;
@@ -6494,19 +6494,19 @@ class DescribeTagsOfInstanceIdsResponse extends  AbstractModel {
         super();
 
         /**
-         * 偏移量
+         * 偏移量。
          * @type {number || null}
          */
         this.Offset = null;
 
         /**
-         * 每页返回多少个标签
+         * 每页返回多少个标签。
          * @type {number || null}
          */
         this.Limit = null;
 
         /**
-         * 实例标签信息
+         * 实例标签信息。
          * @type {Array.<TagsInfoOfInstance> || null}
          */
         this.Rows = null;
@@ -6551,7 +6551,7 @@ class VerifyRootAccountResponse extends  AbstractModel {
         super();
 
         /**
-         * 异步任务的请求ID，可使用此ID查询异步任务的执行结果
+         * 异步任务的请求 ID，可使用此 ID 查询异步任务的执行结果
          * @type {string || null}
          */
         this.AsyncRequestId = null;
@@ -6586,7 +6586,7 @@ class DescribeDBInstanceConfigRequest extends  AbstractModel {
         super();
 
         /**
-         * 实例ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例ID相同。
+         * 实例 ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同。
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -7094,7 +7094,7 @@ class ModifyAccountDescriptionRequest extends  AbstractModel {
         super();
 
         /**
-         * 实例ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例ID相同。
+         * 实例 ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同。
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -7144,7 +7144,7 @@ class ModifyAccountPasswordRequest extends  AbstractModel {
         super();
 
         /**
-         * 实例ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例ID相同。
+         * 实例 ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同。
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -7194,7 +7194,7 @@ class DescribeTablesRequest extends  AbstractModel {
         super();
 
         /**
-         * 实例ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例ID相同。
+         * 实例 ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同。
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -7218,7 +7218,7 @@ class DescribeTablesRequest extends  AbstractModel {
         this.Limit = null;
 
         /**
-         * 匹配数据库表名的正则表达式，规则同MySQL官网
+         * 匹配数据库表名的正则表达式，规则同 MySQL 官网
          * @type {string || null}
          */
         this.TableRegexp = null;
@@ -7285,7 +7285,7 @@ class RenewDBInstanceResponse extends  AbstractModel {
         super();
 
         /**
-         * 订单ID
+         * 订单 ID。
          * @type {string || null}
          */
         this.DealId = null;
@@ -7362,7 +7362,7 @@ class ModifyParamTemplateRequest extends  AbstractModel {
         super();
 
         /**
-         * 模板Id。
+         * 模板 ID。
          * @type {number || null}
          */
         this.TemplateId = null;
@@ -7882,7 +7882,7 @@ class IsolateDBInstanceRequest extends  AbstractModel {
         super();
 
         /**
-         * 实例ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例ID相同，可使用[查询实例列表](https://cloud.tencent.com/document/api/236/15872) 接口获取，其值为输出参数中字段 InstanceId 的值
+         * 实例 ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同，可使用 [查询实例列表](https://cloud.tencent.com/document/api/236/15872) 接口获取，其值为输出参数中字段 InstanceId 的值。
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -7945,7 +7945,7 @@ class ModifyAccountPrivilegesRequest extends  AbstractModel {
         super();
 
         /**
-         * 实例ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例ID相同。
+         * 实例 ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同。
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -7963,19 +7963,19 @@ class ModifyAccountPrivilegesRequest extends  AbstractModel {
         this.GlobalPrivileges = null;
 
         /**
-         * 数据库的权限。Privileges权限的可选值为："SELECT","INSERT","UPDATE","DELETE","CREATE",	"DROP","REFERENCES","INDEX","ALTER","CREATE TEMPORARY TABLES","LOCK TABLES","EXECUTE","CREATE VIEW","SHOW VIEW","CREATE ROUTINE","ALTER ROUTINE","EVENT","TRIGGER"。
+         * 数据库的权限。Privileges 权限的可选值为："SELECT","INSERT","UPDATE","DELETE","CREATE",	"DROP","REFERENCES","INDEX","ALTER","CREATE TEMPORARY TABLES","LOCK TABLES","EXECUTE","CREATE VIEW","SHOW VIEW","CREATE ROUTINE","ALTER ROUTINE","EVENT","TRIGGER"。
          * @type {Array.<DatabasePrivilege> || null}
          */
         this.DatabasePrivileges = null;
 
         /**
-         * 数据库中表的权限。Privileges权限的可选值为：权限的可选值为："SELECT","INSERT","UPDATE","DELETE","CREATE",	"DROP","REFERENCES","INDEX","ALTER","CREATE VIEW","SHOW VIEW", "TRIGGER"。
+         * 数据库中表的权限。Privileges 权限的可选值为：权限的可选值为："SELECT","INSERT","UPDATE","DELETE","CREATE",	"DROP","REFERENCES","INDEX","ALTER","CREATE VIEW","SHOW VIEW", "TRIGGER"。
          * @type {Array.<TablePrivilege> || null}
          */
         this.TablePrivileges = null;
 
         /**
-         * 数据库表中列的权限。Privileges权限的可选值为："SELECT","INSERT","UPDATE","REFERENCES"。
+         * 数据库表中列的权限。Privileges 权限的可选值为："SELECT","INSERT","UPDATE","REFERENCES"。
          * @type {Array.<ColumnPrivilege> || null}
          */
         this.ColumnPrivileges = null;
@@ -8075,7 +8075,7 @@ class CreateBackupRequest extends  AbstractModel {
         super();
 
         /**
-         * 实例ID，格式如：cdb-c1nl9rpv。与云数据库控制台页面中显示的实例ID相同。
+         * 实例 ID，格式如：cdb-c1nl9rpv。与云数据库控制台页面中显示的实例 ID 相同。
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -8088,7 +8088,7 @@ class CreateBackupRequest extends  AbstractModel {
 
         /**
          * 需要备份的库表信息，如果不设置该参数，则默认整实例备份。在 BackupMethod=logical 逻辑备份中才可设置该参数。指定的库表必须存在，否则可能导致备份失败。
-例：如果需要备份 db1 库的 tb1、tb2表 和 db2 库。则该参数设置为 [{"Db": "db1", "Table": "tb1"}, {"Db": "db1", "Table": "tb2"}, {"Db": "db2"} ]
+例：如果需要备份 db1 库的 tb1、tb2 表 和 db2 库。则该参数设置为 [{"Db": "db1", "Table": "tb1"}, {"Db": "db1", "Table": "tb2"}, {"Db": "db2"} ]。
          * @type {Array.<BackupItem> || null}
          */
         this.BackupDBTableList = null;
@@ -8189,7 +8189,7 @@ class DescribeDBInstanceCharsetRequest extends  AbstractModel {
         super();
 
         /**
-         * 实例ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例ID相同，可使用[查询实例列表](https://cloud.tencent.com/document/api/236/15872) 接口获取，其值为输出参数中字段 InstanceId 的值。
+         * 实例 ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同，可使用 [查询实例列表](https://cloud.tencent.com/document/api/236/15872) 接口获取，其值为输出参数中字段 InstanceId 的值。
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -8260,7 +8260,7 @@ class DescribeBackupDatabasesRequest extends  AbstractModel {
         super();
 
         /**
-         * 实例ID，格式如：cdb-c1nl9rpv。与云数据库控制台页面中显示的实例ID相同。
+         * 实例 ID，格式如：cdb-c1nl9rpv。与云数据库控制台页面中显示的实例 ID 相同。
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -8351,13 +8351,13 @@ class ModifyAutoRenewFlagRequest extends  AbstractModel {
         super();
 
         /**
-         * 实例的ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例ID相同。
+         * 实例的 ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同。
          * @type {Array.<string> || null}
          */
         this.InstanceIds = null;
 
         /**
-         * 自动续费标记，可取值的有：0-不自动续费，1-自动续费。
+         * 自动续费标记，可取值的有：0 - 不自动续费，1 - 自动续费。
          * @type {number || null}
          */
         this.AutoRenew = null;
@@ -8386,19 +8386,19 @@ class UpgradeDBInstanceEngineVersionRequest extends  AbstractModel {
         super();
 
         /**
-         * 实例ID，格式如：cdb-c1nl9rpv或者cdbro-c1nl9rpv。与云数据库控制台页面中显示的实例ID相同，可使用[查询实例列表](https://cloud.tencent.com/document/api/236/15872) 接口获取，其值为输出参数中字段 InstanceId 的值
+         * 实例 ID，格式如：cdb-c1nl9rpv 或者 cdbro-c1nl9rpv。与云数据库控制台页面中显示的实例 ID 相同，可使用 [查询实例列表](https://cloud.tencent.com/document/api/236/15872) 接口获取，其值为输出参数中字段 InstanceId 的值。
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * 主实例数据库引擎版本，支持值包括：5.6和5.7
+         * 主实例数据库引擎版本，支持值包括：5.6 和 5.7。
          * @type {string || null}
          */
         this.EngineVersion = null;
 
         /**
-         * 切换访问新实例的方式，默认为0。支持值包括：0-立刻切换，1-时间窗切换；当该值为1时，升级中过程中，切换访问新实例的流程将会在时间窗内进行，或者用户主动调用接口[切换访问新实例](https://cloud.tencent.com/document/product/236/15864)触发该流程
+         * 切换访问新实例的方式，默认为 0。支持值包括：0 - 立刻切换，1 - 时间窗切换；当该值为 1 时，升级中过程中，切换访问新实例的流程将会在时间窗内进行，或者用户主动调用接口 [切换访问新实例](https://cloud.tencent.com/document/product/236/15864) 触发该流程。
          * @type {number || null}
          */
         this.WaitSwitch = null;
@@ -8428,13 +8428,13 @@ class UpgradeDBInstanceResponse extends  AbstractModel {
         super();
 
         /**
-         * 订单ID
+         * 订单 ID。
          * @type {Array.<string> || null}
          */
         this.DealIds = null;
 
         /**
-         * 异步任务的请求ID，可使用此ID查询异步任务的执行结果
+         * 异步任务的请求 ID，可使用此 ID 查询异步任务的执行结果。
          * @type {string || null}
          */
         this.AsyncRequestId = null;
@@ -8470,31 +8470,31 @@ class ModifyDBInstanceVipVportRequest extends  AbstractModel {
         super();
 
         /**
-         * 实例ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例ID相同，可使用[查询实例列表](https://cloud.tencent.com/document/api/236/15872) 接口获取，其值为输出参数中字段 InstanceId 的值。
+         * 实例 ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同，可使用 [查询实例列表](https://cloud.tencent.com/document/api/236/15872) 接口获取，其值为输出参数中字段 InstanceId 的值。
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * 目标IP。该参数和DstPort参数，两者必传一个。
+         * 目标 IP。该参数和 DstPort 参数，两者必传一个。
          * @type {string || null}
          */
         this.DstIp = null;
 
         /**
-         * 目标端口，支持范围为：[1024-65535]。该参数和DstIp参数，两者必传一个。
+         * 目标端口，支持范围为：[1024-65535]。该参数和 DstIp 参数，两者必传一个。
          * @type {number || null}
          */
         this.DstPort = null;
 
         /**
-         * 私有网络统一ID。
+         * 私有网络统一 ID。
          * @type {string || null}
          */
         this.UniqVpcId = null;
 
         /**
-         * 子网统一ID。
+         * 子网统一 ID。
          * @type {string || null}
          */
         this.UniqSubnetId = null;
@@ -8554,7 +8554,7 @@ class DescribeDBImportRecordsRequest extends  AbstractModel {
         super();
 
         /**
-         * 实例ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例ID相同。
+         * 实例 ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同。
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -8572,13 +8572,13 @@ class DescribeDBImportRecordsRequest extends  AbstractModel {
         this.EndTime = null;
 
         /**
-         * 分页参数 , 偏移量 , 默认值为0。
+         * 分页参数，偏移量，默认值为0。
          * @type {number || null}
          */
         this.Offset = null;
 
         /**
-         * 分页参数 , 单次请求返回的数量 , 默认值为20，最小值为1，最大值为100。
+         * 分页参数，单次请求返回的数量，默认值为20，最小值为1，最大值为100。
          * @type {number || null}
          */
         this.Limit = null;
@@ -8610,7 +8610,7 @@ class CreateDBImportJobResponse extends  AbstractModel {
         super();
 
         /**
-         * 异步任务的请求ID，可使用此ID查询异步任务的执行结果
+         * 异步任务的请求 ID，可使用此 ID 查询异步任务的执行结果。
          * @type {string || null}
          */
         this.AsyncRequestId = null;
@@ -8645,19 +8645,19 @@ class DescribeTagsOfInstanceIdsRequest extends  AbstractModel {
         super();
 
         /**
-         * 实例列表
+         * 实例列表。
          * @type {Array.<string> || null}
          */
         this.InstanceIds = null;
 
         /**
-         * 偏移量
+         * 偏移量。
          * @type {number || null}
          */
         this.Offset = null;
 
         /**
-         * 每页返回多少个标签
+         * 每页返回多少个标签。
          * @type {number || null}
          */
         this.Limit = null;
@@ -8687,7 +8687,7 @@ class OpenWanServiceRequest extends  AbstractModel {
         super();
 
         /**
-         * 实例ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例ID相同，可使用[查询实例列表](https://cloud.tencent.com/document/api/236/15872) 接口获取，其值为输出参数中字段 InstanceId 的值
+         * 实例 ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同，可使用 [查询实例列表](https://cloud.tencent.com/document/api/236/15872) 接口获取，其值为输出参数中字段 InstanceId 的值。
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -8715,7 +8715,7 @@ class DeleteTimeWindowRequest extends  AbstractModel {
         super();
 
         /**
-         * 实例ID，格式如：cdb-c1nl9rpv或者cdbro-c1nl9rpv，与云数据库控制台页面中显示的实例ID相同。
+         * 实例 ID，格式如：cdb-c1nl9rpv 或者 cdbro-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同。
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -8743,13 +8743,13 @@ class DescribeDBInstancesResponse extends  AbstractModel {
         super();
 
         /**
-         * 符合查询条件的实例总数
+         * 符合查询条件的实例总数。
          * @type {number || null}
          */
         this.TotalCount = null;
 
         /**
-         * 实例详细信息
+         * 实例详细信息。
          * @type {Array.<InstanceInfo> || null}
          */
         this.Items = null;
@@ -8933,7 +8933,7 @@ class DescribeParamTemplateInfoResponse extends  AbstractModel {
         super();
 
         /**
-         * 参数模板Id。
+         * 参数模板 ID。
          * @type {number || null}
          */
         this.TemplateId = null;
@@ -9067,7 +9067,7 @@ class RestartDBInstancesRequest extends  AbstractModel {
         super();
 
         /**
-         * 实例ID数组，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例ID相同。
+         * 实例 ID 数组，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同。
          * @type {Array.<string> || null}
          */
         this.InstanceIds = null;
@@ -9095,13 +9095,13 @@ class DescribeInstanceParamsResponse extends  AbstractModel {
         super();
 
         /**
-         * 实例的参数总数
+         * 实例的参数总数。
          * @type {number || null}
          */
         this.TotalCount = null;
 
         /**
-         * 参数详情
+         * 参数详情。
          * @type {Array.<ParameterDetail> || null}
          */
         this.Items = null;
@@ -9195,13 +9195,13 @@ class ModifyDBInstanceProjectRequest extends  AbstractModel {
         super();
 
         /**
-         * 实例ID数组，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例ID相同，可使用[查询实例列表](https://cloud.tencent.com/document/api/236/15872) 接口获取，其值为输出参数中字段 InstanceId 的值。
+         * 实例 ID 数组，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同，可使用 [查询实例列表](https://cloud.tencent.com/document/api/236/15872) 接口获取，其值为输出参数中字段 InstanceId 的值。
          * @type {Array.<string> || null}
          */
         this.InstanceIds = null;
 
         /**
-         * 项目的ID。
+         * 项目的 ID。
          * @type {number || null}
          */
         this.NewProjectId = null;
@@ -9230,13 +9230,13 @@ class DisassociateSecurityGroupsRequest extends  AbstractModel {
         super();
 
         /**
-         * 安全组Id。
+         * 安全组 ID。
          * @type {string || null}
          */
         this.SecurityGroupId = null;
 
         /**
-         * 实例ID列表，一个或者多个实例Id组成的数组。
+         * 实例 ID 列表，一个或者多个实例 ID 组成的数组。
          * @type {Array.<string> || null}
          */
         this.InstanceIds = null;
@@ -9265,7 +9265,7 @@ class DeleteAccountsRequest extends  AbstractModel {
         super();
 
         /**
-         * 实例ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例ID相同。
+         * 实例 ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同。
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -9336,7 +9336,7 @@ class DescribeAccountPrivilegesRequest extends  AbstractModel {
         super();
 
         /**
-         * 实例ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例ID相同。
+         * 实例 ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同。
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -9463,13 +9463,13 @@ class DeleteBackupRequest extends  AbstractModel {
         super();
 
         /**
-         * 实例ID，格式如：cdb-c1nl9rpv。与云数据库控制台页面中显示的实例ID相同。
+         * 实例 ID，格式如：cdb-c1nl9rpv。与云数据库控制台页面中显示的实例 ID 相同。
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * 备份任务ID。该任务ID为[创建云数据库备份](https://cloud.tencent.com/document/api/236/15844)接口返回的任务ID。
+         * 备份任务 ID。该任务 ID 为 [创建云数据库备份](https://cloud.tencent.com/document/api/236/15844) 接口返回的任务 ID。
          * @type {number || null}
          */
         this.BackupId = null;
@@ -9498,7 +9498,7 @@ class ModifyTimeWindowRequest extends  AbstractModel {
         super();
 
         /**
-         * 实例ID，格式如：cdb-c1nl9rpv或者cdbro-c1nl9rpv，与云数据库控制台页面中显示的实例ID相同。
+         * 实例 ID，格式如：cdb-c1nl9rpv 或者 cdbro-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同。
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -9510,7 +9510,7 @@ class ModifyTimeWindowRequest extends  AbstractModel {
         this.TimeRanges = null;
 
         /**
-         * 指定修改哪一天的客户时间段，可能的取值为：monday, tuesday, wednesday, thursday, friday, saturday, sunday。如果不指定该值或者为空，则默认一周七天都修改。
+         * 指定修改哪一天的客户时间段，可能的取值为：monday，tuesday，wednesday，thursday，friday，saturday，sunday。如果不指定该值或者为空，则默认一周七天都修改。
          * @type {Array.<string> || null}
          */
         this.Weekdays = null;
@@ -9540,31 +9540,31 @@ class DescribeBackupConfigResponse extends  AbstractModel {
         super();
 
         /**
-         * 备份开始的最早时间点，单位为时刻。例如，2 - 凌晨2:00
+         * 备份开始的最早时间点，单位为时刻。例如，2 - 凌晨 2:00。
          * @type {number || null}
          */
         this.StartTimeMin = null;
 
         /**
-         * 备份开始的最晚时间点，单位为时刻。例如，6 - 凌晨6:00
+         * 备份开始的最晚时间点，单位为时刻。例如，6 - 凌晨 6:00。
          * @type {number || null}
          */
         this.StartTimeMax = null;
 
         /**
-         * 备份过期时间，单位为天
+         * 备份过期时间，单位为天。
          * @type {number || null}
          */
         this.BackupExpireDays = null;
 
         /**
-         * 备份方式，可能的值为：physical - 物理备份，logical - 逻辑备份
+         * 备份方式，可能的值为：physical - 物理备份，logical - 逻辑备份。
          * @type {string || null}
          */
         this.BackupMethod = null;
 
         /**
-         * Binlog过期时间，单位为天
+         * Binlog 过期时间，单位为天。
          * @type {number || null}
          */
         this.BinlogExpireDays = null;
@@ -9603,7 +9603,7 @@ class StartBatchRollbackResponse extends  AbstractModel {
         super();
 
         /**
-         * 异步任务的请求ID，可使用此ID查询异步任务的执行结果
+         * 异步任务的请求 ID，可使用此 ID 查询异步任务的执行结果。
          * @type {string || null}
          */
         this.AsyncRequestId = null;
@@ -9764,13 +9764,13 @@ class VerifyRootAccountRequest extends  AbstractModel {
         super();
 
         /**
-         * 实例ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例ID相同。
+         * 实例 ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同。
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * 实例ROOT账号的密码。
+         * 实例 ROOT 账号的密码。
          * @type {string || null}
          */
         this.Password = null;
@@ -9799,7 +9799,7 @@ class OpenWanServiceResponse extends  AbstractModel {
         super();
 
         /**
-         * 异步任务的请求ID，可使用此ID查询异步任务的执行结果
+         * 异步任务的请求 ID，可使用此 ID 查询异步任务的执行结果。
          * @type {string || null}
          */
         this.AsyncRequestId = null;
@@ -9834,7 +9834,7 @@ class ModifyBackupConfigRequest extends  AbstractModel {
         super();
 
         /**
-         * 实例ID，格式如：cdb-c1nl9rpv。与云数据库控制台页面中显示的实例ID相同。
+         * 实例 ID，格式如：cdb-c1nl9rpv。与云数据库控制台页面中显示的实例ID相同。
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -9883,7 +9883,7 @@ class DescribeBinlogsRequest extends  AbstractModel {
         super();
 
         /**
-         * 实例ID，格式如：cdb-c1nl9rpv。与云数据库控制台页面中显示的实例ID相同。
+         * 实例 ID，格式如：cdb-c1nl9rpv。与云数据库控制台页面中显示的实例 ID 相同。
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -9953,7 +9953,7 @@ class DescribeDBInstanceGTIDRequest extends  AbstractModel {
         super();
 
         /**
-         * 实例ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例ID相同，可使用[查询实例列表](https://cloud.tencent.com/document/api/236/15872) 接口获取，其值为输出参数中字段 InstanceId 的值。
+         * 实例 ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同，可使用 [查询实例列表](https://cloud.tencent.com/document/api/236/15872) 接口获取，其值为输出参数中字段 InstanceId 的值。
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -10016,13 +10016,13 @@ class InquiryPriceUpgradeInstancesResponse extends  AbstractModel {
         super();
 
         /**
-         * 实例价格，单位：分（人民币）
+         * 实例价格，单位：分（人民币）。
          * @type {number || null}
          */
         this.Price = null;
 
         /**
-         * 实例原价，单位：分（人民币）
+         * 实例原价，单位：分（人民币）。
          * @type {number || null}
          */
         this.OriginalPrice = null;

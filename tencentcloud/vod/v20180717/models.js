@@ -308,6 +308,48 @@ class DescribeAllClassRequest extends  AbstractModel {
 }
 
 /**
+ * WeChatMiniProgramPublish请求参数结构体
+ * @class
+ */
+class WeChatMiniProgramPublishRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 媒体文件 ID。
+         * @type {string || null}
+         */
+        this.FileId = null;
+
+        /**
+         * 发布视频所对应的转码模板 ID，为0代表原始视频。
+         * @type {number || null}
+         */
+        this.SourceDefinition = null;
+
+        /**
+         * 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FileId = 'FileId' in params ? params.FileId : null;
+        this.SourceDefinition = 'SourceDefinition' in params ? params.SourceDefinition : null;
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
+
+    }
+}
+
+/**
  * 智能分类任务输入类型
  * @class
  */
@@ -10852,10 +10894,11 @@ class PullUploadRequest extends  AbstractModel {
         this.ExpireTime = null;
 
         /**
-         * 指定上传园区，仅适用于对上传地域有特殊需求的用户。目前支持的园区：
+         * 指定上传园区，目前支持的园区：
 <li>ap-chongqing：重庆园区，</li>
 <li>ap-beijing：北京园区，</li>
 <li>ap-shanghai：上海园区。</li>
+注意：不填此参数默认上传至重庆园区。
          * @type {string || null}
          */
         this.StorageRegion = null;
@@ -14585,6 +14628,7 @@ class DescribeTaskDetailResponse extends  AbstractModel {
 <li>Procedure：视频处理任务；</li>
 <li>EditMedia：视频编辑任务；</li>
 <li>WechatPublish：微信发布任务；</li>
+<li>WechatMiniProgramPublish：微信小程序视频发布任务；</li>
 <li>ComposeMedia：制作媒体文件任务；</li>
 <li>PullUpload：拉取上传媒体文件任务。</li>
 
@@ -14696,6 +14740,13 @@ class DescribeTaskDetailResponse extends  AbstractModel {
         this.CreateImageSpriteTask = null;
 
         /**
+         * 微信小程序发布任务信息，仅当 TaskType 为 WechatMiniProgramPublish，该字段有值。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {WechatMiniProgramPublishTask || null}
+         */
+        this.WechatMiniProgramPublishTask = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -14774,6 +14825,12 @@ class DescribeTaskDetailResponse extends  AbstractModel {
             let obj = new CreateImageSpriteTask2017();
             obj.deserialize(params.CreateImageSpriteTask)
             this.CreateImageSpriteTask = obj;
+        }
+
+        if (params.WechatMiniProgramPublishTask) {
+            let obj = new WechatMiniProgramPublishTask();
+            obj.deserialize(params.WechatMiniProgramPublishTask)
+            this.WechatMiniProgramPublishTask = obj;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -16917,6 +16974,41 @@ class DescribeWatermarkTemplatesResponse extends  AbstractModel {
                 this.WatermarkTemplateSet.push(obj);
             }
         }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * WeChatMiniProgramPublish返回参数结构体
+ * @class
+ */
+class WeChatMiniProgramPublishResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 任务 ID。
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -19808,6 +19900,7 @@ module.exports = {
     AiRecognitionTaskAsrFullTextSegmentItem: AiRecognitionTaskAsrFullTextSegmentItem,
     UserDefineOcrTextReviewTemplateInfoForUpdate: UserDefineOcrTextReviewTemplateInfoForUpdate,
     DescribeAllClassRequest: DescribeAllClassRequest,
+    WeChatMiniProgramPublishRequest: WeChatMiniProgramPublishRequest,
     AiAnalysisTaskClassificationInput: AiAnalysisTaskClassificationInput,
     SvgWatermarkInput: SvgWatermarkInput,
     CreateTranscodeTemplateRequest: CreateTranscodeTemplateRequest,
@@ -20106,6 +20199,7 @@ module.exports = {
     DescribeTranscodeTemplatesRequest: DescribeTranscodeTemplatesRequest,
     PoliticalConfigureInfoForUpdate: PoliticalConfigureInfoForUpdate,
     DescribeWatermarkTemplatesResponse: DescribeWatermarkTemplatesResponse,
+    WeChatMiniProgramPublishResponse: WeChatMiniProgramPublishResponse,
     ImageTransform: ImageTransform,
     FrameTagConfigureInfo: FrameTagConfigureInfo,
     ExecuteFunctionRequest: ExecuteFunctionRequest,

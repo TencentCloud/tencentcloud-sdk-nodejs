@@ -204,7 +204,7 @@ class SignKeyword extends  AbstractModel {
         this.OffsetCoordY = null;
 
         /**
-         * 签章突破宽度
+         * 签章图片宽度
          * @type {string || null}
          */
         this.ImageWidth = null;

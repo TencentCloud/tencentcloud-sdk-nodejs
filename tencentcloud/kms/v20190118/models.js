@@ -53,7 +53,7 @@ class UpdateAliasRequest extends  AbstractModel {
         super();
 
         /**
-         * 新的别名，1-64个字符或数字的组合
+         * 新的别名，1-60个字符或数字的组合
          * @type {string || null}
          */
         this.Alias = null;
@@ -129,18 +129,36 @@ class ReEncryptRequest extends  AbstractModel {
 }
 
 /**
- * UpdateKeyDescription返回参数结构体
+ * GenerateDataKey请求参数结构体
  * @class
  */
-class UpdateKeyDescriptionResponse extends  AbstractModel {
+class GenerateDataKeyRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * CMK全局唯一标识符
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.KeyId = null;
+
+        /**
+         * 指定生成Datakey的加密算法以及Datakey大小，AES_128或者AES_256。
+         * @type {string || null}
+         */
+        this.KeySpec = null;
+
+        /**
+         * 生成的DataKey的长度，同时指定NumberOfBytes和KeySpec时，以NumberOfBytes为准。最小值为1， 最大值为1024
+         * @type {number || null}
+         */
+        this.NumberOfBytes = null;
+
+        /**
+         * key/value对的json字符串，如果使用该字段，则返回的DataKey在解密时需要填入相同的字符串
+         * @type {string || null}
+         */
+        this.EncryptionContext = null;
 
     }
 
@@ -151,7 +169,10 @@ class UpdateKeyDescriptionResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.KeyId = 'KeyId' in params ? params.KeyId : null;
+        this.KeySpec = 'KeySpec' in params ? params.KeySpec : null;
+        this.NumberOfBytes = 'NumberOfBytes' in params ? params.NumberOfBytes : null;
+        this.EncryptionContext = 'EncryptionContext' in params ? params.EncryptionContext : null;
 
     }
 }
@@ -270,7 +291,7 @@ class CreateKeyRequest extends  AbstractModel {
         super();
 
         /**
-         * 作为密钥更容易辨识，更容易被人看懂的别名， 不可为空，1-60个字符或数字的组合
+         * 作为密钥更容易辨识，更容易被人看懂的别名， 不可为空，1-60个字母数字 - _ 的组合。以 kms- 作为前缀的用于云产品使用，Alias 不可重复。
          * @type {string || null}
          */
         this.Alias = null;
@@ -367,49 +388,24 @@ class DisableKeyResponse extends  AbstractModel {
 }
 
 /**
- * CreateKey返回参数结构体
+ * Decrypt返回参数结构体
  * @class
  */
-class CreateKeyResponse extends  AbstractModel {
+class DecryptResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * CMK的全局唯一标识符
+         * CMK的全局唯一标识
          * @type {string || null}
          */
         this.KeyId = null;
 
         /**
-         * 作为密钥更容易辨识，更容易被人看懂的别名
+         * 解密后的明文。该字段是base64编码的，为了得到原始明文，调用方需要进行base64解码
          * @type {string || null}
          */
-        this.Alias = null;
-
-        /**
-         * 密钥创建时间，unix时间戳
-         * @type {number || null}
-         */
-        this.CreateTime = null;
-
-        /**
-         * CMK的描述
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.Description = null;
-
-        /**
-         * CMK的状态
-         * @type {string || null}
-         */
-        this.KeyState = null;
-
-        /**
-         * CMK的用途
-         * @type {string || null}
-         */
-        this.KeyUsage = null;
+        this.Plaintext = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -427,11 +423,7 @@ class CreateKeyResponse extends  AbstractModel {
             return;
         }
         this.KeyId = 'KeyId' in params ? params.KeyId : null;
-        this.Alias = 'Alias' in params ? params.Alias : null;
-        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
-        this.Description = 'Description' in params ? params.Description : null;
-        this.KeyState = 'KeyState' in params ? params.KeyState : null;
-        this.KeyUsage = 'KeyUsage' in params ? params.KeyUsage : null;
+        this.Plaintext = 'Plaintext' in params ? params.Plaintext : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -494,30 +486,18 @@ class ReEncryptResponse extends  AbstractModel {
 }
 
 /**
- * Encrypt返回参数结构体
+ * DescribeKey请求参数结构体
  * @class
  */
-class EncryptResponse extends  AbstractModel {
+class DescribeKeyRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 加密后的密文
-         * @type {string || null}
-         */
-        this.CiphertextBlob = null;
-
-        /**
-         * 加密使用的CMK的全局唯一标识
+         * CMK全局唯一标识符
          * @type {string || null}
          */
         this.KeyId = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
 
     }
 
@@ -528,9 +508,35 @@ class EncryptResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.CiphertextBlob = 'CiphertextBlob' in params ? params.CiphertextBlob : null;
         this.KeyId = 'KeyId' in params ? params.KeyId : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CancelKeyDeletion请求参数结构体
+ * @class
+ */
+class CancelKeyDeletionRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 需要被取消删除的CMK的唯一标志
+         * @type {string || null}
+         */
+        this.KeyId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.KeyId = 'KeyId' in params ? params.KeyId : null;
 
     }
 }
@@ -564,6 +570,41 @@ class EnableKeyResponse extends  AbstractModel {
 }
 
 /**
+ * ScheduleKeyDeletion请求参数结构体
+ * @class
+ */
+class ScheduleKeyDeletionRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * CMK的唯一标志
+         * @type {string || null}
+         */
+        this.KeyId = null;
+
+        /**
+         * 计划删除时间区间[7,30]
+         * @type {number || null}
+         */
+        this.PendingWindowInDays = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.KeyId = 'KeyId' in params ? params.KeyId : null;
+        this.PendingWindowInDays = 'PendingWindowInDays' in params ? params.PendingWindowInDays : null;
+
+    }
+}
+
+/**
  * GetServiceStatus返回参数结构体
  * @class
  */
@@ -576,6 +617,13 @@ class GetServiceStatusResponse extends  AbstractModel {
          * @type {boolean || null}
          */
         this.ServiceEnabled = null;
+
+        /**
+         * 服务不可用类型： 0-未购买，1-正常， 2-欠费停服， 3-资源释放
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.InvalidType = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -593,6 +641,7 @@ class GetServiceStatusResponse extends  AbstractModel {
             return;
         }
         this.ServiceEnabled = 'ServiceEnabled' in params ? params.ServiceEnabled : null;
+        this.InvalidType = 'InvalidType' in params ? params.InvalidType : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -690,6 +739,34 @@ class EnableKeysRequest extends  AbstractModel {
 }
 
 /**
+ * UpdateKeyDescription返回参数结构体
+ * @class
+ */
+class UpdateKeyDescriptionResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * Encrypt请求参数结构体
  * @class
  */
@@ -732,24 +809,49 @@ class EncryptRequest extends  AbstractModel {
 }
 
 /**
- * Decrypt返回参数结构体
+ * CreateKey返回参数结构体
  * @class
  */
-class DecryptResponse extends  AbstractModel {
+class CreateKeyResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * CMK的全局唯一标识
+         * CMK的全局唯一标识符
          * @type {string || null}
          */
         this.KeyId = null;
 
         /**
-         * 解密后的明文。该字段是base64编码的，为了得到原始明文，调用方需要进行base64解码
+         * 作为密钥更容易辨识，更容易被人看懂的别名
          * @type {string || null}
          */
-        this.Plaintext = null;
+        this.Alias = null;
+
+        /**
+         * 密钥创建时间，unix时间戳
+         * @type {number || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * CMK的描述
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * CMK的状态
+         * @type {string || null}
+         */
+        this.KeyState = null;
+
+        /**
+         * CMK的用途
+         * @type {string || null}
+         */
+        this.KeyUsage = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -767,7 +869,11 @@ class DecryptResponse extends  AbstractModel {
             return;
         }
         this.KeyId = 'KeyId' in params ? params.KeyId : null;
-        this.Plaintext = 'Plaintext' in params ? params.Plaintext : null;
+        this.Alias = 'Alias' in params ? params.Alias : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.KeyState = 'KeyState' in params ? params.KeyState : null;
+        this.KeyUsage = 'KeyUsage' in params ? params.KeyUsage : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -925,36 +1031,24 @@ class ListKeyDetailResponse extends  AbstractModel {
 }
 
 /**
- * GenerateDataKey请求参数结构体
+ * CancelKeyDeletion返回参数结构体
  * @class
  */
-class GenerateDataKeyRequest extends  AbstractModel {
+class CancelKeyDeletionResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * CMK全局唯一标识符
+         * 唯一标志被取消删除的CMK。
          * @type {string || null}
          */
         this.KeyId = null;
 
         /**
-         * 指定生成Datakey的加密算法以及Datakey大小，AES_128或者AES_256。默认为AES_256
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.KeySpec = null;
-
-        /**
-         * 生成的DataKey的长度，同时指定NumberOfBytes和KeySpec时，以NumberOfBytes为准。最小值为1， 最大值为1024
-         * @type {number || null}
-         */
-        this.NumberOfBytes = null;
-
-        /**
-         * key/value对的json字符串，如果使用该字段，则返回的DataKey在解密时需要填入相同的字符串
-         * @type {string || null}
-         */
-        this.EncryptionContext = null;
+        this.RequestId = null;
 
     }
 
@@ -966,9 +1060,7 @@ class GenerateDataKeyRequest extends  AbstractModel {
             return;
         }
         this.KeyId = 'KeyId' in params ? params.KeyId : null;
-        this.KeySpec = 'KeySpec' in params ? params.KeySpec : null;
-        this.NumberOfBytes = 'NumberOfBytes' in params ? params.NumberOfBytes : null;
-        this.EncryptionContext = 'EncryptionContext' in params ? params.EncryptionContext : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1099,7 +1191,7 @@ class KeyMetadata extends  AbstractModel {
         this.Description = null;
 
         /**
-         * CMK的状态， Enabled 或者 Disabled 或者 Deleted
+         * CMK的状态， Enabled 或者 Disabled 或者PendingDelete状态
          * @type {string || null}
          */
         this.KeyState = null;
@@ -1140,6 +1232,13 @@ class KeyMetadata extends  AbstractModel {
          */
         this.NextRotateTime = null;
 
+        /**
+         * 计划删除的时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.DeletionDate = null;
+
     }
 
     /**
@@ -1160,6 +1259,7 @@ class KeyMetadata extends  AbstractModel {
         this.KeyRotationEnabled = 'KeyRotationEnabled' in params ? params.KeyRotationEnabled : null;
         this.Owner = 'Owner' in params ? params.Owner : null;
         this.NextRotateTime = 'NextRotateTime' in params ? params.NextRotateTime : null;
+        this.DeletionDate = 'DeletionDate' in params ? params.DeletionDate : null;
 
     }
 }
@@ -1249,6 +1349,48 @@ class UpdateAliasResponse extends  AbstractModel {
 }
 
 /**
+ * ScheduleKeyDeletion返回参数结构体
+ * @class
+ */
+class ScheduleKeyDeletionResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 计划删除执行时间
+         * @type {number || null}
+         */
+        this.DeletionDate = null;
+
+        /**
+         * 唯一标志被计划删除的CMK
+         * @type {string || null}
+         */
+        this.KeyId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DeletionDate = 'DeletionDate' in params ? params.DeletionDate : null;
+        this.KeyId = 'KeyId' in params ? params.KeyId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * Decrypt请求参数结构体
  * @class
  */
@@ -1316,7 +1458,7 @@ class ListKeyDetailRequest extends  AbstractModel {
         this.OrderType = null;
 
         /**
-         * 根据CMK状态筛选， 0表示全部CMK， 1 表示仅查询Enabled CMK， 2 表示仅查询Disabled CMK
+         * 根据CMK状态筛选， 0表示全部CMK， 1 表示仅查询Enabled CMK， 2 表示仅查询Disabled CMK，3表示查询PendingDelete CMK(处于计划删除状态的Key)
          * @type {number || null}
          */
         this.KeyState = null;
@@ -1451,18 +1593,30 @@ class DescribeKeyResponse extends  AbstractModel {
 }
 
 /**
- * DescribeKey请求参数结构体
+ * Encrypt返回参数结构体
  * @class
  */
-class DescribeKeyRequest extends  AbstractModel {
+class EncryptResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * CMK全局唯一标识符
+         * 加密后的密文
+         * @type {string || null}
+         */
+        this.CiphertextBlob = null;
+
+        /**
+         * 加密使用的CMK的全局唯一标识
          * @type {string || null}
          */
         this.KeyId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
 
     }
 
@@ -1473,7 +1627,9 @@ class DescribeKeyRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.CiphertextBlob = 'CiphertextBlob' in params ? params.CiphertextBlob : null;
         this.KeyId = 'KeyId' in params ? params.KeyId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1559,40 +1715,44 @@ module.exports = {
     DisableKeysRequest: DisableKeysRequest,
     UpdateAliasRequest: UpdateAliasRequest,
     ReEncryptRequest: ReEncryptRequest,
-    UpdateKeyDescriptionResponse: UpdateKeyDescriptionResponse,
+    GenerateDataKeyRequest: GenerateDataKeyRequest,
     GenerateDataKeyResponse: GenerateDataKeyResponse,
     EnableKeyRotationRequest: EnableKeyRotationRequest,
     EnableKeyRotationResponse: EnableKeyRotationResponse,
     CreateKeyRequest: CreateKeyRequest,
     EnableKeysResponse: EnableKeysResponse,
     DisableKeyResponse: DisableKeyResponse,
-    CreateKeyResponse: CreateKeyResponse,
+    DecryptResponse: DecryptResponse,
     ReEncryptResponse: ReEncryptResponse,
-    EncryptResponse: EncryptResponse,
+    DescribeKeyRequest: DescribeKeyRequest,
+    CancelKeyDeletionRequest: CancelKeyDeletionRequest,
     EnableKeyResponse: EnableKeyResponse,
+    ScheduleKeyDeletionRequest: ScheduleKeyDeletionRequest,
     GetServiceStatusResponse: GetServiceStatusResponse,
     Key: Key,
     GetKeyRotationStatusResponse: GetKeyRotationStatusResponse,
     EnableKeysRequest: EnableKeysRequest,
+    UpdateKeyDescriptionResponse: UpdateKeyDescriptionResponse,
     EncryptRequest: EncryptRequest,
-    DecryptResponse: DecryptResponse,
+    CreateKeyResponse: CreateKeyResponse,
     EnableKeyRequest: EnableKeyRequest,
     GetKeyRotationStatusRequest: GetKeyRotationStatusRequest,
     DescribeKeysResponse: DescribeKeysResponse,
     ListKeyDetailResponse: ListKeyDetailResponse,
-    GenerateDataKeyRequest: GenerateDataKeyRequest,
+    CancelKeyDeletionResponse: CancelKeyDeletionResponse,
     ListKeysRequest: ListKeysRequest,
     ListKeysResponse: ListKeysResponse,
     KeyMetadata: KeyMetadata,
     DisableKeysResponse: DisableKeysResponse,
     DisableKeyRotationResponse: DisableKeyRotationResponse,
     UpdateAliasResponse: UpdateAliasResponse,
+    ScheduleKeyDeletionResponse: ScheduleKeyDeletionResponse,
     DecryptRequest: DecryptRequest,
     ListKeyDetailRequest: ListKeyDetailRequest,
     UpdateKeyDescriptionRequest: UpdateKeyDescriptionRequest,
     DisableKeyRequest: DisableKeyRequest,
     DescribeKeyResponse: DescribeKeyResponse,
-    DescribeKeyRequest: DescribeKeyRequest,
+    EncryptResponse: EncryptResponse,
     DescribeKeysRequest: DescribeKeysRequest,
     GetServiceStatusRequest: GetServiceStatusRequest,
     DisableKeyRotationRequest: DisableKeyRotationRequest,

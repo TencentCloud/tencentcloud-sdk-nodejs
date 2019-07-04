@@ -230,7 +230,7 @@ class CdbClient extends AbstractClient {
     }
     
     /**
-     * 本接口(DescribeDBInstanceGTID)用于查询云数据库实例是否开通了GTID，不支持版本为5.5以及以下的实例。
+     * 本接口(DescribeDBInstanceGTID)用于查询云数据库实例是否开通了 GTID，不支持版本为 5.5 以及以下的实例。
      * @param {DescribeDBInstanceGTIDRequest} req
      * @param {function(string, DescribeDBInstanceGTIDResponse):void} cb
      * @public
@@ -263,7 +263,7 @@ class CdbClient extends AbstractClient {
     }
 
     /**
-     * 本接口(UpgradeDBInstance)用于升级云数据库实例，实例类型支持主实例、灾备实例和只读实例
+     * 本接口(UpgradeDBInstance)用于升级云数据库实例，实例类型支持主实例、灾备实例和只读实例。
      * @param {UpgradeDBInstanceRequest} req
      * @param {function(string, UpgradeDBInstanceResponse):void} cb
      * @public
@@ -353,7 +353,7 @@ class CdbClient extends AbstractClient {
     }
 
     /**
-     * 本接口(OpenDBInstanceGTID)用于开启云数据库实例的GTID，只支持版本为5.6以及以上的实例。
+     * 本接口(OpenDBInstanceGTID)用于开启云数据库实例的 GTID，只支持版本为 5.6 以及以上的实例。
      * @param {OpenDBInstanceGTIDRequest} req
      * @param {function(string, OpenDBInstanceGTIDResponse):void} cb
      * @public
@@ -430,7 +430,7 @@ class CdbClient extends AbstractClient {
     }
 
     /**
-     * 可以对实例标签进行添加、修改或者删除
+     * 本接口(ModifyInstanceTag)用于对实例标签进行添加、修改或者删除。
      * @param {ModifyInstanceTagRequest} req
      * @param {function(string, ModifyInstanceTagResponse):void} cb
      * @public
@@ -509,13 +509,13 @@ class CdbClient extends AbstractClient {
     /**
      * 本接口(CreateDBInstanceHour)用于创建按量计费的实例，可通过传入实例规格、MySQL 版本号和数量等信息创建云数据库实例，支持主实例、灾备实例和只读实例的创建。
 
-该接口为异步接口，您还可以使用[查询实例列表](https://cloud.tencent.com/document/api/236/15872)接口查询该实例的详细信息。当该实例的Status为1，且TaskStatus为0，表示实例已经发货成功。
+该接口为异步接口，您还可以使用 [查询实例列表](https://cloud.tencent.com/document/api/236/15872) 接口查询该实例的详细信息。当该实例的 Status 为 1，且 TaskStatus 为 0，表示实例已经发货成功。
 
-1. 首先请使用[获取云数据库可售卖规格](https://cloud.tencent.com/document/api/236/17229)接口查询可创建的实例规格信息，然后请使用[查询数据库价格](https://cloud.tencent.com/document/api/236/18566)接口查询可创建实例的售卖价格；
+1. 首先请使用 [获取云数据库可售卖规格](https://cloud.tencent.com/document/api/236/17229) 接口查询可创建的实例规格信息，然后请使用 [查询数据库价格](https://cloud.tencent.com/document/api/236/18566) 接口查询可创建实例的售卖价格；
 2. 单次创建实例最大支持 100 个，实例时长最大支持 36 个月；
-3. 支持创建 MySQL5.5、MySQL5.6和MySQL5.7 版本；
+3. 支持创建 MySQL 5.5、MySQL 5.6 和 MySQL 5.7 版本；
 4. 支持创建主实例、灾备实例和只读实例；
-5. 当入参指定Port或ParamList时，该实例会进行初始化操作；
+5. 当入参指定 Port，ParamList 或 Password 时，该实例会进行初始化操作；
      * @param {CreateDBInstanceHourRequest} req
      * @param {function(string, CreateDBInstanceHourResponse):void} cb
      * @public
@@ -570,7 +570,7 @@ class CdbClient extends AbstractClient {
     }
 
     /**
-     * 本接口(ModifyDBInstanceVipVport)用于修改云数据库实例的IP和端口号，也可进行基础网络转VPC网络和VPC网络下的子网变更。
+     * 本接口(ModifyDBInstanceVipVport)用于修改云数据库实例的IP和端口号，也可进行基础网络转 VPC 网络和 VPC 网络下的子网变更。
      * @param {ModifyDBInstanceVipVportRequest} req
      * @param {function(string, ModifyDBInstanceVipVportResponse):void} cb
      * @public
@@ -640,7 +640,7 @@ class CdbClient extends AbstractClient {
     }
 
     /**
-     * 本接口(DescribeDBInstances)用于查询云数据库实例列表，支持通过项目ID、实例ID、访问地址、实例状态等过滤条件来筛选实例。支持查询主实例、灾备实例和只读实例信息列表。
+     * 本接口(DescribeDBInstances)用于查询云数据库实例列表，支持通过项目 ID、实例 ID、访问地址、实例状态等过滤条件来筛选实例。支持查询主实例、灾备实例和只读实例信息列表。
      * @param {DescribeDBInstancesRequest} req
      * @param {function(string, DescribeDBInstancesResponse):void} cb
      * @public
@@ -651,7 +651,7 @@ class CdbClient extends AbstractClient {
     }
 
     /**
-     * 本接口(VerifyRootAccount)用于校验云数据库实例的ROOT账号是否有足够的权限进行授权操作。
+     * 本接口(VerifyRootAccount)用于校验云数据库实例的 ROOT 账号是否有足够的权限进行授权操作。
      * @param {VerifyRootAccountRequest} req
      * @param {function(string, VerifyRootAccountResponse):void} cb
      * @public
@@ -730,7 +730,7 @@ class CdbClient extends AbstractClient {
     /**
      * 本接口(DescribeDBPrice)用于查询云数据库实例的价格，支持查询按量计费或者包年包月的价格。可传入实例类型、购买时长、购买数量、内存大小、硬盘大小和可用区信息等来查询实例价格。
 
-注意：对某个地域进行询价，请使用对应地域的接入点，接入点信息请参照<a href="https://cloud.tencent.com/document/api/236/15832">服务地址</a>文档。例如：对广州地域进行询价，请把请求发到：cdb.ap-guangzhou.tencentcloudapi.com。同理对上海地域询价，把请求发到：cdb.ap-shanghai.tencentcloudapi.com
+注意：对某个地域进行询价，请使用对应地域的接入点，接入点信息请参照 <a href="https://cloud.tencent.com/document/api/236/15832">服务地址</a> 文档。例如：对广州地域进行询价，请把请求发到：cdb.ap-guangzhou.tencentcloudapi.com。同理对上海地域询价，把请求发到：cdb.ap-shanghai.tencentcloudapi.com。
      * @param {DescribeDBPriceRequest} req
      * @param {function(string, DescribeDBPriceResponse):void} cb
      * @public
@@ -765,13 +765,13 @@ class CdbClient extends AbstractClient {
     /**
      * 本接口(CreateDBInstance)用于创建包年包月的云数据库实例（包括主实例、灾备实例和只读实例），可通过传入实例规格、MySQL 版本号、购买时长和数量等信息创建云数据库实例。
 
-该接口为异步接口，您还可以使用[查询实例列表](https://cloud.tencent.com/document/api/236/15872)接口查询该实例的详细信息。当该实例的Status为1，且TaskStatus为0，表示实例已经发货成功。
+该接口为异步接口，您还可以使用 [查询实例列表](https://cloud.tencent.com/document/api/236/15872) 接口查询该实例的详细信息。当该实例的 Status 为1，且 TaskStatus 为0，表示实例已经发货成功。
 
-1. 首先请使用[获取云数据库可售卖规格](https://cloud.tencent.com/document/api/236/17229)接口查询可创建的实例规格信息，然后请使用[查询数据库价格](https://cloud.tencent.com/document/api/236/18566)接口查询可创建实例的售卖价格；
+1. 首先请使用 [获取云数据库可售卖规格](https://cloud.tencent.com/document/api/236/17229) 接口查询可创建的实例规格信息，然后请使用 [查询数据库价格](https://cloud.tencent.com/document/api/236/18566) 接口查询可创建实例的售卖价格；
 2. 单次创建实例最大支持 100 个，实例时长最大支持 36 个月；
-3. 支持创建 MySQL5.5 、 MySQL5.6 、 MySQL5.7 版本；
+3. 支持创建 MySQL 5.5 、 MySQL 5.6 、 MySQL 5.7 版本；
 4. 支持创建主实例、只读实例、灾备实例；
-5. 当入参指定Port或ParamList时，该实例会进行初始化操作；
+5. 当入参指定 Port，ParamList 或 Password 时，该实例会进行初始化操作；
      * @param {CreateDBInstanceRequest} req
      * @param {function(string, CreateDBInstanceResponse):void} cb
      * @public
@@ -826,7 +826,7 @@ class CdbClient extends AbstractClient {
     }
 
     /**
-     * 本接口(SwitchForUpgrade)用于切换访问新实例，针对主升级中的实例处于待切换状态时，用户可主动发起该流程
+     * 本接口(SwitchForUpgrade)用于切换访问新实例，针对主升级中的实例处于待切换状态时，用户可主动发起该流程。
      * @param {SwitchForUpgradeRequest} req
      * @param {function(string, SwitchForUpgradeResponse):void} cb
      * @public
@@ -892,7 +892,7 @@ class CdbClient extends AbstractClient {
     }
 
     /**
-     * 获取实例绑定的标签
+     * 本接口(DescribeTagsOfInstanceIds)用于获取云数据库实例的标签信息。
      * @param {DescribeTagsOfInstanceIdsRequest} req
      * @param {function(string, DescribeTagsOfInstanceIdsResponse):void} cb
      * @public
@@ -993,7 +993,7 @@ class CdbClient extends AbstractClient {
     /**
      * 本接口(OpenWanService)用于开通实例外网访问。
 
-注意，实例开通外网访问之前，需要先将实例进行[实例初始化](https://cloud.tencent.com/document/api/236/15873)操作。
+注意，实例开通外网访问之前，需要先将实例进行 [实例初始化](https://cloud.tencent.com/document/api/236/15873) 操作。
      * @param {OpenWanServiceRequest} req
      * @param {function(string, OpenWanServiceResponse):void} cb
      * @public
@@ -1037,7 +1037,7 @@ class CdbClient extends AbstractClient {
     }
 
     /**
-     * 本接口(DeleteTimeWindow)用于删除云数据库实例的维护时间窗口。删除实例维护时间窗口之后，默认的维护时间窗为 03:00-04:00，即当选择在维护时间窗口内切换访问新实例时，默认会在03:00-04:00点进行切换访问新实例。
+     * 本接口(DeleteTimeWindow)用于删除云数据库实例的维护时间窗口。删除实例维护时间窗口之后，默认的维护时间窗为 03:00-04:00，即当选择在维护时间窗口内切换访问新实例时，默认会在 03:00-04:00 点进行切换访问新实例。
      * @param {DeleteTimeWindowRequest} req
      * @param {function(string, DeleteTimeWindowResponse):void} cb
      * @public
