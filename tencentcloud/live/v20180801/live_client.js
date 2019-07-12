@@ -205,7 +205,6 @@ const EnableLiveDomainRequest = models.EnableLiveDomainRequest;
 const ForbidLiveDomainResponse = models.ForbidLiveDomainResponse;
 const DescribeLiveSnapshotRulesRequest = models.DescribeLiveSnapshotRulesRequest;
 const CreateLiveTranscodeRuleResponse = models.CreateLiveTranscodeRuleResponse;
-const SetLiveWatermarkStatusResponse = models.SetLiveWatermarkStatusResponse;
 const CreateLiveCallbackRuleResponse = models.CreateLiveCallbackRuleResponse;
 const DescribeLiveRecordTemplateResponse = models.DescribeLiveRecordTemplateResponse;
 const DescribeVisitTopSumInfoListResponse = models.DescribeVisitTopSumInfoListResponse;
@@ -217,7 +216,6 @@ const HlsSpecialParam = models.HlsSpecialParam;
 const DescribeLiveRecordRulesResponse = models.DescribeLiveRecordRulesResponse;
 const DescribeBillBandwidthAndFluxListResponse = models.DescribeBillBandwidthAndFluxListResponse;
 const DescribeLiveDomainPlayInfoListResponse = models.DescribeLiveDomainPlayInfoListResponse;
-const SetLiveWatermarkStatusRequest = models.SetLiveWatermarkStatusRequest;
 const HttpCodeValue = models.HttpCodeValue;
 const DescribeLiveStreamOnlineListRequest = models.DescribeLiveStreamOnlineListRequest;
 const DeleteLiveSnapshotTemplateResponse = models.DeleteLiveSnapshotTemplateResponse;
@@ -634,17 +632,6 @@ class LiveClient extends AbstractClient {
     }
 
     /**
-     * 解绑域名证书
-     * @param {UnBindLiveDomainCertRequest} req
-     * @param {function(string, UnBindLiveDomainCertResponse):void} cb
-     * @public
-     */
-    UnBindLiveDomainCert(req, cb) {
-        let resp = new UnBindLiveDomainCertResponse();
-        this.request("UnBindLiveDomainCert", req, resp, cb);
-    }
-
-    /**
      * 查询下行播放错误码信息。
      * @param {DescribePlayErrorCodeSumInfoListRequest} req
      * @param {function(string, DescribePlayErrorCodeSumInfoListResponse):void} cb
@@ -947,14 +934,14 @@ class LiveClient extends AbstractClient {
     }
 
     /**
-     * 设置水印是否启用
-     * @param {SetLiveWatermarkStatusRequest} req
-     * @param {function(string, SetLiveWatermarkStatusResponse):void} cb
+     * 解绑域名证书
+     * @param {UnBindLiveDomainCertRequest} req
+     * @param {function(string, UnBindLiveDomainCertResponse):void} cb
      * @public
      */
-    SetLiveWatermarkStatus(req, cb) {
-        let resp = new SetLiveWatermarkStatusResponse();
-        this.request("SetLiveWatermarkStatus", req, resp, cb);
+    UnBindLiveDomainCert(req, cb) {
+        let resp = new UnBindLiveDomainCertResponse();
+        this.request("UnBindLiveDomainCert", req, resp, cb);
     }
 
     /**

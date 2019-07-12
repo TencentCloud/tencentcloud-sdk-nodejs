@@ -16,12 +16,14 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
+const DescribeFilterResultListResponse = models.DescribeFilterResultListResponse;
 const VoiceFilter = models.VoiceFilter;
 const VoiceFilterRequest = models.VoiceFilterRequest;
 const VoiceFilterResponse = models.VoiceFilterResponse;
-const VoiceFilterInfo = models.VoiceFilterInfo;
-const DescribeFilterResultListResponse = models.DescribeFilterResultListResponse;
 const DescribeFilterResultListRequest = models.DescribeFilterResultListRequest;
+const VoiceFilterInfo = models.VoiceFilterInfo;
+const DescribeFilterResultResponse = models.DescribeFilterResultResponse;
+const DescribeFilterResultRequest = models.DescribeFilterResultRequest;
 
 
 /**
@@ -34,6 +36,17 @@ class GmeClient extends AbstractClient {
         super("gme.tencentcloudapi.com", "2018-07-11", credential, region, profile);
     }
     
+    /**
+     * 根据应用ID和文件ID查询识别结果
+     * @param {DescribeFilterResultRequest} req
+     * @param {function(string, DescribeFilterResultResponse):void} cb
+     * @public
+     */
+    DescribeFilterResult(req, cb) {
+        let resp = new DescribeFilterResultResponse();
+        this.request("DescribeFilterResult", req, resp, cb);
+    }
+
     /**
      * 根据日期查询识别结果列表
      * @param {DescribeFilterResultListRequest} req

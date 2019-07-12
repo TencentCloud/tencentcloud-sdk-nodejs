@@ -2379,7 +2379,7 @@ class CreateParamTemplateResponse extends  AbstractModel {
         super();
 
         /**
-         * 参数模板ID。
+         * 参数模板 ID。
          * @type {number || null}
          */
         this.TemplateId = null;
@@ -3427,7 +3427,7 @@ class DescribeDBInstancesRequest extends  AbstractModel {
         this.Limit = null;
 
         /**
-         * 安全组 ID。
+         * 安全组 ID。当使用安全组 ID 为过滤条件时，需指定 WithSecurityGroup 参数为 1。
          * @type {string || null}
          */
         this.SecurityGroupId = null;
@@ -3493,7 +3493,7 @@ class DescribeDBInstancesRequest extends  AbstractModel {
         this.OrderDirection = null;
 
         /**
-         * 是否包含安全组详细信息，可取值：0 - 不包含，1 - 包含。
+         * 是否以安全组 ID 为过滤条件。
          * @type {number || null}
          */
         this.WithSecurityGroup = null;
@@ -5534,6 +5534,34 @@ class DescribeSupportedPrivilegesResponse extends  AbstractModel {
 }
 
 /**
+ * OfflineIsolatedInstances请求参数结构体
+ * @class
+ */
+class OfflineIsolatedInstancesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例 ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同。
+         * @type {Array.<string> || null}
+         */
+        this.InstanceIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
+
+    }
+}
+
+/**
  * ModifyDBInstanceName请求参数结构体
  * @class
  */
@@ -6995,6 +7023,34 @@ class InstanceInfo extends  AbstractModel {
 }
 
 /**
+ * OfflineIsolatedInstances返回参数结构体
+ * @class
+ */
+class OfflineIsolatedInstancesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * 数据库权限
  * @class
  */
@@ -7830,13 +7886,13 @@ class CreateParamTemplateRequest extends  AbstractModel {
         this.Description = null;
 
         /**
-         * mysql版本。
+         * MySQL 版本号。
          * @type {string || null}
          */
         this.EngineVersion = null;
 
         /**
-         * 源参数模板ID。
+         * 源参数模板 ID。
          * @type {number || null}
          */
         this.TemplateId = null;
@@ -10160,6 +10216,7 @@ module.exports = {
     SlaveInfo: SlaveInfo,
     TagInfo: TagInfo,
     DescribeSupportedPrivilegesResponse: DescribeSupportedPrivilegesResponse,
+    OfflineIsolatedInstancesRequest: OfflineIsolatedInstancesRequest,
     ModifyDBInstanceNameRequest: ModifyDBInstanceNameRequest,
     TagInfoUnit: TagInfoUnit,
     OpenDBInstanceGTIDRequest: OpenDBInstanceGTIDRequest,
@@ -10186,6 +10243,7 @@ module.exports = {
     DescribeDBInstanceConfigRequest: DescribeDBInstanceConfigRequest,
     DescribeBackupTablesRequest: DescribeBackupTablesRequest,
     InstanceInfo: InstanceInfo,
+    OfflineIsolatedInstancesResponse: OfflineIsolatedInstancesResponse,
     DatabasePrivilege: DatabasePrivilege,
     ModifyDBInstanceSecurityGroupsResponse: ModifyDBInstanceSecurityGroupsResponse,
     ModifyDBInstanceNameResponse: ModifyDBInstanceNameResponse,

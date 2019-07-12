@@ -126,6 +126,7 @@ const DeviceNetInfo = models.DeviceNetInfo;
 const SlaveInfo = models.SlaveInfo;
 const TagInfo = models.TagInfo;
 const DescribeSupportedPrivilegesResponse = models.DescribeSupportedPrivilegesResponse;
+const OfflineIsolatedInstancesRequest = models.OfflineIsolatedInstancesRequest;
 const ModifyDBInstanceNameRequest = models.ModifyDBInstanceNameRequest;
 const TagInfoUnit = models.TagInfoUnit;
 const OpenDBInstanceGTIDRequest = models.OpenDBInstanceGTIDRequest;
@@ -152,6 +153,7 @@ const VerifyRootAccountResponse = models.VerifyRootAccountResponse;
 const DescribeDBInstanceConfigRequest = models.DescribeDBInstanceConfigRequest;
 const DescribeBackupTablesRequest = models.DescribeBackupTablesRequest;
 const InstanceInfo = models.InstanceInfo;
+const OfflineIsolatedInstancesResponse = models.OfflineIsolatedInstancesResponse;
 const DatabasePrivilege = models.DatabasePrivilege;
 const ModifyDBInstanceSecurityGroupsResponse = models.ModifyDBInstanceSecurityGroupsResponse;
 const ModifyDBInstanceNameResponse = models.ModifyDBInstanceNameResponse;
@@ -375,7 +377,7 @@ class CdbClient extends AbstractClient {
     }
 
     /**
-     * 本接口(IsolateDBInstance)用于销毁云数据库实例，销毁之后不能通过IP和端口访问数据库，按量计费实例销毁后直接下线。
+     * 本接口(IsolateDBInstance)用于隔离云数据库实例，隔离后不能通过IP和端口访问数据库。隔离的实例可在回收站中进行开机。若为欠费隔离，请尽快进行冲正。
      * @param {IsolateDBInstanceRequest} req
      * @param {function(string, IsolateDBInstanceResponse):void} cb
      * @public
@@ -944,6 +946,21 @@ class CdbClient extends AbstractClient {
     CreateAccounts(req, cb) {
         let resp = new CreateAccountsResponse();
         this.request("CreateAccounts", req, resp, cb);
+    }
+
+    /**
+     * 本接口(OfflineIsolatedInstances)用于立即下线隔离状态的云数据库实例。进行操作的实例状态必须为隔离状态，即通过 [查询实例列表](https://cloud.tencent.com/document/api/236/15872) 接口查询到 Status 值为 5 的实例。
+
+该接口为异步操作，部分资源的回收可能存在延迟。您可以通过使用 [查询实例列表](https://cloud.tencent.com/document/api/236/15872) 接口，指定实例 InstanceId 和状态 Status 为 [5,6,7] 进行查询，若返回实例为空，则实例资源已全部释放。
+
+注意，实例下线后，相关资源和数据将无法找回，请谨慎操作。
+     * @param {OfflineIsolatedInstancesRequest} req
+     * @param {function(string, OfflineIsolatedInstancesResponse):void} cb
+     * @public
+     */
+    OfflineIsolatedInstances(req, cb) {
+        let resp = new OfflineIsolatedInstancesResponse();
+        this.request("OfflineIsolatedInstances", req, resp, cb);
     }
 
     /**

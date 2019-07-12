@@ -96,6 +96,7 @@ const ScheduledAction = models.ScheduledAction;
 const CompleteLifecycleActionResponse = models.CompleteLifecycleActionResponse;
 const Filter = models.Filter;
 const DescribeLifecycleHooksRequest = models.DescribeLifecycleHooksRequest;
+const ServiceSettings = models.ServiceSettings;
 const LaunchConfiguration = models.LaunchConfiguration;
 const TargetAttribute = models.TargetAttribute;
 const ModifyNotificationConfigurationResponse = models.ModifyNotificationConfigurationResponse;

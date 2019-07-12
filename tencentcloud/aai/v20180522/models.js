@@ -144,7 +144,7 @@ class TextToVoiceResponse extends  AbstractModel {
         super();
 
         /**
-         * base64编码的wav音频数据
+         * base64编码的wav/mp3音频数据
          * @type {string || null}
          */
         this.Audio = null;
@@ -375,7 +375,7 @@ class TextToVoiceRequest extends  AbstractModel {
         super();
 
         /**
-         * 合成语音的源文本，按UTF-8编码统一计算，中文最大支持350字符，英文最大支持500字符
+         * 合成语音的源文本，按UTF-8编码统一计算，中文最大支持350字符，英文最大支持500字符。包含空格等字符时需要url encode再传输。
          * @type {string || null}
          */
         this.Text = null;
