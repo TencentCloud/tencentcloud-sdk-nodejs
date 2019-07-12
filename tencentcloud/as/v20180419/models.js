@@ -224,9 +224,10 @@ class ModifyAutoScalingGroupRequest extends  AbstractModel {
         this.Zones = null;
 
         /**
-         * 重试策略，取值包括 IMMEDIATE_RETRY 和 INCREMENTAL_INTERVALS，默认取值为 IMMEDIATE_RETRY。
+         * 重试策略，取值包括 IMMEDIATE_RETRY、 INCREMENTAL_INTERVALS、NO_RETRY，默认取值为 IMMEDIATE_RETRY。
 <br><li> IMMEDIATE_RETRY，立即重试，在较短时间内快速重试，连续失败超过一定次数（5次）后不再重试。
 <br><li> INCREMENTAL_INTERVALS，间隔递增重试，随着连续失败次数的增加，重试间隔逐渐增大，重试间隔从秒级到1天不等。
+<br><li> NO_RETRY，不进行重试，直到再次收到用户调用或者告警信息后才会重试。
          * @type {string || null}
          */
         this.RetryPolicy = null;
@@ -241,6 +242,12 @@ class ModifyAutoScalingGroupRequest extends  AbstractModel {
          * @type {string || null}
          */
         this.ZonesCheckPolicy = null;
+
+        /**
+         * 服务设置，包括云监控不健康替换等服务设置。
+         * @type {ServiceSettings || null}
+         */
+        this.ServiceSettings = null;
 
     }
 
@@ -265,6 +272,12 @@ class ModifyAutoScalingGroupRequest extends  AbstractModel {
         this.Zones = 'Zones' in params ? params.Zones : null;
         this.RetryPolicy = 'RetryPolicy' in params ? params.RetryPolicy : null;
         this.ZonesCheckPolicy = 'ZonesCheckPolicy' in params ? params.ZonesCheckPolicy : null;
+
+        if (params.ServiceSettings) {
+            let obj = new ServiceSettings();
+            obj.deserialize(params.ServiceSettings)
+            this.ServiceSettings = obj;
+        }
 
     }
 }
@@ -1708,6 +1721,12 @@ class CreateLaunchConfigurationRequest extends  AbstractModel {
          */
         this.InstanceTags = null;
 
+        /**
+         * CAM角色名称。可通过DescribeRoleList接口返回值中的roleName获取。
+         * @type {string || null}
+         */
+        this.CamRoleName = null;
+
     }
 
     /**
@@ -1774,6 +1793,7 @@ class CreateLaunchConfigurationRequest extends  AbstractModel {
                 this.InstanceTags.push(obj);
             }
         }
+        this.CamRoleName = 'CamRoleName' in params ? params.CamRoleName : null;
 
     }
 }
@@ -1924,6 +1944,12 @@ class AutoScalingGroup extends  AbstractModel {
          */
         this.Tags = null;
 
+        /**
+         * 服务设置
+         * @type {ServiceSettings || null}
+         */
+        this.ServiceSettings = null;
+
     }
 
     /**
@@ -1971,6 +1997,12 @@ class AutoScalingGroup extends  AbstractModel {
                 obj.deserialize(params.Tags[z]);
                 this.Tags.push(obj);
             }
+        }
+
+        if (params.ServiceSettings) {
+            let obj = new ServiceSettings();
+            obj.deserialize(params.ServiceSettings)
+            this.ServiceSettings = obj;
         }
 
     }
@@ -2852,9 +2884,10 @@ class CreateAutoScalingGroupRequest extends  AbstractModel {
         this.Zones = null;
 
         /**
-         * 重试策略，取值包括 IMMEDIATE_RETRY 和 INCREMENTAL_INTERVALS，默认取值为 IMMEDIATE_RETRY。
+         * 重试策略，取值包括 IMMEDIATE_RETRY、 INCREMENTAL_INTERVALS、NO_RETRY，默认取值为 IMMEDIATE_RETRY。
 <br><li> IMMEDIATE_RETRY，立即重试，在较短时间内快速重试，连续失败超过一定次数（5次）后不再重试。
 <br><li> INCREMENTAL_INTERVALS，间隔递增重试，随着连续失败次数的增加，重试间隔逐渐增大，重试间隔从秒级到1天不等。
+<br><li> NO_RETRY，不进行重试，直到再次收到用户调用或者告警信息后才会重试。
          * @type {string || null}
          */
         this.RetryPolicy = null;
@@ -2875,6 +2908,12 @@ class CreateAutoScalingGroupRequest extends  AbstractModel {
          * @type {Array.<Tag> || null}
          */
         this.Tags = null;
+
+        /**
+         * 服务设置，包括云监控不健康替换等服务设置。
+         * @type {ServiceSettings || null}
+         */
+        this.ServiceSettings = null;
 
     }
 
@@ -2916,6 +2955,12 @@ class CreateAutoScalingGroupRequest extends  AbstractModel {
                 obj.deserialize(params.Tags[z]);
                 this.Tags.push(obj);
             }
+        }
+
+        if (params.ServiceSettings) {
+            let obj = new ServiceSettings();
+            obj.deserialize(params.ServiceSettings)
+            this.ServiceSettings = obj;
         }
 
     }
@@ -3060,6 +3105,12 @@ class UpgradeLaunchConfigurationRequest extends  AbstractModel {
          */
         this.InstanceTags = null;
 
+        /**
+         * CAM角色名称。可通过DescribeRoleList接口返回值中的roleName获取。
+         * @type {string || null}
+         */
+        this.CamRoleName = null;
+
     }
 
     /**
@@ -3126,6 +3177,7 @@ class UpgradeLaunchConfigurationRequest extends  AbstractModel {
                 this.InstanceTags.push(obj);
             }
         }
+        this.CamRoleName = 'CamRoleName' in params ? params.CamRoleName : null;
 
     }
 }
@@ -4232,6 +4284,34 @@ class DescribeLifecycleHooksRequest extends  AbstractModel {
 }
 
 /**
+ * 服务设置
+ * @class
+ */
+class ServiceSettings extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 开启监控不健康替换服务。若开启则对于云监控标记为不健康的实例，弹性伸缩服务会进行替换。若不指定该参数，则默认为 False。
+         * @type {boolean || null}
+         */
+        this.ReplaceMonitorUnhealthy = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ReplaceMonitorUnhealthy = 'ReplaceMonitorUnhealthy' in params ? params.ReplaceMonitorUnhealthy : null;
+
+    }
+}
+
+/**
  * 符合条件的启动配置信息的集合。
  * @class
  */
@@ -4369,6 +4449,12 @@ class LaunchConfiguration extends  AbstractModel {
          */
         this.UpdatedTime = null;
 
+        /**
+         * CAM角色名称。可通过DescribeRoleList接口返回值中的roleName获取。
+         * @type {string || null}
+         */
+        this.CamRoleName = null;
+
     }
 
     /**
@@ -4448,6 +4534,7 @@ class LaunchConfiguration extends  AbstractModel {
         }
         this.VersionNumber = 'VersionNumber' in params ? params.VersionNumber : null;
         this.UpdatedTime = 'UpdatedTime' in params ? params.UpdatedTime : null;
+        this.CamRoleName = 'CamRoleName' in params ? params.CamRoleName : null;
 
     }
 }
@@ -5898,6 +5985,7 @@ module.exports = {
     CompleteLifecycleActionResponse: CompleteLifecycleActionResponse,
     Filter: Filter,
     DescribeLifecycleHooksRequest: DescribeLifecycleHooksRequest,
+    ServiceSettings: ServiceSettings,
     LaunchConfiguration: LaunchConfiguration,
     TargetAttribute: TargetAttribute,
     ModifyNotificationConfigurationResponse: ModifyNotificationConfigurationResponse,

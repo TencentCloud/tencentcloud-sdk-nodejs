@@ -368,6 +368,7 @@ class CreateLiveSnapshotTemplateRequest extends  AbstractModel {
 
         /**
          * 截图间隔，单位s，默认10s。
+范围： 10s ~ 600s。
          * @type {number || null}
          */
         this.SnapshotInterval = null;
@@ -7166,14 +7167,14 @@ class CreateLiveRecordRequest extends  AbstractModel {
         this.DomainName = null;
 
         /**
-         * 录制开始时间。中国标准时间，需要URLEncode。如 2017-01-01 10:10:01，编码为：2017-01-01+10%3a10%3a01。
+         * 录制开始时间。中国标准时间，需要URLEncode(rfc3986)。如 2017-01-01 10:10:01，编码为：2017-01-01+10%3a10%3a01。
 定时录制模式，必须设置该字段；实时视频录制模式，忽略该字段。
          * @type {string || null}
          */
         this.StartTime = null;
 
         /**
-         * 录制结束时间。中国标准时间，需要URLEncode。如 2017-01-01 10:30:01，编码为：2017-01-01+10%3a30%3a01。
+         * 录制结束时间。中国标准时间，需要URLEncode(rfc3986)。如 2017-01-01 10:30:01，编码为：2017-01-01+10%3a30%3a01。
 定时录制模式，必须设置该字段；实时录制模式，为可选字段。如果通过Highlight参数，设置录制为实时视频录制模式，其设置的结束时间不应超过当前时间+30分钟，如果设置的结束时间超过当前时间+30分钟或者小于当前时间或者不设置该参数，则实际结束时间为当前时间+30分钟。
          * @type {string || null}
          */
@@ -7190,20 +7191,24 @@ class CreateLiveRecordRequest extends  AbstractModel {
 
         /**
          * 录制文件格式。其值为：
-“flv”,“hls”,”mp4”,“aac”,”mp3”，默认“flv”。
+“flv”【默认】,“hls”,”mp4”,“aac”,”mp3”。
 在定时录制模式或实时视频录制模式下，该参数均有效，不区分大小写。
          * @type {string || null}
          */
         this.FileFormat = null;
 
         /**
-         * 开启实时视频录制模式标志。0：不开启实时视频录制模式，即采用定时录制模式【默认】；1：开启实时视频录制模式。
+         * 开启实时视频录制模式标志。
+0：不开启实时视频录制模式，即定时录制模式【默认】。见[示例一](#.E7.A4.BA.E4.BE.8B1-.E5.88.9B.E5.BB.BA.E5.AE.9A.E6.97.B6.E5.BD.95.E5.88.B6.E4.BB.BB.E5.8A.A1)。
+1：开启实时视频录制模式。见[示例二](#.E7.A4.BA.E4.BE.8B2-.E5.88.9B.E5.BB.BA.E5.AE.9E.E6.97.B6.E5.BD.95.E5.88.B6.E4.BB.BB.E5.8A.A1)。
          * @type {number || null}
          */
         this.Highlight = null;
 
         /**
-         * 开启A+B=C混流C流录制标志。0：不开启A+B=C混流C流录制【默认】；1：开启A+B=C混流C流录制。
+         * 开启A+B=C混流C流录制标志。
+0：不开启A+B=C混流C流录制【默认】。
+1：开启A+B=C混流C流录制。
 在定时录制模式或实时视频录制模式下，该参数均有效。
          * @type {number || null}
          */
@@ -9186,34 +9191,6 @@ class CreateLiveTranscodeRuleResponse extends  AbstractModel {
 }
 
 /**
- * SetLiveWatermarkStatus返回参数结构体
- * @class
- */
-class SetLiveWatermarkStatusResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
  * CreateLiveCallbackRule返回参数结构体
  * @class
  */
@@ -9746,41 +9723,6 @@ class DescribeLiveDomainPlayInfoListResponse extends  AbstractModel {
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * SetLiveWatermarkStatus请求参数结构体
- * @class
- */
-class SetLiveWatermarkStatusRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 水印ID。
-         * @type {number || null}
-         */
-        this.WatermarkId = null;
-
-        /**
-         * 状态。0：停用，1:启用
-         * @type {number || null}
-         */
-        this.Status = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.WatermarkId = 'WatermarkId' in params ? params.WatermarkId : null;
-        this.Status = 'Status' in params ? params.Status : null;
 
     }
 }
@@ -11596,7 +11538,6 @@ module.exports = {
     ForbidLiveDomainResponse: ForbidLiveDomainResponse,
     DescribeLiveSnapshotRulesRequest: DescribeLiveSnapshotRulesRequest,
     CreateLiveTranscodeRuleResponse: CreateLiveTranscodeRuleResponse,
-    SetLiveWatermarkStatusResponse: SetLiveWatermarkStatusResponse,
     CreateLiveCallbackRuleResponse: CreateLiveCallbackRuleResponse,
     DescribeLiveRecordTemplateResponse: DescribeLiveRecordTemplateResponse,
     DescribeVisitTopSumInfoListResponse: DescribeVisitTopSumInfoListResponse,
@@ -11608,7 +11549,6 @@ module.exports = {
     DescribeLiveRecordRulesResponse: DescribeLiveRecordRulesResponse,
     DescribeBillBandwidthAndFluxListResponse: DescribeBillBandwidthAndFluxListResponse,
     DescribeLiveDomainPlayInfoListResponse: DescribeLiveDomainPlayInfoListResponse,
-    SetLiveWatermarkStatusRequest: SetLiveWatermarkStatusRequest,
     HttpCodeValue: HttpCodeValue,
     DescribeLiveStreamOnlineListRequest: DescribeLiveStreamOnlineListRequest,
     DeleteLiveSnapshotTemplateResponse: DeleteLiveSnapshotTemplateResponse,

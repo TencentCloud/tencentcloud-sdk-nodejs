@@ -5931,7 +5931,7 @@ class AddInstancesRequest extends  AbstractModel {
         this.Password = null;
 
         /**
-         * 重装系统，关联秘钥设置
+         * 重装系统，关联密钥设置
          * @type {string || null}
          */
         this.KeyId = null;

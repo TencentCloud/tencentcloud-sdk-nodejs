@@ -1042,13 +1042,13 @@ class Block extends  AbstractModel {
         this.DataHash = null;
 
         /**
-         * 区块ID，与区块编号一直
+         * 区块ID，与区块编号一致
          * @type {number || null}
          */
         this.BlockId = null;
 
         /**
-         * 前一个区块Hash（未使用）,与区块Hash数值一直
+         * 前一个区块Hash（未使用）,与区块Hash数值一致
          * @type {string || null}
          */
         this.PreHash = null;
