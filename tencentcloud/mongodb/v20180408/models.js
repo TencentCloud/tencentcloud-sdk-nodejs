@@ -99,7 +99,7 @@ class CreateDBInstanceRequest extends  AbstractModel {
         this.Volume = null;
 
         /**
-         * 版本号，当前仅支持 MONGO_3_WT
+         * 版本号，当前支持 MONGO_3_WT、MONGO_3_ROCKS、MONGO_36_WT
          * @type {string || null}
          */
         this.MongoVersion = null;
@@ -266,7 +266,7 @@ class CreateDBInstanceHourRequest extends  AbstractModel {
         this.SecondaryNum = null;
 
         /**
-         * MongoDB引擎版本，值包括：MONGO_2、MONGO_3_MMAP、MONGO_3_WT 、MONGO_3_ROCKS和MONGO_36_WT
+         * MongoDB引擎版本，值包括MONGO_3_WT 、MONGO_3_ROCKS和MONGO_36_WT
          * @type {string || null}
          */
         this.EngineVersion = null;
@@ -1099,6 +1099,12 @@ class CreateDBInstanceResponse extends  AbstractModel {
         this.DealId = null;
 
         /**
+         * 创建的实例ID列表
+         * @type {Array.<string> || null}
+         */
+        this.InstanceIds = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -1114,6 +1120,7 @@ class CreateDBInstanceResponse extends  AbstractModel {
             return;
         }
         this.DealId = 'DealId' in params ? params.DealId : null;
+        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -1554,6 +1561,12 @@ class CreateDBInstanceHourResponse extends  AbstractModel {
         this.DealId = null;
 
         /**
+         * 创建的实例ID列表
+         * @type {Array.<string> || null}
+         */
+        this.InstanceIds = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -1569,6 +1582,7 @@ class CreateDBInstanceHourResponse extends  AbstractModel {
             return;
         }
         this.DealId = 'DealId' in params ? params.DealId : null;
+        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
