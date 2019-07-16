@@ -16,30 +16,51 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
+const TextVehicleBack = models.TextVehicleBack;
 const ArithmeticOCRResponse = models.ArithmeticOCRResponse;
-const EnglishOCRRequest = models.EnglishOCRRequest;
+const BusinessCardOCRResponse = models.BusinessCardOCRResponse;
+const TextVatInvoice = models.TextVatInvoice;
+const GeneralHandwritingOCRRequest = models.GeneralHandwritingOCRRequest;
+const BizLicenseOCRRequest = models.BizLicenseOCRRequest;
 const GeneralAccurateOCRResponse = models.GeneralAccurateOCRResponse;
 const GeneralFastOCRRequest = models.GeneralFastOCRRequest;
 const TextTable = models.TextTable;
+const EnglishOCRResponse = models.EnglishOCRResponse;
 const GeneralAccurateOCRRequest = models.GeneralAccurateOCRRequest;
+const TextVehicleFront = models.TextVehicleFront;
 const GeneralBasicOCRResponse = models.GeneralBasicOCRResponse;
 const VinOCRRequest = models.VinOCRRequest;
-const EnglishOCRResponse = models.EnglishOCRResponse;
-const WaybillOCRResponse = models.WaybillOCRResponse;
+const BankCardOCRRequest = models.BankCardOCRRequest;
+const GeneralHandwritingOCRResponse = models.GeneralHandwritingOCRResponse;
+const DriverLicenseOCRResponse = models.DriverLicenseOCRResponse;
+const VehicleLicenseOCRResponse = models.VehicleLicenseOCRResponse;
+const VatInvoiceOCRRequest = models.VatInvoiceOCRRequest;
 const IDCardOCRResponse = models.IDCardOCRResponse;
 const TextDetectionEn = models.TextDetectionEn;
 const ArithmeticOCRRequest = models.ArithmeticOCRRequest;
+const WaybillOCRResponse = models.WaybillOCRResponse;
 const TableOCRResponse = models.TableOCRResponse;
 const Coord = models.Coord;
 const WaybillOCRRequest = models.WaybillOCRRequest;
+const VehicleLicenseOCRRequest = models.VehicleLicenseOCRRequest;
 const TextWaybill = models.TextWaybill;
 const TextArithmetic = models.TextArithmetic;
 const IDCardOCRRequest = models.IDCardOCRRequest;
+const DriverLicenseOCRRequest = models.DriverLicenseOCRRequest;
 const TextDetection = models.TextDetection;
 const VinOCRResponse = models.VinOCRResponse;
+const LicensePlateOCRResponse = models.LicensePlateOCRResponse;
+const BusinessCardInfo = models.BusinessCardInfo;
+const TextGeneralHandwriting = models.TextGeneralHandwriting;
 const WaybillObj = models.WaybillObj;
 const TableOCRRequest = models.TableOCRRequest;
+const BizLicenseOCRResponse = models.BizLicenseOCRResponse;
+const EnglishOCRRequest = models.EnglishOCRRequest;
+const VatInvoiceOCRResponse = models.VatInvoiceOCRResponse;
+const BankCardOCRResponse = models.BankCardOCRResponse;
+const BusinessCardOCRRequest = models.BusinessCardOCRRequest;
 const GeneralFastOCRResponse = models.GeneralFastOCRResponse;
+const LicensePlateOCRRequest = models.LicensePlateOCRRequest;
 const GeneralBasicOCRRequest = models.GeneralBasicOCRRequest;
 
 
@@ -76,14 +97,58 @@ class OcrClient extends AbstractClient {
     }
 
     /**
-     * 本接口支持二代身份证正反面所有字段的识别，包括姓名、性别、民族、出生日期、住址、公民身份证号、签发机关、有效期限；具备身份证照片、人像照片的裁剪功能和翻拍件、复印件的识别告警功能。
-     * @param {IDCardOCRRequest} req
-     * @param {function(string, IDCardOCRResponse):void} cb
+     * 本接口支持行驶证主页和副页所有字段的自动定位与识别，包含车牌号码、车辆类型、所有人、住址、使用性质、品牌型号、车辆识别代码、发动机号、注册日期、发证日期等。
+     * @param {VehicleLicenseOCRRequest} req
+     * @param {function(string, VehicleLicenseOCRResponse):void} cb
      * @public
      */
-    IDCardOCR(req, cb) {
-        let resp = new IDCardOCRResponse();
-        this.request("IDCardOCR", req, resp, cb);
+    VehicleLicenseOCR(req, cb) {
+        let resp = new VehicleLicenseOCRResponse();
+        this.request("VehicleLicenseOCR", req, resp, cb);
+    }
+
+    /**
+     * 本接口支持名片各字段的自动定位与识别，包含姓名、电话、手机号、邮箱、公司、部门、职位、网址、地址、QQ、微信、MSN等。
+     * @param {BusinessCardOCRRequest} req
+     * @param {function(string, BusinessCardOCRResponse):void} cb
+     * @public
+     */
+    BusinessCardOCR(req, cb) {
+        let resp = new BusinessCardOCRResponse();
+        this.request("BusinessCardOCR", req, resp, cb);
+    }
+
+    /**
+     * 本接口支持对驾驶证主页所有字段的自动定位与识别，包含证号、姓名、性别、国籍、住址、出生日期、初次领证日期、准驾车型、有效期限等。
+     * @param {DriverLicenseOCRRequest} req
+     * @param {function(string, DriverLicenseOCRResponse):void} cb
+     * @public
+     */
+    DriverLicenseOCR(req, cb) {
+        let resp = new DriverLicenseOCRResponse();
+        this.request("DriverLicenseOCR", req, resp, cb);
+    }
+
+    /**
+     * 本接口支持图片内手写体文字的检测和识别，针对手写字体无规则、字迹潦草、模糊等特点进行了识别能力的增强。
+     * @param {GeneralHandwritingOCRRequest} req
+     * @param {function(string, GeneralHandwritingOCRResponse):void} cb
+     * @public
+     */
+    GeneralHandwritingOCR(req, cb) {
+        let resp = new GeneralHandwritingOCRResponse();
+        this.request("GeneralHandwritingOCR", req, resp, cb);
+    }
+
+    /**
+     * 本接口支持对中国大陆主流银行卡的卡号、银行信息、有效期等关键字段的检测与识别。
+     * @param {BankCardOCRRequest} req
+     * @param {function(string, BankCardOCRResponse):void} cb
+     * @public
+     */
+    BankCardOCR(req, cb) {
+        let resp = new BankCardOCRResponse();
+        this.request("BankCardOCR", req, resp, cb);
     }
 
     /**
@@ -120,6 +185,50 @@ class OcrClient extends AbstractClient {
     }
 
     /**
+     * 本接口支持对中国大陆机动车车牌的自动定位和识别，返回地域编号和车牌号信息。
+     * @param {LicensePlateOCRRequest} req
+     * @param {function(string, LicensePlateOCRResponse):void} cb
+     * @public
+     */
+    LicensePlateOCR(req, cb) {
+        let resp = new LicensePlateOCRResponse();
+        this.request("LicensePlateOCR", req, resp, cb);
+    }
+
+    /**
+     * 本接口支持增值税专用发票、增值税普通发票、增值税电子发票全字段的内容检测和识别，包括发票代码、发票号码、开票日期、合计金额、校验码、税率、合计税额、价税合计、购买方识别号、复核、销售方识别号、开票人、密码区1、密码区2、密码区3、密码区4、发票名称、购买方名称、销售方名称、服务名称、备注、规格型号、数量、单价、金额、税额、收款人等字段。
+     * @param {VatInvoiceOCRRequest} req
+     * @param {function(string, VatInvoiceOCRResponse):void} cb
+     * @public
+     */
+    VatInvoiceOCR(req, cb) {
+        let resp = new VatInvoiceOCRResponse();
+        this.request("VatInvoiceOCR", req, resp, cb);
+    }
+
+    /**
+     * 本接口支持二代身份证正反面所有字段的识别，包括姓名、性别、民族、出生日期、住址、公民身份证号、签发机关、有效期限；具备身份证照片、人像照片的裁剪功能和翻拍件、复印件的识别告警功能。
+     * @param {IDCardOCRRequest} req
+     * @param {function(string, IDCardOCRResponse):void} cb
+     * @public
+     */
+    IDCardOCR(req, cb) {
+        let resp = new IDCardOCRResponse();
+        this.request("IDCardOCR", req, resp, cb);
+    }
+
+    /**
+     * 本接口支持快速精准识别营业执照上的字段，包括注册号、公司名称、经营场所、主体类型、法定代表人、注册资金、组成形式、成立日期、营业期限和经营范围等字段。
+     * @param {BizLicenseOCRRequest} req
+     * @param {function(string, BizLicenseOCRResponse):void} cb
+     * @public
+     */
+    BizLicenseOCR(req, cb) {
+        let resp = new BizLicenseOCRResponse();
+        this.request("BizLicenseOCR", req, resp, cb);
+    }
+
+    /**
      * 本接口支持图片内车辆识别代号（VIN）的检测和识别。
      * @param {VinOCRRequest} req
      * @param {function(string, VinOCRResponse):void} cb
@@ -142,7 +251,7 @@ class OcrClient extends AbstractClient {
     }
 
     /**
-     * 本接口支持多场景、任意版面下整图文字的识别，包括中英文、字母、数字和日文、韩文的识别。应用场景包括：印刷文档识别、网络图片识别、广告图文字识别、街景店招识别、菜单识别、视频标题识别、头像文字识别等。
+     * 本接口支持多场景、任意版面下整图文字的识别。支持自动识别语言类型，同时支持自选语言种类（推荐），除中英文外，支持日语、韩语、西班牙语、法语、德语、葡萄牙语、越南语、马来语、俄语、意大利语、荷兰语、瑞典语、芬兰语、丹麦语、挪威语、匈牙利语、泰语等多种语言。应用场景包括：印刷文档识别、网络图片识别、广告图文字识别、街景店招识别、菜单识别、视频标题识别、头像文字识别等。
      * @param {GeneralBasicOCRRequest} req
      * @param {function(string, GeneralBasicOCRResponse):void} cb
      * @public
