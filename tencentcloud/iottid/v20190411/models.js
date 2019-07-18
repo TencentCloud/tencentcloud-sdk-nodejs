@@ -38,6 +38,41 @@ class DescribePermissionRequest extends  AbstractModel {
 }
 
 /**
+ * VerifyChipBurnInfo返回参数结构体
+ * @class
+ */
+class VerifyChipBurnInfoResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 验证结果
+         * @type {boolean || null}
+         */
+        this.Pass = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Pass = 'Pass' in params ? params.Pass : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DeliverTids返回参数结构体
  * @class
  */
@@ -168,6 +203,41 @@ class DownloadTidsResponse extends  AbstractModel {
 }
 
 /**
+ * AuthTestTid返回参数结构体
+ * @class
+ */
+class AuthTestTidResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 认证结果
+         * @type {boolean || null}
+         */
+        this.Pass = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Pass = 'Pass' in params ? params.Pass : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DeliverTidNotify返回参数结构体
  * @class
  */
@@ -217,6 +287,34 @@ class DeliverTidNotifyResponse extends  AbstractModel {
 }
 
 /**
+ * AuthTestTid请求参数结构体
+ * @class
+ */
+class AuthTestTidRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 设备端SDK填入测试TID参数后生成的加密数据串
+         * @type {string || null}
+         */
+        this.Data = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Data = 'Data' in params ? params.Data : null;
+
+    }
+}
+
+/**
  * BurnTidNotify请求参数结构体
  * @class
  */
@@ -247,6 +345,34 @@ class BurnTidNotifyRequest extends  AbstractModel {
         }
         this.OrderId = 'OrderId' in params ? params.OrderId : null;
         this.Tid = 'Tid' in params ? params.Tid : null;
+
+    }
+}
+
+/**
+ * VerifyChipBurnInfo请求参数结构体
+ * @class
+ */
+class VerifyChipBurnInfoRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 验证数据
+         * @type {string || null}
+         */
+        this.Data = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Data = 'Data' in params ? params.Data : null;
 
     }
 }
@@ -456,11 +582,15 @@ class DownloadTidsRequest extends  AbstractModel {
 
 module.exports = {
     DescribePermissionRequest: DescribePermissionRequest,
+    VerifyChipBurnInfoResponse: VerifyChipBurnInfoResponse,
     DeliverTidsResponse: DeliverTidsResponse,
     BurnTidNotifyResponse: BurnTidNotifyResponse,
     DownloadTidsResponse: DownloadTidsResponse,
+    AuthTestTidResponse: AuthTestTidResponse,
     DeliverTidNotifyResponse: DeliverTidNotifyResponse,
+    AuthTestTidRequest: AuthTestTidRequest,
     BurnTidNotifyRequest: BurnTidNotifyRequest,
+    VerifyChipBurnInfoRequest: VerifyChipBurnInfoRequest,
     DeliverTidsRequest: DeliverTidsRequest,
     DeliverTidNotifyRequest: DeliverTidNotifyRequest,
     TidKeysInfo: TidKeysInfo,

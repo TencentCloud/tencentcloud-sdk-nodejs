@@ -47,6 +47,7 @@ const ComposeMediaResponse = models.ComposeMediaResponse;
 const ClassificationConfigureInfo = models.ClassificationConfigureInfo;
 const MediaAiAnalysisClassificationItem = models.MediaAiAnalysisClassificationItem;
 const AudioTemplateInfoForUpdate = models.AudioTemplateInfoForUpdate;
+const ModifySubAppIdInfoRequest = models.ModifySubAppIdInfoRequest;
 const DeletePersonSampleRequest = models.DeletePersonSampleRequest;
 const MediaSampleSnapshotItem = models.MediaSampleSnapshotItem;
 const AiRecognitionTaskInput = models.AiRecognitionTaskInput;
@@ -163,7 +164,9 @@ const ImageSpriteTaskInput = models.ImageSpriteTaskInput;
 const ObjectConfigureInfoForUpdate = models.ObjectConfigureInfoForUpdate;
 const DeleteMediaRequest = models.DeleteMediaRequest;
 const ImageWatermarkTemplate = models.ImageWatermarkTemplate;
+const ModifySubAppIdInfoResponse = models.ModifySubAppIdInfoResponse;
 const AsrWordsConfigureInfo = models.AsrWordsConfigureInfo;
+const ModifySubAppIdStatusResponse = models.ModifySubAppIdStatusResponse;
 const SimpleHlsClipRequest = models.SimpleHlsClipRequest;
 const MediaDeleteItem = models.MediaDeleteItem;
 const AiSamplePerson = models.AiSamplePerson;
@@ -191,6 +194,7 @@ const MediaKeyFrameDescItem = models.MediaKeyFrameDescItem;
 const AiSampleTagOperation = models.AiSampleTagOperation;
 const ConfirmEventsRequest = models.ConfirmEventsRequest;
 const CreateAIRecognitionTemplateResponse = models.CreateAIRecognitionTemplateResponse;
+const ModifySubAppIdStatusRequest = models.ModifySubAppIdStatusRequest;
 const DeleteTranscodeTemplateRequest = models.DeleteTranscodeTemplateRequest;
 const AiReviewTerrorismTaskOutput = models.AiReviewTerrorismTaskOutput;
 const ResetProcedureTemplateResponse = models.ResetProcedureTemplateResponse;
@@ -272,6 +276,7 @@ const AdaptiveDynamicStreamingInfoItem = models.AdaptiveDynamicStreamingInfoItem
 const DeleteClassResponse = models.DeleteClassResponse;
 const ModifyTranscodeTemplateResponse = models.ModifyTranscodeTemplateResponse;
 const MediaSampleSnapshotInfo = models.MediaSampleSnapshotInfo;
+const DescribeSubAppIdsResponse = models.DescribeSubAppIdsResponse;
 const MediaInfo = models.MediaInfo;
 const VideoTemplateInfoForUpdate = models.VideoTemplateInfoForUpdate;
 const CreateContentReviewTemplateRequest = models.CreateContentReviewTemplateRequest;
@@ -290,6 +295,7 @@ const CreateProcedureTemplateResponse = models.CreateProcedureTemplateResponse;
 const OcrFullTextConfigureInfoForUpdate = models.OcrFullTextConfigureInfoForUpdate;
 const AiRecognitionTaskOcrFullTextResultInput = models.AiRecognitionTaskOcrFullTextResultInput;
 const DescribeTasksResponse = models.DescribeTasksResponse;
+const DescribeSubAppIdsRequest = models.DescribeSubAppIdsRequest;
 const AiRecognitionTaskFaceResultInput = models.AiRecognitionTaskFaceResultInput;
 const AiReviewPoliticalTaskOutput = models.AiReviewPoliticalTaskOutput;
 const AiReviewTaskPoliticalResult = models.AiReviewTaskPoliticalResult;
@@ -304,6 +310,7 @@ const CreateAIAnalysisTemplateRequest = models.CreateAIAnalysisTemplateRequest;
 const AiReviewTerrorismTaskInput = models.AiReviewTerrorismTaskInput;
 const MediaAudioStreamItem = models.MediaAudioStreamItem;
 const MediaImageSpriteInfo = models.MediaImageSpriteInfo;
+const SubAppIdInfo = models.SubAppIdInfo;
 const DescribeAllClassResponse = models.DescribeAllClassResponse;
 const DeleteWatermarkTemplateRequest = models.DeleteWatermarkTemplateRequest;
 const EditMediaStreamInfo = models.EditMediaStreamInfo;
@@ -476,6 +483,18 @@ class VodClient extends AbstractClient {
     }
 
     /**
+     * 该接口用于获取当前账号有权限的子应用列表，包含主应用。若尚未开通子应用功能，接口将返回 
+ FailedOperation。
+     * @param {DescribeSubAppIdsRequest} req
+     * @param {function(string, DescribeSubAppIdsResponse):void} cb
+     * @public
+     */
+    DescribeSubAppIds(req, cb) {
+        let resp = new DescribeSubAppIdsResponse();
+        this.request("DescribeSubAppIds", req, resp, cb);
+    }
+
+    /**
      * * 该接口用于申请媒体文件（和封面文件）的上传，获取文件上传到腾讯云点播的元信息（包括上传路径、上传签名等），用于后续上传接口。
 * 上传流程请参考[服务端上传综述](https://cloud.tencent.com/document/product/266/9759)。
      * @param {ApplyUploadRequest} req
@@ -522,8 +541,8 @@ class VodClient extends AbstractClient {
 
     /**
      * 1. 该接口可以获取多个视频的多种信息，包括：
-    1. 基础信息（basicInfo）：包括视频名称、大小、时长、封面图片等。
-    2. 元信息（metaData）：包括视频流信息、音频流信息等。
+    1. 基础信息（basicInfo）：包括视频名称、分类、播放地址、封面图片等。
+    2. 元信息（metaData）：包括大小、时长、视频流信息、音频流信息等。
     3. 转码结果信息（transcodeInfo）：包括该视频转码生成的各种码率的视频的地址、规格、码率、分辨率等。
     4. 转动图结果信息（animatedGraphicsInfo）：对视频转动图（如 gif）后，动图相关信息。
     5. 采样截图信息（sampleSnapshotInfo）：对视频采样截图后，相关截图信息。
@@ -793,6 +812,17 @@ class VodClient extends AbstractClient {
     }
 
     /**
+     * 该接口用于修改子应用信息，但不允许修改主应用信息。
+     * @param {ModifySubAppIdInfoRequest} req
+     * @param {function(string, ModifySubAppIdInfoResponse):void} cb
+     * @public
+     */
+    ModifySubAppIdInfo(req, cb) {
+        let resp = new ModifySubAppIdInfoResponse();
+        this.request("ModifySubAppIdInfo", req, resp, cb);
+    }
+
+    /**
      * 根据任务流模板名字，获取任务流模板详情列表。
      * @param {DescribeProcedureTemplatesRequest} req
      * @param {function(string, DescribeProcedureTemplatesResponse):void} cb
@@ -974,6 +1004,17 @@ class VodClient extends AbstractClient {
     CreateClass(req, cb) {
         let resp = new CreateClassResponse();
         this.request("CreateClass", req, resp, cb);
+    }
+
+    /**
+     * 该接口用于启用、停用子应用。被停用的子应用将封停对应域名，并限制控制台访问。
+     * @param {ModifySubAppIdStatusRequest} req
+     * @param {function(string, ModifySubAppIdStatusResponse):void} cb
+     * @public
+     */
+    ModifySubAppIdStatus(req, cb) {
+        let resp = new ModifySubAppIdStatusResponse();
+        this.request("ModifySubAppIdStatus", req, resp, cb);
     }
 
     /**

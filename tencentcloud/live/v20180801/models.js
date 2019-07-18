@@ -368,7 +368,7 @@ class CreateLiveSnapshotTemplateRequest extends  AbstractModel {
 
         /**
          * 截图间隔，单位s，默认10s。
-范围： 10s ~ 600s。
+范围： 5s ~ 600s。
          * @type {number || null}
          */
         this.SnapshotInterval = null;
@@ -5408,6 +5408,58 @@ class StreamName extends  AbstractModel {
          */
         this.StreamName = null;
 
+        /**
+         * 应用名称。
+         * @type {string || null}
+         */
+        this.AppName = null;
+
+        /**
+         * 推流域名。
+         * @type {string || null}
+         */
+        this.DomainName = null;
+
+        /**
+         * 推流开始时间。
+UTC格式时间，
+例如：2019-01-07T12:00:00Z。
+         * @type {string || null}
+         */
+        this.StreamStartTime = null;
+
+        /**
+         * 推流结束时间。
+UTC格式时间，
+例如：2019-01-07T15:00:00Z。
+         * @type {string || null}
+         */
+        this.StreamEndTime = null;
+
+        /**
+         * 停止原因。
+         * @type {string || null}
+         */
+        this.StopReason = null;
+
+        /**
+         * 推流持续时长，单位：秒。
+         * @type {number || null}
+         */
+        this.Duration = null;
+
+        /**
+         * 主播IP。
+         * @type {string || null}
+         */
+        this.ClientIp = null;
+
+        /**
+         * 分辨率。
+         * @type {string || null}
+         */
+        this.Resolution = null;
+
     }
 
     /**
@@ -5418,6 +5470,14 @@ class StreamName extends  AbstractModel {
             return;
         }
         this.StreamName = 'StreamName' in params ? params.StreamName : null;
+        this.AppName = 'AppName' in params ? params.AppName : null;
+        this.DomainName = 'DomainName' in params ? params.DomainName : null;
+        this.StreamStartTime = 'StreamStartTime' in params ? params.StreamStartTime : null;
+        this.StreamEndTime = 'StreamEndTime' in params ? params.StreamEndTime : null;
+        this.StopReason = 'StopReason' in params ? params.StopReason : null;
+        this.Duration = 'Duration' in params ? params.Duration : null;
+        this.ClientIp = 'ClientIp' in params ? params.ClientIp : null;
+        this.Resolution = 'Resolution' in params ? params.Resolution : null;
 
     }
 }

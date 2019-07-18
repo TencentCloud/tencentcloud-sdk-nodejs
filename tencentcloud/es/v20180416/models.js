@@ -258,7 +258,7 @@ class RestartInstanceResponse extends  AbstractModel {
 }
 
 /**
- * ik插件词典新
+ * ik插件词典信息
  * @class
  */
 class DictInfo extends  AbstractModel {
@@ -295,6 +295,34 @@ class DictInfo extends  AbstractModel {
         this.Key = 'Key' in params ? params.Key : null;
         this.Name = 'Name' in params ? params.Name : null;
         this.Size = 'Size' in params ? params.Size : null;
+
+    }
+}
+
+/**
+ * UpgradeLicense返回参数结构体
+ * @class
+ */
+class UpgradeLicenseResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -413,6 +441,55 @@ class DescribeInstanceLogsRequest extends  AbstractModel {
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.OrderByType = 'OrderByType' in params ? params.OrderByType : null;
+
+    }
+}
+
+/**
+ * UpgradeLicense请求参数结构体
+ * @class
+ */
+class UpgradeLicenseRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * License类型<li>oss：开源版</li><li>basic：基础版</li><li>platinum：白金版</li>默认值platinum
+         * @type {string || null}
+         */
+        this.LicenseType = null;
+
+        /**
+         * 是否自动使用代金券<li>0：不自动使用</li><li>1：自动使用</li>默认值0
+         * @type {number || null}
+         */
+        this.AutoVoucher = null;
+
+        /**
+         * 代金券ID列表（目前仅支持指定一张代金券）
+         * @type {Array.<string> || null}
+         */
+        this.VoucherIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.LicenseType = 'LicenseType' in params ? params.LicenseType : null;
+        this.AutoVoucher = 'AutoVoucher' in params ? params.AutoVoucher : null;
+        this.VoucherIds = 'VoucherIds' in params ? params.VoucherIds : null;
 
     }
 }
@@ -591,13 +668,13 @@ class CreateInstanceRequest extends  AbstractModel {
         this.ChargeType = null;
 
         /**
-         * 包年包月购买时长（单位由参数TimeUint决定）
+         * 包年包月购买时长（单位由参数TimeUnit决定）
          * @type {number || null}
          */
         this.ChargePeriod = null;
 
         /**
-         * 自动续费标识<li>RENEW_FLAG_AUTO：自动续费</li><li>RENEW_FLAG_MANUAL：不自动续费，用户手动续费</li>ChargeType为PREPAID时需要设置，如不传递该参数，普通用于默认不自动续费，SVIP用户自动续费
+         * 自动续费标识<li>RENEW_FLAG_AUTO：自动续费</li><li>RENEW_FLAG_MANUAL：不自动续费，用户手动续费</li>ChargeType为PREPAID时需要设置，如不传递该参数，普通用户默认不自动续费，SVIP用户自动续费
          * @type {string || null}
          */
         this.RenewFlag = null;
@@ -1663,6 +1740,36 @@ class SubTaskDetail extends  AbstractModel {
          */
         this.ErrMsg = null;
 
+        /**
+         * 子任务类型
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * 子任务状态，0处理中 1成功 -1失败
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * 升级检查失败的索引名
+         * @type {Array.<string> || null}
+         */
+        this.FailedIndices = null;
+
+        /**
+         * 子任务结束时间
+         * @type {string || null}
+         */
+        this.FinishTime = null;
+
+        /**
+         * 子任务等级，1警告 2失败
+         * @type {number || null}
+         */
+        this.Level = null;
+
     }
 
     /**
@@ -1675,6 +1782,39 @@ class SubTaskDetail extends  AbstractModel {
         this.Name = 'Name' in params ? params.Name : null;
         this.Result = 'Result' in params ? params.Result : null;
         this.ErrMsg = 'ErrMsg' in params ? params.ErrMsg : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.FailedIndices = 'FailedIndices' in params ? params.FailedIndices : null;
+        this.FinishTime = 'FinishTime' in params ? params.FinishTime : null;
+        this.Level = 'Level' in params ? params.Level : null;
+
+    }
+}
+
+/**
+ * UpgradeInstance返回参数结构体
+ * @class
+ */
+class UpgradeInstanceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1703,6 +1843,55 @@ class UpdateInstanceResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * UpgradeInstance请求参数结构体
+ * @class
+ */
+class UpgradeInstanceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 目标ES版本
+         * @type {string || null}
+         */
+        this.EsVersion = null;
+
+        /**
+         * 是否只做升级检查，默认值为false
+         * @type {boolean || null}
+         */
+        this.CheckOnly = null;
+
+        /**
+         * 目标商业特性版本：<li>oss 开源版</li><li>basic 基础版</li>当前仅在5.6.4升级6.x版本时使用，默认值为basic
+         * @type {string || null}
+         */
+        this.LicenseType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.EsVersion = 'EsVersion' in params ? params.EsVersion : null;
+        this.CheckOnly = 'CheckOnly' in params ? params.CheckOnly : null;
+        this.LicenseType = 'LicenseType' in params ? params.LicenseType : null;
 
     }
 }
@@ -1797,8 +1986,10 @@ module.exports = {
     OperationDetail: OperationDetail,
     RestartInstanceResponse: RestartInstanceResponse,
     DictInfo: DictInfo,
+    UpgradeLicenseResponse: UpgradeLicenseResponse,
     CreateInstanceResponse: CreateInstanceResponse,
     DescribeInstanceLogsRequest: DescribeInstanceLogsRequest,
+    UpgradeLicenseRequest: UpgradeLicenseRequest,
     CosBackup: CosBackup,
     TagInfo: TagInfo,
     KeyValue: KeyValue,
@@ -1817,7 +2008,9 @@ module.exports = {
     MasterNodeInfo: MasterNodeInfo,
     DeleteInstanceRequest: DeleteInstanceRequest,
     SubTaskDetail: SubTaskDetail,
+    UpgradeInstanceResponse: UpgradeInstanceResponse,
     UpdateInstanceResponse: UpdateInstanceResponse,
+    UpgradeInstanceRequest: UpgradeInstanceRequest,
     Operation: Operation,
 
 }

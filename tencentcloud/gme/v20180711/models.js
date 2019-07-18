@@ -114,13 +114,13 @@ class VoiceFilterRequest extends  AbstractModel {
         super();
 
         /**
-         * 应用ID，创建应用得到的AppID: https://console.cloud.tencent.com/gamegme
+         * 应用ID，登录[控制台](https://console.cloud.tencent.com/gamegme)创建应用得到的AppID
          * @type {number || null}
          */
         this.BizId = null;
 
         /**
-         * 文件ID，表示文件唯一id
+         * 文件ID，表示文件唯一ID
          * @type {string || null}
          */
         this.FileId = null;
@@ -223,13 +223,13 @@ class DescribeFilterResultListRequest extends  AbstractModel {
         this.EndDate = null;
 
         /**
-         * 偏移量, 默认0
+         * 偏移量，默认值为0。
          * @type {number || null}
          */
         this.Offset = null;
 
         /**
-         * 限制数目	, 默认10, 最大100
+         * 返回数量，默认值为10，最大值为100。
          * @type {number || null}
          */
         this.Limit = null;

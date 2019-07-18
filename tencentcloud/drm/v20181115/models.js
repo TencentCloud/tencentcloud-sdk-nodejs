@@ -170,6 +170,243 @@ class StartEncryptionRequest extends  AbstractModel {
 }
 
 /**
+ * AddFairPlayPem返回参数结构体
+ * @class
+ */
+class AddFairPlayPemResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 设置私钥后，后台返回的pem id，用来唯一标识一个私钥。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.FairPlayPemId = null;
+
+        /**
+         * 私钥的优先级，优先级数值越高，优先级越高。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Priority = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FairPlayPemId = 'FairPlayPemId' in params ? params.FairPlayPemId : null;
+        this.Priority = 'Priority' in params ? params.Priority : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifyFairPlayPem请求参数结构体
+ * @class
+ */
+class ModifyFairPlayPemRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 加密后的fairplay方案申请时使用的私钥。
+请使用腾讯云DRM 提供的公钥，使用rsa加密算法，PKCS1填充方式对私钥文件中的字段进行加密，并对加密结果进行base64编码。
+         * @type {string || null}
+         */
+        this.Pem = null;
+
+        /**
+         * 加密后的fairplay方案申请返回的ask数据。
+请使用腾讯云DRM 提供的公钥，使用rsa加密算法，PKCS1填充方式对Ask字符串进行加密，并对加密结果进行base64编码。
+         * @type {string || null}
+         */
+        this.Ask = null;
+
+        /**
+         * 要修改的私钥id
+         * @type {number || null}
+         */
+        this.FairPlayPemId = null;
+
+        /**
+         * 私钥的解密密钥。
+openssl在生成rsa时，可能会需要设置加密密钥，请记住设置的密钥。
+请使用腾讯云DRM 提供的公钥，使用rsa加密算法，PKCS1填充方式对解密密钥进行加密，并对加密结果进行base64编码。
+         * @type {string || null}
+         */
+        this.PemDecryptKey = null;
+
+        /**
+         * 委托者Id,适用于托管自身证书的客户。普通客户无需填该字段。
+         * @type {number || null}
+         */
+        this.BailorId = null;
+
+        /**
+         * 私钥的优先级，优先级数值越高，优先级越高。
+该值可以不传，后台将自动分配一个优先级。
+         * @type {number || null}
+         */
+        this.Priority = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Pem = 'Pem' in params ? params.Pem : null;
+        this.Ask = 'Ask' in params ? params.Ask : null;
+        this.FairPlayPemId = 'FairPlayPemId' in params ? params.FairPlayPemId : null;
+        this.PemDecryptKey = 'PemDecryptKey' in params ? params.PemDecryptKey : null;
+        this.BailorId = 'BailorId' in params ? params.BailorId : null;
+        this.Priority = 'Priority' in params ? params.Priority : null;
+
+    }
+}
+
+/**
+ * AddFairPlayPem请求参数结构体
+ * @class
+ */
+class AddFairPlayPemRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 加密后的fairplay方案申请时使用的私钥。
+请使用腾讯云DRM 提供的公钥，使用rsa加密算法，PKCS1填充方式对私钥文件中的字段进行加密，并对加密结果进行base64编码。
+         * @type {string || null}
+         */
+        this.Pem = null;
+
+        /**
+         * 加密后的fairplay方案申请返回的ask数据。
+请使用腾讯云DRM 提供的公钥，使用rsa加密算法，PKCS1填充方式对Ask字符串进行加密，并对加密结果进行base64编码。
+         * @type {string || null}
+         */
+        this.Ask = null;
+
+        /**
+         * 私钥的解密密钥。
+openssl在生成rsa时，可能会需要设置加密密钥，请记住设置的密钥。
+请使用腾讯云DRM 提供的公钥，使用rsa加密算法，PKCS1填充方式对解密密钥进行加密，并对加密结果进行base64编码。
+         * @type {string || null}
+         */
+        this.PemDecryptKey = null;
+
+        /**
+         * 委托者Id,适用于托管自身证书的客户。普通客户无需填该字段。
+         * @type {number || null}
+         */
+        this.BailorId = null;
+
+        /**
+         * 私钥的优先级，优先级数值越高，优先级越高。
+该值可以不传，后台将自动分配一个优先级。
+         * @type {number || null}
+         */
+        this.Priority = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Pem = 'Pem' in params ? params.Pem : null;
+        this.Ask = 'Ask' in params ? params.Ask : null;
+        this.PemDecryptKey = 'PemDecryptKey' in params ? params.PemDecryptKey : null;
+        this.BailorId = 'BailorId' in params ? params.BailorId : null;
+        this.Priority = 'Priority' in params ? params.Priority : null;
+
+    }
+}
+
+/**
+ * DeleteFairPlayPem返回参数结构体
+ * @class
+ */
+class DeleteFairPlayPemResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeFairPlayPem请求参数结构体
+ * @class
+ */
+class DescribeFairPlayPemRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 委托者Id,适用于托管自身证书的客户。普通客户无需填该字段。
+         * @type {number || null}
+         */
+        this.BailorId = null;
+
+        /**
+         * 需要查询的pem id。
+当该值未填入时，将返回所有的私钥信息。
+         * @type {number || null}
+         */
+        this.FairPlayPemId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.BailorId = 'BailorId' in params ? params.BailorId : null;
+        this.FairPlayPemId = 'FairPlayPemId' in params ? params.FairPlayPemId : null;
+
+    }
+}
+
+/**
  * DescribeKeys返回参数结构体
  * @class
  */
@@ -334,12 +571,19 @@ class CreateLicenseRequest extends  AbstractModel {
 }
 
 /**
- * StartEncryption返回参数结构体
+ * DescribeFairPlayPem返回参数结构体
  * @class
  */
-class StartEncryptionResponse extends  AbstractModel {
+class DescribeFairPlayPemResponse extends  AbstractModel {
     constructor(){
         super();
+
+        /**
+         * 该账户下，所有设置的FairPlay私钥摘要信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<FairPlayPemDigestInfo> || null}
+         */
+        this.FairPlayPems = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -355,6 +599,15 @@ class StartEncryptionResponse extends  AbstractModel {
     deserialize(params) {
         if (!params) {
             return;
+        }
+
+        if (params.FairPlayPems) {
+            this.FairPlayPems = new Array();
+            for (let z in params.FairPlayPems) {
+                let obj = new FairPlayPemDigestInfo();
+                obj.deserialize(params.FairPlayPems[z]);
+                this.FairPlayPems.push(obj);
+            }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -406,6 +659,86 @@ class Key extends  AbstractModel {
         this.KeyId = 'KeyId' in params ? params.KeyId : null;
         this.Key = 'Key' in params ? params.Key : null;
         this.Iv = 'Iv' in params ? params.Iv : null;
+
+    }
+}
+
+/**
+ * ModifyFairPlayPem返回参数结构体
+ * @class
+ */
+class ModifyFairPlayPemResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 设置私钥后，后台返回的pem id，用来唯一标识一个私钥。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.FairPlayPemId = null;
+
+        /**
+         * 私钥的优先级，优先级数值越高，优先级越高。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Priority = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FairPlayPemId = 'FairPlayPemId' in params ? params.FairPlayPemId : null;
+        this.Priority = 'Priority' in params ? params.Priority : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DeleteFairPlayPem请求参数结构体
+ * @class
+ */
+class DeleteFairPlayPemRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 委托者Id,适用于托管自身证书的客户。普通客户无需填该字段。
+         * @type {number || null}
+         */
+        this.BailorId = null;
+
+        /**
+         * 要删除的pem id。
+当未传入该值时，将删除所有的私钥。
+         * @type {number || null}
+         */
+        this.FairPlayPemId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.BailorId = 'BailorId' in params ? params.BailorId : null;
+        this.FairPlayPemId = 'FairPlayPemId' in params ? params.FairPlayPemId : null;
 
     }
 }
@@ -504,6 +837,67 @@ class DrmSourceObject extends  AbstractModel {
 }
 
 /**
+ * FairPlay 私钥摘要信息。
+ * @class
+ */
+class FairPlayPemDigestInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * fairplay 私钥pem id。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.FairPlayPemId = null;
+
+        /**
+         * 私钥的优先级。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Priority = null;
+
+        /**
+         * 私钥的md5 信息。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Md5Pem = null;
+
+        /**
+         * ASK的md5信息。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Md5Ask = null;
+
+        /**
+         * 私钥解密密钥的md5值。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Md5PemDecryptKey = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FairPlayPemId = 'FairPlayPemId' in params ? params.FairPlayPemId : null;
+        this.Priority = 'Priority' in params ? params.Priority : null;
+        this.Md5Pem = 'Md5Pem' in params ? params.Md5Pem : null;
+        this.Md5Ask = 'Md5Ask' in params ? params.Md5Ask : null;
+        this.Md5PemDecryptKey = 'Md5PemDecryptKey' in params ? params.Md5PemDecryptKey : null;
+
+    }
+}
+
+/**
  * DRM加密后的输出对象
  * @class
  */
@@ -550,17 +944,54 @@ class DrmOutputObject extends  AbstractModel {
     }
 }
 
+/**
+ * StartEncryption返回参数结构体
+ * @class
+ */
+class StartEncryptionResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
 module.exports = {
     CreateLicenseResponse: CreateLicenseResponse,
     PlaybackPolicy: PlaybackPolicy,
     StartEncryptionRequest: StartEncryptionRequest,
+    AddFairPlayPemResponse: AddFairPlayPemResponse,
+    ModifyFairPlayPemRequest: ModifyFairPlayPemRequest,
+    AddFairPlayPemRequest: AddFairPlayPemRequest,
+    DeleteFairPlayPemResponse: DeleteFairPlayPemResponse,
+    DescribeFairPlayPemRequest: DescribeFairPlayPemRequest,
     DescribeKeysResponse: DescribeKeysResponse,
     DrmOutputPara: DrmOutputPara,
     CreateLicenseRequest: CreateLicenseRequest,
-    StartEncryptionResponse: StartEncryptionResponse,
+    DescribeFairPlayPemResponse: DescribeFairPlayPemResponse,
     Key: Key,
+    ModifyFairPlayPemResponse: ModifyFairPlayPemResponse,
+    DeleteFairPlayPemRequest: DeleteFairPlayPemRequest,
     DescribeKeysRequest: DescribeKeysRequest,
     DrmSourceObject: DrmSourceObject,
+    FairPlayPemDigestInfo: FairPlayPemDigestInfo,
     DrmOutputObject: DrmOutputObject,
+    StartEncryptionResponse: StartEncryptionResponse,
 
 }

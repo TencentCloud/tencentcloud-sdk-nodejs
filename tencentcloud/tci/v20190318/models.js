@@ -101,7 +101,7 @@ class FaceIdentifyStatistic extends  AbstractModel {
 }
 
 /**
- * 单词出现的起始时间和结束时间信息
+ * 单词出现的那个句子的起始时间和结束时间信息
  * @class
  */
 class DetailInfo extends  AbstractModel {
@@ -109,7 +109,7 @@ class DetailInfo extends  AbstractModel {
         super();
 
         /**
-         * 单词出现在该音频中的时间戳，出现了几次， 就返回对应次数的起始和结束时间戳
+         * 单词出现在该音频中的那个句子的时间戳，出现了几次， 就返回对应次数的起始和结束时间戳
          * @type {Array.<WordTimePair> || null}
          */
         this.Value = null;
@@ -340,6 +340,83 @@ class AIAssistantRequest extends  AbstractModel {
 }
 
 /**
+ * CreatePerson请求参数结构体
+ * @class
+ */
+class CreatePersonRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 人员库唯一标识符
+         * @type {string || null}
+         */
+        this.LibraryId = null;
+
+        /**
+         * 人员名称
+         * @type {string || null}
+         */
+        this.PersonName = null;
+
+        /**
+         * 人员工作号码
+         * @type {string || null}
+         */
+        this.JobNumber = null;
+
+        /**
+         * 人员邮箱
+         * @type {string || null}
+         */
+        this.Mail = null;
+
+        /**
+         * 人员性别，0：未知 1：男性，2：女性
+         * @type {number || null}
+         */
+        this.Male = null;
+
+        /**
+         * 自定义人员 ID，注意不能使用 tci_person_ 前缀
+         * @type {string || null}
+         */
+        this.PersonId = null;
+
+        /**
+         * 人员电话号码
+         * @type {string || null}
+         */
+        this.PhoneNumber = null;
+
+        /**
+         * 人员学生号码
+         * @type {string || null}
+         */
+        this.StudentNumber = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LibraryId = 'LibraryId' in params ? params.LibraryId : null;
+        this.PersonName = 'PersonName' in params ? params.PersonName : null;
+        this.JobNumber = 'JobNumber' in params ? params.JobNumber : null;
+        this.Mail = 'Mail' in params ? params.Mail : null;
+        this.Male = 'Male' in params ? params.Male : null;
+        this.PersonId = 'PersonId' in params ? params.PersonId : null;
+        this.PhoneNumber = 'PhoneNumber' in params ? params.PhoneNumber : null;
+        this.StudentNumber = 'StudentNumber' in params ? params.StudentNumber : null;
+
+    }
+}
+
+/**
  * 光照统计结果
  * @class
  */
@@ -455,6 +532,41 @@ class CreateVocabResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * SubmitConversationTask返回参数结构体
+ * @class
+ */
+class SubmitConversationTaskResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 	查询结果时指名的jobid。在URL方式时提交请求后会返回一个jobid，后续查询该url的结果时使用这个jobid进行查询。
+         * @type {number || null}
+         */
+        this.JobId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.JobId = 'JobId' in params ? params.JobId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -714,7 +826,7 @@ class SubmitImageTaskRequest extends  AbstractModel {
         this.FileContent = null;
 
         /**
-         * 输入分析对象类型，picture_url:图片地址，vod_url:视频地址，live_url：直播地址
+         * 输入分析对象类型，picture：二进制图片的 base64 编码字符串，picture_url:图片地址，vod_url：视频地址，live_url：直播地址
          * @type {string || null}
          */
         this.FileType = null;
@@ -732,7 +844,7 @@ class SubmitImageTaskRequest extends  AbstractModel {
         this.LightStandardSet = null;
 
         /**
-         * 抽帧的时间间隔，单位毫秒，默认值1000。
+         * 抽帧的时间间隔，单位毫秒，默认值1000，保留字段，当前不支持填写。
          * @type {number || null}
          */
         this.FrameInterval = null;
@@ -750,7 +862,7 @@ class SubmitImageTaskRequest extends  AbstractModel {
         this.MaxVideoDuration = null;
 
         /**
-         * 人脸识别中的相似度阈值，默认值为0.89
+         * 人脸识别中的相似度阈值，默认值为0.89，保留字段，当前不支持填写。
          * @type {number || null}
          */
         this.SimThreshold = null;
@@ -790,7 +902,7 @@ class SubmitImageTaskRequest extends  AbstractModel {
 }
 
 /**
- * 起始时间和结束时间信息
+ * 单词出现的那个句子的起始时间和结束时间信息
  * @class
  */
 class WordTimePair extends  AbstractModel {
@@ -798,13 +910,13 @@ class WordTimePair extends  AbstractModel {
         super();
 
         /**
-         * 单词的起始时间
+         * 单词出现的那个句子的起始时间
          * @type {number || null}
          */
         this.Mbtm = null;
 
         /**
-         * 	单词的结束时间
+         * 	单词出现的那个句子的结束时间
          * @type {number || null}
          */
         this.Metm = null;
@@ -1114,6 +1226,12 @@ class DescribeConversationTaskResponse extends  AbstractModel {
         this.VocabAnalysisStatInfo = null;
 
         /**
+         * 整个音频流的全部文本
+         * @type {string || null}
+         */
+        this.AllTexts = null;
+
+        /**
          * 音频任务唯一id。在URL方式时提交请求后会返回一个jobid，后续查询该url的结果时使用这个jobid进行查询。
          * @type {number || null}
          */
@@ -1179,9 +1297,59 @@ class DescribeConversationTaskResponse extends  AbstractModel {
                 this.VocabAnalysisStatInfo.push(obj);
             }
         }
+        this.AllTexts = 'AllTexts' in params ? params.AllTexts : null;
         this.JobId = 'JobId' in params ? params.JobId : null;
         this.Progress = 'Progress' in params ? params.Progress : null;
         this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CreatePerson返回参数结构体
+ * @class
+ */
+class CreatePersonResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 人员库唯一标识符
+         * @type {string || null}
+         */
+        this.LibraryId = null;
+
+        /**
+         * 人员唯一标识符
+         * @type {string || null}
+         */
+        this.PersonId = null;
+
+        /**
+         * 人员名称
+         * @type {string || null}
+         */
+        this.PersonName = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LibraryId = 'LibraryId' in params ? params.LibraryId : null;
+        this.PersonId = 'PersonId' in params ? params.PersonId : null;
+        this.PersonName = 'PersonName' in params ? params.PersonName : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -1579,6 +1747,12 @@ class TransmitAudioStreamResponse extends  AbstractModel {
         this.VocabAnalysisStatInfo = null;
 
         /**
+         * 音频全部文本。
+         * @type {string || null}
+         */
+        this.AllTexts = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -1626,6 +1800,7 @@ class TransmitAudioStreamResponse extends  AbstractModel {
                 this.VocabAnalysisStatInfo.push(obj);
             }
         }
+        this.AllTexts = 'AllTexts' in params ? params.AllTexts : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -2714,6 +2889,12 @@ class DescribeAudioTaskResponse extends  AbstractModel {
         this.VocabAnalysisStatInfo = null;
 
         /**
+         * 返回音频全部文本。
+         * @type {string || null}
+         */
+        this.AllTexts = null;
+
+        /**
          * 音频任务唯一id。在URL方式时提交请求后会返回一个jobid，后续查询该url的结果时使用这个jobid进行查询。
          * @type {number || null}
          */
@@ -2779,6 +2960,7 @@ class DescribeAudioTaskResponse extends  AbstractModel {
                 this.VocabAnalysisStatInfo.push(obj);
             }
         }
+        this.AllTexts = 'AllTexts' in params ? params.AllTexts : null;
         this.JobId = 'JobId' in params ? params.JobId : null;
         this.Progress = 'Progress' in params ? params.Progress : null;
         this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
@@ -3896,7 +4078,7 @@ class ImageTaskFunction extends  AbstractModel {
         super();
 
         /**
-         * 大教室场景肢体动作识别选项
+         * 大教室场景学生肢体动作识别选项
          * @type {boolean || null}
          */
         this.EnableActionClass = null;
@@ -3920,13 +4102,13 @@ class ImageTaskFunction extends  AbstractModel {
         this.EnableFaceIdentify = null;
 
         /**
-         * 动作选项
+         * 手势选项
          * @type {boolean || null}
          */
         this.EnableGesture = null;
 
         /**
-         * 手势选项
+         * 优图手势选项（该功能尚未支持）
          * @type {boolean || null}
          */
         this.EnableHandTracking = null;
@@ -3938,13 +4120,13 @@ class ImageTaskFunction extends  AbstractModel {
         this.EnableLightJudge = null;
 
         /**
-         * 学生动作选项
+         * 小班课场景学生肢体动作识别选项
          * @type {boolean || null}
          */
         this.EnableStudentBodyMovements = null;
 
         /**
-         * 教师动作选项
+         * 教师动作选项（该功能尚未支持）
          * @type {boolean || null}
          */
         this.EnableTeacherBodyMovements = null;
@@ -4065,6 +4247,81 @@ class Library extends  AbstractModel {
         this.LibraryName = 'LibraryName' in params ? params.LibraryName : null;
         this.PersonCount = 'PersonCount' in params ? params.PersonCount : null;
         this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+
+    }
+}
+
+/**
+ * SubmitConversationTask请求参数结构体
+ * @class
+ */
+class SubmitConversationTaskRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 音频源的语言，默认0为英文，1为中文
+         * @type {number || null}
+         */
+        this.Lang = null;
+
+        /**
+         * 语音编码类型 1:pcm
+         * @type {number || null}
+         */
+        this.VoiceEncodeType = null;
+
+        /**
+         * 语音文件类型 1:raw, 2:wav, 3:mp3（三种格式目前仅支持16k采样率16bit）
+         * @type {number || null}
+         */
+        this.VoiceFileType = null;
+
+        /**
+         * 功能开关列表，表示是否需要打开相应的功能，返回相应的信息
+         * @type {Function || null}
+         */
+        this.Functions = null;
+
+        /**
+         * 学生音频流
+         * @type {string || null}
+         */
+        this.StudentUrl = null;
+
+        /**
+         * 教师音频流
+         * @type {string || null}
+         */
+        this.TeacherUrl = null;
+
+        /**
+         * 识别词库名列表，评估过程使用这些词汇库中的词汇进行词汇使用行为分析
+         * @type {Array.<string> || null}
+         */
+        this.VocabLibNameList = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Lang = 'Lang' in params ? params.Lang : null;
+        this.VoiceEncodeType = 'VoiceEncodeType' in params ? params.VoiceEncodeType : null;
+        this.VoiceFileType = 'VoiceFileType' in params ? params.VoiceFileType : null;
+
+        if (params.Functions) {
+            let obj = new Function();
+            obj.deserialize(params.Functions)
+            this.Functions = obj;
+        }
+        this.StudentUrl = 'StudentUrl' in params ? params.StudentUrl : null;
+        this.TeacherUrl = 'TeacherUrl' in params ? params.TeacherUrl : null;
+        this.VocabLibNameList = 'VocabLibNameList' in params ? params.VocabLibNameList : null;
 
     }
 }
@@ -4766,6 +5023,12 @@ class Function extends  AbstractModel {
         super();
 
         /**
+         * 输出全部文本标识，当该值设置为true时，会输出当前音频的全部文本
+         * @type {boolean || null}
+         */
+        this.EnableAllText = null;
+
+        /**
          * 输出关键词信息标识，当该值设置为true时，会输出当前音频的关键词信息。
          * @type {boolean || null}
          */
@@ -4792,6 +5055,7 @@ class Function extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.EnableAllText = 'EnableAllText' in params ? params.EnableAllText : null;
         this.EnableKeyword = 'EnableKeyword' in params ? params.EnableKeyword : null;
         this.EnableVadInfo = 'EnableVadInfo' in params ? params.EnableVadInfo : null;
         this.EnableVolume = 'EnableVolume' in params ? params.EnableVolume : null;
@@ -5342,7 +5606,7 @@ class SubmitAudioTaskRequest extends  AbstractModel {
         this.VoiceEncodeType = null;
 
         /**
-         * 语音文件类型 1:raw, 2:wav, 3:mp3（三种格式目前仅支持16k采样率16bit）
+         * 语音文件类型 1:raw, 2:wav, 3:mp3，10:视频（三种音频格式目前仅支持16k采样率16bit）
          * @type {number || null}
          */
         this.VoiceFileType = null;
@@ -5354,16 +5618,10 @@ class SubmitAudioTaskRequest extends  AbstractModel {
         this.Functions = null;
 
         /**
-         * 课堂标识符
+         * 视频文件类型，默认点播，直播天 live_url
          * @type {string || null}
          */
-        this.ClassId = null;
-
-        /**
-         * 身份，1：老师 2：学生
-         * @type {number || null}
-         */
-        this.Identity = null;
+        this.FileType = null;
 
         /**
          * 识别词库名列表，评估过程使用这些词汇库中的词汇进行词汇使用行为分析
@@ -5390,8 +5648,7 @@ class SubmitAudioTaskRequest extends  AbstractModel {
             obj.deserialize(params.Functions)
             this.Functions = obj;
         }
-        this.ClassId = 'ClassId' in params ? params.ClassId : null;
-        this.Identity = 'Identity' in params ? params.Identity : null;
+        this.FileType = 'FileType' in params ? params.FileType : null;
         this.VocabLibNameList = 'VocabLibNameList' in params ? params.VocabLibNameList : null;
 
     }
@@ -5951,7 +6208,7 @@ class DescribeConversationTaskRequest extends  AbstractModel {
 }
 
 /**
- * 词汇库中的单词出现在音频中的起始时间和结束时间信息
+ * 词汇库中的单词出现在音频中的那个句子的起始时间和结束时间信息
  * @class
  */
 class VocabDetailInfomation extends  AbstractModel {
@@ -5959,8 +6216,8 @@ class VocabDetailInfomation extends  AbstractModel {
         super();
 
         /**
-         * 词汇库中的单词出现在该音频中的时间戳，出现了几次，就返回对应次数的起始和结束时间戳
-         * @type {DetailInfo || null}
+         * 词汇库中的单词出现在该音频中的那个句子的时间戳，出现了几次，就返回对应次数的起始和结束时间戳
+         * @type {Array.<DetailInfo> || null}
          */
         this.VocabDetailInfo = null;
 
@@ -5981,9 +6238,12 @@ class VocabDetailInfomation extends  AbstractModel {
         }
 
         if (params.VocabDetailInfo) {
-            let obj = new DetailInfo();
-            obj.deserialize(params.VocabDetailInfo)
-            this.VocabDetailInfo = obj;
+            this.VocabDetailInfo = new Array();
+            for (let z in params.VocabDetailInfo) {
+                let obj = new DetailInfo();
+                obj.deserialize(params.VocabDetailInfo[z]);
+                this.VocabDetailInfo.push(obj);
+            }
         }
         this.VocabLibName = 'VocabLibName' in params ? params.VocabLibName : null;
 
@@ -6180,9 +6440,11 @@ module.exports = {
     DeleteVocabLibRequest: DeleteVocabLibRequest,
     DescribeAITaskResultRequest: DescribeAITaskResultRequest,
     AIAssistantRequest: AIAssistantRequest,
+    CreatePersonRequest: CreatePersonRequest,
     LightStatistic: LightStatistic,
     DescribePersonsRequest: DescribePersonsRequest,
     CreateVocabResponse: CreateVocabResponse,
+    SubmitConversationTaskResponse: SubmitConversationTaskResponse,
     DescribeVocabLibRequest: DescribeVocabLibRequest,
     ActionType: ActionType,
     DescribePersonsResponse: DescribePersonsResponse,
@@ -6198,6 +6460,7 @@ module.exports = {
     DescribeAttendanceResultRequest: DescribeAttendanceResultRequest,
     WholeTextItem: WholeTextItem,
     DescribeConversationTaskResponse: DescribeConversationTaskResponse,
+    CreatePersonResponse: CreatePersonResponse,
     DescribeImageTaskRequest: DescribeImageTaskRequest,
     HighlightsInfomation: HighlightsInfomation,
     TimeType: TimeType,
@@ -6253,6 +6516,7 @@ module.exports = {
     ImageTaskFunction: ImageTaskFunction,
     FrameInfo: FrameInfo,
     Library: Library,
+    SubmitConversationTaskRequest: SubmitConversationTaskRequest,
     SubmitHighlightsResponse: SubmitHighlightsResponse,
     DeletePersonResponse: DeletePersonResponse,
     ImageTaskStatistic: ImageTaskStatistic,
