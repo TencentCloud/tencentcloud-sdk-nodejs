@@ -23,9 +23,11 @@ const FacePoseResult = models.FacePoseResult;
 const DeleteVocabLibRequest = models.DeleteVocabLibRequest;
 const DescribeAITaskResultRequest = models.DescribeAITaskResultRequest;
 const AIAssistantRequest = models.AIAssistantRequest;
+const CreatePersonRequest = models.CreatePersonRequest;
 const LightStatistic = models.LightStatistic;
 const DescribePersonsRequest = models.DescribePersonsRequest;
 const CreateVocabResponse = models.CreateVocabResponse;
+const SubmitConversationTaskResponse = models.SubmitConversationTaskResponse;
 const DescribeVocabLibRequest = models.DescribeVocabLibRequest;
 const ActionType = models.ActionType;
 const DescribePersonsResponse = models.DescribePersonsResponse;
@@ -41,6 +43,7 @@ const LightResult = models.LightResult;
 const DescribeAttendanceResultRequest = models.DescribeAttendanceResultRequest;
 const WholeTextItem = models.WholeTextItem;
 const DescribeConversationTaskResponse = models.DescribeConversationTaskResponse;
+const CreatePersonResponse = models.CreatePersonResponse;
 const DescribeImageTaskRequest = models.DescribeImageTaskRequest;
 const HighlightsInfomation = models.HighlightsInfomation;
 const TimeType = models.TimeType;
@@ -96,6 +99,7 @@ const LightDistributionStatistic = models.LightDistributionStatistic;
 const ImageTaskFunction = models.ImageTaskFunction;
 const FrameInfo = models.FrameInfo;
 const Library = models.Library;
+const SubmitConversationTaskRequest = models.SubmitConversationTaskRequest;
 const SubmitHighlightsResponse = models.SubmitHighlightsResponse;
 const DeletePersonResponse = models.DeletePersonResponse;
 const ImageTaskStatistic = models.ImageTaskStatistic;
@@ -246,6 +250,17 @@ class TciClient extends AbstractClient {
     }
 
     /**
+     * 对话任务分析接口
+     * @param {SubmitConversationTaskRequest} req
+     * @param {function(string, SubmitConversationTaskResponse):void} cb
+     * @public
+     */
+    SubmitConversationTask(req, cb) {
+        let resp = new SubmitConversationTaskResponse();
+        this.request("SubmitConversationTask", req, resp, cb);
+    }
+
+    /**
      * 视频精彩集锦结果查询接口，异步查询客户提交的请求的结果。
      * @param {DescribeHighlightResultRequest} req
      * @param {function(string, DescribeHighlightResultResponse):void} cb
@@ -290,14 +305,14 @@ class TciClient extends AbstractClient {
     }
 
     /**
-     * 用于取消已经提交的任务
-     * @param {CancelTaskRequest} req
-     * @param {function(string, CancelTaskResponse):void} cb
+     * 创建人员
+     * @param {CreatePersonRequest} req
+     * @param {function(string, CreatePersonResponse):void} cb
      * @public
      */
-    CancelTask(req, cb) {
-        let resp = new CancelTaskResponse();
-        this.request("CancelTask", req, resp, cb);
+    CreatePerson(req, cb) {
+        let resp = new CreatePersonResponse();
+        this.request("CreatePerson", req, resp, cb);
     }
 
     /**
@@ -342,6 +357,17 @@ class TciClient extends AbstractClient {
     SubmitCheckAttendanceTask(req, cb) {
         let resp = new SubmitCheckAttendanceTaskResponse();
         this.request("SubmitCheckAttendanceTask", req, resp, cb);
+    }
+
+    /**
+     * 用于取消已经提交的任务
+     * @param {CancelTaskRequest} req
+     * @param {function(string, CancelTaskResponse):void} cb
+     * @public
+     */
+    CancelTask(req, cb) {
+        let resp = new CancelTaskResponse();
+        this.request("CancelTask", req, resp, cb);
     }
 
     /**

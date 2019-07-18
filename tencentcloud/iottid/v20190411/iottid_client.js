@@ -17,11 +17,15 @@
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const DescribePermissionRequest = models.DescribePermissionRequest;
+const VerifyChipBurnInfoResponse = models.VerifyChipBurnInfoResponse;
 const DeliverTidsResponse = models.DeliverTidsResponse;
 const BurnTidNotifyResponse = models.BurnTidNotifyResponse;
 const DownloadTidsResponse = models.DownloadTidsResponse;
+const AuthTestTidResponse = models.AuthTestTidResponse;
 const DeliverTidNotifyResponse = models.DeliverTidNotifyResponse;
+const AuthTestTidRequest = models.AuthTestTidRequest;
 const BurnTidNotifyRequest = models.BurnTidNotifyRequest;
+const VerifyChipBurnInfoRequest = models.VerifyChipBurnInfoRequest;
 const DeliverTidsRequest = models.DeliverTidsRequest;
 const DeliverTidNotifyRequest = models.DeliverTidNotifyRequest;
 const TidKeysInfo = models.TidKeysInfo;
@@ -40,14 +44,25 @@ class IottidClient extends AbstractClient {
     }
     
     /**
-     * 查询企业用户TID平台控制台权限
-     * @param {DescribePermissionRequest} req
-     * @param {function(string, DescribePermissionResponse):void} cb
+     * 单向认证测试TID
+     * @param {AuthTestTidRequest} req
+     * @param {function(string, AuthTestTidResponse):void} cb
      * @public
      */
-    DescribePermission(req, cb) {
-        let resp = new DescribePermissionResponse();
-        this.request("DescribePermission", req, resp, cb);
+    AuthTestTid(req, cb) {
+        let resp = new AuthTestTidResponse();
+        this.request("AuthTestTid", req, resp, cb);
+    }
+
+    /**
+     * 下载控制台验证芯片烧录信息，保证TID与中心信息一致
+     * @param {VerifyChipBurnInfoRequest} req
+     * @param {function(string, VerifyChipBurnInfoResponse):void} cb
+     * @public
+     */
+    VerifyChipBurnInfo(req, cb) {
+        let resp = new VerifyChipBurnInfoResponse();
+        this.request("VerifyChipBurnInfo", req, resp, cb);
     }
 
     /**
@@ -70,6 +85,17 @@ class IottidClient extends AbstractClient {
     BurnTidNotify(req, cb) {
         let resp = new BurnTidNotifyResponse();
         this.request("BurnTidNotify", req, resp, cb);
+    }
+
+    /**
+     * 查询企业用户TID平台控制台权限
+     * @param {DescribePermissionRequest} req
+     * @param {function(string, DescribePermissionResponse):void} cb
+     * @public
+     */
+    DescribePermission(req, cb) {
+        let resp = new DescribePermissionResponse();
+        this.request("DescribePermission", req, resp, cb);
     }
 
     /**

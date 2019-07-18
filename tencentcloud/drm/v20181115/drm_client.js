@@ -19,14 +19,23 @@ const AbstractClient = require('../../common/abstract_client')
 const CreateLicenseResponse = models.CreateLicenseResponse;
 const PlaybackPolicy = models.PlaybackPolicy;
 const StartEncryptionRequest = models.StartEncryptionRequest;
+const AddFairPlayPemResponse = models.AddFairPlayPemResponse;
+const ModifyFairPlayPemRequest = models.ModifyFairPlayPemRequest;
+const AddFairPlayPemRequest = models.AddFairPlayPemRequest;
+const DeleteFairPlayPemResponse = models.DeleteFairPlayPemResponse;
+const DescribeFairPlayPemRequest = models.DescribeFairPlayPemRequest;
 const DescribeKeysResponse = models.DescribeKeysResponse;
 const DrmOutputPara = models.DrmOutputPara;
 const CreateLicenseRequest = models.CreateLicenseRequest;
-const StartEncryptionResponse = models.StartEncryptionResponse;
+const DescribeFairPlayPemResponse = models.DescribeFairPlayPemResponse;
 const Key = models.Key;
+const ModifyFairPlayPemResponse = models.ModifyFairPlayPemResponse;
+const DeleteFairPlayPemRequest = models.DeleteFairPlayPemRequest;
 const DescribeKeysRequest = models.DescribeKeysRequest;
 const DrmSourceObject = models.DrmSourceObject;
+const FairPlayPemDigestInfo = models.FairPlayPemDigestInfo;
 const DrmOutputObject = models.DrmOutputObject;
+const StartEncryptionResponse = models.StartEncryptionResponse;
 
 
 /**
@@ -40,6 +49,29 @@ class DrmClient extends AbstractClient {
     }
     
     /**
+     * 开发者调用该接口，启动一次内容文件的DRM加密工作流
+     * @param {StartEncryptionRequest} req
+     * @param {function(string, StartEncryptionResponse):void} cb
+     * @public
+     */
+    StartEncryption(req, cb) {
+        let resp = new StartEncryptionResponse();
+        this.request("StartEncryption", req, resp, cb);
+    }
+
+    /**
+     * 本接口用来设置fairplay方案所需的私钥、私钥密钥、ask等信息。
+如需使用fairplay方案，请务必先设置私钥。
+     * @param {AddFairPlayPemRequest} req
+     * @param {function(string, AddFairPlayPemResponse):void} cb
+     * @public
+     */
+    AddFairPlayPem(req, cb) {
+        let resp = new AddFairPlayPemResponse();
+        this.request("AddFairPlayPem", req, resp, cb);
+    }
+
+    /**
      * 本接口用来生成DRM方案对应的播放许可证，开发者需提供DRM方案类型、内容类型参数，后台将生成许可证后返回许可证数据
 开发者需要转发终端设备发出的许可证请求信息。
      * @param {CreateLicenseRequest} req
@@ -52,14 +84,15 @@ class DrmClient extends AbstractClient {
     }
 
     /**
-     * 开发者调用该接口，启动一次内容文件的DRM加密工作流
-     * @param {StartEncryptionRequest} req
-     * @param {function(string, StartEncryptionResponse):void} cb
+     * 本接口用来设置fairplay方案所需的私钥、私钥密钥、ask等信息。
+如需使用fairplay方案，请务必先设置私钥。
+     * @param {ModifyFairPlayPemRequest} req
+     * @param {function(string, ModifyFairPlayPemResponse):void} cb
      * @public
      */
-    StartEncryption(req, cb) {
-        let resp = new StartEncryptionResponse();
-        this.request("StartEncryption", req, resp, cb);
+    ModifyFairPlayPem(req, cb) {
+        let resp = new ModifyFairPlayPemResponse();
+        this.request("ModifyFairPlayPem", req, resp, cb);
     }
 
     /**
@@ -73,6 +106,30 @@ class DrmClient extends AbstractClient {
     DescribeKeys(req, cb) {
         let resp = new DescribeKeysResponse();
         this.request("DescribeKeys", req, resp, cb);
+    }
+
+    /**
+     * 本接口用来删除fairplay方案的私钥、ask等信息
+注：高风险操作，删除后，您将无法使用腾讯云DRM提供的fairplay服务。
+由于缓存，删除操作需要约半小时生效
+     * @param {DeleteFairPlayPemRequest} req
+     * @param {function(string, DeleteFairPlayPemResponse):void} cb
+     * @public
+     */
+    DeleteFairPlayPem(req, cb) {
+        let resp = new DeleteFairPlayPemResponse();
+        this.request("DeleteFairPlayPem", req, resp, cb);
+    }
+
+    /**
+     * 该接口用来查询设置的FairPlay私钥校验信息。可用该接口校验设置的私钥与本身的私钥是否一致。
+     * @param {DescribeFairPlayPemRequest} req
+     * @param {function(string, DescribeFairPlayPemResponse):void} cb
+     * @public
+     */
+    DescribeFairPlayPem(req, cb) {
+        let resp = new DescribeFairPlayPemResponse();
+        this.request("DescribeFairPlayPem", req, resp, cb);
     }
 
 

@@ -22,8 +22,10 @@ const DescribeInstanceOperationsRequest = models.DescribeInstanceOperationsReque
 const OperationDetail = models.OperationDetail;
 const RestartInstanceResponse = models.RestartInstanceResponse;
 const DictInfo = models.DictInfo;
+const UpgradeLicenseResponse = models.UpgradeLicenseResponse;
 const CreateInstanceResponse = models.CreateInstanceResponse;
 const DescribeInstanceLogsRequest = models.DescribeInstanceLogsRequest;
+const UpgradeLicenseRequest = models.UpgradeLicenseRequest;
 const CosBackup = models.CosBackup;
 const TagInfo = models.TagInfo;
 const KeyValue = models.KeyValue;
@@ -42,7 +44,9 @@ const EsAcl = models.EsAcl;
 const MasterNodeInfo = models.MasterNodeInfo;
 const DeleteInstanceRequest = models.DeleteInstanceRequest;
 const SubTaskDetail = models.SubTaskDetail;
+const UpgradeInstanceResponse = models.UpgradeInstanceResponse;
 const UpdateInstanceResponse = models.UpdateInstanceResponse;
+const UpgradeInstanceRequest = models.UpgradeInstanceRequest;
 const Operation = models.Operation;
 
 
@@ -87,6 +91,28 @@ class EsClient extends AbstractClient {
     CreateInstance(req, cb) {
         let resp = new CreateInstanceResponse();
         this.request("CreateInstance", req, resp, cb);
+    }
+
+    /**
+     * 升级ES集群版本
+     * @param {UpgradeInstanceRequest} req
+     * @param {function(string, UpgradeInstanceResponse):void} cb
+     * @public
+     */
+    UpgradeInstance(req, cb) {
+        let resp = new UpgradeInstanceResponse();
+        this.request("UpgradeInstance", req, resp, cb);
+    }
+
+    /**
+     * 升级ES商业特性
+     * @param {UpgradeLicenseRequest} req
+     * @param {function(string, UpgradeLicenseResponse):void} cb
+     * @public
+     */
+    UpgradeLicense(req, cb) {
+        let resp = new UpgradeLicenseResponse();
+        this.request("UpgradeLicense", req, resp, cb);
     }
 
     /**

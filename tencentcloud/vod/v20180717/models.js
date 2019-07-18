@@ -1606,6 +1606,48 @@ class AudioTemplateInfoForUpdate extends  AbstractModel {
 }
 
 /**
+ * ModifySubAppIdInfo请求参数结构体
+ * @class
+ */
+class ModifySubAppIdInfoRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 子应用 ID。
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+        /**
+         * 子应用名称，长度限制：40个字符。
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 子应用简介，长度限制： 300个字符。
+         * @type {string || null}
+         */
+        this.Description = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Description = 'Description' in params ? params.Description : null;
+
+    }
+}
+
+/**
  * DeletePersonSample请求参数结构体
  * @class
  */
@@ -6212,8 +6254,8 @@ class VideoTemplateInfo extends  AbstractModel {
 
         /**
          * 分辨率自适应，可选值：
-<li>open：开启，此时，Width 代表视频的宽度，Height 表示视频的高度；</li>
-<li>close：关闭，此时，Width 代表视频的长边，Height 表示视频的短边。</li>
+<li>open：开启，此时，Width 代表视频的长边，Height 表示视频的短边；</li>
+<li>close：关闭，此时，Width 代表视频的宽度，Height 表示视频的高度。</li>
 默认值：open。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
@@ -7918,6 +7960,34 @@ class ImageWatermarkTemplate extends  AbstractModel {
 }
 
 /**
+ * ModifySubAppIdInfo返回参数结构体
+ * @class
+ */
+class ModifySubAppIdInfoResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * 语音关键词识别控制参数。
  * @class
  */
@@ -7951,6 +8021,34 @@ class AsrWordsConfigureInfo extends  AbstractModel {
         }
         this.Switch = 'Switch' in params ? params.Switch : null;
         this.LabelSet = 'LabelSet' in params ? params.LabelSet : null;
+
+    }
+}
+
+/**
+ * ModifySubAppIdStatus返回参数结构体
+ * @class
+ */
+class ModifySubAppIdStatusResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -9305,6 +9403,43 @@ class CreateAIRecognitionTemplateResponse extends  AbstractModel {
         }
         this.Definition = 'Definition' in params ? params.Definition : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifySubAppIdStatus请求参数结构体
+ * @class
+ */
+class ModifySubAppIdStatusRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 子应用 ID。
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+        /**
+         * 子应用状态，取值范围：
+<li>On：启用</li>
+<li>Off：停用</li>
+         * @type {string || null}
+         */
+        this.Status = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
+        this.Status = 'Status' in params ? params.Status : null;
 
     }
 }
@@ -12927,6 +13062,7 @@ class DescribeMediaInfosRequest extends  AbstractModel {
 <li>sampleSnapshotInfo（采样截图信息）。</li>
 <li>keyFrameDescInfo（打点信息）。</li>
 <li>adaptiveDynamicStreamingInfo（转自适应码流信息）。</li>
+<li>miniProgramReviewInfo（小程序审核信息）。</li>
          * @type {Array.<string> || null}
          */
         this.Filters = null;
@@ -14049,6 +14185,49 @@ class MediaSampleSnapshotInfo extends  AbstractModel {
 }
 
 /**
+ * DescribeSubAppIds返回参数结构体
+ * @class
+ */
+class DescribeSubAppIdsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 子应用信息集合。
+         * @type {Array.<SubAppIdInfo> || null}
+         */
+        this.SubAppIdInfoSet = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.SubAppIdInfoSet) {
+            this.SubAppIdInfoSet = new Array();
+            for (let z in params.SubAppIdInfoSet) {
+                let obj = new SubAppIdInfo();
+                obj.deserialize(params.SubAppIdInfoSet[z]);
+                this.SubAppIdInfoSet.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * 点播文件信息
  * @class
  */
@@ -14057,14 +14236,14 @@ class MediaInfo extends  AbstractModel {
         super();
 
         /**
-         * 基础信息。包括视频名称、大小、时长、封面图片等。
+         * 基础信息。包括视频名称、分类、播放地址、封面图片等。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {MediaBasicInfo || null}
          */
         this.BasicInfo = null;
 
         /**
-         * 元信息。包括视频流信息、音频流信息等。
+         * 元信息。包括大小、时长、视频流信息、音频流信息等。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {MediaMetaData || null}
          */
@@ -14226,8 +14405,8 @@ class VideoTemplateInfoForUpdate extends  AbstractModel {
 
         /**
          * 分辨率自适应，可选值：
-<li>open：开启，此时，Width 代表视频的宽度，Height 表示视频的高度；</li>
-<li>close：关闭，此时，Width 代表视频的长边，Height 表示视频的短边。</li>
+<li>open：开启，此时，Width 代表视频的长边，Height 表示视频的短边；</li>
+<li>close：关闭，此时，Width 代表视频的宽度，Height 表示视频的高度。</li>
          * @type {string || null}
          */
         this.ResolutionAdaptive = null;
@@ -15151,6 +15330,27 @@ class DescribeTasksResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeSubAppIds请求参数结构体
+ * @class
+ */
+class DescribeSubAppIdsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+    }
+}
+
+/**
  * 人脸识别输入。
  * @class
  */
@@ -16027,6 +16227,64 @@ class MediaImageSpriteInfo extends  AbstractModel {
                 this.ImageSpriteSet.push(obj);
             }
         }
+
+    }
+}
+
+/**
+ * 子应用信息。
+ * @class
+ */
+class SubAppIdInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 子应用 ID。
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+        /**
+         * 子应用名称。
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 子应用简介。
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * 子应用创建时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F)。
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * 子应用状态，有效值：
+<li>On：启用；</li>
+<li>Off：停用。</li>
+         * @type {string || null}
+         */
+        this.Status = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.Status = 'Status' in params ? params.Status : null;
 
     }
 }
@@ -19926,6 +20184,7 @@ module.exports = {
     ClassificationConfigureInfo: ClassificationConfigureInfo,
     MediaAiAnalysisClassificationItem: MediaAiAnalysisClassificationItem,
     AudioTemplateInfoForUpdate: AudioTemplateInfoForUpdate,
+    ModifySubAppIdInfoRequest: ModifySubAppIdInfoRequest,
     DeletePersonSampleRequest: DeletePersonSampleRequest,
     MediaSampleSnapshotItem: MediaSampleSnapshotItem,
     AiRecognitionTaskInput: AiRecognitionTaskInput,
@@ -20042,7 +20301,9 @@ module.exports = {
     ObjectConfigureInfoForUpdate: ObjectConfigureInfoForUpdate,
     DeleteMediaRequest: DeleteMediaRequest,
     ImageWatermarkTemplate: ImageWatermarkTemplate,
+    ModifySubAppIdInfoResponse: ModifySubAppIdInfoResponse,
     AsrWordsConfigureInfo: AsrWordsConfigureInfo,
+    ModifySubAppIdStatusResponse: ModifySubAppIdStatusResponse,
     SimpleHlsClipRequest: SimpleHlsClipRequest,
     MediaDeleteItem: MediaDeleteItem,
     AiSamplePerson: AiSamplePerson,
@@ -20070,6 +20331,7 @@ module.exports = {
     AiSampleTagOperation: AiSampleTagOperation,
     ConfirmEventsRequest: ConfirmEventsRequest,
     CreateAIRecognitionTemplateResponse: CreateAIRecognitionTemplateResponse,
+    ModifySubAppIdStatusRequest: ModifySubAppIdStatusRequest,
     DeleteTranscodeTemplateRequest: DeleteTranscodeTemplateRequest,
     AiReviewTerrorismTaskOutput: AiReviewTerrorismTaskOutput,
     ResetProcedureTemplateResponse: ResetProcedureTemplateResponse,
@@ -20151,6 +20413,7 @@ module.exports = {
     DeleteClassResponse: DeleteClassResponse,
     ModifyTranscodeTemplateResponse: ModifyTranscodeTemplateResponse,
     MediaSampleSnapshotInfo: MediaSampleSnapshotInfo,
+    DescribeSubAppIdsResponse: DescribeSubAppIdsResponse,
     MediaInfo: MediaInfo,
     VideoTemplateInfoForUpdate: VideoTemplateInfoForUpdate,
     CreateContentReviewTemplateRequest: CreateContentReviewTemplateRequest,
@@ -20169,6 +20432,7 @@ module.exports = {
     OcrFullTextConfigureInfoForUpdate: OcrFullTextConfigureInfoForUpdate,
     AiRecognitionTaskOcrFullTextResultInput: AiRecognitionTaskOcrFullTextResultInput,
     DescribeTasksResponse: DescribeTasksResponse,
+    DescribeSubAppIdsRequest: DescribeSubAppIdsRequest,
     AiRecognitionTaskFaceResultInput: AiRecognitionTaskFaceResultInput,
     AiReviewPoliticalTaskOutput: AiReviewPoliticalTaskOutput,
     AiReviewTaskPoliticalResult: AiReviewTaskPoliticalResult,
@@ -20183,6 +20447,7 @@ module.exports = {
     AiReviewTerrorismTaskInput: AiReviewTerrorismTaskInput,
     MediaAudioStreamItem: MediaAudioStreamItem,
     MediaImageSpriteInfo: MediaImageSpriteInfo,
+    SubAppIdInfo: SubAppIdInfo,
     DescribeAllClassResponse: DescribeAllClassResponse,
     DeleteWatermarkTemplateRequest: DeleteWatermarkTemplateRequest,
     EditMediaStreamInfo: EditMediaStreamInfo,

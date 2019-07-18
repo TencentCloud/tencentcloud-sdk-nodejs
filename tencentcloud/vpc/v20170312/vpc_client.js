@@ -67,6 +67,7 @@ const AcceptAttachCcnInstancesRequest = models.AcceptAttachCcnInstancesRequest;
 const DescribeGatewayFlowMonitorDetailResponse = models.DescribeGatewayFlowMonitorDetailResponse;
 const DeleteFlowLogRequest = models.DeleteFlowLogRequest;
 const HaVipDisassociateAddressIpResponse = models.HaVipDisassociateAddressIpResponse;
+const DescribeTaskResultRequest = models.DescribeTaskResultRequest;
 const AttachNetworkInterfaceRequest = models.AttachNetworkInterfaceRequest;
 const AssignIpv6CidrBlockRequest = models.AssignIpv6CidrBlockRequest;
 const CreateSecurityGroupPoliciesResponse = models.CreateSecurityGroupPoliciesResponse;
@@ -277,6 +278,7 @@ const CreateAddressTemplateGroupResponse = models.CreateAddressTemplateGroupResp
 const DescribeBandwidthPackageQuotaResponse = models.DescribeBandwidthPackageQuotaResponse;
 const DeleteServiceTemplateGroupRequest = models.DeleteServiceTemplateGroupRequest;
 const CreateDirectConnectGatewayResponse = models.CreateDirectConnectGatewayResponse;
+const DescribeTaskResultResponse = models.DescribeTaskResultResponse;
 const ModifyAddressTemplateGroupAttributeRequest = models.ModifyAddressTemplateGroupAttributeRequest;
 const ModifyServiceTemplateGroupAttributeRequest = models.ModifyServiceTemplateGroupAttributeRequest;
 const UnassignIpv6CidrBlockRequest = models.UnassignIpv6CidrBlockRequest;
@@ -436,6 +438,17 @@ class VpcClient extends AbstractClient {
     CreateFlowLog(req, cb) {
         let resp = new CreateFlowLogResponse();
         this.request("CreateFlowLog", req, resp, cb);
+    }
+
+    /**
+     * 查询EIP异步任务执行结果
+     * @param {DescribeTaskResultRequest} req
+     * @param {function(string, DescribeTaskResultResponse):void} cb
+     * @public
+     */
+    DescribeTaskResult(req, cb) {
+        let resp = new DescribeTaskResultResponse();
+        this.request("DescribeTaskResult", req, resp, cb);
     }
 
     /**

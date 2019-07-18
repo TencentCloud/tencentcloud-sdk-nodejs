@@ -2316,6 +2316,41 @@ class HaVipDisassociateAddressIpResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeTaskResult请求参数结构体
+ * @class
+ */
+class DescribeTaskResultRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 异步任务ID
+         * @type {number || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * 计费订单号
+         * @type {string || null}
+         */
+        this.DealName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.DealName = 'DealName' in params ? params.DealName : null;
+
+    }
+}
+
+/**
  * AttachNetworkInterface请求参数结构体
  * @class
  */
@@ -3094,6 +3129,12 @@ class NetworkInterface extends  AbstractModel {
          */
         this.Ipv6AddressSet = null;
 
+        /**
+         * 标签键值对。
+         * @type {Array.<Tag> || null}
+         */
+        this.TagSet = null;
+
     }
 
     /**
@@ -3136,6 +3177,15 @@ class NetworkInterface extends  AbstractModel {
                 let obj = new Ipv6Address();
                 obj.deserialize(params.Ipv6AddressSet[z]);
                 this.Ipv6AddressSet.push(obj);
+            }
+        }
+
+        if (params.TagSet) {
+            this.TagSet = new Array();
+            for (let z in params.TagSet) {
+                let obj = new Tag();
+                obj.deserialize(params.TagSet[z]);
+                this.TagSet.push(obj);
             }
         }
 
@@ -5758,6 +5808,8 @@ class DescribeVpcsRequest extends  AbstractModel {
 <li>is-default - String - （过滤条件）是否默认VPC。</li>
 <li>vpc-id - String - （过滤条件）VPC实例ID形如：vpc-f49l6u0z。</li>
 <li>cidr-block - String - （过滤条件）vpc的cidr。</li>
+<li>tag-key - String -是否必填：否- （过滤条件）按照标签键进行过滤。</li>
+<li>tag:tag-key - String - 是否必填：否 - （过滤条件）按照标签键值对进行过滤。 tag-key使用具体的标签键进行替换。使用请参考示例2。</li>
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
@@ -8109,6 +8161,8 @@ class DescribeSubnetsRequest extends  AbstractModel {
 <li>is-remote-vpc-snat - Boolean - （过滤条件）是否为VPC SNAT地址池子网。</li>
 <li>subnet-name - String - （过滤条件）子网名称。</li>
 <li>zone - String - （过滤条件）可用区。</li>
+<li>tag-key - String -是否必填：否- （过滤条件）按照标签键进行过滤。</li>
+<li>tag:tag-key - String - 是否必填：否 - （过滤条件）按照标签键值对进行过滤。 tag-key使用具体的标签键进行替换。使用请参考示例2。</li>
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
@@ -9925,6 +9979,8 @@ class DescribeRouteTablesRequest extends  AbstractModel {
 <li>route-table-name - String - （过滤条件）路由表名称。</li>
 <li>vpc-id - String - （过滤条件）VPC实例ID，形如：vpc-f49l6u0z。</li>
 <li>association.main - String - （过滤条件）是否主路由表。</li>
+<li>tag-key - String -是否必填：否- （过滤条件）按照标签键进行过滤。</li>
+<li>tag:tag-key - String - 是否必填：否 - （过滤条件）按照标签键值对进行过滤。 tag-key使用具体的标签键进行替换。使用请参考示例2。</li>
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
@@ -11625,6 +11681,48 @@ class CreateDirectConnectGatewayResponse extends  AbstractModel {
             obj.deserialize(params.DirectConnectGateway)
             this.DirectConnectGateway = obj;
         }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeTaskResult返回参数结构体
+ * @class
+ */
+class DescribeTaskResultResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 任务ID
+         * @type {number || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * 执行结果，包括"SUCCESS", "FAILED", "RUNNING"
+         * @type {string || null}
+         */
+        this.Result = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.Result = 'Result' in params ? params.Result : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -16027,6 +16125,7 @@ module.exports = {
     DescribeGatewayFlowMonitorDetailResponse: DescribeGatewayFlowMonitorDetailResponse,
     DeleteFlowLogRequest: DeleteFlowLogRequest,
     HaVipDisassociateAddressIpResponse: HaVipDisassociateAddressIpResponse,
+    DescribeTaskResultRequest: DescribeTaskResultRequest,
     AttachNetworkInterfaceRequest: AttachNetworkInterfaceRequest,
     AssignIpv6CidrBlockRequest: AssignIpv6CidrBlockRequest,
     CreateSecurityGroupPoliciesResponse: CreateSecurityGroupPoliciesResponse,
@@ -16237,6 +16336,7 @@ module.exports = {
     DescribeBandwidthPackageQuotaResponse: DescribeBandwidthPackageQuotaResponse,
     DeleteServiceTemplateGroupRequest: DeleteServiceTemplateGroupRequest,
     CreateDirectConnectGatewayResponse: CreateDirectConnectGatewayResponse,
+    DescribeTaskResultResponse: DescribeTaskResultResponse,
     ModifyAddressTemplateGroupAttributeRequest: ModifyAddressTemplateGroupAttributeRequest,
     ModifyServiceTemplateGroupAttributeRequest: ModifyServiceTemplateGroupAttributeRequest,
     UnassignIpv6CidrBlockRequest: UnassignIpv6CidrBlockRequest,
