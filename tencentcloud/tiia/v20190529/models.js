@@ -17,6 +17,49 @@
 const AbstractModel = require("../../common/abstract_model");
 
 /**
+ * DetectProduct返回参数结构体
+ * @class
+ */
+class DetectProductResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 商品识别结果数组
+         * @type {Array.<Product> || null}
+         */
+        this.Products = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Products) {
+            this.Products = new Array();
+            for (let z in params.Products) {
+                let obj = new Product();
+                obj.deserialize(params.Products[z]);
+                this.Products.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * ImageModeration请求参数结构体
  * @class
  */
@@ -79,6 +122,76 @@ class ImageModerationRequest extends  AbstractModel {
         this.Config = 'Config' in params ? params.Config : null;
         this.Extra = 'Extra' in params ? params.Extra : null;
         this.ImageBase64 = 'ImageBase64' in params ? params.ImageBase64 : null;
+
+    }
+}
+
+/**
+ * 检测到的单个商品结构体
+ * @class
+ */
+class Product extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 图片中商品的三级分类识别结果，选取所有三级分类中的置信度最大者
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 三级商品分类对应的一级分类和二级分类，两级之间用“-”（中划线）隔开，例如商品名称是“硬盘”，那么Parents输出为“电脑、办公-电脑配件”
+         * @type {string || null}
+         */
+        this.Parents = null;
+
+        /**
+         * 算法对于Name的置信度，0-100之间，值越高，表示对于Name越确定
+         * @type {number || null}
+         */
+        this.Confidence = null;
+
+        /**
+         * 商品坐标X轴的最小值
+         * @type {number || null}
+         */
+        this.XMin = null;
+
+        /**
+         * 商品坐标Y轴的最小值
+         * @type {number || null}
+         */
+        this.YMin = null;
+
+        /**
+         * 商品坐标X轴的最大值
+         * @type {number || null}
+         */
+        this.XMax = null;
+
+        /**
+         * 商品坐标Y轴的最大值
+         * @type {number || null}
+         */
+        this.YMax = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Parents = 'Parents' in params ? params.Parents : null;
+        this.Confidence = 'Confidence' in params ? params.Confidence : null;
+        this.XMin = 'XMin' in params ? params.XMin : null;
+        this.YMin = 'YMin' in params ? params.YMin : null;
+        this.XMax = 'XMax' in params ? params.XMax : null;
+        this.YMax = 'YMax' in params ? params.YMax : null;
 
     }
 }
@@ -244,6 +357,79 @@ class DetectLabelRequest extends  AbstractModel {
         }
         this.ImageUrl = 'ImageUrl' in params ? params.ImageUrl : null;
         this.ImageBase64 = 'ImageBase64' in params ? params.ImageBase64 : null;
+
+    }
+}
+
+/**
+ * RecognizeCar请求参数结构体
+ * @class
+ */
+class RecognizeCarRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 图片的BASE64值；
+BASE64编码后的图片数据大小不超过3M，支持PNG、JPG、JPEG、BMP格式，暂不支持GIF格式。
+         * @type {string || null}
+         */
+        this.ImageBase64 = null;
+
+        /**
+         * 图片的 ImageUrl、ImageBase64必须提供一个，如果都提供，只使用ImageUrl。
+
+图片URL地址。支持的图片格式：PNG、JPG、JPEG、BMP，暂不支持GIF格式。支持的图片大小：所下载图片经Base64编码后不超过4M。图片下载时间不超过3秒。
+         * @type {string || null}
+         */
+        this.ImageUrl = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ImageBase64 = 'ImageBase64' in params ? params.ImageBase64 : null;
+        this.ImageUrl = 'ImageUrl' in params ? params.ImageUrl : null;
+
+    }
+}
+
+/**
+ * 汽车坐标信息
+ * @class
+ */
+class Coord extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 横坐标x
+         * @type {number || null}
+         */
+        this.X = null;
+
+        /**
+         * 纵坐标y
+         * @type {number || null}
+         */
+        this.Y = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.X = 'X' in params ? params.X : null;
+        this.Y = 'Y' in params ? params.Y : null;
 
     }
 }
@@ -511,6 +697,69 @@ BLOCK：违规
 }
 
 /**
+ * 车辆属性识别的结果
+ * @class
+ */
+class CarTagItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 车系
+         * @type {string || null}
+         */
+        this.Serial = null;
+
+        /**
+         * 车辆品牌
+         * @type {string || null}
+         */
+        this.Brand = null;
+
+        /**
+         * 车辆类型
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * 车辆颜色
+         * @type {string || null}
+         */
+        this.Color = null;
+
+        /**
+         * 置信度，0-100
+         * @type {number || null}
+         */
+        this.Confidence = null;
+
+        /**
+         * 年份，没识别出年份的时候返回0
+         * @type {number || null}
+         */
+        this.Year = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Serial = 'Serial' in params ? params.Serial : null;
+        this.Brand = 'Brand' in params ? params.Brand : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Color = 'Color' in params ? params.Color : null;
+        this.Confidence = 'Confidence' in params ? params.Confidence : null;
+        this.Year = 'Year' in params ? params.Year : null;
+
+    }
+}
+
+/**
  * 识别出的人脸在图片中的位置。
 
  * @class
@@ -604,6 +853,106 @@ class FaceResult extends  AbstractModel {
                 this.Candidates.push(obj);
             }
         }
+
+    }
+}
+
+/**
+ * RecognizeCar返回参数结构体
+ * @class
+ */
+class RecognizeCarResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 汽车的四个矩形顶点坐标
+         * @type {Array.<Coord> || null}
+         */
+        this.CarCoords = null;
+
+        /**
+         * 车辆属性识别的结果数组
+         * @type {Array.<CarTagItem> || null}
+         */
+        this.CarTags = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.CarCoords) {
+            this.CarCoords = new Array();
+            for (let z in params.CarCoords) {
+                let obj = new Coord();
+                obj.deserialize(params.CarCoords[z]);
+                this.CarCoords.push(obj);
+            }
+        }
+
+        if (params.CarTags) {
+            this.CarTags = new Array();
+            for (let z in params.CarTags) {
+                let obj = new CarTagItem();
+                obj.deserialize(params.CarTags[z]);
+                this.CarTags.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DetectProduct请求参数结构体
+ * @class
+ */
+class DetectProductRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 图片URL地址。 
+图片限制： 
+• 图片格式：PNG、JPG、JPEG。 
+• 图片大小：所下载图片经Base64编码后不超过4M。图片下载时间不超过3秒。 
+建议：
+• 图片像素：大于50*50像素，否则影响识别效果； 
+• 长宽比：长边：短边<5； 
+接口响应时间会受到图片下载时间的影响，建议使用更可靠的存储服务，推荐将图片存储在腾讯云COS。
+         * @type {string || null}
+         */
+        this.ImageUrl = null;
+
+        /**
+         * 图片经过base64编码的内容。最大不超过4M。与ImageUrl同时存在时优先使用ImageUrl字段。
+         * @type {string || null}
+         */
+        this.ImageBase64 = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ImageUrl = 'ImageUrl' in params ? params.ImageUrl : null;
+        this.ImageBase64 = 'ImageBase64' in params ? params.ImageBase64 : null;
 
     }
 }
@@ -741,16 +1090,23 @@ class DetectLabelItem extends  AbstractModel {
 }
 
 module.exports = {
+    DetectProductResponse: DetectProductResponse,
     ImageModerationRequest: ImageModerationRequest,
+    Product: Product,
     Candidate: Candidate,
     TerrorismResult: TerrorismResult,
     DetectLabelRequest: DetectLabelRequest,
+    RecognizeCarRequest: RecognizeCarRequest,
+    Coord: Coord,
     DetectLabelResponse: DetectLabelResponse,
     PoliticsResult: PoliticsResult,
     PornResult: PornResult,
     DisgustResult: DisgustResult,
+    CarTagItem: CarTagItem,
     FaceRect: FaceRect,
     FaceResult: FaceResult,
+    RecognizeCarResponse: RecognizeCarResponse,
+    DetectProductRequest: DetectProductRequest,
     ImageModerationResponse: ImageModerationResponse,
     DetectLabelItem: DetectLabelItem,
 

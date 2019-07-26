@@ -9896,7 +9896,7 @@ class ModifyBackupConfigRequest extends  AbstractModel {
         this.InstanceId = null;
 
         /**
-         * 备份过期时间，单位为天，最小值为7天，最大值为732天。
+         * 备份文件的保留时间，单位为天。最小值为7天，最大值为732天。
          * @type {number || null}
          */
         this.ExpireDays = null;
@@ -9913,6 +9913,12 @@ class ModifyBackupConfigRequest extends  AbstractModel {
          */
         this.BackupMethod = null;
 
+        /**
+         * binlog的保留时间，单位为天。最小值为7天，最大值为732天。该值的设置不能大于备份文件的保留时间。
+         * @type {number || null}
+         */
+        this.BinlogExpireDays = null;
+
     }
 
     /**
@@ -9926,6 +9932,7 @@ class ModifyBackupConfigRequest extends  AbstractModel {
         this.ExpireDays = 'ExpireDays' in params ? params.ExpireDays : null;
         this.StartTime = 'StartTime' in params ? params.StartTime : null;
         this.BackupMethod = 'BackupMethod' in params ? params.BackupMethod : null;
+        this.BinlogExpireDays = 'BinlogExpireDays' in params ? params.BinlogExpireDays : null;
 
     }
 }
