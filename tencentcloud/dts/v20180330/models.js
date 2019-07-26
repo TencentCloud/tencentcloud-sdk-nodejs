@@ -465,13 +465,13 @@ class CreateMigrateJobRequest extends  AbstractModel {
         this.MigrateOption = null;
 
         /**
-         * 源实例数据库类型:mysql,redis,mongodb
+         * 源实例数据库类型，目前支持：mysql，redis，mongodb，postgresql，mariadb，percona。不同地域数据库类型的具体支持情况，请参考控制台创建迁移页面。
          * @type {string || null}
          */
         this.SrcDatabaseType = null;
 
         /**
-         * 源实例接入类型，值包括：extranet(外网),cvm(cvm自建实例),dcg(专线接入的实例),vpncloud(云vpn接入的实例),vpnselfbuild(自建vpn接入的实例)，cdb(云上cdb实例)
+         * 源实例接入类型，值包括：extranet(外网),cvm(cvm自建实例),dcg(专线接入的实例),vpncloud(云vpn接入的实例),cdb(腾讯云数据库实例),ccn(云联网实例)
          * @type {string || null}
          */
         this.SrcAccessType = null;
@@ -483,13 +483,13 @@ class CreateMigrateJobRequest extends  AbstractModel {
         this.SrcInfo = null;
 
         /**
-         * 目标实例数据库类型,mysql,redis,mongodb
+         * 目标实例数据库类型，目前支持：mysql，redis，mongodb，postgresql，mariadb，percona。不同地域数据库类型的具体支持情况，请参考控制台创建迁移页面。
          * @type {string || null}
          */
         this.DstDatabaseType = null;
 
         /**
-         * 目标实例接入类型，值包括：extranet(外网),cvm(cvm自建实例),dcg(专线接入的实例),vpncloud(云vpn接入的实例),vpnselfbuild(自建vpn接入的实例)，cdb(云上cdb实例). 目前只支持cdb.
+         * 目标实例接入类型，目前支持：cdb（腾讯云数据库实例）
          * @type {string || null}
          */
         this.DstAccessType = null;
@@ -501,7 +501,7 @@ class CreateMigrateJobRequest extends  AbstractModel {
         this.DstInfo = null;
 
         /**
-         * 需要迁移的源数据库表信息，用json格式的字符串描述。
+         * 需要迁移的源数据库表信息，用json格式的字符串描述。当MigrateOption.MigrateObject配置为2（指定库表迁移）时必填。
 对于database-table两级结构的数据库：
 [{Database:db1,Table:[table1,table2]},{Database:db2}]
 对于database-schema-table三级结构：
@@ -706,31 +706,31 @@ class DstInfo extends  AbstractModel {
         super();
 
         /**
-         * 目标实例Id
+         * 目标实例Id，如cdb-jd92ijd8
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * 目标实例vip
+         * 目标实例vip。已废弃，无需填写
          * @type {string || null}
          */
         this.Ip = null;
 
         /**
-         * 目标实例vport
+         * 目标实例vport。已废弃，无需填写
          * @type {number || null}
          */
         this.Port = null;
 
         /**
-         * 目标实例Id
+         * 目标实例地域，如ap-guangzhou
          * @type {string || null}
          */
         this.Region = null;
 
         /**
-         * 只读开关
+         * 目前只对MySQL有效。当为整实例迁移时，1-只读，0-可读写。
          * @type {number || null}
          */
         this.ReadOnly = null;
@@ -790,7 +790,7 @@ class SrcInfo extends  AbstractModel {
         super();
 
         /**
-         * 阿里云AccessKey
+         * 阿里云AccessKey。源库是阿里云RDS5.6适用
          * @type {string || null}
          */
         this.AccessKey = null;
@@ -820,43 +820,43 @@ class SrcInfo extends  AbstractModel {
         this.Password = null;
 
         /**
-         * 阿里云rds实例id
+         * 阿里云RDS实例ID。源库是阿里云RDS5.6适用
          * @type {string || null}
          */
         this.RdsInstanceId = null;
 
         /**
-         * CVM实例短ID，格式如：ins-olgl89y8，与云主机控制台页面显示的实例ID相同，如果是CVM自建实例或者通过自建VPN接入的公网实例，需要传递此字段
+         * CVM实例短ID，格式如：ins-olgl39y8，与云主机控制台页面显示的实例ID相同。如果是CVM自建实例，需要传递此字段
          * @type {string || null}
          */
         this.CvmInstanceId = null;
 
         /**
-         * 专线网关ID
+         * 专线网关ID，格式如：dcg-0rxtqqxb
          * @type {string || null}
          */
         this.UniqDcgId = null;
 
         /**
-         * 私有网络ID，和原来的数字vpcId对应，需要调vpc的接口去转换
+         * 私有网络ID，格式如：vpc-92jblxto
          * @type {string || null}
          */
         this.VpcId = null;
 
         /**
-         * 私有网络下的子网ID, 和原来的数字子网ID对应，需要调用vpc的接口去转换
+         * 私有网络下的子网ID，格式如：subnet-3paxmkdz
          * @type {string || null}
          */
         this.SubnetId = null;
 
         /**
-         * 系统分配的VPN网关ID
+         * VPN网关ID，格式如：vpngw-9ghexg7q
          * @type {string || null}
          */
         this.UniqVpnGwId = null;
 
         /**
-         * 实例短Id
+         * 数据库实例ID,格式如：cdb-powiqx8q
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -868,7 +868,7 @@ class SrcInfo extends  AbstractModel {
         this.Region = null;
 
         /**
-         * 服务提供商，如:aliyun,others
+         * 当实例为RDS实例时，填写为aliyun, 其他情况均填写others
          * @type {string || null}
          */
         this.Supplier = null;
@@ -909,19 +909,19 @@ class ConsistencyParams extends  AbstractModel {
         super();
 
         /**
-         * 1-100的整数值，select(*)对比时每张表的抽样行数比例
+         * 数据内容检测参数。表中选出用来数据对比的行，占表的总行数的百分比。取值范围是整数[1-100]
          * @type {number || null}
          */
         this.SelectRowsPerTable = null;
 
         /**
-         * 1-100的整数值，select(*)对比的表的比例
+         * 数据内容检测参数。迁移库表中，要进行数据内容检测的表，占所有表的百分比。取值范围是整数[1-100]
          * @type {number || null}
          */
         this.TablesSelectAll = null;
 
         /**
-         * 1-100的整数值，select count(*)对比的表的比例
+         * 数据数量检测，检测表行数是否一致。迁移库表中，要进行数据数量检测的表，占所有表的百分比。取值范围是整数[1-100]
          * @type {number || null}
          */
         this.TablesSelectCount = null;
@@ -1024,7 +1024,7 @@ class MigrateOption extends  AbstractModel {
         this.MigrateObject = null;
 
         /**
-         * 数据对比类型，1-未配置,2-全量检测,3-抽样检测, 4-仅校验不一致表,5-不检测
+         * 抽样数据一致性检测参数，1-未配置,2-全量检测,3-抽样检测, 4-仅校验不一致表,5-不检测
          * @type {number || null}
          */
         this.ConsistencyType = null;
@@ -1051,12 +1051,13 @@ MongoDB可定义如下的参数:
 	'SrcAuthFlag': "1", 
 	'SrcAuthMechanism':"SCRAM-SHA-1"
 }
+MySQL暂不支持额外参数设置。
          * @type {string || null}
          */
         this.ExternParams = null;
 
         /**
-         * 抽样检验时的抽样参数
+         * 仅用于“抽样数据一致性检测”，ConsistencyType配置为抽样检测时，必选
          * @type {ConsistencyParams || null}
          */
         this.ConsistencyParams = null;
@@ -2190,13 +2191,13 @@ class MigrateJobInfo extends  AbstractModel {
         this.MigrateOption = null;
 
         /**
-         * 源实例数据库类型:mysql,redis,percona,mongodb,postgresql,sqlserver,mariadb
+         * 源实例数据库类型:mysql，redis，mongodb，postgresql，mariadb，percona
          * @type {string || null}
          */
         this.SrcDatabaseType = null;
 
         /**
-         * 源实例接入类型，值包括：extranet(外网),cvm(cvm自建实例),dcg(专线接入的实例),vpncloud(云vpn接入的实例),vpnselfbuild(自建vpn接入的实例)，cdb(云上cdb实例)
+         * 源实例接入类型，值包括：extranet(外网),cvm(cvm自建实例),dcg(专线接入的实例),vpncloud(云vpn接入的实例),cdb(腾讯云数据库实例),ccn(云联网实例)
          * @type {string || null}
          */
         this.SrcAccessType = null;
@@ -2208,19 +2209,19 @@ class MigrateJobInfo extends  AbstractModel {
         this.SrcInfo = null;
 
         /**
-         * 目标实例数据库类型,mysql,redis,percona,mongodb,postgresql,sqlserver,mariadb
+         * 目标实例数据库类型:mysql，redis，mongodb，postgresql，mariadb，percona
          * @type {string || null}
          */
         this.DstDatabaseType = null;
 
         /**
-         * 源实例接入类型，值包括：extranet(外网),cvm(cvm自建实例),dcg(专线接入的实例),vpncloud(云vpn接入的实例),vpnselfbuild(自建vpn接入的实例)，cdb(云上cdb实例)
+         * 目标实例接入类型，目前支持：cdb(腾讯云数据库实例)
          * @type {string || null}
          */
         this.DstAccessType = null;
 
         /**
-         * 目的实例信息
+         * 目标实例信息
          * @type {DstInfo || null}
          */
         this.DstInfo = null;
@@ -2250,7 +2251,7 @@ class MigrateJobInfo extends  AbstractModel {
         this.EndTime = null;
 
         /**
-         * 任务状态,取值为：1-创建中(Creating),2-创建完成(Created),3-校验中(Checking)4-校验通过(CheckPass),5-校验不通过（CheckNotPass）,6-准备运行(ReadyRun),7-任务运行(Running),8-准备完成（ReadyComplete）,9-任务成功（Success）,10-任务失败（Failed）,11-中止中（Stoping）,12-完成中（Completing）
+         * 任务状态,取值为：1-创建中(Creating),3-校验中(Checking)4-校验通过(CheckPass),5-校验不通过（CheckNotPass）,7-任务运行(Running),8-准备完成（ReadyComplete）,9-任务成功（Success）,10-任务失败（Failed）,11-撤销中（Stoping）,12-完成中（Completing）
          * @type {number || null}
          */
         this.Status = null;

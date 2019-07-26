@@ -2207,7 +2207,7 @@ class DescribeLiveStreamPublishedListRequest extends  AbstractModel {
         super();
 
         /**
-         * 您的域名。
+         * 您的推流域名。
          * @type {string || null}
          */
         this.DomainName = null;
@@ -2216,6 +2216,7 @@ class DescribeLiveStreamPublishedListRequest extends  AbstractModel {
          * 结束时间。
 UTC 格式，例如：2016-06-30T19:00:00Z。
 不超过当前时间。
+注意：EndTime和StartTime相差不可超过30天。
          * @type {string || null}
          */
         this.EndTime = null;
@@ -2223,13 +2224,13 @@ UTC 格式，例如：2016-06-30T19:00:00Z。
         /**
          * 起始时间。 
 UTC 格式，例如：2016-06-29T19:00:00Z。
-和当前时间相隔不超过7天。
+最长支持查询60天内数据。
          * @type {string || null}
          */
         this.StartTime = null;
 
         /**
-         * 推流路径，与推流和播放地址中的AppName保持一致，默认为 live。
+         * 推流路径，与推流和播放地址中的AppName保持一致，默认为 live。不支持模糊匹配。
          * @type {string || null}
          */
         this.AppName = null;
@@ -2250,6 +2251,12 @@ UTC 格式，例如：2016-06-29T19:00:00Z。
          */
         this.PageSize = null;
 
+        /**
+         * 流名称，支持模糊匹配。
+         * @type {string || null}
+         */
+        this.StreamName = null;
+
     }
 
     /**
@@ -2265,6 +2272,7 @@ UTC 格式，例如：2016-06-29T19:00:00Z。
         this.AppName = 'AppName' in params ? params.AppName : null;
         this.PageNum = 'PageNum' in params ? params.PageNum : null;
         this.PageSize = 'PageSize' in params ? params.PageSize : null;
+        this.StreamName = 'StreamName' in params ? params.StreamName : null;
 
     }
 }
@@ -5491,7 +5499,7 @@ class CreatePullStreamConfigRequest extends  AbstractModel {
         super();
 
         /**
-         * 源Url。
+         * 源Url。目前可支持直播流及点播文件。
          * @type {string || null}
          */
         this.FromUrl = null;

@@ -304,7 +304,7 @@ class BatchClient extends AbstractClient {
     }
 
     /**
-     * 目前对CVM现有实例族划分为四类，每一类包含若干实例族。该接口用于查询实例分类信息。
+     * 目前对CVM现有实例族分类，每一类包含若干实例族。该接口用于查询实例分类信息。
      * @param {DescribeInstanceCategoriesRequest} req
      * @param {function(string, DescribeInstanceCategoriesResponse):void} cb
      * @public

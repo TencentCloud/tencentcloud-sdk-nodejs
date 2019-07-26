@@ -549,7 +549,7 @@ class TextClassificationResponse extends  AbstractModel {
         super();
 
         /**
-         * 文本分类结果
+         * 文本分类结果（文本分类映射表请参见附录）
          * @type {Array.<ClassificationResult> || null}
          */
         this.Classes = null;
@@ -804,13 +804,16 @@ class LexicalAnalysisResponse extends  AbstractModel {
         super();
 
         /**
-         * 命名实体识别结果
+         * 命名实体识别结果。取值范围：
+<li>PER：表示人名</li>
+<li>LOC：表示地名</li>
+<li>ORG：表示机构团体名</li>
          * @type {Array.<NerToken> || null}
          */
         this.NerTokens = null;
 
         /**
-         * 分词&词性标注结果
+         * 分词&词性标注结果（词性表请参见附录）
          * @type {Array.<PosToken> || null}
          */
         this.PosTokens = null;

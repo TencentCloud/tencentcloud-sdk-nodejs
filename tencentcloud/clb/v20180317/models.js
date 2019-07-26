@@ -94,19 +94,19 @@ class ModifyTargetPortRequest extends  AbstractModel {
         this.ListenerId = null;
 
         /**
-         * 要修改端口的后端机器列表
+         * 要修改端口的后端服务列表
          * @type {Array.<Target> || null}
          */
         this.Targets = null;
 
         /**
-         * 后端机器绑定到监听器的新端口
+         * 后端服务绑定到监听器或转发规则的新端口
          * @type {number || null}
          */
         this.NewPort = null;
 
         /**
-         * 转发规则的ID
+         * 转发规则的ID，当后端服务绑定到七层转发规则时，必须提供此参数或Domain+Url两者之一
          * @type {string || null}
          */
         this.LocationId = null;
@@ -368,47 +368,47 @@ OPEN：公网属性， INTERNAL：内网属性。
         this.ProjectId = null;
 
         /**
-         * IP版本，IPV4 | IPV6，默认值 IPV4。
+         * 仅适用于公网负载均衡。IP版本，IPV4 | IPV6，默认值 IPV4。
          * @type {string || null}
          */
         this.AddressIPVersion = null;
 
         /**
-         * 创建负载均衡的个数
+         * 创建负载均衡的个数，默认值 1。
          * @type {number || null}
          */
         this.Number = null;
 
         /**
-         * 设置跨可用区容灾时的主可用区ID，例如 100001 或 ap-guangzhou-1
-注：主可用区是需要承载流量的可用区，备可用区默认不承载流量，主可用区不可用时才使用备可用区，平台将为您自动选择最佳备可用区
+         * 仅适用于公网负载均衡。设置跨可用区容灾时的主可用区ID，例如 100001 或 ap-guangzhou-1
+注：主可用区是需要承载流量的可用区，备可用区默认不承载流量，主可用区不可用时才使用备可用区，平台将为您自动选择最佳备可用区。可通过 DescribeMasterZones 接口查询一个地域的主可用区的列表。
          * @type {string || null}
          */
         this.MasterZoneId = null;
 
         /**
-         * 可用区ID，指定可用区以创建负载均衡实例。如：ap-guangzhou-1
+         * 仅适用于公网负载均衡。可用区ID，指定可用区以创建负载均衡实例。如：ap-guangzhou-1
          * @type {string || null}
          */
         this.ZoneId = null;
 
         /**
-         * Anycast的发布域，可取 ZONE_A 或 ZONE_B
+         * 仅适用于公网负载均衡。Anycast的发布域，可取 ZONE_A 或 ZONE_B。仅带宽非上移用户支持此参数。
          * @type {string || null}
          */
         this.AnycastZone = null;
 
         /**
-         * 负载均衡的网络计费方式，此参数仅对带宽上移用户生效
+         * 仅适用于公网负载均衡。负载均衡的网络计费方式，此参数仅对带宽上移用户生效。
          * @type {InternetAccessible || null}
          */
         this.InternetAccessible = null;
 
         /**
-         * CMCC | CTCC | CUCC，分别对应 移动 | 电信 | 联通，如果不指定本参数，则默认使用BGP。可通过 DescribeSingleIsp 接口查询一个地域所支持的Isp。
-         * @type {string || null}
+         * 购买负载均衡同时，给负载均衡打上标签
+         * @type {Array.<TagInfo> || null}
          */
-        this.VipIsp = null;
+        this.Tags = null;
 
     }
 
@@ -436,7 +436,15 @@ OPEN：公网属性， INTERNAL：内网属性。
             obj.deserialize(params.InternetAccessible)
             this.InternetAccessible = obj;
         }
-        this.VipIsp = 'VipIsp' in params ? params.VipIsp : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new TagInfo();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
 
     }
 }
@@ -1039,7 +1047,7 @@ class DescribeTargetsRequest extends  AbstractModel {
         this.Protocol = null;
 
         /**
-         * 负载均衡监听器端口
+         * 监听器端口
          * @type {number || null}
          */
         this.Port = null;
@@ -1827,7 +1835,7 @@ class Target extends  AbstractModel {
         this.Port = null;
 
         /**
-         * 后端服务的类型，可取：CVM（云服务器）、ENI（弹性网卡）
+         * 后端服务的类型，可取：CVM（云服务器）、ENI（弹性网卡）；作为入参时，目前本参数暂不生效。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
@@ -1848,7 +1856,7 @@ class Target extends  AbstractModel {
         this.Weight = null;
 
         /**
-         * 绑定弹性网卡时需要传入此参数，代表弹性网卡的IP，弹性网卡必须先绑定至CVM，然后才能绑定到负载均衡实例。注意：参数 InstanceId 和 EniIp 只能传入一个且必须传入一个。
+         * 绑定弹性网卡时需要传入此参数，代表弹性网卡的IP，弹性网卡必须先绑定至CVM，然后才能绑定到负载均衡实例。注意：参数 InstanceId 和 EniIp 只能传入一个且必须传入一个。注意：绑定弹性网卡需要先提交工单开白名单使用。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
@@ -2281,12 +2289,6 @@ class ModifyTargetWeightRequest extends  AbstractModel {
         this.ListenerId = null;
 
         /**
-         * 后端云服务器新的转发权重，取值范围：0~100。
-         * @type {number || null}
-         */
-        this.Weight = null;
-
-        /**
          * 转发规则的ID，当绑定机器到七层转发规则时，必须提供此参数或Domain+Url两者之一
          * @type {string || null}
          */
@@ -2305,10 +2307,16 @@ class ModifyTargetWeightRequest extends  AbstractModel {
         this.Url = null;
 
         /**
-         * 要修改权重的后端机器列表
+         * 要修改权重的后端服务列表
          * @type {Array.<Target> || null}
          */
         this.Targets = null;
+
+        /**
+         * 后端服务服务新的转发权重，取值范围：0~100，默认值10。如果设置了 Targets.Weight 参数，则此参数不生效。
+         * @type {number || null}
+         */
+        this.Weight = null;
 
     }
 
@@ -2321,7 +2329,6 @@ class ModifyTargetWeightRequest extends  AbstractModel {
         }
         this.LoadBalancerId = 'LoadBalancerId' in params ? params.LoadBalancerId : null;
         this.ListenerId = 'ListenerId' in params ? params.ListenerId : null;
-        this.Weight = 'Weight' in params ? params.Weight : null;
         this.LocationId = 'LocationId' in params ? params.LocationId : null;
         this.Domain = 'Domain' in params ? params.Domain : null;
         this.Url = 'Url' in params ? params.Url : null;
@@ -2334,6 +2341,7 @@ class ModifyTargetWeightRequest extends  AbstractModel {
                 this.Targets.push(obj);
             }
         }
+        this.Weight = 'Weight' in params ? params.Weight : null;
 
     }
 }
@@ -2365,7 +2373,7 @@ class ModifyDomainRequest extends  AbstractModel {
         this.Domain = null;
 
         /**
-         * 新域名，	长度限制为：1-80。有三种使用格式：非正则表达式格式，通配符格式，正则表达式格式。非正则表达式格式只能使用字母、数字、‘-’、‘.’。通配符格式的使用 ‘*’ 只能在开头或者结尾。正则表达式以'~'开头。
+         * 新域名，	长度限制为：1-120。有三种使用格式：非正则表达式格式，通配符格式，正则表达式格式。非正则表达式格式只能使用字母、数字、‘-’、‘.’。通配符格式的使用 ‘*’ 只能在开头或者结尾。正则表达式以'~'开头。
          * @type {string || null}
          */
         this.NewDomain = null;
@@ -3708,6 +3716,7 @@ class DescribeTargetsResponse extends  AbstractModel {
 
         /**
          * 监听器后端绑定的机器信息
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<ListenerBackend> || null}
          */
         this.Listeners = null;
@@ -3896,7 +3905,7 @@ class DeregisterTargetsRequest extends  AbstractModel {
         this.ListenerId = null;
 
         /**
-         * 要解绑的后端机器列表，数组长度最大支持20
+         * 要解绑的后端服务列表，数组长度最大支持20
          * @type {Array.<Target> || null}
          */
         this.Targets = null;
@@ -4872,6 +4881,20 @@ OPEN：公网属性， INTERNAL：内网属性。
          */
         this.PrepaidAttributes = null;
 
+        /**
+         * 负载均衡日志服务(CLS)的日志集ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.LogSetId = null;
+
+        /**
+         * 负载均衡日志服务(CLS)的日志主题ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.LogTopicId = null;
+
     }
 
     /**
@@ -4947,6 +4970,8 @@ OPEN：公网属性， INTERNAL：内网属性。
             obj.deserialize(params.PrepaidAttributes)
             this.PrepaidAttributes = obj;
         }
+        this.LogSetId = 'LogSetId' in params ? params.LogSetId : null;
+        this.LogTopicId = 'LogTopicId' in params ? params.LogTopicId : null;
 
     }
 }

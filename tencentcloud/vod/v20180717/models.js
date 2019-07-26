@@ -727,6 +727,58 @@ class AiRecognitionTaskAsrFullTextResultOutput extends  AbstractModel {
 }
 
 /**
+ * 小程序审核概要元信息
+ * @class
+ */
+class MediaMiniProgramReviewElem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 审核类型。 
+<li>Porn：画面涉黄，</li>
+<li>Porn.Ocr：文字涉黄，</li>
+<li>Porn.Asr：声音涉黄，</li>
+<li>Terrorism：画面涉暴恐，</li>
+<li>Political：画面涉政，</li>
+<li>Political.Ocr：文字涉政，</li>
+<li>Political.Asr：声音涉政。</li>
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * 审核意见。
+<li>pass：确认正常，</li>
+<li>block：确认违规，</li>
+<li>review：疑似违规。</li>
+         * @type {string || null}
+         */
+        this.Suggestion = null;
+
+        /**
+         * 审核结果置信度。取值 0~100。
+         * @type {string || null}
+         */
+        this.Confidence = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Suggestion = 'Suggestion' in params ? params.Suggestion : null;
+        this.Confidence = 'Confidence' in params ? params.Confidence : null;
+
+    }
+}
+
+/**
  * 智能封面结果信息
  * @class
  */
@@ -2003,6 +2055,13 @@ class AIRecognitionTemplateItem extends  AbstractModel {
         this.HeadTailConfigure = null;
 
         /**
+         * 拆条识别控制参数。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {SegmentConfigureInfo || null}
+         */
+        this.SegmentConfigure = null;
+
+        /**
          * 人脸识别控制参数。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {FaceConfigureInfo || null}
@@ -2079,6 +2138,12 @@ class AIRecognitionTemplateItem extends  AbstractModel {
             let obj = new HeadTailConfigureInfo();
             obj.deserialize(params.HeadTailConfigure)
             this.HeadTailConfigure = obj;
+        }
+
+        if (params.SegmentConfigure) {
+            let obj = new SegmentConfigureInfo();
+            obj.deserialize(params.SegmentConfigure)
+            this.SegmentConfigure = obj;
         }
 
         if (params.FaceConfigure) {
@@ -4261,6 +4326,76 @@ class AiRecognitionTaskAsrFullTextResultInput extends  AbstractModel {
 }
 
 /**
+ * 小程序审核信息单元
+ * @class
+ */
+class MediaMiniProgramReviewInfoItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 模板id。小程序视频发布的视频所对应的转码模板ID，为0代表原始视频。
+         * @type {number || null}
+         */
+        this.Definition = null;
+
+        /**
+         * 视频元信息。
+         * @type {MediaMetaData || null}
+         */
+        this.MetaData = null;
+
+        /**
+         * 小程序审核视频播放地址。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Url = null;
+
+        /**
+         * 小程序视频发布状态：
+<li>Pass：成功。</li>
+<li>Rejected：未通过。</li>
+         * @type {string || null}
+         */
+        this.ReviewResult = null;
+
+        /**
+         * 小程序审核元素。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {MediaMiniProgramReviewElem || null}
+         */
+        this.ReviewSummery = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Definition = 'Definition' in params ? params.Definition : null;
+
+        if (params.MetaData) {
+            let obj = new MediaMetaData();
+            obj.deserialize(params.MetaData)
+            this.MetaData = obj;
+        }
+        this.Url = 'Url' in params ? params.Url : null;
+        this.ReviewResult = 'ReviewResult' in params ? params.ReviewResult : null;
+
+        if (params.ReviewSummery) {
+            let obj = new MediaMiniProgramReviewElem();
+            obj.deserialize(params.ReviewSummery)
+            this.ReviewSummery = obj;
+        }
+
+    }
+}
+
+/**
  * 视频处理任务类型
  * @class
  */
@@ -4840,6 +4975,74 @@ class PornAsrReviewTemplateInfo extends  AbstractModel {
         this.Switch = 'Switch' in params ? params.Switch : null;
         this.BlockConfidence = 'BlockConfidence' in params ? params.BlockConfidence : null;
         this.ReviewConfidence = 'ReviewConfidence' in params ? params.ReviewConfidence : null;
+
+    }
+}
+
+/**
+ * 视频拆条结果。
+ * @class
+ */
+class AiRecognitionTaskSegmentResult extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 任务状态，有 PROCESSING，SUCCESS 和 FAIL 三种。
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * 错误码，0：成功，其他值：失败。
+         * @type {number || null}
+         */
+        this.ErrCode = null;
+
+        /**
+         * 错误信息。
+         * @type {string || null}
+         */
+        this.Message = null;
+
+        /**
+         * 视频拆条任务输入信息。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {AiRecognitionTaskSegmentResultInput || null}
+         */
+        this.Input = null;
+
+        /**
+         * 视频拆条任务输出信息。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {AiRecognitionTaskSegmentResultOutput || null}
+         */
+        this.Output = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Status = 'Status' in params ? params.Status : null;
+        this.ErrCode = 'ErrCode' in params ? params.ErrCode : null;
+        this.Message = 'Message' in params ? params.Message : null;
+
+        if (params.Input) {
+            let obj = new AiRecognitionTaskSegmentResultInput();
+            obj.deserialize(params.Input)
+            this.Input = obj;
+        }
+
+        if (params.Output) {
+            let obj = new AiRecognitionTaskSegmentResultOutput();
+            obj.deserialize(params.Output)
+            this.Output = obj;
+        }
 
     }
 }
@@ -5512,6 +5715,42 @@ class MediaTranscodeItem extends  AbstractModel {
                 let obj = new MediaVideoStreamItem();
                 obj.deserialize(params.VideoStreamSet[z]);
                 this.VideoStreamSet.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * 小程序审核信息
+ * @class
+ */
+class MediaMiniProgramReviewInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 审核信息列表。
+         * @type {Array.<MediaMiniProgramReviewInfoItem> || null}
+         */
+        this.MiniProgramReivewList = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.MiniProgramReivewList) {
+            this.MiniProgramReivewList = new Array();
+            for (let z in params.MiniProgramReivewList) {
+                let obj = new MediaMiniProgramReviewInfoItem();
+                obj.deserialize(params.MiniProgramReivewList[z]);
+                this.MiniProgramReivewList.push(obj);
             }
         }
 
@@ -6286,6 +6525,16 @@ class VideoTemplateInfo extends  AbstractModel {
          */
         this.Height = null;
 
+        /**
+         * 填充方式，当视频流配置宽高参数与原始视频的宽高比不一致时，对转码的处理方式，即为“填充”。可选填充方式：
+<li> stretch：拉伸，对每一帧进行拉伸，填满整个画面，可能导致转码后的视频被“压扁“或者“拉长“；</li>
+<li>black：留黑，保持视频宽高比不变，边缘剩余部分使用黑色填充。</li>
+默认值：black 。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.FillType = null;
+
     }
 
     /**
@@ -6301,6 +6550,7 @@ class VideoTemplateInfo extends  AbstractModel {
         this.ResolutionAdaptive = 'ResolutionAdaptive' in params ? params.ResolutionAdaptive : null;
         this.Width = 'Width' in params ? params.Width : null;
         this.Height = 'Height' in params ? params.Height : null;
+        this.FillType = 'FillType' in params ? params.FillType : null;
 
     }
 }
@@ -6668,6 +6918,69 @@ class UserDefineConfigureInfo extends  AbstractModel {
             obj.deserialize(params.OcrReviewInfo)
             this.OcrReviewInfo = obj;
         }
+
+    }
+}
+
+/**
+ * 视频拆条片段。
+ * @class
+ */
+class AiRecognitionTaskSegmentSegmentItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 视频拆条片段 Url。
+         * @type {string || null}
+         */
+        this.SegmentUrl = null;
+
+        /**
+         * 拆条片段置信度。取值：0~100。
+         * @type {number || null}
+         */
+        this.Confidence = null;
+
+        /**
+         * 拆条片段起始的偏移时间，单位：秒。
+         * @type {number || null}
+         */
+        this.StartTimeOffset = null;
+
+        /**
+         * 拆条片段终止的偏移时间，单位：秒。
+         * @type {number || null}
+         */
+        this.EndTimeOffset = null;
+
+        /**
+         * 拆条封面图片 Url。
+         * @type {string || null}
+         */
+        this.CovImgUrl = null;
+
+        /**
+         * 特殊字段，请忽略。
+         * @type {string || null}
+         */
+        this.SpecialInfo = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SegmentUrl = 'SegmentUrl' in params ? params.SegmentUrl : null;
+        this.Confidence = 'Confidence' in params ? params.Confidence : null;
+        this.StartTimeOffset = 'StartTimeOffset' in params ? params.StartTimeOffset : null;
+        this.EndTimeOffset = 'EndTimeOffset' in params ? params.EndTimeOffset : null;
+        this.CovImgUrl = 'CovImgUrl' in params ? params.CovImgUrl : null;
+        this.SpecialInfo = 'SpecialInfo' in params ? params.SpecialInfo : null;
 
     }
 }
@@ -10647,6 +10960,72 @@ class AiRecognitionTaskOcrFullTextSegmentTextItem extends  AbstractModel {
 }
 
 /**
+ * 视频拆条输出。
+ * @class
+ */
+class AiRecognitionTaskSegmentResultOutput extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 视频拆条片段列表。
+         * @type {Array.<AiRecognitionTaskSegmentSegmentItem> || null}
+         */
+        this.SegmentSet = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.SegmentSet) {
+            this.SegmentSet = new Array();
+            for (let z in params.SegmentSet) {
+                let obj = new AiRecognitionTaskSegmentSegmentItem();
+                obj.deserialize(params.SegmentSet[z]);
+                this.SegmentSet.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * 视频拆条任务识别控制参数
+ * @class
+ */
+class SegmentConfigureInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 视频拆条识别任务开关，可选值：
+<li>ON：开启智能视频拆条识别任务；</li>
+<li>OFF：关闭智能视频拆条识别任务。</li>
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+
+    }
+}
+
+/**
  * Ocr 文字涉黄信息
  * @class
  */
@@ -14299,6 +14678,13 @@ class MediaInfo extends  AbstractModel {
         this.AdaptiveDynamicStreamingInfo = null;
 
         /**
+         * 小程序审核信息。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {MediaMiniProgramReviewInfo || null}
+         */
+        this.MiniProgramReviewInfo = null;
+
+        /**
          * 媒体文件唯一标识 ID。
          * @type {string || null}
          */
@@ -14366,6 +14752,12 @@ class MediaInfo extends  AbstractModel {
             let obj = new MediaAdaptiveDynamicStreamingInfo();
             obj.deserialize(params.AdaptiveDynamicStreamingInfo)
             this.AdaptiveDynamicStreamingInfo = obj;
+        }
+
+        if (params.MiniProgramReviewInfo) {
+            let obj = new MediaMiniProgramReviewInfo();
+            obj.deserialize(params.MiniProgramReviewInfo)
+            this.MiniProgramReviewInfo = obj;
         }
         this.FileId = 'FileId' in params ? params.FileId : null;
 
@@ -15259,6 +15651,34 @@ class AiRecognitionTaskOcrFullTextResultInput extends  AbstractModel {
 
         /**
          * 文本全文识别模板 ID。
+         * @type {number || null}
+         */
+        this.Definition = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Definition = 'Definition' in params ? params.Definition : null;
+
+    }
+}
+
+/**
+ * 视频拆条输入。
+ * @class
+ */
+class AiRecognitionTaskSegmentResultInput extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 视频拆条模板 ID。
          * @type {number || null}
          */
         this.Definition = null;
@@ -20041,6 +20461,22 @@ class AiRecognitionResult extends  AbstractModel {
         this.Type = null;
 
         /**
+         * 视频片头片尾识别结果，当 Type 为
+ HeadTailRecognition 时有效。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {AiRecognitionTaskHeadTailResult || null}
+         */
+        this.HeadTailTask = null;
+
+        /**
+         * 视频拆条识别结果，当 Type 为
+ SegmentRecognition 时有效。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {AiRecognitionTaskSegmentResult || null}
+         */
+        this.SegmentTask = null;
+
+        /**
          * 人脸识别结果，当 Type 为 
  FaceRecognition 时有效。
 注意：此字段可能返回 null，表示取不到有效值。
@@ -20081,14 +20517,6 @@ class AiRecognitionResult extends  AbstractModel {
         this.OcrFullTextTask = null;
 
         /**
-         * 视频片头片尾识别结果，当 Type 为
- HeadTailRecognition 时有效。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {AiRecognitionTaskHeadTailResult || null}
-         */
-        this.HeadTailTask = null;
-
-        /**
          * 物体识别结果，当 Type 为
  ObjectRecognition 时有效。
 注意：此字段可能返回 null，表示取不到有效值。
@@ -20106,6 +20534,18 @@ class AiRecognitionResult extends  AbstractModel {
             return;
         }
         this.Type = 'Type' in params ? params.Type : null;
+
+        if (params.HeadTailTask) {
+            let obj = new AiRecognitionTaskHeadTailResult();
+            obj.deserialize(params.HeadTailTask)
+            this.HeadTailTask = obj;
+        }
+
+        if (params.SegmentTask) {
+            let obj = new AiRecognitionTaskSegmentResult();
+            obj.deserialize(params.SegmentTask)
+            this.SegmentTask = obj;
+        }
 
         if (params.FaceTask) {
             let obj = new AiRecognitionTaskFaceResult();
@@ -20137,12 +20577,6 @@ class AiRecognitionResult extends  AbstractModel {
             this.OcrFullTextTask = obj;
         }
 
-        if (params.HeadTailTask) {
-            let obj = new AiRecognitionTaskHeadTailResult();
-            obj.deserialize(params.HeadTailTask)
-            this.HeadTailTask = obj;
-        }
-
         if (params.ObjectTask) {
             let obj = new AiRecognitionTaskObjectResult();
             obj.deserialize(params.ObjectTask)
@@ -20166,6 +20600,7 @@ module.exports = {
     AudioTrackItem: AudioTrackItem,
     TagConfigureInfo: TagConfigureInfo,
     AiRecognitionTaskAsrFullTextResultOutput: AiRecognitionTaskAsrFullTextResultOutput,
+    MediaMiniProgramReviewElem: MediaMiniProgramReviewElem,
     AiAnalysisTaskCoverOutput: AiAnalysisTaskCoverOutput,
     AiReviewPoliticalOcrTaskInput: AiReviewPoliticalOcrTaskInput,
     MediaInputInfo: MediaInputInfo,
@@ -20234,6 +20669,7 @@ module.exports = {
     MediaAnimatedGraphicsInfo: MediaAnimatedGraphicsInfo,
     MediaMetaData: MediaMetaData,
     AiRecognitionTaskAsrFullTextResultInput: AiRecognitionTaskAsrFullTextResultInput,
+    MediaMiniProgramReviewInfoItem: MediaMiniProgramReviewInfoItem,
     MediaProcessTaskInput: MediaProcessTaskInput,
     AiRecognitionTaskFaceSegmentItem: AiRecognitionTaskFaceSegmentItem,
     ProcessMediaResponse: ProcessMediaResponse,
@@ -20245,6 +20681,7 @@ module.exports = {
     SvgWatermarkInputForUpdate: SvgWatermarkInputForUpdate,
     AiRecognitionTaskOcrWordsResult: AiRecognitionTaskOcrWordsResult,
     PornAsrReviewTemplateInfo: PornAsrReviewTemplateInfo,
+    AiRecognitionTaskSegmentResult: AiRecognitionTaskSegmentResult,
     LiveRealTimeClipRequest: LiveRealTimeClipRequest,
     AiRecognitionTaskOcrFullTextSegmentItem: AiRecognitionTaskOcrFullTextSegmentItem,
     AiReviewPornAsrTaskOutput: AiReviewPornAsrTaskOutput,
@@ -20256,6 +20693,7 @@ module.exports = {
     DescribeMediaInfosResponse: DescribeMediaInfosResponse,
     DeleteProcedureTemplateResponse: DeleteProcedureTemplateResponse,
     MediaTranscodeItem: MediaTranscodeItem,
+    MediaMiniProgramReviewInfo: MediaMiniProgramReviewInfo,
     MediaContentReviewOcrTextSegmentItem: MediaContentReviewOcrTextSegmentItem,
     ImageWatermarkInput: ImageWatermarkInput,
     ObjectConfigureInfo: ObjectConfigureInfo,
@@ -20277,6 +20715,7 @@ module.exports = {
     DescribeWatermarkTemplatesRequest: DescribeWatermarkTemplatesRequest,
     CoverBySnapshotTaskInput: CoverBySnapshotTaskInput,
     UserDefineConfigureInfo: UserDefineConfigureInfo,
+    AiRecognitionTaskSegmentSegmentItem: AiRecognitionTaskSegmentSegmentItem,
     AiReviewPornOcrTaskInput: AiReviewPornOcrTaskInput,
     OcrWordsConfigureInfo: OcrWordsConfigureInfo,
     MediaSnapshotByTimeOffsetItem: MediaSnapshotByTimeOffsetItem,
@@ -20354,6 +20793,8 @@ module.exports = {
     AiContentReviewTaskInput: AiContentReviewTaskInput,
     ProcessMediaByUrlResponse: ProcessMediaByUrlResponse,
     AiRecognitionTaskOcrFullTextSegmentTextItem: AiRecognitionTaskOcrFullTextSegmentTextItem,
+    AiRecognitionTaskSegmentResultOutput: AiRecognitionTaskSegmentResultOutput,
+    SegmentConfigureInfo: SegmentConfigureInfo,
     AiReviewPornOcrTaskOutput: AiReviewPornOcrTaskOutput,
     ApplyUploadRequest: ApplyUploadRequest,
     DeleteContentReviewTemplateResponse: DeleteContentReviewTemplateResponse,
@@ -20431,6 +20872,7 @@ module.exports = {
     CreateProcedureTemplateResponse: CreateProcedureTemplateResponse,
     OcrFullTextConfigureInfoForUpdate: OcrFullTextConfigureInfoForUpdate,
     AiRecognitionTaskOcrFullTextResultInput: AiRecognitionTaskOcrFullTextResultInput,
+    AiRecognitionTaskSegmentResultInput: AiRecognitionTaskSegmentResultInput,
     DescribeTasksResponse: DescribeTasksResponse,
     DescribeSubAppIdsRequest: DescribeSubAppIdsRequest,
     AiRecognitionTaskFaceResultInput: AiRecognitionTaskFaceResultInput,
