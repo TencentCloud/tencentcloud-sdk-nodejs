@@ -1172,7 +1172,7 @@ class LiveClient extends AbstractClient {
     }
 
     /**
-     * 停用使用某个直播域名
+     * 停止使用某个直播域名。
      * @param {ForbidLiveDomainRequest} req
      * @param {function(string, ForbidLiveDomainResponse):void} cb
      * @public

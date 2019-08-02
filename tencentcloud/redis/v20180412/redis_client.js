@@ -40,7 +40,7 @@ const InstanceClusterShard = models.InstanceClusterShard;
 const TradeDealDetail = models.TradeDealDetail;
 const EnableReplicaReadonlyRequest = models.EnableReplicaReadonlyRequest;
 const RenewInstanceResponse = models.RenewInstanceResponse;
-const ModifyInstanceRequest = models.ModifyInstanceRequest;
+const InstanceMultiParam = models.InstanceMultiParam;
 const ProductConf = models.ProductConf;
 const InstanceClusterNode = models.InstanceClusterNode;
 const RestoreInstanceResponse = models.RestoreInstanceResponse;
@@ -61,6 +61,7 @@ const ClearInstanceRequest = models.ClearInstanceRequest;
 const ModifyAutoBackupConfigRequest = models.ModifyAutoBackupConfigRequest;
 const InstanceTextParam = models.InstanceTextParam;
 const InstanceSet = models.InstanceSet;
+const ZoneCapacityConf = models.ZoneCapacityConf;
 const DescribeInstanceBackupsRequest = models.DescribeInstanceBackupsRequest;
 const DescribeTaskInfoResponse = models.DescribeTaskInfoResponse;
 const DescribeInstanceParamRecordsResponse = models.DescribeInstanceParamRecordsResponse;
@@ -77,7 +78,7 @@ const DescribeInstanceShardsResponse = models.DescribeInstanceShardsResponse;
 const RenewInstanceRequest = models.RenewInstanceRequest;
 const DescribeTaskInfoRequest = models.DescribeTaskInfoRequest;
 const InstanceIntegerParam = models.InstanceIntegerParam;
-const ZoneCapacityConf = models.ZoneCapacityConf;
+const ModifyInstanceRequest = models.ModifyInstanceRequest;
 const UpgradeInstanceResponse = models.UpgradeInstanceResponse;
 const UpgradeInstanceRequest = models.UpgradeInstanceRequest;
 const ManualBackupInstanceRequest = models.ManualBackupInstanceRequest;
@@ -270,7 +271,7 @@ class RedisClient extends AbstractClient {
     }
 
     /**
-     * 查询备份Rdb下载地址
+     * 查询备份Rdb下载地址(接口灰度中，需要加白名单使用)
      * @param {DescribeBackupUrlRequest} req
      * @param {function(string, DescribeBackupUrlResponse):void} cb
      * @public

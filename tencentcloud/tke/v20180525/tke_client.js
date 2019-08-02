@@ -16,31 +16,40 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
-const DescribeClustersRequest = models.DescribeClustersRequest;
+const DeleteClusterRequest = models.DeleteClusterRequest;
+const DescribeClusterSecurityResponse = models.DescribeClusterSecurityResponse;
+const DescribeExistedInstancesResponse = models.DescribeExistedInstancesResponse;
+const DescribeClusterSecurityRequest = models.DescribeClusterSecurityRequest;
 const DeleteClusterInstancesResponse = models.DeleteClusterInstancesResponse;
+const EnhancedService = models.EnhancedService;
 const LoginSettings = models.LoginSettings;
 const AddExistedInstancesRequest = models.AddExistedInstancesRequest;
 const Instance = models.Instance;
-const EnhancedService = models.EnhancedService;
+const DescribeClusterInstancesResponse = models.DescribeClusterInstancesResponse;
+const CreateClusterInstancesResponse = models.CreateClusterInstancesResponse;
 const ExistedInstancesForNode = models.ExistedInstancesForNode;
 const CreateClusterResponse = models.CreateClusterResponse;
 const RunSecurityServiceEnabled = models.RunSecurityServiceEnabled;
 const ClusterBasicSettings = models.ClusterBasicSettings;
 const CreateClusterRequest = models.CreateClusterRequest;
 const DeleteClusterInstancesRequest = models.DeleteClusterInstancesRequest;
+const CreateClusterInstancesRequest = models.CreateClusterInstancesRequest;
 const DescribeClusterInstancesRequest = models.DescribeClusterInstancesRequest;
 const ClusterCIDRSettings = models.ClusterCIDRSettings;
 const InstanceAdvancedSettings = models.InstanceAdvancedSettings;
 const RunInstancesForNode = models.RunInstancesForNode;
 const ExistedInstancesPara = models.ExistedInstancesPara;
-const Filter = models.Filter;
-const ClusterNetworkSettings = models.ClusterNetworkSettings;
+const DescribeExistedInstancesRequest = models.DescribeExistedInstancesRequest;
+const ExistedInstance = models.ExistedInstance;
 const RunMonitorServiceEnabled = models.RunMonitorServiceEnabled;
 const ClusterAdvancedSettings = models.ClusterAdvancedSettings;
+const Filter = models.Filter;
 const Cluster = models.Cluster;
 const DescribeClustersResponse = models.DescribeClustersResponse;
-const DescribeClusterInstancesResponse = models.DescribeClusterInstancesResponse;
+const ClusterNetworkSettings = models.ClusterNetworkSettings;
 const AddExistedInstancesResponse = models.AddExistedInstancesResponse;
+const DescribeClustersRequest = models.DescribeClustersRequest;
+const DeleteClusterResponse = models.DeleteClusterResponse;
 
 
 /**
@@ -53,39 +62,6 @@ class TkeClient extends AbstractClient {
         super("tke.tencentcloudapi.com", "2018-05-25", credential, region, profile);
     }
     
-    /**
-     * 添加已经存在的实例到集群
-     * @param {AddExistedInstancesRequest} req
-     * @param {function(string, AddExistedInstancesResponse):void} cb
-     * @public
-     */
-    AddExistedInstances(req, cb) {
-        let resp = new AddExistedInstancesResponse();
-        this.request("AddExistedInstances", req, resp, cb);
-    }
-
-    /**
-     *  查询集群下节点实例信息 
-     * @param {DescribeClusterInstancesRequest} req
-     * @param {function(string, DescribeClusterInstancesResponse):void} cb
-     * @public
-     */
-    DescribeClusterInstances(req, cb) {
-        let resp = new DescribeClusterInstancesResponse();
-        this.request("DescribeClusterInstances", req, resp, cb);
-    }
-
-    /**
-     * 查询集群列表
-     * @param {DescribeClustersRequest} req
-     * @param {function(string, DescribeClustersResponse):void} cb
-     * @public
-     */
-    DescribeClusters(req, cb) {
-        let resp = new DescribeClustersResponse();
-        this.request("DescribeClusters", req, resp, cb);
-    }
-
     /**
      * 删除集群中的实例
      * @param {DeleteClusterInstancesRequest} req
@@ -106,6 +82,83 @@ class TkeClient extends AbstractClient {
     CreateCluster(req, cb) {
         let resp = new CreateClusterResponse();
         this.request("CreateCluster", req, resp, cb);
+    }
+
+    /**
+     * 扩展(新建)集群节点
+     * @param {CreateClusterInstancesRequest} req
+     * @param {function(string, CreateClusterInstancesResponse):void} cb
+     * @public
+     */
+    CreateClusterInstances(req, cb) {
+        let resp = new CreateClusterInstancesResponse();
+        this.request("CreateClusterInstances", req, resp, cb);
+    }
+
+    /**
+     * 查询已经存在的节点，判断是否可以加入集群
+     * @param {DescribeExistedInstancesRequest} req
+     * @param {function(string, DescribeExistedInstancesResponse):void} cb
+     * @public
+     */
+    DescribeExistedInstances(req, cb) {
+        let resp = new DescribeExistedInstancesResponse();
+        this.request("DescribeExistedInstances", req, resp, cb);
+    }
+
+    /**
+     * 添加已经存在的实例到集群
+     * @param {AddExistedInstancesRequest} req
+     * @param {function(string, AddExistedInstancesResponse):void} cb
+     * @public
+     */
+    AddExistedInstances(req, cb) {
+        let resp = new AddExistedInstancesResponse();
+        this.request("AddExistedInstances", req, resp, cb);
+    }
+
+    /**
+     * 查询集群列表
+     * @param {DescribeClustersRequest} req
+     * @param {function(string, DescribeClustersResponse):void} cb
+     * @public
+     */
+    DescribeClusters(req, cb) {
+        let resp = new DescribeClustersResponse();
+        this.request("DescribeClusters", req, resp, cb);
+    }
+
+    /**
+     * 集群的密钥信息
+     * @param {DescribeClusterSecurityRequest} req
+     * @param {function(string, DescribeClusterSecurityResponse):void} cb
+     * @public
+     */
+    DescribeClusterSecurity(req, cb) {
+        let resp = new DescribeClusterSecurityResponse();
+        this.request("DescribeClusterSecurity", req, resp, cb);
+    }
+
+    /**
+     * 删除集群(YUNAPI V3版本)
+     * @param {DeleteClusterRequest} req
+     * @param {function(string, DeleteClusterResponse):void} cb
+     * @public
+     */
+    DeleteCluster(req, cb) {
+        let resp = new DeleteClusterResponse();
+        this.request("DeleteCluster", req, resp, cb);
+    }
+
+    /**
+     *  查询集群下节点实例信息 
+     * @param {DescribeClusterInstancesRequest} req
+     * @param {function(string, DescribeClusterInstancesResponse):void} cb
+     * @public
+     */
+    DescribeClusterInstances(req, cb) {
+        let resp = new DescribeClusterInstancesResponse();
+        this.request("DescribeClusterInstances", req, resp, cb);
     }
 
 

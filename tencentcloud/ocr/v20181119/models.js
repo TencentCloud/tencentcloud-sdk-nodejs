@@ -17,7 +17,7 @@
 const AbstractModel = require("../../common/abstract_model");
 
 /**
- * TextVehicleBack
+ * 行驶证副页正面的识别结果
  * @class
  */
 class TextVehicleBack extends  AbstractModel {
@@ -169,7 +169,7 @@ class BusinessCardOCRResponse extends  AbstractModel {
         super();
 
         /**
-         * 名片识别内容。
+         * 名片识别结果，具体内容请点击左侧链接。
          * @type {Array.<BusinessCardInfo> || null}
          */
         this.BusinessCardInfos = null;
@@ -298,7 +298,7 @@ class BizLicenseOCRRequest extends  AbstractModel {
         /**
          * 图片的 Base64 值。
 支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经Base64编码后不超过 3M。图片下载时间不超过 3 秒。
+支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。
 图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
          * @type {string || null}
          */
@@ -307,7 +307,7 @@ class BizLicenseOCRRequest extends  AbstractModel {
         /**
          * 图片的 Url 地址。
 支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经 Base64 编码后不超过 3M。图片下载时间不超过 3 秒。
+支持的图片大小：所下载图片经 Base64 编码后不超过 7M。图片下载时间不超过 3 秒。
 图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。
 非腾讯云存储的 Url 速度和稳定性可能受一定影响。
          * @type {string || null}
@@ -592,7 +592,7 @@ class GeneralAccurateOCRRequest extends  AbstractModel {
 }
 
 /**
- * TextVehicleFront
+ * 行驶证主页正面的识别结果
  * @class
  */
 class TextVehicleFront extends  AbstractModel {
@@ -803,7 +803,7 @@ class BankCardOCRRequest extends  AbstractModel {
         /**
          * 图片的 Base64 值。
 支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经Base64编码后不超过 3M。图片下载时间不超过 3 秒。
+支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。
 图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
          * @type {string || null}
          */
@@ -812,7 +812,7 @@ class BankCardOCRRequest extends  AbstractModel {
         /**
          * 图片的 Url 地址。
 支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经 Base64 编码后不超过 3M。图片下载时间不超过 3 秒。
+支持的图片大小：所下载图片经 Base64 编码后不超过 7M。图片下载时间不超过 3 秒。
 图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。
 非腾讯云存储的 Url 速度和稳定性可能受一定影响。
          * @type {string || null}
@@ -1128,15 +1128,21 @@ class IDCardOCRResponse extends  AbstractModel {
         this.ValidDate = null;
 
         /**
-         * 扩展信息，根据请求的可选字段返回对应内容，不请求则不返回，具体输入参考示例3。目前支持的扩展字段为：
+         * 扩展信息，根据请求的可选字段返回对应内容，不请求则不返回，具体输入参考示例3和示例4。
+
+目前支持的扩展字段为：
 IdCard，身份证照片，请求 CropIdCard 时返回；
 Portrait，人像照片，请求 CropPortrait 时返回；
-WarnInfos，告警信息（Code - 告警码，Msg - 告警信息内容），识别出翻拍件或复印件时返回。
+WarnInfos，告警信息（Code - 告警码），识别出以下告警内容时返回。
 
 Code 告警码列表和释义：
--9103	身份证翻拍告警，
+-9100	身份证有效日期不合法告警，
+-9101	身份证边框不完整告警，
 -9102	身份证复印件告警，
--9105	身份证框内遮挡告警。
+-9103	身份证翻拍告警，
+-9105	身份证框内遮挡告警，
+-9104	临时身份证告警，
+-9106	身份证 PS 告警。
          * @type {string || null}
          */
         this.AdvancedInfo = null;
@@ -1280,7 +1286,6 @@ class WaybillOCRResponse extends  AbstractModel {
 
         /**
          * 检测到的文本信息，具体内容请点击左侧链接。
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {TextWaybill || null}
          */
         this.TextDetections = null;
@@ -1449,7 +1454,7 @@ class VehicleLicenseOCRRequest extends  AbstractModel {
         /**
          * 图片的 Base64 值。
 支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经Base64编码后不超过 3M。图片下载时间不超过 3 秒。
+支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。
 图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
          * @type {string || null}
          */
@@ -1458,7 +1463,7 @@ class VehicleLicenseOCRRequest extends  AbstractModel {
         /**
          * 图片的 Url 地址。
 支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经 Base64 编码后不超过 3M。图片下载时间不超过 3 秒。
+支持的图片大小：所下载图片经 Base64 编码后不超过 7M。图片下载时间不超过 3 秒。
 图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。
 非腾讯云存储的 Url 速度和稳定性可能受一定影响。
          * @type {string || null}
@@ -1614,7 +1619,7 @@ class TextArithmetic extends  AbstractModel {
         this.Result = null;
 
         /**
-         * 置信度 0 ~100
+         * 保留字段，暂无意义
          * @type {number || null}
          */
         this.Confidence = null;
@@ -1627,7 +1632,7 @@ class TextArithmetic extends  AbstractModel {
         this.Polygon = null;
 
         /**
-         * 此字段为扩展字段。
+         * 此字段为扩展字段
          * @type {string || null}
          */
         this.AdvancedInfo = null;
@@ -1669,7 +1674,7 @@ class IDCardOCRRequest extends  AbstractModel {
         /**
          * 图片的 Base64 值。
 支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经Base64编码后不超过 3M。图片下载时间不超过 3 秒。
+支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。
 图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
          * @type {string || null}
          */
@@ -1678,7 +1683,7 @@ class IDCardOCRRequest extends  AbstractModel {
         /**
          * 图片的 Url 地址。
 支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经 Base64 编码后不超过 3M。图片下载时间不超过 3 秒。
+支持的图片大小：所下载图片经 Base64 编码后不超过 7M。图片下载时间不超过 3 秒。
 图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。
 非腾讯云存储的 Url 速度和稳定性可能受一定影响。
          * @type {string || null}
@@ -1695,11 +1700,14 @@ BACK 为身份证有国徽的一面（国徽面）。
         /**
          * 可选字段，根据需要选择是否请求对应字段。
 目前包含的字段为：
-CropIdCard，身份证照片裁剪，bool 类型，
-CropPortrait，人像照片裁剪，bool 类型，
-CopyWarn，复印件告警，bool 类型，
-BorderCheckWarn，遮挡告警，bool 类型，
-ReshootWarn，翻拍告警，bool 类型。
+CropIdCard，身份证照片裁剪，bool 类型，默认false，
+CropPortrait，人像照片裁剪，bool 类型，默认false，
+CopyWarn，复印件告警，bool 类型，默认false，
+BorderCheckWarn，边框和框内遮挡告警，bool 类型，默认false，
+ReshootWarn，翻拍告警，bool 类型，默认false，
+DetectPsWarn，PS检测告警，bool类型，默认false，
+TempIdWarn，临时身份证告警，bool类型，默认false，
+InvalidDateWarn，身份证有效日期不合法告警，bool类型，默认false。
 
 SDK 设置方式参考：
 Config = Json.stringify({"CropIdCard":true,"CropPortrait":true})
@@ -1737,7 +1745,7 @@ class DriverLicenseOCRRequest extends  AbstractModel {
         /**
          * 图片的 Base64 值。
 支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经Base64编码后不超过 3M。图片下载时间不超过 3 秒。
+支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。
 图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
          * @type {string || null}
          */
@@ -1746,7 +1754,7 @@ class DriverLicenseOCRRequest extends  AbstractModel {
         /**
          * 图片的 Url 地址。
 支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经 Base64 编码后不超过 3M。图片下载时间不超过 3 秒。
+支持的图片大小：所下载图片经 Base64 编码后不超过 7M。图片下载时间不超过 3 秒。
 图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。
 非腾讯云存储的 Url 速度和稳定性可能受一定影响。
          * @type {string || null}
@@ -2303,7 +2311,7 @@ class BusinessCardOCRRequest extends  AbstractModel {
         /**
          * 图片的 Base64 值。
 支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经Base64编码后不超过 3M。图片下载时间不超过 3 秒。
+支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。
 图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
          * @type {string || null}
          */
@@ -2312,7 +2320,7 @@ class BusinessCardOCRRequest extends  AbstractModel {
         /**
          * 图片的 Url 地址。
 支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经 Base64 编码后不超过 3M。图片下载时间不超过 3 秒。
+支持的图片大小：所下载图片经 Base64 编码后不超过 7M。图片下载时间不超过 3 秒。
 图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。
 非腾讯云存储的 Url 速度和稳定性可能受一定影响。
          * @type {string || null}
@@ -2483,13 +2491,13 @@ zh\auto\jap\kor\
 spa\fre\ger\por\
 vie\may\rus\ita\
 hol\swe\fin\dan\
-nor\hun\tha
+nor\hun\tha\lat
 可选值分别表示：
 中英文混合、自动识别、日语、韩语、
 西班牙语、法语、德语、葡萄牙语、
 越南语、马来语、俄语、意大利语、
 荷兰语、瑞典语、芬兰语、丹麦语、
-挪威语、匈牙利语、泰语。
+挪威语、匈牙利语、泰语、拉丁语系。
          * @type {string || null}
          */
         this.LanguageType = null;
