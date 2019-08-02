@@ -98,6 +98,27 @@ class Candidate extends  AbstractModel {
          */
         this.Score = null;
 
+        /**
+         * 人员名称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.PersonName = null;
+
+        /**
+         * 人员性别
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Gender = null;
+
+        /**
+         * 包含此人员的人员库及描述字段内容列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<PersonGroupInfo> || null}
+         */
+        this.PersonGroupInfos = null;
+
     }
 
     /**
@@ -110,6 +131,17 @@ class Candidate extends  AbstractModel {
         this.PersonId = 'PersonId' in params ? params.PersonId : null;
         this.FaceId = 'FaceId' in params ? params.FaceId : null;
         this.Score = 'Score' in params ? params.Score : null;
+        this.PersonName = 'PersonName' in params ? params.PersonName : null;
+        this.Gender = 'Gender' in params ? params.Gender : null;
+
+        if (params.PersonGroupInfos) {
+            this.PersonGroupInfos = new Array();
+            for (let z in params.PersonGroupInfos) {
+                let obj = new PersonGroupInfo();
+                obj.deserialize(params.PersonGroupInfos[z]);
+                this.PersonGroupInfos.push(obj);
+            }
+        }
 
     }
 }
@@ -531,7 +563,7 @@ class FaceAttributesInfo extends  AbstractModel {
         super();
 
         /**
-         * 性别 [0(female，女性)~100(male，男性)]。 NeedFaceAttributes 不为 1 或检测超过 5 张人脸时，此参数仍返回，但不具备参考意义。
+         * 性别[0~49]为女性，[50，100]为男性，越接近0和100表示置信度越高。NeedFaceAttributes 不为 1 或检测超过 5 张人脸时，此参数仍返回，但不具备参考意义。
          * @type {number || null}
          */
         this.Gender = null;
@@ -1499,6 +1531,7 @@ class FaceQualityInfo extends  AbstractModel {
 
         /**
          * 质量分: [0,100]，综合评价图像质量是否适合人脸识别，分数越高质量越好。 
+正常情况，只需要使用Score作为质量分总体的判断标准即可。
 参考范围：[0,40]较差，[40,60] 一般，[60,80]较好，[80,100]很好。 
 建议：人脸入库选取70以上的图片。
 注意：此字段可能返回 null，表示取不到有效值。
@@ -2140,6 +2173,14 @@ class AnalyzeFaceRequest extends  AbstractModel {
          */
         this.Url = null;
 
+        /**
+         * 人脸识别服务所用的算法模型版本。目前入参支持 “2.0”和“3.0“ 两个输入。  
+默认为"2.0"。 
+不同算法模型版本对应的人脸识别算法不同，新版本的整体效果会优于旧版本，建议使用最新版本。
+         * @type {string || null}
+         */
+        this.FaceModelVersion = null;
+
     }
 
     /**
@@ -2152,6 +2193,7 @@ class AnalyzeFaceRequest extends  AbstractModel {
         this.Mode = 'Mode' in params ? params.Mode : null;
         this.Image = 'Image' in params ? params.Image : null;
         this.Url = 'Url' in params ? params.Url : null;
+        this.FaceModelVersion = 'FaceModelVersion' in params ? params.FaceModelVersion : null;
 
     }
 }
@@ -2239,7 +2281,7 @@ class DetectFaceRequest extends  AbstractModel {
         /**
          * 是否开启质量检测。0 为关闭，1 为开启。默认为 0。 
 非 1 值均视为不进行质量检测。
-最多返回面积最大的 5 张人脸质量分信息，超过 5 张人脸（第 6 张及以后的人脸）的 FaceQualityInfo不具备参考意义。  
+最多返回面积最大的 30 张人脸质量分信息，超过 30 张人脸（第 31 张及以后的人脸）的 FaceQualityInfo不具备参考意义。  
 建议：人脸入库操作建议开启此功能。
          * @type {number || null}
          */
@@ -2767,25 +2809,32 @@ class SearchFacesRequest extends  AbstractModel {
         this.Url = null;
 
         /**
-         * 最多处理的人脸数目。默认值为1（仅检测图片中面积最大的那张人脸），最大值为10。 
-MaxFaceNum用于，当待识别图片包含多张人脸时，要搜索的人脸数量。 
-当 MaxFaceNum 不为1时，设MaxFaceNum=M，则实际上是 M:N 的人脸搜索（N为待搜索的人脸数）。
+         * 最多识别的人脸数目。默认值为1（仅检测图片中面积最大的那张人脸），最大值为10。 
+MaxFaceNum用于，当输入的待识别图片包含多张人脸时，设定要搜索的人脸的数量。 
+例：输入的Image或Url中的图片包含多张人脸，设MaxFaceNum=5，则会识别图片中面积最大的5张人脸。
          * @type {number || null}
          */
         this.MaxFaceNum = null;
 
         /**
-         * 人脸长和宽的最小尺寸，单位为像素。默认为80。低于40将影响搜索精度。建议设置为80。
+         * 人脸长和宽的最小尺寸，单位为像素。默认为80。低于40的人脸图片无法被识别。建议设置为80。
          * @type {number || null}
          */
         this.MinFaceSize = null;
 
         /**
-         * 被检测到的人脸，对应最多返回的最相似人员数目。默认值为5，最大值为10。  
-例，设MaxFaceNum为3，MaxPersonNum为5，则最多可能返回3*5=15个人员。
+         * 单张被识别的人脸返回的最相似人员数量。默认值为5，最大值为100。 
+例，设MaxFaceNum为1，MaxPersonNum为8，则返回Top8相似的人员信息。
+值越大，需要处理的时间越长。建议不要超过10。
          * @type {number || null}
          */
         this.MaxPersonNum = null;
+
+        /**
+         * 是否返回人员具体信息。0 为关闭，1 为开启。默认为 0。其他非0非1值默认为0
+         * @type {number || null}
+         */
+        this.NeedPersonInfo = null;
 
     }
 
@@ -2802,6 +2851,7 @@ MaxFaceNum用于，当待识别图片包含多张人脸时，要搜索的人脸�
         this.MaxFaceNum = 'MaxFaceNum' in params ? params.MaxFaceNum : null;
         this.MinFaceSize = 'MinFaceSize' in params ? params.MinFaceSize : null;
         this.MaxPersonNum = 'MaxPersonNum' in params ? params.MaxPersonNum : null;
+        this.NeedPersonInfo = 'NeedPersonInfo' in params ? params.NeedPersonInfo : null;
 
     }
 }

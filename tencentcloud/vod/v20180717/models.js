@@ -129,7 +129,7 @@ class ModifyWatermarkTemplateRequest extends  AbstractModel {
         this.TextTemplate = null;
 
         /**
-         * SVG水印模板，当 Type 为 svg，该字段必填。当 Type 为 image 或 text，该字段无效。
+         * SVG 水印模板，该字段仅对 SVG 水印模板有效。
          * @type {SvgWatermarkInputForUpdate || null}
          */
         this.SvgTemplate = null;
@@ -5175,6 +5175,41 @@ class AiRecognitionTaskOcrFullTextSegmentItem extends  AbstractModel {
 }
 
 /**
+ * 编辑视频的结果文件输出。
+ * @class
+ */
+class EditMediaOutputConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 输出文件格式，可选值：mp4、hls。默认是 mp4。
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * 输出文件的过期时间，超过该时间文件将被删除，默认为永久不过期，格式按照 ISO 8601标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F)。
+         * @type {string || null}
+         */
+        this.ExpireTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Type = 'Type' in params ? params.Type : null;
+        this.ExpireTime = 'ExpireTime' in params ? params.ExpireTime : null;
+
+    }
+}
+
+/**
  * Asr 文字涉黄信息
  * @class
  */
@@ -5339,10 +5374,24 @@ class EditMediaRequest extends  AbstractModel {
         this.StreamInfos = null;
 
         /**
+         * 编辑模板 ID，取值有 10，20，不填代表使用 10 模板。
+<li>10：拼接时，以分辨率最高的输入为基准；</li>
+<li>20：拼接时，以码率最高的输入为基准；</li>
+         * @type {number || null}
+         */
+        this.Definition = null;
+
+        /**
          * [任务流模板](/document/product/266/11700#.E4.BB.BB.E5.8A.A1.E6.B5.81.E6.A8.A1.E6.9D.BF)名字，如果要对生成的新视频执行任务流时填写。
          * @type {string || null}
          */
         this.ProcedureName = null;
+
+        /**
+         * 编辑后生成的文件配置。
+         * @type {EditMediaOutputConfig || null}
+         */
+        this.OutputConfig = null;
 
         /**
          * 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
@@ -5378,7 +5427,14 @@ class EditMediaRequest extends  AbstractModel {
                 this.StreamInfos.push(obj);
             }
         }
+        this.Definition = 'Definition' in params ? params.Definition : null;
         this.ProcedureName = 'ProcedureName' in params ? params.ProcedureName : null;
+
+        if (params.OutputConfig) {
+            let obj = new EditMediaOutputConfig();
+            obj.deserialize(params.OutputConfig)
+            this.OutputConfig = obj;
+        }
         this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
 
     }
@@ -6858,6 +6914,36 @@ class CoverBySnapshotTaskInput extends  AbstractModel {
                 this.WatermarkSet.push(obj);
             }
         }
+
+    }
+}
+
+/**
+ * 视频拆条识别任务控制参数
+ * @class
+ */
+class SegmentConfigureInfoForUpdate extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 视频拆条识别任务开关，可选值：
+<li>ON：开启智能视频拆条识别任务；</li>
+<li>OFF：关闭智能视频拆条识别任务。</li>
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
 
     }
 }
@@ -9985,7 +10071,7 @@ class DescribeAIAnalysisTemplatesRequest extends  AbstractModel {
         super();
 
         /**
-         * 视频内容分析模板唯一标识过滤条件，数组长度限制：10。
+         * 视频内容分析模板唯一标识过滤条件，数组长度最大值：100。
          * @type {Array.<number> || null}
          */
         this.Definitions = null;
@@ -11408,11 +11494,7 @@ class PullUploadRequest extends  AbstractModel {
         this.ExpireTime = null;
 
         /**
-         * 指定上传园区，目前支持的园区：
-<li>ap-chongqing：重庆园区，</li>
-<li>ap-beijing：北京园区，</li>
-<li>ap-shanghai：上海园区。</li>
-注意：不填此参数默认上传至重庆园区。
+         * 指定上传园区，仅适用于对上传地域有特殊需求的用户（目前仅支持北京、上海和重庆园区）。
          * @type {string || null}
          */
         this.StorageRegion = null;
@@ -12451,6 +12533,12 @@ class ModifyAIRecognitionTemplateRequest extends  AbstractModel {
         this.HeadTailConfigure = null;
 
         /**
+         * 视频拆条识别控制参数。
+         * @type {SegmentConfigureInfoForUpdate || null}
+         */
+        this.SegmentConfigure = null;
+
+        /**
          * 人脸识别控制参数。
          * @type {FaceConfigureInfoForUpdate || null}
          */
@@ -12515,6 +12603,12 @@ class ModifyAIRecognitionTemplateRequest extends  AbstractModel {
             let obj = new HeadTailConfigureInfoForUpdate();
             obj.deserialize(params.HeadTailConfigure)
             this.HeadTailConfigure = obj;
+        }
+
+        if (params.SegmentConfigure) {
+            let obj = new SegmentConfigureInfoForUpdate();
+            obj.deserialize(params.SegmentConfigure)
+            this.SegmentConfigure = obj;
         }
 
         if (params.FaceConfigure) {
@@ -13616,6 +13710,12 @@ class CreateAIRecognitionTemplateRequest extends  AbstractModel {
         this.HeadTailConfigure = null;
 
         /**
+         * 视频拆条识别控制参数。
+         * @type {SegmentConfigureInfo || null}
+         */
+        this.SegmentConfigure = null;
+
+        /**
          * 人脸识别控制参数。
          * @type {FaceConfigureInfo || null}
          */
@@ -13679,6 +13779,12 @@ class CreateAIRecognitionTemplateRequest extends  AbstractModel {
             let obj = new HeadTailConfigureInfo();
             obj.deserialize(params.HeadTailConfigure)
             this.HeadTailConfigure = obj;
+        }
+
+        if (params.SegmentConfigure) {
+            let obj = new SegmentConfigureInfo();
+            obj.deserialize(params.SegmentConfigure)
+            this.SegmentConfigure = obj;
         }
 
         if (params.FaceConfigure) {
@@ -14819,6 +14925,15 @@ class VideoTemplateInfoForUpdate extends  AbstractModel {
          */
         this.Height = null;
 
+        /**
+         * 填充方式，当视频流配置宽高参数与原始视频的宽高比不一致时，对转码的处理方式，即为“填充”。可选填充方式：
+<li> stretch：拉伸，对每一帧进行拉伸，填满整个画面，可能导致转码后的视频被“压扁“或者“拉长“；</li>
+<li>black：留黑，保持视频宽高比不变，边缘剩余部分使用黑色填充。</li>
+默认值：black 。
+         * @type {string || null}
+         */
+        this.FillType = null;
+
     }
 
     /**
@@ -14834,6 +14949,7 @@ class VideoTemplateInfoForUpdate extends  AbstractModel {
         this.ResolutionAdaptive = 'ResolutionAdaptive' in params ? params.ResolutionAdaptive : null;
         this.Width = 'Width' in params ? params.Width : null;
         this.Height = 'Height' in params ? params.Height : null;
+        this.FillType = 'FillType' in params ? params.FillType : null;
 
     }
 }
@@ -14953,7 +15069,7 @@ class DescribeContentReviewTemplatesRequest extends  AbstractModel {
         super();
 
         /**
-         * 内容审核模板唯一标识过滤条件，数组长度限制：50。
+         * 内容审核模板唯一标识过滤条件，数组长度限制：100。
          * @type {Array.<number> || null}
          */
         this.Definitions = null;
@@ -14965,7 +15081,7 @@ class DescribeContentReviewTemplatesRequest extends  AbstractModel {
         this.Offset = null;
 
         /**
-         * 返回记录条数，默认值：10，最大值：50。
+         * 返回记录条数，默认值：10，最大值：100。
          * @type {number || null}
          */
         this.Limit = null;
@@ -20363,7 +20479,7 @@ class DescribeAIRecognitionTemplatesRequest extends  AbstractModel {
         super();
 
         /**
-         * 视频内容识别模板唯一标识过滤条件，数组长度限制：10。
+         * 视频内容识别模板唯一标识过滤条件，数组长度限制：100。
          * @type {Array.<number> || null}
          */
         this.Definitions = null;
@@ -20375,7 +20491,7 @@ class DescribeAIRecognitionTemplatesRequest extends  AbstractModel {
         this.Offset = null;
 
         /**
-         * 返回记录条数，默认值：10，最大值：50。
+         * 返回记录条数，默认值：10，最大值：100。
          * @type {number || null}
          */
         this.Limit = null;
@@ -20684,6 +20800,7 @@ module.exports = {
     AiRecognitionTaskSegmentResult: AiRecognitionTaskSegmentResult,
     LiveRealTimeClipRequest: LiveRealTimeClipRequest,
     AiRecognitionTaskOcrFullTextSegmentItem: AiRecognitionTaskOcrFullTextSegmentItem,
+    EditMediaOutputConfig: EditMediaOutputConfig,
     AiReviewPornAsrTaskOutput: AiReviewPornAsrTaskOutput,
     SimpleHlsClipResponse: SimpleHlsClipResponse,
     DeleteAIAnalysisTemplateRequest: DeleteAIAnalysisTemplateRequest,
@@ -20714,6 +20831,7 @@ module.exports = {
     ModifyContentReviewTemplateResponse: ModifyContentReviewTemplateResponse,
     DescribeWatermarkTemplatesRequest: DescribeWatermarkTemplatesRequest,
     CoverBySnapshotTaskInput: CoverBySnapshotTaskInput,
+    SegmentConfigureInfoForUpdate: SegmentConfigureInfoForUpdate,
     UserDefineConfigureInfo: UserDefineConfigureInfo,
     AiRecognitionTaskSegmentSegmentItem: AiRecognitionTaskSegmentSegmentItem,
     AiReviewPornOcrTaskInput: AiReviewPornOcrTaskInput,

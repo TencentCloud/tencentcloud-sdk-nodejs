@@ -1884,6 +1884,12 @@ class Snapshot extends  AbstractModel {
          */
         this.ImageCount = null;
 
+        /**
+         * 快照类型，目前该项取值可以为PRIVATE_SNAPSHOT或者SHARED_SNAPSHOT
+         * @type {string || null}
+         */
+        this.SnapshotType = null;
+
     }
 
     /**
@@ -1922,6 +1928,7 @@ class Snapshot extends  AbstractModel {
             }
         }
         this.ImageCount = 'ImageCount' in params ? params.ImageCount : null;
+        this.SnapshotType = 'SnapshotType' in params ? params.SnapshotType : null;
 
     }
 }
@@ -2584,13 +2591,13 @@ class DescribeAutoSnapshotPoliciesRequest extends  AbstractModel {
         this.Filters = null;
 
         /**
-         * 返回数量，默认为20，最大值为100。关于`Limit`的更进一步介绍请参考 API [简介](/document/362/13158)中的相关小节。
+         * 返回数量，默认为20，最大值为100。关于`Limit`的更进一步介绍请参考 API [简介](/document/product/362/15633)中的相关小节。
          * @type {number || null}
          */
         this.Limit = null;
 
         /**
-         * 偏移量，默认为0。关于`Offset`的更进一步介绍请参考API[简介](/document/362/13158)中的相关小节。
+         * 偏移量，默认为0。关于`Offset`的更进一步介绍请参考API[简介](/document/product/362/15633)中的相关小节。
          * @type {number || null}
          */
         this.Offset = null;
@@ -3304,6 +3311,20 @@ class Disk extends  AbstractModel {
          */
         this.InstanceIdList = null;
 
+        /**
+         * 云硬盘挂载目标设备的ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.AttachDeviceId = null;
+
+        /**
+         * 云硬盘挂载目标设备的类型，目前包括CVM和POD
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.AttachDeviceType = null;
+
     }
 
     /**
@@ -3356,6 +3377,8 @@ class Disk extends  AbstractModel {
         this.MigratePercent = 'MigratePercent' in params ? params.MigratePercent : null;
         this.Shareable = 'Shareable' in params ? params.Shareable : null;
         this.InstanceIdList = 'InstanceIdList' in params ? params.InstanceIdList : null;
+        this.AttachDeviceId = 'AttachDeviceId' in params ? params.AttachDeviceId : null;
+        this.AttachDeviceType = 'AttachDeviceType' in params ? params.AttachDeviceType : null;
 
     }
 }

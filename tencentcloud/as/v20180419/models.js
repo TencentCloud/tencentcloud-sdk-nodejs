@@ -2864,7 +2864,7 @@ class CreateAutoScalingGroupRequest extends  AbstractModel {
         this.ForwardLoadBalancers = null;
 
         /**
-         * 子网ID列表，VPC场景下必须指定子网
+         * 子网ID列表，VPC场景下必须指定子网。多个子网以填写顺序为优先级，依次进行尝试，直至可以成功创建实例。
          * @type {Array.<string> || null}
          */
         this.SubnetIds = null;
@@ -2878,7 +2878,7 @@ class CreateAutoScalingGroupRequest extends  AbstractModel {
         this.TerminationPolicies = null;
 
         /**
-         * 可用区列表，基础网络场景下必须指定可用区
+         * 可用区列表，基础网络场景下必须指定可用区。多个可用区以填写顺序为优先级，依次进行尝试，直至可以成功创建实例。
          * @type {Array.<string> || null}
          */
         this.Zones = null;
@@ -3540,6 +3540,12 @@ class Instance extends  AbstractModel {
          */
         this.VersionNumber = null;
 
+        /**
+         * 伸缩组名称
+         * @type {string || null}
+         */
+        this.AutoScalingGroupName = null;
+
     }
 
     /**
@@ -3561,6 +3567,7 @@ class Instance extends  AbstractModel {
         this.AddTime = 'AddTime' in params ? params.AddTime : null;
         this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
         this.VersionNumber = 'VersionNumber' in params ? params.VersionNumber : null;
+        this.AutoScalingGroupName = 'AutoScalingGroupName' in params ? params.AutoScalingGroupName : null;
 
     }
 }

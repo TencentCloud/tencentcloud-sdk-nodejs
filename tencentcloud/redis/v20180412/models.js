@@ -88,16 +88,22 @@ class ResetPasswordRequest extends  AbstractModel {
         super();
 
         /**
-         * 重置的密码
+         * Redis实例ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 重置的密码（切换为免密实例时，可不传；其他情况必传）
          * @type {string || null}
          */
         this.Password = null;
 
         /**
-         * Redis实例ID
-         * @type {string || null}
+         * 是否切换免密实例，false-切换为非免密码实例，true-切换为免密码实例；默认false
+         * @type {boolean || null}
          */
-        this.InstanceId = null;
+        this.NoAuth = null;
 
     }
 
@@ -108,8 +114,9 @@ class ResetPasswordRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Password = 'Password' in params ? params.Password : null;
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Password = 'Password' in params ? params.Password : null;
+        this.NoAuth = 'NoAuth' in params ? params.NoAuth : null;
 
     }
 }
@@ -178,6 +185,12 @@ class ModifyInstanceParamsResponse extends  AbstractModel {
         this.Changed = null;
 
         /**
+         * 任务ID
+         * @type {number || null}
+         */
+        this.TaskId = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -193,6 +206,7 @@ class ModifyInstanceParamsResponse extends  AbstractModel {
             return;
         }
         this.Changed = 'Changed' in params ? params.Changed : null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -402,16 +416,16 @@ class RestoreInstanceRequest extends  AbstractModel {
         this.InstanceId = null;
 
         /**
-         * 实例密码，恢复实例时，需要校验实例密码
-         * @type {string || null}
-         */
-        this.Password = null;
-
-        /**
          * 备份ID，可通过 GetRedisBackupList 接口返回值中的 backupId 获取
          * @type {string || null}
          */
         this.BackupId = null;
+
+        /**
+         * 实例密码，恢复实例时，需要校验实例密码（免密实例不需要传密码）
+         * @type {string || null}
+         */
+        this.Password = null;
 
     }
 
@@ -423,8 +437,8 @@ class RestoreInstanceRequest extends  AbstractModel {
             return;
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.Password = 'Password' in params ? params.Password : null;
         this.BackupId = 'BackupId' in params ? params.BackupId : null;
+        this.Password = 'Password' in params ? params.Password : null;
 
     }
 }
@@ -479,7 +493,7 @@ class CreateInstancesRequest extends  AbstractModel {
         this.ZoneId = null;
 
         /**
-         * 实例类型：2 – Redis2.8主从版，3 – Redis3.2主从版(CKV主从版)，4 – Redis3.2集群版(CKV集群版)，5-Redis2.8单机版，7 – Redis4.0集群版，
+         * 实例类型：2 – Redis2.8主从版，3 – Redis3.2主从版(CKV主从版)，4 – Redis3.2集群版(CKV集群版)，5-Redis2.8单机版，6 – Redis4.0主从版，7 – Redis4.0集群版，
          * @type {number || null}
          */
         this.TypeId = null;
@@ -503,16 +517,16 @@ class CreateInstancesRequest extends  AbstractModel {
         this.Period = null;
 
         /**
-         * 实例密码，密码规则：1.长度为8-16个字符；2:至少包含字母、数字和字符!@^*()中的两种
-         * @type {string || null}
-         */
-        this.Password = null;
-
-        /**
          * 付费方式:0-按量计费，1-包年包月。
          * @type {number || null}
          */
         this.BillingMode = null;
+
+        /**
+         * 实例密码，密码规则：1.长度为8-16个字符；2:至少包含字母、数字和字符!@^*()中的两种（创建免密实例时，可不传入该字段，该字段内容会忽略）
+         * @type {string || null}
+         */
+        this.Password = null;
 
         /**
          * 私有网络ID，如果不传则默认选择基础网络，请使用私有网络列表查询，如：vpc-sad23jfdfk
@@ -551,7 +565,7 @@ class CreateInstancesRequest extends  AbstractModel {
         this.VPort = null;
 
         /**
-         * 实例分片数量，Redis2.8主从版、CKV主从版和Redis2.8单机版不需要填写
+         * 实例分片数量，Redis2.8主从版、CKV主从版和Redis2.8单机版、Redis4.0主从版不需要填写
          * @type {number || null}
          */
         this.RedisShardNum = null;
@@ -574,6 +588,12 @@ class CreateInstancesRequest extends  AbstractModel {
          */
         this.InstanceName = null;
 
+        /**
+         * 是否支持免密，true-免密实例，false-非免密实例，默认为非免密实例
+         * @type {boolean || null}
+         */
+        this.NoAuth = null;
+
     }
 
     /**
@@ -588,8 +608,8 @@ class CreateInstancesRequest extends  AbstractModel {
         this.MemSize = 'MemSize' in params ? params.MemSize : null;
         this.GoodsNum = 'GoodsNum' in params ? params.GoodsNum : null;
         this.Period = 'Period' in params ? params.Period : null;
-        this.Password = 'Password' in params ? params.Password : null;
         this.BillingMode = 'BillingMode' in params ? params.BillingMode : null;
+        this.Password = 'Password' in params ? params.Password : null;
         this.VpcId = 'VpcId' in params ? params.VpcId : null;
         this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
         this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
@@ -600,6 +620,7 @@ class CreateInstancesRequest extends  AbstractModel {
         this.RedisReplicasNum = 'RedisReplicasNum' in params ? params.RedisReplicasNum : null;
         this.ReplicasReadonly = 'ReplicasReadonly' in params ? params.ReplicasReadonly : null;
         this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
+        this.NoAuth = 'NoAuth' in params ? params.NoAuth : null;
 
     }
 }
@@ -1205,42 +1226,60 @@ class RenewInstanceResponse extends  AbstractModel {
 }
 
 /**
- * ModifyInstance请求参数结构体
+ * 实例多选项类型参数描述
  * @class
  */
-class ModifyInstanceRequest extends  AbstractModel {
+class InstanceMultiParam extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 修改实例操作，如填写：rename-表示实例重命名；modifyProject-修改实例所属项目；modifyAutoRenew-修改实例续费标记
+         * 参数名
          * @type {string || null}
          */
-        this.Operation = null;
+        this.ParamName = null;
 
         /**
-         * 实例Id
+         * 参数类型：multi
          * @type {string || null}
          */
-        this.InstanceId = null;
+        this.ValueType = null;
 
         /**
-         * 实例的新名称
+         * 修改后是否需要重启：true，false
          * @type {string || null}
          */
-        this.InstanceName = null;
+        this.NeedRestart = null;
 
         /**
-         * 项目Id
+         * 参数默认值
+         * @type {string || null}
+         */
+        this.DefaultValue = null;
+
+        /**
+         * 当前运行参数值
+         * @type {string || null}
+         */
+        this.CurrentValue = null;
+
+        /**
+         * 参数说明
+         * @type {string || null}
+         */
+        this.Tips = null;
+
+        /**
+         * 参数说明
+         * @type {string || null}
+         */
+        this.EnumValue = null;
+
+        /**
+         * 参数状态, 1: 修改中， 2：修改完成
          * @type {number || null}
          */
-        this.ProjectId = null;
-
-        /**
-         * 自动续费标识。0 - 默认状态（手动续费）；1 - 自动续费；2 - 明确不自动续费
-         * @type {number || null}
-         */
-        this.AutoRenew = null;
+        this.Status = null;
 
     }
 
@@ -1251,11 +1290,14 @@ class ModifyInstanceRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Operation = 'Operation' in params ? params.Operation : null;
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
-        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
-        this.AutoRenew = 'AutoRenew' in params ? params.AutoRenew : null;
+        this.ParamName = 'ParamName' in params ? params.ParamName : null;
+        this.ValueType = 'ValueType' in params ? params.ValueType : null;
+        this.NeedRestart = 'NeedRestart' in params ? params.NeedRestart : null;
+        this.DefaultValue = 'DefaultValue' in params ? params.DefaultValue : null;
+        this.CurrentValue = 'CurrentValue' in params ? params.CurrentValue : null;
+        this.Tips = 'Tips' in params ? params.Tips : null;
+        this.EnumValue = 'EnumValue' in params ? params.EnumValue : null;
+        this.Status = 'Status' in params ? params.Status : null;
 
     }
 }
@@ -1838,6 +1880,12 @@ class InstanceEnumParam extends  AbstractModel {
          */
         this.EnumValue = null;
 
+        /**
+         * 参数状态, 1: 修改中， 2：修改完成
+         * @type {number || null}
+         */
+        this.Status = null;
+
     }
 
     /**
@@ -1854,6 +1902,7 @@ class InstanceEnumParam extends  AbstractModel {
         this.CurrentValue = 'CurrentValue' in params ? params.CurrentValue : null;
         this.Tips = 'Tips' in params ? params.Tips : null;
         this.EnumValue = 'EnumValue' in params ? params.EnumValue : null;
+        this.Status = 'Status' in params ? params.Status : null;
 
     }
 }
@@ -1937,7 +1986,7 @@ class ResetPasswordResponse extends  AbstractModel {
         super();
 
         /**
-         * 任务ID
+         * 任务ID（修改密码时的任务ID，如果时切换免密码或者非免密码实例，则无需关注此返回值）
          * @type {number || null}
          */
         this.TaskId = null;
@@ -1996,6 +2045,12 @@ class DescribeInstanceParamsResponse extends  AbstractModel {
         this.InstanceTextParam = null;
 
         /**
+         * 实例多选项型参数
+         * @type {Array.<InstanceMultiParam> || null}
+         */
+        this.InstanceMultiParam = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -2036,6 +2091,15 @@ class DescribeInstanceParamsResponse extends  AbstractModel {
                 let obj = new InstanceTextParam();
                 obj.deserialize(params.InstanceTextParam[z]);
                 this.InstanceTextParam.push(obj);
+            }
+        }
+
+        if (params.InstanceMultiParam) {
+            this.InstanceMultiParam = new Array();
+            for (let z in params.InstanceMultiParam) {
+                let obj = new InstanceMultiParam();
+                obj.deserialize(params.InstanceMultiParam[z]);
+                this.InstanceMultiParam.push(obj);
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
@@ -2219,7 +2283,7 @@ class ClearInstanceRequest extends  AbstractModel {
         this.InstanceId = null;
 
         /**
-         * redis的实例密码
+         * redis的实例密码（免密实例不需要传密码，非免密实例必传）
          * @type {string || null}
          */
         this.Password = null;
@@ -2338,6 +2402,12 @@ class InstanceTextParam extends  AbstractModel {
          */
         this.TextValue = null;
 
+        /**
+         * 参数状态, 1: 修改中， 2：修改完成
+         * @type {number || null}
+         */
+        this.Status = null;
+
     }
 
     /**
@@ -2354,6 +2424,7 @@ class InstanceTextParam extends  AbstractModel {
         this.CurrentValue = 'CurrentValue' in params ? params.CurrentValue : null;
         this.Tips = 'Tips' in params ? params.Tips : null;
         this.TextValue = 'TextValue' in params ? params.TextValue : null;
+        this.Status = 'Status' in params ? params.Status : null;
 
     }
 }
@@ -2578,6 +2649,13 @@ class InstanceSet extends  AbstractModel {
          */
         this.ProjectName = null;
 
+        /**
+         * 是否为免密实例，true-免密实例；false-非免密实例
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.NoAuth = null;
+
     }
 
     /**
@@ -2638,6 +2716,85 @@ class InstanceSet extends  AbstractModel {
             }
         }
         this.ProjectName = 'ProjectName' in params ? params.ProjectName : null;
+        this.NoAuth = 'NoAuth' in params ? params.NoAuth : null;
+
+    }
+}
+
+/**
+ * 可用区内产品信息
+ * @class
+ */
+class ZoneCapacityConf extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 可用区ID：如ap-guangzhou-3
+         * @type {string || null}
+         */
+        this.ZoneId = null;
+
+        /**
+         * 可用区名称
+         * @type {string || null}
+         */
+        this.ZoneName = null;
+
+        /**
+         * 可用区是否售罄
+         * @type {boolean || null}
+         */
+        this.IsSaleout = null;
+
+        /**
+         * 是否为默认可用区
+         * @type {boolean || null}
+         */
+        this.IsDefault = null;
+
+        /**
+         * 网络类型：basenet -- 基础网络；vpcnet -- VPC网络
+         * @type {Array.<string> || null}
+         */
+        this.NetWorkType = null;
+
+        /**
+         * 可用区内产品规格等信息
+         * @type {Array.<ProductConf> || null}
+         */
+        this.ProductSet = null;
+
+        /**
+         * 可用区ID：如100003
+         * @type {number || null}
+         */
+        this.OldZoneId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
+        this.ZoneName = 'ZoneName' in params ? params.ZoneName : null;
+        this.IsSaleout = 'IsSaleout' in params ? params.IsSaleout : null;
+        this.IsDefault = 'IsDefault' in params ? params.IsDefault : null;
+        this.NetWorkType = 'NetWorkType' in params ? params.NetWorkType : null;
+
+        if (params.ProductSet) {
+            this.ProductSet = new Array();
+            for (let z in params.ProductSet) {
+                let obj = new ProductConf();
+                obj.deserialize(params.ProductSet[z]);
+                this.ProductSet.push(obj);
+            }
+        }
+        this.OldZoneId = 'OldZoneId' in params ? params.OldZoneId : null;
 
     }
 }
@@ -3179,6 +3336,12 @@ class CreateInstancesResponse extends  AbstractModel {
         this.DealId = null;
 
         /**
+         * 实例ID(该字段灰度中，部分地域不可见)
+         * @type {Array.<string> || null}
+         */
+        this.InstanceIds = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -3194,6 +3357,7 @@ class CreateInstancesResponse extends  AbstractModel {
             return;
         }
         this.DealId = 'DealId' in params ? params.DealId : null;
+        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -3368,6 +3532,12 @@ class InstanceIntegerParam extends  AbstractModel {
          */
         this.Max = null;
 
+        /**
+         * 参数状态, 1: 修改中， 2：修改完成
+         * @type {number || null}
+         */
+        this.Status = null;
+
     }
 
     /**
@@ -3385,59 +3555,48 @@ class InstanceIntegerParam extends  AbstractModel {
         this.Tips = 'Tips' in params ? params.Tips : null;
         this.Min = 'Min' in params ? params.Min : null;
         this.Max = 'Max' in params ? params.Max : null;
+        this.Status = 'Status' in params ? params.Status : null;
 
     }
 }
 
 /**
- * 可用区内产品信息
+ * ModifyInstance请求参数结构体
  * @class
  */
-class ZoneCapacityConf extends  AbstractModel {
+class ModifyInstanceRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 可用区ID：如ap-guangzhou-3
+         * 修改实例操作，如填写：rename-表示实例重命名；modifyProject-修改实例所属项目；modifyAutoRenew-修改实例续费标记
          * @type {string || null}
          */
-        this.ZoneId = null;
+        this.Operation = null;
 
         /**
-         * 可用区名称
+         * 实例Id
          * @type {string || null}
          */
-        this.ZoneName = null;
+        this.InstanceId = null;
 
         /**
-         * 可用区是否售罄
-         * @type {boolean || null}
+         * 实例的新名称
+         * @type {string || null}
          */
-        this.IsSaleout = null;
+        this.InstanceName = null;
 
         /**
-         * 是否为默认可用区
-         * @type {boolean || null}
-         */
-        this.IsDefault = null;
-
-        /**
-         * 网络类型：basenet -- 基础网络；vpcnet -- VPC网络
-         * @type {Array.<string> || null}
-         */
-        this.NetWorkType = null;
-
-        /**
-         * 可用区内产品规格等信息
-         * @type {Array.<ProductConf> || null}
-         */
-        this.ProductSet = null;
-
-        /**
-         * 可用区ID：如100003
+         * 项目Id
          * @type {number || null}
          */
-        this.OldZoneId = null;
+        this.ProjectId = null;
+
+        /**
+         * 自动续费标识。0 - 默认状态（手动续费）；1 - 自动续费；2 - 明确不自动续费
+         * @type {number || null}
+         */
+        this.AutoRenew = null;
 
     }
 
@@ -3448,21 +3607,11 @@ class ZoneCapacityConf extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
-        this.ZoneName = 'ZoneName' in params ? params.ZoneName : null;
-        this.IsSaleout = 'IsSaleout' in params ? params.IsSaleout : null;
-        this.IsDefault = 'IsDefault' in params ? params.IsDefault : null;
-        this.NetWorkType = 'NetWorkType' in params ? params.NetWorkType : null;
-
-        if (params.ProductSet) {
-            this.ProductSet = new Array();
-            for (let z in params.ProductSet) {
-                let obj = new ProductConf();
-                obj.deserialize(params.ProductSet[z]);
-                this.ProductSet.push(obj);
-            }
-        }
-        this.OldZoneId = 'OldZoneId' in params ? params.OldZoneId : null;
+        this.Operation = 'Operation' in params ? params.Operation : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+        this.AutoRenew = 'AutoRenew' in params ? params.AutoRenew : null;
 
     }
 }
@@ -4025,7 +4174,7 @@ module.exports = {
     TradeDealDetail: TradeDealDetail,
     EnableReplicaReadonlyRequest: EnableReplicaReadonlyRequest,
     RenewInstanceResponse: RenewInstanceResponse,
-    ModifyInstanceRequest: ModifyInstanceRequest,
+    InstanceMultiParam: InstanceMultiParam,
     ProductConf: ProductConf,
     InstanceClusterNode: InstanceClusterNode,
     RestoreInstanceResponse: RestoreInstanceResponse,
@@ -4046,6 +4195,7 @@ module.exports = {
     ModifyAutoBackupConfigRequest: ModifyAutoBackupConfigRequest,
     InstanceTextParam: InstanceTextParam,
     InstanceSet: InstanceSet,
+    ZoneCapacityConf: ZoneCapacityConf,
     DescribeInstanceBackupsRequest: DescribeInstanceBackupsRequest,
     DescribeTaskInfoResponse: DescribeTaskInfoResponse,
     DescribeInstanceParamRecordsResponse: DescribeInstanceParamRecordsResponse,
@@ -4062,7 +4212,7 @@ module.exports = {
     RenewInstanceRequest: RenewInstanceRequest,
     DescribeTaskInfoRequest: DescribeTaskInfoRequest,
     InstanceIntegerParam: InstanceIntegerParam,
-    ZoneCapacityConf: ZoneCapacityConf,
+    ModifyInstanceRequest: ModifyInstanceRequest,
     UpgradeInstanceResponse: UpgradeInstanceResponse,
     UpgradeInstanceRequest: UpgradeInstanceRequest,
     ManualBackupInstanceRequest: ManualBackupInstanceRequest,

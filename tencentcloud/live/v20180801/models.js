@@ -337,7 +337,8 @@ class CreateLiveSnapshotTemplateRequest extends  AbstractModel {
         super();
 
         /**
-         * 模板名称。非空的字符串。
+         * 模板名称，非空的字符串。
+长度上限：255字节。
          * @type {string || null}
          */
         this.TemplateName = null;
@@ -362,6 +363,7 @@ class CreateLiveSnapshotTemplateRequest extends  AbstractModel {
 
         /**
          * 描述信息。
+长度上限：1024字节。
          * @type {string || null}
          */
         this.Description = null;
@@ -2024,16 +2026,20 @@ class DescribeBillBandwidthAndFluxListRequest extends  AbstractModel {
         this.PlayDomains = null;
 
         /**
-         * 国内还是国外，若不填，表示国内+国外。
+         * 可选值：
+Mainland：查询国内数据，
+Oversea：则查询国外数据。
+默认：查询国内+国外的数据。
          * @type {string || null}
          */
         this.MainlandOrOversea = null;
 
         /**
          * 数据粒度，支持如下粒度：
-5：5分钟粒度，默认值（跨度不支持超过1天）；
-60：1小时粒度（跨度不支持超过一个月）；
+5：5分钟粒度，（跨度不支持超过1天），
+60：1小时粒度（跨度不支持超过一个月），
 1440：天粒度（跨度不支持超过一个月）。
+默认值：5。
          * @type {number || null}
          */
         this.Granularity = null;
@@ -4307,13 +4313,15 @@ class CreateLiveCallbackTemplateRequest extends  AbstractModel {
         super();
 
         /**
-         * 模板名称。非空的字符串
+         * 模板名称，非空的字符串。
+长度上限：255字节。
          * @type {string || null}
          */
         this.TemplateName = null;
 
         /**
          * 描述信息。
+长度上限：1024字节。
          * @type {string || null}
          */
         this.Description = null;
@@ -5374,13 +5382,16 @@ class AddLiveDomainRequest extends  AbstractModel {
 1：国内，
 2：全球，
 3：境外。
+默认值：1。
          * @type {number || null}
          */
         this.PlayType = null;
 
         /**
-         * 默认 0 ：普通直播，
-1：慢直播。
+         * 是否是慢直播：
+0： 普通直播，
+1 ：慢直播 。
+默认值： 0。
          * @type {number || null}
          */
         this.IsDelayLive = null;
@@ -5511,13 +5522,22 @@ class CreatePullStreamConfigRequest extends  AbstractModel {
         this.ToUrl = null;
 
         /**
-         * 区域id,1-深圳,2-上海，3-天津,4-香港。
+         * 区域id：
+1-深圳，
+2-上海，
+3-天津，
+4-香港。
          * @type {number || null}
          */
         this.AreaId = null;
 
         /**
-         * 运营商id,1-电信,2-移动,3-联通,4-其他,AreaId为4的时候,IspId只能为其他。
+         * 运营商id：
+1-电信，
+2-移动，
+3-联通，
+4-其他。
+注：AreaId为4的时候,IspId只能为其他。
          * @type {number || null}
          */
         this.IspId = null;
@@ -7110,7 +7130,7 @@ class SnapshotTemplateInfo extends  AbstractModel {
         this.TemplateName = null;
 
         /**
-         * 截图时间间隔。5-300
+         * 截图时间间隔。5-300秒。
          * @type {number || null}
          */
         this.SnapshotInterval = null;
@@ -8006,7 +8026,7 @@ class ForbidLiveDomainRequest extends  AbstractModel {
         super();
 
         /**
-         * 停用的直播域名
+         * 待停用的直播域名。
          * @type {string || null}
          */
         this.DomainName = null;
@@ -10178,30 +10198,33 @@ class ModifyLiveSnapshotTemplateRequest extends  AbstractModel {
 
         /**
          * 模板名称。
+长度上限：255字节。
          * @type {string || null}
          */
         this.TemplateName = null;
 
         /**
          * 描述信息。
+长度上限：1024字节。
          * @type {string || null}
          */
         this.Description = null;
 
         /**
-         * 截图时间间隔
+         * 截图间隔，单位s，默认10s。
+范围： 5s ~ 600s。
          * @type {number || null}
          */
         this.SnapshotInterval = null;
 
         /**
-         * 截图宽度。
+         * 截图宽度。默认：0（原始宽）。
          * @type {number || null}
          */
         this.Width = null;
 
         /**
-         * 截图高度。
+         * 截图高度。默认：0（原始高）。
          * @type {number || null}
          */
         this.Height = null;
