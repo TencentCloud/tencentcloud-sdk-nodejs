@@ -534,6 +534,18 @@ baseline/main/high。
          */
         this.Description = null;
 
+        /**
+         * 是否是急速高清模板，0：否，1：是。默认0。
+         * @type {number || null}
+         */
+        this.AiTransCode = null;
+
+        /**
+         * 急速高清相比VideoBitrate少多少码率，0.1到0.5
+         * @type {number || null}
+         */
+        this.AdaptBitratePercent = null;
+
     }
 
     /**
@@ -561,6 +573,8 @@ baseline/main/high。
         this.TemplateId = 'TemplateId' in params ? params.TemplateId : null;
         this.TemplateName = 'TemplateName' in params ? params.TemplateName : null;
         this.Description = 'Description' in params ? params.Description : null;
+        this.AiTransCode = 'AiTransCode' in params ? params.AiTransCode : null;
+        this.AdaptBitratePercent = 'AdaptBitratePercent' in params ? params.AdaptBitratePercent : null;
 
     }
 }
@@ -8676,6 +8690,18 @@ baseline/main/high。默认baseline
          */
         this.FpsToOrig = null;
 
+        /**
+         * 是否是急速高清模板，0：否，1：是。默认0。
+         * @type {number || null}
+         */
+        this.AiTransCode = null;
+
+        /**
+         * 急速高清相比VideoBitrate少多少码率，0.1到0.5
+         * @type {number || null}
+         */
+        this.AdaptBitratePercent = null;
+
     }
 
     /**
@@ -8702,6 +8728,8 @@ baseline/main/high。默认baseline
         this.BitrateToOrig = 'BitrateToOrig' in params ? params.BitrateToOrig : null;
         this.HeightToOrig = 'HeightToOrig' in params ? params.HeightToOrig : null;
         this.FpsToOrig = 'FpsToOrig' in params ? params.FpsToOrig : null;
+        this.AiTransCode = 'AiTransCode' in params ? params.AiTransCode : null;
+        this.AdaptBitratePercent = 'AdaptBitratePercent' in params ? params.AdaptBitratePercent : null;
 
     }
 }
@@ -9087,6 +9115,12 @@ baseline/main/high。
          */
         this.FpsToOrig = null;
 
+        /**
+         * 急速高清相比VideoBitrate少多少码率，0.1到0.5
+         * @type {number || null}
+         */
+        this.AdaptBitratePercent = null;
+
     }
 
     /**
@@ -9113,6 +9147,7 @@ baseline/main/high。
         this.BitrateToOrig = 'BitrateToOrig' in params ? params.BitrateToOrig : null;
         this.HeightToOrig = 'HeightToOrig' in params ? params.HeightToOrig : null;
         this.FpsToOrig = 'FpsToOrig' in params ? params.FpsToOrig : null;
+        this.AdaptBitratePercent = 'AdaptBitratePercent' in params ? params.AdaptBitratePercent : null;
 
     }
 }
