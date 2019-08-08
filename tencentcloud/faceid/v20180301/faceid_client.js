@@ -97,7 +97,7 @@ class FaceidClient extends AbstractClient {
     }
 
     /**
-     * 银行卡核验
+     * 银行卡三要素核验，输入银行卡号、姓名、开户证件号，校验信息的真实性和一致性。
      * @param {BankCardVerificationRequest} req
      * @param {function(string, BankCardVerificationResponse):void} cb
      * @public
@@ -141,7 +141,7 @@ class FaceidClient extends AbstractClient {
     }
 
     /**
-     * 银行卡四要素核验
+     * 输入银行卡号、姓名、开户证件号、开户手机号，校验信息的真实性和一致性。
      * @param {BankCard4EVerificationRequest} req
      * @param {function(string, BankCard4EVerificationResponse):void} cb
      * @public
@@ -174,7 +174,7 @@ class FaceidClient extends AbstractClient {
     }
 
     /**
-     * 银行卡二要素核验
+     * 输入银行卡号、姓名，校验信息的真实性和一致性。
      * @param {BankCard2EVerificationRequest} req
      * @param {function(string, BankCard2EVerificationResponse):void} cb
      * @public

@@ -1739,6 +1739,34 @@ class RegisterTargetsWithClassicalLBRequest extends  AbstractModel {
 }
 
 /**
+ * ReplaceCertForLoadBalancers返回参数结构体
+ * @class
+ */
+class ReplaceCertForLoadBalancersResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * ModifyListener请求参数结构体
  * @class
  */
@@ -1967,7 +1995,7 @@ class HealthCheck extends  AbstractModel {
         this.HealthSwitch = null;
 
         /**
-         * 健康检查的响应超时时间，可选值：2~60，默认值：2，单位：秒。响应超时时间要小于检查间隔时间。
+         * 健康检查的响应超时时间（仅适用于四层监听器），可选值：2~60，默认值：2，单位：秒。响应超时时间要小于检查间隔时间。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
@@ -3149,18 +3177,24 @@ class ManualRewriteRequest extends  AbstractModel {
 }
 
 /**
- * ModifyListener返回参数结构体
+ * ReplaceCertForLoadBalancers请求参数结构体
  * @class
  */
-class ModifyListenerResponse extends  AbstractModel {
+class ReplaceCertForLoadBalancersRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * 需要被替换的证书的ID，可以是服务端证书或客户端证书
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.OldCertificateId = null;
+
+        /**
+         * 新证书的内容等相关信息
+         * @type {CertificateInput || null}
+         */
+        this.Certificate = null;
 
     }
 
@@ -3171,7 +3205,13 @@ class ModifyListenerResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.OldCertificateId = 'OldCertificateId' in params ? params.OldCertificateId : null;
+
+        if (params.Certificate) {
+            let obj = new CertificateInput();
+            obj.deserialize(params.Certificate)
+            this.Certificate = obj;
+        }
 
     }
 }
@@ -3857,6 +3897,34 @@ class TargetRegionInfo extends  AbstractModel {
 }
 
 /**
+ * ModifyListener返回参数结构体
+ * @class
+ */
+class ModifyListenerResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DeleteRule返回参数结构体
  * @class
  */
@@ -3964,7 +4032,7 @@ class CertificateOutput extends  AbstractModel {
         super();
 
         /**
-         * 认证类型，unidirectional：单向认证，mutual：双向认证
+         * 认证类型，UNIDIRECTIONAL：单向认证，MUTUAL：双向认证
          * @type {string || null}
          */
         this.SSLMode = null;
@@ -4358,19 +4426,19 @@ class RuleInput extends  AbstractModel {
         super();
 
         /**
-         * 转发规则的域名。
+         * 转发规则的域名。长度限制为：1~80。
          * @type {string || null}
          */
         this.Domain = null;
 
         /**
-         * 转发规则的路径。
+         * 转发规则的路径。长度限制为：1~200。
          * @type {string || null}
          */
         this.Url = null;
 
         /**
-         * 会话保持时间
+         * 会话保持时间。设置为0表示关闭会话保持，开启会话保持可取值30~3600，单位：秒。
          * @type {number || null}
          */
         this.SessionExpireTime = null;
@@ -4895,6 +4963,13 @@ OPEN：公网属性， INTERNAL：内网属性。
          */
         this.LogTopicId = null;
 
+        /**
+         * 负载均衡实例的IPv6地址
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.AddressIPv6 = null;
+
     }
 
     /**
@@ -4972,6 +5047,7 @@ OPEN：公网属性， INTERNAL：内网属性。
         }
         this.LogSetId = 'LogSetId' in params ? params.LogSetId : null;
         this.LogTopicId = 'LogTopicId' in params ? params.LogTopicId : null;
+        this.AddressIPv6 = 'AddressIPv6' in params ? params.AddressIPv6 : null;
 
     }
 }
@@ -5013,6 +5089,7 @@ module.exports = {
     Listener: Listener,
     ModifyLoadBalancerAttributesResponse: ModifyLoadBalancerAttributesResponse,
     RegisterTargetsWithClassicalLBRequest: RegisterTargetsWithClassicalLBRequest,
+    ReplaceCertForLoadBalancersResponse: ReplaceCertForLoadBalancersResponse,
     ModifyListenerRequest: ModifyListenerRequest,
     Target: Target,
     RegisterTargetsRequest: RegisterTargetsRequest,
@@ -5035,7 +5112,7 @@ module.exports = {
     CreateRuleRequest: CreateRuleRequest,
     RuleTargets: RuleTargets,
     ManualRewriteRequest: ManualRewriteRequest,
-    ModifyListenerResponse: ModifyListenerResponse,
+    ReplaceCertForLoadBalancersRequest: ReplaceCertForLoadBalancersRequest,
     DescribeTargetHealthResponse: DescribeTargetHealthResponse,
     CreateListenerRequest: CreateListenerRequest,
     RewriteLocationMap: RewriteLocationMap,
@@ -5051,6 +5128,7 @@ module.exports = {
     BatchModifyTargetWeightRequest: BatchModifyTargetWeightRequest,
     DeleteRewriteResponse: DeleteRewriteResponse,
     TargetRegionInfo: TargetRegionInfo,
+    ModifyListenerResponse: ModifyListenerResponse,
     DeleteRuleResponse: DeleteRuleResponse,
     DeregisterTargetsRequest: DeregisterTargetsRequest,
     CertificateOutput: CertificateOutput,

@@ -18,10 +18,12 @@ const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const ModifySubnetDHCPRelayResponse = models.ModifySubnetDHCPRelayResponse;
 const DescribeNatSubnetsResponse = models.DescribeNatSubnetsResponse;
+const DescribeVpcPeerConnectionsResponse = models.DescribeVpcPeerConnectionsResponse;
 const UnbindIpsFromNatGatewayResponse = models.UnbindIpsFromNatGatewayResponse;
 const IKEOptionsSpecification = models.IKEOptionsSpecification;
 const ModifyRouteTableRequest = models.ModifyRouteTableRequest;
 const CreateRoutePoliciesRequest = models.CreateRoutePoliciesRequest;
+const Filter = models.Filter;
 const CreateVirtualSubnetWithVlanRequest = models.CreateVirtualSubnetWithVlanRequest;
 const DeleteVirtualIpResponse = models.DeleteVirtualIpResponse;
 const DescribeSubnetsRequest = models.DescribeSubnetsRequest;
@@ -37,8 +39,8 @@ const DescribeCustomerGatewaysResponse = models.DescribeCustomerGatewaysResponse
 const UnbindSubnetsFromNatGatewayRequest = models.UnbindSubnetsFromNatGatewayRequest;
 const SubnetInfo = models.SubnetInfo;
 const DeleteRoutePolicyResponse = models.DeleteRoutePolicyResponse;
+const DescribeVpnGatewaysResponse = models.DescribeVpnGatewaysResponse;
 const VpcInfo = models.VpcInfo;
-const CreateHostedInterfaceRequest = models.CreateHostedInterfaceRequest;
 const CreateInterfacesResponse = models.CreateInterfacesResponse;
 const DescribeNatSubnetsRequest = models.DescribeNatSubnetsRequest;
 const DownloadCustomerGatewayConfigurationResponse = models.DownloadCustomerGatewayConfigurationResponse;
@@ -57,15 +59,18 @@ const AcceptVpcPeerConnectionRequest = models.AcceptVpcPeerConnectionRequest;
 const BindSubnetsToNatGatewayResponse = models.BindSubnetsToNatGatewayResponse;
 const VpcSubnetViewInfo = models.VpcSubnetViewInfo;
 const CreateVpcResponse = models.CreateVpcResponse;
+const CreateCustomerGatewayResponse = models.CreateCustomerGatewayResponse;
 const DescribeTaskStatusResponse = models.DescribeTaskStatusResponse;
 const DeleteVpnGatewayRequest = models.DeleteVpnGatewayRequest;
 const NatSubnetInfo = models.NatSubnetInfo;
 const DescribeSubnetByHostedDeviceRequest = models.DescribeSubnetByHostedDeviceRequest;
 const CreateVpcPeerConnectionResponse = models.CreateVpcPeerConnectionResponse;
 const ModifySubnetAttributeRequest = models.ModifySubnetAttributeRequest;
+const ResetVpnConnectionRequest = models.ResetVpnConnectionRequest;
 const DeleteNatGatewayRequest = models.DeleteNatGatewayRequest;
 const DeleteVpnConnectionResponse = models.DeleteVpnConnectionResponse;
 const ModifyCustomerGatewayAttributeResponse = models.ModifyCustomerGatewayAttributeResponse;
+const VpnConnection = models.VpnConnection;
 const CreateDockerSubnetWithVlanRequest = models.CreateDockerSubnetWithVlanRequest;
 const RoutePolicy = models.RoutePolicy;
 const DeleteHostedInterfaceResponse = models.DeleteHostedInterfaceResponse;
@@ -87,20 +92,24 @@ const ModifyVpcAttributeResponse = models.ModifyVpcAttributeResponse;
 const ModifyVpnConnectionAttributeResponse = models.ModifyVpnConnectionAttributeResponse;
 const DescribeSubnetAvailableIpsResponse = models.DescribeSubnetAvailableIpsResponse;
 const DescribeNatGatewaysRequest = models.DescribeNatGatewaysRequest;
+const VpcPeerConnection = models.VpcPeerConnection;
 const VpcSubnetCreateInfo = models.VpcSubnetCreateInfo;
+const DescribeVpnConnectionsRequest = models.DescribeVpnConnectionsRequest;
 const ModifyVpcPeerConnectionRequest = models.ModifyVpcPeerConnectionRequest;
 const DeleteCustomerGatewayResponse = models.DeleteCustomerGatewayResponse;
 const ModifyVpcAttributeRequest = models.ModifyVpcAttributeRequest;
 const CreateRoutePoliciesResponse = models.CreateRoutePoliciesResponse;
 const DescribeRouteTablesRequest = models.DescribeRouteTablesRequest;
 const DeleteVirtualIpRequest = models.DeleteVirtualIpRequest;
-const AsyncRegisterIpsRequest = models.AsyncRegisterIpsRequest;
+const DescribeVpnGatewaysRequest = models.DescribeVpnGatewaysRequest;
+const CreateHostedInterfaceRequest = models.CreateHostedInterfaceRequest;
 const NatGatewayInfo = models.NatGatewayInfo;
-const Filter = models.Filter;
+const BindSubnetsToNatGatewayRequest = models.BindSubnetsToNatGatewayRequest;
 const ResetVpnConnectionResponse = models.ResetVpnConnectionResponse;
 const RejectVpcPeerConnectionRequest = models.RejectVpcPeerConnectionRequest;
 const VpcViewInfo = models.VpcViewInfo;
 const DescribeCustomerGatewaysRequest = models.DescribeCustomerGatewaysRequest;
+const CreateCustomerGatewayRequest = models.CreateCustomerGatewayRequest;
 const DeleteHostedInterfacesRequest = models.DeleteHostedInterfacesRequest;
 const DescribeTaskStatusRequest = models.DescribeTaskStatusRequest;
 const ModifyVpnConnectionAttributeRequest = models.ModifyVpnConnectionAttributeRequest;
@@ -111,12 +120,13 @@ const DescribeVpcViewRequest = models.DescribeVpcViewRequest;
 const DescribeSubnetByDeviceRequest = models.DescribeSubnetByDeviceRequest;
 const AcceptVpcPeerConnectionResponse = models.AcceptVpcPeerConnectionResponse;
 const DescribeRoutePoliciesRequest = models.DescribeRoutePoliciesRequest;
+const VpnGateway = models.VpnGateway;
 const ModifyVpnGatewayAttributeRequest = models.ModifyVpnGatewayAttributeRequest;
 const CreateNatGatewayRequest = models.CreateNatGatewayRequest;
 const IPSECOptionsSpecification = models.IPSECOptionsSpecification;
 const DeleteVpnConnectionRequest = models.DeleteVpnConnectionRequest;
 const UnbindSubnetsFromNatGatewayResponse = models.UnbindSubnetsFromNatGatewayResponse;
-const ResetVpnConnectionRequest = models.ResetVpnConnectionRequest;
+const DescribeVpnConnectionsResponse = models.DescribeVpnConnectionsResponse;
 const DeleteCustomerGatewayRequest = models.DeleteCustomerGatewayRequest;
 const IpInfo = models.IpInfo;
 const UpgradeNatGatewayRequest = models.UpgradeNatGatewayRequest;
@@ -129,6 +139,7 @@ const DescribeVpcQuotaResponse = models.DescribeVpcQuotaResponse;
 const UnbindEipsFromNatGatewayResponse = models.UnbindEipsFromNatGatewayResponse;
 const ModifySubnetAttributeResponse = models.ModifySubnetAttributeResponse;
 const CreateInterfacesRequest = models.CreateInterfacesRequest;
+const DescribeVpcPeerConnectionsRequest = models.DescribeVpcPeerConnectionsRequest;
 const CreateVpcRequest = models.CreateVpcRequest;
 const DescribeSubnetByHostedDeviceResponse = models.DescribeSubnetByHostedDeviceResponse;
 const CreateVpcPeerConnectionRequest = models.CreateVpcPeerConnectionRequest;
@@ -139,7 +150,7 @@ const DeleteVpcResponse = models.DeleteVpcResponse;
 const BindIpsToNatGatewayResponse = models.BindIpsToNatGatewayResponse;
 const VpcQuota = models.VpcQuota;
 const CreateNatGatewayResponse = models.CreateNatGatewayResponse;
-const BindSubnetsToNatGatewayRequest = models.BindSubnetsToNatGatewayRequest;
+const AsyncRegisterIpsRequest = models.AsyncRegisterIpsRequest;
 const BindIpsToNatGatewayRequest = models.BindIpsToNatGatewayRequest;
 const DescribeVpcsResponse = models.DescribeVpcsResponse;
 const SubnetCreateInputInfo = models.SubnetCreateInputInfo;
@@ -364,18 +375,14 @@ class BmvpcClient extends AbstractClient {
     }
 
     /**
-     * 本接口（CreateHostedInterface）用于黑石托管机器加入带VLANID不为5的子网。
-
-1) 不能加入vlanId 为5的子网，只能加入VLANID范围为2000-2999的子网。
-2) 每台托管机器最多可以加入20个子网。
-3) 每次调用最多能支持传入10台托管机器。
-     * @param {CreateHostedInterfaceRequest} req
-     * @param {function(string, CreateHostedInterfaceResponse):void} cb
+     * 删除黑石路由表路由规则
+     * @param {DeleteRoutePolicyRequest} req
+     * @param {function(string, DeleteRoutePolicyResponse):void} cb
      * @public
      */
-    CreateHostedInterface(req, cb) {
-        let resp = new CreateHostedInterfaceResponse();
-        this.request("CreateHostedInterface", req, resp, cb);
+    DeleteRoutePolicy(req, cb) {
+        let resp = new DeleteRoutePolicyResponse();
+        this.request("DeleteRoutePolicy", req, resp, cb);
     }
 
     /**
@@ -512,6 +519,17 @@ class BmvpcClient extends AbstractClient {
     }
 
     /**
+     * 物理机可以加入物理机子网，虚拟子网，DOCKER子网，通过此接口可以查询物理机加入的子网。
+     * @param {DescribeSubnetByDeviceRequest} req
+     * @param {function(string, DescribeSubnetByDeviceResponse):void} cb
+     * @public
+     */
+    DescribeSubnetByDevice(req, cb) {
+        let resp = new DescribeSubnetByDeviceResponse();
+        this.request("DescribeSubnetByDevice", req, resp, cb);
+    }
+
+    /**
      * 修改路由表
      * @param {ModifyRouteTableRequest} req
      * @param {function(string, ModifyRouteTableResponse):void} cb
@@ -556,14 +574,14 @@ class BmvpcClient extends AbstractClient {
     }
 
     /**
-     * 物理机可以加入物理机子网，虚拟子网，DOCKER子网，通过此接口可以查询物理机加入的子网。
-     * @param {DescribeSubnetByDeviceRequest} req
-     * @param {function(string, DescribeSubnetByDeviceResponse):void} cb
+     * 本接口（CreateCustomerGateway）用于创建对端网关。
+     * @param {CreateCustomerGatewayRequest} req
+     * @param {function(string, CreateCustomerGatewayResponse):void} cb
      * @public
      */
-    DescribeSubnetByDevice(req, cb) {
-        let resp = new DescribeSubnetByDeviceResponse();
-        this.request("DescribeSubnetByDevice", req, resp, cb);
+    CreateCustomerGateway(req, cb) {
+        let resp = new CreateCustomerGatewayResponse();
+        this.request("CreateCustomerGateway", req, resp, cb);
     }
 
     /**
@@ -645,6 +663,17 @@ class BmvpcClient extends AbstractClient {
     }
 
     /**
+     * 本接口（DescribeVpnGateways）用于查询VPN网关列表。
+     * @param {DescribeVpnGatewaysRequest} req
+     * @param {function(string, DescribeVpnGatewaysResponse):void} cb
+     * @public
+     */
+    DescribeVpnGateways(req, cb) {
+        let resp = new DescribeVpnGatewaysResponse();
+        this.request("DescribeVpnGateways", req, resp, cb);
+    }
+
+    /**
      * 托管机器移除子网批量接口，传入一台托管机器和多个子网，批量移除这些子网。异步接口，接口返回TaskId。
      * @param {DeleteHostedInterfacesRequest} req
      * @param {function(string, DeleteHostedInterfacesResponse):void} cb
@@ -711,14 +740,29 @@ class BmvpcClient extends AbstractClient {
     }
 
     /**
-     * 删除黑石路由表路由规则
-     * @param {DeleteRoutePolicyRequest} req
-     * @param {function(string, DeleteRoutePolicyResponse):void} cb
+     * 本接口（CreateHostedInterface）用于黑石托管机器加入带VLANID不为5的子网。
+
+1) 不能加入vlanId 为5的子网，只能加入VLANID范围为2000-2999的子网。
+2) 每台托管机器最多可以加入20个子网。
+3) 每次调用最多能支持传入10台托管机器。
+     * @param {CreateHostedInterfaceRequest} req
+     * @param {function(string, CreateHostedInterfaceResponse):void} cb
      * @public
      */
-    DeleteRoutePolicy(req, cb) {
-        let resp = new DeleteRoutePolicyResponse();
-        this.request("DeleteRoutePolicy", req, resp, cb);
+    CreateHostedInterface(req, cb) {
+        let resp = new CreateHostedInterfaceResponse();
+        this.request("CreateHostedInterface", req, resp, cb);
+    }
+
+    /**
+     *  本接口（DescribeVpnConnections）查询VPN通道列表。
+     * @param {DescribeVpnConnectionsRequest} req
+     * @param {function(string, DescribeVpnConnectionsResponse):void} cb
+     * @public
+     */
+    DescribeVpnConnections(req, cb) {
+        let resp = new DescribeVpnConnectionsResponse();
+        this.request("DescribeVpnConnections", req, resp, cb);
     }
 
     /**
@@ -730,6 +774,17 @@ class BmvpcClient extends AbstractClient {
     DescribeSubnetByHostedDevice(req, cb) {
         let resp = new DescribeSubnetByHostedDeviceResponse();
         this.request("DescribeSubnetByHostedDevice", req, resp, cb);
+    }
+
+    /**
+     * 获取对等连接列表
+     * @param {DescribeVpcPeerConnectionsRequest} req
+     * @param {function(string, DescribeVpcPeerConnectionsResponse):void} cb
+     * @public
+     */
+    DescribeVpcPeerConnections(req, cb) {
+        let resp = new DescribeVpcPeerConnectionsResponse();
+        this.request("DescribeVpcPeerConnections", req, resp, cb);
     }
 
     /**

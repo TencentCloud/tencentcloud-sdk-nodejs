@@ -1607,7 +1607,16 @@ class AudioTemplateInfoForUpdate extends  AbstractModel {
         super();
 
         /**
-         * 音频流的编码格式，可选值：
+         * 音频流的编码格式。
+当外层参数 Container 为 mp3 时，可选值为：
+<li>libmp3lame。</li>
+当外层参数 Container 为 ogg 或 flac 时，可选值为：
+<li>flac。</li>
+当外层参数 Container 为 m4a 时，可选值为：
+<li>libfdk_aac；</li>
+<li>libmp3lame；</li>
+<li>ac3。</li>
+当外层参数 Container 为视频格式（mp4、flv 或 hls）时，可选值为：
 <li>libfdk_aac：更适合 mp4 和 hls；</li>
 <li>libmp3lame：更适合 flv；</li>
 <li>mp2。</li>
@@ -1836,7 +1845,16 @@ class AudioTemplateInfo extends  AbstractModel {
         super();
 
         /**
-         * 音频流的编码格式，可选值：
+         * 音频流的编码格式。
+当外层参数 Container 为 mp3 时，可选值为：
+<li>libmp3lame。</li>
+当外层参数 Container 为 ogg 或 flac 时，可选值为：
+<li>flac。</li>
+当外层参数 Container 为 m4a 时，可选值为：
+<li>libfdk_aac；</li>
+<li>libmp3lame；</li>
+<li>ac3。</li>
+当外层参数 Container 为视频格式（mp4、flv 或 hls）时，可选值为：
 <li>libfdk_aac：更适合 mp4 和 hls；</li>
 <li>libmp3lame：更适合 flv；</li>
 <li>mp2。</li>
@@ -2487,7 +2505,7 @@ class TextWatermarkTemplateInputForUpdate extends  AbstractModel {
         this.FontSize = null;
 
         /**
-         * 字体颜色，格式：0xRRGGBB，默认值：0xFFFFFF（黑色）。
+         * 字体颜色，格式：0xRRGGBB，默认值：0xFFFFFF（白色）。
          * @type {string || null}
          */
         this.FontColor = null;
@@ -7205,7 +7223,7 @@ class TextWatermarkTemplateInput extends  AbstractModel {
         this.FontSize = null;
 
         /**
-         * 字体颜色，格式：0xRRGGBB，默认值：0xFFFFFF（黑色）。
+         * 字体颜色，格式：0xRRGGBB，默认值：0xFFFFFF（白色）。
          * @type {string || null}
          */
         this.FontColor = null;

@@ -856,7 +856,7 @@ class SrcInfo extends  AbstractModel {
         this.UniqVpnGwId = null;
 
         /**
-         * 数据库实例ID,格式如：cdb-powiqx8q
+         * 数据库实例ID，格式如：cdb-powiqx8q
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -872,6 +872,13 @@ class SrcInfo extends  AbstractModel {
          * @type {string || null}
          */
         this.Supplier = null;
+
+        /**
+         * 云联网ID，如：ccn-afp6kltc
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.CcnId = null;
 
     }
 
@@ -896,6 +903,7 @@ class SrcInfo extends  AbstractModel {
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
         this.Region = 'Region' in params ? params.Region : null;
         this.Supplier = 'Supplier' in params ? params.Supplier : null;
+        this.CcnId = 'CcnId' in params ? params.CcnId : null;
 
     }
 }
@@ -2251,7 +2259,7 @@ class MigrateJobInfo extends  AbstractModel {
         this.EndTime = null;
 
         /**
-         * 任务状态,取值为：1-创建中(Creating),3-校验中(Checking)4-校验通过(CheckPass),5-校验不通过（CheckNotPass）,7-任务运行(Running),8-准备完成（ReadyComplete）,9-任务成功（Success）,10-任务失败（Failed）,11-撤销中（Stoping）,12-完成中（Completing）
+         * 任务状态,取值为：1-创建中(Creating),3-校验中(Checking)4-校验通过(CheckPass),5-校验不通过（CheckNotPass）,7-任务运行(Running),8-准备完成（ReadyComplete）,9-任务成功（Success）,10-任务失败（Failed）,11-撤销中（Stopping）,12-完成中（Completing）
          * @type {number || null}
          */
         this.Status = null;

@@ -190,7 +190,7 @@ class BankCardVerificationRequest extends  AbstractModel {
         super();
 
         /**
-         * 身份证号
+         * 开户证件号，与CertType参数的证件类型一致，如：身份证，则传入身份证号。
          * @type {string || null}
          */
         this.IdCard = null;
@@ -709,7 +709,7 @@ class BankCard4EVerificationRequest extends  AbstractModel {
         this.Phone = null;
 
         /**
-         * 身份证号码
+         * 开户证件号，与CertType参数的证件类型一致，如：身份证，则传入身份证号。
          * @type {string || null}
          */
         this.IdCard = null;

@@ -71,6 +71,7 @@ module.exports = {
     tics: require("./tics"),
     tiia: require("./tiia"),
     tke: require("./tke"),
+    tkgdq: require("./tkgdq"),
     tmt: require("./tmt"),
     tsf: require("./tsf"),
     vod: require("./vod"),
