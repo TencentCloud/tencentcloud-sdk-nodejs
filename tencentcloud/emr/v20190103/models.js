@@ -717,6 +717,48 @@ class PreExecuteFileSettings extends  AbstractModel {
          */
         this.Domain = null;
 
+        /**
+         * 执行顺序
+         * @type {number || null}
+         */
+        this.RunOrder = null;
+
+        /**
+         * resourceAfter 或 clusterAfter
+         * @type {string || null}
+         */
+        this.WhenRun = null;
+
+        /**
+         * 脚本文件名
+         * @type {string || null}
+         */
+        this.CosFileName = null;
+
+        /**
+         * 脚本的cos地址
+         * @type {string || null}
+         */
+        this.CosFileURI = null;
+
+        /**
+         * cos的SecretId
+         * @type {string || null}
+         */
+        this.CosSecretId = null;
+
+        /**
+         * Cos的SecretKey
+         * @type {string || null}
+         */
+        this.CosSecretKey = null;
+
+        /**
+         * cos的appid
+         * @type {string || null}
+         */
+        this.AppId = null;
+
     }
 
     /**
@@ -731,6 +773,13 @@ class PreExecuteFileSettings extends  AbstractModel {
         this.Bucket = 'Bucket' in params ? params.Bucket : null;
         this.Region = 'Region' in params ? params.Region : null;
         this.Domain = 'Domain' in params ? params.Domain : null;
+        this.RunOrder = 'RunOrder' in params ? params.RunOrder : null;
+        this.WhenRun = 'WhenRun' in params ? params.WhenRun : null;
+        this.CosFileName = 'CosFileName' in params ? params.CosFileName : null;
+        this.CosFileURI = 'CosFileURI' in params ? params.CosFileURI : null;
+        this.CosSecretId = 'CosSecretId' in params ? params.CosSecretId : null;
+        this.CosSecretKey = 'CosSecretKey' in params ? params.CosSecretKey : null;
+        this.AppId = 'AppId' in params ? params.AppId : null;
 
     }
 }
@@ -829,7 +878,7 @@ class CreateInstanceRequest extends  AbstractModel {
 
         /**
          * 预执行脚本设置
-         * @type {PreExecuteFileSettings || null}
+         * @type {Array.<PreExecuteFileSettings> || null}
          */
         this.PreExecutedFileSettings = null;
 
@@ -844,6 +893,12 @@ class CreateInstanceRequest extends  AbstractModel {
          * @type {string || null}
          */
         this.NeedMasterWan = null;
+
+        /**
+         * 是否需要开启外网远程登录，即22号端口，在SgId不为空时，该选项无效
+         * @type {number || null}
+         */
+        this.RemoteLoginAtCreate = null;
 
     }
 
@@ -895,12 +950,16 @@ class CreateInstanceRequest extends  AbstractModel {
         this.SgId = 'SgId' in params ? params.SgId : null;
 
         if (params.PreExecutedFileSettings) {
-            let obj = new PreExecuteFileSettings();
-            obj.deserialize(params.PreExecutedFileSettings)
-            this.PreExecutedFileSettings = obj;
+            this.PreExecutedFileSettings = new Array();
+            for (let z in params.PreExecutedFileSettings) {
+                let obj = new PreExecuteFileSettings();
+                obj.deserialize(params.PreExecutedFileSettings[z]);
+                this.PreExecutedFileSettings.push(obj);
+            }
         }
         this.AutoRenew = 'AutoRenew' in params ? params.AutoRenew : null;
         this.NeedMasterWan = 'NeedMasterWan' in params ? params.NeedMasterWan : null;
+        this.RemoteLoginAtCreate = 'RemoteLoginAtCreate' in params ? params.RemoteLoginAtCreate : null;
 
     }
 }
@@ -1181,7 +1240,7 @@ class ScaleOutInstanceRequest extends  AbstractModel {
 
         /**
          * 预执行脚本设置
-         * @type {PreExecuteFileSettings || null}
+         * @type {Array.<PreExecuteFileSettings> || null}
          */
         this.PreExecutedFileSettings = null;
 
@@ -1213,9 +1272,12 @@ class ScaleOutInstanceRequest extends  AbstractModel {
         this.PayMode = 'PayMode' in params ? params.PayMode : null;
 
         if (params.PreExecutedFileSettings) {
-            let obj = new PreExecuteFileSettings();
-            obj.deserialize(params.PreExecutedFileSettings)
-            this.PreExecutedFileSettings = obj;
+            this.PreExecutedFileSettings = new Array();
+            for (let z in params.PreExecutedFileSettings) {
+                let obj = new PreExecuteFileSettings();
+                obj.deserialize(params.PreExecutedFileSettings[z]);
+                this.PreExecutedFileSettings.push(obj);
+            }
         }
         this.TaskCount = 'TaskCount' in params ? params.TaskCount : null;
         this.CoreCount = 'CoreCount' in params ? params.CoreCount : null;
@@ -1497,7 +1559,7 @@ class NodeSpec extends  AbstractModel {
         this.SpecName = null;
 
         /**
-         * 多云盘参数
+         * 多盘数据
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<MultiDisk> || null}
          */
@@ -1705,6 +1767,12 @@ class MultiDisk extends  AbstractModel {
          */
         this.Volume = null;
 
+        /**
+         * 该类型云盘个数
+         * @type {number || null}
+         */
+        this.Count = null;
+
     }
 
     /**
@@ -1716,6 +1784,7 @@ class MultiDisk extends  AbstractModel {
         }
         this.DiskType = 'DiskType' in params ? params.DiskType : null;
         this.Volume = 'Volume' in params ? params.Volume : null;
+        this.Count = 'Count' in params ? params.Count : null;
 
     }
 }
