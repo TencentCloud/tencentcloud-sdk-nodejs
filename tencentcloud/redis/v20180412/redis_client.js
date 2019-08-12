@@ -18,6 +18,7 @@ const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const ModifyInstanceResponse = models.ModifyInstanceResponse;
 const DescribeInstanceShardsRequest = models.DescribeInstanceShardsRequest;
+const SwitchInstanceVipResponse = models.SwitchInstanceVipResponse;
 const ResetPasswordRequest = models.ResetPasswordRequest;
 const DescribeAutoBackupConfigResponse = models.DescribeAutoBackupConfigResponse;
 const ModifyInstanceParamsResponse = models.ModifyInstanceParamsResponse;
@@ -26,6 +27,7 @@ const RedisBackupSet = models.RedisBackupSet;
 const ModfiyInstancePasswordRequest = models.ModfiyInstancePasswordRequest;
 const ModifyAutoBackupConfigResponse = models.ModifyAutoBackupConfigResponse;
 const RestoreInstanceRequest = models.RestoreInstanceRequest;
+const SwitchInstanceVipRequest = models.SwitchInstanceVipRequest;
 const EnableReplicaReadonlyResponse = models.EnableReplicaReadonlyResponse;
 const CreateInstancesRequest = models.CreateInstancesRequest;
 const DescribeProductInfoResponse = models.DescribeProductInfoResponse;
@@ -422,6 +424,17 @@ class RedisClient extends AbstractClient {
     ModifyInstance(req, cb) {
         let resp = new ModifyInstanceResponse();
         this.request("ModifyInstance", req, resp, cb);
+    }
+
+    /**
+     * 在通过DTS支持跨可用区灾备的场景中，通过该接口交换实例VIP完成实例灾备切换。交换VIP后目标实例可写，源和目标实例VIP互换，同时源与目标实例间DTS同步任务断开
+     * @param {SwitchInstanceVipRequest} req
+     * @param {function(string, SwitchInstanceVipResponse):void} cb
+     * @public
+     */
+    SwitchInstanceVip(req, cb) {
+        let resp = new SwitchInstanceVipResponse();
+        this.request("SwitchInstanceVip", req, resp, cb);
     }
 
 
