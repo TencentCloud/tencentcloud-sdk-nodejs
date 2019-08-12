@@ -80,6 +80,41 @@ class DescribeInstanceShardsRequest extends  AbstractModel {
 }
 
 /**
+ * SwitchInstanceVip返回参数结构体
+ * @class
+ */
+class SwitchInstanceVipResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 任务ID
+         * @type {number || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * ResetPassword请求参数结构体
  * @class
  */
@@ -439,6 +474,62 @@ class RestoreInstanceRequest extends  AbstractModel {
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
         this.BackupId = 'BackupId' in params ? params.BackupId : null;
         this.Password = 'Password' in params ? params.Password : null;
+
+    }
+}
+
+/**
+ * SwitchInstanceVip请求参数结构体
+ * @class
+ */
+class SwitchInstanceVipRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 源实例ID
+         * @type {string || null}
+         */
+        this.SrcInstanceId = null;
+
+        /**
+         * 目标实例ID
+         * @type {string || null}
+         */
+        this.DstInstanceId = null;
+
+        /**
+         * 单位为秒。源实例与目标实例间DTS已断开时间，如果DTS断开时间大于TimeDelay，则不切换VIP，建议尽量根据业务设置一个可接受的值。
+         * @type {number || null}
+         */
+        this.TimeDelay = null;
+
+        /**
+         * 在DTS断开的情况下是否强制切换。1：强制切换，0：不强制切换
+         * @type {number || null}
+         */
+        this.ForceSwitch = null;
+
+        /**
+         * now: 立即切换，syncComplete：等待同步完成后切换
+         * @type {string || null}
+         */
+        this.SwitchTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SrcInstanceId = 'SrcInstanceId' in params ? params.SrcInstanceId : null;
+        this.DstInstanceId = 'DstInstanceId' in params ? params.DstInstanceId : null;
+        this.TimeDelay = 'TimeDelay' in params ? params.TimeDelay : null;
+        this.ForceSwitch = 'ForceSwitch' in params ? params.ForceSwitch : null;
+        this.SwitchTime = 'SwitchTime' in params ? params.SwitchTime : null;
 
     }
 }
@@ -4152,6 +4243,7 @@ class DestroyPostpaidInstanceResponse extends  AbstractModel {
 module.exports = {
     ModifyInstanceResponse: ModifyInstanceResponse,
     DescribeInstanceShardsRequest: DescribeInstanceShardsRequest,
+    SwitchInstanceVipResponse: SwitchInstanceVipResponse,
     ResetPasswordRequest: ResetPasswordRequest,
     DescribeAutoBackupConfigResponse: DescribeAutoBackupConfigResponse,
     ModifyInstanceParamsResponse: ModifyInstanceParamsResponse,
@@ -4160,6 +4252,7 @@ module.exports = {
     ModfiyInstancePasswordRequest: ModfiyInstancePasswordRequest,
     ModifyAutoBackupConfigResponse: ModifyAutoBackupConfigResponse,
     RestoreInstanceRequest: RestoreInstanceRequest,
+    SwitchInstanceVipRequest: SwitchInstanceVipRequest,
     EnableReplicaReadonlyResponse: EnableReplicaReadonlyResponse,
     CreateInstancesRequest: CreateInstancesRequest,
     DescribeProductInfoResponse: DescribeProductInfoResponse,
