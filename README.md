@@ -4,7 +4,7 @@
 # 依赖环境
 1. NODEJS 7.10.1 版本及以上
 2. 从腾讯云控制台 开通相应产品
-3. 获取 SecretID、SecretKey 以及调用地址（endpoint），endpoint 一般形式为*.tencentcloudapi.com，如CVM 的调用地址为 cvm.tencentcloudapi.com，具体参考各产品说明。
+3. 获取 SecretID、SecretKey 以及调用地址（endpoint），endpoint 一般形式为\*.tencentcloudapi.com，如CVM 的调用地址为 cvm.tencentcloudapi.com，具体参考各产品说明。
 
 # 获取安装
 安装 NODEJS SDK 前，先获取安全凭证。在第一次使用云API之前，用户首先需要在腾讯云控制台上申请安全凭证，安全凭证包括 SecretID 和 SecretKey， SecretID 是用于标识 API 调用者的身份，SecretKey是用于加密签名字符串和服务器端验证签名字符串的密钥。SecretKey 必须严格保管，避免泄露。
@@ -49,8 +49,16 @@ client.DescribeZones(req, function(err, response) {
     console.log(response.to_json_string());
 });
 ```
-# 更多示例
+
+## 更多示例
+
 更丰富的使用demo请在examples目录中寻找。
+
+# 相关配置
+
+## 代理
+
+如果是有代理的环境下，需要设置系统环境变量 `https_proxy` ，否则可能无法正常调用，抛出连接超时的异常。
 
 # 旧版SDK
 我们推荐使用新版NODEJS SDK，如果一定要用旧版SDK，请前往[github仓库](https://github.com/CFETeam/qcloudapi-sdk)下载。
