@@ -26,6 +26,7 @@ const AIAssistantRequest = models.AIAssistantRequest;
 const CreatePersonRequest = models.CreatePersonRequest;
 const LightStatistic = models.LightStatistic;
 const DescribePersonsRequest = models.DescribePersonsRequest;
+const SubmitOneByOneClassTaskRequest = models.SubmitOneByOneClassTaskRequest;
 const CreateVocabResponse = models.CreateVocabResponse;
 const SubmitConversationTaskResponse = models.SubmitConversationTaskResponse;
 const DescribeVocabLibRequest = models.DescribeVocabLibRequest;
@@ -39,17 +40,19 @@ const WordTimePair = models.WordTimePair;
 const ModifyLibraryRequest = models.ModifyLibraryRequest;
 const FaceInfo = models.FaceInfo;
 const DeleteLibraryResponse = models.DeleteLibraryResponse;
+const SubmitFullBodyClassTaskRequest = models.SubmitFullBodyClassTaskRequest;
 const LightResult = models.LightResult;
 const DescribeAttendanceResultRequest = models.DescribeAttendanceResultRequest;
+const SubmitOpenClassTaskResponse = models.SubmitOpenClassTaskResponse;
 const WholeTextItem = models.WholeTextItem;
 const DescribeConversationTaskResponse = models.DescribeConversationTaskResponse;
 const CreatePersonResponse = models.CreatePersonResponse;
 const DescribeImageTaskRequest = models.DescribeImageTaskRequest;
 const HighlightsInfomation = models.HighlightsInfomation;
 const TimeType = models.TimeType;
+const SubmitTraditionalClassTaskRequest = models.SubmitTraditionalClassTaskRequest;
 const DeleteFaceResponse = models.DeleteFaceResponse;
 const SubmitDoubleVideoHighlightsRequest = models.SubmitDoubleVideoHighlightsRequest;
-const CheckAttendanceResponse = models.CheckAttendanceResponse;
 const ExpressRatioStatistic = models.ExpressRatioStatistic;
 const TransmitAudioStreamResponse = models.TransmitAudioStreamResponse;
 const DeletePersonRequest = models.DeletePersonRequest;
@@ -63,6 +66,7 @@ const AttendanceInfo = models.AttendanceInfo;
 const SubmitCheckAttendanceTaskResponse = models.SubmitCheckAttendanceTaskResponse;
 const DeleteVocabResponse = models.DeleteVocabResponse;
 const CheckFacePhotoRequest = models.CheckFacePhotoRequest;
+const TeacherOutScreenResult = models.TeacherOutScreenResult;
 const Word = models.Word;
 const DeleteVocabRequest = models.DeleteVocabRequest;
 const ActionInfo = models.ActionInfo;
@@ -79,11 +83,14 @@ const DescribePersonRequest = models.DescribePersonRequest;
 const StandardVideoResult = models.StandardVideoResult;
 const ModifyLibraryResponse = models.ModifyLibraryResponse;
 const TimeInfoResult = models.TimeInfoResult;
+const SubmitPartialBodyClassTaskResponse = models.SubmitPartialBodyClassTaskResponse;
 const ASRStat = models.ASRStat;
 const TextItem = models.TextItem;
 const CancelTaskRequest = models.CancelTaskRequest;
 const DoubleVideoFunction = models.DoubleVideoFunction;
+const SubmitPartialBodyClassTaskRequest = models.SubmitPartialBodyClassTaskRequest;
 const DescribeHighlightResultResponse = models.DescribeHighlightResultResponse;
+const SubmitOneByOneClassTaskResponse = models.SubmitOneByOneClassTaskResponse;
 const LightStandard = models.LightStandard;
 const SubmitHighlightsRequest = models.SubmitHighlightsRequest;
 const ModifyPersonResponse = models.ModifyPersonResponse;
@@ -118,21 +125,23 @@ const DescribeAttendanceResultResponse = models.DescribeAttendanceResultResponse
 const FaceExpressStatistic = models.FaceExpressStatistic;
 const ActionDurationStatistic = models.ActionDurationStatistic;
 const DescribeLibrariesRequest = models.DescribeLibrariesRequest;
+const SubmitFullBodyClassTaskResponse = models.SubmitFullBodyClassTaskResponse;
 const ModifyPersonRequest = models.ModifyPersonRequest;
 const DescribeImageTaskResponse = models.DescribeImageTaskResponse;
 const StandardAudioResult = models.StandardAudioResult;
 const HandTrackingResult = models.HandTrackingResult;
+const SubmitOpenClassTaskRequest = models.SubmitOpenClassTaskRequest;
 const SubmitAudioTaskRequest = models.SubmitAudioTaskRequest;
 const CreateVocabRequest = models.CreateVocabRequest;
 const TransmitAudioStreamRequest = models.TransmitAudioStreamRequest;
 const FaceAttrResult = models.FaceAttrResult;
+const SubmitTraditionalClassTaskResponse = models.SubmitTraditionalClassTaskResponse;
 const AIAssistantResponse = models.AIAssistantResponse;
 const SubmitImageTaskResponse = models.SubmitImageTaskResponse;
 const CreateVocabLibRequest = models.CreateVocabLibRequest;
 const CreateLibraryResponse = models.CreateLibraryResponse;
 const FaceIdentifyResult = models.FaceIdentifyResult;
 const SubmitAudioTaskResponse = models.SubmitAudioTaskResponse;
-const CheckAttendanceRequest = models.CheckAttendanceRequest;
 const DescribeConversationTaskRequest = models.DescribeConversationTaskRequest;
 const VocabDetailInfomation = models.VocabDetailInfomation;
 const CreateLibraryRequest = models.CreateLibraryRequest;
@@ -150,6 +159,24 @@ class TciClient extends AbstractClient {
         super("tci.tencentcloudapi.com", "2019-03-18", credential, region, profile);
     }
     
+    /**
+     * **提交线下小班（无课桌）课任务**  
+线下小班课是指有学生无课桌的课堂，满座15人以下，全局画面且背景不动，能清晰看到。  
+  
+**提供的功能接口有：**学生人脸识别、学生表情识别、学生肢体动作识别。  可分析的指标维度包括：身份识别、正脸、侧脸、抬头、低头、高兴、中性、高兴、中性、惊讶、厌恶、恐惧、愤怒、蔑视、悲伤、站立、举手、坐着等。
+  
+**对场景的要求为：**真实常规教室，满座15人以下，全局画面且背景不动；人脸上下角度在20度以内，左右角度在15度以内，歪头角度在15度以内；光照均匀，无遮挡，人脸清晰可见；像素最好在 100X100 像素以上但是图像整体质量不能超过1080p。
+    
+**结果查询方式：**图像任务直接返回结果，点播及直播任务通过DescribeAITaskResult查询结果。
+     * @param {SubmitOpenClassTaskRequest} req
+     * @param {function(string, SubmitOpenClassTaskResponse):void} cb
+     * @public
+     */
+    SubmitOpenClassTask(req, cb) {
+        let resp = new SubmitOpenClassTaskResponse();
+        this.request("SubmitOpenClassTask", req, resp, cb);
+    }
+
     /**
      * 创建人员库
      * @param {CreateLibraryRequest} req
@@ -272,6 +299,25 @@ class TciClient extends AbstractClient {
     }
 
     /**
+     * **提交线下传统面授大班课（含课桌）任务。**  
+传统教室课堂是指有学生课堂有课桌的课堂，满座20-50人，全局画面且背景不动。  
+  
+**提供的功能接口有：**学生人脸识别、学生表情识别、学生肢体动作识别。可分析的指标维度包括：学生身份识别、正脸、侧脸、抬头、低头、高兴、中性、高兴、中性、惊讶、厌恶、恐惧、愤怒、蔑视、悲伤、举手、站立、坐着、趴桌子、玩手机等  
+  
+**对场景的要求为：**传统的学生上课教室，满座20-50人，全局画面且背景不动；人脸上下角度在20度以内，左右角度在15度以内，歪头角度在15度以内；光照均匀，无遮挡，人脸清晰可见；像素最好在 100X100 像素以上，但是图像整体质量不能超过1080p。
+    
+**结果查询方式：**图像任务直接返回结果，点播及直播任务通过DescribeAITaskResult查询结果。
+  
+     * @param {SubmitTraditionalClassTaskRequest} req
+     * @param {function(string, SubmitTraditionalClassTaskResponse):void} cb
+     * @public
+     */
+    SubmitTraditionalClassTask(req, cb) {
+        let resp = new SubmitTraditionalClassTaskResponse();
+        this.request("SubmitTraditionalClassTask", req, resp, cb);
+    }
+
+    /**
      * 获取标准化接口任务结果
      * @param {DescribeAITaskResultRequest} req
      * @param {function(string, DescribeAITaskResultResponse):void} cb
@@ -305,14 +351,14 @@ class TciClient extends AbstractClient {
     }
 
     /**
-     * 创建人员
-     * @param {CreatePersonRequest} req
-     * @param {function(string, CreatePersonResponse):void} cb
+     * 用于取消已经提交的任务，目前只支持图像任务。
+     * @param {CancelTaskRequest} req
+     * @param {function(string, CancelTaskResponse):void} cb
      * @public
      */
-    CreatePerson(req, cb) {
-        let resp = new CreatePersonResponse();
-        this.request("CreatePerson", req, resp, cb);
+    CancelTask(req, cb) {
+        let resp = new CancelTaskResponse();
+        this.request("CancelTask", req, resp, cb);
     }
 
     /**
@@ -349,7 +395,55 @@ class TciClient extends AbstractClient {
     }
 
     /**
-     * 提交人员考勤任务
+     * **提交在线1对1课堂任务**  
+对于在线1对1课堂，老师通过视频向学生授课，并且学生人数为1人。通过上传学生端的图像信息，可以获取学生的听课情况分析。 具体指一路全局画面且背景不动，有1位学生的头像或上半身的画面，要求画面稳定清晰。
+  
+**提供的功能接口有：**学生人脸识别、学生表情识别、语音识别。可分析的指标维度包括：学生身份识别、正脸、侧脸、抬头、低头、人脸坐标、人脸尺寸、高兴、中性、高兴、中性、惊讶、厌恶、恐惧、愤怒、蔑视、悲伤、语音转文字、发音时长、非发音时长、音量、语速等。
+  
+**对场景的要求为：**真实常规1v1授课场景，学生2人以下，全局画面且背景不动；人脸上下角度在20度以内，左右角度在15度以内，歪头角度在15度以内；光照均匀，无遮挡，人脸清晰可见；像素最好在 100X100 像素以上，但是图像整体质量不能超过1080p。
+    
+**结果查询方式：**图像任务直接返回结果，点播及直播任务通过DescribeAITaskResult查询结果。
+     * @param {SubmitOneByOneClassTaskRequest} req
+     * @param {function(string, SubmitOneByOneClassTaskResponse):void} cb
+     * @public
+     */
+    SubmitOneByOneClassTask(req, cb) {
+        let resp = new SubmitOneByOneClassTaskResponse();
+        this.request("SubmitOneByOneClassTask", req, resp, cb);
+    }
+
+    /**
+     * **在线小班课任务**：此场景是在线授课场景，老师一般为坐着授课，摄像头可以拍摄到老师的头部及上半身。拍摄视频为一路全局画面，且背景不动，要求画面稳定清晰。通过此接口可分析老师授课的行为及语音，以支持AI评教。    
+  
+**提供的功能接口有：**老师人脸识别、老师表情识别、老师手势识别、光线识别、语音识别。 可分析的指标维度包括：身份识别、正脸、侧脸、人脸坐标、人脸尺寸、高兴、中性、高兴、中性、惊讶、厌恶、恐惧、愤怒、蔑视、悲伤、点赞手势、听你说手势、听我说手势、拿教具行为、语音转文字、发音时长、非发音时长、音量、语速、指定关键词的使用等 
+  
+**对场景的要求为：**在线常规授课场景，全局画面且背景不动；人脸上下角度在20度以内，左右角度在15度以内，歪头角度在15度以内；光照均匀，无遮挡，人脸清晰可见；像素最好在 100X100 像素以上，但是图像整体质量不能超过1080p。
+    
+**结果查询方式：**图像任务直接返回结果，点播及直播任务通过DescribeAITaskResult查询结果。
+     * @param {SubmitPartialBodyClassTaskRequest} req
+     * @param {function(string, SubmitPartialBodyClassTaskResponse):void} cb
+     * @public
+     */
+    SubmitPartialBodyClassTask(req, cb) {
+        let resp = new SubmitPartialBodyClassTaskResponse();
+        this.request("SubmitPartialBodyClassTask", req, resp, cb);
+    }
+
+    /**
+     * 提交人员考勤任务，支持包括点播和直播资源；支持通过DescribeAttendanceResult查询结果，也支持通过NoticeUrl设置考勤回调结果，回调结果结构如下：
+##### 回调事件结构
+ | 参数名称 | 类型 | 描述 | 
+ | ----  | ---  | ------  |
+ | jobid | Integer | 任务ID | 
+ | person_info | array of PersonInfo | 识别到的人员列表 | 
+#####子结构PersonInfo
+ | 参数名称 | 类型 | 描述 | 
+ | ----  | ---  | ------  |
+ | traceid | String | 可用于区分同一路视频流下的不同陌生人 | 
+ | personid | String | 识别到的人员ID，如果是陌生人则返回空串 | 
+ | libid | String | 识别到的人员所在的库ID，如果是陌生人则返回空串 | 
+ | timestamp | uint64 | 识别到人脸的绝对时间戳，单位ms | 
+ | image_url | string | 识别到人脸的事件抓图的下载地址，不长期保存，需要请及时下载 | 
      * @param {SubmitCheckAttendanceTaskRequest} req
      * @param {function(string, SubmitCheckAttendanceTaskResponse):void} cb
      * @public
@@ -360,14 +454,14 @@ class TciClient extends AbstractClient {
     }
 
     /**
-     * 用于取消已经提交的任务
-     * @param {CancelTaskRequest} req
-     * @param {function(string, CancelTaskResponse):void} cb
+     * 创建人员
+     * @param {CreatePersonRequest} req
+     * @param {function(string, CreatePersonResponse):void} cb
      * @public
      */
-    CancelTask(req, cb) {
-        let resp = new CancelTaskResponse();
-        this.request("CancelTask", req, resp, cb);
+    CreatePerson(req, cb) {
+        let resp = new CreatePersonResponse();
+        this.request("CreatePerson", req, resp, cb);
     }
 
     /**
@@ -448,14 +542,20 @@ class TciClient extends AbstractClient {
     }
 
     /**
-     * 人员考勤
-     * @param {CheckAttendanceRequest} req
-     * @param {function(string, CheckAttendanceResponse):void} cb
+     * **传统课堂授课任务**：在此场景中，老师为站立授课，有白板或投影供老师展示课程内容，摄像头可以拍摄到老师的半身或者全身。拍摄视频为一路全局画面，且背景不动，要求画面稳定清晰。通过此接口可分析老师授课的行为及语音，以支持AI评教。  
+  
+**提供的功能接口有：**老师人脸识别、老师表情识别、老师肢体动作识别、语音识别。  可分析的指标维度包括：身份识别、正脸、侧脸、人脸坐标、人脸尺寸、高兴、中性、高兴、中性、惊讶、厌恶、恐惧、愤怒、蔑视、悲伤、正面讲解、写板书、指黑板、语音转文字、发音时长、非发音时长、音量、语速、指定关键词的使用等
+  
+**对场景的要求为：**真实场景老师1人出现在画面中，全局画面且背景不动；人脸上下角度在20度以内，左右角度在15度以内，歪头角度在15度以内；光照均匀，无遮挡，人脸清晰可见；像素最好在 100X100 像素以上，但是图像整体质量不能超过1080p。
+    
+**结果查询方式：**图像任务直接返回结果，点播及直播任务通过DescribeAITaskResult查询结果。
+     * @param {SubmitFullBodyClassTaskRequest} req
+     * @param {function(string, SubmitFullBodyClassTaskResponse):void} cb
      * @public
      */
-    CheckAttendance(req, cb) {
-        let resp = new CheckAttendanceResponse();
-        this.request("CheckAttendance", req, resp, cb);
+    SubmitFullBodyClassTask(req, cb) {
+        let resp = new SubmitFullBodyClassTaskResponse();
+        this.request("SubmitFullBodyClassTask", req, resp, cb);
     }
 
     /**

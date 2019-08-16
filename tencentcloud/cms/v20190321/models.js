@@ -168,7 +168,8 @@ class TextData extends  AbstractModel {
 20001：政治
 20002：色情 
 20006：涉毒违法
-20007：谩骂 
+20007：谩骂
+20105：广告引流 
 24001：暴恐
 21000：综合
          * @type {number || null}
@@ -236,6 +237,34 @@ class VideoModerationResponse extends  AbstractModel {
         this.BusinessCode = 'BusinessCode' in params ? params.BusinessCode : null;
         this.Data = 'Data' in params ? params.Data : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * TextModeration请求参数结构体
+ * @class
+ */
+class TextModerationRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 文本内容Base64编码
+         * @type {string || null}
+         */
+        this.Content = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Content = 'Content' in params ? params.Content : null;
 
     }
 }
@@ -330,6 +359,76 @@ class ImageModerationRequest extends  AbstractModel {
 }
 
 /**
+ * CreateFileSample请求参数结构体
+ * @class
+ */
+class CreateFileSampleRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 文件类型结构数组
+         * @type {Array.<FileSample> || null}
+         */
+        this.Contents = null;
+
+        /**
+         * 恶意类型
+100：正常
+20001：政治
+20002：色情 
+20006：涉毒违法
+20007：谩骂 
+24001：暴恐
+21000：综合
+20105：广告引流
+         * @type {number || null}
+         */
+        this.EvilType = null;
+
+        /**
+         * 文件类型
+image：图片
+audio：音频
+video：视频
+         * @type {string || null}
+         */
+        this.FileType = null;
+
+        /**
+         * 样本类型
+1：黑库
+2：白库
+         * @type {number || null}
+         */
+        this.Label = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Contents) {
+            this.Contents = new Array();
+            for (let z in params.Contents) {
+                let obj = new FileSample();
+                obj.deserialize(params.Contents[z]);
+                this.Contents.push(obj);
+            }
+        }
+        this.EvilType = 'EvilType' in params ? params.EvilType : null;
+        this.FileType = 'FileType' in params ? params.FileType : null;
+        this.Label = 'Label' in params ? params.Label : null;
+
+    }
+}
+
+/**
  * 图片识别结果详情
  * @class
  */
@@ -350,6 +449,7 @@ class ImageData extends  AbstractModel {
 20002：色情 
 20006：涉毒违法
 20007：谩骂 
+20103：性感
 24001：暴恐
 21000：综合
          * @type {number || null}
@@ -367,6 +467,12 @@ class ImageData extends  AbstractModel {
          * @type {ImageIllegalDetect || null}
          */
         this.IllegalDetect = null;
+
+        /**
+         * 图片OCR详情
+         * @type {OCRDetect || null}
+         */
+        this.OCRDetect = null;
 
         /**
          * 图片涉政详情
@@ -416,6 +522,12 @@ class ImageData extends  AbstractModel {
             this.IllegalDetect = obj;
         }
 
+        if (params.OCRDetect) {
+            let obj = new OCRDetect();
+            obj.deserialize(params.OCRDetect)
+            this.OCRDetect = obj;
+        }
+
         if (params.PolityDetect) {
             let obj = new ImagePolityDetect();
             obj.deserialize(params.PolityDetect)
@@ -453,13 +565,8 @@ class ImagePornDetect extends  AbstractModel {
 
         /**
          * 恶意类型
-100：正常 
-20001：政治
-20002：色情 
-20006：涉毒违法
-20007：谩骂 
-24001：暴恐
-21000：综合
+100：正常
+20002：色情
          * @type {number || null}
          */
         this.EvilType = null;
@@ -581,6 +688,221 @@ class CreateTextSampleResponse extends  AbstractModel {
 }
 
 /**
+ * 概览数据
+ * @class
+ */
+class OverviewRecord extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 调用恶意量
+         * @type {number || null}
+         */
+        this.EvilCount = null;
+
+        /**
+         * Text表示文本，Image表示图片，Audio表示音频，Video表示视频
+         * @type {string || null}
+         */
+        this.ServiceType = null;
+
+        /**
+         * 调用总量
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 恶意量同比增长率
+         * @type {string || null}
+         */
+        this.Yoy = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.EvilCount = 'EvilCount' in params ? params.EvilCount : null;
+        this.ServiceType = 'ServiceType' in params ? params.ServiceType : null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.Yoy = 'Yoy' in params ? params.Yoy : null;
+
+    }
+}
+
+/**
+ * 文件样本返回信息
+ * @class
+ */
+class FileSampleInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 处理错误码
+         * @type {number || null}
+         */
+        this.Code = null;
+
+        /**
+         * 创建时间戳
+         * @type {number || null}
+         */
+        this.CreatedAt = null;
+
+        /**
+         * 恶意类型
+100：正常
+20001：政治
+20002：色情 
+20006：涉毒违法
+20007：谩骂 
+24001：暴恐
+21000：综合
+         * @type {number || null}
+         */
+        this.EvilType = null;
+
+        /**
+         * 文件的md5
+         * @type {string || null}
+         */
+        this.FileMd5 = null;
+
+        /**
+         * 文件名称
+         * @type {string || null}
+         */
+        this.FileName = null;
+
+        /**
+         * 文件类型
+         * @type {string || null}
+         */
+        this.FileType = null;
+
+        /**
+         * 唯一标识
+         * @type {string || null}
+         */
+        this.Id = null;
+
+        /**
+         * 样本类型
+1：黑库
+2：白库
+         * @type {number || null}
+         */
+        this.Label = null;
+
+        /**
+         * 任务状态
+1：已完成
+2：处理中
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * 文件的url
+         * @type {string || null}
+         */
+        this.FileUrl = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Code = 'Code' in params ? params.Code : null;
+        this.CreatedAt = 'CreatedAt' in params ? params.CreatedAt : null;
+        this.EvilType = 'EvilType' in params ? params.EvilType : null;
+        this.FileMd5 = 'FileMd5' in params ? params.FileMd5 : null;
+        this.FileName = 'FileName' in params ? params.FileName : null;
+        this.FileType = 'FileType' in params ? params.FileType : null;
+        this.Id = 'Id' in params ? params.Id : null;
+        this.Label = 'Label' in params ? params.Label : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.FileUrl = 'FileUrl' in params ? params.FileUrl : null;
+
+    }
+}
+
+/**
+ * DescribeFileSample请求参数结构体
+ * @class
+ */
+class DescribeFileSampleRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 支持通过标签值进行筛选
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * 数量限制，默认为20，最大值为100
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 偏移量，默认为0
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 升序（asc）还是降序（desc），默认：desc
+         * @type {string || null}
+         */
+        this.OrderDirection = null;
+
+        /**
+         * 按某个字段排序，目前仅支持CreatedAt排序
+         * @type {string || null}
+         */
+        this.OrderField = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.OrderDirection = 'OrderDirection' in params ? params.OrderDirection : null;
+        this.OrderField = 'OrderField' in params ? params.OrderField : null;
+
+    }
+}
+
+/**
  * 图片涉政详情
  * @class
  */
@@ -592,11 +914,6 @@ class ImagePolityDetect extends  AbstractModel {
          * 恶意类型
 100：正常 
 20001：政治
-20002：色情 
-20006：涉毒违法
-20007：谩骂 
-24001：暴恐
-21000：综合
          * @type {number || null}
          */
         this.EvilType = null;
@@ -660,13 +977,8 @@ class ImageTerrorDetect extends  AbstractModel {
 
         /**
          * 恶意类型
-100：正常 
-20001：政治
-20002：色情 
-20006：涉毒违法
-20007：谩骂 
+100：正常
 24001：暴恐
-21000：综合
          * @type {number || null}
          */
         this.EvilType = null;
@@ -845,36 +1157,26 @@ class TextSample extends  AbstractModel {
 }
 
 /**
- * 概览数据
+ * DeleteFileSample返回参数结构体
  * @class
  */
-class OverviewRecord extends  AbstractModel {
+class DeleteFileSampleResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 调用恶意量
+         * 任务状态
+1：已完成
+2：处理中
          * @type {number || null}
          */
-        this.EvilCount = null;
+        this.Progress = null;
 
         /**
-         * Text表示文本，Image表示图片，Audio表示音频，Video表示视频
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.ServiceType = null;
-
-        /**
-         * 调用总量
-         * @type {number || null}
-         */
-        this.TotalCount = null;
-
-        /**
-         * 恶意量同比增长率
-         * @type {string || null}
-         */
-        this.Yoy = null;
+        this.RequestId = null;
 
     }
 
@@ -885,10 +1187,100 @@ class OverviewRecord extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.EvilCount = 'EvilCount' in params ? params.EvilCount : null;
-        this.ServiceType = 'ServiceType' in params ? params.ServiceType : null;
+        this.Progress = 'Progress' in params ? params.Progress : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 文件类型样本
+ * @class
+ */
+class FileSample extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 文件md5
+         * @type {string || null}
+         */
+        this.FileMd5 = null;
+
+        /**
+         * 文件名称
+         * @type {string || null}
+         */
+        this.FileName = null;
+
+        /**
+         * 文件url
+         * @type {string || null}
+         */
+        this.FileUrl = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FileMd5 = 'FileMd5' in params ? params.FileMd5 : null;
+        this.FileName = 'FileName' in params ? params.FileName : null;
+        this.FileUrl = 'FileUrl' in params ? params.FileUrl : null;
+
+    }
+}
+
+/**
+ * DescribeFileSample返回参数结构体
+ * @class
+ */
+class DescribeFileSampleResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 符合要求的样本的信息
+         * @type {Array.<FileSampleInfo> || null}
+         */
+        this.FileSampleSet = null;
+
+        /**
+         * 符合要求的样本的数量
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.FileSampleSet) {
+            this.FileSampleSet = new Array();
+            for (let z in params.FileSampleSet) {
+                let obj = new FileSampleInfo();
+                obj.deserialize(params.FileSampleSet[z]);
+                this.FileSampleSet.push(obj);
+            }
+        }
         this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
-        this.Yoy = 'Yoy' in params ? params.Yoy : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -946,18 +1338,18 @@ class CreateTextSampleRequest extends  AbstractModel {
 }
 
 /**
- * TextModeration请求参数结构体
+ * DeleteFileSample请求参数结构体
  * @class
  */
-class TextModerationRequest extends  AbstractModel {
+class DeleteFileSampleRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 文本内容Base64编码
-         * @type {string || null}
+         * 唯一标识数组
+         * @type {Array.<string> || null}
          */
-        this.Content = null;
+        this.Ids = null;
 
     }
 
@@ -968,7 +1360,7 @@ class TextModerationRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Content = 'Content' in params ? params.Content : null;
+        this.Ids = 'Ids' in params ? params.Ids : null;
 
     }
 }
@@ -1004,6 +1396,34 @@ class Filter extends  AbstractModel {
         }
         this.Name = 'Name' in params ? params.Name : null;
         this.Value = 'Value' in params ? params.Value : null;
+
+    }
+}
+
+/**
+ * OCR识别结果详情
+ * @class
+ */
+class OCRDetect extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 识别到的文本信息
+         * @type {string || null}
+         */
+        this.TextInfo = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TextInfo = 'TextInfo' in params ? params.TextInfo : null;
 
     }
 }
@@ -1110,13 +1530,8 @@ class ImageHotDetect extends  AbstractModel {
 
         /**
          * 恶意类型
-100：正常 
-20001：政治
-20002：色情 
-20006：涉毒违法
-20007：谩骂 
-24001：暴恐
-21000：综合
+100：正常
+20103：性感
          * @type {number || null}
          */
         this.EvilType = null;
@@ -1287,12 +1702,7 @@ class ImageIllegalDetect extends  AbstractModel {
         /**
          * 恶意类型
 100：正常 
-20001：政治
-20002：色情 
 20006：涉毒违法
-20007：谩骂 
-24001：暴恐
-21000：综合
          * @type {number || null}
          */
         this.EvilType = null;
@@ -1335,6 +1745,43 @@ class ImageIllegalDetect extends  AbstractModel {
         this.Keywords = 'Keywords' in params ? params.Keywords : null;
         this.Labels = 'Labels' in params ? params.Labels : null;
         this.Score = 'Score' in params ? params.Score : null;
+
+    }
+}
+
+/**
+ * CreateFileSample返回参数结构体
+ * @class
+ */
+class CreateFileSampleResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 任务状态
+1：已完成
+2：处理中
+         * @type {number || null}
+         */
+        this.Progress = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Progress = 'Progress' in params ? params.Progress : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1422,26 +1869,35 @@ module.exports = {
     TextModerationResponse: TextModerationResponse,
     TextData: TextData,
     VideoModerationResponse: VideoModerationResponse,
+    TextModerationRequest: TextModerationRequest,
     ImageModerationResponse: ImageModerationResponse,
     ImageModerationRequest: ImageModerationRequest,
+    CreateFileSampleRequest: CreateFileSampleRequest,
     ImageData: ImageData,
     ImagePornDetect: ImagePornDetect,
     DeleteTextSampleResponse: DeleteTextSampleResponse,
     CreateTextSampleResponse: CreateTextSampleResponse,
+    OverviewRecord: OverviewRecord,
+    FileSampleInfo: FileSampleInfo,
+    DescribeFileSampleRequest: DescribeFileSampleRequest,
     ImagePolityDetect: ImagePolityDetect,
     ImageTerrorDetect: ImageTerrorDetect,
     DescribeTextSampleResponse: DescribeTextSampleResponse,
     TextSample: TextSample,
-    OverviewRecord: OverviewRecord,
+    DeleteFileSampleResponse: DeleteFileSampleResponse,
+    FileSample: FileSample,
+    DescribeFileSampleResponse: DescribeFileSampleResponse,
     CreateTextSampleRequest: CreateTextSampleRequest,
-    TextModerationRequest: TextModerationRequest,
+    DeleteFileSampleRequest: DeleteFileSampleRequest,
     Filter: Filter,
+    OCRDetect: OCRDetect,
     DescribeModerationOverviewResponse: DescribeModerationOverviewResponse,
     Similar: Similar,
     ImageHotDetect: ImageHotDetect,
     DescribeTextSampleRequest: DescribeTextSampleRequest,
     AudioModerationRequest: AudioModerationRequest,
     ImageIllegalDetect: ImageIllegalDetect,
+    CreateFileSampleResponse: CreateFileSampleResponse,
     VideoModerationRequest: VideoModerationRequest,
     DeleteTextSampleRequest: DeleteTextSampleRequest,
 

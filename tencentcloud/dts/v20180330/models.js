@@ -712,6 +712,12 @@ class DstInfo extends  AbstractModel {
         this.InstanceId = null;
 
         /**
+         * 目标实例地域，如ap-guangzhou
+         * @type {string || null}
+         */
+        this.Region = null;
+
+        /**
          * 目标实例vip。已废弃，无需填写
          * @type {string || null}
          */
@@ -722,12 +728,6 @@ class DstInfo extends  AbstractModel {
          * @type {number || null}
          */
         this.Port = null;
-
-        /**
-         * 目标实例地域，如ap-guangzhou
-         * @type {string || null}
-         */
-        this.Region = null;
 
         /**
          * 目前只对MySQL有效。当为整实例迁移时，1-只读，0-可读写。
@@ -745,9 +745,9 @@ class DstInfo extends  AbstractModel {
             return;
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Region = 'Region' in params ? params.Region : null;
         this.Ip = 'Ip' in params ? params.Ip : null;
         this.Port = 'Port' in params ? params.Port : null;
-        this.Region = 'Region' in params ? params.Region : null;
         this.ReadOnly = 'ReadOnly' in params ? params.ReadOnly : null;
 
     }

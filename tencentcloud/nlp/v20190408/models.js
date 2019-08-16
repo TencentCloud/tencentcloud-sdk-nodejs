@@ -227,7 +227,7 @@ class TextCorrectionRequest extends  AbstractModel {
         super();
 
         /**
-         * 待纠错的文本（仅支持UTF-8格式，不超过200字）
+         * 待纠错的文本（仅支持UTF-8格式，不超过2000字）
          * @type {string || null}
          */
         this.Text = null;
