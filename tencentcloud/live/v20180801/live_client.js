@@ -299,6 +299,7 @@ class LiveClient extends AbstractClient {
 
 - 注意事项
   1. 调用接口超时设置应大于3秒，小于3秒重试以及频繁调用都有可能产生重复录制任务。
+  2. 受限于音视频文件格式（FLV/MP4/HLS）对编码类型的支持，视频编码类型支持 H.264，音频编码类型支持 AAC。
      * @param {CreateLiveRecordRequest} req
      * @param {function(string, CreateLiveRecordResponse):void} cb
      * @public

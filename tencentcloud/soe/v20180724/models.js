@@ -660,6 +660,19 @@ class PhoneInfo extends  AbstractModel {
          */
         this.Stress = null;
 
+        /**
+         * 参考音素，在单词诊断模式下，代表标准
+音素
+         * @type {string || null}
+         */
+        this.ReferencePhone = null;
+
+        /**
+         * 当前词与输入语句的匹配情况，0：匹配单词、1：新增单词、2：缺少单词、3：错读的词、4：未录入单词。
+         * @type {number || null}
+         */
+        this.MatchTag = null;
+
     }
 
     /**
@@ -675,6 +688,8 @@ class PhoneInfo extends  AbstractModel {
         this.DetectedStress = 'DetectedStress' in params ? params.DetectedStress : null;
         this.Phone = 'Phone' in params ? params.Phone : null;
         this.Stress = 'Stress' in params ? params.Stress : null;
+        this.ReferencePhone = 'ReferencePhone' in params ? params.ReferencePhone : null;
+        this.MatchTag = 'MatchTag' in params ? params.MatchTag : null;
 
     }
 }
@@ -729,6 +744,12 @@ class WordRsp extends  AbstractModel {
          */
         this.PhoneInfos = null;
 
+        /**
+         * 参考词，目前为保留字段。
+         * @type {string || null}
+         */
+        this.ReferenceWord = null;
+
     }
 
     /**
@@ -753,6 +774,7 @@ class WordRsp extends  AbstractModel {
                 this.PhoneInfos.push(obj);
             }
         }
+        this.ReferenceWord = 'ReferenceWord' in params ? params.ReferenceWord : null;
 
     }
 }

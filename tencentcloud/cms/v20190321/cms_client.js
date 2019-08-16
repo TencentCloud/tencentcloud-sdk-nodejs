@@ -21,26 +21,35 @@ const DescribeModerationOverviewRequest = models.DescribeModerationOverviewReque
 const TextModerationResponse = models.TextModerationResponse;
 const TextData = models.TextData;
 const VideoModerationResponse = models.VideoModerationResponse;
+const TextModerationRequest = models.TextModerationRequest;
 const ImageModerationResponse = models.ImageModerationResponse;
 const ImageModerationRequest = models.ImageModerationRequest;
+const CreateFileSampleRequest = models.CreateFileSampleRequest;
 const ImageData = models.ImageData;
 const ImagePornDetect = models.ImagePornDetect;
 const DeleteTextSampleResponse = models.DeleteTextSampleResponse;
 const CreateTextSampleResponse = models.CreateTextSampleResponse;
+const OverviewRecord = models.OverviewRecord;
+const FileSampleInfo = models.FileSampleInfo;
+const DescribeFileSampleRequest = models.DescribeFileSampleRequest;
 const ImagePolityDetect = models.ImagePolityDetect;
 const ImageTerrorDetect = models.ImageTerrorDetect;
 const DescribeTextSampleResponse = models.DescribeTextSampleResponse;
 const TextSample = models.TextSample;
-const OverviewRecord = models.OverviewRecord;
+const DeleteFileSampleResponse = models.DeleteFileSampleResponse;
+const FileSample = models.FileSample;
+const DescribeFileSampleResponse = models.DescribeFileSampleResponse;
 const CreateTextSampleRequest = models.CreateTextSampleRequest;
-const TextModerationRequest = models.TextModerationRequest;
+const DeleteFileSampleRequest = models.DeleteFileSampleRequest;
 const Filter = models.Filter;
+const OCRDetect = models.OCRDetect;
 const DescribeModerationOverviewResponse = models.DescribeModerationOverviewResponse;
 const Similar = models.Similar;
 const ImageHotDetect = models.ImageHotDetect;
 const DescribeTextSampleRequest = models.DescribeTextSampleRequest;
 const AudioModerationRequest = models.AudioModerationRequest;
 const ImageIllegalDetect = models.ImageIllegalDetect;
+const CreateFileSampleResponse = models.CreateFileSampleResponse;
 const VideoModerationRequest = models.VideoModerationRequest;
 const DeleteTextSampleRequest = models.DeleteTextSampleRequest;
 
@@ -90,6 +99,24 @@ class CmsClient extends AbstractClient {
 
     /**
      * 视频内容检测（Video Moderation, VM）服务能识别涉黄、涉政、涉恐等违规视频，同时支持用户配置视频黑库，打击自定义的违规内容。
+
+<br>
+接口返回值说明：调用本接口有两个返回值，一个是同步返回值，一个是识别完成后的异步回调返回值。
+
+视频识别结果存在于异步回调返回值中，异步回调返回值明细：
+
+参数名 | 类型 | 描述
+-|-|-
+SeqID | String | 请求seqId唯一标识
+EvilFlag | Integer | 是否恶意：0正常，1可疑（Homology模块下：0未匹配到，1恶意，2白样本）
+EvilType | Integer | 恶意类型：100正常，20001政治，20002色情
+Duration | Integer | 视频时长（单位：秒）
+PornDetect |  | 视频智能鉴黄
+PolityDetect | | 视频涉政识别
+Homology | | 相似度识别
+HitFlag | Integer  | 0正常，1可疑
+Score | Integer | 判断分值
+SeedUrl | String | 命中的种子URL
      * @param {VideoModerationRequest} req
      * @param {function(string, VideoModerationResponse):void} cb
      * @public
@@ -97,28 +124,6 @@ class CmsClient extends AbstractClient {
     VideoModeration(req, cb) {
         let resp = new VideoModerationResponse();
         this.request("VideoModeration", req, resp, cb);
-    }
-
-    /**
-     * 音频内容检测（Audio Moderation, AM）服务使用了波形分析、声纹分析等技术，能识别涉黄、涉政、涉恐等违规音频，同时支持用户配置音频黑库，打击自定义的违规内容。
-     * @param {AudioModerationRequest} req
-     * @param {function(string, AudioModerationResponse):void} cb
-     * @public
-     */
-    AudioModeration(req, cb) {
-        let resp = new AudioModerationResponse();
-        this.request("AudioModeration", req, resp, cb);
-    }
-
-    /**
-     * 支持批量查询文字样本库
-     * @param {DescribeTextSampleRequest} req
-     * @param {function(string, DescribeTextSampleResponse):void} cb
-     * @public
-     */
-    DescribeTextSample(req, cb) {
-        let resp = new DescribeTextSampleResponse();
-        this.request("DescribeTextSample", req, resp, cb);
     }
 
     /**
@@ -133,6 +138,72 @@ class CmsClient extends AbstractClient {
     }
 
     /**
+     * 通过该接口可以将文件新增到样本库
+     * @param {CreateFileSampleRequest} req
+     * @param {function(string, CreateFileSampleResponse):void} cb
+     * @public
+     */
+    CreateFileSample(req, cb) {
+        let resp = new CreateFileSampleResponse();
+        this.request("CreateFileSample", req, resp, cb);
+    }
+
+    /**
+     * 音频内容检测（Audio Moderation, AM）服务使用了波形分析、声纹分析等技术，能识别涉黄、涉政、涉恐等违规音频，同时支持用户配置音频黑库，打击自定义的违规内容。
+
+<br>
+接口返回值说明：调用本接口有两个返回值，一个是同步返回值，一个是识别完成后的异步回调返回值。
+
+音频识别结果存在于异步回调返回值中，异步回调返回值明细：
+
+参数名 | 类型 | 描述
+-|-|-
+SeqID | String | 请求seqId唯一标识
+EvilFlag | Integer | 是否恶意：0正常，1可疑（Homology模块下：0未匹配到，1恶意，2白样本）
+EvilType | Integer | 恶意类型：100正常，20001政治，20002色情，20007谩骂
+Duration | Integer | 音频时长（单位：毫秒）
+PornDetect | | 音频智能鉴黄
+PolityDetect | | 音频涉政识别
+CurseDetect | | 音频谩骂识别
+Homology | | 相似度识别
+HitFlag | Integer | 0正常，1可疑
+Score | Integer | 判断分值
+Keywords | Array of String | 关键词明细
+StartTime | Array of String | 恶意开始时间
+EndTime | Array of String | 恶意结束时间
+SeedUrl | String | 命中的种子URL
+     * @param {AudioModerationRequest} req
+     * @param {function(string, AudioModerationResponse):void} cb
+     * @public
+     */
+    AudioModeration(req, cb) {
+        let resp = new AudioModerationResponse();
+        this.request("AudioModeration", req, resp, cb);
+    }
+
+    /**
+     * 查询文件样本库，支持批量查询
+     * @param {DescribeFileSampleRequest} req
+     * @param {function(string, DescribeFileSampleResponse):void} cb
+     * @public
+     */
+    DescribeFileSample(req, cb) {
+        let resp = new DescribeFileSampleResponse();
+        this.request("DescribeFileSample", req, resp, cb);
+    }
+
+    /**
+     * 支持批量查询文字样本库
+     * @param {DescribeTextSampleRequest} req
+     * @param {function(string, DescribeTextSampleResponse):void} cb
+     * @public
+     */
+    DescribeTextSample(req, cb) {
+        let resp = new DescribeTextSampleResponse();
+        this.request("DescribeTextSample", req, resp, cb);
+    }
+
+    /**
      * 图片内容检测服务（Image Moderation, IM）能自动扫描图片，识别涉黄、涉恐、涉政、涉毒等有害内容，同时支持用户配置图片黑名单，打击自定义的违规图片。
      * @param {ImageModerationRequest} req
      * @param {function(string, ImageModerationResponse):void} cb
@@ -141,6 +212,17 @@ class CmsClient extends AbstractClient {
     ImageModeration(req, cb) {
         let resp = new ImageModerationResponse();
         this.request("ImageModeration", req, resp, cb);
+    }
+
+    /**
+     * 删除文件样本库，支持批量删除，一次提交不超过20个
+     * @param {DeleteFileSampleRequest} req
+     * @param {function(string, DeleteFileSampleResponse):void} cb
+     * @public
+     */
+    DeleteFileSample(req, cb) {
+        let resp = new DeleteFileSampleResponse();
+        this.request("DeleteFileSample", req, resp, cb);
     }
 
 

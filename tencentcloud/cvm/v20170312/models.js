@@ -848,6 +848,16 @@ class RunInstancesRequest extends  AbstractModel {
          */
         this.UserData = null;
 
+        /**
+         * 是否只预检此次请求。
+true：发送检查请求，不会创建实例。检查项包括是否填写了必需参数，请求格式，业务限制和云服务器库存。
+如果检查不通过，则返回对应错误码；
+如果检查通过，则返回RequestId.
+false（默认）：发送正常请求，通过检查后直接创建实例
+         * @type {boolean || null}
+         */
+        this.DryRun = null;
+
     }
 
     /**
@@ -939,6 +949,7 @@ class RunInstancesRequest extends  AbstractModel {
             this.InstanceMarketOptions = obj;
         }
         this.UserData = 'UserData' in params ? params.UserData : null;
+        this.DryRun = 'DryRun' in params ? params.DryRun : null;
 
     }
 }
@@ -6568,13 +6579,6 @@ class DescribeImagesRequest extends  AbstractModel {
     PUBLIC_IMAGE: 公共镜像 (腾讯云官方镜像)
     MARKET_IMAGE: 服务市场 (服务市场提供的镜像) 
    SHARED_IMAGE: 共享镜像(其他账户共享给本帐户的镜像) 。</li>
-<li> image-state - String - 是否必填： 否 - （过滤条件）按照镜像状态进行过滤。取值范围：
-    CREATING: 创建中
-    NORMAL: 正常
-    USING: 使用中
-    SYNCING: 同步中
-    IMPORTING: 导入中
-    DELETING: 删除中。</li>
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;

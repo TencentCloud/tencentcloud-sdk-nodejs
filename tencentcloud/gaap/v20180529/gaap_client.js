@@ -991,7 +991,7 @@ class GaapClient extends AbstractClient {
     }
 
     /**
-     * 该接口用于7层监听器转发规则绑定源站。
+     * 该接口用于7层监听器的转发规则绑定源站。注意：本接口会解绑之前绑定的源站，绑定本次调用所选择的源站。
      * @param {BindRuleRealServersRequest} req
      * @param {function(string, BindRuleRealServersResponse):void} cb
      * @public

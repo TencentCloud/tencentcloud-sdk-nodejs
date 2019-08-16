@@ -223,21 +223,21 @@ class DeleteLiveRecordRuleRequest extends  AbstractModel {
 
         /**
          * 推流域名。
-域名+AppName+StreamName唯一标识单个转码规则，如需删除需要强匹配，比如AppName为空也需要传空字符串进行强匹配。
+域名+AppName+StreamName唯一标识单个转码规则，如需删除需要强匹配，例如AppName为空也需要传空字符串进行强匹配。
          * @type {string || null}
          */
         this.DomainName = null;
 
         /**
          * 推流路径，与推流和播放地址中的AppName保持一致，默认为 live。
-域名+AppName+StreamName唯一标识单个转码规则，如需删除需要强匹配，比如AppName为空也需要传空字符串进行强匹配。
+域名+AppName+StreamName唯一标识单个转码规则，如需删除需要强匹配，例如AppName为空也需要传空字符串进行强匹配。
          * @type {string || null}
          */
         this.AppName = null;
 
         /**
          * 流名称。
-域名+AppName+StreamName唯一标识单个转码规则，如需删除需要强匹配，比如AppName为空也需要传空字符串进行强匹配。
+域名+AppName+StreamName唯一标识单个转码规则，如需删除需要强匹配，例如AppName为空也需要传空字符串进行强匹配。
          * @type {string || null}
          */
         this.StreamName = null;
@@ -1869,6 +1869,12 @@ class DomainInfo extends  AbstractModel {
          */
         this.IsDelayLive = null;
 
+        /**
+         * 当前客户使用的cname信息
+         * @type {string || null}
+         */
+        this.CurrentCName = null;
+
     }
 
     /**
@@ -1886,6 +1892,7 @@ class DomainInfo extends  AbstractModel {
         this.TargetDomain = 'TargetDomain' in params ? params.TargetDomain : null;
         this.PlayType = 'PlayType' in params ? params.PlayType : null;
         this.IsDelayLive = 'IsDelayLive' in params ? params.IsDelayLive : null;
+        this.CurrentCName = 'CurrentCName' in params ? params.CurrentCName : null;
 
     }
 }
@@ -2307,28 +2314,28 @@ class DeleteLiveTranscodeRuleRequest extends  AbstractModel {
 
         /**
          * 推流域名。
-域名维度转码，域名+AppName+StreamName唯一标识单个转码规则，如需删除需要强匹配，比如AppName为空也需要传空字符串进行强匹配。
+域名维度转码，域名+AppName+StreamName唯一标识单个转码规则，如需删除需要强匹配，例如AppName为空也需要传空字符串进行强匹配。
          * @type {string || null}
          */
         this.DomainName = null;
 
         /**
          * 推流路径，与推流和播放地址中的AppName保持一致，默认为 live。
-域名+AppName+StreamName+TemplateId唯一标识单个转码规则，如需删除需要强匹配，比如AppName为空也需要传空字符串进行强匹配。
+域名+AppName+StreamName+TemplateId唯一标识单个转码规则，如需删除需要强匹配，例如AppName为空也需要传空字符串进行强匹配。
          * @type {string || null}
          */
         this.AppName = null;
 
         /**
          * 流名称。
-域名+AppName+StreamName+TemplateId唯一标识单个转码规则，如需删除需要强匹配，比如AppName为空也需要传空字符串进行强匹配。
+域名+AppName+StreamName+TemplateId唯一标识单个转码规则，如需删除需要强匹配，例如AppName为空也需要传空字符串进行强匹配。
          * @type {string || null}
          */
         this.StreamName = null;
 
         /**
          * 模板ID。
-域名+AppName+StreamName+TemplateId唯一标识单个转码规则，如需删除需要强匹配，比如AppName为空也需要传空字符串进行强匹配。
+域名+AppName+StreamName+TemplateId唯一标识单个转码规则，如需删除需要强匹配，例如AppName为空也需要传空字符串进行强匹配。
          * @type {number || null}
          */
         this.TemplateId = null;
@@ -2684,6 +2691,14 @@ class ForbidLiveStreamRequest extends  AbstractModel {
          */
         this.ResumeTime = null;
 
+        /**
+         * 禁推原因。
+注明：请务必填写禁推原因，防止误操作。
+长度限制：2048字节。
+         * @type {string || null}
+         */
+        this.Reason = null;
+
     }
 
     /**
@@ -2697,6 +2712,7 @@ class ForbidLiveStreamRequest extends  AbstractModel {
         this.DomainName = 'DomainName' in params ? params.DomainName : null;
         this.StreamName = 'StreamName' in params ? params.StreamName : null;
         this.ResumeTime = 'ResumeTime' in params ? params.ResumeTime : null;
+        this.Reason = 'Reason' in params ? params.Reason : null;
 
     }
 }
@@ -2780,7 +2796,7 @@ class PlayCodeTotalInfo extends  AbstractModel {
         super();
 
         /**
-         * http code，可选值包括400,403,404,500,502,503,504
+         * HTTP code，可选值包括400,403,404,500,502,503,504
          * @type {string || null}
          */
         this.Code = null;
@@ -5540,7 +5556,7 @@ class CreatePullStreamConfigRequest extends  AbstractModel {
 1-深圳，
 2-上海，
 3-天津，
-4-香港。
+4-中国香港。
          * @type {number || null}
          */
         this.AreaId = null;
@@ -6228,7 +6244,12 @@ class ModifyPullStreamConfigRequest extends  AbstractModel {
         this.ToUrl = null;
 
         /**
-         * 区域id,1-深圳,2-上海，3-天津,4-香港。如有改动，需同时传入IspId。
+         * 区域id：
+1-深圳，
+2-上海，
+3-天津，
+4-中国香港。
+如有改动，需同时传入IspId。
          * @type {number || null}
          */
         this.AreaId = null;
@@ -6855,7 +6876,7 @@ class HttpStatusInfo extends  AbstractModel {
         super();
 
         /**
-         * 播放http状态码。
+         * 播放HTTP状态码。
          * @type {string || null}
          */
         this.HttpStatus = null;
@@ -8472,7 +8493,7 @@ class HttpStatusData extends  AbstractModel {
 }
 
 /**
- * http返回码和统计数据
+ * HTTP返回码和统计数据
  * @class
  */
 class HttpCodeInfo extends  AbstractModel {
@@ -8480,7 +8501,7 @@ class HttpCodeInfo extends  AbstractModel {
         super();
 
         /**
-         * http协议返回码。
+         * HTTP协议返回码。
 例："2xx", "3xx", "4xx", "5xx"。
          * @type {string || null}
          */
@@ -9851,7 +9872,7 @@ class DescribeLiveDomainPlayInfoListResponse extends  AbstractModel {
 }
 
 /**
- * http返回码数据信息
+ * HTTP返回码数据信息
  * @class
  */
 class HttpCodeValue extends  AbstractModel {

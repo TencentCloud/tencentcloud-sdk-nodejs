@@ -22,6 +22,7 @@ const CreateDBInstanceRequest = models.CreateDBInstanceRequest;
 const UpgradeDBInstanceHourRequest = models.UpgradeDBInstanceHourRequest;
 const CreateDBInstanceHourRequest = models.CreateDBInstanceHourRequest;
 const AssignProjectRequest = models.AssignProjectRequest;
+const ClientConnection = models.ClientConnection;
 const DescribeDBInstancesRequest = models.DescribeDBInstancesRequest;
 const SetPasswordResponse = models.SetPasswordResponse;
 const SpecificationInfo = models.SpecificationInfo;
@@ -34,12 +35,14 @@ const CreateDBInstanceResponse = models.CreateDBInstanceResponse;
 const SetPasswordRequest = models.SetPasswordRequest;
 const AssignProjectResponse = models.AssignProjectResponse;
 const DescribeSlowLogRequest = models.DescribeSlowLogRequest;
+const DescribeClientConnectionsRequest = models.DescribeClientConnectionsRequest;
 const SetAutoRenewResponse = models.SetAutoRenewResponse;
 const MongoDBInstance = models.MongoDBInstance;
 const RenameInstanceRequest = models.RenameInstanceRequest;
 const UpgradeDBInstanceResponse = models.UpgradeDBInstanceResponse;
 const SetAutoRenewRequest = models.SetAutoRenewRequest;
 const RenameInstanceResponse = models.RenameInstanceResponse;
+const DescribeClientConnectionsResponse = models.DescribeClientConnectionsResponse;
 const UpgradeDBInstanceHourResponse = models.UpgradeDBInstanceHourResponse;
 const UpgradeDBInstanceRequest = models.UpgradeDBInstanceRequest;
 const CreateDBInstanceHourResponse = models.CreateDBInstanceHourResponse;
@@ -91,6 +94,17 @@ class MongodbClient extends AbstractClient {
     CreateDBInstance(req, cb) {
         let resp = new CreateDBInstanceResponse();
         this.request("CreateDBInstance", req, resp, cb);
+    }
+
+    /**
+     * 本接口(DescribeClientConnections)用于查询实例客户端连接信息，包括连接IP和连接数量。目前只支持3.2版本的MongoDB实例。
+     * @param {DescribeClientConnectionsRequest} req
+     * @param {function(string, DescribeClientConnectionsResponse):void} cb
+     * @public
+     */
+    DescribeClientConnections(req, cb) {
+        let resp = new DescribeClientConnectionsResponse();
+        this.request("DescribeClientConnections", req, resp, cb);
     }
 
     /**

@@ -17,38 +17,10 @@
 const AbstractModel = require("../../common/abstract_model");
 
 /**
- * KickOutUser返回参数结构体
+ * DissolveRoom请求参数结构体
  * @class
  */
-class KickOutUserResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * DissloveRoom请求参数结构体
- * @class
- */
-class DissloveRoomRequest extends  AbstractModel {
+class DissolveRoomRequest extends  AbstractModel {
     constructor(){
         super();
 
@@ -75,6 +47,34 @@ class DissloveRoomRequest extends  AbstractModel {
         }
         this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
         this.RoomId = 'RoomId' in params ? params.RoomId : null;
+
+    }
+}
+
+/**
+ * DissolveRoom返回参数结构体
+ * @class
+ */
+class DissolveRoomResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -122,10 +122,10 @@ class KickOutUserRequest extends  AbstractModel {
 }
 
 /**
- * DissloveRoom返回参数结构体
+ * KickOutUser返回参数结构体
  * @class
  */
-class DissloveRoomResponse extends  AbstractModel {
+class KickOutUserResponse extends  AbstractModel {
     constructor(){
         super();
 
@@ -150,9 +150,9 @@ class DissloveRoomResponse extends  AbstractModel {
 }
 
 module.exports = {
-    KickOutUserResponse: KickOutUserResponse,
-    DissloveRoomRequest: DissloveRoomRequest,
+    DissolveRoomRequest: DissolveRoomRequest,
+    DissolveRoomResponse: DissolveRoomResponse,
     KickOutUserRequest: KickOutUserRequest,
-    DissloveRoomResponse: DissloveRoomResponse,
+    KickOutUserResponse: KickOutUserResponse,
 
 }

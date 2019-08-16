@@ -16,10 +16,10 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
-const KickOutUserResponse = models.KickOutUserResponse;
-const DissloveRoomRequest = models.DissloveRoomRequest;
+const DissolveRoomRequest = models.DissolveRoomRequest;
+const DissolveRoomResponse = models.DissolveRoomResponse;
 const KickOutUserRequest = models.KickOutUserRequest;
-const DissloveRoomResponse = models.DissloveRoomResponse;
+const KickOutUserResponse = models.KickOutUserResponse;
 
 
 /**
@@ -45,13 +45,13 @@ class TrtcClient extends AbstractClient {
 
     /**
      * 接口说明：把房间所有用户从房间踢出，解散房间。
-     * @param {DissloveRoomRequest} req
-     * @param {function(string, DissloveRoomResponse):void} cb
+     * @param {DissolveRoomRequest} req
+     * @param {function(string, DissolveRoomResponse):void} cb
      * @public
      */
-    DissloveRoom(req, cb) {
-        let resp = new DissloveRoomResponse();
-        this.request("DissloveRoom", req, resp, cb);
+    DissolveRoom(req, cb) {
+        let resp = new DissolveRoomResponse();
+        this.request("DissolveRoom", req, resp, cb);
     }
 
 

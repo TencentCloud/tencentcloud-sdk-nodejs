@@ -371,6 +371,7 @@ class BindRuleRealServersRequest extends  AbstractModel {
          * 需要绑定的源站信息列表。
 如果已经存在绑定的源站，则会覆盖更新成这个源站列表。
 当不带该字段时，表示解绑该规则上的所有源站。
+如果该规则的源站调度策略是加权轮询，需要填写源站权重 RealServerWeight, 不填或者其他调度类型默认源站权重为1。
          * @type {Array.<RealServerBindSetReq> || null}
          */
         this.RealServerBindSet = null;
@@ -1633,7 +1634,7 @@ class BindListenerRealServersRequest extends  AbstractModel {
         this.ListenerId = null;
 
         /**
-         * 待绑定源站列表
+         * 待绑定源站列表。如果该监听器的源站调度策略是加权轮询，需要填写源站权重 RealServerWeight, 不填或者其他调度类型默认源站权重为1。
          * @type {Array.<RealServerBindSetReq> || null}
          */
         this.RealServerBindSet = null;
@@ -3617,7 +3618,12 @@ class TCPListener extends  AbstractModel {
         this.Protocol = null;
 
         /**
-         * 监听器状态
+         * 监听器状态，其中：
+0， 运行中；
+1， 创建中；
+2，销毁中；
+3，源站调整中；
+4，配置变更中。
          * @type {number || null}
          */
         this.ListenerStatus = null;
@@ -3947,13 +3953,18 @@ class HTTPSListener extends  AbstractModel {
         this.Port = null;
 
         /**
-         * 监听器协议， HTTP
+         * 监听器协议， 值为：HTTP
          * @type {string || null}
          */
         this.Protocol = null;
 
         /**
-         * 监听器状态
+         * 监听器状态，其中：
+0， 运行中；
+1， 创建中；
+2，销毁中；
+3，源站调整中；
+4，配置变更中。
          * @type {number || null}
          */
         this.ListenerStatus = null;
@@ -5565,7 +5576,12 @@ class HTTPListener extends  AbstractModel {
         this.Protocol = null;
 
         /**
-         * 监听器状态
+         * 监听器状态，其中：
+0， 运行中；
+1， 创建中；
+2，销毁中；
+3，源站调整中；
+4，配置变更中。
          * @type {number || null}
          */
         this.ListenerStatus = null;
@@ -8868,7 +8884,12 @@ class UDPListener extends  AbstractModel {
         this.Protocol = null;
 
         /**
-         * 监听器状态
+         * 监听器状态，其中：
+0， 运行中；
+1， 创建中；
+2，销毁中；
+3，源站调整中；
+4，配置变更中。
          * @type {number || null}
          */
         this.ListenerStatus = null;
@@ -9175,12 +9196,6 @@ class RealServerBindSetReq extends  AbstractModel {
         this.RealServerId = null;
 
         /**
-         * 源站权重
-         * @type {number || null}
-         */
-        this.RealServerWeight = null;
-
-        /**
          * 源站端口
          * @type {number || null}
          */
@@ -9192,6 +9207,12 @@ class RealServerBindSetReq extends  AbstractModel {
          */
         this.RealServerIP = null;
 
+        /**
+         * 源站权重
+         * @type {number || null}
+         */
+        this.RealServerWeight = null;
+
     }
 
     /**
@@ -9202,9 +9223,9 @@ class RealServerBindSetReq extends  AbstractModel {
             return;
         }
         this.RealServerId = 'RealServerId' in params ? params.RealServerId : null;
-        this.RealServerWeight = 'RealServerWeight' in params ? params.RealServerWeight : null;
         this.RealServerPort = 'RealServerPort' in params ? params.RealServerPort : null;
         this.RealServerIP = 'RealServerIP' in params ? params.RealServerIP : null;
+        this.RealServerWeight = 'RealServerWeight' in params ? params.RealServerWeight : null;
 
     }
 }

@@ -4468,6 +4468,18 @@ class RuleInput extends  AbstractModel {
          */
         this.ForwardType = null;
 
+        /**
+         * 是否将该域名设为默认域名，注意，一个监听器下只能设置一个默认域名。
+         * @type {boolean || null}
+         */
+        this.DefaultServer = null;
+
+        /**
+         * 是否开启Http2，注意，只用HTTPS域名才能开启Http2。
+         * @type {boolean || null}
+         */
+        this.Http2 = null;
+
     }
 
     /**
@@ -4494,6 +4506,8 @@ class RuleInput extends  AbstractModel {
         }
         this.Scheduler = 'Scheduler' in params ? params.Scheduler : null;
         this.ForwardType = 'ForwardType' in params ? params.ForwardType : null;
+        this.DefaultServer = 'DefaultServer' in params ? params.DefaultServer : null;
+        this.Http2 = 'Http2' in params ? params.Http2 : null;
 
     }
 }
@@ -4577,7 +4591,7 @@ class DeleteListenerResponse extends  AbstractModel {
 }
 
 /**
- * 网络计费方式
+ * 网络计费方式，最大出带宽
  * @class
  */
 class InternetAccessible extends  AbstractModel {

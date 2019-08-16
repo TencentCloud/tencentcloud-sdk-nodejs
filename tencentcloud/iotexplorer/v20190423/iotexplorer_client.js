@@ -19,6 +19,8 @@ const AbstractClient = require('../../common/abstract_client')
 const DescribeProjectResponse = models.DescribeProjectResponse;
 const ControlDeviceDataResponse = models.ControlDeviceDataResponse;
 const DescribeDeviceDataHistoryRequest = models.DescribeDeviceDataHistoryRequest;
+const SearchStudioProductResponse = models.SearchStudioProductResponse;
+const DeviceData = models.DeviceData;
 const DescribeStudioProductRequest = models.DescribeStudioProductRequest;
 const DeleteProjectRequest = models.DeleteProjectRequest;
 const DeviceDataHistoryItem = models.DeviceDataHistoryItem;
@@ -28,6 +30,7 @@ const DescribeModelDefinitionResponse = models.DescribeModelDefinitionResponse;
 const ProjectEntryEx = models.ProjectEntryEx;
 const GetProjectListRequest = models.GetProjectListRequest;
 const DeleteStudioProductResponse = models.DeleteStudioProductResponse;
+const DeleteDeviceRequest = models.DeleteDeviceRequest;
 const ModifyStudioProductResponse = models.ModifyStudioProductResponse;
 const ControlDeviceDataRequest = models.ControlDeviceDataRequest;
 const SearchStudioProductRequest = models.SearchStudioProductRequest;
@@ -48,13 +51,15 @@ const DescribeModelDefinitionRequest = models.DescribeModelDefinitionRequest;
 const DeleteProjectResponse = models.DeleteProjectResponse;
 const GetProjectListResponse = models.GetProjectListResponse;
 const DescribeDeviceDataResponse = models.DescribeDeviceDataResponse;
-const SearchStudioProductResponse = models.SearchStudioProductResponse;
+const CreateDeviceResponse = models.CreateDeviceResponse;
+const CreateDeviceRequest = models.CreateDeviceRequest;
 const DescribeProjectRequest = models.DescribeProjectRequest;
 const GetStudioProductListRequest = models.GetStudioProductListRequest;
 const DescribeDeviceDataRequest = models.DescribeDeviceDataRequest;
+const DeleteDeviceResponse = models.DeleteDeviceResponse;
 const ModifyModelDefinitionResponse = models.ModifyModelDefinitionResponse;
-const CreateProjectRequest = models.CreateProjectRequest;
 const DescribeStudioProductResponse = models.DescribeStudioProductResponse;
+const CreateProjectRequest = models.CreateProjectRequest;
 
 
 /**
@@ -87,6 +92,17 @@ class IotexplorerClient extends AbstractClient {
     DeleteStudioProduct(req, cb) {
         let resp = new DeleteStudioProductResponse();
         this.request("DeleteStudioProduct", req, resp, cb);
+    }
+
+    /**
+     * 创建设备
+     * @param {CreateDeviceRequest} req
+     * @param {function(string, CreateDeviceResponse):void} cb
+     * @public
+     */
+    CreateDevice(req, cb) {
+        let resp = new CreateDeviceResponse();
+        this.request("CreateDevice", req, resp, cb);
     }
 
     /**
@@ -134,14 +150,14 @@ class IotexplorerClient extends AbstractClient {
     }
 
     /**
-     * 提供修改产品的数据模板的能力
-     * @param {ModifyModelDefinitionRequest} req
-     * @param {function(string, ModifyModelDefinitionResponse):void} cb
+     * 提供查看茶品详细信息的能力，包括产品的ID、数据协议、认证类型等重要参数
+     * @param {DescribeStudioProductRequest} req
+     * @param {function(string, DescribeStudioProductResponse):void} cb
      * @public
      */
-    ModifyModelDefinition(req, cb) {
-        let resp = new ModifyModelDefinitionResponse();
-        this.request("ModifyModelDefinition", req, resp, cb);
+    DescribeStudioProduct(req, cb) {
+        let resp = new DescribeStudioProductResponse();
+        this.request("DescribeStudioProduct", req, resp, cb);
     }
 
     /**
@@ -200,6 +216,17 @@ class IotexplorerClient extends AbstractClient {
     }
 
     /**
+     * 提供修改产品的数据模板的能力
+     * @param {ModifyModelDefinitionRequest} req
+     * @param {function(string, ModifyModelDefinitionResponse):void} cb
+     * @public
+     */
+    ModifyModelDefinition(req, cb) {
+        let resp = new ModifyModelDefinitionResponse();
+        this.request("ModifyModelDefinition", req, resp, cb);
+    }
+
+    /**
      * 提供删除某个项目的能力
      * @param {DeleteProjectRequest} req
      * @param {function(string, DeleteProjectResponse):void} cb
@@ -211,14 +238,14 @@ class IotexplorerClient extends AbstractClient {
     }
 
     /**
-     * 提供查看茶品详细信息的能力，包括产品的ID、数据协议、认证类型等重要参数
-     * @param {DescribeStudioProductRequest} req
-     * @param {function(string, DescribeStudioProductResponse):void} cb
+     * 删除设备
+     * @param {DeleteDeviceRequest} req
+     * @param {function(string, DeleteDeviceResponse):void} cb
      * @public
      */
-    DescribeStudioProduct(req, cb) {
-        let resp = new DescribeStudioProductResponse();
-        this.request("DescribeStudioProduct", req, resp, cb);
+    DeleteDevice(req, cb) {
+        let resp = new DeleteDeviceResponse();
+        this.request("DeleteDevice", req, resp, cb);
     }
 
     /**
