@@ -27,6 +27,7 @@ const SvgWatermarkInput = models.SvgWatermarkInput;
 const CreateTranscodeTemplateRequest = models.CreateTranscodeTemplateRequest;
 const TransitionOpertion = models.TransitionOpertion;
 const AudioTrackItem = models.AudioTrackItem;
+const MediaAiAnalysisHighlightItem = models.MediaAiAnalysisHighlightItem;
 const TagConfigureInfo = models.TagConfigureInfo;
 const AiRecognitionTaskAsrFullTextResultOutput = models.AiRecognitionTaskAsrFullTextResultOutput;
 const MediaMiniProgramReviewElem = models.MediaMiniProgramReviewElem;
@@ -64,6 +65,7 @@ const PushUrlCacheResponse = models.PushUrlCacheResponse;
 const HeadTailConfigureInfo = models.HeadTailConfigureInfo;
 const TerrorismImgReviewTemplateInfoForUpdate = models.TerrorismImgReviewTemplateInfoForUpdate;
 const AiRecognitionTaskOcrFullTextResultOutput = models.AiRecognitionTaskOcrFullTextResultOutput;
+const AiAnalysisTaskHighlightResult = models.AiAnalysisTaskHighlightResult;
 const TextWatermarkTemplateInputForUpdate = models.TextWatermarkTemplateInputForUpdate;
 const AiRecognitionTaskOcrWordsResultInput = models.AiRecognitionTaskOcrWordsResultInput;
 const AiReviewPornTaskInput = models.AiReviewPornTaskInput;
@@ -159,6 +161,7 @@ const AiRecognitionTaskObjectResult = models.AiRecognitionTaskObjectResult;
 const AiAnalysisTaskTagResult = models.AiAnalysisTaskTagResult;
 const SearchMediaResponse = models.SearchMediaResponse;
 const AiAnalysisTaskTagOutput = models.AiAnalysisTaskTagOutput;
+const AiAnalysisTaskHighlightOutput = models.AiAnalysisTaskHighlightOutput;
 const ProcessMediaRequest = models.ProcessMediaRequest;
 const ModifyMediaInfoResponse = models.ModifyMediaInfoResponse;
 const AiRecognitionTaskOcrFullTextResult = models.AiRecognitionTaskOcrFullTextResult;
@@ -180,6 +183,7 @@ const AiSamplePerson = models.AiSamplePerson;
 const MediaAdaptiveDynamicStreamingInfo = models.MediaAdaptiveDynamicStreamingInfo;
 const AsrWordsConfigureInfoForUpdate = models.AsrWordsConfigureInfoForUpdate;
 const DescribeContentReviewTemplatesResponse = models.DescribeContentReviewTemplatesResponse;
+const TEHDConfig = models.TEHDConfig;
 const ClipTask2017 = models.ClipTask2017;
 const AiRecognitionTaskAsrWordsResultInput = models.AiRecognitionTaskAsrWordsResultInput;
 const UserDefineAsrTextReviewTemplateInfoForUpdate = models.UserDefineAsrTextReviewTemplateInfoForUpdate;
@@ -228,6 +232,7 @@ const AiRecognitionTaskSegmentResultOutput = models.AiRecognitionTaskSegmentResu
 const SegmentConfigureInfo = models.SegmentConfigureInfo;
 const AiReviewPornOcrTaskOutput = models.AiReviewPornOcrTaskOutput;
 const ApplyUploadRequest = models.ApplyUploadRequest;
+const AiAnalysisTaskHighlightInput = models.AiAnalysisTaskHighlightInput;
 const DeleteContentReviewTemplateResponse = models.DeleteContentReviewTemplateResponse;
 const MediaBasicInfo = models.MediaBasicInfo;
 const AiReviewPoliticalAsrTaskInput = models.AiReviewPoliticalAsrTaskInput;
@@ -506,7 +511,7 @@ class VodClient extends AbstractClient {
 
     /**
      * * 该接口用于申请媒体文件（和封面文件）的上传，获取文件上传到云点播的元信息（包括上传路径、上传签名等），用于后续上传接口。
-* 上传流程请参考[服务端上传综述](https://cloud.tencent.com/document/product/266/9759)。
+* 上传流程请参考 [服务端上传综述](/document/product/266/9759)。
      * @param {ApplyUploadRequest} req
      * @param {function(string, ApplyUploadResponse):void} cb
      * @public

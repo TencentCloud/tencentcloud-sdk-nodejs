@@ -4082,6 +4082,12 @@ class ModifyPersonResponse extends  AbstractModel {
         super();
 
         /**
+         * 人脸信息
+         * @type {Array.<FaceInfo> || null}
+         */
+        this.FaceInfoSet = null;
+
+        /**
          * 人员所属人员库标识符
          * @type {string || null}
          */
@@ -4113,6 +4119,15 @@ class ModifyPersonResponse extends  AbstractModel {
     deserialize(params) {
         if (!params) {
             return;
+        }
+
+        if (params.FaceInfoSet) {
+            this.FaceInfoSet = new Array();
+            for (let z in params.FaceInfoSet) {
+                let obj = new FaceInfo();
+                obj.deserialize(params.FaceInfoSet[z]);
+                this.FaceInfoSet.push(obj);
+            }
         }
         this.LibraryId = 'LibraryId' in params ? params.LibraryId : null;
         this.PersonId = 'PersonId' in params ? params.PersonId : null;

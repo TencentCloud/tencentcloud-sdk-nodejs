@@ -2367,6 +2367,18 @@ class DCDBShardInfo extends  AbstractModel {
          */
         this.ShardId = null;
 
+        /**
+         * 产品ProductID
+         * @type {number || null}
+         */
+        this.Pid = null;
+
+        /**
+         * Proxy版本
+         * @type {string || null}
+         */
+        this.ProxyVersion = null;
+
     }
 
     /**
@@ -2394,6 +2406,8 @@ class DCDBShardInfo extends  AbstractModel {
         this.StorageUsage = 'StorageUsage' in params ? params.StorageUsage : null;
         this.MemoryUsage = 'MemoryUsage' in params ? params.MemoryUsage : null;
         this.ShardId = 'ShardId' in params ? params.ShardId : null;
+        this.Pid = 'Pid' in params ? params.Pid : null;
+        this.ProxyVersion = 'ProxyVersion' in params ? params.ProxyVersion : null;
 
     }
 }
@@ -4674,6 +4688,12 @@ class DescribeDCDBInstancesRequest extends  AbstractModel {
          */
         this.IsFilterExcluster = null;
 
+        /**
+         * 独享集群ID
+         * @type {Array.<string> || null}
+         */
+        this.ExclusterIds = null;
+
     }
 
     /**
@@ -4696,6 +4716,7 @@ class DescribeDCDBInstancesRequest extends  AbstractModel {
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.ExclusterType = 'ExclusterType' in params ? params.ExclusterType : null;
         this.IsFilterExcluster = 'IsFilterExcluster' in params ? params.IsFilterExcluster : null;
+        this.ExclusterIds = 'ExclusterIds' in params ? params.ExclusterIds : null;
 
     }
 }

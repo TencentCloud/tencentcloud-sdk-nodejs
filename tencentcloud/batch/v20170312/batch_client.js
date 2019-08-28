@@ -22,6 +22,7 @@ const DeleteComputeEnvResponse = models.DeleteComputeEnvResponse;
 const SubmitJobRequest = models.SubmitJobRequest;
 const ComputeEnvData = models.ComputeEnvData;
 const Authentication = models.Authentication;
+const RetryJobsResponse = models.RetryJobsResponse;
 const TerminateComputeNodeRequest = models.TerminateComputeNodeRequest;
 const DescribeTaskLogsRequest = models.DescribeTaskLogsRequest;
 const AgentRunningMode = models.AgentRunningMode;
@@ -38,9 +39,11 @@ const TaskInstanceMetrics = models.TaskInstanceMetrics;
 const TaskInstanceLog = models.TaskInstanceLog;
 const MountDataDisk = models.MountDataDisk;
 const TaskView = models.TaskView;
+const Externals = models.Externals;
 const DescribeComputeEnvResponse = models.DescribeComputeEnvResponse;
 const TerminateJobRequest = models.TerminateJobRequest;
 const Application = models.Application;
+const EnvDataCpm = models.EnvDataCpm;
 const OutputMappingConfig = models.OutputMappingConfig;
 const ComputeNodeMetrics = models.ComputeNodeMetrics;
 const TaskMetrics = models.TaskMetrics;
@@ -58,8 +61,11 @@ const DescribeComputeEnvCreateInfosRequest = models.DescribeComputeEnvCreateInfo
 const DescribeComputeEnvRequest = models.DescribeComputeEnvRequest;
 const InstanceMarketOptionsRequest = models.InstanceMarketOptionsRequest;
 const DescribeTaskTemplatesResponse = models.DescribeTaskTemplatesResponse;
+const CreateCpmComputeEnvResponse = models.CreateCpmComputeEnvResponse;
 const DeleteJobRequest = models.DeleteJobRequest;
+const CreateCpmComputeEnvRequest = models.CreateCpmComputeEnvRequest;
 const DescribeTaskLogsResponse = models.DescribeTaskLogsResponse;
+const NamedCpmComputeEnv = models.NamedCpmComputeEnv;
 const DeleteTaskTemplatesRequest = models.DeleteTaskTemplatesRequest;
 const DescribeJobResponse = models.DescribeJobResponse;
 const DescribeComputeEnvCreateInfoRequest = models.DescribeComputeEnvCreateInfoRequest;
@@ -69,13 +75,12 @@ const NamedComputeEnv = models.NamedComputeEnv;
 const DeleteJobResponse = models.DeleteJobResponse;
 const EventConfig = models.EventConfig;
 const SpotMarketOptions = models.SpotMarketOptions;
-const Externals = models.Externals;
+const CpmVirtualPrivateCloud = models.CpmVirtualPrivateCloud;
 const OutputMapping = models.OutputMapping;
 const EnhancedService = models.EnhancedService;
 const DescribeJobSubmitInfoResponse = models.DescribeJobSubmitInfoResponse;
 const DescribeComputeEnvCreateInfosResponse = models.DescribeComputeEnvCreateInfosResponse;
 const RunSecurityServiceEnabled = models.RunSecurityServiceEnabled;
-const CreateTaskTemplateResponse = models.CreateTaskTemplateResponse;
 const DescribeJobRequest = models.DescribeJobRequest;
 const RedirectInfo = models.RedirectInfo;
 const DescribeInstanceCategoriesResponse = models.DescribeInstanceCategoriesResponse;
@@ -93,7 +98,7 @@ const Placement = models.Placement;
 const ComputeNode = models.ComputeNode;
 const ItemPrice = models.ItemPrice;
 const InstanceTypeQuotaItem = models.InstanceTypeQuotaItem;
-const RetryJobsResponse = models.RetryJobsResponse;
+const CreateTaskTemplateResponse = models.CreateTaskTemplateResponse;
 const StorageBlock = models.StorageBlock;
 const DescribeJobsRequest = models.DescribeJobsRequest;
 const TaskTemplateView = models.TaskTemplateView;
@@ -155,6 +160,17 @@ class BatchClient extends AbstractClient {
     CreateTaskTemplate(req, cb) {
         let resp = new CreateTaskTemplateResponse();
         this.request("CreateTaskTemplate", req, resp, cb);
+    }
+
+    /**
+     * 创建黑石计算环境
+     * @param {CreateCpmComputeEnvRequest} req
+     * @param {function(string, CreateCpmComputeEnvResponse):void} cb
+     * @public
+     */
+    CreateCpmComputeEnv(req, cb) {
+        let resp = new CreateCpmComputeEnvResponse();
+        this.request("CreateCpmComputeEnv", req, resp, cb);
     }
 
     /**

@@ -24,12 +24,13 @@ const DescribeClusterSecurityRequest = models.DescribeClusterSecurityRequest;
 const DeleteClusterInstancesResponse = models.DeleteClusterInstancesResponse;
 const EnhancedService = models.EnhancedService;
 const LoginSettings = models.LoginSettings;
-const RunSecurityServiceEnabled = models.RunSecurityServiceEnabled;
+const Label = models.Label;
 const AddExistedInstancesRequest = models.AddExistedInstancesRequest;
 const CreateClusterRouteRequest = models.CreateClusterRouteRequest;
 const DescribeClusterInstancesResponse = models.DescribeClusterInstancesResponse;
-const CreateClusterInstancesResponse = models.CreateClusterInstancesResponse;
+const CreateClusterAsGroupRequest = models.CreateClusterAsGroupRequest;
 const DescribeClusterRouteTablesRequest = models.DescribeClusterRouteTablesRequest;
+const CreateClusterInstancesResponse = models.CreateClusterInstancesResponse;
 const CreateClusterRouteTableResponse = models.CreateClusterRouteTableResponse;
 const ExistedInstancesForNode = models.ExistedInstancesForNode;
 const CreateClusterResponse = models.CreateClusterResponse;
@@ -40,6 +41,7 @@ const ClusterBasicSettings = models.ClusterBasicSettings;
 const CreateClusterRequest = models.CreateClusterRequest;
 const DeleteClusterInstancesRequest = models.DeleteClusterInstancesRequest;
 const CreateClusterInstancesRequest = models.CreateClusterInstancesRequest;
+const CreateClusterAsGroupResponse = models.CreateClusterAsGroupResponse;
 const CreateClusterRouteTableRequest = models.CreateClusterRouteTableRequest;
 const DescribeClusterRouteTablesResponse = models.DescribeClusterRouteTablesResponse;
 const DescribeClustersRequest = models.DescribeClustersRequest;
@@ -49,6 +51,7 @@ const ClusterCIDRSettings = models.ClusterCIDRSettings;
 const InstanceAdvancedSettings = models.InstanceAdvancedSettings;
 const DescribeRouteTableConflictsRequest = models.DescribeRouteTableConflictsRequest;
 const RunInstancesForNode = models.RunInstancesForNode;
+const RunSecurityServiceEnabled = models.RunSecurityServiceEnabled;
 const ExistedInstancesPara = models.ExistedInstancesPara;
 const DescribeExistedInstancesRequest = models.DescribeExistedInstancesRequest;
 const ExistedInstance = models.ExistedInstance;
@@ -63,10 +66,10 @@ const Instance = models.Instance;
 const Cluster = models.Cluster;
 const DescribeClustersResponse = models.DescribeClustersResponse;
 const ClusterNetworkSettings = models.ClusterNetworkSettings;
-const DeleteClusterResponse = models.DeleteClusterResponse;
+const DeleteClusterRouteResponse = models.DeleteClusterRouteResponse;
 const AddExistedInstancesResponse = models.AddExistedInstancesResponse;
 const DeleteClusterRouteTableResponse = models.DeleteClusterRouteTableResponse;
-const DeleteClusterRouteResponse = models.DeleteClusterRouteResponse;
+const DeleteClusterResponse = models.DeleteClusterResponse;
 
 
 /**
@@ -143,6 +146,17 @@ class TkeClient extends AbstractClient {
     DeleteCluster(req, cb) {
         let resp = new DeleteClusterResponse();
         this.request("DeleteCluster", req, resp, cb);
+    }
+
+    /**
+     * 为已经存在的集群创建伸缩组
+     * @param {CreateClusterAsGroupRequest} req
+     * @param {function(string, CreateClusterAsGroupResponse):void} cb
+     * @public
+     */
+    CreateClusterAsGroup(req, cb) {
+        let resp = new CreateClusterAsGroupResponse();
+        this.request("CreateClusterAsGroup", req, resp, cb);
     }
 
     /**

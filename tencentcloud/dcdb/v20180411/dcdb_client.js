@@ -457,7 +457,7 @@ class DcdbClient extends AbstractClient {
     }
 
     /**
-     * 本接口（DescribeDatabaseObjects）用于查询云数据库实例的表信息。
+     * 本接口（DescribeDatabaseTable）用于查询云数据库实例的表信息。
      * @param {DescribeDatabaseTableRequest} req
      * @param {function(string, DescribeDatabaseTableResponse):void} cb
      * @public

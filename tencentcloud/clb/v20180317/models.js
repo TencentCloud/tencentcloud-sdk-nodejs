@@ -180,48 +180,26 @@ class SetLoadBalancerSecurityGroupsResponse extends  AbstractModel {
 }
 
 /**
- * 修改节点权重的数据类型
+ * 暂做保留，一般用户无需关注。
  * @class
  */
-class RsWeightRule extends  AbstractModel {
+class ExtraInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 负载均衡监听器 ID
+         * 是否开通VIP直通
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.ZhiTong = null;
+
+        /**
+         * TgwGroup名称
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
-        this.ListenerId = null;
-
-        /**
-         * 转发规则的ID
-         * @type {string || null}
-         */
-        this.LocationId = null;
-
-        /**
-         * 要修改权重的后端机器列表
-         * @type {Array.<Target> || null}
-         */
-        this.Targets = null;
-
-        /**
-         * 目标规则的域名，提供LocationId参数时本参数不生效
-         * @type {string || null}
-         */
-        this.Domain = null;
-
-        /**
-         * 目标规则的URL，提供LocationId参数时本参数不生效
-         * @type {string || null}
-         */
-        this.Url = null;
-
-        /**
-         * 后端服务新的转发权重，取值范围：0~100。
-         * @type {number || null}
-         */
-        this.Weight = null;
+        this.TgwGroupName = null;
 
     }
 
@@ -232,20 +210,8 @@ class RsWeightRule extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ListenerId = 'ListenerId' in params ? params.ListenerId : null;
-        this.LocationId = 'LocationId' in params ? params.LocationId : null;
-
-        if (params.Targets) {
-            this.Targets = new Array();
-            for (let z in params.Targets) {
-                let obj = new Target();
-                obj.deserialize(params.Targets[z]);
-                this.Targets.push(obj);
-            }
-        }
-        this.Domain = 'Domain' in params ? params.Domain : null;
-        this.Url = 'Url' in params ? params.Url : null;
-        this.Weight = 'Weight' in params ? params.Weight : null;
+        this.ZhiTong = 'ZhiTong' in params ? params.ZhiTong : null;
+        this.TgwGroupName = 'TgwGroupName' in params ? params.TgwGroupName : null;
 
     }
 }
@@ -791,6 +757,77 @@ class ClassicalTarget extends  AbstractModel {
         this.PrivateIpAddresses = 'PrivateIpAddresses' in params ? params.PrivateIpAddresses : null;
         this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
         this.RunFlag = 'RunFlag' in params ? params.RunFlag : null;
+
+    }
+}
+
+/**
+ * 修改节点权重的数据类型
+ * @class
+ */
+class RsWeightRule extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 负载均衡监听器 ID
+         * @type {string || null}
+         */
+        this.ListenerId = null;
+
+        /**
+         * 转发规则的ID
+         * @type {string || null}
+         */
+        this.LocationId = null;
+
+        /**
+         * 要修改权重的后端机器列表
+         * @type {Array.<Target> || null}
+         */
+        this.Targets = null;
+
+        /**
+         * 目标规则的域名，提供LocationId参数时本参数不生效
+         * @type {string || null}
+         */
+        this.Domain = null;
+
+        /**
+         * 目标规则的URL，提供LocationId参数时本参数不生效
+         * @type {string || null}
+         */
+        this.Url = null;
+
+        /**
+         * 后端服务新的转发权重，取值范围：0~100。
+         * @type {number || null}
+         */
+        this.Weight = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ListenerId = 'ListenerId' in params ? params.ListenerId : null;
+        this.LocationId = 'LocationId' in params ? params.LocationId : null;
+
+        if (params.Targets) {
+            this.Targets = new Array();
+            for (let z in params.Targets) {
+                let obj = new Target();
+                obj.deserialize(params.Targets[z]);
+                this.Targets.push(obj);
+            }
+        }
+        this.Domain = 'Domain' in params ? params.Domain : null;
+        this.Url = 'Url' in params ? params.Url : null;
+        this.Weight = 'Weight' in params ? params.Weight : null;
 
     }
 }
@@ -1419,7 +1456,7 @@ class TargetHealth extends  AbstractModel {
         this.Port = null;
 
         /**
-         * 当前健康状态，true：健康，false：不健康。
+         * 当前健康状态，true：健康，false：不健康（包括尚未开始探测、探测中、状态异常等几种状态）。只有处于健康状态（且权重大于0），负载均衡才会向其转发流量。
          * @type {boolean || null}
          */
         this.HealthStatus = null;
@@ -1429,6 +1466,12 @@ class TargetHealth extends  AbstractModel {
          * @type {string || null}
          */
         this.TargetId = null;
+
+        /**
+         * 当前健康状态的详细信息。如：Alive、Dead、Unknown。Alive状态为健康，Dead状态为异常，Unknown状态包括尚未开始探测、探测中、状态未知。
+         * @type {string || null}
+         */
+        this.HealthStatusDetial = null;
 
     }
 
@@ -1443,6 +1486,7 @@ class TargetHealth extends  AbstractModel {
         this.Port = 'Port' in params ? params.Port : null;
         this.HealthStatus = 'HealthStatus' in params ? params.HealthStatus : null;
         this.TargetId = 'TargetId' in params ? params.TargetId : null;
+        this.HealthStatusDetial = 'HealthStatusDetial' in params ? params.HealthStatusDetial : null;
 
     }
 }
@@ -2438,7 +2482,7 @@ class Backend extends  AbstractModel {
         this.Type = null;
 
         /**
-         * 后端服务的唯一 ID，可通过 DescribeInstances 接口返回字段中的 unInstanceId 字段获取
+         * 后端服务的唯一 ID，如 ins-abcd1234
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -2484,7 +2528,7 @@ class Backend extends  AbstractModel {
         this.RegisteredTime = null;
 
         /**
-         * 弹性网卡唯一ID
+         * 弹性网卡唯一ID，如 eni-1234abcd
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
@@ -4984,6 +5028,13 @@ OPEN：公网属性， INTERNAL：内网属性。
          */
         this.AddressIPv6 = null;
 
+        /**
+         * 暂做保留，一般用户无需关注。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {ExtraInfo || null}
+         */
+        this.ExtraInfo = null;
+
     }
 
     /**
@@ -5063,6 +5114,12 @@ OPEN：公网属性， INTERNAL：内网属性。
         this.LogTopicId = 'LogTopicId' in params ? params.LogTopicId : null;
         this.AddressIPv6 = 'AddressIPv6' in params ? params.AddressIPv6 : null;
 
+        if (params.ExtraInfo) {
+            let obj = new ExtraInfo();
+            obj.deserialize(params.ExtraInfo)
+            this.ExtraInfo = obj;
+        }
+
     }
 }
 
@@ -5070,7 +5127,7 @@ module.exports = {
     DeleteRewriteRequest: DeleteRewriteRequest,
     ModifyTargetPortRequest: ModifyTargetPortRequest,
     SetLoadBalancerSecurityGroupsResponse: SetLoadBalancerSecurityGroupsResponse,
-    RsWeightRule: RsWeightRule,
+    ExtraInfo: ExtraInfo,
     BatchModifyTargetWeightResponse: BatchModifyTargetWeightResponse,
     SetSecurityGroupForLoadbalancersRequest: SetSecurityGroupForLoadbalancersRequest,
     CreateLoadBalancerRequest: CreateLoadBalancerRequest,
@@ -5080,6 +5137,7 @@ module.exports = {
     DescribeClassicalLBByInstanceIdResponse: DescribeClassicalLBByInstanceIdResponse,
     DescribeRewriteRequest: DescribeRewriteRequest,
     ClassicalTarget: ClassicalTarget,
+    RsWeightRule: RsWeightRule,
     DeregisterTargetsFromClassicalLBRequest: DeregisterTargetsFromClassicalLBRequest,
     SetSecurityGroupForLoadbalancersResponse: SetSecurityGroupForLoadbalancersResponse,
     ModifyTargetWeightResponse: ModifyTargetWeightResponse,
