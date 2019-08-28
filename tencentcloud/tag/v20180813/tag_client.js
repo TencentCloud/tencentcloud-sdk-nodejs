@@ -23,7 +23,10 @@ const ModifyResourceTagsResponse = models.ModifyResourceTagsResponse;
 const DescribeTagKeysResponse = models.DescribeTagKeysResponse;
 const DescribeTagValuesRequest = models.DescribeTagValuesRequest;
 const ModifyResourceTagsRequest = models.ModifyResourceTagsRequest;
+const ResourcesTag = models.ResourcesTag;
+const DescribeResourcesByTagsResponse = models.DescribeResourcesByTagsResponse;
 const DescribeTagKeysRequest = models.DescribeTagKeysRequest;
+const TagFilters = models.TagFilters;
 const DescribeResourceTagsByResourceIdsRequest = models.DescribeResourceTagsByResourceIdsRequest;
 const Tag = models.Tag;
 const TagResource = models.TagResource;
@@ -40,6 +43,7 @@ const DeleteResourceTagRequest = models.DeleteResourceTagRequest;
 const UpdateResourceTagValueResponse = models.UpdateResourceTagValueResponse;
 const TagKeyObject = models.TagKeyObject;
 const TagWithDelete = models.TagWithDelete;
+const DescribeResourcesByTagsRequest = models.DescribeResourcesByTagsRequest;
 
 
 /**
@@ -86,6 +90,29 @@ class TagClient extends AbstractClient {
     }
 
     /**
+     * 本接口用于修改资源关联的所有标签
+     * @param {ModifyResourceTagsRequest} req
+     * @param {function(string, ModifyResourceTagsResponse):void} cb
+     * @public
+     */
+    ModifyResourceTags(req, cb) {
+        let resp = new ModifyResourceTagsResponse();
+        this.request("ModifyResourceTags", req, resp, cb);
+    }
+
+    /**
+     * 用于查询已建立的标签列表中的标签键。
+
+     * @param {DescribeTagKeysRequest} req
+     * @param {function(string, DescribeTagKeysResponse):void} cb
+     * @public
+     */
+    DescribeTagKeys(req, cb) {
+        let resp = new DescribeTagKeysResponse();
+        this.request("DescribeTagKeys", req, resp, cb);
+    }
+
+    /**
      * 本接口用于解除标签和资源的关联关系
      * @param {DeleteResourceTagRequest} req
      * @param {function(string, DeleteResourceTagResponse):void} cb
@@ -94,17 +121,6 @@ class TagClient extends AbstractClient {
     DeleteResourceTag(req, cb) {
         let resp = new DeleteResourceTagResponse();
         this.request("DeleteResourceTag", req, resp, cb);
-    }
-
-    /**
-     * 本接口用于创建一对标签键和标签值
-     * @param {CreateTagRequest} req
-     * @param {function(string, CreateTagResponse):void} cb
-     * @public
-     */
-    CreateTag(req, cb) {
-        let resp = new CreateTagResponse();
-        this.request("CreateTag", req, resp, cb);
     }
 
     /**
@@ -120,14 +136,14 @@ class TagClient extends AbstractClient {
     }
 
     /**
-     * 本接口用于修改资源关联的所有标签
-     * @param {ModifyResourceTagsRequest} req
-     * @param {function(string, ModifyResourceTagsResponse):void} cb
+     * 通过标签查询资源列表
+     * @param {DescribeResourcesByTagsRequest} req
+     * @param {function(string, DescribeResourcesByTagsResponse):void} cb
      * @public
      */
-    ModifyResourceTags(req, cb) {
-        let resp = new ModifyResourceTagsResponse();
-        this.request("ModifyResourceTags", req, resp, cb);
+    DescribeResourcesByTags(req, cb) {
+        let resp = new DescribeResourcesByTagsResponse();
+        this.request("DescribeResourcesByTags", req, resp, cb);
     }
 
     /**
@@ -153,15 +169,14 @@ class TagClient extends AbstractClient {
     }
 
     /**
-     * 用于查询已建立的标签列表中的标签键。
-
-     * @param {DescribeTagKeysRequest} req
-     * @param {function(string, DescribeTagKeysResponse):void} cb
+     * 本接口用于创建一对标签键和标签值
+     * @param {CreateTagRequest} req
+     * @param {function(string, CreateTagResponse):void} cb
      * @public
      */
-    DescribeTagKeys(req, cb) {
-        let resp = new DescribeTagKeysResponse();
-        this.request("DescribeTagKeys", req, resp, cb);
+    CreateTag(req, cb) {
+        let resp = new CreateTagResponse();
+        this.request("CreateTag", req, resp, cb);
     }
 
 

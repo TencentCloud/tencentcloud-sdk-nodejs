@@ -114,7 +114,7 @@ class InitOralProcessRequest extends  AbstractModel {
         this.WorkMode = null;
 
         /**
-         * 评估模式，0：词模式（中文评测模式下为文字模式），1：句子模式，2：段落模式，3：自由说模式，当为词模式评估时，能够提供每个音节的评估信息，当为句子模式时，能够提供完整度和流利度信息。
+         * 评估模式，0：词模式（中文评测模式下为文字模式），1：句子模式，2：段落模式，3：自由说模式，当为词模式评估时，能够提供每个音节的评估信息，当为句子模式时，能够提供完整度和流利度信息。4: 英文单词音素诊断评测模式，针对一个单词音素诊断评测。
          * @type {number || null}
          */
         this.EvalMode = null;
@@ -703,13 +703,13 @@ class WordRsp extends  AbstractModel {
         super();
 
         /**
-         * 当前单词语音起始时间点，单位为ms
+         * 当前单词语音起始时间点，单位为ms，该字段段落模式下无意义。
          * @type {number || null}
          */
         this.MemBeginTime = null;
 
         /**
-         * 当前单词语音终止时间点，单位为ms
+         * 当前单词语音终止时间点，单位为ms，该字段段落模式下无意义。
          * @type {number || null}
          */
         this.MemEndTime = null;
@@ -872,7 +872,7 @@ class TransmitOralProcessWithInitRequest extends  AbstractModel {
         this.IsEnd = null;
 
         /**
-         * 语音文件类型 	1:raw, 2:wav, 3:mp3(三种格式目前仅支持16k采样率16bit编码单声道，如有不一致可能导致评估不准确或失败)。
+         * 语音文件类型 	1: raw, 2: wav, 3: mp3, 4: speex (语言文件格式目前仅支持 16k 采样率 16bit 编码单声道，如有不一致可能导致评估不准确或失败)。
          * @type {number || null}
          */
         this.VoiceFileType = null;
@@ -908,7 +908,7 @@ class TransmitOralProcessWithInitRequest extends  AbstractModel {
         this.WorkMode = null;
 
         /**
-         * 评估模式，0：词模式（中文评测模式下为文字模式），1：句子模式，2：段落模式，3：自由说模式，当为词模式评估时，能够提供每个音节的评估信息，当为句子模式时，能够提供完整度和流利度信息。
+         * 评估模式，0：词模式（中文评测模式下为文字模式），1：句子模式，2：段落模式，3：自由说模式，当为词模式评估时，能够提供每个音节的评估信息，当为句子模式时，能够提供完整度和流利度信息，4：单词纠错模式：能够对单词和句子中的读错读音进行纠正，给出参考正确读音。
          * @type {number || null}
          */
         this.EvalMode = null;

@@ -802,18 +802,17 @@ class CreatePersonRequest extends  AbstractModel {
         this.PersonExDescriptionInfos = null;
 
         /**
-         * 图片 base64 数据。
-若图片中包含多张人脸，只选取其中人脸面积最大的人脸。
+         * 图片 base64 数据，base64 编码后大小不可超过5M。
 支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。
          * @type {string || null}
          */
         this.Image = null;
 
         /**
-         * 图片的 Url、Image必须提供一个，如果都提供，只使用 Url。
+         * 图片的 Url 。对应图片 base64 编码后大小不可超过5M。
+Url、Image必须提供一个，如果都提供，只使用 Url。  
 图片存储于腾讯云的Url可保障更高下载速度和稳定性，建议图片存储于腾讯云。 
 非腾讯云存储的Url速度和稳定性可能受一定影响。
-若图片中包含多张人脸，只选取其中人脸面积最大的人脸。
 支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。
          * @type {string || null}
          */
@@ -1048,14 +1047,15 @@ class DetectLiveFaceRequest extends  AbstractModel {
         super();
 
         /**
-         * 图片 base64 数据（图片的宽高比请接近3:4，不符合宽高比的图片返回的分值不具备参考意义）。
+         * 图片 base64 数据，base64 编码后大小不可超过5M（图片的宽高比请接近3:4，不符合宽高比的图片返回的分值不具备参考意义）。
 支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。
          * @type {string || null}
          */
         this.Image = null;
 
         /**
-         * 图片的 Url 。图片的 Url、Image必须提供一个，如果都提供，只使用 Url。 
+         * 图片的 Url 。对应图片 base64 编码后大小不可超过5M。
+Url、Image必须提供一个，如果都提供，只使用 Url。 
 （图片的宽高比请接近 3:4，不符合宽高比的图片返回的分值不具备参考意义） 
 图片存储于腾讯云的Url可保障更高下载速度和稳定性，建议图片存储于腾讯云。 
 非腾讯云存储的Url速度和稳定性可能受一定影响。
@@ -1185,7 +1185,8 @@ class CreateFaceRequest extends  AbstractModel {
         this.PersonId = null;
 
         /**
-         * 图片 base64 数据。人员人脸总数量不可超过5张。
+         * 图片 base64 数据，base64 编码后大小不可超过5M。
+人员人脸总数量不可超过5张。
 若图片中包含多张人脸，只选取其中人脸面积最大的人脸。
 支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。
          * @type {Array.<string> || null}
@@ -1193,12 +1194,13 @@ class CreateFaceRequest extends  AbstractModel {
         this.Images = null;
 
         /**
-         * 图片的 Url、Image必须提供一个，如果都提供，只使用 Url。
+         * 图片的 Url 。对应图片 base64 编码后大小不可超过5M。
+Url、Image必须提供一个，如果都提供，只使用 Url。  
 图片存储于腾讯云的Url可保障更高下载速度和稳定性，建议图片存储于腾讯云。 
-非腾讯云存储的Url速度和稳定性可能受一定影响。 
+非腾讯云存储的Url速度和稳定性可能受一定影响。
+支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。
 人员人脸总数量不可超过5张。
 若图片中包含多张人脸，只选取其中人脸面积最大的人脸。
-支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。
          * @type {Array.<string> || null}
          */
         this.Urls = null;
@@ -1531,7 +1533,7 @@ class FaceQualityInfo extends  AbstractModel {
 
         /**
          * 质量分: [0,100]，综合评价图像质量是否适合人脸识别，分数越高质量越好。 
-正常情况，只需要使用Score作为质量分总体的判断标准即可。
+正常情况，只需要使用Score作为质量分总体的判断标准即可。Sharpness、Brightness、Completeness等细项分仅供参考。
 参考范围：[0,40]较差，[40,60] 一般，[60,80]较好，[80,100]很好。 
 建议：人脸入库选取70以上的图片。
 注意：此字段可能返回 null，表示取不到有效值。
@@ -1595,7 +1597,7 @@ class CompareFaceRequest extends  AbstractModel {
         super();
 
         /**
-         * A 图片 base64 数据。
+         * A 图片 base64 数据，base64 编码后大小不可超过5M。
 若图片中包含多张人脸，只选取其中人脸面积最大的人脸。
 支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。
          * @type {string || null}
@@ -1603,7 +1605,7 @@ class CompareFaceRequest extends  AbstractModel {
         this.ImageA = null;
 
         /**
-         * B 图片 base64 数据。
+         * B 图片 base64 数据，base64 编码后大小不可超过5M。
 若图片中包含多张人脸，只选取其中人脸面积最大的人脸。
 支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。
          * @type {string || null}
@@ -1611,7 +1613,8 @@ class CompareFaceRequest extends  AbstractModel {
         this.ImageB = null;
 
         /**
-         * A 图片的 Url 。A 图片的 Url、Image必须提供一个，如果都提供，只使用 Url。 
+         * A 图片的 Url ，对应图片 base64 编码后大小不可超过5M。
+A 图片的 Url、Image必须提供一个，如果都提供，只使用 Url。 
 图片存储于腾讯云的Url可保障更高下载速度和稳定性，建议图片存储于腾讯云。 
 非腾讯云存储的Url速度和稳定性可能受一定影响。
 若图片中包含多张人脸，只选取其中人脸面积最大的人脸。
@@ -1621,7 +1624,8 @@ class CompareFaceRequest extends  AbstractModel {
         this.UrlA = null;
 
         /**
-         * B 图片的 Url 。B 图片的 Url、Image必须提供一个，如果都提供，只使用 Url。 
+         * B 图片的 Url ，对应图片 base64 编码后大小不可超过5M。
+B 图片的 Url、Image必须提供一个，如果都提供，只使用 Url。 
 图片存储于腾讯云的Url可保障更高下载速度和稳定性，建议图片存储于腾讯云。 
 非腾讯云存储的Url速度和稳定性可能受一定影响。
 若图片中包含多张人脸，只选取其中人脸面积最大的人脸。
@@ -1886,6 +1890,12 @@ class DetectFaceResponse extends  AbstractModel {
         this.FaceInfos = null;
 
         /**
+         * 人脸识别所用的算法模型版本。
+         * @type {string || null}
+         */
+        this.FaceModelVersion = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -1911,6 +1921,7 @@ class DetectFaceResponse extends  AbstractModel {
                 this.FaceInfos.push(obj);
             }
         }
+        this.FaceModelVersion = 'FaceModelVersion' in params ? params.FaceModelVersion : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -2034,6 +2045,12 @@ class AnalyzeFaceResponse extends  AbstractModel {
         this.FaceShapeSet = null;
 
         /**
+         * 人脸识别所用的算法模型版本。
+         * @type {string || null}
+         */
+        this.FaceModelVersion = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -2059,6 +2076,7 @@ class AnalyzeFaceResponse extends  AbstractModel {
                 this.FaceShapeSet.push(obj);
             }
         }
+        this.FaceModelVersion = 'FaceModelVersion' in params ? params.FaceModelVersion : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -2159,13 +2177,15 @@ class AnalyzeFaceRequest extends  AbstractModel {
         this.Mode = null;
 
         /**
-         * 图片 base64 数据。支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。
+         * 图片 base64 数据，base64 编码后大小不可超过5M。
+支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。
          * @type {string || null}
          */
         this.Image = null;
 
         /**
-         * 图片的 Url、Image必须提供一个，如果都提供，只使用 Url。  
+         * 图片的 Url 。对应图片 base64 编码后大小不可超过5M。
+Url、Image必须提供一个，如果都提供，只使用 Url。  
 图片存储于腾讯云的Url可保障更高下载速度和稳定性，建议图片存储于腾讯云。 
 非腾讯云存储的Url速度和稳定性可能受一定影响。
 支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。
@@ -2255,13 +2275,15 @@ class DetectFaceRequest extends  AbstractModel {
         this.MinFaceSize = null;
 
         /**
-         * 图片 base64 数据。支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。
+         * 图片 base64 数据，base64 编码后大小不可超过5M。
+支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。
          * @type {string || null}
          */
         this.Image = null;
 
         /**
-         * 图片的 Url、Image必须提供一个，如果都提供，只使用 Url。 
+         * 图片的 Url 。对应图片 base64 编码后大小不可超过5M。
+Url、Image必须提供一个，如果都提供，只使用 Url。  
 图片存储于腾讯云的Url可保障更高下载速度和稳定性，建议图片存储于腾讯云。 
 非腾讯云存储的Url速度和稳定性可能受一定影响。
 支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。
@@ -2287,6 +2309,14 @@ class DetectFaceRequest extends  AbstractModel {
          */
         this.NeedQualityDetection = null;
 
+        /**
+         * 人脸识别服务所用的算法模型版本。目前入参支持 “2.0”和“3.0“ 两个输入。  
+默认为"2.0"。 
+不同算法模型版本对应的人脸识别算法不同，新版本的整体效果会优于旧版本，建议使用最新版本。
+         * @type {string || null}
+         */
+        this.FaceModelVersion = null;
+
     }
 
     /**
@@ -2302,6 +2332,7 @@ class DetectFaceRequest extends  AbstractModel {
         this.Url = 'Url' in params ? params.Url : null;
         this.NeedFaceAttributes = 'NeedFaceAttributes' in params ? params.NeedFaceAttributes : null;
         this.NeedQualityDetection = 'NeedQualityDetection' in params ? params.NeedQualityDetection : null;
+        this.FaceModelVersion = 'FaceModelVersion' in params ? params.FaceModelVersion : null;
 
     }
 }
@@ -2469,7 +2500,7 @@ class VerifyFaceRequest extends  AbstractModel {
         this.PersonId = null;
 
         /**
-         * 图片 base64 数据。
+         * 图片 base64 数据，base64 编码后大小不可超过5M。
 若图片中包含多张人脸，只选取其中人脸面积最大的人脸。
 支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。
          * @type {string || null}
@@ -2477,7 +2508,8 @@ class VerifyFaceRequest extends  AbstractModel {
         this.Image = null;
 
         /**
-         * 图片的 Url 。 图片的 Url、Image必须提供一个，如果都提供，只使用 Url。 
+         * 图片的 Url 。对应图片 base64 编码后大小不可超过5M。
+Url、Image必须提供一个，如果都提供，只使用 Url。  
 图片存储于腾讯云的Url可保障更高下载速度和稳定性，建议图片存储于腾讯云。 
 非腾讯云存储的Url速度和稳定性可能受一定影响。
 若图片中包含多张人脸，只选取其中人脸面积最大的人脸。
@@ -2794,13 +2826,15 @@ class SearchFacesRequest extends  AbstractModel {
         this.GroupIds = null;
 
         /**
-         * 图片 base64 数据。支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。
+         * 图片 base64 数据，base64 编码后大小不可超过5M。
+支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。
          * @type {string || null}
          */
         this.Image = null;
 
         /**
-         * 图片的 Url、Image必须提供一个，如果都提供，只使用 Url。
+         * 图片的 Url 。对应图片 base64 编码后大小不可超过5M。
+Url、Image必须提供一个，如果都提供，只使用 Url。  
 图片存储于腾讯云的Url可保障更高下载速度和稳定性，建议图片存储于腾讯云。 
 非腾讯云存储的Url速度和稳定性可能受一定影响。
 支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。

@@ -17,11 +17,11 @@
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const TextProcessResponse = models.TextProcessResponse;
+const Group = models.Group;
 const SlotInfo = models.SlotInfo;
 const TextResetRequest = models.TextResetRequest;
-const ResetRequest = models.ResetRequest;
 const TextResetResponse = models.TextResetResponse;
-const ResetResponse = models.ResetResponse;
+const ResponseMessage = models.ResponseMessage;
 const TextProcessRequest = models.TextProcessRequest;
 
 
@@ -32,22 +32,11 @@ const TextProcessRequest = models.TextProcessRequest;
 class TbpClient extends AbstractClient {
 
     constructor(credential, region, profile) {
-        super("tbp.tencentcloudapi.com", "2019-03-11", credential, region, profile);
+        super("tbp.tencentcloudapi.com", "2019-06-27", credential, region, profile);
     }
     
     /**
-     * 对当前机器人的会话状态进行复位
-     * @param {ResetRequest} req
-     * @param {function(string, ResetResponse):void} cb
-     * @public
-     */
-    Reset(req, cb) {
-        let resp = new ResetResponse();
-        this.request("Reset", req, resp, cb);
-    }
-
-    /**
-     * 会话重置接口。已废弃，推荐使用最新版TextReset接口。
+     * 会话重置接口。
      * @param {TextResetRequest} req
      * @param {function(string, TextResetResponse):void} cb
      * @public
@@ -58,7 +47,7 @@ class TbpClient extends AbstractClient {
     }
 
     /**
-     * 接收调用侧的文本输入，返回应答文本。已废弃，推荐使用最新版TextProcess接口。
+     * 接收调用侧的文本输入，返回应答文本。
      * @param {TextProcessRequest} req
      * @param {function(string, TextProcessResponse):void} cb
      * @public

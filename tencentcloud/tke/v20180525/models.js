@@ -376,18 +376,24 @@ class LoginSettings extends  AbstractModel {
 }
 
 /**
- * 描述了 “云安全” 服务相关的信息
+ * k8s中标签，一般以数组的方式存在
  * @class
  */
-class RunSecurityServiceEnabled extends  AbstractModel {
+class Label extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 是否开启[云安全](/document/product/296)服务。取值范围：<br><li>TRUE：表示开启云安全服务<br><li>FALSE：表示不开启云安全服务<br><br>默认取值：TRUE。
-         * @type {boolean || null}
+         * map表中的Name
+         * @type {string || null}
          */
-        this.Enabled = null;
+        this.Name = null;
+
+        /**
+         * map表中的Value
+         * @type {string || null}
+         */
+        this.Value = null;
 
     }
 
@@ -398,7 +404,8 @@ class RunSecurityServiceEnabled extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Enabled = 'Enabled' in params ? params.Enabled : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Value = 'Value' in params ? params.Value : null;
 
     }
 }
@@ -574,6 +581,96 @@ class DescribeClusterInstancesResponse extends  AbstractModel {
 }
 
 /**
+ * CreateClusterAsGroup请求参数结构体
+ * @class
+ */
+class CreateClusterAsGroupRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 集群ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * 伸缩组创建透传参数，json化字符串格式，详见[伸缩组创建实例](https://cloud.tencent.com/document/api/377/20440)接口。LaunchConfigurationId由LaunchConfigurePara参数创建，不支持填写
+         * @type {string || null}
+         */
+        this.AutoScalingGroupPara = null;
+
+        /**
+         * 启动配置创建透传参数，json化字符串格式，详见[创建启动配置](https://cloud.tencent.com/document/api/377/20447)接口。另外ImageId参数由于集群维度已经有的ImageId信息，这个字段不需要填写。UserData字段设置通过UserScript设置，这个字段不需要填写。
+         * @type {string || null}
+         */
+        this.LaunchConfigurePara = null;
+
+        /**
+         * 节点高级配置信息
+         * @type {InstanceAdvancedSettings || null}
+         */
+        this.InstanceAdvancedSettings = null;
+
+        /**
+         * 节点Label数组
+         * @type {Array.<Label> || null}
+         */
+        this.Labels = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.AutoScalingGroupPara = 'AutoScalingGroupPara' in params ? params.AutoScalingGroupPara : null;
+        this.LaunchConfigurePara = 'LaunchConfigurePara' in params ? params.LaunchConfigurePara : null;
+
+        if (params.InstanceAdvancedSettings) {
+            let obj = new InstanceAdvancedSettings();
+            obj.deserialize(params.InstanceAdvancedSettings)
+            this.InstanceAdvancedSettings = obj;
+        }
+
+        if (params.Labels) {
+            this.Labels = new Array();
+            for (let z in params.Labels) {
+                let obj = new Label();
+                obj.deserialize(params.Labels[z]);
+                this.Labels.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * DescribeClusterRouteTables请求参数结构体
+ * @class
+ */
+class DescribeClusterRouteTablesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+    }
+}
+
+/**
  * CreateClusterInstances返回参数结构体
  * @class
  */
@@ -604,27 +701,6 @@ class CreateClusterInstancesResponse extends  AbstractModel {
         }
         this.InstanceIdSet = 'InstanceIdSet' in params ? params.InstanceIdSet : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * DescribeClusterRouteTables请求参数结构体
- * @class
- */
-class DescribeClusterRouteTablesRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
 
     }
 }
@@ -666,7 +742,7 @@ class ExistedInstancesForNode extends  AbstractModel {
         super();
 
         /**
-         * 节点角色，取值:MASTER_ETCD, WORKER。MASTER_ETCD只有在创建 INDEPENDENT_CLUSTER 独立集群时需要指定。
+         * 节点角色，取值:MASTER_ETCD, WORKER。MASTER_ETCD只有在创建 INDEPENDENT_CLUSTER 独立集群时需要指定。MASTER_ETCD节点数量为3～7，建议为奇数。MASTER_ETCD最小配置为4C8G。
          * @type {string || null}
          */
         this.NodeRole = null;
@@ -914,7 +990,7 @@ class CreateClusterRequest extends  AbstractModel {
         this.ClusterType = null;
 
         /**
-         * CVM创建透传参数，json化字符串格式，详见[CVM创建实例](https://cloud.tencent.com/document/product/213/15730)接口。
+         * CVM创建透传参数，json化字符串格式，详见[CVM创建实例](https://cloud.tencent.com/document/product/213/15730)接口。总机型(包括地域)数量不超过10个，相同机型(地域)购买多台机器可以通过设置参数中RunInstances中InstanceCount来实现。
          * @type {Array.<RunInstancesForNode> || null}
          */
         this.RunInstancesForNode = null;
@@ -938,7 +1014,7 @@ class CreateClusterRequest extends  AbstractModel {
         this.InstanceAdvancedSettings = null;
 
         /**
-         * 已存在实例的配置信息
+         * 已存在实例的配置信息。所有实例必须在同一个VPC中，最大数量不超过100。
          * @type {Array.<ExistedInstancesForNode> || null}
          */
         this.ExistedInstancesForNode = null;
@@ -1089,6 +1165,48 @@ class CreateClusterInstancesRequest extends  AbstractModel {
 }
 
 /**
+ * CreateClusterAsGroup返回参数结构体
+ * @class
+ */
+class CreateClusterAsGroupResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 启动配置ID
+         * @type {string || null}
+         */
+        this.LaunchConfigurationId = null;
+
+        /**
+         * 伸缩组ID
+         * @type {string || null}
+         */
+        this.AutoScalingGroupId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LaunchConfigurationId = 'LaunchConfigurationId' in params ? params.LaunchConfigurationId : null;
+        this.AutoScalingGroupId = 'AutoScalingGroupId' in params ? params.AutoScalingGroupId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * CreateClusterRouteTable请求参数结构体
  * @class
  */
@@ -1209,7 +1327,7 @@ class DescribeClustersRequest extends  AbstractModel {
         this.Offset = null;
 
         /**
-         * 最大输出条数，默认20
+         * 最大输出条数，默认20，最大为100
          * @type {number || null}
          */
         this.Limit = null;
@@ -1302,22 +1420,28 @@ class DescribeClusterInstancesRequest extends  AbstractModel {
         this.ClusterId = null;
 
         /**
-         * 偏移量,默认0
+         * 偏移量，默认为0。关于Offset的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/15688)中的相关小节。
          * @type {number || null}
          */
         this.Offset = null;
 
         /**
-         * 最大输出条数，默认20
+         * 返回数量，默认为20，最大值为100。关于Limit的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/15688)中的相关小节。
          * @type {number || null}
          */
         this.Limit = null;
 
         /**
-         * 需要获取的节点实例Id列表(默认为空，表示拉取集群下所有节点实例)
+         * 需要获取的节点实例Id列表。如果为空，表示拉取集群下所有节点实例。
          * @type {Array.<string> || null}
          */
         this.InstanceIds = null;
+
+        /**
+         * 节点角色, MASTER, WORKER, ETCD, MASTER_ETCD,ALL, 默认为WORKER。默认为WORKER类型。
+         * @type {string || null}
+         */
+        this.InstanceRole = null;
 
     }
 
@@ -1332,6 +1456,7 @@ class DescribeClusterInstancesRequest extends  AbstractModel {
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
+        this.InstanceRole = 'InstanceRole' in params ? params.InstanceRole : null;
 
     }
 }
@@ -1345,7 +1470,7 @@ class ClusterCIDRSettings extends  AbstractModel {
         super();
 
         /**
-         * 用于分配集群容器和服务 IP 的 CIDR，不得与 VPC CIDR 冲突，也不得与同 VPC 内其他集群 CIDR 冲突
+         * 用于分配集群容器和服务 IP 的 CIDR，不得与 VPC CIDR 冲突，也不得与同 VPC 内其他集群 CIDR 冲突。且网段范围必须在内网网段内，例如:10.1.0.0/14, 192.168.0.1/18,172.16.0.0/16。
          * @type {string || null}
          */
         this.ClusterCIDR = null;
@@ -1357,13 +1482,13 @@ class ClusterCIDRSettings extends  AbstractModel {
         this.IgnoreClusterCIDRConflict = null;
 
         /**
-         * 集群中每个Node上最大的Pod数量
+         * 集群中每个Node上最大的Pod数量。取值范围4～256。不为2的幂值时会向上取最接近的2的幂值。
          * @type {number || null}
          */
         this.MaxNodePodNum = null;
 
         /**
-         * 集群最大的service数量
+         * 集群最大的service数量。取值范围32～32768，不为2的幂值时会向上取最接近的2的幂值。
          * @type {number || null}
          */
         this.MaxClusterServiceNum = null;
@@ -1478,7 +1603,7 @@ class RunInstancesForNode extends  AbstractModel {
         super();
 
         /**
-         * 节点角色，取值:MASTER_ETCD, WORKER。MASTER_ETCD只有在创建 INDEPENDENT_CLUSTER 独立集群时需要指定。
+         * 节点角色，取值:MASTER_ETCD, WORKER。MASTER_ETCD只有在创建 INDEPENDENT_CLUSTER 独立集群时需要指定。MASTER_ETCD节点数量为3～7，建议为奇数。MASTER_ETCD节点最小配置为4C8G。
          * @type {string || null}
          */
         this.NodeRole = null;
@@ -1500,6 +1625,34 @@ class RunInstancesForNode extends  AbstractModel {
         }
         this.NodeRole = 'NodeRole' in params ? params.NodeRole : null;
         this.RunInstancesPara = 'RunInstancesPara' in params ? params.RunInstancesPara : null;
+
+    }
+}
+
+/**
+ * 描述了 “云安全” 服务相关的信息
+ * @class
+ */
+class RunSecurityServiceEnabled extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 是否开启[云安全](/document/product/296)服务。取值范围：<br><li>TRUE：表示开启云安全服务<br><li>FALSE：表示不开启云安全服务<br><br>默认取值：TRUE。
+         * @type {boolean || null}
+         */
+        this.Enabled = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Enabled = 'Enabled' in params ? params.Enabled : null;
 
     }
 }
@@ -2317,10 +2470,10 @@ class ClusterNetworkSettings extends  AbstractModel {
 }
 
 /**
- * DeleteCluster返回参数结构体
+ * DeleteClusterRoute返回参数结构体
  * @class
  */
-class DeleteClusterResponse extends  AbstractModel {
+class DeleteClusterRouteResponse extends  AbstractModel {
     constructor(){
         super();
 
@@ -2422,10 +2575,10 @@ class DeleteClusterRouteTableResponse extends  AbstractModel {
 }
 
 /**
- * DeleteClusterRoute返回参数结构体
+ * DeleteCluster返回参数结构体
  * @class
  */
-class DeleteClusterRouteResponse extends  AbstractModel {
+class DeleteClusterResponse extends  AbstractModel {
     constructor(){
         super();
 
@@ -2458,12 +2611,13 @@ module.exports = {
     DeleteClusterInstancesResponse: DeleteClusterInstancesResponse,
     EnhancedService: EnhancedService,
     LoginSettings: LoginSettings,
-    RunSecurityServiceEnabled: RunSecurityServiceEnabled,
+    Label: Label,
     AddExistedInstancesRequest: AddExistedInstancesRequest,
     CreateClusterRouteRequest: CreateClusterRouteRequest,
     DescribeClusterInstancesResponse: DescribeClusterInstancesResponse,
-    CreateClusterInstancesResponse: CreateClusterInstancesResponse,
+    CreateClusterAsGroupRequest: CreateClusterAsGroupRequest,
     DescribeClusterRouteTablesRequest: DescribeClusterRouteTablesRequest,
+    CreateClusterInstancesResponse: CreateClusterInstancesResponse,
     CreateClusterRouteTableResponse: CreateClusterRouteTableResponse,
     ExistedInstancesForNode: ExistedInstancesForNode,
     CreateClusterResponse: CreateClusterResponse,
@@ -2474,6 +2628,7 @@ module.exports = {
     CreateClusterRequest: CreateClusterRequest,
     DeleteClusterInstancesRequest: DeleteClusterInstancesRequest,
     CreateClusterInstancesRequest: CreateClusterInstancesRequest,
+    CreateClusterAsGroupResponse: CreateClusterAsGroupResponse,
     CreateClusterRouteTableRequest: CreateClusterRouteTableRequest,
     DescribeClusterRouteTablesResponse: DescribeClusterRouteTablesResponse,
     DescribeClustersRequest: DescribeClustersRequest,
@@ -2483,6 +2638,7 @@ module.exports = {
     InstanceAdvancedSettings: InstanceAdvancedSettings,
     DescribeRouteTableConflictsRequest: DescribeRouteTableConflictsRequest,
     RunInstancesForNode: RunInstancesForNode,
+    RunSecurityServiceEnabled: RunSecurityServiceEnabled,
     ExistedInstancesPara: ExistedInstancesPara,
     DescribeExistedInstancesRequest: DescribeExistedInstancesRequest,
     ExistedInstance: ExistedInstance,
@@ -2497,9 +2653,9 @@ module.exports = {
     Cluster: Cluster,
     DescribeClustersResponse: DescribeClustersResponse,
     ClusterNetworkSettings: ClusterNetworkSettings,
-    DeleteClusterResponse: DeleteClusterResponse,
+    DeleteClusterRouteResponse: DeleteClusterRouteResponse,
     AddExistedInstancesResponse: AddExistedInstancesResponse,
     DeleteClusterRouteTableResponse: DeleteClusterRouteTableResponse,
-    DeleteClusterRouteResponse: DeleteClusterRouteResponse,
+    DeleteClusterResponse: DeleteClusterResponse,
 
 }

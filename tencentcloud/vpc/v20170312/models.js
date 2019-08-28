@@ -484,6 +484,8 @@ class DescribeNetworkInterfacesRequest extends  AbstractModel {
 <li>network-interface-name - String - （过滤条件）网卡实例名称。</li>
 <li>network-interface-description - String - （过滤条件）网卡实例描述。</li>
 <li>address-ip - String - （过滤条件）内网IPv4地址。</li>
+<li>tag-key - String -是否必填：否- （过滤条件）按照标签键进行过滤。使用请参考示例2</li>
+<li>tag:tag-key - String - 是否必填：否 - （过滤条件）按照标签键值对进行过滤。 tag-key使用具体的标签键进行替换。使用请参考示例3。</li>
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
@@ -999,6 +1001,12 @@ class ModifyAddressAttributeRequest extends  AbstractModel {
          */
         this.AddressName = null;
 
+        /**
+         * 设定EIP是否直通，"TRUE"表示直通，"FALSE"表示非直通。注意该参数仅对EIP直通功能可见的用户可以设定。
+         * @type {string || null}
+         */
+        this.EipDirectConnection = null;
+
     }
 
     /**
@@ -1010,6 +1018,7 @@ class ModifyAddressAttributeRequest extends  AbstractModel {
         }
         this.AddressId = 'AddressId' in params ? params.AddressId : null;
         this.AddressName = 'AddressName' in params ? params.AddressName : null;
+        this.EipDirectConnection = 'EipDirectConnection' in params ? params.EipDirectConnection : null;
 
     }
 }
@@ -1254,6 +1263,64 @@ class CreateVpcResponse extends  AbstractModel {
             this.Vpc = obj;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * VPC辅助CIDR信息。
+ * @class
+ */
+class AssistantCidr extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * `VPC`实例`ID`。形如：`vpc-6v2ht8q5`
+         * @type {string || null}
+         */
+        this.VpcId = null;
+
+        /**
+         * 辅助CIDR。形如：`172.16.0.0/16`
+         * @type {string || null}
+         */
+        this.CidrBlock = null;
+
+        /**
+         * 辅助CIDR类型（0：普通辅助CIDR，1：容器辅助CIDR），默认都是0。
+         * @type {number || null}
+         */
+        this.AssistantType = null;
+
+        /**
+         * 辅助CIDR拆分的子网。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<Subnet> || null}
+         */
+        this.SubnetSet = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.CidrBlock = 'CidrBlock' in params ? params.CidrBlock : null;
+        this.AssistantType = 'AssistantType' in params ? params.AssistantType : null;
+
+        if (params.SubnetSet) {
+            this.SubnetSet = new Array();
+            for (let z in params.SubnetSet) {
+                let obj = new Subnet();
+                obj.deserialize(params.SubnetSet[z]);
+                this.SubnetSet.push(obj);
+            }
+        }
 
     }
 }
@@ -3119,8 +3186,11 @@ class DescribeSecurityGroupsRequest extends  AbstractModel {
 
         /**
          * 过滤条件，参数不支持同时指定SecurityGroupIds和Filters。
+<li>security-group-id - String - （过滤条件）安全组ID。</li>
 <li>project-id - Integer - （过滤条件）项目id。</li>
 <li>security-group-name - String - （过滤条件）安全组名称。</li>
+<li>tag-key - String -是否必填：否- （过滤条件）按照标签键进行过滤。使用请参考示例2。</li>
+<li>tag:tag-key - String - 是否必填：否 - （过滤条件）按照标签键值对进行过滤。 tag-key使用具体的标签键进行替换。使用请参考示例3。</li>
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
@@ -4924,6 +4994,13 @@ class Vpc extends  AbstractModel {
          */
         this.TagSet = null;
 
+        /**
+         * 辅助CIDR
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<AssistantCidr> || null}
+         */
+        this.AssistantCidrSet = null;
+
     }
 
     /**
@@ -4951,6 +5028,15 @@ class Vpc extends  AbstractModel {
                 let obj = new Tag();
                 obj.deserialize(params.TagSet[z]);
                 this.TagSet.push(obj);
+            }
+        }
+
+        if (params.AssistantCidrSet) {
+            this.AssistantCidrSet = new Array();
+            for (let z in params.AssistantCidrSet) {
+                let obj = new AssistantCidr();
+                obj.deserialize(params.AssistantCidrSet[z]);
+                this.AssistantCidrSet.push(obj);
             }
         }
 
@@ -7428,7 +7514,7 @@ class DescribeAddressesRequest extends  AbstractModel {
 <li> address-id - String - 是否必填：否 - （过滤条件）按照 EIP 的唯一 ID 过滤。EIP 唯一 ID 形如：eip-11112222。</li>
 <li> address-name - String - 是否必填：否 - （过滤条件）按照 EIP 名称过滤。不支持模糊过滤。</li>
 <li> address-ip - String - 是否必填：否 - （过滤条件）按照 EIP 的 IP 地址过滤。</li>
-<li> address-status - String - 是否必填：否 - （过滤条件）按照 EIP 的状态过滤。取值范围：[详见EIP状态列表](https://cloud.tencent.com/document/api/213/9452#eip_state)。</li>
+<li> address-status - String - 是否必填：否 - （过滤条件）按照 EIP 的状态过滤。状态包含：'CREATING'，'BINDING'，'BIND'，'UNBINDING'，'UNBIND'，'OFFLINING'，'BIND_ENI'。</li>
 <li> instance-id - String - 是否必填：否 - （过滤条件）按照 EIP 绑定的实例 ID 过滤。实例 ID 形如：ins-11112222。</li>
 <li> private-ip-address - String - 是否必填：否 - （过滤条件）按照 EIP 绑定的内网 IP 过滤。</li>
 <li> network-interface-id - String - 是否必填：否 - （过滤条件）按照 EIP 绑定的弹性网卡 ID 过滤。弹性网卡 ID 形如：eni-11112222。</li>
@@ -11793,7 +11879,7 @@ class Address extends  AbstractModel {
         this.AddressName = null;
 
         /**
-         * `EIP`状态。
+         * `EIP`状态，包含'CREATING'(创建中),'BINDING'(绑定中),'BIND'(已绑定),'UNBINDING'(解绑中),'UNBIND'(已解绑),'OFFLINING'(释放中),'BIND_ENI'(绑定悬空弹性网卡)
          * @type {string || null}
          */
         this.AddressStatus = null;
@@ -16551,7 +16637,7 @@ class AssignPrivateIpAddressesRequest extends  AbstractModel {
         this.PrivateIpAddresses = null;
 
         /**
-         * 新申请的内网IP地址个数，内网IP地址个数总和不能超过配数。
+         * 新申请的内网IP地址个数，内网IP地址个数总和不能超过配额数，详见<a href="/document/product/576/18527">弹性网卡使用限制</a>。
          * @type {number || null}
          */
         this.SecondaryPrivateIpAddressCount = null;
@@ -16647,7 +16733,7 @@ class CreateVpcRequest extends  AbstractModel {
         this.VpcName = null;
 
         /**
-         * vpc的cidr，只能为10.0.0.0/16，172.16.0.0/12，192.168.0.0/16这三个内网网段内。
+         * vpc的cidr，只能为10.0.0.0/16，172.16.0.0/16，192.168.0.0/16这三个内网网段内。
          * @type {string || null}
          */
         this.CidrBlock = null;
@@ -16996,6 +17082,7 @@ module.exports = {
     AddBandwidthPackageResourcesRequest: AddBandwidthPackageResourcesRequest,
     AssignIpv6SubnetCidrBlockRequest: AssignIpv6SubnetCidrBlockRequest,
     CreateVpcResponse: CreateVpcResponse,
+    AssistantCidr: AssistantCidr,
     DescribeVpcPrivateIpAddressesRequest: DescribeVpcPrivateIpAddressesRequest,
     AddressTemplate: AddressTemplate,
     DescribeIp6TranslatorQuotaResponse: DescribeIp6TranslatorQuotaResponse,

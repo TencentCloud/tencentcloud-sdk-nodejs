@@ -60,6 +60,13 @@ class TextProcessResponse extends  AbstractModel {
         this.InputText = null;
 
         /**
+         * 机器人应答。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {ResponseMessage || null}
+         */
+        this.ResponseMessage = null;
+
+        /**
          * 透传字段，由用户自定义的WebService服务返回。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
@@ -67,11 +74,11 @@ class TextProcessResponse extends  AbstractModel {
         this.SessionAttributes = null;
 
         /**
-         * 机器人对话的应答文本。
+         * 结果类型 {0:未命中机器人; 1:任务型机器人; 2:问答型机器人; 3:闲聊型机器人}
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
-        this.ResponseText = null;
+        this.ResultType = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -101,9 +108,59 @@ class TextProcessResponse extends  AbstractModel {
             }
         }
         this.InputText = 'InputText' in params ? params.InputText : null;
+
+        if (params.ResponseMessage) {
+            let obj = new ResponseMessage();
+            obj.deserialize(params.ResponseMessage)
+            this.ResponseMessage = obj;
+        }
         this.SessionAttributes = 'SessionAttributes' in params ? params.SessionAttributes : null;
-        this.ResponseText = 'ResponseText' in params ? params.ResponseText : null;
+        this.ResultType = 'ResultType' in params ? params.ResultType : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Group是消息组的具体定义，当前包含ContentType、Url、Content三个字段。其中，具体的ContentType字段定义，参考互联网MIME类型标准。
+ * @class
+ */
+class Group extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 消息类型参考互联网MIME类型标准，当前仅支持"text/plain"。
+         * @type {string || null}
+         */
+        this.ContentType = null;
+
+        /**
+         * 返回内容以链接形式提供。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Url = null;
+
+        /**
+         * 普通文本。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Content = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ContentType = 'ContentType' in params ? params.ContentType : null;
+        this.Url = 'Url' in params ? params.Url : null;
+        this.Content = 'Content' in params ? params.Content : null;
 
     }
 }
@@ -160,16 +217,22 @@ class TextResetRequest extends  AbstractModel {
         this.BotId = null;
 
         /**
+         * 机器人版本，取值"dev"或"release"，{调试版本：dev；线上版本：release}。
+         * @type {string || null}
+         */
+        this.BotEnv = null;
+
+        /**
          * 终端标识，每个终端(或线程)对应一个，区分并发多用户。
          * @type {string || null}
          */
         this.TerminalId = null;
 
         /**
-         * 机器人版本，取值"dev"或"release"，{调试版本：dev；线上版本：release}。
+         * 平台类型，{小程序：MiniProgram；小微：XiaoWei；公众号：OfficialAccount}。
          * @type {string || null}
          */
-        this.BotEnv = null;
+        this.PlatformType = null;
 
     }
 
@@ -181,57 +244,9 @@ class TextResetRequest extends  AbstractModel {
             return;
         }
         this.BotId = 'BotId' in params ? params.BotId : null;
+        this.BotEnv = 'BotEnv' in params ? params.BotEnv : null;
         this.TerminalId = 'TerminalId' in params ? params.TerminalId : null;
-        this.BotEnv = 'BotEnv' in params ? params.BotEnv : null;
-
-    }
-}
-
-/**
- * Reset请求参数结构体
- * @class
- */
-class ResetRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 机器人标识
-         * @type {string || null}
-         */
-        this.BotId = null;
-
-        /**
-         * 子账户id，每个终端对应一个
-         * @type {string || null}
-         */
-        this.UserId = null;
-
-        /**
-         * 机器人版本号。BotVersion/BotEnv二选一：二者均填，仅BotVersion有效；二者均不填，默认BotEnv=dev
-         * @type {string || null}
-         */
-        this.BotVersion = null;
-
-        /**
-         * 机器人环境{dev:测试;release:线上}。BotVersion/BotEnv二选一：二者均填，仅BotVersion有效；二者均不填，默认BotEnv=dev
-         * @type {string || null}
-         */
-        this.BotEnv = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.BotId = 'BotId' in params ? params.BotId : null;
-        this.UserId = 'UserId' in params ? params.UserId : null;
-        this.BotVersion = 'BotVersion' in params ? params.BotVersion : null;
-        this.BotEnv = 'BotEnv' in params ? params.BotEnv : null;
+        this.PlatformType = 'PlatformType' in params ? params.PlatformType : null;
 
     }
 }
@@ -245,7 +260,7 @@ class TextResetResponse extends  AbstractModel {
         super();
 
         /**
-         * 当前会话状态，取值："START"/"COUTINUE"/"COMPLETE"。
+         * 当前会话状态{会话开始: START; 会话中: COUTINUE; 会话结束: COMPLETE}。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
@@ -280,6 +295,13 @@ class TextResetResponse extends  AbstractModel {
         this.InputText = null;
 
         /**
+         * 机器人应答。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {ResponseMessage || null}
+         */
+        this.ResponseMessage = null;
+
+        /**
          * 透传字段，由用户自定义的WebService服务返回。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
@@ -287,11 +309,11 @@ class TextResetResponse extends  AbstractModel {
         this.SessionAttributes = null;
 
         /**
-         * 机器人对话的应答文本。
+         * 结果类型 {未命中机器人:0; 任务型机器人:1; 问答型机器人:2; 闲聊型机器人:3}。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
-        this.ResponseText = null;
+        this.ResultType = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -321,88 +343,33 @@ class TextResetResponse extends  AbstractModel {
             }
         }
         this.InputText = 'InputText' in params ? params.InputText : null;
+
+        if (params.ResponseMessage) {
+            let obj = new ResponseMessage();
+            obj.deserialize(params.ResponseMessage)
+            this.ResponseMessage = obj;
+        }
         this.SessionAttributes = 'SessionAttributes' in params ? params.SessionAttributes : null;
-        this.ResponseText = 'ResponseText' in params ? params.ResponseText : null;
+        this.ResultType = 'ResultType' in params ? params.ResultType : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
 
 /**
- * Reset返回参数结构体
+ * 从TBP-RTS服务v1.3版本起，机器人以消息组列表的形式响应，消息组列表GroupList包含多组消息，用户根据需要对部分或全部消息组进行组合使用。
  * @class
  */
-class ResetResponse extends  AbstractModel {
+class ResponseMessage extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 当前会话状态。取值:"start"/"continue"/"complete"
+         * 消息组列表。
 注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
+         * @type {Array.<Group> || null}
          */
-        this.DialogStatus = null;
-
-        /**
-         * 匹配到的机器人名称
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.BotName = null;
-
-        /**
-         * 匹配到的意图名称
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.IntentName = null;
-
-        /**
-         * 机器人回答
-         * @type {string || null}
-         */
-        this.ResponseText = null;
-
-        /**
-         * 语义解析的槽位结果列表
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {Array.<SlotInfo> || null}
-         */
-        this.SlotInfoList = null;
-
-        /**
-         * 透传字段
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.SessionAttributes = null;
-
-        /**
-         * 用户说法。该说法是用户原生说法或ASR识别结果，未经过语义优化
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.Question = null;
-
-        /**
-         * tts合成pcm音频存储链接。仅当请求参数NeedTts=true时返回
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.WaveUrl = null;
-
-        /**
-         * tts合成的pcm音频。二进制数组经过base64编码(暂时不返回)
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.WaveData = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
+        this.GroupList = null;
 
     }
 
@@ -413,24 +380,15 @@ class ResetResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.DialogStatus = 'DialogStatus' in params ? params.DialogStatus : null;
-        this.BotName = 'BotName' in params ? params.BotName : null;
-        this.IntentName = 'IntentName' in params ? params.IntentName : null;
-        this.ResponseText = 'ResponseText' in params ? params.ResponseText : null;
 
-        if (params.SlotInfoList) {
-            this.SlotInfoList = new Array();
-            for (let z in params.SlotInfoList) {
-                let obj = new SlotInfo();
-                obj.deserialize(params.SlotInfoList[z]);
-                this.SlotInfoList.push(obj);
+        if (params.GroupList) {
+            this.GroupList = new Array();
+            for (let z in params.GroupList) {
+                let obj = new Group();
+                obj.deserialize(params.GroupList[z]);
+                this.GroupList.push(obj);
             }
         }
-        this.SessionAttributes = 'SessionAttributes' in params ? params.SessionAttributes : null;
-        this.Question = 'Question' in params ? params.Question : null;
-        this.WaveUrl = 'WaveUrl' in params ? params.WaveUrl : null;
-        this.WaveData = 'WaveData' in params ? params.WaveData : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -450,6 +408,12 @@ class TextProcessRequest extends  AbstractModel {
         this.BotId = null;
 
         /**
+         * 机器人版本，取值"dev"或"release"，{调试版本：dev；线上版本：release}。
+         * @type {string || null}
+         */
+        this.BotEnv = null;
+
+        /**
          * 终端标识，每个终端(或线程)对应一个，区分并发多用户。
          * @type {string || null}
          */
@@ -462,16 +426,16 @@ class TextProcessRequest extends  AbstractModel {
         this.InputText = null;
 
         /**
-         * 机器人版本，取值"dev"或"release"，{调试版本：dev；线上版本：release}。
-         * @type {string || null}
-         */
-        this.BotEnv = null;
-
-        /**
          * 透传字段，透传给用户自定义的WebService服务。
          * @type {string || null}
          */
         this.SessionAttributes = null;
+
+        /**
+         * 平台类型，{小程序：MiniProgram；小微：XiaoWei；公众号：OfficialAccount}。
+         * @type {string || null}
+         */
+        this.PlatformType = null;
 
     }
 
@@ -483,21 +447,22 @@ class TextProcessRequest extends  AbstractModel {
             return;
         }
         this.BotId = 'BotId' in params ? params.BotId : null;
+        this.BotEnv = 'BotEnv' in params ? params.BotEnv : null;
         this.TerminalId = 'TerminalId' in params ? params.TerminalId : null;
         this.InputText = 'InputText' in params ? params.InputText : null;
-        this.BotEnv = 'BotEnv' in params ? params.BotEnv : null;
         this.SessionAttributes = 'SessionAttributes' in params ? params.SessionAttributes : null;
+        this.PlatformType = 'PlatformType' in params ? params.PlatformType : null;
 
     }
 }
 
 module.exports = {
     TextProcessResponse: TextProcessResponse,
+    Group: Group,
     SlotInfo: SlotInfo,
     TextResetRequest: TextResetRequest,
-    ResetRequest: ResetRequest,
     TextResetResponse: TextResetResponse,
-    ResetResponse: ResetResponse,
+    ResponseMessage: ResponseMessage,
     TextProcessRequest: TextProcessRequest,
 
 }

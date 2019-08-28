@@ -43,6 +43,7 @@ const ModifyDirectConnectGatewayAttributeRequest = models.ModifyDirectConnectGat
 const AddBandwidthPackageResourcesRequest = models.AddBandwidthPackageResourcesRequest;
 const AssignIpv6SubnetCidrBlockRequest = models.AssignIpv6SubnetCidrBlockRequest;
 const CreateVpcResponse = models.CreateVpcResponse;
+const AssistantCidr = models.AssistantCidr;
 const DescribeVpcPrivateIpAddressesRequest = models.DescribeVpcPrivateIpAddressesRequest;
 const AddressTemplate = models.AddressTemplate;
 const DescribeIp6TranslatorQuotaResponse = models.DescribeIp6TranslatorQuotaResponse;
