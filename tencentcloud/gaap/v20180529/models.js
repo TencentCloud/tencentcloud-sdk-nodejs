@@ -3803,7 +3803,7 @@ class CreateCertificateRequest extends  AbstractModel {
         this.CertificateAlias = null;
 
         /**
-         * 秘钥内容。采用url编码。仅当证书类型为SSL证书时，需要填写该参数。格式为pem。
+         * 密钥内容。采用url编码。仅当证书类型为SSL证书时，需要填写该参数。格式为pem。
          * @type {string || null}
          */
         this.CertificateKey = null;

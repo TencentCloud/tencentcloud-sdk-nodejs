@@ -188,19 +188,19 @@ class BillResourceSummary extends  AbstractModel {
         super();
 
         /**
-         * 产品
+         * 产品名称：云产品大类，如云服务器CVM、云数据库MySQL
          * @type {string || null}
          */
         this.BusinessCodeName = null;
 
         /**
-         * 子产品
+         * 子产品：云产品子类，如云服务器CVM-标准型S1
          * @type {string || null}
          */
         this.ProductCodeName = null;
 
         /**
-         * 计费模式
+         * 计费模式：包年包月和按量计费
          * @type {string || null}
          */
         this.PayModeName = null;
@@ -236,7 +236,7 @@ class BillResourceSummary extends  AbstractModel {
         this.ResourceName = null;
 
         /**
-         * 交易类型
+         * 交易类型：包年包月新购/续费/升降配/退款、按量计费扣费、调账补偿/扣费等类型
          * @type {string || null}
          */
         this.ActionTypeName = null;
@@ -844,7 +844,7 @@ class BusinessSummaryOverviewItem extends  AbstractModel {
         this.BusinessCode = null;
 
         /**
-         * 产品名称
+         * 产品名称：云产品大类，如云服务器CVM、云数据库MySQL
          * @type {string || null}
          */
         this.BusinessCodeName = null;
@@ -887,19 +887,19 @@ class BillDetailComponent extends  AbstractModel {
         super();
 
         /**
-         * 组件名称
+         * 组件类型:资源组件类型的名称，如内存、硬盘等
          * @type {string || null}
          */
         this.ComponentCodeName = null;
 
         /**
-         * 组件类型名称
+         * 组件名称:资源组件的名称，如云数据库MySQL-内存等
          * @type {string || null}
          */
         this.ItemCodeName = null;
 
         /**
-         * 组件刊例价
+         * 组件刊例价:资源组件的原始价格，保持原始粒度
          * @type {string || null}
          */
         this.SinglePrice = null;
@@ -1155,7 +1155,7 @@ class ActionSummaryOverviewItem extends  AbstractModel {
         super();
 
         /**
-         * 交易类型
+         * 交易类型：包年包月新购/续费/升降配/退款、按量计费扣费、调账补偿/扣费等类型
          * @type {string || null}
          */
         this.ActionType = null;
@@ -1462,37 +1462,37 @@ class BillDetail extends  AbstractModel {
         super();
 
         /**
-         * 产品名称
+         * 产品名称：云产品大类，如云服务器CVM、云数据库MySQL
          * @type {string || null}
          */
         this.BusinessCodeName = null;
 
         /**
-         * 子产品名称
+         * 子产品名称：云产品子类，如云服务器CVM-标准型S1
          * @type {string || null}
          */
         this.ProductCodeName = null;
 
         /**
-         * 计费模式
+         * 计费模式：包年包月和按量计费
          * @type {string || null}
          */
         this.PayModeName = null;
 
         /**
-         * 项目
+         * 项目:资源所属项目
          * @type {string || null}
          */
         this.ProjectName = null;
 
         /**
-         * 区域
+         * 区域：资源所属地域，如华南地区（广州）
          * @type {string || null}
          */
         this.RegionName = null;
 
         /**
-         * 可用区
+         * 可用区：资源所属可用区，如广州三区
          * @type {string || null}
          */
         this.ZoneName = null;
@@ -2025,7 +2025,7 @@ class PayModeSummaryOverviewItem extends  AbstractModel {
         this.RealTotalCostRatio = null;
 
         /**
-         * 按交易类型汇总消费详情
+         * 按交易类型：包年包月新购/续费/升降配/退款、按量计费扣费、调账补偿/扣费等类型汇总消费详情
          * @type {Array.<ActionSummaryOverviewItem> || null}
          */
         this.Detail = null;

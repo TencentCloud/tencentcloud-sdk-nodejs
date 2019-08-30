@@ -28,6 +28,7 @@ const TrainTicketOCRRequest = models.TrainTicketOCRRequest;
 const GeneralAccurateOCRResponse = models.GeneralAccurateOCRResponse;
 const TextTable = models.TextTable;
 const EnglishOCRResponse = models.EnglishOCRResponse;
+const MLIDPassportOCRRequest = models.MLIDPassportOCRRequest;
 const GeneralAccurateOCRRequest = models.GeneralAccurateOCRRequest;
 const PermitOCRResponse = models.PermitOCRResponse;
 const FlightInvoiceOCRResponse = models.FlightInvoiceOCRResponse;
@@ -45,10 +46,13 @@ const QuotaInvoiceOCRResponse = models.QuotaInvoiceOCRResponse;
 const IDCardOCRResponse = models.IDCardOCRResponse;
 const TextDetectionEn = models.TextDetectionEn;
 const ArithmeticOCRRequest = models.ArithmeticOCRRequest;
+const MLIDCardOCRResponse = models.MLIDCardOCRResponse;
 const TextVehicleFront = models.TextVehicleFront;
 const TaxiInvoiceOCRResponse = models.TaxiInvoiceOCRResponse;
+const MLIDPassportOCRResponse = models.MLIDPassportOCRResponse;
 const GeneralHandwritingOCRResponse = models.GeneralHandwritingOCRResponse;
 const PermitOCRRequest = models.PermitOCRRequest;
+const MLIDCardOCRRequest = models.MLIDCardOCRRequest;
 const TableOCRResponse = models.TableOCRResponse;
 const Coord = models.Coord;
 const TaxiInvoiceOCRRequest = models.TaxiInvoiceOCRRequest;
@@ -111,6 +115,19 @@ class OcrClient extends AbstractClient {
     }
 
     /**
+     * 本接口支持马来西亚身份证识别，识别字段包括身份证号、姓名、性别、地址；具备身份证人像照片的裁剪功能和翻拍、复印件告警功能。
+本接口暂未完全对外开放，如需咨询，请[联系商务](https://cloud.tencent.com/about/connect)
+
+     * @param {MLIDCardOCRRequest} req
+     * @param {function(string, MLIDCardOCRResponse):void} cb
+     * @public
+     */
+    MLIDCardOCR(req, cb) {
+        let resp = new MLIDCardOCRResponse();
+        this.request("MLIDCardOCR", req, resp, cb);
+    }
+
+    /**
      * 本接口支持图像整体文字的检测和识别，返回文字框位置与文字内容。相比通用印刷体识别接口，准确率和召回率更高。
      * @param {GeneralAccurateOCRRequest} req
      * @param {function(string, GeneralAccurateOCRResponse):void} cb
@@ -130,6 +147,18 @@ class OcrClient extends AbstractClient {
     VinOCR(req, cb) {
         let resp = new VinOCRResponse();
         this.request("VinOCR", req, resp, cb);
+    }
+
+    /**
+     * 本接口支持马来西亚身护照识别，识别字段包括护照ID、姓名、出生日期、性别、有效期、发行国、国籍；具备护照人像照片的裁剪功能和翻拍、复印件告警功能。
+本接口暂未完全对外开放，如需咨询，请[联系商务](https://cloud.tencent.com/about/connect)
+     * @param {MLIDPassportOCRRequest} req
+     * @param {function(string, MLIDPassportOCRResponse):void} cb
+     * @public
+     */
+    MLIDPassportOCR(req, cb) {
+        let resp = new MLIDPassportOCRResponse();
+        this.request("MLIDPassportOCR", req, resp, cb);
     }
 
     /**

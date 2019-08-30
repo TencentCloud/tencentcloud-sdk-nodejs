@@ -4503,7 +4503,7 @@ class MediaMiniProgramReviewInfoItem extends  AbstractModel {
         /**
          * 小程序审核元素。
 注意：此字段可能返回 null，表示取不到有效值。
-         * @type {MediaMiniProgramReviewElem || null}
+         * @type {Array.<MediaMiniProgramReviewElem> || null}
          */
         this.ReviewSummery = null;
 
@@ -4527,9 +4527,12 @@ class MediaMiniProgramReviewInfoItem extends  AbstractModel {
         this.ReviewResult = 'ReviewResult' in params ? params.ReviewResult : null;
 
         if (params.ReviewSummery) {
-            let obj = new MediaMiniProgramReviewElem();
-            obj.deserialize(params.ReviewSummery)
-            this.ReviewSummery = obj;
+            this.ReviewSummery = new Array();
+            for (let z in params.ReviewSummery) {
+                let obj = new MediaMiniProgramReviewElem();
+                obj.deserialize(params.ReviewSummery[z]);
+                this.ReviewSummery.push(obj);
+            }
         }
 
     }
@@ -5929,7 +5932,7 @@ class MediaMiniProgramReviewInfo extends  AbstractModel {
          * 审核信息列表。
          * @type {Array.<MediaMiniProgramReviewInfoItem> || null}
          */
-        this.MiniProgramReivewList = null;
+        this.MiniProgramReviewList = null;
 
     }
 
@@ -5941,12 +5944,12 @@ class MediaMiniProgramReviewInfo extends  AbstractModel {
             return;
         }
 
-        if (params.MiniProgramReivewList) {
-            this.MiniProgramReivewList = new Array();
-            for (let z in params.MiniProgramReivewList) {
+        if (params.MiniProgramReviewList) {
+            this.MiniProgramReviewList = new Array();
+            for (let z in params.MiniProgramReviewList) {
                 let obj = new MediaMiniProgramReviewInfoItem();
-                obj.deserialize(params.MiniProgramReivewList[z]);
-                this.MiniProgramReivewList.push(obj);
+                obj.deserialize(params.MiniProgramReviewList[z]);
+                this.MiniProgramReviewList.push(obj);
             }
         }
 
