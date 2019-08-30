@@ -54,15 +54,16 @@ const DetachInstancesResponse = models.DetachInstancesResponse;
 const CreateLaunchConfigurationRequest = models.CreateLaunchConfigurationRequest;
 const AutoScalingGroup = models.AutoScalingGroup;
 const AttachInstancesResponse = models.AttachInstancesResponse;
-const DeleteLifecycleHookResponse = models.DeleteLifecycleHookResponse;
-const PreviewPaiDomainNameResponse = models.PreviewPaiDomainNameResponse;
+const DescribeAutoScalingGroupLastActivitiesResponse = models.DescribeAutoScalingGroupLastActivitiesResponse;
 const DescribeAccountLimitsRequest = models.DescribeAccountLimitsRequest;
 const UpgradeLifecycleHookRequest = models.UpgradeLifecycleHookRequest;
 const ScalingPolicy = models.ScalingPolicy;
+const DescribeAutoScalingGroupLastActivitiesRequest = models.DescribeAutoScalingGroupLastActivitiesRequest;
 const ModifyLoadBalancersResponse = models.ModifyLoadBalancersResponse;
 const DescribePaiInstancesRequest = models.DescribePaiInstancesRequest;
 const CreateNotificationConfigurationRequest = models.CreateNotificationConfigurationRequest;
 const DescribeScheduledActionsResponse = models.DescribeScheduledActionsResponse;
+const ModifyNotificationConfigurationRequest = models.ModifyNotificationConfigurationRequest;
 const DeleteLifecycleHookRequest = models.DeleteLifecycleHookRequest;
 const ModifyLoadBalancersRequest = models.ModifyLoadBalancersRequest;
 const DeleteLaunchConfigurationRequest = models.DeleteLaunchConfigurationRequest;
@@ -75,7 +76,7 @@ const CreateAutoScalingGroupRequest = models.CreateAutoScalingGroupRequest;
 const DeleteScheduledActionResponse = models.DeleteScheduledActionResponse;
 const UpgradeLaunchConfigurationRequest = models.UpgradeLaunchConfigurationRequest;
 const DescribeAutoScalingActivitiesResponse = models.DescribeAutoScalingActivitiesResponse;
-const ModifyNotificationConfigurationRequest = models.ModifyNotificationConfigurationRequest;
+const DescribeNotificationConfigurationsResponse = models.DescribeNotificationConfigurationsResponse;
 const DataDisk = models.DataDisk;
 const PreviewPaiDomainNameRequest = models.PreviewPaiDomainNameRequest;
 const DeleteScalingPolicyRequest = models.DeleteScalingPolicyRequest;
@@ -113,6 +114,7 @@ const MetricAlarm = models.MetricAlarm;
 const DescribeNotificationConfigurationsRequest = models.DescribeNotificationConfigurationsRequest;
 const LifecycleHook = models.LifecycleHook;
 const ForwardLoadBalancer = models.ForwardLoadBalancer;
+const PreviewPaiDomainNameResponse = models.PreviewPaiDomainNameResponse;
 const DeleteAutoScalingGroupRequest = models.DeleteAutoScalingGroupRequest;
 const RemoveInstancesRequest = models.RemoveInstancesRequest;
 const AttachInstancesRequest = models.AttachInstancesRequest;
@@ -120,7 +122,7 @@ const DescribeScalingPoliciesResponse = models.DescribeScalingPoliciesResponse;
 const Activity = models.Activity;
 const ModifyDesiredCapacityResponse = models.ModifyDesiredCapacityResponse;
 const RunMonitorServiceEnabled = models.RunMonitorServiceEnabled;
-const DescribeNotificationConfigurationsResponse = models.DescribeNotificationConfigurationsResponse;
+const DeleteLifecycleHookResponse = models.DeleteLifecycleHookResponse;
 const ActivtyRelatedInstance = models.ActivtyRelatedInstance;
 const InternetAccessible = models.InternetAccessible;
 const EnableAutoScalingGroupResponse = models.EnableAutoScalingGroupResponse;
@@ -547,6 +549,17 @@ class AsClient extends AbstractClient {
     DeleteLifecycleHook(req, cb) {
         let resp = new DeleteLifecycleHookResponse();
         this.request("DeleteLifecycleHook", req, resp, cb);
+    }
+
+    /**
+     * 本接口（DescribeAutoScalingGroupLastActivities）用于查询伸缩组的最新一次伸缩活动记录。
+     * @param {DescribeAutoScalingGroupLastActivitiesRequest} req
+     * @param {function(string, DescribeAutoScalingGroupLastActivitiesResponse):void} cb
+     * @public
+     */
+    DescribeAutoScalingGroupLastActivities(req, cb) {
+        let resp = new DescribeAutoScalingGroupLastActivitiesResponse();
+        this.request("DescribeAutoScalingGroupLastActivities", req, resp, cb);
     }
 
     /**

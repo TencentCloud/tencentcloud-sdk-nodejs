@@ -33,7 +33,7 @@ class TrtcClient extends AbstractClient {
     }
     
     /**
-     * 接口说明：将用户从房间踢出。
+     * 接口说明：将用户从房间踢出。支持 TRTC SDK 6.6及以上版本，包括Android、iOS、Windows 和 macOS。
      * @param {KickOutUserRequest} req
      * @param {function(string, KickOutUserResponse):void} cb
      * @public
@@ -44,7 +44,7 @@ class TrtcClient extends AbstractClient {
     }
 
     /**
-     * 接口说明：把房间所有用户从房间踢出，解散房间。
+     * 接口说明：把房间所有用户从房间踢出，解散房间。支持 TRTC SDK 6.6及以上版本，包括Android、iOS、Windows 和 macOS。
      * @param {DissolveRoomRequest} req
      * @param {function(string, DissolveRoomResponse):void} cb
      * @public

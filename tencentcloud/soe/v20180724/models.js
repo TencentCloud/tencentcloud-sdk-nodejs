@@ -138,7 +138,7 @@ class InitOralProcessRequest extends  AbstractModel {
         this.IsLongLifeSession = null;
 
         /**
-         * 音频存储模式，0：不存储，1：存储到公共对象存储，输出结果为该会话最后一个分片TransmitOralProcess 返回结果 AudioUrl 字段。
+         * 音频存储模式，0：不存储，1：存储到公共对象存储，输出结果为该会话最后一个分片TransmitOralProcess 返回结果 AudioUrl 字段，2：永久存储音频，需要提工单申请，会产生一定存储费用，3：自定义存储，将音频存储到自定义的腾讯云[对象存储](https://cloud.tencent.com/product/cos)中，需要提工单登记存储信息。
          * @type {number || null}
          */
         this.StorageMode = null;
@@ -162,7 +162,7 @@ class InitOralProcessRequest extends  AbstractModel {
         this.IsAsync = null;
 
         /**
-         * 输入文本模式，0: 普通文本，1：[音素结构](https://cloud.tencent.com/document/product/884/33698)文本。
+         * 输入文本模式，0: 普通文本，1：[音素结构](https://cloud.tencent.com/document/product/884/33698)文本。2：音素注册模式（提工单注册需要使用音素的单词）。
          * @type {number || null}
          */
         this.TextMode = null;
@@ -661,8 +661,7 @@ class PhoneInfo extends  AbstractModel {
         this.Stress = null;
 
         /**
-         * 参考音素，在单词诊断模式下，代表标准
-音素
+         * 参考音素，在单词诊断模式下，代表标准音素
          * @type {string || null}
          */
         this.ReferencePhone = null;
@@ -926,7 +925,7 @@ class TransmitOralProcessWithInitRequest extends  AbstractModel {
         this.SoeAppId = null;
 
         /**
-         * 音频存储模式，0：不存储，1：存储到公共对象存储，输出结果为该会话最后一个分片TransmitOralProcess 返回结果 AudioUrl 字段。
+         * 音频存储模式，0：不存储，1：存储到公共对象存储，输出结果为该会话最后一个分片TransmitOralProcess 返回结果 AudioUrl 字段，2：永久存储音频，需要提工单申请，会产生一定存储费用，3：自定义存储，将音频存储到自定义的腾讯云[对象存储](https://cloud.tencent.com/product/cos)中，需要提工单登记存储信息。
          * @type {number || null}
          */
         this.StorageMode = null;
@@ -956,7 +955,7 @@ class TransmitOralProcessWithInitRequest extends  AbstractModel {
         this.IsQuery = null;
 
         /**
-         * 输入文本模式，0: 普通文本，1：[音素结构](https://cloud.tencent.com/document/product/884/33698)文本。
+         * 输入文本模式，0: 普通文本，1：[音素结构](https://cloud.tencent.com/document/product/884/33698)文本。2：音素注册模式（提工单注册需要使用音素的单词）。
          * @type {number || null}
          */
         this.TextMode = null;

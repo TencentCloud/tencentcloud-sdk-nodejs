@@ -1142,7 +1142,7 @@ class GetPersonBaseInfoResponse extends  AbstractModel {
         this.Gender = null;
 
         /**
-         * 包含的人脸图片列表
+         * 包含的人脸 ID 列表
          * @type {Array.<string> || null}
          */
         this.FaceIds = null;

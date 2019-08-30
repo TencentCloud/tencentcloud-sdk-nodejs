@@ -1767,10 +1767,9 @@ class CreateNamespaceResponse extends  AbstractModel {
         super();
 
         /**
-         * 创建命名空间是否成功。
-true：创建成功。
-false：创建失败。
-         * @type {boolean || null}
+         * 成功时为命名空间ID，失败为null
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
          */
         this.Result = null;
 
@@ -2005,6 +2004,41 @@ class SimpleApplication extends  AbstractModel {
          */
         this.MicroserviceType = null;
 
+        /**
+         * ApplicationDesc
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ApplicationDesc = null;
+
+        /**
+         * ProgLang
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ProgLang = null;
+
+        /**
+         * ApplicationResourceType
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ApplicationResourceType = null;
+
+        /**
+         * CreateTime
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * UpdateTime
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.UpdateTime = null;
+
     }
 
     /**
@@ -2018,6 +2052,11 @@ class SimpleApplication extends  AbstractModel {
         this.ApplicationName = 'ApplicationName' in params ? params.ApplicationName : null;
         this.ApplicationType = 'ApplicationType' in params ? params.ApplicationType : null;
         this.MicroserviceType = 'MicroserviceType' in params ? params.MicroserviceType : null;
+        this.ApplicationDesc = 'ApplicationDesc' in params ? params.ApplicationDesc : null;
+        this.ProgLang = 'ProgLang' in params ? params.ProgLang : null;
+        this.ApplicationResourceType = 'ApplicationResourceType' in params ? params.ApplicationResourceType : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
 
     }
 }
@@ -2829,6 +2868,12 @@ class DescribeSimpleApplicationsRequest extends  AbstractModel {
          */
         this.MicroserviceType = null;
 
+        /**
+         * 资源类型数组
+         * @type {Array.<string> || null}
+         */
+        this.ApplicationResourceTypeList = null;
+
     }
 
     /**
@@ -2843,6 +2888,7 @@ class DescribeSimpleApplicationsRequest extends  AbstractModel {
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.MicroserviceType = 'MicroserviceType' in params ? params.MicroserviceType : null;
+        this.ApplicationResourceTypeList = 'ApplicationResourceTypeList' in params ? params.ApplicationResourceTypeList : null;
 
     }
 }
@@ -2885,6 +2931,12 @@ class DescribeSimpleNamespacesRequest extends  AbstractModel {
          */
         this.NamespaceId = null;
 
+        /**
+         * 查询资源类型列表
+         * @type {Array.<string> || null}
+         */
+        this.NamespaceResourceTypeList = null;
+
     }
 
     /**
@@ -2899,6 +2951,7 @@ class DescribeSimpleNamespacesRequest extends  AbstractModel {
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.NamespaceId = 'NamespaceId' in params ? params.NamespaceId : null;
+        this.NamespaceResourceTypeList = 'NamespaceResourceTypeList' in params ? params.NamespaceResourceTypeList : null;
 
     }
 }
@@ -4184,6 +4237,12 @@ class CreateNamespaceRequest extends  AbstractModel {
          */
         this.NamespaceDesc = null;
 
+        /**
+         * 命名空间资源类型(默认值为DEF)
+         * @type {string || null}
+         */
+        this.NamespaceResourceType = null;
+
     }
 
     /**
@@ -4196,6 +4255,7 @@ class CreateNamespaceRequest extends  AbstractModel {
         this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
         this.NamespaceName = 'NamespaceName' in params ? params.NamespaceName : null;
         this.NamespaceDesc = 'NamespaceDesc' in params ? params.NamespaceDesc : null;
+        this.NamespaceResourceType = 'NamespaceResourceType' in params ? params.NamespaceResourceType : null;
 
     }
 }
@@ -5350,6 +5410,13 @@ class ApplicationForPage extends  AbstractModel {
          */
         this.UpdateTime = null;
 
+        /**
+         * 应用资源类型
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ApplicationResourceType = null;
+
     }
 
     /**
@@ -5367,6 +5434,7 @@ class ApplicationForPage extends  AbstractModel {
         this.ProgLang = 'ProgLang' in params ? params.ProgLang : null;
         this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
         this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.ApplicationResourceType = 'ApplicationResourceType' in params ? params.ApplicationResourceType : null;
 
     }
 }
@@ -5762,6 +5830,12 @@ class DescribeGroupsRequest extends  AbstractModel {
          */
         this.ClusterId = null;
 
+        /**
+         * 部署组资源类型列表
+         * @type {Array.<string> || null}
+         */
+        this.GroupResourceTypeList = null;
+
     }
 
     /**
@@ -5779,6 +5853,7 @@ class DescribeGroupsRequest extends  AbstractModel {
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.NamespaceId = 'NamespaceId' in params ? params.NamespaceId : null;
         this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.GroupResourceTypeList = 'GroupResourceTypeList' in params ? params.GroupResourceTypeList : null;
 
     }
 }
@@ -6019,6 +6094,12 @@ class DescribeApplicationsRequest extends  AbstractModel {
          */
         this.MicroserviceType = null;
 
+        /**
+         * 应用资源类型数组
+         * @type {Array.<string> || null}
+         */
+        this.ApplicationResourceTypeList = null;
+
     }
 
     /**
@@ -6035,6 +6116,7 @@ class DescribeApplicationsRequest extends  AbstractModel {
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.ApplicationType = 'ApplicationType' in params ? params.ApplicationType : null;
         this.MicroserviceType = 'MicroserviceType' in params ? params.MicroserviceType : null;
+        this.ApplicationResourceTypeList = 'ApplicationResourceTypeList' in params ? params.ApplicationResourceTypeList : null;
 
     }
 }
@@ -6114,6 +6196,12 @@ class CreateApplicationRequest extends  AbstractModel {
          */
         this.MicroserviceType = null;
 
+        /**
+         * 应有资源类型
+         * @type {string || null}
+         */
+        this.ApplicationResourceType = null;
+
     }
 
     /**
@@ -6128,6 +6216,7 @@ class CreateApplicationRequest extends  AbstractModel {
         this.ApplicationDesc = 'ApplicationDesc' in params ? params.ApplicationDesc : null;
         this.ApplicationLogConfig = 'ApplicationLogConfig' in params ? params.ApplicationLogConfig : null;
         this.MicroserviceType = 'MicroserviceType' in params ? params.MicroserviceType : null;
+        this.ApplicationResourceType = 'ApplicationResourceType' in params ? params.ApplicationResourceType : null;
 
     }
 }

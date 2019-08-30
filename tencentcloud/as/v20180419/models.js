@@ -2044,12 +2044,18 @@ class AttachInstancesResponse extends  AbstractModel {
 }
 
 /**
- * DeleteLifecycleHook返回参数结构体
+ * DescribeAutoScalingGroupLastActivities返回参数结构体
  * @class
  */
-class DeleteLifecycleHookResponse extends  AbstractModel {
+class DescribeAutoScalingGroupLastActivitiesResponse extends  AbstractModel {
     constructor(){
         super();
+
+        /**
+         * 符合条件的伸缩活动信息集合。说明：伸缩组伸缩活动不存在的则不返回，如传50个伸缩组ID，返回45条数据，说明其中有5个伸缩组伸缩活动不存在。
+         * @type {Array.<Activity> || null}
+         */
+        this.ActivitySet = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2066,41 +2072,15 @@ class DeleteLifecycleHookResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
-    }
-}
-
-/**
- * PreviewPaiDomainName返回参数结构体
- * @class
- */
-class PreviewPaiDomainNameResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 可用的PAI域名
-         * @type {string || null}
-         */
-        this.DomainName = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
+        if (params.ActivitySet) {
+            this.ActivitySet = new Array();
+            for (let z in params.ActivitySet) {
+                let obj = new Activity();
+                obj.deserialize(params.ActivitySet[z]);
+                this.ActivitySet.push(obj);
+            }
         }
-        this.DomainName = 'DomainName' in params ? params.DomainName : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -2280,6 +2260,34 @@ class ScalingPolicy extends  AbstractModel {
             this.MetricAlarm = obj;
         }
         this.NotificationUserGroupIds = 'NotificationUserGroupIds' in params ? params.NotificationUserGroupIds : null;
+
+    }
+}
+
+/**
+ * DescribeAutoScalingGroupLastActivities请求参数结构体
+ * @class
+ */
+class DescribeAutoScalingGroupLastActivitiesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 伸缩组ID列表
+         * @type {Array.<string> || null}
+         */
+        this.AutoScalingGroupIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AutoScalingGroupIds = 'AutoScalingGroupIds' in params ? params.AutoScalingGroupIds : null;
 
     }
 }
@@ -2470,6 +2478,54 @@ class DescribeScheduledActionsResponse extends  AbstractModel {
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifyNotificationConfiguration请求参数结构体
+ * @class
+ */
+class ModifyNotificationConfigurationRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 待修改的通知ID。
+         * @type {string || null}
+         */
+        this.AutoScalingNotificationId = null;
+
+        /**
+         * 通知类型，即为需要订阅的通知类型集合，取值范围如下：
+<li>SCALE_OUT_SUCCESSFUL：扩容成功</li>
+<li>SCALE_OUT_FAILED：扩容失败</li>
+<li>SCALE_IN_SUCCESSFUL：缩容成功</li>
+<li>SCALE_IN_FAILED：缩容失败</li>
+<li>REPLACE_UNHEALTHY_INSTANCE_SUCCESSFUL：替换不健康子机成功</li>
+<li>REPLACE_UNHEALTHY_INSTANCE_FAILED：替换不健康子机失败</li>
+         * @type {Array.<string> || null}
+         */
+        this.NotificationTypes = null;
+
+        /**
+         * 通知组ID，即为用户组ID集合，用户组ID可以通过[DescribeUserGroup](https://cloud.tencent.com/document/api/378/4404)查询。
+         * @type {Array.<string> || null}
+         */
+        this.NotificationUserGroupIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AutoScalingNotificationId = 'AutoScalingNotificationId' in params ? params.AutoScalingNotificationId : null;
+        this.NotificationTypes = 'NotificationTypes' in params ? params.NotificationTypes : null;
+        this.NotificationUserGroupIds = 'NotificationUserGroupIds' in params ? params.NotificationUserGroupIds : null;
 
     }
 }
@@ -3233,36 +3289,30 @@ class DescribeAutoScalingActivitiesResponse extends  AbstractModel {
 }
 
 /**
- * ModifyNotificationConfiguration请求参数结构体
+ * DescribeNotificationConfigurations返回参数结构体
  * @class
  */
-class ModifyNotificationConfigurationRequest extends  AbstractModel {
+class DescribeNotificationConfigurationsResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 待修改的通知ID。
+         * 符合条件的通知数量。
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 弹性伸缩事件通知详细信息列表。
+         * @type {Array.<AutoScalingNotification> || null}
+         */
+        this.AutoScalingNotificationSet = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.AutoScalingNotificationId = null;
-
-        /**
-         * 通知类型，即为需要订阅的通知类型集合，取值范围如下：
-<li>SCALE_OUT_SUCCESSFUL：扩容成功</li>
-<li>SCALE_OUT_FAILED：扩容失败</li>
-<li>SCALE_IN_SUCCESSFUL：缩容成功</li>
-<li>SCALE_IN_FAILED：缩容失败</li>
-<li>REPLACE_UNHEALTHY_INSTANCE_SUCCESSFUL：替换不健康子机成功</li>
-<li>REPLACE_UNHEALTHY_INSTANCE_FAILED：替换不健康子机失败</li>
-         * @type {Array.<string> || null}
-         */
-        this.NotificationTypes = null;
-
-        /**
-         * 通知组ID，即为用户组ID集合，用户组ID可以通过[DescribeUserGroup](https://cloud.tencent.com/document/api/378/4404)查询。
-         * @type {Array.<string> || null}
-         */
-        this.NotificationUserGroupIds = null;
+        this.RequestId = null;
 
     }
 
@@ -3273,9 +3323,17 @@ class ModifyNotificationConfigurationRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.AutoScalingNotificationId = 'AutoScalingNotificationId' in params ? params.AutoScalingNotificationId : null;
-        this.NotificationTypes = 'NotificationTypes' in params ? params.NotificationTypes : null;
-        this.NotificationUserGroupIds = 'NotificationUserGroupIds' in params ? params.NotificationUserGroupIds : null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.AutoScalingNotificationSet) {
+            this.AutoScalingNotificationSet = new Array();
+            for (let z in params.AutoScalingNotificationSet) {
+                let obj = new AutoScalingNotification();
+                obj.deserialize(params.AutoScalingNotificationSet[z]);
+                this.AutoScalingNotificationSet.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -5246,7 +5304,7 @@ class ForwardLoadBalancer extends  AbstractModel {
         this.TargetAttributes = null;
 
         /**
-         * 转发规则ID
+         * 转发规则ID，注意：针对七层监听器此参数必填
          * @type {string || null}
          */
         this.LocationId = null;
@@ -5272,6 +5330,41 @@ class ForwardLoadBalancer extends  AbstractModel {
             }
         }
         this.LocationId = 'LocationId' in params ? params.LocationId : null;
+
+    }
+}
+
+/**
+ * PreviewPaiDomainName返回参数结构体
+ * @class
+ */
+class PreviewPaiDomainNameResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 可用的PAI域名
+         * @type {string || null}
+         */
+        this.DomainName = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DomainName = 'DomainName' in params ? params.DomainName : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -5602,24 +5695,12 @@ class RunMonitorServiceEnabled extends  AbstractModel {
 }
 
 /**
- * DescribeNotificationConfigurations返回参数结构体
+ * DeleteLifecycleHook返回参数结构体
  * @class
  */
-class DescribeNotificationConfigurationsResponse extends  AbstractModel {
+class DeleteLifecycleHookResponse extends  AbstractModel {
     constructor(){
         super();
-
-        /**
-         * 符合条件的通知数量。
-         * @type {number || null}
-         */
-        this.TotalCount = null;
-
-        /**
-         * 弹性伸缩事件通知详细信息列表。
-         * @type {Array.<AutoScalingNotification> || null}
-         */
-        this.AutoScalingNotificationSet = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -5635,16 +5716,6 @@ class DescribeNotificationConfigurationsResponse extends  AbstractModel {
     deserialize(params) {
         if (!params) {
             return;
-        }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
-
-        if (params.AutoScalingNotificationSet) {
-            this.AutoScalingNotificationSet = new Array();
-            for (let z in params.AutoScalingNotificationSet) {
-                let obj = new AutoScalingNotification();
-                obj.deserialize(params.AutoScalingNotificationSet[z]);
-                this.AutoScalingNotificationSet.push(obj);
-            }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -5950,15 +6021,16 @@ module.exports = {
     CreateLaunchConfigurationRequest: CreateLaunchConfigurationRequest,
     AutoScalingGroup: AutoScalingGroup,
     AttachInstancesResponse: AttachInstancesResponse,
-    DeleteLifecycleHookResponse: DeleteLifecycleHookResponse,
-    PreviewPaiDomainNameResponse: PreviewPaiDomainNameResponse,
+    DescribeAutoScalingGroupLastActivitiesResponse: DescribeAutoScalingGroupLastActivitiesResponse,
     DescribeAccountLimitsRequest: DescribeAccountLimitsRequest,
     UpgradeLifecycleHookRequest: UpgradeLifecycleHookRequest,
     ScalingPolicy: ScalingPolicy,
+    DescribeAutoScalingGroupLastActivitiesRequest: DescribeAutoScalingGroupLastActivitiesRequest,
     ModifyLoadBalancersResponse: ModifyLoadBalancersResponse,
     DescribePaiInstancesRequest: DescribePaiInstancesRequest,
     CreateNotificationConfigurationRequest: CreateNotificationConfigurationRequest,
     DescribeScheduledActionsResponse: DescribeScheduledActionsResponse,
+    ModifyNotificationConfigurationRequest: ModifyNotificationConfigurationRequest,
     DeleteLifecycleHookRequest: DeleteLifecycleHookRequest,
     ModifyLoadBalancersRequest: ModifyLoadBalancersRequest,
     DeleteLaunchConfigurationRequest: DeleteLaunchConfigurationRequest,
@@ -5971,7 +6043,7 @@ module.exports = {
     DeleteScheduledActionResponse: DeleteScheduledActionResponse,
     UpgradeLaunchConfigurationRequest: UpgradeLaunchConfigurationRequest,
     DescribeAutoScalingActivitiesResponse: DescribeAutoScalingActivitiesResponse,
-    ModifyNotificationConfigurationRequest: ModifyNotificationConfigurationRequest,
+    DescribeNotificationConfigurationsResponse: DescribeNotificationConfigurationsResponse,
     DataDisk: DataDisk,
     PreviewPaiDomainNameRequest: PreviewPaiDomainNameRequest,
     DeleteScalingPolicyRequest: DeleteScalingPolicyRequest,
@@ -6009,6 +6081,7 @@ module.exports = {
     DescribeNotificationConfigurationsRequest: DescribeNotificationConfigurationsRequest,
     LifecycleHook: LifecycleHook,
     ForwardLoadBalancer: ForwardLoadBalancer,
+    PreviewPaiDomainNameResponse: PreviewPaiDomainNameResponse,
     DeleteAutoScalingGroupRequest: DeleteAutoScalingGroupRequest,
     RemoveInstancesRequest: RemoveInstancesRequest,
     AttachInstancesRequest: AttachInstancesRequest,
@@ -6016,7 +6089,7 @@ module.exports = {
     Activity: Activity,
     ModifyDesiredCapacityResponse: ModifyDesiredCapacityResponse,
     RunMonitorServiceEnabled: RunMonitorServiceEnabled,
-    DescribeNotificationConfigurationsResponse: DescribeNotificationConfigurationsResponse,
+    DeleteLifecycleHookResponse: DeleteLifecycleHookResponse,
     ActivtyRelatedInstance: ActivtyRelatedInstance,
     InternetAccessible: InternetAccessible,
     EnableAutoScalingGroupResponse: EnableAutoScalingGroupResponse,

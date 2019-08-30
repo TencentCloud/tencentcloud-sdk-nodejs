@@ -635,6 +635,43 @@ class EnglishOCRResponse extends  AbstractModel {
 }
 
 /**
+ * MLIDPassportOCR请求参数结构体
+ * @class
+ */
+class MLIDPassportOCRRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 图片的 Base64 值。
+支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
+支持的图片大小：所下载图片经Base64编码后不超过 3M。图片下载时间不超过 3 秒。
+         * @type {string || null}
+         */
+        this.ImageBase64 = null;
+
+        /**
+         * 是否返回图片
+         * @type {boolean || null}
+         */
+        this.RetImage = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ImageBase64 = 'ImageBase64' in params ? params.ImageBase64 : null;
+        this.RetImage = 'RetImage' in params ? params.RetImage : null;
+
+    }
+}
+
+/**
  * GeneralAccurateOCR请求参数结构体
  * @class
  */
@@ -1530,6 +1567,78 @@ class ArithmeticOCRRequest extends  AbstractModel {
 }
 
 /**
+ * MLIDCardOCR返回参数结构体
+ * @class
+ */
+class MLIDCardOCRResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 身份证号
+         * @type {string || null}
+         */
+        this.ID = null;
+
+        /**
+         * 姓名
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 地址
+         * @type {string || null}
+         */
+        this.Address = null;
+
+        /**
+         * 性别
+         * @type {string || null}
+         */
+        this.Sex = null;
+
+        /**
+         * 告警码
+-9103	证照翻拍告警
+-9102	证照复印件告警
+         * @type {Array.<number> || null}
+         */
+        this.Warn = null;
+
+        /**
+         * 证件图片
+         * @type {string || null}
+         */
+        this.Image = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ID = 'ID' in params ? params.ID : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Address = 'Address' in params ? params.Address : null;
+        this.Sex = 'Sex' in params ? params.Sex : null;
+        this.Warn = 'Warn' in params ? params.Warn : null;
+        this.Image = 'Image' in params ? params.Image : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * 行驶证主页正面的识别结果
  * @class
  */
@@ -1716,6 +1825,99 @@ class TaxiInvoiceOCRResponse extends  AbstractModel {
 }
 
 /**
+ * MLIDPassportOCR返回参数结构体
+ * @class
+ */
+class MLIDPassportOCRResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 护照ID
+         * @type {string || null}
+         */
+        this.ID = null;
+
+        /**
+         * 姓名
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 出生日期
+         * @type {string || null}
+         */
+        this.DateOfBirth = null;
+
+        /**
+         * 性别（F女，M男）
+         * @type {string || null}
+         */
+        this.Sex = null;
+
+        /**
+         * 有效期
+         * @type {string || null}
+         */
+        this.DateOfExpiration = null;
+
+        /**
+         * 发行国
+         * @type {string || null}
+         */
+        this.IssuingCountry = null;
+
+        /**
+         * 国籍
+         * @type {string || null}
+         */
+        this.Nationality = null;
+
+        /**
+         * 告警码
+-9103	证照翻拍告警
+-9102	证照复印件告警
+         * @type {Array.<number> || null}
+         */
+        this.Warn = null;
+
+        /**
+         * 证件图片
+         * @type {string || null}
+         */
+        this.Image = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ID = 'ID' in params ? params.ID : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.DateOfBirth = 'DateOfBirth' in params ? params.DateOfBirth : null;
+        this.Sex = 'Sex' in params ? params.Sex : null;
+        this.DateOfExpiration = 'DateOfExpiration' in params ? params.DateOfExpiration : null;
+        this.IssuingCountry = 'IssuingCountry' in params ? params.IssuingCountry : null;
+        this.Nationality = 'Nationality' in params ? params.Nationality : null;
+        this.Warn = 'Warn' in params ? params.Warn : null;
+        this.Image = 'Image' in params ? params.Image : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * GeneralHandwritingOCR返回参数结构体
  * @class
  */
@@ -1796,6 +1998,54 @@ class PermitOCRRequest extends  AbstractModel {
         }
         this.ImageBase64 = 'ImageBase64' in params ? params.ImageBase64 : null;
         this.ImageUrl = 'ImageUrl' in params ? params.ImageUrl : null;
+
+    }
+}
+
+/**
+ * MLIDCardOCR请求参数结构体
+ * @class
+ */
+class MLIDCardOCRRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 图片的 Base64 值。
+支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
+支持的图片大小：所下载图片经Base64编码后不超过 3M。图片下载时间不超过 3 秒。
+         * @type {string || null}
+         */
+        this.ImageBase64 = null;
+
+        /**
+         * 图片的 Url 地址。( 中国地区之外不支持这个字段 )
+支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
+支持的图片大小：所下载图片经 Base64 编码后不超过 3M。图片下载时间不超过 3 秒。
+图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。
+非腾讯云存储的 Url 速度和稳定性可能受一定影响。
+         * @type {string || null}
+         */
+        this.ImageUrl = null;
+
+        /**
+         * 是否返回图片
+         * @type {boolean || null}
+         */
+        this.RetImage = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ImageBase64 = 'ImageBase64' in params ? params.ImageBase64 : null;
+        this.ImageUrl = 'ImageUrl' in params ? params.ImageUrl : null;
+        this.RetImage = 'RetImage' in params ? params.RetImage : null;
 
     }
 }
@@ -2139,26 +2389,26 @@ class TextArithmetic extends  AbstractModel {
         this.DetectedText = null;
 
         /**
-         * 结果
+         * 算式运算结果
          * @type {boolean || null}
          */
         this.Result = null;
 
         /**
-         * 保留字段，暂无意义
+         * 保留字段，暂不支持
          * @type {number || null}
          */
         this.Confidence = null;
 
         /**
-         * 文本行坐标，以四个顶点坐标表示（预留字段，目前不支持）
+         * 文本行坐标，以四个顶点坐标表示（保留字段，暂不支持）
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<Coord> || null}
          */
         this.Polygon = null;
 
         /**
-         * 此字段为扩展字段
+         * 保留字段，暂不支持
          * @type {string || null}
          */
         this.AdvancedInfo = null;
@@ -3241,6 +3491,7 @@ module.exports = {
     GeneralAccurateOCRResponse: GeneralAccurateOCRResponse,
     TextTable: TextTable,
     EnglishOCRResponse: EnglishOCRResponse,
+    MLIDPassportOCRRequest: MLIDPassportOCRRequest,
     GeneralAccurateOCRRequest: GeneralAccurateOCRRequest,
     PermitOCRResponse: PermitOCRResponse,
     FlightInvoiceOCRResponse: FlightInvoiceOCRResponse,
@@ -3258,10 +3509,13 @@ module.exports = {
     IDCardOCRResponse: IDCardOCRResponse,
     TextDetectionEn: TextDetectionEn,
     ArithmeticOCRRequest: ArithmeticOCRRequest,
+    MLIDCardOCRResponse: MLIDCardOCRResponse,
     TextVehicleFront: TextVehicleFront,
     TaxiInvoiceOCRResponse: TaxiInvoiceOCRResponse,
+    MLIDPassportOCRResponse: MLIDPassportOCRResponse,
     GeneralHandwritingOCRResponse: GeneralHandwritingOCRResponse,
     PermitOCRRequest: PermitOCRRequest,
+    MLIDCardOCRRequest: MLIDCardOCRRequest,
     TableOCRResponse: TableOCRResponse,
     Coord: Coord,
     TaxiInvoiceOCRRequest: TaxiInvoiceOCRRequest,
