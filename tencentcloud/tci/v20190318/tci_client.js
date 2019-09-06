@@ -102,6 +102,7 @@ const DescribeVocabResponse = models.DescribeVocabResponse;
 const DescribeImageTaskStatisticResponse = models.DescribeImageTaskStatisticResponse;
 const SubmitCheckAttendanceTaskRequest = models.SubmitCheckAttendanceTaskRequest;
 const CancelTaskResponse = models.CancelTaskResponse;
+const StudentBodyMovementResult = models.StudentBodyMovementResult;
 const LightDistributionStatistic = models.LightDistributionStatistic;
 const ImageTaskFunction = models.ImageTaskFunction;
 const FrameInfo = models.FrameInfo;

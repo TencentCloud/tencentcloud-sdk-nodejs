@@ -438,6 +438,20 @@ class ScanPiece extends  AbstractModel {
          */
         this.ScanDetail = null;
 
+        /**
+         * gme实时语音房间id，透传任务传入时的RoomId
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.RoomId = null;
+
+        /**
+         * gme实时语音用户id，透传任务传入时的OpenId
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.OpenId = null;
+
     }
 
     /**
@@ -459,6 +473,8 @@ class ScanPiece extends  AbstractModel {
                 this.ScanDetail.push(obj);
             }
         }
+        this.RoomId = 'RoomId' in params ? params.RoomId : null;
+        this.OpenId = 'OpenId' in params ? params.OpenId : null;
 
     }
 }
@@ -660,6 +676,18 @@ class Task extends  AbstractModel {
          */
         this.Url = null;
 
+        /**
+         * gme实时语音房间id，通过gme实时语音进行语音分析时输入
+         * @type {string || null}
+         */
+        this.RoomId = null;
+
+        /**
+         * gme实时语音用户id，通过gme实时语音进行语音分析时输入
+         * @type {string || null}
+         */
+        this.OpenId = null;
+
     }
 
     /**
@@ -671,6 +699,8 @@ class Task extends  AbstractModel {
         }
         this.DataId = 'DataId' in params ? params.DataId : null;
         this.Url = 'Url' in params ? params.Url : null;
+        this.RoomId = 'RoomId' in params ? params.RoomId : null;
+        this.OpenId = 'OpenId' in params ? params.OpenId : null;
 
     }
 }

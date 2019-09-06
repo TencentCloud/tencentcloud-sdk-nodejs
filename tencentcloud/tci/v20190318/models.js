@@ -158,19 +158,19 @@ class FacePoseResult extends  AbstractModel {
         this.Direction = null;
 
         /**
-         * Pitch
+         * 围绕Z轴旋转角度，俯仰角
          * @type {number || null}
          */
         this.Pitch = null;
 
         /**
-         * Roll
+         * 围绕X轴旋转角度，翻滚角
          * @type {number || null}
          */
         this.Roll = null;
 
         /**
-         * 角度信息选填
+         * 围绕Y轴旋转角度，偏航角
          * @type {number || null}
          */
         this.Yaw = null;
@@ -271,13 +271,13 @@ class AIAssistantRequest extends  AbstractModel {
         super();
 
         /**
-         * 输入分析对象内容
+         * 输入分析对象内容，输入数据格式参考FileType参数释义
          * @type {string || null}
          */
         this.FileContent = null;
 
         /**
-         * 输入分析对象类型，picture_url:图片地址，vod_url:视频地址，live_url：直播地址,audio_url: 音频文件
+         * 输入分析对象类型，picture_url:图片地址，vod_url:视频地址，live_url：直播地址，audio_url: 音频文件，picture：图片二进制数据的BASE64编码
          * @type {string || null}
          */
         this.FileType = null;
@@ -295,7 +295,7 @@ class AIAssistantRequest extends  AbstractModel {
         this.LibrarySet = null;
 
         /**
-         * 直播流评估时间，在FileType为live_url时生效，默认值为10分钟。
+         * 视频评估时间，单位毫秒，点播场景默认值为2小时（无法探测长度时）或完整视频，直播场景默认值为10分钟或直播提前结束
          * @type {number || null}
          */
         this.MaxVideoDuration = null;
@@ -539,7 +539,7 @@ class SubmitOneByOneClassTaskRequest extends  AbstractModel {
         super();
 
         /**
-         * 输入分析对象内容
+         * 输入分析对象内容，输入数据格式参考FileType参数释义
          * @type {string || null}
          */
         this.FileContent = null;
@@ -563,7 +563,7 @@ class SubmitOneByOneClassTaskRequest extends  AbstractModel {
         this.LibrarySet = null;
 
         /**
-         * 直播流评估时间，在FileType为live_url时生效，默认值为10分钟。
+         * 视频评估时间，单位毫秒，点播场景默认值为2小时（无法探测长度时）或完整视频，直播场景默认值为10分钟或直播提前结束
          * @type {number || null}
          */
         this.MaxVideoDuration = null;
@@ -918,7 +918,7 @@ class SubmitImageTaskRequest extends  AbstractModel {
         super();
 
         /**
-         * 输入分析对象内容
+         * 输入分析对象内容，输入数据格式参考FileType参数释义
          * @type {string || null}
          */
         this.FileContent = null;
@@ -954,7 +954,7 @@ class SubmitImageTaskRequest extends  AbstractModel {
         this.LibrarySet = null;
 
         /**
-         * 最大的视频长度，单位毫秒，默认值为两小时
+         * 视频评估时间，单位毫秒，点播场景默认值为2小时（无法探测长度时）或完整视频，直播场景默认值为10分钟或直播提前结束
          * @type {number || null}
          */
         this.MaxVideoDuration = null;
@@ -1176,7 +1176,7 @@ class SubmitFullBodyClassTaskRequest extends  AbstractModel {
         super();
 
         /**
-         * 输入分析对象内容
+         * 输入分析对象内容，输入数据格式参考FileType参数释义
          * @type {string || null}
          */
         this.FileContent = null;
@@ -1200,7 +1200,7 @@ class SubmitFullBodyClassTaskRequest extends  AbstractModel {
         this.LibrarySet = null;
 
         /**
-         * 直播流评估时间，在FileType为live_url时生效，默认值为10分钟。
+         * 视频评估时间，单位毫秒，点播场景默认值为2小时（无法探测长度时）或完整视频，直播场景默认值为10分钟或直播提前结束
          * @type {number || null}
          */
         this.MaxVideoDuration = null;
@@ -1253,7 +1253,7 @@ class LightResult extends  AbstractModel {
         super();
 
         /**
-         * 光照程度
+         * 光照程度，参考提交任务时的LightStandard指定的Name参数
          * @type {string || null}
          */
         this.LightLevel = null;
@@ -1746,13 +1746,13 @@ class SubmitTraditionalClassTaskRequest extends  AbstractModel {
         super();
 
         /**
-         * 输入分析对象内容，仅支持url，暂不支持直接上传base64图片
+         * 输入分析对象内容，输入数据格式参考FileType参数释义
          * @type {string || null}
          */
         this.FileContent = null;
 
         /**
-         * 输入分析对象类型，picture_url:图片地址，vod_url:视频地址，live_url：直播地址
+         * 输入分析对象类型，picture_url:图片地址，vod_url:视频地址，live_url：直播地址，picture：图片二进制数据的BASE64编码
          * @type {string || null}
          */
         this.FileType = null;
@@ -1764,7 +1764,7 @@ class SubmitTraditionalClassTaskRequest extends  AbstractModel {
         this.LibrarySet = null;
 
         /**
-         * 直播流评估时间，在FileType为live_url时生效，默认值为10分钟。
+         * 视频评估时间，单位毫秒，点播场景默认值为2小时（无法探测长度时）或完整视频，直播场景默认值为10分钟或直播提前结束
          * @type {number || null}
          */
         this.MaxVideoDuration = null;
@@ -2076,16 +2076,16 @@ class DeletePersonRequest extends  AbstractModel {
         super();
 
         /**
-         * 人员唯一标识符
-         * @type {string || null}
-         */
-        this.PersonId = null;
-
-        /**
          * 人员库唯一标识符
          * @type {string || null}
          */
         this.LibraryId = null;
+
+        /**
+         * 人员唯一标识符
+         * @type {string || null}
+         */
+        this.PersonId = null;
 
     }
 
@@ -2096,8 +2096,8 @@ class DeletePersonRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.PersonId = 'PersonId' in params ? params.PersonId : null;
         this.LibraryId = 'LibraryId' in params ? params.LibraryId : null;
+        this.PersonId = 'PersonId' in params ? params.PersonId : null;
 
     }
 }
@@ -2593,7 +2593,8 @@ class TeacherOutScreenResult extends  AbstractModel {
         super();
 
         /**
-         * 动作识别结果
+         * 动作识别结果，InScreen：在屏幕内
+OutScreen：不在屏幕内
          * @type {string || null}
          */
         this.Class = null;
@@ -2740,25 +2741,25 @@ class ActionInfo extends  AbstractModel {
         super();
 
         /**
-         * 躯体动作识别结果
+         * 躯体动作识别结果，包含坐着（sit）、站立（stand）和趴睡（sleep）
          * @type {ActionType || null}
          */
         this.BodyPosture = null;
 
         /**
-         * 举手识别结果
+         * 举手识别结果，包含举手（hand）和未检测到举手（nothand）
          * @type {ActionType || null}
          */
         this.Handup = null;
 
         /**
-         * 是否低头识别结果
+         * 是否低头识别结果，包含抬头（lookingahead）和未检测到抬头（notlookingahead）
          * @type {ActionType || null}
          */
         this.LookHead = null;
 
         /**
-         * 是否写字识别结果
+         * 是否写字识别结果，包含写字（write）和未检测到写字（notlookingahead）
          * @type {ActionType || null}
          */
         this.Writing = null;
@@ -2843,7 +2844,7 @@ class FaceExpressionResult extends  AbstractModel {
         this.Confidence = null;
 
         /**
-         * 表情识别结果
+         * 表情识别结果，包括"neutral":中性,"happiness":开心，"angry":"生气"，"disgust":厌恶，"fear":"恐惧"，"sadness":"悲伤"，"surprise":"惊讶"，"contempt":"蔑视"
          * @type {string || null}
          */
         this.Expression = null;
@@ -2942,7 +2943,7 @@ class GestureResult extends  AbstractModel {
         super();
 
         /**
-         * 识别结果
+         * 识别结果，包含"USPEAK":听你说，"LISTEN":听我说，"GOOD":GOOD，"TOOLS":拿教具，"OTHERS":其他
          * @type {string || null}
          */
         this.Class = null;
@@ -3040,7 +3041,7 @@ class CreateFaceResponse extends  AbstractModel {
 }
 
 /**
- * BodyMovementResult
+ * 老师肢体动作识别结果
  * @class
  */
 class BodyMovementResult extends  AbstractModel {
@@ -3066,7 +3067,11 @@ class BodyMovementResult extends  AbstractModel {
         this.Left = null;
 
         /**
-         * 动作识别结果
+         * 老师动作识别结果，包含
+1、teach_on_positive_attitude 正面讲解
+2、point_to_the_blackboard 指黑板
+3、writing_blackboard 写板书
+4、other 其他
          * @type {string || null}
          */
         this.Movements = null;
@@ -3337,16 +3342,16 @@ class DescribePersonRequest extends  AbstractModel {
         super();
 
         /**
-         * 人员唯一标识符
-         * @type {string || null}
-         */
-        this.PersonId = null;
-
-        /**
          * 人员库唯一标识符
          * @type {string || null}
          */
         this.LibraryId = null;
+
+        /**
+         * 人员唯一标识符
+         * @type {string || null}
+         */
+        this.PersonId = null;
 
     }
 
@@ -3357,8 +3362,8 @@ class DescribePersonRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.PersonId = 'PersonId' in params ? params.PersonId : null;
         this.LibraryId = 'LibraryId' in params ? params.LibraryId : null;
+        this.PersonId = 'PersonId' in params ? params.PersonId : null;
 
     }
 }
@@ -3774,7 +3779,7 @@ class SubmitPartialBodyClassTaskRequest extends  AbstractModel {
         super();
 
         /**
-         * 输入分析对象内容
+         * 输入分析对象内容，输入数据格式参考FileType参数释义
          * @type {string || null}
          */
         this.FileContent = null;
@@ -3798,7 +3803,7 @@ class SubmitPartialBodyClassTaskRequest extends  AbstractModel {
         this.LibrarySet = null;
 
         /**
-         * 直播流评估时间，在FileType为live_url时生效，默认值为10分钟。
+         * 视频评估时间，单位毫秒，点播场景默认值为2小时（无法探测长度时）或完整视频，直播场景默认值为10分钟或直播提前结束
          * @type {number || null}
          */
         this.MaxVideoDuration = null;
@@ -3950,7 +3955,12 @@ class SubmitOneByOneClassTaskResponse extends  AbstractModel {
 }
 
 /**
- * 光照标准
+ * 光照标准，结构的相关示例为：
+{
+    "Name":"dark"，
+    "Range":[0,30]
+}
+当光照的区间落入在0到30的范围时，就会命中dark的光照标准
  * @class
  */
 class LightStandard extends  AbstractModel {
@@ -4551,6 +4561,97 @@ class CancelTaskResponse extends  AbstractModel {
 }
 
 /**
+ * 学生肢体动作结果
+ * @class
+ */
+class StudentBodyMovementResult extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 置信度（已废弃）
+         * @type {number || null}
+         */
+        this.Confidence = null;
+
+        /**
+         * 举手识别结果置信度
+         * @type {number || null}
+         */
+        this.HandupConfidence = null;
+
+        /**
+         * 举手识别结果，包含举手（handup）和未举手（nothandup）
+         * @type {string || null}
+         */
+        this.HandupStatus = null;
+
+        /**
+         * 识别结果高度
+         * @type {number || null}
+         */
+        this.Height = null;
+
+        /**
+         * 识别结果左坐标
+         * @type {number || null}
+         */
+        this.Left = null;
+
+        /**
+         * 动作识别结果（已废弃）
+         * @type {string || null}
+         */
+        this.Movements = null;
+
+        /**
+         * 站立识别结果置信度
+         * @type {number || null}
+         */
+        this.StandConfidence = null;
+
+        /**
+         * 站立识别结果，包含站立（stand）和坐着（sit）
+         * @type {string || null}
+         */
+        this.StandStatus = null;
+
+        /**
+         * 识别结果顶坐标
+         * @type {number || null}
+         */
+        this.Top = null;
+
+        /**
+         * 识别结果宽度
+         * @type {number || null}
+         */
+        this.Width = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Confidence = 'Confidence' in params ? params.Confidence : null;
+        this.HandupConfidence = 'HandupConfidence' in params ? params.HandupConfidence : null;
+        this.HandupStatus = 'HandupStatus' in params ? params.HandupStatus : null;
+        this.Height = 'Height' in params ? params.Height : null;
+        this.Left = 'Left' in params ? params.Left : null;
+        this.Movements = 'Movements' in params ? params.Movements : null;
+        this.StandConfidence = 'StandConfidence' in params ? params.StandConfidence : null;
+        this.StandStatus = 'StandStatus' in params ? params.StandStatus : null;
+        this.Top = 'Top' in params ? params.Top : null;
+        this.Width = 'Width' in params ? params.Width : null;
+
+    }
+}
+
+/**
  * 光照强度统计结果
  * @class
  */
@@ -4789,6 +4890,18 @@ class SubmitConversationTaskRequest extends  AbstractModel {
         this.Lang = null;
 
         /**
+         * 学生音频流
+         * @type {string || null}
+         */
+        this.StudentUrl = null;
+
+        /**
+         * 教师音频流
+         * @type {string || null}
+         */
+        this.TeacherUrl = null;
+
+        /**
          * 语音编码类型 1:pcm
          * @type {number || null}
          */
@@ -4807,18 +4920,6 @@ class SubmitConversationTaskRequest extends  AbstractModel {
         this.Functions = null;
 
         /**
-         * 学生音频流
-         * @type {string || null}
-         */
-        this.StudentUrl = null;
-
-        /**
-         * 教师音频流
-         * @type {string || null}
-         */
-        this.TeacherUrl = null;
-
-        /**
          * 识别词库名列表，评估过程使用这些词汇库中的词汇进行词汇使用行为分析
          * @type {Array.<string> || null}
          */
@@ -4834,6 +4935,8 @@ class SubmitConversationTaskRequest extends  AbstractModel {
             return;
         }
         this.Lang = 'Lang' in params ? params.Lang : null;
+        this.StudentUrl = 'StudentUrl' in params ? params.StudentUrl : null;
+        this.TeacherUrl = 'TeacherUrl' in params ? params.TeacherUrl : null;
         this.VoiceEncodeType = 'VoiceEncodeType' in params ? params.VoiceEncodeType : null;
         this.VoiceFileType = 'VoiceFileType' in params ? params.VoiceFileType : null;
 
@@ -4842,8 +4945,6 @@ class SubmitConversationTaskRequest extends  AbstractModel {
             obj.deserialize(params.Functions)
             this.Functions = obj;
         }
-        this.StudentUrl = 'StudentUrl' in params ? params.StudentUrl : null;
-        this.TeacherUrl = 'TeacherUrl' in params ? params.TeacherUrl : null;
         this.VocabLibNameList = 'VocabLibNameList' in params ? params.VocabLibNameList : null;
 
     }
@@ -5366,7 +5467,7 @@ class ImageTaskResult extends  AbstractModel {
 
         /**
          * 学生肢体动作识别结果
-         * @type {BodyMovementResult || null}
+         * @type {StudentBodyMovementResult || null}
          */
         this.StudentBodyMovement = null;
 
@@ -5453,7 +5554,7 @@ class ImageTaskResult extends  AbstractModel {
         }
 
         if (params.StudentBodyMovement) {
-            let obj = new BodyMovementResult();
+            let obj = new StudentBodyMovementResult();
             obj.deserialize(params.StudentBodyMovement)
             this.StudentBodyMovement = obj;
         }
@@ -5885,6 +5986,12 @@ class ModifyPersonRequest extends  AbstractModel {
         super();
 
         /**
+         * 人员库唯一标识符
+         * @type {string || null}
+         */
+        this.LibraryId = null;
+
+        /**
          * 人员唯一标识符
          * @type {string || null}
          */
@@ -5895,12 +6002,6 @@ class ModifyPersonRequest extends  AbstractModel {
          * @type {string || null}
          */
         this.JobNumber = null;
-
-        /**
-         * 人员库唯一标识符
-         * @type {string || null}
-         */
-        this.LibraryId = null;
 
         /**
          * 人员邮箱
@@ -5941,9 +6042,9 @@ class ModifyPersonRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.LibraryId = 'LibraryId' in params ? params.LibraryId : null;
         this.PersonId = 'PersonId' in params ? params.PersonId : null;
         this.JobNumber = 'JobNumber' in params ? params.JobNumber : null;
-        this.LibraryId = 'LibraryId' in params ? params.LibraryId : null;
         this.Mail = 'Mail' in params ? params.Mail : null;
         this.Male = 'Male' in params ? params.Male : null;
         this.PersonName = 'PersonName' in params ? params.PersonName : null;
@@ -6188,7 +6289,7 @@ class SubmitOpenClassTaskRequest extends  AbstractModel {
         super();
 
         /**
-         * 输入分析对象内容
+         * 输入分析对象内容，输入数据格式参考FileType参数释义
          * @type {string || null}
          */
         this.FileContent = null;
@@ -6206,7 +6307,7 @@ class SubmitOpenClassTaskRequest extends  AbstractModel {
         this.LibrarySet = null;
 
         /**
-         * 直播流评估时间，在FileType为live_url时生效，默认值为10分钟。
+         * 视频评估时间，单位毫秒，点播场景默认值为2小时（无法探测长度时）或完整视频，直播场景默认值为10分钟或直播提前结束
          * @type {number || null}
          */
         this.MaxVideoDuration = null;
@@ -7148,6 +7249,7 @@ module.exports = {
     DescribeImageTaskStatisticResponse: DescribeImageTaskStatisticResponse,
     SubmitCheckAttendanceTaskRequest: SubmitCheckAttendanceTaskRequest,
     CancelTaskResponse: CancelTaskResponse,
+    StudentBodyMovementResult: StudentBodyMovementResult,
     LightDistributionStatistic: LightDistributionStatistic,
     ImageTaskFunction: ImageTaskFunction,
     FrameInfo: FrameInfo,

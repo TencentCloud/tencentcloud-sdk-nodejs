@@ -578,7 +578,7 @@ class EipInfo extends  AbstractModel {
         this.Eip = null;
 
         /**
-         * 运营商ID 0：电信； 1：联通； 2：移动； 3：教育网； 4：盈科； 5：BGP； 6：香港
+         * 运营商ID 0：电信； 1：联通； 2：移动； 3：教育网； 4：盈科； 5：BGP； 6：中国香港
          * @type {number || null}
          */
         this.IspId = null;
@@ -1172,7 +1172,7 @@ class DescribeEipsRequest extends  AbstractModel {
 
         /**
          * EIP ACL实例ID
-         * @type {number || null}
+         * @type {string || null}
          */
         this.AclId = null;
 
