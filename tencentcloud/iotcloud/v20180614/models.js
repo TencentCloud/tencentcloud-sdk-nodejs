@@ -108,6 +108,34 @@ class DeleteProductRequest extends  AbstractModel {
 }
 
 /**
+ * EnableTopicRule返回参数结构体
+ * @class
+ */
+class EnableTopicRuleResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * UpdateDeviceShadow返回参数结构体
  * @class
  */
@@ -201,6 +229,48 @@ class DisableTopicRuleResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * UpdateDeviceAvailableState请求参数结构体
+ * @class
+ */
+class UpdateDeviceAvailableStateRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 设备所属产品id
+         * @type {string || null}
+         */
+        this.ProductId = null;
+
+        /**
+         * 设备名称
+         * @type {string || null}
+         */
+        this.DeviceName = null;
+
+        /**
+         * 要设置的设备状态，1为启用，0为禁用
+         * @type {number || null}
+         */
+        this.EnableState = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ProductId = 'ProductId' in params ? params.ProductId : null;
+        this.DeviceName = 'DeviceName' in params ? params.DeviceName : null;
+        this.EnableState = 'EnableState' in params ? params.EnableState : null;
 
     }
 }
@@ -332,6 +402,34 @@ class DescribeMultiDevicesRequest extends  AbstractModel {
         this.TaskId = 'TaskId' in params ? params.TaskId : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
+
+    }
+}
+
+/**
+ * UpdateDeviceAvailableState返回参数结构体
+ * @class
+ */
+class UpdateDeviceAvailableStateResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -752,6 +850,62 @@ class BatchUpdateShadow extends  AbstractModel {
             return;
         }
         this.Desired = 'Desired' in params ? params.Desired : null;
+
+    }
+}
+
+/**
+ * BindDevices请求参数结构体
+ * @class
+ */
+class BindDevicesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 网关设备的产品ID
+         * @type {string || null}
+         */
+        this.GatewayProductId = null;
+
+        /**
+         * 网关设备的设备名
+         * @type {string || null}
+         */
+        this.GatewayDeviceName = null;
+
+        /**
+         * 被绑定设备的产品ID
+         * @type {string || null}
+         */
+        this.ProductId = null;
+
+        /**
+         * 被绑定的多个设备名
+         * @type {Array.<string> || null}
+         */
+        this.DeviceNames = null;
+
+        /**
+         * 中兴CLAA设备的绑定需要skey，普通的设备不需要
+         * @type {string || null}
+         */
+        this.Skey = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.GatewayProductId = 'GatewayProductId' in params ? params.GatewayProductId : null;
+        this.GatewayDeviceName = 'GatewayDeviceName' in params ? params.GatewayDeviceName : null;
+        this.ProductId = 'ProductId' in params ? params.ProductId : null;
+        this.DeviceNames = 'DeviceNames' in params ? params.DeviceNames : null;
+        this.Skey = 'Skey' in params ? params.Skey : null;
 
     }
 }
@@ -1363,6 +1517,62 @@ class DeleteLoraDeviceResponse extends  AbstractModel {
 }
 
 /**
+ * UnbindDevices请求参数结构体
+ * @class
+ */
+class UnbindDevicesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 网关设备的产品ID
+         * @type {string || null}
+         */
+        this.GatewayProductId = null;
+
+        /**
+         * 网关设备的设备名
+         * @type {string || null}
+         */
+        this.GatewayDeviceName = null;
+
+        /**
+         * 产品ID
+         * @type {string || null}
+         */
+        this.ProductId = null;
+
+        /**
+         * 多个设备名
+         * @type {Array.<string> || null}
+         */
+        this.DeviceNames = null;
+
+        /**
+         * 中兴CLAA设备的解绑需要Skey，普通设备不需要
+         * @type {string || null}
+         */
+        this.Skey = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.GatewayProductId = 'GatewayProductId' in params ? params.GatewayProductId : null;
+        this.GatewayDeviceName = 'GatewayDeviceName' in params ? params.GatewayDeviceName : null;
+        this.ProductId = 'ProductId' in params ? params.ProductId : null;
+        this.DeviceNames = 'DeviceNames' in params ? params.DeviceNames : null;
+        this.Skey = 'Skey' in params ? params.Skey : null;
+
+    }
+}
+
+/**
  * DescribeDevice请求参数结构体
  * @class
  */
@@ -1862,10 +2072,10 @@ class DescribeTasksResponse extends  AbstractModel {
 }
 
 /**
- * EnableTopicRule返回参数结构体
+ * BindDevices返回参数结构体
  * @class
  */
-class EnableTopicRuleResponse extends  AbstractModel {
+class BindDevicesResponse extends  AbstractModel {
     constructor(){
         super();
 
@@ -3067,7 +3277,7 @@ class DescribeLoraDeviceRequest extends  AbstractModel {
         super();
 
         /**
-         * 产品id
+         * 产品Id
          * @type {string || null}
          */
         this.ProductId = null;
@@ -3089,6 +3299,34 @@ class DescribeLoraDeviceRequest extends  AbstractModel {
         }
         this.ProductId = 'ProductId' in params ? params.ProductId : null;
         this.DeviceName = 'DeviceName' in params ? params.DeviceName : null;
+
+    }
+}
+
+/**
+ * UnbindDevices返回参数结构体
+ * @class
+ */
+class UnbindDevicesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3643,12 +3881,15 @@ class TaskInfo extends  AbstractModel {
 module.exports = {
     PublishMessageRequest: PublishMessageRequest,
     DeleteProductRequest: DeleteProductRequest,
+    EnableTopicRuleResponse: EnableTopicRuleResponse,
     UpdateDeviceShadowResponse: UpdateDeviceShadowResponse,
     DescribeTasksRequest: DescribeTasksRequest,
     DisableTopicRuleResponse: DisableTopicRuleResponse,
+    UpdateDeviceAvailableStateRequest: UpdateDeviceAvailableStateRequest,
     ReplaceTopicRuleRequest: ReplaceTopicRuleRequest,
     DeleteTopicRuleRequest: DeleteTopicRuleRequest,
     DescribeMultiDevicesRequest: DescribeMultiDevicesRequest,
+    UpdateDeviceAvailableStateResponse: UpdateDeviceAvailableStateResponse,
     MultiDevicesInfo: MultiDevicesInfo,
     PublishAsDeviceRequest: PublishAsDeviceRequest,
     DescribeDeviceClientKeyRequest: DescribeDeviceClientKeyRequest,
@@ -3658,6 +3899,7 @@ module.exports = {
     CreateTaskResponse: CreateTaskResponse,
     BatchPublishMessage: BatchPublishMessage,
     BatchUpdateShadow: BatchUpdateShadow,
+    BindDevicesRequest: BindDevicesRequest,
     Filter: Filter,
     DeleteDeviceRequest: DeleteDeviceRequest,
     DeleteProductResponse: DeleteProductResponse,
@@ -3671,6 +3913,7 @@ module.exports = {
     DeleteTopicRuleResponse: DeleteTopicRuleResponse,
     ProductProperties: ProductProperties,
     DeleteLoraDeviceResponse: DeleteLoraDeviceResponse,
+    UnbindDevicesRequest: UnbindDevicesRequest,
     DescribeDeviceRequest: DescribeDeviceRequest,
     CreateLoraDeviceRequest: CreateLoraDeviceRequest,
     DescribeTaskRequest: DescribeTaskRequest,
@@ -3682,7 +3925,7 @@ module.exports = {
     ProductMetadata: ProductMetadata,
     DescribeLoraDeviceResponse: DescribeLoraDeviceResponse,
     DescribeTasksResponse: DescribeTasksResponse,
-    EnableTopicRuleResponse: EnableTopicRuleResponse,
+    BindDevicesResponse: BindDevicesResponse,
     CreateProductResponse: CreateProductResponse,
     DescribeProductsRequest: DescribeProductsRequest,
     DescribeDevicesRequest: DescribeDevicesRequest,
@@ -3707,6 +3950,7 @@ module.exports = {
     CreateMultiDeviceResponse: CreateMultiDeviceResponse,
     ReplaceTopicRuleResponse: ReplaceTopicRuleResponse,
     DescribeLoraDeviceRequest: DescribeLoraDeviceRequest,
+    UnbindDevicesResponse: UnbindDevicesResponse,
     DescribeDeviceShadowResponse: DescribeDeviceShadowResponse,
     DescribeDeviceClientKeyResponse: DescribeDeviceClientKeyResponse,
     PublishAsDeviceResponse: PublishAsDeviceResponse,

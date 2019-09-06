@@ -4110,7 +4110,8 @@ class CreateImageRequest extends  AbstractModel {
         this.ImageDescription = null;
 
         /**
-         * 软关机失败时是否执行强制关机以制作镜像
+         * 是否执行强制关机以制作镜像。
+取值范围：<br><li>TRUE：表示关机之后制作镜像<br><li>FALSE：表示开机状态制作镜像<br><br>默认取值：FALSE。<br><br>开机状态制作镜像，可能导致部分数据未备份，影响数据安全。
          * @type {string || null}
          */
         this.ForcePoweroff = null;
@@ -4122,19 +4123,13 @@ class CreateImageRequest extends  AbstractModel {
         this.Sysprep = null;
 
         /**
-         * 实例处于运行中时，是否允许关机执行制作镜像任务。
-         * @type {string || null}
-         */
-        this.Reboot = null;
-
-        /**
          * 实例需要制作镜像的数据盘Id
          * @type {Array.<string> || null}
          */
         this.DataDiskIds = null;
 
         /**
-         * 需要制作镜像的快照Id,必须包含一个系统盘快照
+         * 需要制作镜像的快照ID,必须包含一个系统盘快照
          * @type {Array.<string> || null}
          */
         this.SnapshotIds = null;
@@ -4159,7 +4154,6 @@ class CreateImageRequest extends  AbstractModel {
         this.ImageDescription = 'ImageDescription' in params ? params.ImageDescription : null;
         this.ForcePoweroff = 'ForcePoweroff' in params ? params.ForcePoweroff : null;
         this.Sysprep = 'Sysprep' in params ? params.Sysprep : null;
-        this.Reboot = 'Reboot' in params ? params.Reboot : null;
         this.DataDiskIds = 'DataDiskIds' in params ? params.DataDiskIds : null;
         this.SnapshotIds = 'SnapshotIds' in params ? params.SnapshotIds : null;
         this.DryRun = 'DryRun' in params ? params.DryRun : null;
@@ -4321,6 +4315,12 @@ class Instance extends  AbstractModel {
          */
         this.StopChargingMode = null;
 
+        /**
+         * 实例全局唯一ID
+         * @type {string || null}
+         */
+        this.Uuid = null;
+
     }
 
     /**
@@ -4395,6 +4395,7 @@ class Instance extends  AbstractModel {
             }
         }
         this.StopChargingMode = 'StopChargingMode' in params ? params.StopChargingMode : null;
+        this.Uuid = 'Uuid' in params ? params.Uuid : null;
 
     }
 }
@@ -7392,13 +7393,13 @@ class InternetAccessible extends  AbstractModel {
         this.InternetMaxBandwidthOut = null;
 
         /**
-         * 是否分配公网IP。取值范围：<br><li>TRUE：表示分配公网IP<br><li>FALSE：表示不分配公网IP<br><br>当公网带宽大于0Mbps时，可自由选择开通与否，默认开通公网IP；当公网带宽为0，则不允许分配公网IP。
+         * 是否分配公网IP。取值范围：<br><li>TRUE：表示分配公网IP<br><li>FALSE：表示不分配公网IP<br><br>当公网带宽大于0Mbps时，可自由选择开通与否，默认开通公网IP；当公网带宽为0，则不允许分配公网IP。该参数仅在RunInstances接口中作为入参使用。
          * @type {boolean || null}
          */
         this.PublicIpAssigned = null;
 
         /**
-         * 带宽包ID。可通过[`DescribeBandwidthPackages`](https://cloud.tencent.com/document/api/215/19209)接口返回值中的`BandwidthPackageId`获取。
+         * 带宽包ID。可通过[`DescribeBandwidthPackages`](https://cloud.tencent.com/document/api/215/19209)接口返回值中的`BandwidthPackageId`获取。该参数仅在RunInstances接口中作为入参使用。
          * @type {string || null}
          */
         this.BandwidthPackageId = null;

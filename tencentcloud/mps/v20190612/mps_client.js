@@ -88,6 +88,7 @@ const DeleteTranscodeTemplateResponse = models.DeleteTranscodeTemplateResponse;
 const MediaTranscodeItem = models.MediaTranscodeItem;
 const TextWatermarkTemplateInputForUpdate = models.TextWatermarkTemplateInputForUpdate;
 const ProcessMediaRequest = models.ProcessMediaRequest;
+const ProcessLiveMediaResponse = models.ProcessLiveMediaResponse;
 const CreateSnapshotByTimeOffsetTemplateRequest = models.CreateSnapshotByTimeOffsetTemplateRequest;
 const CreateSampleSnapshotTemplateRequest = models.CreateSampleSnapshotTemplateRequest;
 const DescribeSampleSnapshotTemplatesRequest = models.DescribeSampleSnapshotTemplatesRequest;
@@ -111,6 +112,7 @@ const ModifyTranscodeTemplateRequest = models.ModifyTranscodeTemplateRequest;
 const ImageWatermarkTemplate = models.ImageWatermarkTemplate;
 const ImageWatermarkInput = models.ImageWatermarkInput;
 const CosFileUploadTrigger = models.CosFileUploadTrigger;
+const TEHDConfigForUpdate = models.TEHDConfigForUpdate;
 const CreateAnimatedGraphicsTemplateResponse = models.CreateAnimatedGraphicsTemplateResponse;
 const MediaSnapshotByTimePicInfoItem = models.MediaSnapshotByTimePicInfoItem;
 const WatermarkTemplate = models.WatermarkTemplate;
@@ -119,13 +121,14 @@ const DescribeWorkflowsResponse = models.DescribeWorkflowsResponse;
 const DescribeTaskDetailRequest = models.DescribeTaskDetailRequest;
 const DeleteImageSpriteTemplateResponse = models.DeleteImageSpriteTemplateResponse;
 const CreateWorkflowResponse = models.CreateWorkflowResponse;
+const TEHDConfig = models.TEHDConfig;
 const AnimatedGraphicsTemplate = models.AnimatedGraphicsTemplate;
 const ModifyAnimatedGraphicsTemplateRequest = models.ModifyAnimatedGraphicsTemplateRequest;
 const MediaProcessTaskResult = models.MediaProcessTaskResult;
+const ProcessLiveMediaRequest = models.ProcessLiveMediaRequest;
 const WatermarkInput = models.WatermarkInput;
 const EnableWorkflowResponse = models.EnableWorkflowResponse;
 const DescribeSnapshotByTimeOffsetTemplatesRequest = models.DescribeSnapshotByTimeOffsetTemplatesRequest;
-const CosOutputStorage = models.CosOutputStorage;
 const ModifyImageSpriteTemplateResponse = models.ModifyImageSpriteTemplateResponse;
 const CreateWatermarkTemplateRequest = models.CreateWatermarkTemplateRequest;
 const DeleteWatermarkTemplateResponse = models.DeleteWatermarkTemplateResponse;
@@ -134,7 +137,7 @@ const ProcessMediaResponse = models.ProcessMediaResponse;
 const MediaProcessTaskInput = models.MediaProcessTaskInput;
 const VideoTemplateInfoForUpdate = models.VideoTemplateInfoForUpdate;
 const CreateImageSpriteTemplateResponse = models.CreateImageSpriteTemplateResponse;
-const AdaptiveDynamicStreamingTaskInput = models.AdaptiveDynamicStreamingTaskInput;
+const CosOutputStorage = models.CosOutputStorage;
 const DescribeImageSpriteTemplatesResponse = models.DescribeImageSpriteTemplatesResponse;
 const ModifyWatermarkTemplateResponse = models.ModifyWatermarkTemplateResponse;
 const TaskNotifyConfig = models.TaskNotifyConfig;
@@ -346,6 +349,22 @@ class MpsClient extends AbstractClient {
     DeleteSampleSnapshotTemplate(req, cb) {
         let resp = new DeleteSampleSnapshotTemplateResponse();
         this.request("DeleteSampleSnapshotTemplate", req, resp, cb);
+    }
+
+    /**
+     * 对直播流媒体发起处理任务，功能包括：
+
+1. 智能内容识别（人脸、文本全文、文本关键词、语音全文、语音关键词、物体）。
+2. 智能内容分析（精彩集锦）。
+
+直播流处理事件通知实时写入用户指定的消息队列 CMQ 中，用户需要从消息队列 CMQ 中获取事件通知结果，同时处理过程中存在输出文件的，会写入用户指定的输出文件的目标存储中。
+     * @param {ProcessLiveMediaRequest} req
+     * @param {function(string, ProcessLiveMediaResponse):void} cb
+     * @public
+     */
+    ProcessLiveMedia(req, cb) {
+        let resp = new ProcessLiveMediaResponse();
+        this.request("ProcessLiveMedia", req, resp, cb);
     }
 
     /**

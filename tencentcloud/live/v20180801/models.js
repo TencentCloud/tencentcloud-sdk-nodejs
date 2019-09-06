@@ -92,6 +92,12 @@ class BillDataInfo extends  AbstractModel {
          */
         this.Flux = null;
 
+        /**
+         * 峰值时间点，格式为yyyy-mm-dd HH:MM:SS，原始数据为5分钟粒度，如果查询小时和天粒度数据，则返回对应粒度内的带宽峰值时间点。
+         * @type {string || null}
+         */
+        this.PeakTime = null;
+
     }
 
     /**
@@ -104,6 +110,7 @@ class BillDataInfo extends  AbstractModel {
         this.Time = 'Time' in params ? params.Time : null;
         this.Bandwidth = 'Bandwidth' in params ? params.Bandwidth : null;
         this.Flux = 'Flux' in params ? params.Flux : null;
+        this.PeakTime = 'PeakTime' in params ? params.PeakTime : null;
 
     }
 }
@@ -6264,6 +6271,7 @@ class ModifyPullStreamConfigRequest extends  AbstractModel {
          * 开始时间。
 使用UTC格式时间，
 例如：2019-01-08T10:00:00Z。
+格式按照 ISO 8601 标准表示，详见 [ISO 日期格式说明](document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F)。
          * @type {string || null}
          */
         this.StartTime = null;
@@ -6276,6 +6284,7 @@ class ModifyPullStreamConfigRequest extends  AbstractModel {
 
 使用UTC格式时间，
 例如：2019-01-08T10:00:00Z。
+格式按照 ISO 8601 标准表示，详见 [ISO 日期格式说明](document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F)。
          * @type {string || null}
          */
         this.EndTime = null;
@@ -7077,6 +7086,12 @@ class DescribeLiveDomainsRequest extends  AbstractModel {
          */
         this.IsDelayLive = null;
 
+        /**
+         * 域名前缀
+         * @type {string || null}
+         */
+        this.DomainPrefix = null;
+
     }
 
     /**
@@ -7091,6 +7106,7 @@ class DescribeLiveDomainsRequest extends  AbstractModel {
         this.PageSize = 'PageSize' in params ? params.PageSize : null;
         this.PageNum = 'PageNum' in params ? params.PageNum : null;
         this.IsDelayLive = 'IsDelayLive' in params ? params.IsDelayLive : null;
+        this.DomainPrefix = 'DomainPrefix' in params ? params.DomainPrefix : null;
 
     }
 }

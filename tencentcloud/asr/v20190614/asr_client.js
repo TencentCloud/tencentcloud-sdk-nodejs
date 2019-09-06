@@ -16,8 +16,14 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
-const SentenceRecognitionRequest = models.SentenceRecognitionRequest;
+const CreateRecTaskResponse = models.CreateRecTaskResponse;
+const Task = models.Task;
+const DescribeTaskStatusRequest = models.DescribeTaskStatusRequest;
 const SentenceRecognitionResponse = models.SentenceRecognitionResponse;
+const TaskStatus = models.TaskStatus;
+const CreateRecTaskRequest = models.CreateRecTaskRequest;
+const DescribeTaskStatusResponse = models.DescribeTaskStatusResponse;
+const SentenceRecognitionRequest = models.SentenceRecognitionRequest;
 
 
 /**
@@ -31,14 +37,28 @@ class AsrClient extends AbstractClient {
     }
     
     /**
-     * 本接口用于对60秒之内的短音频文件进行识别，支持本地语音文件上传和语音URL上传两种请求方式。
+     * 本接口服务对录音时长1小时以内的录音文件进行识别，异步返回识别全部结果。
+<br>• 支持回调或轮询的方式获取结果，轮询方式请参考“录音文件识别结果查询”。
+<br>• 支持语音 URL 和本地语音文件两种请求方式。
+<br>• 接口是 HTTP RESTful 形式
 
-当音频文件通过请求中body内容上传时，请求大小不能超过600KB；当音频以url方式传输时，音频时长不可超过60s。
+在使用该接口前，需要在 [语音识别控制台](https://console.cloud.tencent.com/asr) 开通服务，并进入 [API 密钥管理页面](https://console.cloud.tencent.com/cam/capi) 新建密钥，<br>生成 AppID、SecretID 和 SecretKey ，用于 API 调用时生成签名，签名将用来进行接口鉴权。
+     * @param {CreateRecTaskRequest} req
+     * @param {function(string, CreateRecTaskResponse):void} cb
+     * @public
+     */
+    CreateRecTask(req, cb) {
+        let resp = new CreateRecTaskResponse();
+        this.request("CreateRecTask", req, resp, cb);
+    }
 
-所有请求参数放在POST请求的body中，编码类型采用x-www-form-urlencoded，参数进行urlencode编码后传输。
-
-现暂只支持中文普通话和带有一定方言口音的中文普通话识别，支持识别8k16bit和16k16bit的mp3或者wav格式的单声道音频。
-
+    /**
+     * 本接口用于对60秒之内的短音频文件进行识别。
+<br>•   支持中文普通话、英语、粤语和带有一定方言口音的中文普通话识别。
+<br>•   支持本地语音文件上传和语音URL上传两种请求方式。
+<br>•   音频格式支持wav、mp3；采样率支持8000Hz或者16000Hz；采样精度支持16bits；声道支持单声道。
+<br>•   当音频文件通过请求中body内容上传时，请求大小不能超过600KB；当音频以URL方式传输时，音频时长不可超过60s。
+<br>•   所有请求参数放在POST请求的body中，编码类型采用x-www-form-urlencoded，参数进行urlencode编码后传输。
      * @param {SentenceRecognitionRequest} req
      * @param {function(string, SentenceRecognitionResponse):void} cb
      * @public
@@ -46,6 +66,17 @@ class AsrClient extends AbstractClient {
     SentenceRecognition(req, cb) {
         let resp = new SentenceRecognitionResponse();
         this.request("SentenceRecognition", req, resp, cb);
+    }
+
+    /**
+     * 本接口需要配合录音文件识别请求接口使用，单独使用无效。在调用录音文件识别接口后，可以在本接口传入TaskID来轮询识别结果。
+     * @param {DescribeTaskStatusRequest} req
+     * @param {function(string, DescribeTaskStatusResponse):void} cb
+     * @public
+     */
+    DescribeTaskStatus(req, cb) {
+        let resp = new DescribeTaskStatusResponse();
+        this.request("DescribeTaskStatus", req, resp, cb);
     }
 
 

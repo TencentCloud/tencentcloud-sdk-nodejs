@@ -410,7 +410,7 @@ class SvgWatermarkInput extends  AbstractModel {
 <li>当字符串以 px 结尾，表示水印 Height 单位为像素，如 100px 表示 Height 为 100 像素；当填 0px 且
  Width 不为 0px 时，表示水印的高度按原始 SVG 图像等比缩放；当 Width、Height 都填 0px 时，表示水印的高度取原始 SVG 图像的高度；</li>
 <li>当字符串以 W% 结尾，表示水印 Height 为视频宽度的百分比大小，如 10W% 表示 Height 为视频宽度的 10%；</li>
-<li>当字符串以 H% 结尾，表示水印 Height 为视频高度的百分比大小，如 10H% 表示 Height 为��频高度的 10%；</li>
+<li>当字符串以 H% 结尾，表示水印 Height 为视频高度的百分比大小，如 10H% 表示 Height 为视频高度的 10%；</li>
 <li>当字符串以 S% 结尾，表示水印 Height 为视频短边的百分比大小，如 10S% 表示 Height 为视频短边的 10%；</li>
 <li>当字符串以 L% 结尾，表示水印 Height 为视频长边的百分比大小，如 10L% 表示 Height 为视频长边的 10%；</li>
 <li>当字符串以 % 结尾时，含义同 H%。</li>
@@ -652,6 +652,12 @@ class CreateTranscodeTemplateRequest extends  AbstractModel {
          */
         this.AudioTemplate = null;
 
+        /**
+         * 极速高清转码参数，需联系商务架构师开通后才能使用。
+         * @type {TEHDConfig || null}
+         */
+        this.TEHDConfig = null;
+
     }
 
     /**
@@ -677,6 +683,12 @@ class CreateTranscodeTemplateRequest extends  AbstractModel {
             let obj = new AudioTemplateInfo();
             obj.deserialize(params.AudioTemplate)
             this.AudioTemplate = obj;
+        }
+
+        if (params.TEHDConfig) {
+            let obj = new TEHDConfig();
+            obj.deserialize(params.TEHDConfig)
+            this.TEHDConfig = obj;
         }
 
     }
@@ -2352,7 +2364,7 @@ class SvgWatermarkInputForUpdate extends  AbstractModel {
 
         /**
          * 水印的高度，支持 px，%，W%，H%，S%，L% 六种格式：
-<li>当字符串以 px 结尾，表示水印 Height 单位为像素，如 100px 表示 Height 为 100 像��；当填 0px 且
+<li>当字符串以 px 结尾，表示水印 Height 单位为像素，如 100px 表示 Height 为 100 像素；当填 0px 且
  Width 不为 0px 时，表示水印的高度按原始 SVG 图像等比缩放；当 Width、Height 都填 0px 时，表示水印的高度取原始 SVG 图像的高度；</li>
 <li>当字符串以 W% 结尾，表示水印 Height 为视频宽度的百分比大小，如 10W% 表示 Height 为视频宽度的 10%；</li>
 <li>当字符串以 H% 结尾，表示水印 Height 为视频高度的百分比大小，如 10H% 表示 Height 为视频高度的 10%；</li>
@@ -3076,6 +3088,14 @@ class DescribeTranscodeTemplatesRequest extends  AbstractModel {
         this.ContainerType = null;
 
         /**
+         * 极速高清过滤条件，用于过滤普通转码或极速高清转码模板，可选值：
+<li>Common：普通转码模板；</li>
+<li>TEHD：极速高清模板。</li>
+         * @type {string || null}
+         */
+        this.TEHDType = null;
+
+        /**
          * 分页偏移量，默认值：0。
          * @type {number || null}
          */
@@ -3099,6 +3119,7 @@ class DescribeTranscodeTemplatesRequest extends  AbstractModel {
         this.Definitions = 'Definitions' in params ? params.Definitions : null;
         this.Type = 'Type' in params ? params.Type : null;
         this.ContainerType = 'ContainerType' in params ? params.ContainerType : null;
+        this.TEHDType = 'TEHDType' in params ? params.TEHDType : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
 
@@ -3876,6 +3897,13 @@ class TranscodeTemplate extends  AbstractModel {
         this.AudioTemplate = null;
 
         /**
+         * 极速高清转码参数，需联系商务架构师开通后才能使用。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {TEHDConfig || null}
+         */
+        this.TEHDConfig = null;
+
+        /**
          * 封装格式过滤条件，可选值：
 <li>Video：视频格式，可以同时包含视频流和音频流的封装格式；</li>
 <li>PureAudio：纯音频格式，只能包含音频流的封装格式板。</li>
@@ -3922,6 +3950,12 @@ class TranscodeTemplate extends  AbstractModel {
             let obj = new AudioTemplateInfo();
             obj.deserialize(params.AudioTemplate)
             this.AudioTemplate = obj;
+        }
+
+        if (params.TEHDConfig) {
+            let obj = new TEHDConfig();
+            obj.deserialize(params.TEHDConfig)
+            this.TEHDConfig = obj;
         }
         this.ContainerType = 'ContainerType' in params ? params.ContainerType : null;
         this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
@@ -4232,6 +4266,41 @@ class ProcessMediaRequest extends  AbstractModel {
         this.TasksPriority = 'TasksPriority' in params ? params.TasksPriority : null;
         this.SessionId = 'SessionId' in params ? params.SessionId : null;
         this.SessionContext = 'SessionContext' in params ? params.SessionContext : null;
+
+    }
+}
+
+/**
+ * ProcessLiveMedia返回参数结构体
+ * @class
+ */
+class ProcessLiveMediaResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 任务 ID
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -5398,6 +5467,12 @@ class ModifyTranscodeTemplateRequest extends  AbstractModel {
          */
         this.AudioTemplate = null;
 
+        /**
+         * 极速高清转码参数，需联系商务架构师开通后才能使用。
+         * @type {TEHDConfigForUpdate || null}
+         */
+        this.TEHDConfig = null;
+
     }
 
     /**
@@ -5424,6 +5499,12 @@ class ModifyTranscodeTemplateRequest extends  AbstractModel {
             let obj = new AudioTemplateInfoForUpdate();
             obj.deserialize(params.AudioTemplate)
             this.AudioTemplate = obj;
+        }
+
+        if (params.TEHDConfig) {
+            let obj = new TEHDConfigForUpdate();
+            obj.deserialize(params.TEHDConfig)
+            this.TEHDConfig = obj;
         }
 
     }
@@ -5569,6 +5650,43 @@ class CosFileUploadTrigger extends  AbstractModel {
         this.Region = 'Region' in params ? params.Region : null;
         this.Dir = 'Dir' in params ? params.Dir : null;
         this.Formats = 'Formats' in params ? params.Formats : null;
+
+    }
+}
+
+/**
+ * 极速高清参数配置。
+ * @class
+ */
+class TEHDConfigForUpdate extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 极速高清类型，可选值：
+<li>TEHD-100：极速高清-100。</li>
+不填代表不修改。
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * 视频码率上限，不填代表不修改。
+         * @type {number || null}
+         */
+        this.MaxVideoBitrate = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Type = 'Type' in params ? params.Type : null;
+        this.MaxVideoBitrate = 'MaxVideoBitrate' in params ? params.MaxVideoBitrate : null;
 
     }
 }
@@ -6000,6 +6118,44 @@ class CreateWorkflowResponse extends  AbstractModel {
 }
 
 /**
+ * 极速高清参数配置。
+ * @class
+ */
+class TEHDConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 极速高清类型，可选值：
+<li>TEHD-100：极速高清-100。</li>
+不填代表不启用极速高清。
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * 视频码率上限，当 Type 指定了极速高清类型时有效。
+不填或填0表示不设视频码率上限。
+         * @type {number || null}
+         */
+        this.MaxVideoBitrate = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Type = 'Type' in params ? params.Type : null;
+        this.MaxVideoBitrate = 'MaxVideoBitrate' in params ? params.MaxVideoBitrate : null;
+
+    }
+}
+
+/**
  * 转动图模板详情。
  * @class
  */
@@ -6287,6 +6443,110 @@ class MediaProcessTaskResult extends  AbstractModel {
 }
 
 /**
+ * ProcessLiveMedia请求参数结构体
+ * @class
+ */
+class ProcessLiveMediaRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 直播流 URL。
+         * @type {string || null}
+         */
+        this.Url = null;
+
+        /**
+         * 直播流处理输出文件的目标存储。如处理有文件输出，该参数为必填项。
+         * @type {TaskOutputStorage || null}
+         */
+        this.OutputStorage = null;
+
+        /**
+         * 直播流处理生成的文件输出的目标目录，如`/movie/201909/`，如果不填为 `/` 目录。
+         * @type {string || null}
+         */
+        this.OutputDir = null;
+
+        /**
+         * 直播流内容识别类型任务参数。
+         * @type {AiRecognitionTaskInput || null}
+         */
+        this.AiRecognitionTask = null;
+
+        /**
+         * 直播流内容分析类型任务参数。
+         * @type {AiAnalysisTaskInput || null}
+         */
+        this.AiAnalysisTask = null;
+
+        /**
+         * 任务的事件通知信息，不填代表不获取事件通知。
+         * @type {TaskNotifyConfig || null}
+         */
+        this.TaskNotifyConfig = null;
+
+        /**
+         * 来源上下文，用于透传用户请求信息，任务流状态变更回调将返回该字段值，最长 1000 个字符。
+         * @type {string || null}
+         */
+        this.SessionContext = null;
+
+        /**
+         * 用于去重的识别码，如果七天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。
+         * @type {string || null}
+         */
+        this.SessionId = null;
+
+        /**
+         * 直播开始时间戳（UTC 时间 单位为秒，该参数仅对于直播流分析有效）。
+         * @type {number || null}
+         */
+        this.StartTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Url = 'Url' in params ? params.Url : null;
+
+        if (params.OutputStorage) {
+            let obj = new TaskOutputStorage();
+            obj.deserialize(params.OutputStorage)
+            this.OutputStorage = obj;
+        }
+        this.OutputDir = 'OutputDir' in params ? params.OutputDir : null;
+
+        if (params.AiRecognitionTask) {
+            let obj = new AiRecognitionTaskInput();
+            obj.deserialize(params.AiRecognitionTask)
+            this.AiRecognitionTask = obj;
+        }
+
+        if (params.AiAnalysisTask) {
+            let obj = new AiAnalysisTaskInput();
+            obj.deserialize(params.AiAnalysisTask)
+            this.AiAnalysisTask = obj;
+        }
+
+        if (params.TaskNotifyConfig) {
+            let obj = new TaskNotifyConfig();
+            obj.deserialize(params.TaskNotifyConfig)
+            this.TaskNotifyConfig = obj;
+        }
+        this.SessionContext = 'SessionContext' in params ? params.SessionContext : null;
+        this.SessionId = 'SessionId' in params ? params.SessionId : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+
+    }
+}
+
+/**
  * 视频处理任务中的水印参数类型
  * @class
  */
@@ -6403,41 +6663,6 @@ class DescribeSnapshotByTimeOffsetTemplatesRequest extends  AbstractModel {
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.Type = 'Type' in params ? params.Type : null;
-
-    }
-}
-
-/**
- * 视频处理 COS 输出对象信息。
- * @class
- */
-class CosOutputStorage extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 视频处理生成的文件输出的目标 Bucket 名，如 TopRankVideo-125xxx88。如果不填，表示继承上层。
-         * @type {string || null}
-         */
-        this.Bucket = null;
-
-        /**
-         * 视频处理生成的文件输出的目标 Bucket 的园区，如 ap-chongqing。如果不填，表示继承上层。
-         * @type {string || null}
-         */
-        this.Region = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Bucket = 'Bucket' in params ? params.Bucket : null;
-        this.Region = 'Region' in params ? params.Region : null;
 
     }
 }
@@ -6683,45 +6908,33 @@ class MediaProcessTaskInput extends  AbstractModel {
 
         /**
          * 视频转码任务列表。
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<TranscodeTaskInput> || null}
          */
         this.TranscodeTaskSet = null;
 
         /**
          * 视频转动图任务列表。
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<AnimatedGraphicTaskInput> || null}
          */
         this.AnimatedGraphicTaskSet = null;
 
         /**
          * 对视频按时间点截图任务列表。
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<SnapshotByTimeOffsetTaskInput> || null}
          */
         this.SnapshotByTimeOffsetTaskSet = null;
 
         /**
          * 对视频采样截图任务列表。
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<SampleSnapshotTaskInput> || null}
          */
         this.SampleSnapshotTaskSet = null;
 
         /**
          * 对视频截雪碧图任务列表。
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<ImageSpriteTaskInput> || null}
          */
         this.ImageSpriteTaskSet = null;
-
-        /**
-         * 对视频转自适应码流任务列表。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {Array.<AdaptiveDynamicStreamingTaskInput> || null}
-         */
-        this.AdaptiveDynamicStreamingTaskSet = null;
 
     }
 
@@ -6775,15 +6988,6 @@ class MediaProcessTaskInput extends  AbstractModel {
                 let obj = new ImageSpriteTaskInput();
                 obj.deserialize(params.ImageSpriteTaskSet[z]);
                 this.ImageSpriteTaskSet.push(obj);
-            }
-        }
-
-        if (params.AdaptiveDynamicStreamingTaskSet) {
-            this.AdaptiveDynamicStreamingTaskSet = new Array();
-            for (let z in params.AdaptiveDynamicStreamingTaskSet) {
-                let obj = new AdaptiveDynamicStreamingTaskInput();
-                obj.deserialize(params.AdaptiveDynamicStreamingTaskSet[z]);
-                this.AdaptiveDynamicStreamingTaskSet.push(obj);
             }
         }
 
@@ -6910,57 +7114,24 @@ class CreateImageSpriteTemplateResponse extends  AbstractModel {
 }
 
 /**
- * 对视频转自适应码流的输入参数类型
+ * 视频处理 COS 输出对象信息。
  * @class
  */
-class AdaptiveDynamicStreamingTaskInput extends  AbstractModel {
+class CosOutputStorage extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 转自适应码流模板 ID。
-         * @type {number || null}
-         */
-        this.Definition = null;
-
-        /**
-         * 水印列表，支持多张图片或文字水印，最大可支持 10 张。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {Array.<WatermarkInput> || null}
-         */
-        this.WatermarkSet = null;
-
-        /**
-         * 转自适应码流后文件的目标存储，不填则继承上层的 OutputStorage 值。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {TaskOutputStorage || null}
-         */
-        this.OutputStorage = null;
-
-        /**
-         * 转自适应码流后，manifest 文件的输出路径，可以为相对路径或者绝对路径。如果不填，则默认为相对路径：`{inputName}_adaptiveDynamicStreaming_{definition}.{format}`。
+         * 视频处理生成的文件输出的目标 Bucket 名，如 TopRankVideo-125xxx88。如果不填，表示继承上层。
          * @type {string || null}
          */
-        this.OutputObjectPath = null;
+        this.Bucket = null;
 
         /**
-         * 转自适应码流（HLS）后，二级 index 文件的输出路径，只能为相对路径。如果不填，则默认为相对路径：`{inputName}_adaptiveDynamicStreaming_{definition}_{trackType}_{trackDefinition}.{format}`。
+         * 视频处理生成的文件输出的目标 Bucket 的园区，如 ap-chongqing。如果不填，表示继承上层。
          * @type {string || null}
          */
-        this.SubStreamManifestObjectName = null;
-
-        /**
-         * 转自适应码流后，分片文件的输出路径，只能为相对路径。如果不填，则默认为相对路径：`{inputName}_adaptiveDynamicStreaming_{definition}_{trackType}_{trackDefinition}_{number}.{format}`。
-         * @type {string || null}
-         */
-        this.SegmentObjectName = null;
-
-        /**
-         * 转自适应码流后输出路径中的`{number}`变量的规则。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {NumberFormat || null}
-         */
-        this.ObjectNumberFormat = null;
+        this.Region = null;
 
     }
 
@@ -6971,31 +7142,8 @@ class AdaptiveDynamicStreamingTaskInput extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Definition = 'Definition' in params ? params.Definition : null;
-
-        if (params.WatermarkSet) {
-            this.WatermarkSet = new Array();
-            for (let z in params.WatermarkSet) {
-                let obj = new WatermarkInput();
-                obj.deserialize(params.WatermarkSet[z]);
-                this.WatermarkSet.push(obj);
-            }
-        }
-
-        if (params.OutputStorage) {
-            let obj = new TaskOutputStorage();
-            obj.deserialize(params.OutputStorage)
-            this.OutputStorage = obj;
-        }
-        this.OutputObjectPath = 'OutputObjectPath' in params ? params.OutputObjectPath : null;
-        this.SubStreamManifestObjectName = 'SubStreamManifestObjectName' in params ? params.SubStreamManifestObjectName : null;
-        this.SegmentObjectName = 'SegmentObjectName' in params ? params.SegmentObjectName : null;
-
-        if (params.ObjectNumberFormat) {
-            let obj = new NumberFormat();
-            obj.deserialize(params.ObjectNumberFormat)
-            this.ObjectNumberFormat = obj;
-        }
+        this.Bucket = 'Bucket' in params ? params.Bucket : null;
+        this.Region = 'Region' in params ? params.Region : null;
 
     }
 }
@@ -7094,7 +7242,7 @@ class TaskNotifyConfig extends  AbstractModel {
         super();
 
         /**
-         * CMQ 的模型，有 Queue 和 Topic 两种。
+         * CMQ 的模型，有 Queue 和 Topic 两种，目前仅支持 Queue。
          * @type {string || null}
          */
         this.CmqModel = null;
@@ -7214,6 +7362,7 @@ module.exports = {
     MediaTranscodeItem: MediaTranscodeItem,
     TextWatermarkTemplateInputForUpdate: TextWatermarkTemplateInputForUpdate,
     ProcessMediaRequest: ProcessMediaRequest,
+    ProcessLiveMediaResponse: ProcessLiveMediaResponse,
     CreateSnapshotByTimeOffsetTemplateRequest: CreateSnapshotByTimeOffsetTemplateRequest,
     CreateSampleSnapshotTemplateRequest: CreateSampleSnapshotTemplateRequest,
     DescribeSampleSnapshotTemplatesRequest: DescribeSampleSnapshotTemplatesRequest,
@@ -7237,6 +7386,7 @@ module.exports = {
     ImageWatermarkTemplate: ImageWatermarkTemplate,
     ImageWatermarkInput: ImageWatermarkInput,
     CosFileUploadTrigger: CosFileUploadTrigger,
+    TEHDConfigForUpdate: TEHDConfigForUpdate,
     CreateAnimatedGraphicsTemplateResponse: CreateAnimatedGraphicsTemplateResponse,
     MediaSnapshotByTimePicInfoItem: MediaSnapshotByTimePicInfoItem,
     WatermarkTemplate: WatermarkTemplate,
@@ -7245,13 +7395,14 @@ module.exports = {
     DescribeTaskDetailRequest: DescribeTaskDetailRequest,
     DeleteImageSpriteTemplateResponse: DeleteImageSpriteTemplateResponse,
     CreateWorkflowResponse: CreateWorkflowResponse,
+    TEHDConfig: TEHDConfig,
     AnimatedGraphicsTemplate: AnimatedGraphicsTemplate,
     ModifyAnimatedGraphicsTemplateRequest: ModifyAnimatedGraphicsTemplateRequest,
     MediaProcessTaskResult: MediaProcessTaskResult,
+    ProcessLiveMediaRequest: ProcessLiveMediaRequest,
     WatermarkInput: WatermarkInput,
     EnableWorkflowResponse: EnableWorkflowResponse,
     DescribeSnapshotByTimeOffsetTemplatesRequest: DescribeSnapshotByTimeOffsetTemplatesRequest,
-    CosOutputStorage: CosOutputStorage,
     ModifyImageSpriteTemplateResponse: ModifyImageSpriteTemplateResponse,
     CreateWatermarkTemplateRequest: CreateWatermarkTemplateRequest,
     DeleteWatermarkTemplateResponse: DeleteWatermarkTemplateResponse,
@@ -7260,7 +7411,7 @@ module.exports = {
     MediaProcessTaskInput: MediaProcessTaskInput,
     VideoTemplateInfoForUpdate: VideoTemplateInfoForUpdate,
     CreateImageSpriteTemplateResponse: CreateImageSpriteTemplateResponse,
-    AdaptiveDynamicStreamingTaskInput: AdaptiveDynamicStreamingTaskInput,
+    CosOutputStorage: CosOutputStorage,
     DescribeImageSpriteTemplatesResponse: DescribeImageSpriteTemplatesResponse,
     ModifyWatermarkTemplateResponse: ModifyWatermarkTemplateResponse,
     TaskNotifyConfig: TaskNotifyConfig,
