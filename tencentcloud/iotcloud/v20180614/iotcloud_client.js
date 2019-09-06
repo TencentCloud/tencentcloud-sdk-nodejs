@@ -18,12 +18,15 @@ const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const PublishMessageRequest = models.PublishMessageRequest;
 const DeleteProductRequest = models.DeleteProductRequest;
+const EnableTopicRuleResponse = models.EnableTopicRuleResponse;
 const UpdateDeviceShadowResponse = models.UpdateDeviceShadowResponse;
 const DescribeTasksRequest = models.DescribeTasksRequest;
 const DisableTopicRuleResponse = models.DisableTopicRuleResponse;
+const UpdateDeviceAvailableStateRequest = models.UpdateDeviceAvailableStateRequest;
 const ReplaceTopicRuleRequest = models.ReplaceTopicRuleRequest;
 const DeleteTopicRuleRequest = models.DeleteTopicRuleRequest;
 const DescribeMultiDevicesRequest = models.DescribeMultiDevicesRequest;
+const UpdateDeviceAvailableStateResponse = models.UpdateDeviceAvailableStateResponse;
 const MultiDevicesInfo = models.MultiDevicesInfo;
 const PublishAsDeviceRequest = models.PublishAsDeviceRequest;
 const DescribeDeviceClientKeyRequest = models.DescribeDeviceClientKeyRequest;
@@ -33,6 +36,7 @@ const PublishToDeviceResponse = models.PublishToDeviceResponse;
 const CreateTaskResponse = models.CreateTaskResponse;
 const BatchPublishMessage = models.BatchPublishMessage;
 const BatchUpdateShadow = models.BatchUpdateShadow;
+const BindDevicesRequest = models.BindDevicesRequest;
 const Filter = models.Filter;
 const DeleteDeviceRequest = models.DeleteDeviceRequest;
 const DeleteProductResponse = models.DeleteProductResponse;
@@ -46,6 +50,7 @@ const DeviceTag = models.DeviceTag;
 const DeleteTopicRuleResponse = models.DeleteTopicRuleResponse;
 const ProductProperties = models.ProductProperties;
 const DeleteLoraDeviceResponse = models.DeleteLoraDeviceResponse;
+const UnbindDevicesRequest = models.UnbindDevicesRequest;
 const DescribeDeviceRequest = models.DescribeDeviceRequest;
 const CreateLoraDeviceRequest = models.CreateLoraDeviceRequest;
 const DescribeTaskRequest = models.DescribeTaskRequest;
@@ -57,7 +62,7 @@ const PublishToDeviceRequest = models.PublishToDeviceRequest;
 const ProductMetadata = models.ProductMetadata;
 const DescribeLoraDeviceResponse = models.DescribeLoraDeviceResponse;
 const DescribeTasksResponse = models.DescribeTasksResponse;
-const EnableTopicRuleResponse = models.EnableTopicRuleResponse;
+const BindDevicesResponse = models.BindDevicesResponse;
 const CreateProductResponse = models.CreateProductResponse;
 const DescribeProductsRequest = models.DescribeProductsRequest;
 const DescribeDevicesRequest = models.DescribeDevicesRequest;
@@ -82,6 +87,7 @@ const DeviceInfo = models.DeviceInfo;
 const CreateMultiDeviceResponse = models.CreateMultiDeviceResponse;
 const ReplaceTopicRuleResponse = models.ReplaceTopicRuleResponse;
 const DescribeLoraDeviceRequest = models.DescribeLoraDeviceRequest;
+const UnbindDevicesResponse = models.UnbindDevicesResponse;
 const DescribeDeviceShadowResponse = models.DescribeDeviceShadowResponse;
 const DescribeDeviceClientKeyResponse = models.DescribeDeviceClientKeyResponse;
 const PublishAsDeviceResponse = models.PublishAsDeviceResponse;
@@ -358,6 +364,17 @@ class IotcloudClient extends AbstractClient {
     }
 
     /**
+     * 启用或者禁用设备
+     * @param {UpdateDeviceAvailableStateRequest} req
+     * @param {function(string, UpdateDeviceAvailableStateResponse):void} cb
+     * @public
+     */
+    UpdateDeviceAvailableState(req, cb) {
+        let resp = new UpdateDeviceAvailableStateResponse();
+        this.request("UpdateDeviceAvailableState", req, resp, cb);
+    }
+
+    /**
      * 模拟lora类型的设备端向服务器端发送消息
      * @param {PublishAsDeviceRequest} req
      * @param {function(string, PublishAsDeviceResponse):void} cb
@@ -380,6 +397,17 @@ class IotcloudClient extends AbstractClient {
     }
 
     /**
+     * 本接口（BindDevices）用于网关设备批量绑定子设备
+     * @param {BindDevicesRequest} req
+     * @param {function(string, BindDevicesResponse):void} cb
+     * @public
+     */
+    BindDevices(req, cb) {
+        let resp = new BindDevicesResponse();
+        this.request("BindDevices", req, resp, cb);
+    }
+
+    /**
      * 本接口（UpdateTopicPolicy）用于更新Topic信息
      * @param {UpdateTopicPolicyRequest} req
      * @param {function(string, UpdateTopicPolicyResponse):void} cb
@@ -388,6 +416,17 @@ class IotcloudClient extends AbstractClient {
     UpdateTopicPolicy(req, cb) {
         let resp = new UpdateTopicPolicyResponse();
         this.request("UpdateTopicPolicy", req, resp, cb);
+    }
+
+    /**
+     * 本接口（UnbindDevices）用于网关设备批量解绑子设备
+     * @param {UnbindDevicesRequest} req
+     * @param {function(string, UnbindDevicesResponse):void} cb
+     * @public
+     */
+    UnbindDevices(req, cb) {
+        let resp = new UnbindDevicesResponse();
+        this.request("UnbindDevices", req, resp, cb);
     }
 
     /**

@@ -16,16 +16,19 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
+const DescribeTaskRequest = models.DescribeTaskRequest;
 const SentenceItem = models.SentenceItem;
-const CorrectData = models.CorrectData;
+const ECCResponse = models.ECCResponse;
 const EHOCRResponse = models.EHOCRResponse;
+const ErrorCoordinate = models.ErrorCoordinate;
 const ECCRequest = models.ECCRequest;
 const SentenceCom = models.SentenceCom;
 const SentenceSuggest = models.SentenceSuggest;
-const ECCResponse = models.ECCResponse;
+const CorrectData = models.CorrectData;
 const ScoreCategory = models.ScoreCategory;
 const Aspect = models.Aspect;
 const CompostionContext = models.CompostionContext;
+const DescribeTaskResponse = models.DescribeTaskResponse;
 const EHOCRRequest = models.EHOCRRequest;
 
 
@@ -41,7 +44,7 @@ class EccClient extends AbstractClient {
     
     /**
      * https://ecc.tencentcloudapi.com/?Action=EHOCR
-作文识别
+图像识别批改接口
      * @param {EHOCRRequest} req
      * @param {function(string, EHOCRResponse):void} cb
      * @public
@@ -61,6 +64,17 @@ class EccClient extends AbstractClient {
     ECC(req, cb) {
         let resp = new ECCResponse();
         this.request("ECC", req, resp, cb);
+    }
+
+    /**
+     * 异步任务结果查询接口
+     * @param {DescribeTaskRequest} req
+     * @param {function(string, DescribeTaskResponse):void} cb
+     * @public
+     */
+    DescribeTask(req, cb) {
+        let resp = new DescribeTaskResponse();
+        this.request("DescribeTask", req, resp, cb);
     }
 
 

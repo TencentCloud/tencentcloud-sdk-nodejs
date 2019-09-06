@@ -17,6 +17,56 @@
 const AbstractModel = require("../../common/abstract_model");
 
 /**
+ * FaceFusion返回参数结构体
+ * @class
+ */
+class FaceFusionResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * RspImgType 为 url 时，返回结果的 url， RspImgType 为 base64 时返回 base64 数据。当前仅支持 url 方式，base64 方式后期开放。
+         * @type {string || null}
+         */
+        this.Image = null;
+
+        /**
+         * 鉴黄鉴政结果
+         * @type {Array.<FuseFaceReviewResult> || null}
+         */
+        this.ReviewResultSet = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Image = 'Image' in params ? params.Image : null;
+
+        if (params.ReviewResultSet) {
+            this.ReviewResultSet = new Array();
+            for (let z in params.ReviewResultSet) {
+                let obj = new FuseFaceReviewResult();
+                obj.deserialize(params.ReviewResultSet[z]);
+                this.ReviewResultSet.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * FaceFusion请求参数结构体
  * @class
  */
@@ -80,30 +130,85 @@ class FaceFusionRequest extends  AbstractModel {
 }
 
 /**
- * FaceFusion返回参数结构体
+ * 人脸融合鉴黄鉴政人脸信息
  * @class
  */
-class FaceFusionResponse extends  AbstractModel {
+class FuseFaceReviewDetail extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * RspImgType 为 url 时，返回结果的 url， RspImgType 为 base64 时返回 base64 数据。当前仅支持 url 方式，base64 方式后期开放。
+         * 鉴政使用字段, 为职业属性,其他审核结果对应上一级category
+         * @type {string || null}
+         */
+        this.Field = null;
+
+        /**
+         * 人员名称
+         * @type {string || null}
+         */
+        this.Label = null;
+
+        /**
+         * 对应识别label的置信度
+         * @type {number || null}
+         */
+        this.Confidence = null;
+
+        /**
+         * 此字段为保留字段，目前统一返回pass。
+         * @type {string || null}
+         */
+        this.Suggestion = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Field = 'Field' in params ? params.Field : null;
+        this.Label = 'Label' in params ? params.Label : null;
+        this.Confidence = 'Confidence' in params ? params.Confidence : null;
+        this.Suggestion = 'Suggestion' in params ? params.Suggestion : null;
+
+    }
+}
+
+/**
+ * 人脸图片和待被融合的素材模板图的人脸位置信息。
+ * @class
+ */
+class MergeInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 输入图片base64
          * @type {string || null}
          */
         this.Image = null;
 
         /**
-         * 鉴黄鉴政结果
-         * @type {Array.<FuseFaceReviewResult> || null}
-         */
-        this.ReviewResultSet = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * 输入图片url
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.Url = null;
+
+        /**
+         * 上传的图片人脸位置信息（人脸框）
+         * @type {FaceRect || null}
+         */
+        this.InputImageFaceRect = null;
+
+        /**
+         * 控制台上传的素材人脸ID
+         * @type {string || null}
+         */
+        this.TemplateFaceID = null;
 
     }
 
@@ -115,16 +220,14 @@ class FaceFusionResponse extends  AbstractModel {
             return;
         }
         this.Image = 'Image' in params ? params.Image : null;
+        this.Url = 'Url' in params ? params.Url : null;
 
-        if (params.ReviewResultSet) {
-            this.ReviewResultSet = new Array();
-            for (let z in params.ReviewResultSet) {
-                let obj = new FuseFaceReviewResult();
-                obj.deserialize(params.ReviewResultSet[z]);
-                this.ReviewResultSet.push(obj);
-            }
+        if (params.InputImageFaceRect) {
+            let obj = new FaceRect();
+            obj.deserialize(params.InputImageFaceRect)
+            this.InputImageFaceRect = obj;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.TemplateFaceID = 'TemplateFaceID' in params ? params.TemplateFaceID : null;
 
     }
 }
@@ -201,36 +304,24 @@ class FuseFaceReviewResult extends  AbstractModel {
 }
 
 /**
- * 人脸融合鉴黄鉴政人脸信息
+ * FuseFace返回参数结构体
  * @class
  */
-class FuseFaceReviewDetail extends  AbstractModel {
+class FuseFaceResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 鉴政使用字段, 为职业属性,其他审核结果对应上一级category
+         * RspImgType 为 url 时，返回结果的 url， RspImgType 为 base64 时返回 base64 数据。
          * @type {string || null}
          */
-        this.Field = null;
+        this.FusedImage = null;
 
         /**
-         * 人员名称
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.Label = null;
-
-        /**
-         * 对应识别label的置信度
-         * @type {number || null}
-         */
-        this.Confidence = null;
-
-        /**
-         * 此字段为保留字段，目前统一返回pass。
-         * @type {string || null}
-         */
-        this.Suggestion = null;
+        this.RequestId = null;
 
     }
 
@@ -241,18 +332,142 @@ class FuseFaceReviewDetail extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Field = 'Field' in params ? params.Field : null;
-        this.Label = 'Label' in params ? params.Label : null;
-        this.Confidence = 'Confidence' in params ? params.Confidence : null;
-        this.Suggestion = 'Suggestion' in params ? params.Suggestion : null;
+        this.FusedImage = 'FusedImage' in params ? params.FusedImage : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * FuseFace请求参数结构体
+ * @class
+ */
+class FuseFaceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 活动 ID，请在人脸融合控制台查看。
+         * @type {string || null}
+         */
+        this.ProjectId = null;
+
+        /**
+         * 素材 ID，请在人脸融合控制台查看。
+         * @type {string || null}
+         */
+        this.ModelId = null;
+
+        /**
+         * 返回图像方式（url 或 base64) ，二选一。url有效期为30天。
+         * @type {string || null}
+         */
+        this.RspImgType = null;
+
+        /**
+         * 人脸图片和待被融合的素材模板图的人脸位置信息。
+         * @type {Array.<MergeInfo> || null}
+         */
+        this.MergeInfos = null;
+
+        /**
+         * 脸型融合比例，数值越高，融合后的脸型越像素材人物。取值范围[0,100] 
+若此参数不填写，则使用人脸融合控制台中脸型参数数值。
+         * @type {number || null}
+         */
+        this.FuseProfileDegree = null;
+
+        /**
+         * 五官融合比例，数值越高，融合后的五官越像素材人物。取值范围[0,100] 
+若此参数不填写，则使用人脸融合控制台中五官参数数值。
+         * @type {number || null}
+         */
+        this.FuseFaceDegree = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+        this.ModelId = 'ModelId' in params ? params.ModelId : null;
+        this.RspImgType = 'RspImgType' in params ? params.RspImgType : null;
+
+        if (params.MergeInfos) {
+            this.MergeInfos = new Array();
+            for (let z in params.MergeInfos) {
+                let obj = new MergeInfo();
+                obj.deserialize(params.MergeInfos[z]);
+                this.MergeInfos.push(obj);
+            }
+        }
+        this.FuseProfileDegree = 'FuseProfileDegree' in params ? params.FuseProfileDegree : null;
+        this.FuseFaceDegree = 'FuseFaceDegree' in params ? params.FuseFaceDegree : null;
+
+    }
+}
+
+/**
+ * 人脸框信息
+ * @class
+ */
+class FaceRect extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 人脸框左上角横坐标。
+         * @type {number || null}
+         */
+        this.X = null;
+
+        /**
+         * 人脸框左上角纵坐标。
+         * @type {number || null}
+         */
+        this.Y = null;
+
+        /**
+         * 人脸框宽度。
+         * @type {number || null}
+         */
+        this.Width = null;
+
+        /**
+         * 人脸框高度。
+         * @type {number || null}
+         */
+        this.Height = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.X = 'X' in params ? params.X : null;
+        this.Y = 'Y' in params ? params.Y : null;
+        this.Width = 'Width' in params ? params.Width : null;
+        this.Height = 'Height' in params ? params.Height : null;
 
     }
 }
 
 module.exports = {
-    FaceFusionRequest: FaceFusionRequest,
     FaceFusionResponse: FaceFusionResponse,
-    FuseFaceReviewResult: FuseFaceReviewResult,
+    FaceFusionRequest: FaceFusionRequest,
     FuseFaceReviewDetail: FuseFaceReviewDetail,
+    MergeInfo: MergeInfo,
+    FuseFaceReviewResult: FuseFaceReviewResult,
+    FuseFaceResponse: FuseFaceResponse,
+    FuseFaceRequest: FuseFaceRequest,
+    FaceRect: FaceRect,
 
 }
