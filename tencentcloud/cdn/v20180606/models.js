@@ -17,6 +17,41 @@
 const AbstractModel = require("../../common/abstract_model");
 
 /**
+ * PurgePathCache请求参数结构体
+ * @class
+ */
+class PurgePathCacheRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 要刷新的目录列表，必须包含协议头部。
+         * @type {Array.<string> || null}
+         */
+        this.Paths = null;
+
+        /**
+         * 刷新类型，flush 代表刷新有更新的资源，delete 表示刷新全部资源。
+         * @type {string || null}
+         */
+        this.FlushType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Paths = 'Paths' in params ? params.Paths : null;
+        this.FlushType = 'FlushType' in params ? params.FlushType : null;
+
+    }
+}
+
+/**
  * 访问明细数据类型
  * @class
  */
@@ -77,6 +112,34 @@ statusCode：状态码，返回 2XX、3XX、4XX、5XX 汇总数据，单位为 �
             obj.deserialize(params.SummarizedData)
             this.SummarizedData = obj;
         }
+
+    }
+}
+
+/**
+ * PurgeUrlsCache请求参数结构体
+ * @class
+ */
+class PurgeUrlsCacheRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 要刷新的Url列表，必须包含协议头部。
+         * @type {Array.<string> || null}
+         */
+        this.Urls = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Urls = 'Urls' in params ? params.Urls : null;
 
     }
 }
@@ -273,6 +336,62 @@ day：天粒度，指定查询区间大于 31 天，可返回天粒度明细数�
 }
 
 /**
+ * 预热任务日志详情。
+ * @class
+ */
+class PushTask extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 预热任务Id，前十位为时间戳。
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * 预热Url。
+         * @type {string || null}
+         */
+        this.Url = null;
+
+        /**
+         * 预热任务状态，fail表示失败，done表示成功，process表示预热中。
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * 预热百分比。
+         * @type {number || null}
+         */
+        this.Percent = null;
+
+        /**
+         * 预热任务提交时间。
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.Url = 'Url' in params ? params.Url : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.Percent = 'Percent' in params ? params.Percent : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+
+    }
+}
+
+/**
  * 时间戳与其对应的数值
  * @class
  */
@@ -309,24 +428,18 @@ class TimestampData extends  AbstractModel {
 }
 
 /**
- * 名称与ID映射关系
+ * DescribeCdnIp请求参数结构体
  * @class
  */
-class MapInfo extends  AbstractModel {
+class DescribeCdnIpRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 对象 Id
-         * @type {number || null}
+         * 需要查询的 IP 列表
+         * @type {Array.<string> || null}
          */
-        this.Id = null;
-
-        /**
-         * 对象名称
-         * @type {string || null}
-         */
-        this.Name = null;
+        this.Ips = null;
 
     }
 
@@ -337,8 +450,344 @@ class MapInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Id = 'Id' in params ? params.Id : null;
-        this.Name = 'Name' in params ? params.Name : null;
+        this.Ips = 'Ips' in params ? params.Ips : null;
+
+    }
+}
+
+/**
+ * PushUrlsCache请求参数结构体
+ * @class
+ */
+class PushUrlsCacheRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * URL 列表，提交时需要包含协议头部（http:// 或 https://）
+         * @type {Array.<string> || null}
+         */
+        this.Urls = null;
+
+        /**
+         * 预热请求回源时 HTTP 请求的 User-Agent 头部，默认为 TencentCdn
+         * @type {string || null}
+         */
+        this.UserAgent = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Urls = 'Urls' in params ? params.Urls : null;
+        this.UserAgent = 'UserAgent' in params ? params.UserAgent : null;
+
+    }
+}
+
+/**
+ * DescribePushTasks请求参数结构体
+ * @class
+ */
+class DescribePushTasksRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 开始时间，如2018-08-08 00:00:00。
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * 结束时间，如2018-08-08 23:59:59。
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * 提交时返回的任务 Id，查询时 TaskId 和起始时间必须指定一项。
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * 查询关键字，请输入域名或 http(s):// 开头完整 URL。
+         * @type {string || null}
+         */
+        this.Keyword = null;
+
+        /**
+         * 分页查询偏移量，默认为 0 （第一页）。
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 分页查询限制数目，默认为20。
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 查询刷新记录指定地区。mainland：中国大陆。
+         * @type {string || null}
+         */
+        this.Area = null;
+
+        /**
+         * 查询指定任务状态，fail表示失败，done表示成功，process表示刷新中。
+         * @type {string || null}
+         */
+        this.Status = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.Keyword = 'Keyword' in params ? params.Keyword : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Area = 'Area' in params ? params.Area : null;
+        this.Status = 'Status' in params ? params.Status : null;
+
+    }
+}
+
+/**
+ * DescribeIpVisit返回参数结构体
+ * @class
+ */
+class DescribeIpVisitResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 数据统计的时间粒度，支持5min,  day，分别表示5分钟，1天的时间粒度。
+         * @type {string || null}
+         */
+        this.Interval = null;
+
+        /**
+         * 各个资源的回源数据详情。
+         * @type {Array.<ResourceData> || null}
+         */
+        this.Data = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Interval = 'Interval' in params ? params.Interval : null;
+
+        if (params.Data) {
+            this.Data = new Array();
+            for (let z in params.Data) {
+                let obj = new ResourceData();
+                obj.deserialize(params.Data[z]);
+                this.Data.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * PurgePathCache返回参数结构体
+ * @class
+ */
+class PurgePathCacheResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 刷新任务Id，前十位为提交任务时的UTC时间。
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 刷新任务日志详情
+ * @class
+ */
+class PurgeTask extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 刷新任务ID。
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * 刷新Url。
+         * @type {string || null}
+         */
+        this.Url = null;
+
+        /**
+         * 刷新任务状态，fail表示失败，done表示成功，process表示刷新中。
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * 刷新类型，url表示url刷新，path表示目录刷新。
+         * @type {string || null}
+         */
+        this.PurgeType = null;
+
+        /**
+         * 刷新资源方式，flush代表刷新更新资源，delete代表刷新全部资源。
+         * @type {string || null}
+         */
+        this.FlushType = null;
+
+        /**
+         * 刷新任务提交时间
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.Url = 'Url' in params ? params.Url : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.PurgeType = 'PurgeType' in params ? params.PurgeType : null;
+        this.FlushType = 'FlushType' in params ? params.FlushType : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+
+    }
+}
+
+/**
+ * DescribePurgeTasks请求参数结构体
+ * @class
+ */
+class DescribePurgeTasksRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 查询刷新类型。url：查询 url 刷新记录；path：查询目录刷新记录。
+         * @type {string || null}
+         */
+        this.PurgeType = null;
+
+        /**
+         * 开始时间，如2018-08-08 00:00:00。
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * 结束时间，如2018-08-08 23:59:59。
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * 提交时返回的任务 Id，查询时 TaskId 和起始时间必须指定一项。
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * 分页查询偏移量，默认为 0 （第一页）。
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 分页查询限制数目，默认为20。
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 查询关键字，请输入域名或 http(s):// 开头完整 URL。
+         * @type {string || null}
+         */
+        this.Keyword = null;
+
+        /**
+         * 查询指定任务状态，fail表示失败，done表示成功，process表示刷新中。
+         * @type {string || null}
+         */
+        this.Status = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PurgeType = 'PurgeType' in params ? params.PurgeType : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Keyword = 'Keyword' in params ? params.Keyword : null;
+        this.Status = 'Status' in params ? params.Status : null;
 
     }
 }
@@ -559,34 +1008,47 @@ class DescribePayTypeRequest extends  AbstractModel {
 }
 
 /**
- * DescribeCdnData返回参数结构体
+ * DescribeIpVisit请求参数结构体
  * @class
  */
-class DescribeCdnDataResponse extends  AbstractModel {
+class DescribeIpVisitRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 返回数据的时间粒度，查询时指定：
-min：1 分钟粒度
-5min：5 分钟粒度
-hour：1 小时粒度
-day：天粒度
+         * 查询起始时间，如：2018-09-04 10:40:10，返回结果大于等于指定时间
+根据指定时间粒度不同，会进行向前归整，如 2018-09-04 10:40:10 在按 5 分钟的时间粒度查询时，返回的第一个数据对应时间点为 2018-09-04 10:40:00
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * 查询结束时间，如：2018-09-04 10:40:10，返回结果小于等于指定时间
+根据指定时间粒度不同，会进行向前归整，如 2018-09-04 10:40:10 在按 5 分钟的时间粒度查询时，返回的最后一个数据对应时间点为 2018-09-04 10:40:00
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * 指定查询域名列表，最多可一次性查询 30 个加速域名明细
+         * @type {Array.<string> || null}
+         */
+        this.Domains = null;
+
+        /**
+         * 指定要查询的项目 ID，[前往查看项目 ID](https://console.cloud.tencent.com/project)
+未填充域名情况下，指定项目查询，若填充了具体域名信息，以域名为主
+         * @type {number || null}
+         */
+        this.Project = null;
+
+        /**
+         * 时间粒度，支持以下几种模式：
+5min：5 分钟粒度，查询时间区间 24 小时内，默认返回 5 分钟粒度活跃用户数
+day：天粒度，查询时间区间大于 1 天时，默认返回天粒度活跃用户数
          * @type {string || null}
          */
         this.Interval = null;
-
-        /**
-         * 指定条件查询得到的数据明细
-         * @type {Array.<ResourceData> || null}
-         */
-        this.Data = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
 
     }
 
@@ -597,67 +1059,11 @@ day：天粒度
         if (!params) {
             return;
         }
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.Domains = 'Domains' in params ? params.Domains : null;
+        this.Project = 'Project' in params ? params.Project : null;
         this.Interval = 'Interval' in params ? params.Interval : null;
-
-        if (params.Data) {
-            this.Data = new Array();
-            for (let z in params.Data) {
-                let obj = new ResourceData();
-                obj.deserialize(params.Data[z]);
-                this.Data.push(obj);
-            }
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * DescribeIpVisit返回参数结构体
- * @class
- */
-class DescribeIpVisitResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 数据统计的时间粒度，支持5min,  day，分别表示5分钟，1天的时间粒度。
-         * @type {string || null}
-         */
-        this.Interval = null;
-
-        /**
-         * 各个资源的回源数据详情。
-         * @type {Array.<ResourceData> || null}
-         */
-        this.Data = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Interval = 'Interval' in params ? params.Interval : null;
-
-        if (params.Data) {
-            this.Data = new Array();
-            for (let z in params.Data) {
-                let obj = new ResourceData();
-                obj.deserialize(params.Data[z]);
-                this.Data.push(obj);
-            }
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -767,6 +1173,41 @@ enable：当前为可用状态，已解禁，可正常访问
         this.EndTime = 'EndTime' in params ? params.EndTime : null;
         this.Url = 'Url' in params ? params.Url : null;
         this.Status = 'Status' in params ? params.Status : null;
+
+    }
+}
+
+/**
+ * PurgeUrlsCache返回参数结构体
+ * @class
+ */
+class PurgeUrlsCacheResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 刷新任务Id，前十位为提交任务时的UTC时间。
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -912,6 +1353,110 @@ class DisableCachesResponse extends  AbstractModel {
 }
 
 /**
+ * DescribePurgeTasks返回参数结构体
+ * @class
+ */
+class DescribePurgeTasksResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 刷新历史记录
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<PurgeTask> || null}
+         */
+        this.PurgeLogs = null;
+
+        /**
+         * 任务总数，用于分页
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.PurgeLogs) {
+            this.PurgeLogs = new Array();
+            for (let z in params.PurgeLogs) {
+                let obj = new PurgeTask();
+                obj.deserialize(params.PurgeLogs[z]);
+                this.PurgeLogs.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribePushTasks返回参数结构体
+ * @class
+ */
+class DescribePushTasksResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 预热历史记录
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<PushTask> || null}
+         */
+        this.PushLogs = null;
+
+        /**
+         * 任务总数，用于分页
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.PushLogs) {
+            this.PushLogs = new Array();
+            for (let z in params.PushLogs) {
+                let obj = new PushTask();
+                obj.deserialize(params.PushLogs[z]);
+                this.PushLogs.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * 查询对象及其对应的回源明细数据
  * @class
  */
@@ -1009,47 +1554,24 @@ class DescribeOriginDataResponse extends  AbstractModel {
 }
 
 /**
- * DescribeIpVisit请求参数结构体
+ * DescribeCdnIp返回参数结构体
  * @class
  */
-class DescribeIpVisitRequest extends  AbstractModel {
+class DescribeCdnIpResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 查询起始时间，如：2018-09-04 10:40:10，返回结果大于等于指定时间
-根据指定时间粒度不同，会进行向前归整，如 2018-09-04 10:40:10 在按 5 分钟的时间粒度查询时，返回的第一个数据对应时间点为 2018-09-04 10:40:00
+         * 查询的节点归属详情。
+         * @type {Array.<CdnIp> || null}
+         */
+        this.Ips = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.StartTime = null;
-
-        /**
-         * 查询结束时间，如：2018-09-04 10:40:10，返回结果小于等于指定时间
-根据指定时间粒度不同，会进行向前归整，如 2018-09-04 10:40:10 在按 5 分钟的时间粒度查询时，返回的最后一个数据对应时间点为 2018-09-04 10:40:00
-         * @type {string || null}
-         */
-        this.EndTime = null;
-
-        /**
-         * 指定查询域名列表，最多可一次性查询 30 个加速域名明细
-         * @type {Array.<string> || null}
-         */
-        this.Domains = null;
-
-        /**
-         * 指定要查询的项目 ID，[前往查看项目 ID](https://console.cloud.tencent.com/project)
-未填充域名情况下，指定项目查询，若填充了具体域名信息，以域名为主
-         * @type {number || null}
-         */
-        this.Project = null;
-
-        /**
-         * 时间粒度，支持以下几种模式：
-5min：5 分钟粒度，查询时间区间 24 小时内，默认返回 5 分钟粒度活跃用户数
-day：天粒度，查询时间区间大于 1 天时，默认返回天粒度活跃用户数
-         * @type {string || null}
-         */
-        this.Interval = null;
+        this.RequestId = null;
 
     }
 
@@ -1060,11 +1582,134 @@ day：天粒度，查询时间区间大于 1 天时，默认返回天粒度活�
         if (!params) {
             return;
         }
-        this.StartTime = 'StartTime' in params ? params.StartTime : null;
-        this.EndTime = 'EndTime' in params ? params.EndTime : null;
-        this.Domains = 'Domains' in params ? params.Domains : null;
-        this.Project = 'Project' in params ? params.Project : null;
+
+        if (params.Ips) {
+            this.Ips = new Array();
+            for (let z in params.Ips) {
+                let obj = new CdnIp();
+                obj.deserialize(params.Ips[z]);
+                this.Ips.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeCdnData返回参数结构体
+ * @class
+ */
+class DescribeCdnDataResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 返回数据的时间粒度，查询时指定：
+min：1 分钟粒度
+5min：5 分钟粒度
+hour：1 小时粒度
+day：天粒度
+         * @type {string || null}
+         */
+        this.Interval = null;
+
+        /**
+         * 指定条件查询得到的数据明细
+         * @type {Array.<ResourceData> || null}
+         */
+        this.Data = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
         this.Interval = 'Interval' in params ? params.Interval : null;
+
+        if (params.Data) {
+            this.Data = new Array();
+            for (let z in params.Data) {
+                let obj = new ResourceData();
+                obj.deserialize(params.Data[z]);
+                this.Data.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CdnIp 属性详情。
+ * @class
+ */
+class CdnIp extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 节点 ip。
+         * @type {string || null}
+         */
+        this.Ip = null;
+
+        /**
+         * 是否为腾讯云 CDN 加速节点。yes 表示该节点为腾讯云 CDN 节点，no 表示该节点不是腾讯云 CDN 节点。
+         * @type {string || null}
+         */
+        this.Platform = null;
+
+        /**
+         * 表示该节点所处的省份/国家。unknown 表示节点位置未知。
+         * @type {string || null}
+         */
+        this.Location = null;
+
+        /**
+         * 节点上下线历史记录。
+         * @type {Array.<CdnIpHistory> || null}
+         */
+        this.History = null;
+
+        /**
+         * 节点的服务地域。mainland 表示服务地域为中国境内，overseas 表示服务地域为中国境外， unknown 表示服务地域未知。
+         * @type {string || null}
+         */
+        this.Area = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Ip = 'Ip' in params ? params.Ip : null;
+        this.Platform = 'Platform' in params ? params.Platform : null;
+        this.Location = 'Location' in params ? params.Location : null;
+
+        if (params.History) {
+            this.History = new Array();
+            for (let z in params.History) {
+                let obj = new CdnIpHistory();
+                obj.deserialize(params.History[z]);
+                this.History.push(obj);
+            }
+        }
+        this.Area = 'Area' in params ? params.Area : null;
 
     }
 }
@@ -1308,6 +1953,76 @@ class EnableCachesRequest extends  AbstractModel {
 }
 
 /**
+ * PushUrlsCache返回参数结构体
+ * @class
+ */
+class PushUrlsCacheResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 此批次提交任务对应的 Id，值唯一
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 名称与ID映射关系
+ * @class
+ */
+class MapInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 对象 Id
+         * @type {number || null}
+         */
+        this.Id = null;
+
+        /**
+         * 对象名称
+         * @type {string || null}
+         */
+        this.Name = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Id = 'Id' in params ? params.Id : null;
+        this.Name = 'Name' in params ? params.Name : null;
+
+    }
+}
+
+/**
  * 排序类型的数据结构
  * @class
  */
@@ -1387,6 +2102,42 @@ class GetDisableRecordsResponse extends  AbstractModel {
 }
 
 /**
+ * CdnIp 节点上下线历史
+ * @class
+ */
+class CdnIpHistory extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 上下线状态。online 为上线，offline 为下线。
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * 操作时间。当该值为 null 时表示无历史状态变更记录。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Datetime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Status = 'Status' in params ? params.Status : null;
+        this.Datetime = 'Datetime' in params ? params.Datetime : null;
+
+    }
+}
+
+/**
  * 明细数据的汇总值，各指标根据其特性不同拥有不同汇总方式
  * @class
  */
@@ -1425,33 +2176,49 @@ avg：平均值
 }
 
 module.exports = {
+    PurgePathCacheRequest: PurgePathCacheRequest,
     CdnData: CdnData,
+    PurgeUrlsCacheRequest: PurgeUrlsCacheRequest,
     ResourceData: ResourceData,
     UrlRecord: UrlRecord,
     DescribeOriginDataRequest: DescribeOriginDataRequest,
+    PushTask: PushTask,
     TimestampData: TimestampData,
-    MapInfo: MapInfo,
+    DescribeCdnIpRequest: DescribeCdnIpRequest,
+    PushUrlsCacheRequest: PushUrlsCacheRequest,
+    DescribePushTasksRequest: DescribePushTasksRequest,
+    DescribeIpVisitResponse: DescribeIpVisitResponse,
+    PurgePathCacheResponse: PurgePathCacheResponse,
+    PurgeTask: PurgeTask,
+    DescribePurgeTasksRequest: DescribePurgeTasksRequest,
     CacheOptResult: CacheOptResult,
     ListTopDataResponse: ListTopDataResponse,
     DescribeMapInfoResponse: DescribeMapInfoResponse,
     DescribeMapInfoRequest: DescribeMapInfoRequest,
     EnableCachesResponse: EnableCachesResponse,
     DescribePayTypeRequest: DescribePayTypeRequest,
-    DescribeCdnDataResponse: DescribeCdnDataResponse,
-    DescribeIpVisitResponse: DescribeIpVisitResponse,
+    DescribeIpVisitRequest: DescribeIpVisitRequest,
     DescribePayTypeResponse: DescribePayTypeResponse,
     GetDisableRecordsRequest: GetDisableRecordsRequest,
+    PurgeUrlsCacheResponse: PurgeUrlsCacheResponse,
     ListTopDataRequest: ListTopDataRequest,
     DisableCachesResponse: DisableCachesResponse,
+    DescribePurgeTasksResponse: DescribePurgeTasksResponse,
+    DescribePushTasksResponse: DescribePushTasksResponse,
     ResourceOriginData: ResourceOriginData,
     DescribeOriginDataResponse: DescribeOriginDataResponse,
-    DescribeIpVisitRequest: DescribeIpVisitRequest,
+    DescribeCdnIpResponse: DescribeCdnIpResponse,
+    DescribeCdnDataResponse: DescribeCdnDataResponse,
+    CdnIp: CdnIp,
     DisableCachesRequest: DisableCachesRequest,
     DescribeCdnDataRequest: DescribeCdnDataRequest,
     TopData: TopData,
     EnableCachesRequest: EnableCachesRequest,
+    PushUrlsCacheResponse: PushUrlsCacheResponse,
+    MapInfo: MapInfo,
     TopDetailData: TopDetailData,
     GetDisableRecordsResponse: GetDisableRecordsResponse,
+    CdnIpHistory: CdnIpHistory,
     SummarizedData: SummarizedData,
 
 }

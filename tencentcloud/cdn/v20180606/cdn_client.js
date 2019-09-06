@@ -16,33 +16,49 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
+const PurgePathCacheRequest = models.PurgePathCacheRequest;
 const CdnData = models.CdnData;
+const PurgeUrlsCacheRequest = models.PurgeUrlsCacheRequest;
 const ResourceData = models.ResourceData;
 const UrlRecord = models.UrlRecord;
 const DescribeOriginDataRequest = models.DescribeOriginDataRequest;
+const PushTask = models.PushTask;
 const TimestampData = models.TimestampData;
-const MapInfo = models.MapInfo;
+const DescribeCdnIpRequest = models.DescribeCdnIpRequest;
+const PushUrlsCacheRequest = models.PushUrlsCacheRequest;
+const DescribePushTasksRequest = models.DescribePushTasksRequest;
+const DescribeIpVisitResponse = models.DescribeIpVisitResponse;
+const PurgePathCacheResponse = models.PurgePathCacheResponse;
+const PurgeTask = models.PurgeTask;
+const DescribePurgeTasksRequest = models.DescribePurgeTasksRequest;
 const CacheOptResult = models.CacheOptResult;
 const ListTopDataResponse = models.ListTopDataResponse;
 const DescribeMapInfoResponse = models.DescribeMapInfoResponse;
 const DescribeMapInfoRequest = models.DescribeMapInfoRequest;
 const EnableCachesResponse = models.EnableCachesResponse;
 const DescribePayTypeRequest = models.DescribePayTypeRequest;
-const DescribeCdnDataResponse = models.DescribeCdnDataResponse;
-const DescribeIpVisitResponse = models.DescribeIpVisitResponse;
+const DescribeIpVisitRequest = models.DescribeIpVisitRequest;
 const DescribePayTypeResponse = models.DescribePayTypeResponse;
 const GetDisableRecordsRequest = models.GetDisableRecordsRequest;
+const PurgeUrlsCacheResponse = models.PurgeUrlsCacheResponse;
 const ListTopDataRequest = models.ListTopDataRequest;
 const DisableCachesResponse = models.DisableCachesResponse;
+const DescribePurgeTasksResponse = models.DescribePurgeTasksResponse;
+const DescribePushTasksResponse = models.DescribePushTasksResponse;
 const ResourceOriginData = models.ResourceOriginData;
 const DescribeOriginDataResponse = models.DescribeOriginDataResponse;
-const DescribeIpVisitRequest = models.DescribeIpVisitRequest;
+const DescribeCdnIpResponse = models.DescribeCdnIpResponse;
+const DescribeCdnDataResponse = models.DescribeCdnDataResponse;
+const CdnIp = models.CdnIp;
 const DisableCachesRequest = models.DisableCachesRequest;
 const DescribeCdnDataRequest = models.DescribeCdnDataRequest;
 const TopData = models.TopData;
 const EnableCachesRequest = models.EnableCachesRequest;
+const PushUrlsCacheResponse = models.PushUrlsCacheResponse;
+const MapInfo = models.MapInfo;
 const TopDetailData = models.TopDetailData;
 const GetDisableRecordsResponse = models.GetDisableRecordsResponse;
+const CdnIpHistory = models.CdnIpHistory;
 const SummarizedData = models.SummarizedData;
 
 
@@ -95,6 +111,28 @@ class CdnClient extends AbstractClient {
     }
 
     /**
+     * PushUrlsCache 用于将指定 URL 资源列表加载至 CDN 节点，默认情况下每次调用可提交 20 条 URL，每日一共可提交 1000 条。
+     * @param {PushUrlsCacheRequest} req
+     * @param {function(string, PushUrlsCacheResponse):void} cb
+     * @public
+     */
+    PushUrlsCache(req, cb) {
+        let resp = new PushUrlsCacheResponse();
+        this.request("PushUrlsCache", req, resp, cb);
+    }
+
+    /**
+     * DescribeCdnIp 用于查询 CDN IP 归属。
+     * @param {DescribeCdnIpRequest} req
+     * @param {function(string, DescribeCdnIpResponse):void} cb
+     * @public
+     */
+    DescribeCdnIp(req, cb) {
+        let resp = new DescribeCdnIpResponse();
+        this.request("DescribeCdnIp", req, resp, cb);
+    }
+
+    /**
      * DescribeMapInfo 用于查询省份对应的 ID，运营商对应的 ID 信息。
      * @param {DescribeMapInfoRequest} req
      * @param {function(string, DescribeMapInfoResponse):void} cb
@@ -103,6 +141,17 @@ class CdnClient extends AbstractClient {
     DescribeMapInfo(req, cb) {
         let resp = new DescribeMapInfoResponse();
         this.request("DescribeMapInfo", req, resp, cb);
+    }
+
+    /**
+     * DescribePurgeTasks 用于查询刷新任务提交历史记录及执行进度。
+     * @param {DescribePurgeTasksRequest} req
+     * @param {function(string, DescribePurgeTasksResponse):void} cb
+     * @public
+     */
+    DescribePurgeTasks(req, cb) {
+        let resp = new DescribePurgeTasksResponse();
+        this.request("DescribePurgeTasks", req, resp, cb);
     }
 
     /**
@@ -125,6 +174,28 @@ class CdnClient extends AbstractClient {
     DescribePayType(req, cb) {
         let resp = new DescribePayTypeResponse();
         this.request("DescribePayType", req, resp, cb);
+    }
+
+    /**
+     * PurgeUrlsCache 用于批量刷新目录缓存，一次提交将返回一个刷新任务id。
+     * @param {PurgePathCacheRequest} req
+     * @param {function(string, PurgePathCacheResponse):void} cb
+     * @public
+     */
+    PurgePathCache(req, cb) {
+        let resp = new PurgePathCacheResponse();
+        this.request("PurgePathCache", req, resp, cb);
+    }
+
+    /**
+     * PurgeUrlsCache 用于批量刷新Url，一次提交将返回一个刷新任务id。
+     * @param {PurgeUrlsCacheRequest} req
+     * @param {function(string, PurgeUrlsCacheResponse):void} cb
+     * @public
+     */
+    PurgeUrlsCache(req, cb) {
+        let resp = new PurgeUrlsCacheResponse();
+        this.request("PurgeUrlsCache", req, resp, cb);
     }
 
     /**
@@ -170,6 +241,17 @@ class CdnClient extends AbstractClient {
     DisableCaches(req, cb) {
         let resp = new DisableCachesResponse();
         this.request("DisableCaches", req, resp, cb);
+    }
+
+    /**
+     * DescribePushTasks 用于查询预热任务提交历史记录及执行进度。（接口尚在批量公测中，暂未全量开放使用）
+     * @param {DescribePushTasksRequest} req
+     * @param {function(string, DescribePushTasksResponse):void} cb
+     * @public
+     */
+    DescribePushTasks(req, cb) {
+        let resp = new DescribePushTasksResponse();
+        this.request("DescribePushTasks", req, resp, cb);
     }
 
     /**

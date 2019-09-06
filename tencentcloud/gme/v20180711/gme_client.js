@@ -121,7 +121,7 @@ Type表示过滤类型，1：政治，2：色情，3：谩骂
 <p>ad :广告</p>
 <p>terrorism:暴恐</p>
 <p>contraband :违禁</p>
-<p>customized:自定义，比如自定义词库。暂未开放</p>
+<p>customized:自定义词库</p>
 </td>
 </tr>
 </tbody>
@@ -192,6 +192,8 @@ Type表示过滤类型，1：政治，2：色情，3：谩骂
 			"DumpUrl": "",
 			"HitFlag": true,
 			"MainType": "abuse",
+			"RoomId": "123",
+			"OpenId": "xxx",
 			"ScanDetail": [{
 				"EndTime": 1110,
 				"KeyWord": "xxx",
