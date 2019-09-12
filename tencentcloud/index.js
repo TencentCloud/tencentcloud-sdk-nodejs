@@ -80,6 +80,7 @@ module.exports = {
     tmt: require("./tmt"),
     trtc: require("./trtc"),
     tsf: require("./tsf"),
+    tts: require("./tts"),
     vod: require("./vod"),
     vpc: require("./vpc"),
     wss: require("./wss"),

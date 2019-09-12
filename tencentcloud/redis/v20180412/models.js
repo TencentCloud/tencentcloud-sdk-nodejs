@@ -1618,6 +1618,56 @@ class InstanceClusterNode extends  AbstractModel {
 }
 
 /**
+ * DescribeSlowLog返回参数结构体
+ * @class
+ */
+class DescribeSlowLogResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 慢查询总数
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 慢查询详情
+         * @type {Array.<InstanceSlowlogDetail> || null}
+         */
+        this.InstanceSlowlogDetail = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.InstanceSlowlogDetail) {
+            this.InstanceSlowlogDetail = new Array();
+            for (let z in params.InstanceSlowlogDetail) {
+                let obj = new InstanceSlowlogDetail();
+                obj.deserialize(params.InstanceSlowlogDetail[z]);
+                this.InstanceSlowlogDetail.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * RestoreInstance返回参数结构体
  * @class
  */
@@ -2516,6 +2566,69 @@ class InstanceTextParam extends  AbstractModel {
         this.Tips = 'Tips' in params ? params.Tips : null;
         this.TextValue = 'TextValue' in params ? params.TextValue : null;
         this.Status = 'Status' in params ? params.Status : null;
+
+    }
+}
+
+/**
+ * DescribeSlowLog请求参数结构体
+ * @class
+ */
+class DescribeSlowLogRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例Id
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 开始时间
+         * @type {string || null}
+         */
+        this.BeginTime = null;
+
+        /**
+         * 结束时间
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * 慢查询阈值（单位：微秒）
+         * @type {number || null}
+         */
+        this.MinQueryTime = null;
+
+        /**
+         * 页面大小
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 偏移量，取Limit整数倍
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.BeginTime = 'BeginTime' in params ? params.BeginTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.MinQueryTime = 'MinQueryTime' in params ? params.MinQueryTime : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
 
     }
 }
@@ -4240,6 +4353,62 @@ class DestroyPostpaidInstanceResponse extends  AbstractModel {
     }
 }
 
+/**
+ * 慢查询详情
+ * @class
+ */
+class InstanceSlowlogDetail extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 慢查询耗时
+         * @type {number || null}
+         */
+        this.Duration = null;
+
+        /**
+         * 客户端地址
+         * @type {string || null}
+         */
+        this.Client = null;
+
+        /**
+         * 命令
+         * @type {string || null}
+         */
+        this.Command = null;
+
+        /**
+         * 详细命令行信息
+         * @type {string || null}
+         */
+        this.CommandLine = null;
+
+        /**
+         * 执行时间
+         * @type {string || null}
+         */
+        this.ExecuteTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Duration = 'Duration' in params ? params.Duration : null;
+        this.Client = 'Client' in params ? params.Client : null;
+        this.Command = 'Command' in params ? params.Command : null;
+        this.CommandLine = 'CommandLine' in params ? params.CommandLine : null;
+        this.ExecuteTime = 'ExecuteTime' in params ? params.ExecuteTime : null;
+
+    }
+}
+
 module.exports = {
     ModifyInstanceResponse: ModifyInstanceResponse,
     DescribeInstanceShardsRequest: DescribeInstanceShardsRequest,
@@ -4270,6 +4439,7 @@ module.exports = {
     InstanceMultiParam: InstanceMultiParam,
     ProductConf: ProductConf,
     InstanceClusterNode: InstanceClusterNode,
+    DescribeSlowLogResponse: DescribeSlowLogResponse,
     RestoreInstanceResponse: RestoreInstanceResponse,
     DescribeInstanceBackupsResponse: DescribeInstanceBackupsResponse,
     DescribeBackupUrlRequest: DescribeBackupUrlRequest,
@@ -4287,6 +4457,7 @@ module.exports = {
     ClearInstanceRequest: ClearInstanceRequest,
     ModifyAutoBackupConfigRequest: ModifyAutoBackupConfigRequest,
     InstanceTextParam: InstanceTextParam,
+    DescribeSlowLogRequest: DescribeSlowLogRequest,
     InstanceSet: InstanceSet,
     ZoneCapacityConf: ZoneCapacityConf,
     DescribeInstanceBackupsRequest: DescribeInstanceBackupsRequest,
@@ -4320,5 +4491,6 @@ module.exports = {
     DescribeInstanceParamsRequest: DescribeInstanceParamsRequest,
     CleanUpInstanceResponse: CleanUpInstanceResponse,
     DestroyPostpaidInstanceResponse: DestroyPostpaidInstanceResponse,
+    InstanceSlowlogDetail: InstanceSlowlogDetail,
 
 }

@@ -52,6 +52,18 @@ class VerifyChipBurnInfoResponse extends  AbstractModel {
         this.Pass = null;
 
         /**
+         * 已验证次数
+         * @type {number || null}
+         */
+        this.VerifiedTimes = null;
+
+        /**
+         * 剩余验证次数
+         * @type {number || null}
+         */
+        this.LeftTimes = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -67,6 +79,8 @@ class VerifyChipBurnInfoResponse extends  AbstractModel {
             return;
         }
         this.Pass = 'Pass' in params ? params.Pass : null;
+        this.VerifiedTimes = 'VerifiedTimes' in params ? params.VerifiedTimes : null;
+        this.LeftTimes = 'LeftTimes' in params ? params.LeftTimes : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -159,19 +173,18 @@ class BurnTidNotifyResponse extends  AbstractModel {
 }
 
 /**
- * DownloadTids返回参数结构体
+ * DescribeAvailableLibCount返回参数结构体
  * @class
  */
-class DownloadTidsResponse extends  AbstractModel {
+class DescribeAvailableLibCountResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 下载的TID信息列表
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {Array.<TidKeysInfo> || null}
+         * 可空发的白盒秘钥数量
+         * @type {number || null}
          */
-        this.TidSet = null;
+        this.Quantity = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -188,15 +201,7 @@ class DownloadTidsResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.TidSet) {
-            this.TidSet = new Array();
-            for (let z in params.TidSet) {
-                let obj = new TidKeysInfo();
-                obj.deserialize(params.TidSet[z]);
-                this.TidSet.push(obj);
-            }
-        }
+        this.Quantity = 'Quantity' in params ? params.Quantity : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -378,6 +383,34 @@ class VerifyChipBurnInfoRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeAvailableLibCount请求参数结构体
+ * @class
+ */
+class DescribeAvailableLibCountRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 订单编号
+         * @type {string || null}
+         */
+        this.OrderId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.OrderId = 'OrderId' in params ? params.OrderId : null;
+
+    }
+}
+
+/**
  * DeliverTids请求参数结构体
  * @class
  */
@@ -392,7 +425,7 @@ class DeliverTidsRequest extends  AbstractModel {
         this.OrderId = null;
 
         /**
-         * 数量，1~10
+         * 数量，1~100
          * @type {number || null}
          */
         this.Quantity = null;
@@ -479,6 +512,18 @@ class TidKeysInfo extends  AbstractModel {
          */
         this.Psk = null;
 
+        /**
+         * 软加固白盒秘钥下载地址
+         * @type {string || null}
+         */
+        this.DownloadUrl = null;
+
+        /**
+         * 软加固设备标识码
+         * @type {string || null}
+         */
+        this.DeviceCode = null;
+
     }
 
     /**
@@ -492,6 +537,8 @@ class TidKeysInfo extends  AbstractModel {
         this.PublicKey = 'PublicKey' in params ? params.PublicKey : null;
         this.PrivateKey = 'PrivateKey' in params ? params.PrivateKey : null;
         this.Psk = 'Psk' in params ? params.Psk : null;
+        this.DownloadUrl = 'DownloadUrl' in params ? params.DownloadUrl : null;
+        this.DeviceCode = 'DeviceCode' in params ? params.DeviceCode : null;
 
     }
 }
@@ -580,21 +627,67 @@ class DownloadTidsRequest extends  AbstractModel {
     }
 }
 
+/**
+ * DownloadTids返回参数结构体
+ * @class
+ */
+class DownloadTidsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 下载的TID信息列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<TidKeysInfo> || null}
+         */
+        this.TidSet = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.TidSet) {
+            this.TidSet = new Array();
+            for (let z in params.TidSet) {
+                let obj = new TidKeysInfo();
+                obj.deserialize(params.TidSet[z]);
+                this.TidSet.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
 module.exports = {
     DescribePermissionRequest: DescribePermissionRequest,
     VerifyChipBurnInfoResponse: VerifyChipBurnInfoResponse,
     DeliverTidsResponse: DeliverTidsResponse,
     BurnTidNotifyResponse: BurnTidNotifyResponse,
-    DownloadTidsResponse: DownloadTidsResponse,
+    DescribeAvailableLibCountResponse: DescribeAvailableLibCountResponse,
     AuthTestTidResponse: AuthTestTidResponse,
     DeliverTidNotifyResponse: DeliverTidNotifyResponse,
     AuthTestTidRequest: AuthTestTidRequest,
     BurnTidNotifyRequest: BurnTidNotifyRequest,
     VerifyChipBurnInfoRequest: VerifyChipBurnInfoRequest,
+    DescribeAvailableLibCountRequest: DescribeAvailableLibCountRequest,
     DeliverTidsRequest: DeliverTidsRequest,
     DeliverTidNotifyRequest: DeliverTidNotifyRequest,
     TidKeysInfo: TidKeysInfo,
     DescribePermissionResponse: DescribePermissionResponse,
     DownloadTidsRequest: DownloadTidsRequest,
+    DownloadTidsResponse: DownloadTidsResponse,
 
 }
