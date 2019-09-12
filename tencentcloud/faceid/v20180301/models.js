@@ -282,6 +282,62 @@ class DetectAuthResponse extends  AbstractModel {
 }
 
 /**
+ * IdCardOCRVerification请求参数结构体
+ * @class
+ */
+class IdCardOCRVerificationRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 身份证号
+姓名和身份证号、ImageBase64、ImageUrl三者必须提供其中之一。若都提供了，则按照姓名和身份证号>ImageBase64>ImageUrl的优先级使用参数。
+         * @type {string || null}
+         */
+        this.IdCard = null;
+
+        /**
+         * 姓名
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 身份证人像面的 Base64 值
+支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
+支持的图片大小：所下载图片经Base64编码后不超过 3M。图片下载时间不超过 3 秒。
+         * @type {string || null}
+         */
+        this.ImageBase64 = null;
+
+        /**
+         * 身份证人像面的 Url 地址
+支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
+支持的图片大小：所下载图片经 Base64 编码后不超过 3M。图片下载时间不超过 3 秒。
+图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。
+非腾讯云存储的 Url 速度和稳定性可能受一定影响。
+         * @type {string || null}
+         */
+        this.ImageUrl = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.IdCard = 'IdCard' in params ? params.IdCard : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.ImageBase64 = 'ImageBase64' in params ? params.ImageBase64 : null;
+        this.ImageUrl = 'ImageUrl' in params ? params.ImageUrl : null;
+
+    }
+}
+
+/**
  * BankCard4EVerification返回参数结构体
  * @class
  */
@@ -495,6 +551,102 @@ class LivenessRecognitionResponse extends  AbstractModel {
         this.Sim = 'Sim' in params ? params.Sim : null;
         this.Result = 'Result' in params ? params.Result : null;
         this.Description = 'Description' in params ? params.Description : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * IdCardOCRVerification返回参数结构体
+ * @class
+ */
+class IdCardOCRVerificationResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 认证结果码，收费情况如下。
+收费结果码：
+0: 姓名和身份证号一致
+-1: 姓名和身份证号不一致
+不收费结果码：
+-2: 非法身份证号（长度、校验位等不正确）
+-3: 非法姓名（长度、格式等不正确）
+-4: 证件库服务异常
+-5: 证件库中无此身份证记录
+         * @type {string || null}
+         */
+        this.Result = null;
+
+        /**
+         * 认证结果信息。
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * 用于验证的姓名
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 用于验证的身份证号
+         * @type {string || null}
+         */
+        this.IdCard = null;
+
+        /**
+         * OCR得到的性别
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Sex = null;
+
+        /**
+         * OCR得到的民族
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Nation = null;
+
+        /**
+         * OCR得到的生日
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Birth = null;
+
+        /**
+         * OCR得到的地址
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Address = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Result = 'Result' in params ? params.Result : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.IdCard = 'IdCard' in params ? params.IdCard : null;
+        this.Sex = 'Sex' in params ? params.Sex : null;
+        this.Nation = 'Nation' in params ? params.Nation : null;
+        this.Birth = 'Birth' in params ? params.Birth : null;
+        this.Address = 'Address' in params ? params.Address : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -1229,10 +1381,12 @@ module.exports = {
     IdCardVerificationRequest: IdCardVerificationRequest,
     BankCardVerificationRequest: BankCardVerificationRequest,
     DetectAuthResponse: DetectAuthResponse,
+    IdCardOCRVerificationRequest: IdCardOCRVerificationRequest,
     BankCard4EVerificationResponse: BankCard4EVerificationResponse,
     BankCard2EVerificationRequest: BankCard2EVerificationRequest,
     LivenessRecognitionRequest: LivenessRecognitionRequest,
     LivenessRecognitionResponse: LivenessRecognitionResponse,
+    IdCardOCRVerificationResponse: IdCardOCRVerificationResponse,
     DetectAuthRequest: DetectAuthRequest,
     BankCardVerificationResponse: BankCardVerificationResponse,
     ImageRecognitionRequest: ImageRecognitionRequest,

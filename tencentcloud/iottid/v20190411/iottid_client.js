@@ -20,17 +20,19 @@ const DescribePermissionRequest = models.DescribePermissionRequest;
 const VerifyChipBurnInfoResponse = models.VerifyChipBurnInfoResponse;
 const DeliverTidsResponse = models.DeliverTidsResponse;
 const BurnTidNotifyResponse = models.BurnTidNotifyResponse;
-const DownloadTidsResponse = models.DownloadTidsResponse;
+const DescribeAvailableLibCountResponse = models.DescribeAvailableLibCountResponse;
 const AuthTestTidResponse = models.AuthTestTidResponse;
 const DeliverTidNotifyResponse = models.DeliverTidNotifyResponse;
 const AuthTestTidRequest = models.AuthTestTidRequest;
 const BurnTidNotifyRequest = models.BurnTidNotifyRequest;
 const VerifyChipBurnInfoRequest = models.VerifyChipBurnInfoRequest;
+const DescribeAvailableLibCountRequest = models.DescribeAvailableLibCountRequest;
 const DeliverTidsRequest = models.DeliverTidsRequest;
 const DeliverTidNotifyRequest = models.DeliverTidNotifyRequest;
 const TidKeysInfo = models.TidKeysInfo;
 const DescribePermissionResponse = models.DescribePermissionResponse;
 const DownloadTidsRequest = models.DownloadTidsRequest;
+const DownloadTidsResponse = models.DownloadTidsResponse;
 
 
 /**
@@ -44,7 +46,7 @@ class IottidClient extends AbstractClient {
     }
     
     /**
-     * 单向认证测试TID
+     * 单向认证测试TID 
      * @param {AuthTestTidRequest} req
      * @param {function(string, AuthTestTidResponse):void} cb
      * @public
@@ -55,7 +57,7 @@ class IottidClient extends AbstractClient {
     }
 
     /**
-     * 下载控制台验证芯片烧录信息，保证TID与中心信息一致
+     * 下载控制台验证芯片烧录信息，保证TID与中心信息一致 
      * @param {VerifyChipBurnInfoRequest} req
      * @param {function(string, VerifyChipBurnInfoResponse):void} cb
      * @public
@@ -66,7 +68,7 @@ class IottidClient extends AbstractClient {
     }
 
     /**
-     * 设备服务商请求空发产品订单的TID信息
+     * 设备服务商请求空发产品订单的TID信息 
      * @param {DeliverTidsRequest} req
      * @param {function(string, DeliverTidsResponse):void} cb
      * @public
@@ -77,7 +79,7 @@ class IottidClient extends AbstractClient {
     }
 
     /**
-     * 安全芯片TID烧录回执
+     * 安全芯片TID烧录回执 
      * @param {BurnTidNotifyRequest} req
      * @param {function(string, BurnTidNotifyResponse):void} cb
      * @public
@@ -88,7 +90,7 @@ class IottidClient extends AbstractClient {
     }
 
     /**
-     * 查询企业用户TID平台控制台权限
+     * 查询企业用户TID平台控制台权限 
      * @param {DescribePermissionRequest} req
      * @param {function(string, DescribePermissionResponse):void} cb
      * @public
@@ -99,7 +101,7 @@ class IottidClient extends AbstractClient {
     }
 
     /**
-     * 安全芯片为载体的TID空发回执，绑定TID与订单号。
+     * 安全芯片为载体的TID空发回执，绑定TID与订单号。 
      * @param {DeliverTidNotifyRequest} req
      * @param {function(string, DeliverTidNotifyResponse):void} cb
      * @public
@@ -110,7 +112,7 @@ class IottidClient extends AbstractClient {
     }
 
     /**
-     * 下载芯片订单的TID
+     * 下载芯片订单的TID 
      * @param {DownloadTidsRequest} req
      * @param {function(string, DownloadTidsResponse):void} cb
      * @public
@@ -118,6 +120,17 @@ class IottidClient extends AbstractClient {
     DownloadTids(req, cb) {
         let resp = new DownloadTidsResponse();
         this.request("DownloadTids", req, resp, cb);
+    }
+
+    /**
+     * 查询指定订单的可空发的白盒秘钥数量
+     * @param {DescribeAvailableLibCountRequest} req
+     * @param {function(string, DescribeAvailableLibCountResponse):void} cb
+     * @public
+     */
+    DescribeAvailableLibCount(req, cb) {
+        let resp = new DescribeAvailableLibCountResponse();
+        this.request("DescribeAvailableLibCount", req, resp, cb);
     }
 
 

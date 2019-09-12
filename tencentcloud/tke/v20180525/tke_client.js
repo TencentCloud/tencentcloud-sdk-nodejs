@@ -30,7 +30,6 @@ const CreateClusterRouteRequest = models.CreateClusterRouteRequest;
 const DescribeClusterInstancesResponse = models.DescribeClusterInstancesResponse;
 const CreateClusterAsGroupRequest = models.CreateClusterAsGroupRequest;
 const DescribeClusterRouteTablesRequest = models.DescribeClusterRouteTablesRequest;
-const CreateClusterInstancesResponse = models.CreateClusterInstancesResponse;
 const CreateClusterRouteTableResponse = models.CreateClusterRouteTableResponse;
 const ExistedInstancesForNode = models.ExistedInstancesForNode;
 const CreateClusterResponse = models.CreateClusterResponse;
@@ -42,9 +41,10 @@ const CreateClusterRequest = models.CreateClusterRequest;
 const DeleteClusterInstancesRequest = models.DeleteClusterInstancesRequest;
 const CreateClusterInstancesRequest = models.CreateClusterInstancesRequest;
 const CreateClusterAsGroupResponse = models.CreateClusterAsGroupResponse;
+const Tag = models.Tag;
 const CreateClusterRouteTableRequest = models.CreateClusterRouteTableRequest;
 const DescribeClusterRouteTablesResponse = models.DescribeClusterRouteTablesResponse;
-const DescribeClustersRequest = models.DescribeClustersRequest;
+const DeleteClusterAsGroupsResponse = models.DeleteClusterAsGroupsResponse;
 const RouteTableInfo = models.RouteTableInfo;
 const DescribeClusterInstancesRequest = models.DescribeClusterInstancesRequest;
 const ClusterCIDRSettings = models.ClusterCIDRSettings;
@@ -53,6 +53,7 @@ const DescribeRouteTableConflictsRequest = models.DescribeRouteTableConflictsReq
 const RunInstancesForNode = models.RunInstancesForNode;
 const RunSecurityServiceEnabled = models.RunSecurityServiceEnabled;
 const ExistedInstancesPara = models.ExistedInstancesPara;
+const DeleteClusterAsGroupsRequest = models.DeleteClusterAsGroupsRequest;
 const DescribeExistedInstancesRequest = models.DescribeExistedInstancesRequest;
 const ExistedInstance = models.ExistedInstance;
 const CreateClusterRouteResponse = models.CreateClusterRouteResponse;
@@ -63,13 +64,16 @@ const RouteTableConflict = models.RouteTableConflict;
 const ClusterAdvancedSettings = models.ClusterAdvancedSettings;
 const Filter = models.Filter;
 const Instance = models.Instance;
+const TagSpecification = models.TagSpecification;
+const DescribeClustersRequest = models.DescribeClustersRequest;
 const Cluster = models.Cluster;
 const DescribeClustersResponse = models.DescribeClustersResponse;
 const ClusterNetworkSettings = models.ClusterNetworkSettings;
 const DeleteClusterRouteResponse = models.DeleteClusterRouteResponse;
+const DeleteClusterResponse = models.DeleteClusterResponse;
 const AddExistedInstancesResponse = models.AddExistedInstancesResponse;
 const DeleteClusterRouteTableResponse = models.DeleteClusterRouteTableResponse;
-const DeleteClusterResponse = models.DeleteClusterResponse;
+const CreateClusterInstancesResponse = models.CreateClusterInstancesResponse;
 
 
 /**
@@ -82,6 +86,17 @@ class TkeClient extends AbstractClient {
         super("tke.tencentcloudapi.com", "2018-05-25", credential, region, profile);
     }
     
+    /**
+     * 删除集群伸缩组
+     * @param {DeleteClusterAsGroupsRequest} req
+     * @param {function(string, DeleteClusterAsGroupsResponse):void} cb
+     * @public
+     */
+    DeleteClusterAsGroups(req, cb) {
+        let resp = new DeleteClusterAsGroupsResponse();
+        this.request("DeleteClusterAsGroups", req, resp, cb);
+    }
+
     /**
      * 删除集群路由
      * @param {DeleteClusterRouteRequest} req

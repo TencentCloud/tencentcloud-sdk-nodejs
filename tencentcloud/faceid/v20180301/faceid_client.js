@@ -22,10 +22,12 @@ const GetLiveCodeRequest = models.GetLiveCodeRequest;
 const IdCardVerificationRequest = models.IdCardVerificationRequest;
 const BankCardVerificationRequest = models.BankCardVerificationRequest;
 const DetectAuthResponse = models.DetectAuthResponse;
+const IdCardOCRVerificationRequest = models.IdCardOCRVerificationRequest;
 const BankCard4EVerificationResponse = models.BankCard4EVerificationResponse;
 const BankCard2EVerificationRequest = models.BankCard2EVerificationRequest;
 const LivenessRecognitionRequest = models.LivenessRecognitionRequest;
 const LivenessRecognitionResponse = models.LivenessRecognitionResponse;
+const IdCardOCRVerificationResponse = models.IdCardOCRVerificationResponse;
 const DetectAuthRequest = models.DetectAuthRequest;
 const BankCardVerificationResponse = models.BankCardVerificationResponse;
 const ImageRecognitionRequest = models.ImageRecognitionRequest;
@@ -138,6 +140,17 @@ class FaceidClient extends AbstractClient {
     IdCardVerification(req, cb) {
         let resp = new IdCardVerificationResponse();
         this.request("IdCardVerification", req, resp, cb);
+    }
+
+    /**
+     * 本接口用于校验姓名和身份证号的真实性和一致性，您可以通过输入姓名和身份证号或传入身份证人像面照片提供所需验证信息。
+     * @param {IdCardOCRVerificationRequest} req
+     * @param {function(string, IdCardOCRVerificationResponse):void} cb
+     * @public
+     */
+    IdCardOCRVerification(req, cb) {
+        let resp = new IdCardOCRVerificationResponse();
+        this.request("IdCardOCRVerification", req, resp, cb);
     }
 
     /**

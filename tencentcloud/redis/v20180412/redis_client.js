@@ -45,6 +45,7 @@ const RenewInstanceResponse = models.RenewInstanceResponse;
 const InstanceMultiParam = models.InstanceMultiParam;
 const ProductConf = models.ProductConf;
 const InstanceClusterNode = models.InstanceClusterNode;
+const DescribeSlowLogResponse = models.DescribeSlowLogResponse;
 const RestoreInstanceResponse = models.RestoreInstanceResponse;
 const DescribeInstanceBackupsResponse = models.DescribeInstanceBackupsResponse;
 const DescribeBackupUrlRequest = models.DescribeBackupUrlRequest;
@@ -62,6 +63,7 @@ const DescribeInstancesRequest = models.DescribeInstancesRequest;
 const ClearInstanceRequest = models.ClearInstanceRequest;
 const ModifyAutoBackupConfigRequest = models.ModifyAutoBackupConfigRequest;
 const InstanceTextParam = models.InstanceTextParam;
+const DescribeSlowLogRequest = models.DescribeSlowLogRequest;
 const InstanceSet = models.InstanceSet;
 const ZoneCapacityConf = models.ZoneCapacityConf;
 const DescribeInstanceBackupsRequest = models.DescribeInstanceBackupsRequest;
@@ -95,6 +97,7 @@ const InstanceParamHistory = models.InstanceParamHistory;
 const DescribeInstanceParamsRequest = models.DescribeInstanceParamsRequest;
 const CleanUpInstanceResponse = models.CleanUpInstanceResponse;
 const DestroyPostpaidInstanceResponse = models.DestroyPostpaidInstanceResponse;
+const InstanceSlowlogDetail = models.InstanceSlowlogDetail;
 
 
 /**
@@ -358,6 +361,17 @@ class RedisClient extends AbstractClient {
     DescribeTaskInfo(req, cb) {
         let resp = new DescribeTaskInfoResponse();
         this.request("DescribeTaskInfo", req, resp, cb);
+    }
+
+    /**
+     * 查询实例慢查询记录
+     * @param {DescribeSlowLogRequest} req
+     * @param {function(string, DescribeSlowLogResponse):void} cb
+     * @public
+     */
+    DescribeSlowLog(req, cb) {
+        let resp = new DescribeSlowLogResponse();
+        this.request("DescribeSlowLog", req, resp, cb);
     }
 
     /**
