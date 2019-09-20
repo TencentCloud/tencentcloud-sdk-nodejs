@@ -736,7 +736,7 @@ class CreateEnterpriseAccountRequest extends  AbstractModel {
         this.Name = null;
 
         /**
-         * 企业用户证件类型，8代表营业执照
+         * 企业用户证件类型，8代表营业执照，详情请见常见问题
          * @type {number || null}
          */
         this.IdentType = null;
@@ -851,7 +851,7 @@ class CreateContractByUploadRequest extends  AbstractModel {
         this.Remarks = null;
 
         /**
-         * 过期时间
+         * 合同长时间未签署的过期时间
          * @type {string || null}
          */
         this.ExpireTime = null;
@@ -982,7 +982,7 @@ class CreatePersonalAccountRequest extends  AbstractModel {
         this.Name = null;
 
         /**
-         * 个人用户证件类型。0代表身份证
+         * 个人用户证件类型，0代表身份证，详情请见常见问题
          * @type {number || null}
          */
         this.IdentType = null;
@@ -1256,7 +1256,7 @@ class SignContractByCoordinateRequest extends  AbstractModel {
         this.SignLocations = null;
 
         /**
-         * 印章ID
+         * 签章ID
          * @type {string || null}
          */
         this.SealResId = null;

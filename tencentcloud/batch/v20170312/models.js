@@ -866,6 +866,12 @@ class Task extends  AbstractModel {
          */
         this.RestartComputeNode = null;
 
+        /**
+         * 启动任务过程中，创建计算资源如CVM失败后的最大重试次数，默认为0。
+         * @type {number || null}
+         */
+        this.ResourceMaxRetryCount = null;
+
     }
 
     /**
@@ -952,6 +958,7 @@ class Task extends  AbstractModel {
         this.Timeout = 'Timeout' in params ? params.Timeout : null;
         this.MaxConcurrentNum = 'MaxConcurrentNum' in params ? params.MaxConcurrentNum : null;
         this.RestartComputeNode = 'RestartComputeNode' in params ? params.RestartComputeNode : null;
+        this.ResourceMaxRetryCount = 'ResourceMaxRetryCount' in params ? params.ResourceMaxRetryCount : null;
 
     }
 }

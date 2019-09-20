@@ -316,7 +316,7 @@ OPEN：公网属性， INTERNAL：内网属性。
         this.LoadBalancerName = null;
 
         /**
-         * 负载均衡后端目标设备所属的网络 ID，可以通过 DescribeVpcEx 接口获取。 不传此参数则默认为基础网络（"0"）。
+         * 负载均衡后端目标设备所属的网络 ID，如vpc-12345678，可以通过 DescribeVpcEx 接口获取。 不传此参数则默认为基础网络（"0"）。
          * @type {string || null}
          */
         this.VpcId = null;
@@ -497,6 +497,12 @@ class ModifyLoadBalancerAttributesRequest extends  AbstractModel {
          */
         this.TargetRegionInfo = null;
 
+        /**
+         * 网络计费相关参数，注意，目前只支持修改最大出带宽，不支持修改网络计费方式。
+         * @type {InternetAccessible || null}
+         */
+        this.InternetChargeInfo = null;
+
     }
 
     /**
@@ -513,6 +519,12 @@ class ModifyLoadBalancerAttributesRequest extends  AbstractModel {
             let obj = new TargetRegionInfo();
             obj.deserialize(params.TargetRegionInfo)
             this.TargetRegionInfo = obj;
+        }
+
+        if (params.InternetChargeInfo) {
+            let obj = new InternetAccessible();
+            obj.deserialize(params.InternetChargeInfo)
+            this.InternetChargeInfo = obj;
         }
 
     }
@@ -1670,6 +1682,13 @@ class Listener extends  AbstractModel {
          */
         this.ListenerName = null;
 
+        /**
+         * 监听器的创建时间。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
     }
 
     /**
@@ -1707,6 +1726,7 @@ class Listener extends  AbstractModel {
             }
         }
         this.ListenerName = 'ListenerName' in params ? params.ListenerName : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
 
     }
 }
@@ -2341,6 +2361,34 @@ class ManualRewriteResponse extends  AbstractModel {
 }
 
 /**
+ * ModifyDomainAttributes返回参数结构体
+ * @class
+ */
+class ModifyDomainAttributesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * ModifyTargetWeight请求参数结构体
  * @class
  */
@@ -2385,7 +2433,7 @@ class ModifyTargetWeightRequest extends  AbstractModel {
         this.Targets = null;
 
         /**
-         * 后端服务服务新的转发权重，取值范围：0~100，默认值10。如果设置了 Targets.Weight 参数，则此参数不生效。
+         * 后端服务新的转发权重，取值范围：0~100，默认值10。如果设置了 Targets.Weight 参数，则此参数不生效。
          * @type {number || null}
          */
         this.Weight = null;
@@ -2985,6 +3033,12 @@ class RuleOutput extends  AbstractModel {
          */
         this.ForwardType = null;
 
+        /**
+         * 转发规则的创建时间
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
     }
 
     /**
@@ -3023,6 +3077,7 @@ class RuleOutput extends  AbstractModel {
         this.DefaultServer = 'DefaultServer' in params ? params.DefaultServer : null;
         this.Http2 = 'Http2' in params ? params.Http2 : null;
         this.ForwardType = 'ForwardType' in params ? params.ForwardType : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
 
     }
 }
@@ -3540,7 +3595,7 @@ OPEN：公网属性， INTERNAL：内网属性。
         this.LoadBalancerType = null;
 
         /**
-         * 负载均衡实例的类型。1：通用的负载均衡实例，0：传统型负载均衡实例
+         * 负载均衡实例的类型。1：通用的负载均衡实例，0：传统型负载均衡实例。如果不传此参数，则查询所有类型的负载均衡实例。
          * @type {number || null}
          */
         this.Forward = null;
@@ -3618,8 +3673,8 @@ OPEN：公网属性， INTERNAL：内网属性。
         this.WithRs = null;
 
         /**
-         * 负载均衡实例所属私有网络，如 vpc-bhqkbhdx，
-基础网络不支持通过VpcId查询。
+         * 负载均衡实例所属私有网络唯一ID，如 vpc-bhqkbhdx，
+基础网络可传入'0'。
          * @type {string || null}
          */
         this.VpcId = null;
@@ -3992,6 +4047,81 @@ class DeleteRuleResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifyDomainAttributes请求参数结构体
+ * @class
+ */
+class ModifyDomainAttributesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 负载均衡实例 ID
+         * @type {string || null}
+         */
+        this.LoadBalancerId = null;
+
+        /**
+         * 应用型负载均衡监听器 ID
+         * @type {string || null}
+         */
+        this.ListenerId = null;
+
+        /**
+         * 域名（必须是已经创建的转发规则下的域名）
+         * @type {string || null}
+         */
+        this.Domain = null;
+
+        /**
+         * 要修改的新域名
+         * @type {string || null}
+         */
+        this.NewDomain = null;
+
+        /**
+         * 域名相关的证书信息，注意，仅对启用SNI的监听器适用。
+         * @type {CertificateInput || null}
+         */
+        this.Certificate = null;
+
+        /**
+         * 是否开启Http2，注意，只用HTTPS域名才能开启Http2。
+         * @type {boolean || null}
+         */
+        this.Http2 = null;
+
+        /**
+         * 是否设为默认域名，注意，一个监听器下只能设置一个默认域名。
+         * @type {boolean || null}
+         */
+        this.DefaultServer = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LoadBalancerId = 'LoadBalancerId' in params ? params.LoadBalancerId : null;
+        this.ListenerId = 'ListenerId' in params ? params.ListenerId : null;
+        this.Domain = 'Domain' in params ? params.Domain : null;
+        this.NewDomain = 'NewDomain' in params ? params.NewDomain : null;
+
+        if (params.Certificate) {
+            let obj = new CertificateInput();
+            obj.deserialize(params.Certificate)
+            this.Certificate = obj;
+        }
+        this.Http2 = 'Http2' in params ? params.Http2 : null;
+        this.DefaultServer = 'DefaultServer' in params ? params.DefaultServer : null;
 
     }
 }
@@ -4650,7 +4780,7 @@ BANDWIDTH_PACKAGE 按带宽包计费（当前，只有指定运营商时才支�
         this.InternetChargeType = null;
 
         /**
-         * 最大出带宽，单位Mbps，范围支持0到65535，仅对公网属性的LB生效，默认值 10
+         * 最大出带宽，单位Mbps，范围支持0到2048，仅对公网属性的LB生效，默认值 10
          * @type {number || null}
          */
         this.InternetMaxBandwidthOut = null;
@@ -5035,6 +5165,13 @@ OPEN：公网属性， INTERNAL：内网属性。
          */
         this.ExtraInfo = null;
 
+        /**
+         * 是否默认放通来自CLB的流量。开启默认放通（true）：只验证CLB上的安全组；不开启默认放通（false）：需同时验证CLB和后端实例上的安全组。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.LoadBalancerPassToTarget = null;
+
     }
 
     /**
@@ -5119,6 +5256,7 @@ OPEN：公网属性， INTERNAL：内网属性。
             obj.deserialize(params.ExtraInfo)
             this.ExtraInfo = obj;
         }
+        this.LoadBalancerPassToTarget = 'LoadBalancerPassToTarget' in params ? params.LoadBalancerPassToTarget : null;
 
     }
 }
@@ -5171,6 +5309,7 @@ module.exports = {
     ModifyTargetPortResponse: ModifyTargetPortResponse,
     DescribeClassicalLBByInstanceIdRequest: DescribeClassicalLBByInstanceIdRequest,
     ManualRewriteResponse: ManualRewriteResponse,
+    ModifyDomainAttributesResponse: ModifyDomainAttributesResponse,
     ModifyTargetWeightRequest: ModifyTargetWeightRequest,
     ModifyDomainRequest: ModifyDomainRequest,
     Backend: Backend,
@@ -5202,6 +5341,7 @@ module.exports = {
     TargetRegionInfo: TargetRegionInfo,
     ModifyListenerResponse: ModifyListenerResponse,
     DeleteRuleResponse: DeleteRuleResponse,
+    ModifyDomainAttributesRequest: ModifyDomainAttributesRequest,
     DeregisterTargetsRequest: DeregisterTargetsRequest,
     CertificateOutput: CertificateOutput,
     ListenerBackend: ListenerBackend,

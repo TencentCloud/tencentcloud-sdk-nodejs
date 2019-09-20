@@ -16,6 +16,7 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
+const ChargePrepaid = models.ChargePrepaid;
 const LocalDiskType = models.LocalDiskType;
 const AssociateInstancesKeyPairsResponse = models.AssociateInstancesKeyPairsResponse;
 const RenewInstancesRequest = models.RenewInstancesRequest;
@@ -44,6 +45,7 @@ const InstanceTypeConfig = models.InstanceTypeConfig;
 const AllocateHostsRequest = models.AllocateHostsRequest;
 const LoginSettings = models.LoginSettings;
 const DescribeRegionsResponse = models.DescribeRegionsResponse;
+const PurchaseReservedInstancesOfferingRequest = models.PurchaseReservedInstancesOfferingRequest;
 const RebootInstancesRequest = models.RebootInstancesRequest;
 const AssociateInstancesKeyPairsRequest = models.AssociateInstancesKeyPairsRequest;
 const ImportKeyPairResponse = models.ImportKeyPairResponse;
@@ -55,7 +57,7 @@ const ResetInstancesPasswordRequest = models.ResetInstancesPasswordRequest;
 const InternetChargeTypeConfig = models.InternetChargeTypeConfig;
 const DescribeImagesResponse = models.DescribeImagesResponse;
 const ModifyInstancesVpcAttributeResponse = models.ModifyInstancesVpcAttributeResponse;
-const CreateKeyPairResponse = models.CreateKeyPairResponse;
+const InquiryPriceResetInstancesTypeRequest = models.InquiryPriceResetInstancesTypeRequest;
 const DescribeInstancesOperationLimitRequest = models.DescribeInstancesOperationLimitRequest;
 const ModifyInstancesChargeTypeRequest = models.ModifyInstancesChargeTypeRequest;
 const DescribeInstanceVncUrlRequest = models.DescribeInstanceVncUrlRequest;
@@ -91,6 +93,7 @@ const Image = models.Image;
 const DescribeDisasterRecoverGroupQuotaResponse = models.DescribeDisasterRecoverGroupQuotaResponse;
 const DescribeRegionsRequest = models.DescribeRegionsRequest;
 const CreateDisasterRecoverGroupRequest = models.CreateDisasterRecoverGroupRequest;
+const DescribeReservedInstancesResponse = models.DescribeReservedInstancesResponse;
 const DescribeImportImageOsResponse = models.DescribeImportImageOsResponse;
 const ModifyKeyPairAttributeResponse = models.ModifyKeyPairAttributeResponse;
 const DataDisk = models.DataDisk;
@@ -103,8 +106,9 @@ const InquiryPriceModifyInstancesChargeTypeRequest = models.InquiryPriceModifyIn
 const CreateImageRequest = models.CreateImageRequest;
 const Instance = models.Instance;
 const EnhancedService = models.EnhancedService;
-const InquiryPriceResetInstancesTypeRequest = models.InquiryPriceResetInstancesTypeRequest;
+const CreateKeyPairResponse = models.CreateKeyPairResponse;
 const DescribeInstanceVncUrlResponse = models.DescribeInstanceVncUrlResponse;
+const DescribeReservedInstancesOfferingsRequest = models.DescribeReservedInstancesOfferingsRequest;
 const DescribeDisasterRecoverGroupsResponse = models.DescribeDisasterRecoverGroupsResponse;
 const RunSecurityServiceEnabled = models.RunSecurityServiceEnabled;
 const ActionTimer = models.ActionTimer;
@@ -128,7 +132,7 @@ const ModifyHostsAttributeResponse = models.ModifyHostsAttributeResponse;
 const DescribeDisasterRecoverGroupQuotaRequest = models.DescribeDisasterRecoverGroupQuotaRequest;
 const StartInstancesResponse = models.StartInstancesResponse;
 const ModifyInstancesVpcAttributeRequest = models.ModifyInstancesVpcAttributeRequest;
-const ChargePrepaid = models.ChargePrepaid;
+const DescribeReservedInstancesRequest = models.DescribeReservedInstancesRequest;
 const DescribeInternetChargeTypeConfigsResponse = models.DescribeInternetChargeTypeConfigsResponse;
 const DescribeZoneInstanceConfigInfosRequest = models.DescribeZoneInstanceConfigInfosRequest;
 const DescribeZonesResponse = models.DescribeZonesResponse;
@@ -142,11 +146,13 @@ const DescribeInstancesStatusRequest = models.DescribeInstancesStatusRequest;
 const InquiryPriceResizeInstanceDisksResponse = models.InquiryPriceResizeInstanceDisksResponse;
 const TerminateInstancesRequest = models.TerminateInstancesRequest;
 const SharePermission = models.SharePermission;
+const ReservedInstances = models.ReservedInstances;
 const DeleteImagesResponse = models.DeleteImagesResponse;
 const ImportImageResponse = models.ImportImageResponse;
 const ModifyDisasterRecoverGroupAttributeRequest = models.ModifyDisasterRecoverGroupAttributeRequest;
 const RebootInstancesResponse = models.RebootInstancesResponse;
 const InquiryPriceResetInstancesTypeResponse = models.InquiryPriceResetInstancesTypeResponse;
+const ReservedInstancesOffering = models.ReservedInstancesOffering;
 const OsVersion = models.OsVersion;
 const ModifyImageAttributeResponse = models.ModifyImageAttributeResponse;
 const InquiryPriceRenewInstancesRequest = models.InquiryPriceRenewInstancesRequest;
@@ -162,6 +168,7 @@ const DisassociateSecurityGroupsRequest = models.DisassociateSecurityGroupsReque
 const ModifyHostsAttributeRequest = models.ModifyHostsAttributeRequest;
 const ImportKeyPairRequest = models.ImportKeyPairRequest;
 const KeyPair = models.KeyPair;
+const DescribeReservedInstancesOfferingsResponse = models.DescribeReservedInstancesOfferingsResponse;
 const RenewInstancesResponse = models.RenewInstancesResponse;
 const RunMonitorServiceEnabled = models.RunMonitorServiceEnabled;
 const ResetInstanceResponse = models.ResetInstanceResponse;
@@ -173,6 +180,7 @@ const DescribeInstanceTypeConfigsResponse = models.DescribeInstanceTypeConfigsRe
 const ResizeInstanceDisksRequest = models.ResizeInstanceDisksRequest;
 const DescribeInstanceFamilyConfigsRequest = models.DescribeInstanceFamilyConfigsRequest;
 const DescribeInstanceInternetBandwidthConfigsRequest = models.DescribeInstanceInternetBandwidthConfigsRequest;
+const PurchaseReservedInstancesOfferingResponse = models.PurchaseReservedInstancesOfferingResponse;
 const StorageBlock = models.StorageBlock;
 const InternetAccessible = models.InternetAccessible;
 const RenewHostsResponse = models.RenewHostsResponse;
@@ -631,21 +639,14 @@ class CvmClient extends AbstractClient {
     }
 
     /**
-     * 本接口 (ResetInstance) 用于重装指定实例上的操作系统。
-
-* 如果指定了`ImageId`参数，则使用指定的镜像重装；否则按照当前实例使用的镜像进行重装。
-* 系统盘将会被格式化，并重置；请确保系统盘中无重要文件。
-* `Linux`和`Windows`系统互相切换时，该实例系统盘`ID`将发生变化，系统盘关联快照将无法回滚、恢复数据。
-* 密码不指定将会通过站内信下发随机密码。
-* 目前只支持[系统盘类型](https://cloud.tencent.com/document/api/213/9452#block_device)是`CLOUD_BASIC`、`CLOUD_PREMIUM`、`CLOUD_SSD`类型的实例使用该接口实现`Linux`和`Windows`操作系统切换。
-* 目前不支持海外地域的实例使用该接口实现`Linux`和`Windows`操作系统切换。
-     * @param {ResetInstanceRequest} req
-     * @param {function(string, ResetInstanceResponse):void} cb
+     * 本接口(PurchaseReservedInstancesOffering)用于用户购买一个或者多个指定配置的预留实例
+     * @param {PurchaseReservedInstancesOfferingRequest} req
+     * @param {function(string, PurchaseReservedInstancesOfferingResponse):void} cb
      * @public
      */
-    ResetInstance(req, cb) {
-        let resp = new ResetInstanceResponse();
-        this.request("ResetInstance", req, resp, cb);
+    PurchaseReservedInstancesOffering(req, cb) {
+        let resp = new PurchaseReservedInstancesOfferingResponse();
+        this.request("PurchaseReservedInstancesOffering", req, resp, cb);
     }
 
     /**
@@ -662,6 +663,17 @@ class CvmClient extends AbstractClient {
     ResizeInstanceDisks(req, cb) {
         let resp = new ResizeInstanceDisksResponse();
         this.request("ResizeInstanceDisks", req, resp, cb);
+    }
+
+    /**
+     * 本接口(DescribeReservedInstances)可提供列出用户已购买的预留实例
+     * @param {DescribeReservedInstancesRequest} req
+     * @param {function(string, DescribeReservedInstancesResponse):void} cb
+     * @public
+     */
+    DescribeReservedInstances(req, cb) {
+        let resp = new DescribeReservedInstancesResponse();
+        this.request("DescribeReservedInstances", req, resp, cb);
     }
 
     /**
@@ -798,6 +810,24 @@ class CvmClient extends AbstractClient {
     ModifyInstancesProject(req, cb) {
         let resp = new ModifyInstancesProjectResponse();
         this.request("ModifyInstancesProject", req, resp, cb);
+    }
+
+    /**
+     * 本接口 (ResetInstance) 用于重装指定实例上的操作系统。
+
+* 如果指定了`ImageId`参数，则使用指定的镜像重装；否则按照当前实例使用的镜像进行重装。
+* 系统盘将会被格式化，并重置；请确保系统盘中无重要文件。
+* `Linux`和`Windows`系统互相切换时，该实例系统盘`ID`将发生变化，系统盘关联快照将无法回滚、恢复数据。
+* 密码不指定将会通过站内信下发随机密码。
+* 目前只支持[系统盘类型](https://cloud.tencent.com/document/api/213/9452#block_device)是`CLOUD_BASIC`、`CLOUD_PREMIUM`、`CLOUD_SSD`类型的实例使用该接口实现`Linux`和`Windows`操作系统切换。
+* 目前不支持海外地域的实例使用该接口实现`Linux`和`Windows`操作系统切换。
+     * @param {ResetInstanceRequest} req
+     * @param {function(string, ResetInstanceResponse):void} cb
+     * @public
+     */
+    ResetInstance(req, cb) {
+        let resp = new ResetInstanceResponse();
+        this.request("ResetInstance", req, resp, cb);
     }
 
     /**
@@ -968,6 +998,17 @@ https://img.qcloud.com/qcloud/app/active_vnc/index.html?InstanceVncUrl=wss%3A%2F
     DescribeKeyPairs(req, cb) {
         let resp = new DescribeKeyPairsResponse();
         this.request("DescribeKeyPairs", req, resp, cb);
+    }
+
+    /**
+     * 本接口(DescribeReservedInstancesOfferings)供用户列出可购买的预留实例配置
+     * @param {DescribeReservedInstancesOfferingsRequest} req
+     * @param {function(string, DescribeReservedInstancesOfferingsResponse):void} cb
+     * @public
+     */
+    DescribeReservedInstancesOfferings(req, cb) {
+        let resp = new DescribeReservedInstancesOfferingsResponse();
+        this.request("DescribeReservedInstancesOfferings", req, resp, cb);
     }
 
     /**

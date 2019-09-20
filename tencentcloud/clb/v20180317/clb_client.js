@@ -63,6 +63,7 @@ const ClassicalHealth = models.ClassicalHealth;
 const ModifyTargetPortResponse = models.ModifyTargetPortResponse;
 const DescribeClassicalLBByInstanceIdRequest = models.DescribeClassicalLBByInstanceIdRequest;
 const ManualRewriteResponse = models.ManualRewriteResponse;
+const ModifyDomainAttributesResponse = models.ModifyDomainAttributesResponse;
 const ModifyTargetWeightRequest = models.ModifyTargetWeightRequest;
 const ModifyDomainRequest = models.ModifyDomainRequest;
 const Backend = models.Backend;
@@ -94,6 +95,7 @@ const DeleteRewriteResponse = models.DeleteRewriteResponse;
 const TargetRegionInfo = models.TargetRegionInfo;
 const ModifyListenerResponse = models.ModifyListenerResponse;
 const DeleteRuleResponse = models.DeleteRuleResponse;
+const ModifyDomainAttributesRequest = models.ModifyDomainAttributesRequest;
 const DeregisterTargetsRequest = models.DeregisterTargetsRequest;
 const CertificateOutput = models.CertificateOutput;
 const ListenerBackend = models.ListenerBackend;
@@ -287,6 +289,18 @@ class ClbClient extends AbstractClient {
     DeleteLoadBalancer(req, cb) {
         let resp = new DeleteLoadBalancerResponse();
         this.request("DeleteLoadBalancer", req, resp, cb);
+    }
+
+    /**
+     * ModifyDomainAttributes接口用于修改负载均衡7层监听器转发规则的域名级别属性，如修改域名、修改DefaultServer、开启/关闭Http2、修改证书。
+本接口为异步接口，本接口返回成功后，需以返回的RequestId为入参，调用DescribeTaskStatus接口查询本次任务是否成功。
+     * @param {ModifyDomainAttributesRequest} req
+     * @param {function(string, ModifyDomainAttributesResponse):void} cb
+     * @public
+     */
+    ModifyDomainAttributes(req, cb) {
+        let resp = new ModifyDomainAttributesResponse();
+        this.request("ModifyDomainAttributes", req, resp, cb);
     }
 
     /**
