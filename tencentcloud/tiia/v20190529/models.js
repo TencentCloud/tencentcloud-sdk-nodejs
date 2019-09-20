@@ -17,6 +17,95 @@
 const AbstractModel = require("../../common/abstract_model");
 
 /**
+ * 色情识别结果。
+ * @class
+ */
+class TextResult extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 该识别场景的错误码：
+0表示成功，
+-1表示系统错误，
+-2表示引擎错误，
+-1400表示图片解码失败，
+-1401表示图片不符合规范。
+-1402表示图片文件太大。
+         * @type {number || null}
+         */
+        this.Code = null;
+
+        /**
+         * 错误码描述信息。
+         * @type {string || null}
+         */
+        this.Msg = null;
+
+        /**
+         * 识别场景的审核结论：
+PASS：正常
+REVIEW：疑似
+BLOCK：违规
+         * @type {string || null}
+         */
+        this.Suggestion = null;
+
+        /**
+         * 算法对于识别结果的置信度，0-100之间，值越高，表示对于结论越确定。
+         * @type {number || null}
+         */
+        this.Confidence = null;
+
+        /**
+         * 识别到的关键词数组
+         * @type {Array.<string> || null}
+         */
+        this.Keywords = null;
+
+        /**
+         * 图片中是否包含敏感文本内容。
+包含：
+NOTEXT：无文本
+NORMAL：内容正常
+ADS：广告推广
+POLITICS：政治
+PORN：色情
+DRUGS：涉毒
+CURSE：谩骂
+TERRORISM：暴恐
+OTHERS：其他
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * 预留字段，后期用于展示更多识别信息。
+         * @type {string || null}
+         */
+        this.AdvancedInfo = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Code = 'Code' in params ? params.Code : null;
+        this.Msg = 'Msg' in params ? params.Msg : null;
+        this.Suggestion = 'Suggestion' in params ? params.Suggestion : null;
+        this.Confidence = 'Confidence' in params ? params.Confidence : null;
+        this.Keywords = 'Keywords' in params ? params.Keywords : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.AdvancedInfo = 'AdvancedInfo' in params ? params.AdvancedInfo : null;
+
+    }
+}
+
+/**
  * 识别出人脸对应的候选人。
  * @class
  */
@@ -281,6 +370,13 @@ BLOCK：违规
         this.DisgustResult = null;
 
         /**
+         * 文字识别结果。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {TextResult || null}
+         */
+        this.TextResult = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -321,6 +417,12 @@ BLOCK：违规
             obj.deserialize(params.DisgustResult)
             this.DisgustResult = obj;
         }
+
+        if (params.TextResult) {
+            let obj = new TextResult();
+            obj.deserialize(params.TextResult)
+            this.TextResult = obj;
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -339,6 +441,7 @@ class ImageModerationRequest extends  AbstractModel {
 1. PORN，即色情识别
 2. TERRORISM，即暴恐识别
 3. POLITICS，即政治敏感识别
+4. TEXT, 即图像文本识别
 
 支持多场景（Scenes）一起检测。例如，使用 Scenes=["PORN", "TERRORISM"]，即对一张图片同时进行色情识别和暴恐识别。
          * @type {Array.<string> || null}
@@ -349,7 +452,7 @@ class ImageModerationRequest extends  AbstractModel {
          * 图片URL地址。 
 图片限制： 
  • 图片格式：PNG、JPG、JPEG。 
- • 图片大小：所下载图片经Base64编码后不超过4M。图片下载时间不超过3秒。 
+ • 图片大小：所下载图片经Base64编码后不超过4M。图片下载时间不超过3秒。 TEXT场景要求图片经Base64编码后不超过3M。
  • 图片像素：大于50*50像素，否则影响识别效果； 
  • 长宽比：长边：短边<5； 
 接口响应时间会受到图片下载时间的影响，建议使用更可靠的存储服务，推荐将图片存储在腾讯云COS。
@@ -1505,6 +1608,7 @@ class FaceRect extends  AbstractModel {
 }
 
 module.exports = {
+    TextResult: TextResult,
     Candidate: Candidate,
     TerrorismResult: TerrorismResult,
     DetectCelebrityResponse: DetectCelebrityResponse,

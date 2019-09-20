@@ -16,17 +16,16 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
-const CreateInstanceResult = models.CreateInstanceResult;
+const EmrProductConfigOutter = models.EmrProductConfigOutter;
 const LoginSettings = models.LoginSettings;
 const VPCSettings = models.VPCSettings;
-const TerminateTasksResponse = models.TerminateTasksResponse;
+const PriceResource = models.PriceResource;
 const ScaleOutInstanceResponse = models.ScaleOutInstanceResponse;
 const InquiryPriceCreateInstanceRequest = models.InquiryPriceCreateInstanceRequest;
-const ClusterInstanceInfo = models.ClusterInstanceInfo;
-const ClusterInfoResult = models.ClusterInfoResult;
-const ResourceSpec = models.ResourceSpec;
+const Resource = models.Resource;
 const CreateInstanceResponse = models.CreateInstanceResponse;
-const ScaleOutInstanceResult = models.ScaleOutInstanceResult;
+const InquiryPriceRenewInstanceResponse = models.InquiryPriceRenewInstanceResponse;
+const TerminateTasksRequest = models.TerminateTasksRequest;
 const InquiryPriceCreateInstanceResponse = models.InquiryPriceCreateInstanceResponse;
 const PreExecuteFileSettings = models.PreExecuteFileSettings;
 const CreateInstanceRequest = models.CreateInstanceRequest;
@@ -34,17 +33,20 @@ const DescribeInstancesResponse = models.DescribeInstancesResponse;
 const InquiryPriceScaleOutInstanceRequest = models.InquiryPriceScaleOutInstanceRequest;
 const Placement = models.Placement;
 const DescribeInstancesRequest = models.DescribeInstancesRequest;
+const InquiryPriceUpdateInstanceRequest = models.InquiryPriceUpdateInstanceRequest;
 const COSSettings = models.COSSettings;
-const ScaleOutInstanceRequest = models.ScaleOutInstanceRequest;
+const ClusterInstancesInfo = models.ClusterInstancesInfo;
+const MultiDisk = models.MultiDisk;
 const InquiryPriceScaleOutInstanceResponse = models.InquiryPriceScaleOutInstanceResponse;
-const TerminateTasksRequest = models.TerminateTasksRequest;
-const EMRProductConfigSettings = models.EMRProductConfigSettings;
-const NodeSpec = models.NodeSpec;
+const OutterResource = models.OutterResource;
+const UpdateInstanceSettings = models.UpdateInstanceSettings;
+const TerminateTasksResponse = models.TerminateTasksResponse;
 const TerminateInstanceRequest = models.TerminateInstanceRequest;
 const TerminateInstanceResponse = models.TerminateInstanceResponse;
-const InquiryPriceResult = models.InquiryPriceResult;
-const TerminateResult = models.TerminateResult;
-const MultiDisk = models.MultiDisk;
+const InquiryPriceUpdateInstanceResponse = models.InquiryPriceUpdateInstanceResponse;
+const NewResourceSpec = models.NewResourceSpec;
+const InquiryPriceRenewInstanceRequest = models.InquiryPriceRenewInstanceRequest;
+const ScaleOutInstanceRequest = models.ScaleOutInstanceRequest;
 
 
 /**
@@ -88,6 +90,28 @@ class EmrClient extends AbstractClient {
     TerminateInstance(req, cb) {
         let resp = new TerminateInstanceResponse();
         this.request("TerminateInstance", req, resp, cb);
+    }
+
+    /**
+     * 变配询价
+     * @param {InquiryPriceUpdateInstanceRequest} req
+     * @param {function(string, InquiryPriceUpdateInstanceResponse):void} cb
+     * @public
+     */
+    InquiryPriceUpdateInstance(req, cb) {
+        let resp = new InquiryPriceUpdateInstanceResponse();
+        this.request("InquiryPriceUpdateInstance", req, resp, cb);
+    }
+
+    /**
+     * 续费询价。
+     * @param {InquiryPriceRenewInstanceRequest} req
+     * @param {function(string, InquiryPriceRenewInstanceResponse):void} cb
+     * @public
+     */
+    InquiryPriceRenewInstance(req, cb) {
+        let resp = new InquiryPriceRenewInstanceResponse();
+        this.request("InquiryPriceRenewInstance", req, resp, cb);
     }
 
     /**
