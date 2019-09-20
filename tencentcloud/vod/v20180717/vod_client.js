@@ -30,6 +30,7 @@ const TransitionOpertion = models.TransitionOpertion;
 const AudioTrackItem = models.AudioTrackItem;
 const MediaAiAnalysisHighlightItem = models.MediaAiAnalysisHighlightItem;
 const DescribeAnimatedGraphicsTemplatesRequest = models.DescribeAnimatedGraphicsTemplatesRequest;
+const AdaptiveDynamicStreamingTemplate = models.AdaptiveDynamicStreamingTemplate;
 const DeleteAnimatedGraphicsTemplateResponse = models.DeleteAnimatedGraphicsTemplateResponse;
 const AiRecognitionTaskAsrFullTextResultOutput = models.AiRecognitionTaskAsrFullTextResultOutput;
 const MediaMiniProgramReviewElem = models.MediaMiniProgramReviewElem;
@@ -43,6 +44,7 @@ const AiReviewTaskPoliticalOcrResult = models.AiReviewTaskPoliticalOcrResult;
 const AiSampleWord = models.AiSampleWord;
 const CreateImageSpriteTemplateRequest = models.CreateImageSpriteTemplateRequest;
 const MediaSnapshotByTimePicInfoItem = models.MediaSnapshotByTimePicInfoItem;
+const VideoTrackTemplateInfo = models.VideoTrackTemplateInfo;
 const UserDefineFaceReviewTemplateInfo = models.UserDefineFaceReviewTemplateInfo;
 const ContentReviewTemplateItem = models.ContentReviewTemplateItem;
 const DeleteAIRecognitionTemplateResponse = models.DeleteAIRecognitionTemplateResponse;
@@ -57,6 +59,7 @@ const AudioTemplateInfoForUpdate = models.AudioTemplateInfoForUpdate;
 const ModifySubAppIdInfoRequest = models.ModifySubAppIdInfoRequest;
 const DeletePersonSampleRequest = models.DeletePersonSampleRequest;
 const MediaSampleSnapshotItem = models.MediaSampleSnapshotItem;
+const DescribeVideoTrackTemplatesRequest = models.DescribeVideoTrackTemplatesRequest;
 const AiRecognitionTaskInput = models.AiRecognitionTaskInput;
 const AudioTemplateInfo = models.AudioTemplateInfo;
 const ExecuteFunctionResponse = models.ExecuteFunctionResponse;
@@ -100,6 +103,7 @@ const ModifyAIAnalysisTemplateResponse = models.ModifyAIAnalysisTemplateResponse
 const DescribeAIRecognitionTemplatesResponse = models.DescribeAIRecognitionTemplatesResponse;
 const EditMediaResponse = models.EditMediaResponse;
 const PoliticalOcrReviewTemplateInfoForUpdate = models.PoliticalOcrReviewTemplateInfoForUpdate;
+const AudioTrackTemplateInfo = models.AudioTrackTemplateInfo;
 const ProcessMediaByUrlRequest = models.ProcessMediaByUrlRequest;
 const ModifyMediaInfoRequest = models.ModifyMediaInfoRequest;
 const PornAsrReviewTemplateInfoForUpdate = models.PornAsrReviewTemplateInfoForUpdate;
@@ -107,6 +111,7 @@ const MediaAnimatedGraphicsInfo = models.MediaAnimatedGraphicsInfo;
 const DescribeSnapshotByTimeOffsetTemplatesRequest = models.DescribeSnapshotByTimeOffsetTemplatesRequest;
 const AiRecognitionTaskAsrFullTextResultInput = models.AiRecognitionTaskAsrFullTextResultInput;
 const MediaMiniProgramReviewInfoItem = models.MediaMiniProgramReviewInfoItem;
+const ProcessMediaByProcedureRequest = models.ProcessMediaByProcedureRequest;
 const MediaProcessTaskInput = models.MediaProcessTaskInput;
 const AiRecognitionTaskFaceSegmentItem = models.AiRecognitionTaskFaceSegmentItem;
 const ProcessMediaResponse = models.ProcessMediaResponse;
@@ -131,9 +136,10 @@ const ConcatFileInfo2017 = models.ConcatFileInfo2017;
 const MediaProcessTaskImageSpriteResult = models.MediaProcessTaskImageSpriteResult;
 const DescribeMediaInfosResponse = models.DescribeMediaInfosResponse;
 const DeleteProcedureTemplateResponse = models.DeleteProcedureTemplateResponse;
-const ProcessMediaByProcedureRequest = models.ProcessMediaByProcedureRequest;
+const DescribeAdaptiveDynamicStreamingTemplatesResponse = models.DescribeAdaptiveDynamicStreamingTemplatesResponse;
 const MediaMiniProgramReviewInfo = models.MediaMiniProgramReviewInfo;
 const MediaContentReviewOcrTextSegmentItem = models.MediaContentReviewOcrTextSegmentItem;
+const DescribeAdaptiveDynamicStreamingTemplatesRequest = models.DescribeAdaptiveDynamicStreamingTemplatesRequest;
 const ImageWatermarkInput = models.ImageWatermarkInput;
 const ObjectConfigureInfo = models.ObjectConfigureInfo;
 const AsrFullTextConfigureInfoForUpdate = models.AsrFullTextConfigureInfoForUpdate;
@@ -257,6 +263,7 @@ const PullUploadRequest = models.PullUploadRequest;
 const SortBy = models.SortBy;
 const MediaAiAnalysisTagItem = models.MediaAiAnalysisTagItem;
 const TranscodeTemplate = models.TranscodeTemplate;
+const DescribeAudioTrackTemplatesResponse = models.DescribeAudioTrackTemplatesResponse;
 const PornOcrReviewTemplateInfo = models.PornOcrReviewTemplateInfo;
 const AiReviewTaskPoliticalAsrResult = models.AiReviewTaskPoliticalAsrResult;
 const AiRecognitionTaskAsrWordsSegmentItem = models.AiRecognitionTaskAsrWordsSegmentItem;
@@ -331,6 +338,7 @@ const CreateProcedureTemplateResponse = models.CreateProcedureTemplateResponse;
 const OcrFullTextConfigureInfoForUpdate = models.OcrFullTextConfigureInfoForUpdate;
 const AiRecognitionTaskOcrFullTextResultInput = models.AiRecognitionTaskOcrFullTextResultInput;
 const AiRecognitionTaskSegmentResultInput = models.AiRecognitionTaskSegmentResultInput;
+const DescribeAudioTrackTemplatesRequest = models.DescribeAudioTrackTemplatesRequest;
 const DescribeTasksResponse = models.DescribeTasksResponse;
 const DescribeSubAppIdsRequest = models.DescribeSubAppIdsRequest;
 const AiRecognitionTaskFaceResultInput = models.AiRecognitionTaskFaceResultInput;
@@ -386,6 +394,7 @@ const PornConfigureInfo = models.PornConfigureInfo;
 const AiRecognitionTaskObjectSeqmentItem = models.AiRecognitionTaskObjectSeqmentItem;
 const PullEventsRequest = models.PullEventsRequest;
 const FaceConfigureInfoForUpdate = models.FaceConfigureInfoForUpdate;
+const DescribeVideoTrackTemplatesResponse = models.DescribeVideoTrackTemplatesResponse;
 const DescribeAIAnalysisTemplatesResponse = models.DescribeAIAnalysisTemplatesResponse;
 const CreateSnapshotByTimeOffsetTemplateRequest = models.CreateSnapshotByTimeOffsetTemplateRequest;
 const AiRecognitionTaskAsrWordsResult = models.AiRecognitionTaskAsrWordsResult;
@@ -458,14 +467,14 @@ class VodClient extends AbstractClient {
     }
 
     /**
-     * 修改用户自定义视频内容审核模板。
-     * @param {ModifyContentReviewTemplateRequest} req
-     * @param {function(string, ModifyContentReviewTemplateResponse):void} cb
+     * 查询转自适应码流模板，支持根据条件，分页查询。
+     * @param {DescribeAdaptiveDynamicStreamingTemplatesRequest} req
+     * @param {function(string, DescribeAdaptiveDynamicStreamingTemplatesResponse):void} cb
      * @public
      */
-    ModifyContentReviewTemplate(req, cb) {
-        let resp = new ModifyContentReviewTemplateResponse();
-        this.request("ModifyContentReviewTemplate", req, resp, cb);
+    DescribeAdaptiveDynamicStreamingTemplates(req, cb) {
+        let resp = new DescribeAdaptiveDynamicStreamingTemplatesResponse();
+        this.request("DescribeAdaptiveDynamicStreamingTemplates", req, resp, cb);
     }
 
     /**
@@ -558,6 +567,17 @@ class VodClient extends AbstractClient {
     DescribeSnapshotByTimeOffsetTemplates(req, cb) {
         let resp = new DescribeSnapshotByTimeOffsetTemplatesResponse();
         this.request("DescribeSnapshotByTimeOffsetTemplates", req, resp, cb);
+    }
+
+    /**
+     * 该接口用于将一个网络上的视频拉取到云点播平台。
+     * @param {PullUploadRequest} req
+     * @param {function(string, PullUploadResponse):void} cb
+     * @public
+     */
+    PullUpload(req, cb) {
+        let resp = new PullUploadResponse();
+        this.request("PullUpload", req, resp, cb);
     }
 
     /**
@@ -745,6 +765,17 @@ class VodClient extends AbstractClient {
     DeleteWatermarkTemplate(req, cb) {
         let resp = new DeleteWatermarkTemplateResponse();
         this.request("DeleteWatermarkTemplate", req, resp, cb);
+    }
+
+    /**
+     * 修改用户自定义视频内容审核模板。
+     * @param {ModifyContentReviewTemplateRequest} req
+     * @param {function(string, ModifyContentReviewTemplateResponse):void} cb
+     * @public
+     */
+    ModifyContentReviewTemplate(req, cb) {
+        let resp = new ModifyContentReviewTemplateResponse();
+        this.request("ModifyContentReviewTemplate", req, resp, cb);
     }
 
     /**
@@ -951,14 +982,14 @@ class VodClient extends AbstractClient {
     }
 
     /**
-     * 该接口用于将一个网络上的视频拉取到云点播平台。
-     * @param {PullUploadRequest} req
-     * @param {function(string, PullUploadResponse):void} cb
+     * 获取转自适应码流音频轨模板列表，支持根据条件，分页查询。
+     * @param {DescribeAudioTrackTemplatesRequest} req
+     * @param {function(string, DescribeAudioTrackTemplatesResponse):void} cb
      * @public
      */
-    PullUpload(req, cb) {
-        let resp = new PullUploadResponse();
-        this.request("PullUpload", req, resp, cb);
+    DescribeAudioTrackTemplates(req, cb) {
+        let resp = new DescribeAudioTrackTemplatesResponse();
+        this.request("DescribeAudioTrackTemplates", req, resp, cb);
     }
 
     /**
@@ -1063,6 +1094,17 @@ class VodClient extends AbstractClient {
     CreateWordSamples(req, cb) {
         let resp = new CreateWordSamplesResponse();
         this.request("CreateWordSamples", req, resp, cb);
+    }
+
+    /**
+     * 获取转自适应码流视频轨模板列表，支持根据条件，分页查询。
+     * @param {DescribeVideoTrackTemplatesRequest} req
+     * @param {function(string, DescribeVideoTrackTemplatesResponse):void} cb
+     * @public
+     */
+    DescribeVideoTrackTemplates(req, cb) {
+        let resp = new DescribeVideoTrackTemplatesResponse();
+        this.request("DescribeVideoTrackTemplates", req, resp, cb);
     }
 
     /**

@@ -17,6 +17,41 @@
 const AbstractModel = require("../../common/abstract_model");
 
 /**
+ * 描述预付费模式，即包年包月相关参数。包括购买时长和自动续费逻辑等。
+ * @class
+ */
+class ChargePrepaid extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 购买实例的时长，单位：月。取值范围：1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36。
+         * @type {number || null}
+         */
+        this.Period = null;
+
+        /**
+         * 自动续费标识。取值范围：<br><li>NOTIFY_AND_AUTO_RENEW：通知过期且自动续费<br><li>NOTIFY_AND_MANUAL_RENEW：通知过期不自动续费<br><li>DISABLE_NOTIFY_AND_MANUAL_RENEW：不通知过期不自动续费<br><br>默认取值：NOTIFY_AND_AUTO_RENEW。若该参数指定为NOTIFY_AND_AUTO_RENEW，在账户余额充足的情况下，实例到期后将按月自动续费。
+         * @type {string || null}
+         */
+        this.RenewFlag = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Period = 'Period' in params ? params.Period : null;
+        this.RenewFlag = 'RenewFlag' in params ? params.RenewFlag : null;
+
+    }
+}
+
+/**
  * 本地磁盘规格
  * @class
  */
@@ -1478,6 +1513,55 @@ class DescribeRegionsResponse extends  AbstractModel {
 }
 
 /**
+ * PurchaseReservedInstancesOffering请求参数结构体
+ * @class
+ */
+class PurchaseReservedInstancesOfferingRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 购买预留实例计费数量
+         * @type {number || null}
+         */
+        this.InstanceCount = null;
+
+        /**
+         * 预留实例计费配置ID
+         * @type {string || null}
+         */
+        this.ReservedInstancesOfferingId = null;
+
+        /**
+         * 试运行
+         * @type {boolean || null}
+         */
+        this.DryRun = null;
+
+        /**
+         * 用于保证请求幂等性的字符串。该字符串由客户生成，需保证不同请求之间唯一，最大值不超过64个ASCII字符。若不指定该参数，则无法保证请求的幂等性。<br>更多详细信息请参阅：如何保证幂等性
+         * @type {string || null}
+         */
+        this.ClientToken = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceCount = 'InstanceCount' in params ? params.InstanceCount : null;
+        this.ReservedInstancesOfferingId = 'ReservedInstancesOfferingId' in params ? params.ReservedInstancesOfferingId : null;
+        this.DryRun = 'DryRun' in params ? params.DryRun : null;
+        this.ClientToken = 'ClientToken' in params ? params.ClientToken : null;
+
+    }
+}
+
+/**
  * RebootInstances请求参数结构体
  * @class
  */
@@ -1987,24 +2071,24 @@ class ModifyInstancesVpcAttributeResponse extends  AbstractModel {
 }
 
 /**
- * CreateKeyPair返回参数结构体
+ * InquiryPriceResetInstancesType请求参数结构体
  * @class
  */
-class CreateKeyPairResponse extends  AbstractModel {
+class InquiryPriceResetInstancesTypeRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 密钥对信息。
-         * @type {KeyPair || null}
+         * 一个或多个待操作的实例ID。可通过[`DescribeInstances`](https://cloud.tencent.com/document/api/213/15728)接口返回值中的`InstanceId`获取。每次请求批量实例的上限为1。
+         * @type {Array.<string> || null}
          */
-        this.KeyPair = null;
+        this.InstanceIds = null;
 
         /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * 实例机型。不同实例机型指定了不同的资源规格，具体取值可参见附表实例资源规格对照表，也可以调用查询实例资源规格列表接口获得最新的规格表。
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.InstanceType = null;
 
     }
 
@@ -2015,13 +2099,8 @@ class CreateKeyPairResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.KeyPair) {
-            let obj = new KeyPair();
-            obj.deserialize(params.KeyPair)
-            this.KeyPair = obj;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
+        this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
 
     }
 }
@@ -3583,6 +3662,56 @@ class CreateDisasterRecoverGroupRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeReservedInstances返回参数结构体
+ * @class
+ */
+class DescribeReservedInstancesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 符合条件的预留实例计费数量。
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 符合条件的预留实例计费列表。
+         * @type {Array.<ReservedInstances> || null}
+         */
+        this.ReservedInstancesSet = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.ReservedInstancesSet) {
+            this.ReservedInstancesSet = new Array();
+            for (let z in params.ReservedInstancesSet) {
+                let obj = new ReservedInstances();
+                obj.deserialize(params.ReservedInstancesSet[z]);
+                this.ReservedInstancesSet.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeImportImageOs返回参数结构体
  * @class
  */
@@ -4321,6 +4450,30 @@ class Instance extends  AbstractModel {
          */
         this.Uuid = null;
 
+        /**
+         * 实例的最新操作。例：StopInstances、ResetInstance。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.LatestOperation = null;
+
+        /**
+         * 实例的最新操作状态。取值范围：<br>
+<li>SUCCESS：表示操作成功<br>
+<li>OPERATING：表示操作执行中<br>
+<li>FAILED：表示操作失败
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.LatestOperationState = null;
+
+        /**
+         * 实例最新操作的唯一请求 ID。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.LatestOperationRequestId = null;
+
     }
 
     /**
@@ -4396,6 +4549,9 @@ class Instance extends  AbstractModel {
         }
         this.StopChargingMode = 'StopChargingMode' in params ? params.StopChargingMode : null;
         this.Uuid = 'Uuid' in params ? params.Uuid : null;
+        this.LatestOperation = 'LatestOperation' in params ? params.LatestOperation : null;
+        this.LatestOperationState = 'LatestOperationState' in params ? params.LatestOperationState : null;
+        this.LatestOperationRequestId = 'LatestOperationRequestId' in params ? params.LatestOperationRequestId : null;
 
     }
 }
@@ -4446,24 +4602,24 @@ class EnhancedService extends  AbstractModel {
 }
 
 /**
- * InquiryPriceResetInstancesType请求参数结构体
+ * CreateKeyPair返回参数结构体
  * @class
  */
-class InquiryPriceResetInstancesTypeRequest extends  AbstractModel {
+class CreateKeyPairResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 一个或多个待操作的实例ID。可通过[`DescribeInstances`](https://cloud.tencent.com/document/api/213/15728)接口返回值中的`InstanceId`获取。每次请求批量实例的上限为1。
-         * @type {Array.<string> || null}
+         * 密钥对信息。
+         * @type {KeyPair || null}
          */
-        this.InstanceIds = null;
+        this.KeyPair = null;
 
         /**
-         * 实例机型。不同实例机型指定了不同的资源规格，具体取值可参见附表实例资源规格对照表，也可以调用查询实例资源规格列表接口获得最新的规格表。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.InstanceType = null;
+        this.RequestId = null;
 
     }
 
@@ -4474,8 +4630,13 @@ class InquiryPriceResetInstancesTypeRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
-        this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
+
+        if (params.KeyPair) {
+            let obj = new KeyPair();
+            obj.deserialize(params.KeyPair)
+            this.KeyPair = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -4511,6 +4672,93 @@ class DescribeInstanceVncUrlResponse extends  AbstractModel {
         }
         this.InstanceVncUrl = 'InstanceVncUrl' in params ? params.InstanceVncUrl : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeReservedInstancesOfferings请求参数结构体
+ * @class
+ */
+class DescribeReservedInstancesOfferingsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 试运行, 默认为 false。
+         * @type {boolean || null}
+         */
+        this.DryRun = null;
+
+        /**
+         * 偏移量，默认为0。关于`Offset`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/15688)中的相关小节。
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 返回数量，默认为20，最大值为100。关于`Limit`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/15688)中的相关小节。
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 以最大有效期作为过滤参数。
+计量单位: 秒
+默认为 94608000。
+         * @type {number || null}
+         */
+        this.MaxDuration = null;
+
+        /**
+         * 以最小有效期作为过滤参数。
+计量单位: 秒
+默认为 2592000。
+         * @type {number || null}
+         */
+        this.MinDuration = null;
+
+        /**
+         * <li><strong>zone</strong></li>
+<p style="padding-left: 30px;">按照预留实例计费可购买的【<strong>可用区</strong>】进行过滤。形如：ap-guangzhou-1。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p><p style="padding-left: 30px;">可选项：<a href="https://cloud.tencent.com/document/product/213/6091">可用区列表</a></p>
+<li><strong>duration</strong></li>
+<p style="padding-left: 30px;">按照预留实例计费【<strong>有效期</strong>】即预留实例计费购买时长进行过滤。形如：31536000。</p><p style="padding-left: 30px;">类型：Integer</p><p style="padding-left: 30px;">计量单位：秒</p><p style="padding-left: 30px;">必选：否</p><p style="padding-left: 30px;">可选项：31536000 (1年) | 94608000（3年）</p>
+<li><strong>instance-type</strong></li>
+<p style="padding-left: 30px;">按照【<strong>预留实例计费类型</strong>】进行过滤。形如：S3.MEDIUM4。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p><p style="padding-left: 30px;">可选项：<a href="https://cloud.tencent.com/document/product/213/11518">预留实例计费类型列表</a></p>
+<li><strong>offering-type</strong></li>
+<p style="padding-left: 30px;">按照【<strong>付款类型</strong>】进行过滤。形如：All Upfront (预付全部费用)。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p><p style="padding-left: 30px;">可选项：All Upfront (预付全部费用)</p>
+<li><strong>product-description</strong></li>
+<p style="padding-left: 30px;">按照预留实例计费的【<strong>平台描述</strong>】（即操作系统）进行过滤。形如：linux。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p><p style="padding-left: 30px;">可选项：linux</p>
+<li><strong>reserved-instances-offering-id</strong></li>
+<p style="padding-left: 30px;">按照【<strong>预留实例计费配置ID</strong>】进行过滤。形如：650c138f-ae7e-4750-952a-96841d6e9fc1。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p>
+每次请求的`Filters`的上限为10，`Filter.Values`的上限为5。
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DryRun = 'DryRun' in params ? params.DryRun : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.MaxDuration = 'MaxDuration' in params ? params.MaxDuration : null;
+        this.MinDuration = 'MinDuration' in params ? params.MinDuration : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
 
     }
 }
@@ -5436,24 +5684,50 @@ class ModifyInstancesVpcAttributeRequest extends  AbstractModel {
 }
 
 /**
- * 描述预付费模式，即包年包月相关参数。包括购买时长和自动续费逻辑等。
+ * DescribeReservedInstances请求参数结构体
  * @class
  */
-class ChargePrepaid extends  AbstractModel {
+class DescribeReservedInstancesRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 购买实例的时长，单位：月。取值范围：1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36。
-         * @type {number || null}
+         * 试运行。默认为 false。
+         * @type {boolean || null}
          */
-        this.Period = null;
+        this.DryRun = null;
 
         /**
-         * 自动续费标识。取值范围：<br><li>NOTIFY_AND_AUTO_RENEW：通知过期且自动续费<br><li>NOTIFY_AND_MANUAL_RENEW：通知过期不自动续费<br><li>DISABLE_NOTIFY_AND_MANUAL_RENEW：不通知过期不自动续费<br><br>默认取值：NOTIFY_AND_AUTO_RENEW。若该参数指定为NOTIFY_AND_AUTO_RENEW，在账户余额充足的情况下，实例到期后将按月自动续费。
-         * @type {string || null}
+         * 偏移量，默认为0。关于`Offset`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/15688)中的相关小节。
+         * @type {number || null}
          */
-        this.RenewFlag = null;
+        this.Offset = null;
+
+        /**
+         * 返回数量，默认为20，最大值为100。关于`Limit`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/15688)中的相关小节。
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * <li><strong>zone</strong></li>
+<p style="padding-left: 30px;">按照预留实例计费可购买的【<strong>可用区</strong>】进行过滤。形如：ap-guangzhou-1。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p><p style="padding-left: 30px;">可选项：<a href="https://cloud.tencent.com/document/product/213/6091">可用区列表</a></p>
+<li><strong>duration</strong></li>
+<p style="padding-left: 30px;">按照预留实例计费【<strong>有效期</strong>】即预留实例计费购买时长进行过滤。形如：31536000。</p><p style="padding-left: 30px;">类型：Integer</p><p style="padding-left: 30px;">计量单位：秒</p><p style="padding-left: 30px;">必选：否</p><p style="padding-left: 30px;">可选项：31536000 (1年) | 94608000（3年）</p>
+<li><strong>instance-type</strong></li>
+<p style="padding-left: 30px;">按照【<strong>预留实例计费类型</strong>】进行过滤。形如：S3.MEDIUM4。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p><p style="padding-left: 30px;">可选项：<a href="https://cloud.tencent.com/document/product/213/11518">预留实例计费类型列表</a></p>
+<li><strong>offering-type</strong></li>
+<p style="padding-left: 30px;">按照【<strong>付款类型</strong>】进行过滤。形如：All Upfront (预付全部费用)。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p><p style="padding-left: 30px;">可选项：All Upfront (预付全部费用)</p>
+<li><strong>product-description</strong></li>
+<p style="padding-left: 30px;">按照预留实例计费的【<strong>平台描述</strong>】（即操作系统）进行过滤。形如：linux。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p><p style="padding-left: 30px;">可选项：linux</p>
+<li><strong>reserved-instances-id</strong></li>
+<p style="padding-left: 30px;">按照已购买【<strong>预留实例计费ID</strong>】进行过滤。形如：650c138f-ae7e-4750-952a-96841d6e9fc1。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p>
+<li><strong>state</strong></li>
+<p style="padding-left: 30px;">按照已购买【<strong>预留实例计费状态</strong>】进行过滤。形如：active。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p><p style="padding-left: 30px;">可选项：active (以创建) | pending (等待被创建) | retired (过期)</p>
+每次请求的`Filters`的上限为10，`Filter.Values`的上限为5。
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
 
     }
 
@@ -5464,8 +5738,18 @@ class ChargePrepaid extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Period = 'Period' in params ? params.Period : null;
-        this.RenewFlag = 'RenewFlag' in params ? params.RenewFlag : null;
+        this.DryRun = 'DryRun' in params ? params.DryRun : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
 
     }
 }
@@ -6090,6 +6374,111 @@ class SharePermission extends  AbstractModel {
 }
 
 /**
+ * 描述用户已购买预留实例计费信息
+ * @class
+ */
+class ReservedInstances extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 已购买的预留实例计费ID。形如：650c138f-ae7e-4750-952a-96841d6e9fc1。
+         * @type {string || null}
+         */
+        this.ReservedInstancesId = null;
+
+        /**
+         * 预留实例计费的类型。形如：S3.MEDIUM4。
+返回项：<a href="https://cloud.tencent.com/document/product/213/11518">预留实例计费类型列表</a>
+         * @type {string || null}
+         */
+        this.InstanceType = null;
+
+        /**
+         * 预留实例计费可购买的可用区。形如：ap-guangzhou-1。
+返回项：<a href="https://cloud.tencent.com/document/product/213/6091">可用区列表</a>
+         * @type {string || null}
+         */
+        this.Zone = null;
+
+        /**
+         * 预留实例计费开始时间。形如：1949-10-01 00:00:00
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * 预留实例计费到期时间。形如：1949-10-01 00:00:00
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * 预留实例计费【有效期】即预留实例计费购买时长。形如：31536000。
+计量单位：秒。
+         * @type {number || null}
+         */
+        this.Duration = null;
+
+        /**
+         * 已购买的预留实例计费个数。形如：10。
+         * @type {number || null}
+         */
+        this.InstanceCount = null;
+
+        /**
+         * 描述预留实例计费的平台描述（即操作系统）。形如：linux。
+返回项： linux 。
+         * @type {string || null}
+         */
+        this.ProductDescription = null;
+
+        /**
+         * 预留实例计费购买的状态。形如：active
+返回项： active (以创建) | pending (等待被创建) | retired (过期)。
+         * @type {string || null}
+         */
+        this.State = null;
+
+        /**
+         * 可购买的预留实例计费类型的结算货币，使用ISO 4217标准货币代码。形如：USD。
+返回项：USD（美元）。
+         * @type {string || null}
+         */
+        this.CurrencyCode = null;
+
+        /**
+         * 预留实例计费的付款类型。形如：All Upfront。
+返回项： All Upfront (预付全部费用)。
+         * @type {string || null}
+         */
+        this.OfferingType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ReservedInstancesId = 'ReservedInstancesId' in params ? params.ReservedInstancesId : null;
+        this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
+        this.Zone = 'Zone' in params ? params.Zone : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.Duration = 'Duration' in params ? params.Duration : null;
+        this.InstanceCount = 'InstanceCount' in params ? params.InstanceCount : null;
+        this.ProductDescription = 'ProductDescription' in params ? params.ProductDescription : null;
+        this.State = 'State' in params ? params.State : null;
+        this.CurrencyCode = 'CurrencyCode' in params ? params.CurrencyCode : null;
+        this.OfferingType = 'OfferingType' in params ? params.OfferingType : null;
+
+    }
+}
+
+/**
  * DeleteImages返回参数结构体
  * @class
  */
@@ -6244,6 +6633,99 @@ class InquiryPriceResetInstancesTypeResponse extends  AbstractModel {
             this.Price = obj;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 描述可购买预留实例计费信息
+ * @class
+ */
+class ReservedInstancesOffering extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 预留实例计费可购买的可用区。形如：ap-guangzhou-1。
+返回项：<a href="https://cloud.tencent.com/document/product/213/6091">可用区列表</a>
+         * @type {string || null}
+         */
+        this.Zone = null;
+
+        /**
+         * 可购买的预留实例计费类型的结算货币，使用ISO 4217标准货币代码。
+返回项：USD（美元）。
+         * @type {string || null}
+         */
+        this.CurrencyCode = null;
+
+        /**
+         * 预留实例计费【有效期】即预留实例计费购买时长。形如：31536000。
+计量单位：秒
+         * @type {number || null}
+         */
+        this.Duration = null;
+
+        /**
+         * 预留实例计费的购买价格。形如：4000.0。
+计量单位：与 currencyCode 一致，目前支持 USD（美元）
+         * @type {number || null}
+         */
+        this.FixedPrice = null;
+
+        /**
+         * 预留实例计费的实例类型。形如：S3.MEDIUM4。
+返回项：<a href="https://cloud.tencent.com/product/cvm/instances">预留实例计费类型列表</a>
+         * @type {string || null}
+         */
+        this.InstanceType = null;
+
+        /**
+         * 预留实例计费的付款类型。形如：All Upfront。
+返回项： All Upfront (预付全部费用)。
+         * @type {string || null}
+         */
+        this.OfferingType = null;
+
+        /**
+         * 可购买的预留实例计费配置ID。形如：650c138f-ae7e-4750-952a-96841d6e9fc1。
+         * @type {string || null}
+         */
+        this.ReservedInstancesOfferingId = null;
+
+        /**
+         * 预留实例计费的平台描述（即操作系统）。形如：linux。
+返回项： linux 。
+         * @type {string || null}
+         */
+        this.ProductDescription = null;
+
+        /**
+         * 扣除预付费之后的使用价格 (按小时计费)。形如：0.0。
+目前，因为只支持 All Upfront 付款类型，所以默认为 0元/小时。
+计量单位：元/小时，货币单位与 currencyCode 一致，目前支持 USD（美元）
+         * @type {number || null}
+         */
+        this.UsagePrice = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Zone = 'Zone' in params ? params.Zone : null;
+        this.CurrencyCode = 'CurrencyCode' in params ? params.CurrencyCode : null;
+        this.Duration = 'Duration' in params ? params.Duration : null;
+        this.FixedPrice = 'FixedPrice' in params ? params.FixedPrice : null;
+        this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
+        this.OfferingType = 'OfferingType' in params ? params.OfferingType : null;
+        this.ReservedInstancesOfferingId = 'ReservedInstancesOfferingId' in params ? params.ReservedInstancesOfferingId : null;
+        this.ProductDescription = 'ProductDescription' in params ? params.ProductDescription : null;
+        this.UsagePrice = 'UsagePrice' in params ? params.UsagePrice : null;
 
     }
 }
@@ -6932,6 +7414,56 @@ class KeyPair extends  AbstractModel {
 }
 
 /**
+ * DescribeReservedInstancesOfferings返回参数结构体
+ * @class
+ */
+class DescribeReservedInstancesOfferingsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 符合条件的预留实例计费数量。
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 符合条件的预留实例计费列表。
+         * @type {Array.<ReservedInstancesOffering> || null}
+         */
+        this.ReservedInstancesOfferingsSet = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.ReservedInstancesOfferingsSet) {
+            this.ReservedInstancesOfferingsSet = new Array();
+            for (let z in params.ReservedInstancesOfferingsSet) {
+                let obj = new ReservedInstancesOffering();
+                obj.deserialize(params.ReservedInstancesOfferingsSet[z]);
+                this.ReservedInstancesOfferingsSet.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * RenewInstances返回参数结构体
  * @class
  */
@@ -7328,6 +7860,41 @@ class DescribeInstanceInternetBandwidthConfigsRequest extends  AbstractModel {
 }
 
 /**
+ * PurchaseReservedInstancesOffering返回参数结构体
+ * @class
+ */
+class PurchaseReservedInstancesOfferingResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 已购买预留实例计费ID
+         * @type {string || null}
+         */
+        this.ReservedInstanceId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ReservedInstanceId = 'ReservedInstanceId' in params ? params.ReservedInstanceId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * HDD的本地存储信息
  * @class
  */
@@ -7630,6 +8197,7 @@ class Price extends  AbstractModel {
 }
 
 module.exports = {
+    ChargePrepaid: ChargePrepaid,
     LocalDiskType: LocalDiskType,
     AssociateInstancesKeyPairsResponse: AssociateInstancesKeyPairsResponse,
     RenewInstancesRequest: RenewInstancesRequest,
@@ -7658,6 +8226,7 @@ module.exports = {
     AllocateHostsRequest: AllocateHostsRequest,
     LoginSettings: LoginSettings,
     DescribeRegionsResponse: DescribeRegionsResponse,
+    PurchaseReservedInstancesOfferingRequest: PurchaseReservedInstancesOfferingRequest,
     RebootInstancesRequest: RebootInstancesRequest,
     AssociateInstancesKeyPairsRequest: AssociateInstancesKeyPairsRequest,
     ImportKeyPairResponse: ImportKeyPairResponse,
@@ -7669,7 +8238,7 @@ module.exports = {
     InternetChargeTypeConfig: InternetChargeTypeConfig,
     DescribeImagesResponse: DescribeImagesResponse,
     ModifyInstancesVpcAttributeResponse: ModifyInstancesVpcAttributeResponse,
-    CreateKeyPairResponse: CreateKeyPairResponse,
+    InquiryPriceResetInstancesTypeRequest: InquiryPriceResetInstancesTypeRequest,
     DescribeInstancesOperationLimitRequest: DescribeInstancesOperationLimitRequest,
     ModifyInstancesChargeTypeRequest: ModifyInstancesChargeTypeRequest,
     DescribeInstanceVncUrlRequest: DescribeInstanceVncUrlRequest,
@@ -7705,6 +8274,7 @@ module.exports = {
     DescribeDisasterRecoverGroupQuotaResponse: DescribeDisasterRecoverGroupQuotaResponse,
     DescribeRegionsRequest: DescribeRegionsRequest,
     CreateDisasterRecoverGroupRequest: CreateDisasterRecoverGroupRequest,
+    DescribeReservedInstancesResponse: DescribeReservedInstancesResponse,
     DescribeImportImageOsResponse: DescribeImportImageOsResponse,
     ModifyKeyPairAttributeResponse: ModifyKeyPairAttributeResponse,
     DataDisk: DataDisk,
@@ -7717,8 +8287,9 @@ module.exports = {
     CreateImageRequest: CreateImageRequest,
     Instance: Instance,
     EnhancedService: EnhancedService,
-    InquiryPriceResetInstancesTypeRequest: InquiryPriceResetInstancesTypeRequest,
+    CreateKeyPairResponse: CreateKeyPairResponse,
     DescribeInstanceVncUrlResponse: DescribeInstanceVncUrlResponse,
+    DescribeReservedInstancesOfferingsRequest: DescribeReservedInstancesOfferingsRequest,
     DescribeDisasterRecoverGroupsResponse: DescribeDisasterRecoverGroupsResponse,
     RunSecurityServiceEnabled: RunSecurityServiceEnabled,
     ActionTimer: ActionTimer,
@@ -7742,7 +8313,7 @@ module.exports = {
     DescribeDisasterRecoverGroupQuotaRequest: DescribeDisasterRecoverGroupQuotaRequest,
     StartInstancesResponse: StartInstancesResponse,
     ModifyInstancesVpcAttributeRequest: ModifyInstancesVpcAttributeRequest,
-    ChargePrepaid: ChargePrepaid,
+    DescribeReservedInstancesRequest: DescribeReservedInstancesRequest,
     DescribeInternetChargeTypeConfigsResponse: DescribeInternetChargeTypeConfigsResponse,
     DescribeZoneInstanceConfigInfosRequest: DescribeZoneInstanceConfigInfosRequest,
     DescribeZonesResponse: DescribeZonesResponse,
@@ -7756,11 +8327,13 @@ module.exports = {
     InquiryPriceResizeInstanceDisksResponse: InquiryPriceResizeInstanceDisksResponse,
     TerminateInstancesRequest: TerminateInstancesRequest,
     SharePermission: SharePermission,
+    ReservedInstances: ReservedInstances,
     DeleteImagesResponse: DeleteImagesResponse,
     ImportImageResponse: ImportImageResponse,
     ModifyDisasterRecoverGroupAttributeRequest: ModifyDisasterRecoverGroupAttributeRequest,
     RebootInstancesResponse: RebootInstancesResponse,
     InquiryPriceResetInstancesTypeResponse: InquiryPriceResetInstancesTypeResponse,
+    ReservedInstancesOffering: ReservedInstancesOffering,
     OsVersion: OsVersion,
     ModifyImageAttributeResponse: ModifyImageAttributeResponse,
     InquiryPriceRenewInstancesRequest: InquiryPriceRenewInstancesRequest,
@@ -7776,6 +8349,7 @@ module.exports = {
     ModifyHostsAttributeRequest: ModifyHostsAttributeRequest,
     ImportKeyPairRequest: ImportKeyPairRequest,
     KeyPair: KeyPair,
+    DescribeReservedInstancesOfferingsResponse: DescribeReservedInstancesOfferingsResponse,
     RenewInstancesResponse: RenewInstancesResponse,
     RunMonitorServiceEnabled: RunMonitorServiceEnabled,
     ResetInstanceResponse: ResetInstanceResponse,
@@ -7787,6 +8361,7 @@ module.exports = {
     ResizeInstanceDisksRequest: ResizeInstanceDisksRequest,
     DescribeInstanceFamilyConfigsRequest: DescribeInstanceFamilyConfigsRequest,
     DescribeInstanceInternetBandwidthConfigsRequest: DescribeInstanceInternetBandwidthConfigsRequest,
+    PurchaseReservedInstancesOfferingResponse: PurchaseReservedInstancesOfferingResponse,
     StorageBlock: StorageBlock,
     InternetAccessible: InternetAccessible,
     RenewHostsResponse: RenewHostsResponse,

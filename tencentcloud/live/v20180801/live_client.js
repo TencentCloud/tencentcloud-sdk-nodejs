@@ -1105,7 +1105,7 @@ class LiveClient extends AbstractClient {
     }
 
     /**
-     * 查询实时的域名维度下行播放数据。
+     * 查询实时的域名维度下行播放数据，由于数据处理有耗时，接口默认查询4分钟前的准实时数据。
      * @param {DescribeLiveDomainPlayInfoListRequest} req
      * @param {function(string, DescribeLiveDomainPlayInfoListResponse):void} cb
      * @public
