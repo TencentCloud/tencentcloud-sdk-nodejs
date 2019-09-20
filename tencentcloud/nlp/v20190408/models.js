@@ -204,6 +204,12 @@ class KeywordsExtractionRequest extends  AbstractModel {
          */
         this.Text = null;
 
+        /**
+         * 指定关键词个数上限（默认值为5）
+         * @type {number || null}
+         */
+        this.Num = null;
+
     }
 
     /**
@@ -214,6 +220,7 @@ class KeywordsExtractionRequest extends  AbstractModel {
             return;
         }
         this.Text = 'Text' in params ? params.Text : null;
+        this.Num = 'Num' in params ? params.Num : null;
 
     }
 }
@@ -291,6 +298,60 @@ class ClassificationResult extends  AbstractModel {
         this.FirstClassProbability = 'FirstClassProbability' in params ? params.FirstClassProbability : null;
         this.SecondClassName = 'SecondClassName' in params ? params.SecondClassName : null;
         this.SecondClassProbability = 'SecondClassProbability' in params ? params.SecondClassProbability : null;
+
+    }
+}
+
+/**
+ * 文本审核结果
+ * @class
+ */
+class EvilToken extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 文本是否恶意：
+0、正常；
+1、恶意；
+2、可疑送审
+         * @type {number || null}
+         */
+        this.EvilFlag = null;
+
+        /**
+         * 恶意关键词组
+         * @type {Array.<string> || null}
+         */
+        this.EvilKeywords = null;
+
+        /**
+         * 文本恶意类型：
+0、正常；
+1、政治；
+2、色情；
+3、辱骂/低俗；
+4、暴恐/毒品；
+5、广告/灌水；
+6、迷信/邪教；
+7、其他违法（如跨站追杀/恶意竞争等）；
+8、综合
+         * @type {number || null}
+         */
+        this.EvilType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.EvilFlag = 'EvilFlag' in params ? params.EvilFlag : null;
+        this.EvilKeywords = 'EvilKeywords' in params ? params.EvilKeywords : null;
+        this.EvilType = 'EvilType' in params ? params.EvilType : null;
 
     }
 }
@@ -424,6 +485,49 @@ class ContentApprovalRequest extends  AbstractModel {
             return;
         }
         this.Text = 'Text' in params ? params.Text : null;
+
+    }
+}
+
+/**
+ * TextApproval返回参数结构体
+ * @class
+ */
+class TextApprovalResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 文本审核输出结果
+         * @type {Array.<EvilToken> || null}
+         */
+        this.EvilTokens = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.EvilTokens) {
+            this.EvilTokens = new Array();
+            for (let z in params.EvilTokens) {
+                let obj = new EvilToken();
+                obj.deserialize(params.EvilTokens[z]);
+                this.EvilTokens.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -796,27 +900,18 @@ class SentimentAnalysisResponse extends  AbstractModel {
 }
 
 /**
- * LexicalAnalysis返回参数结构体
+ * KeywordsExtraction返回参数结构体
  * @class
  */
-class LexicalAnalysisResponse extends  AbstractModel {
+class KeywordsExtractionResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 命名实体识别结果。取值范围：
-<li>PER：表示人名</li>
-<li>LOC：表示地名</li>
-<li>ORG：表示机构团体名</li>
-         * @type {Array.<NerToken> || null}
+         * 关键词提取结果
+         * @type {Array.<Keyword> || null}
          */
-        this.NerTokens = null;
-
-        /**
-         * 分词&词性标注结果（词性表请参见附录）
-         * @type {Array.<PosToken> || null}
-         */
-        this.PosTokens = null;
+        this.Keywords = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -834,21 +929,12 @@ class LexicalAnalysisResponse extends  AbstractModel {
             return;
         }
 
-        if (params.NerTokens) {
-            this.NerTokens = new Array();
-            for (let z in params.NerTokens) {
-                let obj = new NerToken();
-                obj.deserialize(params.NerTokens[z]);
-                this.NerTokens.push(obj);
-            }
-        }
-
-        if (params.PosTokens) {
-            this.PosTokens = new Array();
-            for (let z in params.PosTokens) {
-                let obj = new PosToken();
-                obj.deserialize(params.PosTokens[z]);
-                this.PosTokens.push(obj);
+        if (params.Keywords) {
+            this.Keywords = new Array();
+            for (let z in params.Keywords) {
+                let obj = new Keyword();
+                obj.deserialize(params.Keywords[z]);
+                this.Keywords.push(obj);
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
@@ -1160,6 +1246,42 @@ class DependencyParsingResponse extends  AbstractModel {
 }
 
 /**
+ * TextApproval请求参数结构体
+ * @class
+ */
+class TextApprovalRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 待审核的文本（仅支持UTF-8格式，不超过2000字）
+         * @type {string || null}
+         */
+        this.Text = null;
+
+        /**
+         * 文本审核模式（默认取1值）：
+1、全领域审核
+         * @type {number || null}
+         */
+        this.Flag = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Text = 'Text' in params ? params.Text : null;
+        this.Flag = 'Flag' in params ? params.Flag : null;
+
+    }
+}
+
+/**
  * 文本纠错结果
  * @class
  */
@@ -1217,7 +1339,7 @@ class LexicalAnalysisRequest extends  AbstractModel {
 
         /**
          * 词法分析模式（默认取1值）：
-1、高精度；
+1、高精度（具备混合粒度分词能力）；
 2、高性能；
          * @type {number || null}
          */
@@ -1306,18 +1428,27 @@ class SensitiveWordsRecognitionRequest extends  AbstractModel {
 }
 
 /**
- * KeywordsExtraction返回参数结构体
+ * LexicalAnalysis返回参数结构体
  * @class
  */
-class KeywordsExtractionResponse extends  AbstractModel {
+class LexicalAnalysisResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 关键词提取结果
-         * @type {Array.<Keyword> || null}
+         * 命名实体识别结果。取值范围：
+<li>PER：表示人名</li>
+<li>LOC：表示地名</li>
+<li>ORG：表示机构团体名</li>
+         * @type {Array.<NerToken> || null}
          */
-        this.Keywords = null;
+        this.NerTokens = null;
+
+        /**
+         * 分词&词性标注结果（词性表请参见附录）
+         * @type {Array.<PosToken> || null}
+         */
+        this.PosTokens = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1335,12 +1466,21 @@ class KeywordsExtractionResponse extends  AbstractModel {
             return;
         }
 
-        if (params.Keywords) {
-            this.Keywords = new Array();
-            for (let z in params.Keywords) {
-                let obj = new Keyword();
-                obj.deserialize(params.Keywords[z]);
-                this.Keywords.push(obj);
+        if (params.NerTokens) {
+            this.NerTokens = new Array();
+            for (let z in params.NerTokens) {
+                let obj = new NerToken();
+                obj.deserialize(params.NerTokens[z]);
+                this.NerTokens.push(obj);
+            }
+        }
+
+        if (params.PosTokens) {
+            this.PosTokens = new Array();
+            for (let z in params.PosTokens) {
+                let obj = new PosToken();
+                obj.deserialize(params.PosTokens[z]);
+                this.PosTokens.push(obj);
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
@@ -1356,10 +1496,12 @@ module.exports = {
     KeywordsExtractionRequest: KeywordsExtractionRequest,
     TextCorrectionRequest: TextCorrectionRequest,
     ClassificationResult: ClassificationResult,
+    EvilToken: EvilToken,
     AutoSummarizationResponse: AutoSummarizationResponse,
     WordSimilarityResponse: WordSimilarityResponse,
     WordSimilarityRequest: WordSimilarityRequest,
     ContentApprovalRequest: ContentApprovalRequest,
+    TextApprovalResponse: TextApprovalResponse,
     SentenceEmbeddingResponse: SentenceEmbeddingResponse,
     SentenceSimilarityRequest: SentenceSimilarityRequest,
     SimilarWordsRequest: SimilarWordsRequest,
@@ -1369,7 +1511,7 @@ module.exports = {
     WordEmbeddingResponse: WordEmbeddingResponse,
     PosToken: PosToken,
     SentimentAnalysisResponse: SentimentAnalysisResponse,
-    LexicalAnalysisResponse: LexicalAnalysisResponse,
+    KeywordsExtractionResponse: KeywordsExtractionResponse,
     TextCorrectionResponse: TextCorrectionResponse,
     DependencyParsingRequest: DependencyParsingRequest,
     WordEmbeddingRequest: WordEmbeddingRequest,
@@ -1378,10 +1520,11 @@ module.exports = {
     SimilarWordsResponse: SimilarWordsResponse,
     SensitiveWordsRecognitionResponse: SensitiveWordsRecognitionResponse,
     DependencyParsingResponse: DependencyParsingResponse,
+    TextApprovalRequest: TextApprovalRequest,
     CCIToken: CCIToken,
     LexicalAnalysisRequest: LexicalAnalysisRequest,
     SentimentAnalysisRequest: SentimentAnalysisRequest,
     SensitiveWordsRecognitionRequest: SensitiveWordsRecognitionRequest,
-    KeywordsExtractionResponse: KeywordsExtractionResponse,
+    LexicalAnalysisResponse: LexicalAnalysisResponse,
 
 }

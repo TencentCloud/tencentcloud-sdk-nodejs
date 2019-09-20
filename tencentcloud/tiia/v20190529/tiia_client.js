@@ -16,6 +16,7 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
+const TextResult = models.TextResult;
 const Candidate = models.Candidate;
 const TerrorismResult = models.TerrorismResult;
 const DetectCelebrityResponse = models.DetectCelebrityResponse;
@@ -100,7 +101,7 @@ class TiiaClient extends AbstractClient {
     }
 
     /**
-     * 本接口提供多种维度的图像审核能力，支持色情和性感内容识别，政治人物和涉政敏感场景识别，以及暴恐人物、场景、旗帜标识等违禁内容的识别。
+     * 本接口提供多种维度的图像审核能力，支持色情和性感内容识别，政治人物和涉政敏感场景识别，暴恐人物、场景、旗帜标识等违禁内容的识别，以及图片中文字内容的识别。
      * @param {ImageModerationRequest} req
      * @param {function(string, ImageModerationResponse):void} cb
      * @public

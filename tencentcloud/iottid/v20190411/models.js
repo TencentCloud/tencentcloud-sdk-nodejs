@@ -181,7 +181,7 @@ class DescribeAvailableLibCountResponse extends  AbstractModel {
         super();
 
         /**
-         * 可空发的白盒秘钥数量
+         * 可空发的白盒密钥数量
          * @type {number || null}
          */
         this.Quantity = null;
@@ -513,7 +513,7 @@ class TidKeysInfo extends  AbstractModel {
         this.Psk = null;
 
         /**
-         * 软加固白盒秘钥下载地址
+         * 软加固白盒密钥下载地址
          * @type {string || null}
          */
         this.DownloadUrl = null;

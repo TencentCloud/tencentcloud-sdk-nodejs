@@ -23,10 +23,12 @@ const AutoSummarizationRequest = models.AutoSummarizationRequest;
 const KeywordsExtractionRequest = models.KeywordsExtractionRequest;
 const TextCorrectionRequest = models.TextCorrectionRequest;
 const ClassificationResult = models.ClassificationResult;
+const EvilToken = models.EvilToken;
 const AutoSummarizationResponse = models.AutoSummarizationResponse;
 const WordSimilarityResponse = models.WordSimilarityResponse;
 const WordSimilarityRequest = models.WordSimilarityRequest;
 const ContentApprovalRequest = models.ContentApprovalRequest;
+const TextApprovalResponse = models.TextApprovalResponse;
 const SentenceEmbeddingResponse = models.SentenceEmbeddingResponse;
 const SentenceSimilarityRequest = models.SentenceSimilarityRequest;
 const SimilarWordsRequest = models.SimilarWordsRequest;
@@ -36,7 +38,7 @@ const Keyword = models.Keyword;
 const WordEmbeddingResponse = models.WordEmbeddingResponse;
 const PosToken = models.PosToken;
 const SentimentAnalysisResponse = models.SentimentAnalysisResponse;
-const LexicalAnalysisResponse = models.LexicalAnalysisResponse;
+const KeywordsExtractionResponse = models.KeywordsExtractionResponse;
 const TextCorrectionResponse = models.TextCorrectionResponse;
 const DependencyParsingRequest = models.DependencyParsingRequest;
 const WordEmbeddingRequest = models.WordEmbeddingRequest;
@@ -45,11 +47,12 @@ const NerToken = models.NerToken;
 const SimilarWordsResponse = models.SimilarWordsResponse;
 const SensitiveWordsRecognitionResponse = models.SensitiveWordsRecognitionResponse;
 const DependencyParsingResponse = models.DependencyParsingResponse;
+const TextApprovalRequest = models.TextApprovalRequest;
 const CCIToken = models.CCIToken;
 const LexicalAnalysisRequest = models.LexicalAnalysisRequest;
 const SentimentAnalysisRequest = models.SentimentAnalysisRequest;
 const SensitiveWordsRecognitionRequest = models.SensitiveWordsRecognitionRequest;
-const KeywordsExtractionResponse = models.KeywordsExtractionResponse;
+const LexicalAnalysisResponse = models.LexicalAnalysisResponse;
 
 
 /**
@@ -62,6 +65,27 @@ class NlpClient extends AbstractClient {
         super("nlp.tencentcloudapi.com", "2019-04-08", credential, region, profile);
     }
     
+    /**
+     * 文本审核接口能够识别文本信息中的色情、政治等有害内容，帮助用户及时、精准地防范违规风险，可用于内容审核、敏感信息过滤、舆情监控等场景。
+
+该功能基于10万级大规模敏感词库，结合多种文本对抗方法、政策权威指令等，并运用了深度学习技术，高效识别高危有害内容。同时我们会根据大规模语料和实时反误杀系统，不断更新迭代，确保效果持续提升。
+
+文本审核接口目前提供以下三个功能：
+
+1、文本恶意级别：将文本分为3个级别，包括正常、恶意、可疑送审；
+
+2、文本恶意类型：把文本分为9个类别，包括正常、政治、色情、辱骂/低俗、暴恐/毒品、广告/灌水、迷信/邪教、其他违法、综合；
+
+3、恶意关键词：文本中所有涉嫌恶意的关键词。
+     * @param {TextApprovalRequest} req
+     * @param {function(string, TextApprovalResponse):void} cb
+     * @public
+     */
+    TextApproval(req, cb) {
+        let resp = new TextApprovalResponse();
+        this.request("TextApproval", req, resp, cb);
+    }
+
     /**
      * 词相似度接口能够基于词向量技术来计算两个输入词语的余弦相似度，相似度数值越大的两个词语在语义上越相似。
      * @param {WordSimilarityRequest} req
@@ -198,7 +222,9 @@ https://ai.tencent.com/ailab/nlp/embedding.html
     }
 
     /**
-     * 文本审核接口能够识别文本信息中的色情、政治等有害内容，帮助用户及时、精准地防范违规风险，可用于内容审核、敏感信息过滤、舆情监控等场景。
+     * （该接口即将下线，请使用升级接口：文本审核）
+
+文本审核接口能够识别文本信息中的色情、政治等有害内容，帮助用户及时、精准地防范违规风险，可用于内容审核、敏感信息过滤、舆情监控等场景。
 
 该功能基于10万级大规模敏感词库，结合多种文本对抗方法、政策权威指令等，并运用了深度学习技术，高效识别高危有害内容。同时我们会根据大规模语料和实时反误杀系统，不断更新迭代，确保效果持续提升。
 

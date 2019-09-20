@@ -19,21 +19,27 @@ const AbstractClient = require('../../common/abstract_client')
 const DetachDisksRequest = models.DetachDisksRequest;
 const DescribeDiskOperationLogsResponse = models.DescribeDiskOperationLogsResponse;
 const ResizeDiskRequest = models.ResizeDiskRequest;
+const RenewDiskRequest = models.RenewDiskRequest;
 const TerminateDisksResponse = models.TerminateDisksResponse;
+const DescribeSnapshotSharePermissionResponse = models.DescribeSnapshotSharePermissionResponse;
+const SharePermission = models.SharePermission;
 const ModifyDiskAttributesResponse = models.ModifyDiskAttributesResponse;
 const TerminateDisksRequest = models.TerminateDisksRequest;
+const ModifyDisksChargeTypeResponse = models.ModifyDisksChargeTypeResponse;
 const DescribeDisksRequest = models.DescribeDisksRequest;
 const DescribeInstancesDiskNumRequest = models.DescribeInstancesDiskNumRequest;
 const AutoSnapshotPolicy = models.AutoSnapshotPolicy;
 const Policy = models.Policy;
-const Placement = models.Placement;
+const ModifySnapshotsSharePermissionResponse = models.ModifySnapshotsSharePermissionResponse;
 const DescribeSnapshotOperationLogsRequest = models.DescribeSnapshotOperationLogsRequest;
 const ModifySnapshotAttributeRequest = models.ModifySnapshotAttributeRequest;
 const InquiryPriceRenewDisksRequest = models.InquiryPriceRenewDisksRequest;
+const DescribeSnapshotSharePermissionRequest = models.DescribeSnapshotSharePermissionRequest;
 const RenewDiskResponse = models.RenewDiskResponse;
 const InquiryPriceRenewDisksResponse = models.InquiryPriceRenewDisksResponse;
 const ModifyDisksRenewFlagRequest = models.ModifyDisksRenewFlagRequest;
 const ModifyAutoSnapshotPolicyAttributeResponse = models.ModifyAutoSnapshotPolicyAttributeResponse;
+const ModifyDisksChargeTypeRequest = models.ModifyDisksChargeTypeRequest;
 const Price = models.Price;
 const UnbindAutoSnapshotPolicyResponse = models.UnbindAutoSnapshotPolicyResponse;
 const InquiryPriceCreateDisksResponse = models.InquiryPriceCreateDisksResponse;
@@ -63,7 +69,7 @@ const SnapshotOperationLog = models.SnapshotOperationLog;
 const CreateDisksResponse = models.CreateDisksResponse;
 const AttachDisksResponse = models.AttachDisksResponse;
 const CreateAutoSnapshotPolicyResponse = models.CreateAutoSnapshotPolicyResponse;
-const RenewDiskRequest = models.RenewDiskRequest;
+const ModifySnapshotsSharePermissionRequest = models.ModifySnapshotsSharePermissionRequest;
 const DiskOperationLog = models.DiskOperationLog;
 const UnbindAutoSnapshotPolicyRequest = models.UnbindAutoSnapshotPolicyRequest;
 const DescribeDiskOperationLogsRequest = models.DescribeDiskOperationLogsRequest;
@@ -80,8 +86,9 @@ const CreateSnapshotRequest = models.CreateSnapshotRequest;
 const AttachDetail = models.AttachDetail;
 const InquiryPriceResizeDiskResponse = models.InquiryPriceResizeDiskResponse;
 const DescribeInstancesDiskNumResponse = models.DescribeInstancesDiskNumResponse;
-const DescribeSnapshotsRequest = models.DescribeSnapshotsRequest;
 const ResizeDiskResponse = models.ResizeDiskResponse;
+const DescribeSnapshotsRequest = models.DescribeSnapshotsRequest;
+const Placement = models.Placement;
 const CreateAutoSnapshotPolicyRequest = models.CreateAutoSnapshotPolicyRequest;
 const Disk = models.Disk;
 const ModifyAutoSnapshotPolicyAttributeRequest = models.ModifyAutoSnapshotPolicyAttributeRequest;
@@ -343,6 +350,17 @@ class CbsClient extends AbstractClient {
     }
 
     /**
+     * 本接口（DescribeSnapshotSharePermission）用于查询快照的分享信息。
+     * @param {DescribeSnapshotSharePermissionRequest} req
+     * @param {function(string, DescribeSnapshotSharePermissionResponse):void} cb
+     * @public
+     */
+    DescribeSnapshotSharePermission(req, cb) {
+        let resp = new DescribeSnapshotSharePermissionResponse();
+        this.request("DescribeSnapshotSharePermission", req, resp, cb);
+    }
+
+    /**
      * 本接口（CreateAutoSnapshotPolicy）用于创建定期快照策略。
 
 * 每个地域可创建的定期快照策略数量限制请参考文档[定期快照](/document/product/362/8191)。
@@ -354,6 +372,24 @@ class CbsClient extends AbstractClient {
     CreateAutoSnapshotPolicy(req, cb) {
         let resp = new CreateAutoSnapshotPolicyResponse();
         this.request("CreateAutoSnapshotPolicy", req, resp, cb);
+    }
+
+    /**
+     * 接口请求域名： cbs.tencentcloudapi.com 。
+
+本接口 (ModifyDisksChargeType) 用于切换云盘的计费模式。
+
+只支持从 POSTPAID_BY_HOUR 计费模式切换为PREPAID计费模式。
+非弹性云盘不支持此接口，请通过修改实例计费模式接口将实例连同非弹性云盘一起转换。
+默认接口请求频率限制：10次/秒。
+
+     * @param {ModifyDisksChargeTypeRequest} req
+     * @param {function(string, ModifyDisksChargeTypeResponse):void} cb
+     * @public
+     */
+    ModifyDisksChargeType(req, cb) {
+        let resp = new ModifyDisksChargeTypeResponse();
+        this.request("ModifyDisksChargeType", req, resp, cb);
     }
 
     /**
@@ -423,6 +459,23 @@ class CbsClient extends AbstractClient {
     DescribeSnapshotOperationLogs(req, cb) {
         let resp = new DescribeSnapshotOperationLogsResponse();
         this.request("DescribeSnapshotOperationLogs", req, resp, cb);
+    }
+
+    /**
+     * 本接口（ModifySnapshotsSharePermission）用于修改快照分享信息。
+
+分享快照后，被分享账户可以通过该快照创建云硬盘。
+* 每个快照最多可分享给50个账户。
+* 分享快照无法更改名称，描述，仅可用于创建云硬盘。
+* 只支持分享到对方账户相同地域。
+* 仅支持分享数据盘快照。
+     * @param {ModifySnapshotsSharePermissionRequest} req
+     * @param {function(string, ModifySnapshotsSharePermissionResponse):void} cb
+     * @public
+     */
+    ModifySnapshotsSharePermission(req, cb) {
+        let resp = new ModifySnapshotsSharePermissionResponse();
+        this.request("ModifySnapshotsSharePermission", req, resp, cb);
     }
 
     /**
