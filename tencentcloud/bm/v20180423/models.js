@@ -1320,13 +1320,13 @@ class DescribeDeviceClassPartitionRequest extends  AbstractModel {
         super();
 
         /**
-         * 设备类型代号。代号通过接口[查询设备型号(DescribeDeviceClass)](https://cloud.tencent.com/document/api/386/32911)查询。标准机型需要传入此参数
+         * 设备类型代号。代号通过接口[查询设备型号(DescribeDeviceClass)](https://cloud.tencent.com/document/api/386/32911)查询。标准机型需要传入此参数。虽是可选参数，但DeviceClassCode和InstanceId参数，必须要填写一个。
          * @type {string || null}
          */
         this.DeviceClassCode = null;
 
         /**
-         * 需要查询自定义机型RAID信息时，传入自定义机型实例ID。InstanceId存在时DeviceClassCode失效
+         * 需要查询自定义机型RAID信息时，传入自定义机型实例ID。InstanceId存在时DeviceClassCode失效。 虽是可选参数，但DeviceClassCode和InstanceId参数，必须要填写一个。
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -1608,7 +1608,7 @@ class BuyDevicesRequest extends  AbstractModel {
 
         /**
          * CPU型号ID，自定义机型需要传入，取值：
-<br/><li>1: E5-2620v3 (6核) &#42; 2</li><li>2: E5-2680v4 (14核) &#42; 2</li><li>3: E5-2670v3 (12核) &#42; 2</li><li>4: E5-2620v4 (8核) &#42; 2</li><li>5: 4110 (8核) &#42; 2</li><li>6: 6133 (20核) &#42; 2</li><br/>
+<br/><li>1: E5-2620v3 (6核) * 2</li><li>2: E5-2680v4 (14核) * 2</li><li>3: E5-2670v3 (12核) * 2</li><li>4: E5-2620v4 (8核) * 2</li><li>5: 4110 (8核) * 2</li><li>6: 6133 (20核) * 2</li><br/>
          * @type {number || null}
          */
         this.CpuId = null;
@@ -1660,6 +1660,12 @@ class BuyDevicesRequest extends  AbstractModel {
          * @type {string || null}
          */
         this.FileSystem = null;
+
+        /**
+         * 此参数是为了防止重复发货。如果两次调用传入相同的BuySession，只会发货一次。 不要以设备别名做为BuySession，这样只会第一次购买成功。参数长度为128位，合法字符为大小字母，数字，下划线，横线。
+         * @type {string || null}
+         */
+        this.BuySession = null;
 
     }
 
@@ -1715,6 +1721,7 @@ class BuyDevicesRequest extends  AbstractModel {
             }
         }
         this.FileSystem = 'FileSystem' in params ? params.FileSystem : null;
+        this.BuySession = 'BuySession' in params ? params.BuySession : null;
 
     }
 }

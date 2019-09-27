@@ -1331,7 +1331,7 @@ class CreateWorkflowRequest extends  AbstractModel {
         this.TaskNotifyConfig = null;
 
         /**
-         * 任务流的优先级，数值越大优先级越高，取值范围是 -10 到 10，不填代表 0。
+         * 工作流的优先级，数值越大优先级越高，取值范围是 -10 到 10，不填代表 0。
          * @type {number || null}
          */
         this.TaskPriority = null;
@@ -1751,7 +1751,7 @@ class ResetWorkflowRequest extends  AbstractModel {
         this.MediaProcessTask = null;
 
         /**
-         * 任务流的优先级，数值越大优先级越高，取值范围是 -10 到 10，不填代表 0。
+         * 工作流的优先级，数值越大优先级越高，取值范围是 -10 到 10，不填代表 0。
          * @type {number || null}
          */
         this.TaskPriority = null;
@@ -3030,10 +3030,17 @@ class DescribeUserInfoResponse extends  AbstractModel {
          * 用户付费类型，取值：
 <li>DailyPayment：日结付费 ；</li>
 <li>MonthlyPayment：月结付费。</li>
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.PaymentType = null;
+
+        /**
+         * 是否是旧版视频处理用户，取值：
+<li>0：否 ；</li>
+<li>1：是。</li>
+         * @type {number || null}
+         */
+        this.OldMpsUser = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -3052,6 +3059,7 @@ class DescribeUserInfoResponse extends  AbstractModel {
         }
         this.Status = 'Status' in params ? params.Status : null;
         this.PaymentType = 'PaymentType' in params ? params.PaymentType : null;
+        this.OldMpsUser = 'OldMpsUser' in params ? params.OldMpsUser : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -6668,6 +6676,41 @@ class DescribeSnapshotByTimeOffsetTemplatesRequest extends  AbstractModel {
 }
 
 /**
+ * 视频处理 COS 输出对象信息。
+ * @class
+ */
+class CosOutputStorage extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 视频处理生成的文件输出的目标 Bucket 名，如 TopRankVideo-125xxx88。如果不填，表示继承上层。
+         * @type {string || null}
+         */
+        this.Bucket = null;
+
+        /**
+         * 视频处理生成的文件输出的目标 Bucket 的园区，如 ap-chongqing。如果不填，表示继承上层。
+         * @type {string || null}
+         */
+        this.Region = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Bucket = 'Bucket' in params ? params.Bucket : null;
+        this.Region = 'Region' in params ? params.Region : null;
+
+    }
+}
+
+/**
  * ModifyImageSpriteTemplate返回参数结构体
  * @class
  */
@@ -6936,6 +6979,12 @@ class MediaProcessTaskInput extends  AbstractModel {
          */
         this.ImageSpriteTaskSet = null;
 
+        /**
+         * 对视频转自适应码流任务列表。
+         * @type {Array.<AdaptiveDynamicStreamingTaskInput> || null}
+         */
+        this.AdaptiveDynamicStreamingTaskSet = null;
+
     }
 
     /**
@@ -6988,6 +7037,15 @@ class MediaProcessTaskInput extends  AbstractModel {
                 let obj = new ImageSpriteTaskInput();
                 obj.deserialize(params.ImageSpriteTaskSet[z]);
                 this.ImageSpriteTaskSet.push(obj);
+            }
+        }
+
+        if (params.AdaptiveDynamicStreamingTaskSet) {
+            this.AdaptiveDynamicStreamingTaskSet = new Array();
+            for (let z in params.AdaptiveDynamicStreamingTaskSet) {
+                let obj = new AdaptiveDynamicStreamingTaskInput();
+                obj.deserialize(params.AdaptiveDynamicStreamingTaskSet[z]);
+                this.AdaptiveDynamicStreamingTaskSet.push(obj);
             }
         }
 
@@ -7114,24 +7172,57 @@ class CreateImageSpriteTemplateResponse extends  AbstractModel {
 }
 
 /**
- * 视频处理 COS 输出对象信息。
+ * 对视频转自适应码流的输入参数类型
  * @class
  */
-class CosOutputStorage extends  AbstractModel {
+class AdaptiveDynamicStreamingTaskInput extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 视频处理生成的文件输出的目标 Bucket 名，如 TopRankVideo-125xxx88。如果不填，表示继承上层。
-         * @type {string || null}
+         * 转自适应码流模板 ID。
+         * @type {number || null}
          */
-        this.Bucket = null;
+        this.Definition = null;
 
         /**
-         * 视频处理生成的文件输出的目标 Bucket 的园区，如 ap-chongqing。如果不填，表示继承上层。
+         * 水印列表，支持多张图片或文字水印，最大可支持 10 张。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<WatermarkInput> || null}
+         */
+        this.WatermarkSet = null;
+
+        /**
+         * 转自适应码流后文件的目标存储，不填则继承上层的 OutputStorage 值。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {TaskOutputStorage || null}
+         */
+        this.OutputStorage = null;
+
+        /**
+         * 转自适应码流后，manifest 文件的输出路径，可以为相对路径或者绝对路径。如果不填，则默认为相对路径：`{inputName}_adaptiveDynamicStreaming_{definition}.{format}`。
          * @type {string || null}
          */
-        this.Region = null;
+        this.OutputObjectPath = null;
+
+        /**
+         * 转自适应码流（HLS）后，二级 index 文件的输出路径，只能为相对路径。如果不填，则默认为相对路径：`{inputName}_adaptiveDynamicStreaming_{definition}_{trackType}_{trackDefinition}.{format}`。
+         * @type {string || null}
+         */
+        this.SubStreamManifestObjectName = null;
+
+        /**
+         * 转自适应码流后，分片文件的输出路径，只能为相对路径。如果不填，则默认为相对路径：`{inputName}_adaptiveDynamicStreaming_{definition}_{trackType}_{trackDefinition}_{number}.{format}`。
+         * @type {string || null}
+         */
+        this.SegmentObjectName = null;
+
+        /**
+         * 转自适应码流后输出路径中的`{number}`变量的规则。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {NumberFormat || null}
+         */
+        this.ObjectNumberFormat = null;
 
     }
 
@@ -7142,8 +7233,31 @@ class CosOutputStorage extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Bucket = 'Bucket' in params ? params.Bucket : null;
-        this.Region = 'Region' in params ? params.Region : null;
+        this.Definition = 'Definition' in params ? params.Definition : null;
+
+        if (params.WatermarkSet) {
+            this.WatermarkSet = new Array();
+            for (let z in params.WatermarkSet) {
+                let obj = new WatermarkInput();
+                obj.deserialize(params.WatermarkSet[z]);
+                this.WatermarkSet.push(obj);
+            }
+        }
+
+        if (params.OutputStorage) {
+            let obj = new TaskOutputStorage();
+            obj.deserialize(params.OutputStorage)
+            this.OutputStorage = obj;
+        }
+        this.OutputObjectPath = 'OutputObjectPath' in params ? params.OutputObjectPath : null;
+        this.SubStreamManifestObjectName = 'SubStreamManifestObjectName' in params ? params.SubStreamManifestObjectName : null;
+        this.SegmentObjectName = 'SegmentObjectName' in params ? params.SegmentObjectName : null;
+
+        if (params.ObjectNumberFormat) {
+            let obj = new NumberFormat();
+            obj.deserialize(params.ObjectNumberFormat)
+            this.ObjectNumberFormat = obj;
+        }
 
     }
 }
@@ -7403,6 +7517,7 @@ module.exports = {
     WatermarkInput: WatermarkInput,
     EnableWorkflowResponse: EnableWorkflowResponse,
     DescribeSnapshotByTimeOffsetTemplatesRequest: DescribeSnapshotByTimeOffsetTemplatesRequest,
+    CosOutputStorage: CosOutputStorage,
     ModifyImageSpriteTemplateResponse: ModifyImageSpriteTemplateResponse,
     CreateWatermarkTemplateRequest: CreateWatermarkTemplateRequest,
     DeleteWatermarkTemplateResponse: DeleteWatermarkTemplateResponse,
@@ -7411,7 +7526,7 @@ module.exports = {
     MediaProcessTaskInput: MediaProcessTaskInput,
     VideoTemplateInfoForUpdate: VideoTemplateInfoForUpdate,
     CreateImageSpriteTemplateResponse: CreateImageSpriteTemplateResponse,
-    CosOutputStorage: CosOutputStorage,
+    AdaptiveDynamicStreamingTaskInput: AdaptiveDynamicStreamingTaskInput,
     DescribeImageSpriteTemplatesResponse: DescribeImageSpriteTemplatesResponse,
     ModifyWatermarkTemplateResponse: ModifyWatermarkTemplateResponse,
     TaskNotifyConfig: TaskNotifyConfig,

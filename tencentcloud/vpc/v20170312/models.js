@@ -7745,6 +7745,18 @@ class CreateCcnRequest extends  AbstractModel {
          */
         this.QosLevel = null;
 
+        /**
+         * 计费模式，PREPAID：表示预付费，即包年包月，POSTPAID：表示后付费，即按量计费。默认：POSTPAID。
+         * @type {string || null}
+         */
+        this.InstanceChargeType = null;
+
+        /**
+         * 限速类型，OUTER_REGION_LIMIT表示地域出口限速，INTER_REGION_LIMIT为地域间限速，默认为OUTER_REGION_LIMIT
+         * @type {string || null}
+         */
+        this.BandwidthLimitType = null;
+
     }
 
     /**
@@ -7757,6 +7769,8 @@ class CreateCcnRequest extends  AbstractModel {
         this.CcnName = 'CcnName' in params ? params.CcnName : null;
         this.CcnDescription = 'CcnDescription' in params ? params.CcnDescription : null;
         this.QosLevel = 'QosLevel' in params ? params.QosLevel : null;
+        this.InstanceChargeType = 'InstanceChargeType' in params ? params.InstanceChargeType : null;
+        this.BandwidthLimitType = 'BandwidthLimitType' in params ? params.BandwidthLimitType : null;
 
     }
 }
@@ -8054,6 +8068,12 @@ NAT类型支持网络地址转换配置，类型确定后不能修改；一个�
          */
         this.EnableBGP = null;
 
+        /**
+         * 开启和关闭BGP的community属性。
+         * @type {boolean || null}
+         */
+        this.EnableBGPCommunity = null;
+
     }
 
     /**
@@ -8074,6 +8094,7 @@ NAT类型支持网络地址转换配置，类型确定后不能修改；一个�
         this.CcnId = 'CcnId' in params ? params.CcnId : null;
         this.CcnRouteType = 'CcnRouteType' in params ? params.CcnRouteType : null;
         this.EnableBGP = 'EnableBGP' in params ? params.EnableBGP : null;
+        this.EnableBGPCommunity = 'EnableBGPCommunity' in params ? params.EnableBGPCommunity : null;
 
     }
 }
@@ -9438,7 +9459,7 @@ class AllocateAddressesRequest extends  AbstractModel {
 
         /**
          * Anycast发布域。
-<ul style="margin:0"><li>已开通Anycast公网加速白名单的用户，可选值：<ul><li>ANYCAST_ZONE_GLOBAL：全球发布域（需要额外开通Anycast全球加速白名单）</li><li>ANYCAST_ZONE_OVERSEAS：海外发布域</li></ul>默认值：ANYCAST_ZONE_OVERSEAS。</li></ul>
+<ul style="margin:0"><li>已开通Anycast公网加速白名单的用户，可选值：<ul><li>ANYCAST_ZONE_GLOBAL：全球发布域（需要额外开通Anycast全球加速白名单）</li><li>ANYCAST_ZONE_OVERSEAS：境外发布域</li></ul>默认值：ANYCAST_ZONE_OVERSEAS。</li></ul>
          * @type {string || null}
          */
         this.AnycastZone = null;

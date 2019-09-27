@@ -94,6 +94,54 @@ cdn业务：
 }
 
 /**
+ * DescribeBillSummaryByTag返回参数结构体
+ * @class
+ */
+class DescribeBillSummaryByTagResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 数据是否准备好，0未准备好，1准备好
+         * @type {number || null}
+         */
+        this.Ready = null;
+
+        /**
+         * 各标签值花费分布详情
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {TagSummaryOverviewItem || null}
+         */
+        this.SummaryOverview = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Ready = 'Ready' in params ? params.Ready : null;
+
+        if (params.SummaryOverview) {
+            let obj = new TagSummaryOverviewItem();
+            obj.deserialize(params.SummaryOverview)
+            this.SummaryOverview = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * 由时间和值组成的数据结构
  * @class
  */
@@ -194,7 +242,7 @@ class BillResourceSummary extends  AbstractModel {
         this.BusinessCodeName = null;
 
         /**
-         * 子产品：云产品子类，如云服务器CVM-标准型S1
+         * 子产品：云产品子类，如云服务器CVM-标准型S1， 当没有获取到子产品名称时，返回"-"
          * @type {string || null}
          */
         this.ProductCodeName = null;
@@ -343,6 +391,31 @@ class BillResourceSummary extends  AbstractModel {
          */
         this.ExtendField5 = null;
 
+        /**
+         * Tag 信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<BillTagInfo> || null}
+         */
+        this.Tags = null;
+
+        /**
+         * 付款方uin
+         * @type {string || null}
+         */
+        this.PayerUin = null;
+
+        /**
+         * 资源所有者uin,无值则返回"-"
+         * @type {string || null}
+         */
+        this.OwnerUin = null;
+
+        /**
+         * 操作者uin,无值则返回"-"
+         * @type {string || null}
+         */
+        this.OperateUin = null;
+
     }
 
     /**
@@ -378,6 +451,67 @@ class BillResourceSummary extends  AbstractModel {
         this.ExtendField3 = 'ExtendField3' in params ? params.ExtendField3 : null;
         this.ExtendField4 = 'ExtendField4' in params ? params.ExtendField4 : null;
         this.ExtendField5 = 'ExtendField5' in params ? params.ExtendField5 : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new BillTagInfo();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
+        this.PayerUin = 'PayerUin' in params ? params.PayerUin : null;
+        this.OwnerUin = 'OwnerUin' in params ? params.OwnerUin : null;
+        this.OperateUin = 'OperateUin' in params ? params.OperateUin : null;
+
+    }
+}
+
+/**
+ * DescribeBillSummaryByTag请求参数结构体
+ * @class
+ */
+class DescribeBillSummaryByTagRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 查询账单数据的用户UIN
+         * @type {string || null}
+         */
+        this.PayerUin = null;
+
+        /**
+         * 目前只支持传当月开始，且必须和EndTime为相同月份，例 2018-09-01 00:00:00
+         * @type {string || null}
+         */
+        this.BeginTime = null;
+
+        /**
+         * 目前只支持传当月结束，且必须和BeginTime为相同月份，例 2018-09-30 23:59:59
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * 分账标签键
+         * @type {string || null}
+         */
+        this.TagKey = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PayerUin = 'PayerUin' in params ? params.PayerUin : null;
+        this.BeginTime = 'BeginTime' in params ? params.BeginTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.TagKey = 'TagKey' in params ? params.TagKey : null;
 
     }
 }
@@ -442,6 +576,41 @@ class DescribeBillSummaryByProductResponse extends  AbstractModel {
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 账单 Tag 信息
+ * @class
+ */
+class BillTagInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 分账标签键
+         * @type {string || null}
+         */
+        this.TagKey = null;
+
+        /**
+         * 标签值
+         * @type {string || null}
+         */
+        this.TagValue = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TagKey = 'TagKey' in params ? params.TagKey : null;
+        this.TagValue = 'TagValue' in params ? params.TagValue : null;
 
     }
 }
@@ -620,6 +789,24 @@ class DescribeBillDetailRequest extends  AbstractModel {
          */
         this.NeedRecordNum = null;
 
+        /**
+         * 查询指定产品信息
+         * @type {string || null}
+         */
+        this.ProductCode = null;
+
+        /**
+         * 付费模式 prePay/postPay
+         * @type {string || null}
+         */
+        this.PayMode = null;
+
+        /**
+         * 查询指定资源信息
+         * @type {string || null}
+         */
+        this.ResourceId = null;
+
     }
 
     /**
@@ -636,6 +823,9 @@ class DescribeBillDetailRequest extends  AbstractModel {
         this.BeginTime = 'BeginTime' in params ? params.BeginTime : null;
         this.EndTime = 'EndTime' in params ? params.EndTime : null;
         this.NeedRecordNum = 'NeedRecordNum' in params ? params.NeedRecordNum : null;
+        this.ProductCode = 'ProductCode' in params ? params.ProductCode : null;
+        this.PayMode = 'PayMode' in params ? params.PayMode : null;
+        this.ResourceId = 'ResourceId' in params ? params.ResourceId : null;
 
     }
 }
@@ -673,6 +863,30 @@ class RegionSummaryOverviewItem extends  AbstractModel {
          */
         this.RealTotalCostRatio = null;
 
+        /**
+         * 现金金额
+         * @type {string || null}
+         */
+        this.CashPayAmount = null;
+
+        /**
+         * 赠送金金额
+         * @type {string || null}
+         */
+        this.IncentivePayAmount = null;
+
+        /**
+         * 代金券金额
+         * @type {string || null}
+         */
+        this.VoucherPayAmount = null;
+
+        /**
+         * 账单月份，格式2019-08
+         * @type {string || null}
+         */
+        this.BillMonth = null;
+
     }
 
     /**
@@ -686,6 +900,10 @@ class RegionSummaryOverviewItem extends  AbstractModel {
         this.RegionName = 'RegionName' in params ? params.RegionName : null;
         this.RealTotalCost = 'RealTotalCost' in params ? params.RealTotalCost : null;
         this.RealTotalCostRatio = 'RealTotalCostRatio' in params ? params.RealTotalCostRatio : null;
+        this.CashPayAmount = 'CashPayAmount' in params ? params.CashPayAmount : null;
+        this.IncentivePayAmount = 'IncentivePayAmount' in params ? params.IncentivePayAmount : null;
+        this.VoucherPayAmount = 'VoucherPayAmount' in params ? params.VoucherPayAmount : null;
+        this.BillMonth = 'BillMonth' in params ? params.BillMonth : null;
 
     }
 }
@@ -861,6 +1079,30 @@ class BusinessSummaryOverviewItem extends  AbstractModel {
          */
         this.RealTotalCostRatio = null;
 
+        /**
+         * 现金金额
+         * @type {string || null}
+         */
+        this.CashPayAmount = null;
+
+        /**
+         * 赠送金金额
+         * @type {string || null}
+         */
+        this.IncentivePayAmount = null;
+
+        /**
+         * 代金券金额
+         * @type {string || null}
+         */
+        this.VoucherPayAmount = null;
+
+        /**
+         * 账单月份，格式2019-08
+         * @type {string || null}
+         */
+        this.BillMonth = null;
+
     }
 
     /**
@@ -874,6 +1116,10 @@ class BusinessSummaryOverviewItem extends  AbstractModel {
         this.BusinessCodeName = 'BusinessCodeName' in params ? params.BusinessCodeName : null;
         this.RealTotalCost = 'RealTotalCost' in params ? params.RealTotalCost : null;
         this.RealTotalCostRatio = 'RealTotalCostRatio' in params ? params.RealTotalCostRatio : null;
+        this.CashPayAmount = 'CashPayAmount' in params ? params.CashPayAmount : null;
+        this.IncentivePayAmount = 'IncentivePayAmount' in params ? params.IncentivePayAmount : null;
+        this.VoucherPayAmount = 'VoucherPayAmount' in params ? params.VoucherPayAmount : null;
+        this.BillMonth = 'BillMonth' in params ? params.BillMonth : null;
 
     }
 }
@@ -1178,6 +1424,30 @@ class ActionSummaryOverviewItem extends  AbstractModel {
          */
         this.RealTotalCostRatio = null;
 
+        /**
+         * 现金金额
+         * @type {string || null}
+         */
+        this.CashPayAmount = null;
+
+        /**
+         * 赠送金金额
+         * @type {string || null}
+         */
+        this.IncentivePayAmount = null;
+
+        /**
+         * 代金券金额
+         * @type {string || null}
+         */
+        this.VoucherPayAmount = null;
+
+        /**
+         * 账单月份，格式2019-08
+         * @type {string || null}
+         */
+        this.BillMonth = null;
+
     }
 
     /**
@@ -1191,6 +1461,10 @@ class ActionSummaryOverviewItem extends  AbstractModel {
         this.ActionTypeName = 'ActionTypeName' in params ? params.ActionTypeName : null;
         this.RealTotalCost = 'RealTotalCost' in params ? params.RealTotalCost : null;
         this.RealTotalCostRatio = 'RealTotalCostRatio' in params ? params.RealTotalCostRatio : null;
+        this.CashPayAmount = 'CashPayAmount' in params ? params.CashPayAmount : null;
+        this.IncentivePayAmount = 'IncentivePayAmount' in params ? params.IncentivePayAmount : null;
+        this.VoucherPayAmount = 'VoucherPayAmount' in params ? params.VoucherPayAmount : null;
+        this.BillMonth = 'BillMonth' in params ? params.BillMonth : null;
 
     }
 }
@@ -1569,6 +1843,13 @@ class BillDetail extends  AbstractModel {
          */
         this.OperateUin = null;
 
+        /**
+         * Tag 信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<BillTagInfo> || null}
+         */
+        this.Tags = null;
+
     }
 
     /**
@@ -1605,6 +1886,60 @@ class BillDetail extends  AbstractModel {
         this.OwnerUin = 'OwnerUin' in params ? params.OwnerUin : null;
         this.OperateUin = 'OperateUin' in params ? params.OperateUin : null;
 
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new BillTagInfo();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * 按标签汇总消费详情
+ * @class
+ */
+class TagSummaryOverviewItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 标签值
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.TagValue = null;
+
+        /**
+         * 实际花费
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.RealTotalCost = null;
+
+        /**
+         * 费用所占百分比，两位小数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.RealTotalCostRatio = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TagValue = 'TagValue' in params ? params.TagValue : null;
+        this.RealTotalCost = 'RealTotalCost' in params ? params.RealTotalCost : null;
+        this.RealTotalCostRatio = 'RealTotalCostRatio' in params ? params.RealTotalCostRatio : null;
+
     }
 }
 
@@ -1640,6 +1975,30 @@ class ProjectSummaryOverviewItem extends  AbstractModel {
          */
         this.RealTotalCostRatio = null;
 
+        /**
+         * 现金金额
+         * @type {string || null}
+         */
+        this.CashPayAmount = null;
+
+        /**
+         * 赠送金金额
+         * @type {string || null}
+         */
+        this.IncentivePayAmount = null;
+
+        /**
+         * 代金券金额
+         * @type {string || null}
+         */
+        this.VoucherPayAmount = null;
+
+        /**
+         * 账单月份，格式2019-08
+         * @type {string || null}
+         */
+        this.BillMonth = null;
+
     }
 
     /**
@@ -1653,6 +2012,10 @@ class ProjectSummaryOverviewItem extends  AbstractModel {
         this.ProjectName = 'ProjectName' in params ? params.ProjectName : null;
         this.RealTotalCost = 'RealTotalCost' in params ? params.RealTotalCost : null;
         this.RealTotalCostRatio = 'RealTotalCostRatio' in params ? params.RealTotalCostRatio : null;
+        this.CashPayAmount = 'CashPayAmount' in params ? params.CashPayAmount : null;
+        this.IncentivePayAmount = 'IncentivePayAmount' in params ? params.IncentivePayAmount : null;
+        this.VoucherPayAmount = 'VoucherPayAmount' in params ? params.VoucherPayAmount : null;
+        this.BillMonth = 'BillMonth' in params ? params.BillMonth : null;
 
     }
 }
@@ -2030,6 +2393,24 @@ class PayModeSummaryOverviewItem extends  AbstractModel {
          */
         this.Detail = null;
 
+        /**
+         * 现金金额
+         * @type {string || null}
+         */
+        this.CashPayAmount = null;
+
+        /**
+         * 赠送金金额
+         * @type {string || null}
+         */
+        this.IncentivePayAmount = null;
+
+        /**
+         * 代金券金额
+         * @type {string || null}
+         */
+        this.VoucherPayAmount = null;
+
     }
 
     /**
@@ -2052,6 +2433,9 @@ class PayModeSummaryOverviewItem extends  AbstractModel {
                 this.Detail.push(obj);
             }
         }
+        this.CashPayAmount = 'CashPayAmount' in params ? params.CashPayAmount : null;
+        this.IncentivePayAmount = 'IncentivePayAmount' in params ? params.IncentivePayAmount : null;
+        this.VoucherPayAmount = 'VoucherPayAmount' in params ? params.VoucherPayAmount : null;
 
     }
 }
@@ -2070,6 +2454,24 @@ class BusinessSummaryTotal extends  AbstractModel {
          */
         this.RealTotalCost = null;
 
+        /**
+         * 代金券金额
+         * @type {string || null}
+         */
+        this.VoucherPayAmount = null;
+
+        /**
+         * 赠送金金额
+         * @type {string || null}
+         */
+        this.IncentivePayAmount = null;
+
+        /**
+         * 现金金额
+         * @type {string || null}
+         */
+        this.CashPayAmount = null;
+
     }
 
     /**
@@ -2080,16 +2482,22 @@ class BusinessSummaryTotal extends  AbstractModel {
             return;
         }
         this.RealTotalCost = 'RealTotalCost' in params ? params.RealTotalCost : null;
+        this.VoucherPayAmount = 'VoucherPayAmount' in params ? params.VoucherPayAmount : null;
+        this.IncentivePayAmount = 'IncentivePayAmount' in params ? params.IncentivePayAmount : null;
+        this.CashPayAmount = 'CashPayAmount' in params ? params.CashPayAmount : null;
 
     }
 }
 
 module.exports = {
     DescribeDosageDetailByDateRequest: DescribeDosageDetailByDateRequest,
+    DescribeBillSummaryByTagResponse: DescribeBillSummaryByTagResponse,
     DetailPoint: DetailPoint,
     DescribeBillSummaryByPayModeResponse: DescribeBillSummaryByPayModeResponse,
     BillResourceSummary: BillResourceSummary,
+    DescribeBillSummaryByTagRequest: DescribeBillSummaryByTagRequest,
     DescribeBillSummaryByProductResponse: DescribeBillSummaryByProductResponse,
+    BillTagInfo: BillTagInfo,
     DescribeBillSummaryByRegionResponse: DescribeBillSummaryByRegionResponse,
     DetailSet: DetailSet,
     DescribeAccountBalanceRequest: DescribeAccountBalanceRequest,
@@ -2110,6 +2518,7 @@ module.exports = {
     DescribeBillSummaryByProductRequest: DescribeBillSummaryByProductRequest,
     PayDealsResponse: PayDealsResponse,
     BillDetail: BillDetail,
+    TagSummaryOverviewItem: TagSummaryOverviewItem,
     ProjectSummaryOverviewItem: ProjectSummaryOverviewItem,
     DescribeBillDetailResponse: DescribeBillDetailResponse,
     Deal: Deal,

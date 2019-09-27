@@ -903,7 +903,7 @@ class GaapClient extends AbstractClient {
     }
 
     /**
-     * 该接口用于查询监听器统计数据，包括出入带宽，出入包量，并发数据。支持300, 3600和86400的细粒度，取值为细粒度范围内最大值。
+     * 该接口用于查询监听器统计数据，包括出入带宽，出入包量，并发数据。支持300秒, 3600秒和86400秒的细粒度，取值为细粒度范围内最大值。
      * @param {DescribeListenerStatisticsRequest} req
      * @param {function(string, DescribeListenerStatisticsResponse):void} cb
      * @public
@@ -1002,7 +1002,7 @@ class GaapClient extends AbstractClient {
     }
 
     /**
-     * 本接口（CreateProxy）用于创建一个指定配置的加速通道。
+     * 本接口（CreateProxy）用于创建/复制一个指定配置的加速通道。当复制通道时，需要设置新通道的基本配置参数，并设置ClonedProxyId来指定被复制的通道。
      * @param {CreateProxyRequest} req
      * @param {function(string, CreateProxyResponse):void} cb
      * @public

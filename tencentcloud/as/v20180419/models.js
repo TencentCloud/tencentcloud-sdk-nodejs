@@ -2584,6 +2584,14 @@ class ModifyLoadBalancersRequest extends  AbstractModel {
          */
         this.ForwardLoadBalancers = null;
 
+        /**
+         * 负载均衡器校验策略，取值包括 ALL 和 DIFF，默认取值为 ALL。
+<br><li> ALL，所有负载均衡器都合法则通过校验，否则校验报错。
+<br><li> DIFF，仅校验负载均衡器参数中实际变化的部分，如果合法则通过校验，否则校验报错。
+         * @type {string || null}
+         */
+        this.LoadBalancersCheckPolicy = null;
+
     }
 
     /**
@@ -2604,6 +2612,7 @@ class ModifyLoadBalancersRequest extends  AbstractModel {
                 this.ForwardLoadBalancers.push(obj);
             }
         }
+        this.LoadBalancersCheckPolicy = 'LoadBalancersCheckPolicy' in params ? params.LoadBalancersCheckPolicy : null;
 
     }
 }
@@ -4509,7 +4518,7 @@ class LaunchConfiguration extends  AbstractModel {
         this.VersionNumber = null;
 
         /**
-         * 更新时间
+         * 更新时间。
          * @type {string || null}
          */
         this.UpdatedTime = null;
@@ -4519,6 +4528,12 @@ class LaunchConfiguration extends  AbstractModel {
          * @type {string || null}
          */
         this.CamRoleName = null;
+
+        /**
+         * 上次操作时，InstanceTypesCheckPolicy 取值。
+         * @type {string || null}
+         */
+        this.LastOperationInstanceTypesCheckPolicy = null;
 
     }
 
@@ -4600,6 +4615,7 @@ class LaunchConfiguration extends  AbstractModel {
         this.VersionNumber = 'VersionNumber' in params ? params.VersionNumber : null;
         this.UpdatedTime = 'UpdatedTime' in params ? params.UpdatedTime : null;
         this.CamRoleName = 'CamRoleName' in params ? params.CamRoleName : null;
+        this.LastOperationInstanceTypesCheckPolicy = 'LastOperationInstanceTypesCheckPolicy' in params ? params.LastOperationInstanceTypesCheckPolicy : null;
 
     }
 }
