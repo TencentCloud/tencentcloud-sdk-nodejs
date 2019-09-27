@@ -144,6 +144,96 @@ class DetailInfo extends  AbstractModel {
 }
 
 /**
+ * SubmitImageTaskPlus请求参数结构体
+ * @class
+ */
+class SubmitImageTaskPlusRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 输入分析对象内容，输入数据格式参考FileType参数释义
+         * @type {Array.<string> || null}
+         */
+        this.FileContent = null;
+
+        /**
+         * 输入分析对象类型，picture：二进制图片的 base64 编码字符串，picture_url:图片地址，vod_url：视频地址，live_url：直播地址
+         * @type {string || null}
+         */
+        this.FileType = null;
+
+        /**
+         * 任务控制选项
+         * @type {ImageTaskFunction || null}
+         */
+        this.Functions = null;
+
+        /**
+         * 光照标准列表
+         * @type {Array.<LightStandard> || null}
+         */
+        this.LightStandardSet = null;
+
+        /**
+         * 抽帧的时间间隔，单位毫秒，默认值1000，保留字段，当前不支持填写。
+         * @type {number || null}
+         */
+        this.FrameInterval = null;
+
+        /**
+         * 查询人员库列表
+         * @type {Array.<string> || null}
+         */
+        this.LibrarySet = null;
+
+        /**
+         * 视频评估时间，单位秒，点播场景默认值为2小时（无法探测长度时）或完整视频，直播场景默认值为10分钟或直播提前结束
+         * @type {number || null}
+         */
+        this.MaxVideoDuration = null;
+
+        /**
+         * 人脸识别中的相似度阈值，默认值为0.89，保留字段，当前不支持填写。
+         * @type {number || null}
+         */
+        this.SimThreshold = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FileContent = 'FileContent' in params ? params.FileContent : null;
+        this.FileType = 'FileType' in params ? params.FileType : null;
+
+        if (params.Functions) {
+            let obj = new ImageTaskFunction();
+            obj.deserialize(params.Functions)
+            this.Functions = obj;
+        }
+
+        if (params.LightStandardSet) {
+            this.LightStandardSet = new Array();
+            for (let z in params.LightStandardSet) {
+                let obj = new LightStandard();
+                obj.deserialize(params.LightStandardSet[z]);
+                this.LightStandardSet.push(obj);
+            }
+        }
+        this.FrameInterval = 'FrameInterval' in params ? params.FrameInterval : null;
+        this.LibrarySet = 'LibrarySet' in params ? params.LibrarySet : null;
+        this.MaxVideoDuration = 'MaxVideoDuration' in params ? params.MaxVideoDuration : null;
+        this.SimThreshold = 'SimThreshold' in params ? params.SimThreshold : null;
+
+    }
+}
+
+/**
  * FacePoseResult
  * @class
  */
@@ -295,7 +385,7 @@ class AIAssistantRequest extends  AbstractModel {
         this.LibrarySet = null;
 
         /**
-         * 视频评估时间，单位毫秒，点播场景默认值为2小时（无法探测长度时）或完整视频，直播场景默认值为10分钟或直播提前结束
+         * 视频评估时间，单位秒，点播场景默认值为2小时（无法探测长度时）或完整视频，直播场景默认值为10分钟或直播提前结束
          * @type {number || null}
          */
         this.MaxVideoDuration = null;
@@ -563,7 +653,7 @@ class SubmitOneByOneClassTaskRequest extends  AbstractModel {
         this.LibrarySet = null;
 
         /**
-         * 视频评估时间，单位毫秒，点播场景默认值为2小时（无法探测长度时）或完整视频，直播场景默认值为10分钟或直播提前结束
+         * 视频评估时间，单位秒，点播场景默认值为2小时（无法探测长度时）或完整视频，直播场景默认值为10分钟或直播提前结束
          * @type {number || null}
          */
         this.MaxVideoDuration = null;
@@ -910,6 +1000,48 @@ class DescribeImageTaskStatisticRequest extends  AbstractModel {
 }
 
 /**
+ * SubmitCheckAttendanceTaskPlus返回参数结构体
+ * @class
+ */
+class SubmitCheckAttendanceTaskPlusResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 任务标识符
+         * @type {number || null}
+         */
+        this.JobId = null;
+
+        /**
+         * 没有注册的人的ID列表
+         * @type {string || null}
+         */
+        this.NotRegisteredSet = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.JobId = 'JobId' in params ? params.JobId : null;
+        this.NotRegisteredSet = 'NotRegisteredSet' in params ? params.NotRegisteredSet : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * SubmitImageTask请求参数结构体
  * @class
  */
@@ -954,7 +1086,7 @@ class SubmitImageTaskRequest extends  AbstractModel {
         this.LibrarySet = null;
 
         /**
-         * 视频评估时间，单位毫秒，点播场景默认值为2小时（无法探测长度时）或完整视频，直播场景默认值为10分钟或直播提前结束
+         * 视频评估时间，单位秒，点播场景默认值为2小时（无法探测长度时）或完整视频，直播场景默认值为10分钟或直播提前结束
          * @type {number || null}
          */
         this.MaxVideoDuration = null;
@@ -1200,7 +1332,7 @@ class SubmitFullBodyClassTaskRequest extends  AbstractModel {
         this.LibrarySet = null;
 
         /**
-         * 视频评估时间，单位毫秒，点播场景默认值为2小时（无法探测长度时）或完整视频，直播场景默认值为10分钟或直播提前结束
+         * 视频评估时间，单位秒，点播场景默认值为2小时（无法探测长度时）或完整视频，直播场景默认值为10分钟或直播提前结束
          * @type {number || null}
          */
         this.MaxVideoDuration = null;
@@ -1414,6 +1546,92 @@ class WholeTextItem extends  AbstractModel {
         this.MaxVolume = 'MaxVolume' in params ? params.MaxVolume : null;
         this.MinVolume = 'MinVolume' in params ? params.MinVolume : null;
         this.Speed = 'Speed' in params ? params.Speed : null;
+
+    }
+}
+
+/**
+ * SubmitCheckAttendanceTaskPlus请求参数结构体
+ * @class
+ */
+class SubmitCheckAttendanceTaskPlusRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 输入数据
+         * @type {Array.<string> || null}
+         */
+        this.FileContent = null;
+
+        /**
+         * 视频流类型，vod_url表示点播URL，live_url表示直播URL，默认vod_url
+         * @type {string || null}
+         */
+        this.FileType = null;
+
+        /**
+         * 人员库 ID列表
+         * @type {Array.<string> || null}
+         */
+        this.LibraryIds = null;
+
+        /**
+         * 确定出勤阈值；默认为0.92
+         * @type {number || null}
+         */
+        this.AttendanceThreshold = null;
+
+        /**
+         * 是否开启陌生人模式，陌生人模式是指在任务中发现的非注册人脸库中的人脸也返回相关统计信息，默认不开启
+         * @type {boolean || null}
+         */
+        this.EnableStranger = null;
+
+        /**
+         * 考勤结束时间（到视频的第几秒结束考勤），单位秒；默认为900 
+对于直播场景，使用绝对时间戳，单位秒，默认当前时间往后12小时
+         * @type {number || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * 通知回调地址，要求方法为post，application/json格式
+         * @type {string || null}
+         */
+        this.NoticeUrl = null;
+
+        /**
+         * 考勤开始时间（从视频的第几秒开始考勤），单位秒；默认为0 
+对于直播场景，使用绝对时间戳，单位秒，默认当前时间
+         * @type {number || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * 识别阈值；默认为0.8
+         * @type {number || null}
+         */
+        this.Threshold = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FileContent = 'FileContent' in params ? params.FileContent : null;
+        this.FileType = 'FileType' in params ? params.FileType : null;
+        this.LibraryIds = 'LibraryIds' in params ? params.LibraryIds : null;
+        this.AttendanceThreshold = 'AttendanceThreshold' in params ? params.AttendanceThreshold : null;
+        this.EnableStranger = 'EnableStranger' in params ? params.EnableStranger : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.NoticeUrl = 'NoticeUrl' in params ? params.NoticeUrl : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.Threshold = 'Threshold' in params ? params.Threshold : null;
 
     }
 }
@@ -1764,7 +1982,7 @@ class SubmitTraditionalClassTaskRequest extends  AbstractModel {
         this.LibrarySet = null;
 
         /**
-         * 视频评估时间，单位毫秒，点播场景默认值为2小时（无法探测长度时）或完整视频，直播场景默认值为10分钟或直播提前结束
+         * 视频评估时间，单位秒，点播场景默认值为2小时（无法探测长度时）或完整视频，直播场景默认值为10分钟或直播提前结束
          * @type {number || null}
          */
         this.MaxVideoDuration = null;
@@ -3803,7 +4021,7 @@ class SubmitPartialBodyClassTaskRequest extends  AbstractModel {
         this.LibrarySet = null;
 
         /**
-         * 视频评估时间，单位毫秒，点播场景默认值为2小时（无法探测长度时）或完整视频，直播场景默认值为10分钟或直播提前结束
+         * 视频评估时间，单位秒，点播场景默认值为2小时（无法探测长度时）或完整视频，直播场景默认值为10分钟或直播提前结束
          * @type {number || null}
          */
         this.MaxVideoDuration = null;
@@ -5581,6 +5799,70 @@ class ImageTaskResult extends  AbstractModel {
 }
 
 /**
+ * SubmitImageTaskPlus返回参数结构体
+ * @class
+ */
+class SubmitImageTaskPlusResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 识别结果
+         * @type {Array.<ImageTaskResult> || null}
+         */
+        this.ResultSet = null;
+
+        /**
+         * 任务标识符
+         * @type {number || null}
+         */
+        this.JobId = null;
+
+        /**
+         * 任务进度
+         * @type {number || null}
+         */
+        this.Progress = null;
+
+        /**
+         * 结果总数目
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.ResultSet) {
+            this.ResultSet = new Array();
+            for (let z in params.ResultSet) {
+                let obj = new ImageTaskResult();
+                obj.deserialize(params.ResultSet[z]);
+                this.ResultSet.push(obj);
+            }
+        }
+        this.JobId = 'JobId' in params ? params.JobId : null;
+        this.Progress = 'Progress' in params ? params.Progress : null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * 词汇库中的单词出现在音频中的总次数信息
  * @class
  */
@@ -6307,7 +6589,7 @@ class SubmitOpenClassTaskRequest extends  AbstractModel {
         this.LibrarySet = null;
 
         /**
-         * 视频评估时间，单位毫秒，点播场景默认值为2小时（无法探测长度时）或完整视频，直播场景默认值为10分钟或直播提前结束
+         * 视频评估时间，单位秒，点播场景默认值为2小时（无法探测长度时）或完整视频，直播场景默认值为10分钟或直播提前结束
          * @type {number || null}
          */
         this.MaxVideoDuration = null;
@@ -7166,6 +7448,7 @@ module.exports = {
     CreateVocabLibResponse: CreateVocabLibResponse,
     FaceIdentifyStatistic: FaceIdentifyStatistic,
     DetailInfo: DetailInfo,
+    SubmitImageTaskPlusRequest: SubmitImageTaskPlusRequest,
     FacePoseResult: FacePoseResult,
     DeleteVocabLibRequest: DeleteVocabLibRequest,
     DescribeAITaskResultRequest: DescribeAITaskResultRequest,
@@ -7182,6 +7465,7 @@ module.exports = {
     HLFunction: HLFunction,
     CreateFaceRequest: CreateFaceRequest,
     DescribeImageTaskStatisticRequest: DescribeImageTaskStatisticRequest,
+    SubmitCheckAttendanceTaskPlusResponse: SubmitCheckAttendanceTaskPlusResponse,
     SubmitImageTaskRequest: SubmitImageTaskRequest,
     WordTimePair: WordTimePair,
     ModifyLibraryRequest: ModifyLibraryRequest,
@@ -7192,6 +7476,7 @@ module.exports = {
     DescribeAttendanceResultRequest: DescribeAttendanceResultRequest,
     SubmitOpenClassTaskResponse: SubmitOpenClassTaskResponse,
     WholeTextItem: WholeTextItem,
+    SubmitCheckAttendanceTaskPlusRequest: SubmitCheckAttendanceTaskPlusRequest,
     DescribeConversationTaskResponse: DescribeConversationTaskResponse,
     CreatePersonResponse: CreatePersonResponse,
     DescribeImageTaskRequest: DescribeImageTaskRequest,
@@ -7265,6 +7550,7 @@ module.exports = {
     DescribeVocabRequest: DescribeVocabRequest,
     DeleteVocabLibResponse: DeleteVocabLibResponse,
     ImageTaskResult: ImageTaskResult,
+    SubmitImageTaskPlusResponse: SubmitImageTaskPlusResponse,
     VocabStatInfomation: VocabStatInfomation,
     SubmitDoubleVideoHighlightsResponse: SubmitDoubleVideoHighlightsResponse,
     Function: Function,
