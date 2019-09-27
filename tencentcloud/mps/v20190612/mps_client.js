@@ -129,6 +129,7 @@ const ProcessLiveMediaRequest = models.ProcessLiveMediaRequest;
 const WatermarkInput = models.WatermarkInput;
 const EnableWorkflowResponse = models.EnableWorkflowResponse;
 const DescribeSnapshotByTimeOffsetTemplatesRequest = models.DescribeSnapshotByTimeOffsetTemplatesRequest;
+const CosOutputStorage = models.CosOutputStorage;
 const ModifyImageSpriteTemplateResponse = models.ModifyImageSpriteTemplateResponse;
 const CreateWatermarkTemplateRequest = models.CreateWatermarkTemplateRequest;
 const DeleteWatermarkTemplateResponse = models.DeleteWatermarkTemplateResponse;
@@ -137,7 +138,7 @@ const ProcessMediaResponse = models.ProcessMediaResponse;
 const MediaProcessTaskInput = models.MediaProcessTaskInput;
 const VideoTemplateInfoForUpdate = models.VideoTemplateInfoForUpdate;
 const CreateImageSpriteTemplateResponse = models.CreateImageSpriteTemplateResponse;
-const CosOutputStorage = models.CosOutputStorage;
+const AdaptiveDynamicStreamingTaskInput = models.AdaptiveDynamicStreamingTaskInput;
 const DescribeImageSpriteTemplatesResponse = models.DescribeImageSpriteTemplatesResponse;
 const ModifyWatermarkTemplateResponse = models.ModifyWatermarkTemplateResponse;
 const TaskNotifyConfig = models.TaskNotifyConfig;
@@ -423,7 +424,7 @@ class MpsClient extends AbstractClient {
     }
 
     /**
-     * 用户信息查询，返回用户状态和计费类型，若未注册则返回未注册用户错误提示。
+     * 用户服务信息查询，返回用户状态和计费类型；若未注册则返回相应错误提示。
      * @param {DescribeUserInfoRequest} req
      * @param {function(string, DescribeUserInfoResponse):void} cb
      * @public

@@ -891,6 +891,12 @@ class UpdateFunctionConfigurationRequest extends  AbstractModel {
          */
         this.Publish = null;
 
+        /**
+         * 是否开启L5访问能力，TRUE 为开启，FALSE为关闭
+         * @type {string || null}
+         */
+        this.L5Enable = null;
+
     }
 
     /**
@@ -922,6 +928,7 @@ class UpdateFunctionConfigurationRequest extends  AbstractModel {
         this.ClsLogsetId = 'ClsLogsetId' in params ? params.ClsLogsetId : null;
         this.ClsTopicId = 'ClsTopicId' in params ? params.ClsTopicId : null;
         this.Publish = 'Publish' in params ? params.Publish : null;
+        this.L5Enable = 'L5Enable' in params ? params.L5Enable : null;
 
     }
 }
@@ -1864,6 +1871,12 @@ class GetFunctionResponse extends  AbstractModel {
         this.Type = null;
 
         /**
+         * 是否启用L5
+         * @type {string || null}
+         */
+        this.L5Enable = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -1943,6 +1956,7 @@ class GetFunctionResponse extends  AbstractModel {
             this.AccessInfo = obj;
         }
         this.Type = 'Type' in params ? params.Type : null;
+        this.L5Enable = 'L5Enable' in params ? params.L5Enable : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -2405,6 +2419,18 @@ class UpdateFunctionCodeRequest extends  AbstractModel {
          */
         this.Publish = null;
 
+        /**
+         * 函数代码
+         * @type {Code || null}
+         */
+        this.Code = null;
+
+        /**
+         * 代码来源方式，支持以下'ZipFile', 'Cos', 'Inline', 'TempCos', 'Git' 之一，使用Git来源必须指定此字段
+         * @type {string || null}
+         */
+        this.CodeSource = null;
+
     }
 
     /**
@@ -2423,6 +2449,13 @@ class UpdateFunctionCodeRequest extends  AbstractModel {
         this.CosBucketRegion = 'CosBucketRegion' in params ? params.CosBucketRegion : null;
         this.EnvId = 'EnvId' in params ? params.EnvId : null;
         this.Publish = 'Publish' in params ? params.Publish : null;
+
+        if (params.Code) {
+            let obj = new Code();
+            obj.deserialize(params.Code)
+            this.Code = obj;
+        }
+        this.CodeSource = 'CodeSource' in params ? params.CodeSource : null;
 
     }
 }

@@ -17,10 +17,13 @@
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const DescribeDosageDetailByDateRequest = models.DescribeDosageDetailByDateRequest;
+const DescribeBillSummaryByTagResponse = models.DescribeBillSummaryByTagResponse;
 const DetailPoint = models.DetailPoint;
 const DescribeBillSummaryByPayModeResponse = models.DescribeBillSummaryByPayModeResponse;
 const BillResourceSummary = models.BillResourceSummary;
+const DescribeBillSummaryByTagRequest = models.DescribeBillSummaryByTagRequest;
 const DescribeBillSummaryByProductResponse = models.DescribeBillSummaryByProductResponse;
+const BillTagInfo = models.BillTagInfo;
 const DescribeBillSummaryByRegionResponse = models.DescribeBillSummaryByRegionResponse;
 const DetailSet = models.DetailSet;
 const DescribeAccountBalanceRequest = models.DescribeAccountBalanceRequest;
@@ -41,6 +44,7 @@ const DescribeBillResourceSummaryRequest = models.DescribeBillResourceSummaryReq
 const DescribeBillSummaryByProductRequest = models.DescribeBillSummaryByProductRequest;
 const PayDealsResponse = models.PayDealsResponse;
 const BillDetail = models.BillDetail;
+const TagSummaryOverviewItem = models.TagSummaryOverviewItem;
 const ProjectSummaryOverviewItem = models.ProjectSummaryOverviewItem;
 const DescribeBillDetailResponse = models.DescribeBillDetailResponse;
 const Deal = models.Deal;
@@ -158,6 +162,17 @@ class BillingClient extends AbstractClient {
     DescribeBillSummaryByProduct(req, cb) {
         let resp = new DescribeBillSummaryByProductResponse();
         this.request("DescribeBillSummaryByProduct", req, resp, cb);
+    }
+
+    /**
+     * 获取按标签汇总费用分布
+     * @param {DescribeBillSummaryByTagRequest} req
+     * @param {function(string, DescribeBillSummaryByTagResponse):void} cb
+     * @public
+     */
+    DescribeBillSummaryByTag(req, cb) {
+        let resp = new DescribeBillSummaryByTagResponse();
+        this.request("DescribeBillSummaryByTag", req, resp, cb);
     }
 
     /**
