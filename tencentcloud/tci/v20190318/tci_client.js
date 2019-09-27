@@ -19,6 +19,7 @@ const AbstractClient = require('../../common/abstract_client')
 const CreateVocabLibResponse = models.CreateVocabLibResponse;
 const FaceIdentifyStatistic = models.FaceIdentifyStatistic;
 const DetailInfo = models.DetailInfo;
+const SubmitImageTaskPlusRequest = models.SubmitImageTaskPlusRequest;
 const FacePoseResult = models.FacePoseResult;
 const DeleteVocabLibRequest = models.DeleteVocabLibRequest;
 const DescribeAITaskResultRequest = models.DescribeAITaskResultRequest;
@@ -35,6 +36,7 @@ const DescribePersonsResponse = models.DescribePersonsResponse;
 const HLFunction = models.HLFunction;
 const CreateFaceRequest = models.CreateFaceRequest;
 const DescribeImageTaskStatisticRequest = models.DescribeImageTaskStatisticRequest;
+const SubmitCheckAttendanceTaskPlusResponse = models.SubmitCheckAttendanceTaskPlusResponse;
 const SubmitImageTaskRequest = models.SubmitImageTaskRequest;
 const WordTimePair = models.WordTimePair;
 const ModifyLibraryRequest = models.ModifyLibraryRequest;
@@ -45,6 +47,7 @@ const LightResult = models.LightResult;
 const DescribeAttendanceResultRequest = models.DescribeAttendanceResultRequest;
 const SubmitOpenClassTaskResponse = models.SubmitOpenClassTaskResponse;
 const WholeTextItem = models.WholeTextItem;
+const SubmitCheckAttendanceTaskPlusRequest = models.SubmitCheckAttendanceTaskPlusRequest;
 const DescribeConversationTaskResponse = models.DescribeConversationTaskResponse;
 const CreatePersonResponse = models.CreatePersonResponse;
 const DescribeImageTaskRequest = models.DescribeImageTaskRequest;
@@ -118,6 +121,7 @@ const DescribeHighlightResultRequest = models.DescribeHighlightResultRequest;
 const DescribeVocabRequest = models.DescribeVocabRequest;
 const DeleteVocabLibResponse = models.DeleteVocabLibResponse;
 const ImageTaskResult = models.ImageTaskResult;
+const SubmitImageTaskPlusResponse = models.SubmitImageTaskPlusResponse;
 const VocabStatInfomation = models.VocabStatInfomation;
 const SubmitDoubleVideoHighlightsResponse = models.SubmitDoubleVideoHighlightsResponse;
 const Function = models.Function;
@@ -176,6 +180,17 @@ class TciClient extends AbstractClient {
     SubmitOpenClassTask(req, cb) {
         let resp = new SubmitOpenClassTaskResponse();
         this.request("SubmitOpenClassTask", req, resp, cb);
+    }
+
+    /**
+     * 支持多路视频流，提交高级人员考勤任务
+     * @param {SubmitCheckAttendanceTaskPlusRequest} req
+     * @param {function(string, SubmitCheckAttendanceTaskPlusResponse):void} cb
+     * @public
+     */
+    SubmitCheckAttendanceTaskPlus(req, cb) {
+        let resp = new SubmitCheckAttendanceTaskPlusResponse();
+        this.request("SubmitCheckAttendanceTaskPlus", req, resp, cb);
     }
 
     /**
@@ -519,6 +534,17 @@ class TciClient extends AbstractClient {
     DescribeAttendanceResult(req, cb) {
         let resp = new DescribeAttendanceResultResponse();
         this.request("DescribeAttendanceResult", req, resp, cb);
+    }
+
+    /**
+     * 高级图像分析任务，开放了图像任务里的所有开关，可以根据场景深度定制图像分析任务。支持的图像类别有，图片链接、图片二进制数据、点播链接和直播链接。
+     * @param {SubmitImageTaskPlusRequest} req
+     * @param {function(string, SubmitImageTaskPlusResponse):void} cb
+     * @public
+     */
+    SubmitImageTaskPlus(req, cb) {
+        let resp = new SubmitImageTaskPlusResponse();
+        this.request("SubmitImageTaskPlus", req, resp, cb);
     }
 
     /**
