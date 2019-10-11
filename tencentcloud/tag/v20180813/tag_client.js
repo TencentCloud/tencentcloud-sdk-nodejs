@@ -23,16 +23,16 @@ const ModifyResourceTagsResponse = models.ModifyResourceTagsResponse;
 const DescribeTagKeysResponse = models.DescribeTagKeysResponse;
 const DescribeTagValuesRequest = models.DescribeTagValuesRequest;
 const ModifyResourceTagsRequest = models.ModifyResourceTagsRequest;
-const ResourcesTag = models.ResourcesTag;
 const DescribeResourcesByTagsResponse = models.DescribeResourcesByTagsResponse;
 const DescribeTagKeysRequest = models.DescribeTagKeysRequest;
-const TagFilters = models.TagFilters;
+const DescribeResourcesByTagsRequest = models.DescribeResourcesByTagsRequest;
 const DescribeResourceTagsByResourceIdsRequest = models.DescribeResourceTagsByResourceIdsRequest;
 const Tag = models.Tag;
 const TagResource = models.TagResource;
 const DescribeTagsRequest = models.DescribeTagsRequest;
 const AddResourceTagRequest = models.AddResourceTagRequest;
 const CreateTagRequest = models.CreateTagRequest;
+const TagFilter = models.TagFilter;
 const CreateTagResponse = models.CreateTagResponse;
 const DescribeResourceTagsByResourceIdsResponse = models.DescribeResourceTagsByResourceIdsResponse;
 const DeleteTagResponse = models.DeleteTagResponse;
@@ -43,7 +43,7 @@ const DeleteResourceTagRequest = models.DeleteResourceTagRequest;
 const UpdateResourceTagValueResponse = models.UpdateResourceTagValueResponse;
 const TagKeyObject = models.TagKeyObject;
 const TagWithDelete = models.TagWithDelete;
-const DescribeResourcesByTagsRequest = models.DescribeResourcesByTagsRequest;
+const ResourceTag = models.ResourceTag;
 
 
 /**

@@ -180,9 +180,9 @@ Type为LABEL时：
 86到91，Suggestion建议为REVIEW
 91到100，Suggestion建议为BLOCK
 Type为FACE时：
-0到55，Suggestion建议为PASS
-55到60，Suggestion建议为REVIEW
-60到100，Suggestion建议为BLOCK
+0到70，Suggestion建议为PASS
+70到80，Suggestion建议为REVIEW
+80到100，Suggestion建议为BLOCK
          * @type {number || null}
          */
         this.Confidence = null;
@@ -1216,9 +1216,9 @@ Type为DNA时：
 75到90，Suggestion建议为REVIEW
 90到100，Suggestion建议为BLOCK
 Type为FACE时：
-0到55，Suggestion建议为PASS
-55到60，Suggestion建议为REVIEW
-60到100，Suggestion建议为BLOCK
+0到70，Suggestion建议为PASS
+70到80，Suggestion建议为REVIEW
+80到100，Suggestion建议为BLOCK
          * @type {number || null}
          */
         this.Confidence = null;
