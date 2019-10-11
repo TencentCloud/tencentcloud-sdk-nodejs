@@ -457,6 +457,12 @@ class ImageData extends  AbstractModel {
         this.EvilType = null;
 
         /**
+         * 图片二维码详情
+         * @type {CodeDetect || null}
+         */
+        this.CodeDetect = null;
+
+        /**
          * 图片性感详情
          * @type {ImageHotDetect || null}
          */
@@ -509,6 +515,12 @@ class ImageData extends  AbstractModel {
         }
         this.EvilFlag = 'EvilFlag' in params ? params.EvilFlag : null;
         this.EvilType = 'EvilType' in params ? params.EvilType : null;
+
+        if (params.CodeDetect) {
+            let obj = new CodeDetect();
+            obj.deserialize(params.CodeDetect)
+            this.CodeDetect = obj;
+        }
 
         if (params.HotDetect) {
             let obj = new ImageHotDetect();
@@ -646,6 +658,88 @@ class DeleteTextSampleResponse extends  AbstractModel {
         }
         this.Progress = 'Progress' in params ? params.Progress : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 文字样本信息
+ * @class
+ */
+class TextSample extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 处理错误码
+         * @type {number || null}
+         */
+        this.Code = null;
+
+        /**
+         * 关键词
+         * @type {string || null}
+         */
+        this.Content = null;
+
+        /**
+         * 创建时间戳
+         * @type {number || null}
+         */
+        this.CreatedAt = null;
+
+        /**
+         * 恶意类型
+100：正常
+20001：政治
+20002：色情 
+20006：涉毒违法
+20007：谩骂 
+20105：广告引流 
+24001：暴恐
+20004/21000：综合
+         * @type {number || null}
+         */
+        this.EvilType = null;
+
+        /**
+         * 唯一标识
+         * @type {string || null}
+         */
+        this.Id = null;
+
+        /**
+         * 样本类型
+1：黑库
+2：白库
+         * @type {number || null}
+         */
+        this.Label = null;
+
+        /**
+         * 任务状态
+1：已完成
+2：处理中
+         * @type {number || null}
+         */
+        this.Status = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Code = 'Code' in params ? params.Code : null;
+        this.Content = 'Content' in params ? params.Content : null;
+        this.CreatedAt = 'CreatedAt' in params ? params.CreatedAt : null;
+        this.EvilType = 'EvilType' in params ? params.EvilType : null;
+        this.Id = 'Id' in params ? params.Id : null;
+        this.Label = 'Label' in params ? params.Label : null;
+        this.Status = 'Status' in params ? params.Status : null;
 
     }
 }
@@ -903,50 +997,24 @@ class DescribeFileSampleRequest extends  AbstractModel {
 }
 
 /**
- * 图片涉政详情
+ * 图片二维码详情
  * @class
  */
-class ImagePolityDetect extends  AbstractModel {
+class CodeDetect extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 恶意类型
-100：正常 
-20001：政治
+         * 从图片中检测到的二维码，可能为多个
+         * @type {Array.<CodeDetail> || null}
+         */
+        this.ModerationDetail = null;
+
+        /**
+         * 检测是否成功，0：成功，-1：出错
          * @type {number || null}
          */
-        this.EvilType = null;
-
-        /**
-         * 处置判定  0：正常 1：可疑
-         * @type {number || null}
-         */
-        this.HitFlag = null;
-
-        /**
-         * 命中的人脸名称
-         * @type {Array.<string> || null}
-         */
-        this.FaceNames = null;
-
-        /**
-         * 关键词明细
-         * @type {Array.<string> || null}
-         */
-        this.Keywords = null;
-
-        /**
-         * 命中的政治物品名称
-         * @type {Array.<string> || null}
-         */
-        this.PolityItems = null;
-
-        /**
-         * 政治（人脸）分：分值范围 0-100，分数越高可疑程度越高
-         * @type {number || null}
-         */
-        this.Score = null;
+        this.ModerationCode = null;
 
     }
 
@@ -957,12 +1025,16 @@ class ImagePolityDetect extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.EvilType = 'EvilType' in params ? params.EvilType : null;
-        this.HitFlag = 'HitFlag' in params ? params.HitFlag : null;
-        this.FaceNames = 'FaceNames' in params ? params.FaceNames : null;
-        this.Keywords = 'Keywords' in params ? params.Keywords : null;
-        this.PolityItems = 'PolityItems' in params ? params.PolityItems : null;
-        this.Score = 'Score' in params ? params.Score : null;
+
+        if (params.ModerationDetail) {
+            this.ModerationDetail = new Array();
+            for (let z in params.ModerationDetail) {
+                let obj = new CodeDetail();
+                obj.deserialize(params.ModerationDetail[z]);
+                this.ModerationDetail.push(obj);
+            }
+        }
+        this.ModerationCode = 'ModerationCode' in params ? params.ModerationCode : null;
 
     }
 }
@@ -1076,65 +1148,24 @@ class DescribeTextSampleResponse extends  AbstractModel {
 }
 
 /**
- * 文字样本信息
+ * 二维码在图片中的位置，由4个点的坐标表示
  * @class
  */
-class TextSample extends  AbstractModel {
+class CodePosition extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 处理错误码
+         * 二维码边界点X轴坐标
          * @type {number || null}
          */
-        this.Code = null;
+        this.FloatX = null;
 
         /**
-         * 关键词
-         * @type {string || null}
-         */
-        this.Content = null;
-
-        /**
-         * 创建时间戳
+         * 二维码边界点Y轴坐标
          * @type {number || null}
          */
-        this.CreatedAt = null;
-
-        /**
-         * 恶意类型
-100：正常
-20001：政治
-20002：色情 
-20006：涉毒违法
-20007：谩骂 
-24001：暴恐
-21000：综合
-         * @type {number || null}
-         */
-        this.EvilType = null;
-
-        /**
-         * 唯一标识
-         * @type {string || null}
-         */
-        this.Id = null;
-
-        /**
-         * 样本类型
-1：黑库
-2：白库
-         * @type {number || null}
-         */
-        this.Label = null;
-
-        /**
-         * 任务状态
-1：已完成
-2：处理中
-         * @type {number || null}
-         */
-        this.Status = null;
+        this.FloatY = null;
 
     }
 
@@ -1145,13 +1176,8 @@ class TextSample extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Code = 'Code' in params ? params.Code : null;
-        this.Content = 'Content' in params ? params.Content : null;
-        this.CreatedAt = 'CreatedAt' in params ? params.CreatedAt : null;
-        this.EvilType = 'EvilType' in params ? params.EvilType : null;
-        this.Id = 'Id' in params ? params.Id : null;
-        this.Label = 'Label' in params ? params.Label : null;
-        this.Status = 'Status' in params ? params.Status : null;
+        this.FloatX = 'FloatX' in params ? params.FloatX : null;
+        this.FloatY = 'FloatY' in params ? params.FloatY : null;
 
     }
 }
@@ -1651,7 +1677,7 @@ class AudioModerationRequest extends  AbstractModel {
         super();
 
         /**
-         * 回调url
+         * 回调URL，音频识别结果将以POST请求方式发送到此地址
          * @type {string || null}
          */
         this.CallbackUrl = null;
@@ -1687,6 +1713,128 @@ class AudioModerationRequest extends  AbstractModel {
         this.FileContent = 'FileContent' in params ? params.FileContent : null;
         this.FileMD5 = 'FileMD5' in params ? params.FileMD5 : null;
         this.FileUrl = 'FileUrl' in params ? params.FileUrl : null;
+
+    }
+}
+
+/**
+ * 从图片中检测到的二维码，可能为多个
+ * @class
+ */
+class CodeDetail extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 二维码在图片中的位置，由4个点的坐标表示
+         * @type {Array.<CodePosition> || null}
+         */
+        this.CodePosition = null;
+
+        /**
+         * 二维码文本的编码格式
+         * @type {string || null}
+         */
+        this.CodeCharset = null;
+
+        /**
+         * 二维码的文本内容
+         * @type {string || null}
+         */
+        this.CodeText = null;
+
+        /**
+         * 二维码的类型：1：ONED_BARCODE，2：QRCOD，3:WXCODE，4：PDF417，5:DATAMATRIX
+         * @type {number || null}
+         */
+        this.CodeType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.CodePosition) {
+            this.CodePosition = new Array();
+            for (let z in params.CodePosition) {
+                let obj = new CodePosition();
+                obj.deserialize(params.CodePosition[z]);
+                this.CodePosition.push(obj);
+            }
+        }
+        this.CodeCharset = 'CodeCharset' in params ? params.CodeCharset : null;
+        this.CodeText = 'CodeText' in params ? params.CodeText : null;
+        this.CodeType = 'CodeType' in params ? params.CodeType : null;
+
+    }
+}
+
+/**
+ * 图片涉政详情
+ * @class
+ */
+class ImagePolityDetect extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 恶意类型
+100：正常 
+20001：政治
+         * @type {number || null}
+         */
+        this.EvilType = null;
+
+        /**
+         * 处置判定  0：正常 1：可疑
+         * @type {number || null}
+         */
+        this.HitFlag = null;
+
+        /**
+         * 命中的人脸名称
+         * @type {Array.<string> || null}
+         */
+        this.FaceNames = null;
+
+        /**
+         * 关键词明细
+         * @type {Array.<string> || null}
+         */
+        this.Keywords = null;
+
+        /**
+         * 命中的政治物品名称
+         * @type {Array.<string> || null}
+         */
+        this.PolityItems = null;
+
+        /**
+         * 政治（人脸）分：分值范围 0-100，分数越高可疑程度越高
+         * @type {number || null}
+         */
+        this.Score = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.EvilType = 'EvilType' in params ? params.EvilType : null;
+        this.HitFlag = 'HitFlag' in params ? params.HitFlag : null;
+        this.FaceNames = 'FaceNames' in params ? params.FaceNames : null;
+        this.Keywords = 'Keywords' in params ? params.Keywords : null;
+        this.PolityItems = 'PolityItems' in params ? params.PolityItems : null;
+        this.Score = 'Score' in params ? params.Score : null;
 
     }
 }
@@ -1795,7 +1943,7 @@ class VideoModerationRequest extends  AbstractModel {
         super();
 
         /**
-         * 回调Url
+         * 回调URL，音频识别结果将以POST请求方式发送到此地址
          * @type {string || null}
          */
         this.CallbackUrl = null;
@@ -1876,14 +2024,15 @@ module.exports = {
     ImageData: ImageData,
     ImagePornDetect: ImagePornDetect,
     DeleteTextSampleResponse: DeleteTextSampleResponse,
+    TextSample: TextSample,
     CreateTextSampleResponse: CreateTextSampleResponse,
     OverviewRecord: OverviewRecord,
     FileSampleInfo: FileSampleInfo,
     DescribeFileSampleRequest: DescribeFileSampleRequest,
-    ImagePolityDetect: ImagePolityDetect,
+    CodeDetect: CodeDetect,
     ImageTerrorDetect: ImageTerrorDetect,
     DescribeTextSampleResponse: DescribeTextSampleResponse,
-    TextSample: TextSample,
+    CodePosition: CodePosition,
     DeleteFileSampleResponse: DeleteFileSampleResponse,
     FileSample: FileSample,
     DescribeFileSampleResponse: DescribeFileSampleResponse,
@@ -1896,6 +2045,8 @@ module.exports = {
     ImageHotDetect: ImageHotDetect,
     DescribeTextSampleRequest: DescribeTextSampleRequest,
     AudioModerationRequest: AudioModerationRequest,
+    CodeDetail: CodeDetail,
+    ImagePolityDetect: ImagePolityDetect,
     ImageIllegalDetect: ImageIllegalDetect,
     CreateFileSampleResponse: CreateFileSampleResponse,
     VideoModerationRequest: VideoModerationRequest,

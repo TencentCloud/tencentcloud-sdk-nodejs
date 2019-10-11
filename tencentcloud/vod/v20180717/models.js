@@ -4327,7 +4327,10 @@ class MediaProcessTaskAdaptiveDynamicStreamingResult extends  AbstractModel {
         this.Status = null;
 
         /**
-         * 错误码，0：成功，其他值：失败。
+         * 错误码，0 表示成功，其他值表示失败：
+<li>40000：输入参数不合法，请检查输入参数；</li>
+<li>60000：源文件错误（如视频数据损坏），请确认源文件是否正常；</li>
+<li>70000：内部服务错误，建议重试。</li>
          * @type {number || null}
          */
         this.ErrCode = null;
@@ -6551,7 +6554,10 @@ class MediaProcessTaskImageSpriteResult extends  AbstractModel {
         this.Status = null;
 
         /**
-         * 错误码，0：成功，其他值：失败。
+         * 错误码，0 表示成功，其他值表示失败：
+<li>40000：输入参数不合法，请检查输入参数；</li>
+<li>60000：源文件错误（如视频数据损坏），请确认源文件是否正常；</li>
+<li>70000：内部服务错误，建议重试。</li>
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
@@ -8391,6 +8397,49 @@ class MediaAnimatedGraphicsItem extends  AbstractModel {
 }
 
 /**
+ * DescribeCDNUsageData返回参数结构体
+ * @class
+ */
+class DescribeCDNUsageDataResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * CDN 统计数据，每天一条数据。
+         * @type {Array.<StatDataItem> || null}
+         */
+        this.Data = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Data) {
+            this.Data = new Array();
+            for (let z in params.Data) {
+                let obj = new StatDataItem();
+                obj.deserialize(params.Data[z]);
+                this.Data.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * ModifyWordSample请求参数结构体
  * @class
  */
@@ -8467,7 +8516,10 @@ class MediaProcessTaskAnimatedGraphicResult extends  AbstractModel {
         this.Status = null;
 
         /**
-         * 错误码，0：成功，其他值：失败。
+         * 错误码，0 表示成功，其他值表示失败：
+<li>40000：输入参数不合法，请检查输入参数；</li>
+<li>60000：源文件错误（如视频数据损坏），请确认源文件是否正常；</li>
+<li>70000：内部服务错误，建议重试。</li>
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
@@ -9065,7 +9117,10 @@ class MediaProcessTaskSnapshotByTimeOffsetResult extends  AbstractModel {
         this.Status = null;
 
         /**
-         * 错误码，0：成功，其他值：失败。
+         * 错误码，0 表示成功，其他值表示失败：
+<li>40000：输入参数不合法，请检查输入参数；</li>
+<li>60000：源文件错误（如视频数据损坏），请确认源文件是否正常；</li>
+<li>70000：内部服务错误，建议重试。</li>
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
@@ -9205,7 +9260,10 @@ class MediaProcessTaskTranscodeResult extends  AbstractModel {
         this.Status = null;
 
         /**
-         * 错误码，0：成功，其他值：失败。
+         * 错误码，0 表示成功，其他值表示失败：
+<li>40000：输入参数不合法，请检查输入参数；</li>
+<li>60000：源文件错误（如视频数据损坏），请确认源文件是否正常；</li>
+<li>70000：内部服务错误，建议重试。</li>
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
@@ -10203,7 +10261,10 @@ class MediaProcessTaskCoverBySnapshotResult extends  AbstractModel {
         this.Status = null;
 
         /**
-         * 错误码，0：成功，其他值：失败。
+         * 错误码，0 表示成功，其他值表示失败：
+<li>40000：输入参数不合法，请检查输入参数；</li>
+<li>60000：源文件错误（如视频数据损坏），请确认源文件是否正常；</li>
+<li>70000：内部服务错误，建议重试。</li>
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
@@ -13427,6 +13488,58 @@ class TranscodeTemplate extends  AbstractModel {
 }
 
 /**
+ * DescribeCDNUsageData请求参数结构体
+ * @class
+ */
+class DescribeCDNUsageDataRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 起始日期，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F)。
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * 结束日期，需大于开始日期，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F)。
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * CDN 统计数据类型，有效值：
+<li>Flux：流量，单位为byte。</li>
+<li>Bandwidth：带宽，单位为bps。</li>
+         * @type {string || null}
+         */
+        this.DataType = null;
+
+        /**
+         * 点播 [子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
+当该字段为1时，表示以管理员身份查询所有子应用（含主应用）的用量合计。
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.DataType = 'DataType' in params ? params.DataType : null;
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
+
+    }
+}
+
+/**
  * DescribeAudioTrackTemplates返回参数结构体
  * @class
  */
@@ -14723,7 +14836,10 @@ class MediaProcessTaskSampleSnapshotResult extends  AbstractModel {
         this.Status = null;
 
         /**
-         * 错误码，0：成功，其他值：失败。
+         * 错误码，0 表示成功，其他值表示失败：
+<li>40000：输入参数不合法，请检查输入参数；</li>
+<li>60000：源文件错误（如视频数据损坏），请确认源文件是否正常；</li>
+<li>70000：内部服务错误，建议重试。</li>
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
@@ -18278,16 +18394,14 @@ class ProcedureTask extends  AbstractModel {
         this.Status = null;
 
         /**
-         * 错误码
-<li>0：成功；</li>
-<li>其他值：失败。</li>
+         * 已弃用，请使用各个具体任务的 ErrCode。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.ErrCode = null;
 
         /**
-         * 错误信息。
+         * 已弃用，请使用各个具体任务的 Message。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
@@ -22121,9 +22235,10 @@ class EditMediaTask extends  AbstractModel {
         this.Status = null;
 
         /**
-         * 错误码
-<li>0：成功；</li>
-<li>其他值：失败。</li>
+         * 错误码，0 表示成功，其他值表示失败：
+<li>40000：输入参数不合法，请检查输入参数；</li>
+<li>60000：源文件错误（如视频数据损坏），请确认源文件是否正常；</li>
+<li>70000：内部服务错误，建议重试。</li>
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
@@ -23520,16 +23635,15 @@ class PullUploadTask extends  AbstractModel {
          * 任务流状态，取值：
 <li>PROCESSING：处理中；</li>
 <li>FINISH：已完成。</li>
-
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.Status = null;
 
         /**
-         * 错误码
-<li>0：成功；</li>
-<li>其他值：失败。</li>
+         * 错误码，0 表示成功，其他值表示失败：
+<li>40000：输入参数不合法，请检查输入参数；</li>
+<li>60000：源文件错误（如视频数据损坏），请确认源文件是否正常；</li>
+<li>70000：内部服务错误，建议重试。</li>
          * @type {number || null}
          */
         this.ErrCode = null;
@@ -24062,6 +24176,7 @@ module.exports = {
     MediaSnapshotByTimeOffsetItem: MediaSnapshotByTimeOffsetItem,
     TextWatermarkTemplateInput: TextWatermarkTemplateInput,
     MediaAnimatedGraphicsItem: MediaAnimatedGraphicsItem,
+    DescribeCDNUsageDataResponse: DescribeCDNUsageDataResponse,
     ModifyWordSampleRequest: ModifyWordSampleRequest,
     MediaProcessTaskAnimatedGraphicResult: MediaProcessTaskAnimatedGraphicResult,
     DeleteMediaResponse: DeleteMediaResponse,
@@ -24157,6 +24272,7 @@ module.exports = {
     SortBy: SortBy,
     MediaAiAnalysisTagItem: MediaAiAnalysisTagItem,
     TranscodeTemplate: TranscodeTemplate,
+    DescribeCDNUsageDataRequest: DescribeCDNUsageDataRequest,
     DescribeAudioTrackTemplatesResponse: DescribeAudioTrackTemplatesResponse,
     PornOcrReviewTemplateInfo: PornOcrReviewTemplateInfo,
     AiReviewTaskPoliticalAsrResult: AiReviewTaskPoliticalAsrResult,

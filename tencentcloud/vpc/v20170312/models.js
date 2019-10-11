@@ -5419,6 +5419,12 @@ class SecurityGroupPolicy extends  AbstractModel {
          */
         this.PolicyDescription = null;
 
+        /**
+         * 安全组最近修改时间。
+         * @type {string || null}
+         */
+        this.ModifyTime = null;
+
     }
 
     /**
@@ -5447,6 +5453,7 @@ class SecurityGroupPolicy extends  AbstractModel {
         }
         this.Action = 'Action' in params ? params.Action : null;
         this.PolicyDescription = 'PolicyDescription' in params ? params.PolicyDescription : null;
+        this.ModifyTime = 'ModifyTime' in params ? params.ModifyTime : null;
 
     }
 }
@@ -7448,6 +7455,12 @@ class AssociateAddressResponse extends  AbstractModel {
         super();
 
         /**
+         * 异步任务TaskId。可以使用[DescribeTaskResult](https://cloud.tencent.com/document/api/215/36271)接口查询任务状态。
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -7462,6 +7475,7 @@ class AssociateAddressResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -9185,6 +9199,12 @@ class ModifyAddressesBandwidthResponse extends  AbstractModel {
         super();
 
         /**
+         * 异步任务TaskId。可以使用[DescribeTaskResult](https://cloud.tencent.com/document/api/215/36271)接口查询任务状态。
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -9199,6 +9219,7 @@ class ModifyAddressesBandwidthResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -12259,6 +12280,12 @@ class AllocateAddressesResponse extends  AbstractModel {
         this.AddressSet = null;
 
         /**
+         * 异步任务TaskId。可以使用[DescribeTaskResult](https://cloud.tencent.com/document/api/215/36271)接口查询任务状态。
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -12274,6 +12301,7 @@ class AllocateAddressesResponse extends  AbstractModel {
             return;
         }
         this.AddressSet = 'AddressSet' in params ? params.AddressSet : null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -14001,6 +14029,12 @@ class ReleaseAddressesResponse extends  AbstractModel {
         super();
 
         /**
+         * 异步任务TaskId。可以使用[DescribeTaskResult](https://cloud.tencent.com/document/api/215/36271)接口查询任务状态。
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -14015,6 +14049,7 @@ class ReleaseAddressesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -15053,6 +15088,12 @@ class DisassociateAddressResponse extends  AbstractModel {
         super();
 
         /**
+         * 异步任务TaskId。可以使用[DescribeTaskResult](https://cloud.tencent.com/document/api/215/36271)接口查询任务状态。
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -15067,6 +15108,7 @@ class DisassociateAddressResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
