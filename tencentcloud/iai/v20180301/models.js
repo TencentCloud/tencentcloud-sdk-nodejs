@@ -396,7 +396,7 @@ class GroupInfo extends  AbstractModel {
          * Group的创建时间和日期 CreationTimestamp。CreationTimestamp 的值是自 Unix 纪元时间到Group创建时间的毫秒数。 
 Unix 纪元时间是 1970 年 1 月 1 日星期四，协调世界时 (UTC) 00:00:00。有关更多信息，请参阅 Unix 时间。
 注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
+         * @type {number || null}
          */
         this.CreationTimestamp = null;
 
@@ -1643,7 +1643,8 @@ B 图片的 Url、Image必须提供一个，如果都提供，只使用 Url。
         this.UrlB = null;
 
         /**
-         * 人脸识别服务所用的算法模型版本。目前入参支持 “2.0”和“3.0“ 两个输入。
+         * 人脸识别服务所用的算法模型版本。目前入参支持 “2.0”和“3.0“ 两个输入。 
+默认为"2.0"。 
 不同算法模型版本对应的人脸识别算法不同，新版本的整体效果会优于旧版本，建议使用“3.0”版本。
          * @type {string || null}
          */

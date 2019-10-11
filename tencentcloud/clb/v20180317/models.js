@@ -152,6 +152,41 @@ class ModifyTargetPortRequest extends  AbstractModel {
 }
 
 /**
+ * BatchDeregisterTargets返回参数结构体
+ * @class
+ */
+class BatchDeregisterTargetsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 解绑失败的监听器ID
+         * @type {Array.<string> || null}
+         */
+        this.FailListenerIdSet = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FailListenerIdSet = 'FailListenerIdSet' in params ? params.FailListenerIdSet : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * SetLoadBalancerSecurityGroups返回参数结构体
  * @class
  */
@@ -3219,6 +3254,49 @@ class RuleTargets extends  AbstractModel {
 }
 
 /**
+ * BatchDeregisterTargets请求参数结构体
+ * @class
+ */
+class BatchDeregisterTargetsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 负载均衡ID
+         * @type {string || null}
+         */
+        this.LoadBalancerId = null;
+
+        /**
+         * 解绑目标
+         * @type {Array.<BatchTarget> || null}
+         */
+        this.Targets = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LoadBalancerId = 'LoadBalancerId' in params ? params.LoadBalancerId : null;
+
+        if (params.Targets) {
+            this.Targets = new Array();
+            for (let z in params.Targets) {
+                let obj = new BatchTarget();
+                obj.deserialize(params.Targets[z]);
+                this.Targets.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * ManualRewrite请求参数结构体
  * @class
  */
@@ -3961,6 +4039,69 @@ class DeleteRewriteResponse extends  AbstractModel {
 }
 
 /**
+ * 批量绑定类型
+ * @class
+ */
+class BatchTarget extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 监听器ID
+         * @type {string || null}
+         */
+        this.ListenerId = null;
+
+        /**
+         * 绑定端口
+         * @type {number || null}
+         */
+        this.Port = null;
+
+        /**
+         * 子机ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 弹性网卡ip
+         * @type {string || null}
+         */
+        this.EniIp = null;
+
+        /**
+         * 子机权重，范围[0, 100]。绑定时如果不存在，则默认为10。
+         * @type {number || null}
+         */
+        this.Weight = null;
+
+        /**
+         * 七层规则ID
+         * @type {string || null}
+         */
+        this.LocationId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ListenerId = 'ListenerId' in params ? params.ListenerId : null;
+        this.Port = 'Port' in params ? params.Port : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.EniIp = 'EniIp' in params ? params.EniIp : null;
+        this.Weight = 'Weight' in params ? params.Weight : null;
+        this.LocationId = 'LocationId' in params ? params.LocationId : null;
+
+    }
+}
+
+/**
  * 负载均衡实例所绑定的后端服务的信息，包括所属地域、所属网络。
  * @class
  */
@@ -3991,6 +4132,42 @@ class TargetRegionInfo extends  AbstractModel {
         }
         this.Region = 'Region' in params ? params.Region : null;
         this.VpcId = 'VpcId' in params ? params.VpcId : null;
+
+    }
+}
+
+/**
+ * BatchRegisterTargets返回参数结构体
+ * @class
+ */
+class BatchRegisterTargetsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 绑定失败的监听器ID，如为空表示全部绑定成功。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
+         */
+        this.FailListenerIdSet = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FailListenerIdSet = 'FailListenerIdSet' in params ? params.FailListenerIdSet : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -4066,7 +4243,7 @@ class ModifyDomainAttributesRequest extends  AbstractModel {
         this.LoadBalancerId = null;
 
         /**
-         * 应用型负载均衡监听器 ID
+         * 负载均衡监听器 ID
          * @type {string || null}
          */
         this.ListenerId = null;
@@ -4236,6 +4413,49 @@ class CertificateOutput extends  AbstractModel {
         this.SSLMode = 'SSLMode' in params ? params.SSLMode : null;
         this.CertId = 'CertId' in params ? params.CertId : null;
         this.CertCaId = 'CertCaId' in params ? params.CertCaId : null;
+
+    }
+}
+
+/**
+ * BatchRegisterTargets请求参数结构体
+ * @class
+ */
+class BatchRegisterTargetsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 负载均衡ID
+         * @type {string || null}
+         */
+        this.LoadBalancerId = null;
+
+        /**
+         * 绑定目标
+         * @type {Array.<BatchTarget> || null}
+         */
+        this.Targets = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LoadBalancerId = 'LoadBalancerId' in params ? params.LoadBalancerId : null;
+
+        if (params.Targets) {
+            this.Targets = new Array();
+            for (let z in params.Targets) {
+                let obj = new BatchTarget();
+                obj.deserialize(params.Targets[z]);
+                this.Targets.push(obj);
+            }
+        }
 
     }
 }
@@ -5165,13 +5385,6 @@ OPEN：公网属性， INTERNAL：内网属性。
          */
         this.ExtraInfo = null;
 
-        /**
-         * 是否默认放通来自CLB的流量。开启默认放通（true）：只验证CLB上的安全组；不开启默认放通（false）：需同时验证CLB和后端实例上的安全组。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {boolean || null}
-         */
-        this.LoadBalancerPassToTarget = null;
-
     }
 
     /**
@@ -5256,7 +5469,6 @@ OPEN：公网属性， INTERNAL：内网属性。
             obj.deserialize(params.ExtraInfo)
             this.ExtraInfo = obj;
         }
-        this.LoadBalancerPassToTarget = 'LoadBalancerPassToTarget' in params ? params.LoadBalancerPassToTarget : null;
 
     }
 }
@@ -5264,6 +5476,7 @@ OPEN：公网属性， INTERNAL：内网属性。
 module.exports = {
     DeleteRewriteRequest: DeleteRewriteRequest,
     ModifyTargetPortRequest: ModifyTargetPortRequest,
+    BatchDeregisterTargetsResponse: BatchDeregisterTargetsResponse,
     SetLoadBalancerSecurityGroupsResponse: SetLoadBalancerSecurityGroupsResponse,
     ExtraInfo: ExtraInfo,
     BatchModifyTargetWeightResponse: BatchModifyTargetWeightResponse,
@@ -5322,6 +5535,7 @@ module.exports = {
     DeleteLoadBalancerRequest: DeleteLoadBalancerRequest,
     CreateRuleRequest: CreateRuleRequest,
     RuleTargets: RuleTargets,
+    BatchDeregisterTargetsRequest: BatchDeregisterTargetsRequest,
     ManualRewriteRequest: ManualRewriteRequest,
     ReplaceCertForLoadBalancersRequest: ReplaceCertForLoadBalancersRequest,
     DescribeTargetHealthResponse: DescribeTargetHealthResponse,
@@ -5338,12 +5552,15 @@ module.exports = {
     DescribeTargetsResponse: DescribeTargetsResponse,
     BatchModifyTargetWeightRequest: BatchModifyTargetWeightRequest,
     DeleteRewriteResponse: DeleteRewriteResponse,
+    BatchTarget: BatchTarget,
     TargetRegionInfo: TargetRegionInfo,
+    BatchRegisterTargetsResponse: BatchRegisterTargetsResponse,
     ModifyListenerResponse: ModifyListenerResponse,
     DeleteRuleResponse: DeleteRuleResponse,
     ModifyDomainAttributesRequest: ModifyDomainAttributesRequest,
     DeregisterTargetsRequest: DeregisterTargetsRequest,
     CertificateOutput: CertificateOutput,
+    BatchRegisterTargetsRequest: BatchRegisterTargetsRequest,
     ListenerBackend: ListenerBackend,
     TagInfo: TagInfo,
     DescribeClassicalLBListenersResponse: DescribeClassicalLBListenersResponse,

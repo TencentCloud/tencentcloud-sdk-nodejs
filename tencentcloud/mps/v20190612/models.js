@@ -1234,7 +1234,10 @@ class MediaProcessTaskImageSpriteResult extends  AbstractModel {
         this.Status = null;
 
         /**
-         * 错误码，0：成功，其他值：失败。
+         * 错误码，0 表示成功，其他值表示失败：
+<li>40000：输入参数不合法，请检查输入参数；</li>
+<li>60000：源文件错误（如视频数据损坏），请确认源文件是否正常；</li>
+<li>70000：内部服务错误，建议重试。</li>
          * @type {number || null}
          */
         this.ErrCode = null;
@@ -3575,7 +3578,10 @@ class MediaProcessTaskAnimatedGraphicResult extends  AbstractModel {
         this.Status = null;
 
         /**
-         * 错误码，0：成功，其他值：失败。
+         * 错误码，0 表示成功，其他值表示失败：
+<li>40000：输入参数不合法，请检查输入参数；</li>
+<li>60000：源文件错误（如视频数据损坏），请确认源文件是否正常；</li>
+<li>70000：内部服务错误，建议重试。</li>
          * @type {number || null}
          */
         this.ErrCode = null;
@@ -4517,15 +4523,13 @@ class WorkflowTask extends  AbstractModel {
         this.Status = null;
 
         /**
-         * 错误码
-<li>0：成功；</li>
-<li>其他值：失败。</li>
+         * 已弃用，请使用各个具体任务的 ErrCode。
          * @type {number || null}
          */
         this.ErrCode = null;
 
         /**
-         * 错误信息。
+         * 已弃用，请使用各个具体任务的 Message。
          * @type {string || null}
          */
         this.Message = null;
@@ -4631,7 +4635,10 @@ class MediaProcessTaskSnapshotByTimeOffsetResult extends  AbstractModel {
         this.Status = null;
 
         /**
-         * 错误码，0：成功，其他值：失败。
+         * 错误码，0 表示成功，其他值表示失败：
+<li>40000：输入参数不合法，请检查输入参数；</li>
+<li>60000：源文件错误（如视频数据损坏），请确认源文件是否正常；</li>
+<li>70000：内部服务错误，建议重试。</li>
          * @type {number || null}
          */
         this.ErrCode = null;
@@ -5120,7 +5127,10 @@ class MediaProcessTaskTranscodeResult extends  AbstractModel {
         this.Status = null;
 
         /**
-         * 错误码，0：成功，其他值：失败。
+         * 错误码，0 表示成功，其他值表示失败：
+<li>40000：输入参数不合法，请检查输入参数；</li>
+<li>60000：源文件错误（如视频数据损坏），请确认源文件是否正常；</li>
+<li>70000：内部服务错误，建议重试。</li>
          * @type {number || null}
          */
         this.ErrCode = null;
@@ -5361,7 +5371,10 @@ class MediaProcessTaskSampleSnapshotResult extends  AbstractModel {
         this.Status = null;
 
         /**
-         * 错误码，0：成功，其他值：失败。
+         * 错误码，0 表示成功，其他值表示失败：
+<li>40000：输入参数不合法，请检查输入参数；</li>
+<li>60000：源文件错误（如视频数据损坏），请确认源文件是否正常；</li>
+<li>70000：内部服务错误，建议重试。</li>
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */

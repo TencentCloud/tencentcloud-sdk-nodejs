@@ -18,6 +18,7 @@ const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const DeleteRewriteRequest = models.DeleteRewriteRequest;
 const ModifyTargetPortRequest = models.ModifyTargetPortRequest;
+const BatchDeregisterTargetsResponse = models.BatchDeregisterTargetsResponse;
 const SetLoadBalancerSecurityGroupsResponse = models.SetLoadBalancerSecurityGroupsResponse;
 const ExtraInfo = models.ExtraInfo;
 const BatchModifyTargetWeightResponse = models.BatchModifyTargetWeightResponse;
@@ -76,6 +77,7 @@ const RuleOutput = models.RuleOutput;
 const DeleteLoadBalancerRequest = models.DeleteLoadBalancerRequest;
 const CreateRuleRequest = models.CreateRuleRequest;
 const RuleTargets = models.RuleTargets;
+const BatchDeregisterTargetsRequest = models.BatchDeregisterTargetsRequest;
 const ManualRewriteRequest = models.ManualRewriteRequest;
 const ReplaceCertForLoadBalancersRequest = models.ReplaceCertForLoadBalancersRequest;
 const DescribeTargetHealthResponse = models.DescribeTargetHealthResponse;
@@ -92,12 +94,15 @@ const RewriteTarget = models.RewriteTarget;
 const DescribeTargetsResponse = models.DescribeTargetsResponse;
 const BatchModifyTargetWeightRequest = models.BatchModifyTargetWeightRequest;
 const DeleteRewriteResponse = models.DeleteRewriteResponse;
+const BatchTarget = models.BatchTarget;
 const TargetRegionInfo = models.TargetRegionInfo;
+const BatchRegisterTargetsResponse = models.BatchRegisterTargetsResponse;
 const ModifyListenerResponse = models.ModifyListenerResponse;
 const DeleteRuleResponse = models.DeleteRuleResponse;
 const ModifyDomainAttributesRequest = models.ModifyDomainAttributesRequest;
 const DeregisterTargetsRequest = models.DeregisterTargetsRequest;
 const CertificateOutput = models.CertificateOutput;
+const BatchRegisterTargetsRequest = models.BatchRegisterTargetsRequest;
 const ListenerBackend = models.ListenerBackend;
 const TagInfo = models.TagInfo;
 const DescribeClassicalLBListenersResponse = models.DescribeClassicalLBListenersResponse;
@@ -182,6 +187,17 @@ class ClbClient extends AbstractClient {
     SetSecurityGroupForLoadbalancers(req, cb) {
         let resp = new SetSecurityGroupForLoadbalancersResponse();
         this.request("SetSecurityGroupForLoadbalancers", req, resp, cb);
+    }
+
+    /**
+     * 批量解绑四七层后端服务。
+     * @param {BatchDeregisterTargetsRequest} req
+     * @param {function(string, BatchDeregisterTargetsResponse):void} cb
+     * @public
+     */
+    BatchDeregisterTargets(req, cb) {
+        let resp = new BatchDeregisterTargetsResponse();
+        this.request("BatchDeregisterTargets", req, resp, cb);
     }
 
     /**
@@ -351,6 +367,17 @@ class ClbClient extends AbstractClient {
     }
 
     /**
+     * 批量绑定虚拟主机或弹性网卡，支持跨域绑定，只支持四层（TCP、UDP）协议绑定。
+     * @param {BatchRegisterTargetsRequest} req
+     * @param {function(string, BatchRegisterTargetsResponse):void} cb
+     * @public
+     */
+    BatchRegisterTargets(req, cb) {
+        let resp = new BatchRegisterTargetsResponse();
+        this.request("BatchRegisterTargets", req, resp, cb);
+    }
+
+    /**
      * ModifyTargetWeight 接口用于修改负载均衡绑定的后端服务的转发权重。
 本接口为异步接口，本接口返回成功后需以返回的RequestID为入参，调用DescribeTaskStatus接口查询本次任务是否成功。
      * @param {ModifyTargetWeightRequest} req
@@ -500,7 +527,7 @@ class ClbClient extends AbstractClient {
     }
 
     /**
-     * CreateLoadBalancer 接口用来创建负载均衡实例。为了使用负载均衡服务，您必须购买一个或多个负载均衡实例。成功调用该接口后，会返回负载均衡实例的唯一 ID。负载均衡实例的类型分为：公网、内网。详情可参考产品说明中的产品类型。
+     * CreateLoadBalancer 接口用来创建负载均衡实例（本接口只支持购买按量计费的负载均衡，包年包月的负载均衡请通过控制台购买）。为了使用负载均衡服务，您必须购买一个或多个负载均衡实例。成功调用该接口后，会返回负载均衡实例的唯一 ID。负载均衡实例的类型分为：公网、内网。详情可参考产品说明中的产品类型。
 注意：(1)指定可用区申请负载均衡、跨zone容灾【如需使用，请提交工单（ https://console.cloud.tencent.com/workorder/category ）申请】；(2)目前只有北京、上海、广州支持IPv6；
 本接口为异步接口，接口成功返回后，可使用 DescribeLoadBalancers 接口查询负载均衡实例的状态（如创建中、正常），以确定是否创建成功。
      * @param {CreateLoadBalancerRequest} req

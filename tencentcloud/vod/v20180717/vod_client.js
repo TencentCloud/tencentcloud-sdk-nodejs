@@ -168,6 +168,7 @@ const OcrWordsConfigureInfo = models.OcrWordsConfigureInfo;
 const MediaSnapshotByTimeOffsetItem = models.MediaSnapshotByTimeOffsetItem;
 const TextWatermarkTemplateInput = models.TextWatermarkTemplateInput;
 const MediaAnimatedGraphicsItem = models.MediaAnimatedGraphicsItem;
+const DescribeCDNUsageDataResponse = models.DescribeCDNUsageDataResponse;
 const ModifyWordSampleRequest = models.ModifyWordSampleRequest;
 const MediaProcessTaskAnimatedGraphicResult = models.MediaProcessTaskAnimatedGraphicResult;
 const DeleteMediaResponse = models.DeleteMediaResponse;
@@ -263,6 +264,7 @@ const PullUploadRequest = models.PullUploadRequest;
 const SortBy = models.SortBy;
 const MediaAiAnalysisTagItem = models.MediaAiAnalysisTagItem;
 const TranscodeTemplate = models.TranscodeTemplate;
+const DescribeCDNUsageDataRequest = models.DescribeCDNUsageDataRequest;
 const DescribeAudioTrackTemplatesResponse = models.DescribeAudioTrackTemplatesResponse;
 const PornOcrReviewTemplateInfo = models.PornOcrReviewTemplateInfo;
 const AiReviewTaskPoliticalAsrResult = models.AiReviewTaskPoliticalAsrResult;
@@ -993,6 +995,17 @@ class VodClient extends AbstractClient {
     }
 
     /**
+     * 该接口用于根据人物 ID，修改人物样本信息，包括名称、描述的修改，以及人脸、标签的添加、删除、重置操作。人脸删除操作需保证至少剩余 1 张图片，否则，请使用重置操作。
+     * @param {ModifyPersonSampleRequest} req
+     * @param {function(string, ModifyPersonSampleResponse):void} cb
+     * @public
+     */
+    ModifyPersonSample(req, cb) {
+        let resp = new ModifyPersonSampleResponse();
+        this.request("ModifyPersonSample", req, resp, cb);
+    }
+
+    /**
      * 创建用户自定义转动图模板，数量上限：16。
      * @param {CreateAnimatedGraphicsTemplateRequest} req
      * @param {function(string, CreateAnimatedGraphicsTemplateResponse):void} cb
@@ -1166,14 +1179,18 @@ class VodClient extends AbstractClient {
     }
 
     /**
-     * 该接口用于根据人物 ID，修改人物样本信息，包括名称、描述的修改，以及人脸、标签的添加、删除、重置操作。人脸删除操作需保证至少剩余 1 张图片，否则，请使用重置操作。
-     * @param {ModifyPersonSampleRequest} req
-     * @param {function(string, ModifyPersonSampleResponse):void} cb
+     * 该接口用于查询点播 CDN 的流量、带宽等统计数据。
+   1. 可以查询最近365天内的 CDN 用量数据。
+   2.  查询时间跨度不超过90天。
+   3.  流量为每天的总流量，带宽为每天的峰值带宽。
+
+     * @param {DescribeCDNUsageDataRequest} req
+     * @param {function(string, DescribeCDNUsageDataResponse):void} cb
      * @public
      */
-    ModifyPersonSample(req, cb) {
-        let resp = new ModifyPersonSampleResponse();
-        this.request("ModifyPersonSample", req, resp, cb);
+    DescribeCDNUsageData(req, cb) {
+        let resp = new DescribeCDNUsageDataResponse();
+        this.request("DescribeCDNUsageData", req, resp, cb);
     }
 
     /**
