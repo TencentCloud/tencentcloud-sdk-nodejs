@@ -218,6 +218,12 @@ class CreateDBInstanceRequest extends  AbstractModel {
          */
         this.ResourceTags = null;
 
+        /**
+         * 置放群组 ID。
+         * @type {string || null}
+         */
+        this.DeployGroupId = null;
+
     }
 
     /**
@@ -272,6 +278,7 @@ class CreateDBInstanceRequest extends  AbstractModel {
                 this.ResourceTags.push(obj);
             }
         }
+        this.DeployGroupId = 'DeployGroupId' in params ? params.DeployGroupId : null;
 
     }
 }
@@ -3049,6 +3056,12 @@ class CreateDBInstanceHourRequest extends  AbstractModel {
          */
         this.ResourceTags = null;
 
+        /**
+         * 置放群组 ID。
+         * @type {string || null}
+         */
+        this.DeployGroupId = null;
+
     }
 
     /**
@@ -3102,6 +3115,7 @@ class CreateDBInstanceHourRequest extends  AbstractModel {
                 this.ResourceTags.push(obj);
             }
         }
+        this.DeployGroupId = 'DeployGroupId' in params ? params.DeployGroupId : null;
 
     }
 }
@@ -5413,6 +5427,7 @@ class SlaveInfo extends  AbstractModel {
 
         /**
          * 第二备机信息
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {SlaveInstanceInfo || null}
          */
         this.Second = null;
@@ -6724,6 +6739,7 @@ class InstanceInfo extends  AbstractModel {
 
         /**
          * 只读vip信息。单独开通只读实例访问的只读实例才有该字段
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {RoVipInfo || null}
          */
         this.RoVipInfo = null;
@@ -6748,6 +6764,7 @@ class InstanceInfo extends  AbstractModel {
 
         /**
          * 备机信息
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {SlaveInfo || null}
          */
         this.SlaveInfo = null;
@@ -6778,6 +6795,7 @@ class InstanceInfo extends  AbstractModel {
 
         /**
          * 只读组详细信息
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<RoGroup> || null}
          */
         this.RoGroups = null;
@@ -6826,6 +6844,7 @@ class InstanceInfo extends  AbstractModel {
 
         /**
          * 主实例详细信息
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {MasterInfo || null}
          */
         this.MasterInfo = null;
@@ -6850,6 +6869,7 @@ class InstanceInfo extends  AbstractModel {
 
         /**
          * 灾备实例详细信息
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<DrInfo> || null}
          */
         this.DrInfo = null;

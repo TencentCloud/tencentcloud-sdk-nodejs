@@ -246,24 +246,30 @@ class ImageTag extends  AbstractModel {
 }
 
 /**
- * DescribeUploadInfo返回参数结构体
+ * DescribePublicConfigSummary请求参数结构体
  * @class
  */
-class DescribeUploadInfoResponse extends  AbstractModel {
+class DescribePublicConfigSummaryRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * COS上传信息
-         * @type {CosUploadInfo || null}
-         */
-        this.Result = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * 查询关键字，模糊查询：配置项名称，不传入时查询全量
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.SearchWord = null;
+
+        /**
+         * 偏移量，默认为0
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 每页条数，默认为20
+         * @type {number || null}
+         */
+        this.Limit = null;
 
     }
 
@@ -274,13 +280,9 @@ class DescribeUploadInfoResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.Result) {
-            let obj = new CosUploadInfo();
-            obj.deserialize(params.Result)
-            this.Result = obj;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.SearchWord = 'SearchWord' in params ? params.SearchWord : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
 
     }
 }
@@ -517,6 +519,41 @@ class DescribeImageTagsRequest extends  AbstractModel {
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.QueryImageIdFlag = 'QueryImageIdFlag' in params ? params.QueryImageIdFlag : null;
+
+    }
+}
+
+/**
+ * ReleaseConfig返回参数结构体
+ * @class
+ */
+class ReleaseConfigResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * true：发布成功；false：发布失败
+         * @type {boolean || null}
+         */
+        this.Result = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Result = 'Result' in params ? params.Result : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -833,6 +870,34 @@ class VmGroup extends  AbstractModel {
 }
 
 /**
+ * RevocationConfig请求参数结构体
+ * @class
+ */
+class RevocationConfigRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 配置项发布ID
+         * @type {string || null}
+         */
+        this.ConfigReleaseId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ConfigReleaseId = 'ConfigReleaseId' in params ? params.ConfigReleaseId : null;
+
+    }
+}
+
+/**
  * ModifyUploadInfo请求参数结构体
  * @class
  */
@@ -884,6 +949,115 @@ class ModifyUploadInfoRequest extends  AbstractModel {
         this.Result = 'Result' in params ? params.Result : null;
         this.Md5 = 'Md5' in params ? params.Md5 : null;
         this.Size = 'Size' in params ? params.Size : null;
+
+    }
+}
+
+/**
+ * DescribeUploadInfo返回参数结构体
+ * @class
+ */
+class DescribeUploadInfoResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * COS上传信息
+         * @type {CosUploadInfo || null}
+         */
+        this.Result = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Result) {
+            let obj = new CosUploadInfo();
+            obj.deserialize(params.Result)
+            this.Result = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeReleasedConfig请求参数结构体
+ * @class
+ */
+class DescribeReleasedConfigRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 部署组ID
+         * @type {string || null}
+         */
+        this.GroupId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.GroupId = 'GroupId' in params ? params.GroupId : null;
+
+    }
+}
+
+/**
+ * StopGroup返回参数结构体
+ * @class
+ */
+class StopGroupResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 任务ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {TaskId || null}
+         */
+        this.Result = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Result) {
+            let obj = new TaskId();
+            obj.deserialize(params.Result)
+            this.Result = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1017,6 +1191,128 @@ class ModifyMicroserviceRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeConfigReleases请求参数结构体
+ * @class
+ */
+class DescribeConfigReleasesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 配置项名称，不传入时查询全量
+         * @type {string || null}
+         */
+        this.ConfigName = null;
+
+        /**
+         * 部署组ID，不传入时查询全量
+         * @type {string || null}
+         */
+        this.GroupId = null;
+
+        /**
+         * 命名空间ID，不传入时查询全量
+         * @type {string || null}
+         */
+        this.NamespaceId = null;
+
+        /**
+         * 集群ID，不传入时查询全量
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * 每页条数
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 偏移量
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 配置ID，不传入时查询全量
+         * @type {string || null}
+         */
+        this.ConfigId = null;
+
+        /**
+         * 应用ID，不传入时查询全量
+         * @type {string || null}
+         */
+        this.ApplicationId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ConfigName = 'ConfigName' in params ? params.ConfigName : null;
+        this.GroupId = 'GroupId' in params ? params.GroupId : null;
+        this.NamespaceId = 'NamespaceId' in params ? params.NamespaceId : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.ConfigId = 'ConfigId' in params ? params.ConfigId : null;
+        this.ApplicationId = 'ApplicationId' in params ? params.ApplicationId : null;
+
+    }
+}
+
+/**
+ * TSF配置项发布信息分页对象
+ * @class
+ */
+class TsfPageConfigRelease extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 总条数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 配置项发布信息数组
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<ConfigRelease> || null}
+         */
+        this.Content = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.Content) {
+            this.Content = new Array();
+            for (let z in params.Content) {
+                let obj = new ConfigRelease();
+                obj.deserialize(params.Content[z]);
+                this.Content.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * CreateContainGroup返回参数结构体
  * @class
  */
@@ -1092,6 +1388,140 @@ class DescribeContainerGroupDetailResponse extends  AbstractModel {
 }
 
 /**
+ * 简单应用
+ * @class
+ */
+class SimpleApplication extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 应用ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ApplicationId = null;
+
+        /**
+         * 应用名称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ApplicationName = null;
+
+        /**
+         * 应用类型
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ApplicationType = null;
+
+        /**
+         * 应用微服务类型
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.MicroserviceType = null;
+
+        /**
+         * ApplicationDesc
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ApplicationDesc = null;
+
+        /**
+         * ProgLang
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ProgLang = null;
+
+        /**
+         * ApplicationResourceType
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ApplicationResourceType = null;
+
+        /**
+         * CreateTime
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * UpdateTime
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.UpdateTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ApplicationId = 'ApplicationId' in params ? params.ApplicationId : null;
+        this.ApplicationName = 'ApplicationName' in params ? params.ApplicationName : null;
+        this.ApplicationType = 'ApplicationType' in params ? params.ApplicationType : null;
+        this.MicroserviceType = 'MicroserviceType' in params ? params.MicroserviceType : null;
+        this.ApplicationDesc = 'ApplicationDesc' in params ? params.ApplicationDesc : null;
+        this.ProgLang = 'ProgLang' in params ? params.ProgLang : null;
+        this.ApplicationResourceType = 'ApplicationResourceType' in params ? params.ApplicationResourceType : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+
+    }
+}
+
+/**
+ * DescribePublicConfigSummary返回参数结构体
+ * @class
+ */
+class DescribePublicConfigSummaryResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 分页的全局配置统计信息列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {TsfPageConfig || null}
+         */
+        this.Result = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Result) {
+            let obj = new TsfPageConfig();
+            obj.deserialize(params.Result)
+            this.Result = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeSimpleClusters返回参数结构体
  * @class
  */
@@ -1128,6 +1558,48 @@ class DescribeSimpleClustersResponse extends  AbstractModel {
             this.Result = obj;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribePublicConfigReleaseLogs请求参数结构体
+ * @class
+ */
+class DescribePublicConfigReleaseLogsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 命名空间ID，不传入时查询全量
+         * @type {string || null}
+         */
+        this.NamespaceId = null;
+
+        /**
+         * 偏移量，默认为0
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 每页条数，默认为20
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.NamespaceId = 'NamespaceId' in params ? params.NamespaceId : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
 
     }
 }
@@ -1194,6 +1666,47 @@ class StartGroupRequest extends  AbstractModel {
             return;
         }
         this.GroupId = 'GroupId' in params ? params.GroupId : null;
+
+    }
+}
+
+/**
+ * DescribeConfigs返回参数结构体
+ * @class
+ */
+class DescribeConfigsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 分页后的配置项列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {TsfPageConfig || null}
+         */
+        this.Result = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Result) {
+            let obj = new TsfPageConfig();
+            obj.deserialize(params.Result)
+            this.Result = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1315,6 +1828,51 @@ class ModifyContainerReplicasRequest extends  AbstractModel {
 }
 
 /**
+ * 列表中部署组分页信息
+ * @class
+ */
+class TsfPageVmGroup extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 虚拟机部署组总数目
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 虚拟机部署组列表信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<VmGroupSimple> || null}
+         */
+        this.Content = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.Content) {
+            this.Content = new Array();
+            for (let z in params.Content) {
+                let obj = new VmGroupSimple();
+                obj.deserialize(params.Content[z]);
+                this.Content.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * 微服务实例的分页内容
  * @class
  */
@@ -1383,6 +1941,62 @@ class DeleteMicroserviceRequest extends  AbstractModel {
             return;
         }
         this.MicroserviceId = 'MicroserviceId' in params ? params.MicroserviceId : null;
+
+    }
+}
+
+/**
+ * CreatePublicConfig请求参数结构体
+ * @class
+ */
+class CreatePublicConfigRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 配置项名称
+         * @type {string || null}
+         */
+        this.ConfigName = null;
+
+        /**
+         * 配置项版本
+         * @type {string || null}
+         */
+        this.ConfigVersion = null;
+
+        /**
+         * 配置项值，总是接收yaml格式的内容
+         * @type {string || null}
+         */
+        this.ConfigValue = null;
+
+        /**
+         * 配置项版本描述
+         * @type {string || null}
+         */
+        this.ConfigVersionDesc = null;
+
+        /**
+         * 配置项类型
+         * @type {string || null}
+         */
+        this.ConfigType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ConfigName = 'ConfigName' in params ? params.ConfigName : null;
+        this.ConfigVersion = 'ConfigVersion' in params ? params.ConfigVersion : null;
+        this.ConfigValue = 'ConfigValue' in params ? params.ConfigValue : null;
+        this.ConfigVersionDesc = 'ConfigVersionDesc' in params ? params.ConfigVersionDesc : null;
+        this.ConfigType = 'ConfigType' in params ? params.ConfigType : null;
 
     }
 }
@@ -1496,6 +2110,69 @@ class DescribeContainerGroupsRequest extends  AbstractModel {
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
         this.NamespaceId = 'NamespaceId' in params ? params.NamespaceId : null;
+
+    }
+}
+
+/**
+ * ModifyContainerReplicas返回参数结构体
+ * @class
+ */
+class ModifyContainerReplicasResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 结果true：成功；false：失败；
+         * @type {boolean || null}
+         */
+        this.Result = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Result = 'Result' in params ? params.Result : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeConfig请求参数结构体
+ * @class
+ */
+class DescribeConfigRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 配置项ID
+         * @type {string || null}
+         */
+        this.ConfigId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ConfigId = 'ConfigId' in params ? params.ConfigId : null;
 
     }
 }
@@ -1618,6 +2295,51 @@ class Namespace extends  AbstractModel {
 }
 
 /**
+ * Tsf分页集群对象
+ * @class
+ */
+class TsfPageCluster extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 总条数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 集群列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<Cluster> || null}
+         */
+        this.Content = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.Content) {
+            this.Content = new Array();
+            for (let z in params.Content) {
+                let obj = new Cluster();
+                obj.deserialize(params.Content[z]);
+                this.Content.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * DescribeGroup返回参数结构体
  * @class
  */
@@ -1731,18 +2453,60 @@ false：失败
 }
 
 /**
- * DeletePkgs返回参数结构体
+ * DescribeSimpleGroups请求参数结构体
  * @class
  */
-class DeletePkgsResponse extends  AbstractModel {
+class DescribeSimpleGroupsRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * 部署组ID列表，不填写时查询全量
+         * @type {Array.<string> || null}
+         */
+        this.GroupIdList = null;
+
+        /**
+         * 应用ID，不填写时查询全量
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.ApplicationId = null;
+
+        /**
+         * 集群ID，不填写时查询全量
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * 命名空间ID，不填写时查询全量
+         * @type {string || null}
+         */
+        this.NamespaceId = null;
+
+        /**
+         * 每页条数
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 起始偏移量
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 部署组ID，不填写时查询全量
+         * @type {string || null}
+         */
+        this.GroupId = null;
+
+        /**
+         * 模糊查询，部署组名称，不填写时查询全量
+         * @type {string || null}
+         */
+        this.SearchWord = null;
 
     }
 
@@ -1753,7 +2517,14 @@ class DeletePkgsResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.GroupIdList = 'GroupIdList' in params ? params.GroupIdList : null;
+        this.ApplicationId = 'ApplicationId' in params ? params.ApplicationId : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.NamespaceId = 'NamespaceId' in params ? params.NamespaceId : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.GroupId = 'GroupId' in params ? params.GroupId : null;
+        this.SearchWord = 'SearchWord' in params ? params.SearchWord : null;
 
     }
 }
@@ -1928,6 +2699,49 @@ class DeleteGroupRequest extends  AbstractModel {
 }
 
 /**
+ * TsfPage<Config>
+ * @class
+ */
+class TsfPageConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * TsfPageConfig
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 配置项列表
+         * @type {Array.<Config> || null}
+         */
+        this.Content = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.Content) {
+            this.Content = new Array();
+            for (let z in params.Content) {
+                let obj = new Config();
+                obj.deserialize(params.Content[z]);
+                this.Content.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * DescribeApplication返回参数结构体
  * @class
  */
@@ -1969,75 +2783,25 @@ class DescribeApplicationResponse extends  AbstractModel {
 }
 
 /**
- * 简单应用
+ * DescribeConfigReleaseLogs返回参数结构体
  * @class
  */
-class SimpleApplication extends  AbstractModel {
+class DescribeConfigReleaseLogsResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 应用ID
+         * 分页的配置项发布历史列表
 注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
+         * @type {TsfPageConfigReleaseLog || null}
          */
-        this.ApplicationId = null;
+        this.Result = null;
 
         /**
-         * 应用名称
-注意：此字段可能返回 null，表示取不到有效值。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.ApplicationName = null;
-
-        /**
-         * 应用类型
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.ApplicationType = null;
-
-        /**
-         * 应用微服务类型
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.MicroserviceType = null;
-
-        /**
-         * ApplicationDesc
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.ApplicationDesc = null;
-
-        /**
-         * ProgLang
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.ProgLang = null;
-
-        /**
-         * ApplicationResourceType
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.ApplicationResourceType = null;
-
-        /**
-         * CreateTime
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.CreateTime = null;
-
-        /**
-         * UpdateTime
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.UpdateTime = null;
+        this.RequestId = null;
 
     }
 
@@ -2048,15 +2812,48 @@ class SimpleApplication extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ApplicationId = 'ApplicationId' in params ? params.ApplicationId : null;
-        this.ApplicationName = 'ApplicationName' in params ? params.ApplicationName : null;
-        this.ApplicationType = 'ApplicationType' in params ? params.ApplicationType : null;
-        this.MicroserviceType = 'MicroserviceType' in params ? params.MicroserviceType : null;
-        this.ApplicationDesc = 'ApplicationDesc' in params ? params.ApplicationDesc : null;
-        this.ProgLang = 'ProgLang' in params ? params.ProgLang : null;
-        this.ApplicationResourceType = 'ApplicationResourceType' in params ? params.ApplicationResourceType : null;
-        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
-        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+
+        if (params.Result) {
+            let obj = new TsfPageConfigReleaseLog();
+            obj.deserialize(params.Result)
+            this.Result = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * RevocationConfig返回参数结构体
+ * @class
+ */
+class RevocationConfigResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * true：回滚成功；false：回滚失败
+         * @type {boolean || null}
+         */
+        this.Result = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Result = 'Result' in params ? params.Result : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2380,26 +3177,18 @@ class ContainerGroupDetail extends  AbstractModel {
 }
 
 /**
- * Tsf分页集群对象
+ * DeletePublicConfig请求参数结构体
  * @class
  */
-class TsfPageCluster extends  AbstractModel {
+class DeletePublicConfigRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 总条数
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
+         * 配置项ID
+         * @type {string || null}
          */
-        this.TotalCount = null;
-
-        /**
-         * 集群列表
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {Array.<Cluster> || null}
-         */
-        this.Content = null;
+        this.ConfigId = null;
 
     }
 
@@ -2410,16 +3199,7 @@ class TsfPageCluster extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
-
-        if (params.Content) {
-            this.Content = new Array();
-            for (let z in params.Content) {
-                let obj = new Cluster();
-                obj.deserialize(params.Content[z]);
-                this.Content.push(obj);
-            }
-        }
+        this.ConfigId = 'ConfigId' in params ? params.ConfigId : null;
 
     }
 }
@@ -2706,15 +3486,154 @@ class DescribeApplicationAttributeRequest extends  AbstractModel {
 }
 
 /**
- * ModifyContainerReplicas返回参数结构体
+ * RollbackConfig请求参数结构体
  * @class
  */
-class ModifyContainerReplicasResponse extends  AbstractModel {
+class RollbackConfigRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 结果true：成功；false：失败；
+         * 配置项发布历史ID
+         * @type {string || null}
+         */
+        this.ConfigReleaseLogId = null;
+
+        /**
+         * 回滚描述
+         * @type {string || null}
+         */
+        this.ReleaseDesc = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ConfigReleaseLogId = 'ConfigReleaseLogId' in params ? params.ConfigReleaseLogId : null;
+        this.ReleaseDesc = 'ReleaseDesc' in params ? params.ReleaseDesc : null;
+
+    }
+}
+
+/**
+ * DescribeConfigs请求参数结构体
+ * @class
+ */
+class DescribeConfigsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 应用ID，不传入时查询全量
+         * @type {string || null}
+         */
+        this.ApplicationId = null;
+
+        /**
+         * 配置项ID，不传入时查询全量，高优先级
+         * @type {string || null}
+         */
+        this.ConfigId = null;
+
+        /**
+         * 偏移量
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 每页条数
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 配置项ID列表，不传入时查询全量，低优先级
+         * @type {Array.<string> || null}
+         */
+        this.ConfigIdList = null;
+
+        /**
+         * 配置项名称，精确查询，不传入时查询全量
+         * @type {string || null}
+         */
+        this.ConfigName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ApplicationId = 'ApplicationId' in params ? params.ApplicationId : null;
+        this.ConfigId = 'ConfigId' in params ? params.ConfigId : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.ConfigIdList = 'ConfigIdList' in params ? params.ConfigIdList : null;
+        this.ConfigName = 'ConfigName' in params ? params.ConfigName : null;
+
+    }
+}
+
+/**
+ * DescribePublicConfig返回参数结构体
+ * @class
+ */
+class DescribePublicConfigResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 全局配置
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Config || null}
+         */
+        this.Result = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Result) {
+            let obj = new Config();
+            obj.deserialize(params.Result)
+            this.Result = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DeleteConfig返回参数结构体
+ * @class
+ */
+class DeleteConfigResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * true：删除成功；false：删除失败
          * @type {boolean || null}
          */
         this.Result = null;
@@ -2736,51 +3655,6 @@ class ModifyContainerReplicasResponse extends  AbstractModel {
         }
         this.Result = 'Result' in params ? params.Result : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * 应用分页信息
- * @class
- */
-class TsfPageApplication extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 应用总数目
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.TotalCount = null;
-
-        /**
-         * 应用信息列表
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {Array.<ApplicationForPage> || null}
-         */
-        this.Content = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
-
-        if (params.Content) {
-            this.Content = new Array();
-            for (let z in params.Content) {
-                let obj = new ApplicationForPage();
-                obj.deserialize(params.Content[z]);
-                this.Content.push(obj);
-            }
-        }
 
     }
 }
@@ -2874,6 +3748,12 @@ class DescribeSimpleApplicationsRequest extends  AbstractModel {
          */
         this.ApplicationResourceTypeList = null;
 
+        /**
+         * 通过id和name进行关键词过滤
+         * @type {string || null}
+         */
+        this.SearchWord = null;
+
     }
 
     /**
@@ -2889,6 +3769,48 @@ class DescribeSimpleApplicationsRequest extends  AbstractModel {
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.MicroserviceType = 'MicroserviceType' in params ? params.MicroserviceType : null;
         this.ApplicationResourceTypeList = 'ApplicationResourceTypeList' in params ? params.ApplicationResourceTypeList : null;
+        this.SearchWord = 'SearchWord' in params ? params.SearchWord : null;
+
+    }
+}
+
+/**
+ * DescribeConfig返回参数结构体
+ * @class
+ */
+class DescribeConfigResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 配置项
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Config || null}
+         */
+        this.Result = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Result) {
+            let obj = new Config();
+            obj.deserialize(params.Result)
+            this.Result = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2937,6 +3859,18 @@ class DescribeSimpleNamespacesRequest extends  AbstractModel {
          */
         this.NamespaceResourceTypeList = null;
 
+        /**
+         * 通过id和name进行过滤
+         * @type {string || null}
+         */
+        this.SearchWord = null;
+
+        /**
+         * 查询的命名空间类型列表
+         * @type {Array.<string> || null}
+         */
+        this.NamespaceTypeList = null;
+
     }
 
     /**
@@ -2952,6 +3886,8 @@ class DescribeSimpleNamespacesRequest extends  AbstractModel {
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.NamespaceId = 'NamespaceId' in params ? params.NamespaceId : null;
         this.NamespaceResourceTypeList = 'NamespaceResourceTypeList' in params ? params.NamespaceResourceTypeList : null;
+        this.SearchWord = 'SearchWord' in params ? params.SearchWord : null;
+        this.NamespaceTypeList = 'NamespaceTypeList' in params ? params.NamespaceTypeList : null;
 
     }
 }
@@ -3280,19 +4216,17 @@ class ExpandGroupResponse extends  AbstractModel {
 }
 
 /**
- * ModifyContainerGroup返回参数结构体
+ * DescribePublicConfigs返回参数结构体
  * @class
  */
-class ModifyContainerGroupResponse extends  AbstractModel {
+class DescribePublicConfigsResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 更新部署组是否成功。
-true：成功。
-false：失败。
+         * 分页后的全局配置项列表
 注意：此字段可能返回 null，表示取不到有效值。
-         * @type {boolean || null}
+         * @type {TsfPageConfig || null}
          */
         this.Result = null;
 
@@ -3311,7 +4245,12 @@ false：失败。
         if (!params) {
             return;
         }
-        this.Result = 'Result' in params ? params.Result : null;
+
+        if (params.Result) {
+            let obj = new TsfPageConfig();
+            obj.deserialize(params.Result)
+            this.Result = obj;
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -3382,6 +4321,34 @@ class DeleteApplicationRequest extends  AbstractModel {
 }
 
 /**
+ * RevocationPublicConfig请求参数结构体
+ * @class
+ */
+class RevocationPublicConfigRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 配置项发布ID
+         * @type {string || null}
+         */
+        this.ConfigReleaseId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ConfigReleaseId = 'ConfigReleaseId' in params ? params.ConfigReleaseId : null;
+
+    }
+}
+
+/**
  * DescribeSimpleClusters请求参数结构体
  * @class
  */
@@ -3413,6 +4380,12 @@ class DescribeSimpleClustersRequest extends  AbstractModel {
          */
         this.Limit = null;
 
+        /**
+         * 对id和name进行关键词过滤
+         * @type {string || null}
+         */
+        this.SearchWord = null;
+
     }
 
     /**
@@ -3426,6 +4399,7 @@ class DescribeSimpleClustersRequest extends  AbstractModel {
         this.ClusterType = 'ClusterType' in params ? params.ClusterType : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
+        this.SearchWord = 'SearchWord' in params ? params.SearchWord : null;
 
     }
 }
@@ -3459,17 +4433,45 @@ class StartContainerGroupRequest extends  AbstractModel {
 }
 
 /**
- * StopGroup返回参数结构体
+ * DeleteConfig请求参数结构体
  * @class
  */
-class StopGroupResponse extends  AbstractModel {
+class DeleteConfigRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 任务ID
+         * 配置项ID
+         * @type {string || null}
+         */
+        this.ConfigId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ConfigId = 'ConfigId' in params ? params.ConfigId : null;
+
+    }
+}
+
+/**
+ * DescribePublicConfigReleaseLogs返回参数结构体
+ * @class
+ */
+class DescribePublicConfigReleaseLogsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 分页后的公共配置项发布历史列表
 注意：此字段可能返回 null，表示取不到有效值。
-         * @type {TaskId || null}
+         * @type {TsfPageConfigReleaseLog || null}
          */
         this.Result = null;
 
@@ -3490,7 +4492,7 @@ class StopGroupResponse extends  AbstractModel {
         }
 
         if (params.Result) {
-            let obj = new TaskId();
+            let obj = new TsfPageConfigReleaseLog();
             obj.deserialize(params.Result)
             this.Result = obj;
         }
@@ -3878,6 +4880,123 @@ class Instance extends  AbstractModel {
 }
 
 /**
+ * 配置项
+ * @class
+ */
+class Config extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 配置项ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ConfigId = null;
+
+        /**
+         * 配置项名称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ConfigName = null;
+
+        /**
+         * 配置项版本
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ConfigVersion = null;
+
+        /**
+         * 配置项版本描述
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ConfigVersionDesc = null;
+
+        /**
+         * 配置项值
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ConfigValue = null;
+
+        /**
+         * 配置项类型
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ConfigType = null;
+
+        /**
+         * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.CreationTime = null;
+
+        /**
+         * 应用ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ApplicationId = null;
+
+        /**
+         * 应用名称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ApplicationName = null;
+
+        /**
+         * 删除标识，true：可以删除；false：不可删除
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.DeleteFlag = null;
+
+        /**
+         * 最后更新时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.LastUpdateTime = null;
+
+        /**
+         * 配置项版本数量
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.ConfigVersionCount = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ConfigId = 'ConfigId' in params ? params.ConfigId : null;
+        this.ConfigName = 'ConfigName' in params ? params.ConfigName : null;
+        this.ConfigVersion = 'ConfigVersion' in params ? params.ConfigVersion : null;
+        this.ConfigVersionDesc = 'ConfigVersionDesc' in params ? params.ConfigVersionDesc : null;
+        this.ConfigValue = 'ConfigValue' in params ? params.ConfigValue : null;
+        this.ConfigType = 'ConfigType' in params ? params.ConfigType : null;
+        this.CreationTime = 'CreationTime' in params ? params.CreationTime : null;
+        this.ApplicationId = 'ApplicationId' in params ? params.ApplicationId : null;
+        this.ApplicationName = 'ApplicationName' in params ? params.ApplicationName : null;
+        this.DeleteFlag = 'DeleteFlag' in params ? params.DeleteFlag : null;
+        this.LastUpdateTime = 'LastUpdateTime' in params ? params.LastUpdateTime : null;
+        this.ConfigVersionCount = 'ConfigVersionCount' in params ? params.ConfigVersionCount : null;
+
+    }
+}
+
+/**
  * CreateCluster返回参数结构体
  * @class
  */
@@ -3889,6 +5008,42 @@ class CreateClusterResponse extends  AbstractModel {
          * 创建集群操作是否成功。
 true：操作成功。
 false：操作失败。
+         * @type {boolean || null}
+         */
+        this.Result = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Result = 'Result' in params ? params.Result : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DeletePublicConfig返回参数结构体
+ * @class
+ */
+class DeletePublicConfigResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * true：删除成功；false：删除失败
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {boolean || null}
          */
         this.Result = null;
@@ -4050,6 +5205,163 @@ class StopGroupRequest extends  AbstractModel {
 }
 
 /**
+ * 配置项发布日志
+ * @class
+ */
+class ConfigReleaseLog extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 配置项发布日志ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ConfigReleaseLogId = null;
+
+        /**
+         * 配置项ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ConfigId = null;
+
+        /**
+         * 配置项名称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ConfigName = null;
+
+        /**
+         * 配置项版本
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ConfigVersion = null;
+
+        /**
+         * 部署组ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.GroupId = null;
+
+        /**
+         * 部署组名称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.GroupName = null;
+
+        /**
+         * 命名空间ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.NamespaceId = null;
+
+        /**
+         * 命名空间名称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.NamespaceName = null;
+
+        /**
+         * 集群ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * 集群名称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ClusterName = null;
+
+        /**
+         * 发布时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ReleaseTime = null;
+
+        /**
+         * 发布描述
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ReleaseDesc = null;
+
+        /**
+         * 发布状态
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ReleaseStatus = null;
+
+        /**
+         * 上次发布的配置项ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.LastConfigId = null;
+
+        /**
+         * 上次发布的配置项名称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.LastConfigName = null;
+
+        /**
+         * 上次发布的配置项版本
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.LastConfigVersion = null;
+
+        /**
+         * 回滚标识
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.RollbackFlag = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ConfigReleaseLogId = 'ConfigReleaseLogId' in params ? params.ConfigReleaseLogId : null;
+        this.ConfigId = 'ConfigId' in params ? params.ConfigId : null;
+        this.ConfigName = 'ConfigName' in params ? params.ConfigName : null;
+        this.ConfigVersion = 'ConfigVersion' in params ? params.ConfigVersion : null;
+        this.GroupId = 'GroupId' in params ? params.GroupId : null;
+        this.GroupName = 'GroupName' in params ? params.GroupName : null;
+        this.NamespaceId = 'NamespaceId' in params ? params.NamespaceId : null;
+        this.NamespaceName = 'NamespaceName' in params ? params.NamespaceName : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.ClusterName = 'ClusterName' in params ? params.ClusterName : null;
+        this.ReleaseTime = 'ReleaseTime' in params ? params.ReleaseTime : null;
+        this.ReleaseDesc = 'ReleaseDesc' in params ? params.ReleaseDesc : null;
+        this.ReleaseStatus = 'ReleaseStatus' in params ? params.ReleaseStatus : null;
+        this.LastConfigId = 'LastConfigId' in params ? params.LastConfigId : null;
+        this.LastConfigName = 'LastConfigName' in params ? params.LastConfigName : null;
+        this.LastConfigVersion = 'LastConfigVersion' in params ? params.LastConfigVersion : null;
+        this.RollbackFlag = 'RollbackFlag' in params ? params.RollbackFlag : null;
+
+    }
+}
+
+/**
  * ShrinkGroup返回参数结构体
  * @class
  */
@@ -4156,6 +5468,123 @@ class CosUploadInfo extends  AbstractModel {
 }
 
 /**
+ * 配置项发布信息
+ * @class
+ */
+class ConfigRelease extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 配置项发布ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ConfigReleaseId = null;
+
+        /**
+         * 配置项ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ConfigId = null;
+
+        /**
+         * 配置项名称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ConfigName = null;
+
+        /**
+         * 配置项版本
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ConfigVersion = null;
+
+        /**
+         * 发布时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ReleaseTime = null;
+
+        /**
+         * 部署组ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.GroupId = null;
+
+        /**
+         * 部署组名称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.GroupName = null;
+
+        /**
+         * 命名空间ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.NamespaceId = null;
+
+        /**
+         * 命名空间名称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.NamespaceName = null;
+
+        /**
+         * 集群ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * 集群名称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ClusterName = null;
+
+        /**
+         * 发布描述
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ReleaseDesc = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ConfigReleaseId = 'ConfigReleaseId' in params ? params.ConfigReleaseId : null;
+        this.ConfigId = 'ConfigId' in params ? params.ConfigId : null;
+        this.ConfigName = 'ConfigName' in params ? params.ConfigName : null;
+        this.ConfigVersion = 'ConfigVersion' in params ? params.ConfigVersion : null;
+        this.ReleaseTime = 'ReleaseTime' in params ? params.ReleaseTime : null;
+        this.GroupId = 'GroupId' in params ? params.GroupId : null;
+        this.GroupName = 'GroupName' in params ? params.GroupName : null;
+        this.NamespaceId = 'NamespaceId' in params ? params.NamespaceId : null;
+        this.NamespaceName = 'NamespaceName' in params ? params.NamespaceName : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.ClusterName = 'ClusterName' in params ? params.ClusterName : null;
+        this.ReleaseDesc = 'ReleaseDesc' in params ? params.ReleaseDesc : null;
+
+    }
+}
+
+/**
  * DeleteContainerGroup请求参数结构体
  * @class
  */
@@ -4207,6 +5636,111 @@ class DescribeContainerGroupDetailRequest extends  AbstractModel {
             return;
         }
         this.GroupId = 'GroupId' in params ? params.GroupId : null;
+
+    }
+}
+
+/**
+ * ReleaseConfig请求参数结构体
+ * @class
+ */
+class ReleaseConfigRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 配置ID
+         * @type {string || null}
+         */
+        this.ConfigId = null;
+
+        /**
+         * 部署组ID
+         * @type {string || null}
+         */
+        this.GroupId = null;
+
+        /**
+         * 发布描述
+         * @type {string || null}
+         */
+        this.ReleaseDesc = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ConfigId = 'ConfigId' in params ? params.ConfigId : null;
+        this.GroupId = 'GroupId' in params ? params.GroupId : null;
+        this.ReleaseDesc = 'ReleaseDesc' in params ? params.ReleaseDesc : null;
+
+    }
+}
+
+/**
+ * CreateConfig请求参数结构体
+ * @class
+ */
+class CreateConfigRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 配置项名称
+         * @type {string || null}
+         */
+        this.ConfigName = null;
+
+        /**
+         * 配置项版本
+         * @type {string || null}
+         */
+        this.ConfigVersion = null;
+
+        /**
+         * 配置项值
+         * @type {string || null}
+         */
+        this.ConfigValue = null;
+
+        /**
+         * 应用ID
+         * @type {string || null}
+         */
+        this.ApplicationId = null;
+
+        /**
+         * 配置项版本描述
+         * @type {string || null}
+         */
+        this.ConfigVersionDesc = null;
+
+        /**
+         * 配置项值类型
+         * @type {string || null}
+         */
+        this.ConfigType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ConfigName = 'ConfigName' in params ? params.ConfigName : null;
+        this.ConfigVersion = 'ConfigVersion' in params ? params.ConfigVersion : null;
+        this.ConfigValue = 'ConfigValue' in params ? params.ConfigValue : null;
+        this.ApplicationId = 'ApplicationId' in params ? params.ApplicationId : null;
+        this.ConfigVersionDesc = 'ConfigVersionDesc' in params ? params.ConfigVersionDesc : null;
+        this.ConfigType = 'ConfigType' in params ? params.ConfigType : null;
 
     }
 }
@@ -4452,6 +5986,51 @@ class StopContainerGroupRequest extends  AbstractModel {
 }
 
 /**
+ * 应用分页信息
+ * @class
+ */
+class TsfPageApplication extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 应用总数目
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 应用信息列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<ApplicationForPage> || null}
+         */
+        this.Content = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.Content) {
+            this.Content = new Array();
+            for (let z in params.Content) {
+                let obj = new ApplicationForPage();
+                obj.deserialize(params.Content[z]);
+                this.Content.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * DescribeGroup请求参数结构体
  * @class
  */
@@ -4579,26 +6158,25 @@ class ProtocolPort extends  AbstractModel {
 }
 
 /**
- * 列表中部署组分页信息
+ * DescribeConfigReleases返回参数结构体
  * @class
  */
-class TsfPageVmGroup extends  AbstractModel {
+class DescribeConfigReleasesResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 虚拟机部署组总数目
+         * 分页的配置发布信息
 注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
+         * @type {TsfPageConfigRelease || null}
          */
-        this.TotalCount = null;
+        this.Result = null;
 
         /**
-         * 虚拟机部署组列表信息
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {Array.<VmGroupSimple> || null}
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
          */
-        this.Content = null;
+        this.RequestId = null;
 
     }
 
@@ -4609,16 +6187,13 @@ class TsfPageVmGroup extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
 
-        if (params.Content) {
-            this.Content = new Array();
-            for (let z in params.Content) {
-                let obj = new VmGroupSimple();
-                obj.deserialize(params.Content[z]);
-                this.Content.push(obj);
-            }
+        if (params.Result) {
+            let obj = new TsfPageConfigRelease();
+            obj.deserialize(params.Result)
+            this.Result = obj;
         }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -4785,60 +6360,18 @@ class DeleteImageTag extends  AbstractModel {
 }
 
 /**
- * DescribeSimpleGroups请求参数结构体
+ * DeletePkgs返回参数结构体
  * @class
  */
-class DescribeSimpleGroupsRequest extends  AbstractModel {
+class DeletePkgsResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 部署组ID列表，不填写时查询全量
-         * @type {Array.<string> || null}
-         */
-        this.GroupIdList = null;
-
-        /**
-         * 应用ID，不填写时查询全量
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.ApplicationId = null;
-
-        /**
-         * 集群ID，不填写时查询全量
-         * @type {string || null}
-         */
-        this.ClusterId = null;
-
-        /**
-         * 命名空间ID，不填写时查询全量
-         * @type {string || null}
-         */
-        this.NamespaceId = null;
-
-        /**
-         * 每页条数
-         * @type {number || null}
-         */
-        this.Limit = null;
-
-        /**
-         * 起始偏移量
-         * @type {number || null}
-         */
-        this.Offset = null;
-
-        /**
-         * 部署组ID，不填写时查询全量
-         * @type {string || null}
-         */
-        this.GroupId = null;
-
-        /**
-         * 模糊查询，部署组名称，不填写时查询全量
-         * @type {string || null}
-         */
-        this.SearchWord = null;
+        this.RequestId = null;
 
     }
 
@@ -4849,14 +6382,7 @@ class DescribeSimpleGroupsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.GroupIdList = 'GroupIdList' in params ? params.GroupIdList : null;
-        this.ApplicationId = 'ApplicationId' in params ? params.ApplicationId : null;
-        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
-        this.NamespaceId = 'NamespaceId' in params ? params.NamespaceId : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
-        this.GroupId = 'GroupId' in params ? params.GroupId : null;
-        this.SearchWord = 'SearchWord' in params ? params.SearchWord : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -5347,6 +6873,79 @@ class Microservice extends  AbstractModel {
 }
 
 /**
+ * TSF配置项发布日志分页对象
+ * @class
+ */
+class TsfPageConfigReleaseLog extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 总条数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 配置项发布日志数组
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<ConfigReleaseLog> || null}
+         */
+        this.Content = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.Content) {
+            this.Content = new Array();
+            for (let z in params.Content) {
+                let obj = new ConfigReleaseLog();
+                obj.deserialize(params.Content[z]);
+                this.Content.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * DescribePublicConfig请求参数结构体
+ * @class
+ */
+class DescribePublicConfigRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 需要查询的配置项ID
+         * @type {string || null}
+         */
+        this.ConfigId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ConfigId = 'ConfigId' in params ? params.ConfigId : null;
+
+    }
+}
+
+/**
  * 分页的应用描述信息字段
  * @class
  */
@@ -5440,6 +7039,47 @@ class ApplicationForPage extends  AbstractModel {
 }
 
 /**
+ * StartGroup返回参数结构体
+ * @class
+ */
+class StartGroupResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 任务ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {TaskId || null}
+         */
+        this.Result = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Result) {
+            let obj = new TaskId();
+            obj.deserialize(params.Result)
+            this.Result = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DeployContainerGroup返回参数结构体
  * @class
  */
@@ -5477,17 +7117,17 @@ false：失败。
 }
 
 /**
- * StartGroup返回参数结构体
+ * CreatePublicConfig返回参数结构体
  * @class
  */
-class StartGroupResponse extends  AbstractModel {
+class CreatePublicConfigResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 任务ID
+         * true：创建成功；false：创建失败
 注意：此字段可能返回 null，表示取不到有效值。
-         * @type {TaskId || null}
+         * @type {boolean || null}
          */
         this.Result = null;
 
@@ -5506,12 +7146,7 @@ class StartGroupResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.Result) {
-            let obj = new TaskId();
-            obj.deserialize(params.Result)
-            this.Result = obj;
-        }
+        this.Result = 'Result' in params ? params.Result : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -5594,6 +7229,42 @@ class ContainGroupResult extends  AbstractModel {
             }
         }
         this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+    }
+}
+
+/**
+ * DescribeReleasedConfig返回参数结构体
+ * @class
+ */
+class DescribeReleasedConfigResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 已发布的配置内容
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Result = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Result = 'Result' in params ? params.Result : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -5730,6 +7401,140 @@ class TsfPageSimpleApplication extends  AbstractModel {
                 this.Content.push(obj);
             }
         }
+
+    }
+}
+
+/**
+ * CreateConfig返回参数结构体
+ * @class
+ */
+class CreateConfigResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * true：创建成功；false：创建失败
+         * @type {boolean || null}
+         */
+        this.Result = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Result = 'Result' in params ? params.Result : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * RevocationPublicConfig返回参数结构体
+ * @class
+ */
+class RevocationPublicConfigResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * true：撤销成功；false：撤销失败
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.Result = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Result = 'Result' in params ? params.Result : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeConfigReleaseLogs请求参数结构体
+ * @class
+ */
+class DescribeConfigReleaseLogsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 部署组ID，不传入时查询全量
+         * @type {string || null}
+         */
+        this.GroupId = null;
+
+        /**
+         * 偏移量，默认为0
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 每页条数，默认为20
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 命名空间ID，不传入时查询全量
+         * @type {string || null}
+         */
+        this.NamespaceId = null;
+
+        /**
+         * 集群ID，不传入时查询全量
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * 应用ID，不传入时查询全量
+         * @type {string || null}
+         */
+        this.ApplicationId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.GroupId = 'GroupId' in params ? params.GroupId : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.NamespaceId = 'NamespaceId' in params ? params.NamespaceId : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.ApplicationId = 'ApplicationId' in params ? params.ApplicationId : null;
 
     }
 }
@@ -5968,6 +7773,62 @@ class TsfPageMicroservice extends  AbstractModel {
 }
 
 /**
+ * DescribePublicConfigs请求参数结构体
+ * @class
+ */
+class DescribePublicConfigsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 配置项ID，不传入时查询全量，高优先级
+         * @type {string || null}
+         */
+        this.ConfigId = null;
+
+        /**
+         * 偏移量，默认为0
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 每页条数，默认为20
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 配置项ID列表，不传入时查询全量，低优先级
+         * @type {Array.<string> || null}
+         */
+        this.ConfigIdList = null;
+
+        /**
+         * 配置项名称，精确查询，不传入时查询全量
+         * @type {string || null}
+         */
+        this.ConfigName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ConfigId = 'ConfigId' in params ? params.ConfigId : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.ConfigIdList = 'ConfigIdList' in params ? params.ConfigIdList : null;
+        this.ConfigName = 'ConfigName' in params ? params.ConfigName : null;
+
+    }
+}
+
+/**
  * AddInstances请求参数结构体
  * @class
  */
@@ -6040,6 +7901,41 @@ class AddInstancesRequest extends  AbstractModel {
         this.KeyId = 'KeyId' in params ? params.KeyId : null;
         this.SgId = 'SgId' in params ? params.SgId : null;
         this.InstanceImportMode = 'InstanceImportMode' in params ? params.InstanceImportMode : null;
+
+    }
+}
+
+/**
+ * RollbackConfig返回参数结构体
+ * @class
+ */
+class RollbackConfigResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * true：回滚成功；false：回滚失败
+         * @type {boolean || null}
+         */
+        this.Result = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Result = 'Result' in params ? params.Result : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -6217,6 +8113,62 @@ class CreateApplicationRequest extends  AbstractModel {
         this.ApplicationLogConfig = 'ApplicationLogConfig' in params ? params.ApplicationLogConfig : null;
         this.MicroserviceType = 'MicroserviceType' in params ? params.MicroserviceType : null;
         this.ApplicationResourceType = 'ApplicationResourceType' in params ? params.ApplicationResourceType : null;
+
+    }
+}
+
+/**
+ * DescribePublicConfigReleases请求参数结构体
+ * @class
+ */
+class DescribePublicConfigReleasesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 配置项名称，不传入时查询全量
+         * @type {string || null}
+         */
+        this.ConfigName = null;
+
+        /**
+         * 命名空间ID，不传入时查询全量
+         * @type {string || null}
+         */
+        this.NamespaceId = null;
+
+        /**
+         * 每页条数
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 偏移量
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 配置项ID，不传入时查询全量
+         * @type {string || null}
+         */
+        this.ConfigId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ConfigName = 'ConfigName' in params ? params.ConfigName : null;
+        this.NamespaceId = 'NamespaceId' in params ? params.NamespaceId : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.ConfigId = 'ConfigId' in params ? params.ConfigId : null;
 
     }
 }
@@ -6670,6 +8622,46 @@ class DeletePkgsRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeConfigSummary返回参数结构体
+ * @class
+ */
+class DescribeConfigSummaryResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 配置项分页对象
+         * @type {TsfPageConfig || null}
+         */
+        this.Result = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Result) {
+            let obj = new TsfPageConfig();
+            obj.deserialize(params.Result)
+            this.Result = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * CreateContainGroup请求参数结构体
  * @class
  */
@@ -6930,6 +8922,47 @@ class ContainGroup extends  AbstractModel {
 }
 
 /**
+ * DescribePublicConfigReleases返回参数结构体
+ * @class
+ */
+class DescribePublicConfigReleasesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 公共配置发布信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {TsfPageConfigRelease || null}
+         */
+        this.Result = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Result) {
+            let obj = new TsfPageConfigRelease();
+            obj.deserialize(params.Result)
+            this.Result = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * CreateApplication返回参数结构体
  * @class
  */
@@ -6961,6 +8994,55 @@ class CreateApplicationResponse extends  AbstractModel {
         }
         this.Result = 'Result' in params ? params.Result : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeConfigSummary请求参数结构体
+ * @class
+ */
+class DescribeConfigSummaryRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 应用ID，不传入时查询全量
+         * @type {string || null}
+         */
+        this.ApplicationId = null;
+
+        /**
+         * 查询关键字，模糊查询：应用名称，配置项名称，不传入时查询全量
+         * @type {string || null}
+         */
+        this.SearchWord = null;
+
+        /**
+         * 偏移量，默认为0
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 每页条数，默认为20
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ApplicationId = 'ApplicationId' in params ? params.ApplicationId : null;
+        this.SearchWord = 'SearchWord' in params ? params.SearchWord : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
 
     }
 }
@@ -7002,6 +9084,122 @@ class DeployGroupResponse extends  AbstractModel {
             this.Result = obj;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifyContainerGroup返回参数结构体
+ * @class
+ */
+class ModifyContainerGroupResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 更新部署组是否成功。
+true：成功。
+false：失败。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.Result = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Result = 'Result' in params ? params.Result : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ReleasePublicConfig返回参数结构体
+ * @class
+ */
+class ReleasePublicConfigResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * true：发布成功；false：发布失败
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.Result = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Result = 'Result' in params ? params.Result : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ReleasePublicConfig请求参数结构体
+ * @class
+ */
+class ReleasePublicConfigRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 配置ID
+         * @type {string || null}
+         */
+        this.ConfigId = null;
+
+        /**
+         * 命名空间ID
+         * @type {string || null}
+         */
+        this.NamespaceId = null;
+
+        /**
+         * 发布描述
+         * @type {string || null}
+         */
+        this.ReleaseDesc = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ConfigId = 'ConfigId' in params ? params.ConfigId : null;
+        this.NamespaceId = 'NamespaceId' in params ? params.NamespaceId : null;
+        this.ReleaseDesc = 'ReleaseDesc' in params ? params.ReleaseDesc : null;
 
     }
 }
@@ -7139,46 +9337,64 @@ module.exports = {
     DescribeDownloadInfoRequest: DescribeDownloadInfoRequest,
     DescribeSimpleApplicationsResponse: DescribeSimpleApplicationsResponse,
     ImageTag: ImageTag,
-    DescribeUploadInfoResponse: DescribeUploadInfoResponse,
+    DescribePublicConfigSummaryRequest: DescribePublicConfigSummaryRequest,
     DescribeClusterInstancesResponse: DescribeClusterInstancesResponse,
     DescribeMicroserviceRequest: DescribeMicroserviceRequest,
     CosCredentials: CosCredentials,
     ExpandGroupRequest: ExpandGroupRequest,
     DescribeImageTagsRequest: DescribeImageTagsRequest,
+    ReleaseConfigResponse: ReleaseConfigResponse,
     TsfPageSimpleGroup: TsfPageSimpleGroup,
     PkgInfo: PkgInfo,
     VmGroup: VmGroup,
+    RevocationConfigRequest: RevocationConfigRequest,
     ModifyUploadInfoRequest: ModifyUploadInfoRequest,
+    DescribeUploadInfoResponse: DescribeUploadInfoResponse,
+    DescribeReleasedConfigRequest: DescribeReleasedConfigRequest,
+    StopGroupResponse: StopGroupResponse,
     StopContainerGroupResponse: StopContainerGroupResponse,
     CreateGroupRequest: CreateGroupRequest,
     ModifyMicroserviceRequest: ModifyMicroserviceRequest,
+    DescribeConfigReleasesRequest: DescribeConfigReleasesRequest,
+    TsfPageConfigRelease: TsfPageConfigRelease,
     CreateContainGroupResponse: CreateContainGroupResponse,
     DescribeContainerGroupDetailResponse: DescribeContainerGroupDetailResponse,
+    SimpleApplication: SimpleApplication,
+    DescribePublicConfigSummaryResponse: DescribePublicConfigSummaryResponse,
     DescribeSimpleClustersResponse: DescribeSimpleClustersResponse,
+    DescribePublicConfigReleaseLogsRequest: DescribePublicConfigReleaseLogsRequest,
     DeleteApplicationResponse: DeleteApplicationResponse,
     StartGroupRequest: StartGroupRequest,
+    DescribeConfigsResponse: DescribeConfigsResponse,
     DescribeApplicationAttributeResponse: DescribeApplicationAttributeResponse,
     DescribeApplicationsResponse: DescribeApplicationsResponse,
     ModifyContainerReplicasRequest: ModifyContainerReplicasRequest,
+    TsfPageVmGroup: TsfPageVmGroup,
     TsfPageMsInstance: TsfPageMsInstance,
     DeleteMicroserviceRequest: DeleteMicroserviceRequest,
+    CreatePublicConfigRequest: CreatePublicConfigRequest,
     RemoveInstancesResponse: RemoveInstancesResponse,
     DescribeContainerGroupsRequest: DescribeContainerGroupsRequest,
+    ModifyContainerReplicasResponse: ModifyContainerReplicasResponse,
+    DescribeConfigRequest: DescribeConfigRequest,
     Namespace: Namespace,
+    TsfPageCluster: TsfPageCluster,
     DescribeGroupResponse: DescribeGroupResponse,
     Env: Env,
     DeleteContainerGroupResponse: DeleteContainerGroupResponse,
-    DeletePkgsResponse: DeletePkgsResponse,
+    DescribeSimpleGroupsRequest: DescribeSimpleGroupsRequest,
     CreateNamespaceResponse: CreateNamespaceResponse,
     DeleteImageTagsResponse: DeleteImageTagsResponse,
     ModifyUploadInfoResponse: ModifyUploadInfoResponse,
     DescribeImageTagsResponse: DescribeImageTagsResponse,
     DeleteGroupRequest: DeleteGroupRequest,
+    TsfPageConfig: TsfPageConfig,
     DescribeApplicationResponse: DescribeApplicationResponse,
-    SimpleApplication: SimpleApplication,
+    DescribeConfigReleaseLogsResponse: DescribeConfigReleaseLogsResponse,
+    RevocationConfigResponse: RevocationConfigResponse,
     DescribeSimpleGroupsResponse: DescribeSimpleGroupsResponse,
     ContainerGroupDetail: ContainerGroupDetail,
-    TsfPageCluster: TsfPageCluster,
+    DeletePublicConfigRequest: DeletePublicConfigRequest,
     DeleteNamespaceResponse: DeleteNamespaceResponse,
     CreateMicroserviceRequest: CreateMicroserviceRequest,
     DescribePkgsRequest: DescribePkgsRequest,
@@ -7186,44 +9402,56 @@ module.exports = {
     ShrinkInstancesResponse: ShrinkInstancesResponse,
     DeleteImageTagsRequest: DeleteImageTagsRequest,
     DescribeApplicationAttributeRequest: DescribeApplicationAttributeRequest,
-    ModifyContainerReplicasResponse: ModifyContainerReplicasResponse,
-    TsfPageApplication: TsfPageApplication,
+    RollbackConfigRequest: RollbackConfigRequest,
+    DescribeConfigsRequest: DescribeConfigsRequest,
+    DescribePublicConfigResponse: DescribePublicConfigResponse,
+    DeleteConfigResponse: DeleteConfigResponse,
     TsfPageNamespace: TsfPageNamespace,
     DescribeSimpleApplicationsRequest: DescribeSimpleApplicationsRequest,
+    DescribeConfigResponse: DescribeConfigResponse,
     DescribeSimpleNamespacesRequest: DescribeSimpleNamespacesRequest,
     SimpleGroup: SimpleGroup,
     MsInstance: MsInstance,
     ExpandGroupResponse: ExpandGroupResponse,
-    ModifyContainerGroupResponse: ModifyContainerGroupResponse,
+    DescribePublicConfigsResponse: DescribePublicConfigsResponse,
     AddInstancesResponse: AddInstancesResponse,
     DeleteApplicationRequest: DeleteApplicationRequest,
+    RevocationPublicConfigRequest: RevocationPublicConfigRequest,
     DescribeSimpleClustersRequest: DescribeSimpleClustersRequest,
     StartContainerGroupRequest: StartContainerGroupRequest,
-    StopGroupResponse: StopGroupResponse,
+    DeleteConfigRequest: DeleteConfigRequest,
+    DescribePublicConfigReleaseLogsResponse: DescribePublicConfigReleaseLogsResponse,
     VmGroupSimple: VmGroupSimple,
     Instance: Instance,
+    Config: Config,
     CreateClusterResponse: CreateClusterResponse,
+    DeletePublicConfigResponse: DeletePublicConfigResponse,
     CreateMicroserviceResponse: CreateMicroserviceResponse,
     CreateClusterRequest: CreateClusterRequest,
     StopGroupRequest: StopGroupRequest,
+    ConfigReleaseLog: ConfigReleaseLog,
     ShrinkGroupResponse: ShrinkGroupResponse,
     CosUploadInfo: CosUploadInfo,
+    ConfigRelease: ConfigRelease,
     DeleteContainerGroupRequest: DeleteContainerGroupRequest,
     DescribeContainerGroupDetailRequest: DescribeContainerGroupDetailRequest,
+    ReleaseConfigRequest: ReleaseConfigRequest,
+    CreateConfigRequest: CreateConfigRequest,
     CreateNamespaceRequest: CreateNamespaceRequest,
     PkgList: PkgList,
     DescribeUploadInfoRequest: DescribeUploadInfoRequest,
     DescribeClusterInstancesRequest: DescribeClusterInstancesRequest,
     StopContainerGroupRequest: StopContainerGroupRequest,
+    TsfPageApplication: TsfPageApplication,
     DescribeGroupRequest: DescribeGroupRequest,
     ImageTagsResult: ImageTagsResult,
     ProtocolPort: ProtocolPort,
-    TsfPageVmGroup: TsfPageVmGroup,
+    DescribeConfigReleasesResponse: DescribeConfigReleasesResponse,
     DescribePkgsResponse: DescribePkgsResponse,
     DescribeSimpleNamespacesResponse: DescribeSimpleNamespacesResponse,
     ApplicationAttribute: ApplicationAttribute,
     DeleteImageTag: DeleteImageTag,
-    DescribeSimpleGroupsRequest: DescribeSimpleGroupsRequest,
+    DeletePkgsResponse: DeletePkgsResponse,
     DescribeGroupsResponse: DescribeGroupsResponse,
     Cluster: Cluster,
     ModifyMicroserviceResponse: ModifyMicroserviceResponse,
@@ -7231,22 +9459,32 @@ module.exports = {
     DescribeDownloadInfoResponse: DescribeDownloadInfoResponse,
     DescribeApplicationRequest: DescribeApplicationRequest,
     Microservice: Microservice,
+    TsfPageConfigReleaseLog: TsfPageConfigReleaseLog,
+    DescribePublicConfigRequest: DescribePublicConfigRequest,
     ApplicationForPage: ApplicationForPage,
-    DeployContainerGroupResponse: DeployContainerGroupResponse,
     StartGroupResponse: StartGroupResponse,
+    DeployContainerGroupResponse: DeployContainerGroupResponse,
+    CreatePublicConfigResponse: CreatePublicConfigResponse,
     DeleteMicroserviceResponse: DeleteMicroserviceResponse,
     ContainGroupResult: ContainGroupResult,
+    DescribeReleasedConfigResponse: DescribeReleasedConfigResponse,
     DescribeMicroservicesRequest: DescribeMicroservicesRequest,
     ShrinkGroupRequest: ShrinkGroupRequest,
     TsfPageSimpleApplication: TsfPageSimpleApplication,
+    CreateConfigResponse: CreateConfigResponse,
+    RevocationPublicConfigResponse: RevocationPublicConfigResponse,
+    DescribeConfigReleaseLogsRequest: DescribeConfigReleaseLogsRequest,
     DescribeContainerGroupsResponse: DescribeContainerGroupsResponse,
     DescribeGroupsRequest: DescribeGroupsRequest,
     ModifyContainerGroupRequest: ModifyContainerGroupRequest,
     TsfPageMicroservice: TsfPageMicroservice,
+    DescribePublicConfigsRequest: DescribePublicConfigsRequest,
     AddInstancesRequest: AddInstancesRequest,
+    RollbackConfigResponse: RollbackConfigResponse,
     DescribeApplicationsRequest: DescribeApplicationsRequest,
     StartContainerGroupResponse: StartContainerGroupResponse,
     CreateApplicationRequest: CreateApplicationRequest,
+    DescribePublicConfigReleasesRequest: DescribePublicConfigReleasesRequest,
     DeleteNamespaceRequest: DeleteNamespaceRequest,
     RemoveInstancesRequest: RemoveInstancesRequest,
     DeployGroupRequest: DeployGroupRequest,
@@ -7256,10 +9494,16 @@ module.exports = {
     DeployContainerGroupRequest: DeployContainerGroupRequest,
     CosDownloadInfo: CosDownloadInfo,
     DeletePkgsRequest: DeletePkgsRequest,
+    DescribeConfigSummaryResponse: DescribeConfigSummaryResponse,
     CreateContainGroupRequest: CreateContainGroupRequest,
     ContainGroup: ContainGroup,
+    DescribePublicConfigReleasesResponse: DescribePublicConfigReleasesResponse,
     CreateApplicationResponse: CreateApplicationResponse,
+    DescribeConfigSummaryRequest: DescribeConfigSummaryRequest,
     DeployGroupResponse: DeployGroupResponse,
+    ModifyContainerGroupResponse: ModifyContainerGroupResponse,
+    ReleasePublicConfigResponse: ReleasePublicConfigResponse,
+    ReleasePublicConfigRequest: ReleasePublicConfigRequest,
     TaskId: TaskId,
     DescribeGroupInstancesRequest: DescribeGroupInstancesRequest,
     CreateGroupResponse: CreateGroupResponse,
