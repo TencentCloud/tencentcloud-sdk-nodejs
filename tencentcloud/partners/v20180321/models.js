@@ -346,6 +346,34 @@ class DescribeAgentAuditedClientsRequest extends  AbstractModel {
 }
 
 /**
+ * RemovePayRelationForClient请求参数结构体
+ * @class
+ */
+class RemovePayRelationForClientRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 客户账号ID
+         * @type {string || null}
+         */
+        this.ClientUin = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClientUin = 'ClientUin' in params ? params.ClientUin : null;
+
+    }
+}
+
+/**
  * AgentPayDeals请求参数结构体
  * @class
  */
@@ -549,6 +577,34 @@ class DescribeClientBalanceRequest extends  AbstractModel {
 }
 
 /**
+ * RemovePayRelationForClient返回参数结构体
+ * @class
+ */
+class RemovePayRelationForClientResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeRebateInfos请求参数结构体
  * @class
  */
@@ -586,6 +642,34 @@ class DescribeRebateInfosRequest extends  AbstractModel {
         this.RebateMonth = 'RebateMonth' in params ? params.RebateMonth : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
+
+    }
+}
+
+/**
+ * CreatePayRelationForClient返回参数结构体
+ * @class
+ */
+class CreatePayRelationForClientResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1100,6 +1184,13 @@ class AgentAuditedClient extends  AbstractModel {
          */
         this.SalesName = null;
 
+        /**
+         * 代客邮箱
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Mail = null;
+
     }
 
     /**
@@ -1124,6 +1215,7 @@ class AgentAuditedClient extends  AbstractModel {
         this.ProjectType = 'ProjectType' in params ? params.ProjectType : null;
         this.SalesUin = 'SalesUin' in params ? params.SalesUin : null;
         this.SalesName = 'SalesName' in params ? params.SalesName : null;
+        this.Mail = 'Mail' in params ? params.Mail : null;
 
     }
 }
@@ -1242,6 +1334,34 @@ class ModifyClientRemarkRequest extends  AbstractModel {
 }
 
 /**
+ * CreatePayRelationForClient请求参数结构体
+ * @class
+ */
+class CreatePayRelationForClientRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 客户账号ID
+         * @type {string || null}
+         */
+        this.ClientUin = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClientUin = 'ClientUin' in params ? params.ClientUin : null;
+
+    }
+}
+
+/**
  * AgentTransferMoney返回参数结构体
  * @class
  */
@@ -1351,6 +1471,13 @@ class AgentBillElem extends  AbstractModel {
          */
         this.ProjectType = null;
 
+        /**
+         * 活动ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ActivityId = null;
+
     }
 
     /**
@@ -1372,6 +1499,7 @@ class AgentBillElem extends  AbstractModel {
         this.PayerMode = 'PayerMode' in params ? params.PayerMode : null;
         this.ClientType = 'ClientType' in params ? params.ClientType : null;
         this.ProjectType = 'ProjectType' in params ? params.ProjectType : null;
+        this.ActivityId = 'ActivityId' in params ? params.ActivityId : null;
 
     }
 }
@@ -1745,6 +1873,13 @@ class AgentDealElem extends  AbstractModel {
          */
         this.PayerMode = null;
 
+        /**
+         * 活动ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ActivityId = null;
+
     }
 
     /**
@@ -1782,6 +1917,7 @@ class AgentDealElem extends  AbstractModel {
         this.ProjectType = 'ProjectType' in params ? params.ProjectType : null;
         this.SalesUin = 'SalesUin' in params ? params.SalesUin : null;
         this.PayerMode = 'PayerMode' in params ? params.PayerMode : null;
+        this.ActivityId = 'ActivityId' in params ? params.ActivityId : null;
 
     }
 }
@@ -1890,12 +2026,15 @@ module.exports = {
     DescribeAgentDealsCacheRequest: DescribeAgentDealsCacheRequest,
     DescribeSalesmansRequest: DescribeSalesmansRequest,
     DescribeAgentAuditedClientsRequest: DescribeAgentAuditedClientsRequest,
+    RemovePayRelationForClientRequest: RemovePayRelationForClientRequest,
     AgentPayDealsRequest: AgentPayDealsRequest,
     RebateInfoElem: RebateInfoElem,
     DescribeClientBalanceResponse: DescribeClientBalanceResponse,
     AgentTransferMoneyRequest: AgentTransferMoneyRequest,
     DescribeClientBalanceRequest: DescribeClientBalanceRequest,
+    RemovePayRelationForClientResponse: RemovePayRelationForClientResponse,
     DescribeRebateInfosRequest: DescribeRebateInfosRequest,
+    CreatePayRelationForClientResponse: CreatePayRelationForClientResponse,
     DescribeAgentAuditedClientsResponse: DescribeAgentAuditedClientsResponse,
     DescribeAgentBillsResponse: DescribeAgentBillsResponse,
     DescribeAgentPayDealsRequest: DescribeAgentPayDealsRequest,
@@ -1908,6 +2047,7 @@ module.exports = {
     DescribeAgentPayDealsResponse: DescribeAgentPayDealsResponse,
     DealGoodsPriceElem: DealGoodsPriceElem,
     ModifyClientRemarkRequest: ModifyClientRemarkRequest,
+    CreatePayRelationForClientRequest: CreatePayRelationForClientRequest,
     AgentTransferMoneyResponse: AgentTransferMoneyResponse,
     AgentBillElem: AgentBillElem,
     AuditApplyClientResponse: AuditApplyClientResponse,

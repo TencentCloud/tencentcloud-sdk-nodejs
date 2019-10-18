@@ -813,7 +813,7 @@ class UpdateAssumeRolePolicyRequest extends  AbstractModel {
         super();
 
         /**
-         * 策略文档
+         * 策略文档，示例：{"version":"2.0","statement":[{"action":"name/sts:AssumeRole","effect":"allow","principal":{"service":["cloudaudit.cloud.tencent.com","cls.cloud.tencent.com"]}}]}，principal用于指定角色的授权对象。获取该参数可参阅 获取角色详情（https://cloud.tencent.com/document/product/598/36221） 输出参数RoleInfo
          * @type {string || null}
          */
         this.PolicyDocument = null;
@@ -2205,6 +2205,34 @@ class AttachPolicyInfo extends  AbstractModel {
          */
         this.PolicyType = null;
 
+        /**
+         * 策略备注
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Remark = null;
+
+        /**
+         * 策略关联操作者主张号
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.OperateOwnerUin = null;
+
+        /**
+         * 策略关联操作者ID，如果UinType为0表示子帐号Uin，如果UinType为1表示角色ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.OperateUin = null;
+
+        /**
+         * UinType为0表示OperateUin字段是子帐号Uin，如果UinType为1表示OperateUin字段是角色ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.OperateUinType = null;
+
     }
 
     /**
@@ -2219,6 +2247,10 @@ class AttachPolicyInfo extends  AbstractModel {
         this.AddTime = 'AddTime' in params ? params.AddTime : null;
         this.CreateMode = 'CreateMode' in params ? params.CreateMode : null;
         this.PolicyType = 'PolicyType' in params ? params.PolicyType : null;
+        this.Remark = 'Remark' in params ? params.Remark : null;
+        this.OperateOwnerUin = 'OperateOwnerUin' in params ? params.OperateOwnerUin : null;
+        this.OperateUin = 'OperateUin' in params ? params.OperateUin : null;
+        this.OperateUinType = 'OperateUinType' in params ? params.OperateUinType : null;
 
     }
 }
@@ -3552,7 +3584,7 @@ class CreateRoleRequest extends  AbstractModel {
         this.RoleName = null;
 
         /**
-         * 策略文档
+         * 策略文档，示例：{"version":"2.0","statement":[{"action":"name/sts:AssumeRole","effect":"allow","principal":{"service":["cloudaudit.cloud.tencent.com","cls.cloud.tencent.com"]}}]}，principal用于指定角色的授权对象。获取该参数可参阅 获取角色详情（https://cloud.tencent.com/document/product/598/36221） 输出参数RoleInfo
          * @type {string || null}
          */
         this.PolicyDocument = null;

@@ -6830,6 +6830,19 @@ class MediaContentReviewOcrTextSegmentItem extends  AbstractModel {
          */
         this.AreaCoordSet = null;
 
+        /**
+         * 嫌疑图片 URL （图片不会永久存储，到达
+PicUrlExpireTime 时间点后图片将被删除）。
+         * @type {string || null}
+         */
+        this.Url = null;
+
+        /**
+         * 嫌疑图片 URL 失效时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F)。
+         * @type {number || null}
+         */
+        this.PicUrlExpireTime = null;
+
     }
 
     /**
@@ -6845,6 +6858,8 @@ class MediaContentReviewOcrTextSegmentItem extends  AbstractModel {
         this.Suggestion = 'Suggestion' in params ? params.Suggestion : null;
         this.KeywordSet = 'KeywordSet' in params ? params.KeywordSet : null;
         this.AreaCoordSet = 'AreaCoordSet' in params ? params.AreaCoordSet : null;
+        this.Url = 'Url' in params ? params.Url : null;
+        this.PicUrlExpireTime = 'PicUrlExpireTime' in params ? params.PicUrlExpireTime : null;
 
     }
 }
@@ -11895,6 +11910,14 @@ class ProcedureTemplate extends  AbstractModel {
         this.Name = null;
 
         /**
+         * 任务流模板类型，取值范围：
+<li>Preset：系统预置任务流模板；</li>
+<li>Custom：用户自定义任务流模板。</li>
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
          * 视频处理类型任务参数。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {MediaProcessTaskInput || null}
@@ -11944,6 +11967,7 @@ class ProcedureTemplate extends  AbstractModel {
             return;
         }
         this.Name = 'Name' in params ? params.Name : null;
+        this.Type = 'Type' in params ? params.Type : null;
 
         if (params.MediaProcessTask) {
             let obj = new MediaProcessTaskInput();
@@ -12152,21 +12176,18 @@ class MediaContentReviewPoliticalSegmentItem extends  AbstractModel {
 
         /**
          * 嫌疑片段起始的偏移时间，单位：秒。
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.StartTimeOffset = null;
 
         /**
          * 嫌疑片段结束的偏移时间，单位：秒。
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.EndTimeOffset = null;
 
         /**
          * 嫌疑片段涉政分数。
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.Confidence = null;
@@ -12176,21 +12197,18 @@ class MediaContentReviewPoliticalSegmentItem extends  AbstractModel {
 <li>pass。</li>
 <li>review。</li>
 <li>block。</li>
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.Suggestion = null;
 
         /**
          * 涉政人物、违规图标名字。
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.Name = null;
 
         /**
          * 嫌疑片段鉴政结果标签。
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.Label = null;
@@ -12198,24 +12216,27 @@ class MediaContentReviewPoliticalSegmentItem extends  AbstractModel {
         /**
          * 嫌疑图片 URL （图片不会永久存储，到达
  PicUrlExpireTime 时间点后图片将被删除）。
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.Url = null;
 
         /**
          * 涉政人物、违规图标出现的区域坐标 (像素级)，[x1, y1, x2, y2]，即左上角坐标、右下角坐标。
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<number> || null}
          */
         this.AreaCoordSet = null;
 
         /**
-         * 嫌疑图片 URL 失效时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F)。
-注意：此字段可能返回 null，表示取不到有效值。
+         * 该字段已废弃，请使用 PicUrlExpireTime。
          * @type {number || null}
          */
         this.PicUrlExpireTimeStamp = null;
+
+        /**
+         * 嫌疑图片 URL 失效时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F)。
+         * @type {string || null}
+         */
+        this.PicUrlExpireTime = null;
 
     }
 
@@ -12235,6 +12256,7 @@ class MediaContentReviewPoliticalSegmentItem extends  AbstractModel {
         this.Url = 'Url' in params ? params.Url : null;
         this.AreaCoordSet = 'AreaCoordSet' in params ? params.AreaCoordSet : null;
         this.PicUrlExpireTimeStamp = 'PicUrlExpireTimeStamp' in params ? params.PicUrlExpireTimeStamp : null;
+        this.PicUrlExpireTime = 'PicUrlExpireTime' in params ? params.PicUrlExpireTime : null;
 
     }
 }
@@ -13852,28 +13874,24 @@ class MediaContentReviewSegmentItem extends  AbstractModel {
 
         /**
          * 嫌疑片段起始的偏移时间，单位：秒。
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.StartTimeOffset = null;
 
         /**
          * 嫌疑片段结束的偏移时间，单位：秒。
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.EndTimeOffset = null;
 
         /**
          * 嫌疑片段涉黄分数。
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.Confidence = null;
 
         /**
          * 嫌疑片段鉴黄结果标签。
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.Label = null;
@@ -13883,7 +13901,6 @@ class MediaContentReviewSegmentItem extends  AbstractModel {
 <li>pass。</li>
 <li>review。</li>
 <li>block。</li>
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.Suggestion = null;
@@ -13891,17 +13908,21 @@ class MediaContentReviewSegmentItem extends  AbstractModel {
         /**
          * 嫌疑图片 URL （图片不会永久存储，到达
  PicUrlExpireTime 时间点后图片将被删除）。
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.Url = null;
 
         /**
-         * 嫌疑图片 URL 失效时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F)。
-注意：此字段可能返回 null，表示取不到有效值。
+         * 该字段已废弃，请使用 PicUrlExpireTime。
          * @type {number || null}
          */
         this.PicUrlExpireTimeStamp = null;
+
+        /**
+         * 嫌疑图片 URL 失效时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F)。
+         * @type {string || null}
+         */
+        this.PicUrlExpireTime = null;
 
     }
 
@@ -13919,6 +13940,7 @@ class MediaContentReviewSegmentItem extends  AbstractModel {
         this.Suggestion = 'Suggestion' in params ? params.Suggestion : null;
         this.Url = 'Url' in params ? params.Url : null;
         this.PicUrlExpireTimeStamp = 'PicUrlExpireTimeStamp' in params ? params.PicUrlExpireTimeStamp : null;
+        this.PicUrlExpireTime = 'PicUrlExpireTime' in params ? params.PicUrlExpireTime : null;
 
     }
 }

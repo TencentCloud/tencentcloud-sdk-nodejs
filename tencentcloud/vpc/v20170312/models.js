@@ -2080,10 +2080,10 @@ class DescribeRouteTablesResponse extends  AbstractModel {
 }
 
 /**
- * RejectAttachCcnInstances返回参数结构体
+ * DeleteCcn返回参数结构体
  * @class
  */
-class RejectAttachCcnInstancesResponse extends  AbstractModel {
+class DeleteCcnResponse extends  AbstractModel {
     constructor(){
         super();
 
@@ -4675,6 +4675,8 @@ class DescribeCcnsRequest extends  AbstractModel {
 <li>ccn-name - String - （过滤条件）CCN名称。</li>
 <li>ccn-description - String - （过滤条件）CCN描述。</li>
 <li>state - String - （过滤条件）实例状态， 'ISOLATED': 隔离中（欠费停服），'AVAILABLE'：运行中。</li>
+<li>tag-key - String -是否必填：否- （过滤条件）按照标签键进行过滤。</li>
+<li>tag:tag-key - String - 是否必填：否 - （过滤条件）按照标签键值对进行过滤。 tag-key使用具体的标签键进行替换。使用请参考示例：查询绑定了标签的CCN列表。</li>
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
@@ -5396,6 +5398,12 @@ class SecurityGroupPolicy extends  AbstractModel {
         this.CidrBlock = null;
 
         /**
+         * 网段或IPv6(互斥)。
+         * @type {string || null}
+         */
+        this.Ipv6CidrBlock = null;
+
+        /**
          * 安全组实例ID，例如：sg-ohuuioma。
          * @type {string || null}
          */
@@ -5444,6 +5452,7 @@ class SecurityGroupPolicy extends  AbstractModel {
             this.ServiceTemplate = obj;
         }
         this.CidrBlock = 'CidrBlock' in params ? params.CidrBlock : null;
+        this.Ipv6CidrBlock = 'Ipv6CidrBlock' in params ? params.Ipv6CidrBlock : null;
         this.SecurityGroupId = 'SecurityGroupId' in params ? params.SecurityGroupId : null;
 
         if (params.AddressTemplate) {
@@ -7221,6 +7230,34 @@ class DeleteAddressTemplateGroupRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeNetworkInterfaceLimit请求参数结构体
+ * @class
+ */
+class DescribeNetworkInterfaceLimitRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 要查询的CVM实例ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+    }
+}
+
+/**
  * CreateBandwidthPackage请求参数结构体
  * @class
  */
@@ -7694,6 +7731,48 @@ class DescribeIp6TranslatorQuotaRequest extends  AbstractModel {
             return;
         }
         this.Ip6TranslatorIds = 'Ip6TranslatorIds' in params ? params.Ip6TranslatorIds : null;
+
+    }
+}
+
+/**
+ * DescribeNetworkInterfaceLimit返回参数结构体
+ * @class
+ */
+class DescribeNetworkInterfaceLimitResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 弹性网卡配额
+         * @type {number || null}
+         */
+        this.EniQuantity = null;
+
+        /**
+         * 每个弹性网卡可以分配的ip配额
+         * @type {number || null}
+         */
+        this.EniPrivateIpAddressQuantity = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.EniQuantity = 'EniQuantity' in params ? params.EniQuantity : null;
+        this.EniPrivateIpAddressQuantity = 'EniPrivateIpAddressQuantity' in params ? params.EniPrivateIpAddressQuantity : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -9220,6 +9299,34 @@ class ModifyAddressesBandwidthResponse extends  AbstractModel {
             return;
         }
         this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * RejectAttachCcnInstances返回参数结构体
+ * @class
+ */
+class RejectAttachCcnInstancesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -14091,34 +14198,6 @@ class InquiryPriceResetVpnGatewayInternetMaxBandwidthRequest extends  AbstractMo
 }
 
 /**
- * DeleteCcn返回参数结构体
- * @class
- */
-class DeleteCcnResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
  * ReplaceSecurityGroupPolicy返回参数结构体
  * @class
  */
@@ -17198,7 +17277,7 @@ module.exports = {
     RouteTableAssociation: RouteTableAssociation,
     ModifyCustomerGatewayAttributeRequest: ModifyCustomerGatewayAttributeRequest,
     DescribeRouteTablesResponse: DescribeRouteTablesResponse,
-    RejectAttachCcnInstancesResponse: RejectAttachCcnInstancesResponse,
+    DeleteCcnResponse: DeleteCcnResponse,
     ServiceTemplate: ServiceTemplate,
     DescribeCcnAttachedInstancesRequest: DescribeCcnAttachedInstancesRequest,
     DescribeNatGatewaysRequest: DescribeNatGatewaysRequest,
@@ -17309,6 +17388,7 @@ module.exports = {
     CreateAddressTemplateResponse: CreateAddressTemplateResponse,
     CreateNatGatewayDestinationIpPortTranslationNatRuleResponse: CreateNatGatewayDestinationIpPortTranslationNatRuleResponse,
     DeleteAddressTemplateGroupRequest: DeleteAddressTemplateGroupRequest,
+    DescribeNetworkInterfaceLimitRequest: DescribeNetworkInterfaceLimitRequest,
     CreateBandwidthPackageRequest: CreateBandwidthPackageRequest,
     ModifyRouteTableAttributeRequest: ModifyRouteTableAttributeRequest,
     ModifyDirectConnectGatewayAttributeResponse: ModifyDirectConnectGatewayAttributeResponse,
@@ -17321,6 +17401,7 @@ module.exports = {
     ModifyNetworkInterfaceAttributeResponse: ModifyNetworkInterfaceAttributeResponse,
     CreateSecurityGroupResponse: CreateSecurityGroupResponse,
     DescribeIp6TranslatorQuotaRequest: DescribeIp6TranslatorQuotaRequest,
+    DescribeNetworkInterfaceLimitResponse: DescribeNetworkInterfaceLimitResponse,
     AssignIpv6CidrBlockResponse: AssignIpv6CidrBlockResponse,
     CreateCcnRequest: CreateCcnRequest,
     RemoveIp6RulesRequest: RemoveIp6RulesRequest,
@@ -17353,6 +17434,7 @@ module.exports = {
     DeleteBandwidthPackageRequest: DeleteBandwidthPackageRequest,
     HaVip: HaVip,
     ModifyAddressesBandwidthResponse: ModifyAddressesBandwidthResponse,
+    RejectAttachCcnInstancesResponse: RejectAttachCcnInstancesResponse,
     SetCcnRegionBandwidthLimitsResponse: SetCcnRegionBandwidthLimitsResponse,
     DescribeIp6TranslatorsResponse: DescribeIp6TranslatorsResponse,
     DescribeAccountAttributesRequest: DescribeAccountAttributesRequest,
@@ -17469,7 +17551,6 @@ module.exports = {
     ResetVpnConnectionRequest: ResetVpnConnectionRequest,
     ReleaseAddressesResponse: ReleaseAddressesResponse,
     InquiryPriceResetVpnGatewayInternetMaxBandwidthRequest: InquiryPriceResetVpnGatewayInternetMaxBandwidthRequest,
-    DeleteCcnResponse: DeleteCcnResponse,
     ReplaceSecurityGroupPolicyResponse: ReplaceSecurityGroupPolicyResponse,
     ModifyPrivateIpAddressesAttributeResponse: ModifyPrivateIpAddressesAttributeResponse,
     DeleteDirectConnectGatewayCcnRoutesRequest: DeleteDirectConnectGatewayCcnRoutesRequest,

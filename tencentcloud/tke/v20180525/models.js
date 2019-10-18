@@ -927,6 +927,12 @@ class ClusterBasicSettings extends  AbstractModel {
          */
         this.OsCustomizeType = null;
 
+        /**
+         * 是否开启节点的默认安全组(默认: 否，Aphla特性)
+         * @type {boolean || null}
+         */
+        this.NeedWorkSecurityGroup = null;
+
     }
 
     /**
@@ -952,6 +958,7 @@ class ClusterBasicSettings extends  AbstractModel {
             }
         }
         this.OsCustomizeType = 'OsCustomizeType' in params ? params.OsCustomizeType : null;
+        this.NeedWorkSecurityGroup = 'NeedWorkSecurityGroup' in params ? params.NeedWorkSecurityGroup : null;
 
     }
 }
@@ -1088,6 +1095,12 @@ class DeleteClusterInstancesRequest extends  AbstractModel {
          */
         this.InstanceDeleteMode = null;
 
+        /**
+         * 是否强制删除(当节点在初始化时，可以指定参数为TRUE)
+         * @type {boolean || null}
+         */
+        this.ForceDelete = null;
+
     }
 
     /**
@@ -1100,6 +1113,7 @@ class DeleteClusterInstancesRequest extends  AbstractModel {
         this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
         this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
         this.InstanceDeleteMode = 'InstanceDeleteMode' in params ? params.InstanceDeleteMode : null;
+        this.ForceDelete = 'ForceDelete' in params ? params.ForceDelete : null;
 
     }
 }
@@ -1534,6 +1548,12 @@ class InstanceAdvancedSettings extends  AbstractModel {
          */
         this.Unschedulable = null;
 
+        /**
+         * 节点Label数组
+         * @type {Array.<Label> || null}
+         */
+        this.Labels = null;
+
     }
 
     /**
@@ -1547,6 +1567,15 @@ class InstanceAdvancedSettings extends  AbstractModel {
         this.DockerGraphPath = 'DockerGraphPath' in params ? params.DockerGraphPath : null;
         this.UserScript = 'UserScript' in params ? params.UserScript : null;
         this.Unschedulable = 'Unschedulable' in params ? params.Unschedulable : null;
+
+        if (params.Labels) {
+            this.Labels = new Array();
+            for (let z in params.Labels) {
+                let obj = new Label();
+                obj.deserialize(params.Labels[z]);
+                this.Labels.push(obj);
+            }
+        }
 
     }
 }
@@ -1771,7 +1800,7 @@ class DescribeExistedInstancesRequest extends  AbstractModel {
         super();
 
         /**
-         * 集群 ID，请填写查询集群列表 接口中返回的 ClusterId 字段（仅通过ClusterId获取需要过滤条件中的VPCID，比较状态时会使用该地域下所有集群中的节点进行比较。参数不支持同时指定InstanceIds和ClusterId。
+         * 集群 ID，请填写查询集群列表 接口中返回的 ClusterId 字段（仅通过ClusterId获取需要过滤条件中的VPCID。节点状态比较时会使用该地域下所有集群中的节点进行比较。参数不支持同时指定InstanceIds和ClusterId。
          * @type {string || null}
          */
         this.ClusterId = null;
@@ -2466,6 +2495,12 @@ class Cluster extends  AbstractModel {
          */
         this.TagSpecification = null;
 
+        /**
+         * 集群状态 (Running 运行中  Creating 创建中 Abnormal 异常  )
+         * @type {string || null}
+         */
+        this.ClusterStatus = null;
+
     }
 
     /**
@@ -2498,6 +2533,7 @@ class Cluster extends  AbstractModel {
                 this.TagSpecification.push(obj);
             }
         }
+        this.ClusterStatus = 'ClusterStatus' in params ? params.ClusterStatus : null;
 
     }
 }

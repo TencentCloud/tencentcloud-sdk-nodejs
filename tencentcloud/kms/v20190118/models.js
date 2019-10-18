@@ -17,6 +17,34 @@
 const AbstractModel = require("../../common/abstract_model");
 
 /**
+ * UpdateKeyDescription返回参数结构体
+ * @class
+ */
+class UpdateKeyDescriptionResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DisableKeys请求参数结构体
  * @class
  */
@@ -143,13 +171,13 @@ class GenerateDataKeyRequest extends  AbstractModel {
         this.KeyId = null;
 
         /**
-         * 指定生成Datakey的加密算法以及Datakey大小，AES_128或者AES_256。
+         * 指定生成Datakey的加密算法以及Datakey大小，AES_128或者AES_256。KeySpec 和 NumberOfBytes 必须指定一个
          * @type {string || null}
          */
         this.KeySpec = null;
 
         /**
-         * 生成的DataKey的长度，同时指定NumberOfBytes和KeySpec时，以NumberOfBytes为准。最小值为1， 最大值为1024
+         * 生成的DataKey的长度，同时指定NumberOfBytes和KeySpec时，以NumberOfBytes为准。最小值为1， 最大值为1024。KeySpec 和 NumberOfBytes 必须指定一个
          * @type {number || null}
          */
         this.NumberOfBytes = null;
@@ -198,7 +226,7 @@ class GenerateDataKeyResponse extends  AbstractModel {
         this.Plaintext = null;
 
         /**
-         * DataKey加密后的密文，用户需要自行保存密文
+         * DataKey加密后经过base64编码的密文，用户需要自行保存密文
          * @type {string || null}
          */
         this.CiphertextBlob = null;
@@ -309,7 +337,7 @@ class CreateKeyRequest extends  AbstractModel {
         this.KeyUsage = null;
 
         /**
-         * 指定key类型，1为当前地域默认类型，默认为1，且当前只支持该类型
+         * 指定key类型，默认为1，1表示默认类型，由KMS创建CMK密钥，2 表示EXTERNAL 类型，该类型需要用户导入密钥材料，参考 GetParametersForImport 和 ImportKeyMaterial 接口
          * @type {number || null}
          */
         this.Type = null;
@@ -382,6 +410,104 @@ class DisableKeyResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * GetParametersForImport请求参数结构体
+ * @class
+ */
+class GetParametersForImportRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * CMK的唯一标识，获取密钥参数的CMK必须是EXTERNAL类型，即在CreateKey时指定Type=2 类型的CMK。
+         * @type {string || null}
+         */
+        this.KeyId = null;
+
+        /**
+         * 指定加密密钥材料的算法，目前支持RSAES_PKCS1_V1_5、RSAES_OAEP_SHA_1、RSAES_OAEP_SHA_256
+         * @type {string || null}
+         */
+        this.WrappingAlgorithm = null;
+
+        /**
+         * 指定加密密钥材料的类型，目前只支持RSA_2048
+         * @type {string || null}
+         */
+        this.WrappingKeySpec = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.KeyId = 'KeyId' in params ? params.KeyId : null;
+        this.WrappingAlgorithm = 'WrappingAlgorithm' in params ? params.WrappingAlgorithm : null;
+        this.WrappingKeySpec = 'WrappingKeySpec' in params ? params.WrappingKeySpec : null;
+
+    }
+}
+
+/**
+ * GetParametersForImport返回参数结构体
+ * @class
+ */
+class GetParametersForImportResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * CMK的唯一标识，用于指定目标导入密钥材料的CMK。
+         * @type {string || null}
+         */
+        this.KeyId = null;
+
+        /**
+         * 导入密钥材料需要的token，用于作为 ImportKeyMaterial 的参数。
+         * @type {string || null}
+         */
+        this.ImportToken = null;
+
+        /**
+         * 用于加密密钥材料的RSA公钥，base64编码。使用PublicKey base64解码后的公钥将导入密钥进行加密后作为 ImportKeyMaterial 的参数。
+         * @type {string || null}
+         */
+        this.PublicKey = null;
+
+        /**
+         * 该导出token和公钥的有效期，超过该时间后无法导入，需要重新调用GetParametersForImport获取。
+         * @type {number || null}
+         */
+        this.ParametersValidTo = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.KeyId = 'KeyId' in params ? params.KeyId : null;
+        this.ImportToken = 'ImportToken' in params ? params.ImportToken : null;
+        this.PublicKey = 'PublicKey' in params ? params.PublicKey : null;
+        this.ParametersValidTo = 'ParametersValidTo' in params ? params.ParametersValidTo : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -542,6 +668,62 @@ class CancelKeyDeletionRequest extends  AbstractModel {
 }
 
 /**
+ * 返回CMK列表信息
+ * @class
+ */
+class Key extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * CMK的全局唯一标识。
+         * @type {string || null}
+         */
+        this.KeyId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.KeyId = 'KeyId' in params ? params.KeyId : null;
+
+    }
+}
+
+/**
+ * DeleteImportedKeyMaterial请求参数结构体
+ * @class
+ */
+class DeleteImportedKeyMaterialRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 指定需要删除密钥材料的EXTERNAL CMK。
+         * @type {string || null}
+         */
+        this.KeyId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.KeyId = 'KeyId' in params ? params.KeyId : null;
+
+    }
+}
+
+/**
  * EnableKey返回参数结构体
  * @class
  */
@@ -648,18 +830,36 @@ class GetServiceStatusResponse extends  AbstractModel {
 }
 
 /**
- * 返回CMK列表信息
+ * ImportKeyMaterial请求参数结构体
  * @class
  */
-class Key extends  AbstractModel {
+class ImportKeyMaterialRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * CMK的全局唯一标识。
+         * 使用GetParametersForImport 返回的PublicKey加密后的密钥材料base64编码。对于国密版本region的KMS，导入的密钥材料长度要求为 128 bit，FIPS版本region的KMS， 导入的密钥材料长度要求为 256 bit。
+         * @type {string || null}
+         */
+        this.EncryptedKeyMaterial = null;
+
+        /**
+         * 通过调用GetParametersForImport获得的导入令牌。
+         * @type {string || null}
+         */
+        this.ImportToken = null;
+
+        /**
+         * 指定导入密钥材料的CMK，需要和GetParametersForImport 指定的CMK相同。
          * @type {string || null}
          */
         this.KeyId = null;
+
+        /**
+         * 密钥材料过期时间 unix 时间戳，不指定或者 0 表示密钥材料不会过期，若指定过期时间，需要大于当前时间点。
+         * @type {number || null}
+         */
+        this.ValidTo = null;
 
     }
 
@@ -670,7 +870,10 @@ class Key extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.EncryptedKeyMaterial = 'EncryptedKeyMaterial' in params ? params.EncryptedKeyMaterial : null;
+        this.ImportToken = 'ImportToken' in params ? params.ImportToken : null;
         this.KeyId = 'KeyId' in params ? params.KeyId : null;
+        this.ValidTo = 'ValidTo' in params ? params.ValidTo : null;
 
     }
 }
@@ -711,18 +914,18 @@ class GetKeyRotationStatusResponse extends  AbstractModel {
 }
 
 /**
- * EnableKeys请求参数结构体
+ * DisableKey请求参数结构体
  * @class
  */
-class EnableKeysRequest extends  AbstractModel {
+class DisableKeyRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 需要批量启用的CMK Id 列表， CMK数量最大支持100
-         * @type {Array.<string> || null}
+         * CMK唯一标识符
+         * @type {string || null}
          */
-        this.KeyIds = null;
+        this.KeyId = null;
 
     }
 
@@ -733,16 +936,16 @@ class EnableKeysRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.KeyIds = 'KeyIds' in params ? params.KeyIds : null;
+        this.KeyId = 'KeyId' in params ? params.KeyId : null;
 
     }
 }
 
 /**
- * UpdateKeyDescription返回参数结构体
+ * ImportKeyMaterial返回参数结构体
  * @class
  */
-class UpdateKeyDescriptionResponse extends  AbstractModel {
+class ImportKeyMaterialResponse extends  AbstractModel {
     constructor(){
         super();
 
@@ -804,6 +1007,34 @@ class EncryptRequest extends  AbstractModel {
         this.KeyId = 'KeyId' in params ? params.KeyId : null;
         this.Plaintext = 'Plaintext' in params ? params.Plaintext : null;
         this.EncryptionContext = 'EncryptionContext' in params ? params.EncryptionContext : null;
+
+    }
+}
+
+/**
+ * DeleteImportedKeyMaterial返回参数结构体
+ * @class
+ */
+class DeleteImportedKeyMaterialResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1191,7 +1422,7 @@ class KeyMetadata extends  AbstractModel {
         this.Description = null;
 
         /**
-         * CMK的状态， Enabled 或者 Disabled 或者PendingDelete状态
+         * CMK的状态， 取值为：Enabled | Disabled | PendingDelete | PendingImport
          * @type {string || null}
          */
         this.KeyState = null;
@@ -1203,7 +1434,7 @@ class KeyMetadata extends  AbstractModel {
         this.KeyUsage = null;
 
         /**
-         * CMK类型，当前为 1 普通类型
+         * CMK类型，2 表示符合FIPS标准，4表示符合国密标准
          * @type {number || null}
          */
         this.Type = null;
@@ -1239,6 +1470,20 @@ class KeyMetadata extends  AbstractModel {
          */
         this.DeletionDate = null;
 
+        /**
+         * CMK 密钥材料类型，由KMS创建的为： TENCENT_KMS， 由用户导入的类型为：EXTERNAL
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Origin = null;
+
+        /**
+         * 在Origin为  EXTERNAL 时有效，表示密钥材料的有效日期， 0 表示不过期
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.ValidTo = null;
+
     }
 
     /**
@@ -1260,6 +1505,8 @@ class KeyMetadata extends  AbstractModel {
         this.Owner = 'Owner' in params ? params.Owner : null;
         this.NextRotateTime = 'NextRotateTime' in params ? params.NextRotateTime : null;
         this.DeletionDate = 'DeletionDate' in params ? params.DeletionDate : null;
+        this.Origin = 'Origin' in params ? params.Origin : null;
+        this.ValidTo = 'ValidTo' in params ? params.ValidTo : null;
 
     }
 }
@@ -1399,7 +1646,7 @@ class DecryptRequest extends  AbstractModel {
         super();
 
         /**
-         * 被加密的密文数据
+         * 待解密的密文数据
          * @type {string || null}
          */
         this.CiphertextBlob = null;
@@ -1458,7 +1705,7 @@ class ListKeyDetailRequest extends  AbstractModel {
         this.OrderType = null;
 
         /**
-         * 根据CMK状态筛选， 0表示全部CMK， 1 表示仅查询Enabled CMK， 2 表示仅查询Disabled CMK，3表示查询PendingDelete CMK(处于计划删除状态的Key)
+         * 根据CMK状态筛选， 0表示全部CMK， 1 表示仅查询Enabled CMK， 2 表示仅查询Disabled CMK，3 表示查询PendingDelete 状态的CMK(处于计划删除状态的Key)，4 表示查询 PendingImport 状态的CMK
          * @type {number || null}
          */
         this.KeyState = null;
@@ -1468,6 +1715,12 @@ class ListKeyDetailRequest extends  AbstractModel {
          * @type {string || null}
          */
         this.SearchKeyAlias = null;
+
+        /**
+         * 根据CMK类型筛选， "TENCENT_KMS" 表示筛选密钥材料由KMS创建的CMK， "EXTERNAL" 表示筛选密钥材料需要用户导入的 EXTERNAL类型CMK，"ALL" 或者不设置表示两种类型都查询，大小写敏感。
+         * @type {string || null}
+         */
+        this.Origin = null;
 
     }
 
@@ -1484,6 +1737,7 @@ class ListKeyDetailRequest extends  AbstractModel {
         this.OrderType = 'OrderType' in params ? params.OrderType : null;
         this.KeyState = 'KeyState' in params ? params.KeyState : null;
         this.SearchKeyAlias = 'SearchKeyAlias' in params ? params.SearchKeyAlias : null;
+        this.Origin = 'Origin' in params ? params.Origin : null;
 
     }
 }
@@ -1524,18 +1778,18 @@ class UpdateKeyDescriptionRequest extends  AbstractModel {
 }
 
 /**
- * DisableKey请求参数结构体
+ * EnableKeys请求参数结构体
  * @class
  */
-class DisableKeyRequest extends  AbstractModel {
+class EnableKeysRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * CMK唯一标识符
-         * @type {string || null}
+         * 需要批量启用的CMK Id 列表， CMK数量最大支持100
+         * @type {Array.<string> || null}
          */
-        this.KeyId = null;
+        this.KeyIds = null;
 
     }
 
@@ -1546,7 +1800,7 @@ class DisableKeyRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.KeyId = 'KeyId' in params ? params.KeyId : null;
+        this.KeyIds = 'KeyIds' in params ? params.KeyIds : null;
 
     }
 }
@@ -1601,7 +1855,7 @@ class EncryptResponse extends  AbstractModel {
         super();
 
         /**
-         * 加密后的密文
+         * 加密后经过base64编码的密文
          * @type {string || null}
          */
         this.CiphertextBlob = null;
@@ -1712,6 +1966,7 @@ class DisableKeyRotationRequest extends  AbstractModel {
 }
 
 module.exports = {
+    UpdateKeyDescriptionResponse: UpdateKeyDescriptionResponse,
     DisableKeysRequest: DisableKeysRequest,
     UpdateAliasRequest: UpdateAliasRequest,
     ReEncryptRequest: ReEncryptRequest,
@@ -1722,18 +1977,23 @@ module.exports = {
     CreateKeyRequest: CreateKeyRequest,
     EnableKeysResponse: EnableKeysResponse,
     DisableKeyResponse: DisableKeyResponse,
+    GetParametersForImportRequest: GetParametersForImportRequest,
+    GetParametersForImportResponse: GetParametersForImportResponse,
     DecryptResponse: DecryptResponse,
     ReEncryptResponse: ReEncryptResponse,
     DescribeKeyRequest: DescribeKeyRequest,
     CancelKeyDeletionRequest: CancelKeyDeletionRequest,
+    Key: Key,
+    DeleteImportedKeyMaterialRequest: DeleteImportedKeyMaterialRequest,
     EnableKeyResponse: EnableKeyResponse,
     ScheduleKeyDeletionRequest: ScheduleKeyDeletionRequest,
     GetServiceStatusResponse: GetServiceStatusResponse,
-    Key: Key,
+    ImportKeyMaterialRequest: ImportKeyMaterialRequest,
     GetKeyRotationStatusResponse: GetKeyRotationStatusResponse,
-    EnableKeysRequest: EnableKeysRequest,
-    UpdateKeyDescriptionResponse: UpdateKeyDescriptionResponse,
+    DisableKeyRequest: DisableKeyRequest,
+    ImportKeyMaterialResponse: ImportKeyMaterialResponse,
     EncryptRequest: EncryptRequest,
+    DeleteImportedKeyMaterialResponse: DeleteImportedKeyMaterialResponse,
     CreateKeyResponse: CreateKeyResponse,
     EnableKeyRequest: EnableKeyRequest,
     GetKeyRotationStatusRequest: GetKeyRotationStatusRequest,
@@ -1750,7 +2010,7 @@ module.exports = {
     DecryptRequest: DecryptRequest,
     ListKeyDetailRequest: ListKeyDetailRequest,
     UpdateKeyDescriptionRequest: UpdateKeyDescriptionRequest,
-    DisableKeyRequest: DisableKeyRequest,
+    EnableKeysRequest: EnableKeysRequest,
     DescribeKeyResponse: DescribeKeyResponse,
     EncryptResponse: EncryptResponse,
     DescribeKeysRequest: DescribeKeysRequest,

@@ -560,6 +560,12 @@ class TextTranslateRequest extends  AbstractModel {
          */
         this.ProjectId = null;
 
+        /**
+         * 用来标记不希望被翻译的文本内容，如句子中的特殊符号、人名、地名等；每次请求只支持配置一个不被翻译的单词；仅支持配置人名、地名等名词，不要配置动词或短语，否则会影响翻译结果。
+         * @type {string || null}
+         */
+        this.UntranslatedText = null;
+
     }
 
     /**
@@ -573,6 +579,7 @@ class TextTranslateRequest extends  AbstractModel {
         this.Source = 'Source' in params ? params.Source : null;
         this.Target = 'Target' in params ? params.Target : null;
         this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+        this.UntranslatedText = 'UntranslatedText' in params ? params.UntranslatedText : null;
 
     }
 }

@@ -820,7 +820,7 @@ class SrcInfo extends  AbstractModel {
         this.Password = null;
 
         /**
-         * 阿里云RDS实例ID。源库是阿里云RDS5.6适用
+         * 阿里云RDS实例ID。源库是阿里云RDS5.6/5.6适用
          * @type {string || null}
          */
         this.RdsInstanceId = null;
@@ -880,6 +880,12 @@ class SrcInfo extends  AbstractModel {
          */
         this.CcnId = null;
 
+        /**
+         * 数据库版本，当实例为RDS实例时才有效，格式如：5.6或者5.7，默认为5.6
+         * @type {string || null}
+         */
+        this.EngineVersion = null;
+
     }
 
     /**
@@ -904,6 +910,7 @@ class SrcInfo extends  AbstractModel {
         this.Region = 'Region' in params ? params.Region : null;
         this.Supplier = 'Supplier' in params ? params.Supplier : null;
         this.CcnId = 'CcnId' in params ? params.CcnId : null;
+        this.EngineVersion = 'EngineVersion' in params ? params.EngineVersion : null;
 
     }
 }
