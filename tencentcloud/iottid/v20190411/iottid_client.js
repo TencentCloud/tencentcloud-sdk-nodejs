@@ -21,11 +21,13 @@ const VerifyChipBurnInfoResponse = models.VerifyChipBurnInfoResponse;
 const DeliverTidsResponse = models.DeliverTidsResponse;
 const BurnTidNotifyResponse = models.BurnTidNotifyResponse;
 const DescribeAvailableLibCountResponse = models.DescribeAvailableLibCountResponse;
+const UploadDeviceUniqueCodeResponse = models.UploadDeviceUniqueCodeResponse;
 const AuthTestTidResponse = models.AuthTestTidResponse;
 const DeliverTidNotifyResponse = models.DeliverTidNotifyResponse;
 const AuthTestTidRequest = models.AuthTestTidRequest;
 const BurnTidNotifyRequest = models.BurnTidNotifyRequest;
 const VerifyChipBurnInfoRequest = models.VerifyChipBurnInfoRequest;
+const UploadDeviceUniqueCodeRequest = models.UploadDeviceUniqueCodeRequest;
 const DescribeAvailableLibCountRequest = models.DescribeAvailableLibCountRequest;
 const DeliverTidsRequest = models.DeliverTidsRequest;
 const DeliverTidNotifyRequest = models.DeliverTidNotifyRequest;
@@ -54,6 +56,17 @@ class IottidClient extends AbstractClient {
     AuthTestTid(req, cb) {
         let resp = new AuthTestTidResponse();
         this.request("AuthTestTid", req, resp, cb);
+    }
+
+    /**
+     * 上传硬件唯一标识码，是软加固设备身份参数。本接口如遇到错误数据，则所有当次上传数据失效。
+     * @param {UploadDeviceUniqueCodeRequest} req
+     * @param {function(string, UploadDeviceUniqueCodeResponse):void} cb
+     * @public
+     */
+    UploadDeviceUniqueCode(req, cb) {
+        let resp = new UploadDeviceUniqueCodeResponse();
+        this.request("UploadDeviceUniqueCode", req, resp, cb);
     }
 
     /**

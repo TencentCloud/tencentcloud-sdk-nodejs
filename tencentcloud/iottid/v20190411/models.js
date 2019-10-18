@@ -208,6 +208,64 @@ class DescribeAvailableLibCountResponse extends  AbstractModel {
 }
 
 /**
+ * UploadDeviceUniqueCode返回参数结构体
+ * @class
+ */
+class UploadDeviceUniqueCodeResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 本次已上传数量
+         * @type {number || null}
+         */
+        this.Count = null;
+
+        /**
+         * 重复的硬件唯一标识码
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
+         */
+        this.ExistedCodeSet = null;
+
+        /**
+         * 剩余可上传数量
+         * @type {number || null}
+         */
+        this.LeftQuantity = null;
+
+        /**
+         * 错误的硬件唯一标识码
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
+         */
+        this.IllegalCodeSet = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Count = 'Count' in params ? params.Count : null;
+        this.ExistedCodeSet = 'ExistedCodeSet' in params ? params.ExistedCodeSet : null;
+        this.LeftQuantity = 'LeftQuantity' in params ? params.LeftQuantity : null;
+        this.IllegalCodeSet = 'IllegalCodeSet' in params ? params.IllegalCodeSet : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * AuthTestTid返回参数结构体
  * @class
  */
@@ -378,6 +436,41 @@ class VerifyChipBurnInfoRequest extends  AbstractModel {
             return;
         }
         this.Data = 'Data' in params ? params.Data : null;
+
+    }
+}
+
+/**
+ * UploadDeviceUniqueCode请求参数结构体
+ * @class
+ */
+class UploadDeviceUniqueCodeRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 硬件唯一标识码
+         * @type {Array.<string> || null}
+         */
+        this.CodeSet = null;
+
+        /**
+         * 硬件标识码绑定的申请编号
+         * @type {string || null}
+         */
+        this.OrderId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CodeSet = 'CodeSet' in params ? params.CodeSet : null;
+        this.OrderId = 'OrderId' in params ? params.OrderId : null;
 
     }
 }
@@ -677,11 +770,13 @@ module.exports = {
     DeliverTidsResponse: DeliverTidsResponse,
     BurnTidNotifyResponse: BurnTidNotifyResponse,
     DescribeAvailableLibCountResponse: DescribeAvailableLibCountResponse,
+    UploadDeviceUniqueCodeResponse: UploadDeviceUniqueCodeResponse,
     AuthTestTidResponse: AuthTestTidResponse,
     DeliverTidNotifyResponse: DeliverTidNotifyResponse,
     AuthTestTidRequest: AuthTestTidRequest,
     BurnTidNotifyRequest: BurnTidNotifyRequest,
     VerifyChipBurnInfoRequest: VerifyChipBurnInfoRequest,
+    UploadDeviceUniqueCodeRequest: UploadDeviceUniqueCodeRequest,
     DescribeAvailableLibCountRequest: DescribeAvailableLibCountRequest,
     DeliverTidsRequest: DeliverTidsRequest,
     DeliverTidNotifyRequest: DeliverTidNotifyRequest,

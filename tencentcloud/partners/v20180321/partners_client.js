@@ -20,12 +20,15 @@ const AgentClientElem = models.AgentClientElem;
 const DescribeAgentDealsCacheRequest = models.DescribeAgentDealsCacheRequest;
 const DescribeSalesmansRequest = models.DescribeSalesmansRequest;
 const DescribeAgentAuditedClientsRequest = models.DescribeAgentAuditedClientsRequest;
+const RemovePayRelationForClientRequest = models.RemovePayRelationForClientRequest;
 const AgentPayDealsRequest = models.AgentPayDealsRequest;
 const RebateInfoElem = models.RebateInfoElem;
 const DescribeClientBalanceResponse = models.DescribeClientBalanceResponse;
 const AgentTransferMoneyRequest = models.AgentTransferMoneyRequest;
 const DescribeClientBalanceRequest = models.DescribeClientBalanceRequest;
+const RemovePayRelationForClientResponse = models.RemovePayRelationForClientResponse;
 const DescribeRebateInfosRequest = models.DescribeRebateInfosRequest;
+const CreatePayRelationForClientResponse = models.CreatePayRelationForClientResponse;
 const DescribeAgentAuditedClientsResponse = models.DescribeAgentAuditedClientsResponse;
 const DescribeAgentBillsResponse = models.DescribeAgentBillsResponse;
 const DescribeAgentPayDealsRequest = models.DescribeAgentPayDealsRequest;
@@ -38,6 +41,7 @@ const AgentAuditedClient = models.AgentAuditedClient;
 const DescribeAgentPayDealsResponse = models.DescribeAgentPayDealsResponse;
 const DealGoodsPriceElem = models.DealGoodsPriceElem;
 const ModifyClientRemarkRequest = models.ModifyClientRemarkRequest;
+const CreatePayRelationForClientRequest = models.CreatePayRelationForClientRequest;
 const AgentTransferMoneyResponse = models.AgentTransferMoneyResponse;
 const AgentBillElem = models.AgentBillElem;
 const AuditApplyClientResponse = models.AuditApplyClientResponse;
@@ -126,6 +130,17 @@ class PartnersClient extends AbstractClient {
     }
 
     /**
+     * 合作伙伴为客户消除强代付关系
+     * @param {RemovePayRelationForClientRequest} req
+     * @param {function(string, RemovePayRelationForClientResponse):void} cb
+     * @public
+     */
+    RemovePayRelationForClient(req, cb) {
+        let resp = new RemovePayRelationForClientResponse();
+        this.request("RemovePayRelationForClient", req, resp, cb);
+    }
+
+    /**
      * 代理商可以对名下客户添加备注、修改备注
      * @param {ModifyClientRemarkRequest} req
      * @param {function(string, ModifyClientRemarkResponse):void} cb
@@ -178,6 +193,17 @@ class PartnersClient extends AbstractClient {
     DescribeAgentAuditedClients(req, cb) {
         let resp = new DescribeAgentAuditedClientsResponse();
         this.request("DescribeAgentAuditedClients", req, resp, cb);
+    }
+
+    /**
+     * 合作伙伴为客户创建强代付关系
+     * @param {CreatePayRelationForClientRequest} req
+     * @param {function(string, CreatePayRelationForClientResponse):void} cb
+     * @public
+     */
+    CreatePayRelationForClient(req, cb) {
+        let resp = new CreatePayRelationForClientResponse();
+        this.request("CreatePayRelationForClient", req, resp, cb);
     }
 
     /**

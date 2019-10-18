@@ -60,7 +60,7 @@ const ResetRoutesRequest = models.ResetRoutesRequest;
 const RouteTableAssociation = models.RouteTableAssociation;
 const ModifyCustomerGatewayAttributeRequest = models.ModifyCustomerGatewayAttributeRequest;
 const DescribeRouteTablesResponse = models.DescribeRouteTablesResponse;
-const RejectAttachCcnInstancesResponse = models.RejectAttachCcnInstancesResponse;
+const DeleteCcnResponse = models.DeleteCcnResponse;
 const ServiceTemplate = models.ServiceTemplate;
 const DescribeCcnAttachedInstancesRequest = models.DescribeCcnAttachedInstancesRequest;
 const DescribeNatGatewaysRequest = models.DescribeNatGatewaysRequest;
@@ -171,6 +171,7 @@ const DeleteCustomerGatewayResponse = models.DeleteCustomerGatewayResponse;
 const CreateAddressTemplateResponse = models.CreateAddressTemplateResponse;
 const CreateNatGatewayDestinationIpPortTranslationNatRuleResponse = models.CreateNatGatewayDestinationIpPortTranslationNatRuleResponse;
 const DeleteAddressTemplateGroupRequest = models.DeleteAddressTemplateGroupRequest;
+const DescribeNetworkInterfaceLimitRequest = models.DescribeNetworkInterfaceLimitRequest;
 const CreateBandwidthPackageRequest = models.CreateBandwidthPackageRequest;
 const ModifyRouteTableAttributeRequest = models.ModifyRouteTableAttributeRequest;
 const ModifyDirectConnectGatewayAttributeResponse = models.ModifyDirectConnectGatewayAttributeResponse;
@@ -183,6 +184,7 @@ const DescribeSecurityGroupPoliciesRequest = models.DescribeSecurityGroupPolicie
 const ModifyNetworkInterfaceAttributeResponse = models.ModifyNetworkInterfaceAttributeResponse;
 const CreateSecurityGroupResponse = models.CreateSecurityGroupResponse;
 const DescribeIp6TranslatorQuotaRequest = models.DescribeIp6TranslatorQuotaRequest;
+const DescribeNetworkInterfaceLimitResponse = models.DescribeNetworkInterfaceLimitResponse;
 const AssignIpv6CidrBlockResponse = models.AssignIpv6CidrBlockResponse;
 const CreateCcnRequest = models.CreateCcnRequest;
 const RemoveIp6RulesRequest = models.RemoveIp6RulesRequest;
@@ -215,6 +217,7 @@ const DownloadCustomerGatewayConfigurationRequest = models.DownloadCustomerGatew
 const DeleteBandwidthPackageRequest = models.DeleteBandwidthPackageRequest;
 const HaVip = models.HaVip;
 const ModifyAddressesBandwidthResponse = models.ModifyAddressesBandwidthResponse;
+const RejectAttachCcnInstancesResponse = models.RejectAttachCcnInstancesResponse;
 const SetCcnRegionBandwidthLimitsResponse = models.SetCcnRegionBandwidthLimitsResponse;
 const DescribeIp6TranslatorsResponse = models.DescribeIp6TranslatorsResponse;
 const DescribeAccountAttributesRequest = models.DescribeAccountAttributesRequest;
@@ -331,7 +334,6 @@ const CreateBandwidthPackageResponse = models.CreateBandwidthPackageResponse;
 const ResetVpnConnectionRequest = models.ResetVpnConnectionRequest;
 const ReleaseAddressesResponse = models.ReleaseAddressesResponse;
 const InquiryPriceResetVpnGatewayInternetMaxBandwidthRequest = models.InquiryPriceResetVpnGatewayInternetMaxBandwidthRequest;
-const DeleteCcnResponse = models.DeleteCcnResponse;
 const ReplaceSecurityGroupPolicyResponse = models.ReplaceSecurityGroupPolicyResponse;
 const ModifyPrivateIpAddressesAttributeResponse = models.ModifyPrivateIpAddressesAttributeResponse;
 const DeleteDirectConnectGatewayCcnRoutesRequest = models.DeleteDirectConnectGatewayCcnRoutesRequest;
@@ -610,14 +612,14 @@ class VpcClient extends AbstractClient {
     }
 
     /**
-     * 本接口（DisassociateNatGatewayAddress）用于NAT网关解绑弹性IP。
-     * @param {DisassociateNatGatewayAddressRequest} req
-     * @param {function(string, DisassociateNatGatewayAddressResponse):void} cb
+     * 本接口（DescribeNetworkInterfaceLimit）根据CVM实例ID查询弹性网卡配额，返回该CVM实例能绑定的弹性网卡配额，以及每个弹性网卡可以分配的ip配额
+     * @param {DescribeNetworkInterfaceLimitRequest} req
+     * @param {function(string, DescribeNetworkInterfaceLimitResponse):void} cb
      * @public
      */
-    DisassociateNatGatewayAddress(req, cb) {
-        let resp = new DisassociateNatGatewayAddressResponse();
-        this.request("DisassociateNatGatewayAddress", req, resp, cb);
+    DescribeNetworkInterfaceLimit(req, cb) {
+        let resp = new DescribeNetworkInterfaceLimitResponse();
+        this.request("DescribeNetworkInterfaceLimit", req, resp, cb);
     }
 
     /**
@@ -1119,6 +1121,17 @@ class VpcClient extends AbstractClient {
     AttachClassicLinkVpc(req, cb) {
         let resp = new AttachClassicLinkVpcResponse();
         this.request("AttachClassicLinkVpc", req, resp, cb);
+    }
+
+    /**
+     * 本接口（DisassociateNatGatewayAddress）用于NAT网关解绑弹性IP。
+     * @param {DisassociateNatGatewayAddressRequest} req
+     * @param {function(string, DisassociateNatGatewayAddressResponse):void} cb
+     * @public
+     */
+    DisassociateNatGatewayAddress(req, cb) {
+        let resp = new DisassociateNatGatewayAddressResponse();
+        this.request("DisassociateNatGatewayAddress", req, resp, cb);
     }
 
     /**
