@@ -33,6 +33,7 @@ const DecryptResponse = models.DecryptResponse;
 const ReEncryptResponse = models.ReEncryptResponse;
 const DescribeKeyRequest = models.DescribeKeyRequest;
 const CancelKeyDeletionRequest = models.CancelKeyDeletionRequest;
+const GenerateRandomRequest = models.GenerateRandomRequest;
 const Key = models.Key;
 const DeleteImportedKeyMaterialRequest = models.DeleteImportedKeyMaterialRequest;
 const EnableKeyResponse = models.EnableKeyResponse;
@@ -61,6 +62,7 @@ const DecryptRequest = models.DecryptRequest;
 const ListKeyDetailRequest = models.ListKeyDetailRequest;
 const UpdateKeyDescriptionRequest = models.UpdateKeyDescriptionRequest;
 const EnableKeysRequest = models.EnableKeysRequest;
+const GenerateRandomResponse = models.GenerateRandomResponse;
 const DescribeKeyResponse = models.DescribeKeyResponse;
 const EncryptResponse = models.EncryptResponse;
 const DescribeKeysRequest = models.DescribeKeysRequest;
@@ -198,6 +200,17 @@ class KmsClient extends AbstractClient {
     ListKeys(req, cb) {
         let resp = new ListKeysResponse();
         this.request("ListKeys", req, resp, cb);
+    }
+
+    /**
+     * 随机数生成接口。
+     * @param {GenerateRandomRequest} req
+     * @param {function(string, GenerateRandomResponse):void} cb
+     * @public
+     */
+    GenerateRandom(req, cb) {
+        let resp = new GenerateRandomResponse();
+        this.request("GenerateRandom", req, resp, cb);
     }
 
     /**

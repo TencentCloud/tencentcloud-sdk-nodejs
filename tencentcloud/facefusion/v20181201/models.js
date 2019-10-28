@@ -31,7 +31,7 @@ class FaceFusionResponse extends  AbstractModel {
         this.Image = null;
 
         /**
-         * 鉴黄鉴政结果
+         * 鉴政结果
          * @type {Array.<FuseFaceReviewResult> || null}
          */
         this.ReviewResultSet = null;
@@ -365,7 +365,7 @@ class FuseFaceRequest extends  AbstractModel {
         this.RspImgType = null;
 
         /**
-         * 人脸图片和待被融合的素材模板图的人脸位置信息。
+         * 用户人脸图片、素材模板图的人脸位置信息。
          * @type {Array.<MergeInfo> || null}
          */
         this.MergeInfos = null;

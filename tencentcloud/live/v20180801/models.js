@@ -2680,7 +2680,7 @@ class ForbidLiveStreamRequest extends  AbstractModel {
         this.AppName = null;
 
         /**
-         * 您的加速域名。
+         * 您的推流域名。
          * @type {string || null}
          */
         this.DomainName = null;
@@ -2694,7 +2694,7 @@ class ForbidLiveStreamRequest extends  AbstractModel {
         /**
          * 恢复流的时间。UTC 格式，例如：2018-11-29T19:00:00Z。
 注意：
-1. 默认禁播90天，且最长支持禁播90天。
+1. 默认禁播7天，且最长支持禁播90天。
 2. 北京时间值为 UTC 时间值 + 8 小时，格式按照 ISO 8601 标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F)。
          * @type {string || null}
          */
@@ -2797,7 +2797,7 @@ class StreamInfo extends  AbstractModel {
 }
 
 /**
- * 各状态码的总次数，暂时支持400,403,404,500,502,503,504
+ * 各状态码的总次数，支持大多数的http协议返回码
  * @class
  */
 class PlayCodeTotalInfo extends  AbstractModel {
@@ -6928,14 +6928,6 @@ class DescribeLiveTranscodeDetailInfoRequest extends  AbstractModel {
         super();
 
         /**
-         * 起始时间，北京时间，
-格式：yyyymmdd。
-注意：当前只支持查询近30天内某天的详细数据。
-         * @type {string || null}
-         */
-        this.DayTime = null;
-
-        /**
          * 推流域名。
          * @type {string || null}
          */
@@ -6946,6 +6938,14 @@ class DescribeLiveTranscodeDetailInfoRequest extends  AbstractModel {
          * @type {string || null}
          */
         this.StreamName = null;
+
+        /**
+         * 查询时间，北京时间，
+格式：yyyymmdd。
+注意：支持查询近3个月内某天的详细数据。
+         * @type {string || null}
+         */
+        this.DayTime = null;
 
         /**
          * 页数，默认1，
@@ -6961,6 +6961,22 @@ class DescribeLiveTranscodeDetailInfoRequest extends  AbstractModel {
          */
         this.PageSize = null;
 
+        /**
+         * 起始天时间，北京时间，
+格式：yyyymmdd。
+注意：支持查询近3个月内的详细数据。
+         * @type {string || null}
+         */
+        this.StartDayTime = null;
+
+        /**
+         * 结束天时间，北京时间，
+格式：yyyymmdd。
+注意：支持查询近3个月内的详细数据，注意DayTime 与（StartDayTime，EndDayTime）必须要传一个，如果都传，会以DayTime为准 。
+         * @type {string || null}
+         */
+        this.EndDayTime = null;
+
     }
 
     /**
@@ -6970,11 +6986,13 @@ class DescribeLiveTranscodeDetailInfoRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.DayTime = 'DayTime' in params ? params.DayTime : null;
         this.PushDomain = 'PushDomain' in params ? params.PushDomain : null;
         this.StreamName = 'StreamName' in params ? params.StreamName : null;
+        this.DayTime = 'DayTime' in params ? params.DayTime : null;
         this.PageNum = 'PageNum' in params ? params.PageNum : null;
         this.PageSize = 'PageSize' in params ? params.PageSize : null;
+        this.StartDayTime = 'StartDayTime' in params ? params.StartDayTime : null;
+        this.EndDayTime = 'EndDayTime' in params ? params.EndDayTime : null;
 
     }
 }
@@ -7000,6 +7018,18 @@ class ProIspPlayCodeDataInfo extends  AbstractModel {
         this.IspName = null;
 
         /**
+         * 错误码为2开头的次数。
+         * @type {number || null}
+         */
+        this.Code2xx = null;
+
+        /**
+         * 错误码为3开头的次数。
+         * @type {number || null}
+         */
+        this.Code3xx = null;
+
+        /**
          * 错误码为4开头的次数。
          * @type {number || null}
          */
@@ -7022,6 +7052,8 @@ class ProIspPlayCodeDataInfo extends  AbstractModel {
         }
         this.ProvinceName = 'ProvinceName' in params ? params.ProvinceName : null;
         this.IspName = 'IspName' in params ? params.IspName : null;
+        this.Code2xx = 'Code2xx' in params ? params.Code2xx : null;
+        this.Code3xx = 'Code3xx' in params ? params.Code3xx : null;
         this.Code4xx = 'Code4xx' in params ? params.Code4xx : null;
         this.Code5xx = 'Code5xx' in params ? params.Code5xx : null;
 
@@ -7128,7 +7160,7 @@ class ProIspPlaySumInfo extends  AbstractModel {
         super();
 
         /**
-         * 省份/运营商。
+         * 省份/运营商/国家或地区。
          * @type {string || null}
          */
         this.Name = null;

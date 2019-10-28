@@ -74,7 +74,7 @@ class TextProcessResponse extends  AbstractModel {
         this.SessionAttributes = null;
 
         /**
-         * 结果类型 {0:未命中机器人; 1:任务型机器人; 2:问答型机器人; 3:闲聊型机器人}
+         * 结果类型 {中间逻辑出错:0; 任务型机器人:1; 问答型机器人:2; 闲聊型机器人:3; 未匹配上，返回预设兜底话术:5; 未匹配上，返回相似问题列表:6}。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
@@ -229,7 +229,7 @@ class TextResetRequest extends  AbstractModel {
         this.TerminalId = null;
 
         /**
-         * 平台类型，{小程序：MiniProgram；小微：XiaoWei；公众号：OfficialAccount}。
+         * 平台类型，{小程序：MiniProgram；小微：XiaoWei；公众号：OfficialAccount；企业微信: WXWork}。
          * @type {string || null}
          */
         this.PlatformType = null;
@@ -309,7 +309,7 @@ class TextResetResponse extends  AbstractModel {
         this.SessionAttributes = null;
 
         /**
-         * 结果类型 {未命中机器人:0; 任务型机器人:1; 问答型机器人:2; 闲聊型机器人:3}。
+         * 结果类型 {中间逻辑出错:0; 任务型机器人:1; 问答型机器人:2; 闲聊型机器人:3; 未匹配上，返回预设兜底话术:5; 未匹配上，返回相似问题列表:6}。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
@@ -432,7 +432,7 @@ class TextProcessRequest extends  AbstractModel {
         this.SessionAttributes = null;
 
         /**
-         * 平台类型，{小程序：MiniProgram；小微：XiaoWei；公众号：OfficialAccount}。
+         * 平台类型，{小程序：MiniProgram；小微：XiaoWei；公众号：OfficialAccount；企业微信: WXWork}。
          * @type {string || null}
          */
         this.PlatformType = null;
