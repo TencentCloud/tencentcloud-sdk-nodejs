@@ -668,6 +668,34 @@ class CancelKeyDeletionRequest extends  AbstractModel {
 }
 
 /**
+ * GenerateRandom请求参数结构体
+ * @class
+ */
+class GenerateRandomRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 生成的随机数的长度。最小值为1， 最大值为1024。
+         * @type {number || null}
+         */
+        this.NumberOfBytes = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.NumberOfBytes = 'NumberOfBytes' in params ? params.NumberOfBytes : null;
+
+    }
+}
+
+/**
  * 返回CMK列表信息
  * @class
  */
@@ -856,7 +884,7 @@ class ImportKeyMaterialRequest extends  AbstractModel {
         this.KeyId = null;
 
         /**
-         * 密钥材料过期时间 unix 时间戳，不指定或者 0 表示密钥材料不会过期，若指定过期时间，需要大于当前时间点。
+         * 密钥材料过期时间 unix 时间戳，不指定或者 0 表示密钥材料不会过期，若指定过期时间，需要大于当前时间点，最大支持 2147443200。
          * @type {number || null}
          */
         this.ValidTo = null;
@@ -1806,6 +1834,41 @@ class EnableKeysRequest extends  AbstractModel {
 }
 
 /**
+ * GenerateRandom返回参数结构体
+ * @class
+ */
+class GenerateRandomResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 生成的随机数的明文，该明文使用base64编码，用户需要使用base64解码得到明文。
+         * @type {string || null}
+         */
+        this.Plaintext = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Plaintext = 'Plaintext' in params ? params.Plaintext : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeKey返回参数结构体
  * @class
  */
@@ -1983,6 +2046,7 @@ module.exports = {
     ReEncryptResponse: ReEncryptResponse,
     DescribeKeyRequest: DescribeKeyRequest,
     CancelKeyDeletionRequest: CancelKeyDeletionRequest,
+    GenerateRandomRequest: GenerateRandomRequest,
     Key: Key,
     DeleteImportedKeyMaterialRequest: DeleteImportedKeyMaterialRequest,
     EnableKeyResponse: EnableKeyResponse,
@@ -2011,6 +2075,7 @@ module.exports = {
     ListKeyDetailRequest: ListKeyDetailRequest,
     UpdateKeyDescriptionRequest: UpdateKeyDescriptionRequest,
     EnableKeysRequest: EnableKeysRequest,
+    GenerateRandomResponse: GenerateRandomResponse,
     DescribeKeyResponse: DescribeKeyResponse,
     EncryptResponse: EncryptResponse,
     DescribeKeysRequest: DescribeKeysRequest,

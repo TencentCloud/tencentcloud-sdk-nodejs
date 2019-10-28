@@ -5781,6 +5781,34 @@ class PoliticalAsrReviewTemplateInfoForUpdate extends  AbstractModel {
 }
 
 /**
+ * 微信小程序发布任务类型
+ * @class
+ */
+class WechatMiniProgramPublishTaskInput extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 发布视频所对应的转码模板 ID，为 0 代表原始视频。
+         * @type {number || null}
+         */
+        this.SourceDefinition = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SourceDefinition = 'SourceDefinition' in params ? params.SourceDefinition : null;
+
+    }
+}
+
+/**
  * AI 样本管理，人脸数据操作。
  * @class
  */
@@ -5861,6 +5889,17 @@ class SvgWatermarkInputForUpdate extends  AbstractModel {
          */
         this.Height = null;
 
+        /**
+         * 水印周期配置，用于配置水印周期性地显示与隐藏。
+主要使用场景是：为了视频防遮标，在视频多个地方设置水印，这些水印按固定顺序周期性地显示与隐藏。
+比如，设置 A、B、C、D 4 个水印分别位于视频的左上角、右上角、右下角、左下角处，视频开始时，{ A 显示 5 秒 -> B 显示 5 秒 -> C 显示 5 秒 -> D 显示 5 秒 } -> A 显示 5 秒 -> B 显示 5 秒 -> ...，任何时刻只显示一处水印。
+花括号 {} 表示由 A、B、C、D 4 个水印组成的大周期，可以看出每个大周期持续 20 秒。
+可以看出，A、B、C、D 都是周期性地显示 5 秒、隐藏 15 秒，且四者有固定的显示顺序。
+此配置项即用来描述单个水印的周期配置。
+         * @type {WatermarkCycleConfigForUpdate || null}
+         */
+        this.CycleConfig = null;
+
     }
 
     /**
@@ -5872,6 +5911,12 @@ class SvgWatermarkInputForUpdate extends  AbstractModel {
         }
         this.Width = 'Width' in params ? params.Width : null;
         this.Height = 'Height' in params ? params.Height : null;
+
+        if (params.CycleConfig) {
+            let obj = new WatermarkCycleConfigForUpdate();
+            obj.deserialize(params.CycleConfig)
+            this.CycleConfig = obj;
+        }
 
     }
 }
@@ -6839,7 +6884,7 @@ PicUrlExpireTime 时间点后图片将被删除）。
 
         /**
          * 嫌疑图片 URL 失效时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F)。
-         * @type {number || null}
+         * @type {string || null}
          */
         this.PicUrlExpireTime = null;
 
@@ -8911,7 +8956,7 @@ class ProcessMediaRequest extends  AbstractModel {
         super();
 
         /**
-         * 媒体文件 ID。
+         * 媒体文件 ID，即该文件在云点播上的全局唯一标识符，在上传成功后由云点播后台分配。可以在 [视频上传完成事件通知](/document/product/266/7830) 或 [云点播控制台](https://console.cloud.tencent.com/vod/media) 获取该字段。
          * @type {string || null}
          */
         this.FileId = null;
@@ -11946,6 +11991,13 @@ class ProcedureTemplate extends  AbstractModel {
         this.AiRecognitionTask = null;
 
         /**
+         * 微信小程序发布任务参数。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {WechatMiniProgramPublishTaskInput || null}
+         */
+        this.MiniProgramPublishTask = null;
+
+        /**
          * 模板创建时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F)。
          * @type {string || null}
          */
@@ -11991,6 +12043,12 @@ class ProcedureTemplate extends  AbstractModel {
             let obj = new AiRecognitionTaskInput();
             obj.deserialize(params.AiRecognitionTask)
             this.AiRecognitionTask = obj;
+        }
+
+        if (params.MiniProgramPublishTask) {
+            let obj = new WechatMiniProgramPublishTaskInput();
+            obj.deserialize(params.MiniProgramPublishTask)
+            this.MiniProgramPublishTask = obj;
         }
         this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
         this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
@@ -22515,6 +22573,49 @@ class CommitUploadRequest extends  AbstractModel {
 }
 
 /**
+ * 水印周期配置。
+ * @class
+ */
+class WatermarkCycleConfigForUpdate extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 水印在视频里第一次出现的播放时间点，单位：秒。
+         * @type {number || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * 在一个水印周期内，水印显示的持续时间，单位：秒。
+         * @type {number || null}
+         */
+        this.DisplayDuration = null;
+
+        /**
+         * 一个水印周期的持续时间，单位：秒。
+填 0 表示水印只持续一个水印周期（即在整个视频里只显示 DisplayDuration 秒）。
+         * @type {number || null}
+         */
+        this.CycleDuration = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.DisplayDuration = 'DisplayDuration' in params ? params.DisplayDuration : null;
+        this.CycleDuration = 'CycleDuration' in params ? params.CycleDuration : null;
+
+    }
+}
+
+/**
  * 视频指定时间点截图任务信息，该结构仅用于 2017 版[指定时间点截图](https://cloud.tencent.com/document/product/266/8102)接口发起的任务。
  * @class
  */
@@ -24149,6 +24250,7 @@ module.exports = {
     ClassificationConfigureInfoForUpdate: ClassificationConfigureInfoForUpdate,
     CreateWordSamplesRequest: CreateWordSamplesRequest,
     PoliticalAsrReviewTemplateInfoForUpdate: PoliticalAsrReviewTemplateInfoForUpdate,
+    WechatMiniProgramPublishTaskInput: WechatMiniProgramPublishTaskInput,
     AiSampleFaceOperation: AiSampleFaceOperation,
     SvgWatermarkInputForUpdate: SvgWatermarkInputForUpdate,
     AiRecognitionTaskOcrWordsResult: AiRecognitionTaskOcrWordsResult,
@@ -24447,6 +24549,7 @@ module.exports = {
     AiReviewPoliticalOcrTaskOutput: AiReviewPoliticalOcrTaskOutput,
     OcrFullTextConfigureInfo: OcrFullTextConfigureInfo,
     CommitUploadRequest: CommitUploadRequest,
+    WatermarkCycleConfigForUpdate: WatermarkCycleConfigForUpdate,
     SnapshotByTimeOffsetTask2017: SnapshotByTimeOffsetTask2017,
     MediaClassInfo: MediaClassInfo,
     DescribeTranscodeTemplatesResponse: DescribeTranscodeTemplatesResponse,

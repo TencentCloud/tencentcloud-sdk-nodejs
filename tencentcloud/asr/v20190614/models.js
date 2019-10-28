@@ -212,7 +212,10 @@ class CreateRecTaskRequest extends  AbstractModel {
         super();
 
         /**
-         * 引擎类型。8k_0：电话 8k 通用模型；16k_0：16k 通用模型；8k_6: 电话场景下单声道话者分离模型。
+         * 引擎类型。
+8k_0：电话 8k 通用模型；
+16k_0：16k 通用模型；
+8k_6: 电话场景下单声道话者分离模型。
          * @type {string || null}
          */
         this.EngineModelType = null;
@@ -236,7 +239,7 @@ class CreateRecTaskRequest extends  AbstractModel {
         this.SourceType = null;
 
         /**
-         * 回调 URL，用户自行搭建的用于接收识别结果的服务器地址， 长度小于2048字节。
+         * 回调 URL，用户自行搭建的用于接收识别结果的服务器地址， 长度小于2048字节。如果用户使用回调方式获取识别结果，需提交该参数；如果用户使用轮询方式获取识别结果，则无需提交该参数。
          * @type {string || null}
          */
         this.CallbackUrl = null;
@@ -341,7 +344,11 @@ class SentenceRecognitionRequest extends  AbstractModel {
         this.SubServiceType = null;
 
         /**
-         * 引擎类型。8k：电话 8k 中文普通话通用；16k：16k 中文普通话通用；16k_en：16k 英语；16k_ca：16k 粤语。
+         * 引擎类型。
+8k：电话 8k 中文普通话通用；
+16k：16k 中文普通话通用；
+16k_en：16k 英语；
+16k_ca：16k 粤语。
          * @type {string || null}
          */
         this.EngSerViceType = null;
