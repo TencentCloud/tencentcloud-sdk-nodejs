@@ -17,33 +17,39 @@
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const TextResult = models.TextResult;
+const DetectDisgustRequest = models.DetectDisgustRequest;
 const Candidate = models.Candidate;
 const TerrorismResult = models.TerrorismResult;
 const DetectCelebrityResponse = models.DetectCelebrityResponse;
+const CropImageRequest = models.CropImageRequest;
 const DetectProductRequest = models.DetectProductRequest;
 const ImageModerationResponse = models.ImageModerationResponse;
 const ImageModerationRequest = models.ImageModerationRequest;
 const AssessQualityResponse = models.AssessQualityResponse;
-const Product = models.Product;
+const DetectDisgustResponse = models.DetectDisgustResponse;
 const DetectLabelRequest = models.DetectLabelRequest;
 const DetectLabelResponse = models.DetectLabelResponse;
 const EnhanceImageResponse = models.EnhanceImageResponse;
 const DisgustResult = models.DisgustResult;
 const AssessQualityRequest = models.AssessQualityRequest;
 const RecognizeCarResponse = models.RecognizeCarResponse;
+const DetectMisbehaviorResponse = models.DetectMisbehaviorResponse;
 const RecognizeCarRequest = models.RecognizeCarRequest;
 const EnhanceImageRequest = models.EnhanceImageRequest;
+const CropImageResponse = models.CropImageResponse;
 const DetectCelebrityRequest = models.DetectCelebrityRequest;
-const DetectProductResponse = models.DetectProductResponse;
+const Coord = models.Coord;
 const Face = models.Face;
 const PoliticsResult = models.PoliticsResult;
 const PornResult = models.PornResult;
-const Coord = models.Coord;
+const DetectProductResponse = models.DetectProductResponse;
 const FaceResult = models.FaceResult;
 const DetectLabelItem = models.DetectLabelItem;
 const Labels = models.Labels;
+const Product = models.Product;
 const CarTagItem = models.CarTagItem;
 const FaceRect = models.FaceRect;
+const DetectMisbehaviorRequest = models.DetectMisbehaviorRequest;
 
 
 /**
@@ -87,6 +93,43 @@ class TiiaClient extends AbstractClient {
     AssessQuality(req, cb) {
         let resp = new AssessQualityResponse();
         this.request("AssessQuality", req, resp, cb);
+    }
+
+    /**
+     * 输入一张图片，返回AI针对一张图片是否是恶心的一系列判断值。
+
+通过恶心图片识别, 可以判断一张图片是否令人恶心, 同时给出它属于的潜在类别, 让您能够过滤掉使人不愉快的图片.
+     * @param {DetectDisgustRequest} req
+     * @param {function(string, DetectDisgustResponse):void} cb
+     * @public
+     */
+    DetectDisgust(req, cb) {
+        let resp = new DetectDisgustResponse();
+        this.request("DetectDisgust", req, resp, cb);
+    }
+
+    /**
+     * 根据输入的裁剪比例，智能判断一张图片的最佳裁剪区域，确保原图的主体区域不受影响。
+
+可以自动裁剪图片，适应不同平台、设备的展示要求，避免简单拉伸带来的变形。
+     * @param {CropImageRequest} req
+     * @param {function(string, CropImageResponse):void} cb
+     * @public
+     */
+    CropImage(req, cb) {
+        let resp = new CropImageResponse();
+        this.request("CropImage", req, resp, cb);
+    }
+
+    /**
+     * 可以识别输入的图片中是否包含不良行为，例如打架斗殴、赌博、抽烟等，可以应用于广告图、直播截图、短视频截图等审核，减少不良行为对平台内容质量的影响，维护健康向上的互联网环境。
+     * @param {DetectMisbehaviorRequest} req
+     * @param {function(string, DetectMisbehaviorResponse):void} cb
+     * @public
+     */
+    DetectMisbehavior(req, cb) {
+        let resp = new DetectMisbehaviorResponse();
+        this.request("DetectMisbehavior", req, resp, cb);
     }
 
     /**

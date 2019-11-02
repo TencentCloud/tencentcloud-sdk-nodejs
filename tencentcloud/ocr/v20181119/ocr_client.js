@@ -16,7 +16,6 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
-const InstitutionOCRResponse = models.InstitutionOCRResponse;
 const BusinessCardOCRResponse = models.BusinessCardOCRResponse;
 const TextArithmetic = models.TextArithmetic;
 const BankCardOCRRequest = models.BankCardOCRRequest;
@@ -34,18 +33,21 @@ const PermitOCRResponse = models.PermitOCRResponse;
 const InvoiceGeneralOCRRequest = models.InvoiceGeneralOCRRequest;
 const Rect = models.Rect;
 const WaybillOCRResponse = models.WaybillOCRResponse;
+const SingleInvoiceInfo = models.SingleInvoiceInfo;
 const TextFormula = models.TextFormula;
 const MLIDCardOCRRequest = models.MLIDCardOCRRequest;
 const VehicleRegCertInfo = models.VehicleRegCertInfo;
 const VehicleLicenseOCRRequest = models.VehicleLicenseOCRRequest;
+const EnterpriseLicenseOCRResponse = models.EnterpriseLicenseOCRResponse;
 const InvoiceGeneralInfo = models.InvoiceGeneralInfo;
-const FormulaOCRRequest = models.FormulaOCRRequest;
+const InstitutionOCRResponse = models.InstitutionOCRResponse;
 const DriverLicenseOCRRequest = models.DriverLicenseOCRRequest;
 const TextDetection = models.TextDetection;
 const TextEduPaper = models.TextEduPaper;
 const QrcodeOCRResponse = models.QrcodeOCRResponse;
 const WaybillObj = models.WaybillObj;
 const InvoiceDetectInfo = models.InvoiceDetectInfo;
+const EnterpriseLicenseOCRRequest = models.EnterpriseLicenseOCRRequest;
 const FinanBillInfo = models.FinanBillInfo;
 const TrainTicketOCRResponse = models.TrainTicketOCRResponse;
 const TollInvoiceInfo = models.TollInvoiceInfo;
@@ -56,6 +58,7 @@ const TextVatInvoice = models.TextVatInvoice;
 const GeneralHandwritingOCRRequest = models.GeneralHandwritingOCRRequest;
 const BizLicenseOCRRequest = models.BizLicenseOCRRequest;
 const MixedInvoiceDetectResponse = models.MixedInvoiceDetectResponse;
+const InsuranceBillOCRResponse = models.InsuranceBillOCRResponse;
 const GeneralEfficientOCRResponse = models.GeneralEfficientOCRResponse;
 const TextTable = models.TextTable;
 const QrcodeOCRRequest = models.QrcodeOCRRequest;
@@ -104,10 +107,10 @@ const Coord = models.Coord;
 const DutyPaidProofInfo = models.DutyPaidProofInfo;
 const FinanBillOCRResponse = models.FinanBillOCRResponse;
 const TextWaybill = models.TextWaybill;
-const SingleInvoiceInfo = models.SingleInvoiceInfo;
+const QuestionObj = models.QuestionObj;
 const VinOCRResponse = models.VinOCRResponse;
 const ArithmeticOCRRequest = models.ArithmeticOCRRequest;
-const ShipInvoiceInfo = models.ShipInvoiceInfo;
+const FormulaOCRRequest = models.FormulaOCRRequest;
 const PassportOCRRequest = models.PassportOCRRequest;
 const DutyPaidProofOCRRequest = models.DutyPaidProofOCRRequest;
 const OrgCodeCertOCRResponse = models.OrgCodeCertOCRResponse;
@@ -115,6 +118,7 @@ const MixedInvoiceOCRRequest = models.MixedInvoiceOCRRequest;
 const CarInvoiceOCRResponse = models.CarInvoiceOCRResponse;
 const GeneralFastOCRRequest = models.GeneralFastOCRRequest;
 const ShipInvoiceOCRResponse = models.ShipInvoiceOCRResponse;
+const InsuranceBillInfo = models.InsuranceBillInfo;
 const VehicleRegCertOCRResponse = models.VehicleRegCertOCRResponse;
 const GeneralAccurateOCRResponse = models.GeneralAccurateOCRResponse;
 const BusInvoiceOCRResponse = models.BusInvoiceOCRResponse;
@@ -122,10 +126,14 @@ const QrcodeResultsInfo = models.QrcodeResultsInfo;
 const EnglishOCRResponse = models.EnglishOCRResponse;
 const BusInvoiceOCRRequest = models.BusInvoiceOCRRequest;
 const QuotaInvoiceOCRResponse = models.QuotaInvoiceOCRResponse;
+const EnterpriseLicenseInfo = models.EnterpriseLicenseInfo;
+const InsuranceBillOCRRequest = models.InsuranceBillOCRRequest;
 const GeneralHandwritingOCRResponse = models.GeneralHandwritingOCRResponse;
 const TableOCRResponse = models.TableOCRResponse;
+const QuestionBlockObj = models.QuestionBlockObj;
 const WaybillOCRRequest = models.WaybillOCRRequest;
 const VatRollInvoiceInfo = models.VatRollInvoiceInfo;
+const ShipInvoiceInfo = models.ShipInvoiceInfo;
 const IDCardOCRRequest = models.IDCardOCRRequest;
 const MixedInvoiceDetectRequest = models.MixedInvoiceDetectRequest;
 const MLIDCardOCRResponse = models.MLIDCardOCRResponse;
@@ -150,6 +158,28 @@ class OcrClient extends AbstractClient {
         super("ocr.tencentcloudapi.com", "2018-11-19", credential, region, profile);
     }
     
+    /**
+     * 本接口支持病案首页、费用清单、结算单、医疗发票四种保险理赔单据的文本识别和结构化输出。
+     * @param {InsuranceBillOCRRequest} req
+     * @param {function(string, InsuranceBillOCRResponse):void} cb
+     * @public
+     */
+    InsuranceBillOCR(req, cb) {
+        let resp = new InsuranceBillOCRResponse();
+        this.request("InsuranceBillOCR", req, resp, cb);
+    }
+
+    /**
+     * 本接口支持智能化识别各类企业登记证书、许可证书、企业执照、三证合一类证书，结构化输出统一社会信用代码、公司名称、法定代表人、公司地址、注册资金、企业类型、经营范围等关键字段。
+     * @param {EnterpriseLicenseOCRRequest} req
+     * @param {function(string, EnterpriseLicenseOCRResponse):void} cb
+     * @public
+     */
+    EnterpriseLicenseOCR(req, cb) {
+        let resp = new EnterpriseLicenseOCRResponse();
+        this.request("EnterpriseLicenseOCR", req, resp, cb);
+    }
+
     /**
      * 本接口支持名片各字段的自动定位与识别，包含姓名、电话、手机号、邮箱、公司、部门、职位、网址、地址、QQ、微信、MSN等。
      * @param {BusinessCardOCRRequest} req
@@ -209,14 +239,14 @@ class OcrClient extends AbstractClient {
     }
 
     /**
-     * 本接口支持事业单位法人证书关键字段识别，包括注册号、有效期、住所、名称、法定代表人等。
-     * @param {InstitutionOCRRequest} req
-     * @param {function(string, InstitutionOCRResponse):void} cb
+     * 本接口支持图像整体文字的检测和识别，返回文字框位置与文字内容。相比通用印刷体识别接口，准确率和召回率更高。
+     * @param {GeneralAccurateOCRRequest} req
+     * @param {function(string, GeneralAccurateOCRResponse):void} cb
      * @public
      */
-    InstitutionOCR(req, cb) {
-        let resp = new InstitutionOCRResponse();
-        this.request("InstitutionOCR", req, resp, cb);
+    GeneralAccurateOCR(req, cb) {
+        let resp = new GeneralAccurateOCRResponse();
+        this.request("GeneralAccurateOCR", req, resp, cb);
     }
 
     /**
@@ -533,14 +563,14 @@ class OcrClient extends AbstractClient {
     }
 
     /**
-     * 本接口支持图像整体文字的检测和识别，返回文字框位置与文字内容。相比通用印刷体识别接口，准确率和召回率更高。
-     * @param {GeneralAccurateOCRRequest} req
-     * @param {function(string, GeneralAccurateOCRResponse):void} cb
+     * 本接口支持事业单位法人证书关键字段识别，包括注册号、有效期、住所、名称、法定代表人等。
+     * @param {InstitutionOCRRequest} req
+     * @param {function(string, InstitutionOCRResponse):void} cb
      * @public
      */
-    GeneralAccurateOCR(req, cb) {
-        let resp = new GeneralAccurateOCRResponse();
-        this.request("GeneralAccurateOCR", req, resp, cb);
+    InstitutionOCR(req, cb) {
+        let resp = new InstitutionOCRResponse();
+        this.request("InstitutionOCR", req, resp, cb);
     }
 
     /**

@@ -47,6 +47,11 @@ class TextResult extends  AbstractModel {
 PASS：正常
 REVIEW：疑似
 BLOCK：违规
+
+Suggestion由Type决定：
+Type为 NOTEXT/NORMAL 时，Suggestion为PASS；
+Type为 POLITICS/PORN/TERRORISM/ADS 时，Suggestion为BLOCK；
+其他情况下Suggestion为REVIEW。
          * @type {string || null}
          */
         this.Suggestion = null;
@@ -101,6 +106,48 @@ OTHERS：其他
         this.Keywords = 'Keywords' in params ? params.Keywords : null;
         this.Type = 'Type' in params ? params.Type : null;
         this.AdvancedInfo = 'AdvancedInfo' in params ? params.AdvancedInfo : null;
+
+    }
+}
+
+/**
+ * DetectDisgust请求参数结构体
+ * @class
+ */
+class DetectDisgustRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 图片URL地址。 
+图片限制： 
+• 图片格式：PNG、JPG、JPEG。 
+• 图片大小：所下载图片经Base64编码后不超过4M。图片下载时间不超过3秒。 
+建议：
+• 图片像素：大于50*50像素，否则影响识别效果； 
+• 长宽比：长边：短边<5； 
+接口响应时间会受到图片下载时间的影响，建议使用更可靠的存储服务，推荐将图片存储在腾讯云COS。
+         * @type {string || null}
+         */
+        this.ImageUrl = null;
+
+        /**
+         * 图片经过base64编码的内容。最大不超过4M。与ImageUrl同时存在时优先使用ImageUrl字段。
+         * @type {string || null}
+         */
+        this.ImageBase64 = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ImageUrl = 'ImageUrl' in params ? params.ImageUrl : null;
+        this.ImageBase64 = 'ImageBase64' in params ? params.ImageBase64 : null;
 
     }
 }
@@ -272,6 +319,66 @@ class DetectCelebrityResponse extends  AbstractModel {
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CropImage请求参数结构体
+ * @class
+ */
+class CropImageRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 需要裁剪区域的宽度，与Height共同组成所需裁剪的图片宽高比例；
+输入数字请大于0、小于图片宽度的像素值；
+         * @type {number || null}
+         */
+        this.Width = null;
+
+        /**
+         * 需要裁剪区域的高度，与Width共同组成所需裁剪的图片宽高比例；
+输入数字请请大于0、小于图片高度的像素值；
+宽高比例（Width : Height）会简化为最简分数，即如果Width输入10、Height输入20，会简化为1：2。
+Width : Height建议取值在[1, 2.5]之间，超过这个范围可能会影响效果；
+         * @type {number || null}
+         */
+        this.Height = null;
+
+        /**
+         * 图片URL地址。 
+图片限制： 
+• 图片格式：PNG、JPG、JPEG。 
+• 图片大小：所下载图片经Base64编码后不超过4M。图片下载时间不超过3秒。 
+建议：
+• 图片像素：大于50*50像素，否则影响识别效果； 
+• 长宽比：长边：短边<5； 
+接口响应时间会受到图片下载时间的影响，建议使用更可靠的存储服务，推荐将图片存储在腾讯云COS。
+         * @type {string || null}
+         */
+        this.ImageUrl = null;
+
+        /**
+         * 图片经过base64编码的内容。最大不超过4M。与ImageUrl同时存在时优先使用ImageUrl字段。
+         * @type {string || null}
+         */
+        this.ImageBase64 = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Width = 'Width' in params ? params.Width : null;
+        this.Height = 'Height' in params ? params.Height : null;
+        this.ImageUrl = 'ImageUrl' in params ? params.ImageUrl : null;
+        this.ImageBase64 = 'ImageBase64' in params ? params.ImageBase64 : null;
 
     }
 }
@@ -574,54 +681,30 @@ class AssessQualityResponse extends  AbstractModel {
 }
 
 /**
- * 检测到的单个商品结构体
+ * DetectDisgust返回参数结构体
  * @class
  */
-class Product extends  AbstractModel {
+class DetectDisgustResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 图片中商品的三级分类识别结果，选取所有三级分类中的置信度最大者
-         * @type {string || null}
-         */
-        this.Name = null;
-
-        /**
-         * 三级商品分类对应的一级分类和二级分类，两级之间用“-”（中划线）隔开，例如商品名称是“硬盘”，那么Parents输出为“电脑、办公-电脑配件”
-         * @type {string || null}
-         */
-        this.Parents = null;
-
-        /**
-         * 算法对于Name的置信度，0-100之间，值越高，表示对于Name越确定
+         * 对于图片中包含恶心内容的置信度，取值[0,1]，一般超过0.5则表明可能是恶心图片。
          * @type {number || null}
          */
         this.Confidence = null;
 
         /**
-         * 商品坐标X轴的最小值
-         * @type {number || null}
+         * 与图像内容最相似的恶心内容的类别，包含腐烂、密集、畸形、血腥、蛇、虫子、牙齿等。
+         * @type {string || null}
          */
-        this.XMin = null;
+        this.Type = null;
 
         /**
-         * 商品坐标Y轴的最小值
-         * @type {number || null}
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
          */
-        this.YMin = null;
-
-        /**
-         * 商品坐标X轴的最大值
-         * @type {number || null}
-         */
-        this.XMax = null;
-
-        /**
-         * 商品坐标Y轴的最大值
-         * @type {number || null}
-         */
-        this.YMax = null;
+        this.RequestId = null;
 
     }
 
@@ -632,13 +715,9 @@ class Product extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Name = 'Name' in params ? params.Name : null;
-        this.Parents = 'Parents' in params ? params.Parents : null;
         this.Confidence = 'Confidence' in params ? params.Confidence : null;
-        this.XMin = 'XMin' in params ? params.XMin : null;
-        this.YMin = 'YMin' in params ? params.YMin : null;
-        this.XMax = 'XMax' in params ? params.XMax : null;
-        this.YMax = 'YMax' in params ? params.YMax : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -919,6 +998,48 @@ class RecognizeCarResponse extends  AbstractModel {
 }
 
 /**
+ * DetectMisbehavior返回参数结构体
+ * @class
+ */
+class DetectMisbehaviorResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 对于图片中包含不良行为的置信度，取值[0,1]，一般超过0.5则表明可能包含不良行为内容；
+         * @type {number || null}
+         */
+        this.Confidence = null;
+
+        /**
+         * 图像中最可能包含的不良行为类别，包括赌博、打架斗殴、吸毒等。
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Confidence = 'Confidence' in params ? params.Confidence : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * RecognizeCar请求参数结构体
  * @class
  */
@@ -1005,6 +1126,90 @@ class EnhanceImageRequest extends  AbstractModel {
 }
 
 /**
+ * CropImage返回参数结构体
+ * @class
+ */
+class CropImageResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 裁剪区域左上角X坐标值
+         * @type {number || null}
+         */
+        this.X = null;
+
+        /**
+         * 裁剪区域左上角Y坐标值
+         * @type {number || null}
+         */
+        this.Y = null;
+
+        /**
+         * 裁剪区域的宽度，单位为像素
+         * @type {number || null}
+         */
+        this.Width = null;
+
+        /**
+         * 裁剪区域的高度，单位为像素
+         * @type {number || null}
+         */
+        this.Height = null;
+
+        /**
+         * 原图宽度，单位为像素
+         * @type {number || null}
+         */
+        this.OriginalWidth = null;
+
+        /**
+         * 原图高度，单位为像素
+         * @type {number || null}
+         */
+        this.OriginalHeight = null;
+
+        /**
+         * 0：抠图正常, 1：原图过长, 2：原图过宽, 3：抠图区域过长, 4：抠图区域过宽, 5：纯色图 6：宽高比异常
+原图过长是指原图的高度是宽度的1.8倍以上；
+原图过宽是指原图的宽度是高度的1.8倍以上；
+抠图区域过长是指抠图的高度是主体备选框高度的1.6倍以上；
+抠图过宽是指当没有检测到人脸时，抠图区域宽度是检测出的原图主体区域宽度的1.6倍以上；
+纯色图是指裁剪区域视觉较为单一、缺乏主体部分；
+Width : Height取值超出[1, 2.5]的范围；
+以上是辅助决策的参考建议，可以根据业务需求选择采纳或忽视。
+         * @type {number || null}
+         */
+        this.CropResult = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.X = 'X' in params ? params.X : null;
+        this.Y = 'Y' in params ? params.Y : null;
+        this.Width = 'Width' in params ? params.Width : null;
+        this.Height = 'Height' in params ? params.Height : null;
+        this.OriginalWidth = 'OriginalWidth' in params ? params.OriginalWidth : null;
+        this.OriginalHeight = 'OriginalHeight' in params ? params.OriginalHeight : null;
+        this.CropResult = 'CropResult' in params ? params.CropResult : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DetectCelebrity请求参数结构体
  * @class
  */
@@ -1047,24 +1252,24 @@ class DetectCelebrityRequest extends  AbstractModel {
 }
 
 /**
- * DetectProduct返回参数结构体
+ * 汽车坐标信息
  * @class
  */
-class DetectProductResponse extends  AbstractModel {
+class Coord extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 商品识别结果数组
-         * @type {Array.<Product> || null}
+         * 横坐标x
+         * @type {number || null}
          */
-        this.Products = null;
+        this.X = null;
 
         /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
+         * 纵坐标y
+         * @type {number || null}
          */
-        this.RequestId = null;
+        this.Y = null;
 
     }
 
@@ -1075,16 +1280,8 @@ class DetectProductResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.Products) {
-            this.Products = new Array();
-            for (let z in params.Products) {
-                let obj = new Product();
-                obj.deserialize(params.Products[z]);
-                this.Products.push(obj);
-            }
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.X = 'X' in params ? params.X : null;
+        this.Y = 'Y' in params ? params.Y : null;
 
     }
 }
@@ -1340,24 +1537,24 @@ BLOCK：违规
 }
 
 /**
- * 汽车坐标信息
+ * DetectProduct返回参数结构体
  * @class
  */
-class Coord extends  AbstractModel {
+class DetectProductResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 横坐标x
-         * @type {number || null}
+         * 商品识别结果数组
+         * @type {Array.<Product> || null}
          */
-        this.X = null;
+        this.Products = null;
 
         /**
-         * 纵坐标y
-         * @type {number || null}
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
          */
-        this.Y = null;
+        this.RequestId = null;
 
     }
 
@@ -1368,8 +1565,16 @@ class Coord extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.X = 'X' in params ? params.X : null;
-        this.Y = 'Y' in params ? params.Y : null;
+
+        if (params.Products) {
+            this.Products = new Array();
+            for (let z in params.Products) {
+                let obj = new Product();
+                obj.deserialize(params.Products[z]);
+                this.Products.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1495,6 +1700,76 @@ class Labels extends  AbstractModel {
 }
 
 /**
+ * 检测到的单个商品结构体
+ * @class
+ */
+class Product extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 图片中商品的三级分类识别结果，选取所有三级分类中的置信度最大者
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 三级商品分类对应的一级分类和二级分类，两级之间用“-”（中划线）隔开，例如商品名称是“硬盘”，那么Parents输出为“电脑、办公-电脑配件”
+         * @type {string || null}
+         */
+        this.Parents = null;
+
+        /**
+         * 算法对于Name的置信度，0-100之间，值越高，表示对于Name越确定
+         * @type {number || null}
+         */
+        this.Confidence = null;
+
+        /**
+         * 商品坐标X轴的最小值
+         * @type {number || null}
+         */
+        this.XMin = null;
+
+        /**
+         * 商品坐标Y轴的最小值
+         * @type {number || null}
+         */
+        this.YMin = null;
+
+        /**
+         * 商品坐标X轴的最大值
+         * @type {number || null}
+         */
+        this.XMax = null;
+
+        /**
+         * 商品坐标Y轴的最大值
+         * @type {number || null}
+         */
+        this.YMax = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Parents = 'Parents' in params ? params.Parents : null;
+        this.Confidence = 'Confidence' in params ? params.Confidence : null;
+        this.XMin = 'XMin' in params ? params.XMin : null;
+        this.YMin = 'YMin' in params ? params.YMin : null;
+        this.XMax = 'XMax' in params ? params.XMax : null;
+        this.YMax = 'YMax' in params ? params.YMax : null;
+
+    }
+}
+
+/**
  * 车辆属性识别的结果
  * @class
  */
@@ -1607,34 +1882,82 @@ class FaceRect extends  AbstractModel {
     }
 }
 
+/**
+ * DetectMisbehavior请求参数结构体
+ * @class
+ */
+class DetectMisbehaviorRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 图片URL地址。 
+图片限制： 
+• 图片格式：PNG、JPG、JPEG。 
+• 图片大小：所下载图片经Base64编码后不超过4M。图片下载时间不超过3秒。 
+建议：
+• 图片像素：大于50*50像素，否则影响识别效果； 
+• 长宽比：长边：短边<5； 
+接口响应时间会受到图片下载时间的影响，建议使用更可靠的存储服务，推荐将图片存储在腾讯云COS。
+         * @type {string || null}
+         */
+        this.ImageUrl = null;
+
+        /**
+         * 图片经过base64编码的内容。最大不超过4M。与ImageUrl同时存在时优先使用ImageUrl字段。
+         * @type {string || null}
+         */
+        this.ImageBase64 = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ImageUrl = 'ImageUrl' in params ? params.ImageUrl : null;
+        this.ImageBase64 = 'ImageBase64' in params ? params.ImageBase64 : null;
+
+    }
+}
+
 module.exports = {
     TextResult: TextResult,
+    DetectDisgustRequest: DetectDisgustRequest,
     Candidate: Candidate,
     TerrorismResult: TerrorismResult,
     DetectCelebrityResponse: DetectCelebrityResponse,
+    CropImageRequest: CropImageRequest,
     DetectProductRequest: DetectProductRequest,
     ImageModerationResponse: ImageModerationResponse,
     ImageModerationRequest: ImageModerationRequest,
     AssessQualityResponse: AssessQualityResponse,
-    Product: Product,
+    DetectDisgustResponse: DetectDisgustResponse,
     DetectLabelRequest: DetectLabelRequest,
     DetectLabelResponse: DetectLabelResponse,
     EnhanceImageResponse: EnhanceImageResponse,
     DisgustResult: DisgustResult,
     AssessQualityRequest: AssessQualityRequest,
     RecognizeCarResponse: RecognizeCarResponse,
+    DetectMisbehaviorResponse: DetectMisbehaviorResponse,
     RecognizeCarRequest: RecognizeCarRequest,
     EnhanceImageRequest: EnhanceImageRequest,
+    CropImageResponse: CropImageResponse,
     DetectCelebrityRequest: DetectCelebrityRequest,
-    DetectProductResponse: DetectProductResponse,
+    Coord: Coord,
     Face: Face,
     PoliticsResult: PoliticsResult,
     PornResult: PornResult,
-    Coord: Coord,
+    DetectProductResponse: DetectProductResponse,
     FaceResult: FaceResult,
     DetectLabelItem: DetectLabelItem,
     Labels: Labels,
+    Product: Product,
     CarTagItem: CarTagItem,
     FaceRect: FaceRect,
+    DetectMisbehaviorRequest: DetectMisbehaviorRequest,
 
 }

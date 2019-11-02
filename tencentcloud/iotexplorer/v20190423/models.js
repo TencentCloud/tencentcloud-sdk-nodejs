@@ -400,6 +400,74 @@ class ListEventHistoryRequest extends  AbstractModel {
 }
 
 /**
+ * ListEventHistory返回参数结构体
+ * @class
+ */
+class ListEventHistoryResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 搜索上下文, 用作查询游标
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Context = null;
+
+        /**
+         * 搜索结果数量
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Total = null;
+
+        /**
+         * 搜索结果是否已经结束
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.Listover = null;
+
+        /**
+         * 搜集结果集
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<EventHistoryItem> || null}
+         */
+        this.EventHistory = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Context = 'Context' in params ? params.Context : null;
+        this.Total = 'Total' in params ? params.Total : null;
+        this.Listover = 'Listover' in params ? params.Listover : null;
+
+        if (params.EventHistory) {
+            this.EventHistory = new Array();
+            for (let z in params.EventHistory) {
+                let obj = new EventHistoryItem();
+                obj.deserialize(params.EventHistory[z]);
+                this.EventHistory.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * 设备历史数据结构
  * @class
  */
@@ -1251,75 +1319,18 @@ class ModifyModelDefinitionRequest extends  AbstractModel {
 }
 
 /**
- * DescribeDevice请求参数结构体
+ * CreateStudioProduct返回参数结构体
  * @class
  */
-class DescribeDeviceRequest extends  AbstractModel {
+class CreateStudioProductResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 产品ID
-         * @type {string || null}
+         * 产品描述
+         * @type {ProductEntry || null}
          */
-        this.ProductId = null;
-
-        /**
-         * 设备名
-         * @type {string || null}
-         */
-        this.DeviceName = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.ProductId = 'ProductId' in params ? params.ProductId : null;
-        this.DeviceName = 'DeviceName' in params ? params.DeviceName : null;
-
-    }
-}
-
-/**
- * ListEventHistory返回参数结构体
- * @class
- */
-class ListEventHistoryResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 搜索上下文, 用作查询游标
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.Context = null;
-
-        /**
-         * 搜索结果数量
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.Total = null;
-
-        /**
-         * 搜索结果是否已经结束
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {boolean || null}
-         */
-        this.Listover = null;
-
-        /**
-         * 搜集结果集
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {Array.<EventHistoryItem> || null}
-         */
-        this.EventHistory = null;
+        this.Product = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1336,19 +1347,62 @@ class ListEventHistoryResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Context = 'Context' in params ? params.Context : null;
-        this.Total = 'Total' in params ? params.Total : null;
-        this.Listover = 'Listover' in params ? params.Listover : null;
 
-        if (params.EventHistory) {
-            this.EventHistory = new Array();
-            for (let z in params.EventHistory) {
-                let obj = new EventHistoryItem();
-                obj.deserialize(params.EventHistory[z]);
-                this.EventHistory.push(obj);
-            }
+        if (params.Product) {
+            let obj = new ProductEntry();
+            obj.deserialize(params.Product)
+            this.Product = obj;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CallDeviceActionSync请求参数结构体
+ * @class
+ */
+class CallDeviceActionSyncRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 产品Id
+         * @type {string || null}
+         */
+        this.ProductId = null;
+
+        /**
+         * 设备名称
+         * @type {string || null}
+         */
+        this.DeviceName = null;
+
+        /**
+         * 动作Id
+         * @type {string || null}
+         */
+        this.ActionId = null;
+
+        /**
+         * 输入参数
+         * @type {string || null}
+         */
+        this.InputParams = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ProductId = 'ProductId' in params ? params.ProductId : null;
+        this.DeviceName = 'DeviceName' in params ? params.DeviceName : null;
+        this.ActionId = 'ActionId' in params ? params.ActionId : null;
+        this.InputParams = 'InputParams' in params ? params.InputParams : null;
 
     }
 }
@@ -1419,6 +1473,56 @@ class ModifyProjectRequest extends  AbstractModel {
         this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
         this.ProjectName = 'ProjectName' in params ? params.ProjectName : null;
         this.ProjectDesc = 'ProjectDesc' in params ? params.ProjectDesc : null;
+
+    }
+}
+
+/**
+ * CallDeviceActionSync返回参数结构体
+ * @class
+ */
+class CallDeviceActionSyncResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 调用Id
+         * @type {string || null}
+         */
+        this.ClientToken = null;
+
+        /**
+         * 输出参数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.OutputParams = null;
+
+        /**
+         * 返回状态
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClientToken = 'ClientToken' in params ? params.ClientToken : null;
+        this.OutputParams = 'OutputParams' in params ? params.OutputParams : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1806,26 +1910,24 @@ class DeleteProjectResponse extends  AbstractModel {
 }
 
 /**
- * GetProjectList返回参数结构体
+ * CallDeviceActionAsync返回参数结构体
  * @class
  */
-class GetProjectListResponse extends  AbstractModel {
+class CallDeviceActionAsyncResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 项目列表
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {Array.<ProjectEntryEx> || null}
+         * 调用Id
+         * @type {string || null}
          */
-        this.Projects = null;
+        this.ClientToken = null;
 
         /**
-         * 列表项个数
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
+         * 异步调用状态
+         * @type {string || null}
          */
-        this.Total = null;
+        this.Status = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1842,17 +1944,58 @@ class GetProjectListResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.Projects) {
-            this.Projects = new Array();
-            for (let z in params.Projects) {
-                let obj = new ProjectEntryEx();
-                obj.deserialize(params.Projects[z]);
-                this.Projects.push(obj);
-            }
-        }
-        this.Total = 'Total' in params ? params.Total : null;
+        this.ClientToken = 'ClientToken' in params ? params.ClientToken : null;
+        this.Status = 'Status' in params ? params.Status : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CallDeviceActionAsync请求参数结构体
+ * @class
+ */
+class CallDeviceActionAsyncRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 产品Id
+         * @type {string || null}
+         */
+        this.ProductId = null;
+
+        /**
+         * 设备名称
+         * @type {string || null}
+         */
+        this.DeviceName = null;
+
+        /**
+         * 动作Id
+         * @type {string || null}
+         */
+        this.ActionId = null;
+
+        /**
+         * 输入参数
+         * @type {string || null}
+         */
+        this.InputParams = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ProductId = 'ProductId' in params ? params.ProductId : null;
+        this.DeviceName = 'DeviceName' in params ? params.DeviceName : null;
+        this.ActionId = 'ActionId' in params ? params.ActionId : null;
+        this.InputParams = 'InputParams' in params ? params.InputParams : null;
 
     }
 }
@@ -2219,24 +2362,30 @@ class ModifyModelDefinitionResponse extends  AbstractModel {
 }
 
 /**
- * CreateStudioProduct返回参数结构体
+ * DescribeDevice请求参数结构体
  * @class
  */
-class CreateStudioProductResponse extends  AbstractModel {
+class DescribeDeviceRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 产品描述
-         * @type {ProductEntry || null}
-         */
-        this.Product = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * 产品ID
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.ProductId = null;
+
+        /**
+         * 设备名
+         * @type {string || null}
+         */
+        this.DeviceName = null;
+
+        /**
+         * 设备ID，该字段有值将代替 ProductId/DeviceName
+         * @type {string || null}
+         */
+        this.DeviceId = null;
 
     }
 
@@ -2247,13 +2396,9 @@ class CreateStudioProductResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.Product) {
-            let obj = new ProductEntry();
-            obj.deserialize(params.Product)
-            this.Product = obj;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.ProductId = 'ProductId' in params ? params.ProductId : null;
+        this.DeviceName = 'DeviceName' in params ? params.DeviceName : null;
+        this.DeviceId = 'DeviceId' in params ? params.DeviceId : null;
 
     }
 }
@@ -2381,6 +2526,58 @@ class DescribeDeviceResponse extends  AbstractModel {
 }
 
 /**
+ * GetProjectList返回参数结构体
+ * @class
+ */
+class GetProjectListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 项目列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<ProjectEntryEx> || null}
+         */
+        this.Projects = null;
+
+        /**
+         * 列表项个数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Total = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Projects) {
+            this.Projects = new Array();
+            for (let z in params.Projects) {
+                let obj = new ProjectEntryEx();
+                obj.deserialize(params.Projects[z]);
+                this.Projects.push(obj);
+            }
+        }
+        this.Total = 'Total' in params ? params.Total : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * CreateProject请求参数结构体
  * @class
  */
@@ -2424,6 +2621,7 @@ module.exports = {
     DescribeStudioProductRequest: DescribeStudioProductRequest,
     DeleteProjectRequest: DeleteProjectRequest,
     ListEventHistoryRequest: ListEventHistoryRequest,
+    ListEventHistoryResponse: ListEventHistoryResponse,
     DeviceDataHistoryItem: DeviceDataHistoryItem,
     ProductEntry: ProductEntry,
     GetStudioProductListResponse: GetStudioProductListResponse,
@@ -2441,10 +2639,11 @@ module.exports = {
     ProjectEntry: ProjectEntry,
     ModifyProjectResponse: ModifyProjectResponse,
     ModifyModelDefinitionRequest: ModifyModelDefinitionRequest,
-    DescribeDeviceRequest: DescribeDeviceRequest,
-    ListEventHistoryResponse: ListEventHistoryResponse,
+    CreateStudioProductResponse: CreateStudioProductResponse,
+    CallDeviceActionSyncRequest: CallDeviceActionSyncRequest,
     DeleteStudioProductRequest: DeleteStudioProductRequest,
     ModifyProjectRequest: ModifyProjectRequest,
+    CallDeviceActionSyncResponse: CallDeviceActionSyncResponse,
     ModifyStudioProductRequest: ModifyStudioProductRequest,
     DescribeDeviceDataHistoryResponse: DescribeDeviceDataHistoryResponse,
     CreateStudioProductRequest: CreateStudioProductRequest,
@@ -2453,7 +2652,8 @@ module.exports = {
     ReleaseStudioProductRequest: ReleaseStudioProductRequest,
     DescribeModelDefinitionRequest: DescribeModelDefinitionRequest,
     DeleteProjectResponse: DeleteProjectResponse,
-    GetProjectListResponse: GetProjectListResponse,
+    CallDeviceActionAsyncResponse: CallDeviceActionAsyncResponse,
+    CallDeviceActionAsyncRequest: CallDeviceActionAsyncRequest,
     DescribeDeviceDataResponse: DescribeDeviceDataResponse,
     CreateDeviceResponse: CreateDeviceResponse,
     CreateDeviceRequest: CreateDeviceRequest,
@@ -2463,10 +2663,11 @@ module.exports = {
     DeleteDeviceResponse: DeleteDeviceResponse,
     DeviceInfo: DeviceInfo,
     ModifyModelDefinitionResponse: ModifyModelDefinitionResponse,
-    CreateStudioProductResponse: CreateStudioProductResponse,
+    DescribeDeviceRequest: DescribeDeviceRequest,
     GetDeviceListRequest: GetDeviceListRequest,
     DescribeStudioProductResponse: DescribeStudioProductResponse,
     DescribeDeviceResponse: DescribeDeviceResponse,
+    GetProjectListResponse: GetProjectListResponse,
     CreateProjectRequest: CreateProjectRequest,
 
 }

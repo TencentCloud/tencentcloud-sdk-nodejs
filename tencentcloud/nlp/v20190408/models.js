@@ -199,7 +199,7 @@ class KeywordsExtractionRequest extends  AbstractModel {
         super();
 
         /**
-         * 待处理的文本（仅支持UTF-8格式，不超过2000字）
+         * 待处理的文本（仅支持UTF-8格式，不超过10000字）
          * @type {string || null}
          */
         this.Text = null;

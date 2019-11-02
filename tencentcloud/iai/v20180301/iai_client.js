@@ -17,10 +17,12 @@
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const GetPersonGroupInfoResponse = models.GetPersonGroupInfoResponse;
+const SearchFacesReturnsByGroupResponse = models.SearchFacesReturnsByGroupResponse;
 const Candidate = models.Candidate;
 const ModifyGroupResponse = models.ModifyGroupResponse;
 const DeletePersonRequest = models.DeletePersonRequest;
 const DetectLiveFaceResponse = models.DetectLiveFaceResponse;
+const SearchPersonsReturnsByGroupResponse = models.SearchPersonsReturnsByGroupResponse;
 const DeleteFaceRequest = models.DeleteFaceRequest;
 const ModifyPersonBaseInfoResponse = models.ModifyPersonBaseInfoResponse;
 const GetGroupListResponse = models.GetGroupListResponse;
@@ -34,18 +36,24 @@ const CreatePersonRequest = models.CreatePersonRequest;
 const DeleteGroupRequest = models.DeleteGroupRequest;
 const CreateFaceResponse = models.CreateFaceResponse;
 const ModifyPersonBaseInfoRequest = models.ModifyPersonBaseInfoRequest;
+const GroupCandidate = models.GroupCandidate;
+const SearchPersonsResponse = models.SearchPersonsResponse;
 const CompareFaceResponse = models.CompareFaceResponse;
 const PersonExDescriptionInfo = models.PersonExDescriptionInfo;
 const DetectLiveFaceRequest = models.DetectLiveFaceRequest;
 const VerifyFaceResponse = models.VerifyFaceResponse;
 const GetPersonBaseInfoResponse = models.GetPersonBaseInfoResponse;
+const ResultsReturnsByGroup = models.ResultsReturnsByGroup;
 const CreateFaceRequest = models.CreateFaceRequest;
+const SearchFacesReturnsByGroupRequest = models.SearchFacesReturnsByGroupRequest;
 const CreateGroupRequest = models.CreateGroupRequest;
 const ModifyPersonGroupInfoRequest = models.ModifyPersonGroupInfoRequest;
 const GetPersonGroupInfoRequest = models.GetPersonGroupInfoRequest;
 const Result = models.Result;
+const VerifyPersonRequest = models.VerifyPersonRequest;
 const FaceInfo = models.FaceInfo;
 const DeleteGroupResponse = models.DeleteGroupResponse;
+const SearchPersonsRequest = models.SearchPersonsRequest;
 const FaceQualityInfo = models.FaceQualityInfo;
 const CompareFaceRequest = models.CompareFaceRequest;
 const PersonInfo = models.PersonInfo;
@@ -53,7 +61,9 @@ const FaceShape = models.FaceShape;
 const DetectFaceResponse = models.DetectFaceResponse;
 const CopyPersonRequest = models.CopyPersonRequest;
 const GetPersonListNumRequest = models.GetPersonListNumRequest;
+const SearchPersonsReturnsByGroupRequest = models.SearchPersonsReturnsByGroupRequest;
 const DeletePersonFromGroupResponse = models.DeletePersonFromGroupResponse;
+const VerifyPersonResponse = models.VerifyPersonResponse;
 const AnalyzeFaceResponse = models.AnalyzeFaceResponse;
 const GetGroupListRequest = models.GetGroupListRequest;
 const FaceHairAttributesInfo = models.FaceHairAttributesInfo;
@@ -96,6 +106,18 @@ class IaiClient extends AbstractClient {
     DeletePersonFromGroup(req, cb) {
         let resp = new DeletePersonFromGroupResponse();
         this.request("DeletePersonFromGroup", req, resp, cb);
+    }
+
+    /**
+     * 用于对一张待识别的人脸图片，在一个或多个人员库中识别出最相似的 TopN 人员，按照人员库的维度以人员相似度从大到小顺序排列。
+此接口需与[人员库管理相关接口](https://cloud.tencent.com/document/product/867/32794)结合使用。
+     * @param {SearchFacesReturnsByGroupRequest} req
+     * @param {function(string, SearchFacesReturnsByGroupResponse):void} cb
+     * @public
+     */
+    SearchFacesReturnsByGroup(req, cb) {
+        let resp = new SearchFacesReturnsByGroupResponse();
+        this.request("SearchFacesReturnsByGroup", req, resp, cb);
     }
 
     /**
@@ -202,6 +224,8 @@ class IaiClient extends AbstractClient {
 
     /**
      * 将已存在于某人员库的人员复制到其他人员库，该人员的描述信息不会被复制。单个人员最多只能同时存在100个人员库中。
+>     
+- 注：若该人员创建时算法模型版本为2.0，复制到非2.0算法模型版本的Group中时，复制操作将会失败。
      * @param {CopyPersonRequest} req
      * @param {function(string, CopyPersonResponse):void} cb
      * @public
@@ -329,6 +353,24 @@ class IaiClient extends AbstractClient {
     }
 
     /**
+     * 给定一张人脸图片和一个 PersonId，判断图片中的人和 PersonId 对应的人是否为同一人。PersonId 请参考[人员库管理相关接口](https://cloud.tencent.com/document/product/867/32794)。
+本接口会将该人员（Person）下的所有人脸（Face）进行融合特征处理，即若某个Person下有4张 Face，本接口会将4张 Face 的特征进行融合处理，生成对应这个 Person 的特征，使人员验证（确定待识别的人脸图片是某人员）更加准确。
+
+ 和人脸比对相关接口不同的是，人脸验证相关接口用于判断 “此人是否是此人”，“此人”的信息已存于人员库中，“此人”可能存在多张人脸图片；而人脸比对相关接口用于判断两张人脸的相似度。
+
+
+>     
+- 公共参数中的签名方式请使用V3版本，即配置SignatureMethod参数为TC3-HMAC-SHA256。
+     * @param {VerifyPersonRequest} req
+     * @param {function(string, VerifyPersonResponse):void} cb
+     * @public
+     */
+    VerifyPerson(req, cb) {
+        let resp = new VerifyPersonResponse();
+        this.request("VerifyPerson", req, resp, cb);
+    }
+
+    /**
      * 修改指定人员库人员描述内容。
      * @param {ModifyPersonGroupInfoRequest} req
      * @param {function(string, ModifyPersonGroupInfoResponse):void} cb
@@ -337,6 +379,23 @@ class IaiClient extends AbstractClient {
     ModifyPersonGroupInfo(req, cb) {
         let resp = new ModifyPersonGroupInfoResponse();
         this.request("ModifyPersonGroupInfo", req, resp, cb);
+    }
+
+    /**
+     * 用于对一张待识别的人脸图片，在一个或多个人员库中识别出最相似的 TopN 人员，按照相似度从大到小排列。
+
+本接口会将该人员（Person）下的所有人脸（Face）进行融合特征处理，即若某个 Person 下有4张 Face ，本接口会将4张 Face 的特征进行融合处理，生成对应这个 Person 的特征，使人员搜索（确定待识别的人脸图片是某人）更加准确。
+
+人员搜索接口和人脸搜索接口的区别是：人脸搜索会比对该 Person 下所有 Face ，而人员搜索比对的是该 Person 的 Person 特征。
+>     
+- 公共参数中的签名方式请使用V3版本，即配置SignatureMethod参数为TC3-HMAC-SHA256。
+     * @param {SearchPersonsRequest} req
+     * @param {function(string, SearchPersonsResponse):void} cb
+     * @public
+     */
+    SearchPersons(req, cb) {
+        let resp = new SearchPersonsResponse();
+        this.request("SearchPersons", req, resp, cb);
     }
 
     /**
@@ -353,6 +412,21 @@ class IaiClient extends AbstractClient {
     CompareFace(req, cb) {
         let resp = new CompareFaceResponse();
         this.request("CompareFace", req, resp, cb);
+    }
+
+    /**
+     * 用于对一张待识别的人脸图片，在一个或多个人员库中识别出最相似的 TopN 人员，按照人员库的维度以人员相似度从大到小顺序排列。
+
+本接口会将该人员（Person）下的所有人脸（Face）进行融合特征处理，即若某个Person下有4张 Face，本接口会将4张 Face 的特征进行融合处理，生成对应这个 Person 的特征，使人员搜索（确定待识别的人脸图片是某人员）更加准确。
+
+人员搜索和人脸搜索的区别是：人脸搜索比对该 Person 下所有 Face ，而人员搜索比对的是该 Person 的 Person 特征。
+     * @param {SearchPersonsReturnsByGroupRequest} req
+     * @param {function(string, SearchPersonsReturnsByGroupResponse):void} cb
+     * @public
+     */
+    SearchPersonsReturnsByGroup(req, cb) {
+        let resp = new SearchPersonsReturnsByGroupResponse();
+        this.request("SearchPersonsReturnsByGroup", req, resp, cb);
     }
 
     /**

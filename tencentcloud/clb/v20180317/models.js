@@ -823,16 +823,16 @@ class RsWeightRule extends  AbstractModel {
         this.ListenerId = null;
 
         /**
-         * 转发规则的ID
-         * @type {string || null}
-         */
-        this.LocationId = null;
-
-        /**
          * 要修改权重的后端机器列表
          * @type {Array.<Target> || null}
          */
         this.Targets = null;
+
+        /**
+         * 转发规则的ID，七层规则时需要此参数，4层规则不需要
+         * @type {string || null}
+         */
+        this.LocationId = null;
 
         /**
          * 目标规则的域名，提供LocationId参数时本参数不生效
@@ -862,7 +862,6 @@ class RsWeightRule extends  AbstractModel {
             return;
         }
         this.ListenerId = 'ListenerId' in params ? params.ListenerId : null;
-        this.LocationId = 'LocationId' in params ? params.LocationId : null;
 
         if (params.Targets) {
             this.Targets = new Array();
@@ -872,6 +871,7 @@ class RsWeightRule extends  AbstractModel {
                 this.Targets.push(obj);
             }
         }
+        this.LocationId = 'LocationId' in params ? params.LocationId : null;
         this.Domain = 'Domain' in params ? params.Domain : null;
         this.Url = 'Url' in params ? params.Url : null;
         this.Weight = 'Weight' in params ? params.Weight : null;
@@ -1724,6 +1724,13 @@ class Listener extends  AbstractModel {
          */
         this.CreateTime = null;
 
+        /**
+         * 端口段结束端口
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.EndPort = null;
+
     }
 
     /**
@@ -1762,6 +1769,7 @@ class Listener extends  AbstractModel {
         }
         this.ListenerName = 'ListenerName' in params ? params.ListenerName : null;
         this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.EndPort = 'EndPort' in params ? params.EndPort : null;
 
     }
 }
@@ -1916,6 +1924,12 @@ class ModifyListenerRequest extends  AbstractModel {
          */
         this.Scheduler = null;
 
+        /**
+         * 是否开启SNI特性，此参数仅适用于HTTPS监听器。注意：未开启SNI的监听器可以开启SNI；已开启SNI的监听器不能关闭SNI
+         * @type {number || null}
+         */
+        this.SniSwitch = null;
+
     }
 
     /**
@@ -1942,6 +1956,7 @@ class ModifyListenerRequest extends  AbstractModel {
             this.Certificate = obj;
         }
         this.Scheduler = 'Scheduler' in params ? params.Scheduler : null;
+        this.SniSwitch = 'SniSwitch' in params ? params.SniSwitch : null;
 
     }
 }
@@ -4267,7 +4282,7 @@ class ModifyDomainAttributesRequest extends  AbstractModel {
         this.Certificate = null;
 
         /**
-         * 是否开启Http2，注意，只用HTTPS域名才能开启Http2。
+         * 是否开启Http2，注意，只有HTTPS域名才能开启Http2。
          * @type {boolean || null}
          */
         this.Http2 = null;
@@ -4874,6 +4889,12 @@ class RuleInput extends  AbstractModel {
          */
         this.Http2 = null;
 
+        /**
+         * 后端目标类型，NODE表示绑定普通节点，TARGETGROUP表示绑定目标组
+         * @type {string || null}
+         */
+        this.TargetType = null;
+
     }
 
     /**
@@ -4902,6 +4923,7 @@ class RuleInput extends  AbstractModel {
         this.ForwardType = 'ForwardType' in params ? params.ForwardType : null;
         this.DefaultServer = 'DefaultServer' in params ? params.DefaultServer : null;
         this.Http2 = 'Http2' in params ? params.Http2 : null;
+        this.TargetType = 'TargetType' in params ? params.TargetType : null;
 
     }
 }
@@ -5385,6 +5407,20 @@ OPEN：公网属性， INTERNAL：内网属性。
          */
         this.ExtraInfo = null;
 
+        /**
+         * 是否可绑定高防包
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.IsDDos = null;
+
+        /**
+         * 负载均衡维度的个性化配置ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ConfigId = null;
+
     }
 
     /**
@@ -5469,6 +5505,8 @@ OPEN：公网属性， INTERNAL：内网属性。
             obj.deserialize(params.ExtraInfo)
             this.ExtraInfo = obj;
         }
+        this.IsDDos = 'IsDDos' in params ? params.IsDDos : null;
+        this.ConfigId = 'ConfigId' in params ? params.ConfigId : null;
 
     }
 }

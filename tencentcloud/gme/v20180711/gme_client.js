@@ -197,7 +197,7 @@ Type表示过滤类型，1：政治，2：色情，3：谩骂
 	<ul>
 		<li>使用 HMAC-SH1 算法, 最终结果做 BASE64 编码;</li>
 		<li>签名原文串为 POST+body 的整个json内容(长度以 Content-Length 为准);</li>
-		<li>签名key为应用的 secrectkey，可以通过控制台查看。</li>
+		<li>签名key为应用的 SecretKey，可以通过控制台查看。</li>
 	</ul>
 </ul>
 

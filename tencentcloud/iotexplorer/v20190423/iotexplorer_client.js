@@ -24,6 +24,7 @@ const DeviceData = models.DeviceData;
 const DescribeStudioProductRequest = models.DescribeStudioProductRequest;
 const DeleteProjectRequest = models.DeleteProjectRequest;
 const ListEventHistoryRequest = models.ListEventHistoryRequest;
+const ListEventHistoryResponse = models.ListEventHistoryResponse;
 const DeviceDataHistoryItem = models.DeviceDataHistoryItem;
 const ProductEntry = models.ProductEntry;
 const GetStudioProductListResponse = models.GetStudioProductListResponse;
@@ -41,10 +42,11 @@ const ReleaseStudioProductResponse = models.ReleaseStudioProductResponse;
 const ProjectEntry = models.ProjectEntry;
 const ModifyProjectResponse = models.ModifyProjectResponse;
 const ModifyModelDefinitionRequest = models.ModifyModelDefinitionRequest;
-const DescribeDeviceRequest = models.DescribeDeviceRequest;
-const ListEventHistoryResponse = models.ListEventHistoryResponse;
+const CreateStudioProductResponse = models.CreateStudioProductResponse;
+const CallDeviceActionSyncRequest = models.CallDeviceActionSyncRequest;
 const DeleteStudioProductRequest = models.DeleteStudioProductRequest;
 const ModifyProjectRequest = models.ModifyProjectRequest;
+const CallDeviceActionSyncResponse = models.CallDeviceActionSyncResponse;
 const ModifyStudioProductRequest = models.ModifyStudioProductRequest;
 const DescribeDeviceDataHistoryResponse = models.DescribeDeviceDataHistoryResponse;
 const CreateStudioProductRequest = models.CreateStudioProductRequest;
@@ -53,7 +55,8 @@ const CreateProjectResponse = models.CreateProjectResponse;
 const ReleaseStudioProductRequest = models.ReleaseStudioProductRequest;
 const DescribeModelDefinitionRequest = models.DescribeModelDefinitionRequest;
 const DeleteProjectResponse = models.DeleteProjectResponse;
-const GetProjectListResponse = models.GetProjectListResponse;
+const CallDeviceActionAsyncResponse = models.CallDeviceActionAsyncResponse;
+const CallDeviceActionAsyncRequest = models.CallDeviceActionAsyncRequest;
 const DescribeDeviceDataResponse = models.DescribeDeviceDataResponse;
 const CreateDeviceResponse = models.CreateDeviceResponse;
 const CreateDeviceRequest = models.CreateDeviceRequest;
@@ -63,10 +66,11 @@ const DescribeDeviceDataRequest = models.DescribeDeviceDataRequest;
 const DeleteDeviceResponse = models.DeleteDeviceResponse;
 const DeviceInfo = models.DeviceInfo;
 const ModifyModelDefinitionResponse = models.ModifyModelDefinitionResponse;
-const CreateStudioProductResponse = models.CreateStudioProductResponse;
+const DescribeDeviceRequest = models.DescribeDeviceRequest;
 const GetDeviceListRequest = models.GetDeviceListRequest;
 const DescribeStudioProductResponse = models.DescribeStudioProductResponse;
 const DescribeDeviceResponse = models.DescribeDeviceResponse;
+const GetProjectListResponse = models.GetProjectListResponse;
 const CreateProjectRequest = models.CreateProjectRequest;
 
 
@@ -166,6 +170,17 @@ class IotexplorerClient extends AbstractClient {
     DescribeDeviceDataHistory(req, cb) {
         let resp = new DescribeDeviceDataHistoryResponse();
         this.request("DescribeDeviceDataHistory", req, resp, cb);
+    }
+
+    /**
+     * 为用户提供同步调用设备动作的能力。
+     * @param {CallDeviceActionSyncRequest} req
+     * @param {function(string, CallDeviceActionSyncResponse):void} cb
+     * @public
+     */
+    CallDeviceActionSync(req, cb) {
+        let resp = new CallDeviceActionSyncResponse();
+        this.request("CallDeviceActionSync", req, resp, cb);
     }
 
     /**
@@ -287,6 +302,17 @@ class IotexplorerClient extends AbstractClient {
     CreateProject(req, cb) {
         let resp = new CreateProjectResponse();
         this.request("CreateProject", req, resp, cb);
+    }
+
+    /**
+     * 提供给用户异步调用设备动作的能力
+     * @param {CallDeviceActionAsyncRequest} req
+     * @param {function(string, CallDeviceActionAsyncResponse):void} cb
+     * @public
+     */
+    CallDeviceActionAsync(req, cb) {
+        let resp = new CallDeviceActionAsyncResponse();
+        this.request("CallDeviceActionAsync", req, resp, cb);
     }
 
     /**
