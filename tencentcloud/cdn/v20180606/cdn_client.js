@@ -60,6 +60,7 @@ const TopDetailData = models.TopDetailData;
 const GetDisableRecordsResponse = models.GetDisableRecordsResponse;
 const CdnIpHistory = models.CdnIpHistory;
 const SummarizedData = models.SummarizedData;
+const RegionMapRelation = models.RegionMapRelation;
 
 
 /**

@@ -29,6 +29,7 @@ module.exports = {
     cws: require("./cws"),
     dc: require("./dc"),
     dcdb: require("./dcdb"),
+    domain: require("./domain"),
     drm: require("./drm"),
     ds: require("./ds"),
     dts: require("./dts"),

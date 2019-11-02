@@ -38,6 +38,13 @@ class GetPersonGroupInfoResponse extends  AbstractModel {
         this.GroupNum = null;
 
         /**
+         * 人脸识别服务所用的算法模型版本。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.FaceModelVersion = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -62,6 +69,64 @@ class GetPersonGroupInfoResponse extends  AbstractModel {
             }
         }
         this.GroupNum = 'GroupNum' in params ? params.GroupNum : null;
+        this.FaceModelVersion = 'FaceModelVersion' in params ? params.FaceModelVersion : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * SearchFacesReturnsByGroup返回参数结构体
+ * @class
+ */
+class SearchFacesReturnsByGroupResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 搜索的人员库中包含的人脸数。
+         * @type {number || null}
+         */
+        this.FaceNum = null;
+
+        /**
+         * 识别结果。
+         * @type {Array.<ResultsReturnsByGroup> || null}
+         */
+        this.ResultsReturnsByGroup = null;
+
+        /**
+         * 人脸识别所用的算法模型版本。
+         * @type {string || null}
+         */
+        this.FaceModelVersion = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FaceNum = 'FaceNum' in params ? params.FaceNum : null;
+
+        if (params.ResultsReturnsByGroup) {
+            this.ResultsReturnsByGroup = new Array();
+            for (let z in params.ResultsReturnsByGroup) {
+                let obj = new ResultsReturnsByGroup();
+                obj.deserialize(params.ResultsReturnsByGroup[z]);
+                this.ResultsReturnsByGroup.push(obj);
+            }
+        }
+        this.FaceModelVersion = 'FaceModelVersion' in params ? params.FaceModelVersion : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -89,11 +154,12 @@ class Candidate extends  AbstractModel {
 
         /**
          * 候选者的匹配得分。 
-10万大小人脸库，若人脸均为类似抓拍照（人脸质量较差）， 
-误识率百分之一对应分数为70分，误识率千分之一对应分数为80分，误识率万分之一对应分数为90分； 
-若人脸均为类似自拍照（人脸质量较好）， 
-误识率百分之一对应分数为60分，误识率千分之一对应分数为70分，误识率万分之一对应分数为80分。 
-建议分数不要超过90分。您可以根据实际情况选择合适的分数。
+
+1万大小人脸底库下，误识率百分之一对应分数为70分，误识率千分之一对应分数为80分，误识率万分之一对应分数为90分；
+10万大小人脸底库下，误识率百分之一对应分数为80分，误识率千分之一对应分数为90分，误识率万分之一对应分数为100分；
+30万大小人脸底库下，误识率百分之一对应分数为85分，误识率千分之一对应分数为95分。
+
+一般80分左右可适用大部分场景，建议分数不要超过90分。您可以根据实际情况选择合适的分数。
          * @type {number || null}
          */
         this.Score = null;
@@ -232,6 +298,63 @@ class DetectLiveFaceResponse extends  AbstractModel {
             return;
         }
         this.Score = 'Score' in params ? params.Score : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * SearchPersonsReturnsByGroup返回参数结构体
+ * @class
+ */
+class SearchPersonsReturnsByGroupResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 搜索的人员库中包含的人员数。若输入图片中所有人脸均不符合质量要求，则返回0。
+         * @type {number || null}
+         */
+        this.PersonNum = null;
+
+        /**
+         * 识别结果。
+         * @type {Array.<ResultsReturnsByGroup> || null}
+         */
+        this.ResultsReturnsByGroup = null;
+
+        /**
+         * 人脸识别所用的算法模型版本。
+         * @type {string || null}
+         */
+        this.FaceModelVersion = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PersonNum = 'PersonNum' in params ? params.PersonNum : null;
+
+        if (params.ResultsReturnsByGroup) {
+            this.ResultsReturnsByGroup = new Array();
+            for (let z in params.ResultsReturnsByGroup) {
+                let obj = new ResultsReturnsByGroup();
+                obj.deserialize(params.ResultsReturnsByGroup[z]);
+                this.ResultsReturnsByGroup.push(obj);
+            }
+        }
+        this.FaceModelVersion = 'FaceModelVersion' in params ? params.FaceModelVersion : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -448,6 +571,13 @@ class GetPersonListResponse extends  AbstractModel {
         this.FaceNum = null;
 
         /**
+         * 人脸识别所用的算法模型版本。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.FaceModelVersion = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -473,6 +603,7 @@ class GetPersonListResponse extends  AbstractModel {
         }
         this.PersonNum = 'PersonNum' in params ? params.PersonNum : null;
         this.FaceNum = 'FaceNum' in params ? params.FaceNum : null;
+        this.FaceModelVersion = 'FaceModelVersion' in params ? params.FaceModelVersion : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -818,6 +949,34 @@ Url、Image必须提供一个，如果都提供，只使用 Url。
          */
         this.Url = null;
 
+        /**
+         * 此参数用于控制判断 Image 或 Url 中图片包含的人脸，是否在人员库中已有疑似的同一人。 
+如果判断为已有相同人在人员库中，则不会创建新的人员，返回疑似同一人的人员信息。 
+如果判断没有，则完成创建人员。 
+0: 不进行判断，无论是否有疑似同一人在库中均完成入库； 
+1:较低的同一人判断要求（百一误识别率）； 
+2: 一般的同一人判断要求（千一误识别率）； 
+3: 较高的同一人判断要求（万一误识别率）； 
+4: 很高的同一人判断要求（十万一误识别率）。 
+默认 0。  
+注： 要求越高，则疑似同一人的概率越小。不同要求对应的误识别率仅为参考值，您可以根据实际情况调整。
+         * @type {number || null}
+         */
+        this.UniquePersonControl = null;
+
+        /**
+         * 图片质量控制。 
+0: 不进行控制； 
+1:较低的质量要求，图像存在非常模糊，眼睛鼻子嘴巴遮挡至少其中一种或多种的情况； 
+2: 一般的质量要求，图像存在偏亮，偏暗，模糊或一般模糊，眉毛遮挡，脸颊遮挡，下巴遮挡，至少其中三种的情况； 
+3: 较高的质量要求，图像存在偏亮，偏暗，一般模糊，眉毛遮挡，脸颊遮挡，下巴遮挡，其中一到两种的情况； 
+4: 很高的质量要求，各个维度均为最好或最多在某一维度上存在轻微问题； 
+默认 0。 
+若图片质量不满足要求，则返回结果中会提示图片质量检测不符要求。
+         * @type {number || null}
+         */
+        this.QualityControl = null;
+
     }
 
     /**
@@ -842,6 +1001,8 @@ Url、Image必须提供一个，如果都提供，只使用 Url。
         }
         this.Image = 'Image' in params ? params.Image : null;
         this.Url = 'Url' in params ? params.Url : null;
+        this.UniquePersonControl = 'UniquePersonControl' in params ? params.UniquePersonControl : null;
+        this.QualityControl = 'QualityControl' in params ? params.QualityControl : null;
 
     }
 }
@@ -895,10 +1056,33 @@ class CreateFaceResponse extends  AbstractModel {
         this.SucFaceIds = null;
 
         /**
-         * 每张人脸图片添加结果，-1101 代表未检测到人脸，-1102 代表图片解码失败，其他非 0 值代表算法服务异常。
+         * 每张人脸图片添加结果，-1101 代表未检测到人脸，-1102 代表图片解码失败， 
+-1601代表不符合图片质量控制要求, 
+-1603 代表已有相似度超过99%的人脸存在，-1604 代表人脸相似度没有超过FaceMatchThreshold。 
+其他非 0 值代表算法服务异常。 
+RetCode的顺序和入参中 Images 或 Urls 的顺序一致。
          * @type {Array.<number> || null}
          */
         this.RetCode = null;
+
+        /**
+         * 加入成功的人脸索引。索引顺序和入参中 Images 或 Urls 的顺序一致。 
+例， Urls 中 有 3 个 url，第二个 url 失败，则 SucIndexes 值为 [0,2] 。
+         * @type {Array.<number> || null}
+         */
+        this.SucIndexes = null;
+
+        /**
+         * 加入成功的人脸框位置。顺序和入参中 Images 或 Urls 的顺序一致。
+         * @type {Array.<FaceRect> || null}
+         */
+        this.SucFaceRects = null;
+
+        /**
+         * 人脸识别所用的算法模型版本。
+         * @type {string || null}
+         */
+        this.FaceModelVersion = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -918,6 +1102,17 @@ class CreateFaceResponse extends  AbstractModel {
         this.SucFaceNum = 'SucFaceNum' in params ? params.SucFaceNum : null;
         this.SucFaceIds = 'SucFaceIds' in params ? params.SucFaceIds : null;
         this.RetCode = 'RetCode' in params ? params.RetCode : null;
+        this.SucIndexes = 'SucIndexes' in params ? params.SucIndexes : null;
+
+        if (params.SucFaceRects) {
+            this.SucFaceRects = new Array();
+            for (let z in params.SucFaceRects) {
+                let obj = new FaceRect();
+                obj.deserialize(params.SucFaceRects[z]);
+                this.SucFaceRects.push(obj);
+            }
+        }
+        this.FaceModelVersion = 'FaceModelVersion' in params ? params.FaceModelVersion : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -961,6 +1156,107 @@ class ModifyPersonBaseInfoRequest extends  AbstractModel {
         this.PersonId = 'PersonId' in params ? params.PersonId : null;
         this.PersonName = 'PersonName' in params ? params.PersonName : null;
         this.Gender = 'Gender' in params ? params.Gender : null;
+
+    }
+}
+
+/**
+ * 分组识别结果Item
+ * @class
+ */
+class GroupCandidate extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 人员库ID 。
+         * @type {string || null}
+         */
+        this.GroupId = null;
+
+        /**
+         * 识别出的最相似候选人。
+         * @type {Array.<Candidate> || null}
+         */
+        this.Candidates = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.GroupId = 'GroupId' in params ? params.GroupId : null;
+
+        if (params.Candidates) {
+            this.Candidates = new Array();
+            for (let z in params.Candidates) {
+                let obj = new Candidate();
+                obj.deserialize(params.Candidates[z]);
+                this.Candidates.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * SearchPersons返回参数结构体
+ * @class
+ */
+class SearchPersonsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 识别结果。
+         * @type {Array.<Result> || null}
+         */
+        this.Results = null;
+
+        /**
+         * 搜索的人员库中包含的人员数。若输入图片中所有人脸均不符合质量要求，则返回0。
+         * @type {number || null}
+         */
+        this.PersonNum = null;
+
+        /**
+         * 人脸识别所用的算法模型版本。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.FaceModelVersion = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Results) {
+            this.Results = new Array();
+            for (let z in params.Results) {
+                let obj = new Result();
+                obj.deserialize(params.Results[z]);
+                this.Results.push(obj);
+            }
+        }
+        this.PersonNum = 'PersonNum' in params ? params.PersonNum : null;
+        this.FaceModelVersion = 'FaceModelVersion' in params ? params.FaceModelVersion : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1097,6 +1393,10 @@ class VerifyFaceResponse extends  AbstractModel {
 
         /**
          * 给定的人脸图片与 PersonId 对应人脸的相似度。若 PersonId 下有多张人脸（Face），返回相似度最大的分数。
+
+不同算法版本返回的相似度分数不同。
+若需要验证两张图片中人脸是否为同一人，3.0版本误识率千分之一对应分数为40分，误识率万分之一对应分数为50分，误识率十万分之一对应分数为60分。 一般超过50分则可认定为同一人。
+2.0版本误识率千分之一对应分数为70分，误识率万分之一对应分数为80分，误识率十万分之一对应分数为90分。 一般超过80分则可认定为同一人。
          * @type {number || null}
          */
         this.Score = null;
@@ -1106,6 +1406,12 @@ class VerifyFaceResponse extends  AbstractModel {
          * @type {boolean || null}
          */
         this.IsMatch = null;
+
+        /**
+         * 人脸识别所用的算法模型版本。
+         * @type {string || null}
+         */
+        this.FaceModelVersion = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1124,6 +1430,7 @@ class VerifyFaceResponse extends  AbstractModel {
         }
         this.Score = 'Score' in params ? params.Score : null;
         this.IsMatch = 'IsMatch' in params ? params.IsMatch : null;
+        this.FaceModelVersion = 'FaceModelVersion' in params ? params.FaceModelVersion : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -1179,6 +1486,63 @@ class GetPersonBaseInfoResponse extends  AbstractModel {
 }
 
 /**
+ * 识别结果。
+
+ * @class
+ */
+class ResultsReturnsByGroup extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 检测出的人脸框位置。
+         * @type {FaceRect || null}
+         */
+        this.FaceRect = null;
+
+        /**
+         * 识别结果。
+         * @type {Array.<GroupCandidate> || null}
+         */
+        this.GroupCandidates = null;
+
+        /**
+         * 检测出的人脸图片状态返回码。0 表示正常。 
+-1601代表不符合图片质量控制要求，此时Candidate内容为空。
+         * @type {number || null}
+         */
+        this.RetCode = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.FaceRect) {
+            let obj = new FaceRect();
+            obj.deserialize(params.FaceRect)
+            this.FaceRect = obj;
+        }
+
+        if (params.GroupCandidates) {
+            this.GroupCandidates = new Array();
+            for (let z in params.GroupCandidates) {
+                let obj = new GroupCandidate();
+                obj.deserialize(params.GroupCandidates[z]);
+                this.GroupCandidates.push(obj);
+            }
+        }
+        this.RetCode = 'RetCode' in params ? params.RetCode : null;
+
+    }
+}
+
+/**
  * CreateFace请求参数结构体
  * @class
  */
@@ -1213,6 +1577,26 @@ Url、Image必须提供一个，如果都提供，只使用 Url。
          */
         this.Urls = null;
 
+        /**
+         * 只有和该人员已有的人脸相似度超过FaceMatchThreshold值的人脸，才能增加人脸成功。 
+默认值60分。取值范围[0,100] 。
+         * @type {number || null}
+         */
+        this.FaceMatchThreshold = null;
+
+        /**
+         * 图片质量控制。 
+0: 不进行控制； 
+1:较低的质量要求，图像存在非常模糊，眼睛鼻子嘴巴遮挡至少其中一种或多种的情况； 
+2: 一般的质量要求，图像存在偏亮，偏暗，模糊或一般模糊，眉毛遮挡，脸颊遮挡，下巴遮挡，至少其中三种的情况； 
+3: 较高的质量要求，图像存在偏亮，偏暗，一般模糊，眉毛遮挡，脸颊遮挡，下巴遮挡，其中一到两种的情况； 
+4: 很高的质量要求，各个维度均为最好或最多在某一维度上存在轻微问题； 
+默认 0。 
+若图片质量不满足要求，则返回结果中会提示图片质量检测不符要求。
+         * @type {number || null}
+         */
+        this.QualityControl = null;
+
     }
 
     /**
@@ -1225,6 +1609,109 @@ Url、Image必须提供一个，如果都提供，只使用 Url。
         this.PersonId = 'PersonId' in params ? params.PersonId : null;
         this.Images = 'Images' in params ? params.Images : null;
         this.Urls = 'Urls' in params ? params.Urls : null;
+        this.FaceMatchThreshold = 'FaceMatchThreshold' in params ? params.FaceMatchThreshold : null;
+        this.QualityControl = 'QualityControl' in params ? params.QualityControl : null;
+
+    }
+}
+
+/**
+ * SearchFacesReturnsByGroup请求参数结构体
+ * @class
+ */
+class SearchFacesReturnsByGroupRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 希望搜索的人员库列表，上限10个。
+         * @type {Array.<string> || null}
+         */
+        this.GroupIds = null;
+
+        /**
+         * 图片 base64 数据，base64 编码后大小不可超过5M。
+支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。
+         * @type {string || null}
+         */
+        this.Image = null;
+
+        /**
+         * 图片的 Url 。对应图片 base64 编码后大小不可超过5M。
+Url、Image必须提供一个，如果都提供，只使用 Url。
+图片存储于腾讯云的Url可保障更高下载速度和稳定性，建议图片存储于腾讯云。
+非腾讯云存储的Url速度和稳定性可能受一定影响。
+支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。
+         * @type {string || null}
+         */
+        this.Url = null;
+
+        /**
+         * 最多识别的人脸数目。默认值为1（仅检测图片中面积最大的那张人脸），最大值为10。
+MaxFaceNum用于，当输入的待识别图片包含多张人脸时，设定要搜索的人脸的数量。
+例：输入的Image或Url中的图片包含多张人脸，设MaxFaceNum=5，则会识别图片中面积最大的5张人脸。
+         * @type {number || null}
+         */
+        this.MaxFaceNum = null;
+
+        /**
+         * 人脸长和宽的最小尺寸，单位为像素。默认为80。低于40将影响搜索精度。建议设置为80。
+         * @type {number || null}
+         */
+        this.MinFaceSize = null;
+
+        /**
+         * 被检测到的人脸，对应最多返回的最相似人员数目。默认值为5，最大值为10。  
+例，设MaxFaceNum为3，MaxPersonNum为5，则最多可能返回3*5=15个人员。
+         * @type {number || null}
+         */
+        this.MaxPersonNumPerGroup = null;
+
+        /**
+         * 是否返回人员具体信息。0 为关闭，1 为开启。默认为 0。其他非0非1值默认为0
+         * @type {number || null}
+         */
+        this.NeedPersonInfo = null;
+
+        /**
+         * 图片质量控制。 
+0: 不进行控制； 
+1:较低的质量要求，图像存在非常模糊，眼睛鼻子嘴巴遮挡至少其中一种或多种的情况； 
+2: 一般的质量要求，图像存在偏亮，偏暗，模糊或一般模糊，眉毛遮挡，脸颊遮挡，下巴遮挡，至少其中三种的情况； 
+3: 较高的质量要求，图像存在偏亮，偏暗，一般模糊，眉毛遮挡，脸颊遮挡，下巴遮挡，其中一到两种的情况； 
+4: 很高的质量要求，各个维度均为最好或最多在某一维度上存在轻微问题； 
+默认 0。 
+若图片质量不满足要求，则返回结果中会提示图片质量检测不符要求。
+         * @type {number || null}
+         */
+        this.QualityControl = null;
+
+        /**
+         * 出参Score中，只有大于等于FaceMatchThreshold值的结果才会返回。
+默认为0。
+取值范围[0.0,100.0) 。
+         * @type {number || null}
+         */
+        this.FaceMatchThreshold = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.GroupIds = 'GroupIds' in params ? params.GroupIds : null;
+        this.Image = 'Image' in params ? params.Image : null;
+        this.Url = 'Url' in params ? params.Url : null;
+        this.MaxFaceNum = 'MaxFaceNum' in params ? params.MaxFaceNum : null;
+        this.MinFaceSize = 'MinFaceSize' in params ? params.MinFaceSize : null;
+        this.MaxPersonNumPerGroup = 'MaxPersonNumPerGroup' in params ? params.MaxPersonNumPerGroup : null;
+        this.NeedPersonInfo = 'NeedPersonInfo' in params ? params.NeedPersonInfo : null;
+        this.QualityControl = 'QualityControl' in params ? params.QualityControl : null;
+        this.FaceMatchThreshold = 'FaceMatchThreshold' in params ? params.FaceMatchThreshold : null;
 
     }
 }
@@ -1267,6 +1754,14 @@ class CreateGroupRequest extends  AbstractModel {
          */
         this.Tag = null;
 
+        /**
+         * 人脸识别服务所用的算法模型版本。目前入参支持 “2.0”和“3.0“ 两个输入。
+默认为"2.0"。
+不同算法模型版本对应的人脸识别算法不同，新版本的整体效果会优于旧版本，建议使用“3.0”版本。
+         * @type {string || null}
+         */
+        this.FaceModelVersion = null;
+
     }
 
     /**
@@ -1280,6 +1775,7 @@ class CreateGroupRequest extends  AbstractModel {
         this.GroupId = 'GroupId' in params ? params.GroupId : null;
         this.GroupExDescriptions = 'GroupExDescriptions' in params ? params.GroupExDescriptions : null;
         this.Tag = 'Tag' in params ? params.Tag : null;
+        this.FaceModelVersion = 'FaceModelVersion' in params ? params.FaceModelVersion : null;
 
     }
 }
@@ -1396,6 +1892,13 @@ class Result extends  AbstractModel {
          */
         this.FaceRect = null;
 
+        /**
+         * 检测出的人脸图片状态返回码。0 表示正常。 
+-1601代表不符合图片质量控制要求，此时Candidate内容为空。
+         * @type {number || null}
+         */
+        this.RetCode = null;
+
     }
 
     /**
@@ -1420,6 +1923,69 @@ class Result extends  AbstractModel {
             obj.deserialize(params.FaceRect)
             this.FaceRect = obj;
         }
+        this.RetCode = 'RetCode' in params ? params.RetCode : null;
+
+    }
+}
+
+/**
+ * VerifyPerson请求参数结构体
+ * @class
+ */
+class VerifyPersonRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 图片 base64 数据。
+若图片中包含多张人脸，只选取其中人脸面积最大的人脸。
+支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。
+         * @type {string || null}
+         */
+        this.Image = null;
+
+        /**
+         * 图片的 Url 。 图片的 Url、Image必须提供一个，如果都提供，只使用 Url。 
+图片存储于腾讯云的Url可保障更高下载速度和稳定性，建议图片存储于腾讯云。 
+非腾讯云存储的Url速度和稳定性可能受一定影响。
+若图片中包含多张人脸，只选取其中人脸面积最大的人脸。
+支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。
+         * @type {string || null}
+         */
+        this.Url = null;
+
+        /**
+         * 待验证的人员ID。人员ID具体信息请参考人员库管理相关接口。
+         * @type {string || null}
+         */
+        this.PersonId = null;
+
+        /**
+         * 图片质量控制。 
+0: 不进行控制； 
+1:较低的质量要求，图像存在非常模糊，眼睛鼻子嘴巴遮挡至少其中一种或多种的情况； 
+2: 一般的质量要求，图像存在偏亮，偏暗，模糊或一般模糊，眉毛遮挡，脸颊遮挡，下巴遮挡，至少其中三种的情况； 
+3: 较高的质量要求，图像存在偏亮，偏暗，一般模糊，眉毛遮挡，脸颊遮挡，下巴遮挡，其中一到两种的情况； 
+4: 很高的质量要求，各个维度均为最好或最多在某一维度上存在轻微问题； 
+默认 0。 
+若图片质量不满足要求，则返回结果中会提示图片质量检测不符要求。
+         * @type {number || null}
+         */
+        this.QualityControl = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Image = 'Image' in params ? params.Image : null;
+        this.Url = 'Url' in params ? params.Url : null;
+        this.PersonId = 'PersonId' in params ? params.PersonId : null;
+        this.QualityControl = 'QualityControl' in params ? params.QualityControl : null;
 
     }
 }
@@ -1527,6 +2093,102 @@ class DeleteGroupResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * SearchPersons请求参数结构体
+ * @class
+ */
+class SearchPersonsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 希望搜索的人员库列表，上限100个。
+         * @type {Array.<string> || null}
+         */
+        this.GroupIds = null;
+
+        /**
+         * 图片 base64 数据，base64 编码后大小不可超过5M。
+若图片中包含多张人脸，只选取其中人脸面积最大的人脸。
+支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。
+         * @type {string || null}
+         */
+        this.Image = null;
+
+        /**
+         * 图片的 Url 。对应图片 base64 编码后大小不可超过5M。
+Url、Image必须提供一个，如果都提供，只使用 Url。
+图片存储于腾讯云的Url可保障更高下载速度和稳定性，建议图片存储于腾讯云。
+非腾讯云存储的Url速度和稳定性可能受一定影响。
+支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。
+         * @type {string || null}
+         */
+        this.Url = null;
+
+        /**
+         * 最多识别的人脸数目。默认值为1（仅检测图片中面积最大的那张人脸），最大值为10。
+MaxFaceNum用于，当输入的待识别图片包含多张人脸时，设定要搜索的人脸的数量。
+例：输入的Image或Url中的图片包含多张人脸，设MaxFaceNum=5，则会识别图片中面积最大的5张人脸。
+         * @type {number || null}
+         */
+        this.MaxFaceNum = null;
+
+        /**
+         * 人脸长和宽的最小尺寸，单位为像素。默认为80。低于40将影响搜索精度。建议设置为80。
+         * @type {number || null}
+         */
+        this.MinFaceSize = null;
+
+        /**
+         * 单张被识别的人脸返回的最相似人员数量。默认值为5，最大值为100。
+例，设MaxFaceNum为1，MaxPersonNum为8，则返回Top8相似的人员信息。
+值越大，需要处理的时间越长。建议不要超过10。
+         * @type {number || null}
+         */
+        this.MaxPersonNum = null;
+
+        /**
+         * 此参数用于控制判断 Image 或 Url 中图片包含的人脸，是否在人员库中已有疑似的同一人。 
+如果判断为已有相同人在人员库中，则不会创建新的人员，返回疑似同一人的人员信息。 
+如果判断没有，则完成创建人员。 
+0: 不进行判断，无论是否有疑似同一人在库中均完成入库； 
+1:较低的同一人判断要求（百一误识别率）； 
+2: 一般的同一人判断要求（千一误识别率）； 
+3: 较高的同一人判断要求（万一误识别率）； 
+4: 很高的同一人判断要求（十万一误识别率）。 
+默认 0。  
+注： 要求越高，则疑似同一人的概率越小。不同要求对应的误识别率仅为参考值，您可以根据实际情况调整。
+         * @type {number || null}
+         */
+        this.QualityControl = null;
+
+        /**
+         * 出参Score中，只有大于等于FaceMatchThreshold值的结果才会返回。默认为0。取值范围[0.0,100.0) 。
+         * @type {number || null}
+         */
+        this.FaceMatchThreshold = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.GroupIds = 'GroupIds' in params ? params.GroupIds : null;
+        this.Image = 'Image' in params ? params.Image : null;
+        this.Url = 'Url' in params ? params.Url : null;
+        this.MaxFaceNum = 'MaxFaceNum' in params ? params.MaxFaceNum : null;
+        this.MinFaceSize = 'MinFaceSize' in params ? params.MinFaceSize : null;
+        this.MaxPersonNum = 'MaxPersonNum' in params ? params.MaxPersonNum : null;
+        this.QualityControl = 'QualityControl' in params ? params.QualityControl : null;
+        this.FaceMatchThreshold = 'FaceMatchThreshold' in params ? params.FaceMatchThreshold : null;
 
     }
 }
@@ -1650,6 +2312,19 @@ B 图片的 Url、Image必须提供一个，如果都提供，只使用 Url。
          */
         this.FaceModelVersion = null;
 
+        /**
+         * 图片质量控制。 
+0: 不进行控制； 
+1:较低的质量要求，图像存在非常模糊，眼睛鼻子嘴巴遮挡至少其中一种或多种的情况； 
+2: 一般的质量要求，图像存在偏亮，偏暗，模糊或一般模糊，眉毛遮挡，脸颊遮挡，下巴遮挡，至少其中三种的情况； 
+3: 较高的质量要求，图像存在偏亮，偏暗，一般模糊，眉毛遮挡，脸颊遮挡，下巴遮挡，其中一到两种的情况； 
+4: 很高的质量要求，各个维度均为最好或最多在某一维度上存在轻微问题； 
+默认 0。 
+若图片质量不满足要求，则返回结果中会提示图片质量检测不符要求。
+         * @type {number || null}
+         */
+        this.QualityControl = null;
+
     }
 
     /**
@@ -1664,6 +2339,7 @@ B 图片的 Url、Image必须提供一个，如果都提供，只使用 Url。
         this.UrlA = 'UrlA' in params ? params.UrlA : null;
         this.UrlB = 'UrlB' in params ? params.UrlB : null;
         this.FaceModelVersion = 'FaceModelVersion' in params ? params.FaceModelVersion : null;
+        this.QualityControl = 'QualityControl' in params ? params.QualityControl : null;
 
     }
 }
@@ -1706,6 +2382,13 @@ class PersonInfo extends  AbstractModel {
          */
         this.FaceIds = null;
 
+        /**
+         * Group的创建时间和日期 CreationTimestamp。CreationTimestamp 的值是自 Unix 纪元时间到Group创建时间的毫秒数。 
+Unix 纪元时间是 1970 年 1 月 1 日星期四，协调世界时 (UTC) 00:00:00。有关更多信息，请参阅 Unix 时间。
+         * @type {number || null}
+         */
+        this.CreationTimestamp = null;
+
     }
 
     /**
@@ -1720,6 +2403,7 @@ class PersonInfo extends  AbstractModel {
         this.Gender = 'Gender' in params ? params.Gender : null;
         this.PersonExDescriptions = 'PersonExDescriptions' in params ? params.PersonExDescriptions : null;
         this.FaceIds = 'FaceIds' in params ? params.FaceIds : null;
+        this.CreationTimestamp = 'CreationTimestamp' in params ? params.CreationTimestamp : null;
 
     }
 }
@@ -2008,6 +2692,98 @@ class GetPersonListNumRequest extends  AbstractModel {
 }
 
 /**
+ * SearchPersonsReturnsByGroup请求参数结构体
+ * @class
+ */
+class SearchPersonsReturnsByGroupRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 希望搜索的人员库列表，上限10个。
+         * @type {Array.<string> || null}
+         */
+        this.GroupIds = null;
+
+        /**
+         * 图片 base64 数据，base64 编码后大小不可超过5M。
+支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。
+         * @type {string || null}
+         */
+        this.Image = null;
+
+        /**
+         * 图片的 Url 。对应图片 base64 编码后大小不可超过5M。
+Url、Image必须提供一个，如果都提供，只使用 Url。
+图片存储于腾讯云的Url可保障更高下载速度和稳定性，建议图片存储于腾讯云。
+非腾讯云存储的Url速度和稳定性可能受一定影响。
+支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。
+         * @type {string || null}
+         */
+        this.Url = null;
+
+        /**
+         * 最多识别的人脸数目。默认值为1（仅检测图片中面积最大的那张人脸），最大值为10。
+MaxFaceNum用于，当输入的待识别图片包含多张人脸时，设定要搜索的人脸的数量。
+例：输入的Image或Url中的图片包含多张人脸，设MaxFaceNum=5，则会识别图片中面积最大的5张人脸。
+         * @type {number || null}
+         */
+        this.MaxFaceNum = null;
+
+        /**
+         * 人脸长和宽的最小尺寸，单位为像素。默认为80。低于40将影响搜索精度。建议设置为80。
+         * @type {number || null}
+         */
+        this.MinFaceSize = null;
+
+        /**
+         * 被检测到的人脸，对应最多返回的最相似人员数目。默认值为5，最大值为10。  
+例，设MaxFaceNum为3，MaxPersonNumPerGroup为5，GroupIds长度为3，则最多可能返回3*5*3=45个人员。
+         * @type {number || null}
+         */
+        this.MaxPersonNumPerGroup = null;
+
+        /**
+         * 图片质量控制。 
+0: 不进行控制； 
+1:较低的质量要求，图像存在非常模糊，眼睛鼻子嘴巴遮挡至少其中一种或多种的情况； 
+2: 一般的质量要求，图像存在偏亮，偏暗，模糊或一般模糊，眉毛遮挡，脸颊遮挡，下巴遮挡，至少其中三种的情况； 
+3: 较高的质量要求，图像存在偏亮，偏暗，一般模糊，眉毛遮挡，脸颊遮挡，下巴遮挡，其中一到两种的情况； 
+4: 很高的质量要求，各个维度均为最好或最多在某一维度上存在轻微问题； 
+默认 0。 
+若图片质量不满足要求，则返回结果中会提示图片质量检测不符要求。
+         * @type {number || null}
+         */
+        this.QualityControl = null;
+
+        /**
+         * 出参Score中，只有超过FaceMatchThreshold值的结果才会返回。默认为0。
+         * @type {number || null}
+         */
+        this.FaceMatchThreshold = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.GroupIds = 'GroupIds' in params ? params.GroupIds : null;
+        this.Image = 'Image' in params ? params.Image : null;
+        this.Url = 'Url' in params ? params.Url : null;
+        this.MaxFaceNum = 'MaxFaceNum' in params ? params.MaxFaceNum : null;
+        this.MinFaceSize = 'MinFaceSize' in params ? params.MinFaceSize : null;
+        this.MaxPersonNumPerGroup = 'MaxPersonNumPerGroup' in params ? params.MaxPersonNumPerGroup : null;
+        this.QualityControl = 'QualityControl' in params ? params.QualityControl : null;
+        this.FaceMatchThreshold = 'FaceMatchThreshold' in params ? params.FaceMatchThreshold : null;
+
+    }
+}
+
+/**
  * DeletePersonFromGroup返回参数结构体
  * @class
  */
@@ -2030,6 +2806,55 @@ class DeletePersonFromGroupResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * VerifyPerson返回参数结构体
+ * @class
+ */
+class VerifyPersonResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 给定的人脸照片与 PersonId 对应的相似度。若 PersonId 下有多张人脸（Face），会融合多张人脸信息进行验证。
+         * @type {number || null}
+         */
+        this.Score = null;
+
+        /**
+         * 是否为同一人的判断。
+         * @type {boolean || null}
+         */
+        this.IsMatch = null;
+
+        /**
+         * 人脸识别所用的算法模型版本。
+         * @type {string || null}
+         */
+        this.FaceModelVersion = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Score = 'Score' in params ? params.Score : null;
+        this.IsMatch = 'IsMatch' in params ? params.IsMatch : null;
+        this.FaceModelVersion = 'FaceModelVersion' in params ? params.FaceModelVersion : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -2286,7 +3111,9 @@ class DetectFaceRequest extends  AbstractModel {
         this.MaxFaceNum = null;
 
         /**
-         * 人脸长和宽的最小尺寸，单位为像素。默认为40。低于此尺寸的人脸不会被检测。
+         * 人脸长和宽的最小尺寸，单位为像素。
+默认为40。建议不低于34。
+低于MinFaceSize值的人脸不会被检测。
          * @type {number || null}
          */
         this.MinFaceSize = null;
@@ -2369,6 +3196,26 @@ class CreatePersonResponse extends  AbstractModel {
         this.FaceId = null;
 
         /**
+         * 检测出的人脸框的位置。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {FaceRect || null}
+         */
+        this.FaceRect = null;
+
+        /**
+         * 疑似同一人的PersonId。 
+当 UniquePersonControl 参数不为0且人员库中有疑似的同一人，此参数才有意义。
+         * @type {string || null}
+         */
+        this.SimilarPersonId = null;
+
+        /**
+         * 人脸识别所用的算法模型版本。
+         * @type {string || null}
+         */
+        this.FaceModelVersion = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -2384,6 +3231,14 @@ class CreatePersonResponse extends  AbstractModel {
             return;
         }
         this.FaceId = 'FaceId' in params ? params.FaceId : null;
+
+        if (params.FaceRect) {
+            let obj = new FaceRect();
+            obj.deserialize(params.FaceRect)
+            this.FaceRect = obj;
+        }
+        this.SimilarPersonId = 'SimilarPersonId' in params ? params.SimilarPersonId : null;
+        this.FaceModelVersion = 'FaceModelVersion' in params ? params.FaceModelVersion : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -2438,6 +3293,12 @@ class SearchFacesResponse extends  AbstractModel {
         this.FaceNum = null;
 
         /**
+         * 人脸识别所用的算法模型版本。
+         * @type {string || null}
+         */
+        this.FaceModelVersion = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -2462,6 +3323,7 @@ class SearchFacesResponse extends  AbstractModel {
             }
         }
         this.FaceNum = 'FaceNum' in params ? params.FaceNum : null;
+        this.FaceModelVersion = 'FaceModelVersion' in params ? params.FaceModelVersion : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -2535,6 +3397,19 @@ Url、Image必须提供一个，如果都提供，只使用 Url。
          */
         this.Url = null;
 
+        /**
+         * 图片质量控制。 
+0: 不进行控制； 
+1:较低的质量要求，图像存在非常模糊，眼睛鼻子嘴巴遮挡至少其中一种或多种的情况； 
+2: 一般的质量要求，图像存在偏亮，偏暗，模糊或一般模糊，眉毛遮挡，脸颊遮挡，下巴遮挡，至少其中三种的情况； 
+3: 较高的质量要求，图像存在偏亮，偏暗，一般模糊，眉毛遮挡，脸颊遮挡，下巴遮挡，其中一到两种的情况； 
+4: 很高的质量要求，各个维度均为最好或最多在某一维度上存在轻微问题； 
+默认 0。 
+若图片质量不满足要求，则返回结果中会提示图片质量检测不符要求。
+         * @type {number || null}
+         */
+        this.QualityControl = null;
+
     }
 
     /**
@@ -2547,6 +3422,7 @@ Url、Image必须提供一个，如果都提供，只使用 Url。
         this.PersonId = 'PersonId' in params ? params.PersonId : null;
         this.Image = 'Image' in params ? params.Image : null;
         this.Url = 'Url' in params ? params.Url : null;
+        this.QualityControl = 'QualityControl' in params ? params.QualityControl : null;
 
     }
 }
@@ -2887,6 +3763,25 @@ MaxFaceNum用于，当输入的待识别图片包含多张人脸时，设定要�
          */
         this.NeedPersonInfo = null;
 
+        /**
+         * 图片质量控制，若图片中包含多张人脸，会对要求处理的人脸进行质量控制判断。  
+0: 不进行控制， 
+1:较低的质量要求， 
+2: 一般的质量要求， 
+3: 较高的质量要求。 
+4: 很高的质量要求。 
+默认 0。 
+若图片质量不满足要求，则返回结果中会提示图片质量检测不符要求。
+         * @type {number || null}
+         */
+        this.QualityControl = null;
+
+        /**
+         * 出参Score中，只有超过FaceMatchThreshold值的结果才会返回。默认为0。
+         * @type {number || null}
+         */
+        this.FaceMatchThreshold = null;
+
     }
 
     /**
@@ -2903,6 +3798,8 @@ MaxFaceNum用于，当输入的待识别图片包含多张人脸时，设定要�
         this.MinFaceSize = 'MinFaceSize' in params ? params.MinFaceSize : null;
         this.MaxPersonNum = 'MaxPersonNum' in params ? params.MaxPersonNum : null;
         this.NeedPersonInfo = 'NeedPersonInfo' in params ? params.NeedPersonInfo : null;
+        this.QualityControl = 'QualityControl' in params ? params.QualityControl : null;
+        this.FaceMatchThreshold = 'FaceMatchThreshold' in params ? params.FaceMatchThreshold : null;
 
     }
 }
@@ -2951,6 +3848,12 @@ class CreateGroupResponse extends  AbstractModel {
         super();
 
         /**
+         * 人脸识别所用的算法模型版本。
+         * @type {string || null}
+         */
+        this.FaceModelVersion = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -2965,6 +3868,7 @@ class CreateGroupResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.FaceModelVersion = 'FaceModelVersion' in params ? params.FaceModelVersion : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -2972,10 +3876,12 @@ class CreateGroupResponse extends  AbstractModel {
 
 module.exports = {
     GetPersonGroupInfoResponse: GetPersonGroupInfoResponse,
+    SearchFacesReturnsByGroupResponse: SearchFacesReturnsByGroupResponse,
     Candidate: Candidate,
     ModifyGroupResponse: ModifyGroupResponse,
     DeletePersonRequest: DeletePersonRequest,
     DetectLiveFaceResponse: DetectLiveFaceResponse,
+    SearchPersonsReturnsByGroupResponse: SearchPersonsReturnsByGroupResponse,
     DeleteFaceRequest: DeleteFaceRequest,
     ModifyPersonBaseInfoResponse: ModifyPersonBaseInfoResponse,
     GetGroupListResponse: GetGroupListResponse,
@@ -2989,18 +3895,24 @@ module.exports = {
     DeleteGroupRequest: DeleteGroupRequest,
     CreateFaceResponse: CreateFaceResponse,
     ModifyPersonBaseInfoRequest: ModifyPersonBaseInfoRequest,
+    GroupCandidate: GroupCandidate,
+    SearchPersonsResponse: SearchPersonsResponse,
     CompareFaceResponse: CompareFaceResponse,
     PersonExDescriptionInfo: PersonExDescriptionInfo,
     DetectLiveFaceRequest: DetectLiveFaceRequest,
     VerifyFaceResponse: VerifyFaceResponse,
     GetPersonBaseInfoResponse: GetPersonBaseInfoResponse,
+    ResultsReturnsByGroup: ResultsReturnsByGroup,
     CreateFaceRequest: CreateFaceRequest,
+    SearchFacesReturnsByGroupRequest: SearchFacesReturnsByGroupRequest,
     CreateGroupRequest: CreateGroupRequest,
     ModifyPersonGroupInfoRequest: ModifyPersonGroupInfoRequest,
     GetPersonGroupInfoRequest: GetPersonGroupInfoRequest,
     Result: Result,
+    VerifyPersonRequest: VerifyPersonRequest,
     FaceInfo: FaceInfo,
     DeleteGroupResponse: DeleteGroupResponse,
+    SearchPersonsRequest: SearchPersonsRequest,
     FaceQualityInfo: FaceQualityInfo,
     CompareFaceRequest: CompareFaceRequest,
     PersonInfo: PersonInfo,
@@ -3008,7 +3920,9 @@ module.exports = {
     DetectFaceResponse: DetectFaceResponse,
     CopyPersonRequest: CopyPersonRequest,
     GetPersonListNumRequest: GetPersonListNumRequest,
+    SearchPersonsReturnsByGroupRequest: SearchPersonsReturnsByGroupRequest,
     DeletePersonFromGroupResponse: DeletePersonFromGroupResponse,
+    VerifyPersonResponse: VerifyPersonResponse,
     AnalyzeFaceResponse: AnalyzeFaceResponse,
     GetGroupListRequest: GetGroupListRequest,
     FaceHairAttributesInfo: FaceHairAttributesInfo,

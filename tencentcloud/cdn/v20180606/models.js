@@ -300,7 +300,7 @@ statusCode：回源状态码，返回 2xx、3xx、4xx、5xx 汇总数据，单�
 
         /**
          * 时间粒度，支持以下几种模式：
-min：1 分钟粒度，指定查询区间 24 小时内（含 24 小时），可返回 1 分钟粒度明细数据
+min：1 分钟粒度，指定查询区间 24 小时内（含 24 小时），可返回 1 分钟粒度明细数据（指定查询服务地域为中国境外时不支持 1 分钟粒度）
 5min：5 分钟粒度，指定查询区间 31 天内（含 31 天），可返回 5 分钟粒度明细数据
 hour：1 小时粒度，指定查询区间 31 天内（含 31 天），可返回 1 小时粒度明细数据
 day：天粒度，指定查询区间大于 31 天，可返回天粒度明细数据
@@ -314,6 +314,14 @@ day：天粒度，指定查询区间大于 31 天，可返回天粒度明细数�
          * @type {boolean || null}
          */
         this.Detail = null;
+
+        /**
+         * 指定服务地域查询，不填充表示查询中国境内 CDN 数据
+mainland：指定查询中国境内 CDN 数据
+overseas：指定查询中国境外 CDN 数据
+         * @type {string || null}
+         */
+        this.Area = null;
 
     }
 
@@ -331,6 +339,7 @@ day：天粒度，指定查询区间大于 31 天，可返回天粒度明细数�
         this.Project = 'Project' in params ? params.Project : null;
         this.Interval = 'Interval' in params ? params.Interval : null;
         this.Detail = 'Detail' in params ? params.Detail : null;
+        this.Area = 'Area' in params ? params.Area : null;
 
     }
 }
@@ -373,6 +382,12 @@ class PushTask extends  AbstractModel {
          */
         this.CreateTime = null;
 
+        /**
+         * 预热区域，mainland，overseas或global。
+         * @type {string || null}
+         */
+        this.Area = null;
+
     }
 
     /**
@@ -387,6 +402,7 @@ class PushTask extends  AbstractModel {
         this.Status = 'Status' in params ? params.Status : null;
         this.Percent = 'Percent' in params ? params.Percent : null;
         this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.Area = 'Area' in params ? params.Area : null;
 
     }
 }
@@ -887,6 +903,20 @@ class DescribeMapInfoResponse extends  AbstractModel {
         this.MapInfoList = null;
 
         /**
+         * 服务端区域id和子区域id的映射关系。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<RegionMapRelation> || null}
+         */
+        this.ServerRegionRelation = null;
+
+        /**
+         * 客户端区域id和子区域id的映射关系。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<RegionMapRelation> || null}
+         */
+        this.ClientRegionRelation = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -910,6 +940,24 @@ class DescribeMapInfoResponse extends  AbstractModel {
                 this.MapInfoList.push(obj);
             }
         }
+
+        if (params.ServerRegionRelation) {
+            this.ServerRegionRelation = new Array();
+            for (let z in params.ServerRegionRelation) {
+                let obj = new RegionMapRelation();
+                obj.deserialize(params.ServerRegionRelation[z]);
+                this.ServerRegionRelation.push(obj);
+            }
+        }
+
+        if (params.ClientRegionRelation) {
+            this.ClientRegionRelation = new Array();
+            for (let z in params.ClientRegionRelation) {
+                let obj = new RegionMapRelation();
+                obj.deserialize(params.ClientRegionRelation[z]);
+                this.ClientRegionRelation.push(obj);
+            }
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -926,7 +974,7 @@ class DescribeMapInfoRequest extends  AbstractModel {
         /**
          * 映射查询类别：
 isp：运营商映射查询
-district：省份映射查询
+district：省份（中国境内）、国家/地区（中国境外）映射查询
          * @type {string || null}
          */
         this.Name = null;
@@ -994,6 +1042,14 @@ class DescribePayTypeRequest extends  AbstractModel {
     constructor(){
         super();
 
+        /**
+         * 指定服务地域查询，不填充表示查询中国境内 CDN 计费方式
+mainland：指定查询中国境内 CDN 计费方式
+overseas：指定查询中国境外 CDN 计费方式
+         * @type {string || null}
+         */
+        this.Area = null;
+
     }
 
     /**
@@ -1003,6 +1059,7 @@ class DescribePayTypeRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.Area = 'Area' in params ? params.Area : null;
 
     }
 }
@@ -1080,6 +1137,7 @@ class DescribePayTypeResponse extends  AbstractModel {
          * 计费类型：
 flux：流量计费
 bandwidth：带宽计费
+如果修改过计费方式，表示下次生效的计费类型，否则表示当前计费类型。
          * @type {string || null}
          */
         this.PayType = null;
@@ -1104,6 +1162,22 @@ max：峰值带宽计费，日结模式
         this.StatType = null;
 
         /**
+         * 地区计费方式，仅在查询中国境外 CDN 计费方式时可用
+all：表示全地区统一计费
+multiple：表示分地区计费。
+         * @type {string || null}
+         */
+        this.RegionType = null;
+
+        /**
+         * 当前计费类型：
+flux：流量计费
+bandwidth：带宽计费
+         * @type {string || null}
+         */
+        this.CurrentPayType = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -1121,6 +1195,8 @@ max：峰值带宽计费，日结模式
         this.PayType = 'PayType' in params ? params.PayType : null;
         this.BillingCycle = 'BillingCycle' in params ? params.BillingCycle : null;
         this.StatType = 'StatType' in params ? params.StatType : null;
+        this.RegionType = 'RegionType' in params ? params.RegionType : null;
+        this.CurrentPayType = 'CurrentPayType' in params ? params.CurrentPayType : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -1135,13 +1211,13 @@ class GetDisableRecordsRequest extends  AbstractModel {
         super();
 
         /**
-         * 开始时间
+         * 开始时间，如：2018-12-12 10:24:00。
          * @type {string || null}
          */
         this.StartTime = null;
 
         /**
-         * 结束时间
+         * 结束时间，如：2018-12-14 10:24:00。
          * @type {string || null}
          */
         this.EndTime = null;
@@ -1160,6 +1236,18 @@ enable：当前为可用状态，已解禁，可正常访问
          */
         this.Status = null;
 
+        /**
+         * 分页查询偏移量，默认为 0 （第一页）。
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 分页查询限制数目，默认为20。
+         * @type {number || null}
+         */
+        this.Limit = null;
+
     }
 
     /**
@@ -1173,6 +1261,8 @@ enable：当前为可用状态，已解禁，可正常访问
         this.EndTime = 'EndTime' in params ? params.EndTime : null;
         this.Url = 'Url' in params ? params.Url : null;
         this.Status = 'Status' in params ? params.Status : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
 
     }
 }
@@ -1221,24 +1311,24 @@ class ListTopDataRequest extends  AbstractModel {
         super();
 
         /**
-         * 查询起始日期，如：2018-09-09 00:00:00
+         * 查询起始日期，如：2018-09-09 00:00:00。目前只支持按天粒度的数据查询，只取入参中的天数信息。
          * @type {string || null}
          */
         this.StartTime = null;
 
         /**
-         * 查询结束日期，如：2018-09-10 00:00:00
+         * 查询结束日期，如：2018-09-10 00:00:00。目前只支持按天粒度的数据查询，只取入参中的天数信息。例如，要查询2018-09-10的数据，输入StartTime=2018-09-10 00:00:00，EndTime=2018-09-10 00:00:00即可。
          * @type {string || null}
          */
         this.EndTime = null;
 
         /**
          * 排序对象，支持以下几种形式：
-Url：访问 URL 排序，带参数统计，支持的 Filter 为 flux、request
-Path：访问 URL 排序，不带参数统计，支持的 Filter 为 flux、request（白名单功能）
-District：省份排序，支持的 Filter 为 flux、request
-Isp：运营商排序，支持的 Filter 为 flux、request
-Host：域名访问数据排序，支持的 Filter 为：flux, request, bandwidth, fluxHitRate, 2XX, 3XX, 4XX, 5XX，具体状态码统计
+url：访问 URL 排序，带参数统计，支持的 Filter 为 flux、request
+path：访问 URL 排序，不带参数统计，支持的 Filter 为 flux、request（白名单功能）
+district：省份、国家/地区排序，支持的 Filter 为 flux、request
+isp：运营商排序，支持的 Filter 为 flux、request
+host：域名访问数据排序，支持的 Filter 为：flux, request, bandwidth, fluxHitRate, 2XX, 3XX, 4XX, 5XX，具体状态码统计
 originHost：域名回源数据排序，支持的 Filter 为 flux， request，bandwidth，origin_2XX，origin_3XX，oringin_4XX，origin_5XX，具体回源状态码统计
          * @type {string || null}
          */
@@ -1278,7 +1368,7 @@ OriginStatusCode：指定回源状态码统计，在 Code 参数中填充指定�
         this.Project = null;
 
         /**
-         * 多域名查询时，默认（false)返回所有域名汇总排序结果
+         * 多域名查询时，默认（false)返回所有域名汇总排序结果
 Metric 为 Url、Path、District、Isp，Filter 为 flux、reqeust 时，可设置为 true，返回每一个 Domain 的排序数据
          * @type {boolean || null}
          */
@@ -1289,6 +1379,22 @@ Metric 为 Url、Path、District、Isp，Filter 为 flux、reqeust 时，可设�
          * @type {string || null}
          */
         this.Code = null;
+
+        /**
+         * 指定服务地域查询，不填充表示查询中国境内 CDN 数据
+mainland：指定查询中国境内 CDN 数据
+overseas：指定查询中国境外 CDN 数据，支持的 Metric 为 url、district、host、originHost，当 Metric 为 originHost 时仅支持 flux、request、bandwidth Filter
+         * @type {string || null}
+         */
+        this.Area = null;
+
+        /**
+         * 查询中国境外CDN数据，且仅当 Metric 为 District 或 Host 时，可指定地区类型查询，不填充表示查询服务地区数据（仅在 Area 为 overseas，且 Metric 是 District 或 Host 时可用）
+server：指定查询服务地区（腾讯云 CDN 节点服务器所在地区）数据
+client：指定查询客户端地区（用户请求终端所在地区）数据，当 Metric 为 host 时仅支持 flux、request、bandwidth Filter
+         * @type {string || null}
+         */
+        this.AreaType = null;
 
     }
 
@@ -1307,6 +1413,8 @@ Metric 为 Url、Path、District、Isp，Filter 为 flux、reqeust 时，可设�
         this.Project = 'Project' in params ? params.Project : null;
         this.Detail = 'Detail' in params ? params.Detail : null;
         this.Code = 'Code' in params ? params.Code : null;
+        this.Area = 'Area' in params ? params.Area : null;
+        this.AreaType = 'AreaType' in params ? params.AreaType : null;
 
     }
 }
@@ -1799,7 +1907,7 @@ statusCode：状态码，返回 2xx、3xx、4xx、5xx 汇总数据，单位为 �
 
         /**
          * 时间粒度，支持以下几种模式：
-min：1 分钟粒度，指定查询区间 24 小时内（含 24 小时），可返回 1 分钟粒度明细数据
+min：1 分钟粒度，指定查询区间 24 小时内（含 24 小时），可返回 1 分钟粒度明细数据（指定查询服务地域为中国境外时不支持 1 分钟粒度）
 5min：5 分钟粒度，指定查询区间 31 天内（含 31 天），可返回 5 分钟粒度明细数据
 hour：1 小时粒度，指定查询区间 31 天内（含 31 天），可返回 1 小时粒度明细数据
 day：天粒度，指定查询区间大于 31 天，可返回天粒度明细数据
@@ -1815,15 +1923,18 @@ day：天粒度，指定查询区间大于 31 天，可返回天粒度明细数�
         this.Detail = null;
 
         /**
-         * 指定运营商查询，不填充表示查询所有运营商
+         * 查询中国境内CDN数据时，指定运营商查询，不填充表示查询所有运营商
 运营商编码可以查看 [运营商编码映射](https://cloud.tencent.com/document/product/228/6316#.E8.BF.90.E8.90.A5.E5.95.86.E6.98.A0.E5.B0.84)
+指定运营商查询时，不可同时指定省份、IP协议查询
          * @type {number || null}
          */
         this.Isp = null;
 
         /**
-         * 指定省份查询，不填充表示查询所有省份
-省份编码可以查看 [省份编码映射](https://cloud.tencent.com/document/product/228/6316#.E7.9C.81.E4.BB.BD.E6.98.A0.E5.B0.84)
+         * 查询中国境内CDN数据时，指定省份查询，不填充表示查询所有省份
+查询中国境外CDN数据时，指定国家/地区查询，不填充表示查询所有国家/地区
+省份、国家/地区编码可以查看 [省份编码映射](https://cloud.tencent.com/document/product/228/6316#.E7.9C.81.E4.BB.BD.E6.98.A0.E5.B0.84)
+指定（中国境内）省份查询时，不可同时指定运营商、IP协议查询
          * @type {number || null}
          */
         this.District = null;
@@ -1846,11 +1957,28 @@ https：指定查询 HTTPS 对应指标
         /**
          * 指定IP协议查询，不填充表示查询所有协议
 all：所有协议
-ipv4：指定查询 ipv4对应指标
+ipv4：指定查询 ipv4 对应指标
 ipv6：指定查询 ipv6 对应指标
+指定IP协议查询时，不可同时指定省份、运营商查询
          * @type {string || null}
          */
         this.IpProtocol = null;
+
+        /**
+         * 指定服务地域查询，不填充表示查询中国境内CDN数据
+mainland：指定查询中国境内 CDN 数据
+overseas：指定查询中国境外 CDN 数据
+         * @type {string || null}
+         */
+        this.Area = null;
+
+        /**
+         * 查询中国境外CDN数据时，可指定地区类型查询，不填充表示查询服务地区数据（仅在 Area 为 overseas 时可用）
+server：指定查询服务地区（腾讯云 CDN 节点服务器所在地区）数据
+client：指定查询客户端地区（用户请求终端所在地区）数据
+         * @type {string || null}
+         */
+        this.AreaType = null;
 
     }
 
@@ -1873,6 +2001,8 @@ ipv6：指定查询 ipv6 对应指标
         this.Protocol = 'Protocol' in params ? params.Protocol : null;
         this.DataSource = 'DataSource' in params ? params.DataSource : null;
         this.IpProtocol = 'IpProtocol' in params ? params.IpProtocol : null;
+        this.Area = 'Area' in params ? params.Area : null;
+        this.AreaType = 'AreaType' in params ? params.AreaType : null;
 
     }
 }
@@ -2073,6 +2203,13 @@ class GetDisableRecordsResponse extends  AbstractModel {
         this.UrlRecordList = null;
 
         /**
+         * 任务总数，用于分页
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -2096,6 +2233,7 @@ class GetDisableRecordsResponse extends  AbstractModel {
                 this.UrlRecordList.push(obj);
             }
         }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -2175,6 +2313,41 @@ avg：平均值
     }
 }
 
+/**
+ * 区域映射id和子区域id的关联信息。
+ * @class
+ */
+class RegionMapRelation extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 区域ID。
+         * @type {number || null}
+         */
+        this.RegionId = null;
+
+        /**
+         * 子区域ID列表
+         * @type {Array.<number> || null}
+         */
+        this.SubRegionIdList = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RegionId = 'RegionId' in params ? params.RegionId : null;
+        this.SubRegionIdList = 'SubRegionIdList' in params ? params.SubRegionIdList : null;
+
+    }
+}
+
 module.exports = {
     PurgePathCacheRequest: PurgePathCacheRequest,
     CdnData: CdnData,
@@ -2220,5 +2393,6 @@ module.exports = {
     GetDisableRecordsResponse: GetDisableRecordsResponse,
     CdnIpHistory: CdnIpHistory,
     SummarizedData: SummarizedData,
+    RegionMapRelation: RegionMapRelation,
 
 }

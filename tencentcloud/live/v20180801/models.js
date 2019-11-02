@@ -8676,14 +8676,12 @@ class CreateLiveTranscodeTemplateRequest extends  AbstractModel {
 
         /**
          * 视频编码：h264/h265，默认h264。
-注意：当前该参数未生效，待后续支持！
          * @type {string || null}
          */
         this.Vcodec = null;
 
         /**
          * 音频编码：aac，默认原始音频格式。
-注意：当前该参数未生效，待后续支持！
          * @type {string || null}
          */
         this.Acodec = null;

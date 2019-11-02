@@ -228,6 +228,7 @@ class ClbClient extends AbstractClient {
 
     /**
      * 用户需要先创建出一个HTTPS:443监听器，并在其下创建转发规则。通过调用本接口，系统会自动创建出一个HTTP:80监听器（如果之前不存在），并在其下创建转发规则，与HTTPS:443监听器下的Domains（在入参中指定）对应。创建成功后可以通过HTTP:80地址自动跳转为HTTPS:443地址进行访问。
+本接口为异步接口，本接口返回成功后需以返回的RequestID为入参，调用DescribeTaskStatus接口查询本次任务是否成功。
      * @param {AutoRewriteRequest} req
      * @param {function(string, AutoRewriteResponse):void} cb
      * @public
@@ -414,6 +415,7 @@ class ClbClient extends AbstractClient {
 
     /**
      * DeleteRewrite 接口支持删除指定转发规则之间的重定向关系。
+本接口为异步接口，本接口返回成功后需以返回的RequestID为入参，调用DescribeTaskStatus接口查询本次任务是否成功。
      * @param {DeleteRewriteRequest} req
      * @param {function(string, DeleteRewriteResponse):void} cb
      * @public
@@ -504,7 +506,7 @@ class ClbClient extends AbstractClient {
     }
 
     /**
-     * BatchModifyTargetWeight接口用于批量修改负载均衡监听器绑定的后端机器的转发权重，暂时只支持HTTP/HTTPS监听器。不支持传统型负载均衡。
+     * BatchModifyTargetWeight接口用于批量修改负载均衡监听器绑定的后端机器的转发权重，支持负载均衡的4层和7层监听器；不支持传统型负载均衡。
 本接口为异步接口，本接口返回成功后需以返回的RequestID为入参，调用DescribeTaskStatus接口查询本次任务是否成功。
      * @param {BatchModifyTargetWeightRequest} req
      * @param {function(string, BatchModifyTargetWeightResponse):void} cb
@@ -541,6 +543,7 @@ class ClbClient extends AbstractClient {
 
     /**
      * 用户手动配置原访问地址和重定向地址，系统自动将原访问地址的请求重定向至对应路径的目的地址。同一域名下可以配置多条路径作为重定向策略，实现http/https之间请求的自动跳转。设置重定向时，需满足如下约束条件：若A已经重定向至B，则A不能再重定向至C（除非先删除老的重定向关系，再建立新的重定向关系），B不能重定向至任何其它地址。
+本接口为异步接口，本接口返回成功后需以返回的RequestID为入参，调用DescribeTaskStatus接口查询本次任务是否成功。
      * @param {ManualRewriteRequest} req
      * @param {function(string, ManualRewriteResponse):void} cb
      * @public
