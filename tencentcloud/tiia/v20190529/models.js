@@ -749,6 +749,18 @@ class DetectLabelRequest extends  AbstractModel {
          */
         this.ImageBase64 = null;
 
+        /**
+         * 本次调用支持的识别场景，可选值如下：
+WEB，针对网络图片优化;
+CAMERA，针对手机摄像头拍摄图片优化;
+ALBUM，针对手机相册、网盘产品优化;
+如果不传此参数，则默认为WEB。
+
+支持多场景（Scenes）一起检测。例如，使用 Scenes=["WEB", "CAMERA"]，即对一张图片使用两个模型同时检测，输出两套识别结果。
+         * @type {Array.<string> || null}
+         */
+        this.Scenes = null;
+
     }
 
     /**
@@ -760,6 +772,7 @@ class DetectLabelRequest extends  AbstractModel {
         }
         this.ImageUrl = 'ImageUrl' in params ? params.ImageUrl : null;
         this.ImageBase64 = 'ImageBase64' in params ? params.ImageBase64 : null;
+        this.Scenes = 'Scenes' in params ? params.Scenes : null;
 
     }
 }
@@ -773,10 +786,25 @@ class DetectLabelResponse extends  AbstractModel {
         super();
 
         /**
-         * 标签结果数组。
+         * Web网络版标签结果数组。如未选择WEB场景，则为空。
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<DetectLabelItem> || null}
          */
         this.Labels = null;
+
+        /**
+         * Camera摄像头版标签结果数组。如未选择CAMERA场景，则为空。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<DetectLabelItem> || null}
+         */
+        this.CameraLabels = null;
+
+        /**
+         * Album相册版标签结果数组。如未选择ALBUM场景，则为空。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<DetectLabelItem> || null}
+         */
+        this.AlbumLabels = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -800,6 +828,24 @@ class DetectLabelResponse extends  AbstractModel {
                 let obj = new DetectLabelItem();
                 obj.deserialize(params.Labels[z]);
                 this.Labels.push(obj);
+            }
+        }
+
+        if (params.CameraLabels) {
+            this.CameraLabels = new Array();
+            for (let z in params.CameraLabels) {
+                let obj = new DetectLabelItem();
+                obj.deserialize(params.CameraLabels[z]);
+                this.CameraLabels.push(obj);
+            }
+        }
+
+        if (params.AlbumLabels) {
+            this.AlbumLabels = new Array();
+            for (let z in params.AlbumLabels) {
+                let obj = new DetectLabelItem();
+                obj.deserialize(params.AlbumLabels[z]);
+                this.AlbumLabels.push(obj);
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
@@ -1647,6 +1693,18 @@ class DetectLabelItem extends  AbstractModel {
          */
         this.Confidence = null;
 
+        /**
+         * 标签的一级分类
+         * @type {string || null}
+         */
+        this.FirstCategory = null;
+
+        /**
+         * 标签的二级分类
+         * @type {string || null}
+         */
+        this.SecondCategory = null;
+
     }
 
     /**
@@ -1658,6 +1716,8 @@ class DetectLabelItem extends  AbstractModel {
         }
         this.Name = 'Name' in params ? params.Name : null;
         this.Confidence = 'Confidence' in params ? params.Confidence : null;
+        this.FirstCategory = 'FirstCategory' in params ? params.FirstCategory : null;
+        this.SecondCategory = 'SecondCategory' in params ? params.SecondCategory : null;
 
     }
 }

@@ -998,7 +998,7 @@ class ScanDetail extends  AbstractModel {
         super();
 
         /**
-         * 违规场景，参照Label定义
+         * 违规场景，参照<a href="https://cloud.tencent.com/document/product/607/37622#Label_Value">Label</a>定义
          * @type {string || null}
          */
         this.Label = null;
@@ -1066,13 +1066,13 @@ class CreateAppRequest extends  AbstractModel {
         this.ProjectId = null;
 
         /**
-         * 需要支持的引擎列表，取值android, ios, uinty, cocos, unreal, windows。默认全选。
+         * 需要支持的引擎列表，取值android, ios, unity, cocos, unreal, windows。默认全选。
          * @type {Array.<string> || null}
          */
         this.EngineList = null;
 
         /**
-         * 服务区域列表, 默认为空数组. 取值: mainland(美), sa(南美), eu(欧洲), oc(澳洲), me(中东)。默认全选
+         * 服务区域列表，取值: mainland(大陆地区), sa(南美), eu(欧洲), oc(澳洲), me(中东)。默认全选。
          * @type {Array.<string> || null}
          */
         this.RegionList = null;
@@ -1084,13 +1084,13 @@ class CreateAppRequest extends  AbstractModel {
         this.RealtimeSpeechConf = null;
 
         /**
-         * 离线语音服务配置数据
+         * 语音消息及转文本服务配置数据
          * @type {VoiceMessageConf || null}
          */
         this.VoiceMessageConf = null;
 
         /**
-         * 语音过滤服务配置数据
+         * 语音分析服务配置数据
          * @type {VoiceFilterConf || null}
          */
         this.VoiceFilterConf = null;
@@ -1260,13 +1260,13 @@ class CreateAppResponse extends  AbstractModel {
         this.RealtimeSpeechConf = null;
 
         /**
-         * 语音消息服务配置数据
+         * 语音消息及转文本服务配置数据
          * @type {VoiceMessageConf || null}
          */
         this.VoiceMessageConf = null;
 
         /**
-         * 语音过滤服务配置数据
+         * 语音分析服务配置数据
          * @type {VoiceFilterConf || null}
          */
         this.VoiceFilterConf = null;

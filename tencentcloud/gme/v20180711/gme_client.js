@@ -71,7 +71,7 @@ class GmeClient extends AbstractClient {
     }
 
     /**
-     * 本接口(DescribeAppStatistics)用户获取某个GME应用的用量数据。包括实时语音，离线语音，语音过滤等。最长查询周期为最近30天。
+     * 本接口(DescribeAppStatistics)用于获取某个GME应用的用量数据。包括实时语音，离线语音，语音过滤等。最长查询周期为最近30天。
      * @param {DescribeAppStatisticsRequest} req
      * @param {function(string, DescribeAppStatisticsResponse):void} cb
      * @public

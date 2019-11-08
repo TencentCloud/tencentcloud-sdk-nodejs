@@ -55,7 +55,7 @@ class GetMonitorDataRequest extends  AbstractModel {
         this.StartTime = null;
 
         /**
-         * 结束时间，默认为当前时间。 EndTime不能小于EtartTime
+         * 结束时间，默认为当前时间。 EndTime不能小于StartTime
          * @type {string || null}
          */
         this.EndTime = null;

@@ -6475,6 +6475,18 @@ class EditMediaRequest extends  AbstractModel {
         this.OutputConfig = null;
 
         /**
+         * 标识来源上下文，用于透传用户请求信息，在EditMediaComplete回调和任务流状态变更回调将返回该字段值，最长 1000个字符。
+         * @type {string || null}
+         */
+        this.SessionContext = null;
+
+        /**
+         * 用于任务去重的识别码，如果一天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。
+         * @type {string || null}
+         */
+        this.SessionId = null;
+
+        /**
          * 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
          * @type {number || null}
          */
@@ -6516,6 +6528,8 @@ class EditMediaRequest extends  AbstractModel {
             obj.deserialize(params.OutputConfig)
             this.OutputConfig = obj;
         }
+        this.SessionContext = 'SessionContext' in params ? params.SessionContext : null;
+        this.SessionId = 'SessionId' in params ? params.SessionId : null;
         this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
 
     }
@@ -7391,6 +7405,14 @@ class DescribeProcedureTemplatesRequest extends  AbstractModel {
         this.Names = null;
 
         /**
+         * 任务流模板类型过滤条件，可选值：
+<li>Preset：系统预置任务流模板；</li>
+<li>Custom：用户自定义任务流模板。</li>
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
          * 分页偏移量，默认值：0。
          * @type {number || null}
          */
@@ -7418,6 +7440,7 @@ class DescribeProcedureTemplatesRequest extends  AbstractModel {
             return;
         }
         this.Names = 'Names' in params ? params.Names : null;
+        this.Type = 'Type' in params ? params.Type : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
@@ -21890,16 +21913,6 @@ class AudioVolumeParam extends  AbstractModel {
         super();
 
         /**
-         * 音频增益，取值范围0~10。仅在Mute=0时生效。
-<li>大于1表示增加音量。</li>
-<li>小于1表示降低音量。</li>
-<li>1：表示不改变。</li>
-默认是1。
-         * @type {number || null}
-         */
-        this.Gain = null;
-
-        /**
          * 是否静音，取值范围0或1。
 <li>0表示不静音。</li>
 <li>1表示静音。</li>
@@ -21907,6 +21920,16 @@ class AudioVolumeParam extends  AbstractModel {
          * @type {number || null}
          */
         this.Mute = null;
+
+        /**
+         * 音频增益，取值范围0~10。
+<li>大于1表示增加音量。</li>
+<li>小于1表示降低音量。</li>
+<li>0和1：表示不改变。</li>
+默认是0。
+         * @type {number || null}
+         */
+        this.Gain = null;
 
     }
 
@@ -21917,8 +21940,8 @@ class AudioVolumeParam extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Gain = 'Gain' in params ? params.Gain : null;
         this.Mute = 'Mute' in params ? params.Mute : null;
+        this.Gain = 'Gain' in params ? params.Gain : null;
 
     }
 }
