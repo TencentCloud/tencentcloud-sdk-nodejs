@@ -824,7 +824,7 @@ class LiveClient extends AbstractClient {
     }
 
     /**
-     * 查询某段时间内每个省份每个运营商的平均每秒流量，总流量，总请求数信息。
+     * 查询某段时间内每个国家地区每个省份每个运营商的平均每秒流量，总流量，总请求数信息。
      * @param {DescribeProIspPlaySumInfoListRequest} req
      * @param {function(string, DescribeProIspPlaySumInfoListResponse):void} cb
      * @public
