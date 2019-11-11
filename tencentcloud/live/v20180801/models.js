@@ -2009,6 +2009,12 @@ class DescribePlayErrorCodeDetailInfoListRequest extends  AbstractModel {
          */
         this.PlayDomains = null;
 
+        /**
+         * 地域，可选值：Mainland，Oversea，China，Foreign，Global（默认值）；如果为空，查询总的数据；如果为“Mainland”，查询中国大陆的数据；如果为“Oversea”，则查询中国大陆以外的数据；如果为China，查询中国的数据（包括港澳台）；如果为Foreign，查询国外的数据（不包括港澳台）。
+         * @type {string || null}
+         */
+        this.MainlandOrOversea = null;
+
     }
 
     /**
@@ -2023,6 +2029,7 @@ class DescribePlayErrorCodeDetailInfoListRequest extends  AbstractModel {
         this.Granularity = 'Granularity' in params ? params.Granularity : null;
         this.StatType = 'StatType' in params ? params.StatType : null;
         this.PlayDomains = 'PlayDomains' in params ? params.PlayDomains : null;
+        this.MainlandOrOversea = 'MainlandOrOversea' in params ? params.MainlandOrOversea : null;
 
     }
 }
@@ -3403,7 +3410,7 @@ class DescribePlayErrorCodeSumInfoListResponse extends  AbstractModel {
         this.TotalCode5xx = null;
 
         /**
-         * 各状态码的总次数，暂时支持400,403,404,500,502,503,504。
+         * 各状态码的总次数。
          * @type {Array.<PlayCodeTotalInfo> || null}
          */
         this.TotalCodeList = null;
@@ -3431,6 +3438,18 @@ class DescribePlayErrorCodeSumInfoListResponse extends  AbstractModel {
          * @type {number || null}
          */
         this.TotalNum = null;
+
+        /**
+         * 状态码为2开头的总次数。
+         * @type {number || null}
+         */
+        this.TotalCode2xx = null;
+
+        /**
+         * 状态码为3开头的总次数。
+         * @type {number || null}
+         */
+        this.TotalCode3xx = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -3472,6 +3491,8 @@ class DescribePlayErrorCodeSumInfoListResponse extends  AbstractModel {
         this.PageSize = 'PageSize' in params ? params.PageSize : null;
         this.TotalPage = 'TotalPage' in params ? params.TotalPage : null;
         this.TotalNum = 'TotalNum' in params ? params.TotalNum : null;
+        this.TotalCode2xx = 'TotalCode2xx' in params ? params.TotalCode2xx : null;
+        this.TotalCode3xx = 'TotalCode3xx' in params ? params.TotalCode3xx : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -4094,20 +4115,34 @@ class DescribePlayErrorCodeSumInfoListRequest extends  AbstractModel {
         this.PlayDomains = null;
 
         /**
-         * 页数，
-范围[1,1000]，
-默认值：1。
+         * 页数，范围[1,1000]，默认值是1。
          * @type {number || null}
          */
         this.PageNum = null;
 
         /**
-         * 每页个数，
-范围：[1,1000]，
-默认值： 20。
+         * 每页个数，范围：[1,1000]，默认值是20。
          * @type {number || null}
          */
         this.PageSize = null;
+
+        /**
+         * 地域，可选值：Mainland，Oversea，China，Foreign，Global（默认值）；如果为空，查询总的数据；如果为“Mainland”，查询中国大陆的数据；如果为“Oversea”，则查询中国大陆以外的数据；如果为China，查询中国的数据（包括港澳台）；如果为Foreign，查询国外的数据（不包括港澳台）。
+         * @type {string || null}
+         */
+        this.MainlandOrOversea = null;
+
+        /**
+         * 分组参数，可选值：CountryProIsp（默认值），Country（国家），默认是按照国家+省份+运营商来进行分组；目前国外的省份和运营商暂时无法识别。
+         * @type {string || null}
+         */
+        this.GroupType = null;
+
+        /**
+         * 输出字段使用的语言，可选值：Chinese（默认值），English，目前国家，省份和运营商支持多语言。
+         * @type {string || null}
+         */
+        this.OutLanguage = null;
 
     }
 
@@ -4123,6 +4158,9 @@ class DescribePlayErrorCodeSumInfoListRequest extends  AbstractModel {
         this.PlayDomains = 'PlayDomains' in params ? params.PlayDomains : null;
         this.PageNum = 'PageNum' in params ? params.PageNum : null;
         this.PageSize = 'PageSize' in params ? params.PageSize : null;
+        this.MainlandOrOversea = 'MainlandOrOversea' in params ? params.MainlandOrOversea : null;
+        this.GroupType = 'GroupType' in params ? params.GroupType : null;
+        this.OutLanguage = 'OutLanguage' in params ? params.OutLanguage : null;
 
     }
 }
@@ -4440,16 +4478,13 @@ class DescribeTopClientIpSumInfoListResponse extends  AbstractModel {
         super();
 
         /**
-         * 页号，
-范围是[1,1000]，
-默认值是1。
+         * 页号，范围是[1,1000]，默认值是1。
          * @type {number || null}
          */
         this.PageNum = null;
 
         /**
-         * 每页个数，范围是[1,1000]，
-默认值是20。
+         * 每页个数，范围是[1,1000]，默认值是20。
          * @type {number || null}
          */
         this.PageSize = null;
@@ -4813,7 +4848,7 @@ class CreateLiveTranscodeRuleRequest extends  AbstractModel {
         this.AppName = null;
 
         /**
-         * 流名称。
+         * 流名称。如果只绑定域名或路径，则此处填空。
          * @type {string || null}
          */
         this.StreamName = null;
@@ -5836,16 +5871,22 @@ class DescribeProvinceIspPlayInfoListRequest extends  AbstractModel {
         this.PlayDomains = null;
 
         /**
-         * 非必传参数，要查询的省份（地区）英文名称列表，如 Beijing
+         * 要查询的省份（地区）英文名称列表，如 Beijing。
          * @type {Array.<string> || null}
          */
         this.ProvinceNames = null;
 
         /**
-         * 非必传参数，要查询的运营商英文名称列表，如 China Mobile ，如果为空，查询所有运营商的数据
+         * 要查询的运营商英文名称列表，如 China Mobile ，如果为空，查询所有运营商的数据。
          * @type {Array.<string> || null}
          */
         this.IspNames = null;
+
+        /**
+         * 地域，可选值：Mainland，Oversea，China，Foreign，Global（默认值）；如果为空，查询总的数据；如果为“Mainland”，查询中国大陆的数据；如果为“Oversea”，则查询中国大陆以外的数据；如果为China，查询中国的数据（包括港澳台）；如果为Foreign，查询国外的数据（不包括港澳台）。
+         * @type {string || null}
+         */
+        this.MainlandOrOversea = null;
 
     }
 
@@ -5863,6 +5904,7 @@ class DescribeProvinceIspPlayInfoListRequest extends  AbstractModel {
         this.PlayDomains = 'PlayDomains' in params ? params.PlayDomains : null;
         this.ProvinceNames = 'ProvinceNames' in params ? params.ProvinceNames : null;
         this.IspNames = 'IspNames' in params ? params.IspNames : null;
+        this.MainlandOrOversea = 'MainlandOrOversea' in params ? params.MainlandOrOversea : null;
 
     }
 }
@@ -6718,25 +6760,34 @@ class DescribeTopClientIpSumInfoListRequest extends  AbstractModel {
         this.PlayDomains = null;
 
         /**
-         * 页号，
-范围是[1,1000]，
-默认值是1。
+         * 页号，范围是[1,1000]，默认值是1。
          * @type {number || null}
          */
         this.PageNum = null;
 
         /**
-         * 每页个数，范围是[1,1000]，
-默认值是20。
+         * 每页个数，范围是[1,1000]，默认值是20。
          * @type {number || null}
          */
         this.PageSize = null;
 
         /**
-         * 排序指标，可选值包括”TotalRequest”，”FailedRequest”,“TotalFlux”。
+         * 排序指标，可选值包括TotalRequest（默认值），FailedRequest,TotalFlux。
          * @type {string || null}
          */
         this.OrderParam = null;
+
+        /**
+         * 地域，可选值：Mainland，Oversea，China，Foreign，Global（默认值）；如果为空，查询总的数据；如果为“Mainland”，查询中国大陆的数据；如果为“Oversea”，则查询中国大陆以外的数据；如果为China，查询中国的数据（包括港澳台）；如果为Foreign，查询国外的数据（不包括港澳台）。
+         * @type {string || null}
+         */
+        this.MainlandOrOversea = null;
+
+        /**
+         * 输出字段使用的语言，可选值：Chinese（默认值），English；目前国家，省份和运营商支持多语言。
+         * @type {string || null}
+         */
+        this.OutLanguage = null;
 
     }
 
@@ -6753,6 +6804,8 @@ class DescribeTopClientIpSumInfoListRequest extends  AbstractModel {
         this.PageNum = 'PageNum' in params ? params.PageNum : null;
         this.PageSize = 'PageSize' in params ? params.PageSize : null;
         this.OrderParam = 'OrderParam' in params ? params.OrderParam : null;
+        this.MainlandOrOversea = 'MainlandOrOversea' in params ? params.MainlandOrOversea : null;
+        this.OutLanguage = 'OutLanguage' in params ? params.OutLanguage : null;
 
     }
 }
@@ -7006,6 +7059,12 @@ class ProIspPlayCodeDataInfo extends  AbstractModel {
         super();
 
         /**
+         * 国家或地区。
+         * @type {string || null}
+         */
+        this.CountryAreaName = null;
+
+        /**
          * 省份。
          * @type {string || null}
          */
@@ -7050,6 +7109,7 @@ class ProIspPlayCodeDataInfo extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.CountryAreaName = 'CountryAreaName' in params ? params.CountryAreaName : null;
         this.ProvinceName = 'ProvinceName' in params ? params.ProvinceName : null;
         this.IspName = 'IspName' in params ? params.IspName : null;
         this.Code2xx = 'Code2xx' in params ? params.Code2xx : null;
@@ -7855,6 +7915,12 @@ class ClientIpPlaySumInfo extends  AbstractModel {
          */
         this.TotalFailedRequest = null;
 
+        /**
+         * 客户端所在国家。
+         * @type {string || null}
+         */
+        this.CountryArea = null;
+
     }
 
     /**
@@ -7869,6 +7935,7 @@ class ClientIpPlaySumInfo extends  AbstractModel {
         this.TotalFlux = 'TotalFlux' in params ? params.TotalFlux : null;
         this.TotalRequest = 'TotalRequest' in params ? params.TotalRequest : null;
         this.TotalFailedRequest = 'TotalFailedRequest' in params ? params.TotalFailedRequest : null;
+        this.CountryArea = 'CountryArea' in params ? params.CountryArea : null;
 
     }
 }
@@ -8035,7 +8102,7 @@ class DescribeProIspPlaySumInfoListRequest extends  AbstractModel {
         this.EndTime = null;
 
         /**
-         * 统计的类型，可选值包括”Province”，”Isp”。
+         * 统计的类型，可选值：”Province”，”Isp”，“CountryOrArea”。
          * @type {string || null}
          */
         this.StatType = null;
@@ -8047,19 +8114,28 @@ class DescribeProIspPlaySumInfoListRequest extends  AbstractModel {
         this.PlayDomains = null;
 
         /**
-         * 页号，
-范围是[1,1000]，
-默认值是1。
+         * 页号，范围是[1,1000]，默认值是1。
          * @type {number || null}
          */
         this.PageNum = null;
 
         /**
-         * 每页个数，范围是[1,1000]，
-默认值是20。
+         * 每页个数，范围是[1,1000]，默认值是20。
          * @type {number || null}
          */
         this.PageSize = null;
+
+        /**
+         * 地域，可选值：Mainland，Oversea，China，Foreign，Global（默认值）；如果为空，查询总的数据；如果为“Mainland”，查询中国大陆的数据；如果为“Oversea”，则查询中国大陆以外的数据；如果为China，查询中国的数据（包括港澳台）；如果为Foreign，查询国外的数据（不包括港澳台）。
+         * @type {string || null}
+         */
+        this.MainlandOrOversea = null;
+
+        /**
+         * 输出字段使用的语言，可选值：Chinese（默认值），English；目前国家，省份和运营商支持多语言。
+         * @type {string || null}
+         */
+        this.OutLanguage = null;
 
     }
 
@@ -8076,6 +8152,8 @@ class DescribeProIspPlaySumInfoListRequest extends  AbstractModel {
         this.PlayDomains = 'PlayDomains' in params ? params.PlayDomains : null;
         this.PageNum = 'PageNum' in params ? params.PageNum : null;
         this.PageSize = 'PageSize' in params ? params.PageSize : null;
+        this.MainlandOrOversea = 'MainlandOrOversea' in params ? params.MainlandOrOversea : null;
+        this.OutLanguage = 'OutLanguage' in params ? params.OutLanguage : null;
 
     }
 }
@@ -8682,6 +8760,7 @@ class CreateLiveTranscodeTemplateRequest extends  AbstractModel {
 
         /**
          * 音频编码：aac，默认原始音频格式。
+注意：当前该参数未生效，待后续支持！
          * @type {string || null}
          */
         this.Acodec = null;
@@ -11402,7 +11481,7 @@ class DescribeProIspPlaySumInfoListResponse extends  AbstractModel {
         this.TotalPage = null;
 
         /**
-         * 省份或运营商汇总数据列表。
+         * 省份，运营商，国家或地区汇总数据列表。
          * @type {Array.<ProIspPlaySumInfo> || null}
          */
         this.DataInfoList = null;
