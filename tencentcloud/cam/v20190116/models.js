@@ -1441,6 +1441,13 @@ class StrategyInfo extends  AbstractModel {
          */
         this.ServiceType = null;
 
+        /**
+         * 当需要查询标记实体是否已经关联策略时不为null。0表示未关联策略，1表示已关联策略
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.IsAttached = null;
+
     }
 
     /**
@@ -1458,6 +1465,7 @@ class StrategyInfo extends  AbstractModel {
         this.CreateMode = 'CreateMode' in params ? params.CreateMode : null;
         this.Attachments = 'Attachments' in params ? params.Attachments : null;
         this.ServiceType = 'ServiceType' in params ? params.ServiceType : null;
+        this.IsAttached = 'IsAttached' in params ? params.IsAttached : null;
 
     }
 }
@@ -2215,14 +2223,14 @@ class AttachPolicyInfo extends  AbstractModel {
         /**
          * 策略关联操作者主张号
 注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
+         * @type {string || null}
          */
         this.OperateOwnerUin = null;
 
         /**
          * 策略关联操作者ID，如果UinType为0表示子帐号Uin，如果UinType为1表示角色ID
 注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
+         * @type {string || null}
          */
         this.OperateUin = null;
 

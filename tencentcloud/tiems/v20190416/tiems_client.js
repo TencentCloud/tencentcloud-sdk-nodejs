@@ -19,6 +19,7 @@ const AbstractClient = require('../../common/abstract_client')
 const DeleteJobResponse = models.DeleteJobResponse;
 const DeleteRuntimeResponse = models.DeleteRuntimeResponse;
 const CreateJobRequest = models.CreateJobRequest;
+const ExposeServiceRequest = models.ExposeServiceRequest;
 const DescribeServiceConfigsResponse = models.DescribeServiceConfigsResponse;
 const CreateJobResponse = models.CreateJobResponse;
 const DeleteServiceResponse = models.DeleteServiceResponse;
@@ -29,7 +30,6 @@ const Conditions = models.Conditions;
 const DescribeServiceConfigsRequest = models.DescribeServiceConfigsRequest;
 const DeleteServiceConfigResponse = models.DeleteServiceConfigResponse;
 const Config = models.Config;
-const Expose = models.Expose;
 const PredictInput = models.PredictInput;
 const CreateRuntimeResponse = models.CreateRuntimeResponse;
 const Job = models.Job;
@@ -43,6 +43,7 @@ const JobStatus = models.JobStatus;
 const UpdateServiceRequest = models.UpdateServiceRequest;
 const Filter = models.Filter;
 const CreateServiceConfigResponse = models.CreateServiceConfigResponse;
+const ExposeInfo = models.ExposeInfo;
 const DeleteServiceRequest = models.DeleteServiceRequest;
 const Runtime = models.Runtime;
 const ServiceStatus = models.ServiceStatus;
@@ -50,6 +51,7 @@ const Option = models.Option;
 const DeleteJobRequest = models.DeleteJobRequest;
 const Scaler = models.Scaler;
 const DescribeRuntimesRequest = models.DescribeRuntimesRequest;
+const ExposeServiceResponse = models.ExposeServiceResponse;
 const CreateServiceConfigRequest = models.CreateServiceConfigRequest;
 const UpdateJobResponse = models.UpdateJobResponse;
 const CreateRuntimeRequest = models.CreateRuntimeRequest;
@@ -81,14 +83,14 @@ class TiemsClient extends AbstractClient {
     }
 
     /**
-     * 更新任务
-     * @param {UpdateJobRequest} req
-     * @param {function(string, UpdateJobResponse):void} cb
+     * 暴露服务
+     * @param {ExposeServiceRequest} req
+     * @param {function(string, ExposeServiceResponse):void} cb
      * @public
      */
-    UpdateJob(req, cb) {
-        let resp = new UpdateJobResponse();
-        this.request("UpdateJob", req, resp, cb);
+    ExposeService(req, cb) {
+        let resp = new ExposeServiceResponse();
+        this.request("ExposeService", req, resp, cb);
     }
 
     /**
@@ -122,6 +124,17 @@ class TiemsClient extends AbstractClient {
     CreateRuntime(req, cb) {
         let resp = new CreateRuntimeResponse();
         this.request("CreateRuntime", req, resp, cb);
+    }
+
+    /**
+     * 更新任务
+     * @param {UpdateJobRequest} req
+     * @param {function(string, UpdateJobResponse):void} cb
+     * @public
+     */
+    UpdateJob(req, cb) {
+        let resp = new UpdateJobResponse();
+        this.request("UpdateJob", req, resp, cb);
     }
 
     /**
