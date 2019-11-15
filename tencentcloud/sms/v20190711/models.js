@@ -129,13 +129,13 @@ class PullSmsSendStatus extends  AbstractModel {
         this.NationCode = null;
 
         /**
-         * 手机号码（ e.164 标准）
+         * 手机号码,e.164标准，+[国家或地区码][手机号] ，示例如：+8613711112222， 其中前面有一个+号 ，86为国家码，13711112222为手机号
          * @type {string || null}
          */
         this.PurePhoneNumber = null;
 
         /**
-         * 手机号码
+         * 手机号码，普通格式，示例如：13711112222
          * @type {string || null}
          */
         this.PhoneNumber = null;
@@ -265,8 +265,8 @@ class PullSmsReplyStatus extends  AbstractModel {
         super();
 
         /**
-         * 通道扩展码，默认没有开通（需要填空）
-         * @type {string || null}
+         * 短信码号扩展号，默认未开通，如需开通请联系 [sms helper](https://cloud.tencent.com/document/product/382/3773)
+         * @type {number || null}
          */
         this.ExtendCode = null;
 
@@ -277,7 +277,7 @@ class PullSmsReplyStatus extends  AbstractModel {
         this.NationCode = null;
 
         /**
-         * 手机号码（ e.164 标准）
+         * 手机号码,e.164标准，+[国家或地区码][手机号] ，示例如：+8613711112222， 其中前面有一个+号 ，86为国家码，13711112222为手机号
          * @type {string || null}
          */
         this.PhoneNumber = null;
@@ -295,8 +295,8 @@ class PullSmsReplyStatus extends  AbstractModel {
         this.ReplyContent = null;
 
         /**
-         * 回复时间，UNIX 时间戳（单位：秒）
-         * @type {number || null}
+         * 回复时间(例如：2019-10-08 17:18:37)
+         * @type {string || null}
          */
         this.ReplyTime = null;
 

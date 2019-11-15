@@ -93,7 +93,7 @@ class TextArithmetic extends  AbstractModel {
         this.Confidence = null;
 
         /**
-         * 文本行坐标，以四个顶点坐标表示（保留字段，暂不支持）
+         * 原图文本行坐标，以四个顶点坐标表示（保留字段，暂不支持）
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<Coord> || null}
          */
@@ -104,6 +104,29 @@ class TextArithmetic extends  AbstractModel {
          * @type {string || null}
          */
         this.AdvancedInfo = null;
+
+        /**
+         * 文本行在旋转纠正之后的图像中的像素坐标，表示为（左上角x, 左上角y，宽width，高height）
+         * @type {ItemCoord || null}
+         */
+        this.ItemCoord = null;
+
+        /**
+         * 算式题型编号：
+‘1’: 加减乘除四则
+‘2’: 加减乘除已知结果求运算因子
+‘3’: 判断大小
+‘4’: 约等于估算
+‘5’: 带余数除法
+‘6’: 分数四则运算
+‘7’: 单位换算
+‘8’: 竖式加减法
+‘9’: 竖式乘除法
+‘10’: 脱式计算
+‘11’: 解方程
+         * @type {string || null}
+         */
+        this.ExpressionType = null;
 
     }
 
@@ -127,6 +150,13 @@ class TextArithmetic extends  AbstractModel {
             }
         }
         this.AdvancedInfo = 'AdvancedInfo' in params ? params.AdvancedInfo : null;
+
+        if (params.ItemCoord) {
+            let obj = new ItemCoord();
+            obj.deserialize(params.ItemCoord)
+            this.ItemCoord = obj;
+        }
+        this.ExpressionType = 'ExpressionType' in params ? params.ExpressionType : null;
 
     }
 }
@@ -420,6 +450,12 @@ class EstateCertOCRResponse extends  AbstractModel {
         this.Angle = null;
 
         /**
+         * 不动产权号
+         * @type {string || null}
+         */
+        this.Number = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -445,6 +481,7 @@ class EstateCertOCRResponse extends  AbstractModel {
         this.Term = 'Term' in params ? params.Term : null;
         this.Other = 'Other' in params ? params.Other : null;
         this.Angle = 'Angle' in params ? params.Angle : null;
+        this.Number = 'Number' in params ? params.Number : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -5038,6 +5075,55 @@ class DutyPaidProofOCRRequest extends  AbstractModel {
 }
 
 /**
+ * 文本行在旋转纠正之后的图像中的像素坐标，表示为（左上角x, 左上角y，宽width，高height）
+ * @class
+ */
+class ItemCoord extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 左上角x
+         * @type {number || null}
+         */
+        this.X = null;
+
+        /**
+         * 左上角y
+         * @type {number || null}
+         */
+        this.Y = null;
+
+        /**
+         * 宽width
+         * @type {number || null}
+         */
+        this.Width = null;
+
+        /**
+         * 高height
+         * @type {number || null}
+         */
+        this.Height = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.X = 'X' in params ? params.X : null;
+        this.Y = 'Y' in params ? params.Y : null;
+        this.Width = 'Width' in params ? params.Width : null;
+        this.Height = 'Height' in params ? params.Height : null;
+
+    }
+}
+
+/**
  * OrgCodeCertOCR返回参数结构体
  * @class
  */
@@ -6740,6 +6826,7 @@ module.exports = {
     FormulaOCRRequest: FormulaOCRRequest,
     PassportOCRRequest: PassportOCRRequest,
     DutyPaidProofOCRRequest: DutyPaidProofOCRRequest,
+    ItemCoord: ItemCoord,
     OrgCodeCertOCRResponse: OrgCodeCertOCRResponse,
     MixedInvoiceOCRRequest: MixedInvoiceOCRRequest,
     CarInvoiceOCRResponse: CarInvoiceOCRResponse,

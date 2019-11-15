@@ -236,7 +236,7 @@ class GetFederationTokenRequest extends  AbstractModel {
         super();
 
         /**
-         * 联合身份用户昵称
+         * 调用方英文名称，由字母组成。
          * @type {string || null}
          */
         this.Name = null;
@@ -252,7 +252,7 @@ class GetFederationTokenRequest extends  AbstractModel {
         this.Policy = null;
 
         /**
-         * 指定临时证书的有效期，单位：秒，默认1800秒，最长可设定有效期为7200秒
+         * 指定临时证书的有效期，单位：秒，默认1800秒，最长可设定有效期为7200秒。
          * @type {number || null}
          */
         this.DurationSeconds = null;

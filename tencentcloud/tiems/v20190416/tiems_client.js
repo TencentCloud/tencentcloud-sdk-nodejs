@@ -16,29 +16,46 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
-const DeleteServiceConfigResponse = models.DeleteServiceConfigResponse;
+const DeleteJobResponse = models.DeleteJobResponse;
+const DeleteRuntimeResponse = models.DeleteRuntimeResponse;
+const CreateJobRequest = models.CreateJobRequest;
 const DescribeServiceConfigsResponse = models.DescribeServiceConfigsResponse;
+const CreateJobResponse = models.CreateJobResponse;
 const DeleteServiceResponse = models.DeleteServiceResponse;
 const UpdateServiceResponse = models.UpdateServiceResponse;
+const Instance = models.Instance;
 const DescribeServicesResponse = models.DescribeServicesResponse;
 const Conditions = models.Conditions;
 const DescribeServiceConfigsRequest = models.DescribeServiceConfigsRequest;
-const Option = models.Option;
-const Service = models.Service;
+const DeleteServiceConfigResponse = models.DeleteServiceConfigResponse;
+const Config = models.Config;
+const Expose = models.Expose;
+const PredictInput = models.PredictInput;
+const CreateRuntimeResponse = models.CreateRuntimeResponse;
+const Job = models.Job;
+const UpdateJobRequest = models.UpdateJobRequest;
 const DescribeRuntimesResponse = models.DescribeRuntimesResponse;
+const DescribeInstancesResponse = models.DescribeInstancesResponse;
+const DescribeInstancesRequest = models.DescribeInstancesRequest;
 const CreateServiceResponse = models.CreateServiceResponse;
 const CreateServiceRequest = models.CreateServiceRequest;
+const JobStatus = models.JobStatus;
 const UpdateServiceRequest = models.UpdateServiceRequest;
 const Filter = models.Filter;
 const CreateServiceConfigResponse = models.CreateServiceConfigResponse;
 const DeleteServiceRequest = models.DeleteServiceRequest;
 const Runtime = models.Runtime;
+const ServiceStatus = models.ServiceStatus;
+const Option = models.Option;
+const DeleteJobRequest = models.DeleteJobRequest;
 const Scaler = models.Scaler;
-const ServiceConfig = models.ServiceConfig;
 const DescribeRuntimesRequest = models.DescribeRuntimesRequest;
 const CreateServiceConfigRequest = models.CreateServiceConfigRequest;
+const UpdateJobResponse = models.UpdateJobResponse;
+const CreateRuntimeRequest = models.CreateRuntimeRequest;
+const ModelService = models.ModelService;
 const DeleteServiceConfigRequest = models.DeleteServiceConfigRequest;
-const ServiceStatus = models.ServiceStatus;
+const DeleteRuntimeRequest = models.DeleteRuntimeRequest;
 const DescribeServicesRequest = models.DescribeServicesRequest;
 
 
@@ -64,6 +81,17 @@ class TiemsClient extends AbstractClient {
     }
 
     /**
+     * 更新任务
+     * @param {UpdateJobRequest} req
+     * @param {function(string, UpdateJobResponse):void} cb
+     * @public
+     */
+    UpdateJob(req, cb) {
+        let resp = new UpdateJobResponse();
+        this.request("UpdateJob", req, resp, cb);
+    }
+
+    /**
      * 描述服务
      * @param {DescribeServicesRequest} req
      * @param {function(string, DescribeServicesResponse):void} cb
@@ -86,6 +114,39 @@ class TiemsClient extends AbstractClient {
     }
 
     /**
+     * 创建运行环境
+     * @param {CreateRuntimeRequest} req
+     * @param {function(string, CreateRuntimeResponse):void} cb
+     * @public
+     */
+    CreateRuntime(req, cb) {
+        let resp = new CreateRuntimeResponse();
+        this.request("CreateRuntime", req, resp, cb);
+    }
+
+    /**
+     * 删除任务
+     * @param {DeleteJobRequest} req
+     * @param {function(string, DeleteJobResponse):void} cb
+     * @public
+     */
+    DeleteJob(req, cb) {
+        let resp = new DeleteJobResponse();
+        this.request("DeleteJob", req, resp, cb);
+    }
+
+    /**
+     * 删除运行环境
+     * @param {DeleteRuntimeRequest} req
+     * @param {function(string, DeleteRuntimeResponse):void} cb
+     * @public
+     */
+    DeleteRuntime(req, cb) {
+        let resp = new DeleteRuntimeResponse();
+        this.request("DeleteRuntime", req, resp, cb);
+    }
+
+    /**
      * 描述服务配置
      * @param {DescribeServiceConfigsRequest} req
      * @param {function(string, DescribeServiceConfigsResponse):void} cb
@@ -105,6 +166,28 @@ class TiemsClient extends AbstractClient {
     DeleteService(req, cb) {
         let resp = new DeleteServiceResponse();
         this.request("DeleteService", req, resp, cb);
+    }
+
+    /**
+     * 获取节点列表
+     * @param {DescribeInstancesRequest} req
+     * @param {function(string, DescribeInstancesResponse):void} cb
+     * @public
+     */
+    DescribeInstances(req, cb) {
+        let resp = new DescribeInstancesResponse();
+        this.request("DescribeInstances", req, resp, cb);
+    }
+
+    /**
+     * 创建任务
+     * @param {CreateJobRequest} req
+     * @param {function(string, CreateJobResponse):void} cb
+     * @public
+     */
+    CreateJob(req, cb) {
+        let resp = new CreateJobResponse();
+        this.request("CreateJob", req, resp, cb);
     }
 
     /**

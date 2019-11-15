@@ -234,6 +234,12 @@ class TextResetRequest extends  AbstractModel {
          */
         this.PlatformType = null;
 
+        /**
+         * 当PlatformType为微信公众号或企业微信时，传递对应微信公众号或企业微信的唯一标识
+         * @type {string || null}
+         */
+        this.PlatformId = null;
+
     }
 
     /**
@@ -247,6 +253,7 @@ class TextResetRequest extends  AbstractModel {
         this.BotEnv = 'BotEnv' in params ? params.BotEnv : null;
         this.TerminalId = 'TerminalId' in params ? params.TerminalId : null;
         this.PlatformType = 'PlatformType' in params ? params.PlatformType : null;
+        this.PlatformId = 'PlatformId' in params ? params.PlatformId : null;
 
     }
 }
@@ -437,6 +444,12 @@ class TextProcessRequest extends  AbstractModel {
          */
         this.PlatformType = null;
 
+        /**
+         * 当PlatformType为微信公众号或企业微信时，传递对应微信公众号或企业微信的唯一标识
+         * @type {string || null}
+         */
+        this.PlatformId = null;
+
     }
 
     /**
@@ -452,6 +465,7 @@ class TextProcessRequest extends  AbstractModel {
         this.InputText = 'InputText' in params ? params.InputText : null;
         this.SessionAttributes = 'SessionAttributes' in params ? params.SessionAttributes : null;
         this.PlatformType = 'PlatformType' in params ? params.PlatformType : null;
+        this.PlatformId = 'PlatformId' in params ? params.PlatformId : null;
 
     }
 }

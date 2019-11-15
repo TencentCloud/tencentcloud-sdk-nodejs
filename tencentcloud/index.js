@@ -27,6 +27,7 @@ module.exports = {
     cr: require("./cr"),
     cvm: require("./cvm"),
     cws: require("./cws"),
+    dayu: require("./dayu"),
     dc: require("./dc"),
     dcdb: require("./dcdb"),
     domain: require("./domain"),

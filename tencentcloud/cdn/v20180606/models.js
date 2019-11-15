@@ -25,13 +25,15 @@ class PurgePathCacheRequest extends  AbstractModel {
         super();
 
         /**
-         * 要刷新的目录列表，必须包含协议头部。
+         * 目录列表，需要包含协议头部 http:// 或 https://
          * @type {Array.<string> || null}
          */
         this.Paths = null;
 
         /**
-         * 刷新类型，flush 代表刷新有更新的资源，delete 表示刷新全部资源。
+         * 刷新类型
+flush：刷新产生更新的资源
+delete：刷新全部资源
          * @type {string || null}
          */
         this.FlushType = null;
@@ -47,6 +49,123 @@ class PurgePathCacheRequest extends  AbstractModel {
         }
         this.Paths = 'Paths' in params ? params.Paths : null;
         this.FlushType = 'FlushType' in params ? params.FlushType : null;
+
+    }
+}
+
+/**
+ * DescribeCdnDomainLogs返回参数结构体
+ * @class
+ */
+class DescribeCdnDomainLogsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 日志包下载链接
+         * @type {Array.<DomainLog> || null}
+         */
+        this.DomainLogs = null;
+
+        /**
+         * 查询到的总条数
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.DomainLogs) {
+            this.DomainLogs = new Array();
+            for (let z in params.DomainLogs) {
+                let obj = new DomainLog();
+                obj.deserialize(params.DomainLogs[z]);
+                this.DomainLogs.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeCdnDomainLogs请求参数结构体
+ * @class
+ */
+class DescribeCdnDomainLogsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 指定域名查询
+         * @type {string || null}
+         */
+        this.Domain = null;
+
+        /**
+         * 开始时间，如 2019-09-04 00:00:00
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * 结束时间，如 2019-09-04 12:00:00
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * 分页查询偏移量，默认为 0 （第一页）
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 分页查询限制数目，默认为 100，最大为 1000
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 指定区域下载日志
+mainland：获取境内加速日志包下载链接
+overseas：获取境外加速日志包下载链接
+global：同时获取境内、境外加速日志包下载链接（分开打包）
+不指定时默认为 mainland
+         * @type {string || null}
+         */
+        this.Area = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Domain = 'Domain' in params ? params.Domain : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Area = 'Area' in params ? params.Area : null;
 
     }
 }
@@ -125,7 +244,7 @@ class PurgeUrlsCacheRequest extends  AbstractModel {
         super();
 
         /**
-         * 要刷新的Url列表，必须包含协议头部。
+         * URL 列表，需要包含协议头部 http:// 或 https://
          * @type {Array.<string> || null}
          */
         this.Urls = null;
@@ -345,7 +464,7 @@ overseas：指定查询中国境外 CDN 数据
 }
 
 /**
- * 预热任务日志详情。
+ * 预热任务详情
  * @class
  */
 class PushTask extends  AbstractModel {
@@ -353,37 +472,43 @@ class PushTask extends  AbstractModel {
         super();
 
         /**
-         * 预热任务Id，前十位为时间戳。
+         * 预热任务 ID
          * @type {string || null}
          */
         this.TaskId = null;
 
         /**
-         * 预热Url。
+         * 预热 URL
          * @type {string || null}
          */
         this.Url = null;
 
         /**
-         * 预热任务状态，fail表示失败，done表示成功，process表示预热中。
+         * 预热任务状态
+fail：预热失败
+done：预热成功
+process：预热中
          * @type {string || null}
          */
         this.Status = null;
 
         /**
-         * 预热百分比。
+         * 预热进度百分比
          * @type {number || null}
          */
         this.Percent = null;
 
         /**
-         * 预热任务提交时间。
+         * 预热任务提交时间
          * @type {string || null}
          */
         this.CreateTime = null;
 
         /**
-         * 预热区域，mainland，overseas或global。
+         * 预热区域
+mainland：境内
+overseas：境外
+global：全球
          * @type {string || null}
          */
         this.Area = null;
@@ -480,16 +605,27 @@ class PushUrlsCacheRequest extends  AbstractModel {
         super();
 
         /**
-         * URL 列表，提交时需要包含协议头部（http:// 或 https://）
+         * URL 列表，需要包含协议头部 http:// 或 https://
          * @type {Array.<string> || null}
          */
         this.Urls = null;
 
         /**
-         * 预热请求回源时 HTTP 请求的 User-Agent 头部，默认为 TencentCdn
+         * 指定预热请求回源时 HTTP 请求的 User-Agent 头部
+默认为 TencentCdn
          * @type {string || null}
          */
         this.UserAgent = null;
+
+        /**
+         * 预热生效区域
+mainland：预热至境内节点
+overseas：预热至境外节点
+global：预热全球节点
+不填充情况下，默认为 mainland， URL 中域名必须在对应区域启用了加速服务才能提交对应区域的预热任务
+         * @type {string || null}
+         */
+        this.Area = null;
 
     }
 
@@ -502,6 +638,7 @@ class PushUrlsCacheRequest extends  AbstractModel {
         }
         this.Urls = 'Urls' in params ? params.Urls : null;
         this.UserAgent = 'UserAgent' in params ? params.UserAgent : null;
+        this.Area = 'Area' in params ? params.Area : null;
 
     }
 }
@@ -527,37 +664,44 @@ class DescribePushTasksRequest extends  AbstractModel {
         this.EndTime = null;
 
         /**
-         * 提交时返回的任务 Id，查询时 TaskId 和起始时间必须指定一项。
+         * 指定任务 ID 查询
+TaskId 和起始时间必须指定一项
          * @type {string || null}
          */
         this.TaskId = null;
 
         /**
-         * 查询关键字，请输入域名或 http(s):// 开头完整 URL。
+         * 查询关键字，请输入域名或 http(s):// 开头完整 URL
          * @type {string || null}
          */
         this.Keyword = null;
 
         /**
-         * 分页查询偏移量，默认为 0 （第一页）。
+         * 分页查询偏移量，默认为 0 （第一页）
          * @type {number || null}
          */
         this.Offset = null;
 
         /**
-         * 分页查询限制数目，默认为20。
+         * 分页查询限制数目，默认为 20
          * @type {number || null}
          */
         this.Limit = null;
 
         /**
-         * 查询刷新记录指定地区。mainland：中国大陆。
+         * 指定地区查询预热纪录
+mainland：境内
+overseas：境外
+global：全球
          * @type {string || null}
          */
         this.Area = null;
 
         /**
-         * 查询指定任务状态，fail表示失败，done表示成功，process表示刷新中。
+         * 指定任务状态查询
+fail：预热失败
+done：预热成功
+process：预热中
          * @type {string || null}
          */
         this.Status = null;
@@ -579,6 +723,41 @@ class DescribePushTasksRequest extends  AbstractModel {
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.Area = 'Area' in params ? params.Area : null;
         this.Status = 'Status' in params ? params.Status : null;
+
+    }
+}
+
+/**
+ * DescribeTrafficPackages请求参数结构体
+ * @class
+ */
+class DescribeTrafficPackagesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 分页查询起始地址，默认 0（第一页）
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 分页查询记录个数，默认100，最大1000
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
 
     }
 }
@@ -642,7 +821,7 @@ class PurgePathCacheResponse extends  AbstractModel {
         super();
 
         /**
-         * 刷新任务Id，前十位为提交任务时的UTC时间。
+         * 刷新任务 ID，同一批次提交的目录共用一个任务 ID
          * @type {string || null}
          */
         this.TaskId = null;
@@ -669,7 +848,7 @@ class PurgePathCacheResponse extends  AbstractModel {
 }
 
 /**
- * 刷新任务日志详情
+ * 刷新任务详情
  * @class
  */
 class PurgeTask extends  AbstractModel {
@@ -677,31 +856,38 @@ class PurgeTask extends  AbstractModel {
         super();
 
         /**
-         * 刷新任务ID。
+         * 刷新任务 ID
          * @type {string || null}
          */
         this.TaskId = null;
 
         /**
-         * 刷新Url。
+         * 刷新 URL
          * @type {string || null}
          */
         this.Url = null;
 
         /**
-         * 刷新任务状态，fail表示失败，done表示成功，process表示刷新中。
+         * 刷新任务状态
+fail：刷新失败
+done：刷新成功
+process：刷新中
          * @type {string || null}
          */
         this.Status = null;
 
         /**
-         * 刷新类型，url表示url刷新，path表示目录刷新。
+         * 刷新类型
+url：URL 刷新
+path：目录刷新
          * @type {string || null}
          */
         this.PurgeType = null;
 
         /**
-         * 刷新资源方式，flush代表刷新更新资源，delete代表刷新全部资源。
+         * 刷新方式
+flush：刷新更新资源（仅目录刷新时有此类型）
+delete：刷新全部资源
          * @type {string || null}
          */
         this.FlushType = null;
@@ -740,52 +926,67 @@ class DescribePurgeTasksRequest extends  AbstractModel {
         super();
 
         /**
-         * 查询刷新类型。url：查询 url 刷新记录；path：查询目录刷新记录。
+         * 指定刷新类型查询
+url：url 刷新记录
+path：目录刷新记录
          * @type {string || null}
          */
         this.PurgeType = null;
 
         /**
-         * 开始时间，如2018-08-08 00:00:00。
+         * 根据时间区间查询时，填充开始时间，如 2018-08-08 00:00:00
          * @type {string || null}
          */
         this.StartTime = null;
 
         /**
-         * 结束时间，如2018-08-08 23:59:59。
+         * 根据时间区间查询时，填充结束时间，如 2018-08-08 23:59:59
          * @type {string || null}
          */
         this.EndTime = null;
 
         /**
-         * 提交时返回的任务 Id，查询时 TaskId 和起始时间必须指定一项。
+         * 根据任务 ID 查询时，填充任务 ID
+查询时任务 ID 与起始时间必须填充一项
          * @type {string || null}
          */
         this.TaskId = null;
 
         /**
-         * 分页查询偏移量，默认为 0 （第一页）。
+         * 分页查询偏移量，默认为 0 （第一页）
          * @type {number || null}
          */
         this.Offset = null;
 
         /**
-         * 分页查询限制数目，默认为20。
+         * 分页查询限制数目，默认为 20
          * @type {number || null}
          */
         this.Limit = null;
 
         /**
-         * 查询关键字，请输入域名或 http(s):// 开头完整 URL。
+         * 支持域名过滤，或 http(s):// 开头完整 URL 过滤
          * @type {string || null}
          */
         this.Keyword = null;
 
         /**
-         * 查询指定任务状态，fail表示失败，done表示成功，process表示刷新中。
+         * 指定任务状态查询
+fail：刷新失败
+done：刷新成功
+process：刷新中
          * @type {string || null}
          */
         this.Status = null;
+
+        /**
+         * 指定刷新地域查询
+mainland：境内
+overseas：境外
+global：全球
+         * @type {string || null}
+         */
+        this.Area = null;
 
     }
 
@@ -804,6 +1005,7 @@ class DescribePurgeTasksRequest extends  AbstractModel {
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.Keyword = 'Keyword' in params ? params.Keyword : null;
         this.Status = 'Status' in params ? params.Status : null;
+        this.Area = 'Area' in params ? params.Area : null;
 
     }
 }
@@ -964,6 +1166,70 @@ class DescribeMapInfoResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeTrafficPackages返回参数结构体
+ * @class
+ */
+class DescribeTrafficPackagesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 流量包总个数
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 流量包详情
+         * @type {Array.<TrafficPackage> || null}
+         */
+        this.TrafficPackages = null;
+
+        /**
+         * 即将过期的流量包个数（7天内）
+         * @type {number || null}
+         */
+        this.ExpiringCount = null;
+
+        /**
+         * 有效流量包个数
+         * @type {number || null}
+         */
+        this.EnabledCount = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.TrafficPackages) {
+            this.TrafficPackages = new Array();
+            for (let z in params.TrafficPackages) {
+                let obj = new TrafficPackage();
+                obj.deserialize(params.TrafficPackages[z]);
+                this.TrafficPackages.push(obj);
+            }
+        }
+        this.ExpiringCount = 'ExpiringCount' in params ? params.ExpiringCount : null;
+        this.EnabledCount = 'EnabledCount' in params ? params.EnabledCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeMapInfo请求参数结构体
  * @class
  */
@@ -1043,9 +1309,10 @@ class DescribePayTypeRequest extends  AbstractModel {
         super();
 
         /**
-         * 指定服务地域查询，不填充表示查询中国境内 CDN 计费方式
-mainland：指定查询中国境内 CDN 计费方式
-overseas：指定查询中国境外 CDN 计费方式
+         * 指定服务地域查询
+mainland：境内计费方式查询
+overseas：境外计费方式查询
+未填充时默认为 mainland
          * @type {string || null}
          */
         this.Area = null;
@@ -1126,6 +1393,64 @@ day：天粒度，查询时间区间大于 1 天时，默认返回天粒度活�
 }
 
 /**
+ * 日志包下载链接详情
+ * @class
+ */
+class DomainLog extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 日志包起始时间
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * 日志包结束时间
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * 日志包下载链接
+         * @type {string || null}
+         */
+        this.LogPath = null;
+
+        /**
+         * 日志包对应加速区域
+mainland：境内
+overseas：境外
+         * @type {string || null}
+         */
+        this.Area = null;
+
+        /**
+         * 日志包文件名
+         * @type {string || null}
+         */
+        this.LogName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.LogPath = 'LogPath' in params ? params.LogPath : null;
+        this.Area = 'Area' in params ? params.Area : null;
+        this.LogName = 'LogName' in params ? params.LogName : null;
+
+    }
+}
+
+/**
  * DescribePayType返回参数结构体
  * @class
  */
@@ -1137,7 +1462,7 @@ class DescribePayTypeResponse extends  AbstractModel {
          * 计费类型：
 flux：流量计费
 bandwidth：带宽计费
-如果修改过计费方式，表示下次生效的计费类型，否则表示当前计费类型。
+日结计费方式切换时，若当日产生消耗，则此字段表示第二天即将生效的计费方式，若未产生消耗，则表示已经生效的计费方式。
          * @type {string || null}
          */
         this.PayType = null;
@@ -1162,15 +1487,15 @@ max：峰值带宽计费，日结模式
         this.StatType = null;
 
         /**
-         * 地区计费方式，仅在查询中国境外 CDN 计费方式时可用
-all：表示全地区统一计费
-multiple：表示分地区计费。
+         * 境外计费类型：
+all：全地区统一计费
+multiple：分地区计费
          * @type {string || null}
          */
         this.RegionType = null;
 
         /**
-         * 当前计费类型：
+         * 当前生效计费类型：
 flux：流量计费
 bandwidth：带宽计费
          * @type {string || null}
@@ -1276,7 +1601,7 @@ class PurgeUrlsCacheResponse extends  AbstractModel {
         super();
 
         /**
-         * 刷新任务Id，前十位为提交任务时的UTC时间。
+         * 刷新任务 ID，同一批次提交的 URL 共用一个任务 ID
          * @type {string || null}
          */
         this.TaskId = null;
@@ -1461,6 +1786,107 @@ class DisableCachesResponse extends  AbstractModel {
 }
 
 /**
+ * CDN加速流量包。
+ * @class
+ */
+class TrafficPackage extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 流量包 Id
+         * @type {number || null}
+         */
+        this.Id = null;
+
+        /**
+         * 流量包类型
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * 流量包大小（单位为 Byte）
+         * @type {number || null}
+         */
+        this.Bytes = null;
+
+        /**
+         * 已消耗流量（单位为 Byte）
+         * @type {number || null}
+         */
+        this.BytesUsed = null;
+
+        /**
+         * 流量包状态
+enabled：已启用
+expired：已过期
+disabled：未启用
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * 流量包发放时间
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * 流量包生效时间
+         * @type {string || null}
+         */
+        this.EnableTime = null;
+
+        /**
+         * 流量包过期时间
+         * @type {string || null}
+         */
+        this.ExpireTime = null;
+
+        /**
+         * 流量包是否续订
+         * @type {boolean || null}
+         */
+        this.ContractExtension = null;
+
+        /**
+         * 流量包是否自动续订
+         * @type {boolean || null}
+         */
+        this.AutoExtension = null;
+
+        /**
+         * 流量包来源
+         * @type {string || null}
+         */
+        this.Channel = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Id = 'Id' in params ? params.Id : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Bytes = 'Bytes' in params ? params.Bytes : null;
+        this.BytesUsed = 'BytesUsed' in params ? params.BytesUsed : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.EnableTime = 'EnableTime' in params ? params.EnableTime : null;
+        this.ExpireTime = 'ExpireTime' in params ? params.ExpireTime : null;
+        this.ContractExtension = 'ContractExtension' in params ? params.ContractExtension : null;
+        this.AutoExtension = 'AutoExtension' in params ? params.AutoExtension : null;
+        this.Channel = 'Channel' in params ? params.Channel : null;
+
+    }
+}
+
+/**
  * DescribePurgeTasks返回参数结构体
  * @class
  */
@@ -1469,7 +1895,7 @@ class DescribePurgeTasksResponse extends  AbstractModel {
         super();
 
         /**
-         * 刷新历史记录
+         * 详细刷新记录
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<PurgeTask> || null}
          */
@@ -2091,7 +2517,7 @@ class PushUrlsCacheResponse extends  AbstractModel {
         super();
 
         /**
-         * 此批次提交任务对应的 Id，值唯一
+         * 此批提交的任务 ID
          * @type {string || null}
          */
         this.TaskId = null;
@@ -2350,6 +2776,8 @@ class RegionMapRelation extends  AbstractModel {
 
 module.exports = {
     PurgePathCacheRequest: PurgePathCacheRequest,
+    DescribeCdnDomainLogsResponse: DescribeCdnDomainLogsResponse,
+    DescribeCdnDomainLogsRequest: DescribeCdnDomainLogsRequest,
     CdnData: CdnData,
     PurgeUrlsCacheRequest: PurgeUrlsCacheRequest,
     ResourceData: ResourceData,
@@ -2360,6 +2788,7 @@ module.exports = {
     DescribeCdnIpRequest: DescribeCdnIpRequest,
     PushUrlsCacheRequest: PushUrlsCacheRequest,
     DescribePushTasksRequest: DescribePushTasksRequest,
+    DescribeTrafficPackagesRequest: DescribeTrafficPackagesRequest,
     DescribeIpVisitResponse: DescribeIpVisitResponse,
     PurgePathCacheResponse: PurgePathCacheResponse,
     PurgeTask: PurgeTask,
@@ -2367,15 +2796,18 @@ module.exports = {
     CacheOptResult: CacheOptResult,
     ListTopDataResponse: ListTopDataResponse,
     DescribeMapInfoResponse: DescribeMapInfoResponse,
+    DescribeTrafficPackagesResponse: DescribeTrafficPackagesResponse,
     DescribeMapInfoRequest: DescribeMapInfoRequest,
     EnableCachesResponse: EnableCachesResponse,
     DescribePayTypeRequest: DescribePayTypeRequest,
     DescribeIpVisitRequest: DescribeIpVisitRequest,
+    DomainLog: DomainLog,
     DescribePayTypeResponse: DescribePayTypeResponse,
     GetDisableRecordsRequest: GetDisableRecordsRequest,
     PurgeUrlsCacheResponse: PurgeUrlsCacheResponse,
     ListTopDataRequest: ListTopDataRequest,
     DisableCachesResponse: DisableCachesResponse,
+    TrafficPackage: TrafficPackage,
     DescribePurgeTasksResponse: DescribePurgeTasksResponse,
     DescribePushTasksResponse: DescribePushTasksResponse,
     ResourceOriginData: ResourceOriginData,

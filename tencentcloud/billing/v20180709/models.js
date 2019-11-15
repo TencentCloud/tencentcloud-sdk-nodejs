@@ -110,7 +110,7 @@ class DescribeBillSummaryByTagResponse extends  AbstractModel {
         /**
          * 各标签值花费分布详情
 注意：此字段可能返回 null，表示取不到有效值。
-         * @type {TagSummaryOverviewItem || null}
+         * @type {Array.<TagSummaryOverviewItem> || null}
          */
         this.SummaryOverview = null;
 
@@ -132,9 +132,12 @@ class DescribeBillSummaryByTagResponse extends  AbstractModel {
         this.Ready = 'Ready' in params ? params.Ready : null;
 
         if (params.SummaryOverview) {
-            let obj = new TagSummaryOverviewItem();
-            obj.deserialize(params.SummaryOverview)
-            this.SummaryOverview = obj;
+            this.SummaryOverview = new Array();
+            for (let z in params.SummaryOverview) {
+                let obj = new TagSummaryOverviewItem();
+                obj.deserialize(params.SummaryOverview[z]);
+                this.SummaryOverview.push(obj);
+            }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
