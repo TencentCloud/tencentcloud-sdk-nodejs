@@ -113,6 +113,7 @@ const ArithmeticOCRRequest = models.ArithmeticOCRRequest;
 const FormulaOCRRequest = models.FormulaOCRRequest;
 const PassportOCRRequest = models.PassportOCRRequest;
 const DutyPaidProofOCRRequest = models.DutyPaidProofOCRRequest;
+const ItemCoord = models.ItemCoord;
 const OrgCodeCertOCRResponse = models.OrgCodeCertOCRResponse;
 const MixedInvoiceOCRRequest = models.MixedInvoiceOCRRequest;
 const CarInvoiceOCRResponse = models.CarInvoiceOCRResponse;
