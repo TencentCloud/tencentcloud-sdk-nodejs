@@ -183,6 +183,55 @@ class CreateJobRequest extends  AbstractModel {
 }
 
 /**
+ * ExposeService请求参数结构体
+ * @class
+ */
+class ExposeServiceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 服务Id
+         * @type {string || null}
+         */
+        this.ServiceId = null;
+
+        /**
+         * 暴露方式，支持 EXTERNAL（外网暴露），VPC （VPC内网打通）
+         * @type {string || null}
+         */
+        this.ExposeType = null;
+
+        /**
+         * 暴露方式为 VPC 时，填写需要打通的私有网络Id
+         * @type {string || null}
+         */
+        this.VpcId = null;
+
+        /**
+         * 暴露方式为 VPC 时，填写需要打通的子网Id
+         * @type {string || null}
+         */
+        this.SubnetId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ServiceId = 'ServiceId' in params ? params.ServiceId : null;
+        this.ExposeType = 'ExposeType' in params ? params.ExposeType : null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
+
+    }
+}
+
+/**
  * DescribeServiceConfigs返回参数结构体
  * @class
  */
@@ -745,57 +794,6 @@ class Config extends  AbstractModel {
         this.Version = 'Version' in params ? params.Version : null;
         this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
         this.Description = 'Description' in params ? params.Description : null;
-
-    }
-}
-
-/**
- * 服务暴露方式
- * @class
- */
-class Expose extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 暴露方式，支持 EXTERNAL（外网暴露），VPC （VPC内网打通）
-         * @type {string || null}
-         */
-        this.ExposeType = null;
-
-        /**
-         * 暴露Ip。暴露方式为 EXTERNAL 为外网 Ip，暴露方式为 VPC 时为指定 Vpc 下的Vip
-         * @type {string || null}
-         */
-        this.Ip = null;
-
-        /**
-         * 暴露方式为 VPC 时，打通的私有网络Id
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.UnVpcId = null;
-
-        /**
-         * 暴露方式为 VPC 时，打通的子网Id
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.UnSubnetId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.ExposeType = 'ExposeType' in params ? params.ExposeType : null;
-        this.Ip = 'Ip' in params ? params.Ip : null;
-        this.UnVpcId = 'UnVpcId' in params ? params.UnVpcId : null;
-        this.UnSubnetId = 'UnSubnetId' in params ? params.UnSubnetId : null;
 
     }
 }
@@ -1684,6 +1682,57 @@ class CreateServiceConfigResponse extends  AbstractModel {
 }
 
 /**
+ * 暴露信息
+ * @class
+ */
+class ExposeInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 暴露方式，支持 EXTERNAL（外网暴露），VPC （VPC内网打通）
+         * @type {string || null}
+         */
+        this.ExposeType = null;
+
+        /**
+         * 暴露Ip。暴露方式为 EXTERNAL 为外网 Ip，暴露方式为 VPC 时为指定 Vpc 下的Vip
+         * @type {string || null}
+         */
+        this.Ip = null;
+
+        /**
+         * 暴露方式为 VPC 时，打通的私有网络Id
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.VpcId = null;
+
+        /**
+         * 暴露方式为 VPC 时，打通的子网Id
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.SubnetId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ExposeType = 'ExposeType' in params ? params.ExposeType : null;
+        this.Ip = 'Ip' in params ? params.Ip : null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
+
+    }
+}
+
+/**
  * DeleteService请求参数结构体
  * @class
  */
@@ -2001,6 +2050,46 @@ class DescribeRuntimesRequest extends  AbstractModel {
 }
 
 /**
+ * ExposeService返回参数结构体
+ * @class
+ */
+class ExposeServiceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 暴露方式
+         * @type {ExposeInfo || null}
+         */
+        this.Expose = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Expose) {
+            let obj = new ExposeInfo();
+            obj.deserialize(params.Expose)
+            this.Expose = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * CreateServiceConfig请求参数结构体
  * @class
  */
@@ -2281,7 +2370,7 @@ class ModelService extends  AbstractModel {
         /**
          * 暴露方式
 注意：此字段可能返回 null，表示取不到有效值。
-         * @type {Array.<Expose> || null}
+         * @type {Array.<ExposeInfo> || null}
          */
         this.Exposes = null;
 
@@ -2356,7 +2445,7 @@ class ModelService extends  AbstractModel {
         if (params.Exposes) {
             this.Exposes = new Array();
             for (let z in params.Exposes) {
-                let obj = new Expose();
+                let obj = new ExposeInfo();
                 obj.deserialize(params.Exposes[z]);
                 this.Exposes.push(obj);
             }
@@ -2500,6 +2589,7 @@ module.exports = {
     DeleteJobResponse: DeleteJobResponse,
     DeleteRuntimeResponse: DeleteRuntimeResponse,
     CreateJobRequest: CreateJobRequest,
+    ExposeServiceRequest: ExposeServiceRequest,
     DescribeServiceConfigsResponse: DescribeServiceConfigsResponse,
     CreateJobResponse: CreateJobResponse,
     DeleteServiceResponse: DeleteServiceResponse,
@@ -2510,7 +2600,6 @@ module.exports = {
     DescribeServiceConfigsRequest: DescribeServiceConfigsRequest,
     DeleteServiceConfigResponse: DeleteServiceConfigResponse,
     Config: Config,
-    Expose: Expose,
     PredictInput: PredictInput,
     CreateRuntimeResponse: CreateRuntimeResponse,
     Job: Job,
@@ -2524,6 +2613,7 @@ module.exports = {
     UpdateServiceRequest: UpdateServiceRequest,
     Filter: Filter,
     CreateServiceConfigResponse: CreateServiceConfigResponse,
+    ExposeInfo: ExposeInfo,
     DeleteServiceRequest: DeleteServiceRequest,
     Runtime: Runtime,
     ServiceStatus: ServiceStatus,
@@ -2531,6 +2621,7 @@ module.exports = {
     DeleteJobRequest: DeleteJobRequest,
     Scaler: Scaler,
     DescribeRuntimesRequest: DescribeRuntimesRequest,
+    ExposeServiceResponse: ExposeServiceResponse,
     CreateServiceConfigRequest: CreateServiceConfigRequest,
     UpdateJobResponse: UpdateJobResponse,
     CreateRuntimeRequest: CreateRuntimeRequest,
