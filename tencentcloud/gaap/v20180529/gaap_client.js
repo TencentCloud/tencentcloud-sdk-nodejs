@@ -26,7 +26,7 @@ const DeleteRuleRequest = models.DeleteRuleRequest;
 const BindRuleRealServersRequest = models.BindRuleRealServersRequest;
 const DescribeHTTPSListenersResponse = models.DescribeHTTPSListenersResponse;
 const ModifyProxiesProjectRequest = models.ModifyProxiesProjectRequest;
-const ListenerInfo = models.ListenerInfo;
+const DomainErrorPageInfo = models.DomainErrorPageInfo;
 const DescribeCertificateDetailRequest = models.DescribeCertificateDetailRequest;
 const TagResourceInfo = models.TagResourceInfo;
 const SetAuthenticationResponse = models.SetAuthenticationResponse;
@@ -39,6 +39,7 @@ const ModifyRealServerNameResponse = models.ModifyRealServerNameResponse;
 const DescribeGroupDomainConfigResponse = models.DescribeGroupDomainConfigResponse;
 const ModifyCertificateResponse = models.ModifyCertificateResponse;
 const OpenSecurityPolicyRequest = models.OpenSecurityPolicyRequest;
+const DeleteDomainErrorPageInfoRequest = models.DeleteDomainErrorPageInfoRequest;
 const DescribeListenerRealServersRequest = models.DescribeListenerRealServersRequest;
 const DescribeProxyGroupStatisticsRequest = models.DescribeProxyGroupStatisticsRequest;
 const DescribeHTTPSListenersRequest = models.DescribeHTTPSListenersRequest;
@@ -52,7 +53,9 @@ const DescribeProxiesResponse = models.DescribeProxiesResponse;
 const CreateRuleResponse = models.CreateRuleResponse;
 const ModifyRealServerNameRequest = models.ModifyRealServerNameRequest;
 const DeleteProxyGroupResponse = models.DeleteProxyGroupResponse;
+const CreateDomainErrorPageInfoResponse = models.CreateDomainErrorPageInfoResponse;
 const BindListenerRealServersRequest = models.BindListenerRealServersRequest;
+const ModifyProxyConfigurationRequest = models.ModifyProxyConfigurationRequest;
 const DescribeRuleRealServersRequest = models.DescribeRuleRealServersRequest;
 const DescribeGroupDomainConfigRequest = models.DescribeGroupDomainConfigRequest;
 const CreateProxyGroupDomainRequest = models.CreateProxyGroupDomainRequest;
@@ -87,6 +90,7 @@ const DescribeDestRegionsResponse = models.DescribeDestRegionsResponse;
 const DescribeProxiesRequest = models.DescribeProxiesRequest;
 const BindListenerRealServersResponse = models.BindListenerRealServersResponse;
 const ModifyProxyGroupAttributeResponse = models.ModifyProxyGroupAttributeResponse;
+const ListenerInfo = models.ListenerInfo;
 const DescribeUDPListenersResponse = models.DescribeUDPListenersResponse;
 const CreateUDPListenersRequest = models.CreateUDPListenersRequest;
 const ModifyRuleAttributeRequest = models.ModifyRuleAttributeRequest;
@@ -97,6 +101,7 @@ const DescribeAccessRegionsRequest = models.DescribeAccessRegionsRequest;
 const CreateCertificateRequest = models.CreateCertificateRequest;
 const DescribeCertificatesResponse = models.DescribeCertificatesResponse;
 const DescribeProxyGroupListResponse = models.DescribeProxyGroupListResponse;
+const DescribeDomainErrorPageInfoRequest = models.DescribeDomainErrorPageInfoRequest;
 const HTTPSListener = models.HTTPSListener;
 const DomainAccessRegionDict = models.DomainAccessRegionDict;
 const CloseSecurityPolicyRequest = models.CloseSecurityPolicyRequest;
@@ -119,7 +124,9 @@ const StatisticsDataInfo = models.StatisticsDataInfo;
 const ProxyGroupInfo = models.ProxyGroupInfo;
 const CreateProxyGroupDomainResponse = models.CreateProxyGroupDomainResponse;
 const Certificate = models.Certificate;
+const DescribeDomainErrorPageInfoResponse = models.DescribeDomainErrorPageInfoResponse;
 const DestroyProxiesResponse = models.DestroyProxiesResponse;
+const DescribeRuleRealServersResponse = models.DescribeRuleRealServersResponse;
 const DescribeRealServersStatusRequest = models.DescribeRealServersStatusRequest;
 const ModifyHTTPListenerAttributeRequest = models.ModifyHTTPListenerAttributeRequest;
 const CreateProxyRequest = models.CreateProxyRequest;
@@ -149,6 +156,7 @@ const SetAuthenticationRequest = models.SetAuthenticationRequest;
 const InquiryPriceCreateProxyResponse = models.InquiryPriceCreateProxyResponse;
 const NewRealServer = models.NewRealServer;
 const DescribeHTTPListenersResponse = models.DescribeHTTPListenersResponse;
+const HttpHeaderParam = models.HttpHeaderParam;
 const DescribeRealServerStatisticsResponse = models.DescribeRealServerStatisticsResponse;
 const AccessRegionDomainConf = models.AccessRegionDomainConf;
 const DeleteDomainResponse = models.DeleteDomainResponse;
@@ -184,13 +192,13 @@ const DescribeProxyStatisticsResponse = models.DescribeProxyStatisticsResponse;
 const DescribeRealServersStatusResponse = models.DescribeRealServersStatusResponse;
 const ModifyProxyGroupAttributeRequest = models.ModifyProxyGroupAttributeRequest;
 const DescribeCertificateDetailResponse = models.DescribeCertificateDetailResponse;
-const ModifyProxyConfigurationRequest = models.ModifyProxyConfigurationRequest;
+const DeleteDomainErrorPageInfoResponse = models.DeleteDomainErrorPageInfoResponse;
 const ModifyProxiesAttributeResponse = models.ModifyProxiesAttributeResponse;
 const CheckProxyCreateRequest = models.CheckProxyCreateRequest;
 const DescribeRegionAndPriceRequest = models.DescribeRegionAndPriceRequest;
 const AddRealServersRequest = models.AddRealServersRequest;
 const ModifyProxiesAttributeRequest = models.ModifyProxiesAttributeRequest;
-const DescribeRuleRealServersResponse = models.DescribeRuleRealServersResponse;
+const CertificateAliasInfo = models.CertificateAliasInfo;
 const CreateHTTPSListenerRequest = models.CreateHTTPSListenerRequest;
 const DeleteSecurityRulesRequest = models.DeleteSecurityRulesRequest;
 const ProxyIdDict = models.ProxyIdDict;
@@ -205,6 +213,7 @@ const RemoveRealServersResponse = models.RemoveRealServersResponse;
 const RealServerBindSetReq = models.RealServerBindSetReq;
 const OpenProxiesResponse = models.OpenProxiesResponse;
 const ModifyProxyConfigurationResponse = models.ModifyProxyConfigurationResponse;
+const CreateDomainErrorPageInfoRequest = models.CreateDomainErrorPageInfoRequest;
 
 
 /**
@@ -328,6 +337,17 @@ class GaapClient extends AbstractClient {
     }
 
     /**
+     * 删除域名的定制错误
+     * @param {DeleteDomainErrorPageInfoRequest} req
+     * @param {function(string, DeleteDomainErrorPageInfoResponse):void} cb
+     * @public
+     */
+    DeleteDomainErrorPageInfo(req, cb) {
+        let resp = new DeleteDomainErrorPageInfoResponse();
+        this.request("DeleteDomainErrorPageInfo", req, resp, cb);
+    }
+
+    /**
      * 本接口（ModifyCertificate）用于修改监听器下的域名对应的证书。该接口仅适用于version3.0的通道。
      * @param {ModifyCertificateRequest} req
      * @param {function(string, ModifyCertificateResponse):void} cb
@@ -358,6 +378,17 @@ class GaapClient extends AbstractClient {
     CreateRule(req, cb) {
         let resp = new CreateRuleResponse();
         this.request("CreateRule", req, resp, cb);
+    }
+
+    /**
+     * 定制域名指定错误码的错误响应
+     * @param {CreateDomainErrorPageInfoRequest} req
+     * @param {function(string, CreateDomainErrorPageInfoResponse):void} cb
+     * @public
+     */
+    CreateDomainErrorPageInfo(req, cb) {
+        let resp = new CreateDomainErrorPageInfoResponse();
+        this.request("CreateDomainErrorPageInfo", req, resp, cb);
     }
 
     /**
@@ -660,14 +691,14 @@ class GaapClient extends AbstractClient {
     }
 
     /**
-     * 该接口（DeleteListeners）用于批量删除通道或通道组的监听器，包括4/7层监听器。
-     * @param {DeleteListenersRequest} req
-     * @param {function(string, DeleteListenersResponse):void} cb
+     * 关闭安全策略
+     * @param {CloseSecurityPolicyRequest} req
+     * @param {function(string, CloseSecurityPolicyResponse):void} cb
      * @public
      */
-    DeleteListeners(req, cb) {
-        let resp = new DeleteListenersResponse();
-        this.request("DeleteListeners", req, resp, cb);
+    CloseSecurityPolicy(req, cb) {
+        let resp = new CloseSecurityPolicyResponse();
+        this.request("CloseSecurityPolicy", req, resp, cb);
     }
 
     /**
@@ -701,6 +732,17 @@ class GaapClient extends AbstractClient {
     RemoveRealServers(req, cb) {
         let resp = new RemoveRealServersResponse();
         this.request("RemoveRealServers", req, resp, cb);
+    }
+
+    /**
+     * 查询目前订制域名的错误响应
+     * @param {DescribeDomainErrorPageInfoRequest} req
+     * @param {function(string, DescribeDomainErrorPageInfoResponse):void} cb
+     * @public
+     */
+    DescribeDomainErrorPageInfo(req, cb) {
+        let resp = new DescribeDomainErrorPageInfoResponse();
+        this.request("DescribeDomainErrorPageInfo", req, resp, cb);
     }
 
     /**
@@ -1035,14 +1077,14 @@ class GaapClient extends AbstractClient {
     }
 
     /**
-     * 关闭安全策略
-     * @param {CloseSecurityPolicyRequest} req
-     * @param {function(string, CloseSecurityPolicyResponse):void} cb
+     * 该接口（DeleteListeners）用于批量删除通道或通道组的监听器，包括4/7层监听器。
+     * @param {DeleteListenersRequest} req
+     * @param {function(string, DeleteListenersResponse):void} cb
      * @public
      */
-    CloseSecurityPolicy(req, cb) {
-        let resp = new CloseSecurityPolicyResponse();
-        this.request("CloseSecurityPolicy", req, resp, cb);
+    DeleteListeners(req, cb) {
+        let resp = new DeleteListenersResponse();
+        this.request("DeleteListeners", req, resp, cb);
     }
 
     /**
