@@ -16,22 +16,22 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
-const DescribeInstanceMonitorTopNCmdResponse = models.DescribeInstanceMonitorTopNCmdResponse;
 const ModifyInstanceParamsResponse = models.ModifyInstanceParamsResponse;
 const RedisBackupSet = models.RedisBackupSet;
-const ModfiyInstancePasswordRequest = models.ModfiyInstancePasswordRequest;
+const DescribeInstanceMonitorTopNCmdResponse = models.DescribeInstanceMonitorTopNCmdResponse;
 const ModifyAutoBackupConfigResponse = models.ModifyAutoBackupConfigResponse;
 const RestoreInstanceRequest = models.RestoreInstanceRequest;
+const TaskInfoDetail = models.TaskInfoDetail;
 const SwitchInstanceVipRequest = models.SwitchInstanceVipRequest;
 const CreateInstancesRequest = models.CreateInstancesRequest;
 const ModifyNetworkConfigResponse = models.ModifyNetworkConfigResponse;
 const CommandTake = models.CommandTake;
 const DescribeInstanceMonitorBigKeyResponse = models.DescribeInstanceMonitorBigKeyResponse;
-const DelayDistribution = models.DelayDistribution;
+const DescribeTaskListResponse = models.DescribeTaskListResponse;
 const ModifyInstanceRequest = models.ModifyInstanceRequest;
-const DescribeBackupUrlRequest = models.DescribeBackupUrlRequest;
+const RenewInstanceResponse = models.RenewInstanceResponse;
 const DescribeSlowLogResponse = models.DescribeSlowLogResponse;
-const DescribeInstanceDealDetailRequest = models.DescribeInstanceDealDetailRequest;
+const DescribeBackupUrlRequest = models.DescribeBackupUrlRequest;
 const DescribeInstancesResponse = models.DescribeInstancesResponse;
 const DestroyPostpaidInstanceRequest = models.DestroyPostpaidInstanceRequest;
 const Account = models.Account;
@@ -42,34 +42,38 @@ const RegionConf = models.RegionConf;
 const BigKeyInfo = models.BigKeyInfo;
 const RenewInstanceRequest = models.RenewInstanceRequest;
 const DescribeInstanceParamRecordsResponse = models.DescribeInstanceParamRecordsResponse;
-const InstanceMultiParam = models.InstanceMultiParam;
 const ModifyAutoBackupConfigRequest = models.ModifyAutoBackupConfigRequest;
+const InstanceMultiParam = models.InstanceMultiParam;
+const DescribeInstanceDealDetailRequest = models.DescribeInstanceDealDetailRequest;
 const DescribeProjectSecurityGroupRequest = models.DescribeProjectSecurityGroupRequest;
 const RestoreInstanceResponse = models.RestoreInstanceResponse;
 const DescribeInstanceShardsResponse = models.DescribeInstanceShardsResponse;
 const DestroyPrepaidInstanceRequest = models.DestroyPrepaidInstanceRequest;
-const InstanceIntegerParam = models.InstanceIntegerParam;
+const ManualBackupInstanceResponse = models.ManualBackupInstanceResponse;
 const InstanceTagInfo = models.InstanceTagInfo;
+const DescribeInstanceDTSInfoResponse = models.DescribeInstanceDTSInfoResponse;
 const DestroyPostpaidInstanceResponse = models.DestroyPostpaidInstanceResponse;
 const ModifyInstanceResponse = models.ModifyInstanceResponse;
 const TradeDealDetail = models.TradeDealDetail;
 const SourceInfo = models.SourceInfo;
 const DescribeInstanceMonitorHotKeyRequest = models.DescribeInstanceMonitorHotKeyRequest;
+const DescribeInstanceDTSInfoRequest = models.DescribeInstanceDTSInfoRequest;
 const DescribeProductInfoResponse = models.DescribeProductInfoResponse;
 const ModifyInstanceAccountRequest = models.ModifyInstanceAccountRequest;
 const DescribeBackupUrlResponse = models.DescribeBackupUrlResponse;
 const ResetPasswordRequest = models.ResetPasswordRequest;
 const ModifyInstanceAccountResponse = models.ModifyInstanceAccountResponse;
-const InstanceClusterNode = models.InstanceClusterNode;
+const DelayDistribution = models.DelayDistribution;
 const DescribeInstanceMonitorTookDistResponse = models.DescribeInstanceMonitorTookDistResponse;
 const DescribeInstanceBackupsResponse = models.DescribeInstanceBackupsResponse;
-const ManualBackupInstanceResponse = models.ManualBackupInstanceResponse;
+const InstanceIntegerParam = models.InstanceIntegerParam;
 const DescribeInstanceMonitorTookDistRequest = models.DescribeInstanceMonitorTookDistRequest;
 const InstanceTextParam = models.InstanceTextParam;
 const DescribeInstanceMonitorTopNCmdTookResponse = models.DescribeInstanceMonitorTopNCmdTookResponse;
 const DescribeInstanceMonitorBigKeySizeDistRequest = models.DescribeInstanceMonitorBigKeySizeDistRequest;
 const InstanceParamHistory = models.InstanceParamHistory;
 const DescribeInstanceParamRecordsRequest = models.DescribeInstanceParamRecordsRequest;
+const DescribeTaskListRequest = models.DescribeTaskListRequest;
 const DisableReplicaReadonlyResponse = models.DisableReplicaReadonlyResponse;
 const CreateInstancesResponse = models.CreateInstancesResponse;
 const DescribeTaskInfoRequest = models.DescribeTaskInfoRequest;
@@ -88,13 +92,14 @@ const InstanceSecurityGroupDetail = models.InstanceSecurityGroupDetail;
 const DescribeInstanceSecurityGroupResponse = models.DescribeInstanceSecurityGroupResponse;
 const ProductConf = models.ProductConf;
 const InstanceNode = models.InstanceNode;
-const RenewInstanceResponse = models.RenewInstanceResponse;
+const DescribeInstanceDTSInstanceInfo = models.DescribeInstanceDTSInstanceInfo;
 const DescribeTaskInfoResponse = models.DescribeTaskInfoResponse;
 const DescribeInstanceMonitorBigKeyTypeDistResponse = models.DescribeInstanceMonitorBigKeyTypeDistResponse;
 const CleanUpInstanceRequest = models.CleanUpInstanceRequest;
 const DescribeInstanceDealDetailResponse = models.DescribeInstanceDealDetailResponse;
 const DescribeInstancesRequest = models.DescribeInstancesRequest;
 const SourceCommand = models.SourceCommand;
+const ModfiyInstancePasswordRequest = models.ModfiyInstancePasswordRequest;
 const DescribeSlowLogRequest = models.DescribeSlowLogRequest;
 const DescribeAutoBackupConfigRequest = models.DescribeAutoBackupConfigRequest;
 const DescribeInstanceMonitorSIPResponse = models.DescribeInstanceMonitorSIPResponse;
@@ -109,6 +114,7 @@ const DestroyPrepaidInstanceResponse = models.DestroyPrepaidInstanceResponse;
 const DescribeInstanceMonitorBigKeyTypeDistRequest = models.DescribeInstanceMonitorBigKeyTypeDistRequest;
 const ModifyInstanceParamsRequest = models.ModifyInstanceParamsRequest;
 const BigKeyTypeInfo = models.BigKeyTypeInfo;
+const InstanceClusterNode = models.InstanceClusterNode;
 const EnableReplicaReadonlyRequest = models.EnableReplicaReadonlyRequest;
 const DescribeInstanceAccountResponse = models.DescribeInstanceAccountResponse;
 const DescribeInstanceMonitorBigKeyRequest = models.DescribeInstanceMonitorBigKeyRequest;
@@ -187,6 +193,17 @@ class RedisClient extends AbstractClient {
     }
 
     /**
+     * 查询任务列表信息
+     * @param {DescribeTaskListRequest} req
+     * @param {function(string, DescribeTaskListResponse):void} cb
+     * @public
+     */
+    DescribeTaskList(req, cb) {
+        let resp = new DescribeTaskListResponse();
+        this.request("DescribeTaskList", req, resp, cb);
+    }
+
+    /**
      * 回收站实例立即下线
      * @param {CleanUpInstanceRequest} req
      * @param {function(string, CleanUpInstanceResponse):void} cb
@@ -206,6 +223,17 @@ class RedisClient extends AbstractClient {
     DescribeInstanceAccount(req, cb) {
         let resp = new DescribeInstanceAccountResponse();
         this.request("DescribeInstanceAccount", req, resp, cb);
+    }
+
+    /**
+     * 查询实例DTS信息
+     * @param {DescribeInstanceDTSInfoRequest} req
+     * @param {function(string, DescribeInstanceDTSInfoResponse):void} cb
+     * @public
+     */
+    DescribeInstanceDTSInfo(req, cb) {
+        let resp = new DescribeInstanceDTSInfoResponse();
+        this.request("DescribeInstanceDTSInfo", req, resp, cb);
     }
 
     /**
