@@ -1411,6 +1411,20 @@ class ScanPiece extends  AbstractModel {
          */
         this.Info = null;
 
+        /**
+         * 流检测时分片在流中的偏移时间，单位毫秒
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 流检测时分片时长
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Duration = null;
+
     }
 
     /**
@@ -1435,6 +1449,8 @@ class ScanPiece extends  AbstractModel {
         this.RoomId = 'RoomId' in params ? params.RoomId : null;
         this.OpenId = 'OpenId' in params ? params.OpenId : null;
         this.Info = 'Info' in params ? params.Info : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Duration = 'Duration' in params ? params.Duration : null;
 
     }
 }

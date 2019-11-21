@@ -52,54 +52,18 @@ class DeleteClusterRequest extends  AbstractModel {
 }
 
 /**
- * DescribeClusterSecurity返回参数结构体
+ * CreateClusterEndpointVip返回参数结构体
  * @class
  */
-class DescribeClusterSecurityResponse extends  AbstractModel {
+class CreateClusterEndpointVipResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 集群的账号名称
-         * @type {string || null}
+         * 请求任务的FlowId
+         * @type {number || null}
          */
-        this.UserName = null;
-
-        /**
-         * 集群的访问密码
-         * @type {string || null}
-         */
-        this.Password = null;
-
-        /**
-         * 集群访问CA证书
-         * @type {string || null}
-         */
-        this.CertificationAuthority = null;
-
-        /**
-         * 集群访问的地址
-         * @type {string || null}
-         */
-        this.ClusterExternalEndpoint = null;
-
-        /**
-         * 集群访问的域名
-         * @type {string || null}
-         */
-        this.Domain = null;
-
-        /**
-         * 集群Endpoint地址
-         * @type {string || null}
-         */
-        this.PgwEndpoint = null;
-
-        /**
-         * 集群访问策略组
-         * @type {Array.<string> || null}
-         */
-        this.SecurityPolicy = null;
+        this.RequestFlowId = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -116,13 +80,7 @@ class DescribeClusterSecurityResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.UserName = 'UserName' in params ? params.UserName : null;
-        this.Password = 'Password' in params ? params.Password : null;
-        this.CertificationAuthority = 'CertificationAuthority' in params ? params.CertificationAuthority : null;
-        this.ClusterExternalEndpoint = 'ClusterExternalEndpoint' in params ? params.ClusterExternalEndpoint : null;
-        this.Domain = 'Domain' in params ? params.Domain : null;
-        this.PgwEndpoint = 'PgwEndpoint' in params ? params.PgwEndpoint : null;
-        this.SecurityPolicy = 'SecurityPolicy' in params ? params.SecurityPolicy : null;
+        this.RequestFlowId = 'RequestFlowId' in params ? params.RequestFlowId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -258,18 +216,18 @@ class DescribeClusterSecurityRequest extends  AbstractModel {
 }
 
 /**
- * DeleteClusterInstances返回参数结构体
+ * DescribeClusterEndpointVipStatus请求参数结构体
  * @class
  */
-class DeleteClusterInstancesResponse extends  AbstractModel {
+class DescribeClusterEndpointVipStatusRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * 集群ID
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.ClusterId = null;
 
     }
 
@@ -280,7 +238,49 @@ class DeleteClusterInstancesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+
+    }
+}
+
+/**
+ * CreateClusterEndpoint请求参数结构体
+ * @class
+ */
+class CreateClusterEndpointRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 集群ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * 集群端口所在的子网ID  (仅在开启非外网访问时需要填，必须为集群所在VPC内的子网)
+         * @type {string || null}
+         */
+        this.SubnetId = null;
+
+        /**
+         * 是否为外网访问（TRUE 外网访问 FALSE 内网访问，默认值： FALSE）
+         * @type {boolean || null}
+         */
+        this.IsExtranet = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
+        this.IsExtranet = 'IsExtranet' in params ? params.IsExtranet : null;
 
     }
 }
@@ -326,6 +326,55 @@ class EnhancedService extends  AbstractModel {
             obj.deserialize(params.MonitorService)
             this.MonitorService = obj;
         }
+
+    }
+}
+
+/**
+ * 集群的实例信息
+ * @class
+ */
+class Instance extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 节点角色, MASTER, WORKER, ETCD, MASTER_ETCD,ALL, 默认为WORKER
+         * @type {string || null}
+         */
+        this.InstanceRole = null;
+
+        /**
+         * 实例异常(或者处于初始化中)的原因
+         * @type {string || null}
+         */
+        this.FailedReason = null;
+
+        /**
+         * 实例的状态（running 运行中，initializing 初始化中，failed 异常）
+         * @type {string || null}
+         */
+        this.InstanceState = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.InstanceRole = 'InstanceRole' in params ? params.InstanceRole : null;
+        this.FailedReason = 'FailedReason' in params ? params.FailedReason : null;
+        this.InstanceState = 'InstanceState' in params ? params.InstanceState : null;
 
     }
 }
@@ -526,6 +575,126 @@ class CreateClusterRouteRequest extends  AbstractModel {
         this.RouteTableName = 'RouteTableName' in params ? params.RouteTableName : null;
         this.DestinationCidrBlock = 'DestinationCidrBlock' in params ? params.DestinationCidrBlock : null;
         this.GatewayIp = 'GatewayIp' in params ? params.GatewayIp : null;
+
+    }
+}
+
+/**
+ * DescribeClusterEndpointVipStatus返回参数结构体
+ * @class
+ */
+class DescribeClusterEndpointVipStatusResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 端口操作状态 (Creating 创建中  CreateFailed 创建失败 Created 创建完成 Deleting 删除中 DeletedFailed 删除失败 Deleted 已删除 NotFound 未发现操作 )
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * 操作失败的原因
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ErrorMsg = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Status = 'Status' in params ? params.Status : null;
+        this.ErrorMsg = 'ErrorMsg' in params ? params.ErrorMsg : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeClusterSecurity返回参数结构体
+ * @class
+ */
+class DescribeClusterSecurityResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 集群的账号名称
+         * @type {string || null}
+         */
+        this.UserName = null;
+
+        /**
+         * 集群的访问密码
+         * @type {string || null}
+         */
+        this.Password = null;
+
+        /**
+         * 集群访问CA证书
+         * @type {string || null}
+         */
+        this.CertificationAuthority = null;
+
+        /**
+         * 集群访问的地址
+         * @type {string || null}
+         */
+        this.ClusterExternalEndpoint = null;
+
+        /**
+         * 集群访问的域名
+         * @type {string || null}
+         */
+        this.Domain = null;
+
+        /**
+         * 集群Endpoint地址
+         * @type {string || null}
+         */
+        this.PgwEndpoint = null;
+
+        /**
+         * 集群访问策略组
+         * @type {Array.<string> || null}
+         */
+        this.SecurityPolicy = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.UserName = 'UserName' in params ? params.UserName : null;
+        this.Password = 'Password' in params ? params.Password : null;
+        this.CertificationAuthority = 'CertificationAuthority' in params ? params.CertificationAuthority : null;
+        this.ClusterExternalEndpoint = 'ClusterExternalEndpoint' in params ? params.ClusterExternalEndpoint : null;
+        this.Domain = 'Domain' in params ? params.Domain : null;
+        this.PgwEndpoint = 'PgwEndpoint' in params ? params.PgwEndpoint : null;
+        this.SecurityPolicy = 'SecurityPolicy' in params ? params.SecurityPolicy : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1208,6 +1377,34 @@ class CreateClusterAsGroupResponse extends  AbstractModel {
 }
 
 /**
+ * DeleteClusterInstances返回参数结构体
+ * @class
+ */
+class DeleteClusterInstancesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * 标签绑定的资源类型，当前支持类型："cluster"
  * @class
  */
@@ -1292,24 +1489,12 @@ class CreateClusterRouteTableRequest extends  AbstractModel {
 }
 
 /**
- * DescribeClusterRouteTables返回参数结构体
+ * DeleteClusterEndpoint返回参数结构体
  * @class
  */
-class DescribeClusterRouteTablesResponse extends  AbstractModel {
+class DeleteClusterEndpointResponse extends  AbstractModel {
     constructor(){
         super();
-
-        /**
-         * 符合条件的实例数量。
-         * @type {number || null}
-         */
-        this.TotalCount = null;
-
-        /**
-         * 集群路由表对象。
-         * @type {Array.<RouteTableInfo> || null}
-         */
-        this.RouteTableSet = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1326,17 +1511,59 @@ class DescribeClusterRouteTablesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
-
-        if (params.RouteTableSet) {
-            this.RouteTableSet = new Array();
-            for (let z in params.RouteTableSet) {
-                let obj = new RouteTableInfo();
-                obj.deserialize(params.RouteTableSet[z]);
-                this.RouteTableSet.push(obj);
-            }
-        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 路由表冲突对象
+ * @class
+ */
+class RouteTableConflict extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 路由表类型。
+         * @type {string || null}
+         */
+        this.RouteTableType = null;
+
+        /**
+         * 路由表CIDR。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.RouteTableCidrBlock = null;
+
+        /**
+         * 路由表名称。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.RouteTableName = null;
+
+        /**
+         * 路由表ID。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.RouteTableId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RouteTableType = 'RouteTableType' in params ? params.RouteTableType : null;
+        this.RouteTableCidrBlock = 'RouteTableCidrBlock' in params ? params.RouteTableCidrBlock : null;
+        this.RouteTableName = 'RouteTableName' in params ? params.RouteTableName : null;
+        this.RouteTableId = 'RouteTableId' in params ? params.RouteTableId : null;
 
     }
 }
@@ -1407,6 +1634,34 @@ class RouteTableInfo extends  AbstractModel {
         this.RouteTableName = 'RouteTableName' in params ? params.RouteTableName : null;
         this.RouteTableCidrBlock = 'RouteTableCidrBlock' in params ? params.RouteTableCidrBlock : null;
         this.VpcId = 'VpcId' in params ? params.VpcId : null;
+
+    }
+}
+
+/**
+ * DeleteClusterEndpointVip返回参数结构体
+ * @class
+ */
+class DeleteClusterEndpointVipResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1581,6 +1836,84 @@ class InstanceAdvancedSettings extends  AbstractModel {
 }
 
 /**
+ * ModifyClusterEndpointSP返回参数结构体
+ * @class
+ */
+class ModifyClusterEndpointSPResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeClusterRouteTables返回参数结构体
+ * @class
+ */
+class DescribeClusterRouteTablesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 符合条件的实例数量。
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 集群路由表对象。
+         * @type {Array.<RouteTableInfo> || null}
+         */
+        this.RouteTableSet = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.RouteTableSet) {
+            this.RouteTableSet = new Array();
+            for (let z in params.RouteTableSet) {
+                let obj = new RouteTableInfo();
+                obj.deserialize(params.RouteTableSet[z]);
+                this.RouteTableSet.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeRouteTableConflicts请求参数结构体
  * @class
  */
@@ -1651,18 +1984,24 @@ class RunInstancesForNode extends  AbstractModel {
 }
 
 /**
- * 描述了 “云安全” 服务相关的信息
+ * CreateClusterEndpointVip请求参数结构体
  * @class
  */
-class RunSecurityServiceEnabled extends  AbstractModel {
+class CreateClusterEndpointVipRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 是否开启[云安全](/document/product/296)服务。取值范围：<br><li>TRUE：表示开启云安全服务<br><li>FALSE：表示不开启云安全服务<br><br>默认取值：TRUE。
-         * @type {boolean || null}
+         * 集群ID
+         * @type {string || null}
          */
-        this.Enabled = null;
+        this.ClusterId = null;
+
+        /**
+         * 安全策略放通单个IP或CIDR(例如: "192.168.1.0/24",默认为拒绝所有)
+         * @type {Array.<string> || null}
+         */
+        this.SecurityPolicies = null;
 
     }
 
@@ -1673,7 +2012,8 @@ class RunSecurityServiceEnabled extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Enabled = 'Enabled' in params ? params.Enabled : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.SecurityPolicies = 'SecurityPolicies' in params ? params.SecurityPolicies : null;
 
     }
 }
@@ -1711,10 +2051,16 @@ class ExistedInstancesPara extends  AbstractModel {
         this.LoginSettings = null;
 
         /**
-         * 实例所属安全组。该参数可以通过调用 DescribeSecurityGroups 的返回值中的sgId字段来获取。若不指定该参数，则绑定默认安全组。（目前仅支持设置单个sgId）
+         * 实例所属安全组。该参数可以通过调用 DescribeSecurityGroups 的返回值中的sgId字段来获取。若不指定该参数，则绑定默认安全组。
          * @type {Array.<string> || null}
          */
         this.SecurityGroupIds = null;
+
+        /**
+         * 重装系统时，可以指定修改实例的HostName。
+         * @type {string || null}
+         */
+        this.HostName = null;
 
     }
 
@@ -1745,6 +2091,7 @@ class ExistedInstancesPara extends  AbstractModel {
             this.LoginSettings = obj;
         }
         this.SecurityGroupIds = 'SecurityGroupIds' in params ? params.SecurityGroupIds : null;
+        this.HostName = 'HostName' in params ? params.HostName : null;
 
     }
 }
@@ -1921,6 +2268,7 @@ class ExistedInstance extends  AbstractModel {
         /**
          * 实例主网卡的公网IP列表。
 注意：此字段可能返回 null，表示取不到有效值。
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<string> || null}
          */
         this.PublicIpAddresses = null;
@@ -2020,6 +2368,41 @@ class CreateClusterRouteResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifyClusterEndpointSP请求参数结构体
+ * @class
+ */
+class ModifyClusterEndpointSPRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 集群ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * 安全策略放通单个IP或CIDR(例如: "192.168.1.0/24",默认为拒绝所有)
+         * @type {Array.<string> || null}
+         */
+        this.SecurityPolicies = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.SecurityPolicies = 'SecurityPolicies' in params ? params.SecurityPolicies : null;
 
     }
 }
@@ -2146,39 +2529,18 @@ class RunMonitorServiceEnabled extends  AbstractModel {
 }
 
 /**
- * 路由表冲突对象
+ * CreateClusterEndpoint返回参数结构体
  * @class
  */
-class RouteTableConflict extends  AbstractModel {
+class CreateClusterEndpointResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 路由表类型。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.RouteTableType = null;
-
-        /**
-         * 路由表CIDR。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.RouteTableCidrBlock = null;
-
-        /**
-         * 路由表名称。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.RouteTableName = null;
-
-        /**
-         * 路由表ID。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.RouteTableId = null;
+        this.RequestId = null;
 
     }
 
@@ -2189,10 +2551,42 @@ class RouteTableConflict extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RouteTableType = 'RouteTableType' in params ? params.RouteTableType : null;
-        this.RouteTableCidrBlock = 'RouteTableCidrBlock' in params ? params.RouteTableCidrBlock : null;
-        this.RouteTableName = 'RouteTableName' in params ? params.RouteTableName : null;
-        this.RouteTableId = 'RouteTableId' in params ? params.RouteTableId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DeleteClusterEndpoint请求参数结构体
+ * @class
+ */
+class DeleteClusterEndpointRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 集群ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * 是否为外网访问（TRUE 外网访问 FALSE 内网访问，默认值： FALSE）
+         * @type {boolean || null}
+         */
+        this.IsExtranet = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.IsExtranet = 'IsExtranet' in params ? params.IsExtranet : null;
 
     }
 }
@@ -2223,6 +2617,12 @@ class ClusterAdvancedSettings extends  AbstractModel {
          */
         this.ContainerRuntime = null;
 
+        /**
+         * 集群中节点NodeName类型（包括 hostname,lan-ip两种形式，默认为lan-ip）
+         * @type {string || null}
+         */
+        this.NodeNameType = null;
+
     }
 
     /**
@@ -2235,6 +2635,7 @@ class ClusterAdvancedSettings extends  AbstractModel {
         this.IPVS = 'IPVS' in params ? params.IPVS : null;
         this.AsEnabled = 'AsEnabled' in params ? params.AsEnabled : null;
         this.ContainerRuntime = 'ContainerRuntime' in params ? params.ContainerRuntime : null;
+        this.NodeNameType = 'NodeNameType' in params ? params.NodeNameType : null;
 
     }
 }
@@ -2275,36 +2676,24 @@ class Filter extends  AbstractModel {
 }
 
 /**
- * 集群的实例信息
+ * DescribeClusterEndpointStatus请求参数结构体
  * @class
  */
-class Instance extends  AbstractModel {
+class DescribeClusterEndpointStatusRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 实例ID
+         * 集群ID
          * @type {string || null}
          */
-        this.InstanceId = null;
+        this.ClusterId = null;
 
         /**
-         * 节点角色, MASTER, WORKER, ETCD, MASTER_ETCD,ALL, 默认为WORKER
-         * @type {string || null}
+         * 是否为外网访问（TRUE 外网访问 FALSE 内网访问，默认值： FALSE）
+         * @type {boolean || null}
          */
-        this.InstanceRole = null;
-
-        /**
-         * 实例异常(或者处于初始化中)的原因
-         * @type {string || null}
-         */
-        this.FailedReason = null;
-
-        /**
-         * 实例的状态（running 运行中，initializing 初始化中，failed 异常）
-         * @type {string || null}
-         */
-        this.InstanceState = null;
+        this.IsExtranet = null;
 
     }
 
@@ -2315,10 +2704,8 @@ class Instance extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.InstanceRole = 'InstanceRole' in params ? params.InstanceRole : null;
-        this.FailedReason = 'FailedReason' in params ? params.FailedReason : null;
-        this.InstanceState = 'InstanceState' in params ? params.InstanceState : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.IsExtranet = 'IsExtranet' in params ? params.IsExtranet : null;
 
     }
 }
@@ -2364,6 +2751,34 @@ class TagSpecification extends  AbstractModel {
                 this.Tags.push(obj);
             }
         }
+
+    }
+}
+
+/**
+ * DeleteClusterEndpointVip请求参数结构体
+ * @class
+ */
+class DeleteClusterEndpointVipRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 集群ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
 
     }
 }
@@ -2539,6 +2954,42 @@ class Cluster extends  AbstractModel {
 }
 
 /**
+ * DescribeClusterEndpointStatus返回参数结构体
+ * @class
+ */
+class DescribeClusterEndpointStatusResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 查询集群访问端口状态（Created 开启成功，Creating 开启中中，NotFound 未开启）
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Status = 'Status' in params ? params.Status : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeClusters返回参数结构体
  * @class
  */
@@ -2584,6 +3035,34 @@ class DescribeClustersResponse extends  AbstractModel {
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 描述了 “云安全” 服务相关的信息
+ * @class
+ */
+class RunSecurityServiceEnabled extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 是否开启[云安全](/document/product/296)服务。取值范围：<br><li>TRUE：表示开启云安全服务<br><li>FALSE：表示不开启云安全服务<br><br>默认取值：TRUE。
+         * @type {boolean || null}
+         */
+        this.Enabled = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Enabled = 'Enabled' in params ? params.Enabled : null;
 
     }
 }
@@ -2828,16 +3307,20 @@ class CreateClusterInstancesResponse extends  AbstractModel {
 
 module.exports = {
     DeleteClusterRequest: DeleteClusterRequest,
-    DescribeClusterSecurityResponse: DescribeClusterSecurityResponse,
+    CreateClusterEndpointVipResponse: CreateClusterEndpointVipResponse,
     DescribeExistedInstancesResponse: DescribeExistedInstancesResponse,
     DescribeClusterRoutesResponse: DescribeClusterRoutesResponse,
     DescribeClusterSecurityRequest: DescribeClusterSecurityRequest,
-    DeleteClusterInstancesResponse: DeleteClusterInstancesResponse,
+    DescribeClusterEndpointVipStatusRequest: DescribeClusterEndpointVipStatusRequest,
+    CreateClusterEndpointRequest: CreateClusterEndpointRequest,
     EnhancedService: EnhancedService,
+    Instance: Instance,
     LoginSettings: LoginSettings,
     Label: Label,
     AddExistedInstancesRequest: AddExistedInstancesRequest,
     CreateClusterRouteRequest: CreateClusterRouteRequest,
+    DescribeClusterEndpointVipStatusResponse: DescribeClusterEndpointVipStatusResponse,
+    DescribeClusterSecurityResponse: DescribeClusterSecurityResponse,
     DescribeClusterInstancesResponse: DescribeClusterInstancesResponse,
     CreateClusterAsGroupRequest: CreateClusterAsGroupRequest,
     DescribeClusterRouteTablesRequest: DescribeClusterRouteTablesRequest,
@@ -2852,33 +3335,43 @@ module.exports = {
     DeleteClusterInstancesRequest: DeleteClusterInstancesRequest,
     CreateClusterInstancesRequest: CreateClusterInstancesRequest,
     CreateClusterAsGroupResponse: CreateClusterAsGroupResponse,
+    DeleteClusterInstancesResponse: DeleteClusterInstancesResponse,
     Tag: Tag,
     CreateClusterRouteTableRequest: CreateClusterRouteTableRequest,
-    DescribeClusterRouteTablesResponse: DescribeClusterRouteTablesResponse,
+    DeleteClusterEndpointResponse: DeleteClusterEndpointResponse,
+    RouteTableConflict: RouteTableConflict,
     DeleteClusterAsGroupsResponse: DeleteClusterAsGroupsResponse,
     RouteTableInfo: RouteTableInfo,
+    DeleteClusterEndpointVipResponse: DeleteClusterEndpointVipResponse,
     DescribeClusterInstancesRequest: DescribeClusterInstancesRequest,
     ClusterCIDRSettings: ClusterCIDRSettings,
     InstanceAdvancedSettings: InstanceAdvancedSettings,
+    ModifyClusterEndpointSPResponse: ModifyClusterEndpointSPResponse,
+    DescribeClusterRouteTablesResponse: DescribeClusterRouteTablesResponse,
     DescribeRouteTableConflictsRequest: DescribeRouteTableConflictsRequest,
     RunInstancesForNode: RunInstancesForNode,
-    RunSecurityServiceEnabled: RunSecurityServiceEnabled,
+    CreateClusterEndpointVipRequest: CreateClusterEndpointVipRequest,
     ExistedInstancesPara: ExistedInstancesPara,
     DeleteClusterAsGroupsRequest: DeleteClusterAsGroupsRequest,
     DescribeExistedInstancesRequest: DescribeExistedInstancesRequest,
     ExistedInstance: ExistedInstance,
     CreateClusterRouteResponse: CreateClusterRouteResponse,
+    ModifyClusterEndpointSPRequest: ModifyClusterEndpointSPRequest,
     DescribeRouteTableConflictsResponse: DescribeRouteTableConflictsResponse,
     RouteInfo: RouteInfo,
     RunMonitorServiceEnabled: RunMonitorServiceEnabled,
-    RouteTableConflict: RouteTableConflict,
+    CreateClusterEndpointResponse: CreateClusterEndpointResponse,
+    DeleteClusterEndpointRequest: DeleteClusterEndpointRequest,
     ClusterAdvancedSettings: ClusterAdvancedSettings,
     Filter: Filter,
-    Instance: Instance,
+    DescribeClusterEndpointStatusRequest: DescribeClusterEndpointStatusRequest,
     TagSpecification: TagSpecification,
+    DeleteClusterEndpointVipRequest: DeleteClusterEndpointVipRequest,
     DescribeClustersRequest: DescribeClustersRequest,
     Cluster: Cluster,
+    DescribeClusterEndpointStatusResponse: DescribeClusterEndpointStatusResponse,
     DescribeClustersResponse: DescribeClustersResponse,
+    RunSecurityServiceEnabled: RunSecurityServiceEnabled,
     ClusterNetworkSettings: ClusterNetworkSettings,
     DeleteClusterRouteResponse: DeleteClusterRouteResponse,
     DeleteClusterResponse: DeleteClusterResponse,

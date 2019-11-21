@@ -25,7 +25,7 @@ class CreateRecTaskResponse extends  AbstractModel {
         super();
 
         /**
-         * 录音文件识别的请求返回结果。
+         * 录音文件识别的请求返回结果，包含结果查询需要的TaskId
          * @type {Task || null}
          */
         this.Data = null;

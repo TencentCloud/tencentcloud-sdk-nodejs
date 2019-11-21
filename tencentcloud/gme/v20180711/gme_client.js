@@ -217,6 +217,8 @@ Type表示过滤类型，1：政治，2：色情，3：谩骂
 		"RoomId": "123",
 		"OpenId": "xxx",
 		"Info":"",
+                "Offset": 0,
+                "Duration": 3400,
 		"ScanDetail": [{
 			"EndTime": 1110,
 			"KeyWord": "xxx",

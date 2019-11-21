@@ -1415,7 +1415,10 @@ class AiReviewTaskPoliticalOcrResult extends  AbstractModel {
         this.Status = null;
 
         /**
-         * 错误码，0：成功，其他值：失败。
+         * 错误码，0 表示成功，其他值表示失败：
+<li>40000：输入参数不合法，请检查输入参数；</li>
+<li>60000：源文件错误（如视频数据损坏），请确认源文件是否正常；</li>
+<li>70000：内部服务错误，建议重试。</li>
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
@@ -6264,10 +6267,23 @@ class EditMediaOutputConfig extends  AbstractModel {
         super();
 
         /**
+         * 输出文件名，最长 64 个字符。缺省由系统指定生成文件名。
+         * @type {string || null}
+         */
+        this.MediaName = null;
+
+        /**
          * 输出文件格式，可选值：mp4、hls。默认是 mp4。
          * @type {string || null}
          */
         this.Type = null;
+
+        /**
+         * 分类ID，用于对媒体进行分类管理，可通过 [创建分类](/document/product/266/7812) 接口，创建分类，获得分类 ID。
+<li>默认值：0，表示其他分类。</li>
+         * @type {number || null}
+         */
+        this.ClassId = null;
 
         /**
          * 输出文件的过期时间，超过该时间文件将被删除，默认为永久不过期，格式按照 ISO 8601标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F)。
@@ -6284,7 +6300,9 @@ class EditMediaOutputConfig extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.MediaName = 'MediaName' in params ? params.MediaName : null;
         this.Type = 'Type' in params ? params.Type : null;
+        this.ClassId = 'ClassId' in params ? params.ClassId : null;
         this.ExpireTime = 'ExpireTime' in params ? params.ExpireTime : null;
 
     }
@@ -7849,7 +7867,10 @@ class AiReviewTaskPornOcrResult extends  AbstractModel {
         this.Status = null;
 
         /**
-         * 错误码，0：成功，其他值：失败。
+         * 错误码，0 表示成功，其他值表示失败：
+<li>40000：输入参数不合法，请检查输入参数；</li>
+<li>60000：源文件错误（如视频数据损坏），请确认源文件是否正常；</li>
+<li>70000：内部服务错误，建议重试。</li>
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
@@ -8488,7 +8509,13 @@ class DescribeCDNUsageDataResponse extends  AbstractModel {
         super();
 
         /**
-         * CDN 统计数据，每天一条数据。
+         * 时间粒度，单位：分钟。
+         * @type {number || null}
+         */
+        this.DataInterval = null;
+
+        /**
+         * CDN 统计数据。
          * @type {Array.<StatDataItem> || null}
          */
         this.Data = null;
@@ -8508,6 +8535,7 @@ class DescribeCDNUsageDataResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.DataInterval = 'DataInterval' in params ? params.DataInterval : null;
 
         if (params.Data) {
             this.Data = new Array();
@@ -8855,14 +8883,14 @@ class SearchMediaResponse extends  AbstractModel {
         super();
 
         /**
-         * 符合搜索条件的记录总数
-<li>最大值：5000，即，当命中记录数超过 5000，该字段将返回 5000，而非实际命中总数。</li>
+         * 符合搜索条件的记录总数。
+<li>最大值：5000。当命中记录数超过5000时，该字段将返回 5000，而非实际命中总数。</li>
          * @type {number || null}
          */
         this.TotalCount = null;
 
         /**
-         * 媒体文件信息列表，只包含基础信息（BasicInfo）
+         * 媒体文件信息列表，只包含基础信息（BasicInfo）。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<MediaInfo> || null}
          */
@@ -9033,6 +9061,12 @@ class ProcessMediaRequest extends  AbstractModel {
         this.SessionId = null;
 
         /**
+         * 保留字段，特殊用途时使用。
+         * @type {string || null}
+         */
+        this.ExtInfo = null;
+
+        /**
          * 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
          * @type {number || null}
          */
@@ -9076,6 +9110,7 @@ class ProcessMediaRequest extends  AbstractModel {
         this.TasksNotifyMode = 'TasksNotifyMode' in params ? params.TasksNotifyMode : null;
         this.SessionContext = 'SessionContext' in params ? params.SessionContext : null;
         this.SessionId = 'SessionId' in params ? params.SessionId : null;
+        this.ExtInfo = 'ExtInfo' in params ? params.ExtInfo : null;
         this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
 
     }
@@ -10135,16 +10170,35 @@ class AnimatedGraphicsTemplate extends  AbstractModel {
         this.Comment = null;
 
         /**
-         * 动图宽度（或长边）的最大值。
+         * 动图宽度（或长边）的最大值，取值范围：0 和 [128, 4096]，单位：px。
+<li>当 Width、Height 均为 0，则分辨率同源；</li>
+<li>当 Width 为 0，Height 非 0，则 Width 按比例缩放；</li>
+<li>当 Width 非 0，Height 为 0，则 Height 按比例缩放；</li>
+<li>当 Width、Height 均非 0，则分辨率按用户指定。</li>
+默认值：0。
          * @type {number || null}
          */
         this.Width = null;
 
         /**
-         * 动图高度（或短边）的最大值。
+         * 动图高度（或短边）的最大值，取值范围：0 和 [128, 4096]，单位：px。
+<li>当 Width、Height 均为 0，则分辨率同源；</li>
+<li>当 Width 为 0，Height 非 0，则 Width 按比例缩放；</li>
+<li>当 Width 非 0，Height 为 0，则 Height 按比例缩放；</li>
+<li>当 Width、Height 均非 0，则分辨率按用户指定。</li>
+默认值：0。
          * @type {number || null}
          */
         this.Height = null;
+
+        /**
+         * 分辨率自适应，可选值：
+<li>open：开启，此时，Width 代表视频的长边，Height 表示视频的短边；</li>
+<li>close：关闭，此时，Width 代表视频的宽度，Height 表示视频的高度。</li>
+默认值：open。
+         * @type {string || null}
+         */
+        this.ResolutionAdaptive = null;
 
         /**
          * 动图格式。
@@ -10191,6 +10245,7 @@ class AnimatedGraphicsTemplate extends  AbstractModel {
         this.Comment = 'Comment' in params ? params.Comment : null;
         this.Width = 'Width' in params ? params.Width : null;
         this.Height = 'Height' in params ? params.Height : null;
+        this.ResolutionAdaptive = 'ResolutionAdaptive' in params ? params.ResolutionAdaptive : null;
         this.Format = 'Format' in params ? params.Format : null;
         this.Fps = 'Fps' in params ? params.Fps : null;
         this.Quality = 'Quality' in params ? params.Quality : null;
@@ -12094,7 +12149,10 @@ class AiReviewTaskTerrorismResult extends  AbstractModel {
         this.Status = null;
 
         /**
-         * 错误码，0：成功，其他值：失败。
+         * 错误码，0 表示成功，其他值表示失败：
+<li>40000：输入参数不合法，请检查输入参数；</li>
+<li>60000：源文件错误（如视频数据损坏），请确认源文件是否正常；</li>
+<li>70000：内部服务错误，建议重试。</li>
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
@@ -12727,6 +12785,15 @@ class ImageSpriteTemplate extends  AbstractModel {
          */
         this.UpdateTime = null;
 
+        /**
+         * 填充方式，当视频流配置宽高参数与原始视频的宽高比不一致时，对转码的处理方式，即为“填充”。可选填充方式：
+<li> stretch：拉伸，对每一帧进行拉伸，填满整个画面，可能导致转码后的视频被“压扁“或者“拉长“；</li>
+<li>black：留黑，保持视频宽高比不变，边缘剩余部分使用黑色填充。</li>
+默认值：black 。
+         * @type {string || null}
+         */
+        this.FillType = null;
+
     }
 
     /**
@@ -12747,6 +12814,7 @@ class ImageSpriteTemplate extends  AbstractModel {
         this.ColumnCount = 'ColumnCount' in params ? params.ColumnCount : null;
         this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
         this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.FillType = 'FillType' in params ? params.FillType : null;
 
     }
 }
@@ -13352,6 +13420,12 @@ class PullUploadRequest extends  AbstractModel {
         this.SessionId = null;
 
         /**
+         * 保留字段，特殊用途时使用。
+         * @type {string || null}
+         */
+        this.ExtInfo = null;
+
+        /**
          * 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
          * @type {number || null}
          */
@@ -13375,6 +13449,7 @@ class PullUploadRequest extends  AbstractModel {
         this.ClassId = 'ClassId' in params ? params.ClassId : null;
         this.SessionContext = 'SessionContext' in params ? params.SessionContext : null;
         this.SessionId = 'SessionId' in params ? params.SessionId : null;
+        this.ExtInfo = 'ExtInfo' in params ? params.ExtInfo : null;
         this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
 
     }
@@ -13612,15 +13687,32 @@ class DescribeCDNUsageDataRequest extends  AbstractModel {
 
         /**
          * CDN 统计数据类型，有效值：
-<li>Flux：流量，单位为byte。</li>
-<li>Bandwidth：带宽，单位为bps。</li>
+<li>Flux：流量，单位为 byte。</li>
+<li>Bandwidth：带宽，单位为 bps。</li>
          * @type {string || null}
          */
         this.DataType = null;
 
         /**
-         * 点播 [子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
+         * 用量数据的时间粒度，单位：分钟，取值有：
+<li>5：5 分钟粒度，返回指定查询时间内5分钟粒度的明细数据。</li>
+<li>60：小时粒度，返回指定查询时间内1小时粒度的数据。</li>
+<li>1440：天粒度，返回指定查询时间内1天粒度的数据。</li>
+默认值为1440，返回天粒度的数据。
 当该字段为1时，表示以管理员身份查询所有子应用（含主应用）的用量合计。
+         * @type {number || null}
+         */
+        this.DataInterval = null;
+
+        /**
+         * 域名列表。一次最多查询20个域名的用量数据。可以指定多个域名，查询这些域名叠加的用量数据。默认返回所有域名叠加的用量数据。
+         * @type {Array.<string> || null}
+         */
+        this.DomainNames = null;
+
+        /**
+         * 点播 [子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
+当该字段为1时，表示以管理员身份查询所有子应用（含主应用）的用量合计，此时时间粒度只支持天粒度。
          * @type {number || null}
          */
         this.SubAppId = null;
@@ -13637,6 +13729,8 @@ class DescribeCDNUsageDataRequest extends  AbstractModel {
         this.StartTime = 'StartTime' in params ? params.StartTime : null;
         this.EndTime = 'EndTime' in params ? params.EndTime : null;
         this.DataType = 'DataType' in params ? params.DataType : null;
+        this.DataInterval = 'DataInterval' in params ? params.DataInterval : null;
+        this.DomainNames = 'DomainNames' in params ? params.DomainNames : null;
         this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
 
     }
@@ -13751,7 +13845,10 @@ class AiReviewTaskPoliticalAsrResult extends  AbstractModel {
         this.Status = null;
 
         /**
-         * 错误码，0：成功，其他值：失败。
+         * 错误码，0 表示成功，其他值表示失败：
+<li>40000：输入参数不合法，请检查输入参数；</li>
+<li>60000：源文件错误（如视频数据损坏），请确认源文件是否正常；</li>
+<li>70000：内部服务错误，建议重试。</li>
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
@@ -14041,7 +14138,10 @@ class AiReviewTaskPornResult extends  AbstractModel {
         this.Status = null;
 
         /**
-         * 错误码，0：成功，其他值：失败。
+         * 错误码，0 表示成功，其他值表示失败：
+<li>40000：输入参数不合法，请检查输入参数；</li>
+<li>60000：源文件错误（如视频数据损坏），请确认源文件是否正常；</li>
+<li>70000：内部服务错误，建议重试。</li>
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
@@ -15515,6 +15615,25 @@ class ComposeMediaTaskOutput extends  AbstractModel {
          */
         this.FileUrl = null;
 
+        /**
+         * 文件名称，最长 64 个字符。
+         * @type {string || null}
+         */
+        this.MediaName = null;
+
+        /**
+         * 分类ID，用于对媒体进行分类管理，可通过 [创建分类](/document/product/266/7812) 接口，创建分类，获得分类 ID。
+<li>默认值：0，表示其他分类。</li>
+         * @type {number || null}
+         */
+        this.ClassId = null;
+
+        /**
+         * 输出文件的过期时间，超过该时间文件将被删除，默认为永久不过期，格式按照 ISO 8601标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F)。
+         * @type {string || null}
+         */
+        this.ExpireTime = null;
+
     }
 
     /**
@@ -15527,6 +15646,9 @@ class ComposeMediaTaskOutput extends  AbstractModel {
         this.FileType = 'FileType' in params ? params.FileType : null;
         this.FileId = 'FileId' in params ? params.FileId : null;
         this.FileUrl = 'FileUrl' in params ? params.FileUrl : null;
+        this.MediaName = 'MediaName' in params ? params.MediaName : null;
+        this.ClassId = 'ClassId' in params ? params.ClassId : null;
+        this.ExpireTime = 'ExpireTime' in params ? params.ExpireTime : null;
 
     }
 }
@@ -16589,6 +16711,24 @@ class WatermarkInput extends  AbstractModel {
          */
         this.SvgContent = null;
 
+        /**
+         * 水印的起始时间偏移，单位：秒。不填或填0，表示水印从画面出现时开始显现。
+<li>不填或填0，表示水印从画面开始就出现；</li>
+<li>当数值大于0时（假设为 n），表示水印从画面开始的第 n 秒出现；</li>
+<li>当数值小于0时（假设为 -n），表示水印从离画面结束 n 秒前开始出现。</li>
+         * @type {number || null}
+         */
+        this.StartTimeOffset = null;
+
+        /**
+         * 水印的结束时间偏移，单位：秒。
+<li>不填或填0，表示水印持续到画面结束；</li>
+<li>当数值大于0时（假设为 n），表示水印持续到第 n 秒时消失；</li>
+<li>当数值小于0时（假设为 -n），表示水印持续到离画面结束 n 秒前消失。</li>
+         * @type {number || null}
+         */
+        this.EndTimeOffset = null;
+
     }
 
     /**
@@ -16601,6 +16741,8 @@ class WatermarkInput extends  AbstractModel {
         this.Definition = 'Definition' in params ? params.Definition : null;
         this.TextContent = 'TextContent' in params ? params.TextContent : null;
         this.SvgContent = 'SvgContent' in params ? params.SvgContent : null;
+        this.StartTimeOffset = 'StartTimeOffset' in params ? params.StartTimeOffset : null;
+        this.EndTimeOffset = 'EndTimeOffset' in params ? params.EndTimeOffset : null;
 
     }
 }
@@ -18350,7 +18492,10 @@ class AiReviewTaskPoliticalResult extends  AbstractModel {
         this.Status = null;
 
         /**
-         * 错误码，0：成功，其他值：失败。
+         * 错误码，0 表示成功，其他值表示失败：
+<li>40000：输入参数不合法，请检查输入参数；</li>
+<li>60000：源文件错误（如视频数据损坏），请确认源文件是否正常；</li>
+<li>70000：内部服务错误，建议重试。</li>
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
@@ -18700,7 +18845,7 @@ class TaskSimpleInfo extends  AbstractModel {
          * 任务创建时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F)。
          * @type {string || null}
          */
-        this.CreatTime = null;
+        this.CreateTime = null;
 
         /**
          * 任务开始执行时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F)。若任务尚未开始，该字段为空。
@@ -18727,7 +18872,7 @@ class TaskSimpleInfo extends  AbstractModel {
         }
         this.TaskId = 'TaskId' in params ? params.TaskId : null;
         this.TaskType = 'TaskType' in params ? params.TaskType : null;
-        this.CreatTime = 'CreatTime' in params ? params.CreatTime : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
         this.BeginProcessTime = 'BeginProcessTime' in params ? params.BeginProcessTime : null;
         this.FinishTime = 'FinishTime' in params ? params.FinishTime : null;
 
@@ -18880,16 +19025,35 @@ class SnapshotByTimeOffsetTemplate extends  AbstractModel {
         this.Comment = null;
 
         /**
-         * 图片宽度。
+         * 截图宽度（或长边）的最大值，取值范围：0 和 [128, 4096]，单位：px。
+<li>当 Width、Height 均为 0，则分辨率同源；</li>
+<li>当 Width 为 0，Height 非 0，则 Width 按比例缩放；</li>
+<li>当 Width 非 0，Height 为 0，则 Height 按比例缩放；</li>
+<li>当 Width、Height 均非 0，则分辨率按用户指定。</li>
+默认值：0。
          * @type {number || null}
          */
         this.Width = null;
 
         /**
-         * 图片高度。
+         * 截图高度（或短边）的最大值，取值范围：0 和 [128, 4096]，单位：px。
+<li>当 Width、Height 均为 0，则分辨率同源；</li>
+<li>当 Width 为 0，Height 非 0，则 Width 按比例缩放；</li>
+<li>当 Width 非 0，Height 为 0，则 Height 按比例缩放；</li>
+<li>当 Width、Height 均非 0，则分辨率按用户指定。</li>
+默认值：0。
          * @type {number || null}
          */
         this.Height = null;
+
+        /**
+         * 分辨率自适应，可选值：
+<li>open：开启，此时，Width 代表视频的长边，Height 表示视频的短边；</li>
+<li>close：关闭，此时，Width 代表视频的宽度，Height 表示视频的高度。</li>
+默认值：open。
+         * @type {string || null}
+         */
+        this.ResolutionAdaptive = null;
 
         /**
          * 图片格式。
@@ -18909,6 +19073,17 @@ class SnapshotByTimeOffsetTemplate extends  AbstractModel {
          */
         this.UpdateTime = null;
 
+        /**
+         * 填充方式，当视频流配置宽高参数与原始视频的宽高比不一致时，对转码的处理方式，即为“填充”。可选填充方式：
+<li> stretch：拉伸，对每一帧进行拉伸，填满整个画面，可能导致转码后的视频被“压扁“或者“拉长“；</li>
+<li>black：留黑，保持视频宽高比不变，边缘剩余部分使用黑色填充。</li>
+<li>black：留白，保持视频宽高比不变，边缘剩余部分使用白色填充。</li>
+<li>black：高斯模糊，保持视频宽高比不变，边缘剩余部分使用高斯模糊。</li>
+默认值：black 。
+         * @type {string || null}
+         */
+        this.FillType = null;
+
     }
 
     /**
@@ -18924,9 +19099,11 @@ class SnapshotByTimeOffsetTemplate extends  AbstractModel {
         this.Comment = 'Comment' in params ? params.Comment : null;
         this.Width = 'Width' in params ? params.Width : null;
         this.Height = 'Height' in params ? params.Height : null;
+        this.ResolutionAdaptive = 'ResolutionAdaptive' in params ? params.ResolutionAdaptive : null;
         this.Format = 'Format' in params ? params.Format : null;
         this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
         this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.FillType = 'FillType' in params ? params.FillType : null;
 
     }
 }
@@ -21712,14 +21889,14 @@ class SearchMediaRequest extends  AbstractModel {
         super();
 
         /**
-         * 搜索文本，模糊匹配媒体文件名称或描述信息，匹配项越多，匹配度越高，排序越优先。长度限制：64 个字符。
+         * 搜索文本，模糊匹配媒体文件名称或描述信息，匹配项越多，匹配度越高，排序越优先。长度限制：64个字符。
          * @type {string || null}
          */
         this.Text = null;
 
         /**
          * 标签集合，匹配集合中任意元素。
-<li>单个标签长度限制：8 个字符。</li>
+<li>单个标签长度限制：8个字符。</li>
 <li>数组长度限制：10。</li>
          * @type {Array.<string> || null}
          */
@@ -21734,7 +21911,7 @@ class SearchMediaRequest extends  AbstractModel {
         /**
          * 创建时间的开始时间。
 <li>大于等于开始时间。</li>
-<li>格式按照 ISO 8601 标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F)。</li>
+<li>格式按照 ISO 8601标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F)。</li>
          * @type {string || null}
          */
         this.StartTime = null;
@@ -21742,7 +21919,7 @@ class SearchMediaRequest extends  AbstractModel {
         /**
          * 创建时间的结束时间。
 <li>小于结束时间。</li>
-<li>格式按照 ISO 8601 标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F)。</li>
+<li>格式按照 ISO 8601标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F)。</li>
          * @type {string || null}
          */
         this.EndTime = null;
@@ -21754,7 +21931,7 @@ class SearchMediaRequest extends  AbstractModel {
         this.SourceType = null;
 
         /**
-         * 推流[直播码](https://cloud.tencent.com/document/product/267/5959)。
+         * 推流 [直播码](https://cloud.tencent.com/document/product/267/5959)。
          * @type {string || null}
          */
         this.StreamId = null;
@@ -21774,15 +21951,15 @@ class SearchMediaRequest extends  AbstractModel {
         this.Sort = null;
 
         /**
-         * 偏移量。
-<li>默认值：0。</li>
-<li>取值范围：Offset + Limit 不超过 5000。</li>
+         * 分页返回的起始偏移量，默认值：0。将返回第 Offset 到第 Offset+Limit-1 条。
+<li>取值范围：Offset + Limit 不超过5000。</li>
          * @type {number || null}
          */
         this.Offset = null;
 
         /**
-         * 返回记录条数，默认值：10。
+         * 分页返回的记录条数，默认值：10。将返回第 Offset 到第 Offset+Limit-1 条。
+<li>取值范围：Offset + Limit 不超过5000。</li>
          * @type {number || null}
          */
         this.Limit = null;
@@ -21961,7 +22138,10 @@ class AiReviewTaskPornAsrResult extends  AbstractModel {
         this.Status = null;
 
         /**
-         * 错误码，0：成功，其他值：失败。
+         * 错误码，0 表示成功，其他值表示失败：
+<li>40000：输入参数不合法，请检查输入参数；</li>
+<li>60000：源文件错误（如视频数据损坏），请确认源文件是否正常；</li>
+<li>70000：内部服务错误，建议重试。</li>
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
@@ -23173,16 +23353,35 @@ class SampleSnapshotTemplate extends  AbstractModel {
         this.Comment = null;
 
         /**
-         * 图片宽度。
+         * 截图宽度（或长边）的最大值，取值范围：0 和 [128, 4096]，单位：px。
+<li>当 Width、Height 均为 0，则分辨率同源；</li>
+<li>当 Width 为 0，Height 非 0，则 Width 按比例缩放；</li>
+<li>当 Width 非 0，Height 为 0，则 Height 按比例缩放；</li>
+<li>当 Width、Height 均非 0，则分辨率按用户指定。</li>
+默认值：0。
          * @type {number || null}
          */
         this.Width = null;
 
         /**
-         * 图片高度。
+         * 截图高度（或短边）的最大值，取值范围：0 和 [128, 4096]，单位：px。
+<li>当 Width、Height 均为 0，则分辨率同源；</li>
+<li>当 Width 为 0，Height 非 0，则 Width 按比例缩放；</li>
+<li>当 Width 非 0，Height 为 0，则 Height 按比例缩放；</li>
+<li>当 Width、Height 均非 0，则分辨率按用户指定。</li>
+默认值：0。
          * @type {number || null}
          */
         this.Height = null;
+
+        /**
+         * 分辨率自适应，可选值：
+<li>open：开启，此时，Width 代表视频的长边，Height 表示视频的短边；</li>
+<li>close：关闭，此时，Width 代表视频的宽度，Height 表示视频的高度。</li>
+默认值：open。
+         * @type {string || null}
+         */
+        this.ResolutionAdaptive = null;
 
         /**
          * 图片格式。
@@ -23214,6 +23413,17 @@ class SampleSnapshotTemplate extends  AbstractModel {
          */
         this.UpdateTime = null;
 
+        /**
+         * 填充方式，当视频流配置宽高参数与原始视频的宽高比不一致时，对转码的处理方式，即为“填充”。可选填充方式：
+<li> stretch：拉伸，对每一帧进行拉伸，填满整个画面，可能导致转码后的视频被“压扁“或者“拉长“；</li>
+<li>black：留黑，保持视频宽高比不变，边缘剩余部分使用黑色填充。</li>
+<li>black：留白，保持视频宽高比不变，边缘剩余部分使用白色填充。</li>
+<li>black：高斯模糊，保持视频宽高比不变，边缘剩余部分使用高斯模糊。</li>
+默认值：black 。
+         * @type {string || null}
+         */
+        this.FillType = null;
+
     }
 
     /**
@@ -23229,11 +23439,13 @@ class SampleSnapshotTemplate extends  AbstractModel {
         this.Comment = 'Comment' in params ? params.Comment : null;
         this.Width = 'Width' in params ? params.Width : null;
         this.Height = 'Height' in params ? params.Height : null;
+        this.ResolutionAdaptive = 'ResolutionAdaptive' in params ? params.ResolutionAdaptive : null;
         this.Format = 'Format' in params ? params.Format : null;
         this.SampleType = 'SampleType' in params ? params.SampleType : null;
         this.SampleInterval = 'SampleInterval' in params ? params.SampleInterval : null;
         this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
         this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.FillType = 'FillType' in params ? params.FillType : null;
 
     }
 }
@@ -23576,6 +23788,13 @@ class EditMediaTaskOutput extends  AbstractModel {
         this.FileType = null;
 
         /**
+         * 媒体文件播放地址。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.FileUrl = null;
+
+        /**
          * 媒体文件 ID。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
@@ -23583,11 +23802,26 @@ class EditMediaTaskOutput extends  AbstractModel {
         this.FileId = null;
 
         /**
-         * 媒体文件播放地址。
+         * 输出文件名，最长 64 个字符。缺省由系统指定生成文件名。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
-        this.FileUrl = null;
+        this.MediaName = null;
+
+        /**
+         * 分类ID，用于对媒体进行分类管理，可通过 [创建分类](/document/product/266/7812) 接口，创建分类，获得分类 ID。
+<li>默认值：0，表示其他分类。</li>
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.ClassId = null;
+
+        /**
+         * 输出文件的过期时间，超过该时间文件将被删除，默认为永久不过期，格式按照 ISO 8601标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F)。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ExpireTime = null;
 
     }
 
@@ -23599,8 +23833,11 @@ class EditMediaTaskOutput extends  AbstractModel {
             return;
         }
         this.FileType = 'FileType' in params ? params.FileType : null;
-        this.FileId = 'FileId' in params ? params.FileId : null;
         this.FileUrl = 'FileUrl' in params ? params.FileUrl : null;
+        this.FileId = 'FileId' in params ? params.FileId : null;
+        this.MediaName = 'MediaName' in params ? params.MediaName : null;
+        this.ClassId = 'ClassId' in params ? params.ClassId : null;
+        this.ExpireTime = 'ExpireTime' in params ? params.ExpireTime : null;
 
     }
 }
@@ -23696,6 +23933,19 @@ class ComposeMediaOutput extends  AbstractModel {
         this.Description = null;
 
         /**
+         * 分类ID，用于对媒体进行分类管理，可通过 [创建分类](/document/product/266/7812) 接口，创建分类，获得分类 ID。
+<li>默认值：0，表示其他分类。</li>
+         * @type {number || null}
+         */
+        this.ClassId = null;
+
+        /**
+         * 输出文件的过期时间，超过该时间文件将被删除，默认为永久不过期，格式按照 ISO 8601标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F)。
+         * @type {string || null}
+         */
+        this.ExpireTime = null;
+
+        /**
          * 封装格式，可选值：mp4、mp3。其中，mp3 为纯音频文件。
          * @type {string || null}
          */
@@ -23744,6 +23994,8 @@ class ComposeMediaOutput extends  AbstractModel {
         }
         this.FileName = 'FileName' in params ? params.FileName : null;
         this.Description = 'Description' in params ? params.Description : null;
+        this.ClassId = 'ClassId' in params ? params.ClassId : null;
+        this.ExpireTime = 'ExpireTime' in params ? params.ExpireTime : null;
         this.Container = 'Container' in params ? params.Container : null;
 
         if (params.VideoStream) {

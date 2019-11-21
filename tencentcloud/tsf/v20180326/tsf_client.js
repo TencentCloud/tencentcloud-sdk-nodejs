@@ -25,6 +25,7 @@ const DescribeClusterInstancesResponse = models.DescribeClusterInstancesResponse
 const DescribeMicroserviceRequest = models.DescribeMicroserviceRequest;
 const CosCredentials = models.CosCredentials;
 const ExpandGroupRequest = models.ExpandGroupRequest;
+const DeleteServerlessGroupRequest = models.DeleteServerlessGroupRequest;
 const DescribeImageTagsRequest = models.DescribeImageTagsRequest;
 const ReleaseConfigResponse = models.ReleaseConfigResponse;
 const TsfPageSimpleGroup = models.TsfPageSimpleGroup;
@@ -46,13 +47,13 @@ const SimpleApplication = models.SimpleApplication;
 const DescribePublicConfigSummaryResponse = models.DescribePublicConfigSummaryResponse;
 const DescribeSimpleClustersResponse = models.DescribeSimpleClustersResponse;
 const DescribePublicConfigReleaseLogsRequest = models.DescribePublicConfigReleaseLogsRequest;
+const CreateServerlessGroupResponse = models.CreateServerlessGroupResponse;
 const DeleteApplicationResponse = models.DeleteApplicationResponse;
 const StartGroupRequest = models.StartGroupRequest;
 const DescribeConfigsResponse = models.DescribeConfigsResponse;
 const DescribeApplicationAttributeResponse = models.DescribeApplicationAttributeResponse;
 const DescribeApplicationsResponse = models.DescribeApplicationsResponse;
 const ModifyContainerReplicasRequest = models.ModifyContainerReplicasRequest;
-const TsfPageVmGroup = models.TsfPageVmGroup;
 const TsfPageMsInstance = models.TsfPageMsInstance;
 const DeleteMicroserviceRequest = models.DeleteMicroserviceRequest;
 const CreatePublicConfigRequest = models.CreatePublicConfigRequest;
@@ -63,15 +64,18 @@ const DescribeConfigRequest = models.DescribeConfigRequest;
 const Namespace = models.Namespace;
 const TsfPageCluster = models.TsfPageCluster;
 const DescribeGroupResponse = models.DescribeGroupResponse;
+const DescribeGroupsResponse = models.DescribeGroupsResponse;
 const Env = models.Env;
 const DeleteContainerGroupResponse = models.DeleteContainerGroupResponse;
 const DescribeSimpleGroupsRequest = models.DescribeSimpleGroupsRequest;
 const CreateNamespaceResponse = models.CreateNamespaceResponse;
+const DeleteServerlessGroupResponse = models.DeleteServerlessGroupResponse;
 const DeleteImageTagsResponse = models.DeleteImageTagsResponse;
 const ModifyUploadInfoResponse = models.ModifyUploadInfoResponse;
 const DescribeImageTagsResponse = models.DescribeImageTagsResponse;
 const DeleteGroupRequest = models.DeleteGroupRequest;
 const TsfPageConfig = models.TsfPageConfig;
+const ServerlessGroup = models.ServerlessGroup;
 const DescribeApplicationResponse = models.DescribeApplicationResponse;
 const DescribeConfigReleaseLogsResponse = models.DescribeConfigReleaseLogsResponse;
 const RevocationConfigResponse = models.RevocationConfigResponse;
@@ -96,6 +100,7 @@ const DescribeSimpleNamespacesRequest = models.DescribeSimpleNamespacesRequest;
 const SimpleGroup = models.SimpleGroup;
 const MsInstance = models.MsInstance;
 const ExpandGroupResponse = models.ExpandGroupResponse;
+const DescribeServerlessGroupsResponse = models.DescribeServerlessGroupsResponse;
 const DescribePublicConfigsResponse = models.DescribePublicConfigsResponse;
 const AddInstancesResponse = models.AddInstancesResponse;
 const DeleteApplicationRequest = models.DeleteApplicationRequest;
@@ -129,13 +134,15 @@ const TsfPageApplication = models.TsfPageApplication;
 const DescribeGroupRequest = models.DescribeGroupRequest;
 const ImageTagsResult = models.ImageTagsResult;
 const ProtocolPort = models.ProtocolPort;
-const DescribeConfigReleasesResponse = models.DescribeConfigReleasesResponse;
+const DescribeServerlessGroupRequest = models.DescribeServerlessGroupRequest;
+const TsfPageVmGroup = models.TsfPageVmGroup;
 const DescribePkgsResponse = models.DescribePkgsResponse;
 const DescribeSimpleNamespacesResponse = models.DescribeSimpleNamespacesResponse;
+const VpcConfig = models.VpcConfig;
 const ApplicationAttribute = models.ApplicationAttribute;
 const DeleteImageTag = models.DeleteImageTag;
 const DeletePkgsResponse = models.DeletePkgsResponse;
-const DescribeGroupsResponse = models.DescribeGroupsResponse;
+const DescribeConfigReleasesResponse = models.DescribeConfigReleasesResponse;
 const Cluster = models.Cluster;
 const ModifyMicroserviceResponse = models.ModifyMicroserviceResponse;
 const DescribeMicroservicesResponse = models.DescribeMicroservicesResponse;
@@ -172,11 +179,14 @@ const DeleteNamespaceRequest = models.DeleteNamespaceRequest;
 const RemoveInstancesRequest = models.RemoveInstancesRequest;
 const DeployGroupRequest = models.DeployGroupRequest;
 const TsfPageInstance = models.TsfPageInstance;
+const CreateServerlessGroupRequest = models.CreateServerlessGroupRequest;
 const DescribeMicroserviceResponse = models.DescribeMicroserviceResponse;
 const DeleteGroupResponse = models.DeleteGroupResponse;
+const DescribeServerlessGroupsRequest = models.DescribeServerlessGroupsRequest;
 const DeployContainerGroupRequest = models.DeployContainerGroupRequest;
 const CosDownloadInfo = models.CosDownloadInfo;
 const DeletePkgsRequest = models.DeletePkgsRequest;
+const ServerlessGroupPage = models.ServerlessGroupPage;
 const DescribeConfigSummaryResponse = models.DescribeConfigSummaryResponse;
 const CreateContainGroupRequest = models.CreateContainGroupRequest;
 const ContainGroup = models.ContainGroup;
@@ -187,6 +197,7 @@ const DeployGroupResponse = models.DeployGroupResponse;
 const ModifyContainerGroupResponse = models.ModifyContainerGroupResponse;
 const ReleasePublicConfigResponse = models.ReleasePublicConfigResponse;
 const ReleasePublicConfigRequest = models.ReleasePublicConfigRequest;
+const DescribeServerlessGroupResponse = models.DescribeServerlessGroupResponse;
 const TaskId = models.TaskId;
 const DescribeGroupInstancesRequest = models.DescribeGroupInstancesRequest;
 const CreateGroupResponse = models.CreateGroupResponse;
@@ -203,14 +214,14 @@ class TsfClient extends AbstractClient {
     }
     
     /**
-     * 虚拟机部署组添加实例
-     * @param {ExpandGroupRequest} req
-     * @param {function(string, ExpandGroupResponse):void} cb
+     * 停止容器部署组
+     * @param {StopContainerGroupRequest} req
+     * @param {function(string, StopContainerGroupResponse):void} cb
      * @public
      */
-    ExpandGroup(req, cb) {
-        let resp = new ExpandGroupResponse();
-        this.request("ExpandGroup", req, resp, cb);
+    StopContainerGroup(req, cb) {
+        let resp = new StopContainerGroupResponse();
+        this.request("StopContainerGroup", req, resp, cb);
     }
 
     /**
@@ -302,14 +313,14 @@ class TsfClient extends AbstractClient {
     }
 
     /**
-     * 撤回已发布的公共配置
-     * @param {RevocationPublicConfigRequest} req
-     * @param {function(string, RevocationPublicConfigResponse):void} cb
+     * 查询Serverless部署组列表
+     * @param {DescribeServerlessGroupsRequest} req
+     * @param {function(string, DescribeServerlessGroupsResponse):void} cb
      * @public
      */
-    RevocationPublicConfig(req, cb) {
-        let resp = new RevocationPublicConfigResponse();
-        this.request("RevocationPublicConfig", req, resp, cb);
+    DescribeServerlessGroups(req, cb) {
+        let resp = new DescribeServerlessGroupsResponse();
+        this.request("DescribeServerlessGroups", req, resp, cb);
     }
 
     /**
@@ -457,6 +468,28 @@ class TsfClient extends AbstractClient {
     }
 
     /**
+     * 查询Serverless部署组明细
+     * @param {DescribeServerlessGroupRequest} req
+     * @param {function(string, DescribeServerlessGroupResponse):void} cb
+     * @public
+     */
+    DescribeServerlessGroup(req, cb) {
+        let resp = new DescribeServerlessGroupResponse();
+        this.request("DescribeServerlessGroup", req, resp, cb);
+    }
+
+    /**
+     * 获取应用列表其它字段，如实例数量信息等
+     * @param {DescribeApplicationAttributeRequest} req
+     * @param {function(string, DescribeApplicationAttributeResponse):void} cb
+     * @public
+     */
+    DescribeApplicationAttribute(req, cb) {
+        let resp = new DescribeApplicationAttributeResponse();
+        this.request("DescribeApplicationAttribute", req, resp, cb);
+    }
+
+    /**
      * 查询配置
      * @param {DescribeConfigRequest} req
      * @param {function(string, DescribeConfigResponse):void} cb
@@ -501,25 +534,25 @@ class TsfClient extends AbstractClient {
     }
 
     /**
-     * 停止容器部署组
-     * @param {StopContainerGroupRequest} req
-     * @param {function(string, StopContainerGroupResponse):void} cb
+     * 虚拟机部署组添加实例
+     * @param {ExpandGroupRequest} req
+     * @param {function(string, ExpandGroupResponse):void} cb
      * @public
      */
-    StopContainerGroup(req, cb) {
-        let resp = new StopContainerGroupResponse();
-        this.request("StopContainerGroup", req, resp, cb);
+    ExpandGroup(req, cb) {
+        let resp = new ExpandGroupResponse();
+        this.request("ExpandGroup", req, resp, cb);
     }
 
     /**
-     * 部署虚拟机部署组应用
-     * @param {DeployGroupRequest} req
-     * @param {function(string, DeployGroupResponse):void} cb
+     * 查询公共配置（单条）
+     * @param {DescribePublicConfigRequest} req
+     * @param {function(string, DescribePublicConfigResponse):void} cb
      * @public
      */
-    DeployGroup(req, cb) {
-        let resp = new DeployGroupResponse();
-        this.request("DeployGroup", req, resp, cb);
+    DescribePublicConfig(req, cb) {
+        let resp = new DescribePublicConfigResponse();
+        this.request("DescribePublicConfig", req, resp, cb);
     }
 
     /**
@@ -600,6 +633,17 @@ class TsfClient extends AbstractClient {
     }
 
     /**
+     * 撤回已发布的公共配置
+     * @param {RevocationPublicConfigRequest} req
+     * @param {function(string, RevocationPublicConfigResponse):void} cb
+     * @public
+     */
+    RevocationPublicConfig(req, cb) {
+        let resp = new RevocationPublicConfigResponse();
+        this.request("RevocationPublicConfig", req, resp, cb);
+    }
+
+    /**
      * 虚拟机部署组下线实例
      * @param {ShrinkInstancesRequest} req
      * @param {function(string, ShrinkInstancesResponse):void} cb
@@ -611,14 +655,14 @@ class TsfClient extends AbstractClient {
     }
 
     /**
-     * 获取应用列表其它字段，如实例数量信息等
-     * @param {DescribeApplicationAttributeRequest} req
-     * @param {function(string, DescribeApplicationAttributeResponse):void} cb
+     * 部署虚拟机部署组应用
+     * @param {DeployGroupRequest} req
+     * @param {function(string, DeployGroupResponse):void} cb
      * @public
      */
-    DescribeApplicationAttribute(req, cb) {
-        let resp = new DescribeApplicationAttributeResponse();
-        this.request("DescribeApplicationAttribute", req, resp, cb);
+    DeployGroup(req, cb) {
+        let resp = new DeployGroupResponse();
+        this.request("DeployGroup", req, resp, cb);
     }
 
     /**
@@ -707,6 +751,18 @@ class TsfClient extends AbstractClient {
     DescribeSimpleNamespaces(req, cb) {
         let resp = new DescribeSimpleNamespacesResponse();
         this.request("DescribeSimpleNamespaces", req, resp, cb);
+    }
+
+    /**
+     * 调用该接口和COS的上传接口后，需要调用此接口更新TSF中保存的程序包状态。
+调用此接口完成后，才标志上传包流程结束。
+     * @param {ModifyUploadInfoRequest} req
+     * @param {function(string, ModifyUploadInfoResponse):void} cb
+     * @public
+     */
+    ModifyUploadInfo(req, cb) {
+        let resp = new ModifyUploadInfoResponse();
+        this.request("ModifyUploadInfo", req, resp, cb);
     }
 
     /**
@@ -888,14 +944,14 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
     }
 
     /**
-     * 查询公共配置（单条）
-     * @param {DescribePublicConfigRequest} req
-     * @param {function(string, DescribePublicConfigResponse):void} cb
+     * 创建Serverless部署组
+     * @param {CreateServerlessGroupRequest} req
+     * @param {function(string, CreateServerlessGroupResponse):void} cb
      * @public
      */
-    DescribePublicConfig(req, cb) {
-        let resp = new DescribePublicConfigResponse();
-        this.request("DescribePublicConfig", req, resp, cb);
+    CreateServerlessGroup(req, cb) {
+        let resp = new CreateServerlessGroupResponse();
+        this.request("CreateServerlessGroup", req, resp, cb);
     }
 
     /**
@@ -921,15 +977,14 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
     }
 
     /**
-     * 调用该接口和COS的上传接口后，需要调用此接口更新TSF中保存的程序包状态。
-调用此接口完成后，才标志上传包流程结束。
-     * @param {ModifyUploadInfoRequest} req
-     * @param {function(string, ModifyUploadInfoResponse):void} cb
+     * 删除Serverless部署组
+     * @param {DeleteServerlessGroupRequest} req
+     * @param {function(string, DeleteServerlessGroupResponse):void} cb
      * @public
      */
-    ModifyUploadInfo(req, cb) {
-        let resp = new ModifyUploadInfoResponse();
-        this.request("ModifyUploadInfo", req, resp, cb);
+    DeleteServerlessGroup(req, cb) {
+        let resp = new DeleteServerlessGroupResponse();
+        this.request("DeleteServerlessGroup", req, resp, cb);
     }
 
     /**

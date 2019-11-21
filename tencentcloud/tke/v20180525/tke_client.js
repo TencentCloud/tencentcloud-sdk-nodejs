@@ -17,16 +17,20 @@
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const DeleteClusterRequest = models.DeleteClusterRequest;
-const DescribeClusterSecurityResponse = models.DescribeClusterSecurityResponse;
+const CreateClusterEndpointVipResponse = models.CreateClusterEndpointVipResponse;
 const DescribeExistedInstancesResponse = models.DescribeExistedInstancesResponse;
 const DescribeClusterRoutesResponse = models.DescribeClusterRoutesResponse;
 const DescribeClusterSecurityRequest = models.DescribeClusterSecurityRequest;
-const DeleteClusterInstancesResponse = models.DeleteClusterInstancesResponse;
+const DescribeClusterEndpointVipStatusRequest = models.DescribeClusterEndpointVipStatusRequest;
+const CreateClusterEndpointRequest = models.CreateClusterEndpointRequest;
 const EnhancedService = models.EnhancedService;
+const Instance = models.Instance;
 const LoginSettings = models.LoginSettings;
 const Label = models.Label;
 const AddExistedInstancesRequest = models.AddExistedInstancesRequest;
 const CreateClusterRouteRequest = models.CreateClusterRouteRequest;
+const DescribeClusterEndpointVipStatusResponse = models.DescribeClusterEndpointVipStatusResponse;
+const DescribeClusterSecurityResponse = models.DescribeClusterSecurityResponse;
 const DescribeClusterInstancesResponse = models.DescribeClusterInstancesResponse;
 const CreateClusterAsGroupRequest = models.CreateClusterAsGroupRequest;
 const DescribeClusterRouteTablesRequest = models.DescribeClusterRouteTablesRequest;
@@ -41,33 +45,43 @@ const CreateClusterRequest = models.CreateClusterRequest;
 const DeleteClusterInstancesRequest = models.DeleteClusterInstancesRequest;
 const CreateClusterInstancesRequest = models.CreateClusterInstancesRequest;
 const CreateClusterAsGroupResponse = models.CreateClusterAsGroupResponse;
+const DeleteClusterInstancesResponse = models.DeleteClusterInstancesResponse;
 const Tag = models.Tag;
 const CreateClusterRouteTableRequest = models.CreateClusterRouteTableRequest;
-const DescribeClusterRouteTablesResponse = models.DescribeClusterRouteTablesResponse;
+const DeleteClusterEndpointResponse = models.DeleteClusterEndpointResponse;
+const RouteTableConflict = models.RouteTableConflict;
 const DeleteClusterAsGroupsResponse = models.DeleteClusterAsGroupsResponse;
 const RouteTableInfo = models.RouteTableInfo;
+const DeleteClusterEndpointVipResponse = models.DeleteClusterEndpointVipResponse;
 const DescribeClusterInstancesRequest = models.DescribeClusterInstancesRequest;
 const ClusterCIDRSettings = models.ClusterCIDRSettings;
 const InstanceAdvancedSettings = models.InstanceAdvancedSettings;
+const ModifyClusterEndpointSPResponse = models.ModifyClusterEndpointSPResponse;
+const DescribeClusterRouteTablesResponse = models.DescribeClusterRouteTablesResponse;
 const DescribeRouteTableConflictsRequest = models.DescribeRouteTableConflictsRequest;
 const RunInstancesForNode = models.RunInstancesForNode;
-const RunSecurityServiceEnabled = models.RunSecurityServiceEnabled;
+const CreateClusterEndpointVipRequest = models.CreateClusterEndpointVipRequest;
 const ExistedInstancesPara = models.ExistedInstancesPara;
 const DeleteClusterAsGroupsRequest = models.DeleteClusterAsGroupsRequest;
 const DescribeExistedInstancesRequest = models.DescribeExistedInstancesRequest;
 const ExistedInstance = models.ExistedInstance;
 const CreateClusterRouteResponse = models.CreateClusterRouteResponse;
+const ModifyClusterEndpointSPRequest = models.ModifyClusterEndpointSPRequest;
 const DescribeRouteTableConflictsResponse = models.DescribeRouteTableConflictsResponse;
 const RouteInfo = models.RouteInfo;
 const RunMonitorServiceEnabled = models.RunMonitorServiceEnabled;
-const RouteTableConflict = models.RouteTableConflict;
+const CreateClusterEndpointResponse = models.CreateClusterEndpointResponse;
+const DeleteClusterEndpointRequest = models.DeleteClusterEndpointRequest;
 const ClusterAdvancedSettings = models.ClusterAdvancedSettings;
 const Filter = models.Filter;
-const Instance = models.Instance;
+const DescribeClusterEndpointStatusRequest = models.DescribeClusterEndpointStatusRequest;
 const TagSpecification = models.TagSpecification;
+const DeleteClusterEndpointVipRequest = models.DeleteClusterEndpointVipRequest;
 const DescribeClustersRequest = models.DescribeClustersRequest;
 const Cluster = models.Cluster;
+const DescribeClusterEndpointStatusResponse = models.DescribeClusterEndpointStatusResponse;
 const DescribeClustersResponse = models.DescribeClustersResponse;
+const RunSecurityServiceEnabled = models.RunSecurityServiceEnabled;
 const ClusterNetworkSettings = models.ClusterNetworkSettings;
 const DeleteClusterRouteResponse = models.DeleteClusterRouteResponse;
 const DeleteClusterResponse = models.DeleteClusterResponse;
@@ -86,6 +100,39 @@ class TkeClient extends AbstractClient {
         super("tke.tencentcloudapi.com", "2018-05-25", credential, region, profile);
     }
     
+    /**
+     * 创建集群
+     * @param {CreateClusterRequest} req
+     * @param {function(string, CreateClusterResponse):void} cb
+     * @public
+     */
+    CreateCluster(req, cb) {
+        let resp = new CreateClusterResponse();
+        this.request("CreateCluster", req, resp, cb);
+    }
+
+    /**
+     * 删除集群访问端口(独立集群开启内网/外网访问，托管集群支持开启内网访问)
+     * @param {DeleteClusterEndpointRequest} req
+     * @param {function(string, DeleteClusterEndpointResponse):void} cb
+     * @public
+     */
+    DeleteClusterEndpoint(req, cb) {
+        let resp = new DeleteClusterEndpointResponse();
+        this.request("DeleteClusterEndpoint", req, resp, cb);
+    }
+
+    /**
+     * 删除集群(YUNAPI V3版本)
+     * @param {DeleteClusterRequest} req
+     * @param {function(string, DeleteClusterResponse):void} cb
+     * @public
+     */
+    DeleteCluster(req, cb) {
+        let resp = new DeleteClusterResponse();
+        this.request("DeleteCluster", req, resp, cb);
+    }
+
     /**
      * 删除集群伸缩组
      * @param {DeleteClusterAsGroupsRequest} req
@@ -109,58 +156,25 @@ class TkeClient extends AbstractClient {
     }
 
     /**
-     * 查询集群列表
-     * @param {DescribeClustersRequest} req
-     * @param {function(string, DescribeClustersResponse):void} cb
+     * 查询集群开启端口流程状态(仅支持托管集群外网端口)
+     * @param {DescribeClusterEndpointVipStatusRequest} req
+     * @param {function(string, DescribeClusterEndpointVipStatusResponse):void} cb
      * @public
      */
-    DescribeClusters(req, cb) {
-        let resp = new DescribeClustersResponse();
-        this.request("DescribeClusters", req, resp, cb);
+    DescribeClusterEndpointVipStatus(req, cb) {
+        let resp = new DescribeClusterEndpointVipStatusResponse();
+        this.request("DescribeClusterEndpointVipStatus", req, resp, cb);
     }
 
     /**
-     * 查询路由表冲突列表
-     * @param {DescribeRouteTableConflictsRequest} req
-     * @param {function(string, DescribeRouteTableConflictsResponse):void} cb
+     * 扩展(新建)集群节点
+     * @param {CreateClusterInstancesRequest} req
+     * @param {function(string, CreateClusterInstancesResponse):void} cb
      * @public
      */
-    DescribeRouteTableConflicts(req, cb) {
-        let resp = new DescribeRouteTableConflictsResponse();
-        this.request("DescribeRouteTableConflicts", req, resp, cb);
-    }
-
-    /**
-     * 删除集群中的实例
-     * @param {DeleteClusterInstancesRequest} req
-     * @param {function(string, DeleteClusterInstancesResponse):void} cb
-     * @public
-     */
-    DeleteClusterInstances(req, cb) {
-        let resp = new DeleteClusterInstancesResponse();
-        this.request("DeleteClusterInstances", req, resp, cb);
-    }
-
-    /**
-     * 创建集群
-     * @param {CreateClusterRequest} req
-     * @param {function(string, CreateClusterResponse):void} cb
-     * @public
-     */
-    CreateCluster(req, cb) {
-        let resp = new CreateClusterResponse();
-        this.request("CreateCluster", req, resp, cb);
-    }
-
-    /**
-     * 删除集群(YUNAPI V3版本)
-     * @param {DeleteClusterRequest} req
-     * @param {function(string, DeleteClusterResponse):void} cb
-     * @public
-     */
-    DeleteCluster(req, cb) {
-        let resp = new DeleteClusterResponse();
-        this.request("DeleteCluster", req, resp, cb);
+    CreateClusterInstances(req, cb) {
+        let resp = new CreateClusterInstancesResponse();
+        this.request("CreateClusterInstances", req, resp, cb);
     }
 
     /**
@@ -197,17 +211,6 @@ class TkeClient extends AbstractClient {
     }
 
     /**
-     * 添加已经存在的实例到集群
-     * @param {AddExistedInstancesRequest} req
-     * @param {function(string, AddExistedInstancesResponse):void} cb
-     * @public
-     */
-    AddExistedInstances(req, cb) {
-        let resp = new AddExistedInstancesResponse();
-        this.request("AddExistedInstances", req, resp, cb);
-    }
-
-    /**
      * 创建集群路由表
      * @param {CreateClusterRouteTableRequest} req
      * @param {function(string, CreateClusterRouteTableResponse):void} cb
@@ -230,14 +233,47 @@ class TkeClient extends AbstractClient {
     }
 
     /**
-     * 查询集群路由
-     * @param {DescribeClusterRoutesRequest} req
-     * @param {function(string, DescribeClusterRoutesResponse):void} cb
+     * 查询集群列表
+     * @param {DescribeClustersRequest} req
+     * @param {function(string, DescribeClustersResponse):void} cb
      * @public
      */
-    DescribeClusterRoutes(req, cb) {
-        let resp = new DescribeClusterRoutesResponse();
-        this.request("DescribeClusterRoutes", req, resp, cb);
+    DescribeClusters(req, cb) {
+        let resp = new DescribeClustersResponse();
+        this.request("DescribeClusters", req, resp, cb);
+    }
+
+    /**
+     * 查询集群访问端口状态(独立集群开启内网/外网访问，托管集群支持开启内网访问)
+     * @param {DescribeClusterEndpointStatusRequest} req
+     * @param {function(string, DescribeClusterEndpointStatusResponse):void} cb
+     * @public
+     */
+    DescribeClusterEndpointStatus(req, cb) {
+        let resp = new DescribeClusterEndpointStatusResponse();
+        this.request("DescribeClusterEndpointStatus", req, resp, cb);
+    }
+
+    /**
+     * 创建集群访问端口(独立集群开启内网/外网访问，托管集群支持开启内网访问)
+     * @param {CreateClusterEndpointRequest} req
+     * @param {function(string, CreateClusterEndpointResponse):void} cb
+     * @public
+     */
+    CreateClusterEndpoint(req, cb) {
+        let resp = new CreateClusterEndpointResponse();
+        this.request("CreateClusterEndpoint", req, resp, cb);
+    }
+
+    /**
+     * 添加已经存在的实例到集群
+     * @param {AddExistedInstancesRequest} req
+     * @param {function(string, AddExistedInstancesResponse):void} cb
+     * @public
+     */
+    AddExistedInstances(req, cb) {
+        let resp = new AddExistedInstancesResponse();
+        this.request("AddExistedInstances", req, resp, cb);
     }
 
     /**
@@ -252,25 +288,14 @@ class TkeClient extends AbstractClient {
     }
 
     /**
-     * 删除集群路由表
-     * @param {DeleteClusterRouteTableRequest} req
-     * @param {function(string, DeleteClusterRouteTableResponse):void} cb
+     * 查询路由表冲突列表
+     * @param {DescribeRouteTableConflictsRequest} req
+     * @param {function(string, DescribeRouteTableConflictsResponse):void} cb
      * @public
      */
-    DeleteClusterRouteTable(req, cb) {
-        let resp = new DeleteClusterRouteTableResponse();
-        this.request("DeleteClusterRouteTable", req, resp, cb);
-    }
-
-    /**
-     * 扩展(新建)集群节点
-     * @param {CreateClusterInstancesRequest} req
-     * @param {function(string, CreateClusterInstancesResponse):void} cb
-     * @public
-     */
-    CreateClusterInstances(req, cb) {
-        let resp = new CreateClusterInstancesResponse();
-        this.request("CreateClusterInstances", req, resp, cb);
+    DescribeRouteTableConflicts(req, cb) {
+        let resp = new DescribeRouteTableConflictsResponse();
+        this.request("DescribeRouteTableConflicts", req, resp, cb);
     }
 
     /**
@@ -282,6 +307,72 @@ class TkeClient extends AbstractClient {
     DescribeClusterInstances(req, cb) {
         let resp = new DescribeClusterInstancesResponse();
         this.request("DescribeClusterInstances", req, resp, cb);
+    }
+
+    /**
+     * 删除托管集群外网访问端口（老的方式，仅支持托管集群外网端口）
+     * @param {DeleteClusterEndpointVipRequest} req
+     * @param {function(string, DeleteClusterEndpointVipResponse):void} cb
+     * @public
+     */
+    DeleteClusterEndpointVip(req, cb) {
+        let resp = new DeleteClusterEndpointVipResponse();
+        this.request("DeleteClusterEndpointVip", req, resp, cb);
+    }
+
+    /**
+     * 删除集群中的实例
+     * @param {DeleteClusterInstancesRequest} req
+     * @param {function(string, DeleteClusterInstancesResponse):void} cb
+     * @public
+     */
+    DeleteClusterInstances(req, cb) {
+        let resp = new DeleteClusterInstancesResponse();
+        this.request("DeleteClusterInstances", req, resp, cb);
+    }
+
+    /**
+     * 修改托管集群外网端口的安全策略（老的方式，仅支持托管集群外网端口）
+     * @param {ModifyClusterEndpointSPRequest} req
+     * @param {function(string, ModifyClusterEndpointSPResponse):void} cb
+     * @public
+     */
+    ModifyClusterEndpointSP(req, cb) {
+        let resp = new ModifyClusterEndpointSPResponse();
+        this.request("ModifyClusterEndpointSP", req, resp, cb);
+    }
+
+    /**
+     * 创建托管集群外网访问端口（老的方式，仅支持托管集群外网端口）
+     * @param {CreateClusterEndpointVipRequest} req
+     * @param {function(string, CreateClusterEndpointVipResponse):void} cb
+     * @public
+     */
+    CreateClusterEndpointVip(req, cb) {
+        let resp = new CreateClusterEndpointVipResponse();
+        this.request("CreateClusterEndpointVip", req, resp, cb);
+    }
+
+    /**
+     * 删除集群路由表
+     * @param {DeleteClusterRouteTableRequest} req
+     * @param {function(string, DeleteClusterRouteTableResponse):void} cb
+     * @public
+     */
+    DeleteClusterRouteTable(req, cb) {
+        let resp = new DeleteClusterRouteTableResponse();
+        this.request("DeleteClusterRouteTable", req, resp, cb);
+    }
+
+    /**
+     * 查询集群路由
+     * @param {DescribeClusterRoutesRequest} req
+     * @param {function(string, DescribeClusterRoutesResponse):void} cb
+     * @public
+     */
+    DescribeClusterRoutes(req, cb) {
+        let resp = new DescribeClusterRoutesResponse();
+        this.request("DescribeClusterRoutes", req, resp, cb);
     }
 
 

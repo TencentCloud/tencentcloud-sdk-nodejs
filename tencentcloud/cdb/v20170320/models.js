@@ -224,6 +224,12 @@ class CreateDBInstanceRequest extends  AbstractModel {
          */
         this.DeployGroupId = null;
 
+        /**
+         * 用于保证请求幂等性的字符串。该字符串由客户生成，需保证不同请求之间在当天内唯一，最大值不超过64个ASCII字符。若不指定该参数，则无法保证请求的幂等性。
+         * @type {string || null}
+         */
+        this.ClientToken = null;
+
     }
 
     /**
@@ -279,6 +285,119 @@ class CreateDBInstanceRequest extends  AbstractModel {
             }
         }
         this.DeployGroupId = 'DeployGroupId' in params ? params.DeployGroupId : null;
+        this.ClientToken = 'ClientToken' in params ? params.ClientToken : null;
+
+    }
+}
+
+/**
+ * 实例任务详情
+ * @class
+ */
+class TaskDetail extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 错误码。
+         * @type {number || null}
+         */
+        this.Code = null;
+
+        /**
+         * 错误信息。
+         * @type {string || null}
+         */
+        this.Message = null;
+
+        /**
+         * 实例任务 ID。
+         * @type {number || null}
+         */
+        this.JobId = null;
+
+        /**
+         * 实例任务进度。
+         * @type {number || null}
+         */
+        this.Progress = null;
+
+        /**
+         * 实例任务状态，可能的值包括：
+"UNDEFINED" - 未定义；
+"INITIAL" - 初始化；
+"RUNNING" - 运行中；
+"SUCCEED" - 执行成功；
+"FAILED" - 执行失败；
+"KILLED" - 已终止；
+"REMOVED" - 已删除；
+"PAUSED" - 已暂停。
+         * @type {string || null}
+         */
+        this.TaskStatus = null;
+
+        /**
+         * 实例任务类型，可能的值包括：
+"ROLLBACK" - 数据库回档；
+"SQL OPERATION" - SQL操作；
+"IMPORT DATA" - 数据导入；
+"MODIFY PARAM" - 参数设置；
+"INITIAL" - 初始化云数据库实例；
+"REBOOT" - 重启云数据库实例；
+"OPEN GTID" - 开启云数据库实例GTID；
+"UPGRADE RO" - 只读实例升级；
+"BATCH ROLLBACK" - 数据库批量回档；
+"UPGRADE MASTER" - 主实例升级；
+"DROP TABLES" - 删除云数据库库表；
+"SWITCH DR TO MASTER" - 灾备实例提升为主。
+         * @type {string || null}
+         */
+        this.TaskType = null;
+
+        /**
+         * 实例任务开始时间。
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * 实例任务结束时间。
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * 任务关联的实例 ID。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
+         */
+        this.InstanceIds = null;
+
+        /**
+         * 异步任务的请求 ID。
+         * @type {string || null}
+         */
+        this.AsyncRequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Code = 'Code' in params ? params.Code : null;
+        this.Message = 'Message' in params ? params.Message : null;
+        this.JobId = 'JobId' in params ? params.JobId : null;
+        this.Progress = 'Progress' in params ? params.Progress : null;
+        this.TaskStatus = 'TaskStatus' in params ? params.TaskStatus : null;
+        this.TaskType = 'TaskType' in params ? params.TaskType : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
+        this.AsyncRequestId = 'AsyncRequestId' in params ? params.AsyncRequestId : null;
 
     }
 }
@@ -1760,7 +1879,7 @@ class DescribeTasksResponse extends  AbstractModel {
 
         /**
          * 返回的实例任务信息。
-         * @type {Array.<string> || null}
+         * @type {Array.<TaskDetail> || null}
          */
         this.Items = null;
 
@@ -1780,7 +1899,15 @@ class DescribeTasksResponse extends  AbstractModel {
             return;
         }
         this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
-        this.Items = 'Items' in params ? params.Items : null;
+
+        if (params.Items) {
+            this.Items = new Array();
+            for (let z in params.Items) {
+                let obj = new TaskDetail();
+                obj.deserialize(params.Items[z]);
+                this.Items.push(obj);
+            }
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -2630,19 +2757,39 @@ class DescribeTasksRequest extends  AbstractModel {
         this.InstanceId = null;
 
         /**
-         * 异步任务请求 ID，执行 CDB 相关操作返回的 AsyncRequestId。
+         * 异步任务请求 ID，执行云数据库相关操作返回的 AsyncRequestId。
          * @type {string || null}
          */
         this.AsyncRequestId = null;
 
         /**
-         * 任务类型，不传值则查询所有任务类型，可能的值：1-数据库回档；2-SQL操作；3-数据导入；5-参数设置；6-初始化；7-重启；8-开启GTID；9-只读实例升级；10-数据库批量回档；11-主实例升级；12-删除库表；13-切换为主实例。
+         * 任务类型，不传值则查询所有任务类型，支持的值包括：
+1 - 数据库回档；
+2 - SQL操作；
+3 - 数据导入；
+5 - 参数设置；
+6 - 初始化云数据库实例；
+7 - 重启云数据库实例；
+8 - 开启云数据库实例GTID；
+9 - 只读实例升级；
+10 - 数据库批量回档；
+11 - 主实例升级；
+12 - 删除云数据库库表；
+13 - 灾备实例提升为主。
          * @type {Array.<number> || null}
          */
         this.TaskTypes = null;
 
         /**
-         * 任务状态，不传值则查询所有任务状态，可能的值：-1-未定义；0-初始化; 1-运行中；2-执行成功；3-执行失败；4-已终止；5-已删除；6-已暂停。
+         * 任务状态，不传值则查询所有任务状态，支持的值包括：
+-1 - 未定义；
+0 - 初始化；
+1 - 运行中；
+2 - 执行成功；
+3 - 执行失败；
+4 - 已终止；
+5 - 已删除；
+6 - 已暂停。
          * @type {Array.<number> || null}
          */
         this.TaskStatus = null;
@@ -3161,6 +3308,12 @@ class CreateDBInstanceHourRequest extends  AbstractModel {
          */
         this.DeployGroupId = null;
 
+        /**
+         * 用于保证请求幂等性的字符串。该字符串由客户生成，需保证不同请求之间在当天内唯一，最大值不超过64个ASCII字符。若不指定该参数，则无法保证请求的幂等性。
+         * @type {string || null}
+         */
+        this.ClientToken = null;
+
     }
 
     /**
@@ -3215,6 +3368,7 @@ class CreateDBInstanceHourRequest extends  AbstractModel {
             }
         }
         this.DeployGroupId = 'DeployGroupId' in params ? params.DeployGroupId : null;
+        this.ClientToken = 'ClientToken' in params ? params.ClientToken : null;
 
     }
 }
@@ -7086,7 +7240,7 @@ class InstanceInfo extends  AbstractModel {
         this.DeployMode = null;
 
         /**
-         * 实例任务状态
+         * 实例任务状态。0 - 没有任务 ,1 - 升级中,2 - 数据导入中,3 - 开放Slave中,4 - 外网访问开通中,5 - 批量操作执行中,6 - 回档中,7 - 外网访问关闭中,8 - 密码修改中,9 - 实例名修改中,10 - 重启中,12 - 自建迁移中,13 - 删除库表中,14 - 灾备实例创建同步中,15 - 升级待切换,16 - 升级切换中,17 - 升级切换完成
          * @type {number || null}
          */
         this.TaskStatus = null;
@@ -10572,6 +10726,7 @@ class InquiryPriceUpgradeInstancesResponse extends  AbstractModel {
 module.exports = {
     SellType: SellType,
     CreateDBInstanceRequest: CreateDBInstanceRequest,
+    TaskDetail: TaskDetail,
     DeviceDiskInfo: DeviceDiskInfo,
     DescribeAccountPrivilegesResponse: DescribeAccountPrivilegesResponse,
     CreateDBImportJobRequest: CreateDBImportJobRequest,

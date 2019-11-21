@@ -426,6 +426,7 @@ class DescribeAutoScalingGroupsRequest extends  AbstractModel {
          * 过滤条件。
 <li> auto-scaling-group-id - String - 是否必填：否 -（过滤条件）按照伸缩组ID过滤。</li>
 <li> auto-scaling-group-name - String - 是否必填：否 -（过滤条件）按照伸缩组名称过滤。</li>
+<li> vague-auto-scaling-group-name - String - 是否必填：否 -（过滤条件）按照伸缩组名称模糊搜索。</li>
 <li> launch-configuration-id - String - 是否必填：否 -（过滤条件）按照启动配置ID过滤。</li>
 <li> tag-key - String - 是否必填：否 -（过滤条件）按照标签键进行过滤。</li>
 <li> tag-value - String - 是否必填：否 -（过滤条件）按照标签值进行过滤。</li>
@@ -1413,18 +1414,38 @@ class LimitedLoginSettings extends  AbstractModel {
 }
 
 /**
- * ModifyAutoScalingGroup返回参数结构体
+ * ModifyLoadBalancers请求参数结构体
  * @class
  */
-class ModifyAutoScalingGroupResponse extends  AbstractModel {
+class ModifyLoadBalancersRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * 伸缩组ID
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.AutoScalingGroupId = null;
+
+        /**
+         * 传统负载均衡器ID列表，目前长度上限为20，LoadBalancerIds 和 ForwardLoadBalancers 二者同时最多只能指定一个
+         * @type {Array.<string> || null}
+         */
+        this.LoadBalancerIds = null;
+
+        /**
+         * 应用型负载均衡器列表，目前长度上限为20，LoadBalancerIds 和 ForwardLoadBalancers 二者同时最多只能指定一个
+         * @type {Array.<ForwardLoadBalancer> || null}
+         */
+        this.ForwardLoadBalancers = null;
+
+        /**
+         * 负载均衡器校验策略，取值包括 ALL 和 DIFF，默认取值为 ALL。
+<br><li> ALL，所有负载均衡器都合法则通过校验，否则校验报错。
+<br><li> DIFF，仅校验负载均衡器参数中实际变化的部分，如果合法则通过校验，否则校验报错。
+         * @type {string || null}
+         */
+        this.LoadBalancersCheckPolicy = null;
 
     }
 
@@ -1435,7 +1456,18 @@ class ModifyAutoScalingGroupResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.AutoScalingGroupId = 'AutoScalingGroupId' in params ? params.AutoScalingGroupId : null;
+        this.LoadBalancerIds = 'LoadBalancerIds' in params ? params.LoadBalancerIds : null;
+
+        if (params.ForwardLoadBalancers) {
+            this.ForwardLoadBalancers = new Array();
+            for (let z in params.ForwardLoadBalancers) {
+                let obj = new ForwardLoadBalancer();
+                obj.deserialize(params.ForwardLoadBalancers[z]);
+                this.ForwardLoadBalancers.push(obj);
+            }
+        }
+        this.LoadBalancersCheckPolicy = 'LoadBalancersCheckPolicy' in params ? params.LoadBalancersCheckPolicy : null;
 
     }
 }
@@ -1727,6 +1759,12 @@ class CreateLaunchConfigurationRequest extends  AbstractModel {
          */
         this.CamRoleName = null;
 
+        /**
+         * 云服务器主机名（HostName）的相关设置。
+         * @type {HostNameSettings || null}
+         */
+        this.HostNameSettings = null;
+
     }
 
     /**
@@ -1794,6 +1832,12 @@ class CreateLaunchConfigurationRequest extends  AbstractModel {
             }
         }
         this.CamRoleName = 'CamRoleName' in params ? params.CamRoleName : null;
+
+        if (params.HostNameSettings) {
+            let obj = new HostNameSettings();
+            obj.deserialize(params.HostNameSettings)
+            this.HostNameSettings = obj;
+        }
 
     }
 }
@@ -2293,6 +2337,48 @@ class DescribeAutoScalingGroupLastActivitiesRequest extends  AbstractModel {
 }
 
 /**
+ * 云服务器主机名（HostName）的相关设置
+ * @class
+ */
+class HostNameSettings extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 云服务器的主机名。
+<br><li> 点号（.）和短横线（-）不能作为 HostName 的首尾字符，不能连续使用。
+<br><li> 不支持 Windows 实例。
+<br><li> 其他类型（Linux 等）实例：字符长度为[2, 40]，允许支持多个点号，点之间为一段，每段允许字母（不限制大小写）、数字和短横线（-）组成。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.HostName = null;
+
+        /**
+         * 云服务器主机名的风格，取值范围包括 ORIGINAL 和  UNIQUE，默认为 ORIGINAL。
+<br><li> ORIGINAL，AS 直接将入参中所填的 HostName 传递给 CVM，CVM 可能会对 HostName 追加序列号，伸缩组中实例的 HostName 会出现冲突的情况。
+<br><li> UNIQUE，入参所填的 HostName 相当于主机名前缀，AS 和 CVM 会对其进行拓展，伸缩组中实例的 HostName 可以保证唯一。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.HostNameStyle = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.HostName = 'HostName' in params ? params.HostName : null;
+        this.HostNameStyle = 'HostNameStyle' in params ? params.HostNameStyle : null;
+
+    }
+}
+
+/**
  * ModifyLoadBalancers返回参数结构体
  * @class
  */
@@ -2559,38 +2645,18 @@ class DeleteLifecycleHookRequest extends  AbstractModel {
 }
 
 /**
- * ModifyLoadBalancers请求参数结构体
+ * ModifyAutoScalingGroup返回参数结构体
  * @class
  */
-class ModifyLoadBalancersRequest extends  AbstractModel {
+class ModifyAutoScalingGroupResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 伸缩组ID
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.AutoScalingGroupId = null;
-
-        /**
-         * 传统负载均衡器ID列表，目前长度上限为5，LoadBalancerIds 和 ForwardLoadBalancers 二者同时最多只能指定一个
-         * @type {Array.<string> || null}
-         */
-        this.LoadBalancerIds = null;
-
-        /**
-         * 应用型负载均衡器列表，目前长度上限为5，LoadBalancerIds 和 ForwardLoadBalancers 二者同时最多只能指定一个
-         * @type {Array.<ForwardLoadBalancer> || null}
-         */
-        this.ForwardLoadBalancers = null;
-
-        /**
-         * 负载均衡器校验策略，取值包括 ALL 和 DIFF，默认取值为 ALL。
-<br><li> ALL，所有负载均衡器都合法则通过校验，否则校验报错。
-<br><li> DIFF，仅校验负载均衡器参数中实际变化的部分，如果合法则通过校验，否则校验报错。
-         * @type {string || null}
-         */
-        this.LoadBalancersCheckPolicy = null;
+        this.RequestId = null;
 
     }
 
@@ -2601,18 +2667,7 @@ class ModifyLoadBalancersRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.AutoScalingGroupId = 'AutoScalingGroupId' in params ? params.AutoScalingGroupId : null;
-        this.LoadBalancerIds = 'LoadBalancerIds' in params ? params.LoadBalancerIds : null;
-
-        if (params.ForwardLoadBalancers) {
-            this.ForwardLoadBalancers = new Array();
-            for (let z in params.ForwardLoadBalancers) {
-                let obj = new ForwardLoadBalancer();
-                obj.deserialize(params.ForwardLoadBalancers[z]);
-                this.ForwardLoadBalancers.push(obj);
-            }
-        }
-        this.LoadBalancersCheckPolicy = 'LoadBalancersCheckPolicy' in params ? params.LoadBalancersCheckPolicy : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2911,7 +2966,7 @@ class CreateAutoScalingGroupRequest extends  AbstractModel {
         this.DesiredCapacity = null;
 
         /**
-         * 传统负载均衡器ID列表，目前长度上限为5，LoadBalancerIds 和 ForwardLoadBalancers 二者同时最多只能指定一个
+         * 传统负载均衡器ID列表，目前长度上限为20，LoadBalancerIds 和 ForwardLoadBalancers 二者同时最多只能指定一个
          * @type {Array.<string> || null}
          */
         this.LoadBalancerIds = null;
@@ -2923,7 +2978,7 @@ class CreateAutoScalingGroupRequest extends  AbstractModel {
         this.ProjectId = null;
 
         /**
-         * 应用型负载均衡器列表，目前长度上限为5，LoadBalancerIds 和 ForwardLoadBalancers 二者同时最多只能指定一个
+         * 应用型负载均衡器列表，目前长度上限为20，LoadBalancerIds 和 ForwardLoadBalancers 二者同时最多只能指定一个
          * @type {Array.<ForwardLoadBalancer> || null}
          */
         this.ForwardLoadBalancers = null;
@@ -3176,6 +3231,12 @@ class UpgradeLaunchConfigurationRequest extends  AbstractModel {
          */
         this.CamRoleName = null;
 
+        /**
+         * 云服务器主机名（HostName）的相关设置。
+         * @type {HostNameSettings || null}
+         */
+        this.HostNameSettings = null;
+
     }
 
     /**
@@ -3243,6 +3304,12 @@ class UpgradeLaunchConfigurationRequest extends  AbstractModel {
             }
         }
         this.CamRoleName = 'CamRoleName' in params ? params.CamRoleName : null;
+
+        if (params.HostNameSettings) {
+            let obj = new HostNameSettings();
+            obj.deserialize(params.HostNameSettings)
+            this.HostNameSettings = obj;
+        }
 
     }
 }
@@ -4067,19 +4134,19 @@ class CreateLifecycleHookRequest extends  AbstractModel {
         this.AutoScalingGroupId = null;
 
         /**
-         * 生命周期挂钩名称。名称仅支持中文、英文、数字、下划线、分隔符"-"、小数点，最大长度不能超128个字节。
+         * 生命周期挂钩名称。名称仅支持中文、英文、数字、下划线（_）、短横线（-）、小数点（.），最大长度不能超128个字节。
          * @type {string || null}
          */
         this.LifecycleHookName = null;
 
         /**
-         * 进行生命周期挂钩的场景，取值范围包括“INSTANCE_LAUNCHING”和“INSTANCE_TERMINATING”
+         * 进行生命周期挂钩的场景，取值范围包括 INSTANCE_LAUNCHING 和 INSTANCE_TERMINATING
          * @type {string || null}
          */
         this.LifecycleTransition = null;
 
         /**
-         * 定义伸缩组在生命周期挂钩超时的情况下应采取的操作，取值范围是“CONTINUE”或“ABANDON”，默认值为“CONTINUE”
+         * 定义伸缩组在生命周期挂钩超时的情况下应采取的操作，取值范围是 CONTINUE 或 ABANDON，默认值为 CONTINUE
          * @type {string || null}
          */
         this.DefaultResult = null;
@@ -4091,7 +4158,7 @@ class CreateLifecycleHookRequest extends  AbstractModel {
         this.HeartbeatTimeout = null;
 
         /**
-         * 弹性伸缩向通知目标发送的附加信息，默认值为''。最大长度不能超过1024个字节。
+         * 弹性伸缩向通知目标发送的附加信息，默认值为空字符串“”。最大长度不能超过1024个字节。
          * @type {string || null}
          */
         this.NotificationMetadata = null;
@@ -4535,6 +4602,12 @@ class LaunchConfiguration extends  AbstractModel {
          */
         this.LastOperationInstanceTypesCheckPolicy = null;
 
+        /**
+         * 云服务器主机名（HostName）的相关设置。
+         * @type {HostNameSettings || null}
+         */
+        this.HostNameSettings = null;
+
     }
 
     /**
@@ -4616,6 +4689,12 @@ class LaunchConfiguration extends  AbstractModel {
         this.UpdatedTime = 'UpdatedTime' in params ? params.UpdatedTime : null;
         this.CamRoleName = 'CamRoleName' in params ? params.CamRoleName : null;
         this.LastOperationInstanceTypesCheckPolicy = 'LastOperationInstanceTypesCheckPolicy' in params ? params.LastOperationInstanceTypesCheckPolicy : null;
+
+        if (params.HostNameSettings) {
+            let obj = new HostNameSettings();
+            obj.deserialize(params.HostNameSettings)
+            this.HostNameSettings = obj;
+        }
 
     }
 }
@@ -4904,6 +4983,7 @@ class DescribeLaunchConfigurationsRequest extends  AbstractModel {
          * 过滤条件。
 <li> launch-configuration-id - String - 是否必填：否 -（过滤条件）按照启动配置ID过滤。</li>
 <li> launch-configuration-name - String - 是否必填：否 -（过滤条件）按照启动配置名称过滤。</li>
+<li> vague-launch-configuration-name - String - 是否必填：否 -（过滤条件）按照启动配置名称模糊搜索。</li>
 每次请求的`Filters`的上限为10，`Filter.Values`的上限为5。参数不支持同时指定`LaunchConfigurationIds`和`Filters`。
          * @type {Array.<Filter> || null}
          */
@@ -6028,7 +6108,7 @@ module.exports = {
     Tag: Tag,
     DescribeAutoScalingInstancesRequest: DescribeAutoScalingInstancesRequest,
     LimitedLoginSettings: LimitedLoginSettings,
-    ModifyAutoScalingGroupResponse: ModifyAutoScalingGroupResponse,
+    ModifyLoadBalancersRequest: ModifyLoadBalancersRequest,
     RemoveInstancesResponse: RemoveInstancesResponse,
     ModifyScalingPolicyResponse: ModifyScalingPolicyResponse,
     SetInstancesProtectionRequest: SetInstancesProtectionRequest,
@@ -6042,13 +6122,14 @@ module.exports = {
     UpgradeLifecycleHookRequest: UpgradeLifecycleHookRequest,
     ScalingPolicy: ScalingPolicy,
     DescribeAutoScalingGroupLastActivitiesRequest: DescribeAutoScalingGroupLastActivitiesRequest,
+    HostNameSettings: HostNameSettings,
     ModifyLoadBalancersResponse: ModifyLoadBalancersResponse,
     DescribePaiInstancesRequest: DescribePaiInstancesRequest,
     CreateNotificationConfigurationRequest: CreateNotificationConfigurationRequest,
     DescribeScheduledActionsResponse: DescribeScheduledActionsResponse,
     ModifyNotificationConfigurationRequest: ModifyNotificationConfigurationRequest,
     DeleteLifecycleHookRequest: DeleteLifecycleHookRequest,
-    ModifyLoadBalancersRequest: ModifyLoadBalancersRequest,
+    ModifyAutoScalingGroupResponse: ModifyAutoScalingGroupResponse,
     DeleteLaunchConfigurationRequest: DeleteLaunchConfigurationRequest,
     ModifyScalingPolicyRequest: ModifyScalingPolicyRequest,
     InstanceMarketOptionsRequest: InstanceMarketOptionsRequest,

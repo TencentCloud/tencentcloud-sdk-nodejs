@@ -70,7 +70,7 @@ class ChdfsClient extends AbstractClient {
     }
     
     /**
-     * 查看挂载点详细信息
+     * 查看挂载点详细信息。
      * @param {DescribeMountPointRequest} req
      * @param {function(string, DescribeMountPointResponse):void} cb
      * @public
@@ -81,7 +81,7 @@ class ChdfsClient extends AbstractClient {
     }
 
     /**
-     * 修改文件系统属性
+     * 修改文件系统属性，仅限于创建成功的文件系统。
      * @param {ModifyFileSystemRequest} req
      * @param {function(string, ModifyFileSystemResponse):void} cb
      * @public
@@ -92,7 +92,7 @@ class ChdfsClient extends AbstractClient {
     }
 
     /**
-     * 删除文件系统
+     * 删除文件系统，不允许删除非空文件系统。
      * @param {DeleteFileSystemRequest} req
      * @param {function(string, DeleteFileSystemResponse):void} cb
      * @public
@@ -103,7 +103,7 @@ class ChdfsClient extends AbstractClient {
     }
 
     /**
-     * 批量删除权限规则
+     * 批量删除权限规则。
      * @param {DeleteAccessRulesRequest} req
      * @param {function(string, DeleteAccessRulesResponse):void} cb
      * @public
@@ -114,7 +114,7 @@ class ChdfsClient extends AbstractClient {
     }
 
     /**
-     * 查看文件系统详细信息
+     * 查看文件系统详细信息。
      * @param {DescribeFileSystemRequest} req
      * @param {function(string, DescribeFileSystemResponse):void} cb
      * @public
@@ -125,7 +125,7 @@ class ChdfsClient extends AbstractClient {
     }
 
     /**
-     * 查看权限组列表
+     * 查看权限组列表。
      * @param {DescribeAccessGroupsRequest} req
      * @param {function(string, DescribeAccessGroupsResponse):void} cb
      * @public
@@ -136,7 +136,7 @@ class ChdfsClient extends AbstractClient {
     }
 
     /**
-     * 查看权限规则列表
+     * 通过权限组ID查看权限规则列表。
      * @param {DescribeAccessRulesRequest} req
      * @param {function(string, DescribeAccessRulesResponse):void} cb
      * @public
@@ -147,7 +147,7 @@ class ChdfsClient extends AbstractClient {
     }
 
     /**
-     * 查看文件系统列表
+     * 查看文件系统列表。
      * @param {DescribeFileSystemsRequest} req
      * @param {function(string, DescribeFileSystemsResponse):void} cb
      * @public
@@ -158,7 +158,7 @@ class ChdfsClient extends AbstractClient {
     }
 
     /**
-     * 创建挂载点
+     * 创建文件系统挂载点，仅限于创建成功的文件系统。
      * @param {CreateMountPointRequest} req
      * @param {function(string, CreateMountPointResponse):void} cb
      * @public
@@ -169,7 +169,7 @@ class ChdfsClient extends AbstractClient {
     }
 
     /**
-     * 查看挂载点列表
+     * 通过文件系统ID或者权限组ID查看挂载点列表。
      * @param {DescribeMountPointsRequest} req
      * @param {function(string, DescribeMountPointsResponse):void} cb
      * @public
@@ -180,7 +180,7 @@ class ChdfsClient extends AbstractClient {
     }
 
     /**
-     * 修改权限组属性
+     * 修改权限组属性。
      * @param {ModifyAccessGroupRequest} req
      * @param {function(string, ModifyAccessGroupResponse):void} cb
      * @public
@@ -191,7 +191,7 @@ class ChdfsClient extends AbstractClient {
     }
 
     /**
-     * 批量修改权限规则属性
+     * 批量修改权限规则属性，需要指定权限规则ID。
      * @param {ModifyAccessRulesRequest} req
      * @param {function(string, ModifyAccessRulesResponse):void} cb
      * @public
@@ -202,7 +202,7 @@ class ChdfsClient extends AbstractClient {
     }
 
     /**
-     * 删除权限组
+     * 删除权限组。
      * @param {DeleteAccessGroupRequest} req
      * @param {function(string, DeleteAccessGroupResponse):void} cb
      * @public
@@ -213,7 +213,7 @@ class ChdfsClient extends AbstractClient {
     }
 
     /**
-     * 修改挂载点属性
+     * 修改挂载点属性。
      * @param {ModifyMountPointRequest} req
      * @param {function(string, ModifyMountPointResponse):void} cb
      * @public
@@ -224,7 +224,7 @@ class ChdfsClient extends AbstractClient {
     }
 
     /**
-     * 创建文件系统（异步创建）
+     * 创建文件系统（异步）。
      * @param {CreateFileSystemRequest} req
      * @param {function(string, CreateFileSystemResponse):void} cb
      * @public
@@ -235,7 +235,7 @@ class ChdfsClient extends AbstractClient {
     }
 
     /**
-     * 创建权限组
+     * 创建权限组。
      * @param {CreateAccessGroupRequest} req
      * @param {function(string, CreateAccessGroupResponse):void} cb
      * @public
@@ -246,7 +246,7 @@ class ChdfsClient extends AbstractClient {
     }
 
     /**
-     * 批量创建权限规则
+     * 批量创建权限规则，权限规则ID和创建时间无需填写。
      * @param {CreateAccessRulesRequest} req
      * @param {function(string, CreateAccessRulesResponse):void} cb
      * @public
@@ -257,7 +257,7 @@ class ChdfsClient extends AbstractClient {
     }
 
     /**
-     * 删除挂载点
+     * 删除挂载点。
      * @param {DeleteMountPointRequest} req
      * @param {function(string, DeleteMountPointResponse):void} cb
      * @public

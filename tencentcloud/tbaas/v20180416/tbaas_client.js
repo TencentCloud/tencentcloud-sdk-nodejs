@@ -20,11 +20,12 @@ const QueryRequest = models.QueryRequest;
 const SendTransactionHandlerResponse = models.SendTransactionHandlerResponse;
 const ApplyUserCertRequest = models.ApplyUserCertRequest;
 const GetTransListHandlerResponse = models.GetTransListHandlerResponse;
+const GetTransactionDetailForUserResponse = models.GetTransactionDetailForUserResponse;
 const ApplyUserCertResponse = models.ApplyUserCertResponse;
 const GetLatesdTransactionListRequest = models.GetLatesdTransactionListRequest;
 const InvokeResponse = models.InvokeResponse;
 const DownloadUserCertResponse = models.DownloadUserCertResponse;
-const InvokeRequest = models.InvokeRequest;
+const GetTransactionDetailForUserRequest = models.GetTransactionDetailForUserRequest;
 const GetBlockListResponse = models.GetBlockListResponse;
 const SrvInvokeRequest = models.SrvInvokeRequest;
 const BlockByNumberHandlerResponse = models.BlockByNumberHandlerResponse;
@@ -40,6 +41,7 @@ const GetClusterSummaryRequest = models.GetClusterSummaryRequest;
 const Block = models.Block;
 const GetBlockListRequest = models.GetBlockListRequest;
 const BcosTransInfo = models.BcosTransInfo;
+const InvokeRequest = models.InvokeRequest;
 const GetInvokeTxResponse = models.GetInvokeTxResponse;
 const GetBlockListHandlerResponse = models.GetBlockListHandlerResponse;
 const SendTransactionHandlerRequest = models.SendTransactionHandlerRequest;
@@ -47,8 +49,9 @@ const GetTransListHandlerRequest = models.GetTransListHandlerRequest;
 const TransactionItem = models.TransactionItem;
 const BlockByNumberHandlerRequest = models.BlockByNumberHandlerRequest;
 const BcosBlockObj = models.BcosBlockObj;
-const QueryResponse = models.QueryResponse;
 const GetTransByHashHandlerRequest = models.GetTransByHashHandlerRequest;
+const QueryResponse = models.QueryResponse;
+const EndorserGroup = models.EndorserGroup;
 
 
 /**
@@ -191,6 +194,17 @@ class TbaasClient extends AbstractClient {
     Query(req, cb) {
         let resp = new QueryResponse();
         this.request("Query", req, resp, cb);
+    }
+
+    /**
+     * 获取交易详情
+     * @param {GetTransactionDetailForUserRequest} req
+     * @param {function(string, GetTransactionDetailForUserResponse):void} cb
+     * @public
+     */
+    GetTransactionDetailForUser(req, cb) {
+        let resp = new GetTransactionDetailForUserResponse();
+        this.request("GetTransactionDetailForUser", req, resp, cb);
     }
 
     /**
