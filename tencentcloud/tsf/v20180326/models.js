@@ -475,6 +475,34 @@ class ExpandGroupRequest extends  AbstractModel {
 }
 
 /**
+ * DeleteServerlessGroup请求参数结构体
+ * @class
+ */
+class DeleteServerlessGroupRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * groupId，分组唯一标识
+         * @type {string || null}
+         */
+        this.GroupId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.GroupId = 'GroupId' in params ? params.GroupId : null;
+
+    }
+}
+
+/**
  * DescribeImageTags请求参数结构体
  * @class
  */
@@ -1605,6 +1633,42 @@ class DescribePublicConfigReleaseLogsRequest extends  AbstractModel {
 }
 
 /**
+ * CreateServerlessGroup返回参数结构体
+ * @class
+ */
+class CreateServerlessGroupResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 创建成功的部署组ID，返回null表示失败
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Result = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Result = 'Result' in params ? params.Result : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DeleteApplication返回参数结构体
  * @class
  */
@@ -1823,51 +1887,6 @@ class ModifyContainerReplicasRequest extends  AbstractModel {
         }
         this.GroupId = 'GroupId' in params ? params.GroupId : null;
         this.InstanceNum = 'InstanceNum' in params ? params.InstanceNum : null;
-
-    }
-}
-
-/**
- * 列表中部署组分页信息
- * @class
- */
-class TsfPageVmGroup extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 虚拟机部署组总数目
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.TotalCount = null;
-
-        /**
-         * 虚拟机部署组列表信息
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {Array.<VmGroupSimple> || null}
-         */
-        this.Content = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
-
-        if (params.Content) {
-            this.Content = new Array();
-            for (let z in params.Content) {
-                let obj = new VmGroupSimple();
-                obj.deserialize(params.Content[z]);
-                this.Content.push(obj);
-            }
-        }
 
     }
 }
@@ -2381,6 +2400,47 @@ class DescribeGroupResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeGroups返回参数结构体
+ * @class
+ */
+class DescribeGroupsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 虚拟机部署组分页信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {TsfPageVmGroup || null}
+         */
+        this.Result = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Result) {
+            let obj = new TsfPageVmGroup();
+            obj.deserialize(params.Result)
+            this.Result = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * 环境变量
  * @class
  */
@@ -2541,6 +2601,41 @@ class CreateNamespaceResponse extends  AbstractModel {
          * 成功时为命名空间ID，失败为null
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
+         */
+        this.Result = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Result = 'Result' in params ? params.Result : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DeleteServerlessGroup返回参数结构体
+ * @class
+ */
+class DeleteServerlessGroupResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 结果true：成功；false：失败。
+         * @type {boolean || null}
          */
         this.Result = null;
 
@@ -2737,6 +2832,131 @@ class TsfPageConfig extends  AbstractModel {
                 this.Content.push(obj);
             }
         }
+
+    }
+}
+
+/**
+ * Serverless部署组信息
+ * @class
+ */
+class ServerlessGroup extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 部署组ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.GroupId = null;
+
+        /**
+         * 分组名称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.GroupName = null;
+
+        /**
+         * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * 服务状态
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * 程序包ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.PkgId = null;
+
+        /**
+         * 程序包名
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.PkgName = null;
+
+        /**
+         * 集群id
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * 集群名称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ClusterName = null;
+
+        /**
+         * 命名空间id
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.NamespaceId = null;
+
+        /**
+         * 命名空间名称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.NamespaceName = null;
+
+        /**
+         * vpc ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.VpcId = null;
+
+        /**
+         * vpc 子网ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.SubnetId = null;
+
+        /**
+         * 程序包版本
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.PkgVersion = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.GroupId = 'GroupId' in params ? params.GroupId : null;
+        this.GroupName = 'GroupName' in params ? params.GroupName : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.PkgId = 'PkgId' in params ? params.PkgId : null;
+        this.PkgName = 'PkgName' in params ? params.PkgName : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.ClusterName = 'ClusterName' in params ? params.ClusterName : null;
+        this.NamespaceId = 'NamespaceId' in params ? params.NamespaceId : null;
+        this.NamespaceName = 'NamespaceName' in params ? params.NamespaceName : null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
+        this.PkgVersion = 'PkgVersion' in params ? params.PkgVersion : null;
 
     }
 }
@@ -4207,6 +4427,47 @@ class ExpandGroupResponse extends  AbstractModel {
 
         if (params.Result) {
             let obj = new TaskId();
+            obj.deserialize(params.Result)
+            this.Result = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeServerlessGroups返回参数结构体
+ * @class
+ */
+class DescribeServerlessGroupsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 数据列表对象
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {ServerlessGroupPage || null}
+         */
+        this.Result = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Result) {
+            let obj = new ServerlessGroupPage();
             obj.deserialize(params.Result)
             this.Result = obj;
         }
@@ -6158,25 +6419,18 @@ class ProtocolPort extends  AbstractModel {
 }
 
 /**
- * DescribeConfigReleases返回参数结构体
+ * DescribeServerlessGroup请求参数结构体
  * @class
  */
-class DescribeConfigReleasesResponse extends  AbstractModel {
+class DescribeServerlessGroupRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 分页的配置发布信息
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {TsfPageConfigRelease || null}
-         */
-        this.Result = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * 部署组ID
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.GroupId = null;
 
     }
 
@@ -6187,13 +6441,52 @@ class DescribeConfigReleasesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.GroupId = 'GroupId' in params ? params.GroupId : null;
 
-        if (params.Result) {
-            let obj = new TsfPageConfigRelease();
-            obj.deserialize(params.Result)
-            this.Result = obj;
+    }
+}
+
+/**
+ * 列表中部署组分页信息
+ * @class
+ */
+class TsfPageVmGroup extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 虚拟机部署组总数目
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 虚拟机部署组列表信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<VmGroupSimple> || null}
+         */
+        this.Content = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.Content) {
+            this.Content = new Array();
+            for (let z in params.Content) {
+                let obj = new VmGroupSimple();
+                obj.deserialize(params.Content[z]);
+                this.Content.push(obj);
+            }
+        }
 
     }
 }
@@ -6275,6 +6568,41 @@ class DescribeSimpleNamespacesResponse extends  AbstractModel {
             this.Result = obj;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * vpc 配置信息
+ * @class
+ */
+class VpcConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * VpcId
+         * @type {string || null}
+         */
+        this.VpcId = null;
+
+        /**
+         * SubnetId 子网ID
+         * @type {string || null}
+         */
+        this.SubnetId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
 
     }
 }
@@ -6388,17 +6716,17 @@ class DeletePkgsResponse extends  AbstractModel {
 }
 
 /**
- * DescribeGroups返回参数结构体
+ * DescribeConfigReleases返回参数结构体
  * @class
  */
-class DescribeGroupsResponse extends  AbstractModel {
+class DescribeConfigReleasesResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 虚拟机部署组分页信息
+         * 分页的配置发布信息
 注意：此字段可能返回 null，表示取不到有效值。
-         * @type {TsfPageVmGroup || null}
+         * @type {TsfPageConfigRelease || null}
          */
         this.Result = null;
 
@@ -6419,7 +6747,7 @@ class DescribeGroupsResponse extends  AbstractModel {
         }
 
         if (params.Result) {
-            let obj = new TsfPageVmGroup();
+            let obj = new TsfPageConfigRelease();
             obj.deserialize(params.Result)
             this.Result = obj;
         }
@@ -8331,6 +8659,60 @@ class TsfPageInstance extends  AbstractModel {
 }
 
 /**
+ * CreateServerlessGroup请求参数结构体
+ * @class
+ */
+class CreateServerlessGroupRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 分组所属应用ID
+         * @type {string || null}
+         */
+        this.ApplicationId = null;
+
+        /**
+         * 分组名称字段，长度1~60，字母或下划线开头，可包含字母数字下划线
+         * @type {string || null}
+         */
+        this.GroupName = null;
+
+        /**
+         * 程序包Id
+         * @type {string || null}
+         */
+        this.PkgId = null;
+
+        /**
+         * VpcConfig对象
+         * @type {VpcConfig || null}
+         */
+        this.VpcConfig = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ApplicationId = 'ApplicationId' in params ? params.ApplicationId : null;
+        this.GroupName = 'GroupName' in params ? params.GroupName : null;
+        this.PkgId = 'PkgId' in params ? params.PkgId : null;
+
+        if (params.VpcConfig) {
+            let obj = new VpcConfig();
+            obj.deserialize(params.VpcConfig)
+            this.VpcConfig = obj;
+        }
+
+    }
+}
+
+/**
  * DescribeMicroservice返回参数结构体
  * @class
  */
@@ -8405,6 +8787,69 @@ false：操作失败。
         }
         this.Result = 'Result' in params ? params.Result : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeServerlessGroups请求参数结构体
+ * @class
+ */
+class DescribeServerlessGroupsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 分组所属应用ID
+         * @type {string || null}
+         */
+        this.ApplicationId = null;
+
+        /**
+         * 搜索字段，模糊搜索groupName字段
+         * @type {string || null}
+         */
+        this.SearchWord = null;
+
+        /**
+         * 排序字段，默认为 createTime字段，支持id， name， createTime
+         * @type {string || null}
+         */
+        this.OrderBy = null;
+
+        /**
+         * 排序方式，默认为1：倒序排序，0：正序，1：倒序
+         * @type {string || null}
+         */
+        this.OrderType = null;
+
+        /**
+         * 偏移量，取值从0开始
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 分页个数，默认为20， 取值应为1~50
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ApplicationId = 'ApplicationId' in params ? params.ApplicationId : null;
+        this.SearchWord = 'SearchWord' in params ? params.SearchWord : null;
+        this.OrderBy = 'OrderBy' in params ? params.OrderBy : null;
+        this.OrderType = 'OrderType' in params ? params.OrderType : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
 
     }
 }
@@ -8617,6 +9062,51 @@ class DeletePkgsRequest extends  AbstractModel {
         }
         this.ApplicationId = 'ApplicationId' in params ? params.ApplicationId : null;
         this.PkgIds = 'PkgIds' in params ? params.PkgIds : null;
+
+    }
+}
+
+/**
+ * ServerlessGroup 翻页对象
+ * @class
+ */
+class ServerlessGroupPage extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 总记录数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 列表信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<ServerlessGroup> || null}
+         */
+        this.Content = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.Content) {
+            this.Content = new Array();
+            for (let z in params.Content) {
+                let obj = new ServerlessGroup();
+                obj.deserialize(params.Content[z]);
+                this.Content.push(obj);
+            }
+        }
 
     }
 }
@@ -9205,6 +9695,47 @@ class ReleasePublicConfigRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeServerlessGroup返回参数结构体
+ * @class
+ */
+class DescribeServerlessGroupResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 结果
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {ServerlessGroup || null}
+         */
+        this.Result = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Result) {
+            let obj = new ServerlessGroup();
+            obj.deserialize(params.Result)
+            this.Result = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * 任务id
  * @class
  */
@@ -9342,6 +9873,7 @@ module.exports = {
     DescribeMicroserviceRequest: DescribeMicroserviceRequest,
     CosCredentials: CosCredentials,
     ExpandGroupRequest: ExpandGroupRequest,
+    DeleteServerlessGroupRequest: DeleteServerlessGroupRequest,
     DescribeImageTagsRequest: DescribeImageTagsRequest,
     ReleaseConfigResponse: ReleaseConfigResponse,
     TsfPageSimpleGroup: TsfPageSimpleGroup,
@@ -9363,13 +9895,13 @@ module.exports = {
     DescribePublicConfigSummaryResponse: DescribePublicConfigSummaryResponse,
     DescribeSimpleClustersResponse: DescribeSimpleClustersResponse,
     DescribePublicConfigReleaseLogsRequest: DescribePublicConfigReleaseLogsRequest,
+    CreateServerlessGroupResponse: CreateServerlessGroupResponse,
     DeleteApplicationResponse: DeleteApplicationResponse,
     StartGroupRequest: StartGroupRequest,
     DescribeConfigsResponse: DescribeConfigsResponse,
     DescribeApplicationAttributeResponse: DescribeApplicationAttributeResponse,
     DescribeApplicationsResponse: DescribeApplicationsResponse,
     ModifyContainerReplicasRequest: ModifyContainerReplicasRequest,
-    TsfPageVmGroup: TsfPageVmGroup,
     TsfPageMsInstance: TsfPageMsInstance,
     DeleteMicroserviceRequest: DeleteMicroserviceRequest,
     CreatePublicConfigRequest: CreatePublicConfigRequest,
@@ -9380,15 +9912,18 @@ module.exports = {
     Namespace: Namespace,
     TsfPageCluster: TsfPageCluster,
     DescribeGroupResponse: DescribeGroupResponse,
+    DescribeGroupsResponse: DescribeGroupsResponse,
     Env: Env,
     DeleteContainerGroupResponse: DeleteContainerGroupResponse,
     DescribeSimpleGroupsRequest: DescribeSimpleGroupsRequest,
     CreateNamespaceResponse: CreateNamespaceResponse,
+    DeleteServerlessGroupResponse: DeleteServerlessGroupResponse,
     DeleteImageTagsResponse: DeleteImageTagsResponse,
     ModifyUploadInfoResponse: ModifyUploadInfoResponse,
     DescribeImageTagsResponse: DescribeImageTagsResponse,
     DeleteGroupRequest: DeleteGroupRequest,
     TsfPageConfig: TsfPageConfig,
+    ServerlessGroup: ServerlessGroup,
     DescribeApplicationResponse: DescribeApplicationResponse,
     DescribeConfigReleaseLogsResponse: DescribeConfigReleaseLogsResponse,
     RevocationConfigResponse: RevocationConfigResponse,
@@ -9413,6 +9948,7 @@ module.exports = {
     SimpleGroup: SimpleGroup,
     MsInstance: MsInstance,
     ExpandGroupResponse: ExpandGroupResponse,
+    DescribeServerlessGroupsResponse: DescribeServerlessGroupsResponse,
     DescribePublicConfigsResponse: DescribePublicConfigsResponse,
     AddInstancesResponse: AddInstancesResponse,
     DeleteApplicationRequest: DeleteApplicationRequest,
@@ -9446,13 +9982,15 @@ module.exports = {
     DescribeGroupRequest: DescribeGroupRequest,
     ImageTagsResult: ImageTagsResult,
     ProtocolPort: ProtocolPort,
-    DescribeConfigReleasesResponse: DescribeConfigReleasesResponse,
+    DescribeServerlessGroupRequest: DescribeServerlessGroupRequest,
+    TsfPageVmGroup: TsfPageVmGroup,
     DescribePkgsResponse: DescribePkgsResponse,
     DescribeSimpleNamespacesResponse: DescribeSimpleNamespacesResponse,
+    VpcConfig: VpcConfig,
     ApplicationAttribute: ApplicationAttribute,
     DeleteImageTag: DeleteImageTag,
     DeletePkgsResponse: DeletePkgsResponse,
-    DescribeGroupsResponse: DescribeGroupsResponse,
+    DescribeConfigReleasesResponse: DescribeConfigReleasesResponse,
     Cluster: Cluster,
     ModifyMicroserviceResponse: ModifyMicroserviceResponse,
     DescribeMicroservicesResponse: DescribeMicroservicesResponse,
@@ -9489,11 +10027,14 @@ module.exports = {
     RemoveInstancesRequest: RemoveInstancesRequest,
     DeployGroupRequest: DeployGroupRequest,
     TsfPageInstance: TsfPageInstance,
+    CreateServerlessGroupRequest: CreateServerlessGroupRequest,
     DescribeMicroserviceResponse: DescribeMicroserviceResponse,
     DeleteGroupResponse: DeleteGroupResponse,
+    DescribeServerlessGroupsRequest: DescribeServerlessGroupsRequest,
     DeployContainerGroupRequest: DeployContainerGroupRequest,
     CosDownloadInfo: CosDownloadInfo,
     DeletePkgsRequest: DeletePkgsRequest,
+    ServerlessGroupPage: ServerlessGroupPage,
     DescribeConfigSummaryResponse: DescribeConfigSummaryResponse,
     CreateContainGroupRequest: CreateContainGroupRequest,
     ContainGroup: ContainGroup,
@@ -9504,6 +10045,7 @@ module.exports = {
     ModifyContainerGroupResponse: ModifyContainerGroupResponse,
     ReleasePublicConfigResponse: ReleasePublicConfigResponse,
     ReleasePublicConfigRequest: ReleasePublicConfigRequest,
+    DescribeServerlessGroupResponse: DescribeServerlessGroupResponse,
     TaskId: TaskId,
     DescribeGroupInstancesRequest: DescribeGroupInstancesRequest,
     CreateGroupResponse: CreateGroupResponse,

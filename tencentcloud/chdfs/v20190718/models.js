@@ -387,6 +387,12 @@ class CreateMountPointRequest extends  AbstractModel {
          */
         this.MountPointStatus = null;
 
+        /**
+         * VPC网络类型（1：CVM；2：黑石1.0；3：黑石2.0）
+         * @type {number || null}
+         */
+        this.VpcType = null;
+
     }
 
     /**
@@ -401,6 +407,7 @@ class CreateMountPointRequest extends  AbstractModel {
         this.AccessGroupId = 'AccessGroupId' in params ? params.AccessGroupId : null;
         this.VpcId = 'VpcId' in params ? params.VpcId : null;
         this.MountPointStatus = 'MountPointStatus' in params ? params.MountPointStatus : null;
+        this.VpcType = 'VpcType' in params ? params.VpcType : null;
 
     }
 }
@@ -705,6 +712,7 @@ class ModifyFileSystemRequest extends  AbstractModel {
 
         /**
          * 文件系统容量（byte），下限为1M，上限为1P，且必须是1M的整数倍
+注意：修改的文件系统容量不能小于当前使用量
          * @type {number || null}
          */
         this.CapacityQuota = null;
@@ -1331,6 +1339,12 @@ class MountPoint extends  AbstractModel {
          */
         this.CreateTime = null;
 
+        /**
+         * VPC网络类型
+         * @type {number || null}
+         */
+        this.VpcType = null;
+
     }
 
     /**
@@ -1347,6 +1361,7 @@ class MountPoint extends  AbstractModel {
         this.VpcId = 'VpcId' in params ? params.VpcId : null;
         this.Status = 'Status' in params ? params.Status : null;
         this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.VpcType = 'VpcType' in params ? params.VpcType : null;
 
     }
 }

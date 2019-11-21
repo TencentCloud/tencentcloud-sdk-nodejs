@@ -18,6 +18,7 @@ const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const SellType = models.SellType;
 const CreateDBInstanceRequest = models.CreateDBInstanceRequest;
+const TaskDetail = models.TaskDetail;
 const DeviceDiskInfo = models.DeviceDiskInfo;
 const DescribeAccountPrivilegesResponse = models.DescribeAccountPrivilegesResponse;
 const CreateDBImportJobRequest = models.CreateDBImportJobRequest;

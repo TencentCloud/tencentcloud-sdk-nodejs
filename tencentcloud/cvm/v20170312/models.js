@@ -83,6 +83,12 @@ class LocalDiskType extends  AbstractModel {
          */
         this.MaxSize = null;
 
+        /**
+         * 购买时本地盘是否为必选。取值范围：<br><li>REQUIRED：表示必选<br><li>OPTIONAL：表示可选。
+         * @type {string || null}
+         */
+        this.Required = null;
+
     }
 
     /**
@@ -96,6 +102,7 @@ class LocalDiskType extends  AbstractModel {
         this.PartitionType = 'PartitionType' in params ? params.PartitionType : null;
         this.MinSize = 'MinSize' in params ? params.MinSize : null;
         this.MaxSize = 'MaxSize' in params ? params.MaxSize : null;
+        this.Required = 'Required' in params ? params.Required : null;
 
     }
 }

@@ -3797,6 +3797,41 @@ class InstanceNode extends  AbstractModel {
 }
 
 /**
+ * StartupInstance返回参数结构体
+ * @class
+ */
+class StartupInstanceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 任务id
+         * @type {number || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * 详细DTS实例信息
  * @class
  */
@@ -5557,6 +5592,34 @@ class DescribeInstanceParamsResponse extends  AbstractModel {
 }
 
 /**
+ * StartupInstance请求参数结构体
+ * @class
+ */
+class StartupInstanceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例id
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+    }
+}
+
+/**
  * 热Key详细信息
  * @class
  */
@@ -6296,6 +6359,7 @@ module.exports = {
     DescribeInstanceSecurityGroupResponse: DescribeInstanceSecurityGroupResponse,
     ProductConf: ProductConf,
     InstanceNode: InstanceNode,
+    StartupInstanceResponse: StartupInstanceResponse,
     DescribeInstanceDTSInstanceInfo: DescribeInstanceDTSInstanceInfo,
     DescribeTaskInfoResponse: DescribeTaskInfoResponse,
     DescribeInstanceMonitorBigKeyTypeDistResponse: DescribeInstanceMonitorBigKeyTypeDistResponse,
@@ -6326,6 +6390,7 @@ module.exports = {
     DescribeProductInfoRequest: DescribeProductInfoRequest,
     SwitchInstanceVipResponse: SwitchInstanceVipResponse,
     DescribeInstanceParamsResponse: DescribeInstanceParamsResponse,
+    StartupInstanceRequest: StartupInstanceRequest,
     HotKeyInfo: HotKeyInfo,
     CreateInstanceAccountResponse: CreateInstanceAccountResponse,
     DescribeInstanceBackupsRequest: DescribeInstanceBackupsRequest,

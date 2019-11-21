@@ -188,7 +188,7 @@ class ApplyUserCertRequest extends  AbstractModel {
         this.Applicant = null;
 
         /**
-         * 证件号码。如果腾讯云账号对应的实名认证类型为企业认证，填入企业营业执照；如果腾讯云账号对应的实名认证类型为个人认证，填入个人身份证号码
+         * 证件号码。如果腾讯云账号对应的实名认证类型为企业认证，填入“0”；如果腾讯云账号对应的实名认证类型为个人认证，填入个人身份证号码
          * @type {string || null}
          */
         this.IdentityNum = null;
@@ -277,6 +277,133 @@ class GetTransListHandlerResponse extends  AbstractModel {
                 let obj = new BcosTransInfo();
                 obj.deserialize(params.List[z]);
                 this.List.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * GetTransactionDetailForUser返回参数结构体
+ * @class
+ */
+class GetTransactionDetailForUserResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 交易ID
+         * @type {string || null}
+         */
+        this.TransactionId = null;
+
+        /**
+         * 交易hash
+         * @type {string || null}
+         */
+        this.TransactionHash = null;
+
+        /**
+         * 创建交易的组织名
+         * @type {string || null}
+         */
+        this.CreateOrgName = null;
+
+        /**
+         * 交易类型（普通交易和配置交易）
+         * @type {string || null}
+         */
+        this.TransactionType = null;
+
+        /**
+         * 交易状态
+         * @type {string || null}
+         */
+        this.TransactionStatus = null;
+
+        /**
+         * 交易创建时间
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * 交易数据
+         * @type {string || null}
+         */
+        this.TransactionData = null;
+
+        /**
+         * 交易所在区块号
+         * @type {number || null}
+         */
+        this.BlockId = null;
+
+        /**
+         * 交易所在区块哈希
+         * @type {string || null}
+         */
+        this.BlockHash = null;
+
+        /**
+         * 交易所在区块高度
+         * @type {number || null}
+         */
+        this.BlockHeight = null;
+
+        /**
+         * 通道名称
+         * @type {string || null}
+         */
+        this.ChannelName = null;
+
+        /**
+         * 交易所在合约名称
+         * @type {string || null}
+         */
+        this.ContractName = null;
+
+        /**
+         * 背书组织列表
+         * @type {Array.<EndorserGroup> || null}
+         */
+        this.EndorserOrgList = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TransactionId = 'TransactionId' in params ? params.TransactionId : null;
+        this.TransactionHash = 'TransactionHash' in params ? params.TransactionHash : null;
+        this.CreateOrgName = 'CreateOrgName' in params ? params.CreateOrgName : null;
+        this.TransactionType = 'TransactionType' in params ? params.TransactionType : null;
+        this.TransactionStatus = 'TransactionStatus' in params ? params.TransactionStatus : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.TransactionData = 'TransactionData' in params ? params.TransactionData : null;
+        this.BlockId = 'BlockId' in params ? params.BlockId : null;
+        this.BlockHash = 'BlockHash' in params ? params.BlockHash : null;
+        this.BlockHeight = 'BlockHeight' in params ? params.BlockHeight : null;
+        this.ChannelName = 'ChannelName' in params ? params.ChannelName : null;
+        this.ContractName = 'ContractName' in params ? params.ContractName : null;
+
+        if (params.EndorserOrgList) {
+            this.EndorserOrgList = new Array();
+            for (let z in params.EndorserOrgList) {
+                let obj = new EndorserGroup();
+                obj.deserialize(params.EndorserOrgList[z]);
+                this.EndorserOrgList.push(obj);
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
@@ -488,10 +615,10 @@ class DownloadUserCertResponse extends  AbstractModel {
 }
 
 /**
- * Invoke请求参数结构体
+ * GetTransactionDetailForUser请求参数结构体
  * @class
  */
-class InvokeRequest extends  AbstractModel {
+class GetTransactionDetailForUserRequest extends  AbstractModel {
     constructor(){
         super();
 
@@ -502,7 +629,7 @@ class InvokeRequest extends  AbstractModel {
         this.Module = null;
 
         /**
-         * 操作名，固定字段：invoke
+         * 操作名，固定字段：transaction_detail_for_user
          * @type {string || null}
          */
         this.Operation = null;
@@ -514,10 +641,10 @@ class InvokeRequest extends  AbstractModel {
         this.ClusterId = null;
 
         /**
-         * 业务所属智能合约名称，可在智能合约详情或列表中获取
+         * 参与交易的组织名称，可以在组织管理列表中获取当前组织的名称
          * @type {string || null}
          */
-        this.ChaincodeName = null;
+        this.GroupName = null;
 
         /**
          * 业务所属通道名称，可在通道详情或列表中获取
@@ -526,34 +653,16 @@ class InvokeRequest extends  AbstractModel {
         this.ChannelName = null;
 
         /**
-         * 对该笔交易进行背书的节点列表（包括节点名称和节点所属组织名称，详见数据结构一节），可以在通道详情中获取该通道上的节点名称极其所属组织名称
-         * @type {Array.<PeerSet> || null}
-         */
-        this.Peers = null;
-
-        /**
-         * 该笔交易需要调用的智能合约中的函数名称
-         * @type {string || null}
-         */
-        this.FuncName = null;
-
-        /**
-         * 调用合约的组织名称，可以在组织管理列表中获取当前组织的名称
-         * @type {string || null}
-         */
-        this.GroupName = null;
-
-        /**
-         * 被调用的函数参数列表
-         * @type {Array.<string> || null}
-         */
-        this.Args = null;
-
-        /**
-         * 同步调用标识，可选参数，值为0或者不传表示使用同步方法调用，调用后会等待交易执行后再返回执行结果；值为1时表示使用异步方式调用Invoke，执行后会立即返回交易对应的Txid，后续需要通过GetInvokeTx这个API查询该交易的执行结果。（对于逻辑较为简单的交易，可以使用同步模式；对于逻辑较为复杂的交易，建议使用异步模式，否则容易导致API因等待时间过长，返回等待超时）
+         * 区块ID，通过GetInvokeTx接口可以获取交易所在的区块ID
          * @type {number || null}
          */
-        this.AsyncFlag = null;
+        this.BlockId = null;
+
+        /**
+         * 交易ID，需要查询的详情的交易ID
+         * @type {string || null}
+         */
+        this.TransactionId = null;
 
     }
 
@@ -567,21 +676,10 @@ class InvokeRequest extends  AbstractModel {
         this.Module = 'Module' in params ? params.Module : null;
         this.Operation = 'Operation' in params ? params.Operation : null;
         this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
-        this.ChaincodeName = 'ChaincodeName' in params ? params.ChaincodeName : null;
-        this.ChannelName = 'ChannelName' in params ? params.ChannelName : null;
-
-        if (params.Peers) {
-            this.Peers = new Array();
-            for (let z in params.Peers) {
-                let obj = new PeerSet();
-                obj.deserialize(params.Peers[z]);
-                this.Peers.push(obj);
-            }
-        }
-        this.FuncName = 'FuncName' in params ? params.FuncName : null;
         this.GroupName = 'GroupName' in params ? params.GroupName : null;
-        this.Args = 'Args' in params ? params.Args : null;
-        this.AsyncFlag = 'AsyncFlag' in params ? params.AsyncFlag : null;
+        this.ChannelName = 'ChannelName' in params ? params.ChannelName : null;
+        this.BlockId = 'BlockId' in params ? params.BlockId : null;
+        this.TransactionId = 'TransactionId' in params ? params.TransactionId : null;
 
     }
 }
@@ -645,7 +743,7 @@ class SrvInvokeRequest extends  AbstractModel {
         super();
 
         /**
-         * 服务类型，ss或者dam
+         * 服务类型，iss或者dam
          * @type {string || null}
          */
         this.Service = null;
@@ -1485,6 +1583,105 @@ class BcosTransInfo extends  AbstractModel {
 }
 
 /**
+ * Invoke请求参数结构体
+ * @class
+ */
+class InvokeRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 模块名，固定字段：transaction
+         * @type {string || null}
+         */
+        this.Module = null;
+
+        /**
+         * 操作名，固定字段：invoke
+         * @type {string || null}
+         */
+        this.Operation = null;
+
+        /**
+         * 区块链网络ID，可在区块链网络详情或列表中获取
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * 业务所属智能合约名称，可在智能合约详情或列表中获取
+         * @type {string || null}
+         */
+        this.ChaincodeName = null;
+
+        /**
+         * 业务所属通道名称，可在通道详情或列表中获取
+         * @type {string || null}
+         */
+        this.ChannelName = null;
+
+        /**
+         * 对该笔交易进行背书的节点列表（包括节点名称和节点所属组织名称，详见数据结构一节），可以在通道详情中获取该通道上的节点名称极其所属组织名称
+         * @type {Array.<PeerSet> || null}
+         */
+        this.Peers = null;
+
+        /**
+         * 该笔交易需要调用的智能合约中的函数名称
+         * @type {string || null}
+         */
+        this.FuncName = null;
+
+        /**
+         * 调用合约的组织名称，可以在组织管理列表中获取当前组织的名称
+         * @type {string || null}
+         */
+        this.GroupName = null;
+
+        /**
+         * 被调用的函数参数列表
+         * @type {Array.<string> || null}
+         */
+        this.Args = null;
+
+        /**
+         * 同步调用标识，可选参数，值为0或者不传表示使用同步方法调用，调用后会等待交易执行后再返回执行结果；值为1时表示使用异步方式调用Invoke，执行后会立即返回交易对应的Txid，后续需要通过GetInvokeTx这个API查询该交易的执行结果。（对于逻辑较为简单的交易，可以使用同步模式；对于逻辑较为复杂的交易，建议使用异步模式，否则容易导致API因等待时间过长，返回等待超时）
+         * @type {number || null}
+         */
+        this.AsyncFlag = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Module = 'Module' in params ? params.Module : null;
+        this.Operation = 'Operation' in params ? params.Operation : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.ChaincodeName = 'ChaincodeName' in params ? params.ChaincodeName : null;
+        this.ChannelName = 'ChannelName' in params ? params.ChannelName : null;
+
+        if (params.Peers) {
+            this.Peers = new Array();
+            for (let z in params.Peers) {
+                let obj = new PeerSet();
+                obj.deserialize(params.Peers[z]);
+                this.Peers.push(obj);
+            }
+        }
+        this.FuncName = 'FuncName' in params ? params.FuncName : null;
+        this.GroupName = 'GroupName' in params ? params.GroupName : null;
+        this.Args = 'Args' in params ? params.Args : null;
+        this.AsyncFlag = 'AsyncFlag' in params ? params.AsyncFlag : null;
+
+    }
+}
+
+/**
  * GetInvokeTx返回参数结构体
  * @class
  */
@@ -1927,41 +2124,6 @@ class BcosBlockObj extends  AbstractModel {
 }
 
 /**
- * Query返回参数结构体
- * @class
- */
-class QueryResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 查询结果数据
-         * @type {Array.<string> || null}
-         */
-        this.Data = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Data = 'Data' in params ? params.Data : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
  * GetTransByHashHandler请求参数结构体
  * @class
  */
@@ -2010,16 +2172,87 @@ class GetTransByHashHandlerRequest extends  AbstractModel {
     }
 }
 
+/**
+ * Query返回参数结构体
+ * @class
+ */
+class QueryResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 查询结果数据
+         * @type {Array.<string> || null}
+         */
+        this.Data = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Data = 'Data' in params ? params.Data : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 背书组织及其节点列表
+ * @class
+ */
+class EndorserGroup extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 背书组织名称
+         * @type {string || null}
+         */
+        this.EndorserGroupName = null;
+
+        /**
+         * 背书节点列表
+         * @type {Array.<string> || null}
+         */
+        this.EndorserPeerList = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.EndorserGroupName = 'EndorserGroupName' in params ? params.EndorserGroupName : null;
+        this.EndorserPeerList = 'EndorserPeerList' in params ? params.EndorserPeerList : null;
+
+    }
+}
+
 module.exports = {
     QueryRequest: QueryRequest,
     SendTransactionHandlerResponse: SendTransactionHandlerResponse,
     ApplyUserCertRequest: ApplyUserCertRequest,
     GetTransListHandlerResponse: GetTransListHandlerResponse,
+    GetTransactionDetailForUserResponse: GetTransactionDetailForUserResponse,
     ApplyUserCertResponse: ApplyUserCertResponse,
     GetLatesdTransactionListRequest: GetLatesdTransactionListRequest,
     InvokeResponse: InvokeResponse,
     DownloadUserCertResponse: DownloadUserCertResponse,
-    InvokeRequest: InvokeRequest,
+    GetTransactionDetailForUserRequest: GetTransactionDetailForUserRequest,
     GetBlockListResponse: GetBlockListResponse,
     SrvInvokeRequest: SrvInvokeRequest,
     BlockByNumberHandlerResponse: BlockByNumberHandlerResponse,
@@ -2035,6 +2268,7 @@ module.exports = {
     Block: Block,
     GetBlockListRequest: GetBlockListRequest,
     BcosTransInfo: BcosTransInfo,
+    InvokeRequest: InvokeRequest,
     GetInvokeTxResponse: GetInvokeTxResponse,
     GetBlockListHandlerResponse: GetBlockListHandlerResponse,
     SendTransactionHandlerRequest: SendTransactionHandlerRequest,
@@ -2042,7 +2276,8 @@ module.exports = {
     TransactionItem: TransactionItem,
     BlockByNumberHandlerRequest: BlockByNumberHandlerRequest,
     BcosBlockObj: BcosBlockObj,
-    QueryResponse: QueryResponse,
     GetTransByHashHandlerRequest: GetTransByHashHandlerRequest,
+    QueryResponse: QueryResponse,
+    EndorserGroup: EndorserGroup,
 
 }

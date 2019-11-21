@@ -92,6 +92,7 @@ const InstanceSecurityGroupDetail = models.InstanceSecurityGroupDetail;
 const DescribeInstanceSecurityGroupResponse = models.DescribeInstanceSecurityGroupResponse;
 const ProductConf = models.ProductConf;
 const InstanceNode = models.InstanceNode;
+const StartupInstanceResponse = models.StartupInstanceResponse;
 const DescribeInstanceDTSInstanceInfo = models.DescribeInstanceDTSInstanceInfo;
 const DescribeTaskInfoResponse = models.DescribeTaskInfoResponse;
 const DescribeInstanceMonitorBigKeyTypeDistResponse = models.DescribeInstanceMonitorBigKeyTypeDistResponse;
@@ -122,6 +123,7 @@ const DisableReplicaReadonlyRequest = models.DisableReplicaReadonlyRequest;
 const DescribeProductInfoRequest = models.DescribeProductInfoRequest;
 const SwitchInstanceVipResponse = models.SwitchInstanceVipResponse;
 const DescribeInstanceParamsResponse = models.DescribeInstanceParamsResponse;
+const StartupInstanceRequest = models.StartupInstanceRequest;
 const HotKeyInfo = models.HotKeyInfo;
 const CreateInstanceAccountResponse = models.CreateInstanceAccountResponse;
 const DescribeInstanceBackupsRequest = models.DescribeInstanceBackupsRequest;
@@ -608,6 +610,17 @@ class RedisClient extends AbstractClient {
     DescribeInstanceBackups(req, cb) {
         let resp = new DescribeInstanceBackupsResponse();
         this.request("DescribeInstanceBackups", req, resp, cb);
+    }
+
+    /**
+     * 实例解隔离
+     * @param {StartupInstanceRequest} req
+     * @param {function(string, StartupInstanceResponse):void} cb
+     * @public
+     */
+    StartupInstance(req, cb) {
+        let resp = new StartupInstanceResponse();
+        this.request("StartupInstance", req, resp, cb);
     }
 
     /**

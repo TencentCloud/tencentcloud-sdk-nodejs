@@ -17,6 +17,67 @@
 const AbstractModel = require("../../common/abstract_model");
 
 /**
+ * LexicalAnalysis返回参数结构体
+ * @class
+ */
+class LexicalAnalysisResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 命名实体识别结果。取值范围：
+<li>PER：表示人名</li>
+<li>LOC：表示地名</li>
+<li>ORG：表示机构团体名</li>
+         * @type {Array.<NerToken> || null}
+         */
+        this.NerTokens = null;
+
+        /**
+         * 分词&词性标注结果（词性表请参见附录）
+         * @type {Array.<PosToken> || null}
+         */
+        this.PosTokens = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.NerTokens) {
+            this.NerTokens = new Array();
+            for (let z in params.NerTokens) {
+                let obj = new NerToken();
+                obj.deserialize(params.NerTokens[z]);
+                this.NerTokens.push(obj);
+            }
+        }
+
+        if (params.PosTokens) {
+            this.PosTokens = new Array();
+            for (let z in params.PosTokens) {
+                let obj = new PosToken();
+                obj.deserialize(params.PosTokens[z]);
+                this.PosTokens.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * SentenceEmbedding请求参数结构体
  * @class
  */
@@ -40,6 +101,34 @@ class SentenceEmbeddingRequest extends  AbstractModel {
             return;
         }
         this.Text = 'Text' in params ? params.Text : null;
+
+    }
+}
+
+/**
+ * DescribeTriple请求参数结构体
+ * @class
+ */
+class DescribeTripleRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 三元组查询条件
+         * @type {string || null}
+         */
+        this.TripleCondition = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TripleCondition = 'TripleCondition' in params ? params.TripleCondition : null;
 
     }
 }
@@ -89,6 +178,48 @@ class DpToken extends  AbstractModel {
         this.Id = 'Id' in params ? params.Id : null;
         this.Relation = 'Relation' in params ? params.Relation : null;
         this.Word = 'Word' in params ? params.Word : null;
+
+    }
+}
+
+/**
+ * ChatBot返回参数结构体
+ * @class
+ */
+class ChatBotResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 对于当前输出回复的自信度
+         * @type {number || null}
+         */
+        this.Confidence = null;
+
+        /**
+         * 闲聊回复
+         * @type {string || null}
+         */
+        this.Reply = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Confidence = 'Confidence' in params ? params.Confidence : null;
+        this.Reply = 'Reply' in params ? params.Reply : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -191,6 +322,83 @@ class AutoSummarizationRequest extends  AbstractModel {
 }
 
 /**
+ * ChatBot请求参数结构体
+ * @class
+ */
+class ChatBotRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 用户请求的query
+         * @type {string || null}
+         */
+        this.Query = null;
+
+        /**
+         * 0: 通用闲聊, 1:儿童闲聊, 默认是通用闲聊
+         * @type {number || null}
+         */
+        this.Flag = null;
+
+        /**
+         * 服务的id,  主要用于儿童闲聊接口，比如手Q的openid
+         * @type {string || null}
+         */
+        this.OpenId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Query = 'Query' in params ? params.Query : null;
+        this.Flag = 'Flag' in params ? params.Flag : null;
+        this.OpenId = 'OpenId' in params ? params.OpenId : null;
+
+    }
+}
+
+/**
+ * DescribeRelation请求参数结构体
+ * @class
+ */
+class DescribeRelationRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 输入第一个实体
+         * @type {string || null}
+         */
+        this.LeftEntityName = null;
+
+        /**
+         * 输入第二个实体
+         * @type {string || null}
+         */
+        this.RightEntityName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LeftEntityName = 'LeftEntityName' in params ? params.LeftEntityName : null;
+        this.RightEntityName = 'RightEntityName' in params ? params.RightEntityName : null;
+
+    }
+}
+
+/**
  * KeywordsExtraction请求参数结构体
  * @class
  */
@@ -226,18 +434,24 @@ class KeywordsExtractionRequest extends  AbstractModel {
 }
 
 /**
- * TextCorrection请求参数结构体
+ * DescribeEntity返回参数结构体
  * @class
  */
-class TextCorrectionRequest extends  AbstractModel {
+class DescribeEntityResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 待纠错的文本（仅支持UTF-8格式，不超过2000字）
+         * 返回查询实体相关信息
          * @type {string || null}
          */
-        this.Text = null;
+        this.Content = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
 
     }
 
@@ -248,7 +462,8 @@ class TextCorrectionRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Text = 'Text' in params ? params.Text : null;
+        this.Content = 'Content' in params ? params.Content : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -335,7 +550,8 @@ class EvilToken extends  AbstractModel {
 5、广告/灌水；
 6、迷信/邪教；
 7、其他违法（如跨站追杀/恶意竞争等）；
-8、综合
+8、综合；
+9、联系方式/链接
          * @type {number || null}
          */
         this.EvilType = null;
@@ -352,6 +568,34 @@ class EvilToken extends  AbstractModel {
         this.EvilFlag = 'EvilFlag' in params ? params.EvilFlag : null;
         this.EvilKeywords = 'EvilKeywords' in params ? params.EvilKeywords : null;
         this.EvilType = 'EvilType' in params ? params.EvilType : null;
+
+    }
+}
+
+/**
+ * DescribeEntity请求参数结构体
+ * @class
+ */
+class DescribeEntityRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实体名称
+         * @type {string || null}
+         */
+        this.EntityName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.EntityName = 'EntityName' in params ? params.EntityName : null;
 
     }
 }
@@ -392,18 +636,46 @@ class AutoSummarizationResponse extends  AbstractModel {
 }
 
 /**
- * WordSimilarity返回参数结构体
+ * DependencyParsing请求参数结构体
  * @class
  */
-class WordSimilarityResponse extends  AbstractModel {
+class DependencyParsingRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 两个词语的相似度
-         * @type {number || null}
+         * 待分析的文本（仅支持UTF-8格式，不超过200字）
+         * @type {string || null}
          */
-        this.Similarity = null;
+        this.Text = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Text = 'Text' in params ? params.Text : null;
+
+    }
+}
+
+/**
+ * DescribeRelation返回参数结构体
+ * @class
+ */
+class DescribeRelationResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 返回查询实体间的关系
+         * @type {Array.<EntityRelationContent> || null}
+         */
+        this.Content = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -420,7 +692,15 @@ class WordSimilarityResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Similarity = 'Similarity' in params ? params.Similarity : null;
+
+        if (params.Content) {
+            this.Content = new Array();
+            for (let z in params.Content) {
+                let obj = new EntityRelationContent();
+                obj.deserialize(params.Content[z]);
+                this.Content.push(obj);
+            }
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -498,7 +778,26 @@ class TextApprovalResponse extends  AbstractModel {
         super();
 
         /**
-         * 文本审核输出结果
+         * 文本审核输出结果列表，列表每个元素包含以下信息：
+
+EvilFlag（文本恶意等级）：
+0、正常；
+1、恶意；
+2、可疑送审
+
+EvilType（文本恶意类型）：
+0、正常；
+1、政治；
+2、色情；
+3、辱骂/低俗；
+4、暴恐/毒品；
+5、广告/灌水；
+6、迷信/邪教；
+7、其他违法（如跨站追杀/恶意竞争等）；
+8、综合；
+9、联系方式/链接
+
+EvilKeywords（恶意关键词组）
          * @type {Array.<EvilToken> || null}
          */
         this.EvilTokens = null;
@@ -696,7 +995,7 @@ class TextClassificationRequest extends  AbstractModel {
         super();
 
         /**
-         * 待分类的文本（仅支持UTF-8格式，不超过2000字）
+         * 待分类的文本（仅支持UTF-8格式，不超过10000字）
          * @type {string || null}
          */
         this.Text = null;
@@ -796,6 +1095,49 @@ class WordEmbeddingResponse extends  AbstractModel {
         }
         this.Dimension = 'Dimension' in params ? params.Dimension : null;
         this.Vector = 'Vector' in params ? params.Vector : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeTriple返回参数结构体
+ * @class
+ */
+class DescribeTripleResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 返回三元组信息
+         * @type {Array.<TripleContent> || null}
+         */
+        this.Content = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Content) {
+            this.Content = new Array();
+            for (let z in params.Content) {
+                let obj = new TripleContent();
+                obj.deserialize(params.Content[z]);
+                this.Content.push(obj);
+            }
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -993,15 +1335,57 @@ class TextCorrectionResponse extends  AbstractModel {
 }
 
 /**
- * DependencyParsing请求参数结构体
+ * 实体关系查询返回的Object类型
  * @class
  */
-class DependencyParsingRequest extends  AbstractModel {
+class EntityRelationObject extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 待分析的文本（仅支持UTF-8格式，不超过200字）
+         * object对应id
+         * @type {Array.<string> || null}
+         */
+        this.Id = null;
+
+        /**
+         * object对应name
+         * @type {Array.<string> || null}
+         */
+        this.Name = null;
+
+        /**
+         * object对应popular值
+         * @type {Array.<number> || null}
+         */
+        this.Popular = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Id = 'Id' in params ? params.Id : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Popular = 'Popular' in params ? params.Popular : null;
+
+    }
+}
+
+/**
+ * WordEmbedding请求参数结构体
+ * @class
+ */
+class WordEmbeddingRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 输入的词语（仅支持UTF-8格式，不超过20字）
          * @type {string || null}
          */
         this.Text = null;
@@ -1021,15 +1405,15 @@ class DependencyParsingRequest extends  AbstractModel {
 }
 
 /**
- * WordEmbedding请求参数结构体
+ * TextCorrection请求参数结构体
  * @class
  */
-class WordEmbeddingRequest extends  AbstractModel {
+class TextCorrectionRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 输入的词语（仅支持UTF-8格式，不超过20字）
+         * 待纠错的文本（仅支持UTF-8格式，不超过2000字）
          * @type {string || null}
          */
         this.Text = null;
@@ -1353,9 +1737,9 @@ class LexicalAnalysisRequest extends  AbstractModel {
         this.Text = null;
 
         /**
-         * 词法分析模式（默认取1值）：
-1、高精度（具备混合粒度分词能力）；
-2、高性能；
+         * 词法分析模式（默认取2值）：
+1、高精度（混合粒度分词能力）；
+2、高性能（单粒度分词能力）；
          * @type {number || null}
          */
         this.Flag = null;
@@ -1391,10 +1775,10 @@ class SentimentAnalysisRequest extends  AbstractModel {
 
         /**
          * 文本所属类型（默认取4值）：
-1、电商
-2、APP
-3、美食
-4、酒店和其他
+1、商品评论类
+2、社交类
+3、美食酒店类
+4、通用领域类
          * @type {number || null}
          */
         this.Flag = null;
@@ -1443,27 +1827,76 @@ class SensitiveWordsRecognitionRequest extends  AbstractModel {
 }
 
 /**
- * LexicalAnalysis返回参数结构体
+ * 返回的实体关系查询结果详细内容
  * @class
  */
-class LexicalAnalysisResponse extends  AbstractModel {
+class EntityRelationContent extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 命名实体识别结果。取值范围：
-<li>PER：表示人名</li>
-<li>LOC：表示地名</li>
-<li>ORG：表示机构团体名</li>
-         * @type {Array.<NerToken> || null}
+         * 实体关系查询返回关系的object
+         * @type {Array.<EntityRelationObject> || null}
          */
-        this.NerTokens = null;
+        this.Object = null;
 
         /**
-         * 分词&词性标注结果（词性表请参见附录）
-         * @type {Array.<PosToken> || null}
+         * 实体关系查询返回关系的subject
+         * @type {Array.<EntityRelationSubject> || null}
          */
-        this.PosTokens = null;
+        this.Subject = null;
+
+        /**
+         * 实体关系查询返回的关系名称
+         * @type {string || null}
+         */
+        this.Relation = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Object) {
+            this.Object = new Array();
+            for (let z in params.Object) {
+                let obj = new EntityRelationObject();
+                obj.deserialize(params.Object[z]);
+                this.Object.push(obj);
+            }
+        }
+
+        if (params.Subject) {
+            this.Subject = new Array();
+            for (let z in params.Subject) {
+                let obj = new EntityRelationSubject();
+                obj.deserialize(params.Subject[z]);
+                this.Subject.push(obj);
+            }
+        }
+        this.Relation = 'Relation' in params ? params.Relation : null;
+
+    }
+}
+
+/**
+ * WordSimilarity返回参数结构体
+ * @class
+ */
+class WordSimilarityResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 两个词语的相似度
+         * @type {number || null}
+         */
+        this.Similarity = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1480,40 +1913,121 @@ class LexicalAnalysisResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.NerTokens) {
-            this.NerTokens = new Array();
-            for (let z in params.NerTokens) {
-                let obj = new NerToken();
-                obj.deserialize(params.NerTokens[z]);
-                this.NerTokens.push(obj);
-            }
-        }
-
-        if (params.PosTokens) {
-            this.PosTokens = new Array();
-            for (let z in params.PosTokens) {
-                let obj = new PosToken();
-                obj.deserialize(params.PosTokens[z]);
-                this.PosTokens.push(obj);
-            }
-        }
+        this.Similarity = 'Similarity' in params ? params.Similarity : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
 
+/**
+ * 三元组查询返回的元记录
+ * @class
+ */
+class TripleContent extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实体id
+         * @type {string || null}
+         */
+        this.Id = null;
+
+        /**
+         * 实体名称
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 实体order
+         * @type {number || null}
+         */
+        this.Order = null;
+
+        /**
+         * 实体流行度
+         * @type {number || null}
+         */
+        this.Popular = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Id = 'Id' in params ? params.Id : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Order = 'Order' in params ? params.Order : null;
+        this.Popular = 'Popular' in params ? params.Popular : null;
+
+    }
+}
+
+/**
+ * 实体关系查询返回Subject
+ * @class
+ */
+class EntityRelationSubject extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Subject对应id
+         * @type {Array.<string> || null}
+         */
+        this.Id = null;
+
+        /**
+         * Subject对应name
+         * @type {Array.<string> || null}
+         */
+        this.Name = null;
+
+        /**
+         * Subject对应popular
+         * @type {Array.<number> || null}
+         */
+        this.Popular = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Id = 'Id' in params ? params.Id : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Popular = 'Popular' in params ? params.Popular : null;
+
+    }
+}
+
 module.exports = {
+    LexicalAnalysisResponse: LexicalAnalysisResponse,
     SentenceEmbeddingRequest: SentenceEmbeddingRequest,
+    DescribeTripleRequest: DescribeTripleRequest,
     DpToken: DpToken,
+    ChatBotResponse: ChatBotResponse,
     ContentApprovalResponse: ContentApprovalResponse,
     AutoSummarizationRequest: AutoSummarizationRequest,
+    ChatBotRequest: ChatBotRequest,
+    DescribeRelationRequest: DescribeRelationRequest,
     KeywordsExtractionRequest: KeywordsExtractionRequest,
-    TextCorrectionRequest: TextCorrectionRequest,
+    DescribeEntityResponse: DescribeEntityResponse,
     ClassificationResult: ClassificationResult,
     EvilToken: EvilToken,
+    DescribeEntityRequest: DescribeEntityRequest,
     AutoSummarizationResponse: AutoSummarizationResponse,
-    WordSimilarityResponse: WordSimilarityResponse,
+    DependencyParsingRequest: DependencyParsingRequest,
+    DescribeRelationResponse: DescribeRelationResponse,
     WordSimilarityRequest: WordSimilarityRequest,
     ContentApprovalRequest: ContentApprovalRequest,
     TextApprovalResponse: TextApprovalResponse,
@@ -1524,12 +2038,14 @@ module.exports = {
     TextClassificationRequest: TextClassificationRequest,
     Keyword: Keyword,
     WordEmbeddingResponse: WordEmbeddingResponse,
+    DescribeTripleResponse: DescribeTripleResponse,
     PosToken: PosToken,
     SentimentAnalysisResponse: SentimentAnalysisResponse,
     KeywordsExtractionResponse: KeywordsExtractionResponse,
     TextCorrectionResponse: TextCorrectionResponse,
-    DependencyParsingRequest: DependencyParsingRequest,
+    EntityRelationObject: EntityRelationObject,
     WordEmbeddingRequest: WordEmbeddingRequest,
+    TextCorrectionRequest: TextCorrectionRequest,
     SentenceSimilarityResponse: SentenceSimilarityResponse,
     NerToken: NerToken,
     SimilarWordsResponse: SimilarWordsResponse,
@@ -1540,6 +2056,9 @@ module.exports = {
     LexicalAnalysisRequest: LexicalAnalysisRequest,
     SentimentAnalysisRequest: SentimentAnalysisRequest,
     SensitiveWordsRecognitionRequest: SensitiveWordsRecognitionRequest,
-    LexicalAnalysisResponse: LexicalAnalysisResponse,
+    EntityRelationContent: EntityRelationContent,
+    WordSimilarityResponse: WordSimilarityResponse,
+    TripleContent: TripleContent,
+    EntityRelationSubject: EntityRelationSubject,
 
 }

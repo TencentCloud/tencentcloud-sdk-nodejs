@@ -16,16 +16,23 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
+const LexicalAnalysisResponse = models.LexicalAnalysisResponse;
 const SentenceEmbeddingRequest = models.SentenceEmbeddingRequest;
+const DescribeTripleRequest = models.DescribeTripleRequest;
 const DpToken = models.DpToken;
+const ChatBotResponse = models.ChatBotResponse;
 const ContentApprovalResponse = models.ContentApprovalResponse;
 const AutoSummarizationRequest = models.AutoSummarizationRequest;
+const ChatBotRequest = models.ChatBotRequest;
+const DescribeRelationRequest = models.DescribeRelationRequest;
 const KeywordsExtractionRequest = models.KeywordsExtractionRequest;
-const TextCorrectionRequest = models.TextCorrectionRequest;
+const DescribeEntityResponse = models.DescribeEntityResponse;
 const ClassificationResult = models.ClassificationResult;
 const EvilToken = models.EvilToken;
+const DescribeEntityRequest = models.DescribeEntityRequest;
 const AutoSummarizationResponse = models.AutoSummarizationResponse;
-const WordSimilarityResponse = models.WordSimilarityResponse;
+const DependencyParsingRequest = models.DependencyParsingRequest;
+const DescribeRelationResponse = models.DescribeRelationResponse;
 const WordSimilarityRequest = models.WordSimilarityRequest;
 const ContentApprovalRequest = models.ContentApprovalRequest;
 const TextApprovalResponse = models.TextApprovalResponse;
@@ -36,12 +43,14 @@ const TextClassificationResponse = models.TextClassificationResponse;
 const TextClassificationRequest = models.TextClassificationRequest;
 const Keyword = models.Keyword;
 const WordEmbeddingResponse = models.WordEmbeddingResponse;
+const DescribeTripleResponse = models.DescribeTripleResponse;
 const PosToken = models.PosToken;
 const SentimentAnalysisResponse = models.SentimentAnalysisResponse;
 const KeywordsExtractionResponse = models.KeywordsExtractionResponse;
 const TextCorrectionResponse = models.TextCorrectionResponse;
-const DependencyParsingRequest = models.DependencyParsingRequest;
+const EntityRelationObject = models.EntityRelationObject;
 const WordEmbeddingRequest = models.WordEmbeddingRequest;
+const TextCorrectionRequest = models.TextCorrectionRequest;
 const SentenceSimilarityResponse = models.SentenceSimilarityResponse;
 const NerToken = models.NerToken;
 const SimilarWordsResponse = models.SimilarWordsResponse;
@@ -52,7 +61,10 @@ const CCIToken = models.CCIToken;
 const LexicalAnalysisRequest = models.LexicalAnalysisRequest;
 const SentimentAnalysisRequest = models.SentimentAnalysisRequest;
 const SensitiveWordsRecognitionRequest = models.SensitiveWordsRecognitionRequest;
-const LexicalAnalysisResponse = models.LexicalAnalysisResponse;
+const EntityRelationContent = models.EntityRelationContent;
+const WordSimilarityResponse = models.WordSimilarityResponse;
+const TripleContent = models.TripleContent;
+const EntityRelationSubject = models.EntityRelationSubject;
 
 
 /**
@@ -74,7 +86,7 @@ class NlpClient extends AbstractClient {
 
 1、文本恶意级别：将文本分为3个级别，包括正常、恶意、可疑送审；
 
-2、文本恶意类型：把文本分为9个类别，包括正常、政治、色情、辱骂/低俗、暴恐/毒品、广告/灌水、迷信/邪教、其他违法、综合；
+2、文本恶意类型：把文本分为10个类别，包括正常、政治、色情、辱骂/低俗、暴恐/毒品、广告/灌水、迷信/邪教、其他违法、综合、联系方式/链接；
 
 3、恶意关键词：文本中所有涉嫌恶意的关键词。
      * @param {TextApprovalRequest} req
@@ -98,6 +110,17 @@ class NlpClient extends AbstractClient {
     }
 
     /**
+     * 输入实体名称，返回实体相关的信息如实体别名、实体英文名、实体详细信息、相关实体等。
+     * @param {DescribeEntityRequest} req
+     * @param {function(string, DescribeEntityResponse):void} cb
+     * @public
+     */
+    DescribeEntity(req, cb) {
+        let resp = new DescribeEntityResponse();
+        this.request("DescribeEntity", req, resp, cb);
+    }
+
+    /**
      * 文本相似度接口能够基于深度学习技术来计算两个输入文本的相似度，相似度数值越大的两个文本在语义上越相似。目前仅支持短文本的相似度计算，长文本的相似度计算也即将推出。
 
 鉴于文本相似度是一个应用非常广泛的功能，腾讯知文自然语言处理团队在深度神经网络模型的基础上，专门针对文本相似任务进行了优化，并持续迭代更新。基于文本相似度，可以轻松实现诸如文本去重、相似推荐等功能。
@@ -108,6 +131,38 @@ class NlpClient extends AbstractClient {
     SentenceSimilarity(req, cb) {
         let resp = new SentenceSimilarityResponse();
         this.request("SentenceSimilarity", req, resp, cb);
+    }
+
+    /**
+     * 闲聊服务基于腾讯领先的NLP引擎能力、数据运算能力和千亿级互联网语料数据的支持，同时集成了广泛的知识问答能力，可实现上百种自定义属性配置，以及儿童语言风格及说话方式，从而让聊天变得更睿智、简单和有趣。
+
+
+     * @param {ChatBotRequest} req
+     * @param {function(string, ChatBotResponse):void} cb
+     * @public
+     */
+    ChatBot(req, cb) {
+        let resp = new ChatBotResponse();
+        this.request("ChatBot", req, resp, cb);
+    }
+
+    /**
+     * 词向量接口能够将输入的词语映射成一个固定维度的词向量，用来表示这个词语的语义特征。词向量是很多自然语言处理技术的基础，能够显著提高它们的效果。
+
+该词向量服务由腾讯知文自然语言处理团队联合腾讯AI Lab共同打造。使用的词向量基于千亿级大规模互联网语料并采用AI Lab自研的DSG算法训练而成，开源的词向量包含800多万中文词汇，在覆盖率、新鲜度及准确性等三方面性能突出。
+
+腾讯AI Lab词向量相关资料：
+
+https://ai.tencent.com/ailab/zh/news/detial?id=22
+
+https://ai.tencent.com/ailab/nlp/embedding.html 
+     * @param {WordEmbeddingRequest} req
+     * @param {function(string, WordEmbeddingResponse):void} cb
+     * @public
+     */
+    WordEmbedding(req, cb) {
+        let resp = new WordEmbeddingResponse();
+        this.request("WordEmbedding", req, resp, cb);
     }
 
     /**
@@ -132,37 +187,37 @@ class NlpClient extends AbstractClient {
     }
 
     /**
-     * 词法分析接口提供以下三个功能：
+     * （该接口即将下线，请使用升级接口：文本审核）
 
-1、智能分词：将连续的自然语言文本，切分成具有语义合理性和完整性的词汇序列；
+文本审核接口能够识别文本信息中的色情、政治等有害内容，帮助用户及时、精准地防范违规风险，可用于内容审核、敏感信息过滤、舆情监控等场景。
 
-2、词性标注：为每一个词附上对应的词性，例如名词、代词、形容词、动词等；
+该功能基于10万级大规模敏感词库，结合多种文本对抗方法、政策权威指令等，并运用了深度学习技术，高效识别高危有害内容。同时我们会根据大规模语料和实时反误杀系统，不断更新迭代，确保效果持续提升。
 
-3、命名实体识别：快速识别文本中的实体，例如人名、地名、机构名、时间日期等。
+文本审核接口目前提供以下三个功能：
 
-所有的功能均基于千亿级大规模互联网语料进行持续迭代更新，以保证效果不断提升，用户无需担心新词发现、歧义消除、调用性能等问题。目前词法分析已经在泛互联网、金融、政务等不同垂直领域提供业务支持，并取得良好的效果。
-     * @param {LexicalAnalysisRequest} req
-     * @param {function(string, LexicalAnalysisResponse):void} cb
+1、文本恶意级别：将文本分为3个级别，包括正常、恶意、可疑送审；
+
+2、文本恶意类型：把文本分为9个类别，包括正常、政治、色情、辱骂/低俗、暴恐/毒品、广告/灌水、迷信/邪教、其他违法、综合；
+
+3、恶意关键词：文本中所有涉嫌恶意的关键词。
+     * @param {ContentApprovalRequest} req
+     * @param {function(string, ContentApprovalResponse):void} cb
      * @public
      */
-    LexicalAnalysis(req, cb) {
-        let resp = new LexicalAnalysisResponse();
-        this.request("LexicalAnalysis", req, resp, cb);
+    ContentApproval(req, cb) {
+        let resp = new ContentApprovalResponse();
+        this.request("ContentApproval", req, resp, cb);
     }
 
     /**
-     * 敏感词识别接口能够识别出文本中的所有敏感词，帮助用户及时、精准地防范违规风险，广泛用于各种高危涉敏场景（如资讯、评论、聊天室）的敏感信息过滤。
-
-该功能基于10万级大规模敏感词库，结合多种文本对抗方法、政策权威指令等，高效识别敏感词及其各类变种。同时我们会根据大规模语料和实时反误杀系统，不断更新迭代，确保效果持续提升。
-
-目前能够支持对政治、色情、辱骂/低俗、暴恐/毒品、广告/灌水、迷信/邪教、其他违法、综合等8大类敏感信息的识别。
-     * @param {SensitiveWordsRecognitionRequest} req
-     * @param {function(string, SensitiveWordsRecognitionResponse):void} cb
+     * 输入两个实体，返回两个实体间的关系，例如马化腾与腾讯公司不仅是相关实体，二者还存在隶属关系（马化腾属于腾讯公司）。
+     * @param {DescribeRelationRequest} req
+     * @param {function(string, DescribeRelationResponse):void} cb
      * @public
      */
-    SensitiveWordsRecognition(req, cb) {
-        let resp = new SensitiveWordsRecognitionResponse();
-        this.request("SensitiveWordsRecognition", req, resp, cb);
+    DescribeRelation(req, cb) {
+        let resp = new DescribeRelationResponse();
+        this.request("DescribeRelation", req, resp, cb);
     }
 
     /**
@@ -190,22 +245,22 @@ class NlpClient extends AbstractClient {
     }
 
     /**
-     * 词向量接口能够将输入的词语映射成一个固定维度的词向量，用来表示这个词语的语义特征。词向量是很多自然语言处理技术的基础，能够显著提高它们的效果。
+     * 词法分析接口提供以下三个功能：
 
-该词向量服务由腾讯知文自然语言处理团队联合腾讯AI Lab共同打造。使用的词向量基于千亿级大规模互联网语料并采用AI Lab自研的DSG算法训练而成，开源的词向量包含800多万中文词汇，在覆盖率、新鲜度及准确性等三方面性能突出。
+1、智能分词：将连续的自然语言文本，切分成具有语义合理性和完整性的词汇序列；
 
-腾讯AI Lab词向量相关资料：
+2、词性标注：为每一个词附上对应的词性，例如名词、代词、形容词、动词等；
 
-https://ai.tencent.com/ailab/zh/news/detial?id=22
+3、命名实体识别：快速识别文本中的实体，例如人名、地名、机构名等。
 
-https://ai.tencent.com/ailab/nlp/embedding.html 
-     * @param {WordEmbeddingRequest} req
-     * @param {function(string, WordEmbeddingResponse):void} cb
+所有的功能均基于千亿级大规模互联网语料进行持续迭代更新，以保证效果不断提升，用户无需担心新词发现、歧义消除、调用性能等问题。目前词法分析已经在泛互联网、金融、政务等不同垂直领域提供业务支持，并取得良好的效果。
+     * @param {LexicalAnalysisRequest} req
+     * @param {function(string, LexicalAnalysisResponse):void} cb
      * @public
      */
-    WordEmbedding(req, cb) {
-        let resp = new WordEmbeddingResponse();
-        this.request("WordEmbedding", req, resp, cb);
+    LexicalAnalysis(req, cb) {
+        let resp = new LexicalAnalysisResponse();
+        this.request("LexicalAnalysis", req, resp, cb);
     }
 
     /**
@@ -222,26 +277,29 @@ https://ai.tencent.com/ailab/nlp/embedding.html
     }
 
     /**
-     * （该接口即将下线，请使用升级接口：文本审核）
-
-文本审核接口能够识别文本信息中的色情、政治等有害内容，帮助用户及时、精准地防范违规风险，可用于内容审核、敏感信息过滤、舆情监控等场景。
-
-该功能基于10万级大规模敏感词库，结合多种文本对抗方法、政策权威指令等，并运用了深度学习技术，高效识别高危有害内容。同时我们会根据大规模语料和实时反误杀系统，不断更新迭代，确保效果持续提升。
-
-文本审核接口目前提供以下三个功能：
-
-1、文本恶意级别：将文本分为3个级别，包括正常、恶意、可疑送审；
-
-2、文本恶意类型：把文本分为9个类别，包括正常、政治、色情、辱骂/低俗、暴恐/毒品、广告/灌水、迷信/邪教、其他违法、综合；
-
-3、恶意关键词：文本中所有涉嫌恶意的关键词。
-     * @param {ContentApprovalRequest} req
-     * @param {function(string, ContentApprovalResponse):void} cb
+     * 三元组查询，主要分为两类，SP查询和PO查询。SP查询表示已知主语和谓语查询宾语，PO查询表示已知宾语和谓语查询主语。每一个SP或PO查询都是一个可独立执行的查询，TQL支持SP查询的嵌套查询，即主语可以是一个嵌套的子查询。其他复杂的三元组查询方法，请参考官网API文档示例。
+     * @param {DescribeTripleRequest} req
+     * @param {function(string, DescribeTripleResponse):void} cb
      * @public
      */
-    ContentApproval(req, cb) {
-        let resp = new ContentApprovalResponse();
-        this.request("ContentApproval", req, resp, cb);
+    DescribeTriple(req, cb) {
+        let resp = new DescribeTripleResponse();
+        this.request("DescribeTriple", req, resp, cb);
+    }
+
+    /**
+     * 敏感词识别接口能够识别出文本中的所有敏感词，帮助用户及时、精准地防范违规风险，广泛用于各种高危涉敏场景（如资讯、评论、聊天室）的敏感信息过滤。
+
+该功能基于10万级大规模敏感词库，结合多种文本对抗方法、政策权威指令等，高效识别敏感词及其各类变种。同时我们会根据大规模语料和实时反误杀系统，不断更新迭代，确保效果持续提升。
+
+目前能够支持对政治、色情、辱骂/低俗、暴恐/毒品、广告/灌水、迷信/邪教、其他违法、综合等8大类敏感信息的识别。
+     * @param {SensitiveWordsRecognitionRequest} req
+     * @param {function(string, SensitiveWordsRecognitionResponse):void} cb
+     * @public
+     */
+    SensitiveWordsRecognition(req, cb) {
+        let resp = new SensitiveWordsRecognitionResponse();
+        this.request("SensitiveWordsRecognition", req, resp, cb);
     }
 
     /**
