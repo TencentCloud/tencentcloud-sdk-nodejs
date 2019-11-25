@@ -28,6 +28,7 @@ module.exports = {
     cvm: require("./cvm"),
     cws: require("./cws"),
     dayu: require("./dayu"),
+    dbbrain: require("./dbbrain"),
     dc: require("./dc"),
     dcdb: require("./dcdb"),
     domain: require("./domain"),

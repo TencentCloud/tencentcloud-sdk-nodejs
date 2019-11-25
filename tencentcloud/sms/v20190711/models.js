@@ -52,10 +52,61 @@ class PullSmsReplyStatusRequest extends  AbstractModel {
 }
 
 /**
- * PullSmsReplyStatusByPhoneNumber请求参数结构体
+ * SmsPackagesStatistics请求参数结构体
  * @class
  */
-class PullSmsReplyStatusByPhoneNumberRequest extends  AbstractModel {
+class SmsPackagesStatisticsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 最大上限
+注：目前固定设置为0
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 偏移量
+注：目前固定设置为0
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 需要拉取的套餐包个数
+         * @type {number || null}
+         */
+        this.NumberOfPullPackages = null;
+
+        /**
+         * 短信SdkAppid在[短信控制台](https://console.cloud.tencent.com/sms/smslist) 添加应用后生成的实际SdkAppid,示例如1400006666。
+         * @type {string || null}
+         */
+        this.SmsSdkAppid = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.NumberOfPullPackages = 'NumberOfPullPackages' in params ? params.NumberOfPullPackages : null;
+        this.SmsSdkAppid = 'SmsSdkAppid' in params ? params.SmsSdkAppid : null;
+
+    }
+}
+
+/**
+ * PullSmsSendStatusByPhoneNumber请求参数结构体
+ * @class
+ */
+class PullSmsSendStatusByPhoneNumberRequest extends  AbstractModel {
     constructor(){
         super();
 
@@ -109,54 +160,24 @@ class PullSmsReplyStatusByPhoneNumberRequest extends  AbstractModel {
 }
 
 /**
- * 短信的下发状态详细信息
+ * CallbackStatusStatistics返回参数结构体
  * @class
  */
-class PullSmsSendStatus extends  AbstractModel {
+class CallbackStatusStatisticsResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 用户实际接收到短信的时间
-         * @type {string || null}
+         * 回执数据统计响应包体
+         * @type {CallbackStatusStatistics || null}
          */
-        this.UserReceiveTime = null;
+        this.CallbackStatusStatistics = null;
 
         /**
-         * 国家（或地区）码
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.NationCode = null;
-
-        /**
-         * 手机号码,e.164标准，+[国家或地区码][手机号] ，示例如：+8613711112222， 其中前面有一个+号 ，86为国家码，13711112222为手机号
-         * @type {string || null}
-         */
-        this.PurePhoneNumber = null;
-
-        /**
-         * 手机号码，普通格式，示例如：13711112222
-         * @type {string || null}
-         */
-        this.PhoneNumber = null;
-
-        /**
-         * 本次发送标识 ID
-         * @type {string || null}
-         */
-        this.SerialNo = null;
-
-        /**
-         * 实际是否收到短信接收状态，SUCCESS（成功）、FAIL（失败）
-         * @type {string || null}
-         */
-        this.ReportStatus = null;
-
-        /**
-         * 用户接收短信状态描述
-         * @type {string || null}
-         */
-        this.Description = null;
+        this.RequestId = null;
 
     }
 
@@ -167,13 +188,13 @@ class PullSmsSendStatus extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.UserReceiveTime = 'UserReceiveTime' in params ? params.UserReceiveTime : null;
-        this.NationCode = 'NationCode' in params ? params.NationCode : null;
-        this.PurePhoneNumber = 'PurePhoneNumber' in params ? params.PurePhoneNumber : null;
-        this.PhoneNumber = 'PhoneNumber' in params ? params.PhoneNumber : null;
-        this.SerialNo = 'SerialNo' in params ? params.SerialNo : null;
-        this.ReportStatus = 'ReportStatus' in params ? params.ReportStatus : null;
-        this.Description = 'Description' in params ? params.Description : null;
+
+        if (params.CallbackStatusStatistics) {
+            let obj = new CallbackStatusStatistics();
+            obj.deserialize(params.CallbackStatusStatistics)
+            this.CallbackStatusStatistics = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -209,6 +230,76 @@ class PullSmsSendStatusRequest extends  AbstractModel {
         }
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.SmsSdkAppid = 'SmsSdkAppid' in params ? params.SmsSdkAppid : null;
+
+    }
+}
+
+/**
+ * 套餐包信息统计响应包体
+ * @class
+ */
+class SmsPackagesStatistics extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 套餐包创建时间
+         * @type {string || null}
+         */
+        this.PackageCreateTime = null;
+
+        /**
+         * 套餐包生效时间
+         * @type {string || null}
+         */
+        this.PackageEffectiveTime = null;
+
+        /**
+         * 套餐包过期时间
+         * @type {string || null}
+         */
+        this.PackageExpiredTime = null;
+
+        /**
+         * 套餐包条数
+         * @type {number || null}
+         */
+        this.AmountOfPackage = null;
+
+        /**
+         * 0表示赠送套餐包，1表示购买套餐包
+         * @type {number || null}
+         */
+        this.TypeOfPackage = null;
+
+        /**
+         * 套餐包 ID
+         * @type {number || null}
+         */
+        this.PackageId = null;
+
+        /**
+         * 当前使用量
+         * @type {number || null}
+         */
+        this.CurrentUsage = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PackageCreateTime = 'PackageCreateTime' in params ? params.PackageCreateTime : null;
+        this.PackageEffectiveTime = 'PackageEffectiveTime' in params ? params.PackageEffectiveTime : null;
+        this.PackageExpiredTime = 'PackageExpiredTime' in params ? params.PackageExpiredTime : null;
+        this.AmountOfPackage = 'AmountOfPackage' in params ? params.AmountOfPackage : null;
+        this.TypeOfPackage = 'TypeOfPackage' in params ? params.TypeOfPackage : null;
+        this.PackageId = 'PackageId' in params ? params.PackageId : null;
+        this.CurrentUsage = 'CurrentUsage' in params ? params.CurrentUsage : null;
 
     }
 }
@@ -363,43 +454,24 @@ class SendSmsResponse extends  AbstractModel {
 }
 
 /**
- * PullSmsSendStatusByPhoneNumber请求参数结构体
+ * SendStatusStatistics返回参数结构体
  * @class
  */
-class PullSmsSendStatusByPhoneNumberRequest extends  AbstractModel {
+class SendStatusStatisticsResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 拉取起始时间，UNIX 时间戳（时间：秒）
+         * 发送数据统计响应包体
+         * @type {SendStatusStatistics || null}
+         */
+        this.SendStatusStatistics = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.SendDateTime = null;
-
-        /**
-         * 偏移量
-注：目前固定设置为0
-         * @type {number || null}
-         */
-        this.Offset = null;
-
-        /**
-         * 拉取最大条数，最多 100
-         * @type {number || null}
-         */
-        this.Limit = null;
-
-        /**
-         * 下发目的手机号码，依据 e.164 标准为：+[国家（或地区）码][手机号] ，示例如：+8613711112222， 其中前面有一个+号 ，86为国家码，13711112222为手机号。
-         * @type {string || null}
-         */
-        this.PhoneNumber = null;
-
-        /**
-         * 短信SdkAppid在[短信控制台](https://console.cloud.tencent.com/sms/smslist) 添加应用后生成的实际SdkAppid,示例如1400006666。
-         * @type {string || null}
-         */
-        this.SmsSdkAppid = null;
+        this.RequestId = null;
 
     }
 
@@ -410,11 +482,13 @@ class PullSmsSendStatusByPhoneNumberRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.SendDateTime = 'SendDateTime' in params ? params.SendDateTime : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
-        this.PhoneNumber = 'PhoneNumber' in params ? params.PhoneNumber : null;
-        this.SmsSdkAppid = 'SmsSdkAppid' in params ? params.SmsSdkAppid : null;
+
+        if (params.SendStatusStatistics) {
+            let obj = new SendStatusStatistics();
+            obj.deserialize(params.SendStatusStatistics)
+            this.SendStatusStatistics = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -499,92 +573,6 @@ class SendSmsRequest extends  AbstractModel {
 }
 
 /**
- * PullSmsReplyStatus返回参数结构体
- * @class
- */
-class PullSmsReplyStatusResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 回复状态响应集合
-         * @type {Array.<PullSmsReplyStatus> || null}
-         */
-        this.PullSmsReplyStatusSet = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-        if (params.PullSmsReplyStatusSet) {
-            this.PullSmsReplyStatusSet = new Array();
-            for (let z in params.PullSmsReplyStatusSet) {
-                let obj = new PullSmsReplyStatus();
-                obj.deserialize(params.PullSmsReplyStatusSet[z]);
-                this.PullSmsReplyStatusSet.push(obj);
-            }
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * PullSmsReplyStatusByPhoneNumber返回参数结构体
- * @class
- */
-class PullSmsReplyStatusByPhoneNumberResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 回复状态响应集合
-         * @type {Array.<PullSmsReplyStatus> || null}
-         */
-        this.PullSmsReplyStatusSet = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-        if (params.PullSmsReplyStatusSet) {
-            this.PullSmsReplyStatusSet = new Array();
-            for (let z in params.PullSmsReplyStatusSet) {
-                let obj = new PullSmsReplyStatus();
-                obj.deserialize(params.PullSmsReplyStatusSet[z]);
-                this.PullSmsReplyStatusSet.push(obj);
-            }
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
  * 发送短信状态
  * @class
  */
@@ -648,6 +636,420 @@ class SendStatus extends  AbstractModel {
 }
 
 /**
+ * 短信的下发状态详细信息
+ * @class
+ */
+class PullSmsSendStatus extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 用户实际接收到短信的时间
+         * @type {string || null}
+         */
+        this.UserReceiveTime = null;
+
+        /**
+         * 国家（或地区）码
+         * @type {string || null}
+         */
+        this.NationCode = null;
+
+        /**
+         * 手机号码,e.164标准，+[国家或地区码][手机号] ，示例如：+8613711112222， 其中前面有一个+号 ，86为国家码，13711112222为手机号
+         * @type {string || null}
+         */
+        this.PurePhoneNumber = null;
+
+        /**
+         * 手机号码，普通格式，示例如：13711112222
+         * @type {string || null}
+         */
+        this.PhoneNumber = null;
+
+        /**
+         * 本次发送标识 ID
+         * @type {string || null}
+         */
+        this.SerialNo = null;
+
+        /**
+         * 实际是否收到短信接收状态，SUCCESS（成功）、FAIL（失败）
+         * @type {string || null}
+         */
+        this.ReportStatus = null;
+
+        /**
+         * 用户接收短信状态描述
+         * @type {string || null}
+         */
+        this.Description = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.UserReceiveTime = 'UserReceiveTime' in params ? params.UserReceiveTime : null;
+        this.NationCode = 'NationCode' in params ? params.NationCode : null;
+        this.PurePhoneNumber = 'PurePhoneNumber' in params ? params.PurePhoneNumber : null;
+        this.PhoneNumber = 'PhoneNumber' in params ? params.PhoneNumber : null;
+        this.SerialNo = 'SerialNo' in params ? params.SerialNo : null;
+        this.ReportStatus = 'ReportStatus' in params ? params.ReportStatus : null;
+        this.Description = 'Description' in params ? params.Description : null;
+
+    }
+}
+
+/**
+ * 回执数据统计响应包体
+ * @class
+ */
+class CallbackStatusStatistics extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 短信回执量统计
+         * @type {number || null}
+         */
+        this.CallbackCount = null;
+
+        /**
+         * 短信提交成功量统计
+         * @type {number || null}
+         */
+        this.RequestSuccessCount = null;
+
+        /**
+         * 短信回执失败量统计
+         * @type {number || null}
+         */
+        this.CallbackFailCount = null;
+
+        /**
+         * 短信回执成功量统计
+         * @type {number || null}
+         */
+        this.CallbackSuccessCount = null;
+
+        /**
+         * 运营商内部错误统计
+         * @type {number || null}
+         */
+        this.InternalErrorCount = null;
+
+        /**
+         * 号码无效或空号统计
+         * @type {number || null}
+         */
+        this.InvalidNumberCount = null;
+
+        /**
+         * 停机、关机等错误统计
+         * @type {number || null}
+         */
+        this.ShutdownErrorCount = null;
+
+        /**
+         * 号码拉入黑名单统计
+         * @type {number || null}
+         */
+        this.BlackListCount = null;
+
+        /**
+         * 运营商频率限制统计
+         * @type {number || null}
+         */
+        this.FrequencyLimitCount = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CallbackCount = 'CallbackCount' in params ? params.CallbackCount : null;
+        this.RequestSuccessCount = 'RequestSuccessCount' in params ? params.RequestSuccessCount : null;
+        this.CallbackFailCount = 'CallbackFailCount' in params ? params.CallbackFailCount : null;
+        this.CallbackSuccessCount = 'CallbackSuccessCount' in params ? params.CallbackSuccessCount : null;
+        this.InternalErrorCount = 'InternalErrorCount' in params ? params.InternalErrorCount : null;
+        this.InvalidNumberCount = 'InvalidNumberCount' in params ? params.InvalidNumberCount : null;
+        this.ShutdownErrorCount = 'ShutdownErrorCount' in params ? params.ShutdownErrorCount : null;
+        this.BlackListCount = 'BlackListCount' in params ? params.BlackListCount : null;
+        this.FrequencyLimitCount = 'FrequencyLimitCount' in params ? params.FrequencyLimitCount : null;
+
+    }
+}
+
+/**
+ * SendStatusStatistics请求参数结构体
+ * @class
+ */
+class SendStatusStatisticsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 最大上限
+注：目前固定设置为0
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 偏移量
+注：目前固定设置为0
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 拉取起始时间，yyyymmddhh 需要拉取的起始时间，精确到小时
+         * @type {number || null}
+         */
+        this.StartDateTime = null;
+
+        /**
+         * 结束时间，yyyymmddhh 需要拉取的截止时间，精确到小时
+注：EndDataTime 必须大于StartDateTime
+         * @type {number || null}
+         */
+        this.EndDataTime = null;
+
+        /**
+         * 短信SdkAppid在[短信控制台](https://console.cloud.tencent.com/sms/smslist) 添加应用后生成的实际SdkAppid,示例如1400006666。
+         * @type {string || null}
+         */
+        this.SmsSdkAppid = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.StartDateTime = 'StartDateTime' in params ? params.StartDateTime : null;
+        this.EndDataTime = 'EndDataTime' in params ? params.EndDataTime : null;
+        this.SmsSdkAppid = 'SmsSdkAppid' in params ? params.SmsSdkAppid : null;
+
+    }
+}
+
+/**
+ * PullSmsReplyStatusByPhoneNumber返回参数结构体
+ * @class
+ */
+class PullSmsReplyStatusByPhoneNumberResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 回复状态响应集合
+         * @type {Array.<PullSmsReplyStatus> || null}
+         */
+        this.PullSmsReplyStatusSet = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.PullSmsReplyStatusSet) {
+            this.PullSmsReplyStatusSet = new Array();
+            for (let z in params.PullSmsReplyStatusSet) {
+                let obj = new PullSmsReplyStatus();
+                obj.deserialize(params.PullSmsReplyStatusSet[z]);
+                this.PullSmsReplyStatusSet.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CallbackStatusStatistics请求参数结构体
+ * @class
+ */
+class CallbackStatusStatisticsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 最大上限
+注：目前固定设置为0
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 偏移量
+注：目前固定设置为0
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 开始时间，yyyymmddhh 需要拉取的起始时间，精确到小时
+         * @type {number || null}
+         */
+        this.StartDateTime = null;
+
+        /**
+         * 结束时间，yyyymmddhh 需要拉取的截止时间，精确到小时
+注：EndDataTime 必须大于StartDateTime
+         * @type {number || null}
+         */
+        this.EndDataTime = null;
+
+        /**
+         * 短信SdkAppid在[短信控制台](https://console.cloud.tencent.com/sms/smslist) 添加应用后生成的实际SdkAppid,示例如1400006666。
+         * @type {string || null}
+         */
+        this.SmsSdkAppid = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.StartDateTime = 'StartDateTime' in params ? params.StartDateTime : null;
+        this.EndDataTime = 'EndDataTime' in params ? params.EndDataTime : null;
+        this.SmsSdkAppid = 'SmsSdkAppid' in params ? params.SmsSdkAppid : null;
+
+    }
+}
+
+/**
+ * PullSmsReplyStatusByPhoneNumber请求参数结构体
+ * @class
+ */
+class PullSmsReplyStatusByPhoneNumberRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 拉取起始时间，UNIX 时间戳（时间：秒）
+         * @type {string || null}
+         */
+        this.SendDateTime = null;
+
+        /**
+         * 偏移量
+注：目前固定设置为0
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 拉取最大条数，最多 100
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 下发目的手机号码，依据 e.164 标准为：+[国家（或地区）码][手机号] ，示例如：+8613711112222， 其中前面有一个+号 ，86为国家码，13711112222为手机号。
+         * @type {string || null}
+         */
+        this.PhoneNumber = null;
+
+        /**
+         * 短信SdkAppid在[短信控制台](https://console.cloud.tencent.com/sms/smslist) 添加应用后生成的实际SdkAppid,示例如1400006666。
+         * @type {string || null}
+         */
+        this.SmsSdkAppid = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SendDateTime = 'SendDateTime' in params ? params.SendDateTime : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.PhoneNumber = 'PhoneNumber' in params ? params.PhoneNumber : null;
+        this.SmsSdkAppid = 'SmsSdkAppid' in params ? params.SmsSdkAppid : null;
+
+    }
+}
+
+/**
+ * 发送数据统计响应包体
+ * @class
+ */
+class SendStatusStatistics extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 短信计费条数统计，例如提交成功量为100条，其中有20条是长短信（长度为80字）被拆分成2条，则计费条数为： ```80 * 1 + 20 * 2 = 120``` 条
+         * @type {number || null}
+         */
+        this.BillingStatistics = null;
+
+        /**
+         * 短信提交量统计
+         * @type {number || null}
+         */
+        this.RequestStatistics = null;
+
+        /**
+         * 短信提交成功量统计
+         * @type {number || null}
+         */
+        this.RequestSuccessStatistics = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.BillingStatistics = 'BillingStatistics' in params ? params.BillingStatistics : null;
+        this.RequestStatistics = 'RequestStatistics' in params ? params.RequestStatistics : null;
+        this.RequestSuccessStatistics = 'RequestSuccessStatistics' in params ? params.RequestSuccessStatistics : null;
+
+    }
+}
+
+/**
  * PullSmsSendStatus返回参数结构体
  * @class
  */
@@ -690,19 +1092,114 @@ class PullSmsSendStatusResponse extends  AbstractModel {
     }
 }
 
+/**
+ * SmsPackagesStatistics返回参数结构体
+ * @class
+ */
+class SmsPackagesStatisticsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 发送数据统计响应包体
+         * @type {Array.<SmsPackagesStatistics> || null}
+         */
+        this.SmsPackagesStatisticsSet = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.SmsPackagesStatisticsSet) {
+            this.SmsPackagesStatisticsSet = new Array();
+            for (let z in params.SmsPackagesStatisticsSet) {
+                let obj = new SmsPackagesStatistics();
+                obj.deserialize(params.SmsPackagesStatisticsSet[z]);
+                this.SmsPackagesStatisticsSet.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * PullSmsReplyStatus返回参数结构体
+ * @class
+ */
+class PullSmsReplyStatusResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 回复状态响应集合
+         * @type {Array.<PullSmsReplyStatus> || null}
+         */
+        this.PullSmsReplyStatusSet = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.PullSmsReplyStatusSet) {
+            this.PullSmsReplyStatusSet = new Array();
+            for (let z in params.PullSmsReplyStatusSet) {
+                let obj = new PullSmsReplyStatus();
+                obj.deserialize(params.PullSmsReplyStatusSet[z]);
+                this.PullSmsReplyStatusSet.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
 module.exports = {
     PullSmsReplyStatusRequest: PullSmsReplyStatusRequest,
-    PullSmsReplyStatusByPhoneNumberRequest: PullSmsReplyStatusByPhoneNumberRequest,
-    PullSmsSendStatus: PullSmsSendStatus,
+    SmsPackagesStatisticsRequest: SmsPackagesStatisticsRequest,
+    PullSmsSendStatusByPhoneNumberRequest: PullSmsSendStatusByPhoneNumberRequest,
+    CallbackStatusStatisticsResponse: CallbackStatusStatisticsResponse,
     PullSmsSendStatusRequest: PullSmsSendStatusRequest,
+    SmsPackagesStatistics: SmsPackagesStatistics,
     PullSmsSendStatusByPhoneNumberResponse: PullSmsSendStatusByPhoneNumberResponse,
     PullSmsReplyStatus: PullSmsReplyStatus,
     SendSmsResponse: SendSmsResponse,
-    PullSmsSendStatusByPhoneNumberRequest: PullSmsSendStatusByPhoneNumberRequest,
+    SendStatusStatisticsResponse: SendStatusStatisticsResponse,
     SendSmsRequest: SendSmsRequest,
-    PullSmsReplyStatusResponse: PullSmsReplyStatusResponse,
-    PullSmsReplyStatusByPhoneNumberResponse: PullSmsReplyStatusByPhoneNumberResponse,
     SendStatus: SendStatus,
+    PullSmsSendStatus: PullSmsSendStatus,
+    CallbackStatusStatistics: CallbackStatusStatistics,
+    SendStatusStatisticsRequest: SendStatusStatisticsRequest,
+    PullSmsReplyStatusByPhoneNumberResponse: PullSmsReplyStatusByPhoneNumberResponse,
+    CallbackStatusStatisticsRequest: CallbackStatusStatisticsRequest,
+    PullSmsReplyStatusByPhoneNumberRequest: PullSmsReplyStatusByPhoneNumberRequest,
+    SendStatusStatistics: SendStatusStatistics,
     PullSmsSendStatusResponse: PullSmsSendStatusResponse,
+    SmsPackagesStatisticsResponse: SmsPackagesStatisticsResponse,
+    PullSmsReplyStatusResponse: PullSmsReplyStatusResponse,
 
 }
