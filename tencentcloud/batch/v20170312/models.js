@@ -1623,19 +1623,37 @@ class EnvDataCpm extends  AbstractModel {
         super();
 
         /**
-         * 黑石可用区列表。可通过黑石[DescribeRegions](https://cloud.tencent.com/document/api/386/33564)接口查询。目前仅支持一个可用区。
+         * 黑石可用区名称列表。如ap-guangzhou-bls-1, 可通过黑石接口[DescribeRegions]( https://cloud.tencent.com/document/api/386/33564)接口获取。不是Batch可用区名称。目前仅支持一个可用区名称。
          * @type {Array.<string> || null}
          */
         this.Zones = null;
 
         /**
-         * 黑石计算单元类型列表。如v3.c2.medium，更详细的ComputeType参考[黑石竞价实例产品文档](https://cloud.tencent.com/document/product/386/30256)。目前仅支持一个计算单元类型。
+         * 购买的机型ID。通过黑石接口[DescribeDeviceClass]( https://cloud.tencent.com/document/api/386/32911)查询设备型号，获取机型信息。
          * @type {Array.<string> || null}
          */
-        this.ComputeTypes = null;
+        this.InstanceTypes = null;
 
         /**
-         * 黑石操作系统类型ID。
+         * 购买时长单位，取值：m(月)。
+         * @type {string || null}
+         */
+        this.TimeUnit = null;
+
+        /**
+         * 购买时长。
+         * @type {number || null}
+         */
+        this.TimeSpan = null;
+
+        /**
+         * RAID类型ID。通过黑石接口[DescribeDeviceClassPartition]( https://cloud.tencent.com/document/api/386/32910)查询机型RAID方式以及系统盘大小，获取RAID信息。
+         * @type {number || null}
+         */
+        this.RaidId = null;
+
+        /**
+         * 部署服务器的操作系统ID。通过黑石接口[DescribeOsInfo]( https://cloud.tencent.com/document/product/386/32902)查询操作系统信息。
          * @type {number || null}
          */
         this.OsTypeId = null;
@@ -1647,22 +1665,88 @@ class EnvDataCpm extends  AbstractModel {
         this.VirtualPrivateClouds = null;
 
         /**
-         * DeployType参数值为fast时，将选取黑石预部署机器发货，发货快。如果无此参数，则选取黑石常规机器发货。
-         * @type {string || null}
+         * 是否安装安全Agent，取值：1(安装) 0(不安装)，默认取值0。
+         * @type {number || null}
          */
-        this.DeployType = null;
+        this.NeedSecurityAgent = null;
 
         /**
-         * 出价策略。默认取值为SpotAsPriceGo，表示出价方式为随市场价的策略。目前只可取值SpotAsPriceGo。
-         * @type {string || null}
+         * 是否安装监控Agent，取值：1(安装) 0(不安装)，默认取值0。
+         * @type {number || null}
          */
-        this.SpotStrategy = null;
+        this.NeedMonitorAgent = null;
 
         /**
-         * 设置黑石竞价实例密码。若不指定会生成随机密码，可到站内信中查看。
+         * 自动续费标志位，取值：1(自动续费) 0(不自动续费)，默认取值0。
+         * @type {number || null}
+         */
+        this.AutoRenewFlag = null;
+
+        /**
+         * 数据盘是否格式化，取值：1(格式化) 0(不格式化)，默认取值为1。
+         * @type {number || null}
+         */
+        this.IsZoning = null;
+
+        /**
+         * 指定数据盘的文件系统格式，当前支持 ext4和xfs选项， 默认为ext4。 参数适用于数据盘和Linux， 且在IsZoning为1时生效。
          * @type {string || null}
          */
-        this.Passwd = null;
+        this.FileSystem = null;
+
+        /**
+         * 设置Linux root或Windows Administrator的密码。若不设置此参数，默认情况下会随机生成密码，并以站内信方式通知到用户。
+         * @type {string || null}
+         */
+        this.Password = null;
+
+        /**
+         * 是否分配弹性公网IP，取值：1(分配) 0(不分配)，默认取值0。
+         * @type {number || null}
+         */
+        this.ApplyEip = null;
+
+        /**
+         * 弹性公网IP计费模式，取值：flow(按流量计费) bandwidth(按带宽计费)，默认取值flow。
+         * @type {string || null}
+         */
+        this.EipPayMode = null;
+
+        /**
+         * 弹性公网IP带宽限制，单位Mb。
+         * @type {number || null}
+         */
+        this.EipBandwidth = null;
+
+        /**
+         * 自定义镜像ID，取值生效时用自定义镜像部署物理机。
+         * @type {string || null}
+         */
+        this.ImageId = null;
+
+        /**
+         * 系统盘根分区大小，单位为G，默认取值10G。通过黑石接口[DescribeDeviceClassPartition]( https://cloud.tencent.com/document/api/386/32910)查询机型RAID方式以及系统盘大小，获取根分区信息。
+         * @type {number || null}
+         */
+        this.SysRootSpace = null;
+
+        /**
+         * /data分区大小，单位为G。如果系统盘还有剩余大小，会分配给/data分区。（特殊情况：如果剩余空间不足10G，并且没有指定/data分区，则剩余空间会分配给Root分区）。
+         * @type {number || null}
+         */
+        this.SysDataSpace = null;
+
+        /**
+         * 是否开启超线程，取值：1(开启) 0(关闭)，默认取值1。
+         * @type {number || null}
+         */
+        this.HyperThreading = null;
+
+        /**
+         * 指定的内网IP列表，不指定时自动分配。
+         * @type {Array.<string> || null}
+         */
+        this.LanIps = null;
 
     }
 
@@ -1674,7 +1758,10 @@ class EnvDataCpm extends  AbstractModel {
             return;
         }
         this.Zones = 'Zones' in params ? params.Zones : null;
-        this.ComputeTypes = 'ComputeTypes' in params ? params.ComputeTypes : null;
+        this.InstanceTypes = 'InstanceTypes' in params ? params.InstanceTypes : null;
+        this.TimeUnit = 'TimeUnit' in params ? params.TimeUnit : null;
+        this.TimeSpan = 'TimeSpan' in params ? params.TimeSpan : null;
+        this.RaidId = 'RaidId' in params ? params.RaidId : null;
         this.OsTypeId = 'OsTypeId' in params ? params.OsTypeId : null;
 
         if (params.VirtualPrivateClouds) {
@@ -1685,9 +1772,20 @@ class EnvDataCpm extends  AbstractModel {
                 this.VirtualPrivateClouds.push(obj);
             }
         }
-        this.DeployType = 'DeployType' in params ? params.DeployType : null;
-        this.SpotStrategy = 'SpotStrategy' in params ? params.SpotStrategy : null;
-        this.Passwd = 'Passwd' in params ? params.Passwd : null;
+        this.NeedSecurityAgent = 'NeedSecurityAgent' in params ? params.NeedSecurityAgent : null;
+        this.NeedMonitorAgent = 'NeedMonitorAgent' in params ? params.NeedMonitorAgent : null;
+        this.AutoRenewFlag = 'AutoRenewFlag' in params ? params.AutoRenewFlag : null;
+        this.IsZoning = 'IsZoning' in params ? params.IsZoning : null;
+        this.FileSystem = 'FileSystem' in params ? params.FileSystem : null;
+        this.Password = 'Password' in params ? params.Password : null;
+        this.ApplyEip = 'ApplyEip' in params ? params.ApplyEip : null;
+        this.EipPayMode = 'EipPayMode' in params ? params.EipPayMode : null;
+        this.EipBandwidth = 'EipBandwidth' in params ? params.EipBandwidth : null;
+        this.ImageId = 'ImageId' in params ? params.ImageId : null;
+        this.SysRootSpace = 'SysRootSpace' in params ? params.SysRootSpace : null;
+        this.SysDataSpace = 'SysDataSpace' in params ? params.SysDataSpace : null;
+        this.HyperThreading = 'HyperThreading' in params ? params.HyperThreading : null;
+        this.LanIps = 'LanIps' in params ? params.LanIps : null;
 
     }
 }
@@ -1948,6 +2046,12 @@ class LocalDiskType extends  AbstractModel {
          */
         this.MaxSize = null;
 
+        /**
+         * 购买时本地盘是否为必选。取值范围：<br><li>REQUIRED：表示必选<br><li>OPTIONAL：表示可选。
+         * @type {string || null}
+         */
+        this.Required = null;
+
     }
 
     /**
@@ -1961,6 +2065,7 @@ class LocalDiskType extends  AbstractModel {
         this.PartitionType = 'PartitionType' in params ? params.PartitionType : null;
         this.MinSize = 'MinSize' in params ? params.MinSize : null;
         this.MaxSize = 'MaxSize' in params ? params.MaxSize : null;
+        this.Required = 'Required' in params ? params.Required : null;
 
     }
 }
@@ -2922,7 +3027,7 @@ class NamedCpmComputeEnv extends  AbstractModel {
         this.EnvDescription = null;
 
         /**
-         * 计算环境管理类型
+         * 计算环境管理类型， 取值MANAGED。
          * @type {string || null}
          */
         this.EnvType = null;

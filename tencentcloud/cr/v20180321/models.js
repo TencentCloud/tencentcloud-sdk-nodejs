@@ -122,7 +122,7 @@ class DescribeTaskStatusResponse extends  AbstractModel {
         this.TaskResult = null;
 
         /**
-         * <p>任务类型：</p><ul style="margin-bottom:0px;"><li>催收数据上传：002</li><li>还款数据上传：003</li><li>回访数据上传：004</li><li>停拨数据上传：005</li></ul>
+         * <p>任务类型：</p><ul style="margin-bottom:0px;"><li>到期/逾期提醒数据上传：002</li><li>到期/逾期提醒停拨数据上传：003</li><li>回访数据上传：004</li><li>回访停拨数据上传：005</li></ul>
          * @type {string || null}
          */
         this.TaskType = null;
@@ -886,21 +886,21 @@ class DownloadReportResponse extends  AbstractModel {
         super();
 
         /**
-         * 催收日报下载地址
+         * 到期/逾期提醒日报下载地址
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.DailyReportUrl = null;
 
         /**
-         * 催收结果下载地址
+         * 到期/逾期提醒结果下载地址
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.ResultReportUrl = null;
 
         /**
-         * 催收明细下载地址
+         * 到期/逾期提醒明细下载地址
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
@@ -1015,7 +1015,7 @@ class UploadDataFileRequest extends  AbstractModel {
         this.FileName = null;
 
         /**
-         * <p>上传类型，不填默认催收文件，取值范围：</p><ul style="margin-bottom:0px;"><li>data：入催文件</li><li>repay：还款文件</li><li>callback：回访文件</li><li>callstop：回访停拨文件</li></ul>
+         * <p>上传类型，不填默认到期/逾期提醒文件，取值范围：</p><ul style="margin-bottom:0px;"><li>data：到期/逾期提醒文件</li><li>repay：到期/逾期提醒停拨文件</li><li>callback：回访文件</li><li>callstop：回访停拨文件</li></ul>
          * @type {string || null}
          */
         this.UploadModel = null;

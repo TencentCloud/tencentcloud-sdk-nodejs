@@ -95,18 +95,6 @@ class MonitorsDetail extends  AbstractModel {
         super();
 
         /**
-         * 监控任务包含的站点列表的平均扫描进度。
-         * @type {number || null}
-         */
-        this.Progress = null;
-
-        /**
-         * 扫描页面总数。
-         * @type {number || null}
-         */
-        this.PageCount = null;
-
-        /**
          * 监控任务基础信息。
          * @type {Monitor || null}
          */
@@ -160,6 +148,24 @@ class MonitorsDetail extends  AbstractModel {
          */
         this.VulsNoticeNumber = null;
 
+        /**
+         * 监控任务包含的站点列表的平均扫描进度。
+         * @type {number || null}
+         */
+        this.Progress = null;
+
+        /**
+         * 扫描页面总数。
+         * @type {number || null}
+         */
+        this.PageCount = null;
+
+        /**
+         * 内容检测数量。
+         * @type {number || null}
+         */
+        this.ContentNumber = null;
+
     }
 
     /**
@@ -169,8 +175,6 @@ class MonitorsDetail extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Progress = 'Progress' in params ? params.Progress : null;
-        this.PageCount = 'PageCount' in params ? params.PageCount : null;
 
         if (params.Basic) {
             let obj = new Monitor();
@@ -201,6 +205,9 @@ class MonitorsDetail extends  AbstractModel {
         this.VulsMiddleNumber = 'VulsMiddleNumber' in params ? params.VulsMiddleNumber : null;
         this.VulsLowNumber = 'VulsLowNumber' in params ? params.VulsLowNumber : null;
         this.VulsNoticeNumber = 'VulsNoticeNumber' in params ? params.VulsNoticeNumber : null;
+        this.Progress = 'Progress' in params ? params.Progress : null;
+        this.PageCount = 'PageCount' in params ? params.PageCount : null;
+        this.ContentNumber = 'ContentNumber' in params ? params.ContentNumber : null;
 
     }
 }
@@ -226,7 +233,7 @@ class DescribeSitesResponse extends  AbstractModel {
         this.Sites = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -276,7 +283,7 @@ class DescribeMonitorsResponse extends  AbstractModel {
         this.TotalCount = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -427,7 +434,7 @@ class ModifyConfigAttributeResponse extends  AbstractModel {
         super();
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -461,7 +468,13 @@ class CreateSitesResponse extends  AbstractModel {
         this.Number = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 站点数组
+         * @type {Array.<MiniSite> || null}
+         */
+        this.Sites = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -476,6 +489,15 @@ class CreateSitesResponse extends  AbstractModel {
             return;
         }
         this.Number = 'Number' in params ? params.Number : null;
+
+        if (params.Sites) {
+            this.Sites = new Array();
+            for (let z in params.Sites) {
+                let obj = new MiniSite();
+                obj.deserialize(params.Sites[z]);
+                this.Sites.push(obj);
+            }
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -511,7 +533,7 @@ class ModifyMonitorAttributeResponse extends  AbstractModel {
         super();
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -539,7 +561,7 @@ class ModifySiteAttributeResponse extends  AbstractModel {
         super();
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -602,7 +624,7 @@ class CreateSitesScansResponse extends  AbstractModel {
         super();
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -628,30 +650,6 @@ class CreateSitesScansResponse extends  AbstractModel {
 class SitesVerification extends  AbstractModel {
     constructor(){
         super();
-
-        /**
-         * ID。
-         * @type {number || null}
-         */
-        this.Id = null;
-
-        /**
-         * 云用户appid
-         * @type {number || null}
-         */
-        this.Appid = null;
-
-        /**
-         * 用于验证站点的url，即访问该url获取验证数据。
-         * @type {string || null}
-         */
-        this.VerifyUrl = null;
-
-        /**
-         * 获取验证验证文件的url。
-         * @type {string || null}
-         */
-        this.VerifyFileUrl = null;
 
         /**
          * 根域名。
@@ -695,6 +693,30 @@ class SitesVerification extends  AbstractModel {
          */
         this.UpdatedAt = null;
 
+        /**
+         * ID。
+         * @type {number || null}
+         */
+        this.Id = null;
+
+        /**
+         * 云用户appid
+         * @type {number || null}
+         */
+        this.Appid = null;
+
+        /**
+         * 用于验证站点的url，即访问该url获取验证数据。
+         * @type {string || null}
+         */
+        this.VerifyUrl = null;
+
+        /**
+         * 获取验证验证文件的url。
+         * @type {string || null}
+         */
+        this.VerifyFileUrl = null;
+
     }
 
     /**
@@ -704,10 +726,6 @@ class SitesVerification extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Id = 'Id' in params ? params.Id : null;
-        this.Appid = 'Appid' in params ? params.Appid : null;
-        this.VerifyUrl = 'VerifyUrl' in params ? params.VerifyUrl : null;
-        this.VerifyFileUrl = 'VerifyFileUrl' in params ? params.VerifyFileUrl : null;
         this.Domain = 'Domain' in params ? params.Domain : null;
         this.TxtName = 'TxtName' in params ? params.TxtName : null;
         this.TxtText = 'TxtText' in params ? params.TxtText : null;
@@ -715,6 +733,10 @@ class SitesVerification extends  AbstractModel {
         this.VerifyStatus = 'VerifyStatus' in params ? params.VerifyStatus : null;
         this.CreatedAt = 'CreatedAt' in params ? params.CreatedAt : null;
         this.UpdatedAt = 'UpdatedAt' in params ? params.UpdatedAt : null;
+        this.Id = 'Id' in params ? params.Id : null;
+        this.Appid = 'Appid' in params ? params.Appid : null;
+        this.VerifyUrl = 'VerifyUrl' in params ? params.VerifyUrl : null;
+        this.VerifyFileUrl = 'VerifyFileUrl' in params ? params.VerifyFileUrl : null;
 
     }
 }
@@ -746,7 +768,7 @@ class DescribeSiteQuotaResponse extends  AbstractModel {
         this.Available = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -831,7 +853,7 @@ class DescribeVulsNumberResponse extends  AbstractModel {
         this.ImpactSites = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -1010,7 +1032,7 @@ class CreateMonitorsResponse extends  AbstractModel {
         super();
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -1050,7 +1072,7 @@ class DescribeVulsResponse extends  AbstractModel {
         this.Vuls = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -1100,7 +1122,7 @@ class VerifySitesResponse extends  AbstractModel {
         this.FailNumber = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -1193,7 +1215,7 @@ class DeleteMonitorsResponse extends  AbstractModel {
         super();
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -1219,12 +1241,6 @@ class DeleteMonitorsResponse extends  AbstractModel {
 class Monitor extends  AbstractModel {
     constructor(){
         super();
-
-        /**
-         * 云用户appid。
-         * @type {number || null}
-         */
-        this.Appid = null;
 
         /**
          * 监控任务ID。
@@ -1304,6 +1320,18 @@ class Monitor extends  AbstractModel {
          */
         this.UpdatedAt = null;
 
+        /**
+         * 云用户appid。
+         * @type {number || null}
+         */
+        this.Appid = null;
+
+        /**
+         * 扫描状态：0-待检测；1-检测完成
+         * @type {number || null}
+         */
+        this.ContentScanStatus = null;
+
     }
 
     /**
@@ -1313,7 +1341,6 @@ class Monitor extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Appid = 'Appid' in params ? params.Appid : null;
         this.Id = 'Id' in params ? params.Id : null;
         this.Name = 'Name' in params ? params.Name : null;
         this.MonitorStatus = 'MonitorStatus' in params ? params.MonitorStatus : null;
@@ -1327,6 +1354,8 @@ class Monitor extends  AbstractModel {
         this.CurrentScanStartTime = 'CurrentScanStartTime' in params ? params.CurrentScanStartTime : null;
         this.CreatedAt = 'CreatedAt' in params ? params.CreatedAt : null;
         this.UpdatedAt = 'UpdatedAt' in params ? params.UpdatedAt : null;
+        this.Appid = 'Appid' in params ? params.Appid : null;
+        this.ContentScanStatus = 'ContentScanStatus' in params ? params.ContentScanStatus : null;
 
     }
 }
@@ -1338,24 +1367,6 @@ class Monitor extends  AbstractModel {
 class Vul extends  AbstractModel {
     constructor(){
         super();
-
-        /**
-         * 是否已经添加误报，0-否，1-是。
-         * @type {number || null}
-         */
-        this.IsReported = null;
-
-        /**
-         * 云用户appid。
-         * @type {number || null}
-         */
-        this.Appid = null;
-
-        /**
-         * 云用户标识。
-         * @type {string || null}
-         */
-        this.Uin = null;
 
         /**
          * 漏洞ID。
@@ -1447,6 +1458,24 @@ class Vul extends  AbstractModel {
          */
         this.UpdatedAt = null;
 
+        /**
+         * 是否已经添加误报，0-否，1-是。
+         * @type {number || null}
+         */
+        this.IsReported = null;
+
+        /**
+         * 云用户appid。
+         * @type {number || null}
+         */
+        this.Appid = null;
+
+        /**
+         * 云用户标识。
+         * @type {string || null}
+         */
+        this.Uin = null;
+
     }
 
     /**
@@ -1456,9 +1485,6 @@ class Vul extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.IsReported = 'IsReported' in params ? params.IsReported : null;
-        this.Appid = 'Appid' in params ? params.Appid : null;
-        this.Uin = 'Uin' in params ? params.Uin : null;
         this.Id = 'Id' in params ? params.Id : null;
         this.SiteId = 'SiteId' in params ? params.SiteId : null;
         this.TaskId = 'TaskId' in params ? params.TaskId : null;
@@ -1474,6 +1500,9 @@ class Vul extends  AbstractModel {
         this.Parameter = 'Parameter' in params ? params.Parameter : null;
         this.CreatedAt = 'CreatedAt' in params ? params.CreatedAt : null;
         this.UpdatedAt = 'UpdatedAt' in params ? params.UpdatedAt : null;
+        this.IsReported = 'IsReported' in params ? params.IsReported : null;
+        this.Appid = 'Appid' in params ? params.Appid : null;
+        this.Uin = 'Uin' in params ? params.Uin : null;
 
     }
 }
@@ -1592,7 +1621,7 @@ class CreateVulsMisinformationResponse extends  AbstractModel {
         super();
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -1635,6 +1664,41 @@ class VerifySitesRequest extends  AbstractModel {
             return;
         }
         this.Urls = 'Urls' in params ? params.Urls : null;
+
+    }
+}
+
+/**
+ * 站点信息。
+ * @class
+ */
+class MiniSite extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 站点ID。
+         * @type {number || null}
+         */
+        this.SiteId = null;
+
+        /**
+         * 站点Url。
+         * @type {string || null}
+         */
+        this.Url = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SiteId = 'SiteId' in params ? params.SiteId : null;
+        this.Url = 'Url' in params ? params.Url : null;
 
     }
 }
@@ -1737,7 +1801,7 @@ class DescribeVulsNumberTimelineResponse extends  AbstractModel {
         this.VulsTimeline = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -1781,7 +1845,7 @@ class CreateVulsReportResponse extends  AbstractModel {
         this.ReportFileUrl = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -1968,7 +2032,7 @@ class DeleteSitesResponse extends  AbstractModel {
         super();
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -2036,7 +2100,7 @@ class DescribeSitesVerificationResponse extends  AbstractModel {
         this.SitesVerification = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -2072,66 +2136,6 @@ class DescribeSitesVerificationResponse extends  AbstractModel {
 class Site extends  AbstractModel {
     constructor(){
         super();
-
-        /**
-         * 扫描进度，百分比整数
-         * @type {number || null}
-         */
-        this.Progress = null;
-
-        /**
-         * 云用户appid。
-         * @type {number || null}
-         */
-        this.Appid = null;
-
-        /**
-         * 云用户标识。
-         * @type {string || null}
-         */
-        this.Uin = null;
-
-        /**
-         * 网站是否需要登录扫描：0-未知；-1-不需要；1-需要。
-         * @type {number || null}
-         */
-        this.NeedLogin = null;
-
-        /**
-         * 登录后的cookie。
-         * @type {string || null}
-         */
-        this.LoginCookie = null;
-
-        /**
-         * 登录后的cookie是否有效：0-无效；1-有效。
-         * @type {number || null}
-         */
-        this.LoginCookieValid = null;
-
-        /**
-         * 用于测试cookie是否有效的URL。
-         * @type {string || null}
-         */
-        this.LoginCheckUrl = null;
-
-        /**
-         * 用于测试cookie是否有效的关键字。
-         * @type {string || null}
-         */
-        this.LoginCheckKw = null;
-
-        /**
-         * 禁止扫描器扫描的目录关键字。
-         * @type {string || null}
-         */
-        this.ScanDisallow = null;
-
-        /**
-         * 访问网站的客户端标识。
-         * @type {string || null}
-         */
-        this.UserAgent = null;
 
         /**
          * 站点ID。
@@ -2265,6 +2269,78 @@ class Site extends  AbstractModel {
          */
         this.LastScanNoticeNum = null;
 
+        /**
+         * 扫描进度，百分比整数
+         * @type {number || null}
+         */
+        this.Progress = null;
+
+        /**
+         * 云用户appid。
+         * @type {number || null}
+         */
+        this.Appid = null;
+
+        /**
+         * 云用户标识。
+         * @type {string || null}
+         */
+        this.Uin = null;
+
+        /**
+         * 网站是否需要登录扫描：0-未知；-1-不需要；1-需要。
+         * @type {number || null}
+         */
+        this.NeedLogin = null;
+
+        /**
+         * 登录后的cookie。
+         * @type {string || null}
+         */
+        this.LoginCookie = null;
+
+        /**
+         * 登录后的cookie是否有效：0-无效；1-有效。
+         * @type {number || null}
+         */
+        this.LoginCookieValid = null;
+
+        /**
+         * 用于测试cookie是否有效的URL。
+         * @type {string || null}
+         */
+        this.LoginCheckUrl = null;
+
+        /**
+         * 用于测试cookie是否有效的关键字。
+         * @type {string || null}
+         */
+        this.LoginCheckKw = null;
+
+        /**
+         * 禁止扫描器扫描的目录关键字。
+         * @type {string || null}
+         */
+        this.ScanDisallow = null;
+
+        /**
+         * 访问网站的客户端标识。
+         * @type {string || null}
+         */
+        this.UserAgent = null;
+
+        /**
+         * 内容检测状态：0-未检测；1-已检测；
+         * @type {number || null}
+         */
+        this.ContentStatus = null;
+
+        /**
+         * 最近一次扫描内容检测数量
+         * @type {number || null}
+         */
+        this.LastScanContentNum = null;
+
     }
 
     /**
@@ -2274,16 +2350,6 @@ class Site extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Progress = 'Progress' in params ? params.Progress : null;
-        this.Appid = 'Appid' in params ? params.Appid : null;
-        this.Uin = 'Uin' in params ? params.Uin : null;
-        this.NeedLogin = 'NeedLogin' in params ? params.NeedLogin : null;
-        this.LoginCookie = 'LoginCookie' in params ? params.LoginCookie : null;
-        this.LoginCookieValid = 'LoginCookieValid' in params ? params.LoginCookieValid : null;
-        this.LoginCheckUrl = 'LoginCheckUrl' in params ? params.LoginCheckUrl : null;
-        this.LoginCheckKw = 'LoginCheckKw' in params ? params.LoginCheckKw : null;
-        this.ScanDisallow = 'ScanDisallow' in params ? params.ScanDisallow : null;
-        this.UserAgent = 'UserAgent' in params ? params.UserAgent : null;
         this.Id = 'Id' in params ? params.Id : null;
         this.MonitorId = 'MonitorId' in params ? params.MonitorId : null;
         this.Url = 'Url' in params ? params.Url : null;
@@ -2306,6 +2372,18 @@ class Site extends  AbstractModel {
         this.LastScanRateLimit = 'LastScanRateLimit' in params ? params.LastScanRateLimit : null;
         this.LastScanVulsNum = 'LastScanVulsNum' in params ? params.LastScanVulsNum : null;
         this.LastScanNoticeNum = 'LastScanNoticeNum' in params ? params.LastScanNoticeNum : null;
+        this.Progress = 'Progress' in params ? params.Progress : null;
+        this.Appid = 'Appid' in params ? params.Appid : null;
+        this.Uin = 'Uin' in params ? params.Uin : null;
+        this.NeedLogin = 'NeedLogin' in params ? params.NeedLogin : null;
+        this.LoginCookie = 'LoginCookie' in params ? params.LoginCookie : null;
+        this.LoginCookieValid = 'LoginCookieValid' in params ? params.LoginCookieValid : null;
+        this.LoginCheckUrl = 'LoginCheckUrl' in params ? params.LoginCheckUrl : null;
+        this.LoginCheckKw = 'LoginCheckKw' in params ? params.LoginCheckKw : null;
+        this.ScanDisallow = 'ScanDisallow' in params ? params.ScanDisallow : null;
+        this.UserAgent = 'UserAgent' in params ? params.UserAgent : null;
+        this.ContentStatus = 'ContentStatus' in params ? params.ContentStatus : null;
+        this.LastScanContentNum = 'LastScanContentNum' in params ? params.LastScanContentNum : null;
 
     }
 }
@@ -2349,7 +2427,13 @@ class DescribeConfigResponse extends  AbstractModel {
         this.Appid = null;
 
         /**
-         * 唯一请求ID，每次请求都会返回。定位问题时需要提供该次请求的RequestId。
+         * 内容检测通知等级-1:通知,0-不通知
+         * @type {number || null}
+         */
+        this.ContentLevel = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
         this.RequestId = null;
@@ -2368,6 +2452,7 @@ class DescribeConfigResponse extends  AbstractModel {
         this.CreatedAt = 'CreatedAt' in params ? params.CreatedAt : null;
         this.UpdatedAt = 'UpdatedAt' in params ? params.UpdatedAt : null;
         this.Appid = 'Appid' in params ? params.Appid : null;
+        this.ContentLevel = 'ContentLevel' in params ? params.ContentLevel : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -2511,6 +2596,7 @@ module.exports = {
     VulsTimeline: VulsTimeline,
     CreateVulsMisinformationResponse: CreateVulsMisinformationResponse,
     VerifySitesRequest: VerifySitesRequest,
+    MiniSite: MiniSite,
     ModifyMonitorAttributeRequest: ModifyMonitorAttributeRequest,
     DescribeVulsNumberTimelineResponse: DescribeVulsNumberTimelineResponse,
     CreateVulsReportResponse: CreateVulsReportResponse,

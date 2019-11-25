@@ -17,18 +17,27 @@
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const PullSmsReplyStatusRequest = models.PullSmsReplyStatusRequest;
-const PullSmsReplyStatusByPhoneNumberRequest = models.PullSmsReplyStatusByPhoneNumberRequest;
-const PullSmsSendStatus = models.PullSmsSendStatus;
+const SmsPackagesStatisticsRequest = models.SmsPackagesStatisticsRequest;
+const PullSmsSendStatusByPhoneNumberRequest = models.PullSmsSendStatusByPhoneNumberRequest;
+const CallbackStatusStatisticsResponse = models.CallbackStatusStatisticsResponse;
 const PullSmsSendStatusRequest = models.PullSmsSendStatusRequest;
+const SmsPackagesStatistics = models.SmsPackagesStatistics;
 const PullSmsSendStatusByPhoneNumberResponse = models.PullSmsSendStatusByPhoneNumberResponse;
 const PullSmsReplyStatus = models.PullSmsReplyStatus;
 const SendSmsResponse = models.SendSmsResponse;
-const PullSmsSendStatusByPhoneNumberRequest = models.PullSmsSendStatusByPhoneNumberRequest;
+const SendStatusStatisticsResponse = models.SendStatusStatisticsResponse;
 const SendSmsRequest = models.SendSmsRequest;
-const PullSmsReplyStatusResponse = models.PullSmsReplyStatusResponse;
-const PullSmsReplyStatusByPhoneNumberResponse = models.PullSmsReplyStatusByPhoneNumberResponse;
 const SendStatus = models.SendStatus;
+const PullSmsSendStatus = models.PullSmsSendStatus;
+const CallbackStatusStatistics = models.CallbackStatusStatistics;
+const SendStatusStatisticsRequest = models.SendStatusStatisticsRequest;
+const PullSmsReplyStatusByPhoneNumberResponse = models.PullSmsReplyStatusByPhoneNumberResponse;
+const CallbackStatusStatisticsRequest = models.CallbackStatusStatisticsRequest;
+const PullSmsReplyStatusByPhoneNumberRequest = models.PullSmsReplyStatusByPhoneNumberRequest;
+const SendStatusStatistics = models.SendStatusStatistics;
 const PullSmsSendStatusResponse = models.PullSmsSendStatusResponse;
+const SmsPackagesStatisticsResponse = models.SmsPackagesStatisticsResponse;
+const PullSmsReplyStatusResponse = models.PullSmsReplyStatusResponse;
 
 
 /**
@@ -41,17 +50,6 @@ class SmsClient extends AbstractClient {
         super("sms.tencentcloudapi.com", "2019-07-11", credential, region, profile);
     }
     
-    /**
-     * 拉取短信回复状态
-     * @param {PullSmsReplyStatusRequest} req
-     * @param {function(string, PullSmsReplyStatusResponse):void} cb
-     * @public
-     */
-    PullSmsReplyStatus(req, cb) {
-        let resp = new PullSmsReplyStatusResponse();
-        this.request("PullSmsReplyStatus", req, resp, cb);
-    }
-
     /**
      * 拉取短信下发状态
      * @param {PullSmsSendStatusRequest} req
@@ -74,6 +72,50 @@ class SmsClient extends AbstractClient {
     SendSms(req, cb) {
         let resp = new SendSmsResponse();
         this.request("SendSms", req, resp, cb);
+    }
+
+    /**
+     * 用户套餐包信息统计
+     * @param {SmsPackagesStatisticsRequest} req
+     * @param {function(string, SmsPackagesStatisticsResponse):void} cb
+     * @public
+     */
+    SmsPackagesStatistics(req, cb) {
+        let resp = new SmsPackagesStatisticsResponse();
+        this.request("SmsPackagesStatistics", req, resp, cb);
+    }
+
+    /**
+     * 统计用户发送短信的数据
+     * @param {SendStatusStatisticsRequest} req
+     * @param {function(string, SendStatusStatisticsResponse):void} cb
+     * @public
+     */
+    SendStatusStatistics(req, cb) {
+        let resp = new SendStatusStatisticsResponse();
+        this.request("SendStatusStatistics", req, resp, cb);
+    }
+
+    /**
+     * 统计用户回执的数据
+     * @param {CallbackStatusStatisticsRequest} req
+     * @param {function(string, CallbackStatusStatisticsResponse):void} cb
+     * @public
+     */
+    CallbackStatusStatistics(req, cb) {
+        let resp = new CallbackStatusStatisticsResponse();
+        this.request("CallbackStatusStatistics", req, resp, cb);
+    }
+
+    /**
+     * 拉取短信回复状态
+     * @param {PullSmsReplyStatusRequest} req
+     * @param {function(string, PullSmsReplyStatusResponse):void} cb
+     * @public
+     */
+    PullSmsReplyStatus(req, cb) {
+        let resp = new PullSmsReplyStatusResponse();
+        this.request("PullSmsReplyStatus", req, resp, cb);
     }
 
     /**
