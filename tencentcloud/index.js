@@ -74,6 +74,7 @@ module.exports = {
     tbaas: require("./tbaas"),
     tbm: require("./tbm"),
     tbp: require("./tbp"),
+    tcaplusdb: require("./tcaplusdb"),
     tcb: require("./tcb"),
     tci: require("./tci"),
     tia: require("./tia"),
