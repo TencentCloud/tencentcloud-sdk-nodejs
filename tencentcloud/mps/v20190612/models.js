@@ -303,7 +303,6 @@ class ModifyWatermarkTemplateRequest extends  AbstractModel {
 <li>TopRight：表示坐标原点位于视频图像的右上角，水印原点为图片或文字的右上角；</li>
 <li>BottomLeft：表示坐标原点位于视频图像的左下角，水印原点为图片或文字的左下角；</li>
 <li>BottomRight：表示坐标原点位于视频图像的右下角，水印原点为图片或文字的右下角。</li>
-目前，当 Type 为 image，该字段仅支持 TopLeft。
          * @type {string || null}
          */
         this.CoordinateOrigin = null;
@@ -1020,6 +1019,119 @@ class DescribeTaskDetailResponse extends  AbstractModel {
         this.SessionId = 'SessionId' in params ? params.SessionId : null;
         this.SessionContext = 'SessionContext' in params ? params.SessionContext : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 直播流 AI 识别结果
+ * @class
+ */
+class LiveStreamAiRecognitionResultItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 结果的类型，取值范围：
+<li>FaceRecognition：人脸识别，</li>
+<li>AsrWordsRecognition：语音关键词识别，</li>
+<li>OcrWordsRecognition：文本关键词识别，</li>
+<li>AsrFullTextRecognition：语音全文识别，</li>
+<li>OcrFullTextRecognition：文本全文识别。</li>
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * 人脸识别结果，当 Type 为
+FaceRecognition 时有效。
+         * @type {Array.<LiveStreamFaceRecognitionResult> || null}
+         */
+        this.FaceRecognitionResultSet = null;
+
+        /**
+         * 语音关键词识别结果，当 Type 为
+AsrWordsRecognition 时有效。
+         * @type {Array.<LiveStreamAsrWordsRecognitionResult> || null}
+         */
+        this.AsrWordsRecognitionResultSet = null;
+
+        /**
+         * 文本关键词识别结果，当 Type 为
+OcrWordsRecognition 时有效。
+         * @type {Array.<LiveStreamOcrWordsRecognitionResult> || null}
+         */
+        this.OcrWordsRecognitionResultSet = null;
+
+        /**
+         * 语音全文识别结果，当 Type 为
+AsrFullTextRecognition 时有效。
+         * @type {Array.<LiveStreamAsrFullTextRecognitionResult> || null}
+         */
+        this.AsrFullTextRecognitionResultSet = null;
+
+        /**
+         * 文本全文识别结果，当 Type 为
+OcrFullTextRecognition 时有效。
+         * @type {Array.<LiveStreamOcrFullTextRecognitionResult> || null}
+         */
+        this.OcrFullTextRecognitionResultSet = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Type = 'Type' in params ? params.Type : null;
+
+        if (params.FaceRecognitionResultSet) {
+            this.FaceRecognitionResultSet = new Array();
+            for (let z in params.FaceRecognitionResultSet) {
+                let obj = new LiveStreamFaceRecognitionResult();
+                obj.deserialize(params.FaceRecognitionResultSet[z]);
+                this.FaceRecognitionResultSet.push(obj);
+            }
+        }
+
+        if (params.AsrWordsRecognitionResultSet) {
+            this.AsrWordsRecognitionResultSet = new Array();
+            for (let z in params.AsrWordsRecognitionResultSet) {
+                let obj = new LiveStreamAsrWordsRecognitionResult();
+                obj.deserialize(params.AsrWordsRecognitionResultSet[z]);
+                this.AsrWordsRecognitionResultSet.push(obj);
+            }
+        }
+
+        if (params.OcrWordsRecognitionResultSet) {
+            this.OcrWordsRecognitionResultSet = new Array();
+            for (let z in params.OcrWordsRecognitionResultSet) {
+                let obj = new LiveStreamOcrWordsRecognitionResult();
+                obj.deserialize(params.OcrWordsRecognitionResultSet[z]);
+                this.OcrWordsRecognitionResultSet.push(obj);
+            }
+        }
+
+        if (params.AsrFullTextRecognitionResultSet) {
+            this.AsrFullTextRecognitionResultSet = new Array();
+            for (let z in params.AsrFullTextRecognitionResultSet) {
+                let obj = new LiveStreamAsrFullTextRecognitionResult();
+                obj.deserialize(params.AsrFullTextRecognitionResultSet[z]);
+                this.AsrFullTextRecognitionResultSet.push(obj);
+            }
+        }
+
+        if (params.OcrFullTextRecognitionResultSet) {
+            this.OcrFullTextRecognitionResultSet = new Array();
+            for (let z in params.OcrFullTextRecognitionResultSet) {
+                let obj = new LiveStreamOcrFullTextRecognitionResult();
+                obj.deserialize(params.OcrFullTextRecognitionResultSet[z]);
+                this.OcrFullTextRecognitionResultSet.push(obj);
+            }
+        }
 
     }
 }
@@ -3315,6 +3427,36 @@ class MediaVideoStreamItem extends  AbstractModel {
 }
 
 /**
+ * 文本全文本识别任务控制参数
+ * @class
+ */
+class OcrFullTextConfigureInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 文本全文识别任务开关，可选值：
+<li>ON：开启智能文本全文识别任务；</li>
+<li>OFF：关闭智能文本全文识别任务。</li>
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+
+    }
+}
+
+/**
  * 时间点截图模板详情
  * @class
  */
@@ -4044,6 +4186,50 @@ class AiSampleWord extends  AbstractModel {
 }
 
 /**
+ * 文本鉴政任务控制参数
+ * @class
+ */
+class PoliticalOcrReviewTemplateInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 文本鉴政任务开关，可选值：
+<li>ON：开启文本鉴政任务；</li>
+<li>OFF：关闭文本鉴政任务。</li>
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+        /**
+         * 判定涉嫌违规的分数阈值，当智能审核达到该分数以上，认为涉嫌违规，不填默认为 100 分。取值范围：0~100。
+         * @type {number || null}
+         */
+        this.BlockConfidence = null;
+
+        /**
+         * 判定需人工复核是否违规的分数阈值，当智能审核达到该分数以上，认为需人工复核，不填默认为 75 分。取值范围：0~100。
+         * @type {number || null}
+         */
+        this.ReviewConfidence = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+        this.BlockConfidence = 'BlockConfidence' in params ? params.BlockConfidence : null;
+        this.ReviewConfidence = 'ReviewConfidence' in params ? params.ReviewConfidence : null;
+
+    }
+}
+
+/**
  * 内容审核鉴恐任务输入参数类型
  * @class
  */
@@ -4423,16 +4609,22 @@ class ProcessLiveStreamRequest extends  AbstractModel {
         this.AiContentReviewTask = null;
 
         /**
-         * 来源上下文，用于透传用户请求信息，任务流状态变更回调将返回该字段值，最长 1000 个字符。
-         * @type {string || null}
+         * 视频内容识别类型任务参数。
+         * @type {AiRecognitionTaskInput || null}
          */
-        this.SessionContext = null;
+        this.AiRecognitionTask = null;
 
         /**
          * 用于去重的识别码，如果七天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。
          * @type {string || null}
          */
         this.SessionId = null;
+
+        /**
+         * 来源上下文，用于透传用户请求信息，任务流状态变更回调将返回该字段值，最长 1000 个字符。
+         * @type {string || null}
+         */
+        this.SessionContext = null;
 
     }
 
@@ -4463,8 +4655,14 @@ class ProcessLiveStreamRequest extends  AbstractModel {
             obj.deserialize(params.AiContentReviewTask)
             this.AiContentReviewTask = obj;
         }
-        this.SessionContext = 'SessionContext' in params ? params.SessionContext : null;
+
+        if (params.AiRecognitionTask) {
+            let obj = new AiRecognitionTaskInput();
+            obj.deserialize(params.AiRecognitionTask)
+            this.AiRecognitionTask = obj;
+        }
         this.SessionId = 'SessionId' in params ? params.SessionId : null;
+        this.SessionContext = 'SessionContext' in params ? params.SessionContext : null;
 
     }
 }
@@ -5558,32 +5756,18 @@ class VideoTemplateInfo extends  AbstractModel {
 }
 
 /**
- * 文本鉴政任务控制参数
+ * 直播流 AI 识别结果
  * @class
  */
-class PoliticalOcrReviewTemplateInfo extends  AbstractModel {
+class LiveStreamAiRecognitionResultInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 文本鉴政任务开关，可选值：
-<li>ON：开启文本鉴政任务；</li>
-<li>OFF：关闭文本鉴政任务。</li>
-         * @type {string || null}
+         * 内容识别结果列表。
+         * @type {Array.<LiveStreamAiRecognitionResultItem> || null}
          */
-        this.Switch = null;
-
-        /**
-         * 判定涉嫌违规的分数阈值，当智能审核达到该分数以上，认为涉嫌违规，不填默认为 100 分。取值范围：0~100。
-         * @type {number || null}
-         */
-        this.BlockConfidence = null;
-
-        /**
-         * 判定需人工复核是否违规的分数阈值，当智能审核达到该分数以上，认为需人工复核，不填默认为 75 分。取值范围：0~100。
-         * @type {number || null}
-         */
-        this.ReviewConfidence = null;
+        this.ResultSet = null;
 
     }
 
@@ -5594,9 +5778,15 @@ class PoliticalOcrReviewTemplateInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Switch = 'Switch' in params ? params.Switch : null;
-        this.BlockConfidence = 'BlockConfidence' in params ? params.BlockConfidence : null;
-        this.ReviewConfidence = 'ReviewConfidence' in params ? params.ReviewConfidence : null;
+
+        if (params.ResultSet) {
+            this.ResultSet = new Array();
+            for (let z in params.ResultSet) {
+                let obj = new LiveStreamAiRecognitionResultItem();
+                obj.deserialize(params.ResultSet[z]);
+                this.ResultSet.push(obj);
+            }
+        }
 
     }
 }
@@ -6561,6 +6751,7 @@ class ParseLiveStreamProcessNotificationResponse extends  AbstractModel {
         /**
          * 直播流处理结果类型，包含：
 <li>AiReviewResult：内容审核结果；</li>
+<li>AiRecognitionResult：内容识别结果；</li>
 <li>ProcessEof：直播流处理结束。</li>
          * @type {string || null}
          */
@@ -6585,6 +6776,13 @@ class ParseLiveStreamProcessNotificationResponse extends  AbstractModel {
          * @type {LiveStreamAiReviewResultInfo || null}
          */
         this.AiReviewResultInfo = null;
+
+        /**
+         * 内容识别结果，当 NotificationType 为 AiRecognitionResult 时有效。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {LiveStreamAiRecognitionResultInfo || null}
+         */
+        this.AiRecognitionResultInfo = null;
 
         /**
          * 用于去重的识别码，如果七天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长50个字符，不带或者带空字符串表示不做去重。
@@ -6627,9 +6825,64 @@ class ParseLiveStreamProcessNotificationResponse extends  AbstractModel {
             obj.deserialize(params.AiReviewResultInfo)
             this.AiReviewResultInfo = obj;
         }
+
+        if (params.AiRecognitionResultInfo) {
+            let obj = new LiveStreamAiRecognitionResultInfo();
+            obj.deserialize(params.AiRecognitionResultInfo)
+            this.AiRecognitionResultInfo = obj;
+        }
         this.SessionId = 'SessionId' in params ? params.SessionId : null;
         this.SessionContext = 'SessionContext' in params ? params.SessionContext : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 直播识别 Asr 全文识别
+ * @class
+ */
+class LiveStreamAsrFullTextRecognitionResult extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 识别文本。
+         * @type {string || null}
+         */
+        this.Text = null;
+
+        /**
+         * 识别片段起始的 PTS 时间，单位：秒。
+         * @type {number || null}
+         */
+        this.StartPtsTime = null;
+
+        /**
+         * 识别片段终止的 PTS 时间，单位：秒。
+         * @type {number || null}
+         */
+        this.EndPtsTime = null;
+
+        /**
+         * 识别片段置信度。取值：0~100。
+         * @type {number || null}
+         */
+        this.Confidence = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Text = 'Text' in params ? params.Text : null;
+        this.StartPtsTime = 'StartPtsTime' in params ? params.StartPtsTime : null;
+        this.EndPtsTime = 'EndPtsTime' in params ? params.EndPtsTime : null;
+        this.Confidence = 'Confidence' in params ? params.Confidence : null;
 
     }
 }
@@ -9274,6 +9527,77 @@ class AiReviewPornTaskInput extends  AbstractModel {
 }
 
 /**
+ * 直播 AI 人脸识别结果
+ * @class
+ */
+class LiveStreamFaceRecognitionResult extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 人物唯一标识 ID。
+         * @type {string || null}
+         */
+        this.Id = null;
+
+        /**
+         * 人物名称。
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 人物库类型，表示识别出的人物来自哪个人物库：
+<li>Default：默认人物库；</li><li>UserDefine：用户自定义人物库。</li>
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * 识别片段起始的 PTS 时间，单位：秒。
+         * @type {number || null}
+         */
+        this.StartPtsTime = null;
+
+        /**
+         * 识别片段终止的 PTS 时间，单位：秒。
+         * @type {number || null}
+         */
+        this.EndPtsTime = null;
+
+        /**
+         * 识别片段置信度。取值：0~100。
+         * @type {number || null}
+         */
+        this.Confidence = null;
+
+        /**
+         * 识别结果的区域坐标。数组包含 4 个元素 [x1,y1,x2,y2]，依次表示区域左上点、右下点的横纵坐标。
+         * @type {Array.<number> || null}
+         */
+        this.AreaCoordSet = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Id = 'Id' in params ? params.Id : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.StartPtsTime = 'StartPtsTime' in params ? params.StartPtsTime : null;
+        this.EndPtsTime = 'EndPtsTime' in params ? params.EndPtsTime : null;
+        this.Confidence = 'Confidence' in params ? params.Confidence : null;
+        this.AreaCoordSet = 'AreaCoordSet' in params ? params.AreaCoordSet : null;
+
+    }
+}
+
+/**
  * CreateSampleSnapshotTemplate请求参数结构体
  * @class
  */
@@ -10777,20 +11101,42 @@ class AiRecognitionTaskAsrFullTextResultOutput extends  AbstractModel {
 }
 
 /**
- * 文本全文本识别任务控制参数
+ * 直播 AI Ocr 单词识别结果
  * @class
  */
-class OcrFullTextConfigureInfo extends  AbstractModel {
+class LiveStreamOcrWordsRecognitionResult extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 文本全文识别任务开关，可选值：
-<li>ON：开启智能文本全文识别任务；</li>
-<li>OFF：关闭智能文本全文识别任务。</li>
+         * 文本关键词。
          * @type {string || null}
          */
-        this.Switch = null;
+        this.Word = null;
+
+        /**
+         * 识别片段起始的 PTS 时间，单位：秒。
+         * @type {number || null}
+         */
+        this.StartPtsTime = null;
+
+        /**
+         * 识别片段终止的 PTS 时间，单位：秒。
+         * @type {number || null}
+         */
+        this.EndPtsTime = null;
+
+        /**
+         * 识别片段置信度。取值：0~100。
+         * @type {number || null}
+         */
+        this.Confidence = null;
+
+        /**
+         * 识别结果的区域坐标。数组包含 4 个元素 [x1,y1,x2,y2]，依次表示区域左上点、右下点的横纵坐标。
+         * @type {Array.<number> || null}
+         */
+        this.AreaCoords = null;
 
     }
 
@@ -10801,7 +11147,11 @@ class OcrFullTextConfigureInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Switch = 'Switch' in params ? params.Switch : null;
+        this.Word = 'Word' in params ? params.Word : null;
+        this.StartPtsTime = 'StartPtsTime' in params ? params.StartPtsTime : null;
+        this.EndPtsTime = 'EndPtsTime' in params ? params.EndPtsTime : null;
+        this.Confidence = 'Confidence' in params ? params.Confidence : null;
+        this.AreaCoords = 'AreaCoords' in params ? params.AreaCoords : null;
 
     }
 }
@@ -11645,6 +11995,55 @@ class AiSampleFaceInfo extends  AbstractModel {
         }
         this.FaceId = 'FaceId' in params ? params.FaceId : null;
         this.Url = 'Url' in params ? params.Url : null;
+
+    }
+}
+
+/**
+ * 直播 AI Asr 单词识别结果
+ * @class
+ */
+class LiveStreamAsrWordsRecognitionResult extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 语音关键词。
+         * @type {string || null}
+         */
+        this.Word = null;
+
+        /**
+         * 识别片段起始的 PTS 时间，单位：秒。
+         * @type {number || null}
+         */
+        this.StartPtsTime = null;
+
+        /**
+         * 识别片段终止的 PTS 时间，单位：秒。
+         * @type {number || null}
+         */
+        this.EndPtsTime = null;
+
+        /**
+         * 识别片段置信度。取值：0~100。
+         * @type {number || null}
+         */
+        this.Confidence = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Word = 'Word' in params ? params.Word : null;
+        this.StartPtsTime = 'StartPtsTime' in params ? params.StartPtsTime : null;
+        this.EndPtsTime = 'EndPtsTime' in params ? params.EndPtsTime : null;
+        this.Confidence = 'Confidence' in params ? params.Confidence : null;
 
     }
 }
@@ -13599,7 +13998,8 @@ class CreateWatermarkTemplateRequest extends  AbstractModel {
         /**
          * 水印类型，可选值：
 <li>image：图片水印；</li>
-<li>text：文字水印。</li>
+<li>text：文字水印；</li>
+<li>svg：SVG 水印。</li>
          * @type {string || null}
          */
         this.Type = null;
@@ -13622,7 +14022,7 @@ class CreateWatermarkTemplateRequest extends  AbstractModel {
 <li>TopRight：表示坐标原点位于视频图像的右上角，水印原点为图片或文字的右上角；</li>
 <li>BottomLeft：表示坐标原点位于视频图像的左下角，水印原点为图片或文字的左下角；</li>
 <li>BottomRight：表示坐标原点位于视频图像的右下角，水印原点为图片或文字的右下角。</li>
-默认值：TopLeft。目前，当 Type 为 image，该字段仅支持 TopLeft。
+默认值：TopLeft。
          * @type {string || null}
          */
         this.CoordinateOrigin = null;
@@ -13886,6 +14286,62 @@ class WatermarkTemplate extends  AbstractModel {
         this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
         this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
         this.CoordinateOrigin = 'CoordinateOrigin' in params ? params.CoordinateOrigin : null;
+
+    }
+}
+
+/**
+ * 直播识别 Ocr 全文识别
+ * @class
+ */
+class LiveStreamOcrFullTextRecognitionResult extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 语音文本。
+         * @type {string || null}
+         */
+        this.Text = null;
+
+        /**
+         * 识别片段起始的 PTS 时间，单位：秒。
+         * @type {number || null}
+         */
+        this.StartPtsTime = null;
+
+        /**
+         * 识别片段终止的 PTS 时间，单位：秒。
+         * @type {number || null}
+         */
+        this.EndPtsTime = null;
+
+        /**
+         * 识别片段置信度。取值：0~100。
+         * @type {number || null}
+         */
+        this.Confidence = null;
+
+        /**
+         * 识别结果的区域坐标。数组包含 4 个元素 [x1,y1,x2,y2]，依次表示区域左上点、右下点的横纵坐标。
+         * @type {Array.<number> || null}
+         */
+        this.AreaCoordSet = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Text = 'Text' in params ? params.Text : null;
+        this.StartPtsTime = 'StartPtsTime' in params ? params.StartPtsTime : null;
+        this.EndPtsTime = 'EndPtsTime' in params ? params.EndPtsTime : null;
+        this.Confidence = 'Confidence' in params ? params.Confidence : null;
+        this.AreaCoordSet = 'AreaCoordSet' in params ? params.AreaCoordSet : null;
 
     }
 }
@@ -14899,6 +15355,7 @@ module.exports = {
     PoliticalAsrReviewTemplateInfoForUpdate: PoliticalAsrReviewTemplateInfoForUpdate,
     TaskSimpleInfo: TaskSimpleInfo,
     DescribeTaskDetailResponse: DescribeTaskDetailResponse,
+    LiveStreamAiRecognitionResultItem: LiveStreamAiRecognitionResultItem,
     AiSampleFaceOperation: AiSampleFaceOperation,
     DeleteImageSpriteTemplateRequest: DeleteImageSpriteTemplateRequest,
     SvgWatermarkInput: SvgWatermarkInput,
@@ -14943,6 +15400,7 @@ module.exports = {
     ParseLiveStreamProcessNotificationRequest: ParseLiveStreamProcessNotificationRequest,
     DescribeSnapshotByTimeOffsetTemplatesResponse: DescribeSnapshotByTimeOffsetTemplatesResponse,
     MediaVideoStreamItem: MediaVideoStreamItem,
+    OcrFullTextConfigureInfo: OcrFullTextConfigureInfo,
     SnapshotByTimeOffsetTemplate: SnapshotByTimeOffsetTemplate,
     DeleteSnapshotByTimeOffsetTemplateResponse: DeleteSnapshotByTimeOffsetTemplateResponse,
     AiRecognitionTaskOcrWordsResultItem: AiRecognitionTaskOcrWordsResultItem,
@@ -14955,6 +15413,7 @@ module.exports = {
     AnimatedGraphicsTemplate: AnimatedGraphicsTemplate,
     PornAsrReviewTemplateInfoForUpdate: PornAsrReviewTemplateInfoForUpdate,
     AiSampleWord: AiSampleWord,
+    PoliticalOcrReviewTemplateInfo: PoliticalOcrReviewTemplateInfo,
     AiReviewTerrorismTaskInput: AiReviewTerrorismTaskInput,
     CreateImageSpriteTemplateRequest: CreateImageSpriteTemplateRequest,
     DescribeWorkflowsRequest: DescribeWorkflowsRequest,
@@ -14983,7 +15442,7 @@ module.exports = {
     AiContentReviewTaskInput: AiContentReviewTaskInput,
     SvgWatermarkInputForUpdate: SvgWatermarkInputForUpdate,
     VideoTemplateInfo: VideoTemplateInfo,
-    PoliticalOcrReviewTemplateInfo: PoliticalOcrReviewTemplateInfo,
+    LiveStreamAiRecognitionResultInfo: LiveStreamAiRecognitionResultInfo,
     DescribeSampleSnapshotTemplatesResponse: DescribeSampleSnapshotTemplatesResponse,
     PornOcrReviewTemplateInfoForUpdate: PornOcrReviewTemplateInfoForUpdate,
     AiReviewTaskPornOcrResult: AiReviewTaskPornOcrResult,
@@ -15001,6 +15460,7 @@ module.exports = {
     ImageSpriteTaskInput: ImageSpriteTaskInput,
     AiRecognitionTaskAsrWordsSegmentItem: AiRecognitionTaskAsrWordsSegmentItem,
     ParseLiveStreamProcessNotificationResponse: ParseLiveStreamProcessNotificationResponse,
+    LiveStreamAsrFullTextRecognitionResult: LiveStreamAsrFullTextRecognitionResult,
     DescribeTranscodeTemplatesRequest: DescribeTranscodeTemplatesRequest,
     AiReviewPornOcrTaskOutput: AiReviewPornOcrTaskOutput,
     CreateSampleSnapshotTemplateResponse: CreateSampleSnapshotTemplateResponse,
@@ -15045,6 +15505,7 @@ module.exports = {
     AiRecognitionTaskOcrFullTextResult: AiRecognitionTaskOcrFullTextResult,
     AiRecognitionTaskAsrWordsResult: AiRecognitionTaskAsrWordsResult,
     AiReviewPornTaskInput: AiReviewPornTaskInput,
+    LiveStreamFaceRecognitionResult: LiveStreamFaceRecognitionResult,
     CreateSampleSnapshotTemplateRequest: CreateSampleSnapshotTemplateRequest,
     UserDefineAsrTextReviewTemplateInfo: UserDefineAsrTextReviewTemplateInfo,
     DescribeSampleSnapshotTemplatesRequest: DescribeSampleSnapshotTemplatesRequest,
@@ -15071,7 +15532,7 @@ module.exports = {
     AiReviewPoliticalOcrTaskOutput: AiReviewPoliticalOcrTaskOutput,
     AiRecognitionTaskAsrWordsResultOutput: AiRecognitionTaskAsrWordsResultOutput,
     AiRecognitionTaskAsrFullTextResultOutput: AiRecognitionTaskAsrFullTextResultOutput,
-    OcrFullTextConfigureInfo: OcrFullTextConfigureInfo,
+    LiveStreamOcrWordsRecognitionResult: LiveStreamOcrWordsRecognitionResult,
     LiveStreamProcessErrorInfo: LiveStreamProcessErrorInfo,
     EnableWorkflowRequest: EnableWorkflowRequest,
     MediaProcessTaskTranscodeResult: MediaProcessTaskTranscodeResult,
@@ -15091,6 +15552,7 @@ module.exports = {
     CosFileUploadTrigger: CosFileUploadTrigger,
     AiRecognitionTaskOcrWordsResultOutput: AiRecognitionTaskOcrWordsResultOutput,
     AiSampleFaceInfo: AiSampleFaceInfo,
+    LiveStreamAsrWordsRecognitionResult: LiveStreamAsrWordsRecognitionResult,
     AiReviewPoliticalAsrTaskOutput: AiReviewPoliticalAsrTaskOutput,
     TerrorismConfigureInfo: TerrorismConfigureInfo,
     TEHDConfigForUpdate: TEHDConfigForUpdate,
@@ -15131,6 +15593,7 @@ module.exports = {
     CreateWatermarkTemplateRequest: CreateWatermarkTemplateRequest,
     UserDefineConfigureInfoForUpdate: UserDefineConfigureInfoForUpdate,
     WatermarkTemplate: WatermarkTemplate,
+    LiveStreamOcrFullTextRecognitionResult: LiveStreamOcrFullTextRecognitionResult,
     DeleteWatermarkTemplateResponse: DeleteWatermarkTemplateResponse,
     DescribeImageSpriteTemplatesResponse: DescribeImageSpriteTemplatesResponse,
     AiRecognitionTaskAsrFullTextResultInput: AiRecognitionTaskAsrFullTextResultInput,

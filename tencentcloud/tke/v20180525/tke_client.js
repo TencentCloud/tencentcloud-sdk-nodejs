@@ -34,6 +34,7 @@ const DescribeClusterSecurityResponse = models.DescribeClusterSecurityResponse;
 const DescribeClusterInstancesResponse = models.DescribeClusterInstancesResponse;
 const CreateClusterAsGroupRequest = models.CreateClusterAsGroupRequest;
 const DescribeClusterRouteTablesRequest = models.DescribeClusterRouteTablesRequest;
+const CreateClusterInstancesResponse = models.CreateClusterInstancesResponse;
 const CreateClusterRouteTableResponse = models.CreateClusterRouteTableResponse;
 const ExistedInstancesForNode = models.ExistedInstancesForNode;
 const CreateClusterResponse = models.CreateClusterResponse;
@@ -87,7 +88,7 @@ const DeleteClusterRouteResponse = models.DeleteClusterRouteResponse;
 const DeleteClusterResponse = models.DeleteClusterResponse;
 const AddExistedInstancesResponse = models.AddExistedInstancesResponse;
 const DeleteClusterRouteTableResponse = models.DeleteClusterRouteTableResponse;
-const CreateClusterInstancesResponse = models.CreateClusterInstancesResponse;
+const DataDisk = models.DataDisk;
 
 
 /**

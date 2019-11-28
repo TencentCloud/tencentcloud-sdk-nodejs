@@ -106,7 +106,6 @@ class FaceFusionRequest extends  AbstractModel {
 
         /**
          * 0表示不需要鉴政，1表示需要鉴政。默认值为0。
-鉴政接口同时会对名人明星进行识别，您可以根据实际需要过滤。
          * @type {number || null}
          */
         this.CelebrityIdentify = null;
@@ -139,7 +138,7 @@ class FuseFaceReviewDetail extends  AbstractModel {
         super();
 
         /**
-         * 鉴政使用字段, 为职业属性,其他审核结果对应上一级category
+         * 保留字段
          * @type {string || null}
          */
         this.Field = null;
@@ -151,13 +150,19 @@ class FuseFaceReviewDetail extends  AbstractModel {
         this.Label = null;
 
         /**
-         * 对应识别label的置信度
+         * 对应识别label的置信度，分数越高意味涉政可能性越大。 
+0到70，Suggestion建议为PASS； 
+70到80，Suggestion建议为REVIEW； 
+80到100，Suggestion建议为BLOCK。
          * @type {number || null}
          */
         this.Confidence = null;
 
         /**
-         * 此字段为保留字段，目前统一返回pass。
+         * 识别场景的审核结论：  
+PASS：正常 
+REVIEW：疑似  
+BLOCK：违规
          * @type {string || null}
          */
         this.Suggestion = null;
@@ -242,31 +247,31 @@ class FuseFaceReviewResult extends  AbstractModel {
         super();
 
         /**
-         * 对应的类别名称 porn, politics, terror
+         * 保留字段
          * @type {string || null}
          */
         this.Category = null;
 
         /**
-         * 对应子类别状态码
+         * 状态码， 0为处理成功，其他值为处理失败
          * @type {string || null}
          */
         this.Code = null;
 
         /**
-         * 对应子类别状态码信息描述
+         * 对应状态码信息描述
          * @type {string || null}
          */
         this.CodeDescription = null;
 
         /**
-         * 对应识别种类的置信度
+         * 保留字段
          * @type {number || null}
          */
         this.Confidence = null;
 
         /**
-         * 此字段为保留字段，目前统一返回pass。
+         * 保留字段
          * @type {string || null}
          */
         this.Suggestion = null;
@@ -319,6 +324,13 @@ class FuseFaceResponse extends  AbstractModel {
         this.FusedImage = null;
 
         /**
+         * 鉴政结果。该数组的顺序和请求中mergeinfo的顺序一致，一一对应
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<FuseFaceReviewResult> || null}
+         */
+        this.ReviewResultSet = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -334,6 +346,15 @@ class FuseFaceResponse extends  AbstractModel {
             return;
         }
         this.FusedImage = 'FusedImage' in params ? params.FusedImage : null;
+
+        if (params.ReviewResultSet) {
+            this.ReviewResultSet = new Array();
+            for (let z in params.ReviewResultSet) {
+                let obj = new FuseFaceReviewResult();
+                obj.deserialize(params.ReviewResultSet[z]);
+                this.ReviewResultSet.push(obj);
+            }
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -385,6 +406,12 @@ class FuseFaceRequest extends  AbstractModel {
          */
         this.FuseFaceDegree = null;
 
+        /**
+         * 0表示不需要鉴政，1表示需要鉴政。默认值为0。
+         * @type {number || null}
+         */
+        this.CelebrityIdentify = null;
+
     }
 
     /**
@@ -408,6 +435,7 @@ class FuseFaceRequest extends  AbstractModel {
         }
         this.FuseProfileDegree = 'FuseProfileDegree' in params ? params.FuseProfileDegree : null;
         this.FuseFaceDegree = 'FuseFaceDegree' in params ? params.FuseFaceDegree : null;
+        this.CelebrityIdentify = 'CelebrityIdentify' in params ? params.CelebrityIdentify : null;
 
     }
 }

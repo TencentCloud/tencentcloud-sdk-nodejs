@@ -1735,6 +1735,41 @@ class StartGroupRequest extends  AbstractModel {
 }
 
 /**
+ * DeployServerlessGroup返回参数结构体
+ * @class
+ */
+class DeployServerlessGroupResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 结果true：成功；false：失败；
+         * @type {boolean || null}
+         */
+        this.Result = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Result = 'Result' in params ? params.Result : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeConfigs返回参数结构体
  * @class
  */
@@ -5141,6 +5176,53 @@ class Instance extends  AbstractModel {
 }
 
 /**
+ * DeployServerlessGroup请求参数结构体
+ * @class
+ */
+class DeployServerlessGroupRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 部署组ID
+         * @type {string || null}
+         */
+        this.GroupId = null;
+
+        /**
+         * 程序包ID
+         * @type {string || null}
+         */
+        this.PkgId = null;
+
+        /**
+         * VpcConfig对象，和创建接口中对象一致
+         * @type {VpcConfig || null}
+         */
+        this.VpcConfig = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.GroupId = 'GroupId' in params ? params.GroupId : null;
+        this.PkgId = 'PkgId' in params ? params.PkgId : null;
+
+        if (params.VpcConfig) {
+            let obj = new VpcConfig();
+            obj.deserialize(params.VpcConfig)
+            this.VpcConfig = obj;
+        }
+
+    }
+}
+
+/**
  * 配置项
  * @class
  */
@@ -7344,6 +7426,13 @@ class ApplicationForPage extends  AbstractModel {
          */
         this.ApplicationResourceType = null;
 
+        /**
+         * 应用runtime类型
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ApplicationRuntimeType = null;
+
     }
 
     /**
@@ -7362,6 +7451,7 @@ class ApplicationForPage extends  AbstractModel {
         this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
         this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
         this.ApplicationResourceType = 'ApplicationResourceType' in params ? params.ApplicationResourceType : null;
+        this.ApplicationRuntimeType = 'ApplicationRuntimeType' in params ? params.ApplicationRuntimeType : null;
 
     }
 }
@@ -9898,6 +9988,7 @@ module.exports = {
     CreateServerlessGroupResponse: CreateServerlessGroupResponse,
     DeleteApplicationResponse: DeleteApplicationResponse,
     StartGroupRequest: StartGroupRequest,
+    DeployServerlessGroupResponse: DeployServerlessGroupResponse,
     DescribeConfigsResponse: DescribeConfigsResponse,
     DescribeApplicationAttributeResponse: DescribeApplicationAttributeResponse,
     DescribeApplicationsResponse: DescribeApplicationsResponse,
@@ -9959,6 +10050,7 @@ module.exports = {
     DescribePublicConfigReleaseLogsResponse: DescribePublicConfigReleaseLogsResponse,
     VmGroupSimple: VmGroupSimple,
     Instance: Instance,
+    DeployServerlessGroupRequest: DeployServerlessGroupRequest,
     Config: Config,
     CreateClusterResponse: CreateClusterResponse,
     DeletePublicConfigResponse: DeletePublicConfigResponse,

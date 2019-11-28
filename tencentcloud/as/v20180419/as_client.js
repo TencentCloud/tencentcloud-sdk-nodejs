@@ -34,6 +34,7 @@ const SystemDisk = models.SystemDisk;
 const SpotMarketOptions = models.SpotMarketOptions;
 const DescribeScalingPoliciesRequest = models.DescribeScalingPoliciesRequest;
 const ModifyScheduledActionResponse = models.ModifyScheduledActionResponse;
+const CreateAutoScalingGroupFromInstanceRequest = models.CreateAutoScalingGroupFromInstanceRequest;
 const ExecuteScalingPolicyResponse = models.ExecuteScalingPolicyResponse;
 const ModifyLaunchConfigurationAttributesResponse = models.ModifyLaunchConfigurationAttributesResponse;
 const SetInstancesProtectionResponse = models.SetInstancesProtectionResponse;
@@ -82,6 +83,7 @@ const DataDisk = models.DataDisk;
 const PreviewPaiDomainNameRequest = models.PreviewPaiDomainNameRequest;
 const DeleteScalingPolicyRequest = models.DeleteScalingPolicyRequest;
 const LoginSettings = models.LoginSettings;
+const CreateAutoScalingGroupFromInstanceResponse = models.CreateAutoScalingGroupFromInstanceResponse;
 const DetachInstancesRequest = models.DetachInstancesRequest;
 const Instance = models.Instance;
 const CreateScheduledActionRequest = models.CreateScheduledActionRequest;
@@ -432,6 +434,19 @@ class AsClient extends AbstractClient {
     DescribeAutoScalingInstances(req, cb) {
         let resp = new DescribeAutoScalingInstancesResponse();
         this.request("DescribeAutoScalingInstances", req, resp, cb);
+    }
+
+    /**
+     * 本接口（CreateAutoScalingGroupFromInstance）用于根据实例创建启动配置及伸缩组。
+
+说明：根据按包年包月计费的实例所创建的伸缩组，其扩容的实例为按量计费实例。
+     * @param {CreateAutoScalingGroupFromInstanceRequest} req
+     * @param {function(string, CreateAutoScalingGroupFromInstanceResponse):void} cb
+     * @public
+     */
+    CreateAutoScalingGroupFromInstance(req, cb) {
+        let resp = new CreateAutoScalingGroupFromInstanceResponse();
+        this.request("CreateAutoScalingGroupFromInstance", req, resp, cb);
     }
 
     /**

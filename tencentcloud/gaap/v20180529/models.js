@@ -60,13 +60,15 @@ class DescribeUDPListenersRequest extends  AbstractModel {
         super();
 
         /**
-         * 通道ID，ProxyId和GroupId必须设置一个，但不能同时设置。
+         * 过滤条件，根据通道ID进行拉取，ProxyId/GroupId/ListenerId必须设置一个，但ProxyId和GroupId不能同时设置。
          * @type {string || null}
          */
         this.ProxyId = null;
 
         /**
-         * 过滤条件，根据监听器ID精确查询
+         * 过滤条件，根据监听器ID精确查询。
+当设置了ProxyId时，会检查该监听器是否归属于该通道。
+当设置了GroupId时，会检查该监听器是否归属于该通道组。
          * @type {string || null}
          */
         this.ListenerId = null;
@@ -96,7 +98,7 @@ class DescribeUDPListenersRequest extends  AbstractModel {
         this.Limit = null;
 
         /**
-         * 通道组ID，ProxyId和GroupId必须设置一个，但不能同时设置。
+         * 过滤条件，根据通道组ID进行拉取，ProxyId/GroupId/ListenerId必须设置一个，但ProxyId和GroupId不能同时设置。
          * @type {string || null}
          */
         this.GroupId = null;
@@ -3296,6 +3298,34 @@ class DeleteListenersRequest extends  AbstractModel {
         this.Force = 'Force' in params ? params.Force : null;
         this.GroupId = 'GroupId' in params ? params.GroupId : null;
         this.ProxyId = 'ProxyId' in params ? params.ProxyId : null;
+
+    }
+}
+
+/**
+ * DescribeSecurityRules请求参数结构体
+ * @class
+ */
+class DescribeSecurityRulesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 安全规则ID列表。总数不能超过20个。
+         * @type {Array.<string> || null}
+         */
+        this.SecurityRuleIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SecurityRuleIds = 'SecurityRuleIds' in params ? params.SecurityRuleIds : null;
 
     }
 }
@@ -6672,6 +6702,56 @@ class ModifyDomainResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeRulesByRuleIds返回参数结构体
+ * @class
+ */
+class DescribeRulesByRuleIdsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 返回的规则总个数。
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 返回的规则列表。
+         * @type {Array.<RuleInfo> || null}
+         */
+        this.RuleSet = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.RuleSet) {
+            this.RuleSet = new Array();
+            for (let z in params.RuleSet) {
+                let obj = new RuleInfo();
+                obj.deserialize(params.RuleSet[z]);
+                this.RuleSet.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * SetAuthentication请求参数结构体
  * @class
  */
@@ -7403,6 +7483,13 @@ class SecurityPolicyRuleOut extends  AbstractModel {
          */
         this.Protocol = null;
 
+        /**
+         * 安全策略ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.PolicyId = null;
+
     }
 
     /**
@@ -7418,6 +7505,7 @@ class SecurityPolicyRuleOut extends  AbstractModel {
         this.DestPortRange = 'DestPortRange' in params ? params.DestPortRange : null;
         this.RuleId = 'RuleId' in params ? params.RuleId : null;
         this.Protocol = 'Protocol' in params ? params.Protocol : null;
+        this.PolicyId = 'PolicyId' in params ? params.PolicyId : null;
 
     }
 }
@@ -8330,13 +8418,15 @@ class DescribeTCPListenersRequest extends  AbstractModel {
         super();
 
         /**
-         * 通道ID，ProxyId和GroupId必须设置一个，但不能同时设置。
+         * 过滤条件，根据通道ID进行拉取，ProxyId/GroupId/ListenerId必须设置一个，但ProxyId和GroupId不能同时设置。
          * @type {string || null}
          */
         this.ProxyId = null;
 
         /**
-         * 过滤条件，根据监听器ID精确查询
+         * 过滤条件，根据监听器ID精确查询。
+当设置了ProxyId时，会检查该监听器是否归属于该通道。
+当设置了GroupId时，会检查该监听器是否归属于该通道组。
          * @type {string || null}
          */
         this.ListenerId = null;
@@ -8366,7 +8456,7 @@ class DescribeTCPListenersRequest extends  AbstractModel {
         this.Limit = null;
 
         /**
-         * 通道组ID，ProxyId和GroupId必须设置一个，但不能同时设置。
+         * 过滤条件，根据通道组ID进行拉取，ProxyId/GroupId/ListenerId必须设置一个，但ProxyId和GroupId不能同时设置。
          * @type {string || null}
          */
         this.GroupId = null;
@@ -8858,6 +8948,56 @@ class ModifyProxiesAttributeRequest extends  AbstractModel {
         this.ProxyName = 'ProxyName' in params ? params.ProxyName : null;
         this.ClientToken = 'ClientToken' in params ? params.ClientToken : null;
         this.ProxyIds = 'ProxyIds' in params ? params.ProxyIds : null;
+
+    }
+}
+
+/**
+ * DescribeSecurityRules返回参数结构体
+ * @class
+ */
+class DescribeSecurityRulesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 返回的安全规则详情总数。
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 返回的安全规则详情列表。
+         * @type {Array.<SecurityPolicyRuleOut> || null}
+         */
+        this.SecurityRuleSet = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.SecurityRuleSet) {
+            this.SecurityRuleSet = new Array();
+            for (let z in params.SecurityRuleSet) {
+                let obj = new SecurityPolicyRuleOut();
+                obj.deserialize(params.SecurityRuleSet[z]);
+                this.SecurityRuleSet.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -9609,6 +9749,34 @@ class RemoveRealServersResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeRulesByRuleIds请求参数结构体
+ * @class
+ */
+class DescribeRulesByRuleIdsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 规则ID列表。最多支持10个规则。
+         * @type {Array.<string> || null}
+         */
+        this.RuleIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RuleIds = 'RuleIds' in params ? params.RuleIds : null;
+
+    }
+}
+
+/**
  * RealServerBindSetReq
  * @class
  */
@@ -9876,6 +10044,7 @@ module.exports = {
     DescribeProxyAndStatisticsListenersRequest: DescribeProxyAndStatisticsListenersRequest,
     DescribeAccessRegionsResponse: DescribeAccessRegionsResponse,
     DeleteListenersRequest: DeleteListenersRequest,
+    DescribeSecurityRulesRequest: DescribeSecurityRulesRequest,
     DescribeDestRegionsResponse: DescribeDestRegionsResponse,
     DescribeProxiesRequest: DescribeProxiesRequest,
     BindListenerRealServersResponse: BindListenerRealServersResponse,
@@ -9942,6 +10111,7 @@ module.exports = {
     CreateTCPListenersResponse: CreateTCPListenersResponse,
     DescribeSecurityPolicyDetailRequest: DescribeSecurityPolicyDetailRequest,
     ModifyDomainResponse: ModifyDomainResponse,
+    DescribeRulesByRuleIdsResponse: DescribeRulesByRuleIdsResponse,
     SetAuthenticationRequest: SetAuthenticationRequest,
     InquiryPriceCreateProxyResponse: InquiryPriceCreateProxyResponse,
     NewRealServer: NewRealServer,
@@ -9988,6 +10158,7 @@ module.exports = {
     DescribeRegionAndPriceRequest: DescribeRegionAndPriceRequest,
     AddRealServersRequest: AddRealServersRequest,
     ModifyProxiesAttributeRequest: ModifyProxiesAttributeRequest,
+    DescribeSecurityRulesResponse: DescribeSecurityRulesResponse,
     CertificateAliasInfo: CertificateAliasInfo,
     CreateHTTPSListenerRequest: CreateHTTPSListenerRequest,
     DeleteSecurityRulesRequest: DeleteSecurityRulesRequest,
@@ -10000,6 +10171,7 @@ module.exports = {
     UDPListener: UDPListener,
     ProxyInfo: ProxyInfo,
     RemoveRealServersResponse: RemoveRealServersResponse,
+    DescribeRulesByRuleIdsRequest: DescribeRulesByRuleIdsRequest,
     RealServerBindSetReq: RealServerBindSetReq,
     OpenProxiesResponse: OpenProxiesResponse,
     ModifyProxyConfigurationResponse: ModifyProxyConfigurationResponse,

@@ -17,6 +17,7 @@
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const ModifyDDoSPolicyCaseRequest = models.ModifyDDoSPolicyCaseRequest;
+const DescribeIpUnBlockListRequest = models.DescribeIpUnBlockListRequest;
 const DeleteDDoSPolicyCaseRequest = models.DeleteDDoSPolicyCaseRequest;
 const CreateDDoSPolicyResponse = models.CreateDDoSPolicyResponse;
 const DeleteL7RulesRequest = models.DeleteL7RulesRequest;
@@ -86,6 +87,7 @@ const ModifyCCHostProtectionResponse = models.ModifyCCHostProtectionResponse;
 const CreateL4RulesResponse = models.CreateL4RulesResponse;
 const DescribeInsurePacksRequest = models.DescribeInsurePacksRequest;
 const DDoSPolicyPortLimit = models.DDoSPolicyPortLimit;
+const Paging = models.Paging;
 const ModifyL4RulesResponse = models.ModifyL4RulesResponse;
 const L4HealthConfig = models.L4HealthConfig;
 const CreateCCSelfDefinePolicyRequest = models.CreateCCSelfDefinePolicyRequest;
@@ -117,6 +119,7 @@ const ModifyCCIpAllowDenyResponse = models.ModifyCCIpAllowDenyResponse;
 const ModifyCCSelfDefinePolicyRequest = models.ModifyCCSelfDefinePolicyRequest;
 const DescribeDDoSEvListRequest = models.DescribeDDoSEvListRequest;
 const ModifyDDoSPolicyNameRequest = models.ModifyDDoSPolicyNameRequest;
+const DescribeIpUnBlockListResponse = models.DescribeIpUnBlockListResponse;
 const ModifyCCPolicySwitchRequest = models.ModifyCCPolicySwitchRequest;
 const ModifyL4KeepTimeRequest = models.ModifyL4KeepTimeRequest;
 const ModifyCCHostProtectionRequest = models.ModifyCCHostProtectionRequest;
@@ -183,6 +186,7 @@ const DescribleL7RulesRequest = models.DescribleL7RulesRequest;
 const DescribeCCIpAllowDenyRequest = models.DescribeCCIpAllowDenyRequest;
 const DescribeSecIndexResponse = models.DescribeSecIndexResponse;
 const L7RuleEntry = models.L7RuleEntry;
+const IpUnBlockData = models.IpUnBlockData;
 const ModifyDDoSLevelRequest = models.ModifyDDoSLevelRequest;
 const DDoSPolicyPacketFilter = models.DDoSPolicyPacketFilter;
 const DescribeDDoSNetIpLogResponse = models.DescribeDDoSNetIpLogResponse;
@@ -382,6 +386,17 @@ class DayuClient extends AbstractClient {
     DescribeCCIpAllowDeny(req, cb) {
         let resp = new DescribeCCIpAllowDenyResponse();
         this.request("DescribeCCIpAllowDeny", req, resp, cb);
+    }
+
+    /**
+     * 获取IP解封记录
+     * @param {DescribeIpUnBlockListRequest} req
+     * @param {function(string, DescribeIpUnBlockListResponse):void} cb
+     * @public
+     */
+    DescribeIpUnBlockList(req, cb) {
+        let resp = new DescribeIpUnBlockListResponse();
+        this.request("DescribeIpUnBlockList", req, resp, cb);
     }
 
     /**

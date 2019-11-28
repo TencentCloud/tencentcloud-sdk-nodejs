@@ -50,6 +50,7 @@ const DescribePublicConfigReleaseLogsRequest = models.DescribePublicConfigReleas
 const CreateServerlessGroupResponse = models.CreateServerlessGroupResponse;
 const DeleteApplicationResponse = models.DeleteApplicationResponse;
 const StartGroupRequest = models.StartGroupRequest;
+const DeployServerlessGroupResponse = models.DeployServerlessGroupResponse;
 const DescribeConfigsResponse = models.DescribeConfigsResponse;
 const DescribeApplicationAttributeResponse = models.DescribeApplicationAttributeResponse;
 const DescribeApplicationsResponse = models.DescribeApplicationsResponse;
@@ -111,6 +112,7 @@ const DeleteConfigRequest = models.DeleteConfigRequest;
 const DescribePublicConfigReleaseLogsResponse = models.DescribePublicConfigReleaseLogsResponse;
 const VmGroupSimple = models.VmGroupSimple;
 const Instance = models.Instance;
+const DeployServerlessGroupRequest = models.DeployServerlessGroupRequest;
 const Config = models.Config;
 const CreateClusterResponse = models.CreateClusterResponse;
 const DeletePublicConfigResponse = models.DeletePublicConfigResponse;
@@ -785,6 +787,17 @@ class TsfClient extends AbstractClient {
     ShrinkGroup(req, cb) {
         let resp = new ShrinkGroupResponse();
         this.request("ShrinkGroup", req, resp, cb);
+    }
+
+    /**
+     * 部署Serverless应用
+     * @param {DeployServerlessGroupRequest} req
+     * @param {function(string, DeployServerlessGroupResponse):void} cb
+     * @public
+     */
+    DeployServerlessGroup(req, cb) {
+        let resp = new DeployServerlessGroupResponse();
+        this.request("DeployServerlessGroup", req, resp, cb);
     }
 
     /**

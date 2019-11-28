@@ -192,6 +192,74 @@ class ModifyDDoSPolicyCaseRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeIpUnBlockList请求参数结构体
+ * @class
+ */
+class DescribeIpUnBlockListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 开始时间
+         * @type {string || null}
+         */
+        this.BeginTime = null;
+
+        /**
+         * 结束时间
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * IP（不为空时，进行IP过滤）
+         * @type {string || null}
+         */
+        this.Ip = null;
+
+        /**
+         * 分页参数（不为空时，进行分页查询），此字段后面会弃用，请用Limit和Offset字段代替；
+         * @type {Paging || null}
+         */
+        this.Paging = null;
+
+        /**
+         * 一页条数，填0表示不分页
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 页起始偏移，取值为(页码-1)*一页条数
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.BeginTime = 'BeginTime' in params ? params.BeginTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.Ip = 'Ip' in params ? params.Ip : null;
+
+        if (params.Paging) {
+            let obj = new Paging();
+            obj.deserialize(params.Paging)
+            this.Paging = obj;
+        }
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+
+    }
+}
+
+/**
  * DeleteDDoSPolicyCase请求参数结构体
  * @class
  */
@@ -877,7 +945,7 @@ class ModifyCCLevelRequest extends  AbstractModel {
         super();
 
         /**
-         * 大禹子产品代号（bgpip表示高防IP；bgp表示独享包；bgp-multip表示共享包；net表示高防IP专业版）
+         * 大禹子产品代号（bgpip表示高防IP；net表示高防IP专业版）
          * @type {string || null}
          */
         this.Business = null;
@@ -895,14 +963,13 @@ class ModifyCCLevelRequest extends  AbstractModel {
         this.Level = null;
 
         /**
-         * 可选字段，代表CC防护类型，取值[http（http协议的CC防护），https（https协议的CC防护）]；当不填时，默认为http协议的CC防护；当填写https时还需要填写RuleId字段；
+         * 可选字段，代表CC防护类型，取值[http（HTTP协议的CC防护），https（HTTPS协议的CC防护）]；当不填时，默认为HTTP协议的CC防护；当填写https时还需要填写RuleId字段；
          * @type {string || null}
          */
         this.Protocol = null;
 
         /**
-         * 可选字段，表示https协议的7层转发规则ID（通过获取7层转发规则接口可以获取规则ID）；
-当Protocol=https时必须填写；
+         * 表示7层转发规则ID（通过获取7层转发规则接口可以获取规则ID）；
          * @type {string || null}
          */
         this.RuleId = null;
@@ -1306,7 +1373,7 @@ class CreateL7RuleCertRequest extends  AbstractModel {
         this.RuleId = null;
 
         /**
-         * 证书类型，当为协议为https协议时必须填，取值[2(腾讯云托管证书)]
+         * 证书类型，当为协议为HTTPS协议时必须填，取值[2(腾讯云托管证书)]
          * @type {number || null}
          */
         this.CertType = null;
@@ -1324,7 +1391,7 @@ class CreateL7RuleCertRequest extends  AbstractModel {
         this.Cert = null;
 
         /**
-         * 当证书来源为自有证书时，此字段必须填写证书秘钥；(因已不再支持自有证书，此字段已弃用，请不用填写此字段)
+         * 当证书来源为自有证书时，此字段必须填写证书密钥；(因已不再支持自有证书，此字段已弃用，请不用填写此字段)
          * @type {string || null}
          */
         this.PrivateKey = null;
@@ -1618,7 +1685,7 @@ class WaterPrintKey extends  AbstractModel {
         this.OpenStatus = null;
 
         /**
-         * 秘钥生成时间
+         * 密钥生成时间
          * @type {string || null}
          */
         this.CreateTime = null;
@@ -2907,7 +2974,7 @@ class CCPolicy extends  AbstractModel {
         this.RuleList = null;
 
         /**
-         * Ip列表
+         * IP列表
          * @type {Array.<string> || null}
          */
         this.IpList = null;
@@ -3396,19 +3463,19 @@ https://域名/cgi
         this.UrlList = null;
 
         /**
-         * 可选字段，代表CC防护类型，取值[http（http协议的CC防护），https（https协议的CC防护）]；当不填时，默认为http协议的CC防护；当填写https时还需要填写Domain和RuleId字段；
+         * 可选字段，代表CC防护类型，取值[http（HTTP协议的CC防护），https（HTTPS协议的CC防护）]；当不填时，默认为HTTP协议的CC防护；当填写https时还需要填写Domain和RuleId字段；
          * @type {string || null}
          */
         this.Protocol = null;
 
         /**
-         * 可选字段，表示https协议的7层转发规则域名（通过获取7层转发规则接口可以获取域名），只有当Protocol字段为https时才必须填写此字段；
+         * 可选字段，表示HTTPS协议的7层转发规则域名（通过获取7层转发规则接口可以获取域名），只有当Protocol字段为https时才必须填写此字段；
          * @type {string || null}
          */
         this.Domain = null;
 
         /**
-         * 可选字段，表示https协议的7层转发规则ID（通过获取7层转发规则接口可以获取规则ID），当添加并且Protocol=https时必须填写；
+         * 可选字段，表示HTTPS协议的7层转发规则ID（通过获取7层转发规则接口可以获取规则ID），当添加并且Protocol=https时必须填写；
 当Method为delete时，可以不用填写此字段；
          * @type {string || null}
          */
@@ -3708,19 +3775,19 @@ class ModifyCCIpAllowDenyRequest extends  AbstractModel {
         this.IpList = null;
 
         /**
-         * 可选字段，代表CC防护类型，取值[http（http协议的CC防护），https（https协议的CC防护）]；当不填时，默认为http协议的CC防护；当填写https时还需要填写Domain和RuleId字段；
+         * 可选字段，代表CC防护类型，取值[http（HTTP协议的CC防护），https（HTTPS协议的CC防护）]；当不填时，默认为HTTP协议的CC防护；当填写https时还需要填写Domain和RuleId字段；
          * @type {string || null}
          */
         this.Protocol = null;
 
         /**
-         * 可选字段，表示https协议的7层转发规则域名（通过获取7层转发规则接口可以获取域名），只有当Protocol字段为https时才必须填写此字段；
+         * 可选字段，表示HTTPS协议的7层转发规则域名（通过获取7层转发规则接口可以获取域名），只有当Protocol字段为https时才必须填写此字段；
          * @type {string || null}
          */
         this.Domain = null;
 
         /**
-         * 可选字段，表示https协议的7层转发规则ID（通过获取7层转发规则接口可以获取规则ID），
+         * 可选字段，表示HTTPS协议的7层转发规则ID（通过获取7层转发规则接口可以获取规则ID），
 当Method为delete时，不用填写此字段；
          * @type {string || null}
          */
@@ -4150,6 +4217,41 @@ class DDoSPolicyPortLimit extends  AbstractModel {
         this.SPortEnd = 'SPortEnd' in params ? params.SPortEnd : null;
         this.Action = 'Action' in params ? params.Action : null;
         this.Kind = 'Kind' in params ? params.Kind : null;
+
+    }
+}
+
+/**
+ * 分页索引
+ * @class
+ */
+class Paging extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 起始位置
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 数量
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
 
     }
 }
@@ -5844,6 +5946,70 @@ class ModifyDDoSPolicyNameRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeIpUnBlockList返回参数结构体
+ * @class
+ */
+class DescribeIpUnBlockListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 开始时间
+         * @type {string || null}
+         */
+        this.BeginTime = null;
+
+        /**
+         * 结束时间
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * IP解封记录
+         * @type {Array.<IpUnBlockData> || null}
+         */
+        this.List = null;
+
+        /**
+         * 总记录数
+         * @type {number || null}
+         */
+        this.Total = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.BeginTime = 'BeginTime' in params ? params.BeginTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+
+        if (params.List) {
+            this.List = new Array();
+            for (let z in params.List) {
+                let obj = new IpUnBlockData();
+                obj.deserialize(params.List[z]);
+                this.List.push(obj);
+            }
+        }
+        this.Total = 'Total' in params ? params.Total : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * ModifyCCPolicySwitch请求参数结构体
  * @class
  */
@@ -6335,13 +6501,13 @@ class ModifyCCThresholdRequest extends  AbstractModel {
         this.Threshold = null;
 
         /**
-         * 可选字段，代表CC防护类型，取值[http（http协议的CC防护），https（https协议的CC防护）]；当不填时，默认为http协议的CC防护；当填写https时还需要填写RuleId字段；
+         * 可选字段，代表CC防护类型，取值[http（HTTP协议的CC防护），https（HTTPS协议的CC防护）]；当不填时，默认为HTTP协议的CC防护；当填写https时还需要填写RuleId字段；
          * @type {string || null}
          */
         this.Protocol = null;
 
         /**
-         * 可选字段，表示https协议的7层转发规则ID（通过获取7层转发规则接口可以获取规则ID）；
+         * 可选字段，表示HTTPS协议的7层转发规则ID（通过获取7层转发规则接口可以获取规则ID）；
 当Protocol=https时必须填写；
          * @type {string || null}
          */
@@ -7731,7 +7897,7 @@ class CCEventRecord extends  AbstractModel {
         super();
 
         /**
-         * 大禹子产品代号（shield表示棋牌；bgpip表示高防IP；bgp表示高防包；bgp-multip表示多ip高防包；net表示高防IP专业版；basic表示DDos基础防护）
+         * 大禹子产品代号（shield表示棋牌；bgpip表示高防IP；bgp表示独享包；bgp-multip表示共享包；net表示高防IP专业版；basic表示DDoS基础防护）
          * @type {string || null}
          */
         this.Business = null;
@@ -7840,7 +8006,7 @@ class DescribeTransmitStatisRequest extends  AbstractModel {
         super();
 
         /**
-         * 大禹子产品代号（bgpip表示高防IP；net表示高防IP专业版；shield表示棋牌盾）
+         * 大禹子产品代号（bgpip表示高防IP；net表示高防IP专业版；shield表示棋牌盾；bgp表示独享包；bgp-multip表示共享包）
          * @type {string || null}
          */
         this.Business = null;
@@ -7878,7 +8044,7 @@ pkg表示包速率；
         this.EndTime = null;
 
         /**
-         * 资源的IP；当不填写时，默认统计资源实例的所有IP；资源实例有多个IP（比如高防IP专业版）时，统计方式是求和；
+         * 资源的IP（当Business为bgp-multip时必填，且仅支持一个IP）；当不填写时，默认统计资源实例的所有IP；资源实例有多个IP（比如高防IP专业版）时，统计方式是求和；
          * @type {Array.<string> || null}
          */
         this.IpList = null;
@@ -9569,7 +9735,7 @@ class L7RuleEntry extends  AbstractModel {
         this.Cert = null;
 
         /**
-         * 当证书来源为自有证书时，此字段必须填写证书秘钥；(因已不再支持自有证书，此字段已弃用，请不用填写此字段)
+         * 当证书来源为自有证书时，此字段必须填写证书密钥；(因已不再支持自有证书，此字段已弃用，请不用填写此字段)
          * @type {string || null}
          */
         this.PrivateKey = null;
@@ -9645,6 +9811,55 @@ class L7RuleEntry extends  AbstractModel {
         this.CCEnable = 'CCEnable' in params ? params.CCEnable : null;
         this.CCThreshold = 'CCThreshold' in params ? params.CCThreshold : null;
         this.CCLevel = 'CCLevel' in params ? params.CCLevel : null;
+
+    }
+}
+
+/**
+ * IP解封记录
+ * @class
+ */
+class IpUnBlockData extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * IP
+         * @type {string || null}
+         */
+        this.Ip = null;
+
+        /**
+         * 封堵时间
+         * @type {string || null}
+         */
+        this.BlockTime = null;
+
+        /**
+         * 解封时间（实际解封时间）
+         * @type {string || null}
+         */
+        this.UnBlockTime = null;
+
+        /**
+         * 解封类型（user：自助解封；auto：自动解封； update：升级解封；bind：绑定高防包解封）
+         * @type {string || null}
+         */
+        this.ActionType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Ip = 'Ip' in params ? params.Ip : null;
+        this.BlockTime = 'BlockTime' in params ? params.BlockTime : null;
+        this.UnBlockTime = 'UnBlockTime' in params ? params.UnBlockTime : null;
+        this.ActionType = 'ActionType' in params ? params.ActionType : null;
 
     }
 }
@@ -10116,7 +10331,7 @@ class DDoSEventRecord extends  AbstractModel {
         super();
 
         /**
-         * 大禹子产品代号（shield表示棋牌；bgpip表示高防IP；bgp表示高防包；bgp-multip表示多ip高防包；net表示高防IP专业版；basic表示DDos基础防护）
+         * 大禹子产品代号（shield表示棋牌；bgpip表示高防IP；bgp表示独享包；bgp-multip表示共享包；net表示高防IP专业版；basic表示DDoS基础防护）
          * @type {string || null}
          */
         this.Business = null;
@@ -10467,6 +10682,7 @@ class DescribeCCTrendRequest extends  AbstractModel {
 
 module.exports = {
     ModifyDDoSPolicyCaseRequest: ModifyDDoSPolicyCaseRequest,
+    DescribeIpUnBlockListRequest: DescribeIpUnBlockListRequest,
     DeleteDDoSPolicyCaseRequest: DeleteDDoSPolicyCaseRequest,
     CreateDDoSPolicyResponse: CreateDDoSPolicyResponse,
     DeleteL7RulesRequest: DeleteL7RulesRequest,
@@ -10536,6 +10752,7 @@ module.exports = {
     CreateL4RulesResponse: CreateL4RulesResponse,
     DescribeInsurePacksRequest: DescribeInsurePacksRequest,
     DDoSPolicyPortLimit: DDoSPolicyPortLimit,
+    Paging: Paging,
     ModifyL4RulesResponse: ModifyL4RulesResponse,
     L4HealthConfig: L4HealthConfig,
     CreateCCSelfDefinePolicyRequest: CreateCCSelfDefinePolicyRequest,
@@ -10567,6 +10784,7 @@ module.exports = {
     ModifyCCSelfDefinePolicyRequest: ModifyCCSelfDefinePolicyRequest,
     DescribeDDoSEvListRequest: DescribeDDoSEvListRequest,
     ModifyDDoSPolicyNameRequest: ModifyDDoSPolicyNameRequest,
+    DescribeIpUnBlockListResponse: DescribeIpUnBlockListResponse,
     ModifyCCPolicySwitchRequest: ModifyCCPolicySwitchRequest,
     ModifyL4KeepTimeRequest: ModifyL4KeepTimeRequest,
     ModifyCCHostProtectionRequest: ModifyCCHostProtectionRequest,
@@ -10633,6 +10851,7 @@ module.exports = {
     DescribeCCIpAllowDenyRequest: DescribeCCIpAllowDenyRequest,
     DescribeSecIndexResponse: DescribeSecIndexResponse,
     L7RuleEntry: L7RuleEntry,
+    IpUnBlockData: IpUnBlockData,
     ModifyDDoSLevelRequest: ModifyDDoSLevelRequest,
     DDoSPolicyPacketFilter: DDoSPolicyPacketFilter,
     DescribeDDoSNetIpLogResponse: DescribeDDoSNetIpLogResponse,

@@ -96,7 +96,7 @@ class LivenessCompareResponse extends  AbstractModel {
         this.Result = null;
 
         /**
-         * 业务错误描述
+         * 业务结果描述。
          * @type {string || null}
          */
         this.Description = null;
@@ -232,6 +232,48 @@ class BankCardVerificationRequest extends  AbstractModel {
 }
 
 /**
+ * PhoneVerification请求参数结构体
+ * @class
+ */
+class PhoneVerificationRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 身份证号
+         * @type {string || null}
+         */
+        this.IdCard = null;
+
+        /**
+         * 姓名
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 手机号
+         * @type {string || null}
+         */
+        this.Phone = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.IdCard = 'IdCard' in params ? params.IdCard : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Phone = 'Phone' in params ? params.Phone : null;
+
+    }
+}
+
+/**
  * DetectAuth返回参数结构体
  * @class
  */
@@ -269,6 +311,60 @@ class DetectAuthResponse extends  AbstractModel {
         }
         this.Url = 'Url' in params ? params.Url : null;
         this.BizToken = 'BizToken' in params ? params.BizToken : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * PhoneVerification返回参数结构体
+ * @class
+ */
+class PhoneVerificationResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 认证结果码:
+  '0': '认证通过',
+  '-1': '手机号已实名，但是身份证和姓名均与实名信息不一致 ',
+  '-2': '手机号已实名，手机号和证件号一致，姓名不一致',
+  '-3': '手机号已实名，手机号和姓名一致，身份证不一致',
+  '-4': '信息不一致',
+  '-5': '手机号未实名',
+  '-6': '手机号码不合法',
+  '-7': '身份证号码有误',
+  '-8': '姓名校验不通过',
+  '-9': '没有记录',
+  '-10': '认证未通过',
+  '-11': '服务繁忙'
+         * @type {string || null}
+         */
+        this.Result = null;
+
+        /**
+         * 业务结果描述。
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Result = 'Result' in params ? params.Result : null;
+        this.Description = 'Description' in params ? params.Description : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -366,7 +462,7 @@ class BankCard4EVerificationResponse extends  AbstractModel {
         this.Result = null;
 
         /**
-         * 认证结果信息。
+         * 业务结果描述。
          * @type {string || null}
          */
         this.Description = null;
@@ -522,7 +618,7 @@ class LivenessRecognitionResponse extends  AbstractModel {
         this.Result = null;
 
         /**
-         * 业务错误描述
+         * 业务结果描述。
          * @type {string || null}
          */
         this.Description = null;
@@ -574,7 +670,7 @@ class IdCardOCRVerificationResponse extends  AbstractModel {
         this.Result = null;
 
         /**
-         * 认证结果信息。
+         * 业务结果描述。
          * @type {string || null}
          */
         this.Description = null;
@@ -720,6 +816,68 @@ BASE64编码后的图片数据大小不超过3M，仅支持jpg、png格式。
 }
 
 /**
+ * MinorsVerification返回参数结构体
+ * @class
+ */
+class MinorsVerificationResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 结果码，收费情况如下。
+收费结果码：
+0: 成年
+-1: 未成年
+-2: 手机号未实名
+-3: 姓名和身份证号不一致
+
+不收费结果码：
+-4: 非法身份证号（长度、校验位等不正确）
+-5: 非法姓名（长度、格式等不正确）
+-6: 数据源服务异常
+-7: 数据源中无此身份证记录
+-8: 公安比对系统升级中，请稍后再试
+         * @type {string || null}
+         */
+        this.Result = null;
+
+        /**
+         * 业务结果描述。
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * 当结果码为0或者-1时，该字段的值为年龄区间。
+格式为[a,b)，表示年龄在a岁以上（包括a岁），b岁以下（不包括b岁）。若b为+时表示没有上限。
+         * @type {string || null}
+         */
+        this.AgeRange = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Result = 'Result' in params ? params.Result : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.AgeRange = 'AgeRange' in params ? params.AgeRange : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * BankCardVerification返回参数结构体
  * @class
  */
@@ -754,7 +912,7 @@ class BankCardVerificationResponse extends  AbstractModel {
         this.Result = null;
 
         /**
-         * 认证结果信息。
+         * 业务结果描述。
          * @type {string || null}
          */
         this.Description = null;
@@ -924,6 +1082,57 @@ class GetActionSequenceResponse extends  AbstractModel {
 }
 
 /**
+ * MinorsVerification请求参数结构体
+ * @class
+ */
+class MinorsVerificationRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 参与校验的参数类型。
+0：使用手机号进行校验；
+1：使用姓名与身份证号进行校验。
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * 手机号。11位数字。
+         * @type {string || null}
+         */
+        this.Mobile = null;
+
+        /**
+         * 身份证号码。
+         * @type {string || null}
+         */
+        this.IdCard = null;
+
+        /**
+         * 姓名。
+         * @type {string || null}
+         */
+        this.Name = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Mobile = 'Mobile' in params ? params.Mobile : null;
+        this.IdCard = 'IdCard' in params ? params.IdCard : null;
+        this.Name = 'Name' in params ? params.Name : null;
+
+    }
+}
+
+/**
  * ImageRecognition返回参数结构体
  * @class
  */
@@ -944,7 +1153,7 @@ class ImageRecognitionResponse extends  AbstractModel {
         this.Result = null;
 
         /**
-         * 业务错误描述
+         * 业务结果描述。
          * @type {string || null}
          */
         this.Description = null;
@@ -1180,7 +1389,7 @@ class BankCard2EVerificationResponse extends  AbstractModel {
         this.Result = null;
 
         /**
-         * 认证结果信息。
+         * 业务结果描述。
          * @type {string || null}
          */
         this.Description = null;
@@ -1230,7 +1439,7 @@ class IdCardVerificationResponse extends  AbstractModel {
         this.Result = null;
 
         /**
-         * 认证结果信息。
+         * 业务结果描述。
          * @type {string || null}
          */
         this.Description = null;
@@ -1339,7 +1548,7 @@ class LivenessResponse extends  AbstractModel {
         this.Result = null;
 
         /**
-         * 业务错误描述
+         * 业务结果描述。
          * @type {string || null}
          */
         this.Description = null;
@@ -1373,7 +1582,9 @@ module.exports = {
     GetLiveCodeRequest: GetLiveCodeRequest,
     IdCardVerificationRequest: IdCardVerificationRequest,
     BankCardVerificationRequest: BankCardVerificationRequest,
+    PhoneVerificationRequest: PhoneVerificationRequest,
     DetectAuthResponse: DetectAuthResponse,
+    PhoneVerificationResponse: PhoneVerificationResponse,
     IdCardOCRVerificationRequest: IdCardOCRVerificationRequest,
     BankCard4EVerificationResponse: BankCard4EVerificationResponse,
     BankCard2EVerificationRequest: BankCard2EVerificationRequest,
@@ -1381,10 +1592,12 @@ module.exports = {
     LivenessRecognitionResponse: LivenessRecognitionResponse,
     IdCardOCRVerificationResponse: IdCardOCRVerificationResponse,
     DetectAuthRequest: DetectAuthRequest,
+    MinorsVerificationResponse: MinorsVerificationResponse,
     BankCardVerificationResponse: BankCardVerificationResponse,
     ImageRecognitionRequest: ImageRecognitionRequest,
     BankCard4EVerificationRequest: BankCard4EVerificationRequest,
     GetActionSequenceResponse: GetActionSequenceResponse,
+    MinorsVerificationRequest: MinorsVerificationRequest,
     ImageRecognitionResponse: ImageRecognitionResponse,
     GetActionSequenceRequest: GetActionSequenceRequest,
     GetDetectInfoResponse: GetDetectInfoResponse,

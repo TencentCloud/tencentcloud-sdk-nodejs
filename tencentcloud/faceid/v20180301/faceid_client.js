@@ -21,7 +21,9 @@ const LivenessCompareResponse = models.LivenessCompareResponse;
 const GetLiveCodeRequest = models.GetLiveCodeRequest;
 const IdCardVerificationRequest = models.IdCardVerificationRequest;
 const BankCardVerificationRequest = models.BankCardVerificationRequest;
+const PhoneVerificationRequest = models.PhoneVerificationRequest;
 const DetectAuthResponse = models.DetectAuthResponse;
+const PhoneVerificationResponse = models.PhoneVerificationResponse;
 const IdCardOCRVerificationRequest = models.IdCardOCRVerificationRequest;
 const BankCard4EVerificationResponse = models.BankCard4EVerificationResponse;
 const BankCard2EVerificationRequest = models.BankCard2EVerificationRequest;
@@ -29,10 +31,12 @@ const LivenessRecognitionRequest = models.LivenessRecognitionRequest;
 const LivenessRecognitionResponse = models.LivenessRecognitionResponse;
 const IdCardOCRVerificationResponse = models.IdCardOCRVerificationResponse;
 const DetectAuthRequest = models.DetectAuthRequest;
+const MinorsVerificationResponse = models.MinorsVerificationResponse;
 const BankCardVerificationResponse = models.BankCardVerificationResponse;
 const ImageRecognitionRequest = models.ImageRecognitionRequest;
 const BankCard4EVerificationRequest = models.BankCard4EVerificationRequest;
 const GetActionSequenceResponse = models.GetActionSequenceResponse;
+const MinorsVerificationRequest = models.MinorsVerificationRequest;
 const ImageRecognitionResponse = models.ImageRecognitionResponse;
 const GetActionSequenceRequest = models.GetActionSequenceRequest;
 const GetDetectInfoResponse = models.GetDetectInfoResponse;
@@ -63,6 +67,17 @@ class FaceidClient extends AbstractClient {
     GetDetectInfo(req, cb) {
         let resp = new GetDetectInfoResponse();
         this.request("GetDetectInfo", req, resp, cb);
+    }
+
+    /**
+     * 传入手机号或者姓名和身份证号，判断该信息是否已实名认证且年满18周岁。
+     * @param {MinorsVerificationRequest} req
+     * @param {function(string, MinorsVerificationResponse):void} cb
+     * @public
+     */
+    MinorsVerification(req, cb) {
+        let resp = new MinorsVerificationResponse();
+        this.request("MinorsVerification", req, resp, cb);
     }
 
     /**
@@ -99,7 +114,7 @@ class FaceidClient extends AbstractClient {
     }
 
     /**
-     * 银行卡三要素核验，输入银行卡号、姓名、开户证件号，校验信息的真实性和一致性。
+     * 本接口用于银行卡号、姓名、开户证件号信息的真实性和一致性。
      * @param {BankCardVerificationRequest} req
      * @param {function(string, BankCardVerificationResponse):void} cb
      * @public
@@ -154,7 +169,7 @@ class FaceidClient extends AbstractClient {
     }
 
     /**
-     * 输入银行卡号、姓名、开户证件号、开户手机号，校验信息的真实性和一致性。
+     * 本接口用于输入银行卡号、姓名、开户证件号、开户手机号，校验信息的真实性和一致性。
      * @param {BankCard4EVerificationRequest} req
      * @param {function(string, BankCard4EVerificationResponse):void} cb
      * @public
@@ -187,7 +202,7 @@ class FaceidClient extends AbstractClient {
     }
 
     /**
-     * 输入银行卡号、姓名，校验信息的真实性和一致性。
+     * 本接口用于校验姓名和银行卡号的真实性和一致性。
      * @param {BankCard2EVerificationRequest} req
      * @param {function(string, BankCard2EVerificationResponse):void} cb
      * @public
@@ -195,6 +210,17 @@ class FaceidClient extends AbstractClient {
     BankCard2EVerification(req, cb) {
         let resp = new BankCard2EVerificationResponse();
         this.request("BankCard2EVerification", req, resp, cb);
+    }
+
+    /**
+     * 本接口用于校验手机号、姓名和身份证号的真实性和一致性。
+     * @param {PhoneVerificationRequest} req
+     * @param {function(string, PhoneVerificationResponse):void} cb
+     * @public
+     */
+    PhoneVerification(req, cb) {
+        let resp = new PhoneVerificationResponse();
+        this.request("PhoneVerification", req, resp, cb);
     }
 
 
