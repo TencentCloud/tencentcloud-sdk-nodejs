@@ -503,6 +503,12 @@ class AddExistedInstancesRequest extends  AbstractModel {
          */
         this.SecurityGroupIds = null;
 
+        /**
+         * 重装系统时，可以指定修改实例的HostName(集群为HostName模式时，此参数必传，规则名称除不支持大写字符外与[CVM创建实例](https://cloud.tencent.com/document/product/213/15730)接口HostName一致)
+         * @type {string || null}
+         */
+        this.HostName = null;
+
     }
 
     /**
@@ -533,6 +539,7 @@ class AddExistedInstancesRequest extends  AbstractModel {
             this.LoginSettings = obj;
         }
         this.SecurityGroupIds = 'SecurityGroupIds' in params ? params.SecurityGroupIds : null;
+        this.HostName = 'HostName' in params ? params.HostName : null;
 
     }
 }
@@ -835,6 +842,41 @@ class DescribeClusterRouteTablesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+
+    }
+}
+
+/**
+ * CreateClusterInstances返回参数结构体
+ * @class
+ */
+class CreateClusterInstancesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 节点实例ID
+         * @type {Array.<string> || null}
+         */
+        this.InstanceIdSet = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceIdSet = 'InstanceIdSet' in params ? params.InstanceIdSet : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1809,6 +1851,12 @@ class InstanceAdvancedSettings extends  AbstractModel {
          */
         this.Labels = null;
 
+        /**
+         * 数据盘相关信息
+         * @type {Array.<DataDisk> || null}
+         */
+        this.DataDisks = null;
+
     }
 
     /**
@@ -1829,6 +1877,15 @@ class InstanceAdvancedSettings extends  AbstractModel {
                 let obj = new Label();
                 obj.deserialize(params.Labels[z]);
                 this.Labels.push(obj);
+            }
+        }
+
+        if (params.DataDisks) {
+            this.DataDisks = new Array();
+            for (let z in params.DataDisks) {
+                let obj = new DataDisk();
+                obj.deserialize(params.DataDisks[z]);
+                this.DataDisks.push(obj);
             }
         }
 
@@ -2057,7 +2114,7 @@ class ExistedInstancesPara extends  AbstractModel {
         this.SecurityGroupIds = null;
 
         /**
-         * 重装系统时，可以指定修改实例的HostName。
+         * 重装系统时，可以指定修改实例的HostName(集群为HostName模式时，此参数必传，规则名称除不支持大写字符外与[CVM创建实例](https://cloud.tencent.com/document/product/213/15730)接口HostName一致)
          * @type {string || null}
          */
         this.HostName = null;
@@ -2618,7 +2675,7 @@ class ClusterAdvancedSettings extends  AbstractModel {
         this.ContainerRuntime = null;
 
         /**
-         * 集群中节点NodeName类型（包括 hostname,lan-ip两种形式，默认为lan-ip）
+         * 集群中节点NodeName类型（包括 hostname,lan-ip两种形式，默认为lan-ip。如果开启了hostname模式，创建节点时需要设置HostName参数，并且InstanceName需要和HostName一致）
          * @type {string || null}
          */
         this.NodeNameType = null;
@@ -2916,6 +2973,13 @@ class Cluster extends  AbstractModel {
          */
         this.ClusterStatus = null;
 
+        /**
+         * 集群属性(包括集群不同属性的MAP，属性字段包括NodeNameType (lan-ip模式和hostname 模式，默认无lan-ip模式))
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Property = null;
+
     }
 
     /**
@@ -2949,6 +3013,7 @@ class Cluster extends  AbstractModel {
             }
         }
         this.ClusterStatus = 'ClusterStatus' in params ? params.ClusterStatus : null;
+        this.Property = 'Property' in params ? params.Property : null;
 
     }
 }
@@ -3271,24 +3336,48 @@ class DeleteClusterRouteTableResponse extends  AbstractModel {
 }
 
 /**
- * CreateClusterInstances返回参数结构体
+ * 描述了k8s节点数据盘相关配置与信息。
  * @class
  */
-class CreateClusterInstancesResponse extends  AbstractModel {
+class DataDisk extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 节点实例ID
-         * @type {Array.<string> || null}
-         */
-        this.InstanceIdSet = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * 云盘类型
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.DiskType = null;
+
+        /**
+         * 文件系统
+         * @type {string || null}
+         */
+        this.FileSystem = null;
+
+        /**
+         * 云盘大小(G）
+         * @type {number || null}
+         */
+        this.DiskSize = null;
+
+        /**
+         * 是否自动化格式盘并挂载
+         * @type {boolean || null}
+         */
+        this.AutuFormatAndMount = null;
+
+        /**
+         * 挂载目录
+         * @type {Array.<string> || null}
+         */
+        this.MountTarget = null;
+
+        /**
+         * 云盘ID
+         * @type {Array.<string> || null}
+         */
+        this.DiskId = null;
 
     }
 
@@ -3299,8 +3388,12 @@ class CreateClusterInstancesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceIdSet = 'InstanceIdSet' in params ? params.InstanceIdSet : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.DiskType = 'DiskType' in params ? params.DiskType : null;
+        this.FileSystem = 'FileSystem' in params ? params.FileSystem : null;
+        this.DiskSize = 'DiskSize' in params ? params.DiskSize : null;
+        this.AutuFormatAndMount = 'AutuFormatAndMount' in params ? params.AutuFormatAndMount : null;
+        this.MountTarget = 'MountTarget' in params ? params.MountTarget : null;
+        this.DiskId = 'DiskId' in params ? params.DiskId : null;
 
     }
 }
@@ -3324,6 +3417,7 @@ module.exports = {
     DescribeClusterInstancesResponse: DescribeClusterInstancesResponse,
     CreateClusterAsGroupRequest: CreateClusterAsGroupRequest,
     DescribeClusterRouteTablesRequest: DescribeClusterRouteTablesRequest,
+    CreateClusterInstancesResponse: CreateClusterInstancesResponse,
     CreateClusterRouteTableResponse: CreateClusterRouteTableResponse,
     ExistedInstancesForNode: ExistedInstancesForNode,
     CreateClusterResponse: CreateClusterResponse,
@@ -3377,6 +3471,6 @@ module.exports = {
     DeleteClusterResponse: DeleteClusterResponse,
     AddExistedInstancesResponse: AddExistedInstancesResponse,
     DeleteClusterRouteTableResponse: DeleteClusterRouteTableResponse,
-    CreateClusterInstancesResponse: CreateClusterInstancesResponse,
+    DataDisk: DataDisk,
 
 }

@@ -317,6 +317,12 @@ class DescribeScanResultListRequest extends  AbstractModel {
          */
         this.TaskIdList = null;
 
+        /**
+         * 任务返回结果数量，默认10，上限500。大文件任务忽略此参数，返回全量结果
+         * @type {number || null}
+         */
+        this.Limit = null;
+
     }
 
     /**
@@ -328,6 +334,7 @@ class DescribeScanResultListRequest extends  AbstractModel {
         }
         this.BizId = 'BizId' in params ? params.BizId : null;
         this.TaskIdList = 'TaskIdList' in params ? params.TaskIdList : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
 
     }
 }
@@ -1425,6 +1432,13 @@ class ScanPiece extends  AbstractModel {
          */
         this.Duration = null;
 
+        /**
+         * 分片开始检测时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.PieceStartTime = null;
+
     }
 
     /**
@@ -1451,6 +1465,7 @@ class ScanPiece extends  AbstractModel {
         this.Info = 'Info' in params ? params.Info : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Duration = 'Duration' in params ? params.Duration : null;
+        this.PieceStartTime = 'PieceStartTime' in params ? params.PieceStartTime : null;
 
     }
 }

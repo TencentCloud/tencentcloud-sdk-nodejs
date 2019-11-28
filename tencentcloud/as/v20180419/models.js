@@ -995,6 +995,69 @@ class ModifyScheduledActionResponse extends  AbstractModel {
 }
 
 /**
+ * CreateAutoScalingGroupFromInstance请求参数结构体
+ * @class
+ */
+class CreateAutoScalingGroupFromInstanceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 伸缩组名称，在您账号中必须唯一。名称仅支持中文、英文、数字、下划线、分隔符"-"、小数点，最大长度不能超55个字节。
+         * @type {string || null}
+         */
+        this.AutoScalingGroupName = null;
+
+        /**
+         * 实例ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 最大实例数，取值范围为0-2000。
+         * @type {number || null}
+         */
+        this.MinSize = null;
+
+        /**
+         * 最小实例数，取值范围为0-2000。
+         * @type {number || null}
+         */
+        this.MaxSize = null;
+
+        /**
+         * 期望实例数，大小介于最小实例数和最大实例数之间。
+         * @type {number || null}
+         */
+        this.DesiredCapacity = null;
+
+        /**
+         * 是否继承实例标签，默认值为False
+         * @type {boolean || null}
+         */
+        this.InheritInstanceTag = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AutoScalingGroupName = 'AutoScalingGroupName' in params ? params.AutoScalingGroupName : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.MinSize = 'MinSize' in params ? params.MinSize : null;
+        this.MaxSize = 'MaxSize' in params ? params.MaxSize : null;
+        this.DesiredCapacity = 'DesiredCapacity' in params ? params.DesiredCapacity : null;
+        this.InheritInstanceTag = 'InheritInstanceTag' in params ? params.InheritInstanceTag : null;
+
+    }
+}
+
+/**
  * ExecuteScalingPolicy返回参数结构体
  * @class
  */
@@ -2900,6 +2963,12 @@ class PaiInstance extends  AbstractModel {
          */
         this.DomainName = null;
 
+        /**
+         * PAI管理页面URL
+         * @type {string || null}
+         */
+        this.PaiMateUrl = null;
+
     }
 
     /**
@@ -2911,6 +2980,7 @@ class PaiInstance extends  AbstractModel {
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
         this.DomainName = 'DomainName' in params ? params.DomainName : null;
+        this.PaiMateUrl = 'PaiMateUrl' in params ? params.PaiMateUrl : null;
 
     }
 }
@@ -3555,6 +3625,41 @@ class LoginSettings extends  AbstractModel {
         this.Password = 'Password' in params ? params.Password : null;
         this.KeyIds = 'KeyIds' in params ? params.KeyIds : null;
         this.KeepImageLogin = 'KeepImageLogin' in params ? params.KeepImageLogin : null;
+
+    }
+}
+
+/**
+ * CreateAutoScalingGroupFromInstance返回参数结构体
+ * @class
+ */
+class CreateAutoScalingGroupFromInstanceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 伸缩组ID
+         * @type {string || null}
+         */
+        this.AutoScalingGroupId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AutoScalingGroupId = 'AutoScalingGroupId' in params ? params.AutoScalingGroupId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -6097,6 +6202,7 @@ module.exports = {
     SpotMarketOptions: SpotMarketOptions,
     DescribeScalingPoliciesRequest: DescribeScalingPoliciesRequest,
     ModifyScheduledActionResponse: ModifyScheduledActionResponse,
+    CreateAutoScalingGroupFromInstanceRequest: CreateAutoScalingGroupFromInstanceRequest,
     ExecuteScalingPolicyResponse: ExecuteScalingPolicyResponse,
     ModifyLaunchConfigurationAttributesResponse: ModifyLaunchConfigurationAttributesResponse,
     SetInstancesProtectionResponse: SetInstancesProtectionResponse,
@@ -6145,6 +6251,7 @@ module.exports = {
     PreviewPaiDomainNameRequest: PreviewPaiDomainNameRequest,
     DeleteScalingPolicyRequest: DeleteScalingPolicyRequest,
     LoginSettings: LoginSettings,
+    CreateAutoScalingGroupFromInstanceResponse: CreateAutoScalingGroupFromInstanceResponse,
     DetachInstancesRequest: DetachInstancesRequest,
     Instance: Instance,
     CreateScheduledActionRequest: CreateScheduledActionRequest,

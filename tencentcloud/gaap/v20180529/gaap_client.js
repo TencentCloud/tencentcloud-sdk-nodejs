@@ -86,6 +86,7 @@ const BindRealServerInfo = models.BindRealServerInfo;
 const DescribeProxyAndStatisticsListenersRequest = models.DescribeProxyAndStatisticsListenersRequest;
 const DescribeAccessRegionsResponse = models.DescribeAccessRegionsResponse;
 const DeleteListenersRequest = models.DeleteListenersRequest;
+const DescribeSecurityRulesRequest = models.DescribeSecurityRulesRequest;
 const DescribeDestRegionsResponse = models.DescribeDestRegionsResponse;
 const DescribeProxiesRequest = models.DescribeProxiesRequest;
 const BindListenerRealServersResponse = models.BindListenerRealServersResponse;
@@ -152,6 +153,7 @@ const ModifyRuleAttributeResponse = models.ModifyRuleAttributeResponse;
 const CreateTCPListenersResponse = models.CreateTCPListenersResponse;
 const DescribeSecurityPolicyDetailRequest = models.DescribeSecurityPolicyDetailRequest;
 const ModifyDomainResponse = models.ModifyDomainResponse;
+const DescribeRulesByRuleIdsResponse = models.DescribeRulesByRuleIdsResponse;
 const SetAuthenticationRequest = models.SetAuthenticationRequest;
 const InquiryPriceCreateProxyResponse = models.InquiryPriceCreateProxyResponse;
 const NewRealServer = models.NewRealServer;
@@ -198,6 +200,7 @@ const CheckProxyCreateRequest = models.CheckProxyCreateRequest;
 const DescribeRegionAndPriceRequest = models.DescribeRegionAndPriceRequest;
 const AddRealServersRequest = models.AddRealServersRequest;
 const ModifyProxiesAttributeRequest = models.ModifyProxiesAttributeRequest;
+const DescribeSecurityRulesResponse = models.DescribeSecurityRulesResponse;
 const CertificateAliasInfo = models.CertificateAliasInfo;
 const CreateHTTPSListenerRequest = models.CreateHTTPSListenerRequest;
 const DeleteSecurityRulesRequest = models.DeleteSecurityRulesRequest;
@@ -210,6 +213,7 @@ const DescribeProxyGroupDetailsResponse = models.DescribeProxyGroupDetailsRespon
 const UDPListener = models.UDPListener;
 const ProxyInfo = models.ProxyInfo;
 const RemoveRealServersResponse = models.RemoveRealServersResponse;
+const DescribeRulesByRuleIdsRequest = models.DescribeRulesByRuleIdsRequest;
 const RealServerBindSetReq = models.RealServerBindSetReq;
 const OpenProxiesResponse = models.OpenProxiesResponse;
 const ModifyProxyConfigurationResponse = models.ModifyProxyConfigurationResponse;
@@ -989,6 +993,17 @@ class GaapClient extends AbstractClient {
     }
 
     /**
+     * 本接口（DescribeSecurityRules）用于根据安全规则ID查询安全规则详情列表。支持一个或多个安全规则的查询。一次最多支持20个安全规则的查询。
+     * @param {DescribeSecurityRulesRequest} req
+     * @param {function(string, DescribeSecurityRulesResponse):void} cb
+     * @public
+     */
+    DescribeSecurityRules(req, cb) {
+        let resp = new DescribeSecurityRulesResponse();
+        this.request("DescribeSecurityRules", req, resp, cb);
+    }
+
+    /**
      * 本接口（DescribeRules）用于查询监听器下的所有规则信息，包括规则域名，路径以及该规则下所绑定的源站列表。当通道版本为3.0时，该接口会返回该域名对应的高级认证配置信息。
      * @param {DescribeRulesRequest} req
      * @param {function(string, DescribeRulesResponse):void} cb
@@ -1085,6 +1100,17 @@ class GaapClient extends AbstractClient {
     DeleteListeners(req, cb) {
         let resp = new DeleteListenersResponse();
         this.request("DeleteListeners", req, resp, cb);
+    }
+
+    /**
+     * 本接口（DescribeRulesByRuleIds）用于根据规则ID拉取规则信息列表。支持一个或者多个规则信息的拉取。一次最多支持10个规则信息的拉取。
+     * @param {DescribeRulesByRuleIdsRequest} req
+     * @param {function(string, DescribeRulesByRuleIdsResponse):void} cb
+     * @public
+     */
+    DescribeRulesByRuleIds(req, cb) {
+        let resp = new DescribeRulesByRuleIdsResponse();
+        this.request("DescribeRulesByRuleIds", req, resp, cb);
     }
 
     /**
