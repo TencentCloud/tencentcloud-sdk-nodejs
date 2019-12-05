@@ -8357,11 +8357,18 @@ class DomainRuleSet extends  AbstractModel {
         this.RealServerCertificateDomain = null;
 
         /**
-         * 多客户端证书时，返回多个证书的id和列表
+         * 多客户端证书时，返回多个证书的id和别名
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<CertificateAliasInfo> || null}
          */
         this.PolyClientCertificateAliasInfo = null;
+
+        /**
+         * 多源站证书时，返回多个证书的id和别名
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<CertificateAliasInfo> || null}
+         */
+        this.PolyRealServerCertificateAliasInfo = null;
 
     }
 
@@ -8403,6 +8410,15 @@ class DomainRuleSet extends  AbstractModel {
                 let obj = new CertificateAliasInfo();
                 obj.deserialize(params.PolyClientCertificateAliasInfo[z]);
                 this.PolyClientCertificateAliasInfo.push(obj);
+            }
+        }
+
+        if (params.PolyRealServerCertificateAliasInfo) {
+            this.PolyRealServerCertificateAliasInfo = new Array();
+            for (let z in params.PolyRealServerCertificateAliasInfo) {
+                let obj = new CertificateAliasInfo();
+                obj.deserialize(params.PolyRealServerCertificateAliasInfo[z]);
+                this.PolyRealServerCertificateAliasInfo.push(obj);
             }
         }
 

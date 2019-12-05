@@ -367,7 +367,7 @@ class LiveClient extends AbstractClient {
     }
 
     /**
-     * 查询拉流配置
+     * 查询直播拉流配置。
      * @param {DescribePullStreamConfigsRequest} req
      * @param {function(string, DescribePullStreamConfigsResponse):void} cb
      * @public
@@ -456,7 +456,7 @@ class LiveClient extends AbstractClient {
     }
 
     /**
-     * 修改直播拉流配置状态
+     * 修改直播拉流配置的状态。
      * @param {ModifyPullStreamStatusRequest} req
      * @param {function(string, ModifyPullStreamStatusResponse):void} cb
      * @public
@@ -544,7 +544,7 @@ class LiveClient extends AbstractClient {
     }
 
     /**
-     * 更新拉流配置
+     * 更新拉流配置。
      * @param {ModifyPullStreamConfigRequest} req
      * @param {function(string, ModifyPullStreamConfigResponse):void} cb
      * @public
@@ -780,7 +780,7 @@ class LiveClient extends AbstractClient {
     }
 
     /**
-     * 恢复某条流的推送。
+     * 恢复某条流的推流。
      * @param {ResumeLiveStreamRequest} req
      * @param {function(string, ResumeLiveStreamResponse):void} cb
      * @public

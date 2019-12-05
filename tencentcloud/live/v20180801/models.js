@@ -1882,6 +1882,18 @@ class DomainInfo extends  AbstractModel {
          */
         this.CurrentCName = null;
 
+        /**
+         * 是否租用域名
+         * @type {number || null}
+         */
+        this.RentTag = null;
+
+        /**
+         * 租用域名过期时间
+         * @type {string || null}
+         */
+        this.RentExpireTime = null;
+
     }
 
     /**
@@ -1900,6 +1912,8 @@ class DomainInfo extends  AbstractModel {
         this.PlayType = 'PlayType' in params ? params.PlayType : null;
         this.IsDelayLive = 'IsDelayLive' in params ? params.IsDelayLive : null;
         this.CurrentCName = 'CurrentCName' in params ? params.CurrentCName : null;
+        this.RentTag = 'RentTag' in params ? params.RentTag : null;
+        this.RentExpireTime = 'RentExpireTime' in params ? params.RentExpireTime : null;
 
     }
 }
@@ -2702,7 +2716,7 @@ class ForbidLiveStreamRequest extends  AbstractModel {
          * 恢复流的时间。UTC 格式，例如：2018-11-29T19:00:00Z。
 注意：
 1. 默认禁播7天，且最长支持禁播90天。
-2. 北京时间值为 UTC 时间值 + 8 小时，格式按照 ISO 8601 标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F)。
+2. 北京时间值为 UTC 时间值 + 8 小时，格式按照 ISO 8601 标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#I)。
          * @type {string || null}
          */
         this.ResumeTime = null;
@@ -3046,6 +3060,12 @@ class LogInfo extends  AbstractModel {
          */
         this.LogTime = null;
 
+        /**
+         * 文件大小
+         * @type {number || null}
+         */
+        this.FileSize = null;
+
     }
 
     /**
@@ -3058,6 +3078,7 @@ class LogInfo extends  AbstractModel {
         this.LogName = 'LogName' in params ? params.LogName : null;
         this.LogUrl = 'LogUrl' in params ? params.LogUrl : null;
         this.LogTime = 'LogTime' in params ? params.LogTime : null;
+        this.FileSize = 'FileSize' in params ? params.FileSize : null;
 
     }
 }
@@ -3098,7 +3119,7 @@ class AddDelayLiveStreamRequest extends  AbstractModel {
          * 延播设置的过期时间。UTC 格式，例如：2018-11-29T19:00:00Z。
 注意：
 1. 默认7天后过期，且最长支持7天内生效。
-2. 北京时间值为 UTC 时间值 + 8 小时，格式按照 ISO 8601 标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F)。
+2. 北京时间值为 UTC 时间值 + 8 小时，格式按照 ISO 8601 标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#I)。
          * @type {string || null}
          */
         this.ExpireTime = null;
@@ -3646,7 +3667,7 @@ class PullStreamConfig extends  AbstractModel {
          * 开始时间。
 UTC格式时间，
 例如：2019-01-08T10:00:00Z。
-注意：北京时间值为 UTC 时间值 + 8 小时，格式按照 ISO 8601 标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F)。
+注意：北京时间值为 UTC 时间值 + 8 小时，格式按照 ISO 8601 标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#I)。
          * @type {string || null}
          */
         this.StartTime = null;
@@ -3656,7 +3677,7 @@ UTC格式时间，
 
 UTC格式时间，
 例如：2019-01-08T10:00:00Z。
-注意：北京时间值为 UTC 时间值 + 8 小时，格式按照 ISO 8601 标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F)。
+注意：北京时间值为 UTC 时间值 + 8 小时，格式按照 ISO 8601 标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#I)。
          * @type {string || null}
          */
         this.EndTime = null;
@@ -5062,6 +5083,12 @@ class PushDataInfo extends  AbstractModel {
          */
         this.Resolution = null;
 
+        /**
+         * 采样率。
+         * @type {number || null}
+         */
+        this.AsampleRate = null;
+
     }
 
     /**
@@ -5084,6 +5111,7 @@ class PushDataInfo extends  AbstractModel {
         this.Acodec = 'Acodec' in params ? params.Acodec : null;
         this.Vcodec = 'Vcodec' in params ? params.Vcodec : null;
         this.Resolution = 'Resolution' in params ? params.Resolution : null;
+        this.AsampleRate = 'AsampleRate' in params ? params.AsampleRate : null;
 
     }
 }
@@ -5624,7 +5652,7 @@ class CreatePullStreamConfigRequest extends  AbstractModel {
          * 开始时间。
 使用UTC格式时间，
 例如：2019-01-08T10:00:00Z。
-注意：北京时间值为 UTC 时间值 + 8 小时，格式按照 ISO 8601 标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F)。
+注意：北京时间值为 UTC 时间值 + 8 小时，格式按照 ISO 8601 标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#I)。
          * @type {string || null}
          */
         this.StartTime = null;
@@ -5636,7 +5664,7 @@ class CreatePullStreamConfigRequest extends  AbstractModel {
 3. 结束时间 和 开始时间 间隔必须小于七天。
 使用UTC格式时间，
 例如：2019-01-08T10:00:00Z。
-注意：北京时间值为 UTC 时间值 + 8 小时，格式按照 ISO 8601 标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F)。
+注意：北京时间值为 UTC 时间值 + 8 小时，格式按照 ISO 8601 标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#I)。
          * @type {string || null}
          */
         this.EndTime = null;
@@ -6321,7 +6349,7 @@ class ModifyPullStreamConfigRequest extends  AbstractModel {
          * 开始时间。
 使用UTC格式时间，
 例如：2019-01-08T10:00:00Z。
-注意：北京时间值为 UTC 时间值 + 8 小时，格式按照 ISO 8601 标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F)。
+注意：北京时间值为 UTC 时间值 + 8 小时，格式按照 ISO 8601 标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#I)。
          * @type {string || null}
          */
         this.StartTime = null;
@@ -6334,7 +6362,7 @@ class ModifyPullStreamConfigRequest extends  AbstractModel {
 
 使用UTC格式时间，
 例如：2019-01-08T10:00:00Z。
-注意：北京时间值为 UTC 时间值 + 8 小时，格式按照 ISO 8601 标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F)。
+注意：北京时间值为 UTC 时间值 + 8 小时，格式按照 ISO 8601 标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#I)。
          * @type {string || null}
          */
         this.EndTime = null;

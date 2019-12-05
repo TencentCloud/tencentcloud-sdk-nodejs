@@ -142,7 +142,7 @@ class DiagHistoryEventItem extends  AbstractModel {
         this.EventId = null;
 
         /**
-         * 严重程度。
+         * 严重程度。从1-4，严重程度递减，意义与DBBrain生成的实例健康报告中对应概念一致。
          * @type {number || null}
          */
         this.Severity = null;
@@ -303,7 +303,7 @@ class DescribeDBDiagEventRequest extends  AbstractModel {
         this.InstanceId = null;
 
         /**
-         * 事件 ID 。
+         * 事件 ID 。通过“获取实例诊断历史DescribeDBDiagHistory”获取。
          * @type {number || null}
          */
         this.EventId = null;
@@ -605,13 +605,13 @@ class DescribeDBDiagHistoryRequest extends  AbstractModel {
         this.InstanceId = null;
 
         /**
-         * 开始时间。
+         * 开始时间。如“2019-09-10 12:13:14”。
          * @type {string || null}
          */
         this.StartTime = null;
 
         /**
-         * 结束时间。
+         * 结束时间。如“2019-09-11 12:13:14”。
          * @type {string || null}
          */
         this.EndTime = null;

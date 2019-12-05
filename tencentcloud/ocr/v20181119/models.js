@@ -1693,6 +1693,76 @@ class EnterpriseLicenseOCRRequest extends  AbstractModel {
 }
 
 /**
+ * PropOwnerCertOCR返回参数结构体
+ * @class
+ */
+class PropOwnerCertOCRResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 房地产权利人
+         * @type {string || null}
+         */
+        this.Owner = null;
+
+        /**
+         * 共有情况
+         * @type {string || null}
+         */
+        this.Possession = null;
+
+        /**
+         * 登记时间
+         * @type {string || null}
+         */
+        this.RegisterTime = null;
+
+        /**
+         * 规划用途
+         * @type {string || null}
+         */
+        this.Purpose = null;
+
+        /**
+         * 房屋性质
+         * @type {string || null}
+         */
+        this.Nature = null;
+
+        /**
+         * 房地坐落
+         * @type {string || null}
+         */
+        this.Location = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Owner = 'Owner' in params ? params.Owner : null;
+        this.Possession = 'Possession' in params ? params.Possession : null;
+        this.RegisterTime = 'RegisterTime' in params ? params.RegisterTime : null;
+        this.Purpose = 'Purpose' in params ? params.Purpose : null;
+        this.Nature = 'Nature' in params ? params.Nature : null;
+        this.Location = 'Location' in params ? params.Location : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * 金融票据整单识别单个字段的内容
  * @class
  */
@@ -3115,6 +3185,48 @@ class InvoiceGeneralOCRResponse extends  AbstractModel {
  * @class
  */
 class TaxiInvoiceOCRRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 图片的 Base64 值。
+支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
+支持的图片大小：所下载图片经Base64编码后不超过 3M。图片下载时间不超过 3 秒。
+图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
+         * @type {string || null}
+         */
+        this.ImageBase64 = null;
+
+        /**
+         * 图片的 Url 地址。
+支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
+支持的图片大小：所下载图片经 Base64 编码后不超过 3M。图片下载时间不超过 3 秒。
+图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。
+非腾讯云存储的 Url 速度和稳定性可能受一定影响。
+         * @type {string || null}
+         */
+        this.ImageUrl = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ImageBase64 = 'ImageBase64' in params ? params.ImageBase64 : null;
+        this.ImageUrl = 'ImageUrl' in params ? params.ImageUrl : null;
+
+    }
+}
+
+/**
+ * PropOwnerCertOCR请求参数结构体
+ * @class
+ */
+class PropOwnerCertOCRRequest extends  AbstractModel {
     constructor(){
         super();
 
@@ -5236,6 +5348,118 @@ class MixedInvoiceOCRRequest extends  AbstractModel {
 }
 
 /**
+ * ResidenceBookletOCR返回参数结构体
+ * @class
+ */
+class ResidenceBookletOCRResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 户号
+         * @type {string || null}
+         */
+        this.HouseholdNumber = null;
+
+        /**
+         * 姓名
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 性别
+         * @type {string || null}
+         */
+        this.Sex = null;
+
+        /**
+         * 出生地
+         * @type {string || null}
+         */
+        this.BirthPlace = null;
+
+        /**
+         * 民族
+         * @type {string || null}
+         */
+        this.Nation = null;
+
+        /**
+         * 籍贯
+         * @type {string || null}
+         */
+        this.NativePlace = null;
+
+        /**
+         * 出生日期
+         * @type {string || null}
+         */
+        this.BirthDate = null;
+
+        /**
+         * 公民身份证件编号
+         * @type {string || null}
+         */
+        this.IdCardNumber = null;
+
+        /**
+         * 文化程度
+         * @type {string || null}
+         */
+        this.EducationDegree = null;
+
+        /**
+         * 服务处所
+         * @type {string || null}
+         */
+        this.ServicePlace = null;
+
+        /**
+         * 户别
+         * @type {string || null}
+         */
+        this.Household = null;
+
+        /**
+         * 住址
+         * @type {string || null}
+         */
+        this.Address = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.HouseholdNumber = 'HouseholdNumber' in params ? params.HouseholdNumber : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Sex = 'Sex' in params ? params.Sex : null;
+        this.BirthPlace = 'BirthPlace' in params ? params.BirthPlace : null;
+        this.Nation = 'Nation' in params ? params.Nation : null;
+        this.NativePlace = 'NativePlace' in params ? params.NativePlace : null;
+        this.BirthDate = 'BirthDate' in params ? params.BirthDate : null;
+        this.IdCardNumber = 'IdCardNumber' in params ? params.IdCardNumber : null;
+        this.EducationDegree = 'EducationDegree' in params ? params.EducationDegree : null;
+        this.ServicePlace = 'ServicePlace' in params ? params.ServicePlace : null;
+        this.Household = 'Household' in params ? params.Household : null;
+        this.Address = 'Address' in params ? params.Address : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * CarInvoiceOCR返回参数结构体
  * @class
  */
@@ -5487,6 +5711,48 @@ class GeneralAccurateOCRResponse extends  AbstractModel {
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ResidenceBookletOCR请求参数结构体
+ * @class
+ */
+class ResidenceBookletOCRRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 图片的 Base64 值。
+支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
+支持的图片大小：所下载图片经Base64编码后不超过 3M。图片下载时间不超过 3 秒。
+图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
+         * @type {string || null}
+         */
+        this.ImageBase64 = null;
+
+        /**
+         * 图片的 Url 地址。
+支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
+支持的图片大小：所下载图片经 Base64 编码后不超过 3M。图片下载时间不超过 3 秒。
+图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。
+非腾讯云存储的 Url 速度和稳定性可能受一定影响。
+         * @type {string || null}
+         */
+        this.ImageUrl = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ImageBase64 = 'ImageBase64' in params ? params.ImageBase64 : null;
+        this.ImageUrl = 'ImageUrl' in params ? params.ImageUrl : null;
 
     }
 }
@@ -6775,6 +7041,7 @@ module.exports = {
     WaybillObj: WaybillObj,
     InvoiceDetectInfo: InvoiceDetectInfo,
     EnterpriseLicenseOCRRequest: EnterpriseLicenseOCRRequest,
+    PropOwnerCertOCRResponse: PropOwnerCertOCRResponse,
     FinanBillInfo: FinanBillInfo,
     TrainTicketOCRResponse: TrainTicketOCRResponse,
     TollInvoiceInfo: TollInvoiceInfo,
@@ -6804,6 +7071,7 @@ module.exports = {
     PermitOCRRequest: PermitOCRRequest,
     InvoiceGeneralOCRResponse: InvoiceGeneralOCRResponse,
     TaxiInvoiceOCRRequest: TaxiInvoiceOCRRequest,
+    PropOwnerCertOCRRequest: PropOwnerCertOCRRequest,
     TextDetectRequest: TextDetectRequest,
     VatRollInvoiceOCRResponse: VatRollInvoiceOCRResponse,
     EduPaperOCRResponse: EduPaperOCRResponse,
@@ -6843,12 +7111,14 @@ module.exports = {
     ItemCoord: ItemCoord,
     OrgCodeCertOCRResponse: OrgCodeCertOCRResponse,
     MixedInvoiceOCRRequest: MixedInvoiceOCRRequest,
+    ResidenceBookletOCRResponse: ResidenceBookletOCRResponse,
     CarInvoiceOCRResponse: CarInvoiceOCRResponse,
     GeneralFastOCRRequest: GeneralFastOCRRequest,
     ShipInvoiceOCRResponse: ShipInvoiceOCRResponse,
     InsuranceBillInfo: InsuranceBillInfo,
     VehicleRegCertOCRResponse: VehicleRegCertOCRResponse,
     GeneralAccurateOCRResponse: GeneralAccurateOCRResponse,
+    ResidenceBookletOCRRequest: ResidenceBookletOCRRequest,
     BusInvoiceOCRResponse: BusInvoiceOCRResponse,
     QrcodeResultsInfo: QrcodeResultsInfo,
     EnglishOCRResponse: EnglishOCRResponse,

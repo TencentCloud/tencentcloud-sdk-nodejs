@@ -27,6 +27,7 @@ const DDosPolicy = models.DDosPolicy;
 const DescribeDDoSNetTrendRequest = models.DescribeDDoSNetTrendRequest;
 const DescribeUnBlockStatisRequest = models.DescribeUnBlockStatisRequest;
 const ModifyCCUrlAllowResponse = models.ModifyCCUrlAllowResponse;
+const DescribeBasicDeviceThresholdResponse = models.DescribeBasicDeviceThresholdResponse;
 const CreateL7RuleCertResponse = models.CreateL7RuleCertResponse;
 const DeleteL4RulesResponse = models.DeleteL4RulesResponse;
 const DescribePolicyCaseResponse = models.DescribePolicyCaseResponse;
@@ -48,6 +49,7 @@ const WaterPrintKey = models.WaterPrintKey;
 const IpBlackWhite = models.IpBlackWhite;
 const DescribeDDoSUsedStatisResponse = models.DescribeDDoSUsedStatisResponse;
 const CreateDDoSPolicyCaseResponse = models.CreateDDoSPolicyCaseResponse;
+const DescribeIPProductInfoResponse = models.DescribeIPProductInfoResponse;
 const DescribeDDoSNetEvListRequest = models.DescribeDDoSNetEvListRequest;
 const ModifyDDoSSwitchResponse = models.ModifyDDoSSwitchResponse;
 const IpBlockData = models.IpBlockData;
@@ -62,6 +64,7 @@ const DescribeL4HealthConfigResponse = models.DescribeL4HealthConfigResponse;
 const DescribePcapRequest = models.DescribePcapRequest;
 const ModifyResBindDDoSPolicyRequest = models.ModifyResBindDDoSPolicyRequest;
 const KeyValueRecord = models.KeyValueRecord;
+const DescribeBasicDeviceThresholdRequest = models.DescribeBasicDeviceThresholdRequest;
 const ModifyResBindDDoSPolicyResponse = models.ModifyResBindDDoSPolicyResponse;
 const ModifyDDoSWaterKeyRequest = models.ModifyDDoSWaterKeyRequest;
 const ModifyCCLevelResponse = models.ModifyCCLevelResponse;
@@ -70,6 +73,7 @@ const DescribeDDoSDefendStatusResponse = models.DescribeDDoSDefendStatusResponse
 const CCPolicy = models.CCPolicy;
 const ModifyDDoSAIStatusResponse = models.ModifyDDoSAIStatusResponse;
 const DescribeDDoSNetEvInfoRequest = models.DescribeDDoSNetEvInfoRequest;
+const ModifyResourceRenewFlagRequest = models.ModifyResourceRenewFlagRequest;
 const DescribeCCEvListResponse = models.DescribeCCEvListResponse;
 const CreateDDoSPolicyCaseRequest = models.CreateDDoSPolicyCaseRequest;
 const ModifyDDoSPolicyNameResponse = models.ModifyDDoSPolicyNameResponse;
@@ -102,8 +106,10 @@ const CreateL4RulesRequest = models.CreateL4RulesRequest;
 const DescribeDDoSNetEvListResponse = models.DescribeDDoSNetEvListResponse;
 const DescribeL4RulesErrHealthRequest = models.DescribeL4RulesErrHealthRequest;
 const L4RuleSource = models.L4RuleSource;
+const CreateBasicDDoSAlarmThresholdResponse = models.CreateBasicDDoSAlarmThresholdResponse;
 const DeleteL4RulesRequest = models.DeleteL4RulesRequest;
 const CreateL7HealthConfigRequest = models.CreateL7HealthConfigRequest;
+const DescribeIPProductInfoRequest = models.DescribeIPProductInfoRequest;
 const ModifyDDoSSwitchRequest = models.ModifyDDoSSwitchRequest;
 const DescribeDDoSUsedStatisRequest = models.DescribeDDoSUsedStatisRequest;
 const ModifyDDoSPolicyRequest = models.ModifyDDoSPolicyRequest;
@@ -131,6 +137,7 @@ const ModifyDDoSAIStatusRequest = models.ModifyDDoSAIStatusRequest;
 const DescribeResourceListResponse = models.DescribeResourceListResponse;
 const ModifyCCThresholdRequest = models.ModifyCCThresholdRequest;
 const CreateL7HealthConfigResponse = models.CreateL7HealthConfigResponse;
+const CreateBasicDDoSAlarmThresholdRequest = models.CreateBasicDDoSAlarmThresholdRequest;
 const CCRuleConfig = models.CCRuleConfig;
 const DescribeDDoSEvInfoResponse = models.DescribeDDoSEvInfoResponse;
 const DescribleRegionCountRequest = models.DescribleRegionCountRequest;
@@ -160,6 +167,7 @@ const CCEventRecord = models.CCEventRecord;
 const DescribeTransmitStatisRequest = models.DescribeTransmitStatisRequest;
 const DescribeInsurePacksResponse = models.DescribeInsurePacksResponse;
 const DescribeCCUrlAllowResponse = models.DescribeCCUrlAllowResponse;
+const ModifyResourceRenewFlagResponse = models.ModifyResourceRenewFlagResponse;
 const OrderBy = models.OrderBy;
 const DescribeActionLogResponse = models.DescribeActionLogResponse;
 const DescribeCCTrendResponse = models.DescribeCCTrendResponse;
@@ -221,6 +229,17 @@ class DayuClient extends AbstractClient {
     ModifyDDoSWaterKey(req, cb) {
         let resp = new ModifyDDoSWaterKeyResponse();
         this.request("ModifyDDoSWaterKey", req, resp, cb);
+    }
+
+    /**
+     * 设置基础防护的DDoS告警阈值，只支持基础防护产品
+     * @param {CreateBasicDDoSAlarmThresholdRequest} req
+     * @param {function(string, CreateBasicDDoSAlarmThresholdResponse):void} cb
+     * @public
+     */
+    CreateBasicDDoSAlarmThreshold(req, cb) {
+        let resp = new CreateBasicDDoSAlarmThresholdResponse();
+        this.request("CreateBasicDDoSAlarmThreshold", req, resp, cb);
     }
 
     /**
@@ -430,6 +449,17 @@ class DayuClient extends AbstractClient {
     CreateCCSelfDefinePolicy(req, cb) {
         let resp = new CreateCCSelfDefinePolicyResponse();
         this.request("CreateCCSelfDefinePolicy", req, resp, cb);
+    }
+
+    /**
+     * 获取独享包或共享包IP对应的云资产信息，只支持独享包和共享包的IP
+     * @param {DescribeIPProductInfoRequest} req
+     * @param {function(string, DescribeIPProductInfoResponse):void} cb
+     * @public
+     */
+    DescribeIPProductInfo(req, cb) {
+        let resp = new DescribeIPProductInfoResponse();
+        this.request("DescribeIPProductInfo", req, resp, cb);
     }
 
     /**
@@ -752,7 +782,18 @@ class DayuClient extends AbstractClient {
     }
 
     /**
-     * 获取DDoS防护状态，支持产品：基础防护，独享包，共享包，高防IP，高防IP专业版；
+     * 获取基础防护黑洞阈值
+     * @param {DescribeBasicDeviceThresholdRequest} req
+     * @param {function(string, DescribeBasicDeviceThresholdResponse):void} cb
+     * @public
+     */
+    DescribeBasicDeviceThreshold(req, cb) {
+        let resp = new DescribeBasicDeviceThresholdResponse();
+        this.request("DescribeBasicDeviceThreshold", req, resp, cb);
+    }
+
+    /**
+     * 获取DDoS防护状态（临时关闭状态），支持产品：基础防护，独享包，共享包，高防IP，高防IP专业版；调用此接口是获取当前是否有设置临时关闭DDoS防护状态，如果有设置会返回临时关闭的时长等参数。
      * @param {DescribeDDoSDefendStatusRequest} req
      * @param {function(string, DescribeDDoSDefendStatusResponse):void} cb
      * @public
@@ -884,7 +925,7 @@ class DayuClient extends AbstractClient {
     }
 
     /**
-     * 开启或关闭DDoS防护状态
+     * 开启或关闭DDoS防护状态，调用此接口允许临时关闭DDoS防护一段时间，等时间到了会自动开启DDoS防护；
      * @param {ModifyDDoSDefendStatusRequest} req
      * @param {function(string, ModifyDDoSDefendStatusResponse):void} cb
      * @public
@@ -969,6 +1010,17 @@ class DayuClient extends AbstractClient {
     ModifyElasticLimit(req, cb) {
         let resp = new ModifyElasticLimitResponse();
         this.request("ModifyElasticLimit", req, resp, cb);
+    }
+
+    /**
+     * 修改资源自动续费标记
+     * @param {ModifyResourceRenewFlagRequest} req
+     * @param {function(string, ModifyResourceRenewFlagResponse):void} cb
+     * @public
+     */
+    ModifyResourceRenewFlag(req, cb) {
+        let resp = new ModifyResourceRenewFlagResponse();
+        this.request("ModifyResourceRenewFlag", req, resp, cb);
     }
 
     /**
