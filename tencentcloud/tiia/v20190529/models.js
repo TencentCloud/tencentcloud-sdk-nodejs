@@ -17,7 +17,7 @@
 const AbstractModel = require("../../common/abstract_model");
 
 /**
- * 色情识别结果。
+ * 图像文本内容审核结果。
  * @class
  */
 class TextResult extends  AbstractModel {
@@ -80,6 +80,8 @@ DRUGS：涉毒
 CURSE：谩骂
 TERRORISM：暴恐
 OTHERS：其他
+
+本服务利用微信团队提供的算法，可以准确识别图片中是否包含二维码。当图片中存在二维码时，分类为ADS，关键词输出为“二维码”。
          * @type {string || null}
          */
         this.Type = null;
@@ -133,6 +135,7 @@ class DetectDisgustRequest extends  AbstractModel {
 
         /**
          * 图片经过base64编码的内容。最大不超过4M。与ImageUrl同时存在时优先使用ImageUrl字段。
+**注意：图片需要base64编码，并且要去掉编码头部。**
          * @type {string || null}
          */
         this.ImageBase64 = null;
@@ -362,6 +365,7 @@ Width : Height建议取值在[1, 2.5]之间，超过这个范围可能会影响�
 
         /**
          * 图片经过base64编码的内容。最大不超过4M。与ImageUrl同时存在时优先使用ImageUrl字段。
+**注意：图片需要base64编码，并且要去掉编码头部。**
          * @type {string || null}
          */
         this.ImageBase64 = null;
@@ -406,6 +410,7 @@ class DetectProductRequest extends  AbstractModel {
 
         /**
          * 图片经过base64编码的内容。最大不超过4M。与ImageUrl同时存在时优先使用ImageUrl字段。
+**注意：图片需要base64编码，并且要去掉编码头部。**
          * @type {string || null}
          */
         this.ImageBase64 = null;
@@ -581,6 +586,7 @@ class ImageModerationRequest extends  AbstractModel {
 
         /**
          * 图片经过base64编码的内容。最大不超过4M。与ImageUrl同时存在时优先使用ImageUrl字段。
+**注意：图片需要base64编码，并且要去掉编码头部。**
          * @type {string || null}
          */
         this.ImageBase64 = null;
@@ -745,6 +751,7 @@ class DetectLabelRequest extends  AbstractModel {
 
         /**
          * 图片经过base64编码的内容。最大不超过4M。与ImageUrl同时存在时优先使用ImageUrl字段。
+**注意：图片需要base64编码，并且要去掉编码头部。**
          * @type {string || null}
          */
         this.ImageBase64 = null;
@@ -966,6 +973,7 @@ class AssessQualityRequest extends  AbstractModel {
 
         /**
          * 图片经过base64编码的内容。最大不超过4M。与ImageUrl同时存在时优先使用ImageUrl字段。
+**注意：图片需要base64编码，并且要去掉编码头部。**
          * @type {string || null}
          */
         this.ImageBase64 = null;
@@ -1108,8 +1116,8 @@ class RecognizeCarRequest extends  AbstractModel {
 
         /**
          * 图片经过base64编码的内容。最大不超过4M。与ImageUrl同时存在时优先使用ImageUrl字段。
-
-图片URL地址。支持的图片格式：PNG、JPG、JPEG、BMP，暂不支持GIF格式。支持的图片大小：所下载图片经Base64编码后不超过4M。图片下载时间不超过3秒。
+**注意：图片需要base64编码，并且要去掉编码头部。**
+支持的图片格式：PNG、JPG、JPEG、BMP，暂不支持GIF格式。支持的图片大小：所下载图片经Base64编码后不超过4M。图片下载时间不超过3秒。
          * @type {string || null}
          */
         this.ImageBase64 = null;
@@ -1151,7 +1159,8 @@ class EnhanceImageRequest extends  AbstractModel {
         this.ImageUrl = null;
 
         /**
-         * 支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。图片经过base64编码的内容。最大不超过4M。与ImageUrl同时存在时优先使用ImageUrl字段
+         * 支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。图片经过base64编码的内容。最大不超过4M。与ImageUrl同时存在时优先使用ImageUrl字段。
+**注意：图片需要base64编码，并且要去掉编码头部。**
          * @type {string || null}
          */
         this.ImageBase64 = null;
@@ -1278,6 +1287,7 @@ class DetectCelebrityRequest extends  AbstractModel {
 
         /**
          * 图片经过base64编码的内容。最大不超过4M。与ImageUrl同时存在时优先使用ImageUrl字段。
+**注意：图片需要base64编码，并且要去掉编码头部。**
          * @type {string || null}
          */
         this.ImageBase64 = null;
@@ -1965,6 +1975,7 @@ class DetectMisbehaviorRequest extends  AbstractModel {
 
         /**
          * 图片经过base64编码的内容。最大不超过4M。与ImageUrl同时存在时优先使用ImageUrl字段。
+**注意：图片需要base64编码，并且要去掉编码头部。**
          * @type {string || null}
          */
         this.ImageBase64 = null;

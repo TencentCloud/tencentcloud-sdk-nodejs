@@ -18,10 +18,12 @@ const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const CreateDBInstanceRequest = models.CreateDBInstanceRequest;
 const DescribeAccountPrivilegesResponse = models.DescribeAccountPrivilegesResponse;
+const DescribeDatabasesRequest = models.DescribeDatabasesRequest;
 const CreateAccountResponse = models.CreateAccountResponse;
 const DescribeDBParametersRequest = models.DescribeDBParametersRequest;
 const DescribeAccountsRequest = models.DescribeAccountsRequest;
 const DescribeRenewalPriceResponse = models.DescribeRenewalPriceResponse;
+const RestartDBInstancesResponse = models.RestartDBInstancesResponse;
 const DescribeUpgradePriceRequest = models.DescribeUpgradePriceRequest;
 const DescribeDBResourceUsageDetailsResponse = models.DescribeDBResourceUsageDetailsResponse;
 const DescribeDBInstanceSpecsResponse = models.DescribeDBInstanceSpecsResponse;
@@ -52,6 +54,7 @@ const DescribeSaleInfoRequest = models.DescribeSaleInfoRequest;
 const RenewDBInstanceRequest = models.RenewDBInstanceRequest;
 const DescribeSqlLogsRequest = models.DescribeSqlLogsRequest;
 const ResetAccountPasswordResponse = models.ResetAccountPasswordResponse;
+const DescribeDBInstanceSpecsRequest = models.DescribeDBInstanceSpecsRequest;
 const DescribePriceRequest = models.DescribePriceRequest;
 const CreateDBInstanceResponse = models.CreateDBInstanceResponse;
 const DescribeBackupTimeRequest = models.DescribeBackupTimeRequest;
@@ -73,7 +76,7 @@ const DBInstance = models.DBInstance;
 const DescribePriceResponse = models.DescribePriceResponse;
 const InitDBInstancesRequest = models.InitDBInstancesRequest;
 const ModifyBackupTimeResponse = models.ModifyBackupTimeResponse;
-const DescribeDBInstanceSpecsRequest = models.DescribeDBInstanceSpecsRequest;
+const Database = models.Database;
 const GrantAccountPrivilegesResponse = models.GrantAccountPrivilegesResponse;
 const OpenDBExtranetAccessRequest = models.OpenDBExtranetAccessRequest;
 const ModifyDBInstanceNameResponse = models.ModifyDBInstanceNameResponse;
@@ -83,6 +86,7 @@ const DescribeDBPerformanceDetailsRequest = models.DescribeDBPerformanceDetailsR
 const DescribeBackupTimeResponse = models.DescribeBackupTimeResponse;
 const SlowLogData = models.SlowLogData;
 const RenewDBInstanceResponse = models.RenewDBInstanceResponse;
+const DescribeDatabasesResponse = models.DescribeDatabasesResponse;
 const DescribeOrdersRequest = models.DescribeOrdersRequest;
 const DescribeDBLogFilesResponse = models.DescribeDBLogFilesResponse;
 const CloseDBExtranetAccessRequest = models.CloseDBExtranetAccessRequest;
@@ -98,6 +102,7 @@ const DescribeDBInstancesResponse = models.DescribeDBInstancesResponse;
 const ConstraintRange = models.ConstraintRange;
 const DescribeRenewalPriceRequest = models.DescribeRenewalPriceRequest;
 const LogFileInfo = models.LogFileInfo;
+const RestartDBInstancesRequest = models.RestartDBInstancesRequest;
 const DescribeDBResourceUsageDetailsRequest = models.DescribeDBResourceUsageDetailsRequest;
 const DBAccount = models.DBAccount;
 const DescribeAccountPrivilegesRequest = models.DescribeAccountPrivilegesRequest;
@@ -268,6 +273,17 @@ class MariadbClient extends AbstractClient {
     ModifyDBInstanceName(req, cb) {
         let resp = new ModifyDBInstanceNameResponse();
         this.request("ModifyDBInstanceName", req, resp, cb);
+    }
+
+    /**
+     * 本接口（RestartDBInstances）用于重启数据库实例
+     * @param {RestartDBInstancesRequest} req
+     * @param {function(string, RestartDBInstancesResponse):void} cb
+     * @public
+     */
+    RestartDBInstances(req, cb) {
+        let resp = new RestartDBInstancesResponse();
+        this.request("RestartDBInstances", req, resp, cb);
     }
 
     /**
@@ -469,6 +485,17 @@ class MariadbClient extends AbstractClient {
     CopyAccountPrivileges(req, cb) {
         let resp = new CopyAccountPrivilegesResponse();
         this.request("CopyAccountPrivileges", req, resp, cb);
+    }
+
+    /**
+     * 本接口（DescribeDatabases）用于查询云数据库实例的数据库列表。
+     * @param {DescribeDatabasesRequest} req
+     * @param {function(string, DescribeDatabasesResponse):void} cb
+     * @public
+     */
+    DescribeDatabases(req, cb) {
+        let resp = new DescribeDatabasesResponse();
+        this.request("DescribeDatabases", req, resp, cb);
     }
 
     /**

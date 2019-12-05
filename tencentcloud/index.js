@@ -1,5 +1,6 @@
 module.exports = {
     aai: require("./aai"),
+    ame: require("./ame"),
     as: require("./as"),
     asr: require("./asr"),
     batch: require("./batch"),
@@ -82,6 +83,7 @@ module.exports = {
     tics: require("./tics"),
     tiems: require("./tiems"),
     tiia: require("./tiia"),
+    tiw: require("./tiw"),
     tke: require("./tke"),
     tkgdq: require("./tkgdq"),
     tmt: require("./tmt"),

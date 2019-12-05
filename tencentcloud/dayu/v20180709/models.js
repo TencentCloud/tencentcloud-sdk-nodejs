@@ -779,6 +779,41 @@ class ModifyCCUrlAllowResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeBasicDeviceThreshold返回参数结构体
+ * @class
+ */
+class DescribeBasicDeviceThresholdResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 返回黑洞封堵值
+         * @type {number || null}
+         */
+        this.Threshold = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Threshold = 'Threshold' in params ? params.Threshold : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * CreateL7RuleCert返回参数结构体
  * @class
  */
@@ -1824,6 +1859,53 @@ class CreateDDoSPolicyCaseResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeIPProductInfo返回参数结构体
+ * @class
+ */
+class DescribeIPProductInfoResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 云产品信息列表，如果没有查询到则返回空数组，值说明如下：
+Key为ProductName时，value表示云产品实例的名称；
+Key为ProductInstanceId时，value表示云产品实例的ID；
+Key为ProductType时，value表示的是云产品的类型（cvm表示云主机、clb表示负载均衡）;
+Key为IP时，value表示云产品实例的IP；
+         * @type {Array.<KeyValueRecord> || null}
+         */
+        this.Data = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Data) {
+            this.Data = new Array();
+            for (let z in params.Data) {
+                let obj = new KeyValueRecord();
+                obj.deserialize(params.Data[z]);
+                this.Data.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeDDoSNetEvList请求参数结构体
  * @class
  */
@@ -2635,6 +2717,76 @@ class KeyValueRecord extends  AbstractModel {
 }
 
 /**
+ * DescribeBasicDeviceThreshold请求参数结构体
+ * @class
+ */
+class DescribeBasicDeviceThresholdRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 查询的IP地址，取值如：1.1.1.1
+         * @type {string || null}
+         */
+        this.BasicIp = null;
+
+        /**
+         * 查询IP所属地域，取值如：gz、bj、sh、hk等地域缩写
+         * @type {string || null}
+         */
+        this.BasicRegion = null;
+
+        /**
+         * 专区类型，取值如：公有云专区：public，黑石专区：bm, NAT服务器专区：nat，互联网通道：channel。
+         * @type {string || null}
+         */
+        this.BasicBizType = null;
+
+        /**
+         * 设备类型，取值如：服务器：cvm，公有云负载均衡：clb，黑石负载均衡：lb，NAT服务器：nat，互联网通道：channel.
+         * @type {string || null}
+         */
+        this.BasicDeviceType = null;
+
+        /**
+         * 有效性检查，取值为1
+         * @type {number || null}
+         */
+        this.BasicCheckFlag = null;
+
+        /**
+         * 可选，IPInstance Nat 网关（如果查询的设备类型是NAT服务器，需要传此参数，通过nat资源查询接口获取）
+         * @type {string || null}
+         */
+        this.BasicIpInstance = null;
+
+        /**
+         * 可选，运营商线路（如果查询的设备类型是NAT服务器，需要传此参数为5）
+         * @type {number || null}
+         */
+        this.BasicIspCode = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.BasicIp = 'BasicIp' in params ? params.BasicIp : null;
+        this.BasicRegion = 'BasicRegion' in params ? params.BasicRegion : null;
+        this.BasicBizType = 'BasicBizType' in params ? params.BasicBizType : null;
+        this.BasicDeviceType = 'BasicDeviceType' in params ? params.BasicDeviceType : null;
+        this.BasicCheckFlag = 'BasicCheckFlag' in params ? params.BasicCheckFlag : null;
+        this.BasicIpInstance = 'BasicIpInstance' in params ? params.BasicIpInstance : null;
+        this.BasicIspCode = 'BasicIspCode' in params ? params.BasicIspCode : null;
+
+    }
+}
+
+/**
  * ModifyResBindDDoSPolicy返回参数结构体
  * @class
  */
@@ -2785,8 +2937,9 @@ class DescribeBaradDataRequest extends  AbstractModel {
 
         /**
          * 指标名，取值：
-connum表示总TCP连接数（新建TCP连接数与活跃TCP连接数的和）；
+connum表示TCP活跃连接数；
 new_conn表示新建TCP连接数；
+inactive_conn表示非活跃连接数;
 intraffic表示入流量；
 outtraffic表示出流量；
 alltraffic表示出流量和入流量之和；
@@ -3117,6 +3270,48 @@ class DescribeDDoSNetEvInfoRequest extends  AbstractModel {
         this.Id = 'Id' in params ? params.Id : null;
         this.StartTime = 'StartTime' in params ? params.StartTime : null;
         this.EndTime = 'EndTime' in params ? params.EndTime : null;
+
+    }
+}
+
+/**
+ * ModifyResourceRenewFlag请求参数结构体
+ * @class
+ */
+class ModifyResourceRenewFlagRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 大禹子产品代号（bgpip表示高防IP；net表示高防IP专业版；shield表示棋牌盾；bgp表示独享包；bgp-multip表示共享包；insurance表示保险包；staticpack表示三网套餐包）
+         * @type {string || null}
+         */
+        this.Business = null;
+
+        /**
+         * 资源Id
+         * @type {string || null}
+         */
+        this.Id = null;
+
+        /**
+         * 自动续费标记（0手动续费；1自动续费；2到期不续费）
+         * @type {number || null}
+         */
+        this.RenewFlag = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Business = 'Business' in params ? params.Business : null;
+        this.Id = 'Id' in params ? params.Id : null;
+        this.RenewFlag = 'RenewFlag' in params ? params.RenewFlag : null;
 
     }
 }
@@ -5007,6 +5202,48 @@ class L4RuleSource extends  AbstractModel {
 }
 
 /**
+ * CreateBasicDDoSAlarmThreshold返回参数结构体
+ * @class
+ */
+class CreateBasicDDoSAlarmThresholdResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 当存在告警阈值配置时，返回告警阈值大于0，当不存在告警配置时，返回告警阈值为0；
+         * @type {number || null}
+         */
+        this.AlarmThreshold = null;
+
+        /**
+         * 告警阈值类型，1-入流量，2-清洗流量；当AlarmThreshold大于0时有效；
+         * @type {number || null}
+         */
+        this.AlarmType = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AlarmThreshold = 'AlarmThreshold' in params ? params.AlarmThreshold : null;
+        this.AlarmType = 'AlarmType' in params ? params.AlarmType : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DeleteL4Rules请求参数结构体
  * @class
  */
@@ -5094,6 +5331,41 @@ class CreateL7HealthConfigRequest extends  AbstractModel {
                 this.HealthConfig.push(obj);
             }
         }
+
+    }
+}
+
+/**
+ * DescribeIPProductInfo请求参数结构体
+ * @class
+ */
+class DescribeIPProductInfoRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 大禹子产品代号（bgp表示独享包；bgp-multip表示共享包）
+         * @type {string || null}
+         */
+        this.Business = null;
+
+        /**
+         * IP列表
+         * @type {Array.<string> || null}
+         */
+        this.IpList = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Business = 'Business' in params ? params.Business : null;
+        this.IpList = 'IpList' in params ? params.IpList : null;
 
     }
 }
@@ -5566,7 +5838,7 @@ class L4RuleHealth extends  AbstractModel {
         this.TimeOut = null;
 
         /**
-         * 检测间隔时间，单位秒
+         * 检测间隔时间，单位秒，必须要大于响应超时时间
          * @type {number || null}
          */
         this.Interval = null;
@@ -6325,7 +6597,14 @@ class BaradData extends  AbstractModel {
         super();
 
         /**
-         * 指标名（connum表示TCP连接数；new_conn表示新增TCP连接数；intraffic表示入流量；outtraffic表示出流量）
+         * 指标名（connum表示TCP活跃连接数；
+new_conn表示新建TCP连接数；
+inactive_conn表示非活跃连接数;
+intraffic表示入流量；
+outtraffic表示出流量；
+alltraffic表示出流量和入流量之和；
+inpkg表示入包速率；
+outpkg表示出包速率；）
          * @type {string || null}
          */
         this.MetricName = null;
@@ -6567,6 +6846,55 @@ class CreateL7HealthConfigResponse extends  AbstractModel {
             this.Success = obj;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CreateBasicDDoSAlarmThreshold请求参数结构体
+ * @class
+ */
+class CreateBasicDDoSAlarmThresholdRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 大禹子产品代号（basic表示DDoS基础防护）
+         * @type {string || null}
+         */
+        this.Business = null;
+
+        /**
+         * =get表示读取告警阈值；=set表示设置告警阈值；
+         * @type {string || null}
+         */
+        this.Method = null;
+
+        /**
+         * 可选，告警阈值类型，1-入流量，2-清洗流量；当Method为set时必须填写；
+         * @type {number || null}
+         */
+        this.AlarmType = null;
+
+        /**
+         * 可选，告警阈值，当Method为set时必须填写；当设置阈值为0时表示清除告警阈值配置；
+         * @type {number || null}
+         */
+        this.AlarmThreshold = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Business = 'Business' in params ? params.Business : null;
+        this.Method = 'Method' in params ? params.Method : null;
+        this.AlarmType = 'AlarmType' in params ? params.AlarmType : null;
+        this.AlarmThreshold = 'AlarmThreshold' in params ? params.AlarmThreshold : null;
 
     }
 }
@@ -8175,6 +8503,46 @@ class DescribeCCUrlAllowResponse extends  AbstractModel {
                 obj.deserialize(params.RecordList[z]);
                 this.RecordList.push(obj);
             }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifyResourceRenewFlag返回参数结构体
+ * @class
+ */
+class ModifyResourceRenewFlagResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 成功码
+         * @type {SuccessCode || null}
+         */
+        this.Success = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Success) {
+            let obj = new SuccessCode();
+            obj.deserialize(params.Success)
+            this.Success = obj;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -10302,6 +10670,7 @@ class ModifyDDoSThresholdRequest extends  AbstractModel {
 
         /**
          * DDoS清洗阈值，取值[0, 60, 80, 100, 150, 200, 250, 300, 400, 500, 700, 1000];
+当设置值为0时，表示采用默认值；
          * @type {number || null}
          */
         this.Threshold = null;
@@ -10692,6 +11061,7 @@ module.exports = {
     DescribeDDoSNetTrendRequest: DescribeDDoSNetTrendRequest,
     DescribeUnBlockStatisRequest: DescribeUnBlockStatisRequest,
     ModifyCCUrlAllowResponse: ModifyCCUrlAllowResponse,
+    DescribeBasicDeviceThresholdResponse: DescribeBasicDeviceThresholdResponse,
     CreateL7RuleCertResponse: CreateL7RuleCertResponse,
     DeleteL4RulesResponse: DeleteL4RulesResponse,
     DescribePolicyCaseResponse: DescribePolicyCaseResponse,
@@ -10713,6 +11083,7 @@ module.exports = {
     IpBlackWhite: IpBlackWhite,
     DescribeDDoSUsedStatisResponse: DescribeDDoSUsedStatisResponse,
     CreateDDoSPolicyCaseResponse: CreateDDoSPolicyCaseResponse,
+    DescribeIPProductInfoResponse: DescribeIPProductInfoResponse,
     DescribeDDoSNetEvListRequest: DescribeDDoSNetEvListRequest,
     ModifyDDoSSwitchResponse: ModifyDDoSSwitchResponse,
     IpBlockData: IpBlockData,
@@ -10727,6 +11098,7 @@ module.exports = {
     DescribePcapRequest: DescribePcapRequest,
     ModifyResBindDDoSPolicyRequest: ModifyResBindDDoSPolicyRequest,
     KeyValueRecord: KeyValueRecord,
+    DescribeBasicDeviceThresholdRequest: DescribeBasicDeviceThresholdRequest,
     ModifyResBindDDoSPolicyResponse: ModifyResBindDDoSPolicyResponse,
     ModifyDDoSWaterKeyRequest: ModifyDDoSWaterKeyRequest,
     ModifyCCLevelResponse: ModifyCCLevelResponse,
@@ -10735,6 +11107,7 @@ module.exports = {
     CCPolicy: CCPolicy,
     ModifyDDoSAIStatusResponse: ModifyDDoSAIStatusResponse,
     DescribeDDoSNetEvInfoRequest: DescribeDDoSNetEvInfoRequest,
+    ModifyResourceRenewFlagRequest: ModifyResourceRenewFlagRequest,
     DescribeCCEvListResponse: DescribeCCEvListResponse,
     CreateDDoSPolicyCaseRequest: CreateDDoSPolicyCaseRequest,
     ModifyDDoSPolicyNameResponse: ModifyDDoSPolicyNameResponse,
@@ -10767,8 +11140,10 @@ module.exports = {
     DescribeDDoSNetEvListResponse: DescribeDDoSNetEvListResponse,
     DescribeL4RulesErrHealthRequest: DescribeL4RulesErrHealthRequest,
     L4RuleSource: L4RuleSource,
+    CreateBasicDDoSAlarmThresholdResponse: CreateBasicDDoSAlarmThresholdResponse,
     DeleteL4RulesRequest: DeleteL4RulesRequest,
     CreateL7HealthConfigRequest: CreateL7HealthConfigRequest,
+    DescribeIPProductInfoRequest: DescribeIPProductInfoRequest,
     ModifyDDoSSwitchRequest: ModifyDDoSSwitchRequest,
     DescribeDDoSUsedStatisRequest: DescribeDDoSUsedStatisRequest,
     ModifyDDoSPolicyRequest: ModifyDDoSPolicyRequest,
@@ -10796,6 +11171,7 @@ module.exports = {
     DescribeResourceListResponse: DescribeResourceListResponse,
     ModifyCCThresholdRequest: ModifyCCThresholdRequest,
     CreateL7HealthConfigResponse: CreateL7HealthConfigResponse,
+    CreateBasicDDoSAlarmThresholdRequest: CreateBasicDDoSAlarmThresholdRequest,
     CCRuleConfig: CCRuleConfig,
     DescribeDDoSEvInfoResponse: DescribeDDoSEvInfoResponse,
     DescribleRegionCountRequest: DescribleRegionCountRequest,
@@ -10825,6 +11201,7 @@ module.exports = {
     DescribeTransmitStatisRequest: DescribeTransmitStatisRequest,
     DescribeInsurePacksResponse: DescribeInsurePacksResponse,
     DescribeCCUrlAllowResponse: DescribeCCUrlAllowResponse,
+    ModifyResourceRenewFlagResponse: ModifyResourceRenewFlagResponse,
     OrderBy: OrderBy,
     DescribeActionLogResponse: DescribeActionLogResponse,
     DescribeCCTrendResponse: DescribeCCTrendResponse,

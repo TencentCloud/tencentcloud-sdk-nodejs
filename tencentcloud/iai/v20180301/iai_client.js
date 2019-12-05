@@ -22,6 +22,7 @@ const Candidate = models.Candidate;
 const ModifyGroupResponse = models.ModifyGroupResponse;
 const DeletePersonRequest = models.DeletePersonRequest;
 const DetectLiveFaceResponse = models.DetectLiveFaceResponse;
+const GetSimilarPersonResultResponse = models.GetSimilarPersonResultResponse;
 const SearchPersonsReturnsByGroupResponse = models.SearchPersonsReturnsByGroupResponse;
 const DeleteFaceRequest = models.DeleteFaceRequest;
 const ModifyPersonBaseInfoResponse = models.ModifyPersonBaseInfoResponse;
@@ -36,8 +37,10 @@ const CreatePersonRequest = models.CreatePersonRequest;
 const DeleteGroupRequest = models.DeleteGroupRequest;
 const CreateFaceResponse = models.CreateFaceResponse;
 const ModifyPersonBaseInfoRequest = models.ModifyPersonBaseInfoRequest;
+const GetSimilarPersonResultRequest = models.GetSimilarPersonResultRequest;
 const GroupCandidate = models.GroupCandidate;
 const SearchPersonsResponse = models.SearchPersonsResponse;
+const FaceQualityInfo = models.FaceQualityInfo;
 const CompareFaceResponse = models.CompareFaceResponse;
 const PersonExDescriptionInfo = models.PersonExDescriptionInfo;
 const DetectLiveFaceRequest = models.DetectLiveFaceRequest;
@@ -54,18 +57,20 @@ const VerifyPersonRequest = models.VerifyPersonRequest;
 const FaceInfo = models.FaceInfo;
 const DeleteGroupResponse = models.DeleteGroupResponse;
 const SearchPersonsRequest = models.SearchPersonsRequest;
-const FaceQualityInfo = models.FaceQualityInfo;
+const EstimateCheckSimilarPersonCostTimeResponse = models.EstimateCheckSimilarPersonCostTimeResponse;
 const CompareFaceRequest = models.CompareFaceRequest;
 const PersonInfo = models.PersonInfo;
+const CheckSimilarPersonRequest = models.CheckSimilarPersonRequest;
 const FaceShape = models.FaceShape;
 const DetectFaceResponse = models.DetectFaceResponse;
 const CopyPersonRequest = models.CopyPersonRequest;
-const GetPersonListNumRequest = models.GetPersonListNumRequest;
+const CheckSimilarPersonResponse = models.CheckSimilarPersonResponse;
 const SearchPersonsReturnsByGroupRequest = models.SearchPersonsReturnsByGroupRequest;
 const DeletePersonFromGroupResponse = models.DeletePersonFromGroupResponse;
 const VerifyPersonResponse = models.VerifyPersonResponse;
 const AnalyzeFaceResponse = models.AnalyzeFaceResponse;
 const GetGroupListRequest = models.GetGroupListRequest;
+const GetPersonListNumResponse = models.GetPersonListNumResponse;
 const FaceHairAttributesInfo = models.FaceHairAttributesInfo;
 const AnalyzeFaceRequest = models.AnalyzeFaceRequest;
 const Point = models.Point;
@@ -76,8 +81,9 @@ const SearchFacesResponse = models.SearchFacesResponse;
 const GroupExDescriptionInfo = models.GroupExDescriptionInfo;
 const VerifyFaceRequest = models.VerifyFaceRequest;
 const CopyPersonResponse = models.CopyPersonResponse;
-const GetPersonListNumResponse = models.GetPersonListNumResponse;
+const EstimateCheckSimilarPersonCostTimeRequest = models.EstimateCheckSimilarPersonCostTimeRequest;
 const GetPersonListRequest = models.GetPersonListRequest;
+const GetPersonListNumRequest = models.GetPersonListNumRequest;
 const DeleteFaceResponse = models.DeleteFaceResponse;
 const DeletePersonResponse = models.DeletePersonResponse;
 const FaceRect = models.FaceRect;
@@ -236,17 +242,20 @@ class IaiClient extends AbstractClient {
     }
 
     /**
-     * 给定一张人脸图片和一个 PersonId，判断图片中的人和 PersonId 对应的人是否为同一人。PersonId 请参考[人员库管理相关接口](https://cloud.tencent.com/document/product/867/32794)。 和[人脸比对](https://cloud.tencent.com/document/product/867/32802)接口不同的是，[人脸验证](https://cloud.tencent.com/document/product/867/32806)用于判断 “此人是否是此人”，“此人”的信息已存于人员库中，“此人”可能存在多张人脸图片；而[人脸比对](https://cloud.tencent.com/document/product/867/32802)用于判断两张人脸的相似度。
+     * 对指定的人员库进行查重，给出疑似相同人的信息。
+
+不支持跨算法模型版本查重，且目前仅支持算法模型为3.0的人员库使用查重功能。
 
 >     
-- 公共参数中的签名方式请使用V3版本，即配置SignatureMethod参数为TC3-HMAC-SHA256。
-     * @param {VerifyFaceRequest} req
-     * @param {function(string, VerifyFaceResponse):void} cb
+- 若对完全相同的指定人员库进行查重操作，需等待上次操作完成才可。即，若两次请求输入的 GroupIds 相同，第一次请求若未完成，第二次请求将返回失败。<br>
+查重的人员库状态为腾讯云开始进行查重任务的那一刻，即您可以理解为当您发起查重请求后，若您的查重任务需要排队，在排队期间您对人员库的增删操作均会会影响查重的结果。腾讯云将以开始进行查重任务的那一刻人员库的状态进行查重。查重任务开始后，您对人员库的任何操作均不影响查重任务的进行。但建议查重任务开始后，请不要对人员库中人员和人脸进行增删操作。
+     * @param {CheckSimilarPersonRequest} req
+     * @param {function(string, CheckSimilarPersonResponse):void} cb
      * @public
      */
-    VerifyFace(req, cb) {
-        let resp = new VerifyFaceResponse();
-        this.request("VerifyFace", req, resp, cb);
+    CheckSimilarPerson(req, cb) {
+        let resp = new CheckSimilarPersonResponse();
+        this.request("CheckSimilarPerson", req, resp, cb);
     }
 
     /**
@@ -283,6 +292,17 @@ class IaiClient extends AbstractClient {
     ModifyGroup(req, cb) {
         let resp = new ModifyGroupResponse();
         this.request("ModifyGroup", req, resp, cb);
+    }
+
+    /**
+     * 获取人员查重接口（CheckSimilarPerson）结果。
+     * @param {GetSimilarPersonResultRequest} req
+     * @param {function(string, GetSimilarPersonResultResponse):void} cb
+     * @public
+     */
+    GetSimilarPersonResult(req, cb) {
+        let resp = new GetSimilarPersonResultResponse();
+        this.request("GetSimilarPersonResult", req, resp, cb);
     }
 
     /**
@@ -361,6 +381,7 @@ class IaiClient extends AbstractClient {
 
 >     
 - 公共参数中的签名方式请使用V3版本，即配置SignatureMethod参数为TC3-HMAC-SHA256。
+- 仅支持算法模型版本（FaceModelVersion）为3.0的人员库。
      * @param {VerifyPersonRequest} req
      * @param {function(string, VerifyPersonResponse):void} cb
      * @public
@@ -382,6 +403,20 @@ class IaiClient extends AbstractClient {
     }
 
     /**
+     * 给定一张人脸图片和一个 PersonId，判断图片中的人和 PersonId 对应的人是否为同一人。PersonId 请参考[人员库管理相关接口](https://cloud.tencent.com/document/product/867/32794)。 和[人脸比对](https://cloud.tencent.com/document/product/867/32802)接口不同的是，[人脸验证](https://cloud.tencent.com/document/product/867/32806)用于判断 “此人是否是此人”，“此人”的信息已存于人员库中，“此人”可能存在多张人脸图片；而[人脸比对](https://cloud.tencent.com/document/product/867/32802)用于判断两张人脸的相似度。
+
+>     
+- 公共参数中的签名方式请使用V3版本，即配置SignatureMethod参数为TC3-HMAC-SHA256。
+     * @param {VerifyFaceRequest} req
+     * @param {function(string, VerifyFaceResponse):void} cb
+     * @public
+     */
+    VerifyFace(req, cb) {
+        let resp = new VerifyFaceResponse();
+        this.request("VerifyFace", req, resp, cb);
+    }
+
+    /**
      * 用于对一张待识别的人脸图片，在一个或多个人员库中识别出最相似的 TopN 人员，按照相似度从大到小排列。
 
 本接口会将该人员（Person）下的所有人脸（Face）进行融合特征处理，即若某个 Person 下有4张 Face ，本接口会将4张 Face 的特征进行融合处理，生成对应这个 Person 的特征，使人员搜索（确定待识别的人脸图片是某人）更加准确。
@@ -389,6 +424,7 @@ class IaiClient extends AbstractClient {
 人员搜索接口和人脸搜索接口的区别是：人脸搜索会比对该 Person 下所有 Face ，而人员搜索比对的是该 Person 的 Person 特征。
 >     
 - 公共参数中的签名方式请使用V3版本，即配置SignatureMethod参数为TC3-HMAC-SHA256。
+- 仅支持算法模型版本（FaceModelVersion）为3.0的人员库。
      * @param {SearchPersonsRequest} req
      * @param {function(string, SearchPersonsResponse):void} cb
      * @public
@@ -420,6 +456,9 @@ class IaiClient extends AbstractClient {
 本接口会将该人员（Person）下的所有人脸（Face）进行融合特征处理，即若某个Person下有4张 Face，本接口会将4张 Face 的特征进行融合处理，生成对应这个 Person 的特征，使人员搜索（确定待识别的人脸图片是某人员）更加准确。
 
 人员搜索和人脸搜索的区别是：人脸搜索比对该 Person 下所有 Face ，而人员搜索比对的是该 Person 的 Person 特征。
+>     
+- 公共参数中的签名方式请使用V3版本，即配置SignatureMethod参数为TC3-HMAC-SHA256。
+- 仅支持算法模型版本（FaceModelVersion）为3.0的人员库。
      * @param {SearchPersonsReturnsByGroupRequest} req
      * @param {function(string, SearchPersonsReturnsByGroupResponse):void} cb
      * @public
@@ -438,6 +477,21 @@ class IaiClient extends AbstractClient {
     GetGroupList(req, cb) {
         let resp = new GetGroupListResponse();
         this.request("GetGroupList", req, resp, cb);
+    }
+
+    /**
+     * 获取若要开始一个人员查重任务，这个任务结束的预估时间。
+
+若EndTimestamp符合您预期，请您尽快发起人员查重请求，否则导致可能需要更多处理时间。
+
+若预估时间超过5小时，则无法使用人员查重功能。
+     * @param {EstimateCheckSimilarPersonCostTimeRequest} req
+     * @param {function(string, EstimateCheckSimilarPersonCostTimeResponse):void} cb
+     * @public
+     */
+    EstimateCheckSimilarPersonCostTime(req, cb) {
+        let resp = new EstimateCheckSimilarPersonCostTimeResponse();
+        this.request("EstimateCheckSimilarPersonCostTime", req, resp, cb);
     }
 
     /**

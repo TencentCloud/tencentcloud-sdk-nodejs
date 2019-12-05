@@ -181,6 +181,34 @@ class DescribeAccountPrivilegesResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeDatabases请求参数结构体
+ * @class
+ */
+class DescribeDatabasesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例 ID，形如：dcdbt-ow7t8lmc。
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+    }
+}
+
+/**
  * CreateAccount返回参数结构体
  * @class
  */
@@ -329,6 +357,41 @@ class DescribeRenewalPriceResponse extends  AbstractModel {
         }
         this.OriginalPrice = 'OriginalPrice' in params ? params.OriginalPrice : null;
         this.Price = 'Price' in params ? params.Price : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * RestartDBInstances返回参数结构体
+ * @class
+ */
+class RestartDBInstancesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 异步任务ID
+         * @type {number || null}
+         */
+        this.FlowId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FlowId = 'FlowId' in params ? params.FlowId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -586,7 +649,7 @@ class CreateAccountRequest extends  AbstractModel {
         this.InstanceId = null;
 
         /**
-         * 登录用户名，由字幕、数字、下划线和连字符组成，长度为1~32位。
+         * 登录用户名，由字母、数字、下划线和连字符组成，长度为1~32位。
          * @type {string || null}
          */
         this.UserName = null;
@@ -1901,6 +1964,27 @@ class ResetAccountPasswordResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeDBInstanceSpecs请求参数结构体
+ * @class
+ */
+class DescribeDBInstanceSpecsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+    }
+}
+
+/**
  * DescribePrice请求参数结构体
  * @class
  */
@@ -3166,12 +3250,18 @@ class ModifyBackupTimeResponse extends  AbstractModel {
 }
 
 /**
- * DescribeDBInstanceSpecs请求参数结构体
+ * 数据库信息
  * @class
  */
-class DescribeDBInstanceSpecsRequest extends  AbstractModel {
+class Database extends  AbstractModel {
     constructor(){
         super();
+
+        /**
+         * 数据库名称
+         * @type {string || null}
+         */
+        this.DbName = null;
 
     }
 
@@ -3182,6 +3272,7 @@ class DescribeDBInstanceSpecsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.DbName = 'DbName' in params ? params.DbName : null;
 
     }
 }
@@ -3564,6 +3655,13 @@ class SlowLogData extends  AbstractModel {
          */
         this.User = null;
 
+        /**
+         * 样例Sql
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ExampleSql = null;
+
     }
 
     /**
@@ -3590,6 +3688,7 @@ class SlowLogData extends  AbstractModel {
         this.TsMax = 'TsMax' in params ? params.TsMax : null;
         this.TsMin = 'TsMin' in params ? params.TsMin : null;
         this.User = 'User' in params ? params.User : null;
+        this.ExampleSql = 'ExampleSql' in params ? params.ExampleSql : null;
 
     }
 }
@@ -3625,6 +3724,56 @@ class RenewDBInstanceResponse extends  AbstractModel {
             return;
         }
         this.DealName = 'DealName' in params ? params.DealName : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeDatabases返回参数结构体
+ * @class
+ */
+class DescribeDatabasesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 该实例上的数据库列表。
+         * @type {Array.<Database> || null}
+         */
+        this.Databases = null;
+
+        /**
+         * 透传入参。
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Databases) {
+            this.Databases = new Array();
+            for (let z in params.Databases) {
+                let obj = new Database();
+                obj.deserialize(params.Databases[z]);
+                this.Databases.push(obj);
+            }
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -4456,6 +4605,34 @@ class LogFileInfo extends  AbstractModel {
 }
 
 /**
+ * RestartDBInstances请求参数结构体
+ * @class
+ */
+class RestartDBInstancesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例ID的数组
+         * @type {Array.<string> || null}
+         */
+        this.InstanceIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
+
+    }
+}
+
+/**
  * DescribeDBResourceUsageDetails请求参数结构体
  * @class
  */
@@ -5179,10 +5356,12 @@ class DeleteAccountResponse extends  AbstractModel {
 module.exports = {
     CreateDBInstanceRequest: CreateDBInstanceRequest,
     DescribeAccountPrivilegesResponse: DescribeAccountPrivilegesResponse,
+    DescribeDatabasesRequest: DescribeDatabasesRequest,
     CreateAccountResponse: CreateAccountResponse,
     DescribeDBParametersRequest: DescribeDBParametersRequest,
     DescribeAccountsRequest: DescribeAccountsRequest,
     DescribeRenewalPriceResponse: DescribeRenewalPriceResponse,
+    RestartDBInstancesResponse: RestartDBInstancesResponse,
     DescribeUpgradePriceRequest: DescribeUpgradePriceRequest,
     DescribeDBResourceUsageDetailsResponse: DescribeDBResourceUsageDetailsResponse,
     DescribeDBInstanceSpecsResponse: DescribeDBInstanceSpecsResponse,
@@ -5213,6 +5392,7 @@ module.exports = {
     RenewDBInstanceRequest: RenewDBInstanceRequest,
     DescribeSqlLogsRequest: DescribeSqlLogsRequest,
     ResetAccountPasswordResponse: ResetAccountPasswordResponse,
+    DescribeDBInstanceSpecsRequest: DescribeDBInstanceSpecsRequest,
     DescribePriceRequest: DescribePriceRequest,
     CreateDBInstanceResponse: CreateDBInstanceResponse,
     DescribeBackupTimeRequest: DescribeBackupTimeRequest,
@@ -5234,7 +5414,7 @@ module.exports = {
     DescribePriceResponse: DescribePriceResponse,
     InitDBInstancesRequest: InitDBInstancesRequest,
     ModifyBackupTimeResponse: ModifyBackupTimeResponse,
-    DescribeDBInstanceSpecsRequest: DescribeDBInstanceSpecsRequest,
+    Database: Database,
     GrantAccountPrivilegesResponse: GrantAccountPrivilegesResponse,
     OpenDBExtranetAccessRequest: OpenDBExtranetAccessRequest,
     ModifyDBInstanceNameResponse: ModifyDBInstanceNameResponse,
@@ -5244,6 +5424,7 @@ module.exports = {
     DescribeBackupTimeResponse: DescribeBackupTimeResponse,
     SlowLogData: SlowLogData,
     RenewDBInstanceResponse: RenewDBInstanceResponse,
+    DescribeDatabasesResponse: DescribeDatabasesResponse,
     DescribeOrdersRequest: DescribeOrdersRequest,
     DescribeDBLogFilesResponse: DescribeDBLogFilesResponse,
     CloseDBExtranetAccessRequest: CloseDBExtranetAccessRequest,
@@ -5259,6 +5440,7 @@ module.exports = {
     ConstraintRange: ConstraintRange,
     DescribeRenewalPriceRequest: DescribeRenewalPriceRequest,
     LogFileInfo: LogFileInfo,
+    RestartDBInstancesRequest: RestartDBInstancesRequest,
     DescribeDBResourceUsageDetailsRequest: DescribeDBResourceUsageDetailsRequest,
     DBAccount: DBAccount,
     DescribeAccountPrivilegesRequest: DescribeAccountPrivilegesRequest,

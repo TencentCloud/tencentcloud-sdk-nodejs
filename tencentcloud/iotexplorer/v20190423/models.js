@@ -1653,37 +1653,37 @@ class CreateStudioProductRequest extends  AbstractModel {
         super();
 
         /**
-         * 产品名称
+         * 产品名称，名称不能和已经存在的产品名称重复。命名规则：[a-zA-Z0-9:_-]{1,32}
          * @type {string || null}
          */
         this.ProductName = null;
 
         /**
-         * 产品分组模板ID
+         * 产品分组模板ID , ( 自定义模板填写1 , 控制台调用会使用预置的其他ID)
          * @type {number || null}
          */
         this.CategoryId = null;
 
         /**
-         * 产品类型
+         * 产品类型 填写 ( 0 普通产品 )
          * @type {number || null}
          */
         this.ProductType = null;
 
         /**
-         * 加密类型
+         * 加密类型 加密类型，1表示证书认证，2表示签名认证。
          * @type {string || null}
          */
         this.EncryptionType = null;
 
         /**
-         * 连接类型
+         * 连接类型 可以填写 wifi cellular else
          * @type {string || null}
          */
         this.NetType = null;
 
         /**
-         * 数据协议
+         * 数据协议 (1 使用物模型)
          * @type {number || null}
          */
         this.DataProtocol = null;
@@ -2090,7 +2090,7 @@ class CreateDeviceRequest extends  AbstractModel {
         this.ProductId = null;
 
         /**
-         * 设备名称。
+         * 设备名称。命名规则：[a-zA-Z0-9:_-]{1,48}。
          * @type {string || null}
          */
         this.DeviceName = null;
@@ -2207,6 +2207,12 @@ class DescribeDeviceDataRequest extends  AbstractModel {
          */
         this.DeviceName = null;
 
+        /**
+         * 设备ID，该字段有值将代替 ProductId/DeviceName
+         * @type {string || null}
+         */
+        this.DeviceId = null;
+
     }
 
     /**
@@ -2218,6 +2224,7 @@ class DescribeDeviceDataRequest extends  AbstractModel {
         }
         this.ProductId = 'ProductId' in params ? params.ProductId : null;
         this.DeviceName = 'DeviceName' in params ? params.DeviceName : null;
+        this.DeviceId = 'DeviceId' in params ? params.DeviceId : null;
 
     }
 }
@@ -2312,6 +2319,13 @@ class DeviceInfo extends  AbstractModel {
          */
         this.DeviceCert = null;
 
+        /**
+         * 日志级别
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.LogLevel = null;
+
     }
 
     /**
@@ -2329,6 +2343,7 @@ class DeviceInfo extends  AbstractModel {
         this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
         this.Version = 'Version' in params ? params.Version : null;
         this.DeviceCert = 'DeviceCert' in params ? params.DeviceCert : null;
+        this.LogLevel = 'LogLevel' in params ? params.LogLevel : null;
 
     }
 }

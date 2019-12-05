@@ -60,8 +60,13 @@ class SmsPackagesStatisticsRequest extends  AbstractModel {
         super();
 
         /**
-         * 最大上限
-注：目前固定设置为0
+         * 短信SdkAppid在[短信控制台](https://console.cloud.tencent.com/sms/smslist) 添加应用后生成的实际SdkAppid,示例如1400006666。
+         * @type {string || null}
+         */
+        this.SmsSdkAppid = null;
+
+        /**
+         * 最大上限(需要拉取的套餐包个数)
          * @type {number || null}
          */
         this.Limit = null;
@@ -73,18 +78,6 @@ class SmsPackagesStatisticsRequest extends  AbstractModel {
          */
         this.Offset = null;
 
-        /**
-         * 需要拉取的套餐包个数
-         * @type {number || null}
-         */
-        this.NumberOfPullPackages = null;
-
-        /**
-         * 短信SdkAppid在[短信控制台](https://console.cloud.tencent.com/sms/smslist) 添加应用后生成的实际SdkAppid,示例如1400006666。
-         * @type {string || null}
-         */
-        this.SmsSdkAppid = null;
-
     }
 
     /**
@@ -94,10 +87,9 @@ class SmsPackagesStatisticsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.SmsSdkAppid = 'SmsSdkAppid' in params ? params.SmsSdkAppid : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
-        this.NumberOfPullPackages = 'NumberOfPullPackages' in params ? params.NumberOfPullPackages : null;
-        this.SmsSdkAppid = 'SmsSdkAppid' in params ? params.SmsSdkAppid : null;
 
     }
 }
@@ -112,7 +104,7 @@ class PullSmsSendStatusByPhoneNumberRequest extends  AbstractModel {
 
         /**
          * 拉取起始时间，UNIX 时间戳（时间：秒）
-         * @type {string || null}
+         * @type {number || null}
          */
         this.SendDateTime = null;
 
@@ -357,7 +349,7 @@ class PullSmsReplyStatus extends  AbstractModel {
 
         /**
          * 短信码号扩展号，默认未开通，如需开通请联系 [sms helper](https://cloud.tencent.com/document/product/382/3773)
-         * @type {number || null}
+         * @type {string || null}
          */
         this.ExtendCode = null;
 
@@ -534,7 +526,7 @@ class SendSmsRequest extends  AbstractModel {
 
         /**
          * 短信码号扩展号，默认未开通，如需开通请联系 [sms helper](https://cloud.tencent.com/document/product/382/3773)
-         * @type {number || null}
+         * @type {string || null}
          */
         this.ExtendCode = null;
 
@@ -798,20 +790,6 @@ class SendStatusStatisticsRequest extends  AbstractModel {
         super();
 
         /**
-         * 最大上限
-注：目前固定设置为0
-         * @type {number || null}
-         */
-        this.Limit = null;
-
-        /**
-         * 偏移量
-注：目前固定设置为0
-         * @type {number || null}
-         */
-        this.Offset = null;
-
-        /**
          * 拉取起始时间，yyyymmddhh 需要拉取的起始时间，精确到小时
          * @type {number || null}
          */
@@ -830,6 +808,20 @@ class SendStatusStatisticsRequest extends  AbstractModel {
          */
         this.SmsSdkAppid = null;
 
+        /**
+         * 最大上限
+注：目前固定设置为0
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 偏移量
+注：目前固定设置为0
+         * @type {number || null}
+         */
+        this.Offset = null;
+
     }
 
     /**
@@ -839,11 +831,11 @@ class SendStatusStatisticsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Limit = 'Limit' in params ? params.Limit : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
         this.StartDateTime = 'StartDateTime' in params ? params.StartDateTime : null;
         this.EndDataTime = 'EndDataTime' in params ? params.EndDataTime : null;
         this.SmsSdkAppid = 'SmsSdkAppid' in params ? params.SmsSdkAppid : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
 
     }
 }
@@ -900,20 +892,6 @@ class CallbackStatusStatisticsRequest extends  AbstractModel {
         super();
 
         /**
-         * 最大上限
-注：目前固定设置为0
-         * @type {number || null}
-         */
-        this.Limit = null;
-
-        /**
-         * 偏移量
-注：目前固定设置为0
-         * @type {number || null}
-         */
-        this.Offset = null;
-
-        /**
          * 开始时间，yyyymmddhh 需要拉取的起始时间，精确到小时
          * @type {number || null}
          */
@@ -932,6 +910,20 @@ class CallbackStatusStatisticsRequest extends  AbstractModel {
          */
         this.SmsSdkAppid = null;
 
+        /**
+         * 最大上限
+注：目前固定设置为0
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 偏移量
+注：目前固定设置为0
+         * @type {number || null}
+         */
+        this.Offset = null;
+
     }
 
     /**
@@ -941,11 +933,11 @@ class CallbackStatusStatisticsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Limit = 'Limit' in params ? params.Limit : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
         this.StartDateTime = 'StartDateTime' in params ? params.StartDateTime : null;
         this.EndDataTime = 'EndDataTime' in params ? params.EndDataTime : null;
         this.SmsSdkAppid = 'SmsSdkAppid' in params ? params.SmsSdkAppid : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
 
     }
 }
@@ -960,7 +952,7 @@ class PullSmsReplyStatusByPhoneNumberRequest extends  AbstractModel {
 
         /**
          * 拉取起始时间，UNIX 时间戳（时间：秒）
-         * @type {string || null}
+         * @type {number || null}
          */
         this.SendDateTime = null;
 
@@ -1019,19 +1011,19 @@ class SendStatusStatistics extends  AbstractModel {
          * 短信计费条数统计，例如提交成功量为100条，其中有20条是长短信（长度为80字）被拆分成2条，则计费条数为： ```80 * 1 + 20 * 2 = 120``` 条
          * @type {number || null}
          */
-        this.BillingStatistics = null;
+        this.FeeCount = null;
 
         /**
          * 短信提交量统计
          * @type {number || null}
          */
-        this.RequestStatistics = null;
+        this.RequestCount = null;
 
         /**
          * 短信提交成功量统计
          * @type {number || null}
          */
-        this.RequestSuccessStatistics = null;
+        this.RequestSuccessCount = null;
 
     }
 
@@ -1042,9 +1034,9 @@ class SendStatusStatistics extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.BillingStatistics = 'BillingStatistics' in params ? params.BillingStatistics : null;
-        this.RequestStatistics = 'RequestStatistics' in params ? params.RequestStatistics : null;
-        this.RequestSuccessStatistics = 'RequestSuccessStatistics' in params ? params.RequestSuccessStatistics : null;
+        this.FeeCount = 'FeeCount' in params ? params.FeeCount : null;
+        this.RequestCount = 'RequestCount' in params ? params.RequestCount : null;
+        this.RequestSuccessCount = 'RequestSuccessCount' in params ? params.RequestSuccessCount : null;
 
     }
 }

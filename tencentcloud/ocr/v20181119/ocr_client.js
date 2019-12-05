@@ -48,6 +48,7 @@ const QrcodeOCRResponse = models.QrcodeOCRResponse;
 const WaybillObj = models.WaybillObj;
 const InvoiceDetectInfo = models.InvoiceDetectInfo;
 const EnterpriseLicenseOCRRequest = models.EnterpriseLicenseOCRRequest;
+const PropOwnerCertOCRResponse = models.PropOwnerCertOCRResponse;
 const FinanBillInfo = models.FinanBillInfo;
 const TrainTicketOCRResponse = models.TrainTicketOCRResponse;
 const TollInvoiceInfo = models.TollInvoiceInfo;
@@ -77,6 +78,7 @@ const LicensePlateOCRResponse = models.LicensePlateOCRResponse;
 const PermitOCRRequest = models.PermitOCRRequest;
 const InvoiceGeneralOCRResponse = models.InvoiceGeneralOCRResponse;
 const TaxiInvoiceOCRRequest = models.TaxiInvoiceOCRRequest;
+const PropOwnerCertOCRRequest = models.PropOwnerCertOCRRequest;
 const TextDetectRequest = models.TextDetectRequest;
 const VatRollInvoiceOCRResponse = models.VatRollInvoiceOCRResponse;
 const EduPaperOCRResponse = models.EduPaperOCRResponse;
@@ -116,12 +118,14 @@ const DutyPaidProofOCRRequest = models.DutyPaidProofOCRRequest;
 const ItemCoord = models.ItemCoord;
 const OrgCodeCertOCRResponse = models.OrgCodeCertOCRResponse;
 const MixedInvoiceOCRRequest = models.MixedInvoiceOCRRequest;
+const ResidenceBookletOCRResponse = models.ResidenceBookletOCRResponse;
 const CarInvoiceOCRResponse = models.CarInvoiceOCRResponse;
 const GeneralFastOCRRequest = models.GeneralFastOCRRequest;
 const ShipInvoiceOCRResponse = models.ShipInvoiceOCRResponse;
 const InsuranceBillInfo = models.InsuranceBillInfo;
 const VehicleRegCertOCRResponse = models.VehicleRegCertOCRResponse;
 const GeneralAccurateOCRResponse = models.GeneralAccurateOCRResponse;
+const ResidenceBookletOCRRequest = models.ResidenceBookletOCRRequest;
 const BusInvoiceOCRResponse = models.BusInvoiceOCRResponse;
 const QrcodeResultsInfo = models.QrcodeResultsInfo;
 const EnglishOCRResponse = models.EnglishOCRResponse;
@@ -229,7 +233,7 @@ class OcrClient extends AbstractClient {
 
     /**
      * 本接口支持条形码和二维码的识别（包括 DataMatrix 和 PDF417）。
-本接口暂未完全对外开放，如需咨询，请[联系商务](https://cloud.tencent.com/about/connect)
+本接口暂未完全对外开放，如需咨询，请[联系商务](https://cloud.tencent.com/about/connect) 
      * @param {QrcodeOCRRequest} req
      * @param {function(string, QrcodeOCRResponse):void} cb
      * @public
@@ -240,7 +244,7 @@ class OcrClient extends AbstractClient {
     }
 
     /**
-     * 本接口支持图像整体文字的检测和识别，返回文字框位置与文字内容。相比通用印刷体识别接口，准确率和召回率更高。
+     * 本接口支持图像整体文字的检测和识别，返回文字框位置与文字内容。相比通用印刷体识别接口，高精度版在英文、数字、小字、模糊字、倾斜文本行等困难场景下，准确率和召回率更高。
      * @param {GeneralAccurateOCRRequest} req
      * @param {function(string, GeneralAccurateOCRResponse):void} cb
      * @public
@@ -340,14 +344,14 @@ class OcrClient extends AbstractClient {
     }
 
     /**
-     * 本接口支持行驶证主页和副页所有字段的自动定位与识别，包含车牌号码、车辆类型、所有人、住址、使用性质、品牌型号、车辆识别代码、发动机号、注册日期、发证日期等。
-     * @param {VehicleLicenseOCRRequest} req
-     * @param {function(string, VehicleLicenseOCRResponse):void} cb
+     * 本接口支持房产证关键字段的识别，包括房地产权利人、共有情况、登记时间、规划用途、房屋性质、房屋坐落等。
+     * @param {PropOwnerCertOCRRequest} req
+     * @param {function(string, PropOwnerCertOCRResponse):void} cb
      * @public
      */
-    VehicleLicenseOCR(req, cb) {
-        let resp = new VehicleLicenseOCRResponse();
-        this.request("VehicleLicenseOCR", req, resp, cb);
+    PropOwnerCertOCR(req, cb) {
+        let resp = new PropOwnerCertOCRResponse();
+        this.request("PropOwnerCertOCR", req, resp, cb);
     }
 
     /**
@@ -564,6 +568,17 @@ class OcrClient extends AbstractClient {
     }
 
     /**
+     * 本接口支持国内机动车登记证书主要字段的结构化识别，包括机动车所有人、身份证明名称、号码、车辆型号、车辆识别代号、发动机号、制造厂名称等。
+     * @param {VehicleRegCertOCRRequest} req
+     * @param {function(string, VehicleRegCertOCRResponse):void} cb
+     * @public
+     */
+    VehicleRegCertOCR(req, cb) {
+        let resp = new VehicleRegCertOCRResponse();
+        this.request("VehicleRegCertOCR", req, resp, cb);
+    }
+
+    /**
      * 本接口支持事业单位法人证书关键字段识别，包括注册号、有效期、住所、名称、法定代表人等。
      * @param {InstitutionOCRRequest} req
      * @param {function(string, InstitutionOCRResponse):void} cb
@@ -586,14 +601,14 @@ class OcrClient extends AbstractClient {
     }
 
     /**
-     * 本接口支持国内机动车登记证书主要字段的结构化识别，包括机动车所有人、身份证明名称、号码、车辆型号、车辆识别代号、发动机号、制造厂名称等。
-     * @param {VehicleRegCertOCRRequest} req
-     * @param {function(string, VehicleRegCertOCRResponse):void} cb
+     * 本接口支持居民户口簿户主页及成员页关键字段的识别，包括姓名、户别、地址、籍贯、身份证号码等。
+     * @param {ResidenceBookletOCRRequest} req
+     * @param {function(string, ResidenceBookletOCRResponse):void} cb
      * @public
      */
-    VehicleRegCertOCR(req, cb) {
-        let resp = new VehicleRegCertOCRResponse();
-        this.request("VehicleRegCertOCR", req, resp, cb);
+    ResidenceBookletOCR(req, cb) {
+        let resp = new ResidenceBookletOCRResponse();
+        this.request("ResidenceBookletOCR", req, resp, cb);
     }
 
     /**
@@ -682,6 +697,17 @@ class OcrClient extends AbstractClient {
     EduPaperOCR(req, cb) {
         let resp = new EduPaperOCRResponse();
         this.request("EduPaperOCR", req, resp, cb);
+    }
+
+    /**
+     * 本接口支持行驶证主页和副页所有字段的自动定位与识别，包含车牌号码、车辆类型、所有人、住址、使用性质、品牌型号、车辆识别代码、发动机号、注册日期、发证日期等。
+     * @param {VehicleLicenseOCRRequest} req
+     * @param {function(string, VehicleLicenseOCRResponse):void} cb
+     * @public
+     */
+    VehicleLicenseOCR(req, cb) {
+        let resp = new VehicleLicenseOCRResponse();
+        this.request("VehicleLicenseOCR", req, resp, cb);
     }
 
 
