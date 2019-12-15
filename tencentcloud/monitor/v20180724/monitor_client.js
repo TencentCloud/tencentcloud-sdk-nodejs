@@ -17,6 +17,8 @@
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const GetMonitorDataRequest = models.GetMonitorDataRequest;
+const PutMonitorDataRequest = models.PutMonitorDataRequest;
+const MetricDatum = models.MetricDatum;
 const Instance = models.Instance;
 const PeriodsSt = models.PeriodsSt;
 const Dimension = models.Dimension;
@@ -26,6 +28,7 @@ const MetricSet = models.MetricSet;
 const DataPoint = models.DataPoint;
 const MetricObjectMeaning = models.MetricObjectMeaning;
 const DimensionsDesc = models.DimensionsDesc;
+const PutMonitorDataResponse = models.PutMonitorDataResponse;
 const DescribeBaseMetricsResponse = models.DescribeBaseMetricsResponse;
 
 
@@ -61,6 +64,23 @@ class MonitorClient extends AbstractClient {
     GetMonitorData(req, cb) {
         let resp = new GetMonitorDataResponse();
         this.request("GetMonitorData", req, resp, cb);
+    }
+
+    /**
+     * 默认接口请求频率限制：50次/秒。
+默认单租户指标上限：100个。
+单次上报最多 30 个指标/值对，请求返回错误时，请求中所有的指标/值均不会被保存。
+
+上报的时间戳为期望保存的时间戳，建议构造整数分钟时刻的时间戳。
+时间戳时间范围必须为当前时间到 300 秒前之间。
+同一 IP 指标对的数据需按分钟先后顺序上报。
+     * @param {PutMonitorDataRequest} req
+     * @param {function(string, PutMonitorDataResponse):void} cb
+     * @public
+     */
+    PutMonitorData(req, cb) {
+        let resp = new PutMonitorDataResponse();
+        this.request("PutMonitorData", req, resp, cb);
     }
 
 

@@ -1568,7 +1568,11 @@ BLOCK：违规
         this.AdvancedInfo = null;
 
         /**
-         * 取值'LABEL‘，LABEL表示结论和置信度来自标签分类。
+         * 色情识别类型：
+PORN：色情
+HOT：性感
+NORMAL：正常
+FAIL：识别失败
          * @type {string || null}
          */
         this.Type = null;

@@ -16,26 +16,27 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
-const ProcessMediaRequest = models.ProcessMediaRequest;
+const MediaAiAnalysisFrameTagSegmentItem = models.MediaAiAnalysisFrameTagSegmentItem;
 const ModifySnapshotByTimeOffsetTemplateResponse = models.ModifySnapshotByTimeOffsetTemplateResponse;
 const ModifySampleSnapshotTemplateResponse = models.ModifySampleSnapshotTemplateResponse;
 const LiveStreamAiReviewImagePornResult = models.LiveStreamAiReviewImagePornResult;
 const ModifyWatermarkTemplateRequest = models.ModifyWatermarkTemplateRequest;
 const CreateWordSamplesRequest = models.CreateWordSamplesRequest;
-const DeleteWatermarkTemplateRequest = models.DeleteWatermarkTemplateRequest;
+const AiAnalysisTaskFrameTagInput = models.AiAnalysisTaskFrameTagInput;
+const DescribeImageSpriteTemplatesRequest = models.DescribeImageSpriteTemplatesRequest;
 const AiRecognitionTaskAsrWordsResultItem = models.AiRecognitionTaskAsrWordsResultItem;
 const AiRecognitionTaskAsrFullTextSegmentItem = models.AiRecognitionTaskAsrFullTextSegmentItem;
 const UserDefineOcrTextReviewTemplateInfoForUpdate = models.UserDefineOcrTextReviewTemplateInfoForUpdate;
 const ModifyAIRecognitionTemplateRequest = models.ModifyAIRecognitionTemplateRequest;
-const ParseNotificationRequest = models.ParseNotificationRequest;
+const MediaAiAnalysisTagItem = models.MediaAiAnalysisTagItem;
 const AnimatedGraphicTaskInput = models.AnimatedGraphicTaskInput;
 const PoliticalAsrReviewTemplateInfoForUpdate = models.PoliticalAsrReviewTemplateInfoForUpdate;
 const TaskSimpleInfo = models.TaskSimpleInfo;
 const DescribeTaskDetailResponse = models.DescribeTaskDetailResponse;
 const LiveStreamAiRecognitionResultItem = models.LiveStreamAiRecognitionResultItem;
 const AiSampleFaceOperation = models.AiSampleFaceOperation;
-const DeleteImageSpriteTemplateRequest = models.DeleteImageSpriteTemplateRequest;
-const SvgWatermarkInput = models.SvgWatermarkInput;
+const AiAnalysisTaskClassificationInput = models.AiAnalysisTaskClassificationInput;
+const AIAnalysisTemplateItem = models.AIAnalysisTemplateItem;
 const WorkflowInfo = models.WorkflowInfo;
 const CreateTranscodeTemplateRequest = models.CreateTranscodeTemplateRequest;
 const ProcessLiveStreamResponse = models.ProcessLiveStreamResponse;
@@ -43,13 +44,14 @@ const AiSampleFailFaceInfo = models.AiSampleFailFaceInfo;
 const DeleteWorkflowRequest = models.DeleteWorkflowRequest;
 const AiRecognitionTaskOcrWordsResult = models.AiRecognitionTaskOcrWordsResult;
 const PornAsrReviewTemplateInfo = models.PornAsrReviewTemplateInfo;
-const DescribeImageSpriteTemplatesRequest = models.DescribeImageSpriteTemplatesRequest;
+const DeleteAIAnalysisTemplateResponse = models.DeleteAIAnalysisTemplateResponse;
 const DeleteWorkflowResponse = models.DeleteWorkflowResponse;
 const OcrFullTextConfigureInfoForUpdate = models.OcrFullTextConfigureInfoForUpdate;
-const AiClassificationTaskInput = models.AiClassificationTaskInput;
 const DeleteAnimatedGraphicsTemplateResponse = models.DeleteAnimatedGraphicsTemplateResponse;
+const ModifyContentReviewTemplateRequest = models.ModifyContentReviewTemplateRequest;
 const AiSampleTagOperation = models.AiSampleTagOperation;
-const AiRecognitionTaskOcrFullTextResultInput = models.AiRecognitionTaskOcrFullTextResultInput;
+const AiRecognitionTaskAsrFullTextResultOutput = models.AiRecognitionTaskAsrFullTextResultOutput;
+const DeleteImageSpriteTemplateResponse = models.DeleteImageSpriteTemplateResponse;
 const AiRecognitionTaskOcrFullTextSegmentItem = models.AiRecognitionTaskOcrFullTextSegmentItem;
 const ResetWorkflowResponse = models.ResetWorkflowResponse;
 const PoliticalImgReviewTemplateInfo = models.PoliticalImgReviewTemplateInfo;
@@ -62,14 +64,21 @@ const DescribeAIRecognitionTemplatesResponse = models.DescribeAIRecognitionTempl
 const PornImgReviewTemplateInfo = models.PornImgReviewTemplateInfo;
 const AiReviewPoliticalTaskOutput = models.AiReviewPoliticalTaskOutput;
 const AiReviewTaskPoliticalResult = models.AiReviewTaskPoliticalResult;
+const SvgWatermarkInputForUpdate = models.SvgWatermarkInputForUpdate;
+const WorkflowTrigger = models.WorkflowTrigger;
 const SampleSnapshotTaskInput = models.SampleSnapshotTaskInput;
+const DeleteAIAnalysisTemplateRequest = models.DeleteAIAnalysisTemplateRequest;
+const MediaSnapshotByTimeOffsetItem = models.MediaSnapshotByTimeOffsetItem;
+const SampleSnapshotTemplate = models.SampleSnapshotTemplate;
 const ModifySnapshotByTimeOffsetTemplateRequest = models.ModifySnapshotByTimeOffsetTemplateRequest;
 const ModifySampleSnapshotTemplateRequest = models.ModifySampleSnapshotTemplateRequest;
+const AiAnalysisResult = models.AiAnalysisResult;
 const AiReviewPoliticalOcrTaskInput = models.AiReviewPoliticalOcrTaskInput;
 const PornOcrReviewTemplateInfo = models.PornOcrReviewTemplateInfo;
 const LiveStreamAiReviewResultItem = models.LiveStreamAiReviewResultItem;
 const ImageWatermarkInputForUpdate = models.ImageWatermarkInputForUpdate;
 const AiReviewPornAsrTaskOutput = models.AiReviewPornAsrTaskOutput;
+const DescribeAIAnalysisTemplatesRequest = models.DescribeAIAnalysisTemplatesRequest;
 const MediaInputInfo = models.MediaInputInfo;
 const LiveStreamTaskNotifyConfig = models.LiveStreamTaskNotifyConfig;
 const MediaProcessTaskImageSpriteResult = models.MediaProcessTaskImageSpriteResult;
@@ -83,13 +92,14 @@ const DeleteSnapshotByTimeOffsetTemplateResponse = models.DeleteSnapshotByTimeOf
 const AiRecognitionTaskOcrWordsResultItem = models.AiRecognitionTaskOcrWordsResultItem;
 const DescribeTasksRequest = models.DescribeTasksRequest;
 const FaceConfigureInfoForUpdate = models.FaceConfigureInfoForUpdate;
-const DeleteSampleSnapshotTemplateResponse = models.DeleteSampleSnapshotTemplateResponse;
 const CreateTranscodeTemplateResponse = models.CreateTranscodeTemplateResponse;
+const AiAnalysisTaskTagInput = models.AiAnalysisTaskTagInput;
 const MediaContentReviewOcrTextSegmentItem = models.MediaContentReviewOcrTextSegmentItem;
 const AiReviewTaskPoliticalOcrResult = models.AiReviewTaskPoliticalOcrResult;
 const AnimatedGraphicsTemplate = models.AnimatedGraphicsTemplate;
 const PornAsrReviewTemplateInfoForUpdate = models.PornAsrReviewTemplateInfoForUpdate;
 const AiSampleWord = models.AiSampleWord;
+const CreateAIAnalysisTemplateRequest = models.CreateAIAnalysisTemplateRequest;
 const PoliticalOcrReviewTemplateInfo = models.PoliticalOcrReviewTemplateInfo;
 const AiReviewTerrorismTaskInput = models.AiReviewTerrorismTaskInput;
 const CreateImageSpriteTemplateRequest = models.CreateImageSpriteTemplateRequest;
@@ -101,31 +111,36 @@ const ProcessLiveStreamRequest = models.ProcessLiveStreamRequest;
 const CreatePersonSampleResponse = models.CreatePersonSampleResponse;
 const CreateContentReviewTemplateResponse = models.CreateContentReviewTemplateResponse;
 const MediaContentReviewAsrTextSegmentItem = models.MediaContentReviewAsrTextSegmentItem;
-const WorkflowTrigger = models.WorkflowTrigger;
+const TagConfigureInfoForUpdate = models.TagConfigureInfoForUpdate;
+const DescribeTranscodeTemplatesResponse = models.DescribeTranscodeTemplatesResponse;
 const ModifyImageSpriteTemplateRequest = models.ModifyImageSpriteTemplateRequest;
 const ContentReviewTemplateItem = models.ContentReviewTemplateItem;
 const MediaSampleSnapshotItem = models.MediaSampleSnapshotItem;
 const DeletePersonSampleResponse = models.DeletePersonSampleResponse;
 const DeleteAIRecognitionTemplateResponse = models.DeleteAIRecognitionTemplateResponse;
 const DeleteWordSamplesRequest = models.DeleteWordSamplesRequest;
+const LiveStreamAiRecognitionResultInfo = models.LiveStreamAiRecognitionResultInfo;
 const DeleteContentReviewTemplateRequest = models.DeleteContentReviewTemplateRequest;
 const CreateSnapshotByTimeOffsetTemplateResponse = models.CreateSnapshotByTimeOffsetTemplateResponse;
 const DescribeWordSamplesRequest = models.DescribeWordSamplesRequest;
-const ModifyContentReviewTemplateRequest = models.ModifyContentReviewTemplateRequest;
+const ModifyAIAnalysisTemplateRequest = models.ModifyAIAnalysisTemplateRequest;
+const DescribeWatermarkTemplatesRequest = models.DescribeWatermarkTemplatesRequest;
 const AiReviewPoliticalTaskInput = models.AiReviewPoliticalTaskInput;
 const ModifyContentReviewTemplateResponse = models.ModifyContentReviewTemplateResponse;
 const PornConfigureInfoForUpdate = models.PornConfigureInfoForUpdate;
-const DescribeWatermarkTemplatesRequest = models.DescribeWatermarkTemplatesRequest;
+const AiRecognitionTaskOcrFullTextSegmentTextItem = models.AiRecognitionTaskOcrFullTextSegmentTextItem;
 const AiContentReviewTaskInput = models.AiContentReviewTaskInput;
-const SvgWatermarkInputForUpdate = models.SvgWatermarkInputForUpdate;
+const WorkflowTask = models.WorkflowTask;
+const DeleteImageSpriteTemplateRequest = models.DeleteImageSpriteTemplateRequest;
 const VideoTemplateInfo = models.VideoTemplateInfo;
-const LiveStreamAiRecognitionResultInfo = models.LiveStreamAiRecognitionResultInfo;
+const DeleteSampleSnapshotTemplateRequest = models.DeleteSampleSnapshotTemplateRequest;
 const DescribeSampleSnapshotTemplatesResponse = models.DescribeSampleSnapshotTemplatesResponse;
-const PornOcrReviewTemplateInfoForUpdate = models.PornOcrReviewTemplateInfoForUpdate;
+const AiAnalysisTaskClassificationOutput = models.AiAnalysisTaskClassificationOutput;
+const SvgWatermarkInput = models.SvgWatermarkInput;
 const AiReviewTaskPornOcrResult = models.AiReviewTaskPornOcrResult;
 const ImageSpriteTemplate = models.ImageSpriteTemplate;
-const AiRecognitionTaskOcrFullTextSegmentTextItem = models.AiRecognitionTaskOcrFullTextSegmentTextItem;
-const DeleteSampleSnapshotTemplateRequest = models.DeleteSampleSnapshotTemplateRequest;
+const AiAnalysisTaskCoverOutput = models.AiAnalysisTaskCoverOutput;
+const ClassificationConfigureInfo = models.ClassificationConfigureInfo;
 const LiveStreamAiReviewVoicePornResult = models.LiveStreamAiReviewVoicePornResult;
 const ModifyWordSampleResponse = models.ModifyWordSampleResponse;
 const TaskOutputStorage = models.TaskOutputStorage;
@@ -135,7 +150,9 @@ const SnapshotByTimeOffsetTaskInput = models.SnapshotByTimeOffsetTaskInput;
 const TerrorismImgReviewTemplateInfo = models.TerrorismImgReviewTemplateInfo;
 const DeletePersonSampleRequest = models.DeletePersonSampleRequest;
 const ImageSpriteTaskInput = models.ImageSpriteTaskInput;
+const UserDefineOcrTextReviewTemplateInfo = models.UserDefineOcrTextReviewTemplateInfo;
 const AiRecognitionTaskAsrWordsSegmentItem = models.AiRecognitionTaskAsrWordsSegmentItem;
+const DescribeImageSpriteTemplatesResponse = models.DescribeImageSpriteTemplatesResponse;
 const ParseLiveStreamProcessNotificationResponse = models.ParseLiveStreamProcessNotificationResponse;
 const LiveStreamAsrFullTextRecognitionResult = models.LiveStreamAsrFullTextRecognitionResult;
 const DescribeTranscodeTemplatesRequest = models.DescribeTranscodeTemplatesRequest;
@@ -145,26 +162,30 @@ const AiRecognitionTaskInput = models.AiRecognitionTaskInput;
 const AiReviewPornOcrTaskInput = models.AiReviewPornOcrTaskInput;
 const OcrWordsConfigureInfo = models.OcrWordsConfigureInfo;
 const DisableWorkflowRequest = models.DisableWorkflowRequest;
-const MediaSnapshotByTimeOffsetItem = models.MediaSnapshotByTimeOffsetItem;
+const AiAnalysisTaskFrameTagOutput = models.AiAnalysisTaskFrameTagOutput;
 const PoliticalConfigureInfoForUpdate = models.PoliticalConfigureInfoForUpdate;
 const AudioTemplateInfo = models.AudioTemplateInfo;
 const DescribeContentReviewTemplatesResponse = models.DescribeContentReviewTemplatesResponse;
 const MediaAnimatedGraphicsItem = models.MediaAnimatedGraphicsItem;
-const ModifyAIRecognitionTemplateResponse = models.ModifyAIRecognitionTemplateResponse;
+const CoverConfigureInfo = models.CoverConfigureInfo;
 const MediaProcessTaskAnimatedGraphicResult = models.MediaProcessTaskAnimatedGraphicResult;
 const DescribeWatermarkTemplatesResponse = models.DescribeWatermarkTemplatesResponse;
+const TaskNotifyConfig = models.TaskNotifyConfig;
 const ModifyWordSampleRequest = models.ModifyWordSampleRequest;
 const AIRecognitionTemplateItem = models.AIRecognitionTemplateItem;
 const AiReviewPornAsrTaskInput = models.AiReviewPornAsrTaskInput;
 const AiRecognitionTaskFaceSegmentItem = models.AiRecognitionTaskFaceSegmentItem;
 const CreateAnimatedGraphicsTemplateRequest = models.CreateAnimatedGraphicsTemplateRequest;
+const FrameTagConfigureInfo = models.FrameTagConfigureInfo;
 const DescribeAnimatedGraphicsTemplatesRequest = models.DescribeAnimatedGraphicsTemplatesRequest;
-const MediaMetaData = models.MediaMetaData;
-const TranscodeTemplate = models.TranscodeTemplate;
+const AiAnalysisTaskTagResult = models.AiAnalysisTaskTagResult;
+const PornOcrReviewTemplateInfoForUpdate = models.PornOcrReviewTemplateInfoForUpdate;
+const ModifyAIAnalysisTemplateResponse = models.ModifyAIAnalysisTemplateResponse;
 const TerrorismImgReviewTemplateInfoForUpdate = models.TerrorismImgReviewTemplateInfoForUpdate;
 const ModifyPersonSampleResponse = models.ModifyPersonSampleResponse;
 const ModifyTranscodeTemplateRequest = models.ModifyTranscodeTemplateRequest;
-const ModifyImageSpriteTemplateResponse = models.ModifyImageSpriteTemplateResponse;
+const NumberFormat = models.NumberFormat;
+const AiAnalysisTaskTagOutput = models.AiAnalysisTaskTagOutput;
 const DeleteTranscodeTemplateResponse = models.DeleteTranscodeTemplateResponse;
 const AiReviewTaskPoliticalAsrResult = models.AiReviewTaskPoliticalAsrResult;
 const MediaTranscodeItem = models.MediaTranscodeItem;
@@ -176,8 +197,11 @@ const PornConfigureInfo = models.PornConfigureInfo;
 const MediaContentReviewSegmentItem = models.MediaContentReviewSegmentItem;
 const AiRecognitionTaskOcrWordsResultInput = models.AiRecognitionTaskOcrWordsResultInput;
 const DescribeContentReviewTemplatesRequest = models.DescribeContentReviewTemplatesRequest;
+const ModifyImageSpriteTemplateResponse = models.ModifyImageSpriteTemplateResponse;
 const UserDefineFaceReviewTemplateInfoForUpdate = models.UserDefineFaceReviewTemplateInfoForUpdate;
+const DescribeAIAnalysisTemplatesResponse = models.DescribeAIAnalysisTemplatesResponse;
 const AiReviewTaskPornResult = models.AiReviewTaskPornResult;
+const DeleteSampleSnapshotTemplateResponse = models.DeleteSampleSnapshotTemplateResponse;
 const UserDefineFaceReviewTemplateInfo = models.UserDefineFaceReviewTemplateInfo;
 const AiRecognitionTaskOcrFullTextResult = models.AiRecognitionTaskOcrFullTextResult;
 const AiRecognitionTaskAsrWordsResult = models.AiRecognitionTaskAsrWordsResult;
@@ -186,15 +210,16 @@ const LiveStreamFaceRecognitionResult = models.LiveStreamFaceRecognitionResult;
 const CreateSampleSnapshotTemplateRequest = models.CreateSampleSnapshotTemplateRequest;
 const UserDefineAsrTextReviewTemplateInfo = models.UserDefineAsrTextReviewTemplateInfo;
 const DescribeSampleSnapshotTemplatesRequest = models.DescribeSampleSnapshotTemplatesRequest;
-const WorkflowTask = models.WorkflowTask;
+const CoverConfigureInfoForUpdate = models.CoverConfigureInfoForUpdate;
 const DisableWorkflowResponse = models.DisableWorkflowResponse;
 const MediaProcessTaskSnapshotByTimeOffsetResult = models.MediaProcessTaskSnapshotByTimeOffsetResult;
 const CreatePersonSampleRequest = models.CreatePersonSampleRequest;
 const AiReviewTaskPornAsrResult = models.AiReviewTaskPornAsrResult;
 const PoliticalImgReviewTemplateInfoForUpdate = models.PoliticalImgReviewTemplateInfoForUpdate;
-const UserDefineOcrTextReviewTemplateInfo = models.UserDefineOcrTextReviewTemplateInfo;
+const MediaAiAnalysisCoverItem = models.MediaAiAnalysisCoverItem;
 const UserDefineConfigureInfo = models.UserDefineConfigureInfo;
 const CosInputInfo = models.CosInputInfo;
+const TagConfigureInfo = models.TagConfigureInfo;
 const TranscodeTaskInput = models.TranscodeTaskInput;
 const DescribeWordSamplesResponse = models.DescribeWordSamplesResponse;
 const FaceConfigureInfo = models.FaceConfigureInfo;
@@ -205,22 +230,24 @@ const DeleteAIRecognitionTemplateRequest = models.DeleteAIRecognitionTemplateReq
 const CreateWatermarkTemplateResponse = models.CreateWatermarkTemplateResponse;
 const ModifyAnimatedGraphicsTemplateResponse = models.ModifyAnimatedGraphicsTemplateResponse;
 const ResetWorkflowRequest = models.ResetWorkflowRequest;
-const NumberFormat = models.NumberFormat;
+const AiAnalysisTaskCoverResult = models.AiAnalysisTaskCoverResult;
 const AiReviewPoliticalOcrTaskOutput = models.AiReviewPoliticalOcrTaskOutput;
 const AiRecognitionTaskAsrWordsResultOutput = models.AiRecognitionTaskAsrWordsResultOutput;
-const AiRecognitionTaskAsrFullTextResultOutput = models.AiRecognitionTaskAsrFullTextResultOutput;
+const AiRecognitionTaskOcrFullTextResultInput = models.AiRecognitionTaskOcrFullTextResultInput;
 const LiveStreamOcrWordsRecognitionResult = models.LiveStreamOcrWordsRecognitionResult;
 const LiveStreamProcessErrorInfo = models.LiveStreamProcessErrorInfo;
 const EnableWorkflowRequest = models.EnableWorkflowRequest;
 const MediaProcessTaskTranscodeResult = models.MediaProcessTaskTranscodeResult;
 const MediaSnapshotByTimePicInfoItem = models.MediaSnapshotByTimePicInfoItem;
-const DescribeTranscodeTemplatesResponse = models.DescribeTranscodeTemplatesResponse;
+const AiAnalysisTaskInput = models.AiAnalysisTaskInput;
 const DeleteAnimatedGraphicsTemplateRequest = models.DeleteAnimatedGraphicsTemplateRequest;
 const DeleteSnapshotByTimeOffsetTemplateRequest = models.DeleteSnapshotByTimeOffsetTemplateRequest;
 const DescribeAnimatedGraphicsTemplatesResponse = models.DescribeAnimatedGraphicsTemplatesResponse;
+const MediaAiAnalysisFrameTagItem = models.MediaAiAnalysisFrameTagItem;
 const DeleteContentReviewTemplateResponse = models.DeleteContentReviewTemplateResponse;
 const TerrorismConfigureInfoForUpdate = models.TerrorismConfigureInfoForUpdate;
 const MediaContentReviewPoliticalSegmentItem = models.MediaContentReviewPoliticalSegmentItem;
+const CreateAIAnalysisTemplateResponse = models.CreateAIAnalysisTemplateResponse;
 const MediaProcessTaskSampleSnapshotResult = models.MediaProcessTaskSampleSnapshotResult;
 const AiRecognitionTaskOcrFullTextResultOutput = models.AiRecognitionTaskOcrFullTextResultOutput;
 const ImageWatermarkTemplate = models.ImageWatermarkTemplate;
@@ -233,10 +260,11 @@ const LiveStreamAsrWordsRecognitionResult = models.LiveStreamAsrWordsRecognition
 const AiReviewPoliticalAsrTaskOutput = models.AiReviewPoliticalAsrTaskOutput;
 const TerrorismConfigureInfo = models.TerrorismConfigureInfo;
 const TEHDConfigForUpdate = models.TEHDConfigForUpdate;
+const TranscodeTemplate = models.TranscodeTemplate;
 const AiSamplePerson = models.AiSamplePerson;
 const CreateAnimatedGraphicsTemplateResponse = models.CreateAnimatedGraphicsTemplateResponse;
 const MediaAudioStreamItem = models.MediaAudioStreamItem;
-const SampleSnapshotTemplate = models.SampleSnapshotTemplate;
+const AiAnalysisTaskClassificationResult = models.AiAnalysisTaskClassificationResult;
 const AiReviewPoliticalAsrTaskInput = models.AiReviewPoliticalAsrTaskInput;
 const AsrFullTextConfigureInfo = models.AsrFullTextConfigureInfo;
 const MediaImageSpriteItem = models.MediaImageSpriteItem;
@@ -245,25 +273,29 @@ const DescribePersonSamplesRequest = models.DescribePersonSamplesRequest;
 const AsrWordsConfigureInfoForUpdate = models.AsrWordsConfigureInfoForUpdate;
 const AiRecognitionTaskFaceResultItem = models.AiRecognitionTaskFaceResultItem;
 const PoliticalAsrReviewTemplateInfo = models.PoliticalAsrReviewTemplateInfo;
+const AiAnalysisTaskCoverInput = models.AiAnalysisTaskCoverInput;
 const CreateAIRecognitionTemplateRequest = models.CreateAIRecognitionTemplateRequest;
 const DescribeTaskDetailRequest = models.DescribeTaskDetailRequest;
-const DeleteImageSpriteTemplateResponse = models.DeleteImageSpriteTemplateResponse;
+const MediaAiAnalysisClassificationItem = models.MediaAiAnalysisClassificationItem;
+const AiAnalysisTaskFrameTagResult = models.AiAnalysisTaskFrameTagResult;
 const AiReviewPornTaskOutput = models.AiReviewPornTaskOutput;
 const CreateWorkflowResponse = models.CreateWorkflowResponse;
 const LiveStreamAiReviewResultInfo = models.LiveStreamAiReviewResultInfo;
 const AiRecognitionTaskAsrFullTextResult = models.AiRecognitionTaskAsrFullTextResult;
 const PoliticalOcrReviewTemplateInfoForUpdate = models.PoliticalOcrReviewTemplateInfoForUpdate;
+const ModifyAIRecognitionTemplateResponse = models.ModifyAIRecognitionTemplateResponse;
 const AiRecognitionTaskAsrWordsResultInput = models.AiRecognitionTaskAsrWordsResultInput;
 const CreateImageSpriteTemplateResponse = models.CreateImageSpriteTemplateResponse;
 const ModifyAnimatedGraphicsTemplateRequest = models.ModifyAnimatedGraphicsTemplateRequest;
 const TEHDConfig = models.TEHDConfig;
 const PoliticalConfigureInfo = models.PoliticalConfigureInfo;
 const AiRecognitionTaskOcrWordsSegmentItem = models.AiRecognitionTaskOcrWordsSegmentItem;
+const WatermarkInput = models.WatermarkInput;
 const LiveStreamAiReviewImagePoliticalResult = models.LiveStreamAiReviewImagePoliticalResult;
 const DeleteWordSamplesResponse = models.DeleteWordSamplesResponse;
 const UserDefineAsrTextReviewTemplateInfoForUpdate = models.UserDefineAsrTextReviewTemplateInfoForUpdate;
 const ModifyPersonSampleRequest = models.ModifyPersonSampleRequest;
-const WatermarkInput = models.WatermarkInput;
+const ProcessMediaRequest = models.ProcessMediaRequest;
 const EnableWorkflowResponse = models.EnableWorkflowResponse;
 const DescribeSnapshotByTimeOffsetTemplatesRequest = models.DescribeSnapshotByTimeOffsetTemplatesRequest;
 const AiSampleWordInfo = models.AiSampleWordInfo;
@@ -272,14 +304,17 @@ const UserDefineConfigureInfoForUpdate = models.UserDefineConfigureInfoForUpdate
 const WatermarkTemplate = models.WatermarkTemplate;
 const LiveStreamOcrFullTextRecognitionResult = models.LiveStreamOcrFullTextRecognitionResult;
 const DeleteWatermarkTemplateResponse = models.DeleteWatermarkTemplateResponse;
-const DescribeImageSpriteTemplatesResponse = models.DescribeImageSpriteTemplatesResponse;
+const DeleteWatermarkTemplateRequest = models.DeleteWatermarkTemplateRequest;
 const AiRecognitionTaskAsrFullTextResultInput = models.AiRecognitionTaskAsrFullTextResultInput;
 const ModifyTranscodeTemplateResponse = models.ModifyTranscodeTemplateResponse;
-const TextWatermarkTemplateInput = models.TextWatermarkTemplateInput;
+const MediaMetaData = models.MediaMetaData;
 const ProcessMediaResponse = models.ProcessMediaResponse;
 const OcrWordsConfigureInfoForUpdate = models.OcrWordsConfigureInfoForUpdate;
-const MediaProcessTaskInput = models.MediaProcessTaskInput;
 const VideoTemplateInfoForUpdate = models.VideoTemplateInfoForUpdate;
+const TextWatermarkTemplateInput = models.TextWatermarkTemplateInput;
+const ParseNotificationRequest = models.ParseNotificationRequest;
+const MediaProcessTaskInput = models.MediaProcessTaskInput;
+const FrameTagConfigureInfoForUpdate = models.FrameTagConfigureInfoForUpdate;
 const CreateContentReviewTemplateRequest = models.CreateContentReviewTemplateRequest;
 const DescribeAIRecognitionTemplatesRequest = models.DescribeAIRecognitionTemplatesRequest;
 const CosOutputStorage = models.CosOutputStorage;
@@ -287,7 +322,7 @@ const MediaProcessTaskResult = models.MediaProcessTaskResult;
 const AiRecognitionTaskFaceResult = models.AiRecognitionTaskFaceResult;
 const ModifyWatermarkTemplateResponse = models.ModifyWatermarkTemplateResponse;
 const CreateWordSamplesResponse = models.CreateWordSamplesResponse;
-const TaskNotifyConfig = models.TaskNotifyConfig;
+const ClassificationConfigureInfoForUpdate = models.ClassificationConfigureInfoForUpdate;
 const AiRecognitionResult = models.AiRecognitionResult;
 
 
@@ -359,6 +394,19 @@ class MpsClient extends AbstractClient {
     }
 
     /**
+     * 删除用户自定义内容分析模板。
+
+注意：模板 ID 为 10000 以下的为系统预置模板，不允许删除。
+     * @param {DeleteAIAnalysisTemplateRequest} req
+     * @param {function(string, DeleteAIAnalysisTemplateResponse):void} cb
+     * @public
+     */
+    DeleteAIAnalysisTemplate(req, cb) {
+        let resp = new DeleteAIAnalysisTemplateResponse();
+        this.request("DeleteAIAnalysisTemplate", req, resp, cb);
+    }
+
+    /**
      * 根据工作流 ID，获取工作流详情列表。
      * @param {DescribeWorkflowsRequest} req
      * @param {function(string, DescribeWorkflowsResponse):void} cb
@@ -414,14 +462,14 @@ class MpsClient extends AbstractClient {
     }
 
     /**
-     * 修改用户自定义指定时间点截图模板。
-     * @param {ModifySnapshotByTimeOffsetTemplateRequest} req
-     * @param {function(string, ModifySnapshotByTimeOffsetTemplateResponse):void} cb
+     * 根据内容分析模板唯一标识，获取内容分析模板详情列表。返回结果包含符合条件的所有用户自定义内容分析模板及系统预置视频内容分析模板
+     * @param {DescribeAIAnalysisTemplatesRequest} req
+     * @param {function(string, DescribeAIAnalysisTemplatesResponse):void} cb
      * @public
      */
-    ModifySnapshotByTimeOffsetTemplate(req, cb) {
-        let resp = new ModifySnapshotByTimeOffsetTemplateResponse();
-        this.request("ModifySnapshotByTimeOffsetTemplate", req, resp, cb);
+    DescribeAIAnalysisTemplates(req, cb) {
+        let resp = new DescribeAIAnalysisTemplatesResponse();
+        this.request("DescribeAIAnalysisTemplates", req, resp, cb);
     }
 
     /**
@@ -656,6 +704,19 @@ class MpsClient extends AbstractClient {
     }
 
     /**
+     * 修改用户自定义内容分析模板。
+
+注意：模板 ID 10000 以下的为系统预置模板，不允许修改。
+     * @param {ModifyAIAnalysisTemplateRequest} req
+     * @param {function(string, ModifyAIAnalysisTemplateResponse):void} cb
+     * @public
+     */
+    ModifyAIAnalysisTemplate(req, cb) {
+        let resp = new ModifyAIAnalysisTemplateResponse();
+        this.request("ModifyAIAnalysisTemplate", req, resp, cb);
+    }
+
+    /**
      * * 该接口用于查询任务列表；
 * 当列表数据比较多时，单次接口调用无法拉取整个列表，可通过 ScrollToken 参数，分批拉取；
 * 只能查询到最近三天（72 小时）内的任务。
@@ -666,6 +727,17 @@ class MpsClient extends AbstractClient {
     DescribeTasks(req, cb) {
         let resp = new DescribeTasksResponse();
         this.request("DescribeTasks", req, resp, cb);
+    }
+
+    /**
+     * 修改用户自定义指定时间点截图模板。
+     * @param {ModifySnapshotByTimeOffsetTemplateRequest} req
+     * @param {function(string, ModifySnapshotByTimeOffsetTemplateResponse):void} cb
+     * @public
+     */
+    ModifySnapshotByTimeOffsetTemplate(req, cb) {
+        let resp = new ModifySnapshotByTimeOffsetTemplateResponse();
+        this.request("ModifySnapshotByTimeOffsetTemplate", req, resp, cb);
     }
 
     /**
@@ -721,7 +793,8 @@ class MpsClient extends AbstractClient {
 5. 对视频截图雪碧图；
 6. 对视频转自适应码流；
 7. 智能内容审核（鉴黄、鉴恐、鉴政）；
-8. 智能内容识别（人脸、文本全文、文本关键词、语音全文、语音关键词）。
+8. 智能内容分析（标签、分类、封面、按帧标签）；
+9. 智能内容识别（人脸、文本全文、文本关键词、语音全文、语音关键词）。
 
 注意：创建工作流成功后是禁用状态，需要手动启用。
      * @param {CreateWorkflowRequest} req
@@ -768,7 +841,8 @@ class MpsClient extends AbstractClient {
 5. 对视频截图雪碧图；
 6. 对视频转自适应码流；
 7. 智能内容审核（鉴黄、鉴恐、鉴政）；
-8. 智能内容识别（人脸、文本全文、文本关键词、语音全文、语音关键词）。
+8. 智能内容分析（标签、分类、封面、按帧标签）；
+9. 智能内容识别（人脸、文本全文、文本关键词、语音全文、语音关键词）。
      * @param {ProcessMediaRequest} req
      * @param {function(string, ProcessMediaResponse):void} cb
      * @public
@@ -831,6 +905,17 @@ class MpsClient extends AbstractClient {
     DeleteContentReviewTemplate(req, cb) {
         let resp = new DeleteContentReviewTemplateResponse();
         this.request("DeleteContentReviewTemplate", req, resp, cb);
+    }
+
+    /**
+     * 创建用户自定义内容分析模板，数量上限：50。
+     * @param {CreateAIAnalysisTemplateRequest} req
+     * @param {function(string, CreateAIAnalysisTemplateResponse):void} cb
+     * @public
+     */
+    CreateAIAnalysisTemplate(req, cb) {
+        let resp = new CreateAIAnalysisTemplateResponse();
+        this.request("CreateAIAnalysisTemplate", req, resp, cb);
     }
 
     /**

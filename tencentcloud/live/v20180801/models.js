@@ -3886,7 +3886,7 @@ class DescribeVisitTopSumInfoListRequest extends  AbstractModel {
 
         /**
          * 结束时间点，格式为yyyy-mm-dd HH:MM:SS
-时间跨度在（0,4小时]，支持最近1天数据查询。
+时间跨度在[0,4小时]，支持最近1天数据查询。
          * @type {string || null}
          */
         this.EndTime = null;
@@ -9981,7 +9981,7 @@ class DescribeLiveDomainPlayInfoListResponse extends  AbstractModel {
         this.TotalFlux = null;
 
         /**
-         * TotalRequest。
+         * 总请求数。
          * @type {number || null}
          */
         this.TotalRequest = null;
