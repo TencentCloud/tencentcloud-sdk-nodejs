@@ -642,6 +642,18 @@ class DescribeSnapshotOperationLogsRequest extends  AbstractModel {
          */
         this.Filters = null;
 
+        /**
+         * 要查询的操作日志的起始时间，例如：“2019-11-22 00:00:00"
+         * @type {string || null}
+         */
+        this.BeginTime = null;
+
+        /**
+         * 要查询的操作日志的截止时间，例如：“2019-11-22 23:59:59"
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
     }
 
     /**
@@ -660,6 +672,8 @@ class DescribeSnapshotOperationLogsRequest extends  AbstractModel {
                 this.Filters.push(obj);
             }
         }
+        this.BeginTime = 'BeginTime' in params ? params.BeginTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
 
     }
 }
@@ -2469,6 +2483,18 @@ class DescribeDiskOperationLogsRequest extends  AbstractModel {
          */
         this.Filters = null;
 
+        /**
+         * 要查询的操作日志的起始时间，例如：“2019-11-22 00:00:00"
+         * @type {string || null}
+         */
+        this.BeginTime = null;
+
+        /**
+         * 要查询的操作日志的截止时间，例如：“2019-11-22 23:59:59"
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
     }
 
     /**
@@ -2487,6 +2513,8 @@ class DescribeDiskOperationLogsRequest extends  AbstractModel {
                 this.Filters.push(obj);
             }
         }
+        this.BeginTime = 'BeginTime' in params ? params.BeginTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
 
     }
 }

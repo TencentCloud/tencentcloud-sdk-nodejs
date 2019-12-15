@@ -25,7 +25,7 @@ class FaceFusionResponse extends  AbstractModel {
         super();
 
         /**
-         * RspImgType 为 url 时，返回结果的 url， RspImgType 为 base64 时返回 base64 数据。当前仅支持 url 方式，base64 方式后期开放。
+         * RspImgType 为 url 时，返回结果的 url， RspImgType 为 base64 时返回 base64 数据。
          * @type {string || null}
          */
         this.Image = null;
@@ -93,7 +93,7 @@ class FaceFusionRequest extends  AbstractModel {
         this.Image = null;
 
         /**
-         * 返回图像方式（url 或 base64) ，二选一。当前仅支持 url 方式，base64 方式后期开放。
+         * 返回图像方式（url 或 base64) ，二选一。url有效期为30天。
          * @type {string || null}
          */
         this.RspImgType = null;

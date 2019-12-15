@@ -88,6 +88,98 @@ class GetMonitorDataRequest extends  AbstractModel {
 }
 
 /**
+ * PutMonitorData请求参数结构体
+ * @class
+ */
+class PutMonitorDataRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 一组指标和数据
+         * @type {Array.<MetricDatum> || null}
+         */
+        this.Metrics = null;
+
+        /**
+         * 上报时自行指定的 IP
+         * @type {string || null}
+         */
+        this.AnnounceIp = null;
+
+        /**
+         * 上报时自行指定的时间戳
+         * @type {number || null}
+         */
+        this.AnnounceTimestamp = null;
+
+        /**
+         * 上报时自行指定的 IP 或 产品实例ID
+         * @type {string || null}
+         */
+        this.AnnounceInstance = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Metrics) {
+            this.Metrics = new Array();
+            for (let z in params.Metrics) {
+                let obj = new MetricDatum();
+                obj.deserialize(params.Metrics[z]);
+                this.Metrics.push(obj);
+            }
+        }
+        this.AnnounceIp = 'AnnounceIp' in params ? params.AnnounceIp : null;
+        this.AnnounceTimestamp = 'AnnounceTimestamp' in params ? params.AnnounceTimestamp : null;
+        this.AnnounceInstance = 'AnnounceInstance' in params ? params.AnnounceInstance : null;
+
+    }
+}
+
+/**
+ * 指标名称和值的封装
+ * @class
+ */
+class MetricDatum extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 指标名称
+         * @type {string || null}
+         */
+        this.MetricName = null;
+
+        /**
+         * 指标的值
+         * @type {number || null}
+         */
+        this.Value = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MetricName = 'MetricName' in params ? params.MetricName : null;
+        this.Value = 'Value' in params ? params.Value : null;
+
+    }
+}
+
+/**
  * 实例维度组合数组
  * @class
  */
@@ -511,6 +603,34 @@ class DimensionsDesc extends  AbstractModel {
 }
 
 /**
+ * PutMonitorData返回参数结构体
+ * @class
+ */
+class PutMonitorDataResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeBaseMetrics返回参数结构体
  * @class
  */
@@ -555,6 +675,8 @@ class DescribeBaseMetricsResponse extends  AbstractModel {
 
 module.exports = {
     GetMonitorDataRequest: GetMonitorDataRequest,
+    PutMonitorDataRequest: PutMonitorDataRequest,
+    MetricDatum: MetricDatum,
     Instance: Instance,
     PeriodsSt: PeriodsSt,
     Dimension: Dimension,
@@ -564,6 +686,7 @@ module.exports = {
     DataPoint: DataPoint,
     MetricObjectMeaning: MetricObjectMeaning,
     DimensionsDesc: DimensionsDesc,
+    PutMonitorDataResponse: PutMonitorDataResponse,
     DescribeBaseMetricsResponse: DescribeBaseMetricsResponse,
 
 }

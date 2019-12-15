@@ -555,7 +555,7 @@ class DomainErrorPageInfo extends  AbstractModel {
         this.SetHeaders = null;
 
         /**
-         * 设置的响应体(不包括 http头)
+         * 设置的响应体(不包括 HTTP头)
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
@@ -2050,21 +2050,21 @@ class CertificateDetail extends  AbstractModel {
         this.CertificateKey = null;
 
         /**
-         * 创建时间，采用unix时间戳的方式，表示从1970年1月1日（UTC/GMT的午夜）开始所经过的秒数。
+         * 创建时间，采用Unix时间戳的方式，表示从1970年1月1日（UTC/GMT的午夜）开始所经过的秒数。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.CreateTime = null;
 
         /**
-         * 证书生效起始时间，采用unix时间戳的方式，表示从1970年1月1日（UTC/GMT的午夜）开始所经过的秒数。
+         * 证书生效起始时间，采用Unix时间戳的方式，表示从1970年1月1日（UTC/GMT的午夜）开始所经过的秒数。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.BeginTime = null;
 
         /**
-         * 证书过期时间，采用unix时间戳的方式，表示从1970年1月1日（UTC/GMT的午夜）开始所经过的秒数。
+         * 证书过期时间，采用Unix时间戳的方式，表示从1970年1月1日（UTC/GMT的午夜）开始所经过的秒数。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
@@ -5288,7 +5288,7 @@ class Certificate extends  AbstractModel {
         this.CertificateName = null;
 
         /**
-         * 证书类型
+         * 证书类型。
          * @type {number || null}
          */
         this.CertificateType = null;
@@ -5301,20 +5301,20 @@ class Certificate extends  AbstractModel {
         this.CertificateAlias = null;
 
         /**
-         * 证书创建时间，采用unix时间戳的方式，表示从1970年1月1日（UTC/GMT的午夜）开始所经过的秒数。
+         * 证书创建时间，采用Unix时间戳的方式，表示从1970年1月1日（UTC/GMT的午夜）开始所经过的秒数。
          * @type {number || null}
          */
         this.CreateTime = null;
 
         /**
-         * 证书生效起始时间，采用unix时间戳的方式，表示从1970年1月1日（UTC/GMT的午夜）开始所经过的秒数。
+         * 证书生效起始时间，采用Unix时间戳的方式，表示从1970年1月1日（UTC/GMT的午夜）开始所经过的秒数。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.BeginTime = null;
 
         /**
-         * 证书过期时间，采用unix时间戳的方式，表示从1970年1月1日（UTC/GMT的午夜）开始所经过的秒数。
+         * 证书过期时间，采用Unix时间戳的方式，表示从1970年1月1日（UTC/GMT的午夜）开始所经过的秒数。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
@@ -5365,7 +5365,7 @@ class DescribeDomainErrorPageInfoResponse extends  AbstractModel {
         super();
 
         /**
-         * 订制错误响应配置集
+         * 定制错误响应配置集
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<DomainErrorPageInfo> || null}
          */
@@ -6811,7 +6811,7 @@ class SetAuthenticationRequest extends  AbstractModel {
         this.GaapCertificateId = null;
 
         /**
-         * 源站CA证书ID，从证书管理页获取。
+         * 源站CA证书ID，从证书管理页获取。源站认证时，填写该参数或RealServerCertificateId参数
          * @type {string || null}
          */
         this.RealServerCertificateId = null;
@@ -6821,6 +6821,12 @@ class SetAuthenticationRequest extends  AbstractModel {
          * @type {string || null}
          */
         this.RealServerCertificateDomain = null;
+
+        /**
+         * 多源站CA证书ID，从证书管理页获取。源站认证时，填写该参数或RealServerCertificateId参数
+         * @type {Array.<string> || null}
+         */
+        this.PolyRealServerCertificateIds = null;
 
     }
 
@@ -6840,6 +6846,7 @@ class SetAuthenticationRequest extends  AbstractModel {
         this.GaapCertificateId = 'GaapCertificateId' in params ? params.GaapCertificateId : null;
         this.RealServerCertificateId = 'RealServerCertificateId' in params ? params.RealServerCertificateId : null;
         this.RealServerCertificateDomain = 'RealServerCertificateDomain' in params ? params.RealServerCertificateDomain : null;
+        this.PolyRealServerCertificateIds = 'PolyRealServerCertificateIds' in params ? params.PolyRealServerCertificateIds : null;
 
     }
 }
@@ -9540,7 +9547,7 @@ class ProxyInfo extends  AbstractModel {
         this.InstanceId = null;
 
         /**
-         * 创建时间，采用unix时间戳的方式，表示从1970年1月1日（UTC/GMT的午夜）开始所经过的秒数。
+         * 创建时间，采用Unix时间戳的方式，表示从1970年1月1日（UTC/GMT的午夜）开始所经过的秒数。
          * @type {number || null}
          */
         this.CreateTime = null;

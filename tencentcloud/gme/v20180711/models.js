@@ -136,7 +136,7 @@ class ModifyAppStatusRequest extends  AbstractModel {
         super();
 
         /**
-         * 应用id，创建应用后由后台生成并返回。
+         * 应用ID，创建应用后由后台生成并返回。
          * @type {number || null}
          */
         this.BizId = null;
@@ -1067,19 +1067,19 @@ class CreateAppRequest extends  AbstractModel {
         this.AppName = null;
 
         /**
-         * 腾讯云项目id，默认为0，表示默认项目
+         * 腾讯云项目ID，默认为0，表示默认项目
          * @type {number || null}
          */
         this.ProjectId = null;
 
         /**
-         * 需要支持的引擎列表，取值android, ios, unity, cocos, unreal, windows。默认全选。
+         * 需要支持的引擎列表，默认全选。
          * @type {Array.<string> || null}
          */
         this.EngineList = null;
 
         /**
-         * 服务区域列表，取值: mainland(大陆地区), sa(南美), eu(欧洲), oc(澳洲), me(中东)。默认全选。
+         * 服务区域列表，默认全选。
          * @type {Array.<string> || null}
          */
         this.RegionList = null;
@@ -1231,7 +1231,7 @@ class CreateAppResponse extends  AbstractModel {
         super();
 
         /**
-         * 应用id，由后台自动生成。
+         * 应用ID，由后台自动生成。
          * @type {number || null}
          */
         this.BizId = null;
@@ -1243,7 +1243,7 @@ class CreateAppResponse extends  AbstractModel {
         this.AppName = null;
 
         /**
-         * 项目id，透传输入的ProjectId
+         * 项目ID，透传输入的ProjectId
          * @type {number || null}
          */
         this.ProjectId = null;
@@ -1323,7 +1323,7 @@ class DescribeAppStatisticsRequest extends  AbstractModel {
         super();
 
         /**
-         * GME应用id
+         * GME应用ID
          * @type {number || null}
          */
         this.BizId = null;
@@ -1479,7 +1479,7 @@ class ModifyAppStatusResponse extends  AbstractModel {
         super();
 
         /**
-         * GME应用id
+         * GME应用ID
          * @type {number || null}
          */
         this.BizId = null;

@@ -739,7 +739,7 @@ class GaapClient extends AbstractClient {
     }
 
     /**
-     * 查询目前订制域名的错误响应
+     * 查询目前定制域名的错误响应
      * @param {DescribeDomainErrorPageInfoRequest} req
      * @param {function(string, DescribeDomainErrorPageInfoResponse):void} cb
      * @public
