@@ -1,4 +1,4 @@
 module.exports = {
-    Client: require("./yunsou_client"),
+    Client: require("./cme_client"),
     Models: require("./models"),
 };

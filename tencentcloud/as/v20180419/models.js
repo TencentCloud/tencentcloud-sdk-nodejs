@@ -249,6 +249,12 @@ class ModifyAutoScalingGroupRequest extends  AbstractModel {
          */
         this.ServiceSettings = null;
 
+        /**
+         * 实例具有IPv6地址数量的配置，取值包括0、1。
+         * @type {number || null}
+         */
+        this.Ipv6AddressCount = null;
+
     }
 
     /**
@@ -278,6 +284,7 @@ class ModifyAutoScalingGroupRequest extends  AbstractModel {
             obj.deserialize(params.ServiceSettings)
             this.ServiceSettings = obj;
         }
+        this.Ipv6AddressCount = 'Ipv6AddressCount' in params ? params.Ipv6AddressCount : null;
 
     }
 }
@@ -752,7 +759,7 @@ class CreatePaiInstanceRequest extends  AbstractModel {
         this.Zones = null;
 
         /**
-         * VpcId。
+         * VPC ID。
          * @type {string || null}
          */
         this.VpcId = null;
@@ -901,6 +908,41 @@ class SpotMarketOptions extends  AbstractModel {
         }
         this.MaxPrice = 'MaxPrice' in params ? params.MaxPrice : null;
         this.SpotInstanceType = 'SpotInstanceType' in params ? params.SpotInstanceType : null;
+
+    }
+}
+
+/**
+ * StopAutoScalingInstances返回参数结构体
+ * @class
+ */
+class StopAutoScalingInstancesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 伸缩活动ID
+         * @type {string || null}
+         */
+        this.ActivityId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ActivityId = 'ActivityId' in params ? params.ActivityId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1143,6 +1185,41 @@ class SetInstancesProtectionResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * StartAutoScalingInstances返回参数结构体
+ * @class
+ */
+class StartAutoScalingInstancesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 伸缩活动ID
+         * @type {string || null}
+         */
+        this.ActivityId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ActivityId = 'ActivityId' in params ? params.ActivityId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -2057,6 +2134,12 @@ class AutoScalingGroup extends  AbstractModel {
          */
         this.ServiceSettings = null;
 
+        /**
+         * 实例具有IPv6地址数量的配置
+         * @type {number || null}
+         */
+        this.Ipv6AddressCount = null;
+
     }
 
     /**
@@ -2111,6 +2194,7 @@ class AutoScalingGroup extends  AbstractModel {
             obj.deserialize(params.ServiceSettings)
             this.ServiceSettings = obj;
         }
+        this.Ipv6AddressCount = 'Ipv6AddressCount' in params ? params.Ipv6AddressCount : null;
 
     }
 }
@@ -3105,6 +3189,12 @@ class CreateAutoScalingGroupRequest extends  AbstractModel {
          */
         this.ServiceSettings = null;
 
+        /**
+         * 实例具有IPv6地址数量的配置，取值包括 0、1，默认值为0。
+         * @type {number || null}
+         */
+        this.Ipv6AddressCount = null;
+
     }
 
     /**
@@ -3152,6 +3242,7 @@ class CreateAutoScalingGroupRequest extends  AbstractModel {
             obj.deserialize(params.ServiceSettings)
             this.ServiceSettings = obj;
         }
+        this.Ipv6AddressCount = 'Ipv6AddressCount' in params ? params.Ipv6AddressCount : null;
 
     }
 }
@@ -3732,7 +3823,20 @@ class Instance extends  AbstractModel {
         this.LaunchConfigurationName = null;
 
         /**
-         * 生命周期状态，取值包括IN_SERVICE, CREATING, TERMINATING, ATTACHING, DETACHING, ATTACHING_LB, DETACHING_LB等
+         * 生命周期状态，取值如下：<br>
+<li>IN_SERVICE：运行中
+<li>CREATING：创建中
+<li>CREATION_FAILED：创建失败
+<li>TERMINATING：中止中
+<li>TERMINATION_FAILED：中止失败
+<li>ATTACHING：绑定中
+<li>DETACHING：解绑中
+<li>ATTACHING_LB：绑定LB中<li>DETACHING_LB：解绑LB中
+<li>STARTING：开机中
+<li>START_FAILED：开机失败
+<li>STOPPING：关机中
+<li>STOP_FAILED：关机失败
+<li>STOPPED：已关机
          * @type {string || null}
          */
         this.LifeCycleState = null;
@@ -4423,13 +4527,13 @@ class CompleteLifecycleActionResponse extends  AbstractModel {
 > * 若存在多个`Filter`时，`Filter`间的关系为逻辑与（`AND`）关系。
 > * 若同一个`Filter`存在多个`Values`，同一`Filter`下`Values`间的关系为逻辑或（`OR`）关系。
 >
-> 以[DescribeInstances](https://cloud.tencent.com/document/api/213/9388)接口的`Filter`为例。若我们需要查询可用区（`zone`）为广州一区 ***并且*** 实例计费模式（`instance-charge-type`）为包年包月 ***或者*** 按量计费的实例时，可如下实现：
+> 以[DescribeInstances](https://cloud.tencent.com/document/api/213/15728)接口的`Filter`为例。若我们需要查询可用区（`zone`）为广州一区 ***并且*** 实例计费模式（`instance-charge-type`）为包年包月 ***或者*** 按量计费的实例时，可如下实现：
 ```
 Filters.0.Name=zone
-&Filters.0.Values.1=ap-guangzhou-1
+&Filters.0.Values.0=ap-guangzhou-1
 &Filters.1.Name=instance-charge-type
-&Filters.1.Values.1=PREPAID
-&Filters.1.Values.2=POSTPAID_BY_HOUR
+&Filters.1.Values.0=PREPAID
+&Filters.1.Values.1=POSTPAID_BY_HOUR
 ```
  * @class
  */
@@ -4543,6 +4647,15 @@ class ServiceSettings extends  AbstractModel {
          */
         this.ReplaceMonitorUnhealthy = null;
 
+        /**
+         * 取值范围： 
+CLASSIC_SCALING：经典方式，使用创建、销毁实例来实现扩缩容； 
+WAKE_UP_STOPPED_SCALING：扩容优先开机。扩容时优先对已关机的实例执行开机操作，若开机后实例数仍低于期望实例数，则创建实例，缩容仍采用销毁实例的方式。用户可以使用StopAutoScalingInstances接口来关闭伸缩组内的实例。监控告警触发的扩容仍将创建实例
+默认取值：CLASSIC_SCALING
+         * @type {string || null}
+         */
+        this.ScalingMode = null;
+
     }
 
     /**
@@ -4553,6 +4666,7 @@ class ServiceSettings extends  AbstractModel {
             return;
         }
         this.ReplaceMonitorUnhealthy = 'ReplaceMonitorUnhealthy' in params ? params.ReplaceMonitorUnhealthy : null;
+        this.ScalingMode = 'ScalingMode' in params ? params.ScalingMode : null;
 
     }
 }
@@ -5634,6 +5748,41 @@ class RemoveInstancesRequest extends  AbstractModel {
 }
 
 /**
+ * StartAutoScalingInstances请求参数结构体
+ * @class
+ */
+class StartAutoScalingInstancesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 伸缩组ID
+         * @type {string || null}
+         */
+        this.AutoScalingGroupId = null;
+
+        /**
+         * 待开启的CVM实例ID列表
+         * @type {Array.<string> || null}
+         */
+        this.InstanceIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AutoScalingGroupId = 'AutoScalingGroupId' in params ? params.AutoScalingGroupId : null;
+        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
+
+    }
+}
+
+/**
  * AttachInstances请求参数结构体
  * @class
  */
@@ -5740,7 +5889,9 @@ class Activity extends  AbstractModel {
 
         /**
          * 伸缩活动类型。取值如下：<br>
-<li>SCALE_OUT：扩容活动<li>SCALE_IN：缩容活动<li>ATTACH_INSTANCES：添加实例<li>REMOVE_INSTANCES：销毁实例<li>DETACH_INSTANCES：移出实例<li>TERMINATE_INSTANCES_UNEXPECTEDLY：实例在CVM控制台被销毁<li>REPLACE_UNHEALTHY_INSTANCE：替换不健康实例）
+<li>SCALE_OUT：扩容活动<li>SCALE_IN：缩容活动<li>ATTACH_INSTANCES：添加实例<li>REMOVE_INSTANCES：销毁实例<li>DETACH_INSTANCES：移出实例<li>TERMINATE_INSTANCES_UNEXPECTEDLY：实例在CVM控制台被销毁<li>REPLACE_UNHEALTHY_INSTANCE：替换不健康实例
+<li>START_INSTANCES：开启实例
+<li>STOP_INSTANCES：关闭实例
          * @type {string || null}
          */
         this.ActivityType = null;
@@ -5862,6 +6013,51 @@ class ModifyDesiredCapacityResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * StopAutoScalingInstances请求参数结构体
+ * @class
+ */
+class StopAutoScalingInstancesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 伸缩组ID
+         * @type {string || null}
+         */
+        this.AutoScalingGroupId = null;
+
+        /**
+         * 待关闭的CVM实例ID列表
+         * @type {Array.<string> || null}
+         */
+        this.InstanceIds = null;
+
+        /**
+         * 关闭的实例是否收费，取值为：  
+KEEP_CHARGING：关机继续收费  
+STOP_CHARGING：关机停止收费
+默认为 KEEP_CHARGING
+         * @type {string || null}
+         */
+        this.StoppedMode = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AutoScalingGroupId = 'AutoScalingGroupId' in params ? params.AutoScalingGroupId : null;
+        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
+        this.StoppedMode = 'StoppedMode' in params ? params.StoppedMode : null;
 
     }
 }
@@ -6064,7 +6260,7 @@ class UpgradeLaunchConfigurationResponse extends  AbstractModel {
 }
 
 /**
- * 描述了了实例的计费模式
+ * 描述了实例的计费模式
  * @class
  */
 class InstanceChargePrepaid extends  AbstractModel {
@@ -6200,12 +6396,14 @@ module.exports = {
     CreatePaiInstanceRequest: CreatePaiInstanceRequest,
     SystemDisk: SystemDisk,
     SpotMarketOptions: SpotMarketOptions,
+    StopAutoScalingInstancesResponse: StopAutoScalingInstancesResponse,
     DescribeScalingPoliciesRequest: DescribeScalingPoliciesRequest,
     ModifyScheduledActionResponse: ModifyScheduledActionResponse,
     CreateAutoScalingGroupFromInstanceRequest: CreateAutoScalingGroupFromInstanceRequest,
     ExecuteScalingPolicyResponse: ExecuteScalingPolicyResponse,
     ModifyLaunchConfigurationAttributesResponse: ModifyLaunchConfigurationAttributesResponse,
     SetInstancesProtectionResponse: SetInstancesProtectionResponse,
+    StartAutoScalingInstancesResponse: StartAutoScalingInstancesResponse,
     CompleteLifecycleActionRequest: CompleteLifecycleActionRequest,
     CreateScalingPolicyResponse: CreateScalingPolicyResponse,
     CreateNotificationConfigurationResponse: CreateNotificationConfigurationResponse,
@@ -6288,10 +6486,12 @@ module.exports = {
     PreviewPaiDomainNameResponse: PreviewPaiDomainNameResponse,
     DeleteAutoScalingGroupRequest: DeleteAutoScalingGroupRequest,
     RemoveInstancesRequest: RemoveInstancesRequest,
+    StartAutoScalingInstancesRequest: StartAutoScalingInstancesRequest,
     AttachInstancesRequest: AttachInstancesRequest,
     DescribeScalingPoliciesResponse: DescribeScalingPoliciesResponse,
     Activity: Activity,
     ModifyDesiredCapacityResponse: ModifyDesiredCapacityResponse,
+    StopAutoScalingInstancesRequest: StopAutoScalingInstancesRequest,
     RunMonitorServiceEnabled: RunMonitorServiceEnabled,
     DeleteLifecycleHookResponse: DeleteLifecycleHookResponse,
     ActivtyRelatedInstance: ActivtyRelatedInstance,
