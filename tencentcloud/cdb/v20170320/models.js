@@ -645,7 +645,7 @@ class DescribeBackupConfigRequest extends  AbstractModel {
         super();
 
         /**
-         * 实例短实例 ID，格式如：cdb-c1nl9rpv。与云数据库控制台页面中显示的实例 ID 相同。
+         * 实例 ID，格式如：cdb-c1nl9rpv。与云数据库控制台页面中显示的实例 ID 相同。
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -5687,25 +5687,25 @@ class DeviceNetInfo extends  AbstractModel {
         this.Conn = null;
 
         /**
-         * 网卡入包量
+         * 网卡入包量，单位：个/秒
          * @type {Array.<number> || null}
          */
         this.PackageIn = null;
 
         /**
-         * 网卡出包量
+         * 网卡出包量，单位：个/秒
          * @type {Array.<number> || null}
          */
         this.PackageOut = null;
 
         /**
-         * 入流量，单位：KB
+         * 入流量，单位：kbps
          * @type {Array.<number> || null}
          */
         this.FlowIn = null;
 
         /**
-         * 出流量，单位：KB
+         * 出流量，单位：kbps
          * @type {Array.<number> || null}
          */
         this.FlowOut = null;
@@ -6924,13 +6924,13 @@ class DescribeTagsOfInstanceIdsResponse extends  AbstractModel {
         super();
 
         /**
-         * 偏移量。
+         * 分页偏移量。
          * @type {number || null}
          */
         this.Offset = null;
 
         /**
-         * 每页返回多少个标签。
+         * 分页大小。
          * @type {number || null}
          */
         this.Limit = null;
@@ -8479,24 +8479,28 @@ class ModifyAccountPrivilegesRequest extends  AbstractModel {
 
         /**
          * 全局权限。其中，GlobalPrivileges 中权限的可选值为："SELECT","INSERT","UPDATE","DELETE","CREATE", "PROCESS", "DROP","REFERENCES","INDEX","ALTER","SHOW DATABASES","CREATE TEMPORARY TABLES","LOCK TABLES","EXECUTE","CREATE VIEW","SHOW VIEW","CREATE ROUTINE","ALTER ROUTINE","EVENT","TRIGGER"。
+注意，不传该参数表示清除该权限。
          * @type {Array.<string> || null}
          */
         this.GlobalPrivileges = null;
 
         /**
          * 数据库的权限。Privileges 权限的可选值为："SELECT","INSERT","UPDATE","DELETE","CREATE",	"DROP","REFERENCES","INDEX","ALTER","CREATE TEMPORARY TABLES","LOCK TABLES","EXECUTE","CREATE VIEW","SHOW VIEW","CREATE ROUTINE","ALTER ROUTINE","EVENT","TRIGGER"。
+注意，不传该参数表示清除该权限。
          * @type {Array.<DatabasePrivilege> || null}
          */
         this.DatabasePrivileges = null;
 
         /**
          * 数据库中表的权限。Privileges 权限的可选值为：权限的可选值为："SELECT","INSERT","UPDATE","DELETE","CREATE",	"DROP","REFERENCES","INDEX","ALTER","CREATE VIEW","SHOW VIEW", "TRIGGER"。
+注意，不传该参数表示清除该权限。
          * @type {Array.<TablePrivilege> || null}
          */
         this.TablePrivileges = null;
 
         /**
          * 数据库表中列的权限。Privileges 权限的可选值为："SELECT","INSERT","UPDATE","REFERENCES"。
+注意，不传该参数表示清除该权限。
          * @type {Array.<ColumnPrivilege> || null}
          */
         this.ColumnPrivileges = null;
@@ -9250,13 +9254,13 @@ class DescribeTagsOfInstanceIdsRequest extends  AbstractModel {
         this.InstanceIds = null;
 
         /**
-         * 偏移量。
+         * 分页偏移量。
          * @type {number || null}
          */
         this.Offset = null;
 
         /**
-         * 每页返回多少个标签。
+         * 分页大小。
          * @type {number || null}
          */
         this.Limit = null;

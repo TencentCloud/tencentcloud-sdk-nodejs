@@ -1035,7 +1035,8 @@ class LiveClient extends AbstractClient {
     }
 
     /**
-     * 域名绑定证书
+     * 域名绑定证书。
+注意：需先调用添加证书接口进行证书添加。获取到证书Id后再调用该接口进行绑定。
      * @param {BindLiveDomainCertRequest} req
      * @param {function(string, BindLiveDomainCertResponse):void} cb
      * @public
