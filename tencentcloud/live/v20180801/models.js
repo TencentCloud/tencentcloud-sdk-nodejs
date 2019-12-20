@@ -6727,7 +6727,7 @@ class BindLiveDomainCertRequest extends  AbstractModel {
         super();
 
         /**
-         * 证书Id。
+         * 证书Id。使用添加证书接口获取证书Id。
          * @type {number || null}
          */
         this.CertId = null;
@@ -8776,6 +8776,7 @@ class CreateLiveTranscodeTemplateRequest extends  AbstractModel {
 
         /**
          * 视频码率。范围：100-8000。
+注意：码率必须是100的倍数。
          * @type {number || null}
          */
         this.VideoBitrate = null;

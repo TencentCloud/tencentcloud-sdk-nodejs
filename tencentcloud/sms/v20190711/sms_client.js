@@ -51,7 +51,7 @@ class SmsClient extends AbstractClient {
     }
     
     /**
-     * 拉取短信下发状态
+     * 拉取短信下发状态。
      * @param {PullSmsSendStatusRequest} req
      * @param {function(string, PullSmsSendStatusResponse):void} cb
      * @public
@@ -75,7 +75,7 @@ class SmsClient extends AbstractClient {
     }
 
     /**
-     * 用户套餐包信息统计
+     * 用户套餐包信息统计。
      * @param {SmsPackagesStatisticsRequest} req
      * @param {function(string, SmsPackagesStatisticsResponse):void} cb
      * @public
@@ -86,7 +86,7 @@ class SmsClient extends AbstractClient {
     }
 
     /**
-     * 统计用户发送短信的数据
+     * 统计用户发送短信的数据。
      * @param {SendStatusStatisticsRequest} req
      * @param {function(string, SendStatusStatisticsResponse):void} cb
      * @public
@@ -97,7 +97,7 @@ class SmsClient extends AbstractClient {
     }
 
     /**
-     * 统计用户回执的数据
+     * 统计用户回执的数据。
      * @param {CallbackStatusStatisticsRequest} req
      * @param {function(string, CallbackStatusStatisticsResponse):void} cb
      * @public
@@ -108,7 +108,7 @@ class SmsClient extends AbstractClient {
     }
 
     /**
-     * 拉取短信回复状态
+     * 拉取短信回复状态。
      * @param {PullSmsReplyStatusRequest} req
      * @param {function(string, PullSmsReplyStatusResponse):void} cb
      * @public
@@ -119,7 +119,7 @@ class SmsClient extends AbstractClient {
     }
 
     /**
-     * 拉取单个号码短信下发状态
+     * 拉取单个号码短信下发状态。
      * @param {PullSmsSendStatusByPhoneNumberRequest} req
      * @param {function(string, PullSmsSendStatusByPhoneNumberResponse):void} cb
      * @public
@@ -130,7 +130,7 @@ class SmsClient extends AbstractClient {
     }
 
     /**
-     * 拉取单个号码短信回复状态
+     * 拉取单个号码短信回复状态。
      * @param {PullSmsReplyStatusByPhoneNumberRequest} req
      * @param {function(string, PullSmsReplyStatusByPhoneNumberResponse):void} cb
      * @public
