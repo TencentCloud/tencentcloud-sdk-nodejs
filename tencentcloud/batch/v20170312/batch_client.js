@@ -28,7 +28,7 @@ const DescribeTaskLogsRequest = models.DescribeTaskLogsRequest;
 const AgentRunningMode = models.AgentRunningMode;
 const EnvData = models.EnvData;
 const DescribeTaskTemplatesRequest = models.DescribeTaskTemplatesRequest;
-const Notification = models.Notification;
+const EventConfig = models.EventConfig;
 const SystemDisk = models.SystemDisk;
 const Task = models.Task;
 const InstanceTypeConfig = models.InstanceTypeConfig;
@@ -40,7 +40,9 @@ const TaskInstanceLog = models.TaskInstanceLog;
 const MountDataDisk = models.MountDataDisk;
 const TaskView = models.TaskView;
 const Externals = models.Externals;
+const OsInfo = models.OsInfo;
 const DescribeComputeEnvResponse = models.DescribeComputeEnvResponse;
+const DescribeCpmOsInfoResponse = models.DescribeCpmOsInfoResponse;
 const TerminateJobRequest = models.TerminateJobRequest;
 const Application = models.Application;
 const EnvDataCpm = models.EnvDataCpm;
@@ -70,10 +72,11 @@ const DeleteTaskTemplatesRequest = models.DeleteTaskTemplatesRequest;
 const DescribeJobResponse = models.DescribeJobResponse;
 const DescribeComputeEnvCreateInfoRequest = models.DescribeComputeEnvCreateInfoRequest;
 const ModifyTaskTemplateRequest = models.ModifyTaskTemplateRequest;
+const DescribeCpmOsInfoRequest = models.DescribeCpmOsInfoRequest;
 const DataDisk = models.DataDisk;
 const NamedComputeEnv = models.NamedComputeEnv;
 const DeleteJobResponse = models.DeleteJobResponse;
-const EventConfig = models.EventConfig;
+const Notification = models.Notification;
 const SpotMarketOptions = models.SpotMarketOptions;
 const CpmVirtualPrivateCloud = models.CpmVirtualPrivateCloud;
 const OutputMapping = models.OutputMapping;
@@ -422,6 +425,17 @@ class BatchClient extends AbstractClient {
     DeleteJob(req, cb) {
         let resp = new DeleteJobResponse();
         this.request("DeleteJob", req, resp, cb);
+    }
+
+    /**
+     * 创建黑石计算环境时，查询批量计算环境支持的黑石操作系统信息
+     * @param {DescribeCpmOsInfoRequest} req
+     * @param {function(string, DescribeCpmOsInfoResponse):void} cb
+     * @public
+     */
+    DescribeCpmOsInfo(req, cb) {
+        let resp = new DescribeCpmOsInfoResponse();
+        this.request("DescribeCpmOsInfo", req, resp, cb);
     }
 
     /**
