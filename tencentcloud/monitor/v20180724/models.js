@@ -17,6 +17,789 @@
 const AbstractModel = require("../../common/abstract_model");
 
 /**
+ * DescribeAccidentEventList接口的出参类型
+ * @class
+ */
+class DescribeAccidentEventListAlarms extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 事件分类
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.BusinessTypeDesc = null;
+
+        /**
+         * 事件类型
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.AccidentTypeDesc = null;
+
+        /**
+         * 事件分类的ID，1表示服务问题，2表示其他订阅
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.BusinessID = null;
+
+        /**
+         * 事件状态的ID，0表示已恢复，1表示未恢复
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.EventStatus = null;
+
+        /**
+         * 影响的对象
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.AffectResource = null;
+
+        /**
+         * 事件的地域
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Region = null;
+
+        /**
+         * 事件发生的时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.OccurTime = null;
+
+        /**
+         * 更新时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.UpdateTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.BusinessTypeDesc = 'BusinessTypeDesc' in params ? params.BusinessTypeDesc : null;
+        this.AccidentTypeDesc = 'AccidentTypeDesc' in params ? params.AccidentTypeDesc : null;
+        this.BusinessID = 'BusinessID' in params ? params.BusinessID : null;
+        this.EventStatus = 'EventStatus' in params ? params.EventStatus : null;
+        this.AffectResource = 'AffectResource' in params ? params.AffectResource : null;
+        this.Region = 'Region' in params ? params.Region : null;
+        this.OccurTime = 'OccurTime' in params ? params.OccurTime : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+
+    }
+}
+
+/**
+ * 创建策略传入的事件告警条件
+ * @class
+ */
+class CreatePolicyGroupEventCondition extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 告警事件的Id
+         * @type {number || null}
+         */
+        this.EventId = null;
+
+        /**
+         * 告警发送收敛类型。0连续告警，1指数告警
+         * @type {number || null}
+         */
+        this.AlarmNotifyType = null;
+
+        /**
+         * 告警发送周期单位秒。<0 不触发, 0 只触发一次, >0 每隔triggerTime秒触发一次
+         * @type {number || null}
+         */
+        this.AlarmNotifyPeriod = null;
+
+        /**
+         * 如果通过模版创建，需要传入模版中该指标的对应RuleId
+         * @type {number || null}
+         */
+        this.RuleId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.EventId = 'EventId' in params ? params.EventId : null;
+        this.AlarmNotifyType = 'AlarmNotifyType' in params ? params.AlarmNotifyType : null;
+        this.AlarmNotifyPeriod = 'AlarmNotifyPeriod' in params ? params.AlarmNotifyPeriod : null;
+        this.RuleId = 'RuleId' in params ? params.RuleId : null;
+
+    }
+}
+
+/**
+ * DescribeProductEventList请求参数结构体
+ * @class
+ */
+class DescribeProductEventListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 接口模块名，固定值"monitor"
+         * @type {string || null}
+         */
+        this.Module = null;
+
+        /**
+         * 产品类型过滤，比如"cvm"表示云服务器
+         * @type {Array.<string> || null}
+         */
+        this.ProductName = null;
+
+        /**
+         * 事件名称过滤，比如"guest_reboot"表示机器重启
+         * @type {Array.<string> || null}
+         */
+        this.EventName = null;
+
+        /**
+         * 影响对象，比如ins-19708ino
+         * @type {Array.<string> || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 维度过滤，比如外网IP:10.0.0.1
+         * @type {Array.<DescribeProductEventListDimensions> || null}
+         */
+        this.Dimensions = null;
+
+        /**
+         * 地域过滤，比如gz
+         * @type {Array.<string> || null}
+         */
+        this.RegionList = null;
+
+        /**
+         * 事件类型过滤，取值范围["status_change","abnormal"]，分别表示状态变更、异常事件
+         * @type {Array.<string> || null}
+         */
+        this.Type = null;
+
+        /**
+         * 事件状态过滤，取值范围["recover","alarm","-"]，分别表示已恢复、未恢复、无状态
+         * @type {Array.<string> || null}
+         */
+        this.Status = null;
+
+        /**
+         * 项目ID过滤
+         * @type {Array.<string> || null}
+         */
+        this.Project = null;
+
+        /**
+         * 告警状态配置过滤，1表示已配置，0表示未配置
+         * @type {number || null}
+         */
+        this.IsAlarmConfig = null;
+
+        /**
+         * 按更新时间排序，ASC表示升序，DESC表示降序，默认DESC
+         * @type {string || null}
+         */
+        this.TimeOrder = null;
+
+        /**
+         * 起始时间，默认一天前的时间戳
+         * @type {number || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * 结束时间，默认当前时间戳
+         * @type {number || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * 页偏移量，默认0
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 每页返回的数量，默认20
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Module = 'Module' in params ? params.Module : null;
+        this.ProductName = 'ProductName' in params ? params.ProductName : null;
+        this.EventName = 'EventName' in params ? params.EventName : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+        if (params.Dimensions) {
+            this.Dimensions = new Array();
+            for (let z in params.Dimensions) {
+                let obj = new DescribeProductEventListDimensions();
+                obj.deserialize(params.Dimensions[z]);
+                this.Dimensions.push(obj);
+            }
+        }
+        this.RegionList = 'RegionList' in params ? params.RegionList : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.Project = 'Project' in params ? params.Project : null;
+        this.IsAlarmConfig = 'IsAlarmConfig' in params ? params.IsAlarmConfig : null;
+        this.TimeOrder = 'TimeOrder' in params ? params.TimeOrder : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+
+    }
+}
+
+/**
+ * 实例维度组合数组
+ * @class
+ */
+class Instance extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例的维度组合
+         * @type {Array.<Dimension> || null}
+         */
+        this.Dimensions = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Dimensions) {
+            this.Dimensions = new Array();
+            for (let z in params.Dimensions) {
+                let obj = new Dimension();
+                obj.deserialize(params.Dimensions[z]);
+                this.Dimensions.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * 维度信息
+ * @class
+ */
+class DimensionsDesc extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 维度名数组
+         * @type {Array.<string> || null}
+         */
+        this.Dimensions = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Dimensions = 'Dimensions' in params ? params.Dimensions : null;
+
+    }
+}
+
+/**
+ * 策略绑定实例维度信息
+ * @class
+ */
+class BindingPolicyObjectDimension extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 地域名
+         * @type {string || null}
+         */
+        this.Region = null;
+
+        /**
+         * 地域ID
+         * @type {number || null}
+         */
+        this.RegionId = null;
+
+        /**
+         * 维度信息
+         * @type {string || null}
+         */
+        this.Dimensions = null;
+
+        /**
+         * 事件维度信息
+         * @type {string || null}
+         */
+        this.EventDimensions = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Region = 'Region' in params ? params.Region : null;
+        this.RegionId = 'RegionId' in params ? params.RegionId : null;
+        this.Dimensions = 'Dimensions' in params ? params.Dimensions : null;
+        this.EventDimensions = 'EventDimensions' in params ? params.EventDimensions : null;
+
+    }
+}
+
+/**
+ * CreatePolicyGroup请求参数结构体
+ * @class
+ */
+class CreatePolicyGroupRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 组策略名称
+         * @type {string || null}
+         */
+        this.GroupName = null;
+
+        /**
+         * 固定值，为"monitor"
+         * @type {string || null}
+         */
+        this.Module = null;
+
+        /**
+         * 策略组所属视图的名称，若通过模版创建，可不传入
+         * @type {string || null}
+         */
+        this.ViewName = null;
+
+        /**
+         * 策略组所属项目Id，会进行鉴权操作
+         * @type {number || null}
+         */
+        this.ProjectId = null;
+
+        /**
+         * 模版策略组Id, 通过模版创建时才需要传
+         * @type {number || null}
+         */
+        this.ConditionTempGroupId = null;
+
+        /**
+         * 是否屏蔽策略组，0表示不屏蔽，1表示屏蔽。不填默认为0
+         * @type {number || null}
+         */
+        this.IsShielded = null;
+
+        /**
+         * 策略组的备注信息
+         * @type {string || null}
+         */
+        this.Remark = null;
+
+        /**
+         * 插入时间，戳格式为Unix时间戳，不填则按后台处理时间填充
+         * @type {number || null}
+         */
+        this.InsertTime = null;
+
+        /**
+         * 策略组中的阈值告警规则
+         * @type {Array.<CreatePolicyGroupCondition> || null}
+         */
+        this.Conditions = null;
+
+        /**
+         * 策略组中的时间告警规则
+         * @type {Array.<CreatePolicyGroupEventCondition> || null}
+         */
+        this.EventConditions = null;
+
+        /**
+         * 是否为后端调用。当且仅当值为1时，后台拉取策略模版中的规则填充入Conditions以及EventConditions字段
+         * @type {number || null}
+         */
+        this.BackEndCall = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.GroupName = 'GroupName' in params ? params.GroupName : null;
+        this.Module = 'Module' in params ? params.Module : null;
+        this.ViewName = 'ViewName' in params ? params.ViewName : null;
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+        this.ConditionTempGroupId = 'ConditionTempGroupId' in params ? params.ConditionTempGroupId : null;
+        this.IsShielded = 'IsShielded' in params ? params.IsShielded : null;
+        this.Remark = 'Remark' in params ? params.Remark : null;
+        this.InsertTime = 'InsertTime' in params ? params.InsertTime : null;
+
+        if (params.Conditions) {
+            this.Conditions = new Array();
+            for (let z in params.Conditions) {
+                let obj = new CreatePolicyGroupCondition();
+                obj.deserialize(params.Conditions[z]);
+                this.Conditions.push(obj);
+            }
+        }
+
+        if (params.EventConditions) {
+            this.EventConditions = new Array();
+            for (let z in params.EventConditions) {
+                let obj = new CreatePolicyGroupEventCondition();
+                obj.deserialize(params.EventConditions[z]);
+                this.EventConditions.push(obj);
+            }
+        }
+        this.BackEndCall = 'BackEndCall' in params ? params.BackEndCall : null;
+
+    }
+}
+
+/**
+ * 创建策略传入的阈值告警条件
+ * @class
+ */
+class CreatePolicyGroupCondition extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 指标Id
+         * @type {number || null}
+         */
+        this.MetricId = null;
+
+        /**
+         * 告警发送收敛类型。0连续告警，1指数告警
+         * @type {number || null}
+         */
+        this.AlarmNotifyType = null;
+
+        /**
+         * 告警发送周期单位秒。<0 不触发, 0 只触发一次, >0 每隔triggerTime秒触发一次
+         * @type {number || null}
+         */
+        this.AlarmNotifyPeriod = null;
+
+        /**
+         * 比较类型，范围0-6，分别对应[>,<,>=,<=,==,!=,!]。如果指标有配置默认比较类型值可以不填。
+         * @type {number || null}
+         */
+        this.CalcType = null;
+
+        /**
+         * 比较的值，如果指标不必须CalcValue可不填
+         * @type {number || null}
+         */
+        this.CalcValue = null;
+
+        /**
+         * Storm检测周期单位秒，若指标有默认值可不填
+         * @type {number || null}
+         */
+        this.CalcPeriod = null;
+
+        /**
+         * 持续几个检测周期触发规则会告警
+         * @type {number || null}
+         */
+        this.ContinuePeriod = null;
+
+        /**
+         * 如果通过模版创建，需要传入模版中该指标的对应RuleId
+         * @type {number || null}
+         */
+        this.RuleId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MetricId = 'MetricId' in params ? params.MetricId : null;
+        this.AlarmNotifyType = 'AlarmNotifyType' in params ? params.AlarmNotifyType : null;
+        this.AlarmNotifyPeriod = 'AlarmNotifyPeriod' in params ? params.AlarmNotifyPeriod : null;
+        this.CalcType = 'CalcType' in params ? params.CalcType : null;
+        this.CalcValue = 'CalcValue' in params ? params.CalcValue : null;
+        this.CalcPeriod = 'CalcPeriod' in params ? params.CalcPeriod : null;
+        this.ContinuePeriod = 'ContinuePeriod' in params ? params.ContinuePeriod : null;
+        this.RuleId = 'RuleId' in params ? params.RuleId : null;
+
+    }
+}
+
+/**
+ * BindingPolicyObject请求参数结构体
+ * @class
+ */
+class BindingPolicyObjectRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 策略分组Id
+         * @type {number || null}
+         */
+        this.GroupId = null;
+
+        /**
+         * 必填。固定值"monitor"
+         * @type {string || null}
+         */
+        this.Module = null;
+
+        /**
+         * 实例分组ID
+         * @type {number || null}
+         */
+        this.InstanceGroupId = null;
+
+        /**
+         * 需要绑定的对象维度信息
+         * @type {Array.<BindingPolicyObjectDimension> || null}
+         */
+        this.Dimensions = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.GroupId = 'GroupId' in params ? params.GroupId : null;
+        this.Module = 'Module' in params ? params.Module : null;
+        this.InstanceGroupId = 'InstanceGroupId' in params ? params.InstanceGroupId : null;
+
+        if (params.Dimensions) {
+            this.Dimensions = new Array();
+            for (let z in params.Dimensions) {
+                let obj = new BindingPolicyObjectDimension();
+                obj.deserialize(params.Dimensions[z]);
+                this.Dimensions.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * 接收人信息
+ * @class
+ */
+class ReceiverInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 告警时间段开始时间。范围[0,86400)，作为unix时间戳转成北京时间后去掉日期，例如7200表示"10:0:0"
+         * @type {number || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * 告警时间段结束时间。含义同StartTime
+         * @type {number || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * 告警通知方式。可选 "SMS","SITE","EMAIL","CALL","WECHAT"
+         * @type {Array.<string> || null}
+         */
+        this.NotifyWay = null;
+
+        /**
+         * 接收人类型。“group” 或 “user”
+         * @type {Array.<string> || null}
+         */
+        this.ReceiverType = null;
+
+        /**
+         * Id
+         * @type {number || null}
+         */
+        this.Id = null;
+
+        /**
+         * 电话告警通知时机。可选"OCCUR"(告警时通知),"RECOVER"(恢复时通知)
+         * @type {Array.<string> || null}
+         */
+        this.SendFor = null;
+
+        /**
+         * 电话告警接收者uid
+         * @type {Array.<number> || null}
+         */
+        this.UidList = null;
+
+        /**
+         * 电话告警轮数
+         * @type {number || null}
+         */
+        this.RoundNumber = null;
+
+        /**
+         * 电话告警对个人间隔（秒）
+         * @type {number || null}
+         */
+        this.PersonInterval = null;
+
+        /**
+         * 电话告警每轮间隔（秒）
+         * @type {number || null}
+         */
+        this.RoundInterval = null;
+
+        /**
+         * 恢复通知方式。可选"SMS"
+         * @type {Array.<string> || null}
+         */
+        this.RecoverNotify = null;
+
+        /**
+         * 是否需要电话告警触达提示。0不需要，1需要
+         * @type {number || null}
+         */
+        this.NeedSendNotice = null;
+
+        /**
+         * 接收组列表。通过平台接口查询到的接收组id列表
+         * @type {Array.<number> || null}
+         */
+        this.ReceiverGroupList = null;
+
+        /**
+         * 接收人列表。通过平台接口查询到的接收人id列表
+         * @type {Array.<number> || null}
+         */
+        this.ReceiverUserList = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.NotifyWay = 'NotifyWay' in params ? params.NotifyWay : null;
+        this.ReceiverType = 'ReceiverType' in params ? params.ReceiverType : null;
+        this.Id = 'Id' in params ? params.Id : null;
+        this.SendFor = 'SendFor' in params ? params.SendFor : null;
+        this.UidList = 'UidList' in params ? params.UidList : null;
+        this.RoundNumber = 'RoundNumber' in params ? params.RoundNumber : null;
+        this.PersonInterval = 'PersonInterval' in params ? params.PersonInterval : null;
+        this.RoundInterval = 'RoundInterval' in params ? params.RoundInterval : null;
+        this.RecoverNotify = 'RecoverNotify' in params ? params.RecoverNotify : null;
+        this.NeedSendNotice = 'NeedSendNotice' in params ? params.NeedSendNotice : null;
+        this.ReceiverGroupList = 'ReceiverGroupList' in params ? params.ReceiverGroupList : null;
+        this.ReceiverUserList = 'ReceiverUserList' in params ? params.ReceiverUserList : null;
+
+    }
+}
+
+/**
+ * 实例对象的维度组合
+ * @class
+ */
+class Dimension extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例维度名称
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 实例维度值
+         * @type {string || null}
+         */
+        this.Value = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Value = 'Value' in params ? params.Value : null;
+
+    }
+}
+
+/**
  * GetMonitorData请求参数结构体
  * @class
  */
@@ -88,36 +871,24 @@ class GetMonitorDataRequest extends  AbstractModel {
 }
 
 /**
- * PutMonitorData请求参数结构体
+ * 周期内的统计方式
  * @class
  */
-class PutMonitorDataRequest extends  AbstractModel {
+class PeriodsSt extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 一组指标和数据
-         * @type {Array.<MetricDatum> || null}
-         */
-        this.Metrics = null;
-
-        /**
-         * 上报时自行指定的 IP
+         * 周期
          * @type {string || null}
          */
-        this.AnnounceIp = null;
+        this.Period = null;
 
         /**
-         * 上报时自行指定的时间戳
-         * @type {number || null}
+         * 统计方式
+         * @type {Array.<string> || null}
          */
-        this.AnnounceTimestamp = null;
-
-        /**
-         * 上报时自行指定的 IP 或 产品实例ID
-         * @type {string || null}
-         */
-        this.AnnounceInstance = null;
+        this.StatType = null;
 
     }
 
@@ -128,18 +899,148 @@ class PutMonitorDataRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.Period = 'Period' in params ? params.Period : null;
+        this.StatType = 'StatType' in params ? params.StatType : null;
 
-        if (params.Metrics) {
-            this.Metrics = new Array();
-            for (let z in params.Metrics) {
-                let obj = new MetricDatum();
-                obj.deserialize(params.Metrics[z]);
-                this.Metrics.push(obj);
-            }
+    }
+}
+
+/**
+ * DescribeAccidentEventList请求参数结构体
+ * @class
+ */
+class DescribeAccidentEventListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 接口模块名，当前接口取值policy
+         * @type {string || null}
+         */
+        this.Module = null;
+
+        /**
+         * 起始时间，默认一天前的时间戳
+         * @type {number || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * 结束时间，默认当前时间戳
+         * @type {number || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * 每页返回的数量，默认20
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 页偏移量，默认0
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 根据UpdateTime排序的规则，取值asc或desc
+         * @type {string || null}
+         */
+        this.UpdateTimeOrder = null;
+
+        /**
+         * 根据OccurTime排序的规则，取值asc或desc（优先根据UpdateTimeOrder排序）
+         * @type {string || null}
+         */
+        this.OccurTimeOrder = null;
+
+        /**
+         * 根据事件类型过滤，1表示服务问题，2表示其他订阅
+         * @type {Array.<number> || null}
+         */
+        this.AccidentType = null;
+
+        /**
+         * 根据事件过滤，1表示云服务器存储问题，2表示云服务器网络连接问题，3表示云服务器运行异常，202表示运营商网络抖动
+         * @type {Array.<number> || null}
+         */
+        this.AccidentEvent = null;
+
+        /**
+         * 根据事件状态过滤，0表示已恢复，1表示未恢复
+         * @type {Array.<number> || null}
+         */
+        this.AccidentStatus = null;
+
+        /**
+         * 根据事件地域过滤，gz表示广州，sh表示上海等
+         * @type {Array.<string> || null}
+         */
+        this.AccidentRegion = null;
+
+        /**
+         * 根据影响资源过滤，比如ins-19a06bka
+         * @type {string || null}
+         */
+        this.AffectResource = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
         }
-        this.AnnounceIp = 'AnnounceIp' in params ? params.AnnounceIp : null;
-        this.AnnounceTimestamp = 'AnnounceTimestamp' in params ? params.AnnounceTimestamp : null;
-        this.AnnounceInstance = 'AnnounceInstance' in params ? params.AnnounceInstance : null;
+        this.Module = 'Module' in params ? params.Module : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.UpdateTimeOrder = 'UpdateTimeOrder' in params ? params.UpdateTimeOrder : null;
+        this.OccurTimeOrder = 'OccurTimeOrder' in params ? params.OccurTimeOrder : null;
+        this.AccidentType = 'AccidentType' in params ? params.AccidentType : null;
+        this.AccidentEvent = 'AccidentEvent' in params ? params.AccidentEvent : null;
+        this.AccidentStatus = 'AccidentStatus' in params ? params.AccidentStatus : null;
+        this.AccidentRegion = 'AccidentRegion' in params ? params.AccidentRegion : null;
+        this.AffectResource = 'AffectResource' in params ? params.AffectResource : null;
+
+    }
+}
+
+/**
+ * 指标数据的解释
+ * @class
+ */
+class MetricObjectMeaning extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 指标英文解释
+         * @type {string || null}
+         */
+        this.En = null;
+
+        /**
+         * 指标中文解释
+         * @type {string || null}
+         */
+        this.Zh = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.En = 'En' in params ? params.En : null;
+        this.Zh = 'Zh' in params ? params.Zh : null;
 
     }
 }
@@ -180,60 +1081,18 @@ class MetricDatum extends  AbstractModel {
 }
 
 /**
- * 实例维度组合数组
+ * ModifyAlarmReceivers返回参数结构体
  * @class
  */
-class Instance extends  AbstractModel {
+class ModifyAlarmReceiversResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 实例的维度组合
-         * @type {Array.<Dimension> || null}
-         */
-        this.Dimensions = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-        if (params.Dimensions) {
-            this.Dimensions = new Array();
-            for (let z in params.Dimensions) {
-                let obj = new Dimension();
-                obj.deserialize(params.Dimensions[z]);
-                this.Dimensions.push(obj);
-            }
-        }
-
-    }
-}
-
-/**
- * 周期内的统计方式
- * @class
- */
-class PeriodsSt extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 周期
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.Period = null;
-
-        /**
-         * 统计方式
-         * @type {Array.<string> || null}
-         */
-        this.StatType = null;
+        this.RequestId = null;
 
     }
 
@@ -244,28 +1103,27 @@ class PeriodsSt extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Period = 'Period' in params ? params.Period : null;
-        this.StatType = 'StatType' in params ? params.StatType : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
 
 /**
- * 实例对象的维度组合
+ * DescribeProductEventList的入参Dimensions
  * @class
  */
-class Dimension extends  AbstractModel {
+class DescribeProductEventListDimensions extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 实例维度名称
+         * 维度名
          * @type {string || null}
          */
         this.Name = null;
 
         /**
-         * 实例维度值
+         * 维度值
          * @type {string || null}
          */
         this.Value = null;
@@ -286,24 +1144,30 @@ class Dimension extends  AbstractModel {
 }
 
 /**
- * DescribeBaseMetrics请求参数结构体
+ * ModifyAlarmReceivers请求参数结构体
  * @class
  */
-class DescribeBaseMetricsRequest extends  AbstractModel {
+class ModifyAlarmReceiversRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 业务命名空间
-         * @type {string || null}
+         * 需要修改接收人的策略组Id
+         * @type {number || null}
          */
-        this.Namespace = null;
+        this.GroupId = null;
 
         /**
-         * 指标名
+         * 必填。固定为“monitor”
          * @type {string || null}
          */
-        this.MetricName = null;
+        this.Module = null;
+
+        /**
+         * 新接收人信息, 没有填写则删除所有接收人
+         * @type {Array.<ReceiverInfo> || null}
+         */
+        this.ReceiverInfos = null;
 
     }
 
@@ -314,8 +1178,17 @@ class DescribeBaseMetricsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Namespace = 'Namespace' in params ? params.Namespace : null;
-        this.MetricName = 'MetricName' in params ? params.MetricName : null;
+        this.GroupId = 'GroupId' in params ? params.GroupId : null;
+        this.Module = 'Module' in params ? params.Module : null;
+
+        if (params.ReceiverInfos) {
+            this.ReceiverInfos = new Array();
+            for (let z in params.ReceiverInfos) {
+                let obj = new ReceiverInfo();
+                obj.deserialize(params.ReceiverInfos[z]);
+                this.ReceiverInfos.push(obj);
+            }
+        }
 
     }
 }
@@ -490,6 +1363,607 @@ class MetricSet extends  AbstractModel {
 }
 
 /**
+ * DescribeProductEventList返回的Events里的GroupInfo
+ * @class
+ */
+class DescribeProductEventListEventsGroupInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 策略ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.GroupId = null;
+
+        /**
+         * 策略名
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.GroupName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.GroupId = 'GroupId' in params ? params.GroupId : null;
+        this.GroupName = 'GroupName' in params ? params.GroupName : null;
+
+    }
+}
+
+/**
+ * DescribeProductEventList返回的Events的Dimensions
+ * @class
+ */
+class DescribeProductEventListEventsDimensions extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 维度名（英文）
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Key = null;
+
+        /**
+         * 维度名（中文）
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 维度值
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Value = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Key = 'Key' in params ? params.Key : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Value = 'Value' in params ? params.Value : null;
+
+    }
+}
+
+/**
+ * CreatePolicyGroup返回参数结构体
+ * @class
+ */
+class CreatePolicyGroupResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 创建成功的策略组Id
+         * @type {number || null}
+         */
+        this.GroupId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.GroupId = 'GroupId' in params ? params.GroupId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * PutMonitorData返回参数结构体
+ * @class
+ */
+class PutMonitorDataResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeProductEventList返回的Events
+ * @class
+ */
+class DescribeProductEventListEvents extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 事件ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.EventId = null;
+
+        /**
+         * 事件中文名
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.EventCName = null;
+
+        /**
+         * 事件英文名
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.EventEName = null;
+
+        /**
+         * 事件简称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.EventName = null;
+
+        /**
+         * 产品中文名
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ProductCName = null;
+
+        /**
+         * 产品英文名
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ProductEName = null;
+
+        /**
+         * 产品简称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ProductName = null;
+
+        /**
+         * 实例ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 实例名称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.InstanceName = null;
+
+        /**
+         * 项目ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ProjectId = null;
+
+        /**
+         * 地域
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Region = null;
+
+        /**
+         * 状态
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * 是否支持告警
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.SupportAlarm = null;
+
+        /**
+         * 事件类型
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * 开始时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * 更新时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.UpdateTime = null;
+
+        /**
+         * 实例对象信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<DescribeProductEventListEventsDimensions> || null}
+         */
+        this.Dimensions = null;
+
+        /**
+         * 实例对象附加信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<DescribeProductEventListEventsDimensions> || null}
+         */
+        this.AdditionMsg = null;
+
+        /**
+         * 是否配置告警
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.IsAlarmConfig = null;
+
+        /**
+         * 策略信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<DescribeProductEventListEventsGroupInfo> || null}
+         */
+        this.GroupInfo = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.EventId = 'EventId' in params ? params.EventId : null;
+        this.EventCName = 'EventCName' in params ? params.EventCName : null;
+        this.EventEName = 'EventEName' in params ? params.EventEName : null;
+        this.EventName = 'EventName' in params ? params.EventName : null;
+        this.ProductCName = 'ProductCName' in params ? params.ProductCName : null;
+        this.ProductEName = 'ProductEName' in params ? params.ProductEName : null;
+        this.ProductName = 'ProductName' in params ? params.ProductName : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+        this.Region = 'Region' in params ? params.Region : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.SupportAlarm = 'SupportAlarm' in params ? params.SupportAlarm : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+
+        if (params.Dimensions) {
+            this.Dimensions = new Array();
+            for (let z in params.Dimensions) {
+                let obj = new DescribeProductEventListEventsDimensions();
+                obj.deserialize(params.Dimensions[z]);
+                this.Dimensions.push(obj);
+            }
+        }
+
+        if (params.AdditionMsg) {
+            this.AdditionMsg = new Array();
+            for (let z in params.AdditionMsg) {
+                let obj = new DescribeProductEventListEventsDimensions();
+                obj.deserialize(params.AdditionMsg[z]);
+                this.AdditionMsg.push(obj);
+            }
+        }
+        this.IsAlarmConfig = 'IsAlarmConfig' in params ? params.IsAlarmConfig : null;
+
+        if (params.GroupInfo) {
+            this.GroupInfo = new Array();
+            for (let z in params.GroupInfo) {
+                let obj = new DescribeProductEventListEventsGroupInfo();
+                obj.deserialize(params.GroupInfo[z]);
+                this.GroupInfo.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * PutMonitorData请求参数结构体
+ * @class
+ */
+class PutMonitorDataRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 一组指标和数据
+         * @type {Array.<MetricDatum> || null}
+         */
+        this.Metrics = null;
+
+        /**
+         * 上报时自行指定的 IP
+         * @type {string || null}
+         */
+        this.AnnounceIp = null;
+
+        /**
+         * 上报时自行指定的时间戳
+         * @type {number || null}
+         */
+        this.AnnounceTimestamp = null;
+
+        /**
+         * 上报时自行指定的 IP 或 产品实例ID
+         * @type {string || null}
+         */
+        this.AnnounceInstance = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Metrics) {
+            this.Metrics = new Array();
+            for (let z in params.Metrics) {
+                let obj = new MetricDatum();
+                obj.deserialize(params.Metrics[z]);
+                this.Metrics.push(obj);
+            }
+        }
+        this.AnnounceIp = 'AnnounceIp' in params ? params.AnnounceIp : null;
+        this.AnnounceTimestamp = 'AnnounceTimestamp' in params ? params.AnnounceTimestamp : null;
+        this.AnnounceInstance = 'AnnounceInstance' in params ? params.AnnounceInstance : null;
+
+    }
+}
+
+/**
+ * DescribeAccidentEventList返回参数结构体
+ * @class
+ */
+class DescribeAccidentEventListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 平台事件列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<DescribeAccidentEventListAlarms> || null}
+         */
+        this.Alarms = null;
+
+        /**
+         * 平台事件的总数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Total = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Alarms) {
+            this.Alarms = new Array();
+            for (let z in params.Alarms) {
+                let obj = new DescribeAccidentEventListAlarms();
+                obj.deserialize(params.Alarms[z]);
+                this.Alarms.push(obj);
+            }
+        }
+        this.Total = 'Total' in params ? params.Total : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeProductEventList返回参数结构体
+ * @class
+ */
+class DescribeProductEventListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 事件列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<DescribeProductEventListEvents> || null}
+         */
+        this.Events = null;
+
+        /**
+         * 事件统计
+         * @type {DescribeProductEventListOverView || null}
+         */
+        this.OverView = null;
+
+        /**
+         * 事件总数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Total = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Events) {
+            this.Events = new Array();
+            for (let z in params.Events) {
+                let obj = new DescribeProductEventListEvents();
+                obj.deserialize(params.Events[z]);
+                this.Events.push(obj);
+            }
+        }
+
+        if (params.OverView) {
+            let obj = new DescribeProductEventListOverView();
+            obj.deserialize(params.OverView)
+            this.OverView = obj;
+        }
+        this.Total = 'Total' in params ? params.Total : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeBaseMetrics返回参数结构体
+ * @class
+ */
+class DescribeBaseMetricsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 查询得到的指标描述列表
+         * @type {Array.<MetricSet> || null}
+         */
+        this.MetricSet = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.MetricSet) {
+            this.MetricSet = new Array();
+            for (let z in params.MetricSet) {
+                let obj = new MetricSet();
+                obj.deserialize(params.MetricSet[z]);
+                this.MetricSet.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeBaseMetrics请求参数结构体
+ * @class
+ */
+class DescribeBaseMetricsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 业务命名空间
+         * @type {string || null}
+         */
+        this.Namespace = null;
+
+        /**
+         * 指标名
+         * @type {string || null}
+         */
+        this.MetricName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Namespace = 'Namespace' in params ? params.Namespace : null;
+        this.MetricName = 'MetricName' in params ? params.MetricName : null;
+
+    }
+}
+
+/**
  * 监控数据点
  * @class
  */
@@ -540,24 +2014,40 @@ class DataPoint extends  AbstractModel {
 }
 
 /**
- * 指标数据的解释
+ * DescribeProductEventList返回的OverView对象
  * @class
  */
-class MetricObjectMeaning extends  AbstractModel {
+class DescribeProductEventListOverView extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 指标英文解释
-         * @type {string || null}
+         * 状态变更的事件数量
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
          */
-        this.En = null;
+        this.StatusChangeAmount = null;
 
         /**
-         * 指标中文解释
-         * @type {string || null}
+         * 告警状态未配置的事件数量
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
          */
-        this.Zh = null;
+        this.UnConfigAlarmAmount = null;
+
+        /**
+         * 异常事件数量
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.UnNormalEventAmount = null;
+
+        /**
+         * 未恢复的事件数量
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.UnRecoverAmount = null;
 
     }
 
@@ -568,45 +2058,19 @@ class MetricObjectMeaning extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.En = 'En' in params ? params.En : null;
-        this.Zh = 'Zh' in params ? params.Zh : null;
+        this.StatusChangeAmount = 'StatusChangeAmount' in params ? params.StatusChangeAmount : null;
+        this.UnConfigAlarmAmount = 'UnConfigAlarmAmount' in params ? params.UnConfigAlarmAmount : null;
+        this.UnNormalEventAmount = 'UnNormalEventAmount' in params ? params.UnNormalEventAmount : null;
+        this.UnRecoverAmount = 'UnRecoverAmount' in params ? params.UnRecoverAmount : null;
 
     }
 }
 
 /**
- * 维度信息
+ * BindingPolicyObject返回参数结构体
  * @class
  */
-class DimensionsDesc extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 维度名数组
-         * @type {Array.<string> || null}
-         */
-        this.Dimensions = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Dimensions = 'Dimensions' in params ? params.Dimensions : null;
-
-    }
-}
-
-/**
- * PutMonitorData返回参数结构体
- * @class
- */
-class PutMonitorDataResponse extends  AbstractModel {
+class BindingPolicyObjectResponse extends  AbstractModel {
     constructor(){
         super();
 
@@ -624,49 +2088,6 @@ class PutMonitorDataResponse extends  AbstractModel {
     deserialize(params) {
         if (!params) {
             return;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * DescribeBaseMetrics返回参数结构体
- * @class
- */
-class DescribeBaseMetricsResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 查询得到的指标描述列表
-         * @type {Array.<MetricSet> || null}
-         */
-        this.MetricSet = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-        if (params.MetricSet) {
-            this.MetricSet = new Array();
-            for (let z in params.MetricSet) {
-                let obj = new MetricSet();
-                obj.deserialize(params.MetricSet[z]);
-                this.MetricSet.push(obj);
-            }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -674,19 +2095,39 @@ class DescribeBaseMetricsResponse extends  AbstractModel {
 }
 
 module.exports = {
-    GetMonitorDataRequest: GetMonitorDataRequest,
-    PutMonitorDataRequest: PutMonitorDataRequest,
-    MetricDatum: MetricDatum,
+    DescribeAccidentEventListAlarms: DescribeAccidentEventListAlarms,
+    CreatePolicyGroupEventCondition: CreatePolicyGroupEventCondition,
+    DescribeProductEventListRequest: DescribeProductEventListRequest,
     Instance: Instance,
-    PeriodsSt: PeriodsSt,
+    DimensionsDesc: DimensionsDesc,
+    BindingPolicyObjectDimension: BindingPolicyObjectDimension,
+    CreatePolicyGroupRequest: CreatePolicyGroupRequest,
+    CreatePolicyGroupCondition: CreatePolicyGroupCondition,
+    BindingPolicyObjectRequest: BindingPolicyObjectRequest,
+    ReceiverInfo: ReceiverInfo,
     Dimension: Dimension,
-    DescribeBaseMetricsRequest: DescribeBaseMetricsRequest,
+    GetMonitorDataRequest: GetMonitorDataRequest,
+    PeriodsSt: PeriodsSt,
+    DescribeAccidentEventListRequest: DescribeAccidentEventListRequest,
+    MetricObjectMeaning: MetricObjectMeaning,
+    MetricDatum: MetricDatum,
+    ModifyAlarmReceiversResponse: ModifyAlarmReceiversResponse,
+    DescribeProductEventListDimensions: DescribeProductEventListDimensions,
+    ModifyAlarmReceiversRequest: ModifyAlarmReceiversRequest,
     GetMonitorDataResponse: GetMonitorDataResponse,
     MetricSet: MetricSet,
-    DataPoint: DataPoint,
-    MetricObjectMeaning: MetricObjectMeaning,
-    DimensionsDesc: DimensionsDesc,
+    DescribeProductEventListEventsGroupInfo: DescribeProductEventListEventsGroupInfo,
+    DescribeProductEventListEventsDimensions: DescribeProductEventListEventsDimensions,
+    CreatePolicyGroupResponse: CreatePolicyGroupResponse,
     PutMonitorDataResponse: PutMonitorDataResponse,
+    DescribeProductEventListEvents: DescribeProductEventListEvents,
+    PutMonitorDataRequest: PutMonitorDataRequest,
+    DescribeAccidentEventListResponse: DescribeAccidentEventListResponse,
+    DescribeProductEventListResponse: DescribeProductEventListResponse,
     DescribeBaseMetricsResponse: DescribeBaseMetricsResponse,
+    DescribeBaseMetricsRequest: DescribeBaseMetricsRequest,
+    DataPoint: DataPoint,
+    DescribeProductEventListOverView: DescribeProductEventListOverView,
+    BindingPolicyObjectResponse: BindingPolicyObjectResponse,
 
 }

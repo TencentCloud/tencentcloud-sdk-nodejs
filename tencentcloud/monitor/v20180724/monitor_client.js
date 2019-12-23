@@ -16,20 +16,40 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
-const GetMonitorDataRequest = models.GetMonitorDataRequest;
-const PutMonitorDataRequest = models.PutMonitorDataRequest;
-const MetricDatum = models.MetricDatum;
+const DescribeAccidentEventListAlarms = models.DescribeAccidentEventListAlarms;
+const CreatePolicyGroupEventCondition = models.CreatePolicyGroupEventCondition;
+const DescribeProductEventListRequest = models.DescribeProductEventListRequest;
 const Instance = models.Instance;
-const PeriodsSt = models.PeriodsSt;
+const DimensionsDesc = models.DimensionsDesc;
+const BindingPolicyObjectDimension = models.BindingPolicyObjectDimension;
+const CreatePolicyGroupRequest = models.CreatePolicyGroupRequest;
+const CreatePolicyGroupCondition = models.CreatePolicyGroupCondition;
+const BindingPolicyObjectRequest = models.BindingPolicyObjectRequest;
+const ReceiverInfo = models.ReceiverInfo;
 const Dimension = models.Dimension;
-const DescribeBaseMetricsRequest = models.DescribeBaseMetricsRequest;
+const GetMonitorDataRequest = models.GetMonitorDataRequest;
+const PeriodsSt = models.PeriodsSt;
+const DescribeAccidentEventListRequest = models.DescribeAccidentEventListRequest;
+const MetricObjectMeaning = models.MetricObjectMeaning;
+const MetricDatum = models.MetricDatum;
+const ModifyAlarmReceiversResponse = models.ModifyAlarmReceiversResponse;
+const DescribeProductEventListDimensions = models.DescribeProductEventListDimensions;
+const ModifyAlarmReceiversRequest = models.ModifyAlarmReceiversRequest;
 const GetMonitorDataResponse = models.GetMonitorDataResponse;
 const MetricSet = models.MetricSet;
-const DataPoint = models.DataPoint;
-const MetricObjectMeaning = models.MetricObjectMeaning;
-const DimensionsDesc = models.DimensionsDesc;
+const DescribeProductEventListEventsGroupInfo = models.DescribeProductEventListEventsGroupInfo;
+const DescribeProductEventListEventsDimensions = models.DescribeProductEventListEventsDimensions;
+const CreatePolicyGroupResponse = models.CreatePolicyGroupResponse;
 const PutMonitorDataResponse = models.PutMonitorDataResponse;
+const DescribeProductEventListEvents = models.DescribeProductEventListEvents;
+const PutMonitorDataRequest = models.PutMonitorDataRequest;
+const DescribeAccidentEventListResponse = models.DescribeAccidentEventListResponse;
+const DescribeProductEventListResponse = models.DescribeProductEventListResponse;
 const DescribeBaseMetricsResponse = models.DescribeBaseMetricsResponse;
+const DescribeBaseMetricsRequest = models.DescribeBaseMetricsRequest;
+const DataPoint = models.DataPoint;
+const DescribeProductEventListOverView = models.DescribeProductEventListOverView;
+const BindingPolicyObjectResponse = models.BindingPolicyObjectResponse;
 
 
 /**
@@ -42,6 +62,50 @@ class MonitorClient extends AbstractClient {
         super("monitor.tencentcloudapi.com", "2018-07-24", credential, region, profile);
     }
     
+    /**
+     * 分页获取产品事件的列表
+     * @param {DescribeProductEventListRequest} req
+     * @param {function(string, DescribeProductEventListResponse):void} cb
+     * @public
+     */
+    DescribeProductEventList(req, cb) {
+        let resp = new DescribeProductEventListResponse();
+        this.request("DescribeProductEventList", req, resp, cb);
+    }
+
+    /**
+     * 获取平台事件列表
+     * @param {DescribeAccidentEventListRequest} req
+     * @param {function(string, DescribeAccidentEventListResponse):void} cb
+     * @public
+     */
+    DescribeAccidentEventList(req, cb) {
+        let resp = new DescribeAccidentEventListResponse();
+        this.request("DescribeAccidentEventList", req, resp, cb);
+    }
+
+    /**
+     * 将告警策略绑定到特定对象
+     * @param {BindingPolicyObjectRequest} req
+     * @param {function(string, BindingPolicyObjectResponse):void} cb
+     * @public
+     */
+    BindingPolicyObject(req, cb) {
+        let resp = new BindingPolicyObjectResponse();
+        this.request("BindingPolicyObject", req, resp, cb);
+    }
+
+    /**
+     * 修改告警接收人
+     * @param {ModifyAlarmReceiversRequest} req
+     * @param {function(string, ModifyAlarmReceiversResponse):void} cb
+     * @public
+     */
+    ModifyAlarmReceivers(req, cb) {
+        let resp = new ModifyAlarmReceiversResponse();
+        this.request("ModifyAlarmReceivers", req, resp, cb);
+    }
+
     /**
      * 获取基础指标详情
      * @param {DescribeBaseMetricsRequest} req
@@ -81,6 +145,17 @@ class MonitorClient extends AbstractClient {
     PutMonitorData(req, cb) {
         let resp = new PutMonitorDataResponse();
         this.request("PutMonitorData", req, resp, cb);
+    }
+
+    /**
+     * 增加策略组
+     * @param {CreatePolicyGroupRequest} req
+     * @param {function(string, CreatePolicyGroupResponse):void} cb
+     * @public
+     */
+    CreatePolicyGroup(req, cb) {
+        let resp = new CreatePolicyGroupResponse();
+        this.request("CreatePolicyGroup", req, resp, cb);
     }
 
 

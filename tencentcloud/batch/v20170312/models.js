@@ -622,7 +622,7 @@ class DescribeTaskTemplatesRequest extends  AbstractModel {
         super();
 
         /**
-         * 任务模板ID
+         * 任务模板ID列表，与Filters参数不能同时指定。
          * @type {Array.<string> || null}
          */
         this.TaskTemplateIds = null;
@@ -630,6 +630,7 @@ class DescribeTaskTemplatesRequest extends  AbstractModel {
         /**
          * 过滤条件
 <li> task-template-name - String - 是否必填：否 -（过滤条件）按照任务模板名称过滤。</li>
+与TaskTemplateIds参数不能同时指定。
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
@@ -672,24 +673,24 @@ class DescribeTaskTemplatesRequest extends  AbstractModel {
 }
 
 /**
- * 通知信息
+ * 事件配置
  * @class
  */
-class Notification extends  AbstractModel {
+class EventConfig extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * CMQ主题名字，要求主题名有效且关联订阅
+         * 事件类型，包括：<br/><li>“JOB_RUNNING”：作业运行，适用于"SubmitJob"。</li><li>“JOB_SUCCEED”：作业成功，适用于"SubmitJob"。</li><li>“JOB_FAILED”：作业失败，适用于"SubmitJob"。</li><li>“JOB_FAILED_INTERRUPTED”：作业失败，保留实例，适用于"SubmitJob"。</li><li>“TASK_RUNNING”：任务运行，适用于"SubmitJob"。</li><li>“TASK_SUCCEED”：任务成功，适用于"SubmitJob"。</li><li>“TASK_FAILED”：任务失败，适用于"SubmitJob"。</li><li>“TASK_FAILED_INTERRUPTED”：任务失败，保留实例，适用于"SubmitJob"。</li><li>“TASK_INSTANCE_RUNNING”：任务实例运行，适用于"SubmitJob"。</li><li>“TASK_INSTANCE_SUCCEED”：任务实例成功，适用于"SubmitJob"。</li><li>“TASK_INSTANCE_FAILED”：任务实例失败，适用于"SubmitJob"。</li><li>“TASK_INSTANCE_FAILED_INTERRUPTED”：任务实例失败，保留实例，适用于"SubmitJob"。</li><li>“COMPUTE_ENV_CREATED”：计算环境已创建，适用于"CreateComputeEnv"。</li><li>“COMPUTE_ENV_DELETED”：计算环境已删除，适用于"CreateComputeEnv"。</li><li>“COMPUTE_NODE_CREATED”：计算节点已创建，适用于"CreateComputeEnv"和"SubmitJob"。</li><li>“COMPUTE_NODE_CREATION_FAILED”：计算节点创建失败，适用于"CreateComputeEnv"和"SubmitJob"。</li><li>“COMPUTE_NODE_RUNNING”：计算节点运行中，适用于"CreateComputeEnv"和"SubmitJob"。</li><li>“COMPUTE_NODE_ABNORMAL”：计算节点异常，适用于"CreateComputeEnv"和"SubmitJob"。</li><li>“COMPUTE_NODE_DELETING”：计算节点已删除，适用于"CreateComputeEnv"和"SubmitJob"。</li>
          * @type {string || null}
          */
-        this.TopicName = null;
+        this.EventName = null;
 
         /**
-         * 事件配置
-         * @type {Array.<EventConfig> || null}
+         * 自定义键值对
+         * @type {Array.<EventVar> || null}
          */
-        this.EventConfigs = null;
+        this.EventVars = null;
 
     }
 
@@ -700,14 +701,14 @@ class Notification extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TopicName = 'TopicName' in params ? params.TopicName : null;
+        this.EventName = 'EventName' in params ? params.EventName : null;
 
-        if (params.EventConfigs) {
-            this.EventConfigs = new Array();
-            for (let z in params.EventConfigs) {
-                let obj = new EventConfig();
-                obj.deserialize(params.EventConfigs[z]);
-                this.EventConfigs.push(obj);
+        if (params.EventVars) {
+            this.EventVars = new Array();
+            for (let z in params.EventVars) {
+                let obj = new EventVar();
+                obj.deserialize(params.EventVars[z]);
+                this.EventVars.push(obj);
             }
         }
 
@@ -1431,6 +1432,76 @@ class Externals extends  AbstractModel {
 }
 
 /**
+ * 操作系统类型
+ * @class
+ */
+class OsInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 操作系统ID。
+         * @type {number || null}
+         */
+        this.OsTypeId = null;
+
+        /**
+         * 操作系统名称。
+         * @type {string || null}
+         */
+        this.OsName = null;
+
+        /**
+         * 操作系统名称描述。
+         * @type {string || null}
+         */
+        this.OsDescription = null;
+
+        /**
+         * 操作系统英文名称。
+         * @type {string || null}
+         */
+        this.OsEnglishDescription = null;
+
+        /**
+         * 操作系统的分类，如CentOs Debian。
+         * @type {string || null}
+         */
+        this.OsClass = null;
+
+        /**
+         * 标识镜像分类。public:公共镜像; private: 专属镜像。
+         * @type {string || null}
+         */
+        this.ImageTag = null;
+
+        /**
+         * 操作系统，ext4文件下所支持的最大的磁盘大小。单位为T。
+         * @type {number || null}
+         */
+        this.MaxPartitionSize = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.OsTypeId = 'OsTypeId' in params ? params.OsTypeId : null;
+        this.OsName = 'OsName' in params ? params.OsName : null;
+        this.OsDescription = 'OsDescription' in params ? params.OsDescription : null;
+        this.OsEnglishDescription = 'OsEnglishDescription' in params ? params.OsEnglishDescription : null;
+        this.OsClass = 'OsClass' in params ? params.OsClass : null;
+        this.ImageTag = 'ImageTag' in params ? params.ImageTag : null;
+        this.MaxPartitionSize = 'MaxPartitionSize' in params ? params.MaxPartitionSize : null;
+
+    }
+}
+
+/**
  * DescribeComputeEnv返回参数结构体
  * @class
  */
@@ -1487,6 +1558,12 @@ class DescribeComputeEnvResponse extends  AbstractModel {
         this.EnvType = null;
 
         /**
+         * 计算环境资源类型，当前为CVM和CPM（黑石）
+         * @type {string || null}
+         */
+        this.ResourceType = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -1527,6 +1604,50 @@ class DescribeComputeEnvResponse extends  AbstractModel {
         }
         this.DesiredComputeNodeCount = 'DesiredComputeNodeCount' in params ? params.DesiredComputeNodeCount : null;
         this.EnvType = 'EnvType' in params ? params.EnvType : null;
+        this.ResourceType = 'ResourceType' in params ? params.ResourceType : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeCpmOsInfo返回参数结构体
+ * @class
+ */
+class DescribeCpmOsInfoResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 操作系统信息列表。
+         * @type {Array.<OsInfo> || null}
+         */
+        this.OsInfoSet = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.OsInfoSet) {
+            this.OsInfoSet = new Array();
+            for (let z in params.OsInfoSet) {
+                let obj = new OsInfo();
+                obj.deserialize(params.OsInfoSet[z]);
+                this.OsInfoSet.push(obj);
+            }
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -1653,7 +1774,7 @@ class EnvDataCpm extends  AbstractModel {
         this.RaidId = null;
 
         /**
-         * 部署服务器的操作系统ID。通过黑石接口[DescribeOsInfo]( https://cloud.tencent.com/document/product/386/32902)查询操作系统信息。
+         * 部署服务器的操作系统ID。通过批量计算接口DescribeCpmOsInfo查询操作系统信息。
          * @type {number || null}
          */
         this.OsTypeId = null;
@@ -2660,7 +2781,7 @@ class DescribeComputeEnvCreateInfosRequest extends  AbstractModel {
         super();
 
         /**
-         * 计算环境ID
+         * 计算环境ID列表，与Filters参数不能同时指定。
          * @type {Array.<string> || null}
          */
         this.EnvIds = null;
@@ -2670,6 +2791,7 @@ class DescribeComputeEnvCreateInfosRequest extends  AbstractModel {
 <li> zone - String - 是否必填：否 -（过滤条件）按照可用区过滤。</li>
 <li> env-id - String - 是否必填：否 -（过滤条件）按照计算环境ID过滤。</li>
 <li> env-name - String - 是否必填：否 -（过滤条件）按照计算环境名称过滤。</li>
+与EnvIds参数不能同时指定。
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
@@ -3353,6 +3475,34 @@ class ModifyTaskTemplateRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeCpmOsInfo请求参数结构体
+ * @class
+ */
+class DescribeCpmOsInfoRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 黑石设备类型代号。 可以从[DescribeDeviceClass](https://cloud.tencent.com/document/api/386/32911)查询设备类型列表。
+         * @type {string || null}
+         */
+        this.DeviceClassCode = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DeviceClassCode = 'DeviceClassCode' in params ? params.DeviceClassCode : null;
+
+    }
+}
+
+/**
  * 描述了数据盘的信息
  * @class
  */
@@ -3580,24 +3730,24 @@ class DeleteJobResponse extends  AbstractModel {
 }
 
 /**
- * 事件配置
+ * 通知信息
  * @class
  */
-class EventConfig extends  AbstractModel {
+class Notification extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 事件类型，包括：<br/><li>“JOB_RUNNING”：作业运行，适用于"SubmitJob"。</li><li>“JOB_SUCCEED”：作业成功，适用于"SubmitJob"。</li><li>“JOB_FAILED”：作业失败，适用于"SubmitJob"。</li><li>“JOB_FAILED_INTERRUPTED”：作业失败，保留实例，适用于"SubmitJob"。</li><li>“TASK_RUNNING”：任务运行，适用于"SubmitJob"。</li><li>“TASK_SUCCEED”：任务成功，适用于"SubmitJob"。</li><li>“TASK_FAILED”：任务失败，适用于"SubmitJob"。</li><li>“TASK_FAILED_INTERRUPTED”：任务失败，保留实例，适用于"SubmitJob"。</li><li>“TASK_INSTANCE_RUNNING”：任务实例运行，适用于"SubmitJob"。</li><li>“TASK_INSTANCE_SUCCEED”：任务实例成功，适用于"SubmitJob"。</li><li>“TASK_INSTANCE_FAILED”：任务实例失败，适用于"SubmitJob"。</li><li>“TASK_INSTANCE_FAILED_INTERRUPTED”：任务实例失败，保留实例，适用于"SubmitJob"。</li><li>“COMPUTE_ENV_CREATED”：计算环境已创建，适用于"CreateComputeEnv"。</li><li>“COMPUTE_ENV_DELETED”：计算环境已删除，适用于"CreateComputeEnv"。</li><li>“COMPUTE_NODE_CREATED”：计算节点已创建，适用于"CreateComputeEnv"和"SubmitJob"。</li><li>“COMPUTE_NODE_CREATION_FAILED”：计算节点创建失败，适用于"CreateComputeEnv"和"SubmitJob"。</li><li>“COMPUTE_NODE_RUNNING”：计算节点运行中，适用于"CreateComputeEnv"和"SubmitJob"。</li><li>“COMPUTE_NODE_ABNORMAL”：计算节点异常，适用于"CreateComputeEnv"和"SubmitJob"。</li><li>“COMPUTE_NODE_DELETING”：计算节点已删除，适用于"CreateComputeEnv"和"SubmitJob"。</li>
+         * CMQ主题名字，要求主题名有效且关联订阅
          * @type {string || null}
          */
-        this.EventName = null;
+        this.TopicName = null;
 
         /**
-         * 自定义键值对
-         * @type {Array.<EventVar> || null}
+         * 事件配置
+         * @type {Array.<EventConfig> || null}
          */
-        this.EventVars = null;
+        this.EventConfigs = null;
 
     }
 
@@ -3608,14 +3758,14 @@ class EventConfig extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.EventName = 'EventName' in params ? params.EventName : null;
+        this.TopicName = 'TopicName' in params ? params.TopicName : null;
 
-        if (params.EventVars) {
-            this.EventVars = new Array();
-            for (let z in params.EventVars) {
-                let obj = new EventVar();
-                obj.deserialize(params.EventVars[z]);
-                this.EventVars.push(obj);
+        if (params.EventConfigs) {
+            this.EventConfigs = new Array();
+            for (let z in params.EventConfigs) {
+                let obj = new EventConfig();
+                obj.deserialize(params.EventConfigs[z]);
+                this.EventConfigs.push(obj);
             }
         }
 
@@ -4549,6 +4699,12 @@ class ComputeNode extends  AbstractModel {
          */
         this.PublicIpAddresses = null;
 
+        /**
+         * 计算环境资源类型，当前为CVM和CPM（黑石）
+         * @type {string || null}
+         */
+        this.ResourceType = null;
+
     }
 
     /**
@@ -4568,6 +4724,7 @@ class ComputeNode extends  AbstractModel {
         this.AgentVersion = 'AgentVersion' in params ? params.AgentVersion : null;
         this.PrivateIpAddresses = 'PrivateIpAddresses' in params ? params.PrivateIpAddresses : null;
         this.PublicIpAddresses = 'PublicIpAddresses' in params ? params.PublicIpAddresses : null;
+        this.ResourceType = 'ResourceType' in params ? params.ResourceType : null;
 
     }
 }
@@ -4838,7 +4995,7 @@ class DescribeJobsRequest extends  AbstractModel {
         super();
 
         /**
-         * 作业ID
+         * 作业ID列表，与Filters参数不能同时指定。
          * @type {Array.<string> || null}
          */
         this.JobIds = null;
@@ -4849,6 +5006,7 @@ class DescribeJobsRequest extends  AbstractModel {
 <li> job-name - String - 是否必填：否 -（过滤条件）按照作业名称过滤。</li>
 <li> job-state - String - 是否必填：否 -（过滤条件）按照作业状态过滤。</li>
 <li> zone - String - 是否必填：否 -（过滤条件）按照可用区过滤。</li>
+与JobIds参数不能同时指定。
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
@@ -5492,6 +5650,12 @@ class ComputeEnvView extends  AbstractModel {
          */
         this.DesiredComputeNodeCount = null;
 
+        /**
+         * 计算环境资源类型，当前为CVM和CPM（黑石）
+         * @type {string || null}
+         */
+        this.ResourceType = null;
+
     }
 
     /**
@@ -5518,6 +5682,7 @@ class ComputeEnvView extends  AbstractModel {
         }
         this.EnvType = 'EnvType' in params ? params.EnvType : null;
         this.DesiredComputeNodeCount = 'DesiredComputeNodeCount' in params ? params.DesiredComputeNodeCount : null;
+        this.ResourceType = 'ResourceType' in params ? params.ResourceType : null;
 
     }
 }
@@ -5646,7 +5811,7 @@ class DescribeComputeEnvsRequest extends  AbstractModel {
         super();
 
         /**
-         * 计算环境ID
+         * 计算环境ID列表，与Filters参数不能同时指定。
          * @type {Array.<string> || null}
          */
         this.EnvIds = null;
@@ -5656,6 +5821,8 @@ class DescribeComputeEnvsRequest extends  AbstractModel {
 <li> zone - String - 是否必填：否 -（过滤条件）按照可用区过滤。</li>
 <li> env-id - String - 是否必填：否 -（过滤条件）按照计算环境ID过滤。</li>
 <li> env-name - String - 是否必填：否 -（过滤条件）按照计算环境名称过滤。</li>
+<li> resource-type - String - 是否必填：否 -（过滤条件）按照计算资源类型过滤，取值CVM或者CPM(黑石)。</li>
+与EnvIds参数不能同时指定。
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
@@ -5971,6 +6138,12 @@ class VirtualPrivateCloud extends  AbstractModel {
          */
         this.PrivateIpAddresses = null;
 
+        /**
+         * 为弹性网卡指定随机生成的 IPv6 地址数量。
+         * @type {number || null}
+         */
+        this.Ipv6AddressCount = null;
+
     }
 
     /**
@@ -5984,6 +6157,7 @@ class VirtualPrivateCloud extends  AbstractModel {
         this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
         this.AsVpcGateway = 'AsVpcGateway' in params ? params.AsVpcGateway : null;
         this.PrivateIpAddresses = 'PrivateIpAddresses' in params ? params.PrivateIpAddresses : null;
+        this.Ipv6AddressCount = 'Ipv6AddressCount' in params ? params.Ipv6AddressCount : null;
 
     }
 }
@@ -6294,7 +6468,7 @@ module.exports = {
     AgentRunningMode: AgentRunningMode,
     EnvData: EnvData,
     DescribeTaskTemplatesRequest: DescribeTaskTemplatesRequest,
-    Notification: Notification,
+    EventConfig: EventConfig,
     SystemDisk: SystemDisk,
     Task: Task,
     InstanceTypeConfig: InstanceTypeConfig,
@@ -6306,7 +6480,9 @@ module.exports = {
     MountDataDisk: MountDataDisk,
     TaskView: TaskView,
     Externals: Externals,
+    OsInfo: OsInfo,
     DescribeComputeEnvResponse: DescribeComputeEnvResponse,
+    DescribeCpmOsInfoResponse: DescribeCpmOsInfoResponse,
     TerminateJobRequest: TerminateJobRequest,
     Application: Application,
     EnvDataCpm: EnvDataCpm,
@@ -6336,10 +6512,11 @@ module.exports = {
     DescribeJobResponse: DescribeJobResponse,
     DescribeComputeEnvCreateInfoRequest: DescribeComputeEnvCreateInfoRequest,
     ModifyTaskTemplateRequest: ModifyTaskTemplateRequest,
+    DescribeCpmOsInfoRequest: DescribeCpmOsInfoRequest,
     DataDisk: DataDisk,
     NamedComputeEnv: NamedComputeEnv,
     DeleteJobResponse: DeleteJobResponse,
-    EventConfig: EventConfig,
+    Notification: Notification,
     SpotMarketOptions: SpotMarketOptions,
     CpmVirtualPrivateCloud: CpmVirtualPrivateCloud,
     OutputMapping: OutputMapping,
