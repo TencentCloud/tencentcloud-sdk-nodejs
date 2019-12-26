@@ -23,6 +23,7 @@ const UpdateDeviceShadowResponse = models.UpdateDeviceShadowResponse;
 const DescribeTasksRequest = models.DescribeTasksRequest;
 const DisableTopicRuleResponse = models.DisableTopicRuleResponse;
 const UpdateDeviceAvailableStateRequest = models.UpdateDeviceAvailableStateRequest;
+const DeviceLabel = models.DeviceLabel;
 const ReplaceTopicRuleRequest = models.ReplaceTopicRuleRequest;
 const DeleteTopicRuleRequest = models.DeleteTopicRuleRequest;
 const DescribeMultiDevicesRequest = models.DescribeMultiDevicesRequest;
@@ -37,7 +38,7 @@ const CreateTaskResponse = models.CreateTaskResponse;
 const BatchPublishMessage = models.BatchPublishMessage;
 const BatchUpdateShadow = models.BatchUpdateShadow;
 const BindDevicesRequest = models.BindDevicesRequest;
-const Filter = models.Filter;
+const UnbindDevicesRequest = models.UnbindDevicesRequest;
 const DeleteDeviceRequest = models.DeleteDeviceRequest;
 const DeleteProductResponse = models.DeleteProductResponse;
 const ResetDeviceStateResponse = models.ResetDeviceStateResponse;
@@ -50,7 +51,6 @@ const DeviceTag = models.DeviceTag;
 const DeleteTopicRuleResponse = models.DeleteTopicRuleResponse;
 const ProductProperties = models.ProductProperties;
 const DeleteLoraDeviceResponse = models.DeleteLoraDeviceResponse;
-const UnbindDevicesRequest = models.UnbindDevicesRequest;
 const DescribeDeviceRequest = models.DescribeDeviceRequest;
 const CreateLoraDeviceRequest = models.CreateLoraDeviceRequest;
 const DescribeTaskRequest = models.DescribeTaskRequest;
@@ -111,7 +111,7 @@ class IotcloudClient extends AbstractClient {
     }
     
     /**
-     * 本接口（CreateTask）用于创建一个批量任务。目前此接口可以创建批量更新影子以及批量下发消息的任务
+     * 本接口（CreateTask）用于创建一个批量任务。目前此接口可以创建批量更新影子以及批量下发消息的任务 
      * @param {CreateTaskRequest} req
      * @param {function(string, CreateTaskResponse):void} cb
      * @public
@@ -155,7 +155,7 @@ class IotcloudClient extends AbstractClient {
     }
 
     /**
-     * 本接口（DescribeDeviceShadow）用于查询虚拟设备信息。
+     * 本接口（DescribeDeviceShadow）用于查询虚拟设备信息。 
      * @param {DescribeDeviceShadowRequest} req
      * @param {function(string, DescribeDeviceShadowResponse):void} cb
      * @public
@@ -166,7 +166,7 @@ class IotcloudClient extends AbstractClient {
     }
 
     /**
-     * 本接口（DescribeDevice）用于查看设备信息
+     * 本接口（DescribeDevice）用于查看设备信息 
      * @param {DescribeDeviceRequest} req
      * @param {function(string, DescribeDeviceResponse):void} cb
      * @public
@@ -199,7 +199,7 @@ class IotcloudClient extends AbstractClient {
     }
 
     /**
-     * 本接口（CancelTask）用于取消一个未被调度的任务。
+     * 本接口（CancelTask）用于取消一个未被调度的任务。 
      * @param {CancelTaskRequest} req
      * @param {function(string, CancelTaskResponse):void} cb
      * @public
@@ -221,7 +221,7 @@ class IotcloudClient extends AbstractClient {
     }
 
     /**
-     * 本接口（CreateTopicPolicy）用于创建一个Topic
+     * 本接口（CreateTopicPolicy）用于创建一个Topic 
      * @param {CreateTopicPolicyRequest} req
      * @param {function(string, CreateTopicPolicyResponse):void} cb
      * @public
@@ -232,7 +232,7 @@ class IotcloudClient extends AbstractClient {
     }
 
     /**
-     * 本接口（CreateProduct）用于创建一个新的物联网通信产品
+     * 本接口（CreateProduct）用于创建一个新的物联网通信产品 
      * @param {CreateProductRequest} req
      * @param {function(string, CreateProductResponse):void} cb
      * @public
@@ -254,7 +254,7 @@ class IotcloudClient extends AbstractClient {
     }
 
     /**
-     * 本接口（DescribeProducts）用于列出产品列表。
+     * 本接口（DescribeProducts）用于列出产品列表。 
      * @param {DescribeProductsRequest} req
      * @param {function(string, DescribeProductsResponse):void} cb
      * @public
@@ -276,7 +276,7 @@ class IotcloudClient extends AbstractClient {
     }
 
     /**
-     * 本接口（DescribeTask）用于查询一个已创建任务的详情，任务保留一个月
+     * 本接口（DescribeTask）用于查询一个已创建任务的详情，任务保留一个月 
      * @param {DescribeTaskRequest} req
      * @param {function(string, DescribeTaskResponse):void} cb
      * @public
@@ -287,7 +287,7 @@ class IotcloudClient extends AbstractClient {
     }
 
     /**
-     * 本接口（DeleteDevice）用于删除物联网通信设备。
+     * 本接口（DeleteDevice）用于删除物联网通信设备。 
      * @param {DeleteDeviceRequest} req
      * @param {function(string, DeleteDeviceResponse):void} cb
      * @public
@@ -298,7 +298,7 @@ class IotcloudClient extends AbstractClient {
     }
 
     /**
-     * 本接口（CreateDevice）用于新建一个物联网通信设备。
+     * 本接口（CreateDevice）用于新建一个物联网通信设备。 
      * @param {CreateDeviceRequest} req
      * @param {function(string, CreateDeviceResponse):void} cb
      * @public
@@ -309,7 +309,7 @@ class IotcloudClient extends AbstractClient {
     }
 
     /**
-     * 本接口（PublishMessage）用于向某个主题发消息。
+     * 本接口（PublishMessage）用于向某个主题发消息。 
      * @param {PublishMessageRequest} req
      * @param {function(string, PublishMessageResponse):void} cb
      * @public
@@ -320,7 +320,7 @@ class IotcloudClient extends AbstractClient {
     }
 
     /**
-     * 本接口（DeleteProduct）用于删除一个物联网通信产品。
+     * 本接口（DeleteProduct）用于删除一个物联网通信产品
      * @param {DeleteProductRequest} req
      * @param {function(string, DeleteProductResponse):void} cb
      * @public
@@ -331,7 +331,7 @@ class IotcloudClient extends AbstractClient {
     }
 
     /**
-     * 重置设备的连接状态
+     * 重置设备的连接状态 
      * @param {ResetDeviceStateRequest} req
      * @param {function(string, ResetDeviceStateResponse):void} cb
      * @public
@@ -342,7 +342,7 @@ class IotcloudClient extends AbstractClient {
     }
 
     /**
-     * 本接口（DescribeTasks）用于查询已创建的任务列表，任务保留一个月
+     * 本接口（DescribeTasks）用于查询已创建的任务列表，任务保留一个月 
      * @param {DescribeTasksRequest} req
      * @param {function(string, DescribeTasksResponse):void} cb
      * @public
@@ -430,7 +430,7 @@ class IotcloudClient extends AbstractClient {
     }
 
     /**
-     * 本接口（DescribeDevices）用于查询物联网通信设备的设备列表。
+     * 本接口（DescribeDevices）用于查询物联网通信设备的设备列表。 
      * @param {DescribeDevicesRequest} req
      * @param {function(string, DescribeDevicesResponse):void} cb
      * @public

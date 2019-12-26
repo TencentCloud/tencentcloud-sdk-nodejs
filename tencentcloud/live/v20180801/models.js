@@ -910,77 +910,6 @@ class DomainInfoList extends  AbstractModel {
 }
 
 /**
- * DescribeLiveStreamOnlineInfo返回参数结构体
- * @class
- */
-class DescribeLiveStreamOnlineInfoResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 分页的页码。
-         * @type {number || null}
-         */
-        this.PageNum = null;
-
-        /**
-         * 每页大小。
-         * @type {number || null}
-         */
-        this.PageSize = null;
-
-        /**
-         * 符合条件的总个数。
-         * @type {number || null}
-         */
-        this.TotalNum = null;
-
-        /**
-         * 总页数。
-         * @type {number || null}
-         */
-        this.TotalPage = null;
-
-        /**
-         * 流信息列表。
-         * @type {Array.<StreamInfo> || null}
-         */
-        this.StreamInfoList = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.PageNum = 'PageNum' in params ? params.PageNum : null;
-        this.PageSize = 'PageSize' in params ? params.PageSize : null;
-        this.TotalNum = 'TotalNum' in params ? params.TotalNum : null;
-        this.TotalPage = 'TotalPage' in params ? params.TotalPage : null;
-
-        if (params.StreamInfoList) {
-            this.StreamInfoList = new Array();
-            for (let z in params.StreamInfoList) {
-                let obj = new StreamInfo();
-                obj.deserialize(params.StreamInfoList[z]);
-                this.StreamInfoList.push(obj);
-            }
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
  * DeleteLiveRecordTemplate请求参数结构体
  * @class
  */
@@ -2748,76 +2677,6 @@ class ForbidLiveStreamRequest extends  AbstractModel {
 }
 
 /**
- * 推流信息
- * @class
- */
-class StreamInfo extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 直播流所属应用名称
-         * @type {string || null}
-         */
-        this.AppName = null;
-
-        /**
-         * 创建模式
-         * @type {string || null}
-         */
-        this.CreateMode = null;
-
-        /**
-         * 创建时间，如: 2018-07-13 14:48:23
-         * @type {string || null}
-         */
-        this.CreateTime = null;
-
-        /**
-         * 流状态
-         * @type {number || null}
-         */
-        this.Status = null;
-
-        /**
-         * 流id
-         * @type {string || null}
-         */
-        this.StreamId = null;
-
-        /**
-         * 流名称
-         * @type {string || null}
-         */
-        this.StreamName = null;
-
-        /**
-         * 水印id
-         * @type {string || null}
-         */
-        this.WaterMarkId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.AppName = 'AppName' in params ? params.AppName : null;
-        this.CreateMode = 'CreateMode' in params ? params.CreateMode : null;
-        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
-        this.Status = 'Status' in params ? params.Status : null;
-        this.StreamId = 'StreamId' in params ? params.StreamId : null;
-        this.StreamName = 'StreamName' in params ? params.StreamName : null;
-        this.WaterMarkId = 'WaterMarkId' in params ? params.WaterMarkId : null;
-
-    }
-}
-
-/**
  * 各状态码的总次数，支持大多数的http协议返回码
  * @class
  */
@@ -3886,7 +3745,7 @@ class DescribeVisitTopSumInfoListRequest extends  AbstractModel {
 
         /**
          * 结束时间点，格式为yyyy-mm-dd HH:MM:SS
-时间跨度在[0,4小时]，支持最近1天数据查询。
+时间跨度在(0,4小时]，支持最近1天数据查询。
          * @type {string || null}
          */
         this.EndTime = null;
@@ -6776,7 +6635,7 @@ class DescribeTopClientIpSumInfoListRequest extends  AbstractModel {
 
         /**
          * 结束时间点，格式为yyyy-mm-dd HH:MM:SS
-时间跨度在（0,4小时]，支持最近1天数据查询。
+时间跨度在[0,4小时]，支持最近1天数据查询。
          * @type {string || null}
          */
         this.EndTime = null;
@@ -6961,41 +6820,6 @@ class ModifyLiveTranscodeTemplateResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * 播放错误码信息
- * @class
- */
-class HttpStatusInfo extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 播放HTTP状态码。
-         * @type {string || null}
-         */
-        this.HttpStatus = null;
-
-        /**
-         * 个数。
-         * @type {number || null}
-         */
-        this.Num = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.HttpStatus = 'HttpStatus' in params ? params.HttpStatus : null;
-        this.Num = 'Num' in params ? params.Num : null;
 
     }
 }
@@ -8452,40 +8276,24 @@ class DomainDetailInfo extends  AbstractModel {
 }
 
 /**
- * DescribeLiveStreamOnlineInfo请求参数结构体
+ * 播放错误码信息
  * @class
  */
-class DescribeLiveStreamOnlineInfoRequest extends  AbstractModel {
+class HttpStatusInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 取得第几页。
-默认值：1。
-         * @type {number || null}
-         */
-        this.PageNum = null;
-
-        /**
-         * 分页大小。
-最大值：100。
-取值范围：1~100 之前的任意整数。
-默认值：10。
-         * @type {number || null}
-         */
-        this.PageSize = null;
-
-        /**
-         * 0:未开始推流 1:正在推流
-         * @type {number || null}
-         */
-        this.Status = null;
-
-        /**
-         * 流名称。
+         * 播放HTTP状态码。
          * @type {string || null}
          */
-        this.StreamName = null;
+        this.HttpStatus = null;
+
+        /**
+         * 个数。
+         * @type {number || null}
+         */
+        this.Num = null;
 
     }
 
@@ -8496,10 +8304,8 @@ class DescribeLiveStreamOnlineInfoRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.PageNum = 'PageNum' in params ? params.PageNum : null;
-        this.PageSize = 'PageSize' in params ? params.PageSize : null;
-        this.Status = 'Status' in params ? params.Status : null;
-        this.StreamName = 'StreamName' in params ? params.StreamName : null;
+        this.HttpStatus = 'HttpStatus' in params ? params.HttpStatus : null;
+        this.Num = 'Num' in params ? params.Num : null;
 
     }
 }
@@ -10218,7 +10024,7 @@ class ModifyLiveCallbackTemplateRequest extends  AbstractModel {
         this.PornCensorshipNotifyUrl = null;
 
         /**
-         * 回调key，回调URL公用，鉴权回调说明详见回调格式文档
+         * 回调key，回调URL公用，鉴权回调说明详见回调格式文档。
          * @type {string || null}
          */
         this.CallbackKey = null;
@@ -11676,7 +11482,6 @@ module.exports = {
     DescribeGroupProIspPlayInfoListResponse: DescribeGroupProIspPlayInfoListResponse,
     PushAuthKeyInfo: PushAuthKeyInfo,
     DomainInfoList: DomainInfoList,
-    DescribeLiveStreamOnlineInfoResponse: DescribeLiveStreamOnlineInfoResponse,
     DeleteLiveRecordTemplateRequest: DeleteLiveRecordTemplateRequest,
     DeleteLiveCallbackTemplateResponse: DeleteLiveCallbackTemplateResponse,
     DescribeLiveStreamOnlineListResponse: DescribeLiveStreamOnlineListResponse,
@@ -11712,7 +11517,6 @@ module.exports = {
     StreamOnlineInfo: StreamOnlineInfo,
     CreateLiveWatermarkRuleResponse: CreateLiveWatermarkRuleResponse,
     ForbidLiveStreamRequest: ForbidLiveStreamRequest,
-    StreamInfo: StreamInfo,
     PlayCodeTotalInfo: PlayCodeTotalInfo,
     AddLiveWatermarkRequest: AddLiveWatermarkRequest,
     ModifyLiveRecordTemplateResponse: ModifyLiveRecordTemplateResponse,
@@ -11797,7 +11601,6 @@ module.exports = {
     DeleteLiveWatermarkRuleResponse: DeleteLiveWatermarkRuleResponse,
     PublishTime: PublishTime,
     ModifyLiveTranscodeTemplateResponse: ModifyLiveTranscodeTemplateResponse,
-    HttpStatusInfo: HttpStatusInfo,
     DescribeLiveTranscodeDetailInfoRequest: DescribeLiveTranscodeDetailInfoRequest,
     ProIspPlayCodeDataInfo: ProIspPlayCodeDataInfo,
     DeleteLiveWatermarkRequest: DeleteLiveWatermarkRequest,
@@ -11827,7 +11630,7 @@ module.exports = {
     CreateLiveRecordTemplateResponse: CreateLiveRecordTemplateResponse,
     RecordParam: RecordParam,
     DomainDetailInfo: DomainDetailInfo,
-    DescribeLiveStreamOnlineInfoRequest: DescribeLiveStreamOnlineInfoRequest,
+    HttpStatusInfo: HttpStatusInfo,
     DeleteLiveRecordRequest: DeleteLiveRecordRequest,
     DescribeLiveStreamPushInfoListResponse: DescribeLiveStreamPushInfoListResponse,
     HttpStatusData: HttpStatusData,
