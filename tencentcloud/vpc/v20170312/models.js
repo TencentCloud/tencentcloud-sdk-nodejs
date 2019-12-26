@@ -201,7 +201,7 @@ class SecurityGroupAssociationStatistics extends  AbstractModel {
         this.SecurityGroupId = null;
 
         /**
-         * 云主机实例数。
+         * 云服务器实例数。
          * @type {number || null}
          */
         this.CVM = null;
@@ -548,6 +548,7 @@ class DescribeNetworkInterfacesRequest extends  AbstractModel {
 <li>address-ip - String - （过滤条件）内网IPv4地址。</li>
 <li>tag-key - String -是否必填：否- （过滤条件）按照标签键进行过滤。使用请参考示例2</li>
 <li>tag:tag-key - String - 是否必填：否 - （过滤条件）按照标签键值对进行过滤。 tag-key使用具体的标签键进行替换。使用请参考示例3。</li>
+<li>is-primary - Boolean - 是否必填：否 - （过滤条件）按照是否主网卡进行过滤。值为true时，仅过滤主网卡；值为false时，仅过滤辅助网卡；次过滤参数为提供时，同时过滤主网卡和辅助网卡。</li>
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
@@ -5769,6 +5770,41 @@ class RejectAttachCcnInstancesRequest extends  AbstractModel {
 }
 
 /**
+ * ModifyCcnRegionBandwidthLimitsType请求参数结构体
+ * @class
+ */
+class ModifyCcnRegionBandwidthLimitsTypeRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 云联网实例ID。
+         * @type {string || null}
+         */
+        this.CcnId = null;
+
+        /**
+         * 云联网限速类型，INTER_REGION_LIMIT：地域间限速，OUTER_REGION_LIMIT：地域出口限速。
+         * @type {string || null}
+         */
+        this.BandwidthLimitType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CcnId = 'CcnId' in params ? params.CcnId : null;
+        this.BandwidthLimitType = 'BandwidthLimitType' in params ? params.BandwidthLimitType : null;
+
+    }
+}
+
+/**
  * ModifyIp6Rule请求参数结构体
  * @class
  */
@@ -7513,7 +7549,7 @@ VPN：VPN网关；
 DIRECTCONNECT：专线网关；
 PEERCONNECTION：对等连接；
 NAT：NAT网关；
-NORMAL_CVM：普通云主机；
+NORMAL_CVM：普通云服务器；
          * @type {string || null}
          */
         this.NextHopType = null;
@@ -7524,7 +7560,7 @@ NORMAL_CVM：普通云主机；
 下一跳类型为DIRECTCONNECT，取值专线网关ID，形如：dcg-12345678；
 下一跳类型为PEERCONNECTION，取值对等连接ID，形如：pcx-12345678；
 下一跳类型为NAT，取值Nat网关，形如：nat-12345678；
-下一跳类型为NORMAL_CVM，取值云主机IPv4地址，形如：10.0.0.12；
+下一跳类型为NORMAL_CVM，取值云服务器IPv4地址，形如：10.0.0.12；
          * @type {string || null}
          */
         this.NextHopDestination = null;
@@ -8689,7 +8725,7 @@ class DescribeNetworkInterfaceLimitResponse extends  AbstractModel {
         this.EniQuantity = null;
 
         /**
-         * 每个弹性网卡可以分配的ip配额
+         * 每个弹性网卡可以分配的IP配额
          * @type {number || null}
          */
         this.EniPrivateIpAddressQuantity = null;
@@ -10235,6 +10271,12 @@ class HaVip extends  AbstractModel {
          */
         this.CreatedTime = null;
 
+        /**
+         * 使用havip的业务标识。
+         * @type {string || null}
+         */
+        this.Business = null;
+
     }
 
     /**
@@ -10254,6 +10296,7 @@ class HaVip extends  AbstractModel {
         this.AddressIp = 'AddressIp' in params ? params.AddressIp : null;
         this.State = 'State' in params ? params.State : null;
         this.CreatedTime = 'CreatedTime' in params ? params.CreatedTime : null;
+        this.Business = 'Business' in params ? params.Business : null;
 
     }
 }
@@ -10288,6 +10331,34 @@ class ModifyAddressesBandwidthResponse extends  AbstractModel {
             return;
         }
         this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifyCcnRegionBandwidthLimitsType返回参数结构体
+ * @class
+ */
+class ModifyCcnRegionBandwidthLimitsTypeResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -10604,13 +10675,14 @@ class AllocateAddressesRequest extends  AbstractModel {
 
         /**
          * Anycast发布域。
-<ul style="margin:0"><li>已开通Anycast公网加速白名单的用户，可选值：<ul><li>ANYCAST_ZONE_GLOBAL：全球发布域（需要额外开通Anycast全球加速白名单）</li><li>ANYCAST_ZONE_OVERSEAS：境外发布域</li></ul>默认值：ANYCAST_ZONE_OVERSEAS。</li></ul>
+<ul style="margin:0"><li>已开通Anycast公网加速白名单的用户，可选值：<ul><li>ANYCAST_ZONE_GLOBAL：全球发布域（需要额外开通Anycast全球加速白名单）</li><li>ANYCAST_ZONE_OVERSEAS：境外发布域</li><li><b>[已废弃]</b> ANYCAST_ZONE_A：发布域A（已更新为全球发布域）</li><li><b>[已废弃]</b> ANYCAST_ZONE_B：发布域B（已更新为全球发布域）</li></ul>默认值：ANYCAST_ZONE_OVERSEAS。</li></ul>
          * @type {string || null}
          */
         this.AnycastZone = null;
 
         /**
-         * AnycastEIP是否用于绑定负载均衡。
+         * <b>[已废弃]</b> AnycastEIP不再区分是否负载均衡。原参数说明如下：
+AnycastEIP是否用于绑定负载均衡。
 <ul style="margin:0"><li>已开通Anycast公网加速白名单的用户，可选值：<ul><li>TRUE：AnycastEIP可绑定对象为负载均衡</li>
 <li>FALSE：AnycastEIP可绑定对象为云服务器、NAT网关、高可用虚拟IP等</li></ul>默认值：FALSE。</li></ul>
          * @type {boolean || null}
@@ -10638,48 +10710,30 @@ class AllocateAddressesRequest extends  AbstractModel {
 }
 
 /**
- * ModifyVpnConnectionAttribute请求参数结构体
+ * NAT网关绑定的弹性IP
  * @class
  */
-class ModifyVpnConnectionAttributeRequest extends  AbstractModel {
+class NatGatewayAddress extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * VPN通道实例ID。形如：vpnx-f49l6u0z。
+         * 弹性公网IP（EIP）的唯一 ID，形如：`eip-11112222`。
          * @type {string || null}
          */
-        this.VpnConnectionId = null;
+        this.AddressId = null;
 
         /**
-         * VPN通道名称，可任意命名，但不得超过60个字符。
+         * 外网IP地址，形如：`123.121.34.33`。
          * @type {string || null}
          */
-        this.VpnConnectionName = null;
+        this.PublicIpAddress = null;
 
         /**
-         * 预共享密钥。
-         * @type {string || null}
+         * 资源封堵状态。true表示弹性ip处于封堵状态，false表示弹性ip处于未封堵状态。
+         * @type {boolean || null}
          */
-        this.PreShareKey = null;
-
-        /**
-         * SPD策略组，例如：{"10.0.0.5/24":["172.123.10.5/16"]}，10.0.0.5/24是vpc内网段172.123.10.5/16是IDC网段。用户指定VPC内哪些网段可以和您IDC中哪些网段通信。
-         * @type {Array.<SecurityPolicyDatabase> || null}
-         */
-        this.SecurityPolicyDatabases = null;
-
-        /**
-         * IKE配置（Internet Key Exchange，因特网密钥交换），IKE具有一套自我保护机制，用户配置网络安全协议。
-         * @type {IKEOptionsSpecification || null}
-         */
-        this.IKEOptionsSpecification = null;
-
-        /**
-         * IPSec配置，腾讯云提供IPSec安全会话设置。
-         * @type {IPSECOptionsSpecification || null}
-         */
-        this.IPSECOptionsSpecification = null;
+        this.IsBlocked = null;
 
     }
 
@@ -10690,30 +10744,9 @@ class ModifyVpnConnectionAttributeRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.VpnConnectionId = 'VpnConnectionId' in params ? params.VpnConnectionId : null;
-        this.VpnConnectionName = 'VpnConnectionName' in params ? params.VpnConnectionName : null;
-        this.PreShareKey = 'PreShareKey' in params ? params.PreShareKey : null;
-
-        if (params.SecurityPolicyDatabases) {
-            this.SecurityPolicyDatabases = new Array();
-            for (let z in params.SecurityPolicyDatabases) {
-                let obj = new SecurityPolicyDatabase();
-                obj.deserialize(params.SecurityPolicyDatabases[z]);
-                this.SecurityPolicyDatabases.push(obj);
-            }
-        }
-
-        if (params.IKEOptionsSpecification) {
-            let obj = new IKEOptionsSpecification();
-            obj.deserialize(params.IKEOptionsSpecification)
-            this.IKEOptionsSpecification = obj;
-        }
-
-        if (params.IPSECOptionsSpecification) {
-            let obj = new IPSECOptionsSpecification();
-            obj.deserialize(params.IPSECOptionsSpecification)
-            this.IPSECOptionsSpecification = obj;
-        }
+        this.AddressId = 'AddressId' in params ? params.AddressId : null;
+        this.PublicIpAddress = 'PublicIpAddress' in params ? params.PublicIpAddress : null;
+        this.IsBlocked = 'IsBlocked' in params ? params.IsBlocked : null;
 
     }
 }
@@ -13330,6 +13363,12 @@ class VpnGateway extends  AbstractModel {
          */
         this.VpnGatewayQuotaSet = null;
 
+        /**
+         * 网关实例版本信息
+         * @type {string || null}
+         */
+        this.Version = null;
+
     }
 
     /**
@@ -13363,6 +13402,7 @@ class VpnGateway extends  AbstractModel {
                 this.VpnGatewayQuotaSet.push(obj);
             }
         }
+        this.Version = 'Version' in params ? params.Version : null;
 
     }
 }
@@ -16371,6 +16411,12 @@ class SecurityGroup extends  AbstractModel {
          */
         this.CreatedTime = null;
 
+        /**
+         * 标签键值对。
+         * @type {Array.<Tag> || null}
+         */
+        this.TagSet = null;
+
     }
 
     /**
@@ -16386,6 +16432,15 @@ class SecurityGroup extends  AbstractModel {
         this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
         this.IsDefault = 'IsDefault' in params ? params.IsDefault : null;
         this.CreatedTime = 'CreatedTime' in params ? params.CreatedTime : null;
+
+        if (params.TagSet) {
+            this.TagSet = new Array();
+            for (let z in params.TagSet) {
+                let obj = new Tag();
+                obj.deserialize(params.TagSet[z]);
+                this.TagSet.push(obj);
+            }
+        }
 
     }
 }
@@ -17123,30 +17178,48 @@ class DeleteSecurityGroupRequest extends  AbstractModel {
 }
 
 /**
- * NAT网关绑定的弹性IP
+ * ModifyVpnConnectionAttribute请求参数结构体
  * @class
  */
-class NatGatewayAddress extends  AbstractModel {
+class ModifyVpnConnectionAttributeRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 弹性公网IP（EIP）的唯一 ID，形如：`eip-11112222`。
+         * VPN通道实例ID。形如：vpnx-f49l6u0z。
          * @type {string || null}
          */
-        this.AddressId = null;
+        this.VpnConnectionId = null;
 
         /**
-         * 外网IP地址，形如：`123.121.34.33`。
+         * VPN通道名称，可任意命名，但不得超过60个字符。
          * @type {string || null}
          */
-        this.PublicIpAddress = null;
+        this.VpnConnectionName = null;
 
         /**
-         * 资源封堵状态。true表示弹性ip处于封堵状态，false表示弹性ip处于未封堵状态。
-         * @type {boolean || null}
+         * 预共享密钥。
+         * @type {string || null}
          */
-        this.IsBlocked = null;
+        this.PreShareKey = null;
+
+        /**
+         * SPD策略组，例如：{"10.0.0.5/24":["172.123.10.5/16"]}，10.0.0.5/24是vpc内网段172.123.10.5/16是IDC网段。用户指定VPC内哪些网段可以和您IDC中哪些网段通信。
+         * @type {Array.<SecurityPolicyDatabase> || null}
+         */
+        this.SecurityPolicyDatabases = null;
+
+        /**
+         * IKE配置（Internet Key Exchange，因特网密钥交换），IKE具有一套自我保护机制，用户配置网络安全协议。
+         * @type {IKEOptionsSpecification || null}
+         */
+        this.IKEOptionsSpecification = null;
+
+        /**
+         * IPSec配置，腾讯云提供IPSec安全会话设置。
+         * @type {IPSECOptionsSpecification || null}
+         */
+        this.IPSECOptionsSpecification = null;
 
     }
 
@@ -17157,9 +17230,30 @@ class NatGatewayAddress extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.AddressId = 'AddressId' in params ? params.AddressId : null;
-        this.PublicIpAddress = 'PublicIpAddress' in params ? params.PublicIpAddress : null;
-        this.IsBlocked = 'IsBlocked' in params ? params.IsBlocked : null;
+        this.VpnConnectionId = 'VpnConnectionId' in params ? params.VpnConnectionId : null;
+        this.VpnConnectionName = 'VpnConnectionName' in params ? params.VpnConnectionName : null;
+        this.PreShareKey = 'PreShareKey' in params ? params.PreShareKey : null;
+
+        if (params.SecurityPolicyDatabases) {
+            this.SecurityPolicyDatabases = new Array();
+            for (let z in params.SecurityPolicyDatabases) {
+                let obj = new SecurityPolicyDatabase();
+                obj.deserialize(params.SecurityPolicyDatabases[z]);
+                this.SecurityPolicyDatabases.push(obj);
+            }
+        }
+
+        if (params.IKEOptionsSpecification) {
+            let obj = new IKEOptionsSpecification();
+            obj.deserialize(params.IKEOptionsSpecification)
+            this.IKEOptionsSpecification = obj;
+        }
+
+        if (params.IPSECOptionsSpecification) {
+            let obj = new IPSECOptionsSpecification();
+            obj.deserialize(params.IPSECOptionsSpecification)
+            this.IPSECOptionsSpecification = obj;
+        }
 
     }
 }
@@ -17397,7 +17491,7 @@ class CreateSecurityGroupRequest extends  AbstractModel {
         this.GroupDescription = null;
 
         /**
-         * 项目id，默认0。可在qcloud控制台项目管理页面查询到。
+         * 项目ID，默认0。可在qcloud控制台项目管理页面查询到。
          * @type {string || null}
          */
         this.ProjectId = null;
@@ -18265,14 +18359,14 @@ class Route extends  AbstractModel {
 
         /**
          * 下一跳类型，目前我们支持的类型有：
-CVM：公网网关类型的云主机；
+CVM：公网网关类型的云服务器；
 VPN：VPN网关；
 DIRECTCONNECT：专线网关；
 PEERCONNECTION：对等连接；
 SSLVPN：sslvpn网关；
 NAT：NAT网关; 
-NORMAL_CVM：普通云主机；
-EIP：云主机的公网IP；
+NORMAL_CVM：普通云服务器；
+EIP：云服务器的公网IP；
 CCN：云联网。
          * @type {string || null}
          */
@@ -18645,6 +18739,7 @@ module.exports = {
     DescribeNatGatewayDestinationIpPortTranslationNatRulesResponse: DescribeNatGatewayDestinationIpPortTranslationNatRulesResponse,
     DescribeVpcIpv6AddressesResponse: DescribeVpcIpv6AddressesResponse,
     RejectAttachCcnInstancesRequest: RejectAttachCcnInstancesRequest,
+    ModifyCcnRegionBandwidthLimitsTypeRequest: ModifyCcnRegionBandwidthLimitsTypeRequest,
     ModifyIp6RuleRequest: ModifyIp6RuleRequest,
     ReplaceRouteTableAssociationRequest: ReplaceRouteTableAssociationRequest,
     RenewVpnGatewayRequest: RenewVpnGatewayRequest,
@@ -18743,6 +18838,7 @@ module.exports = {
     DeleteBandwidthPackageRequest: DeleteBandwidthPackageRequest,
     HaVip: HaVip,
     ModifyAddressesBandwidthResponse: ModifyAddressesBandwidthResponse,
+    ModifyCcnRegionBandwidthLimitsTypeResponse: ModifyCcnRegionBandwidthLimitsTypeResponse,
     RejectAttachCcnInstancesResponse: RejectAttachCcnInstancesResponse,
     SetCcnRegionBandwidthLimitsResponse: SetCcnRegionBandwidthLimitsResponse,
     DescribeIp6TranslatorsResponse: DescribeIp6TranslatorsResponse,
@@ -18751,7 +18847,7 @@ module.exports = {
     DownloadCustomerGatewayConfigurationResponse: DownloadCustomerGatewayConfigurationResponse,
     DeleteNetDetectResponse: DeleteNetDetectResponse,
     AllocateAddressesRequest: AllocateAddressesRequest,
-    ModifyVpnConnectionAttributeRequest: ModifyVpnConnectionAttributeRequest,
+    NatGatewayAddress: NatGatewayAddress,
     CreateRouteTableResponse: CreateRouteTableResponse,
     ModifySecurityGroupAttributeResponse: ModifySecurityGroupAttributeResponse,
     ModifyAddressAttributeResponse: ModifyAddressAttributeResponse,
@@ -18907,7 +19003,7 @@ module.exports = {
     DescribeAddressQuotaResponse: DescribeAddressQuotaResponse,
     CreateCustomerGatewayRequest: CreateCustomerGatewayRequest,
     DeleteSecurityGroupRequest: DeleteSecurityGroupRequest,
-    NatGatewayAddress: NatGatewayAddress,
+    ModifyVpnConnectionAttributeRequest: ModifyVpnConnectionAttributeRequest,
     CreateIp6TranslatorsRequest: CreateIp6TranslatorsRequest,
     ItemPrice: ItemPrice,
     DescribeDirectConnectGatewayCcnRoutesResponse: DescribeDirectConnectGatewayCcnRoutesResponse,
