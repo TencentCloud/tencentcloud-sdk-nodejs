@@ -276,6 +276,41 @@ class UpdateDeviceAvailableStateRequest extends  AbstractModel {
 }
 
 /**
+ * 设备标签
+ * @class
+ */
+class DeviceLabel extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 标签标识
+         * @type {string || null}
+         */
+        this.Key = null;
+
+        /**
+         * 标签值
+         * @type {string || null}
+         */
+        this.Value = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Key = 'Key' in params ? params.Key : null;
+        this.Value = 'Value' in params ? params.Value : null;
+
+    }
+}
+
+/**
  * ReplaceTopicRule请求参数结构体
  * @class
  */
@@ -506,7 +541,7 @@ class PublishAsDeviceRequest extends  AbstractModel {
         super();
 
         /**
-         * 产品id
+         * 产品ID
          * @type {string || null}
          */
         this.ProductId = null;
@@ -911,24 +946,42 @@ class BindDevicesRequest extends  AbstractModel {
 }
 
 /**
- * 描述键值对过滤器，用于条件过滤查询。例如过滤ID、名称、状态等
+ * UnbindDevices请求参数结构体
  * @class
  */
-class Filter extends  AbstractModel {
+class UnbindDevicesRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 过滤键的名称
+         * 网关设备的产品ID
          * @type {string || null}
          */
-        this.Name = null;
+        this.GatewayProductId = null;
 
         /**
-         * 一个或者多个过滤值
+         * 网关设备的设备名
+         * @type {string || null}
+         */
+        this.GatewayDeviceName = null;
+
+        /**
+         * 产品ID
+         * @type {string || null}
+         */
+        this.ProductId = null;
+
+        /**
+         * 多个设备名
          * @type {Array.<string> || null}
          */
-        this.Values = null;
+        this.DeviceNames = null;
+
+        /**
+         * 中兴CLAA设备的解绑需要Skey，普通设备不需要
+         * @type {string || null}
+         */
+        this.Skey = null;
 
     }
 
@@ -939,8 +992,11 @@ class Filter extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Name = 'Name' in params ? params.Name : null;
-        this.Values = 'Values' in params ? params.Values : null;
+        this.GatewayProductId = 'GatewayProductId' in params ? params.GatewayProductId : null;
+        this.GatewayDeviceName = 'GatewayDeviceName' in params ? params.GatewayDeviceName : null;
+        this.ProductId = 'ProductId' in params ? params.ProductId : null;
+        this.DeviceNames = 'DeviceNames' in params ? params.DeviceNames : null;
+        this.Skey = 'Skey' in params ? params.Skey : null;
 
     }
 }
@@ -1517,62 +1573,6 @@ class DeleteLoraDeviceResponse extends  AbstractModel {
 }
 
 /**
- * UnbindDevices请求参数结构体
- * @class
- */
-class UnbindDevicesRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 网关设备的产品ID
-         * @type {string || null}
-         */
-        this.GatewayProductId = null;
-
-        /**
-         * 网关设备的设备名
-         * @type {string || null}
-         */
-        this.GatewayDeviceName = null;
-
-        /**
-         * 产品ID
-         * @type {string || null}
-         */
-        this.ProductId = null;
-
-        /**
-         * 多个设备名
-         * @type {Array.<string> || null}
-         */
-        this.DeviceNames = null;
-
-        /**
-         * 中兴CLAA设备的解绑需要Skey，普通设备不需要
-         * @type {string || null}
-         */
-        this.Skey = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.GatewayProductId = 'GatewayProductId' in params ? params.GatewayProductId : null;
-        this.GatewayDeviceName = 'GatewayDeviceName' in params ? params.GatewayDeviceName : null;
-        this.ProductId = 'ProductId' in params ? params.ProductId : null;
-        this.DeviceNames = 'DeviceNames' in params ? params.DeviceNames : null;
-        this.Skey = 'Skey' in params ? params.Skey : null;
-
-    }
-}
-
-/**
  * DescribeDevice请求参数结构体
  * @class
  */
@@ -1766,7 +1766,7 @@ class ResetDeviceStateRequest extends  AbstractModel {
         super();
 
         /**
-         * 产品Id
+         * 产品ID
          * @type {string || null}
          */
         this.ProductId = null;
@@ -1801,7 +1801,7 @@ class CreateTopicPolicyRequest extends  AbstractModel {
         super();
 
         /**
-         * 产品自身id
+         * 产品自身ID
          * @type {string || null}
          */
         this.ProductID = null;
@@ -1819,7 +1819,7 @@ class CreateTopicPolicyRequest extends  AbstractModel {
         this.Privilege = null;
 
         /**
-         * 代理订阅信息，网关产品为绑定的子产品创建topic时需要填写，内容为子产品的id和设备信息。
+         * 代理订阅信息，网关产品为绑定的子产品创建topic时需要填写，内容为子产品的ID和设备信息。
          * @type {BrokerSubscribe || null}
          */
         this.BrokerSubscribe = null;
@@ -2173,12 +2173,6 @@ class DescribeProductsRequest extends  AbstractModel {
          */
         this.Limit = null;
 
-        /**
-         * 过滤条件
-         * @type {Array.<Filter> || null}
-         */
-        this.Filters = null;
-
     }
 
     /**
@@ -2190,15 +2184,6 @@ class DescribeProductsRequest extends  AbstractModel {
         }
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
-
-        if (params.Filters) {
-            this.Filters = new Array();
-            for (let z in params.Filters) {
-                let obj = new Filter();
-                obj.deserialize(params.Filters[z]);
-                this.Filters.push(obj);
-            }
-        }
 
     }
 }
@@ -2635,7 +2620,7 @@ class DeleteLoraDeviceRequest extends  AbstractModel {
         super();
 
         /**
-         * 设备所属产品id
+         * 设备所属产品ID
          * @type {string || null}
          */
         this.ProductId = null;
@@ -2839,6 +2824,12 @@ class UpdateDeviceShadowRequest extends  AbstractModel {
          */
         this.ShadowVersion = null;
 
+        /**
+         * 下发delta消息的topic前缀，可选类型: "$shadow","$template"。不填写默认"$shadow"。
+         * @type {string || null}
+         */
+        this.Prefix = null;
+
     }
 
     /**
@@ -2852,6 +2843,7 @@ class UpdateDeviceShadowRequest extends  AbstractModel {
         this.DeviceName = 'DeviceName' in params ? params.DeviceName : null;
         this.State = 'State' in params ? params.State : null;
         this.ShadowVersion = 'ShadowVersion' in params ? params.ShadowVersion : null;
+        this.Prefix = 'Prefix' in params ? params.Prefix : null;
 
     }
 }
@@ -3163,6 +3155,13 @@ class DeviceInfo extends  AbstractModel {
          */
         this.EnableState = null;
 
+        /**
+         * 设备标签
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<DeviceLabel> || null}
+         */
+        this.Labels = null;
+
     }
 
     /**
@@ -3201,6 +3200,15 @@ class DeviceInfo extends  AbstractModel {
         this.LogLevel = 'LogLevel' in params ? params.LogLevel : null;
         this.CertState = 'CertState' in params ? params.CertState : null;
         this.EnableState = 'EnableState' in params ? params.EnableState : null;
+
+        if (params.Labels) {
+            this.Labels = new Array();
+            for (let z in params.Labels) {
+                let obj = new DeviceLabel();
+                obj.deserialize(params.Labels[z]);
+                this.Labels.push(obj);
+            }
+        }
 
     }
 }
@@ -3277,7 +3285,7 @@ class DescribeLoraDeviceRequest extends  AbstractModel {
         super();
 
         /**
-         * 产品Id
+         * 产品id
          * @type {string || null}
          */
         this.ProductId = null;
@@ -3633,6 +3641,13 @@ class DescribeDeviceResponse extends  AbstractModel {
         this.EnableState = null;
 
         /**
+         * 设备标签
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<DeviceLabel> || null}
+         */
+        this.Labels = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -3676,6 +3691,15 @@ class DescribeDeviceResponse extends  AbstractModel {
         this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
         this.CertState = 'CertState' in params ? params.CertState : null;
         this.EnableState = 'EnableState' in params ? params.EnableState : null;
+
+        if (params.Labels) {
+            this.Labels = new Array();
+            for (let z in params.Labels) {
+                let obj = new DeviceLabel();
+                obj.deserialize(params.Labels[z]);
+                this.Labels.push(obj);
+            }
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -3886,6 +3910,7 @@ module.exports = {
     DescribeTasksRequest: DescribeTasksRequest,
     DisableTopicRuleResponse: DisableTopicRuleResponse,
     UpdateDeviceAvailableStateRequest: UpdateDeviceAvailableStateRequest,
+    DeviceLabel: DeviceLabel,
     ReplaceTopicRuleRequest: ReplaceTopicRuleRequest,
     DeleteTopicRuleRequest: DeleteTopicRuleRequest,
     DescribeMultiDevicesRequest: DescribeMultiDevicesRequest,
@@ -3900,7 +3925,7 @@ module.exports = {
     BatchPublishMessage: BatchPublishMessage,
     BatchUpdateShadow: BatchUpdateShadow,
     BindDevicesRequest: BindDevicesRequest,
-    Filter: Filter,
+    UnbindDevicesRequest: UnbindDevicesRequest,
     DeleteDeviceRequest: DeleteDeviceRequest,
     DeleteProductResponse: DeleteProductResponse,
     ResetDeviceStateResponse: ResetDeviceStateResponse,
@@ -3913,7 +3938,6 @@ module.exports = {
     DeleteTopicRuleResponse: DeleteTopicRuleResponse,
     ProductProperties: ProductProperties,
     DeleteLoraDeviceResponse: DeleteLoraDeviceResponse,
-    UnbindDevicesRequest: UnbindDevicesRequest,
     DescribeDeviceRequest: DescribeDeviceRequest,
     CreateLoraDeviceRequest: CreateLoraDeviceRequest,
     DescribeTaskRequest: DescribeTaskRequest,

@@ -611,13 +611,13 @@ class Task extends  AbstractModel {
         this.Url = null;
 
         /**
-         * gme实时语音房间id，通过gme实时语音进行语音分析时输入
+         * gme实时语音房间ID，通过gme实时语音进行语音分析时输入
          * @type {string || null}
          */
         this.RoomId = null;
 
         /**
-         * gme实时语音用户id，通过gme实时语音进行语音分析时输入
+         * gme实时语音用户ID，通过gme实时语音进行语音分析时输入
          * @type {string || null}
          */
         this.OpenId = null;
@@ -676,14 +676,14 @@ class VoiceFilterInfo extends  AbstractModel {
         super();
 
         /**
-         * 应用id
+         * 应用ID
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.BizId = null;
 
         /**
-         * 文件id，表示文件唯一id
+         * 文件ID，表示文件唯一ID
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
@@ -697,7 +697,7 @@ class VoiceFilterInfo extends  AbstractModel {
         this.FileName = null;
 
         /**
-         * 用户id
+         * 用户ID
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
@@ -1167,7 +1167,7 @@ class RealtimeSpeechConf extends  AbstractModel {
         this.Status = null;
 
         /**
-         * 实时语音音质类型，取值：high-高音质，ordinary-普通音质。 默认为普通音质。
+         * 实时语音音质类型，取值：high-高音质，ordinary-普通音质。默认高音质。普通音质仅白名单开放，如需要普通音质，请联系腾讯云商务。
          * @type {string || null}
          */
         this.Quality = null;
@@ -1398,14 +1398,14 @@ class ScanPiece extends  AbstractModel {
         this.ScanDetail = null;
 
         /**
-         * gme实时语音房间id，透传任务传入时的RoomId
+         * gme实时语音房间ID，透传任务传入时的RoomId
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.RoomId = null;
 
         /**
-         * gme实时语音用户id，透传任务传入时的OpenId
+         * gme实时语音用户ID，透传任务传入时的OpenId
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */

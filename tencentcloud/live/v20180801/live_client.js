@@ -34,7 +34,6 @@ const DeleteLiveSnapshotTemplateRequest = models.DeleteLiveSnapshotTemplateReque
 const DescribeGroupProIspPlayInfoListResponse = models.DescribeGroupProIspPlayInfoListResponse;
 const PushAuthKeyInfo = models.PushAuthKeyInfo;
 const DomainInfoList = models.DomainInfoList;
-const DescribeLiveStreamOnlineInfoResponse = models.DescribeLiveStreamOnlineInfoResponse;
 const DeleteLiveRecordTemplateRequest = models.DeleteLiveRecordTemplateRequest;
 const DeleteLiveCallbackTemplateResponse = models.DeleteLiveCallbackTemplateResponse;
 const DescribeLiveStreamOnlineListResponse = models.DescribeLiveStreamOnlineListResponse;
@@ -70,7 +69,6 @@ const ModifyLiveDomainCertRequest = models.ModifyLiveDomainCertRequest;
 const StreamOnlineInfo = models.StreamOnlineInfo;
 const CreateLiveWatermarkRuleResponse = models.CreateLiveWatermarkRuleResponse;
 const ForbidLiveStreamRequest = models.ForbidLiveStreamRequest;
-const StreamInfo = models.StreamInfo;
 const PlayCodeTotalInfo = models.PlayCodeTotalInfo;
 const AddLiveWatermarkRequest = models.AddLiveWatermarkRequest;
 const ModifyLiveRecordTemplateResponse = models.ModifyLiveRecordTemplateResponse;
@@ -155,7 +153,6 @@ const CreateLiveCallbackRuleRequest = models.CreateLiveCallbackRuleRequest;
 const DeleteLiveWatermarkRuleResponse = models.DeleteLiveWatermarkRuleResponse;
 const PublishTime = models.PublishTime;
 const ModifyLiveTranscodeTemplateResponse = models.ModifyLiveTranscodeTemplateResponse;
-const HttpStatusInfo = models.HttpStatusInfo;
 const DescribeLiveTranscodeDetailInfoRequest = models.DescribeLiveTranscodeDetailInfoRequest;
 const ProIspPlayCodeDataInfo = models.ProIspPlayCodeDataInfo;
 const DeleteLiveWatermarkRequest = models.DeleteLiveWatermarkRequest;
@@ -185,7 +182,7 @@ const DescribePlayErrorCodeDetailInfoListResponse = models.DescribePlayErrorCode
 const CreateLiveRecordTemplateResponse = models.CreateLiveRecordTemplateResponse;
 const RecordParam = models.RecordParam;
 const DomainDetailInfo = models.DomainDetailInfo;
-const DescribeLiveStreamOnlineInfoRequest = models.DescribeLiveStreamOnlineInfoRequest;
+const HttpStatusInfo = models.HttpStatusInfo;
 const DeleteLiveRecordRequest = models.DeleteLiveRecordRequest;
 const DescribeLiveStreamPushInfoListResponse = models.DescribeLiveStreamPushInfoListResponse;
 const HttpStatusData = models.HttpStatusData;
@@ -813,7 +810,7 @@ class LiveClient extends AbstractClient {
     }
 
     /**
-     * 修改回调模板
+     * 修改回调模板。
      * @param {ModifyLiveCallbackTemplateRequest} req
      * @param {function(string, ModifyLiveCallbackTemplateResponse):void} cb
      * @public
@@ -965,17 +962,6 @@ class LiveClient extends AbstractClient {
     DescribeLogDownloadList(req, cb) {
         let resp = new DescribeLogDownloadListResponse();
         this.request("DescribeLogDownloadList", req, resp, cb);
-    }
-
-    /**
-     * 查询在线推流信息列表
-     * @param {DescribeLiveStreamOnlineInfoRequest} req
-     * @param {function(string, DescribeLiveStreamOnlineInfoResponse):void} cb
-     * @public
-     */
-    DescribeLiveStreamOnlineInfo(req, cb) {
-        let resp = new DescribeLiveStreamOnlineInfoResponse();
-        this.request("DescribeLiveStreamOnlineInfo", req, resp, cb);
     }
 
     /**

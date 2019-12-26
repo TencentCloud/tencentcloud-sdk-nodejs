@@ -28,11 +28,14 @@ const DeleteRuleRequest = models.DeleteRuleRequest;
 const ModifyLoadBalancerAttributesRequest = models.ModifyLoadBalancerAttributesRequest;
 const ModifyRuleRequest = models.ModifyRuleRequest;
 const DescribeClassicalLBByInstanceIdResponse = models.DescribeClassicalLBByInstanceIdResponse;
+const DescribeBlockIPListResponse = models.DescribeBlockIPListResponse;
+const ClassicalHealth = models.ClassicalHealth;
 const DescribeRewriteRequest = models.DescribeRewriteRequest;
 const ClassicalTarget = models.ClassicalTarget;
 const RsWeightRule = models.RsWeightRule;
 const DeregisterTargetsFromClassicalLBRequest = models.DeregisterTargetsFromClassicalLBRequest;
 const SetSecurityGroupForLoadbalancersResponse = models.SetSecurityGroupForLoadbalancersResponse;
+const BasicTargetGroupInfo = models.BasicTargetGroupInfo;
 const ModifyTargetWeightResponse = models.ModifyTargetWeightResponse;
 const DescribeTaskStatusRequest = models.DescribeTaskStatusRequest;
 const DescribeRewriteResponse = models.DescribeRewriteResponse;
@@ -42,6 +45,7 @@ const DescribeTargetsRequest = models.DescribeTargetsRequest;
 const ZoneInfo = models.ZoneInfo;
 const RegisterTargetsWithClassicalLBResponse = models.RegisterTargetsWithClassicalLBResponse;
 const LoadBalancerHealth = models.LoadBalancerHealth;
+const BlockedIP = models.BlockedIP;
 const ModifyRuleResponse = models.ModifyRuleResponse;
 const DescribeClassicalLBTargetsRequest = models.DescribeClassicalLBTargetsRequest;
 const DescribeListenersResponse = models.DescribeListenersResponse;
@@ -49,6 +53,7 @@ const AutoRewriteRequest = models.AutoRewriteRequest;
 const DescribeTaskStatusResponse = models.DescribeTaskStatusResponse;
 const DescribeTargetHealthRequest = models.DescribeTargetHealthRequest;
 const TargetHealth = models.TargetHealth;
+const DescribeBlockIPListRequest = models.DescribeBlockIPListRequest;
 const DescribeClassicalLBHealthStatusResponse = models.DescribeClassicalLBHealthStatusResponse;
 const RuleHealth = models.RuleHealth;
 const Listener = models.Listener;
@@ -60,12 +65,14 @@ const Target = models.Target;
 const RegisterTargetsRequest = models.RegisterTargetsRequest;
 const HealthCheck = models.HealthCheck;
 const DeleteListenerRequest = models.DeleteListenerRequest;
-const ClassicalHealth = models.ClassicalHealth;
+const ModifyBlockIPListResponse = models.ModifyBlockIPListResponse;
 const ModifyTargetPortResponse = models.ModifyTargetPortResponse;
 const DescribeClassicalLBByInstanceIdRequest = models.DescribeClassicalLBByInstanceIdRequest;
 const ManualRewriteResponse = models.ManualRewriteResponse;
+const ModifyBlockIPListRequest = models.ModifyBlockIPListRequest;
 const ModifyDomainAttributesResponse = models.ModifyDomainAttributesResponse;
-const ModifyTargetWeightRequest = models.ModifyTargetWeightRequest;
+const ExclusiveCluster = models.ExclusiveCluster;
+const DescribeClassicalLBHealthStatusRequest = models.DescribeClassicalLBHealthStatusRequest;
 const ModifyDomainRequest = models.ModifyDomainRequest;
 const Backend = models.Backend;
 const LBChargePrepaid = models.LBChargePrepaid;
@@ -79,8 +86,9 @@ const CreateRuleRequest = models.CreateRuleRequest;
 const RuleTargets = models.RuleTargets;
 const BatchDeregisterTargetsRequest = models.BatchDeregisterTargetsRequest;
 const ManualRewriteRequest = models.ManualRewriteRequest;
-const ReplaceCertForLoadBalancersRequest = models.ReplaceCertForLoadBalancersRequest;
+const ModifyListenerResponse = models.ModifyListenerResponse;
 const DescribeTargetHealthResponse = models.DescribeTargetHealthResponse;
+const ClusterItem = models.ClusterItem;
 const CreateListenerRequest = models.CreateListenerRequest;
 const RewriteLocationMap = models.RewriteLocationMap;
 const ModifyDomainResponse = models.ModifyDomainResponse;
@@ -97,7 +105,7 @@ const DeleteRewriteResponse = models.DeleteRewriteResponse;
 const BatchTarget = models.BatchTarget;
 const TargetRegionInfo = models.TargetRegionInfo;
 const BatchRegisterTargetsResponse = models.BatchRegisterTargetsResponse;
-const ModifyListenerResponse = models.ModifyListenerResponse;
+const ReplaceCertForLoadBalancersRequest = models.ReplaceCertForLoadBalancersRequest;
 const DeleteRuleResponse = models.DeleteRuleResponse;
 const ModifyDomainAttributesRequest = models.ModifyDomainAttributesRequest;
 const DeregisterTargetsRequest = models.DeregisterTargetsRequest;
@@ -105,8 +113,11 @@ const CertificateOutput = models.CertificateOutput;
 const BatchRegisterTargetsRequest = models.BatchRegisterTargetsRequest;
 const ListenerBackend = models.ListenerBackend;
 const TagInfo = models.TagInfo;
+const SnatIp = models.SnatIp;
+const DescribeBlockIPTaskResponse = models.DescribeBlockIPTaskResponse;
 const DescribeClassicalLBListenersResponse = models.DescribeClassicalLBListenersResponse;
-const DescribeClassicalLBHealthStatusRequest = models.DescribeClassicalLBHealthStatusRequest;
+const ModifyTargetWeightRequest = models.ModifyTargetWeightRequest;
+const DescribeBlockIPTaskRequest = models.DescribeBlockIPTaskRequest;
 const CreateLoadBalancerResponse = models.CreateLoadBalancerResponse;
 const DescribeListenersRequest = models.DescribeListenersRequest;
 const SetLoadBalancerSecurityGroupsRequest = models.SetLoadBalancerSecurityGroupsRequest;
@@ -204,7 +215,7 @@ class ClbClient extends AbstractClient {
      * ReplaceCertForLoadBalancers 接口用以替换负载均衡实例所关联的证书，对于各个地域的负载均衡，如果指定的老的证书ID与其有关联关系，则会先解除关联，再建立新证书与该负载均衡的关联关系。
 此接口支持替换服务端证书或客户端证书。
 需要使用的新证书，可以通过传入证书ID来指定，如果不指定证书ID，则必须传入证书内容等相关信息，用以新建证书并绑定至负载均衡。
-注：本接口仅可从广州地域调用，其他地域存在域名解析问题，会报错。
+注：本接口仅可从广州地域调用。
      * @param {ReplaceCertForLoadBalancersRequest} req
      * @param {function(string, ReplaceCertForLoadBalancersResponse):void} cb
      * @public
@@ -345,6 +356,17 @@ class ClbClient extends AbstractClient {
     }
 
     /**
+     * 查询一个负载均衡所封禁的IP列表（黑名单）。（接口灰度中，如需使用请提工单）
+     * @param {DescribeBlockIPListRequest} req
+     * @param {function(string, DescribeBlockIPListResponse):void} cb
+     * @public
+     */
+    DescribeBlockIPList(req, cb) {
+        let resp = new DescribeBlockIPListResponse();
+        this.request("DescribeBlockIPList", req, resp, cb);
+    }
+
+    /**
      * DescribeListeners 接口可根据负载均衡器 ID，监听器的协议或端口作为过滤条件获取监听器列表。如果不指定任何过滤条件，默认返该负载均衡器下的默认数据长度（20 个）的监听器。
      * @param {DescribeListenersRequest} req
      * @param {function(string, DescribeListenersResponse):void} cb
@@ -368,7 +390,7 @@ class ClbClient extends AbstractClient {
     }
 
     /**
-     * 批量绑定虚拟主机或弹性网卡，支持跨域绑定，只支持四层（TCP、UDP）协议绑定。
+     * 批量绑定虚拟主机或弹性网卡，支持跨域绑定，支持四层、七层（TCP、UDP、HTTP、HTTPS）协议绑定。
      * @param {BatchRegisterTargetsRequest} req
      * @param {function(string, BatchRegisterTargetsResponse):void} cb
      * @public
@@ -414,15 +436,26 @@ class ClbClient extends AbstractClient {
     }
 
     /**
-     * DeleteRewrite 接口支持删除指定转发规则之间的重定向关系。
-本接口为异步接口，本接口返回成功后需以返回的RequestID为入参，调用DescribeTaskStatus接口查询本次任务是否成功。
-     * @param {DeleteRewriteRequest} req
-     * @param {function(string, DeleteRewriteResponse):void} cb
+     * 修改负载均衡的IP（client IP）封禁黑名单列表，一个转发规则最多支持封禁 2000000 个IP，及黑名单容量为 2000000。
+（接口灰度中，如需使用请提工单）
+     * @param {ModifyBlockIPListRequest} req
+     * @param {function(string, ModifyBlockIPListResponse):void} cb
      * @public
      */
-    DeleteRewrite(req, cb) {
-        let resp = new DeleteRewriteResponse();
-        this.request("DeleteRewrite", req, resp, cb);
+    ModifyBlockIPList(req, cb) {
+        let resp = new ModifyBlockIPListResponse();
+        this.request("ModifyBlockIPList", req, resp, cb);
+    }
+
+    /**
+     * DescribeTargetHealth 接口用来获取负载均衡后端服务的健康检查结果，不支持传统型负载均衡。
+     * @param {DescribeTargetHealthRequest} req
+     * @param {function(string, DescribeTargetHealthResponse):void} cb
+     * @public
+     */
+    DescribeTargetHealth(req, cb) {
+        let resp = new DescribeTargetHealthResponse();
+        this.request("DescribeTargetHealth", req, resp, cb);
     }
 
     /**
@@ -495,6 +528,17 @@ class ClbClient extends AbstractClient {
     }
 
     /**
+     * 根据 ModifyBlockIPList 接口返回的异步任务的ID，查询封禁IP（黑名单）异步任务的执行状态。（接口灰度中，如需使用请提工单）
+     * @param {DescribeBlockIPTaskRequest} req
+     * @param {function(string, DescribeBlockIPTaskResponse):void} cb
+     * @public
+     */
+    DescribeBlockIPTask(req, cb) {
+        let resp = new DescribeBlockIPTaskResponse();
+        this.request("DescribeBlockIPTask", req, resp, cb);
+    }
+
+    /**
      * DescribeClassicalLBByInstanceId用于通过后端实例ID获取传统型负载均衡ID列表
      * @param {DescribeClassicalLBByInstanceIdRequest} req
      * @param {function(string, DescribeClassicalLBByInstanceIdResponse):void} cb
@@ -506,8 +550,8 @@ class ClbClient extends AbstractClient {
     }
 
     /**
-     * BatchModifyTargetWeight接口用于批量修改负载均衡监听器绑定的后端机器的转发权重，支持负载均衡的4层和7层监听器；不支持传统型负载均衡。
-本接口为异步接口，本接口返回成功后需以返回的RequestID为入参，调用DescribeTaskStatus接口查询本次任务是否成功。
+     * 本接口(BatchModifyTargetWeight)用于批量修改负载均衡监听器绑定的后端机器的转发权重，支持负载均衡的4层和7层监听器；不支持传统型负载均衡。
+本接口为异步接口，本接口返回成功后需以返回的 RequestID 为入参，调用 DescribeTaskStatus 接口查询本次任务是否成功。
      * @param {BatchModifyTargetWeightRequest} req
      * @param {function(string, BatchModifyTargetWeightResponse):void} cb
      * @public
@@ -518,19 +562,20 @@ class ClbClient extends AbstractClient {
     }
 
     /**
-     * DescribeTargetHealth 接口用来获取负载均衡后端服务的健康检查结果，不支持传统型负载均衡。
-     * @param {DescribeTargetHealthRequest} req
-     * @param {function(string, DescribeTargetHealthResponse):void} cb
+     * DeleteRewrite 接口支持删除指定转发规则之间的重定向关系。
+本接口为异步接口，本接口返回成功后需以返回的RequestID为入参，调用DescribeTaskStatus接口查询本次任务是否成功。
+     * @param {DeleteRewriteRequest} req
+     * @param {function(string, DeleteRewriteResponse):void} cb
      * @public
      */
-    DescribeTargetHealth(req, cb) {
-        let resp = new DescribeTargetHealthResponse();
-        this.request("DescribeTargetHealth", req, resp, cb);
+    DeleteRewrite(req, cb) {
+        let resp = new DeleteRewriteResponse();
+        this.request("DeleteRewrite", req, resp, cb);
     }
 
     /**
-     * CreateLoadBalancer 接口用来创建负载均衡实例（本接口只支持购买按量计费的负载均衡，包年包月的负载均衡请通过控制台购买）。为了使用负载均衡服务，您必须购买一个或多个负载均衡实例。成功调用该接口后，会返回负载均衡实例的唯一 ID。负载均衡实例的类型分为：公网、内网。详情可参考产品说明中的产品类型。
-注意：(1)指定可用区申请负载均衡、跨zone容灾【如需使用，请提交工单（ https://console.cloud.tencent.com/workorder/category ）申请】；(2)目前只有北京、上海、广州支持IPv6；
+     * 本接口(CreateLoadBalancer)用来创建负载均衡实例（本接口只支持购买按量计费的负载均衡，包年包月的负载均衡请通过控制台购买）。为了使用负载均衡服务，您必须购买一个或多个负载均衡实例。成功调用该接口后，会返回负载均衡实例的唯一 ID。负载均衡实例的类型分为：公网、内网。详情可参考产品说明中的产品类型。
+注意：(1)指定可用区申请负载均衡、跨zone容灾(仅香港支持)【如果您需要体验该功能，请通过 [工单申请](https://console.cloud.tencent.com/workorder/category)】；(2)目前只有北京、上海、广州支持IPv6；(3)一个账号在每个地域的默认购买配额为：公网100个，内网100个。
 本接口为异步接口，接口成功返回后，可使用 DescribeLoadBalancers 接口查询负载均衡实例的状态（如创建中、正常），以确定是否创建成功。
      * @param {CreateLoadBalancerRequest} req
      * @param {function(string, CreateLoadBalancerResponse):void} cb
