@@ -3381,6 +3381,50 @@ class DescribeDestRegionsResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeDomainErrorPageInfoByIds返回参数结构体
+ * @class
+ */
+class DescribeDomainErrorPageInfoByIdsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 定制错误响应配置集
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<DomainErrorPageInfo> || null}
+         */
+        this.ErrorPageSet = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.ErrorPageSet) {
+            this.ErrorPageSet = new Array();
+            for (let z in params.ErrorPageSet) {
+                let obj = new DomainErrorPageInfo();
+                obj.deserialize(params.ErrorPageSet[z]);
+                this.ErrorPageSet.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeProxies请求参数结构体
  * @class
  */
@@ -8799,6 +8843,34 @@ class ModifyProxiesAttributeResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeDomainErrorPageInfoByIds请求参数结构体
+ * @class
+ */
+class DescribeDomainErrorPageInfoByIdsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 定制错误ID列表,最多支持10个
+         * @type {Array.<string> || null}
+         */
+        this.ErrorPageIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ErrorPageIds = 'ErrorPageIds' in params ? params.ErrorPageIds : null;
+
+    }
+}
+
+/**
  * CheckProxyCreate请求参数结构体
  * @class
  */
@@ -10069,6 +10141,7 @@ module.exports = {
     DeleteListenersRequest: DeleteListenersRequest,
     DescribeSecurityRulesRequest: DescribeSecurityRulesRequest,
     DescribeDestRegionsResponse: DescribeDestRegionsResponse,
+    DescribeDomainErrorPageInfoByIdsResponse: DescribeDomainErrorPageInfoByIdsResponse,
     DescribeProxiesRequest: DescribeProxiesRequest,
     BindListenerRealServersResponse: BindListenerRealServersResponse,
     ModifyProxyGroupAttributeResponse: ModifyProxyGroupAttributeResponse,
@@ -10177,6 +10250,7 @@ module.exports = {
     DescribeCertificateDetailResponse: DescribeCertificateDetailResponse,
     DeleteDomainErrorPageInfoResponse: DeleteDomainErrorPageInfoResponse,
     ModifyProxiesAttributeResponse: ModifyProxiesAttributeResponse,
+    DescribeDomainErrorPageInfoByIdsRequest: DescribeDomainErrorPageInfoByIdsRequest,
     CheckProxyCreateRequest: CheckProxyCreateRequest,
     DescribeRegionAndPriceRequest: DescribeRegionAndPriceRequest,
     AddRealServersRequest: AddRealServersRequest,

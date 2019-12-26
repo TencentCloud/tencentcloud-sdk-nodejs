@@ -789,7 +789,7 @@ class RunInstancesRequest extends  AbstractModel {
 
         /**
          * 实例机型。不同实例机型指定了不同的资源规格。
-<br><li>对于付费模式为PREPAID或POSTPAID\_BY\_HOUR的实例创建，具体取值可通过调用接口[DescribeInstanceTypeConfigs](https://cloud.tencent.com/document/api/213/15749)来获得最新的规格表或参见[实例规格](https://cloud.tencent.com/document/product/213/11518)描述。若不指定该参数，则默认机型为S1.SMALL1。<br><li>对于付费模式为CDHPAID的实例创建，该参数以"CDH_"为前缀，根据cpu和内存配置生成，具体形式为：CDH_XCXG，例如对于创建cpu为1核，内存为1G大小的专用宿主机的实例，该参数应该为CDH_1C1G。
+<br><li>对于付费模式为PREPAID或POSTPAID\_BY\_HOUR的实例创建，具体取值可通过调用接口[DescribeInstanceTypeConfigs](https://cloud.tencent.com/document/api/213/15749)来获得最新的规格表或参见[实例规格](https://cloud.tencent.com/document/product/213/11518)描述。若不指定该参数，则默认机型为S1.SMALL1。<br><li>对于付费模式为CDHPAID的实例创建，该参数以"CDH_"为前缀，根据CPU和内存配置生成，具体形式为：CDH_XCXG，例如对于创建CPU为1核，内存为1G大小的专用宿主机的实例，该参数应该为CDH_1C1G。
          * @type {string || null}
          */
         this.InstanceType = null;
@@ -807,7 +807,7 @@ class RunInstancesRequest extends  AbstractModel {
         this.DataDisks = null;
 
         /**
-         * 私有网络相关信息配置。通过该参数可以指定私有网络的ID，子网ID等信息。若不指定该参数，则默认使用基础网络。若在此参数中指定了私有网络ip，表示每个实例的主网卡ip，而且InstanceCount参数必须与私有网络ip的个数一致。
+         * 私有网络相关信息配置。通过该参数可以指定私有网络的ID，子网ID等信息。若不指定该参数，则默认使用基础网络。若在此参数中指定了私有网络IP，表示每个实例的主网卡IP，而且InstanceCount参数必须与私有网络IP的个数一致。
          * @type {VirtualPrivateCloud || null}
          */
         this.VirtualPrivateCloud = null;
@@ -849,7 +849,7 @@ class RunInstancesRequest extends  AbstractModel {
         this.EnhancedService = null;
 
         /**
-         * 用于保证请求幂等性的字符串。该字符串由客户生成，需保证不同请求之间唯一，最大值不超过64个ASCII字符。若不指定该参数，则无法保证请求的幂等性。<br>更多详细信息请参阅：如何保证幂等性。
+         * 用于保证请求幂等性的字符串。该字符串由客户生成，需保证不同请求之间唯一，最大值不超过64个ASCII字符。若不指定该参数，则无法保证请求的幂等性。
          * @type {string || null}
          */
         this.ClientToken = null;
@@ -2232,7 +2232,7 @@ class ModifyImageSharePermissionRequest extends  AbstractModel {
         super();
 
         /**
-         * 镜像ID，形如`img-gvbnzy6f`。镜像Id可以通过如下方式获取：<br><li>通过[DescribeImages](https://cloud.tencent.com/document/api/213/15715)接口返回的`ImageId`获取。<br><li>通过[镜像控制台](https://console.cloud.tencent.com/cvm/image)获取。 <br>镜像ID必须指定为状态为`NORMAL`的镜像。镜像状态请参考[镜像数据表](/document/api/213/9452#image_state)。
+         * 镜像ID，形如`img-gvbnzy6f`。镜像Id可以通过如下方式获取：<br><li>通过[DescribeImages](https://cloud.tencent.com/document/api/213/15715)接口返回的`ImageId`获取。<br><li>通过[镜像控制台](https://console.cloud.tencent.com/cvm/image)获取。 <br>镜像ID必须指定为状态为`NORMAL`的镜像。镜像状态请参考[镜像数据表](https://cloud.tencent.com/document/product/213/15753#Image)。
          * @type {string || null}
          */
         this.ImageId = null;
@@ -3231,7 +3231,7 @@ class InquiryPriceRunInstancesRequest extends  AbstractModel {
         this.ImageId = null;
 
         /**
-         * 实例[计费类型](https://cloud.tencent.com/document/product/213/2180)。<br><li>PREPAID：预付费，即包年包月<br><li>POSTPAID_BY_HOUR：按小时后付费<br>默认值：POSTPAID_BY_HOUR。
+         * 实例[计费类型](https://cloud.tencent.com/document/product/213/2180)。<br><li>PREPAID：预付费，即包年包月<br><li>POSTPAID_BY_HOUR：按小时后付费<br><li>SPOTPAID：竞价付费<br>默认值：POSTPAID_BY_HOUR。
          * @type {string || null}
          */
         this.InstanceChargeType = null;
@@ -3261,7 +3261,7 @@ class InquiryPriceRunInstancesRequest extends  AbstractModel {
         this.DataDisks = null;
 
         /**
-         * 私有网络相关信息配置。通过该参数可以指定私有网络的ID，子网ID等信息。若不指定该参数，则默认使用基础网络。若在此参数中指定了私有网络ip，那么InstanceCount参数只能为1。
+         * 私有网络相关信息配置。通过该参数可以指定私有网络的ID，子网ID等信息。若不指定该参数，则默认使用基础网络。若在此参数中指定了私有网络IP，那么InstanceCount参数只能为1。
          * @type {VirtualPrivateCloud || null}
          */
         this.VirtualPrivateCloud = null;
@@ -3470,7 +3470,14 @@ class Image extends  AbstractModel {
         this.Architecture = null;
 
         /**
-         * 镜像状态
+         * 镜像状态:
+CREATING-创建中
+NORMAL-正常
+CREATEFAILED-创建失败
+USING-使用中
+SYNCING-同步中
+IMPORTING-导入中
+IMPORTFAILED-导入失败
          * @type {string || null}
          */
         this.ImageState = null;
@@ -4473,10 +4480,7 @@ class Instance extends  AbstractModel {
         this.LatestOperation = null;
 
         /**
-         * 实例的最新操作状态。取值范围：<br>
-<li>SUCCESS：表示操作成功<br>
-<li>OPERATING：表示操作执行中<br>
-<li>FAILED：表示操作失败
+         * 实例的最新操作状态。取值范围：<br><li>SUCCESS：表示操作成功<br><li>OPERATING：表示操作执行中<br><li>FAILED：表示操作失败
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
@@ -7639,6 +7643,12 @@ class VirtualPrivateCloud extends  AbstractModel {
          */
         this.PrivateIpAddresses = null;
 
+        /**
+         * 为弹性网卡指定随机生成的 IPv6 地址数量。
+         * @type {number || null}
+         */
+        this.Ipv6AddressCount = null;
+
     }
 
     /**
@@ -7652,6 +7662,7 @@ class VirtualPrivateCloud extends  AbstractModel {
         this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
         this.AsVpcGateway = 'AsVpcGateway' in params ? params.AsVpcGateway : null;
         this.PrivateIpAddresses = 'PrivateIpAddresses' in params ? params.PrivateIpAddresses : null;
+        this.Ipv6AddressCount = 'Ipv6AddressCount' in params ? params.Ipv6AddressCount : null;
 
     }
 }

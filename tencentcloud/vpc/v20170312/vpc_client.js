@@ -135,6 +135,7 @@ const CreateVpnGatewayResponse = models.CreateVpnGatewayResponse;
 const DescribeNatGatewayDestinationIpPortTranslationNatRulesResponse = models.DescribeNatGatewayDestinationIpPortTranslationNatRulesResponse;
 const DescribeVpcIpv6AddressesResponse = models.DescribeVpcIpv6AddressesResponse;
 const RejectAttachCcnInstancesRequest = models.RejectAttachCcnInstancesRequest;
+const ModifyCcnRegionBandwidthLimitsTypeRequest = models.ModifyCcnRegionBandwidthLimitsTypeRequest;
 const ModifyIp6RuleRequest = models.ModifyIp6RuleRequest;
 const ReplaceRouteTableAssociationRequest = models.ReplaceRouteTableAssociationRequest;
 const RenewVpnGatewayRequest = models.RenewVpnGatewayRequest;
@@ -233,6 +234,7 @@ const DownloadCustomerGatewayConfigurationRequest = models.DownloadCustomerGatew
 const DeleteBandwidthPackageRequest = models.DeleteBandwidthPackageRequest;
 const HaVip = models.HaVip;
 const ModifyAddressesBandwidthResponse = models.ModifyAddressesBandwidthResponse;
+const ModifyCcnRegionBandwidthLimitsTypeResponse = models.ModifyCcnRegionBandwidthLimitsTypeResponse;
 const RejectAttachCcnInstancesResponse = models.RejectAttachCcnInstancesResponse;
 const SetCcnRegionBandwidthLimitsResponse = models.SetCcnRegionBandwidthLimitsResponse;
 const DescribeIp6TranslatorsResponse = models.DescribeIp6TranslatorsResponse;
@@ -241,7 +243,7 @@ const DescribeCcnRoutesRequest = models.DescribeCcnRoutesRequest;
 const DownloadCustomerGatewayConfigurationResponse = models.DownloadCustomerGatewayConfigurationResponse;
 const DeleteNetDetectResponse = models.DeleteNetDetectResponse;
 const AllocateAddressesRequest = models.AllocateAddressesRequest;
-const ModifyVpnConnectionAttributeRequest = models.ModifyVpnConnectionAttributeRequest;
+const NatGatewayAddress = models.NatGatewayAddress;
 const CreateRouteTableResponse = models.CreateRouteTableResponse;
 const ModifySecurityGroupAttributeResponse = models.ModifySecurityGroupAttributeResponse;
 const ModifyAddressAttributeResponse = models.ModifyAddressAttributeResponse;
@@ -397,7 +399,7 @@ const Ipv6SubnetCidrBlock = models.Ipv6SubnetCidrBlock;
 const DescribeAddressQuotaResponse = models.DescribeAddressQuotaResponse;
 const CreateCustomerGatewayRequest = models.CreateCustomerGatewayRequest;
 const DeleteSecurityGroupRequest = models.DeleteSecurityGroupRequest;
-const NatGatewayAddress = models.NatGatewayAddress;
+const ModifyVpnConnectionAttributeRequest = models.ModifyVpnConnectionAttributeRequest;
 const CreateIp6TranslatorsRequest = models.CreateIp6TranslatorsRequest;
 const ItemPrice = models.ItemPrice;
 const DescribeDirectConnectGatewayCcnRoutesResponse = models.DescribeDirectConnectGatewayCcnRoutesResponse;
@@ -636,7 +638,7 @@ class VpcClient extends AbstractClient {
     }
 
     /**
-     * 本接口（DescribeNetworkInterfaceLimit）根据CVM实例ID查询弹性网卡配额，返回该CVM实例能绑定的弹性网卡配额，以及每个弹性网卡可以分配的ip配额
+     * 本接口（DescribeNetworkInterfaceLimit）根据CVM实例ID查询弹性网卡配额，返回该CVM实例能绑定的弹性网卡配额，以及每个弹性网卡可以分配的IP配额
      * @param {DescribeNetworkInterfaceLimitRequest} req
      * @param {function(string, DescribeNetworkInterfaceLimitResponse):void} cb
      * @public
@@ -658,14 +660,14 @@ class VpcClient extends AbstractClient {
     }
 
     /**
-     * 本接口（ModifyPrivateIpAddressesAttribute）用于修改弹性网卡内网IP属性。
-     * @param {ModifyPrivateIpAddressesAttributeRequest} req
-     * @param {function(string, ModifyPrivateIpAddressesAttributeResponse):void} cb
+     * 本接口（ModifyCcnRegionBandwidthLimitsType）用于修改后付费云联网实例修改带宽限速策略。
+     * @param {ModifyCcnRegionBandwidthLimitsTypeRequest} req
+     * @param {function(string, ModifyCcnRegionBandwidthLimitsTypeResponse):void} cb
      * @public
      */
-    ModifyPrivateIpAddressesAttribute(req, cb) {
-        let resp = new ModifyPrivateIpAddressesAttributeResponse();
-        this.request("ModifyPrivateIpAddressesAttribute", req, resp, cb);
+    ModifyCcnRegionBandwidthLimitsType(req, cb) {
+        let resp = new ModifyCcnRegionBandwidthLimitsTypeResponse();
+        this.request("ModifyCcnRegionBandwidthLimitsType", req, resp, cb);
     }
 
     /**
@@ -759,6 +761,17 @@ class VpcClient extends AbstractClient {
     AssociateNatGatewayAddress(req, cb) {
         let resp = new AssociateNatGatewayAddressResponse();
         this.request("AssociateNatGatewayAddress", req, resp, cb);
+    }
+
+    /**
+     * 本接口（ModifyPrivateIpAddressesAttribute）用于修改弹性网卡内网IP属性。
+     * @param {ModifyPrivateIpAddressesAttributeRequest} req
+     * @param {function(string, ModifyPrivateIpAddressesAttributeResponse):void} cb
+     * @public
+     */
+    ModifyPrivateIpAddressesAttribute(req, cb) {
+        let resp = new ModifyPrivateIpAddressesAttributeResponse();
+        this.request("ModifyPrivateIpAddressesAttribute", req, resp, cb);
     }
 
     /**
@@ -1181,7 +1194,7 @@ class VpcClient extends AbstractClient {
     /**
      * 本接口(AttachClassicLinkVpc)用于创建私有网络和基础网络设备互通。
 * 私有网络和基础网络设备必须在同一个地域。
-* 私有网络和基础网络的区别详见vpc产品文档-<a href="https://cloud.tencent.com/document/product/215/535#2.-.E7.A7.81.E6.9C.89.E7.BD.91.E7.BB.9C.E4.B8.8E.E5.9F.BA.E7.A1.80.E7.BD.91.E7.BB.9C">私有网络与基础网络</a>。
+* 私有网络和基础网络的区别详见vpc产品文档-<a href="https://cloud.tencent.com/document/product/215/30720">私有网络与基础网络</a>。
      * @param {AttachClassicLinkVpcRequest} req
      * @param {function(string, AttachClassicLinkVpcResponse):void} cb
      * @public
@@ -1550,9 +1563,9 @@ class VpcClient extends AbstractClient {
 
     /**
      * 本接口（AttachNetworkInterface）用于弹性网卡绑定云主机。
-* 一个云主机可以绑定多个弹性网卡，但只能绑定一个主网卡。更多限制信息详见<a href="https://cloud.tencent.com/document/product/215/6513">弹性网卡使用限制</a>。
+* 一个云主机可以绑定多个弹性网卡，但只能绑定一个主网卡。更多限制信息详见<a href="https://cloud.tencent.com/document/product/576/18527">弹性网卡使用限制</a>。
 * 一个弹性网卡只能同时绑定一个云主机。
-* 只有运行中或者已关机状态的云主机才能绑定弹性网卡，查看云主机状态详见<a href="https://cloud.tencent.com/document/api/213/9452#instance_state">腾讯云主机信息</a>。
+* 只有运行中或者已关机状态的云主机才能绑定弹性网卡，查看云主机状态详见<a href="https://cloud.tencent.com/document/api/213/9452#InstanceStatus">腾讯云主机信息</a>。
 * 弹性网卡绑定的云主机必须是私有网络的，而且云主机所在可用区必须和弹性网卡子网的可用区相同。
      * @param {AttachNetworkInterfaceRequest} req
      * @param {function(string, AttachNetworkInterfaceResponse):void} cb
@@ -1754,7 +1767,7 @@ class VpcClient extends AbstractClient {
 
     /**
      * 本接口（CreateSecurityGroup）用于创建新的安全组（SecurityGroup）。
-* 每个账户下每个地域的每个项目的<a href="https://cloud.tencent.com/document/product/213/500#2.-.E5.AE.89.E5.85.A8.E7.BB.84.E7.9A.84.E9.99.90.E5.88.B6">安全组数量限制</a>。
+* 每个账户下每个地域的每个项目的<a href="https://cloud.tencent.com/document/product/213/12453">安全组数量限制</a>。
 * 新建的安全组的入站和出站规则默认都是全部拒绝，在创建后通常您需要再调用CreateSecurityGroupPolicies将安全组的规则设置为需要的规则。
      * @param {CreateSecurityGroupRequest} req
      * @param {function(string, CreateSecurityGroupResponse):void} cb

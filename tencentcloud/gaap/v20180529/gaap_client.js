@@ -88,6 +88,7 @@ const DescribeAccessRegionsResponse = models.DescribeAccessRegionsResponse;
 const DeleteListenersRequest = models.DeleteListenersRequest;
 const DescribeSecurityRulesRequest = models.DescribeSecurityRulesRequest;
 const DescribeDestRegionsResponse = models.DescribeDestRegionsResponse;
+const DescribeDomainErrorPageInfoByIdsResponse = models.DescribeDomainErrorPageInfoByIdsResponse;
 const DescribeProxiesRequest = models.DescribeProxiesRequest;
 const BindListenerRealServersResponse = models.BindListenerRealServersResponse;
 const ModifyProxyGroupAttributeResponse = models.ModifyProxyGroupAttributeResponse;
@@ -196,6 +197,7 @@ const ModifyProxyGroupAttributeRequest = models.ModifyProxyGroupAttributeRequest
 const DescribeCertificateDetailResponse = models.DescribeCertificateDetailResponse;
 const DeleteDomainErrorPageInfoResponse = models.DeleteDomainErrorPageInfoResponse;
 const ModifyProxiesAttributeResponse = models.ModifyProxiesAttributeResponse;
+const DescribeDomainErrorPageInfoByIdsRequest = models.DescribeDomainErrorPageInfoByIdsRequest;
 const CheckProxyCreateRequest = models.CheckProxyCreateRequest;
 const DescribeRegionAndPriceRequest = models.DescribeRegionAndPriceRequest;
 const AddRealServersRequest = models.AddRealServersRequest;
@@ -979,6 +981,17 @@ class GaapClient extends AbstractClient {
     CloseProxies(req, cb) {
         let resp = new CloseProxiesResponse();
         this.request("CloseProxies", req, resp, cb);
+    }
+
+    /**
+     * 根据定制错误ID查询错误响应
+     * @param {DescribeDomainErrorPageInfoByIdsRequest} req
+     * @param {function(string, DescribeDomainErrorPageInfoByIdsResponse):void} cb
+     * @public
+     */
+    DescribeDomainErrorPageInfoByIds(req, cb) {
+        let resp = new DescribeDomainErrorPageInfoByIdsResponse();
+        this.request("DescribeDomainErrorPageInfoByIds", req, resp, cb);
     }
 
     /**
