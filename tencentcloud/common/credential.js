@@ -1,5 +1,5 @@
 /**
- * 认证信息类
+ * Credentials.
  * @class
  */
 class Credential {
@@ -10,13 +10,11 @@ class Credential {
      */
     constructor(secretId, secretKey, token) {
         /**
-         * secretId,可在控制台获取
          * @type {string || null}
          */
         this.secretId = secretId || null;
 
         /**
-         * secretKey,可在控制台获取
          * @type {string || null}
          */
         this.secretKey = secretKey || null;

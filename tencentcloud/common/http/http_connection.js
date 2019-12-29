@@ -18,11 +18,11 @@ class HttpConnection {
         Object.assign(req, opt);
         request(req, function (error, response, body) {
             /**
-            * `.request` 的请求回调
+            * callback of `.request`
             * @callback requestCallback
-            * @param {Error} error 请求错误
-            * @param {Object} response 请求响应
-            * @param {String} body API 请求结果
+            * @param {Error} error Error of the request.
+            * @param {Object} response Response of the request.
+            * @param {String} body Result of the API request.
             */
 
             callback(error, response, body);

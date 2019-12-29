@@ -11,24 +11,24 @@ const TencentCloudSDKHttpException = require("./exception/tencent_cloud_sdk_exce
 class AbstractClient {
 
     /**
-     * 实例化client对象
-     * @param {string} endpoint 接入点域名
-     * @param {string} version 产品版本
-     * @param {Credential} credential 认证信息实例
-     * @param {string} region 产品地域
-     * @param {ClientProfile} profile 可选配置实例
+     * Initialize the client.
+     * @param {string} endpoint The service's domain name, such as [product].tencentcloudapi.com.
+     * @param {string} version The version of the service, such as 2017-03-12.
+     * @param {Credential} credential Credentials.
+     * @param {string} region Region of the service.
+     * @param {ClientProfile} profile Profile settings.
      */
     constructor(endpoint, version, credential, region, profile) {
         this.path = "/";
 
         /**
-         * 认证信息实例
+         * Credentials.
          * @type {Credential || null}
          */
         this.credential = credential || null;
 
         /**
-         * 产品地域
+         * Region of the service.
          * @type {string || null}
          */
         this.region = region || null;
@@ -37,7 +37,7 @@ class AbstractClient {
         this.endpoint = endpoint;
 
         /**
-         * 可选配置实例
+         * Optional profile settings.
          * @type {ClientProfile}
          */
         this.profile = profile || new ClientProfile();
@@ -76,6 +76,7 @@ class AbstractClient {
      * @inner
      */
     doRequest(action, req) {
+        console.log("hello");
         let params = this.mergeData(req);
         params = this.formatRequestData(action, params);
         let optional = {
@@ -134,6 +135,7 @@ class AbstractClient {
         params.Nonce= Math.round(Math.random() * 65535);
         params.Timestamp = Math.round(Date.now() / 1000);
         params.Version = this.apiVersion;
+        params.Language = "en-US";
 
         if (this.credential.secretId) {
             params.SecretId = this.credential.secretId;
