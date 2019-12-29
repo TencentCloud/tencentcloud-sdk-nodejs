@@ -13,7 +13,7 @@ class AbstractModel {
     }
 
     /**
-     * 将object转化为json格式的string
+     * Serialize object into a JSON string.
      * @return {string}
      */
     to_json_string() {
@@ -21,7 +21,7 @@ class AbstractModel {
     }
 
     /**
-     * 将json格式的string转化为object
+     * Deserialize from a JSON string to an object.
      * @param  {string} dataString
      */
     from_json_string(dataString) {
