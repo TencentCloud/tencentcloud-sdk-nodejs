@@ -17,45 +17,10 @@
 const AbstractModel = require("../../common/abstract_model");
 
 /**
- * DissolveRoom请求参数结构体
+ * RemoveUser返回参数结构体
  * @class
  */
-class DissolveRoomRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * TRTC的SDKAppId。
-         * @type {number || null}
-         */
-        this.SdkAppId = null;
-
-        /**
-         * 房间号。
-         * @type {number || null}
-         */
-        this.RoomId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
-        this.RoomId = 'RoomId' in params ? params.RoomId : null;
-
-    }
-}
-
-/**
- * DissolveRoom返回参数结构体
- * @class
- */
-class DissolveRoomResponse extends  AbstractModel {
+class RemoveUserResponse extends  AbstractModel {
     constructor(){
         super();
 
@@ -80,10 +45,45 @@ class DissolveRoomResponse extends  AbstractModel {
 }
 
 /**
- * KickOutUser请求参数结构体
+ * DismissRoom请求参数结构体
  * @class
  */
-class KickOutUserRequest extends  AbstractModel {
+class DismissRoomRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * TRTC的SDKAppId。
+         * @type {number || null}
+         */
+        this.SdkAppId = null;
+
+        /**
+         * 房间号。
+         * @type {number || null}
+         */
+        this.RoomId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
+        this.RoomId = 'RoomId' in params ? params.RoomId : null;
+
+    }
+}
+
+/**
+ * RemoveUser请求参数结构体
+ * @class
+ */
+class RemoveUserRequest extends  AbstractModel {
     constructor(){
         super();
 
@@ -100,7 +100,7 @@ class KickOutUserRequest extends  AbstractModel {
         this.RoomId = null;
 
         /**
-         * 要踢的用户列表，最多10个。
+         * 要移出的用户列表，最多10个。
          * @type {Array.<string> || null}
          */
         this.UserIds = null;
@@ -122,10 +122,10 @@ class KickOutUserRequest extends  AbstractModel {
 }
 
 /**
- * KickOutUser返回参数结构体
+ * DismissRoom返回参数结构体
  * @class
  */
-class KickOutUserResponse extends  AbstractModel {
+class DismissRoomResponse extends  AbstractModel {
     constructor(){
         super();
 
@@ -150,9 +150,9 @@ class KickOutUserResponse extends  AbstractModel {
 }
 
 module.exports = {
-    DissolveRoomRequest: DissolveRoomRequest,
-    DissolveRoomResponse: DissolveRoomResponse,
-    KickOutUserRequest: KickOutUserRequest,
-    KickOutUserResponse: KickOutUserResponse,
+    RemoveUserResponse: RemoveUserResponse,
+    DismissRoomRequest: DismissRoomRequest,
+    RemoveUserRequest: RemoveUserRequest,
+    DismissRoomResponse: DismissRoomResponse,
 
 }

@@ -487,7 +487,7 @@ class CdbClient extends AbstractClient {
     }
 
     /**
-     * 根据置放群组 ID 或置放群组名称查询置放群组列表
+     * 本接口(DescribeDeployGroupList)用于查询用户的置放群组列表，可以指定置放群组 ID 或置放群组名称。
      * @param {DescribeDeployGroupListRequest} req
      * @param {function(string, DescribeDeployGroupListResponse):void} cb
      * @public
@@ -1103,7 +1103,7 @@ class CdbClient extends AbstractClient {
     }
 
     /**
-     * 创建放置实例的置放群组
+     * 本接口(CreateDeployGroup)用于创建放置实例的置放群组
      * @param {CreateDeployGroupRequest} req
      * @param {function(string, CreateDeployGroupResponse):void} cb
      * @public

@@ -17,7 +17,9 @@
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const DeleteRewriteRequest = models.DeleteRewriteRequest;
-const ModifyTargetPortRequest = models.ModifyTargetPortRequest;
+const DescribeTargetGroupListResponse = models.DescribeTargetGroupListResponse;
+const DisassociateTargetGroupsResponse = models.DisassociateTargetGroupsResponse;
+const DescribeTargetGroupListRequest = models.DescribeTargetGroupListRequest;
 const BatchDeregisterTargetsResponse = models.BatchDeregisterTargetsResponse;
 const SetLoadBalancerSecurityGroupsResponse = models.SetLoadBalancerSecurityGroupsResponse;
 const ExtraInfo = models.ExtraInfo;
@@ -29,8 +31,9 @@ const ModifyLoadBalancerAttributesRequest = models.ModifyLoadBalancerAttributesR
 const ModifyRuleRequest = models.ModifyRuleRequest;
 const DescribeClassicalLBByInstanceIdResponse = models.DescribeClassicalLBByInstanceIdResponse;
 const DescribeBlockIPListResponse = models.DescribeBlockIPListResponse;
-const ClassicalHealth = models.ClassicalHealth;
 const DescribeRewriteRequest = models.DescribeRewriteRequest;
+const CreateRuleResponse = models.CreateRuleResponse;
+const AssociateTargetGroupsRequest = models.AssociateTargetGroupsRequest;
 const ClassicalTarget = models.ClassicalTarget;
 const RsWeightRule = models.RsWeightRule;
 const DeregisterTargetsFromClassicalLBRequest = models.DeregisterTargetsFromClassicalLBRequest;
@@ -38,39 +41,47 @@ const SetSecurityGroupForLoadbalancersResponse = models.SetSecurityGroupForLoadb
 const BasicTargetGroupInfo = models.BasicTargetGroupInfo;
 const ModifyTargetWeightResponse = models.ModifyTargetWeightResponse;
 const DescribeTaskStatusRequest = models.DescribeTaskStatusRequest;
+const TargetGroupInstance = models.TargetGroupInstance;
 const DescribeRewriteResponse = models.DescribeRewriteResponse;
-const CreateRuleResponse = models.CreateRuleResponse;
+const DescribeTargetGroupInstancesRequest = models.DescribeTargetGroupInstancesRequest;
+const RegisterTargetGroupInstancesResponse = models.RegisterTargetGroupInstancesResponse;
 const ClassicalTargetInfo = models.ClassicalTargetInfo;
 const DescribeTargetsRequest = models.DescribeTargetsRequest;
 const ZoneInfo = models.ZoneInfo;
 const RegisterTargetsWithClassicalLBResponse = models.RegisterTargetsWithClassicalLBResponse;
+const DescribeTargetGroupsResponse = models.DescribeTargetGroupsResponse;
 const LoadBalancerHealth = models.LoadBalancerHealth;
 const BlockedIP = models.BlockedIP;
 const ModifyRuleResponse = models.ModifyRuleResponse;
 const DescribeClassicalLBTargetsRequest = models.DescribeClassicalLBTargetsRequest;
 const DescribeListenersResponse = models.DescribeListenersResponse;
 const AutoRewriteRequest = models.AutoRewriteRequest;
+const ModifyTargetGroupInstancesWeightResponse = models.ModifyTargetGroupInstancesWeightResponse;
+const DescribeTargetGroupsRequest = models.DescribeTargetGroupsRequest;
 const DescribeTaskStatusResponse = models.DescribeTaskStatusResponse;
 const DescribeTargetHealthRequest = models.DescribeTargetHealthRequest;
-const TargetHealth = models.TargetHealth;
+const Target = models.Target;
 const DescribeBlockIPListRequest = models.DescribeBlockIPListRequest;
 const DescribeClassicalLBHealthStatusResponse = models.DescribeClassicalLBHealthStatusResponse;
 const RuleHealth = models.RuleHealth;
 const Listener = models.Listener;
 const ModifyLoadBalancerAttributesResponse = models.ModifyLoadBalancerAttributesResponse;
 const RegisterTargetsWithClassicalLBRequest = models.RegisterTargetsWithClassicalLBRequest;
+const ModifyDomainAttributesResponse = models.ModifyDomainAttributesResponse;
 const ReplaceCertForLoadBalancersResponse = models.ReplaceCertForLoadBalancersResponse;
 const ModifyListenerRequest = models.ModifyListenerRequest;
-const Target = models.Target;
+const DeregisterTargetGroupInstancesResponse = models.DeregisterTargetGroupInstancesResponse;
 const RegisterTargetsRequest = models.RegisterTargetsRequest;
 const HealthCheck = models.HealthCheck;
+const AssociateTargetGroupsResponse = models.AssociateTargetGroupsResponse;
 const DeleteListenerRequest = models.DeleteListenerRequest;
-const ModifyBlockIPListResponse = models.ModifyBlockIPListResponse;
+const ClassicalHealth = models.ClassicalHealth;
 const ModifyTargetPortResponse = models.ModifyTargetPortResponse;
+const TargetGroupBackend = models.TargetGroupBackend;
 const DescribeClassicalLBByInstanceIdRequest = models.DescribeClassicalLBByInstanceIdRequest;
 const ManualRewriteResponse = models.ManualRewriteResponse;
 const ModifyBlockIPListRequest = models.ModifyBlockIPListRequest;
-const ModifyDomainAttributesResponse = models.ModifyDomainAttributesResponse;
+const ModifyBlockIPListResponse = models.ModifyBlockIPListResponse;
 const ExclusiveCluster = models.ExclusiveCluster;
 const DescribeClassicalLBHealthStatusRequest = models.DescribeClassicalLBHealthStatusRequest;
 const ModifyDomainRequest = models.ModifyDomainRequest;
@@ -79,18 +90,24 @@ const LBChargePrepaid = models.LBChargePrepaid;
 const ClassicalListener = models.ClassicalListener;
 const CertificateInput = models.CertificateInput;
 const CreateListenerResponse = models.CreateListenerResponse;
+const CreateTargetGroupResponse = models.CreateTargetGroupResponse;
 const ClassicalLoadBalancerInfo = models.ClassicalLoadBalancerInfo;
 const RuleOutput = models.RuleOutput;
 const DeleteLoadBalancerRequest = models.DeleteLoadBalancerRequest;
 const CreateRuleRequest = models.CreateRuleRequest;
+const ModifyTargetGroupInstancesPortResponse = models.ModifyTargetGroupInstancesPortResponse;
 const RuleTargets = models.RuleTargets;
 const BatchDeregisterTargetsRequest = models.BatchDeregisterTargetsRequest;
+const DeregisterTargetGroupInstancesRequest = models.DeregisterTargetGroupInstancesRequest;
 const ManualRewriteRequest = models.ManualRewriteRequest;
 const ModifyListenerResponse = models.ModifyListenerResponse;
 const DescribeTargetHealthResponse = models.DescribeTargetHealthResponse;
+const DescribeTargetGroupInstancesResponse = models.DescribeTargetGroupInstancesResponse;
+const CreateTargetGroupRequest = models.CreateTargetGroupRequest;
 const ClusterItem = models.ClusterItem;
 const CreateListenerRequest = models.CreateListenerRequest;
-const RewriteLocationMap = models.RewriteLocationMap;
+const DisassociateTargetGroupsRequest = models.DisassociateTargetGroupsRequest;
+const Filter = models.Filter;
 const ModifyDomainResponse = models.ModifyDomainResponse;
 const RegisterTargetsResponse = models.RegisterTargetsResponse;
 const DeregisterTargetsFromClassicalLBResponse = models.DeregisterTargetsFromClassicalLBResponse;
@@ -99,6 +116,7 @@ const DeleteLoadBalancerResponse = models.DeleteLoadBalancerResponse;
 const AutoRewriteResponse = models.AutoRewriteResponse;
 const DeregisterTargetsResponse = models.DeregisterTargetsResponse;
 const RewriteTarget = models.RewriteTarget;
+const ModifyTargetWeightRequest = models.ModifyTargetWeightRequest;
 const DescribeTargetsResponse = models.DescribeTargetsResponse;
 const BatchModifyTargetWeightRequest = models.BatchModifyTargetWeightRequest;
 const DeleteRewriteResponse = models.DeleteRewriteResponse;
@@ -107,27 +125,39 @@ const TargetRegionInfo = models.TargetRegionInfo;
 const BatchRegisterTargetsResponse = models.BatchRegisterTargetsResponse;
 const ReplaceCertForLoadBalancersRequest = models.ReplaceCertForLoadBalancersRequest;
 const DeleteRuleResponse = models.DeleteRuleResponse;
+const ModifyTargetGroupAttributeRequest = models.ModifyTargetGroupAttributeRequest;
 const ModifyDomainAttributesRequest = models.ModifyDomainAttributesRequest;
 const DeregisterTargetsRequest = models.DeregisterTargetsRequest;
 const CertificateOutput = models.CertificateOutput;
+const ModifyTargetGroupInstancesWeightRequest = models.ModifyTargetGroupInstancesWeightRequest;
+const DeleteTargetGroupsResponse = models.DeleteTargetGroupsResponse;
+const ModifyTargetGroupInstancesPortRequest = models.ModifyTargetGroupInstancesPortRequest;
 const BatchRegisterTargetsRequest = models.BatchRegisterTargetsRequest;
 const ListenerBackend = models.ListenerBackend;
+const RuleInput = models.RuleInput;
 const TagInfo = models.TagInfo;
 const SnatIp = models.SnatIp;
 const DescribeBlockIPTaskResponse = models.DescribeBlockIPTaskResponse;
 const DescribeClassicalLBListenersResponse = models.DescribeClassicalLBListenersResponse;
-const ModifyTargetWeightRequest = models.ModifyTargetWeightRequest;
+const ModifyTargetGroupAttributeResponse = models.ModifyTargetGroupAttributeResponse;
 const DescribeBlockIPTaskRequest = models.DescribeBlockIPTaskRequest;
 const CreateLoadBalancerResponse = models.CreateLoadBalancerResponse;
 const DescribeListenersRequest = models.DescribeListenersRequest;
 const SetLoadBalancerSecurityGroupsRequest = models.SetLoadBalancerSecurityGroupsRequest;
 const DescribeClassicalLBTargetsResponse = models.DescribeClassicalLBTargetsResponse;
-const RuleInput = models.RuleInput;
+const RewriteLocationMap = models.RewriteLocationMap;
+const ModifyTargetPortRequest = models.ModifyTargetPortRequest;
 const DescribeLoadBalancersResponse = models.DescribeLoadBalancersResponse;
 const DeleteListenerResponse = models.DeleteListenerResponse;
 const InternetAccessible = models.InternetAccessible;
+const DeleteTargetGroupsRequest = models.DeleteTargetGroupsRequest;
 const DescribeClassicalLBListenersRequest = models.DescribeClassicalLBListenersRequest;
+const TargetHealth = models.TargetHealth;
+const TargetGroupAssociation = models.TargetGroupAssociation;
 const ListenerHealth = models.ListenerHealth;
+const AssociationItem = models.AssociationItem;
+const TargetGroupInfo = models.TargetGroupInfo;
+const RegisterTargetGroupInstancesRequest = models.RegisterTargetGroupInstancesRequest;
 const LoadBalancer = models.LoadBalancer;
 
 
@@ -212,17 +242,15 @@ class ClbClient extends AbstractClient {
     }
 
     /**
-     * ReplaceCertForLoadBalancers 接口用以替换负载均衡实例所关联的证书，对于各个地域的负载均衡，如果指定的老的证书ID与其有关联关系，则会先解除关联，再建立新证书与该负载均衡的关联关系。
-此接口支持替换服务端证书或客户端证书。
-需要使用的新证书，可以通过传入证书ID来指定，如果不指定证书ID，则必须传入证书内容等相关信息，用以新建证书并绑定至负载均衡。
-注：本接口仅可从广州地域调用。
-     * @param {ReplaceCertForLoadBalancersRequest} req
-     * @param {function(string, ReplaceCertForLoadBalancersResponse):void} cb
+     * 注册服务器到目标组。
+本接口为异步接口，本接口返回成功后需以返回的 RequestID 为入参，调用 DescribeTaskStatus 接口查询本次任务是否成功。
+     * @param {RegisterTargetGroupInstancesRequest} req
+     * @param {function(string, RegisterTargetGroupInstancesResponse):void} cb
      * @public
      */
-    ReplaceCertForLoadBalancers(req, cb) {
-        let resp = new ReplaceCertForLoadBalancersResponse();
-        this.request("ReplaceCertForLoadBalancers", req, resp, cb);
+    RegisterTargetGroupInstances(req, cb) {
+        let resp = new RegisterTargetGroupInstancesResponse();
+        this.request("RegisterTargetGroupInstances", req, resp, cb);
     }
 
     /**
@@ -250,6 +278,18 @@ class ClbClient extends AbstractClient {
     }
 
     /**
+     * 解除规则的目标组关联关系。
+本接口为异步接口，本接口返回成功后需以返回的 RequestID 为入参，调用 DescribeTaskStatus 接口查询本次任务是否成功。
+     * @param {DisassociateTargetGroupsRequest} req
+     * @param {function(string, DisassociateTargetGroupsResponse):void} cb
+     * @public
+     */
+    DisassociateTargetGroups(req, cb) {
+        let resp = new DisassociateTargetGroupsResponse();
+        this.request("DisassociateTargetGroups", req, resp, cb);
+    }
+
+    /**
      * ModifyDomain接口用来修改负载均衡七层监听器下的域名。
 本接口为异步接口，本接口返回成功后需以返回的RequestID为入参，调用DescribeTaskStatus接口查询本次任务是否成功。
      * @param {ModifyDomainRequest} req
@@ -262,14 +302,14 @@ class ClbClient extends AbstractClient {
     }
 
     /**
-     * DescribeClassicalLBTargets用于获取传统型负载均衡绑定的后端服务
-     * @param {DescribeClassicalLBTargetsRequest} req
-     * @param {function(string, DescribeClassicalLBTargetsResponse):void} cb
+     * 删除目标组
+     * @param {DeleteTargetGroupsRequest} req
+     * @param {function(string, DeleteTargetGroupsResponse):void} cb
      * @public
      */
-    DescribeClassicalLBTargets(req, cb) {
-        let resp = new DescribeClassicalLBTargetsResponse();
-        this.request("DescribeClassicalLBTargets", req, resp, cb);
+    DeleteTargetGroups(req, cb) {
+        let resp = new DeleteTargetGroupsResponse();
+        this.request("DeleteTargetGroups", req, resp, cb);
     }
 
     /**
@@ -344,6 +384,44 @@ class ClbClient extends AbstractClient {
     }
 
     /**
+     * ReplaceCertForLoadBalancers 接口用以替换负载均衡实例所关联的证书，对于各个地域的负载均衡，如果指定的老的证书ID与其有关联关系，则会先解除关联，再建立新证书与该负载均衡的关联关系。
+此接口支持替换服务端证书或客户端证书。
+需要使用的新证书，可以通过传入证书ID来指定，如果不指定证书ID，则必须传入证书内容等相关信息，用以新建证书并绑定至负载均衡。
+注：本接口仅可从广州地域调用。
+     * @param {ReplaceCertForLoadBalancersRequest} req
+     * @param {function(string, ReplaceCertForLoadBalancersResponse):void} cb
+     * @public
+     */
+    ReplaceCertForLoadBalancers(req, cb) {
+        let resp = new ReplaceCertForLoadBalancersResponse();
+        this.request("ReplaceCertForLoadBalancers", req, resp, cb);
+    }
+
+    /**
+     * 监听器或转发规则绑定目标组。
+本接口为异步接口，本接口返回成功后需以返回的 RequestID 为入参，调用 DescribeTaskStatus 接口查询本次任务是否成功。
+     * @param {AssociateTargetGroupsRequest} req
+     * @param {function(string, AssociateTargetGroupsResponse):void} cb
+     * @public
+     */
+    AssociateTargetGroups(req, cb) {
+        let resp = new AssociateTargetGroupsResponse();
+        this.request("AssociateTargetGroups", req, resp, cb);
+    }
+
+    /**
+     * 将服务器从目标组中解绑。
+本接口为异步接口，本接口返回成功后需以返回的 RequestID 为入参，调用 DescribeTaskStatus 接口查询本次任务是否成功。
+     * @param {DeregisterTargetGroupInstancesRequest} req
+     * @param {function(string, DeregisterTargetGroupInstancesResponse):void} cb
+     * @public
+     */
+    DeregisterTargetGroupInstances(req, cb) {
+        let resp = new DeregisterTargetGroupInstancesResponse();
+        this.request("DeregisterTargetGroupInstances", req, resp, cb);
+    }
+
+    /**
      * 查询负载均衡实例列表
 
      * @param {DescribeLoadBalancersRequest} req
@@ -378,6 +456,17 @@ class ClbClient extends AbstractClient {
     }
 
     /**
+     * DescribeClassicalLBTargets用于获取传统型负载均衡绑定的后端服务
+     * @param {DescribeClassicalLBTargetsRequest} req
+     * @param {function(string, DescribeClassicalLBTargetsResponse):void} cb
+     * @public
+     */
+    DescribeClassicalLBTargets(req, cb) {
+        let resp = new DescribeClassicalLBTargetsResponse();
+        this.request("DescribeClassicalLBTargets", req, resp, cb);
+    }
+
+    /**
      * 在一个负载均衡实例下创建监听器。
 本接口为异步接口，接口返回成功后，需以返回的 RequestId 为入参，调用 DescribeTaskStatus 接口查询本次任务是否成功。
      * @param {CreateListenerRequest} req
@@ -398,6 +487,18 @@ class ClbClient extends AbstractClient {
     BatchRegisterTargets(req, cb) {
         let resp = new BatchRegisterTargetsResponse();
         this.request("BatchRegisterTargets", req, resp, cb);
+    }
+
+    /**
+     * ModifyTargetPort接口用于修改监听器绑定的后端服务的端口。
+本接口为异步接口，本接口返回成功后需以返回的RequestID为入参，调用DescribeTaskStatus接口查询本次任务是否成功。
+     * @param {ModifyTargetPortRequest} req
+     * @param {function(string, ModifyTargetPortResponse):void} cb
+     * @public
+     */
+    ModifyTargetPort(req, cb) {
+        let resp = new ModifyTargetPortResponse();
+        this.request("ModifyTargetPort", req, resp, cb);
     }
 
     /**
@@ -436,6 +537,28 @@ class ClbClient extends AbstractClient {
     }
 
     /**
+     * DescribeTargetHealth 接口用来获取负载均衡后端服务的健康检查结果，不支持传统型负载均衡。
+     * @param {DescribeTargetHealthRequest} req
+     * @param {function(string, DescribeTargetHealthResponse):void} cb
+     * @public
+     */
+    DescribeTargetHealth(req, cb) {
+        let resp = new DescribeTargetHealthResponse();
+        this.request("DescribeTargetHealth", req, resp, cb);
+    }
+
+    /**
+     * 获取目标组列表
+     * @param {DescribeTargetGroupListRequest} req
+     * @param {function(string, DescribeTargetGroupListResponse):void} cb
+     * @public
+     */
+    DescribeTargetGroupList(req, cb) {
+        let resp = new DescribeTargetGroupListResponse();
+        this.request("DescribeTargetGroupList", req, resp, cb);
+    }
+
+    /**
      * 修改负载均衡的IP（client IP）封禁黑名单列表，一个转发规则最多支持封禁 2000000 个IP，及黑名单容量为 2000000。
 （接口灰度中，如需使用请提工单）
      * @param {ModifyBlockIPListRequest} req
@@ -448,14 +571,14 @@ class ClbClient extends AbstractClient {
     }
 
     /**
-     * DescribeTargetHealth 接口用来获取负载均衡后端服务的健康检查结果，不支持传统型负载均衡。
-     * @param {DescribeTargetHealthRequest} req
-     * @param {function(string, DescribeTargetHealthResponse):void} cb
+     * 创建目标组。（目标组功能正在灰度中，需要开通白名单支持）
+     * @param {CreateTargetGroupRequest} req
+     * @param {function(string, CreateTargetGroupResponse):void} cb
      * @public
      */
-    DescribeTargetHealth(req, cb) {
-        let resp = new DescribeTargetHealthResponse();
-        this.request("DescribeTargetHealth", req, resp, cb);
+    CreateTargetGroup(req, cb) {
+        let resp = new CreateTargetGroupResponse();
+        this.request("CreateTargetGroup", req, resp, cb);
     }
 
     /**
@@ -493,15 +616,25 @@ class ClbClient extends AbstractClient {
     }
 
     /**
-     * ModifyTargetPort接口用于修改监听器绑定的后端服务的端口。
-本接口为异步接口，本接口返回成功后需以返回的RequestID为入参，调用DescribeTaskStatus接口查询本次任务是否成功。
-     * @param {ModifyTargetPortRequest} req
-     * @param {function(string, ModifyTargetPortResponse):void} cb
+     * 查询目标组信息
+     * @param {DescribeTargetGroupsRequest} req
+     * @param {function(string, DescribeTargetGroupsResponse):void} cb
      * @public
      */
-    ModifyTargetPort(req, cb) {
-        let resp = new ModifyTargetPortResponse();
-        this.request("ModifyTargetPort", req, resp, cb);
+    DescribeTargetGroups(req, cb) {
+        let resp = new DescribeTargetGroupsResponse();
+        this.request("DescribeTargetGroups", req, resp, cb);
+    }
+
+    /**
+     * 修改目标组的名称或者默认端口属性
+     * @param {ModifyTargetGroupAttributeRequest} req
+     * @param {function(string, ModifyTargetGroupAttributeResponse):void} cb
+     * @public
+     */
+    ModifyTargetGroupAttribute(req, cb) {
+        let resp = new ModifyTargetGroupAttributeResponse();
+        this.request("ModifyTargetGroupAttribute", req, resp, cb);
     }
 
     /**
@@ -528,6 +661,18 @@ class ClbClient extends AbstractClient {
     }
 
     /**
+     * 批量修改目标组的服务器权重。
+本接口为异步接口，本接口返回成功后需以返回的 RequestID 为入参，调用 DescribeTaskStatus 接口查询本次任务是否成功。
+     * @param {ModifyTargetGroupInstancesWeightRequest} req
+     * @param {function(string, ModifyTargetGroupInstancesWeightResponse):void} cb
+     * @public
+     */
+    ModifyTargetGroupInstancesWeight(req, cb) {
+        let resp = new ModifyTargetGroupInstancesWeightResponse();
+        this.request("ModifyTargetGroupInstancesWeight", req, resp, cb);
+    }
+
+    /**
      * 根据 ModifyBlockIPList 接口返回的异步任务的ID，查询封禁IP（黑名单）异步任务的执行状态。（接口灰度中，如需使用请提工单）
      * @param {DescribeBlockIPTaskRequest} req
      * @param {function(string, DescribeBlockIPTaskResponse):void} cb
@@ -547,6 +692,29 @@ class ClbClient extends AbstractClient {
     DescribeClassicalLBByInstanceId(req, cb) {
         let resp = new DescribeClassicalLBByInstanceIdResponse();
         this.request("DescribeClassicalLBByInstanceId", req, resp, cb);
+    }
+
+    /**
+     * 获取目标组绑定的服务器信息
+     * @param {DescribeTargetGroupInstancesRequest} req
+     * @param {function(string, DescribeTargetGroupInstancesResponse):void} cb
+     * @public
+     */
+    DescribeTargetGroupInstances(req, cb) {
+        let resp = new DescribeTargetGroupInstancesResponse();
+        this.request("DescribeTargetGroupInstances", req, resp, cb);
+    }
+
+    /**
+     * 批量修改目标组服务器端口。
+本接口为异步接口，本接口返回成功后需以返回的 RequestID 为入参，调用 DescribeTaskStatus 接口查询本次任务是否成功。
+     * @param {ModifyTargetGroupInstancesPortRequest} req
+     * @param {function(string, ModifyTargetGroupInstancesPortResponse):void} cb
+     * @public
+     */
+    ModifyTargetGroupInstancesPort(req, cb) {
+        let resp = new ModifyTargetGroupInstancesPortResponse();
+        this.request("ModifyTargetGroupInstancesPort", req, resp, cb);
     }
 
     /**

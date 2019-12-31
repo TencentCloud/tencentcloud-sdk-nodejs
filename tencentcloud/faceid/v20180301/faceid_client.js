@@ -16,6 +16,7 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
+const MobileNetworkTimeVerificationResponse = models.MobileNetworkTimeVerificationResponse;
 const LivenessRequest = models.LivenessRequest;
 const LivenessCompareResponse = models.LivenessCompareResponse;
 const GetLiveCodeRequest = models.GetLiveCodeRequest;
@@ -26,9 +27,12 @@ const DetectAuthResponse = models.DetectAuthResponse;
 const PhoneVerificationResponse = models.PhoneVerificationResponse;
 const IdCardOCRVerificationRequest = models.IdCardOCRVerificationRequest;
 const BankCard4EVerificationResponse = models.BankCard4EVerificationResponse;
+const MobileStatusRequest = models.MobileStatusRequest;
 const BankCard2EVerificationRequest = models.BankCard2EVerificationRequest;
 const LivenessRecognitionRequest = models.LivenessRecognitionRequest;
+const MobileNetworkTimeVerificationRequest = models.MobileNetworkTimeVerificationRequest;
 const LivenessRecognitionResponse = models.LivenessRecognitionResponse;
+const MobileStatusResponse = models.MobileStatusResponse;
 const IdCardOCRVerificationResponse = models.IdCardOCRVerificationResponse;
 const DetectAuthRequest = models.DetectAuthRequest;
 const MinorsVerificationResponse = models.MinorsVerificationResponse;
@@ -92,6 +96,17 @@ class FaceidClient extends AbstractClient {
     }
 
     /**
+     * 本接口用于查询手机号在网时长，输入手机号进行查询。
+     * @param {MobileNetworkTimeVerificationRequest} req
+     * @param {function(string, MobileNetworkTimeVerificationResponse):void} cb
+     * @public
+     */
+    MobileNetworkTimeVerification(req, cb) {
+        let resp = new MobileNetworkTimeVerificationResponse();
+        this.request("MobileNetworkTimeVerification", req, resp, cb);
+    }
+
+    /**
      * 使用动作活体检测模式前，需调用本接口获取动作顺序。
      * @param {GetActionSequenceRequest} req
      * @param {function(string, GetActionSequenceResponse):void} cb
@@ -144,6 +159,17 @@ class FaceidClient extends AbstractClient {
     LivenessRecognition(req, cb) {
         let resp = new LivenessRecognitionResponse();
         this.request("LivenessRecognition", req, resp, cb);
+    }
+
+    /**
+     * 本接口用于验证手机号的状态，您可以输入手机号进行查询。
+     * @param {MobileStatusRequest} req
+     * @param {function(string, MobileStatusResponse):void} cb
+     * @public
+     */
+    MobileStatus(req, cb) {
+        let resp = new MobileStatusResponse();
+        this.request("MobileStatus", req, resp, cb);
     }
 
     /**

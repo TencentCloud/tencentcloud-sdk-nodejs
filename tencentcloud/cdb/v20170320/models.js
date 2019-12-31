@@ -1247,7 +1247,7 @@ class CreateDeployGroupResponse extends  AbstractModel {
         super();
 
         /**
-         * 置放群组ID
+         * 置放群组ID。
          * @type {string || null}
          */
         this.DeployGroupId = null;
@@ -3806,6 +3806,12 @@ class DescribeDBInstancesRequest extends  AbstractModel {
          */
         this.WithMaster = null;
 
+        /**
+         * 置放群组ID列表。
+         * @type {Array.<string> || null}
+         */
+        this.DeployGroupIds = null;
+
     }
 
     /**
@@ -3840,6 +3846,7 @@ class DescribeDBInstancesRequest extends  AbstractModel {
         this.WithDr = 'WithDr' in params ? params.WithDr : null;
         this.WithRo = 'WithRo' in params ? params.WithRo : null;
         this.WithMaster = 'WithMaster' in params ? params.WithMaster : null;
+        this.DeployGroupIds = 'DeployGroupIds' in params ? params.DeployGroupIds : null;
 
     }
 }
@@ -6981,17 +6988,17 @@ class DescribeDeployGroupListResponse extends  AbstractModel {
         super();
 
         /**
+         * 符合条件的记录总数。
+         * @type {number || null}
+         */
+        this.Total = null;
+
+        /**
          * 返回列表。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<DeployGroupInfo> || null}
          */
         this.Items = null;
-
-        /**
-         * 符合条件的记录总数
-         * @type {number || null}
-         */
-        this.Total = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -7008,6 +7015,7 @@ class DescribeDeployGroupListResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.Total = 'Total' in params ? params.Total : null;
 
         if (params.Items) {
             this.Items = new Array();
@@ -7017,7 +7025,6 @@ class DescribeDeployGroupListResponse extends  AbstractModel {
                 this.Items.push(obj);
             }
         }
-        this.Total = 'Total' in params ? params.Total : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -7362,6 +7369,13 @@ class InstanceInfo extends  AbstractModel {
          */
         this.DeviceClass = null;
 
+        /**
+         * 置放群组ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.DeployGroupId = null;
+
     }
 
     /**
@@ -7441,6 +7455,7 @@ class InstanceInfo extends  AbstractModel {
         this.Qps = 'Qps' in params ? params.Qps : null;
         this.ZoneName = 'ZoneName' in params ? params.ZoneName : null;
         this.DeviceClass = 'DeviceClass' in params ? params.DeviceClass : null;
+        this.DeployGroupId = 'DeployGroupId' in params ? params.DeployGroupId : null;
 
     }
 }
@@ -9809,6 +9824,18 @@ class CreateDeployGroupRequest extends  AbstractModel {
          */
         this.Description = null;
 
+        /**
+         * 置放群组的亲和性策略。
+         * @type {Array.<number> || null}
+         */
+        this.Affinity = null;
+
+        /**
+         * 置放群组亲和性策略1的实例限制个数。
+         * @type {number || null}
+         */
+        this.LimitNum = null;
+
     }
 
     /**
@@ -9820,6 +9847,8 @@ class CreateDeployGroupRequest extends  AbstractModel {
         }
         this.DeployGroupName = 'DeployGroupName' in params ? params.DeployGroupName : null;
         this.Description = 'Description' in params ? params.Description : null;
+        this.Affinity = 'Affinity' in params ? params.Affinity : null;
+        this.LimitNum = 'LimitNum' in params ? params.LimitNum : null;
 
     }
 }
@@ -10656,16 +10685,30 @@ class DeployGroupInfo extends  AbstractModel {
         this.CreateTime = null;
 
         /**
-         * 置放群组描述。
-         * @type {string || null}
-         */
-        this.Description = null;
-
-        /**
          * 置放群组实例配额。
          * @type {number || null}
          */
         this.Quota = null;
+
+        /**
+         * 置放群组亲和性策略。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Affinity = null;
+
+        /**
+         * 置放群组亲和性策略1的限制实例个数。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.LimitNum = null;
+
+        /**
+         * 置放群组详细信息。
+         * @type {string || null}
+         */
+        this.Description = null;
 
     }
 
@@ -10679,8 +10722,10 @@ class DeployGroupInfo extends  AbstractModel {
         this.DeployGroupId = 'DeployGroupId' in params ? params.DeployGroupId : null;
         this.DeployGroupName = 'DeployGroupName' in params ? params.DeployGroupName : null;
         this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
-        this.Description = 'Description' in params ? params.Description : null;
         this.Quota = 'Quota' in params ? params.Quota : null;
+        this.Affinity = 'Affinity' in params ? params.Affinity : null;
+        this.LimitNum = 'LimitNum' in params ? params.LimitNum : null;
+        this.Description = 'Description' in params ? params.Description : null;
 
     }
 }

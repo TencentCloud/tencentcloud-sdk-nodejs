@@ -363,6 +363,41 @@ class DescribeRenewalPriceResponse extends  AbstractModel {
 }
 
 /**
+ * CreateTmpInstances请求参数结构体
+ * @class
+ */
+class CreateTmpInstancesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 回档实例的ID列表，形如：tdsql-ow728lmc。
+         * @type {Array.<string> || null}
+         */
+        this.InstanceIds = null;
+
+        /**
+         * 回档时间点
+         * @type {string || null}
+         */
+        this.RollbackTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
+        this.RollbackTime = 'RollbackTime' in params ? params.RollbackTime : null;
+
+    }
+}
+
+/**
  * RestartDBInstances返回参数结构体
  * @class
  */
@@ -2735,6 +2770,41 @@ class ModifyBackupTimeRequest extends  AbstractModel {
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
         this.StartBackupTime = 'StartBackupTime' in params ? params.StartBackupTime : null;
         this.EndBackupTime = 'EndBackupTime' in params ? params.EndBackupTime : null;
+
+    }
+}
+
+/**
+ * CreateTmpInstances返回参数结构体
+ * @class
+ */
+class CreateTmpInstancesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 异步任务流程ID。
+         * @type {number || null}
+         */
+        this.FlowId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FlowId = 'FlowId' in params ? params.FlowId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -5361,6 +5431,7 @@ module.exports = {
     DescribeDBParametersRequest: DescribeDBParametersRequest,
     DescribeAccountsRequest: DescribeAccountsRequest,
     DescribeRenewalPriceResponse: DescribeRenewalPriceResponse,
+    CreateTmpInstancesRequest: CreateTmpInstancesRequest,
     RestartDBInstancesResponse: RestartDBInstancesResponse,
     DescribeUpgradePriceRequest: DescribeUpgradePriceRequest,
     DescribeDBResourceUsageDetailsResponse: DescribeDBResourceUsageDetailsResponse,
@@ -5408,6 +5479,7 @@ module.exports = {
     OpenDBExtranetAccessResponse: OpenDBExtranetAccessResponse,
     ModifyDBInstanceNameRequest: ModifyDBInstanceNameRequest,
     ModifyBackupTimeRequest: ModifyBackupTimeRequest,
+    CreateTmpInstancesResponse: CreateTmpInstancesResponse,
     UpgradeDBInstanceRequest: UpgradeDBInstanceRequest,
     DescribeUpgradePriceResponse: DescribeUpgradePriceResponse,
     DBInstance: DBInstance,

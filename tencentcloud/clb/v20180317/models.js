@@ -74,54 +74,30 @@ class DeleteRewriteRequest extends  AbstractModel {
 }
 
 /**
- * ModifyTargetPort请求参数结构体
+ * DescribeTargetGroupList返回参数结构体
  * @class
  */
-class ModifyTargetPortRequest extends  AbstractModel {
+class DescribeTargetGroupListResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 负载均衡实例 ID
-         * @type {string || null}
-         */
-        this.LoadBalancerId = null;
-
-        /**
-         * 负载均衡监听器 ID
-         * @type {string || null}
-         */
-        this.ListenerId = null;
-
-        /**
-         * 要修改端口的后端服务列表
-         * @type {Array.<Target> || null}
-         */
-        this.Targets = null;
-
-        /**
-         * 后端服务绑定到监听器或转发规则的新端口
+         * 显示的结果数量
          * @type {number || null}
          */
-        this.NewPort = null;
+        this.TotalCount = null;
 
         /**
-         * 转发规则的ID，当后端服务绑定到七层转发规则时，必须提供此参数或Domain+Url两者之一
-         * @type {string || null}
+         * 显示的目标组信息集合
+         * @type {Array.<TargetGroupInfo> || null}
          */
-        this.LocationId = null;
+        this.TargetGroupSet = null;
 
         /**
-         * 目标规则的域名，提供LocationId参数时本参数不生效
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.Domain = null;
-
-        /**
-         * 目标规则的URL，提供LocationId参数时本参数不生效
-         * @type {string || null}
-         */
-        this.Url = null;
+        this.RequestId = null;
 
     }
 
@@ -132,21 +108,102 @@ class ModifyTargetPortRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.LoadBalancerId = 'LoadBalancerId' in params ? params.LoadBalancerId : null;
-        this.ListenerId = 'ListenerId' in params ? params.ListenerId : null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
 
-        if (params.Targets) {
-            this.Targets = new Array();
-            for (let z in params.Targets) {
-                let obj = new Target();
-                obj.deserialize(params.Targets[z]);
-                this.Targets.push(obj);
+        if (params.TargetGroupSet) {
+            this.TargetGroupSet = new Array();
+            for (let z in params.TargetGroupSet) {
+                let obj = new TargetGroupInfo();
+                obj.deserialize(params.TargetGroupSet[z]);
+                this.TargetGroupSet.push(obj);
             }
         }
-        this.NewPort = 'NewPort' in params ? params.NewPort : null;
-        this.LocationId = 'LocationId' in params ? params.LocationId : null;
-        this.Domain = 'Domain' in params ? params.Domain : null;
-        this.Url = 'Url' in params ? params.Url : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DisassociateTargetGroups返回参数结构体
+ * @class
+ */
+class DisassociateTargetGroupsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeTargetGroupList请求参数结构体
+ * @class
+ */
+class DescribeTargetGroupListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 目标组ID数组
+         * @type {Array.<string> || null}
+         */
+        this.TargetGroupIds = null;
+
+        /**
+         * 过滤条件数组，支持TargetGroupVpcId和TargetGroupName。与TargetGroupIds互斥，优先使用目标组ID，
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * 显示的偏移起始量
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 显示条数限制，默认为20
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TargetGroupIds = 'TargetGroupIds' in params ? params.TargetGroupIds : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
 
     }
 }
@@ -742,62 +799,6 @@ class DescribeBlockIPListResponse extends  AbstractModel {
 }
 
 /**
- * 传统型负载均衡后端服务的健康状态
- * @class
- */
-class ClassicalHealth extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 后端服务的内网 IP
-         * @type {string || null}
-         */
-        this.IP = null;
-
-        /**
-         * 后端服务的端口
-         * @type {number || null}
-         */
-        this.Port = null;
-
-        /**
-         * 负载均衡的监听端口
-         * @type {number || null}
-         */
-        this.ListenerPort = null;
-
-        /**
-         * 转发协议
-         * @type {string || null}
-         */
-        this.Protocol = null;
-
-        /**
-         * 健康检查结果，1 表示健康，0 表示不健康
-         * @type {number || null}
-         */
-        this.HealthStatus = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.IP = 'IP' in params ? params.IP : null;
-        this.Port = 'Port' in params ? params.Port : null;
-        this.ListenerPort = 'ListenerPort' in params ? params.ListenerPort : null;
-        this.Protocol = 'Protocol' in params ? params.Protocol : null;
-        this.HealthStatus = 'HealthStatus' in params ? params.HealthStatus : null;
-
-    }
-}
-
-/**
  * DescribeRewrite请求参数结构体
  * @class
  */
@@ -835,6 +836,77 @@ class DescribeRewriteRequest extends  AbstractModel {
         this.LoadBalancerId = 'LoadBalancerId' in params ? params.LoadBalancerId : null;
         this.SourceListenerIds = 'SourceListenerIds' in params ? params.SourceListenerIds : null;
         this.SourceLocationIds = 'SourceLocationIds' in params ? params.SourceLocationIds : null;
+
+    }
+}
+
+/**
+ * CreateRule返回参数结构体
+ * @class
+ */
+class CreateRuleResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 创建的转发规则的唯一标识数组
+         * @type {Array.<string> || null}
+         */
+        this.LocationIds = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LocationIds = 'LocationIds' in params ? params.LocationIds : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * AssociateTargetGroups请求参数结构体
+ * @class
+ */
+class AssociateTargetGroupsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 绑定的关系数组
+         * @type {Array.<TargetGroupAssociation> || null}
+         */
+        this.Associations = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Associations) {
+            this.Associations = new Array();
+            for (let z in params.Associations) {
+                let obj = new TargetGroupAssociation();
+                obj.deserialize(params.Associations[z]);
+                this.Associations.push(obj);
+            }
+        }
 
     }
 }
@@ -1140,6 +1212,55 @@ class DescribeTaskStatusRequest extends  AbstractModel {
 }
 
 /**
+ * 目标组实例
+ * @class
+ */
+class TargetGroupInstance extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 目标组实例的内网IP
+         * @type {string || null}
+         */
+        this.BindIP = null;
+
+        /**
+         * 目标组实例的端口
+         * @type {number || null}
+         */
+        this.Port = null;
+
+        /**
+         * 目标组实例的权重
+         * @type {number || null}
+         */
+        this.Weight = null;
+
+        /**
+         * 目标组实例的新端口
+         * @type {number || null}
+         */
+        this.NewPort = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.BindIP = 'BindIP' in params ? params.BindIP : null;
+        this.Port = 'Port' in params ? params.Port : null;
+        this.Weight = 'Weight' in params ? params.Weight : null;
+        this.NewPort = 'NewPort' in params ? params.NewPort : null;
+
+    }
+}
+
+/**
  * DescribeRewrite返回参数结构体
  * @class
  */
@@ -1183,18 +1304,62 @@ class DescribeRewriteResponse extends  AbstractModel {
 }
 
 /**
- * CreateRule返回参数结构体
+ * DescribeTargetGroupInstances请求参数结构体
  * @class
  */
-class CreateRuleResponse extends  AbstractModel {
+class DescribeTargetGroupInstancesRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 创建的转发规则的唯一标识数组
-         * @type {Array.<string> || null}
+         * 过滤条件，当前仅支持TargetGroupId，BindIP，InstanceId过滤
+         * @type {Array.<Filter> || null}
          */
-        this.LocationIds = null;
+        this.Filters = null;
+
+        /**
+         * 显示数量限制，默认20
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 显示的偏移量，默认为0
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+
+    }
+}
+
+/**
+ * RegisterTargetGroupInstances返回参数结构体
+ * @class
+ */
+class RegisterTargetGroupInstancesResponse extends  AbstractModel {
+    constructor(){
+        super();
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1211,7 +1376,6 @@ class CreateRuleResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.LocationIds = 'LocationIds' in params ? params.LocationIds : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -1368,6 +1532,56 @@ class RegisterTargetsWithClassicalLBResponse extends  AbstractModel {
     deserialize(params) {
         if (!params) {
             return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeTargetGroups返回参数结构体
+ * @class
+ */
+class DescribeTargetGroupsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 显示的结果数量
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 显示的目标组信息集合
+         * @type {Array.<TargetGroupInfo> || null}
+         */
+        this.TargetGroupSet = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.TargetGroupSet) {
+            this.TargetGroupSet = new Array();
+            for (let z in params.TargetGroupSet) {
+                let obj = new TargetGroupInfo();
+                obj.deserialize(params.TargetGroupSet[z]);
+                this.TargetGroupSet.push(obj);
+            }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -1610,6 +1824,91 @@ class AutoRewriteRequest extends  AbstractModel {
 }
 
 /**
+ * ModifyTargetGroupInstancesWeight返回参数结构体
+ * @class
+ */
+class ModifyTargetGroupInstancesWeightResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeTargetGroups请求参数结构体
+ * @class
+ */
+class DescribeTargetGroupsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 目标组ID，与Filters互斥
+         * @type {Array.<string> || null}
+         */
+        this.TargetGroupIds = null;
+
+        /**
+         * 显示条数限制，默认为20
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 显示的偏移起始量
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 过滤条件数组，与TargetGroupIds互斥，支持TargetGroupVpcId和TargetGroupName
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TargetGroupIds = 'TargetGroupIds' in params ? params.TargetGroupIds : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * DescribeTaskStatus返回参数结构体
  * @class
  */
@@ -1673,42 +1972,47 @@ class DescribeTargetHealthRequest extends  AbstractModel {
 }
 
 /**
- * 描述一个Target的健康信息
+ * 转发目标，即绑定在负载均衡上的后端服务
  * @class
  */
-class TargetHealth extends  AbstractModel {
+class Target extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Target的内网IP
-         * @type {string || null}
-         */
-        this.IP = null;
-
-        /**
-         * Target绑定的端口
+         * 后端服务的监听端口
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.Port = null;
 
         /**
-         * 当前健康状态，true：健康，false：不健康（包括尚未开始探测、探测中、状态异常等几种状态）。只有处于健康状态（且权重大于0），负载均衡才会向其转发流量。
-         * @type {boolean || null}
-         */
-        this.HealthStatus = null;
-
-        /**
-         * Target的实例ID，如 ins-12345678
+         * 后端服务的类型，可取：CVM（云服务器）、ENI（弹性网卡）；作为入参时，目前本参数暂不生效。
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
-        this.TargetId = null;
+        this.Type = null;
 
         /**
-         * 当前健康状态的详细信息。如：Alive、Dead、Unknown。Alive状态为健康，Dead状态为异常，Unknown状态包括尚未开始探测、探测中、状态未知。
+         * 绑定CVM时需要传入此参数，代表CVM的唯一 ID，可通过 DescribeInstances 接口返回字段中的 InstanceId 字段获取。
+注意：参数 InstanceId 和 EniIp 只能传入一个且必须传入一个。
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
-        this.HealthStatusDetial = null;
+        this.InstanceId = null;
+
+        /**
+         * 后端服务的转发权重，取值范围：[0, 100]，默认为 10。
+         * @type {number || null}
+         */
+        this.Weight = null;
+
+        /**
+         * 绑定弹性网卡时需要传入此参数，代表弹性网卡的IP，弹性网卡必须先绑定至CVM，然后才能绑定到负载均衡实例。注意：参数 InstanceId 和 EniIp 只能传入一个且必须传入一个。注意：绑定弹性网卡需要先提交工单开白名单使用。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.EniIp = null;
 
     }
 
@@ -1719,11 +2023,11 @@ class TargetHealth extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.IP = 'IP' in params ? params.IP : null;
         this.Port = 'Port' in params ? params.Port : null;
-        this.HealthStatus = 'HealthStatus' in params ? params.HealthStatus : null;
-        this.TargetId = 'TargetId' in params ? params.TargetId : null;
-        this.HealthStatusDetial = 'HealthStatusDetial' in params ? params.HealthStatusDetial : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Weight = 'Weight' in params ? params.Weight : null;
+        this.EniIp = 'EniIp' in params ? params.EniIp : null;
 
     }
 }
@@ -2107,6 +2411,34 @@ class RegisterTargetsWithClassicalLBRequest extends  AbstractModel {
 }
 
 /**
+ * ModifyDomainAttributes返回参数结构体
+ * @class
+ */
+class ModifyDomainAttributesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * ReplaceCertForLoadBalancers返回参数结构体
  * @class
  */
@@ -2223,47 +2555,18 @@ class ModifyListenerRequest extends  AbstractModel {
 }
 
 /**
- * 转发目标，即绑定在负载均衡上的后端服务
+ * DeregisterTargetGroupInstances返回参数结构体
  * @class
  */
-class Target extends  AbstractModel {
+class DeregisterTargetGroupInstancesResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 后端服务的监听端口
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.Port = null;
-
-        /**
-         * 后端服务的类型，可取：CVM（云服务器）、ENI（弹性网卡）；作为入参时，目前本参数暂不生效。
-注意：此字段可能返回 null，表示取不到有效值。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.Type = null;
-
-        /**
-         * 绑定CVM时需要传入此参数，代表CVM的唯一 ID，可通过 DescribeInstances 接口返回字段中的 InstanceId 字段获取。
-注意：参数 InstanceId 和 EniIp 只能传入一个且必须传入一个。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.InstanceId = null;
-
-        /**
-         * 后端服务的转发权重，取值范围：[0, 100]，默认为 10。
-         * @type {number || null}
-         */
-        this.Weight = null;
-
-        /**
-         * 绑定弹性网卡时需要传入此参数，代表弹性网卡的IP，弹性网卡必须先绑定至CVM，然后才能绑定到负载均衡实例。注意：参数 InstanceId 和 EniIp 只能传入一个且必须传入一个。注意：绑定弹性网卡需要先提交工单开白名单使用。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.EniIp = null;
+        this.RequestId = null;
 
     }
 
@@ -2274,11 +2577,7 @@ class Target extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Port = 'Port' in params ? params.Port : null;
-        this.Type = 'Type' in params ? params.Type : null;
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.Weight = 'Weight' in params ? params.Weight : null;
-        this.EniIp = 'EniIp' in params ? params.EniIp : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2497,6 +2796,34 @@ class HealthCheck extends  AbstractModel {
 }
 
 /**
+ * AssociateTargetGroups返回参数结构体
+ * @class
+ */
+class AssociateTargetGroupsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DeleteListener请求参数结构体
  * @class
  */
@@ -2532,24 +2859,42 @@ class DeleteListenerRequest extends  AbstractModel {
 }
 
 /**
- * ModifyBlockIPList返回参数结构体
+ * 传统型负载均衡后端服务的健康状态
  * @class
  */
-class ModifyBlockIPListResponse extends  AbstractModel {
+class ClassicalHealth extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 异步任务的ID
+         * 后端服务的内网 IP
          * @type {string || null}
          */
-        this.JodId = null;
+        this.IP = null;
 
         /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * 后端服务的端口
+         * @type {number || null}
+         */
+        this.Port = null;
+
+        /**
+         * 负载均衡的监听端口
+         * @type {number || null}
+         */
+        this.ListenerPort = null;
+
+        /**
+         * 转发协议
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.Protocol = null;
+
+        /**
+         * 健康检查结果，1 表示健康，0 表示不健康
+         * @type {number || null}
+         */
+        this.HealthStatus = null;
 
     }
 
@@ -2560,8 +2905,11 @@ class ModifyBlockIPListResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.JodId = 'JodId' in params ? params.JodId : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.IP = 'IP' in params ? params.IP : null;
+        this.Port = 'Port' in params ? params.Port : null;
+        this.ListenerPort = 'ListenerPort' in params ? params.ListenerPort : null;
+        this.Protocol = 'Protocol' in params ? params.Protocol : null;
+        this.HealthStatus = 'HealthStatus' in params ? params.HealthStatus : null;
 
     }
 }
@@ -2590,6 +2938,102 @@ class ModifyTargetPortResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 目标组绑定的后端服务器
+ * @class
+ */
+class TargetGroupBackend extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 目标组ID
+         * @type {string || null}
+         */
+        this.TargetGroupId = null;
+
+        /**
+         * 后端服务的类型，可取：CVM、ENI（即将支持）
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * 后端服务的唯一 ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 后端服务的监听端口
+         * @type {number || null}
+         */
+        this.Port = null;
+
+        /**
+         * 后端服务的转发权重，取值范围：[0, 100]，默认为 10。
+         * @type {number || null}
+         */
+        this.Weight = null;
+
+        /**
+         * 后端服务的外网 IP
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
+         */
+        this.PublicIpAddresses = null;
+
+        /**
+         * 后端服务的内网 IP
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
+         */
+        this.PrivateIpAddresses = null;
+
+        /**
+         * 后端服务的实例名称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.InstanceName = null;
+
+        /**
+         * 后端服务被绑定的时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.RegisteredTime = null;
+
+        /**
+         * 弹性网卡唯一ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.EniId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TargetGroupId = 'TargetGroupId' in params ? params.TargetGroupId : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Port = 'Port' in params ? params.Port : null;
+        this.Weight = 'Weight' in params ? params.Weight : null;
+        this.PublicIpAddresses = 'PublicIpAddresses' in params ? params.PublicIpAddresses : null;
+        this.PrivateIpAddresses = 'PrivateIpAddresses' in params ? params.PrivateIpAddresses : null;
+        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
+        this.RegisteredTime = 'RegisteredTime' in params ? params.RegisteredTime : null;
+        this.EniId = 'EniId' in params ? params.EniId : null;
 
     }
 }
@@ -2720,12 +3164,18 @@ class ModifyBlockIPListRequest extends  AbstractModel {
 }
 
 /**
- * ModifyDomainAttributes返回参数结构体
+ * ModifyBlockIPList返回参数结构体
  * @class
  */
-class ModifyDomainAttributesResponse extends  AbstractModel {
+class ModifyBlockIPListResponse extends  AbstractModel {
     constructor(){
         super();
+
+        /**
+         * 异步任务的ID
+         * @type {string || null}
+         */
+        this.JodId = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2742,6 +3192,7 @@ class ModifyDomainAttributesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.JodId = 'JodId' in params ? params.JodId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -3283,6 +3734,41 @@ class CreateListenerResponse extends  AbstractModel {
 }
 
 /**
+ * CreateTargetGroup返回参数结构体
+ * @class
+ */
+class CreateTargetGroupResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 创建目标组后生成的id
+         * @type {string || null}
+         */
+        this.TargetGroupId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TargetGroupId = 'TargetGroupId' in params ? params.TargetGroupId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * 负载均衡信息
  * @class
  */
@@ -3587,6 +4073,34 @@ class CreateRuleRequest extends  AbstractModel {
 }
 
 /**
+ * ModifyTargetGroupInstancesPort返回参数结构体
+ * @class
+ */
+class ModifyTargetGroupInstancesPortResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * HTTP/HTTPS监听器下的转发规则绑定的后端服务信息
  * @class
  */
@@ -3681,6 +4195,49 @@ class BatchDeregisterTargetsRequest extends  AbstractModel {
                 let obj = new BatchTarget();
                 obj.deserialize(params.Targets[z]);
                 this.Targets.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * DeregisterTargetGroupInstances请求参数结构体
+ * @class
+ */
+class DeregisterTargetGroupInstancesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 目标组ID
+         * @type {string || null}
+         */
+        this.TargetGroupId = null;
+
+        /**
+         * 待解绑的服务器信息
+         * @type {Array.<TargetGroupInstance> || null}
+         */
+        this.TargetGroupInstances = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TargetGroupId = 'TargetGroupId' in params ? params.TargetGroupId : null;
+
+        if (params.TargetGroupInstances) {
+            this.TargetGroupInstances = new Array();
+            for (let z in params.TargetGroupInstances) {
+                let obj = new TargetGroupInstance();
+                obj.deserialize(params.TargetGroupInstances[z]);
+                this.TargetGroupInstances.push(obj);
             }
         }
 
@@ -3812,6 +4369,120 @@ class DescribeTargetHealthResponse extends  AbstractModel {
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeTargetGroupInstances返回参数结构体
+ * @class
+ */
+class DescribeTargetGroupInstancesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 本次查询的结果数量
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 绑定的服务器信息
+         * @type {Array.<TargetGroupBackend> || null}
+         */
+        this.TargetGroupInstanceSet = null;
+
+        /**
+         * 实际统计数量，不受Limit，Offset，CAM的影响
+         * @type {number || null}
+         */
+        this.RealCount = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.TargetGroupInstanceSet) {
+            this.TargetGroupInstanceSet = new Array();
+            for (let z in params.TargetGroupInstanceSet) {
+                let obj = new TargetGroupBackend();
+                obj.deserialize(params.TargetGroupInstanceSet[z]);
+                this.TargetGroupInstanceSet.push(obj);
+            }
+        }
+        this.RealCount = 'RealCount' in params ? params.RealCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CreateTargetGroup请求参数结构体
+ * @class
+ */
+class CreateTargetGroupRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 目标组名称，限定50个字符
+         * @type {string || null}
+         */
+        this.TargetGroupName = null;
+
+        /**
+         * 目标组的vpcid属性，不填则使用默认vpc
+         * @type {string || null}
+         */
+        this.VpcId = null;
+
+        /**
+         * 目标组的默认端口， 后续添加服务器时可使用该默认端口
+         * @type {number || null}
+         */
+        this.Port = null;
+
+        /**
+         * 目标组绑定的后端服务器
+         * @type {Array.<TargetGroupInstance> || null}
+         */
+        this.TargetGroupInstances = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TargetGroupName = 'TargetGroupName' in params ? params.TargetGroupName : null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.Port = 'Port' in params ? params.Port : null;
+
+        if (params.TargetGroupInstances) {
+            this.TargetGroupInstances = new Array();
+            for (let z in params.TargetGroupInstances) {
+                let obj = new TargetGroupInstance();
+                obj.deserialize(params.TargetGroupInstances[z]);
+                this.TargetGroupInstances.push(obj);
+            }
+        }
 
     }
 }
@@ -3956,24 +4627,18 @@ class CreateListenerRequest extends  AbstractModel {
 }
 
 /**
- * 转发规则之间的重定向关系
+ * DisassociateTargetGroups请求参数结构体
  * @class
  */
-class RewriteLocationMap extends  AbstractModel {
+class DisassociateTargetGroupsRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 源转发规则ID
-         * @type {string || null}
+         * 待解绑的规则关系数组
+         * @type {Array.<TargetGroupAssociation> || null}
          */
-        this.SourceLocationId = null;
-
-        /**
-         * 重定向至的目标转发规则ID
-         * @type {string || null}
-         */
-        this.TargetLocationId = null;
+        this.Associations = null;
 
     }
 
@@ -3984,8 +4649,50 @@ class RewriteLocationMap extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.SourceLocationId = 'SourceLocationId' in params ? params.SourceLocationId : null;
-        this.TargetLocationId = 'TargetLocationId' in params ? params.TargetLocationId : null;
+
+        if (params.Associations) {
+            this.Associations = new Array();
+            for (let z in params.Associations) {
+                let obj = new TargetGroupAssociation();
+                obj.deserialize(params.Associations[z]);
+                this.Associations.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * 过滤器条件
+ * @class
+ */
+class Filter extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 过滤器的名称
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 过滤器的值数组
+         * @type {Array.<string> || null}
+         */
+        this.Values = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Values = 'Values' in params ? params.Values : null;
 
     }
 }
@@ -4347,6 +5054,84 @@ class RewriteTarget extends  AbstractModel {
 }
 
 /**
+ * ModifyTargetWeight请求参数结构体
+ * @class
+ */
+class ModifyTargetWeightRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 负载均衡实例 ID
+         * @type {string || null}
+         */
+        this.LoadBalancerId = null;
+
+        /**
+         * 负载均衡监听器 ID
+         * @type {string || null}
+         */
+        this.ListenerId = null;
+
+        /**
+         * 转发规则的ID，当绑定机器到七层转发规则时，必须提供此参数或Domain+Url两者之一
+         * @type {string || null}
+         */
+        this.LocationId = null;
+
+        /**
+         * 目标规则的域名，提供LocationId参数时本参数不生效
+         * @type {string || null}
+         */
+        this.Domain = null;
+
+        /**
+         * 目标规则的URL，提供LocationId参数时本参数不生效
+         * @type {string || null}
+         */
+        this.Url = null;
+
+        /**
+         * 要修改权重的后端服务列表
+         * @type {Array.<Target> || null}
+         */
+        this.Targets = null;
+
+        /**
+         * 后端服务新的转发权重，取值范围：0~100，默认值10。如果设置了 Targets.Weight 参数，则此参数不生效。
+         * @type {number || null}
+         */
+        this.Weight = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LoadBalancerId = 'LoadBalancerId' in params ? params.LoadBalancerId : null;
+        this.ListenerId = 'ListenerId' in params ? params.ListenerId : null;
+        this.LocationId = 'LocationId' in params ? params.LocationId : null;
+        this.Domain = 'Domain' in params ? params.Domain : null;
+        this.Url = 'Url' in params ? params.Url : null;
+
+        if (params.Targets) {
+            this.Targets = new Array();
+            for (let z in params.Targets) {
+                let obj = new Target();
+                obj.deserialize(params.Targets[z]);
+                this.Targets.push(obj);
+            }
+        }
+        this.Weight = 'Weight' in params ? params.Weight : null;
+
+    }
+}
+
+/**
  * DescribeTargets返回参数结构体
  * @class
  */
@@ -4664,6 +5449,48 @@ class DeleteRuleResponse extends  AbstractModel {
 }
 
 /**
+ * ModifyTargetGroupAttribute请求参数结构体
+ * @class
+ */
+class ModifyTargetGroupAttributeRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 目标组的ID
+         * @type {string || null}
+         */
+        this.TargetGroupId = null;
+
+        /**
+         * 目标组的新名称
+         * @type {string || null}
+         */
+        this.TargetGroupName = null;
+
+        /**
+         * 目标组的新默认端口
+         * @type {number || null}
+         */
+        this.Port = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TargetGroupId = 'TargetGroupId' in params ? params.TargetGroupId : null;
+        this.TargetGroupName = 'TargetGroupName' in params ? params.TargetGroupName : null;
+        this.Port = 'Port' in params ? params.Port : null;
+
+    }
+}
+
+/**
  * ModifyDomainAttributes请求参数结构体
  * @class
  */
@@ -4853,6 +5680,120 @@ class CertificateOutput extends  AbstractModel {
 }
 
 /**
+ * ModifyTargetGroupInstancesWeight请求参数结构体
+ * @class
+ */
+class ModifyTargetGroupInstancesWeightRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 目标组ID
+         * @type {string || null}
+         */
+        this.TargetGroupId = null;
+
+        /**
+         * 待修改权重的服务器数组
+         * @type {Array.<TargetGroupInstance> || null}
+         */
+        this.TargetGroupInstances = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TargetGroupId = 'TargetGroupId' in params ? params.TargetGroupId : null;
+
+        if (params.TargetGroupInstances) {
+            this.TargetGroupInstances = new Array();
+            for (let z in params.TargetGroupInstances) {
+                let obj = new TargetGroupInstance();
+                obj.deserialize(params.TargetGroupInstances[z]);
+                this.TargetGroupInstances.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * DeleteTargetGroups返回参数结构体
+ * @class
+ */
+class DeleteTargetGroupsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifyTargetGroupInstancesPort请求参数结构体
+ * @class
+ */
+class ModifyTargetGroupInstancesPortRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 目标组ID
+         * @type {string || null}
+         */
+        this.TargetGroupId = null;
+
+        /**
+         * 待修改端口的服务器数组
+         * @type {Array.<TargetGroupInstance> || null}
+         */
+        this.TargetGroupInstances = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TargetGroupId = 'TargetGroupId' in params ? params.TargetGroupId : null;
+
+        if (params.TargetGroupInstances) {
+            this.TargetGroupInstances = new Array();
+            for (let z in params.TargetGroupInstances) {
+                let obj = new TargetGroupInstance();
+                obj.deserialize(params.TargetGroupInstances[z]);
+                this.TargetGroupInstances.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * BatchRegisterTargets请求参数结构体
  * @class
  */
@@ -4965,6 +5906,122 @@ class ListenerBackend extends  AbstractModel {
                 this.Targets.push(obj);
             }
         }
+
+    }
+}
+
+/**
+ * HTTP/HTTPS转发规则（输入）
+ * @class
+ */
+class RuleInput extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 转发规则的域名。长度限制为：1~80。
+         * @type {string || null}
+         */
+        this.Domain = null;
+
+        /**
+         * 转发规则的路径。长度限制为：1~200。
+         * @type {string || null}
+         */
+        this.Url = null;
+
+        /**
+         * 会话保持时间。设置为0表示关闭会话保持，开启会话保持可取值30~3600，单位：秒。
+         * @type {number || null}
+         */
+        this.SessionExpireTime = null;
+
+        /**
+         * 健康检查信息
+         * @type {HealthCheck || null}
+         */
+        this.HealthCheck = null;
+
+        /**
+         * 证书信息
+         * @type {CertificateInput || null}
+         */
+        this.Certificate = null;
+
+        /**
+         * 规则的请求转发方式，可选值：WRR、LEAST_CONN、IP_HASH
+分别表示按权重轮询、最小连接数、按IP哈希， 默认为 WRR。
+         * @type {string || null}
+         */
+        this.Scheduler = null;
+
+        /**
+         * 负载均衡与后端服务之间的转发协议，目前支持 HTTP/HTTPS/TRPC
+         * @type {string || null}
+         */
+        this.ForwardType = null;
+
+        /**
+         * 是否将该域名设为默认域名，注意，一个监听器下只能设置一个默认域名。
+         * @type {boolean || null}
+         */
+        this.DefaultServer = null;
+
+        /**
+         * 是否开启Http2，注意，只有HTTPS域名才能开启Http2。
+         * @type {boolean || null}
+         */
+        this.Http2 = null;
+
+        /**
+         * 后端目标类型，NODE表示绑定普通节点，TARGETGROUP表示绑定目标组
+         * @type {string || null}
+         */
+        this.TargetType = null;
+
+        /**
+         * TRPC被调服务器路由，ForwardType为TRPC时必填
+         * @type {string || null}
+         */
+        this.TrpcCallee = null;
+
+        /**
+         * TRPC调用服务接口，ForwardType为TRPC时必填
+         * @type {string || null}
+         */
+        this.TrpcFunc = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Domain = 'Domain' in params ? params.Domain : null;
+        this.Url = 'Url' in params ? params.Url : null;
+        this.SessionExpireTime = 'SessionExpireTime' in params ? params.SessionExpireTime : null;
+
+        if (params.HealthCheck) {
+            let obj = new HealthCheck();
+            obj.deserialize(params.HealthCheck)
+            this.HealthCheck = obj;
+        }
+
+        if (params.Certificate) {
+            let obj = new CertificateInput();
+            obj.deserialize(params.Certificate)
+            this.Certificate = obj;
+        }
+        this.Scheduler = 'Scheduler' in params ? params.Scheduler : null;
+        this.ForwardType = 'ForwardType' in params ? params.ForwardType : null;
+        this.DefaultServer = 'DefaultServer' in params ? params.DefaultServer : null;
+        this.Http2 = 'Http2' in params ? params.Http2 : null;
+        this.TargetType = 'TargetType' in params ? params.TargetType : null;
+        this.TrpcCallee = 'TrpcCallee' in params ? params.TrpcCallee : null;
+        this.TrpcFunc = 'TrpcFunc' in params ? params.TrpcFunc : null;
 
     }
 }
@@ -5119,54 +6176,18 @@ class DescribeClassicalLBListenersResponse extends  AbstractModel {
 }
 
 /**
- * ModifyTargetWeight请求参数结构体
+ * ModifyTargetGroupAttribute返回参数结构体
  * @class
  */
-class ModifyTargetWeightRequest extends  AbstractModel {
+class ModifyTargetGroupAttributeResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 负载均衡实例 ID
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.LoadBalancerId = null;
-
-        /**
-         * 负载均衡监听器 ID
-         * @type {string || null}
-         */
-        this.ListenerId = null;
-
-        /**
-         * 转发规则的ID，当绑定机器到七层转发规则时，必须提供此参数或Domain+Url两者之一
-         * @type {string || null}
-         */
-        this.LocationId = null;
-
-        /**
-         * 目标规则的域名，提供LocationId参数时本参数不生效
-         * @type {string || null}
-         */
-        this.Domain = null;
-
-        /**
-         * 目标规则的URL，提供LocationId参数时本参数不生效
-         * @type {string || null}
-         */
-        this.Url = null;
-
-        /**
-         * 要修改权重的后端服务列表
-         * @type {Array.<Target> || null}
-         */
-        this.Targets = null;
-
-        /**
-         * 后端服务新的转发权重，取值范围：0~100，默认值10。如果设置了 Targets.Weight 参数，则此参数不生效。
-         * @type {number || null}
-         */
-        this.Weight = null;
+        this.RequestId = null;
 
     }
 
@@ -5177,21 +6198,7 @@ class ModifyTargetWeightRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.LoadBalancerId = 'LoadBalancerId' in params ? params.LoadBalancerId : null;
-        this.ListenerId = 'ListenerId' in params ? params.ListenerId : null;
-        this.LocationId = 'LocationId' in params ? params.LocationId : null;
-        this.Domain = 'Domain' in params ? params.Domain : null;
-        this.Url = 'Url' in params ? params.Url : null;
-
-        if (params.Targets) {
-            this.Targets = new Array();
-            for (let z in params.Targets) {
-                let obj = new Target();
-                obj.deserialize(params.Targets[z]);
-                this.Targets.push(obj);
-            }
-        }
-        this.Weight = 'Weight' in params ? params.Weight : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -5388,85 +6395,24 @@ class DescribeClassicalLBTargetsResponse extends  AbstractModel {
 }
 
 /**
- * HTTP/HTTPS转发规则（输入）
+ * 转发规则之间的重定向关系
  * @class
  */
-class RuleInput extends  AbstractModel {
+class RewriteLocationMap extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 转发规则的域名。长度限制为：1~80。
+         * 源转发规则ID
          * @type {string || null}
          */
-        this.Domain = null;
+        this.SourceLocationId = null;
 
         /**
-         * 转发规则的路径。长度限制为：1~200。
+         * 重定向至的目标转发规则ID
          * @type {string || null}
          */
-        this.Url = null;
-
-        /**
-         * 会话保持时间。设置为0表示关闭会话保持，开启会话保持可取值30~3600，单位：秒。
-         * @type {number || null}
-         */
-        this.SessionExpireTime = null;
-
-        /**
-         * 健康检查信息
-         * @type {HealthCheck || null}
-         */
-        this.HealthCheck = null;
-
-        /**
-         * 证书信息
-         * @type {CertificateInput || null}
-         */
-        this.Certificate = null;
-
-        /**
-         * 规则的请求转发方式，可选值：WRR、LEAST_CONN、IP_HASH
-分别表示按权重轮询、最小连接数、按IP哈希， 默认为 WRR。
-         * @type {string || null}
-         */
-        this.Scheduler = null;
-
-        /**
-         * 负载均衡与后端服务之间的转发协议，目前支持 HTTP/HTTPS/TRPC
-         * @type {string || null}
-         */
-        this.ForwardType = null;
-
-        /**
-         * 是否将该域名设为默认域名，注意，一个监听器下只能设置一个默认域名。
-         * @type {boolean || null}
-         */
-        this.DefaultServer = null;
-
-        /**
-         * 是否开启Http2，注意，只有HTTPS域名才能开启Http2。
-         * @type {boolean || null}
-         */
-        this.Http2 = null;
-
-        /**
-         * 后端目标类型，NODE表示绑定普通节点，TARGETGROUP表示绑定目标组
-         * @type {string || null}
-         */
-        this.TargetType = null;
-
-        /**
-         * TRPC被调服务器路由，ForwardType为TRPC时必填
-         * @type {string || null}
-         */
-        this.TrpcCallee = null;
-
-        /**
-         * TRPC调用服务接口，ForwardType为TRPC时必填
-         * @type {string || null}
-         */
-        this.TrpcFunc = null;
+        this.TargetLocationId = null;
 
     }
 
@@ -5477,28 +6423,86 @@ class RuleInput extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.SourceLocationId = 'SourceLocationId' in params ? params.SourceLocationId : null;
+        this.TargetLocationId = 'TargetLocationId' in params ? params.TargetLocationId : null;
+
+    }
+}
+
+/**
+ * ModifyTargetPort请求参数结构体
+ * @class
+ */
+class ModifyTargetPortRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 负载均衡实例 ID
+         * @type {string || null}
+         */
+        this.LoadBalancerId = null;
+
+        /**
+         * 负载均衡监听器 ID
+         * @type {string || null}
+         */
+        this.ListenerId = null;
+
+        /**
+         * 要修改端口的后端服务列表
+         * @type {Array.<Target> || null}
+         */
+        this.Targets = null;
+
+        /**
+         * 后端服务绑定到监听器或转发规则的新端口
+         * @type {number || null}
+         */
+        this.NewPort = null;
+
+        /**
+         * 转发规则的ID，当后端服务绑定到七层转发规则时，必须提供此参数或Domain+Url两者之一
+         * @type {string || null}
+         */
+        this.LocationId = null;
+
+        /**
+         * 目标规则的域名，提供LocationId参数时本参数不生效
+         * @type {string || null}
+         */
+        this.Domain = null;
+
+        /**
+         * 目标规则的URL，提供LocationId参数时本参数不生效
+         * @type {string || null}
+         */
+        this.Url = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LoadBalancerId = 'LoadBalancerId' in params ? params.LoadBalancerId : null;
+        this.ListenerId = 'ListenerId' in params ? params.ListenerId : null;
+
+        if (params.Targets) {
+            this.Targets = new Array();
+            for (let z in params.Targets) {
+                let obj = new Target();
+                obj.deserialize(params.Targets[z]);
+                this.Targets.push(obj);
+            }
+        }
+        this.NewPort = 'NewPort' in params ? params.NewPort : null;
+        this.LocationId = 'LocationId' in params ? params.LocationId : null;
         this.Domain = 'Domain' in params ? params.Domain : null;
         this.Url = 'Url' in params ? params.Url : null;
-        this.SessionExpireTime = 'SessionExpireTime' in params ? params.SessionExpireTime : null;
-
-        if (params.HealthCheck) {
-            let obj = new HealthCheck();
-            obj.deserialize(params.HealthCheck)
-            this.HealthCheck = obj;
-        }
-
-        if (params.Certificate) {
-            let obj = new CertificateInput();
-            obj.deserialize(params.Certificate)
-            this.Certificate = obj;
-        }
-        this.Scheduler = 'Scheduler' in params ? params.Scheduler : null;
-        this.ForwardType = 'ForwardType' in params ? params.ForwardType : null;
-        this.DefaultServer = 'DefaultServer' in params ? params.DefaultServer : null;
-        this.Http2 = 'Http2' in params ? params.Http2 : null;
-        this.TargetType = 'TargetType' in params ? params.TargetType : null;
-        this.TrpcCallee = 'TrpcCallee' in params ? params.TrpcCallee : null;
-        this.TrpcFunc = 'TrpcFunc' in params ? params.TrpcFunc : null;
 
     }
 }
@@ -5628,6 +6632,34 @@ BANDWIDTH_PACKAGE 按带宽包计费（当前，只有指定运营商时才支�
 }
 
 /**
+ * DeleteTargetGroups请求参数结构体
+ * @class
+ */
+class DeleteTargetGroupsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 目标组的ID数组
+         * @type {Array.<string> || null}
+         */
+        this.TargetGroupIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TargetGroupIds = 'TargetGroupIds' in params ? params.TargetGroupIds : null;
+
+    }
+}
+
+/**
  * DescribeClassicalLBListeners请求参数结构体
  * @class
  */
@@ -5679,6 +6711,111 @@ class DescribeClassicalLBListenersRequest extends  AbstractModel {
         this.Protocol = 'Protocol' in params ? params.Protocol : null;
         this.ListenerPort = 'ListenerPort' in params ? params.ListenerPort : null;
         this.Status = 'Status' in params ? params.Status : null;
+
+    }
+}
+
+/**
+ * 描述一个Target的健康信息
+ * @class
+ */
+class TargetHealth extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Target的内网IP
+         * @type {string || null}
+         */
+        this.IP = null;
+
+        /**
+         * Target绑定的端口
+         * @type {number || null}
+         */
+        this.Port = null;
+
+        /**
+         * 当前健康状态，true：健康，false：不健康（包括尚未开始探测、探测中、状态异常等几种状态）。只有处于健康状态（且权重大于0），负载均衡才会向其转发流量。
+         * @type {boolean || null}
+         */
+        this.HealthStatus = null;
+
+        /**
+         * Target的实例ID，如 ins-12345678
+         * @type {string || null}
+         */
+        this.TargetId = null;
+
+        /**
+         * 当前健康状态的详细信息。如：Alive、Dead、Unknown。Alive状态为健康，Dead状态为异常，Unknown状态包括尚未开始探测、探测中、状态未知。
+         * @type {string || null}
+         */
+        this.HealthStatusDetial = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.IP = 'IP' in params ? params.IP : null;
+        this.Port = 'Port' in params ? params.Port : null;
+        this.HealthStatus = 'HealthStatus' in params ? params.HealthStatus : null;
+        this.TargetId = 'TargetId' in params ? params.TargetId : null;
+        this.HealthStatusDetial = 'HealthStatusDetial' in params ? params.HealthStatusDetial : null;
+
+    }
+}
+
+/**
+ * 规则与目标组的关联关系
+ * @class
+ */
+class TargetGroupAssociation extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 负载均衡ID
+         * @type {string || null}
+         */
+        this.LoadBalancerId = null;
+
+        /**
+         * 监听器ID
+         * @type {string || null}
+         */
+        this.ListenerId = null;
+
+        /**
+         * 目标组ID
+         * @type {string || null}
+         */
+        this.TargetGroupId = null;
+
+        /**
+         * 转发规则ID
+         * @type {string || null}
+         */
+        this.LocationId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LoadBalancerId = 'LoadBalancerId' in params ? params.LoadBalancerId : null;
+        this.ListenerId = 'ListenerId' in params ? params.ListenerId : null;
+        this.TargetGroupId = 'TargetGroupId' in params ? params.TargetGroupId : null;
+        this.LocationId = 'LocationId' in params ? params.LocationId : null;
 
     }
 }
@@ -5743,6 +6880,216 @@ class ListenerHealth extends  AbstractModel {
                 let obj = new RuleHealth();
                 obj.deserialize(params.Rules[z]);
                 this.Rules.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * 目标组关联到的规则
+ * @class
+ */
+class AssociationItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 关联到的负载均衡ID
+         * @type {string || null}
+         */
+        this.LoadBalancerId = null;
+
+        /**
+         * 关联到的监听器ID
+         * @type {string || null}
+         */
+        this.ListenerId = null;
+
+        /**
+         * 关联到的转发规则ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.LocationId = null;
+
+        /**
+         * 关联到的监听器协议类型，如HTTP,TCP,
+         * @type {string || null}
+         */
+        this.Protocol = null;
+
+        /**
+         * 关联到的监听器端口
+         * @type {number || null}
+         */
+        this.Port = null;
+
+        /**
+         * 关联到的转发规则域名
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Domain = null;
+
+        /**
+         * 关联到的转发规则URL
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Url = null;
+
+        /**
+         * 负载均衡名称
+         * @type {string || null}
+         */
+        this.LoadBalancerName = null;
+
+        /**
+         * 监听器名称
+         * @type {string || null}
+         */
+        this.ListenerName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LoadBalancerId = 'LoadBalancerId' in params ? params.LoadBalancerId : null;
+        this.ListenerId = 'ListenerId' in params ? params.ListenerId : null;
+        this.LocationId = 'LocationId' in params ? params.LocationId : null;
+        this.Protocol = 'Protocol' in params ? params.Protocol : null;
+        this.Port = 'Port' in params ? params.Port : null;
+        this.Domain = 'Domain' in params ? params.Domain : null;
+        this.Url = 'Url' in params ? params.Url : null;
+        this.LoadBalancerName = 'LoadBalancerName' in params ? params.LoadBalancerName : null;
+        this.ListenerName = 'ListenerName' in params ? params.ListenerName : null;
+
+    }
+}
+
+/**
+ * 目标组信息
+ * @class
+ */
+class TargetGroupInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 目标组ID
+         * @type {string || null}
+         */
+        this.TargetGroupId = null;
+
+        /**
+         * 目标组的vpcid
+         * @type {string || null}
+         */
+        this.VpcId = null;
+
+        /**
+         * 目标组的名字
+         * @type {string || null}
+         */
+        this.TargetGroupName = null;
+
+        /**
+         * 目标组的默认端口
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Port = null;
+
+        /**
+         * 目标组的创建时间
+         * @type {string || null}
+         */
+        this.CreatedTime = null;
+
+        /**
+         * 目标组的修改时间
+         * @type {string || null}
+         */
+        this.UpdatedTime = null;
+
+        /**
+         * 关联到的规则数组
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<AssociationItem> || null}
+         */
+        this.AssociatedRule = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TargetGroupId = 'TargetGroupId' in params ? params.TargetGroupId : null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.TargetGroupName = 'TargetGroupName' in params ? params.TargetGroupName : null;
+        this.Port = 'Port' in params ? params.Port : null;
+        this.CreatedTime = 'CreatedTime' in params ? params.CreatedTime : null;
+        this.UpdatedTime = 'UpdatedTime' in params ? params.UpdatedTime : null;
+
+        if (params.AssociatedRule) {
+            this.AssociatedRule = new Array();
+            for (let z in params.AssociatedRule) {
+                let obj = new AssociationItem();
+                obj.deserialize(params.AssociatedRule[z]);
+                this.AssociatedRule.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * RegisterTargetGroupInstances请求参数结构体
+ * @class
+ */
+class RegisterTargetGroupInstancesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 目标组ID
+         * @type {string || null}
+         */
+        this.TargetGroupId = null;
+
+        /**
+         * 服务器实例数组
+         * @type {Array.<TargetGroupInstance> || null}
+         */
+        this.TargetGroupInstances = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TargetGroupId = 'TargetGroupId' in params ? params.TargetGroupId : null;
+
+        if (params.TargetGroupInstances) {
+            this.TargetGroupInstances = new Array();
+            for (let z in params.TargetGroupInstances) {
+                let obj = new TargetGroupInstance();
+                obj.deserialize(params.TargetGroupInstances[z]);
+                this.TargetGroupInstances.push(obj);
             }
         }
 
@@ -6151,7 +7498,9 @@ OPEN：公网属性， INTERNAL：内网属性。
 
 module.exports = {
     DeleteRewriteRequest: DeleteRewriteRequest,
-    ModifyTargetPortRequest: ModifyTargetPortRequest,
+    DescribeTargetGroupListResponse: DescribeTargetGroupListResponse,
+    DisassociateTargetGroupsResponse: DisassociateTargetGroupsResponse,
+    DescribeTargetGroupListRequest: DescribeTargetGroupListRequest,
     BatchDeregisterTargetsResponse: BatchDeregisterTargetsResponse,
     SetLoadBalancerSecurityGroupsResponse: SetLoadBalancerSecurityGroupsResponse,
     ExtraInfo: ExtraInfo,
@@ -6163,8 +7512,9 @@ module.exports = {
     ModifyRuleRequest: ModifyRuleRequest,
     DescribeClassicalLBByInstanceIdResponse: DescribeClassicalLBByInstanceIdResponse,
     DescribeBlockIPListResponse: DescribeBlockIPListResponse,
-    ClassicalHealth: ClassicalHealth,
     DescribeRewriteRequest: DescribeRewriteRequest,
+    CreateRuleResponse: CreateRuleResponse,
+    AssociateTargetGroupsRequest: AssociateTargetGroupsRequest,
     ClassicalTarget: ClassicalTarget,
     RsWeightRule: RsWeightRule,
     DeregisterTargetsFromClassicalLBRequest: DeregisterTargetsFromClassicalLBRequest,
@@ -6172,39 +7522,47 @@ module.exports = {
     BasicTargetGroupInfo: BasicTargetGroupInfo,
     ModifyTargetWeightResponse: ModifyTargetWeightResponse,
     DescribeTaskStatusRequest: DescribeTaskStatusRequest,
+    TargetGroupInstance: TargetGroupInstance,
     DescribeRewriteResponse: DescribeRewriteResponse,
-    CreateRuleResponse: CreateRuleResponse,
+    DescribeTargetGroupInstancesRequest: DescribeTargetGroupInstancesRequest,
+    RegisterTargetGroupInstancesResponse: RegisterTargetGroupInstancesResponse,
     ClassicalTargetInfo: ClassicalTargetInfo,
     DescribeTargetsRequest: DescribeTargetsRequest,
     ZoneInfo: ZoneInfo,
     RegisterTargetsWithClassicalLBResponse: RegisterTargetsWithClassicalLBResponse,
+    DescribeTargetGroupsResponse: DescribeTargetGroupsResponse,
     LoadBalancerHealth: LoadBalancerHealth,
     BlockedIP: BlockedIP,
     ModifyRuleResponse: ModifyRuleResponse,
     DescribeClassicalLBTargetsRequest: DescribeClassicalLBTargetsRequest,
     DescribeListenersResponse: DescribeListenersResponse,
     AutoRewriteRequest: AutoRewriteRequest,
+    ModifyTargetGroupInstancesWeightResponse: ModifyTargetGroupInstancesWeightResponse,
+    DescribeTargetGroupsRequest: DescribeTargetGroupsRequest,
     DescribeTaskStatusResponse: DescribeTaskStatusResponse,
     DescribeTargetHealthRequest: DescribeTargetHealthRequest,
-    TargetHealth: TargetHealth,
+    Target: Target,
     DescribeBlockIPListRequest: DescribeBlockIPListRequest,
     DescribeClassicalLBHealthStatusResponse: DescribeClassicalLBHealthStatusResponse,
     RuleHealth: RuleHealth,
     Listener: Listener,
     ModifyLoadBalancerAttributesResponse: ModifyLoadBalancerAttributesResponse,
     RegisterTargetsWithClassicalLBRequest: RegisterTargetsWithClassicalLBRequest,
+    ModifyDomainAttributesResponse: ModifyDomainAttributesResponse,
     ReplaceCertForLoadBalancersResponse: ReplaceCertForLoadBalancersResponse,
     ModifyListenerRequest: ModifyListenerRequest,
-    Target: Target,
+    DeregisterTargetGroupInstancesResponse: DeregisterTargetGroupInstancesResponse,
     RegisterTargetsRequest: RegisterTargetsRequest,
     HealthCheck: HealthCheck,
+    AssociateTargetGroupsResponse: AssociateTargetGroupsResponse,
     DeleteListenerRequest: DeleteListenerRequest,
-    ModifyBlockIPListResponse: ModifyBlockIPListResponse,
+    ClassicalHealth: ClassicalHealth,
     ModifyTargetPortResponse: ModifyTargetPortResponse,
+    TargetGroupBackend: TargetGroupBackend,
     DescribeClassicalLBByInstanceIdRequest: DescribeClassicalLBByInstanceIdRequest,
     ManualRewriteResponse: ManualRewriteResponse,
     ModifyBlockIPListRequest: ModifyBlockIPListRequest,
-    ModifyDomainAttributesResponse: ModifyDomainAttributesResponse,
+    ModifyBlockIPListResponse: ModifyBlockIPListResponse,
     ExclusiveCluster: ExclusiveCluster,
     DescribeClassicalLBHealthStatusRequest: DescribeClassicalLBHealthStatusRequest,
     ModifyDomainRequest: ModifyDomainRequest,
@@ -6213,18 +7571,24 @@ module.exports = {
     ClassicalListener: ClassicalListener,
     CertificateInput: CertificateInput,
     CreateListenerResponse: CreateListenerResponse,
+    CreateTargetGroupResponse: CreateTargetGroupResponse,
     ClassicalLoadBalancerInfo: ClassicalLoadBalancerInfo,
     RuleOutput: RuleOutput,
     DeleteLoadBalancerRequest: DeleteLoadBalancerRequest,
     CreateRuleRequest: CreateRuleRequest,
+    ModifyTargetGroupInstancesPortResponse: ModifyTargetGroupInstancesPortResponse,
     RuleTargets: RuleTargets,
     BatchDeregisterTargetsRequest: BatchDeregisterTargetsRequest,
+    DeregisterTargetGroupInstancesRequest: DeregisterTargetGroupInstancesRequest,
     ManualRewriteRequest: ManualRewriteRequest,
     ModifyListenerResponse: ModifyListenerResponse,
     DescribeTargetHealthResponse: DescribeTargetHealthResponse,
+    DescribeTargetGroupInstancesResponse: DescribeTargetGroupInstancesResponse,
+    CreateTargetGroupRequest: CreateTargetGroupRequest,
     ClusterItem: ClusterItem,
     CreateListenerRequest: CreateListenerRequest,
-    RewriteLocationMap: RewriteLocationMap,
+    DisassociateTargetGroupsRequest: DisassociateTargetGroupsRequest,
+    Filter: Filter,
     ModifyDomainResponse: ModifyDomainResponse,
     RegisterTargetsResponse: RegisterTargetsResponse,
     DeregisterTargetsFromClassicalLBResponse: DeregisterTargetsFromClassicalLBResponse,
@@ -6233,6 +7597,7 @@ module.exports = {
     AutoRewriteResponse: AutoRewriteResponse,
     DeregisterTargetsResponse: DeregisterTargetsResponse,
     RewriteTarget: RewriteTarget,
+    ModifyTargetWeightRequest: ModifyTargetWeightRequest,
     DescribeTargetsResponse: DescribeTargetsResponse,
     BatchModifyTargetWeightRequest: BatchModifyTargetWeightRequest,
     DeleteRewriteResponse: DeleteRewriteResponse,
@@ -6241,27 +7606,39 @@ module.exports = {
     BatchRegisterTargetsResponse: BatchRegisterTargetsResponse,
     ReplaceCertForLoadBalancersRequest: ReplaceCertForLoadBalancersRequest,
     DeleteRuleResponse: DeleteRuleResponse,
+    ModifyTargetGroupAttributeRequest: ModifyTargetGroupAttributeRequest,
     ModifyDomainAttributesRequest: ModifyDomainAttributesRequest,
     DeregisterTargetsRequest: DeregisterTargetsRequest,
     CertificateOutput: CertificateOutput,
+    ModifyTargetGroupInstancesWeightRequest: ModifyTargetGroupInstancesWeightRequest,
+    DeleteTargetGroupsResponse: DeleteTargetGroupsResponse,
+    ModifyTargetGroupInstancesPortRequest: ModifyTargetGroupInstancesPortRequest,
     BatchRegisterTargetsRequest: BatchRegisterTargetsRequest,
     ListenerBackend: ListenerBackend,
+    RuleInput: RuleInput,
     TagInfo: TagInfo,
     SnatIp: SnatIp,
     DescribeBlockIPTaskResponse: DescribeBlockIPTaskResponse,
     DescribeClassicalLBListenersResponse: DescribeClassicalLBListenersResponse,
-    ModifyTargetWeightRequest: ModifyTargetWeightRequest,
+    ModifyTargetGroupAttributeResponse: ModifyTargetGroupAttributeResponse,
     DescribeBlockIPTaskRequest: DescribeBlockIPTaskRequest,
     CreateLoadBalancerResponse: CreateLoadBalancerResponse,
     DescribeListenersRequest: DescribeListenersRequest,
     SetLoadBalancerSecurityGroupsRequest: SetLoadBalancerSecurityGroupsRequest,
     DescribeClassicalLBTargetsResponse: DescribeClassicalLBTargetsResponse,
-    RuleInput: RuleInput,
+    RewriteLocationMap: RewriteLocationMap,
+    ModifyTargetPortRequest: ModifyTargetPortRequest,
     DescribeLoadBalancersResponse: DescribeLoadBalancersResponse,
     DeleteListenerResponse: DeleteListenerResponse,
     InternetAccessible: InternetAccessible,
+    DeleteTargetGroupsRequest: DeleteTargetGroupsRequest,
     DescribeClassicalLBListenersRequest: DescribeClassicalLBListenersRequest,
+    TargetHealth: TargetHealth,
+    TargetGroupAssociation: TargetGroupAssociation,
     ListenerHealth: ListenerHealth,
+    AssociationItem: AssociationItem,
+    TargetGroupInfo: TargetGroupInfo,
+    RegisterTargetGroupInstancesRequest: RegisterTargetGroupInstancesRequest,
     LoadBalancer: LoadBalancer,
 
 }

@@ -17,6 +17,63 @@
 const AbstractModel = require("../../common/abstract_model");
 
 /**
+ * MobileNetworkTimeVerification返回参数结构体
+ * @class
+ */
+class MobileNetworkTimeVerificationResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 认证结果码，收费情况如下。
+收费结果码：
+0: 成功
+-2: 手机号不存在
+-3: 手机号存在，但无法查询到在网时长
+不收费结果码：
+-1: 手机号格式不正确
+-4: 验证中心服务繁忙
+         * @type {string || null}
+         */
+        this.Result = null;
+
+        /**
+         * 业务结果描述。
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * 在网时长区间。
+格式为(a,b]，表示在网时长在a个月以上，b个月以下。若b为+时表示没有上限。
+         * @type {string || null}
+         */
+        this.Range = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Result = 'Result' in params ? params.Result : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.Range = 'Range' in params ? params.Range : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * Liveness请求参数结构体
  * @class
  */
@@ -326,18 +383,18 @@ class PhoneVerificationResponse extends  AbstractModel {
 
         /**
          * 认证结果码:
-  '0': '认证通过',
-  '-1': '手机号已实名，但是身份证和姓名均与实名信息不一致 ',
-  '-2': '手机号已实名，手机号和证件号一致，姓名不一致',
-  '-3': '手机号已实名，手机号和姓名一致，身份证不一致',
-  '-4': '信息不一致',
-  '-5': '手机号未实名',
-  '-6': '手机号码不合法',
-  '-7': '身份证号码有误',
-  '-8': '姓名校验不通过',
-  '-9': '没有记录',
-  '-10': '认证未通过',
-  '-11': '服务繁忙'
+0: 认证通过
+-1: 手机号已实名，但是身份证和姓名均与实名信息不一致 
+-2: 手机号已实名，手机号和证件号一致，姓名不一致
+-3: 手机号已实名，手机号和姓名一致，身份证不一致
+-4: 信息不一致
+-5: 手机号未实名
+-6: 手机号码不合法
+-7: 身份证号码有误
+-8: 姓名校验不通过
+-9: 没有记录
+-10: 认证未通过
+-11: 验证中心服务繁忙
          * @type {string || null}
          */
         this.Result = null;
@@ -456,7 +513,7 @@ class BankCard4EVerificationResponse extends  AbstractModel {
 '-3': '身份证号码有误'
 '-4': '银行卡号码有误'
 '-5': '手机号码不合法'
-'-18': '服务繁忙'
+'-18': '验证中心服务繁忙'
          * @type {string || null}
          */
         this.Result = null;
@@ -485,6 +542,34 @@ class BankCard4EVerificationResponse extends  AbstractModel {
         this.Result = 'Result' in params ? params.Result : null;
         this.Description = 'Description' in params ? params.Description : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * MobileStatus请求参数结构体
+ * @class
+ */
+class MobileStatusRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 手机号码
+         * @type {string || null}
+         */
+        this.Mobile = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Mobile = 'Mobile' in params ? params.Mobile : null;
 
     }
 }
@@ -592,6 +677,34 @@ LIP为数字模式，ACTION为动作模式，SILENT为静默模式，三种模�
 }
 
 /**
+ * MobileNetworkTimeVerification请求参数结构体
+ * @class
+ */
+class MobileNetworkTimeVerificationRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 手机号码。不支持电信手机号。
+         * @type {string || null}
+         */
+        this.Mobile = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Mobile = 'Mobile' in params ? params.Mobile : null;
+
+    }
+}
+
+/**
  * LivenessRecognition返回参数结构体
  * @class
  */
@@ -642,6 +755,67 @@ class LivenessRecognitionResponse extends  AbstractModel {
         this.Sim = 'Sim' in params ? params.Sim : null;
         this.Result = 'Result' in params ? params.Result : null;
         this.Description = 'Description' in params ? params.Description : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * MobileStatus返回参数结构体
+ * @class
+ */
+class MobileStatusResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 认证结果码，收费情况如下。
+收费结果码：
+0：成功
+不收费结果码：
+-1：未查询到结果
+-2：手机号格式不正确
+-3：验证中心服务繁忙
+         * @type {string || null}
+         */
+        this.Result = null;
+
+        /**
+         * 业务结果描述。
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * 状态码：
+0：正常
+1：停机
+2：销号
+3：空号
+4：不在网
+99：未知状态
+         * @type {number || null}
+         */
+        this.StatusCode = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Result = 'Result' in params ? params.Result : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.StatusCode = 'StatusCode' in params ? params.StatusCode : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -906,7 +1080,7 @@ class BankCardVerificationResponse extends  AbstractModel {
 '-2': '姓名校验不通过'
 '-3': '身份证号码有误'
 '-4': '银行卡号码有误'
-'-17': '服务繁忙'
+'-17': '验证中心服务繁忙'
          * @type {string || null}
          */
         this.Result = null;
@@ -1383,7 +1557,7 @@ class BankCard2EVerificationResponse extends  AbstractModel {
 不计费结果码：
   '-2': '姓名校验不通过'
   '-3': '银行卡号码有误'
-  '-16': '服务繁忙'
+  '-16': '验证中心服务繁忙'
          * @type {string || null}
          */
         this.Result = null;
@@ -1577,6 +1751,7 @@ class LivenessResponse extends  AbstractModel {
 }
 
 module.exports = {
+    MobileNetworkTimeVerificationResponse: MobileNetworkTimeVerificationResponse,
     LivenessRequest: LivenessRequest,
     LivenessCompareResponse: LivenessCompareResponse,
     GetLiveCodeRequest: GetLiveCodeRequest,
@@ -1587,9 +1762,12 @@ module.exports = {
     PhoneVerificationResponse: PhoneVerificationResponse,
     IdCardOCRVerificationRequest: IdCardOCRVerificationRequest,
     BankCard4EVerificationResponse: BankCard4EVerificationResponse,
+    MobileStatusRequest: MobileStatusRequest,
     BankCard2EVerificationRequest: BankCard2EVerificationRequest,
     LivenessRecognitionRequest: LivenessRecognitionRequest,
+    MobileNetworkTimeVerificationRequest: MobileNetworkTimeVerificationRequest,
     LivenessRecognitionResponse: LivenessRecognitionResponse,
+    MobileStatusResponse: MobileStatusResponse,
     IdCardOCRVerificationResponse: IdCardOCRVerificationResponse,
     DetectAuthRequest: DetectAuthRequest,
     MinorsVerificationResponse: MinorsVerificationResponse,

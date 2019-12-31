@@ -485,7 +485,7 @@ class CreateInstancesRequest extends  AbstractModel {
         this.SecurityGroupIdList = null;
 
         /**
-         * 用户自定义的端口 不填则默认为6379
+         * 用户自定义的端口 不填则默认为6379，范围[1024,65535]
          * @type {number || null}
          */
         this.VPort = null;
@@ -751,15 +751,15 @@ class ModifyInstanceRequest extends  AbstractModel {
 
         /**
          * 实例Id
-         * @type {string || null}
+         * @type {Array.<string> || null}
          */
-        this.InstanceId = null;
+        this.InstanceIds = null;
 
         /**
          * 实例的新名称
-         * @type {string || null}
+         * @type {Array.<string> || null}
          */
-        this.InstanceName = null;
+        this.InstanceNames = null;
 
         /**
          * 项目Id
@@ -769,6 +769,24 @@ class ModifyInstanceRequest extends  AbstractModel {
 
         /**
          * 自动续费标识。0 - 默认状态（手动续费）；1 - 自动续费；2 - 明确不自动续费
+         * @type {Array.<number> || null}
+         */
+        this.AutoRenews = null;
+
+        /**
+         * 已经废弃
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 已经废弃
+         * @type {string || null}
+         */
+        this.InstanceName = null;
+
+        /**
+         * 已经废弃
          * @type {number || null}
          */
         this.AutoRenew = null;
@@ -783,9 +801,12 @@ class ModifyInstanceRequest extends  AbstractModel {
             return;
         }
         this.Operation = 'Operation' in params ? params.Operation : null;
+        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
+        this.InstanceNames = 'InstanceNames' in params ? params.InstanceNames : null;
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+        this.AutoRenews = 'AutoRenews' in params ? params.AutoRenews : null;
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
         this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
-        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
         this.AutoRenew = 'AutoRenew' in params ? params.AutoRenew : null;
 
     }
@@ -1477,7 +1498,7 @@ class InstanceMultiParam extends  AbstractModel {
 
         /**
          * 参数说明
-         * @type {string || null}
+         * @type {Array.<string> || null}
          */
         this.EnumValue = null;
 
@@ -1777,7 +1798,7 @@ class DescribeInstanceDTSInfoResponse extends  AbstractModel {
         this.JobName = null;
 
         /**
-         * 状态
+         * 任务状态,取值为：1-创建中(Creating),3-校验中(Checking)4-校验通过(CheckPass),5-校验不通过（CheckNotPass）,7-任务运行(Running),8-准备完成（ReadyComplete）,9-任务成功（Success）,10-任务失败（Failed）,11-撤销中（Stopping）,12-完成中（Completing）
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
