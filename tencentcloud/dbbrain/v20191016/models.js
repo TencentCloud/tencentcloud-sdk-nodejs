@@ -142,7 +142,7 @@ class DiagHistoryEventItem extends  AbstractModel {
         this.EventId = null;
 
         /**
-         * 严重程度。从1-4，严重程度递减，意义与DBBrain生成的实例健康报告中对应概念一致。
+         * 严重程度。严重程度分为5级，按影响程度从高至低分别为：1：致命，2：严重，3：告警，4：提示，5：健康。
          * @type {number || null}
          */
         this.Severity = null;
@@ -529,7 +529,7 @@ class DescribeDBDiagEventResponse extends  AbstractModel {
         this.Problem = null;
 
         /**
-         * 严重程度。
+         * 严重程度。严重程度分为5级，按影响程度从高至低分别为：1：致命，2：严重，3：告警，4：提示，5：健康。
          * @type {number || null}
          */
         this.Severity = null;

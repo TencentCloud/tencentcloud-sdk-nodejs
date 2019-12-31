@@ -23,6 +23,7 @@ const CreateAccountResponse = models.CreateAccountResponse;
 const DescribeDBParametersRequest = models.DescribeDBParametersRequest;
 const DescribeAccountsRequest = models.DescribeAccountsRequest;
 const DescribeRenewalPriceResponse = models.DescribeRenewalPriceResponse;
+const CreateTmpInstancesRequest = models.CreateTmpInstancesRequest;
 const RestartDBInstancesResponse = models.RestartDBInstancesResponse;
 const DescribeUpgradePriceRequest = models.DescribeUpgradePriceRequest;
 const DescribeDBResourceUsageDetailsResponse = models.DescribeDBResourceUsageDetailsResponse;
@@ -70,6 +71,7 @@ const CopyAccountPrivilegesRequest = models.CopyAccountPrivilegesRequest;
 const OpenDBExtranetAccessResponse = models.OpenDBExtranetAccessResponse;
 const ModifyDBInstanceNameRequest = models.ModifyDBInstanceNameRequest;
 const ModifyBackupTimeRequest = models.ModifyBackupTimeRequest;
+const CreateTmpInstancesResponse = models.CreateTmpInstancesResponse;
 const UpgradeDBInstanceRequest = models.UpgradeDBInstanceRequest;
 const DescribeUpgradePriceResponse = models.DescribeUpgradePriceResponse;
 const DBInstance = models.DBInstance;
@@ -462,6 +464,17 @@ class MariadbClient extends AbstractClient {
     CloseDBExtranetAccess(req, cb) {
         let resp = new CloseDBExtranetAccessResponse();
         this.request("CloseDBExtranetAccess", req, resp, cb);
+    }
+
+    /**
+     * 本接口（CreateTmpInstances）用于创建临时实例。
+     * @param {CreateTmpInstancesRequest} req
+     * @param {function(string, CreateTmpInstancesResponse):void} cb
+     * @public
+     */
+    CreateTmpInstances(req, cb) {
+        let resp = new CreateTmpInstancesResponse();
+        this.request("CreateTmpInstances", req, resp, cb);
     }
 
     /**

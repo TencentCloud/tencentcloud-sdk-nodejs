@@ -16,6 +16,8 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
+const UnBindingAllPolicyObjectRequest = models.UnBindingAllPolicyObjectRequest;
+const DeletePolicyGroupResponse = models.DeletePolicyGroupResponse;
 const DescribeAccidentEventListAlarms = models.DescribeAccidentEventListAlarms;
 const CreatePolicyGroupEventCondition = models.CreatePolicyGroupEventCondition;
 const DescribeProductEventListRequest = models.DescribeProductEventListRequest;
@@ -24,31 +26,45 @@ const DimensionsDesc = models.DimensionsDesc;
 const BindingPolicyObjectDimension = models.BindingPolicyObjectDimension;
 const CreatePolicyGroupRequest = models.CreatePolicyGroupRequest;
 const CreatePolicyGroupCondition = models.CreatePolicyGroupCondition;
+const DescribePolicyGroupInfoReceiverInfo = models.DescribePolicyGroupInfoReceiverInfo;
 const BindingPolicyObjectRequest = models.BindingPolicyObjectRequest;
+const PutMonitorDataResponse = models.PutMonitorDataResponse;
+const DescribePolicyGroupInfoRequest = models.DescribePolicyGroupInfoRequest;
 const ReceiverInfo = models.ReceiverInfo;
-const Dimension = models.Dimension;
+const DescribeProductEventListEvents = models.DescribeProductEventListEvents;
 const GetMonitorDataRequest = models.GetMonitorDataRequest;
 const PeriodsSt = models.PeriodsSt;
 const DescribeAccidentEventListRequest = models.DescribeAccidentEventListRequest;
+const DescribeProductEventListOverView = models.DescribeProductEventListOverView;
 const MetricObjectMeaning = models.MetricObjectMeaning;
 const MetricDatum = models.MetricDatum;
-const ModifyAlarmReceiversResponse = models.ModifyAlarmReceiversResponse;
+const DeletePolicyGroupRequest = models.DeletePolicyGroupRequest;
+const DescribePolicyGroupInfoCallback = models.DescribePolicyGroupInfoCallback;
+const DescribeProductEventListEventsGroupInfo = models.DescribeProductEventListEventsGroupInfo;
+const UnBindingPolicyObjectResponse = models.UnBindingPolicyObjectResponse;
 const DescribeProductEventListDimensions = models.DescribeProductEventListDimensions;
+const DescribePolicyGroupInfoResponse = models.DescribePolicyGroupInfoResponse;
 const ModifyAlarmReceiversRequest = models.ModifyAlarmReceiversRequest;
+const DescribePolicyGroupInfoCondition = models.DescribePolicyGroupInfoCondition;
 const GetMonitorDataResponse = models.GetMonitorDataResponse;
 const MetricSet = models.MetricSet;
-const DescribeProductEventListEventsGroupInfo = models.DescribeProductEventListEventsGroupInfo;
-const DescribeProductEventListEventsDimensions = models.DescribeProductEventListEventsDimensions;
+const DescribeBindingPolicyObjectListResponse = models.DescribeBindingPolicyObjectListResponse;
+const DescribePolicyGroupInfoConditionTpl = models.DescribePolicyGroupInfoConditionTpl;
+const DescribeBindingPolicyObjectListRequest = models.DescribeBindingPolicyObjectListRequest;
 const CreatePolicyGroupResponse = models.CreatePolicyGroupResponse;
-const PutMonitorDataResponse = models.PutMonitorDataResponse;
-const DescribeProductEventListEvents = models.DescribeProductEventListEvents;
 const PutMonitorDataRequest = models.PutMonitorDataRequest;
+const DescribePolicyGroupInfoEventCondition = models.DescribePolicyGroupInfoEventCondition;
+const DescribeBaseMetricsResponse = models.DescribeBaseMetricsResponse;
+const DescribeBindingPolicyObjectListInstance = models.DescribeBindingPolicyObjectListInstance;
+const UnBindingPolicyObjectRequest = models.UnBindingPolicyObjectRequest;
 const DescribeAccidentEventListResponse = models.DescribeAccidentEventListResponse;
 const DescribeProductEventListResponse = models.DescribeProductEventListResponse;
-const DescribeBaseMetricsResponse = models.DescribeBaseMetricsResponse;
 const DescribeBaseMetricsRequest = models.DescribeBaseMetricsRequest;
+const Dimension = models.Dimension;
 const DataPoint = models.DataPoint;
-const DescribeProductEventListOverView = models.DescribeProductEventListOverView;
+const UnBindingAllPolicyObjectResponse = models.UnBindingAllPolicyObjectResponse;
+const DescribeProductEventListEventsDimensions = models.DescribeProductEventListEventsDimensions;
+const ModifyAlarmReceiversResponse = models.ModifyAlarmReceiversResponse;
 const BindingPolicyObjectResponse = models.BindingPolicyObjectResponse;
 
 
@@ -85,6 +101,17 @@ class MonitorClient extends AbstractClient {
     }
 
     /**
+     * 删除策略的关联对象
+     * @param {UnBindingPolicyObjectRequest} req
+     * @param {function(string, UnBindingPolicyObjectResponse):void} cb
+     * @public
+     */
+    UnBindingPolicyObject(req, cb) {
+        let resp = new UnBindingPolicyObjectResponse();
+        this.request("UnBindingPolicyObject", req, resp, cb);
+    }
+
+    /**
      * 将告警策略绑定到特定对象
      * @param {BindingPolicyObjectRequest} req
      * @param {function(string, BindingPolicyObjectResponse):void} cb
@@ -107,6 +134,28 @@ class MonitorClient extends AbstractClient {
     }
 
     /**
+     * 获取已绑定对象列表
+     * @param {DescribeBindingPolicyObjectListRequest} req
+     * @param {function(string, DescribeBindingPolicyObjectListResponse):void} cb
+     * @public
+     */
+    DescribeBindingPolicyObjectList(req, cb) {
+        let resp = new DescribeBindingPolicyObjectListResponse();
+        this.request("DescribeBindingPolicyObjectList", req, resp, cb);
+    }
+
+    /**
+     * 删除告警策略组
+     * @param {DeletePolicyGroupRequest} req
+     * @param {function(string, DeletePolicyGroupResponse):void} cb
+     * @public
+     */
+    DeletePolicyGroup(req, cb) {
+        let resp = new DeletePolicyGroupResponse();
+        this.request("DeletePolicyGroup", req, resp, cb);
+    }
+
+    /**
      * 获取基础指标详情
      * @param {DescribeBaseMetricsRequest} req
      * @param {function(string, DescribeBaseMetricsResponse):void} cb
@@ -115,6 +164,17 @@ class MonitorClient extends AbstractClient {
     DescribeBaseMetrics(req, cb) {
         let resp = new DescribeBaseMetricsResponse();
         this.request("DescribeBaseMetrics", req, resp, cb);
+    }
+
+    /**
+     * 获取基础策略组详情
+     * @param {DescribePolicyGroupInfoRequest} req
+     * @param {function(string, DescribePolicyGroupInfoResponse):void} cb
+     * @public
+     */
+    DescribePolicyGroupInfo(req, cb) {
+        let resp = new DescribePolicyGroupInfoResponse();
+        this.request("DescribePolicyGroupInfo", req, resp, cb);
     }
 
     /**
@@ -156,6 +216,17 @@ class MonitorClient extends AbstractClient {
     CreatePolicyGroup(req, cb) {
         let resp = new CreatePolicyGroupResponse();
         this.request("CreatePolicyGroup", req, resp, cb);
+    }
+
+    /**
+     * 删除全部的关联对象
+     * @param {UnBindingAllPolicyObjectRequest} req
+     * @param {function(string, UnBindingAllPolicyObjectResponse):void} cb
+     * @public
+     */
+    UnBindingAllPolicyObject(req, cb) {
+        let resp = new UnBindingAllPolicyObjectResponse();
+        this.request("UnBindingAllPolicyObject", req, resp, cb);
     }
 
 

@@ -71,6 +71,7 @@ module.exports = {
     sms: require("./sms"),
     soe: require("./soe"),
     sqlserver: require("./sqlserver"),
+    ssm: require("./ssm"),
     sts: require("./sts"),
     tag: require("./tag"),
     tav: require("./tav"),

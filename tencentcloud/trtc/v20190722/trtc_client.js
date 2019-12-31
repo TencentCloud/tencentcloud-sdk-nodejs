@@ -16,10 +16,10 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
-const DissolveRoomRequest = models.DissolveRoomRequest;
-const DissolveRoomResponse = models.DissolveRoomResponse;
-const KickOutUserRequest = models.KickOutUserRequest;
-const KickOutUserResponse = models.KickOutUserResponse;
+const RemoveUserResponse = models.RemoveUserResponse;
+const DismissRoomRequest = models.DismissRoomRequest;
+const RemoveUserRequest = models.RemoveUserRequest;
+const DismissRoomResponse = models.DismissRoomResponse;
 
 
 /**
@@ -33,25 +33,25 @@ class TrtcClient extends AbstractClient {
     }
     
     /**
-     * 接口说明：将用户从房间踢出。支持所有平台，Android、iOS、Windows 和 macOS 需升级到 TRTC SDK 6.6及以上版本。
-     * @param {KickOutUserRequest} req
-     * @param {function(string, KickOutUserResponse):void} cb
+     * 接口说明：将用户从房间移出，适用于主播/房主/管理员踢人等场景。支持所有平台，Android、iOS、Windows 和 macOS 需升级到 TRTC SDK 6.6及以上版本。
+     * @param {RemoveUserRequest} req
+     * @param {function(string, RemoveUserResponse):void} cb
      * @public
      */
-    KickOutUser(req, cb) {
-        let resp = new KickOutUserResponse();
-        this.request("KickOutUser", req, resp, cb);
+    RemoveUser(req, cb) {
+        let resp = new RemoveUserResponse();
+        this.request("RemoveUser", req, resp, cb);
     }
 
     /**
-     * 接口说明：把房间所有用户从房间踢出，解散房间。支持所有平台，Android、iOS、Windows 和 macOS 需升级到 TRTC SDK 6.6及以上版本。
-     * @param {DissolveRoomRequest} req
-     * @param {function(string, DissolveRoomResponse):void} cb
+     * 接口说明：把房间所有用户从房间移出，解散房间。支持所有平台，Android、iOS、Windows 和 macOS 需升级到 TRTC SDK 6.6及以上版本。
+     * @param {DismissRoomRequest} req
+     * @param {function(string, DismissRoomResponse):void} cb
      * @public
      */
-    DissolveRoom(req, cb) {
-        let resp = new DissolveRoomResponse();
-        this.request("DissolveRoom", req, resp, cb);
+    DismissRoom(req, cb) {
+        let resp = new DismissRoomResponse();
+        this.request("DismissRoom", req, resp, cb);
     }
 
 

@@ -68,7 +68,7 @@ class AppInfo extends  AbstractModel {
         super();
 
         /**
-         * 应用id
+         * 应用ID
          * @type {string || null}
          */
         this.Sdkappid = null;
@@ -271,7 +271,7 @@ class CardInfo extends  AbstractModel {
         super();
 
         /**
-         * 卡片id
+         * 卡片ID
          * @type {string || null}
          */
         this.Iccid = null;
@@ -298,7 +298,7 @@ class CardInfo extends  AbstractModel {
         this.Imei = null;
 
         /**
-         * 应用id
+         * 应用ID
          * @type {string || null}
          */
         this.Sdkappid = null;
@@ -343,7 +343,7 @@ class CardInfo extends  AbstractModel {
         this.ProductId = null;
 
         /**
-         * 流量池id
+         * 流量池ID
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
@@ -404,7 +404,7 @@ class CardInfo extends  AbstractModel {
         this.IsActivated = null;
 
         /**
-         * 订单id
+         * 订单ID
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
@@ -532,13 +532,13 @@ class DescribeCardRequest extends  AbstractModel {
         super();
 
         /**
-         * 应用id
+         * 应用ID
          * @type {number || null}
          */
         this.Sdkappid = null;
 
         /**
-         * 卡片id
+         * 卡片ID
          * @type {string || null}
          */
         this.Iccid = null;
@@ -635,19 +635,19 @@ class SendSmsRequest extends  AbstractModel {
         super();
 
         /**
-         * 应用id
+         * 应用ID
          * @type {number || null}
          */
         this.Sdkappid = null;
 
         /**
-         * 卡片id
+         * 卡片ID
          * @type {string || null}
          */
         this.Iccid = null;
 
         /**
-         * 短信内容
+         * 短信内容长度70限制
          * @type {string || null}
          */
         this.Content = null;
@@ -677,7 +677,7 @@ class DescribeCardsRequest extends  AbstractModel {
         super();
 
         /**
-         * 应用id
+         * 应用ID
          * @type {string || null}
          */
         this.Sdkappid = null;
@@ -719,7 +719,7 @@ class SendMultiSmsRequest extends  AbstractModel {
         super();
 
         /**
-         * 应用id
+         * 应用ID
          * @type {string || null}
          */
         this.Sdkappid = null;
@@ -731,7 +731,7 @@ class SendMultiSmsRequest extends  AbstractModel {
         this.Iccids = null;
 
         /**
-         * 短信内容
+         * 短信内容 长度限制 70
          * @type {string || null}
          */
         this.Content = null;
@@ -773,13 +773,13 @@ class SmsRet extends  AbstractModel {
         this.Msg = null;
 
         /**
-         * 卡片id
+         * 卡片ID
          * @type {string || null}
          */
         this.Iccid = null;
 
         /**
-         * 流水id
+         * 流水ID
          * @type {string || null}
          */
         this.Sid = null;
@@ -810,14 +810,14 @@ class SmsSid extends  AbstractModel {
         super();
 
         /**
-         * 卡片id
+         * 卡片ID
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.Iccid = null;
 
         /**
-         * 信息流水id
+         * 信息流水ID
          * @type {string || null}
          */
         this.Sid = null;

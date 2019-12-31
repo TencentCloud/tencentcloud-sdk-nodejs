@@ -561,6 +561,13 @@ class DomainErrorPageInfo extends  AbstractModel {
          */
         this.Body = null;
 
+        /**
+         * 规则状态,0为成功
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Status = null;
+
     }
 
     /**
@@ -586,6 +593,7 @@ class DomainErrorPageInfo extends  AbstractModel {
             }
         }
         this.Body = 'Body' in params ? params.Body : null;
+        this.Status = 'Status' in params ? params.Status : null;
 
     }
 }
