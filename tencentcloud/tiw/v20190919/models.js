@@ -65,13 +65,13 @@ class LayoutParams extends  AbstractModel {
         super();
 
         /**
-         * 流画面宽，取值范围[1,3000]
+         * 流画面宽，取值范围[2,3000]
          * @type {number || null}
          */
         this.Width = null;
 
         /**
-         * 流画面高，取值范围[1,3000]
+         * 流画面高，取值范围[2,3000]
          * @type {number || null}
          */
         this.Height = null;
@@ -162,7 +162,7 @@ class StartOnlineRecordRequest extends  AbstractModel {
         this.RoomId = null;
 
         /**
-         * 用于实时录制服务进房的用户Id，格式为"tic_record_user_${RoomId}_${Random}"，其中 ${RoomId} 与录制房间号对应，${Random}为一个随机字符串。
+         * 用于实时录制服务进房的用户Id，格式为`tic_record_user_${RoomId}_${Random}`，其中 `${RoomId}` 与录制房间号对应，`${Random}`为一个随机字符串。
 实时录制服务会使用这个用户Id进房进行录制房间内的音视频与白板，为了防止进房冲突，请保证此 用户Id不重复
          * @type {string || null}
          */
@@ -249,6 +249,69 @@ MIX_STREAM - 混流功能
         }
         this.Extras = 'Extras' in params ? params.Extras : null;
         this.AudioFileNeeded = 'AudioFileNeeded' in params ? params.AudioFileNeeded : null;
+
+    }
+}
+
+/**
+ * DescribeOnlineRecordCallback请求参数结构体
+ * @class
+ */
+class DescribeOnlineRecordCallbackRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 应用的SdkAppId
+         * @type {number || null}
+         */
+        this.SdkAppId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
+
+    }
+}
+
+/**
+ * DescribeOnlineRecordCallback返回参数结构体
+ * @class
+ */
+class DescribeOnlineRecordCallbackResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实时录制事件回调地址，如果未设置回调地址，该字段为空字符串
+         * @type {string || null}
+         */
+        this.Callback = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Callback = 'Callback' in params ? params.Callback : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -501,7 +564,7 @@ class CustomLayout extends  AbstractModel {
 
         /**
          * 流布局参数
-         * @type {StreamLayout || null}
+         * @type {Array.<StreamLayout> || null}
          */
         this.InputStreamList = null;
 
@@ -522,9 +585,12 @@ class CustomLayout extends  AbstractModel {
         }
 
         if (params.InputStreamList) {
-            let obj = new StreamLayout();
-            obj.deserialize(params.InputStreamList)
-            this.InputStreamList = obj;
+            this.InputStreamList = new Array();
+            for (let z in params.InputStreamList) {
+                let obj = new StreamLayout();
+                obj.deserialize(params.InputStreamList[z]);
+                this.InputStreamList.push(obj);
+            }
         }
 
     }
@@ -663,7 +729,9 @@ class DescribeOnlineRecordResponse extends  AbstractModel {
          * 录制任务状态
 - PREPARED: 表示录制正在准备中（进房/启动录制服务等操作）
 - RECORDING: 表示录制已开始
-- FINISHED: 表示录制完成
+- PAUSED: 表示录制已暂停
+- STOPPED: 表示录制已停止，正在处理并上传视频
+- FINISHED: 表示视频处理并上传完成，成功生成录制结果
          * @type {string || null}
          */
         this.Status = null;
@@ -947,132 +1015,6 @@ class DescribeTranscodeRequest extends  AbstractModel {
 }
 
 /**
- * SetTranscodeCallback请求参数结构体
- * @class
- */
-class SetTranscodeCallbackRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 客户的SdkAppId
-         * @type {number || null}
-         */
-        this.SdkAppId = null;
-
-        /**
-         * 文档转码进度回调地址，如果传空字符串会删除原来的回调地址配置，回调地址仅支持http或https协议，即回调地址以http://或https://开头
-         * @type {string || null}
-         */
-        this.Callback = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
-        this.Callback = 'Callback' in params ? params.Callback : null;
-
-    }
-}
-
-/**
- * SetOnlineRecordCallback返回参数结构体
- * @class
- */
-class SetOnlineRecordCallbackResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * StopOnlineRecord返回参数结构体
- * @class
- */
-class StopOnlineRecordResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * ResumeOnlineRecord请求参数结构体
- * @class
- */
-class ResumeOnlineRecordRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 客户的SdkAppId
-         * @type {number || null}
-         */
-        this.SdkAppId = null;
-
-        /**
-         * 恢复录制的实时录制任务 Id
-         * @type {string || null}
-         */
-        this.TaskId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
-        this.TaskId = 'TaskId' in params ? params.TaskId : null;
-
-    }
-}
-
-/**
  * DescribeTranscode返回参数结构体
  * @class
  */
@@ -1180,6 +1122,195 @@ class DescribeTranscodeResponse extends  AbstractModel {
 }
 
 /**
+ * SetOnlineRecordCallback返回参数结构体
+ * @class
+ */
+class SetOnlineRecordCallbackResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * StopOnlineRecord返回参数结构体
+ * @class
+ */
+class StopOnlineRecordResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeTranscodeCallback请求参数结构体
+ * @class
+ */
+class DescribeTranscodeCallbackRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 应用的SdkAppId
+         * @type {number || null}
+         */
+        this.SdkAppId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
+
+    }
+}
+
+/**
+ * ResumeOnlineRecord请求参数结构体
+ * @class
+ */
+class ResumeOnlineRecordRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 客户的SdkAppId
+         * @type {number || null}
+         */
+        this.SdkAppId = null;
+
+        /**
+         * 恢复录制的实时录制任务 Id
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+
+    }
+}
+
+/**
+ * DescribeTranscodeCallback返回参数结构体
+ * @class
+ */
+class DescribeTranscodeCallbackResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 文档转码回调地址
+         * @type {string || null}
+         */
+        this.Callback = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Callback = 'Callback' in params ? params.Callback : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * SetTranscodeCallback请求参数结构体
+ * @class
+ */
+class SetTranscodeCallbackRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 客户的SdkAppId
+         * @type {number || null}
+         */
+        this.SdkAppId = null;
+
+        /**
+         * 文档转码进度回调地址，如果传空字符串会删除原来的回调地址配置，回调地址仅支持http或https协议，即回调地址以http://或https://开头
+         * @type {string || null}
+         */
+        this.Callback = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
+        this.Callback = 'Callback' in params ? params.Callback : null;
+
+    }
+}
+
+/**
  * SetOnlineRecordCallback请求参数结构体
  * @class
  */
@@ -1194,7 +1325,7 @@ class SetOnlineRecordCallbackRequest extends  AbstractModel {
         this.SdkAppId = null;
 
         /**
-         * 在线录制任务结果回调地址，如果传空字符串会删除原来的回调地址配置，回调地址仅支持 http或https协议，即回调地址以http://或https://开头
+         * 实时录制任务结果回调地址，如果传空字符串会删除原来的回调地址配置，回调地址仅支持 http或https协议，即回调地址以http://或https://开头
          * @type {string || null}
          */
         this.Callback = null;
@@ -1361,6 +1492,8 @@ module.exports = {
     LayoutParams: LayoutParams,
     ResumeOnlineRecordResponse: ResumeOnlineRecordResponse,
     StartOnlineRecordRequest: StartOnlineRecordRequest,
+    DescribeOnlineRecordCallbackRequest: DescribeOnlineRecordCallbackRequest,
+    DescribeOnlineRecordCallbackResponse: DescribeOnlineRecordCallbackResponse,
     SetTranscodeCallbackResponse: SetTranscodeCallbackResponse,
     StopOnlineRecordRequest: StopOnlineRecordRequest,
     StreamLayout: StreamLayout,
@@ -1375,11 +1508,13 @@ module.exports = {
     Whiteboard: Whiteboard,
     PauseOnlineRecordResponse: PauseOnlineRecordResponse,
     DescribeTranscodeRequest: DescribeTranscodeRequest,
-    SetTranscodeCallbackRequest: SetTranscodeCallbackRequest,
+    DescribeTranscodeResponse: DescribeTranscodeResponse,
     SetOnlineRecordCallbackResponse: SetOnlineRecordCallbackResponse,
     StopOnlineRecordResponse: StopOnlineRecordResponse,
+    DescribeTranscodeCallbackRequest: DescribeTranscodeCallbackRequest,
     ResumeOnlineRecordRequest: ResumeOnlineRecordRequest,
-    DescribeTranscodeResponse: DescribeTranscodeResponse,
+    DescribeTranscodeCallbackResponse: DescribeTranscodeCallbackResponse,
+    SetTranscodeCallbackRequest: SetTranscodeCallbackRequest,
     SetOnlineRecordCallbackRequest: SetOnlineRecordCallbackRequest,
     MixStream: MixStream,
     OmittedDuration: OmittedDuration,

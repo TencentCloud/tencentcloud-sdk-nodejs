@@ -17,6 +17,109 @@
 const AbstractModel = require("../../common/abstract_model");
 
 /**
+ * DisableRsgAsGroup请求参数结构体
+ * @class
+ */
+class DisableRsgAsGroupRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 伸缩组 ID
+         * @type {string || null}
+         */
+        this.Id = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Id = 'Id' in params ? params.Id : null;
+
+    }
+}
+
+/**
+ * ExposeService返回参数结构体
+ * @class
+ */
+class ExposeServiceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 暴露方式
+         * @type {ExposeInfo || null}
+         */
+        this.Expose = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Expose) {
+            let obj = new ExposeInfo();
+            obj.deserialize(params.Expose)
+            this.Expose = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 伸缩组活动关联的节点
+ * @class
+ */
+class RsgAsActivityRelatedInstance extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 节点 ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 节点状态
+         * @type {string || null}
+         */
+        this.InstanceStatus = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.InstanceStatus = 'InstanceStatus' in params ? params.InstanceStatus : null;
+
+    }
+}
+
+/**
  * DeleteJob返回参数结构体
  * @class
  */
@@ -87,16 +190,10 @@ class CreateJobRequest extends  AbstractModel {
         this.Name = null;
 
         /**
-         * 同时处理任务的 Worker 个数
-         * @type {number || null}
-         */
-        this.WorkerCount = null;
-
-        /**
-         * 使用的配置 Id
+         * 使用的资源组 Id，默认使用共享资源组
          * @type {string || null}
          */
-        this.ConfigId = null;
+        this.ResourceGroupId = null;
 
         /**
          * 处理器配置, 单位为1/1000核；范围[100, 256000]
@@ -129,10 +226,16 @@ class CreateJobRequest extends  AbstractModel {
         this.Description = null;
 
         /**
-         * 使用的资源组 Id，默认使用共享资源组
+         * 同时处理任务的 Worker 个数
+         * @type {number || null}
+         */
+        this.WorkerCount = null;
+
+        /**
+         * 使用的配置 Id
          * @type {string || null}
          */
-        this.ResourceGroupId = null;
+        this.ConfigId = null;
 
         /**
          * GPU算力配置，单位为1/1000 卡，范围 [0, 256000]
@@ -152,6 +255,12 @@ class CreateJobRequest extends  AbstractModel {
          */
         this.GpuType = null;
 
+        /**
+         * 量化输入
+         * @type {QuantizationInput || null}
+         */
+        this.QuantizationInput = null;
+
     }
 
     /**
@@ -162,8 +271,7 @@ class CreateJobRequest extends  AbstractModel {
             return;
         }
         this.Name = 'Name' in params ? params.Name : null;
-        this.WorkerCount = 'WorkerCount' in params ? params.WorkerCount : null;
-        this.ConfigId = 'ConfigId' in params ? params.ConfigId : null;
+        this.ResourceGroupId = 'ResourceGroupId' in params ? params.ResourceGroupId : null;
         this.Cpu = 'Cpu' in params ? params.Cpu : null;
         this.Memory = 'Memory' in params ? params.Memory : null;
         this.Cluster = 'Cluster' in params ? params.Cluster : null;
@@ -174,10 +282,17 @@ class CreateJobRequest extends  AbstractModel {
             this.PredictInput = obj;
         }
         this.Description = 'Description' in params ? params.Description : null;
-        this.ResourceGroupId = 'ResourceGroupId' in params ? params.ResourceGroupId : null;
+        this.WorkerCount = 'WorkerCount' in params ? params.WorkerCount : null;
+        this.ConfigId = 'ConfigId' in params ? params.ConfigId : null;
         this.Gpu = 'Gpu' in params ? params.Gpu : null;
         this.GpuMemory = 'GpuMemory' in params ? params.GpuMemory : null;
         this.GpuType = 'GpuType' in params ? params.GpuType : null;
+
+        if (params.QuantizationInput) {
+            let obj = new QuantizationInput();
+            obj.deserialize(params.QuantizationInput)
+            this.QuantizationInput = obj;
+        }
 
     }
 }
@@ -282,6 +397,63 @@ class DescribeServiceConfigsResponse extends  AbstractModel {
 }
 
 /**
+ * 扩缩容配置
+ * @class
+ */
+class Scaler extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 最大副本数
+         * @type {number || null}
+         */
+        this.MaxReplicas = null;
+
+        /**
+         * 最小副本数
+         * @type {number || null}
+         */
+        this.MinReplicas = null;
+
+        /**
+         * 起始副本数
+         * @type {number || null}
+         */
+        this.StartReplicas = null;
+
+        /**
+         * 扩缩容指标，选择自动扩缩容时至少需要选择一个指标，支持CPU-UTIL、MEMORY-UTIL
+         * @type {Array.<Option> || null}
+         */
+        this.HpaMetrics = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MaxReplicas = 'MaxReplicas' in params ? params.MaxReplicas : null;
+        this.MinReplicas = 'MinReplicas' in params ? params.MinReplicas : null;
+        this.StartReplicas = 'StartReplicas' in params ? params.StartReplicas : null;
+
+        if (params.HpaMetrics) {
+            this.HpaMetrics = new Array();
+            for (let z in params.HpaMetrics) {
+                let obj = new Option();
+                obj.deserialize(params.HpaMetrics[z]);
+                this.HpaMetrics.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * CreateJob返回参数结构体
  * @class
  */
@@ -344,6 +516,56 @@ class DeleteServiceResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeRsgAsGroups返回参数结构体
+ * @class
+ */
+class DescribeRsgAsGroupsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 所查询的伸缩组数组
+         * @type {Array.<RsgAsGroup> || null}
+         */
+        this.RsgAsGroupSet = null;
+
+        /**
+         * 伸缩组数组总数目
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.RsgAsGroupSet) {
+            this.RsgAsGroupSet = new Array();
+            for (let z in params.RsgAsGroupSet) {
+                let obj = new RsgAsGroup();
+                obj.deserialize(params.RsgAsGroupSet[z]);
+                this.RsgAsGroupSet.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -505,6 +727,12 @@ class Instance extends  AbstractModel {
          */
         this.GpuRequested = null;
 
+        /**
+         * 节点所在伸缩组 ID
+         * @type {string || null}
+         */
+        this.RsgAsGroupId = null;
+
     }
 
     /**
@@ -532,6 +760,47 @@ class Instance extends  AbstractModel {
         this.CpuRequested = 'CpuRequested' in params ? params.CpuRequested : null;
         this.MemoryRequested = 'MemoryRequested' in params ? params.MemoryRequested : null;
         this.GpuRequested = 'GpuRequested' in params ? params.GpuRequested : null;
+        this.RsgAsGroupId = 'RsgAsGroupId' in params ? params.RsgAsGroupId : null;
+
+    }
+}
+
+/**
+ * UpdateRsgAsGroup返回参数结构体
+ * @class
+ */
+class UpdateRsgAsGroupResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 资源组的伸缩组
+         * @type {RsgAsGroup || null}
+         */
+        this.RsgAsGroup = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.RsgAsGroup) {
+            let obj = new RsgAsGroup();
+            obj.deserialize(params.RsgAsGroup)
+            this.RsgAsGroup = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -582,6 +851,149 @@ class DescribeServicesResponse extends  AbstractModel {
         }
         this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeResourceGroups返回参数结构体
+ * @class
+ */
+class DescribeResourceGroupsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 资源组总数
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 资源组列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<ResourceGroup> || null}
+         */
+        this.ResourceGroups = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.ResourceGroups) {
+            this.ResourceGroups = new Array();
+            for (let z in params.ResourceGroups) {
+                let obj = new ResourceGroup();
+                obj.deserialize(params.ResourceGroups[z]);
+                this.ResourceGroups.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeRsgAsGroups请求参数结构体
+ * @class
+ */
+class DescribeRsgAsGroupsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 筛选选项
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * 偏移量，默认为 0
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 返回数量，默认为 20，最大值为 200
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 输出列表的排列顺序。取值范围："ASC", "DESC"
+         * @type {string || null}
+         */
+        this.Order = null;
+
+        /**
+         * 排序的依据字段， 取值范围 "CREATE_TIME", "UPDATE_TIME", "NAME"
+         * @type {string || null}
+         */
+        this.OrderField = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Order = 'Order' in params ? params.Order : null;
+        this.OrderField = 'OrderField' in params ? params.OrderField : null;
+
+    }
+}
+
+/**
+ * DeleteResourceGroup请求参数结构体
+ * @class
+ */
+class DeleteResourceGroupRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 要删除的资源组 ID
+         * @type {string || null}
+         */
+        this.ResourceGroupId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ResourceGroupId = 'ResourceGroupId' in params ? params.ResourceGroupId : null;
 
     }
 }
@@ -693,10 +1105,175 @@ class DescribeServiceConfigsRequest extends  AbstractModel {
 }
 
 /**
+ * DeleteRsgAsGroup请求参数结构体
+ * @class
+ */
+class DeleteRsgAsGroupRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 伸缩组 ID
+         * @type {string || null}
+         */
+        this.Id = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Id = 'Id' in params ? params.Id : null;
+
+    }
+}
+
+/**
+ * 实例信息
+ * @class
+ */
+class ReplicaInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例名称
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 弹性网卡模式时，弹性网卡Ip
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.EniIp = null;
+
+        /**
+         * Normal: 正常运行中; Abnormal: 异常；Waiting：等待中
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * 当 status为 Abnormal 的时候，一些额外的信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Message = null;
+
+        /**
+         * 启动时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * 重启次数
+         * @type {number || null}
+         */
+        this.Restarted = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.EniIp = 'EniIp' in params ? params.EniIp : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.Message = 'Message' in params ? params.Message : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.Restarted = 'Restarted' in params ? params.Restarted : null;
+
+    }
+}
+
+/**
  * DeleteServiceConfig返回参数结构体
  * @class
  */
 class DeleteServiceConfigResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * UpdateRsgAsGroup请求参数结构体
+ * @class
+ */
+class UpdateRsgAsGroupRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 伸缩组 ID
+         * @type {string || null}
+         */
+        this.Id = null;
+
+        /**
+         * 重命名名称
+         * @type {string || null}
+         */
+        this.Name = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Id = 'Id' in params ? params.Id : null;
+        this.Name = 'Name' in params ? params.Name : null;
+
+    }
+}
+
+/**
+ * DeleteRsgAsGroup返回参数结构体
+ * @class
+ */
+class DeleteRsgAsGroupResponse extends  AbstractModel {
     constructor(){
         super();
 
@@ -794,6 +1371,41 @@ class Config extends  AbstractModel {
         this.Version = 'Version' in params ? params.Version : null;
         this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
         this.Description = 'Description' in params ? params.Description : null;
+
+    }
+}
+
+/**
+ * 配置项
+ * @class
+ */
+class Option extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 名称
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 取值
+         * @type {number || null}
+         */
+        this.Value = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Value = 'Value' in params ? params.Value : null;
 
     }
 }
@@ -918,6 +1530,7 @@ class Job extends  AbstractModel {
 
         /**
          * 集群名
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.Cluster = null;
@@ -936,6 +1549,7 @@ class Job extends  AbstractModel {
 
         /**
          * Worker 使用的运行环境
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.Runtime = null;
@@ -949,12 +1563,14 @@ class Job extends  AbstractModel {
 
         /**
          * 配置 Id
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.ConfigId = null;
 
         /**
          * 预测输入
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {PredictInput || null}
          */
         this.PredictInput = null;
@@ -1055,6 +1671,20 @@ class Job extends  AbstractModel {
          */
         this.ConfigVersion = null;
 
+        /**
+         * Job类型
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.JobType = null;
+
+        /**
+         * 量化输入
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {QuantizationInput || null}
+         */
+        this.QuantizationInput = null;
+
     }
 
     /**
@@ -1096,6 +1726,13 @@ class Job extends  AbstractModel {
         this.GpuType = 'GpuType' in params ? params.GpuType : null;
         this.ConfigName = 'ConfigName' in params ? params.ConfigName : null;
         this.ConfigVersion = 'ConfigVersion' in params ? params.ConfigVersion : null;
+        this.JobType = 'JobType' in params ? params.JobType : null;
+
+        if (params.QuantizationInput) {
+            let obj = new QuantizationInput();
+            obj.deserialize(params.QuantizationInput)
+            this.QuantizationInput = obj;
+        }
 
     }
 }
@@ -1138,6 +1775,70 @@ class UpdateJobRequest extends  AbstractModel {
         this.JobId = 'JobId' in params ? params.JobId : null;
         this.JobAction = 'JobAction' in params ? params.JobAction : null;
         this.Description = 'Description' in params ? params.Description : null;
+
+    }
+}
+
+/**
+ * DescribeResourceGroups请求参数结构体
+ * @class
+ */
+class DescribeResourceGroupsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 筛选选项
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * 偏移量，默认为0
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 返回数量，默认为20，最大值为200
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 输出列表的排列顺序。取值范围：ASC：升序排列 DESC：降序排列
+         * @type {string || null}
+         */
+        this.Order = null;
+
+        /**
+         * 排序的依据字段， 取值范围 "CREATE_TIME", "UPDATE_TIME", "NAME"
+         * @type {string || null}
+         */
+        this.OrderField = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Order = 'Order' in params ? params.Order : null;
+        this.OrderField = 'OrderField' in params ? params.OrderField : null;
 
     }
 }
@@ -1194,6 +1895,34 @@ class DescribeRuntimesResponse extends  AbstractModel {
 }
 
 /**
+ * DeleteInstance返回参数结构体
+ * @class
+ */
+class DeleteInstanceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeInstances返回参数结构体
  * @class
  */
@@ -1237,6 +1966,62 @@ class DescribeInstancesResponse extends  AbstractModel {
                 obj.deserialize(params.Instances[z]);
                 this.Instances.push(obj);
             }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DeleteResourceGroup返回参数结构体
+ * @class
+ */
+class DeleteResourceGroupResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DisableRsgAsGroup返回参数结构体
+ * @class
+ */
+class DisableRsgAsGroupResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -1387,6 +2172,12 @@ class CreateServiceRequest extends  AbstractModel {
         this.ScaleMode = null;
 
         /**
+         * 部署要使用的资源组Id，默认为共享资源组
+         * @type {string || null}
+         */
+        this.ResourceGroupId = null;
+
+        /**
          * 处理器配置, 单位为1/1000核；范围[100, 256000]
          * @type {number || null}
          */
@@ -1403,12 +2194,6 @@ class CreateServiceRequest extends  AbstractModel {
          * @type {string || null}
          */
         this.Cluster = null;
-
-        /**
-         * 部署要使用的资源组Id，默认为共享资源组
-         * @type {string || null}
-         */
-        this.ResourceGroupId = null;
 
         /**
          * 默认为空，表示不需要鉴权，TOKEN 表示选择 Token 鉴权方式
@@ -1458,15 +2243,43 @@ class CreateServiceRequest extends  AbstractModel {
         this.ServiceConfigId = 'ServiceConfigId' in params ? params.ServiceConfigId : null;
         this.Name = 'Name' in params ? params.Name : null;
         this.ScaleMode = 'ScaleMode' in params ? params.ScaleMode : null;
+        this.ResourceGroupId = 'ResourceGroupId' in params ? params.ResourceGroupId : null;
         this.Cpu = 'Cpu' in params ? params.Cpu : null;
         this.Memory = 'Memory' in params ? params.Memory : null;
         this.Cluster = 'Cluster' in params ? params.Cluster : null;
-        this.ResourceGroupId = 'ResourceGroupId' in params ? params.ResourceGroupId : null;
         this.Authentication = 'Authentication' in params ? params.Authentication : null;
         this.Gpu = 'Gpu' in params ? params.Gpu : null;
         this.GpuMemory = 'GpuMemory' in params ? params.GpuMemory : null;
         this.Description = 'Description' in params ? params.Description : null;
         this.GpuType = 'GpuType' in params ? params.GpuType : null;
+
+    }
+}
+
+/**
+ * EnableRsgAsGroup返回参数结构体
+ * @class
+ */
+class EnableRsgAsGroupResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1581,6 +2394,24 @@ class UpdateServiceRequest extends  AbstractModel {
          */
         this.GpuType = null;
 
+        /**
+         * 处理器配置，单位为 1/1000 核
+         * @type {number || null}
+         */
+        this.Cpu = null;
+
+        /**
+         * 内存配置，单位为1M
+         * @type {number || null}
+         */
+        this.Memory = null;
+
+        /**
+         * 显卡配置，单位为 1/1000 卡
+         * @type {number || null}
+         */
+        this.Gpu = null;
+
     }
 
     /**
@@ -1602,6 +2433,9 @@ class UpdateServiceRequest extends  AbstractModel {
         this.ServiceAction = 'ServiceAction' in params ? params.ServiceAction : null;
         this.Description = 'Description' in params ? params.Description : null;
         this.GpuType = 'GpuType' in params ? params.GpuType : null;
+        this.Cpu = 'Cpu' in params ? params.Cpu : null;
+        this.Memory = 'Memory' in params ? params.Memory : null;
+        this.Gpu = 'Gpu' in params ? params.Gpu : null;
 
     }
 }
@@ -1715,6 +2549,27 @@ class ExposeInfo extends  AbstractModel {
          */
         this.SubnetId = null;
 
+        /**
+         * GATEWAY 服务id，ExposeType = GATEWAY 时返回
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.GateWayServiceId = null;
+
+        /**
+         * GATEWAY api id，ExposeType = GATEWAY 时返回
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.GateWayAPIId = null;
+
+        /**
+         * GATEWAY domain，ExposeType = GATEWAY 时返回
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.GateWayDomain = null;
+
     }
 
     /**
@@ -1728,6 +2583,121 @@ class ExposeInfo extends  AbstractModel {
         this.Ip = 'Ip' in params ? params.Ip : null;
         this.VpcId = 'VpcId' in params ? params.VpcId : null;
         this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
+        this.GateWayServiceId = 'GateWayServiceId' in params ? params.GateWayServiceId : null;
+        this.GateWayAPIId = 'GateWayAPIId' in params ? params.GateWayAPIId : null;
+        this.GateWayDomain = 'GateWayDomain' in params ? params.GateWayDomain : null;
+
+    }
+}
+
+/**
+ * 资源组的伸缩组
+ * @class
+ */
+class RsgAsGroup extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 伸缩组 ID
+         * @type {string || null}
+         */
+        this.Id = null;
+
+        /**
+         * 伸缩组所在地域
+         * @type {string || null}
+         */
+        this.Region = null;
+
+        /**
+         * 伸缩组所在可用区
+         * @type {string || null}
+         */
+        this.Zone = null;
+
+        /**
+         * 伸缩组所在集群
+         * @type {string || null}
+         */
+        this.Cluster = null;
+
+        /**
+         * 伸缩组所在资源组 ID
+         * @type {string || null}
+         */
+        this.RsgId = null;
+
+        /**
+         * 伸缩组名称
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 伸缩组允许的最大节点个数
+         * @type {number || null}
+         */
+        this.MaxSize = null;
+
+        /**
+         * 伸缩组允许的最小节点个数
+         * @type {number || null}
+         */
+        this.MinSize = null;
+
+        /**
+         * 伸缩组创建时间
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * 伸缩组更新时间
+         * @type {string || null}
+         */
+        this.UpdateTime = null;
+
+        /**
+         * 伸缩组状态
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * 伸缩组节点类型
+         * @type {string || null}
+         */
+        this.InstanceType = null;
+
+        /**
+         * 伸缩组内节点个数
+         * @type {number || null}
+         */
+        this.InstanceCount = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Id = 'Id' in params ? params.Id : null;
+        this.Region = 'Region' in params ? params.Region : null;
+        this.Zone = 'Zone' in params ? params.Zone : null;
+        this.Cluster = 'Cluster' in params ? params.Cluster : null;
+        this.RsgId = 'RsgId' in params ? params.RsgId : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.MaxSize = 'MaxSize' in params ? params.MaxSize : null;
+        this.MinSize = 'MinSize' in params ? params.MinSize : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
+        this.InstanceCount = 'InstanceCount' in params ? params.InstanceCount : null;
 
     }
 }
@@ -1835,6 +2805,46 @@ class Runtime extends  AbstractModel {
 }
 
 /**
+ * CreateRsgAsGroup返回参数结构体
+ * @class
+ */
+class CreateRsgAsGroupResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 所创建的资源组的伸缩组
+         * @type {RsgAsGroup || null}
+         */
+        this.RsgAsGroup = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.RsgAsGroup) {
+            let obj = new RsgAsGroup();
+            obj.deserialize(params.RsgAsGroup)
+            this.RsgAsGroup = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * 服务状态
  * @class
  */
@@ -1881,6 +2891,13 @@ class ServiceStatus extends  AbstractModel {
          */
         this.Message = null;
 
+        /**
+         * 副本信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<ReplicaInfo> || null}
+         */
+        this.ReplicaInfos = null;
+
     }
 
     /**
@@ -1905,28 +2922,97 @@ class ServiceStatus extends  AbstractModel {
         this.Replicas = 'Replicas' in params ? params.Replicas : null;
         this.Message = 'Message' in params ? params.Message : null;
 
+        if (params.ReplicaInfos) {
+            this.ReplicaInfos = new Array();
+            for (let z in params.ReplicaInfos) {
+                let obj = new ReplicaInfo();
+                obj.deserialize(params.ReplicaInfos[z]);
+                this.ReplicaInfos.push(obj);
+            }
+        }
+
     }
 }
 
 /**
- * 配置项
+ * 伸缩组活动信息
  * @class
  */
-class Option extends  AbstractModel {
+class RsgAsGroupActivity extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 名称
+         * 伸缩组活动 ID
          * @type {string || null}
          */
-        this.Name = null;
+        this.Id = null;
 
         /**
-         * 取值
-         * @type {number || null}
+         * 关联的伸缩组 ID
+         * @type {string || null}
          */
-        this.Value = null;
+        this.RsgAsGroupId = null;
+
+        /**
+         * 活动类型
+         * @type {string || null}
+         */
+        this.ActivityType = null;
+
+        /**
+         * 状态的编码
+         * @type {string || null}
+         */
+        this.StatusCode = null;
+
+        /**
+         * 状态的消息
+         * @type {string || null}
+         */
+        this.StatusMessage = null;
+
+        /**
+         * 活动原因
+         * @type {string || null}
+         */
+        this.Cause = null;
+
+        /**
+         * 活动描述
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * 活动开始时间
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * 活动结束时间
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * 活动创建时间
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * 活动相关联的节点
+         * @type {Array.<RsgAsActivityRelatedInstance> || null}
+         */
+        this.RsgAsActivityRelatedInstance = null;
+
+        /**
+         * 简略的状态消息
+         * @type {string || null}
+         */
+        this.StatusMessageSimplified = null;
 
     }
 
@@ -1937,8 +3023,287 @@ class Option extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.Id = 'Id' in params ? params.Id : null;
+        this.RsgAsGroupId = 'RsgAsGroupId' in params ? params.RsgAsGroupId : null;
+        this.ActivityType = 'ActivityType' in params ? params.ActivityType : null;
+        this.StatusCode = 'StatusCode' in params ? params.StatusCode : null;
+        this.StatusMessage = 'StatusMessage' in params ? params.StatusMessage : null;
+        this.Cause = 'Cause' in params ? params.Cause : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+
+        if (params.RsgAsActivityRelatedInstance) {
+            this.RsgAsActivityRelatedInstance = new Array();
+            for (let z in params.RsgAsActivityRelatedInstance) {
+                let obj = new RsgAsActivityRelatedInstance();
+                obj.deserialize(params.RsgAsActivityRelatedInstance[z]);
+                this.RsgAsActivityRelatedInstance.push(obj);
+            }
+        }
+        this.StatusMessageSimplified = 'StatusMessageSimplified' in params ? params.StatusMessageSimplified : null;
+
+    }
+}
+
+/**
+ * DescribeRsgAsGroupActivities请求参数结构体
+ * @class
+ */
+class DescribeRsgAsGroupActivitiesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 伸缩组 ID
+         * @type {string || null}
+         */
+        this.Id = null;
+
+        /**
+         * 查询活动的开始时间
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * 查询互动的结束时间
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * 筛选选项
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * 偏移量，默认为 0
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 返回数量，默认为 20，最大值为 200
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 输出列表的排列顺序。取值范围："ASC", "DESC"
+         * @type {string || null}
+         */
+        this.Order = null;
+
+        /**
+         * 排序的依据字段， 取值范围 "CREATE_TIME", "UPDATE_TIME", "NAME"
+         * @type {string || null}
+         */
+        this.OrderField = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Id = 'Id' in params ? params.Id : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Order = 'Order' in params ? params.Order : null;
+        this.OrderField = 'OrderField' in params ? params.OrderField : null;
+
+    }
+}
+
+/**
+ * 资源组
+ * @class
+ */
+class ResourceGroup extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 资源组 Id
+         * @type {string || null}
+         */
+        this.Id = null;
+
+        /**
+         * 地域
+         * @type {string || null}
+         */
+        this.Region = null;
+
+        /**
+         * 集群
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Cluster = null;
+
+        /**
+         * 资源组名称
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 资源组描述
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * 创建时间
+         * @type {string || null}
+         */
+        this.Created = null;
+
+        /**
+         * 更新时间
+         * @type {string || null}
+         */
+        this.Updated = null;
+
+        /**
+         * 资源组主机数量
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.InstanceCount = null;
+
+        /**
+         * 使用资源组的服务数量
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.ServiceCount = null;
+
+        /**
+         * 使用资源组的任务数量
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.JobCount = null;
+
+        /**
+         * 资源组是否为公共资源组
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.Public = null;
+
+        /**
+         * 机器类型
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.InstanceType = null;
+
+        /**
+         * 资源组状态
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * 显卡总张数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Gpu = null;
+
+        /**
+         * 处理器总核数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Cpu = null;
+
+        /**
+         * 内存总量，单位为G
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Memory = null;
+
+        /**
+         * 可用区
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Zone = null;
+
+        /**
+         * Gpu类型
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
+         */
+        this.GpuType = null;
+
+        /**
+         * 该资源组下是否有预付费资源
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.HasPrepaid = null;
+
+        /**
+         * 资源组是否允许预付费或后付费模式
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.PayMode = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Id = 'Id' in params ? params.Id : null;
+        this.Region = 'Region' in params ? params.Region : null;
+        this.Cluster = 'Cluster' in params ? params.Cluster : null;
         this.Name = 'Name' in params ? params.Name : null;
-        this.Value = 'Value' in params ? params.Value : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.Created = 'Created' in params ? params.Created : null;
+        this.Updated = 'Updated' in params ? params.Updated : null;
+        this.InstanceCount = 'InstanceCount' in params ? params.InstanceCount : null;
+        this.ServiceCount = 'ServiceCount' in params ? params.ServiceCount : null;
+        this.JobCount = 'JobCount' in params ? params.JobCount : null;
+        this.Public = 'Public' in params ? params.Public : null;
+        this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.Gpu = 'Gpu' in params ? params.Gpu : null;
+        this.Cpu = 'Cpu' in params ? params.Cpu : null;
+        this.Memory = 'Memory' in params ? params.Memory : null;
+        this.Zone = 'Zone' in params ? params.Zone : null;
+        this.GpuType = 'GpuType' in params ? params.GpuType : null;
+        this.HasPrepaid = 'HasPrepaid' in params ? params.HasPrepaid : null;
+        this.PayMode = 'PayMode' in params ? params.PayMode : null;
 
     }
 }
@@ -1972,36 +3337,18 @@ class DeleteJobRequest extends  AbstractModel {
 }
 
 /**
- * 扩缩容配置
+ * DeleteInstance请求参数结构体
  * @class
  */
-class Scaler extends  AbstractModel {
+class DeleteInstanceRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 最大副本数
-         * @type {number || null}
+         * 要删除的节点 ID
+         * @type {string || null}
          */
-        this.MaxReplicas = null;
-
-        /**
-         * 最小副本数
-         * @type {number || null}
-         */
-        this.MinReplicas = null;
-
-        /**
-         * 起始副本数
-         * @type {number || null}
-         */
-        this.StartReplicas = null;
-
-        /**
-         * 扩缩容指标，选择自动扩缩容时至少需要选择一个指标，支持CPU-UTIL、MEMORY-UTIL
-         * @type {Array.<Option> || null}
-         */
-        this.HpaMetrics = null;
+        this.InstanceId = null;
 
     }
 
@@ -2012,18 +3359,63 @@ class Scaler extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.MaxReplicas = 'MaxReplicas' in params ? params.MaxReplicas : null;
-        this.MinReplicas = 'MinReplicas' in params ? params.MinReplicas : null;
-        this.StartReplicas = 'StartReplicas' in params ? params.StartReplicas : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
 
-        if (params.HpaMetrics) {
-            this.HpaMetrics = new Array();
-            for (let z in params.HpaMetrics) {
-                let obj = new Option();
-                obj.deserialize(params.HpaMetrics[z]);
-                this.HpaMetrics.push(obj);
-            }
+    }
+}
+
+/**
+ * CreateRsgAsGroup请求参数结构体
+ * @class
+ */
+class CreateRsgAsGroupRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 资源组 ID
+         * @type {string || null}
+         */
+        this.RsgId = null;
+
+        /**
+         * 伸缩组允许的最大节点数
+         * @type {number || null}
+         */
+        this.MaxSize = null;
+
+        /**
+         * 伸缩组允许的最小节点数
+         * @type {number || null}
+         */
+        this.MinSize = null;
+
+        /**
+         * 资源组所在的集群名
+         * @type {string || null}
+         */
+        this.Cluster = null;
+
+        /**
+         * 伸缩组名称
+         * @type {string || null}
+         */
+        this.Name = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
         }
+        this.RsgId = 'RsgId' in params ? params.RsgId : null;
+        this.MaxSize = 'MaxSize' in params ? params.MaxSize : null;
+        this.MinSize = 'MinSize' in params ? params.MinSize : null;
+        this.Cluster = 'Cluster' in params ? params.Cluster : null;
+        this.Name = 'Name' in params ? params.Name : null;
 
     }
 }
@@ -2050,24 +3442,18 @@ class DescribeRuntimesRequest extends  AbstractModel {
 }
 
 /**
- * ExposeService返回参数结构体
+ * EnableRsgAsGroup请求参数结构体
  * @class
  */
-class ExposeServiceResponse extends  AbstractModel {
+class EnableRsgAsGroupRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 暴露方式
-         * @type {ExposeInfo || null}
-         */
-        this.Expose = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * 伸缩组 ID
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.Id = null;
 
     }
 
@@ -2078,13 +3464,7 @@ class ExposeServiceResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.Expose) {
-            let obj = new ExposeInfo();
-            obj.deserialize(params.Expose)
-            this.Expose = obj;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.Id = 'Id' in params ? params.Id : null;
 
     }
 }
@@ -2134,6 +3514,62 @@ class CreateServiceConfigRequest extends  AbstractModel {
         this.Runtime = 'Runtime' in params ? params.Runtime : null;
         this.ModelUri = 'ModelUri' in params ? params.ModelUri : null;
         this.Description = 'Description' in params ? params.Description : null;
+
+    }
+}
+
+/**
+ * 量化输入
+ * @class
+ */
+class QuantizationInput extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 量化输入路径
+         * @type {string || null}
+         */
+        this.InputPath = null;
+
+        /**
+         * 量化输出路径
+         * @type {string || null}
+         */
+        this.OutputPath = null;
+
+        /**
+         * 量化批大小
+         * @type {number || null}
+         */
+        this.BatchSize = null;
+
+        /**
+         * 量化精度，支持：FP32，FP16，INT8
+         * @type {string || null}
+         */
+        this.Precision = null;
+
+        /**
+         * 转换类型
+         * @type {string || null}
+         */
+        this.ConvertType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InputPath = 'InputPath' in params ? params.InputPath : null;
+        this.OutputPath = 'OutputPath' in params ? params.OutputPath : null;
+        this.BatchSize = 'BatchSize' in params ? params.BatchSize : null;
+        this.Precision = 'Precision' in params ? params.Precision : null;
+        this.ConvertType = 'ConvertType' in params ? params.ConvertType : null;
 
     }
 }
@@ -2522,6 +3958,57 @@ class DeleteRuntimeRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeRsgAsGroupActivities返回参数结构体
+ * @class
+ */
+class DescribeRsgAsGroupActivitiesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 伸缩组活动数组
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<RsgAsGroupActivity> || null}
+         */
+        this.RsgAsGroupActivitySet = null;
+
+        /**
+         * 所查询的伸缩组活动总数目
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.RsgAsGroupActivitySet) {
+            this.RsgAsGroupActivitySet = new Array();
+            for (let z in params.RsgAsGroupActivitySet) {
+                let obj = new RsgAsGroupActivity();
+                obj.deserialize(params.RsgAsGroupActivitySet[z]);
+                this.RsgAsGroupActivitySet.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeServices请求参数结构体
  * @class
  */
@@ -2586,48 +4073,74 @@ class DescribeServicesRequest extends  AbstractModel {
 }
 
 module.exports = {
+    DisableRsgAsGroupRequest: DisableRsgAsGroupRequest,
+    ExposeServiceResponse: ExposeServiceResponse,
+    RsgAsActivityRelatedInstance: RsgAsActivityRelatedInstance,
     DeleteJobResponse: DeleteJobResponse,
     DeleteRuntimeResponse: DeleteRuntimeResponse,
     CreateJobRequest: CreateJobRequest,
     ExposeServiceRequest: ExposeServiceRequest,
     DescribeServiceConfigsResponse: DescribeServiceConfigsResponse,
+    Scaler: Scaler,
     CreateJobResponse: CreateJobResponse,
     DeleteServiceResponse: DeleteServiceResponse,
+    DescribeRsgAsGroupsResponse: DescribeRsgAsGroupsResponse,
     UpdateServiceResponse: UpdateServiceResponse,
     Instance: Instance,
+    UpdateRsgAsGroupResponse: UpdateRsgAsGroupResponse,
     DescribeServicesResponse: DescribeServicesResponse,
+    DescribeResourceGroupsResponse: DescribeResourceGroupsResponse,
+    DescribeRsgAsGroupsRequest: DescribeRsgAsGroupsRequest,
+    DeleteResourceGroupRequest: DeleteResourceGroupRequest,
     Conditions: Conditions,
     DescribeServiceConfigsRequest: DescribeServiceConfigsRequest,
+    DeleteRsgAsGroupRequest: DeleteRsgAsGroupRequest,
+    ReplicaInfo: ReplicaInfo,
     DeleteServiceConfigResponse: DeleteServiceConfigResponse,
+    UpdateRsgAsGroupRequest: UpdateRsgAsGroupRequest,
+    DeleteRsgAsGroupResponse: DeleteRsgAsGroupResponse,
     Config: Config,
+    Option: Option,
     PredictInput: PredictInput,
     CreateRuntimeResponse: CreateRuntimeResponse,
     Job: Job,
     UpdateJobRequest: UpdateJobRequest,
+    DescribeResourceGroupsRequest: DescribeResourceGroupsRequest,
     DescribeRuntimesResponse: DescribeRuntimesResponse,
+    DeleteInstanceResponse: DeleteInstanceResponse,
     DescribeInstancesResponse: DescribeInstancesResponse,
+    DeleteResourceGroupResponse: DeleteResourceGroupResponse,
+    DisableRsgAsGroupResponse: DisableRsgAsGroupResponse,
     DescribeInstancesRequest: DescribeInstancesRequest,
     CreateServiceResponse: CreateServiceResponse,
     CreateServiceRequest: CreateServiceRequest,
+    EnableRsgAsGroupResponse: EnableRsgAsGroupResponse,
     JobStatus: JobStatus,
     UpdateServiceRequest: UpdateServiceRequest,
     Filter: Filter,
     CreateServiceConfigResponse: CreateServiceConfigResponse,
     ExposeInfo: ExposeInfo,
+    RsgAsGroup: RsgAsGroup,
     DeleteServiceRequest: DeleteServiceRequest,
     Runtime: Runtime,
+    CreateRsgAsGroupResponse: CreateRsgAsGroupResponse,
     ServiceStatus: ServiceStatus,
-    Option: Option,
+    RsgAsGroupActivity: RsgAsGroupActivity,
+    DescribeRsgAsGroupActivitiesRequest: DescribeRsgAsGroupActivitiesRequest,
+    ResourceGroup: ResourceGroup,
     DeleteJobRequest: DeleteJobRequest,
-    Scaler: Scaler,
+    DeleteInstanceRequest: DeleteInstanceRequest,
+    CreateRsgAsGroupRequest: CreateRsgAsGroupRequest,
     DescribeRuntimesRequest: DescribeRuntimesRequest,
-    ExposeServiceResponse: ExposeServiceResponse,
+    EnableRsgAsGroupRequest: EnableRsgAsGroupRequest,
     CreateServiceConfigRequest: CreateServiceConfigRequest,
+    QuantizationInput: QuantizationInput,
     UpdateJobResponse: UpdateJobResponse,
     CreateRuntimeRequest: CreateRuntimeRequest,
     ModelService: ModelService,
     DeleteServiceConfigRequest: DeleteServiceConfigRequest,
     DeleteRuntimeRequest: DeleteRuntimeRequest,
+    DescribeRsgAsGroupActivitiesResponse: DescribeRsgAsGroupActivitiesResponse,
     DescribeServicesRequest: DescribeServicesRequest,
 
 }
