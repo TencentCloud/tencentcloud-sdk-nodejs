@@ -21,7 +21,6 @@ const SentenceEmbeddingRequest = models.SentenceEmbeddingRequest;
 const DescribeTripleRequest = models.DescribeTripleRequest;
 const DpToken = models.DpToken;
 const ChatBotResponse = models.ChatBotResponse;
-const ContentApprovalResponse = models.ContentApprovalResponse;
 const AutoSummarizationRequest = models.AutoSummarizationRequest;
 const ChatBotRequest = models.ChatBotRequest;
 const DescribeRelationRequest = models.DescribeRelationRequest;
@@ -34,7 +33,7 @@ const AutoSummarizationResponse = models.AutoSummarizationResponse;
 const DependencyParsingRequest = models.DependencyParsingRequest;
 const DescribeRelationResponse = models.DescribeRelationResponse;
 const WordSimilarityRequest = models.WordSimilarityRequest;
-const ContentApprovalRequest = models.ContentApprovalRequest;
+const TextCorrectionRequest = models.TextCorrectionRequest;
 const TextApprovalResponse = models.TextApprovalResponse;
 const SentenceEmbeddingResponse = models.SentenceEmbeddingResponse;
 const SentenceSimilarityRequest = models.SentenceSimilarityRequest;
@@ -50,7 +49,6 @@ const KeywordsExtractionResponse = models.KeywordsExtractionResponse;
 const TextCorrectionResponse = models.TextCorrectionResponse;
 const EntityRelationObject = models.EntityRelationObject;
 const WordEmbeddingRequest = models.WordEmbeddingRequest;
-const TextCorrectionRequest = models.TextCorrectionRequest;
 const SentenceSimilarityResponse = models.SentenceSimilarityResponse;
 const NerToken = models.NerToken;
 const SimilarWordsResponse = models.SimilarWordsResponse;
@@ -147,25 +145,6 @@ class NlpClient extends AbstractClient {
     }
 
     /**
-     * 词向量接口能够将输入的词语映射成一个固定维度的词向量，用来表示这个词语的语义特征。词向量是很多自然语言处理技术的基础，能够显著提高它们的效果。
-
-该词向量服务由腾讯知文自然语言处理团队联合腾讯AI Lab共同打造。使用的词向量基于千亿级大规模互联网语料并采用AI Lab自研的DSG算法训练而成，开源的词向量包含800多万中文词汇，在覆盖率、新鲜度及准确性等三方面性能突出。
-
-腾讯AI Lab词向量相关资料：
-
-https://ai.tencent.com/ailab/zh/news/detial?id=22
-
-https://ai.tencent.com/ailab/nlp/embedding.html 
-     * @param {WordEmbeddingRequest} req
-     * @param {function(string, WordEmbeddingResponse):void} cb
-     * @public
-     */
-    WordEmbedding(req, cb) {
-        let resp = new WordEmbeddingResponse();
-        this.request("WordEmbedding", req, resp, cb);
-    }
-
-    /**
      * 文本分类接口能够对用户输入的文本进行自动分类，将其映射到具体的类目上，用户只需要提供待分类的文本，而无需关注具体实现。
 
 该功能基于基于千亿级大规模互联网语料和LSTM、BERT等深度神经网络模型进行训练，并持续迭代更新，以保证效果不断提升。
@@ -187,26 +166,22 @@ https://ai.tencent.com/ailab/nlp/embedding.html
     }
 
     /**
-     * （该接口即将下线，请使用升级接口：文本审核）
+     * 词法分析接口提供以下三个功能：
 
-文本审核接口能够识别文本信息中的色情、政治等有害内容，帮助用户及时、精准地防范违规风险，可用于内容审核、敏感信息过滤、舆情监控等场景。
+1、智能分词：将连续的自然语言文本，切分成具有语义合理性和完整性的词汇序列；
 
-该功能基于10万级大规模敏感词库，结合多种文本对抗方法、政策权威指令等，并运用了深度学习技术，高效识别高危有害内容。同时我们会根据大规模语料和实时反误杀系统，不断更新迭代，确保效果持续提升。
+2、词性标注：为每一个词附上对应的词性，例如名词、代词、形容词、动词等；
 
-文本审核接口目前提供以下三个功能：
+3、命名实体识别：快速识别文本中的实体，例如人名、地名、机构名等。
 
-1、文本恶意级别：将文本分为3个级别，包括正常、恶意、可疑送审；
-
-2、文本恶意类型：把文本分为9个类别，包括正常、政治、色情、辱骂/低俗、暴恐/毒品、广告/灌水、迷信/邪教、其他违法、综合；
-
-3、恶意关键词：文本中所有涉嫌恶意的关键词。
-     * @param {ContentApprovalRequest} req
-     * @param {function(string, ContentApprovalResponse):void} cb
+所有的功能均基于千亿级大规模互联网语料进行持续迭代更新，以保证效果不断提升，用户无需担心新词发现、歧义消除、调用性能等问题。目前词法分析已经在泛互联网、金融、政务等不同垂直领域提供业务支持，并取得良好的效果。
+     * @param {LexicalAnalysisRequest} req
+     * @param {function(string, LexicalAnalysisResponse):void} cb
      * @public
      */
-    ContentApproval(req, cb) {
-        let resp = new ContentApprovalResponse();
-        this.request("ContentApproval", req, resp, cb);
+    LexicalAnalysis(req, cb) {
+        let resp = new LexicalAnalysisResponse();
+        this.request("LexicalAnalysis", req, resp, cb);
     }
 
     /**
@@ -245,22 +220,22 @@ https://ai.tencent.com/ailab/nlp/embedding.html
     }
 
     /**
-     * 词法分析接口提供以下三个功能：
+     * 词向量接口能够将输入的词语映射成一个固定维度的词向量，用来表示这个词语的语义特征。词向量是很多自然语言处理技术的基础，能够显著提高它们的效果。
 
-1、智能分词：将连续的自然语言文本，切分成具有语义合理性和完整性的词汇序列；
+该词向量服务由腾讯知文自然语言处理团队联合腾讯AI Lab共同打造。使用的词向量基于千亿级大规模互联网语料并采用AI Lab自研的DSG算法训练而成，开源的词向量包含800多万中文词汇，在覆盖率、新鲜度及准确性等三方面性能突出。
 
-2、词性标注：为每一个词附上对应的词性，例如名词、代词、形容词、动词等；
+腾讯AI Lab词向量相关资料：
 
-3、命名实体识别：快速识别文本中的实体，例如人名、地名、机构名等。
+https://ai.tencent.com/ailab/zh/news/detial?id=22
 
-所有的功能均基于千亿级大规模互联网语料进行持续迭代更新，以保证效果不断提升，用户无需担心新词发现、歧义消除、调用性能等问题。目前词法分析已经在泛互联网、金融、政务等不同垂直领域提供业务支持，并取得良好的效果。
-     * @param {LexicalAnalysisRequest} req
-     * @param {function(string, LexicalAnalysisResponse):void} cb
+https://ai.tencent.com/ailab/nlp/embedding.html 
+     * @param {WordEmbeddingRequest} req
+     * @param {function(string, WordEmbeddingResponse):void} cb
      * @public
      */
-    LexicalAnalysis(req, cb) {
-        let resp = new LexicalAnalysisResponse();
-        this.request("LexicalAnalysis", req, resp, cb);
+    WordEmbedding(req, cb) {
+        let resp = new WordEmbeddingResponse();
+        this.request("WordEmbedding", req, resp, cb);
     }
 
     /**

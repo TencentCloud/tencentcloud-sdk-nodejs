@@ -225,67 +225,6 @@ class ChatBotResponse extends  AbstractModel {
 }
 
 /**
- * ContentApproval返回参数结构体
- * @class
- */
-class ContentApprovalResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 文本是否恶意：
-0、正常；
-1、恶意；
-2、可疑送审
-         * @type {number || null}
-         */
-        this.EvilFlag = null;
-
-        /**
-         * 恶意关键词组
-         * @type {Array.<string> || null}
-         */
-        this.EvilKeywords = null;
-
-        /**
-         * 文本恶意类型：
-0、正常；
-1、政治；
-2、色情；
-3、辱骂/低俗；
-4、暴恐/毒品；
-5、广告/灌水；
-6、迷信/邪教；
-7、其他违法（如跨站追杀/恶意竞争等）；
-8、综合
-         * @type {number || null}
-         */
-        this.EvilType = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.EvilFlag = 'EvilFlag' in params ? params.EvilFlag : null;
-        this.EvilKeywords = 'EvilKeywords' in params ? params.EvilKeywords : null;
-        this.EvilType = 'EvilType' in params ? params.EvilType : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
  * AutoSummarization请求参数结构体
  * @class
  */
@@ -742,15 +681,15 @@ class WordSimilarityRequest extends  AbstractModel {
 }
 
 /**
- * ContentApproval请求参数结构体
+ * TextCorrection请求参数结构体
  * @class
  */
-class ContentApprovalRequest extends  AbstractModel {
+class TextCorrectionRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 待审核的文本（仅支持UTF-8格式，不超过2000字）
+         * 待纠错的文本（仅支持UTF-8格式，不超过2000字）
          * @type {string || null}
          */
         this.Text = null;
@@ -793,7 +732,7 @@ EvilType（文本恶意类型）：
 4、暴恐/毒品；
 5、广告/灌水；
 6、迷信/邪教；
-7、其他违法（如跨站追杀/恶意竞争等）；
+7、其他违法(如赌博/造假/违法交易等)；
 8、综合；
 9、联系方式/链接
 
@@ -1405,34 +1344,6 @@ class WordEmbeddingRequest extends  AbstractModel {
 }
 
 /**
- * TextCorrection请求参数结构体
- * @class
- */
-class TextCorrectionRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 待纠错的文本（仅支持UTF-8格式，不超过2000字）
-         * @type {string || null}
-         */
-        this.Text = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Text = 'Text' in params ? params.Text : null;
-
-    }
-}
-
-/**
  * SentenceSimilarity返回参数结构体
  * @class
  */
@@ -2016,7 +1927,6 @@ module.exports = {
     DescribeTripleRequest: DescribeTripleRequest,
     DpToken: DpToken,
     ChatBotResponse: ChatBotResponse,
-    ContentApprovalResponse: ContentApprovalResponse,
     AutoSummarizationRequest: AutoSummarizationRequest,
     ChatBotRequest: ChatBotRequest,
     DescribeRelationRequest: DescribeRelationRequest,
@@ -2029,7 +1939,7 @@ module.exports = {
     DependencyParsingRequest: DependencyParsingRequest,
     DescribeRelationResponse: DescribeRelationResponse,
     WordSimilarityRequest: WordSimilarityRequest,
-    ContentApprovalRequest: ContentApprovalRequest,
+    TextCorrectionRequest: TextCorrectionRequest,
     TextApprovalResponse: TextApprovalResponse,
     SentenceEmbeddingResponse: SentenceEmbeddingResponse,
     SentenceSimilarityRequest: SentenceSimilarityRequest,
@@ -2045,7 +1955,6 @@ module.exports = {
     TextCorrectionResponse: TextCorrectionResponse,
     EntityRelationObject: EntityRelationObject,
     WordEmbeddingRequest: WordEmbeddingRequest,
-    TextCorrectionRequest: TextCorrectionRequest,
     SentenceSimilarityResponse: SentenceSimilarityResponse,
     NerToken: NerToken,
     SimilarWordsResponse: SimilarWordsResponse,

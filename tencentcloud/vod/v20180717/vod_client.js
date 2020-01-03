@@ -99,7 +99,7 @@ const MediaProcessTaskAdaptiveDynamicStreamingResult = models.MediaProcessTaskAd
 const OcrWordsConfigureInfoForUpdate = models.OcrWordsConfigureInfoForUpdate;
 const WatermarkTemplate = models.WatermarkTemplate;
 const CoverBySnapshotTaskOutput = models.CoverBySnapshotTaskOutput;
-const ModifyAIAnalysisTemplateResponse = models.ModifyAIAnalysisTemplateResponse;
+const ForbidMediaDistributionRequest = models.ForbidMediaDistributionRequest;
 const DescribeAIRecognitionTemplatesResponse = models.DescribeAIRecognitionTemplatesResponse;
 const EditMediaResponse = models.EditMediaResponse;
 const PoliticalOcrReviewTemplateInfoForUpdate = models.PoliticalOcrReviewTemplateInfoForUpdate;
@@ -113,7 +113,7 @@ const AiRecognitionTaskAsrFullTextResultInput = models.AiRecognitionTaskAsrFullT
 const MediaMiniProgramReviewInfoItem = models.MediaMiniProgramReviewInfoItem;
 const ProcessMediaByProcedureRequest = models.ProcessMediaByProcedureRequest;
 const MediaProcessTaskInput = models.MediaProcessTaskInput;
-const AiRecognitionTaskFaceSegmentItem = models.AiRecognitionTaskFaceSegmentItem;
+const MediaProcessTaskAnimatedGraphicResult = models.MediaProcessTaskAnimatedGraphicResult;
 const ProcessMediaResponse = models.ProcessMediaResponse;
 const CreateWordSamplesResponse = models.CreateWordSamplesResponse;
 const ClassificationConfigureInfoForUpdate = models.ClassificationConfigureInfoForUpdate;
@@ -126,6 +126,7 @@ const AiRecognitionTaskOcrWordsResult = models.AiRecognitionTaskOcrWordsResult;
 const PornAsrReviewTemplateInfo = models.PornAsrReviewTemplateInfo;
 const AiRecognitionTaskSegmentResult = models.AiRecognitionTaskSegmentResult;
 const ModifyAnimatedGraphicsTemplateResponse = models.ModifyAnimatedGraphicsTemplateResponse;
+const ModifyAIAnalysisTemplateResponse = models.ModifyAIAnalysisTemplateResponse;
 const LiveRealTimeClipRequest = models.LiveRealTimeClipRequest;
 const AiRecognitionTaskOcrFullTextSegmentItem = models.AiRecognitionTaskOcrFullTextSegmentItem;
 const EditMediaOutputConfig = models.EditMediaOutputConfig;
@@ -139,7 +140,7 @@ const DescribeMediaInfosResponse = models.DescribeMediaInfosResponse;
 const DeleteProcedureTemplateResponse = models.DeleteProcedureTemplateResponse;
 const DescribeAdaptiveDynamicStreamingTemplatesResponse = models.DescribeAdaptiveDynamicStreamingTemplatesResponse;
 const MediaMiniProgramReviewInfo = models.MediaMiniProgramReviewInfo;
-const MediaContentReviewOcrTextSegmentItem = models.MediaContentReviewOcrTextSegmentItem;
+const ForbidMediaDistributionResponse = models.ForbidMediaDistributionResponse;
 const DescribeAdaptiveDynamicStreamingTemplatesRequest = models.DescribeAdaptiveDynamicStreamingTemplatesRequest;
 const ImageWatermarkInput = models.ImageWatermarkInput;
 const ObjectConfigureInfo = models.ObjectConfigureInfo;
@@ -171,7 +172,7 @@ const TextWatermarkTemplateInput = models.TextWatermarkTemplateInput;
 const MediaAnimatedGraphicsItem = models.MediaAnimatedGraphicsItem;
 const DescribeCDNUsageDataResponse = models.DescribeCDNUsageDataResponse;
 const ModifyWordSampleRequest = models.ModifyWordSampleRequest;
-const MediaProcessTaskAnimatedGraphicResult = models.MediaProcessTaskAnimatedGraphicResult;
+const AiRecognitionTaskFaceSegmentItem = models.AiRecognitionTaskFaceSegmentItem;
 const DeleteMediaResponse = models.DeleteMediaResponse;
 const ModifySnapshotByTimeOffsetTemplateResponse = models.ModifySnapshotByTimeOffsetTemplateResponse;
 const AiRecognitionTaskObjectResult = models.AiRecognitionTaskObjectResult;
@@ -404,6 +405,7 @@ const AiRecognitionTaskAsrWordsResult = models.AiRecognitionTaskAsrWordsResult;
 const DescribeProcedureTemplatesResponse = models.DescribeProcedureTemplatesResponse;
 const SearchMediaRequest = models.SearchMediaRequest;
 const CreateSampleSnapshotTemplateRequest = models.CreateSampleSnapshotTemplateRequest;
+const MediaContentReviewOcrTextSegmentItem = models.MediaContentReviewOcrTextSegmentItem;
 const AudioVolumeParam = models.AudioVolumeParam;
 const AiReviewTaskPornAsrResult = models.AiReviewTaskPornAsrResult;
 const ModifyClassResponse = models.ModifyClassResponse;
@@ -1030,6 +1032,18 @@ class VodClient extends AbstractClient {
     }
 
     /**
+     * * 对媒体禁播后，除了点播控制台预览，其他场景访问视频各种资源的 URL（原始文件、转码输出文件、截图等）均会返回 403。
+  禁播/解禁操作全网生效时间约 5~10 分钟。
+     * @param {ForbidMediaDistributionRequest} req
+     * @param {function(string, ForbidMediaDistributionResponse):void} cb
+     * @public
+     */
+    ForbidMediaDistribution(req, cb) {
+        let resp = new ForbidMediaDistributionResponse();
+        this.request("ForbidMediaDistribution", req, resp, cb);
+    }
+
+    /**
      * * 获得用户的所有分类信息。
      * @param {DescribeAllClassRequest} req
      * @param {function(string, DescribeAllClassResponse):void} cb
@@ -1196,7 +1210,7 @@ class VodClient extends AbstractClient {
     }
 
     /**
-     * 创建用户自定义转码模板，数量上限：1000。
+     * 创建用户自定义转码模板，数量上限：100。
      * @param {CreateTranscodeTemplateRequest} req
      * @param {function(string, CreateTranscodeTemplateResponse):void} cb
      * @public

@@ -153,9 +153,17 @@ class CreateLiveCertRequest extends  AbstractModel {
 
         /**
          * 证书类型。0-用户添加证书；1-腾讯云托管证书。
+注意：当证书类型为0时，HttpsCrt和HttpsKey必选；
+当证书类型为1时，优先使用CloudCertId对应证书，若CloudCertId为空则使用HttpsCrt和HttpsKey。
          * @type {number || null}
          */
         this.CertType = null;
+
+        /**
+         * 证书名称。
+         * @type {string || null}
+         */
+        this.CertName = null;
 
         /**
          * 证书内容，即公钥。
@@ -170,16 +178,16 @@ class CreateLiveCertRequest extends  AbstractModel {
         this.HttpsKey = null;
 
         /**
-         * 证书名称。
-         * @type {string || null}
-         */
-        this.CertName = null;
-
-        /**
          * 描述。
          * @type {string || null}
          */
         this.Description = null;
+
+        /**
+         * 腾讯云证书托管ID。
+         * @type {string || null}
+         */
+        this.CloudCertId = null;
 
     }
 
@@ -191,10 +199,11 @@ class CreateLiveCertRequest extends  AbstractModel {
             return;
         }
         this.CertType = 'CertType' in params ? params.CertType : null;
+        this.CertName = 'CertName' in params ? params.CertName : null;
         this.HttpsCrt = 'HttpsCrt' in params ? params.HttpsCrt : null;
         this.HttpsKey = 'HttpsKey' in params ? params.HttpsKey : null;
-        this.CertName = 'CertName' in params ? params.CertName : null;
         this.Description = 'Description' in params ? params.Description : null;
+        this.CloudCertId = 'CloudCertId' in params ? params.CloudCertId : null;
 
     }
 }
@@ -1286,8 +1295,8 @@ class DomainCertInfo extends  AbstractModel {
 
         /**
          * 证书类型。
-0：腾讯云托管证书
-1：用户添加证书。
+0：用户添加证书，
+1：腾讯云托管证书。
          * @type {number || null}
          */
         this.CertType = null;
@@ -8680,13 +8689,13 @@ baseline/main/high。默认baseline
         this.FpsToOrig = null;
 
         /**
-         * 是否是急速高清模板，0：否，1：是。默认0。
+         * 是否是极速高清模板，0：否，1：是。默认0。
          * @type {number || null}
          */
         this.AiTransCode = null;
 
         /**
-         * 急速高清相比VideoBitrate少多少码率，0.1到0.5
+         * 极速高清相比VideoBitrate少多少码率，0.1到0.5
          * @type {number || null}
          */
         this.AdaptBitratePercent = null;

@@ -123,6 +123,65 @@ class TaskDetail extends  AbstractModel {
 }
 
 /**
+ * 集群中一种节点类型（如热数据节点，冷数据节点，专用主节点等）的规格描述信息，包括节点类型，节点个数，节点规格，磁盘类型，磁盘大小等, Type不指定时默认为热数据节点；如果节点为master节点，则DiskType和DiskSize参数会被忽略（主节点无数据盘）
+ * @class
+ */
+class NodeInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 节点数量
+         * @type {number || null}
+         */
+        this.NodeNum = null;
+
+        /**
+         * 节点规格<li>ES.S1.SMALL2：1核2G</li><li>ES.S1.MEDIUM4：2核4G</li><li>ES.S1.MEDIUM8：2核8G</li><li>ES.S1.LARGE16：4核16G</li><li>ES.S1.2XLARGE32：8核32G</li><li>ES.S1.4XLARGE32：16核32G</li><li>ES.S1.4XLARGE64：16核64G</li>
+         * @type {string || null}
+         */
+        this.NodeType = null;
+
+        /**
+         * 节点类型<li>hotData: 热数据节点</li>
+<li>warmData: 冷数据节点</li>
+<li>dedicatedMaster: 专用主节点</li>
+默认值为hotData
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * 节点磁盘类型<li>CLOUD_SSD：SSD云硬盘</li><li>CLOUD_PREMIUM：高硬能云硬盘</li>默认值CLOUD_SSD
+         * @type {string || null}
+         */
+        this.DiskType = null;
+
+        /**
+         * 节点磁盘容量（单位GB）
+         * @type {number || null}
+         */
+        this.DiskSize = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.NodeNum = 'NodeNum' in params ? params.NodeNum : null;
+        this.NodeType = 'NodeType' in params ? params.NodeType : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.DiskType = 'DiskType' in params ? params.DiskType : null;
+        this.DiskSize = 'DiskSize' in params ? params.DiskSize : null;
+
+    }
+}
+
+/**
  * DescribeInstanceOperations请求参数结构体
  * @class
  */
@@ -230,18 +289,24 @@ class OperationDetail extends  AbstractModel {
 }
 
 /**
- * RestartInstance返回参数结构体
+ * ES公网访问访问控制信息
  * @class
  */
-class RestartInstanceResponse extends  AbstractModel {
+class EsPublicAcl extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
+         * 访问黑名单
+         * @type {Array.<string> || null}
          */
-        this.RequestId = null;
+        this.BlackIpList = null;
+
+        /**
+         * 访问白名单
+         * @type {Array.<string> || null}
+         */
+        this.WhiteIpList = null;
 
     }
 
@@ -252,7 +317,8 @@ class RestartInstanceResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.BlackIpList = 'BlackIpList' in params ? params.BlackIpList : null;
+        this.WhiteIpList = 'WhiteIpList' in params ? params.WhiteIpList : null;
 
     }
 }
@@ -300,10 +366,10 @@ class DictInfo extends  AbstractModel {
 }
 
 /**
- * UpgradeLicense返回参数结构体
+ * RestartInstance返回参数结构体
  * @class
  */
-class UpgradeLicenseResponse extends  AbstractModel {
+class RestartInstanceResponse extends  AbstractModel {
     constructor(){
         super();
 
@@ -477,6 +543,18 @@ class UpgradeLicenseRequest extends  AbstractModel {
          */
         this.VoucherIds = null;
 
+        /**
+         * 6.8（及以上版本）基础版是否开启xpack security认证<li>1：不开启</li><li>2：开启</li>
+         * @type {number || null}
+         */
+        this.BasicSecurityType = null;
+
+        /**
+         * 是否强制重启<li>true强制重启</li><li>false不强制重启</li> 默认值false
+         * @type {boolean || null}
+         */
+        this.ForceRestart = null;
+
     }
 
     /**
@@ -490,6 +568,8 @@ class UpgradeLicenseRequest extends  AbstractModel {
         this.LicenseType = 'LicenseType' in params ? params.LicenseType : null;
         this.AutoVoucher = 'AutoVoucher' in params ? params.AutoVoucher : null;
         this.VoucherIds = 'VoucherIds' in params ? params.VoucherIds : null;
+        this.BasicSecurityType = 'BasicSecurityType' in params ? params.BasicSecurityType : null;
+        this.ForceRestart = 'ForceRestart' in params ? params.ForceRestart : null;
 
     }
 }
@@ -614,28 +694,10 @@ class CreateInstanceRequest extends  AbstractModel {
         this.Zone = null;
 
         /**
-         * 节点数量（2-50个）
-         * @type {number || null}
-         */
-        this.NodeNum = null;
-
-        /**
          * 实例版本（支持"5.6.4"、"6.4.3"）
          * @type {string || null}
          */
         this.EsVersion = null;
-
-        /**
-         * 节点规格<li>ES.S1.SMALL2：1核2G</li><li>ES.S1.MEDIUM4：2核4G</li><li>ES.S1.MEDIUM8：2核8G</li><li>ES.S1.LARGE16：4核16G</li><li>ES.S1.2XLARGE32：8核32G</li><li>ES.S1.4XLARGE32：16核32G</li><li>ES.S1.4XLARGE64：16核64G</li>
-         * @type {string || null}
-         */
-        this.NodeType = null;
-
-        /**
-         * 节点磁盘容量（单位GB）
-         * @type {number || null}
-         */
-        this.DiskSize = null;
 
         /**
          * 私有网络ID
@@ -662,6 +724,13 @@ class CreateInstanceRequest extends  AbstractModel {
         this.InstanceName = null;
 
         /**
+         * 已废弃请使用NodeInfoList
+节点数量（2-50个）
+         * @type {number || null}
+         */
+        this.NodeNum = null;
+
+        /**
          * 计费类型<li>PREPAID：预付费，即包年包月</li><li>POSTPAID_BY_HOUR：按小时后付费</li>默认值POSTPAID_BY_HOUR
          * @type {string || null}
          */
@@ -680,10 +749,25 @@ class CreateInstanceRequest extends  AbstractModel {
         this.RenewFlag = null;
 
         /**
-         * 节点磁盘类型<li>CLOUD_SSD：SSD云硬盘</li><li>CLOUD_PREMIUM：高硬能云硬盘</li>默认值CLOUD_SSD
+         * 已废弃请使用NodeInfoList
+节点规格<li>ES.S1.SMALL2：1核2G</li><li>ES.S1.MEDIUM4：2核4G</li><li>ES.S1.MEDIUM8：2核8G</li><li>ES.S1.LARGE16：4核16G</li><li>ES.S1.2XLARGE32：8核32G</li><li>ES.S1.4XLARGE32：16核32G</li><li>ES.S1.4XLARGE64：16核64G</li>
+         * @type {string || null}
+         */
+        this.NodeType = null;
+
+        /**
+         * 已废弃请使用NodeInfoList
+节点磁盘类型<li>CLOUD_SSD：SSD云硬盘</li><li>CLOUD_PREMIUM：高硬能云硬盘</li>默认值CLOUD_SSD
          * @type {string || null}
          */
         this.DiskType = null;
+
+        /**
+         * 已废弃请使用NodeInfoList
+节点磁盘容量（单位GB）
+         * @type {number || null}
+         */
+        this.DiskSize = null;
 
         /**
          * 计费时长单位（ChargeType为PREPAID时需要设置，默认值为“m”，表示月，当前只支持“m”）
@@ -704,25 +788,29 @@ class CreateInstanceRequest extends  AbstractModel {
         this.VoucherIds = null;
 
         /**
-         * 是否创建专用主节点<li>true：开启专用主节点</li><li>false：不开启专用主节点</li>默认值false
+         * 已废弃请使用NodeInfoList
+是否创建专用主节点<li>true：开启专用主节点</li><li>false：不开启专用主节点</li>默认值false
          * @type {boolean || null}
          */
         this.EnableDedicatedMaster = null;
 
         /**
-         * 专用主节点个数（只支持3个和5个，EnableDedicatedMaster为true时该值必传）
+         * 已废弃请使用NodeInfoList
+专用主节点个数（只支持3个和5个，EnableDedicatedMaster为true时该值必传）
          * @type {number || null}
          */
         this.MasterNodeNum = null;
 
         /**
-         * 专用主节点类型（EnableDedicatedMaster为true时必传）<li>ES.S1.SMALL2：1核2G</li><li>ES.S1.MEDIUM4：2核4G</li><li>ES.S1.MEDIUM8：2核8G</li><li>ES.S1.LARGE16：4核16G</li><li>ES.S1.2XLARGE32：8核32G</li><li>ES.S1.4XLARGE32：16核32G</li><li>ES.S1.4XLARGE64：16核64G</li>
+         * 已废弃请使用NodeInfoList
+专用主节点类型（EnableDedicatedMaster为true时必传）<li>ES.S1.SMALL2：1核2G</li><li>ES.S1.MEDIUM4：2核4G</li><li>ES.S1.MEDIUM8：2核8G</li><li>ES.S1.LARGE16：4核16G</li><li>ES.S1.2XLARGE32：8核32G</li><li>ES.S1.4XLARGE32：16核32G</li><li>ES.S1.4XLARGE64：16核64G</li>
          * @type {string || null}
          */
         this.MasterNodeType = null;
 
         /**
-         * 专用主节点磁盘大小（单位GB，非必传，若传递则必须为50，暂不支持自定义）
+         * 已废弃请使用NodeInfoList
+专用主节点磁盘大小（单位GB，非必传，若传递则必须为50，暂不支持自定义）
          * @type {number || null}
          */
         this.MasterNodeDiskSize = null;
@@ -741,7 +829,7 @@ class CreateInstanceRequest extends  AbstractModel {
 
         /**
          * 多可用区部署时可用区的详细信息(DeployMode为1时必传)
-         * @type {Array.<MultiZoneInfo> || null}
+         * @type {Array.<ZoneDetail> || null}
          */
         this.MultiZoneInfo = null;
 
@@ -750,6 +838,24 @@ class CreateInstanceRequest extends  AbstractModel {
          * @type {string || null}
          */
         this.LicenseType = null;
+
+        /**
+         * 节点信息列表， 用于描述集群各类节点的规格信息如节点类型，节点个数，节点规格，磁盘类型，磁盘大小等
+         * @type {Array.<NodeInfo> || null}
+         */
+        this.NodeInfoList = null;
+
+        /**
+         * 节点标签信息列表
+         * @type {Array.<TagInfo> || null}
+         */
+        this.TagList = null;
+
+        /**
+         * 6.8（及以上版本）基础版是否开启xpack security认证<li>1：不开启</li><li>2：开启</li>
+         * @type {number || null}
+         */
+        this.BasicSecurityType = null;
 
     }
 
@@ -761,18 +867,18 @@ class CreateInstanceRequest extends  AbstractModel {
             return;
         }
         this.Zone = 'Zone' in params ? params.Zone : null;
-        this.NodeNum = 'NodeNum' in params ? params.NodeNum : null;
         this.EsVersion = 'EsVersion' in params ? params.EsVersion : null;
-        this.NodeType = 'NodeType' in params ? params.NodeType : null;
-        this.DiskSize = 'DiskSize' in params ? params.DiskSize : null;
         this.VpcId = 'VpcId' in params ? params.VpcId : null;
         this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
         this.Password = 'Password' in params ? params.Password : null;
         this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
+        this.NodeNum = 'NodeNum' in params ? params.NodeNum : null;
         this.ChargeType = 'ChargeType' in params ? params.ChargeType : null;
         this.ChargePeriod = 'ChargePeriod' in params ? params.ChargePeriod : null;
         this.RenewFlag = 'RenewFlag' in params ? params.RenewFlag : null;
+        this.NodeType = 'NodeType' in params ? params.NodeType : null;
         this.DiskType = 'DiskType' in params ? params.DiskType : null;
+        this.DiskSize = 'DiskSize' in params ? params.DiskSize : null;
         this.TimeUnit = 'TimeUnit' in params ? params.TimeUnit : null;
         this.AutoVoucher = 'AutoVoucher' in params ? params.AutoVoucher : null;
         this.VoucherIds = 'VoucherIds' in params ? params.VoucherIds : null;
@@ -786,12 +892,31 @@ class CreateInstanceRequest extends  AbstractModel {
         if (params.MultiZoneInfo) {
             this.MultiZoneInfo = new Array();
             for (let z in params.MultiZoneInfo) {
-                let obj = new MultiZoneInfo();
+                let obj = new ZoneDetail();
                 obj.deserialize(params.MultiZoneInfo[z]);
                 this.MultiZoneInfo.push(obj);
             }
         }
         this.LicenseType = 'LicenseType' in params ? params.LicenseType : null;
+
+        if (params.NodeInfoList) {
+            this.NodeInfoList = new Array();
+            for (let z in params.NodeInfoList) {
+                let obj = new NodeInfo();
+                obj.deserialize(params.NodeInfoList[z]);
+                this.NodeInfoList.push(obj);
+            }
+        }
+
+        if (params.TagList) {
+            this.TagList = new Array();
+            for (let z in params.TagList) {
+                let obj = new TagInfo();
+                obj.deserialize(params.TagList[z]);
+                this.TagList.push(obj);
+            }
+        }
+        this.BasicSecurityType = 'BasicSecurityType' in params ? params.BasicSecurityType : null;
 
     }
 }
@@ -949,7 +1074,7 @@ class InstanceInfo extends  AbstractModel {
         this.EsConfig = null;
 
         /**
-         * ES访问控制配置
+         * Kibana访问控制配置
          * @type {EsAcl || null}
          */
         this.EsAcl = null;
@@ -1013,6 +1138,124 @@ class InstanceInfo extends  AbstractModel {
          * @type {string || null}
          */
         this.LicenseType = null;
+
+        /**
+         * 是否为冷热集群<li>true: 冷热集群</li><li>false: 非冷热集群</li>
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.EnableHotWarmMode = null;
+
+        /**
+         * 冷节点规格<li>ES.S1.SMALL2：1核2G</li><li>ES.S1.MEDIUM4：2核4G</li><li>ES.S1.MEDIUM8：2核8G</li><li>ES.S1.LARGE16：4核16G</li><li>ES.S1.2XLARGE32：8核32G</li><li>ES.S1.4XLARGE32：16核32G</li><li>ES.S1.4XLARGE64：16核64G</li>
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.WarmNodeType = null;
+
+        /**
+         * 冷节点个数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.WarmNodeNum = null;
+
+        /**
+         * 冷节点CPU核数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.WarmCpuNum = null;
+
+        /**
+         * 冷节点内存内存大小，单位GB
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.WarmMemSize = null;
+
+        /**
+         * 冷节点磁盘类型
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.WarmDiskType = null;
+
+        /**
+         * 冷节点磁盘大小，单位GB
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.WarmDiskSize = null;
+
+        /**
+         * 集群节点信息列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<NodeInfo> || null}
+         */
+        this.NodeInfoList = null;
+
+        /**
+         * Es公网地址
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.EsPublicUrl = null;
+
+        /**
+         * 多可用区网络信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<ZoneDetail> || null}
+         */
+        this.MultiZoneInfo = null;
+
+        /**
+         * 部署模式<li>0：单可用区</li><li>1：多可用区</li>
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.DeployMode = null;
+
+        /**
+         * ES公网访问状态<li>OPEN：开启</li><li>CLOSE：关闭
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.PublicAccess = null;
+
+        /**
+         * ES公网访问控制配置
+         * @type {EsAcl || null}
+         */
+        this.EsPublicAcl = null;
+
+        /**
+         * Kibana内网地址
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.KibanaPrivateUrl = null;
+
+        /**
+         * Kibana公网访问状态<li>OPEN：开启</li><li>CLOSE：关闭
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.KibanaPublicAccess = null;
+
+        /**
+         * Kibana内网访问状态<li>OPEN：开启</li><li>CLOSE：关闭
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.KibanaPrivateAccess = null;
+
+        /**
+         * 6.8（及以上版本）基础版是否开启xpack security认证<li>1：不开启</li><li>2：开启</li>
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.SecurityType = null;
 
     }
 
@@ -1086,6 +1329,44 @@ class InstanceInfo extends  AbstractModel {
             }
         }
         this.LicenseType = 'LicenseType' in params ? params.LicenseType : null;
+        this.EnableHotWarmMode = 'EnableHotWarmMode' in params ? params.EnableHotWarmMode : null;
+        this.WarmNodeType = 'WarmNodeType' in params ? params.WarmNodeType : null;
+        this.WarmNodeNum = 'WarmNodeNum' in params ? params.WarmNodeNum : null;
+        this.WarmCpuNum = 'WarmCpuNum' in params ? params.WarmCpuNum : null;
+        this.WarmMemSize = 'WarmMemSize' in params ? params.WarmMemSize : null;
+        this.WarmDiskType = 'WarmDiskType' in params ? params.WarmDiskType : null;
+        this.WarmDiskSize = 'WarmDiskSize' in params ? params.WarmDiskSize : null;
+
+        if (params.NodeInfoList) {
+            this.NodeInfoList = new Array();
+            for (let z in params.NodeInfoList) {
+                let obj = new NodeInfo();
+                obj.deserialize(params.NodeInfoList[z]);
+                this.NodeInfoList.push(obj);
+            }
+        }
+        this.EsPublicUrl = 'EsPublicUrl' in params ? params.EsPublicUrl : null;
+
+        if (params.MultiZoneInfo) {
+            this.MultiZoneInfo = new Array();
+            for (let z in params.MultiZoneInfo) {
+                let obj = new ZoneDetail();
+                obj.deserialize(params.MultiZoneInfo[z]);
+                this.MultiZoneInfo.push(obj);
+            }
+        }
+        this.DeployMode = 'DeployMode' in params ? params.DeployMode : null;
+        this.PublicAccess = 'PublicAccess' in params ? params.PublicAccess : null;
+
+        if (params.EsPublicAcl) {
+            let obj = new EsAcl();
+            obj.deserialize(params.EsPublicAcl)
+            this.EsPublicAcl = obj;
+        }
+        this.KibanaPrivateUrl = 'KibanaPrivateUrl' in params ? params.KibanaPrivateUrl : null;
+        this.KibanaPublicAccess = 'KibanaPublicAccess' in params ? params.KibanaPublicAccess : null;
+        this.KibanaPrivateAccess = 'KibanaPrivateAccess' in params ? params.KibanaPrivateAccess : null;
+        this.SecurityType = 'SecurityType' in params ? params.SecurityType : null;
 
     }
 }
@@ -1254,6 +1535,41 @@ class RestartInstanceRequest extends  AbstractModel {
 }
 
 /**
+ * 多可用区部署时可用区的详细信息
+ * @class
+ */
+class ZoneDetail extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 可用区
+         * @type {string || null}
+         */
+        this.Zone = null;
+
+        /**
+         * 子网ID
+         * @type {string || null}
+         */
+        this.SubnetId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Zone = 'Zone' in params ? params.Zone : null;
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
+
+    }
+}
+
+/**
  * DescribeInstances请求参数结构体
  * @class
  */
@@ -1303,6 +1619,18 @@ class DescribeInstancesRequest extends  AbstractModel {
          */
         this.OrderByType = null;
 
+        /**
+         * 节点标签信息列表
+         * @type {Array.<TagInfo> || null}
+         */
+        this.TagList = null;
+
+        /**
+         * 私有网络vip列表
+         * @type {Array.<string> || null}
+         */
+        this.IpList = null;
+
     }
 
     /**
@@ -1319,6 +1647,192 @@ class DescribeInstancesRequest extends  AbstractModel {
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.OrderByKey = 'OrderByKey' in params ? params.OrderByKey : null;
         this.OrderByType = 'OrderByType' in params ? params.OrderByType : null;
+
+        if (params.TagList) {
+            this.TagList = new Array();
+            for (let z in params.TagList) {
+                let obj = new TagInfo();
+                obj.deserialize(params.TagList[z]);
+                this.TagList.push(obj);
+            }
+        }
+        this.IpList = 'IpList' in params ? params.IpList : null;
+
+    }
+}
+
+/**
+ * UpdateInstance请求参数结构体
+ * @class
+ */
+class UpdateInstanceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 实例名称（1-50 个英文、汉字、数字、连接线-或下划线_）
+         * @type {string || null}
+         */
+        this.InstanceName = null;
+
+        /**
+         * 已废弃请使用NodeInfoList
+节点个数（2-50个）
+         * @type {number || null}
+         */
+        this.NodeNum = null;
+
+        /**
+         * 配置项（JSON格式字符串）。当前仅支持以下配置项：<li>action.destructive_requires_name</li><li>indices.fielddata.cache.size</li><li>indices.query.bool.max_clause_count</li>
+         * @type {string || null}
+         */
+        this.EsConfig = null;
+
+        /**
+         * 默认用户elastic的密码（8到16位，至少包括两项（[a-z,A-Z],[0-9]和[-!@#$%&^*+=_:;,.?]的特殊符号）
+         * @type {string || null}
+         */
+        this.Password = null;
+
+        /**
+         * 访问控制列表
+         * @type {EsAcl || null}
+         */
+        this.EsAcl = null;
+
+        /**
+         * 已废弃请使用NodeInfoList
+磁盘大小（单位GB）
+         * @type {number || null}
+         */
+        this.DiskSize = null;
+
+        /**
+         * 已废弃请使用NodeInfoList
+节点规格<li>ES.S1.SMALL2：1核2G</li><li>ES.S1.MEDIUM4：2核4G</li><li>ES.S1.MEDIUM8：2核8G</li><li>ES.S1.LARGE16：4核16G</li><li>ES.S1.2XLARGE32：8核32G</li><li>ES.S1.4XLARGE32：16核32G</li><li>ES.S1.4XLARGE64：16核64G</li>
+         * @type {string || null}
+         */
+        this.NodeType = null;
+
+        /**
+         * 已废弃请使用NodeInfoList
+专用主节点个数（只支持3个或5个）
+         * @type {number || null}
+         */
+        this.MasterNodeNum = null;
+
+        /**
+         * 已废弃请使用NodeInfoList
+专用主节点规格<li>ES.S1.SMALL2：1核2G</li><li>ES.S1.MEDIUM4：2核4G</li><li>ES.S1.MEDIUM8：2核8G</li><li>ES.S1.LARGE16：4核16G</li><li>ES.S1.2XLARGE32：8核32G</li><li>ES.S1.4XLARGE32：16核32G</li><li>ES.S1.4XLARGE64：16核64G</li>
+         * @type {string || null}
+         */
+        this.MasterNodeType = null;
+
+        /**
+         * 已废弃请使用NodeInfoList
+专用主节点磁盘大小（单位GB系统默认配置为50GB,暂不支持自定义）
+         * @type {number || null}
+         */
+        this.MasterNodeDiskSize = null;
+
+        /**
+         * 更新配置时是否强制重启<li>true强制重启</li><li>false不强制重启</li>当前仅更新EsConfig时需要设置，默认值为false
+         * @type {boolean || null}
+         */
+        this.ForceRestart = null;
+
+        /**
+         * COS自动备份信息
+         * @type {CosBackup || null}
+         */
+        this.CosBackup = null;
+
+        /**
+         * 节点信息列表，可以只传递要更新的节点及其对应的规格信息。支持的操作包括<li>修改一种节点的个数</li><li>修改一种节点的节点规格及磁盘大小</li><li>增加一种节点类型（需要同时指定该节点的类型，个数，规格，磁盘等信息）</li>上述操作一次只能进行一种，且磁盘类型不支持修改
+         * @type {Array.<NodeInfo> || null}
+         */
+        this.NodeInfoList = null;
+
+        /**
+         * 公网访问状态
+         * @type {string || null}
+         */
+        this.PublicAccess = null;
+
+        /**
+         * 公网访问控制列表
+         * @type {EsPublicAcl || null}
+         */
+        this.EsPublicAcl = null;
+
+        /**
+         * Kibana公网访问状态
+         * @type {string || null}
+         */
+        this.KibanaPublicAccess = null;
+
+        /**
+         * Kibana内网访问状态
+         * @type {string || null}
+         */
+        this.KibanaPrivateAccess = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
+        this.NodeNum = 'NodeNum' in params ? params.NodeNum : null;
+        this.EsConfig = 'EsConfig' in params ? params.EsConfig : null;
+        this.Password = 'Password' in params ? params.Password : null;
+
+        if (params.EsAcl) {
+            let obj = new EsAcl();
+            obj.deserialize(params.EsAcl)
+            this.EsAcl = obj;
+        }
+        this.DiskSize = 'DiskSize' in params ? params.DiskSize : null;
+        this.NodeType = 'NodeType' in params ? params.NodeType : null;
+        this.MasterNodeNum = 'MasterNodeNum' in params ? params.MasterNodeNum : null;
+        this.MasterNodeType = 'MasterNodeType' in params ? params.MasterNodeType : null;
+        this.MasterNodeDiskSize = 'MasterNodeDiskSize' in params ? params.MasterNodeDiskSize : null;
+        this.ForceRestart = 'ForceRestart' in params ? params.ForceRestart : null;
+
+        if (params.CosBackup) {
+            let obj = new CosBackup();
+            obj.deserialize(params.CosBackup)
+            this.CosBackup = obj;
+        }
+
+        if (params.NodeInfoList) {
+            this.NodeInfoList = new Array();
+            for (let z in params.NodeInfoList) {
+                let obj = new NodeInfo();
+                obj.deserialize(params.NodeInfoList[z]);
+                this.NodeInfoList.push(obj);
+            }
+        }
+        this.PublicAccess = 'PublicAccess' in params ? params.PublicAccess : null;
+
+        if (params.EsPublicAcl) {
+            let obj = new EsPublicAcl();
+            obj.deserialize(params.EsPublicAcl)
+            this.EsPublicAcl = obj;
+        }
+        this.KibanaPublicAccess = 'KibanaPublicAccess' in params ? params.KibanaPublicAccess : null;
+        this.KibanaPrivateAccess = 'KibanaPrivateAccess' in params ? params.KibanaPrivateAccess : null;
 
     }
 }
@@ -1375,163 +1889,6 @@ class EsDictionaryInfo extends  AbstractModel {
 }
 
 /**
- * UpdateInstance请求参数结构体
- * @class
- */
-class UpdateInstanceRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 实例ID
-         * @type {string || null}
-         */
-        this.InstanceId = null;
-
-        /**
-         * 实例名称（1-50 个英文、汉字、数字、连接线-或下划线_）
-         * @type {string || null}
-         */
-        this.InstanceName = null;
-
-        /**
-         * 节点个数（2-50个）
-         * @type {number || null}
-         */
-        this.NodeNum = null;
-
-        /**
-         * 配置项（JSON格式字符串）。当前仅支持以下配置项：<li>action.destructive_requires_name</li><li>indices.fielddata.cache.size</li><li>indices.query.bool.max_clause_count</li>
-         * @type {string || null}
-         */
-        this.EsConfig = null;
-
-        /**
-         * 默认用户elastic的密码（8到16位，至少包括两项（[a-z,A-Z],[0-9]和[-!@#$%&^*+=_:;,.?]的特殊符号）
-         * @type {string || null}
-         */
-        this.Password = null;
-
-        /**
-         * 访问控制列表
-         * @type {EsAcl || null}
-         */
-        this.EsAcl = null;
-
-        /**
-         * 磁盘大小（单位GB）
-         * @type {number || null}
-         */
-        this.DiskSize = null;
-
-        /**
-         * 节点规格<li>ES.S1.SMALL2：1核2G</li><li>ES.S1.MEDIUM4：2核4G</li><li>ES.S1.MEDIUM8：2核8G</li><li>ES.S1.LARGE16：4核16G</li><li>ES.S1.2XLARGE32：8核32G</li><li>ES.S1.4XLARGE32：16核32G</li><li>ES.S1.4XLARGE64：16核64G</li>
-         * @type {string || null}
-         */
-        this.NodeType = null;
-
-        /**
-         * 专用主节点个数（只支持3个或5个）
-         * @type {number || null}
-         */
-        this.MasterNodeNum = null;
-
-        /**
-         * 专用主节点规格<li>ES.S1.SMALL2：1核2G</li><li>ES.S1.MEDIUM4：2核4G</li><li>ES.S1.MEDIUM8：2核8G</li><li>ES.S1.LARGE16：4核16G</li><li>ES.S1.2XLARGE32：8核32G</li><li>ES.S1.4XLARGE32：16核32G</li><li>ES.S1.4XLARGE64：16核64G</li>
-         * @type {string || null}
-         */
-        this.MasterNodeType = null;
-
-        /**
-         * 专用主节点磁盘大小（单位GB系统默认配置为50GB,暂不支持自定义）
-         * @type {number || null}
-         */
-        this.MasterNodeDiskSize = null;
-
-        /**
-         * 更新配置时是否强制重启<li>true强制重启</li><li>false不强制重启</li>当前仅更新EsConfig时需要设置，默认值为false
-         * @type {boolean || null}
-         */
-        this.ForceRestart = null;
-
-        /**
-         * COS自动备份信息
-         * @type {CosBackup || null}
-         */
-        this.CosBackup = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
-        this.NodeNum = 'NodeNum' in params ? params.NodeNum : null;
-        this.EsConfig = 'EsConfig' in params ? params.EsConfig : null;
-        this.Password = 'Password' in params ? params.Password : null;
-
-        if (params.EsAcl) {
-            let obj = new EsAcl();
-            obj.deserialize(params.EsAcl)
-            this.EsAcl = obj;
-        }
-        this.DiskSize = 'DiskSize' in params ? params.DiskSize : null;
-        this.NodeType = 'NodeType' in params ? params.NodeType : null;
-        this.MasterNodeNum = 'MasterNodeNum' in params ? params.MasterNodeNum : null;
-        this.MasterNodeType = 'MasterNodeType' in params ? params.MasterNodeType : null;
-        this.MasterNodeDiskSize = 'MasterNodeDiskSize' in params ? params.MasterNodeDiskSize : null;
-        this.ForceRestart = 'ForceRestart' in params ? params.ForceRestart : null;
-
-        if (params.CosBackup) {
-            let obj = new CosBackup();
-            obj.deserialize(params.CosBackup)
-            this.CosBackup = obj;
-        }
-
-    }
-}
-
-/**
- * 多可用区部署时可用区的详细信息
- * @class
- */
-class MultiZoneInfo extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 可用区
-         * @type {string || null}
-         */
-        this.Zone = null;
-
-        /**
-         * 子网ID
-         * @type {string || null}
-         */
-        this.SubnetId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Zone = 'Zone' in params ? params.Zone : null;
-        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
-
-    }
-}
-
-/**
  * DescribeInstanceOperations返回参数结构体
  * @class
  */
@@ -1575,6 +1932,34 @@ class DescribeInstanceOperationsResponse extends  AbstractModel {
                 obj.deserialize(params.Operations[z]);
                 this.Operations.push(obj);
             }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * UpgradeLicense返回参数结构体
+ * @class
+ */
+class UpgradeLicenseResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -1879,6 +2264,12 @@ class UpgradeInstanceRequest extends  AbstractModel {
          */
         this.LicenseType = null;
 
+        /**
+         * 6.8（及以上版本）基础版是否开启xpack security认证<li>1：不开启</li><li>2：开启</li>
+         * @type {number || null}
+         */
+        this.BasicSecurityType = null;
+
     }
 
     /**
@@ -1892,6 +2283,7 @@ class UpgradeInstanceRequest extends  AbstractModel {
         this.EsVersion = 'EsVersion' in params ? params.EsVersion : null;
         this.CheckOnly = 'CheckOnly' in params ? params.CheckOnly : null;
         this.LicenseType = 'LicenseType' in params ? params.LicenseType : null;
+        this.BasicSecurityType = 'BasicSecurityType' in params ? params.BasicSecurityType : null;
 
     }
 }
@@ -1982,11 +2374,12 @@ class Operation extends  AbstractModel {
 module.exports = {
     InstanceLog: InstanceLog,
     TaskDetail: TaskDetail,
+    NodeInfo: NodeInfo,
     DescribeInstanceOperationsRequest: DescribeInstanceOperationsRequest,
     OperationDetail: OperationDetail,
-    RestartInstanceResponse: RestartInstanceResponse,
+    EsPublicAcl: EsPublicAcl,
     DictInfo: DictInfo,
-    UpgradeLicenseResponse: UpgradeLicenseResponse,
+    RestartInstanceResponse: RestartInstanceResponse,
     CreateInstanceResponse: CreateInstanceResponse,
     DescribeInstanceLogsRequest: DescribeInstanceLogsRequest,
     UpgradeLicenseRequest: UpgradeLicenseRequest,
@@ -1999,11 +2392,12 @@ module.exports = {
     DescribeInstancesResponse: DescribeInstancesResponse,
     DescribeInstanceLogsResponse: DescribeInstanceLogsResponse,
     RestartInstanceRequest: RestartInstanceRequest,
+    ZoneDetail: ZoneDetail,
     DescribeInstancesRequest: DescribeInstancesRequest,
-    EsDictionaryInfo: EsDictionaryInfo,
     UpdateInstanceRequest: UpdateInstanceRequest,
-    MultiZoneInfo: MultiZoneInfo,
+    EsDictionaryInfo: EsDictionaryInfo,
     DescribeInstanceOperationsResponse: DescribeInstanceOperationsResponse,
+    UpgradeLicenseResponse: UpgradeLicenseResponse,
     EsAcl: EsAcl,
     MasterNodeInfo: MasterNodeInfo,
     DeleteInstanceRequest: DeleteInstanceRequest,

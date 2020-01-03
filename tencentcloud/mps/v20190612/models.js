@@ -1523,7 +1523,7 @@ class CreateTranscodeTemplateRequest extends  AbstractModel {
         this.AudioTemplate = null;
 
         /**
-         * 极速高清转码参数，需联系商务架构师开通后才能使用。
+         * 极速高清转码参数。
          * @type {TEHDConfig || null}
          */
         this.TEHDConfig = null;
@@ -3084,16 +3084,35 @@ class ModifySnapshotByTimeOffsetTemplateRequest extends  AbstractModel {
         this.Name = null;
 
         /**
-         * 图片宽度，取值范围： [128, 4096]，单位：px。
+         * 截图宽度（或长边）的最大值，取值范围：0 和 [128, 4096]，单位：px。
+<li>当 Width、Height 均为 0，则分辨率同源；</li>
+<li>当 Width 为 0，Height 非 0，则 Width 按比例缩放；</li>
+<li>当 Width 非 0，Height 为 0，则 Height 按比例缩放；</li>
+<li>当 Width、Height 均非 0，则分辨率按用户指定。</li>
+默认值：0。
          * @type {number || null}
          */
         this.Width = null;
 
         /**
-         * 图片高度，取值范围： [128, 4096]，单位：px。
+         * 截图高度（或短边）的最大值，取值范围：0 和 [128, 4096]，单位：px。
+<li>当 Width、Height 均为 0，则分辨率同源；</li>
+<li>当 Width 为 0，Height 非 0，则 Width 按比例缩放；</li>
+<li>当 Width 非 0，Height 为 0，则 Height 按比例缩放；</li>
+<li>当 Width、Height 均非 0，则分辨率按用户指定。</li>
+默认值：0。
          * @type {number || null}
          */
         this.Height = null;
+
+        /**
+         * 分辨率自适应，可选值：
+<li>open：开启，此时，Width 代表视频的长边，Height 表示视频的短边；</li>
+<li>close：关闭，此时，Width 代表视频的宽度，Height 表示视频的高度。</li>
+默认值：open。
+         * @type {string || null}
+         */
+        this.ResolutionAdaptive = null;
 
         /**
          * 图片格式，取值可以为 jpg 和 png。
@@ -3106,6 +3125,17 @@ class ModifySnapshotByTimeOffsetTemplateRequest extends  AbstractModel {
          * @type {string || null}
          */
         this.Comment = null;
+
+        /**
+         * 填充方式，当视频流配置宽高参数与原始视频的宽高比不一致时，对转码的处理方式，即为“填充”。可选填充方式：
+<li> stretch：拉伸，对每一帧进行拉伸，填满整个画面，可能导致转码后的视频被“压扁“或者“拉长“；</li>
+<li>black：留黑，保持视频宽高比不变，边缘剩余部分使用黑色填充。</li>
+<li>white：留白，保持视频宽高比不变，边缘剩余部分使用白色填充。</li>
+<li>gauss：高斯模糊，保持视频宽高比不变，边缘剩余部分使用高斯模糊。</li>
+默认值：black 。
+         * @type {string || null}
+         */
+        this.FillType = null;
 
     }
 
@@ -3120,8 +3150,10 @@ class ModifySnapshotByTimeOffsetTemplateRequest extends  AbstractModel {
         this.Name = 'Name' in params ? params.Name : null;
         this.Width = 'Width' in params ? params.Width : null;
         this.Height = 'Height' in params ? params.Height : null;
+        this.ResolutionAdaptive = 'ResolutionAdaptive' in params ? params.ResolutionAdaptive : null;
         this.Format = 'Format' in params ? params.Format : null;
         this.Comment = 'Comment' in params ? params.Comment : null;
+        this.FillType = 'FillType' in params ? params.FillType : null;
 
     }
 }
@@ -3147,16 +3179,35 @@ class ModifySampleSnapshotTemplateRequest extends  AbstractModel {
         this.Name = null;
 
         /**
-         * 图片宽度，取值范围： [128, 4096]，单位：px。
+         * 截图宽度（或长边）的最大值，取值范围：0 和 [128, 4096]，单位：px。
+<li>当 Width、Height 均为 0，则分辨率同源；</li>
+<li>当 Width 为 0，Height 非 0，则 Width 按比例缩放；</li>
+<li>当 Width 非 0，Height 为 0，则 Height 按比例缩放；</li>
+<li>当 Width、Height 均非 0，则分辨率按用户指定。</li>
+默认值：0。
          * @type {number || null}
          */
         this.Width = null;
 
         /**
-         * 图片高度，取值范围： [128, 4096]，单位：px。
+         * 截图高度（或短边）的最大值，取值范围：0 和 [128, 4096]，单位：px。
+<li>当 Width、Height 均为 0，则分辨率同源；</li>
+<li>当 Width 为 0，Height 非 0，则 Width 按比例缩放；</li>
+<li>当 Width 非 0，Height 为 0，则 Height 按比例缩放；</li>
+<li>当 Width、Height 均非 0，则分辨率按用户指定。</li>
+默认值：0。
          * @type {number || null}
          */
         this.Height = null;
+
+        /**
+         * 分辨率自适应，可选值：
+<li>open：开启，此时，Width 代表视频的长边，Height 表示视频的短边；</li>
+<li>close：关闭，此时，Width 代表视频的宽度，Height 表示视频的高度。</li>
+默认值：open。
+         * @type {string || null}
+         */
+        this.ResolutionAdaptive = null;
 
         /**
          * 采样截图类型，取值：
@@ -3186,6 +3237,17 @@ class ModifySampleSnapshotTemplateRequest extends  AbstractModel {
          */
         this.Comment = null;
 
+        /**
+         * 填充方式，当视频流配置宽高参数与原始视频的宽高比不一致时，对转码的处理方式，即为“填充”。可选填充方式：
+<li> stretch：拉伸，对每一帧进行拉伸，填满整个画面，可能导致转码后的视频被“压扁“或者“拉长“；</li>
+<li>black：留黑，保持视频宽高比不变，边缘剩余部分使用黑色填充。</li>
+<li>white：留白，保持视频宽高比不变，边缘剩余部分使用白色填充。</li>
+<li>gauss：高斯模糊，保持视频宽高比不变，边缘剩余部分使用高斯模糊。</li>
+默认值：black 。
+         * @type {string || null}
+         */
+        this.FillType = null;
+
     }
 
     /**
@@ -3199,10 +3261,12 @@ class ModifySampleSnapshotTemplateRequest extends  AbstractModel {
         this.Name = 'Name' in params ? params.Name : null;
         this.Width = 'Width' in params ? params.Width : null;
         this.Height = 'Height' in params ? params.Height : null;
+        this.ResolutionAdaptive = 'ResolutionAdaptive' in params ? params.ResolutionAdaptive : null;
         this.SampleType = 'SampleType' in params ? params.SampleType : null;
         this.SampleInterval = 'SampleInterval' in params ? params.SampleInterval : null;
         this.Format = 'Format' in params ? params.Format : null;
         this.Comment = 'Comment' in params ? params.Comment : null;
+        this.FillType = 'FillType' in params ? params.FillType : null;
 
     }
 }
@@ -3599,7 +3663,7 @@ class DescribeAIAnalysisTemplatesRequest extends  AbstractModel {
 }
 
 /**
- * 视频处理输入对象信息。
+ * 视频处理的输入对象信息。
  * @class
  */
 class MediaInputInfo extends  AbstractModel {
@@ -3607,7 +3671,7 @@ class MediaInputInfo extends  AbstractModel {
         super();
 
         /**
-         * 视频处理对象的类型，现在仅支持 COS。
+         * 输入来源对象的类型，现在仅支持 COS。
          * @type {string || null}
          */
         this.Type = null;
@@ -4858,32 +4922,42 @@ class CreateAIAnalysisTemplateRequest extends  AbstractModel {
 }
 
 /**
- * 文本鉴政任务控制参数
+ * 视频处理任务类型
  * @class
  */
-class PoliticalOcrReviewTemplateInfo extends  AbstractModel {
+class MediaProcessTaskInput extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 文本鉴政任务开关，可选值：
-<li>ON：开启文本鉴政任务；</li>
-<li>OFF：关闭文本鉴政任务。</li>
-         * @type {string || null}
+         * 视频转码任务列表。
+         * @type {Array.<TranscodeTaskInput> || null}
          */
-        this.Switch = null;
+        this.TranscodeTaskSet = null;
 
         /**
-         * 判定涉嫌违规的分数阈值，当智能审核达到该分数以上，认为涉嫌违规，不填默认为 100 分。取值范围：0~100。
-         * @type {number || null}
+         * 视频转动图任务列表。
+         * @type {Array.<AnimatedGraphicTaskInput> || null}
          */
-        this.BlockConfidence = null;
+        this.AnimatedGraphicTaskSet = null;
 
         /**
-         * 判定需人工复核是否违规的分数阈值，当智能审核达到该分数以上，认为需人工复核，不填默认为 75 分。取值范围：0~100。
-         * @type {number || null}
+         * 对视频按时间点截图任务列表。
+         * @type {Array.<SnapshotByTimeOffsetTaskInput> || null}
          */
-        this.ReviewConfidence = null;
+        this.SnapshotByTimeOffsetTaskSet = null;
+
+        /**
+         * 对视频采样截图任务列表。
+         * @type {Array.<SampleSnapshotTaskInput> || null}
+         */
+        this.SampleSnapshotTaskSet = null;
+
+        /**
+         * 对视频截雪碧图任务列表。
+         * @type {Array.<ImageSpriteTaskInput> || null}
+         */
+        this.ImageSpriteTaskSet = null;
 
     }
 
@@ -4894,9 +4968,51 @@ class PoliticalOcrReviewTemplateInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Switch = 'Switch' in params ? params.Switch : null;
-        this.BlockConfidence = 'BlockConfidence' in params ? params.BlockConfidence : null;
-        this.ReviewConfidence = 'ReviewConfidence' in params ? params.ReviewConfidence : null;
+
+        if (params.TranscodeTaskSet) {
+            this.TranscodeTaskSet = new Array();
+            for (let z in params.TranscodeTaskSet) {
+                let obj = new TranscodeTaskInput();
+                obj.deserialize(params.TranscodeTaskSet[z]);
+                this.TranscodeTaskSet.push(obj);
+            }
+        }
+
+        if (params.AnimatedGraphicTaskSet) {
+            this.AnimatedGraphicTaskSet = new Array();
+            for (let z in params.AnimatedGraphicTaskSet) {
+                let obj = new AnimatedGraphicTaskInput();
+                obj.deserialize(params.AnimatedGraphicTaskSet[z]);
+                this.AnimatedGraphicTaskSet.push(obj);
+            }
+        }
+
+        if (params.SnapshotByTimeOffsetTaskSet) {
+            this.SnapshotByTimeOffsetTaskSet = new Array();
+            for (let z in params.SnapshotByTimeOffsetTaskSet) {
+                let obj = new SnapshotByTimeOffsetTaskInput();
+                obj.deserialize(params.SnapshotByTimeOffsetTaskSet[z]);
+                this.SnapshotByTimeOffsetTaskSet.push(obj);
+            }
+        }
+
+        if (params.SampleSnapshotTaskSet) {
+            this.SampleSnapshotTaskSet = new Array();
+            for (let z in params.SampleSnapshotTaskSet) {
+                let obj = new SampleSnapshotTaskInput();
+                obj.deserialize(params.SampleSnapshotTaskSet[z]);
+                this.SampleSnapshotTaskSet.push(obj);
+            }
+        }
+
+        if (params.ImageSpriteTaskSet) {
+            this.ImageSpriteTaskSet = new Array();
+            for (let z in params.ImageSpriteTaskSet) {
+                let obj = new ImageSpriteTaskInput();
+                obj.deserialize(params.ImageSpriteTaskSet[z]);
+                this.ImageSpriteTaskSet.push(obj);
+            }
+        }
 
     }
 }
@@ -4938,18 +5054,6 @@ class CreateImageSpriteTemplateRequest extends  AbstractModel {
         super();
 
         /**
-         * 雪碧图中小图的宽度，取值范围： [128, 4096]，单位：px。
-         * @type {number || null}
-         */
-        this.Width = null;
-
-        /**
-         * 雪碧图中小图的高度，取值范围： [128, 4096]，单位：px。
-         * @type {number || null}
-         */
-        this.Height = null;
-
-        /**
          * 采样类型，取值：
 <li>Percent：按百分比。</li>
 <li>Time：按时间间隔。</li>
@@ -4983,6 +5087,46 @@ class CreateImageSpriteTemplateRequest extends  AbstractModel {
          */
         this.Name = null;
 
+        /**
+         * 雪碧图中小图的宽度（或长边）的最大值，取值范围：0 和 [128, 4096]，单位：px。
+<li>当 Width、Height 均为 0，则分辨率同源；</li>
+<li>当 Width 为 0，Height 非 0，则 Width 按比例缩放；</li>
+<li>当 Width 非 0，Height 为 0，则 Height 按比例缩放；</li>
+<li>当 Width、Height 均非 0，则分辨率按用户指定。</li>
+默认值：0。
+         * @type {number || null}
+         */
+        this.Width = null;
+
+        /**
+         * 雪碧图中小图的高度（或短边）的最大值，取值范围：0 和 [128, 4096]，单位：px。
+<li>当 Width、Height 均为 0，则分辨率同源；</li>
+<li>当 Width 为 0，Height 非 0，则 Width 按比例缩放；</li>
+<li>当 Width 非 0，Height 为 0，则 Height 按比例缩放；</li>
+<li>当 Width、Height 均非 0，则分辨率按用户指定。</li>
+默认值：0。
+         * @type {number || null}
+         */
+        this.Height = null;
+
+        /**
+         * 分辨率自适应，可选值：
+<li>open：开启，此时，Width 代表视频的长边，Height 表示视频的短边；</li>
+<li>close：关闭，此时，Width 代表视频的宽度，Height 表示视频的高度。</li>
+默认值：open。
+         * @type {string || null}
+         */
+        this.ResolutionAdaptive = null;
+
+        /**
+         * 填充方式，当视频流配置宽高参数与原始视频的宽高比不一致时，对转码的处理方式，即为“填充”。可选填充方式：
+<li> stretch：拉伸，对每一帧进行拉伸，填满整个画面，可能导致转码后的视频被“压扁“或者“拉长“；</li>
+<li>black：留黑，保持视频宽高比不变，边缘剩余部分使用黑色填充。</li>
+默认值：black 。
+         * @type {string || null}
+         */
+        this.FillType = null;
+
     }
 
     /**
@@ -4992,13 +5136,15 @@ class CreateImageSpriteTemplateRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Width = 'Width' in params ? params.Width : null;
-        this.Height = 'Height' in params ? params.Height : null;
         this.SampleType = 'SampleType' in params ? params.SampleType : null;
         this.SampleInterval = 'SampleInterval' in params ? params.SampleInterval : null;
         this.RowCount = 'RowCount' in params ? params.RowCount : null;
         this.ColumnCount = 'ColumnCount' in params ? params.ColumnCount : null;
         this.Name = 'Name' in params ? params.Name : null;
+        this.Width = 'Width' in params ? params.Width : null;
+        this.Height = 'Height' in params ? params.Height : null;
+        this.ResolutionAdaptive = 'ResolutionAdaptive' in params ? params.ResolutionAdaptive : null;
+        this.FillType = 'FillType' in params ? params.FillType : null;
 
     }
 }
@@ -5589,16 +5735,35 @@ class ModifyImageSpriteTemplateRequest extends  AbstractModel {
         this.Name = null;
 
         /**
-         * 雪碧图中小图的宽度，取值范围： [128, 4096]，单位：px。
+         * 雪碧图中小图的宽度（或长边）的最大值，取值范围：0 和 [128, 4096]，单位：px。
+<li>当 Width、Height 均为 0，则分辨率同源；</li>
+<li>当 Width 为 0，Height 非 0，则 Width 按比例缩放；</li>
+<li>当 Width 非 0，Height 为 0，则 Height 按比例缩放；</li>
+<li>当 Width、Height 均非 0，则分辨率按用户指定。</li>
+默认值：0。
          * @type {number || null}
          */
         this.Width = null;
 
         /**
-         * 雪碧图中小图的高度，取值范围： [128, 4096]，单位：px。
+         * 雪碧图中小图的高度（或短边）的最大值，取值范围：0 和 [128, 4096]，单位：px。
+<li>当 Width、Height 均为 0，则分辨率同源；</li>
+<li>当 Width 为 0，Height 非 0，则 Width 按比例缩放；</li>
+<li>当 Width 非 0，Height 为 0，则 Height 按比例缩放；</li>
+<li>当 Width、Height 均非 0，则分辨率按用户指定。</li>
+默认值：0。
          * @type {number || null}
          */
         this.Height = null;
+
+        /**
+         * 分辨率自适应，可选值：
+<li>open：开启，此时，Width 代表视频的长边，Height 表示视频的短边；</li>
+<li>close：关闭，此时，Width 代表视频的宽度，Height 表示视频的高度。</li>
+默认值：open。
+         * @type {string || null}
+         */
+        this.ResolutionAdaptive = null;
 
         /**
          * 采样类型，取值：
@@ -5628,6 +5793,15 @@ class ModifyImageSpriteTemplateRequest extends  AbstractModel {
          */
         this.ColumnCount = null;
 
+        /**
+         * 填充方式，当视频流配置宽高参数与原始视频的宽高比不一致时，对转码的处理方式，即为“填充”。可选填充方式：
+<li> stretch：拉伸，对每一帧进行拉伸，填满整个画面，可能导致转码后的视频被“压扁“或者“拉长“；</li>
+<li>black：留黑，保持视频宽高比不变，边缘剩余部分使用黑色填充。</li>
+默认值：black 。
+         * @type {string || null}
+         */
+        this.FillType = null;
+
     }
 
     /**
@@ -5641,10 +5815,12 @@ class ModifyImageSpriteTemplateRequest extends  AbstractModel {
         this.Name = 'Name' in params ? params.Name : null;
         this.Width = 'Width' in params ? params.Width : null;
         this.Height = 'Height' in params ? params.Height : null;
+        this.ResolutionAdaptive = 'ResolutionAdaptive' in params ? params.ResolutionAdaptive : null;
         this.SampleType = 'SampleType' in params ? params.SampleType : null;
         this.SampleInterval = 'SampleInterval' in params ? params.SampleInterval : null;
         this.RowCount = 'RowCount' in params ? params.RowCount : null;
         this.ColumnCount = 'ColumnCount' in params ? params.ColumnCount : null;
+        this.FillType = 'FillType' in params ? params.FillType : null;
 
     }
 }
@@ -7155,6 +7331,80 @@ class LiveStreamAiReviewVoicePornResult extends  AbstractModel {
 }
 
 /**
+ * 内容审核涉黄/暴恐嫌疑片段
+ * @class
+ */
+class MediaContentReviewSegmentItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 嫌疑片段起始的偏移时间，单位：秒。
+         * @type {number || null}
+         */
+        this.StartTimeOffset = null;
+
+        /**
+         * 嫌疑片段结束的偏移时间，单位：秒。
+         * @type {number || null}
+         */
+        this.EndTimeOffset = null;
+
+        /**
+         * 嫌疑片段涉黄分数。
+         * @type {number || null}
+         */
+        this.Confidence = null;
+
+        /**
+         * 嫌疑片段鉴黄结果标签。
+         * @type {string || null}
+         */
+        this.Label = null;
+
+        /**
+         * 嫌疑片段鉴黄结果建议，取值范围：
+<li>pass。</li>
+<li>review。</li>
+<li>block。</li>
+         * @type {string || null}
+         */
+        this.Suggestion = null;
+
+        /**
+         * 嫌疑图片 URL （图片不会永久存储，到达
+ PicUrlExpireTime 时间点后图片将被删除）。
+         * @type {string || null}
+         */
+        this.Url = null;
+
+        /**
+         * 嫌疑图片 URL 失效时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F)。
+         * @type {string || null}
+         */
+        this.PicUrlExpireTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.StartTimeOffset = 'StartTimeOffset' in params ? params.StartTimeOffset : null;
+        this.EndTimeOffset = 'EndTimeOffset' in params ? params.EndTimeOffset : null;
+        this.Confidence = 'Confidence' in params ? params.Confidence : null;
+        this.Label = 'Label' in params ? params.Label : null;
+        this.Suggestion = 'Suggestion' in params ? params.Suggestion : null;
+        this.Url = 'Url' in params ? params.Url : null;
+        this.PicUrlExpireTime = 'PicUrlExpireTime' in params ? params.PicUrlExpireTime : null;
+
+    }
+}
+
+/**
  * ModifyWordSample返回参数结构体
  * @class
  */
@@ -7183,47 +7433,6 @@ class ModifyWordSampleResponse extends  AbstractModel {
 }
 
 /**
- * 视频处理输出对象信息。
- * @class
- */
-class TaskOutputStorage extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 视频处理输出对象存储位置的类型，现在仅支持 COS。
-         * @type {string || null}
-         */
-        this.Type = null;
-
-        /**
-         * 当 Type 为 COS 时有效，则该项为必填，表示视频处理 COS 输出位置。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {CosOutputStorage || null}
-         */
-        this.CosOutputStorage = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Type = 'Type' in params ? params.Type : null;
-
-        if (params.CosOutputStorage) {
-            let obj = new CosOutputStorage();
-            obj.deserialize(params.CosOutputStorage)
-            this.CosOutputStorage = obj;
-        }
-
-    }
-}
-
-/**
  * 内容审核结果
  * @class
  */
@@ -7244,6 +7453,18 @@ class AiContentReviewResult extends  AbstractModel {
          * @type {string || null}
          */
         this.Type = null;
+
+        /**
+         * 采样频率，即对视频每秒截取进行审核的帧数。
+         * @type {number || null}
+         */
+        this.SampleRate = null;
+
+        /**
+         * 审核的视频时长，单位：秒。
+         * @type {number || null}
+         */
+        this.Duration = null;
 
         /**
          * 视频内容审核智能画面鉴黄任务的查询结果，当任务类型为 Porn 时有效。
@@ -7304,6 +7525,8 @@ class AiContentReviewResult extends  AbstractModel {
             return;
         }
         this.Type = 'Type' in params ? params.Type : null;
+        this.SampleRate = 'SampleRate' in params ? params.SampleRate : null;
+        this.Duration = 'Duration' in params ? params.Duration : null;
 
         if (params.PornTask) {
             let obj = new AiReviewTaskPornResult();
@@ -7559,6 +7782,47 @@ class TerrorismImgReviewTemplateInfo extends  AbstractModel {
         this.LabelSet = 'LabelSet' in params ? params.LabelSet : null;
         this.BlockConfidence = 'BlockConfidence' in params ? params.BlockConfidence : null;
         this.ReviewConfidence = 'ReviewConfidence' in params ? params.ReviewConfidence : null;
+
+    }
+}
+
+/**
+ * 视频处理输出对象信息。
+ * @class
+ */
+class TaskOutputStorage extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 视频处理输出对象存储位置的类型，现在仅支持 COS。
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * 当 Type 为 COS 时有效，则该项为必填，表示视频处理 COS 输出位置。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {CosOutputStorage || null}
+         */
+        this.CosOutputStorage = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Type = 'Type' in params ? params.Type : null;
+
+        if (params.CosOutputStorage) {
+            let obj = new CosOutputStorage();
+            obj.deserialize(params.CosOutputStorage)
+            this.CosOutputStorage = obj;
+        }
 
     }
 }
@@ -9011,6 +9275,12 @@ class CreateAnimatedGraphicsTemplateRequest extends  AbstractModel {
         super();
 
         /**
+         * 帧率，取值范围：[1, 30]，单位：Hz。
+         * @type {number || null}
+         */
+        this.Fps = null;
+
+        /**
          * 动图宽度（或长边）的最大值，取值范围：0 和 [128, 4096]，单位：px。
 <li>当 Width、Height 均为 0，则分辨率同源；</li>
 <li>当 Width 为 0，Height 非 0，则 Width 按比例缩放；</li>
@@ -9022,7 +9292,7 @@ class CreateAnimatedGraphicsTemplateRequest extends  AbstractModel {
         this.Width = null;
 
         /**
-         * 视频流高度（或短边）的最大值，取值范围：0 和 [128, 4096]，单位：px。
+         * 动图高度（或短边）的最大值，取值范围：0 和 [128, 4096]，单位：px。
 <li>当 Width、Height 均为 0，则分辨率同源；</li>
 <li>当 Width 为 0，Height 非 0，则 Width 按比例缩放；</li>
 <li>当 Width 非 0，Height 为 0，则 Height 按比例缩放；</li>
@@ -9033,10 +9303,13 @@ class CreateAnimatedGraphicsTemplateRequest extends  AbstractModel {
         this.Height = null;
 
         /**
-         * 帧率，取值范围：[1, 30]，单位：Hz。
-         * @type {number || null}
+         * 分辨率自适应，可选值：
+<li>open：开启，此时，Width 代表视频的长边，Height 表示视频的短边；</li>
+<li>close：关闭，此时，Width 代表视频的宽度，Height 表示视频的高度。</li>
+默认值：open。
+         * @type {string || null}
          */
-        this.Fps = null;
+        this.ResolutionAdaptive = null;
 
         /**
          * 动图格式，取值为 gif 和 webp。默认为 gif。
@@ -9071,9 +9344,10 @@ class CreateAnimatedGraphicsTemplateRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.Fps = 'Fps' in params ? params.Fps : null;
         this.Width = 'Width' in params ? params.Width : null;
         this.Height = 'Height' in params ? params.Height : null;
-        this.Fps = 'Fps' in params ? params.Fps : null;
+        this.ResolutionAdaptive = 'ResolutionAdaptive' in params ? params.ResolutionAdaptive : null;
         this.Format = 'Format' in params ? params.Format : null;
         this.Quality = 'Quality' in params ? params.Quality : null;
         this.Name = 'Name' in params ? params.Name : null;
@@ -9478,7 +9752,7 @@ class ModifyTranscodeTemplateRequest extends  AbstractModel {
         this.AudioTemplate = null;
 
         /**
-         * 极速高清转码参数，需联系商务架构师开通后才能使用。
+         * 极速高清转码参数。
          * @type {TEHDConfigForUpdate || null}
          */
         this.TEHDConfig = null;
@@ -9885,22 +10159,41 @@ class CreateSnapshotByTimeOffsetTemplateRequest extends  AbstractModel {
         super();
 
         /**
-         * 图片宽度，取值范围： [128, 4096]，单位：px。
+         * 指定时间点截图模板名称，长度限制：64 个字符。
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 截图宽度（或长边）的最大值，取值范围：0 和 [128, 4096]，单位：px。
+<li>当 Width、Height 均为 0，则分辨率同源；</li>
+<li>当 Width 为 0，Height 非 0，则 Width 按比例缩放；</li>
+<li>当 Width 非 0，Height 为 0，则 Height 按比例缩放；</li>
+<li>当 Width、Height 均非 0，则分辨率按用户指定。</li>
+默认值：0。
          * @type {number || null}
          */
         this.Width = null;
 
         /**
-         * 图片高度，取值范围： [128, 4096]，单位：px。
+         * 截图高度（或短边）的最大值，取值范围：0 和 [128, 4096]，单位：px。
+<li>当 Width、Height 均为 0，则分辨率同源；</li>
+<li>当 Width 为 0，Height 非 0，则 Width 按比例缩放；</li>
+<li>当 Width 非 0，Height 为 0，则 Height 按比例缩放；</li>
+<li>当 Width、Height 均非 0，则分辨率按用户指定。</li>
+默认值：0。
          * @type {number || null}
          */
         this.Height = null;
 
         /**
-         * 指定时间点截图模板名称，长度限制：64 个字符。
+         * 分辨率自适应，可选值：
+<li>open：开启，此时，Width 代表视频的长边，Height 表示视频的短边；</li>
+<li>close：关闭，此时，Width 代表视频的宽度，Height 表示视频的高度。</li>
+默认值：open。
          * @type {string || null}
          */
-        this.Name = null;
+        this.ResolutionAdaptive = null;
 
         /**
          * 图片格式，取值可以为 jpg 和 png。默认为 jpg。
@@ -9914,6 +10207,17 @@ class CreateSnapshotByTimeOffsetTemplateRequest extends  AbstractModel {
          */
         this.Comment = null;
 
+        /**
+         * 填充方式，当视频流配置宽高参数与原始视频的宽高比不一致时，对转码的处理方式，即为“填充”。可选填充方式：
+<li> stretch：拉伸，对每一帧进行拉伸，填满整个画面，可能导致转码后的视频被“压扁“或者“拉长“；</li>
+<li>black：留黑，保持视频宽高比不变，边缘剩余部分使用黑色填充。</li>
+<li>white：留白，保持视频宽高比不变，边缘剩余部分使用白色填充。</li>
+<li>gauss：高斯模糊，保持视频宽高比不变，边缘剩余部分使用高斯模糊。</li>
+默认值：black 。
+         * @type {string || null}
+         */
+        this.FillType = null;
+
     }
 
     /**
@@ -9923,11 +10227,13 @@ class CreateSnapshotByTimeOffsetTemplateRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.Name = 'Name' in params ? params.Name : null;
         this.Width = 'Width' in params ? params.Width : null;
         this.Height = 'Height' in params ? params.Height : null;
-        this.Name = 'Name' in params ? params.Name : null;
+        this.ResolutionAdaptive = 'ResolutionAdaptive' in params ? params.ResolutionAdaptive : null;
         this.Format = 'Format' in params ? params.Format : null;
         this.Comment = 'Comment' in params ? params.Comment : null;
+        this.FillType = 'FillType' in params ? params.FillType : null;
 
     }
 }
@@ -10101,58 +10407,24 @@ class PornConfigureInfo extends  AbstractModel {
 }
 
 /**
- * 内容审核涉黄/暴恐嫌疑片段
+ * DescribeMediaMetaData返回参数结构体
  * @class
  */
-class MediaContentReviewSegmentItem extends  AbstractModel {
+class DescribeMediaMetaDataResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 嫌疑片段起始的偏移时间，单位：秒。
-         * @type {number || null}
+         * 媒体元信息。
+         * @type {MediaMetaData || null}
          */
-        this.StartTimeOffset = null;
+        this.MetaData = null;
 
         /**
-         * 嫌疑片段结束的偏移时间，单位：秒。
-         * @type {number || null}
-         */
-        this.EndTimeOffset = null;
-
-        /**
-         * 嫌疑片段涉黄分数。
-         * @type {number || null}
-         */
-        this.Confidence = null;
-
-        /**
-         * 嫌疑片段鉴黄结果标签。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.Label = null;
-
-        /**
-         * 嫌疑片段鉴黄结果建议，取值范围：
-<li>pass。</li>
-<li>review。</li>
-<li>block。</li>
-         * @type {string || null}
-         */
-        this.Suggestion = null;
-
-        /**
-         * 嫌疑图片 URL （图片不会永久存储，到达
- PicUrlExpireTime 时间点后图片将被删除）。
-         * @type {string || null}
-         */
-        this.Url = null;
-
-        /**
-         * 嫌疑图片 URL 失效时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F)。
-         * @type {string || null}
-         */
-        this.PicUrlExpireTime = null;
+        this.RequestId = null;
 
     }
 
@@ -10163,13 +10435,13 @@ class MediaContentReviewSegmentItem extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.StartTimeOffset = 'StartTimeOffset' in params ? params.StartTimeOffset : null;
-        this.EndTimeOffset = 'EndTimeOffset' in params ? params.EndTimeOffset : null;
-        this.Confidence = 'Confidence' in params ? params.Confidence : null;
-        this.Label = 'Label' in params ? params.Label : null;
-        this.Suggestion = 'Suggestion' in params ? params.Suggestion : null;
-        this.Url = 'Url' in params ? params.Url : null;
-        this.PicUrlExpireTime = 'PicUrlExpireTime' in params ? params.PicUrlExpireTime : null;
+
+        if (params.MetaData) {
+            let obj = new MediaMetaData();
+            obj.deserialize(params.MetaData)
+            this.MetaData = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -10763,18 +11035,6 @@ class CreateSampleSnapshotTemplateRequest extends  AbstractModel {
         super();
 
         /**
-         * 图片宽度，取值范围： [128, 4096]，单位：px。
-         * @type {number || null}
-         */
-        this.Width = null;
-
-        /**
-         * 图片高度，取值范围： [128, 4096]，单位：px。
-         * @type {number || null}
-         */
-        this.Height = null;
-
-        /**
          * 采样截图类型，取值：
 <li>Percent：按百分比。</li>
 <li>Time：按时间间隔。</li>
@@ -10797,6 +11057,37 @@ class CreateSampleSnapshotTemplateRequest extends  AbstractModel {
         this.Name = null;
 
         /**
+         * 截图宽度（或长边）的最大值，取值范围：0 和 [128, 4096]，单位：px。
+<li>当 Width、Height 均为 0，则分辨率同源；</li>
+<li>当 Width 为 0，Height 非 0，则 Width 按比例缩放；</li>
+<li>当 Width 非 0，Height 为 0，则 Height 按比例缩放；</li>
+<li>当 Width、Height 均非 0，则分辨率按用户指定。</li>
+默认值：0。
+         * @type {number || null}
+         */
+        this.Width = null;
+
+        /**
+         * 截图高度（或短边）的最大值，取值范围：0 和 [128, 4096]，单位：px。
+<li>当 Width、Height 均为 0，则分辨率同源；</li>
+<li>当 Width 为 0，Height 非 0，则 Width 按比例缩放；</li>
+<li>当 Width 非 0，Height 为 0，则 Height 按比例缩放；</li>
+<li>当 Width、Height 均非 0，则分辨率按用户指定。</li>
+默认值：0。
+         * @type {number || null}
+         */
+        this.Height = null;
+
+        /**
+         * 分辨率自适应，可选值：
+<li>open：开启，此时，Width 代表视频的长边，Height 表示视频的短边；</li>
+<li>close：关闭，此时，Width 代表视频的宽度，Height 表示视频的高度。</li>
+默认值：open。
+         * @type {string || null}
+         */
+        this.ResolutionAdaptive = null;
+
+        /**
          * 图片格式，取值为 jpg 和 png。默认为 jpg。
          * @type {string || null}
          */
@@ -10808,6 +11099,17 @@ class CreateSampleSnapshotTemplateRequest extends  AbstractModel {
          */
         this.Comment = null;
 
+        /**
+         * 填充方式，当视频流配置宽高参数与原始视频的宽高比不一致时，对转码的处理方式，即为“填充”。可选填充方式：
+<li> stretch：拉伸，对每一帧进行拉伸，填满整个画面，可能导致转码后的视频被“压扁“或者“拉长“；</li>
+<li>black：留黑，保持视频宽高比不变，边缘剩余部分使用黑色填充。</li>
+<li>white：留白，保持视频宽高比不变，边缘剩余部分使用白色填充。</li>
+<li>gauss：高斯模糊，保持视频宽高比不变，边缘剩余部分使用高斯模糊。</li>
+默认值：black 。
+         * @type {string || null}
+         */
+        this.FillType = null;
+
     }
 
     /**
@@ -10817,13 +11119,15 @@ class CreateSampleSnapshotTemplateRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Width = 'Width' in params ? params.Width : null;
-        this.Height = 'Height' in params ? params.Height : null;
         this.SampleType = 'SampleType' in params ? params.SampleType : null;
         this.SampleInterval = 'SampleInterval' in params ? params.SampleInterval : null;
         this.Name = 'Name' in params ? params.Name : null;
+        this.Width = 'Width' in params ? params.Width : null;
+        this.Height = 'Height' in params ? params.Height : null;
+        this.ResolutionAdaptive = 'ResolutionAdaptive' in params ? params.ResolutionAdaptive : null;
         this.Format = 'Format' in params ? params.Format : null;
         this.Comment = 'Comment' in params ? params.Comment : null;
+        this.FillType = 'FillType' in params ? params.FillType : null;
 
     }
 }
@@ -13364,7 +13668,7 @@ class TranscodeTemplate extends  AbstractModel {
         this.AudioTemplate = null;
 
         /**
-         * 极速高清转码参数，需联系商务架构师开通后才能使用。
+         * 极速高清转码参数。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {TEHDConfig || null}
          */
@@ -13656,6 +13960,50 @@ class AiAnalysisTaskClassificationResult extends  AbstractModel {
             obj.deserialize(params.Output)
             this.Output = obj;
         }
+
+    }
+}
+
+/**
+ * 文本鉴政任务控制参数
+ * @class
+ */
+class PoliticalOcrReviewTemplateInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 文本鉴政任务开关，可选值：
+<li>ON：开启文本鉴政任务；</li>
+<li>OFF：关闭文本鉴政任务。</li>
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+        /**
+         * 判定涉嫌违规的分数阈值，当智能审核达到该分数以上，认为涉嫌违规，不填默认为 100 分。取值范围：0~100。
+         * @type {number || null}
+         */
+        this.BlockConfidence = null;
+
+        /**
+         * 判定需人工复核是否违规的分数阈值，当智能审核达到该分数以上，认为需人工复核，不填默认为 75 分。取值范围：0~100。
+         * @type {number || null}
+         */
+        this.ReviewConfidence = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+        this.BlockConfidence = 'BlockConfidence' in params ? params.BlockConfidence : null;
+        this.ReviewConfidence = 'ReviewConfidence' in params ? params.ReviewConfidence : null;
 
     }
 }
@@ -14682,7 +15030,7 @@ class ModifyAnimatedGraphicsTemplateRequest extends  AbstractModel {
         this.Width = null;
 
         /**
-         * 视频流高度（或短边）的最大值，取值范围：0 和 [128, 4096]，单位：px。
+         * 动图高度（或短边）的最大值，取值范围：0 和 [128, 4096]，单位：px。
 <li>当 Width、Height 均为 0，则分辨率同源；</li>
 <li>当 Width 为 0，Height 非 0，则 Width 按比例缩放；</li>
 <li>当 Width 非 0，Height 为 0，则 Height 按比例缩放；</li>
@@ -14691,6 +15039,15 @@ class ModifyAnimatedGraphicsTemplateRequest extends  AbstractModel {
          * @type {number || null}
          */
         this.Height = null;
+
+        /**
+         * 分辨率自适应，可选值：
+<li>open：开启，此时，Width 代表视频的长边，Height 表示视频的短边；</li>
+<li>close：关闭，此时，Width 代表视频的宽度，Height 表示视频的高度。</li>
+默认值：open。
+         * @type {string || null}
+         */
+        this.ResolutionAdaptive = null;
 
         /**
          * 动图格式，取值为 gif 和 webp。
@@ -14729,6 +15086,7 @@ class ModifyAnimatedGraphicsTemplateRequest extends  AbstractModel {
         this.Name = 'Name' in params ? params.Name : null;
         this.Width = 'Width' in params ? params.Width : null;
         this.Height = 'Height' in params ? params.Height : null;
+        this.ResolutionAdaptive = 'ResolutionAdaptive' in params ? params.ResolutionAdaptive : null;
         this.Format = 'Format' in params ? params.Format : null;
         this.Fps = 'Fps' in params ? params.Fps : null;
         this.Quality = 'Quality' in params ? params.Quality : null;
@@ -16263,42 +16621,18 @@ class ParseNotificationRequest extends  AbstractModel {
 }
 
 /**
- * 视频处理任务类型
+ * DescribeMediaMetaData请求参数结构体
  * @class
  */
-class MediaProcessTaskInput extends  AbstractModel {
+class DescribeMediaMetaDataRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 视频转码任务列表。
-         * @type {Array.<TranscodeTaskInput> || null}
+         * 需要获取元信息的文件输入信息。
+         * @type {MediaInputInfo || null}
          */
-        this.TranscodeTaskSet = null;
-
-        /**
-         * 视频转动图任务列表。
-         * @type {Array.<AnimatedGraphicTaskInput> || null}
-         */
-        this.AnimatedGraphicTaskSet = null;
-
-        /**
-         * 对视频按时间点截图任务列表。
-         * @type {Array.<SnapshotByTimeOffsetTaskInput> || null}
-         */
-        this.SnapshotByTimeOffsetTaskSet = null;
-
-        /**
-         * 对视频采样截图任务列表。
-         * @type {Array.<SampleSnapshotTaskInput> || null}
-         */
-        this.SampleSnapshotTaskSet = null;
-
-        /**
-         * 对视频截雪碧图任务列表。
-         * @type {Array.<ImageSpriteTaskInput> || null}
-         */
-        this.ImageSpriteTaskSet = null;
+        this.InputInfo = null;
 
     }
 
@@ -16310,49 +16644,10 @@ class MediaProcessTaskInput extends  AbstractModel {
             return;
         }
 
-        if (params.TranscodeTaskSet) {
-            this.TranscodeTaskSet = new Array();
-            for (let z in params.TranscodeTaskSet) {
-                let obj = new TranscodeTaskInput();
-                obj.deserialize(params.TranscodeTaskSet[z]);
-                this.TranscodeTaskSet.push(obj);
-            }
-        }
-
-        if (params.AnimatedGraphicTaskSet) {
-            this.AnimatedGraphicTaskSet = new Array();
-            for (let z in params.AnimatedGraphicTaskSet) {
-                let obj = new AnimatedGraphicTaskInput();
-                obj.deserialize(params.AnimatedGraphicTaskSet[z]);
-                this.AnimatedGraphicTaskSet.push(obj);
-            }
-        }
-
-        if (params.SnapshotByTimeOffsetTaskSet) {
-            this.SnapshotByTimeOffsetTaskSet = new Array();
-            for (let z in params.SnapshotByTimeOffsetTaskSet) {
-                let obj = new SnapshotByTimeOffsetTaskInput();
-                obj.deserialize(params.SnapshotByTimeOffsetTaskSet[z]);
-                this.SnapshotByTimeOffsetTaskSet.push(obj);
-            }
-        }
-
-        if (params.SampleSnapshotTaskSet) {
-            this.SampleSnapshotTaskSet = new Array();
-            for (let z in params.SampleSnapshotTaskSet) {
-                let obj = new SampleSnapshotTaskInput();
-                obj.deserialize(params.SampleSnapshotTaskSet[z]);
-                this.SampleSnapshotTaskSet.push(obj);
-            }
-        }
-
-        if (params.ImageSpriteTaskSet) {
-            this.ImageSpriteTaskSet = new Array();
-            for (let z in params.ImageSpriteTaskSet) {
-                let obj = new ImageSpriteTaskInput();
-                obj.deserialize(params.ImageSpriteTaskSet[z]);
-                this.ImageSpriteTaskSet.push(obj);
-            }
+        if (params.InputInfo) {
+            let obj = new MediaInputInfo();
+            obj.deserialize(params.InputInfo)
+            this.InputInfo = obj;
         }
 
     }
@@ -16998,7 +17293,7 @@ module.exports = {
     PornAsrReviewTemplateInfoForUpdate: PornAsrReviewTemplateInfoForUpdate,
     AiSampleWord: AiSampleWord,
     CreateAIAnalysisTemplateRequest: CreateAIAnalysisTemplateRequest,
-    PoliticalOcrReviewTemplateInfo: PoliticalOcrReviewTemplateInfo,
+    MediaProcessTaskInput: MediaProcessTaskInput,
     AiReviewTerrorismTaskInput: AiReviewTerrorismTaskInput,
     CreateImageSpriteTemplateRequest: CreateImageSpriteTemplateRequest,
     DescribeWorkflowsRequest: DescribeWorkflowsRequest,
@@ -17040,12 +17335,13 @@ module.exports = {
     AiAnalysisTaskCoverOutput: AiAnalysisTaskCoverOutput,
     ClassificationConfigureInfo: ClassificationConfigureInfo,
     LiveStreamAiReviewVoicePornResult: LiveStreamAiReviewVoicePornResult,
+    MediaContentReviewSegmentItem: MediaContentReviewSegmentItem,
     ModifyWordSampleResponse: ModifyWordSampleResponse,
-    TaskOutputStorage: TaskOutputStorage,
     AiContentReviewResult: AiContentReviewResult,
     AudioTemplateInfoForUpdate: AudioTemplateInfoForUpdate,
     SnapshotByTimeOffsetTaskInput: SnapshotByTimeOffsetTaskInput,
     TerrorismImgReviewTemplateInfo: TerrorismImgReviewTemplateInfo,
+    TaskOutputStorage: TaskOutputStorage,
     DeletePersonSampleRequest: DeletePersonSampleRequest,
     ImageSpriteTaskInput: ImageSpriteTaskInput,
     UserDefineOcrTextReviewTemplateInfo: UserDefineOcrTextReviewTemplateInfo,
@@ -17092,7 +17388,7 @@ module.exports = {
     TextWatermarkTemplateInputForUpdate: TextWatermarkTemplateInputForUpdate,
     LiveStreamProcessTask: LiveStreamProcessTask,
     PornConfigureInfo: PornConfigureInfo,
-    MediaContentReviewSegmentItem: MediaContentReviewSegmentItem,
+    DescribeMediaMetaDataResponse: DescribeMediaMetaDataResponse,
     AiRecognitionTaskOcrWordsResultInput: AiRecognitionTaskOcrWordsResultInput,
     DescribeContentReviewTemplatesRequest: DescribeContentReviewTemplatesRequest,
     ModifyImageSpriteTemplateResponse: ModifyImageSpriteTemplateResponse,
@@ -17163,6 +17459,7 @@ module.exports = {
     CreateAnimatedGraphicsTemplateResponse: CreateAnimatedGraphicsTemplateResponse,
     MediaAudioStreamItem: MediaAudioStreamItem,
     AiAnalysisTaskClassificationResult: AiAnalysisTaskClassificationResult,
+    PoliticalOcrReviewTemplateInfo: PoliticalOcrReviewTemplateInfo,
     AiReviewPoliticalAsrTaskInput: AiReviewPoliticalAsrTaskInput,
     AsrFullTextConfigureInfo: AsrFullTextConfigureInfo,
     MediaImageSpriteItem: MediaImageSpriteItem,
@@ -17211,7 +17508,7 @@ module.exports = {
     VideoTemplateInfoForUpdate: VideoTemplateInfoForUpdate,
     TextWatermarkTemplateInput: TextWatermarkTemplateInput,
     ParseNotificationRequest: ParseNotificationRequest,
-    MediaProcessTaskInput: MediaProcessTaskInput,
+    DescribeMediaMetaDataRequest: DescribeMediaMetaDataRequest,
     FrameTagConfigureInfoForUpdate: FrameTagConfigureInfoForUpdate,
     CreateContentReviewTemplateRequest: CreateContentReviewTemplateRequest,
     DescribeAIRecognitionTemplatesRequest: DescribeAIRecognitionTemplatesRequest,

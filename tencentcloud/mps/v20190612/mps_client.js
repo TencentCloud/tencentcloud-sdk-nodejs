@@ -100,7 +100,7 @@ const AnimatedGraphicsTemplate = models.AnimatedGraphicsTemplate;
 const PornAsrReviewTemplateInfoForUpdate = models.PornAsrReviewTemplateInfoForUpdate;
 const AiSampleWord = models.AiSampleWord;
 const CreateAIAnalysisTemplateRequest = models.CreateAIAnalysisTemplateRequest;
-const PoliticalOcrReviewTemplateInfo = models.PoliticalOcrReviewTemplateInfo;
+const MediaProcessTaskInput = models.MediaProcessTaskInput;
 const AiReviewTerrorismTaskInput = models.AiReviewTerrorismTaskInput;
 const CreateImageSpriteTemplateRequest = models.CreateImageSpriteTemplateRequest;
 const DescribeWorkflowsRequest = models.DescribeWorkflowsRequest;
@@ -142,12 +142,13 @@ const ImageSpriteTemplate = models.ImageSpriteTemplate;
 const AiAnalysisTaskCoverOutput = models.AiAnalysisTaskCoverOutput;
 const ClassificationConfigureInfo = models.ClassificationConfigureInfo;
 const LiveStreamAiReviewVoicePornResult = models.LiveStreamAiReviewVoicePornResult;
+const MediaContentReviewSegmentItem = models.MediaContentReviewSegmentItem;
 const ModifyWordSampleResponse = models.ModifyWordSampleResponse;
-const TaskOutputStorage = models.TaskOutputStorage;
 const AiContentReviewResult = models.AiContentReviewResult;
 const AudioTemplateInfoForUpdate = models.AudioTemplateInfoForUpdate;
 const SnapshotByTimeOffsetTaskInput = models.SnapshotByTimeOffsetTaskInput;
 const TerrorismImgReviewTemplateInfo = models.TerrorismImgReviewTemplateInfo;
+const TaskOutputStorage = models.TaskOutputStorage;
 const DeletePersonSampleRequest = models.DeletePersonSampleRequest;
 const ImageSpriteTaskInput = models.ImageSpriteTaskInput;
 const UserDefineOcrTextReviewTemplateInfo = models.UserDefineOcrTextReviewTemplateInfo;
@@ -194,7 +195,7 @@ const CreateSnapshotByTimeOffsetTemplateRequest = models.CreateSnapshotByTimeOff
 const TextWatermarkTemplateInputForUpdate = models.TextWatermarkTemplateInputForUpdate;
 const LiveStreamProcessTask = models.LiveStreamProcessTask;
 const PornConfigureInfo = models.PornConfigureInfo;
-const MediaContentReviewSegmentItem = models.MediaContentReviewSegmentItem;
+const DescribeMediaMetaDataResponse = models.DescribeMediaMetaDataResponse;
 const AiRecognitionTaskOcrWordsResultInput = models.AiRecognitionTaskOcrWordsResultInput;
 const DescribeContentReviewTemplatesRequest = models.DescribeContentReviewTemplatesRequest;
 const ModifyImageSpriteTemplateResponse = models.ModifyImageSpriteTemplateResponse;
@@ -265,6 +266,7 @@ const AiSamplePerson = models.AiSamplePerson;
 const CreateAnimatedGraphicsTemplateResponse = models.CreateAnimatedGraphicsTemplateResponse;
 const MediaAudioStreamItem = models.MediaAudioStreamItem;
 const AiAnalysisTaskClassificationResult = models.AiAnalysisTaskClassificationResult;
+const PoliticalOcrReviewTemplateInfo = models.PoliticalOcrReviewTemplateInfo;
 const AiReviewPoliticalAsrTaskInput = models.AiReviewPoliticalAsrTaskInput;
 const AsrFullTextConfigureInfo = models.AsrFullTextConfigureInfo;
 const MediaImageSpriteItem = models.MediaImageSpriteItem;
@@ -313,7 +315,7 @@ const OcrWordsConfigureInfoForUpdate = models.OcrWordsConfigureInfoForUpdate;
 const VideoTemplateInfoForUpdate = models.VideoTemplateInfoForUpdate;
 const TextWatermarkTemplateInput = models.TextWatermarkTemplateInput;
 const ParseNotificationRequest = models.ParseNotificationRequest;
-const MediaProcessTaskInput = models.MediaProcessTaskInput;
+const DescribeMediaMetaDataRequest = models.DescribeMediaMetaDataRequest;
 const FrameTagConfigureInfoForUpdate = models.FrameTagConfigureInfoForUpdate;
 const CreateContentReviewTemplateRequest = models.CreateContentReviewTemplateRequest;
 const DescribeAIRecognitionTemplatesRequest = models.DescribeAIRecognitionTemplatesRequest;
@@ -426,6 +428,17 @@ class MpsClient extends AbstractClient {
     DescribeSnapshotByTimeOffsetTemplates(req, cb) {
         let resp = new DescribeSnapshotByTimeOffsetTemplatesResponse();
         this.request("DescribeSnapshotByTimeOffsetTemplates", req, resp, cb);
+    }
+
+    /**
+     * 获取媒体的元信息，包括视频画面宽、高、编码格式、时长、帧率等。
+     * @param {DescribeMediaMetaDataRequest} req
+     * @param {function(string, DescribeMediaMetaDataResponse):void} cb
+     * @public
+     */
+    DescribeMediaMetaData(req, cb) {
+        let resp = new DescribeMediaMetaDataResponse();
+        this.request("DescribeMediaMetaData", req, resp, cb);
     }
 
     /**

@@ -709,6 +709,23 @@ class DriverLicenseOCRResponse extends  AbstractModel {
         this.CardCode = null;
 
         /**
+         * 告警码	告警码消息	                                                告警码说明
+-9102	WARN_DRIVER_LICENSE_COPY_CARD	        复印件告警
+-9103	WARN_DRIVER_LICENSE_SCREENED_CARD	翻拍件告警
+-9106	WARN_DRIVER_LICENSE_PS_CARD	                ps告警
+注：告警码可以同时存在多个
+         * @type {Array.<number> || null}
+         */
+        this.RecognizeWarnCode = null;
+
+        /**
+         * 告警码说明
+注：告警信息可以同时存在多个
+         * @type {Array.<string> || null}
+         */
+        this.RecognizeWarnMsg = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -733,6 +750,8 @@ class DriverLicenseOCRResponse extends  AbstractModel {
         this.StartDate = 'StartDate' in params ? params.StartDate : null;
         this.EndDate = 'EndDate' in params ? params.EndDate : null;
         this.CardCode = 'CardCode' in params ? params.CardCode : null;
+        this.RecognizeWarnCode = 'RecognizeWarnCode' in params ? params.RecognizeWarnCode : null;
+        this.RecognizeWarnMsg = 'RecognizeWarnMsg' in params ? params.RecognizeWarnMsg : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -1866,6 +1885,18 @@ class TrainTicketOCRResponse extends  AbstractModel {
         this.ID = null;
 
         /**
+         * 发票消费类型
+         * @type {string || null}
+         */
+        this.InvoiceType = null;
+
+        /**
+         * 序列号
+         * @type {string || null}
+         */
+        this.SerialNumber = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -1890,6 +1921,8 @@ class TrainTicketOCRResponse extends  AbstractModel {
         this.Price = 'Price' in params ? params.Price : null;
         this.SeatCategory = 'SeatCategory' in params ? params.SeatCategory : null;
         this.ID = 'ID' in params ? params.ID : null;
+        this.InvoiceType = 'InvoiceType' in params ? params.InvoiceType : null;
+        this.SerialNumber = 'SerialNumber' in params ? params.SerialNumber : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -2515,6 +2548,38 @@ class TaxiInvoiceOCRResponse extends  AbstractModel {
         this.Distance = null;
 
         /**
+         * 发票所在地
+         * @type {string || null}
+         */
+        this.Location = null;
+
+        /**
+         * 车牌号
+         * @type {string || null}
+         */
+        this.PlateNumber = null;
+
+        /**
+         * 发票消费类型
+         * @type {string || null}
+         */
+        this.InvoiceType = null;
+
+        /**
+         * 省
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Province = null;
+
+        /**
+         * 市
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.City = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -2536,6 +2601,11 @@ class TaxiInvoiceOCRResponse extends  AbstractModel {
         this.GetOnTime = 'GetOnTime' in params ? params.GetOnTime : null;
         this.GetOffTime = 'GetOffTime' in params ? params.GetOffTime : null;
         this.Distance = 'Distance' in params ? params.Distance : null;
+        this.Location = 'Location' in params ? params.Location : null;
+        this.PlateNumber = 'PlateNumber' in params ? params.PlateNumber : null;
+        this.InvoiceType = 'InvoiceType' in params ? params.InvoiceType : null;
+        this.Province = 'Province' in params ? params.Province : null;
+        this.City = 'City' in params ? params.City : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -2776,6 +2846,23 @@ class VehicleLicenseOCRResponse extends  AbstractModel {
         this.BackInfo = null;
 
         /**
+         * 告警码	告警码消息	                                                告警码说明
+-9102	WARN_DRIVER_LICENSE_COPY_CARD	        复印件告警
+-9103	WARN_DRIVER_LICENSE_SCREENED_CARD	翻拍件告警
+-9106	WARN_DRIVER_LICENSE_PS_CARD	                ps告警
+注：告警码可以同时存在多个
+         * @type {Array.<number> || null}
+         */
+        this.RecognizeWarnCode = null;
+
+        /**
+         * 告警码说明
+注：告警信息可以同时存在多个
+         * @type {Array.<string> || null}
+         */
+        this.RecognizeWarnMsg = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -2802,6 +2889,8 @@ class VehicleLicenseOCRResponse extends  AbstractModel {
             obj.deserialize(params.BackInfo)
             this.BackInfo = obj;
         }
+        this.RecognizeWarnCode = 'RecognizeWarnCode' in params ? params.RecognizeWarnCode : null;
+        this.RecognizeWarnMsg = 'RecognizeWarnMsg' in params ? params.RecognizeWarnMsg : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -4609,6 +4698,20 @@ class MLIDPassportOCRResponse extends  AbstractModel {
         this.Image = null;
 
         /**
+         * 扩展字段:
+{
+    ID:{
+        Confidence:0.9999
+    },
+    Name:{
+        Confidence:0.9996
+    }
+}
+         * @type {string || null}
+         */
+        this.AdvancedInfo = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -4632,6 +4735,7 @@ class MLIDPassportOCRResponse extends  AbstractModel {
         this.Nationality = 'Nationality' in params ? params.Nationality : null;
         this.Warn = 'Warn' in params ? params.Warn : null;
         this.Image = 'Image' in params ? params.Image : null;
+        this.AdvancedInfo = 'AdvancedInfo' in params ? params.AdvancedInfo : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -5966,6 +6070,39 @@ class QuotaInvoiceOCRResponse extends  AbstractModel {
         this.Rate = null;
 
         /**
+         * 小写金额
+         * @type {string || null}
+         */
+        this.RateNum = null;
+
+        /**
+         * 发票消费类型
+         * @type {string || null}
+         */
+        this.InvoiceType = null;
+
+        /**
+         * 省
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Province = null;
+
+        /**
+         * 市
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.City = null;
+
+        /**
+         * 是否有公司印章（1有 0无 空为识别不出）
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.HasStamp = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -5983,6 +6120,11 @@ class QuotaInvoiceOCRResponse extends  AbstractModel {
         this.InvoiceNum = 'InvoiceNum' in params ? params.InvoiceNum : null;
         this.InvoiceCode = 'InvoiceCode' in params ? params.InvoiceCode : null;
         this.Rate = 'Rate' in params ? params.Rate : null;
+        this.RateNum = 'RateNum' in params ? params.RateNum : null;
+        this.InvoiceType = 'InvoiceType' in params ? params.InvoiceType : null;
+        this.Province = 'Province' in params ? params.Province : null;
+        this.City = 'City' in params ? params.City : null;
+        this.HasStamp = 'HasStamp' in params ? params.HasStamp : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -6497,6 +6639,20 @@ class MLIDCardOCRResponse extends  AbstractModel {
         this.Image = null;
 
         /**
+         * 扩展字段:
+{
+    ID:{
+        Confidence:0.9999
+    },
+    Name:{
+        Confidence:0.9996
+    }
+}
+         * @type {string || null}
+         */
+        this.AdvancedInfo = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -6517,6 +6673,7 @@ class MLIDCardOCRResponse extends  AbstractModel {
         this.Sex = 'Sex' in params ? params.Sex : null;
         this.Warn = 'Warn' in params ? params.Warn : null;
         this.Image = 'Image' in params ? params.Image : null;
+        this.AdvancedInfo = 'AdvancedInfo' in params ? params.AdvancedInfo : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }

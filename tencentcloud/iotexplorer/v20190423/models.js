@@ -2095,6 +2095,36 @@ class CreateDeviceRequest extends  AbstractModel {
          */
         this.DeviceName = null;
 
+        /**
+         * LoRaWAN 设备地址
+         * @type {string || null}
+         */
+        this.DevAddr = null;
+
+        /**
+         * LoRaWAN 应用密钥
+         * @type {string || null}
+         */
+        this.AppKey = null;
+
+        /**
+         * LoRaWAN 设备唯一标识
+         * @type {string || null}
+         */
+        this.DevEUI = null;
+
+        /**
+         * LoRaWAN 应用会话密钥
+         * @type {string || null}
+         */
+        this.AppSKey = null;
+
+        /**
+         * LoRaWAN 网络会话密钥
+         * @type {string || null}
+         */
+        this.NwkSKey = null;
+
     }
 
     /**
@@ -2106,6 +2136,11 @@ class CreateDeviceRequest extends  AbstractModel {
         }
         this.ProductId = 'ProductId' in params ? params.ProductId : null;
         this.DeviceName = 'DeviceName' in params ? params.DeviceName : null;
+        this.DevAddr = 'DevAddr' in params ? params.DevAddr : null;
+        this.AppKey = 'AppKey' in params ? params.AppKey : null;
+        this.DevEUI = 'DevEUI' in params ? params.DevEUI : null;
+        this.AppSKey = 'AppSKey' in params ? params.AppSKey : null;
+        this.NwkSKey = 'NwkSKey' in params ? params.NwkSKey : null;
 
     }
 }
@@ -2326,6 +2361,41 @@ class DeviceInfo extends  AbstractModel {
          */
         this.LogLevel = null;
 
+        /**
+         * LoRaWAN 设备地址
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.DevAddr = null;
+
+        /**
+         * LoRaWAN 应用密钥
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.AppKey = null;
+
+        /**
+         * LoRaWAN 设备唯一标识
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.DevEUI = null;
+
+        /**
+         * LoRaWAN 应用会话密钥
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.AppSKey = null;
+
+        /**
+         * LoRaWAN 网络会话密钥
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.NwkSKey = null;
+
     }
 
     /**
@@ -2344,6 +2414,11 @@ class DeviceInfo extends  AbstractModel {
         this.Version = 'Version' in params ? params.Version : null;
         this.DeviceCert = 'DeviceCert' in params ? params.DeviceCert : null;
         this.LogLevel = 'LogLevel' in params ? params.LogLevel : null;
+        this.DevAddr = 'DevAddr' in params ? params.DevAddr : null;
+        this.AppKey = 'AppKey' in params ? params.AppKey : null;
+        this.DevEUI = 'DevEUI' in params ? params.DevEUI : null;
+        this.AppSKey = 'AppSKey' in params ? params.AppSKey : null;
+        this.NwkSKey = 'NwkSKey' in params ? params.NwkSKey : null;
 
     }
 }

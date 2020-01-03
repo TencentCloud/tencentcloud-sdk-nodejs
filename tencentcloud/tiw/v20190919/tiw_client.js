@@ -20,6 +20,8 @@ const Canvas = models.Canvas;
 const LayoutParams = models.LayoutParams;
 const ResumeOnlineRecordResponse = models.ResumeOnlineRecordResponse;
 const StartOnlineRecordRequest = models.StartOnlineRecordRequest;
+const DescribeOnlineRecordCallbackRequest = models.DescribeOnlineRecordCallbackRequest;
+const DescribeOnlineRecordCallbackResponse = models.DescribeOnlineRecordCallbackResponse;
 const SetTranscodeCallbackResponse = models.SetTranscodeCallbackResponse;
 const StopOnlineRecordRequest = models.StopOnlineRecordRequest;
 const StreamLayout = models.StreamLayout;
@@ -34,11 +36,13 @@ const CreateTranscodeRequest = models.CreateTranscodeRequest;
 const Whiteboard = models.Whiteboard;
 const PauseOnlineRecordResponse = models.PauseOnlineRecordResponse;
 const DescribeTranscodeRequest = models.DescribeTranscodeRequest;
-const SetTranscodeCallbackRequest = models.SetTranscodeCallbackRequest;
+const DescribeTranscodeResponse = models.DescribeTranscodeResponse;
 const SetOnlineRecordCallbackResponse = models.SetOnlineRecordCallbackResponse;
 const StopOnlineRecordResponse = models.StopOnlineRecordResponse;
+const DescribeTranscodeCallbackRequest = models.DescribeTranscodeCallbackRequest;
 const ResumeOnlineRecordRequest = models.ResumeOnlineRecordRequest;
-const DescribeTranscodeResponse = models.DescribeTranscodeResponse;
+const DescribeTranscodeCallbackResponse = models.DescribeTranscodeCallbackResponse;
+const SetTranscodeCallbackRequest = models.SetTranscodeCallbackRequest;
 const SetOnlineRecordCallbackRequest = models.SetOnlineRecordCallbackRequest;
 const MixStream = models.MixStream;
 const OmittedDuration = models.OmittedDuration;
@@ -89,6 +93,17 @@ class TiwClient extends AbstractClient {
     }
 
     /**
+     * 设置文档转码回调地址
+     * @param {SetTranscodeCallbackRequest} req
+     * @param {function(string, SetTranscodeCallbackResponse):void} cb
+     * @public
+     */
+    SetTranscodeCallback(req, cb) {
+        let resp = new SetTranscodeCallbackResponse();
+        this.request("SetTranscodeCallback", req, resp, cb);
+    }
+
+    /**
      * 发起一个实时录制任务
      * @param {StartOnlineRecordRequest} req
      * @param {function(string, StartOnlineRecordResponse):void} cb
@@ -122,14 +137,14 @@ class TiwClient extends AbstractClient {
     }
 
     /**
-     * 设置文档转码回调地址
-     * @param {SetTranscodeCallbackRequest} req
-     * @param {function(string, SetTranscodeCallbackResponse):void} cb
+     * 查询文档转码回调地址
+     * @param {DescribeTranscodeCallbackRequest} req
+     * @param {function(string, DescribeTranscodeCallbackResponse):void} cb
      * @public
      */
-    SetTranscodeCallback(req, cb) {
-        let resp = new SetTranscodeCallbackResponse();
-        this.request("SetTranscodeCallback", req, resp, cb);
+    DescribeTranscodeCallback(req, cb) {
+        let resp = new DescribeTranscodeCallbackResponse();
+        this.request("DescribeTranscodeCallback", req, resp, cb);
     }
 
     /**
@@ -141,6 +156,17 @@ class TiwClient extends AbstractClient {
     DescribeOnlineRecord(req, cb) {
         let resp = new DescribeOnlineRecordResponse();
         this.request("DescribeOnlineRecord", req, resp, cb);
+    }
+
+    /**
+     * 查询实时录制回调地址
+     * @param {DescribeOnlineRecordCallbackRequest} req
+     * @param {function(string, DescribeOnlineRecordCallbackResponse):void} cb
+     * @public
+     */
+    DescribeOnlineRecordCallback(req, cb) {
+        let resp = new DescribeOnlineRecordCallbackResponse();
+        this.request("DescribeOnlineRecordCallback", req, resp, cb);
     }
 
     /**

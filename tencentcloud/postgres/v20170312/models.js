@@ -96,6 +96,12 @@ class CreateDBInstancesRequest extends  AbstractModel {
          */
         this.SubnetId = null;
 
+        /**
+         * 续费标记：0-正常续费（默认）；1-自动续费；
+         * @type {number || null}
+         */
+        this.AutoRenewFlag = null;
+
     }
 
     /**
@@ -117,6 +123,7 @@ class CreateDBInstancesRequest extends  AbstractModel {
         this.VoucherIds = 'VoucherIds' in params ? params.VoucherIds : null;
         this.VpcId = 'VpcId' in params ? params.VpcId : null;
         this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
+        this.AutoRenewFlag = 'AutoRenewFlag' in params ? params.AutoRenewFlag : null;
 
     }
 }
@@ -1399,6 +1406,12 @@ class DBInstance extends  AbstractModel {
          */
         this.DBInstanceNetInfo = null;
 
+        /**
+         * 机器类型
+         * @type {string || null}
+         */
+        this.Type = null;
+
     }
 
     /**
@@ -1439,6 +1452,7 @@ class DBInstance extends  AbstractModel {
                 this.DBInstanceNetInfo.push(obj);
             }
         }
+        this.Type = 'Type' in params ? params.Type : null;
 
     }
 }
@@ -1772,6 +1786,12 @@ class SpecItemInfo extends  AbstractModel {
          */
         this.Pid = null;
 
+        /**
+         * 机器类型
+         * @type {string || null}
+         */
+        this.Type = null;
+
     }
 
     /**
@@ -1790,6 +1810,7 @@ class SpecItemInfo extends  AbstractModel {
         this.MinStorage = 'MinStorage' in params ? params.MinStorage : null;
         this.Qps = 'Qps' in params ? params.Qps : null;
         this.Pid = 'Pid' in params ? params.Pid : null;
+        this.Type = 'Type' in params ? params.Type : null;
 
     }
 }
