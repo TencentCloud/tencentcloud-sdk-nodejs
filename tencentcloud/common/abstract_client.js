@@ -76,7 +76,6 @@ class AbstractClient {
      * @inner
      */
     doRequest(action, req) {
-        console.log("hello");
         let params = this.mergeData(req);
         params = this.formatRequestData(action, params);
         let optional = {
