@@ -171,7 +171,7 @@ class TryLipstickPicResponse extends  AbstractModel {
 }
 
 /**
- * 唇色信息。
+ * 唇色信息
  * @class
  */
 class LipColorInfo extends  AbstractModel {

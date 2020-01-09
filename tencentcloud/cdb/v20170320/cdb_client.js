@@ -27,6 +27,7 @@ const DescribeBackupConfigRequest = models.DescribeBackupConfigRequest;
 const RoVipInfo = models.RoVipInfo;
 const DescribeAccountsRequest = models.DescribeAccountsRequest;
 const StopDBImportJobRequest = models.StopDBImportJobRequest;
+const RoWeightValue = models.RoWeightValue;
 const StopDBImportJobResponse = models.StopDBImportJobResponse;
 const Parameter = models.Parameter;
 const DescribeDBInstanceRebootTimeRequest = models.DescribeDBInstanceRebootTimeRequest;
@@ -65,8 +66,10 @@ const RoGroup = models.RoGroup;
 const ParameterDetail = models.ParameterDetail;
 const ModifyAccountDescriptionResponse = models.ModifyAccountDescriptionResponse;
 const SwitchForUpgradeRequest = models.SwitchForUpgradeRequest;
+const ModifyInstanceTagResponse = models.ModifyInstanceTagResponse;
 const CreateParamTemplateResponse = models.CreateParamTemplateResponse;
 const CreateDBInstanceHourResponse = models.CreateDBInstanceHourResponse;
+const ReleaseIsolatedDBInstancesRequest = models.ReleaseIsolatedDBInstancesRequest;
 const BinlogInfo = models.BinlogInfo;
 const DeleteDeployGroupsResponse = models.DeleteDeployGroupsResponse;
 const DescribeTasksRequest = models.DescribeTasksRequest;
@@ -93,7 +96,7 @@ const ModifyInstanceParamRequest = models.ModifyInstanceParamRequest;
 const DescribeProjectSecurityGroupsResponse = models.DescribeProjectSecurityGroupsResponse;
 const ModifyDBInstanceProjectRequest = models.ModifyDBInstanceProjectRequest;
 const CommonTimeWindow = models.CommonTimeWindow;
-const ModifyInstanceTagResponse = models.ModifyInstanceTagResponse;
+const DescribeRoGroupsRequest = models.DescribeRoGroupsRequest;
 const DescribeDBSwitchRecordsRequest = models.DescribeDBSwitchRecordsRequest;
 const DescribeSupportedPrivilegesRequest = models.DescribeSupportedPrivilegesRequest;
 const DescribeAsyncRequestInfoResponse = models.DescribeAsyncRequestInfoResponse;
@@ -110,6 +113,7 @@ const ModifyAutoRenewFlagResponse = models.ModifyAutoRenewFlagResponse;
 const DeleteTimeWindowResponse = models.DeleteTimeWindowResponse;
 const DescribeBackupsResponse = models.DescribeBackupsResponse;
 const DescribeTimeWindowRequest = models.DescribeTimeWindowRequest;
+const ModifyInstanceParamResponse = models.ModifyInstanceParamResponse;
 const DescribeDBImportRecordsResponse = models.DescribeDBImportRecordsResponse;
 const DescribeTimeWindowResponse = models.DescribeTimeWindowResponse;
 const BackupItem = models.BackupItem;
@@ -126,6 +130,7 @@ const DescribeProjectSecurityGroupsRequest = models.DescribeProjectSecurityGroup
 const StartBatchRollbackRequest = models.StartBatchRollbackRequest;
 const SecurityGroup = models.SecurityGroup;
 const ZoneConf = models.ZoneConf;
+const BalanceRoGroupLoadResponse = models.BalanceRoGroupLoadResponse;
 const DeviceNetInfo = models.DeviceNetInfo;
 const SlaveInfo = models.SlaveInfo;
 const TagInfo = models.TagInfo;
@@ -138,7 +143,8 @@ const OpenDBInstanceGTIDRequest = models.OpenDBInstanceGTIDRequest;
 const UpgradeDBInstanceEngineVersionResponse = models.UpgradeDBInstanceEngineVersionResponse;
 const InquiryPriceUpgradeInstancesRequest = models.InquiryPriceUpgradeInstancesRequest;
 const DescribeAsyncRequestInfoRequest = models.DescribeAsyncRequestInfoRequest;
-const ModifyInstanceParamResponse = models.ModifyInstanceParamResponse;
+const VerifyRootAccountRequest = models.VerifyRootAccountRequest;
+const BalanceRoGroupLoadRequest = models.BalanceRoGroupLoadRequest;
 const UpgradeDBInstanceRequest = models.UpgradeDBInstanceRequest;
 const ColumnPrivilege = models.ColumnPrivilege;
 const DescribeUploadedFilesRequest = models.DescribeUploadedFilesRequest;
@@ -161,6 +167,7 @@ const DescribeBackupTablesRequest = models.DescribeBackupTablesRequest;
 const InstanceInfo = models.InstanceInfo;
 const OfflineIsolatedInstancesResponse = models.OfflineIsolatedInstancesResponse;
 const DatabasePrivilege = models.DatabasePrivilege;
+const RoGroupAttr = models.RoGroupAttr;
 const ModifyBackupConfigResponse = models.ModifyBackupConfigResponse;
 const ModifyDBInstanceNameResponse = models.ModifyDBInstanceNameResponse;
 const ModifyAccountDescriptionRequest = models.ModifyAccountDescriptionRequest;
@@ -171,6 +178,7 @@ const RenewDBInstanceResponse = models.RenewDBInstanceResponse;
 const DescribeDatabasesResponse = models.DescribeDatabasesResponse;
 const ModifyParamTemplateRequest = models.ModifyParamTemplateRequest;
 const AddTimeWindowResponse = models.AddTimeWindowResponse;
+const DescribeRoGroupsResponse = models.DescribeRoGroupsResponse;
 const ZoneSellConf = models.ZoneSellConf;
 const InitDBInstancesRequest = models.InitDBInstancesRequest;
 const RoInstanceInfo = models.RoInstanceInfo;
@@ -181,6 +189,7 @@ const DeviceCpuRateInfo = models.DeviceCpuRateInfo;
 const ModifyAccountPrivilegesRequest = models.ModifyAccountPrivilegesRequest;
 const Account = models.Account;
 const CreateBackupRequest = models.CreateBackupRequest;
+const ModifyRoGroupInfoResponse = models.ModifyRoGroupInfoResponse;
 const AccountInfo = models.AccountInfo;
 const DescribeDBInstanceCharsetRequest = models.DescribeDBInstanceCharsetRequest;
 const RollbackTables = models.RollbackTables;
@@ -221,7 +230,9 @@ const StartBatchRollbackResponse = models.StartBatchRollbackResponse;
 const DescribeDeviceMonitorInfoResponse = models.DescribeDeviceMonitorInfoResponse;
 const UploadInfo = models.UploadInfo;
 const DescribeRollbackRangeTimeResponse = models.DescribeRollbackRangeTimeResponse;
-const VerifyRootAccountRequest = models.VerifyRootAccountRequest;
+const ModifyRoGroupInfoRequest = models.ModifyRoGroupInfoRequest;
+const ReleaseResult = models.ReleaseResult;
+const ReleaseIsolatedDBInstancesResponse = models.ReleaseIsolatedDBInstancesResponse;
 const OpenWanServiceResponse = models.OpenWanServiceResponse;
 const ModifyBackupConfigRequest = models.ModifyBackupConfigRequest;
 const ModifyAccountPasswordResponse = models.ModifyAccountPasswordResponse;
@@ -309,6 +320,28 @@ class CdbClient extends AbstractClient {
     }
 
     /**
+     * 本接口(VerifyRootAccount)用于校验云数据库实例的 ROOT 账号是否有足够的权限进行授权操作。
+     * @param {VerifyRootAccountRequest} req
+     * @param {function(string, VerifyRootAccountResponse):void} cb
+     * @public
+     */
+    VerifyRootAccount(req, cb) {
+        let resp = new VerifyRootAccountResponse();
+        this.request("VerifyRootAccount", req, resp, cb);
+    }
+
+    /**
+     * 本接口（ReleaseIsolatedDBInstances）用于恢复已隔离云数据库实例。
+     * @param {ReleaseIsolatedDBInstancesRequest} req
+     * @param {function(string, ReleaseIsolatedDBInstancesResponse):void} cb
+     * @public
+     */
+    ReleaseIsolatedDBInstances(req, cb) {
+        let resp = new ReleaseIsolatedDBInstancesResponse();
+        this.request("ReleaseIsolatedDBInstances", req, resp, cb);
+    }
+
+    /**
      * 本接口(CreateDBImportJob)用于创建云数据库数据导入任务。
 
 注意，用户进行数据导入任务的文件，必须提前上传到腾讯云。用户须在控制台进行文件导入。
@@ -385,6 +418,17 @@ class CdbClient extends AbstractClient {
     ModifyAccountDescription(req, cb) {
         let resp = new ModifyAccountDescriptionResponse();
         this.request("ModifyAccountDescription", req, resp, cb);
+    }
+
+    /**
+     * 本接口(BalanceRoGroupLoad)用于重新均衡 RO 组内实例的负载。注意，RO 组内 RO 实例会有一次数据库连接瞬断，请确保应用程序能重连数据库，谨慎操作。
+     * @param {BalanceRoGroupLoadRequest} req
+     * @param {function(string, BalanceRoGroupLoadResponse):void} cb
+     * @public
+     */
+    BalanceRoGroupLoad(req, cb) {
+        let resp = new BalanceRoGroupLoadResponse();
+        this.request("BalanceRoGroupLoad", req, resp, cb);
     }
 
     /**
@@ -666,14 +710,14 @@ class CdbClient extends AbstractClient {
     }
 
     /**
-     * 本接口(VerifyRootAccount)用于校验云数据库实例的 ROOT 账号是否有足够的权限进行授权操作。
-     * @param {VerifyRootAccountRequest} req
-     * @param {function(string, VerifyRootAccountResponse):void} cb
+     * 本接口（ModifyRoGroupInfo）用于更新云数据库只读组的信息。包括设置实例延迟超限剔除策略，设置只读实例读权重等。
+     * @param {ModifyRoGroupInfoRequest} req
+     * @param {function(string, ModifyRoGroupInfoResponse):void} cb
      * @public
      */
-    VerifyRootAccount(req, cb) {
-        let resp = new VerifyRootAccountResponse();
-        this.request("VerifyRootAccount", req, resp, cb);
+    ModifyRoGroupInfo(req, cb) {
+        let resp = new ModifyRoGroupInfoResponse();
+        this.request("ModifyRoGroupInfo", req, resp, cb);
     }
 
     /**
@@ -943,6 +987,17 @@ class CdbClient extends AbstractClient {
     }
 
     /**
+     * 本接口(DescribeUploadedFiles)用于查询用户导入的SQL文件列表。
+     * @param {DescribeUploadedFilesRequest} req
+     * @param {function(string, DescribeUploadedFilesResponse):void} cb
+     * @public
+     */
+    DescribeUploadedFiles(req, cb) {
+        let resp = new DescribeUploadedFilesResponse();
+        this.request("DescribeUploadedFiles", req, resp, cb);
+    }
+
+    /**
      * 本接口(DescribeBinlogs)用于查询云数据库实例的二进制数据。
      * @param {DescribeBinlogsRequest} req
      * @param {function(string, DescribeBinlogsResponse):void} cb
@@ -1020,14 +1075,14 @@ class CdbClient extends AbstractClient {
     }
 
     /**
-     * 本接口(DescribeUploadedFiles)用于查询用户导入的SQL文件列表。
-     * @param {DescribeUploadedFilesRequest} req
-     * @param {function(string, DescribeUploadedFilesResponse):void} cb
+     * 本接口(DescribeRoGroups)用于查询云数据库实例的所有的RO组的信息。
+     * @param {DescribeRoGroupsRequest} req
+     * @param {function(string, DescribeRoGroupsResponse):void} cb
      * @public
      */
-    DescribeUploadedFiles(req, cb) {
-        let resp = new DescribeUploadedFilesResponse();
-        this.request("DescribeUploadedFiles", req, resp, cb);
+    DescribeRoGroups(req, cb) {
+        let resp = new DescribeRoGroupsResponse();
+        this.request("DescribeRoGroups", req, resp, cb);
     }
 
     /**

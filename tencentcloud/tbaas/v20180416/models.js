@@ -1814,12 +1814,6 @@ class SendTransactionHandlerRequest extends  AbstractModel {
         this.GroupPk = null;
 
         /**
-         * 私钥用户编号
-         * @type {string || null}
-         */
-        this.KeyUser = null;
-
-        /**
          * 合约编号
          * @type {number || null}
          */
@@ -1849,7 +1843,6 @@ class SendTransactionHandlerRequest extends  AbstractModel {
         this.Module = 'Module' in params ? params.Module : null;
         this.Operation = 'Operation' in params ? params.Operation : null;
         this.GroupPk = 'GroupPk' in params ? params.GroupPk : null;
-        this.KeyUser = 'KeyUser' in params ? params.KeyUser : null;
         this.ContractId = 'ContractId' in params ? params.ContractId : null;
         this.FuncName = 'FuncName' in params ? params.FuncName : null;
         this.FuncParam = 'FuncParam' in params ? params.FuncParam : null;
@@ -2047,7 +2040,7 @@ class BlockByNumberHandlerRequest extends  AbstractModel {
 }
 
 /**
- * bcos区块对象
+ * Bcos区块对象
  * @class
  */
 class BcosBlockObj extends  AbstractModel {
@@ -2073,7 +2066,7 @@ class BcosBlockObj extends  AbstractModel {
         this.BlockTimestamp = null;
 
         /**
-         * 打包节点id
+         * 打包节点ID
          * @type {string || null}
          */
         this.Sealer = null;
