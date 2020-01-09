@@ -791,6 +791,41 @@ class StopDBImportJobRequest extends  AbstractModel {
 }
 
 /**
+ * RO 实例的权重值
+ * @class
+ */
+class RoWeightValue extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * RO 实例 ID。
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 权重值。取值范围为 [0, 100]。
+         * @type {number || null}
+         */
+        this.Weight = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Weight = 'Weight' in params ? params.Weight : null;
+
+    }
+}
+
+/**
  * StopDBImportJob返回参数结构体
  * @class
  */
@@ -2330,70 +2365,98 @@ class RoGroup extends  AbstractModel {
         super();
 
         /**
-         * 只读组模式，可选值为：alone-系统自动分配只读组；allinone-新建只读组；join-使用现有只读组
+         * 只读组模式，可选值为：alone-系统自动分配只读组；allinone-新建只读组；join-使用现有只读组。
          * @type {string || null}
          */
         this.RoGroupMode = null;
 
         /**
-         * 只读组ID
+         * 只读组 ID。
          * @type {string || null}
          */
         this.RoGroupId = null;
 
         /**
-         * 只读组名称
+         * 只读组名称。
          * @type {string || null}
          */
         this.RoGroupName = null;
 
         /**
-         * 是否启用延迟超限剔除功能，启用该功能后，只读实例与主实例的延迟超过延迟阈值，只读实例将被隔离。可选值：1-启用；0-不启用
+         * 是否启用延迟超限剔除功能，启用该功能后，只读实例与主实例的延迟超过延迟阈值，只读实例将被隔离。可选值：1-启用；0-不启用。
          * @type {number || null}
          */
         this.RoOfflineDelay = null;
 
         /**
-         * 延迟阈值
+         * 延迟阈值。
          * @type {number || null}
          */
         this.RoMaxDelayTime = null;
 
         /**
-         * 最少实例保留个数，若购买只读实例数量小于设置数量将不做剔除
+         * 最少实例保留个数，若购买只读实例数量小于设置数量将不做剔除。
          * @type {number || null}
          */
         this.MinRoInGroup = null;
 
         /**
-         * 读写权重分配模式，可选值：system-系统自动分配；custom-自定义
+         * 读写权重分配模式，可选值：system-系统自动分配；custom-自定义。
          * @type {string || null}
          */
         this.WeightMode = null;
 
         /**
-         * 权重值
+         * 权重值。
          * @type {number || null}
          */
         this.Weight = null;
 
         /**
-         * 只读组中的只读实例详情
+         * 只读组中的只读实例详情。
          * @type {Array.<RoInstanceInfo> || null}
          */
         this.RoInstances = null;
 
         /**
-         * 只读组的内网IP
+         * 只读组的内网 IP。
          * @type {string || null}
          */
         this.Vip = null;
 
         /**
-         * 只读组的内网端口号
+         * 只读组的内网端口号。
          * @type {number || null}
          */
         this.Vport = null;
+
+        /**
+         * 私有网络 ID。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.UniqVpcId = null;
+
+        /**
+         * 子网 ID。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.UniqSubnetId = null;
+
+        /**
+         * 只读组所在的地域。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.RoGroupRegion = null;
+
+        /**
+         * 只读组所在的可用区。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.RoGroupZone = null;
 
     }
 
@@ -2423,6 +2486,10 @@ class RoGroup extends  AbstractModel {
         }
         this.Vip = 'Vip' in params ? params.Vip : null;
         this.Vport = 'Vport' in params ? params.Vport : null;
+        this.UniqVpcId = 'UniqVpcId' in params ? params.UniqVpcId : null;
+        this.UniqSubnetId = 'UniqSubnetId' in params ? params.UniqSubnetId : null;
+        this.RoGroupRegion = 'RoGroupRegion' in params ? params.RoGroupRegion : null;
+        this.RoGroupZone = 'RoGroupZone' in params ? params.RoGroupZone : null;
 
     }
 }
@@ -2575,6 +2642,34 @@ class SwitchForUpgradeRequest extends  AbstractModel {
 }
 
 /**
+ * ModifyInstanceTag返回参数结构体
+ * @class
+ */
+class ModifyInstanceTagResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * CreateParamTemplate返回参数结构体
  * @class
  */
@@ -2647,6 +2742,34 @@ class CreateDBInstanceHourResponse extends  AbstractModel {
         this.DealIds = 'DealIds' in params ? params.DealIds : null;
         this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ReleaseIsolatedDBInstances请求参数结构体
+ * @class
+ */
+class ReleaseIsolatedDBInstancesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例 ID 数组，单个实例 ID 格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同，可使用 [查询实例列表](https://cloud.tencent.com/document/api/236/15872) 接口获取，其值为输出参数中字段 InstanceId 的值。
+         * @type {Array.<string> || null}
+         */
+        this.InstanceIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
 
     }
 }
@@ -2848,7 +2971,7 @@ class IsolateDBInstanceResponse extends  AbstractModel {
         super();
 
         /**
-         * 异步任务的请求 ID，可使用此 ID 查询异步任务的执行结果。
+         * 异步任务的请求 ID，可使用此 ID 查询异步任务的执行结果。(该返回字段目前已废弃，可以通过 DescribeDBInstances 接口查询实例的隔离状态)
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
@@ -4282,18 +4405,18 @@ class CommonTimeWindow extends  AbstractModel {
 }
 
 /**
- * ModifyInstanceTag返回参数结构体
+ * DescribeRoGroups请求参数结构体
  * @class
  */
-class ModifyInstanceTagResponse extends  AbstractModel {
+class DescribeRoGroupsRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * 实例ID，格式如：cdb-c1nl9rpv或者cdb-c1nl9rpv，与云数据库控制台页面中显示的实例ID相同。
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.InstanceId = null;
 
     }
 
@@ -4304,7 +4427,7 @@ class ModifyInstanceTagResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
 
     }
 }
@@ -4932,6 +5055,41 @@ class DescribeTimeWindowRequest extends  AbstractModel {
 }
 
 /**
+ * ModifyInstanceParam返回参数结构体
+ * @class
+ */
+class ModifyInstanceParamResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 异步任务 ID，可用于查询任务进度。
+         * @type {string || null}
+         */
+        this.AsyncRequestId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AsyncRequestId = 'AsyncRequestId' in params ? params.AsyncRequestId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeDBImportRecords返回参数结构体
  * @class
  */
@@ -5130,19 +5288,19 @@ class DescribeBackupConfigResponse extends  AbstractModel {
         super();
 
         /**
-         * 备份开始的最早时间点，单位为时刻。例如，2 - 凌晨 2:00。
+         * 自动备份开始的最早时间点，单位为时刻。例如，2 - 凌晨 2:00。（该字段已废弃，建议使用 BackupTimeWindow 字段）
          * @type {number || null}
          */
         this.StartTimeMin = null;
 
         /**
-         * 备份开始的最晚时间点，单位为时刻。例如，6 - 凌晨 6:00。
+         * 自动备份开始的最晚时间点，单位为时刻。例如，6 - 凌晨 6:00。（该字段已废弃，建议使用 BackupTimeWindow 字段）
          * @type {number || null}
          */
         this.StartTimeMax = null;
 
         /**
-         * 备份过期时间，单位为天。
+         * 备份文件保留时间，单位为天。
          * @type {number || null}
          */
         this.BackupExpireDays = null;
@@ -5154,10 +5312,16 @@ class DescribeBackupConfigResponse extends  AbstractModel {
         this.BackupMethod = null;
 
         /**
-         * Binlog 过期时间，单位为天。
+         * Binlog 文件保留时间，单位为天。
          * @type {number || null}
          */
         this.BinlogExpireDays = null;
+
+        /**
+         * 实例自动备份的时间窗。
+         * @type {CommonTimeWindow || null}
+         */
+        this.BackupTimeWindow = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -5179,6 +5343,12 @@ class DescribeBackupConfigResponse extends  AbstractModel {
         this.BackupExpireDays = 'BackupExpireDays' in params ? params.BackupExpireDays : null;
         this.BackupMethod = 'BackupMethod' in params ? params.BackupMethod : null;
         this.BinlogExpireDays = 'BinlogExpireDays' in params ? params.BinlogExpireDays : null;
+
+        if (params.BackupTimeWindow) {
+            let obj = new CommonTimeWindow();
+            obj.deserialize(params.BackupTimeWindow)
+            this.BackupTimeWindow = obj;
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -5680,6 +5850,34 @@ class ZoneConf extends  AbstractModel {
 }
 
 /**
+ * BalanceRoGroupLoad返回参数结构体
+ * @class
+ */
+class BalanceRoGroupLoadResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * 实例所在物理机网络监控信息
  * @class
  */
@@ -6153,24 +6351,24 @@ class DescribeAsyncRequestInfoRequest extends  AbstractModel {
 }
 
 /**
- * ModifyInstanceParam返回参数结构体
+ * VerifyRootAccount请求参数结构体
  * @class
  */
-class ModifyInstanceParamResponse extends  AbstractModel {
+class VerifyRootAccountRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 异步任务 ID，可用于查询任务进度。
+         * 实例 ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同。
          * @type {string || null}
          */
-        this.AsyncRequestId = null;
+        this.InstanceId = null;
 
         /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * 实例 ROOT 账号的密码。
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.Password = null;
 
     }
 
@@ -6181,8 +6379,36 @@ class ModifyInstanceParamResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.AsyncRequestId = 'AsyncRequestId' in params ? params.AsyncRequestId : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Password = 'Password' in params ? params.Password : null;
+
+    }
+}
+
+/**
+ * BalanceRoGroupLoad请求参数结构体
+ * @class
+ */
+class BalanceRoGroupLoadRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * RO 组的 ID，格式如：cdbrg-c1nl9rpv。
+         * @type {string || null}
+         */
+        this.RoGroupId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RoGroupId = 'RoGroupId' in params ? params.RoGroupId : null;
 
     }
 }
@@ -7524,6 +7750,62 @@ class DatabasePrivilege extends  AbstractModel {
 }
 
 /**
+ * RO 组的配置信息
+ * @class
+ */
+class RoGroupAttr extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * RO 组名称。
+         * @type {string || null}
+         */
+        this.RoGroupName = null;
+
+        /**
+         * RO 实例最大延迟阀值。单位为秒，最小值为 1。注意，RO 组必须设置了开启实例延迟剔除策略，该值才有效。
+         * @type {number || null}
+         */
+        this.RoMaxDelayTime = null;
+
+        /**
+         * 是否开启实例延迟剔除。支持的值包括：1 - 开启；0 - 不开启。注意，若设置开启实例延迟剔除，则必须设置延迟阈值（RoMaxDelayTime）参数。
+         * @type {number || null}
+         */
+        this.RoOfflineDelay = null;
+
+        /**
+         * 最少保留实例数。可设置为小于或等于该 RO 组下 RO 实例个数的任意值。注意，若设置值大于 RO 实例数量将不做剔除；若设置为 0，所有实例延迟超限都会被剔除。
+         * @type {number || null}
+         */
+        this.MinRoInGroup = null;
+
+        /**
+         * 权重模式。支持值包括："system" - 系统自动分配； "custom" - 用户自定义设置。注意，若设置 "custom" 模式，则必须设置 RO 实例权重配置（RoWeightValues）参数。
+         * @type {string || null}
+         */
+        this.WeightMode = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RoGroupName = 'RoGroupName' in params ? params.RoGroupName : null;
+        this.RoMaxDelayTime = 'RoMaxDelayTime' in params ? params.RoMaxDelayTime : null;
+        this.RoOfflineDelay = 'RoOfflineDelay' in params ? params.RoOfflineDelay : null;
+        this.MinRoInGroup = 'MinRoInGroup' in params ? params.MinRoInGroup : null;
+        this.WeightMode = 'WeightMode' in params ? params.WeightMode : null;
+
+    }
+}
+
+/**
  * ModifyBackupConfig返回参数结构体
  * @class
  */
@@ -7926,6 +8208,49 @@ class AddTimeWindowResponse extends  AbstractModel {
     deserialize(params) {
         if (!params) {
             return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeRoGroups返回参数结构体
+ * @class
+ */
+class DescribeRoGroupsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * RO组信息数组，一个实例可关联多个RO组。
+         * @type {Array.<RoGroup> || null}
+         */
+        this.RoGroups = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.RoGroups) {
+            this.RoGroups = new Array();
+            for (let z in params.RoGroups) {
+                let obj = new RoGroup();
+                obj.deserialize(params.RoGroups[z]);
+                this.RoGroups.push(obj);
+            }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -8653,6 +8978,34 @@ class CreateBackupRequest extends  AbstractModel {
                 this.BackupDBTableList.push(obj);
             }
         }
+
+    }
+}
+
+/**
+ * ModifyRoGroupInfo返回参数结构体
+ * @class
+ */
+class ModifyRoGroupInfoResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -9825,13 +10178,13 @@ class CreateDeployGroupRequest extends  AbstractModel {
         this.Description = null;
 
         /**
-         * 置放群组的亲和性策略。
+         * 置放群组的亲和性策略，目前仅支持取值为1，策略1表示同台物理机上限制实例的个数。
          * @type {Array.<number> || null}
          */
         this.Affinity = null;
 
         /**
-         * 置放群组亲和性策略1的实例限制个数。
+         * 置放群组亲和性策略1中同台物理机上实例的限制个数。
          * @type {number || null}
          */
         this.LimitNum = null;
@@ -10388,24 +10741,92 @@ class DescribeRollbackRangeTimeResponse extends  AbstractModel {
 }
 
 /**
- * VerifyRootAccount请求参数结构体
+ * ModifyRoGroupInfo请求参数结构体
  * @class
  */
-class VerifyRootAccountRequest extends  AbstractModel {
+class ModifyRoGroupInfoRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 实例 ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同。
+         * RO 组的实例 ID。
+         * @type {string || null}
+         */
+        this.RoGroupId = null;
+
+        /**
+         * RO 组的详细信息。
+         * @type {RoGroupAttr || null}
+         */
+        this.RoGroupInfo = null;
+
+        /**
+         * RO 组内实例的权重。若修改 RO 组的权重模式为用户自定义模式（custom），则必须设置该参数，且需要设置每个 RO 实例的权重值。
+         * @type {Array.<RoWeightValue> || null}
+         */
+        this.RoWeightValues = null;
+
+        /**
+         * 是否重新均衡 RO 组内的 RO 实例的负载。支持值包括：1 - 重新均衡负载；0 - 不重新均衡负载。默认值为 0。注意，设置为重新均衡负载是，RO 组内 RO 实例会有一次数据库连接瞬断，请确保应用程序能重连数据库。
+         * @type {number || null}
+         */
+        this.IsBalanceRoLoad = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RoGroupId = 'RoGroupId' in params ? params.RoGroupId : null;
+
+        if (params.RoGroupInfo) {
+            let obj = new RoGroupAttr();
+            obj.deserialize(params.RoGroupInfo)
+            this.RoGroupInfo = obj;
+        }
+
+        if (params.RoWeightValues) {
+            this.RoWeightValues = new Array();
+            for (let z in params.RoWeightValues) {
+                let obj = new RoWeightValue();
+                obj.deserialize(params.RoWeightValues[z]);
+                this.RoWeightValues.push(obj);
+            }
+        }
+        this.IsBalanceRoLoad = 'IsBalanceRoLoad' in params ? params.IsBalanceRoLoad : null;
+
+    }
+}
+
+/**
+ * 解隔离任务结果
+ * @class
+ */
+class ReleaseResult extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例 ID。
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * 实例 ROOT 账号的密码。
+         * 实例解隔离操作的结果值。返回值为0表示成功。
+         * @type {number || null}
+         */
+        this.Code = null;
+
+        /**
+         * 实例解隔离操作的错误信息。
          * @type {string || null}
          */
-        this.Password = null;
+        this.Message = null;
 
     }
 
@@ -10417,7 +10838,51 @@ class VerifyRootAccountRequest extends  AbstractModel {
             return;
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.Password = 'Password' in params ? params.Password : null;
+        this.Code = 'Code' in params ? params.Code : null;
+        this.Message = 'Message' in params ? params.Message : null;
+
+    }
+}
+
+/**
+ * ReleaseIsolatedDBInstances返回参数结构体
+ * @class
+ */
+class ReleaseIsolatedDBInstancesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 解隔离操作的结果集。
+         * @type {Array.<ReleaseResult> || null}
+         */
+        this.Items = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Items) {
+            this.Items = new Array();
+            for (let z in params.Items) {
+                let obj = new ReleaseResult();
+                obj.deserialize(params.Items[z]);
+                this.Items.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -10685,20 +11150,20 @@ class DeployGroupInfo extends  AbstractModel {
         this.CreateTime = null;
 
         /**
-         * 置放群组实例配额。
+         * 置放群组实例配额，表示一个置放群组中可容纳的最大实例数目。
          * @type {number || null}
          */
         this.Quota = null;
 
         /**
-         * 置放群组亲和性策略。
+         * 置放群组亲和性策略，目前仅支持策略1，即在物理机纬度打散实例的分布。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.Affinity = null;
 
         /**
-         * 置放群组亲和性策略1的限制实例个数。
+         * 置放群组亲和性策略1中，同台物理机上同个置放群组实例的限制个数。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
@@ -10784,6 +11249,7 @@ module.exports = {
     RoVipInfo: RoVipInfo,
     DescribeAccountsRequest: DescribeAccountsRequest,
     StopDBImportJobRequest: StopDBImportJobRequest,
+    RoWeightValue: RoWeightValue,
     StopDBImportJobResponse: StopDBImportJobResponse,
     Parameter: Parameter,
     DescribeDBInstanceRebootTimeRequest: DescribeDBInstanceRebootTimeRequest,
@@ -10822,8 +11288,10 @@ module.exports = {
     ParameterDetail: ParameterDetail,
     ModifyAccountDescriptionResponse: ModifyAccountDescriptionResponse,
     SwitchForUpgradeRequest: SwitchForUpgradeRequest,
+    ModifyInstanceTagResponse: ModifyInstanceTagResponse,
     CreateParamTemplateResponse: CreateParamTemplateResponse,
     CreateDBInstanceHourResponse: CreateDBInstanceHourResponse,
+    ReleaseIsolatedDBInstancesRequest: ReleaseIsolatedDBInstancesRequest,
     BinlogInfo: BinlogInfo,
     DeleteDeployGroupsResponse: DeleteDeployGroupsResponse,
     DescribeTasksRequest: DescribeTasksRequest,
@@ -10850,7 +11318,7 @@ module.exports = {
     DescribeProjectSecurityGroupsResponse: DescribeProjectSecurityGroupsResponse,
     ModifyDBInstanceProjectRequest: ModifyDBInstanceProjectRequest,
     CommonTimeWindow: CommonTimeWindow,
-    ModifyInstanceTagResponse: ModifyInstanceTagResponse,
+    DescribeRoGroupsRequest: DescribeRoGroupsRequest,
     DescribeDBSwitchRecordsRequest: DescribeDBSwitchRecordsRequest,
     DescribeSupportedPrivilegesRequest: DescribeSupportedPrivilegesRequest,
     DescribeAsyncRequestInfoResponse: DescribeAsyncRequestInfoResponse,
@@ -10867,6 +11335,7 @@ module.exports = {
     DeleteTimeWindowResponse: DeleteTimeWindowResponse,
     DescribeBackupsResponse: DescribeBackupsResponse,
     DescribeTimeWindowRequest: DescribeTimeWindowRequest,
+    ModifyInstanceParamResponse: ModifyInstanceParamResponse,
     DescribeDBImportRecordsResponse: DescribeDBImportRecordsResponse,
     DescribeTimeWindowResponse: DescribeTimeWindowResponse,
     BackupItem: BackupItem,
@@ -10883,6 +11352,7 @@ module.exports = {
     StartBatchRollbackRequest: StartBatchRollbackRequest,
     SecurityGroup: SecurityGroup,
     ZoneConf: ZoneConf,
+    BalanceRoGroupLoadResponse: BalanceRoGroupLoadResponse,
     DeviceNetInfo: DeviceNetInfo,
     SlaveInfo: SlaveInfo,
     TagInfo: TagInfo,
@@ -10895,7 +11365,8 @@ module.exports = {
     UpgradeDBInstanceEngineVersionResponse: UpgradeDBInstanceEngineVersionResponse,
     InquiryPriceUpgradeInstancesRequest: InquiryPriceUpgradeInstancesRequest,
     DescribeAsyncRequestInfoRequest: DescribeAsyncRequestInfoRequest,
-    ModifyInstanceParamResponse: ModifyInstanceParamResponse,
+    VerifyRootAccountRequest: VerifyRootAccountRequest,
+    BalanceRoGroupLoadRequest: BalanceRoGroupLoadRequest,
     UpgradeDBInstanceRequest: UpgradeDBInstanceRequest,
     ColumnPrivilege: ColumnPrivilege,
     DescribeUploadedFilesRequest: DescribeUploadedFilesRequest,
@@ -10918,6 +11389,7 @@ module.exports = {
     InstanceInfo: InstanceInfo,
     OfflineIsolatedInstancesResponse: OfflineIsolatedInstancesResponse,
     DatabasePrivilege: DatabasePrivilege,
+    RoGroupAttr: RoGroupAttr,
     ModifyBackupConfigResponse: ModifyBackupConfigResponse,
     ModifyDBInstanceNameResponse: ModifyDBInstanceNameResponse,
     ModifyAccountDescriptionRequest: ModifyAccountDescriptionRequest,
@@ -10928,6 +11400,7 @@ module.exports = {
     DescribeDatabasesResponse: DescribeDatabasesResponse,
     ModifyParamTemplateRequest: ModifyParamTemplateRequest,
     AddTimeWindowResponse: AddTimeWindowResponse,
+    DescribeRoGroupsResponse: DescribeRoGroupsResponse,
     ZoneSellConf: ZoneSellConf,
     InitDBInstancesRequest: InitDBInstancesRequest,
     RoInstanceInfo: RoInstanceInfo,
@@ -10938,6 +11411,7 @@ module.exports = {
     ModifyAccountPrivilegesRequest: ModifyAccountPrivilegesRequest,
     Account: Account,
     CreateBackupRequest: CreateBackupRequest,
+    ModifyRoGroupInfoResponse: ModifyRoGroupInfoResponse,
     AccountInfo: AccountInfo,
     DescribeDBInstanceCharsetRequest: DescribeDBInstanceCharsetRequest,
     RollbackTables: RollbackTables,
@@ -10978,7 +11452,9 @@ module.exports = {
     DescribeDeviceMonitorInfoResponse: DescribeDeviceMonitorInfoResponse,
     UploadInfo: UploadInfo,
     DescribeRollbackRangeTimeResponse: DescribeRollbackRangeTimeResponse,
-    VerifyRootAccountRequest: VerifyRootAccountRequest,
+    ModifyRoGroupInfoRequest: ModifyRoGroupInfoRequest,
+    ReleaseResult: ReleaseResult,
+    ReleaseIsolatedDBInstancesResponse: ReleaseIsolatedDBInstancesResponse,
     OpenWanServiceResponse: OpenWanServiceResponse,
     ModifyBackupConfigRequest: ModifyBackupConfigRequest,
     ModifyAccountPasswordResponse: ModifyAccountPasswordResponse,

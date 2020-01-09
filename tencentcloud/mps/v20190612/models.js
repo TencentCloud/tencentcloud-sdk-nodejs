@@ -6751,7 +6751,8 @@ class VideoTemplateInfo extends  AbstractModel {
          * 视频流的编码格式，可选值：
 <li>libx264：H.264 编码</li>
 <li>libx265：H.265 编码</li>
-目前 H.265 编码必须指定分辨率，并且需要在 640*480 以内。
+<li>av1：AOMedia Video 1 编码</li>
+目前 H.265 编码必须指定分辨率，并且需要在 640*480 以内。av1 编码容器目前只支持 mp4 。
          * @type {string || null}
          */
         this.Codec = null;
@@ -11758,6 +11759,14 @@ class TranscodeTaskInput extends  AbstractModel {
          */
         this.ObjectNumberFormat = null;
 
+        /**
+         * 视频转码自定义参数，当 Definition 填 0 时有效。
+该参数用于高度定制场景，建议您优先使用 Definition 指定转码参数。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {RawTranscodeParameter || null}
+         */
+        this.RawParameter = null;
+
     }
 
     /**
@@ -11790,6 +11799,12 @@ class TranscodeTaskInput extends  AbstractModel {
             let obj = new NumberFormat();
             obj.deserialize(params.ObjectNumberFormat)
             this.ObjectNumberFormat = obj;
+        }
+
+        if (params.RawParameter) {
+            let obj = new RawTranscodeParameter();
+            obj.deserialize(params.RawParameter)
+            this.RawParameter = obj;
         }
 
     }
@@ -13524,6 +13539,63 @@ class AiReviewPoliticalAsrTaskOutput extends  AbstractModel {
                 obj.deserialize(params.SegmentSet[z]);
                 this.SegmentSet.push(obj);
             }
+        }
+
+    }
+}
+
+/**
+ * 用户自定义审核任务控制参数。
+ * @class
+ */
+class UserDefineConfigureInfoForUpdate extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 用户自定义人物审核控制参数。
+         * @type {UserDefineFaceReviewTemplateInfoForUpdate || null}
+         */
+        this.FaceReviewInfo = null;
+
+        /**
+         * 用户自定义语音审核控制参数。
+         * @type {UserDefineAsrTextReviewTemplateInfoForUpdate || null}
+         */
+        this.AsrReviewInfo = null;
+
+        /**
+         * 用户自定义文本审核控制参数。
+         * @type {UserDefineOcrTextReviewTemplateInfoForUpdate || null}
+         */
+        this.OcrReviewInfo = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.FaceReviewInfo) {
+            let obj = new UserDefineFaceReviewTemplateInfoForUpdate();
+            obj.deserialize(params.FaceReviewInfo)
+            this.FaceReviewInfo = obj;
+        }
+
+        if (params.AsrReviewInfo) {
+            let obj = new UserDefineAsrTextReviewTemplateInfoForUpdate();
+            obj.deserialize(params.AsrReviewInfo)
+            this.AsrReviewInfo = obj;
+        }
+
+        if (params.OcrReviewInfo) {
+            let obj = new UserDefineOcrTextReviewTemplateInfoForUpdate();
+            obj.deserialize(params.OcrReviewInfo)
+            this.OcrReviewInfo = obj;
         }
 
     }
@@ -15910,30 +15982,54 @@ class CreateWatermarkTemplateRequest extends  AbstractModel {
 }
 
 /**
- * 用户自定义审核任务控制参数。
+ * 自定义转码的的规格参数。
  * @class
  */
-class UserDefineConfigureInfoForUpdate extends  AbstractModel {
+class RawTranscodeParameter extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 用户自定义人物审核控制参数。
-         * @type {UserDefineFaceReviewTemplateInfoForUpdate || null}
+         * 封装格式，可选值：mp4、flv、hls、mp3、flac、ogg、m4a。其中，mp3、flac、ogg、m4a 为纯音频文件。
+         * @type {string || null}
          */
-        this.FaceReviewInfo = null;
+        this.Container = null;
 
         /**
-         * 用户自定义语音审核控制参数。
-         * @type {UserDefineAsrTextReviewTemplateInfoForUpdate || null}
+         * 是否去除视频数据，取值：
+<li>0：保留；</li>
+<li>1：去除。</li>
+默认值：0。
+         * @type {number || null}
          */
-        this.AsrReviewInfo = null;
+        this.RemoveVideo = null;
 
         /**
-         * 用户自定义文本审核控制参数。
-         * @type {UserDefineOcrTextReviewTemplateInfoForUpdate || null}
+         * 是否去除音频数据，取值：
+<li>0：保留；</li>
+<li>1：去除。</li>
+默认值：0。
+         * @type {number || null}
          */
-        this.OcrReviewInfo = null;
+        this.RemoveAudio = null;
+
+        /**
+         * 视频流配置参数，当 RemoveVideo 为 0，该字段必填。
+         * @type {VideoTemplateInfo || null}
+         */
+        this.VideoTemplate = null;
+
+        /**
+         * 音频流配置参数，当 RemoveAudio 为 0，该字段必填。
+         * @type {AudioTemplateInfo || null}
+         */
+        this.AudioTemplate = null;
+
+        /**
+         * 极速高清转码参数。
+         * @type {TEHDConfig || null}
+         */
+        this.TEHDConfig = null;
 
     }
 
@@ -15944,23 +16040,26 @@ class UserDefineConfigureInfoForUpdate extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.Container = 'Container' in params ? params.Container : null;
+        this.RemoveVideo = 'RemoveVideo' in params ? params.RemoveVideo : null;
+        this.RemoveAudio = 'RemoveAudio' in params ? params.RemoveAudio : null;
 
-        if (params.FaceReviewInfo) {
-            let obj = new UserDefineFaceReviewTemplateInfoForUpdate();
-            obj.deserialize(params.FaceReviewInfo)
-            this.FaceReviewInfo = obj;
+        if (params.VideoTemplate) {
+            let obj = new VideoTemplateInfo();
+            obj.deserialize(params.VideoTemplate)
+            this.VideoTemplate = obj;
         }
 
-        if (params.AsrReviewInfo) {
-            let obj = new UserDefineAsrTextReviewTemplateInfoForUpdate();
-            obj.deserialize(params.AsrReviewInfo)
-            this.AsrReviewInfo = obj;
+        if (params.AudioTemplate) {
+            let obj = new AudioTemplateInfo();
+            obj.deserialize(params.AudioTemplate)
+            this.AudioTemplate = obj;
         }
 
-        if (params.OcrReviewInfo) {
-            let obj = new UserDefineOcrTextReviewTemplateInfoForUpdate();
-            obj.deserialize(params.OcrReviewInfo)
-            this.OcrReviewInfo = obj;
+        if (params.TEHDConfig) {
+            let obj = new TEHDConfig();
+            obj.deserialize(params.TEHDConfig)
+            this.TEHDConfig = obj;
         }
 
     }
@@ -16466,7 +16565,8 @@ class VideoTemplateInfoForUpdate extends  AbstractModel {
          * 视频流的编码格式，可选值：
 <li>libx264：H.264 编码</li>
 <li>libx265：H.265 编码</li>
-目前 H.265 编码必须指定分辨率，并且需要在 640*480 以内。
+<li>av1：AOMedia Video 1 编码</li>
+目前 H.265 编码必须指定分辨率，并且需要在 640*480 以内。av1 编码容器目前只支持 mp4 。
          * @type {string || null}
          */
         this.Codec = null;
@@ -17452,6 +17552,7 @@ module.exports = {
     AiSampleFaceInfo: AiSampleFaceInfo,
     LiveStreamAsrWordsRecognitionResult: LiveStreamAsrWordsRecognitionResult,
     AiReviewPoliticalAsrTaskOutput: AiReviewPoliticalAsrTaskOutput,
+    UserDefineConfigureInfoForUpdate: UserDefineConfigureInfoForUpdate,
     TerrorismConfigureInfo: TerrorismConfigureInfo,
     TEHDConfigForUpdate: TEHDConfigForUpdate,
     TranscodeTemplate: TranscodeTemplate,
@@ -17495,7 +17596,7 @@ module.exports = {
     DescribeSnapshotByTimeOffsetTemplatesRequest: DescribeSnapshotByTimeOffsetTemplatesRequest,
     AiSampleWordInfo: AiSampleWordInfo,
     CreateWatermarkTemplateRequest: CreateWatermarkTemplateRequest,
-    UserDefineConfigureInfoForUpdate: UserDefineConfigureInfoForUpdate,
+    RawTranscodeParameter: RawTranscodeParameter,
     WatermarkTemplate: WatermarkTemplate,
     LiveStreamOcrFullTextRecognitionResult: LiveStreamOcrFullTextRecognitionResult,
     DeleteWatermarkTemplateResponse: DeleteWatermarkTemplateResponse,

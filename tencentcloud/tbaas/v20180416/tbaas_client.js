@@ -208,7 +208,7 @@ class TbaasClient extends AbstractClient {
     }
 
     /**
-     * bcos分页查询当前群组下的区块列表
+     * Bcos分页查询当前群组下的区块列表
      * @param {GetBlockListHandlerRequest} req
      * @param {function(string, GetBlockListHandlerResponse):void} cb
      * @public
