@@ -56,6 +56,7 @@ const AiRecognitionTaskOcrFullTextSegmentItem = models.AiRecognitionTaskOcrFullT
 const ResetWorkflowResponse = models.ResetWorkflowResponse;
 const PoliticalImgReviewTemplateInfo = models.PoliticalImgReviewTemplateInfo;
 const CreateAIRecognitionTemplateResponse = models.CreateAIRecognitionTemplateResponse;
+const ManageTaskResponse = models.ManageTaskResponse;
 const DescribeTasksResponse = models.DescribeTasksResponse;
 const DeleteTranscodeTemplateRequest = models.DeleteTranscodeTemplateRequest;
 const AiReviewTerrorismTaskOutput = models.AiReviewTerrorismTaskOutput;
@@ -228,6 +229,7 @@ const AiRecognitionTaskFaceResultOutput = models.AiRecognitionTaskFaceResultOutp
 const ParseNotificationResponse = models.ParseNotificationResponse;
 const PornImgReviewTemplateInfoForUpdate = models.PornImgReviewTemplateInfoForUpdate;
 const DeleteAIRecognitionTemplateRequest = models.DeleteAIRecognitionTemplateRequest;
+const ManageTaskRequest = models.ManageTaskRequest;
 const CreateWatermarkTemplateResponse = models.CreateWatermarkTemplateResponse;
 const ModifyAnimatedGraphicsTemplateResponse = models.ModifyAnimatedGraphicsTemplateResponse;
 const ResetWorkflowRequest = models.ResetWorkflowRequest;
@@ -715,6 +717,18 @@ class MpsClient extends AbstractClient {
     EnableWorkflow(req, cb) {
         let resp = new EnableWorkflowResponse();
         this.request("EnableWorkflow", req, resp, cb);
+    }
+
+    /**
+     * 对已发起的任务进行管理。
+> 注意：目前仅支持终止执行中的直播流处理任务。
+     * @param {ManageTaskRequest} req
+     * @param {function(string, ManageTaskResponse):void} cb
+     * @public
+     */
+    ManageTask(req, cb) {
+        let resp = new ManageTaskResponse();
+        this.request("ManageTask", req, resp, cb);
     }
 
     /**

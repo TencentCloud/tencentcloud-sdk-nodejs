@@ -17,25 +17,30 @@
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const CreateLicenseResponse = models.CreateLicenseResponse;
-const PlaybackPolicy = models.PlaybackPolicy;
-const StartEncryptionRequest = models.StartEncryptionRequest;
-const AddFairPlayPemResponse = models.AddFairPlayPemResponse;
-const ModifyFairPlayPemRequest = models.ModifyFairPlayPemRequest;
-const AddFairPlayPemRequest = models.AddFairPlayPemRequest;
-const DeleteFairPlayPemResponse = models.DeleteFairPlayPemResponse;
-const DescribeFairPlayPemRequest = models.DescribeFairPlayPemRequest;
-const DescribeKeysResponse = models.DescribeKeysResponse;
-const DrmOutputPara = models.DrmOutputPara;
+const KeyParam = models.KeyParam;
+const FairPlayPemDigestInfo = models.FairPlayPemDigestInfo;
+const CreateEncryptKeysResponse = models.CreateEncryptKeysResponse;
 const CreateLicenseRequest = models.CreateLicenseRequest;
+const DescribeAllKeysRequest = models.DescribeAllKeysRequest;
+const DrmSourceObject = models.DrmSourceObject;
+const CreateEncryptKeysRequest = models.CreateEncryptKeysRequest;
+const ModifyFairPlayPemResponse = models.ModifyFairPlayPemResponse;
 const DescribeFairPlayPemResponse = models.DescribeFairPlayPemResponse;
 const Key = models.Key;
-const ModifyFairPlayPemResponse = models.ModifyFairPlayPemResponse;
+const PlaybackPolicy = models.PlaybackPolicy;
+const AddFairPlayPemResponse = models.AddFairPlayPemResponse;
+const AddFairPlayPemRequest = models.AddFairPlayPemRequest;
 const DeleteFairPlayPemRequest = models.DeleteFairPlayPemRequest;
-const DescribeKeysRequest = models.DescribeKeysRequest;
-const DrmSourceObject = models.DrmSourceObject;
-const FairPlayPemDigestInfo = models.FairPlayPemDigestInfo;
-const DrmOutputObject = models.DrmOutputObject;
+const DescribeKeysResponse = models.DescribeKeysResponse;
+const DescribeAllKeysResponse = models.DescribeAllKeysResponse;
+const StartEncryptionRequest = models.StartEncryptionRequest;
+const ModifyFairPlayPemRequest = models.ModifyFairPlayPemRequest;
+const DeleteFairPlayPemResponse = models.DeleteFairPlayPemResponse;
+const DrmOutputPara = models.DrmOutputPara;
 const StartEncryptionResponse = models.StartEncryptionResponse;
+const DescribeFairPlayPemRequest = models.DescribeFairPlayPemRequest;
+const DescribeKeysRequest = models.DescribeKeysRequest;
+const DrmOutputObject = models.DrmOutputObject;
 
 
 /**
@@ -69,6 +74,17 @@ class DrmClient extends AbstractClient {
     AddFairPlayPem(req, cb) {
         let resp = new AddFairPlayPemResponse();
         this.request("AddFairPlayPem", req, resp, cb);
+    }
+
+    /**
+     * 该接口用来设置加密的秘钥。注意，同一个content id，只能设置一次！
+     * @param {CreateEncryptKeysRequest} req
+     * @param {function(string, CreateEncryptKeysResponse):void} cb
+     * @public
+     */
+    CreateEncryptKeys(req, cb) {
+        let resp = new CreateEncryptKeysResponse();
+        this.request("CreateEncryptKeys", req, resp, cb);
     }
 
     /**
@@ -106,6 +122,18 @@ class DrmClient extends AbstractClient {
     DescribeKeys(req, cb) {
         let resp = new DescribeKeysResponse();
         this.request("DescribeKeys", req, resp, cb);
+    }
+
+    /**
+     * 本接口用来查询指定DRM类型、ContentType的所有加密秘钥
+
+     * @param {DescribeAllKeysRequest} req
+     * @param {function(string, DescribeAllKeysResponse):void} cb
+     * @public
+     */
+    DescribeAllKeys(req, cb) {
+        let resp = new DescribeAllKeysResponse();
+        this.request("DescribeAllKeys", req, resp, cb);
     }
 
     /**

@@ -3704,6 +3704,95 @@ class UpdateLiveWatermarkResponse extends  AbstractModel {
 }
 
 /**
+ * 直播包信息
+ * @class
+ */
+class LivePackageInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 包ID。
+         * @type {string || null}
+         */
+        this.Id = null;
+
+        /**
+         * 总量。
+注意：当为流量包时单位为字节；
+当为转码包时单位为分钟。
+         * @type {number || null}
+         */
+        this.Total = null;
+
+        /**
+         * 使用量。
+注意：当为流量包时单位为字节；
+当为转码包时单位为分钟。
+         * @type {number || null}
+         */
+        this.Used = null;
+
+        /**
+         * 剩余量。
+注意：当为流量包时单位为字节；
+当为转码包时单位为分钟。
+         * @type {number || null}
+         */
+        this.Left = null;
+
+        /**
+         * 购买时间。
+         * @type {string || null}
+         */
+        this.BuyTime = null;
+
+        /**
+         * 过期时间。
+         * @type {string || null}
+         */
+        this.ExpireTime = null;
+
+        /**
+         * 包类型，可选值：
+0：流量包；
+1：普通转码包；
+2：极速高清包。
+         * @type {number || null}
+         */
+        this.Type = null;
+
+        /**
+         * 包状态，可选值：
+0：未使用；
+1：使用中；
+2：已过期。
+         * @type {number || null}
+         */
+        this.Status = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Id = 'Id' in params ? params.Id : null;
+        this.Total = 'Total' in params ? params.Total : null;
+        this.Used = 'Used' in params ? params.Used : null;
+        this.Left = 'Left' in params ? params.Left : null;
+        this.BuyTime = 'BuyTime' in params ? params.BuyTime : null;
+        this.ExpireTime = 'ExpireTime' in params ? params.ExpireTime : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Status = 'Status' in params ? params.Status : null;
+
+    }
+}
+
+/**
  * CreateLiveTranscodeTemplate返回参数结构体
  * @class
  */
@@ -4717,6 +4806,50 @@ class DescribeLiveWatermarksRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeLivePackageInfo返回参数结构体
+ * @class
+ */
+class DescribeLivePackageInfoResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 套餐包信息。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<LivePackageInfo> || null}
+         */
+        this.LivePackageInfoList = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.LivePackageInfoList) {
+            this.LivePackageInfoList = new Array();
+            for (let z in params.LivePackageInfoList) {
+                let obj = new LivePackageInfo();
+                obj.deserialize(params.LivePackageInfoList[z]);
+                this.LivePackageInfoList.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * CreateLiveTranscodeRule请求参数结构体
  * @class
  */
@@ -5471,6 +5604,36 @@ UTC格式时间，
         this.Duration = 'Duration' in params ? params.Duration : null;
         this.ClientIp = 'ClientIp' in params ? params.ClientIp : null;
         this.Resolution = 'Resolution' in params ? params.Resolution : null;
+
+    }
+}
+
+/**
+ * DescribeLivePackageInfo请求参数结构体
+ * @class
+ */
+class DescribeLivePackageInfoRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 包类型，可选值：
+0：流量包；
+1：转码包。
+         * @type {number || null}
+         */
+        this.PackageType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PackageType = 'PackageType' in params ? params.PackageType : null;
 
     }
 }
@@ -11546,6 +11709,7 @@ module.exports = {
     CreateLiveRecordResponse: CreateLiveRecordResponse,
     RuleInfo: RuleInfo,
     UpdateLiveWatermarkResponse: UpdateLiveWatermarkResponse,
+    LivePackageInfo: LivePackageInfo,
     CreateLiveTranscodeTemplateResponse: CreateLiveTranscodeTemplateResponse,
     DescribeVisitTopSumInfoListRequest: DescribeVisitTopSumInfoListRequest,
     DayStreamPlayInfo: DayStreamPlayInfo,
@@ -11568,6 +11732,7 @@ module.exports = {
     DeleteLiveWatermarkRuleRequest: DeleteLiveWatermarkRuleRequest,
     StreamEventInfo: StreamEventInfo,
     DescribeLiveWatermarksRequest: DescribeLiveWatermarksRequest,
+    DescribeLivePackageInfoResponse: DescribeLivePackageInfoResponse,
     CreateLiveTranscodeRuleRequest: CreateLiveTranscodeRuleRequest,
     DescribeLiveWatermarkRulesRequest: DescribeLiveWatermarkRulesRequest,
     DropLiveStreamRequest: DropLiveStreamRequest,
@@ -11582,6 +11747,7 @@ module.exports = {
     DescribeLiveTranscodeRulesResponse: DescribeLiveTranscodeRulesResponse,
     AddLiveDomainRequest: AddLiveDomainRequest,
     StreamName: StreamName,
+    DescribeLivePackageInfoRequest: DescribeLivePackageInfoRequest,
     CreatePullStreamConfigRequest: CreatePullStreamConfigRequest,
     DescribeLiveCertsRequest: DescribeLiveCertsRequest,
     DescribeLiveCertResponse: DescribeLiveCertResponse,

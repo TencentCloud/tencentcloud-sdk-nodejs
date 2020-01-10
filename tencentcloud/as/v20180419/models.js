@@ -255,6 +255,20 @@ class ModifyAutoScalingGroupRequest extends  AbstractModel {
          */
         this.Ipv6AddressCount = null;
 
+        /**
+         * 多可用区/子网策略，取值包括 PRIORITY 和 EQUALITY。
+<br><li> PRIORITY，按照可用区/子网列表的顺序，作为优先级来尝试创建实例，如果优先级最高的可用区/子网可以创建成功，则总在该可用区/子网创建。
+<br><li> EQUALITY：每次选择当前实例数最少的可用区/子网进行扩容，使得每个可用区/子网都有机会发生扩容，多次扩容出的实例会打散到多个可用区/子网。
+
+与本策略相关的注意点：
+<br><li> 当伸缩组为基础网络时，本策略适用于多可用区；当伸缩组为VPC网络时，本策略适用于多子网，此时不再考虑可用区因素，例如四个子网ABCD，其中ABC处于可用区1，D处于可用区2，此时考虑子网ABCD进行排序，而不考虑可用区1、2。
+<br><li> 本策略适用于多可用区/子网，不适用于启动配置的多机型。多机型按照优先级策略进行选择。
+<br><li> 创建实例时，先保证多机型的策略，后保证多可用区/子网的策略。例如多机型A、B，多子网1、2、3（按照PRIORITY策略），会按照A1、A2、A3、B1、B2、B3 进行尝试，如果A1售罄，会尝试A2（而非B1）。
+<br><li> 无论使用哪种策略，单次伸缩活动总是优先保持使用一种具体配置（机型 * 可用区/子网）。
+         * @type {string || null}
+         */
+        this.MultiZoneSubnetPolicy = null;
+
     }
 
     /**
@@ -285,6 +299,7 @@ class ModifyAutoScalingGroupRequest extends  AbstractModel {
             this.ServiceSettings = obj;
         }
         this.Ipv6AddressCount = 'Ipv6AddressCount' in params ? params.Ipv6AddressCount : null;
+        this.MultiZoneSubnetPolicy = 'MultiZoneSubnetPolicy' in params ? params.MultiZoneSubnetPolicy : null;
 
     }
 }
@@ -1004,6 +1019,51 @@ class DescribeScalingPoliciesRequest extends  AbstractModel {
         }
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
+
+    }
+}
+
+/**
+ * 云服务器实例名称（InstanceName）的相关设置
+ * @class
+ */
+class InstanceNameSettings extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 云服务器的实例名。
+
+点号（.）和短横线（-）不能作为 InstanceName 的首尾字符，不能连续使用。
+
+其他类型（Linux 等）实例：字符长度为[2, 40]，允许支持多个点号，点之间为一段，每段允许字母（不限制大小写）、数字和短横线（-）组成。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.InstanceName = null;
+
+        /**
+         * 云服务器实例名的风格，取值范围包括 ORIGINAL 和 UNIQUE，默认为 ORIGINAL。
+
+ORIGINAL，AS 直接将入参中所填的 InstanceName 传递给 CVM，CVM 可能会对 InstanceName 追加序列号，伸缩组中实例的 InstanceName 会出现冲突的情况。
+
+UNIQUE，入参所填的 InstanceName 相当于实例名前缀，AS 和 CVM 会对其进行拓展，伸缩组中实例的 InstanceName 可以保证唯一。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.InstanceNameStyle = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
+        this.InstanceNameStyle = 'InstanceNameStyle' in params ? params.InstanceNameStyle : null;
 
     }
 }
@@ -1905,6 +1965,18 @@ class CreateLaunchConfigurationRequest extends  AbstractModel {
          */
         this.HostNameSettings = null;
 
+        /**
+         * 云服务器实例名（InstanceName）的相关设置。
+         * @type {InstanceNameSettings || null}
+         */
+        this.InstanceNameSettings = null;
+
+        /**
+         * 预付费模式，即包年包月相关参数设置。通过该参数可以指定包年包月实例的购买时长、是否设置自动续费等属性。若指定实例的付费模式为预付费则该参数必传。
+         * @type {InstanceChargePrepaid || null}
+         */
+        this.InstanceChargePrepaid = null;
+
     }
 
     /**
@@ -1977,6 +2049,18 @@ class CreateLaunchConfigurationRequest extends  AbstractModel {
             let obj = new HostNameSettings();
             obj.deserialize(params.HostNameSettings)
             this.HostNameSettings = obj;
+        }
+
+        if (params.InstanceNameSettings) {
+            let obj = new InstanceNameSettings();
+            obj.deserialize(params.InstanceNameSettings)
+            this.InstanceNameSettings = obj;
+        }
+
+        if (params.InstanceChargePrepaid) {
+            let obj = new InstanceChargePrepaid();
+            obj.deserialize(params.InstanceChargePrepaid)
+            this.InstanceChargePrepaid = obj;
         }
 
     }
@@ -2140,6 +2224,14 @@ class AutoScalingGroup extends  AbstractModel {
          */
         this.Ipv6AddressCount = null;
 
+        /**
+         * 多可用区/子网策略。
+<br><li> PRIORITY，按照可用区/子网列表的顺序，作为优先级来尝试创建实例，如果优先级最高的可用区/子网可以创建成功，则总在该可用区/子网创建。
+<br><li> EQUALITY：每次选择当前实例数最少的可用区/子网进行扩容，使得每个可用区/子网都有机会发生扩容，多次扩容出的实例会打散到多个可用区/子网。
+         * @type {string || null}
+         */
+        this.MultiZoneSubnetPolicy = null;
+
     }
 
     /**
@@ -2195,6 +2287,7 @@ class AutoScalingGroup extends  AbstractModel {
             this.ServiceSettings = obj;
         }
         this.Ipv6AddressCount = 'Ipv6AddressCount' in params ? params.Ipv6AddressCount : null;
+        this.MultiZoneSubnetPolicy = 'MultiZoneSubnetPolicy' in params ? params.MultiZoneSubnetPolicy : null;
 
     }
 }
@@ -3195,6 +3288,20 @@ class CreateAutoScalingGroupRequest extends  AbstractModel {
          */
         this.Ipv6AddressCount = null;
 
+        /**
+         * 多可用区/子网策略，取值包括 PRIORITY 和 EQUALITY，默认为 PRIORITY。
+<br><li> PRIORITY，按照可用区/子网列表的顺序，作为优先级来尝试创建实例，如果优先级最高的可用区/子网可以创建成功，则总在该可用区/子网创建。
+<br><li> EQUALITY：每次选择当前实例数最少的可用区/子网进行扩容，使得每个可用区/子网都有机会发生扩容，多次扩容出的实例会打散到多个可用区/子网。
+
+与本策略相关的注意点：
+<br><li> 当伸缩组为基础网络时，本策略适用于多可用区；当伸缩组为VPC网络时，本策略适用于多子网，此时不再考虑可用区因素，例如四个子网ABCD，其中ABC处于可用区1，D处于可用区2，此时考虑子网ABCD进行排序，而不考虑可用区1、2。
+<br><li> 本策略适用于多可用区/子网，不适用于启动配置的多机型。多机型按照优先级策略进行选择。
+<br><li> 创建实例时，先保证多机型的策略，后保证多可用区/子网的策略。例如多机型A、B，多子网1、2、3（按照PRIORITY策略），会按照A1、A2、A3、B1、B2、B3 进行尝试，如果A1售罄，会尝试A2（而非B1）。
+<br><li> 无论使用哪种策略，单次伸缩活动总是优先保持使用一种具体配置（机型 * 可用区/子网）。
+         * @type {string || null}
+         */
+        this.MultiZoneSubnetPolicy = null;
+
     }
 
     /**
@@ -3243,6 +3350,7 @@ class CreateAutoScalingGroupRequest extends  AbstractModel {
             this.ServiceSettings = obj;
         }
         this.Ipv6AddressCount = 'Ipv6AddressCount' in params ? params.Ipv6AddressCount : null;
+        this.MultiZoneSubnetPolicy = 'MultiZoneSubnetPolicy' in params ? params.MultiZoneSubnetPolicy : null;
 
     }
 }
@@ -3398,6 +3506,18 @@ class UpgradeLaunchConfigurationRequest extends  AbstractModel {
          */
         this.HostNameSettings = null;
 
+        /**
+         * 云服务器实例名（InstanceName）的相关设置。
+         * @type {Array.<InstanceNameSettings> || null}
+         */
+        this.InstanceNameSettings = null;
+
+        /**
+         * 预付费模式，即包年包月相关参数设置。通过该参数可以指定包年包月实例的购买时长、是否设置自动续费等属性。若指定实例的付费模式为预付费则该参数必传。
+         * @type {InstanceChargePrepaid || null}
+         */
+        this.InstanceChargePrepaid = null;
+
     }
 
     /**
@@ -3470,6 +3590,21 @@ class UpgradeLaunchConfigurationRequest extends  AbstractModel {
             let obj = new HostNameSettings();
             obj.deserialize(params.HostNameSettings)
             this.HostNameSettings = obj;
+        }
+
+        if (params.InstanceNameSettings) {
+            this.InstanceNameSettings = new Array();
+            for (let z in params.InstanceNameSettings) {
+                let obj = new InstanceNameSettings();
+                obj.deserialize(params.InstanceNameSettings[z]);
+                this.InstanceNameSettings.push(obj);
+            }
+        }
+
+        if (params.InstanceChargePrepaid) {
+            let obj = new InstanceChargePrepaid();
+            obj.deserialize(params.InstanceChargePrepaid)
+            this.InstanceChargePrepaid = obj;
         }
 
     }
@@ -4827,6 +4962,18 @@ class LaunchConfiguration extends  AbstractModel {
          */
         this.HostNameSettings = null;
 
+        /**
+         * 云服务器实例名（InstanceName）的相关设置。
+         * @type {Array.<InstanceNameSettings> || null}
+         */
+        this.InstanceNameSettings = null;
+
+        /**
+         * 预付费模式，即包年包月相关参数设置。通过该参数可以指定包年包月实例的购买时长、是否设置自动续费等属性。若指定实例的付费模式为预付费则该参数必传。
+         * @type {InstanceChargePrepaid || null}
+         */
+        this.InstanceChargePrepaid = null;
+
     }
 
     /**
@@ -4913,6 +5060,21 @@ class LaunchConfiguration extends  AbstractModel {
             let obj = new HostNameSettings();
             obj.deserialize(params.HostNameSettings)
             this.HostNameSettings = obj;
+        }
+
+        if (params.InstanceNameSettings) {
+            this.InstanceNameSettings = new Array();
+            for (let z in params.InstanceNameSettings) {
+                let obj = new InstanceNameSettings();
+                obj.deserialize(params.InstanceNameSettings[z]);
+                this.InstanceNameSettings.push(obj);
+            }
+        }
+
+        if (params.InstanceChargePrepaid) {
+            let obj = new InstanceChargePrepaid();
+            obj.deserialize(params.InstanceChargePrepaid)
+            this.InstanceChargePrepaid = obj;
         }
 
     }
@@ -6398,6 +6560,7 @@ module.exports = {
     SpotMarketOptions: SpotMarketOptions,
     StopAutoScalingInstancesResponse: StopAutoScalingInstancesResponse,
     DescribeScalingPoliciesRequest: DescribeScalingPoliciesRequest,
+    InstanceNameSettings: InstanceNameSettings,
     ModifyScheduledActionResponse: ModifyScheduledActionResponse,
     CreateAutoScalingGroupFromInstanceRequest: CreateAutoScalingGroupFromInstanceRequest,
     ExecuteScalingPolicyResponse: ExecuteScalingPolicyResponse,

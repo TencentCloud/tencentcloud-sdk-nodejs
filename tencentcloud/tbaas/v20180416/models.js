@@ -109,6 +109,56 @@ class QueryRequest extends  AbstractModel {
 }
 
 /**
+ * GetBlockTransactionListForUser返回参数结构体
+ * @class
+ */
+class GetBlockTransactionListForUserResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 交易总数量
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 交易列表
+         * @type {Array.<TransactionItem> || null}
+         */
+        this.TransactionList = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.TransactionList) {
+            this.TransactionList = new Array();
+            for (let z in params.TransactionList) {
+                let obj = new TransactionItem();
+                obj.deserialize(params.TransactionList[z]);
+                this.TransactionList.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * SendTransactionHandler返回参数结构体
  * @class
  */
@@ -420,6 +470,18 @@ class ApplyUserCertResponse extends  AbstractModel {
         super();
 
         /**
+         * 证书ID
+         * @type {number || null}
+         */
+        this.CertId = null;
+
+        /**
+         * 证书DN
+         * @type {string || null}
+         */
+        this.CertDn = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -434,6 +496,8 @@ class ApplyUserCertResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.CertId = 'CertId' in params ? params.CertId : null;
+        this.CertDn = 'CertDn' in params ? params.CertDn : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -1205,6 +1269,83 @@ class PeerSet extends  AbstractModel {
 }
 
 /**
+ * GetBlockTransactionListForUser请求参数结构体
+ * @class
+ */
+class GetBlockTransactionListForUserRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 模块名，固定字段：transaction
+         * @type {string || null}
+         */
+        this.Module = null;
+
+        /**
+         * 操作名，固定字段：block_transaction_list_for_user
+         * @type {string || null}
+         */
+        this.Operation = null;
+
+        /**
+         * 区块链网络ID，可在区块链网络详情或列表中获取
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * 参与交易的组织名称，可以在组织管理列表中获取当前组织的名称
+         * @type {string || null}
+         */
+        this.GroupName = null;
+
+        /**
+         * 业务所属通道名称，可在通道详情或列表中获取
+         * @type {string || null}
+         */
+        this.ChannelName = null;
+
+        /**
+         * 区块ID，通过GetInvokeTx接口可以获取交易所在的区块ID
+         * @type {number || null}
+         */
+        this.BlockId = null;
+
+        /**
+         * 查询的交易列表起始偏移地址
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 查询的交易列表数量
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Module = 'Module' in params ? params.Module : null;
+        this.Operation = 'Operation' in params ? params.Operation : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.GroupName = 'GroupName' in params ? params.GroupName : null;
+        this.ChannelName = 'ChannelName' in params ? params.ChannelName : null;
+        this.BlockId = 'BlockId' in params ? params.BlockId : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+
+    }
+}
+
+/**
  * SrvInvoke返回参数结构体
  * @class
  */
@@ -1513,7 +1654,7 @@ class GetBlockListRequest extends  AbstractModel {
 }
 
 /**
- * bcos交易信息对象
+ * Bcos交易信息对象
  * @class
  */
 class BcosTransInfo extends  AbstractModel {
@@ -2237,6 +2378,7 @@ class EndorserGroup extends  AbstractModel {
 
 module.exports = {
     QueryRequest: QueryRequest,
+    GetBlockTransactionListForUserResponse: GetBlockTransactionListForUserResponse,
     SendTransactionHandlerResponse: SendTransactionHandlerResponse,
     ApplyUserCertRequest: ApplyUserCertRequest,
     GetTransListHandlerResponse: GetTransListHandlerResponse,
@@ -2255,6 +2397,7 @@ module.exports = {
     DownloadUserCertRequest: DownloadUserCertRequest,
     GetClusterSummaryResponse: GetClusterSummaryResponse,
     PeerSet: PeerSet,
+    GetBlockTransactionListForUserRequest: GetBlockTransactionListForUserRequest,
     SrvInvokeResponse: SrvInvokeResponse,
     GetBlockListHandlerRequest: GetBlockListHandlerRequest,
     GetClusterSummaryRequest: GetClusterSummaryRequest,

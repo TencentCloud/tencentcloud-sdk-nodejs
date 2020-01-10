@@ -17,10 +17,104 @@
 const AbstractModel = require("../../common/abstract_model");
 
 /**
- * UnBindingAllPolicyObject请求参数结构体
+ * DescribePolicyConditionList.ConfigManual
  * @class
  */
-class UnBindingAllPolicyObjectRequest extends  AbstractModel {
+class DescribePolicyConditionListConfigManual extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 检测方式
+         * @type {DescribePolicyConditionListConfigManualCalcType || null}
+         */
+        this.CalcType = null;
+
+        /**
+         * 检测阈值
+         * @type {DescribePolicyConditionListConfigManualCalcValue || null}
+         */
+        this.CalcValue = null;
+
+        /**
+         * 持续时间
+         * @type {DescribePolicyConditionListConfigManualContinueTime || null}
+         */
+        this.ContinueTime = null;
+
+        /**
+         * 数据周期
+         * @type {DescribePolicyConditionListConfigManualPeriod || null}
+         */
+        this.Period = null;
+
+        /**
+         * 持续周期个数
+         * @type {DescribePolicyConditionListConfigManualPeriodNum || null}
+         */
+        this.PeriodNum = null;
+
+        /**
+         * 聚合方式
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {DescribePolicyConditionListConfigManualStatType || null}
+         */
+        this.StatType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.CalcType) {
+            let obj = new DescribePolicyConditionListConfigManualCalcType();
+            obj.deserialize(params.CalcType)
+            this.CalcType = obj;
+        }
+
+        if (params.CalcValue) {
+            let obj = new DescribePolicyConditionListConfigManualCalcValue();
+            obj.deserialize(params.CalcValue)
+            this.CalcValue = obj;
+        }
+
+        if (params.ContinueTime) {
+            let obj = new DescribePolicyConditionListConfigManualContinueTime();
+            obj.deserialize(params.ContinueTime)
+            this.ContinueTime = obj;
+        }
+
+        if (params.Period) {
+            let obj = new DescribePolicyConditionListConfigManualPeriod();
+            obj.deserialize(params.Period)
+            this.Period = obj;
+        }
+
+        if (params.PeriodNum) {
+            let obj = new DescribePolicyConditionListConfigManualPeriodNum();
+            obj.deserialize(params.PeriodNum)
+            this.PeriodNum = obj;
+        }
+
+        if (params.StatType) {
+            let obj = new DescribePolicyConditionListConfigManualStatType();
+            obj.deserialize(params.StatType)
+            this.StatType = obj;
+        }
+
+    }
+}
+
+/**
+ * UnBindingPolicyObject请求参数结构体
+ * @class
+ */
+class UnBindingPolicyObjectRequest extends  AbstractModel {
     constructor(){
         super();
 
@@ -36,6 +130,12 @@ class UnBindingAllPolicyObjectRequest extends  AbstractModel {
          */
         this.GroupId = null;
 
+        /**
+         * 待删除对象实例的唯一id列表
+         * @type {Array.<string> || null}
+         */
+        this.UniqueId = null;
+
     }
 
     /**
@@ -47,6 +147,35 @@ class UnBindingAllPolicyObjectRequest extends  AbstractModel {
         }
         this.Module = 'Module' in params ? params.Module : null;
         this.GroupId = 'GroupId' in params ? params.GroupId : null;
+        this.UniqueId = 'UniqueId' in params ? params.UniqueId : null;
+
+    }
+}
+
+/**
+ * DescribePolicyConditionList请求参数结构体
+ * @class
+ */
+class DescribePolicyConditionListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 固定值，为"monitor"
+         * @type {string || null}
+         */
+        this.Module = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Module = 'Module' in params ? params.Module : null;
 
     }
 }
@@ -384,18 +513,152 @@ class Instance extends  AbstractModel {
 }
 
 /**
- * 维度信息
+ * DescribeProductEventList返回的Events
  * @class
  */
-class DimensionsDesc extends  AbstractModel {
+class DescribeProductEventListEvents extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 维度名数组
-         * @type {Array.<string> || null}
+         * 事件ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.EventId = null;
+
+        /**
+         * 事件中文名
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.EventCName = null;
+
+        /**
+         * 事件英文名
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.EventEName = null;
+
+        /**
+         * 事件简称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.EventName = null;
+
+        /**
+         * 产品中文名
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ProductCName = null;
+
+        /**
+         * 产品英文名
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ProductEName = null;
+
+        /**
+         * 产品简称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ProductName = null;
+
+        /**
+         * 实例ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 实例名称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.InstanceName = null;
+
+        /**
+         * 项目ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ProjectId = null;
+
+        /**
+         * 地域
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Region = null;
+
+        /**
+         * 状态
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * 是否支持告警
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.SupportAlarm = null;
+
+        /**
+         * 事件类型
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * 开始时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * 更新时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.UpdateTime = null;
+
+        /**
+         * 实例对象信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<DescribeProductEventListEventsDimensions> || null}
          */
         this.Dimensions = null;
+
+        /**
+         * 实例对象附加信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<DescribeProductEventListEventsDimensions> || null}
+         */
+        this.AdditionMsg = null;
+
+        /**
+         * 是否配置告警
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.IsAlarmConfig = null;
+
+        /**
+         * 策略信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<DescribeProductEventListEventsGroupInfo> || null}
+         */
+        this.GroupInfo = null;
 
     }
 
@@ -406,7 +669,50 @@ class DimensionsDesc extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Dimensions = 'Dimensions' in params ? params.Dimensions : null;
+        this.EventId = 'EventId' in params ? params.EventId : null;
+        this.EventCName = 'EventCName' in params ? params.EventCName : null;
+        this.EventEName = 'EventEName' in params ? params.EventEName : null;
+        this.EventName = 'EventName' in params ? params.EventName : null;
+        this.ProductCName = 'ProductCName' in params ? params.ProductCName : null;
+        this.ProductEName = 'ProductEName' in params ? params.ProductEName : null;
+        this.ProductName = 'ProductName' in params ? params.ProductName : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+        this.Region = 'Region' in params ? params.Region : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.SupportAlarm = 'SupportAlarm' in params ? params.SupportAlarm : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+
+        if (params.Dimensions) {
+            this.Dimensions = new Array();
+            for (let z in params.Dimensions) {
+                let obj = new DescribeProductEventListEventsDimensions();
+                obj.deserialize(params.Dimensions[z]);
+                this.Dimensions.push(obj);
+            }
+        }
+
+        if (params.AdditionMsg) {
+            this.AdditionMsg = new Array();
+            for (let z in params.AdditionMsg) {
+                let obj = new DescribeProductEventListEventsDimensions();
+                obj.deserialize(params.AdditionMsg[z]);
+                this.AdditionMsg.push(obj);
+            }
+        }
+        this.IsAlarmConfig = 'IsAlarmConfig' in params ? params.IsAlarmConfig : null;
+
+        if (params.GroupInfo) {
+            this.GroupInfo = new Array();
+            for (let z in params.GroupInfo) {
+                let obj = new DescribeProductEventListEventsGroupInfo();
+                obj.deserialize(params.GroupInfo[z]);
+                this.GroupInfo.push(obj);
+            }
+        }
 
     }
 }
@@ -456,6 +762,60 @@ class BindingPolicyObjectDimension extends  AbstractModel {
         this.RegionId = 'RegionId' in params ? params.RegionId : null;
         this.Dimensions = 'Dimensions' in params ? params.Dimensions : null;
         this.EventDimensions = 'EventDimensions' in params ? params.EventDimensions : null;
+
+    }
+}
+
+/**
+ * 指标告警配置
+ * @class
+ */
+class DescribePolicyConditionListMetric extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 指标配置
+         * @type {DescribePolicyConditionListConfigManual || null}
+         */
+        this.ConfigManual = null;
+
+        /**
+         * 指标id
+         * @type {number || null}
+         */
+        this.MetricId = null;
+
+        /**
+         * 指标名称
+         * @type {string || null}
+         */
+        this.MetricShowName = null;
+
+        /**
+         * 指标单位
+         * @type {string || null}
+         */
+        this.MetricUnit = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.ConfigManual) {
+            let obj = new DescribePolicyConditionListConfigManual();
+            obj.deserialize(params.ConfigManual)
+            this.ConfigManual = obj;
+        }
+        this.MetricId = 'MetricId' in params ? params.MetricId : null;
+        this.MetricShowName = 'MetricShowName' in params ? params.MetricShowName : null;
+        this.MetricUnit = 'MetricUnit' in params ? params.MetricUnit : null;
 
     }
 }
@@ -822,10 +1182,47 @@ class BindingPolicyObjectRequest extends  AbstractModel {
 }
 
 /**
- * PutMonitorData返回参数结构体
+ * DescribeProductEventList返回的Events里的GroupInfo
  * @class
  */
-class PutMonitorDataResponse extends  AbstractModel {
+class DescribeProductEventListEventsGroupInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 策略ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.GroupId = null;
+
+        /**
+         * 策略名
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.GroupName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.GroupId = 'GroupId' in params ? params.GroupId : null;
+        this.GroupName = 'GroupName' in params ? params.GroupName : null;
+
+    }
+}
+
+/**
+ * UnBindingPolicyObject返回参数结构体
+ * @class
+ */
+class UnBindingPolicyObjectResponse extends  AbstractModel {
     constructor(){
         super();
 
@@ -844,6 +1241,281 @@ class PutMonitorDataResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribePolicyConditionList.ConfigManual.Period
+ * @class
+ */
+class DescribePolicyConditionListConfigManualPeriod extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 默认周期，单位：秒
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Default = null;
+
+        /**
+         * 可选周期，单位：秒
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<number> || null}
+         */
+        this.Keys = null;
+
+        /**
+         * 是否必须
+         * @type {boolean || null}
+         */
+        this.Need = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Default = 'Default' in params ? params.Default : null;
+        this.Keys = 'Keys' in params ? params.Keys : null;
+        this.Need = 'Need' in params ? params.Need : null;
+
+    }
+}
+
+/**
+ * DescribePolicyConditionList.EventMetric
+ * @class
+ */
+class DescribePolicyConditionListEventMetric extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 事件id
+         * @type {number || null}
+         */
+        this.EventId = null;
+
+        /**
+         * 事件名称
+         * @type {string || null}
+         */
+        this.EventShowName = null;
+
+        /**
+         * 是否需要恢复
+         * @type {boolean || null}
+         */
+        this.NeedRecovered = null;
+
+        /**
+         * 事件类型，预留字段，当前固定取值为2
+         * @type {number || null}
+         */
+        this.Type = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.EventId = 'EventId' in params ? params.EventId : null;
+        this.EventShowName = 'EventShowName' in params ? params.EventShowName : null;
+        this.NeedRecovered = 'NeedRecovered' in params ? params.NeedRecovered : null;
+        this.Type = 'Type' in params ? params.Type : null;
+
+    }
+}
+
+/**
+ * DescribePolicyConditionList策略条件
+ * @class
+ */
+class DescribePolicyConditionListCondition extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 策略视图名称
+         * @type {string || null}
+         */
+        this.PolicyViewName = null;
+
+        /**
+         * 事件告警条件
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<DescribePolicyConditionListEventMetric> || null}
+         */
+        this.EventMetrics = null;
+
+        /**
+         * 是否支持多地域
+         * @type {boolean || null}
+         */
+        this.IsSupportMultiRegion = null;
+
+        /**
+         * 指标告警条件
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<DescribePolicyConditionListMetric> || null}
+         */
+        this.Metrics = null;
+
+        /**
+         * 策略类型名称
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 排序id
+         * @type {number || null}
+         */
+        this.SortId = null;
+
+        /**
+         * 是否支持默认策略
+         * @type {boolean || null}
+         */
+        this.SupportDefault = null;
+
+        /**
+         * 支持该策略类型的地域列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
+         */
+        this.SupportRegions = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PolicyViewName = 'PolicyViewName' in params ? params.PolicyViewName : null;
+
+        if (params.EventMetrics) {
+            this.EventMetrics = new Array();
+            for (let z in params.EventMetrics) {
+                let obj = new DescribePolicyConditionListEventMetric();
+                obj.deserialize(params.EventMetrics[z]);
+                this.EventMetrics.push(obj);
+            }
+        }
+        this.IsSupportMultiRegion = 'IsSupportMultiRegion' in params ? params.IsSupportMultiRegion : null;
+
+        if (params.Metrics) {
+            this.Metrics = new Array();
+            for (let z in params.Metrics) {
+                let obj = new DescribePolicyConditionListMetric();
+                obj.deserialize(params.Metrics[z]);
+                this.Metrics.push(obj);
+            }
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.SortId = 'SortId' in params ? params.SortId : null;
+        this.SupportDefault = 'SupportDefault' in params ? params.SupportDefault : null;
+        this.SupportRegions = 'SupportRegions' in params ? params.SupportRegions : null;
+
+    }
+}
+
+/**
+ * UnBindingAllPolicyObject请求参数结构体
+ * @class
+ */
+class UnBindingAllPolicyObjectRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 固定值，为"monitor"
+         * @type {string || null}
+         */
+        this.Module = null;
+
+        /**
+         * 策略组id
+         * @type {number || null}
+         */
+        this.GroupId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Module = 'Module' in params ? params.Module : null;
+        this.GroupId = 'GroupId' in params ? params.GroupId : null;
+
+    }
+}
+
+/**
+ * DescribePolicyGroupList返回参数结构体
+ * @class
+ */
+class DescribePolicyGroupListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 策略组列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<DescribePolicyGroupListGroup> || null}
+         */
+        this.GroupList = null;
+
+        /**
+         * 策略组总数
+         * @type {number || null}
+         */
+        this.Total = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.GroupList) {
+            this.GroupList = new Array();
+            for (let z in params.GroupList) {
+                let obj = new DescribePolicyGroupListGroup();
+                obj.deserialize(params.GroupList[z]);
+                this.GroupList.push(obj);
+            }
+        }
+        this.Total = 'Total' in params ? params.Total : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -885,96 +1557,18 @@ class DescribePolicyGroupInfoRequest extends  AbstractModel {
 }
 
 /**
- * 接收人信息
+ * 维度信息
  * @class
  */
-class ReceiverInfo extends  AbstractModel {
+class DimensionsDesc extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 告警时间段开始时间。范围[0,86400)，作为unix时间戳转成北京时间后去掉日期，例如7200表示"10:0:0"
-         * @type {number || null}
-         */
-        this.StartTime = null;
-
-        /**
-         * 告警时间段结束时间。含义同StartTime
-         * @type {number || null}
-         */
-        this.EndTime = null;
-
-        /**
-         * 告警通知方式。可选 "SMS","SITE","EMAIL","CALL","WECHAT"
+         * 维度名数组
          * @type {Array.<string> || null}
          */
-        this.NotifyWay = null;
-
-        /**
-         * 接收人类型。“group” 或 “user”
-         * @type {Array.<string> || null}
-         */
-        this.ReceiverType = null;
-
-        /**
-         * Id
-         * @type {number || null}
-         */
-        this.Id = null;
-
-        /**
-         * 电话告警通知时机。可选"OCCUR"(告警时通知),"RECOVER"(恢复时通知)
-         * @type {Array.<string> || null}
-         */
-        this.SendFor = null;
-
-        /**
-         * 电话告警接收者uid
-         * @type {Array.<number> || null}
-         */
-        this.UidList = null;
-
-        /**
-         * 电话告警轮数
-         * @type {number || null}
-         */
-        this.RoundNumber = null;
-
-        /**
-         * 电话告警对个人间隔（秒）
-         * @type {number || null}
-         */
-        this.PersonInterval = null;
-
-        /**
-         * 电话告警每轮间隔（秒）
-         * @type {number || null}
-         */
-        this.RoundInterval = null;
-
-        /**
-         * 恢复通知方式。可选"SMS"
-         * @type {Array.<string> || null}
-         */
-        this.RecoverNotify = null;
-
-        /**
-         * 是否需要电话告警触达提示。0不需要，1需要
-         * @type {number || null}
-         */
-        this.NeedSendNotice = null;
-
-        /**
-         * 接收组列表。通过平台接口查询到的接收组id列表
-         * @type {Array.<number> || null}
-         */
-        this.ReceiverGroupList = null;
-
-        /**
-         * 接收人列表。通过平台接口查询到的接收人id列表
-         * @type {Array.<number> || null}
-         */
-        this.ReceiverUserList = null;
+        this.Dimensions = null;
 
     }
 
@@ -985,171 +1579,137 @@ class ReceiverInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.StartTime = 'StartTime' in params ? params.StartTime : null;
-        this.EndTime = 'EndTime' in params ? params.EndTime : null;
-        this.NotifyWay = 'NotifyWay' in params ? params.NotifyWay : null;
-        this.ReceiverType = 'ReceiverType' in params ? params.ReceiverType : null;
-        this.Id = 'Id' in params ? params.Id : null;
-        this.SendFor = 'SendFor' in params ? params.SendFor : null;
-        this.UidList = 'UidList' in params ? params.UidList : null;
-        this.RoundNumber = 'RoundNumber' in params ? params.RoundNumber : null;
-        this.PersonInterval = 'PersonInterval' in params ? params.PersonInterval : null;
-        this.RoundInterval = 'RoundInterval' in params ? params.RoundInterval : null;
-        this.RecoverNotify = 'RecoverNotify' in params ? params.RecoverNotify : null;
-        this.NeedSendNotice = 'NeedSendNotice' in params ? params.NeedSendNotice : null;
-        this.ReceiverGroupList = 'ReceiverGroupList' in params ? params.ReceiverGroupList : null;
-        this.ReceiverUserList = 'ReceiverUserList' in params ? params.ReceiverUserList : null;
+        this.Dimensions = 'Dimensions' in params ? params.Dimensions : null;
 
     }
 }
 
 /**
- * DescribeProductEventList返回的Events
+ * DescribePolicyGroupList.Group
  * @class
  */
-class DescribeProductEventListEvents extends  AbstractModel {
+class DescribePolicyGroupListGroup extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 事件ID
-注意：此字段可能返回 null，表示取不到有效值。
+         * 策略组id
          * @type {number || null}
          */
-        this.EventId = null;
+        this.GroupId = null;
 
         /**
-         * 事件中文名
-注意：此字段可能返回 null，表示取不到有效值。
+         * 策略组名称
          * @type {string || null}
          */
-        this.EventCName = null;
+        this.GroupName = null;
 
         /**
-         * 事件英文名
-注意：此字段可能返回 null，表示取不到有效值。
+         * 是否开启
+         * @type {boolean || null}
+         */
+        this.IsOpen = null;
+
+        /**
+         * 策略视图名称
          * @type {string || null}
          */
-        this.EventEName = null;
+        this.ViewName = null;
 
         /**
-         * 事件简称
-注意：此字段可能返回 null，表示取不到有效值。
+         * 最近编辑的用户uin
          * @type {string || null}
          */
-        this.EventName = null;
+        this.LastEditUin = null;
 
         /**
-         * 产品中文名
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.ProductCName = null;
-
-        /**
-         * 产品英文名
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.ProductEName = null;
-
-        /**
-         * 产品简称
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.ProductName = null;
-
-        /**
-         * 实例ID
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.InstanceId = null;
-
-        /**
-         * 实例名称
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.InstanceName = null;
-
-        /**
-         * 项目ID
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.ProjectId = null;
-
-        /**
-         * 地域
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.Region = null;
-
-        /**
-         * 状态
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.Status = null;
-
-        /**
-         * 是否支持告警
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.SupportAlarm = null;
-
-        /**
-         * 事件类型
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.Type = null;
-
-        /**
-         * 开始时间
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.StartTime = null;
-
-        /**
-         * 更新时间
-注意：此字段可能返回 null，表示取不到有效值。
+         * 最后修改时间
          * @type {number || null}
          */
         this.UpdateTime = null;
 
         /**
-         * 实例对象信息
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {Array.<DescribeProductEventListEventsDimensions> || null}
-         */
-        this.Dimensions = null;
-
-        /**
-         * 实例对象附加信息
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {Array.<DescribeProductEventListEventsDimensions> || null}
-         */
-        this.AdditionMsg = null;
-
-        /**
-         * 是否配置告警
-注意：此字段可能返回 null，表示取不到有效值。
+         * 创建时间
          * @type {number || null}
          */
-        this.IsAlarmConfig = null;
+        this.InsertTime = null;
 
         /**
-         * 策略信息
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {Array.<DescribeProductEventListEventsGroupInfo> || null}
+         * 策略组绑定的实例数
+         * @type {number || null}
          */
-        this.GroupInfo = null;
+        this.UseSum = null;
+
+        /**
+         * 策略组绑定的未屏蔽实例数
+         * @type {number || null}
+         */
+        this.NoShieldedSum = null;
+
+        /**
+         * 是否为默认策略，0表示非默认策略，1表示默认策略
+         * @type {number || null}
+         */
+        this.IsDefault = null;
+
+        /**
+         * 是否可以设置成默认策略
+         * @type {boolean || null}
+         */
+        this.CanSetDefault = null;
+
+        /**
+         * 父策略组id
+         * @type {number || null}
+         */
+        this.ParentGroupId = null;
+
+        /**
+         * 策略组备注
+         * @type {string || null}
+         */
+        this.Remark = null;
+
+        /**
+         * 策略组所属项目id
+         * @type {number || null}
+         */
+        this.ProjectId = null;
+
+        /**
+         * 阈值规则列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<DescribePolicyGroupInfoCondition> || null}
+         */
+        this.Conditions = null;
+
+        /**
+         * 产品事件规则列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<DescribePolicyGroupInfoEventCondition> || null}
+         */
+        this.EventConditions = null;
+
+        /**
+         * 用户接收人列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<DescribePolicyGroupInfoReceiverInfo> || null}
+         */
+        this.ReceiverInfos = null;
+
+        /**
+         * 模板策略组
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {DescribePolicyGroupInfoConditionTpl || null}
+         */
+        this.ConditionsTemp = null;
+
+        /**
+         * 策略组绑定的实例组信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {DescribePolicyGroupListGroupInstanceGroup || null}
+         */
+        this.InstanceGroup = null;
 
     }
 
@@ -1160,49 +1720,58 @@ class DescribeProductEventListEvents extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.EventId = 'EventId' in params ? params.EventId : null;
-        this.EventCName = 'EventCName' in params ? params.EventCName : null;
-        this.EventEName = 'EventEName' in params ? params.EventEName : null;
-        this.EventName = 'EventName' in params ? params.EventName : null;
-        this.ProductCName = 'ProductCName' in params ? params.ProductCName : null;
-        this.ProductEName = 'ProductEName' in params ? params.ProductEName : null;
-        this.ProductName = 'ProductName' in params ? params.ProductName : null;
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
-        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
-        this.Region = 'Region' in params ? params.Region : null;
-        this.Status = 'Status' in params ? params.Status : null;
-        this.SupportAlarm = 'SupportAlarm' in params ? params.SupportAlarm : null;
-        this.Type = 'Type' in params ? params.Type : null;
-        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.GroupId = 'GroupId' in params ? params.GroupId : null;
+        this.GroupName = 'GroupName' in params ? params.GroupName : null;
+        this.IsOpen = 'IsOpen' in params ? params.IsOpen : null;
+        this.ViewName = 'ViewName' in params ? params.ViewName : null;
+        this.LastEditUin = 'LastEditUin' in params ? params.LastEditUin : null;
         this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.InsertTime = 'InsertTime' in params ? params.InsertTime : null;
+        this.UseSum = 'UseSum' in params ? params.UseSum : null;
+        this.NoShieldedSum = 'NoShieldedSum' in params ? params.NoShieldedSum : null;
+        this.IsDefault = 'IsDefault' in params ? params.IsDefault : null;
+        this.CanSetDefault = 'CanSetDefault' in params ? params.CanSetDefault : null;
+        this.ParentGroupId = 'ParentGroupId' in params ? params.ParentGroupId : null;
+        this.Remark = 'Remark' in params ? params.Remark : null;
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
 
-        if (params.Dimensions) {
-            this.Dimensions = new Array();
-            for (let z in params.Dimensions) {
-                let obj = new DescribeProductEventListEventsDimensions();
-                obj.deserialize(params.Dimensions[z]);
-                this.Dimensions.push(obj);
+        if (params.Conditions) {
+            this.Conditions = new Array();
+            for (let z in params.Conditions) {
+                let obj = new DescribePolicyGroupInfoCondition();
+                obj.deserialize(params.Conditions[z]);
+                this.Conditions.push(obj);
             }
         }
 
-        if (params.AdditionMsg) {
-            this.AdditionMsg = new Array();
-            for (let z in params.AdditionMsg) {
-                let obj = new DescribeProductEventListEventsDimensions();
-                obj.deserialize(params.AdditionMsg[z]);
-                this.AdditionMsg.push(obj);
+        if (params.EventConditions) {
+            this.EventConditions = new Array();
+            for (let z in params.EventConditions) {
+                let obj = new DescribePolicyGroupInfoEventCondition();
+                obj.deserialize(params.EventConditions[z]);
+                this.EventConditions.push(obj);
             }
         }
-        this.IsAlarmConfig = 'IsAlarmConfig' in params ? params.IsAlarmConfig : null;
 
-        if (params.GroupInfo) {
-            this.GroupInfo = new Array();
-            for (let z in params.GroupInfo) {
-                let obj = new DescribeProductEventListEventsGroupInfo();
-                obj.deserialize(params.GroupInfo[z]);
-                this.GroupInfo.push(obj);
+        if (params.ReceiverInfos) {
+            this.ReceiverInfos = new Array();
+            for (let z in params.ReceiverInfos) {
+                let obj = new DescribePolicyGroupInfoReceiverInfo();
+                obj.deserialize(params.ReceiverInfos[z]);
+                this.ReceiverInfos.push(obj);
             }
+        }
+
+        if (params.ConditionsTemp) {
+            let obj = new DescribePolicyGroupInfoConditionTpl();
+            obj.deserialize(params.ConditionsTemp)
+            this.ConditionsTemp = obj;
+        }
+
+        if (params.InstanceGroup) {
+            let obj = new DescribePolicyGroupListGroupInstanceGroup();
+            obj.deserialize(params.InstanceGroup)
+            this.InstanceGroup = obj;
         }
 
     }
@@ -1620,26 +2189,24 @@ class DescribePolicyGroupInfoCallback extends  AbstractModel {
 }
 
 /**
- * DescribeProductEventList返回的Events里的GroupInfo
+ * DescribePolicyConditionList返回参数结构体
  * @class
  */
-class DescribeProductEventListEventsGroupInfo extends  AbstractModel {
+class DescribePolicyConditionListResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 策略ID
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
+         * 告警策略条件列表
+         * @type {Array.<DescribePolicyConditionListCondition> || null}
          */
-        this.GroupId = null;
+        this.Conditions = null;
 
         /**
-         * 策略名
-注意：此字段可能返回 null，表示取不到有效值。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.GroupName = null;
+        this.RequestId = null;
 
     }
 
@@ -1650,17 +2217,61 @@ class DescribeProductEventListEventsGroupInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.GroupId = 'GroupId' in params ? params.GroupId : null;
-        this.GroupName = 'GroupName' in params ? params.GroupName : null;
+
+        if (params.Conditions) {
+            this.Conditions = new Array();
+            for (let z in params.Conditions) {
+                let obj = new DescribePolicyConditionListCondition();
+                obj.deserialize(params.Conditions[z]);
+                this.Conditions.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
 
 /**
- * UnBindingPolicyObject返回参数结构体
+ * DescribePolicyConditionList.ConfigManual.CalcType
  * @class
  */
-class UnBindingPolicyObjectResponse extends  AbstractModel {
+class DescribePolicyConditionListConfigManualCalcType extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * CalcType 取值
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<number> || null}
+         */
+        this.Keys = null;
+
+        /**
+         * 是否必须
+         * @type {boolean || null}
+         */
+        this.Need = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Keys = 'Keys' in params ? params.Keys : null;
+        this.Need = 'Need' in params ? params.Need : null;
+
+    }
+}
+
+/**
+ * PutMonitorData返回参数结构体
+ * @class
+ */
+class PutMonitorDataResponse extends  AbstractModel {
     constructor(){
         super();
 
@@ -1680,6 +2291,125 @@ class UnBindingPolicyObjectResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 接收人信息
+ * @class
+ */
+class ReceiverInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 告警时间段开始时间。范围[0,86400)，作为unix时间戳转成北京时间后去掉日期，例如7200表示"10:0:0"
+         * @type {number || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * 告警时间段结束时间。含义同StartTime
+         * @type {number || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * 告警通知方式。可选 "SMS","SITE","EMAIL","CALL","WECHAT"
+         * @type {Array.<string> || null}
+         */
+        this.NotifyWay = null;
+
+        /**
+         * 接收人类型。“group” 或 “user”
+         * @type {Array.<string> || null}
+         */
+        this.ReceiverType = null;
+
+        /**
+         * Id
+         * @type {number || null}
+         */
+        this.Id = null;
+
+        /**
+         * 电话告警通知时机。可选"OCCUR"(告警时通知),"RECOVER"(恢复时通知)
+         * @type {Array.<string> || null}
+         */
+        this.SendFor = null;
+
+        /**
+         * 电话告警接收者uid
+         * @type {Array.<number> || null}
+         */
+        this.UidList = null;
+
+        /**
+         * 电话告警轮数
+         * @type {number || null}
+         */
+        this.RoundNumber = null;
+
+        /**
+         * 电话告警对个人间隔（秒）
+         * @type {number || null}
+         */
+        this.PersonInterval = null;
+
+        /**
+         * 电话告警每轮间隔（秒）
+         * @type {number || null}
+         */
+        this.RoundInterval = null;
+
+        /**
+         * 恢复通知方式。可选"SMS"
+         * @type {Array.<string> || null}
+         */
+        this.RecoverNotify = null;
+
+        /**
+         * 是否需要电话告警触达提示。0不需要，1需要
+         * @type {number || null}
+         */
+        this.NeedSendNotice = null;
+
+        /**
+         * 接收组列表。通过平台接口查询到的接收组id列表
+         * @type {Array.<number> || null}
+         */
+        this.ReceiverGroupList = null;
+
+        /**
+         * 接收人列表。通过平台接口查询到的接收人id列表
+         * @type {Array.<number> || null}
+         */
+        this.ReceiverUserList = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.NotifyWay = 'NotifyWay' in params ? params.NotifyWay : null;
+        this.ReceiverType = 'ReceiverType' in params ? params.ReceiverType : null;
+        this.Id = 'Id' in params ? params.Id : null;
+        this.SendFor = 'SendFor' in params ? params.SendFor : null;
+        this.UidList = 'UidList' in params ? params.UidList : null;
+        this.RoundNumber = 'RoundNumber' in params ? params.RoundNumber : null;
+        this.PersonInterval = 'PersonInterval' in params ? params.PersonInterval : null;
+        this.RoundInterval = 'RoundInterval' in params ? params.RoundInterval : null;
+        this.RecoverNotify = 'RecoverNotify' in params ? params.RecoverNotify : null;
+        this.NeedSendNotice = 'NeedSendNotice' in params ? params.NeedSendNotice : null;
+        this.ReceiverGroupList = 'ReceiverGroupList' in params ? params.ReceiverGroupList : null;
+        this.ReceiverUserList = 'ReceiverUserList' in params ? params.ReceiverUserList : null;
 
     }
 }
@@ -2549,6 +3279,50 @@ class DescribeBaseMetricsResponse extends  AbstractModel {
 }
 
 /**
+ * DescribePolicyConditionList.ConfigManual.PeriodNum
+ * @class
+ */
+class DescribePolicyConditionListConfigManualPeriodNum extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 默认周期数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Default = null;
+
+        /**
+         * 可选周期数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<number> || null}
+         */
+        this.Keys = null;
+
+        /**
+         * 是否必须
+         * @type {boolean || null}
+         */
+        this.Need = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Default = 'Default' in params ? params.Default : null;
+        this.Keys = 'Keys' in params ? params.Keys : null;
+        this.Need = 'Need' in params ? params.Need : null;
+
+    }
+}
+
+/**
  * 查询策略绑定对象列表接口返回的对象实例信息
  * @class
  */
@@ -2598,10 +3372,54 @@ class DescribeBindingPolicyObjectListInstance extends  AbstractModel {
 }
 
 /**
- * UnBindingPolicyObject请求参数结构体
+ * DescribePolicyConditionList.ConfigManual.ContinueTime
  * @class
  */
-class UnBindingPolicyObjectRequest extends  AbstractModel {
+class DescribePolicyConditionListConfigManualContinueTime extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 默认持续时间，单位：秒
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Default = null;
+
+        /**
+         * 可选持续时间，单位：秒
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<number> || null}
+         */
+        this.Keys = null;
+
+        /**
+         * 是否必须
+         * @type {boolean || null}
+         */
+        this.Need = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Default = 'Default' in params ? params.Default : null;
+        this.Keys = 'Keys' in params ? params.Keys : null;
+        this.Need = 'Need' in params ? params.Need : null;
+
+    }
+}
+
+/**
+ * DescribePolicyGroupList请求参数结构体
+ * @class
+ */
+class DescribePolicyGroupListRequest extends  AbstractModel {
     constructor(){
         super();
 
@@ -2612,16 +3430,16 @@ class UnBindingPolicyObjectRequest extends  AbstractModel {
         this.Module = null;
 
         /**
-         * 策略组id
+         * 分页参数，最大返回个数
          * @type {number || null}
          */
-        this.GroupId = null;
+        this.Limit = null;
 
         /**
-         * 待删除对象实例的唯一id列表
-         * @type {Array.<string> || null}
+         * 分页参数，起始位置
+         * @type {number || null}
          */
-        this.UniqueId = null;
+        this.Offset = null;
 
     }
 
@@ -2633,8 +3451,8 @@ class UnBindingPolicyObjectRequest extends  AbstractModel {
             return;
         }
         this.Module = 'Module' in params ? params.Module : null;
-        this.GroupId = 'GroupId' in params ? params.GroupId : null;
-        this.UniqueId = 'UniqueId' in params ? params.UniqueId : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
 
     }
 }
@@ -2904,6 +3722,91 @@ class UnBindingAllPolicyObjectResponse extends  AbstractModel {
 }
 
 /**
+ * DescribePolicyConditionList.ConfigManual.StatType
+ * @class
+ */
+class DescribePolicyConditionListConfigManualStatType extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 数据聚合方式，周期5秒
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.P5 = null;
+
+        /**
+         * 数据聚合方式，周期10秒
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.P10 = null;
+
+        /**
+         * 数据聚合方式，周期1分钟
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.P60 = null;
+
+        /**
+         * 数据聚合方式，周期5分钟
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.P300 = null;
+
+        /**
+         * 数据聚合方式，周期10分钟
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.P600 = null;
+
+        /**
+         * 数据聚合方式，周期30分钟
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.P1800 = null;
+
+        /**
+         * 数据聚合方式，周期1小时
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.P3600 = null;
+
+        /**
+         * 数据聚合方式，周期1天
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.P86400 = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.P5 = 'P5' in params ? params.P5 : null;
+        this.P10 = 'P10' in params ? params.P10 : null;
+        this.P60 = 'P60' in params ? params.P60 : null;
+        this.P300 = 'P300' in params ? params.P300 : null;
+        this.P600 = 'P600' in params ? params.P600 : null;
+        this.P1800 = 'P1800' in params ? params.P1800 : null;
+        this.P3600 = 'P3600' in params ? params.P3600 : null;
+        this.P86400 = 'P86400' in params ? params.P86400 : null;
+
+    }
+}
+
+/**
  * DescribeProductEventList返回的Events的Dimensions
  * @class
  */
@@ -2949,6 +3852,66 @@ class DescribeProductEventListEventsDimensions extends  AbstractModel {
 }
 
 /**
+ * DescribePolicyConditionList.ConfigManual.CalcValue
+ * @class
+ */
+class DescribePolicyConditionListConfigManualCalcValue extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 默认值
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Default = null;
+
+        /**
+         * 固定值
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Fixed = null;
+
+        /**
+         * 最大值
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Max = null;
+
+        /**
+         * 最小值
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Min = null;
+
+        /**
+         * 是否必须
+         * @type {boolean || null}
+         */
+        this.Need = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Default = 'Default' in params ? params.Default : null;
+        this.Fixed = 'Fixed' in params ? params.Fixed : null;
+        this.Max = 'Max' in params ? params.Max : null;
+        this.Min = 'Min' in params ? params.Min : null;
+        this.Need = 'Need' in params ? params.Need : null;
+
+    }
+}
+
+/**
  * ModifyAlarmReceivers返回参数结构体
  * @class
  */
@@ -2972,6 +3935,76 @@ class ModifyAlarmReceiversResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribePolicyGroupList接口策略组绑定的实例分组信息
+ * @class
+ */
+class DescribePolicyGroupListGroupInstanceGroup extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例分组名称id
+         * @type {number || null}
+         */
+        this.InstanceGroupId = null;
+
+        /**
+         * 策略类型视图名称
+         * @type {string || null}
+         */
+        this.ViewName = null;
+
+        /**
+         * 最近编辑的用户uin
+         * @type {string || null}
+         */
+        this.LastEditUin = null;
+
+        /**
+         * 实例分组名称
+         * @type {string || null}
+         */
+        this.GroupName = null;
+
+        /**
+         * 实例数量
+         * @type {number || null}
+         */
+        this.InstanceSum = null;
+
+        /**
+         * 更新时间
+         * @type {number || null}
+         */
+        this.UpdateTime = null;
+
+        /**
+         * 创建时间
+         * @type {number || null}
+         */
+        this.InsertTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceGroupId = 'InstanceGroupId' in params ? params.InstanceGroupId : null;
+        this.ViewName = 'ViewName' in params ? params.ViewName : null;
+        this.LastEditUin = 'LastEditUin' in params ? params.LastEditUin : null;
+        this.GroupName = 'GroupName' in params ? params.GroupName : null;
+        this.InstanceSum = 'InstanceSum' in params ? params.InstanceSum : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.InsertTime = 'InsertTime' in params ? params.InsertTime : null;
 
     }
 }
@@ -3005,22 +4038,31 @@ class BindingPolicyObjectResponse extends  AbstractModel {
 }
 
 module.exports = {
-    UnBindingAllPolicyObjectRequest: UnBindingAllPolicyObjectRequest,
+    DescribePolicyConditionListConfigManual: DescribePolicyConditionListConfigManual,
+    UnBindingPolicyObjectRequest: UnBindingPolicyObjectRequest,
+    DescribePolicyConditionListRequest: DescribePolicyConditionListRequest,
     DeletePolicyGroupResponse: DeletePolicyGroupResponse,
     DescribeAccidentEventListAlarms: DescribeAccidentEventListAlarms,
     CreatePolicyGroupEventCondition: CreatePolicyGroupEventCondition,
     DescribeProductEventListRequest: DescribeProductEventListRequest,
     Instance: Instance,
-    DimensionsDesc: DimensionsDesc,
+    DescribeProductEventListEvents: DescribeProductEventListEvents,
     BindingPolicyObjectDimension: BindingPolicyObjectDimension,
+    DescribePolicyConditionListMetric: DescribePolicyConditionListMetric,
     CreatePolicyGroupRequest: CreatePolicyGroupRequest,
     CreatePolicyGroupCondition: CreatePolicyGroupCondition,
     DescribePolicyGroupInfoReceiverInfo: DescribePolicyGroupInfoReceiverInfo,
     BindingPolicyObjectRequest: BindingPolicyObjectRequest,
-    PutMonitorDataResponse: PutMonitorDataResponse,
+    DescribeProductEventListEventsGroupInfo: DescribeProductEventListEventsGroupInfo,
+    UnBindingPolicyObjectResponse: UnBindingPolicyObjectResponse,
+    DescribePolicyConditionListConfigManualPeriod: DescribePolicyConditionListConfigManualPeriod,
+    DescribePolicyConditionListEventMetric: DescribePolicyConditionListEventMetric,
+    DescribePolicyConditionListCondition: DescribePolicyConditionListCondition,
+    UnBindingAllPolicyObjectRequest: UnBindingAllPolicyObjectRequest,
+    DescribePolicyGroupListResponse: DescribePolicyGroupListResponse,
     DescribePolicyGroupInfoRequest: DescribePolicyGroupInfoRequest,
-    ReceiverInfo: ReceiverInfo,
-    DescribeProductEventListEvents: DescribeProductEventListEvents,
+    DimensionsDesc: DimensionsDesc,
+    DescribePolicyGroupListGroup: DescribePolicyGroupListGroup,
     GetMonitorDataRequest: GetMonitorDataRequest,
     PeriodsSt: PeriodsSt,
     DescribeAccidentEventListRequest: DescribeAccidentEventListRequest,
@@ -3029,8 +4071,10 @@ module.exports = {
     MetricDatum: MetricDatum,
     DeletePolicyGroupRequest: DeletePolicyGroupRequest,
     DescribePolicyGroupInfoCallback: DescribePolicyGroupInfoCallback,
-    DescribeProductEventListEventsGroupInfo: DescribeProductEventListEventsGroupInfo,
-    UnBindingPolicyObjectResponse: UnBindingPolicyObjectResponse,
+    DescribePolicyConditionListResponse: DescribePolicyConditionListResponse,
+    DescribePolicyConditionListConfigManualCalcType: DescribePolicyConditionListConfigManualCalcType,
+    PutMonitorDataResponse: PutMonitorDataResponse,
+    ReceiverInfo: ReceiverInfo,
     DescribeProductEventListDimensions: DescribeProductEventListDimensions,
     DescribePolicyGroupInfoResponse: DescribePolicyGroupInfoResponse,
     ModifyAlarmReceiversRequest: ModifyAlarmReceiversRequest,
@@ -3044,16 +4088,21 @@ module.exports = {
     PutMonitorDataRequest: PutMonitorDataRequest,
     DescribePolicyGroupInfoEventCondition: DescribePolicyGroupInfoEventCondition,
     DescribeBaseMetricsResponse: DescribeBaseMetricsResponse,
+    DescribePolicyConditionListConfigManualPeriodNum: DescribePolicyConditionListConfigManualPeriodNum,
     DescribeBindingPolicyObjectListInstance: DescribeBindingPolicyObjectListInstance,
-    UnBindingPolicyObjectRequest: UnBindingPolicyObjectRequest,
+    DescribePolicyConditionListConfigManualContinueTime: DescribePolicyConditionListConfigManualContinueTime,
+    DescribePolicyGroupListRequest: DescribePolicyGroupListRequest,
     DescribeAccidentEventListResponse: DescribeAccidentEventListResponse,
     DescribeProductEventListResponse: DescribeProductEventListResponse,
     DescribeBaseMetricsRequest: DescribeBaseMetricsRequest,
     Dimension: Dimension,
     DataPoint: DataPoint,
     UnBindingAllPolicyObjectResponse: UnBindingAllPolicyObjectResponse,
+    DescribePolicyConditionListConfigManualStatType: DescribePolicyConditionListConfigManualStatType,
     DescribeProductEventListEventsDimensions: DescribeProductEventListEventsDimensions,
+    DescribePolicyConditionListConfigManualCalcValue: DescribePolicyConditionListConfigManualCalcValue,
     ModifyAlarmReceiversResponse: ModifyAlarmReceiversResponse,
+    DescribePolicyGroupListGroupInstanceGroup: DescribePolicyGroupListGroupInstanceGroup,
     BindingPolicyObjectResponse: BindingPolicyObjectResponse,
 
 }
