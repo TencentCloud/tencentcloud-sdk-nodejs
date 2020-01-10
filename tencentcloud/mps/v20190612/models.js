@@ -2273,6 +2273,34 @@ class CreateAIRecognitionTemplateResponse extends  AbstractModel {
 }
 
 /**
+ * ManageTask返回参数结构体
+ * @class
+ */
+class ManageTaskResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeTasks返回参数结构体
  * @class
  */
@@ -6803,6 +6831,13 @@ class VideoTemplateInfo extends  AbstractModel {
         this.Height = null;
 
         /**
+         * 关键帧 I 帧之间的间隔，取值范围：0 和 [1, 100000]，单位：帧数。
+当填 0 或不填时，系统将自动设置 gop 长度。
+         * @type {number || null}
+         */
+        this.Gop = null;
+
+        /**
          * 填充方式，当视频流配置宽高参数与原始视频的宽高比不一致时，对转码的处理方式，即为“填充”。可选填充方式：
 <li> stretch：拉伸，对每一帧进行拉伸，填满整个画面，可能导致转码后的视频被“压扁“或者“拉长“；</li>
 <li>black：留黑，保持视频宽高比不变，边缘剩余部分使用黑色填充。</li>
@@ -6826,6 +6861,7 @@ class VideoTemplateInfo extends  AbstractModel {
         this.ResolutionAdaptive = 'ResolutionAdaptive' in params ? params.ResolutionAdaptive : null;
         this.Width = 'Width' in params ? params.Width : null;
         this.Height = 'Height' in params ? params.Height : null;
+        this.Gop = 'Gop' in params ? params.Gop : null;
         this.FillType = 'FillType' in params ? params.FillType : null;
 
     }
@@ -11727,6 +11763,14 @@ class TranscodeTaskInput extends  AbstractModel {
         this.Definition = null;
 
         /**
+         * 视频转码自定义参数，当 Definition 填 0 时有效。
+该参数用于高度定制场景，建议您优先使用 Definition 指定转码参数。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {RawTranscodeParameter || null}
+         */
+        this.RawParameter = null;
+
+        /**
          * 水印列表，支持多张图片或文字水印，最大可支持 10 张。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<WatermarkInput> || null}
@@ -11759,14 +11803,6 @@ class TranscodeTaskInput extends  AbstractModel {
          */
         this.ObjectNumberFormat = null;
 
-        /**
-         * 视频转码自定义参数，当 Definition 填 0 时有效。
-该参数用于高度定制场景，建议您优先使用 Definition 指定转码参数。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {RawTranscodeParameter || null}
-         */
-        this.RawParameter = null;
-
     }
 
     /**
@@ -11777,6 +11813,12 @@ class TranscodeTaskInput extends  AbstractModel {
             return;
         }
         this.Definition = 'Definition' in params ? params.Definition : null;
+
+        if (params.RawParameter) {
+            let obj = new RawTranscodeParameter();
+            obj.deserialize(params.RawParameter)
+            this.RawParameter = obj;
+        }
 
         if (params.WatermarkSet) {
             this.WatermarkSet = new Array();
@@ -11799,12 +11841,6 @@ class TranscodeTaskInput extends  AbstractModel {
             let obj = new NumberFormat();
             obj.deserialize(params.ObjectNumberFormat)
             this.ObjectNumberFormat = obj;
-        }
-
-        if (params.RawParameter) {
-            let obj = new RawTranscodeParameter();
-            obj.deserialize(params.RawParameter)
-            this.RawParameter = obj;
         }
 
     }
@@ -12106,6 +12142,42 @@ class DeleteAIRecognitionTemplateRequest extends  AbstractModel {
             return;
         }
         this.Definition = 'Definition' in params ? params.Definition : null;
+
+    }
+}
+
+/**
+ * ManageTask请求参数结构体
+ * @class
+ */
+class ManageTaskRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 操作类型，取值范围：
+<li>Abort：终止任务。</li>
+         * @type {string || null}
+         */
+        this.OperationType = null;
+
+        /**
+         * 视频处理的任务 ID。
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.OperationType = 'OperationType' in params ? params.OperationType : null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
 
     }
 }
@@ -16610,10 +16682,15 @@ class VideoTemplateInfoForUpdate extends  AbstractModel {
         this.Height = null;
 
         /**
+         * 关键帧 I 帧之间的间隔，取值范围：0 和 [1, 100000]，单位：帧数。当填 0 时，系统将自动设置 gop 长度。
+         * @type {string || null}
+         */
+        this.Gop = null;
+
+        /**
          * 填充方式，当视频流配置宽高参数与原始视频的宽高比不一致时，对转码的处理方式，即为“填充”。可选填充方式：
 <li> stretch：拉伸，对每一帧进行拉伸，填满整个画面，可能导致转码后的视频被“压扁“或者“拉长“；</li>
 <li>black：留黑，保持视频宽高比不变，边缘剩余部分使用黑色填充。</li>
-默认值：black 。
          * @type {string || null}
          */
         this.FillType = null;
@@ -16633,6 +16710,7 @@ class VideoTemplateInfoForUpdate extends  AbstractModel {
         this.ResolutionAdaptive = 'ResolutionAdaptive' in params ? params.ResolutionAdaptive : null;
         this.Width = 'Width' in params ? params.Width : null;
         this.Height = 'Height' in params ? params.Height : null;
+        this.Gop = 'Gop' in params ? params.Gop : null;
         this.FillType = 'FillType' in params ? params.FillType : null;
 
     }
@@ -17349,6 +17427,7 @@ module.exports = {
     ResetWorkflowResponse: ResetWorkflowResponse,
     PoliticalImgReviewTemplateInfo: PoliticalImgReviewTemplateInfo,
     CreateAIRecognitionTemplateResponse: CreateAIRecognitionTemplateResponse,
+    ManageTaskResponse: ManageTaskResponse,
     DescribeTasksResponse: DescribeTasksResponse,
     DeleteTranscodeTemplateRequest: DeleteTranscodeTemplateRequest,
     AiReviewTerrorismTaskOutput: AiReviewTerrorismTaskOutput,
@@ -17521,6 +17600,7 @@ module.exports = {
     ParseNotificationResponse: ParseNotificationResponse,
     PornImgReviewTemplateInfoForUpdate: PornImgReviewTemplateInfoForUpdate,
     DeleteAIRecognitionTemplateRequest: DeleteAIRecognitionTemplateRequest,
+    ManageTaskRequest: ManageTaskRequest,
     CreateWatermarkTemplateResponse: CreateWatermarkTemplateResponse,
     ModifyAnimatedGraphicsTemplateResponse: ModifyAnimatedGraphicsTemplateResponse,
     ResetWorkflowRequest: ResetWorkflowRequest,

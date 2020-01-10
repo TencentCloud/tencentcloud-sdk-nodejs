@@ -16,22 +16,31 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
-const UnBindingAllPolicyObjectRequest = models.UnBindingAllPolicyObjectRequest;
+const DescribePolicyConditionListConfigManual = models.DescribePolicyConditionListConfigManual;
+const UnBindingPolicyObjectRequest = models.UnBindingPolicyObjectRequest;
+const DescribePolicyConditionListRequest = models.DescribePolicyConditionListRequest;
 const DeletePolicyGroupResponse = models.DeletePolicyGroupResponse;
 const DescribeAccidentEventListAlarms = models.DescribeAccidentEventListAlarms;
 const CreatePolicyGroupEventCondition = models.CreatePolicyGroupEventCondition;
 const DescribeProductEventListRequest = models.DescribeProductEventListRequest;
 const Instance = models.Instance;
-const DimensionsDesc = models.DimensionsDesc;
+const DescribeProductEventListEvents = models.DescribeProductEventListEvents;
 const BindingPolicyObjectDimension = models.BindingPolicyObjectDimension;
+const DescribePolicyConditionListMetric = models.DescribePolicyConditionListMetric;
 const CreatePolicyGroupRequest = models.CreatePolicyGroupRequest;
 const CreatePolicyGroupCondition = models.CreatePolicyGroupCondition;
 const DescribePolicyGroupInfoReceiverInfo = models.DescribePolicyGroupInfoReceiverInfo;
 const BindingPolicyObjectRequest = models.BindingPolicyObjectRequest;
-const PutMonitorDataResponse = models.PutMonitorDataResponse;
+const DescribeProductEventListEventsGroupInfo = models.DescribeProductEventListEventsGroupInfo;
+const UnBindingPolicyObjectResponse = models.UnBindingPolicyObjectResponse;
+const DescribePolicyConditionListConfigManualPeriod = models.DescribePolicyConditionListConfigManualPeriod;
+const DescribePolicyConditionListEventMetric = models.DescribePolicyConditionListEventMetric;
+const DescribePolicyConditionListCondition = models.DescribePolicyConditionListCondition;
+const UnBindingAllPolicyObjectRequest = models.UnBindingAllPolicyObjectRequest;
+const DescribePolicyGroupListResponse = models.DescribePolicyGroupListResponse;
 const DescribePolicyGroupInfoRequest = models.DescribePolicyGroupInfoRequest;
-const ReceiverInfo = models.ReceiverInfo;
-const DescribeProductEventListEvents = models.DescribeProductEventListEvents;
+const DimensionsDesc = models.DimensionsDesc;
+const DescribePolicyGroupListGroup = models.DescribePolicyGroupListGroup;
 const GetMonitorDataRequest = models.GetMonitorDataRequest;
 const PeriodsSt = models.PeriodsSt;
 const DescribeAccidentEventListRequest = models.DescribeAccidentEventListRequest;
@@ -40,8 +49,10 @@ const MetricObjectMeaning = models.MetricObjectMeaning;
 const MetricDatum = models.MetricDatum;
 const DeletePolicyGroupRequest = models.DeletePolicyGroupRequest;
 const DescribePolicyGroupInfoCallback = models.DescribePolicyGroupInfoCallback;
-const DescribeProductEventListEventsGroupInfo = models.DescribeProductEventListEventsGroupInfo;
-const UnBindingPolicyObjectResponse = models.UnBindingPolicyObjectResponse;
+const DescribePolicyConditionListResponse = models.DescribePolicyConditionListResponse;
+const DescribePolicyConditionListConfigManualCalcType = models.DescribePolicyConditionListConfigManualCalcType;
+const PutMonitorDataResponse = models.PutMonitorDataResponse;
+const ReceiverInfo = models.ReceiverInfo;
 const DescribeProductEventListDimensions = models.DescribeProductEventListDimensions;
 const DescribePolicyGroupInfoResponse = models.DescribePolicyGroupInfoResponse;
 const ModifyAlarmReceiversRequest = models.ModifyAlarmReceiversRequest;
@@ -55,16 +66,21 @@ const CreatePolicyGroupResponse = models.CreatePolicyGroupResponse;
 const PutMonitorDataRequest = models.PutMonitorDataRequest;
 const DescribePolicyGroupInfoEventCondition = models.DescribePolicyGroupInfoEventCondition;
 const DescribeBaseMetricsResponse = models.DescribeBaseMetricsResponse;
+const DescribePolicyConditionListConfigManualPeriodNum = models.DescribePolicyConditionListConfigManualPeriodNum;
 const DescribeBindingPolicyObjectListInstance = models.DescribeBindingPolicyObjectListInstance;
-const UnBindingPolicyObjectRequest = models.UnBindingPolicyObjectRequest;
+const DescribePolicyConditionListConfigManualContinueTime = models.DescribePolicyConditionListConfigManualContinueTime;
+const DescribePolicyGroupListRequest = models.DescribePolicyGroupListRequest;
 const DescribeAccidentEventListResponse = models.DescribeAccidentEventListResponse;
 const DescribeProductEventListResponse = models.DescribeProductEventListResponse;
 const DescribeBaseMetricsRequest = models.DescribeBaseMetricsRequest;
 const Dimension = models.Dimension;
 const DataPoint = models.DataPoint;
 const UnBindingAllPolicyObjectResponse = models.UnBindingAllPolicyObjectResponse;
+const DescribePolicyConditionListConfigManualStatType = models.DescribePolicyConditionListConfigManualStatType;
 const DescribeProductEventListEventsDimensions = models.DescribeProductEventListEventsDimensions;
+const DescribePolicyConditionListConfigManualCalcValue = models.DescribePolicyConditionListConfigManualCalcValue;
 const ModifyAlarmReceiversResponse = models.ModifyAlarmReceiversResponse;
+const DescribePolicyGroupListGroupInstanceGroup = models.DescribePolicyGroupListGroupInstanceGroup;
 const BindingPolicyObjectResponse = models.BindingPolicyObjectResponse;
 
 
@@ -178,6 +194,17 @@ class MonitorClient extends AbstractClient {
     }
 
     /**
+     * 获取基础策略告警组列表
+     * @param {DescribePolicyGroupListRequest} req
+     * @param {function(string, DescribePolicyGroupListResponse):void} cb
+     * @public
+     */
+    DescribePolicyGroupList(req, cb) {
+        let resp = new DescribePolicyGroupListResponse();
+        this.request("DescribePolicyGroupList", req, resp, cb);
+    }
+
+    /**
      * 获取云产品的监控数据。传入产品的命名空间、对象维度描述和监控指标即可获得相应的监控数据。
 接口调用频率限制为：20次/秒，1200次/分钟。
 若您需要调用的指标、对象较多，可能存在因限频出现拉取失败的情况，建议尽量将请求按时间维度均摊。
@@ -227,6 +254,17 @@ class MonitorClient extends AbstractClient {
     UnBindingAllPolicyObject(req, cb) {
         let resp = new UnBindingAllPolicyObjectResponse();
         this.request("UnBindingAllPolicyObject", req, resp, cb);
+    }
+
+    /**
+     * 获取基础告警策略条件
+     * @param {DescribePolicyConditionListRequest} req
+     * @param {function(string, DescribePolicyConditionListResponse):void} cb
+     * @public
+     */
+    DescribePolicyConditionList(req, cb) {
+        let resp = new DescribePolicyConditionListResponse();
+        this.request("DescribePolicyConditionList", req, resp, cb);
     }
 
 

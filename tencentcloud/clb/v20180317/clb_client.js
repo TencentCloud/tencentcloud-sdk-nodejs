@@ -56,12 +56,14 @@ const ModifyRuleResponse = models.ModifyRuleResponse;
 const DescribeClassicalLBTargetsRequest = models.DescribeClassicalLBTargetsRequest;
 const DescribeListenersResponse = models.DescribeListenersResponse;
 const AutoRewriteRequest = models.AutoRewriteRequest;
+const DescribeLoadBalancerListByCertIdResponse = models.DescribeLoadBalancerListByCertIdResponse;
 const ModifyTargetGroupInstancesWeightResponse = models.ModifyTargetGroupInstancesWeightResponse;
 const DescribeTargetGroupsRequest = models.DescribeTargetGroupsRequest;
 const DescribeTaskStatusResponse = models.DescribeTaskStatusResponse;
 const DescribeTargetHealthRequest = models.DescribeTargetHealthRequest;
 const Target = models.Target;
 const DescribeBlockIPListRequest = models.DescribeBlockIPListRequest;
+const CertIdRelatedWithLoadBalancers = models.CertIdRelatedWithLoadBalancers;
 const DescribeClassicalLBHealthStatusResponse = models.DescribeClassicalLBHealthStatusResponse;
 const RuleHealth = models.RuleHealth;
 const Listener = models.Listener;
@@ -121,6 +123,7 @@ const DescribeTargetsResponse = models.DescribeTargetsResponse;
 const BatchModifyTargetWeightRequest = models.BatchModifyTargetWeightRequest;
 const DeleteRewriteResponse = models.DeleteRewriteResponse;
 const BatchTarget = models.BatchTarget;
+const DescribeLoadBalancerListByCertIdRequest = models.DescribeLoadBalancerListByCertIdRequest;
 const TargetRegionInfo = models.TargetRegionInfo;
 const BatchRegisterTargetsResponse = models.BatchRegisterTargetsResponse;
 const ReplaceCertForLoadBalancersRequest = models.ReplaceCertForLoadBalancersRequest;
@@ -128,7 +131,7 @@ const DeleteRuleResponse = models.DeleteRuleResponse;
 const ModifyTargetGroupAttributeRequest = models.ModifyTargetGroupAttributeRequest;
 const ModifyDomainAttributesRequest = models.ModifyDomainAttributesRequest;
 const DeregisterTargetsRequest = models.DeregisterTargetsRequest;
-const CertificateOutput = models.CertificateOutput;
+const InternetAccessible = models.InternetAccessible;
 const ModifyTargetGroupInstancesWeightRequest = models.ModifyTargetGroupInstancesWeightRequest;
 const DeleteTargetGroupsResponse = models.DeleteTargetGroupsResponse;
 const ModifyTargetGroupInstancesPortRequest = models.ModifyTargetGroupInstancesPortRequest;
@@ -149,7 +152,7 @@ const RewriteLocationMap = models.RewriteLocationMap;
 const ModifyTargetPortRequest = models.ModifyTargetPortRequest;
 const DescribeLoadBalancersResponse = models.DescribeLoadBalancersResponse;
 const DeleteListenerResponse = models.DeleteListenerResponse;
-const InternetAccessible = models.InternetAccessible;
+const CertificateOutput = models.CertificateOutput;
 const DeleteTargetGroupsRequest = models.DeleteTargetGroupsRequest;
 const DescribeClassicalLBListenersRequest = models.DescribeClassicalLBListenersRequest;
 const TargetHealth = models.TargetHealth;
@@ -422,7 +425,7 @@ class ClbClient extends AbstractClient {
     }
 
     /**
-     * 查询负载均衡实例列表
+     * 查询一个地域的负载均衡实例列表
 
      * @param {DescribeLoadBalancersRequest} req
      * @param {function(string, DescribeLoadBalancersResponse):void} cb
@@ -445,7 +448,7 @@ class ClbClient extends AbstractClient {
     }
 
     /**
-     * DescribeListeners 接口可根据负载均衡器 ID，监听器的协议或端口作为过滤条件获取监听器列表。如果不指定任何过滤条件，默认返该负载均衡器下的默认数据长度（20 个）的监听器。
+     * DescribeListeners 接口可根据负载均衡器 ID，监听器的协议或端口作为过滤条件获取监听器列表。如果不指定任何过滤条件，则返回该负载均衡实例下的所有监听器。
      * @param {DescribeListenersRequest} req
      * @param {function(string, DescribeListenersResponse):void} cb
      * @public
@@ -635,6 +638,17 @@ class ClbClient extends AbstractClient {
     ModifyTargetGroupAttribute(req, cb) {
         let resp = new ModifyTargetGroupAttributeResponse();
         this.request("ModifyTargetGroupAttribute", req, resp, cb);
+    }
+
+    /**
+     * 根据证书ID查询其在一个地域中所关联到负载均衡实例列表
+     * @param {DescribeLoadBalancerListByCertIdRequest} req
+     * @param {function(string, DescribeLoadBalancerListByCertIdResponse):void} cb
+     * @public
+     */
+    DescribeLoadBalancerListByCertId(req, cb) {
+        let resp = new DescribeLoadBalancerListByCertIdResponse();
+        this.request("DescribeLoadBalancerListByCertId", req, resp, cb);
     }
 
     /**

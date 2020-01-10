@@ -17,6 +17,7 @@
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const QueryRequest = models.QueryRequest;
+const GetBlockTransactionListForUserResponse = models.GetBlockTransactionListForUserResponse;
 const SendTransactionHandlerResponse = models.SendTransactionHandlerResponse;
 const ApplyUserCertRequest = models.ApplyUserCertRequest;
 const GetTransListHandlerResponse = models.GetTransListHandlerResponse;
@@ -35,6 +36,7 @@ const GetLatesdTransactionListResponse = models.GetLatesdTransactionListResponse
 const DownloadUserCertRequest = models.DownloadUserCertRequest;
 const GetClusterSummaryResponse = models.GetClusterSummaryResponse;
 const PeerSet = models.PeerSet;
+const GetBlockTransactionListForUserRequest = models.GetBlockTransactionListForUserRequest;
 const SrvInvokeResponse = models.SrvInvokeResponse;
 const GetBlockListHandlerRequest = models.GetBlockListHandlerRequest;
 const GetClusterSummaryRequest = models.GetClusterSummaryRequest;
@@ -164,14 +166,14 @@ class TbaasClient extends AbstractClient {
     }
 
     /**
-     * Bcos根据交易哈希查看交易详细信息
-     * @param {GetTransByHashHandlerRequest} req
-     * @param {function(string, GetTransByHashHandlerResponse):void} cb
+     * 获取区块内的交易列表
+     * @param {GetBlockTransactionListForUserRequest} req
+     * @param {function(string, GetBlockTransactionListForUserResponse):void} cb
      * @public
      */
-    GetTransByHashHandler(req, cb) {
-        let resp = new GetTransByHashHandlerResponse();
-        this.request("GetTransByHashHandler", req, resp, cb);
+    GetBlockTransactionListForUser(req, cb) {
+        let resp = new GetBlockTransactionListForUserResponse();
+        this.request("GetBlockTransactionListForUser", req, resp, cb);
     }
 
     /**
@@ -205,6 +207,17 @@ class TbaasClient extends AbstractClient {
     GetTransactionDetailForUser(req, cb) {
         let resp = new GetTransactionDetailForUserResponse();
         this.request("GetTransactionDetailForUser", req, resp, cb);
+    }
+
+    /**
+     * Bcos根据交易哈希查看交易详细信息
+     * @param {GetTransByHashHandlerRequest} req
+     * @param {function(string, GetTransByHashHandlerResponse):void} cb
+     * @public
+     */
+    GetTransByHashHandler(req, cb) {
+        let resp = new GetTransByHashHandlerResponse();
+        this.request("GetTransByHashHandler", req, resp, cb);
     }
 
     /**

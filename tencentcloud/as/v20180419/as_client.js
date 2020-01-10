@@ -34,6 +34,7 @@ const SystemDisk = models.SystemDisk;
 const SpotMarketOptions = models.SpotMarketOptions;
 const StopAutoScalingInstancesResponse = models.StopAutoScalingInstancesResponse;
 const DescribeScalingPoliciesRequest = models.DescribeScalingPoliciesRequest;
+const InstanceNameSettings = models.InstanceNameSettings;
 const ModifyScheduledActionResponse = models.ModifyScheduledActionResponse;
 const CreateAutoScalingGroupFromInstanceRequest = models.CreateAutoScalingGroupFromInstanceRequest;
 const ExecuteScalingPolicyResponse = models.ExecuteScalingPolicyResponse;

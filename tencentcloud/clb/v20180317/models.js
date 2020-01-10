@@ -451,10 +451,16 @@ OPEN：公网属性， INTERNAL：内网属性。
         this.ZoneId = null;
 
         /**
-         * 仅适用于公网负载均衡。负载均衡的网络计费方式，此参数仅对带宽上移用户生效。
+         * 仅适用于公网负载均衡。负载均衡的网络计费模式。
          * @type {InternetAccessible || null}
          */
         this.InternetAccessible = null;
+
+        /**
+         * 仅适用于公网负载均衡。CMCC | CTCC | CUCC，分别对应 移动 | 电信 | 联通，如果不指定本参数，则默认使用BGP。可通过 DescribeSingleIsp 接口查询一个地域所支持的Isp。如果指定运营商，则网络计费式只能使用按带宽包计费(BANDWIDTH_PACKAGE)。
+         * @type {string || null}
+         */
+        this.VipIsp = null;
 
         /**
          * 购买负载均衡同时，给负载均衡打上标签
@@ -487,6 +493,7 @@ OPEN：公网属性， INTERNAL：内网属性。
             obj.deserialize(params.InternetAccessible)
             this.InternetAccessible = obj;
         }
+        this.VipIsp = 'VipIsp' in params ? params.VipIsp : null;
 
         if (params.Tags) {
             this.Tags = new Array();
@@ -588,6 +595,12 @@ class ModifyLoadBalancerAttributesRequest extends  AbstractModel {
          */
         this.InternetChargeInfo = null;
 
+        /**
+         * Target是否放通来自CLB的流量。开启放通（true）：只验证CLB上的安全组；不开启放通（false）：需同时验证CLB和后端实例上的安全组。
+         * @type {boolean || null}
+         */
+        this.LoadBalancerPassToTarget = null;
+
     }
 
     /**
@@ -611,6 +624,7 @@ class ModifyLoadBalancerAttributesRequest extends  AbstractModel {
             obj.deserialize(params.InternetChargeInfo)
             this.InternetChargeInfo = obj;
         }
+        this.LoadBalancerPassToTarget = 'LoadBalancerPassToTarget' in params ? params.LoadBalancerPassToTarget : null;
 
     }
 }
@@ -1753,6 +1767,13 @@ class DescribeListenersResponse extends  AbstractModel {
         this.Listeners = null;
 
         /**
+         * 总的监听器个数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -1776,6 +1797,7 @@ class DescribeListenersResponse extends  AbstractModel {
                 this.Listeners.push(obj);
             }
         }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -1819,6 +1841,49 @@ class AutoRewriteRequest extends  AbstractModel {
         this.LoadBalancerId = 'LoadBalancerId' in params ? params.LoadBalancerId : null;
         this.ListenerId = 'ListenerId' in params ? params.ListenerId : null;
         this.Domains = 'Domains' in params ? params.Domains : null;
+
+    }
+}
+
+/**
+ * DescribeLoadBalancerListByCertId返回参数结构体
+ * @class
+ */
+class DescribeLoadBalancerListByCertIdResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 证书ID，以及与该证书ID关联的负载均衡实例列表
+         * @type {Array.<CertIdRelatedWithLoadBalancers> || null}
+         */
+        this.CertSet = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.CertSet) {
+            this.CertSet = new Array();
+            for (let z in params.CertSet) {
+                let obj = new CertIdRelatedWithLoadBalancers();
+                obj.deserialize(params.CertSet[z]);
+                this.CertSet.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2070,6 +2135,50 @@ class DescribeBlockIPListRequest extends  AbstractModel {
         this.LoadBalancerId = 'LoadBalancerId' in params ? params.LoadBalancerId : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
+
+    }
+}
+
+/**
+ * 证书ID，以及与该证书ID关联的负载均衡实例列表
+ * @class
+ */
+class CertIdRelatedWithLoadBalancers extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 证书ID
+         * @type {string || null}
+         */
+        this.CertId = null;
+
+        /**
+         * 与证书关联的负载均衡实例列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<LoadBalancer> || null}
+         */
+        this.LoadBalancers = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CertId = 'CertId' in params ? params.CertId : null;
+
+        if (params.LoadBalancers) {
+            this.LoadBalancers = new Array();
+            for (let z in params.LoadBalancers) {
+                let obj = new LoadBalancer();
+                obj.deserialize(params.LoadBalancers[z]);
+                this.LoadBalancers.push(obj);
+            }
+        }
 
     }
 }
@@ -4570,7 +4679,7 @@ class CreateListenerRequest extends  AbstractModel {
         this.HealthCheck = null;
 
         /**
-         * 证书相关信息，此参数仅适用于HTTPS/TCP_SSL监听器
+         * 证书相关信息，此参数仅适用于TCP_SSL监听器和未开启SNI特性的HTTPS监听器。
          * @type {CertificateInput || null}
          */
         this.Certificate = null;
@@ -5310,6 +5419,34 @@ class BatchTarget extends  AbstractModel {
 }
 
 /**
+ * DescribeLoadBalancerListByCertId请求参数结构体
+ * @class
+ */
+class DescribeLoadBalancerListByCertIdRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 服务端证书的ID，或客户端证书的ID
+         * @type {Array.<string> || null}
+         */
+        this.CertIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CertIds = 'CertIds' in params ? params.CertIds : null;
+
+    }
+}
+
+/**
  * 负载均衡实例所绑定的后端服务的信息，包括所属地域、所属网络。
  * @class
  */
@@ -5637,31 +5774,34 @@ class DeregisterTargetsRequest extends  AbstractModel {
 }
 
 /**
- * 证书相关信息
+ * 网络计费模式，最大出带宽
  * @class
  */
-class CertificateOutput extends  AbstractModel {
+class InternetAccessible extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 认证类型，UNIDIRECTIONAL：单向认证，MUTUAL：双向认证
-         * @type {string || null}
-         */
-        this.SSLMode = null;
-
-        /**
-         * 服务端证书的 ID。
-         * @type {string || null}
-         */
-        this.CertId = null;
-
-        /**
-         * 客户端证书的 ID。
+         * TRAFFIC_POSTPAID_BY_HOUR 按流量按小时后计费 ; BANDWIDTH_POSTPAID_BY_HOUR 按带宽按小时后计费;
+BANDWIDTH_PACKAGE 按带宽包计费（当前，只有指定运营商时才支持此种计费模式）
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
-        this.CertCaId = null;
+        this.InternetChargeType = null;
+
+        /**
+         * 最大出带宽，单位Mbps，范围支持0到2048，仅对公网属性的LB生效，默认值 10
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.InternetMaxBandwidthOut = null;
+
+        /**
+         * 带宽包的类型，如SINGLEISP
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.BandwidthpkgSubType = null;
 
     }
 
@@ -5672,9 +5812,9 @@ class CertificateOutput extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.SSLMode = 'SSLMode' in params ? params.SSLMode : null;
-        this.CertId = 'CertId' in params ? params.CertId : null;
-        this.CertCaId = 'CertCaId' in params ? params.CertCaId : null;
+        this.InternetChargeType = 'InternetChargeType' in params ? params.InternetChargeType : null;
+        this.InternetMaxBandwidthOut = 'InternetMaxBandwidthOut' in params ? params.InternetMaxBandwidthOut : null;
+        this.BandwidthpkgSubType = 'BandwidthpkgSubType' in params ? params.BandwidthpkgSubType : null;
 
     }
 }
@@ -6586,34 +6726,31 @@ class DeleteListenerResponse extends  AbstractModel {
 }
 
 /**
- * 网络计费方式，最大出带宽
+ * 证书相关信息
  * @class
  */
-class InternetAccessible extends  AbstractModel {
+class CertificateOutput extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * TRAFFIC_POSTPAID_BY_HOUR 按流量按小时后计费 ; BANDWIDTH_POSTPAID_BY_HOUR 按带宽按小时后计费;
-BANDWIDTH_PACKAGE 按带宽包计费（当前，只有指定运营商时才支持此种计费模式）
+         * 认证类型，UNIDIRECTIONAL：单向认证，MUTUAL：双向认证
+         * @type {string || null}
+         */
+        this.SSLMode = null;
+
+        /**
+         * 服务端证书的 ID。
+         * @type {string || null}
+         */
+        this.CertId = null;
+
+        /**
+         * 客户端证书的 ID。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
-        this.InternetChargeType = null;
-
-        /**
-         * 最大出带宽，单位Mbps，范围支持0到2048，仅对公网属性的LB生效，默认值 10
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.InternetMaxBandwidthOut = null;
-
-        /**
-         * 带宽包的类型，如SINGLEISP
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.BandwidthpkgSubType = null;
+        this.CertCaId = null;
 
     }
 
@@ -6624,9 +6761,9 @@ BANDWIDTH_PACKAGE 按带宽包计费（当前，只有指定运营商时才支�
         if (!params) {
             return;
         }
-        this.InternetChargeType = 'InternetChargeType' in params ? params.InternetChargeType : null;
-        this.InternetMaxBandwidthOut = 'InternetMaxBandwidthOut' in params ? params.InternetMaxBandwidthOut : null;
-        this.BandwidthpkgSubType = 'BandwidthpkgSubType' in params ? params.BandwidthpkgSubType : null;
+        this.SSLMode = 'SSLMode' in params ? params.SSLMode : null;
+        this.CertId = 'CertId' in params ? params.CertId : null;
+        this.CertCaId = 'CertCaId' in params ? params.CertCaId : null;
 
     }
 }
@@ -7537,12 +7674,14 @@ module.exports = {
     DescribeClassicalLBTargetsRequest: DescribeClassicalLBTargetsRequest,
     DescribeListenersResponse: DescribeListenersResponse,
     AutoRewriteRequest: AutoRewriteRequest,
+    DescribeLoadBalancerListByCertIdResponse: DescribeLoadBalancerListByCertIdResponse,
     ModifyTargetGroupInstancesWeightResponse: ModifyTargetGroupInstancesWeightResponse,
     DescribeTargetGroupsRequest: DescribeTargetGroupsRequest,
     DescribeTaskStatusResponse: DescribeTaskStatusResponse,
     DescribeTargetHealthRequest: DescribeTargetHealthRequest,
     Target: Target,
     DescribeBlockIPListRequest: DescribeBlockIPListRequest,
+    CertIdRelatedWithLoadBalancers: CertIdRelatedWithLoadBalancers,
     DescribeClassicalLBHealthStatusResponse: DescribeClassicalLBHealthStatusResponse,
     RuleHealth: RuleHealth,
     Listener: Listener,
@@ -7602,6 +7741,7 @@ module.exports = {
     BatchModifyTargetWeightRequest: BatchModifyTargetWeightRequest,
     DeleteRewriteResponse: DeleteRewriteResponse,
     BatchTarget: BatchTarget,
+    DescribeLoadBalancerListByCertIdRequest: DescribeLoadBalancerListByCertIdRequest,
     TargetRegionInfo: TargetRegionInfo,
     BatchRegisterTargetsResponse: BatchRegisterTargetsResponse,
     ReplaceCertForLoadBalancersRequest: ReplaceCertForLoadBalancersRequest,
@@ -7609,7 +7749,7 @@ module.exports = {
     ModifyTargetGroupAttributeRequest: ModifyTargetGroupAttributeRequest,
     ModifyDomainAttributesRequest: ModifyDomainAttributesRequest,
     DeregisterTargetsRequest: DeregisterTargetsRequest,
-    CertificateOutput: CertificateOutput,
+    InternetAccessible: InternetAccessible,
     ModifyTargetGroupInstancesWeightRequest: ModifyTargetGroupInstancesWeightRequest,
     DeleteTargetGroupsResponse: DeleteTargetGroupsResponse,
     ModifyTargetGroupInstancesPortRequest: ModifyTargetGroupInstancesPortRequest,
@@ -7630,7 +7770,7 @@ module.exports = {
     ModifyTargetPortRequest: ModifyTargetPortRequest,
     DescribeLoadBalancersResponse: DescribeLoadBalancersResponse,
     DeleteListenerResponse: DeleteListenerResponse,
-    InternetAccessible: InternetAccessible,
+    CertificateOutput: CertificateOutput,
     DeleteTargetGroupsRequest: DeleteTargetGroupsRequest,
     DescribeClassicalLBListenersRequest: DescribeClassicalLBListenersRequest,
     TargetHealth: TargetHealth,

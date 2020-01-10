@@ -89,6 +89,7 @@ const PullStreamConfig = models.PullStreamConfig;
 const CreateLiveRecordResponse = models.CreateLiveRecordResponse;
 const RuleInfo = models.RuleInfo;
 const UpdateLiveWatermarkResponse = models.UpdateLiveWatermarkResponse;
+const LivePackageInfo = models.LivePackageInfo;
 const CreateLiveTranscodeTemplateResponse = models.CreateLiveTranscodeTemplateResponse;
 const DescribeVisitTopSumInfoListRequest = models.DescribeVisitTopSumInfoListRequest;
 const DayStreamPlayInfo = models.DayStreamPlayInfo;
@@ -111,6 +112,7 @@ const DeletePullStreamConfigResponse = models.DeletePullStreamConfigResponse;
 const DeleteLiveWatermarkRuleRequest = models.DeleteLiveWatermarkRuleRequest;
 const StreamEventInfo = models.StreamEventInfo;
 const DescribeLiveWatermarksRequest = models.DescribeLiveWatermarksRequest;
+const DescribeLivePackageInfoResponse = models.DescribeLivePackageInfoResponse;
 const CreateLiveTranscodeRuleRequest = models.CreateLiveTranscodeRuleRequest;
 const DescribeLiveWatermarkRulesRequest = models.DescribeLiveWatermarkRulesRequest;
 const DropLiveStreamRequest = models.DropLiveStreamRequest;
@@ -125,6 +127,7 @@ const DescribeLiveSnapshotTemplateResponse = models.DescribeLiveSnapshotTemplate
 const DescribeLiveTranscodeRulesResponse = models.DescribeLiveTranscodeRulesResponse;
 const AddLiveDomainRequest = models.AddLiveDomainRequest;
 const StreamName = models.StreamName;
+const DescribeLivePackageInfoRequest = models.DescribeLivePackageInfoRequest;
 const CreatePullStreamConfigRequest = models.CreatePullStreamConfigRequest;
 const DescribeLiveCertsRequest = models.DescribeLiveCertsRequest;
 const DescribeLiveCertResponse = models.DescribeLiveCertResponse;
@@ -1302,6 +1305,17 @@ class LiveClient extends AbstractClient {
     EnableLiveDomain(req, cb) {
         let resp = new EnableLiveDomainResponse();
         this.request("EnableLiveDomain", req, resp, cb);
+    }
+
+    /**
+     * 查询用户套餐包总量、使用量、剩余量、包状态、购买时间和过期时间等。
+     * @param {DescribeLivePackageInfoRequest} req
+     * @param {function(string, DescribeLivePackageInfoResponse):void} cb
+     * @public
+     */
+    DescribeLivePackageInfo(req, cb) {
+        let resp = new DescribeLivePackageInfoResponse();
+        this.request("DescribeLivePackageInfo", req, resp, cb);
     }
 
     /**
