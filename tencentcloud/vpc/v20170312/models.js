@@ -1701,6 +1701,14 @@ class DescribeFlowLogsRequest extends  AbstractModel {
          */
         this.Limit = null;
 
+        /**
+         * 过滤条件，参数不支持同时指定FlowLogIds和Filters。
+<li>tag-key - String -是否必填：否- （过滤条件）按照标签键进行过滤。</li>
+<li>tag:tag-key - String - 是否必填：否 - （过滤条件）按照标签键值对进行过滤。 tag-key使用具体的标签键进行替换。</li>
+         * @type {Filter || null}
+         */
+        this.Filters = null;
+
     }
 
     /**
@@ -1722,6 +1730,12 @@ class DescribeFlowLogsRequest extends  AbstractModel {
         this.OrderDirection = 'OrderDirection' in params ? params.OrderDirection : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
+
+        if (params.Filters) {
+            let obj = new Filter();
+            obj.deserialize(params.Filters)
+            this.Filters = obj;
+        }
 
     }
 }
@@ -1849,6 +1863,12 @@ class ModifyBandwidthPackageAttributeRequest extends  AbstractModel {
          */
         this.BandwidthPackageName = null;
 
+        /**
+         * 带宽包计费模式
+         * @type {string || null}
+         */
+        this.ChargeType = null;
+
     }
 
     /**
@@ -1860,6 +1880,7 @@ class ModifyBandwidthPackageAttributeRequest extends  AbstractModel {
         }
         this.BandwidthPackageId = 'BandwidthPackageId' in params ? params.BandwidthPackageId : null;
         this.BandwidthPackageName = 'BandwidthPackageName' in params ? params.BandwidthPackageName : null;
+        this.ChargeType = 'ChargeType' in params ? params.ChargeType : null;
 
     }
 }

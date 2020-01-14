@@ -66,6 +66,7 @@ module.exports = {
     ms: require("./ms"),
     msp: require("./msp"),
     nlp: require("./nlp"),
+    npp: require("./npp"),
     ocr: require("./ocr"),
     organization: require("./organization"),
     partners: require("./partners"),

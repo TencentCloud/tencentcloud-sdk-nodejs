@@ -1002,13 +1002,13 @@ class RecognizeCarResponse extends  AbstractModel {
         super();
 
         /**
-         * 汽车的四个矩形顶点坐标
+         * 汽车的四个矩形顶点坐标，如果图片中存在多辆车，则输出最大车辆的坐标。
          * @type {Array.<Coord> || null}
          */
         this.CarCoords = null;
 
         /**
-         * 车辆属性识别的结果数组
+         * 车辆属性识别的结果数组，如果识别到多辆车，则会输出每辆车的top1结果。
          * @type {Array.<CarTagItem> || null}
          */
         this.CarTags = null;
@@ -1888,6 +1888,12 @@ class CarTagItem extends  AbstractModel {
          */
         this.Year = null;
 
+        /**
+         * 车辆在图片中的坐标信息
+         * @type {Array.<Coord> || null}
+         */
+        this.CarLocation = null;
+
     }
 
     /**
@@ -1903,6 +1909,15 @@ class CarTagItem extends  AbstractModel {
         this.Color = 'Color' in params ? params.Color : null;
         this.Confidence = 'Confidence' in params ? params.Confidence : null;
         this.Year = 'Year' in params ? params.Year : null;
+
+        if (params.CarLocation) {
+            this.CarLocation = new Array();
+            for (let z in params.CarLocation) {
+                let obj = new Coord();
+                obj.deserialize(params.CarLocation[z]);
+                this.CarLocation.push(obj);
+            }
+        }
 
     }
 }

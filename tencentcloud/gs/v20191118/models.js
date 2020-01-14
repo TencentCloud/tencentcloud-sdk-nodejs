@@ -259,6 +259,12 @@ class TrylockWorkerRequest extends  AbstractModel {
          */
         this.SetNo = null;
 
+        /**
+         * 游戏用户IP，用于就近调度，例如125.127.178.228
+         * @type {string || null}
+         */
+        this.UserIp = null;
+
     }
 
     /**
@@ -272,6 +278,7 @@ class TrylockWorkerRequest extends  AbstractModel {
         this.GameId = 'GameId' in params ? params.GameId : null;
         this.GameRegion = 'GameRegion' in params ? params.GameRegion : null;
         this.SetNo = 'SetNo' in params ? params.SetNo : null;
+        this.UserIp = 'UserIp' in params ? params.UserIp : null;
 
     }
 }
@@ -303,7 +310,7 @@ class CreateSessionRequest extends  AbstractModel {
         this.GameId = null;
 
         /**
-         * 游戏区域
+         * 游戏区域，ap-guangzhou、ap-shanghai、ap-beijing等
          * @type {string || null}
          */
         this.GameRegion = null;
@@ -315,22 +322,52 @@ class CreateSessionRequest extends  AbstractModel {
         this.GameParas = null;
 
         /**
-         * 分辨率
+         * 分辨率,，可设置为1080p或720p
          * @type {string || null}
          */
         this.Resolution = null;
 
         /**
-         * 背景图url
+         * 背景图url，格式为png或jpeg，宽高1920*1080
          * @type {string || null}
          */
         this.ImageUrl = null;
 
         /**
-         * 资源池编号
+         * 资源池编号，1表示正式，2表示测试
          * @type {number || null}
          */
         this.SetNo = null;
+
+        /**
+         * 单位Mbps，固定码率，后端不动态调整(MaxBitrate和MinBitrate将无效)
+         * @type {number || null}
+         */
+        this.Bitrate = null;
+
+        /**
+         * 单位Mbps，动态调整最大码率
+         * @type {number || null}
+         */
+        this.MaxBitrate = null;
+
+        /**
+         * 单位Mbps，动态调整最小码率
+         * @type {number || null}
+         */
+        this.MinBitrate = null;
+
+        /**
+         * 帧率，可设置为30、45或60
+         * @type {number || null}
+         */
+        this.Fps = null;
+
+        /**
+         * 游戏用户IP，用于就近调度，例如125.127.178.228
+         * @type {string || null}
+         */
+        this.UserIp = null;
 
     }
 
@@ -349,6 +386,11 @@ class CreateSessionRequest extends  AbstractModel {
         this.Resolution = 'Resolution' in params ? params.Resolution : null;
         this.ImageUrl = 'ImageUrl' in params ? params.ImageUrl : null;
         this.SetNo = 'SetNo' in params ? params.SetNo : null;
+        this.Bitrate = 'Bitrate' in params ? params.Bitrate : null;
+        this.MaxBitrate = 'MaxBitrate' in params ? params.MaxBitrate : null;
+        this.MinBitrate = 'MinBitrate' in params ? params.MinBitrate : null;
+        this.Fps = 'Fps' in params ? params.Fps : null;
+        this.UserIp = 'UserIp' in params ? params.UserIp : null;
 
     }
 }
@@ -362,7 +404,7 @@ class DescribeWorkersRequest extends  AbstractModel {
         super();
 
         /**
-         * 资源池编号，值为2的幂，1表示共用，2表示测试
+         * 资源池编号，1表示正式，2表示测试
          * @type {number || null}
          */
         this.SetNo = null;

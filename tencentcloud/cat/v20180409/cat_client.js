@@ -16,95 +16,75 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
+const GetReturnCodeInfoResponse = models.GetReturnCodeInfoResponse;
 const ModifyAgentGroupRequest = models.ModifyAgentGroupRequest;
+const BindAlarmPolicyResponse = models.BindAlarmPolicyResponse;
 const AlarmInfo = models.AlarmInfo;
-const RunTaskRequest = models.RunTaskRequest;
-const DescribeTaskDetailResponse = models.DescribeTaskDetailResponse;
-const DeleteTasksResponse = models.DeleteTasksResponse;
-const DescribeAlarmGroupsResponse = models.DescribeAlarmGroupsResponse;
-const GetRespTimeTrendResponse = models.GetRespTimeTrendResponse;
-const ResultSummary = models.ResultSummary;
-const BindAlarmPolicyRequest = models.BindAlarmPolicyRequest;
-const DescribeAlarmsRequest = models.DescribeAlarmsRequest;
-const DescribeTasksResponse = models.DescribeTasksResponse;
-const DescribeAlarmsByTaskRequest = models.DescribeAlarmsByTaskRequest;
-const PauseTaskRequest = models.PauseTaskRequest;
-const GetResultSummaryRequest = models.GetResultSummaryRequest;
-const CreateTaskExRequest = models.CreateTaskExRequest;
-const DataPoint = models.DataPoint;
-const DescribeAlarmTopicResponse = models.DescribeAlarmTopicResponse;
-const ModifyAlarmPloicyRequest = models.ModifyAlarmPloicyRequest;
-const DescribeUserLimitRequest = models.DescribeUserLimitRequest;
-const DescribeTasksRequest = models.DescribeTasksRequest;
+const GetDailyAvailRatioRequest = models.GetDailyAvailRatioRequest;
+const ModifyTaskExResponse = models.ModifyTaskExResponse;
 const DescribeAgentsRequest = models.DescribeAgentsRequest;
+const CatReturnSummary = models.CatReturnSummary;
 const CatReturnDetail = models.CatReturnDetail;
+const RunTaskRequest = models.RunTaskRequest;
+const DimensionsDetail = models.DimensionsDetail;
+const GetRespTimeTrendExResponse = models.GetRespTimeTrendExResponse;
+const ModifyAgentGroupResponse = models.ModifyAgentGroupResponse;
+const DescribeTaskDetailResponse = models.DescribeTaskDetailResponse;
 const IspDetail = models.IspDetail;
+const DataPointMetric = models.DataPointMetric;
 const GetReturnCodeInfoRequest = models.GetReturnCodeInfoRequest;
+const DescribeCatLogsRequest = models.DescribeCatLogsRequest;
 const DescribeAgentsResponse = models.DescribeAgentsResponse;
+const GetAvailRatioHistoryResponse = models.GetAvailRatioHistoryResponse;
 const CreateAgentGroupResponse = models.CreateAgentGroupResponse;
+const DeleteTasksResponse = models.DeleteTasksResponse;
+const DescribeAlarmsResponse = models.DescribeAlarmsResponse;
+const GetRealAvailRatioRequest = models.GetRealAvailRatioRequest;
 const DeleteAgentGroupResponse = models.DeleteAgentGroupResponse;
 const AgentGroup = models.AgentGroup;
-const CreateAlarmPloicyResponse = models.CreateAlarmPloicyResponse;
-const GetReturnCodeHistoryRequest = models.GetReturnCodeHistoryRequest;
-const ProvinceDetail = models.ProvinceDetail;
-const GetRealAvailRatioResponse = models.GetRealAvailRatioResponse;
-const CatTask = models.CatTask;
-const CreateTaskRequest = models.CreateTaskRequest;
-const CreateAgentGroupRequest = models.CreateAgentGroupRequest;
-const CreateAlarmPloicyRequest = models.CreateAlarmPloicyRequest;
-const ModifyTaskExResponse = models.ModifyTaskExResponse;
-const DescribeAlarmsByTaskResponse = models.DescribeAlarmsByTaskResponse;
-const ModifyTaskExRequest = models.ModifyTaskExRequest;
-const DescribeTasksByTypeRequest = models.DescribeTasksByTypeRequest;
-const CreateTaskExResponse = models.CreateTaskExResponse;
-const GetReturnCodeHistoryResponse = models.GetReturnCodeHistoryResponse;
-const GetAvailRatioHistoryRequest = models.GetAvailRatioHistoryRequest;
-const GetTaskTotalNumberResponse = models.GetTaskTotalNumberResponse;
-const DimensionsDetail = models.DimensionsDetail;
-const ModifyAlarmPloicyResponse = models.ModifyAlarmPloicyResponse;
-const GetDailyAvailRatioRequest = models.GetDailyAvailRatioRequest;
-const DescribeAgentGroupResponse = models.DescribeAgentGroupResponse;
-const CatReturnSummary = models.CatReturnSummary;
-const GetRespTimeTrendExResponse = models.GetRespTimeTrendExResponse;
-const DataPointMetric = models.DataPointMetric;
-const DescribeCatLogsRequest = models.DescribeCatLogsRequest;
-const GetAvailRatioHistoryResponse = models.GetAvailRatioHistoryResponse;
-const DescribeAgentGroupRequest = models.DescribeAgentGroupRequest;
-const DescribeAlarmsResponse = models.DescribeAlarmsResponse;
-const DescribeTasksByTypeResponse = models.DescribeTasksByTypeResponse;
-const DescribeAlarmTopicRequest = models.DescribeAlarmTopicRequest;
-const DescribeAgentGroupsResponse = models.DescribeAgentGroupsResponse;
-const ModifyTaskResponse = models.ModifyTaskResponse;
-const AlarmGroupInfo = models.AlarmGroupInfo;
-const GetRespTimeTrendExRequest = models.GetRespTimeTrendExRequest;
-const GetRespTimeTrendRequest = models.GetRespTimeTrendRequest;
-const DescribeAgentGroupsRequest = models.DescribeAgentGroupsRequest;
-const TaskAlarm = models.TaskAlarm;
-const DescribeCatLogsResponse = models.DescribeCatLogsResponse;
-const CatTaskDetail = models.CatTaskDetail;
-const GetReturnCodeInfoResponse = models.GetReturnCodeInfoResponse;
-const BindAlarmPolicyResponse = models.BindAlarmPolicyResponse;
-const RunTaskResponse = models.RunTaskResponse;
-const DescribeTaskResponse = models.DescribeTaskResponse;
-const CreateTaskResponse = models.CreateTaskResponse;
-const VerifyResultRequest = models.VerifyResultRequest;
-const GetTaskTotalNumberRequest = models.GetTaskTotalNumberRequest;
-const ModifyAgentGroupResponse = models.ModifyAgentGroupResponse;
 const DescribeTaskDetailRequest = models.DescribeTaskDetailRequest;
-const ModifyTaskRequest = models.ModifyTaskRequest;
+const DescribeTasksByTypeResponse = models.DescribeTasksByTypeResponse;
 const GetResultSummaryResponse = models.GetResultSummaryResponse;
-const VerifyResultResponse = models.VerifyResultResponse;
+const GetReturnCodeHistoryRequest = models.GetReturnCodeHistoryRequest;
+const BindAlarmPolicyRequest = models.BindAlarmPolicyRequest;
+const DescribeAgentGroupsResponse = models.DescribeAgentGroupsResponse;
+const ProvinceDetail = models.ProvinceDetail;
 const AlarmTopic = models.AlarmTopic;
-const DescribeTaskRequest = models.DescribeTaskRequest;
+const ResultSummary = models.ResultSummary;
+const PauseTaskRequest = models.PauseTaskRequest;
+const GetResultSummaryRequest = models.GetResultSummaryRequest;
+const DescribeAlarmsRequest = models.DescribeAlarmsRequest;
 const DescribeUserLimitResponse = models.DescribeUserLimitResponse;
-const DescribeAlarmGroupsRequest = models.DescribeAlarmGroupsRequest;
+const GetRespTimeTrendExRequest = models.GetRespTimeTrendExRequest;
 const DeleteTasksRequest = models.DeleteTasksRequest;
+const DescribeAlarmsByTaskRequest = models.DescribeAlarmsByTaskRequest;
 const PauseTaskResponse = models.PauseTaskResponse;
+const CreateAgentGroupRequest = models.CreateAgentGroupRequest;
+const CatLog = models.CatLog;
 const GetDailyAvailRatioResponse = models.GetDailyAvailRatioResponse;
 const DeleteAgentGroupRequest = models.DeleteAgentGroupRequest;
-const GetRealAvailRatioRequest = models.GetRealAvailRatioRequest;
-const CatLog = models.CatLog;
+const GetAvailRatioHistoryRequest = models.GetAvailRatioHistoryRequest;
+const DescribeAgentGroupsRequest = models.DescribeAgentGroupsRequest;
+const DescribeAlarmsByTaskResponse = models.DescribeAlarmsByTaskResponse;
+const ModifyTaskExRequest = models.ModifyTaskExRequest;
+const DescribeAlarmTopicRequest = models.DescribeAlarmTopicRequest;
+const CreateTaskExRequest = models.CreateTaskExRequest;
+const GetTaskTotalNumberRequest = models.GetTaskTotalNumberRequest;
+const TaskAlarm = models.TaskAlarm;
+const DescribeTasksByTypeRequest = models.DescribeTasksByTypeRequest;
+const VerifyResultRequest = models.VerifyResultRequest;
+const VerifyResultResponse = models.VerifyResultResponse;
+const CatTaskDetail = models.CatTaskDetail;
+const GetReturnCodeHistoryResponse = models.GetReturnCodeHistoryResponse;
+const DataPoint = models.DataPoint;
+const DescribeAlarmTopicResponse = models.DescribeAlarmTopicResponse;
+const GetRealAvailRatioResponse = models.GetRealAvailRatioResponse;
+const RunTaskResponse = models.RunTaskResponse;
 const CatAgent = models.CatAgent;
+const DescribeCatLogsResponse = models.DescribeCatLogsResponse;
+const GetTaskTotalNumberResponse = models.GetTaskTotalNumberResponse;
+const CreateTaskExResponse = models.CreateTaskExResponse;
+const DescribeUserLimitRequest = models.DescribeUserLimitRequest;
 
 
 /**
@@ -118,21 +98,6 @@ class CatClient extends AbstractClient {
     }
     
     /**
-     * 创建拨测任务（创建任务并发起验证）
-
-操作提示：
-下一步，请通过VerifyCatResult 接口，验证一下拨测验证是否成功。如果成功，则可通过RunTask 接口运行该任务。
-
-     * @param {CreateTaskRequest} req
-     * @param {function(string, CreateTaskResponse):void} cb
-     * @public
-     */
-    CreateTask(req, cb) {
-        let resp = new CreateTaskResponse();
-        this.request("CreateTask", req, resp, cb);
-    }
-
-    /**
      * 查询拨测任务的走势数据
      * @param {GetRespTimeTrendExRequest} req
      * @param {function(string, GetRespTimeTrendExResponse):void} cb
@@ -144,14 +109,14 @@ class CatClient extends AbstractClient {
     }
 
     /**
-     * 查询拨测任务列表
-     * @param {DescribeTasksRequest} req
-     * @param {function(string, DescribeTasksResponse):void} cb
+     * 修改拨测分组
+     * @param {ModifyAgentGroupRequest} req
+     * @param {function(string, ModifyAgentGroupResponse):void} cb
      * @public
      */
-    DescribeTasks(req, cb) {
-        let resp = new DescribeTasksResponse();
-        this.request("DescribeTasks", req, resp, cb);
+    ModifyAgentGroup(req, cb) {
+        let resp = new ModifyAgentGroupResponse();
+        this.request("ModifyAgentGroup", req, resp, cb);
     }
 
     /**
@@ -210,19 +175,6 @@ class CatClient extends AbstractClient {
     }
 
     /**
-     * 修改 拨测任务。
-如果验证未成功，请先验证成功。避免修改为失败率100%的拨测任务。
-
-     * @param {ModifyTaskRequest} req
-     * @param {function(string, ModifyTaskResponse):void} cb
-     * @public
-     */
-    ModifyTask(req, cb) {
-        let resp = new ModifyTaskResponse();
-        this.request("ModifyTask", req, resp, cb);
-    }
-
-    /**
      * 添加拨测分组
      * @param {CreateAgentGroupRequest} req
      * @param {function(string, CreateAgentGroupResponse):void} cb
@@ -242,17 +194,6 @@ class CatClient extends AbstractClient {
     DescribeTaskDetail(req, cb) {
         let resp = new DescribeTaskDetailResponse();
         this.request("DescribeTaskDetail", req, resp, cb);
-    }
-
-    /**
-     * 查询拨测任务详情
-     * @param {DescribeTaskRequest} req
-     * @param {function(string, DescribeTaskResponse):void} cb
-     * @public
-     */
-    DescribeTask(req, cb) {
-        let resp = new DescribeTaskResponse();
-        this.request("DescribeTask", req, resp, cb);
     }
 
     /**
@@ -308,28 +249,6 @@ class CatClient extends AbstractClient {
     GetDailyAvailRatio(req, cb) {
         let resp = new GetDailyAvailRatioResponse();
         this.request("GetDailyAvailRatio", req, resp, cb);
-    }
-
-    /**
-     * 修改拨测分组
-     * @param {ModifyAgentGroupRequest} req
-     * @param {function(string, ModifyAgentGroupResponse):void} cb
-     * @public
-     */
-    ModifyAgentGroup(req, cb) {
-        let resp = new ModifyAgentGroupResponse();
-        this.request("ModifyAgentGroup", req, resp, cb);
-    }
-
-    /**
-     * 查询拨测分组详情
-     * @param {DescribeAgentGroupRequest} req
-     * @param {function(string, DescribeAgentGroupResponse):void} cb
-     * @public
-     */
-    DescribeAgentGroup(req, cb) {
-        let resp = new DescribeAgentGroupResponse();
-        this.request("DescribeAgentGroup", req, resp, cb);
     }
 
     /**
@@ -410,17 +329,6 @@ class CatClient extends AbstractClient {
     }
 
     /**
-     * 查询用户的告警接收组列表
-     * @param {DescribeAlarmGroupsRequest} req
-     * @param {function(string, DescribeAlarmGroupsResponse):void} cb
-     * @public
-     */
-    DescribeAlarmGroups(req, cb) {
-        let resp = new DescribeAlarmGroupsResponse();
-        this.request("DescribeAlarmGroups", req, resp, cb);
-    }
-
-    /**
      * 删除拨测分组
      * @param {DeleteAgentGroupRequest} req
      * @param {function(string, DeleteAgentGroupResponse):void} cb
@@ -440,28 +348,6 @@ class CatClient extends AbstractClient {
     GetAvailRatioHistory(req, cb) {
         let resp = new GetAvailRatioHistoryResponse();
         this.request("GetAvailRatioHistory", req, resp, cb);
-    }
-
-    /**
-     * 为拨测任务修改告警策略
-     * @param {ModifyAlarmPloicyRequest} req
-     * @param {function(string, ModifyAlarmPloicyResponse):void} cb
-     * @public
-     */
-    ModifyAlarmPloicy(req, cb) {
-        let resp = new ModifyAlarmPloicyResponse();
-        this.request("ModifyAlarmPloicy", req, resp, cb);
-    }
-
-    /**
-     * 查询拨测任务的统计数据
-     * @param {GetRespTimeTrendRequest} req
-     * @param {function(string, GetRespTimeTrendResponse):void} cb
-     * @public
-     */
-    GetRespTimeTrend(req, cb) {
-        let resp = new GetRespTimeTrendResponse();
-        this.request("GetRespTimeTrend", req, resp, cb);
     }
 
     /**
@@ -495,17 +381,6 @@ class CatClient extends AbstractClient {
     DescribeAlarmsByTask(req, cb) {
         let resp = new DescribeAlarmsByTaskResponse();
         this.request("DescribeAlarmsByTask", req, resp, cb);
-    }
-
-    /**
-     * 为拨测任务创建告警策略
-     * @param {CreateAlarmPloicyRequest} req
-     * @param {function(string, CreateAlarmPloicyResponse):void} cb
-     * @public
-     */
-    CreateAlarmPloicy(req, cb) {
-        let resp = new CreateAlarmPloicyResponse();
-        this.request("CreateAlarmPloicy", req, resp, cb);
     }
 
     /**
