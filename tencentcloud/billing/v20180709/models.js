@@ -17,6 +17,243 @@
 const AbstractModel = require("../../common/abstract_model");
 
 /**
+ * 消耗组件明细
+ * @class
+ */
+class CostComponentSet extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 组件类型名称
+         * @type {string || null}
+         */
+        this.ComponentCodeName = null;
+
+        /**
+         * 组件名称
+         * @type {string || null}
+         */
+        this.ItemCodeName = null;
+
+        /**
+         * 刊例价
+         * @type {string || null}
+         */
+        this.SinglePrice = null;
+
+        /**
+         * 刊例价单位
+         * @type {string || null}
+         */
+        this.PriceUnit = null;
+
+        /**
+         * 用量
+         * @type {string || null}
+         */
+        this.UsedAmount = null;
+
+        /**
+         * 用量单位
+         * @type {string || null}
+         */
+        this.UsedAmountUnit = null;
+
+        /**
+         * 原价
+         * @type {string || null}
+         */
+        this.Cost = null;
+
+        /**
+         * 折扣
+         * @type {string || null}
+         */
+        this.Discount = null;
+
+        /**
+         * 折后价
+         * @type {string || null}
+         */
+        this.RealCost = null;
+
+        /**
+         * 代金券支付金额
+         * @type {string || null}
+         */
+        this.VoucherPayAmount = null;
+
+        /**
+         * 现金支付金额
+         * @type {string || null}
+         */
+        this.CashPayAmount = null;
+
+        /**
+         * 赠送金支付金额
+         * @type {string || null}
+         */
+        this.IncentivePayAmount = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ComponentCodeName = 'ComponentCodeName' in params ? params.ComponentCodeName : null;
+        this.ItemCodeName = 'ItemCodeName' in params ? params.ItemCodeName : null;
+        this.SinglePrice = 'SinglePrice' in params ? params.SinglePrice : null;
+        this.PriceUnit = 'PriceUnit' in params ? params.PriceUnit : null;
+        this.UsedAmount = 'UsedAmount' in params ? params.UsedAmount : null;
+        this.UsedAmountUnit = 'UsedAmountUnit' in params ? params.UsedAmountUnit : null;
+        this.Cost = 'Cost' in params ? params.Cost : null;
+        this.Discount = 'Discount' in params ? params.Discount : null;
+        this.RealCost = 'RealCost' in params ? params.RealCost : null;
+        this.VoucherPayAmount = 'VoucherPayAmount' in params ? params.VoucherPayAmount : null;
+        this.CashPayAmount = 'CashPayAmount' in params ? params.CashPayAmount : null;
+        this.IncentivePayAmount = 'IncentivePayAmount' in params ? params.IncentivePayAmount : null;
+
+    }
+}
+
+/**
+ * DescribeCostSummaryByProduct请求参数结构体
+ * @class
+ */
+class DescribeCostSummaryByProductRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 查询账单数据的用户UIN
+         * @type {string || null}
+         */
+        this.PayerUin = null;
+
+        /**
+         * 目前只支持传当月1号 00:00:00，且必须和EndTime为相同月份，不支持跨月查询，例 2018-09-01 00:00:00
+         * @type {string || null}
+         */
+        this.BeginTime = null;
+
+        /**
+         * 目前只支持传当月最后一天 23:59:59，且必须和BeginTime为相同月份，不支持跨月查询，例 2018-09-30 23:59:59
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * 每次获取数据量
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 偏移量
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 是否需要返回记录数量，0不需要，1需要，默认不需要
+         * @type {number || null}
+         */
+        this.NeedRecordNum = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PayerUin = 'PayerUin' in params ? params.PayerUin : null;
+        this.BeginTime = 'BeginTime' in params ? params.BeginTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.NeedRecordNum = 'NeedRecordNum' in params ? params.NeedRecordNum : null;
+
+    }
+}
+
+/**
+ * DescribeCostSummaryByProject返回参数结构体
+ * @class
+ */
+class DescribeCostSummaryByProjectResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 数据是否准备好，0未准备好，1准备好
+         * @type {number || null}
+         */
+        this.Ready = null;
+
+        /**
+         * 消耗详情
+         * @type {ConsumptionSummaryTotal || null}
+         */
+        this.Total = null;
+
+        /**
+         * 消耗按业务汇总详情
+         * @type {Array.<ConsumptionProjectSummaryDataItem> || null}
+         */
+        this.Data = null;
+
+        /**
+         * 记录数量，NeedRecordNum为0是返回null
+         * @type {number || null}
+         */
+        this.RecordNum = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Ready = 'Ready' in params ? params.Ready : null;
+
+        if (params.Total) {
+            let obj = new ConsumptionSummaryTotal();
+            obj.deserialize(params.Total)
+            this.Total = obj;
+        }
+
+        if (params.Data) {
+            this.Data = new Array();
+            for (let z in params.Data) {
+                let obj = new ConsumptionProjectSummaryDataItem();
+                obj.deserialize(params.Data[z]);
+                this.Data.push(obj);
+            }
+        }
+        this.RecordNum = 'RecordNum' in params ? params.RecordNum : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeDosageDetailByDate请求参数结构体
  * @class
  */
@@ -94,31 +331,60 @@ cdn业务：
 }
 
 /**
- * DescribeBillSummaryByTag返回参数结构体
+ * 按项目汇总消费详情
  * @class
  */
-class DescribeBillSummaryByTagResponse extends  AbstractModel {
+class ProjectSummaryOverviewItem extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 数据是否准备好，0未准备好，1准备好
-         * @type {number || null}
-         */
-        this.Ready = null;
-
-        /**
-         * 各标签值花费分布详情
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {Array.<TagSummaryOverviewItem> || null}
-         */
-        this.SummaryOverview = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * 项目ID
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.ProjectId = null;
+
+        /**
+         * 项目名称
+         * @type {string || null}
+         */
+        this.ProjectName = null;
+
+        /**
+         * 实际花费
+         * @type {string || null}
+         */
+        this.RealTotalCost = null;
+
+        /**
+         * 费用所占百分比，两位小数
+         * @type {string || null}
+         */
+        this.RealTotalCostRatio = null;
+
+        /**
+         * 现金金额
+         * @type {string || null}
+         */
+        this.CashPayAmount = null;
+
+        /**
+         * 赠送金金额
+         * @type {string || null}
+         */
+        this.IncentivePayAmount = null;
+
+        /**
+         * 代金券金额
+         * @type {string || null}
+         */
+        this.VoucherPayAmount = null;
+
+        /**
+         * 账单月份，格式2019-08
+         * @type {string || null}
+         */
+        this.BillMonth = null;
 
     }
 
@@ -129,17 +395,103 @@ class DescribeBillSummaryByTagResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Ready = 'Ready' in params ? params.Ready : null;
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+        this.ProjectName = 'ProjectName' in params ? params.ProjectName : null;
+        this.RealTotalCost = 'RealTotalCost' in params ? params.RealTotalCost : null;
+        this.RealTotalCostRatio = 'RealTotalCostRatio' in params ? params.RealTotalCostRatio : null;
+        this.CashPayAmount = 'CashPayAmount' in params ? params.CashPayAmount : null;
+        this.IncentivePayAmount = 'IncentivePayAmount' in params ? params.IncentivePayAmount : null;
+        this.VoucherPayAmount = 'VoucherPayAmount' in params ? params.VoucherPayAmount : null;
+        this.BillMonth = 'BillMonth' in params ? params.BillMonth : null;
 
-        if (params.SummaryOverview) {
-            this.SummaryOverview = new Array();
-            for (let z in params.SummaryOverview) {
-                let obj = new TagSummaryOverviewItem();
-                obj.deserialize(params.SummaryOverview[z]);
-                this.SummaryOverview.push(obj);
-            }
+    }
+}
+
+/**
+ * 地域过滤条件
+ * @class
+ */
+class ConditionRegion extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 地域ID
+         * @type {string || null}
+         */
+        this.RegionId = null;
+
+        /**
+         * 地域名称
+         * @type {string || null}
+         */
+        this.RegionName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.RegionId = 'RegionId' in params ? params.RegionId : null;
+        this.RegionName = 'RegionName' in params ? params.RegionName : null;
+
+    }
+}
+
+/**
+ * 消耗按产品汇总详情
+ * @class
+ */
+class ConsumptionBusinessSummaryDataItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 产品码
+         * @type {string || null}
+         */
+        this.BusinessCode = null;
+
+        /**
+         * 产品名称
+         * @type {string || null}
+         */
+        this.BusinessCodeName = null;
+
+        /**
+         * 折后总价
+         * @type {string || null}
+         */
+        this.RealTotalCost = null;
+
+        /**
+         * 费用趋势
+         * @type {ConsumptionSummaryTrend || null}
+         */
+        this.Trend = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.BusinessCode = 'BusinessCode' in params ? params.BusinessCode : null;
+        this.BusinessCodeName = 'BusinessCodeName' in params ? params.BusinessCodeName : null;
+        this.RealTotalCost = 'RealTotalCost' in params ? params.RealTotalCost : null;
+
+        if (params.Trend) {
+            let obj = new ConsumptionSummaryTrend();
+            obj.deserialize(params.Trend)
+            this.Trend = obj;
+        }
 
     }
 }
@@ -175,6 +527,145 @@ class DetailPoint extends  AbstractModel {
         }
         this.Time = 'Time' in params ? params.Time : null;
         this.Value = 'Value' in params ? params.Value : null;
+
+    }
+}
+
+/**
+ * 消耗明细数据类型
+ * @class
+ */
+class CostDetail extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 支付者uin
+         * @type {string || null}
+         */
+        this.PayerUin = null;
+
+        /**
+         * 业务名称
+         * @type {string || null}
+         */
+        this.BusinessCodeName = null;
+
+        /**
+         * 产品名称
+         * @type {string || null}
+         */
+        this.ProductCodeName = null;
+
+        /**
+         * 计费模式名称
+         * @type {string || null}
+         */
+        this.PayModeName = null;
+
+        /**
+         * 项目名称
+         * @type {string || null}
+         */
+        this.ProjectName = null;
+
+        /**
+         * 区域名称
+         * @type {string || null}
+         */
+        this.RegionName = null;
+
+        /**
+         * 地区名称
+         * @type {string || null}
+         */
+        this.ZoneName = null;
+
+        /**
+         * 资源id
+         * @type {string || null}
+         */
+        this.ResourceId = null;
+
+        /**
+         * 资源名称
+         * @type {string || null}
+         */
+        this.ResourceName = null;
+
+        /**
+         * 类型名称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ActionTypeName = null;
+
+        /**
+         * 订单id
+         * @type {string || null}
+         */
+        this.OrderId = null;
+
+        /**
+         * 交易id
+         * @type {string || null}
+         */
+        this.BillId = null;
+
+        /**
+         * 费用开始时间
+         * @type {string || null}
+         */
+        this.FeeBeginTime = null;
+
+        /**
+         * 费用结束时间
+         * @type {string || null}
+         */
+        this.FeeEndTime = null;
+
+        /**
+         * 组件明细
+         * @type {CostComponentSet || null}
+         */
+        this.ComponentSet = null;
+
+        /**
+         * 产品代码
+         * @type {string || null}
+         */
+        this.ProductCode = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PayerUin = 'PayerUin' in params ? params.PayerUin : null;
+        this.BusinessCodeName = 'BusinessCodeName' in params ? params.BusinessCodeName : null;
+        this.ProductCodeName = 'ProductCodeName' in params ? params.ProductCodeName : null;
+        this.PayModeName = 'PayModeName' in params ? params.PayModeName : null;
+        this.ProjectName = 'ProjectName' in params ? params.ProjectName : null;
+        this.RegionName = 'RegionName' in params ? params.RegionName : null;
+        this.ZoneName = 'ZoneName' in params ? params.ZoneName : null;
+        this.ResourceId = 'ResourceId' in params ? params.ResourceId : null;
+        this.ResourceName = 'ResourceName' in params ? params.ResourceName : null;
+        this.ActionTypeName = 'ActionTypeName' in params ? params.ActionTypeName : null;
+        this.OrderId = 'OrderId' in params ? params.OrderId : null;
+        this.BillId = 'BillId' in params ? params.BillId : null;
+        this.FeeBeginTime = 'FeeBeginTime' in params ? params.FeeBeginTime : null;
+        this.FeeEndTime = 'FeeEndTime' in params ? params.FeeEndTime : null;
+
+        if (params.ComponentSet) {
+            let obj = new CostComponentSet();
+            obj.deserialize(params.ComponentSet)
+            this.ComponentSet = obj;
+        }
+        this.ProductCode = 'ProductCode' in params ? params.ProductCode : null;
 
     }
 }
@@ -520,6 +1011,160 @@ class DescribeBillSummaryByTagRequest extends  AbstractModel {
 }
 
 /**
+ * 账单筛选条件对象
+ * @class
+ */
+class Conditions extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 只支持6和12两个值
+         * @type {number || null}
+         */
+        this.TimeRange = null;
+
+        /**
+         * 产品编码
+         * @type {string || null}
+         */
+        this.BusinessCode = null;
+
+        /**
+         * 项目ID
+         * @type {number || null}
+         */
+        this.ProjectId = null;
+
+        /**
+         * 地域ID
+         * @type {number || null}
+         */
+        this.RegionId = null;
+
+        /**
+         * 付费模式，可选prePay和postPay
+         * @type {string || null}
+         */
+        this.PayMode = null;
+
+        /**
+         * 资源关键字
+         * @type {string || null}
+         */
+        this.ResourceKeyword = null;
+
+        /**
+         * 产品编码
+         * @type {Array.<string> || null}
+         */
+        this.BusinessCodes = null;
+
+        /**
+         * 子产品编码
+         * @type {Array.<string> || null}
+         */
+        this.ProductCodes = null;
+
+        /**
+         * 地域ID
+         * @type {Array.<number> || null}
+         */
+        this.RegionIds = null;
+
+        /**
+         * 项目ID
+         * @type {Array.<number> || null}
+         */
+        this.ProjectIds = null;
+
+        /**
+         * 付费模式，可选prePay和postPay
+         * @type {Array.<string> || null}
+         */
+        this.PayModes = null;
+
+        /**
+         * 交易类型
+         * @type {Array.<string> || null}
+         */
+        this.ActionTypes = null;
+
+        /**
+         * 是否隐藏0元流水
+         * @type {number || null}
+         */
+        this.HideFreeCost = null;
+
+        /**
+         * 排序规则，可选desc和asc
+         * @type {string || null}
+         */
+        this.OrderByCost = null;
+
+        /**
+         * 交易ID
+         * @type {Array.<string> || null}
+         */
+        this.BillIds = null;
+
+        /**
+         * 组件编码
+         * @type {Array.<string> || null}
+         */
+        this.ComponentCodes = null;
+
+        /**
+         * 文件ID
+         * @type {Array.<string> || null}
+         */
+        this.FileIds = null;
+
+        /**
+         * 文件类型
+         * @type {Array.<string> || null}
+         */
+        this.FileTypes = null;
+
+        /**
+         * 状态
+         * @type {Array.<number> || null}
+         */
+        this.Status = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TimeRange = 'TimeRange' in params ? params.TimeRange : null;
+        this.BusinessCode = 'BusinessCode' in params ? params.BusinessCode : null;
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+        this.RegionId = 'RegionId' in params ? params.RegionId : null;
+        this.PayMode = 'PayMode' in params ? params.PayMode : null;
+        this.ResourceKeyword = 'ResourceKeyword' in params ? params.ResourceKeyword : null;
+        this.BusinessCodes = 'BusinessCodes' in params ? params.BusinessCodes : null;
+        this.ProductCodes = 'ProductCodes' in params ? params.ProductCodes : null;
+        this.RegionIds = 'RegionIds' in params ? params.RegionIds : null;
+        this.ProjectIds = 'ProjectIds' in params ? params.ProjectIds : null;
+        this.PayModes = 'PayModes' in params ? params.PayModes : null;
+        this.ActionTypes = 'ActionTypes' in params ? params.ActionTypes : null;
+        this.HideFreeCost = 'HideFreeCost' in params ? params.HideFreeCost : null;
+        this.OrderByCost = 'OrderByCost' in params ? params.OrderByCost : null;
+        this.BillIds = 'BillIds' in params ? params.BillIds : null;
+        this.ComponentCodes = 'ComponentCodes' in params ? params.ComponentCodes : null;
+        this.FileIds = 'FileIds' in params ? params.FileIds : null;
+        this.FileTypes = 'FileTypes' in params ? params.FileTypes : null;
+        this.Status = 'Status' in params ? params.Status : null;
+
+    }
+}
+
+/**
  * DescribeBillSummaryByProduct返回参数结构体
  * @class
  */
@@ -721,6 +1366,189 @@ class DetailSet extends  AbstractModel {
 }
 
 /**
+ * 按地域汇总消费详情
+ * @class
+ */
+class RegionSummaryOverviewItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 地域ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.RegionId = null;
+
+        /**
+         * 地域名称
+         * @type {string || null}
+         */
+        this.RegionName = null;
+
+        /**
+         * 实际花费
+         * @type {string || null}
+         */
+        this.RealTotalCost = null;
+
+        /**
+         * 费用所占百分比，两位小数
+         * @type {string || null}
+         */
+        this.RealTotalCostRatio = null;
+
+        /**
+         * 现金金额
+         * @type {string || null}
+         */
+        this.CashPayAmount = null;
+
+        /**
+         * 赠送金金额
+         * @type {string || null}
+         */
+        this.IncentivePayAmount = null;
+
+        /**
+         * 代金券金额
+         * @type {string || null}
+         */
+        this.VoucherPayAmount = null;
+
+        /**
+         * 账单月份，格式2019-08
+         * @type {string || null}
+         */
+        this.BillMonth = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RegionId = 'RegionId' in params ? params.RegionId : null;
+        this.RegionName = 'RegionName' in params ? params.RegionName : null;
+        this.RealTotalCost = 'RealTotalCost' in params ? params.RealTotalCost : null;
+        this.RealTotalCostRatio = 'RealTotalCostRatio' in params ? params.RealTotalCostRatio : null;
+        this.CashPayAmount = 'CashPayAmount' in params ? params.CashPayAmount : null;
+        this.IncentivePayAmount = 'IncentivePayAmount' in params ? params.IncentivePayAmount : null;
+        this.VoucherPayAmount = 'VoucherPayAmount' in params ? params.VoucherPayAmount : null;
+        this.BillMonth = 'BillMonth' in params ? params.BillMonth : null;
+
+    }
+}
+
+/**
+ * 消耗按资源汇总详情
+ * @class
+ */
+class ConsumptionResourceSummaryDataItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 资源ID
+         * @type {string || null}
+         */
+        this.ResourceId = null;
+
+        /**
+         * 资源名称
+         * @type {string || null}
+         */
+        this.ResourceName = null;
+
+        /**
+         * 折后总价
+         * @type {string || null}
+         */
+        this.RealTotalCost = null;
+
+        /**
+         * 现金花费
+         * @type {string || null}
+         */
+        this.CashPayAmount = null;
+
+        /**
+         * 项目ID
+         * @type {string || null}
+         */
+        this.ProjectId = null;
+
+        /**
+         * 项目名称
+         * @type {string || null}
+         */
+        this.ProjectName = null;
+
+        /**
+         * 地域ID
+         * @type {string || null}
+         */
+        this.RegionId = null;
+
+        /**
+         * 地域名称
+         * @type {string || null}
+         */
+        this.RegionName = null;
+
+        /**
+         * 付费模式
+         * @type {string || null}
+         */
+        this.PayMode = null;
+
+        /**
+         * 付费模式名称
+         * @type {string || null}
+         */
+        this.PayModeName = null;
+
+        /**
+         * 产品码
+         * @type {string || null}
+         */
+        this.BusinessCode = null;
+
+        /**
+         * 产品名称
+         * @type {string || null}
+         */
+        this.BusinessCodeName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ResourceId = 'ResourceId' in params ? params.ResourceId : null;
+        this.ResourceName = 'ResourceName' in params ? params.ResourceName : null;
+        this.RealTotalCost = 'RealTotalCost' in params ? params.RealTotalCost : null;
+        this.CashPayAmount = 'CashPayAmount' in params ? params.CashPayAmount : null;
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+        this.ProjectName = 'ProjectName' in params ? params.ProjectName : null;
+        this.RegionId = 'RegionId' in params ? params.RegionId : null;
+        this.RegionName = 'RegionName' in params ? params.RegionName : null;
+        this.PayMode = 'PayMode' in params ? params.PayMode : null;
+        this.PayModeName = 'PayModeName' in params ? params.PayModeName : null;
+        this.BusinessCode = 'BusinessCode' in params ? params.BusinessCode : null;
+        this.BusinessCodeName = 'BusinessCodeName' in params ? params.BusinessCodeName : null;
+
+    }
+}
+
+/**
  * DescribeAccountBalance请求参数结构体
  * @class
  */
@@ -834,61 +1662,42 @@ class DescribeBillDetailRequest extends  AbstractModel {
 }
 
 /**
- * 按地域汇总消费详情
+ * 消耗按项目汇总详情
  * @class
  */
-class RegionSummaryOverviewItem extends  AbstractModel {
+class ConsumptionProjectSummaryDataItem extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 地域ID
-注意：此字段可能返回 null，表示取不到有效值。
+         * 项目ID
          * @type {string || null}
          */
-        this.RegionId = null;
+        this.ProjectId = null;
 
         /**
-         * 地域名称
+         * 项目名称
          * @type {string || null}
          */
-        this.RegionName = null;
+        this.ProjectName = null;
 
         /**
-         * 实际花费
+         * 折后总价
          * @type {string || null}
          */
         this.RealTotalCost = null;
 
         /**
-         * 费用所占百分比，两位小数
-         * @type {string || null}
+         * 趋势
+         * @type {ConsumptionSummaryTrend || null}
          */
-        this.RealTotalCostRatio = null;
+        this.Trend = null;
 
         /**
-         * 现金金额
-         * @type {string || null}
+         * 产品消耗详情
+         * @type {Array.<ConsumptionBusinessSummaryDataItem> || null}
          */
-        this.CashPayAmount = null;
-
-        /**
-         * 赠送金金额
-         * @type {string || null}
-         */
-        this.IncentivePayAmount = null;
-
-        /**
-         * 代金券金额
-         * @type {string || null}
-         */
-        this.VoucherPayAmount = null;
-
-        /**
-         * 账单月份，格式2019-08
-         * @type {string || null}
-         */
-        this.BillMonth = null;
+        this.Business = null;
 
     }
 
@@ -899,14 +1708,95 @@ class RegionSummaryOverviewItem extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RegionId = 'RegionId' in params ? params.RegionId : null;
-        this.RegionName = 'RegionName' in params ? params.RegionName : null;
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+        this.ProjectName = 'ProjectName' in params ? params.ProjectName : null;
         this.RealTotalCost = 'RealTotalCost' in params ? params.RealTotalCost : null;
-        this.RealTotalCostRatio = 'RealTotalCostRatio' in params ? params.RealTotalCostRatio : null;
-        this.CashPayAmount = 'CashPayAmount' in params ? params.CashPayAmount : null;
-        this.IncentivePayAmount = 'IncentivePayAmount' in params ? params.IncentivePayAmount : null;
-        this.VoucherPayAmount = 'VoucherPayAmount' in params ? params.VoucherPayAmount : null;
-        this.BillMonth = 'BillMonth' in params ? params.BillMonth : null;
+
+        if (params.Trend) {
+            let obj = new ConsumptionSummaryTrend();
+            obj.deserialize(params.Trend)
+            this.Trend = obj;
+        }
+
+        if (params.Business) {
+            this.Business = new Array();
+            for (let z in params.Business) {
+                let obj = new ConsumptionBusinessSummaryDataItem();
+                obj.deserialize(params.Business[z]);
+                this.Business.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * DescribeCostSummaryByProduct返回参数结构体
+ * @class
+ */
+class DescribeCostSummaryByProductResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 数据是否准备好，0未准备好，1准备好
+         * @type {number || null}
+         */
+        this.Ready = null;
+
+        /**
+         * 消耗详情
+         * @type {ConsumptionSummaryTotal || null}
+         */
+        this.Total = null;
+
+        /**
+         * 消耗按产品汇总详情
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<ConsumptionBusinessSummaryDataItem> || null}
+         */
+        this.Data = null;
+
+        /**
+         * 记录数量，NeedRecordNum为0是返回null
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.RecordNum = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Ready = 'Ready' in params ? params.Ready : null;
+
+        if (params.Total) {
+            let obj = new ConsumptionSummaryTotal();
+            obj.deserialize(params.Total)
+            this.Total = obj;
+        }
+
+        if (params.Data) {
+            this.Data = new Array();
+            for (let z in params.Data) {
+                let obj = new ConsumptionBusinessSummaryDataItem();
+                obj.deserialize(params.Data[z]);
+                this.Data.push(obj);
+            }
+        }
+        this.RecordNum = 'RecordNum' in params ? params.RecordNum : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1045,6 +1935,69 @@ class DescribeAccountBalanceResponse extends  AbstractModel {
         }
         this.Balance = 'Balance' in params ? params.Balance : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeCostSummaryByRegion请求参数结构体
+ * @class
+ */
+class DescribeCostSummaryByRegionRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 查询账单数据的用户UIN
+         * @type {string || null}
+         */
+        this.PayerUin = null;
+
+        /**
+         * 目前只支持传当月1号 00:00:00，且必须和EndTime为相同月份，不支持跨月查询，例 2018-09-01 00:00:00
+         * @type {string || null}
+         */
+        this.BeginTime = null;
+
+        /**
+         * 目前只支持传当月最后一天 23:59:59，且必须和BeginTime为相同月份，不支持跨月查询，例 2018-09-30 23:59:59
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * 每次获取数据量
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 偏移量
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 是否需要返回记录数量，0不需要，1需要，默认不需要
+         * @type {number || null}
+         */
+        this.NeedRecordNum = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PayerUin = 'PayerUin' in params ? params.PayerUin : null;
+        this.BeginTime = 'BeginTime' in params ? params.BeginTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.NeedRecordNum = 'NeedRecordNum' in params ? params.NeedRecordNum : null;
 
     }
 }
@@ -1231,6 +2184,27 @@ class BillDetailComponent extends  AbstractModel {
          */
         this.IncentivePayAmount = null;
 
+        /**
+         * 组件类型代码
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ItemCode = null;
+
+        /**
+         * 组件名称代码
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ComponentCode = null;
+
+        /**
+         * 合同价
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ContractPrice = null;
+
     }
 
     /**
@@ -1256,6 +2230,45 @@ class BillDetailComponent extends  AbstractModel {
         this.VoucherPayAmount = 'VoucherPayAmount' in params ? params.VoucherPayAmount : null;
         this.CashPayAmount = 'CashPayAmount' in params ? params.CashPayAmount : null;
         this.IncentivePayAmount = 'IncentivePayAmount' in params ? params.IncentivePayAmount : null;
+        this.ItemCode = 'ItemCode' in params ? params.ItemCode : null;
+        this.ComponentCode = 'ComponentCode' in params ? params.ComponentCode : null;
+        this.ContractPrice = 'ContractPrice' in params ? params.ContractPrice : null;
+
+    }
+}
+
+/**
+ * 消耗费用趋势
+ * @class
+ */
+class ConsumptionSummaryTrend extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 趋势类型，upward上升/downward下降/none无
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * 趋势值，Type为none是该字段值为null
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Value = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Value = 'Value' in params ? params.Value : null;
 
     }
 }
@@ -1340,6 +2353,138 @@ class DescribeBillSummaryByPayModeRequest extends  AbstractModel {
         this.PayerUin = 'PayerUin' in params ? params.PayerUin : null;
         this.BeginTime = 'BeginTime' in params ? params.BeginTime : null;
         this.EndTime = 'EndTime' in params ? params.EndTime : null;
+
+    }
+}
+
+/**
+ * DescribeCostSummaryByProject请求参数结构体
+ * @class
+ */
+class DescribeCostSummaryByProjectRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 查询账单数据的用户UIN
+         * @type {string || null}
+         */
+        this.PayerUin = null;
+
+        /**
+         * 目前只支持传当月1号 00:00:00，且必须和EndTime为相同月份，不支持跨月查询，例 2018-09-01 00:00:00
+         * @type {string || null}
+         */
+        this.BeginTime = null;
+
+        /**
+         * 目前只支持传当月最后一天 23:59:59，且必须和BeginTime为相同月份，不支持跨月查询，例 2018-09-30 23:59:59
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * 每次获取数据量
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 偏移量
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 是否需要返回记录数量，0不需要，1需要，默认不需要
+         * @type {number || null}
+         */
+        this.NeedRecordNum = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PayerUin = 'PayerUin' in params ? params.PayerUin : null;
+        this.BeginTime = 'BeginTime' in params ? params.BeginTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.NeedRecordNum = 'NeedRecordNum' in params ? params.NeedRecordNum : null;
+
+    }
+}
+
+/**
+ * 消耗按地域汇总详情
+ * @class
+ */
+class ConsumptionRegionSummaryDataItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 地域ID
+         * @type {string || null}
+         */
+        this.RegionId = null;
+
+        /**
+         * 地域名称
+         * @type {string || null}
+         */
+        this.RegionName = null;
+
+        /**
+         * 折后总价
+         * @type {string || null}
+         */
+        this.RealTotalCost = null;
+
+        /**
+         * 趋势
+         * @type {ConsumptionSummaryTrend || null}
+         */
+        this.Trend = null;
+
+        /**
+         * 产品消费详情
+         * @type {Array.<ConsumptionBusinessSummaryDataItem> || null}
+         */
+        this.Business = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RegionId = 'RegionId' in params ? params.RegionId : null;
+        this.RegionName = 'RegionName' in params ? params.RegionName : null;
+        this.RealTotalCost = 'RealTotalCost' in params ? params.RealTotalCost : null;
+
+        if (params.Trend) {
+            let obj = new ConsumptionSummaryTrend();
+            obj.deserialize(params.Trend)
+            this.Trend = obj;
+        }
+
+        if (params.Business) {
+            this.Business = new Array();
+            for (let z in params.Business) {
+                let obj = new ConsumptionBusinessSummaryDataItem();
+                obj.deserialize(params.Business[z]);
+                this.Business.push(obj);
+            }
+        }
 
     }
 }
@@ -1473,30 +2618,24 @@ class ActionSummaryOverviewItem extends  AbstractModel {
 }
 
 /**
- * DescribeBillSummaryByProject请求参数结构体
+ * 付费模式过滤条件
  * @class
  */
-class DescribeBillSummaryByProjectRequest extends  AbstractModel {
+class ConditionPayMode extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 查询账单数据的用户UIN
+         * 付费模式
          * @type {string || null}
          */
-        this.PayerUin = null;
+        this.PayMode = null;
 
         /**
-         * 目前只支持传当月开始，且必须和EndTime为相同月份，例 2018-09-01 00:00:00
+         * 付费模式名称
          * @type {string || null}
          */
-        this.BeginTime = null;
-
-        /**
-         * 目前只支持传当月结束，且必须和BeginTime为相同月份，例 2018-09-30 23:59:59
-         * @type {string || null}
-         */
-        this.EndTime = null;
+        this.PayModeName = null;
 
     }
 
@@ -1507,9 +2646,8 @@ class DescribeBillSummaryByProjectRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.PayerUin = 'PayerUin' in params ? params.PayerUin : null;
-        this.BeginTime = 'BeginTime' in params ? params.BeginTime : null;
-        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.PayMode = 'PayMode' in params ? params.PayMode : null;
+        this.PayModeName = 'PayModeName' in params ? params.PayModeName : null;
 
     }
 }
@@ -1853,6 +2991,27 @@ class BillDetail extends  AbstractModel {
          */
         this.Tags = null;
 
+        /**
+         * 商品名称代码
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.BusinessCode = null;
+
+        /**
+         * 子商品名称代码
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ProductCode = null;
+
+        /**
+         * 交易类型代码
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ActionType = null;
+
     }
 
     /**
@@ -1897,6 +3056,60 @@ class BillDetail extends  AbstractModel {
                 this.Tags.push(obj);
             }
         }
+        this.BusinessCode = 'BusinessCode' in params ? params.BusinessCode : null;
+        this.ProductCode = 'ProductCode' in params ? params.ProductCode : null;
+        this.ActionType = 'ActionType' in params ? params.ActionType : null;
+
+    }
+}
+
+/**
+ * DescribeBillSummaryByTag返回参数结构体
+ * @class
+ */
+class DescribeBillSummaryByTagResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 数据是否准备好，0未准备好，1准备好
+         * @type {number || null}
+         */
+        this.Ready = null;
+
+        /**
+         * 各标签值花费分布详情
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<TagSummaryOverviewItem> || null}
+         */
+        this.SummaryOverview = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Ready = 'Ready' in params ? params.Ready : null;
+
+        if (params.SummaryOverview) {
+            this.SummaryOverview = new Array();
+            for (let z in params.SummaryOverview) {
+                let obj = new TagSummaryOverviewItem();
+                obj.deserialize(params.SummaryOverview[z]);
+                this.SummaryOverview.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1947,60 +3160,52 @@ class TagSummaryOverviewItem extends  AbstractModel {
 }
 
 /**
- * 按项目汇总消费详情
+ * DescribeCostSummaryByResource返回参数结构体
  * @class
  */
-class ProjectSummaryOverviewItem extends  AbstractModel {
+class DescribeCostSummaryByResourceResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 项目ID
-         * @type {string || null}
+         * 数据是否准备好，0未准备好，1准备好
+         * @type {number || null}
          */
-        this.ProjectId = null;
+        this.Ready = null;
 
         /**
-         * 项目名称
-         * @type {string || null}
+         * 消耗详情
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {ConsumptionSummaryTotal || null}
          */
-        this.ProjectName = null;
+        this.Total = null;
 
         /**
-         * 实际花费
-         * @type {string || null}
+         * 过滤条件
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {ConsumptionResourceSummaryConditionValue || null}
          */
-        this.RealTotalCost = null;
+        this.ConditionValue = null;
 
         /**
-         * 费用所占百分比，两位小数
-         * @type {string || null}
+         * 记录数量
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
          */
-        this.RealTotalCostRatio = null;
+        this.RecordNum = null;
 
         /**
-         * 现金金额
-         * @type {string || null}
+         * 资源消耗详情
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<ConsumptionResourceSummaryDataItem> || null}
          */
-        this.CashPayAmount = null;
+        this.Data = null;
 
         /**
-         * 赠送金金额
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.IncentivePayAmount = null;
-
-        /**
-         * 代金券金额
-         * @type {string || null}
-         */
-        this.VoucherPayAmount = null;
-
-        /**
-         * 账单月份，格式2019-08
-         * @type {string || null}
-         */
-        this.BillMonth = null;
+        this.RequestId = null;
 
     }
 
@@ -2011,14 +3216,30 @@ class ProjectSummaryOverviewItem extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
-        this.ProjectName = 'ProjectName' in params ? params.ProjectName : null;
-        this.RealTotalCost = 'RealTotalCost' in params ? params.RealTotalCost : null;
-        this.RealTotalCostRatio = 'RealTotalCostRatio' in params ? params.RealTotalCostRatio : null;
-        this.CashPayAmount = 'CashPayAmount' in params ? params.CashPayAmount : null;
-        this.IncentivePayAmount = 'IncentivePayAmount' in params ? params.IncentivePayAmount : null;
-        this.VoucherPayAmount = 'VoucherPayAmount' in params ? params.VoucherPayAmount : null;
-        this.BillMonth = 'BillMonth' in params ? params.BillMonth : null;
+        this.Ready = 'Ready' in params ? params.Ready : null;
+
+        if (params.Total) {
+            let obj = new ConsumptionSummaryTotal();
+            obj.deserialize(params.Total)
+            this.Total = obj;
+        }
+
+        if (params.ConditionValue) {
+            let obj = new ConsumptionResourceSummaryConditionValue();
+            obj.deserialize(params.ConditionValue)
+            this.ConditionValue = obj;
+        }
+        this.RecordNum = 'RecordNum' in params ? params.RecordNum : null;
+
+        if (params.Data) {
+            this.Data = new Array();
+            for (let z in params.Data) {
+                let obj = new ConsumptionResourceSummaryDataItem();
+                obj.deserialize(params.Data[z]);
+                this.Data.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2070,6 +3291,87 @@ class DescribeBillDetailResponse extends  AbstractModel {
         }
         this.Total = 'Total' in params ? params.Total : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 消耗按资源汇总过滤条件
+ * @class
+ */
+class ConsumptionResourceSummaryConditionValue extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 产品列表
+         * @type {Array.<ConditionBusiness> || null}
+         */
+        this.Business = null;
+
+        /**
+         * 项目列表
+         * @type {Array.<ConditionProject> || null}
+         */
+        this.Project = null;
+
+        /**
+         * 地域列表
+         * @type {Array.<ConditionRegion> || null}
+         */
+        this.Region = null;
+
+        /**
+         * 付费模式列表
+         * @type {Array.<ConditionPayMode> || null}
+         */
+        this.PayMode = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Business) {
+            this.Business = new Array();
+            for (let z in params.Business) {
+                let obj = new ConditionBusiness();
+                obj.deserialize(params.Business[z]);
+                this.Business.push(obj);
+            }
+        }
+
+        if (params.Project) {
+            this.Project = new Array();
+            for (let z in params.Project) {
+                let obj = new ConditionProject();
+                obj.deserialize(params.Project[z]);
+                this.Project.push(obj);
+            }
+        }
+
+        if (params.Region) {
+            this.Region = new Array();
+            for (let z in params.Region) {
+                let obj = new ConditionRegion();
+                obj.deserialize(params.Region[z]);
+                this.Region.push(obj);
+            }
+        }
+
+        if (params.PayMode) {
+            this.PayMode = new Array();
+            for (let z in params.PayMode) {
+                let obj = new ConditionPayMode();
+                obj.deserialize(params.PayMode[z]);
+                this.PayMode.push(obj);
+            }
+        }
 
     }
 }
@@ -2178,6 +3480,19 @@ class Deal extends  AbstractModel {
          */
         this.TotalCost = null;
 
+        /**
+         * 产品编码
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ProductCode = null;
+
+        /**
+         * 子产品编码
+         * @type {string || null}
+         */
+        this.SubProductCode = null;
+
     }
 
     /**
@@ -2211,6 +3526,93 @@ class Deal extends  AbstractModel {
         this.Policy = 'Policy' in params ? params.Policy : null;
         this.Price = 'Price' in params ? params.Price : null;
         this.TotalCost = 'TotalCost' in params ? params.TotalCost : null;
+        this.ProductCode = 'ProductCode' in params ? params.ProductCode : null;
+        this.SubProductCode = 'SubProductCode' in params ? params.SubProductCode : null;
+
+    }
+}
+
+/**
+ * DescribeCostDetail请求参数结构体
+ * @class
+ */
+class DescribeCostDetailRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 数量，最大值为100
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 偏移量
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 周期开始时间，格式为Y-m-d H:i:s，Month和BeginTime&EndTime必传一个，如果有该字段则Month字段无效。BeginTime和EndTime必须一起传。不能早于开通成本分析的月份，最多可拉取24个月内的数据。
+         * @type {string || null}
+         */
+        this.BeginTime = null;
+
+        /**
+         * 周期结束时间，格式为Y-m-d H:i:s，Month和BeginTime&EndTime必传一个，如果有该字段则Month字段无效。BeginTime和EndTime必须一起传。不能早于开通成本分析的月份，最多可拉取24个月内的数据。
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * 是否需要访问列表的总记录数，用于前端分页
+1-表示需要， 0-表示不需要
+         * @type {number || null}
+         */
+        this.NeedRecordNum = null;
+
+        /**
+         * 月份，格式为yyyy-mm，Month和BeginTime&EndTime必传一个，如果有传BeginTime&EndTime则Month字段无效。不能早于开通成本分析的月份，最多可拉取24个月内的数据。
+         * @type {string || null}
+         */
+        this.Month = null;
+
+        /**
+         * 查询指定产品信息
+         * @type {string || null}
+         */
+        this.ProductCode = null;
+
+        /**
+         * 付费模式 prePay/postPay
+         * @type {string || null}
+         */
+        this.PayMode = null;
+
+        /**
+         * 查询指定资源信息
+         * @type {string || null}
+         */
+        this.ResourceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.BeginTime = 'BeginTime' in params ? params.BeginTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.NeedRecordNum = 'NeedRecordNum' in params ? params.NeedRecordNum : null;
+        this.Month = 'Month' in params ? params.Month : null;
+        this.ProductCode = 'ProductCode' in params ? params.ProductCode : null;
+        this.PayMode = 'PayMode' in params ? params.PayMode : null;
+        this.ResourceId = 'ResourceId' in params ? params.ResourceId : null;
 
     }
 }
@@ -2266,6 +3668,111 @@ class DescribeDealsByCondResponse extends  AbstractModel {
 }
 
 /**
+ * 项目过滤条件
+ * @class
+ */
+class ConditionProject extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 项目ID
+         * @type {string || null}
+         */
+        this.ProjectId = null;
+
+        /**
+         * 项目名称
+         * @type {string || null}
+         */
+        this.ProjectName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+        this.ProjectName = 'ProjectName' in params ? params.ProjectName : null;
+
+    }
+}
+
+/**
+ * 消耗汇总详情
+ * @class
+ */
+class ConsumptionSummaryTotal extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 折后总价
+         * @type {string || null}
+         */
+        this.RealTotalCost = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RealTotalCost = 'RealTotalCost' in params ? params.RealTotalCost : null;
+
+    }
+}
+
+/**
+ * DescribeBillSummaryByProject请求参数结构体
+ * @class
+ */
+class DescribeBillSummaryByProjectRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 查询账单数据的用户UIN
+         * @type {string || null}
+         */
+        this.PayerUin = null;
+
+        /**
+         * 目前只支持传当月开始，且必须和EndTime为相同月份，例 2018-09-01 00:00:00
+         * @type {string || null}
+         */
+        this.BeginTime = null;
+
+        /**
+         * 目前只支持传当月结束，且必须和BeginTime为相同月份，例 2018-09-30 23:59:59
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PayerUin = 'PayerUin' in params ? params.PayerUin : null;
+        this.BeginTime = 'BeginTime' in params ? params.BeginTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+
+    }
+}
+
+/**
  * DescribeBillSummaryByProject返回参数结构体
  * @class
  */
@@ -2311,6 +3818,175 @@ class DescribeBillSummaryByProjectResponse extends  AbstractModel {
                 this.SummaryOverview.push(obj);
             }
         }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 产品过滤条件
+ * @class
+ */
+class ConditionBusiness extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 产品码
+         * @type {string || null}
+         */
+        this.BusinessCode = null;
+
+        /**
+         * 产品名称
+         * @type {string || null}
+         */
+        this.BusinessCodeName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.BusinessCode = 'BusinessCode' in params ? params.BusinessCode : null;
+        this.BusinessCodeName = 'BusinessCodeName' in params ? params.BusinessCodeName : null;
+
+    }
+}
+
+/**
+ * DescribeCostSummaryByResource请求参数结构体
+ * @class
+ */
+class DescribeCostSummaryByResourceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 查询账单数据的用户UIN
+         * @type {string || null}
+         */
+        this.PayerUin = null;
+
+        /**
+         * 目前只支持传当月1号 00:00:00，且必须和EndTime为相同月份，不支持跨月查询，例 2018-09-01 00:00:00
+         * @type {string || null}
+         */
+        this.BeginTime = null;
+
+        /**
+         * 目前只支持传当月最后一天 23:59:59，且必须和BeginTime为相同月份，不支持跨月查询，例 2018-09-30 23:59:59
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * 每次获取数据量
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 偏移量
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 是否需要返回记录数量，0不需要，1需要，默认不需要
+         * @type {number || null}
+         */
+        this.NeedRecordNum = null;
+
+        /**
+         * 是否需要返回过滤条件，0不需要，1需要，默认不需要
+         * @type {number || null}
+         */
+        this.NeedConditionValue = null;
+
+        /**
+         * 过滤条件，只支持ResourceKeyword(资源关键字，支持资源id及资源名称模糊查询)，ProjectIds（项目id），RegionIds(地域id)，PayModes(付费模式，可选prePay和postPay)，HideFreeCost（是否隐藏0元流水，可选0和1），OrderByCost（按费用排序规则，可选desc和asc）
+         * @type {Conditions || null}
+         */
+        this.Conditions = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PayerUin = 'PayerUin' in params ? params.PayerUin : null;
+        this.BeginTime = 'BeginTime' in params ? params.BeginTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.NeedRecordNum = 'NeedRecordNum' in params ? params.NeedRecordNum : null;
+        this.NeedConditionValue = 'NeedConditionValue' in params ? params.NeedConditionValue : null;
+
+        if (params.Conditions) {
+            let obj = new Conditions();
+            obj.deserialize(params.Conditions)
+            this.Conditions = obj;
+        }
+
+    }
+}
+
+/**
+ * DescribeCostDetail返回参数结构体
+ * @class
+ */
+class DescribeCostDetailResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 消耗明细
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<CostDetail> || null}
+         */
+        this.DetailSet = null;
+
+        /**
+         * 记录数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Total = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.DetailSet) {
+            this.DetailSet = new Array();
+            for (let z in params.DetailSet) {
+                let obj = new CostDetail();
+                obj.deserialize(params.DetailSet[z]);
+                this.DetailSet.push(obj);
+            }
+        }
+        this.Total = 'Total' in params ? params.Total : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -2492,43 +4168,137 @@ class BusinessSummaryTotal extends  AbstractModel {
     }
 }
 
+/**
+ * DescribeCostSummaryByRegion返回参数结构体
+ * @class
+ */
+class DescribeCostSummaryByRegionResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 数据是否准备好，0未准备好，1准备好
+         * @type {number || null}
+         */
+        this.Ready = null;
+
+        /**
+         * 消耗详情
+         * @type {ConsumptionSummaryTotal || null}
+         */
+        this.Total = null;
+
+        /**
+         * 消耗按地域汇总详情
+         * @type {Array.<ConsumptionRegionSummaryDataItem> || null}
+         */
+        this.Data = null;
+
+        /**
+         * 记录数量，NeedRecordNum为0是返回null
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.RecordNum = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Ready = 'Ready' in params ? params.Ready : null;
+
+        if (params.Total) {
+            let obj = new ConsumptionSummaryTotal();
+            obj.deserialize(params.Total)
+            this.Total = obj;
+        }
+
+        if (params.Data) {
+            this.Data = new Array();
+            for (let z in params.Data) {
+                let obj = new ConsumptionRegionSummaryDataItem();
+                obj.deserialize(params.Data[z]);
+                this.Data.push(obj);
+            }
+        }
+        this.RecordNum = 'RecordNum' in params ? params.RecordNum : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
 module.exports = {
+    CostComponentSet: CostComponentSet,
+    DescribeCostSummaryByProductRequest: DescribeCostSummaryByProductRequest,
+    DescribeCostSummaryByProjectResponse: DescribeCostSummaryByProjectResponse,
     DescribeDosageDetailByDateRequest: DescribeDosageDetailByDateRequest,
-    DescribeBillSummaryByTagResponse: DescribeBillSummaryByTagResponse,
+    ProjectSummaryOverviewItem: ProjectSummaryOverviewItem,
+    ConditionRegion: ConditionRegion,
+    ConsumptionBusinessSummaryDataItem: ConsumptionBusinessSummaryDataItem,
     DetailPoint: DetailPoint,
+    CostDetail: CostDetail,
     DescribeBillSummaryByPayModeResponse: DescribeBillSummaryByPayModeResponse,
     BillResourceSummary: BillResourceSummary,
     DescribeBillSummaryByTagRequest: DescribeBillSummaryByTagRequest,
+    Conditions: Conditions,
     DescribeBillSummaryByProductResponse: DescribeBillSummaryByProductResponse,
     BillTagInfo: BillTagInfo,
     DescribeBillSummaryByRegionResponse: DescribeBillSummaryByRegionResponse,
     DetailSet: DetailSet,
+    RegionSummaryOverviewItem: RegionSummaryOverviewItem,
+    ConsumptionResourceSummaryDataItem: ConsumptionResourceSummaryDataItem,
     DescribeAccountBalanceRequest: DescribeAccountBalanceRequest,
     DescribeBillDetailRequest: DescribeBillDetailRequest,
-    RegionSummaryOverviewItem: RegionSummaryOverviewItem,
+    ConsumptionProjectSummaryDataItem: ConsumptionProjectSummaryDataItem,
+    DescribeCostSummaryByProductResponse: DescribeCostSummaryByProductResponse,
     ProductInfo: ProductInfo,
     DescribeDosageDetailByDateResponse: DescribeDosageDetailByDateResponse,
     DescribeAccountBalanceResponse: DescribeAccountBalanceResponse,
+    DescribeCostSummaryByRegionRequest: DescribeCostSummaryByRegionRequest,
     BusinessSummaryOverviewItem: BusinessSummaryOverviewItem,
     BillDetailComponent: BillDetailComponent,
+    ConsumptionSummaryTrend: ConsumptionSummaryTrend,
     DescribeBillSummaryByRegionRequest: DescribeBillSummaryByRegionRequest,
     DescribeBillSummaryByPayModeRequest: DescribeBillSummaryByPayModeRequest,
+    DescribeCostSummaryByProjectRequest: DescribeCostSummaryByProjectRequest,
+    ConsumptionRegionSummaryDataItem: ConsumptionRegionSummaryDataItem,
     DescribeBillResourceSummaryResponse: DescribeBillResourceSummaryResponse,
     ActionSummaryOverviewItem: ActionSummaryOverviewItem,
-    DescribeBillSummaryByProjectRequest: DescribeBillSummaryByProjectRequest,
+    ConditionPayMode: ConditionPayMode,
     DescribeDealsByCondRequest: DescribeDealsByCondRequest,
     DescribeBillResourceSummaryRequest: DescribeBillResourceSummaryRequest,
     DescribeBillSummaryByProductRequest: DescribeBillSummaryByProductRequest,
     PayDealsResponse: PayDealsResponse,
     BillDetail: BillDetail,
+    DescribeBillSummaryByTagResponse: DescribeBillSummaryByTagResponse,
     TagSummaryOverviewItem: TagSummaryOverviewItem,
-    ProjectSummaryOverviewItem: ProjectSummaryOverviewItem,
+    DescribeCostSummaryByResourceResponse: DescribeCostSummaryByResourceResponse,
     DescribeBillDetailResponse: DescribeBillDetailResponse,
+    ConsumptionResourceSummaryConditionValue: ConsumptionResourceSummaryConditionValue,
     Deal: Deal,
+    DescribeCostDetailRequest: DescribeCostDetailRequest,
     DescribeDealsByCondResponse: DescribeDealsByCondResponse,
+    ConditionProject: ConditionProject,
+    ConsumptionSummaryTotal: ConsumptionSummaryTotal,
+    DescribeBillSummaryByProjectRequest: DescribeBillSummaryByProjectRequest,
     DescribeBillSummaryByProjectResponse: DescribeBillSummaryByProjectResponse,
+    ConditionBusiness: ConditionBusiness,
+    DescribeCostSummaryByResourceRequest: DescribeCostSummaryByResourceRequest,
+    DescribeCostDetailResponse: DescribeCostDetailResponse,
     PayDealsRequest: PayDealsRequest,
     PayModeSummaryOverviewItem: PayModeSummaryOverviewItem,
     BusinessSummaryTotal: BusinessSummaryTotal,
+    DescribeCostSummaryByRegionResponse: DescribeCostSummaryByRegionResponse,
 
 }

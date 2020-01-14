@@ -25,13 +25,13 @@ class DeleteCertRequest extends  AbstractModel {
         super();
 
         /**
-         * 证书 ID，即通过 GetList 拿到的证书列表的 ID 字段
+         * 证书 ID，即通过 GetList 拿到的证书列表的 ID 字段。
          * @type {string || null}
          */
         this.Id = null;
 
         /**
-         * 模块名称，应填ssl
+         * 模块名称，应填 ssl。
          * @type {string || null}
          */
         this.ModuleType = null;
@@ -60,7 +60,7 @@ class UploadCertResponse extends  AbstractModel {
         super();
 
         /**
-         * 证书ID
+         * 证书ID。
          * @type {string || null}
          */
         this.Id = null;
@@ -123,13 +123,13 @@ class DescribeCertListResponse extends  AbstractModel {
         super();
 
         /**
-         * 总数量
+         * 总数量。
          * @type {number || null}
          */
         this.TotalCount = null;
 
         /**
-         * 列表
+         * 列表。
          * @type {Array.<SSLCertificate> || null}
          */
         this.CertificateSet = null;
@@ -173,37 +173,37 @@ class UploadCertRequest extends  AbstractModel {
         super();
 
         /**
-         * 证书内容
+         * 证书内容。
          * @type {string || null}
          */
         this.Cert = null;
 
         /**
-         * 证书类型（目前支持：CA 为客户端证书，SVR 为服务器证书）
+         * 证书类型（目前支持：CA 为客户端证书，SVR 为服务器证书）。
          * @type {string || null}
          */
         this.CertType = null;
 
         /**
-         * 项目ID
+         * 项目ID，详见用户指南的 [项目与标签](https://cloud.tencent.com/document/product/598/32738)。
          * @type {string || null}
          */
         this.ProjectId = null;
 
         /**
-         * 模块名称，应填ssl
+         * 模块名称，应填 ssl。
          * @type {string || null}
          */
         this.ModuleType = null;
 
         /**
-         * 证书私钥，certType=SVR 时必填
+         * 证书私钥，certType=SVR 时必填。
          * @type {string || null}
          */
         this.Key = null;
 
         /**
-         * 证书备注
+         * 证书备注。
          * @type {string || null}
          */
         this.Alias = null;
@@ -228,7 +228,7 @@ class UploadCertRequest extends  AbstractModel {
 }
 
 /**
- * 获取证书列表（SSLCertificate）返回参数键为CertificateSet的内容
+ * 获取证书列表（SSLCertificate）返回参数键为 CertificateSet 的内容。
  * @class
  */
 class SSLCertificate extends  AbstractModel {
@@ -355,7 +355,7 @@ class SSLCertificate extends  AbstractModel {
         this.ProjectInfo = null;
 
         /**
-         * 证书Id
+         * 证书ID
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
@@ -470,49 +470,49 @@ class DescribeCertListRequest extends  AbstractModel {
         super();
 
         /**
-         * 模块名称，应填ssl
+         * 模块名称，应填 ssl。
          * @type {string || null}
          */
         this.ModuleType = null;
 
         /**
-         * 页数，默认第一页
+         * 页数，默认第一页。
          * @type {number || null}
          */
         this.Offset = null;
 
         /**
-         * 每页条数，默认每页20条
+         * 每页条数，默认每页20条。
          * @type {number || null}
          */
         this.Limit = null;
 
         /**
-         * 搜索关键字
+         * 搜索关键字。
          * @type {string || null}
          */
         this.SearchKey = null;
 
         /**
-         * 证书类型（目前支持:CA=客户端证书,SVR=服务器证书）
+         * 证书类型（目前支持:CA=客户端证书,SVR=服务器证书）。
          * @type {string || null}
          */
         this.CertType = null;
 
         /**
-         * 证书id
+         * 证书ID。
          * @type {string || null}
          */
         this.Id = null;
 
         /**
-         * 是否同时获取证书内容
+         * 是否同时获取证书内容。
          * @type {string || null}
          */
         this.WithCert = null;
 
         /**
-         * 如传，则只返回可以给该域名使用的证书
+         * 如传，则只返回可以给该域名使用的证书。
          * @type {string || null}
          */
         this.AltDomain = null;

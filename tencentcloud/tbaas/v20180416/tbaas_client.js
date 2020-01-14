@@ -20,21 +20,24 @@ const QueryRequest = models.QueryRequest;
 const GetBlockTransactionListForUserResponse = models.GetBlockTransactionListForUserResponse;
 const SendTransactionHandlerResponse = models.SendTransactionHandlerResponse;
 const ApplyUserCertRequest = models.ApplyUserCertRequest;
+const TransByDynamicContractHandlerRequest = models.TransByDynamicContractHandlerRequest;
 const GetTransListHandlerResponse = models.GetTransListHandlerResponse;
-const GetTransactionDetailForUserResponse = models.GetTransactionDetailForUserResponse;
+const DeployDynamicContractHandlerResponse = models.DeployDynamicContractHandlerResponse;
 const ApplyUserCertResponse = models.ApplyUserCertResponse;
-const GetLatesdTransactionListRequest = models.GetLatesdTransactionListRequest;
+const GetInvokeTxRequest = models.GetInvokeTxRequest;
 const InvokeResponse = models.InvokeResponse;
 const DownloadUserCertResponse = models.DownloadUserCertResponse;
+const GetLatesdTransactionListRequest = models.GetLatesdTransactionListRequest;
 const GetTransactionDetailForUserRequest = models.GetTransactionDetailForUserRequest;
 const GetBlockListResponse = models.GetBlockListResponse;
 const SrvInvokeRequest = models.SrvInvokeRequest;
 const BlockByNumberHandlerResponse = models.BlockByNumberHandlerResponse;
 const GetTransByHashHandlerResponse = models.GetTransByHashHandlerResponse;
-const GetInvokeTxRequest = models.GetInvokeTxRequest;
+const DeployDynamicContractHandlerRequest = models.DeployDynamicContractHandlerRequest;
 const GetLatesdTransactionListResponse = models.GetLatesdTransactionListResponse;
 const DownloadUserCertRequest = models.DownloadUserCertRequest;
 const GetClusterSummaryResponse = models.GetClusterSummaryResponse;
+const TransByDynamicContractHandlerResponse = models.TransByDynamicContractHandlerResponse;
 const PeerSet = models.PeerSet;
 const GetBlockTransactionListForUserRequest = models.GetBlockTransactionListForUserRequest;
 const SrvInvokeResponse = models.SrvInvokeResponse;
@@ -46,8 +49,9 @@ const BcosTransInfo = models.BcosTransInfo;
 const InvokeRequest = models.InvokeRequest;
 const GetInvokeTxResponse = models.GetInvokeTxResponse;
 const GetBlockListHandlerResponse = models.GetBlockListHandlerResponse;
-const SendTransactionHandlerRequest = models.SendTransactionHandlerRequest;
+const GetTransactionDetailForUserResponse = models.GetTransactionDetailForUserResponse;
 const GetTransListHandlerRequest = models.GetTransListHandlerRequest;
+const SendTransactionHandlerRequest = models.SendTransactionHandlerRequest;
 const TransactionItem = models.TransactionItem;
 const BlockByNumberHandlerRequest = models.BlockByNumberHandlerRequest;
 const BcosBlockObj = models.BcosBlockObj;
@@ -75,6 +79,17 @@ class TbaasClient extends AbstractClient {
     ApplyUserCert(req, cb) {
         let resp = new ApplyUserCertResponse();
         this.request("ApplyUserCert", req, resp, cb);
+    }
+
+    /**
+     * 根据动态部署的合约发送交易
+     * @param {TransByDynamicContractHandlerRequest} req
+     * @param {function(string, TransByDynamicContractHandlerResponse):void} cb
+     * @public
+     */
+    TransByDynamicContractHandler(req, cb) {
+        let resp = new TransByDynamicContractHandlerResponse();
+        this.request("TransByDynamicContractHandler", req, resp, cb);
     }
 
     /**
@@ -108,6 +123,17 @@ class TbaasClient extends AbstractClient {
     GetClusterSummary(req, cb) {
         let resp = new GetClusterSummaryResponse();
         this.request("GetClusterSummary", req, resp, cb);
+    }
+
+    /**
+     * 获取交易详情
+     * @param {GetTransactionDetailForUserRequest} req
+     * @param {function(string, GetTransactionDetailForUserResponse):void} cb
+     * @public
+     */
+    GetTransactionDetailForUser(req, cb) {
+        let resp = new GetTransactionDetailForUserResponse();
+        this.request("GetTransactionDetailForUser", req, resp, cb);
     }
 
     /**
@@ -199,14 +225,14 @@ class TbaasClient extends AbstractClient {
     }
 
     /**
-     * 获取交易详情
-     * @param {GetTransactionDetailForUserRequest} req
-     * @param {function(string, GetTransactionDetailForUserResponse):void} cb
+     * 动态部署合约
+     * @param {DeployDynamicContractHandlerRequest} req
+     * @param {function(string, DeployDynamicContractHandlerResponse):void} cb
      * @public
      */
-    GetTransactionDetailForUser(req, cb) {
-        let resp = new GetTransactionDetailForUserResponse();
-        this.request("GetTransactionDetailForUser", req, resp, cb);
+    DeployDynamicContractHandler(req, cb) {
+        let resp = new DeployDynamicContractHandlerResponse();
+        this.request("DeployDynamicContractHandler", req, resp, cb);
     }
 
     /**

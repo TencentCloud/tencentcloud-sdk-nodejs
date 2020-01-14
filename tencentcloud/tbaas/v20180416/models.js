@@ -278,6 +278,83 @@ class ApplyUserCertRequest extends  AbstractModel {
 }
 
 /**
+ * TransByDynamicContractHandler请求参数结构体
+ * @class
+ */
+class TransByDynamicContractHandlerRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 模块名，固定字段：transaction
+         * @type {string || null}
+         */
+        this.Module = null;
+
+        /**
+         * 操作名，固定字段：trans_by_dynamic_contract
+         * @type {string || null}
+         */
+        this.Operation = null;
+
+        /**
+         * 群组编号
+         * @type {string || null}
+         */
+        this.GroupPk = null;
+
+        /**
+         * 合约地址（合约部署成功，可得到合约地址）
+         * @type {string || null}
+         */
+        this.ContractAddress = null;
+
+        /**
+         * 合约名
+         * @type {string || null}
+         */
+        this.ContractName = null;
+
+        /**
+         * 合约编译后的abi
+         * @type {string || null}
+         */
+        this.AbiInfo = null;
+
+        /**
+         * 合约被调用方法名
+         * @type {string || null}
+         */
+        this.FuncName = null;
+
+        /**
+         * 合约被调用方法的入参
+         * @type {Array.<string> || null}
+         */
+        this.FuncParam = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Module = 'Module' in params ? params.Module : null;
+        this.Operation = 'Operation' in params ? params.Operation : null;
+        this.GroupPk = 'GroupPk' in params ? params.GroupPk : null;
+        this.ContractAddress = 'ContractAddress' in params ? params.ContractAddress : null;
+        this.ContractName = 'ContractName' in params ? params.ContractName : null;
+        this.AbiInfo = 'AbiInfo' in params ? params.AbiInfo : null;
+        this.FuncName = 'FuncName' in params ? params.FuncName : null;
+        this.FuncParam = 'FuncParam' in params ? params.FuncParam : null;
+
+    }
+}
+
+/**
  * GetTransListHandler返回参数结构体
  * @class
  */
@@ -335,90 +412,18 @@ class GetTransListHandlerResponse extends  AbstractModel {
 }
 
 /**
- * GetTransactionDetailForUser返回参数结构体
+ * DeployDynamicContractHandler返回参数结构体
  * @class
  */
-class GetTransactionDetailForUserResponse extends  AbstractModel {
+class DeployDynamicContractHandlerResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 交易ID
+         * 部署成功返回的合约地址
          * @type {string || null}
          */
-        this.TransactionId = null;
-
-        /**
-         * 交易hash
-         * @type {string || null}
-         */
-        this.TransactionHash = null;
-
-        /**
-         * 创建交易的组织名
-         * @type {string || null}
-         */
-        this.CreateOrgName = null;
-
-        /**
-         * 交易类型（普通交易和配置交易）
-         * @type {string || null}
-         */
-        this.TransactionType = null;
-
-        /**
-         * 交易状态
-         * @type {string || null}
-         */
-        this.TransactionStatus = null;
-
-        /**
-         * 交易创建时间
-         * @type {string || null}
-         */
-        this.CreateTime = null;
-
-        /**
-         * 交易数据
-         * @type {string || null}
-         */
-        this.TransactionData = null;
-
-        /**
-         * 交易所在区块号
-         * @type {number || null}
-         */
-        this.BlockId = null;
-
-        /**
-         * 交易所在区块哈希
-         * @type {string || null}
-         */
-        this.BlockHash = null;
-
-        /**
-         * 交易所在区块高度
-         * @type {number || null}
-         */
-        this.BlockHeight = null;
-
-        /**
-         * 通道名称
-         * @type {string || null}
-         */
-        this.ChannelName = null;
-
-        /**
-         * 交易所在合约名称
-         * @type {string || null}
-         */
-        this.ContractName = null;
-
-        /**
-         * 背书组织列表
-         * @type {Array.<EndorserGroup> || null}
-         */
-        this.EndorserOrgList = null;
+        this.ContractAddress = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -435,27 +440,7 @@ class GetTransactionDetailForUserResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TransactionId = 'TransactionId' in params ? params.TransactionId : null;
-        this.TransactionHash = 'TransactionHash' in params ? params.TransactionHash : null;
-        this.CreateOrgName = 'CreateOrgName' in params ? params.CreateOrgName : null;
-        this.TransactionType = 'TransactionType' in params ? params.TransactionType : null;
-        this.TransactionStatus = 'TransactionStatus' in params ? params.TransactionStatus : null;
-        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
-        this.TransactionData = 'TransactionData' in params ? params.TransactionData : null;
-        this.BlockId = 'BlockId' in params ? params.BlockId : null;
-        this.BlockHash = 'BlockHash' in params ? params.BlockHash : null;
-        this.BlockHeight = 'BlockHeight' in params ? params.BlockHeight : null;
-        this.ChannelName = 'ChannelName' in params ? params.ChannelName : null;
-        this.ContractName = 'ContractName' in params ? params.ContractName : null;
-
-        if (params.EndorserOrgList) {
-            this.EndorserOrgList = new Array();
-            for (let z in params.EndorserOrgList) {
-                let obj = new EndorserGroup();
-                obj.deserialize(params.EndorserOrgList[z]);
-                this.EndorserOrgList.push(obj);
-            }
-        }
+        this.ContractAddress = 'ContractAddress' in params ? params.ContractAddress : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -498,6 +483,167 @@ class ApplyUserCertResponse extends  AbstractModel {
         }
         this.CertId = 'CertId' in params ? params.CertId : null;
         this.CertDn = 'CertDn' in params ? params.CertDn : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * GetInvokeTx请求参数结构体
+ * @class
+ */
+class GetInvokeTxRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 模块名，固定字段：transaction
+         * @type {string || null}
+         */
+        this.Module = null;
+
+        /**
+         * 操作名，固定字段：query_txid
+         * @type {string || null}
+         */
+        this.Operation = null;
+
+        /**
+         * 区块链网络ID，可在区块链网络详情或列表中获取
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * 业务所属通道名称，可在通道详情或列表中获取
+         * @type {string || null}
+         */
+        this.ChannelName = null;
+
+        /**
+         * 执行该查询交易的节点名称，可以在通道详情中获取该通道上的节点名称极其所属组织名称
+         * @type {string || null}
+         */
+        this.PeerName = null;
+
+        /**
+         * 执行该查询交易的节点所属组织名称，可以在通道详情中获取该通道上的节点名称极其所属组织名称
+         * @type {string || null}
+         */
+        this.PeerGroup = null;
+
+        /**
+         * 交易ID
+         * @type {string || null}
+         */
+        this.TxId = null;
+
+        /**
+         * 调用合约的组织名称，可以在组织管理列表中获取当前组织的名称
+         * @type {string || null}
+         */
+        this.GroupName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Module = 'Module' in params ? params.Module : null;
+        this.Operation = 'Operation' in params ? params.Operation : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.ChannelName = 'ChannelName' in params ? params.ChannelName : null;
+        this.PeerName = 'PeerName' in params ? params.PeerName : null;
+        this.PeerGroup = 'PeerGroup' in params ? params.PeerGroup : null;
+        this.TxId = 'TxId' in params ? params.TxId : null;
+        this.GroupName = 'GroupName' in params ? params.GroupName : null;
+
+    }
+}
+
+/**
+ * Invoke返回参数结构体
+ * @class
+ */
+class InvokeResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 交易ID
+         * @type {string || null}
+         */
+        this.Txid = null;
+
+        /**
+         * 交易执行结果
+         * @type {string || null}
+         */
+        this.Events = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Txid = 'Txid' in params ? params.Txid : null;
+        this.Events = 'Events' in params ? params.Events : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DownloadUserCert返回参数结构体
+ * @class
+ */
+class DownloadUserCertResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 证书名称
+         * @type {string || null}
+         */
+        this.CertName = null;
+
+        /**
+         * 证书内容
+         * @type {string || null}
+         */
+        this.CertCtx = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CertName = 'CertName' in params ? params.CertName : null;
+        this.CertCtx = 'CertCtx' in params ? params.CertCtx : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -590,90 +736,6 @@ class GetLatesdTransactionListRequest extends  AbstractModel {
         this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
-
-    }
-}
-
-/**
- * Invoke返回参数结构体
- * @class
- */
-class InvokeResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 交易ID
-         * @type {string || null}
-         */
-        this.Txid = null;
-
-        /**
-         * 交易执行结果
-         * @type {string || null}
-         */
-        this.Events = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Txid = 'Txid' in params ? params.Txid : null;
-        this.Events = 'Events' in params ? params.Events : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * DownloadUserCert返回参数结构体
- * @class
- */
-class DownloadUserCertResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 证书名称
-         * @type {string || null}
-         */
-        this.CertName = null;
-
-        /**
-         * 证书内容
-         * @type {string || null}
-         */
-        this.CertCtx = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.CertName = 'CertName' in params ? params.CertName : null;
-        this.CertCtx = 'CertCtx' in params ? params.CertCtx : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -911,60 +973,54 @@ class GetTransByHashHandlerResponse extends  AbstractModel {
 }
 
 /**
- * GetInvokeTx请求参数结构体
+ * DeployDynamicContractHandler请求参数结构体
  * @class
  */
-class GetInvokeTxRequest extends  AbstractModel {
+class DeployDynamicContractHandlerRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 模块名，固定字段：transaction
+         * 模块名，固定字段：contract
          * @type {string || null}
          */
         this.Module = null;
 
         /**
-         * 操作名，固定字段：query_txid
+         * 操作名，固定字段：deploy_by_dynamic_contract
          * @type {string || null}
          */
         this.Operation = null;
 
         /**
-         * 区块链网络ID，可在区块链网络详情或列表中获取
+         * 群组编号
          * @type {string || null}
          */
-        this.ClusterId = null;
+        this.GroupPk = null;
 
         /**
-         * 业务所属通道名称，可在通道详情或列表中获取
+         * 合约名称
          * @type {string || null}
          */
-        this.ChannelName = null;
+        this.ContractName = null;
 
         /**
-         * 执行该查询交易的节点名称，可以在通道详情中获取该通道上的节点名称极其所属组织名称
+         * 合约编译后的abi
          * @type {string || null}
          */
-        this.PeerName = null;
+        this.AbiInfo = null;
 
         /**
-         * 执行该查询交易的节点所属组织名称，可以在通道详情中获取该通道上的节点名称极其所属组织名称
+         * 合约编译后的binary
          * @type {string || null}
          */
-        this.PeerGroup = null;
+        this.ByteCodeBin = null;
 
         /**
-         * 交易ID
-         * @type {string || null}
+         * 构造函数入参
+         * @type {Array.<string> || null}
          */
-        this.TxId = null;
-
-        /**
-         * 调用合约的组织名称，可以在组织管理列表中获取当前组织的名称
-         * @type {string || null}
-         */
-        this.GroupName = null;
+        this.ConstructorParams = null;
 
     }
 
@@ -977,12 +1033,11 @@ class GetInvokeTxRequest extends  AbstractModel {
         }
         this.Module = 'Module' in params ? params.Module : null;
         this.Operation = 'Operation' in params ? params.Operation : null;
-        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
-        this.ChannelName = 'ChannelName' in params ? params.ChannelName : null;
-        this.PeerName = 'PeerName' in params ? params.PeerName : null;
-        this.PeerGroup = 'PeerGroup' in params ? params.PeerGroup : null;
-        this.TxId = 'TxId' in params ? params.TxId : null;
-        this.GroupName = 'GroupName' in params ? params.GroupName : null;
+        this.GroupPk = 'GroupPk' in params ? params.GroupPk : null;
+        this.ContractName = 'ContractName' in params ? params.ContractName : null;
+        this.AbiInfo = 'AbiInfo' in params ? params.AbiInfo : null;
+        this.ByteCodeBin = 'ByteCodeBin' in params ? params.ByteCodeBin : null;
+        this.ConstructorParams = 'ConstructorParams' in params ? params.ConstructorParams : null;
 
     }
 }
@@ -1228,6 +1283,41 @@ class GetClusterSummaryResponse extends  AbstractModel {
         this.TlsCertCount = 'TlsCertCount' in params ? params.TlsCertCount : null;
         this.PeerCertCount = 'PeerCertCount' in params ? params.PeerCertCount : null;
         this.ClientCertCount = 'ClientCertCount' in params ? params.ClientCertCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * TransByDynamicContractHandler返回参数结构体
+ * @class
+ */
+class TransByDynamicContractHandlerResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 交易结果json字符串
+         * @type {string || null}
+         */
+        this.TransactionRsp = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TransactionRsp = 'TransactionRsp' in params ? params.TransactionRsp : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -1929,48 +2019,96 @@ class GetBlockListHandlerResponse extends  AbstractModel {
 }
 
 /**
- * SendTransactionHandler请求参数结构体
+ * GetTransactionDetailForUser返回参数结构体
  * @class
  */
-class SendTransactionHandlerRequest extends  AbstractModel {
+class GetTransactionDetailForUserResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 模块名，固定字段：transaction
+         * 交易ID
          * @type {string || null}
          */
-        this.Module = null;
+        this.TransactionId = null;
 
         /**
-         * 操作名，固定字段：send_transaction
+         * 交易hash
          * @type {string || null}
          */
-        this.Operation = null;
+        this.TransactionHash = null;
 
         /**
-         * 群组编号
+         * 创建交易的组织名
          * @type {string || null}
          */
-        this.GroupPk = null;
+        this.CreateOrgName = null;
 
         /**
-         * 合约编号
+         * 交易类型（普通交易和配置交易）
+         * @type {string || null}
+         */
+        this.TransactionType = null;
+
+        /**
+         * 交易状态
+         * @type {string || null}
+         */
+        this.TransactionStatus = null;
+
+        /**
+         * 交易创建时间
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * 交易数据
+         * @type {string || null}
+         */
+        this.TransactionData = null;
+
+        /**
+         * 交易所在区块号
          * @type {number || null}
          */
-        this.ContractId = null;
+        this.BlockId = null;
 
         /**
-         * 合约方法名
+         * 交易所在区块哈希
          * @type {string || null}
          */
-        this.FuncName = null;
+        this.BlockHash = null;
 
         /**
-         * 合约方法入参
-         * @type {Array.<string> || null}
+         * 交易所在区块高度
+         * @type {number || null}
          */
-        this.FuncParam = null;
+        this.BlockHeight = null;
+
+        /**
+         * 通道名称
+         * @type {string || null}
+         */
+        this.ChannelName = null;
+
+        /**
+         * 交易所在合约名称
+         * @type {string || null}
+         */
+        this.ContractName = null;
+
+        /**
+         * 背书组织列表
+         * @type {Array.<EndorserGroup> || null}
+         */
+        this.EndorserOrgList = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
 
     }
 
@@ -1981,12 +2119,28 @@ class SendTransactionHandlerRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Module = 'Module' in params ? params.Module : null;
-        this.Operation = 'Operation' in params ? params.Operation : null;
-        this.GroupPk = 'GroupPk' in params ? params.GroupPk : null;
-        this.ContractId = 'ContractId' in params ? params.ContractId : null;
-        this.FuncName = 'FuncName' in params ? params.FuncName : null;
-        this.FuncParam = 'FuncParam' in params ? params.FuncParam : null;
+        this.TransactionId = 'TransactionId' in params ? params.TransactionId : null;
+        this.TransactionHash = 'TransactionHash' in params ? params.TransactionHash : null;
+        this.CreateOrgName = 'CreateOrgName' in params ? params.CreateOrgName : null;
+        this.TransactionType = 'TransactionType' in params ? params.TransactionType : null;
+        this.TransactionStatus = 'TransactionStatus' in params ? params.TransactionStatus : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.TransactionData = 'TransactionData' in params ? params.TransactionData : null;
+        this.BlockId = 'BlockId' in params ? params.BlockId : null;
+        this.BlockHash = 'BlockHash' in params ? params.BlockHash : null;
+        this.BlockHeight = 'BlockHeight' in params ? params.BlockHeight : null;
+        this.ChannelName = 'ChannelName' in params ? params.ChannelName : null;
+        this.ContractName = 'ContractName' in params ? params.ContractName : null;
+
+        if (params.EndorserOrgList) {
+            this.EndorserOrgList = new Array();
+            for (let z in params.EndorserOrgList) {
+                let obj = new EndorserGroup();
+                obj.deserialize(params.EndorserOrgList[z]);
+                this.EndorserOrgList.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2050,6 +2204,69 @@ class GetTransListHandlerRequest extends  AbstractModel {
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.GroupPk = 'GroupPk' in params ? params.GroupPk : null;
         this.TransHash = 'TransHash' in params ? params.TransHash : null;
+
+    }
+}
+
+/**
+ * SendTransactionHandler请求参数结构体
+ * @class
+ */
+class SendTransactionHandlerRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 模块名，固定字段：transaction
+         * @type {string || null}
+         */
+        this.Module = null;
+
+        /**
+         * 操作名，固定字段：send_transaction
+         * @type {string || null}
+         */
+        this.Operation = null;
+
+        /**
+         * 群组编号
+         * @type {string || null}
+         */
+        this.GroupPk = null;
+
+        /**
+         * 合约编号
+         * @type {number || null}
+         */
+        this.ContractId = null;
+
+        /**
+         * 合约方法名
+         * @type {string || null}
+         */
+        this.FuncName = null;
+
+        /**
+         * 合约方法入参
+         * @type {Array.<string> || null}
+         */
+        this.FuncParam = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Module = 'Module' in params ? params.Module : null;
+        this.Operation = 'Operation' in params ? params.Operation : null;
+        this.GroupPk = 'GroupPk' in params ? params.GroupPk : null;
+        this.ContractId = 'ContractId' in params ? params.ContractId : null;
+        this.FuncName = 'FuncName' in params ? params.FuncName : null;
+        this.FuncParam = 'FuncParam' in params ? params.FuncParam : null;
 
     }
 }
@@ -2381,21 +2598,24 @@ module.exports = {
     GetBlockTransactionListForUserResponse: GetBlockTransactionListForUserResponse,
     SendTransactionHandlerResponse: SendTransactionHandlerResponse,
     ApplyUserCertRequest: ApplyUserCertRequest,
+    TransByDynamicContractHandlerRequest: TransByDynamicContractHandlerRequest,
     GetTransListHandlerResponse: GetTransListHandlerResponse,
-    GetTransactionDetailForUserResponse: GetTransactionDetailForUserResponse,
+    DeployDynamicContractHandlerResponse: DeployDynamicContractHandlerResponse,
     ApplyUserCertResponse: ApplyUserCertResponse,
-    GetLatesdTransactionListRequest: GetLatesdTransactionListRequest,
+    GetInvokeTxRequest: GetInvokeTxRequest,
     InvokeResponse: InvokeResponse,
     DownloadUserCertResponse: DownloadUserCertResponse,
+    GetLatesdTransactionListRequest: GetLatesdTransactionListRequest,
     GetTransactionDetailForUserRequest: GetTransactionDetailForUserRequest,
     GetBlockListResponse: GetBlockListResponse,
     SrvInvokeRequest: SrvInvokeRequest,
     BlockByNumberHandlerResponse: BlockByNumberHandlerResponse,
     GetTransByHashHandlerResponse: GetTransByHashHandlerResponse,
-    GetInvokeTxRequest: GetInvokeTxRequest,
+    DeployDynamicContractHandlerRequest: DeployDynamicContractHandlerRequest,
     GetLatesdTransactionListResponse: GetLatesdTransactionListResponse,
     DownloadUserCertRequest: DownloadUserCertRequest,
     GetClusterSummaryResponse: GetClusterSummaryResponse,
+    TransByDynamicContractHandlerResponse: TransByDynamicContractHandlerResponse,
     PeerSet: PeerSet,
     GetBlockTransactionListForUserRequest: GetBlockTransactionListForUserRequest,
     SrvInvokeResponse: SrvInvokeResponse,
@@ -2407,8 +2627,9 @@ module.exports = {
     InvokeRequest: InvokeRequest,
     GetInvokeTxResponse: GetInvokeTxResponse,
     GetBlockListHandlerResponse: GetBlockListHandlerResponse,
-    SendTransactionHandlerRequest: SendTransactionHandlerRequest,
+    GetTransactionDetailForUserResponse: GetTransactionDetailForUserResponse,
     GetTransListHandlerRequest: GetTransListHandlerRequest,
+    SendTransactionHandlerRequest: SendTransactionHandlerRequest,
     TransactionItem: TransactionItem,
     BlockByNumberHandlerRequest: BlockByNumberHandlerRequest,
     BcosBlockObj: BcosBlockObj,
