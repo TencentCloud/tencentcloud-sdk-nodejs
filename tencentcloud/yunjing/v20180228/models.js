@@ -726,7 +726,7 @@ class WeeklyReportVul extends  AbstractModel {
 
         /**
          * 漏洞类型。
-<li> WEB : WEB漏洞</li>
+<li> WEB : Web漏洞</li>
 <li> SYSTEM :系统组件漏洞</li>
 <li> BASELINE : 安全基线</li>
          * @type {string || null}
@@ -1014,6 +1014,7 @@ class DescribeAttackLogsRequest extends  AbstractModel {
          * 过滤条件。
 <li>HttpMethod - String - 是否必填：否 - 攻击方法(POST|GET)</li>
 <li>MachineIp - String - 是否必填：否 - 主机内网IP</li>
+<li>DateRange - String - 是否必填：否 - 时间范围(存储最近3个月的数据)，如最近一个月["2019-11-17", "2019-12-17"]</li>
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
@@ -1070,7 +1071,7 @@ class ComponentStatistics extends  AbstractModel {
 
         /**
          * 组件类型。
-<li>WEB：web组件</li>
+<li>WEB：Web组件</li>
 <li>SYSTEM：系统组件</li>
          * @type {string || null}
          */
@@ -1693,6 +1694,24 @@ class BruteAttack extends  AbstractModel {
          */
         this.Uuid = null;
 
+        /**
+         * 是否专业版。
+         * @type {boolean || null}
+         */
+        this.IsProVersion = null;
+
+        /**
+         * 阻断状态。
+         * @type {string || null}
+         */
+        this.BanStatus = null;
+
+        /**
+         * 机器UUID
+         * @type {string || null}
+         */
+        this.Quuid = null;
+
     }
 
     /**
@@ -1714,6 +1733,9 @@ class BruteAttack extends  AbstractModel {
         this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
         this.MachineName = 'MachineName' in params ? params.MachineName : null;
         this.Uuid = 'Uuid' in params ? params.Uuid : null;
+        this.IsProVersion = 'IsProVersion' in params ? params.IsProVersion : null;
+        this.BanStatus = 'BanStatus' in params ? params.BanStatus : null;
+        this.Quuid = 'Quuid' in params ? params.Quuid : null;
 
     }
 }
@@ -2571,7 +2593,7 @@ class UntrustMalwaresRequest extends  AbstractModel {
         super();
 
         /**
-         * 木马Id数组，单次最大处理不能超过200条。
+         * 木马ID数组，单次最大处理不能超过200条。
          * @type {Array.<number> || null}
          */
         this.Ids = null;
@@ -6738,7 +6760,7 @@ class SeparateMalwaresRequest extends  AbstractModel {
         super();
 
         /**
-         * 木马事件Id数组。
+         * 木马事件ID数组。
          * @type {Array.<number> || null}
          */
         this.Ids = null;
@@ -7443,6 +7465,34 @@ class DescribeOpenPortsResponse extends  AbstractModel {
  * @class
  */
 class EditBashRuleResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * OpenProVersion返回参数结构体
+ * @class
+ */
+class OpenProVersionResponse extends  AbstractModel {
     constructor(){
         super();
 
@@ -8629,7 +8679,7 @@ class DeleteNonlocalLoginPlacesRequest extends  AbstractModel {
         super();
 
         /**
-         * 异地登录事件Id数组。
+         * 异地登录事件ID数组。
          * @type {Array.<number> || null}
          */
         this.Ids = null;
@@ -8947,6 +8997,7 @@ class Machine extends  AbstractModel {
          * 主机状态。
 <li>OFFLINE: 离线  </li>
 <li>ONLINE: 在线</li>
+<li>MACHINE_STOPPED: 已关机</li>
          * @type {string || null}
          */
         this.MachineStatus = null;
@@ -9680,7 +9731,7 @@ class Component extends  AbstractModel {
         /**
          * 组件类型。
 <li>SYSTEM：系统组件</li>
-<li>WEB：WEB组件</li>
+<li>WEB：Web组件</li>
          * @type {string || null}
          */
         this.ComponentType = null;
@@ -10033,6 +10084,59 @@ class CloseProVersionRequest extends  AbstractModel {
 }
 
 /**
+ * OpenProVersion请求参数结构体
+ * @class
+ */
+class OpenProVersionRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 云主机类型。
+<li>CVM：表示虚拟主机</li>
+<li>BM:  表示黑石物理机</li>
+         * @type {string || null}
+         */
+        this.MachineType = null;
+
+        /**
+         * 机器所属地域。
+如：ap-guangzhou，ap-shanghai
+         * @type {string || null}
+         */
+        this.MachineRegion = null;
+
+        /**
+         * 主机唯一标识Uuid数组。
+黑石的InstanceId，CVM的Uuid
+         * @type {Array.<string> || null}
+         */
+        this.Quuids = null;
+
+        /**
+         * 活动ID。
+         * @type {number || null}
+         */
+        this.ActivityId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MachineType = 'MachineType' in params ? params.MachineType : null;
+        this.MachineRegion = 'MachineRegion' in params ? params.MachineRegion : null;
+        this.Quuids = 'Quuids' in params ? params.Quuids : null;
+        this.ActivityId = 'ActivityId' in params ? params.ActivityId : null;
+
+    }
+}
+
+/**
  * DeleteBashRules返回参数结构体
  * @class
  */
@@ -10349,7 +10453,7 @@ class AddMachineTagRequest extends  AbstractModel {
         super();
 
         /**
-         * 云主机ID
+         * 云服务器ID
          * @type {string || null}
          */
         this.Quuid = null;
@@ -10361,13 +10465,13 @@ class AddMachineTagRequest extends  AbstractModel {
         this.TagId = null;
 
         /**
-         * 主机地区
+         * 云服务器地区
          * @type {string || null}
          */
         this.MRegion = null;
 
         /**
-         * 主机地区类型(CVM|BM)
+         * 云服务器类型(CVM|BM)
          * @type {string || null}
          */
         this.MArea = null;
@@ -11274,6 +11378,7 @@ module.exports = {
     DeleteAttackLogsRequest: DeleteAttackLogsRequest,
     DescribeOpenPortsResponse: DescribeOpenPortsResponse,
     EditBashRuleResponse: EditBashRuleResponse,
+    OpenProVersionResponse: OpenProVersionResponse,
     DescribeMachineInfoRequest: DescribeMachineInfoRequest,
     DescribeMaliciousRequestsRequest: DescribeMaliciousRequestsRequest,
     DescribeProcessesRequest: DescribeProcessesRequest,
@@ -11328,6 +11433,7 @@ module.exports = {
     DeleteMachineTagResponse: DeleteMachineTagResponse,
     DescribeHistoryAccountsRequest: DescribeHistoryAccountsRequest,
     CloseProVersionRequest: CloseProVersionRequest,
+    OpenProVersionRequest: OpenProVersionRequest,
     DeleteBashRulesResponse: DeleteBashRulesResponse,
     IgnoreImpactedHostsResponse: IgnoreImpactedHostsResponse,
     DeleteBashEventsRequest: DeleteBashEventsRequest,

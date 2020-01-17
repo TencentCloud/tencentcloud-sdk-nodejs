@@ -24,6 +24,7 @@ const DescribeItemsResponse = models.DescribeItemsResponse;
 const Music = models.Music;
 const Artist = models.Artist;
 const DescribeLyricResponse = models.DescribeLyricResponse;
+const ReportDataResponse = models.ReportDataResponse;
 const DescribeItemsRequest = models.DescribeItemsRequest;
 const DescribeStationsRequest = models.DescribeStationsRequest;
 const Item = models.Item;
@@ -31,6 +32,7 @@ const Station = models.Station;
 const Lyric = models.Lyric;
 const DescribeLyricRequest = models.DescribeLyricRequest;
 const DescribeStationsResponse = models.DescribeStationsResponse;
+const ReportDataRequest = models.ReportDataRequest;
 const DescribeMusicRequest = models.DescribeMusicRequest;
 
 
@@ -75,6 +77,17 @@ class AmeClient extends AbstractClient {
     DescribeLyric(req, cb) {
         let resp = new DescribeLyricResponse();
         this.request("DescribeLyric", req, resp, cb);
+    }
+
+    /**
+     * 客户上报用户数据功能，为了更好的为用户提供优质服务
+     * @param {ReportDataRequest} req
+     * @param {function(string, ReportDataResponse):void} cb
+     * @public
+     */
+    ReportData(req, cb) {
+        let resp = new ReportDataResponse();
+        this.request("ReportData", req, resp, cb);
     }
 
     /**

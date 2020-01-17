@@ -172,6 +172,7 @@ const CloseProVersionResponse = models.CloseProVersionResponse;
 const DeleteAttackLogsRequest = models.DeleteAttackLogsRequest;
 const DescribeOpenPortsResponse = models.DescribeOpenPortsResponse;
 const EditBashRuleResponse = models.EditBashRuleResponse;
+const OpenProVersionResponse = models.OpenProVersionResponse;
 const DescribeMachineInfoRequest = models.DescribeMachineInfoRequest;
 const DescribeMaliciousRequestsRequest = models.DescribeMaliciousRequestsRequest;
 const DescribeProcessesRequest = models.DescribeProcessesRequest;
@@ -226,6 +227,7 @@ const DescribeProcessStatisticsRequest = models.DescribeProcessStatisticsRequest
 const DeleteMachineTagResponse = models.DeleteMachineTagResponse;
 const DescribeHistoryAccountsRequest = models.DescribeHistoryAccountsRequest;
 const CloseProVersionRequest = models.CloseProVersionRequest;
+const OpenProVersionRequest = models.OpenProVersionRequest;
 const DeleteBashRulesResponse = models.DeleteBashRulesResponse;
 const IgnoreImpactedHostsResponse = models.IgnoreImpactedHostsResponse;
 const DeleteBashEventsRequest = models.DeleteBashEventsRequest;
@@ -318,6 +320,17 @@ class YunjingClient extends AbstractClient {
     DescribeAttackLogs(req, cb) {
         let resp = new DescribeAttackLogsResponse();
         this.request("DescribeAttackLogs", req, resp, cb);
+    }
+
+    /**
+     * 本接口 (OpenProVersion) 用于开通专业版。
+     * @param {OpenProVersionRequest} req
+     * @param {function(string, OpenProVersionResponse):void} cb
+     * @public
+     */
+    OpenProVersion(req, cb) {
+        let resp = new OpenProVersionResponse();
+        this.request("OpenProVersion", req, resp, cb);
     }
 
     /**

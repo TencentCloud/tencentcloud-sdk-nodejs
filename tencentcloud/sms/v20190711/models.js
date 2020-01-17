@@ -52,6 +52,212 @@ class PullSmsReplyStatusRequest extends  AbstractModel {
 }
 
 /**
+ * DeleteSmsTemplate返回参数结构体
+ * @class
+ */
+class DeleteSmsTemplateResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 删除模板响应
+         * @type {DeleteTemplateStatus || null}
+         */
+        this.DeleteTemplateStatus = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.DeleteTemplateStatus) {
+            let obj = new DeleteTemplateStatus();
+            obj.deserialize(params.DeleteTemplateStatus)
+            this.DeleteTemplateStatus = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifySmsTemplate返回参数结构体
+ * @class
+ */
+class ModifySmsTemplateResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 修改模板参数响应
+         * @type {ModifyTemplateStatus || null}
+         */
+        this.ModifyTemplateStatus = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.ModifyTemplateStatus) {
+            let obj = new ModifyTemplateStatus();
+            obj.deserialize(params.ModifyTemplateStatus)
+            this.ModifyTemplateStatus = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * AddSmsSign请求参数结构体
+ * @class
+ */
+class AddSmsSignRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 签名名称。
+         * @type {string || null}
+         */
+        this.SignName = null;
+
+        /**
+         * 签名类型。其中每种类型后面标注了其可选的 DocumentType（证明类型）：
+0：公司（0，1，2，3）。
+1：APP（0，1，2，3，4） 。
+2：网站（0，1，2，3，5）。
+3：公众号或者小程序（0，1，2，3，6）。
+4：商标（7）。
+5：政府/机关事业单位/其他机构（2，3）。
+注：必须按照对应关系选择证明类型，否则会审核失败。
+         * @type {number || null}
+         */
+        this.SignType = null;
+
+        /**
+         * 证明类型。其中：
+0：三证合一。
+1：企业营业执照。
+2：组织机构代码证书。
+3：社会信用代码证书。
+4：应用后台管理截图(个人开发APP)。
+5：网站备案后台截图(个人开发网站)。
+6：小程序设置页面截图(个人认证小程序)。
+7：商标注册书。
+         * @type {number || null}
+         */
+        this.DocumentType = null;
+
+        /**
+         * 是否国际短信。其中：
+0：表示国内短信。
+1：表示海外短信。
+         * @type {number || null}
+         */
+        this.International = null;
+
+        /**
+         * 签名用途。其中：
+0：自用。
+1：他用。
+         * @type {number || null}
+         */
+        this.UsedMethod = null;
+
+        /**
+         * 签名对应的资质证明图片需先进行 base64 编码格式转换，将转换后的字符串去掉前缀`data:image/jpeg;base64,`再赋值给该参数。
+         * @type {string || null}
+         */
+        this.ProofImage = null;
+
+        /**
+         * 委托授权证明。选择 UsedMethod 为他用之后需要提交委托的授权证明。
+图片需先进行 base64 编码格式转换，将转换后的字符串去掉前缀`data:image/jpeg;base64,`再赋值给该参数。
+注：只有 UsedMethod 在选择为 1（他用）时，这个字段才会生效。
+         * @type {string || null}
+         */
+        this.CommissionImage = null;
+
+        /**
+         * 签名的申请备注。
+         * @type {string || null}
+         */
+        this.Remark = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SignName = 'SignName' in params ? params.SignName : null;
+        this.SignType = 'SignType' in params ? params.SignType : null;
+        this.DocumentType = 'DocumentType' in params ? params.DocumentType : null;
+        this.International = 'International' in params ? params.International : null;
+        this.UsedMethod = 'UsedMethod' in params ? params.UsedMethod : null;
+        this.ProofImage = 'ProofImage' in params ? params.ProofImage : null;
+        this.CommissionImage = 'CommissionImage' in params ? params.CommissionImage : null;
+        this.Remark = 'Remark' in params ? params.Remark : null;
+
+    }
+}
+
+/**
+ * 添加模板参数响应 
+ * @class
+ */
+class AddTemplateStatus extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 模板参数
+         * @type {string || null}
+         */
+        this.TemplateId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TemplateId = 'TemplateId' in params ? params.TemplateId : null;
+
+    }
+}
+
+/**
  * SmsPackagesStatistics请求参数结构体
  * @class
  */
@@ -147,6 +353,125 @@ class PullSmsSendStatusByPhoneNumberRequest extends  AbstractModel {
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.PhoneNumber = 'PhoneNumber' in params ? params.PhoneNumber : null;
         this.SmsSdkAppid = 'SmsSdkAppid' in params ? params.SmsSdkAppid : null;
+
+    }
+}
+
+/**
+ * AddSmsTemplate请求参数结构体
+ * @class
+ */
+class AddSmsTemplateRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 模板名称。
+         * @type {string || null}
+         */
+        this.TemplateName = null;
+
+        /**
+         * 模板内容。
+         * @type {string || null}
+         */
+        this.TemplateContent = null;
+
+        /**
+         * 短信类型，0表示普通短信, 1表示营销短信。
+         * @type {number || null}
+         */
+        this.SmsType = null;
+
+        /**
+         * 0表示国内短信，1表示国际/港澳台短信，默认为0。
+         * @type {number || null}
+         */
+        this.International = null;
+
+        /**
+         * 模板备注，例如申请原因，使用场景等。
+         * @type {string || null}
+         */
+        this.Remark = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TemplateName = 'TemplateName' in params ? params.TemplateName : null;
+        this.TemplateContent = 'TemplateContent' in params ? params.TemplateContent : null;
+        this.SmsType = 'SmsType' in params ? params.SmsType : null;
+        this.International = 'International' in params ? params.International : null;
+        this.Remark = 'Remark' in params ? params.Remark : null;
+
+    }
+}
+
+/**
+ * ModifySmsTemplate请求参数结构体
+ * @class
+ */
+class ModifySmsTemplateRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 待修改的模板的模板 ID。
+         * @type {number || null}
+         */
+        this.TemplateId = null;
+
+        /**
+         * 新的模板名称。
+         * @type {string || null}
+         */
+        this.TemplateName = null;
+
+        /**
+         * 新的模板内容。
+         * @type {string || null}
+         */
+        this.TemplateContent = null;
+
+        /**
+         * 短信类型，0表示普通短信, 1表示营销短信。
+         * @type {number || null}
+         */
+        this.SmsType = null;
+
+        /**
+         * 0表示国内短信，1表示国际/港澳台短信，默认为0。
+         * @type {number || null}
+         */
+        this.International = null;
+
+        /**
+         * 模板备注，例如申请原因，使用场景等。
+         * @type {string || null}
+         */
+        this.Remark = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TemplateId = 'TemplateId' in params ? params.TemplateId : null;
+        this.TemplateName = 'TemplateName' in params ? params.TemplateName : null;
+        this.TemplateContent = 'TemplateContent' in params ? params.TemplateContent : null;
+        this.SmsType = 'SmsType' in params ? params.SmsType : null;
+        this.International = 'International' in params ? params.International : null;
+        this.Remark = 'Remark' in params ? params.Remark : null;
 
     }
 }
@@ -361,6 +686,41 @@ class PullSmsSendStatusByPhoneNumberResponse extends  AbstractModel {
 }
 
 /**
+ * 修改签名响应 
+ * @class
+ */
+class ModifySignStatus extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 签名Id
+         * @type {number || null}
+         */
+        this.SignId = null;
+
+        /**
+         * 签名修改申请Id
+         * @type {string || null}
+         */
+        this.SignApplyId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SignId = 'SignId' in params ? params.SignId : null;
+        this.SignApplyId = 'SignApplyId' in params ? params.SignApplyId : null;
+
+    }
+}
+
+/**
  * 短信回复状态
  * @class
  */
@@ -540,7 +900,7 @@ class SendSmsRequest extends  AbstractModel {
         this.SmsSdkAppid = null;
 
         /**
-         * 短信签名内容，使用 UTF-8 编码，必须填写已审核通过的签名，签名信息可登录 [短信控制台](https://console.cloud.tencent.com/sms/smslist)  查看。
+         * 短信签名内容，使用 UTF-8 编码，必须填写已审核通过的签名，签名信息可登录 [短信控制台](https://console.cloud.tencent.com/sms/smslist)  查看。注：国内短信为必填参数。
          * @type {string || null}
          */
         this.Sign = null;
@@ -591,48 +951,30 @@ class SendSmsRequest extends  AbstractModel {
 }
 
 /**
- * 发送短信状态
+ * 发送数据统计响应包体
  * @class
  */
-class SendStatus extends  AbstractModel {
+class SendStatusStatistics extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 发送流水号。
-         * @type {string || null}
-         */
-        this.SerialNo = null;
-
-        /**
-         * 手机号码,e.164标准，+[国家或地区码][手机号] ，示例如：+8613711112222， 其中前面有一个+号 ，86为国家码，13711112222为手机号。
-         * @type {string || null}
-         */
-        this.PhoneNumber = null;
-
-        /**
-         * 计费条数，计费规则请查询 [计费策略](https://cloud.tencent.com/document/product/382/36135)。
+         * 短信计费条数统计，例如提交成功量为100条，其中有20条是长短信（长度为80字）被拆分成2条，则计费条数为： ```80 * 1 + 20 * 2 = 120``` 条。
          * @type {number || null}
          */
-        this.Fee = null;
+        this.FeeCount = null;
 
         /**
-         * 用户Session内容。
-         * @type {string || null}
+         * 短信提交量统计。
+         * @type {number || null}
          */
-        this.SessionContext = null;
+        this.RequestCount = null;
 
         /**
-         * 短信请求错误码，具体含义请参考错误码。
-         * @type {string || null}
+         * 短信提交成功量统计。
+         * @type {number || null}
          */
-        this.Code = null;
-
-        /**
-         * 短信请求错误码描述。
-         * @type {string || null}
-         */
-        this.Message = null;
+        this.RequestSuccessCount = null;
 
     }
 
@@ -643,12 +985,248 @@ class SendStatus extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.SerialNo = 'SerialNo' in params ? params.SerialNo : null;
-        this.PhoneNumber = 'PhoneNumber' in params ? params.PhoneNumber : null;
-        this.Fee = 'Fee' in params ? params.Fee : null;
-        this.SessionContext = 'SessionContext' in params ? params.SessionContext : null;
-        this.Code = 'Code' in params ? params.Code : null;
-        this.Message = 'Message' in params ? params.Message : null;
+        this.FeeCount = 'FeeCount' in params ? params.FeeCount : null;
+        this.RequestCount = 'RequestCount' in params ? params.RequestCount : null;
+        this.RequestSuccessCount = 'RequestSuccessCount' in params ? params.RequestSuccessCount : null;
+
+    }
+}
+
+/**
+ * CallbackStatusStatistics请求参数结构体
+ * @class
+ */
+class CallbackStatusStatisticsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 开始时间，yyyymmddhh 需要拉取的起始时间，精确到小时。
+         * @type {number || null}
+         */
+        this.StartDateTime = null;
+
+        /**
+         * 结束时间，yyyymmddhh 需要拉取的截止时间，精确到小时。
+注：EndDataTime 必须大于 StartDateTime。
+         * @type {number || null}
+         */
+        this.EndDataTime = null;
+
+        /**
+         * 短信SdkAppid在 [短信控制台](https://console.cloud.tencent.com/sms/smslist) 添加应用后生成的实际SdkAppid，示例如1400006666。
+         * @type {string || null}
+         */
+        this.SmsSdkAppid = null;
+
+        /**
+         * 最大上限。
+注：目前固定设置为0。
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 偏移量。
+注：目前固定设置为0。
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.StartDateTime = 'StartDateTime' in params ? params.StartDateTime : null;
+        this.EndDataTime = 'EndDataTime' in params ? params.EndDataTime : null;
+        this.SmsSdkAppid = 'SmsSdkAppid' in params ? params.SmsSdkAppid : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+
+    }
+}
+
+/**
+ * 删除模板响应
+ * @class
+ */
+class DeleteTemplateStatus extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 删除状态信息。
+         * @type {string || null}
+         */
+        this.DeleteStatus = null;
+
+        /**
+         * 删除时间，UNIX 时间戳（单位：秒）。
+         * @type {number || null}
+         */
+        this.DeleteTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DeleteStatus = 'DeleteStatus' in params ? params.DeleteStatus : null;
+        this.DeleteTime = 'DeleteTime' in params ? params.DeleteTime : null;
+
+    }
+}
+
+/**
+ * ModifySmsSign请求参数结构体
+ * @class
+ */
+class ModifySmsSignRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 待修改的签名Id。
+         * @type {number || null}
+         */
+        this.SignId = null;
+
+        /**
+         * 签名名称。
+         * @type {string || null}
+         */
+        this.SignName = null;
+
+        /**
+         * 签名类型。其中每种类型后面标注了其可选的 DocumentType（证明类型）：
+0：公司（0，1，2，3）。
+1：APP（0，1，2，3，4） 。
+2：网站（0，1，2，3，5）。
+3：公众号或者小程序（0，1，2，3，6）。
+4：商标（7）。
+5：政府/机关事业单位/其他机构（2，3）。
+注：必须按照对应关系选择证明类型，否则会审核失败。
+         * @type {number || null}
+         */
+        this.SignType = null;
+
+        /**
+         * 证明类型。其中：
+0：三证合一。
+1：企业营业执照。
+2：组织机构代码证书。
+3：社会信用代码证书。
+4：应用后台管理截图(个人开发APP)。
+5：网站备案后台截图(个人开发网站)。
+6：小程序设置页面截图(个人认证小程序)。
+7：商标注册书。
+         * @type {number || null}
+         */
+        this.DocumentType = null;
+
+        /**
+         * 是否国际短信。其中：
+0：表示国内短信。
+1：表示海外短信。
+         * @type {number || null}
+         */
+        this.International = null;
+
+        /**
+         * 签名用途。其中：
+0：自用。
+1：他用。
+         * @type {number || null}
+         */
+        this.UsedMethod = null;
+
+        /**
+         * 签名对应的资质证明图片需先进行 base64 编码格式转换，将转换后的字符串去掉前缀`data:image/jpeg;base64,`再赋值给该参数。
+         * @type {string || null}
+         */
+        this.ProofImage = null;
+
+        /**
+         * 委托授权证明。选择 UsedMethod 为他用之后需要提交委托的授权证明。
+图片需先进行 base64 编码格式转换，将转换后的字符串去掉前缀`data:image/jpeg;base64,`再赋值给该参数。
+注：只有 UsedMethod 在选择为 1（他用）时，这个字段才会生效。
+         * @type {string || null}
+         */
+        this.CommissionImage = null;
+
+        /**
+         * 签名的申请备注。
+         * @type {string || null}
+         */
+        this.Remark = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SignId = 'SignId' in params ? params.SignId : null;
+        this.SignName = 'SignName' in params ? params.SignName : null;
+        this.SignType = 'SignType' in params ? params.SignType : null;
+        this.DocumentType = 'DocumentType' in params ? params.DocumentType : null;
+        this.International = 'International' in params ? params.International : null;
+        this.UsedMethod = 'UsedMethod' in params ? params.UsedMethod : null;
+        this.ProofImage = 'ProofImage' in params ? params.ProofImage : null;
+        this.CommissionImage = 'CommissionImage' in params ? params.CommissionImage : null;
+        this.Remark = 'Remark' in params ? params.Remark : null;
+
+    }
+}
+
+/**
+ * AddSmsTemplate返回参数结构体
+ * @class
+ */
+class AddSmsTemplateResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 添加短信模板响应包体
+         * @type {AddTemplateStatus || null}
+         */
+        this.AddTemplateStatus = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.AddTemplateStatus) {
+            let obj = new AddTemplateStatus();
+            obj.deserialize(params.AddTemplateStatus)
+            this.AddTemplateStatus = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -726,6 +1304,46 @@ class PullSmsSendStatus extends  AbstractModel {
         this.SerialNo = 'SerialNo' in params ? params.SerialNo : null;
         this.ReportStatus = 'ReportStatus' in params ? params.ReportStatus : null;
         this.Description = 'Description' in params ? params.Description : null;
+
+    }
+}
+
+/**
+ * ModifySmsSign返回参数结构体
+ * @class
+ */
+class ModifySmsSignResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 修改签名响应
+         * @type {ModifySignStatus || null}
+         */
+        this.ModifySignStatus = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.ModifySignStatus) {
+            let obj = new ModifySignStatus();
+            obj.deserialize(params.ModifySignStatus)
+            this.ModifySignStatus = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -874,6 +1492,34 @@ class SendStatusStatisticsRequest extends  AbstractModel {
 }
 
 /**
+ * DeleteSmsTemplate请求参数结构体
+ * @class
+ */
+class DeleteSmsTemplateRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 待删除的模板 ID。
+         * @type {number || null}
+         */
+        this.TemplateId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TemplateId = 'TemplateId' in params ? params.TemplateId : null;
+
+    }
+}
+
+/**
  * PullSmsReplyStatusByPhoneNumber返回参数结构体
  * @class
  */
@@ -917,45 +1563,48 @@ class PullSmsReplyStatusByPhoneNumberResponse extends  AbstractModel {
 }
 
 /**
- * CallbackStatusStatistics请求参数结构体
+ * 发送短信状态
  * @class
  */
-class CallbackStatusStatisticsRequest extends  AbstractModel {
+class SendStatus extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 开始时间，yyyymmddhh 需要拉取的起始时间，精确到小时。
-         * @type {number || null}
-         */
-        this.StartDateTime = null;
-
-        /**
-         * 结束时间，yyyymmddhh 需要拉取的截止时间，精确到小时。
-注：EndDataTime 必须大于 StartDateTime。
-         * @type {number || null}
-         */
-        this.EndDataTime = null;
-
-        /**
-         * 短信SdkAppid在 [短信控制台](https://console.cloud.tencent.com/sms/smslist) 添加应用后生成的实际SdkAppid，示例如1400006666。
+         * 发送流水号。
          * @type {string || null}
          */
-        this.SmsSdkAppid = null;
+        this.SerialNo = null;
 
         /**
-         * 最大上限。
-注：目前固定设置为0。
-         * @type {number || null}
+         * 手机号码,e.164标准，+[国家或地区码][手机号] ，示例如：+8613711112222， 其中前面有一个+号 ，86为国家码，13711112222为手机号。
+         * @type {string || null}
          */
-        this.Limit = null;
+        this.PhoneNumber = null;
 
         /**
-         * 偏移量。
-注：目前固定设置为0。
+         * 计费条数，计费规则请查询 [计费策略](https://cloud.tencent.com/document/product/382/36135)。
          * @type {number || null}
          */
-        this.Offset = null;
+        this.Fee = null;
+
+        /**
+         * 用户Session内容。
+         * @type {string || null}
+         */
+        this.SessionContext = null;
+
+        /**
+         * 短信请求错误码，具体含义请参考错误码。
+         * @type {string || null}
+         */
+        this.Code = null;
+
+        /**
+         * 短信请求错误码描述。
+         * @type {string || null}
+         */
+        this.Message = null;
 
     }
 
@@ -966,11 +1615,120 @@ class CallbackStatusStatisticsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.StartDateTime = 'StartDateTime' in params ? params.StartDateTime : null;
-        this.EndDataTime = 'EndDataTime' in params ? params.EndDataTime : null;
-        this.SmsSdkAppid = 'SmsSdkAppid' in params ? params.SmsSdkAppid : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.SerialNo = 'SerialNo' in params ? params.SerialNo : null;
+        this.PhoneNumber = 'PhoneNumber' in params ? params.PhoneNumber : null;
+        this.Fee = 'Fee' in params ? params.Fee : null;
+        this.SessionContext = 'SessionContext' in params ? params.SessionContext : null;
+        this.Code = 'Code' in params ? params.Code : null;
+        this.Message = 'Message' in params ? params.Message : null;
+
+    }
+}
+
+/**
+ * DeleteSmsSign返回参数结构体
+ * @class
+ */
+class DeleteSmsSignResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 删除签名响应
+         * @type {DeleteSignStatus || null}
+         */
+        this.DeleteSignStatus = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.DeleteSignStatus) {
+            let obj = new DeleteSignStatus();
+            obj.deserialize(params.DeleteSignStatus)
+            this.DeleteSignStatus = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * AddSmsSign返回参数结构体
+ * @class
+ */
+class AddSmsSignResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 添加签名响应
+         * @type {AddSignStatus || null}
+         */
+        this.AddSignStatus = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.AddSignStatus) {
+            let obj = new AddSignStatus();
+            obj.deserialize(params.AddSignStatus)
+            this.AddSignStatus = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DeleteSmsSign请求参数结构体
+ * @class
+ */
+class DeleteSmsSignRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 待删除的签名 ID。
+         * @type {number || null}
+         */
+        this.SignId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SignId = 'SignId' in params ? params.SignId : null;
 
     }
 }
@@ -1033,30 +1791,24 @@ class PullSmsReplyStatusByPhoneNumberRequest extends  AbstractModel {
 }
 
 /**
- * 发送数据统计响应包体
+ * 添加签名响应 
  * @class
  */
-class SendStatusStatistics extends  AbstractModel {
+class AddSignStatus extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 短信计费条数统计，例如提交成功量为100条，其中有20条是长短信（长度为80字）被拆分成2条，则计费条数为： ```80 * 1 + 20 * 2 = 120``` 条。
+         * 签名Id。
          * @type {number || null}
          */
-        this.FeeCount = null;
+        this.SignId = null;
 
         /**
-         * 短信提交量统计。
+         * 签名申请Id。
          * @type {number || null}
          */
-        this.RequestCount = null;
-
-        /**
-         * 短信提交成功量统计。
-         * @type {number || null}
-         */
-        this.RequestSuccessCount = null;
+        this.SignApplyId = null;
 
     }
 
@@ -1067,9 +1819,36 @@ class SendStatusStatistics extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.FeeCount = 'FeeCount' in params ? params.FeeCount : null;
-        this.RequestCount = 'RequestCount' in params ? params.RequestCount : null;
-        this.RequestSuccessCount = 'RequestSuccessCount' in params ? params.RequestSuccessCount : null;
+        this.SignId = 'SignId' in params ? params.SignId : null;
+        this.SignApplyId = 'SignApplyId' in params ? params.SignApplyId : null;
+
+    }
+}
+
+/**
+ * 修改模板参数响应 
+ * @class
+ */
+class ModifyTemplateStatus extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 模板参数
+         * @type {number || null}
+         */
+        this.TemplateId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TemplateId = 'TemplateId' in params ? params.TemplateId : null;
 
     }
 }
@@ -1161,6 +1940,41 @@ class SmsPackagesStatisticsResponse extends  AbstractModel {
 }
 
 /**
+ * 删除签名响应
+ * @class
+ */
+class DeleteSignStatus extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 删除状态信息。
+         * @type {string || null}
+         */
+        this.DeleteStatus = null;
+
+        /**
+         * 删除时间，UNIX 时间戳（单位：秒）。
+         * @type {number || null}
+         */
+        this.DeleteTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DeleteStatus = 'DeleteStatus' in params ? params.DeleteStatus : null;
+        this.DeleteTime = 'DeleteTime' in params ? params.DeleteTime : null;
+
+    }
+}
+
+/**
  * PullSmsReplyStatus返回参数结构体
  * @class
  */
@@ -1205,26 +2019,44 @@ class PullSmsReplyStatusResponse extends  AbstractModel {
 
 module.exports = {
     PullSmsReplyStatusRequest: PullSmsReplyStatusRequest,
+    DeleteSmsTemplateResponse: DeleteSmsTemplateResponse,
+    ModifySmsTemplateResponse: ModifySmsTemplateResponse,
+    AddSmsSignRequest: AddSmsSignRequest,
+    AddTemplateStatus: AddTemplateStatus,
     SmsPackagesStatisticsRequest: SmsPackagesStatisticsRequest,
     PullSmsSendStatusByPhoneNumberRequest: PullSmsSendStatusByPhoneNumberRequest,
+    AddSmsTemplateRequest: AddSmsTemplateRequest,
+    ModifySmsTemplateRequest: ModifySmsTemplateRequest,
     CallbackStatusStatisticsResponse: CallbackStatusStatisticsResponse,
     PullSmsSendStatusRequest: PullSmsSendStatusRequest,
     SmsPackagesStatistics: SmsPackagesStatistics,
     PullSmsSendStatusByPhoneNumberResponse: PullSmsSendStatusByPhoneNumberResponse,
+    ModifySignStatus: ModifySignStatus,
     PullSmsReplyStatus: PullSmsReplyStatus,
     SendSmsResponse: SendSmsResponse,
     SendStatusStatisticsResponse: SendStatusStatisticsResponse,
     SendSmsRequest: SendSmsRequest,
-    SendStatus: SendStatus,
+    SendStatusStatistics: SendStatusStatistics,
+    CallbackStatusStatisticsRequest: CallbackStatusStatisticsRequest,
+    DeleteTemplateStatus: DeleteTemplateStatus,
+    ModifySmsSignRequest: ModifySmsSignRequest,
+    AddSmsTemplateResponse: AddSmsTemplateResponse,
     PullSmsSendStatus: PullSmsSendStatus,
+    ModifySmsSignResponse: ModifySmsSignResponse,
     CallbackStatusStatistics: CallbackStatusStatistics,
     SendStatusStatisticsRequest: SendStatusStatisticsRequest,
+    DeleteSmsTemplateRequest: DeleteSmsTemplateRequest,
     PullSmsReplyStatusByPhoneNumberResponse: PullSmsReplyStatusByPhoneNumberResponse,
-    CallbackStatusStatisticsRequest: CallbackStatusStatisticsRequest,
+    SendStatus: SendStatus,
+    DeleteSmsSignResponse: DeleteSmsSignResponse,
+    AddSmsSignResponse: AddSmsSignResponse,
+    DeleteSmsSignRequest: DeleteSmsSignRequest,
     PullSmsReplyStatusByPhoneNumberRequest: PullSmsReplyStatusByPhoneNumberRequest,
-    SendStatusStatistics: SendStatusStatistics,
+    AddSignStatus: AddSignStatus,
+    ModifyTemplateStatus: ModifyTemplateStatus,
     PullSmsSendStatusResponse: PullSmsSendStatusResponse,
     SmsPackagesStatisticsResponse: SmsPackagesStatisticsResponse,
+    DeleteSignStatus: DeleteSignStatus,
     PullSmsReplyStatusResponse: PullSmsReplyStatusResponse,
 
 }

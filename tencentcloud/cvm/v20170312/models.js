@@ -2813,7 +2813,7 @@ class Placement extends  AbstractModel {
         this.ProjectId = null;
 
         /**
-         * 实例所属的专用宿主机ID列表。如果您有购买专用宿主机并且指定了该参数，则您购买的实例就会随机的部署在这些专用宿主机上。
+         * 实例所属的专用宿主机ID列表，仅用于入参。如果您有购买专用宿主机并且指定了该参数，则您购买的实例就会随机的部署在这些专用宿主机上。
          * @type {Array.<string> || null}
          */
         this.HostIds = null;
@@ -2823,6 +2823,12 @@ class Placement extends  AbstractModel {
          * @type {Array.<string> || null}
          */
         this.HostIps = null;
+
+        /**
+         * 实例所属的专用宿主机ID，仅用于出参。
+         * @type {string || null}
+         */
+        this.HostId = null;
 
     }
 
@@ -2837,6 +2843,7 @@ class Placement extends  AbstractModel {
         this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
         this.HostIds = 'HostIds' in params ? params.HostIds : null;
         this.HostIps = 'HostIps' in params ? params.HostIps : null;
+        this.HostId = 'HostId' in params ? params.HostId : null;
 
     }
 }
@@ -3867,6 +3874,17 @@ class DataDisk extends  AbstractModel {
          */
         this.SnapshotId = null;
 
+        /**
+         * 数据盘是否随子机销毁。取值范围：
+<li>TRUE：加密
+<li>FALSE：不加密<br>
+默认取值：FALSE<br>
+该参数目前仅用于 `RunInstances` 接口。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.Encrypt = null;
+
     }
 
     /**
@@ -3881,6 +3899,7 @@ class DataDisk extends  AbstractModel {
         this.DiskId = 'DiskId' in params ? params.DiskId : null;
         this.DeleteWithInstance = 'DeleteWithInstance' in params ? params.DeleteWithInstance : null;
         this.SnapshotId = 'SnapshotId' in params ? params.SnapshotId : null;
+        this.Encrypt = 'Encrypt' in params ? params.Encrypt : null;
 
     }
 }

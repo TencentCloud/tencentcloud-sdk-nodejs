@@ -395,6 +395,34 @@ class DescribeLyricResponse extends  AbstractModel {
 }
 
 /**
+ * ReportData返回参数结构体
+ * @class
+ */
+class ReportDataResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeItems请求参数结构体
  * @class
  */
@@ -415,13 +443,15 @@ class DescribeItemsRequest extends  AbstractModel {
         this.Limit = null;
 
         /**
-         * （电台/歌单）ID，CategoryId和CategoryCode两个必传1个
+         * （电台/歌单）ID，CategoryId和CategoryCode两个必传1个，可以从【获取分类内容（Station）列表接口】中获取。
+链接地址：https://cloud.tencent.com/document/product/1155/40109
          * @type {string || null}
          */
         this.CategoryId = null;
 
         /**
-         * （电台/歌单）代码，CategoryId和CategoryCode两个必传1个
+         * （电台/歌单）ID，CategoryId和CategoryCode两个必传1个，可以从【获取分类内容（Station）列表接口】中获取。
+链接地址：https://cloud.tencent.com/document/product/1155/40109
          * @type {string || null}
          */
         this.CategoryCode = null;
@@ -766,6 +796,46 @@ class DescribeStationsResponse extends  AbstractModel {
 }
 
 /**
+ * ReportData请求参数结构体
+ * @class
+ */
+class ReportDataRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 上报数据
+注:reportData为客户端压缩后的上报数据进行16进制转换的字符串数据
+压缩说明：
+a) 上报的json格式字符串通过流的转换（ByteArrayInputStream, java.util.zip.GZIPOutputStream），获取到压缩后的字节数组。
+b) 将压缩后的字节数组转成16进制字符串。
+
+reportData由两部分数据组成：
+1）report_type（上报类型）
+2）data（歌曲上报数据）
+不同的report_type对应的data数据结构不一样。
+
+详细说明请参考文档reportdata.docx：
+https://github.com/ame-demo/doc
+         * @type {string || null}
+         */
+        this.ReportData = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ReportData = 'ReportData' in params ? params.ReportData : null;
+
+    }
+}
+
+/**
  * DescribeMusic请求参数结构体
  * @class
  */
@@ -824,6 +894,7 @@ module.exports = {
     Music: Music,
     Artist: Artist,
     DescribeLyricResponse: DescribeLyricResponse,
+    ReportDataResponse: ReportDataResponse,
     DescribeItemsRequest: DescribeItemsRequest,
     DescribeStationsRequest: DescribeStationsRequest,
     Item: Item,
@@ -831,6 +902,7 @@ module.exports = {
     Lyric: Lyric,
     DescribeLyricRequest: DescribeLyricRequest,
     DescribeStationsResponse: DescribeStationsResponse,
+    ReportDataRequest: ReportDataRequest,
     DescribeMusicRequest: DescribeMusicRequest,
 
 }

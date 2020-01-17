@@ -25,7 +25,7 @@ class GetUserResponse extends  AbstractModel {
         super();
 
         /**
-         * 子用户用户 ID
+         * 子用户用户 UIN
          * @type {number || null}
          */
         this.Uin = null;
@@ -223,7 +223,7 @@ class CreatePolicyResponse extends  AbstractModel {
         super();
 
         /**
-         * 新增策略id
+         * 新增策略ID
          * @type {number || null}
          */
         this.PolicyId = null;
@@ -293,7 +293,7 @@ class ListAttachedGroupPoliciesRequest extends  AbstractModel {
         super();
 
         /**
-         * 用户组 id
+         * 用户组ID
          * @type {number || null}
          */
         this.TargetGroupId = null;
@@ -996,6 +996,9 @@ addTime：策略创建时间
 type：1 表示自定义策略，2 表示预设策略 
 description：策略描述 
 createMode：1 表示按业务权限创建的策略，其他值表示可以查看策略语法和通过策略语法更新策略
+Attachments: 关联的用户数
+ServiceType: 策略关联的产品
+IsAttached: 当需要查询标记实体是否已经关联策略时不为null。0表示未关联策略，1表示已关联策略
          * @type {Array.<StrategyInfo> || null}
          */
         this.List = null;
@@ -1070,6 +1073,12 @@ class OffsiteFlag extends  AbstractModel {
          */
         this.NotifyWechat = null;
 
+        /**
+         * 提示
+         * @type {number || null}
+         */
+        this.Tips = null;
+
     }
 
     /**
@@ -1083,6 +1092,7 @@ class OffsiteFlag extends  AbstractModel {
         this.NotifyPhone = 'NotifyPhone' in params ? params.NotifyPhone : null;
         this.NotifyEmail = 'NotifyEmail' in params ? params.NotifyEmail : null;
         this.NotifyWechat = 'NotifyWechat' in params ? params.NotifyWechat : null;
+        this.Tips = 'Tips' in params ? params.Tips : null;
 
     }
 }
@@ -1214,6 +1224,13 @@ class RoleInfo extends  AbstractModel {
          */
         this.ConsoleLogin = null;
 
+        /**
+         * 角色类型，取user或system
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.RoleType = null;
+
     }
 
     /**
@@ -1230,6 +1247,7 @@ class RoleInfo extends  AbstractModel {
         this.AddTime = 'AddTime' in params ? params.AddTime : null;
         this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
         this.ConsoleLogin = 'ConsoleLogin' in params ? params.ConsoleLogin : null;
+        this.RoleType = 'RoleType' in params ? params.RoleType : null;
 
     }
 }
@@ -1448,6 +1466,13 @@ class StrategyInfo extends  AbstractModel {
          */
         this.IsAttached = null;
 
+        /**
+         * 是否已下线
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Deactived = null;
+
     }
 
     /**
@@ -1466,6 +1491,7 @@ class StrategyInfo extends  AbstractModel {
         this.Attachments = 'Attachments' in params ? params.Attachments : null;
         this.ServiceType = 'ServiceType' in params ? params.ServiceType : null;
         this.IsAttached = 'IsAttached' in params ? params.IsAttached : null;
+        this.Deactived = 'Deactived' in params ? params.Deactived : null;
 
     }
 }
@@ -1580,7 +1606,7 @@ class AddUserRequest extends  AbstractModel {
         this.UseApi = null;
 
         /**
-         * 子用户控制台登录密码，若未进行密码规则设置则默认密码规则为8位以上同时包含大写小字母、数字和特殊字符。只有可以登录控制台时才有效，如果传空并且上面指定允许登录控制台，则自动生成随机密码，随机密码规则为32位包含大写小字母、数字和特殊字符。
+         * 子用户控制台登录密码，若未进行密码规则设置则默认密码规则为8位以上同时包含大小写字母、数字和特殊字符。只有可以登录控制台时才有效，如果传空并且上面指定允许登录控制台，则自动生成随机密码，随机密码规则为32位包含大小写字母、数字和特殊字符。
          * @type {string || null}
          */
         this.Password = null;
@@ -2079,7 +2105,7 @@ class UpdateUserRequest extends  AbstractModel {
         this.ConsoleLogin = null;
 
         /**
-         * 子用户控制台登录密码，若未进行密码规则设置则默认密码规则为8位以上同时包含大写小字母、数字和特殊字符。只有可以登录控制台时才有效，如果传空并且上面指定允许登录控制台，则自动生成随机密码，随机密码规则为32位包含大写小字母、数字和特殊字符。
+         * 子用户控制台登录密码，若未进行密码规则设置则默认密码规则为8位以上同时包含大小写字母、数字和特殊字符。只有可以登录控制台时才有效，如果传空并且上面指定允许登录控制台，则自动生成随机密码，随机密码规则为32位包含大小写字母、数字和特殊字符。
          * @type {string || null}
          */
         this.Password = null;
@@ -2241,6 +2267,13 @@ class AttachPolicyInfo extends  AbstractModel {
          */
         this.OperateUinType = null;
 
+        /**
+         * 是否已下线
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Deactived = null;
+
     }
 
     /**
@@ -2259,6 +2292,7 @@ class AttachPolicyInfo extends  AbstractModel {
         this.OperateOwnerUin = 'OperateOwnerUin' in params ? params.OperateOwnerUin : null;
         this.OperateUin = 'OperateUin' in params ? params.OperateUin : null;
         this.OperateUinType = 'OperateUinType' in params ? params.OperateUinType : null;
+        this.Deactived = 'Deactived' in params ? params.Deactived : null;
 
     }
 }
@@ -2967,7 +3001,7 @@ class CreatePolicyRequest extends  AbstractModel {
         this.PolicyName = null;
 
         /**
-         * 策略文档
+         * 策略文档，示例：{"version":"2.0","statement":[{"action":"name/sts:AssumeRole","effect":"allow","principal":{"service":["cloudaudit.cloud.tencent.com","cls.cloud.tencent.com"]}}]}，principal用于指定角色的授权对象。获取该参数可参阅 获取角色详情（https://cloud.tencent.com/document/product/598/36221） 输出参数RoleInfo
          * @type {string || null}
          */
         this.PolicyDocument = null;
@@ -3357,6 +3391,13 @@ class AttachedPolicyOfRole extends  AbstractModel {
          */
         this.CreateMode = null;
 
+        /**
+         * 是否已下线
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Deactived = null;
+
     }
 
     /**
@@ -3371,6 +3412,7 @@ class AttachedPolicyOfRole extends  AbstractModel {
         this.AddTime = 'AddTime' in params ? params.AddTime : null;
         this.PolicyType = 'PolicyType' in params ? params.PolicyType : null;
         this.CreateMode = 'CreateMode' in params ? params.CreateMode : null;
+        this.Deactived = 'Deactived' in params ? params.Deactived : null;
 
     }
 }
@@ -3604,7 +3646,7 @@ class CreateRoleRequest extends  AbstractModel {
         this.Description = null;
 
         /**
-         * 是否允许登录
+         * 是否允许登录 1 为允许 0 为不允许
          * @type {number || null}
          */
         this.ConsoleLogin = null;
@@ -4053,7 +4095,7 @@ class UpdatePolicyRequest extends  AbstractModel {
         super();
 
         /**
-         * 策略 id
+         * 策略ID
          * @type {number || null}
          */
         this.PolicyId = null;
@@ -4071,7 +4113,7 @@ class UpdatePolicyRequest extends  AbstractModel {
         this.Description = null;
 
         /**
-         * 策略文档
+         * 策略文档，示例：{"version":"2.0","statement":[{"action":"name/sts:AssumeRole","effect":"allow","principal":{"service":["cloudaudit.cloud.tencent.com","cls.cloud.tencent.com"]}}]}，principal用于指定角色的授权对象。获取该参数可参阅 获取角色详情（https://cloud.tencent.com/document/product/598/36221） 输出参数RoleInfo
          * @type {string || null}
          */
         this.PolicyDocument = null;
