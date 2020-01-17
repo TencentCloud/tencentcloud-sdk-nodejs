@@ -281,7 +281,7 @@ class CamClient extends AbstractClient {
     }
 
     /**
-     * 设置用户的登录，敏感操作，异步登录设置
+     * 设置用户的登录保护和敏感操作校验方式
      * @param {SetFlagRequest} req
      * @param {function(string, SetFlagResponse):void} cb
      * @public

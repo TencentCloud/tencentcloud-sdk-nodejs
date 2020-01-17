@@ -8767,7 +8767,7 @@ class MediaAnimatedGraphicsItem extends  AbstractModel {
         this.Path = null;
 
         /**
-         * 转动图模板 ID，参见[转动图参数模板](https://cloud.tencent.com/document/product/266/33481#.E8.BD.AC.E5.8A.A8.E5.9B.BE.E6.A8.A1.E6.9D.BF)。
+         * 转动图模板 ID，参见[转动图参数模板](https://cloud.tencent.com/document/product/862/37042#.E9.A2.84.E7.BD.AE.E8.BD.AC.E5.8A.A8.E5.9B.BE.E6.A8.A1.E6.9D.BF)。
          * @type {number || null}
          */
         this.Definition = null;
@@ -10032,7 +10032,7 @@ class MediaTranscodeItem extends  AbstractModel {
         this.Path = null;
 
         /**
-         * 转码规格 ID，参见[转码参数模板](https://cloud.tencent.com/document/product/266/33478#.E8.BD.AC.E7.A0.81.E6.A8.A1.E6.9D.BF)。
+         * 转码规格 ID，参见[转码参数模板](https://cloud.tencent.com/document/product/862/37042)。
          * @type {number || null}
          */
         this.Definition = null;
@@ -13415,7 +13415,7 @@ class CosFileUploadTrigger extends  AbstractModel {
         this.Region = null;
 
         /**
-         * 工作流绑定的输入路径目录，如`/movie/201907/`，不填代表根目录`/`。
+         * 工作流绑定的输入路径目录，必须为绝对路径，即以 `/` 开头和结尾。如`/movie/201907/`，不填代表根目录`/`。
          * @type {string || null}
          */
         this.Dir = null;
@@ -14257,7 +14257,7 @@ class MediaImageSpriteItem extends  AbstractModel {
         this.ImagePathSet = null;
 
         /**
-         * 雪碧图子图位置与时间关系的 WebVtt 文件路径。WebVtt 文件表明了各个雪碧图小图对应的时间点，以及在在雪碧大图里的坐标位置，一般被播放器用于实现预览。
+         * 雪碧图子图位置与时间关系的 WebVtt 文件路径。WebVtt 文件表明了各个雪碧图小图对应的时间点，以及在雪碧大图里的坐标位置，一般被播放器用于实现预览。
          * @type {string || null}
          */
         this.WebVttPath = null;
@@ -16054,7 +16054,7 @@ class CreateWatermarkTemplateRequest extends  AbstractModel {
 }
 
 /**
- * 自定义转码的的规格参数。
+ * 自定义转码的规格参数。
  * @class
  */
 class RawTranscodeParameter extends  AbstractModel {
@@ -16683,7 +16683,7 @@ class VideoTemplateInfoForUpdate extends  AbstractModel {
 
         /**
          * 关键帧 I 帧之间的间隔，取值范围：0 和 [1, 100000]，单位：帧数。当填 0 时，系统将自动设置 gop 长度。
-         * @type {string || null}
+         * @type {number || null}
          */
         this.Gop = null;
 

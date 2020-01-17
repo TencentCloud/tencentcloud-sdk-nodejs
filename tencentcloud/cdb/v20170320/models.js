@@ -1978,7 +1978,7 @@ class DescribeRollbackRangeTimeRequest extends  AbstractModel {
         super();
 
         /**
-         * 实例 ID 列表，单个实例Id的格式如：cdb-c1nl9rpv。与云数据库控制台页面中显示的实例 ID 相同。
+         * 实例 ID 列表，单个实例 ID 的格式如：cdb-c1nl9rpv。与云数据库控制台页面中显示的实例 ID 相同。
          * @type {Array.<string> || null}
          */
         this.InstanceIds = null;
@@ -7424,7 +7424,7 @@ class InstanceInfo extends  AbstractModel {
         this.AutoRenew = null;
 
         /**
-         * 数据复制方式
+         * 数据复制方式。0 - 异步复制；1 - 半同步复制；2 - 强同步复制
          * @type {number || null}
          */
         this.ProtectMode = null;
@@ -7467,7 +7467,7 @@ class InstanceInfo extends  AbstractModel {
         this.DeadlineTime = null;
 
         /**
-         * 可用区部署方式
+         * 可用区部署方式。可能的值为：0 - 单可用区；1 - 多可用区
          * @type {number || null}
          */
         this.DeployMode = null;
@@ -7764,7 +7764,7 @@ class RoGroupAttr extends  AbstractModel {
         this.RoGroupName = null;
 
         /**
-         * RO 实例最大延迟阀值。单位为秒，最小值为 1。注意，RO 组必须设置了开启实例延迟剔除策略，该值才有效。
+         * RO 实例最大延迟阈值。单位为秒，最小值为 1。注意，RO 组必须设置了开启实例延迟剔除策略，该值才有效。
          * @type {number || null}
          */
         this.RoMaxDelayTime = null;
@@ -11175,6 +11175,13 @@ class DeployGroupInfo extends  AbstractModel {
          */
         this.Description = null;
 
+        /**
+         * 置放群组物理机型属性。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.DevClass = null;
+
     }
 
     /**
@@ -11191,6 +11198,7 @@ class DeployGroupInfo extends  AbstractModel {
         this.Affinity = 'Affinity' in params ? params.Affinity : null;
         this.LimitNum = 'LimitNum' in params ? params.LimitNum : null;
         this.Description = 'Description' in params ? params.Description : null;
+        this.DevClass = 'DevClass' in params ? params.DevClass : null;
 
     }
 }

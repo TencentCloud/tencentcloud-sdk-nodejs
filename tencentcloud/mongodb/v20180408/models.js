@@ -586,7 +586,7 @@ class SpecificationInfo extends  AbstractModel {
          * 售卖规格信息
          * @type {Array.<SpecItem> || null}
          */
-        this.SpecItem = null;
+        this.SpecItems = null;
 
     }
 
@@ -600,12 +600,12 @@ class SpecificationInfo extends  AbstractModel {
         this.Region = 'Region' in params ? params.Region : null;
         this.Zone = 'Zone' in params ? params.Zone : null;
 
-        if (params.SpecItem) {
-            this.SpecItem = new Array();
-            for (let z in params.SpecItem) {
+        if (params.SpecItems) {
+            this.SpecItems = new Array();
+            for (let z in params.SpecItems) {
                 let obj = new SpecItem();
-                obj.deserialize(params.SpecItem[z]);
-                this.SpecItem.push(obj);
+                obj.deserialize(params.SpecItems[z]);
+                this.SpecItems.push(obj);
             }
         }
 
@@ -848,7 +848,7 @@ class MongoDBInstanceDetail extends  AbstractModel {
         this.InstanceStatusDesc = null;
 
         /**
-         * 实例对应的物理实例id，回档并替换过的实例有不同的InstanceId和RealInstanceId，从barad获取监控数据等场景下需要用物理id获取
+         * 实例对应的物理实例ID，回档并替换过的实例有不同的InstanceId和RealInstanceId，从barad获取监控数据等场景下需要用物理id获取
          * @type {string || null}
          */
         this.RealInstanceId = null;
@@ -1781,7 +1781,7 @@ class MongodbShardInfo extends  AbstractModel {
         this.SecondaryNum = null;
 
         /**
-         * 分片物理id
+         * 分片物理ID
          * @type {string || null}
          */
         this.RealReplicaSetId = null;

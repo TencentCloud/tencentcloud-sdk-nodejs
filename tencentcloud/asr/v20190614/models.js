@@ -57,6 +57,34 @@ class CreateRecTaskResponse extends  AbstractModel {
 }
 
 /**
+ * GetAsrVocab请求参数结构体
+ * @class
+ */
+class GetAsrVocabRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 热词表ID
+         * @type {string || null}
+         */
+        this.VocabId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.VocabId = 'VocabId' in params ? params.VocabId : null;
+
+    }
+}
+
+/**
  * 录音文件识别请求的返回数据
  * @class
  */
@@ -85,18 +113,24 @@ class Task extends  AbstractModel {
 }
 
 /**
- * DescribeTaskStatus请求参数结构体
+ * CreateAsrVocab返回参数结构体
  * @class
  */
-class DescribeTaskStatusRequest extends  AbstractModel {
+class CreateAsrVocabResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 从CreateRecTask接口获取的TaskId，用于获取任务状态与结果。
-         * @type {number || null}
+         * 词表ID，可用于获取词表信息
+         * @type {string || null}
          */
-        this.TaskId = null;
+        this.VocabId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
 
     }
 
@@ -107,7 +141,8 @@ class DescribeTaskStatusRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.VocabId = 'VocabId' in params ? params.VocabId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -142,6 +177,91 @@ class SentenceRecognitionResponse extends  AbstractModel {
             return;
         }
         this.Result = 'Result' in params ? params.Result : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * GetAsrVocab返回参数结构体
+ * @class
+ */
+class GetAsrVocabResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 热词表名称
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 热词表描述
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * 热词表ID
+         * @type {string || null}
+         */
+        this.VocabId = null;
+
+        /**
+         * 词权重列表
+         * @type {Array.<HotWord> || null}
+         */
+        this.WordWeights = null;
+
+        /**
+         * 词表创建时间
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * 词表更新时间
+         * @type {string || null}
+         */
+        this.UpdateTime = null;
+
+        /**
+         * 热词表状态，1为默认状态即在识别时默认加载该热词表进行识别，0为初始状态
+         * @type {number || null}
+         */
+        this.State = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.VocabId = 'VocabId' in params ? params.VocabId : null;
+
+        if (params.WordWeights) {
+            this.WordWeights = new Array();
+            for (let z in params.WordWeights) {
+                let obj = new HotWord();
+                obj.deserialize(params.WordWeights[z]);
+                this.WordWeights.push(obj);
+            }
+        }
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.State = 'State' in params ? params.State : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -204,6 +324,132 @@ class TaskStatus extends  AbstractModel {
 }
 
 /**
+ * DeleteAsrVocab请求参数结构体
+ * @class
+ */
+class DeleteAsrVocabRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 热词表Id
+         * @type {string || null}
+         */
+        this.VocabId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.VocabId = 'VocabId' in params ? params.VocabId : null;
+
+    }
+}
+
+/**
+ * DeleteAsrVocab返回参数结构体
+ * @class
+ */
+class DeleteAsrVocabResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 热词的词和权重
+ * @class
+ */
+class HotWord extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 热词
+         * @type {string || null}
+         */
+        this.Word = null;
+
+        /**
+         * 权重
+         * @type {number || null}
+         */
+        this.Weight = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Word = 'Word' in params ? params.Word : null;
+        this.Weight = 'Weight' in params ? params.Weight : null;
+
+    }
+}
+
+/**
+ * UpdateAsrVocab返回参数结构体
+ * @class
+ */
+class UpdateAsrVocabResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 热词表ID
+         * @type {string || null}
+         */
+        this.VocabId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.VocabId = 'VocabId' in params ? params.VocabId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * CreateRecTask请求参数结构体
  * @class
  */
@@ -213,9 +459,9 @@ class CreateRecTaskRequest extends  AbstractModel {
 
         /**
          * 引擎模型类型。
-8k_0：电话 8k 中文普通话通用，可用于双声道音频的识别；
-8k_6：电话 8k 中文普通话话者分离，仅用于单声道；
-16k_0：16k 中文普通话通用；
+8k_zh：电话 8k 中文普通话通用，可用于双声道音频的识别；
+8k_zh_s：电话 8k 中文普通话话者分离，仅用于单声道；
+16k_zh：16k 中文普通话通用；
 16k_en：16k 英语；
 16k_ca：16k 粤语。
          * @type {string || null}
@@ -264,6 +510,12 @@ class CreateRecTaskRequest extends  AbstractModel {
          */
         this.DataLen = null;
 
+        /**
+         * 热词id。用于调用对应的热词表，如果在调用语音识别服务时，不进行单独的热词id设置，自动生效默认热词；如果进行了单独的热词id设置，那么将生效单独设置的热词id。
+         * @type {string || null}
+         */
+        this.HotwordId = null;
+
     }
 
     /**
@@ -281,6 +533,7 @@ class CreateRecTaskRequest extends  AbstractModel {
         this.Url = 'Url' in params ? params.Url : null;
         this.Data = 'Data' in params ? params.Data : null;
         this.DataLen = 'DataLen' in params ? params.DataLen : null;
+        this.HotwordId = 'HotwordId' in params ? params.HotwordId : null;
 
     }
 }
@@ -346,9 +599,9 @@ class SentenceRecognitionRequest extends  AbstractModel {
         this.SubServiceType = null;
 
         /**
-         * 引擎类型。
-8k：电话 8k 中文普通话通用；
-16k：16k 中文普通话通用；
+         * 引擎模型类型。
+8k_zh：电话 8k 中文普通话通用；
+16k_zh：16k 中文普通话通用；
 16k_en：16k 英语；
 16k_ca：16k 粤语。
          * @type {string || null}
@@ -391,6 +644,12 @@ class SentenceRecognitionRequest extends  AbstractModel {
          */
         this.DataLen = null;
 
+        /**
+         * 热词id。用于调用对应的热词表，如果在调用语音识别服务时，不进行单独的热词id设置，自动生效默认热词；如果进行了单独的热词id设置，那么将生效单独设置的热词id。
+         * @type {string || null}
+         */
+        this.HotwordId = null;
+
     }
 
     /**
@@ -409,18 +668,179 @@ class SentenceRecognitionRequest extends  AbstractModel {
         this.Url = 'Url' in params ? params.Url : null;
         this.Data = 'Data' in params ? params.Data : null;
         this.DataLen = 'DataLen' in params ? params.DataLen : null;
+        this.HotwordId = 'HotwordId' in params ? params.HotwordId : null;
+
+    }
+}
+
+/**
+ * DescribeTaskStatus请求参数结构体
+ * @class
+ */
+class DescribeTaskStatusRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 从CreateRecTask接口获取的TaskId，用于获取任务状态与结果。
+         * @type {number || null}
+         */
+        this.TaskId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+
+    }
+}
+
+/**
+ * CreateAsrVocab请求参数结构体
+ * @class
+ */
+class CreateAsrVocabRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 热词表名称，长度在1-255之间
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 热词表描述，长度在0-1000之间
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * 词权重数组，包含全部的热词和对应的权重。每个热词的长度不大于10，权重为[1,10]之间整数，数组长度不大于128
+         * @type {Array.<HotWord> || null}
+         */
+        this.WordWeights = null;
+
+        /**
+         * 词权重文件（纯文本文件）的二进制base64编码，以行分隔，每行的格式为word|weight，即以英文符号|为分割，左边为词，右边为权重，如：你好|5。
+当用户传此参数（参数长度大于0），即以此参数解析词权重，WordWeights会被忽略
+         * @type {string || null}
+         */
+        this.WordWeightStr = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Description = 'Description' in params ? params.Description : null;
+
+        if (params.WordWeights) {
+            this.WordWeights = new Array();
+            for (let z in params.WordWeights) {
+                let obj = new HotWord();
+                obj.deserialize(params.WordWeights[z]);
+                this.WordWeights.push(obj);
+            }
+        }
+        this.WordWeightStr = 'WordWeightStr' in params ? params.WordWeightStr : null;
+
+    }
+}
+
+/**
+ * UpdateAsrVocab请求参数结构体
+ * @class
+ */
+class UpdateAsrVocabRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 热词表ID
+         * @type {string || null}
+         */
+        this.VocabId = null;
+
+        /**
+         * 热词表名称
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 词权重数组，包含全部的热词和对应的权重。每个热词的长度不大于10，权重为[1,10]之间整数，数组长度不大于128
+         * @type {Array.<HotWord> || null}
+         */
+        this.WordWeights = null;
+
+        /**
+         * 词权重文件（纯文本文件）的二进制base64编码，以行分隔，每行的格式为word|weight，即以英文符号|为分割，左边为词，右边为权重，如：你好|5。
+当用户传此参数（参数长度大于0），即以此参数解析词权重，WordWeights会被忽略
+         * @type {string || null}
+         */
+        this.WordWeightStr = null;
+
+        /**
+         * 热词表描述
+         * @type {string || null}
+         */
+        this.Description = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.VocabId = 'VocabId' in params ? params.VocabId : null;
+        this.Name = 'Name' in params ? params.Name : null;
+
+        if (params.WordWeights) {
+            this.WordWeights = new Array();
+            for (let z in params.WordWeights) {
+                let obj = new HotWord();
+                obj.deserialize(params.WordWeights[z]);
+                this.WordWeights.push(obj);
+            }
+        }
+        this.WordWeightStr = 'WordWeightStr' in params ? params.WordWeightStr : null;
+        this.Description = 'Description' in params ? params.Description : null;
 
     }
 }
 
 module.exports = {
     CreateRecTaskResponse: CreateRecTaskResponse,
+    GetAsrVocabRequest: GetAsrVocabRequest,
     Task: Task,
-    DescribeTaskStatusRequest: DescribeTaskStatusRequest,
+    CreateAsrVocabResponse: CreateAsrVocabResponse,
     SentenceRecognitionResponse: SentenceRecognitionResponse,
+    GetAsrVocabResponse: GetAsrVocabResponse,
     TaskStatus: TaskStatus,
+    DeleteAsrVocabRequest: DeleteAsrVocabRequest,
+    DeleteAsrVocabResponse: DeleteAsrVocabResponse,
+    HotWord: HotWord,
+    UpdateAsrVocabResponse: UpdateAsrVocabResponse,
     CreateRecTaskRequest: CreateRecTaskRequest,
     DescribeTaskStatusResponse: DescribeTaskStatusResponse,
     SentenceRecognitionRequest: SentenceRecognitionRequest,
+    DescribeTaskStatusRequest: DescribeTaskStatusRequest,
+    CreateAsrVocabRequest: CreateAsrVocabRequest,
+    UpdateAsrVocabRequest: UpdateAsrVocabRequest,
 
 }
