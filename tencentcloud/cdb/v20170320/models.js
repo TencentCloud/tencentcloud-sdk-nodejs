@@ -1998,6 +1998,34 @@ class DescribeRollbackRangeTimeRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeBackupOverview请求参数结构体
+ * @class
+ */
+class DescribeBackupOverviewRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 需要查询的云数据库产品类型，目前仅支持 "mysql"。
+         * @type {string || null}
+         */
+        this.Product = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Product = 'Product' in params ? params.Product : null;
+
+    }
+}
+
+/**
  * DescribeBackups请求参数结构体
  * @class
  */
@@ -2495,6 +2523,76 @@ class RoGroup extends  AbstractModel {
 }
 
 /**
+ * DescribeDataBackupOverview返回参数结构体
+ * @class
+ */
+class DescribeDataBackupOverviewResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 当前地域的数据备份总容量（包含自动备份和手动备份，单位为字节）。
+         * @type {number || null}
+         */
+        this.DataBackupVolume = null;
+
+        /**
+         * 当前地域的数据备份总个数。
+         * @type {number || null}
+         */
+        this.DataBackupCount = null;
+
+        /**
+         * 当前地域的自动备份总容量。
+         * @type {number || null}
+         */
+        this.AutoBackupVolume = null;
+
+        /**
+         * 当前地域的自动备份总个数。
+         * @type {number || null}
+         */
+        this.AutoBackupCount = null;
+
+        /**
+         * 当前地域的手动备份总容量。
+         * @type {number || null}
+         */
+        this.ManualBackupVolume = null;
+
+        /**
+         * 当前地域的手动备份总个数。
+         * @type {number || null}
+         */
+        this.ManualBackupCount = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DataBackupVolume = 'DataBackupVolume' in params ? params.DataBackupVolume : null;
+        this.DataBackupCount = 'DataBackupCount' in params ? params.DataBackupCount : null;
+        this.AutoBackupVolume = 'AutoBackupVolume' in params ? params.AutoBackupVolume : null;
+        this.AutoBackupCount = 'AutoBackupCount' in params ? params.AutoBackupCount : null;
+        this.ManualBackupVolume = 'ManualBackupVolume' in params ? params.ManualBackupVolume : null;
+        this.ManualBackupCount = 'ManualBackupCount' in params ? params.ManualBackupCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * 实例参数的详细描述
  * @class
  */
@@ -2579,24 +2677,72 @@ class ParameterDetail extends  AbstractModel {
 }
 
 /**
- * ModifyAccountDescription返回参数结构体
+ * 实例备份统计项
  * @class
  */
-class ModifyAccountDescriptionResponse extends  AbstractModel {
+class BackupSummaryItem extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 异步任务的请求 ID，可使用此 ID 查询异步任务的执行结果。
+         * 实例ID。
          * @type {string || null}
          */
-        this.AsyncRequestId = null;
+        this.InstanceId = null;
 
         /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
+         * 该实例自动数据备份的个数。
+         * @type {number || null}
          */
-        this.RequestId = null;
+        this.AutoBackupCount = null;
+
+        /**
+         * 该实例自动数据备份的容量。
+         * @type {number || null}
+         */
+        this.AutoBackupVolume = null;
+
+        /**
+         * 该实例手动数据备份的个数。
+         * @type {number || null}
+         */
+        this.ManualBackupCount = null;
+
+        /**
+         * 该实例手动数据备份的容量。
+         * @type {number || null}
+         */
+        this.ManualBackupVolume = null;
+
+        /**
+         * 该实例总的数据备份（包含自动备份和手动备份）个数。
+         * @type {number || null}
+         */
+        this.DataBackupCount = null;
+
+        /**
+         * 该实例总的数据备份容量。
+         * @type {number || null}
+         */
+        this.DataBackupVolume = null;
+
+        /**
+         * 该实例日志备份的个数。
+         * @type {number || null}
+         */
+        this.BinlogBackupCount = null;
+
+        /**
+         * 该实例日志备份的容量。
+         * @type {number || null}
+         */
+        this.BinlogBackupVolume = null;
+
+        /**
+         * 该实例的总备份（包含数据备份和日志备份）占用容量。
+         * @type {number || null}
+         */
+        this.BackupVolume = null;
 
     }
 
@@ -2607,8 +2753,16 @@ class ModifyAccountDescriptionResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.AsyncRequestId = 'AsyncRequestId' in params ? params.AsyncRequestId : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.AutoBackupCount = 'AutoBackupCount' in params ? params.AutoBackupCount : null;
+        this.AutoBackupVolume = 'AutoBackupVolume' in params ? params.AutoBackupVolume : null;
+        this.ManualBackupCount = 'ManualBackupCount' in params ? params.ManualBackupCount : null;
+        this.ManualBackupVolume = 'ManualBackupVolume' in params ? params.ManualBackupVolume : null;
+        this.DataBackupCount = 'DataBackupCount' in params ? params.DataBackupCount : null;
+        this.DataBackupVolume = 'DataBackupVolume' in params ? params.DataBackupVolume : null;
+        this.BinlogBackupCount = 'BinlogBackupCount' in params ? params.BinlogBackupCount : null;
+        this.BinlogBackupVolume = 'BinlogBackupVolume' in params ? params.BinlogBackupVolume : null;
+        this.BackupVolume = 'BackupVolume' in params ? params.BackupVolume : null;
 
     }
 }
@@ -3684,7 +3838,7 @@ class BackupInfo extends  AbstractModel {
         this.InternetUrl = null;
 
         /**
-         * 日志具体类型，可能的值有：logic - 逻辑冷备，physical - 物理冷备
+         * 日志具体类型。可能的值有 "logical": 逻辑冷备， "physical": 物理冷备。
          * @type {string || null}
          */
         this.Type = null;
@@ -3696,7 +3850,7 @@ class BackupInfo extends  AbstractModel {
         this.BackupId = null;
 
         /**
-         * 备份任务状态
+         * 备份任务状态。可能的值有 "SUCCESS": 备份成功， "FAILED": 备份失败， "RUNNING": 备份进行中。
          * @type {string || null}
          */
         this.Status = null;
@@ -3708,10 +3862,28 @@ class BackupInfo extends  AbstractModel {
         this.FinishTime = null;
 
         /**
-         * 备份的创建者，可能的值：SYSTEM - 系统创建，Uin - 发起者Uin值
+         * （该值将废弃，不建议使用）备份的创建者，可能的值：SYSTEM - 系统创建，Uin - 发起者Uin值。
          * @type {string || null}
          */
         this.Creator = null;
+
+        /**
+         * 备份任务的开始时间
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * 备份方法。可能的值有 "full": 全量备份， "partial": 部分备份。
+         * @type {string || null}
+         */
+        this.Method = null;
+
+        /**
+         * 备份方式。可能的值有 "manual": 手动备份， "automatic": 自动备份。
+         * @type {string || null}
+         */
+        this.Way = null;
 
     }
 
@@ -3732,6 +3904,9 @@ class BackupInfo extends  AbstractModel {
         this.Status = 'Status' in params ? params.Status : null;
         this.FinishTime = 'FinishTime' in params ? params.FinishTime : null;
         this.Creator = 'Creator' in params ? params.Creator : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.Method = 'Method' in params ? params.Method : null;
+        this.Way = 'Way' in params ? params.Way : null;
 
     }
 }
@@ -4335,54 +4510,42 @@ class ModifyDBInstanceProjectRequest extends  AbstractModel {
 }
 
 /**
- * 通用时间窗
+ * DescribeBackupSummaries请求参数结构体
  * @class
  */
-class CommonTimeWindow extends  AbstractModel {
+class DescribeBackupSummariesRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 周一的时间窗，格式如： 02:00-06:00
+         * 需要查询的云数据库产品类型，目前仅支持 "mysql"。
          * @type {string || null}
          */
-        this.Monday = null;
+        this.Product = null;
 
         /**
-         * 周二的时间窗，格式如： 02:00-06:00
-         * @type {string || null}
+         * 分页查询数据的偏移量。
+         * @type {number || null}
          */
-        this.Tuesday = null;
+        this.Offset = null;
 
         /**
-         * 周三的时间窗，格式如： 02:00-06:00
-         * @type {string || null}
+         * 分页查询数据的条目限制，默认值为20。
+         * @type {number || null}
          */
-        this.Wednesday = null;
+        this.Limit = null;
 
         /**
-         * 周四的时间窗，格式如： 02:00-06:00
+         * 指定按某一项排序，可选值包括： BackupVolume: 备份容量， DataBackupVolume: 数据备份容量， BinlogBackupVolume: 日志备份容量， AutoBackupVolume: 自动备份容量， ManualBackupVolume: 手动备份容量。
          * @type {string || null}
          */
-        this.Thursday = null;
+        this.OrderBy = null;
 
         /**
-         * 周五的时间窗，格式如： 02:00-06:00
+         * 指定排序方向，可选值包括： ASC: 正序， DESC: 逆序。
          * @type {string || null}
          */
-        this.Friday = null;
-
-        /**
-         * 周六的时间窗，格式如： 02:00-06:00
-         * @type {string || null}
-         */
-        this.Saturday = null;
-
-        /**
-         * 周日的时间窗，格式如： 02:00-06:00
-         * @type {string || null}
-         */
-        this.Sunday = null;
+        this.OrderDirection = null;
 
     }
 
@@ -4393,13 +4556,11 @@ class CommonTimeWindow extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Monday = 'Monday' in params ? params.Monday : null;
-        this.Tuesday = 'Tuesday' in params ? params.Tuesday : null;
-        this.Wednesday = 'Wednesday' in params ? params.Wednesday : null;
-        this.Thursday = 'Thursday' in params ? params.Thursday : null;
-        this.Friday = 'Friday' in params ? params.Friday : null;
-        this.Saturday = 'Saturday' in params ? params.Saturday : null;
-        this.Sunday = 'Sunday' in params ? params.Sunday : null;
+        this.Product = 'Product' in params ? params.Product : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.OrderBy = 'OrderBy' in params ? params.OrderBy : null;
+        this.OrderDirection = 'OrderDirection' in params ? params.OrderDirection : null;
 
     }
 }
@@ -4879,6 +5040,56 @@ class DescribeBackupDatabasesResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeBackupSummaries返回参数结构体
+ * @class
+ */
+class DescribeBackupSummariesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例备份统计条目。
+         * @type {Array.<BackupSummaryItem> || null}
+         */
+        this.Items = null;
+
+        /**
+         * 实例备份统计总条目数。
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Items) {
+            this.Items = new Array();
+            for (let z in params.Items) {
+                let obj = new BackupSummaryItem();
+                obj.deserialize(params.Items[z]);
+                this.Items.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeInstanceParamRecords请求参数结构体
  * @class
  */
@@ -4972,6 +5183,34 @@ class DeleteTimeWindowResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeBinlogBackupOverview请求参数结构体
+ * @class
+ */
+class DescribeBinlogBackupOverviewRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 需要查询的云数据库产品类型，目前仅支持 "mysql"。
+         * @type {string || null}
+         */
+        this.Product = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Product = 'Product' in params ? params.Product : null;
 
     }
 }
@@ -6500,6 +6739,62 @@ class UpgradeDBInstanceRequest extends  AbstractModel {
         this.WaitSwitch = 'WaitSwitch' in params ? params.WaitSwitch : null;
         this.BackupZone = 'BackupZone' in params ? params.BackupZone : null;
         this.InstanceRole = 'InstanceRole' in params ? params.InstanceRole : null;
+
+    }
+}
+
+/**
+ * DescribeBackupOverview返回参数结构体
+ * @class
+ */
+class DescribeBackupOverviewResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 用户在当前地域备份的总个数（包含数据备份和日志备份）。
+         * @type {number || null}
+         */
+        this.BackupCount = null;
+
+        /**
+         * 用户在当前地域备份的总容量
+         * @type {number || null}
+         */
+        this.BackupVolume = null;
+
+        /**
+         * 用户在当前地域备份的计费容量，即超出赠送容量的部分。
+         * @type {number || null}
+         */
+        this.BillingVolume = null;
+
+        /**
+         * 用户在当前地域获得的赠送备份容量。
+         * @type {number || null}
+         */
+        this.FreeVolume = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.BackupCount = 'BackupCount' in params ? params.BackupCount : null;
+        this.BackupVolume = 'BackupVolume' in params ? params.BackupVolume : null;
+        this.BillingVolume = 'BillingVolume' in params ? params.BillingVolume : null;
+        this.FreeVolume = 'FreeVolume' in params ? params.FreeVolume : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -8390,6 +8685,48 @@ class ZoneSellConf extends  AbstractModel {
 }
 
 /**
+ * DescribeBinlogBackupOverview返回参数结构体
+ * @class
+ */
+class DescribeBinlogBackupOverviewResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 总的日志备份容量（单位为字节）。
+         * @type {number || null}
+         */
+        this.BinlogBackupVolume = null;
+
+        /**
+         * 总的日志备份个数。
+         * @type {number || null}
+         */
+        this.BinlogBackupCount = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.BinlogBackupVolume = 'BinlogBackupVolume' in params ? params.BinlogBackupVolume : null;
+        this.BinlogBackupCount = 'BinlogBackupCount' in params ? params.BinlogBackupCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * InitDBInstances请求参数结构体
  * @class
  */
@@ -9011,6 +9348,76 @@ class ModifyRoGroupInfoResponse extends  AbstractModel {
 }
 
 /**
+ * 通用时间窗
+ * @class
+ */
+class CommonTimeWindow extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 周一的时间窗，格式如： 02:00-06:00
+         * @type {string || null}
+         */
+        this.Monday = null;
+
+        /**
+         * 周二的时间窗，格式如： 02:00-06:00
+         * @type {string || null}
+         */
+        this.Tuesday = null;
+
+        /**
+         * 周三的时间窗，格式如： 02:00-06:00
+         * @type {string || null}
+         */
+        this.Wednesday = null;
+
+        /**
+         * 周四的时间窗，格式如： 02:00-06:00
+         * @type {string || null}
+         */
+        this.Thursday = null;
+
+        /**
+         * 周五的时间窗，格式如： 02:00-06:00
+         * @type {string || null}
+         */
+        this.Friday = null;
+
+        /**
+         * 周六的时间窗，格式如： 02:00-06:00
+         * @type {string || null}
+         */
+        this.Saturday = null;
+
+        /**
+         * 周日的时间窗，格式如： 02:00-06:00
+         * @type {string || null}
+         */
+        this.Sunday = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Monday = 'Monday' in params ? params.Monday : null;
+        this.Tuesday = 'Tuesday' in params ? params.Tuesday : null;
+        this.Wednesday = 'Wednesday' in params ? params.Wednesday : null;
+        this.Thursday = 'Thursday' in params ? params.Thursday : null;
+        this.Friday = 'Friday' in params ? params.Friday : null;
+        this.Saturday = 'Saturday' in params ? params.Saturday : null;
+        this.Sunday = 'Sunday' in params ? params.Sunday : null;
+
+    }
+}
+
+/**
  * 账号详细信息
  * @class
  */
@@ -9364,6 +9771,41 @@ class DeleteDeployGroupsRequest extends  AbstractModel {
             return;
         }
         this.DeployGroupIds = 'DeployGroupIds' in params ? params.DeployGroupIds : null;
+
+    }
+}
+
+/**
+ * ModifyAccountDescription返回参数结构体
+ * @class
+ */
+class ModifyAccountDescriptionResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 异步任务的请求 ID，可使用此 ID 查询异步任务的执行结果。
+         * @type {string || null}
+         */
+        this.AsyncRequestId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AsyncRequestId = 'AsyncRequestId' in params ? params.AsyncRequestId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -9891,6 +10333,34 @@ class InitDBInstancesResponse extends  AbstractModel {
         }
         this.AsyncRequestIds = 'AsyncRequestIds' in params ? params.AsyncRequestIds : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeDataBackupOverview请求参数结构体
+ * @class
+ */
+class DescribeDataBackupOverviewRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 需要查询的云数据库产品类型，目前仅支持 "mysql"。
+         * @type {string || null}
+         */
+        this.Product = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Product = 'Product' in params ? params.Product : null;
 
     }
 }
@@ -11283,6 +11753,7 @@ module.exports = {
     DescribeTasksResponse: DescribeTasksResponse,
     DescribeParamTemplatesRequest: DescribeParamTemplatesRequest,
     DescribeRollbackRangeTimeRequest: DescribeRollbackRangeTimeRequest,
+    DescribeBackupOverviewRequest: DescribeBackupOverviewRequest,
     DescribeBackupsRequest: DescribeBackupsRequest,
     ModifyDBInstanceProjectResponse: ModifyDBInstanceProjectResponse,
     DescribeInstanceParamRecordsResponse: DescribeInstanceParamRecordsResponse,
@@ -11293,8 +11764,9 @@ module.exports = {
     DeleteParamTemplateRequest: DeleteParamTemplateRequest,
     DrInfo: DrInfo,
     RoGroup: RoGroup,
+    DescribeDataBackupOverviewResponse: DescribeDataBackupOverviewResponse,
     ParameterDetail: ParameterDetail,
-    ModifyAccountDescriptionResponse: ModifyAccountDescriptionResponse,
+    BackupSummaryItem: BackupSummaryItem,
     SwitchForUpgradeRequest: SwitchForUpgradeRequest,
     ModifyInstanceTagResponse: ModifyInstanceTagResponse,
     CreateParamTemplateResponse: CreateParamTemplateResponse,
@@ -11325,7 +11797,7 @@ module.exports = {
     ModifyInstanceParamRequest: ModifyInstanceParamRequest,
     DescribeProjectSecurityGroupsResponse: DescribeProjectSecurityGroupsResponse,
     ModifyDBInstanceProjectRequest: ModifyDBInstanceProjectRequest,
-    CommonTimeWindow: CommonTimeWindow,
+    DescribeBackupSummariesRequest: DescribeBackupSummariesRequest,
     DescribeRoGroupsRequest: DescribeRoGroupsRequest,
     DescribeDBSwitchRecordsRequest: DescribeDBSwitchRecordsRequest,
     DescribeSupportedPrivilegesRequest: DescribeSupportedPrivilegesRequest,
@@ -11338,9 +11810,11 @@ module.exports = {
     RestartDBInstancesResponse: RestartDBInstancesResponse,
     ParamTemplateInfo: ParamTemplateInfo,
     DescribeBackupDatabasesResponse: DescribeBackupDatabasesResponse,
+    DescribeBackupSummariesResponse: DescribeBackupSummariesResponse,
     DescribeInstanceParamRecordsRequest: DescribeInstanceParamRecordsRequest,
     ModifyAutoRenewFlagResponse: ModifyAutoRenewFlagResponse,
     DeleteTimeWindowResponse: DeleteTimeWindowResponse,
+    DescribeBinlogBackupOverviewRequest: DescribeBinlogBackupOverviewRequest,
     DescribeBackupsResponse: DescribeBackupsResponse,
     DescribeTimeWindowRequest: DescribeTimeWindowRequest,
     ModifyInstanceParamResponse: ModifyInstanceParamResponse,
@@ -11376,6 +11850,7 @@ module.exports = {
     VerifyRootAccountRequest: VerifyRootAccountRequest,
     BalanceRoGroupLoadRequest: BalanceRoGroupLoadRequest,
     UpgradeDBInstanceRequest: UpgradeDBInstanceRequest,
+    DescribeBackupOverviewResponse: DescribeBackupOverviewResponse,
     ColumnPrivilege: ColumnPrivilege,
     DescribeUploadedFilesRequest: DescribeUploadedFilesRequest,
     DescribeDeviceMonitorInfoRequest: DescribeDeviceMonitorInfoRequest,
@@ -11410,6 +11885,7 @@ module.exports = {
     AddTimeWindowResponse: AddTimeWindowResponse,
     DescribeRoGroupsResponse: DescribeRoGroupsResponse,
     ZoneSellConf: ZoneSellConf,
+    DescribeBinlogBackupOverviewResponse: DescribeBinlogBackupOverviewResponse,
     InitDBInstancesRequest: InitDBInstancesRequest,
     RoInstanceInfo: RoInstanceInfo,
     CreateParamTemplateRequest: CreateParamTemplateRequest,
@@ -11420,6 +11896,7 @@ module.exports = {
     Account: Account,
     CreateBackupRequest: CreateBackupRequest,
     ModifyRoGroupInfoResponse: ModifyRoGroupInfoResponse,
+    CommonTimeWindow: CommonTimeWindow,
     AccountInfo: AccountInfo,
     DescribeDBInstanceCharsetRequest: DescribeDBInstanceCharsetRequest,
     RollbackTables: RollbackTables,
@@ -11429,6 +11906,7 @@ module.exports = {
     ModifyAutoRenewFlagRequest: ModifyAutoRenewFlagRequest,
     UpgradeDBInstanceEngineVersionRequest: UpgradeDBInstanceEngineVersionRequest,
     DeleteDeployGroupsRequest: DeleteDeployGroupsRequest,
+    ModifyAccountDescriptionResponse: ModifyAccountDescriptionResponse,
     UpgradeDBInstanceResponse: UpgradeDBInstanceResponse,
     ModifyDBInstanceVipVportRequest: ModifyDBInstanceVipVportRequest,
     DescribeSlowLogsResponse: DescribeSlowLogsResponse,
@@ -11441,6 +11919,7 @@ module.exports = {
     TablePrivilege: TablePrivilege,
     SlowLogInfo: SlowLogInfo,
     InitDBInstancesResponse: InitDBInstancesResponse,
+    DescribeDataBackupOverviewRequest: DescribeDataBackupOverviewRequest,
     DescribeParamTemplateInfoResponse: DescribeParamTemplateInfoResponse,
     ParamRecord: ParamRecord,
     RestartDBInstancesRequest: RestartDBInstancesRequest,

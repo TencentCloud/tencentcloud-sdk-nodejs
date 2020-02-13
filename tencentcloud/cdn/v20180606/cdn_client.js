@@ -39,6 +39,7 @@ const DescribeDomainsResponse = models.DescribeDomainsResponse;
 const CompressionRule = models.CompressionRule;
 const Origin = models.Origin;
 const EnableCachesRequest = models.EnableCachesRequest;
+const DescribeBillingDataRequest = models.DescribeBillingDataRequest;
 const SimpleCache = models.SimpleCache;
 const TopDetailData = models.TopDetailData;
 const UpdatePayTypeResponse = models.UpdatePayTypeResponse;
@@ -99,6 +100,7 @@ const DomainLog = models.DomainLog;
 const GetDisableRecordsRequest = models.GetDisableRecordsRequest;
 const PurgeUrlsCacheResponse = models.PurgeUrlsCacheResponse;
 const ResponseHeader = models.ResponseHeader;
+const DescribeBillingDataResponse = models.DescribeBillingDataResponse;
 const DisableCachesResponse = models.DisableCachesResponse;
 const DescribeCdnIpResponse = models.DescribeCdnIpResponse;
 const DescribeCdnDataResponse = models.DescribeCdnDataResponse;
@@ -115,6 +117,7 @@ const OriginPullOptimization = models.OriginPullOptimization;
 const PushTask = models.PushTask;
 const TimestampData = models.TimestampData;
 const StartCdnDomainResponse = models.StartCdnDomainResponse;
+const ResourceBillingData = models.ResourceBillingData;
 const Sort = models.Sort;
 const DescribePurgeTasksRequest = models.DescribePurgeTasksRequest;
 const PushUrlsCacheResponse = models.PushUrlsCacheResponse;
@@ -448,6 +451,17 @@ class CdnClient extends AbstractClient {
     GetDisableRecords(req, cb) {
         let resp = new GetDisableRecordsResponse();
         this.request("GetDisableRecords", req, resp, cb);
+    }
+
+    /**
+     * DescribeBillingData 用于查询实际计费数据明细。
+     * @param {DescribeBillingDataRequest} req
+     * @param {function(string, DescribeBillingDataResponse):void} cb
+     * @public
+     */
+    DescribeBillingData(req, cb) {
+        let resp = new DescribeBillingDataResponse();
+        this.request("DescribeBillingData", req, resp, cb);
     }
 
     /**

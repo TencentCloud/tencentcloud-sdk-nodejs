@@ -17,45 +17,6 @@
 const AbstractModel = require("../../common/abstract_model");
 
 /**
- * DescribeDatabaseACL返回参数结构体
- * @class
- */
-class DescribeDatabaseACLResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 权限标签。取值范围：
-<li> READONLY：所有用户可读，仅创建者和管理员可写</li>
-<li> PRIVATE：仅创建者及管理员可读写</li>
-<li> ADMINWRITE：所有用户可读，仅管理员可写</li>
-<li> ADMINONLY：仅管理员可读写</li>
-         * @type {string || null}
-         */
-        this.AclTag = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.AclTag = 'AclTag' in params ? params.AclTag : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
  * StorageInfo 资源信息
  * @class
  */
@@ -101,6 +62,443 @@ class StorageInfo extends  AbstractModel {
         this.Bucket = 'Bucket' in params ? params.Bucket : null;
         this.CdnDomain = 'CdnDomain' in params ? params.CdnDomain : null;
         this.AppId = 'AppId' in params ? params.AppId : null;
+
+    }
+}
+
+/**
+ * IsolateMysqlInstance请求参数结构体
+ * @class
+ */
+class IsolateMysqlInstanceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 环境id
+         * @type {string || null}
+         */
+        this.EnvId = null;
+
+        /**
+         * 实例别名
+         * @type {string || null}
+         */
+        this.Alias = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.EnvId = 'EnvId' in params ? params.EnvId : null;
+        this.Alias = 'Alias' in params ? params.Alias : null;
+
+    }
+}
+
+/**
+ * 函数的信息
+ * @class
+ */
+class FunctionInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 命名空间
+         * @type {string || null}
+         */
+        this.Namespace = null;
+
+        /**
+         * 所属地域。
+当前支持ap-shanghai
+         * @type {string || null}
+         */
+        this.Region = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Namespace = 'Namespace' in params ? params.Namespace : null;
+        this.Region = 'Region' in params ? params.Region : null;
+
+    }
+}
+
+/**
+ * CreateMysqlInstance请求参数结构体
+ * @class
+ */
+class CreateMysqlInstanceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 环境名称
+         * @type {string || null}
+         */
+        this.EnvId = null;
+
+        /**
+         * 实例别名
+         * @type {string || null}
+         */
+        this.Alias = null;
+
+        /**
+         * 实例内存大小，单位：MB
+         * @type {number || null}
+         */
+        this.Memory = null;
+
+        /**
+         * 实例硬盘大小，单位：GB
+         * @type {number || null}
+         */
+        this.Volume = null;
+
+        /**
+         * MySQL 版本，值包括：5.7
+         * @type {string || null}
+         */
+        this.EngineVersion = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.EnvId = 'EnvId' in params ? params.EnvId : null;
+        this.Alias = 'Alias' in params ? params.Alias : null;
+        this.Memory = 'Memory' in params ? params.Memory : null;
+        this.Volume = 'Volume' in params ? params.Volume : null;
+        this.EngineVersion = 'EngineVersion' in params ? params.EngineVersion : null;
+
+    }
+}
+
+/**
+ * CommonServiceAPI返回参数结构体
+ * @class
+ */
+class CommonServiceAPIResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * json格式response
+         * @type {string || null}
+         */
+        this.JSONResp = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.JSONResp = 'JSONResp' in params ? params.JSONResp : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CreateMysqlInstance返回参数结构体
+ * @class
+ */
+class CreateMysqlInstanceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifyDatabaseACL请求参数结构体
+ * @class
+ */
+class ModifyDatabaseACLRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 环境ID
+         * @type {string || null}
+         */
+        this.EnvId = null;
+
+        /**
+         * 集合名称
+         * @type {string || null}
+         */
+        this.CollectionName = null;
+
+        /**
+         * 权限标签。包含以下取值：
+<li> READONLY：所有用户可读，仅创建者和管理员可写</li>
+<li> PRIVATE：仅创建者及管理员可读写</li>
+<li> ADMINWRITE：所有用户可读，仅管理员可写</li>
+<li> ADMINONLY：仅管理员可读写</li>
+         * @type {string || null}
+         */
+        this.AclTag = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.EnvId = 'EnvId' in params ? params.EnvId : null;
+        this.CollectionName = 'CollectionName' in params ? params.CollectionName : null;
+        this.AclTag = 'AclTag' in params ? params.AclTag : null;
+
+    }
+}
+
+/**
+ * DescribeEnvs请求参数结构体
+ * @class
+ */
+class DescribeEnvsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 环境ID，如果传了这个参数则只返回该环境的相关信息
+         * @type {string || null}
+         */
+        this.EnvId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.EnvId = 'EnvId' in params ? params.EnvId : null;
+
+    }
+}
+
+/**
+ * ModifyDatabaseACL返回参数结构体
+ * @class
+ */
+class ModifyDatabaseACLResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 静态CDN资源信息
+ * @class
+ */
+class StaticStorageInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 静态CDN域名
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.StaticDomain = null;
+
+        /**
+         * 静态CDN默认文件夹，当前为根目录
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.DefaultDirName = null;
+
+        /**
+         * 资源状态(process/online/offline/init)
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * cos所属区域
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Region = null;
+
+        /**
+         * bucket信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Bucket = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.StaticDomain = 'StaticDomain' in params ? params.StaticDomain : null;
+        this.DefaultDirName = 'DefaultDirName' in params ? params.DefaultDirName : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.Region = 'Region' in params ? params.Region : null;
+        this.Bucket = 'Bucket' in params ? params.Bucket : null;
+
+    }
+}
+
+/**
+ * ModifyEnv返回参数结构体
+ * @class
+ */
+class ModifyEnvResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 云日志服务相关信息
+ * @class
+ */
+class LogServiceInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * log名
+         * @type {string || null}
+         */
+        this.LogsetName = null;
+
+        /**
+         * log-id
+         * @type {string || null}
+         */
+        this.LogsetId = null;
+
+        /**
+         * topic名
+         * @type {string || null}
+         */
+        this.TopicName = null;
+
+        /**
+         * topic-id
+         * @type {string || null}
+         */
+        this.TopicId = null;
+
+        /**
+         * cls日志所属地域
+         * @type {string || null}
+         */
+        this.Region = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LogsetName = 'LogsetName' in params ? params.LogsetName : null;
+        this.LogsetId = 'LogsetId' in params ? params.LogsetId : null;
+        this.TopicName = 'TopicName' in params ? params.TopicName : null;
+        this.TopicId = 'TopicId' in params ? params.TopicId : null;
+        this.Region = 'Region' in params ? params.Region : null;
 
     }
 }
@@ -153,10 +551,10 @@ class DatabasesInfo extends  AbstractModel {
 }
 
 /**
- * ModifyEnv请求参数结构体
+ * DescribeDatabaseACL请求参数结构体
  * @class
  */
-class ModifyEnvRequest extends  AbstractModel {
+class DescribeDatabaseACLRequest extends  AbstractModel {
     constructor(){
         super();
 
@@ -167,7 +565,42 @@ class ModifyEnvRequest extends  AbstractModel {
         this.EnvId = null;
 
         /**
-         * 环境备注名，要以a-z开头，不能包含 a-zA-z0-9- 以外的字符
+         * 集合名称
+         * @type {string || null}
+         */
+        this.CollectionName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.EnvId = 'EnvId' in params ? params.EnvId : null;
+        this.CollectionName = 'CollectionName' in params ? params.CollectionName : null;
+
+    }
+}
+
+/**
+ * OfflineMysqlInstance请求参数结构体
+ * @class
+ */
+class OfflineMysqlInstanceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 环境id
+         * @type {string || null}
+         */
+        this.EnvId = null;
+
+        /**
+         * 实例别名
          * @type {string || null}
          */
         this.Alias = null;
@@ -183,6 +616,101 @@ class ModifyEnvRequest extends  AbstractModel {
         }
         this.EnvId = 'EnvId' in params ? params.EnvId : null;
         this.Alias = 'Alias' in params ? params.Alias : null;
+
+    }
+}
+
+/**
+ * OfflineMysqlInstance返回参数结构体
+ * @class
+ */
+class OfflineMysqlInstanceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * UpgradeMysqlInstance返回参数结构体
+ * @class
+ */
+class UpgradeMysqlInstanceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeDatabaseACL返回参数结构体
+ * @class
+ */
+class DescribeDatabaseACLResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 权限标签。包含以下取值：
+<li> READONLY：所有用户可读，仅创建者和管理员可写</li>
+<li> PRIVATE：仅创建者及管理员可读写</li>
+<li> ADMINWRITE：所有用户可读，仅管理员可写</li>
+<li> ADMINONLY：仅管理员可读写</li>
+         * @type {string || null}
+         */
+        this.AclTag = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AclTag = 'AclTag' in params ? params.AclTag : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -230,7 +758,6 @@ class EnvInfo extends  AbstractModel {
         /**
          * 环境状态。包含以下取值：
 <li>NORMAL：正常可用</li>
-<li>HALTED：停服，用量超限或后台封禁</li>
 <li>UNAVAILABLE：服务不可用，可能是尚未初始化或者初始化过程中</li>
          * @type {string || null}
          */
@@ -267,6 +794,27 @@ class EnvInfo extends  AbstractModel {
          * @type {string || null}
          */
         this.PackageName = null;
+
+        /**
+         * 云日志服务列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<LogServiceInfo> || null}
+         */
+        this.LogServices = null;
+
+        /**
+         * 静态资源信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<StaticStorageInfo> || null}
+         */
+        this.StaticStorages = null;
+
+        /**
+         * 是否到期自动降为免费版
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.IsAutoDegrade = null;
 
     }
 
@@ -313,78 +861,33 @@ class EnvInfo extends  AbstractModel {
         this.PackageId = 'PackageId' in params ? params.PackageId : null;
         this.PackageName = 'PackageName' in params ? params.PackageName : null;
 
-    }
-}
-
-/**
- * 函数的信息
- * @class
- */
-class FunctionInfo extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 命名空间
-         * @type {string || null}
-         */
-        this.Namespace = null;
-
-        /**
-         * 所属地域。
-当前支持ap-shanghai
-         * @type {string || null}
-         */
-        this.Region = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
+        if (params.LogServices) {
+            this.LogServices = new Array();
+            for (let z in params.LogServices) {
+                let obj = new LogServiceInfo();
+                obj.deserialize(params.LogServices[z]);
+                this.LogServices.push(obj);
+            }
         }
-        this.Namespace = 'Namespace' in params ? params.Namespace : null;
-        this.Region = 'Region' in params ? params.Region : null;
 
-    }
-}
-
-/**
- * DescribeEnvs请求参数结构体
- * @class
- */
-class DescribeEnvsRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 环境ID，如果传了这个参数则只返回该环境的相关信息
-         * @type {string || null}
-         */
-        this.EnvId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
+        if (params.StaticStorages) {
+            this.StaticStorages = new Array();
+            for (let z in params.StaticStorages) {
+                let obj = new StaticStorageInfo();
+                obj.deserialize(params.StaticStorages[z]);
+                this.StaticStorages.push(obj);
+            }
         }
-        this.EnvId = 'EnvId' in params ? params.EnvId : null;
+        this.IsAutoDegrade = 'IsAutoDegrade' in params ? params.IsAutoDegrade : null;
 
     }
 }
 
 /**
- * ModifyDatabaseACL请求参数结构体
+ * ModifyEnv请求参数结构体
  * @class
  */
-class ModifyDatabaseACLRequest extends  AbstractModel {
+class ModifyEnvRequest extends  AbstractModel {
     constructor(){
         super();
 
@@ -395,20 +898,10 @@ class ModifyDatabaseACLRequest extends  AbstractModel {
         this.EnvId = null;
 
         /**
-         * 集合名称
+         * 环境备注名，要以a-z开头，不能包含 a-zA-z0-9- 以外的字符
          * @type {string || null}
          */
-        this.CollectionName = null;
-
-        /**
-         * 权限标签。取值范围：
-<li> READONLY：所有用户可读，仅创建者和管理员可写</li>
-<li> PRIVATE：仅创建者及管理员可读写</li>
-<li> ADMINWRITE：所有用户可读，仅管理员可写</li>
-<li> ADMINONLY：仅管理员可读写</li>
-         * @type {string || null}
-         */
-        this.AclTag = null;
+        this.Alias = null;
 
     }
 
@@ -420,31 +913,24 @@ class ModifyDatabaseACLRequest extends  AbstractModel {
             return;
         }
         this.EnvId = 'EnvId' in params ? params.EnvId : null;
-        this.CollectionName = 'CollectionName' in params ? params.CollectionName : null;
-        this.AclTag = 'AclTag' in params ? params.AclTag : null;
+        this.Alias = 'Alias' in params ? params.Alias : null;
 
     }
 }
 
 /**
- * DescribeDatabaseACL请求参数结构体
+ * IsolateMysqlInstance返回参数结构体
  * @class
  */
-class DescribeDatabaseACLRequest extends  AbstractModel {
+class IsolateMysqlInstanceResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 环境ID
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.EnvId = null;
-
-        /**
-         * 集合名称
-         * @type {string || null}
-         */
-        this.CollectionName = null;
+        this.RequestId = null;
 
     }
 
@@ -455,8 +941,42 @@ class DescribeDatabaseACLRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.EnvId = 'EnvId' in params ? params.EnvId : null;
-        this.CollectionName = 'CollectionName' in params ? params.CollectionName : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CommonServiceAPI请求参数结构体
+ * @class
+ */
+class CommonServiceAPIRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Service名，需要转发访问的接口名
+         * @type {string || null}
+         */
+        this.Service = null;
+
+        /**
+         * 需要转发的云API参数，要转成JSON格式
+         * @type {string || null}
+         */
+        this.JSONData = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Service = 'Service' in params ? params.Service : null;
+        this.JSONData = 'JSONData' in params ? params.JSONData : null;
 
     }
 }
@@ -505,18 +1025,42 @@ class DescribeEnvsResponse extends  AbstractModel {
 }
 
 /**
- * ModifyEnv返回参数结构体
+ * UpgradeMysqlInstance请求参数结构体
  * @class
  */
-class ModifyEnvResponse extends  AbstractModel {
+class UpgradeMysqlInstanceRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * 环境id
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.EnvId = null;
+
+        /**
+         * 实例别名
+         * @type {string || null}
+         */
+        this.Alias = null;
+
+        /**
+         * 实例内存大小，单位：MB
+         * @type {number || null}
+         */
+        this.Memory = null;
+
+        /**
+         * 实例硬盘大小，单位：GB
+         * @type {number || null}
+         */
+        this.Volume = null;
+
+        /**
+         * MySQL 版本，值包括: 5.7
+         * @type {string || null}
+         */
+        this.EngineVersion = null;
 
     }
 
@@ -527,51 +1071,39 @@ class ModifyEnvResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * ModifyDatabaseACL返回参数结构体
- * @class
- */
-class ModifyDatabaseACLResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.EnvId = 'EnvId' in params ? params.EnvId : null;
+        this.Alias = 'Alias' in params ? params.Alias : null;
+        this.Memory = 'Memory' in params ? params.Memory : null;
+        this.Volume = 'Volume' in params ? params.Volume : null;
+        this.EngineVersion = 'EngineVersion' in params ? params.EngineVersion : null;
 
     }
 }
 
 module.exports = {
-    DescribeDatabaseACLResponse: DescribeDatabaseACLResponse,
     StorageInfo: StorageInfo,
-    DatabasesInfo: DatabasesInfo,
-    ModifyEnvRequest: ModifyEnvRequest,
-    EnvInfo: EnvInfo,
+    IsolateMysqlInstanceRequest: IsolateMysqlInstanceRequest,
     FunctionInfo: FunctionInfo,
-    DescribeEnvsRequest: DescribeEnvsRequest,
+    CreateMysqlInstanceRequest: CreateMysqlInstanceRequest,
+    CommonServiceAPIResponse: CommonServiceAPIResponse,
+    CreateMysqlInstanceResponse: CreateMysqlInstanceResponse,
     ModifyDatabaseACLRequest: ModifyDatabaseACLRequest,
-    DescribeDatabaseACLRequest: DescribeDatabaseACLRequest,
-    DescribeEnvsResponse: DescribeEnvsResponse,
-    ModifyEnvResponse: ModifyEnvResponse,
+    DescribeEnvsRequest: DescribeEnvsRequest,
     ModifyDatabaseACLResponse: ModifyDatabaseACLResponse,
+    StaticStorageInfo: StaticStorageInfo,
+    ModifyEnvResponse: ModifyEnvResponse,
+    LogServiceInfo: LogServiceInfo,
+    DatabasesInfo: DatabasesInfo,
+    DescribeDatabaseACLRequest: DescribeDatabaseACLRequest,
+    OfflineMysqlInstanceRequest: OfflineMysqlInstanceRequest,
+    OfflineMysqlInstanceResponse: OfflineMysqlInstanceResponse,
+    UpgradeMysqlInstanceResponse: UpgradeMysqlInstanceResponse,
+    DescribeDatabaseACLResponse: DescribeDatabaseACLResponse,
+    EnvInfo: EnvInfo,
+    ModifyEnvRequest: ModifyEnvRequest,
+    IsolateMysqlInstanceResponse: IsolateMysqlInstanceResponse,
+    CommonServiceAPIRequest: CommonServiceAPIRequest,
+    DescribeEnvsResponse: DescribeEnvsResponse,
+    UpgradeMysqlInstanceRequest: UpgradeMysqlInstanceRequest,
 
 }

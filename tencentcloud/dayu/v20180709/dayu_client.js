@@ -38,6 +38,7 @@ const ModifyCCLevelRequest = models.ModifyCCLevelRequest;
 const DeleteCCSelfDefinePolicyRequest = models.DeleteCCSelfDefinePolicyRequest;
 const DescribeCCUrlAllowRequest = models.DescribeCCUrlAllowRequest;
 const KeyValue = models.KeyValue;
+const IpBlackWhite = models.IpBlackWhite;
 const ModifyDDoSAlarmThresholdRequest = models.ModifyDDoSAlarmThresholdRequest;
 const CreateDDoSPolicyRequest = models.CreateDDoSPolicyRequest;
 const ModifyCCThresholdResponse = models.ModifyCCThresholdResponse;
@@ -49,9 +50,10 @@ const DescribeDDoSAttackSourceRequest = models.DescribeDDoSAttackSourceRequest;
 const DescribeDDoSCountRequest = models.DescribeDDoSCountRequest;
 const RegionInstanceCount = models.RegionInstanceCount;
 const WaterPrintKey = models.WaterPrintKey;
-const IpBlackWhite = models.IpBlackWhite;
+const DescribeDDoSNetIpLogRequest = models.DescribeDDoSNetIpLogRequest;
 const DescribeDDoSUsedStatisResponse = models.DescribeDDoSUsedStatisResponse;
-const CreateDDoSPolicyCaseResponse = models.CreateDDoSPolicyCaseResponse;
+const DescribeBasicCCThresholdRequest = models.DescribeBasicCCThresholdRequest;
+const CreateL4HealthConfigResponse = models.CreateL4HealthConfigResponse;
 const DescribeIPProductInfoResponse = models.DescribeIPProductInfoResponse;
 const ModifyDDoSSwitchResponse = models.ModifyDDoSSwitchResponse;
 const IpBlockData = models.IpBlockData;
@@ -60,6 +62,7 @@ const ModifyDDoSDefendStatusRequest = models.ModifyDDoSDefendStatusRequest;
 const DescribeRuleSetsResponse = models.DescribeRuleSetsResponse;
 const DescribeBaradDataResponse = models.DescribeBaradDataResponse;
 const DescribeDDoSEvInfoRequest = models.DescribeDDoSEvInfoRequest;
+const DescribeDDoSAttackIPRegionMapResponse = models.DescribeDDoSAttackIPRegionMapResponse;
 const ModifyL4KeepTimeResponse = models.ModifyL4KeepTimeResponse;
 const ModifyL7RulesResponse = models.ModifyL7RulesResponse;
 const DescribeL7HealthConfigRequest = models.DescribeL7HealthConfigRequest;
@@ -79,11 +82,13 @@ const ModifyDDoSAIStatusResponse = models.ModifyDDoSAIStatusResponse;
 const DescribeDDoSNetEvInfoRequest = models.DescribeDDoSNetEvInfoRequest;
 const ModifyResourceRenewFlagRequest = models.ModifyResourceRenewFlagRequest;
 const DescribeCCEvListResponse = models.DescribeCCEvListResponse;
+const DescribeCCFrequencyRulesRequest = models.DescribeCCFrequencyRulesRequest;
 const CreateDDoSPolicyCaseRequest = models.CreateDDoSPolicyCaseRequest;
 const ModifyDDoSPolicyNameResponse = models.ModifyDDoSPolicyNameResponse;
 const DescribeCCAlarmThresholdRequest = models.DescribeCCAlarmThresholdRequest;
 const ModifyCCUrlAllowRequest = models.ModifyCCUrlAllowRequest;
 const ModifyDDoSAlarmThresholdResponse = models.ModifyDDoSAlarmThresholdResponse;
+const ModifyDDoSLevelResponse = models.ModifyDDoSLevelResponse;
 const DescribeCCIpAllowDenyResponse = models.DescribeCCIpAllowDenyResponse;
 const DescribeDDoSIpLogResponse = models.DescribeDDoSIpLogResponse;
 const CCRule = models.CCRule;
@@ -98,18 +103,18 @@ const CreateL4RulesResponse = models.CreateL4RulesResponse;
 const DescribeInsurePacksRequest = models.DescribeInsurePacksRequest;
 const DescribeDDoSNetCountRequest = models.DescribeDDoSNetCountRequest;
 const Paging = models.Paging;
-const ModifyL4RulesResponse = models.ModifyL4RulesResponse;
-const L4HealthConfig = models.L4HealthConfig;
+const ModifyCCSelfDefinePolicyRequest = models.ModifyCCSelfDefinePolicyRequest;
 const CreateCCSelfDefinePolicyRequest = models.CreateCCSelfDefinePolicyRequest;
 const SuccessCode = models.SuccessCode;
 const DescribleL4RulesRequest = models.DescribleL4RulesRequest;
 const L4RuleEntry = models.L4RuleEntry;
 const DescribeL4HealthConfigRequest = models.DescribeL4HealthConfigRequest;
-const CreateL7CCRuleResponse = models.CreateL7CCRuleResponse;
+const ModifyL4RulesRequest = models.ModifyL4RulesRequest;
 const DescribeDDoSIpLogRequest = models.DescribeDDoSIpLogRequest;
 const CreateL7RulesRequest = models.CreateL7RulesRequest;
 const CreateL4RulesRequest = models.CreateL4RulesRequest;
 const DescribeDDoSNetEvListResponse = models.DescribeDDoSNetEvListResponse;
+const ModifyCCFrequencyRulesStatusResponse = models.ModifyCCFrequencyRulesStatusResponse;
 const DescribeL4RulesErrHealthRequest = models.DescribeL4RulesErrHealthRequest;
 const L4RuleSource = models.L4RuleSource;
 const CreateBasicDDoSAlarmThresholdResponse = models.CreateBasicDDoSAlarmThresholdResponse;
@@ -119,6 +124,7 @@ const CreateL7HealthConfigRequest = models.CreateL7HealthConfigRequest;
 const DescribeIPProductInfoRequest = models.DescribeIPProductInfoRequest;
 const ModifyDDoSSwitchRequest = models.ModifyDDoSSwitchRequest;
 const CreateL7RuleCertResponse = models.CreateL7RuleCertResponse;
+const DescribeDDoSAttackIPRegionMapRequest = models.DescribeDDoSAttackIPRegionMapRequest;
 const ModifyDDoSPolicyRequest = models.ModifyDDoSPolicyRequest;
 const DescribeSourceIpSegmentRequest = models.DescribeSourceIpSegmentRequest;
 const DescribeSourceIpSegmentResponse = models.DescribeSourceIpSegmentResponse;
@@ -126,16 +132,19 @@ const ModifyResBindDDoSPolicyRequest = models.ModifyResBindDDoSPolicyRequest;
 const L7RuleHealth = models.L7RuleHealth;
 const CreateL7RulesUploadRequest = models.CreateL7RulesUploadRequest;
 const L4RuleHealth = models.L4RuleHealth;
+const ModifyCCFrequencyRulesRequest = models.ModifyCCFrequencyRulesRequest;
 const ModifyCCPolicySwitchResponse = models.ModifyCCPolicySwitchResponse;
 const ModifyDDoSThresholdResponse = models.ModifyDDoSThresholdResponse;
 const CreateL4HealthConfigRequest = models.CreateL4HealthConfigRequest;
 const ModifyCCIpAllowDenyResponse = models.ModifyCCIpAllowDenyResponse;
 const ModifyCCAlarmThresholdRequest = models.ModifyCCAlarmThresholdRequest;
-const ModifyCCSelfDefinePolicyRequest = models.ModifyCCSelfDefinePolicyRequest;
+const DescribeCCFrequencyRulesResponse = models.DescribeCCFrequencyRulesResponse;
 const DescribeDDoSEvListRequest = models.DescribeDDoSEvListRequest;
+const DescribeBasicCCThresholdResponse = models.DescribeBasicCCThresholdResponse;
 const ModifyDDoSPolicyNameRequest = models.ModifyDDoSPolicyNameRequest;
 const DescribeIpUnBlockListResponse = models.DescribeIpUnBlockListResponse;
 const ModifyCCPolicySwitchRequest = models.ModifyCCPolicySwitchRequest;
+const ModifyCCFrequencyRulesResponse = models.ModifyCCFrequencyRulesResponse;
 const ModifyL4KeepTimeRequest = models.ModifyL4KeepTimeRequest;
 const ModifyCCHostProtectionRequest = models.ModifyCCHostProtectionRequest;
 const DescribeIpBlockListRequest = models.DescribeIpBlockListRequest;
@@ -146,29 +155,28 @@ const ModifyDDoSAIStatusRequest = models.ModifyDDoSAIStatusRequest;
 const DescribeResourceListResponse = models.DescribeResourceListResponse;
 const ModifyCCThresholdRequest = models.ModifyCCThresholdRequest;
 const CreateBasicDDoSAlarmThresholdRequest = models.CreateBasicDDoSAlarmThresholdRequest;
-const CCRuleConfig = models.CCRuleConfig;
+const L4HealthConfig = models.L4HealthConfig;
 const DescribeDDoSEvInfoResponse = models.DescribeDDoSEvInfoResponse;
 const DescribleRegionCountRequest = models.DescribleRegionCountRequest;
 const ModifyCCSelfDefinePolicyResponse = models.ModifyCCSelfDefinePolicyResponse;
-const CreateL7CCRuleRequest = models.CreateL7CCRuleRequest;
 const DescribeDDoSAlarmThresholdRequest = models.DescribeDDoSAlarmThresholdRequest;
 const DescribePolicyCaseRequest = models.DescribePolicyCaseRequest;
 const WaterPrintPolicy = models.WaterPrintPolicy;
 const ProtocolPort = models.ProtocolPort;
 const DeleteCCSelfDefinePolicyResponse = models.DeleteCCSelfDefinePolicyResponse;
 const DescribeDDoSPolicyResponse = models.DescribeDDoSPolicyResponse;
-const DescribeDDoSNetIpLogRequest = models.DescribeDDoSNetIpLogRequest;
+const DeleteCCFrequencyRulesResponse = models.DeleteCCFrequencyRulesResponse;
 const DeleteDDoSPolicyCaseResponse = models.DeleteDDoSPolicyCaseResponse;
-const CreateL4HealthConfigResponse = models.CreateL4HealthConfigResponse;
+const CreateDDoSPolicyCaseResponse = models.CreateDDoSPolicyCaseResponse;
 const ModifyL7RulesRequest = models.ModifyL7RulesRequest;
 const ModifyElasticLimitResponse = models.ModifyElasticLimitResponse;
 const DDoSAttackSourceRecord = models.DDoSAttackSourceRecord;
 const CreateUnblockIpResponse = models.CreateUnblockIpResponse;
 const DescribePackIndexRequest = models.DescribePackIndexRequest;
-const ModifyL4RulesRequest = models.ModifyL4RulesRequest;
 const DescribeDDoSEvListResponse = models.DescribeDDoSEvListResponse;
 const DescribeDDoSPolicyRequest = models.DescribeDDoSPolicyRequest;
 const DescribeL7HealthConfigResponse = models.DescribeL7HealthConfigResponse;
+const CCFrequencyRule = models.CCFrequencyRule;
 const CreateCCSelfDefinePolicyResponse = models.CreateCCSelfDefinePolicyResponse;
 const DescribeDDoSAttackSourceResponse = models.DescribeDDoSAttackSourceResponse;
 const DescribeDDoSUsedStatisRequest = models.DescribeDDoSUsedStatisRequest;
@@ -186,6 +194,7 @@ const DescribeCCTrendResponse = models.DescribeCCTrendResponse;
 const ModifyDDoSPolicyCaseResponse = models.ModifyDDoSPolicyCaseResponse;
 const CreateUnblockIpRequest = models.CreateUnblockIpRequest;
 const DescribeSecIndexRequest = models.DescribeSecIndexRequest;
+const ModifyCCFrequencyRulesStatusRequest = models.ModifyCCFrequencyRulesStatusRequest;
 const DescribeDDoSCountResponse = models.DescribeDDoSCountResponse;
 const DescribeL4RulesErrHealthResponse = models.DescribeL4RulesErrHealthResponse;
 const DeleteDDoSPolicyResponse = models.DeleteDDoSPolicyResponse;
@@ -199,7 +208,7 @@ const DescribeDDoSNetEvInfoResponse = models.DescribeDDoSNetEvInfoResponse;
 const DescribeRuleSetsRequest = models.DescribeRuleSetsRequest;
 const ModifyDDoSDefendStatusResponse = models.ModifyDDoSDefendStatusResponse;
 const DescribleL7RulesResponse = models.DescribleL7RulesResponse;
-const ModifyDDoSLevelResponse = models.ModifyDDoSLevelResponse;
+const CreateCCFrequencyRulesResponse = models.CreateCCFrequencyRulesResponse;
 const DescribeIpBlockListResponse = models.DescribeIpBlockListResponse;
 const DDoSPolicyPortLimit = models.DDoSPolicyPortLimit;
 const DescribeDDoSNetTrendResponse = models.DescribeDDoSNetTrendResponse;
@@ -211,7 +220,9 @@ const L7RuleEntry = models.L7RuleEntry;
 const IpUnBlockData = models.IpUnBlockData;
 const ModifyDDoSLevelRequest = models.ModifyDDoSLevelRequest;
 const DDoSPolicyPacketFilter = models.DDoSPolicyPacketFilter;
+const DeleteCCFrequencyRulesRequest = models.DeleteCCFrequencyRulesRequest;
 const DescribeDDoSNetIpLogResponse = models.DescribeDDoSNetIpLogResponse;
+const CreateCCFrequencyRulesRequest = models.CreateCCFrequencyRulesRequest;
 const DeleteL7RulesResponse = models.DeleteL7RulesResponse;
 const CreateL7HealthConfigResponse = models.CreateL7HealthConfigResponse;
 const DescribeDDoSTrendResponse = models.DescribeDDoSTrendResponse;
@@ -219,6 +230,7 @@ const DescribleRegionCountResponse = models.DescribleRegionCountResponse;
 const ModifyDDoSThresholdRequest = models.ModifyDDoSThresholdRequest;
 const DDoSEventRecord = models.DDoSEventRecord;
 const DescribleL4RulesResponse = models.DescribleL4RulesResponse;
+const ModifyL4RulesResponse = models.ModifyL4RulesResponse;
 const DeleteDDoSPolicyRequest = models.DeleteDDoSPolicyRequest;
 const CreateL7RulesUploadResponse = models.CreateL7RulesUploadResponse;
 const CreateInstanceNameRequest = models.CreateInstanceNameRequest;
@@ -266,17 +278,6 @@ class DayuClient extends AbstractClient {
     DescribeRuleSets(req, cb) {
         let resp = new DescribeRuleSetsResponse();
         this.request("DescribeRuleSets", req, resp, cb);
-    }
-
-    /**
-     * 支持读取，添加，删除7层CC自定义规则
-     * @param {CreateL7CCRuleRequest} req
-     * @param {function(string, CreateL7CCRuleResponse):void} cb
-     * @public
-     */
-    CreateL7CCRule(req, cb) {
-        let resp = new CreateL7CCRuleResponse();
-        this.request("CreateL7CCRule", req, resp, cb);
     }
 
     /**
@@ -478,14 +479,14 @@ class DayuClient extends AbstractClient {
     }
 
     /**
-     * 获取CC自定义策略
-     * @param {DescribeCCSelfDefinePolicyRequest} req
-     * @param {function(string, DescribeCCSelfDefinePolicyResponse):void} cb
+     * 获取CC防护的访问频率控制规则
+     * @param {DescribeCCFrequencyRulesRequest} req
+     * @param {function(string, DescribeCCFrequencyRulesResponse):void} cb
      * @public
      */
-    DescribeCCSelfDefinePolicy(req, cb) {
-        let resp = new DescribeCCSelfDefinePolicyResponse();
-        this.request("DescribeCCSelfDefinePolicy", req, resp, cb);
+    DescribeCCFrequencyRules(req, cb) {
+        let resp = new DescribeCCFrequencyRulesResponse();
+        this.request("DescribeCCFrequencyRules", req, resp, cb);
     }
 
     /**
@@ -522,7 +523,7 @@ class DayuClient extends AbstractClient {
     }
 
     /**
-     * 为大禹子产品提供从巴拉多获取指标统计数据的接口
+     * 为大禹子产品提供业务转发指标数据的接口
      * @param {DescribeBaradDataRequest} req
      * @param {function(string, DescribeBaradDataResponse):void} cb
      * @public
@@ -530,6 +531,17 @@ class DayuClient extends AbstractClient {
     DescribeBaradData(req, cb) {
         let resp = new DescribeBaradDataResponse();
         this.request("DescribeBaradData", req, resp, cb);
+    }
+
+    /**
+     * 修改CC防护的访问频率控制规则
+     * @param {ModifyCCFrequencyRulesRequest} req
+     * @param {function(string, ModifyCCFrequencyRulesResponse):void} cb
+     * @public
+     */
+    ModifyCCFrequencyRules(req, cb) {
+        let resp = new ModifyCCFrequencyRulesResponse();
+        this.request("ModifyCCFrequencyRules", req, resp, cb);
     }
 
     /**
@@ -555,7 +567,7 @@ class DayuClient extends AbstractClient {
     }
 
     /**
-     * 获取回源IP段，支持的产品：高防IP，高防IP专业版，棋牌盾；
+     * 获取回源IP段，支持的产品：高防IP，高防IP专业版；
      * @param {DescribeSourceIpSegmentRequest} req
      * @param {function(string, DescribeSourceIpSegmentResponse):void} cb
      * @public
@@ -687,7 +699,7 @@ class DayuClient extends AbstractClient {
     }
 
     /**
-     * 获取产品总览统计，支持高防包、高防IP、高防IP专业版、棋牌盾
+     * 获取产品总览统计，支持高防包、高防IP、高防IP专业版；
      * @param {DescribePackIndexRequest} req
      * @param {function(string, DescribePackIndexResponse):void} cb
      * @public
@@ -819,6 +831,17 @@ class DayuClient extends AbstractClient {
     }
 
     /**
+     * 删除CC防护的访问频率控制规则
+     * @param {DeleteCCFrequencyRulesRequest} req
+     * @param {function(string, DeleteCCFrequencyRulesResponse):void} cb
+     * @public
+     */
+    DeleteCCFrequencyRules(req, cb) {
+        let resp = new DeleteCCFrequencyRulesResponse();
+        this.request("DeleteCCFrequencyRules", req, resp, cb);
+    }
+
+    /**
      * 修改L4转发规则的会话保持，支持的子产品：高防IP、高防IP专业版
      * @param {ModifyL4KeepTimeRequest} req
      * @param {function(string, ModifyL4KeepTimeResponse):void} cb
@@ -852,14 +875,14 @@ class DayuClient extends AbstractClient {
     }
 
     /**
-     * 获取DDoS高级策略
-     * @param {DescribeDDoSPolicyRequest} req
-     * @param {function(string, DescribeDDoSPolicyResponse):void} cb
+     * 获取DDoS攻击源IP地域分布图，支持全球攻击分布和国内省份攻击分布；
+     * @param {DescribeDDoSAttackIPRegionMapRequest} req
+     * @param {function(string, DescribeDDoSAttackIPRegionMapResponse):void} cb
      * @public
      */
-    DescribeDDoSPolicy(req, cb) {
-        let resp = new DescribeDDoSPolicyResponse();
-        this.request("DescribeDDoSPolicy", req, resp, cb);
+    DescribeDDoSAttackIPRegionMap(req, cb) {
+        let resp = new DescribeDDoSAttackIPRegionMapResponse();
+        this.request("DescribeDDoSAttackIPRegionMap", req, resp, cb);
     }
 
     /**
@@ -1061,6 +1084,28 @@ class DayuClient extends AbstractClient {
     }
 
     /**
+     * 获取CC自定义策略
+     * @param {DescribeCCSelfDefinePolicyRequest} req
+     * @param {function(string, DescribeCCSelfDefinePolicyResponse):void} cb
+     * @public
+     */
+    DescribeCCSelfDefinePolicy(req, cb) {
+        let resp = new DescribeCCSelfDefinePolicyResponse();
+        this.request("DescribeCCSelfDefinePolicy", req, resp, cb);
+    }
+
+    /**
+     * 开启或关闭CC防护的访问频率控制规则
+     * @param {ModifyCCFrequencyRulesStatusRequest} req
+     * @param {function(string, ModifyCCFrequencyRulesStatusResponse):void} cb
+     * @public
+     */
+    ModifyCCFrequencyRulesStatus(req, cb) {
+        let resp = new ModifyCCFrequencyRulesStatusResponse();
+        this.request("ModifyCCFrequencyRulesStatus", req, resp, cb);
+    }
+
+    /**
      * 修改CC的防护阈值
      * @param {ModifyCCThresholdRequest} req
      * @param {function(string, ModifyCCThresholdResponse):void} cb
@@ -1116,6 +1161,17 @@ class DayuClient extends AbstractClient {
     }
 
     /**
+     * 添加CC防护的访问频率控制规则
+     * @param {CreateCCFrequencyRulesRequest} req
+     * @param {function(string, CreateCCFrequencyRulesResponse):void} cb
+     * @public
+     */
+    CreateCCFrequencyRules(req, cb) {
+        let resp = new CreateCCFrequencyRulesResponse();
+        this.request("CreateCCFrequencyRules", req, resp, cb);
+    }
+
+    /**
      * 修改L7转发规则
      * @param {ModifyL7RulesRequest} req
      * @param {function(string, ModifyL7RulesResponse):void} cb
@@ -1124,6 +1180,17 @@ class DayuClient extends AbstractClient {
     ModifyL7Rules(req, cb) {
         let resp = new ModifyL7RulesResponse();
         this.request("ModifyL7Rules", req, resp, cb);
+    }
+
+    /**
+     * 获取基础防护CC防护阈值
+     * @param {DescribeBasicCCThresholdRequest} req
+     * @param {function(string, DescribeBasicCCThresholdResponse):void} cb
+     * @public
+     */
+    DescribeBasicCCThreshold(req, cb) {
+        let resp = new DescribeBasicCCThresholdResponse();
+        this.request("DescribeBasicCCThreshold", req, resp, cb);
     }
 
     /**
@@ -1149,7 +1216,7 @@ class DayuClient extends AbstractClient {
     }
 
     /**
-     * 资源实例重命名，支持独享包、共享包、高防IP、高防IP专业版、棋牌盾；
+     * 资源实例重命名，支持独享包、共享包、高防IP、高防IP专业版；
      * @param {CreateInstanceNameRequest} req
      * @param {function(string, CreateInstanceNameResponse):void} cb
      * @public
@@ -1190,6 +1257,17 @@ class DayuClient extends AbstractClient {
     DescribeDDoSEvInfo(req, cb) {
         let resp = new DescribeDDoSEvInfoResponse();
         this.request("DescribeDDoSEvInfo", req, resp, cb);
+    }
+
+    /**
+     * 获取DDoS高级策略
+     * @param {DescribeDDoSPolicyRequest} req
+     * @param {function(string, DescribeDDoSPolicyResponse):void} cb
+     * @public
+     */
+    DescribeDDoSPolicy(req, cb) {
+        let resp = new DescribeDDoSPolicyResponse();
+        this.request("DescribeDDoSPolicy", req, resp, cb);
     }
 
 

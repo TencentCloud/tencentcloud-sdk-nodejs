@@ -32,15 +32,16 @@ const CreatePolicyGroupCondition = models.CreatePolicyGroupCondition;
 const DescribePolicyGroupInfoReceiverInfo = models.DescribePolicyGroupInfoReceiverInfo;
 const BindingPolicyObjectRequest = models.BindingPolicyObjectRequest;
 const DescribeProductEventListEventsGroupInfo = models.DescribeProductEventListEventsGroupInfo;
-const UnBindingPolicyObjectResponse = models.UnBindingPolicyObjectResponse;
+const PutMonitorDataRequest = models.PutMonitorDataRequest;
 const DescribePolicyConditionListConfigManualPeriod = models.DescribePolicyConditionListConfigManualPeriod;
 const DescribePolicyConditionListEventMetric = models.DescribePolicyConditionListEventMetric;
 const DescribePolicyConditionListCondition = models.DescribePolicyConditionListCondition;
-const UnBindingAllPolicyObjectRequest = models.UnBindingAllPolicyObjectRequest;
+const DescribeBasicAlarmListRequest = models.DescribeBasicAlarmListRequest;
 const DescribePolicyGroupListResponse = models.DescribePolicyGroupListResponse;
 const DescribePolicyGroupInfoRequest = models.DescribePolicyGroupInfoRequest;
 const DimensionsDesc = models.DimensionsDesc;
 const DescribePolicyGroupListGroup = models.DescribePolicyGroupListGroup;
+const DescribeBasicAlarmListAlarms = models.DescribeBasicAlarmListAlarms;
 const GetMonitorDataRequest = models.GetMonitorDataRequest;
 const PeriodsSt = models.PeriodsSt;
 const DescribeAccidentEventListRequest = models.DescribeAccidentEventListRequest;
@@ -51,19 +52,22 @@ const DeletePolicyGroupRequest = models.DeletePolicyGroupRequest;
 const DescribePolicyGroupInfoCallback = models.DescribePolicyGroupInfoCallback;
 const DescribePolicyConditionListResponse = models.DescribePolicyConditionListResponse;
 const DescribePolicyConditionListConfigManualCalcType = models.DescribePolicyConditionListConfigManualCalcType;
+const UnBindingAllPolicyObjectRequest = models.UnBindingAllPolicyObjectRequest;
 const PutMonitorDataResponse = models.PutMonitorDataResponse;
 const ReceiverInfo = models.ReceiverInfo;
 const DescribeProductEventListDimensions = models.DescribeProductEventListDimensions;
 const DescribePolicyGroupInfoResponse = models.DescribePolicyGroupInfoResponse;
+const DescribeBasicAlarmListResponse = models.DescribeBasicAlarmListResponse;
 const ModifyAlarmReceiversRequest = models.ModifyAlarmReceiversRequest;
 const DescribePolicyGroupInfoCondition = models.DescribePolicyGroupInfoCondition;
+const UnBindingPolicyObjectResponse = models.UnBindingPolicyObjectResponse;
 const GetMonitorDataResponse = models.GetMonitorDataResponse;
 const MetricSet = models.MetricSet;
 const DescribeBindingPolicyObjectListResponse = models.DescribeBindingPolicyObjectListResponse;
 const DescribePolicyGroupInfoConditionTpl = models.DescribePolicyGroupInfoConditionTpl;
 const DescribeBindingPolicyObjectListRequest = models.DescribeBindingPolicyObjectListRequest;
 const CreatePolicyGroupResponse = models.CreatePolicyGroupResponse;
-const PutMonitorDataRequest = models.PutMonitorDataRequest;
+const InstanceGroup = models.InstanceGroup;
 const DescribePolicyGroupInfoEventCondition = models.DescribePolicyGroupInfoEventCondition;
 const DescribeBaseMetricsResponse = models.DescribeBaseMetricsResponse;
 const DescribePolicyConditionListConfigManualPeriodNum = models.DescribePolicyConditionListConfigManualPeriodNum;
@@ -202,6 +206,17 @@ class MonitorClient extends AbstractClient {
     DescribePolicyGroupList(req, cb) {
         let resp = new DescribePolicyGroupListResponse();
         this.request("DescribePolicyGroupList", req, resp, cb);
+    }
+
+    /**
+     * 获取基础告警列表
+     * @param {DescribeBasicAlarmListRequest} req
+     * @param {function(string, DescribeBasicAlarmListResponse):void} cb
+     * @public
+     */
+    DescribeBasicAlarmList(req, cb) {
+        let resp = new DescribeBasicAlarmListResponse();
+        this.request("DescribeBasicAlarmList", req, resp, cb);
     }
 
     /**

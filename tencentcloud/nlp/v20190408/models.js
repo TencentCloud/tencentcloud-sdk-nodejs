@@ -239,8 +239,8 @@ class AutoSummarizationRequest extends  AbstractModel {
         this.Text = null;
 
         /**
-         * 指定摘要的长度（默认值为200）
-注：为保证摘要的可读性，最终生成的摘要长度并不会严格遵循这个值，会有略微的浮动
+         * 指定摘要的长度上限（默认值为200）
+注：为保证摘要的可读性，最终生成的摘要长度会低于指定的长度上限。
          * @type {number || null}
          */
         this.Length = null;
@@ -457,61 +457,6 @@ class ClassificationResult extends  AbstractModel {
 }
 
 /**
- * 文本审核结果
- * @class
- */
-class EvilToken extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 文本是否恶意：
-0、正常；
-1、恶意；
-2、可疑送审
-         * @type {number || null}
-         */
-        this.EvilFlag = null;
-
-        /**
-         * 恶意关键词组
-         * @type {Array.<string> || null}
-         */
-        this.EvilKeywords = null;
-
-        /**
-         * 文本恶意类型：
-0、正常；
-1、政治；
-2、色情；
-3、辱骂/低俗；
-4、暴恐/毒品；
-5、广告/灌水；
-6、迷信/邪教；
-7、其他违法（如跨站追杀/恶意竞争等）；
-8、综合；
-9、联系方式/链接
-         * @type {number || null}
-         */
-        this.EvilType = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.EvilFlag = 'EvilFlag' in params ? params.EvilFlag : null;
-        this.EvilKeywords = 'EvilKeywords' in params ? params.EvilKeywords : null;
-        this.EvilType = 'EvilType' in params ? params.EvilType : null;
-
-    }
-}
-
-/**
  * DescribeEntity请求参数结构体
  * @class
  */
@@ -704,68 +649,6 @@ class TextCorrectionRequest extends  AbstractModel {
             return;
         }
         this.Text = 'Text' in params ? params.Text : null;
-
-    }
-}
-
-/**
- * TextApproval返回参数结构体
- * @class
- */
-class TextApprovalResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 文本审核输出结果列表，列表每个元素包含以下信息：
-
-EvilFlag（文本恶意等级）：
-0、正常；
-1、恶意；
-2、可疑送审
-
-EvilType（文本恶意类型）：
-0、正常；
-1、政治；
-2、色情；
-3、辱骂/低俗；
-4、暴恐/毒品；
-5、广告/灌水；
-6、迷信/邪教；
-7、其他违法(如赌博/造假/违法交易等)；
-8、综合；
-9、联系方式/链接
-
-EvilKeywords（恶意关键词组）
-         * @type {Array.<EvilToken> || null}
-         */
-        this.EvilTokens = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-        if (params.EvilTokens) {
-            this.EvilTokens = new Array();
-            for (let z in params.EvilTokens) {
-                let obj = new EvilToken();
-                obj.deserialize(params.EvilTokens[z]);
-                this.EvilTokens.push(obj);
-            }
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1463,41 +1346,6 @@ class SimilarWordsResponse extends  AbstractModel {
 }
 
 /**
- * SensitiveWordsRecognition返回参数结构体
- * @class
- */
-class SensitiveWordsRecognitionResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 敏感词数组
-         * @type {Array.<string> || null}
-         */
-        this.SensitiveWords = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.SensitiveWords = 'SensitiveWords' in params ? params.SensitiveWords : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
  * DependencyParsing返回参数结构体
  * @class
  */
@@ -1551,42 +1399,6 @@ class DependencyParsingResponse extends  AbstractModel {
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * TextApproval请求参数结构体
- * @class
- */
-class TextApprovalRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 待审核的文本（仅支持UTF-8格式，不超过2000字）
-         * @type {string || null}
-         */
-        this.Text = null;
-
-        /**
-         * 文本审核模式（默认取1值）：
-1、全领域审核
-         * @type {number || null}
-         */
-        this.Flag = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Text = 'Text' in params ? params.Text : null;
-        this.Flag = 'Flag' in params ? params.Flag : null;
 
     }
 }
@@ -1705,34 +1517,6 @@ class SentimentAnalysisRequest extends  AbstractModel {
         }
         this.Text = 'Text' in params ? params.Text : null;
         this.Flag = 'Flag' in params ? params.Flag : null;
-
-    }
-}
-
-/**
- * SensitiveWordsRecognition请求参数结构体
- * @class
- */
-class SensitiveWordsRecognitionRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 待识别的文本（仅支持UTF-8格式，不超过2000字）
-         * @type {string || null}
-         */
-        this.Text = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Text = 'Text' in params ? params.Text : null;
 
     }
 }
@@ -1933,14 +1717,12 @@ module.exports = {
     KeywordsExtractionRequest: KeywordsExtractionRequest,
     DescribeEntityResponse: DescribeEntityResponse,
     ClassificationResult: ClassificationResult,
-    EvilToken: EvilToken,
     DescribeEntityRequest: DescribeEntityRequest,
     AutoSummarizationResponse: AutoSummarizationResponse,
     DependencyParsingRequest: DependencyParsingRequest,
     DescribeRelationResponse: DescribeRelationResponse,
     WordSimilarityRequest: WordSimilarityRequest,
     TextCorrectionRequest: TextCorrectionRequest,
-    TextApprovalResponse: TextApprovalResponse,
     SentenceEmbeddingResponse: SentenceEmbeddingResponse,
     SentenceSimilarityRequest: SentenceSimilarityRequest,
     SimilarWordsRequest: SimilarWordsRequest,
@@ -1958,13 +1740,10 @@ module.exports = {
     SentenceSimilarityResponse: SentenceSimilarityResponse,
     NerToken: NerToken,
     SimilarWordsResponse: SimilarWordsResponse,
-    SensitiveWordsRecognitionResponse: SensitiveWordsRecognitionResponse,
     DependencyParsingResponse: DependencyParsingResponse,
-    TextApprovalRequest: TextApprovalRequest,
     CCIToken: CCIToken,
     LexicalAnalysisRequest: LexicalAnalysisRequest,
     SentimentAnalysisRequest: SentimentAnalysisRequest,
-    SensitiveWordsRecognitionRequest: SensitiveWordsRecognitionRequest,
     EntityRelationContent: EntityRelationContent,
     WordSimilarityResponse: WordSimilarityResponse,
     TripleContent: TripleContent,

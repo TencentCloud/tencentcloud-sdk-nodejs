@@ -1219,18 +1219,36 @@ class DescribeProductEventListEventsGroupInfo extends  AbstractModel {
 }
 
 /**
- * UnBindingPolicyObject返回参数结构体
+ * PutMonitorData请求参数结构体
  * @class
  */
-class UnBindingPolicyObjectResponse extends  AbstractModel {
+class PutMonitorDataRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * 一组指标和数据
+         * @type {Array.<MetricDatum> || null}
+         */
+        this.Metrics = null;
+
+        /**
+         * 上报时自行指定的 IP
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.AnnounceIp = null;
+
+        /**
+         * 上报时自行指定的时间戳
+         * @type {number || null}
+         */
+        this.AnnounceTimestamp = null;
+
+        /**
+         * 上报时自行指定的 IP 或 产品实例ID
+         * @type {string || null}
+         */
+        this.AnnounceInstance = null;
 
     }
 
@@ -1241,7 +1259,18 @@ class UnBindingPolicyObjectResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+        if (params.Metrics) {
+            this.Metrics = new Array();
+            for (let z in params.Metrics) {
+                let obj = new MetricDatum();
+                obj.deserialize(params.Metrics[z]);
+                this.Metrics.push(obj);
+            }
+        }
+        this.AnnounceIp = 'AnnounceIp' in params ? params.AnnounceIp : null;
+        this.AnnounceTimestamp = 'AnnounceTimestamp' in params ? params.AnnounceTimestamp : null;
+        this.AnnounceInstance = 'AnnounceInstance' in params ? params.AnnounceInstance : null;
 
     }
 }
@@ -1436,24 +1465,78 @@ class DescribePolicyConditionListCondition extends  AbstractModel {
 }
 
 /**
- * UnBindingAllPolicyObject请求参数结构体
+ * DescribeBasicAlarmList请求参数结构体
  * @class
  */
-class UnBindingAllPolicyObjectRequest extends  AbstractModel {
+class DescribeBasicAlarmListRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 固定值，为"monitor"
+         * 接口模块名，当前取值monitor
          * @type {string || null}
          */
         this.Module = null;
 
         /**
-         * 策略组id
+         * 起始时间，默认一天前的时间戳
          * @type {number || null}
          */
-        this.GroupId = null;
+        this.StartTime = null;
+
+        /**
+         * 结束时间，默认当前时间戳
+         * @type {number || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * 每页返回的数量，默认20
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 页偏移量，默认0
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 根据发生时间排序，取值ASC或DESC
+         * @type {string || null}
+         */
+        this.OccurTimeOrder = null;
+
+        /**
+         * 根据项目ID过滤
+         * @type {Array.<number> || null}
+         */
+        this.ProjectIds = null;
+
+        /**
+         * 根据策略类型过滤
+         * @type {Array.<string> || null}
+         */
+        this.ViewNames = null;
+
+        /**
+         * 根据告警状态过滤
+         * @type {Array.<number> || null}
+         */
+        this.AlarmStatus = null;
+
+        /**
+         * 根据告警对象过滤
+         * @type {string || null}
+         */
+        this.ObjLike = null;
+
+        /**
+         * 根据实例组ID过滤
+         * @type {Array.<number> || null}
+         */
+        this.InstanceGroupIds = null;
 
     }
 
@@ -1465,7 +1548,16 @@ class UnBindingAllPolicyObjectRequest extends  AbstractModel {
             return;
         }
         this.Module = 'Module' in params ? params.Module : null;
-        this.GroupId = 'GroupId' in params ? params.GroupId : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.OccurTimeOrder = 'OccurTimeOrder' in params ? params.OccurTimeOrder : null;
+        this.ProjectIds = 'ProjectIds' in params ? params.ProjectIds : null;
+        this.ViewNames = 'ViewNames' in params ? params.ViewNames : null;
+        this.AlarmStatus = 'AlarmStatus' in params ? params.AlarmStatus : null;
+        this.ObjLike = 'ObjLike' in params ? params.ObjLike : null;
+        this.InstanceGroupIds = 'InstanceGroupIds' in params ? params.InstanceGroupIds : null;
 
     }
 }
@@ -1772,6 +1864,210 @@ class DescribePolicyGroupListGroup extends  AbstractModel {
             let obj = new DescribePolicyGroupListGroupInstanceGroup();
             obj.deserialize(params.InstanceGroup)
             this.InstanceGroup = obj;
+        }
+
+    }
+}
+
+/**
+ * DescribeBasicAlarmList返回的Alarms
+ * @class
+ */
+class DescribeBasicAlarmListAlarms extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 该条告警的ID
+         * @type {number || null}
+         */
+        this.Id = null;
+
+        /**
+         * 项目ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.ProjectId = null;
+
+        /**
+         * 项目名称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ProjectName = null;
+
+        /**
+         * 告警状态ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * 告警状态
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.AlarmStatus = null;
+
+        /**
+         * 策略组ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.GroupId = null;
+
+        /**
+         * 策略组名
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.GroupName = null;
+
+        /**
+         * 发生时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.FirstOccurTime = null;
+
+        /**
+         * 持续时间，单位s
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Duration = null;
+
+        /**
+         * 结束时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.LastOccurTime = null;
+
+        /**
+         * 告警内容
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Content = null;
+
+        /**
+         * 告警对象
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ObjName = null;
+
+        /**
+         * 告警对象ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ObjId = null;
+
+        /**
+         * 策略类型
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ViewName = null;
+
+        /**
+         * VPC，只有CVM有
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Vpc = null;
+
+        /**
+         * 指标ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.MetricId = null;
+
+        /**
+         * 指标名
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.MetricName = null;
+
+        /**
+         * 告警类型，0表示指标告警，2表示产品事件告警，3表示平台事件告警
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.AlarmType = null;
+
+        /**
+         * 地域
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Region = null;
+
+        /**
+         * 告警对象维度信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Dimensions = null;
+
+        /**
+         * 通知方式
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
+         */
+        this.NotifyWay = null;
+
+        /**
+         * 所属实例组信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<InstanceGroup> || null}
+         */
+        this.InstanceGroup = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Id = 'Id' in params ? params.Id : null;
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+        this.ProjectName = 'ProjectName' in params ? params.ProjectName : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.AlarmStatus = 'AlarmStatus' in params ? params.AlarmStatus : null;
+        this.GroupId = 'GroupId' in params ? params.GroupId : null;
+        this.GroupName = 'GroupName' in params ? params.GroupName : null;
+        this.FirstOccurTime = 'FirstOccurTime' in params ? params.FirstOccurTime : null;
+        this.Duration = 'Duration' in params ? params.Duration : null;
+        this.LastOccurTime = 'LastOccurTime' in params ? params.LastOccurTime : null;
+        this.Content = 'Content' in params ? params.Content : null;
+        this.ObjName = 'ObjName' in params ? params.ObjName : null;
+        this.ObjId = 'ObjId' in params ? params.ObjId : null;
+        this.ViewName = 'ViewName' in params ? params.ViewName : null;
+        this.Vpc = 'Vpc' in params ? params.Vpc : null;
+        this.MetricId = 'MetricId' in params ? params.MetricId : null;
+        this.MetricName = 'MetricName' in params ? params.MetricName : null;
+        this.AlarmType = 'AlarmType' in params ? params.AlarmType : null;
+        this.Region = 'Region' in params ? params.Region : null;
+        this.Dimensions = 'Dimensions' in params ? params.Dimensions : null;
+        this.NotifyWay = 'NotifyWay' in params ? params.NotifyWay : null;
+
+        if (params.InstanceGroup) {
+            this.InstanceGroup = new Array();
+            for (let z in params.InstanceGroup) {
+                let obj = new InstanceGroup();
+                obj.deserialize(params.InstanceGroup[z]);
+                this.InstanceGroup.push(obj);
+            }
         }
 
     }
@@ -2268,6 +2564,41 @@ class DescribePolicyConditionListConfigManualCalcType extends  AbstractModel {
 }
 
 /**
+ * UnBindingAllPolicyObject请求参数结构体
+ * @class
+ */
+class UnBindingAllPolicyObjectRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 固定值，为"monitor"
+         * @type {string || null}
+         */
+        this.Module = null;
+
+        /**
+         * 策略组id
+         * @type {number || null}
+         */
+        this.GroupId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Module = 'Module' in params ? params.Module : null;
+        this.GroupId = 'GroupId' in params ? params.GroupId : null;
+
+    }
+}
+
+/**
  * PutMonitorData返回参数结构体
  * @class
  */
@@ -2629,6 +2960,58 @@ class DescribePolicyGroupInfoResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeBasicAlarmList返回参数结构体
+ * @class
+ */
+class DescribeBasicAlarmListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 告警列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<DescribeBasicAlarmListAlarms> || null}
+         */
+        this.Alarms = null;
+
+        /**
+         * 总数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Total = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Alarms) {
+            this.Alarms = new Array();
+            for (let z in params.Alarms) {
+                let obj = new DescribeBasicAlarmListAlarms();
+                obj.deserialize(params.Alarms[z]);
+                this.Alarms.push(obj);
+            }
+        }
+        this.Total = 'Total' in params ? params.Total : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * ModifyAlarmReceivers请求参数结构体
  * @class
  */
@@ -2765,6 +3148,34 @@ class DescribePolicyGroupInfoCondition extends  AbstractModel {
         this.CalcType = 'CalcType' in params ? params.CalcType : null;
         this.CalcValue = 'CalcValue' in params ? params.CalcValue : null;
         this.ContinueTime = 'ContinueTime' in params ? params.ContinueTime : null;
+
+    }
+}
+
+/**
+ * UnBindingPolicyObject返回参数结构体
+ * @class
+ */
+class UnBindingPolicyObjectResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3123,36 +3534,26 @@ class CreatePolicyGroupResponse extends  AbstractModel {
 }
 
 /**
- * PutMonitorData请求参数结构体
+ * DescribeBasicAlarmList返回的Alarms里的InstanceGroup
  * @class
  */
-class PutMonitorDataRequest extends  AbstractModel {
+class InstanceGroup extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 一组指标和数据
-         * @type {Array.<MetricDatum> || null}
-         */
-        this.Metrics = null;
-
-        /**
-         * 上报时自行指定的 IP
-         * @type {string || null}
-         */
-        this.AnnounceIp = null;
-
-        /**
-         * 上报时自行指定的时间戳
+         * 实例组ID
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
-        this.AnnounceTimestamp = null;
+        this.InstanceGroupId = null;
 
         /**
-         * 上报时自行指定的 IP 或 产品实例ID
+         * 实例组名
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
-        this.AnnounceInstance = null;
+        this.InstanceGroupName = null;
 
     }
 
@@ -3163,18 +3564,8 @@ class PutMonitorDataRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.Metrics) {
-            this.Metrics = new Array();
-            for (let z in params.Metrics) {
-                let obj = new MetricDatum();
-                obj.deserialize(params.Metrics[z]);
-                this.Metrics.push(obj);
-            }
-        }
-        this.AnnounceIp = 'AnnounceIp' in params ? params.AnnounceIp : null;
-        this.AnnounceTimestamp = 'AnnounceTimestamp' in params ? params.AnnounceTimestamp : null;
-        this.AnnounceInstance = 'AnnounceInstance' in params ? params.AnnounceInstance : null;
+        this.InstanceGroupId = 'InstanceGroupId' in params ? params.InstanceGroupId : null;
+        this.InstanceGroupName = 'InstanceGroupName' in params ? params.InstanceGroupName : null;
 
     }
 }
@@ -4054,15 +4445,16 @@ module.exports = {
     DescribePolicyGroupInfoReceiverInfo: DescribePolicyGroupInfoReceiverInfo,
     BindingPolicyObjectRequest: BindingPolicyObjectRequest,
     DescribeProductEventListEventsGroupInfo: DescribeProductEventListEventsGroupInfo,
-    UnBindingPolicyObjectResponse: UnBindingPolicyObjectResponse,
+    PutMonitorDataRequest: PutMonitorDataRequest,
     DescribePolicyConditionListConfigManualPeriod: DescribePolicyConditionListConfigManualPeriod,
     DescribePolicyConditionListEventMetric: DescribePolicyConditionListEventMetric,
     DescribePolicyConditionListCondition: DescribePolicyConditionListCondition,
-    UnBindingAllPolicyObjectRequest: UnBindingAllPolicyObjectRequest,
+    DescribeBasicAlarmListRequest: DescribeBasicAlarmListRequest,
     DescribePolicyGroupListResponse: DescribePolicyGroupListResponse,
     DescribePolicyGroupInfoRequest: DescribePolicyGroupInfoRequest,
     DimensionsDesc: DimensionsDesc,
     DescribePolicyGroupListGroup: DescribePolicyGroupListGroup,
+    DescribeBasicAlarmListAlarms: DescribeBasicAlarmListAlarms,
     GetMonitorDataRequest: GetMonitorDataRequest,
     PeriodsSt: PeriodsSt,
     DescribeAccidentEventListRequest: DescribeAccidentEventListRequest,
@@ -4073,19 +4465,22 @@ module.exports = {
     DescribePolicyGroupInfoCallback: DescribePolicyGroupInfoCallback,
     DescribePolicyConditionListResponse: DescribePolicyConditionListResponse,
     DescribePolicyConditionListConfigManualCalcType: DescribePolicyConditionListConfigManualCalcType,
+    UnBindingAllPolicyObjectRequest: UnBindingAllPolicyObjectRequest,
     PutMonitorDataResponse: PutMonitorDataResponse,
     ReceiverInfo: ReceiverInfo,
     DescribeProductEventListDimensions: DescribeProductEventListDimensions,
     DescribePolicyGroupInfoResponse: DescribePolicyGroupInfoResponse,
+    DescribeBasicAlarmListResponse: DescribeBasicAlarmListResponse,
     ModifyAlarmReceiversRequest: ModifyAlarmReceiversRequest,
     DescribePolicyGroupInfoCondition: DescribePolicyGroupInfoCondition,
+    UnBindingPolicyObjectResponse: UnBindingPolicyObjectResponse,
     GetMonitorDataResponse: GetMonitorDataResponse,
     MetricSet: MetricSet,
     DescribeBindingPolicyObjectListResponse: DescribeBindingPolicyObjectListResponse,
     DescribePolicyGroupInfoConditionTpl: DescribePolicyGroupInfoConditionTpl,
     DescribeBindingPolicyObjectListRequest: DescribeBindingPolicyObjectListRequest,
     CreatePolicyGroupResponse: CreatePolicyGroupResponse,
-    PutMonitorDataRequest: PutMonitorDataRequest,
+    InstanceGroup: InstanceGroup,
     DescribePolicyGroupInfoEventCondition: DescribePolicyGroupInfoEventCondition,
     DescribeBaseMetricsResponse: DescribeBaseMetricsResponse,
     DescribePolicyConditionListConfigManualPeriodNum: DescribePolicyConditionListConfigManualPeriodNum,

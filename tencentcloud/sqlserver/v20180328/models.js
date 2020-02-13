@@ -601,7 +601,7 @@ class DBRemark extends  AbstractModel {
         super();
 
         /**
-         * 据库名
+         * 数据库名称
          * @type {string || null}
          */
         this.Name = null;

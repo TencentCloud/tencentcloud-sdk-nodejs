@@ -179,7 +179,7 @@ class DescribeTasksRequest extends  AbstractModel {
         super();
 
         /**
-         * 分页偏移，从0开始
+         * 偏移l量，从0开始
          * @type {number || null}
          */
         this.Offset = null;
@@ -2162,7 +2162,7 @@ class DescribeProductsRequest extends  AbstractModel {
         super();
 
         /**
-         * 分页偏移，Offset从0开始
+         * 偏移量，Offset从0开始
          * @type {number || null}
          */
         this.Offset = null;
@@ -2203,13 +2203,13 @@ class DescribeDevicesRequest extends  AbstractModel {
         this.ProductId = null;
 
         /**
-         * 分页偏移
+         * 偏移量，Offset从0开始
          * @type {number || null}
          */
         this.Offset = null;
 
         /**
-         * 分页的大小，数值范围 10-100
+         * 分页的大小，数值范围 10-250
          * @type {number || null}
          */
         this.Limit = null;

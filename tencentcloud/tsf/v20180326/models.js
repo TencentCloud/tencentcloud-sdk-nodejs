@@ -2603,6 +2603,12 @@ class DescribeSimpleGroupsRequest extends  AbstractModel {
          */
         this.SearchWord = null;
 
+        /**
+         * 部署组类型，精确过滤字段，M：service mesh, P：原生应用， M：网关应用
+         * @type {string || null}
+         */
+        this.AppMicroServiceType = null;
+
     }
 
     /**
@@ -2620,6 +2626,7 @@ class DescribeSimpleGroupsRequest extends  AbstractModel {
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.GroupId = 'GroupId' in params ? params.GroupId : null;
         this.SearchWord = 'SearchWord' in params ? params.SearchWord : null;
+        this.AppMicroServiceType = 'AppMicroServiceType' in params ? params.AppMicroServiceType : null;
 
     }
 }
@@ -2970,6 +2977,41 @@ class ServerlessGroup extends  AbstractModel {
          */
         this.PkgVersion = null;
 
+        /**
+         * 所需实例内存大小
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Memory = null;
+
+        /**
+         * 要求最小实例数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.InstanceRequest = null;
+
+        /**
+         * 部署组启动参数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.StartupParameters = null;
+
+        /**
+         * 应用ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ApplicationId = null;
+
+        /**
+         * 部署组实例数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.InstanceCount = null;
+
     }
 
     /**
@@ -2992,6 +3034,11 @@ class ServerlessGroup extends  AbstractModel {
         this.VpcId = 'VpcId' in params ? params.VpcId : null;
         this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
         this.PkgVersion = 'PkgVersion' in params ? params.PkgVersion : null;
+        this.Memory = 'Memory' in params ? params.Memory : null;
+        this.InstanceRequest = 'InstanceRequest' in params ? params.InstanceRequest : null;
+        this.StartupParameters = 'StartupParameters' in params ? params.StartupParameters : null;
+        this.ApplicationId = 'ApplicationId' in params ? params.ApplicationId : null;
+        this.InstanceCount = 'InstanceCount' in params ? params.InstanceCount : null;
 
     }
 }
@@ -3839,6 +3886,83 @@ class DescribeConfigsRequest extends  AbstractModel {
 }
 
 /**
+ * AddClusterInstances请求参数结构体
+ * @class
+ */
+class AddClusterInstancesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 集群ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * 云主机ID列表
+         * @type {Array.<string> || null}
+         */
+        this.InstanceIdList = null;
+
+        /**
+         * 操作系统名称
+         * @type {string || null}
+         */
+        this.OsName = null;
+
+        /**
+         * 操作系统镜像ID
+         * @type {string || null}
+         */
+        this.ImageId = null;
+
+        /**
+         * 重装系统密码设置
+         * @type {string || null}
+         */
+        this.Password = null;
+
+        /**
+         * 重装系统，关联密钥设置
+         * @type {string || null}
+         */
+        this.KeyId = null;
+
+        /**
+         * 安全组设置
+         * @type {string || null}
+         */
+        this.SgId = null;
+
+        /**
+         * 云主机导入方式，虚拟机集群必填，容器集群不填写此字段，R：重装TSF系统镜像，M：手动安装agent
+         * @type {string || null}
+         */
+        this.InstanceImportMode = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.InstanceIdList = 'InstanceIdList' in params ? params.InstanceIdList : null;
+        this.OsName = 'OsName' in params ? params.OsName : null;
+        this.ImageId = 'ImageId' in params ? params.ImageId : null;
+        this.Password = 'Password' in params ? params.Password : null;
+        this.KeyId = 'KeyId' in params ? params.KeyId : null;
+        this.SgId = 'SgId' in params ? params.SgId : null;
+        this.InstanceImportMode = 'InstanceImportMode' in params ? params.InstanceImportMode : null;
+
+    }
+}
+
+/**
  * DescribePublicConfig返回参数结构体
  * @class
  */
@@ -4126,6 +4250,18 @@ class DescribeSimpleNamespacesRequest extends  AbstractModel {
          */
         this.NamespaceTypeList = null;
 
+        /**
+         * 通过命名空间名精确过滤
+         * @type {string || null}
+         */
+        this.NamespaceName = null;
+
+        /**
+         * 通过是否是默认命名空间过滤，不传表示拉取全部命名空间。0：默认，命名空间。1：非默认命名空间
+         * @type {string || null}
+         */
+        this.IsDefault = null;
+
     }
 
     /**
@@ -4143,6 +4279,8 @@ class DescribeSimpleNamespacesRequest extends  AbstractModel {
         this.NamespaceResourceTypeList = 'NamespaceResourceTypeList' in params ? params.NamespaceResourceTypeList : null;
         this.SearchWord = 'SearchWord' in params ? params.SearchWord : null;
         this.NamespaceTypeList = 'NamespaceTypeList' in params ? params.NamespaceTypeList : null;
+        this.NamespaceName = 'NamespaceName' in params ? params.NamespaceName : null;
+        this.IsDefault = 'IsDefault' in params ? params.IsDefault : null;
 
     }
 }
@@ -5196,10 +5334,22 @@ class DeployServerlessGroupRequest extends  AbstractModel {
         this.PkgId = null;
 
         /**
-         * VpcConfig对象，和创建接口中对象一致
-         * @type {VpcConfig || null}
+         * 所需实例内存大小，取值为 1Gi 2Gi 4Gi 8Gi 16Gi，缺省为 1Gi，不传表示维持原态
+         * @type {string || null}
          */
-        this.VpcConfig = null;
+        this.Memory = null;
+
+        /**
+         * 要求最小实例数，取值范围 [1, 4]，缺省为 1，不传表示维持原态
+         * @type {number || null}
+         */
+        this.InstanceRequest = null;
+
+        /**
+         * 部署组启动参数，不传表示维持原态
+         * @type {string || null}
+         */
+        this.StartupParameters = null;
 
     }
 
@@ -5212,12 +5362,9 @@ class DeployServerlessGroupRequest extends  AbstractModel {
         }
         this.GroupId = 'GroupId' in params ? params.GroupId : null;
         this.PkgId = 'PkgId' in params ? params.PkgId : null;
-
-        if (params.VpcConfig) {
-            let obj = new VpcConfig();
-            obj.deserialize(params.VpcConfig)
-            this.VpcConfig = obj;
-        }
+        this.Memory = 'Memory' in params ? params.Memory : null;
+        this.InstanceRequest = 'InstanceRequest' in params ? params.InstanceRequest : null;
+        this.StartupParameters = 'StartupParameters' in params ? params.StartupParameters : null;
 
     }
 }
@@ -5499,6 +5646,12 @@ class CreateClusterRequest extends  AbstractModel {
          */
         this.TsfZoneId = null;
 
+        /**
+         * 私有网络子网ID
+         * @type {string || null}
+         */
+        this.SubnetId = null;
+
     }
 
     /**
@@ -5515,6 +5668,7 @@ class CreateClusterRequest extends  AbstractModel {
         this.ClusterDesc = 'ClusterDesc' in params ? params.ClusterDesc : null;
         this.TsfRegionId = 'TsfRegionId' in params ? params.TsfRegionId : null;
         this.TsfZoneId = 'TsfZoneId' in params ? params.TsfZoneId : null;
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
 
     }
 }
@@ -6097,16 +6251,16 @@ class CreateNamespaceRequest extends  AbstractModel {
         super();
 
         /**
-         * 集群ID
-         * @type {string || null}
-         */
-        this.ClusterId = null;
-
-        /**
          * 命名空间名称
          * @type {string || null}
          */
         this.NamespaceName = null;
+
+        /**
+         * 集群ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
 
         /**
          * 命名空间描述
@@ -6120,6 +6274,18 @@ class CreateNamespaceRequest extends  AbstractModel {
          */
         this.NamespaceResourceType = null;
 
+        /**
+         * 是否是全局命名空间(默认是DEF，表示普通命名空间；GLOBAL表示全局命名空间)
+         * @type {string || null}
+         */
+        this.NamespaceType = null;
+
+        /**
+         * 命名空间ID
+         * @type {string || null}
+         */
+        this.NamespaceId = null;
+
     }
 
     /**
@@ -6129,10 +6295,12 @@ class CreateNamespaceRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
         this.NamespaceName = 'NamespaceName' in params ? params.NamespaceName : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
         this.NamespaceDesc = 'NamespaceDesc' in params ? params.NamespaceDesc : null;
         this.NamespaceResourceType = 'NamespaceResourceType' in params ? params.NamespaceResourceType : null;
+        this.NamespaceType = 'NamespaceType' in params ? params.NamespaceType : null;
+        this.NamespaceId = 'NamespaceId' in params ? params.NamespaceId : null;
 
     }
 }
@@ -6574,6 +6742,51 @@ class TsfPageVmGroup extends  AbstractModel {
 }
 
 /**
+ * 添加实例到集群的结果
+ * @class
+ */
+class AddInstanceResult extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 添加集群失败的节点列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
+         */
+        this.FailedInstanceIds = null;
+
+        /**
+         * 添加集群成功的节点列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
+         */
+        this.SuccInstanceIds = null;
+
+        /**
+         * 添加集群超时的节点列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
+         */
+        this.TimeoutInstanceIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FailedInstanceIds = 'FailedInstanceIds' in params ? params.FailedInstanceIds : null;
+        this.SuccInstanceIds = 'SuccInstanceIds' in params ? params.SuccInstanceIds : null;
+        this.TimeoutInstanceIds = 'TimeoutInstanceIds' in params ? params.TimeoutInstanceIds : null;
+
+    }
+}
+
+/**
  * DescribePkgs返回参数结构体
  * @class
  */
@@ -6650,41 +6863,6 @@ class DescribeSimpleNamespacesResponse extends  AbstractModel {
             this.Result = obj;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * vpc 配置信息
- * @class
- */
-class VpcConfig extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * VpcId
-         * @type {string || null}
-         */
-        this.VpcId = null;
-
-        /**
-         * SubnetId 子网ID
-         * @type {string || null}
-         */
-        this.SubnetId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.VpcId = 'VpcId' in params ? params.VpcId : null;
-        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
 
     }
 }
@@ -7859,6 +8037,47 @@ class CreateConfigResponse extends  AbstractModel {
 }
 
 /**
+ * AddClusterInstances返回参数结构体
+ * @class
+ */
+class AddClusterInstancesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 添加云主机的返回列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {AddInstanceResult || null}
+         */
+        this.Result = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Result) {
+            let obj = new AddInstanceResult();
+            obj.deserialize(params.Result)
+            this.Result = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * RevocationPublicConfig返回参数结构体
  * @class
  */
@@ -8487,10 +8706,16 @@ class CreateApplicationRequest extends  AbstractModel {
         this.ApplicationName = null;
 
         /**
-         * 应用类型
+         * 应用类型，V：虚拟机应用；C：容器应用；S：serverless应用
          * @type {string || null}
          */
         this.ApplicationType = null;
+
+        /**
+         * 应用微服务类型，M：service mesh应用；N：普通应用；G：网关应用
+         * @type {string || null}
+         */
+        this.MicroserviceType = null;
 
         /**
          * 应用描述
@@ -8505,16 +8730,16 @@ class CreateApplicationRequest extends  AbstractModel {
         this.ApplicationLogConfig = null;
 
         /**
-         * 应用微服务类型
-         * @type {string || null}
-         */
-        this.MicroserviceType = null;
-
-        /**
-         * 应有资源类型
+         * 应用资源类型，废弃参数
          * @type {string || null}
          */
         this.ApplicationResourceType = null;
+
+        /**
+         * 应用runtime类型
+         * @type {string || null}
+         */
+        this.ApplicationRuntimeType = null;
 
     }
 
@@ -8527,10 +8752,11 @@ class CreateApplicationRequest extends  AbstractModel {
         }
         this.ApplicationName = 'ApplicationName' in params ? params.ApplicationName : null;
         this.ApplicationType = 'ApplicationType' in params ? params.ApplicationType : null;
+        this.MicroserviceType = 'MicroserviceType' in params ? params.MicroserviceType : null;
         this.ApplicationDesc = 'ApplicationDesc' in params ? params.ApplicationDesc : null;
         this.ApplicationLogConfig = 'ApplicationLogConfig' in params ? params.ApplicationLogConfig : null;
-        this.MicroserviceType = 'MicroserviceType' in params ? params.MicroserviceType : null;
         this.ApplicationResourceType = 'ApplicationResourceType' in params ? params.ApplicationResourceType : null;
+        this.ApplicationRuntimeType = 'ApplicationRuntimeType' in params ? params.ApplicationRuntimeType : null;
 
     }
 }
@@ -8769,16 +8995,16 @@ class CreateServerlessGroupRequest extends  AbstractModel {
         this.GroupName = null;
 
         /**
-         * 程序包Id
+         * 分组所属名字空间ID
          * @type {string || null}
          */
-        this.PkgId = null;
+        this.NamespaceId = null;
 
         /**
-         * VpcConfig对象
-         * @type {VpcConfig || null}
+         * 分组所属集群ID
+         * @type {string || null}
          */
-        this.VpcConfig = null;
+        this.ClusterId = null;
 
     }
 
@@ -8791,13 +9017,8 @@ class CreateServerlessGroupRequest extends  AbstractModel {
         }
         this.ApplicationId = 'ApplicationId' in params ? params.ApplicationId : null;
         this.GroupName = 'GroupName' in params ? params.GroupName : null;
-        this.PkgId = 'PkgId' in params ? params.PkgId : null;
-
-        if (params.VpcConfig) {
-            let obj = new VpcConfig();
-            obj.deserialize(params.VpcConfig)
-            this.VpcConfig = obj;
-        }
+        this.NamespaceId = 'NamespaceId' in params ? params.NamespaceId : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
 
     }
 }
@@ -8890,16 +9111,16 @@ class DescribeServerlessGroupsRequest extends  AbstractModel {
         super();
 
         /**
-         * 分组所属应用ID
-         * @type {string || null}
-         */
-        this.ApplicationId = null;
-
-        /**
          * 搜索字段，模糊搜索groupName字段
          * @type {string || null}
          */
         this.SearchWord = null;
+
+        /**
+         * 分组所属应用ID
+         * @type {string || null}
+         */
+        this.ApplicationId = null;
 
         /**
          * 排序字段，默认为 createTime字段，支持id， name， createTime
@@ -8925,6 +9146,18 @@ class DescribeServerlessGroupsRequest extends  AbstractModel {
          */
         this.Limit = null;
 
+        /**
+         * 分组所属名字空间ID
+         * @type {string || null}
+         */
+        this.NamespaceId = null;
+
+        /**
+         * 分组所属集群ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
     }
 
     /**
@@ -8934,12 +9167,14 @@ class DescribeServerlessGroupsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ApplicationId = 'ApplicationId' in params ? params.ApplicationId : null;
         this.SearchWord = 'SearchWord' in params ? params.SearchWord : null;
+        this.ApplicationId = 'ApplicationId' in params ? params.ApplicationId : null;
         this.OrderBy = 'OrderBy' in params ? params.OrderBy : null;
         this.OrderType = 'OrderType' in params ? params.OrderType : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
+        this.NamespaceId = 'NamespaceId' in params ? params.NamespaceId : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
 
     }
 }
@@ -10030,6 +10265,7 @@ module.exports = {
     DescribeApplicationAttributeRequest: DescribeApplicationAttributeRequest,
     RollbackConfigRequest: RollbackConfigRequest,
     DescribeConfigsRequest: DescribeConfigsRequest,
+    AddClusterInstancesRequest: AddClusterInstancesRequest,
     DescribePublicConfigResponse: DescribePublicConfigResponse,
     DeleteConfigResponse: DeleteConfigResponse,
     TsfPageNamespace: TsfPageNamespace,
@@ -10076,9 +10312,9 @@ module.exports = {
     ProtocolPort: ProtocolPort,
     DescribeServerlessGroupRequest: DescribeServerlessGroupRequest,
     TsfPageVmGroup: TsfPageVmGroup,
+    AddInstanceResult: AddInstanceResult,
     DescribePkgsResponse: DescribePkgsResponse,
     DescribeSimpleNamespacesResponse: DescribeSimpleNamespacesResponse,
-    VpcConfig: VpcConfig,
     ApplicationAttribute: ApplicationAttribute,
     DeleteImageTag: DeleteImageTag,
     DeletePkgsResponse: DeletePkgsResponse,
@@ -10102,6 +10338,7 @@ module.exports = {
     ShrinkGroupRequest: ShrinkGroupRequest,
     TsfPageSimpleApplication: TsfPageSimpleApplication,
     CreateConfigResponse: CreateConfigResponse,
+    AddClusterInstancesResponse: AddClusterInstancesResponse,
     RevocationPublicConfigResponse: RevocationPublicConfigResponse,
     DescribeConfigReleaseLogsRequest: DescribeConfigReleaseLogsRequest,
     DescribeContainerGroupsResponse: DescribeContainerGroupsResponse,
