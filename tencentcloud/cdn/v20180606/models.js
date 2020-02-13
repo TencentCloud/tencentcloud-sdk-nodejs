@@ -1385,6 +1385,102 @@ class EnableCachesRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeBillingData请求参数结构体
+ * @class
+ */
+class DescribeBillingDataRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 查询起始时间，如：2018-09-04 10:40:00，返回结果大于等于指定时间
+根据指定时间粒度参数不同，会进行向前取整，如指定起始时间为 2018-09-04 10:40:00 按小时粒度查询，返回的第一个数据对应时间点为 2018-09-04 10:00:00
+起始时间与结束时间间隔小于等于 90 天
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * 查询结束时间，如：2018-09-04 10:40:00，返回结果小于等于指定时间
+根据指定时间粒度参数不同，会进行向前取整，如指定结束时间为  2018-09-04 10:40:00 按小时粒度查询时，返回的最后一个数据对应时间点为 2018-09-04 10:00:00
+起始时间与结束时间间隔小于等于 90 天
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * 时间粒度，支持模式如下：
+min：1 分钟粒度，查询区间需要小于等于 24 小时
+5min：5 分钟粒度，查询区间需要小于等于 31 天
+hour：1 小时粒度，查询区间需要小于等于 31 天内
+day：天粒度，查询区间需要大于 31 天
+
+Area 字段为 overseas 时暂不支持1分钟粒度数据查询
+         * @type {string || null}
+         */
+        this.Interval = null;
+
+        /**
+         * 指定域名查询计费数据
+         * @type {string || null}
+         */
+        this.Domain = null;
+
+        /**
+         * 指定项目 ID 查询，[前往查看项目 ID](https://console.cloud.tencent.com/project)
+若 Domain 参数填充了具体域名信息，则返回该域名的计费数据，而非指定项目计费数据
+         * @type {number || null}
+         */
+        this.Project = null;
+
+        /**
+         * 指定加速区域查询计费数据：
+mainland：中国境内
+overseas：中国境外
+不填充时，默认为 mainland
+         * @type {string || null}
+         */
+        this.Area = null;
+
+        /**
+         * Area 为 overseas 时，指定国家/地区查询
+省份、国家/地区编码可以查看 [省份编码映射](https://cloud.tencent.com/document/product/228/6316#.E7.9C.81.E4.BB.BD.E6.98.A0.E5.B0.84)
+不填充时，查询所有国家/地区
+         * @type {number || null}
+         */
+        this.District = null;
+
+        /**
+         * 计费统计类型
+flux：计费流量
+bandwidth：计费带宽
+默认为 bandwidth
+         * @type {string || null}
+         */
+        this.Metric = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.Interval = 'Interval' in params ? params.Interval : null;
+        this.Domain = 'Domain' in params ? params.Domain : null;
+        this.Project = 'Project' in params ? params.Project : null;
+        this.Area = 'Area' in params ? params.Area : null;
+        this.District = 'District' in params ? params.District : null;
+        this.Metric = 'Metric' in params ? params.Metric : null;
+
+    }
+}
+
+/**
  * 缓存配置基础版本
 默认情况下所有文件缓存过期时间为 30 天
 默认情况下静态加速类型的域名 .php;.jsp;.asp;.aspx 不缓存
@@ -5758,6 +5854,60 @@ off：关闭
 }
 
 /**
+ * DescribeBillingData返回参数结构体
+ * @class
+ */
+class DescribeBillingDataResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 时间粒度，根据查询时传递参数指定：
+min：1 分钟粒度
+5min：5 分钟粒度
+hour：1 小时粒度
+day：天粒度
+         * @type {string || null}
+         */
+        this.Interval = null;
+
+        /**
+         * 数据明细
+         * @type {Array.<ResourceBillingData> || null}
+         */
+        this.Data = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Interval = 'Interval' in params ? params.Interval : null;
+
+        if (params.Data) {
+            this.Data = new Array();
+            for (let z in params.Data) {
+                let obj = new ResourceBillingData();
+                obj.deserialize(params.Data[z]);
+                this.Data.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DisableCaches返回参数结构体
  * @class
  */
@@ -6451,6 +6601,53 @@ class StartCdnDomainResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 计费数据明细
+ * @class
+ */
+class ResourceBillingData extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 资源名称，根据查询条件不同分为以下几类：
+某一个具体域名：表示该域名明细数据
+multiDomains：表示多域名汇总明细数据
+某一个项目 ID：指定项目查询时，显示为项目 ID
+all：账号维度数据明细
+         * @type {string || null}
+         */
+        this.Resource = null;
+
+        /**
+         * 计费数据详情
+         * @type {Array.<CdnData> || null}
+         */
+        this.BillingData = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Resource = 'Resource' in params ? params.Resource : null;
+
+        if (params.BillingData) {
+            this.BillingData = new Array();
+            for (let z in params.BillingData) {
+                let obj = new CdnData();
+                obj.deserialize(params.BillingData[z]);
+                this.BillingData.push(obj);
+            }
+        }
 
     }
 }
@@ -7846,6 +8043,7 @@ module.exports = {
     CompressionRule: CompressionRule,
     Origin: Origin,
     EnableCachesRequest: EnableCachesRequest,
+    DescribeBillingDataRequest: DescribeBillingDataRequest,
     SimpleCache: SimpleCache,
     TopDetailData: TopDetailData,
     UpdatePayTypeResponse: UpdatePayTypeResponse,
@@ -7906,6 +8104,7 @@ module.exports = {
     GetDisableRecordsRequest: GetDisableRecordsRequest,
     PurgeUrlsCacheResponse: PurgeUrlsCacheResponse,
     ResponseHeader: ResponseHeader,
+    DescribeBillingDataResponse: DescribeBillingDataResponse,
     DisableCachesResponse: DisableCachesResponse,
     DescribeCdnIpResponse: DescribeCdnIpResponse,
     DescribeCdnDataResponse: DescribeCdnDataResponse,
@@ -7922,6 +8121,7 @@ module.exports = {
     PushTask: PushTask,
     TimestampData: TimestampData,
     StartCdnDomainResponse: StartCdnDomainResponse,
+    ResourceBillingData: ResourceBillingData,
     Sort: Sort,
     DescribePurgeTasksRequest: DescribePurgeTasksRequest,
     PushUrlsCacheResponse: PushUrlsCacheResponse,

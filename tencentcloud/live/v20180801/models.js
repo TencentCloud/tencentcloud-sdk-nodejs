@@ -4864,7 +4864,7 @@ class CreateLiveTranscodeRuleRequest extends  AbstractModel {
         this.DomainName = null;
 
         /**
-         * 推流路径，与推流和播放地址中的AppName保持一致，默认为 live。
+         * 推流路径，与推流和播放地址中的AppName保持一致。如果只绑定域名，则此处填空。
          * @type {string || null}
          */
         this.AppName = null;
@@ -5179,7 +5179,7 @@ class DescribeGroupProIspPlayInfoListRequest extends  AbstractModel {
         this.ProvinceNames = null;
 
         /**
-         * 运营商列表，默认不填，则返回个运营商的数据。
+         * 运营商列表，默认不填，则返回整个运营商的数据。
          * @type {Array.<string> || null}
          */
         this.IspNames = null;
@@ -10062,13 +10062,13 @@ class DescribeLiveStreamOnlineListRequest extends  AbstractModel {
         super();
 
         /**
-         * 推流域名。
+         * 推流域名。多域名用户需要填写DomainName。
          * @type {string || null}
          */
         this.DomainName = null;
 
         /**
-         * 推流路径，与推流和播放地址中的AppName保持一致，默认为 live。
+         * 推流路径，与推流和播放地址中的AppName保持一致，默认为 live。多路径用户需要填写AppName。
          * @type {string || null}
          */
         this.AppName = null;

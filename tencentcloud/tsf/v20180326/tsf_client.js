@@ -92,6 +92,7 @@ const DeleteImageTagsRequest = models.DeleteImageTagsRequest;
 const DescribeApplicationAttributeRequest = models.DescribeApplicationAttributeRequest;
 const RollbackConfigRequest = models.RollbackConfigRequest;
 const DescribeConfigsRequest = models.DescribeConfigsRequest;
+const AddClusterInstancesRequest = models.AddClusterInstancesRequest;
 const DescribePublicConfigResponse = models.DescribePublicConfigResponse;
 const DeleteConfigResponse = models.DeleteConfigResponse;
 const TsfPageNamespace = models.TsfPageNamespace;
@@ -138,9 +139,9 @@ const ImageTagsResult = models.ImageTagsResult;
 const ProtocolPort = models.ProtocolPort;
 const DescribeServerlessGroupRequest = models.DescribeServerlessGroupRequest;
 const TsfPageVmGroup = models.TsfPageVmGroup;
+const AddInstanceResult = models.AddInstanceResult;
 const DescribePkgsResponse = models.DescribePkgsResponse;
 const DescribeSimpleNamespacesResponse = models.DescribeSimpleNamespacesResponse;
-const VpcConfig = models.VpcConfig;
 const ApplicationAttribute = models.ApplicationAttribute;
 const DeleteImageTag = models.DeleteImageTag;
 const DeletePkgsResponse = models.DeletePkgsResponse;
@@ -164,6 +165,7 @@ const DescribeMicroservicesRequest = models.DescribeMicroservicesRequest;
 const ShrinkGroupRequest = models.ShrinkGroupRequest;
 const TsfPageSimpleApplication = models.TsfPageSimpleApplication;
 const CreateConfigResponse = models.CreateConfigResponse;
+const AddClusterInstancesResponse = models.AddClusterInstancesResponse;
 const RevocationPublicConfigResponse = models.RevocationPublicConfigResponse;
 const DescribeConfigReleaseLogsRequest = models.DescribeConfigReleaseLogsRequest;
 const DescribeContainerGroupsResponse = models.DescribeContainerGroupsResponse;
@@ -312,6 +314,17 @@ class TsfClient extends AbstractClient {
     DeployContainerGroup(req, cb) {
         let resp = new DeployContainerGroupResponse();
         this.request("DeployContainerGroup", req, resp, cb);
+    }
+
+    /**
+     * 添加云主机节点至TSF集群
+     * @param {AddClusterInstancesRequest} req
+     * @param {function(string, AddClusterInstancesResponse):void} cb
+     * @public
+     */
+    AddClusterInstances(req, cb) {
+        let resp = new AddClusterInstancesResponse();
+        this.request("AddClusterInstances", req, resp, cb);
     }
 
     /**

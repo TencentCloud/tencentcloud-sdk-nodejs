@@ -155,7 +155,7 @@ class MariadbClient extends AbstractClient {
     }
 
     /**
-     * 本接口（DescribeOrders）用于查询云数据库订单信息。传入订单Id来查询订单关联的云数据库实例，和对应的任务流程ID。
+     * 本接口（DescribeOrders）用于查询云数据库订单信息。传入订单ID来查询订单关联的云数据库实例，和对应的任务流程ID。
      * @param {DescribeOrdersRequest} req
      * @param {function(string, DescribeOrdersResponse):void} cb
      * @public

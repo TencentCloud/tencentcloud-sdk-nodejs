@@ -16,6 +16,7 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
+const CorrectMultiImageResponse = models.CorrectMultiImageResponse;
 const DescribeTaskRequest = models.DescribeTaskRequest;
 const SentenceItem = models.SentenceItem;
 const ECCResponse = models.ECCResponse;
@@ -30,6 +31,7 @@ const Aspect = models.Aspect;
 const CompostionContext = models.CompostionContext;
 const DescribeTaskResponse = models.DescribeTaskResponse;
 const EHOCRRequest = models.EHOCRRequest;
+const CorrectMultiImageRequest = models.CorrectMultiImageRequest;
 
 
 /**
@@ -75,6 +77,18 @@ class EccClient extends AbstractClient {
     DescribeTask(req, cb) {
         let resp = new DescribeTaskResponse();
         this.request("DescribeTask", req, resp, cb);
+    }
+
+    /**
+     * https://ecc.tencentcloudapi.com/?Action=CorrectMultiImage
+多图像识别批改接口
+     * @param {CorrectMultiImageRequest} req
+     * @param {function(string, CorrectMultiImageResponse):void} cb
+     * @public
+     */
+    CorrectMultiImage(req, cb) {
+        let resp = new CorrectMultiImageResponse();
+        this.request("CorrectMultiImage", req, resp, cb);
     }
 
 

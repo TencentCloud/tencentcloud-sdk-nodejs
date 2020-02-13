@@ -1496,10 +1496,22 @@ class TextEduPaper extends  AbstractModel {
         super();
 
         /**
-         * 识别出的文本行内容
+         * 识别出的字段名称（关键字）
+         * @type {string || null}
+         */
+        this.Item = null;
+
+        /**
+         * 识别出的字段名称对应的值，也就是字段Item对应的字符串结果
          * @type {string || null}
          */
         this.DetectedText = null;
+
+        /**
+         * 文本行在旋转纠正之后的图像中的像素坐标，表示为（左上角x, 左上角y，宽width，高height）
+         * @type {ItemCoord || null}
+         */
+        this.Itemcoord = null;
 
     }
 
@@ -1510,7 +1522,14 @@ class TextEduPaper extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.Item = 'Item' in params ? params.Item : null;
         this.DetectedText = 'DetectedText' in params ? params.DetectedText : null;
+
+        if (params.Itemcoord) {
+            let obj = new ItemCoord();
+            obj.deserialize(params.Itemcoord)
+            this.Itemcoord = obj;
+        }
 
     }
 }
@@ -2177,6 +2196,13 @@ class GeneralHandwritingOCRRequest extends  AbstractModel {
          */
         this.ImageUrl = null;
 
+        /**
+         * 场景字段，默认不用填写。
+可选值:only_hw  表示只输出手写体识别结果，过滤印刷体。
+         * @type {string || null}
+         */
+        this.Scene = null;
+
     }
 
     /**
@@ -2188,6 +2214,7 @@ class GeneralHandwritingOCRRequest extends  AbstractModel {
         }
         this.ImageBase64 = 'ImageBase64' in params ? params.ImageBase64 : null;
         this.ImageUrl = 'ImageUrl' in params ? params.ImageUrl : null;
+        this.Scene = 'Scene' in params ? params.Scene : null;
 
     }
 }
@@ -3573,7 +3600,9 @@ class TextGeneralHandwriting extends  AbstractModel {
         this.Polygon = null;
 
         /**
-         * 此字段为扩展字段
+         * 此字段为扩展字段。
+能返回文本行的段落信息，例如：{\"Parag\":{\"ParagNo\":2}}，
+其中ParagNo为段落行，从1开始。
          * @type {string || null}
          */
         this.AdvancedInfo = null;

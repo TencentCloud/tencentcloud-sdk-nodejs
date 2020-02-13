@@ -815,6 +815,76 @@ class DescribeAnimatedGraphicsTemplatesRequest extends  AbstractModel {
 }
 
 /**
+ * 内容审核 Asr 文字鉴任违禁务结果类型
+ * @class
+ */
+class AiReviewTaskProhibitedAsrResult extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 任务状态，有 PROCESSING，SUCCESS 和 FAIL 三种。
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * 错误码，0 表示成功，其他值表示失败：
+<li>40000：输入参数不合法，请检查输入参数；</li>
+<li>60000：源文件错误（如视频数据损坏），请确认源文件是否正常；</li>
+<li>70000：内部服务错误，建议重试。</li>
+         * @type {number || null}
+         */
+        this.ErrCode = null;
+
+        /**
+         * 错误信息。
+         * @type {string || null}
+         */
+        this.Message = null;
+
+        /**
+         * 内容审核 Asr 文字鉴违禁任务输入。
+         * @type {AiReviewProhibitedAsrTaskInput || null}
+         */
+        this.Input = null;
+
+        /**
+         * 内容审核 Asr 文字鉴违禁任务输出。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {AiReviewProhibitedAsrTaskOutput || null}
+         */
+        this.Output = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Status = 'Status' in params ? params.Status : null;
+        this.ErrCode = 'ErrCode' in params ? params.ErrCode : null;
+        this.Message = 'Message' in params ? params.Message : null;
+
+        if (params.Input) {
+            let obj = new AiReviewProhibitedAsrTaskInput();
+            obj.deserialize(params.Input)
+            this.Input = obj;
+        }
+
+        if (params.Output) {
+            let obj = new AiReviewProhibitedAsrTaskOutput();
+            obj.deserialize(params.Output)
+            this.Output = obj;
+        }
+
+    }
+}
+
+/**
  * 转自适应码流模板详情
  * @class
  */
@@ -895,13 +965,13 @@ class AdaptiveDynamicStreamingTemplate extends  AbstractModel {
         this.DisableHigherVideoResolution = null;
 
         /**
-         * 模板创建时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F)。
+         * 模板创建时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
          * @type {string || null}
          */
         this.CreateTime = null;
 
         /**
-         * 模板最后修改时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F)。
+         * 模板最后修改时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
          * @type {string || null}
          */
         this.UpdateTime = null;
@@ -976,6 +1046,76 @@ class DeleteAnimatedGraphicsTemplateResponse extends  AbstractModel {
 }
 
 /**
+ * 内容审核 Ocr 文字鉴任违禁务结果类型
+ * @class
+ */
+class AiReviewTaskProhibitedOcrResult extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 任务状态，有 PROCESSING，SUCCESS 和 FAIL 三种。
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * 错误码，0 表示成功，其他值表示失败：
+<li>40000：输入参数不合法，请检查输入参数；</li>
+<li>60000：源文件错误（如视频数据损坏），请确认源文件是否正常；</li>
+<li>70000：内部服务错误，建议重试。</li>
+         * @type {number || null}
+         */
+        this.ErrCode = null;
+
+        /**
+         * 错误信息。
+         * @type {string || null}
+         */
+        this.Message = null;
+
+        /**
+         * 内容审核 Ocr 文字鉴违禁任务输入。
+         * @type {AiReviewProhibitedOcrTaskInput || null}
+         */
+        this.Input = null;
+
+        /**
+         * 内容审核 Ocr 文字鉴违禁任务输出。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {AiReviewProhibitedOcrTaskOutput || null}
+         */
+        this.Output = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Status = 'Status' in params ? params.Status : null;
+        this.ErrCode = 'ErrCode' in params ? params.ErrCode : null;
+        this.Message = 'Message' in params ? params.Message : null;
+
+        if (params.Input) {
+            let obj = new AiReviewProhibitedOcrTaskInput();
+            obj.deserialize(params.Input)
+            this.Input = obj;
+        }
+
+        if (params.Output) {
+            let obj = new AiReviewProhibitedOcrTaskOutput();
+            obj.deserialize(params.Output)
+            this.Output = obj;
+        }
+
+    }
+}
+
+/**
  * 语音全文识别结果。
  * @class
  */
@@ -1014,6 +1154,59 @@ class AiRecognitionTaskAsrFullTextResultOutput extends  AbstractModel {
             }
         }
         this.SubtitleUrl = 'SubtitleUrl' in params ? params.SubtitleUrl : null;
+
+    }
+}
+
+/**
+ * Ocr 文字涉违禁信息
+ * @class
+ */
+class AiReviewProhibitedOcrTaskOutput extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Ocr 文字涉违禁评分，分值为0到100。
+         * @type {number || null}
+         */
+        this.Confidence = null;
+
+        /**
+         * Ocr 文字涉违禁结果建议，取值范围：
+<li>pass。</li>
+<li>review。</li>
+<li>block。</li>
+         * @type {string || null}
+         */
+        this.Suggestion = null;
+
+        /**
+         * Ocr 文字有涉违禁嫌疑的视频片段列表。
+         * @type {Array.<MediaContentReviewOcrTextSegmentItem> || null}
+         */
+        this.SegmentSet = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Confidence = 'Confidence' in params ? params.Confidence : null;
+        this.Suggestion = 'Suggestion' in params ? params.Suggestion : null;
+
+        if (params.SegmentSet) {
+            this.SegmentSet = new Array();
+            for (let z in params.SegmentSet) {
+                let obj = new MediaContentReviewOcrTextSegmentItem();
+                obj.deserialize(params.SegmentSet[z]);
+                this.SegmentSet.push(obj);
+            }
+        }
 
     }
 }
@@ -1530,13 +1723,13 @@ class AiSampleWord extends  AbstractModel {
         this.UsageSet = null;
 
         /**
-         * 创建时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F)。
+         * 创建时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
          * @type {string || null}
          */
         this.CreateTime = null;
 
         /**
-         * 最后修改时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F)。
+         * 最后修改时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
          * @type {string || null}
          */
         this.UpdateTime = null;
@@ -1813,13 +2006,13 @@ class VideoTrackTemplateInfo extends  AbstractModel {
         this.FillType = null;
 
         /**
-         * 模板创建时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F)。
+         * 模板创建时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
          * @type {string || null}
          */
         this.CreateTime = null;
 
         /**
-         * 模板最后修改时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F)。
+         * 模板最后修改时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
          * @type {string || null}
          */
         this.UpdateTime = null;
@@ -1950,6 +2143,16 @@ class ContentReviewTemplateItem extends  AbstractModel {
         this.PoliticalConfigure = null;
 
         /**
+         * 违禁控制参数。违禁内容包括：
+<li>谩骂；</li>
+<li>涉毒违法。</li>
+注意：此参数尚未支持。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {ProhibitedConfigureInfo || null}
+         */
+        this.ProhibitedConfigure = null;
+
+        /**
          * 用户自定义内容审核控制参数。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {UserDefineConfigureInfo || null}
@@ -1971,13 +2174,13 @@ class ContentReviewTemplateItem extends  AbstractModel {
         this.ScreenshotInterval = null;
 
         /**
-         * 模板创建时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F)。
+         * 模板创建时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
          * @type {string || null}
          */
         this.CreateTime = null;
 
         /**
-         * 模板最后修改时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F)。
+         * 模板最后修改时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
          * @type {string || null}
          */
         this.UpdateTime = null;
@@ -2011,6 +2214,12 @@ class ContentReviewTemplateItem extends  AbstractModel {
             let obj = new PoliticalConfigureInfo();
             obj.deserialize(params.PoliticalConfigure)
             this.PoliticalConfigure = obj;
+        }
+
+        if (params.ProhibitedConfigure) {
+            let obj = new ProhibitedConfigureInfo();
+            obj.deserialize(params.ProhibitedConfigure)
+            this.ProhibitedConfigure = obj;
         }
 
         if (params.UserDefineConfigure) {
@@ -2941,13 +3150,13 @@ class AIRecognitionTemplateItem extends  AbstractModel {
         this.ScreenshotInterval = null;
 
         /**
-         * 模板创建时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F)。
+         * 模板创建时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
          * @type {string || null}
          */
         this.CreateTime = null;
 
         /**
-         * 模板最后修改时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F)。
+         * 模板最后修改时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
          * @type {string || null}
          */
         this.UpdateTime = null;
@@ -3439,6 +3648,34 @@ class TextWatermarkTemplateInputForUpdate extends  AbstractModel {
         this.FontSize = 'FontSize' in params ? params.FontSize : null;
         this.FontColor = 'FontColor' in params ? params.FontColor : null;
         this.FontAlpha = 'FontAlpha' in params ? params.FontAlpha : null;
+
+    }
+}
+
+/**
+ * 内容审核 Ocr 文字鉴恐任务输入参数类型
+ * @class
+ */
+class AiReviewTerrorismOcrTaskInput extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 鉴恐模板 ID。
+         * @type {number || null}
+         */
+        this.Definition = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Definition = 'Definition' in params ? params.Definition : null;
 
     }
 }
@@ -4556,13 +4793,13 @@ class WatermarkTemplate extends  AbstractModel {
         this.SvgTemplate = null;
 
         /**
-         * 模板创建时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F)。
+         * 模板创建时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
          * @type {string || null}
          */
         this.CreateTime = null;
 
         /**
-         * 模板最后修改时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F)。
+         * 模板最后修改时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
          * @type {string || null}
          */
         this.UpdateTime = null;
@@ -4899,13 +5136,13 @@ class AudioTrackTemplateInfo extends  AbstractModel {
         this.AudioChannel = null;
 
         /**
-         * 模板创建时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F)。
+         * 模板创建时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
          * @type {string || null}
          */
         this.CreateTime = null;
 
         /**
-         * 模板最后修改时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F)。
+         * 模板最后修改时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
          * @type {string || null}
          */
         this.UpdateTime = null;
@@ -5082,7 +5319,7 @@ class ModifyMediaInfoRequest extends  AbstractModel {
         this.ClassId = null;
 
         /**
-         * 媒体文件过期时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F)。填“9999-12-31T23:59:59Z”表示永不过期。过期后该媒体文件及其相关资源（转码结果、雪碧图等）将被永久删除。
+         * 媒体文件过期时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。填“9999-12-31T23:59:59Z”表示永不过期。过期后该媒体文件及其相关资源（转码结果、雪碧图等）将被永久删除。
          * @type {string || null}
          */
         this.ExpireTime = null;
@@ -5166,6 +5403,41 @@ class ModifyMediaInfoRequest extends  AbstractModel {
         this.AddTags = 'AddTags' in params ? params.AddTags : null;
         this.DeleteTags = 'DeleteTags' in params ? params.DeleteTags : null;
         this.ClearTags = 'ClearTags' in params ? params.ClearTags : null;
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
+
+    }
+}
+
+/**
+ * DeleteTranscodeTemplate请求参数结构体
+ * @class
+ */
+class DeleteTranscodeTemplateRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 转码模板唯一标识。
+         * @type {number || null}
+         */
+        this.Definition = null;
+
+        /**
+         * 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Definition = 'Definition' in params ? params.Definition : null;
         this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
 
     }
@@ -6030,6 +6302,76 @@ class SvgWatermarkInputForUpdate extends  AbstractModel {
 }
 
 /**
+ * 内容审核 Ocr 文字鉴恐任务结果类型
+ * @class
+ */
+class AiReviewTaskTerrorismOcrResult extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 任务状态，有 PROCESSING，SUCCESS 和 FAIL 三种。
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * 错误码，0 表示成功，其他值表示失败：
+<li>40000：输入参数不合法，请检查输入参数；</li>
+<li>60000：源文件错误（如视频数据损坏），请确认源文件是否正常；</li>
+<li>70000：内部服务错误，建议重试。</li>
+         * @type {number || null}
+         */
+        this.ErrCode = null;
+
+        /**
+         * 错误信息。
+         * @type {string || null}
+         */
+        this.Message = null;
+
+        /**
+         * 内容审核 Ocr 文字鉴恐任务输入。
+         * @type {AiReviewTerrorismOcrTaskInput || null}
+         */
+        this.Input = null;
+
+        /**
+         * 内容审核 Ocr 文字鉴恐任务输出。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {AiReviewTerrorismOcrTaskOutput || null}
+         */
+        this.Output = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Status = 'Status' in params ? params.Status : null;
+        this.ErrCode = 'ErrCode' in params ? params.ErrCode : null;
+        this.Message = 'Message' in params ? params.Message : null;
+
+        if (params.Input) {
+            let obj = new AiReviewTerrorismOcrTaskInput();
+            obj.deserialize(params.Input)
+            this.Input = obj;
+        }
+
+        if (params.Output) {
+            let obj = new AiReviewTerrorismOcrTaskOutput();
+            obj.deserialize(params.Output)
+            this.Output = obj;
+        }
+
+    }
+}
+
+/**
  * 文本关键识别结果。
  * @class
  */
@@ -6279,13 +6621,13 @@ class LiveRealTimeClipRequest extends  AbstractModel {
         this.StreamId = null;
 
         /**
-         * 流剪辑的开始时间，格式参照 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F)。
+         * 流剪辑的开始时间，格式参照 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#I)。
          * @type {string || null}
          */
         this.StartTime = null;
 
         /**
-         * 流剪辑的结束时间，格式参照 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F)。
+         * 流剪辑的结束时间，格式参照 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#I)。
          * @type {string || null}
          */
         this.EndTime = null;
@@ -6297,7 +6639,7 @@ class LiveRealTimeClipRequest extends  AbstractModel {
         this.IsPersistence = null;
 
         /**
-         * 剪辑固化后的视频存储过期时间。格式参照 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F)。填“9999-12-31T23:59:59Z”表示永不过期。过期后该媒体文件及其相关资源（转码结果、雪碧图等）将被永久删除。仅 IsPersistence 为 1 时有效，默认剪辑固化的视频永不过期。
+         * 剪辑固化后的视频存储过期时间。格式参照 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。填“9999-12-31T23:59:59Z”表示永不过期。过期后该媒体文件及其相关资源（转码结果、雪碧图等）将被永久删除。仅 IsPersistence 为 1 时有效，默认剪辑固化的视频永不过期。
          * @type {string || null}
          */
         this.ExpireTime = null;
@@ -6313,6 +6655,18 @@ class LiveRealTimeClipRequest extends  AbstractModel {
          * @type {number || null}
          */
         this.MetaDataRequired = null;
+
+        /**
+         * 即时剪辑使用的域名，必须在直播侧开通时移。
+         * @type {string || null}
+         */
+        this.Host = null;
+
+        /**
+         * 系统保留字段，请勿填写。
+         * @type {string || null}
+         */
+        this.ExtInfo = null;
 
         /**
          * 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
@@ -6336,6 +6690,8 @@ class LiveRealTimeClipRequest extends  AbstractModel {
         this.ExpireTime = 'ExpireTime' in params ? params.ExpireTime : null;
         this.Procedure = 'Procedure' in params ? params.Procedure : null;
         this.MetaDataRequired = 'MetaDataRequired' in params ? params.MetaDataRequired : null;
+        this.Host = 'Host' in params ? params.Host : null;
+        this.ExtInfo = 'ExtInfo' in params ? params.ExtInfo : null;
         this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
 
     }
@@ -6419,7 +6775,7 @@ class EditMediaOutputConfig extends  AbstractModel {
         this.ClassId = null;
 
         /**
-         * 输出文件的过期时间，超过该时间文件将被删除，默认为永久不过期，格式按照 ISO 8601标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F)。
+         * 输出文件的过期时间，超过该时间文件将被删除，默认为永久不过期，格式按照 ISO 8601标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#I)。
          * @type {string || null}
          */
         this.ExpireTime = null;
@@ -6451,7 +6807,6 @@ class AiReviewPornAsrTaskOutput extends  AbstractModel {
 
         /**
          * Asr 文字涉黄评分，分值为0到100。
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.Confidence = null;
@@ -6461,14 +6816,12 @@ class AiReviewPornAsrTaskOutput extends  AbstractModel {
 <li>pass。</li>
 <li>review。</li>
 <li>block。</li>
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.Suggestion = null;
 
         /**
          * Asr 文字有涉黄嫌疑的视频片段列表。
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<MediaContentReviewAsrTextSegmentItem> || null}
          */
         this.SegmentSet = null;
@@ -8497,7 +8850,7 @@ class MediaAnimatedGraphicsItem extends  AbstractModel {
         this.Url = null;
 
         /**
-         * 转动图模板 ID，参见[转动图参数模板](https://cloud.tencent.com/document/product/266/33481#.E8.BD.AC.E5.8A.A8.E5.9B.BE.E6.A8.A1.E6.9D.BF)。
+         * 转动图模板 ID，参见[转动图参数模板](https://cloud.tencent.com/document/product/266/33481#.3Cspan-id-.3D-.22zdt.22.3E.3C.2Fspan.3E.E8.BD.AC.E5.8A.A8.E5.9B.BE.E6.A8.A1.E6.9D.BF)。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
@@ -9804,16 +10157,22 @@ class SimpleHlsClipRequest extends  AbstractModel {
         this.Url = null;
 
         /**
-         * 裁剪的开始偏移时间，单位秒。默认 0，即从视频开头开始裁剪。负数表示距离视频结束多少秒开始裁剪。比如 -10 表示从倒数第 10 秒开始裁剪。
+         * 裁剪的开始偏移时间，单位秒。默认 0，即从视频开头开始裁剪。负数表示距离视频结束多少秒开始裁剪。例如 -10 表示从倒数第 10 秒开始裁剪。
          * @type {number || null}
          */
         this.StartTimeOffset = null;
 
         /**
-         * 裁剪的结束偏移时间，单位秒。默认 0，即裁剪到视频尾部。负数表示距离视频结束多少秒结束裁剪。比如 -10 表示到倒数第 10 秒结束裁剪。
+         * 裁剪的结束偏移时间，单位秒。默认 0，即裁剪到视频尾部。负数表示距离视频结束多少秒结束裁剪。例如 -10 表示到倒数第 10 秒结束裁剪。
          * @type {number || null}
          */
         this.EndTimeOffset = null;
+
+        /**
+         * 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
+         * @type {number || null}
+         */
+        this.SubAppId = null;
 
     }
 
@@ -9827,6 +10186,7 @@ class SimpleHlsClipRequest extends  AbstractModel {
         this.Url = 'Url' in params ? params.Url : null;
         this.StartTimeOffset = 'StartTimeOffset' in params ? params.StartTimeOffset : null;
         this.EndTimeOffset = 'EndTimeOffset' in params ? params.EndTimeOffset : null;
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
 
     }
 }
@@ -9849,7 +10209,7 @@ class MediaDeleteItem extends  AbstractModel {
         this.Type = null;
 
         /**
-         * 删除由Type参数指定的种类下的视频模板号，模板定义参见[转码模板](https://cloud.tencent.com/document/product/266/33478#.E8.BD.AC.E7.A0.81.E6.A8.A1.E6.9D.BF)。
+         * 删除由Type参数指定的种类下的视频模板号，模板定义参见[转码模板](https://cloud.tencent.com/document/product/266/33478#.3Cspan-id-.3D-.22zm.22-.3E.3C.2Fspan.3E.E8.BD.AC.E7.A0.81.E6.A8.A1.E6.9D.BF)。
 默认值为0，表示删除参数Type指定种类下所有的视频。
          * @type {number || null}
          */
@@ -9917,13 +10277,13 @@ class AiSamplePerson extends  AbstractModel {
         this.UsageSet = null;
 
         /**
-         * 创建时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F)。
+         * 创建时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
          * @type {string || null}
          */
         this.CreateTime = null;
 
         /**
-         * 最后修改时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F)。
+         * 最后修改时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
          * @type {string || null}
          */
         this.UpdateTime = null;
@@ -10279,13 +10639,13 @@ class AnimatedGraphicsTemplate extends  AbstractModel {
         this.Quality = null;
 
         /**
-         * 模板创建时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F)。
+         * 模板创建时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
          * @type {string || null}
          */
         this.CreateTime = null;
 
         /**
-         * 模板最后修改时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F)。
+         * 模板最后修改时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
          * @type {string || null}
          */
         this.UpdateTime = null;
@@ -10311,6 +10671,50 @@ class AnimatedGraphicsTemplate extends  AbstractModel {
         this.Quality = 'Quality' in params ? params.Quality : null;
         this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
         this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+
+    }
+}
+
+/**
+ * 文本鉴恐任务控制参数
+ * @class
+ */
+class TerrorismOcrReviewTemplateInfoForUpdate extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 文本鉴恐任务开关，可选值：
+<li>ON：开启文本鉴恐任务；</li>
+<li>OFF：关闭文本鉴恐任务。</li>
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+        /**
+         * 判定涉嫌违规的分数阈值，当智能审核达到该分数以上，认为涉嫌违规，不填默认为 100 分。取值范围：0~100。
+         * @type {number || null}
+         */
+        this.BlockConfidence = null;
+
+        /**
+         * 判定需人工复核是否违规的分数阈值，当智能审核达到该分数以上，认为需人工复核，不填默认为 75 分。取值范围：0~100。
+         * @type {number || null}
+         */
+        this.ReviewConfidence = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+        this.BlockConfidence = 'BlockConfidence' in params ? params.BlockConfidence : null;
+        this.ReviewConfidence = 'ReviewConfidence' in params ? params.ReviewConfidence : null;
 
     }
 }
@@ -10649,6 +11053,12 @@ class TerrorismConfigureInfoForUpdate extends  AbstractModel {
          */
         this.ImgReviewInfo = null;
 
+        /**
+         * 文本鉴恐任务控制参数。
+         * @type {TerrorismOcrReviewTemplateInfoForUpdate || null}
+         */
+        this.OcrReviewInfo = null;
+
     }
 
     /**
@@ -10663,6 +11073,12 @@ class TerrorismConfigureInfoForUpdate extends  AbstractModel {
             let obj = new TerrorismImgReviewTemplateInfoForUpdate();
             obj.deserialize(params.ImgReviewInfo)
             this.ImgReviewInfo = obj;
+        }
+
+        if (params.OcrReviewInfo) {
+            let obj = new TerrorismOcrReviewTemplateInfoForUpdate();
+            obj.deserialize(params.OcrReviewInfo)
+            this.OcrReviewInfo = obj;
         }
 
     }
@@ -11018,6 +11434,96 @@ class AnimatedGraphicTaskInput extends  AbstractModel {
 }
 
 /**
+ * 视频处理任务中的马赛克参数类型
+ * @class
+ */
+class MosaicInput extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 原点位置，目前仅支持：
+<li>TopLeft：表示坐标原点位于视频图像左上角，马赛克原点为图片或文字的左上角。</li>
+默认值：TopLeft。
+         * @type {string || null}
+         */
+        this.CoordinateOrigin = null;
+
+        /**
+         * 马赛克原点距离视频图像坐标原点的水平位置。支持 %、px 两种格式：
+<li>当字符串以 % 结尾，表示马赛克 XPos 为视频宽度指定百分比，如 10% 表示 XPos 为视频宽度的 10%；</li>
+<li>当字符串以 px 结尾，表示马赛克 XPos 为指定像素，如 100px 表示 XPos 为 100 像素。</li>
+默认值：0px。
+         * @type {string || null}
+         */
+        this.XPos = null;
+
+        /**
+         * 马赛克原点距离视频图像坐标原点的垂直位置。支持 %、px 两种格式：
+<li>当字符串以 % 结尾，表示马赛克 YPos 为视频高度指定百分比，如 10% 表示 YPos 为视频高度的 10%；</li>
+<li>当字符串以 px 结尾，表示马赛克 YPos 为指定像素，如 100px 表示 YPos 为 100 像素。</li>
+默认值：0px。
+         * @type {string || null}
+         */
+        this.YPos = null;
+
+        /**
+         * 马赛克的宽度。支持 %、px 两种格式：
+<li>当字符串以 % 结尾，表示马赛克 Width 为视频宽度的百分比大小，如 10% 表示 Width 为视频宽度的 10%；</li>
+<li>当字符串以 px 结尾，表示马赛克 Width 单位为像素，如 100px 表示 Width 为 100 像素。</li>
+默认值：10%。
+         * @type {string || null}
+         */
+        this.Width = null;
+
+        /**
+         * 马赛克的高度。支持 %、px 两种格式：
+<li>当字符串以 % 结尾，表示马赛克 Height 为视频高度的百分比大小，如 10% 表示 Height 为视频高度的 10%；</li>
+<li>当字符串以 px 结尾，表示马赛克 Height 单位为像素，如 100px 表示 Height 为 100 像素。</li>
+默认值：10%。
+         * @type {string || null}
+         */
+        this.Height = null;
+
+        /**
+         * 马赛克的起始时间偏移，单位：秒。不填或填0，表示马赛克从画面出现时开始显现。
+<li>不填或填0，表示马赛克从画面开始就出现；</li>
+<li>当数值大于0时（假设为 n），表示马赛克从画面开始的第 n 秒出现；</li>
+<li>当数值小于0时（假设为 -n），表示马赛克从离画面结束 n 秒前开始出现。</li>
+         * @type {number || null}
+         */
+        this.StartTimeOffset = null;
+
+        /**
+         * 马赛克的结束时间偏移，单位：秒。
+<li>不填或填0，表示马赛克持续到画面结束；</li>
+<li>当数值大于0时（假设为 n），表示马赛克持续到第 n 秒时消失；</li>
+<li>当数值小于0时（假设为 -n），表示马赛克持续到离画面结束 n 秒前消失。</li>
+         * @type {number || null}
+         */
+        this.EndTimeOffset = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CoordinateOrigin = 'CoordinateOrigin' in params ? params.CoordinateOrigin : null;
+        this.XPos = 'XPos' in params ? params.XPos : null;
+        this.YPos = 'YPos' in params ? params.YPos : null;
+        this.Width = 'Width' in params ? params.Width : null;
+        this.Height = 'Height' in params ? params.Height : null;
+        this.StartTimeOffset = 'StartTimeOffset' in params ? params.StartTimeOffset : null;
+        this.EndTimeOffset = 'EndTimeOffset' in params ? params.EndTimeOffset : null;
+
+    }
+}
+
+/**
  * AI 智能分析模板详情
  * @class
  */
@@ -11078,13 +11584,13 @@ class AIAnalysisTemplateItem extends  AbstractModel {
         this.HighlightConfigure = null;
 
         /**
-         * 模板创建时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F)。
+         * 模板创建时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
          * @type {string || null}
          */
         this.CreateTime = null;
 
         /**
-         * 模板最后修改时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F)。
+         * 模板最后修改时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
          * @type {string || null}
          */
         this.UpdateTime = null;
@@ -11461,24 +11967,30 @@ class ModifySubAppIdStatusRequest extends  AbstractModel {
 }
 
 /**
- * DeleteTranscodeTemplate请求参数结构体
+ * CreateWatermarkTemplate返回参数结构体
  * @class
  */
-class DeleteTranscodeTemplateRequest extends  AbstractModel {
+class CreateWatermarkTemplateResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 转码模板唯一标识。
+         * 水印模板唯一标识。
          * @type {number || null}
          */
         this.Definition = null;
 
         /**
-         * 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
-         * @type {number || null}
+         * 水印图片地址，仅当 Type 为 image，该字段有效。
+         * @type {string || null}
          */
-        this.SubAppId = null;
+        this.ImageUrl = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
 
     }
 
@@ -11490,7 +12002,8 @@ class DeleteTranscodeTemplateRequest extends  AbstractModel {
             return;
         }
         this.Definition = 'Definition' in params ? params.Definition : null;
-        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
+        this.ImageUrl = 'ImageUrl' in params ? params.ImageUrl : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -11591,6 +12104,106 @@ class ResetProcedureTemplateResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 违禁任务控制参数
+ * @class
+ */
+class ProhibitedConfigureInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 语音违禁控制参数。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {ProhibitedAsrReviewTemplateInfo || null}
+         */
+        this.AsrReviewInfo = null;
+
+        /**
+         * 文本违禁控制参数。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {ProhibitedOcrReviewTemplateInfo || null}
+         */
+        this.OcrReviewInfo = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.AsrReviewInfo) {
+            let obj = new ProhibitedAsrReviewTemplateInfo();
+            obj.deserialize(params.AsrReviewInfo)
+            this.AsrReviewInfo = obj;
+        }
+
+        if (params.OcrReviewInfo) {
+            let obj = new ProhibitedOcrReviewTemplateInfo();
+            obj.deserialize(params.OcrReviewInfo)
+            this.OcrReviewInfo = obj;
+        }
+
+    }
+}
+
+/**
+ * Ocr 文字涉恐信息
+ * @class
+ */
+class AiReviewTerrorismOcrTaskOutput extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Ocr 文字涉恐评分，分值为0到100。
+         * @type {number || null}
+         */
+        this.Confidence = null;
+
+        /**
+         * Ocr 文字涉恐结果建议，取值范围：
+<li>pass。</li>
+<li>review。</li>
+<li>block。</li>
+         * @type {string || null}
+         */
+        this.Suggestion = null;
+
+        /**
+         * Ocr 文字有涉恐嫌疑的视频片段列表。
+         * @type {Array.<MediaContentReviewOcrTextSegmentItem> || null}
+         */
+        this.SegmentSet = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Confidence = 'Confidence' in params ? params.Confidence : null;
+        this.Suggestion = 'Suggestion' in params ? params.Suggestion : null;
+
+        if (params.SegmentSet) {
+            this.SegmentSet = new Array();
+            for (let z in params.SegmentSet) {
+                let obj = new MediaContentReviewOcrTextSegmentItem();
+                obj.deserialize(params.SegmentSet[z]);
+                this.SegmentSet.push(obj);
+            }
+        }
 
     }
 }
@@ -12145,13 +12758,13 @@ class ProcedureTemplate extends  AbstractModel {
         this.MiniProgramPublishTask = null;
 
         /**
-         * 模板创建时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F)。
+         * 模板创建时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
          * @type {string || null}
          */
         this.CreateTime = null;
 
         /**
-         * 模板最后修改时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F)。
+         * 模板最后修改时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
          * @type {string || null}
          */
         this.UpdateTime = null;
@@ -12441,7 +13054,7 @@ class MediaContentReviewPoliticalSegmentItem extends  AbstractModel {
         this.PicUrlExpireTimeStamp = null;
 
         /**
-         * 嫌疑图片 URL 失效时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F)。
+         * 嫌疑图片 URL 失效时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
          * @type {string || null}
          */
         this.PicUrlExpireTime = null;
@@ -12862,13 +13475,13 @@ class ImageSpriteTemplate extends  AbstractModel {
         this.ColumnCount = null;
 
         /**
-         * 模板创建时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F)。
+         * 模板创建时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
          * @type {string || null}
          */
         this.CreateTime = null;
 
         /**
-         * 模板最后修改时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F)。
+         * 模板最后修改时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
          * @type {string || null}
          */
         this.UpdateTime = null;
@@ -13042,7 +13655,6 @@ class AiReviewPornOcrTaskOutput extends  AbstractModel {
 
         /**
          * Ocr 文字涉黄评分，分值为0到100。
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.Confidence = null;
@@ -13052,14 +13664,12 @@ class AiReviewPornOcrTaskOutput extends  AbstractModel {
 <li>pass。</li>
 <li>review。</li>
 <li>block。</li>
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.Suggestion = null;
 
         /**
          * Ocr 文字有涉黄嫌疑的视频片段列表。
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<MediaContentReviewOcrTextSegmentItem> || null}
          */
         this.SegmentSet = null;
@@ -13294,21 +13904,21 @@ class MediaBasicInfo extends  AbstractModel {
         this.Description = null;
 
         /**
-         * 媒体文件的创建时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F)。
+         * 媒体文件的创建时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.CreateTime = null;
 
         /**
-         * 媒体文件的最近更新时间（如修改视频属性、发起视频处理等会触发更新媒体文件信息的操作），使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F)。
+         * 媒体文件的最近更新时间（如修改视频属性、发起视频处理等会触发更新媒体文件信息的操作），使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.UpdateTime = null;
 
         /**
-         * 媒体文件的过期时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F)。过期后该媒体文件及其相关资源（转码结果、雪碧图等）将被永久删除。“9999-12-31T23:59:59Z”表示永不过期。
+         * 媒体文件的过期时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。过期后该媒体文件及其相关资源（转码结果、雪碧图等）将被永久删除。“9999-12-31T23:59:59Z”表示永不过期。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
@@ -13455,7 +14065,7 @@ class PullUploadRequest extends  AbstractModel {
 
         /**
          * 要拉取的媒体 URL，暂不支持拉取 HLS 和 Dash 格式。
-支持的扩展名详见[文件类型](https://cloud.tencent.com/document/product/266/9760#.E6.96.87.E4.BB.B6.E7.B1.BB.E5.9E.8B)。
+支持的扩展名详见[媒体类型](https://cloud.tencent.com/document/product/266/9760#.E5.AA.92.E4.BD.93.E7.B1.BB.E5.9E.8B)。
          * @type {string || null}
          */
         this.MediaUrl = null;
@@ -13479,7 +14089,7 @@ class PullUploadRequest extends  AbstractModel {
         this.Procedure = null;
 
         /**
-         * 媒体文件过期时间，格式按照 ISO 8601 标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F)。
+         * 媒体文件过期时间，格式按照 ISO 8601 标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#I)。
          * @type {string || null}
          */
         this.ExpireTime = null;
@@ -13702,13 +14312,13 @@ class TranscodeTemplate extends  AbstractModel {
         this.ContainerType = null;
 
         /**
-         * 模板创建时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F)。
+         * 模板创建时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
          * @type {string || null}
          */
         this.CreateTime = null;
 
         /**
-         * 模板最后修改时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F)。
+         * 模板最后修改时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
          * @type {string || null}
          */
         this.UpdateTime = null;
@@ -13763,13 +14373,13 @@ class DescribeCDNUsageDataRequest extends  AbstractModel {
         super();
 
         /**
-         * 起始日期，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F)。
+         * 起始日期，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
          * @type {string || null}
          */
         this.StartTime = null;
 
         /**
-         * 结束日期，需大于开始日期，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F)。
+         * 结束日期，需大于开始日期，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
          * @type {string || null}
          */
         this.EndTime = null;
@@ -14041,13 +14651,13 @@ class DescribeReviewDetailsRequest extends  AbstractModel {
         super();
 
         /**
-         * 起始日期。使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F)。
+         * 起始日期。使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
          * @type {string || null}
          */
         this.StartTime = null;
 
         /**
-         * 结束日期，需大于起始日期。使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F)。
+         * 结束日期，需大于起始日期。使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
          * @type {string || null}
          */
         this.EndTime = null;
@@ -14132,6 +14742,34 @@ class PornConfigureInfoForUpdate extends  AbstractModel {
 }
 
 /**
+ * 内容审核 Asr 文字鉴违禁任务输入参数类型
+ * @class
+ */
+class AiReviewProhibitedAsrTaskInput extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 鉴违禁模板 ID。
+         * @type {number || null}
+         */
+        this.Definition = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Definition = 'Definition' in params ? params.Definition : null;
+
+    }
+}
+
+/**
  * 内容审核涉黄/暴恐嫌疑片段
  * @class
  */
@@ -14186,7 +14824,7 @@ class MediaContentReviewSegmentItem extends  AbstractModel {
         this.PicUrlExpireTimeStamp = null;
 
         /**
-         * 嫌疑图片 URL 失效时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F)。
+         * 嫌疑图片 URL 失效时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
          * @type {string || null}
          */
         this.PicUrlExpireTime = null;
@@ -14208,6 +14846,50 @@ class MediaContentReviewSegmentItem extends  AbstractModel {
         this.Url = 'Url' in params ? params.Url : null;
         this.PicUrlExpireTimeStamp = 'PicUrlExpireTimeStamp' in params ? params.PicUrlExpireTimeStamp : null;
         this.PicUrlExpireTime = 'PicUrlExpireTime' in params ? params.PicUrlExpireTime : null;
+
+    }
+}
+
+/**
+ * 文本鉴恐任务控制参数
+ * @class
+ */
+class TerrorismOcrReviewTemplateInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 文本鉴恐任务开关，可选值：
+<li>ON：开启文本鉴恐任务；</li>
+<li>OFF：关闭文本鉴恐任务。</li>
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+        /**
+         * 判定涉嫌违规的分数阈值，当智能审核达到该分数以上，认为涉嫌违规，不填默认为 100 分。取值范围：0~100。
+         * @type {number || null}
+         */
+        this.BlockConfidence = null;
+
+        /**
+         * 判定需人工复核是否违规的分数阈值，当智能审核达到该分数以上，认为需人工复核，不填默认为 75 分。取值范围：0~100。
+         * @type {number || null}
+         */
+        this.ReviewConfidence = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+        this.BlockConfidence = 'BlockConfidence' in params ? params.BlockConfidence : null;
+        this.ReviewConfidence = 'ReviewConfidence' in params ? params.ReviewConfidence : null;
 
     }
 }
@@ -14314,6 +14996,59 @@ class AiRecognitionTaskObjectResultOutput extends  AbstractModel {
                 let obj = new AiRecognitionTaskObjectResultItem();
                 obj.deserialize(params.ResultSet[z]);
                 this.ResultSet.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * Asr 文字涉违禁信息
+ * @class
+ */
+class AiReviewProhibitedAsrTaskOutput extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Asr 文字涉违禁评分，分值为0到100。
+         * @type {number || null}
+         */
+        this.Confidence = null;
+
+        /**
+         * Asr 文字涉违禁结果建议，取值范围：
+<li>pass。</li>
+<li>review。</li>
+<li>block。</li>
+         * @type {string || null}
+         */
+        this.Suggestion = null;
+
+        /**
+         * Asr 文字有涉违禁嫌疑的视频片段列表。
+         * @type {Array.<MediaContentReviewAsrTextSegmentItem> || null}
+         */
+        this.SegmentSet = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Confidence = 'Confidence' in params ? params.Confidence : null;
+        this.Suggestion = 'Suggestion' in params ? params.Suggestion : null;
+
+        if (params.SegmentSet) {
+            this.SegmentSet = new Array();
+            for (let z in params.SegmentSet) {
+                let obj = new MediaContentReviewAsrTextSegmentItem();
+                obj.deserialize(params.SegmentSet[z]);
+                this.SegmentSet.push(obj);
             }
         }
 
@@ -14615,6 +15350,12 @@ class TranscodeTaskInput extends  AbstractModel {
          */
         this.WatermarkSet = null;
 
+        /**
+         * 马赛克列表，最大可支持 10 张。
+         * @type {Array.<MosaicInput> || null}
+         */
+        this.MosaicSet = null;
+
     }
 
     /**
@@ -14632,6 +15373,15 @@ class TranscodeTaskInput extends  AbstractModel {
                 let obj = new WatermarkInput();
                 obj.deserialize(params.WatermarkSet[z]);
                 this.WatermarkSet.push(obj);
+            }
+        }
+
+        if (params.MosaicSet) {
+            this.MosaicSet = new Array();
+            for (let z in params.MosaicSet) {
+                let obj = new MosaicInput();
+                obj.deserialize(params.MosaicSet[z]);
+                this.MosaicSet.push(obj);
             }
         }
 
@@ -14970,7 +15720,7 @@ class StatDataItem extends  AbstractModel {
         super();
 
         /**
-         * 数据所在时间区间的开始时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F)。如：当时间粒度为天，2018-12-01T00:00:00+08:00，表示2018年12月1日（含）到2018年12月2日（不含）区间。
+         * 数据所在时间区间的开始时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。如：当时间粒度为天，2018-12-01T00:00:00+08:00，表示2018年12月1日（含）到2018年12月2日（不含）区间。
 <li>表示小时级别数据时，2019-08-22T00:00:00+08:00表示2019-08-22日0点到1点的统计数据。</li>
 <li>表示天级别数据时，2019-08-22T00:00:00+08:00表示2019-08-22日的统计数据。</li>
          * @type {string || null}
@@ -15039,6 +15789,50 @@ class MediaSourceData extends  AbstractModel {
         }
         this.SourceType = 'SourceType' in params ? params.SourceType : null;
         this.SourceContext = 'SourceContext' in params ? params.SourceContext : null;
+
+    }
+}
+
+/**
+ * 语音违禁任务控制参数
+ * @class
+ */
+class ProhibitedAsrReviewTemplateInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 语音违禁任务开关，可选值：
+<li>ON：开启语音违禁任务；</li>
+<li>OFF：关闭语音违禁任务。</li>
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+        /**
+         * 判定涉嫌违规的分数阈值，当智能审核达到该分数以上，认为涉嫌违规，不填默认为 100 分。取值范围：0~100。
+         * @type {number || null}
+         */
+        this.BlockConfidence = null;
+
+        /**
+         * 判定需人工复核是否违规的分数阈值，当智能审核达到该分数以上，认为需人工复核，不填默认为 75 分。取值范围：0~100。
+         * @type {number || null}
+         */
+        this.ReviewConfidence = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+        this.BlockConfidence = 'BlockConfidence' in params ? params.BlockConfidence : null;
+        this.ReviewConfidence = 'ReviewConfidence' in params ? params.ReviewConfidence : null;
 
     }
 }
@@ -15500,7 +16294,6 @@ class AiReviewPoliticalAsrTaskOutput extends  AbstractModel {
 
         /**
          * Asr 文字涉政、敏感评分，分值为0到100。
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.Confidence = null;
@@ -15510,14 +16303,12 @@ class AiReviewPoliticalAsrTaskOutput extends  AbstractModel {
 <li>pass。</li>
 <li>review。</li>
 <li>block。</li>
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.Suggestion = null;
 
         /**
          * Asr 文字有涉政、敏感嫌疑的视频片段列表。
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<MediaContentReviewAsrTextSegmentItem> || null}
          */
         this.SegmentSet = null;
@@ -15718,7 +16509,7 @@ class ComposeMediaTaskOutput extends  AbstractModel {
         this.ClassId = null;
 
         /**
-         * 输出文件的过期时间，超过该时间文件将被删除，默认为永久不过期，格式按照 ISO 8601标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F)。
+         * 输出文件的过期时间，超过该时间文件将被删除，默认为永久不过期，格式按照 ISO 8601标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#I)。
          * @type {string || null}
          */
         this.ExpireTime = null;
@@ -16928,6 +17719,50 @@ class AdaptiveDynamicStreamingInfoItem extends  AbstractModel {
         this.Package = 'Package' in params ? params.Package : null;
         this.DrmType = 'DrmType' in params ? params.DrmType : null;
         this.Url = 'Url' in params ? params.Url : null;
+
+    }
+}
+
+/**
+ * 文本违禁任务控制参数
+ * @class
+ */
+class ProhibitedOcrReviewTemplateInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 文本违禁任务开关，可选值：
+<li>ON：开启文本违禁任务；</li>
+<li>OFF：关闭文本违禁任务。</li>
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+        /**
+         * 判定涉嫌违规的分数阈值，当智能审核达到该分数以上，认为涉嫌违规，不填默认为 100 分。取值范围：0~100。
+         * @type {number || null}
+         */
+        this.BlockConfidence = null;
+
+        /**
+         * 判定需人工复核是否违规的分数阈值，当智能审核达到该分数以上，认为需人工复核，不填默认为 75 分。取值范围：0~100。
+         * @type {number || null}
+         */
+        this.ReviewConfidence = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+        this.BlockConfidence = 'BlockConfidence' in params ? params.BlockConfidence : null;
+        this.ReviewConfidence = 'ReviewConfidence' in params ? params.ReviewConfidence : null;
 
     }
 }
@@ -18974,20 +19809,20 @@ class TaskSimpleInfo extends  AbstractModel {
         this.TaskType = null;
 
         /**
-         * 任务创建时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F)。
+         * 任务创建时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
          * @type {string || null}
          */
         this.CreateTime = null;
 
         /**
-         * 任务开始执行时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F)。若任务尚未开始，该字段为空。
+         * 任务开始执行时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。若任务尚未开始，该字段为空。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.BeginProcessTime = null;
 
         /**
-         * 任务结束时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F)。若任务尚未完成，该字段为空。
+         * 任务结束时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。若任务尚未完成，该字段为空。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
@@ -19208,13 +20043,13 @@ class SnapshotByTimeOffsetTemplate extends  AbstractModel {
         this.Format = null;
 
         /**
-         * 模板创建时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F)。
+         * 模板创建时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
          * @type {string || null}
          */
         this.CreateTime = null;
 
         /**
-         * 模板最后修改时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F)。
+         * 模板最后修改时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
          * @type {string || null}
          */
         this.UpdateTime = null;
@@ -19744,7 +20579,7 @@ class SubAppIdInfo extends  AbstractModel {
         this.Description = null;
 
         /**
-         * 子应用创建时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F)。
+         * 子应用创建时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
          * @type {string || null}
          */
         this.CreateTime = null;
@@ -19928,6 +20763,34 @@ class ModifyImageSpriteTemplateRequest extends  AbstractModel {
 }
 
 /**
+ * 内容审核 Ocr 文字鉴违禁任务输入参数类型
+ * @class
+ */
+class AiReviewProhibitedOcrTaskInput extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 鉴违禁模板 ID。
+         * @type {number || null}
+         */
+        this.Definition = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Definition = 'Definition' in params ? params.Definition : null;
+
+    }
+}
+
+/**
  * DeleteWatermarkTemplate请求参数结构体
  * @class
  */
@@ -19977,14 +20840,14 @@ class EditMediaStreamInfo extends  AbstractModel {
         this.StreamId = null;
 
         /**
-         * 流剪辑的起始时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F)。
+         * 流剪辑的起始时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.StartTime = null;
 
         /**
-         * 流剪辑的结束时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F)。
+         * 流剪辑的结束时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
@@ -20302,48 +21165,6 @@ class CommitUploadResponse extends  AbstractModel {
 }
 
 /**
- * CreateWatermarkTemplate返回参数结构体
- * @class
- */
-class CreateWatermarkTemplateResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 水印模板唯一标识。
-         * @type {number || null}
-         */
-        this.Definition = null;
-
-        /**
-         * 水印图片地址，仅当 Type 为 image，该字段有效。
-         * @type {string || null}
-         */
-        this.ImageUrl = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Definition = 'Definition' in params ? params.Definition : null;
-        this.ImageUrl = 'ImageUrl' in params ? params.ImageUrl : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
  * DescribeSampleSnapshotTemplates返回参数结构体
  * @class
  */
@@ -20438,6 +21259,9 @@ class AiContentReviewResult extends  AbstractModel {
 <li>Porn.Ocr：Ocr 文字鉴黄</li>
 <li>Political.Asr：Asr 文字鉴政</li>
 <li>Political.Ocr：Ocr 文字鉴政</li>
+<li>Terrorism.Ocr：Ocr 文字鉴恐</li>
+<li>Prohibited.Asr：Asr 文字鉴违禁</li>
+<li>Prohibited.Ocr：Ocr 文字鉴违禁</li>
          * @type {string || null}
          */
         this.Type = null;
@@ -20491,6 +21315,27 @@ class AiContentReviewResult extends  AbstractModel {
          */
         this.PoliticalOcrTask = null;
 
+        /**
+         * 视频内容审核 Ocr 文字鉴恐任务的查询结果，当任务类型为 Terrorism.Ocr 时有效。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {AiReviewTaskTerrorismOcrResult || null}
+         */
+        this.TerrorismOcrTask = null;
+
+        /**
+         * 视频内容审核 Asr 文字鉴违禁任务的查询结果，当任务类型为 Prohibited.Asr 时有效。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {AiReviewTaskProhibitedAsrResult || null}
+         */
+        this.ProhibitedAsrTask = null;
+
+        /**
+         * 视频内容审核 Ocr 文字鉴违禁任务的查询结果，当任务类型为 Prohibited.Ocr 时有效。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {AiReviewTaskProhibitedOcrResult || null}
+         */
+        this.ProhibitedOcrTask = null;
+
     }
 
     /**
@@ -20542,6 +21387,24 @@ class AiContentReviewResult extends  AbstractModel {
             let obj = new AiReviewTaskPoliticalOcrResult();
             obj.deserialize(params.PoliticalOcrTask)
             this.PoliticalOcrTask = obj;
+        }
+
+        if (params.TerrorismOcrTask) {
+            let obj = new AiReviewTaskTerrorismOcrResult();
+            obj.deserialize(params.TerrorismOcrTask)
+            this.TerrorismOcrTask = obj;
+        }
+
+        if (params.ProhibitedAsrTask) {
+            let obj = new AiReviewTaskProhibitedAsrResult();
+            obj.deserialize(params.ProhibitedAsrTask)
+            this.ProhibitedAsrTask = obj;
+        }
+
+        if (params.ProhibitedOcrTask) {
+            let obj = new AiReviewTaskProhibitedOcrResult();
+            obj.deserialize(params.ProhibitedOcrTask)
+            this.ProhibitedOcrTask = obj;
         }
 
     }
@@ -22147,7 +23010,7 @@ class SearchMediaRequest extends  AbstractModel {
         /**
          * 创建时间的开始时间。
 <li>大于等于开始时间。</li>
-<li>格式按照 ISO 8601标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F)。</li>
+<li>格式按照 ISO 8601标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#I)。</li>
          * @type {string || null}
          */
         this.StartTime = null;
@@ -22155,7 +23018,7 @@ class SearchMediaRequest extends  AbstractModel {
         /**
          * 创建时间的结束时间。
 <li>小于结束时间。</li>
-<li>格式按照 ISO 8601标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F)。</li>
+<li>格式按照 ISO 8601标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#I)。</li>
          * @type {string || null}
          */
         this.EndTime = null;
@@ -22410,7 +23273,7 @@ PicUrlExpireTime 时间点后图片将被删除）。
         this.Url = null;
 
         /**
-         * 嫌疑图片 URL 失效时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F)。
+         * 嫌疑图片 URL 失效时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
          * @type {string || null}
          */
         this.PicUrlExpireTime = null;
@@ -23036,7 +23899,6 @@ class AiReviewPoliticalOcrTaskOutput extends  AbstractModel {
 
         /**
          * Ocr 文字有涉政、敏感嫌疑的视频片段列表。
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<MediaContentReviewOcrTextSegmentItem> || null}
          */
         this.SegmentSet = null;
@@ -23575,6 +24437,13 @@ class TerrorismConfigureInfo extends  AbstractModel {
          */
         this.ImgReviewInfo = null;
 
+        /**
+         * 文字鉴恐任务控制参数。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {TerrorismOcrReviewTemplateInfo || null}
+         */
+        this.OcrReviewInfo = null;
+
     }
 
     /**
@@ -23589,6 +24458,12 @@ class TerrorismConfigureInfo extends  AbstractModel {
             let obj = new TerrorismImgReviewTemplateInfo();
             obj.deserialize(params.ImgReviewInfo)
             this.ImgReviewInfo = obj;
+        }
+
+        if (params.OcrReviewInfo) {
+            let obj = new TerrorismOcrReviewTemplateInfo();
+            obj.deserialize(params.OcrReviewInfo)
+            this.OcrReviewInfo = obj;
         }
 
     }
@@ -23757,13 +24632,13 @@ class SampleSnapshotTemplate extends  AbstractModel {
         this.SampleInterval = null;
 
         /**
-         * 模板创建时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F)。
+         * 模板创建时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
          * @type {string || null}
          */
         this.CreateTime = null;
 
         /**
-         * 模板最后修改时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F)。
+         * 模板最后修改时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
          * @type {string || null}
          */
         this.UpdateTime = null;
@@ -23849,7 +24724,7 @@ class MediaImageSpriteItem extends  AbstractModel {
         this.ImageUrlSet = null;
 
         /**
-         * 雪碧图子图位置与时间关系的 WebVtt 文件地址。WebVtt 文件表明了各个雪碧图小图对应的时间点，以及在在雪碧大图里的坐标位置，一般被播放器用于实现预览。
+         * 雪碧图子图位置与时间关系的 WebVtt 文件地址。WebVtt 文件表明了各个雪碧图小图对应的时间点，以及在雪碧大图里的坐标位置，一般被播放器用于实现预览。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
@@ -24172,7 +25047,7 @@ class EditMediaTaskOutput extends  AbstractModel {
         this.ClassId = null;
 
         /**
-         * 输出文件的过期时间，超过该时间文件将被删除，默认为永久不过期，格式按照 ISO 8601标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F)。
+         * 输出文件的过期时间，超过该时间文件将被删除，默认为永久不过期，格式按照 ISO 8601标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#I)。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
@@ -24295,7 +25170,7 @@ class ComposeMediaOutput extends  AbstractModel {
         this.ClassId = null;
 
         /**
-         * 输出文件的过期时间，超过该时间文件将被删除，默认为永久不过期，格式按照 ISO 8601标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F)。
+         * 输出文件的过期时间，超过该时间文件将被删除，默认为永久不过期，格式按照 ISO 8601标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#I)。
          * @type {string || null}
          */
         this.ExpireTime = null;
@@ -24791,9 +25666,12 @@ module.exports = {
     AudioTrackItem: AudioTrackItem,
     MediaAiAnalysisHighlightItem: MediaAiAnalysisHighlightItem,
     DescribeAnimatedGraphicsTemplatesRequest: DescribeAnimatedGraphicsTemplatesRequest,
+    AiReviewTaskProhibitedAsrResult: AiReviewTaskProhibitedAsrResult,
     AdaptiveDynamicStreamingTemplate: AdaptiveDynamicStreamingTemplate,
     DeleteAnimatedGraphicsTemplateResponse: DeleteAnimatedGraphicsTemplateResponse,
+    AiReviewTaskProhibitedOcrResult: AiReviewTaskProhibitedOcrResult,
     AiRecognitionTaskAsrFullTextResultOutput: AiRecognitionTaskAsrFullTextResultOutput,
+    AiReviewProhibitedOcrTaskOutput: AiReviewProhibitedOcrTaskOutput,
     MediaMiniProgramReviewElem: MediaMiniProgramReviewElem,
     AiAnalysisTaskCoverOutput: AiAnalysisTaskCoverOutput,
     ModifySampleSnapshotTemplateRequest: ModifySampleSnapshotTemplateRequest,
@@ -24837,6 +25715,7 @@ module.exports = {
     AiAnalysisTaskHighlightResult: AiAnalysisTaskHighlightResult,
     DeleteAIAnalysisTemplateResponse: DeleteAIAnalysisTemplateResponse,
     TextWatermarkTemplateInputForUpdate: TextWatermarkTemplateInputForUpdate,
+    AiReviewTerrorismOcrTaskInput: AiReviewTerrorismOcrTaskInput,
     AiRecognitionTaskOcrWordsResultInput: AiRecognitionTaskOcrWordsResultInput,
     AiReviewPornTaskInput: AiReviewPornTaskInput,
     CreateProcedureTemplateRequest: CreateProcedureTemplateRequest,
@@ -24867,6 +25746,7 @@ module.exports = {
     AudioTrackTemplateInfo: AudioTrackTemplateInfo,
     ProcessMediaByUrlRequest: ProcessMediaByUrlRequest,
     ModifyMediaInfoRequest: ModifyMediaInfoRequest,
+    DeleteTranscodeTemplateRequest: DeleteTranscodeTemplateRequest,
     PornAsrReviewTemplateInfoForUpdate: PornAsrReviewTemplateInfoForUpdate,
     MediaAnimatedGraphicsInfo: MediaAnimatedGraphicsInfo,
     DescribeSnapshotByTimeOffsetTemplatesRequest: DescribeSnapshotByTimeOffsetTemplatesRequest,
@@ -24883,6 +25763,7 @@ module.exports = {
     WechatMiniProgramPublishTaskInput: WechatMiniProgramPublishTaskInput,
     AiSampleFaceOperation: AiSampleFaceOperation,
     SvgWatermarkInputForUpdate: SvgWatermarkInputForUpdate,
+    AiReviewTaskTerrorismOcrResult: AiReviewTaskTerrorismOcrResult,
     AiRecognitionTaskOcrWordsResult: AiRecognitionTaskOcrWordsResult,
     PornAsrReviewTemplateInfo: PornAsrReviewTemplateInfo,
     AiRecognitionTaskSegmentResult: AiRecognitionTaskSegmentResult,
@@ -24966,6 +25847,7 @@ module.exports = {
     TEHDConfig: TEHDConfig,
     ClipTask2017: ClipTask2017,
     AnimatedGraphicsTemplate: AnimatedGraphicsTemplate,
+    TerrorismOcrReviewTemplateInfoForUpdate: TerrorismOcrReviewTemplateInfoForUpdate,
     UserDefineAsrTextReviewTemplateInfoForUpdate: UserDefineAsrTextReviewTemplateInfoForUpdate,
     AiRecognitionTaskHeadTailResultOutput: AiRecognitionTaskHeadTailResultOutput,
     ModifyImageSpriteTemplateResponse: ModifyImageSpriteTemplateResponse,
@@ -24978,6 +25860,7 @@ module.exports = {
     TranscodePlayInfo2017: TranscodePlayInfo2017,
     ComposeMediaTaskInput: ComposeMediaTaskInput,
     AnimatedGraphicTaskInput: AnimatedGraphicTaskInput,
+    MosaicInput: MosaicInput,
     AIAnalysisTemplateItem: AIAnalysisTemplateItem,
     AiRecognitionTaskObjectResultItem: AiRecognitionTaskObjectResultItem,
     MediaSnapshotByTimeOffsetInfo: MediaSnapshotByTimeOffsetInfo,
@@ -24987,9 +25870,11 @@ module.exports = {
     ConfirmEventsRequest: ConfirmEventsRequest,
     CreateAIRecognitionTemplateResponse: CreateAIRecognitionTemplateResponse,
     ModifySubAppIdStatusRequest: ModifySubAppIdStatusRequest,
-    DeleteTranscodeTemplateRequest: DeleteTranscodeTemplateRequest,
+    CreateWatermarkTemplateResponse: CreateWatermarkTemplateResponse,
     AiReviewTerrorismTaskOutput: AiReviewTerrorismTaskOutput,
     ResetProcedureTemplateResponse: ResetProcedureTemplateResponse,
+    ProhibitedConfigureInfo: ProhibitedConfigureInfo,
+    AiReviewTerrorismOcrTaskOutput: AiReviewTerrorismOcrTaskOutput,
     AiAnalysisResult: AiAnalysisResult,
     DescribeAIAnalysisTemplatesRequest: DescribeAIAnalysisTemplatesRequest,
     MediaTranscodeInfo: MediaTranscodeInfo,
@@ -25034,9 +25919,12 @@ module.exports = {
     AiRecognitionTaskAsrWordsSegmentItem: AiRecognitionTaskAsrWordsSegmentItem,
     DescribeReviewDetailsRequest: DescribeReviewDetailsRequest,
     PornConfigureInfoForUpdate: PornConfigureInfoForUpdate,
+    AiReviewProhibitedAsrTaskInput: AiReviewProhibitedAsrTaskInput,
     MediaContentReviewSegmentItem: MediaContentReviewSegmentItem,
+    TerrorismOcrReviewTemplateInfo: TerrorismOcrReviewTemplateInfo,
     AiReviewTaskPornResult: AiReviewTaskPornResult,
     AiRecognitionTaskObjectResultOutput: AiRecognitionTaskObjectResultOutput,
+    AiReviewProhibitedAsrTaskOutput: AiReviewProhibitedAsrTaskOutput,
     CreateClassResponse: CreateClassResponse,
     MediaAiAnalysisFrameTagItem: MediaAiAnalysisFrameTagItem,
     CoverConfigureInfoForUpdate: CoverConfigureInfoForUpdate,
@@ -25049,6 +25937,7 @@ module.exports = {
     ClipFileInfo2017: ClipFileInfo2017,
     StatDataItem: StatDataItem,
     MediaSourceData: MediaSourceData,
+    ProhibitedAsrReviewTemplateInfo: ProhibitedAsrReviewTemplateInfo,
     PushUrlCacheRequest: PushUrlCacheRequest,
     CreateAIAnalysisTemplateResponse: CreateAIAnalysisTemplateResponse,
     MediaProcessTaskSampleSnapshotResult: MediaProcessTaskSampleSnapshotResult,
@@ -25079,6 +25968,7 @@ module.exports = {
     WatermarkInput: WatermarkInput,
     AiSampleWordInfo: AiSampleWordInfo,
     AdaptiveDynamicStreamingInfoItem: AdaptiveDynamicStreamingInfoItem,
+    ProhibitedOcrReviewTemplateInfo: ProhibitedOcrReviewTemplateInfo,
     DeleteClassResponse: DeleteClassResponse,
     ModifyTranscodeTemplateResponse: ModifyTranscodeTemplateResponse,
     MediaMetaData: MediaMetaData,
@@ -25128,13 +26018,13 @@ module.exports = {
     SubAppIdInfo: SubAppIdInfo,
     DescribeAllClassResponse: DescribeAllClassResponse,
     ModifyImageSpriteTemplateRequest: ModifyImageSpriteTemplateRequest,
+    AiReviewProhibitedOcrTaskInput: AiReviewProhibitedOcrTaskInput,
     DeleteWatermarkTemplateRequest: DeleteWatermarkTemplateRequest,
     EditMediaStreamInfo: EditMediaStreamInfo,
     DescribeWordSamplesRequest: DescribeWordSamplesRequest,
     LiveRealTimeClipResponse: LiveRealTimeClipResponse,
     ModifyAIAnalysisTemplateRequest: ModifyAIAnalysisTemplateRequest,
     CommitUploadResponse: CommitUploadResponse,
-    CreateWatermarkTemplateResponse: CreateWatermarkTemplateResponse,
     DescribeSampleSnapshotTemplatesResponse: DescribeSampleSnapshotTemplatesResponse,
     ModifyWordSampleResponse: ModifyWordSampleResponse,
     AiContentReviewResult: AiContentReviewResult,

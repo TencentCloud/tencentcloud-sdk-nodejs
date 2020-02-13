@@ -25,7 +25,7 @@ class InitDCDBInstancesResponse extends  AbstractModel {
         super();
 
         /**
-         * 异步任务Id，可通过 DescribeFlow 查询任务状态。
+         * 异步任务ID，可通过 DescribeFlow 查询任务状态。
          * @type {Array.<number> || null}
          */
         this.FlowIds = null;
@@ -103,7 +103,7 @@ class DescribeAccountPrivilegesResponse extends  AbstractModel {
         super();
 
         /**
-         * 实例Id
+         * 实例ID
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -1142,7 +1142,7 @@ class DescribeDCDBPriceRequest extends  AbstractModel {
         this.Zone = null;
 
         /**
-         * 欲购买实例的数量，目前只支持购买1个实例
+         * 欲购买实例的数量，目前支持购买1-10个实例
          * @type {number || null}
          */
         this.Count = null;
@@ -1180,6 +1180,12 @@ class DescribeDCDBPriceRequest extends  AbstractModel {
          */
         this.ShardCount = null;
 
+        /**
+         * 付费类型。postpaid：按量付费   prepaid：预付费
+         * @type {string || null}
+         */
+        this.Paymode = null;
+
     }
 
     /**
@@ -1196,6 +1202,7 @@ class DescribeDCDBPriceRequest extends  AbstractModel {
         this.ShardMemory = 'ShardMemory' in params ? params.ShardMemory : null;
         this.ShardStorage = 'ShardStorage' in params ? params.ShardStorage : null;
         this.ShardCount = 'ShardCount' in params ? params.ShardCount : null;
+        this.Paymode = 'Paymode' in params ? params.Paymode : null;
 
     }
 }
@@ -1667,7 +1674,7 @@ class DescribeDCDBShardsRequest extends  AbstractModel {
         this.InstanceId = null;
 
         /**
-         * 分片Id列表。
+         * 分片ID列表。
          * @type {Array.<string> || null}
          */
         this.ShardInstanceIds = null;
@@ -1884,7 +1891,7 @@ class DCDBInstanceInfo extends  AbstractModel {
         this.InstanceName = null;
 
         /**
-         * APPID
+         * AppID
          * @type {number || null}
          */
         this.AppId = null;
@@ -2010,25 +2017,25 @@ class DCDBInstanceInfo extends  AbstractModel {
         this.IsTmp = null;
 
         /**
-         * 独享集群Id，为空表示非独享集群实例
+         * 独享集群ID，为空表示非独享集群实例
          * @type {string || null}
          */
         this.ExclusterId = null;
 
         /**
-         * 字符串型的私有网络Id
+         * 字符串型的私有网络ID
          * @type {string || null}
          */
         this.UniqueVpcId = null;
 
         /**
-         * 字符串型的私有网络子网Id
+         * 字符串型的私有网络子网ID
          * @type {string || null}
          */
         this.UniqueSubnetId = null;
 
         /**
-         * 数字实例Id（过时字段，请勿依赖该值）
+         * 数字实例ID（过时字段，请勿依赖该值）
          * @type {number || null}
          */
         this.Id = null;
@@ -2052,7 +2059,7 @@ class DCDBInstanceInfo extends  AbstractModel {
         this.WanPort = null;
 
         /**
-         * 产品类型 Id（过时字段，请勿依赖该值）
+         * 产品类型 ID（过时字段，请勿依赖该值）
          * @type {number || null}
          */
         this.Pid = null;
@@ -2379,6 +2386,27 @@ class DCDBShardInfo extends  AbstractModel {
          */
         this.ProxyVersion = null;
 
+        /**
+         * 付费模型
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Paymode = null;
+
+        /**
+         * 分片的主可用区
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ShardMasterZone = null;
+
+        /**
+         * 分片的从可用区列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
+         */
+        this.ShardSlaveZones = null;
+
     }
 
     /**
@@ -2408,6 +2436,9 @@ class DCDBShardInfo extends  AbstractModel {
         this.ShardId = 'ShardId' in params ? params.ShardId : null;
         this.Pid = 'Pid' in params ? params.Pid : null;
         this.ProxyVersion = 'ProxyVersion' in params ? params.ProxyVersion : null;
+        this.Paymode = 'Paymode' in params ? params.Paymode : null;
+        this.ShardMasterZone = 'ShardMasterZone' in params ? params.ShardMasterZone : null;
+        this.ShardSlaveZones = 'ShardSlaveZones' in params ? params.ShardSlaveZones : null;
 
     }
 }
@@ -2533,7 +2564,7 @@ class OpenDBExtranetAccessResponse extends  AbstractModel {
         super();
 
         /**
-         * 异步任务Id，可通过 DescribeFlow 查询任务状态。
+         * 异步任务ID，可通过 DescribeFlow 查询任务状态。
          * @type {number || null}
          */
         this.FlowId = null;
@@ -3143,7 +3174,7 @@ class CloseDBExtranetAccessResponse extends  AbstractModel {
         super();
 
         /**
-         * 异步任务Id，可通过 DescribeFlow 查询任务状态。
+         * 异步任务ID，可通过 DescribeFlow 查询任务状态。
          * @type {number || null}
          */
         this.FlowId = null;
@@ -3418,7 +3449,7 @@ class InitDCDBInstancesRequest extends  AbstractModel {
         super();
 
         /**
-         * 待初始化的实例Id列表，形如：dcdbt-ow728lmc，可以通过 DescribeDCDBInstances 查询实例详情获得。
+         * 待初始化的实例ID列表，形如：dcdbt-ow728lmc，可以通过 DescribeDCDBInstances 查询实例详情获得。
          * @type {Array.<string> || null}
          */
         this.InstanceIds = null;
@@ -3670,7 +3701,7 @@ class CreateDCDBInstanceRequest extends  AbstractModel {
         this.ShardCount = null;
 
         /**
-         * 欲购买实例的数量，目前只支持购买1个实例
+         * 欲购买实例的数量
          * @type {number || null}
          */
         this.Count = null;
@@ -3715,6 +3746,18 @@ class CreateDCDBInstanceRequest extends  AbstractModel {
          */
         this.VoucherIds = null;
 
+        /**
+         * 安全组id
+         * @type {string || null}
+         */
+        this.SecurityGroupId = null;
+
+        /**
+         * 实例名称， 可以通过该字段自主的设置实例的名字
+         * @type {string || null}
+         */
+        this.InstanceName = null;
+
     }
 
     /**
@@ -3737,6 +3780,8 @@ class CreateDCDBInstanceRequest extends  AbstractModel {
         this.DbVersionId = 'DbVersionId' in params ? params.DbVersionId : null;
         this.AutoVoucher = 'AutoVoucher' in params ? params.AutoVoucher : null;
         this.VoucherIds = 'VoucherIds' in params ? params.VoucherIds : null;
+        this.SecurityGroupId = 'SecurityGroupId' in params ? params.SecurityGroupId : null;
+        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
 
     }
 }
@@ -3929,7 +3974,7 @@ class CreateAccountResponse extends  AbstractModel {
         super();
 
         /**
-         * 实例Id，透传入参。
+         * 实例ID，透传入参。
          * @type {string || null}
          */
         this.InstanceId = null;

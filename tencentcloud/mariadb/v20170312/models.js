@@ -133,7 +133,7 @@ class DescribeAccountPrivilegesResponse extends  AbstractModel {
         super();
 
         /**
-         * 实例Id
+         * 实例ID
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -217,7 +217,7 @@ class CreateAccountResponse extends  AbstractModel {
         super();
 
         /**
-         * 实例Id，透传入参。
+         * 实例ID，透传入参。
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -748,7 +748,7 @@ class InitDBInstancesResponse extends  AbstractModel {
         super();
 
         /**
-         * 异步任务Id，可通过 DescribeFlow 查询任务状态。
+         * 异步任务ID，可通过 DescribeFlow 查询任务状态。
          * @type {number || null}
          */
         this.FlowId = null;
@@ -1363,7 +1363,7 @@ class DBBackupTimeConfig extends  AbstractModel {
         super();
 
         /**
-         * 实例 Id
+         * 实例 ID
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -1825,7 +1825,7 @@ class DescribeDBInstancesRequest extends  AbstractModel {
         this.ExclusterType = null;
 
         /**
-         * 按独享集群Id过滤实例，独享集群Id形如dbdc-4ih6uct9
+         * 按独享集群ID过滤实例，独享集群ID形如dbdc-4ih6uct9
          * @type {Array.<string> || null}
          */
         this.ExclusterIds = null;
@@ -2671,7 +2671,7 @@ class OpenDBExtranetAccessResponse extends  AbstractModel {
         super();
 
         /**
-         * 异步任务Id，可通过 DescribeFlow 查询任务状态。
+         * 异步任务ID，可通过 DescribeFlow 查询任务状态。
          * @type {number || null}
          */
         this.FlowId = null;
@@ -2918,7 +2918,7 @@ class DBInstance extends  AbstractModel {
         super();
 
         /**
-         * 实例 Id，唯一标识一个 TDSQL 实例
+         * 实例 ID，唯一标识一个 TDSQL 实例
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -2930,13 +2930,13 @@ class DBInstance extends  AbstractModel {
         this.InstanceName = null;
 
         /**
-         * 实例所属应用 Id
+         * 实例所属应用 ID
          * @type {number || null}
          */
         this.AppId = null;
 
         /**
-         * 实例所属项目 Id
+         * 实例所属项目 ID
          * @type {number || null}
          */
         this.ProjectId = null;
@@ -2954,13 +2954,13 @@ class DBInstance extends  AbstractModel {
         this.Zone = null;
 
         /**
-         * 私有网络 Id，基础网络时为 0
+         * 私有网络 ID，基础网络时为 0
          * @type {number || null}
          */
         this.VpcId = null;
 
         /**
-         * 子网 Id，基础网络时为 0
+         * 子网 ID，基础网络时为 0
          * @type {number || null}
          */
         this.SubnetId = null;
@@ -3050,13 +3050,13 @@ class DBInstance extends  AbstractModel {
         this.Storage = null;
 
         /**
-         * 字符串型的私有网络Id
+         * 字符串型的私有网络ID
          * @type {string || null}
          */
         this.UniqueVpcId = null;
 
         /**
-         * 字符串型的私有网络子网Id
+         * 字符串型的私有网络子网ID
          * @type {string || null}
          */
         this.UniqueSubnetId = null;
@@ -3080,19 +3080,19 @@ class DBInstance extends  AbstractModel {
         this.IsTmp = null;
 
         /**
-         * 独享集群Id，为空表示为普通实例
+         * 独享集群ID，为空表示为普通实例
          * @type {string || null}
          */
         this.ExclusterId = null;
 
         /**
-         * 数字实例Id（过时字段，请勿依赖该值）
+         * 数字实例ID（过时字段，请勿依赖该值）
          * @type {number || null}
          */
         this.Id = null;
 
         /**
-         * 产品类型 Id
+         * 产品类型 ID
          * @type {number || null}
          */
         this.Pid = null;
@@ -3250,7 +3250,7 @@ class InitDBInstancesRequest extends  AbstractModel {
         super();
 
         /**
-         * 待初始化的实例Id列表，形如：tdsql-ow728lmc，可以通过 DescribeDBInstances 查询实例详情获得。
+         * 待初始化的实例ID列表，形如：tdsql-ow728lmc，可以通过 DescribeDBInstances 查询实例详情获得。
          * @type {Array.<string> || null}
          */
         this.InstanceIds = null;
@@ -3440,7 +3440,7 @@ class CloseDBExtranetAccessResponse extends  AbstractModel {
         super();
 
         /**
-         * 异步任务Id，可通过 DescribeFlow 查询任务状态。
+         * 异步任务ID，可通过 DescribeFlow 查询任务状态。
          * @type {number || null}
          */
         this.FlowId = null;

@@ -156,6 +156,18 @@ class ModifyDDoSPolicyCaseRequest extends  AbstractModel {
          */
         this.HasVPN = null;
 
+        /**
+         * TCP业务端口列表，同时支持单个端口和端口段，字符串格式，例如：80,443,700-800,53,1000-3000
+         * @type {string || null}
+         */
+        this.TcpPortList = null;
+
+        /**
+         * UDP业务端口列表，同时支持单个端口和端口段，字符串格式，例如：80,443,700-800,53,1000-3000
+         * @type {string || null}
+         */
+        this.UdpPortList = null;
+
     }
 
     /**
@@ -187,6 +199,8 @@ class ModifyDDoSPolicyCaseRequest extends  AbstractModel {
         this.MinUdpPackageLen = 'MinUdpPackageLen' in params ? params.MinUdpPackageLen : null;
         this.MaxUdpPackageLen = 'MaxUdpPackageLen' in params ? params.MaxUdpPackageLen : null;
         this.HasVPN = 'HasVPN' in params ? params.HasVPN : null;
+        this.TcpPortList = 'TcpPortList' in params ? params.TcpPortList : null;
+        this.UdpPortList = 'UdpPortList' in params ? params.UdpPortList : null;
 
     }
 }
@@ -380,7 +394,7 @@ class DescribeCCEvListRequest extends  AbstractModel {
         super();
 
         /**
-         * 大禹子产品代号（shield表示棋牌盾；bgpip表示高防IP；bgp表示独享包；bgp-multip表示共享包；net表示高防IP专业版；basic表示DDoS基础防护）
+         * 大禹子产品代号（bgpip表示高防IP；bgp表示独享包；bgp-multip表示共享包；net表示高防IP专业版；basic表示DDoS基础防护）
          * @type {string || null}
          */
         this.Business = null;
@@ -1267,6 +1281,41 @@ class KeyValue extends  AbstractModel {
 }
 
 /**
+ * 黑白IP
+ * @class
+ */
+class IpBlackWhite extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * IP地址
+         * @type {string || null}
+         */
+        this.Ip = null;
+
+        /**
+         * 黑白类型，取值范围[black，white]
+         * @type {string || null}
+         */
+        this.Type = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Ip = 'Ip' in params ? params.Ip : null;
+        this.Type = 'Type' in params ? params.Type : null;
+
+    }
+}
+
+/**
  * ModifyDDoSAlarmThreshold请求参数结构体
  * @class
  */
@@ -1921,24 +1970,36 @@ class WaterPrintKey extends  AbstractModel {
 }
 
 /**
- * 黑白IP
+ * DescribeDDoSNetIpLog请求参数结构体
  * @class
  */
-class IpBlackWhite extends  AbstractModel {
+class DescribeDDoSNetIpLogRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * IP地址
+         * 大禹子产品代号（net表示高防IP专业版）
          * @type {string || null}
          */
-        this.Ip = null;
+        this.Business = null;
 
         /**
-         * 黑白类型，取值范围[black，white]
+         * 资源ID
          * @type {string || null}
          */
-        this.Type = null;
+        this.Id = null;
+
+        /**
+         * 攻击开始时间
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * 攻击结束时间
+         * @type {string || null}
+         */
+        this.EndTime = null;
 
     }
 
@@ -1949,8 +2010,10 @@ class IpBlackWhite extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Ip = 'Ip' in params ? params.Ip : null;
-        this.Type = 'Type' in params ? params.Type : null;
+        this.Business = 'Business' in params ? params.Business : null;
+        this.Id = 'Id' in params ? params.Id : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
 
     }
 }
@@ -2001,18 +2064,81 @@ Attacks：DDoS防护次数
 }
 
 /**
- * CreateDDoSPolicyCase返回参数结构体
+ * DescribeBasicCCThreshold请求参数结构体
  * @class
  */
-class CreateDDoSPolicyCaseResponse extends  AbstractModel {
+class DescribeBasicCCThresholdRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 策略场景ID
+         * 查询的IP地址，取值如：1.1.1.1
          * @type {string || null}
          */
-        this.SceneId = null;
+        this.BasicIp = null;
+
+        /**
+         * 查询IP所属地域，取值如：gz、bj、sh、hk等地域缩写
+         * @type {string || null}
+         */
+        this.BasicRegion = null;
+
+        /**
+         * 专区类型，取值如：公有云专区：public，黑石专区：bm, NAT服务器专区：nat，互联网通道：channel。
+         * @type {string || null}
+         */
+        this.BasicBizType = null;
+
+        /**
+         * 设备类型，取值如：服务器：cvm，公有云负载均衡：clb，黑石负载均衡：lb，NAT服务器：nat，互联网通道：channel.
+         * @type {string || null}
+         */
+        this.BasicDeviceType = null;
+
+        /**
+         * 可选，IPInstance Nat 网关（如果查询的设备类型是NAT服务器，需要传此参数，通过nat资源查询接口获取）
+         * @type {string || null}
+         */
+        this.BasicIpInstance = null;
+
+        /**
+         * 可选，运营商线路（如果查询的设备类型是NAT服务器，需要传此参数为5）
+         * @type {number || null}
+         */
+        this.BasicIspCode = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.BasicIp = 'BasicIp' in params ? params.BasicIp : null;
+        this.BasicRegion = 'BasicRegion' in params ? params.BasicRegion : null;
+        this.BasicBizType = 'BasicBizType' in params ? params.BasicBizType : null;
+        this.BasicDeviceType = 'BasicDeviceType' in params ? params.BasicDeviceType : null;
+        this.BasicIpInstance = 'BasicIpInstance' in params ? params.BasicIpInstance : null;
+        this.BasicIspCode = 'BasicIspCode' in params ? params.BasicIspCode : null;
+
+    }
+}
+
+/**
+ * CreateL4HealthConfig返回参数结构体
+ * @class
+ */
+class CreateL4HealthConfigResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 成功码
+         * @type {SuccessCode || null}
+         */
+        this.Success = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2029,7 +2155,12 @@ class CreateDDoSPolicyCaseResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.SceneId = 'SceneId' in params ? params.SceneId : null;
+
+        if (params.Success) {
+            let obj = new SuccessCode();
+            obj.deserialize(params.Success)
+            this.Success = obj;
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -2494,6 +2625,64 @@ class DescribeDDoSEvInfoRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeDDoSAttackIPRegionMap返回参数结构体
+ * @class
+ */
+class DescribeDDoSAttackIPRegionMapResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 全球地域分布数据
+         * @type {Array.<KeyValueRecord> || null}
+         */
+        this.NationCount = null;
+
+        /**
+         * 国内省份地域分布数据
+         * @type {Array.<KeyValueRecord> || null}
+         */
+        this.ProvinceCount = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.NationCount) {
+            this.NationCount = new Array();
+            for (let z in params.NationCount) {
+                let obj = new KeyValueRecord();
+                obj.deserialize(params.NationCount[z]);
+                this.NationCount.push(obj);
+            }
+        }
+
+        if (params.ProvinceCount) {
+            this.ProvinceCount = new Array();
+            for (let z in params.ProvinceCount) {
+                let obj = new KeyValueRecord();
+                obj.deserialize(params.ProvinceCount[z]);
+                this.ProvinceCount.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * ModifyL4KeepTime返回参数结构体
  * @class
  */
@@ -2667,7 +2856,7 @@ class DescribePcapRequest extends  AbstractModel {
         super();
 
         /**
-         * 大禹子产品代号（bgpip表示高防IP；bgp表示独享包；bgp-multip表示共享包；net表示高防IP专业版；shield表示棋牌盾）
+         * 大禹子产品代号（bgpip表示高防IP；bgp表示独享包；bgp-multip表示共享包；net表示高防IP专业版）
          * @type {string || null}
          */
         this.Business = null;
@@ -2998,7 +3187,7 @@ class DescribeBaradDataRequest extends  AbstractModel {
         super();
 
         /**
-         * 大禹子产品代号（bgpip表示高防IP；net表示高防IP专业版；shield表示棋牌盾）
+         * 大禹子产品代号（bgpip表示高防IP；net表示高防IP专业版）
          * @type {string || null}
          */
         this.Business = null;
@@ -3527,6 +3716,48 @@ class DescribeCCEvListResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeCCFrequencyRules请求参数结构体
+ * @class
+ */
+class DescribeCCFrequencyRulesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 大禹子产品代号（bgpip表示高防IP；net表示高防IP专业版）
+         * @type {string || null}
+         */
+        this.Business = null;
+
+        /**
+         * 资源ID
+         * @type {string || null}
+         */
+        this.Id = null;
+
+        /**
+         * 7层转发规则ID（通过获取7层转发规则接口可以获取规则ID）；当填写时表示获取转发规则的访问频率控制规则；
+         * @type {string || null}
+         */
+        this.RuleId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Business = 'Business' in params ? params.Business : null;
+        this.Id = 'Id' in params ? params.Id : null;
+        this.RuleId = 'RuleId' in params ? params.RuleId : null;
+
+    }
+}
+
+/**
  * CreateDDoSPolicyCase请求参数结构体
  * @class
  */
@@ -3666,6 +3897,18 @@ class CreateDDoSPolicyCaseRequest extends  AbstractModel {
          */
         this.HasVPN = null;
 
+        /**
+         * TCP业务端口列表，同时支持单个端口和端口段，字符串格式，例如：80,443,700-800,53,1000-3000
+         * @type {string || null}
+         */
+        this.TcpPortList = null;
+
+        /**
+         * UDP业务端口列表，同时支持单个端口和端口段，字符串格式，例如：80,443,700-800,53,1000-3000
+         * @type {string || null}
+         */
+        this.UdpPortList = null;
+
     }
 
     /**
@@ -3697,6 +3940,8 @@ class CreateDDoSPolicyCaseRequest extends  AbstractModel {
         this.MinUdpPackageLen = 'MinUdpPackageLen' in params ? params.MinUdpPackageLen : null;
         this.MaxUdpPackageLen = 'MaxUdpPackageLen' in params ? params.MaxUdpPackageLen : null;
         this.HasVPN = 'HasVPN' in params ? params.HasVPN : null;
+        this.TcpPortList = 'TcpPortList' in params ? params.TcpPortList : null;
+        this.UdpPortList = 'UdpPortList' in params ? params.UdpPortList : null;
 
     }
 }
@@ -3891,6 +4136,48 @@ class ModifyDDoSAlarmThresholdResponse extends  AbstractModel {
             obj.deserialize(params.Success)
             this.Success = obj;
         }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifyDDoSLevel返回参数结构体
+ * @class
+ */
+class ModifyDDoSLevelResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 资源ID
+         * @type {string || null}
+         */
+        this.Id = null;
+
+        /**
+         * 防护等级，取值[low,middle,high]
+         * @type {string || null}
+         */
+        this.DDoSLevel = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Id = 'Id' in params ? params.Id : null;
+        this.DDoSLevel = 'DDoSLevel' in params ? params.DDoSLevel : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -4633,24 +4920,36 @@ class Paging extends  AbstractModel {
 }
 
 /**
- * ModifyL4Rules返回参数结构体
+ * ModifyCCSelfDefinePolicy请求参数结构体
  * @class
  */
-class ModifyL4RulesResponse extends  AbstractModel {
+class ModifyCCSelfDefinePolicyRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 成功码
-         * @type {SuccessCode || null}
-         */
-        this.Success = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * 大禹子产品代号（bgpip表示高防IP；bgp表示独享包；bgp-multip表示共享包；net表示高防IP专业版）
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.Business = null;
+
+        /**
+         * 资源ID
+         * @type {string || null}
+         */
+        this.Id = null;
+
+        /**
+         * 策略ID
+         * @type {string || null}
+         */
+        this.SetId = null;
+
+        /**
+         * CC策略描述
+         * @type {CCPolicy || null}
+         */
+        this.Policy = null;
 
     }
 
@@ -4661,90 +4960,15 @@ class ModifyL4RulesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.Business = 'Business' in params ? params.Business : null;
+        this.Id = 'Id' in params ? params.Id : null;
+        this.SetId = 'SetId' in params ? params.SetId : null;
 
-        if (params.Success) {
-            let obj = new SuccessCode();
-            obj.deserialize(params.Success)
-            this.Success = obj;
+        if (params.Policy) {
+            let obj = new CCPolicy();
+            obj.deserialize(params.Policy)
+            this.Policy = obj;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * 四层健康检查配置
- * @class
- */
-class L4HealthConfig extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 转发协议，取值[TCP, UDP]
-         * @type {string || null}
-         */
-        this.Protocol = null;
-
-        /**
-         * 转发端口
-         * @type {number || null}
-         */
-        this.VirtualPort = null;
-
-        /**
-         * =1表示开启；=0表示关闭
-         * @type {number || null}
-         */
-        this.Enable = null;
-
-        /**
-         * 响应超时时间，单位秒
-         * @type {number || null}
-         */
-        this.TimeOut = null;
-
-        /**
-         * 检测间隔时间，单位秒
-         * @type {number || null}
-         */
-        this.Interval = null;
-
-        /**
-         * 不健康阈值，单位次
-         * @type {number || null}
-         */
-        this.KickNum = null;
-
-        /**
-         * 健康阈值，单位次
-         * @type {number || null}
-         */
-        this.AliveNum = null;
-
-        /**
-         * 会话保持时间，单位秒
-         * @type {number || null}
-         */
-        this.KeepTime = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Protocol = 'Protocol' in params ? params.Protocol : null;
-        this.VirtualPort = 'VirtualPort' in params ? params.VirtualPort : null;
-        this.Enable = 'Enable' in params ? params.Enable : null;
-        this.TimeOut = 'TimeOut' in params ? params.TimeOut : null;
-        this.Interval = 'Interval' in params ? params.Interval : null;
-        this.KickNum = 'KickNum' in params ? params.KickNum : null;
-        this.AliveNum = 'AliveNum' in params ? params.AliveNum : null;
-        this.KeepTime = 'KeepTime' in params ? params.KeepTime : null;
 
     }
 }
@@ -5036,24 +5260,30 @@ class DescribeL4HealthConfigRequest extends  AbstractModel {
 }
 
 /**
- * CreateL7CCRule返回参数结构体
+ * ModifyL4Rules请求参数结构体
  * @class
  */
-class CreateL7CCRuleResponse extends  AbstractModel {
+class ModifyL4RulesRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 7层CC自定义规则参数，当没有开启CC自定义规则时，返回空数组
-         * @type {Array.<CCRuleConfig> || null}
-         */
-        this.RuleConfig = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * 大禹子产品代号（bgpip表示高防IP；bgp表示独享包；bgp-multip表示共享包；net表示高防IP专业版）
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.Business = null;
+
+        /**
+         * 资源ID
+         * @type {string || null}
+         */
+        this.Id = null;
+
+        /**
+         * 规则
+         * @type {L4RuleEntry || null}
+         */
+        this.Rule = null;
 
     }
 
@@ -5064,16 +5294,14 @@ class CreateL7CCRuleResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.Business = 'Business' in params ? params.Business : null;
+        this.Id = 'Id' in params ? params.Id : null;
 
-        if (params.RuleConfig) {
-            this.RuleConfig = new Array();
-            for (let z in params.RuleConfig) {
-                let obj = new CCRuleConfig();
-                obj.deserialize(params.RuleConfig[z]);
-                this.RuleConfig.push(obj);
-            }
+        if (params.Rule) {
+            let obj = new L4RuleEntry();
+            obj.deserialize(params.Rule)
+            this.Rule = obj;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -5307,6 +5535,46 @@ class DescribeDDoSNetEvListResponse extends  AbstractModel {
             }
         }
         this.Total = 'Total' in params ? params.Total : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifyCCFrequencyRulesStatus返回参数结构体
+ * @class
+ */
+class ModifyCCFrequencyRulesStatusResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 成功码
+         * @type {SuccessCode || null}
+         */
+        this.Success = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Success) {
+            let obj = new SuccessCode();
+            obj.deserialize(params.Success)
+            this.Success = obj;
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -5726,6 +5994,62 @@ class CreateL7RuleCertResponse extends  AbstractModel {
             this.Success = obj;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeDDoSAttackIPRegionMap请求参数结构体
+ * @class
+ */
+class DescribeDDoSAttackIPRegionMapRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 大禹子产品代号（shield表示棋牌；bgpip表示高防IP；bgp表示高防包；bgp-multip表示多ip高防包；net表示高防IP专业版）
+         * @type {string || null}
+         */
+        this.Business = null;
+
+        /**
+         * 资源ID
+         * @type {string || null}
+         */
+        this.Id = null;
+
+        /**
+         * 统计开始时间
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * 统计结束时间，最大可统计的时间范围是半年；
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * 指定资源的特定IP的攻击源，可选
+         * @type {Array.<string> || null}
+         */
+        this.IpList = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Business = 'Business' in params ? params.Business : null;
+        this.Id = 'Id' in params ? params.Id : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.IpList = 'IpList' in params ? params.IpList : null;
 
     }
 }
@@ -6157,6 +6481,97 @@ class L4RuleHealth extends  AbstractModel {
 }
 
 /**
+ * ModifyCCFrequencyRules请求参数结构体
+ * @class
+ */
+class ModifyCCFrequencyRulesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 大禹子产品代号（bgpip表示高防IP；net表示高防IP专业版）
+         * @type {string || null}
+         */
+        this.Business = null;
+
+        /**
+         * CC的访问频率控制规则ID
+         * @type {string || null}
+         */
+        this.CCFrequencyRuleId = null;
+
+        /**
+         * 匹配规则，取值["include"(前缀匹配)，"equal"(完全匹配)]
+         * @type {string || null}
+         */
+        this.Mode = null;
+
+        /**
+         * 统计周期，单位秒，取值[10, 30, 60]
+         * @type {number || null}
+         */
+        this.Period = null;
+
+        /**
+         * 访问次数，取值[1-10000]
+         * @type {number || null}
+         */
+        this.ReqNumber = null;
+
+        /**
+         * 执行动作，取值["alg"（人机识别）, "drop"（拦截）]
+         * @type {string || null}
+         */
+        this.Act = null;
+
+        /**
+         * 执行时间，单位秒，取值[1-900]
+         * @type {number || null}
+         */
+        this.ExeDuration = null;
+
+        /**
+         * URI字符串，必须以/开头，例如/abc/a.php，长度不超过31；当URI=/时，匹配模式只能选择前缀匹配；
+         * @type {string || null}
+         */
+        this.Uri = null;
+
+        /**
+         * User-Agent字符串，长度不超过80
+         * @type {string || null}
+         */
+        this.UserAgent = null;
+
+        /**
+         * Cookie字符串，长度不超过40
+         * @type {string || null}
+         */
+        this.Cookie = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Business = 'Business' in params ? params.Business : null;
+        this.CCFrequencyRuleId = 'CCFrequencyRuleId' in params ? params.CCFrequencyRuleId : null;
+        this.Mode = 'Mode' in params ? params.Mode : null;
+        this.Period = 'Period' in params ? params.Period : null;
+        this.ReqNumber = 'ReqNumber' in params ? params.ReqNumber : null;
+        this.Act = 'Act' in params ? params.Act : null;
+        this.ExeDuration = 'ExeDuration' in params ? params.ExeDuration : null;
+        this.Uri = 'Uri' in params ? params.Uri : null;
+        this.UserAgent = 'UserAgent' in params ? params.UserAgent : null;
+        this.Cookie = 'Cookie' in params ? params.Cookie : null;
+
+    }
+}
+
+/**
  * ModifyCCPolicySwitch返回参数结构体
  * @class
  */
@@ -6376,36 +6791,30 @@ class ModifyCCAlarmThresholdRequest extends  AbstractModel {
 }
 
 /**
- * ModifyCCSelfDefinePolicy请求参数结构体
+ * DescribeCCFrequencyRules返回参数结构体
  * @class
  */
-class ModifyCCSelfDefinePolicyRequest extends  AbstractModel {
+class DescribeCCFrequencyRulesResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 大禹子产品代号（bgpip表示高防IP；bgp表示独享包；bgp-multip表示共享包；net表示高防IP专业版）
-         * @type {string || null}
+         * 访问频率控制规则列表
+         * @type {Array.<CCFrequencyRule> || null}
          */
-        this.Business = null;
+        this.CCFrequencyRuleList = null;
 
         /**
-         * 资源ID
+         * 访问频率控制规则开关状态，取值[on(开启)，off(关闭)]
          * @type {string || null}
          */
-        this.Id = null;
+        this.CCFrequencyRuleStatus = null;
 
         /**
-         * 策略ID
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.SetId = null;
-
-        /**
-         * CC策略描述
-         * @type {CCPolicy || null}
-         */
-        this.Policy = null;
+        this.RequestId = null;
 
     }
 
@@ -6416,15 +6825,17 @@ class ModifyCCSelfDefinePolicyRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Business = 'Business' in params ? params.Business : null;
-        this.Id = 'Id' in params ? params.Id : null;
-        this.SetId = 'SetId' in params ? params.SetId : null;
 
-        if (params.Policy) {
-            let obj = new CCPolicy();
-            obj.deserialize(params.Policy)
-            this.Policy = obj;
+        if (params.CCFrequencyRuleList) {
+            this.CCFrequencyRuleList = new Array();
+            for (let z in params.CCFrequencyRuleList) {
+                let obj = new CCFrequencyRule();
+                obj.deserialize(params.CCFrequencyRuleList[z]);
+                this.CCFrequencyRuleList.push(obj);
+            }
         }
+        this.CCFrequencyRuleStatus = 'CCFrequencyRuleStatus' in params ? params.CCFrequencyRuleStatus : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -6502,6 +6913,48 @@ class DescribeDDoSEvListRequest extends  AbstractModel {
         this.OverLoad = 'OverLoad' in params ? params.OverLoad : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
+
+    }
+}
+
+/**
+ * DescribeBasicCCThreshold返回参数结构体
+ * @class
+ */
+class DescribeBasicCCThresholdResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * CC启动开关（0:关闭；1:开启）
+         * @type {number || null}
+         */
+        this.CCEnable = null;
+
+        /**
+         * CC防护阈值
+         * @type {number || null}
+         */
+        this.CCThreshold = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CCEnable = 'CCEnable' in params ? params.CCEnable : null;
+        this.CCThreshold = 'CCThreshold' in params ? params.CCThreshold : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -6657,6 +7110,46 @@ class ModifyCCPolicySwitchRequest extends  AbstractModel {
         this.Id = 'Id' in params ? params.Id : null;
         this.SetId = 'SetId' in params ? params.SetId : null;
         this.Switch = 'Switch' in params ? params.Switch : null;
+
+    }
+}
+
+/**
+ * ModifyCCFrequencyRules返回参数结构体
+ * @class
+ */
+class ModifyCCFrequencyRulesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 成功码
+         * @type {SuccessCode || null}
+         */
+        this.Success = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Success) {
+            let obj = new SuccessCode();
+            obj.deserialize(params.Success)
+            this.Success = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -7032,13 +7525,40 @@ class DescribeResourceListResponse extends  AbstractModel {
         this.Total = null;
 
         /**
-         * 资源记录列表
+         * 资源记录列表，返回Key值说明：
+"Key": "CreateTime" 表示资源实例购买时间
+"Key": "Region" 表示资源实例的地域
+"Key": "BoundIP" 表示独享包实例绑定的IP
+"Key": "Id" 表示资源实例的ID
+"Key": "CCEnabled" 表示资源实例的CC防护开关状态
+"Key": "DDoSThreshold" 表示资源实例的DDoS的清洗阈值	
+"Key": "BoundStatus" 表示独享包或共享包实例的绑定IP操作状态(绑定中或绑定完成)
+"Key": "Type" 此字段弃用
+"Key": "ElasticLimit" 表示资源实例的弹性防护值
+"Key": "DDoSAI" 表示资源实例的DDoS AI防护开关
+"Key": "Bandwidth" 表示资源实例的保底防护值
+"Key": "OverloadCount" 表示资源实例受到超过弹性防护值的次数
+"Key": "Status" 表示资源实例的状态(idle:运行中, attacking:攻击中, blocking:封堵中, isolate:隔离中)
+"Key": "Lbid" 此字段弃用
+"Key": "ShowFlag" 此字段弃用
+"Key": "Expire" 表示资源实例的过期时间
+"Key": "CCThreshold" 表示资源实例的CC防护触发阈值
+"Key": "AutoRenewFlag" 表示资源实例的自动续费是否开启
+"Key": "IspCode" 表示独享包或共享包的线路(0-电信, 1-联通, 2-移动, 5-BGP)
+"Key": "PackType" 表示套餐包类型
+"Key": "PackId" 表示套餐包ID
+"Key": "Name" 表示资源实例的名称
+"Key": "Locked" 此字段弃用
+"Key": "IpDDoSLevel" 表示资源实例的防护等级(low-宽松, middle-正常, high-严格)
+"Key": "DefendStatus" 表示资源实例的DDoS防护状态(防护开启或临时关闭)
+"Key": "UndefendExpire" 表示资源实例的DDoS防护临时关闭结束时间
+"Key": "Tgw" 表示资源实例是否是新资源
          * @type {Array.<KeyValueRecord> || null}
          */
         this.ServicePacks = null;
 
         /**
-         * 大禹子产品代号（bgp表示独享包；bgp-multip表示共享包；bgpip表示高防IP；net表示高防IP专业版；shield表示棋牌）
+         * 大禹子产品代号（bgp表示独享包；bgp-multip表示共享包；bgpip表示高防IP；net表示高防IP专业版）
          * @type {string || null}
          */
         this.Business = null;
@@ -7083,20 +7603,14 @@ class ModifyCCThresholdRequest extends  AbstractModel {
         super();
 
         /**
-         * 大禹子产品代号（bgpip表示高防IP；bgp表示独享包；bgp-multip表示共享包；net表示高防IP专业版）
+         * 大禹子产品代号（bgpip表示高防IP；bgp表示独享包；bgp-multip表示共享包；net表示高防IP专业版；basic表示基础防护）
          * @type {string || null}
          */
         this.Business = null;
 
         /**
-         * 资源ID
-         * @type {string || null}
-         */
-        this.Id = null;
-
-        /**
          * CC防护阈值，取值(0 100 150 240 350 480 550 700 850 1000 1500 2000 3000 5000 10000 20000);
-当Business为高防IP、高防IP专业版、棋牌盾时，其CC防护最大阈值跟资源的保底防护带宽有关，对应关系如下：
+当Business为高防IP、高防IP专业版时，其CC防护最大阈值跟资源的保底防护带宽有关，对应关系如下：
   保底带宽: 最大C防护阈值
   10:  20000,
   20:  40000,
@@ -7111,6 +7625,12 @@ class ModifyCCThresholdRequest extends  AbstractModel {
         this.Threshold = null;
 
         /**
+         * 资源ID
+         * @type {string || null}
+         */
+        this.Id = null;
+
+        /**
          * 可选字段，代表CC防护类型，取值[http（HTTP协议的CC防护），https（HTTPS协议的CC防护）]；当不填时，默认为HTTP协议的CC防护；当填写https时还需要填写RuleId字段；
          * @type {string || null}
          */
@@ -7123,6 +7643,42 @@ class ModifyCCThresholdRequest extends  AbstractModel {
          */
         this.RuleId = null;
 
+        /**
+         * 查询的IP地址（仅基础防护提供），取值如：1.1.1.1
+         * @type {string || null}
+         */
+        this.BasicIp = null;
+
+        /**
+         * 查询IP所属地域（仅基础防护提供），取值如：gz、bj、sh、hk等地域缩写
+         * @type {string || null}
+         */
+        this.BasicRegion = null;
+
+        /**
+         * 专区类型（仅基础防护提供），取值如：公有云专区：public，黑石专区：bm, NAT服务器专区：nat，互联网通道：channel。
+         * @type {string || null}
+         */
+        this.BasicBizType = null;
+
+        /**
+         * 设备类型（仅基础防护提供），取值如：服务器：cvm，公有云负载均衡：clb，黑石负载均衡：lb，NAT服务器：nat，互联网通道：channel.
+         * @type {string || null}
+         */
+        this.BasicDeviceType = null;
+
+        /**
+         * 仅基础防护提供。可选，IPInstance Nat 网关（如果查询的设备类型是NAT服务器，需要传此参数，通过nat资源查询接口获取）
+         * @type {string || null}
+         */
+        this.BasicIpInstance = null;
+
+        /**
+         * 仅基础防护提供。可选，运营商线路（如果查询的设备类型是NAT服务器，需要传此参数为5）
+         * @type {number || null}
+         */
+        this.BasicIspCode = null;
+
     }
 
     /**
@@ -7133,10 +7689,16 @@ class ModifyCCThresholdRequest extends  AbstractModel {
             return;
         }
         this.Business = 'Business' in params ? params.Business : null;
-        this.Id = 'Id' in params ? params.Id : null;
         this.Threshold = 'Threshold' in params ? params.Threshold : null;
+        this.Id = 'Id' in params ? params.Id : null;
         this.Protocol = 'Protocol' in params ? params.Protocol : null;
         this.RuleId = 'RuleId' in params ? params.RuleId : null;
+        this.BasicIp = 'BasicIp' in params ? params.BasicIp : null;
+        this.BasicRegion = 'BasicRegion' in params ? params.BasicRegion : null;
+        this.BasicBizType = 'BasicBizType' in params ? params.BasicBizType : null;
+        this.BasicDeviceType = 'BasicDeviceType' in params ? params.BasicDeviceType : null;
+        this.BasicIpInstance = 'BasicIpInstance' in params ? params.BasicIpInstance : null;
+        this.BasicIspCode = 'BasicIspCode' in params ? params.BasicIspCode : null;
 
     }
 }
@@ -7191,36 +7753,60 @@ class CreateBasicDDoSAlarmThresholdRequest extends  AbstractModel {
 }
 
 /**
- * 7层CC自定义规则
+ * 四层健康检查配置
  * @class
  */
-class CCRuleConfig extends  AbstractModel {
+class L4HealthConfig extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 统计周期，单位秒，取值[10, 30, 60]
-         * @type {number || null}
-         */
-        this.Period = null;
-
-        /**
-         * 访问次数，取值[1-10000]
-         * @type {number || null}
-         */
-        this.ReqNumber = null;
-
-        /**
-         * 执行动作，取值["alg"（人机识别）, "drop"（拦截）]
+         * 转发协议，取值[TCP, UDP]
          * @type {string || null}
          */
-        this.Action = null;
+        this.Protocol = null;
 
         /**
-         * 执行时间，单位秒，取值[1-900]
+         * 转发端口
          * @type {number || null}
          */
-        this.ExeDuration = null;
+        this.VirtualPort = null;
+
+        /**
+         * =1表示开启；=0表示关闭
+         * @type {number || null}
+         */
+        this.Enable = null;
+
+        /**
+         * 响应超时时间，单位秒
+         * @type {number || null}
+         */
+        this.TimeOut = null;
+
+        /**
+         * 检测间隔时间，单位秒
+         * @type {number || null}
+         */
+        this.Interval = null;
+
+        /**
+         * 不健康阈值，单位次
+         * @type {number || null}
+         */
+        this.KickNum = null;
+
+        /**
+         * 健康阈值，单位次
+         * @type {number || null}
+         */
+        this.AliveNum = null;
+
+        /**
+         * 会话保持时间，单位秒
+         * @type {number || null}
+         */
+        this.KeepTime = null;
 
     }
 
@@ -7231,10 +7817,14 @@ class CCRuleConfig extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Period = 'Period' in params ? params.Period : null;
-        this.ReqNumber = 'ReqNumber' in params ? params.ReqNumber : null;
-        this.Action = 'Action' in params ? params.Action : null;
-        this.ExeDuration = 'ExeDuration' in params ? params.ExeDuration : null;
+        this.Protocol = 'Protocol' in params ? params.Protocol : null;
+        this.VirtualPort = 'VirtualPort' in params ? params.VirtualPort : null;
+        this.Enable = 'Enable' in params ? params.Enable : null;
+        this.TimeOut = 'TimeOut' in params ? params.TimeOut : null;
+        this.Interval = 'Interval' in params ? params.Interval : null;
+        this.KickNum = 'KickNum' in params ? params.KickNum : null;
+        this.AliveNum = 'AliveNum' in params ? params.AliveNum : null;
+        this.KeepTime = 'KeepTime' in params ? params.KeepTime : null;
 
     }
 }
@@ -7457,70 +8047,6 @@ class ModifyCCSelfDefinePolicyResponse extends  AbstractModel {
             this.Success = obj;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * CreateL7CCRule请求参数结构体
- * @class
- */
-class CreateL7CCRuleRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 大禹子产品代号（bgpip表示高防IP；net表示高防IP专业版）
-         * @type {string || null}
-         */
-        this.Business = null;
-
-        /**
-         * 资源ID
-         * @type {string || null}
-         */
-        this.Id = null;
-
-        /**
-         * 操作码，取值[query(表示查询)，add(表示添加)，del(表示删除)]
-         * @type {string || null}
-         */
-        this.Method = null;
-
-        /**
-         * 7层转发规则ID，例如：rule-0000001
-         * @type {string || null}
-         */
-        this.RuleId = null;
-
-        /**
-         * 7层CC自定义规则参数，当操作码为query时，可以不用填写；当操作码为add或del时，必须填写；
-         * @type {Array.<CCRuleConfig> || null}
-         */
-        this.RuleConfig = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Business = 'Business' in params ? params.Business : null;
-        this.Id = 'Id' in params ? params.Id : null;
-        this.Method = 'Method' in params ? params.Method : null;
-        this.RuleId = 'RuleId' in params ? params.RuleId : null;
-
-        if (params.RuleConfig) {
-            this.RuleConfig = new Array();
-            for (let z in params.RuleConfig) {
-                let obj = new CCRuleConfig();
-                obj.deserialize(params.RuleConfig[z]);
-                this.RuleConfig.push(obj);
-            }
-        }
 
     }
 }
@@ -7770,36 +8296,24 @@ class DescribeDDoSPolicyResponse extends  AbstractModel {
 }
 
 /**
- * DescribeDDoSNetIpLog请求参数结构体
+ * DeleteCCFrequencyRules返回参数结构体
  * @class
  */
-class DescribeDDoSNetIpLogRequest extends  AbstractModel {
+class DeleteCCFrequencyRulesResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 大禹子产品代号（net表示高防IP专业版）
-         * @type {string || null}
+         * 成功码
+         * @type {SuccessCode || null}
          */
-        this.Business = null;
+        this.Success = null;
 
         /**
-         * 资源ID
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.Id = null;
-
-        /**
-         * 攻击开始时间
-         * @type {string || null}
-         */
-        this.StartTime = null;
-
-        /**
-         * 攻击结束时间
-         * @type {string || null}
-         */
-        this.EndTime = null;
+        this.RequestId = null;
 
     }
 
@@ -7810,10 +8324,13 @@ class DescribeDDoSNetIpLogRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Business = 'Business' in params ? params.Business : null;
-        this.Id = 'Id' in params ? params.Id : null;
-        this.StartTime = 'StartTime' in params ? params.StartTime : null;
-        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+
+        if (params.Success) {
+            let obj = new SuccessCode();
+            obj.deserialize(params.Success)
+            this.Success = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -7859,18 +8376,18 @@ class DeleteDDoSPolicyCaseResponse extends  AbstractModel {
 }
 
 /**
- * CreateL4HealthConfig返回参数结构体
+ * CreateDDoSPolicyCase返回参数结构体
  * @class
  */
-class CreateL4HealthConfigResponse extends  AbstractModel {
+class CreateDDoSPolicyCaseResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 成功码
-         * @type {SuccessCode || null}
+         * 策略场景ID
+         * @type {string || null}
          */
-        this.Success = null;
+        this.SceneId = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -7887,12 +8404,7 @@ class CreateL4HealthConfigResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.Success) {
-            let obj = new SuccessCode();
-            obj.deserialize(params.Success)
-            this.Success = obj;
-        }
+        this.SceneId = 'SceneId' in params ? params.SceneId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -8119,53 +8631,6 @@ class DescribePackIndexRequest extends  AbstractModel {
 }
 
 /**
- * ModifyL4Rules请求参数结构体
- * @class
- */
-class ModifyL4RulesRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 大禹子产品代号（bgpip表示高防IP；bgp表示独享包；bgp-multip表示共享包；net表示高防IP专业版）
-         * @type {string || null}
-         */
-        this.Business = null;
-
-        /**
-         * 资源ID
-         * @type {string || null}
-         */
-        this.Id = null;
-
-        /**
-         * 规则
-         * @type {L4RuleEntry || null}
-         */
-        this.Rule = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Business = 'Business' in params ? params.Business : null;
-        this.Id = 'Id' in params ? params.Id : null;
-
-        if (params.Rule) {
-            let obj = new L4RuleEntry();
-            obj.deserialize(params.Rule)
-            this.Rule = obj;
-        }
-
-    }
-}
-
-/**
  * DescribeDDoSEvList返回参数结构体
  * @class
  */
@@ -8325,6 +8790,90 @@ class DescribeL7HealthConfigResponse extends  AbstractModel {
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CC的访问频率控制规则
+ * @class
+ */
+class CCFrequencyRule extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * CC的访问频率控制规则ID
+         * @type {string || null}
+         */
+        this.CCFrequencyRuleId = null;
+
+        /**
+         * URI字符串，必须以/开头，例如/abc/a.php，长度不超过31；当URI=/时，匹配模式只能选择前缀匹配；
+         * @type {string || null}
+         */
+        this.Uri = null;
+
+        /**
+         * User-Agent字符串，长度不超过80
+         * @type {string || null}
+         */
+        this.UserAgent = null;
+
+        /**
+         * Cookie字符串，长度不超过40
+         * @type {string || null}
+         */
+        this.Cookie = null;
+
+        /**
+         * 匹配规则，取值["include"(前缀匹配)，"equal"(完全匹配)]
+         * @type {string || null}
+         */
+        this.Mode = null;
+
+        /**
+         * 统计周期，单位秒，取值[10, 30, 60]
+         * @type {number || null}
+         */
+        this.Period = null;
+
+        /**
+         * 访问次数，取值[1-10000]
+         * @type {number || null}
+         */
+        this.ReqNumber = null;
+
+        /**
+         * 执行动作，取值["alg"（人机识别）, "drop"（拦截）]
+         * @type {string || null}
+         */
+        this.Act = null;
+
+        /**
+         * 执行时间，单位秒，取值[1-900]
+         * @type {number || null}
+         */
+        this.ExeDuration = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CCFrequencyRuleId = 'CCFrequencyRuleId' in params ? params.CCFrequencyRuleId : null;
+        this.Uri = 'Uri' in params ? params.Uri : null;
+        this.UserAgent = 'UserAgent' in params ? params.UserAgent : null;
+        this.Cookie = 'Cookie' in params ? params.Cookie : null;
+        this.Mode = 'Mode' in params ? params.Mode : null;
+        this.Period = 'Period' in params ? params.Period : null;
+        this.ReqNumber = 'ReqNumber' in params ? params.ReqNumber : null;
+        this.Act = 'Act' in params ? params.Act : null;
+        this.ExeDuration = 'ExeDuration' in params ? params.ExeDuration : null;
 
     }
 }
@@ -8692,7 +9241,7 @@ class CCEventRecord extends  AbstractModel {
         super();
 
         /**
-         * 大禹子产品代号（shield表示棋牌；bgpip表示高防IP；bgp表示独享包；bgp-multip表示共享包；net表示高防IP专业版；basic表示DDoS基础防护）
+         * 大禹子产品代号（bgpip表示高防IP；bgp表示独享包；bgp-multip表示共享包；net表示高防IP专业版；basic表示DDoS基础防护）
          * @type {string || null}
          */
         this.Business = null;
@@ -8801,7 +9350,7 @@ class DescribeTransmitStatisRequest extends  AbstractModel {
         super();
 
         /**
-         * 大禹子产品代号（bgpip表示高防IP；net表示高防IP专业版；shield表示棋牌盾；bgp表示独享包；bgp-multip表示共享包）
+         * 大禹子产品代号（bgpip表示高防IP；net表示高防IP专业版；bgp表示独享包；bgp-multip表示共享包）
          * @type {string || null}
          */
         this.Business = null;
@@ -9293,6 +9842,55 @@ class DescribeSecIndexRequest extends  AbstractModel {
 }
 
 /**
+ * ModifyCCFrequencyRulesStatus请求参数结构体
+ * @class
+ */
+class ModifyCCFrequencyRulesStatusRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 大禹子产品代号（bgpip表示高防IP；net表示高防IP专业版）
+         * @type {string || null}
+         */
+        this.Business = null;
+
+        /**
+         * 资源ID
+         * @type {string || null}
+         */
+        this.Id = null;
+
+        /**
+         * 7层转发规则ID（通过获取7层转发规则接口可以获取规则ID）
+         * @type {string || null}
+         */
+        this.RuleId = null;
+
+        /**
+         * 开启或关闭，取值["on"(开启)，"off"(关闭)]
+         * @type {string || null}
+         */
+        this.Method = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Business = 'Business' in params ? params.Business : null;
+        this.Id = 'Id' in params ? params.Id : null;
+        this.RuleId = 'RuleId' in params ? params.RuleId : null;
+        this.Method = 'Method' in params ? params.Method : null;
+
+    }
+}
+
+/**
  * DescribeDDoSCount返回参数结构体
  * @class
  */
@@ -9684,7 +10282,7 @@ class DescribeResourceListRequest extends  AbstractModel {
         super();
 
         /**
-         * 大禹子产品代号（bgp表示独享包；bgp-multip表示共享包；bgpip表示高防IP；net表示高防IP专业版；shield表示棋牌）
+         * 大禹子产品代号（bgp表示独享包；bgp-multip表示共享包；bgpip表示高防IP；net表示高防IP专业版）
          * @type {string || null}
          */
         this.Business = null;
@@ -10160,24 +10758,18 @@ class DescribleL7RulesResponse extends  AbstractModel {
 }
 
 /**
- * ModifyDDoSLevel返回参数结构体
+ * CreateCCFrequencyRules返回参数结构体
  * @class
  */
-class ModifyDDoSLevelResponse extends  AbstractModel {
+class CreateCCFrequencyRulesResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 资源ID
+         * CC防护的访问频率控制规则ID
          * @type {string || null}
          */
-        this.Id = null;
-
-        /**
-         * 防护等级，取值[low,middle,high]
-         * @type {string || null}
-         */
-        this.DDoSLevel = null;
+        this.CCFrequencyRuleId = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -10194,8 +10786,7 @@ class ModifyDDoSLevelResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Id = 'Id' in params ? params.Id : null;
-        this.DDoSLevel = 'DDoSLevel' in params ? params.DDoSLevel : null;
+        this.CCFrequencyRuleId = 'CCFrequencyRuleId' in params ? params.CCFrequencyRuleId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -10253,7 +10844,7 @@ class DDoSPolicyPortLimit extends  AbstractModel {
         super();
 
         /**
-         * 协议，取值范围[tcp,udp,icmp,all]
+         * 协议，取值范围[tcp,udp,all]
          * @type {string || null}
          */
         this.Protocol = null;
@@ -10712,7 +11303,7 @@ class L7RuleEntry extends  AbstractModel {
         this.KeepEnable = null;
 
         /**
-         * 规则ID
+         * 规则ID，当添加新规则时可以不用填写此字段；当修改或者删除规则时需要填写此字段；
          * @type {string || null}
          */
         this.RuleId = null;
@@ -11034,6 +11625,41 @@ class DDoSPolicyPacketFilter extends  AbstractModel {
 }
 
 /**
+ * DeleteCCFrequencyRules请求参数结构体
+ * @class
+ */
+class DeleteCCFrequencyRulesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 大禹子产品代号（bgpip表示高防IP；net表示高防IP专业版）
+         * @type {string || null}
+         */
+        this.Business = null;
+
+        /**
+         * CC防护的访问频率控制规则ID
+         * @type {string || null}
+         */
+        this.CCFrequencyRuleId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Business = 'Business' in params ? params.Business : null;
+        this.CCFrequencyRuleId = 'CCFrequencyRuleId' in params ? params.CCFrequencyRuleId : null;
+
+    }
+}
+
+/**
  * DescribeDDoSNetIpLog返回参数结构体
  * @class
  */
@@ -11102,6 +11728,104 @@ Key为"LogMessage"时，Value值为Ip日志内容
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CreateCCFrequencyRules请求参数结构体
+ * @class
+ */
+class CreateCCFrequencyRulesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 大禹子产品代号（bgpip表示高防IP；net表示高防IP专业版）
+         * @type {string || null}
+         */
+        this.Business = null;
+
+        /**
+         * 资源ID
+         * @type {string || null}
+         */
+        this.Id = null;
+
+        /**
+         * 7层转发规则ID（通过获取7层转发规则接口可以获取规则ID）
+         * @type {string || null}
+         */
+        this.RuleId = null;
+
+        /**
+         * 匹配规则，取值["include"(前缀匹配)，"equal"(完全匹配)]
+         * @type {string || null}
+         */
+        this.Mode = null;
+
+        /**
+         * 统计周期，单位秒，取值[10, 30, 60]
+         * @type {number || null}
+         */
+        this.Period = null;
+
+        /**
+         * 访问次数，取值[1-10000]
+         * @type {number || null}
+         */
+        this.ReqNumber = null;
+
+        /**
+         * 执行动作，取值["alg"（人机识别）, "drop"（拦截）]
+         * @type {string || null}
+         */
+        this.Act = null;
+
+        /**
+         * 执行时间，单位秒，取值[1-900]
+         * @type {number || null}
+         */
+        this.ExeDuration = null;
+
+        /**
+         * URI字符串，必须以/开头，例如/abc/a.php，长度不超过31；当URI=/时，匹配模式只能选择前缀匹配；
+         * @type {string || null}
+         */
+        this.Uri = null;
+
+        /**
+         * User-Agent字符串，长度不超过80
+         * @type {string || null}
+         */
+        this.UserAgent = null;
+
+        /**
+         * Cookie字符串，长度不超过40
+         * @type {string || null}
+         */
+        this.Cookie = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Business = 'Business' in params ? params.Business : null;
+        this.Id = 'Id' in params ? params.Id : null;
+        this.RuleId = 'RuleId' in params ? params.RuleId : null;
+        this.Mode = 'Mode' in params ? params.Mode : null;
+        this.Period = 'Period' in params ? params.Period : null;
+        this.ReqNumber = 'ReqNumber' in params ? params.ReqNumber : null;
+        this.Act = 'Act' in params ? params.Act : null;
+        this.ExeDuration = 'ExeDuration' in params ? params.ExeDuration : null;
+        this.Uri = 'Uri' in params ? params.Uri : null;
+        this.UserAgent = 'UserAgent' in params ? params.UserAgent : null;
+        this.Cookie = 'Cookie' in params ? params.Cookie : null;
 
     }
 }
@@ -11373,7 +12097,7 @@ class DDoSEventRecord extends  AbstractModel {
         super();
 
         /**
-         * 大禹子产品代号（shield表示棋牌；bgpip表示高防IP；bgp表示独享包；bgp-multip表示共享包；net表示高防IP专业版；basic表示DDoS基础防护）
+         * 大禹子产品代号（bgpip表示高防IP；bgp表示独享包；bgp-multip表示共享包；net表示高防IP专业版；basic表示DDoS基础防护）
          * @type {string || null}
          */
         this.Business = null;
@@ -11529,6 +12253,46 @@ class DescribleL4RulesResponse extends  AbstractModel {
                 obj.deserialize(params.Healths[z]);
                 this.Healths.push(obj);
             }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifyL4Rules返回参数结构体
+ * @class
+ */
+class ModifyL4RulesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 成功码
+         * @type {SuccessCode || null}
+         */
+        this.Success = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Success) {
+            let obj = new SuccessCode();
+            obj.deserialize(params.Success)
+            this.Success = obj;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -11745,6 +12509,7 @@ module.exports = {
     DeleteCCSelfDefinePolicyRequest: DeleteCCSelfDefinePolicyRequest,
     DescribeCCUrlAllowRequest: DescribeCCUrlAllowRequest,
     KeyValue: KeyValue,
+    IpBlackWhite: IpBlackWhite,
     ModifyDDoSAlarmThresholdRequest: ModifyDDoSAlarmThresholdRequest,
     CreateDDoSPolicyRequest: CreateDDoSPolicyRequest,
     ModifyCCThresholdResponse: ModifyCCThresholdResponse,
@@ -11756,9 +12521,10 @@ module.exports = {
     DescribeDDoSCountRequest: DescribeDDoSCountRequest,
     RegionInstanceCount: RegionInstanceCount,
     WaterPrintKey: WaterPrintKey,
-    IpBlackWhite: IpBlackWhite,
+    DescribeDDoSNetIpLogRequest: DescribeDDoSNetIpLogRequest,
     DescribeDDoSUsedStatisResponse: DescribeDDoSUsedStatisResponse,
-    CreateDDoSPolicyCaseResponse: CreateDDoSPolicyCaseResponse,
+    DescribeBasicCCThresholdRequest: DescribeBasicCCThresholdRequest,
+    CreateL4HealthConfigResponse: CreateL4HealthConfigResponse,
     DescribeIPProductInfoResponse: DescribeIPProductInfoResponse,
     ModifyDDoSSwitchResponse: ModifyDDoSSwitchResponse,
     IpBlockData: IpBlockData,
@@ -11767,6 +12533,7 @@ module.exports = {
     DescribeRuleSetsResponse: DescribeRuleSetsResponse,
     DescribeBaradDataResponse: DescribeBaradDataResponse,
     DescribeDDoSEvInfoRequest: DescribeDDoSEvInfoRequest,
+    DescribeDDoSAttackIPRegionMapResponse: DescribeDDoSAttackIPRegionMapResponse,
     ModifyL4KeepTimeResponse: ModifyL4KeepTimeResponse,
     ModifyL7RulesResponse: ModifyL7RulesResponse,
     DescribeL7HealthConfigRequest: DescribeL7HealthConfigRequest,
@@ -11786,11 +12553,13 @@ module.exports = {
     DescribeDDoSNetEvInfoRequest: DescribeDDoSNetEvInfoRequest,
     ModifyResourceRenewFlagRequest: ModifyResourceRenewFlagRequest,
     DescribeCCEvListResponse: DescribeCCEvListResponse,
+    DescribeCCFrequencyRulesRequest: DescribeCCFrequencyRulesRequest,
     CreateDDoSPolicyCaseRequest: CreateDDoSPolicyCaseRequest,
     ModifyDDoSPolicyNameResponse: ModifyDDoSPolicyNameResponse,
     DescribeCCAlarmThresholdRequest: DescribeCCAlarmThresholdRequest,
     ModifyCCUrlAllowRequest: ModifyCCUrlAllowRequest,
     ModifyDDoSAlarmThresholdResponse: ModifyDDoSAlarmThresholdResponse,
+    ModifyDDoSLevelResponse: ModifyDDoSLevelResponse,
     DescribeCCIpAllowDenyResponse: DescribeCCIpAllowDenyResponse,
     DescribeDDoSIpLogResponse: DescribeDDoSIpLogResponse,
     CCRule: CCRule,
@@ -11805,18 +12574,18 @@ module.exports = {
     DescribeInsurePacksRequest: DescribeInsurePacksRequest,
     DescribeDDoSNetCountRequest: DescribeDDoSNetCountRequest,
     Paging: Paging,
-    ModifyL4RulesResponse: ModifyL4RulesResponse,
-    L4HealthConfig: L4HealthConfig,
+    ModifyCCSelfDefinePolicyRequest: ModifyCCSelfDefinePolicyRequest,
     CreateCCSelfDefinePolicyRequest: CreateCCSelfDefinePolicyRequest,
     SuccessCode: SuccessCode,
     DescribleL4RulesRequest: DescribleL4RulesRequest,
     L4RuleEntry: L4RuleEntry,
     DescribeL4HealthConfigRequest: DescribeL4HealthConfigRequest,
-    CreateL7CCRuleResponse: CreateL7CCRuleResponse,
+    ModifyL4RulesRequest: ModifyL4RulesRequest,
     DescribeDDoSIpLogRequest: DescribeDDoSIpLogRequest,
     CreateL7RulesRequest: CreateL7RulesRequest,
     CreateL4RulesRequest: CreateL4RulesRequest,
     DescribeDDoSNetEvListResponse: DescribeDDoSNetEvListResponse,
+    ModifyCCFrequencyRulesStatusResponse: ModifyCCFrequencyRulesStatusResponse,
     DescribeL4RulesErrHealthRequest: DescribeL4RulesErrHealthRequest,
     L4RuleSource: L4RuleSource,
     CreateBasicDDoSAlarmThresholdResponse: CreateBasicDDoSAlarmThresholdResponse,
@@ -11826,6 +12595,7 @@ module.exports = {
     DescribeIPProductInfoRequest: DescribeIPProductInfoRequest,
     ModifyDDoSSwitchRequest: ModifyDDoSSwitchRequest,
     CreateL7RuleCertResponse: CreateL7RuleCertResponse,
+    DescribeDDoSAttackIPRegionMapRequest: DescribeDDoSAttackIPRegionMapRequest,
     ModifyDDoSPolicyRequest: ModifyDDoSPolicyRequest,
     DescribeSourceIpSegmentRequest: DescribeSourceIpSegmentRequest,
     DescribeSourceIpSegmentResponse: DescribeSourceIpSegmentResponse,
@@ -11833,16 +12603,19 @@ module.exports = {
     L7RuleHealth: L7RuleHealth,
     CreateL7RulesUploadRequest: CreateL7RulesUploadRequest,
     L4RuleHealth: L4RuleHealth,
+    ModifyCCFrequencyRulesRequest: ModifyCCFrequencyRulesRequest,
     ModifyCCPolicySwitchResponse: ModifyCCPolicySwitchResponse,
     ModifyDDoSThresholdResponse: ModifyDDoSThresholdResponse,
     CreateL4HealthConfigRequest: CreateL4HealthConfigRequest,
     ModifyCCIpAllowDenyResponse: ModifyCCIpAllowDenyResponse,
     ModifyCCAlarmThresholdRequest: ModifyCCAlarmThresholdRequest,
-    ModifyCCSelfDefinePolicyRequest: ModifyCCSelfDefinePolicyRequest,
+    DescribeCCFrequencyRulesResponse: DescribeCCFrequencyRulesResponse,
     DescribeDDoSEvListRequest: DescribeDDoSEvListRequest,
+    DescribeBasicCCThresholdResponse: DescribeBasicCCThresholdResponse,
     ModifyDDoSPolicyNameRequest: ModifyDDoSPolicyNameRequest,
     DescribeIpUnBlockListResponse: DescribeIpUnBlockListResponse,
     ModifyCCPolicySwitchRequest: ModifyCCPolicySwitchRequest,
+    ModifyCCFrequencyRulesResponse: ModifyCCFrequencyRulesResponse,
     ModifyL4KeepTimeRequest: ModifyL4KeepTimeRequest,
     ModifyCCHostProtectionRequest: ModifyCCHostProtectionRequest,
     DescribeIpBlockListRequest: DescribeIpBlockListRequest,
@@ -11853,29 +12626,28 @@ module.exports = {
     DescribeResourceListResponse: DescribeResourceListResponse,
     ModifyCCThresholdRequest: ModifyCCThresholdRequest,
     CreateBasicDDoSAlarmThresholdRequest: CreateBasicDDoSAlarmThresholdRequest,
-    CCRuleConfig: CCRuleConfig,
+    L4HealthConfig: L4HealthConfig,
     DescribeDDoSEvInfoResponse: DescribeDDoSEvInfoResponse,
     DescribleRegionCountRequest: DescribleRegionCountRequest,
     ModifyCCSelfDefinePolicyResponse: ModifyCCSelfDefinePolicyResponse,
-    CreateL7CCRuleRequest: CreateL7CCRuleRequest,
     DescribeDDoSAlarmThresholdRequest: DescribeDDoSAlarmThresholdRequest,
     DescribePolicyCaseRequest: DescribePolicyCaseRequest,
     WaterPrintPolicy: WaterPrintPolicy,
     ProtocolPort: ProtocolPort,
     DeleteCCSelfDefinePolicyResponse: DeleteCCSelfDefinePolicyResponse,
     DescribeDDoSPolicyResponse: DescribeDDoSPolicyResponse,
-    DescribeDDoSNetIpLogRequest: DescribeDDoSNetIpLogRequest,
+    DeleteCCFrequencyRulesResponse: DeleteCCFrequencyRulesResponse,
     DeleteDDoSPolicyCaseResponse: DeleteDDoSPolicyCaseResponse,
-    CreateL4HealthConfigResponse: CreateL4HealthConfigResponse,
+    CreateDDoSPolicyCaseResponse: CreateDDoSPolicyCaseResponse,
     ModifyL7RulesRequest: ModifyL7RulesRequest,
     ModifyElasticLimitResponse: ModifyElasticLimitResponse,
     DDoSAttackSourceRecord: DDoSAttackSourceRecord,
     CreateUnblockIpResponse: CreateUnblockIpResponse,
     DescribePackIndexRequest: DescribePackIndexRequest,
-    ModifyL4RulesRequest: ModifyL4RulesRequest,
     DescribeDDoSEvListResponse: DescribeDDoSEvListResponse,
     DescribeDDoSPolicyRequest: DescribeDDoSPolicyRequest,
     DescribeL7HealthConfigResponse: DescribeL7HealthConfigResponse,
+    CCFrequencyRule: CCFrequencyRule,
     CreateCCSelfDefinePolicyResponse: CreateCCSelfDefinePolicyResponse,
     DescribeDDoSAttackSourceResponse: DescribeDDoSAttackSourceResponse,
     DescribeDDoSUsedStatisRequest: DescribeDDoSUsedStatisRequest,
@@ -11893,6 +12665,7 @@ module.exports = {
     ModifyDDoSPolicyCaseResponse: ModifyDDoSPolicyCaseResponse,
     CreateUnblockIpRequest: CreateUnblockIpRequest,
     DescribeSecIndexRequest: DescribeSecIndexRequest,
+    ModifyCCFrequencyRulesStatusRequest: ModifyCCFrequencyRulesStatusRequest,
     DescribeDDoSCountResponse: DescribeDDoSCountResponse,
     DescribeL4RulesErrHealthResponse: DescribeL4RulesErrHealthResponse,
     DeleteDDoSPolicyResponse: DeleteDDoSPolicyResponse,
@@ -11906,7 +12679,7 @@ module.exports = {
     DescribeRuleSetsRequest: DescribeRuleSetsRequest,
     ModifyDDoSDefendStatusResponse: ModifyDDoSDefendStatusResponse,
     DescribleL7RulesResponse: DescribleL7RulesResponse,
-    ModifyDDoSLevelResponse: ModifyDDoSLevelResponse,
+    CreateCCFrequencyRulesResponse: CreateCCFrequencyRulesResponse,
     DescribeIpBlockListResponse: DescribeIpBlockListResponse,
     DDoSPolicyPortLimit: DDoSPolicyPortLimit,
     DescribeDDoSNetTrendResponse: DescribeDDoSNetTrendResponse,
@@ -11918,7 +12691,9 @@ module.exports = {
     IpUnBlockData: IpUnBlockData,
     ModifyDDoSLevelRequest: ModifyDDoSLevelRequest,
     DDoSPolicyPacketFilter: DDoSPolicyPacketFilter,
+    DeleteCCFrequencyRulesRequest: DeleteCCFrequencyRulesRequest,
     DescribeDDoSNetIpLogResponse: DescribeDDoSNetIpLogResponse,
+    CreateCCFrequencyRulesRequest: CreateCCFrequencyRulesRequest,
     DeleteL7RulesResponse: DeleteL7RulesResponse,
     CreateL7HealthConfigResponse: CreateL7HealthConfigResponse,
     DescribeDDoSTrendResponse: DescribeDDoSTrendResponse,
@@ -11926,6 +12701,7 @@ module.exports = {
     ModifyDDoSThresholdRequest: ModifyDDoSThresholdRequest,
     DDoSEventRecord: DDoSEventRecord,
     DescribleL4RulesResponse: DescribleL4RulesResponse,
+    ModifyL4RulesResponse: ModifyL4RulesResponse,
     DeleteDDoSPolicyRequest: DeleteDDoSPolicyRequest,
     CreateL7RulesUploadResponse: CreateL7RulesUploadResponse,
     CreateInstanceNameRequest: CreateInstanceNameRequest,
