@@ -16,21 +16,15 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
-const TextResult = models.TextResult;
 const DetectDisgustRequest = models.DetectDisgustRequest;
-const Candidate = models.Candidate;
-const TerrorismResult = models.TerrorismResult;
 const DetectCelebrityResponse = models.DetectCelebrityResponse;
 const CropImageRequest = models.CropImageRequest;
 const DetectProductRequest = models.DetectProductRequest;
-const ImageModerationResponse = models.ImageModerationResponse;
-const ImageModerationRequest = models.ImageModerationRequest;
 const AssessQualityResponse = models.AssessQualityResponse;
 const DetectDisgustResponse = models.DetectDisgustResponse;
 const DetectLabelRequest = models.DetectLabelRequest;
 const DetectLabelResponse = models.DetectLabelResponse;
 const EnhanceImageResponse = models.EnhanceImageResponse;
-const DisgustResult = models.DisgustResult;
 const AssessQualityRequest = models.AssessQualityRequest;
 const RecognizeCarResponse = models.RecognizeCarResponse;
 const DetectMisbehaviorResponse = models.DetectMisbehaviorResponse;
@@ -40,15 +34,11 @@ const CropImageResponse = models.CropImageResponse;
 const DetectCelebrityRequest = models.DetectCelebrityRequest;
 const Coord = models.Coord;
 const Face = models.Face;
-const PoliticsResult = models.PoliticsResult;
-const PornResult = models.PornResult;
 const DetectProductResponse = models.DetectProductResponse;
-const FaceResult = models.FaceResult;
 const DetectLabelItem = models.DetectLabelItem;
 const Labels = models.Labels;
 const Product = models.Product;
 const CarTagItem = models.CarTagItem;
-const FaceRect = models.FaceRect;
 const DetectMisbehaviorRequest = models.DetectMisbehaviorRequest;
 
 
@@ -171,31 +161,6 @@ class TiiaClient extends AbstractClient {
     DetectProduct(req, cb) {
         let resp = new DetectProductResponse();
         this.request("DetectProduct", req, resp, cb);
-    }
-
-    /**
-     * 图像审核包含鉴黄、政治敏感识别、暴恐识别、图文审核等服务。
-
-• 鉴黄：识别图片中是否存在涉黄内容，将图片分为正常、性感、色情三类，并输出分类的置信度。
-
-• 政治敏感识别：识别图片中是否存在政治人物、政治恶搞、著名政治事件照片等内容。
-
-• 暴恐识别：识别图片中的暴力恐怖元素，例如武器、管制刀具、血腥、恐怖主义等。
-
-• 图文审核：结合OCR、NLP和二维码识别算法，分析图片中的文字是否违规，或是否存在二维码等营销内容，并输出违规内容的类别（涉黄、涉政、谩骂、广告营销、暴恐等）。
-
-为了方便使用、减少图片传输次数，图像审核包装成多合一接口，实际上是多个服务。
-
-图像审核根据服务的调用次数收费。例如一张图片同时调用鉴黄、图文审核两个服务，那么此次调用按照两次计费。
->     
-- 公共参数中的签名方式必须指定为V3版本，即配置SignatureMethod参数为TC3-HMAC-SHA256。
-     * @param {ImageModerationRequest} req
-     * @param {function(string, ImageModerationResponse):void} cb
-     * @public
-     */
-    ImageModeration(req, cb) {
-        let resp = new ImageModerationResponse();
-        this.request("ImageModeration", req, resp, cb);
     }
 
     /**

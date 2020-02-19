@@ -149,13 +149,13 @@ class MigrateDetailInfo extends  AbstractModel {
         this.CurrentStepProgress = null;
 
         /**
-         * 主从差距，MB
+         * 主从差距，MB；在增量同步阶段有效，目前支持产品为：redis和mysql
          * @type {number || null}
          */
         this.MasterSlaveDistance = null;
 
         /**
-         * 主从差距，秒
+         * 主从差距，秒；在增量同步阶段有效，目前支持产品为：mysql
          * @type {number || null}
          */
         this.SecondsBehindMaster = null;
