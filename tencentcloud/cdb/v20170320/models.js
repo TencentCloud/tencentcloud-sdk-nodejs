@@ -2937,7 +2937,7 @@ class BinlogInfo extends  AbstractModel {
         super();
 
         /**
-         * 备份文件名
+         * binlog 日志备份文件名
          * @type {string || null}
          */
         this.Name = null;
@@ -2949,7 +2949,7 @@ class BinlogInfo extends  AbstractModel {
         this.Size = null;
 
         /**
-         * 备份快照时间，时间格式：2016-03-17 02:10:37
+         * 文件存储时间，时间格式：2016-03-17 02:10:37
          * @type {string || null}
          */
         this.Date = null;
@@ -2972,6 +2972,18 @@ class BinlogInfo extends  AbstractModel {
          */
         this.Type = null;
 
+        /**
+         * binlog 文件起始时间
+         * @type {string || null}
+         */
+        this.BinlogStartTime = null;
+
+        /**
+         * binlog 文件截止时间
+         * @type {string || null}
+         */
+        this.BinlogFinishTime = null;
+
     }
 
     /**
@@ -2987,6 +2999,8 @@ class BinlogInfo extends  AbstractModel {
         this.IntranetUrl = 'IntranetUrl' in params ? params.IntranetUrl : null;
         this.InternetUrl = 'InternetUrl' in params ? params.InternetUrl : null;
         this.Type = 'Type' in params ? params.Type : null;
+        this.BinlogStartTime = 'BinlogStartTime' in params ? params.BinlogStartTime : null;
+        this.BinlogFinishTime = 'BinlogFinishTime' in params ? params.BinlogFinishTime : null;
 
     }
 }

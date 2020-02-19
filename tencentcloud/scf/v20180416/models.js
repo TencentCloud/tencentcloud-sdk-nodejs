@@ -114,6 +114,18 @@ class CreateFunctionRequest extends  AbstractModel {
          */
         this.CodeSource = null;
 
+        /**
+         * 函数要关联的Layer版本列表，Layer会按照在列表中顺序依次覆盖。
+         * @type {Array.<LayerVersionSimple> || null}
+         */
+        this.Layers = null;
+
+        /**
+         * 死信队列参数
+         * @type {DeadLetterConfig || null}
+         */
+        this.DeadLetterConfig = null;
+
     }
 
     /**
@@ -154,6 +166,21 @@ class CreateFunctionRequest extends  AbstractModel {
         this.Type = 'Type' in params ? params.Type : null;
         this.CodeSource = 'CodeSource' in params ? params.CodeSource : null;
 
+        if (params.Layers) {
+            this.Layers = new Array();
+            for (let z in params.Layers) {
+                let obj = new LayerVersionSimple();
+                obj.deserialize(params.Layers[z]);
+                this.Layers.push(obj);
+            }
+        }
+
+        if (params.DeadLetterConfig) {
+            let obj = new DeadLetterConfig();
+            obj.deserialize(params.DeadLetterConfig)
+            this.DeadLetterConfig = obj;
+        }
+
     }
 }
 
@@ -188,6 +215,125 @@ class AccessInfo extends  AbstractModel {
         }
         this.Host = 'Host' in params ? params.Host : null;
         this.Vip = 'Vip' in params ? params.Vip : null;
+
+    }
+}
+
+/**
+ * layer版本信息
+ * @class
+ */
+class LayerVersionInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 版本适用的运行时
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
+         */
+        this.CompatibleRuntimes = null;
+
+        /**
+         * 创建时间
+         * @type {string || null}
+         */
+        this.AddTime = null;
+
+        /**
+         * 版本描述
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * 许可证信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.LicenseInfo = null;
+
+        /**
+         * 版本号
+         * @type {number || null}
+         */
+        this.LayerVersion = null;
+
+        /**
+         * layer名称
+         * @type {string || null}
+         */
+        this.LayerName = null;
+
+        /**
+         * Layer的当前状态，可能取值：
+publishing  发布中
+available  可用
+unavailable  不可用
+         * @type {string || null}
+         */
+        this.Status = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CompatibleRuntimes = 'CompatibleRuntimes' in params ? params.CompatibleRuntimes : null;
+        this.AddTime = 'AddTime' in params ? params.AddTime : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.LicenseInfo = 'LicenseInfo' in params ? params.LicenseInfo : null;
+        this.LayerVersion = 'LayerVersion' in params ? params.LayerVersion : null;
+        this.LayerName = 'LayerName' in params ? params.LayerName : null;
+        this.Status = 'Status' in params ? params.Status : null;
+
+    }
+}
+
+/**
+ * ListLayerVersions返回参数结构体
+ * @class
+ */
+class ListLayerVersionsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * layer版本列表
+         * @type {Array.<LayerVersionInfo> || null}
+         */
+        this.LayerVersions = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.LayerVersions) {
+            this.LayerVersions = new Array();
+            for (let z in params.LayerVersions) {
+                let obj = new LayerVersionInfo();
+                obj.deserialize(params.LayerVersions[z]);
+                this.LayerVersions.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -249,6 +395,57 @@ class CopyFunctionResponse extends  AbstractModel {
     deserialize(params) {
         if (!params) {
             return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ListVersionByFunction返回参数结构体
+ * @class
+ */
+class ListVersionByFunctionResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 函数版本。
+         * @type {Array.<string> || null}
+         */
+        this.FunctionVersion = null;
+
+        /**
+         * 函数版本列表。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<FunctionVersion> || null}
+         */
+        this.Versions = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FunctionVersion = 'FunctionVersion' in params ? params.FunctionVersion : null;
+
+        if (params.Versions) {
+            this.Versions = new Array();
+            for (let z in params.Versions) {
+                let obj = new FunctionVersion();
+                obj.deserialize(params.Versions[z]);
+                this.Versions.push(obj);
+            }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -356,6 +553,56 @@ class GetFunctionRequest extends  AbstractModel {
         this.Qualifier = 'Qualifier' in params ? params.Qualifier : null;
         this.Namespace = 'Namespace' in params ? params.Namespace : null;
         this.ShowCode = 'ShowCode' in params ? params.ShowCode : null;
+
+    }
+}
+
+/**
+ * ListLayers返回参数结构体
+ * @class
+ */
+class ListLayersResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * layer列表
+         * @type {Array.<LayerVersionInfo> || null}
+         */
+        this.Layers = null;
+
+        /**
+         * layer总数
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Layers) {
+            this.Layers = new Array();
+            for (let z in params.Layers) {
+                let obj = new LayerVersionInfo();
+                obj.deserialize(params.Layers[z]);
+                this.Layers.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -524,25 +771,12 @@ class GetFunctionAddressRequest extends  AbstractModel {
 }
 
 /**
- * ListVersionByFunction返回参数结构体
+ * DeleteLayerVersion返回参数结构体
  * @class
  */
-class ListVersionByFunctionResponse extends  AbstractModel {
+class DeleteLayerVersionResponse extends  AbstractModel {
     constructor(){
         super();
-
-        /**
-         * 函数版本。
-         * @type {Array.<string> || null}
-         */
-        this.FunctionVersion = null;
-
-        /**
-         * 函数版本列表。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {Array.<FunctionVersion> || null}
-         */
-        this.Versions = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -558,16 +792,6 @@ class ListVersionByFunctionResponse extends  AbstractModel {
     deserialize(params) {
         if (!params) {
             return;
-        }
-        this.FunctionVersion = 'FunctionVersion' in params ? params.FunctionVersion : null;
-
-        if (params.Versions) {
-            this.Versions = new Array();
-            for (let z in params.Versions) {
-                let obj = new FunctionVersion();
-                obj.deserialize(params.Versions[z]);
-                this.Versions.push(obj);
-            }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -749,6 +973,48 @@ class Function extends  AbstractModel {
 }
 
 /**
+ * 死信队列参数
+ * @class
+ */
+class DeadLetterConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 死信队列模式
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * 死信队列名称
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 死信队列主题模式的标签形式
+         * @type {string || null}
+         */
+        this.FilterType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.FilterType = 'FilterType' in params ? params.FilterType : null;
+
+    }
+}
+
+/**
  * Invoke请求参数结构体
  * @class
  */
@@ -897,6 +1163,24 @@ class UpdateFunctionConfigurationRequest extends  AbstractModel {
          */
         this.L5Enable = null;
 
+        /**
+         * 函数要关联的Layer版本列表，Layer会按照在列表中顺序依次覆盖。
+         * @type {Array.<LayerVersionSimple> || null}
+         */
+        this.Layers = null;
+
+        /**
+         * 函数关联的死信队列信息
+         * @type {DeadLetterConfig || null}
+         */
+        this.DeadLetterConfig = null;
+
+        /**
+         * 是否开启Ons访问能力，TRUE 为开启，FALSE为关闭
+         * @type {string || null}
+         */
+        this.OnsEnable = null;
+
     }
 
     /**
@@ -930,6 +1214,22 @@ class UpdateFunctionConfigurationRequest extends  AbstractModel {
         this.Publish = 'Publish' in params ? params.Publish : null;
         this.L5Enable = 'L5Enable' in params ? params.L5Enable : null;
 
+        if (params.Layers) {
+            this.Layers = new Array();
+            for (let z in params.Layers) {
+                let obj = new LayerVersionSimple();
+                obj.deserialize(params.Layers[z]);
+                this.Layers.push(obj);
+            }
+        }
+
+        if (params.DeadLetterConfig) {
+            let obj = new DeadLetterConfig();
+            obj.deserialize(params.DeadLetterConfig)
+            this.DeadLetterConfig = obj;
+        }
+        this.OnsEnable = 'OnsEnable' in params ? params.OnsEnable : null;
+
     }
 }
 
@@ -942,13 +1242,13 @@ class VpcConfig extends  AbstractModel {
         super();
 
         /**
-         * 私有网络 的 id
+         * 私有网络 的 Id
          * @type {string || null}
          */
         this.VpcId = null;
 
         /**
-         * 子网的 id
+         * 子网的 Id
          * @type {string || null}
          */
         this.SubnetId = null;
@@ -999,6 +1299,46 @@ class ListVersionByFunctionRequest extends  AbstractModel {
         }
         this.FunctionName = 'FunctionName' in params ? params.FunctionName : null;
         this.Namespace = 'Namespace' in params ? params.Namespace : null;
+
+    }
+}
+
+/**
+ * 公网访问配置
+ * @class
+ */
+class PublicNetConfigOut extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 是否开启公网访问能力取值['DISABLE','ENABLE']
+         * @type {string || null}
+         */
+        this.PublicNetStatus = null;
+
+        /**
+         * Eip配置
+         * @type {EipConfigOut || null}
+         */
+        this.EipConfig = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PublicNetStatus = 'PublicNetStatus' in params ? params.PublicNetStatus : null;
+
+        if (params.EipConfig) {
+            let obj = new EipConfigOut();
+            obj.deserialize(params.EipConfig)
+            this.EipConfig = obj;
+        }
 
     }
 }
@@ -1082,6 +1422,41 @@ class UpdateNamespaceResponse extends  AbstractModel {
 }
 
 /**
+ * ListLayerVersions请求参数结构体
+ * @class
+ */
+class ListLayerVersionsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * layer名称
+         * @type {string || null}
+         */
+        this.LayerName = null;
+
+        /**
+         * 适配的运行时
+         * @type {Array.<string> || null}
+         */
+        this.CompatibleRuntime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LayerName = 'LayerName' in params ? params.LayerName : null;
+        this.CompatibleRuntime = 'CompatibleRuntime' in params ? params.CompatibleRuntime : null;
+
+    }
+}
+
+/**
  * CreateTrigger返回参数结构体
  * @class
  */
@@ -1117,6 +1492,67 @@ class CreateTriggerResponse extends  AbstractModel {
             this.TriggerInfo = obj;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * PublishLayerVersion请求参数结构体
+ * @class
+ */
+class PublishLayerVersionRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * layer名称，支持26个英文字母大小写、数字、连接符和下划线，第一个字符只能以字母开头，最后一个字符不能为连接符或者下划线，名称长度1-64
+         * @type {string || null}
+         */
+        this.LayerName = null;
+
+        /**
+         * layer适用的运行时，可多选，可选的值有： Python2.7, Python3.6, Nodejs6.10, Java8, Php5, Php7, Nodejs8.9, Go1
+         * @type {Array.<string> || null}
+         */
+        this.CompatibleRuntimes = null;
+
+        /**
+         * layer的文件来源
+         * @type {Code || null}
+         */
+        this.Content = null;
+
+        /**
+         * layer版本的描述
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * layer的软件许可证
+         * @type {string || null}
+         */
+        this.LicenseInfo = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LayerName = 'LayerName' in params ? params.LayerName : null;
+        this.CompatibleRuntimes = 'CompatibleRuntimes' in params ? params.CompatibleRuntimes : null;
+
+        if (params.Content) {
+            let obj = new Code();
+            obj.deserialize(params.Content)
+            this.Content = obj;
+        }
+        this.Description = 'Description' in params ? params.Description : null;
+        this.LicenseInfo = 'LicenseInfo' in params ? params.LicenseInfo : null;
 
     }
 }
@@ -1180,6 +1616,55 @@ class DeleteNamespaceRequest extends  AbstractModel {
             return;
         }
         this.Namespace = 'Namespace' in params ? params.Namespace : null;
+
+    }
+}
+
+/**
+ * ListLayers请求参数结构体
+ * @class
+ */
+class ListLayersRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 适配的运行时
+         * @type {string || null}
+         */
+        this.CompatibleRuntime = null;
+
+        /**
+         * Offset
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Limit
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 查询key，模糊匹配名称
+         * @type {string || null}
+         */
+        this.SearchKey = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CompatibleRuntime = 'CompatibleRuntime' in params ? params.CompatibleRuntime : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.SearchKey = 'SearchKey' in params ? params.SearchKey : null;
 
     }
 }
@@ -1435,6 +1920,41 @@ class UpdateFunctionConfigurationResponse extends  AbstractModel {
 }
 
 /**
+ * PublishLayerVersion返回参数结构体
+ * @class
+ */
+class PublishLayerVersionResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 本次创建的layer的版本号
+         * @type {number || null}
+         */
+        this.LayerVersion = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LayerVersion = 'LayerVersion' in params ? params.LayerVersion : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * PublishVersion返回参数结构体
  * @class
  */
@@ -1519,6 +2039,41 @@ class PublishVersionResponse extends  AbstractModel {
 }
 
 /**
+ * DeleteLayerVersion请求参数结构体
+ * @class
+ */
+class DeleteLayerVersionRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * layer名称
+         * @type {string || null}
+         */
+        this.LayerName = null;
+
+        /**
+         * 版本号
+         * @type {number || null}
+         */
+        this.LayerVersion = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LayerName = 'LayerName' in params ? params.LayerName : null;
+        this.LayerVersion = 'LayerVersion' in params ? params.LayerVersion : null;
+
+    }
+}
+
+/**
  * CreateFunction返回参数结构体
  * @class
  */
@@ -1542,6 +2097,41 @@ class CreateFunctionResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 指定某个Layer版本
+ * @class
+ */
+class LayerVersionSimple extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * layer名称
+         * @type {string || null}
+         */
+        this.LayerName = null;
+
+        /**
+         * 版本号
+         * @type {number || null}
+         */
+        this.LayerVersion = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LayerName = 'LayerName' in params ? params.LayerName : null;
+        this.LayerVersion = 'LayerVersion' in params ? params.LayerVersion : null;
 
     }
 }
@@ -1617,26 +2207,24 @@ class Trigger extends  AbstractModel {
 }
 
 /**
- * 描述键值对过滤器，用于条件过滤查询。例如过滤ID、名称、状态等
-若存在多个Filter时，Filter间的关系为逻辑与（AND）关系。
-若同一个Filter存在多个Values，同一Filter下Values间的关系为逻辑或（OR）关系。
+ * EipOutConfig
  * @class
  */
-class Filter extends  AbstractModel {
+class EipOutConfig extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 需要过滤的字段。
+         * 是否是固定IP，["TRUE","FALSE"]
          * @type {string || null}
          */
-        this.Name = null;
+        this.EipFixed = null;
 
         /**
-         * 字段的过滤值。
+         * IP列表
          * @type {Array.<string> || null}
          */
-        this.Values = null;
+        this.Eips = null;
 
     }
 
@@ -1647,8 +2235,8 @@ class Filter extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Name = 'Name' in params ? params.Name : null;
-        this.Values = 'Values' in params ? params.Values : null;
+        this.EipFixed = 'EipFixed' in params ? params.EipFixed : null;
+        this.Eips = 'Eips' in params ? params.Eips : null;
 
     }
 }
@@ -1877,6 +2465,38 @@ class GetFunctionResponse extends  AbstractModel {
         this.L5Enable = null;
 
         /**
+         * 函数关联的Layer版本信息
+         * @type {Array.<LayerVersionInfo> || null}
+         */
+        this.Layers = null;
+
+        /**
+         * 函数关联的死信队列信息
+         * @type {DeadLetterConfig || null}
+         */
+        this.DeadLetterConfig = null;
+
+        /**
+         * 函数创建回见
+         * @type {string || null}
+         */
+        this.AddTime = null;
+
+        /**
+         * 公网访问配置
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {PublicNetConfigOut || null}
+         */
+        this.PublicNetConfig = null;
+
+        /**
+         * 是否启用Ons
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.OnsEnable = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -1957,6 +2577,29 @@ class GetFunctionResponse extends  AbstractModel {
         }
         this.Type = 'Type' in params ? params.Type : null;
         this.L5Enable = 'L5Enable' in params ? params.L5Enable : null;
+
+        if (params.Layers) {
+            this.Layers = new Array();
+            for (let z in params.Layers) {
+                let obj = new LayerVersionInfo();
+                obj.deserialize(params.Layers[z]);
+                this.Layers.push(obj);
+            }
+        }
+
+        if (params.DeadLetterConfig) {
+            let obj = new DeadLetterConfig();
+            obj.deserialize(params.DeadLetterConfig)
+            this.DeadLetterConfig = obj;
+        }
+        this.AddTime = 'AddTime' in params ? params.AddTime : null;
+
+        if (params.PublicNetConfig) {
+            let obj = new PublicNetConfigOut();
+            obj.deserialize(params.PublicNetConfig)
+            this.PublicNetConfig = obj;
+        }
+        this.OnsEnable = 'OnsEnable' in params ? params.OnsEnable : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -2141,24 +2784,26 @@ class DeleteTriggerResponse extends  AbstractModel {
 }
 
 /**
- * EipOutConfig
+ * 描述键值对过滤器，用于条件过滤查询。例如过滤ID、名称、状态等
+若存在多个Filter时，Filter间的关系为逻辑与（AND）关系。
+若同一个Filter存在多个Values，同一Filter下Values间的关系为逻辑或（OR）关系。
  * @class
  */
-class EipOutConfig extends  AbstractModel {
+class Filter extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 是否是固定IP，["TRUE","FALSE"]
+         * 需要过滤的字段。
          * @type {string || null}
          */
-        this.EipFixed = null;
+        this.Name = null;
 
         /**
-         * IP列表
+         * 字段的过滤值。
          * @type {Array.<string> || null}
          */
-        this.Eips = null;
+        this.Values = null;
 
     }
 
@@ -2169,8 +2814,8 @@ class EipOutConfig extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.EipFixed = 'EipFixed' in params ? params.EipFixed : null;
-        this.Eips = 'Eips' in params ? params.Eips : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Values = 'Values' in params ? params.Values : null;
 
     }
 }
@@ -2499,7 +3144,7 @@ class GetFunctionLogsRequest extends  AbstractModel {
         this.OrderBy = null;
 
         /**
-         * 日志过滤条件。可用来区分正确和错误日志，filter.retCode=not0 表示只返回错误日志，filter.retCode=is0 表示只返回正确日志，不传，则返回所有日志
+         * 日志过滤条件。可用来区分正确和错误日志，filter.RetCode=not0 表示只返回错误日志，filter.RetCode=is0 表示只返回正确日志，不传，则返回所有日志
          * @type {LogFilter || null}
          */
         this.Filter = null;
@@ -2602,7 +3247,7 @@ class CreateTriggerRequest extends  AbstractModel {
         this.Type = null;
 
         /**
-         * 触发器对应的参数，如果是 timer 类型的触发器其内容是 Linux cron 表达式。如果是cos类型的触发器，其内容是json字符串 {"event":"cos:ObjectCreated:*","filter":{"Prefix":"","Suffix":""}},其中event是触发的cos事件，fitler中Prefix是对应的文件前缀过滤条件，Suffix是后缀过滤条件，如果不需要filter条件可不传。如果是其他触发器，见具体触发器说明
+         * 触发器对应的参数，可见具体[触发器描述说明](https://cloud.tencent.com/document/product/583/39901)
          * @type {string || null}
          */
         this.TriggerDesc = null;
@@ -2723,6 +3368,41 @@ class GetFunctionAddressResponse extends  AbstractModel {
 }
 
 /**
+ * GetLayerVersion请求参数结构体
+ * @class
+ */
+class GetLayerVersionRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * layer名称
+         * @type {string || null}
+         */
+        this.LayerName = null;
+
+        /**
+         * 版本号
+         * @type {number || null}
+         */
+        this.LayerVersion = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LayerName = 'LayerName' in params ? params.LayerName : null;
+        this.LayerVersion = 'LayerVersion' in params ? params.LayerVersion : null;
+
+    }
+}
+
+/**
  * DeleteFunction返回参数结构体
  * @class
  */
@@ -2796,6 +3476,42 @@ class ListNamespacesResponse extends  AbstractModel {
         }
         this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 公网访问固定ip配置
+ * @class
+ */
+class EipConfigOut extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 是否是固定IP，["ENABLE","DISABLE"]
+         * @type {string || null}
+         */
+        this.EipStatus = null;
+
+        /**
+         * IP列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
+         */
+        this.EipAddress = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.EipStatus = 'EipStatus' in params ? params.EipStatus : null;
+        this.EipAddress = 'EipAddress' in params ? params.EipAddress : null;
 
     }
 }
@@ -2997,6 +3713,100 @@ class LogSearchContext extends  AbstractModel {
 }
 
 /**
+ * GetLayerVersion返回参数结构体
+ * @class
+ */
+class GetLayerVersionResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 适配的运行时
+         * @type {Array.<string> || null}
+         */
+        this.CompatibleRuntimes = null;
+
+        /**
+         * layer版本文件的SHA256编码
+         * @type {string || null}
+         */
+        this.CodeSha256 = null;
+
+        /**
+         * layer版本文件的下载地址
+         * @type {string || null}
+         */
+        this.Location = null;
+
+        /**
+         * 版本的创建时间
+         * @type {string || null}
+         */
+        this.AddTime = null;
+
+        /**
+         * 版本的描述
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * 许可证信息
+         * @type {string || null}
+         */
+        this.LicenseInfo = null;
+
+        /**
+         * 版本号
+         * @type {number || null}
+         */
+        this.LayerVersion = null;
+
+        /**
+         * layer名称
+         * @type {string || null}
+         */
+        this.LayerName = null;
+
+        /**
+         * Layer的当前状态，可能取值：
+publishing  发布中
+available  可用
+unavailable  不可用
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CompatibleRuntimes = 'CompatibleRuntimes' in params ? params.CompatibleRuntimes : null;
+        this.CodeSha256 = 'CodeSha256' in params ? params.CodeSha256 : null;
+        this.Location = 'Location' in params ? params.Location : null;
+        this.AddTime = 'AddTime' in params ? params.AddTime : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.LicenseInfo = 'LicenseInfo' in params ? params.LicenseInfo : null;
+        this.LayerVersion = 'LayerVersion' in params ? params.LayerVersion : null;
+        this.LayerName = 'LayerName' in params ? params.LayerName : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * UpdateFunctionCode返回参数结构体
  * @class
  */
@@ -3061,42 +3871,54 @@ UserCodeException 返回函数调用发生用户代码错误的日志，
 module.exports = {
     CreateFunctionRequest: CreateFunctionRequest,
     AccessInfo: AccessInfo,
+    LayerVersionInfo: LayerVersionInfo,
+    ListLayerVersionsResponse: ListLayerVersionsResponse,
     DeleteFunctionRequest: DeleteFunctionRequest,
     CopyFunctionResponse: CopyFunctionResponse,
+    ListVersionByFunctionResponse: ListVersionByFunctionResponse,
     Namespace: Namespace,
     GetFunctionRequest: GetFunctionRequest,
+    ListLayersResponse: ListLayersResponse,
     Environment: Environment,
     ListNamespacesRequest: ListNamespacesRequest,
     FunctionVersion: FunctionVersion,
     GetFunctionAddressRequest: GetFunctionAddressRequest,
-    ListVersionByFunctionResponse: ListVersionByFunctionResponse,
+    DeleteLayerVersionResponse: DeleteLayerVersionResponse,
     InvokeResponse: InvokeResponse,
     CreateNamespaceResponse: CreateNamespaceResponse,
     Function: Function,
+    DeadLetterConfig: DeadLetterConfig,
     InvokeRequest: InvokeRequest,
     UpdateFunctionConfigurationRequest: UpdateFunctionConfigurationRequest,
     VpcConfig: VpcConfig,
     ListVersionByFunctionRequest: ListVersionByFunctionRequest,
+    PublicNetConfigOut: PublicNetConfigOut,
     ListFunctionsResponse: ListFunctionsResponse,
     UpdateNamespaceResponse: UpdateNamespaceResponse,
+    ListLayerVersionsRequest: ListLayerVersionsRequest,
     CreateTriggerResponse: CreateTriggerResponse,
+    PublishLayerVersionRequest: PublishLayerVersionRequest,
     CreateNamespaceRequest: CreateNamespaceRequest,
     DeleteNamespaceRequest: DeleteNamespaceRequest,
+    ListLayersRequest: ListLayersRequest,
     Result: Result,
     CopyFunctionRequest: CopyFunctionRequest,
     Tag: Tag,
     DeleteNamespaceResponse: DeleteNamespaceResponse,
     UpdateFunctionConfigurationResponse: UpdateFunctionConfigurationResponse,
+    PublishLayerVersionResponse: PublishLayerVersionResponse,
     PublishVersionResponse: PublishVersionResponse,
+    DeleteLayerVersionRequest: DeleteLayerVersionRequest,
     CreateFunctionResponse: CreateFunctionResponse,
+    LayerVersionSimple: LayerVersionSimple,
     Trigger: Trigger,
-    Filter: Filter,
+    EipOutConfig: EipOutConfig,
     Variable: Variable,
     GetFunctionResponse: GetFunctionResponse,
     GetFunctionLogsResponse: GetFunctionLogsResponse,
     ListFunctionsRequest: ListFunctionsRequest,
     DeleteTriggerResponse: DeleteTriggerResponse,
-    EipOutConfig: EipOutConfig,
+    Filter: Filter,
     DeleteTriggerRequest: DeleteTriggerRequest,
     Code: Code,
     UpdateFunctionCodeRequest: UpdateFunctionCodeRequest,
@@ -3104,11 +3926,14 @@ module.exports = {
     CreateTriggerRequest: CreateTriggerRequest,
     UpdateNamespaceRequest: UpdateNamespaceRequest,
     GetFunctionAddressResponse: GetFunctionAddressResponse,
+    GetLayerVersionRequest: GetLayerVersionRequest,
     DeleteFunctionResponse: DeleteFunctionResponse,
     ListNamespacesResponse: ListNamespacesResponse,
+    EipConfigOut: EipConfigOut,
     PublishVersionRequest: PublishVersionRequest,
     FunctionLog: FunctionLog,
     LogSearchContext: LogSearchContext,
+    GetLayerVersionResponse: GetLayerVersionResponse,
     UpdateFunctionCodeResponse: UpdateFunctionCodeResponse,
     LogFilter: LogFilter,
 

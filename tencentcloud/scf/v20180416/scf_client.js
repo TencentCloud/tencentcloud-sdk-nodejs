@@ -18,42 +18,54 @@ const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const CreateFunctionRequest = models.CreateFunctionRequest;
 const AccessInfo = models.AccessInfo;
+const LayerVersionInfo = models.LayerVersionInfo;
+const ListLayerVersionsResponse = models.ListLayerVersionsResponse;
 const DeleteFunctionRequest = models.DeleteFunctionRequest;
 const CopyFunctionResponse = models.CopyFunctionResponse;
+const ListVersionByFunctionResponse = models.ListVersionByFunctionResponse;
 const Namespace = models.Namespace;
 const GetFunctionRequest = models.GetFunctionRequest;
+const ListLayersResponse = models.ListLayersResponse;
 const Environment = models.Environment;
 const ListNamespacesRequest = models.ListNamespacesRequest;
 const FunctionVersion = models.FunctionVersion;
 const GetFunctionAddressRequest = models.GetFunctionAddressRequest;
-const ListVersionByFunctionResponse = models.ListVersionByFunctionResponse;
+const DeleteLayerVersionResponse = models.DeleteLayerVersionResponse;
 const InvokeResponse = models.InvokeResponse;
 const CreateNamespaceResponse = models.CreateNamespaceResponse;
 const Function = models.Function;
+const DeadLetterConfig = models.DeadLetterConfig;
 const InvokeRequest = models.InvokeRequest;
 const UpdateFunctionConfigurationRequest = models.UpdateFunctionConfigurationRequest;
 const VpcConfig = models.VpcConfig;
 const ListVersionByFunctionRequest = models.ListVersionByFunctionRequest;
+const PublicNetConfigOut = models.PublicNetConfigOut;
 const ListFunctionsResponse = models.ListFunctionsResponse;
 const UpdateNamespaceResponse = models.UpdateNamespaceResponse;
+const ListLayerVersionsRequest = models.ListLayerVersionsRequest;
 const CreateTriggerResponse = models.CreateTriggerResponse;
+const PublishLayerVersionRequest = models.PublishLayerVersionRequest;
 const CreateNamespaceRequest = models.CreateNamespaceRequest;
 const DeleteNamespaceRequest = models.DeleteNamespaceRequest;
+const ListLayersRequest = models.ListLayersRequest;
 const Result = models.Result;
 const CopyFunctionRequest = models.CopyFunctionRequest;
 const Tag = models.Tag;
 const DeleteNamespaceResponse = models.DeleteNamespaceResponse;
 const UpdateFunctionConfigurationResponse = models.UpdateFunctionConfigurationResponse;
+const PublishLayerVersionResponse = models.PublishLayerVersionResponse;
 const PublishVersionResponse = models.PublishVersionResponse;
+const DeleteLayerVersionRequest = models.DeleteLayerVersionRequest;
 const CreateFunctionResponse = models.CreateFunctionResponse;
+const LayerVersionSimple = models.LayerVersionSimple;
 const Trigger = models.Trigger;
-const Filter = models.Filter;
+const EipOutConfig = models.EipOutConfig;
 const Variable = models.Variable;
 const GetFunctionResponse = models.GetFunctionResponse;
 const GetFunctionLogsResponse = models.GetFunctionLogsResponse;
 const ListFunctionsRequest = models.ListFunctionsRequest;
 const DeleteTriggerResponse = models.DeleteTriggerResponse;
-const EipOutConfig = models.EipOutConfig;
+const Filter = models.Filter;
 const DeleteTriggerRequest = models.DeleteTriggerRequest;
 const Code = models.Code;
 const UpdateFunctionCodeRequest = models.UpdateFunctionCodeRequest;
@@ -61,11 +73,14 @@ const GetFunctionLogsRequest = models.GetFunctionLogsRequest;
 const CreateTriggerRequest = models.CreateTriggerRequest;
 const UpdateNamespaceRequest = models.UpdateNamespaceRequest;
 const GetFunctionAddressResponse = models.GetFunctionAddressResponse;
+const GetLayerVersionRequest = models.GetLayerVersionRequest;
 const DeleteFunctionResponse = models.DeleteFunctionResponse;
 const ListNamespacesResponse = models.ListNamespacesResponse;
+const EipConfigOut = models.EipConfigOut;
 const PublishVersionRequest = models.PublishVersionRequest;
 const FunctionLog = models.FunctionLog;
 const LogSearchContext = models.LogSearchContext;
+const GetLayerVersionResponse = models.GetLayerVersionResponse;
 const UpdateFunctionCodeResponse = models.UpdateFunctionCodeResponse;
 const LogFilter = models.LogFilter;
 
@@ -81,39 +96,6 @@ class ScfClient extends AbstractClient {
     }
     
     /**
-     * 该接口根据传入的参数查询函数的版本。
-     * @param {ListVersionByFunctionRequest} req
-     * @param {function(string, ListVersionByFunctionResponse):void} cb
-     * @public
-     */
-    ListVersionByFunction(req, cb) {
-        let resp = new ListVersionByFunctionResponse();
-        this.request("ListVersionByFunction", req, resp, cb);
-    }
-
-    /**
-     * 更新命名空间
-     * @param {UpdateNamespaceRequest} req
-     * @param {function(string, UpdateNamespaceResponse):void} cb
-     * @public
-     */
-    UpdateNamespace(req, cb) {
-        let resp = new UpdateNamespaceResponse();
-        this.request("UpdateNamespace", req, resp, cb);
-    }
-
-    /**
-     * 该接口用于运行函数。
-     * @param {InvokeRequest} req
-     * @param {function(string, InvokeResponse):void} cb
-     * @public
-     */
-    Invoke(req, cb) {
-        let resp = new InvokeResponse();
-        this.request("Invoke", req, resp, cb);
-    }
-
-    /**
      * 该接口根据传入参数删除函数。
      * @param {DeleteFunctionRequest} req
      * @param {function(string, DeleteFunctionResponse):void} cb
@@ -125,69 +107,14 @@ class ScfClient extends AbstractClient {
     }
 
     /**
-     * 该接口用于用户发布新版本函数。
-     * @param {PublishVersionRequest} req
-     * @param {function(string, PublishVersionResponse):void} cb
+     * 获取layer版本详细信息，包括用于下载layer文件的链接。
+     * @param {GetLayerVersionRequest} req
+     * @param {function(string, GetLayerVersionResponse):void} cb
      * @public
      */
-    PublishVersion(req, cb) {
-        let resp = new PublishVersionResponse();
-        this.request("PublishVersion", req, resp, cb);
-    }
-
-    /**
-     * 该接口根据参数传入删除已有的触发方式。
-     * @param {DeleteTriggerRequest} req
-     * @param {function(string, DeleteTriggerResponse):void} cb
-     * @public
-     */
-    DeleteTrigger(req, cb) {
-        let resp = new DeleteTriggerResponse();
-        this.request("DeleteTrigger", req, resp, cb);
-    }
-
-    /**
-     * 该接口获取某个函数的详细信息，包括名称、代码、处理方法、关联触发器和超时时间等字段。
-     * @param {GetFunctionRequest} req
-     * @param {function(string, GetFunctionResponse):void} cb
-     * @public
-     */
-    GetFunction(req, cb) {
-        let resp = new GetFunctionResponse();
-        this.request("GetFunction", req, resp, cb);
-    }
-
-    /**
-     * 该接口用于获取函数代码包的下载地址。
-     * @param {GetFunctionAddressRequest} req
-     * @param {function(string, GetFunctionAddressResponse):void} cb
-     * @public
-     */
-    GetFunctionAddress(req, cb) {
-        let resp = new GetFunctionAddressResponse();
-        this.request("GetFunctionAddress", req, resp, cb);
-    }
-
-    /**
-     * 列出命名空间列表
-     * @param {ListNamespacesRequest} req
-     * @param {function(string, ListNamespacesResponse):void} cb
-     * @public
-     */
-    ListNamespaces(req, cb) {
-        let resp = new ListNamespacesResponse();
-        this.request("ListNamespaces", req, resp, cb);
-    }
-
-    /**
-     * 该接口根据传入参数更新函数配置。
-     * @param {UpdateFunctionConfigurationRequest} req
-     * @param {function(string, UpdateFunctionConfigurationResponse):void} cb
-     * @public
-     */
-    UpdateFunctionConfiguration(req, cb) {
-        let resp = new UpdateFunctionConfigurationResponse();
-        this.request("UpdateFunctionConfiguration", req, resp, cb);
+    GetLayerVersion(req, cb) {
+        let resp = new GetLayerVersionResponse();
+        this.request("GetLayerVersion", req, resp, cb);
     }
 
     /**
@@ -230,6 +157,17 @@ class ScfClient extends AbstractClient {
     }
 
     /**
+     * 该接口根据参数传入删除已有的触发方式。
+     * @param {DeleteTriggerRequest} req
+     * @param {function(string, DeleteTriggerResponse):void} cb
+     * @public
+     */
+    DeleteTrigger(req, cb) {
+        let resp = new DeleteTriggerResponse();
+        this.request("DeleteTrigger", req, resp, cb);
+    }
+
+    /**
      * 该接口根据指定的日志查询条件返回函数运行日志。
      * @param {GetFunctionLogsRequest} req
      * @param {function(string, GetFunctionLogsResponse):void} cb
@@ -238,6 +176,105 @@ class ScfClient extends AbstractClient {
     GetFunctionLogs(req, cb) {
         let resp = new GetFunctionLogsResponse();
         this.request("GetFunctionLogs", req, resp, cb);
+    }
+
+    /**
+     * 更新命名空间
+     * @param {UpdateNamespaceRequest} req
+     * @param {function(string, UpdateNamespaceResponse):void} cb
+     * @public
+     */
+    UpdateNamespace(req, cb) {
+        let resp = new UpdateNamespaceResponse();
+        this.request("UpdateNamespace", req, resp, cb);
+    }
+
+    /**
+     * 该接口用于运行函数。
+     * @param {InvokeRequest} req
+     * @param {function(string, InvokeResponse):void} cb
+     * @public
+     */
+    Invoke(req, cb) {
+        let resp = new InvokeResponse();
+        this.request("Invoke", req, resp, cb);
+    }
+
+    /**
+     * 该接口用于用户发布新版本函数。
+     * @param {PublishVersionRequest} req
+     * @param {function(string, PublishVersionResponse):void} cb
+     * @public
+     */
+    PublishVersion(req, cb) {
+        let resp = new PublishVersionResponse();
+        this.request("PublishVersion", req, resp, cb);
+    }
+
+    /**
+     * 删除指定layer的指定版本，被删除的版本无法再关联到函数上，但不会影响正在引用这个layer的函数。
+     * @param {DeleteLayerVersionRequest} req
+     * @param {function(string, DeleteLayerVersionResponse):void} cb
+     * @public
+     */
+    DeleteLayerVersion(req, cb) {
+        let resp = new DeleteLayerVersionResponse();
+        this.request("DeleteLayerVersion", req, resp, cb);
+    }
+
+    /**
+     * 该接口获取某个函数的详细信息，包括名称、代码、处理方法、关联触发器和超时时间等字段。
+     * @param {GetFunctionRequest} req
+     * @param {function(string, GetFunctionResponse):void} cb
+     * @public
+     */
+    GetFunction(req, cb) {
+        let resp = new GetFunctionResponse();
+        this.request("GetFunction", req, resp, cb);
+    }
+
+    /**
+     * 该接口根据传入的参数创建命名空间。
+     * @param {DeleteNamespaceRequest} req
+     * @param {function(string, DeleteNamespaceResponse):void} cb
+     * @public
+     */
+    DeleteNamespace(req, cb) {
+        let resp = new DeleteNamespaceResponse();
+        this.request("DeleteNamespace", req, resp, cb);
+    }
+
+    /**
+     * 该接口根据传入的参数查询函数的版本。
+     * @param {ListVersionByFunctionRequest} req
+     * @param {function(string, ListVersionByFunctionResponse):void} cb
+     * @public
+     */
+    ListVersionByFunction(req, cb) {
+        let resp = new ListVersionByFunctionResponse();
+        this.request("ListVersionByFunction", req, resp, cb);
+    }
+
+    /**
+     * 返回全部layer的列表，其中包含了每个layer最新版本的信息，可以通过适配运行时进行过滤。
+     * @param {ListLayersRequest} req
+     * @param {function(string, ListLayersResponse):void} cb
+     * @public
+     */
+    ListLayers(req, cb) {
+        let resp = new ListLayersResponse();
+        this.request("ListLayers", req, resp, cb);
+    }
+
+    /**
+     * 返回指定layer的全部版本的信息
+     * @param {ListLayerVersionsRequest} req
+     * @param {function(string, ListLayerVersionsResponse):void} cb
+     * @public
+     */
+    ListLayerVersions(req, cb) {
+        let resp = new ListLayerVersionsResponse();
+        this.request("ListLayerVersions", req, resp, cb);
     }
 
     /**
@@ -252,6 +289,39 @@ class ScfClient extends AbstractClient {
     }
 
     /**
+     * 该接口根据传入参数更新函数配置。
+     * @param {UpdateFunctionConfigurationRequest} req
+     * @param {function(string, UpdateFunctionConfigurationResponse):void} cb
+     * @public
+     */
+    UpdateFunctionConfiguration(req, cb) {
+        let resp = new UpdateFunctionConfigurationResponse();
+        this.request("UpdateFunctionConfiguration", req, resp, cb);
+    }
+
+    /**
+     * 使用给定的zip文件或cos对象创建一个layer新版本，每次使用相同的LayerName调用本接口，都会生成一个新版本。
+     * @param {PublishLayerVersionRequest} req
+     * @param {function(string, PublishLayerVersionResponse):void} cb
+     * @public
+     */
+    PublishLayerVersion(req, cb) {
+        let resp = new PublishLayerVersionResponse();
+        this.request("PublishLayerVersion", req, resp, cb);
+    }
+
+    /**
+     * 该接口用于获取函数代码包的下载地址。
+     * @param {GetFunctionAddressRequest} req
+     * @param {function(string, GetFunctionAddressResponse):void} cb
+     * @public
+     */
+    GetFunctionAddress(req, cb) {
+        let resp = new GetFunctionAddressResponse();
+        this.request("GetFunctionAddress", req, resp, cb);
+    }
+
+    /**
      * 该接口根据传入参数创建新的函数。
      * @param {CreateFunctionRequest} req
      * @param {function(string, CreateFunctionResponse):void} cb
@@ -263,14 +333,14 @@ class ScfClient extends AbstractClient {
     }
 
     /**
-     * 该接口根据传入的参数创建命名空间。
-     * @param {DeleteNamespaceRequest} req
-     * @param {function(string, DeleteNamespaceResponse):void} cb
+     * 列出命名空间列表
+     * @param {ListNamespacesRequest} req
+     * @param {function(string, ListNamespacesResponse):void} cb
      * @public
      */
-    DeleteNamespace(req, cb) {
-        let resp = new DeleteNamespaceResponse();
-        this.request("DeleteNamespace", req, resp, cb);
+    ListNamespaces(req, cb) {
+        let resp = new ListNamespacesResponse();
+        this.request("ListNamespaces", req, resp, cb);
     }
 
     /**

@@ -159,29 +159,29 @@ class AddSmsSignRequest extends  AbstractModel {
         this.SignType = null;
 
         /**
-         * 证明类型。其中：
+         * 证明类型：
 0：三证合一。
 1：企业营业执照。
 2：组织机构代码证书。
 3：社会信用代码证书。
-4：应用后台管理截图(个人开发APP)。
-5：网站备案后台截图(个人开发网站)。
-6：小程序设置页面截图(个人认证小程序)。
+4：应用后台管理截图（个人开发APP）。
+5：网站备案后台截图（个人开发网站）。
+6：小程序设置页面截图（个人认证小程序）。
 7：商标注册书。
          * @type {number || null}
          */
         this.DocumentType = null;
 
         /**
-         * 是否国际短信。其中：
+         * 是否国际/港澳台短信：
 0：表示国内短信。
-1：表示海外短信。
+1：表示国际/港澳台短信。
          * @type {number || null}
          */
         this.International = null;
 
         /**
-         * 签名用途。其中：
+         * 签名用途：
 0：自用。
 1：他用。
          * @type {number || null}
@@ -384,7 +384,9 @@ class AddSmsTemplateRequest extends  AbstractModel {
         this.SmsType = null;
 
         /**
-         * 0表示国内短信，1表示国际/港澳台短信，默认为0。
+         * 是否国际/港澳台短信：
+0：表示国内短信。
+1：表示国际/港澳台短信。
          * @type {number || null}
          */
         this.International = null;
@@ -446,7 +448,9 @@ class ModifySmsTemplateRequest extends  AbstractModel {
         this.SmsType = null;
 
         /**
-         * 0表示国内短信，1表示国际/港澳台短信，默认为0。
+         * 是否国际/港澳台短信：
+0：表示国内短信。
+1：表示国际/港澳台短信。
          * @type {number || null}
          */
         this.International = null;
@@ -1095,7 +1099,7 @@ class ModifySmsSignRequest extends  AbstractModel {
         super();
 
         /**
-         * 待修改的签名Id。
+         * 待修改的签名 ID。
          * @type {number || null}
          */
         this.SignId = null;
@@ -1120,7 +1124,7 @@ class ModifySmsSignRequest extends  AbstractModel {
         this.SignType = null;
 
         /**
-         * 证明类型。其中：
+         * 证明类型：
 0：三证合一。
 1：企业营业执照。
 2：组织机构代码证书。
@@ -1134,15 +1138,15 @@ class ModifySmsSignRequest extends  AbstractModel {
         this.DocumentType = null;
 
         /**
-         * 是否国际短信。其中：
+         * 是否国际/港澳台短信：
 0：表示国内短信。
-1：表示海外短信。
+1：表示国际/港澳台短信。
          * @type {number || null}
          */
         this.International = null;
 
         /**
-         * 签名用途。其中：
+         * 签名用途：
 0：自用。
 1：他用。
          * @type {number || null}
