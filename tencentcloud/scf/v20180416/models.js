@@ -220,7 +220,7 @@ class AccessInfo extends  AbstractModel {
 }
 
 /**
- * layer版本信息
+ * 层版本信息
  * @class
  */
 class LayerVersionInfo extends  AbstractModel {
@@ -261,16 +261,17 @@ class LayerVersionInfo extends  AbstractModel {
         this.LayerVersion = null;
 
         /**
-         * layer名称
+         * 层名称
          * @type {string || null}
          */
         this.LayerName = null;
 
         /**
-         * Layer的当前状态，可能取值：
-publishing  发布中
-available  可用
-unavailable  不可用
+         * 层的具体版本当前状态，可能取值：
+Active 正常
+Publishing  发布中
+PublishFailed  发布失败
+Deleted 已删除
          * @type {string || null}
          */
         this.Status = null;
@@ -304,7 +305,7 @@ class ListLayerVersionsResponse extends  AbstractModel {
         super();
 
         /**
-         * layer版本列表
+         * 层版本列表
          * @type {Array.<LayerVersionInfo> || null}
          */
         this.LayerVersions = null;
@@ -566,13 +567,13 @@ class ListLayersResponse extends  AbstractModel {
         super();
 
         /**
-         * layer列表
+         * 层列表
          * @type {Array.<LayerVersionInfo> || null}
          */
         this.Layers = null;
 
         /**
-         * layer总数
+         * 层总数
          * @type {number || null}
          */
         this.TotalCount = null;
@@ -1164,7 +1165,7 @@ class UpdateFunctionConfigurationRequest extends  AbstractModel {
         this.L5Enable = null;
 
         /**
-         * 函数要关联的Layer版本列表，Layer会按照在列表中顺序依次覆盖。
+         * 函数要关联的层版本列表，层的版本会按照在列表中顺序依次覆盖。
          * @type {Array.<LayerVersionSimple> || null}
          */
         this.Layers = null;
@@ -1430,7 +1431,7 @@ class ListLayerVersionsRequest extends  AbstractModel {
         super();
 
         /**
-         * layer名称
+         * 层名称
          * @type {string || null}
          */
         this.LayerName = null;
@@ -1505,31 +1506,31 @@ class PublishLayerVersionRequest extends  AbstractModel {
         super();
 
         /**
-         * layer名称，支持26个英文字母大小写、数字、连接符和下划线，第一个字符只能以字母开头，最后一个字符不能为连接符或者下划线，名称长度1-64
+         * 层名称，支持26个英文字母大小写、数字、连接符和下划线，第一个字符只能以字母开头，最后一个字符不能为连接符或者下划线，名称长度1-64
          * @type {string || null}
          */
         this.LayerName = null;
 
         /**
-         * layer适用的运行时，可多选，可选的值有： Python2.7, Python3.6, Nodejs6.10, Java8, Php5, Php7, Nodejs8.9, Go1
+         * 层适用的运行时，可多选，可选的值对应函数的 Runtime 可选值。
          * @type {Array.<string> || null}
          */
         this.CompatibleRuntimes = null;
 
         /**
-         * layer的文件来源
+         * 层的文件来源或文件内容
          * @type {Code || null}
          */
         this.Content = null;
 
         /**
-         * layer版本的描述
+         * 层的版本的描述
          * @type {string || null}
          */
         this.Description = null;
 
         /**
-         * layer的软件许可证
+         * 层的软件许可证
          * @type {string || null}
          */
         this.LicenseInfo = null;
@@ -1928,7 +1929,7 @@ class PublishLayerVersionResponse extends  AbstractModel {
         super();
 
         /**
-         * 本次创建的layer的版本号
+         * 本次创建的层的版本号
          * @type {number || null}
          */
         this.LayerVersion = null;
@@ -2047,7 +2048,7 @@ class DeleteLayerVersionRequest extends  AbstractModel {
         super();
 
         /**
-         * layer名称
+         * 层名称
          * @type {string || null}
          */
         this.LayerName = null;
@@ -3376,7 +3377,7 @@ class GetLayerVersionRequest extends  AbstractModel {
         super();
 
         /**
-         * layer名称
+         * 层名称
          * @type {string || null}
          */
         this.LayerName = null;
@@ -3727,13 +3728,13 @@ class GetLayerVersionResponse extends  AbstractModel {
         this.CompatibleRuntimes = null;
 
         /**
-         * layer版本文件的SHA256编码
+         * 层中版本文件的SHA256编码
          * @type {string || null}
          */
         this.CodeSha256 = null;
 
         /**
-         * layer版本文件的下载地址
+         * 层中版本文件的下载地址
          * @type {string || null}
          */
         this.Location = null;
@@ -3763,16 +3764,17 @@ class GetLayerVersionResponse extends  AbstractModel {
         this.LayerVersion = null;
 
         /**
-         * layer名称
+         * 层名称
          * @type {string || null}
          */
         this.LayerName = null;
 
         /**
-         * Layer的当前状态，可能取值：
-publishing  发布中
-available  可用
-unavailable  不可用
+         * 层的具体版本当前状态，可能取值：
+Active 正常
+Publishing  发布中
+PublishFailed  发布失败
+Deleted 已删除
          * @type {string || null}
          */
         this.Status = null;
