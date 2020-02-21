@@ -243,6 +243,7 @@ const AiAnalysisResult = models.AiAnalysisResult;
 const DescribeAIAnalysisTemplatesRequest = models.DescribeAIAnalysisTemplatesRequest;
 const MediaTranscodeInfo = models.MediaTranscodeInfo;
 const AiRecognitionTaskOcrWordsResultItem = models.AiRecognitionTaskOcrWordsResultItem;
+const ParseStreamingManifestRequest = models.ParseStreamingManifestRequest;
 const DeleteSampleSnapshotTemplateResponse = models.DeleteSampleSnapshotTemplateResponse;
 const AiAnalysisTaskTagInput = models.AiAnalysisTaskTagInput;
 const MediaTrackItem = models.MediaTrackItem;
@@ -265,6 +266,7 @@ const ImageSpriteTemplate = models.ImageSpriteTemplate;
 const AiRecognitionTaskOcrFullTextSegmentTextItem = models.AiRecognitionTaskOcrFullTextSegmentTextItem;
 const SnapshotByTimeOffsetTaskInput = models.SnapshotByTimeOffsetTaskInput;
 const SegmentConfigureInfo = models.SegmentConfigureInfo;
+const ParseStreamingManifestResponse = models.ParseStreamingManifestResponse;
 const AiReviewPornOcrTaskOutput = models.AiReviewPornOcrTaskOutput;
 const ApplyUploadRequest = models.ApplyUploadRequest;
 const CreateSampleSnapshotTemplateResponse = models.CreateSampleSnapshotTemplateResponse;
@@ -295,6 +297,7 @@ const CoverConfigureInfoForUpdate = models.CoverConfigureInfoForUpdate;
 const AiAnalysisTaskClassificationResult = models.AiAnalysisTaskClassificationResult;
 const PoliticalImgReviewTemplateInfoForUpdate = models.PoliticalImgReviewTemplateInfoForUpdate;
 const UserDefineOcrTextReviewTemplateInfo = models.UserDefineOcrTextReviewTemplateInfo;
+const AdaptiveStreamTemplate = models.AdaptiveStreamTemplate;
 const TranscodeTaskInput = models.TranscodeTaskInput;
 const ModifyAIRecognitionTemplateRequest = models.ModifyAIRecognitionTemplateRequest;
 const WechatPublishTask = models.WechatPublishTask;
@@ -485,6 +488,19 @@ class VodClient extends AbstractClient {
     DeleteAnimatedGraphicsTemplate(req, cb) {
         let resp = new DeleteAnimatedGraphicsTemplateResponse();
         this.request("DeleteAnimatedGraphicsTemplate", req, resp, cb);
+    }
+
+    /**
+     * 对 HLS 视频进行按时间段裁剪。
+
+注意：裁剪出来的视频与原始视频共用 ts，仅生成新的 m3u8。原始视频删除后，该裁剪视频也会被删除。
+     * @param {SimpleHlsClipRequest} req
+     * @param {function(string, SimpleHlsClipResponse):void} cb
+     * @public
+     */
+    SimpleHlsClip(req, cb) {
+        let resp = new SimpleHlsClipResponse();
+        this.request("SimpleHlsClip", req, resp, cb);
     }
 
     /**
@@ -693,16 +709,14 @@ class VodClient extends AbstractClient {
     }
 
     /**
-     * 对 HLS 视频进行按时间段裁剪。
-
-注意：裁剪出来的视频与原始视频共用 ts，仅生成新的 m3u8。原始视频删除后，该裁剪视频也会被删除。
-     * @param {SimpleHlsClipRequest} req
-     * @param {function(string, SimpleHlsClipResponse):void} cb
+     * 上传 HLS 视频时，解析索引文件内容，返回待上传的分片文件列表。分片文件路径必须是当前目录或子目录的相对路径，不能是 URL，不能是绝对路径。
+     * @param {ParseStreamingManifestRequest} req
+     * @param {function(string, ParseStreamingManifestResponse):void} cb
      * @public
      */
-    SimpleHlsClip(req, cb) {
-        let resp = new SimpleHlsClipResponse();
-        this.request("SimpleHlsClip", req, resp, cb);
+    ParseStreamingManifest(req, cb) {
+        let resp = new ParseStreamingManifestResponse();
+        this.request("ParseStreamingManifest", req, resp, cb);
     }
 
     /**

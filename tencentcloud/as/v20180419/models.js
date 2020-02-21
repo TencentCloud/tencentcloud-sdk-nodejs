@@ -3508,7 +3508,7 @@ class UpgradeLaunchConfigurationRequest extends  AbstractModel {
 
         /**
          * 云服务器实例名（InstanceName）的相关设置。
-         * @type {Array.<InstanceNameSettings> || null}
+         * @type {InstanceNameSettings || null}
          */
         this.InstanceNameSettings = null;
 
@@ -3593,12 +3593,9 @@ class UpgradeLaunchConfigurationRequest extends  AbstractModel {
         }
 
         if (params.InstanceNameSettings) {
-            this.InstanceNameSettings = new Array();
-            for (let z in params.InstanceNameSettings) {
-                let obj = new InstanceNameSettings();
-                obj.deserialize(params.InstanceNameSettings[z]);
-                this.InstanceNameSettings.push(obj);
-            }
+            let obj = new InstanceNameSettings();
+            obj.deserialize(params.InstanceNameSettings)
+            this.InstanceNameSettings = obj;
         }
 
         if (params.InstanceChargePrepaid) {
@@ -4964,7 +4961,7 @@ class LaunchConfiguration extends  AbstractModel {
 
         /**
          * 云服务器实例名（InstanceName）的相关设置。
-         * @type {Array.<InstanceNameSettings> || null}
+         * @type {InstanceNameSettings || null}
          */
         this.InstanceNameSettings = null;
 
@@ -5063,12 +5060,9 @@ class LaunchConfiguration extends  AbstractModel {
         }
 
         if (params.InstanceNameSettings) {
-            this.InstanceNameSettings = new Array();
-            for (let z in params.InstanceNameSettings) {
-                let obj = new InstanceNameSettings();
-                obj.deserialize(params.InstanceNameSettings[z]);
-                this.InstanceNameSettings.push(obj);
-            }
+            let obj = new InstanceNameSettings();
+            obj.deserialize(params.InstanceNameSettings)
+            this.InstanceNameSettings = obj;
         }
 
         if (params.InstanceChargePrepaid) {
@@ -5786,6 +5780,12 @@ class ForwardLoadBalancer extends  AbstractModel {
          */
         this.LocationId = null;
 
+        /**
+         * 负载均衡实例所属地域，默认取AS服务所在地域
+         * @type {string || null}
+         */
+        this.Region = null;
+
     }
 
     /**
@@ -5807,6 +5807,7 @@ class ForwardLoadBalancer extends  AbstractModel {
             }
         }
         this.LocationId = 'LocationId' in params ? params.LocationId : null;
+        this.Region = 'Region' in params ? params.Region : null;
 
     }
 }

@@ -107,7 +107,7 @@ class ScfClient extends AbstractClient {
     }
 
     /**
-     * 获取layer版本详细信息，包括用于下载layer文件的链接。
+     * 获取层版本详细信息，包括用于下载层中文件的链接。
      * @param {GetLayerVersionRequest} req
      * @param {function(string, GetLayerVersionResponse):void} cb
      * @public
@@ -212,7 +212,7 @@ class ScfClient extends AbstractClient {
     }
 
     /**
-     * 删除指定layer的指定版本，被删除的版本无法再关联到函数上，但不会影响正在引用这个layer的函数。
+     * 删除指定层的指定版本，被删除的版本无法再关联到函数上，但不会影响正在引用这个层的函数。
      * @param {DeleteLayerVersionRequest} req
      * @param {function(string, DeleteLayerVersionResponse):void} cb
      * @public
@@ -256,7 +256,7 @@ class ScfClient extends AbstractClient {
     }
 
     /**
-     * 返回全部layer的列表，其中包含了每个layer最新版本的信息，可以通过适配运行时进行过滤。
+     * 返回全部层的列表，其中包含了每个层最新版本的信息，可以通过适配运行时进行过滤。
      * @param {ListLayersRequest} req
      * @param {function(string, ListLayersResponse):void} cb
      * @public
@@ -267,7 +267,7 @@ class ScfClient extends AbstractClient {
     }
 
     /**
-     * 返回指定layer的全部版本的信息
+     * 返回指定层的全部版本的信息
      * @param {ListLayerVersionsRequest} req
      * @param {function(string, ListLayerVersionsResponse):void} cb
      * @public
@@ -300,7 +300,7 @@ class ScfClient extends AbstractClient {
     }
 
     /**
-     * 使用给定的zip文件或cos对象创建一个layer新版本，每次使用相同的LayerName调用本接口，都会生成一个新版本。
+     * 使用给定的zip文件或cos对象创建一个层的新版本，每次使用相同的层的名称调用本接口，都会生成一个新版本。
      * @param {PublishLayerVersionRequest} req
      * @param {function(string, PublishLayerVersionResponse):void} cb
      * @public

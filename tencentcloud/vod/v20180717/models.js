@@ -949,6 +949,19 @@ class AdaptiveDynamicStreamingTemplate extends  AbstractModel {
         this.AudioTrackTemplateSet = null;
 
         /**
+         * 自适应转码格式，取值范围：
+<li>HLS。</li>
+         * @type {string || null}
+         */
+        this.Format = null;
+
+        /**
+         * 自适应转码输入流参数信息，最多输入10路流。
+         * @type {Array.<AdaptiveStreamTemplate> || null}
+         */
+        this.StreamInfos = null;
+
+        /**
          * 是否禁止视频低码率转高码率，取值范围：
 <li>0：否，</li>
 <li>1：是。</li>
@@ -1007,6 +1020,16 @@ class AdaptiveDynamicStreamingTemplate extends  AbstractModel {
                 let obj = new AudioTrackTemplateInfo();
                 obj.deserialize(params.AudioTrackTemplateSet[z]);
                 this.AudioTrackTemplateSet.push(obj);
+            }
+        }
+        this.Format = 'Format' in params ? params.Format : null;
+
+        if (params.StreamInfos) {
+            this.StreamInfos = new Array();
+            for (let z in params.StreamInfos) {
+                let obj = new AdaptiveStreamTemplate();
+                obj.deserialize(params.StreamInfos[z]);
+                this.StreamInfos.push(obj);
             }
         }
         this.DisableHigherVideoBitrate = 'DisableHigherVideoBitrate' in params ? params.DisableHigherVideoBitrate : null;
@@ -12436,6 +12459,43 @@ class AiRecognitionTaskOcrWordsResultItem extends  AbstractModel {
 }
 
 /**
+ * ParseStreamingManifest请求参数结构体
+ * @class
+ */
+class ParseStreamingManifestRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 待解析的索引文件内容。
+         * @type {string || null}
+         */
+        this.MediaManifestContent = null;
+
+        /**
+         * 视频索引文件格式。默认 m3u8 格式。
+<li>m3u8</li>
+<li>mpd</li>
+         * @type {string || null}
+         */
+        this.ManifestType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MediaManifestContent = 'MediaManifestContent' in params ? params.MediaManifestContent : null;
+        this.ManifestType = 'ManifestType' in params ? params.ManifestType : null;
+
+    }
+}
+
+/**
  * DeleteSampleSnapshotTemplate返回参数结构体
  * @class
  */
@@ -13641,6 +13701,41 @@ class SegmentConfigureInfo extends  AbstractModel {
             return;
         }
         this.Switch = 'Switch' in params ? params.Switch : null;
+
+    }
+}
+
+/**
+ * ParseStreamingManifest返回参数结构体
+ * @class
+ */
+class ParseStreamingManifestResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 分片文件列表。
+         * @type {Array.<string> || null}
+         */
+        this.MediaSegmentSet = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MediaSegmentSet = 'MediaSegmentSet' in params ? params.MediaSegmentSet : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -15325,6 +15420,60 @@ class UserDefineOcrTextReviewTemplateInfo extends  AbstractModel {
         this.LabelSet = 'LabelSet' in params ? params.LabelSet : null;
         this.BlockConfidence = 'BlockConfidence' in params ? params.BlockConfidence : null;
         this.ReviewConfidence = 'ReviewConfidence' in params ? params.ReviewConfidence : null;
+
+    }
+}
+
+/**
+ * 自适应转码流参数模板
+ * @class
+ */
+class AdaptiveStreamTemplate extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 视频参数信息。
+         * @type {VideoTemplateInfo || null}
+         */
+        this.Video = null;
+
+        /**
+         * 音频参数信息。
+         * @type {AudioTemplateInfo || null}
+         */
+        this.Audio = null;
+
+        /**
+         * 是否移除音频流，取值范围：
+<li>0：否，</li>
+<li>1：是。</li>
+         * @type {number || null}
+         */
+        this.RemoveAudio = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Video) {
+            let obj = new VideoTemplateInfo();
+            obj.deserialize(params.Video)
+            this.Video = obj;
+        }
+
+        if (params.Audio) {
+            let obj = new AudioTemplateInfo();
+            obj.deserialize(params.Audio)
+            this.Audio = obj;
+        }
+        this.RemoveAudio = 'RemoveAudio' in params ? params.RemoveAudio : null;
 
     }
 }
@@ -25879,6 +26028,7 @@ module.exports = {
     DescribeAIAnalysisTemplatesRequest: DescribeAIAnalysisTemplatesRequest,
     MediaTranscodeInfo: MediaTranscodeInfo,
     AiRecognitionTaskOcrWordsResultItem: AiRecognitionTaskOcrWordsResultItem,
+    ParseStreamingManifestRequest: ParseStreamingManifestRequest,
     DeleteSampleSnapshotTemplateResponse: DeleteSampleSnapshotTemplateResponse,
     AiAnalysisTaskTagInput: AiAnalysisTaskTagInput,
     MediaTrackItem: MediaTrackItem,
@@ -25901,6 +26051,7 @@ module.exports = {
     AiRecognitionTaskOcrFullTextSegmentTextItem: AiRecognitionTaskOcrFullTextSegmentTextItem,
     SnapshotByTimeOffsetTaskInput: SnapshotByTimeOffsetTaskInput,
     SegmentConfigureInfo: SegmentConfigureInfo,
+    ParseStreamingManifestResponse: ParseStreamingManifestResponse,
     AiReviewPornOcrTaskOutput: AiReviewPornOcrTaskOutput,
     ApplyUploadRequest: ApplyUploadRequest,
     CreateSampleSnapshotTemplateResponse: CreateSampleSnapshotTemplateResponse,
@@ -25931,6 +26082,7 @@ module.exports = {
     AiAnalysisTaskClassificationResult: AiAnalysisTaskClassificationResult,
     PoliticalImgReviewTemplateInfoForUpdate: PoliticalImgReviewTemplateInfoForUpdate,
     UserDefineOcrTextReviewTemplateInfo: UserDefineOcrTextReviewTemplateInfo,
+    AdaptiveStreamTemplate: AdaptiveStreamTemplate,
     TranscodeTaskInput: TranscodeTaskInput,
     ModifyAIRecognitionTemplateRequest: ModifyAIRecognitionTemplateRequest,
     WechatPublishTask: WechatPublishTask,

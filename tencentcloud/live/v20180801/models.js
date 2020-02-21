@@ -5648,12 +5648,17 @@ class CreatePullStreamConfigRequest extends  AbstractModel {
 
         /**
          * 源Url。目前可支持直播流及点播文件。
+注意：
+1. 多个点播url之间使用空格拼接。
+2. 目前上限支持10个url。
+3. 支持拉流文件格式：flv，rtmp，hls，mp4。
          * @type {string || null}
          */
         this.FromUrl = null;
 
         /**
          * 目的Url，目前限制该目标地址为腾讯域名。
+仅支持：rtmp协议。
          * @type {string || null}
          */
         this.ToUrl = null;
