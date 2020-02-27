@@ -19,28 +19,33 @@ const AbstractClient = require('../../common/abstract_client')
 const PullSmsReplyStatusRequest = models.PullSmsReplyStatusRequest;
 const DeleteSmsTemplateResponse = models.DeleteSmsTemplateResponse;
 const ModifySmsTemplateResponse = models.ModifySmsTemplateResponse;
+const ModifySmsSignRequest = models.ModifySmsSignRequest;
 const AddSmsSignRequest = models.AddSmsSignRequest;
 const AddTemplateStatus = models.AddTemplateStatus;
-const SmsPackagesStatisticsRequest = models.SmsPackagesStatisticsRequest;
+const DescribeSmsTemplateListResponse = models.DescribeSmsTemplateListResponse;
 const PullSmsSendStatusByPhoneNumberRequest = models.PullSmsSendStatusByPhoneNumberRequest;
 const AddSmsTemplateRequest = models.AddSmsTemplateRequest;
 const ModifySmsTemplateRequest = models.ModifySmsTemplateRequest;
+const PullSmsReplyStatus = models.PullSmsReplyStatus;
 const CallbackStatusStatisticsResponse = models.CallbackStatusStatisticsResponse;
 const PullSmsSendStatusRequest = models.PullSmsSendStatusRequest;
 const SmsPackagesStatistics = models.SmsPackagesStatistics;
 const PullSmsSendStatusByPhoneNumberResponse = models.PullSmsSendStatusByPhoneNumberResponse;
 const ModifySignStatus = models.ModifySignStatus;
-const PullSmsReplyStatus = models.PullSmsReplyStatus;
+const DescribeSignListStatus = models.DescribeSignListStatus;
 const SendSmsResponse = models.SendSmsResponse;
 const SendStatusStatisticsResponse = models.SendStatusStatisticsResponse;
 const SendSmsRequest = models.SendSmsRequest;
 const SendStatusStatistics = models.SendStatusStatistics;
 const CallbackStatusStatisticsRequest = models.CallbackStatusStatisticsRequest;
 const DeleteTemplateStatus = models.DeleteTemplateStatus;
-const ModifySmsSignRequest = models.ModifySmsSignRequest;
+const DescribeSmsSignListRequest = models.DescribeSmsSignListRequest;
+const SmsPackagesStatisticsRequest = models.SmsPackagesStatisticsRequest;
+const DescribeTemplateListStatus = models.DescribeTemplateListStatus;
 const AddSmsTemplateResponse = models.AddSmsTemplateResponse;
 const PullSmsSendStatus = models.PullSmsSendStatus;
-const ModifySmsSignResponse = models.ModifySmsSignResponse;
+const DescribeSmsSignListResponse = models.DescribeSmsSignListResponse;
+const DescribeSmsTemplateListRequest = models.DescribeSmsTemplateListRequest;
 const CallbackStatusStatistics = models.CallbackStatusStatistics;
 const SendStatusStatisticsRequest = models.SendStatusStatisticsRequest;
 const DeleteSmsTemplateRequest = models.DeleteSmsTemplateRequest;
@@ -50,6 +55,7 @@ const DeleteSmsSignResponse = models.DeleteSmsSignResponse;
 const AddSmsSignResponse = models.AddSmsSignResponse;
 const DeleteSmsSignRequest = models.DeleteSmsSignRequest;
 const PullSmsReplyStatusByPhoneNumberRequest = models.PullSmsReplyStatusByPhoneNumberRequest;
+const ModifySmsSignResponse = models.ModifySmsSignResponse;
 const AddSignStatus = models.AddSignStatus;
 const ModifyTemplateStatus = models.ModifyTemplateStatus;
 const PullSmsSendStatusResponse = models.PullSmsSendStatusResponse;
@@ -69,18 +75,21 @@ class SmsClient extends AbstractClient {
     }
     
     /**
-     * 删除短信模板
-     * @param {DeleteSmsTemplateRequest} req
-     * @param {function(string, DeleteSmsTemplateResponse):void} cb
+     * 修改短信签名，修改之前请先认证参阅 [腾讯云短信签名审核标准](https://cloud.tencent.com/document/product/382/39022)。
+>- ⚠️注意：个人认证用户不支持使用 API 修改短信签名，请参阅了解 [实名认证基本介绍](https://cloud.tencent.com/document/product/378/3629)，如果为个人认证请登录控制台修改短信签名。
+>- 修改短信签名，仅当签名为待审核或已拒绝状态时，才能进行修改，已审核通过的签名不支持修改。
+     * @param {ModifySmsSignRequest} req
+     * @param {function(string, ModifySmsSignResponse):void} cb
      * @public
      */
-    DeleteSmsTemplate(req, cb) {
-        let resp = new DeleteSmsTemplateResponse();
-        this.request("DeleteSmsTemplate", req, resp, cb);
+    ModifySmsSign(req, cb) {
+        let resp = new ModifySmsSignResponse();
+        this.request("ModifySmsSign", req, resp, cb);
     }
 
     /**
-     * 添加短信签名
+     * 添加短信签名，申请之前请先认证参阅 [腾讯云短信签名审核标准](https://cloud.tencent.com/document/product/382/39022)。
+>⚠️注意：个人认证用户不支持使用 API 申请短信签名，请参阅了解 [实名认证基本介绍](https://cloud.tencent.com/document/product/378/3629)，如果为个人认证请登录控制台申请短信签名，具体操作请参阅 [创建短信签名](https://cloud.tencent.com/document/product/382/36136#Sign)。
      * @param {AddSmsSignRequest} req
      * @param {function(string, AddSmsSignResponse):void} cb
      * @public
@@ -115,14 +124,14 @@ class SmsClient extends AbstractClient {
     }
 
     /**
-     * 修改短信签名
-     * @param {ModifySmsSignRequest} req
-     * @param {function(string, ModifySmsSignResponse):void} cb
+     * >⚠️注意：个人认证用户不支持使用 API 删除短信正文模版，请参阅了解 [实名认证基本介绍](https://cloud.tencent.com/document/product/378/3629)，请登录控制台删除短信正文模版，具体操作请参阅 [短信正文模版操作](https://cloud.tencent.com/document/product/382/36136#Template) 中查看删除短信正文模版须知。
+     * @param {DeleteSmsTemplateRequest} req
+     * @param {function(string, DeleteSmsTemplateResponse):void} cb
      * @public
      */
-    ModifySmsSign(req, cb) {
-        let resp = new ModifySmsSignResponse();
-        this.request("ModifySmsSign", req, resp, cb);
+    DeleteSmsTemplate(req, cb) {
+        let resp = new DeleteSmsTemplateResponse();
+        this.request("DeleteSmsTemplate", req, resp, cb);
     }
 
     /**
@@ -159,6 +168,17 @@ class SmsClient extends AbstractClient {
     }
 
     /**
+     * >⚠️注意：个人认证用户不支持使用 API 查询短信正文模版，请参阅了解 [实名认证基本介绍](https://cloud.tencent.com/document/product/378/3629)。
+     * @param {DescribeSmsTemplateListRequest} req
+     * @param {function(string, DescribeSmsTemplateListResponse):void} cb
+     * @public
+     */
+    DescribeSmsTemplateList(req, cb) {
+        let resp = new DescribeSmsTemplateListResponse();
+        this.request("DescribeSmsTemplateList", req, resp, cb);
+    }
+
+    /**
      * 拉取短信回复状态。
      * @param {PullSmsReplyStatusRequest} req
      * @param {function(string, PullSmsReplyStatusResponse):void} cb
@@ -167,6 +187,17 @@ class SmsClient extends AbstractClient {
     PullSmsReplyStatus(req, cb) {
         let resp = new PullSmsReplyStatusResponse();
         this.request("PullSmsReplyStatus", req, resp, cb);
+    }
+
+    /**
+     * >⚠️注意：个人认证用户不支持使用 API 查询短信签名，请参阅了解 [实名认证基本介绍](https://cloud.tencent.com/document/product/378/3629)。
+     * @param {DescribeSmsSignListRequest} req
+     * @param {function(string, DescribeSmsSignListResponse):void} cb
+     * @public
+     */
+    DescribeSmsSignList(req, cb) {
+        let resp = new DescribeSmsSignListResponse();
+        this.request("DescribeSmsSignList", req, resp, cb);
     }
 
     /**
@@ -181,7 +212,9 @@ class SmsClient extends AbstractClient {
     }
 
     /**
-     * 修改短信模板
+     * 修改短信正文模版，修改之前请先认真参阅 [腾讯云短信正文模版审核标准](https://cloud.tencent.com/document/product/382/39023)。
+>- ⚠️注意：个人认证用户不支持使用 API 修改短信正文模版，请参阅了解 [实名认证基本介绍](https://cloud.tencent.com/document/product/378/3629)，如果为个人认证请登录控制台申请短信正文模版。
+>- 修改短信签名，仅当正文模版为待审核或已拒绝状态时，才能进行修改，已审核通过的正文模版不支持修改。
      * @param {ModifySmsTemplateRequest} req
      * @param {function(string, ModifySmsTemplateResponse):void} cb
      * @public
@@ -203,7 +236,7 @@ class SmsClient extends AbstractClient {
     }
 
     /**
-     * 删除短信签名
+     * >⚠️注意：个人认证用户不支持使用 API 删除短信签名，请参阅了解 [实名认证基本介绍](https://cloud.tencent.com/document/product/378/3629)，请登录控制台删除短信签名，具体操作请参阅 [短信签名操作](https://cloud.tencent.com/document/product/382/36136#Sign) 中查看删除短信签名须知。
      * @param {DeleteSmsSignRequest} req
      * @param {function(string, DeleteSmsSignResponse):void} cb
      * @public
@@ -214,7 +247,8 @@ class SmsClient extends AbstractClient {
     }
 
     /**
-     * 添加短信模板
+     * 添加短信模版，申请之前请先认证参阅 [腾讯云短信正文模版审核标准](https://cloud.tencent.com/document/product/382/39023)。
+>⚠️注意：个人认证用户不支持使用 API 申请短信正文模版，请参阅了解 [实名认证基本介绍](https://cloud.tencent.com/document/product/378/3629)，如果为个人认证请登录控制台申请短信正文模版，具体操作请参阅 [创建短信正文模版](https://cloud.tencent.com/document/product/382/36136#Template)。
      * @param {AddSmsTemplateRequest} req
      * @param {function(string, AddSmsTemplateResponse):void} cb
      * @public

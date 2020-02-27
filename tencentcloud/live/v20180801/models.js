@@ -3452,13 +3452,13 @@ class DescribeLiveDomainsResponse extends  AbstractModel {
         super();
 
         /**
-         * 总记录数
+         * 总记录数。
          * @type {number || null}
          */
         this.AllCount = null;
 
         /**
-         * 域名详细信息列表
+         * 域名详细信息列表。
          * @type {Array.<DomainInfo> || null}
          */
         this.DomainList = null;
@@ -7186,37 +7186,37 @@ class DescribeLiveDomainsRequest extends  AbstractModel {
         super();
 
         /**
-         * 域名状态过滤。0-停用，1-启用
+         * 域名状态过滤。0-停用，1-启用。
          * @type {number || null}
          */
         this.DomainStatus = null;
 
         /**
-         * 域名类型过滤。0-推流，1-播放
+         * 域名类型过滤。0-推流，1-播放。
          * @type {number || null}
          */
         this.DomainType = null;
 
         /**
-         * 分页大小，范围：10~100。默认10
+         * 分页大小，范围：10~100。默认10。
          * @type {number || null}
          */
         this.PageSize = null;
 
         /**
-         * 取第几页，范围：1~100000。默认1
+         * 取第几页，范围：1~100000。默认1。
          * @type {number || null}
          */
         this.PageNum = null;
 
         /**
-         * 0 普通直播 1慢直播 默认0
+         * 0 普通直播 1慢直播 默认0。
          * @type {number || null}
          */
         this.IsDelayLive = null;
 
         /**
-         * 域名前缀
+         * 域名前缀。
          * @type {string || null}
          */
         this.DomainPrefix = null;

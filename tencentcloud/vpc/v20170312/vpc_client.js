@@ -18,6 +18,7 @@ const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const ModifyAddressTemplateAttributeResponse = models.ModifyAddressTemplateAttributeResponse;
 const ServiceTemplateGroup = models.ServiceTemplateGroup;
+const SecurityGroupLimitSet = models.SecurityGroupLimitSet;
 const CreateRoutesRequest = models.CreateRoutesRequest;
 const DescribeHaVipsResponse = models.DescribeHaVipsResponse;
 const SecurityGroupAssociationStatistics = models.SecurityGroupAssociationStatistics;
@@ -161,6 +162,7 @@ const DescribeIp6TranslatorsRequest = models.DescribeIp6TranslatorsRequest;
 const CreateSubnetsResponse = models.CreateSubnetsResponse;
 const DescribeGatewayFlowMonitorDetailRequest = models.DescribeGatewayFlowMonitorDetailRequest;
 const InquiryPriceCreateVpnGatewayResponse = models.InquiryPriceCreateVpnGatewayResponse;
+const DescribeSecurityGroupLimitsResponse = models.DescribeSecurityGroupLimitsResponse;
 const FilterObject = models.FilterObject;
 const ModifyBandwidthPackageAttributeResponse = models.ModifyBandwidthPackageAttributeResponse;
 const DetachNetworkInterfaceResponse = models.DetachNetworkInterfaceResponse;
@@ -246,6 +248,7 @@ const AllocateAddressesRequest = models.AllocateAddressesRequest;
 const NatGatewayAddress = models.NatGatewayAddress;
 const CreateRouteTableResponse = models.CreateRouteTableResponse;
 const ModifySecurityGroupAttributeResponse = models.ModifySecurityGroupAttributeResponse;
+const AddressTemplateItem = models.AddressTemplateItem;
 const ModifyAddressAttributeResponse = models.ModifyAddressAttributeResponse;
 const AttachClassicLinkVpcRequest = models.AttachClassicLinkVpcRequest;
 const GatewayFlowMonitorDetail = models.GatewayFlowMonitorDetail;
@@ -271,6 +274,7 @@ const CreateDefaultVpcResponse = models.CreateDefaultVpcResponse;
 const ModifyVpcAttributeResponse = models.ModifyVpcAttributeResponse;
 const ModifyVpnConnectionAttributeResponse = models.ModifyVpnConnectionAttributeResponse;
 const PrivateIpAddressSpecification = models.PrivateIpAddressSpecification;
+const AlgType = models.AlgType;
 const MigratePrivateIpAddressResponse = models.MigratePrivateIpAddressResponse;
 const DeleteRouteTableResponse = models.DeleteRouteTableResponse;
 const AccountAttribute = models.AccountAttribute;
@@ -407,6 +411,7 @@ const ModifyPrivateIpAddressesAttributeRequest = models.ModifyPrivateIpAddresses
 const ResetNatGatewayConnectionResponse = models.ResetNatGatewayConnectionResponse;
 const CreateSecurityGroupRequest = models.CreateSecurityGroupRequest;
 const ModifyCcnAttributeResponse = models.ModifyCcnAttributeResponse;
+const DescribeSecurityGroupLimitsRequest = models.DescribeSecurityGroupLimitsRequest;
 const DescribeClassicLinkInstancesRequest = models.DescribeClassicLinkInstancesRequest;
 const CreateServiceTemplateResponse = models.CreateServiceTemplateResponse;
 const DeleteNetworkInterfaceResponse = models.DeleteNetworkInterfaceResponse;
@@ -535,7 +540,7 @@ class VpcClient extends AbstractClient {
     }
 
     /**
-     * 接口支持创建[设备带宽包](https://cloud.tencent.com/document/product/684/15246#.E8.AE.BE.E5.A4.87.E5.B8.A6.E5.AE.BD.E5.8C.85)和[ip带宽包](https://cloud.tencent.com/document/product/684/15246#ip-.E5.B8.A6.E5.AE.BD.E5.8C.85)
+     * 接口支持创建[设备带宽包](https://cloud.tencent.com/document/product/684/15246#.E8.AE.BE.E5.A4.87.E5.B8.A6.E5.AE.BD.E5.8C.85)和[IP带宽包](https://cloud.tencent.com/document/product/684/15246#ip-.E5.B8.A6.E5.AE.BD.E5.8C.85)
      * @param {CreateBandwidthPackageRequest} req
      * @param {function(string, CreateBandwidthPackageResponse):void} cb
      * @public
@@ -559,6 +564,7 @@ class VpcClient extends AbstractClient {
     /**
      * 本接口(CreateRouteTable)用于创建路由表。
 * 创建了VPC后，系统会创建一个默认路由表，所有新建的子网都会关联到默认路由表。默认情况下您可以直接使用默认路由表来管理您的路由策略。当您的路由策略较多时，您可以调用创建路由表接口创建更多路由表管理您的路由策略。
+* 创建路由表同时可以绑定标签, 应答里的标签列表代表添加成功的标签。
      * @param {CreateRouteTableRequest} req
      * @param {function(string, CreateRouteTableResponse):void} cb
      * @public
@@ -839,6 +845,7 @@ class VpcClient extends AbstractClient {
 * 您可以创建的最小网段子网掩码为28（有16个IP地址），最大网段子网掩码为16（65,536个IP地址）。
 * 同一个VPC内，多个子网的网段不能重叠。
 * 子网创建后会自动关联到默认路由表。
+* 创建子网同时可以绑定标签, 应答里的标签列表代表添加成功的标签。
      * @param {CreateSubnetsRequest} req
      * @param {function(string, CreateSubnetsResponse):void} cb
      * @public
@@ -956,6 +963,7 @@ class VpcClient extends AbstractClient {
 * 您可以创建的最小网段子网掩码为28（有16个IP地址），最大网段子网掩码为16（65,536个IP地址）。
 * 同一个VPC内，多个子网的网段不能重叠。
 * 子网创建后会自动关联到默认路由表。
+* 创建子网同时可以绑定标签, 应答里的标签列表代表添加成功的标签。
      * @param {CreateSubnetRequest} req
      * @param {function(string, CreateSubnetResponse):void} cb
      * @public
@@ -1047,6 +1055,7 @@ class VpcClient extends AbstractClient {
      * 本接口(CreateVpc)用于创建私有网络(VPC)。
 * 用户可以创建的最小网段子网掩码为28（有16个IP地址），最大网段子网掩码为16（65,536个IP地址）,如果规划VPC网段请参见VPC网段规划说明。
 * 同一个地域能创建的VPC资源个数也是有限制的，详见 <a href="https://cloud.tencent.com/doc/product/215/537" title="VPC使用限制">VPC使用限制</a>,如果需要扩充请联系在线客服。
+* 创建VPC同时可以绑定标签, 应答里的标签列表代表添加成功的标签。
      * @param {CreateVpcRequest} req
      * @param {function(string, CreateVpcResponse):void} cb
      * @public
@@ -1268,7 +1277,7 @@ class VpcClient extends AbstractClient {
     }
 
     /**
-     * 接口支持删除共享带宽包，包括[设备带宽包](https://cloud.tencent.com/document/product/684/15246#.E8.AE.BE.E5.A4.87.E5.B8.A6.E5.AE.BD.E5.8C.85)和[ip带宽包](https://cloud.tencent.com/document/product/684/15246#ip-.E5.B8.A6.E5.AE.BD.E5.8C.85)
+     * 接口支持删除共享带宽包，包括[设备带宽包](https://cloud.tencent.com/document/product/684/15246#.E8.AE.BE.E5.A4.87.E5.B8.A6.E5.AE.BD.E5.8C.85)和[IP带宽包](https://cloud.tencent.com/document/product/684/15246#ip-.E5.B8.A6.E5.AE.BD.E5.8C.85)
      * @param {DeleteBandwidthPackageRequest} req
      * @param {function(string, DeleteBandwidthPackageResponse):void} cb
      * @public
@@ -1769,6 +1778,7 @@ class VpcClient extends AbstractClient {
      * 本接口（CreateSecurityGroup）用于创建新的安全组（SecurityGroup）。
 * 每个账户下每个地域的每个项目的<a href="https://cloud.tencent.com/document/product/213/12453">安全组数量限制</a>。
 * 新建的安全组的入站和出站规则默认都是全部拒绝，在创建后通常您需要再调用CreateSecurityGroupPolicies将安全组的规则设置为需要的规则。
+* 创建安全组同时可以绑定标签, 应答里的标签列表代表添加成功的标签。
      * @param {CreateSecurityGroupRequest} req
      * @param {function(string, CreateSecurityGroupResponse):void} cb
      * @public
@@ -1809,6 +1819,17 @@ class VpcClient extends AbstractClient {
     DeleteRouteTable(req, cb) {
         let resp = new DeleteRouteTableResponse();
         this.request("DeleteRouteTable", req, resp, cb);
+    }
+
+    /**
+     * 本接口(DescribeSecurityGroupLimits)用于查询用户安全组配额。
+     * @param {DescribeSecurityGroupLimitsRequest} req
+     * @param {function(string, DescribeSecurityGroupLimitsResponse):void} cb
+     * @public
+     */
+    DescribeSecurityGroupLimits(req, cb) {
+        let resp = new DescribeSecurityGroupLimitsResponse();
+        this.request("DescribeSecurityGroupLimits", req, resp, cb);
     }
 
     /**
@@ -2051,6 +2072,7 @@ class VpcClient extends AbstractClient {
 
     /**
      * 本接口（CreateCcn）用于创建云联网（CCN）。<br />
+* 创建云联网同时可以绑定标签, 应答里的标签列表代表添加成功的标签。
 每个账号能创建的云联网实例个数是有限的，详请参考产品文档。如果需要扩充请联系在线客服。
      * @param {CreateCcnRequest} req
      * @param {function(string, CreateCcnResponse):void} cb

@@ -952,19 +952,19 @@ class DescribeTaskDetailResponse extends  AbstractModel {
         this.Status = null;
 
         /**
-         * 任务的创建时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F)。
+         * 任务的创建时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710#52)。
          * @type {string || null}
          */
         this.CreateTime = null;
 
         /**
-         * 任务开始执行的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F)。
+         * 任务开始执行的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710#52)。
          * @type {string || null}
          */
         this.BeginProcessTime = null;
 
         /**
-         * 任务执行完毕的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F)。
+         * 任务执行完毕的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710#52)。
          * @type {string || null}
          */
         this.FinishTime = null;
@@ -2031,6 +2031,50 @@ class OcrFullTextConfigureInfoForUpdate extends  AbstractModel {
             return;
         }
         this.Switch = 'Switch' in params ? params.Switch : null;
+
+    }
+}
+
+/**
+ * 文本违禁任务控制参数
+ * @class
+ */
+class ProhibitedOcrReviewTemplateInfoForUpdate extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 文本违禁任务开关，可选值：
+<li>ON：开启文本违禁任务；</li>
+<li>OFF：关闭文本违禁任务。</li>
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+        /**
+         * 判定涉嫌违规的分数阈值，当智能审核达到该分数以上，认为涉嫌违规，不填默认为 100 分。取值范围：0~100。
+         * @type {number || null}
+         */
+        this.BlockConfidence = null;
+
+        /**
+         * 判定需人工复核是否违规的分数阈值，当智能审核达到该分数以上，认为需人工复核，不填默认为 75 分。取值范围：0~100。
+         * @type {number || null}
+         */
+        this.ReviewConfidence = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+        this.BlockConfidence = 'BlockConfidence' in params ? params.BlockConfidence : null;
+        this.ReviewConfidence = 'ReviewConfidence' in params ? params.ReviewConfidence : null;
 
     }
 }
@@ -5682,6 +5726,15 @@ class ModifyContentReviewTemplateRequest extends  AbstractModel {
         this.PoliticalConfigure = null;
 
         /**
+         * 违禁控制参数。违禁内容包括：
+<li>谩骂；</li>
+<li>涉毒违法。</li>
+注意：此参数尚未支持。
+         * @type {ProhibitedConfigureInfoForUpdate || null}
+         */
+        this.ProhibitedConfigure = null;
+
+        /**
          * 用户自定义内容审核控制参数。
          * @type {UserDefineConfigureInfoForUpdate || null}
          */
@@ -5716,6 +5769,12 @@ class ModifyContentReviewTemplateRequest extends  AbstractModel {
             let obj = new PoliticalConfigureInfoForUpdate();
             obj.deserialize(params.PoliticalConfigure)
             this.PoliticalConfigure = obj;
+        }
+
+        if (params.ProhibitedConfigure) {
+            let obj = new ProhibitedConfigureInfoForUpdate();
+            obj.deserialize(params.ProhibitedConfigure)
+            this.ProhibitedConfigure = obj;
         }
 
         if (params.UserDefineConfigure) {
@@ -6063,6 +6122,51 @@ class ModifyImageSpriteTemplateRequest extends  AbstractModel {
         this.RowCount = 'RowCount' in params ? params.RowCount : null;
         this.ColumnCount = 'ColumnCount' in params ? params.ColumnCount : null;
         this.FillType = 'FillType' in params ? params.FillType : null;
+
+    }
+}
+
+/**
+ * 违禁任务控制参数
+ * @class
+ */
+class ProhibitedConfigureInfoForUpdate extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 语音违禁控制参数。
+         * @type {ProhibitedAsrReviewTemplateInfoForUpdate || null}
+         */
+        this.AsrReviewInfo = null;
+
+        /**
+         * 文本违禁控制参数。
+         * @type {ProhibitedOcrReviewTemplateInfoForUpdate || null}
+         */
+        this.OcrReviewInfo = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.AsrReviewInfo) {
+            let obj = new ProhibitedAsrReviewTemplateInfoForUpdate();
+            obj.deserialize(params.AsrReviewInfo)
+            this.AsrReviewInfo = obj;
+        }
+
+        if (params.OcrReviewInfo) {
+            let obj = new ProhibitedOcrReviewTemplateInfoForUpdate();
+            obj.deserialize(params.OcrReviewInfo)
+            this.OcrReviewInfo = obj;
+        }
 
     }
 }
@@ -10346,6 +10450,36 @@ class MediaTranscodeItem extends  AbstractModel {
 }
 
 /**
+ * 智能标签任务控制参数
+ * @class
+ */
+class TagConfigureInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 智能标签任务开关，可选值：
+<li>ON：开启智能标签任务；</li>
+<li>OFF：关闭智能标签任务。</li>
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+
+    }
+}
+
+/**
  * DescribePersonSamples返回参数结构体
  * @class
  */
@@ -12156,20 +12290,32 @@ class CosInputInfo extends  AbstractModel {
 }
 
 /**
- * 智能标签任务控制参数
+ * 语音违禁任务控制参数
  * @class
  */
-class TagConfigureInfo extends  AbstractModel {
+class ProhibitedAsrReviewTemplateInfoForUpdate extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 智能标签任务开关，可选值：
-<li>ON：开启智能标签任务；</li>
-<li>OFF：关闭智能标签任务。</li>
+         * 语音违禁任务开关，可选值：
+<li>ON：开启语音违禁任务；</li>
+<li>OFF：关闭语音违禁任务。</li>
          * @type {string || null}
          */
         this.Switch = null;
+
+        /**
+         * 判定涉嫌违规的分数阈值，当智能审核达到该分数以上，认为涉嫌违规，不填默认为 100 分。取值范围：0~100。
+         * @type {number || null}
+         */
+        this.BlockConfidence = null;
+
+        /**
+         * 判定需人工复核是否违规的分数阈值，当智能审核达到该分数以上，认为需人工复核，不填默认为 75 分。取值范围：0~100。
+         * @type {number || null}
+         */
+        this.ReviewConfidence = null;
 
     }
 
@@ -12181,6 +12327,8 @@ class TagConfigureInfo extends  AbstractModel {
             return;
         }
         this.Switch = 'Switch' in params ? params.Switch : null;
+        this.BlockConfidence = 'BlockConfidence' in params ? params.BlockConfidence : null;
+        this.ReviewConfidence = 'ReviewConfidence' in params ? params.ReviewConfidence : null;
 
     }
 }
@@ -17780,6 +17928,15 @@ class CreateContentReviewTemplateRequest extends  AbstractModel {
         this.PoliticalConfigure = null;
 
         /**
+         * 违禁控制参数。违禁内容包括：
+<li>谩骂；</li>
+<li>涉毒违法。</li>
+注意：此参数尚未支持。
+         * @type {ProhibitedConfigureInfo || null}
+         */
+        this.ProhibitedConfigure = null;
+
+        /**
          * 用户自定义内容审核控制参数。
          * @type {UserDefineConfigureInfo || null}
          */
@@ -17813,6 +17970,12 @@ class CreateContentReviewTemplateRequest extends  AbstractModel {
             let obj = new PoliticalConfigureInfo();
             obj.deserialize(params.PoliticalConfigure)
             this.PoliticalConfigure = obj;
+        }
+
+        if (params.ProhibitedConfigure) {
+            let obj = new ProhibitedConfigureInfo();
+            obj.deserialize(params.ProhibitedConfigure)
+            this.ProhibitedConfigure = obj;
         }
 
         if (params.UserDefineConfigure) {
@@ -18319,6 +18482,7 @@ module.exports = {
     AiReviewTaskProhibitedAsrResult: AiReviewTaskProhibitedAsrResult,
     DeleteWorkflowResponse: DeleteWorkflowResponse,
     OcrFullTextConfigureInfoForUpdate: OcrFullTextConfigureInfoForUpdate,
+    ProhibitedOcrReviewTemplateInfoForUpdate: ProhibitedOcrReviewTemplateInfoForUpdate,
     DeleteAnimatedGraphicsTemplateResponse: DeleteAnimatedGraphicsTemplateResponse,
     AiReviewTaskProhibitedOcrResult: AiReviewTaskProhibitedOcrResult,
     AiSampleTagOperation: AiSampleTagOperation,
@@ -18388,6 +18552,7 @@ module.exports = {
     TagConfigureInfoForUpdate: TagConfigureInfoForUpdate,
     DescribeTranscodeTemplatesResponse: DescribeTranscodeTemplatesResponse,
     ModifyImageSpriteTemplateRequest: ModifyImageSpriteTemplateRequest,
+    ProhibitedConfigureInfoForUpdate: ProhibitedConfigureInfoForUpdate,
     ContentReviewTemplateItem: ContentReviewTemplateItem,
     MediaSampleSnapshotItem: MediaSampleSnapshotItem,
     AiReviewProhibitedOcrTaskInput: AiReviewProhibitedOcrTaskInput,
@@ -18464,6 +18629,7 @@ module.exports = {
     DeleteTranscodeTemplateResponse: DeleteTranscodeTemplateResponse,
     AiReviewTaskPoliticalAsrResult: AiReviewTaskPoliticalAsrResult,
     MediaTranscodeItem: MediaTranscodeItem,
+    TagConfigureInfo: TagConfigureInfo,
     DescribePersonSamplesResponse: DescribePersonSamplesResponse,
     CreateSnapshotByTimeOffsetTemplateRequest: CreateSnapshotByTimeOffsetTemplateRequest,
     TextWatermarkTemplateInputForUpdate: TextWatermarkTemplateInputForUpdate,
@@ -18498,7 +18664,7 @@ module.exports = {
     MediaAiAnalysisCoverItem: MediaAiAnalysisCoverItem,
     UserDefineConfigureInfo: UserDefineConfigureInfo,
     CosInputInfo: CosInputInfo,
-    TagConfigureInfo: TagConfigureInfo,
+    ProhibitedAsrReviewTemplateInfoForUpdate: ProhibitedAsrReviewTemplateInfoForUpdate,
     TranscodeTaskInput: TranscodeTaskInput,
     DescribeWordSamplesResponse: DescribeWordSamplesResponse,
     FaceConfigureInfo: FaceConfigureInfo,

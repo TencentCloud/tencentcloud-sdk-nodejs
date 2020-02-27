@@ -16,30 +16,22 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
-const StorageInfo = models.StorageInfo;
-const IsolateMysqlInstanceRequest = models.IsolateMysqlInstanceRequest;
-const FunctionInfo = models.FunctionInfo;
-const CreateMysqlInstanceRequest = models.CreateMysqlInstanceRequest;
+const ModifyEnvResponse = models.ModifyEnvResponse;
 const CommonServiceAPIResponse = models.CommonServiceAPIResponse;
-const CreateMysqlInstanceResponse = models.CreateMysqlInstanceResponse;
-const ModifyDatabaseACLRequest = models.ModifyDatabaseACLRequest;
+const DescribeDatabaseACLResponse = models.DescribeDatabaseACLResponse;
+const StorageInfo = models.StorageInfo;
+const DatabasesInfo = models.DatabasesInfo;
+const ModifyEnvRequest = models.ModifyEnvRequest;
+const EnvInfo = models.EnvInfo;
+const FunctionInfo = models.FunctionInfo;
 const DescribeEnvsRequest = models.DescribeEnvsRequest;
+const ModifyDatabaseACLRequest = models.ModifyDatabaseACLRequest;
+const CommonServiceAPIRequest = models.CommonServiceAPIRequest;
+const DescribeDatabaseACLRequest = models.DescribeDatabaseACLRequest;
+const DescribeEnvsResponse = models.DescribeEnvsResponse;
 const ModifyDatabaseACLResponse = models.ModifyDatabaseACLResponse;
 const StaticStorageInfo = models.StaticStorageInfo;
-const ModifyEnvResponse = models.ModifyEnvResponse;
 const LogServiceInfo = models.LogServiceInfo;
-const DatabasesInfo = models.DatabasesInfo;
-const DescribeDatabaseACLRequest = models.DescribeDatabaseACLRequest;
-const OfflineMysqlInstanceRequest = models.OfflineMysqlInstanceRequest;
-const OfflineMysqlInstanceResponse = models.OfflineMysqlInstanceResponse;
-const UpgradeMysqlInstanceResponse = models.UpgradeMysqlInstanceResponse;
-const DescribeDatabaseACLResponse = models.DescribeDatabaseACLResponse;
-const EnvInfo = models.EnvInfo;
-const ModifyEnvRequest = models.ModifyEnvRequest;
-const IsolateMysqlInstanceResponse = models.IsolateMysqlInstanceResponse;
-const CommonServiceAPIRequest = models.CommonServiceAPIRequest;
-const DescribeEnvsResponse = models.DescribeEnvsResponse;
-const UpgradeMysqlInstanceRequest = models.UpgradeMysqlInstanceRequest;
 
 
 /**
@@ -52,6 +44,39 @@ class TcbClient extends AbstractClient {
         super("tcb.tencentcloudapi.com", "2018-06-08", credential, region, profile);
     }
     
+    /**
+     * TCB云API统一入口
+     * @param {CommonServiceAPIRequest} req
+     * @param {function(string, CommonServiceAPIResponse):void} cb
+     * @public
+     */
+    CommonServiceAPI(req, cb) {
+        let resp = new CommonServiceAPIResponse();
+        this.request("CommonServiceAPI", req, resp, cb);
+    }
+
+    /**
+     * 修改数据库权限
+     * @param {ModifyDatabaseACLRequest} req
+     * @param {function(string, ModifyDatabaseACLResponse):void} cb
+     * @public
+     */
+    ModifyDatabaseACL(req, cb) {
+        let resp = new ModifyDatabaseACLResponse();
+        this.request("ModifyDatabaseACL", req, resp, cb);
+    }
+
+    /**
+     * 获取数据库权限
+     * @param {DescribeDatabaseACLRequest} req
+     * @param {function(string, DescribeDatabaseACLResponse):void} cb
+     * @public
+     */
+    DescribeDatabaseACL(req, cb) {
+        let resp = new DescribeDatabaseACLResponse();
+        this.request("DescribeDatabaseACL", req, resp, cb);
+    }
+
     /**
      * 更新环境信息
      * @param {ModifyEnvRequest} req
@@ -72,83 +97,6 @@ class TcbClient extends AbstractClient {
     DescribeEnvs(req, cb) {
         let resp = new DescribeEnvsResponse();
         this.request("DescribeEnvs", req, resp, cb);
-    }
-
-    /**
-     * 创建mysql实例
-     * @param {CreateMysqlInstanceRequest} req
-     * @param {function(string, CreateMysqlInstanceResponse):void} cb
-     * @public
-     */
-    CreateMysqlInstance(req, cb) {
-        let resp = new CreateMysqlInstanceResponse();
-        this.request("CreateMysqlInstance", req, resp, cb);
-    }
-
-    /**
-     * 下线mysql实例
-     * @param {OfflineMysqlInstanceRequest} req
-     * @param {function(string, OfflineMysqlInstanceResponse):void} cb
-     * @public
-     */
-    OfflineMysqlInstance(req, cb) {
-        let resp = new OfflineMysqlInstanceResponse();
-        this.request("OfflineMysqlInstance", req, resp, cb);
-    }
-
-    /**
-     * 修改数据库权限
-     * @param {ModifyDatabaseACLRequest} req
-     * @param {function(string, ModifyDatabaseACLResponse):void} cb
-     * @public
-     */
-    ModifyDatabaseACL(req, cb) {
-        let resp = new ModifyDatabaseACLResponse();
-        this.request("ModifyDatabaseACL", req, resp, cb);
-    }
-
-    /**
-     * 升级mysql实例
-     * @param {UpgradeMysqlInstanceRequest} req
-     * @param {function(string, UpgradeMysqlInstanceResponse):void} cb
-     * @public
-     */
-    UpgradeMysqlInstance(req, cb) {
-        let resp = new UpgradeMysqlInstanceResponse();
-        this.request("UpgradeMysqlInstance", req, resp, cb);
-    }
-
-    /**
-     * TCB云API统一入口
-     * @param {CommonServiceAPIRequest} req
-     * @param {function(string, CommonServiceAPIResponse):void} cb
-     * @public
-     */
-    CommonServiceAPI(req, cb) {
-        let resp = new CommonServiceAPIResponse();
-        this.request("CommonServiceAPI", req, resp, cb);
-    }
-
-    /**
-     * 获取数据库权限
-     * @param {DescribeDatabaseACLRequest} req
-     * @param {function(string, DescribeDatabaseACLResponse):void} cb
-     * @public
-     */
-    DescribeDatabaseACL(req, cb) {
-        let resp = new DescribeDatabaseACLResponse();
-        this.request("DescribeDatabaseACL", req, resp, cb);
-    }
-
-    /**
-     * 隔离mysql实例
-     * @param {IsolateMysqlInstanceRequest} req
-     * @param {function(string, IsolateMysqlInstanceResponse):void} cb
-     * @public
-     */
-    IsolateMysqlInstance(req, cb) {
-        let resp = new IsolateMysqlInstanceResponse();
-        this.request("IsolateMysqlInstance", req, resp, cb);
     }
 
 

@@ -189,6 +189,13 @@ class GetFederationTokenResponse extends  AbstractModel {
         this.ExpiredTime = null;
 
         /**
+         * 证书有效的时间，以 iso8601 格式的 UTC 时间表示
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Expiration = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -210,6 +217,7 @@ class GetFederationTokenResponse extends  AbstractModel {
             this.Credentials = obj;
         }
         this.ExpiredTime = 'ExpiredTime' in params ? params.ExpiredTime : null;
+        this.Expiration = 'Expiration' in params ? params.Expiration : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }

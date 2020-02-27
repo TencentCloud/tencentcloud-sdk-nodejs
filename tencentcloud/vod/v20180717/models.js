@@ -2545,24 +2545,42 @@ class DeleteSampleSnapshotTemplateRequest extends  AbstractModel {
 }
 
 /**
- * 智能分类结果
+ * DescribeStorageData返回参数结构体
  * @class
  */
-class MediaAiAnalysisClassificationItem extends  AbstractModel {
+class DescribeStorageDataResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 智能分类的类别名称。
-         * @type {string || null}
-         */
-        this.Classification = null;
-
-        /**
-         * 智能分类的可信度，取值范围是 0 到 100。
+         * 当前媒体总量。
          * @type {number || null}
          */
-        this.Confidence = null;
+        this.MediaCount = null;
+
+        /**
+         * 当前总存储量，单位是字节。
+         * @type {number || null}
+         */
+        this.TotalStorage = null;
+
+        /**
+         * 当前低频存储量，单位是字节。
+         * @type {number || null}
+         */
+        this.InfrequentStorage = null;
+
+        /**
+         * 当前标准存储量，单位是字节。
+         * @type {number || null}
+         */
+        this.StandardStorage = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
 
     }
 
@@ -2573,8 +2591,11 @@ class MediaAiAnalysisClassificationItem extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Classification = 'Classification' in params ? params.Classification : null;
-        this.Confidence = 'Confidence' in params ? params.Confidence : null;
+        this.MediaCount = 'MediaCount' in params ? params.MediaCount : null;
+        this.TotalStorage = 'TotalStorage' in params ? params.TotalStorage : null;
+        this.InfrequentStorage = 'InfrequentStorage' in params ? params.InfrequentStorage : null;
+        this.StandardStorage = 'StandardStorage' in params ? params.StandardStorage : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3403,20 +3424,48 @@ class PushUrlCacheResponse extends  AbstractModel {
 }
 
 /**
- * 视频片头片尾识别任务控制参数
+ * 对视频做采样截图任务结果类型
  * @class
  */
-class HeadTailConfigureInfo extends  AbstractModel {
+class MediaProcessTaskSampleSnapshotResult extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 视频片头片尾识别任务开关，可选值：
-<li>ON：开启智能视频片头片尾识别任务；</li>
-<li>OFF：关闭智能视频片头片尾识别任务。</li>
+         * 任务状态，有 PROCESSING，SUCCESS 和 FAIL 三种。
          * @type {string || null}
          */
-        this.Switch = null;
+        this.Status = null;
+
+        /**
+         * 错误码，0 表示成功，其他值表示失败：
+<li>40000：输入参数不合法，请检查输入参数；</li>
+<li>60000：源文件错误（如视频数据损坏），请确认源文件是否正常；</li>
+<li>70000：内部服务错误，建议重试。</li>
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.ErrCode = null;
+
+        /**
+         * 错误信息。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Message = null;
+
+        /**
+         * 对视频做采样截图任务输入。
+         * @type {SampleSnapshotTaskInput || null}
+         */
+        this.Input = null;
+
+        /**
+         * 对视频做采样截图任务输出。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {MediaSampleSnapshotItem || null}
+         */
+        this.Output = null;
 
     }
 
@@ -3427,7 +3476,21 @@ class HeadTailConfigureInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Switch = 'Switch' in params ? params.Switch : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.ErrCode = 'ErrCode' in params ? params.ErrCode : null;
+        this.Message = 'Message' in params ? params.Message : null;
+
+        if (params.Input) {
+            let obj = new SampleSnapshotTaskInput();
+            obj.deserialize(params.Input)
+            this.Input = obj;
+        }
+
+        if (params.Output) {
+            let obj = new MediaSampleSnapshotItem();
+            obj.deserialize(params.Output)
+            this.Output = obj;
+        }
 
     }
 }
@@ -3492,18 +3555,76 @@ class TerrorismImgReviewTemplateInfoForUpdate extends  AbstractModel {
 }
 
 /**
- * 文本全文识别输出。
+ * ModifyTranscodeTemplate请求参数结构体
  * @class
  */
-class AiRecognitionTaskOcrFullTextResultOutput extends  AbstractModel {
+class ModifyTranscodeTemplateRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 文本全文识别结果集。
-         * @type {Array.<AiRecognitionTaskOcrFullTextSegmentItem> || null}
+         * 转码模板唯一标识。
+         * @type {number || null}
          */
-        this.SegmentSet = null;
+        this.Definition = null;
+
+        /**
+         * 封装格式，可选值：mp4、flv、hls、mp3、flac、ogg、m4a。其中，mp3、flac、ogg、m4a 为纯音频文件。
+         * @type {string || null}
+         */
+        this.Container = null;
+
+        /**
+         * 转码模板名称，长度限制：64 个字符。
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 模板描述信息，长度限制：256 个字节。
+         * @type {string || null}
+         */
+        this.Comment = null;
+
+        /**
+         * 是否去除视频数据，可选值：
+<li>0：保留</li>
+<li>1：去除</li>
+         * @type {number || null}
+         */
+        this.RemoveVideo = null;
+
+        /**
+         * 是否去除音频数据，可选值：
+<li>0：保留</li>
+<li>1：去除</li>
+         * @type {number || null}
+         */
+        this.RemoveAudio = null;
+
+        /**
+         * 视频流配置参数。
+         * @type {VideoTemplateInfoForUpdate || null}
+         */
+        this.VideoTemplate = null;
+
+        /**
+         * 音频流配置参数。
+         * @type {AudioTemplateInfoForUpdate || null}
+         */
+        this.AudioTemplate = null;
+
+        /**
+         * 极速高清转码参数。
+         * @type {TEHDConfigForUpdate || null}
+         */
+        this.TEHDConfig = null;
+
+        /**
+         * 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
+         * @type {number || null}
+         */
+        this.SubAppId = null;
 
     }
 
@@ -3514,15 +3635,31 @@ class AiRecognitionTaskOcrFullTextResultOutput extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.Definition = 'Definition' in params ? params.Definition : null;
+        this.Container = 'Container' in params ? params.Container : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Comment = 'Comment' in params ? params.Comment : null;
+        this.RemoveVideo = 'RemoveVideo' in params ? params.RemoveVideo : null;
+        this.RemoveAudio = 'RemoveAudio' in params ? params.RemoveAudio : null;
 
-        if (params.SegmentSet) {
-            this.SegmentSet = new Array();
-            for (let z in params.SegmentSet) {
-                let obj = new AiRecognitionTaskOcrFullTextSegmentItem();
-                obj.deserialize(params.SegmentSet[z]);
-                this.SegmentSet.push(obj);
-            }
+        if (params.VideoTemplate) {
+            let obj = new VideoTemplateInfoForUpdate();
+            obj.deserialize(params.VideoTemplate)
+            this.VideoTemplate = obj;
         }
+
+        if (params.AudioTemplate) {
+            let obj = new AudioTemplateInfoForUpdate();
+            obj.deserialize(params.AudioTemplate)
+            this.AudioTemplate = obj;
+        }
+
+        if (params.TEHDConfig) {
+            let obj = new TEHDConfigForUpdate();
+            obj.deserialize(params.TEHDConfig)
+            this.TEHDConfig = obj;
+        }
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
 
     }
 }
@@ -3837,6 +3974,56 @@ class CreateProcedureTemplateRequest extends  AbstractModel {
             obj.deserialize(params.AiRecognitionTask)
             this.AiRecognitionTask = obj;
         }
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
+
+    }
+}
+
+/**
+ * DescribeMediaProcessUsageData请求参数结构体
+ * @class
+ */
+class DescribeMediaProcessUsageDataRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 起始日期。使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F)。
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * 结束日期，需大于等于起始日期。使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F)。
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * 查询视频处理任务类型，默认查询转码。目前只支持转码类型数据查询。
+<li>Transcode: 转码</li>
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * 点播 [子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.Type = 'Type' in params ? params.Type : null;
         this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
 
     }
@@ -4327,76 +4514,18 @@ class FileDeleteTask extends  AbstractModel {
 }
 
 /**
- * ModifyTranscodeTemplate请求参数结构体
+ * 文本全文识别输出。
  * @class
  */
-class ModifyTranscodeTemplateRequest extends  AbstractModel {
+class AiRecognitionTaskOcrFullTextResultOutput extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 转码模板唯一标识。
-         * @type {number || null}
+         * 文本全文识别结果集。
+         * @type {Array.<AiRecognitionTaskOcrFullTextSegmentItem> || null}
          */
-        this.Definition = null;
-
-        /**
-         * 封装格式，可选值：mp4、flv、hls、mp3、flac、ogg、m4a。其中，mp3、flac、ogg、m4a 为纯音频文件。
-         * @type {string || null}
-         */
-        this.Container = null;
-
-        /**
-         * 转码模板名称，长度限制：64 个字符。
-         * @type {string || null}
-         */
-        this.Name = null;
-
-        /**
-         * 模板描述信息，长度限制：256 个字节。
-         * @type {string || null}
-         */
-        this.Comment = null;
-
-        /**
-         * 是否去除视频数据，可选值：
-<li>0：保留</li>
-<li>1：去除</li>
-         * @type {number || null}
-         */
-        this.RemoveVideo = null;
-
-        /**
-         * 是否去除音频数据，可选值：
-<li>0：保留</li>
-<li>1：去除</li>
-         * @type {number || null}
-         */
-        this.RemoveAudio = null;
-
-        /**
-         * 视频流配置参数。
-         * @type {VideoTemplateInfoForUpdate || null}
-         */
-        this.VideoTemplate = null;
-
-        /**
-         * 音频流配置参数。
-         * @type {AudioTemplateInfoForUpdate || null}
-         */
-        this.AudioTemplate = null;
-
-        /**
-         * 极速高清转码参数。
-         * @type {TEHDConfigForUpdate || null}
-         */
-        this.TEHDConfig = null;
-
-        /**
-         * 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
-         * @type {number || null}
-         */
-        this.SubAppId = null;
+        this.SegmentSet = null;
 
     }
 
@@ -4407,31 +4536,15 @@ class ModifyTranscodeTemplateRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Definition = 'Definition' in params ? params.Definition : null;
-        this.Container = 'Container' in params ? params.Container : null;
-        this.Name = 'Name' in params ? params.Name : null;
-        this.Comment = 'Comment' in params ? params.Comment : null;
-        this.RemoveVideo = 'RemoveVideo' in params ? params.RemoveVideo : null;
-        this.RemoveAudio = 'RemoveAudio' in params ? params.RemoveAudio : null;
 
-        if (params.VideoTemplate) {
-            let obj = new VideoTemplateInfoForUpdate();
-            obj.deserialize(params.VideoTemplate)
-            this.VideoTemplate = obj;
+        if (params.SegmentSet) {
+            this.SegmentSet = new Array();
+            for (let z in params.SegmentSet) {
+                let obj = new AiRecognitionTaskOcrFullTextSegmentItem();
+                obj.deserialize(params.SegmentSet[z]);
+                this.SegmentSet.push(obj);
+            }
         }
-
-        if (params.AudioTemplate) {
-            let obj = new AudioTemplateInfoForUpdate();
-            obj.deserialize(params.AudioTemplate)
-            this.AudioTemplate = obj;
-        }
-
-        if (params.TEHDConfig) {
-            let obj = new TEHDConfigForUpdate();
-            obj.deserialize(params.TEHDConfig)
-            this.TEHDConfig = obj;
-        }
-        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
 
     }
 }
@@ -5707,6 +5820,131 @@ class MediaMiniProgramReviewInfoItem extends  AbstractModel {
 }
 
 /**
+ * 视频处理任务统计数据。
+ * @class
+ */
+class TaskStatData extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 任务类型。
+<li>Transcode: 转码</li>
+<li>Snapshot: 截图</li>
+         * @type {string || null}
+         */
+        this.TaskType = null;
+
+        /**
+         * 任务数统计数据概览。
+<li>Transcode: 用量单位为秒</li>
+         * @type {Array.<TaskStatDataItem> || null}
+         */
+        this.Summary = null;
+
+        /**
+         * 不同规格任务统计数据详情。
+转码规格：
+<li>Remuxing: 转封装</li>
+<li>Audio: 音频转码</li>
+<li>Standard.H264.SD: H.264编码方式标清转码</li>
+<li>Standard.H264.HD: H.264编码方式高清转码</li>
+<li>Standard.H264.FHD: H.264编码方式全高清转码</li>
+<li>Standard.H264.2K: H.264编码方式2K转码</li>
+<li>Standard.H264.4K: H.264编码方式4K转码</li>
+<li>Standard.H265.SD: H.265编码方式标清转码</li>
+<li>Standard.H265.HD: H.265编码方式高清转码</li>
+<li>Standard.H265.FHD: H.265编码方式全高清转码</li>
+<li>Standard.H265.2K: H.265编码方式2K转码</li>
+<li>Standard.H265.4K: H.265编码方式4K转码</li>
+<li>TESHD-10.H264.SD: H.264编码方式标清极速高清转码</li>
+<li>TESHD-10.H264.HD: H.264编码方式高清极速高清转码</li>
+<li>TESHD-10.H264.FHD: H.264编码方式全高清极速高清转码</li>
+<li>TESHD-10.H264.2K: H.264编码方式2K极速高清转码</li>
+<li>TESHD-10.H264.4K: H.264编码方式4K极速高清转码</li>
+<li>TESHD-10.H265.SD: H.265编码方式标清极速高清转码</li>
+<li>TESHD-10.H265.HD: H.265编码方式高清极速高清转码</li>
+<li>TESHD-10.H265.FHD: H.265编码方式全高清极速高清转码</li>
+<li>TESHD-10.H265.2K: H.265编码方式2K极速高清转码</li>
+<li>TESHD-10.H265.4K: H.265编码方式4K极速高清转码</li>
+<li>Edit.Audio: 音频编辑</li>
+<li>Edit.H264.SD: H.264编码方式标清视频编辑</li>
+<li>Edit.H264.HD: H.264编码方式高清视频编辑</li>
+<li>Edit.H264.FHD: H.264编码方式全高清视频编辑</li>
+<li>Edit.H264.2K: H.264编码方式2K视频编辑</li>
+<li>Edit.H264.4K: H.264编码方式4K视频编辑</li>
+<li>Edit.H265.SD: H.265编码方式标清视频编辑</li>
+<li>Edit.H265.HD: H.265编码方式高清视频编辑</li>
+<li>Edit.H265.FHD: H.265编码方式全高清视频编辑</li>
+<li>Edit.H265.2K: H.265编码方式2K视频编辑</li>
+<li>Edit.H265.4K: H.265编码方式4K视频编辑</li>
+         * @type {Array.<SpecificationDataItem> || null}
+         */
+        this.Details = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskType = 'TaskType' in params ? params.TaskType : null;
+
+        if (params.Summary) {
+            this.Summary = new Array();
+            for (let z in params.Summary) {
+                let obj = new TaskStatDataItem();
+                obj.deserialize(params.Summary[z]);
+                this.Summary.push(obj);
+            }
+        }
+
+        if (params.Details) {
+            this.Details = new Array();
+            for (let z in params.Details) {
+                let obj = new SpecificationDataItem();
+                obj.deserialize(params.Details[z]);
+                this.Details.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * 文本全文本识别任务控制参数
+ * @class
+ */
+class OcrFullTextConfigureInfoForUpdate extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 文本全文识别任务开关，可选值：
+<li>ON：开启智能文本全文识别任务；</li>
+<li>OFF：关闭智能文本全文识别任务。</li>
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+
+    }
+}
+
+/**
  * ProcessMediaByProcedure请求参数结构体
  * @class
  */
@@ -6574,6 +6812,50 @@ class AiRecognitionTaskSegmentResult extends  AbstractModel {
 }
 
 /**
+ * 语音违禁任务控制参数
+ * @class
+ */
+class ProhibitedAsrReviewTemplateInfoForUpdate extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 语音违禁任务开关，可选值：
+<li>ON：开启语音违禁任务；</li>
+<li>OFF：关闭语音违禁任务。</li>
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+        /**
+         * 判定涉嫌违规的分数阈值，当智能审核达到该分数以上，认为涉嫌违规，不填默认为 100 分。取值范围：0~100。
+         * @type {number || null}
+         */
+        this.BlockConfidence = null;
+
+        /**
+         * 判定需人工复核是否违规的分数阈值，当智能审核达到该分数以上，认为需人工复核，不填默认为 75 分。取值范围：0~100。
+         * @type {number || null}
+         */
+        this.ReviewConfidence = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+        this.BlockConfidence = 'BlockConfidence' in params ? params.BlockConfidence : null;
+        this.ReviewConfidence = 'ReviewConfidence' in params ? params.ReviewConfidence : null;
+
+    }
+}
+
+/**
  * ModifyAnimatedGraphicsTemplate返回参数结构体
  * @class
  */
@@ -7008,6 +7290,12 @@ class EditMediaRequest extends  AbstractModel {
         this.SessionContext = null;
 
         /**
+         * 任务的优先级，数值越大优先级越高，取值范围是 -10 到 10，不填代表 0。
+         * @type {number || null}
+         */
+        this.TasksPriority = null;
+
+        /**
          * 用于任务去重的识别码，如果一天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。
          * @type {string || null}
          */
@@ -7056,6 +7344,7 @@ class EditMediaRequest extends  AbstractModel {
             this.OutputConfig = obj;
         }
         this.SessionContext = 'SessionContext' in params ? params.SessionContext : null;
+        this.TasksPriority = 'TasksPriority' in params ? params.TasksPriority : null;
         this.SessionId = 'SessionId' in params ? params.SessionId : null;
         this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
 
@@ -7919,6 +8208,51 @@ class DescribeProcedureTemplatesRequest extends  AbstractModel {
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
+
+    }
+}
+
+/**
+ * 违禁任务控制参数
+ * @class
+ */
+class ProhibitedConfigureInfoForUpdate extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 语音违禁控制参数。
+         * @type {ProhibitedAsrReviewTemplateInfoForUpdate || null}
+         */
+        this.AsrReviewInfo = null;
+
+        /**
+         * 文本违禁控制参数。
+         * @type {ProhibitedOcrReviewTemplateInfoForUpdate || null}
+         */
+        this.OcrReviewInfo = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.AsrReviewInfo) {
+            let obj = new ProhibitedAsrReviewTemplateInfoForUpdate();
+            obj.deserialize(params.AsrReviewInfo)
+            this.AsrReviewInfo = obj;
+        }
+
+        if (params.OcrReviewInfo) {
+            let obj = new ProhibitedOcrReviewTemplateInfoForUpdate();
+            obj.deserialize(params.OcrReviewInfo)
+            this.OcrReviewInfo = obj;
+        }
 
     }
 }
@@ -10416,6 +10750,34 @@ class AsrWordsConfigureInfoForUpdate extends  AbstractModel {
 }
 
 /**
+ * DescribeStorageData请求参数结构体
+ * @class
+ */
+class DescribeStorageDataRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
+
+    }
+}
+
+/**
  * DeleteImageSpriteTemplate返回参数结构体
  * @class
  */
@@ -12651,6 +13013,49 @@ class MediaTrackItem extends  AbstractModel {
 }
 
 /**
+ * DescribeStorageDetails返回参数结构体
+ * @class
+ */
+class DescribeStorageDetailsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 存储统计数据，每分钟/小时/天一条数据。
+         * @type {Array.<StatDataItem> || null}
+         */
+        this.Data = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Data) {
+            this.Data = new Array();
+            for (let z in params.Data) {
+                let obj = new StatDataItem();
+                obj.deserialize(params.Data[z]);
+                this.Data.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * PullEvents返回参数结构体
  * @class
  */
@@ -13250,6 +13655,15 @@ class ModifyContentReviewTemplateRequest extends  AbstractModel {
         this.PoliticalConfigure = null;
 
         /**
+         * 违禁控制参数。违禁内容包括：
+<li>谩骂；</li>
+<li>涉毒违法。</li>
+注意：此参数尚未支持。
+         * @type {ProhibitedConfigureInfoForUpdate || null}
+         */
+        this.ProhibitedConfigure = null;
+
+        /**
          * 用户自定义内容审核控制参数。
          * @type {UserDefineConfigureInfoForUpdate || null}
          */
@@ -13304,6 +13718,12 @@ class ModifyContentReviewTemplateRequest extends  AbstractModel {
             let obj = new PoliticalConfigureInfoForUpdate();
             obj.deserialize(params.PoliticalConfigure)
             this.PoliticalConfigure = obj;
+        }
+
+        if (params.ProhibitedConfigure) {
+            let obj = new ProhibitedConfigureInfoForUpdate();
+            obj.deserialize(params.ProhibitedConfigure)
+            this.ProhibitedConfigure = obj;
         }
 
         if (params.UserDefineConfigure) {
@@ -13701,6 +14121,48 @@ class SegmentConfigureInfo extends  AbstractModel {
             return;
         }
         this.Switch = 'Switch' in params ? params.Switch : null;
+
+    }
+}
+
+/**
+ * 任务统计数据，包括任务数和用量。
+ * @class
+ */
+class TaskStatDataItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 数据所在时间区间的开始时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F)。如：当时间粒度为天，2018-12-01T00:00:00+08:00，表示2018年12月1日（含）到2018年12月2日（不含）区间。
+         * @type {string || null}
+         */
+        this.Time = null;
+
+        /**
+         * 任务数。
+         * @type {number || null}
+         */
+        this.Count = null;
+
+        /**
+         * 任务用量。
+         * @type {number || null}
+         */
+        this.Usage = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Time = 'Time' in params ? params.Time : null;
+        this.Count = 'Count' in params ? params.Count : null;
+        this.Usage = 'Usage' in params ? params.Usage : null;
 
     }
 }
@@ -15186,24 +15648,44 @@ class CreateClassResponse extends  AbstractModel {
 }
 
 /**
- * 智能按帧标签结果信息
+ * DescribeSampleSnapshotTemplates请求参数结构体
  * @class
  */
-class MediaAiAnalysisFrameTagItem extends  AbstractModel {
+class DescribeSampleSnapshotTemplatesRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 按帧标签名称。
-         * @type {string || null}
+         * 采样截图模板唯一标识过滤条件，数组长度限制：100。
+         * @type {Array.<number> || null}
          */
-        this.Tag = null;
+        this.Definitions = null;
 
         /**
-         * 按帧标签的可信度，取值范围是 0 到 100。
+         * 分页偏移量，默认值：0。
          * @type {number || null}
          */
-        this.Confidence = null;
+        this.Offset = null;
+
+        /**
+         * 返回记录条数，默认值：10，最大值：100。
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 模板类型过滤条件，可选值：
+<li>Preset：系统预置模板；</li>
+<li>Custom：用户自定义模板。</li>
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
+         * @type {number || null}
+         */
+        this.SubAppId = null;
 
     }
 
@@ -15214,8 +15696,11 @@ class MediaAiAnalysisFrameTagItem extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Tag = 'Tag' in params ? params.Tag : null;
-        this.Confidence = 'Confidence' in params ? params.Confidence : null;
+        this.Definitions = 'Definitions' in params ? params.Definitions : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
 
     }
 }
@@ -16057,48 +16542,20 @@ class CreateAIAnalysisTemplateResponse extends  AbstractModel {
 }
 
 /**
- * 对视频做采样截图任务结果类型
+ * 视频片头片尾识别任务控制参数
  * @class
  */
-class MediaProcessTaskSampleSnapshotResult extends  AbstractModel {
+class HeadTailConfigureInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 任务状态，有 PROCESSING，SUCCESS 和 FAIL 三种。
+         * 视频片头片尾识别任务开关，可选值：
+<li>ON：开启智能视频片头片尾识别任务；</li>
+<li>OFF：关闭智能视频片头片尾识别任务。</li>
          * @type {string || null}
          */
-        this.Status = null;
-
-        /**
-         * 错误码，0 表示成功，其他值表示失败：
-<li>40000：输入参数不合法，请检查输入参数；</li>
-<li>60000：源文件错误（如视频数据损坏），请确认源文件是否正常；</li>
-<li>70000：内部服务错误，建议重试。</li>
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.ErrCode = null;
-
-        /**
-         * 错误信息。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.Message = null;
-
-        /**
-         * 对视频做采样截图任务输入。
-         * @type {SampleSnapshotTaskInput || null}
-         */
-        this.Input = null;
-
-        /**
-         * 对视频做采样截图任务输出。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {MediaSampleSnapshotItem || null}
-         */
-        this.Output = null;
+        this.Switch = null;
 
     }
 
@@ -16109,21 +16566,7 @@ class MediaProcessTaskSampleSnapshotResult extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Status = 'Status' in params ? params.Status : null;
-        this.ErrCode = 'ErrCode' in params ? params.ErrCode : null;
-        this.Message = 'Message' in params ? params.Message : null;
-
-        if (params.Input) {
-            let obj = new SampleSnapshotTaskInput();
-            obj.deserialize(params.Input)
-            this.Input = obj;
-        }
-
-        if (params.Output) {
-            let obj = new MediaSampleSnapshotItem();
-            obj.deserialize(params.Output)
-            this.Output = obj;
-        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
 
     }
 }
@@ -16582,6 +17025,49 @@ class ModifyClassRequest extends  AbstractModel {
 }
 
 /**
+ * 指定规格任务统计数据。
+ * @class
+ */
+class SpecificationDataItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 任务规格。
+         * @type {string || null}
+         */
+        this.Specification = null;
+
+        /**
+         * 统计数据。
+         * @type {Array.<TaskStatDataItem> || null}
+         */
+        this.Data = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Specification = 'Specification' in params ? params.Specification : null;
+
+        if (params.Data) {
+            this.Data = new Array();
+            for (let z in params.Data) {
+                let obj = new TaskStatDataItem();
+                obj.deserialize(params.Data[z]);
+                this.Data.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * 极速高清参数配置。
  * @class
  */
@@ -17031,6 +17517,41 @@ class DescribeTaskDetailRequest extends  AbstractModel {
         }
         this.TaskId = 'TaskId' in params ? params.TaskId : null;
         this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
+
+    }
+}
+
+/**
+ * 智能分类结果
+ * @class
+ */
+class MediaAiAnalysisClassificationItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 智能分类的类别名称。
+         * @type {string || null}
+         */
+        this.Classification = null;
+
+        /**
+         * 智能分类的可信度，取值范围是 0 到 100。
+         * @type {number || null}
+         */
+        this.Confidence = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Classification = 'Classification' in params ? params.Classification : null;
+        this.Confidence = 'Confidence' in params ? params.Confidence : null;
 
     }
 }
@@ -18467,6 +18988,15 @@ class CreateContentReviewTemplateRequest extends  AbstractModel {
         this.PoliticalConfigure = null;
 
         /**
+         * 违禁控制参数。违禁内容包括：
+<li>谩骂；</li>
+<li>涉毒违法。</li>
+注意：此参数尚未支持。
+         * @type {ProhibitedConfigureInfo || null}
+         */
+        this.ProhibitedConfigure = null;
+
+        /**
          * 用户自定义内容审核控制参数。
          * @type {UserDefineConfigureInfo || null}
          */
@@ -18513,6 +19043,12 @@ class CreateContentReviewTemplateRequest extends  AbstractModel {
             let obj = new PoliticalConfigureInfo();
             obj.deserialize(params.PoliticalConfigure)
             this.PoliticalConfigure = obj;
+        }
+
+        if (params.ProhibitedConfigure) {
+            let obj = new ProhibitedConfigureInfo();
+            obj.deserialize(params.ProhibitedConfigure)
+            this.ProhibitedConfigure = obj;
         }
 
         if (params.UserDefineConfigure) {
@@ -18827,19 +19363,19 @@ class DescribeTaskDetailResponse extends  AbstractModel {
         this.Status = null;
 
         /**
-         * 任务的创建时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F)。
+         * 任务的创建时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
          * @type {string || null}
          */
         this.CreateTime = null;
 
         /**
-         * 任务开始执行的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F)。
+         * 任务开始执行的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
          * @type {string || null}
          */
         this.BeginProcessTime = null;
 
         /**
-         * 任务执行完毕的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F)。
+         * 任务执行完毕的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
          * @type {string || null}
          */
         this.FinishTime = null;
@@ -19251,20 +19787,24 @@ class CreateProcedureTemplateResponse extends  AbstractModel {
 }
 
 /**
- * 文本全文本识别任务控制参数
+ * DescribeMediaProcessUsageData返回参数结构体
  * @class
  */
-class OcrFullTextConfigureInfoForUpdate extends  AbstractModel {
+class DescribeMediaProcessUsageDataResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 文本全文识别任务开关，可选值：
-<li>ON：开启智能文本全文识别任务；</li>
-<li>OFF：关闭智能文本全文识别任务。</li>
+         * 视频处理统计数据概览，展示所查询任务的概览以及详细数据。
+         * @type {Array.<TaskStatData> || null}
+         */
+        this.MediaProcessDataSet = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.Switch = null;
+        this.RequestId = null;
 
     }
 
@@ -19275,7 +19815,16 @@ class OcrFullTextConfigureInfoForUpdate extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Switch = 'Switch' in params ? params.Switch : null;
+
+        if (params.MediaProcessDataSet) {
+            this.MediaProcessDataSet = new Array();
+            for (let z in params.MediaProcessDataSet) {
+                let obj = new TaskStatData();
+                obj.deserialize(params.MediaProcessDataSet[z]);
+                this.MediaProcessDataSet.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -20262,6 +20811,50 @@ class DeleteSnapshotByTimeOffsetTemplateResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 文本违禁任务控制参数
+ * @class
+ */
+class ProhibitedOcrReviewTemplateInfoForUpdate extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 文本违禁任务开关，可选值：
+<li>ON：开启文本违禁任务；</li>
+<li>OFF：关闭文本违禁任务。</li>
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+        /**
+         * 判定涉嫌违规的分数阈值，当智能审核达到该分数以上，认为涉嫌违规，不填默认为 100 分。取值范围：0~100。
+         * @type {number || null}
+         */
+        this.BlockConfidence = null;
+
+        /**
+         * 判定需人工复核是否违规的分数阈值，当智能审核达到该分数以上，认为需人工复核，不填默认为 75 分。取值范围：0~100。
+         * @type {number || null}
+         */
+        this.ReviewConfidence = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+        this.BlockConfidence = 'BlockConfidence' in params ? params.BlockConfidence : null;
+        this.ReviewConfidence = 'ReviewConfidence' in params ? params.ReviewConfidence : null;
 
     }
 }
@@ -24470,44 +25063,24 @@ class DescribeAnimatedGraphicsTemplatesResponse extends  AbstractModel {
 }
 
 /**
- * DescribeSampleSnapshotTemplates请求参数结构体
+ * 智能按帧标签结果信息
  * @class
  */
-class DescribeSampleSnapshotTemplatesRequest extends  AbstractModel {
+class MediaAiAnalysisFrameTagItem extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 采样截图模板唯一标识过滤条件，数组长度限制：100。
-         * @type {Array.<number> || null}
-         */
-        this.Definitions = null;
-
-        /**
-         * 分页偏移量，默认值：0。
-         * @type {number || null}
-         */
-        this.Offset = null;
-
-        /**
-         * 返回记录条数，默认值：10，最大值：100。
-         * @type {number || null}
-         */
-        this.Limit = null;
-
-        /**
-         * 模板类型过滤条件，可选值：
-<li>Preset：系统预置模板；</li>
-<li>Custom：用户自定义模板。</li>
+         * 按帧标签名称。
          * @type {string || null}
          */
-        this.Type = null;
+        this.Tag = null;
 
         /**
-         * 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
+         * 按帧标签的可信度，取值范围是 0 到 100。
          * @type {number || null}
          */
-        this.SubAppId = null;
+        this.Confidence = null;
 
     }
 
@@ -24518,11 +25091,8 @@ class DescribeSampleSnapshotTemplatesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Definitions = 'Definitions' in params ? params.Definitions : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
-        this.Type = 'Type' in params ? params.Type : null;
-        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
+        this.Tag = 'Tag' in params ? params.Tag : null;
+        this.Confidence = 'Confidence' in params ? params.Confidence : null;
 
     }
 }
@@ -25056,6 +25626,71 @@ class AiAnalysisTaskCoverInput extends  AbstractModel {
             return;
         }
         this.Definition = 'Definition' in params ? params.Definition : null;
+
+    }
+}
+
+/**
+ * DescribeStorageDetails请求参数结构体
+ * @class
+ */
+class DescribeStorageDetailsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 起始时间，格式按照 ISO 8601 标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F)。
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * 结束时间，需大于开始日期，格式按照 ISO 8601 标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F)。
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * 查询时间间隔，有效值：
+<li>Minute：每分钟一个统计数据。</li>
+<li>Hour：每小时一个统计数据。</li>
+<li>Day：每天一个统计数据。</li>
+默认按时间跨度决定，小于1小时按分钟，小于等于7天按小时，大于7天按天展示。
+         * @type {string || null}
+         */
+        this.Interval = null;
+
+        /**
+         * 查询的存储类型，有效值：
+<li>TotalStorage：存储总量。</li>
+<li>StandardStorage：标准存储。</li>
+<li>InfrequentStorage：低频存储。</li>
+默认值为 TotalStorage。
+         * @type {string || null}
+         */
+        this.StorageType = null;
+
+        /**
+         * 点播 [子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
+当该字段为1时，表示以管理员身份查询所有子应用（含主应用）的用量合计。
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.Interval = 'Interval' in params ? params.Interval : null;
+        this.StorageType = 'StorageType' in params ? params.StorageType : null;
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
 
     }
 }
@@ -25842,7 +26477,7 @@ module.exports = {
     ResetProcedureTemplateRequest: ResetProcedureTemplateRequest,
     ComposeMediaResponse: ComposeMediaResponse,
     DeleteSampleSnapshotTemplateRequest: DeleteSampleSnapshotTemplateRequest,
-    MediaAiAnalysisClassificationItem: MediaAiAnalysisClassificationItem,
+    DescribeStorageDataResponse: DescribeStorageDataResponse,
     AudioTemplateInfoForUpdate: AudioTemplateInfoForUpdate,
     ModifySubAppIdInfoRequest: ModifySubAppIdInfoRequest,
     DeletePersonSampleRequest: DeletePersonSampleRequest,
@@ -25858,9 +26493,9 @@ module.exports = {
     AiRecognitionTaskFaceResult: AiRecognitionTaskFaceResult,
     AiRecognitionTaskHeadTailResultInput: AiRecognitionTaskHeadTailResultInput,
     PushUrlCacheResponse: PushUrlCacheResponse,
-    HeadTailConfigureInfo: HeadTailConfigureInfo,
+    MediaProcessTaskSampleSnapshotResult: MediaProcessTaskSampleSnapshotResult,
     TerrorismImgReviewTemplateInfoForUpdate: TerrorismImgReviewTemplateInfoForUpdate,
-    AiRecognitionTaskOcrFullTextResultOutput: AiRecognitionTaskOcrFullTextResultOutput,
+    ModifyTranscodeTemplateRequest: ModifyTranscodeTemplateRequest,
     AiAnalysisTaskHighlightResult: AiAnalysisTaskHighlightResult,
     DeleteAIAnalysisTemplateResponse: DeleteAIAnalysisTemplateResponse,
     TextWatermarkTemplateInputForUpdate: TextWatermarkTemplateInputForUpdate,
@@ -25868,6 +26503,7 @@ module.exports = {
     AiRecognitionTaskOcrWordsResultInput: AiRecognitionTaskOcrWordsResultInput,
     AiReviewPornTaskInput: AiReviewPornTaskInput,
     CreateProcedureTemplateRequest: CreateProcedureTemplateRequest,
+    DescribeMediaProcessUsageDataRequest: DescribeMediaProcessUsageDataRequest,
     CreatePersonSampleRequest: CreatePersonSampleRequest,
     MediaTransitionItem: MediaTransitionItem,
     MediaAiAnalysisCoverItem: MediaAiAnalysisCoverItem,
@@ -25879,7 +26515,7 @@ module.exports = {
     AiAnalysisTaskCoverResult: AiAnalysisTaskCoverResult,
     AiAnalysisTaskClassificationOutput: AiAnalysisTaskClassificationOutput,
     FileDeleteTask: FileDeleteTask,
-    ModifyTranscodeTemplateRequest: ModifyTranscodeTemplateRequest,
+    AiRecognitionTaskOcrFullTextResultOutput: AiRecognitionTaskOcrFullTextResultOutput,
     EditMediaTaskInput: EditMediaTaskInput,
     UserDefineAsrTextReviewTemplateInfo: UserDefineAsrTextReviewTemplateInfo,
     DescribeWordSamplesResponse: DescribeWordSamplesResponse,
@@ -25901,6 +26537,8 @@ module.exports = {
     DescribeSnapshotByTimeOffsetTemplatesRequest: DescribeSnapshotByTimeOffsetTemplatesRequest,
     AiRecognitionTaskAsrFullTextResultInput: AiRecognitionTaskAsrFullTextResultInput,
     MediaMiniProgramReviewInfoItem: MediaMiniProgramReviewInfoItem,
+    TaskStatData: TaskStatData,
+    OcrFullTextConfigureInfoForUpdate: OcrFullTextConfigureInfoForUpdate,
     ProcessMediaByProcedureRequest: ProcessMediaByProcedureRequest,
     MediaProcessTaskInput: MediaProcessTaskInput,
     MediaProcessTaskAnimatedGraphicResult: MediaProcessTaskAnimatedGraphicResult,
@@ -25916,6 +26554,7 @@ module.exports = {
     AiRecognitionTaskOcrWordsResult: AiRecognitionTaskOcrWordsResult,
     PornAsrReviewTemplateInfo: PornAsrReviewTemplateInfo,
     AiRecognitionTaskSegmentResult: AiRecognitionTaskSegmentResult,
+    ProhibitedAsrReviewTemplateInfoForUpdate: ProhibitedAsrReviewTemplateInfoForUpdate,
     ModifyAnimatedGraphicsTemplateResponse: ModifyAnimatedGraphicsTemplateResponse,
     ModifyAIAnalysisTemplateResponse: ModifyAIAnalysisTemplateResponse,
     LiveRealTimeClipRequest: LiveRealTimeClipRequest,
@@ -25942,6 +26581,7 @@ module.exports = {
     CreateContentReviewTemplateResponse: CreateContentReviewTemplateResponse,
     HighlightsConfigureInfo: HighlightsConfigureInfo,
     DescribeProcedureTemplatesRequest: DescribeProcedureTemplatesRequest,
+    ProhibitedConfigureInfoForUpdate: ProhibitedConfigureInfoForUpdate,
     TagConfigureInfoForUpdate: TagConfigureInfoForUpdate,
     DeleteWordSamplesRequest: DeleteWordSamplesRequest,
     EmptyTrackItem: EmptyTrackItem,
@@ -25991,6 +26631,7 @@ module.exports = {
     AiSamplePerson: AiSamplePerson,
     MediaAdaptiveDynamicStreamingInfo: MediaAdaptiveDynamicStreamingInfo,
     AsrWordsConfigureInfoForUpdate: AsrWordsConfigureInfoForUpdate,
+    DescribeStorageDataRequest: DescribeStorageDataRequest,
     DeleteImageSpriteTemplateResponse: DeleteImageSpriteTemplateResponse,
     DescribeContentReviewTemplatesResponse: DescribeContentReviewTemplatesResponse,
     TEHDConfig: TEHDConfig,
@@ -26032,6 +26673,7 @@ module.exports = {
     DeleteSampleSnapshotTemplateResponse: DeleteSampleSnapshotTemplateResponse,
     AiAnalysisTaskTagInput: AiAnalysisTaskTagInput,
     MediaTrackItem: MediaTrackItem,
+    DescribeStorageDetailsResponse: DescribeStorageDetailsResponse,
     PullEventsResponse: PullEventsResponse,
     AiRecognitionTaskObjectResultInput: AiRecognitionTaskObjectResultInput,
     OutputVideoStream: OutputVideoStream,
@@ -26051,6 +26693,7 @@ module.exports = {
     AiRecognitionTaskOcrFullTextSegmentTextItem: AiRecognitionTaskOcrFullTextSegmentTextItem,
     SnapshotByTimeOffsetTaskInput: SnapshotByTimeOffsetTaskInput,
     SegmentConfigureInfo: SegmentConfigureInfo,
+    TaskStatDataItem: TaskStatDataItem,
     ParseStreamingManifestResponse: ParseStreamingManifestResponse,
     AiReviewPornOcrTaskOutput: AiReviewPornOcrTaskOutput,
     ApplyUploadRequest: ApplyUploadRequest,
@@ -26077,7 +26720,7 @@ module.exports = {
     AiRecognitionTaskObjectResultOutput: AiRecognitionTaskObjectResultOutput,
     AiReviewProhibitedAsrTaskOutput: AiReviewProhibitedAsrTaskOutput,
     CreateClassResponse: CreateClassResponse,
-    MediaAiAnalysisFrameTagItem: MediaAiAnalysisFrameTagItem,
+    DescribeSampleSnapshotTemplatesRequest: DescribeSampleSnapshotTemplatesRequest,
     CoverConfigureInfoForUpdate: CoverConfigureInfoForUpdate,
     AiAnalysisTaskClassificationResult: AiAnalysisTaskClassificationResult,
     PoliticalImgReviewTemplateInfoForUpdate: PoliticalImgReviewTemplateInfoForUpdate,
@@ -26092,13 +26735,14 @@ module.exports = {
     ProhibitedAsrReviewTemplateInfo: ProhibitedAsrReviewTemplateInfo,
     PushUrlCacheRequest: PushUrlCacheRequest,
     CreateAIAnalysisTemplateResponse: CreateAIAnalysisTemplateResponse,
-    MediaProcessTaskSampleSnapshotResult: MediaProcessTaskSampleSnapshotResult,
+    HeadTailConfigureInfo: HeadTailConfigureInfo,
     EventContent: EventContent,
     HighlightsConfigureInfoForUpdate: HighlightsConfigureInfoForUpdate,
     UserDefineConfigureInfoForUpdate: UserDefineConfigureInfoForUpdate,
     AiReviewPoliticalAsrTaskOutput: AiReviewPoliticalAsrTaskOutput,
     OutputAudioStream: OutputAudioStream,
     ModifyClassRequest: ModifyClassRequest,
+    SpecificationDataItem: SpecificationDataItem,
     TEHDConfigForUpdate: TEHDConfigForUpdate,
     ComposeMediaTaskOutput: ComposeMediaTaskOutput,
     DescribeMediaInfosRequest: DescribeMediaInfosRequest,
@@ -26106,6 +26750,7 @@ module.exports = {
     AsrFullTextConfigureInfo: AsrFullTextConfigureInfo,
     CreateAIRecognitionTemplateRequest: CreateAIRecognitionTemplateRequest,
     DescribeTaskDetailRequest: DescribeTaskDetailRequest,
+    MediaAiAnalysisClassificationItem: MediaAiAnalysisClassificationItem,
     AiAnalysisTaskFrameTagResult: AiAnalysisTaskFrameTagResult,
     AiReviewPornTaskOutput: AiReviewPornTaskOutput,
     AiRecognitionTaskAsrFullTextResult: AiRecognitionTaskAsrFullTextResult,
@@ -26142,7 +26787,7 @@ module.exports = {
     AiSampleFailFaceInfo: AiSampleFailFaceInfo,
     UserDefineFaceReviewTemplateInfoForUpdate: UserDefineFaceReviewTemplateInfoForUpdate,
     CreateProcedureTemplateResponse: CreateProcedureTemplateResponse,
-    OcrFullTextConfigureInfoForUpdate: OcrFullTextConfigureInfoForUpdate,
+    DescribeMediaProcessUsageDataResponse: DescribeMediaProcessUsageDataResponse,
     AiRecognitionTaskOcrFullTextResultInput: AiRecognitionTaskOcrFullTextResultInput,
     AiRecognitionTaskSegmentResultInput: AiRecognitionTaskSegmentResultInput,
     DescribeAudioTrackTemplatesRequest: DescribeAudioTrackTemplatesRequest,
@@ -26158,6 +26803,7 @@ module.exports = {
     MediaVideoStreamItem: MediaVideoStreamItem,
     SnapshotByTimeOffsetTemplate: SnapshotByTimeOffsetTemplate,
     DeleteSnapshotByTimeOffsetTemplateResponse: DeleteSnapshotByTimeOffsetTemplateResponse,
+    ProhibitedOcrReviewTemplateInfoForUpdate: ProhibitedOcrReviewTemplateInfoForUpdate,
     DescribeTasksRequest: DescribeTasksRequest,
     DescribeReviewDetailsResponse: DescribeReviewDetailsResponse,
     CreateTranscodeTemplateResponse: CreateTranscodeTemplateResponse,
@@ -26230,7 +26876,7 @@ module.exports = {
     DeleteAnimatedGraphicsTemplateRequest: DeleteAnimatedGraphicsTemplateRequest,
     DeleteSnapshotByTimeOffsetTemplateRequest: DeleteSnapshotByTimeOffsetTemplateRequest,
     DescribeAnimatedGraphicsTemplatesResponse: DescribeAnimatedGraphicsTemplatesResponse,
-    DescribeSampleSnapshotTemplatesRequest: DescribeSampleSnapshotTemplatesRequest,
+    MediaAiAnalysisFrameTagItem: MediaAiAnalysisFrameTagItem,
     SampleSnapshotTaskInput: SampleSnapshotTaskInput,
     TerrorismConfigureInfo: TerrorismConfigureInfo,
     PoliticalAsrReviewTemplateInfo: PoliticalAsrReviewTemplateInfo,
@@ -26240,6 +26886,7 @@ module.exports = {
     DescribePersonSamplesRequest: DescribePersonSamplesRequest,
     AiRecognitionTaskFaceResultItem: AiRecognitionTaskFaceResultItem,
     AiAnalysisTaskCoverInput: AiAnalysisTaskCoverInput,
+    DescribeStorageDetailsRequest: DescribeStorageDetailsRequest,
     MediaTrack: MediaTrack,
     MediaOutputInfo: MediaOutputInfo,
     EditMediaTaskOutput: EditMediaTaskOutput,

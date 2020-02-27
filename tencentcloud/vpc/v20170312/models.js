@@ -76,6 +76,12 @@ class ServiceTemplateGroup extends  AbstractModel {
          */
         this.CreatedTime = null;
 
+        /**
+         * 协议端口模板实例信息。
+         * @type {Array.<ServiceTemplate> || null}
+         */
+        this.ServiceTemplateSet = null;
+
     }
 
     /**
@@ -89,6 +95,71 @@ class ServiceTemplateGroup extends  AbstractModel {
         this.ServiceTemplateGroupName = 'ServiceTemplateGroupName' in params ? params.ServiceTemplateGroupName : null;
         this.ServiceTemplateIdSet = 'ServiceTemplateIdSet' in params ? params.ServiceTemplateIdSet : null;
         this.CreatedTime = 'CreatedTime' in params ? params.CreatedTime : null;
+
+        if (params.ServiceTemplateSet) {
+            this.ServiceTemplateSet = new Array();
+            for (let z in params.ServiceTemplateSet) {
+                let obj = new ServiceTemplate();
+                obj.deserialize(params.ServiceTemplateSet[z]);
+                this.ServiceTemplateSet.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * 用户安全组配额限制。
+ * @class
+ */
+class SecurityGroupLimitSet extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 每个项目每个地域可创建安全组数
+         * @type {number || null}
+         */
+        this.SecurityGroupLimit = null;
+
+        /**
+         * 安全组下的最大规则数
+         * @type {number || null}
+         */
+        this.SecurityGroupPolicyLimit = null;
+
+        /**
+         * 安全组下嵌套安全组规则数
+         * @type {number || null}
+         */
+        this.ReferedSecurityGroupLimit = null;
+
+        /**
+         * 单安全组关联实例数
+         * @type {number || null}
+         */
+        this.SecurityGroupInstanceLimit = null;
+
+        /**
+         * 实例关联安全组数
+         * @type {number || null}
+         */
+        this.InstanceSecurityGroupLimit = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SecurityGroupLimit = 'SecurityGroupLimit' in params ? params.SecurityGroupLimit : null;
+        this.SecurityGroupPolicyLimit = 'SecurityGroupPolicyLimit' in params ? params.SecurityGroupPolicyLimit : null;
+        this.ReferedSecurityGroupLimit = 'ReferedSecurityGroupLimit' in params ? params.ReferedSecurityGroupLimit : null;
+        this.SecurityGroupInstanceLimit = 'SecurityGroupInstanceLimit' in params ? params.SecurityGroupInstanceLimit : null;
+        this.InstanceSecurityGroupLimit = 'InstanceSecurityGroupLimit' in params ? params.InstanceSecurityGroupLimit : null;
 
     }
 }
@@ -475,7 +546,7 @@ class DescribeVpnConnectionsRequest extends  AbstractModel {
         this.VpnConnectionIds = null;
 
         /**
-         * 过滤条件，详见下表：实例过滤条件表。每次请求的Filters的上限为10，Filter.Values的上限为5。参数不支持同时指定VpnConnectionIds和Filters。
+         * 过滤条件。每次请求的Filters的上限为10，Filter.Values的上限为5。参数不支持同时指定VpnConnectionIds和Filters。
 <li>vpc-id - String - VPC实例ID，形如：`vpc-0a36uwkr`。</li>
 <li>vpn-gateway-id - String - VPN网关实例ID，形如：`vpngw-p4lmqawn`。</li>
 <li>customer-gateway-id - String - 对端网关实例ID，形如：`cgw-l4rblw63`。</li>
@@ -6939,6 +7010,46 @@ class InquiryPriceCreateVpnGatewayResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeSecurityGroupLimits返回参数结构体
+ * @class
+ */
+class DescribeSecurityGroupLimitsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 用户安全组配额限制。
+         * @type {SecurityGroupLimitSet || null}
+         */
+        this.SecurityGroupLimitSet = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.SecurityGroupLimitSet) {
+            let obj = new SecurityGroupLimitSet();
+            obj.deserialize(params.SecurityGroupLimitSet)
+            this.SecurityGroupLimitSet = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * 过滤器键值对
  * @class
  */
@@ -8456,6 +8567,12 @@ class CreateSubnetsRequest extends  AbstractModel {
          */
         this.Subnets = null;
 
+        /**
+         * 指定绑定的标签列表，注意这里的标签集合为列表中所有子网对象所共享，不能为每个子网对象单独指定标签，例如：[{"Key": "city", "Value": "shanghai"}]
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
     }
 
     /**
@@ -8473,6 +8590,15 @@ class CreateSubnetsRequest extends  AbstractModel {
                 let obj = new SubnetInput();
                 obj.deserialize(params.Subnets[z]);
                 this.Subnets.push(obj);
+            }
+        }
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
             }
         }
 
@@ -8846,6 +8972,12 @@ class CreateCcnRequest extends  AbstractModel {
          */
         this.BandwidthLimitType = null;
 
+        /**
+         * 指定绑定的标签列表，例如：[{"Key": "city", "Value": "shanghai"}]
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
     }
 
     /**
@@ -8860,6 +8992,15 @@ class CreateCcnRequest extends  AbstractModel {
         this.QosLevel = 'QosLevel' in params ? params.QosLevel : null;
         this.InstanceChargeType = 'InstanceChargeType' in params ? params.InstanceChargeType : null;
         this.BandwidthLimitType = 'BandwidthLimitType' in params ? params.BandwidthLimitType : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
 
     }
 }
@@ -10074,6 +10215,12 @@ class CreateSubnetRequest extends  AbstractModel {
          */
         this.Zone = null;
 
+        /**
+         * 指定绑定的标签列表，例如：[{"Key": "city", "Value": "shanghai"}]
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
     }
 
     /**
@@ -10087,6 +10234,15 @@ class CreateSubnetRequest extends  AbstractModel {
         this.SubnetName = 'SubnetName' in params ? params.SubnetName : null;
         this.CidrBlock = 'CidrBlock' in params ? params.CidrBlock : null;
         this.Zone = 'Zone' in params ? params.Zone : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
 
     }
 }
@@ -10123,6 +10279,12 @@ class AddressTemplateGroup extends  AbstractModel {
          */
         this.CreatedTime = null;
 
+        /**
+         * IP地址模板实例。
+         * @type {Array.<AddressTemplateItem> || null}
+         */
+        this.AddressTemplateSet = null;
+
     }
 
     /**
@@ -10136,6 +10298,15 @@ class AddressTemplateGroup extends  AbstractModel {
         this.AddressTemplateGroupId = 'AddressTemplateGroupId' in params ? params.AddressTemplateGroupId : null;
         this.AddressTemplateIdSet = 'AddressTemplateIdSet' in params ? params.AddressTemplateIdSet : null;
         this.CreatedTime = 'CreatedTime' in params ? params.CreatedTime : null;
+
+        if (params.AddressTemplateSet) {
+            this.AddressTemplateSet = new Array();
+            for (let z in params.AddressTemplateSet) {
+                let obj = new AddressTemplateItem();
+                obj.deserialize(params.AddressTemplateSet[z]);
+                this.AddressTemplateSet.push(obj);
+            }
+        }
 
     }
 }
@@ -10836,6 +11007,41 @@ class ModifySecurityGroupAttributeResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 地址信息
+ * @class
+ */
+class AddressTemplateItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 起始地址。
+         * @type {string || null}
+         */
+        this.From = null;
+
+        /**
+         * 结束地址。
+         * @type {string || null}
+         */
+        this.To = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.From = 'From' in params ? params.From : null;
+        this.To = 'To' in params ? params.To : null;
 
     }
 }
@@ -11768,6 +11974,41 @@ AVAILABLE：可用的
 }
 
 /**
+ * ALG协议类型
+ * @class
+ */
+class AlgType extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Ftp协议Alg功能是否开启
+         * @type {boolean || null}
+         */
+        this.Ftp = null;
+
+        /**
+         * Sip协议Alg功能是否开启
+         * @type {boolean || null}
+         */
+        this.Sip = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Ftp = 'Ftp' in params ? params.Ftp : null;
+        this.Sip = 'Sip' in params ? params.Sip : null;
+
+    }
+}
+
+/**
  * MigratePrivateIpAddress返回参数结构体
  * @class
  */
@@ -12462,6 +12703,12 @@ class CreateRouteTableRequest extends  AbstractModel {
          */
         this.RouteTableName = null;
 
+        /**
+         * 指定绑定的标签列表，例如：[{"Key": "city", "Value": "shanghai"}]
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
     }
 
     /**
@@ -12473,6 +12720,15 @@ class CreateRouteTableRequest extends  AbstractModel {
         }
         this.VpcId = 'VpcId' in params ? params.VpcId : null;
         this.RouteTableName = 'RouteTableName' in params ? params.RouteTableName : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
 
     }
 }
@@ -13254,6 +13510,12 @@ class Address extends  AbstractModel {
          */
         this.CascadeRelease = null;
 
+        /**
+         * EIP ALG开启的协议类型。
+         * @type {AlgType || null}
+         */
+        this.EipAlgType = null;
+
     }
 
     /**
@@ -13276,6 +13538,12 @@ class Address extends  AbstractModel {
         this.IsEipDirectConnection = 'IsEipDirectConnection' in params ? params.IsEipDirectConnection : null;
         this.AddressType = 'AddressType' in params ? params.AddressType : null;
         this.CascadeRelease = 'CascadeRelease' in params ? params.CascadeRelease : null;
+
+        if (params.EipAlgType) {
+            let obj = new AlgType();
+            obj.deserialize(params.EipAlgType)
+            this.EipAlgType = obj;
+        }
 
     }
 }
@@ -14181,6 +14449,12 @@ class CCN extends  AbstractModel {
          */
         this.BandwidthLimitType = null;
 
+        /**
+         * 标签键值对。
+         * @type {Array.<Tag> || null}
+         */
+        this.TagSet = null;
+
     }
 
     /**
@@ -14199,6 +14473,15 @@ class CCN extends  AbstractModel {
         this.QosLevel = 'QosLevel' in params ? params.QosLevel : null;
         this.InstanceChargeType = 'InstanceChargeType' in params ? params.InstanceChargeType : null;
         this.BandwidthLimitType = 'BandwidthLimitType' in params ? params.BandwidthLimitType : null;
+
+        if (params.TagSet) {
+            this.TagSet = new Array();
+            for (let z in params.TagSet) {
+                let obj = new Tag();
+                obj.deserialize(params.TagSet[z]);
+                this.TagSet.push(obj);
+            }
+        }
 
     }
 }
@@ -14881,6 +15164,12 @@ class RouteTable extends  AbstractModel {
          */
         this.CreatedTime = null;
 
+        /**
+         * 标签键值对。
+         * @type {Array.<Tag> || null}
+         */
+        this.TagSet = null;
+
     }
 
     /**
@@ -14913,6 +15202,15 @@ class RouteTable extends  AbstractModel {
         }
         this.Main = 'Main' in params ? params.Main : null;
         this.CreatedTime = 'CreatedTime' in params ? params.CreatedTime : null;
+
+        if (params.TagSet) {
+            this.TagSet = new Array();
+            for (let z in params.TagSet) {
+                let obj = new Tag();
+                obj.deserialize(params.TagSet[z]);
+                this.TagSet.push(obj);
+            }
+        }
 
     }
 }
@@ -16235,6 +16533,18 @@ class Subnet extends  AbstractModel {
          */
         this.IsRemoteVpcSnat = null;
 
+        /**
+         * 子网`IP`总数。
+         * @type {number || null}
+         */
+        this.TotalIpAddressCount = null;
+
+        /**
+         * 标签键值对。
+         * @type {Array.<Tag> || null}
+         */
+        this.TagSet = null;
+
     }
 
     /**
@@ -16257,6 +16567,16 @@ class Subnet extends  AbstractModel {
         this.Ipv6CidrBlock = 'Ipv6CidrBlock' in params ? params.Ipv6CidrBlock : null;
         this.NetworkAclId = 'NetworkAclId' in params ? params.NetworkAclId : null;
         this.IsRemoteVpcSnat = 'IsRemoteVpcSnat' in params ? params.IsRemoteVpcSnat : null;
+        this.TotalIpAddressCount = 'TotalIpAddressCount' in params ? params.TotalIpAddressCount : null;
+
+        if (params.TagSet) {
+            this.TagSet = new Array();
+            for (let z in params.TagSet) {
+                let obj = new Tag();
+                obj.deserialize(params.TagSet[z]);
+                this.TagSet.push(obj);
+            }
+        }
 
     }
 }
@@ -17517,6 +17837,12 @@ class CreateSecurityGroupRequest extends  AbstractModel {
          */
         this.ProjectId = null;
 
+        /**
+         * 指定绑定的标签列表，例如：[{"Key": "city", "Value": "shanghai"}]
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
     }
 
     /**
@@ -17529,6 +17855,15 @@ class CreateSecurityGroupRequest extends  AbstractModel {
         this.GroupName = 'GroupName' in params ? params.GroupName : null;
         this.GroupDescription = 'GroupDescription' in params ? params.GroupDescription : null;
         this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
 
     }
 }
@@ -17557,6 +17892,27 @@ class ModifyCcnAttributeResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeSecurityGroupLimits请求参数结构体
+ * @class
+ */
+class DescribeSecurityGroupLimitsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
 
     }
 }
@@ -18290,6 +18646,12 @@ class CreateVpcRequest extends  AbstractModel {
          */
         this.DomainName = null;
 
+        /**
+         * 指定绑定的标签列表，例如：[{"Key": "city", "Value": "shanghai"}]
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
     }
 
     /**
@@ -18304,6 +18666,15 @@ class CreateVpcRequest extends  AbstractModel {
         this.EnableMulticast = 'EnableMulticast' in params ? params.EnableMulticast : null;
         this.DnsServers = 'DnsServers' in params ? params.DnsServers : null;
         this.DomainName = 'DomainName' in params ? params.DomainName : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
 
     }
 }
@@ -18643,6 +19014,7 @@ class DescribeNetDetectsResponse extends  AbstractModel {
 module.exports = {
     ModifyAddressTemplateAttributeResponse: ModifyAddressTemplateAttributeResponse,
     ServiceTemplateGroup: ServiceTemplateGroup,
+    SecurityGroupLimitSet: SecurityGroupLimitSet,
     CreateRoutesRequest: CreateRoutesRequest,
     DescribeHaVipsResponse: DescribeHaVipsResponse,
     SecurityGroupAssociationStatistics: SecurityGroupAssociationStatistics,
@@ -18786,6 +19158,7 @@ module.exports = {
     CreateSubnetsResponse: CreateSubnetsResponse,
     DescribeGatewayFlowMonitorDetailRequest: DescribeGatewayFlowMonitorDetailRequest,
     InquiryPriceCreateVpnGatewayResponse: InquiryPriceCreateVpnGatewayResponse,
+    DescribeSecurityGroupLimitsResponse: DescribeSecurityGroupLimitsResponse,
     FilterObject: FilterObject,
     ModifyBandwidthPackageAttributeResponse: ModifyBandwidthPackageAttributeResponse,
     DetachNetworkInterfaceResponse: DetachNetworkInterfaceResponse,
@@ -18871,6 +19244,7 @@ module.exports = {
     NatGatewayAddress: NatGatewayAddress,
     CreateRouteTableResponse: CreateRouteTableResponse,
     ModifySecurityGroupAttributeResponse: ModifySecurityGroupAttributeResponse,
+    AddressTemplateItem: AddressTemplateItem,
     ModifyAddressAttributeResponse: ModifyAddressAttributeResponse,
     AttachClassicLinkVpcRequest: AttachClassicLinkVpcRequest,
     GatewayFlowMonitorDetail: GatewayFlowMonitorDetail,
@@ -18896,6 +19270,7 @@ module.exports = {
     ModifyVpcAttributeResponse: ModifyVpcAttributeResponse,
     ModifyVpnConnectionAttributeResponse: ModifyVpnConnectionAttributeResponse,
     PrivateIpAddressSpecification: PrivateIpAddressSpecification,
+    AlgType: AlgType,
     MigratePrivateIpAddressResponse: MigratePrivateIpAddressResponse,
     DeleteRouteTableResponse: DeleteRouteTableResponse,
     AccountAttribute: AccountAttribute,
@@ -19032,6 +19407,7 @@ module.exports = {
     ResetNatGatewayConnectionResponse: ResetNatGatewayConnectionResponse,
     CreateSecurityGroupRequest: CreateSecurityGroupRequest,
     ModifyCcnAttributeResponse: ModifyCcnAttributeResponse,
+    DescribeSecurityGroupLimitsRequest: DescribeSecurityGroupLimitsRequest,
     DescribeClassicLinkInstancesRequest: DescribeClassicLinkInstancesRequest,
     CreateServiceTemplateResponse: CreateServiceTemplateResponse,
     DeleteNetworkInterfaceResponse: DeleteNetworkInterfaceResponse,

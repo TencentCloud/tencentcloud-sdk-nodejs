@@ -5721,6 +5721,12 @@ class LifecycleHook extends  AbstractModel {
          */
         this.NotificationTarget = null;
 
+        /**
+         * 生命周期挂钩适用场景
+         * @type {string || null}
+         */
+        this.LifecycleTransitionType = null;
+
     }
 
     /**
@@ -5744,6 +5750,7 @@ class LifecycleHook extends  AbstractModel {
             obj.deserialize(params.NotificationTarget)
             this.NotificationTarget = obj;
         }
+        this.LifecycleTransitionType = 'LifecycleTransitionType' in params ? params.LifecycleTransitionType : null;
 
     }
 }

@@ -51,6 +51,7 @@ const ZoneInfo = models.ZoneInfo;
 const RegisterTargetsWithClassicalLBResponse = models.RegisterTargetsWithClassicalLBResponse;
 const DescribeTargetGroupsResponse = models.DescribeTargetGroupsResponse;
 const LoadBalancerHealth = models.LoadBalancerHealth;
+const DeleteLoadBalancerListenersRequest = models.DeleteLoadBalancerListenersRequest;
 const BlockedIP = models.BlockedIP;
 const ModifyRuleResponse = models.ModifyRuleResponse;
 const DescribeClassicalLBTargetsRequest = models.DescribeClassicalLBTargetsRequest;
@@ -93,6 +94,7 @@ const ClassicalListener = models.ClassicalListener;
 const CertificateInput = models.CertificateInput;
 const CreateListenerResponse = models.CreateListenerResponse;
 const CreateTargetGroupResponse = models.CreateTargetGroupResponse;
+const CreateLoadBalancerSnatIpsResponse = models.CreateLoadBalancerSnatIpsResponse;
 const ClassicalLoadBalancerInfo = models.ClassicalLoadBalancerInfo;
 const RuleOutput = models.RuleOutput;
 const DeleteLoadBalancerRequest = models.DeleteLoadBalancerRequest;
@@ -132,6 +134,7 @@ const ModifyTargetGroupAttributeRequest = models.ModifyTargetGroupAttributeReque
 const ModifyDomainAttributesRequest = models.ModifyDomainAttributesRequest;
 const DeregisterTargetsRequest = models.DeregisterTargetsRequest;
 const InternetAccessible = models.InternetAccessible;
+const CreateLoadBalancerSnatIpsRequest = models.CreateLoadBalancerSnatIpsRequest;
 const ModifyTargetGroupInstancesWeightRequest = models.ModifyTargetGroupInstancesWeightRequest;
 const DeleteTargetGroupsResponse = models.DeleteTargetGroupsResponse;
 const ModifyTargetGroupInstancesPortRequest = models.ModifyTargetGroupInstancesPortRequest;
@@ -145,13 +148,16 @@ const DescribeClassicalLBListenersResponse = models.DescribeClassicalLBListeners
 const ModifyTargetGroupAttributeResponse = models.ModifyTargetGroupAttributeResponse;
 const DescribeBlockIPTaskRequest = models.DescribeBlockIPTaskRequest;
 const CreateLoadBalancerResponse = models.CreateLoadBalancerResponse;
+const DeleteLoadBalancerListenersResponse = models.DeleteLoadBalancerListenersResponse;
 const DescribeListenersRequest = models.DescribeListenersRequest;
+const DeleteLoadBalancerSnatIpsRequest = models.DeleteLoadBalancerSnatIpsRequest;
 const SetLoadBalancerSecurityGroupsRequest = models.SetLoadBalancerSecurityGroupsRequest;
 const DescribeClassicalLBTargetsResponse = models.DescribeClassicalLBTargetsResponse;
 const RewriteLocationMap = models.RewriteLocationMap;
 const ModifyTargetPortRequest = models.ModifyTargetPortRequest;
 const DescribeLoadBalancersResponse = models.DescribeLoadBalancersResponse;
 const DeleteListenerResponse = models.DeleteListenerResponse;
+const DeleteLoadBalancerSnatIpsResponse = models.DeleteLoadBalancerSnatIpsResponse;
 const CertificateOutput = models.CertificateOutput;
 const DeleteTargetGroupsRequest = models.DeleteTargetGroupsRequest;
 const DescribeClassicalLBListenersRequest = models.DescribeClassicalLBListenersRequest;
@@ -187,16 +193,14 @@ class ClbClient extends AbstractClient {
     }
 
     /**
-     * SetLoadBalancerSecurityGroups 接口支持对一个公网负载均衡实例执行设置（绑定、解绑）安全组操作。查询一个负载均衡实例目前已绑定的安全组，可使用 DescribeLoadBalancers 接口。本接口是set语义，
-绑定操作时，入参需要传入负载均衡实例要绑定的所有安全组（已绑定的+新增绑定的）。
-解绑操作时，入参需要传入负载均衡实例执行解绑后所绑定的所有安全组；如果要解绑所有安全组，可不传此参数，或传入空数组。注意：内网负载均衡不支持绑定安全组。
-     * @param {SetLoadBalancerSecurityGroupsRequest} req
-     * @param {function(string, SetLoadBalancerSecurityGroupsResponse):void} cb
+     * 根据证书ID查询其在一个地域中所关联到负载均衡实例列表
+     * @param {DescribeLoadBalancerListByCertIdRequest} req
+     * @param {function(string, DescribeLoadBalancerListByCertIdResponse):void} cb
      * @public
      */
-    SetLoadBalancerSecurityGroups(req, cb) {
-        let resp = new SetLoadBalancerSecurityGroupsResponse();
-        this.request("SetLoadBalancerSecurityGroups", req, resp, cb);
+    DescribeLoadBalancerListByCertId(req, cb) {
+        let resp = new DescribeLoadBalancerListByCertIdResponse();
+        this.request("DescribeLoadBalancerListByCertId", req, resp, cb);
     }
 
     /**
@@ -208,6 +212,17 @@ class ClbClient extends AbstractClient {
     DescribeClassicalLBListeners(req, cb) {
         let resp = new DescribeClassicalLBListenersResponse();
         this.request("DescribeClassicalLBListeners", req, resp, cb);
+    }
+
+    /**
+     * 对于SnatPro的负载均衡，这个接口用于删除SnatIp
+     * @param {DeleteLoadBalancerSnatIpsRequest} req
+     * @param {function(string, DeleteLoadBalancerSnatIpsResponse):void} cb
+     * @public
+     */
+    DeleteLoadBalancerSnatIps(req, cb) {
+        let resp = new DeleteLoadBalancerSnatIpsResponse();
+        this.request("DeleteLoadBalancerSnatIps", req, resp, cb);
     }
 
     /**
@@ -293,15 +308,28 @@ class ClbClient extends AbstractClient {
     }
 
     /**
-     * ModifyDomain接口用来修改负载均衡七层监听器下的域名。
-本接口为异步接口，本接口返回成功后需以返回的RequestID为入参，调用DescribeTaskStatus接口查询本次任务是否成功。
-     * @param {ModifyDomainRequest} req
-     * @param {function(string, ModifyDomainResponse):void} cb
+     * 该接口支持删除负载均衡的多个监听器。
+本接口为异步接口，本接口返回成功后需以返回的 RequestID 为入参，调用 DescribeTaskStatus 接口查询本次任务是否成功。
+     * @param {DeleteLoadBalancerListenersRequest} req
+     * @param {function(string, DeleteLoadBalancerListenersResponse):void} cb
      * @public
      */
-    ModifyDomain(req, cb) {
-        let resp = new ModifyDomainResponse();
-        this.request("ModifyDomain", req, resp, cb);
+    DeleteLoadBalancerListeners(req, cb) {
+        let resp = new DeleteLoadBalancerListenersResponse();
+        this.request("DeleteLoadBalancerListeners", req, resp, cb);
+    }
+
+    /**
+     * SetLoadBalancerSecurityGroups 接口支持对一个公网负载均衡实例执行设置（绑定、解绑）安全组操作。查询一个负载均衡实例目前已绑定的安全组，可使用 DescribeLoadBalancers 接口。本接口是set语义，
+绑定操作时，入参需要传入负载均衡实例要绑定的所有安全组（已绑定的+新增绑定的）。
+解绑操作时，入参需要传入负载均衡实例执行解绑后所绑定的所有安全组；如果要解绑所有安全组，可不传此参数，或传入空数组。注意：内网负载均衡不支持绑定安全组。
+     * @param {SetLoadBalancerSecurityGroupsRequest} req
+     * @param {function(string, SetLoadBalancerSecurityGroupsResponse):void} cb
+     * @public
+     */
+    SetLoadBalancerSecurityGroups(req, cb) {
+        let resp = new SetLoadBalancerSecurityGroupsResponse();
+        this.request("SetLoadBalancerSecurityGroups", req, resp, cb);
     }
 
     /**
@@ -328,14 +356,14 @@ class ClbClient extends AbstractClient {
     }
 
     /**
-     * DescribeClassicalLBHealthStatus用于获取传统型负载均衡后端的健康状态
-     * @param {DescribeClassicalLBHealthStatusRequest} req
-     * @param {function(string, DescribeClassicalLBHealthStatusResponse):void} cb
+     * 针对SnatPro负载均衡，这个接口用于添加SnatIp，如果负载均衡没有开启SnatPro，添加SnatIp后会自动开启
+     * @param {CreateLoadBalancerSnatIpsRequest} req
+     * @param {function(string, CreateLoadBalancerSnatIpsResponse):void} cb
      * @public
      */
-    DescribeClassicalLBHealthStatus(req, cb) {
-        let resp = new DescribeClassicalLBHealthStatusResponse();
-        this.request("DescribeClassicalLBHealthStatus", req, resp, cb);
+    CreateLoadBalancerSnatIps(req, cb) {
+        let resp = new CreateLoadBalancerSnatIpsResponse();
+        this.request("CreateLoadBalancerSnatIps", req, resp, cb);
     }
 
     /**
@@ -401,7 +429,7 @@ class ClbClient extends AbstractClient {
     }
 
     /**
-     * 监听器或转发规则绑定目标组。
+     * 本接口(AssociateTargetGroups)用来将目标组绑定到负载均衡的监听器（四层协议）或转发规则（七层协议）上。
 本接口为异步接口，本接口返回成功后需以返回的 RequestID 为入参，调用 DescribeTaskStatus 接口查询本次任务是否成功。
      * @param {AssociateTargetGroupsRequest} req
      * @param {function(string, AssociateTargetGroupsResponse):void} cb
@@ -596,6 +624,18 @@ class ClbClient extends AbstractClient {
     }
 
     /**
+     * ModifyDomain接口用来修改负载均衡七层监听器下的域名。
+本接口为异步接口，本接口返回成功后需以返回的RequestID为入参，调用DescribeTaskStatus接口查询本次任务是否成功。
+     * @param {ModifyDomainRequest} req
+     * @param {function(string, ModifyDomainResponse):void} cb
+     * @public
+     */
+    ModifyDomain(req, cb) {
+        let resp = new ModifyDomainResponse();
+        this.request("ModifyDomain", req, resp, cb);
+    }
+
+    /**
      * RegisterTargetsWithClassicalLB 接口用于绑定后端服务到传统型负载均衡。
 本接口为异步接口，接口返回成功后，需以返回的 RequestId 为入参，调用 DescribeTaskStatus 接口查询本次任务是否成功。
      * @param {RegisterTargetsWithClassicalLBRequest} req
@@ -641,14 +681,14 @@ class ClbClient extends AbstractClient {
     }
 
     /**
-     * 根据证书ID查询其在一个地域中所关联到负载均衡实例列表
-     * @param {DescribeLoadBalancerListByCertIdRequest} req
-     * @param {function(string, DescribeLoadBalancerListByCertIdResponse):void} cb
+     * DescribeClassicalLBHealthStatus用于获取传统型负载均衡后端的健康状态
+     * @param {DescribeClassicalLBHealthStatusRequest} req
+     * @param {function(string, DescribeClassicalLBHealthStatusResponse):void} cb
      * @public
      */
-    DescribeLoadBalancerListByCertId(req, cb) {
-        let resp = new DescribeLoadBalancerListByCertIdResponse();
-        this.request("DescribeLoadBalancerListByCertId", req, resp, cb);
+    DescribeClassicalLBHealthStatus(req, cb) {
+        let resp = new DescribeClassicalLBHealthStatusResponse();
+        this.request("DescribeClassicalLBHealthStatus", req, resp, cb);
     }
 
     /**

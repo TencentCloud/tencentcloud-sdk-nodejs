@@ -601,6 +601,12 @@ class ModifyLoadBalancerAttributesRequest extends  AbstractModel {
          */
         this.LoadBalancerPassToTarget = null;
 
+        /**
+         * 是否开启SnatPro
+         * @type {boolean || null}
+         */
+        this.SnatPro = null;
+
     }
 
     /**
@@ -625,6 +631,7 @@ class ModifyLoadBalancerAttributesRequest extends  AbstractModel {
             this.InternetChargeInfo = obj;
         }
         this.LoadBalancerPassToTarget = 'LoadBalancerPassToTarget' in params ? params.LoadBalancerPassToTarget : null;
+        this.SnatPro = 'SnatPro' in params ? params.SnatPro : null;
 
     }
 }
@@ -1650,6 +1657,41 @@ class LoadBalancerHealth extends  AbstractModel {
                 this.Listeners.push(obj);
             }
         }
+
+    }
+}
+
+/**
+ * DeleteLoadBalancerListeners请求参数结构体
+ * @class
+ */
+class DeleteLoadBalancerListenersRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 负载均衡实例 ID
+         * @type {string || null}
+         */
+        this.LoadBalancerId = null;
+
+        /**
+         * 指定删除的监听器ID数组，若不填则删除负载均衡的所有监听器
+         * @type {Array.<string> || null}
+         */
+        this.ListenerIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LoadBalancerId = 'LoadBalancerId' in params ? params.LoadBalancerId : null;
+        this.ListenerIds = 'ListenerIds' in params ? params.ListenerIds : null;
 
     }
 }
@@ -3878,6 +3920,34 @@ class CreateTargetGroupResponse extends  AbstractModel {
 }
 
 /**
+ * CreateLoadBalancerSnatIps返回参数结构体
+ * @class
+ */
+class CreateLoadBalancerSnatIpsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * 负载均衡信息
  * @class
  */
@@ -5820,6 +5890,49 @@ BANDWIDTH_PACKAGE 按带宽包计费（当前，只有指定运营商时才支�
 }
 
 /**
+ * CreateLoadBalancerSnatIps请求参数结构体
+ * @class
+ */
+class CreateLoadBalancerSnatIpsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 负载均衡唯一性Id，如lb-12345678
+         * @type {string || null}
+         */
+        this.LoadBalancerId = null;
+
+        /**
+         * 添加SnatIp信息，可指定Ip申请，或者指定子网自动申请
+         * @type {Array.<SnatIp> || null}
+         */
+        this.SnatIps = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LoadBalancerId = 'LoadBalancerId' in params ? params.LoadBalancerId : null;
+
+        if (params.SnatIps) {
+            this.SnatIps = new Array();
+            for (let z in params.SnatIps) {
+                let obj = new SnatIp();
+                obj.deserialize(params.SnatIps[z]);
+                this.SnatIps.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * ModifyTargetGroupInstancesWeight请求参数结构体
  * @class
  */
@@ -6016,6 +6129,13 @@ class ListenerBackend extends  AbstractModel {
          */
         this.Targets = null;
 
+        /**
+         * 若支持端口段，则为端口段结束端口；若不支持端口段，则为0
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.EndPort = null;
+
     }
 
     /**
@@ -6046,6 +6166,7 @@ class ListenerBackend extends  AbstractModel {
                 this.Targets.push(obj);
             }
         }
+        this.EndPort = 'EndPort' in params ? params.EndPort : null;
 
     }
 }
@@ -6407,6 +6528,34 @@ class CreateLoadBalancerResponse extends  AbstractModel {
 }
 
 /**
+ * DeleteLoadBalancerListeners返回参数结构体
+ * @class
+ */
+class DeleteLoadBalancerListenersResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeListeners请求参数结构体
  * @class
  */
@@ -6451,6 +6600,41 @@ class DescribeListenersRequest extends  AbstractModel {
         this.ListenerIds = 'ListenerIds' in params ? params.ListenerIds : null;
         this.Protocol = 'Protocol' in params ? params.Protocol : null;
         this.Port = 'Port' in params ? params.Port : null;
+
+    }
+}
+
+/**
+ * DeleteLoadBalancerSnatIps请求参数结构体
+ * @class
+ */
+class DeleteLoadBalancerSnatIpsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 负载均衡唯一Id，如lb-12345678
+         * @type {string || null}
+         */
+        this.LoadBalancerId = null;
+
+        /**
+         * 删除SnatIp地址数组
+         * @type {Array.<string> || null}
+         */
+        this.Ips = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LoadBalancerId = 'LoadBalancerId' in params ? params.LoadBalancerId : null;
+        this.Ips = 'Ips' in params ? params.Ips : null;
 
     }
 }
@@ -6702,6 +6886,34 @@ class DescribeLoadBalancersResponse extends  AbstractModel {
  * @class
  */
 class DeleteListenerResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DeleteLoadBalancerSnatIps返回参数结构体
+ * @class
+ */
+class DeleteLoadBalancerSnatIpsResponse extends  AbstractModel {
     constructor(){
         super();
 
@@ -7669,6 +7881,7 @@ module.exports = {
     RegisterTargetsWithClassicalLBResponse: RegisterTargetsWithClassicalLBResponse,
     DescribeTargetGroupsResponse: DescribeTargetGroupsResponse,
     LoadBalancerHealth: LoadBalancerHealth,
+    DeleteLoadBalancerListenersRequest: DeleteLoadBalancerListenersRequest,
     BlockedIP: BlockedIP,
     ModifyRuleResponse: ModifyRuleResponse,
     DescribeClassicalLBTargetsRequest: DescribeClassicalLBTargetsRequest,
@@ -7711,6 +7924,7 @@ module.exports = {
     CertificateInput: CertificateInput,
     CreateListenerResponse: CreateListenerResponse,
     CreateTargetGroupResponse: CreateTargetGroupResponse,
+    CreateLoadBalancerSnatIpsResponse: CreateLoadBalancerSnatIpsResponse,
     ClassicalLoadBalancerInfo: ClassicalLoadBalancerInfo,
     RuleOutput: RuleOutput,
     DeleteLoadBalancerRequest: DeleteLoadBalancerRequest,
@@ -7750,6 +7964,7 @@ module.exports = {
     ModifyDomainAttributesRequest: ModifyDomainAttributesRequest,
     DeregisterTargetsRequest: DeregisterTargetsRequest,
     InternetAccessible: InternetAccessible,
+    CreateLoadBalancerSnatIpsRequest: CreateLoadBalancerSnatIpsRequest,
     ModifyTargetGroupInstancesWeightRequest: ModifyTargetGroupInstancesWeightRequest,
     DeleteTargetGroupsResponse: DeleteTargetGroupsResponse,
     ModifyTargetGroupInstancesPortRequest: ModifyTargetGroupInstancesPortRequest,
@@ -7763,13 +7978,16 @@ module.exports = {
     ModifyTargetGroupAttributeResponse: ModifyTargetGroupAttributeResponse,
     DescribeBlockIPTaskRequest: DescribeBlockIPTaskRequest,
     CreateLoadBalancerResponse: CreateLoadBalancerResponse,
+    DeleteLoadBalancerListenersResponse: DeleteLoadBalancerListenersResponse,
     DescribeListenersRequest: DescribeListenersRequest,
+    DeleteLoadBalancerSnatIpsRequest: DeleteLoadBalancerSnatIpsRequest,
     SetLoadBalancerSecurityGroupsRequest: SetLoadBalancerSecurityGroupsRequest,
     DescribeClassicalLBTargetsResponse: DescribeClassicalLBTargetsResponse,
     RewriteLocationMap: RewriteLocationMap,
     ModifyTargetPortRequest: ModifyTargetPortRequest,
     DescribeLoadBalancersResponse: DescribeLoadBalancersResponse,
     DeleteListenerResponse: DeleteListenerResponse,
+    DeleteLoadBalancerSnatIpsResponse: DeleteLoadBalancerSnatIpsResponse,
     CertificateOutput: CertificateOutput,
     DeleteTargetGroupsRequest: DeleteTargetGroupsRequest,
     DescribeClassicalLBListenersRequest: DescribeClassicalLBListenersRequest,
