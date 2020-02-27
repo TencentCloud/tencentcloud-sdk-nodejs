@@ -1566,6 +1566,24 @@ class ClusterCIDRSettings extends  AbstractModel {
          */
         this.MaxClusterServiceNum = null;
 
+        /**
+         * 用于分配集群服务 IP 的 CIDR，不得与 VPC CIDR 冲突，也不得与同 VPC 内其他集群 CIDR 冲突。且网段范围必须在内网网段内，例如:10.1.0.0/14, 192.168.0.1/18,172.16.0.0/16。
+         * @type {string || null}
+         */
+        this.ServiceCIDR = null;
+
+        /**
+         * VPC-CNI网络模式下，弹性网卡的子网Id。
+         * @type {Array.<string> || null}
+         */
+        this.EniSubnetIds = null;
+
+        /**
+         * VPC-CNI网络模式下，弹性网卡IP的回收时间，取值范围[300,15768000)
+         * @type {number || null}
+         */
+        this.ClaimExpiredSeconds = null;
+
     }
 
     /**
@@ -1579,6 +1597,9 @@ class ClusterCIDRSettings extends  AbstractModel {
         this.IgnoreClusterCIDRConflict = 'IgnoreClusterCIDRConflict' in params ? params.IgnoreClusterCIDRConflict : null;
         this.MaxNodePodNum = 'MaxNodePodNum' in params ? params.MaxNodePodNum : null;
         this.MaxClusterServiceNum = 'MaxClusterServiceNum' in params ? params.MaxClusterServiceNum : null;
+        this.ServiceCIDR = 'ServiceCIDR' in params ? params.ServiceCIDR : null;
+        this.EniSubnetIds = 'EniSubnetIds' in params ? params.EniSubnetIds : null;
+        this.ClaimExpiredSeconds = 'ClaimExpiredSeconds' in params ? params.ClaimExpiredSeconds : null;
 
     }
 }
@@ -1936,7 +1957,7 @@ class DataDisk extends  AbstractModel {
         this.DiskType = null;
 
         /**
-         * 文件系统
+         * 文件系统(ext3/ext4/xfs)
          * @type {string || null}
          */
         this.FileSystem = null;
@@ -2037,7 +2058,7 @@ class LoginSettings extends  AbstractModel {
         super();
 
         /**
-         * 实例登录密码。不同操作系统类型密码复杂度限制不一样，具体如下：<br><li>Linux实例密码必须8到16位，至少包括两项[a-z，A-Z]、[0-9] 和 [( ) ` ~ ! @ # $ % ^ & * - + = | { } [ ] : ; ' , . ? / ]中的特殊符号。<br><li>Windows实例密码必须12到16位，至少包括三项[a-z]，[A-Z]，[0-9] 和 [( ) ` ~ ! @ # $ % ^ & * - + = { } [ ] : ; ' , . ? /]中的特殊符号。<br><br>若不指定该参数，则由系统随机生成密码，并通过站内信方式通知到用户。
+         * 实例登录密码。不同操作系统类型密码复杂度限制不一样，具体如下：<br><li>Linux实例密码必须8到30位，至少包括两项[a-z]，[A-Z]、[0-9] 和 [( ) \` ~ ! @ # $ % ^ & &#42;  - + = | { } [ ] : ; ' , . ? / ]中的特殊符号。<br><li>Windows实例密码必须12到30位，至少包括三项[a-z]，[A-Z]，[0-9] 和 [( ) \` ~ ! @ # $ % ^ & &#42; - + = | { } [ ] : ; ' , . ? /]中的特殊符号。<br><br>若不指定该参数，则由系统随机生成密码，并通过站内信方式通知到用户。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
@@ -2731,6 +2752,18 @@ class ClusterAdvancedSettings extends  AbstractModel {
          */
         this.ExtraArgs = null;
 
+        /**
+         * 集群网络类型（包括GR(全局路由)和VPC-CNI两种模式，默认为GR。
+         * @type {string || null}
+         */
+        this.NetworkType = null;
+
+        /**
+         * 集群VPC-CNI模式是否为非固定IP，默认: FALSE 固定IP。
+         * @type {boolean || null}
+         */
+        this.IsNonStaticIpMode = null;
+
     }
 
     /**
@@ -2750,6 +2783,8 @@ class ClusterAdvancedSettings extends  AbstractModel {
             obj.deserialize(params.ExtraArgs)
             this.ExtraArgs = obj;
         }
+        this.NetworkType = 'NetworkType' in params ? params.NetworkType : null;
+        this.IsNonStaticIpMode = 'IsNonStaticIpMode' in params ? params.IsNonStaticIpMode : null;
 
     }
 }

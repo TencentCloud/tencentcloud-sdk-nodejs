@@ -31,8 +31,10 @@ const PreExecuteFileSettings = models.PreExecuteFileSettings;
 const CreateInstanceRequest = models.CreateInstanceRequest;
 const DescribeInstancesResponse = models.DescribeInstancesResponse;
 const InquiryPriceScaleOutInstanceRequest = models.InquiryPriceScaleOutInstanceRequest;
+const Tag = models.Tag;
 const Placement = models.Placement;
 const DescribeInstancesRequest = models.DescribeInstancesRequest;
+const CustomMetaInfo = models.CustomMetaInfo;
 const InquiryPriceUpdateInstanceRequest = models.InquiryPriceUpdateInstanceRequest;
 const COSSettings = models.COSSettings;
 const ClusterInstancesInfo = models.ClusterInstancesInfo;
@@ -82,7 +84,7 @@ class EmrClient extends AbstractClient {
     }
 
     /**
-     * 销毁EMR实例
+     * 销毁EMR实例。此接口仅支持弹性MapReduce正式计费版本。
      * @param {TerminateInstanceRequest} req
      * @param {function(string, TerminateInstanceResponse):void} cb
      * @public

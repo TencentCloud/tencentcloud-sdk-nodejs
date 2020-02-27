@@ -294,7 +294,7 @@ class ModifyTaskExResponse extends  AbstractModel {
         super();
 
         /**
-         * 拨测任务id。验证通过后，创建任务时使用，传递给CreateTask 接口。
+         * 拨测任务ID。验证通过后，创建任务时使用，传递给CreateTask 接口。
          * @type {number || null}
          */
         this.TaskId = null;
@@ -416,7 +416,7 @@ class CatReturnDetail extends  AbstractModel {
         this.MapKey = null;
 
         /**
-         * 拨测目标的ip
+         * 拨测目标的IP
          * @type {string || null}
          */
         this.ServerIp = null;
@@ -1184,7 +1184,7 @@ class AgentGroup extends  AbstractModel {
         super();
 
         /**
-         * 拨测分组Id
+         * 拨测分组ID
          * @type {number || null}
          */
         this.GroupId = null;
@@ -1622,7 +1622,7 @@ class AlarmTopic extends  AbstractModel {
         super();
 
         /**
-         * 主题的Id
+         * 主题的ID
          * @type {string || null}
          */
         this.TopicId = null;
@@ -1663,7 +1663,7 @@ class ResultSummary extends  AbstractModel {
         this.LogTime = null;
 
         /**
-         * 任务Id
+         * 任务ID
          * @type {number || null}
          */
         this.TaskId = null;
@@ -2158,7 +2158,7 @@ class CatLog extends  AbstractModel {
         this.CatTypeName = null;
 
         /**
-         * 任务Id
+         * 任务ID
          * @type {number || null}
          */
         this.TaskId = null;
@@ -2176,13 +2176,13 @@ class CatLog extends  AbstractModel {
         this.Isp = null;
 
         /**
-         * 被拨测Server 的Ip
+         * 被拨测Server的IP
          * @type {string || null}
          */
         this.ServerIp = null;
 
         /**
-         * 被拨测Server 的域名
+         * 被拨测Server的域名
          * @type {string || null}
          */
         this.DomainName = null;
@@ -2230,7 +2230,7 @@ class CatLog extends  AbstractModel {
         this.RespMsg = null;
 
         /**
-         * 客户端ip
+         * 客户端IP
          * @type {string || null}
          */
         this.ClientIp = null;
@@ -2582,7 +2582,7 @@ class ModifyTaskExRequest extends  AbstractModel {
         this.CatTypeName = null;
 
         /**
-         * 拨测的url  例如：www.qq.com (url域名解析需要能解析出具体的ip)
+         * 拨测的URL，例如：www.qq.com (URL域名解析需要能解析出具体的IP)
          * @type {string || null}
          */
         this.Url = null;
@@ -2600,13 +2600,13 @@ class ModifyTaskExRequest extends  AbstractModel {
         this.TaskName = null;
 
         /**
-         * 验证成功的拨测任务id
+         * 验证成功的拨测任务ID
          * @type {number || null}
          */
         this.TaskId = null;
 
         /**
-         * 拨测分组id，体现本拨测任务要采用那些运营商作为拨测源。一般可直接填写本用户的默认拨测分组。参见：DescribeAgentGroupList 接口，本参数使用返回结果里的groupId的值。注意，Type为0时，AgentGroupId为必填
+         * 拨测分组ID，体现本拨测任务要采用那些运营商作为拨测源。一般可直接填写本用户的默认拨测分组。参见：DescribeAgentGroupList 接口，本参数使用返回结果里的GroupId的值。注意，Type为0时，AgentGroupId为必填
          * @type {number || null}
          */
         this.AgentGroupId = null;
@@ -2624,25 +2624,25 @@ class ModifyTaskExRequest extends  AbstractModel {
         this.Port = null;
 
         /**
-         * 是否为Header请求（非0 发起Header 请求。为0，且PostData 非空，发起POST请求。为0，PostData 为空，发起GET请求）
+         * 是否为Header请求（非0 发起Header 请求。为0，且PostData非空，发起POST请求。为0，PostData为空，发起GET请求）
          * @type {number || null}
          */
         this.IsHeader = null;
 
         /**
-         * url中含有https时有用。缺省为SSLv23。需要为 TLSv1_2, TLSv1_1, TLSv1, SSLv2, SSLv23, SSLv3 之一
+         * URL中含有"https"时有用。缺省为SSLv23。需要为 TLSv1_2, TLSv1_1, TLSv1, SSLv2, SSLv23, SSLv3 之一
          * @type {string || null}
          */
         this.SslVer = null;
 
         /**
-         * POST 请求数据。空字符串表示非POST请求
+         * POST 请求数据，空字符串表示非POST请求
          * @type {string || null}
          */
         this.PostData = null;
 
         /**
-         * 用户agent 信息
+         * 用户Agent信息
          * @type {string || null}
          */
         this.UserAgent = null;
@@ -2654,37 +2654,37 @@ class ModifyTaskExRequest extends  AbstractModel {
         this.CheckStr = null;
 
         /**
-         * 1 表示通过检查结果是否包含checkStr 进行校验
+         * 1 表示通过检查结果是否包含CheckStr 进行校验
          * @type {number || null}
          */
         this.CheckType = null;
 
         /**
-         * 需要设置的cookie信息
+         * 需要设置的Cookie信息
          * @type {string || null}
          */
         this.Cookie = null;
 
         /**
-         * 登陆服务器的账号。如果为空字符串，表示不用校验用户密码。只做简单连接服务器的拨测。
+         * 登录服务器的账号。如果为空字符串，表示不用校验用户密码。只做简单连接服务器的拨测
          * @type {string || null}
          */
         this.UserName = null;
 
         /**
-         * 登陆服务器的密码
+         * 登录服务器的密码
          * @type {string || null}
          */
         this.PassWord = null;
 
         /**
-         * 缺省为0。0 表示请求为字符串类型。1表示为二进制类型
+         * 缺省为0，0 表示请求为字符串类型, 1表示为二进制类型
          * @type {number || null}
          */
         this.ReqDataType = null;
 
         /**
-         * 发起tcp, udp请求的协议请求数据
+         * 发起TCP, UDP请求的协议请求数据
          * @type {string || null}
          */
         this.ReqData = null;
@@ -2696,19 +2696,19 @@ class ModifyTaskExRequest extends  AbstractModel {
         this.RespDataType = null;
 
         /**
-         * 预期的udp请求的回应数据。字符串型，只需要返回的结果里包含本字符串算校验通过。二进制型，则需要严格等于才算通过
+         * 预期的UDP请求的回应数据。字符串型，只需要返回的结果里包含本字符串算校验通过。二进制型，则需要严格等于才算通过
          * @type {string || null}
          */
         this.RespData = null;
 
         /**
-         * 目的dns服务器  可以为空字符串
+         * 目的DNS服务器，可以为空字符串
          * @type {string || null}
          */
         this.DnsSvr = null;
 
         /**
-         * 需要检验是否在dns ip列表的ip。可以为空字符串，表示不校验
+         * 需要检验是否在DNS IP列表的IP。可以为空字符串，表示不校验
          * @type {string || null}
          */
         this.DnsCheckIp = null;
@@ -2720,13 +2720,13 @@ class ModifyTaskExRequest extends  AbstractModel {
         this.DnsQueryType = null;
 
         /**
-         * 是否使用安全链接ssl  0 不使用，1 使用
+         * 是否使用安全链接SSL， 0 不使用，1 使用
          * @type {number || null}
          */
         this.UseSecConn = null;
 
         /**
-         * ftp登陆验证方式  0 不验证  1 匿名登陆  2 需要身份验证
+         * FTP登录验证方式，  0 不验证  1 匿名登录  2 需要身份验证
          * @type {number || null}
          */
         this.NeedAuth = null;
@@ -2827,7 +2827,7 @@ class CreateTaskExRequest extends  AbstractModel {
         this.CatTypeName = null;
 
         /**
-         * 拨测的url  例如：www.qq.com (url域名解析需要能解析出具体的ip)
+         * 拨测的URL， 例如：www.qq.com (URL域名解析需要能解析出具体的IP)
          * @type {string || null}
          */
         this.Url = null;
@@ -2845,7 +2845,7 @@ class CreateTaskExRequest extends  AbstractModel {
         this.TaskName = null;
 
         /**
-         * 拨测分组id，体现本拨测任务要采用那些运营商作为拨测源。一般可直接填写本用户的默认拨测分组。参见：DescribeAgentGroups 接口，本参数使用返回结果里的GroupId的值。注意： Type为0时，AgentGroupId为必填
+         * 拨测分组ID，体现本拨测任务要采用那些运营商作为拨测源。一般可直接填写本用户的默认拨测分组。参见：DescribeAgentGroups 接口，本参数使用返回结果里的GroupId的值。注意： Type为0时，AgentGroupId为必填
          * @type {number || null}
          */
         this.AgentGroupId = null;
@@ -2863,19 +2863,19 @@ class CreateTaskExRequest extends  AbstractModel {
         this.IsHeader = null;
 
         /**
-         * url中含有https时有用。缺省为SSLv23。需要为 TLSv1_2, TLSv1_1, TLSv1, SSLv2, SSLv23, SSLv3 之一
+         * URL中含有"https"时有用。缺省为SSLv23。需要为 TLSv1_2, TLSv1_1, TLSv1, SSLv2, SSLv23, SSLv3 之一
          * @type {string || null}
          */
         this.SslVer = null;
 
         /**
-         * POST 请求数据。空字符串表示非POST请求
+         * POST请求数据。空字符串表示非POST请求
          * @type {string || null}
          */
         this.PostData = null;
 
         /**
-         * 用户agent 信息
+         * 用户Agent信息
          * @type {string || null}
          */
         this.UserAgent = null;
@@ -2893,25 +2893,25 @@ class CreateTaskExRequest extends  AbstractModel {
         this.CheckType = null;
 
         /**
-         * 需要设置的cookie信息
+         * 需要设置的Cookie信息
          * @type {string || null}
          */
         this.Cookie = null;
 
         /**
-         * 任务号。用于验证且修改任务时传入原任务号
+         * 任务ID，用于验证且修改任务时传入原任务ID
          * @type {number || null}
          */
         this.TaskId = null;
 
         /**
-         * 登陆服务器的账号。如果为空字符串，表示不用校验用户密码。只做简单连接服务器的拨测。
+         * 登录服务器的账号。如果为空字符串，表示不用校验用户密码。只做简单连接服务器的拨测
          * @type {string || null}
          */
         this.UserName = null;
 
         /**
-         * 登陆服务器的密码
+         * 登录服务器的密码
          * @type {string || null}
          */
         this.PassWord = null;
@@ -2923,7 +2923,7 @@ class CreateTaskExRequest extends  AbstractModel {
         this.ReqDataType = null;
 
         /**
-         * 发起tcp, udp请求的协议请求数据
+         * 发起TCP, UDP请求的协议请求数据
          * @type {string || null}
          */
         this.ReqData = null;
@@ -2935,19 +2935,19 @@ class CreateTaskExRequest extends  AbstractModel {
         this.RespDataType = null;
 
         /**
-         * 预期的udp请求的回应数据。字符串型，只需要返回的结果里包含本字符串算校验通过。二进制型，则需要严格等于才算通过
+         * 预期的UDP请求的回应数据。字符串型，只需要返回的结果里包含本字符串算校验通过。二进制型，则需要严格等于才算通过
          * @type {string || null}
          */
         this.RespData = null;
 
         /**
-         * 目的dns服务器  可以为空字符串
+         * 目的DNS服务器  可以为空字符串
          * @type {string || null}
          */
         this.DnsSvr = null;
 
         /**
-         * 需要检验是否在dns ip列表的ip。可以为空字符串，表示不校验
+         * 需要检验是否在DNS IP列表的IP。可以为空字符串，表示不校验
          * @type {string || null}
          */
         this.DnsCheckIp = null;
@@ -2959,13 +2959,13 @@ class CreateTaskExRequest extends  AbstractModel {
         this.DnsQueryType = null;
 
         /**
-         * 是否使用安全链接ssl  0 不使用，1 使用
+         * 是否使用安全链接SSL， 0 不使用，1 使用
          * @type {number || null}
          */
         this.UseSecConn = null;
 
         /**
-         * ftp登陆验证方式  0 不验证  1 匿名登陆  2 需要身份验证
+         * FTP登录验证方式， 0 不验证 ， 1 匿名登录， 2 需要身份验证
          * @type {number || null}
          */
         this.NeedAuth = null;
@@ -3066,7 +3066,7 @@ class TaskAlarm extends  AbstractModel {
         super();
 
         /**
-         * 任务Id
+         * 任务ID
          * @type {number || null}
          */
         this.TaskId = null;
@@ -3096,7 +3096,7 @@ class TaskAlarm extends  AbstractModel {
         this.Status = null;
 
         /**
-         * 拨测任务的Url
+         * 拨测任务的URL
          * @type {string || null}
          */
         this.CgiUrl = null;
@@ -3269,7 +3269,7 @@ class CatTaskDetail extends  AbstractModel {
         super();
 
         /**
-         * 任务Id
+         * 任务ID
          * @type {number || null}
          */
         this.TaskId = null;
@@ -3293,19 +3293,19 @@ class CatTaskDetail extends  AbstractModel {
         this.CatTypeName = null;
 
         /**
-         * 拨测任务的Url
+         * 拨测任务的URL
          * @type {string || null}
          */
         this.CgiUrl = null;
 
         /**
-         * 拨测分组id
+         * 拨测分组ID
          * @type {number || null}
          */
         this.AgentGroupId = null;
 
         /**
-         * 告警策略组id
+         * 告警策略组ID
          * @type {number || null}
          */
         this.PolicyGroupId = null;
@@ -3329,7 +3329,7 @@ class CatTaskDetail extends  AbstractModel {
         this.Type = null;
 
         /**
-         * 绑定的统一告警主题Id
+         * 绑定的统一告警主题ID
          * @type {string || null}
          */
         this.TopicId = null;
@@ -3365,13 +3365,13 @@ class CatTaskDetail extends  AbstractModel {
         this.CheckType = null;
 
         /**
-         * 用户agent 信息
+         * 用户Agent信息
          * @type {string || null}
          */
         this.UserAgent = null;
 
         /**
-         * 设置的cookie信息
+         * 设置的Cookie信息
          * @type {string || null}
          */
         this.Cookie = null;
@@ -3395,43 +3395,43 @@ class CatTaskDetail extends  AbstractModel {
         this.IsHeader = null;
 
         /**
-         * 目的dns服务器
+         * 目的DNS服务器
          * @type {string || null}
          */
         this.DnsSvr = null;
 
         /**
-         * 需要检验是否在dns ip列表的ip
+         * 需要检验是否在DNS IP列表的IP
          * @type {string || null}
          */
         this.DnsCheckIp = null;
 
         /**
-         * dns查询类型
+         * DNS查询类型
          * @type {string || null}
          */
         this.DnsQueryType = null;
 
         /**
-         * 登陆服务器的账号
+         * 登录服务器的账号
          * @type {string || null}
          */
         this.UserName = null;
 
         /**
-         * 登陆服务器的密码
+         * 登录服务器的密码
          * @type {string || null}
          */
         this.PassWord = null;
 
         /**
-         * 是否使用安全链接ssl  0 不使用，1 使用
+         * 是否使用安全链接SSL， 0 不使用，1 使用
          * @type {number || null}
          */
         this.UseSecConn = null;
 
         /**
-         * ftp登陆验证方式  0 不验证  1 匿名登陆  2 需要身份验证
+         * FTP登录验证方式  0 不验证  1 匿名登录  2 需要身份验证
          * @type {number || null}
          */
         this.NeedAuth = null;
@@ -3443,7 +3443,7 @@ class CatTaskDetail extends  AbstractModel {
         this.ReqDataType = null;
 
         /**
-         * 发起tcp, udp请求的协议请求数据
+         * 发起TCP, UDP请求的协议请求数据
          * @type {string || null}
          */
         this.ReqData = null;
@@ -3455,7 +3455,7 @@ class CatTaskDetail extends  AbstractModel {
         this.RespDataType = null;
 
         /**
-         * 预期的udp请求的回应数据
+         * 预期的UDP请求的回应数据
          * @type {string || null}
          */
         this.RespData = null;
@@ -3970,13 +3970,13 @@ class CreateTaskExResponse extends  AbstractModel {
         super();
 
         /**
-         * 拨测结果查询id。接下来可以使用查询拨测是否能够成功，验证能否通过。
+         * 拨测结果查询ID。接下来可以使用查询拨测是否能够成功，验证能否通过。
          * @type {number || null}
          */
         this.ResultId = null;
 
         /**
-         * 拨测任务id。验证通过后，创建任务时使用，传递给CreateTask 接口。
+         * 拨测任务ID。验证通过后，创建任务时使用，传递给CreateTask 接口。
          * @type {number || null}
          */
         this.TaskId = null;

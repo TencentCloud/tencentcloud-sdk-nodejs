@@ -1680,7 +1680,7 @@ class DescribeDomainsConfigResponse extends  AbstractModel {
 }
 
 /**
- * CDN域名简要信息。
+ * 域名基础配置信息，含 CNAME、状态、业务类型、加速区域、创建时间、更新时间、源站配置等。
  * @class
  */
 class BriefDomain extends  AbstractModel {
@@ -1688,79 +1688,101 @@ class BriefDomain extends  AbstractModel {
         super();
 
         /**
-         * 域名ID。
+         * 域名 ID
          * @type {string || null}
          */
         this.ResourceId = null;
 
         /**
-         * 腾讯云账号ID。
+         * 腾讯云账号 ID
          * @type {number || null}
          */
         this.AppId = null;
 
         /**
-         * CDN加速域名。
+         * 加速域名
          * @type {string || null}
          */
         this.Domain = null;
 
         /**
-         * 域名CName。
+         * 域名对应的 CNAME 地址
          * @type {string || null}
          */
         this.Cname = null;
 
         /**
-         * 域名状态，pending，rejected，processing， online，offline，deleted分别表示审核中，审核未通过，审核通过部署中，已开启，已关闭，已删除。
+         * 加速服务状态
+rejected：域名审核未通过，域名备案过期/被注销导致
+processing：部署中
+online：已启动
+offline：已关闭
          * @type {string || null}
          */
         this.Status = null;
 
         /**
-         * 项目ID。
+         * 项目 ID，可前往腾讯云项目管理页面查看
          * @type {number || null}
          */
         this.ProjectId = null;
 
         /**
-         * 域名业务类型，web，download，media分别表示静态加速，下载加速和流媒体加速。
+         * 域名业务类型
+web：静态加速
+download：下载加速
+media：流媒体点播加速
          * @type {string || null}
          */
         this.ServiceType = null;
 
         /**
-         * 域名创建时间。
+         * 域名创建时间
          * @type {string || null}
          */
         this.CreateTime = null;
 
         /**
-         * 域名更新时间。
+         * 域名更新时间
          * @type {string || null}
          */
         this.UpdateTime = null;
 
         /**
-         * 源站配置详情。
+         * 源站配置详情
          * @type {Origin || null}
          */
         this.Origin = null;
 
         /**
-         * 域名封禁状态，normal，overdue，quota，malicious，ddos，idle，unlicensed，capping，readonly分别表示。
+         * 域名封禁状态
+normal：正常状态
+overdue：账号欠费导致域名关闭，充值完成后可自行启动加速服务
+malicious：域名出现恶意行为，强制关闭加速服务
+ddos：域名被大规模 DDoS 攻击，关闭加速服务
+idle：域名超过 90 天内无任何操作、数据产生，判定为不活跃域名自动关闭加速服务，可自行启动加速服务
+unlicensed：域名未备案/备案注销，自动关闭加速服务，备案完成后可自行启动加速服务
+capping：触发配置的带宽阈值上限
+readonly：域名存在特殊配置，被锁定
          * @type {string || null}
          */
         this.Disable = null;
 
         /**
-         * 加速区域，mainland，oversea或global。
+         * 加速区域
+mainland：中国境内加速
+overseas：中国境外加速
+global：全球加速
          * @type {string || null}
          */
         this.Area = null;
 
         /**
-         * 域名锁定状态，normal，mainland，overseas或global，分别表示未被锁定，国内锁定，海外锁定或全球锁定。
+         * 域名锁定状态
+normal：未锁定
+mainland：中国境内锁定
+overseas：中国境外锁定
+global：全球锁定
          * @type {string || null}
          */
         this.Readonly = null;
@@ -3644,7 +3666,7 @@ index 时填充 /
 }
 
 /**
- * CDN域名详细配置信息。
+ * 加速域名全量配置信息
  * @class
  */
 class DetailDomain extends  AbstractModel {
@@ -3652,257 +3674,279 @@ class DetailDomain extends  AbstractModel {
         super();
 
         /**
-         * 域名ID。
+         * 域名 ID
          * @type {string || null}
          */
         this.ResourceId = null;
 
         /**
-         * 腾讯云账号ID。
+         * 腾讯云账号ID
          * @type {number || null}
          */
         this.AppId = null;
 
         /**
-         * 加速域名。
+         * 加速域名
          * @type {string || null}
          */
         this.Domain = null;
 
         /**
-         * 域名CName。
+         * 域名对应的 CNAME 地址
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.Cname = null;
 
         /**
-         * 域名状态，pending，rejected，processing， online，offline，deleted分别表示审核中，审核未通过，审核通过部署中，已开启，已关闭，已删除。
+         * 加速服务状态
+rejected：域名审核未通过，域名备案过期/被注销导致
+processing：部署中
+online：已启动
+offline：已关闭
          * @type {string || null}
          */
         this.Status = null;
 
         /**
-         * 项目ID。
+         * 项目 ID，可前往腾讯云项目管理页面查看
          * @type {number || null}
          */
         this.ProjectId = null;
 
         /**
-         * 域名业务类型，web，download，media分别表示静态加速，下载加速和流媒体加速。
+         * 域名业务类型
+web：静态加速
+download：下载加速
+media：流媒体点播加速
          * @type {string || null}
          */
         this.ServiceType = null;
 
         /**
-         * 域名创建时间。
+         * 域名创建时间
          * @type {string || null}
          */
         this.CreateTime = null;
 
         /**
-         * 域名更新时间。
+         * 域名更新时间
          * @type {string || null}
          */
         this.UpdateTime = null;
 
         /**
-         * 源站配置。
+         * 源站配置
          * @type {Origin || null}
          */
         this.Origin = null;
 
         /**
-         * IP黑白名单配置。
+         * IP 黑白名单配置
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {IpFilter || null}
          */
         this.IpFilter = null;
 
         /**
-         * IP限频配置。
+         * IP 访问限频配置
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {IpFreqLimit || null}
          */
         this.IpFreqLimit = null;
 
         /**
-         * 状态码缓存配置。
+         * 状态码缓存配置
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {StatusCodeCache || null}
          */
         this.StatusCodeCache = null;
 
         /**
-         * 智能压缩配置。
+         * 智能压缩配置
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {Compression || null}
          */
         this.Compression = null;
 
         /**
-         * 带宽封顶配置。
+         * 带宽封顶配置
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {BandwidthAlert || null}
          */
         this.BandwidthAlert = null;
 
         /**
-         * Range回源配置。
+         * Range 回源配置
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {RangeOriginPull || null}
          */
         this.RangeOriginPull = null;
 
         /**
-         * 301和302自动回源跟随配置。
+         * 301/302 回源自动跟随配置
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {FollowRedirect || null}
          */
         this.FollowRedirect = null;
 
         /**
-         * 错误码重定向配置。
+         * 自定义错误页面配置（功能灰度中，敬请期待）
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {ErrorPage || null}
          */
         this.ErrorPage = null;
 
         /**
-         * 回源请求头部配置。
+         * 自定义请求头部配置
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {RequestHeader || null}
          */
         this.RequestHeader = null;
 
         /**
-         * 源站响应头部配置。
+         * 自定义响应头部配置
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {ResponseHeader || null}
          */
         this.ResponseHeader = null;
 
         /**
-         * 下载速度配置。
+         * 单链接下行限速配置
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {DownstreamCapping || null}
          */
         this.DownstreamCapping = null;
 
         /**
-         * 节点缓存配置。
+         * 带参/不带参缓存配置
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {CacheKey || null}
          */
         this.CacheKey = null;
 
         /**
-         * 遵循源站缓存头部配置。
+         * 源站头部缓存配置
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {ResponseHeaderCache || null}
          */
         this.ResponseHeaderCache = null;
 
         /**
-         * 视频拖拽配置。
+         * 视频拖拽配置
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {VideoSeek || null}
          */
         this.VideoSeek = null;
 
         /**
-         * 缓存规则配置。
+         * 节点缓存过期规则配置
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {Cache || null}
          */
         this.Cache = null;
 
         /**
-         * 跨国优化配置。
+         * 跨国链路优化配置（功能灰度中，敬请期待）
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {OriginPullOptimization || null}
          */
         this.OriginPullOptimization = null;
 
         /**
-         * Https配置。
+         * Https 加速相关配置
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {Https || null}
          */
         this.Https = null;
 
         /**
-         * 时间戳防盗链配置。
+         * 时间戳防盗链配置
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {Authentication || null}
          */
         this.Authentication = null;
 
         /**
-         * seo优化配置。
+         * SEO 优化配置
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {Seo || null}
          */
         this.Seo = null;
 
         /**
-         * 域名封禁状态，normal，overdue，quota，malicious，ddos，idle，unlicensed，capping分别表示。
+         * 域名封禁状态
+normal：正常状态
+overdue：账号欠费导致域名关闭，充值完成后可自行启动加速服务
+malicious：域名出现恶意行为，强制关闭加速服务
+ddos：域名被大规模 DDoS 攻击，关闭加速服务
+idle：域名超过 90 天内无任何操作、数据产生，判定为不活跃域名自动关闭加速服务，可自行启动加速服务
+unlicensed：域名未备案/备案注销，自动关闭加速服务，备案完成后可自行启动加速服务
+capping：触发配置的带宽阈值上限
+readonly：域名存在特殊配置，被锁定
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.Disable = null;
 
         /**
-         * 访问协议强制跳转配置。
+         * 访问协议强制跳转配置
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {ForceRedirect || null}
          */
         this.ForceRedirect = null;
 
         /**
-         * 防盗链配置。
+         * Referer 防盗链配置
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {Referer || null}
          */
         this.Referer = null;
 
         /**
-         * 浏览器缓存规则配置。
+         * 浏览器缓存过期规则配置（功能灰度中，敬请期待）
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {MaxAge || null}
          */
         this.MaxAge = null;
 
         /**
-         * Ipv6配置。
+         * Ipv6 配置（功能灰度中，敬请期待）
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {Ipv6 || null}
          */
         this.Ipv6 = null;
 
         /**
-         * 是否兼容旧版本配置。
+         * 是否兼容旧版本配置（内部兼容性字段）
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {Compatibility || null}
          */
         this.Compatibility = null;
 
         /**
-         * 分地区特殊配置。
+         * 区域特殊配置
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {SpecificConfig || null}
          */
         this.SpecificConfig = null;
 
         /**
-         * 加速区域，mainland，overseas或global。
+         * 加速区域
+mainland：中国境内加速
+overseas：中国境外加速
+global：全球加速
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.Area = null;
 
         /**
-         * 域名锁定状态，normal，mainland，overseas或global，分别表示未被锁定，国内锁定，海外锁定或全球锁定。
+         * 域名锁定状态
+normal：未锁定
+mainland：中国境内锁定
+overseas：中国境外锁定
+global：全球锁定
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
@@ -4155,7 +4199,7 @@ class GetDisableRecordsResponse extends  AbstractModel {
 }
 
 /**
- * CdnIp 节点上下线历史
+ * CDN 节点上下线历史记录
  * @class
  */
 class CdnIpHistory extends  AbstractModel {
@@ -4163,13 +4207,16 @@ class CdnIpHistory extends  AbstractModel {
         super();
 
         /**
-         * 上下线状态。online 为上线，offline 为下线。
+         * 操作类型
+online：节点上线
+offline：节点下线
          * @type {string || null}
          */
         this.Status = null;
 
         /**
-         * 操作时间。当该值为 null 时表示无历史状态变更记录。
+         * 操作类型对应的操作时间
+当该值为 null 时表示无历史状态变更记录
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
@@ -7750,7 +7797,7 @@ class DeleteCdnDomainResponse extends  AbstractModel {
 }
 
 /**
- * CdnIp 属性详情。
+ * IP 属性信息
  * @class
  */
 class CdnIp extends  AbstractModel {
@@ -7758,31 +7805,37 @@ class CdnIp extends  AbstractModel {
         super();
 
         /**
-         * 节点 ip。
+         * 指定查询的 IP
          * @type {string || null}
          */
         this.Ip = null;
 
         /**
-         * 是否为腾讯云 CDN 加速节点。yes 表示该节点为腾讯云 CDN 节点，no 表示该节点不是腾讯云 CDN 节点。
+         * IP 归属：
+yes：节点归属于腾讯云 CDN
+no：节点不属于腾讯云 CDN
          * @type {string || null}
          */
         this.Platform = null;
 
         /**
-         * 表示该节点所处的省份/国家。unknown 表示节点位置未知。
+         * 节点所处的省份/国家
+unknown 表示节点位置未知
          * @type {string || null}
          */
         this.Location = null;
 
         /**
-         * 节点上下线历史记录。
+         * 节点上下线历史记录
          * @type {Array.<CdnIpHistory> || null}
          */
         this.History = null;
 
         /**
-         * 节点的服务地域。mainland 表示服务地域为中国境内，overseas 表示服务地域为中国境外， unknown 表示服务地域未知。
+         * 节点的所在区域
+mainland：中国境内加速节点
+overseas：中国境外加速节点
+unknown：服务地域无法获取
          * @type {string || null}
          */
         this.Area = null;

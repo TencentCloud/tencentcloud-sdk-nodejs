@@ -17,70 +17,74 @@
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const DescribeUinInWhitelistResponse = models.DescribeUinInWhitelistResponse;
-const ModifyZoneNameRequest = models.ModifyZoneNameRequest;
+const DescribeTasksRequest = models.DescribeTasksRequest;
 const IdlFileInfo = models.IdlFileInfo;
 const ClearTablesRequest = models.ClearTablesRequest;
-const DescribeTasksRequest = models.DescribeTasksRequest;
+const DescribeClustersRequest = models.DescribeClustersRequest;
+const ModifyTableQuotasResponse = models.ModifyTableQuotasResponse;
 const DescribeIdlFileInfosResponse = models.DescribeIdlFileInfosResponse;
 const ModifyAppNameRequest = models.ModifyAppNameRequest;
-const DescribeTablesInRecycleRequest = models.DescribeTablesInRecycleRequest;
-const DescribeAppsRequest = models.DescribeAppsRequest;
-const DeleteZoneRequest = models.DeleteZoneRequest;
-const TableResult = models.TableResult;
+const CreateBackupRequest = models.CreateBackupRequest;
+const ModifyTableGroupNameResponse = models.ModifyTableGroupNameResponse;
+const RecoverRecycleTablesResponse = models.RecoverRecycleTablesResponse;
+const ModifyClusterPasswordResponse = models.ModifyClusterPasswordResponse;
+const DeleteClusterResponse = models.DeleteClusterResponse;
+const VerifyIdlFilesRequest = models.VerifyIdlFilesRequest;
+const ModifyClusterNameRequest = models.ModifyClusterNameRequest;
 const ClearTablesResponse = models.ClearTablesResponse;
 const DescribeIdlFileInfosRequest = models.DescribeIdlFileInfosRequest;
-const ParsedTableInfo = models.ParsedTableInfo;
+const TableResultNew = models.TableResultNew;
+const CreateClusterResponse = models.CreateClusterResponse;
+const ErrorInfo = models.ErrorInfo;
 const CreateTablesRequest = models.CreateTablesRequest;
-const ModifyTableMemosRequest = models.ModifyTableMemosRequest;
-const RecoverRecycleTablesResponse = models.RecoverRecycleTablesResponse;
+const ClusterInfo = models.ClusterInfo;
+const ParsedTableInfoNew = models.ParsedTableInfoNew;
 const RegionInfo = models.RegionInfo;
-const DescribeZonesRequest = models.DescribeZonesRequest;
-const DeleteAppRequest = models.DeleteAppRequest;
+const TableInfoNew = models.TableInfoNew;
+const TaskInfoNew = models.TaskInfoNew;
+const RollbackTablesResponse = models.RollbackTablesResponse;
 const DescribeTablesInRecycleResponse = models.DescribeTablesInRecycleResponse;
-const DescribeTablesResponse = models.DescribeTablesResponse;
-const ModifyAppPasswordResponse = models.ModifyAppPasswordResponse;
-const DeleteIdlFilesRequest = models.DeleteIdlFilesRequest;
+const DescribeTableGroupsResponse = models.DescribeTableGroupsResponse;
 const ModifyTablesResponse = models.ModifyTablesResponse;
-const SelectedTableInfo = models.SelectedTableInfo;
-const VerifyIdlFilesResponse = models.VerifyIdlFilesResponse;
-const TableRollbackResult = models.TableRollbackResult;
-const ModifyTableQuotasResponse = models.ModifyTableQuotasResponse;
-const AppInfo = models.AppInfo;
+const ModifyTableMemosResponse = models.ModifyTableMemosResponse;
 const RollbackTablesRequest = models.RollbackTablesRequest;
+const DeleteIdlFilesRequest = models.DeleteIdlFilesRequest;
+const DeleteTableGroupResponse = models.DeleteTableGroupResponse;
+const CreateBackupResponse = models.CreateBackupResponse;
+const TableRollbackResultNew = models.TableRollbackResultNew;
+const VerifyIdlFilesResponse = models.VerifyIdlFilesResponse;
+const DeleteClusterRequest = models.DeleteClusterRequest;
+const DescribeTablesResponse = models.DescribeTablesResponse;
+const ModifyClusterNameResponse = models.ModifyClusterNameResponse;
 const RecoverRecycleTablesRequest = models.RecoverRecycleTablesRequest;
 const DescribeTasksResponse = models.DescribeTasksResponse;
 const DeleteTablesRequest = models.DeleteTablesRequest;
 const DescribeUinInWhitelistRequest = models.DescribeUinInWhitelistRequest;
-const Filter = models.Filter;
-const ZoneInfo = models.ZoneInfo;
+const CreateTableGroupResponse = models.CreateTableGroupResponse;
+const ModifyTableGroupNameRequest = models.ModifyTableGroupNameRequest;
 const DescribeRegionsResponse = models.DescribeRegionsResponse;
-const CreateZoneResponse = models.CreateZoneResponse;
-const ModifyZoneNameResponse = models.ModifyZoneNameResponse;
+const DescribeTableGroupsRequest = models.DescribeTableGroupsRequest;
 const CompareIdlFilesRequest = models.CompareIdlFilesRequest;
-const VerifyIdlFilesRequest = models.VerifyIdlFilesRequest;
-const DescribeAppsResponse = models.DescribeAppsResponse;
-const DeleteZoneResponse = models.DeleteZoneResponse;
+const SelectedTableInfoNew = models.SelectedTableInfoNew;
 const IdlFileInfoWithoutContent = models.IdlFileInfoWithoutContent;
-const ModifyTableMemosResponse = models.ModifyTableMemosResponse;
-const TableInfo = models.TableInfo;
-const RollbackTablesResponse = models.RollbackTablesResponse;
-const ErrorInfo = models.ErrorInfo;
+const ModifyClusterPasswordRequest = models.ModifyClusterPasswordRequest;
+const CreateClusterRequest = models.CreateClusterRequest;
+const Filter = models.Filter;
+const DeleteTablesResponse = models.DeleteTablesResponse;
 const ModifyTableQuotasRequest = models.ModifyTableQuotasRequest;
 const CompareIdlFilesResponse = models.CompareIdlFilesResponse;
 const ModifyTablesRequest = models.ModifyTablesRequest;
-const CreateAppRequest = models.CreateAppRequest;
+const DeleteTableGroupRequest = models.DeleteTableGroupRequest;
 const CreateTablesResponse = models.CreateTablesResponse;
-const ModifyAppPasswordRequest = models.ModifyAppPasswordRequest;
-const CreateAppResponse = models.CreateAppResponse;
+const DescribeTablesInRecycleRequest = models.DescribeTablesInRecycleRequest;
 const DescribeTablesRequest = models.DescribeTablesRequest;
 const DescribeRegionsRequest = models.DescribeRegionsRequest;
-const DescribeZonesResponse = models.DescribeZonesResponse;
-const CreateZoneRequest = models.CreateZoneRequest;
+const DescribeClustersResponse = models.DescribeClustersResponse;
 const ModifyAppNameResponse = models.ModifyAppNameResponse;
 const DeleteIdlFilesResponse = models.DeleteIdlFilesResponse;
-const DeleteTablesResponse = models.DeleteTablesResponse;
-const DeleteAppResponse = models.DeleteAppResponse;
-const TaskInfo = models.TaskInfo;
+const CreateTableGroupRequest = models.CreateTableGroupRequest;
+const ModifyTableMemosRequest = models.ModifyTableMemosRequest;
+const TableGroupInfo = models.TableGroupInfo;
 
 
 /**
@@ -94,14 +98,14 @@ class TcaplusdbClient extends AbstractClient {
     }
     
     /**
-     * 修改指定AppInstanceId的实例密码，后台将在旧密码失效之前同时支持TcaplusDB SDK使用旧密码和新密码访问数据库。在旧密码失效之前不能提交新的密码修改请求，在旧密码失效之后不能提交修改旧密码过期时间的请求。
-     * @param {ModifyAppPasswordRequest} req
-     * @param {function(string, ModifyAppPasswordResponse):void} cb
+     * 本接口用于创建TcaplusDB集群
+     * @param {CreateClusterRequest} req
+     * @param {function(string, CreateClusterResponse):void} cb
      * @public
      */
-    ModifyAppPassword(req, cb) {
-        let resp = new ModifyAppPasswordResponse();
-        this.request("ModifyAppPassword", req, resp, cb);
+    CreateCluster(req, cb) {
+        let resp = new CreateClusterResponse();
+        this.request("CreateCluster", req, resp, cb);
     }
 
     /**
@@ -127,7 +131,7 @@ class TcaplusdbClient extends AbstractClient {
     }
 
     /**
-     * 表数据回档
+     * 表格数据回档
      * @param {RollbackTablesRequest} req
      * @param {function(string, RollbackTablesResponse):void} cb
      * @public
@@ -138,18 +142,40 @@ class TcaplusdbClient extends AbstractClient {
     }
 
     /**
-     * 在TcaplusDB应用下创建大区
-     * @param {CreateZoneRequest} req
-     * @param {function(string, CreateZoneResponse):void} cb
+     * 修改指定的集群名称
+     * @param {ModifyClusterNameRequest} req
+     * @param {function(string, ModifyClusterNameResponse):void} cb
      * @public
      */
-    CreateZone(req, cb) {
-        let resp = new CreateZoneResponse();
-        this.request("CreateZone", req, resp, cb);
+    ModifyClusterName(req, cb) {
+        let resp = new ModifyClusterNameResponse();
+        this.request("ModifyClusterName", req, resp, cb);
     }
 
     /**
-     * 指定应用ID和待删除IDL文件的信息，删除目标文件，如果文件正在被表关联则删除失败。
+     * 删除TcaplusDB集群，必须在集群所属所有资源（包括表格组，表）都已经释放的情况下才会成功。
+     * @param {DeleteClusterRequest} req
+     * @param {function(string, DeleteClusterResponse):void} cb
+     * @public
+     */
+    DeleteCluster(req, cb) {
+        let resp = new DeleteClusterResponse();
+        this.request("DeleteCluster", req, resp, cb);
+    }
+
+    /**
+     * 修改指定集群的密码，后台将在旧密码失效之前同时支持TcaplusDB SDK使用旧密码和新密码访问数据库。在旧密码失效之前不能提交新的密码修改请求，在旧密码失效之后不能提交修改旧密码过期时间的请求。
+     * @param {ModifyClusterPasswordRequest} req
+     * @param {function(string, ModifyClusterPasswordResponse):void} cb
+     * @public
+     */
+    ModifyClusterPassword(req, cb) {
+        let resp = new ModifyClusterPasswordResponse();
+        this.request("ModifyClusterPassword", req, resp, cb);
+    }
+
+    /**
+     * 指定集群ID和待删除IDL文件的信息，删除目标文件，如果文件正在被表关联则删除失败。
      * @param {DeleteIdlFilesRequest} req
      * @param {function(string, DeleteIdlFilesResponse):void} cb
      * @public
@@ -182,18 +208,18 @@ class TcaplusdbClient extends AbstractClient {
     }
 
     /**
-     * 删除TcaplusDB应用实例，必须在应用实例所属所有资源（包括大区，表）都已经释放的情况下才会成功。
-     * @param {DeleteAppRequest} req
-     * @param {function(string, DeleteAppResponse):void} cb
+     * 用户创建备份任务
+     * @param {CreateBackupRequest} req
+     * @param {function(string, CreateBackupResponse):void} cb
      * @public
      */
-    DeleteApp(req, cb) {
-        let resp = new DeleteAppResponse();
-        this.request("DeleteApp", req, resp, cb);
+    CreateBackup(req, cb) {
+        let resp = new CreateBackupResponse();
+        this.request("CreateBackup", req, resp, cb);
     }
 
     /**
-     * 根据选择的IDL文件列表，批量创建表
+     * 根据选择的IDL文件列表，批量创建表格
      * @param {CreateTablesRequest} req
      * @param {function(string, CreateTablesResponse):void} cb
      * @public
@@ -204,7 +230,7 @@ class TcaplusdbClient extends AbstractClient {
     }
 
     /**
-     * 表扩缩容
+     * 表格扩缩容
      * @param {ModifyTableQuotasRequest} req
      * @param {function(string, ModifyTableQuotasResponse):void} cb
      * @public
@@ -215,36 +241,47 @@ class TcaplusdbClient extends AbstractClient {
     }
 
     /**
-     * 查询大区列表
-     * @param {DescribeZonesRequest} req
-     * @param {function(string, DescribeZonesResponse):void} cb
+     * 查询TcaplusDB集群列表，包含集群详细信息。
+     * @param {DescribeClustersRequest} req
+     * @param {function(string, DescribeClustersResponse):void} cb
      * @public
      */
-    DescribeZones(req, cb) {
-        let resp = new DescribeZonesResponse();
-        this.request("DescribeZones", req, resp, cb);
+    DescribeClusters(req, cb) {
+        let resp = new DescribeClustersResponse();
+        this.request("DescribeClusters", req, resp, cb);
     }
 
     /**
-     * 删除大区
-     * @param {DeleteZoneRequest} req
-     * @param {function(string, DeleteZoneResponse):void} cb
+     * 删除表格组
+     * @param {DeleteTableGroupRequest} req
+     * @param {function(string, DeleteTableGroupResponse):void} cb
      * @public
      */
-    DeleteZone(req, cb) {
-        let resp = new DeleteZoneResponse();
-        this.request("DeleteZone", req, resp, cb);
+    DeleteTableGroup(req, cb) {
+        let resp = new DeleteTableGroupResponse();
+        this.request("DeleteTableGroup", req, resp, cb);
     }
 
     /**
-     * 查询TcaplusDB应用列表，包含应用详细信息。
-     * @param {DescribeAppsRequest} req
-     * @param {function(string, DescribeAppsResponse):void} cb
+     * 修改TcaplusDB表格组名称
+     * @param {ModifyTableGroupNameRequest} req
+     * @param {function(string, ModifyTableGroupNameResponse):void} cb
      * @public
      */
-    DescribeApps(req, cb) {
-        let resp = new DescribeAppsResponse();
-        this.request("DescribeApps", req, resp, cb);
+    ModifyTableGroupName(req, cb) {
+        let resp = new ModifyTableGroupNameResponse();
+        this.request("ModifyTableGroupName", req, resp, cb);
+    }
+
+    /**
+     * 在TcaplusDB集群下创建表格组
+     * @param {CreateTableGroupRequest} req
+     * @param {function(string, CreateTableGroupResponse):void} cb
+     * @public
+     */
+    CreateTableGroup(req, cb) {
+        let resp = new CreateTableGroupResponse();
+        this.request("CreateTableGroup", req, resp, cb);
     }
 
     /**
@@ -270,29 +307,18 @@ class TcaplusdbClient extends AbstractClient {
     }
 
     /**
-     * 修改TcaplusDB大区名称
-     * @param {ModifyZoneNameRequest} req
-     * @param {function(string, ModifyZoneNameResponse):void} cb
+     * 查询表格组列表
+     * @param {DescribeTableGroupsRequest} req
+     * @param {function(string, DescribeTableGroupsResponse):void} cb
      * @public
      */
-    ModifyZoneName(req, cb) {
-        let resp = new ModifyZoneNameResponse();
-        this.request("ModifyZoneName", req, resp, cb);
+    DescribeTableGroups(req, cb) {
+        let resp = new DescribeTableGroupsResponse();
+        this.request("DescribeTableGroups", req, resp, cb);
     }
 
     /**
-     * 本接口用于创建TcaplusDB应用
-     * @param {CreateAppRequest} req
-     * @param {function(string, CreateAppResponse):void} cb
-     * @public
-     */
-    CreateApp(req, cb) {
-        let resp = new CreateAppResponse();
-        this.request("CreateApp", req, resp, cb);
-    }
-
-    /**
-     * 选中目标表，上传并校验改表文件，返回是否允许修改表结构
+     * 选中目标表格，上传并校验改表文件，返回是否允许修改表格结构的结果。
      * @param {CompareIdlFilesRequest} req
      * @param {function(string, CompareIdlFilesResponse):void} cb
      * @public
@@ -336,7 +362,7 @@ class TcaplusdbClient extends AbstractClient {
     }
 
     /**
-     * 上传并校验加表文件，返回校验合法的表定义
+     * 上传并校验创建表格文件，返回校验合法的表格定义
      * @param {VerifyIdlFilesRequest} req
      * @param {function(string, VerifyIdlFilesResponse):void} cb
      * @public

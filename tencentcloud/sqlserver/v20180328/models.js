@@ -177,7 +177,7 @@ class DealInfo extends  AbstractModel {
         this.Count = null;
 
         /**
-         * 关联的流程 Id，可用于查询流程执行状态
+         * 关联的流程 ID，可用于查询流程执行状态
          * @type {number || null}
          */
         this.FlowId = null;
@@ -240,7 +240,7 @@ class DescribeAccountsRequest extends  AbstractModel {
         this.Limit = null;
 
         /**
-         * 分页返回，从第几页开始返回。从第0页开始，默认第0页
+         * 分页返回，页编号，默认值为第0页
          * @type {number || null}
          */
         this.Offset = null;
@@ -732,13 +732,13 @@ class DescribeBackupsRequest extends  AbstractModel {
         this.InstanceId = null;
 
         /**
-         * 分页返回，每页返回数量，默认为20，最大值为 100
+         * 分页返回，每页返回的数目，取值为1-100，默认值为20
          * @type {number || null}
          */
         this.Limit = null;
 
         /**
-         * 偏移量，默认为 0
+         * 分页返回，页编号，默认值为第0页
          * @type {number || null}
          */
         this.Offset = null;
@@ -1124,7 +1124,7 @@ class MigrateTask extends  AbstractModel {
         this.Region = null;
 
         /**
-         * 迁移源的类型 1:CDB for SQLServer 2:云服务器自建SQLServer数据库 4:SQLServer备份还原 5:SQLServer备份还原（COS方式）
+         * 迁移源的类型 1:TencentDB for SQLServer 2:云服务器自建SQLServer数据库 4:SQLServer备份还原 5:SQLServer备份还原（COS方式）
          * @type {number || null}
          */
         this.SourceType = null;
@@ -1387,13 +1387,13 @@ class InquiryPriceCreateDBInstancesResponse extends  AbstractModel {
         super();
 
         /**
-         * 未打折前价格，其值除以100表示多少钱。比如10010表示100.10元
+         * 未打折前价格，其值除以100表示多少钱。例如10010表示100.10元
          * @type {number || null}
          */
         this.OriginalPrice = null;
 
         /**
-         * 实际需要支付的价格，其值除以100表示多少钱。比如10010表示100.10元
+         * 实际需要支付的价格，其值除以100表示多少钱。例如10010表示100.10元
          * @type {number || null}
          */
         this.Price = null;
@@ -1614,6 +1614,12 @@ class AccountCreateInfo extends  AbstractModel {
          */
         this.Remark = null;
 
+        /**
+         * 是否为管理员账户，默认为否
+         * @type {boolean || null}
+         */
+        this.IsAdmin = null;
+
     }
 
     /**
@@ -1635,6 +1641,7 @@ class AccountCreateInfo extends  AbstractModel {
             }
         }
         this.Remark = 'Remark' in params ? params.Remark : null;
+        this.IsAdmin = 'IsAdmin' in params ? params.IsAdmin : null;
 
     }
 }
@@ -1722,13 +1729,13 @@ class DescribeDBInstancesRequest extends  AbstractModel {
         this.Status = null;
 
         /**
-         * 页数，默认为 0
+         * 分页返回，页编号，默认值为第0页
          * @type {number || null}
          */
         this.Offset = null;
 
         /**
-         * 页大小，默认为50
+         * 分页返回，每页返回的数目，取值为1-100，默认值为100
          * @type {number || null}
          */
         this.Limit = null;
@@ -2069,7 +2076,7 @@ class MigrateSource extends  AbstractModel {
         super();
 
         /**
-         * 迁移源实例的ID，MigrateType=1(CDB for SQLServers)时使用，格式如：mssql-si2823jyl
+         * 迁移源实例的ID，MigrateType=1(TencentDB for SQLServers)时使用，格式如：mssql-si2823jyl
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -2250,13 +2257,13 @@ class DescribeMigrationsRequest extends  AbstractModel {
         this.MigrateName = null;
 
         /**
-         * 每页的记录数
+         * 分页返回，每页返回的数目，取值为1-100，默认值为100
          * @type {number || null}
          */
         this.Limit = null;
 
         /**
-         * 查询第几页的记录
+         * 分页返回，页编号，默认值为第0页
          * @type {number || null}
          */
         this.Offset = null;
@@ -2301,13 +2308,13 @@ class InquiryPriceRenewDBInstanceResponse extends  AbstractModel {
         super();
 
         /**
-         * 未打折的原价，其值除以100表示最终的价格。比如10094表示100.94元
+         * 未打折的原价，其值除以100表示最终的价格。例如10094表示100.94元
          * @type {number || null}
          */
         this.OriginalPrice = null;
 
         /**
-         * 实际需要支付价格，其值除以100表示最终的价格。比如10094表示100.94元
+         * 实际需要支付价格，其值除以100表示最终的价格。例如10094表示100.94元
          * @type {number || null}
          */
         this.Price = null;
@@ -2377,13 +2384,13 @@ class DescribeDBsRequest extends  AbstractModel {
         this.InstanceIdSet = null;
 
         /**
-         * 每页记录数，最大为100，默认20
+         * 分页返回，每页返回的数目，取值为1-100，默认值为20
          * @type {number || null}
          */
         this.Limit = null;
 
         /**
-         * 页编号，从第0页开始
+         * 分页返回，页编号，默认值为第0页
          * @type {number || null}
          */
         this.Offset = null;
@@ -2413,7 +2420,7 @@ class ModifyDBNameRequest extends  AbstractModel {
         super();
 
         /**
-         * 实例id
+         * 实例ID
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -2652,7 +2659,7 @@ class CreateDBRequest extends  AbstractModel {
         super();
 
         /**
-         * 实例id
+         * 实例ID
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -2835,7 +2842,7 @@ class InstanceDBDetail extends  AbstractModel {
         super();
 
         /**
-         * 实例id
+         * 实例ID
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -3389,7 +3396,7 @@ class CreateMigrationRequest extends  AbstractModel {
         this.MigrateType = null;
 
         /**
-         * 迁移源的类型 1:CDB for SQLServer 2:云服务器自建SQLServer数据库 4:SQLServer备份还原 5:SQLServer备份还原（COS方式）
+         * 迁移源的类型 1:TencentDB for SQLServer 2:云服务器自建SQLServer数据库 4:SQLServer备份还原 5:SQLServer备份还原（COS方式）
          * @type {number || null}
          */
         this.SourceType = null;
@@ -3458,7 +3465,7 @@ class ModifyDBNameResponse extends  AbstractModel {
         super();
 
         /**
-         * 任务流id
+         * 任务流ID
          * @type {number || null}
          */
         this.FlowId = null;
@@ -4085,13 +4092,13 @@ class InquiryPriceUpgradeDBInstanceResponse extends  AbstractModel {
         super();
 
         /**
-         * 未打折的原价，其值除以100表示最终的价格。比如10094表示100.94元
+         * 未打折的原价，其值除以100表示最终的价格。例如10094表示100.94元
          * @type {number || null}
          */
         this.OriginalPrice = null;
 
         /**
-         * 实际需要支付价格，其值除以100表示最终的价格。比如10094表示100.94元
+         * 实际需要支付价格，其值除以100表示最终的价格。例如10094表示100.94元
          * @type {number || null}
          */
         this.Price = null;
@@ -4151,7 +4158,7 @@ class DescribeMigrationDetailResponse extends  AbstractModel {
         this.Region = null;
 
         /**
-         * 迁移源的类型 1:CDB for SQLServer 2:云服务器自建SQLServer数据库 4:SQLServer备份还原 5:SQLServer备份还原（COS方式）
+         * 迁移源的类型 1:TencentDB for SQLServer 2:云服务器自建SQLServer数据库 4:SQLServer备份还原 5:SQLServer备份还原（COS方式）
          * @type {number || null}
          */
         this.SourceType = null;
@@ -4289,7 +4296,7 @@ class ModifyMigrationRequest extends  AbstractModel {
         this.MigrateType = null;
 
         /**
-         * 迁移源的类型 1:CDB for SQLServer 2:云服务器自建SQLServer数据库 4:SQLServer备份还原 5:SQLServer备份还原（COS方式），若不填则不修改
+         * 迁移源的类型 1:TencentDB for SQLServer 2:云服务器自建SQLServer数据库 4:SQLServer备份还原 5:SQLServer备份还原（COS方式），若不填则不修改
          * @type {number || null}
          */
         this.SourceType = null;
@@ -4359,7 +4366,7 @@ class CreateAccountResponse extends  AbstractModel {
         super();
 
         /**
-         * 任务流id
+         * 任务流ID
          * @type {number || null}
          */
         this.FlowId = null;
@@ -4394,7 +4401,7 @@ class DeleteDBResponse extends  AbstractModel {
         super();
 
         /**
-         * 任务流id
+         * 任务流ID
          * @type {number || null}
          */
         this.FlowId = null;
@@ -4429,7 +4436,7 @@ class CreateDBResponse extends  AbstractModel {
         super();
 
         /**
-         * 任务流id
+         * 任务流ID
          * @type {number || null}
          */
         this.FlowId = null;
@@ -4738,13 +4745,13 @@ class DescribeSlowlogsRequest extends  AbstractModel {
         this.EndTime = null;
 
         /**
-         * 分页返回结果，分页大小，默认20，不超过100
+         * 分页返回，每页返回的数目，取值为1-100，默认值为20
          * @type {number || null}
          */
         this.Limit = null;
 
         /**
-         * 从第几页开始返回，起始页，从0开始，默认为0
+         * 分页返回，页编号，默认值为第0页
          * @type {number || null}
          */
         this.Offset = null;
@@ -5078,7 +5085,7 @@ class DeleteAccountResponse extends  AbstractModel {
         super();
 
         /**
-         * 任务流id
+         * 任务流ID
          * @type {number || null}
          */
         this.FlowId = null;

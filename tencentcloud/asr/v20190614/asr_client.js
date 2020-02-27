@@ -16,23 +16,32 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
-const CreateRecTaskResponse = models.CreateRecTaskResponse;
-const GetAsrVocabRequest = models.GetAsrVocabRequest;
-const Task = models.Task;
-const CreateAsrVocabResponse = models.CreateAsrVocabResponse;
-const SentenceRecognitionResponse = models.SentenceRecognitionResponse;
+const SetVocabStateResponse = models.SetVocabStateResponse;
 const GetAsrVocabResponse = models.GetAsrVocabResponse;
+const HotWord = models.HotWord;
+const GetAsrVocabRequest = models.GetAsrVocabRequest;
+const DescribeTaskStatusResponse = models.DescribeTaskStatusResponse;
+const DownloadAsrVocabResponse = models.DownloadAsrVocabResponse;
+const CreateRecTaskResponse = models.CreateRecTaskResponse;
+const UpdateAsrVocabResponse = models.UpdateAsrVocabResponse;
+const DeleteAsrVocabResponse = models.DeleteAsrVocabResponse;
+const GetAsrVocabListRequest = models.GetAsrVocabListRequest;
+const CreateRecTaskRequest = models.CreateRecTaskRequest;
+const SentenceDetail = models.SentenceDetail;
+const DownloadAsrVocabRequest = models.DownloadAsrVocabRequest;
+const SetVocabStateRequest = models.SetVocabStateRequest;
+const Vocab = models.Vocab;
+const Task = models.Task;
 const TaskStatus = models.TaskStatus;
 const DeleteAsrVocabRequest = models.DeleteAsrVocabRequest;
-const DeleteAsrVocabResponse = models.DeleteAsrVocabResponse;
-const HotWord = models.HotWord;
-const UpdateAsrVocabResponse = models.UpdateAsrVocabResponse;
-const CreateRecTaskRequest = models.CreateRecTaskRequest;
-const DescribeTaskStatusResponse = models.DescribeTaskStatusResponse;
 const SentenceRecognitionRequest = models.SentenceRecognitionRequest;
-const DescribeTaskStatusRequest = models.DescribeTaskStatusRequest;
 const CreateAsrVocabRequest = models.CreateAsrVocabRequest;
 const UpdateAsrVocabRequest = models.UpdateAsrVocabRequest;
+const CreateAsrVocabResponse = models.CreateAsrVocabResponse;
+const SentenceRecognitionResponse = models.SentenceRecognitionResponse;
+const DescribeTaskStatusRequest = models.DescribeTaskStatusRequest;
+const GetAsrVocabListResponse = models.GetAsrVocabListResponse;
+const SentenceWords = models.SentenceWords;
 
 
 /**
@@ -45,6 +54,17 @@ class AsrClient extends AbstractClient {
         super("asr.tencentcloudapi.com", "2019-06-14", credential, region, profile);
     }
     
+    /**
+     * 用户通过该接口，可获得所有的热词表及其信息。
+     * @param {GetAsrVocabListRequest} req
+     * @param {function(string, GetAsrVocabListResponse):void} cb
+     * @public
+     */
+    GetAsrVocabList(req, cb) {
+        let resp = new GetAsrVocabListResponse();
+        this.request("GetAsrVocabList", req, resp, cb);
+    }
+
     /**
      * 本接口服务对录音时长1小时以内的录音文件进行识别，异步返回识别全部结果。
 <br>• 接口是 HTTP RESTful 形式
@@ -63,6 +83,17 @@ class AsrClient extends AbstractClient {
     }
 
     /**
+     * 用户根据词表的ID可以获取对应的热词表信息
+     * @param {GetAsrVocabRequest} req
+     * @param {function(string, GetAsrVocabResponse):void} cb
+     * @public
+     */
+    GetAsrVocab(req, cb) {
+        let resp = new GetAsrVocabResponse();
+        this.request("GetAsrVocab", req, resp, cb);
+    }
+
+    /**
      * 在调用录音文件识别请求接口后，有回调和轮询两种方式获取识别结果。
 <br>• 当采用回调方式时，识别完成后会将结果通过 POST 请求的形式通知到用户在请求时填写的回调 URL，具体请参见[ 录音识别结果回调 ](https://cloud.tencent.com/document/product/1093/37139#callback)。
 <br>• 当采用轮询方式时，需要主动提交任务ID来轮询识别结果，共有任务成功、等待、执行中和失败四种结果，具体信息请参见下文说明。
@@ -77,14 +108,14 @@ class AsrClient extends AbstractClient {
     }
 
     /**
-     * 用户根据词表的ID可以获取对应的热词表信息
-     * @param {GetAsrVocabRequest} req
-     * @param {function(string, GetAsrVocabResponse):void} cb
+     * 用户通过该接口可以设置热词表的默认状态。初始状态为0，用户可设置状态为1，即为默认状态。默认状态表示用户在请求识别时，如不设置热词表ID，则默认使用状态为1的热词表。
+     * @param {SetVocabStateRequest} req
+     * @param {function(string, SetVocabStateResponse):void} cb
      * @public
      */
-    GetAsrVocab(req, cb) {
-        let resp = new GetAsrVocabResponse();
-        this.request("GetAsrVocab", req, resp, cb);
+    SetVocabState(req, cb) {
+        let resp = new SetVocabStateResponse();
+        this.request("SetVocabState", req, resp, cb);
     }
 
     /**
@@ -112,6 +143,17 @@ class AsrClient extends AbstractClient {
     CreateAsrVocab(req, cb) {
         let resp = new CreateAsrVocabResponse();
         this.request("CreateAsrVocab", req, resp, cb);
+    }
+
+    /**
+     * 用户通过本接口进行热词表的下载，获得词表权重文件形式的 base64 值，文件形式为通过 “|” 分割的词和权重，即 word|weight 的形式。
+     * @param {DownloadAsrVocabRequest} req
+     * @param {function(string, DownloadAsrVocabResponse):void} cb
+     * @public
+     */
+    DownloadAsrVocab(req, cb) {
+        let resp = new DownloadAsrVocabResponse();
+        this.request("DownloadAsrVocab", req, resp, cb);
     }
 
     /**

@@ -36,6 +36,7 @@ const UpdateCfsRuleResponse = models.UpdateCfsRuleResponse;
 const DescribeCfsFileSystemsResponse = models.DescribeCfsFileSystemsResponse;
 const CreateCfsFileSystemResponse = models.CreateCfsFileSystemResponse;
 const FileSystemInfo = models.FileSystemInfo;
+const TagInfo = models.TagInfo;
 const DescribeCfsPGroupsRequest = models.DescribeCfsPGroupsRequest;
 const AvailableZone = models.AvailableZone;
 const CreateCfsPGroupRequest = models.CreateCfsPGroupRequest;

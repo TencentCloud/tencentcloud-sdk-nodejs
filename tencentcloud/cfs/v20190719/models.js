@@ -804,6 +804,12 @@ class DescribeCfsFileSystemsResponse extends  AbstractModel {
         this.FileSystems = null;
 
         /**
+         * 文件系统总数
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -827,6 +833,7 @@ class DescribeCfsFileSystemsResponse extends  AbstractModel {
                 this.FileSystems.push(obj);
             }
         }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -1055,6 +1062,41 @@ class FileSystemInfo extends  AbstractModel {
 }
 
 /**
+ * Tag信息单元
+ * @class
+ */
+class TagInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 标签键
+         * @type {string || null}
+         */
+        this.TagKey = null;
+
+        /**
+         * 标签值
+         * @type {string || null}
+         */
+        this.TagValue = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TagKey = 'TagKey' in params ? params.TagKey : null;
+        this.TagValue = 'TagValue' in params ? params.TagValue : null;
+
+    }
+}
+
+/**
  * DescribeCfsPGroups请求参数结构体
  * @class
  */
@@ -1107,6 +1149,12 @@ class AvailableZone extends  AbstractModel {
          */
         this.Types = null;
 
+        /**
+         * 可用区中英文名称
+         * @type {string || null}
+         */
+        this.ZoneName = null;
+
     }
 
     /**
@@ -1128,6 +1176,7 @@ class AvailableZone extends  AbstractModel {
                 this.Types.push(obj);
             }
         }
+        this.ZoneName = 'ZoneName' in params ? params.ZoneName : null;
 
     }
 }
@@ -1355,19 +1404,19 @@ class CreateCfsFileSystemRequest extends  AbstractModel {
         this.Protocol = null;
 
         /**
-         * 文件系统存储类型，值为 SD ；其中 SD 为标准型存储
+         * 文件系统存储类型，值为 SD ；其中 SD 为标准型存储， HP为性能存储。
          * @type {string || null}
          */
         this.StorageType = null;
 
         /**
-         * 私有网路（VPC） ID
+         * 私有网络（VPC） ID，若网络类型选择的是VPC，该字段为必填。
          * @type {string || null}
          */
         this.VpcId = null;
 
         /**
-         * 子网 ID
+         * 子网 ID，若网络类型选择的是VPC，该字段为必填。
          * @type {string || null}
          */
         this.SubnetId = null;
@@ -1383,6 +1432,12 @@ class CreateCfsFileSystemRequest extends  AbstractModel {
          * @type {string || null}
          */
         this.FsName = null;
+
+        /**
+         * 文件系统标签
+         * @type {Array.<TagInfo> || null}
+         */
+        this.ResourceTags = null;
 
     }
 
@@ -1402,6 +1457,15 @@ class CreateCfsFileSystemRequest extends  AbstractModel {
         this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
         this.MountIP = 'MountIP' in params ? params.MountIP : null;
         this.FsName = 'FsName' in params ? params.FsName : null;
+
+        if (params.ResourceTags) {
+            this.ResourceTags = new Array();
+            for (let z in params.ResourceTags) {
+                let obj = new TagInfo();
+                obj.deserialize(params.ResourceTags[z]);
+                this.ResourceTags.push(obj);
+            }
+        }
 
     }
 }
@@ -2193,6 +2257,7 @@ module.exports = {
     DescribeCfsFileSystemsResponse: DescribeCfsFileSystemsResponse,
     CreateCfsFileSystemResponse: CreateCfsFileSystemResponse,
     FileSystemInfo: FileSystemInfo,
+    TagInfo: TagInfo,
     DescribeCfsPGroupsRequest: DescribeCfsPGroupsRequest,
     AvailableZone: AvailableZone,
     CreateCfsPGroupRequest: CreateCfsPGroupRequest,

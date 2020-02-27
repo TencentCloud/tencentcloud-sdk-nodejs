@@ -17,50 +17,10 @@
 const AbstractModel = require("../../common/abstract_model");
 
 /**
- * CreateRecTask返回参数结构体
+ * SetVocabState返回参数结构体
  * @class
  */
-class CreateRecTaskResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 录音文件识别的请求返回结果，包含结果查询需要的TaskId
-         * @type {Task || null}
-         */
-        this.Data = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-        if (params.Data) {
-            let obj = new Task();
-            obj.deserialize(params.Data)
-            this.Data = obj;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * GetAsrVocab请求参数结构体
- * @class
- */
-class GetAsrVocabRequest extends  AbstractModel {
+class SetVocabStateResponse extends  AbstractModel {
     constructor(){
         super();
 
@@ -70,62 +30,6 @@ class GetAsrVocabRequest extends  AbstractModel {
          */
         this.VocabId = null;
 
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.VocabId = 'VocabId' in params ? params.VocabId : null;
-
-    }
-}
-
-/**
- * 录音文件识别请求的返回数据
- * @class
- */
-class Task extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 任务ID，可通过此ID在轮询接口获取识别状态与结果
-         * @type {number || null}
-         */
-        this.TaskId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.TaskId = 'TaskId' in params ? params.TaskId : null;
-
-    }
-}
-
-/**
- * CreateAsrVocab返回参数结构体
- * @class
- */
-class CreateAsrVocabResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 词表ID，可用于获取词表信息
-         * @type {string || null}
-         */
-        this.VocabId = null;
-
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
@@ -142,41 +46,6 @@ class CreateAsrVocabResponse extends  AbstractModel {
             return;
         }
         this.VocabId = 'VocabId' in params ? params.VocabId : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * SentenceRecognition返回参数结构体
- * @class
- */
-class SentenceRecognitionResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 识别结果。
-         * @type {string || null}
-         */
-        this.Result = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Result = 'Result' in params ? params.Result : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -268,118 +137,6 @@ class GetAsrVocabResponse extends  AbstractModel {
 }
 
 /**
- * 获取录音识别结果结果的返回参数
- * @class
- */
-class TaskStatus extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 任务标识。
-         * @type {number || null}
-         */
-        this.TaskId = null;
-
-        /**
-         * 任务状态码，0：任务等待，1：任务执行中，2：任务成功，3：任务失败。
-         * @type {number || null}
-         */
-        this.Status = null;
-
-        /**
-         * 任务状态，waiting：任务等待，doing：任务执行中，success：任务成功，failed：任务失败。
-         * @type {string || null}
-         */
-        this.StatusStr = null;
-
-        /**
-         * 识别结果。
-         * @type {string || null}
-         */
-        this.Result = null;
-
-        /**
-         * 失败原因说明。
-         * @type {string || null}
-         */
-        this.ErrorMsg = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.TaskId = 'TaskId' in params ? params.TaskId : null;
-        this.Status = 'Status' in params ? params.Status : null;
-        this.StatusStr = 'StatusStr' in params ? params.StatusStr : null;
-        this.Result = 'Result' in params ? params.Result : null;
-        this.ErrorMsg = 'ErrorMsg' in params ? params.ErrorMsg : null;
-
-    }
-}
-
-/**
- * DeleteAsrVocab请求参数结构体
- * @class
- */
-class DeleteAsrVocabRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 热词表Id
-         * @type {string || null}
-         */
-        this.VocabId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.VocabId = 'VocabId' in params ? params.VocabId : null;
-
-    }
-}
-
-/**
- * DeleteAsrVocab返回参数结构体
- * @class
- */
-class DeleteAsrVocabResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
  * 热词的词和权重
  * @class
  */
@@ -410,6 +167,156 @@ class HotWord extends  AbstractModel {
         }
         this.Word = 'Word' in params ? params.Word : null;
         this.Weight = 'Weight' in params ? params.Weight : null;
+
+    }
+}
+
+/**
+ * GetAsrVocab请求参数结构体
+ * @class
+ */
+class GetAsrVocabRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 热词表ID
+         * @type {string || null}
+         */
+        this.VocabId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.VocabId = 'VocabId' in params ? params.VocabId : null;
+
+    }
+}
+
+/**
+ * DescribeTaskStatus返回参数结构体
+ * @class
+ */
+class DescribeTaskStatusResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 录音文件识别的请求返回结果。
+         * @type {TaskStatus || null}
+         */
+        this.Data = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Data) {
+            let obj = new TaskStatus();
+            obj.deserialize(params.Data)
+            this.Data = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DownloadAsrVocab返回参数结构体
+ * @class
+ */
+class DownloadAsrVocabResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 词表ID。
+         * @type {string || null}
+         */
+        this.VocabId = null;
+
+        /**
+         * 词表权重文件形式的base64值。
+         * @type {string || null}
+         */
+        this.WordWeightStr = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.VocabId = 'VocabId' in params ? params.VocabId : null;
+        this.WordWeightStr = 'WordWeightStr' in params ? params.WordWeightStr : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CreateRecTask返回参数结构体
+ * @class
+ */
+class CreateRecTaskResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 录音文件识别的请求返回结果，包含结果查询需要的TaskId
+         * @type {Task || null}
+         */
+        this.Data = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Data) {
+            let obj = new Task();
+            obj.deserialize(params.Data)
+            this.Data = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -450,6 +357,55 @@ class UpdateAsrVocabResponse extends  AbstractModel {
 }
 
 /**
+ * DeleteAsrVocab返回参数结构体
+ * @class
+ */
+class DeleteAsrVocabResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * GetAsrVocabList请求参数结构体
+ * @class
+ */
+class GetAsrVocabListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+    }
+}
+
+/**
  * CreateRecTask请求参数结构体
  * @class
  */
@@ -475,7 +431,7 @@ class CreateRecTaskRequest extends  AbstractModel {
         this.ChannelNum = null;
 
         /**
-         * 识别结果文本编码方式。0：UTF-8。
+         * 识别结果返回形式。0：标准结果  1：含词时间戳列表结果(一般用于生成字幕场景)
          * @type {number || null}
          */
         this.ResTextFormat = null;
@@ -539,24 +495,54 @@ class CreateRecTaskRequest extends  AbstractModel {
 }
 
 /**
- * DescribeTaskStatus返回参数结构体
+ * 单句的详细识别结果，包含单个词的时间偏移，一般用于生成字幕的场景。
  * @class
  */
-class DescribeTaskStatusResponse extends  AbstractModel {
+class SentenceDetail extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 录音文件识别的请求返回结果。
-         * @type {TaskStatus || null}
-         */
-        this.Data = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * 单句最终识别结果
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.FinalSentence = null;
+
+        /**
+         * 单句中间识别结果，使用空格拆分为多个词
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.SliceSentence = null;
+
+        /**
+         * 单句开始时间（毫秒）
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.StartMs = null;
+
+        /**
+         * 单句结束时间（毫秒）
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.EndMs = null;
+
+        /**
+         * 单句中词个数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.WordsNum = null;
+
+        /**
+         * 单句中词详情
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<SentenceWords> || null}
+         */
+        this.Words = null;
 
     }
 
@@ -567,13 +553,289 @@ class DescribeTaskStatusResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.FinalSentence = 'FinalSentence' in params ? params.FinalSentence : null;
+        this.SliceSentence = 'SliceSentence' in params ? params.SliceSentence : null;
+        this.StartMs = 'StartMs' in params ? params.StartMs : null;
+        this.EndMs = 'EndMs' in params ? params.EndMs : null;
+        this.WordsNum = 'WordsNum' in params ? params.WordsNum : null;
 
-        if (params.Data) {
-            let obj = new TaskStatus();
-            obj.deserialize(params.Data)
-            this.Data = obj;
+        if (params.Words) {
+            this.Words = new Array();
+            for (let z in params.Words) {
+                let obj = new SentenceWords();
+                obj.deserialize(params.Words[z]);
+                this.Words.push(obj);
+            }
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DownloadAsrVocab请求参数结构体
+ * @class
+ */
+class DownloadAsrVocabRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 词表ID。
+         * @type {string || null}
+         */
+        this.VocabId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.VocabId = 'VocabId' in params ? params.VocabId : null;
+
+    }
+}
+
+/**
+ * SetVocabState请求参数结构体
+ * @class
+ */
+class SetVocabStateRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 热词表ID。
+         * @type {string || null}
+         */
+        this.VocabId = null;
+
+        /**
+         * 热词表状态，1：设为默认状态；0：设为非默认状态。
+         * @type {number || null}
+         */
+        this.State = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.VocabId = 'VocabId' in params ? params.VocabId : null;
+        this.State = 'State' in params ? params.State : null;
+
+    }
+}
+
+/**
+ * 词表内容
+ * @class
+ */
+class Vocab extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 热词表名称
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 热词表描述
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * 热词表ID
+         * @type {string || null}
+         */
+        this.VocabId = null;
+
+        /**
+         * 词权重列表
+         * @type {Array.<HotWord> || null}
+         */
+        this.WordWeights = null;
+
+        /**
+         * 词表创建时间
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * 词表更新时间
+         * @type {string || null}
+         */
+        this.UpdateTime = null;
+
+        /**
+         * 热词表状态，1为默认状态即在识别时默认加载该热词表进行识别，0为初始状态
+         * @type {number || null}
+         */
+        this.State = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.VocabId = 'VocabId' in params ? params.VocabId : null;
+
+        if (params.WordWeights) {
+            this.WordWeights = new Array();
+            for (let z in params.WordWeights) {
+                let obj = new HotWord();
+                obj.deserialize(params.WordWeights[z]);
+                this.WordWeights.push(obj);
+            }
+        }
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.State = 'State' in params ? params.State : null;
+
+    }
+}
+
+/**
+ * 录音文件识别请求的返回数据
+ * @class
+ */
+class Task extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 任务ID，可通过此ID在轮询接口获取识别状态与结果
+         * @type {number || null}
+         */
+        this.TaskId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+
+    }
+}
+
+/**
+ * 获取录音识别结果结果的返回参数
+ * @class
+ */
+class TaskStatus extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 任务标识。
+         * @type {number || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * 任务状态码，0：任务等待，1：任务执行中，2：任务成功，3：任务失败。
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * 任务状态，waiting：任务等待，doing：任务执行中，success：任务成功，failed：任务失败。
+         * @type {string || null}
+         */
+        this.StatusStr = null;
+
+        /**
+         * 识别结果。
+         * @type {string || null}
+         */
+        this.Result = null;
+
+        /**
+         * 失败原因说明。
+         * @type {string || null}
+         */
+        this.ErrorMsg = null;
+
+        /**
+         * 识别结果详情，包含每个句子中的词时间偏移，一般用于生成字幕的场景。(录音识别请求中ResTextFormat=1时该字段不为空)
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<SentenceDetail> || null}
+         */
+        this.ResultDetail = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.StatusStr = 'StatusStr' in params ? params.StatusStr : null;
+        this.Result = 'Result' in params ? params.Result : null;
+        this.ErrorMsg = 'ErrorMsg' in params ? params.ErrorMsg : null;
+
+        if (params.ResultDetail) {
+            this.ResultDetail = new Array();
+            for (let z in params.ResultDetail) {
+                let obj = new SentenceDetail();
+                obj.deserialize(params.ResultDetail[z]);
+                this.ResultDetail.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * DeleteAsrVocab请求参数结构体
+ * @class
+ */
+class DeleteAsrVocabRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 热词表Id
+         * @type {string || null}
+         */
+        this.VocabId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.VocabId = 'VocabId' in params ? params.VocabId : null;
 
     }
 }
@@ -669,34 +931,6 @@ class SentenceRecognitionRequest extends  AbstractModel {
         this.Data = 'Data' in params ? params.Data : null;
         this.DataLen = 'DataLen' in params ? params.DataLen : null;
         this.HotwordId = 'HotwordId' in params ? params.HotwordId : null;
-
-    }
-}
-
-/**
- * DescribeTaskStatus请求参数结构体
- * @class
- */
-class DescribeTaskStatusRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 从CreateRecTask接口获取的TaskId，用于获取任务状态与结果。
-         * @type {number || null}
-         */
-        this.TaskId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.TaskId = 'TaskId' in params ? params.TaskId : null;
 
     }
 }
@@ -824,23 +1058,218 @@ class UpdateAsrVocabRequest extends  AbstractModel {
     }
 }
 
+/**
+ * CreateAsrVocab返回参数结构体
+ * @class
+ */
+class CreateAsrVocabResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 词表ID，可用于获取词表信息
+         * @type {string || null}
+         */
+        this.VocabId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.VocabId = 'VocabId' in params ? params.VocabId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * SentenceRecognition返回参数结构体
+ * @class
+ */
+class SentenceRecognitionResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 识别结果。
+         * @type {string || null}
+         */
+        this.Result = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Result = 'Result' in params ? params.Result : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeTaskStatus请求参数结构体
+ * @class
+ */
+class DescribeTaskStatusRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 从CreateRecTask接口获取的TaskId，用于获取任务状态与结果。
+         * @type {number || null}
+         */
+        this.TaskId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+
+    }
+}
+
+/**
+ * GetAsrVocabList返回参数结构体
+ * @class
+ */
+class GetAsrVocabListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 热词表列表
+         * @type {Array.<Vocab> || null}
+         */
+        this.VocabList = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.VocabList) {
+            this.VocabList = new Array();
+            for (let z in params.VocabList) {
+                let obj = new Vocab();
+                obj.deserialize(params.VocabList[z]);
+                this.VocabList.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 识别结果中词文本，以及对应时间偏移
+ * @class
+ */
+class SentenceWords extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 词文本
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Word = null;
+
+        /**
+         * 在句子中的开始时间偏移量
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.OffsetStartMs = null;
+
+        /**
+         * 在句子中的结束时间偏移量
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.OffsetEndMs = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Word = 'Word' in params ? params.Word : null;
+        this.OffsetStartMs = 'OffsetStartMs' in params ? params.OffsetStartMs : null;
+        this.OffsetEndMs = 'OffsetEndMs' in params ? params.OffsetEndMs : null;
+
+    }
+}
+
 module.exports = {
-    CreateRecTaskResponse: CreateRecTaskResponse,
-    GetAsrVocabRequest: GetAsrVocabRequest,
-    Task: Task,
-    CreateAsrVocabResponse: CreateAsrVocabResponse,
-    SentenceRecognitionResponse: SentenceRecognitionResponse,
+    SetVocabStateResponse: SetVocabStateResponse,
     GetAsrVocabResponse: GetAsrVocabResponse,
+    HotWord: HotWord,
+    GetAsrVocabRequest: GetAsrVocabRequest,
+    DescribeTaskStatusResponse: DescribeTaskStatusResponse,
+    DownloadAsrVocabResponse: DownloadAsrVocabResponse,
+    CreateRecTaskResponse: CreateRecTaskResponse,
+    UpdateAsrVocabResponse: UpdateAsrVocabResponse,
+    DeleteAsrVocabResponse: DeleteAsrVocabResponse,
+    GetAsrVocabListRequest: GetAsrVocabListRequest,
+    CreateRecTaskRequest: CreateRecTaskRequest,
+    SentenceDetail: SentenceDetail,
+    DownloadAsrVocabRequest: DownloadAsrVocabRequest,
+    SetVocabStateRequest: SetVocabStateRequest,
+    Vocab: Vocab,
+    Task: Task,
     TaskStatus: TaskStatus,
     DeleteAsrVocabRequest: DeleteAsrVocabRequest,
-    DeleteAsrVocabResponse: DeleteAsrVocabResponse,
-    HotWord: HotWord,
-    UpdateAsrVocabResponse: UpdateAsrVocabResponse,
-    CreateRecTaskRequest: CreateRecTaskRequest,
-    DescribeTaskStatusResponse: DescribeTaskStatusResponse,
     SentenceRecognitionRequest: SentenceRecognitionRequest,
-    DescribeTaskStatusRequest: DescribeTaskStatusRequest,
     CreateAsrVocabRequest: CreateAsrVocabRequest,
     UpdateAsrVocabRequest: UpdateAsrVocabRequest,
+    CreateAsrVocabResponse: CreateAsrVocabResponse,
+    SentenceRecognitionResponse: SentenceRecognitionResponse,
+    DescribeTaskStatusRequest: DescribeTaskStatusRequest,
+    GetAsrVocabListResponse: GetAsrVocabListResponse,
+    SentenceWords: SentenceWords,
 
 }
