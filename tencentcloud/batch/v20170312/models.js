@@ -673,24 +673,24 @@ class DescribeTaskTemplatesRequest extends  AbstractModel {
 }
 
 /**
- * 事件配置
+ * 通知信息
  * @class
  */
-class EventConfig extends  AbstractModel {
+class Notification extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 事件类型，包括：<br/><li>“JOB_RUNNING”：作业运行，适用于"SubmitJob"。</li><li>“JOB_SUCCEED”：作业成功，适用于"SubmitJob"。</li><li>“JOB_FAILED”：作业失败，适用于"SubmitJob"。</li><li>“JOB_FAILED_INTERRUPTED”：作业失败，保留实例，适用于"SubmitJob"。</li><li>“TASK_RUNNING”：任务运行，适用于"SubmitJob"。</li><li>“TASK_SUCCEED”：任务成功，适用于"SubmitJob"。</li><li>“TASK_FAILED”：任务失败，适用于"SubmitJob"。</li><li>“TASK_FAILED_INTERRUPTED”：任务失败，保留实例，适用于"SubmitJob"。</li><li>“TASK_INSTANCE_RUNNING”：任务实例运行，适用于"SubmitJob"。</li><li>“TASK_INSTANCE_SUCCEED”：任务实例成功，适用于"SubmitJob"。</li><li>“TASK_INSTANCE_FAILED”：任务实例失败，适用于"SubmitJob"。</li><li>“TASK_INSTANCE_FAILED_INTERRUPTED”：任务实例失败，保留实例，适用于"SubmitJob"。</li><li>“COMPUTE_ENV_CREATED”：计算环境已创建，适用于"CreateComputeEnv"。</li><li>“COMPUTE_ENV_DELETED”：计算环境已删除，适用于"CreateComputeEnv"。</li><li>“COMPUTE_NODE_CREATED”：计算节点已创建，适用于"CreateComputeEnv"和"SubmitJob"。</li><li>“COMPUTE_NODE_CREATION_FAILED”：计算节点创建失败，适用于"CreateComputeEnv"和"SubmitJob"。</li><li>“COMPUTE_NODE_RUNNING”：计算节点运行中，适用于"CreateComputeEnv"和"SubmitJob"。</li><li>“COMPUTE_NODE_ABNORMAL”：计算节点异常，适用于"CreateComputeEnv"和"SubmitJob"。</li><li>“COMPUTE_NODE_DELETING”：计算节点已删除，适用于"CreateComputeEnv"和"SubmitJob"。</li>
+         * CMQ主题名字，要求主题名有效且关联订阅
          * @type {string || null}
          */
-        this.EventName = null;
+        this.TopicName = null;
 
         /**
-         * 自定义键值对
-         * @type {Array.<EventVar> || null}
+         * 事件配置
+         * @type {Array.<EventConfig> || null}
          */
-        this.EventVars = null;
+        this.EventConfigs = null;
 
     }
 
@@ -701,14 +701,14 @@ class EventConfig extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.EventName = 'EventName' in params ? params.EventName : null;
+        this.TopicName = 'TopicName' in params ? params.TopicName : null;
 
-        if (params.EventVars) {
-            this.EventVars = new Array();
-            for (let z in params.EventVars) {
-                let obj = new EventVar();
-                obj.deserialize(params.EventVars[z]);
-                this.EventVars.push(obj);
+        if (params.EventConfigs) {
+            this.EventConfigs = new Array();
+            for (let z in params.EventConfigs) {
+                let obj = new EventConfig();
+                obj.deserialize(params.EventConfigs[z]);
+                this.EventConfigs.push(obj);
             }
         }
 
@@ -1029,22 +1029,19 @@ class LoginSettings extends  AbstractModel {
         super();
 
         /**
-         * 实例登录密码。不同操作系统类型密码复杂度限制不一样，具体如下：<br><li>Linux实例密码必须8到16位，至少包括两项[a-z，A-Z]、[0-9] 和 [( ) ` ~ ! @ # $ % ^ & * - + = | { } [ ] : ; ' , . ? / ]中的特殊符号。<br><li>Windows实例密码必须12到16位，至少包括三项[a-z]，[A-Z]，[0-9] 和 [( ) ` ~ ! @ # $ % ^ & * - + = { } [ ] : ; ' , . ? /]中的特殊符号。<br><br>若不指定该参数，则由系统随机生成密码，并通过站内信方式通知到用户。
-注意：此字段可能返回 null，表示取不到有效值。
+         * 实例登录密码。不同操作系统类型密码复杂度限制不一样，具体如下：<br><li>Linux实例密码必须8到16位，至少包括两项[a-z，A-Z]、[0-9] 和 [( ) ` ~ ! @ # $ % ^ & * - + = | { } [ ] : ; ' , . ? \/ ]中的特殊符号。<br><li>Windows实例密码必须12到16位，至少包括三项[a-z]，[A-Z]，[0-9] 和 [( ) ` ~ ! @ # $ % ^ & * - + = { } [ ] : ; ' , . ? \/]中的特殊符号。<br><br>若不指定该参数，则由系统随机生成密码，并通过站内信方式通知到用户。
          * @type {string || null}
          */
         this.Password = null;
 
         /**
          * 密钥ID列表。关联密钥后，就可以通过对应的私钥来访问实例；KeyId可通过接口DescribeKeyPairs获取，密钥与密码不能同时指定，同时Windows操作系统不支持指定密钥。当前仅支持购买的时候指定一个密钥。
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<string> || null}
          */
         this.KeyIds = null;
 
         /**
          * 保持镜像的原始设置。该参数与Password或KeyIds.N不能同时指定。只有使用自定义镜像、共享镜像或外部导入镜像创建实例时才能指定该参数为TRUE。取值范围：<br><li>TRUE：表示保持镜像的登录设置<br><li>FALSE：表示不保持镜像的登录设置<br><br>默认取值：FALSE。
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.KeepImageLogin = null;
@@ -1570,6 +1567,12 @@ class DescribeComputeEnvResponse extends  AbstractModel {
         this.NextAction = null;
 
         /**
+         * 用户添加到计算环境中的计算节点个数
+         * @type {number || null}
+         */
+        this.AttachedComputeNodeCount = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -1612,6 +1615,7 @@ class DescribeComputeEnvResponse extends  AbstractModel {
         this.EnvType = 'EnvType' in params ? params.EnvType : null;
         this.ResourceType = 'ResourceType' in params ? params.ResourceType : null;
         this.NextAction = 'NextAction' in params ? params.NextAction : null;
+        this.AttachedComputeNodeCount = 'AttachedComputeNodeCount' in params ? params.AttachedComputeNodeCount : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -1684,6 +1688,34 @@ class TerminateJobRequest extends  AbstractModel {
             return;
         }
         this.JobId = 'JobId' in params ? params.JobId : null;
+
+    }
+}
+
+/**
+ * DetachInstances返回参数结构体
+ * @class
+ */
+class DetachInstancesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1956,6 +1988,34 @@ class OutputMappingConfig extends  AbstractModel {
         this.Scene = 'Scene' in params ? params.Scene : null;
         this.WorkerNum = 'WorkerNum' in params ? params.WorkerNum : null;
         this.WorkerPartSize = 'WorkerPartSize' in params ? params.WorkerPartSize : null;
+
+    }
+}
+
+/**
+ * AttachInstances返回参数结构体
+ * @class
+ */
+class AttachInstancesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3185,6 +3245,12 @@ class NamedCpmComputeEnv extends  AbstractModel {
          */
         this.ActionIfComputeNodeInactive = null;
 
+        /**
+         * 对于实例创建失败或异常退还的计算节点，定期重新创建实例资源的最大重试次数，最大值11，如果不设置的话，系统会设置一个默认值，当前为7
+         * @type {number || null}
+         */
+        this.ResourceMaxRetryCount = null;
+
     }
 
     /**
@@ -3229,6 +3295,7 @@ class NamedCpmComputeEnv extends  AbstractModel {
             this.Notifications = obj;
         }
         this.ActionIfComputeNodeInactive = 'ActionIfComputeNodeInactive' in params ? params.ActionIfComputeNodeInactive : null;
+        this.ResourceMaxRetryCount = 'ResourceMaxRetryCount' in params ? params.ResourceMaxRetryCount : null;
 
     }
 }
@@ -3657,6 +3724,12 @@ class NamedComputeEnv extends  AbstractModel {
          */
         this.ActionIfComputeNodeInactive = null;
 
+        /**
+         * 对于实例创建失败或异常退还的计算节点，定期重新创建实例资源的最大重试次数，最大值11，如果不设置的话，系统会设置一个默认值，当前为7
+         * @type {number || null}
+         */
+        this.ResourceMaxRetryCount = null;
+
     }
 
     /**
@@ -3716,6 +3789,7 @@ class NamedComputeEnv extends  AbstractModel {
             this.Notifications = obj;
         }
         this.ActionIfComputeNodeInactive = 'ActionIfComputeNodeInactive' in params ? params.ActionIfComputeNodeInactive : null;
+        this.ResourceMaxRetryCount = 'ResourceMaxRetryCount' in params ? params.ResourceMaxRetryCount : null;
 
     }
 }
@@ -3749,24 +3823,24 @@ class DeleteJobResponse extends  AbstractModel {
 }
 
 /**
- * 通知信息
+ * 事件配置
  * @class
  */
-class Notification extends  AbstractModel {
+class EventConfig extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * CMQ主题名字，要求主题名有效且关联订阅
+         * 事件类型，包括：<br/><li>“JOB_RUNNING”：作业运行，适用于"SubmitJob"。</li><li>“JOB_SUCCEED”：作业成功，适用于"SubmitJob"。</li><li>“JOB_FAILED”：作业失败，适用于"SubmitJob"。</li><li>“JOB_FAILED_INTERRUPTED”：作业失败，保留实例，适用于"SubmitJob"。</li><li>“TASK_RUNNING”：任务运行，适用于"SubmitJob"。</li><li>“TASK_SUCCEED”：任务成功，适用于"SubmitJob"。</li><li>“TASK_FAILED”：任务失败，适用于"SubmitJob"。</li><li>“TASK_FAILED_INTERRUPTED”：任务失败，保留实例，适用于"SubmitJob"。</li><li>“TASK_INSTANCE_RUNNING”：任务实例运行，适用于"SubmitJob"。</li><li>“TASK_INSTANCE_SUCCEED”：任务实例成功，适用于"SubmitJob"。</li><li>“TASK_INSTANCE_FAILED”：任务实例失败，适用于"SubmitJob"。</li><li>“TASK_INSTANCE_FAILED_INTERRUPTED”：任务实例失败，保留实例，适用于"SubmitJob"。</li><li>“COMPUTE_ENV_CREATED”：计算环境已创建，适用于"CreateComputeEnv"。</li><li>“COMPUTE_ENV_DELETED”：计算环境已删除，适用于"CreateComputeEnv"。</li><li>“COMPUTE_NODE_CREATED”：计算节点已创建，适用于"CreateComputeEnv"和"SubmitJob"。</li><li>“COMPUTE_NODE_CREATION_FAILED”：计算节点创建失败，适用于"CreateComputeEnv"和"SubmitJob"。</li><li>“COMPUTE_NODE_RUNNING”：计算节点运行中，适用于"CreateComputeEnv"和"SubmitJob"。</li><li>“COMPUTE_NODE_ABNORMAL”：计算节点异常，适用于"CreateComputeEnv"和"SubmitJob"。</li><li>“COMPUTE_NODE_DELETING”：计算节点已删除，适用于"CreateComputeEnv"和"SubmitJob"。</li>
          * @type {string || null}
          */
-        this.TopicName = null;
+        this.EventName = null;
 
         /**
-         * 事件配置
-         * @type {Array.<EventConfig> || null}
+         * 自定义键值对
+         * @type {Array.<EventVar> || null}
          */
-        this.EventConfigs = null;
+        this.EventVars = null;
 
     }
 
@@ -3777,14 +3851,14 @@ class Notification extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TopicName = 'TopicName' in params ? params.TopicName : null;
+        this.EventName = 'EventName' in params ? params.EventName : null;
 
-        if (params.EventConfigs) {
-            this.EventConfigs = new Array();
-            for (let z in params.EventConfigs) {
-                let obj = new EventConfig();
-                obj.deserialize(params.EventConfigs[z]);
-                this.EventConfigs.push(obj);
+        if (params.EventVars) {
+            this.EventVars = new Array();
+            for (let z in params.EventVars) {
+                let obj = new EventVar();
+                obj.deserialize(params.EventVars[z]);
+                this.EventVars.push(obj);
             }
         }
 
@@ -3857,6 +3931,88 @@ class CpmVirtualPrivateCloud extends  AbstractModel {
         }
         this.VpcId = 'VpcId' in params ? params.VpcId : null;
         this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
+
+    }
+}
+
+/**
+ * DetachInstances请求参数结构体
+ * @class
+ */
+class DetachInstancesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 计算环境ID
+         * @type {string || null}
+         */
+        this.EnvId = null;
+
+        /**
+         * 实例ID列表
+         * @type {Array.<string> || null}
+         */
+        this.InstanceIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.EnvId = 'EnvId' in params ? params.EnvId : null;
+        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
+
+    }
+}
+
+/**
+ * 描述实例的信息
+ * @class
+ */
+class Instance extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 镜像ID
+         * @type {string || null}
+         */
+        this.ImageId = null;
+
+        /**
+         * 实例登录设置。
+         * @type {LoginSettings || null}
+         */
+        this.LoginSettings = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.ImageId = 'ImageId' in params ? params.ImageId : null;
+
+        if (params.LoginSettings) {
+            let obj = new LoginSettings();
+            obj.deserialize(params.LoginSettings)
+            this.LoginSettings = obj;
+        }
 
     }
 }
@@ -4731,6 +4887,13 @@ class ComputeNode extends  AbstractModel {
          */
         this.ResourceType = null;
 
+        /**
+         * 计算环境资源来源。<br>BATCH_CREATED：由批量计算创建的实例资源。<br>
+USER_ATTACHED：用户添加到计算环境中的实例资源。
+         * @type {string || null}
+         */
+        this.ResourceOrigin = null;
+
     }
 
     /**
@@ -4751,6 +4914,7 @@ class ComputeNode extends  AbstractModel {
         this.PrivateIpAddresses = 'PrivateIpAddresses' in params ? params.PrivateIpAddresses : null;
         this.PublicIpAddresses = 'PublicIpAddresses' in params ? params.PublicIpAddresses : null;
         this.ResourceType = 'ResourceType' in params ? params.ResourceType : null;
+        this.ResourceOrigin = 'ResourceOrigin' in params ? params.ResourceOrigin : null;
 
     }
 }
@@ -5688,6 +5852,12 @@ class ComputeEnvView extends  AbstractModel {
          */
         this.NextAction = null;
 
+        /**
+         * 用户添加到计算环境中的计算节点个数
+         * @type {number || null}
+         */
+        this.AttachedComputeNodeCount = null;
+
     }
 
     /**
@@ -5716,6 +5886,7 @@ class ComputeEnvView extends  AbstractModel {
         this.DesiredComputeNodeCount = 'DesiredComputeNodeCount' in params ? params.DesiredComputeNodeCount : null;
         this.ResourceType = 'ResourceType' in params ? params.ResourceType : null;
         this.NextAction = 'NextAction' in params ? params.NextAction : null;
+        this.AttachedComputeNodeCount = 'AttachedComputeNodeCount' in params ? params.AttachedComputeNodeCount : null;
 
     }
 }
@@ -5829,6 +6000,49 @@ class DescribeTaskRequest extends  AbstractModel {
                 let obj = new Filter();
                 obj.deserialize(params.Filters[z]);
                 this.Filters.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * AttachInstances请求参数结构体
+ * @class
+ */
+class AttachInstancesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 计算环境ID
+         * @type {string || null}
+         */
+        this.EnvId = null;
+
+        /**
+         * 加入计算环境实例列表
+         * @type {Array.<Instance> || null}
+         */
+        this.Instances = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.EnvId = 'EnvId' in params ? params.EnvId : null;
+
+        if (params.Instances) {
+            this.Instances = new Array();
+            for (let z in params.Instances) {
+                let obj = new Instance();
+                obj.deserialize(params.Instances[z]);
+                this.Instances.push(obj);
             }
         }
 
@@ -6501,7 +6715,7 @@ module.exports = {
     AgentRunningMode: AgentRunningMode,
     EnvData: EnvData,
     DescribeTaskTemplatesRequest: DescribeTaskTemplatesRequest,
-    EventConfig: EventConfig,
+    Notification: Notification,
     SystemDisk: SystemDisk,
     Task: Task,
     InstanceTypeConfig: InstanceTypeConfig,
@@ -6517,9 +6731,11 @@ module.exports = {
     DescribeComputeEnvResponse: DescribeComputeEnvResponse,
     DescribeCpmOsInfoResponse: DescribeCpmOsInfoResponse,
     TerminateJobRequest: TerminateJobRequest,
+    DetachInstancesResponse: DetachInstancesResponse,
     Application: Application,
     EnvDataCpm: EnvDataCpm,
     OutputMappingConfig: OutputMappingConfig,
+    AttachInstancesResponse: AttachInstancesResponse,
     ComputeNodeMetrics: ComputeNodeMetrics,
     TaskMetrics: TaskMetrics,
     TerminateComputeNodesRequest: TerminateComputeNodesRequest,
@@ -6549,9 +6765,11 @@ module.exports = {
     DataDisk: DataDisk,
     NamedComputeEnv: NamedComputeEnv,
     DeleteJobResponse: DeleteJobResponse,
-    Notification: Notification,
+    EventConfig: EventConfig,
     SpotMarketOptions: SpotMarketOptions,
     CpmVirtualPrivateCloud: CpmVirtualPrivateCloud,
+    DetachInstancesRequest: DetachInstancesRequest,
+    Instance: Instance,
     OutputMapping: OutputMapping,
     EnhancedService: EnhancedService,
     DescribeJobSubmitInfoResponse: DescribeJobSubmitInfoResponse,
@@ -6591,6 +6809,7 @@ module.exports = {
     ComputeEnvView: ComputeEnvView,
     DescribeComputeEnvsResponse: DescribeComputeEnvsResponse,
     DescribeTaskRequest: DescribeTaskRequest,
+    AttachInstancesRequest: AttachInstancesRequest,
     DescribeComputeEnvsRequest: DescribeComputeEnvsRequest,
     DescribeCvmZoneInstanceConfigInfosResponse: DescribeCvmZoneInstanceConfigInfosResponse,
     DescribeJobsResponse: DescribeJobsResponse,

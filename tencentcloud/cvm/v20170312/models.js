@@ -1440,7 +1440,7 @@ class LoginSettings extends  AbstractModel {
         super();
 
         /**
-         * 实例登录密码。不同操作系统类型密码复杂度限制不一样，具体如下：<br><li>Linux实例密码必须8到16位，至少包括两项[a-z，A-Z]、[0-9] 和 [( ) \` ~ ! @ # \$ % ^ & * - + = | { } [ ] : ; ' , . ? / ]中的特殊符号。<br><li>Windows实例密码必须12到16位，至少包括三项[a-z]，[A-Z]，[0-9] 和 [( ) \` ~ ! @ # \$ % ^ & * - + = { } [ ] : ; ' , . ? /]中的特殊符号。<br><br>若不指定该参数，则由系统随机生成密码，并通过站内信方式通知到用户。
+         * 实例登录密码。不同操作系统类型密码复杂度限制不一样，具体如下：<br><li>Linux实例密码必须8到30位，至少包括两项[a-z]，[A-Z]、[0-9] 和 [( ) \` ~ ! @ # $ % ^ & &#42;  - + = | { } [ ] : ; ' , . ? / ]中的特殊符号。<br><li>Windows实例密码必须12到30位，至少包括三项[a-z]，[A-Z]，[0-9] 和 [( ) \` ~ ! @ # $ % ^ & &#42; - + = | { } [ ] : ; ' , . ? /]中的特殊符号。<br><br>若不指定该参数，则由系统随机生成密码，并通过站内信方式通知到用户。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
@@ -1791,6 +1791,8 @@ class ZoneInfo extends  AbstractModel {
 <li> na-toronto-1 </li>
 <li> na-ashburn-1 </li>
 <li> na-ashburn-2 </li>
+<li> ap-nanjing-1 </li>
+<li> ap-nanjing-2 </li>
          * @type {string || null}
          */
         this.Zone = null;
@@ -4519,6 +4521,13 @@ class Instance extends  AbstractModel {
          */
         this.LatestOperationRequestId = null;
 
+        /**
+         * 分散置放群组ID。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.DisasterRecoverGroupId = null;
+
     }
 
     /**
@@ -4597,6 +4606,7 @@ class Instance extends  AbstractModel {
         this.LatestOperation = 'LatestOperation' in params ? params.LatestOperation : null;
         this.LatestOperationState = 'LatestOperationState' in params ? params.LatestOperationState : null;
         this.LatestOperationRequestId = 'LatestOperationRequestId' in params ? params.LatestOperationRequestId : null;
+        this.DisasterRecoverGroupId = 'DisasterRecoverGroupId' in params ? params.DisasterRecoverGroupId : null;
 
     }
 }

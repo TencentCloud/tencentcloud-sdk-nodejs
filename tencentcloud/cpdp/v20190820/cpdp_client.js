@@ -439,7 +439,7 @@ class CpdpClient extends AbstractClient {
     }
 
     /**
-     * 应用需要先调用本接口生成支付订单号，并将应答的pay_info透传给聚鑫SDK，拉起客户端（包括微信公众号/微信小程序/客户端App）支付。
+     * 应用需要先调用本接口生成支付订单号，并将应答的PayInfo透传给聚鑫SDK，拉起客户端（包括微信公众号/微信小程序/客户端App）支付。
      * @param {UnifiedOrderRequest} req
      * @param {function(string, UnifiedOrderResponse):void} cb
      * @public
