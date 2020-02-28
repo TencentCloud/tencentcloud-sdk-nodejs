@@ -17,6 +17,51 @@
 const AbstractModel = require("../../common/abstract_model");
 
 /**
+ * 多云盘参数
+ * @class
+ */
+class MultiDiskMC extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 该类型云盘个数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Count = null;
+
+        /**
+         * 磁盘类型
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Type = null;
+
+        /**
+         * 云盘大小
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Volume = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Count = 'Count' in params ? params.Count : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Volume = 'Volume' in params ? params.Volume : null;
+
+    }
+}
+
+/**
  * EMR产品配置
  * @class
  */
@@ -727,6 +772,69 @@ class Resource extends  AbstractModel {
 }
 
 /**
+ * TerminateInstance请求参数结构体
+ * @class
+ */
+class TerminateInstanceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例ID。
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 销毁节点ID。该参数为预留参数，用户无需配置。
+         * @type {Array.<string> || null}
+         */
+        this.ResourceIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.ResourceIds = 'ResourceIds' in params ? params.ResourceIds : null;
+
+    }
+}
+
+/**
+ * TerminateInstance返回参数结构体
+ * @class
+ */
+class TerminateInstanceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * CreateInstance返回参数结构体
  * @class
  */
@@ -908,6 +1016,65 @@ class InquiryPriceCreateInstanceResponse extends  AbstractModel {
         this.TimeUnit = 'TimeUnit' in params ? params.TimeUnit : null;
         this.TimeSpan = 'TimeSpan' in params ? params.TimeSpan : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeClusterNodes请求参数结构体
+ * @class
+ */
+class DescribeClusterNodesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 集群实例ID,实例ID形如: emr-xxxxxxxx
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 节点标识，取值为：
+<li>all：表示获取全部类型节点，cdb信息除外。</li>
+<li>master：表示获取master节点信息。</li>
+<li>core：表示获取core节点信息。</li>
+<li>task：表示获取task节点信息。</li>
+<li>common：表示获取common节点信息。</li>
+<li>router：表示获取router节点信息。</li>
+<li>db：表示获取正常状态的cdb信息。</li>
+<li>recyle：表示获取回收站隔离中的节点信息，包括cdb信息。</li>
+<li>renew：表示获取所有待续费的节点信息，包括cdb信息，自动续费节点不会返回。</li>
+注意：现在只支持以上取值，输入其他值会导致错误。
+         * @type {string || null}
+         */
+        this.NodeFlag = null;
+
+        /**
+         * 页编号，默认值为0，表示第一页。
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 每页返回数量，默认值为100，最大值为100。
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.NodeFlag = 'NodeFlag' in params ? params.NodeFlag : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
 
     }
 }
@@ -2296,47 +2463,32 @@ class TerminateTasksResponse extends  AbstractModel {
 }
 
 /**
- * TerminateInstance请求参数结构体
+ * DescribeClusterNodes返回参数结构体
  * @class
  */
-class TerminateInstanceRequest extends  AbstractModel {
+class DescribeClusterNodesResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 实例ID。
-         * @type {string || null}
+         * 查询到的节点总数
+         * @type {number || null}
          */
-        this.InstanceId = null;
+        this.TotalCnt = null;
 
         /**
-         * 销毁节点ID。该参数为预留参数，用户无需配置。
+         * 节点详细信息列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<NodeHardwareInfo> || null}
+         */
+        this.NodeList = null;
+
+        /**
+         * 用户所有的标签键列表
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<string> || null}
          */
-        this.ResourceIds = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.ResourceIds = 'ResourceIds' in params ? params.ResourceIds : null;
-
-    }
-}
-
-/**
- * TerminateInstance返回参数结构体
- * @class
- */
-class TerminateInstanceResponse extends  AbstractModel {
-    constructor(){
-        super();
+        this.TagKeys = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2353,7 +2505,340 @@ class TerminateInstanceResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.TotalCnt = 'TotalCnt' in params ? params.TotalCnt : null;
+
+        if (params.NodeList) {
+            this.NodeList = new Array();
+            for (let z in params.NodeList) {
+                let obj = new NodeHardwareInfo();
+                obj.deserialize(params.NodeList[z]);
+                this.NodeList.push(obj);
+            }
+        }
+        this.TagKeys = 'TagKeys' in params ? params.TagKeys : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 节点硬件信息
+ * @class
+ */
+class NodeHardwareInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 用户APPID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.AppId = null;
+
+        /**
+         * 序列号
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.SerialNo = null;
+
+        /**
+         * 机器实例ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.OrderNo = null;
+
+        /**
+         * master节点绑定外网IP
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.WanIp = null;
+
+        /**
+         * 节点类型
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Flag = null;
+
+        /**
+         * 节点规格
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Spec = null;
+
+        /**
+         * 节点核数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.CpuNum = null;
+
+        /**
+         * 节点内存
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.MemSize = null;
+
+        /**
+         * 节点内存描述
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.MemDesc = null;
+
+        /**
+         * 节点所在region
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.RegionId = null;
+
+        /**
+         * 节点所在Zone
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.ZoneId = null;
+
+        /**
+         * 申请时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ApplyTime = null;
+
+        /**
+         * 释放时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.FreeTime = null;
+
+        /**
+         * 硬盘大小
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.DiskSize = null;
+
+        /**
+         * 节点描述
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.NameTag = null;
+
+        /**
+         * 节点部署服务
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Services = null;
+
+        /**
+         * 磁盘类型
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.StorageType = null;
+
+        /**
+         * 系统盘大小
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.RootSize = null;
+
+        /**
+         * 付费类型
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.ChargeType = null;
+
+        /**
+         * 数据库IP
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.CdbIp = null;
+
+        /**
+         * 数据库端口
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.CdbPort = null;
+
+        /**
+         * 硬盘容量
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.HwDiskSize = null;
+
+        /**
+         * 硬盘容量描述
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.HwDiskSizeDesc = null;
+
+        /**
+         * 内存容量
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.HwMemSize = null;
+
+        /**
+         * 内存容量描述
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.HwMemSizeDesc = null;
+
+        /**
+         * 过期时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ExpireTime = null;
+
+        /**
+         * 节点资源ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.EmrResourceId = null;
+
+        /**
+         * 续费标志
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.IsAutoRenew = null;
+
+        /**
+         * 设备标识
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.DeviceClass = null;
+
+        /**
+         * 支持变配
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Mutable = null;
+
+        /**
+         * 多云盘
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<MultiDiskMC> || null}
+         */
+        this.MCMultiDisk = null;
+
+        /**
+         * 数据库信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {CdbInfo || null}
+         */
+        this.CdbNodeInfo = null;
+
+        /**
+         * 内网IP
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Ip = null;
+
+        /**
+         * 此节点是否可销毁，1可销毁，0不可销毁
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Destroyable = null;
+
+        /**
+         * 节点绑定的标签
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AppId = 'AppId' in params ? params.AppId : null;
+        this.SerialNo = 'SerialNo' in params ? params.SerialNo : null;
+        this.OrderNo = 'OrderNo' in params ? params.OrderNo : null;
+        this.WanIp = 'WanIp' in params ? params.WanIp : null;
+        this.Flag = 'Flag' in params ? params.Flag : null;
+        this.Spec = 'Spec' in params ? params.Spec : null;
+        this.CpuNum = 'CpuNum' in params ? params.CpuNum : null;
+        this.MemSize = 'MemSize' in params ? params.MemSize : null;
+        this.MemDesc = 'MemDesc' in params ? params.MemDesc : null;
+        this.RegionId = 'RegionId' in params ? params.RegionId : null;
+        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
+        this.ApplyTime = 'ApplyTime' in params ? params.ApplyTime : null;
+        this.FreeTime = 'FreeTime' in params ? params.FreeTime : null;
+        this.DiskSize = 'DiskSize' in params ? params.DiskSize : null;
+        this.NameTag = 'NameTag' in params ? params.NameTag : null;
+        this.Services = 'Services' in params ? params.Services : null;
+        this.StorageType = 'StorageType' in params ? params.StorageType : null;
+        this.RootSize = 'RootSize' in params ? params.RootSize : null;
+        this.ChargeType = 'ChargeType' in params ? params.ChargeType : null;
+        this.CdbIp = 'CdbIp' in params ? params.CdbIp : null;
+        this.CdbPort = 'CdbPort' in params ? params.CdbPort : null;
+        this.HwDiskSize = 'HwDiskSize' in params ? params.HwDiskSize : null;
+        this.HwDiskSizeDesc = 'HwDiskSizeDesc' in params ? params.HwDiskSizeDesc : null;
+        this.HwMemSize = 'HwMemSize' in params ? params.HwMemSize : null;
+        this.HwMemSizeDesc = 'HwMemSizeDesc' in params ? params.HwMemSizeDesc : null;
+        this.ExpireTime = 'ExpireTime' in params ? params.ExpireTime : null;
+        this.EmrResourceId = 'EmrResourceId' in params ? params.EmrResourceId : null;
+        this.IsAutoRenew = 'IsAutoRenew' in params ? params.IsAutoRenew : null;
+        this.DeviceClass = 'DeviceClass' in params ? params.DeviceClass : null;
+        this.Mutable = 'Mutable' in params ? params.Mutable : null;
+
+        if (params.MCMultiDisk) {
+            this.MCMultiDisk = new Array();
+            for (let z in params.MCMultiDisk) {
+                let obj = new MultiDiskMC();
+                obj.deserialize(params.MCMultiDisk[z]);
+                this.MCMultiDisk.push(obj);
+            }
+        }
+
+        if (params.CdbNodeInfo) {
+            let obj = new CdbInfo();
+            obj.deserialize(params.CdbNodeInfo)
+            this.CdbNodeInfo = obj;
+        }
+        this.Ip = 'Ip' in params ? params.Ip : null;
+        this.Destroyable = 'Destroyable' in params ? params.Destroyable : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
 
     }
 }
@@ -2588,6 +3073,147 @@ class InquiryPriceRenewInstanceRequest extends  AbstractModel {
 }
 
 /**
+ * 出参
+ * @class
+ */
+class CdbInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 数据库实例
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.InstanceName = null;
+
+        /**
+         * 数据库IP
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Ip = null;
+
+        /**
+         * 数据库端口
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Port = null;
+
+        /**
+         * 数据库内存规格
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.MemSize = null;
+
+        /**
+         * 数据库磁盘规格
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Volume = null;
+
+        /**
+         * 服务标识
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Service = null;
+
+        /**
+         * 过期时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ExpireTime = null;
+
+        /**
+         * 申请时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ApplyTime = null;
+
+        /**
+         * 付费类型
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.PayType = null;
+
+        /**
+         * 过期标识
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.ExpireFlag = null;
+
+        /**
+         * 数据库状态
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * 续费标识
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.IsAutoRenew = null;
+
+        /**
+         * 数据库字符串
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.SerialNo = null;
+
+        /**
+         * ZoneId
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.ZoneId = null;
+
+        /**
+         * RegionId
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.RegionId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
+        this.Ip = 'Ip' in params ? params.Ip : null;
+        this.Port = 'Port' in params ? params.Port : null;
+        this.MemSize = 'MemSize' in params ? params.MemSize : null;
+        this.Volume = 'Volume' in params ? params.Volume : null;
+        this.Service = 'Service' in params ? params.Service : null;
+        this.ExpireTime = 'ExpireTime' in params ? params.ExpireTime : null;
+        this.ApplyTime = 'ApplyTime' in params ? params.ApplyTime : null;
+        this.PayType = 'PayType' in params ? params.PayType : null;
+        this.ExpireFlag = 'ExpireFlag' in params ? params.ExpireFlag : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.IsAutoRenew = 'IsAutoRenew' in params ? params.IsAutoRenew : null;
+        this.SerialNo = 'SerialNo' in params ? params.SerialNo : null;
+        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
+        this.RegionId = 'RegionId' in params ? params.RegionId : null;
+
+    }
+}
+
+/**
  * ScaleOutInstance请求参数结构体
  * @class
  */
@@ -2729,6 +3355,7 @@ class ScaleOutInstanceRequest extends  AbstractModel {
 }
 
 module.exports = {
+    MultiDiskMC: MultiDiskMC,
     EmrProductConfigOutter: EmrProductConfigOutter,
     LoginSettings: LoginSettings,
     VPCSettings: VPCSettings,
@@ -2736,10 +3363,13 @@ module.exports = {
     ScaleOutInstanceResponse: ScaleOutInstanceResponse,
     InquiryPriceCreateInstanceRequest: InquiryPriceCreateInstanceRequest,
     Resource: Resource,
+    TerminateInstanceRequest: TerminateInstanceRequest,
+    TerminateInstanceResponse: TerminateInstanceResponse,
     CreateInstanceResponse: CreateInstanceResponse,
     InquiryPriceRenewInstanceResponse: InquiryPriceRenewInstanceResponse,
     TerminateTasksRequest: TerminateTasksRequest,
     InquiryPriceCreateInstanceResponse: InquiryPriceCreateInstanceResponse,
+    DescribeClusterNodesRequest: DescribeClusterNodesRequest,
     PreExecuteFileSettings: PreExecuteFileSettings,
     CreateInstanceRequest: CreateInstanceRequest,
     DescribeInstancesResponse: DescribeInstancesResponse,
@@ -2756,11 +3386,12 @@ module.exports = {
     OutterResource: OutterResource,
     UpdateInstanceSettings: UpdateInstanceSettings,
     TerminateTasksResponse: TerminateTasksResponse,
-    TerminateInstanceRequest: TerminateInstanceRequest,
-    TerminateInstanceResponse: TerminateInstanceResponse,
+    DescribeClusterNodesResponse: DescribeClusterNodesResponse,
+    NodeHardwareInfo: NodeHardwareInfo,
     InquiryPriceUpdateInstanceResponse: InquiryPriceUpdateInstanceResponse,
     NewResourceSpec: NewResourceSpec,
     InquiryPriceRenewInstanceRequest: InquiryPriceRenewInstanceRequest,
+    CdbInfo: CdbInfo,
     ScaleOutInstanceRequest: ScaleOutInstanceRequest,
 
 }

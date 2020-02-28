@@ -1535,6 +1535,49 @@ class DescribeStreamPlayInfoListResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeScreenShotSheetNumList返回参数结构体
+ * @class
+ */
+class DescribeScreenShotSheetNumListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 数据信息列表。
+         * @type {Array.<TimeValue> || null}
+         */
+        this.DataInfoList = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.DataInfoList) {
+            this.DataInfoList = new Array();
+            for (let z in params.DataInfoList) {
+                let obj = new TimeValue();
+                obj.deserialize(params.DataInfoList[z]);
+                this.DataInfoList.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * ModifyLiveSnapshotTemplate返回参数结构体
  * @class
  */
@@ -3494,6 +3537,41 @@ class DescribeLiveDomainsResponse extends  AbstractModel {
 }
 
 /**
+ * 某个时间点的指标的数值是多少。
+ * @class
+ */
+class TimeValue extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * utc时间，时间格式为yyyy-mm-ddTHH:MM:SSZ。
+         * @type {string || null}
+         */
+        this.Time = null;
+
+        /**
+         * 数值。
+         * @type {number || null}
+         */
+        this.Num = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Time = 'Time' in params ? params.Time : null;
+        this.Num = 'Num' in params ? params.Num : null;
+
+    }
+}
+
+/**
  * 拉流配置
  * @class
  */
@@ -4014,30 +4092,42 @@ class ModifyLivePlayDomainResponse extends  AbstractModel {
 }
 
 /**
- * 某省份某运营商在某段时间内的带宽，流量，请求数和并发数
+ * DescribeScreenShotSheetNumList请求参数结构体
  * @class
  */
-class GroupProIspDataInfo extends  AbstractModel {
+class DescribeScreenShotSheetNumListRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 省份。
+         * utc起始时间，格式为yyyy-mm-ddTHH:MM:SSZ
          * @type {string || null}
          */
-        this.ProvinceName = null;
+        this.StartTime = null;
 
         /**
-         * 运营商。
+         * utc结束时间，格式为yyyy-mm-ddTHH:MM:SSZ，支持查询最近1年数据。
          * @type {string || null}
          */
-        this.IspName = null;
+        this.EndTime = null;
 
         /**
-         * 分钟维度的明细数据。
-         * @type {Array.<CdnPlayStatData> || null}
+         * 地域信息，可选值包括Mainland，Oversea，前者是查询中国大陆范围内的数据，后者是除中国大陆范围之外的数据，若不传该参数，则查询所有地区的数据。
+         * @type {string || null}
          */
-        this.DetailInfoList = null;
+        this.Zone = null;
+
+        /**
+         * 推流域名（支持查询2019年11 月1日之后的域名维度数据）。
+         * @type {Array.<string> || null}
+         */
+        this.PushDomains = null;
+
+        /**
+         * 数据维度，数据延迟1个半小时，可选值包括：1、Minute（5分钟粒度，最大支持查询时间范围是31天），2、Day（天粒度，默认值，最大支持查询时间范围是186天当天）。
+         * @type {string || null}
+         */
+        this.Granularity = null;
 
     }
 
@@ -4048,17 +4138,11 @@ class GroupProIspDataInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ProvinceName = 'ProvinceName' in params ? params.ProvinceName : null;
-        this.IspName = 'IspName' in params ? params.IspName : null;
-
-        if (params.DetailInfoList) {
-            this.DetailInfoList = new Array();
-            for (let z in params.DetailInfoList) {
-                let obj = new CdnPlayStatData();
-                obj.deserialize(params.DetailInfoList[z]);
-                this.DetailInfoList.push(obj);
-            }
-        }
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.Zone = 'Zone' in params ? params.Zone : null;
+        this.PushDomains = 'PushDomains' in params ? params.PushDomains : null;
+        this.Granularity = 'Granularity' in params ? params.Granularity : null;
 
     }
 }
@@ -11300,6 +11384,56 @@ class ResumeDelayLiveStreamResponse extends  AbstractModel {
 }
 
 /**
+ * 某省份某运营商在某段时间内的带宽，流量，请求数和并发数
+ * @class
+ */
+class GroupProIspDataInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 省份。
+         * @type {string || null}
+         */
+        this.ProvinceName = null;
+
+        /**
+         * 运营商。
+         * @type {string || null}
+         */
+        this.IspName = null;
+
+        /**
+         * 分钟维度的明细数据。
+         * @type {Array.<CdnPlayStatData> || null}
+         */
+        this.DetailInfoList = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ProvinceName = 'ProvinceName' in params ? params.ProvinceName : null;
+        this.IspName = 'IspName' in params ? params.IspName : null;
+
+        if (params.DetailInfoList) {
+            this.DetailInfoList = new Array();
+            for (let z in params.DetailInfoList) {
+                let obj = new CdnPlayStatData();
+                obj.deserialize(params.DetailInfoList[z]);
+                this.DetailInfoList.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * DeleteLiveDomain返回参数结构体
  * @class
  */
@@ -11669,6 +11803,7 @@ module.exports = {
     RecordTemplateInfo: RecordTemplateInfo,
     DeleteLiveTranscodeRuleResponse: DeleteLiveTranscodeRuleResponse,
     DescribeStreamPlayInfoListResponse: DescribeStreamPlayInfoListResponse,
+    DescribeScreenShotSheetNumListResponse: DescribeScreenShotSheetNumListResponse,
     ModifyLiveSnapshotTemplateResponse: ModifyLiveSnapshotTemplateResponse,
     ModifyLivePushAuthKeyRequest: ModifyLivePushAuthKeyRequest,
     DeleteLiveCallbackTemplateRequest: DeleteLiveCallbackTemplateRequest,
@@ -11710,6 +11845,7 @@ module.exports = {
     UnBindLiveDomainCertRequest: UnBindLiveDomainCertRequest,
     DeleteLiveRecordResponse: DeleteLiveRecordResponse,
     DescribeLiveDomainsResponse: DescribeLiveDomainsResponse,
+    TimeValue: TimeValue,
     PullStreamConfig: PullStreamConfig,
     CreateLiveRecordResponse: CreateLiveRecordResponse,
     RuleInfo: RuleInfo,
@@ -11720,7 +11856,7 @@ module.exports = {
     DayStreamPlayInfo: DayStreamPlayInfo,
     ModifyPullStreamStatusResponse: ModifyPullStreamStatusResponse,
     ModifyLivePlayDomainResponse: ModifyLivePlayDomainResponse,
-    GroupProIspDataInfo: GroupProIspDataInfo,
+    DescribeScreenShotSheetNumListRequest: DescribeScreenShotSheetNumListRequest,
     DescribePlayErrorCodeSumInfoListRequest: DescribePlayErrorCodeSumInfoListRequest,
     DescribeLiveCertsResponse: DescribeLiveCertsResponse,
     DescribeProvinceIspPlayInfoListResponse: DescribeProvinceIspPlayInfoListResponse,
@@ -11870,6 +12006,7 @@ module.exports = {
     DescribeLiveCallbackRulesResponse: DescribeLiveCallbackRulesResponse,
     ForbidStreamInfo: ForbidStreamInfo,
     ResumeDelayLiveStreamResponse: ResumeDelayLiveStreamResponse,
+    GroupProIspDataInfo: GroupProIspDataInfo,
     DeleteLiveDomainResponse: DeleteLiveDomainResponse,
     CreateLiveRecordTemplateRequest: CreateLiveRecordTemplateRequest,
     DescribeProIspPlaySumInfoListResponse: DescribeProIspPlaySumInfoListResponse,

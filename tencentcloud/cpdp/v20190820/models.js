@@ -129,7 +129,7 @@ class QueryOrderRequest extends  AbstractModel {
         this.MidasAppId = null;
 
         /**
-         * 用户Id，长度不小于5位， 仅支持字母和数字的组合
+         * 用户ID，长度不小于5位， 仅支持字母和数字的组合
          * @type {string || null}
          */
         this.UserId = null;
@@ -2862,7 +2862,7 @@ class CreateAcctRequest extends  AbstractModel {
         this.MidasAppId = null;
 
         /**
-         * 业务平台的子商户Id，唯一
+         * 业务平台的子商户ID，唯一
          * @type {string || null}
          */
         this.SubMchId = null;
@@ -3755,7 +3755,7 @@ class QueryRefundRequest extends  AbstractModel {
         super();
 
         /**
-         * 用户Id，长度不小于5位，仅支持字母和数字的组合。
+         * 用户ID，长度不小于5位，仅支持字母和数字的组合。
          * @type {string || null}
          */
         this.UserId = null;
@@ -3767,7 +3767,7 @@ class QueryRefundRequest extends  AbstractModel {
         this.RefundId = null;
 
         /**
-         * 聚鑫分配的支付主MidasAppid
+         * 聚鑫分配的支付主MidasAppId
          * @type {string || null}
          */
         this.MidasAppId = null;
@@ -4818,13 +4818,13 @@ class CloseOrderRequest extends  AbstractModel {
         super();
 
         /**
-         * 聚鑫分配的支付主MidasAppid
+         * 聚鑫分配的支付主MidasAppId
          * @type {string || null}
          */
         this.MidasAppId = null;
 
         /**
-         * 用户Id，长度不小于5位， 仅支持字母和数字的组合
+         * 用户ID，长度不小于5位， 仅支持字母和数字的组合
          * @type {string || null}
          */
         this.UserId = null;
@@ -5239,7 +5239,7 @@ class UnifiedOrderRequest extends  AbstractModel {
         this.CurrencyType = null;
 
         /**
-         * 聚鑫分配的支付主MidasAppid
+         * 聚鑫分配的支付主MidasAppId
          * @type {string || null}
          */
         this.MidasAppId = null;
@@ -5257,7 +5257,7 @@ class UnifiedOrderRequest extends  AbstractModel {
         this.ProductDetail = null;
 
         /**
-         * 商品id，仅支持数字、字母、下划线（_）、横杠字符（-）、点（.）的组合
+         * 商品ID，仅支持数字、字母、下划线（_）、横杠字符（-）、点（.）的组合
          * @type {string || null}
          */
         this.ProductId = null;
@@ -5275,19 +5275,19 @@ class UnifiedOrderRequest extends  AbstractModel {
         this.TotalAmt = null;
 
         /**
-         * 用户Id，长度不小于5位，仅支持字母和数字的组合
+         * 用户ID，长度不小于5位，仅支持字母和数字的组合
          * @type {string || null}
          */
         this.UserId = null;
 
         /**
-         * 银行真实渠道.如:bank_ccb
+         * 银行真实渠道.如:bank_pingan
          * @type {string || null}
          */
         this.RealChannel = null;
 
         /**
-         * 子订单信息列表，格式：子订单号、子应用Id、金额。 压缩后最长不可超过65535字节(去除空格，换行，制表符等无意义字符)
+         * 子订单信息列表，格式：子订单号、子应用ID、金额。 压缩后最长不可超过65535字节(去除空格，换行，制表符等无意义字符)
          * @type {Array.<UnifiedOrderInSubOrderList> || null}
          */
         this.SubOrderList = null;
@@ -6027,7 +6027,7 @@ class RefundRequest extends  AbstractModel {
         super();
 
         /**
-         * 用户Id，长度不小于5位， 仅支持字母和数字的组合
+         * 用户ID，长度不小于5位， 仅支持字母和数字的组合
          * @type {string || null}
          */
         this.UserId = null;
@@ -6039,19 +6039,19 @@ class RefundRequest extends  AbstractModel {
         this.RefundId = null;
 
         /**
-         * 聚鑫分配的支付主MidasAppid
+         * 聚鑫分配的支付主MidasAppId
          * @type {string || null}
          */
         this.MidasAppId = null;
 
         /**
-         * 退款金额，单位：分。备 注：当该字段为空或者为0 时，系统会默认使用订单当 实付金额做为退款金额
+         * 退款金额，单位：分。备注：当该字段为空或者为0 时，系统会默认使用订单当 实付金额作为退款金额
          * @type {number || null}
          */
         this.TotalRefundAmt = null;
 
         /**
-         * 支持多个子订单批量退款单 个子订单退款支持传 SubOutTradeNo ，也支持传 SubOutTradeNoList ，都传的时候以 SubOutTradeNoList 为准。  如果传了子单退款细节，外 部不需要再传退款金额，平 台应退，商户应退金额，我 们可以直接根据子单退款算 出来总和。
+         * 支持多个子订单批量退款单 个子订单退款支持传 SubOutTradeNo ，也支持传 SubOutTradeNoList ，都传的时候以 SubOutTradeNoList 为准。  如果传了子单退款细节，外 部不需要再传退款金额，平 台应退，商户应退金额，我 们可以直接根据子单退款算出来总和。
          * @type {Array.<RefundOutSubOrderRefundList> || null}
          */
         this.SubOrderRefundList = null;

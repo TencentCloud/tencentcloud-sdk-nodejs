@@ -171,7 +171,6 @@ class TextData extends  AbstractModel {
 20007：谩骂
 20105：广告引流 
 24001：暴恐
-21000：综合
          * @type {number || null}
          */
         this.EvilType = null;
@@ -250,7 +249,7 @@ class TextModerationRequest extends  AbstractModel {
         super();
 
         /**
-         * 文本内容Base64编码
+         * 文本内容Base64编码。原文长度需小于15000字节，即5000个汉字以内。
          * @type {string || null}
          */
         this.Content = null;
@@ -380,17 +379,13 @@ class CreateFileSampleRequest extends  AbstractModel {
 20006：涉毒违法
 20007：谩骂 
 24001：暴恐
-21000：综合
 20105：广告引流
          * @type {number || null}
          */
         this.EvilType = null;
 
         /**
-         * 文件类型
-image：图片
-audio：音频
-video：视频
+         * image：图片
          * @type {string || null}
          */
         this.FileType = null;
@@ -451,7 +446,6 @@ class ImageData extends  AbstractModel {
 20007：谩骂 
 20103：性感
 24001：暴恐
-21000：综合
          * @type {number || null}
          */
         this.EvilType = null;
@@ -473,6 +467,12 @@ class ImageData extends  AbstractModel {
          * @type {ImageIllegalDetect || null}
          */
         this.IllegalDetect = null;
+
+        /**
+         * logo详情
+         * @type {LogoDetail || null}
+         */
+        this.LogoDetect = null;
 
         /**
          * 图片OCR详情
@@ -532,6 +532,12 @@ class ImageData extends  AbstractModel {
             let obj = new ImageIllegalDetect();
             obj.deserialize(params.IllegalDetect)
             this.IllegalDetect = obj;
+        }
+
+        if (params.LogoDetect) {
+            let obj = new LogoDetail();
+            obj.deserialize(params.LogoDetect)
+            this.LogoDetect = obj;
         }
 
         if (params.OCRDetect) {
@@ -697,7 +703,6 @@ class TextSample extends  AbstractModel {
 20007：谩骂 
 20105：广告引流 
 24001：暴恐
-20004/21000：综合
          * @type {number || null}
          */
         this.EvilType = null;
@@ -753,6 +758,12 @@ class CreateTextSampleResponse extends  AbstractModel {
         super();
 
         /**
+         * 操作样本失败时返回的错误信息示例：  "样本1":错误码，"样本2":错误码
+         * @type {string || null}
+         */
+        this.ErrMsg = null;
+
+        /**
          * 任务状态
 1：已完成
 2：处理中
@@ -775,6 +786,7 @@ class CreateTextSampleResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.ErrMsg = 'ErrMsg' in params ? params.ErrMsg : null;
         this.Progress = 'Progress' in params ? params.Progress : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -858,7 +870,6 @@ class FileSampleInfo extends  AbstractModel {
 20006：涉毒违法
 20007：谩骂 
 24001：暴恐
-21000：综合
          * @type {number || null}
          */
         this.EvilType = null;
@@ -904,6 +915,12 @@ class FileSampleInfo extends  AbstractModel {
         this.Status = null;
 
         /**
+         * 文件压缩后云url
+         * @type {string || null}
+         */
+        this.CompressFileUrl = null;
+
+        /**
          * 文件的url
          * @type {string || null}
          */
@@ -927,6 +944,7 @@ class FileSampleInfo extends  AbstractModel {
         this.Id = 'Id' in params ? params.Id : null;
         this.Label = 'Label' in params ? params.Label : null;
         this.Status = 'Status' in params ? params.Status : null;
+        this.CompressFileUrl = 'CompressFileUrl' in params ? params.CompressFileUrl : null;
         this.FileUrl = 'FileUrl' in params ? params.FileUrl : null;
 
     }
@@ -1148,7 +1166,7 @@ class DescribeTextSampleResponse extends  AbstractModel {
 }
 
 /**
- * 二维码在图片中的位置，由4个点的坐标表示
+ * 二维码在图片中的位置，由边界点的坐标表示
  * @class
  */
 class CodePosition extends  AbstractModel {
@@ -1245,6 +1263,12 @@ class FileSample extends  AbstractModel {
          */
         this.FileUrl = null;
 
+        /**
+         * 文件压缩后云url
+         * @type {string || null}
+         */
+        this.CompressFileUrl = null;
+
     }
 
     /**
@@ -1257,6 +1281,7 @@ class FileSample extends  AbstractModel {
         this.FileMd5 = 'FileMd5' in params ? params.FileMd5 : null;
         this.FileName = 'FileName' in params ? params.FileName : null;
         this.FileUrl = 'FileUrl' in params ? params.FileUrl : null;
+        this.CompressFileUrl = 'CompressFileUrl' in params ? params.CompressFileUrl : null;
 
     }
 }
@@ -1333,7 +1358,6 @@ class CreateTextSampleRequest extends  AbstractModel {
 20006：涉毒违法
 20007：谩骂 
 24001：暴恐
-21000：综合
 20105：广告引流
          * @type {number || null}
          */
@@ -1347,6 +1371,12 @@ class CreateTextSampleRequest extends  AbstractModel {
          */
         this.Label = null;
 
+        /**
+         * 测试修改参数
+         * @type {string || null}
+         */
+        this.Test = null;
+
     }
 
     /**
@@ -1359,6 +1389,7 @@ class CreateTextSampleRequest extends  AbstractModel {
         this.Contents = 'Contents' in params ? params.Contents : null;
         this.EvilType = 'EvilType' in params ? params.EvilType : null;
         this.Label = 'Label' in params ? params.Label : null;
+        this.Test = 'Test' in params ? params.Test : null;
 
     }
 }
@@ -1513,7 +1544,6 @@ class Similar extends  AbstractModel {
 20006：涉毒违法
 20007：谩骂 
 24001：暴恐
-21000：综合
          * @type {number || null}
          */
         this.EvilType = null;
@@ -1726,7 +1756,7 @@ class CodeDetail extends  AbstractModel {
         super();
 
         /**
-         * 二维码在图片中的位置，由4个点的坐标表示
+         * 二维码在图片中的位置，由边界点的坐标表示
          * @type {Array.<CodePosition> || null}
          */
         this.CodePosition = null;
@@ -1744,7 +1774,7 @@ class CodeDetail extends  AbstractModel {
         this.CodeText = null;
 
         /**
-         * 二维码的类型：1：ONED_BARCODE，2：QRCOD，3:WXCODE，4：PDF417，5:DATAMATRIX
+         * 二维码的类型：1:ONED_BARCODE，2:QRCOD，3:WXCODE，4:PDF417，5:DATAMATRIX
          * @type {number || null}
          */
         this.CodeType = null;
@@ -1797,6 +1827,12 @@ class ImagePolityDetect extends  AbstractModel {
         this.HitFlag = null;
 
         /**
+         * 命中的logo标签信息
+         * @type {Array.<Logo> || null}
+         */
+        this.PolityLogoDetail = null;
+
+        /**
          * 命中的人脸名称
          * @type {Array.<string> || null}
          */
@@ -1831,6 +1867,15 @@ class ImagePolityDetect extends  AbstractModel {
         }
         this.EvilType = 'EvilType' in params ? params.EvilType : null;
         this.HitFlag = 'HitFlag' in params ? params.HitFlag : null;
+
+        if (params.PolityLogoDetail) {
+            this.PolityLogoDetail = new Array();
+            for (let z in params.PolityLogoDetail) {
+                let obj = new Logo();
+                obj.deserialize(params.PolityLogoDetail[z]);
+                this.PolityLogoDetail.push(obj);
+            }
+        }
         this.FaceNames = 'FaceNames' in params ? params.FaceNames : null;
         this.Keywords = 'Keywords' in params ? params.Keywords : null;
         this.PolityItems = 'PolityItems' in params ? params.PolityItems : null;
@@ -1898,6 +1943,62 @@ class ImageIllegalDetect extends  AbstractModel {
 }
 
 /**
+ * logo位置信息
+ * @class
+ */
+class RrectF extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * logo横坐标
+         * @type {number || null}
+         */
+        this.Cx = null;
+
+        /**
+         * logo纵坐标
+         * @type {number || null}
+         */
+        this.Cy = null;
+
+        /**
+         * logo图标高度
+         * @type {number || null}
+         */
+        this.Height = null;
+
+        /**
+         * logo图标中心旋转度
+         * @type {number || null}
+         */
+        this.Rotate = null;
+
+        /**
+         * logo图标宽度
+         * @type {number || null}
+         */
+        this.Width = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Cx = 'Cx' in params ? params.Cx : null;
+        this.Cy = 'Cy' in params ? params.Cy : null;
+        this.Height = 'Height' in params ? params.Height : null;
+        this.Rotate = 'Rotate' in params ? params.Rotate : null;
+        this.Width = 'Width' in params ? params.Width : null;
+
+    }
+}
+
+/**
  * CreateFileSample返回参数结构体
  * @class
  */
@@ -1930,6 +2031,89 @@ class CreateFileSampleResponse extends  AbstractModel {
         }
         this.Progress = 'Progress' in params ? params.Progress : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * LogoDetail
+ * @class
+ */
+class LogoDetail extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 命中的Applogo详情
+         * @type {Array.<Logo> || null}
+         */
+        this.AppLogoDetail = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.AppLogoDetail) {
+            this.AppLogoDetail = new Array();
+            for (let z in params.AppLogoDetail) {
+                let obj = new Logo();
+                obj.deserialize(params.AppLogoDetail[z]);
+                this.AppLogoDetail.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * Logo
+ * @class
+ */
+class Logo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * logo图标坐标信息
+         * @type {RrectF || null}
+         */
+        this.RrectF = null;
+
+        /**
+         * logo图标置信度
+         * @type {number || null}
+         */
+        this.Confidence = null;
+
+        /**
+         * logo图标名称
+         * @type {string || null}
+         */
+        this.Name = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.RrectF) {
+            let obj = new RrectF();
+            obj.deserialize(params.RrectF)
+            this.RrectF = obj;
+        }
+        this.Confidence = 'Confidence' in params ? params.Confidence : null;
+        this.Name = 'Name' in params ? params.Name : null;
 
     }
 }
@@ -2048,7 +2232,10 @@ module.exports = {
     CodeDetail: CodeDetail,
     ImagePolityDetect: ImagePolityDetect,
     ImageIllegalDetect: ImageIllegalDetect,
+    RrectF: RrectF,
     CreateFileSampleResponse: CreateFileSampleResponse,
+    LogoDetail: LogoDetail,
+    Logo: Logo,
     VideoModerationRequest: VideoModerationRequest,
     DeleteTextSampleRequest: DeleteTextSampleRequest,
 

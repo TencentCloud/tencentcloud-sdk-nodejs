@@ -247,7 +247,7 @@ class TcrClient extends AbstractClient {
     }
 
     /**
-     * 修改个人用户登陆密码
+     * 修改个人用户登录密码
      * @param {ModifyUserPasswordPersonalRequest} req
      * @param {function(string, ModifyUserPasswordPersonalResponse):void} cb
      * @public
@@ -401,7 +401,7 @@ class TcrClient extends AbstractClient {
     }
 
     /**
-     * 用于在个人版版镜像仓库中，获取满足输入搜索条件的用户镜像仓库
+     * 用于在个人版镜像仓库中，获取满足输入搜索条件的用户镜像仓库
      * @param {DescribeRepositoryFilterPersonalRequest} req
      * @param {function(string, DescribeRepositoryFilterPersonalResponse):void} cb
      * @public
@@ -478,7 +478,7 @@ class TcrClient extends AbstractClient {
     }
 
     /**
-     * 获取临时登陆密码
+     * 获取临时登录密码
      * @param {CreateInstanceTokenRequest} req
      * @param {function(string, CreateInstanceTokenResponse):void} cb
      * @public

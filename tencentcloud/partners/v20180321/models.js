@@ -72,6 +72,20 @@ class AgentClientElem extends  AbstractModel {
          */
         this.Status = null;
 
+        /**
+         * 业务员ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.SalesUin = null;
+
+        /**
+         * 业务员姓名
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.SalesName = null;
+
     }
 
     /**
@@ -89,6 +103,8 @@ class AgentClientElem extends  AbstractModel {
         this.Phone = 'Phone' in params ? params.Phone : null;
         this.HasOverdueBill = 'HasOverdueBill' in params ? params.HasOverdueBill : null;
         this.Status = 'Status' in params ? params.Status : null;
+        this.SalesUin = 'SalesUin' in params ? params.SalesUin : null;
+        this.SalesName = 'SalesName' in params ? params.SalesName : null;
 
     }
 }
@@ -1015,6 +1031,18 @@ class DescribeAgentClientsRequest extends  AbstractModel {
          */
         this.Limit = null;
 
+        /**
+         * 业务员ID
+         * @type {string || null}
+         */
+        this.SalesUin = null;
+
+        /**
+         * 业务员姓名（模糊查询）
+         * @type {string || null}
+         */
+        this.SalesName = null;
+
     }
 
     /**
@@ -1030,6 +1058,8 @@ class DescribeAgentClientsRequest extends  AbstractModel {
         this.OrderDirection = 'OrderDirection' in params ? params.OrderDirection : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
+        this.SalesUin = 'SalesUin' in params ? params.SalesUin : null;
+        this.SalesName = 'SalesName' in params ? params.SalesName : null;
 
     }
 }

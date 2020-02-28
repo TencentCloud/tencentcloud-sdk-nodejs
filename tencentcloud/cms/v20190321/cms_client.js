@@ -52,7 +52,10 @@ const AudioModerationRequest = models.AudioModerationRequest;
 const CodeDetail = models.CodeDetail;
 const ImagePolityDetect = models.ImagePolityDetect;
 const ImageIllegalDetect = models.ImageIllegalDetect;
+const RrectF = models.RrectF;
 const CreateFileSampleResponse = models.CreateFileSampleResponse;
+const LogoDetail = models.LogoDetail;
+const Logo = models.Logo;
 const VideoModerationRequest = models.VideoModerationRequest;
 const DeleteTextSampleRequest = models.DeleteTextSampleRequest;
 
@@ -79,7 +82,9 @@ class CmsClient extends AbstractClient {
     }
 
     /**
-     * 删除文字样本库，暂时只支持单个删除
+     * 本文档适用于文本内容安全、音频内容安全自定义识别库的管理。
+<br>
+删除文本样本库，暂时只支持单个删除。
      * @param {DeleteTextSampleRequest} req
      * @param {function(string, DeleteTextSampleResponse):void} cb
      * @public
@@ -90,7 +95,9 @@ class CmsClient extends AbstractClient {
     }
 
     /**
-     * 新增文本类型样本库
+     * 本文档适用于文本内容安全、音频内容安全自定义识别库的管理。
+<br>
+通过该接口可以将文本新增到样本库。
      * @param {CreateTextSampleRequest} req
      * @param {function(string, CreateTextSampleResponse):void} cb
      * @public
@@ -149,7 +156,9 @@ SeedUrl | String | 命中的种子URL
     }
 
     /**
-     * 通过该接口可以将文件新增到样本库
+     * 本文档适用于图片内容安全、视频内容安全自定义识别库的管理。
+<br>
+通过该接口可以将图片新增到样本库。
      * @param {CreateFileSampleRequest} req
      * @param {function(string, CreateFileSampleResponse):void} cb
      * @public
@@ -201,7 +210,9 @@ SeedUrl | String | 命中的种子URL
     }
 
     /**
-     * 查询文件样本库，支持批量查询
+     * 本文档适用于图片内容安全、视频内容安全自定义识别库的管理。
+<br>
+查询图片样本库，支持批量查询。
      * @param {DescribeFileSampleRequest} req
      * @param {function(string, DescribeFileSampleResponse):void} cb
      * @public
@@ -212,7 +223,9 @@ SeedUrl | String | 命中的种子URL
     }
 
     /**
-     * 支持批量查询文字样本库
+     * 本文档适用于文本内容安全、音频内容安全自定义识别库的管理。
+<br>
+支持批量查询文本样本库。
      * @param {DescribeTextSampleRequest} req
      * @param {function(string, DescribeTextSampleResponse):void} cb
      * @public
@@ -234,7 +247,9 @@ SeedUrl | String | 命中的种子URL
     }
 
     /**
-     * 删除文件样本库，支持批量删除，一次提交不超过20个
+     * 本文档适用于图片内容安全、视频内容安全自定义识别库的管理。
+<br>
+删除图片样本库，支持批量删除，一次提交不超过20个。
      * @param {DeleteFileSampleRequest} req
      * @param {function(string, DeleteFileSampleResponse):void} cb
      * @public

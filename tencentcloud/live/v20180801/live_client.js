@@ -44,6 +44,7 @@ const DomainCertInfo = models.DomainCertInfo;
 const RecordTemplateInfo = models.RecordTemplateInfo;
 const DeleteLiveTranscodeRuleResponse = models.DeleteLiveTranscodeRuleResponse;
 const DescribeStreamPlayInfoListResponse = models.DescribeStreamPlayInfoListResponse;
+const DescribeScreenShotSheetNumListResponse = models.DescribeScreenShotSheetNumListResponse;
 const ModifyLiveSnapshotTemplateResponse = models.ModifyLiveSnapshotTemplateResponse;
 const ModifyLivePushAuthKeyRequest = models.ModifyLivePushAuthKeyRequest;
 const DeleteLiveCallbackTemplateRequest = models.DeleteLiveCallbackTemplateRequest;
@@ -85,6 +86,7 @@ const DescribePlayErrorCodeSumInfoListResponse = models.DescribePlayErrorCodeSum
 const UnBindLiveDomainCertRequest = models.UnBindLiveDomainCertRequest;
 const DeleteLiveRecordResponse = models.DeleteLiveRecordResponse;
 const DescribeLiveDomainsResponse = models.DescribeLiveDomainsResponse;
+const TimeValue = models.TimeValue;
 const PullStreamConfig = models.PullStreamConfig;
 const CreateLiveRecordResponse = models.CreateLiveRecordResponse;
 const RuleInfo = models.RuleInfo;
@@ -95,7 +97,7 @@ const DescribeVisitTopSumInfoListRequest = models.DescribeVisitTopSumInfoListReq
 const DayStreamPlayInfo = models.DayStreamPlayInfo;
 const ModifyPullStreamStatusResponse = models.ModifyPullStreamStatusResponse;
 const ModifyLivePlayDomainResponse = models.ModifyLivePlayDomainResponse;
-const GroupProIspDataInfo = models.GroupProIspDataInfo;
+const DescribeScreenShotSheetNumListRequest = models.DescribeScreenShotSheetNumListRequest;
 const DescribePlayErrorCodeSumInfoListRequest = models.DescribePlayErrorCodeSumInfoListRequest;
 const DescribeLiveCertsResponse = models.DescribeLiveCertsResponse;
 const DescribeProvinceIspPlayInfoListResponse = models.DescribeProvinceIspPlayInfoListResponse;
@@ -245,6 +247,7 @@ const DescribePullStreamConfigsResponse = models.DescribePullStreamConfigsRespon
 const DescribeLiveCallbackRulesResponse = models.DescribeLiveCallbackRulesResponse;
 const ForbidStreamInfo = models.ForbidStreamInfo;
 const ResumeDelayLiveStreamResponse = models.ResumeDelayLiveStreamResponse;
+const GroupProIspDataInfo = models.GroupProIspDataInfo;
 const DeleteLiveDomainResponse = models.DeleteLiveDomainResponse;
 const CreateLiveRecordTemplateRequest = models.CreateLiveRecordTemplateRequest;
 const DescribeProIspPlaySumInfoListResponse = models.DescribeProIspPlaySumInfoListResponse;
@@ -401,14 +404,14 @@ class LiveClient extends AbstractClient {
     }
 
     /**
-     * 修改直播推流鉴权key
-     * @param {ModifyLivePushAuthKeyRequest} req
-     * @param {function(string, ModifyLivePushAuthKeyResponse):void} cb
+     * 修改播放域名信息。
+     * @param {ModifyLivePlayDomainRequest} req
+     * @param {function(string, ModifyLivePlayDomainResponse):void} cb
      * @public
      */
-    ModifyLivePushAuthKey(req, cb) {
-        let resp = new ModifyLivePushAuthKeyResponse();
-        this.request("ModifyLivePushAuthKey", req, resp, cb);
+    ModifyLivePlayDomain(req, cb) {
+        let resp = new ModifyLivePlayDomainResponse();
+        this.request("ModifyLivePlayDomain", req, resp, cb);
     }
 
     /**
@@ -669,14 +672,14 @@ class LiveClient extends AbstractClient {
     }
 
     /**
-     * 修改播放域名信息。
-     * @param {ModifyLivePlayDomainRequest} req
-     * @param {function(string, ModifyLivePlayDomainResponse):void} cb
+     * 修改直播推流鉴权key
+     * @param {ModifyLivePushAuthKeyRequest} req
+     * @param {function(string, ModifyLivePushAuthKeyResponse):void} cb
      * @public
      */
-    ModifyLivePlayDomain(req, cb) {
-        let resp = new ModifyLivePlayDomainResponse();
-        this.request("ModifyLivePlayDomain", req, resp, cb);
+    ModifyLivePushAuthKey(req, cb) {
+        let resp = new ModifyLivePushAuthKeyResponse();
+        this.request("ModifyLivePushAuthKey", req, resp, cb);
     }
 
     /**
@@ -932,6 +935,17 @@ class LiveClient extends AbstractClient {
     DescribeLiveTranscodeTemplate(req, cb) {
         let resp = new DescribeLiveTranscodeTemplateResponse();
         this.request("DescribeLiveTranscodeTemplate", req, resp, cb);
+    }
+
+    /**
+     * 接口用来查询直播增值业务--截图的张数
+     * @param {DescribeScreenShotSheetNumListRequest} req
+     * @param {function(string, DescribeScreenShotSheetNumListResponse):void} cb
+     * @public
+     */
+    DescribeScreenShotSheetNumList(req, cb) {
+        let resp = new DescribeScreenShotSheetNumListResponse();
+        this.request("DescribeScreenShotSheetNumList", req, resp, cb);
     }
 
     /**

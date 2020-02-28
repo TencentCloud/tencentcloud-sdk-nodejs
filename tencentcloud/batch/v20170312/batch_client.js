@@ -28,7 +28,7 @@ const DescribeTaskLogsRequest = models.DescribeTaskLogsRequest;
 const AgentRunningMode = models.AgentRunningMode;
 const EnvData = models.EnvData;
 const DescribeTaskTemplatesRequest = models.DescribeTaskTemplatesRequest;
-const EventConfig = models.EventConfig;
+const Notification = models.Notification;
 const SystemDisk = models.SystemDisk;
 const Task = models.Task;
 const InstanceTypeConfig = models.InstanceTypeConfig;
@@ -44,9 +44,11 @@ const OsInfo = models.OsInfo;
 const DescribeComputeEnvResponse = models.DescribeComputeEnvResponse;
 const DescribeCpmOsInfoResponse = models.DescribeCpmOsInfoResponse;
 const TerminateJobRequest = models.TerminateJobRequest;
+const DetachInstancesResponse = models.DetachInstancesResponse;
 const Application = models.Application;
 const EnvDataCpm = models.EnvDataCpm;
 const OutputMappingConfig = models.OutputMappingConfig;
+const AttachInstancesResponse = models.AttachInstancesResponse;
 const ComputeNodeMetrics = models.ComputeNodeMetrics;
 const TaskMetrics = models.TaskMetrics;
 const TerminateComputeNodesRequest = models.TerminateComputeNodesRequest;
@@ -76,9 +78,11 @@ const DescribeCpmOsInfoRequest = models.DescribeCpmOsInfoRequest;
 const DataDisk = models.DataDisk;
 const NamedComputeEnv = models.NamedComputeEnv;
 const DeleteJobResponse = models.DeleteJobResponse;
-const Notification = models.Notification;
+const EventConfig = models.EventConfig;
 const SpotMarketOptions = models.SpotMarketOptions;
 const CpmVirtualPrivateCloud = models.CpmVirtualPrivateCloud;
+const DetachInstancesRequest = models.DetachInstancesRequest;
+const Instance = models.Instance;
 const OutputMapping = models.OutputMapping;
 const EnhancedService = models.EnhancedService;
 const DescribeJobSubmitInfoResponse = models.DescribeJobSubmitInfoResponse;
@@ -118,6 +122,7 @@ const InstanceCategoryItem = models.InstanceCategoryItem;
 const ComputeEnvView = models.ComputeEnvView;
 const DescribeComputeEnvsResponse = models.DescribeComputeEnvsResponse;
 const DescribeTaskRequest = models.DescribeTaskRequest;
+const AttachInstancesRequest = models.AttachInstancesRequest;
 const DescribeComputeEnvsRequest = models.DescribeComputeEnvsRequest;
 const DescribeCvmZoneInstanceConfigInfosResponse = models.DescribeCvmZoneInstanceConfigInfosResponse;
 const DescribeJobsResponse = models.DescribeJobsResponse;
@@ -211,6 +216,23 @@ class BatchClient extends AbstractClient {
     }
 
     /**
+     * 此接口可将已存在实例添加到计算环境中。
+实例需要满足如下条件：<br/>
+1.实例不在批量计算系统中。<br/>
+2.实例状态要求处于运行中。<br/>
+3.支持预付费实例，按小时后付费实例，专享子机实例。不支持竞价实例。<br/>
+
+此接口会将加入到计算环境中的实例重设UserData和重装操作系统。
+     * @param {AttachInstancesRequest} req
+     * @param {function(string, AttachInstancesResponse):void} cb
+     * @public
+     */
+    AttachInstances(req, cb) {
+        let resp = new AttachInstancesResponse();
+        this.request("AttachInstances", req, resp, cb);
+    }
+
+    /**
      * 用于创建计算环境
      * @param {CreateComputeEnvRequest} req
      * @param {function(string, CreateComputeEnvResponse):void} cb
@@ -230,6 +252,17 @@ class BatchClient extends AbstractClient {
     DeleteComputeEnv(req, cb) {
         let resp = new DeleteComputeEnvResponse();
         this.request("DeleteComputeEnv", req, resp, cb);
+    }
+
+    /**
+     * 将添加到计算环境中的实例从计算环境中移出。若是由批量计算自动创建的计算节点实例则不允许移出。
+     * @param {DetachInstancesRequest} req
+     * @param {function(string, DetachInstancesResponse):void} cb
+     * @public
+     */
+    DetachInstances(req, cb) {
+        let resp = new DetachInstancesResponse();
+        this.request("DetachInstances", req, resp, cb);
     }
 
     /**
