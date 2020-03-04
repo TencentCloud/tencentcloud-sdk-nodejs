@@ -2627,6 +2627,12 @@ global：全球加速
          */
         this.Area = null;
 
+        /**
+         * 回源超时配置
+         * @type {OriginPullTimeout || null}
+         */
+        this.OriginPullTimeout = null;
+
     }
 
     /**
@@ -2790,6 +2796,12 @@ global：全球加速
             this.SpecificConfig = obj;
         }
         this.Area = 'Area' in params ? params.Area : null;
+
+        if (params.OriginPullTimeout) {
+            let obj = new OriginPullTimeout();
+            obj.deserialize(params.OriginPullTimeout)
+            this.OriginPullTimeout = obj;
+        }
 
     }
 }
@@ -7193,6 +7205,12 @@ global：全球加速
          */
         this.Area = null;
 
+        /**
+         * 回源超时配置
+         * @type {OriginPullTimeout || null}
+         */
+        this.OriginPullTimeout = null;
+
     }
 
     /**
@@ -7350,6 +7368,12 @@ global：全球加速
             this.SpecificConfig = obj;
         }
         this.Area = 'Area' in params ? params.Area : null;
+
+        if (params.OriginPullTimeout) {
+            let obj = new OriginPullTimeout();
+            obj.deserialize(params.OriginPullTimeout)
+            this.OriginPullTimeout = obj;
+        }
 
     }
 }

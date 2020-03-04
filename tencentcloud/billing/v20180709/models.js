@@ -443,6 +443,48 @@ class ConditionRegion extends  AbstractModel {
 }
 
 /**
+ * DescribeBillSummaryByProduct请求参数结构体
+ * @class
+ */
+class DescribeBillSummaryByProductRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 查询账单数据的用户UIN
+         * @type {string || null}
+         */
+        this.PayerUin = null;
+
+        /**
+         * 目前只支持传当月开始，且必须和EndTime为相同月份，例 2018-09-01 00:00:00
+         * @type {string || null}
+         */
+        this.BeginTime = null;
+
+        /**
+         * 目前只支持传当月结束，且必须和BeginTime为相同月份，例 2018-09-30 23:59:59
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PayerUin = 'PayerUin' in params ? params.PayerUin : null;
+        this.BeginTime = 'BeginTime' in params ? params.BeginTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+
+    }
+}
+
+/**
  * 消耗按产品汇总详情
  * @class
  */
@@ -1366,6 +1408,90 @@ class DetailSet extends  AbstractModel {
 }
 
 /**
+ * 收支明细的流水信息
+ * @class
+ */
+class BillTransactionInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 收支类型：deduct 扣费, recharge 充值, return 退费， block 冻结, unblock 解冻
+         * @type {string || null}
+         */
+        this.ActionType = null;
+
+        /**
+         * 流水金额，单位（分）；正数表示入账，负数表示出账
+         * @type {number || null}
+         */
+        this.Amount = null;
+
+        /**
+         * 可用余额，单位（分）；正数表示入账，负数表示出账
+         * @type {number || null}
+         */
+        this.Balance = null;
+
+        /**
+         * 流水号，如20190131020000236005203583326401
+         * @type {string || null}
+         */
+        this.BillId = null;
+
+        /**
+         * 描述信息
+         * @type {string || null}
+         */
+        this.OperationInfo = null;
+
+        /**
+         * 操作时间"2019-01-31 23:35:10.000"
+         * @type {string || null}
+         */
+        this.OperationTime = null;
+
+        /**
+         * 现金账户余额，单位（分）
+         * @type {number || null}
+         */
+        this.Cash = null;
+
+        /**
+         * 赠送金余额，单位（分）
+         * @type {number || null}
+         */
+        this.Incentive = null;
+
+        /**
+         * 冻结余额，单位（分）
+         * @type {number || null}
+         */
+        this.Freezing = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ActionType = 'ActionType' in params ? params.ActionType : null;
+        this.Amount = 'Amount' in params ? params.Amount : null;
+        this.Balance = 'Balance' in params ? params.Balance : null;
+        this.BillId = 'BillId' in params ? params.BillId : null;
+        this.OperationInfo = 'OperationInfo' in params ? params.OperationInfo : null;
+        this.OperationTime = 'OperationTime' in params ? params.OperationTime : null;
+        this.Cash = 'Cash' in params ? params.Cash : null;
+        this.Incentive = 'Incentive' in params ? params.Incentive : null;
+        this.Freezing = 'Freezing' in params ? params.Freezing : null;
+
+    }
+}
+
+/**
  * 按地域汇总消费详情
  * @class
  */
@@ -1523,6 +1649,12 @@ class ConsumptionResourceSummaryDataItem extends  AbstractModel {
          */
         this.BusinessCodeName = null;
 
+        /**
+         * 消耗类型
+         * @type {string || null}
+         */
+        this.ConsumptionTypeName = null;
+
     }
 
     /**
@@ -1544,6 +1676,7 @@ class ConsumptionResourceSummaryDataItem extends  AbstractModel {
         this.PayModeName = 'PayModeName' in params ? params.PayModeName : null;
         this.BusinessCode = 'BusinessCode' in params ? params.BusinessCode : null;
         this.BusinessCodeName = 'BusinessCodeName' in params ? params.BusinessCodeName : null;
+        this.ConsumptionTypeName = 'ConsumptionTypeName' in params ? params.ConsumptionTypeName : null;
 
     }
 }
@@ -1905,6 +2038,91 @@ class DescribeDosageDetailByDateResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeBillList返回参数结构体
+ * @class
+ */
+class DescribeBillListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 收支明细列表
+         * @type {Array.<BillTransactionInfo> || null}
+         */
+        this.TransactionList = null;
+
+        /**
+         * 总条数
+         * @type {number || null}
+         */
+        this.Total = null;
+
+        /**
+         * 退费总额，单位（分）
+         * @type {number || null}
+         */
+        this.ReturnAmount = null;
+
+        /**
+         * 充值总额，单位（分）
+         * @type {number || null}
+         */
+        this.RechargeAmount = null;
+
+        /**
+         * 冻结总额，单位（分）
+         * @type {number || null}
+         */
+        this.BlockAmount = null;
+
+        /**
+         * 解冻总额，单位（分）
+         * @type {number || null}
+         */
+        this.UnblockAmount = null;
+
+        /**
+         * 扣费总额，单位（分）
+         * @type {number || null}
+         */
+        this.DeductAmount = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.TransactionList) {
+            this.TransactionList = new Array();
+            for (let z in params.TransactionList) {
+                let obj = new BillTransactionInfo();
+                obj.deserialize(params.TransactionList[z]);
+                this.TransactionList.push(obj);
+            }
+        }
+        this.Total = 'Total' in params ? params.Total : null;
+        this.ReturnAmount = 'ReturnAmount' in params ? params.ReturnAmount : null;
+        this.RechargeAmount = 'RechargeAmount' in params ? params.RechargeAmount : null;
+        this.BlockAmount = 'BlockAmount' in params ? params.BlockAmount : null;
+        this.UnblockAmount = 'UnblockAmount' in params ? params.UnblockAmount : null;
+        this.DeductAmount = 'DeductAmount' in params ? params.DeductAmount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeAccountBalance返回参数结构体
  * @class
  */
@@ -2185,14 +2403,14 @@ class BillDetailComponent extends  AbstractModel {
         this.IncentivePayAmount = null;
 
         /**
-         * 组件类型代码
+         * 组件类型代码（未开放的字段）
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.ItemCode = null;
 
         /**
-         * 组件名称代码
+         * 组件名称代码（未开放的字段）
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
@@ -2785,30 +3003,54 @@ class DescribeBillResourceSummaryRequest extends  AbstractModel {
 }
 
 /**
- * DescribeBillSummaryByProduct请求参数结构体
+ * DescribeBillList请求参数结构体
  * @class
  */
-class DescribeBillSummaryByProductRequest extends  AbstractModel {
+class DescribeBillListRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 查询账单数据的用户UIN
+         * 查询范围的起始时间（包含）
          * @type {string || null}
          */
-        this.PayerUin = null;
+        this.StartTime = null;
 
         /**
-         * 目前只支持传当月开始，且必须和EndTime为相同月份，例 2018-09-01 00:00:00
-         * @type {string || null}
-         */
-        this.BeginTime = null;
-
-        /**
-         * 目前只支持传当月结束，且必须和BeginTime为相同月份，例 2018-09-30 23:59:59
+         * 查询范围的结束时间（包含）
          * @type {string || null}
          */
         this.EndTime = null;
+
+        /**
+         * 翻页偏移量，初始值为0
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 每页的限制数量
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 交易类型： all所有交易类型，recharge充值，return退款，unblock解冻，agentin资金转入，advanced垫付，cash提现，deduct扣费，block冻结，agentout资金转出，repay垫付回款，repayment还款(仅国际信用账户)，adj_refund调增(仅国际信用账户)，adj_deduct调减(仅国际信用账户)
+         * @type {Array.<string> || null}
+         */
+        this.PayType = null;
+
+        /**
+         * 扣费模式，当所选的交易类型中包含扣费deduct时有意义： all所有扣费类型，trade预付费支付，hour_h按量小时结，hour_d按量日结，hour_m按量月结，decompensate调账扣费，other其他扣费
+         * @type {Array.<string> || null}
+         */
+        this.SubPayType = null;
+
+        /**
+         * 是否返回0元交易金额的交易项，取值：0-不返回，1-返回。不传该参数则不返回
+         * @type {number || null}
+         */
+        this.WithZeroAmount = null;
 
     }
 
@@ -2819,9 +3061,13 @@ class DescribeBillSummaryByProductRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.PayerUin = 'PayerUin' in params ? params.PayerUin : null;
-        this.BeginTime = 'BeginTime' in params ? params.BeginTime : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
         this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.PayType = 'PayType' in params ? params.PayType : null;
+        this.SubPayType = 'SubPayType' in params ? params.SubPayType : null;
+        this.WithZeroAmount = 'WithZeroAmount' in params ? params.WithZeroAmount : null;
 
     }
 }
@@ -2992,21 +3238,21 @@ class BillDetail extends  AbstractModel {
         this.Tags = null;
 
         /**
-         * 商品名称代码
+         * 商品名称代码（未开放的字段）
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.BusinessCode = null;
 
         /**
-         * 子商品名称代码
+         * 子商品名称代码 （未开放的字段）
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.ProductCode = null;
 
         /**
-         * 交易类型代码
+         * 交易类型代码（未开放的字段）
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
@@ -4245,6 +4491,7 @@ module.exports = {
     DescribeDosageDetailByDateRequest: DescribeDosageDetailByDateRequest,
     ProjectSummaryOverviewItem: ProjectSummaryOverviewItem,
     ConditionRegion: ConditionRegion,
+    DescribeBillSummaryByProductRequest: DescribeBillSummaryByProductRequest,
     ConsumptionBusinessSummaryDataItem: ConsumptionBusinessSummaryDataItem,
     DetailPoint: DetailPoint,
     CostDetail: CostDetail,
@@ -4256,6 +4503,7 @@ module.exports = {
     BillTagInfo: BillTagInfo,
     DescribeBillSummaryByRegionResponse: DescribeBillSummaryByRegionResponse,
     DetailSet: DetailSet,
+    BillTransactionInfo: BillTransactionInfo,
     RegionSummaryOverviewItem: RegionSummaryOverviewItem,
     ConsumptionResourceSummaryDataItem: ConsumptionResourceSummaryDataItem,
     DescribeAccountBalanceRequest: DescribeAccountBalanceRequest,
@@ -4264,6 +4512,7 @@ module.exports = {
     DescribeCostSummaryByProductResponse: DescribeCostSummaryByProductResponse,
     ProductInfo: ProductInfo,
     DescribeDosageDetailByDateResponse: DescribeDosageDetailByDateResponse,
+    DescribeBillListResponse: DescribeBillListResponse,
     DescribeAccountBalanceResponse: DescribeAccountBalanceResponse,
     DescribeCostSummaryByRegionRequest: DescribeCostSummaryByRegionRequest,
     BusinessSummaryOverviewItem: BusinessSummaryOverviewItem,
@@ -4278,7 +4527,7 @@ module.exports = {
     ConditionPayMode: ConditionPayMode,
     DescribeDealsByCondRequest: DescribeDealsByCondRequest,
     DescribeBillResourceSummaryRequest: DescribeBillResourceSummaryRequest,
-    DescribeBillSummaryByProductRequest: DescribeBillSummaryByProductRequest,
+    DescribeBillListRequest: DescribeBillListRequest,
     PayDealsResponse: PayDealsResponse,
     BillDetail: BillDetail,
     DescribeBillSummaryByTagResponse: DescribeBillSummaryByTagResponse,

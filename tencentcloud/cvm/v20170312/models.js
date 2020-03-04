@@ -850,7 +850,7 @@ class RunInstancesRequest extends  AbstractModel {
         this.SecurityGroupIds = null;
 
         /**
-         * 增强服务。通过该参数可以指定是否开启云安全、云监控等服务。若不指定该参数，则默认开启云监控、云安全服务。
+         * 增强服务。通过该参数可以指定是否开启云安全、云监控等服务。若不指定该参数，则默认公共镜像开启云监控、云安全服务；自定义镜像与镜像市场镜像默认不开启云监控，云安全服务，而使用镜像里保留的服务。
          * @type {EnhancedService || null}
          */
         this.EnhancedService = null;
@@ -3877,7 +3877,7 @@ class DataDisk extends  AbstractModel {
         this.SnapshotId = null;
 
         /**
-         * 数据盘是否随子机销毁。取值范围：
+         * 数据盘是加密。取值范围：
 <li>TRUE：加密
 <li>FALSE：不加密<br>
 默认取值：FALSE<br>
@@ -6080,6 +6080,13 @@ class InstanceTypeQuotaItem extends  AbstractModel {
          */
         this.Price = null;
 
+        /**
+         * 售罄原因。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.SoldOutReason = null;
+
     }
 
     /**
@@ -6119,6 +6126,7 @@ class InstanceTypeQuotaItem extends  AbstractModel {
             obj.deserialize(params.Price)
             this.Price = obj;
         }
+        this.SoldOutReason = 'SoldOutReason' in params ? params.SoldOutReason : null;
 
     }
 }

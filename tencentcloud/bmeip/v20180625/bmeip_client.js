@@ -37,6 +37,7 @@ const DescribeEipQuotaResponse = models.DescribeEipQuotaResponse;
 const UnbindRsResponse = models.UnbindRsResponse;
 const BindRsRequest = models.BindRsRequest;
 const UnbindHostedRequest = models.UnbindHostedRequest;
+const UnbindRsListResponse = models.UnbindRsListResponse;
 const BindVpcIpResponse = models.BindVpcIpResponse;
 const DescribeEipsRequest = models.DescribeEipsRequest;
 const ModifyEipNameRequest = models.ModifyEipNameRequest;
@@ -51,6 +52,8 @@ const DescribeEipTaskResponse = models.DescribeEipTaskResponse;
 const ModifyEipChargeRequest = models.ModifyEipChargeRequest;
 const DescribeEipQuotaRequest = models.DescribeEipQuotaRequest;
 const DeleteEipRequest = models.DeleteEipRequest;
+const EipRsMap = models.EipRsMap;
+const UnbindRsListRequest = models.UnbindRsListRequest;
 const DeleteEipAclResponse = models.DeleteEipAclResponse;
 const DescribeEipAclsRequest = models.DescribeEipAclsRequest;
 const BindEipAclsRequest = models.BindEipAclsRequest;
@@ -170,6 +173,17 @@ class BmeipClient extends AbstractClient {
     }
 
     /**
+     * 黑石EIP解绑VPCIP
+     * @param {UnbindVpcIpRequest} req
+     * @param {function(string, UnbindVpcIpResponse):void} cb
+     * @public
+     */
+    UnbindVpcIp(req, cb) {
+        let resp = new UnbindVpcIpResponse();
+        this.request("UnbindVpcIp", req, resp, cb);
+    }
+
+    /**
      * 释放黑石弹性公网IP
      * @param {DeleteEipRequest} req
      * @param {function(string, DeleteEipResponse):void} cb
@@ -258,14 +272,14 @@ class BmeipClient extends AbstractClient {
     }
 
     /**
-     * 黑石EIP解绑VPCIP
-     * @param {UnbindVpcIpRequest} req
-     * @param {function(string, UnbindVpcIpResponse):void} cb
+     * 批量解绑物理机弹性公网IP接口
+     * @param {UnbindRsListRequest} req
+     * @param {function(string, UnbindRsListResponse):void} cb
      * @public
      */
-    UnbindVpcIp(req, cb) {
-        let resp = new UnbindVpcIpResponse();
-        this.request("UnbindVpcIp", req, resp, cb);
+    UnbindRsList(req, cb) {
+        let resp = new UnbindRsListResponse();
+        this.request("UnbindRsList", req, resp, cb);
     }
 
     /**

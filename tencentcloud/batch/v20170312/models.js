@@ -3621,7 +3621,7 @@ class DataDisk extends  AbstractModel {
         this.SnapshotId = null;
 
         /**
-         * 数据盘是否随子机销毁。取值范围：
+         * 数据盘是加密。取值范围：
 <li>TRUE：加密
 <li>FALSE：不加密<br>
 默认取值：FALSE<br>
@@ -5053,6 +5053,13 @@ class InstanceTypeQuotaItem extends  AbstractModel {
          */
         this.Price = null;
 
+        /**
+         * 售罄原因。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.SoldOutReason = null;
+
     }
 
     /**
@@ -5092,6 +5099,7 @@ class InstanceTypeQuotaItem extends  AbstractModel {
             obj.deserialize(params.Price)
             this.Price = obj;
         }
+        this.SoldOutReason = 'SoldOutReason' in params ? params.SoldOutReason : null;
 
     }
 }
