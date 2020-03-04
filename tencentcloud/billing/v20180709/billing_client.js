@@ -22,6 +22,7 @@ const DescribeCostSummaryByProjectResponse = models.DescribeCostSummaryByProject
 const DescribeDosageDetailByDateRequest = models.DescribeDosageDetailByDateRequest;
 const ProjectSummaryOverviewItem = models.ProjectSummaryOverviewItem;
 const ConditionRegion = models.ConditionRegion;
+const DescribeBillSummaryByProductRequest = models.DescribeBillSummaryByProductRequest;
 const ConsumptionBusinessSummaryDataItem = models.ConsumptionBusinessSummaryDataItem;
 const DetailPoint = models.DetailPoint;
 const CostDetail = models.CostDetail;
@@ -33,6 +34,7 @@ const DescribeBillSummaryByProductResponse = models.DescribeBillSummaryByProduct
 const BillTagInfo = models.BillTagInfo;
 const DescribeBillSummaryByRegionResponse = models.DescribeBillSummaryByRegionResponse;
 const DetailSet = models.DetailSet;
+const BillTransactionInfo = models.BillTransactionInfo;
 const RegionSummaryOverviewItem = models.RegionSummaryOverviewItem;
 const ConsumptionResourceSummaryDataItem = models.ConsumptionResourceSummaryDataItem;
 const DescribeAccountBalanceRequest = models.DescribeAccountBalanceRequest;
@@ -41,6 +43,7 @@ const ConsumptionProjectSummaryDataItem = models.ConsumptionProjectSummaryDataIt
 const DescribeCostSummaryByProductResponse = models.DescribeCostSummaryByProductResponse;
 const ProductInfo = models.ProductInfo;
 const DescribeDosageDetailByDateResponse = models.DescribeDosageDetailByDateResponse;
+const DescribeBillListResponse = models.DescribeBillListResponse;
 const DescribeAccountBalanceResponse = models.DescribeAccountBalanceResponse;
 const DescribeCostSummaryByRegionRequest = models.DescribeCostSummaryByRegionRequest;
 const BusinessSummaryOverviewItem = models.BusinessSummaryOverviewItem;
@@ -55,7 +58,7 @@ const ActionSummaryOverviewItem = models.ActionSummaryOverviewItem;
 const ConditionPayMode = models.ConditionPayMode;
 const DescribeDealsByCondRequest = models.DescribeDealsByCondRequest;
 const DescribeBillResourceSummaryRequest = models.DescribeBillResourceSummaryRequest;
-const DescribeBillSummaryByProductRequest = models.DescribeBillSummaryByProductRequest;
+const DescribeBillListRequest = models.DescribeBillListRequest;
 const PayDealsResponse = models.PayDealsResponse;
 const BillDetail = models.BillDetail;
 const DescribeBillSummaryByTagResponse = models.DescribeBillSummaryByTagResponse;
@@ -123,14 +126,14 @@ class BillingClient extends AbstractClient {
     }
 
     /**
-     * 获取按地域汇总消耗详情
-     * @param {DescribeCostSummaryByRegionRequest} req
-     * @param {function(string, DescribeCostSummaryByRegionResponse):void} cb
+     * 获取收支明细列表，支持翻页和参数过滤
+     * @param {DescribeBillListRequest} req
+     * @param {function(string, DescribeBillListResponse):void} cb
      * @public
      */
-    DescribeCostSummaryByRegion(req, cb) {
-        let resp = new DescribeCostSummaryByRegionResponse();
-        this.request("DescribeCostSummaryByRegion", req, resp, cb);
+    DescribeBillList(req, cb) {
+        let resp = new DescribeBillListResponse();
+        this.request("DescribeBillList", req, resp, cb);
     }
 
     /**
@@ -186,6 +189,17 @@ class BillingClient extends AbstractClient {
     DescribeBillResourceSummary(req, cb) {
         let resp = new DescribeBillResourceSummaryResponse();
         this.request("DescribeBillResourceSummary", req, resp, cb);
+    }
+
+    /**
+     * 获取按地域汇总消耗详情
+     * @param {DescribeCostSummaryByRegionRequest} req
+     * @param {function(string, DescribeCostSummaryByRegionResponse):void} cb
+     * @public
+     */
+    DescribeCostSummaryByRegion(req, cb) {
+        let resp = new DescribeCostSummaryByRegionResponse();
+        this.request("DescribeCostSummaryByRegion", req, resp, cb);
     }
 
     /**

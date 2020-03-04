@@ -144,25 +144,25 @@ class DeleteAclRequest extends  AbstractModel {
         this.InstanceId = null;
 
         /**
-         * Acl资源类型，（0:UNKNOWN，1:ANY，2:TOPIC，3:GROUP，4:CLUSTER，5:TRANSACTIONAL_ID）当前只有TOPIC，其它字段用于后续兼容开源kafka的acl时使用
+         * Acl资源类型，(0:UNKNOWN，1:ANY，2:TOPIC，3:GROUP，4:CLUSTER，5:TRANSACTIONAL_ID)，当前只有TOPIC，其它字段用于后续兼容开源kafka的acl时使用
          * @type {number || null}
          */
         this.ResourceType = null;
 
         /**
-         * 资源名称，和resourceType相关如当resourceType为TOPIC时，则该字段表示topic名称，当resourceType为GROUP时，该字段表示group名称
+         * 资源名称，和resourceType相关，如当resourceType为TOPIC时，则该字段表示topic名称，当resourceType为GROUP时，该字段表示group名称
          * @type {string || null}
          */
         this.ResourceName = null;
 
         /**
-         * Acl操作方式(0:UNKNOWN，1:ANY，2:ALL，3:READ，4:WRITE，5:CREATE，6:DELETE，7:ALTER，8:DESCRIBE，9:CLUSTER_ACTION，10:DESCRIBE_CONFIGS，11:ALTER_CONFIGS，12:IDEMPOTEN_WRITE)，当前ckafka只支持READ,WRITE，其它用于后续兼容开源kafka的acl时使用
+         * Acl操作方式，(0:UNKNOWN，1:ANY，2:ALL，3:READ，4:WRITE，5:CREATE，6:DELETE，7:ALTER，8:DESCRIBE，9:CLUSTER_ACTION，10:DESCRIBE_CONFIGS，11:ALTER_CONFIGS，12:IDEMPOTEN_WRITE)，当前ckafka只支持READ,WRITE，其它用于后续兼容开源kafka的acl时使用
          * @type {number || null}
          */
         this.Operation = null;
 
         /**
-         * 权限类型(0:UNKNOWN，1:ANY，2:DENY，3:ALLOW)，当前ckakfa支持ALLOW(相当于白名单)，其它用于后续兼容开源kafka的acl时使用
+         * 权限类型，(0:UNKNOWN，1:ANY，2:DENY，3:ALLOW)，当前ckakfa支持ALLOW(相当于白名单)，其它用于后续兼容开源kafka的acl时使用
          * @type {number || null}
          */
         this.PermissionType = null;
@@ -289,6 +289,43 @@ class DeleteUserRequest extends  AbstractModel {
 }
 
 /**
+ * 分区和位移
+ * @class
+ */
+class PartitionOffset extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Partition,例如"0"或"1"
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Partition = null;
+
+        /**
+         * Offset,例如100
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Partition = 'Partition' in params ? params.Partition : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+
+    }
+}
+
+/**
  * DescribeACL请求参数结构体
  * @class
  */
@@ -303,13 +340,13 @@ class DescribeACLRequest extends  AbstractModel {
         this.InstanceId = null;
 
         /**
-         * Acl资源类型，（0:UNKNOWN，1:ANY，2:TOPIC，3:GROUP，4:CLUSTER，5:TRANSACTIONAL_ID）当前只有TOPIC，其它字段用于后续兼容开源kafka的acl时使用
+         * Acl资源类型，(0:UNKNOWN，1:ANY，2:TOPIC，3:GROUP，4:CLUSTER，5:TRANSACTIONAL_ID)，当前只有TOPIC，其它字段用于后续兼容开源kafka的acl时使用
          * @type {number || null}
          */
         this.ResourceType = null;
 
         /**
-         * 资源名称，和resourceType相关如当resourceType为TOPIC时，则该字段表示topic名称，当resourceType为GROUP时，该字段表示group名称
+         * 资源名称，和resourceType相关，如当resourceType为TOPIC时，则该字段表示topic名称，当resourceType为GROUP时，该字段表示group名称
          * @type {string || null}
          */
         this.ResourceName = null;
@@ -797,6 +834,13 @@ class JgwOperateResponse extends  AbstractModel {
          */
         this.ReturnMessage = null;
 
+        /**
+         * 操作型返回的Data数据,可能有flowId等
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {OperateResponseData || null}
+         */
+        this.Data = null;
+
     }
 
     /**
@@ -808,6 +852,12 @@ class JgwOperateResponse extends  AbstractModel {
         }
         this.ReturnCode = 'ReturnCode' in params ? params.ReturnCode : null;
         this.ReturnMessage = 'ReturnMessage' in params ? params.ReturnMessage : null;
+
+        if (params.Data) {
+            let obj = new OperateResponseData();
+            obj.deserialize(params.Data)
+            this.Data = obj;
+        }
 
     }
 }
@@ -891,6 +941,51 @@ class Tag extends  AbstractModel {
 }
 
 /**
+ * DescribeGroup的返回
+ * @class
+ */
+class GroupResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 计数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * GroupList
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<DescribeGroup> || null}
+         */
+        this.GroupList = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.GroupList) {
+            this.GroupList = new Array();
+            for (let z in params.GroupList) {
+                let obj = new DescribeGroup();
+                obj.deserialize(params.GroupList[z]);
+                this.GroupList.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * DescribeTopicAttributes返回参数结构体
  * @class
  */
@@ -940,7 +1035,7 @@ class DescribeGroupResponse extends  AbstractModel {
 
         /**
          * 返回结果集列表
-         * @type {Array.<DescribeGroup> || null}
+         * @type {GroupResponse || null}
          */
         this.Result = null;
 
@@ -961,12 +1056,9 @@ class DescribeGroupResponse extends  AbstractModel {
         }
 
         if (params.Result) {
-            this.Result = new Array();
-            for (let z in params.Result) {
-                let obj = new DescribeGroup();
-                obj.deserialize(params.Result[z]);
-                this.Result.push(obj);
-            }
+            let obj = new GroupResponse();
+            obj.deserialize(params.Result)
+            this.Result = obj;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -1011,6 +1103,35 @@ class ModifyInstanceAttributesConfig extends  AbstractModel {
         this.AutoCreateTopicEnable = 'AutoCreateTopicEnable' in params ? params.AutoCreateTopicEnable : null;
         this.DefaultNumPartitions = 'DefaultNumPartitions' in params ? params.DefaultNumPartitions : null;
         this.DefaultReplicationFactor = 'DefaultReplicationFactor' in params ? params.DefaultReplicationFactor : null;
+
+    }
+}
+
+/**
+ * 操作类型返回的Data结构
+ * @class
+ */
+class OperateResponseData extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * FlowId
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.FlowId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FlowId = 'FlowId' in params ? params.FlowId : null;
 
     }
 }
@@ -1190,25 +1311,25 @@ class CreateAclRequest extends  AbstractModel {
         this.InstanceId = null;
 
         /**
-         * Acl资源类型，（0:UNKNOWN，1:ANY，2:TOPIC，3:GROUP，4:CLUSTER，5:TRANSACTIONAL_ID）当前只有TOPIC，其它字段用于后续兼容开源kafka的acl时使用
+         * Acl资源类型，(0:UNKNOWN，1:ANY，2:TOPIC，3:GROUP，4:CLUSTER，5:TRANSACTIONAL_ID)，当前只有TOPIC，其它字段用于后续兼容开源kafka的acl时使用
          * @type {number || null}
          */
         this.ResourceType = null;
 
         /**
-         * 资源名称，和resourceType相关如当resourceType为TOPIC时，则该字段表示topic名称，当resourceType为GROUP时，该字段表示group名称
+         * 资源名称，和resourceType相关，如当resourceType为TOPIC时，则该字段表示topic名称，当resourceType为GROUP时，该字段表示group名称
          * @type {string || null}
          */
         this.ResourceName = null;
 
         /**
-         * Acl操作方式(0:UNKNOWN，1:ANY，2:ALL，3:READ，4:WRITE，5:CREATE，6:DELETE，7:ALTER，8:DESCRIBE，9:CLUSTER_ACTION，10:DESCRIBE_CONFIGS，11:ALTER_CONFIGS，
+         * Acl操作方式，(0:UNKNOWN，1:ANY，2:ALL，3:READ，4:WRITE，5:CREATE，6:DELETE，7:ALTER，8:DESCRIBE，9:CLUSTER_ACTION，10:DESCRIBE_CONFIGS，11:ALTER_CONFIGS)
          * @type {number || null}
          */
         this.Operation = null;
 
         /**
-         * 权限类型(0:UNKNOWN，1:ANY，2:DENY，3:ALLOW)，当前ckakfa支持ALLOW(相当于白名单)，其它用于后续兼容开源kafka的acl时使用
+         * 权限类型，(0:UNKNOWN，1:ANY，2:DENY，3:ALLOW)，当前ckakfa支持ALLOW(相当于白名单)，其它用于后续兼容开源kafka的acl时使用
          * @type {number || null}
          */
         this.PermissionType = null;
@@ -3065,6 +3186,34 @@ class InstanceAttributesResponse extends  AbstractModel {
          */
         this.ExpireTime = null;
 
+        /**
+         * 跨可用区
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<number> || null}
+         */
+        this.ZoneIds = null;
+
+        /**
+         * kafka版本信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Version = null;
+
+        /**
+         * 最大分组数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.MaxGroupNum = null;
+
+        /**
+         * 售卖类型
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Cvm = null;
+
     }
 
     /**
@@ -3117,6 +3266,10 @@ class InstanceAttributesResponse extends  AbstractModel {
             }
         }
         this.ExpireTime = 'ExpireTime' in params ? params.ExpireTime : null;
+        this.ZoneIds = 'ZoneIds' in params ? params.ZoneIds : null;
+        this.Version = 'Version' in params ? params.Version : null;
+        this.MaxGroupNum = 'MaxGroupNum' in params ? params.MaxGroupNum : null;
+        this.Cvm = 'Cvm' in params ? params.Cvm : null;
 
     }
 }
@@ -4454,7 +4607,7 @@ class InstanceDetail extends  AbstractModel {
 
         /**
          * 实例状态 int：0表示健康，1表示告警，2 表示实例状态异常
-         * @type {string || null}
+         * @type {number || null}
          */
         this.Healthy = null;
 
@@ -4493,6 +4646,27 @@ class InstanceDetail extends  AbstractModel {
          * @type {Array.<Tag> || null}
          */
         this.Tags = null;
+
+        /**
+         * kafka版本信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Version = null;
+
+        /**
+         * 跨可用区
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<number> || null}
+         */
+        this.ZoneIds = null;
+
+        /**
+         * ckafka售卖类型
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Cvm = null;
 
     }
 
@@ -4538,6 +4712,9 @@ class InstanceDetail extends  AbstractModel {
                 this.Tags.push(obj);
             }
         }
+        this.Version = 'Version' in params ? params.Version : null;
+        this.ZoneIds = 'ZoneIds' in params ? params.ZoneIds : null;
+        this.Cvm = 'Cvm' in params ? params.Cvm : null;
 
     }
 }
@@ -4603,6 +4780,13 @@ class SubscribedInfo extends  AbstractModel {
          */
         this.Partition = null;
 
+        /**
+         * 分区offset信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<PartitionOffset> || null}
+         */
+        this.PartitionOffset = null;
+
     }
 
     /**
@@ -4615,6 +4799,15 @@ class SubscribedInfo extends  AbstractModel {
         this.TopicName = 'TopicName' in params ? params.TopicName : null;
         this.Partition = 'Partition' in params ? params.Partition : null;
 
+        if (params.PartitionOffset) {
+            this.PartitionOffset = new Array();
+            for (let z in params.PartitionOffset) {
+                let obj = new PartitionOffset();
+                obj.deserialize(params.PartitionOffset[z]);
+                this.PartitionOffset.push(obj);
+            }
+        }
+
     }
 }
 
@@ -4623,6 +4816,7 @@ module.exports = {
     DeleteAclRequest: DeleteAclRequest,
     GroupInfoMember: GroupInfoMember,
     DeleteUserRequest: DeleteUserRequest,
+    PartitionOffset: PartitionOffset,
     DescribeACLRequest: DescribeACLRequest,
     DescribeTopicAttributesRequest: DescribeTopicAttributesRequest,
     DescribeInstanceAttributesRequest: DescribeInstanceAttributesRequest,
@@ -4638,9 +4832,11 @@ module.exports = {
     JgwOperateResponse: JgwOperateResponse,
     Topic: Topic,
     Tag: Tag,
+    GroupResponse: GroupResponse,
     DescribeTopicAttributesResponse: DescribeTopicAttributesResponse,
     DescribeGroupResponse: DescribeGroupResponse,
     ModifyInstanceAttributesConfig: ModifyInstanceAttributesConfig,
+    OperateResponseData: OperateResponseData,
     CreateUserResponse: CreateUserResponse,
     ModifyInstanceAttributesResponse: ModifyInstanceAttributesResponse,
     CreatePartitionResponse: CreatePartitionResponse,
