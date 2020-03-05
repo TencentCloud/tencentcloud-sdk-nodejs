@@ -233,7 +233,7 @@ class CreateModelRequest extends  AbstractModel {
         super();
 
         /**
-         * LUT文件。 用于试唇色。须为 512*512的PNG图片。
+         * 用于试唇色，要求必须是LUT 格式的cube文件转换成512*512的PNG图片。查看 [LUT文件的使用说明](https://cloud.tencent.com/document/product/1172/41701)。了解 [cube文件转png图片小工具](http://yyb.gtimg.com/aiplat/static/qcloud-cube-to-png.html)。
          * @type {string || null}
          */
         this.LUTFile = null;

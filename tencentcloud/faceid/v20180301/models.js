@@ -17,44 +17,19 @@
 const AbstractModel = require("../../common/abstract_model");
 
 /**
- * MobileNetworkTimeVerification返回参数结构体
+ * 核身视频信息
  * @class
  */
-class MobileNetworkTimeVerificationResponse extends  AbstractModel {
+class DetectInfoVideoData extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 认证结果码，收费情况如下。
-收费结果码：
-0: 成功
--2: 手机号不存在
--3: 手机号存在，但无法查询到在网时长
-不收费结果码：
--1: 手机号格式不正确
--4: 验证中心服务繁忙
+         * 活体视频的base64编码
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
-        this.Result = null;
-
-        /**
-         * 业务结果描述。
-         * @type {string || null}
-         */
-        this.Description = null;
-
-        /**
-         * 在网时长区间。
-格式为(a,b]，表示在网时长在a个月以上，b个月以下。若b为+时表示没有上限。
-         * @type {string || null}
-         */
-        this.Range = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
+        this.LivenessVideo = null;
 
     }
 
@@ -65,10 +40,72 @@ class MobileNetworkTimeVerificationResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Result = 'Result' in params ? params.Result : null;
-        this.Description = 'Description' in params ? params.Description : null;
-        this.Range = 'Range' in params ? params.Range : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.LivenessVideo = 'LivenessVideo' in params ? params.LivenessVideo : null;
+
+    }
+}
+
+/**
+ * GetDetectInfoEnhanced请求参数结构体
+ * @class
+ */
+class GetDetectInfoEnhancedRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 人脸核身流程的标识，调用DetectAuth接口时生成。
+         * @type {string || null}
+         */
+        this.BizToken = null;
+
+        /**
+         * 用于细分客户使用场景，由腾讯侧在线下对接时分配。
+         * @type {string || null}
+         */
+        this.RuleId = null;
+
+        /**
+         * 指定拉取的结果信息，取值（0：全部；1：文本类；2：身份证信息；3：视频最佳截图信息；4：视频信息）。
+如 134表示拉取文本类、视频最佳截图信息、视频信息。
+默认值：0
+         * @type {string || null}
+         */
+        this.InfoType = null;
+
+        /**
+         * 从活体视频中截取一定张数的最佳帧。默认为0，最大为10，超出10的最多只给10张。（InfoType需要包含3）
+         * @type {number || null}
+         */
+        this.BestFramesCount = null;
+
+        /**
+         * 是否对身份证照片进行裁边。默认为false。（InfoType需要包含2）
+         * @type {boolean || null}
+         */
+        this.IsCutIdCardImage = null;
+
+        /**
+         * 是否需要从身份证中抠出头像。默认为false。（InfoType需要包含2）
+         * @type {boolean || null}
+         */
+        this.IsNeedIdCardAvatar = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.BizToken = 'BizToken' in params ? params.BizToken : null;
+        this.RuleId = 'RuleId' in params ? params.RuleId : null;
+        this.InfoType = 'InfoType' in params ? params.InfoType : null;
+        this.BestFramesCount = 'BestFramesCount' in params ? params.BestFramesCount : null;
+        this.IsCutIdCardImage = 'IsCutIdCardImage' in params ? params.IsCutIdCardImage : null;
+        this.IsNeedIdCardAvatar = 'IsNeedIdCardAvatar' in params ? params.IsNeedIdCardAvatar : null;
 
     }
 }
@@ -183,6 +220,63 @@ class LivenessCompareResponse extends  AbstractModel {
 }
 
 /**
+ * MobileNetworkTimeVerification返回参数结构体
+ * @class
+ */
+class MobileNetworkTimeVerificationResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 认证结果码，收费情况如下。
+收费结果码：
+0: 成功
+-2: 手机号不存在
+-3: 手机号存在，但无法查询到在网时长
+不收费结果码：
+-1: 手机号格式不正确
+-4: 验证中心服务繁忙
+         * @type {string || null}
+         */
+        this.Result = null;
+
+        /**
+         * 业务结果描述。
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * 在网时长区间。
+格式为(a,b]，表示在网时长在a个月以上，b个月以下。若b为+时表示没有上限。
+         * @type {string || null}
+         */
+        this.Range = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Result = 'Result' in params ? params.Result : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.Range = 'Range' in params ? params.Range : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * GetLiveCode请求参数结构体
  * @class
  */
@@ -284,6 +378,123 @@ class BankCardVerificationRequest extends  AbstractModel {
         this.Name = 'Name' in params ? params.Name : null;
         this.BankCard = 'BankCard' in params ? params.BankCard : null;
         this.CertType = 'CertType' in params ? params.CertType : null;
+
+    }
+}
+
+/**
+ * 核身最佳帧信息
+ * @class
+ */
+class DetectInfoBestFrame extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 活体比对最佳帧。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.BestFrame = null;
+
+        /**
+         * 自截帧。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
+         */
+        this.BestFrames = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.BestFrame = 'BestFrame' in params ? params.BestFrame : null;
+        this.BestFrames = 'BestFrames' in params ? params.BestFrames : null;
+
+    }
+}
+
+/**
+ * GetDetectInfoEnhanced返回参数结构体
+ * @class
+ */
+class GetDetectInfoEnhancedResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 文本类信息。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {DetectInfoText || null}
+         */
+        this.Text = null;
+
+        /**
+         * 身份证照片信息。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {DetectInfoIdCardData || null}
+         */
+        this.IdCardData = null;
+
+        /**
+         * 最佳帧信息。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {DetectInfoBestFrame || null}
+         */
+        this.BestFrame = null;
+
+        /**
+         * 视频信息。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {DetectInfoVideoData || null}
+         */
+        this.VideoData = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Text) {
+            let obj = new DetectInfoText();
+            obj.deserialize(params.Text)
+            this.Text = obj;
+        }
+
+        if (params.IdCardData) {
+            let obj = new DetectInfoIdCardData();
+            obj.deserialize(params.IdCardData)
+            this.IdCardData = obj;
+        }
+
+        if (params.BestFrame) {
+            let obj = new DetectInfoBestFrame();
+            obj.deserialize(params.BestFrame)
+            this.BestFrame = obj;
+        }
+
+        if (params.VideoData) {
+            let obj = new DetectInfoVideoData();
+            obj.deserialize(params.VideoData)
+            this.VideoData = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -575,6 +786,62 @@ class MobileStatusRequest extends  AbstractModel {
 }
 
 /**
+ * LivenessRecognition返回参数结构体
+ * @class
+ */
+class LivenessRecognitionResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 验证通过后的视频最佳截图照片，照片为BASE64编码后的值，jpg格式。
+         * @type {string || null}
+         */
+        this.BestFrameBase64 = null;
+
+        /**
+         * 相似度，取值范围 [0.00, 100.00]。推荐相似度大于等于70时可判断为同一人，可根据具体场景自行调整阈值（阈值70的误通过率为千分之一，阈值80的误通过率是万分之一）
+         * @type {number || null}
+         */
+        this.Sim = null;
+
+        /**
+         * 业务错误码，成功情况返回Success, 错误情况请参考下方错误码 列表中FailedOperation部分
+         * @type {string || null}
+         */
+        this.Result = null;
+
+        /**
+         * 业务结果描述。
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.BestFrameBase64 = 'BestFrameBase64' in params ? params.BestFrameBase64 : null;
+        this.Sim = 'Sim' in params ? params.Sim : null;
+        this.Result = 'Result' in params ? params.Result : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * BankCard2EVerification请求参数结构体
  * @class
  */
@@ -705,123 +972,6 @@ class MobileNetworkTimeVerificationRequest extends  AbstractModel {
 }
 
 /**
- * LivenessRecognition返回参数结构体
- * @class
- */
-class LivenessRecognitionResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 验证通过后的视频最佳截图照片，照片为BASE64编码后的值，jpg格式。
-         * @type {string || null}
-         */
-        this.BestFrameBase64 = null;
-
-        /**
-         * 相似度，取值范围 [0.00, 100.00]。推荐相似度大于等于70时可判断为同一人，可根据具体场景自行调整阈值（阈值70的误通过率为千分之一，阈值80的误通过率是万分之一）
-         * @type {number || null}
-         */
-        this.Sim = null;
-
-        /**
-         * 业务错误码，成功情况返回Success, 错误情况请参考下方错误码 列表中FailedOperation部分
-         * @type {string || null}
-         */
-        this.Result = null;
-
-        /**
-         * 业务结果描述。
-         * @type {string || null}
-         */
-        this.Description = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.BestFrameBase64 = 'BestFrameBase64' in params ? params.BestFrameBase64 : null;
-        this.Sim = 'Sim' in params ? params.Sim : null;
-        this.Result = 'Result' in params ? params.Result : null;
-        this.Description = 'Description' in params ? params.Description : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * MobileStatus返回参数结构体
- * @class
- */
-class MobileStatusResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 认证结果码，收费情况如下。
-收费结果码：
-0：成功
-不收费结果码：
--1：未查询到结果
--2：手机号格式不正确
--3：验证中心服务繁忙
-         * @type {string || null}
-         */
-        this.Result = null;
-
-        /**
-         * 业务结果描述。
-         * @type {string || null}
-         */
-        this.Description = null;
-
-        /**
-         * 状态码：
-0：正常
-1：停机
-2：销号
-3：空号
-4：不在网
-99：未知状态
-         * @type {number || null}
-         */
-        this.StatusCode = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Result = 'Result' in params ? params.Result : null;
-        this.Description = 'Description' in params ? params.Description : null;
-        this.StatusCode = 'StatusCode' in params ? params.StatusCode : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
  * IdCardOCRVerification返回参数结构体
  * @class
  */
@@ -913,6 +1063,313 @@ class IdCardOCRVerificationResponse extends  AbstractModel {
         this.Birth = 'Birth' in params ? params.Birth : null;
         this.Address = 'Address' in params ? params.Address : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * MobileStatus返回参数结构体
+ * @class
+ */
+class MobileStatusResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 认证结果码，收费情况如下。
+收费结果码：
+0：成功
+不收费结果码：
+-1：未查询到结果
+-2：手机号格式不正确
+-3：验证中心服务繁忙
+         * @type {string || null}
+         */
+        this.Result = null;
+
+        /**
+         * 业务结果描述。
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * 状态码：
+0：正常
+1：停机
+2：销号
+3：空号
+4：不在网
+99：未知状态
+         * @type {number || null}
+         */
+        this.StatusCode = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Result = 'Result' in params ? params.Result : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.StatusCode = 'StatusCode' in params ? params.StatusCode : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Liveness返回参数结构体
+ * @class
+ */
+class LivenessResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 验证通过后的视频最佳截图照片，照片为BASE64编码后的值，jpg格式。
+         * @type {string || null}
+         */
+        this.BestFrameBase64 = null;
+
+        /**
+         * 业务错误码，成功情况返回Success, 错误情况请参考下方错误码 列表中FailedOperation部分
+         * @type {string || null}
+         */
+        this.Result = null;
+
+        /**
+         * 业务结果描述。
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.BestFrameBase64 = 'BestFrameBase64' in params ? params.BestFrameBase64 : null;
+        this.Result = 'Result' in params ? params.Result : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 核身文本信息
+ * @class
+ */
+class DetectInfoText extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 本次流程最终验证结果。0为成功
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.ErrCode = null;
+
+        /**
+         * 本次流程最终验证结果描述。（仅描述用，文案更新时不会通知。）
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ErrMsg = null;
+
+        /**
+         * 本次验证使用的身份证号。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.IdCard = null;
+
+        /**
+         * 本次验证使用的姓名。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Ocr识别结果。民族。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.OcrNation = null;
+
+        /**
+         * Ocr识别结果。家庭住址。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.OcrAddress = null;
+
+        /**
+         * Ocr识别结果。生日。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.OcrBirth = null;
+
+        /**
+         * Ocr识别结果。签发机关。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.OcrAuthority = null;
+
+        /**
+         * Ocr识别结果。有效日期。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.OcrValidDate = null;
+
+        /**
+         * Ocr识别结果。姓名。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.OcrName = null;
+
+        /**
+         * Ocr识别结果。身份证号。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.OcrIdCard = null;
+
+        /**
+         * Ocr识别结果。性别。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.OcrGender = null;
+
+        /**
+         * 本次流程最终活体结果。0为成功
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.LiveStatus = null;
+
+        /**
+         * 本次流程最终活体结果描述。（仅描述用，文案更新时不会通知。）
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.LiveMsg = null;
+
+        /**
+         * 本次流程最终一比一结果。0为成功
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Comparestatus = null;
+
+        /**
+         * 本次流程最终一比一结果描述。（仅描述用，文案更新时不会通知。）
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Comparemsg = null;
+
+        /**
+         * 本次流程活体一比一的分数。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Sim = null;
+
+        /**
+         * 地理位置经纬度。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Location = null;
+
+        /**
+         * Auth接口带入额外信息。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Extra = null;
+
+        /**
+         * 本次流程进行的活体一比一流水。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<DetectDetail> || null}
+         */
+        this.LivenessDetail = null;
+
+        /**
+         * 手机号码。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Mobile = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ErrCode = 'ErrCode' in params ? params.ErrCode : null;
+        this.ErrMsg = 'ErrMsg' in params ? params.ErrMsg : null;
+        this.IdCard = 'IdCard' in params ? params.IdCard : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.OcrNation = 'OcrNation' in params ? params.OcrNation : null;
+        this.OcrAddress = 'OcrAddress' in params ? params.OcrAddress : null;
+        this.OcrBirth = 'OcrBirth' in params ? params.OcrBirth : null;
+        this.OcrAuthority = 'OcrAuthority' in params ? params.OcrAuthority : null;
+        this.OcrValidDate = 'OcrValidDate' in params ? params.OcrValidDate : null;
+        this.OcrName = 'OcrName' in params ? params.OcrName : null;
+        this.OcrIdCard = 'OcrIdCard' in params ? params.OcrIdCard : null;
+        this.OcrGender = 'OcrGender' in params ? params.OcrGender : null;
+        this.LiveStatus = 'LiveStatus' in params ? params.LiveStatus : null;
+        this.LiveMsg = 'LiveMsg' in params ? params.LiveMsg : null;
+        this.Comparestatus = 'Comparestatus' in params ? params.Comparestatus : null;
+        this.Comparemsg = 'Comparemsg' in params ? params.Comparemsg : null;
+        this.Sim = 'Sim' in params ? params.Sim : null;
+        this.Location = 'Location' in params ? params.Location : null;
+        this.Extra = 'Extra' in params ? params.Extra : null;
+
+        if (params.LivenessDetail) {
+            this.LivenessDetail = new Array();
+            for (let z in params.LivenessDetail) {
+                let obj = new DetectDetail();
+                obj.deserialize(params.LivenessDetail[z]);
+                this.LivenessDetail.push(obj);
+            }
+        }
+        this.Mobile = 'Mobile' in params ? params.Mobile : null;
 
     }
 }
@@ -1641,6 +2098,67 @@ class IdCardVerificationResponse extends  AbstractModel {
 }
 
 /**
+ * 核身身份证图片信息
+ * @class
+ */
+class DetectInfoIdCardData extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * OCR正面照片的base64编码。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.OcrFront = null;
+
+        /**
+         * OCR反面照片的base64编码
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.OcrBack = null;
+
+        /**
+         * 旋转裁边后的正面照片base64编码。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ProcessedFrontImage = null;
+
+        /**
+         * 旋转裁边后的背面照片base64编码。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ProcessedBackImage = null;
+
+        /**
+         * 身份证正面人像图base64编码。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Avatar = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.OcrFront = 'OcrFront' in params ? params.OcrFront : null;
+        this.OcrBack = 'OcrBack' in params ? params.OcrBack : null;
+        this.ProcessedFrontImage = 'ProcessedFrontImage' in params ? params.ProcessedFrontImage : null;
+        this.ProcessedBackImage = 'ProcessedBackImage' in params ? params.ProcessedBackImage : null;
+        this.Avatar = 'Avatar' in params ? params.Avatar : null;
+
+    }
+}
+
+/**
  * LivenessCompare请求参数结构体
  * @class
  */
@@ -1702,36 +2220,96 @@ LIP为数字模式，ACTION为动作模式，SILENT为静默模式，三种模�
 }
 
 /**
- * Liveness返回参数结构体
+ * 活体一比一详情
  * @class
  */
-class LivenessResponse extends  AbstractModel {
+class DetectDetail extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 验证通过后的视频最佳截图照片，照片为BASE64编码后的值，jpg格式。
+         * 请求时间戳。
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
-        this.BestFrameBase64 = null;
+        this.ReqTime = null;
 
         /**
-         * 业务错误码，成功情况返回Success, 错误情况请参考下方错误码 列表中FailedOperation部分
+         * 本次活体一比一请求的唯一标记。
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
-        this.Result = null;
+        this.Seq = null;
 
         /**
-         * 业务结果描述。
+         * 参与本次活体一比一的身份证号。
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
-        this.Description = null;
+        this.Idcard = null;
 
         /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * 参与本次活体一比一的姓名。
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.Name = null;
+
+        /**
+         * 本次活体一比一的相似度。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Sim = null;
+
+        /**
+         * 本次活体一比一是否收费
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.IsNeedCharge = null;
+
+        /**
+         * 本次活体一比一最终结果。0为成功
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Errcode = null;
+
+        /**
+         * 本次活体一比一最终结果描述。（仅描述用，文案更新时不会通知。）
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Errmsg = null;
+
+        /**
+         * 本次活体结果。0为成功
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Livestatus = null;
+
+        /**
+         * 本次活体结果描述。（仅描述用，文案更新时不会通知。）
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Livemsg = null;
+
+        /**
+         * 本次一比一结果。0为成功
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Comparestatus = null;
+
+        /**
+         * 本次一比一结果描述。（仅描述用，文案更新时不会通知。）
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Comparemsg = null;
 
     }
 
@@ -1742,33 +2320,47 @@ class LivenessResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.BestFrameBase64 = 'BestFrameBase64' in params ? params.BestFrameBase64 : null;
-        this.Result = 'Result' in params ? params.Result : null;
-        this.Description = 'Description' in params ? params.Description : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.ReqTime = 'ReqTime' in params ? params.ReqTime : null;
+        this.Seq = 'Seq' in params ? params.Seq : null;
+        this.Idcard = 'Idcard' in params ? params.Idcard : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Sim = 'Sim' in params ? params.Sim : null;
+        this.IsNeedCharge = 'IsNeedCharge' in params ? params.IsNeedCharge : null;
+        this.Errcode = 'Errcode' in params ? params.Errcode : null;
+        this.Errmsg = 'Errmsg' in params ? params.Errmsg : null;
+        this.Livestatus = 'Livestatus' in params ? params.Livestatus : null;
+        this.Livemsg = 'Livemsg' in params ? params.Livemsg : null;
+        this.Comparestatus = 'Comparestatus' in params ? params.Comparestatus : null;
+        this.Comparemsg = 'Comparemsg' in params ? params.Comparemsg : null;
 
     }
 }
 
 module.exports = {
-    MobileNetworkTimeVerificationResponse: MobileNetworkTimeVerificationResponse,
+    DetectInfoVideoData: DetectInfoVideoData,
+    GetDetectInfoEnhancedRequest: GetDetectInfoEnhancedRequest,
     LivenessRequest: LivenessRequest,
     LivenessCompareResponse: LivenessCompareResponse,
+    MobileNetworkTimeVerificationResponse: MobileNetworkTimeVerificationResponse,
     GetLiveCodeRequest: GetLiveCodeRequest,
     IdCardVerificationRequest: IdCardVerificationRequest,
     BankCardVerificationRequest: BankCardVerificationRequest,
+    DetectInfoBestFrame: DetectInfoBestFrame,
+    GetDetectInfoEnhancedResponse: GetDetectInfoEnhancedResponse,
     PhoneVerificationRequest: PhoneVerificationRequest,
     DetectAuthResponse: DetectAuthResponse,
     PhoneVerificationResponse: PhoneVerificationResponse,
     IdCardOCRVerificationRequest: IdCardOCRVerificationRequest,
     BankCard4EVerificationResponse: BankCard4EVerificationResponse,
     MobileStatusRequest: MobileStatusRequest,
+    LivenessRecognitionResponse: LivenessRecognitionResponse,
     BankCard2EVerificationRequest: BankCard2EVerificationRequest,
     LivenessRecognitionRequest: LivenessRecognitionRequest,
     MobileNetworkTimeVerificationRequest: MobileNetworkTimeVerificationRequest,
-    LivenessRecognitionResponse: LivenessRecognitionResponse,
-    MobileStatusResponse: MobileStatusResponse,
     IdCardOCRVerificationResponse: IdCardOCRVerificationResponse,
+    MobileStatusResponse: MobileStatusResponse,
+    LivenessResponse: LivenessResponse,
+    DetectInfoText: DetectInfoText,
     DetectAuthRequest: DetectAuthRequest,
     MinorsVerificationResponse: MinorsVerificationResponse,
     BankCardVerificationResponse: BankCardVerificationResponse,
@@ -1783,7 +2375,8 @@ module.exports = {
     GetDetectInfoRequest: GetDetectInfoRequest,
     BankCard2EVerificationResponse: BankCard2EVerificationResponse,
     IdCardVerificationResponse: IdCardVerificationResponse,
+    DetectInfoIdCardData: DetectInfoIdCardData,
     LivenessCompareRequest: LivenessCompareRequest,
-    LivenessResponse: LivenessResponse,
+    DetectDetail: DetectDetail,
 
 }

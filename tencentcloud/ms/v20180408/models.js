@@ -2769,7 +2769,7 @@ class DescribeShieldResultResponse extends  AbstractModel {
         super();
 
         /**
-         * 任务状态: 1-已完成,2-处理中,3-处理出错,4-处理超时
+         * 任务状态: 0-请返回,1-已完成,2-处理中,3-处理出错,4-处理超时
          * @type {number || null}
          */
         this.TaskStatus = null;

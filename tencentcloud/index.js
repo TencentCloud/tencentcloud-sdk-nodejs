@@ -47,6 +47,7 @@ module.exports = {
     facefusion: require("./facefusion"),
     faceid: require("./faceid"),
     fmu: require("./fmu"),
+    ft: require("./ft"),
     gaap: require("./gaap"),
     gme: require("./gme"),
     gs: require("./gs"),

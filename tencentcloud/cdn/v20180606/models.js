@@ -280,6 +280,107 @@ class UrlRecord extends  AbstractModel {
 }
 
 /**
+ * DescribePushQuota返回参数结构体
+ * @class
+ */
+class DescribePushQuotaResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Url预热用量及配额。
+         * @type {Array.<Quota> || null}
+         */
+        this.UrlPush = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.UrlPush) {
+            this.UrlPush = new Array();
+            for (let z in params.UrlPush) {
+                let obj = new Quota();
+                obj.deserialize(params.UrlPush[z]);
+                this.UrlPush.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribePurgeQuota返回参数结构体
+ * @class
+ */
+class DescribePurgeQuotaResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Url刷新用量及配额。
+         * @type {Array.<Quota> || null}
+         */
+        this.UrlPurge = null;
+
+        /**
+         * 目录刷新用量及配额。
+         * @type {Array.<Quota> || null}
+         */
+        this.PathPurge = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.UrlPurge) {
+            this.UrlPurge = new Array();
+            for (let z in params.UrlPurge) {
+                let obj = new Quota();
+                obj.deserialize(params.UrlPurge[z]);
+                this.UrlPurge.push(obj);
+            }
+        }
+
+        if (params.PathPurge) {
+            this.PathPurge = new Array();
+            for (let z in params.PathPurge) {
+                let obj = new Quota();
+                obj.deserialize(params.PathPurge[z]);
+                this.PathPurge.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * 时间戳防盗链配置
  * @class
  */
@@ -723,60 +824,12 @@ off：关闭
 }
 
 /**
- * Http 头部设置规则，最多可设置 100 条
+ * DescribePurgeQuota请求参数结构体
  * @class
  */
-class HttpHeaderPathRule extends  AbstractModel {
+class DescribePurgeQuotaRequest extends  AbstractModel {
     constructor(){
         super();
-
-        /**
-         * http 头部设置方式
-add：添加头部，若已存在头部，则会存在重复头部
-set：仅回源头部配置支持，若头部已存在则会覆盖原有头部值，若不存在，则会增加该头部及值
-del：删除头部
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.HeaderMode = null;
-
-        /**
-         * http 头部名称，最多可设置 100 个字符
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.HeaderName = null;
-
-        /**
-         * http 头部值，最多可设置 1000 个字符
-Mode 为 del 时非必填
-Mode 为 add/set 时必填
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.HeaderValue = null;
-
-        /**
-         * 规则类型：
-all：所有文件生效
-file：指定文件后缀生效
-directory：指定路径生效
-path：指定绝对路径生效
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.RuleType = null;
-
-        /**
-         * RuleType 对应类型下的匹配内容：
-all 时填充 *
-file 时填充后缀名，如 jpg、txt
-directory 时填充路径，如 /xxx/test/
-path 时填充绝对路径，如 /xxx/test.html
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {Array.<string> || null}
-         */
-        this.RulePaths = null;
 
     }
 
@@ -787,11 +840,6 @@ path 时填充绝对路径，如 /xxx/test.html
         if (!params) {
             return;
         }
-        this.HeaderMode = 'HeaderMode' in params ? params.HeaderMode : null;
-        this.HeaderName = 'HeaderName' in params ? params.HeaderName : null;
-        this.HeaderValue = 'HeaderValue' in params ? params.HeaderValue : null;
-        this.RuleType = 'RuleType' in params ? params.RuleType : null;
-        this.RulePaths = 'RulePaths' in params ? params.RulePaths : null;
 
     }
 }
@@ -1380,6 +1428,55 @@ class EnableCachesRequest extends  AbstractModel {
             return;
         }
         this.Urls = 'Urls' in params ? params.Urls : null;
+
+    }
+}
+
+/**
+ * 刷新/预热 可用量及配额
+ * @class
+ */
+class Quota extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 单次批量提交配额上限。
+         * @type {number || null}
+         */
+        this.Batch = null;
+
+        /**
+         * 每日提交配额上限。
+         * @type {number || null}
+         */
+        this.Total = null;
+
+        /**
+         * 每日剩余的可提交配额。
+         * @type {number || null}
+         */
+        this.Available = null;
+
+        /**
+         * 配额的区域。
+         * @type {string || null}
+         */
+        this.Area = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Batch = 'Batch' in params ? params.Batch : null;
+        this.Total = 'Total' in params ? params.Total : null;
+        this.Available = 'Available' in params ? params.Available : null;
+        this.Area = 'Area' in params ? params.Area : null;
 
     }
 }
@@ -3482,6 +3579,64 @@ all：账号维度明细数据
 }
 
 /**
+ * 节点 IP 信息
+ * @class
+ */
+class IpStatus extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 节点 IP
+         * @type {string || null}
+         */
+        this.Ip = null;
+
+        /**
+         * 节点所属区域
+         * @type {string || null}
+         */
+        this.District = null;
+
+        /**
+         * 节点所属运营商
+         * @type {string || null}
+         */
+        this.Isp = null;
+
+        /**
+         * 节点所在城市
+         * @type {string || null}
+         */
+        this.City = null;
+
+        /**
+         * 节点状态
+online：上线状态，正常调度服务中
+offline：下线状态
+         * @type {string || null}
+         */
+        this.Status = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Ip = 'Ip' in params ? params.Ip : null;
+        this.District = 'District' in params ? params.District : null;
+        this.Isp = 'Isp' in params ? params.Isp : null;
+        this.City = 'City' in params ? params.City : null;
+        this.Status = 'Status' in params ? params.Status : null;
+
+    }
+}
+
+/**
  * AddCdnDomain返回参数结构体
  * @class
  */
@@ -3596,6 +3751,80 @@ class ServerCert extends  AbstractModel {
 }
 
 /**
+ * Http 头部设置规则，最多可设置 100 条
+ * @class
+ */
+class HttpHeaderPathRule extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * http 头部设置方式
+add：添加头部，若已存在头部，则会存在重复头部
+set：仅回源头部配置支持，若头部已存在则会覆盖原有头部值，若不存在，则会增加该头部及值
+del：删除头部
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.HeaderMode = null;
+
+        /**
+         * http 头部名称，最多可设置 100 个字符
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.HeaderName = null;
+
+        /**
+         * http 头部值，最多可设置 1000 个字符
+Mode 为 del 时非必填
+Mode 为 add/set 时必填
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.HeaderValue = null;
+
+        /**
+         * 规则类型：
+all：所有文件生效
+file：指定文件后缀生效
+directory：指定路径生效
+path：指定绝对路径生效
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.RuleType = null;
+
+        /**
+         * RuleType 对应类型下的匹配内容：
+all 时填充 *
+file 时填充后缀名，如 jpg、txt
+directory 时填充路径，如 /xxx/test/
+path 时填充绝对路径，如 /xxx/test.html
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
+         */
+        this.RulePaths = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.HeaderMode = 'HeaderMode' in params ? params.HeaderMode : null;
+        this.HeaderName = 'HeaderName' in params ? params.HeaderName : null;
+        this.HeaderValue = 'HeaderValue' in params ? params.HeaderValue : null;
+        this.RuleType = 'RuleType' in params ? params.RuleType : null;
+        this.RulePaths = 'RulePaths' in params ? params.RulePaths : null;
+
+    }
+}
+
+/**
  * DisableCaches请求参数结构体
  * @class
  */
@@ -3673,6 +3902,44 @@ index 时填充 /
         this.CacheType = 'CacheType' in params ? params.CacheType : null;
         this.CacheContents = 'CacheContents' in params ? params.CacheContents : null;
         this.CacheTime = 'CacheTime' in params ? params.CacheTime : null;
+
+    }
+}
+
+/**
+ * DescribeIpStatus请求参数结构体
+ * @class
+ */
+class DescribeIpStatusRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 加速域名
+         * @type {string || null}
+         */
+        this.Domain = null;
+
+        /**
+         * 节点类型：
+edge：表示边缘节点
+last：表示回源层节点
+不填充情况下，默认返回边缘节点信息
+         * @type {string || null}
+         */
+        this.Layer = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Domain = 'Domain' in params ? params.Domain : null;
+        this.Layer = 'Layer' in params ? params.Layer : null;
 
     }
 }
@@ -6105,6 +6372,56 @@ day：天粒度
 }
 
 /**
+ * DescribeIpStatus返回参数结构体
+ * @class
+ */
+class DescribeIpStatusResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 节点列表
+         * @type {Array.<IpStatus> || null}
+         */
+        this.Ips = null;
+
+        /**
+         * 节点总个数
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Ips) {
+            this.Ips = new Array();
+            for (let z in params.Ips) {
+                let obj = new IpStatus();
+                obj.deserialize(params.Ips[z]);
+                this.Ips.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * 缓存键配置（过滤参数配置）
  * @class
  */
@@ -6660,6 +6977,27 @@ class StartCdnDomainResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribePushQuota请求参数结构体
+ * @class
+ */
+class DescribePushQuotaRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
 
     }
 }
@@ -8102,6 +8440,8 @@ module.exports = {
     Compression: Compression,
     ResourceData: ResourceData,
     UrlRecord: UrlRecord,
+    DescribePushQuotaResponse: DescribePushQuotaResponse,
+    DescribePurgeQuotaResponse: DescribePurgeQuotaResponse,
     Authentication: Authentication,
     Https: Https,
     DescribeTrafficPackagesRequest: DescribeTrafficPackagesRequest,
@@ -8110,7 +8450,7 @@ module.exports = {
     SpecificConfig: SpecificConfig,
     FollowRedirect: FollowRedirect,
     RequestHeader: RequestHeader,
-    HttpHeaderPathRule: HttpHeaderPathRule,
+    DescribePurgeQuotaRequest: DescribePurgeQuotaRequest,
     Referer: Referer,
     AdvanceCacheRule: AdvanceCacheRule,
     DeleteCdnDomainRequest: DeleteCdnDomainRequest,
@@ -8120,6 +8460,7 @@ module.exports = {
     CompressionRule: CompressionRule,
     Origin: Origin,
     EnableCachesRequest: EnableCachesRequest,
+    Quota: Quota,
     DescribeBillingDataRequest: DescribeBillingDataRequest,
     SimpleCache: SimpleCache,
     TopDetailData: TopDetailData,
@@ -8147,10 +8488,13 @@ module.exports = {
     AuthenticationTypeA: AuthenticationTypeA,
     DescribePushTasksResponse: DescribePushTasksResponse,
     ResourceOriginData: ResourceOriginData,
+    IpStatus: IpStatus,
     AddCdnDomainResponse: AddCdnDomainResponse,
     ServerCert: ServerCert,
+    HttpHeaderPathRule: HttpHeaderPathRule,
     DisableCachesRequest: DisableCachesRequest,
     SimpleCacheRule: SimpleCacheRule,
+    DescribeIpStatusRequest: DescribeIpStatusRequest,
     DetailDomain: DetailDomain,
     GetDisableRecordsResponse: GetDisableRecordsResponse,
     CdnIpHistory: CdnIpHistory,
@@ -8185,6 +8529,7 @@ module.exports = {
     DisableCachesResponse: DisableCachesResponse,
     DescribeCdnIpResponse: DescribeCdnIpResponse,
     DescribeCdnDataResponse: DescribeCdnDataResponse,
+    DescribeIpStatusResponse: DescribeIpStatusResponse,
     CacheKey: CacheKey,
     TopData: TopData,
     CappingRule: CappingRule,
@@ -8198,6 +8543,7 @@ module.exports = {
     PushTask: PushTask,
     TimestampData: TimestampData,
     StartCdnDomainResponse: StartCdnDomainResponse,
+    DescribePushQuotaRequest: DescribePushQuotaRequest,
     ResourceBillingData: ResourceBillingData,
     Sort: Sort,
     DescribePurgeTasksRequest: DescribePurgeTasksRequest,
