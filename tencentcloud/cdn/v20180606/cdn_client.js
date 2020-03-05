@@ -21,6 +21,8 @@ const DescribeCdnDomainLogsRequest = models.DescribeCdnDomainLogsRequest;
 const Compression = models.Compression;
 const ResourceData = models.ResourceData;
 const UrlRecord = models.UrlRecord;
+const DescribePushQuotaResponse = models.DescribePushQuotaResponse;
+const DescribePurgeQuotaResponse = models.DescribePurgeQuotaResponse;
 const Authentication = models.Authentication;
 const Https = models.Https;
 const DescribeTrafficPackagesRequest = models.DescribeTrafficPackagesRequest;
@@ -29,7 +31,7 @@ const DomainFilter = models.DomainFilter;
 const SpecificConfig = models.SpecificConfig;
 const FollowRedirect = models.FollowRedirect;
 const RequestHeader = models.RequestHeader;
-const HttpHeaderPathRule = models.HttpHeaderPathRule;
+const DescribePurgeQuotaRequest = models.DescribePurgeQuotaRequest;
 const Referer = models.Referer;
 const AdvanceCacheRule = models.AdvanceCacheRule;
 const DeleteCdnDomainRequest = models.DeleteCdnDomainRequest;
@@ -39,6 +41,7 @@ const DescribeDomainsResponse = models.DescribeDomainsResponse;
 const CompressionRule = models.CompressionRule;
 const Origin = models.Origin;
 const EnableCachesRequest = models.EnableCachesRequest;
+const Quota = models.Quota;
 const DescribeBillingDataRequest = models.DescribeBillingDataRequest;
 const SimpleCache = models.SimpleCache;
 const TopDetailData = models.TopDetailData;
@@ -66,10 +69,13 @@ const AuthenticationTypeB = models.AuthenticationTypeB;
 const AuthenticationTypeA = models.AuthenticationTypeA;
 const DescribePushTasksResponse = models.DescribePushTasksResponse;
 const ResourceOriginData = models.ResourceOriginData;
+const IpStatus = models.IpStatus;
 const AddCdnDomainResponse = models.AddCdnDomainResponse;
 const ServerCert = models.ServerCert;
+const HttpHeaderPathRule = models.HttpHeaderPathRule;
 const DisableCachesRequest = models.DisableCachesRequest;
 const SimpleCacheRule = models.SimpleCacheRule;
+const DescribeIpStatusRequest = models.DescribeIpStatusRequest;
 const DetailDomain = models.DetailDomain;
 const GetDisableRecordsResponse = models.GetDisableRecordsResponse;
 const CdnIpHistory = models.CdnIpHistory;
@@ -104,6 +110,7 @@ const DescribeBillingDataResponse = models.DescribeBillingDataResponse;
 const DisableCachesResponse = models.DisableCachesResponse;
 const DescribeCdnIpResponse = models.DescribeCdnIpResponse;
 const DescribeCdnDataResponse = models.DescribeCdnDataResponse;
+const DescribeIpStatusResponse = models.DescribeIpStatusResponse;
 const CacheKey = models.CacheKey;
 const TopData = models.TopData;
 const CappingRule = models.CappingRule;
@@ -117,6 +124,7 @@ const OriginPullOptimization = models.OriginPullOptimization;
 const PushTask = models.PushTask;
 const TimestampData = models.TimestampData;
 const StartCdnDomainResponse = models.StartCdnDomainResponse;
+const DescribePushQuotaRequest = models.DescribePushQuotaRequest;
 const ResourceBillingData = models.ResourceBillingData;
 const Sort = models.Sort;
 const DescribePurgeTasksRequest = models.DescribePurgeTasksRequest;
@@ -151,6 +159,18 @@ class CdnClient extends AbstractClient {
         super("cdn.tencentcloudapi.com", "2018-06-06", credential, region, profile);
     }
     
+    /**
+     * DescribeIpStatus 用于查询域名所在加速平台的边缘节点、回源节点明细
+注意事项：接口尚未全量开放，未在内测名单中的账号不支持调用
+     * @param {DescribeIpStatusRequest} req
+     * @param {function(string, DescribeIpStatusResponse):void} cb
+     * @public
+     */
+    DescribeIpStatus(req, cb) {
+        let resp = new DescribeIpStatusResponse();
+        this.request("DescribeIpStatus", req, resp, cb);
+    }
+
     /**
      * DescribeMapInfo 用于查询省份对应的 ID，运营商对应的 ID 信息。
      * @param {DescribeMapInfoRequest} req
@@ -294,6 +314,17 @@ class CdnClient extends AbstractClient {
     StopCdnDomain(req, cb) {
         let resp = new StopCdnDomainResponse();
         this.request("StopCdnDomain", req, resp, cb);
+    }
+
+    /**
+     * DescribePurgeQuota 用于查询账户刷新配额和每日可用量。
+     * @param {DescribePurgeQuotaRequest} req
+     * @param {function(string, DescribePurgeQuotaResponse):void} cb
+     * @public
+     */
+    DescribePurgeQuota(req, cb) {
+        let resp = new DescribePurgeQuotaResponse();
+        this.request("DescribePurgeQuota", req, resp, cb);
     }
 
     /**
@@ -462,6 +493,17 @@ class CdnClient extends AbstractClient {
     DescribeBillingData(req, cb) {
         let resp = new DescribeBillingDataResponse();
         this.request("DescribeBillingData", req, resp, cb);
+    }
+
+    /**
+     * DescribePushQuota  用于查询预热配额和每日可用量。
+     * @param {DescribePushQuotaRequest} req
+     * @param {function(string, DescribePushQuotaResponse):void} cb
+     * @public
+     */
+    DescribePushQuota(req, cb) {
+        let resp = new DescribePushQuotaResponse();
+        this.request("DescribePushQuota", req, resp, cb);
     }
 
     /**

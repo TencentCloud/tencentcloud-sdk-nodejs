@@ -1626,6 +1626,7 @@ class PersonExDescriptionInfo extends  AbstractModel {
 
         /**
          * 人员描述字段Index，从0开始
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.PersonExDescriptionIndex = null;
@@ -1965,7 +1966,7 @@ MaxFaceNum用于，当输入的待识别图片包含多张人脸时，设定要�
         this.MaxFaceNum = null;
 
         /**
-         * 人脸长和宽的最小尺寸，单位为像素。默认为80。低于40将影响搜索精度。建议设置为80。
+         * 人脸长和宽的最小尺寸，单位为像素。默认为34。低于34将影响搜索精度。建议设置为80。
          * @type {number || null}
          */
         this.MinFaceSize = null;
@@ -2483,7 +2484,7 @@ MaxFaceNum用于，当输入的待识别图片包含多张人脸时，设定要�
         this.MaxFaceNum = null;
 
         /**
-         * 人脸长和宽的最小尺寸，单位为像素。默认为80。低于40将影响搜索精度。建议设置为80。
+         * 人脸长和宽的最小尺寸，单位为像素。默认为34。低于34将影响搜索精度。建议设置为80。
          * @type {number || null}
          */
         this.MinFaceSize = null;
@@ -3097,7 +3098,7 @@ MaxFaceNum用于，当输入的待识别图片包含多张人脸时，设定要�
         this.MaxFaceNum = null;
 
         /**
-         * 人脸长和宽的最小尺寸，单位为像素。默认为80。低于40将影响搜索精度。建议设置为80。
+         * 人脸长和宽的最小尺寸，单位为像素。默认为34。低于34将影响搜索精度。建议设置为80。
          * @type {number || null}
          */
         this.MinFaceSize = null;
@@ -3570,7 +3571,7 @@ class DetectFaceRequest extends  AbstractModel {
 
         /**
          * 人脸长和宽的最小尺寸，单位为像素。
-默认为40。建议不低于34。
+默认为34。建议不低于34。
 低于MinFaceSize值的人脸不会被检测。
          * @type {number || null}
          */
@@ -3797,6 +3798,7 @@ class GroupExDescriptionInfo extends  AbstractModel {
 
         /**
          * 人员库自定义描述字段Index，从0开始
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.GroupExDescriptionIndex = null;
@@ -4217,7 +4219,7 @@ MaxFaceNum用于，当输入的待识别图片包含多张人脸时，设定要�
         this.MaxFaceNum = null;
 
         /**
-         * 人脸长和宽的最小尺寸，单位为像素。默认为80。低于40的人脸图片无法被识别。建议设置为80。
+         * 人脸长和宽的最小尺寸，单位为像素。默认为34。低于34的人脸图片无法被识别。建议设置为80。
          * @type {number || null}
          */
         this.MinFaceSize = null;

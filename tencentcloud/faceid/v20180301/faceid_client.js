@@ -16,24 +16,30 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
-const MobileNetworkTimeVerificationResponse = models.MobileNetworkTimeVerificationResponse;
+const DetectInfoVideoData = models.DetectInfoVideoData;
+const GetDetectInfoEnhancedRequest = models.GetDetectInfoEnhancedRequest;
 const LivenessRequest = models.LivenessRequest;
 const LivenessCompareResponse = models.LivenessCompareResponse;
+const MobileNetworkTimeVerificationResponse = models.MobileNetworkTimeVerificationResponse;
 const GetLiveCodeRequest = models.GetLiveCodeRequest;
 const IdCardVerificationRequest = models.IdCardVerificationRequest;
 const BankCardVerificationRequest = models.BankCardVerificationRequest;
+const DetectInfoBestFrame = models.DetectInfoBestFrame;
+const GetDetectInfoEnhancedResponse = models.GetDetectInfoEnhancedResponse;
 const PhoneVerificationRequest = models.PhoneVerificationRequest;
 const DetectAuthResponse = models.DetectAuthResponse;
 const PhoneVerificationResponse = models.PhoneVerificationResponse;
 const IdCardOCRVerificationRequest = models.IdCardOCRVerificationRequest;
 const BankCard4EVerificationResponse = models.BankCard4EVerificationResponse;
 const MobileStatusRequest = models.MobileStatusRequest;
+const LivenessRecognitionResponse = models.LivenessRecognitionResponse;
 const BankCard2EVerificationRequest = models.BankCard2EVerificationRequest;
 const LivenessRecognitionRequest = models.LivenessRecognitionRequest;
 const MobileNetworkTimeVerificationRequest = models.MobileNetworkTimeVerificationRequest;
-const LivenessRecognitionResponse = models.LivenessRecognitionResponse;
-const MobileStatusResponse = models.MobileStatusResponse;
 const IdCardOCRVerificationResponse = models.IdCardOCRVerificationResponse;
+const MobileStatusResponse = models.MobileStatusResponse;
+const LivenessResponse = models.LivenessResponse;
+const DetectInfoText = models.DetectInfoText;
 const DetectAuthRequest = models.DetectAuthRequest;
 const MinorsVerificationResponse = models.MinorsVerificationResponse;
 const BankCardVerificationResponse = models.BankCardVerificationResponse;
@@ -48,8 +54,9 @@ const GetLiveCodeResponse = models.GetLiveCodeResponse;
 const GetDetectInfoRequest = models.GetDetectInfoRequest;
 const BankCard2EVerificationResponse = models.BankCard2EVerificationResponse;
 const IdCardVerificationResponse = models.IdCardVerificationResponse;
+const DetectInfoIdCardData = models.DetectInfoIdCardData;
 const LivenessCompareRequest = models.LivenessCompareRequest;
-const LivenessResponse = models.LivenessResponse;
+const DetectDetail = models.DetectDetail;
 
 
 /**
@@ -236,6 +243,17 @@ class FaceidClient extends AbstractClient {
     BankCard2EVerification(req, cb) {
         let resp = new BankCard2EVerificationResponse();
         this.request("BankCard2EVerification", req, resp, cb);
+    }
+
+    /**
+     * 完成验证后，用BizToken调用本接口获取结果信息，BizToken生成后三天内（3\*24\*3,600秒）可多次拉取。
+     * @param {GetDetectInfoEnhancedRequest} req
+     * @param {function(string, GetDetectInfoEnhancedResponse):void} cb
+     * @public
+     */
+    GetDetectInfoEnhanced(req, cb) {
+        let resp = new GetDetectInfoEnhancedResponse();
+        this.request("GetDetectInfoEnhanced", req, resp, cb);
     }
 
     /**
