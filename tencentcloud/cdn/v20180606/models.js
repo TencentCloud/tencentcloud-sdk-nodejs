@@ -4238,6 +4238,13 @@ global：全球锁定
          */
         this.OriginPullTimeout = null;
 
+        /**
+         * 回源S3鉴权配置
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {AwsPrivateAccess || null}
+         */
+        this.AwsPrivateAccess = null;
+
     }
 
     /**
@@ -4420,6 +4427,12 @@ global：全球锁定
             let obj = new OriginPullTimeout();
             obj.deserialize(params.OriginPullTimeout)
             this.OriginPullTimeout = obj;
+        }
+
+        if (params.AwsPrivateAccess) {
+            let obj = new AwsPrivateAccess();
+            obj.deserialize(params.AwsPrivateAccess)
+            this.AwsPrivateAccess = obj;
         }
 
     }
@@ -7549,6 +7562,12 @@ global：全球加速
          */
         this.OriginPullTimeout = null;
 
+        /**
+         * 回源S3私有鉴权
+         * @type {AwsPrivateAccess || null}
+         */
+        this.AwsPrivateAccess = null;
+
     }
 
     /**
@@ -7712,6 +7731,56 @@ global：全球加速
             obj.deserialize(params.OriginPullTimeout)
             this.OriginPullTimeout = obj;
         }
+
+        if (params.AwsPrivateAccess) {
+            let obj = new AwsPrivateAccess();
+            obj.deserialize(params.AwsPrivateAccess)
+            this.AwsPrivateAccess = obj;
+        }
+
+    }
+}
+
+/**
+ * s3源站回源鉴权。
+ * @class
+ */
+class AwsPrivateAccess extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 开关，on/off。
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+        /**
+         * 访问ID。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.AccessKey = null;
+
+        /**
+         * 密钥。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.SecretKey = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+        this.AccessKey = 'AccessKey' in params ? params.AccessKey : null;
+        this.SecretKey = 'SecretKey' in params ? params.SecretKey : null;
 
     }
 }
@@ -8553,6 +8622,7 @@ module.exports = {
     MaxAge: MaxAge,
     UpdateDomainConfigResponse: UpdateDomainConfigResponse,
     UpdateDomainConfigRequest: UpdateDomainConfigRequest,
+    AwsPrivateAccess: AwsPrivateAccess,
     VideoSeek: VideoSeek,
     Compatibility: Compatibility,
     DescribeUrlViolationsResponse: DescribeUrlViolationsResponse,

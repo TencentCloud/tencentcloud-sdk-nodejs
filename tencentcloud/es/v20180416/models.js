@@ -694,7 +694,7 @@ class CreateInstanceRequest extends  AbstractModel {
         this.Zone = null;
 
         /**
-         * 实例版本（支持"5.6.4"、"6.4.3"）
+         * 实例版本（支持"5.6.4"、"6.4.3"、"6.8.2"、"7.5.1"）
          * @type {string || null}
          */
         this.EsVersion = null;

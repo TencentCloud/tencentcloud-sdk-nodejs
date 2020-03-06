@@ -134,6 +134,7 @@ const ListTopDataResponse = models.ListTopDataResponse;
 const MaxAge = models.MaxAge;
 const UpdateDomainConfigResponse = models.UpdateDomainConfigResponse;
 const UpdateDomainConfigRequest = models.UpdateDomainConfigRequest;
+const AwsPrivateAccess = models.AwsPrivateAccess;
 const VideoSeek = models.VideoSeek;
 const Compatibility = models.Compatibility;
 const DescribeUrlViolationsResponse = models.DescribeUrlViolationsResponse;

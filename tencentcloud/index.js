@@ -51,6 +51,7 @@ module.exports = {
     gaap: require("./gaap"),
     gme: require("./gme"),
     gs: require("./gs"),
+    gse: require("./gse"),
     habo: require("./habo"),
     hcm: require("./hcm"),
     iai: require("./iai"),
