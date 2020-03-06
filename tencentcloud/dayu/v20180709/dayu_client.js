@@ -21,6 +21,7 @@ const DescribeIpUnBlockListRequest = models.DescribeIpUnBlockListRequest;
 const DeleteDDoSPolicyCaseRequest = models.DeleteDDoSPolicyCaseRequest;
 const CreateDDoSPolicyResponse = models.CreateDDoSPolicyResponse;
 const DeleteL7RulesRequest = models.DeleteL7RulesRequest;
+const CreateBoundIPRequest = models.CreateBoundIPRequest;
 const DescribeCCEvListRequest = models.DescribeCCEvListRequest;
 const DescribeTransmitStatisResponse = models.DescribeTransmitStatisResponse;
 const DDosPolicy = models.DDosPolicy;
@@ -53,7 +54,7 @@ const WaterPrintKey = models.WaterPrintKey;
 const DescribeDDoSNetIpLogRequest = models.DescribeDDoSNetIpLogRequest;
 const DescribeDDoSUsedStatisResponse = models.DescribeDDoSUsedStatisResponse;
 const DescribeBasicCCThresholdRequest = models.DescribeBasicCCThresholdRequest;
-const CreateL4HealthConfigResponse = models.CreateL4HealthConfigResponse;
+const CreateDDoSPolicyCaseResponse = models.CreateDDoSPolicyCaseResponse;
 const DescribeIPProductInfoResponse = models.DescribeIPProductInfoResponse;
 const ModifyDDoSSwitchResponse = models.ModifyDDoSSwitchResponse;
 const IpBlockData = models.IpBlockData;
@@ -66,7 +67,7 @@ const DescribeDDoSAttackIPRegionMapResponse = models.DescribeDDoSAttackIPRegionM
 const ModifyL4KeepTimeResponse = models.ModifyL4KeepTimeResponse;
 const ModifyL7RulesResponse = models.ModifyL7RulesResponse;
 const DescribeL7HealthConfigRequest = models.DescribeL7HealthConfigRequest;
-const DescribeL4HealthConfigResponse = models.DescribeL4HealthConfigResponse;
+const BoundIpInfo = models.BoundIpInfo;
 const DescribePcapRequest = models.DescribePcapRequest;
 const DescribeDDoSAlarmThresholdResponse = models.DescribeDDoSAlarmThresholdResponse;
 const KeyValueRecord = models.KeyValueRecord;
@@ -122,7 +123,7 @@ const DeleteL4RulesRequest = models.DeleteL4RulesRequest;
 const ModifyCCAlarmThresholdResponse = models.ModifyCCAlarmThresholdResponse;
 const CreateL7HealthConfigRequest = models.CreateL7HealthConfigRequest;
 const DescribeIPProductInfoRequest = models.DescribeIPProductInfoRequest;
-const ModifyDDoSSwitchRequest = models.ModifyDDoSSwitchRequest;
+const DescribeL4HealthConfigResponse = models.DescribeL4HealthConfigResponse;
 const CreateL7RuleCertResponse = models.CreateL7RuleCertResponse;
 const DescribeDDoSAttackIPRegionMapRequest = models.DescribeDDoSAttackIPRegionMapRequest;
 const ModifyDDoSPolicyRequest = models.ModifyDDoSPolicyRequest;
@@ -151,6 +152,7 @@ const DescribeIpBlockListRequest = models.DescribeIpBlockListRequest;
 const DescribeDDoSNetCountResponse = models.DescribeDDoSNetCountResponse;
 const CreateL7RulesResponse = models.CreateL7RulesResponse;
 const BaradData = models.BaradData;
+const ModifyDDoSSwitchRequest = models.ModifyDDoSSwitchRequest;
 const ModifyDDoSAIStatusRequest = models.ModifyDDoSAIStatusRequest;
 const DescribeResourceListResponse = models.DescribeResourceListResponse;
 const ModifyCCThresholdRequest = models.ModifyCCThresholdRequest;
@@ -167,7 +169,7 @@ const DeleteCCSelfDefinePolicyResponse = models.DeleteCCSelfDefinePolicyResponse
 const DescribeDDoSPolicyResponse = models.DescribeDDoSPolicyResponse;
 const DeleteCCFrequencyRulesResponse = models.DeleteCCFrequencyRulesResponse;
 const DeleteDDoSPolicyCaseResponse = models.DeleteDDoSPolicyCaseResponse;
-const CreateDDoSPolicyCaseResponse = models.CreateDDoSPolicyCaseResponse;
+const CreateL4HealthConfigResponse = models.CreateL4HealthConfigResponse;
 const ModifyL7RulesRequest = models.ModifyL7RulesRequest;
 const ModifyElasticLimitResponse = models.ModifyElasticLimitResponse;
 const DDoSAttackSourceRecord = models.DDoSAttackSourceRecord;
@@ -179,6 +181,7 @@ const DescribeL7HealthConfigResponse = models.DescribeL7HealthConfigResponse;
 const CCFrequencyRule = models.CCFrequencyRule;
 const CreateCCSelfDefinePolicyResponse = models.CreateCCSelfDefinePolicyResponse;
 const DescribeDDoSAttackSourceResponse = models.DescribeDDoSAttackSourceResponse;
+const CreateBoundIPResponse = models.CreateBoundIPResponse;
 const DescribeDDoSUsedStatisRequest = models.DescribeDDoSUsedStatisRequest;
 const DDoSPolicyDropOption = models.DDoSPolicyDropOption;
 const ModifyElasticLimitRequest = models.ModifyElasticLimitRequest;
@@ -784,6 +787,17 @@ class DayuClient extends AbstractClient {
     DescribeDDoSNetCount(req, cb) {
         let resp = new DescribeDDoSNetCountResponse();
         this.request("DescribeDDoSNetCount", req, resp, cb);
+    }
+
+    /**
+     * 绑定IP到高防包实例，支持独享包、共享包；需要注意的是此接口绑定或解绑IP是异步接口，当处于绑定或解绑中时，则不允许再进行绑定或解绑，需要等待当前绑定或解绑完成。
+     * @param {CreateBoundIPRequest} req
+     * @param {function(string, CreateBoundIPResponse):void} cb
+     * @public
+     */
+    CreateBoundIP(req, cb) {
+        let resp = new CreateBoundIPResponse();
+        this.request("CreateBoundIP", req, resp, cb);
     }
 
     /**

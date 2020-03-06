@@ -386,6 +386,78 @@ class DeleteL7RulesRequest extends  AbstractModel {
 }
 
 /**
+ * CreateBoundIP请求参数结构体
+ * @class
+ */
+class CreateBoundIPRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 大禹子产品代号（bgp表示独享包；bgp-multip表示共享包）
+         * @type {string || null}
+         */
+        this.Business = null;
+
+        /**
+         * 资源实例ID
+         * @type {string || null}
+         */
+        this.Id = null;
+
+        /**
+         * 绑定到资源实例的IP数组，当资源实例为高防包(独享包)时，数组只允许填1个IP；当没有要绑定的IP时可以为空数组；但是BoundDevList和UnBoundDevList至少有一个不为空；
+         * @type {Array.<BoundIpInfo> || null}
+         */
+        this.BoundDevList = null;
+
+        /**
+         * 与资源实例解绑的IP数组，当资源实例为高防包(独享包)时，数组只允许填1个IP；当没有要解绑的IP时可以为空数组；但是BoundDevList和UnBoundDevList至少有一个不为空；
+         * @type {Array.<BoundIpInfo> || null}
+         */
+        this.UnBoundDevList = null;
+
+        /**
+         * 已弃用，不填
+         * @type {string || null}
+         */
+        this.CopyPolicy = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Business = 'Business' in params ? params.Business : null;
+        this.Id = 'Id' in params ? params.Id : null;
+
+        if (params.BoundDevList) {
+            this.BoundDevList = new Array();
+            for (let z in params.BoundDevList) {
+                let obj = new BoundIpInfo();
+                obj.deserialize(params.BoundDevList[z]);
+                this.BoundDevList.push(obj);
+            }
+        }
+
+        if (params.UnBoundDevList) {
+            this.UnBoundDevList = new Array();
+            for (let z in params.UnBoundDevList) {
+                let obj = new BoundIpInfo();
+                obj.deserialize(params.UnBoundDevList[z]);
+                this.UnBoundDevList.push(obj);
+            }
+        }
+        this.CopyPolicy = 'CopyPolicy' in params ? params.CopyPolicy : null;
+
+    }
+}
+
+/**
  * DescribeCCEvList请求参数结构体
  * @class
  */
@@ -2127,18 +2199,18 @@ class DescribeBasicCCThresholdRequest extends  AbstractModel {
 }
 
 /**
- * CreateL4HealthConfig返回参数结构体
+ * CreateDDoSPolicyCase返回参数结构体
  * @class
  */
-class CreateL4HealthConfigResponse extends  AbstractModel {
+class CreateDDoSPolicyCaseResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 成功码
-         * @type {SuccessCode || null}
+         * 策略场景ID
+         * @type {string || null}
          */
-        this.Success = null;
+        this.SceneId = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2155,12 +2227,7 @@ class CreateL4HealthConfigResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.Success) {
-            let obj = new SuccessCode();
-            obj.deserialize(params.Success)
-            this.Success = obj;
-        }
+        this.SceneId = 'SceneId' in params ? params.SceneId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -2805,24 +2872,36 @@ class DescribeL7HealthConfigRequest extends  AbstractModel {
 }
 
 /**
- * DescribeL4HealthConfig返回参数结构体
+ * 高防包绑定IP对象
  * @class
  */
-class DescribeL4HealthConfigResponse extends  AbstractModel {
+class BoundIpInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 四层健康检查配置数组
-         * @type {Array.<L4HealthConfig> || null}
-         */
-        this.HealthConfig = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * IP
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.Ip = null;
+
+        /**
+         * 绑定的产品分类，取值[public（CVM产品），bm（黑石产品），eni（弹性网卡），vpngw（VPN网关）， natgw（NAT网关），waf（Web应用安全产品），fpc（金融产品），gaap（GAAP产品）, other(托管IP)]
+         * @type {string || null}
+         */
+        this.BizType = null;
+
+        /**
+         * 产品分类下的子类型，取值[cvm（CVM），lb（负载均衡器），eni（弹性网卡），vpngw（VPN），natgw（NAT），waf（WAF），fpc（金融），gaap（GAAP），other（托管IP），eip（黑石弹性IP）]
+         * @type {string || null}
+         */
+        this.DeviceType = null;
+
+        /**
+         * IP所属的资源实例ID，当绑定新IP时必须填写此字段；例如是弹性网卡的IP，则InstanceId填写弹性网卡的ID(eni-*); 如果绑定的是托管IP没有对应的资源实例ID，请填写"none";
+         * @type {string || null}
+         */
+        this.InstanceId = null;
 
     }
 
@@ -2833,16 +2912,10 @@ class DescribeL4HealthConfigResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.HealthConfig) {
-            this.HealthConfig = new Array();
-            for (let z in params.HealthConfig) {
-                let obj = new L4HealthConfig();
-                obj.deserialize(params.HealthConfig[z]);
-                this.HealthConfig.push(obj);
-            }
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.Ip = 'Ip' in params ? params.Ip : null;
+        this.BizType = 'BizType' in params ? params.BizType : null;
+        this.DeviceType = 'DeviceType' in params ? params.DeviceType : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
 
     }
 }
@@ -3440,7 +3513,7 @@ class CCPolicy extends  AbstractModel {
         this.RuleList = null;
 
         /**
-         * IP列表
+         * IP列表，如果不填时，请传空数组但不能为null；
          * @type {Array.<string> || null}
          */
         this.IpList = null;
@@ -5860,82 +5933,24 @@ class DescribeIPProductInfoRequest extends  AbstractModel {
 }
 
 /**
- * ModifyDDoSSwitch请求参数结构体
+ * DescribeL4HealthConfig返回参数结构体
  * @class
  */
-class ModifyDDoSSwitchRequest extends  AbstractModel {
+class DescribeL4HealthConfigResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 大禹子产品代号（basic表示基础防护）
-         * @type {string || null}
+         * 四层健康检查配置数组
+         * @type {Array.<L4HealthConfig> || null}
          */
-        this.Business = null;
+        this.HealthConfig = null;
 
         /**
-         * =get表示读取DDoS防护状态；=set表示修改DDoS防护状态；
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.Method = null;
-
-        /**
-         * 基础防护的IP，只有当Business为基础防护时才需要填写此字段；
-         * @type {string || null}
-         */
-        this.Ip = null;
-
-        /**
-         * 只有当Business为基础防护时才需要填写此字段，IP所属的产品类型，取值[public（CVM产品），bm（黑石产品），eni（弹性网卡），vpngw（VPN网关）， natgw（NAT网关），waf（Web应用安全产品），fpc（金融产品），gaap（GAAP产品）, other(托管IP)]
-         * @type {string || null}
-         */
-        this.BizType = null;
-
-        /**
-         * 只有当Business为基础防护时才需要填写此字段，IP所属的产品子类，取值[cvm（CVM），lb（负载均衡器），eni（弹性网卡），vpngw（VPN），natgw（NAT），waf（WAF），fpc（金融），gaap（GAAP），other（托管IP），eip（黑石弹性IP）]
-         * @type {string || null}
-         */
-        this.DeviceType = null;
-
-        /**
-         * 只有当Business为基础防护时才需要填写此字段，IP所属的资源实例ID，当绑定新IP时必须填写此字段；例如是弹性网卡的IP，则InstanceId填写弹性网卡的ID(eni-*);
-         * @type {string || null}
-         */
-        this.InstanceId = null;
-
-        /**
-         * 只有当Business为基础防护时才需要填写此字段，表示IP所属的地域，取值：
-"bj":     华北地区(北京)
-"cd":     西南地区(成都)
-"cq":     西南地区(重庆)
-"gz":     华南地区(广州)
-"gzopen": 华南地区(广州Open)
-"hk":     中国香港
-"kr":     东南亚地区(首尔)
-"sh":     华东地区(上海)
-"shjr":   华东地区(上海金融)
-"szjr":   华南地区(深圳金融)
-"sg":     东南亚地区(新加坡)
-"th":     东南亚地区(泰国)
-"de":     欧洲地区(德国)
-"usw":    美国西部（硅谷）
-"ca":     北美地区(多伦多)
-"jp":     日本
-"hzec":   杭州
-"in":     印度
-"use":    美东地区（弗吉尼亚）
-"ru":     俄罗斯
-"tpe":    中国台湾
-"nj":     南京
-         * @type {string || null}
-         */
-        this.IPRegion = null;
-
-        /**
-         * 可选字段，防护状态值，取值[0（关闭），1（开启）]；当Method为get时可以不填写此字段；
-         * @type {number || null}
-         */
-        this.Status = null;
+        this.RequestId = null;
 
     }
 
@@ -5946,14 +5961,16 @@ class ModifyDDoSSwitchRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Business = 'Business' in params ? params.Business : null;
-        this.Method = 'Method' in params ? params.Method : null;
-        this.Ip = 'Ip' in params ? params.Ip : null;
-        this.BizType = 'BizType' in params ? params.BizType : null;
-        this.DeviceType = 'DeviceType' in params ? params.DeviceType : null;
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.IPRegion = 'IPRegion' in params ? params.IPRegion : null;
-        this.Status = 'Status' in params ? params.Status : null;
+
+        if (params.HealthConfig) {
+            this.HealthConfig = new Array();
+            for (let z in params.HealthConfig) {
+                let obj = new L4HealthConfig();
+                obj.deserialize(params.HealthConfig[z]);
+                this.HealthConfig.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -7462,6 +7479,105 @@ outpkg表示出包速率；）
 }
 
 /**
+ * ModifyDDoSSwitch请求参数结构体
+ * @class
+ */
+class ModifyDDoSSwitchRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 大禹子产品代号（basic表示基础防护）
+         * @type {string || null}
+         */
+        this.Business = null;
+
+        /**
+         * =get表示读取DDoS防护状态；=set表示修改DDoS防护状态；
+         * @type {string || null}
+         */
+        this.Method = null;
+
+        /**
+         * 基础防护的IP，只有当Business为基础防护时才需要填写此字段；
+         * @type {string || null}
+         */
+        this.Ip = null;
+
+        /**
+         * 只有当Business为基础防护时才需要填写此字段，IP所属的产品类型，取值[public（CVM产品），bm（黑石产品），eni（弹性网卡），vpngw（VPN网关）， natgw（NAT网关），waf（Web应用安全产品），fpc（金融产品），gaap（GAAP产品）, other(托管IP)]
+         * @type {string || null}
+         */
+        this.BizType = null;
+
+        /**
+         * 只有当Business为基础防护时才需要填写此字段，IP所属的产品子类，取值[cvm（CVM），lb（负载均衡器），eni（弹性网卡），vpngw（VPN），natgw（NAT），waf（WAF），fpc（金融），gaap（GAAP），other（托管IP），eip（黑石弹性IP）]
+         * @type {string || null}
+         */
+        this.DeviceType = null;
+
+        /**
+         * 只有当Business为基础防护时才需要填写此字段，IP所属的资源实例ID，当绑定新IP时必须填写此字段；例如是弹性网卡的IP，则InstanceId填写弹性网卡的ID(eni-*);
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 只有当Business为基础防护时才需要填写此字段，表示IP所属的地域，取值：
+"bj":     华北地区(北京)
+"cd":     西南地区(成都)
+"cq":     西南地区(重庆)
+"gz":     华南地区(广州)
+"gzopen": 华南地区(广州Open)
+"hk":     中国香港
+"kr":     东南亚地区(首尔)
+"sh":     华东地区(上海)
+"shjr":   华东地区(上海金融)
+"szjr":   华南地区(深圳金融)
+"sg":     东南亚地区(新加坡)
+"th":     东南亚地区(泰国)
+"de":     欧洲地区(德国)
+"usw":    美国西部（硅谷）
+"ca":     北美地区(多伦多)
+"jp":     日本
+"hzec":   杭州
+"in":     印度
+"use":    美东地区（弗吉尼亚）
+"ru":     俄罗斯
+"tpe":    中国台湾
+"nj":     南京
+         * @type {string || null}
+         */
+        this.IPRegion = null;
+
+        /**
+         * 可选字段，防护状态值，取值[0（关闭），1（开启）]；当Method为get时可以不填写此字段；
+         * @type {number || null}
+         */
+        this.Status = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Business = 'Business' in params ? params.Business : null;
+        this.Method = 'Method' in params ? params.Method : null;
+        this.Ip = 'Ip' in params ? params.Ip : null;
+        this.BizType = 'BizType' in params ? params.BizType : null;
+        this.DeviceType = 'DeviceType' in params ? params.DeviceType : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.IPRegion = 'IPRegion' in params ? params.IPRegion : null;
+        this.Status = 'Status' in params ? params.Status : null;
+
+    }
+}
+
+/**
  * ModifyDDoSAIStatus请求参数结构体
  * @class
  */
@@ -8376,18 +8492,18 @@ class DeleteDDoSPolicyCaseResponse extends  AbstractModel {
 }
 
 /**
- * CreateDDoSPolicyCase返回参数结构体
+ * CreateL4HealthConfig返回参数结构体
  * @class
  */
-class CreateDDoSPolicyCaseResponse extends  AbstractModel {
+class CreateL4HealthConfigResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 策略场景ID
-         * @type {string || null}
+         * 成功码
+         * @type {SuccessCode || null}
          */
-        this.SceneId = null;
+        this.Success = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -8404,7 +8520,12 @@ class CreateDDoSPolicyCaseResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.SceneId = 'SceneId' in params ? params.SceneId : null;
+
+        if (params.Success) {
+            let obj = new SuccessCode();
+            obj.deserialize(params.Success)
+            this.Success = obj;
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -8962,6 +9083,46 @@ class DescribeDDoSAttackSourceResponse extends  AbstractModel {
                 obj.deserialize(params.AttackSourceList[z]);
                 this.AttackSourceList.push(obj);
             }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CreateBoundIP返回参数结构体
+ * @class
+ */
+class CreateBoundIPResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 成功码
+         * @type {SuccessCode || null}
+         */
+        this.Success = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Success) {
+            let obj = new SuccessCode();
+            obj.deserialize(params.Success)
+            this.Success = obj;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -12492,6 +12653,7 @@ module.exports = {
     DeleteDDoSPolicyCaseRequest: DeleteDDoSPolicyCaseRequest,
     CreateDDoSPolicyResponse: CreateDDoSPolicyResponse,
     DeleteL7RulesRequest: DeleteL7RulesRequest,
+    CreateBoundIPRequest: CreateBoundIPRequest,
     DescribeCCEvListRequest: DescribeCCEvListRequest,
     DescribeTransmitStatisResponse: DescribeTransmitStatisResponse,
     DDosPolicy: DDosPolicy,
@@ -12524,7 +12686,7 @@ module.exports = {
     DescribeDDoSNetIpLogRequest: DescribeDDoSNetIpLogRequest,
     DescribeDDoSUsedStatisResponse: DescribeDDoSUsedStatisResponse,
     DescribeBasicCCThresholdRequest: DescribeBasicCCThresholdRequest,
-    CreateL4HealthConfigResponse: CreateL4HealthConfigResponse,
+    CreateDDoSPolicyCaseResponse: CreateDDoSPolicyCaseResponse,
     DescribeIPProductInfoResponse: DescribeIPProductInfoResponse,
     ModifyDDoSSwitchResponse: ModifyDDoSSwitchResponse,
     IpBlockData: IpBlockData,
@@ -12537,7 +12699,7 @@ module.exports = {
     ModifyL4KeepTimeResponse: ModifyL4KeepTimeResponse,
     ModifyL7RulesResponse: ModifyL7RulesResponse,
     DescribeL7HealthConfigRequest: DescribeL7HealthConfigRequest,
-    DescribeL4HealthConfigResponse: DescribeL4HealthConfigResponse,
+    BoundIpInfo: BoundIpInfo,
     DescribePcapRequest: DescribePcapRequest,
     DescribeDDoSAlarmThresholdResponse: DescribeDDoSAlarmThresholdResponse,
     KeyValueRecord: KeyValueRecord,
@@ -12593,7 +12755,7 @@ module.exports = {
     ModifyCCAlarmThresholdResponse: ModifyCCAlarmThresholdResponse,
     CreateL7HealthConfigRequest: CreateL7HealthConfigRequest,
     DescribeIPProductInfoRequest: DescribeIPProductInfoRequest,
-    ModifyDDoSSwitchRequest: ModifyDDoSSwitchRequest,
+    DescribeL4HealthConfigResponse: DescribeL4HealthConfigResponse,
     CreateL7RuleCertResponse: CreateL7RuleCertResponse,
     DescribeDDoSAttackIPRegionMapRequest: DescribeDDoSAttackIPRegionMapRequest,
     ModifyDDoSPolicyRequest: ModifyDDoSPolicyRequest,
@@ -12622,6 +12784,7 @@ module.exports = {
     DescribeDDoSNetCountResponse: DescribeDDoSNetCountResponse,
     CreateL7RulesResponse: CreateL7RulesResponse,
     BaradData: BaradData,
+    ModifyDDoSSwitchRequest: ModifyDDoSSwitchRequest,
     ModifyDDoSAIStatusRequest: ModifyDDoSAIStatusRequest,
     DescribeResourceListResponse: DescribeResourceListResponse,
     ModifyCCThresholdRequest: ModifyCCThresholdRequest,
@@ -12638,7 +12801,7 @@ module.exports = {
     DescribeDDoSPolicyResponse: DescribeDDoSPolicyResponse,
     DeleteCCFrequencyRulesResponse: DeleteCCFrequencyRulesResponse,
     DeleteDDoSPolicyCaseResponse: DeleteDDoSPolicyCaseResponse,
-    CreateDDoSPolicyCaseResponse: CreateDDoSPolicyCaseResponse,
+    CreateL4HealthConfigResponse: CreateL4HealthConfigResponse,
     ModifyL7RulesRequest: ModifyL7RulesRequest,
     ModifyElasticLimitResponse: ModifyElasticLimitResponse,
     DDoSAttackSourceRecord: DDoSAttackSourceRecord,
@@ -12650,6 +12813,7 @@ module.exports = {
     CCFrequencyRule: CCFrequencyRule,
     CreateCCSelfDefinePolicyResponse: CreateCCSelfDefinePolicyResponse,
     DescribeDDoSAttackSourceResponse: DescribeDDoSAttackSourceResponse,
+    CreateBoundIPResponse: CreateBoundIPResponse,
     DescribeDDoSUsedStatisRequest: DescribeDDoSUsedStatisRequest,
     DDoSPolicyDropOption: DDoSPolicyDropOption,
     ModifyElasticLimitRequest: ModifyElasticLimitRequest,
