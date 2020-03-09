@@ -2126,6 +2126,26 @@ class Instance extends  AbstractModel {
          */
         this.InstanceState = null;
 
+        /**
+         * 实例是否封锁状态
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.DrainStatus = null;
+
+        /**
+         * 配置
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {InstanceAdvancedSettings || null}
+         */
+        this.InstanceAdvancedSettings = null;
+
+        /**
+         * 添加时间
+         * @type {string || null}
+         */
+        this.CreatedTime = null;
+
     }
 
     /**
@@ -2139,6 +2159,14 @@ class Instance extends  AbstractModel {
         this.InstanceRole = 'InstanceRole' in params ? params.InstanceRole : null;
         this.FailedReason = 'FailedReason' in params ? params.FailedReason : null;
         this.InstanceState = 'InstanceState' in params ? params.InstanceState : null;
+        this.DrainStatus = 'DrainStatus' in params ? params.DrainStatus : null;
+
+        if (params.InstanceAdvancedSettings) {
+            let obj = new InstanceAdvancedSettings();
+            obj.deserialize(params.InstanceAdvancedSettings)
+            this.InstanceAdvancedSettings = obj;
+        }
+        this.CreatedTime = 'CreatedTime' in params ? params.CreatedTime : null;
 
     }
 }
@@ -2899,6 +2927,40 @@ class Cluster extends  AbstractModel {
          */
         this.Property = null;
 
+        /**
+         * 集群当前master数量
+         * @type {number || null}
+         */
+        this.ClusterMaterNodeNum = null;
+
+        /**
+         * 集群使用镜像id
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ImageId = null;
+
+        /**
+         * OsCustomizeType
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.OsCustomizeType = null;
+
+        /**
+         * 集群运行环境docker或container
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ContainerRuntime = null;
+
+        /**
+         * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.CreatedTime = null;
+
     }
 
     /**
@@ -2933,6 +2995,11 @@ class Cluster extends  AbstractModel {
         }
         this.ClusterStatus = 'ClusterStatus' in params ? params.ClusterStatus : null;
         this.Property = 'Property' in params ? params.Property : null;
+        this.ClusterMaterNodeNum = 'ClusterMaterNodeNum' in params ? params.ClusterMaterNodeNum : null;
+        this.ImageId = 'ImageId' in params ? params.ImageId : null;
+        this.OsCustomizeType = 'OsCustomizeType' in params ? params.OsCustomizeType : null;
+        this.ContainerRuntime = 'ContainerRuntime' in params ? params.ContainerRuntime : null;
+        this.CreatedTime = 'CreatedTime' in params ? params.CreatedTime : null;
 
     }
 }

@@ -31,7 +31,7 @@ class DescribeBRIRequest extends  AbstractModel {
         this.RequestData = null;
 
         /**
-         * 客户用于计费的资源Id
+         * 客户用于计费的资源ID
          * @type {string || null}
          */
         this.ResourceId = null;

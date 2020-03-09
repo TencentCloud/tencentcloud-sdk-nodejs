@@ -8464,6 +8464,12 @@ class RecordParam extends  AbstractModel {
          */
         this.Enable = null;
 
+        /**
+         * 点播子应用ID。
+         * @type {number || null}
+         */
+        this.VodSubAppId = null;
+
     }
 
     /**
@@ -8476,6 +8482,7 @@ class RecordParam extends  AbstractModel {
         this.RecordInterval = 'RecordInterval' in params ? params.RecordInterval : null;
         this.StorageTime = 'StorageTime' in params ? params.StorageTime : null;
         this.Enable = 'Enable' in params ? params.Enable : null;
+        this.VodSubAppId = 'VodSubAppId' in params ? params.VodSubAppId : null;
 
     }
 }

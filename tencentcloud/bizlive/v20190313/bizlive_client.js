@@ -17,11 +17,18 @@
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const DayStreamPlayInfo = models.DayStreamPlayInfo;
-const RegisterIMRequest = models.RegisterIMRequest;
-const ForbidLiveStreamRequest = models.ForbidLiveStreamRequest;
-const RegisterIMResponse = models.RegisterIMResponse;
+const DescribeWorkersResponse = models.DescribeWorkersResponse;
 const ForbidLiveStreamResponse = models.ForbidLiveStreamResponse;
+const WorkerRegionInfo = models.WorkerRegionInfo;
+const RegisterIMRequest = models.RegisterIMRequest;
+const StopGameResponse = models.StopGameResponse;
+const ForbidLiveStreamRequest = models.ForbidLiveStreamRequest;
+const StopGameRequest = models.StopGameRequest;
+const RegisterIMResponse = models.RegisterIMResponse;
+const DescribeWorkersRequest = models.DescribeWorkersRequest;
+const CreateSessionResponse = models.CreateSessionResponse;
 const DescribeStreamPlayInfoListResponse = models.DescribeStreamPlayInfoListResponse;
+const CreateSessionRequest = models.CreateSessionRequest;
 const DescribeStreamPlayInfoListRequest = models.DescribeStreamPlayInfoListRequest;
 
 
@@ -47,14 +54,14 @@ class BizliveClient extends AbstractClient {
     }
 
     /**
-     * 查询播放数据，支持按流名称查询详细播放数据，也可按播放域名查询详细总数据。
-     * @param {DescribeStreamPlayInfoListRequest} req
-     * @param {function(string, DescribeStreamPlayInfoListResponse):void} cb
+     * 强制退出游戏
+     * @param {StopGameRequest} req
+     * @param {function(string, StopGameResponse):void} cb
      * @public
      */
-    DescribeStreamPlayInfoList(req, cb) {
-        let resp = new DescribeStreamPlayInfoListResponse();
-        this.request("DescribeStreamPlayInfoList", req, resp, cb);
+    StopGame(req, cb) {
+        let resp = new StopGameResponse();
+        this.request("StopGame", req, resp, cb);
     }
 
     /**
@@ -66,6 +73,39 @@ class BizliveClient extends AbstractClient {
     RegisterIM(req, cb) {
         let resp = new RegisterIMResponse();
         this.request("RegisterIM", req, resp, cb);
+    }
+
+    /**
+     * 查询空闲机器数量
+     * @param {DescribeWorkersRequest} req
+     * @param {function(string, DescribeWorkersResponse):void} cb
+     * @public
+     */
+    DescribeWorkers(req, cb) {
+        let resp = new DescribeWorkersResponse();
+        this.request("DescribeWorkers", req, resp, cb);
+    }
+
+    /**
+     * 查询播放数据，支持按流名称查询详细播放数据，也可按播放域名查询详细总数据。
+     * @param {DescribeStreamPlayInfoListRequest} req
+     * @param {function(string, DescribeStreamPlayInfoListResponse):void} cb
+     * @public
+     */
+    DescribeStreamPlayInfoList(req, cb) {
+        let resp = new DescribeStreamPlayInfoListResponse();
+        this.request("DescribeStreamPlayInfoList", req, resp, cb);
+    }
+
+    /**
+     * 创建会话
+     * @param {CreateSessionRequest} req
+     * @param {function(string, CreateSessionResponse):void} cb
+     * @public
+     */
+    CreateSession(req, cb) {
+        let resp = new CreateSessionResponse();
+        this.request("CreateSession", req, resp, cb);
     }
 
 

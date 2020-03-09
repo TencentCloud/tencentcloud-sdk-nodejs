@@ -267,7 +267,7 @@ class LiveClient extends AbstractClient {
     }
     
     /**
-     * 断开推流连接，但可以重新推流
+     * 断开推流连接，但可以重新推流。
      * @param {DropLiveStreamRequest} req
      * @param {function(string, DropLiveStreamResponse):void} cb
      * @public

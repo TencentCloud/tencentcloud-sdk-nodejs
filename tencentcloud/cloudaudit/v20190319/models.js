@@ -234,6 +234,24 @@ class UpdateAuditRequest extends  AbstractModel {
         this.IsEnableCmqNotify = null;
 
         /**
+         * 是否开启kms加密。1：是，0：否。如果开启KMS加密，数据在投递到cos时，会将数据加密。
+         * @type {number || null}
+         */
+        this.IsEnableKmsEncry = null;
+
+        /**
+         * CMK的全局唯一标识符，如果不是新创建的kms，该值是必填值。可以通过ListKeyAliasByRegion来获取。云审计不会校验KeyId的合法性，请您谨慎填写，避免给您的数据造成损失。
+         * @type {string || null}
+         */
+        this.KeyId = null;
+
+        /**
+         * kms地域。目前支持的地域可以使用ListKmsEnableRegion来获取。必须要和cos的地域保持一致。
+         * @type {string || null}
+         */
+        this.KmsRegion = null;
+
+        /**
          * 日志文件前缀。3-40个字符，只能包含 ASCII 编码字母 a-z，A-Z，数字 0-9。
          * @type {string || null}
          */
@@ -262,6 +280,9 @@ class UpdateAuditRequest extends  AbstractModel {
         this.IsCreateNewBucket = 'IsCreateNewBucket' in params ? params.IsCreateNewBucket : null;
         this.IsCreateNewQueue = 'IsCreateNewQueue' in params ? params.IsCreateNewQueue : null;
         this.IsEnableCmqNotify = 'IsEnableCmqNotify' in params ? params.IsEnableCmqNotify : null;
+        this.IsEnableKmsEncry = 'IsEnableKmsEncry' in params ? params.IsEnableKmsEncry : null;
+        this.KeyId = 'KeyId' in params ? params.KeyId : null;
+        this.KmsRegion = 'KmsRegion' in params ? params.KmsRegion : null;
         this.LogFilePrefix = 'LogFilePrefix' in params ? params.LogFilePrefix : null;
         this.ReadWriteAttribute = 'ReadWriteAttribute' in params ? params.ReadWriteAttribute : null;
 
@@ -873,6 +894,24 @@ class CreateAuditRequest extends  AbstractModel {
         this.IsCreateNewQueue = null;
 
         /**
+         * 是否开启kms加密。1：是，0：否。如果开启KMS加密，数据在投递到cos时，会将数据加密。
+         * @type {number || null}
+         */
+        this.IsEnableKmsEncry = null;
+
+        /**
+         * CMK的全局唯一标识符，如果不是新创建的kms，该值是必填值。可以通过ListKeyAliasByRegion来获取。云审计不会校验KeyId的合法性，请您谨慎填写，避免给您的数据造成损失。
+         * @type {string || null}
+         */
+        this.KeyId = null;
+
+        /**
+         * kms地域。目前支持的地域可以使用ListKmsEnableRegion来获取。必须要和cos的地域保持一致。
+         * @type {string || null}
+         */
+        this.KmsRegion = null;
+
+        /**
          * 日志文件前缀。3-40个字符，只能包含 ASCII 编码字母 a-z，A-Z，数字 0-9。可以不填，默认以账号ID作为日志前缀。
          * @type {string || null}
          */
@@ -896,6 +935,9 @@ class CreateAuditRequest extends  AbstractModel {
         this.CmqQueueName = 'CmqQueueName' in params ? params.CmqQueueName : null;
         this.CmqRegion = 'CmqRegion' in params ? params.CmqRegion : null;
         this.IsCreateNewQueue = 'IsCreateNewQueue' in params ? params.IsCreateNewQueue : null;
+        this.IsEnableKmsEncry = 'IsEnableKmsEncry' in params ? params.IsEnableKmsEncry : null;
+        this.KeyId = 'KeyId' in params ? params.KeyId : null;
+        this.KmsRegion = 'KmsRegion' in params ? params.KmsRegion : null;
         this.LogFilePrefix = 'LogFilePrefix' in params ? params.LogFilePrefix : null;
 
     }
@@ -1186,6 +1228,30 @@ class DescribeAuditResponse extends  AbstractModel {
         this.IsEnableCmqNotify = null;
 
         /**
+         * 是否开启kms加密。1：是，0：否。如果开启KMS加密，数据在投递到cos时，会将数据加密。
+         * @type {number || null}
+         */
+        this.IsEnableKmsEncry = null;
+
+        /**
+         * CMK的全局唯一标识符。
+         * @type {string || null}
+         */
+        this.KeyId = null;
+
+        /**
+         * CMK别名。
+         * @type {string || null}
+         */
+        this.KmsAlias = null;
+
+        /**
+         * kms地域。
+         * @type {string || null}
+         */
+        this.KmsRegion = null;
+
+        /**
          * 日志前缀。
          * @type {string || null}
          */
@@ -1219,6 +1285,10 @@ class DescribeAuditResponse extends  AbstractModel {
         this.CosBucketName = 'CosBucketName' in params ? params.CosBucketName : null;
         this.CosRegion = 'CosRegion' in params ? params.CosRegion : null;
         this.IsEnableCmqNotify = 'IsEnableCmqNotify' in params ? params.IsEnableCmqNotify : null;
+        this.IsEnableKmsEncry = 'IsEnableKmsEncry' in params ? params.IsEnableKmsEncry : null;
+        this.KeyId = 'KeyId' in params ? params.KeyId : null;
+        this.KmsAlias = 'KmsAlias' in params ? params.KmsAlias : null;
+        this.KmsRegion = 'KmsRegion' in params ? params.KmsRegion : null;
         this.LogFilePrefix = 'LogFilePrefix' in params ? params.LogFilePrefix : null;
         this.ReadWriteAttribute = 'ReadWriteAttribute' in params ? params.ReadWriteAttribute : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
@@ -1271,7 +1341,7 @@ class Event extends  AbstractModel {
         this.EventName = null;
 
         /**
-         * 事件名称中文描述
+         * 事件名称中文描述（此字段请按需使用，如果您是其他语言使用者，可以忽略该字段描述）
          * @type {string || null}
          */
         this.EventNameCn = null;
@@ -1301,7 +1371,13 @@ class Event extends  AbstractModel {
         this.RequestID = null;
 
         /**
-         * 资源类型中文描述
+         * 资源地域
+         * @type {string || null}
+         */
+        this.ResourceRegion = null;
+
+        /**
+         * 资源类型中文描述（此字段请按需使用，如果您是其他语言使用者，可以忽略该字段描述）
          * @type {string || null}
          */
         this.ResourceTypeCn = null;
@@ -1349,6 +1425,7 @@ class Event extends  AbstractModel {
         this.EventSource = 'EventSource' in params ? params.EventSource : null;
         this.EventTime = 'EventTime' in params ? params.EventTime : null;
         this.RequestID = 'RequestID' in params ? params.RequestID : null;
+        this.ResourceRegion = 'ResourceRegion' in params ? params.ResourceRegion : null;
         this.ResourceTypeCn = 'ResourceTypeCn' in params ? params.ResourceTypeCn : null;
         this.SecretId = 'SecretId' in params ? params.SecretId : null;
         this.SourceIPAddress = 'SourceIPAddress' in params ? params.SourceIPAddress : null;
