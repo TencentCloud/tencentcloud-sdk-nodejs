@@ -46,6 +46,7 @@ const AddBandwidthPackageResourcesRequest = models.AddBandwidthPackageResourcesR
 const AssignIpv6SubnetCidrBlockRequest = models.AssignIpv6SubnetCidrBlockRequest;
 const CreateVpcResponse = models.CreateVpcResponse;
 const AssistantCidr = models.AssistantCidr;
+const ModifyNetworkAclEntriesRequest = models.ModifyNetworkAclEntriesRequest;
 const DescribeVpcPrivateIpAddressesRequest = models.DescribeVpcPrivateIpAddressesRequest;
 const AddressTemplate = models.AddressTemplate;
 const DescribeIp6TranslatorQuotaResponse = models.DescribeIp6TranslatorQuotaResponse;
@@ -88,6 +89,7 @@ const HaVipAssociateAddressIpRequest = models.HaVipAssociateAddressIpRequest;
 const DisassociateNatGatewayAddressResponse = models.DisassociateNatGatewayAddressResponse;
 const DeleteRoutesResponse = models.DeleteRoutesResponse;
 const DescribeSecurityGroupAssociationStatisticsResponse = models.DescribeSecurityGroupAssociationStatisticsResponse;
+const ModifyNetworkAclEntriesResponse = models.ModifyNetworkAclEntriesResponse;
 const DescribeFlowLogRequest = models.DescribeFlowLogRequest;
 const DescribeIp6AddressesRequest = models.DescribeIp6AddressesRequest;
 const AddIp6RulesRequest = models.AddIp6RulesRequest;
@@ -152,6 +154,7 @@ const ReplaceRoutesRequest = models.ReplaceRoutesRequest;
 const CreateCustomerGatewayResponse = models.CreateCustomerGatewayResponse;
 const ModifySubnetAttributeRequest = models.ModifySubnetAttributeRequest;
 const DisassociateAddressRequest = models.DisassociateAddressRequest;
+const NetworkAclEntrySet = models.NetworkAclEntrySet;
 const DeleteVpnConnectionResponse = models.DeleteVpnConnectionResponse;
 const CreateCcnResponse = models.CreateCcnResponse;
 const EnableCcnRoutesRequest = models.EnableCcnRoutesRequest;
@@ -207,6 +210,7 @@ const AssignIpv6CidrBlockResponse = models.AssignIpv6CidrBlockResponse;
 const CreateCcnRequest = models.CreateCcnRequest;
 const RemoveIp6RulesRequest = models.RemoveIp6RulesRequest;
 const DeleteVpnConnectionRequest = models.DeleteVpnConnectionRequest;
+const NetworkAclEntry = models.NetworkAclEntry;
 const RenewVpnGatewayResponse = models.RenewVpnGatewayResponse;
 const DeleteDirectConnectGatewayResponse = models.DeleteDirectConnectGatewayResponse;
 const ModifyAddressesBandwidthRequest = models.ModifyAddressesBandwidthRequest;
@@ -1354,6 +1358,17 @@ class VpcClient extends AbstractClient {
     DeleteCcn(req, cb) {
         let resp = new DeleteCcnResponse();
         this.request("DeleteCcn", req, resp, cb);
+    }
+
+    /**
+     * 本接口（ModifyNetworkAclEntries）用于修改（包括添加和删除）网络ACL的入站规则和出站规则。
+     * @param {ModifyNetworkAclEntriesRequest} req
+     * @param {function(string, ModifyNetworkAclEntriesResponse):void} cb
+     * @public
+     */
+    ModifyNetworkAclEntries(req, cb) {
+        let resp = new ModifyNetworkAclEntriesResponse();
+        this.request("ModifyNetworkAclEntries", req, resp, cb);
     }
 
     /**

@@ -66,6 +66,13 @@ class DescribeCaptchaResultResponse extends  AbstractModel {
         this.EvilLevel = null;
 
         /**
+         * 前端获取验证码时间，时间戳格式
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.GetCaptchaTime = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -83,6 +90,7 @@ class DescribeCaptchaResultResponse extends  AbstractModel {
         this.CaptchaCode = 'CaptchaCode' in params ? params.CaptchaCode : null;
         this.CaptchaMsg = 'CaptchaMsg' in params ? params.CaptchaMsg : null;
         this.EvilLevel = 'EvilLevel' in params ? params.EvilLevel : null;
+        this.GetCaptchaTime = 'GetCaptchaTime' in params ? params.GetCaptchaTime : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -1210,6 +1218,12 @@ class DescribeCaptchaResultRequest extends  AbstractModel {
          */
         this.Imei = null;
 
+        /**
+         * 是否返回前端获取验证码时间，取值1：需要返回
+         * @type {number || null}
+         */
+        this.NeedGetCaptchaTime = null;
+
     }
 
     /**
@@ -1229,6 +1243,7 @@ class DescribeCaptchaResultRequest extends  AbstractModel {
         this.SceneId = 'SceneId' in params ? params.SceneId : null;
         this.MacAddress = 'MacAddress' in params ? params.MacAddress : null;
         this.Imei = 'Imei' in params ? params.Imei : null;
+        this.NeedGetCaptchaTime = 'NeedGetCaptchaTime' in params ? params.NeedGetCaptchaTime : null;
 
     }
 }

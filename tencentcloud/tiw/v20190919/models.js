@@ -563,7 +563,7 @@ class CustomLayout extends  AbstractModel {
         this.Canvas = null;
 
         /**
-         * 流布局参数
+         * 流布局参数，每路流的布局不能超出画布区域
          * @type {Array.<StreamLayout> || null}
          */
         this.InputStreamList = null;

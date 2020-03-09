@@ -176,6 +176,24 @@ class TextData extends  AbstractModel {
         this.EvilType = null;
 
         /**
+         * 消息类公共相关参数
+         * @type {TextOutputComm || null}
+         */
+        this.Common = null;
+
+        /**
+         * 消息类ID信息
+         * @type {TextOutputID || null}
+         */
+        this.ID = null;
+
+        /**
+         * 消息类输出结果
+         * @type {TextOutputRes || null}
+         */
+        this.Res = null;
+
+        /**
          * 命中的关键词
          * @type {Array.<string> || null}
          */
@@ -192,6 +210,24 @@ class TextData extends  AbstractModel {
         }
         this.EvilFlag = 'EvilFlag' in params ? params.EvilFlag : null;
         this.EvilType = 'EvilType' in params ? params.EvilType : null;
+
+        if (params.Common) {
+            let obj = new TextOutputComm();
+            obj.deserialize(params.Common)
+            this.Common = obj;
+        }
+
+        if (params.ID) {
+            let obj = new TextOutputID();
+            obj.deserialize(params.ID)
+            this.ID = obj;
+        }
+
+        if (params.Res) {
+            let obj = new TextOutputRes();
+            obj.deserialize(params.Res)
+            this.Res = obj;
+        }
         this.Keywords = 'Keywords' in params ? params.Keywords : null;
 
     }
@@ -569,6 +605,41 @@ class ImageData extends  AbstractModel {
             obj.deserialize(params.TerrorDetect)
             this.TerrorDetect = obj;
         }
+
+    }
+}
+
+/**
+ * 消息类输出ID参数
+ * @class
+ */
+class TextOutputID extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 接入业务的唯一ID
+         * @type {string || null}
+         */
+        this.MsgID = null;
+
+        /**
+         * 用户账号uin，对应请求协议里的Content.User.Uin。旁路结果有回带，串联结果无该字段
+         * @type {string || null}
+         */
+        this.Uin = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MsgID = 'MsgID' in params ? params.MsgID : null;
+        this.Uin = 'Uin' in params ? params.Uin : null;
 
     }
 }
@@ -1337,6 +1408,56 @@ class DescribeFileSampleResponse extends  AbstractModel {
 }
 
 /**
+ * 消息类输出结果参数
+ * @class
+ */
+class TextOutputRes extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 操作人,信安处理人企业微信ID
+         * @type {string || null}
+         */
+        this.Operator = null;
+
+        /**
+         * 恶意操作码，
+删除（1）， 通过（2）， 先审后发（100012）
+         * @type {number || null}
+         */
+        this.ResultCode = null;
+
+        /**
+         * 操作结果备注说明
+         * @type {string || null}
+         */
+        this.ResultMsg = null;
+
+        /**
+         * 恶意类型，广告（10001）， 政治（20001）， 色情（20002）， 社会事件（20004）， 暴力（20011）， 低俗（20012）， 违法犯罪（20006）， 欺诈（20008）， 版权（20013）， 谣言（20104）， 其他（21000）
+         * @type {number || null}
+         */
+        this.ResultType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Operator = 'Operator' in params ? params.Operator : null;
+        this.ResultCode = 'ResultCode' in params ? params.ResultCode : null;
+        this.ResultMsg = 'ResultMsg' in params ? params.ResultMsg : null;
+        this.ResultType = 'ResultType' in params ? params.ResultType : null;
+
+    }
+}
+
+/**
  * CreateTextSample请求参数结构体
  * @class
  */
@@ -1630,6 +1751,55 @@ class ImageHotDetect extends  AbstractModel {
         this.Keywords = 'Keywords' in params ? params.Keywords : null;
         this.Labels = 'Labels' in params ? params.Labels : null;
         this.Score = 'Score' in params ? params.Score : null;
+
+    }
+}
+
+/**
+ * 消息类输出公共参数
+ * @class
+ */
+class TextOutputComm extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 接入业务的唯一ID
+         * @type {number || null}
+         */
+        this.AppID = null;
+
+        /**
+         * 接口唯一ID，旁路调用接口返回有该字段，标识唯一接口
+         * @type {number || null}
+         */
+        this.BUCtrlID = null;
+
+        /**
+         * 消息发送时间
+         * @type {number || null}
+         */
+        this.SendTime = null;
+
+        /**
+         * 请求字段里的Common.Uin
+         * @type {number || null}
+         */
+        this.Uin = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AppID = 'AppID' in params ? params.AppID : null;
+        this.BUCtrlID = 'BUCtrlID' in params ? params.BUCtrlID : null;
+        this.SendTime = 'SendTime' in params ? params.SendTime : null;
+        this.Uin = 'Uin' in params ? params.Uin : null;
 
     }
 }
@@ -2206,6 +2376,7 @@ module.exports = {
     ImageModerationRequest: ImageModerationRequest,
     CreateFileSampleRequest: CreateFileSampleRequest,
     ImageData: ImageData,
+    TextOutputID: TextOutputID,
     ImagePornDetect: ImagePornDetect,
     DeleteTextSampleResponse: DeleteTextSampleResponse,
     TextSample: TextSample,
@@ -2220,6 +2391,7 @@ module.exports = {
     DeleteFileSampleResponse: DeleteFileSampleResponse,
     FileSample: FileSample,
     DescribeFileSampleResponse: DescribeFileSampleResponse,
+    TextOutputRes: TextOutputRes,
     CreateTextSampleRequest: CreateTextSampleRequest,
     DeleteFileSampleRequest: DeleteFileSampleRequest,
     Filter: Filter,
@@ -2227,6 +2399,7 @@ module.exports = {
     DescribeModerationOverviewResponse: DescribeModerationOverviewResponse,
     Similar: Similar,
     ImageHotDetect: ImageHotDetect,
+    TextOutputComm: TextOutputComm,
     DescribeTextSampleRequest: DescribeTextSampleRequest,
     AudioModerationRequest: AudioModerationRequest,
     CodeDetail: CodeDetail,
