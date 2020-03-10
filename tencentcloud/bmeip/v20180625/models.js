@@ -1884,6 +1884,12 @@ class DescribeEipAclsRequest extends  AbstractModel {
          */
         this.Order = null;
 
+        /**
+         * ACL名称列表，支持模糊查找
+         * @type {Array.<string> || null}
+         */
+        this.AclNames = null;
+
     }
 
     /**
@@ -1902,6 +1908,7 @@ class DescribeEipAclsRequest extends  AbstractModel {
         this.EipNames = 'EipNames' in params ? params.EipNames : null;
         this.OrderField = 'OrderField' in params ? params.OrderField : null;
         this.Order = 'Order' in params ? params.Order : null;
+        this.AclNames = 'AclNames' in params ? params.AclNames : null;
 
     }
 }

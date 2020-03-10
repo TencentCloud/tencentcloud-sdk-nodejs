@@ -26,6 +26,7 @@ class SendMultiSmsResponse extends  AbstractModel {
 
         /**
          * 短信流水数组
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<SmsRet> || null}
          */
         this.Data = null;
@@ -596,6 +597,7 @@ class SendSmsResponse extends  AbstractModel {
 
         /**
          * 短信流水信息
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {SmsSid || null}
          */
         this.Data = null;
