@@ -51,7 +51,7 @@ class CrClient extends AbstractClient {
     }
     
     /**
-     * 用于下载当日催收和回访结果报表。当日23:00后，可获取当日催收结果，次日00:30后，可获取昨日回访结果。
+     * 用于下载结果报表。当日23:00后，可获取当日到期/逾期提醒结果，次日00:30后，可获取昨日回访结果。
      * @param {DownloadReportRequest} req
      * @param {function(string, DownloadReportResponse):void} cb
      * @public
