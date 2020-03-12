@@ -18,54 +18,63 @@ const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const UpdateKeyDescriptionResponse = models.UpdateKeyDescriptionResponse;
 const DisableKeysRequest = models.DisableKeysRequest;
+const AlgorithmInfo = models.AlgorithmInfo;
 const UpdateAliasRequest = models.UpdateAliasRequest;
 const ReEncryptRequest = models.ReEncryptRequest;
 const GenerateDataKeyRequest = models.GenerateDataKeyRequest;
 const GenerateDataKeyResponse = models.GenerateDataKeyResponse;
+const AsymmetricRsaDecryptRequest = models.AsymmetricRsaDecryptRequest;
 const EnableKeyRotationRequest = models.EnableKeyRotationRequest;
 const EnableKeyRotationResponse = models.EnableKeyRotationResponse;
 const CreateKeyRequest = models.CreateKeyRequest;
 const EnableKeysResponse = models.EnableKeysResponse;
 const DisableKeyResponse = models.DisableKeyResponse;
 const GetParametersForImportRequest = models.GetParametersForImportRequest;
-const GetParametersForImportResponse = models.GetParametersForImportResponse;
-const DecryptResponse = models.DecryptResponse;
+const DeleteImportedKeyMaterialResponse = models.DeleteImportedKeyMaterialResponse;
+const CreateKeyResponse = models.CreateKeyResponse;
 const ReEncryptResponse = models.ReEncryptResponse;
 const DescribeKeyRequest = models.DescribeKeyRequest;
 const CancelKeyDeletionRequest = models.CancelKeyDeletionRequest;
 const GenerateRandomRequest = models.GenerateRandomRequest;
 const Key = models.Key;
 const DeleteImportedKeyMaterialRequest = models.DeleteImportedKeyMaterialRequest;
+const ListAlgorithmsResponse = models.ListAlgorithmsResponse;
 const EnableKeyResponse = models.EnableKeyResponse;
 const ScheduleKeyDeletionRequest = models.ScheduleKeyDeletionRequest;
-const GetServiceStatusResponse = models.GetServiceStatusResponse;
+const DisableKeysResponse = models.DisableKeysResponse;
 const ImportKeyMaterialRequest = models.ImportKeyMaterialRequest;
 const GetKeyRotationStatusResponse = models.GetKeyRotationStatusResponse;
-const DisableKeyRequest = models.DisableKeyRequest;
+const AsymmetricRsaDecryptResponse = models.AsymmetricRsaDecryptResponse;
 const ImportKeyMaterialResponse = models.ImportKeyMaterialResponse;
 const EncryptRequest = models.EncryptRequest;
-const DeleteImportedKeyMaterialResponse = models.DeleteImportedKeyMaterialResponse;
-const CreateKeyResponse = models.CreateKeyResponse;
+const AsymmetricSm2DecryptRequest = models.AsymmetricSm2DecryptRequest;
+const DecryptResponse = models.DecryptResponse;
 const EnableKeyRequest = models.EnableKeyRequest;
 const GetKeyRotationStatusRequest = models.GetKeyRotationStatusRequest;
+const GetServiceStatusResponse = models.GetServiceStatusResponse;
 const DescribeKeysResponse = models.DescribeKeysResponse;
+const GetPublicKeyResponse = models.GetPublicKeyResponse;
 const ListKeyDetailResponse = models.ListKeyDetailResponse;
 const CancelKeyDeletionResponse = models.CancelKeyDeletionResponse;
 const ListKeysRequest = models.ListKeysRequest;
 const ListKeysResponse = models.ListKeysResponse;
 const KeyMetadata = models.KeyMetadata;
-const DisableKeysResponse = models.DisableKeysResponse;
+const AsymmetricSm2DecryptResponse = models.AsymmetricSm2DecryptResponse;
 const DisableKeyRotationResponse = models.DisableKeyRotationResponse;
+const ListAlgorithmsRequest = models.ListAlgorithmsRequest;
 const UpdateAliasResponse = models.UpdateAliasResponse;
 const ScheduleKeyDeletionResponse = models.ScheduleKeyDeletionResponse;
+const GetParametersForImportResponse = models.GetParametersForImportResponse;
 const DecryptRequest = models.DecryptRequest;
 const ListKeyDetailRequest = models.ListKeyDetailRequest;
 const UpdateKeyDescriptionRequest = models.UpdateKeyDescriptionRequest;
+const DisableKeyRequest = models.DisableKeyRequest;
 const EnableKeysRequest = models.EnableKeysRequest;
 const GenerateRandomResponse = models.GenerateRandomResponse;
 const DescribeKeyResponse = models.DescribeKeyResponse;
 const EncryptResponse = models.EncryptResponse;
 const DescribeKeysRequest = models.DescribeKeysRequest;
+const GetPublicKeyRequest = models.GetPublicKeyRequest;
 const GetServiceStatusRequest = models.GetServiceStatusRequest;
 const DisableKeyRotationRequest = models.DisableKeyRotationRequest;
 
@@ -92,14 +101,14 @@ class KmsClient extends AbstractClient {
     }
 
     /**
-     * 本接口用于解密密文，得到明文数据。
-     * @param {DecryptRequest} req
-     * @param {function(string, DecryptResponse):void} cb
+     * 用于删除导入的密钥材料，仅对EXTERNAL类型的CMK有效，该接口将CMK设置为PendingImport 状态，并不会删除CMK，在重新进行密钥导入后可继续使用。彻底删除CMK请使用 ScheduleKeyDeletion 接口。
+     * @param {DeleteImportedKeyMaterialRequest} req
+     * @param {function(string, DeleteImportedKeyMaterialResponse):void} cb
      * @public
      */
-    Decrypt(req, cb) {
-        let resp = new DecryptResponse();
-        this.request("Decrypt", req, resp, cb);
+    DeleteImportedKeyMaterial(req, cb) {
+        let resp = new DeleteImportedKeyMaterialResponse();
+        this.request("DeleteImportedKeyMaterial", req, resp, cb);
     }
 
     /**
@@ -126,6 +135,17 @@ class KmsClient extends AbstractClient {
     }
 
     /**
+     * 该接口用户获取 KeyUsage为ASYMMETRIC_DECRYPT_RSA_2048 和 ASYMMETRIC_DECRYPT_SM2 的非对称密钥的公钥信息，使用该公钥用户可在本地进行数据加密，使用该公钥加密的数据只能通过KMS使用对应的私钥进行解密。只有处于Enabled状态的非对称密钥才可能获取公钥。
+     * @param {GetPublicKeyRequest} req
+     * @param {function(string, GetPublicKeyResponse):void} cb
+     * @public
+     */
+    GetPublicKey(req, cb) {
+        let resp = new GetPublicKeyResponse();
+        this.request("GetPublicKey", req, resp, cb);
+    }
+
+    /**
      * 本接口用于禁用一个主密钥，处于禁用状态的Key无法用于加密、解密操作。
      * @param {DisableKeyRequest} req
      * @param {function(string, DisableKeyResponse):void} cb
@@ -145,6 +165,17 @@ class KmsClient extends AbstractClient {
     GenerateDataKey(req, cb) {
         let resp = new GenerateDataKeyResponse();
         this.request("GenerateDataKey", req, resp, cb);
+    }
+
+    /**
+     * 使用指定的SM2非对称密钥的私钥进行数据解密，密文必须是使用对应公钥加密的。处于Enabled 状态的非对称密钥才能进行解密操作。传入的密文的长度不能超过256字节。
+     * @param {AsymmetricSm2DecryptRequest} req
+     * @param {function(string, AsymmetricSm2DecryptResponse):void} cb
+     * @public
+     */
+    AsymmetricSm2Decrypt(req, cb) {
+        let resp = new AsymmetricSm2DecryptResponse();
+        this.request("AsymmetricSm2Decrypt", req, resp, cb);
     }
 
     /**
@@ -181,14 +212,25 @@ class KmsClient extends AbstractClient {
     }
 
     /**
-     * 使用指定CMK对密文重新加密。
-     * @param {ReEncryptRequest} req
-     * @param {function(string, ReEncryptResponse):void} cb
+     * 列出当前Region支持的加密方式
+     * @param {ListAlgorithmsRequest} req
+     * @param {function(string, ListAlgorithmsResponse):void} cb
      * @public
      */
-    ReEncrypt(req, cb) {
-        let resp = new ReEncryptResponse();
-        this.request("ReEncrypt", req, resp, cb);
+    ListAlgorithms(req, cb) {
+        let resp = new ListAlgorithmsResponse();
+        this.request("ListAlgorithms", req, resp, cb);
+    }
+
+    /**
+     * 用于获取指定KeyId的主密钥属性详情信息。
+     * @param {DescribeKeyRequest} req
+     * @param {function(string, DescribeKeyResponse):void} cb
+     * @public
+     */
+    DescribeKey(req, cb) {
+        let resp = new DescribeKeyResponse();
+        this.request("DescribeKey", req, resp, cb);
     }
 
     /**
@@ -222,6 +264,17 @@ class KmsClient extends AbstractClient {
     CreateKey(req, cb) {
         let resp = new CreateKeyResponse();
         this.request("CreateKey", req, resp, cb);
+    }
+
+    /**
+     * 使用指定CMK对密文重新加密。
+     * @param {ReEncryptRequest} req
+     * @param {function(string, ReEncryptResponse):void} cb
+     * @public
+     */
+    ReEncrypt(req, cb) {
+        let resp = new ReEncryptResponse();
+        this.request("ReEncrypt", req, resp, cb);
     }
 
     /**
@@ -280,14 +333,14 @@ class KmsClient extends AbstractClient {
     }
 
     /**
-     * 用于获取指定KeyId的主密钥属性详情信息。
-     * @param {DescribeKeyRequest} req
-     * @param {function(string, DescribeKeyResponse):void} cb
+     * 使用指定的RSA非对称密钥的私钥进行数据解密，密文必须是使用对应公钥加密的。处于Enabled 状态的非对称密钥才能进行解密操作。
+     * @param {AsymmetricRsaDecryptRequest} req
+     * @param {function(string, AsymmetricRsaDecryptResponse):void} cb
      * @public
      */
-    DescribeKey(req, cb) {
-        let resp = new DescribeKeyResponse();
-        this.request("DescribeKey", req, resp, cb);
+    AsymmetricRsaDecrypt(req, cb) {
+        let resp = new AsymmetricRsaDecryptResponse();
+        this.request("AsymmetricRsaDecrypt", req, resp, cb);
     }
 
     /**
@@ -313,14 +366,14 @@ class KmsClient extends AbstractClient {
     }
 
     /**
-     * 用于删除导入的密钥材料，仅对EXTERNAL类型的CMK有效，该接口将CMK设置为PendingImport 状态，并不会删除CMK，在重新进行密钥导入后可继续使用。彻底删除CMK请使用 ScheduleKeyDeletion 接口。
-     * @param {DeleteImportedKeyMaterialRequest} req
-     * @param {function(string, DeleteImportedKeyMaterialResponse):void} cb
+     * 本接口用于解密密文，得到明文数据。
+     * @param {DecryptRequest} req
+     * @param {function(string, DecryptResponse):void} cb
      * @public
      */
-    DeleteImportedKeyMaterial(req, cb) {
-        let resp = new DeleteImportedKeyMaterialResponse();
-        this.request("DeleteImportedKeyMaterial", req, resp, cb);
+    Decrypt(req, cb) {
+        let resp = new DecryptResponse();
+        this.request("Decrypt", req, resp, cb);
     }
 
     /**

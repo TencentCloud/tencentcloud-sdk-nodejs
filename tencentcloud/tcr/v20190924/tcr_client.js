@@ -35,6 +35,7 @@ const DeleteNamespacePersonalRequest = models.DeleteNamespacePersonalRequest;
 const Limit = models.Limit;
 const DeleteImagePersonalResponse = models.DeleteImagePersonalResponse;
 const RegistryCondition = models.RegistryCondition;
+const DeleteImageLifecycleGlobalPersonalResponse = models.DeleteImageLifecycleGlobalPersonalResponse;
 const DuplicateImagePersonalResponse = models.DuplicateImagePersonalResponse;
 const DupImageTagResp = models.DupImageTagResp;
 const DeleteApplicationTriggerPersonalResponse = models.DeleteApplicationTriggerPersonalResponse;
@@ -48,7 +49,9 @@ const DeleteImageLifecyclePersonalResponse = models.DeleteImageLifecyclePersonal
 const DescribeRepositoryOwnerPersonalResponse = models.DescribeRepositoryOwnerPersonalResponse;
 const CreateImageLifecyclePersonalResponse = models.CreateImageLifecyclePersonalResponse;
 const RepoIsExistResp = models.RepoIsExistResp;
+const DescribeImageLifecycleGlobalPersonalResponse = models.DescribeImageLifecycleGlobalPersonalResponse;
 const CreateNamespacePersonalResponse = models.CreateNamespacePersonalResponse;
+const DeleteImageLifecycleGlobalPersonalRequest = models.DeleteImageLifecycleGlobalPersonalRequest;
 const DescribeInstanceStatusRequest = models.DescribeInstanceStatusRequest;
 const DescribeInstanceStatusResponse = models.DescribeInstanceStatusResponse;
 const Favors = models.Favors;
@@ -57,7 +60,8 @@ const CreateUserPersonalRequest = models.CreateUserPersonalRequest;
 const ModifyUserPasswordPersonalResponse = models.ModifyUserPasswordPersonalResponse;
 const ModifyRepositoryInfoPersonalResponse = models.ModifyRepositoryInfoPersonalResponse;
 const DescribeImageFilterPersonalRequest = models.DescribeImageFilterPersonalRequest;
-const CreateNamespacePersonalRequest = models.CreateNamespacePersonalRequest;
+const RepoInfoResp = models.RepoInfoResp;
+const ManageImageLifecycleGlobalPersonalResponse = models.ManageImageLifecycleGlobalPersonalResponse;
 const RegistryStatus = models.RegistryStatus;
 const DescribeNamespacePersonalRequest = models.DescribeNamespacePersonalRequest;
 const NamespaceInfo = models.NamespaceInfo;
@@ -72,6 +76,7 @@ const CreateImageLifecyclePersonalRequest = models.CreateImageLifecyclePersonalR
 const TriggerInvokeResult = models.TriggerInvokeResult;
 const CreateUserPersonalResponse = models.CreateUserPersonalResponse;
 const ModifyRepositoryAccessPersonalRequest = models.ModifyRepositoryAccessPersonalRequest;
+const DescribeImageLifecycleGlobalPersonalRequest = models.DescribeImageLifecycleGlobalPersonalRequest;
 const DescribeImageLifecyclePersonalRequest = models.DescribeImageLifecyclePersonalRequest;
 const RepositoryInfoResp = models.RepositoryInfoResp;
 const CreateInstanceRequest = models.CreateInstanceRequest;
@@ -82,6 +87,7 @@ const NamespaceIsExistsResp = models.NamespaceIsExistsResp;
 const DescribeInstancesRequest = models.DescribeInstancesRequest;
 const Filter = models.Filter;
 const RepoInfo = models.RepoInfo;
+const ManageImageLifecycleGlobalPersonalRequest = models.ManageImageLifecycleGlobalPersonalRequest;
 const DescribeUserQuotaPersonalResponse = models.DescribeUserQuotaPersonalResponse;
 const DescribeImagePersonalRequest = models.DescribeImagePersonalRequest;
 const DeleteImageLifecyclePersonalRequest = models.DeleteImageLifecyclePersonalRequest;
@@ -106,7 +112,7 @@ const BatchDeleteImagePersonalRequest = models.BatchDeleteImagePersonalRequest;
 const TriggerResp = models.TriggerResp;
 const RespLimit = models.RespLimit;
 const SameImagesResp = models.SameImagesResp;
-const RepoInfoResp = models.RepoInfoResp;
+const CreateNamespacePersonalRequest = models.CreateNamespacePersonalRequest;
 const DeleteRepositoryPersonalResponse = models.DeleteRepositoryPersonalResponse;
 const ValidateRepositoryExistPersonalResponse = models.ValidateRepositoryExistPersonalResponse;
 const CreateRepositoryPersonalResponse = models.CreateRepositoryPersonalResponse;
@@ -126,14 +132,14 @@ class TcrClient extends AbstractClient {
     }
     
     /**
-     * 用于在个人版中查询与指定tag镜像内容相同的tag列表
-     * @param {DescribeImageFilterPersonalRequest} req
-     * @param {function(string, DescribeImageFilterPersonalResponse):void} cb
+     * 用于获取个人版全局镜像版本自动清理策略
+     * @param {DescribeImageLifecycleGlobalPersonalRequest} req
+     * @param {function(string, DescribeImageLifecycleGlobalPersonalResponse):void} cb
      * @public
      */
-    DescribeImageFilterPersonal(req, cb) {
-        let resp = new DescribeImageFilterPersonalResponse();
-        this.request("DescribeImageFilterPersonal", req, resp, cb);
+    DescribeImageLifecycleGlobalPersonal(req, cb) {
+        let resp = new DescribeImageLifecycleGlobalPersonalResponse();
+        this.request("DescribeImageLifecycleGlobalPersonal", req, resp, cb);
     }
 
     /**
@@ -167,6 +173,17 @@ class TcrClient extends AbstractClient {
     ModifyApplicationTriggerPersonal(req, cb) {
         let resp = new ModifyApplicationTriggerPersonalResponse();
         this.request("ModifyApplicationTriggerPersonal", req, resp, cb);
+    }
+
+    /**
+     * 用于在个人版中查询与指定tag镜像内容相同的tag列表
+     * @param {DescribeImageFilterPersonalRequest} req
+     * @param {function(string, DescribeImageFilterPersonalResponse):void} cb
+     * @public
+     */
+    DescribeImageFilterPersonal(req, cb) {
+        let resp = new DescribeImageFilterPersonalResponse();
+        this.request("DescribeImageFilterPersonal", req, resp, cb);
     }
 
     /**
@@ -233,6 +250,17 @@ class TcrClient extends AbstractClient {
     DescribeRepositoryPersonal(req, cb) {
         let resp = new DescribeRepositoryPersonalResponse();
         this.request("DescribeRepositoryPersonal", req, resp, cb);
+    }
+
+    /**
+     * 用于设置个人版全局镜像版本自动清理策略
+     * @param {ManageImageLifecycleGlobalPersonalRequest} req
+     * @param {function(string, ManageImageLifecycleGlobalPersonalResponse):void} cb
+     * @public
+     */
+    ManageImageLifecycleGlobalPersonal(req, cb) {
+        let resp = new ManageImageLifecycleGlobalPersonalResponse();
+        this.request("ManageImageLifecycleGlobalPersonal", req, resp, cb);
     }
 
     /**
@@ -442,6 +470,17 @@ class TcrClient extends AbstractClient {
     CreateUserPersonal(req, cb) {
         let resp = new CreateUserPersonalResponse();
         this.request("CreateUserPersonal", req, resp, cb);
+    }
+
+    /**
+     * 用于删除个人版全局镜像版本自动清理策略
+     * @param {DeleteImageLifecycleGlobalPersonalRequest} req
+     * @param {function(string, DeleteImageLifecycleGlobalPersonalResponse):void} cb
+     * @public
+     */
+    DeleteImageLifecycleGlobalPersonal(req, cb) {
+        let resp = new DeleteImageLifecycleGlobalPersonalResponse();
+        this.request("DeleteImageLifecycleGlobalPersonal", req, resp, cb);
     }
 
     /**

@@ -1031,6 +1031,34 @@ class RegistryCondition extends  AbstractModel {
 }
 
 /**
+ * DeleteImageLifecycleGlobalPersonal返回参数结构体
+ * @class
+ */
+class DeleteImageLifecycleGlobalPersonalResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DuplicateImagePersonal返回参数结构体
  * @class
  */
@@ -1504,6 +1532,46 @@ class RepoIsExistResp extends  AbstractModel {
 }
 
 /**
+ * DescribeImageLifecycleGlobalPersonal返回参数结构体
+ * @class
+ */
+class DescribeImageLifecycleGlobalPersonalResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 全局自动删除策略信息
+         * @type {AutoDelStrategyInfoResp || null}
+         */
+        this.Data = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Data) {
+            let obj = new AutoDelStrategyInfoResp();
+            obj.deserialize(params.Data)
+            this.Data = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * CreateNamespacePersonal返回参数结构体
  * @class
  */
@@ -1527,6 +1595,27 @@ class CreateNamespacePersonalResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DeleteImageLifecycleGlobalPersonal请求参数结构体
+ * @class
+ */
+class DeleteImageLifecycleGlobalPersonalRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
 
     }
 }
@@ -1860,18 +1949,30 @@ class DescribeImageFilterPersonalRequest extends  AbstractModel {
 }
 
 /**
- * CreateNamespacePersonal请求参数结构体
+ * 仓库信息的返回信息
  * @class
  */
-class CreateNamespacePersonalRequest extends  AbstractModel {
+class RepoInfoResp extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 命名空间名称
+         * 仓库总数
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 仓库信息列表
+         * @type {Array.<RepoInfo> || null}
+         */
+        this.RepoInfo = null;
+
+        /**
+         * Server信息
          * @type {string || null}
          */
-        this.Namespace = null;
+        this.Server = null;
 
     }
 
@@ -1882,7 +1983,45 @@ class CreateNamespacePersonalRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Namespace = 'Namespace' in params ? params.Namespace : null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.RepoInfo) {
+            this.RepoInfo = new Array();
+            for (let z in params.RepoInfo) {
+                let obj = new RepoInfo();
+                obj.deserialize(params.RepoInfo[z]);
+                this.RepoInfo.push(obj);
+            }
+        }
+        this.Server = 'Server' in params ? params.Server : null;
+
+    }
+}
+
+/**
+ * ManageImageLifecycleGlobalPersonal返回参数结构体
+ * @class
+ */
+class ManageImageLifecycleGlobalPersonalResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2451,6 +2590,27 @@ class ModifyRepositoryAccessPersonalRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeImageLifecycleGlobalPersonal请求参数结构体
+ * @class
+ */
+class DescribeImageLifecycleGlobalPersonalRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+    }
+}
+
+/**
  * DescribeImageLifecyclePersonal请求参数结构体
  * @class
  */
@@ -2926,6 +3086,41 @@ class RepoInfo extends  AbstractModel {
         this.Description = 'Description' in params ? params.Description : null;
         this.CreationTime = 'CreationTime' in params ? params.CreationTime : null;
         this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+
+    }
+}
+
+/**
+ * ManageImageLifecycleGlobalPersonal请求参数结构体
+ * @class
+ */
+class ManageImageLifecycleGlobalPersonalRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * global_keep_last_days:全局保留最近几天的数据;global_keep_last_nums:全局保留最近多少个
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * 策略值
+         * @type {number || null}
+         */
+        this.Val = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Val = 'Val' in params ? params.Val : null;
 
     }
 }
@@ -3948,30 +4143,18 @@ class SameImagesResp extends  AbstractModel {
 }
 
 /**
- * 仓库信息的返回信息
+ * CreateNamespacePersonal请求参数结构体
  * @class
  */
-class RepoInfoResp extends  AbstractModel {
+class CreateNamespacePersonalRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 仓库总数
-         * @type {number || null}
-         */
-        this.TotalCount = null;
-
-        /**
-         * 仓库信息列表
-         * @type {Array.<RepoInfo> || null}
-         */
-        this.RepoInfo = null;
-
-        /**
-         * Server信息
+         * 命名空间名称
          * @type {string || null}
          */
-        this.Server = null;
+        this.Namespace = null;
 
     }
 
@@ -3982,17 +4165,7 @@ class RepoInfoResp extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
-
-        if (params.RepoInfo) {
-            this.RepoInfo = new Array();
-            for (let z in params.RepoInfo) {
-                let obj = new RepoInfo();
-                obj.deserialize(params.RepoInfo[z]);
-                this.RepoInfo.push(obj);
-            }
-        }
-        this.Server = 'Server' in params ? params.Server : null;
+        this.Namespace = 'Namespace' in params ? params.Namespace : null;
 
     }
 }
@@ -4197,6 +4370,7 @@ module.exports = {
     Limit: Limit,
     DeleteImagePersonalResponse: DeleteImagePersonalResponse,
     RegistryCondition: RegistryCondition,
+    DeleteImageLifecycleGlobalPersonalResponse: DeleteImageLifecycleGlobalPersonalResponse,
     DuplicateImagePersonalResponse: DuplicateImagePersonalResponse,
     DupImageTagResp: DupImageTagResp,
     DeleteApplicationTriggerPersonalResponse: DeleteApplicationTriggerPersonalResponse,
@@ -4210,7 +4384,9 @@ module.exports = {
     DescribeRepositoryOwnerPersonalResponse: DescribeRepositoryOwnerPersonalResponse,
     CreateImageLifecyclePersonalResponse: CreateImageLifecyclePersonalResponse,
     RepoIsExistResp: RepoIsExistResp,
+    DescribeImageLifecycleGlobalPersonalResponse: DescribeImageLifecycleGlobalPersonalResponse,
     CreateNamespacePersonalResponse: CreateNamespacePersonalResponse,
+    DeleteImageLifecycleGlobalPersonalRequest: DeleteImageLifecycleGlobalPersonalRequest,
     DescribeInstanceStatusRequest: DescribeInstanceStatusRequest,
     DescribeInstanceStatusResponse: DescribeInstanceStatusResponse,
     Favors: Favors,
@@ -4219,7 +4395,8 @@ module.exports = {
     ModifyUserPasswordPersonalResponse: ModifyUserPasswordPersonalResponse,
     ModifyRepositoryInfoPersonalResponse: ModifyRepositoryInfoPersonalResponse,
     DescribeImageFilterPersonalRequest: DescribeImageFilterPersonalRequest,
-    CreateNamespacePersonalRequest: CreateNamespacePersonalRequest,
+    RepoInfoResp: RepoInfoResp,
+    ManageImageLifecycleGlobalPersonalResponse: ManageImageLifecycleGlobalPersonalResponse,
     RegistryStatus: RegistryStatus,
     DescribeNamespacePersonalRequest: DescribeNamespacePersonalRequest,
     NamespaceInfo: NamespaceInfo,
@@ -4234,6 +4411,7 @@ module.exports = {
     TriggerInvokeResult: TriggerInvokeResult,
     CreateUserPersonalResponse: CreateUserPersonalResponse,
     ModifyRepositoryAccessPersonalRequest: ModifyRepositoryAccessPersonalRequest,
+    DescribeImageLifecycleGlobalPersonalRequest: DescribeImageLifecycleGlobalPersonalRequest,
     DescribeImageLifecyclePersonalRequest: DescribeImageLifecyclePersonalRequest,
     RepositoryInfoResp: RepositoryInfoResp,
     CreateInstanceRequest: CreateInstanceRequest,
@@ -4244,6 +4422,7 @@ module.exports = {
     DescribeInstancesRequest: DescribeInstancesRequest,
     Filter: Filter,
     RepoInfo: RepoInfo,
+    ManageImageLifecycleGlobalPersonalRequest: ManageImageLifecycleGlobalPersonalRequest,
     DescribeUserQuotaPersonalResponse: DescribeUserQuotaPersonalResponse,
     DescribeImagePersonalRequest: DescribeImagePersonalRequest,
     DeleteImageLifecyclePersonalRequest: DeleteImageLifecyclePersonalRequest,
@@ -4268,7 +4447,7 @@ module.exports = {
     TriggerResp: TriggerResp,
     RespLimit: RespLimit,
     SameImagesResp: SameImagesResp,
-    RepoInfoResp: RepoInfoResp,
+    CreateNamespacePersonalRequest: CreateNamespacePersonalRequest,
     DeleteRepositoryPersonalResponse: DeleteRepositoryPersonalResponse,
     ValidateRepositoryExistPersonalResponse: ValidateRepositoryExistPersonalResponse,
     CreateRepositoryPersonalResponse: CreateRepositoryPersonalResponse,

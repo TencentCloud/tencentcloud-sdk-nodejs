@@ -16,22 +16,46 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
-const ModifyEnvResponse = models.ModifyEnvResponse;
-const CommonServiceAPIResponse = models.CommonServiceAPIResponse;
-const DescribeDatabaseACLResponse = models.DescribeDatabaseACLResponse;
+const CreateHostingDomainResponse = models.CreateHostingDomainResponse;
+const CreateStaticStoreResponse = models.CreateStaticStoreResponse;
+const DescribeQuotaDataResponse = models.DescribeQuotaDataResponse;
+const CheckTcbServiceResponse = models.CheckTcbServiceResponse;
 const StorageInfo = models.StorageInfo;
-const DatabasesInfo = models.DatabasesInfo;
-const ModifyEnvRequest = models.ModifyEnvRequest;
-const EnvInfo = models.EnvInfo;
 const FunctionInfo = models.FunctionInfo;
-const DescribeEnvsRequest = models.DescribeEnvsRequest;
-const ModifyDatabaseACLRequest = models.ModifyDatabaseACLRequest;
 const CommonServiceAPIRequest = models.CommonServiceAPIRequest;
-const DescribeDatabaseACLRequest = models.DescribeDatabaseACLRequest;
-const DescribeEnvsResponse = models.DescribeEnvsResponse;
-const ModifyDatabaseACLResponse = models.ModifyDatabaseACLResponse;
+const DescribeEndUsersResponse = models.DescribeEndUsersResponse;
+const AuthDomain = models.AuthDomain;
+const CreateStaticStoreRequest = models.CreateStaticStoreRequest;
+const CommonServiceAPIResponse = models.CommonServiceAPIResponse;
+const DescribeEnvLimitRequest = models.DescribeEnvLimitRequest;
+const ModifyEnvRequest = models.ModifyEnvRequest;
+const DescribeEndUsersRequest = models.DescribeEndUsersRequest;
+const DescribeEnvsRequest = models.DescribeEnvsRequest;
+const DescribeQuotaDataRequest = models.DescribeQuotaDataRequest;
+const ReinstateEnvResponse = models.ReinstateEnvResponse;
+const CheckTcbServiceRequest = models.CheckTcbServiceRequest;
 const StaticStorageInfo = models.StaticStorageInfo;
+const ModifyEnvResponse = models.ModifyEnvResponse;
 const LogServiceInfo = models.LogServiceInfo;
+const DatabasesInfo = models.DatabasesInfo;
+const DescribeAuthDomainsRequest = models.DescribeAuthDomainsRequest;
+const DescribeAuthDomainsResponse = models.DescribeAuthDomainsResponse;
+const ReinstateEnvRequest = models.ReinstateEnvRequest;
+const DescribeDatabaseACLRequest = models.DescribeDatabaseACLRequest;
+const CreateHostingDomainRequest = models.CreateHostingDomainRequest;
+const DestroyStaticStoreResponse = models.DestroyStaticStoreResponse;
+const DeleteEndUserResponse = models.DeleteEndUserResponse;
+const ModifyDatabaseACLResponse = models.ModifyDatabaseACLResponse;
+const DescribeDatabaseACLResponse = models.DescribeDatabaseACLResponse;
+const EnvInfo = models.EnvInfo;
+const DestroyEnvRequest = models.DestroyEnvRequest;
+const DestroyEnvResponse = models.DestroyEnvResponse;
+const ModifyDatabaseACLRequest = models.ModifyDatabaseACLRequest;
+const DestroyStaticStoreRequest = models.DestroyStaticStoreRequest;
+const EndUserInfo = models.EndUserInfo;
+const DescribeEnvLimitResponse = models.DescribeEnvLimitResponse;
+const DeleteEndUserRequest = models.DeleteEndUserRequest;
+const DescribeEnvsResponse = models.DescribeEnvsResponse;
 
 
 /**
@@ -45,14 +69,69 @@ class TcbClient extends AbstractClient {
     }
     
     /**
-     * TCB云API统一入口
-     * @param {CommonServiceAPIRequest} req
-     * @param {function(string, CommonServiceAPIResponse):void} cb
+     * 更新环境信息
+     * @param {ModifyEnvRequest} req
+     * @param {function(string, ModifyEnvResponse):void} cb
      * @public
      */
-    CommonServiceAPI(req, cb) {
-        let resp = new CommonServiceAPIResponse();
-        this.request("CommonServiceAPI", req, resp, cb);
+    ModifyEnv(req, cb) {
+        let resp = new ModifyEnvResponse();
+        this.request("ModifyEnv", req, resp, cb);
+    }
+
+    /**
+     * 销毁环境
+     * @param {DestroyEnvRequest} req
+     * @param {function(string, DestroyEnvResponse):void} cb
+     * @public
+     */
+    DestroyEnv(req, cb) {
+        let resp = new DestroyEnvResponse();
+        this.request("DestroyEnv", req, resp, cb);
+    }
+
+    /**
+     * 获取安全域名列表
+     * @param {DescribeAuthDomainsRequest} req
+     * @param {function(string, DescribeAuthDomainsResponse):void} cb
+     * @public
+     */
+    DescribeAuthDomains(req, cb) {
+        let resp = new DescribeAuthDomainsResponse();
+        this.request("DescribeAuthDomains", req, resp, cb);
+    }
+
+    /**
+     * 创建托管域名
+     * @param {CreateHostingDomainRequest} req
+     * @param {function(string, CreateHostingDomainResponse):void} cb
+     * @public
+     */
+    CreateHostingDomain(req, cb) {
+        let resp = new CreateHostingDomainResponse();
+        this.request("CreateHostingDomain", req, resp, cb);
+    }
+
+    /**
+     * 获取环境列表，含环境下的各个资源信息。尤其是各资源的唯一标识，是请求各资源的关键参数
+     * @param {DescribeEnvsRequest} req
+     * @param {function(string, DescribeEnvsResponse):void} cb
+     * @public
+     */
+    DescribeEnvs(req, cb) {
+        let resp = new DescribeEnvsResponse();
+        this.request("DescribeEnvs", req, resp, cb);
+    }
+
+    /**
+     * 销毁静态托管资源，该接口创建异步销毁任务，资源最终状态可从DestroyStaticStore接口查看
+     * @param {DestroyStaticStoreRequest} req
+     * @param {function(string, DestroyStaticStoreResponse):void} cb
+     * @public
+     */
+    DestroyStaticStore(req, cb) {
+        let resp = new DestroyStaticStoreResponse();
+        this.request("DestroyStaticStore", req, resp, cb);
     }
 
     /**
@@ -67,6 +146,83 @@ class TcbClient extends AbstractClient {
     }
 
     /**
+     * 创建静态托管资源，包括COS和CDN，异步任务创建，查看创建结果需要根据DescribeStaticStore接口来查看
+     * @param {CreateStaticStoreRequest} req
+     * @param {function(string, CreateStaticStoreResponse):void} cb
+     * @public
+     */
+    CreateStaticStore(req, cb) {
+        let resp = new CreateStaticStoreResponse();
+        this.request("CreateStaticStore", req, resp, cb);
+    }
+
+    /**
+     * 获取终端用户列表
+     * @param {DescribeEndUsersRequest} req
+     * @param {function(string, DescribeEndUsersResponse):void} cb
+     * @public
+     */
+    DescribeEndUsers(req, cb) {
+        let resp = new DescribeEndUsersResponse();
+        this.request("DescribeEndUsers", req, resp, cb);
+    }
+
+    /**
+     * 检查是否开通Tcb服务
+     * @param {CheckTcbServiceRequest} req
+     * @param {function(string, CheckTcbServiceResponse):void} cb
+     * @public
+     */
+    CheckTcbService(req, cb) {
+        let resp = new CheckTcbServiceResponse();
+        this.request("CheckTcbService", req, resp, cb);
+    }
+
+    /**
+     * 删除终端用户
+     * @param {DeleteEndUserRequest} req
+     * @param {function(string, DeleteEndUserResponse):void} cb
+     * @public
+     */
+    DeleteEndUser(req, cb) {
+        let resp = new DeleteEndUserResponse();
+        this.request("DeleteEndUser", req, resp, cb);
+    }
+
+    /**
+     * TCB云API统一入口
+     * @param {CommonServiceAPIRequest} req
+     * @param {function(string, CommonServiceAPIResponse):void} cb
+     * @public
+     */
+    CommonServiceAPI(req, cb) {
+        let resp = new CommonServiceAPIResponse();
+        this.request("CommonServiceAPI", req, resp, cb);
+    }
+
+    /**
+     * 查询环境个数上限
+     * @param {DescribeEnvLimitRequest} req
+     * @param {function(string, DescribeEnvLimitResponse):void} cb
+     * @public
+     */
+    DescribeEnvLimit(req, cb) {
+        let resp = new DescribeEnvLimitResponse();
+        this.request("DescribeEnvLimit", req, resp, cb);
+    }
+
+    /**
+     * 针对已隔离的免费环境，可以通过本接口将其恢复访问。
+     * @param {ReinstateEnvRequest} req
+     * @param {function(string, ReinstateEnvResponse):void} cb
+     * @public
+     */
+    ReinstateEnv(req, cb) {
+        let resp = new ReinstateEnvResponse();
+        this.request("ReinstateEnv", req, resp, cb);
+    }
+
+    /**
      * 获取数据库权限
      * @param {DescribeDatabaseACLRequest} req
      * @param {function(string, DescribeDatabaseACLResponse):void} cb
@@ -78,25 +234,14 @@ class TcbClient extends AbstractClient {
     }
 
     /**
-     * 更新环境信息
-     * @param {ModifyEnvRequest} req
-     * @param {function(string, ModifyEnvResponse):void} cb
+     * 查询指定指标的配额使用量
+     * @param {DescribeQuotaDataRequest} req
+     * @param {function(string, DescribeQuotaDataResponse):void} cb
      * @public
      */
-    ModifyEnv(req, cb) {
-        let resp = new ModifyEnvResponse();
-        this.request("ModifyEnv", req, resp, cb);
-    }
-
-    /**
-     * 获取环境列表，含环境下的各个资源信息。尤其是各资源的唯一标识，是请求各资源的关键参数
-     * @param {DescribeEnvsRequest} req
-     * @param {function(string, DescribeEnvsResponse):void} cb
-     * @public
-     */
-    DescribeEnvs(req, cb) {
-        let resp = new DescribeEnvsResponse();
-        this.request("DescribeEnvs", req, resp, cb);
+    DescribeQuotaData(req, cb) {
+        let resp = new DescribeQuotaDataResponse();
+        this.request("DescribeQuotaData", req, resp, cb);
     }
 
 
