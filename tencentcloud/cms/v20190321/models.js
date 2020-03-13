@@ -17,91 +17,6 @@
 const AbstractModel = require("../../common/abstract_model");
 
 /**
- * AudioModeration返回参数结构体
- * @class
- */
-class AudioModerationResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 业务返回码 
-60001：成功请求回调任务
-         * @type {number || null}
-         */
-        this.BusinessCode = null;
-
-        /**
-         * 识别返回结果
-         * @type {Array.<string> || null}
-         */
-        this.Data = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.BusinessCode = 'BusinessCode' in params ? params.BusinessCode : null;
-        this.Data = 'Data' in params ? params.Data : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * DescribeModerationOverview请求参数结构体
- * @class
- */
-class DescribeModerationOverviewRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 日期，如2019-01-01， 查询该日期的概览数据
-         * @type {string || null}
-         */
-        this.Date = null;
-
-        /**
-         * 服务类型数组，可以动态配置，Text:文本，Image:图片，Audio:音频，Video:视频, 使用"ALL"表示所有类型, 不区分大小写，如 ["Text", "Image"]查询文本和图片服务的数据，["all"]查询所有服务的数据。
-         * @type {Array.<string> || null}
-         */
-        this.ServiceTypes = null;
-
-        /**
-         * 渠道号数组，1:直播 2:点播 3:IM 4:GME，统计指定渠道组合的汇总数据，如[1,2]表示获取直播和点播两个渠道的汇总数据，不填[]为所有渠道汇总数据
-         * @type {Array.<number> || null}
-         */
-        this.Channels = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Date = 'Date' in params ? params.Date : null;
-        this.ServiceTypes = 'ServiceTypes' in params ? params.ServiceTypes : null;
-        this.Channels = 'Channels' in params ? params.Channels : null;
-
-    }
-}
-
-/**
  * TextModeration返回参数结构体
  * @class
  */
@@ -229,49 +144,6 @@ class TextData extends  AbstractModel {
             this.Res = obj;
         }
         this.Keywords = 'Keywords' in params ? params.Keywords : null;
-
-    }
-}
-
-/**
- * VideoModeration返回参数结构体
- * @class
- */
-class VideoModerationResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 业务返回码
-60001：成功请求回调任务
-         * @type {number || null}
-         */
-        this.BusinessCode = null;
-
-        /**
-         * 识别返回结果
-         * @type {string || null}
-         */
-        this.Data = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.BusinessCode = 'BusinessCode' in params ? params.BusinessCode : null;
-        this.Data = 'Data' in params ? params.Data : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -610,41 +482,6 @@ class ImageData extends  AbstractModel {
 }
 
 /**
- * 消息类输出ID参数
- * @class
- */
-class TextOutputID extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 接入业务的唯一ID
-         * @type {string || null}
-         */
-        this.MsgID = null;
-
-        /**
-         * 用户账号uin，对应请求协议里的Content.User.Uin。旁路结果有回带，串联结果无该字段
-         * @type {string || null}
-         */
-        this.Uin = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.MsgID = 'MsgID' in params ? params.MsgID : null;
-        this.Uin = 'Uin' in params ? params.Uin : null;
-
-    }
-}
-
-/**
  * 图片涉黄详情
  * @class
  */
@@ -865,36 +702,24 @@ class CreateTextSampleResponse extends  AbstractModel {
 }
 
 /**
- * 概览数据
+ * 消息类输出ID参数
  * @class
  */
-class OverviewRecord extends  AbstractModel {
+class TextOutputID extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 调用恶意量
-         * @type {number || null}
-         */
-        this.EvilCount = null;
-
-        /**
-         * Text表示文本，Image表示图片，Audio表示音频，Video表示视频
+         * 接入业务的唯一ID
          * @type {string || null}
          */
-        this.ServiceType = null;
+        this.MsgID = null;
 
         /**
-         * 调用总量
-         * @type {number || null}
-         */
-        this.TotalCount = null;
-
-        /**
-         * 恶意量同比增长率
+         * 用户账号uin，对应请求协议里的Content.User.Uin。旁路结果有回带，串联结果无该字段
          * @type {string || null}
          */
-        this.Yoy = null;
+        this.Uin = null;
 
     }
 
@@ -905,10 +730,8 @@ class OverviewRecord extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.EvilCount = 'EvilCount' in params ? params.EvilCount : null;
-        this.ServiceType = 'ServiceType' in params ? params.ServiceType : null;
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
-        this.Yoy = 'Yoy' in params ? params.Yoy : null;
+        this.MsgID = 'MsgID' in params ? params.MsgID : null;
+        this.Uin = 'Uin' in params ? params.Uin : null;
 
     }
 }
@@ -1607,49 +1430,6 @@ class OCRDetect extends  AbstractModel {
 }
 
 /**
- * DescribeModerationOverview返回参数结构体
- * @class
- */
-class DescribeModerationOverviewResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 概览数据集合
-         * @type {Array.<OverviewRecord> || null}
-         */
-        this.Results = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-        if (params.Results) {
-            this.Results = new Array();
-            for (let z in params.Results) {
-                let obj = new OverviewRecord();
-                obj.deserialize(params.Results[z]);
-                this.Results.push(obj);
-            }
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
  * 相似度详情
  * @class
  */
@@ -1864,55 +1644,6 @@ class DescribeTextSampleRequest extends  AbstractModel {
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.OrderDirection = 'OrderDirection' in params ? params.OrderDirection : null;
         this.OrderField = 'OrderField' in params ? params.OrderField : null;
-
-    }
-}
-
-/**
- * AudioModeration请求参数结构体
- * @class
- */
-class AudioModerationRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 回调URL，音频识别结果将以POST请求方式发送到此地址
-         * @type {string || null}
-         */
-        this.CallbackUrl = null;
-
-        /**
-         * 音频内容的base64
-         * @type {string || null}
-         */
-        this.FileContent = null;
-
-        /**
-         * 音频文件的MD5值
-         * @type {string || null}
-         */
-        this.FileMD5 = null;
-
-        /**
-         * 音频内容Url ，其中FileUrl和FileContent二选一
-         * @type {string || null}
-         */
-        this.FileUrl = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.CallbackUrl = 'CallbackUrl' in params ? params.CallbackUrl : null;
-        this.FileContent = 'FileContent' in params ? params.FileContent : null;
-        this.FileMD5 = 'FileMD5' in params ? params.FileMD5 : null;
-        this.FileUrl = 'FileUrl' in params ? params.FileUrl : null;
 
     }
 }
@@ -2289,55 +2020,6 @@ class Logo extends  AbstractModel {
 }
 
 /**
- * VideoModeration请求参数结构体
- * @class
- */
-class VideoModerationRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 回调URL，音频识别结果将以POST请求方式发送到此地址
-         * @type {string || null}
-         */
-        this.CallbackUrl = null;
-
-        /**
-         * 视频文件MD5
-         * @type {string || null}
-         */
-        this.FileMD5 = null;
-
-        /**
-         * 视频内容base64
-         * @type {string || null}
-         */
-        this.FileContent = null;
-
-        /**
-         * 视频内容Url,其中FileUrl与FileContent二选一
-         * @type {string || null}
-         */
-        this.FileUrl = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.CallbackUrl = 'CallbackUrl' in params ? params.CallbackUrl : null;
-        this.FileMD5 = 'FileMD5' in params ? params.FileMD5 : null;
-        this.FileContent = 'FileContent' in params ? params.FileContent : null;
-        this.FileUrl = 'FileUrl' in params ? params.FileUrl : null;
-
-    }
-}
-
-/**
  * DeleteTextSample请求参数结构体
  * @class
  */
@@ -2366,22 +2048,18 @@ class DeleteTextSampleRequest extends  AbstractModel {
 }
 
 module.exports = {
-    AudioModerationResponse: AudioModerationResponse,
-    DescribeModerationOverviewRequest: DescribeModerationOverviewRequest,
     TextModerationResponse: TextModerationResponse,
     TextData: TextData,
-    VideoModerationResponse: VideoModerationResponse,
     TextModerationRequest: TextModerationRequest,
     ImageModerationResponse: ImageModerationResponse,
     ImageModerationRequest: ImageModerationRequest,
     CreateFileSampleRequest: CreateFileSampleRequest,
     ImageData: ImageData,
-    TextOutputID: TextOutputID,
     ImagePornDetect: ImagePornDetect,
     DeleteTextSampleResponse: DeleteTextSampleResponse,
     TextSample: TextSample,
     CreateTextSampleResponse: CreateTextSampleResponse,
-    OverviewRecord: OverviewRecord,
+    TextOutputID: TextOutputID,
     FileSampleInfo: FileSampleInfo,
     DescribeFileSampleRequest: DescribeFileSampleRequest,
     CodeDetect: CodeDetect,
@@ -2396,12 +2074,10 @@ module.exports = {
     DeleteFileSampleRequest: DeleteFileSampleRequest,
     Filter: Filter,
     OCRDetect: OCRDetect,
-    DescribeModerationOverviewResponse: DescribeModerationOverviewResponse,
     Similar: Similar,
     ImageHotDetect: ImageHotDetect,
     TextOutputComm: TextOutputComm,
     DescribeTextSampleRequest: DescribeTextSampleRequest,
-    AudioModerationRequest: AudioModerationRequest,
     CodeDetail: CodeDetail,
     ImagePolityDetect: ImagePolityDetect,
     ImageIllegalDetect: ImageIllegalDetect,
@@ -2409,7 +2085,6 @@ module.exports = {
     CreateFileSampleResponse: CreateFileSampleResponse,
     LogoDetail: LogoDetail,
     Logo: Logo,
-    VideoModerationRequest: VideoModerationRequest,
     DeleteTextSampleRequest: DeleteTextSampleRequest,
 
 }

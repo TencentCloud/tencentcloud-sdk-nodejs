@@ -26,36 +26,46 @@ const DescribePurgeQuotaResponse = models.DescribePurgeQuotaResponse;
 const Authentication = models.Authentication;
 const Https = models.Https;
 const DescribeTrafficPackagesRequest = models.DescribeTrafficPackagesRequest;
+const CreateClsLogTopicResponse = models.CreateClsLogTopicResponse;
 const PurgePathCacheResponse = models.PurgePathCacheResponse;
 const DomainFilter = models.DomainFilter;
 const SpecificConfig = models.SpecificConfig;
 const FollowRedirect = models.FollowRedirect;
 const RequestHeader = models.RequestHeader;
-const DescribePurgeQuotaRequest = models.DescribePurgeQuotaRequest;
+const HttpHeaderPathRule = models.HttpHeaderPathRule;
 const Referer = models.Referer;
 const AdvanceCacheRule = models.AdvanceCacheRule;
+const DescribeIpStatusResponse = models.DescribeIpStatusResponse;
 const DeleteCdnDomainRequest = models.DeleteCdnDomainRequest;
 const DescribePayTypeResponse = models.DescribePayTypeResponse;
 const ListTopDataRequest = models.ListTopDataRequest;
+const ListClsTopicDomainsRequest = models.ListClsTopicDomainsRequest;
 const DescribeDomainsResponse = models.DescribeDomainsResponse;
+const CreateClsLogTopicRequest = models.CreateClsLogTopicRequest;
 const CompressionRule = models.CompressionRule;
 const Origin = models.Origin;
 const EnableCachesRequest = models.EnableCachesRequest;
 const Quota = models.Quota;
 const DescribeBillingDataRequest = models.DescribeBillingDataRequest;
 const SimpleCache = models.SimpleCache;
-const TopDetailData = models.TopDetailData;
+const DeleteClsLogTopicRequest = models.DeleteClsLogTopicRequest;
 const UpdatePayTypeResponse = models.UpdatePayTypeResponse;
+const TopicInfo = models.TopicInfo;
 const DescribeDomainsConfigResponse = models.DescribeDomainsConfigResponse;
 const BriefDomain = models.BriefDomain;
-const ResponseHeaderCache = models.ResponseHeaderCache;
+const UpdatePayTypeRequest = models.UpdatePayTypeRequest;
+const DisableClsLogTopicRequest = models.DisableClsLogTopicRequest;
+const ListClsTopicDomainsResponse = models.ListClsTopicDomainsResponse;
 const TrafficPackage = models.TrafficPackage;
 const DescribeCdnIpRequest = models.DescribeCdnIpRequest;
 const Ipv6 = models.Ipv6;
 const StatusCodeCache = models.StatusCodeCache;
 const DescribeIpVisitResponse = models.DescribeIpVisitResponse;
+const EnableClsLogTopicResponse = models.EnableClsLogTopicResponse;
+const ListClsLogTopicsResponse = models.ListClsLogTopicsResponse;
 const OverseaConfig = models.OverseaConfig;
 const AddCdnDomainRequest = models.AddCdnDomainRequest;
+const TopDetailData = models.TopDetailData;
 const ErrorPage = models.ErrorPage;
 const MaxAgeRule = models.MaxAgeRule;
 const DescribePayTypeRequest = models.DescribePayTypeRequest;
@@ -71,28 +81,31 @@ const DescribePushTasksResponse = models.DescribePushTasksResponse;
 const ResourceOriginData = models.ResourceOriginData;
 const IpStatus = models.IpStatus;
 const AddCdnDomainResponse = models.AddCdnDomainResponse;
+const DownstreamCapping = models.DownstreamCapping;
 const ServerCert = models.ServerCert;
-const HttpHeaderPathRule = models.HttpHeaderPathRule;
 const DisableCachesRequest = models.DisableCachesRequest;
 const SimpleCacheRule = models.SimpleCacheRule;
+const DisableClsLogTopicResponse = models.DisableClsLogTopicResponse;
 const DescribeIpStatusRequest = models.DescribeIpStatusRequest;
 const DetailDomain = models.DetailDomain;
 const GetDisableRecordsResponse = models.GetDisableRecordsResponse;
+const ResponseHeader = models.ResponseHeader;
 const CdnIpHistory = models.CdnIpHistory;
 const SummarizedData = models.SummarizedData;
-const UpdatePayTypeRequest = models.UpdatePayTypeRequest;
+const ManageClsTopicDomainsRequest = models.ManageClsTopicDomainsRequest;
 const Cache = models.Cache;
 const ForceRedirect = models.ForceRedirect;
 const DescribeOriginDataRequest = models.DescribeOriginDataRequest;
 const RangeOriginPull = models.RangeOriginPull;
 const ViolationUrl = models.ViolationUrl;
+const SearchClsLogResponse = models.SearchClsLogResponse;
 const PushUrlsCacheRequest = models.PushUrlsCacheRequest;
 const MainlandConfig = models.MainlandConfig;
 const DescribePushTasksRequest = models.DescribePushTasksRequest;
 const DescribeUrlViolationsRequest = models.DescribeUrlViolationsRequest;
 const RefererRule = models.RefererRule;
 const IpFreqLimit = models.IpFreqLimit;
-const DownstreamCapping = models.DownstreamCapping;
+const DomainAreaConfig = models.DomainAreaConfig;
 const CacheOptResult = models.CacheOptResult;
 const StopCdnDomainRequest = models.StopCdnDomainRequest;
 const DescribeMapInfoResponse = models.DescribeMapInfoResponse;
@@ -105,19 +118,22 @@ const ClientCert = models.ClientCert;
 const DomainLog = models.DomainLog;
 const GetDisableRecordsRequest = models.GetDisableRecordsRequest;
 const PurgeUrlsCacheResponse = models.PurgeUrlsCacheResponse;
-const ResponseHeader = models.ResponseHeader;
+const DeleteClsLogTopicResponse = models.DeleteClsLogTopicResponse;
 const DescribeBillingDataResponse = models.DescribeBillingDataResponse;
 const DisableCachesResponse = models.DisableCachesResponse;
 const DescribeCdnIpResponse = models.DescribeCdnIpResponse;
 const DescribeCdnDataResponse = models.DescribeCdnDataResponse;
-const DescribeIpStatusResponse = models.DescribeIpStatusResponse;
+const EnableClsLogTopicRequest = models.EnableClsLogTopicRequest;
 const CacheKey = models.CacheKey;
 const TopData = models.TopData;
 const CappingRule = models.CappingRule;
+const ListClsLogTopicsRequest = models.ListClsLogTopicsRequest;
 const Seo = models.Seo;
 const BandwidthAlert = models.BandwidthAlert;
+const ClsLogObject = models.ClsLogObject;
 const RegionMapRelation = models.RegionMapRelation;
 const PurgePathCacheRequest = models.PurgePathCacheRequest;
+const DescribePurgeQuotaRequest = models.DescribePurgeQuotaRequest;
 const CdnData = models.CdnData;
 const PurgeUrlsCacheRequest = models.PurgeUrlsCacheRequest;
 const OriginPullOptimization = models.OriginPullOptimization;
@@ -125,6 +141,7 @@ const PushTask = models.PushTask;
 const TimestampData = models.TimestampData;
 const StartCdnDomainResponse = models.StartCdnDomainResponse;
 const DescribePushQuotaRequest = models.DescribePushQuotaRequest;
+const ResponseHeaderCache = models.ResponseHeaderCache;
 const ResourceBillingData = models.ResourceBillingData;
 const Sort = models.Sort;
 const DescribePurgeTasksRequest = models.DescribePurgeTasksRequest;
@@ -133,10 +150,14 @@ const StopCdnDomainResponse = models.StopCdnDomainResponse;
 const ListTopDataResponse = models.ListTopDataResponse;
 const MaxAge = models.MaxAge;
 const UpdateDomainConfigResponse = models.UpdateDomainConfigResponse;
+const LogSetInfo = models.LogSetInfo;
+const SearchClsLogRequest = models.SearchClsLogRequest;
 const UpdateDomainConfigRequest = models.UpdateDomainConfigRequest;
 const AwsPrivateAccess = models.AwsPrivateAccess;
+const ManageClsTopicDomainsResponse = models.ManageClsTopicDomainsResponse;
 const VideoSeek = models.VideoSeek;
 const Compatibility = models.Compatibility;
+const ClsSearchLogs = models.ClsSearchLogs;
 const DescribeUrlViolationsResponse = models.DescribeUrlViolationsResponse;
 const IpFilter = models.IpFilter;
 const DescribePurgeTasksResponse = models.DescribePurgeTasksResponse;
@@ -295,6 +316,17 @@ class CdnClient extends AbstractClient {
     }
 
     /**
+     * ManageClsTopicDomains 用于管理某日志主题下绑定的域名列表。
+     * @param {ManageClsTopicDomainsRequest} req
+     * @param {function(string, ManageClsTopicDomainsResponse):void} cb
+     * @public
+     */
+    ManageClsTopicDomains(req, cb) {
+        let resp = new ManageClsTopicDomainsResponse();
+        this.request("ManageClsTopicDomains", req, resp, cb);
+    }
+
+    /**
      * StartCdnDomain 用于启用已停用域名的加速服务
      * @param {StartCdnDomainRequest} req
      * @param {function(string, StartCdnDomainResponse):void} cb
@@ -326,6 +358,17 @@ class CdnClient extends AbstractClient {
     DescribePurgeQuota(req, cb) {
         let resp = new DescribePurgeQuotaResponse();
         this.request("DescribePurgeQuota", req, resp, cb);
+    }
+
+    /**
+     * SearchClsLog 用于 CLS 日志检索。支持检索今天，24小时（可选近7中的某一天），近7天的日志数据。
+     * @param {SearchClsLogRequest} req
+     * @param {function(string, SearchClsLogResponse):void} cb
+     * @public
+     */
+    SearchClsLog(req, cb) {
+        let resp = new SearchClsLogResponse();
+        this.request("SearchClsLog", req, resp, cb);
     }
 
     /**
@@ -462,6 +505,17 @@ class CdnClient extends AbstractClient {
     }
 
     /**
+     * CreatClsLogTopic 用于创建日志主题。注意：一个日志集下至多可创建10个日志主题。
+     * @param {CreateClsLogTopicRequest} req
+     * @param {function(string, CreateClsLogTopicResponse):void} cb
+     * @public
+     */
+    CreateClsLogTopic(req, cb) {
+        let resp = new CreateClsLogTopicResponse();
+        this.request("CreateClsLogTopic", req, resp, cb);
+    }
+
+    /**
      * PushUrlsCache 用于将指定 URL 资源列表加载至 CDN 节点，支持指定加速区域预热。
 默认情况下境内、境外每日预热 URL 限额为各 1000 条，每次最多可提交 20 条。
 接口灰度中，暂未全量开放，敬请期待。
@@ -475,6 +529,40 @@ class CdnClient extends AbstractClient {
     }
 
     /**
+     * DisableClsLogTopic 用于停止日志主题投递。注意：停止后，所有绑定该日志主题域名的日志将不再继续投递至该主题，已经投递的日志将会继续保留。生效时间约 5~15 分钟。
+
+     * @param {DisableClsLogTopicRequest} req
+     * @param {function(string, DisableClsLogTopicResponse):void} cb
+     * @public
+     */
+    DisableClsLogTopic(req, cb) {
+        let resp = new DisableClsLogTopicResponse();
+        this.request("DisableClsLogTopic", req, resp, cb);
+    }
+
+    /**
+     * 获取主题下绑定的域名列表
+     * @param {ListClsTopicDomainsRequest} req
+     * @param {function(string, ListClsTopicDomainsResponse):void} cb
+     * @public
+     */
+    ListClsTopicDomains(req, cb) {
+        let resp = new ListClsTopicDomainsResponse();
+        this.request("ListClsTopicDomains", req, resp, cb);
+    }
+
+    /**
+     * ListClsLogTopics 用于显示日志主题列表。注意：一个日志集下至多含10个日志主题。
+     * @param {ListClsLogTopicsRequest} req
+     * @param {function(string, ListClsLogTopicsResponse):void} cb
+     * @public
+     */
+    ListClsLogTopics(req, cb) {
+        let resp = new ListClsLogTopicsResponse();
+        this.request("ListClsLogTopics", req, resp, cb);
+    }
+
+    /**
      * GetDisableRecords 用于查询资源禁用历史，及 URL 当前状态。（接口尚在内测中，暂未全量开放使用）
      * @param {GetDisableRecordsRequest} req
      * @param {function(string, GetDisableRecordsResponse):void} cb
@@ -483,6 +571,17 @@ class CdnClient extends AbstractClient {
     GetDisableRecords(req, cb) {
         let resp = new GetDisableRecordsResponse();
         this.request("GetDisableRecords", req, resp, cb);
+    }
+
+    /**
+     * DeleteClsLogTopic 用于删除日志主题。注意：删除后，所有该日志主题下绑定域名的日志将不再继续投递至该主题，已经投递的日志将会被全部清空。生效时间约 5~15 分钟。
+     * @param {DeleteClsLogTopicRequest} req
+     * @param {function(string, DeleteClsLogTopicResponse):void} cb
+     * @public
+     */
+    DeleteClsLogTopic(req, cb) {
+        let resp = new DeleteClsLogTopicResponse();
+        this.request("DeleteClsLogTopic", req, resp, cb);
     }
 
     /**
@@ -505,6 +604,17 @@ class CdnClient extends AbstractClient {
     DescribePushQuota(req, cb) {
         let resp = new DescribePushQuotaResponse();
         this.request("DescribePushQuota", req, resp, cb);
+    }
+
+    /**
+     * EnableClsLogTopic 用于启动日志主题投递。注意：启动后，所有绑定该日志主题域名的日志将继续投递至该主题。生效时间约 5~15 分钟。
+     * @param {EnableClsLogTopicRequest} req
+     * @param {function(string, EnableClsLogTopicResponse):void} cb
+     * @public
+     */
+    EnableClsLogTopic(req, cb) {
+        let resp = new EnableClsLogTopicResponse();
+        this.request("EnableClsLogTopic", req, resp, cb);
     }
 
     /**

@@ -612,6 +612,34 @@ class DescribeTrafficPackagesRequest extends  AbstractModel {
 }
 
 /**
+ * CreateClsLogTopic返回参数结构体
+ * @class
+ */
+class CreateClsLogTopicResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * PurgePathCache返回参数结构体
  * @class
  */
@@ -824,12 +852,60 @@ off：关闭
 }
 
 /**
- * DescribePurgeQuota请求参数结构体
+ * Http 头部设置规则，最多可设置 100 条
  * @class
  */
-class DescribePurgeQuotaRequest extends  AbstractModel {
+class HttpHeaderPathRule extends  AbstractModel {
     constructor(){
         super();
+
+        /**
+         * http 头部设置方式
+add：添加头部，若已存在头部，则会存在重复头部
+set：仅回源头部配置支持，若头部已存在则会覆盖原有头部值，若不存在，则会增加该头部及值
+del：删除头部
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.HeaderMode = null;
+
+        /**
+         * http 头部名称，最多可设置 100 个字符
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.HeaderName = null;
+
+        /**
+         * http 头部值，最多可设置 1000 个字符
+Mode 为 del 时非必填
+Mode 为 add/set 时必填
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.HeaderValue = null;
+
+        /**
+         * 规则类型：
+all：所有文件生效
+file：指定文件后缀生效
+directory：指定路径生效
+path：指定绝对路径生效
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.RuleType = null;
+
+        /**
+         * RuleType 对应类型下的匹配内容：
+all 时填充 *
+file 时填充后缀名，如 jpg、txt
+directory 时填充路径，如 /xxx/test/
+path 时填充绝对路径，如 /xxx/test.html
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
+         */
+        this.RulePaths = null;
 
     }
 
@@ -840,6 +916,11 @@ class DescribePurgeQuotaRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.HeaderMode = 'HeaderMode' in params ? params.HeaderMode : null;
+        this.HeaderName = 'HeaderName' in params ? params.HeaderName : null;
+        this.HeaderValue = 'HeaderValue' in params ? params.HeaderValue : null;
+        this.RuleType = 'RuleType' in params ? params.RuleType : null;
+        this.RulePaths = 'RulePaths' in params ? params.RulePaths : null;
 
     }
 }
@@ -942,6 +1023,56 @@ default 时填充 "no max-age"
         this.CacheType = 'CacheType' in params ? params.CacheType : null;
         this.CacheContents = 'CacheContents' in params ? params.CacheContents : null;
         this.CacheTime = 'CacheTime' in params ? params.CacheTime : null;
+
+    }
+}
+
+/**
+ * DescribeIpStatus返回参数结构体
+ * @class
+ */
+class DescribeIpStatusResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 节点列表
+         * @type {Array.<IpStatus> || null}
+         */
+        this.Ips = null;
+
+        /**
+         * 节点总个数
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Ips) {
+            this.Ips = new Array();
+            for (let z in params.Ips) {
+                let obj = new IpStatus();
+                obj.deserialize(params.Ips[z]);
+                this.Ips.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1176,6 +1307,48 @@ client：指定查询客户端地区（用户请求终端所在地区）数据�
 }
 
 /**
+ * ListClsTopicDomains请求参数结构体
+ * @class
+ */
+class ListClsTopicDomainsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 日志集ID
+         * @type {string || null}
+         */
+        this.LogsetId = null;
+
+        /**
+         * 主题ID
+         * @type {string || null}
+         */
+        this.TopicId = null;
+
+        /**
+         * 接入渠道，默认值为cdn，后期可扩充dsa/ecdn等
+         * @type {string || null}
+         */
+        this.Channel = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LogsetId = 'LogsetId' in params ? params.LogsetId : null;
+        this.TopicId = 'TopicId' in params ? params.TopicId : null;
+        this.Channel = 'Channel' in params ? params.Channel : null;
+
+    }
+}
+
+/**
  * DescribeDomains返回参数结构体
  * @class
  */
@@ -1222,6 +1395,63 @@ class DescribeDomainsResponse extends  AbstractModel {
         }
         this.TotalNumber = 'TotalNumber' in params ? params.TotalNumber : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CreateClsLogTopic请求参数结构体
+ * @class
+ */
+class CreateClsLogTopicRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 日志主题名称
+         * @type {string || null}
+         */
+        this.TopicName = null;
+
+        /**
+         * 日志集ID
+         * @type {string || null}
+         */
+        this.LogsetId = null;
+
+        /**
+         * 接入渠道，默认值为cdn
+         * @type {string || null}
+         */
+        this.Channel = null;
+
+        /**
+         * 域名区域信息
+         * @type {Array.<DomainAreaConfig> || null}
+         */
+        this.DomainAreaConfigs = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TopicName = 'TopicName' in params ? params.TopicName : null;
+        this.LogsetId = 'LogsetId' in params ? params.LogsetId : null;
+        this.Channel = 'Channel' in params ? params.Channel : null;
+
+        if (params.DomainAreaConfigs) {
+            this.DomainAreaConfigs = new Array();
+            for (let z in params.DomainAreaConfigs) {
+                let obj = new DomainAreaConfig();
+                obj.deserialize(params.DomainAreaConfigs[z]);
+                this.DomainAreaConfigs.push(obj);
+            }
+        }
 
     }
 }
@@ -1663,24 +1893,30 @@ off：关闭
 }
 
 /**
- * 排序类型的数据结构
+ * DeleteClsLogTopic请求参数结构体
  * @class
  */
-class TopDetailData extends  AbstractModel {
+class DeleteClsLogTopicRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 数据类型的名称
+         * 主日志题ID
          * @type {string || null}
          */
-        this.Name = null;
+        this.TopicId = null;
 
         /**
-         * 数据值
-         * @type {number || null}
+         * 日志集ID
+         * @type {string || null}
          */
-        this.Value = null;
+        this.LogsetId = null;
+
+        /**
+         * 接入渠道，默认值为cdn
+         * @type {string || null}
+         */
+        this.Channel = null;
 
     }
 
@@ -1691,8 +1927,9 @@ class TopDetailData extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Name = 'Name' in params ? params.Name : null;
-        this.Value = 'Value' in params ? params.Value : null;
+        this.TopicId = 'TopicId' in params ? params.TopicId : null;
+        this.LogsetId = 'LogsetId' in params ? params.LogsetId : null;
+        this.Channel = 'Channel' in params ? params.Channel : null;
 
     }
 }
@@ -1721,6 +1958,56 @@ class UpdatePayTypeResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CLS主题信息
+ * @class
+ */
+class TopicInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 主题ID
+         * @type {string || null}
+         */
+        this.TopicId = null;
+
+        /**
+         * 主题名字
+         * @type {string || null}
+         */
+        this.TopicName = null;
+
+        /**
+         * 是否启用投递
+         * @type {number || null}
+         */
+        this.Enabled = null;
+
+        /**
+         * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TopicId = 'TopicId' in params ? params.TopicId : null;
+        this.TopicName = 'TopicName' in params ? params.TopicName : null;
+        this.Enabled = 'Enabled' in params ? params.Enabled : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
 
     }
 }
@@ -1916,20 +2203,24 @@ global：全球锁定
 }
 
 /**
- * 源站头部缓存配置，默认为开启状态，缓存所有头部信息
+ * UpdatePayType请求参数结构体
  * @class
  */
-class ResponseHeaderCache extends  AbstractModel {
+class UpdatePayTypeRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 源站头部缓存开关
-on：开启
-off：关闭
+         * 计费区域，mainland或overseas。
          * @type {string || null}
          */
-        this.Switch = null;
+        this.Area = null;
+
+        /**
+         * 计费类型，flux或bandwidth。
+         * @type {string || null}
+         */
+        this.PayType = null;
 
     }
 
@@ -1940,7 +2231,136 @@ off：关闭
         if (!params) {
             return;
         }
-        this.Switch = 'Switch' in params ? params.Switch : null;
+        this.Area = 'Area' in params ? params.Area : null;
+        this.PayType = 'PayType' in params ? params.PayType : null;
+
+    }
+}
+
+/**
+ * DisableClsLogTopic请求参数结构体
+ * @class
+ */
+class DisableClsLogTopicRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 日志集ID
+         * @type {string || null}
+         */
+        this.LogsetId = null;
+
+        /**
+         * 日志主题ID
+         * @type {string || null}
+         */
+        this.TopicId = null;
+
+        /**
+         * 接入渠道，默认值为cdn
+         * @type {string || null}
+         */
+        this.Channel = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LogsetId = 'LogsetId' in params ? params.LogsetId : null;
+        this.TopicId = 'TopicId' in params ? params.TopicId : null;
+        this.Channel = 'Channel' in params ? params.Channel : null;
+
+    }
+}
+
+/**
+ * ListClsTopicDomains返回参数结构体
+ * @class
+ */
+class ListClsTopicDomainsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 开发者ID
+         * @type {number || null}
+         */
+        this.AppId = null;
+
+        /**
+         * 渠道
+         * @type {string || null}
+         */
+        this.Channel = null;
+
+        /**
+         * 日志集ID
+         * @type {string || null}
+         */
+        this.LogsetId = null;
+
+        /**
+         * 主题ID
+         * @type {string || null}
+         */
+        this.TopicId = null;
+
+        /**
+         * 域名区域配置，其中可能含有已删除的域名，如果要再传回ManageClsTopicDomains接口，需要结合ListCdnDomains接口排除掉已删除的域名。
+         * @type {Array.<DomainAreaConfig> || null}
+         */
+        this.DomainAreaConfigs = null;
+
+        /**
+         * 主题名称
+         * @type {string || null}
+         */
+        this.TopicName = null;
+
+        /**
+         * 主题最近更新时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.UpdateTime = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AppId = 'AppId' in params ? params.AppId : null;
+        this.Channel = 'Channel' in params ? params.Channel : null;
+        this.LogsetId = 'LogsetId' in params ? params.LogsetId : null;
+        this.TopicId = 'TopicId' in params ? params.TopicId : null;
+
+        if (params.DomainAreaConfigs) {
+            this.DomainAreaConfigs = new Array();
+            for (let z in params.DomainAreaConfigs) {
+                let obj = new DomainAreaConfig();
+                obj.deserialize(params.DomainAreaConfigs[z]);
+                this.DomainAreaConfigs.push(obj);
+            }
+        }
+        this.TopicName = 'TopicName' in params ? params.TopicName : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2193,6 +2613,90 @@ class DescribeIpVisitResponse extends  AbstractModel {
                 let obj = new ResourceData();
                 obj.deserialize(params.Data[z]);
                 this.Data.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * EnableClsLogTopic返回参数结构体
+ * @class
+ */
+class EnableClsLogTopicResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ListClsLogTopics返回参数结构体
+ * @class
+ */
+class ListClsLogTopicsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 日志集信息
+         * @type {LogSetInfo || null}
+         */
+        this.Logset = null;
+
+        /**
+         * 主题信息列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<TopicInfo> || null}
+         */
+        this.Topics = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Logset) {
+            let obj = new LogSetInfo();
+            obj.deserialize(params.Logset)
+            this.Logset = obj;
+        }
+
+        if (params.Topics) {
+            this.Topics = new Array();
+            for (let z in params.Topics) {
+                let obj = new TopicInfo();
+                obj.deserialize(params.Topics[z]);
+                this.Topics.push(obj);
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
@@ -2899,6 +3403,41 @@ global：全球加速
             obj.deserialize(params.OriginPullTimeout)
             this.OriginPullTimeout = obj;
         }
+
+    }
+}
+
+/**
+ * 排序类型的数据结构
+ * @class
+ */
+class TopDetailData extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 数据类型的名称
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 数据值
+         * @type {number || null}
+         */
+        this.Value = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Value = 'Value' in params ? params.Value : null;
 
     }
 }
@@ -3665,6 +4204,52 @@ class AddCdnDomainResponse extends  AbstractModel {
 }
 
 /**
+ * 单链接下行限速配置，默认为关闭状态
+ * @class
+ */
+class DownstreamCapping extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 下行速度配置开关
+on：开启
+off：关闭
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+        /**
+         * 下行限速规则
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<CappingRule> || null}
+         */
+        this.CappingRules = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+
+        if (params.CappingRules) {
+            this.CappingRules = new Array();
+            for (let z in params.CappingRules) {
+                let obj = new CappingRule();
+                obj.deserialize(params.CappingRules[z]);
+                this.CappingRules.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * https 加速服务端证书配置：
 + 支持使用托管至 SSL 证书管理的证书进行部署
 + 支持上传 PEM 格式的证书进行部署
@@ -3751,80 +4336,6 @@ class ServerCert extends  AbstractModel {
 }
 
 /**
- * Http 头部设置规则，最多可设置 100 条
- * @class
- */
-class HttpHeaderPathRule extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * http 头部设置方式
-add：添加头部，若已存在头部，则会存在重复头部
-set：仅回源头部配置支持，若头部已存在则会覆盖原有头部值，若不存在，则会增加该头部及值
-del：删除头部
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.HeaderMode = null;
-
-        /**
-         * http 头部名称，最多可设置 100 个字符
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.HeaderName = null;
-
-        /**
-         * http 头部值，最多可设置 1000 个字符
-Mode 为 del 时非必填
-Mode 为 add/set 时必填
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.HeaderValue = null;
-
-        /**
-         * 规则类型：
-all：所有文件生效
-file：指定文件后缀生效
-directory：指定路径生效
-path：指定绝对路径生效
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.RuleType = null;
-
-        /**
-         * RuleType 对应类型下的匹配内容：
-all 时填充 *
-file 时填充后缀名，如 jpg、txt
-directory 时填充路径，如 /xxx/test/
-path 时填充绝对路径，如 /xxx/test.html
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {Array.<string> || null}
-         */
-        this.RulePaths = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.HeaderMode = 'HeaderMode' in params ? params.HeaderMode : null;
-        this.HeaderName = 'HeaderName' in params ? params.HeaderName : null;
-        this.HeaderValue = 'HeaderValue' in params ? params.HeaderValue : null;
-        this.RuleType = 'RuleType' in params ? params.RuleType : null;
-        this.RulePaths = 'RulePaths' in params ? params.RulePaths : null;
-
-    }
-}
-
-/**
  * DisableCaches请求参数结构体
  * @class
  */
@@ -3902,6 +4413,34 @@ index 时填充 /
         this.CacheType = 'CacheType' in params ? params.CacheType : null;
         this.CacheContents = 'CacheContents' in params ? params.CacheContents : null;
         this.CacheTime = 'CacheTime' in params ? params.CacheTime : null;
+
+    }
+}
+
+/**
+ * DisableClsLogTopic返回参数结构体
+ * @class
+ */
+class DisableClsLogTopicResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -4491,6 +5030,52 @@ class GetDisableRecordsResponse extends  AbstractModel {
 }
 
 /**
+ * 自定义响应头配置，默认为关闭状态
+ * @class
+ */
+class ResponseHeader extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 自定义响应头开关
+on：开启
+off：关闭
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+        /**
+         * 自定义响应头规则
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<HttpHeaderPathRule> || null}
+         */
+        this.HeaderRules = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+
+        if (params.HeaderRules) {
+            this.HeaderRules = new Array();
+            for (let z in params.HeaderRules) {
+                let obj = new HttpHeaderPathRule();
+                obj.deserialize(params.HeaderRules[z]);
+                this.HeaderRules.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * CDN 节点上下线历史记录
  * @class
  */
@@ -4568,24 +5153,36 @@ avg：平均值
 }
 
 /**
- * UpdatePayType请求参数结构体
+ * ManageClsTopicDomains请求参数结构体
  * @class
  */
-class UpdatePayTypeRequest extends  AbstractModel {
+class ManageClsTopicDomainsRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 计费区域，mainland或overseas。
+         * 日志集ID
          * @type {string || null}
          */
-        this.Area = null;
+        this.LogsetId = null;
 
         /**
-         * 计费类型，flux或bandwidth。
+         * 日志主题ID
          * @type {string || null}
          */
-        this.PayType = null;
+        this.TopicId = null;
+
+        /**
+         * 接入渠道，默认值为cdn
+         * @type {string || null}
+         */
+        this.Channel = null;
+
+        /**
+         * 域名区域配置，注意：如果此字段为空，则表示解绑对应主题下的所有域名
+         * @type {Array.<DomainAreaConfig> || null}
+         */
+        this.DomainAreaConfigs = null;
 
     }
 
@@ -4596,8 +5193,18 @@ class UpdatePayTypeRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Area = 'Area' in params ? params.Area : null;
-        this.PayType = 'PayType' in params ? params.PayType : null;
+        this.LogsetId = 'LogsetId' in params ? params.LogsetId : null;
+        this.TopicId = 'TopicId' in params ? params.TopicId : null;
+        this.Channel = 'Channel' in params ? params.Channel : null;
+
+        if (params.DomainAreaConfigs) {
+            this.DomainAreaConfigs = new Array();
+            for (let z in params.DomainAreaConfigs) {
+                let obj = new DomainAreaConfig();
+                obj.deserialize(params.DomainAreaConfigs[z]);
+                this.DomainAreaConfigs.push(obj);
+            }
+        }
 
     }
 }
@@ -4895,6 +5502,46 @@ complain：申诉进行中
         this.UrlStatus = 'UrlStatus' in params ? params.UrlStatus : null;
         this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
         this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+
+    }
+}
+
+/**
+ * SearchClsLog返回参数结构体
+ * @class
+ */
+class SearchClsLogResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 查询结果
+         * @type {ClsSearchLogs || null}
+         */
+        this.Logs = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Logs) {
+            let obj = new ClsSearchLogs();
+            obj.deserialize(params.Logs)
+            this.Logs = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -5514,27 +6161,24 @@ off：关闭
 }
 
 /**
- * 单链接下行限速配置，默认为关闭状态
+ * 域名地区配置
  * @class
  */
-class DownstreamCapping extends  AbstractModel {
+class DomainAreaConfig extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 下行速度配置开关
-on：开启
-off：关闭
+         * 域名
          * @type {string || null}
          */
-        this.Switch = null;
+        this.Domain = null;
 
         /**
-         * 下行限速规则
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {Array.<CappingRule> || null}
+         * 地区列表，其中元素可为mainland/overseas
+         * @type {Array.<string> || null}
          */
-        this.CappingRules = null;
+        this.Area = null;
 
     }
 
@@ -5545,16 +6189,8 @@ off：关闭
         if (!params) {
             return;
         }
-        this.Switch = 'Switch' in params ? params.Switch : null;
-
-        if (params.CappingRules) {
-            this.CappingRules = new Array();
-            for (let z in params.CappingRules) {
-                let obj = new CappingRule();
-                obj.deserialize(params.CappingRules[z]);
-                this.CappingRules.push(obj);
-            }
-        }
+        this.Domain = 'Domain' in params ? params.Domain : null;
+        this.Area = 'Area' in params ? params.Area : null;
 
     }
 }
@@ -6147,27 +6783,18 @@ class PurgeUrlsCacheResponse extends  AbstractModel {
 }
 
 /**
- * 自定义响应头配置，默认为关闭状态
+ * DeleteClsLogTopic返回参数结构体
  * @class
  */
-class ResponseHeader extends  AbstractModel {
+class DeleteClsLogTopicResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 自定义响应头开关
-on：开启
-off：关闭
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.Switch = null;
-
-        /**
-         * 自定义响应头规则
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {Array.<HttpHeaderPathRule> || null}
-         */
-        this.HeaderRules = null;
+        this.RequestId = null;
 
     }
 
@@ -6178,16 +6805,7 @@ off：关闭
         if (!params) {
             return;
         }
-        this.Switch = 'Switch' in params ? params.Switch : null;
-
-        if (params.HeaderRules) {
-            this.HeaderRules = new Array();
-            for (let z in params.HeaderRules) {
-                let obj = new HttpHeaderPathRule();
-                obj.deserialize(params.HeaderRules[z]);
-                this.HeaderRules.push(obj);
-            }
-        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -6385,30 +7003,30 @@ day：天粒度
 }
 
 /**
- * DescribeIpStatus返回参数结构体
+ * EnableClsLogTopic请求参数结构体
  * @class
  */
-class DescribeIpStatusResponse extends  AbstractModel {
+class EnableClsLogTopicRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 节点列表
-         * @type {Array.<IpStatus> || null}
-         */
-        this.Ips = null;
-
-        /**
-         * 节点总个数
-         * @type {number || null}
-         */
-        this.TotalCount = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * 日志集ID
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.LogsetId = null;
+
+        /**
+         * 日志主题ID
+         * @type {string || null}
+         */
+        this.TopicId = null;
+
+        /**
+         * 接入渠道，默认值为cdn
+         * @type {string || null}
+         */
+        this.Channel = null;
 
     }
 
@@ -6419,17 +7037,9 @@ class DescribeIpStatusResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.Ips) {
-            this.Ips = new Array();
-            for (let z in params.Ips) {
-                let obj = new IpStatus();
-                obj.deserialize(params.Ips[z]);
-                this.Ips.push(obj);
-            }
-        }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.LogsetId = 'LogsetId' in params ? params.LogsetId : null;
+        this.TopicId = 'TopicId' in params ? params.TopicId : null;
+        this.Channel = 'Channel' in params ? params.Channel : null;
 
     }
 }
@@ -6562,6 +7172,34 @@ path 时填充绝对路径，如 /xxx/test.html
 }
 
 /**
+ * ListClsLogTopics请求参数结构体
+ * @class
+ */
+class ListClsLogTopicsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 接入渠道，默认值为cdn
+         * @type {string || null}
+         */
+        this.Channel = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Channel = 'Channel' in params ? params.Channel : null;
+
+    }
+}
+
+/**
  * SEO 搜索引擎优化配置，默认为关闭状态
  * @class
  */
@@ -6649,6 +7287,69 @@ RETURN_404：全部请求返回 404
 }
 
 /**
+ * CLS日志搜索对象
+ * @class
+ */
+class ClsLogObject extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 主题ID
+         * @type {string || null}
+         */
+        this.TopicId = null;
+
+        /**
+         * 主题名字
+         * @type {string || null}
+         */
+        this.TopicName = null;
+
+        /**
+         * 日志时间
+         * @type {string || null}
+         */
+        this.Timestamp = null;
+
+        /**
+         * 日志内容
+         * @type {string || null}
+         */
+        this.Content = null;
+
+        /**
+         * 采集路径
+         * @type {string || null}
+         */
+        this.Filename = null;
+
+        /**
+         * 日志来源设备
+         * @type {string || null}
+         */
+        this.Source = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TopicId = 'TopicId' in params ? params.TopicId : null;
+        this.TopicName = 'TopicName' in params ? params.TopicName : null;
+        this.Timestamp = 'Timestamp' in params ? params.Timestamp : null;
+        this.Content = 'Content' in params ? params.Content : null;
+        this.Filename = 'Filename' in params ? params.Filename : null;
+        this.Source = 'Source' in params ? params.Source : null;
+
+    }
+}
+
+/**
  * 区域映射id和子区域id的关联信息。
  * @class
  */
@@ -6716,6 +7417,27 @@ delete：刷新全部资源
         }
         this.Paths = 'Paths' in params ? params.Paths : null;
         this.FlushType = 'FlushType' in params ? params.FlushType : null;
+
+    }
+}
+
+/**
+ * DescribePurgeQuota请求参数结构体
+ * @class
+ */
+class DescribePurgeQuotaRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
 
     }
 }
@@ -7011,6 +7733,36 @@ class DescribePushQuotaRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+
+    }
+}
+
+/**
+ * 源站头部缓存配置，默认为开启状态，缓存所有头部信息
+ * @class
+ */
+class ResponseHeaderCache extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 源站头部缓存开关
+on：开启
+off：关闭
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
 
     }
 }
@@ -7369,6 +8121,168 @@ class UpdateDomainConfigResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 日志集信息
+ * @class
+ */
+class LogSetInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 开发者ID
+         * @type {number || null}
+         */
+        this.AppId = null;
+
+        /**
+         * 渠道
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Channel = null;
+
+        /**
+         * 日志集ID
+         * @type {string || null}
+         */
+        this.LogsetId = null;
+
+        /**
+         * 日志集名字
+         * @type {string || null}
+         */
+        this.LogsetName = null;
+
+        /**
+         * 是否默认日志集
+         * @type {number || null}
+         */
+        this.IsDefault = null;
+
+        /**
+         * 日志保存时间，单位为天
+         * @type {number || null}
+         */
+        this.LogsetSavePeriod = null;
+
+        /**
+         * 创建日期
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * 区域
+         * @type {string || null}
+         */
+        this.Region = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AppId = 'AppId' in params ? params.AppId : null;
+        this.Channel = 'Channel' in params ? params.Channel : null;
+        this.LogsetId = 'LogsetId' in params ? params.LogsetId : null;
+        this.LogsetName = 'LogsetName' in params ? params.LogsetName : null;
+        this.IsDefault = 'IsDefault' in params ? params.IsDefault : null;
+        this.LogsetSavePeriod = 'LogsetSavePeriod' in params ? params.LogsetSavePeriod : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.Region = 'Region' in params ? params.Region : null;
+
+    }
+}
+
+/**
+ * SearchClsLog请求参数结构体
+ * @class
+ */
+class SearchClsLogRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 需要查询的日志集ID
+         * @type {string || null}
+         */
+        this.LogsetId = null;
+
+        /**
+         * 需要查询的日志主题ID组合，以逗号分隔
+         * @type {string || null}
+         */
+        this.TopicIds = null;
+
+        /**
+         * 需要查询的日志的起始时间，格式 YYYY-mm-dd HH:MM:SS
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * 需要查询的日志的结束时间，格式 YYYY-mm-dd HH:MM:SS
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * 单次要返回的日志条数，单次返回的最大条数为100
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 接入渠道，默认值为cdn
+         * @type {string || null}
+         */
+        this.Channel = null;
+
+        /**
+         * 需要查询的内容，详情请参考https://cloud.tencent.com/document/product/614/16982
+         * @type {string || null}
+         */
+        this.Query = null;
+
+        /**
+         * 加载更多使用，透传上次返回的 context 值，获取后续的日志内容，通过游标最多可获取10000条，请尽可能缩小时间范围
+         * @type {string || null}
+         */
+        this.Context = null;
+
+        /**
+         * 按日志时间排序， asc（升序）或者 desc（降序），默认为 desc
+         * @type {string || null}
+         */
+        this.Sort = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LogsetId = 'LogsetId' in params ? params.LogsetId : null;
+        this.TopicIds = 'TopicIds' in params ? params.TopicIds : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Channel = 'Channel' in params ? params.Channel : null;
+        this.Query = 'Query' in params ? params.Query : null;
+        this.Context = 'Context' in params ? params.Context : null;
+        this.Sort = 'Sort' in params ? params.Sort : null;
 
     }
 }
@@ -7786,6 +8700,34 @@ class AwsPrivateAccess extends  AbstractModel {
 }
 
 /**
+ * ManageClsTopicDomains返回参数结构体
+ * @class
+ */
+class ManageClsTopicDomainsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * 视频拖拽配置，默认为关闭状态
  * @class
  */
@@ -7840,6 +8782,56 @@ class Compatibility extends  AbstractModel {
             return;
         }
         this.Code = 'Code' in params ? params.Code : null;
+
+    }
+}
+
+/**
+ * Cls日志搜索结果
+ * @class
+ */
+class ClsSearchLogs extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 获取更多检索结果的游标
+         * @type {string || null}
+         */
+        this.Context = null;
+
+        /**
+         * 搜索结果是否已经全部返回
+         * @type {boolean || null}
+         */
+        this.Listover = null;
+
+        /**
+         * 日志内容信息
+         * @type {Array.<ClsLogObject> || null}
+         */
+        this.Results = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Context = 'Context' in params ? params.Context : null;
+        this.Listover = 'Listover' in params ? params.Listover : null;
+
+        if (params.Results) {
+            this.Results = new Array();
+            for (let z in params.Results) {
+                let obj = new ClsLogObject();
+                obj.deserialize(params.Results[z]);
+                this.Results.push(obj);
+            }
+        }
 
     }
 }
@@ -8514,36 +9506,46 @@ module.exports = {
     Authentication: Authentication,
     Https: Https,
     DescribeTrafficPackagesRequest: DescribeTrafficPackagesRequest,
+    CreateClsLogTopicResponse: CreateClsLogTopicResponse,
     PurgePathCacheResponse: PurgePathCacheResponse,
     DomainFilter: DomainFilter,
     SpecificConfig: SpecificConfig,
     FollowRedirect: FollowRedirect,
     RequestHeader: RequestHeader,
-    DescribePurgeQuotaRequest: DescribePurgeQuotaRequest,
+    HttpHeaderPathRule: HttpHeaderPathRule,
     Referer: Referer,
     AdvanceCacheRule: AdvanceCacheRule,
+    DescribeIpStatusResponse: DescribeIpStatusResponse,
     DeleteCdnDomainRequest: DeleteCdnDomainRequest,
     DescribePayTypeResponse: DescribePayTypeResponse,
     ListTopDataRequest: ListTopDataRequest,
+    ListClsTopicDomainsRequest: ListClsTopicDomainsRequest,
     DescribeDomainsResponse: DescribeDomainsResponse,
+    CreateClsLogTopicRequest: CreateClsLogTopicRequest,
     CompressionRule: CompressionRule,
     Origin: Origin,
     EnableCachesRequest: EnableCachesRequest,
     Quota: Quota,
     DescribeBillingDataRequest: DescribeBillingDataRequest,
     SimpleCache: SimpleCache,
-    TopDetailData: TopDetailData,
+    DeleteClsLogTopicRequest: DeleteClsLogTopicRequest,
     UpdatePayTypeResponse: UpdatePayTypeResponse,
+    TopicInfo: TopicInfo,
     DescribeDomainsConfigResponse: DescribeDomainsConfigResponse,
     BriefDomain: BriefDomain,
-    ResponseHeaderCache: ResponseHeaderCache,
+    UpdatePayTypeRequest: UpdatePayTypeRequest,
+    DisableClsLogTopicRequest: DisableClsLogTopicRequest,
+    ListClsTopicDomainsResponse: ListClsTopicDomainsResponse,
     TrafficPackage: TrafficPackage,
     DescribeCdnIpRequest: DescribeCdnIpRequest,
     Ipv6: Ipv6,
     StatusCodeCache: StatusCodeCache,
     DescribeIpVisitResponse: DescribeIpVisitResponse,
+    EnableClsLogTopicResponse: EnableClsLogTopicResponse,
+    ListClsLogTopicsResponse: ListClsLogTopicsResponse,
     OverseaConfig: OverseaConfig,
     AddCdnDomainRequest: AddCdnDomainRequest,
+    TopDetailData: TopDetailData,
     ErrorPage: ErrorPage,
     MaxAgeRule: MaxAgeRule,
     DescribePayTypeRequest: DescribePayTypeRequest,
@@ -8559,28 +9561,31 @@ module.exports = {
     ResourceOriginData: ResourceOriginData,
     IpStatus: IpStatus,
     AddCdnDomainResponse: AddCdnDomainResponse,
+    DownstreamCapping: DownstreamCapping,
     ServerCert: ServerCert,
-    HttpHeaderPathRule: HttpHeaderPathRule,
     DisableCachesRequest: DisableCachesRequest,
     SimpleCacheRule: SimpleCacheRule,
+    DisableClsLogTopicResponse: DisableClsLogTopicResponse,
     DescribeIpStatusRequest: DescribeIpStatusRequest,
     DetailDomain: DetailDomain,
     GetDisableRecordsResponse: GetDisableRecordsResponse,
+    ResponseHeader: ResponseHeader,
     CdnIpHistory: CdnIpHistory,
     SummarizedData: SummarizedData,
-    UpdatePayTypeRequest: UpdatePayTypeRequest,
+    ManageClsTopicDomainsRequest: ManageClsTopicDomainsRequest,
     Cache: Cache,
     ForceRedirect: ForceRedirect,
     DescribeOriginDataRequest: DescribeOriginDataRequest,
     RangeOriginPull: RangeOriginPull,
     ViolationUrl: ViolationUrl,
+    SearchClsLogResponse: SearchClsLogResponse,
     PushUrlsCacheRequest: PushUrlsCacheRequest,
     MainlandConfig: MainlandConfig,
     DescribePushTasksRequest: DescribePushTasksRequest,
     DescribeUrlViolationsRequest: DescribeUrlViolationsRequest,
     RefererRule: RefererRule,
     IpFreqLimit: IpFreqLimit,
-    DownstreamCapping: DownstreamCapping,
+    DomainAreaConfig: DomainAreaConfig,
     CacheOptResult: CacheOptResult,
     StopCdnDomainRequest: StopCdnDomainRequest,
     DescribeMapInfoResponse: DescribeMapInfoResponse,
@@ -8593,19 +9598,22 @@ module.exports = {
     DomainLog: DomainLog,
     GetDisableRecordsRequest: GetDisableRecordsRequest,
     PurgeUrlsCacheResponse: PurgeUrlsCacheResponse,
-    ResponseHeader: ResponseHeader,
+    DeleteClsLogTopicResponse: DeleteClsLogTopicResponse,
     DescribeBillingDataResponse: DescribeBillingDataResponse,
     DisableCachesResponse: DisableCachesResponse,
     DescribeCdnIpResponse: DescribeCdnIpResponse,
     DescribeCdnDataResponse: DescribeCdnDataResponse,
-    DescribeIpStatusResponse: DescribeIpStatusResponse,
+    EnableClsLogTopicRequest: EnableClsLogTopicRequest,
     CacheKey: CacheKey,
     TopData: TopData,
     CappingRule: CappingRule,
+    ListClsLogTopicsRequest: ListClsLogTopicsRequest,
     Seo: Seo,
     BandwidthAlert: BandwidthAlert,
+    ClsLogObject: ClsLogObject,
     RegionMapRelation: RegionMapRelation,
     PurgePathCacheRequest: PurgePathCacheRequest,
+    DescribePurgeQuotaRequest: DescribePurgeQuotaRequest,
     CdnData: CdnData,
     PurgeUrlsCacheRequest: PurgeUrlsCacheRequest,
     OriginPullOptimization: OriginPullOptimization,
@@ -8613,6 +9621,7 @@ module.exports = {
     TimestampData: TimestampData,
     StartCdnDomainResponse: StartCdnDomainResponse,
     DescribePushQuotaRequest: DescribePushQuotaRequest,
+    ResponseHeaderCache: ResponseHeaderCache,
     ResourceBillingData: ResourceBillingData,
     Sort: Sort,
     DescribePurgeTasksRequest: DescribePurgeTasksRequest,
@@ -8621,10 +9630,14 @@ module.exports = {
     ListTopDataResponse: ListTopDataResponse,
     MaxAge: MaxAge,
     UpdateDomainConfigResponse: UpdateDomainConfigResponse,
+    LogSetInfo: LogSetInfo,
+    SearchClsLogRequest: SearchClsLogRequest,
     UpdateDomainConfigRequest: UpdateDomainConfigRequest,
     AwsPrivateAccess: AwsPrivateAccess,
+    ManageClsTopicDomainsResponse: ManageClsTopicDomainsResponse,
     VideoSeek: VideoSeek,
     Compatibility: Compatibility,
+    ClsSearchLogs: ClsSearchLogs,
     DescribeUrlViolationsResponse: DescribeUrlViolationsResponse,
     IpFilter: IpFilter,
     DescribePurgeTasksResponse: DescribePurgeTasksResponse,
