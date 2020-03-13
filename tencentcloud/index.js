@@ -63,6 +63,7 @@ module.exports = {
     kms: require("./kms"),
     live: require("./live"),
     mariadb: require("./mariadb"),
+    memcached: require("./memcached"),
     mongodb: require("./mongodb"),
     monitor: require("./monitor"),
     mps: require("./mps"),

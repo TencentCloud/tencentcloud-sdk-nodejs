@@ -534,6 +534,12 @@ class DescribeImageTagsRequest extends  AbstractModel {
          */
         this.QueryImageIdFlag = null;
 
+        /**
+         * 可用于搜索的 tag 名字
+         * @type {string || null}
+         */
+        this.SearchWord = null;
+
     }
 
     /**
@@ -547,6 +553,7 @@ class DescribeImageTagsRequest extends  AbstractModel {
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.QueryImageIdFlag = 'QueryImageIdFlag' in params ? params.QueryImageIdFlag : null;
+        this.SearchWord = 'SearchWord' in params ? params.SearchWord : null;
 
     }
 }
@@ -3866,6 +3873,12 @@ class DescribeConfigsRequest extends  AbstractModel {
          */
         this.ConfigName = null;
 
+        /**
+         * 配置项版本，精确查询，不传入时查询全量
+         * @type {string || null}
+         */
+        this.ConfigVersion = null;
+
     }
 
     /**
@@ -3881,6 +3894,7 @@ class DescribeConfigsRequest extends  AbstractModel {
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.ConfigIdList = 'ConfigIdList' in params ? params.ConfigIdList : null;
         this.ConfigName = 'ConfigName' in params ? params.ConfigName : null;
+        this.ConfigVersion = 'ConfigVersion' in params ? params.ConfigVersion : null;
 
     }
 }
@@ -8447,6 +8461,12 @@ class DescribePublicConfigsRequest extends  AbstractModel {
          */
         this.ConfigName = null;
 
+        /**
+         * 配置项版本，精确查询，不传入时查询全量
+         * @type {string || null}
+         */
+        this.ConfigVersion = null;
+
     }
 
     /**
@@ -8461,6 +8481,7 @@ class DescribePublicConfigsRequest extends  AbstractModel {
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.ConfigIdList = 'ConfigIdList' in params ? params.ConfigIdList : null;
         this.ConfigName = 'ConfigName' in params ? params.ConfigName : null;
+        this.ConfigVersion = 'ConfigVersion' in params ? params.ConfigVersion : null;
 
     }
 }

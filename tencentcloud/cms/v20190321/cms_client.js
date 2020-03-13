@@ -16,22 +16,18 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
-const AudioModerationResponse = models.AudioModerationResponse;
-const DescribeModerationOverviewRequest = models.DescribeModerationOverviewRequest;
 const TextModerationResponse = models.TextModerationResponse;
 const TextData = models.TextData;
-const VideoModerationResponse = models.VideoModerationResponse;
 const TextModerationRequest = models.TextModerationRequest;
 const ImageModerationResponse = models.ImageModerationResponse;
 const ImageModerationRequest = models.ImageModerationRequest;
 const CreateFileSampleRequest = models.CreateFileSampleRequest;
 const ImageData = models.ImageData;
-const TextOutputID = models.TextOutputID;
 const ImagePornDetect = models.ImagePornDetect;
 const DeleteTextSampleResponse = models.DeleteTextSampleResponse;
 const TextSample = models.TextSample;
 const CreateTextSampleResponse = models.CreateTextSampleResponse;
-const OverviewRecord = models.OverviewRecord;
+const TextOutputID = models.TextOutputID;
 const FileSampleInfo = models.FileSampleInfo;
 const DescribeFileSampleRequest = models.DescribeFileSampleRequest;
 const CodeDetect = models.CodeDetect;
@@ -46,12 +42,10 @@ const CreateTextSampleRequest = models.CreateTextSampleRequest;
 const DeleteFileSampleRequest = models.DeleteFileSampleRequest;
 const Filter = models.Filter;
 const OCRDetect = models.OCRDetect;
-const DescribeModerationOverviewResponse = models.DescribeModerationOverviewResponse;
 const Similar = models.Similar;
 const ImageHotDetect = models.ImageHotDetect;
 const TextOutputComm = models.TextOutputComm;
 const DescribeTextSampleRequest = models.DescribeTextSampleRequest;
-const AudioModerationRequest = models.AudioModerationRequest;
 const CodeDetail = models.CodeDetail;
 const ImagePolityDetect = models.ImagePolityDetect;
 const ImageIllegalDetect = models.ImageIllegalDetect;
@@ -59,7 +53,6 @@ const RrectF = models.RrectF;
 const CreateFileSampleResponse = models.CreateFileSampleResponse;
 const LogoDetail = models.LogoDetail;
 const Logo = models.Logo;
-const VideoModerationRequest = models.VideoModerationRequest;
 const DeleteTextSampleRequest = models.DeleteTextSampleRequest;
 
 
@@ -73,17 +66,6 @@ class CmsClient extends AbstractClient {
         super("cms.tencentcloudapi.com", "2019-03-21", credential, region, profile);
     }
     
-    /**
-     * 根据日期，渠道和服务类型查询识别结果概览数据
-     * @param {DescribeModerationOverviewRequest} req
-     * @param {function(string, DescribeModerationOverviewResponse):void} cb
-     * @public
-     */
-    DescribeModerationOverview(req, cb) {
-        let resp = new DescribeModerationOverviewResponse();
-        this.request("DescribeModerationOverview", req, resp, cb);
-    }
-
     /**
      * 本文档适用于文本内容安全、音频内容安全自定义识别库的管理。
 <br>
@@ -111,54 +93,6 @@ class CmsClient extends AbstractClient {
     }
 
     /**
-     * 视频内容检测（Video Moderation, VM）服务能识别涉黄、涉政、涉恐等违规视频，同时支持用户配置视频黑库，打击自定义的违规内容。
-
-<br>
-接口返回值说明：调用本接口有两个返回值，一个是同步返回值，一个是识别完成后的异步回调返回值。
-
-视频识别结果存在于异步回调返回值中，异步回调返回值明细：
-
-参数名 | 类型 | 描述
--|-|-
-SeqID | String | 请求seqId唯一标识
-EvilFlag | Integer | 是否恶意：0正常，1可疑（Homology模块下：0未匹配到，1恶意，2白样本）
-EvilType | Integer | 恶意类型：100正常，20001政治，20002色情
-Duration | Integer | 视频时长（单位：秒）
-PornDetect | [VideoDetectData](#VDD) | 视频智能鉴黄
-PolityDetect | [VideoDetectData](#VDD) | 视频涉政识别
-Homology | [VideoDetectData](#VDD) | 相似度识别
-
-
-<span id="VDD">VideoDetectData</span>
-
-参数名 | 类型 | 描述
--|-|-
-HitFlag | Integer  | 0正常，1可疑
-Score | Integer | 判断分值
-EvilType | Integer | 恶意类型：100正常，20001政治，20002色情
-Keywords | Array of String | 关键词明细
-SeedUrl | String | 命中的种子URL
-     * @param {VideoModerationRequest} req
-     * @param {function(string, VideoModerationResponse):void} cb
-     * @public
-     */
-    VideoModeration(req, cb) {
-        let resp = new VideoModerationResponse();
-        this.request("VideoModeration", req, resp, cb);
-    }
-
-    /**
-     * 文本内容检测（Text Moderation）服务使用了深度学习技术，识别涉黄、涉政、涉恐等有害内容，同时支持用户配置词库，打击自定义的违规文本。
-     * @param {TextModerationRequest} req
-     * @param {function(string, TextModerationResponse):void} cb
-     * @public
-     */
-    TextModeration(req, cb) {
-        let resp = new TextModerationResponse();
-        this.request("TextModeration", req, resp, cb);
-    }
-
-    /**
      * 本文档适用于图片内容安全、视频内容安全自定义识别库的管理。
 <br>
 通过该接口可以将图片新增到样本库。
@@ -172,44 +106,16 @@ SeedUrl | String | 命中的种子URL
     }
 
     /**
-     * 音频内容检测（Audio Moderation, AM）服务使用了波形分析、声纹分析等技术，能识别涉黄、涉政、涉恐等违规音频，同时支持用户配置音频黑库，打击自定义的违规内容。
-
+     * 本文档适用于文本内容安全、音频内容安全自定义识别库的管理。
 <br>
-接口返回值说明：调用本接口有两个返回值，一个是同步返回值，一个是识别完成后的异步回调返回值。
-
-音频识别结果存在于异步回调返回值中，异步回调返回值明细：
-
-参数名 | 类型 | 描述
--|-|-
-SeqID | String | 请求seqId唯一标识
-EvilFlag | Integer | 是否恶意：0正常，1可疑（Homology模块下：0未匹配到，1恶意，2白样本）
-EvilType | Integer | 恶意类型：100正常，20001政治，20002色情，20007谩骂
-Duration | Integer | 音频时长（单位：毫秒）
-PornDetect | [AudioDetectData](#ADD) | 音频智能鉴黄
-PolityDetect | [AudioDetectData](#ADD)| 音频涉政识别
-CurseDetect | [AudioDetectData](#ADD) | 音频谩骂识别
-CustomizedDetect | [AudioDetectData](#ADD) | 自定义识别
-Homology | [AudioDetectData](#ADD) | 相似度识别
-
-
-<span id="ADD"> AudioDetectData </span>
-
-参数名 | 类型 | 描述
--|-|-
-HitFlag | Integer | 0正常，1可疑
-Score | Integer | 判断分值
-EvilType | Integer | 恶意类型：100正常，20001政治，20002色情，20007谩骂
-Keywords | Array of String | 关键词明细
-StartTime | Array of String | 恶意开始时间（Homology、CustomizedDetect无此字段）
-EndTime | Array of String | 恶意结束时间（Homology、CustomizedDetect无此字段）
-SeedUrl | String | 命中的种子URL
-     * @param {AudioModerationRequest} req
-     * @param {function(string, AudioModerationResponse):void} cb
+支持批量查询文本样本库。
+     * @param {DescribeTextSampleRequest} req
+     * @param {function(string, DescribeTextSampleResponse):void} cb
      * @public
      */
-    AudioModeration(req, cb) {
-        let resp = new AudioModerationResponse();
-        this.request("AudioModeration", req, resp, cb);
+    DescribeTextSample(req, cb) {
+        let resp = new DescribeTextSampleResponse();
+        this.request("DescribeTextSample", req, resp, cb);
     }
 
     /**
@@ -226,16 +132,14 @@ SeedUrl | String | 命中的种子URL
     }
 
     /**
-     * 本文档适用于文本内容安全、音频内容安全自定义识别库的管理。
-<br>
-支持批量查询文本样本库。
-     * @param {DescribeTextSampleRequest} req
-     * @param {function(string, DescribeTextSampleResponse):void} cb
+     * 文本内容检测（Text Moderation）服务使用了深度学习技术，识别涉黄、涉政、涉恐等有害内容，同时支持用户配置词库，打击自定义的违规文本。
+     * @param {TextModerationRequest} req
+     * @param {function(string, TextModerationResponse):void} cb
      * @public
      */
-    DescribeTextSample(req, cb) {
-        let resp = new DescribeTextSampleResponse();
-        this.request("DescribeTextSample", req, resp, cb);
+    TextModeration(req, cb) {
+        let resp = new TextModerationResponse();
+        this.request("TextModeration", req, resp, cb);
     }
 
     /**
