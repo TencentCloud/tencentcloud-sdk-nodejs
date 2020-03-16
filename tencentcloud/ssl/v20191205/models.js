@@ -540,7 +540,7 @@ class Certificates extends  AbstractModel {
         this.ProjectInfo = null;
 
         /**
-         * 需要权限的资源。
+         * 关联的云资源，暂不可用
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<string> || null}
          */
@@ -2602,7 +2602,7 @@ class DescribeCertificatesRequest extends  AbstractModel {
         super();
 
         /**
-         * 页数。
+         * 分页偏移量，从0开始
          * @type {number || null}
          */
         this.Offset = null;

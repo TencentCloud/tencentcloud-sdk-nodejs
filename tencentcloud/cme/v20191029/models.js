@@ -950,6 +950,24 @@ class ProjectInfo extends  AbstractModel {
          */
         this.Owner = null;
 
+        /**
+         * 项目封面图片地址。
+         * @type {string || null}
+         */
+        this.CoverUrl = null;
+
+        /**
+         * 项目创建时间，格式按照 ISO 8601 标准表示。
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * 项目更新时间，格式按照 ISO 8601 标准表示。
+         * @type {string || null}
+         */
+        this.UpdateTime = null;
+
     }
 
     /**
@@ -969,6 +987,9 @@ class ProjectInfo extends  AbstractModel {
             obj.deserialize(params.Owner)
             this.Owner = obj;
         }
+        this.CoverUrl = 'CoverUrl' in params ? params.CoverUrl : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
 
     }
 }

@@ -1149,6 +1149,24 @@ class PushQualityData extends  AbstractModel {
          */
         this.AudioTs = null;
 
+        /**
+         * metadata中的视频码率，单位是kbps。
+         * @type {number || null}
+         */
+        this.MetaVideoRate = null;
+
+        /**
+         * metadata中的音频码率，单位是kbps。
+         * @type {number || null}
+         */
+        this.MetaAudioRate = null;
+
+        /**
+         * metadata中的帧率。
+         * @type {number || null}
+         */
+        this.MateFps = null;
+
     }
 
     /**
@@ -1174,6 +1192,9 @@ class PushQualityData extends  AbstractModel {
         this.LocalTs = 'LocalTs' in params ? params.LocalTs : null;
         this.VideoTs = 'VideoTs' in params ? params.VideoTs : null;
         this.AudioTs = 'AudioTs' in params ? params.AudioTs : null;
+        this.MetaVideoRate = 'MetaVideoRate' in params ? params.MetaVideoRate : null;
+        this.MetaAudioRate = 'MetaAudioRate' in params ? params.MetaAudioRate : null;
+        this.MateFps = 'MateFps' in params ? params.MateFps : null;
 
     }
 }
@@ -1487,6 +1508,41 @@ class DeleteLiveTranscodeRuleResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 并发录制路数
+ * @class
+ */
+class ConcurrentRecordStreamNum extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 时间点。
+         * @type {string || null}
+         */
+        this.Time = null;
+
+        /**
+         * 路数。
+         * @type {number || null}
+         */
+        this.Num = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Time = 'Time' in params ? params.Time : null;
+        this.Num = 'Num' in params ? params.Num : null;
 
     }
 }
@@ -1875,6 +1931,14 @@ class DomainInfo extends  AbstractModel {
          */
         this.RentExpireTime = null;
 
+        /**
+         * 0：标准直播，
+1：小程序直播。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.IsMiniProgramLive = null;
+
     }
 
     /**
@@ -1895,6 +1959,7 @@ class DomainInfo extends  AbstractModel {
         this.CurrentCName = 'CurrentCName' in params ? params.CurrentCName : null;
         this.RentTag = 'RentTag' in params ? params.RentTag : null;
         this.RentExpireTime = 'RentExpireTime' in params ? params.RentExpireTime : null;
+        this.IsMiniProgramLive = 'IsMiniProgramLive' in params ? params.IsMiniProgramLive : null;
 
     }
 }
@@ -2764,48 +2829,24 @@ class PlayCodeTotalInfo extends  AbstractModel {
 }
 
 /**
- * AddLiveWatermark请求参数结构体
+ * DescribeConcurrentRecordStreamNum返回参数结构体
  * @class
  */
-class AddLiveWatermarkRequest extends  AbstractModel {
+class DescribeConcurrentRecordStreamNumResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 水印图片url。
+         * 统计信息列表。
+         * @type {Array.<ConcurrentRecordStreamNum> || null}
+         */
+        this.DataInfoList = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.PictureUrl = null;
-
-        /**
-         * 水印名称。
-         * @type {string || null}
-         */
-        this.WatermarkName = null;
-
-        /**
-         * 显示位置,X轴偏移。
-         * @type {number || null}
-         */
-        this.XPosition = null;
-
-        /**
-         * 显示位置,Y轴偏移。
-         * @type {number || null}
-         */
-        this.YPosition = null;
-
-        /**
-         * 水印宽度，占直播原始画面宽度百分比，建议高宽只设置一项，另外一项会自适应缩放，避免变形。
-         * @type {number || null}
-         */
-        this.Width = null;
-
-        /**
-         * 水印高度，占直播原始画面宽度百分比，建议高宽只设置一项，另外一项会自适应缩放，避免变形。
-         * @type {number || null}
-         */
-        this.Height = null;
+        this.RequestId = null;
 
     }
 
@@ -2816,12 +2857,16 @@ class AddLiveWatermarkRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.PictureUrl = 'PictureUrl' in params ? params.PictureUrl : null;
-        this.WatermarkName = 'WatermarkName' in params ? params.WatermarkName : null;
-        this.XPosition = 'XPosition' in params ? params.XPosition : null;
-        this.YPosition = 'YPosition' in params ? params.YPosition : null;
-        this.Width = 'Width' in params ? params.Width : null;
-        this.Height = 'Height' in params ? params.Height : null;
+
+        if (params.DataInfoList) {
+            this.DataInfoList = new Array();
+            for (let z in params.DataInfoList) {
+                let obj = new ConcurrentRecordStreamNum();
+                obj.deserialize(params.DataInfoList[z]);
+                this.DataInfoList.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -4148,63 +4193,48 @@ class DescribeScreenShotSheetNumListRequest extends  AbstractModel {
 }
 
 /**
- * DescribePlayErrorCodeSumInfoList请求参数结构体
+ * AddLiveWatermark请求参数结构体
  * @class
  */
-class DescribePlayErrorCodeSumInfoListRequest extends  AbstractModel {
+class AddLiveWatermarkRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 起始时间点，北京时间。
-格式：yyyy-mm-dd HH:MM:SS。
+         * 水印图片url。
          * @type {string || null}
          */
-        this.StartTime = null;
+        this.PictureUrl = null;
 
         /**
-         * 结束时间点，北京时间。
-格式：yyyy-mm-dd HH:MM:SS。
-注：EndTime 和 StartTime 只支持最近1天的数据查询。
+         * 水印名称。
          * @type {string || null}
          */
-        this.EndTime = null;
+        this.WatermarkName = null;
 
         /**
-         * 播放域名列表，不填表示总体数据。
-         * @type {Array.<string> || null}
-         */
-        this.PlayDomains = null;
-
-        /**
-         * 页数，范围[1,1000]，默认值是1。
+         * 显示位置,X轴偏移。
          * @type {number || null}
          */
-        this.PageNum = null;
+        this.XPosition = null;
 
         /**
-         * 每页个数，范围：[1,1000]，默认值是20。
+         * 显示位置,Y轴偏移。
          * @type {number || null}
          */
-        this.PageSize = null;
+        this.YPosition = null;
 
         /**
-         * 地域，可选值：Mainland，Oversea，China，Foreign，Global（默认值）；如果为空，查询总的数据；如果为“Mainland”，查询中国大陆的数据；如果为“Oversea”，则查询中国大陆以外的数据；如果为China，查询中国的数据（包括港澳台）；如果为Foreign，查询国外的数据（不包括港澳台）。
-         * @type {string || null}
+         * 水印宽度，占直播原始画面宽度百分比，建议高宽只设置一项，另外一项会自适应缩放，避免变形。
+         * @type {number || null}
          */
-        this.MainlandOrOversea = null;
+        this.Width = null;
 
         /**
-         * 分组参数，可选值：CountryProIsp（默认值），Country（国家），默认是按照国家+省份+运营商来进行分组；目前国外的省份和运营商暂时无法识别。
-         * @type {string || null}
+         * 水印高度，占直播原始画面宽度百分比，建议高宽只设置一项，另外一项会自适应缩放，避免变形。
+         * @type {number || null}
          */
-        this.GroupType = null;
-
-        /**
-         * 输出字段使用的语言，可选值：Chinese（默认值），English，目前国家，省份和运营商支持多语言。
-         * @type {string || null}
-         */
-        this.OutLanguage = null;
+        this.Height = null;
 
     }
 
@@ -4215,14 +4245,12 @@ class DescribePlayErrorCodeSumInfoListRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.StartTime = 'StartTime' in params ? params.StartTime : null;
-        this.EndTime = 'EndTime' in params ? params.EndTime : null;
-        this.PlayDomains = 'PlayDomains' in params ? params.PlayDomains : null;
-        this.PageNum = 'PageNum' in params ? params.PageNum : null;
-        this.PageSize = 'PageSize' in params ? params.PageSize : null;
-        this.MainlandOrOversea = 'MainlandOrOversea' in params ? params.MainlandOrOversea : null;
-        this.GroupType = 'GroupType' in params ? params.GroupType : null;
-        this.OutLanguage = 'OutLanguage' in params ? params.OutLanguage : null;
+        this.PictureUrl = 'PictureUrl' in params ? params.PictureUrl : null;
+        this.WatermarkName = 'WatermarkName' in params ? params.WatermarkName : null;
+        this.XPosition = 'XPosition' in params ? params.XPosition : null;
+        this.YPosition = 'YPosition' in params ? params.YPosition : null;
+        this.Width = 'Width' in params ? params.Width : null;
+        this.Height = 'Height' in params ? params.Height : null;
 
     }
 }
@@ -5174,6 +5202,24 @@ class PushDataInfo extends  AbstractModel {
          */
         this.AsampleRate = null;
 
+        /**
+         * metadata中的音频码率，单位是Kbps。
+         * @type {number || null}
+         */
+        this.MetaAudioSpeed = null;
+
+        /**
+         * metadata中的视频码率，单位是Kbps。
+         * @type {number || null}
+         */
+        this.MetaVideoSpeed = null;
+
+        /**
+         * metadata中的帧率。
+         * @type {number || null}
+         */
+        this.MetaFps = null;
+
     }
 
     /**
@@ -5197,6 +5243,9 @@ class PushDataInfo extends  AbstractModel {
         this.Vcodec = 'Vcodec' in params ? params.Vcodec : null;
         this.Resolution = 'Resolution' in params ? params.Resolution : null;
         this.AsampleRate = 'AsampleRate' in params ? params.AsampleRate : null;
+        this.MetaAudioSpeed = 'MetaAudioSpeed' in params ? params.MetaAudioSpeed : null;
+        this.MetaVideoSpeed = 'MetaVideoSpeed' in params ? params.MetaVideoSpeed : null;
+        this.MetaFps = 'MetaFps' in params ? params.MetaFps : null;
 
     }
 }
@@ -5442,6 +5491,12 @@ topspeed_H265 =》极速高清-H265。
          */
         this.PushDomain = null;
 
+        /**
+         * 分辨率。
+         * @type {string || null}
+         */
+        this.Resolution = null;
+
     }
 
     /**
@@ -5459,6 +5514,7 @@ topspeed_H265 =》极速高清-H265。
         this.Bitrate = 'Bitrate' in params ? params.Bitrate : null;
         this.Type = 'Type' in params ? params.Type : null;
         this.PushDomain = 'PushDomain' in params ? params.PushDomain : null;
+        this.Resolution = 'Resolution' in params ? params.Resolution : null;
 
     }
 }
@@ -8124,6 +8180,145 @@ class CreateLiveSnapshotTemplateResponse extends  AbstractModel {
         }
         this.TemplateId = 'TemplateId' in params ? params.TemplateId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeConcurrentRecordStreamNum请求参数结构体
+ * @class
+ */
+class DescribeConcurrentRecordStreamNumRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 直播类型，SlowLive：慢直播。
+NormalLive：普通直播。
+         * @type {string || null}
+         */
+        this.LiveType = null;
+
+        /**
+         * 起始时间，格式：yyyy-mm-dd HH:MM:SS。
+可以查询最近180天的数据。
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * 结束时间，格式：yyyy-mm-dd HH:MM:SS。
+时间跨度最大支持31天。
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * 如果为空，查询所有地区数据；如果为“Mainland”，查询国内数据；如果为“Oversea”，则查询国外数据。
+         * @type {string || null}
+         */
+        this.MainlandOrOversea = null;
+
+        /**
+         * 推流域名列表，不填表示总体数据。
+         * @type {Array.<string> || null}
+         */
+        this.PushDomains = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LiveType = 'LiveType' in params ? params.LiveType : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.MainlandOrOversea = 'MainlandOrOversea' in params ? params.MainlandOrOversea : null;
+        this.PushDomains = 'PushDomains' in params ? params.PushDomains : null;
+
+    }
+}
+
+/**
+ * DescribePlayErrorCodeSumInfoList请求参数结构体
+ * @class
+ */
+class DescribePlayErrorCodeSumInfoListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 起始时间点，北京时间。
+格式：yyyy-mm-dd HH:MM:SS。
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * 结束时间点，北京时间。
+格式：yyyy-mm-dd HH:MM:SS。
+注：EndTime 和 StartTime 只支持最近1天的数据查询。
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * 播放域名列表，不填表示总体数据。
+         * @type {Array.<string> || null}
+         */
+        this.PlayDomains = null;
+
+        /**
+         * 页数，范围[1,1000]，默认值是1。
+         * @type {number || null}
+         */
+        this.PageNum = null;
+
+        /**
+         * 每页个数，范围：[1,1000]，默认值是20。
+         * @type {number || null}
+         */
+        this.PageSize = null;
+
+        /**
+         * 地域，可选值：Mainland，Oversea，China，Foreign，Global（默认值）；如果为空，查询总的数据；如果为“Mainland”，查询中国大陆的数据；如果为“Oversea”，则查询中国大陆以外的数据；如果为China，查询中国的数据（包括港澳台）；如果为Foreign，查询国外的数据（不包括港澳台）。
+         * @type {string || null}
+         */
+        this.MainlandOrOversea = null;
+
+        /**
+         * 分组参数，可选值：CountryProIsp（默认值），Country（国家），默认是按照国家+省份+运营商来进行分组；目前国外的省份和运营商暂时无法识别。
+         * @type {string || null}
+         */
+        this.GroupType = null;
+
+        /**
+         * 输出字段使用的语言，可选值：Chinese（默认值），English，目前国家，省份和运营商支持多语言。
+         * @type {string || null}
+         */
+        this.OutLanguage = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.PlayDomains = 'PlayDomains' in params ? params.PlayDomains : null;
+        this.PageNum = 'PageNum' in params ? params.PageNum : null;
+        this.PageSize = 'PageSize' in params ? params.PageSize : null;
+        this.MainlandOrOversea = 'MainlandOrOversea' in params ? params.MainlandOrOversea : null;
+        this.GroupType = 'GroupType' in params ? params.GroupType : null;
+        this.OutLanguage = 'OutLanguage' in params ? params.OutLanguage : null;
 
     }
 }
@@ -11809,6 +12004,7 @@ module.exports = {
     DomainCertInfo: DomainCertInfo,
     RecordTemplateInfo: RecordTemplateInfo,
     DeleteLiveTranscodeRuleResponse: DeleteLiveTranscodeRuleResponse,
+    ConcurrentRecordStreamNum: ConcurrentRecordStreamNum,
     DescribeStreamPlayInfoListResponse: DescribeStreamPlayInfoListResponse,
     DescribeScreenShotSheetNumListResponse: DescribeScreenShotSheetNumListResponse,
     ModifyLiveSnapshotTemplateResponse: ModifyLiveSnapshotTemplateResponse,
@@ -11837,7 +12033,7 @@ module.exports = {
     CreateLiveWatermarkRuleResponse: CreateLiveWatermarkRuleResponse,
     ForbidLiveStreamRequest: ForbidLiveStreamRequest,
     PlayCodeTotalInfo: PlayCodeTotalInfo,
-    AddLiveWatermarkRequest: AddLiveWatermarkRequest,
+    DescribeConcurrentRecordStreamNumResponse: DescribeConcurrentRecordStreamNumResponse,
     ModifyLiveRecordTemplateResponse: ModifyLiveRecordTemplateResponse,
     ModifyLivePlayDomainRequest: ModifyLivePlayDomainRequest,
     DeleteLiveRecordTemplateResponse: DeleteLiveRecordTemplateResponse,
@@ -11864,7 +12060,7 @@ module.exports = {
     ModifyPullStreamStatusResponse: ModifyPullStreamStatusResponse,
     ModifyLivePlayDomainResponse: ModifyLivePlayDomainResponse,
     DescribeScreenShotSheetNumListRequest: DescribeScreenShotSheetNumListRequest,
-    DescribePlayErrorCodeSumInfoListRequest: DescribePlayErrorCodeSumInfoListRequest,
+    AddLiveWatermarkRequest: AddLiveWatermarkRequest,
     DescribeLiveCertsResponse: DescribeLiveCertsResponse,
     DescribeProvinceIspPlayInfoListResponse: DescribeProvinceIspPlayInfoListResponse,
     DescribeLiveRecordTemplatesResponse: DescribeLiveRecordTemplatesResponse,
@@ -11944,6 +12140,8 @@ module.exports = {
     ClientIpPlaySumInfo: ClientIpPlaySumInfo,
     DescribeLiveTranscodeTemplateResponse: DescribeLiveTranscodeTemplateResponse,
     CreateLiveSnapshotTemplateResponse: CreateLiveSnapshotTemplateResponse,
+    DescribeConcurrentRecordStreamNumRequest: DescribeConcurrentRecordStreamNumRequest,
+    DescribePlayErrorCodeSumInfoListRequest: DescribePlayErrorCodeSumInfoListRequest,
     ModifyLiveCertRequest: ModifyLiveCertRequest,
     DescribeProIspPlaySumInfoListRequest: DescribeProIspPlaySumInfoListRequest,
     UnBindLiveDomainCertResponse: UnBindLiveDomainCertResponse,

@@ -26,30 +26,35 @@ class DescribePolicyConditionListConfigManual extends  AbstractModel {
 
         /**
          * 检测方式
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {DescribePolicyConditionListConfigManualCalcType || null}
          */
         this.CalcType = null;
 
         /**
          * 检测阈值
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {DescribePolicyConditionListConfigManualCalcValue || null}
          */
         this.CalcValue = null;
 
         /**
          * 持续时间
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {DescribePolicyConditionListConfigManualContinueTime || null}
          */
         this.ContinueTime = null;
 
         /**
          * 数据周期
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {DescribePolicyConditionListConfigManualPeriod || null}
          */
         this.Period = null;
 
         /**
          * 持续周期个数
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {DescribePolicyConditionListConfigManualPeriodNum || null}
          */
         this.PeriodNum = null;
@@ -136,6 +141,12 @@ class UnBindingPolicyObjectRequest extends  AbstractModel {
          */
         this.UniqueId = null;
 
+        /**
+         * 实例分组id, 如果按实例分组删除的话UniqueId参数是无效的
+         * @type {number || null}
+         */
+        this.InstanceGroupId = null;
+
     }
 
     /**
@@ -148,6 +159,7 @@ class UnBindingPolicyObjectRequest extends  AbstractModel {
         this.Module = 'Module' in params ? params.Module : null;
         this.GroupId = 'GroupId' in params ? params.GroupId : null;
         this.UniqueId = 'UniqueId' in params ? params.UniqueId : null;
+        this.InstanceGroupId = 'InstanceGroupId' in params ? params.InstanceGroupId : null;
 
     }
 }
@@ -776,6 +788,7 @@ class DescribePolicyConditionListMetric extends  AbstractModel {
 
         /**
          * 指标配置
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {DescribePolicyConditionListConfigManual || null}
          */
         this.ConfigManual = null;
@@ -894,6 +907,12 @@ class CreatePolicyGroupRequest extends  AbstractModel {
          */
         this.BackEndCall = null;
 
+        /**
+         * 指标告警规则的且或关系，0表示或规则(满足任意规则就告警)，1表示且规则(满足所有规则才告警)
+         * @type {number || null}
+         */
+        this.IsUnionRule = null;
+
     }
 
     /**
@@ -930,6 +949,7 @@ class CreatePolicyGroupRequest extends  AbstractModel {
             }
         }
         this.BackEndCall = 'BackEndCall' in params ? params.BackEndCall : null;
+        this.IsUnionRule = 'IsUnionRule' in params ? params.IsUnionRule : null;
 
     }
 }
@@ -1803,6 +1823,13 @@ class DescribePolicyGroupListGroup extends  AbstractModel {
          */
         this.InstanceGroup = null;
 
+        /**
+         * 且或规则标识, 0表示或规则(任意一条规则满足阈值条件就告警), 1表示且规则(所有规则都满足阈值条件才告警)
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.IsUnionRule = null;
+
     }
 
     /**
@@ -1865,6 +1892,7 @@ class DescribePolicyGroupListGroup extends  AbstractModel {
             obj.deserialize(params.InstanceGroup)
             this.InstanceGroup = obj;
         }
+        this.IsUnionRule = 'IsUnionRule' in params ? params.IsUnionRule : null;
 
     }
 }
@@ -2485,6 +2513,84 @@ class DescribePolicyGroupInfoCallback extends  AbstractModel {
 }
 
 /**
+ * DescribeBindingPolicyObjectList返回的是实例分组信息
+ * @class
+ */
+class DescribeBindingPolicyObjectListInstanceGroup extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例分组id
+         * @type {number || null}
+         */
+        this.InstanceGroupId = null;
+
+        /**
+         * 告警策略类型名称
+         * @type {string || null}
+         */
+        this.ViewName = null;
+
+        /**
+         * 最后编辑uin
+         * @type {string || null}
+         */
+        this.LastEditUin = null;
+
+        /**
+         * 实例分组名称
+         * @type {string || null}
+         */
+        this.GroupName = null;
+
+        /**
+         * 实例数量
+         * @type {number || null}
+         */
+        this.InstanceSum = null;
+
+        /**
+         * 更新时间
+         * @type {number || null}
+         */
+        this.UpdateTime = null;
+
+        /**
+         * 创建时间
+         * @type {number || null}
+         */
+        this.InsertTime = null;
+
+        /**
+         * 实例所在的地域集合
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
+         */
+        this.Regions = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceGroupId = 'InstanceGroupId' in params ? params.InstanceGroupId : null;
+        this.ViewName = 'ViewName' in params ? params.ViewName : null;
+        this.LastEditUin = 'LastEditUin' in params ? params.LastEditUin : null;
+        this.GroupName = 'GroupName' in params ? params.GroupName : null;
+        this.InstanceSum = 'InstanceSum' in params ? params.InstanceSum : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.InsertTime = 'InsertTime' in params ? params.InsertTime : null;
+        this.Regions = 'Regions' in params ? params.Regions : null;
+
+    }
+}
+
+/**
  * DescribePolicyConditionList返回参数结构体
  * @class
  */
@@ -2746,6 +2852,56 @@ class ReceiverInfo extends  AbstractModel {
 }
 
 /**
+ * ModifyAlarmReceivers请求参数结构体
+ * @class
+ */
+class ModifyAlarmReceiversRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 需要修改接收人的策略组Id
+         * @type {number || null}
+         */
+        this.GroupId = null;
+
+        /**
+         * 必填。固定为“monitor”
+         * @type {string || null}
+         */
+        this.Module = null;
+
+        /**
+         * 新接收人信息, 没有填写则删除所有接收人
+         * @type {Array.<ReceiverInfo> || null}
+         */
+        this.ReceiverInfos = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.GroupId = 'GroupId' in params ? params.GroupId : null;
+        this.Module = 'Module' in params ? params.Module : null;
+
+        if (params.ReceiverInfos) {
+            this.ReceiverInfos = new Array();
+            for (let z in params.ReceiverInfos) {
+                let obj = new ReceiverInfo();
+                obj.deserialize(params.ReceiverInfos[z]);
+                this.ReceiverInfos.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * DescribeProductEventList的入参Dimensions
  * @class
  */
@@ -2890,6 +3046,13 @@ class DescribePolicyGroupInfoResponse extends  AbstractModel {
         this.CanSetDefault = null;
 
         /**
+         * 是否且规则
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.IsUnionRule = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -2954,6 +3117,7 @@ class DescribePolicyGroupInfoResponse extends  AbstractModel {
             this.ConditionsTemp = obj;
         }
         this.CanSetDefault = 'CanSetDefault' in params ? params.CanSetDefault : null;
+        this.IsUnionRule = 'IsUnionRule' in params ? params.IsUnionRule : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -3012,30 +3176,36 @@ class DescribeBasicAlarmListResponse extends  AbstractModel {
 }
 
 /**
- * ModifyAlarmReceivers请求参数结构体
+ * DescribeBindingPolicyObjectList接口的Dimension
  * @class
  */
-class ModifyAlarmReceiversRequest extends  AbstractModel {
+class DescribeBindingPolicyObjectListDimension extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 需要修改接收人的策略组Id
+         * 地域id
          * @type {number || null}
          */
-        this.GroupId = null;
+        this.RegionId = null;
 
         /**
-         * 必填。固定为“monitor”
+         * 地域简称
          * @type {string || null}
          */
-        this.Module = null;
+        this.Region = null;
 
         /**
-         * 新接收人信息, 没有填写则删除所有接收人
-         * @type {Array.<ReceiverInfo> || null}
+         * 维度组合json字符串
+         * @type {string || null}
          */
-        this.ReceiverInfos = null;
+        this.Dimensions = null;
+
+        /**
+         * 事件维度组合json字符串
+         * @type {string || null}
+         */
+        this.EventDimensions = null;
 
     }
 
@@ -3046,17 +3216,10 @@ class ModifyAlarmReceiversRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.GroupId = 'GroupId' in params ? params.GroupId : null;
-        this.Module = 'Module' in params ? params.Module : null;
-
-        if (params.ReceiverInfos) {
-            this.ReceiverInfos = new Array();
-            for (let z in params.ReceiverInfos) {
-                let obj = new ReceiverInfo();
-                obj.deserialize(params.ReceiverInfos[z]);
-                this.ReceiverInfos.push(obj);
-            }
-        }
+        this.RegionId = 'RegionId' in params ? params.RegionId : null;
+        this.Region = 'Region' in params ? params.Region : null;
+        this.Dimensions = 'Dimensions' in params ? params.Dimensions : null;
+        this.EventDimensions = 'EventDimensions' in params ? params.EventDimensions : null;
 
     }
 }
@@ -3377,6 +3540,13 @@ class DescribeBindingPolicyObjectListResponse extends  AbstractModel {
         this.NoShieldedSum = null;
 
         /**
+         * 绑定的实例分组信息，没有绑定实例分组则为空
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {DescribeBindingPolicyObjectListInstanceGroup || null}
+         */
+        this.InstanceGroup = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -3402,6 +3572,12 @@ class DescribeBindingPolicyObjectListResponse extends  AbstractModel {
         }
         this.Total = 'Total' in params ? params.Total : null;
         this.NoShieldedSum = 'NoShieldedSum' in params ? params.NoShieldedSum : null;
+
+        if (params.InstanceGroup) {
+            let obj = new DescribeBindingPolicyObjectListInstanceGroup();
+            obj.deserialize(params.InstanceGroup)
+            this.InstanceGroup = obj;
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -3445,6 +3621,27 @@ class DescribePolicyGroupInfoConditionTpl extends  AbstractModel {
          */
         this.LastEditUin = null;
 
+        /**
+         * 更新时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.UpdateTime = null;
+
+        /**
+         * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.InsertTime = null;
+
+        /**
+         * 是否且规则
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.IsUnionRule = null;
+
     }
 
     /**
@@ -3459,6 +3656,9 @@ class DescribePolicyGroupInfoConditionTpl extends  AbstractModel {
         this.ViewName = 'ViewName' in params ? params.ViewName : null;
         this.Remark = 'Remark' in params ? params.Remark : null;
         this.LastEditUin = 'LastEditUin' in params ? params.LastEditUin : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.InsertTime = 'InsertTime' in params ? params.InsertTime : null;
+        this.IsUnionRule = 'IsUnionRule' in params ? params.IsUnionRule : null;
 
     }
 }
@@ -3483,6 +3683,24 @@ class DescribeBindingPolicyObjectListRequest extends  AbstractModel {
          */
         this.GroupId = null;
 
+        /**
+         * 分页参数，每页返回的数量，取值1~100，默认20
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 分页参数，页偏移量，从0开始计数，默认0
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 筛选对象的维度信息
+         * @type {Array.<DescribeBindingPolicyObjectListDimension> || null}
+         */
+        this.Dimensions = null;
+
     }
 
     /**
@@ -3494,6 +3712,17 @@ class DescribeBindingPolicyObjectListRequest extends  AbstractModel {
         }
         this.Module = 'Module' in params ? params.Module : null;
         this.GroupId = 'GroupId' in params ? params.GroupId : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+
+        if (params.Dimensions) {
+            this.Dimensions = new Array();
+            for (let z in params.Dimensions) {
+                let obj = new DescribeBindingPolicyObjectListDimension();
+                obj.deserialize(params.Dimensions[z]);
+                this.Dimensions.push(obj);
+            }
+        }
 
     }
 }
@@ -3821,16 +4050,82 @@ class DescribePolicyGroupListRequest extends  AbstractModel {
         this.Module = null;
 
         /**
-         * 分页参数，最大返回个数
+         * 分页参数，每页返回的数量，取值1~100
          * @type {number || null}
          */
         this.Limit = null;
 
         /**
-         * 分页参数，起始位置
+         * 分页参数，页偏移量，从0开始计数
          * @type {number || null}
          */
         this.Offset = null;
+
+        /**
+         * 按策略名搜索
+         * @type {string || null}
+         */
+        this.Like = null;
+
+        /**
+         * 实例分组id
+         * @type {number || null}
+         */
+        this.InstanceGroupId = null;
+
+        /**
+         * 按更新时间排序, asc 或者 desc
+         * @type {string || null}
+         */
+        this.UpdateTimeOrder = null;
+
+        /**
+         * 项目id列表
+         * @type {Array.<number> || null}
+         */
+        this.ProjectIds = null;
+
+        /**
+         * 告警策略类型列表
+         * @type {Array.<string> || null}
+         */
+        this.ViewNames = null;
+
+        /**
+         * 是否过滤无接收人策略组, 1表示过滤, 0表示不过滤
+         * @type {number || null}
+         */
+        this.FilterUnuseReceiver = null;
+
+        /**
+         * 过滤条件, 接收组列表
+         * @type {Array.<string> || null}
+         */
+        this.Receivers = null;
+
+        /**
+         * 过滤条件, 接收人列表
+         * @type {Array.<string> || null}
+         */
+        this.ReceiverUserList = null;
+
+        /**
+         * 维度组合字段(json字符串), 例如[[{"name":"unInstanceId","value":"ins-6e4b2aaa"}]]
+         * @type {string || null}
+         */
+        this.Dimensions = null;
+
+        /**
+         * 模板策略组id, 多个id用逗号分隔
+         * @type {string || null}
+         */
+        this.ConditionTempGroupId = null;
+
+        /**
+         * 过滤条件, 接收人或者接收组, user表示接收人, group表示接收组
+         * @type {string || null}
+         */
+        this.ReceiverType = null;
 
     }
 
@@ -3844,6 +4139,17 @@ class DescribePolicyGroupListRequest extends  AbstractModel {
         this.Module = 'Module' in params ? params.Module : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Like = 'Like' in params ? params.Like : null;
+        this.InstanceGroupId = 'InstanceGroupId' in params ? params.InstanceGroupId : null;
+        this.UpdateTimeOrder = 'UpdateTimeOrder' in params ? params.UpdateTimeOrder : null;
+        this.ProjectIds = 'ProjectIds' in params ? params.ProjectIds : null;
+        this.ViewNames = 'ViewNames' in params ? params.ViewNames : null;
+        this.FilterUnuseReceiver = 'FilterUnuseReceiver' in params ? params.FilterUnuseReceiver : null;
+        this.Receivers = 'Receivers' in params ? params.Receivers : null;
+        this.ReceiverUserList = 'ReceiverUserList' in params ? params.ReceiverUserList : null;
+        this.Dimensions = 'Dimensions' in params ? params.Dimensions : null;
+        this.ConditionTempGroupId = 'ConditionTempGroupId' in params ? params.ConditionTempGroupId : null;
+        this.ReceiverType = 'ReceiverType' in params ? params.ReceiverType : null;
 
     }
 }
@@ -4463,15 +4769,17 @@ module.exports = {
     MetricDatum: MetricDatum,
     DeletePolicyGroupRequest: DeletePolicyGroupRequest,
     DescribePolicyGroupInfoCallback: DescribePolicyGroupInfoCallback,
+    DescribeBindingPolicyObjectListInstanceGroup: DescribeBindingPolicyObjectListInstanceGroup,
     DescribePolicyConditionListResponse: DescribePolicyConditionListResponse,
     DescribePolicyConditionListConfigManualCalcType: DescribePolicyConditionListConfigManualCalcType,
     UnBindingAllPolicyObjectRequest: UnBindingAllPolicyObjectRequest,
     PutMonitorDataResponse: PutMonitorDataResponse,
     ReceiverInfo: ReceiverInfo,
+    ModifyAlarmReceiversRequest: ModifyAlarmReceiversRequest,
     DescribeProductEventListDimensions: DescribeProductEventListDimensions,
     DescribePolicyGroupInfoResponse: DescribePolicyGroupInfoResponse,
     DescribeBasicAlarmListResponse: DescribeBasicAlarmListResponse,
-    ModifyAlarmReceiversRequest: ModifyAlarmReceiversRequest,
+    DescribeBindingPolicyObjectListDimension: DescribeBindingPolicyObjectListDimension,
     DescribePolicyGroupInfoCondition: DescribePolicyGroupInfoCondition,
     UnBindingPolicyObjectResponse: UnBindingPolicyObjectResponse,
     GetMonitorDataResponse: GetMonitorDataResponse,

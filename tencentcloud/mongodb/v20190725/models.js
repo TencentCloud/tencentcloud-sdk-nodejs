@@ -1387,7 +1387,7 @@ class BackupFile extends  AbstractModel {
         super();
 
         /**
-         * 备份文件所属的副本集/分片id
+         * 备份文件所属的副本集/分片ID
          * @type {string || null}
          */
         this.ReplicateSetId = null;

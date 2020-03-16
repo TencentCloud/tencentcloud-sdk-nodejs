@@ -114,6 +114,12 @@ class DeleteUserRequest extends  AbstractModel {
          */
         this.Name = null;
 
+        /**
+         * 是否强制删除该子用户，默认入参为0。0：若该用户存在未删除API密钥，则不删除用户；1：若该用户存在未删除API密钥，则先删除密钥后删除用户。删除密钥需要您拥有cam:DeleteApiKey权限，您将可以删除该用户下启用或禁用状态的所有密钥，无权限则删除密钥和用户失败
+         * @type {number || null}
+         */
+        this.Force = null;
+
     }
 
     /**
@@ -124,6 +130,7 @@ class DeleteUserRequest extends  AbstractModel {
             return;
         }
         this.Name = 'Name' in params ? params.Name : null;
+        this.Force = 'Force' in params ? params.Force : null;
 
     }
 }
@@ -1231,6 +1238,13 @@ class RoleInfo extends  AbstractModel {
          */
         this.RoleType = null;
 
+        /**
+         * 有效时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.SessionDuration = null;
+
     }
 
     /**
@@ -1248,6 +1262,7 @@ class RoleInfo extends  AbstractModel {
         this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
         this.ConsoleLogin = 'ConsoleLogin' in params ? params.ConsoleLogin : null;
         this.RoleType = 'RoleType' in params ? params.RoleType : null;
+        this.SessionDuration = 'SessionDuration' in params ? params.SessionDuration : null;
 
     }
 }
@@ -1473,6 +1488,13 @@ class StrategyInfo extends  AbstractModel {
          */
         this.Deactived = null;
 
+        /**
+         * 已下线产品列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
+         */
+        this.DeactivedDetail = null;
+
     }
 
     /**
@@ -1492,6 +1514,7 @@ class StrategyInfo extends  AbstractModel {
         this.ServiceType = 'ServiceType' in params ? params.ServiceType : null;
         this.IsAttached = 'IsAttached' in params ? params.IsAttached : null;
         this.Deactived = 'Deactived' in params ? params.Deactived : null;
+        this.DeactivedDetail = 'DeactivedDetail' in params ? params.DeactivedDetail : null;
 
     }
 }
@@ -2274,6 +2297,13 @@ class AttachPolicyInfo extends  AbstractModel {
          */
         this.Deactived = null;
 
+        /**
+         * 已下线的产品列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
+         */
+        this.DeactivedDetail = null;
+
     }
 
     /**
@@ -2293,6 +2323,7 @@ class AttachPolicyInfo extends  AbstractModel {
         this.OperateUin = 'OperateUin' in params ? params.OperateUin : null;
         this.OperateUinType = 'OperateUinType' in params ? params.OperateUinType : null;
         this.Deactived = 'Deactived' in params ? params.Deactived : null;
+        this.DeactivedDetail = 'DeactivedDetail' in params ? params.DeactivedDetail : null;
 
     }
 }
@@ -3392,11 +3423,18 @@ class AttachedPolicyOfRole extends  AbstractModel {
         this.CreateMode = null;
 
         /**
-         * 是否已下线
+         * 是否已下线(0:否 1:是)
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.Deactived = null;
+
+        /**
+         * 已下线的产品列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
+         */
+        this.DeactivedDetail = null;
 
     }
 
@@ -3413,6 +3451,7 @@ class AttachedPolicyOfRole extends  AbstractModel {
         this.PolicyType = 'PolicyType' in params ? params.PolicyType : null;
         this.CreateMode = 'CreateMode' in params ? params.CreateMode : null;
         this.Deactived = 'Deactived' in params ? params.Deactived : null;
+        this.DeactivedDetail = 'DeactivedDetail' in params ? params.DeactivedDetail : null;
 
     }
 }
@@ -3651,6 +3690,12 @@ class CreateRoleRequest extends  AbstractModel {
          */
         this.ConsoleLogin = null;
 
+        /**
+         * 申请角色临时密钥的最长有效期限制(范围：0~43200)
+         * @type {number || null}
+         */
+        this.SessionDuration = null;
+
     }
 
     /**
@@ -3664,6 +3709,7 @@ class CreateRoleRequest extends  AbstractModel {
         this.PolicyDocument = 'PolicyDocument' in params ? params.PolicyDocument : null;
         this.Description = 'Description' in params ? params.Description : null;
         this.ConsoleLogin = 'ConsoleLogin' in params ? params.ConsoleLogin : null;
+        this.SessionDuration = 'SessionDuration' in params ? params.SessionDuration : null;
 
     }
 }

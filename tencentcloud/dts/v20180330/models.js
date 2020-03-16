@@ -1163,6 +1163,13 @@ class MigrateStepDetailInfo extends  AbstractModel {
          */
         this.Status = null;
 
+        /**
+         * 当前步骤开始的时间，格式为"yyyy-mm-dd hh:mm:ss"，该字段不存在或者为空是无意义
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
     }
 
     /**
@@ -1176,6 +1183,7 @@ class MigrateStepDetailInfo extends  AbstractModel {
         this.StepName = 'StepName' in params ? params.StepName : null;
         this.StepId = 'StepId' in params ? params.StepId : null;
         this.Status = 'Status' in params ? params.Status : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
 
     }
 }

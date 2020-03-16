@@ -43,6 +43,7 @@ const DescribeLiveDelayInfoListRequest = models.DescribeLiveDelayInfoListRequest
 const DomainCertInfo = models.DomainCertInfo;
 const RecordTemplateInfo = models.RecordTemplateInfo;
 const DeleteLiveTranscodeRuleResponse = models.DeleteLiveTranscodeRuleResponse;
+const ConcurrentRecordStreamNum = models.ConcurrentRecordStreamNum;
 const DescribeStreamPlayInfoListResponse = models.DescribeStreamPlayInfoListResponse;
 const DescribeScreenShotSheetNumListResponse = models.DescribeScreenShotSheetNumListResponse;
 const ModifyLiveSnapshotTemplateResponse = models.ModifyLiveSnapshotTemplateResponse;
@@ -71,7 +72,7 @@ const StreamOnlineInfo = models.StreamOnlineInfo;
 const CreateLiveWatermarkRuleResponse = models.CreateLiveWatermarkRuleResponse;
 const ForbidLiveStreamRequest = models.ForbidLiveStreamRequest;
 const PlayCodeTotalInfo = models.PlayCodeTotalInfo;
-const AddLiveWatermarkRequest = models.AddLiveWatermarkRequest;
+const DescribeConcurrentRecordStreamNumResponse = models.DescribeConcurrentRecordStreamNumResponse;
 const ModifyLiveRecordTemplateResponse = models.ModifyLiveRecordTemplateResponse;
 const ModifyLivePlayDomainRequest = models.ModifyLivePlayDomainRequest;
 const DeleteLiveRecordTemplateResponse = models.DeleteLiveRecordTemplateResponse;
@@ -98,7 +99,7 @@ const DayStreamPlayInfo = models.DayStreamPlayInfo;
 const ModifyPullStreamStatusResponse = models.ModifyPullStreamStatusResponse;
 const ModifyLivePlayDomainResponse = models.ModifyLivePlayDomainResponse;
 const DescribeScreenShotSheetNumListRequest = models.DescribeScreenShotSheetNumListRequest;
-const DescribePlayErrorCodeSumInfoListRequest = models.DescribePlayErrorCodeSumInfoListRequest;
+const AddLiveWatermarkRequest = models.AddLiveWatermarkRequest;
 const DescribeLiveCertsResponse = models.DescribeLiveCertsResponse;
 const DescribeProvinceIspPlayInfoListResponse = models.DescribeProvinceIspPlayInfoListResponse;
 const DescribeLiveRecordTemplatesResponse = models.DescribeLiveRecordTemplatesResponse;
@@ -178,6 +179,8 @@ const DescribeLiveCallbackRulesRequest = models.DescribeLiveCallbackRulesRequest
 const ClientIpPlaySumInfo = models.ClientIpPlaySumInfo;
 const DescribeLiveTranscodeTemplateResponse = models.DescribeLiveTranscodeTemplateResponse;
 const CreateLiveSnapshotTemplateResponse = models.CreateLiveSnapshotTemplateResponse;
+const DescribeConcurrentRecordStreamNumRequest = models.DescribeConcurrentRecordStreamNumRequest;
+const DescribePlayErrorCodeSumInfoListRequest = models.DescribePlayErrorCodeSumInfoListRequest;
 const ModifyLiveCertRequest = models.ModifyLiveCertRequest;
 const DescribeProIspPlaySumInfoListRequest = models.DescribeProIspPlaySumInfoListRequest;
 const UnBindLiveDomainCertResponse = models.UnBindLiveDomainCertResponse;
@@ -286,6 +289,17 @@ class LiveClient extends AbstractClient {
     DescribeLiveWatermarks(req, cb) {
         let resp = new DescribeLiveWatermarksResponse();
         this.request("DescribeLiveWatermarks", req, resp, cb);
+    }
+
+    /**
+     * 查询并发录制路数，对慢直播和普通直播适用。
+     * @param {DescribeConcurrentRecordStreamNumRequest} req
+     * @param {function(string, DescribeConcurrentRecordStreamNumResponse):void} cb
+     * @public
+     */
+    DescribeConcurrentRecordStreamNum(req, cb) {
+        let resp = new DescribeConcurrentRecordStreamNumResponse();
+        this.request("DescribeConcurrentRecordStreamNum", req, resp, cb);
     }
 
     /**

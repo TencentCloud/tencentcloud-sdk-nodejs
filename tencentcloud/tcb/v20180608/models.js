@@ -350,8 +350,8 @@ class AuthDomain extends  AbstractModel {
 
         /**
          * 域名类型。包含以下取值：
-<li>system</li>
-<li>user</li>
+<li>SYSTEM</li>
+<li>USER</li>
          * @type {string || null}
          */
         this.Type = null;

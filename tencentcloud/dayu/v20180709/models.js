@@ -1594,6 +1594,34 @@ class ModifyCCThresholdResponse extends  AbstractModel {
 }
 
 /**
+ * ModifyNetReturnSwitch返回参数结构体
+ * @class
+ */
+class ModifyNetReturnSwitchResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeActionLog请求参数结构体
  * @class
  */
@@ -5380,6 +5408,55 @@ class ModifyL4RulesRequest extends  AbstractModel {
 }
 
 /**
+ * ModifyNetReturnSwitch请求参数结构体
+ * @class
+ */
+class ModifyNetReturnSwitchRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 大禹子产品代号（net表示高防IP专业版）
+         * @type {string || null}
+         */
+        this.Business = null;
+
+        /**
+         * 资源实例ID
+         * @type {string || null}
+         */
+        this.Id = null;
+
+        /**
+         * Status 表示回切开关，0: 关闭， 1:打开
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * 回切时长，单位：小时，取值[0,1,2,3,4,5,6;]当status=1时必选填写Hour>0
+         * @type {number || null}
+         */
+        this.Hour = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Business = 'Business' in params ? params.Business : null;
+        this.Id = 'Id' in params ? params.Id : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.Hour = 'Hour' in params ? params.Hour : null;
+
+    }
+}
+
+/**
  * DescribeDDoSIpLog请求参数结构体
  * @class
  */
@@ -5760,6 +5837,34 @@ class CreateBasicDDoSAlarmThresholdResponse extends  AbstractModel {
         }
         this.AlarmThreshold = 'AlarmThreshold' in params ? params.AlarmThreshold : null;
         this.AlarmType = 'AlarmType' in params ? params.AlarmType : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CreateNetReturn返回参数结构体
+ * @class
+ */
+class CreateNetReturnResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -7573,6 +7678,41 @@ class ModifyDDoSSwitchRequest extends  AbstractModel {
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
         this.IPRegion = 'IPRegion' in params ? params.IPRegion : null;
         this.Status = 'Status' in params ? params.Status : null;
+
+    }
+}
+
+/**
+ * CreateNetReturn请求参数结构体
+ * @class
+ */
+class CreateNetReturnRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 大禹子产品代号（net表示高防IP专业版）
+         * @type {string || null}
+         */
+        this.Business = null;
+
+        /**
+         * 资源实例ID
+         * @type {string || null}
+         */
+        this.Id = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Business = 'Business' in params ? params.Business : null;
+        this.Id = 'Id' in params ? params.Id : null;
 
     }
 }
@@ -11717,7 +11857,12 @@ class DDoSPolicyPacketFilter extends  AbstractModel {
         this.PktlenMax = null;
 
         /**
-         * 是否检测载荷，取值范围[begin_l5(表示检测), no_match(表示不检测)]
+         * 是否检测载荷，取值范围[
+begin_l3(IP头)
+begin_l4(TCP头)
+begin_l5(载荷)
+no_match(不检测)
+]
          * @type {string || null}
          */
         this.MatchBegin = null;
@@ -12675,6 +12820,7 @@ module.exports = {
     ModifyDDoSAlarmThresholdRequest: ModifyDDoSAlarmThresholdRequest,
     CreateDDoSPolicyRequest: CreateDDoSPolicyRequest,
     ModifyCCThresholdResponse: ModifyCCThresholdResponse,
+    ModifyNetReturnSwitchResponse: ModifyNetReturnSwitchResponse,
     DescribeActionLogRequest: DescribeActionLogRequest,
     CreateL7RuleCertRequest: CreateL7RuleCertRequest,
     DescribePcapResponse: DescribePcapResponse,
@@ -12743,6 +12889,7 @@ module.exports = {
     L4RuleEntry: L4RuleEntry,
     DescribeL4HealthConfigRequest: DescribeL4HealthConfigRequest,
     ModifyL4RulesRequest: ModifyL4RulesRequest,
+    ModifyNetReturnSwitchRequest: ModifyNetReturnSwitchRequest,
     DescribeDDoSIpLogRequest: DescribeDDoSIpLogRequest,
     CreateL7RulesRequest: CreateL7RulesRequest,
     CreateL4RulesRequest: CreateL4RulesRequest,
@@ -12751,6 +12898,7 @@ module.exports = {
     DescribeL4RulesErrHealthRequest: DescribeL4RulesErrHealthRequest,
     L4RuleSource: L4RuleSource,
     CreateBasicDDoSAlarmThresholdResponse: CreateBasicDDoSAlarmThresholdResponse,
+    CreateNetReturnResponse: CreateNetReturnResponse,
     DeleteL4RulesRequest: DeleteL4RulesRequest,
     ModifyCCAlarmThresholdResponse: ModifyCCAlarmThresholdResponse,
     CreateL7HealthConfigRequest: CreateL7HealthConfigRequest,
@@ -12785,6 +12933,7 @@ module.exports = {
     CreateL7RulesResponse: CreateL7RulesResponse,
     BaradData: BaradData,
     ModifyDDoSSwitchRequest: ModifyDDoSSwitchRequest,
+    CreateNetReturnRequest: CreateNetReturnRequest,
     ModifyDDoSAIStatusRequest: ModifyDDoSAIStatusRequest,
     DescribeResourceListResponse: DescribeResourceListResponse,
     ModifyCCThresholdRequest: ModifyCCThresholdRequest,

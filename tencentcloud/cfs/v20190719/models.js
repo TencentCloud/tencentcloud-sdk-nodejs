@@ -1027,6 +1027,12 @@ class FileSystemInfo extends  AbstractModel {
          */
         this.KmsKeyId = null;
 
+        /**
+         * 应用ID
+         * @type {number || null}
+         */
+        this.AppId = null;
+
     }
 
     /**
@@ -1057,6 +1063,7 @@ class FileSystemInfo extends  AbstractModel {
         this.FsName = 'FsName' in params ? params.FsName : null;
         this.Encrypted = 'Encrypted' in params ? params.Encrypted : null;
         this.KmsKeyId = 'KmsKeyId' in params ? params.KmsKeyId : null;
+        this.AppId = 'AppId' in params ? params.AppId : null;
 
     }
 }

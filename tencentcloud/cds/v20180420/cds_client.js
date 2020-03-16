@@ -29,6 +29,8 @@ const DescribeDbauditInstancesResponse = models.DescribeDbauditInstancesResponse
 const DbauditTypesInfo = models.DbauditTypesInfo;
 const DescribeDbauditUsedRegionsRequest = models.DescribeDbauditUsedRegionsRequest;
 const InquiryPriceDbauditInstanceRequest = models.InquiryPriceDbauditInstanceRequest;
+const DescribeDasbImageIdsResponse = models.DescribeDasbImageIdsResponse;
+const DescribeDasbImageIdsRequest = models.DescribeDasbImageIdsRequest;
 
 
 /**
@@ -42,14 +44,14 @@ class CdsClient extends AbstractClient {
     }
     
     /**
-     * 本接口 (DescribeDbauditInstanceType) 用于查询可售卖的产品规格列表。
-     * @param {DescribeDbauditInstanceTypeRequest} req
-     * @param {function(string, DescribeDbauditInstanceTypeResponse):void} cb
+     * 获取镜像列表
+     * @param {DescribeDasbImageIdsRequest} req
+     * @param {function(string, DescribeDasbImageIdsResponse):void} cb
      * @public
      */
-    DescribeDbauditInstanceType(req, cb) {
-        let resp = new DescribeDbauditInstanceTypeResponse();
-        this.request("DescribeDbauditInstanceType", req, resp, cb);
+    DescribeDasbImageIds(req, cb) {
+        let resp = new DescribeDasbImageIdsResponse();
+        this.request("DescribeDasbImageIds", req, resp, cb);
     }
 
     /**
@@ -94,6 +96,17 @@ class CdsClient extends AbstractClient {
     DescribeDbauditUsedRegions(req, cb) {
         let resp = new DescribeDbauditUsedRegionsResponse();
         this.request("DescribeDbauditUsedRegions", req, resp, cb);
+    }
+
+    /**
+     * 本接口 (DescribeDbauditInstanceType) 用于查询可售卖的产品规格列表。
+     * @param {DescribeDbauditInstanceTypeRequest} req
+     * @param {function(string, DescribeDbauditInstanceTypeResponse):void} cb
+     * @public
+     */
+    DescribeDbauditInstanceType(req, cb) {
+        let resp = new DescribeDbauditInstanceTypeResponse();
+        this.request("DescribeDbauditInstanceType", req, resp, cb);
     }
 
 

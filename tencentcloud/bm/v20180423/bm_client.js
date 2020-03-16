@@ -74,7 +74,9 @@ const DescribeDeviceClassResponse = models.DescribeDeviceClassResponse;
 const DescribeDeviceHardwareInfoResponse = models.DescribeDeviceHardwareInfoResponse;
 const ModifyUserCmdRequest = models.ModifyUserCmdRequest;
 const DescribeDevicePriceInfoResponse = models.DescribeDevicePriceInfoResponse;
+const ReloadDeviceOsResponse = models.ReloadDeviceOsResponse;
 const RunUserCmdResponse = models.RunUserCmdResponse;
+const ReloadDeviceOsRequest = models.ReloadDeviceOsRequest;
 const DescribeUserCmdsRequest = models.DescribeUserCmdsRequest;
 const DescribeTaskInfoRequest = models.DescribeTaskInfoRequest;
 const RepairTaskControlResponse = models.RepairTaskControlResponse;
@@ -270,6 +272,17 @@ class BmClient extends AbstractClient {
     StartDevices(req, cb) {
         let resp = new StartDevicesResponse();
         this.request("StartDevices", req, resp, cb);
+    }
+
+    /**
+     * 重装操作系统
+     * @param {ReloadDeviceOsRequest} req
+     * @param {function(string, ReloadDeviceOsResponse):void} cb
+     * @public
+     */
+    ReloadDeviceOs(req, cb) {
+        let resp = new ReloadDeviceOsResponse();
+        this.request("ReloadDeviceOs", req, resp, cb);
     }
 
     /**

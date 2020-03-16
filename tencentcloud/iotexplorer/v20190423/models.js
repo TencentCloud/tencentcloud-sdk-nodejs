@@ -594,6 +594,13 @@ class ProductEntry extends  AbstractModel {
          */
         this.ModuleId = null;
 
+        /**
+         * 是否使用脚本进行二进制转json功能 可以取值 true / false
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.EnableProductScript = null;
+
     }
 
     /**
@@ -617,6 +624,7 @@ class ProductEntry extends  AbstractModel {
         this.ProductType = 'ProductType' in params ? params.ProductType : null;
         this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
         this.ModuleId = 'ModuleId' in params ? params.ModuleId : null;
+        this.EnableProductScript = 'EnableProductScript' in params ? params.EnableProductScript : null;
 
     }
 }
@@ -1559,6 +1567,12 @@ class ModifyStudioProductRequest extends  AbstractModel {
          */
         this.ModuleId = null;
 
+        /**
+         * 是否打开二进制转Json功能, 取值为字符串 true/false
+         * @type {string || null}
+         */
+        this.EnableProductScript = null;
+
     }
 
     /**
@@ -1572,6 +1586,7 @@ class ModifyStudioProductRequest extends  AbstractModel {
         this.ProductName = 'ProductName' in params ? params.ProductName : null;
         this.ProductDesc = 'ProductDesc' in params ? params.ProductDesc : null;
         this.ModuleId = 'ModuleId' in params ? params.ModuleId : null;
+        this.EnableProductScript = 'EnableProductScript' in params ? params.EnableProductScript : null;
 
     }
 }

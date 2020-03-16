@@ -16,13 +16,18 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
-const DescribeWorkersResponse = models.DescribeWorkersResponse;
+const DescribeWorkersInfoResponse = models.DescribeWorkersInfoResponse;
+const ModifyWorkersResponse = models.ModifyWorkersResponse;
+const StopGameResponse = models.StopGameResponse;
 const WorkerRegionInfo = models.WorkerRegionInfo;
 const TrylockWorkerResponse = models.TrylockWorkerResponse;
-const StopGameRequest = models.StopGameRequest;
-const StopGameResponse = models.StopGameResponse;
+const DescribeWorkersResponse = models.DescribeWorkersResponse;
+const ModifyWorkersRequest = models.ModifyWorkersRequest;
+const DescribeWorkersInfoRequest = models.DescribeWorkersInfoRequest;
 const CreateSessionResponse = models.CreateSessionResponse;
+const StopGameRequest = models.StopGameRequest;
 const TrylockWorkerRequest = models.TrylockWorkerRequest;
+const WorkerDetail = models.WorkerDetail;
 const CreateSessionRequest = models.CreateSessionRequest;
 const DescribeWorkersRequest = models.DescribeWorkersRequest;
 
@@ -49,17 +54,6 @@ class GsClient extends AbstractClient {
     }
 
     /**
-     * 创建会话
-     * @param {CreateSessionRequest} req
-     * @param {function(string, CreateSessionResponse):void} cb
-     * @public
-     */
-    CreateSession(req, cb) {
-        let resp = new CreateSessionResponse();
-        this.request("CreateSession", req, resp, cb);
-    }
-
-    /**
      * 强制退出游戏
      * @param {StopGameRequest} req
      * @param {function(string, StopGameResponse):void} cb
@@ -79,6 +73,39 @@ class GsClient extends AbstractClient {
     DescribeWorkers(req, cb) {
         let resp = new DescribeWorkersResponse();
         this.request("DescribeWorkers", req, resp, cb);
+    }
+
+    /**
+     * 获取机器信息
+     * @param {DescribeWorkersInfoRequest} req
+     * @param {function(string, DescribeWorkersInfoResponse):void} cb
+     * @public
+     */
+    DescribeWorkersInfo(req, cb) {
+        let resp = new DescribeWorkersInfoResponse();
+        this.request("DescribeWorkersInfo", req, resp, cb);
+    }
+
+    /**
+     * 创建会话
+     * @param {CreateSessionRequest} req
+     * @param {function(string, CreateSessionResponse):void} cb
+     * @public
+     */
+    CreateSession(req, cb) {
+        let resp = new CreateSessionResponse();
+        this.request("CreateSession", req, resp, cb);
+    }
+
+    /**
+     * 修改机器信息
+     * @param {ModifyWorkersRequest} req
+     * @param {function(string, ModifyWorkersResponse):void} cb
+     * @public
+     */
+    ModifyWorkers(req, cb) {
+        let resp = new ModifyWorkersResponse();
+        this.request("ModifyWorkers", req, resp, cb);
     }
 
 
