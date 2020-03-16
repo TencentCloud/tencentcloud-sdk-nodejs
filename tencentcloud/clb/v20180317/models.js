@@ -7737,6 +7737,20 @@ OPEN：公网属性， INTERNAL：内网属性。
          */
         this.SnatIps = null;
 
+        /**
+         * 性能保障规格
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.SlaType = null;
+
+        /**
+         * vip是否被封堵
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.IsBlock = null;
+
     }
 
     /**
@@ -7841,6 +7855,8 @@ OPEN：公网属性， INTERNAL：内网属性。
                 this.SnatIps.push(obj);
             }
         }
+        this.SlaType = 'SlaType' in params ? params.SlaType : null;
+        this.IsBlock = 'IsBlock' in params ? params.IsBlock : null;
 
     }
 }

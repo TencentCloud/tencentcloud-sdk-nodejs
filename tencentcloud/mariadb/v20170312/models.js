@@ -2436,6 +2436,12 @@ class SpecConfigInfo extends  AbstractModel {
          */
         this.NodeCount = null;
 
+        /**
+         * Cpu核数
+         * @type {number || null}
+         */
+        this.Cpu = null;
+
     }
 
     /**
@@ -2453,6 +2459,7 @@ class SpecConfigInfo extends  AbstractModel {
         this.Qps = 'Qps' in params ? params.Qps : null;
         this.Pid = 'Pid' in params ? params.Pid : null;
         this.NodeCount = 'NodeCount' in params ? params.NodeCount : null;
+        this.Cpu = 'Cpu' in params ? params.Cpu : null;
 
     }
 }
@@ -3148,6 +3155,12 @@ class DBInstance extends  AbstractModel {
          */
         this.IsEncryptSupported = null;
 
+        /**
+         * 实例CPU核数
+         * @type {number || null}
+         */
+        this.Cpu = null;
+
     }
 
     /**
@@ -3195,6 +3208,7 @@ class DBInstance extends  AbstractModel {
         this.IsAuditSupported = 'IsAuditSupported' in params ? params.IsAuditSupported : null;
         this.Machine = 'Machine' in params ? params.Machine : null;
         this.IsEncryptSupported = 'IsEncryptSupported' in params ? params.IsEncryptSupported : null;
+        this.Cpu = 'Cpu' in params ? params.Cpu : null;
 
     }
 }

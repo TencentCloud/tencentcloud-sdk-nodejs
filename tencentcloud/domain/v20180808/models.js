@@ -49,7 +49,7 @@ class CheckDomainResponse extends  AbstractModel {
         this.Premium = null;
 
         /**
-         * 价格
+         * 域名价格
          * @type {number || null}
          */
         this.Price = null;
@@ -59,6 +59,46 @@ class CheckDomainResponse extends  AbstractModel {
          * @type {boolean || null}
          */
         this.BlackWord = null;
+
+        /**
+         * 溢价词描述
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Describe = null;
+
+        /**
+         * 溢价词的续费价格
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.FeeRenew = null;
+
+        /**
+         * 域名真实价格
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.RealPrice = null;
+
+        /**
+         * 溢价词的转入价格
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.FeeTransfer = null;
+
+        /**
+         * 溢价词的赎回价格
+         * @type {number || null}
+         */
+        this.FeeRestore = null;
+
+        /**
+         * 检测年限
+         * @type {number || null}
+         */
+        this.Period = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -81,6 +121,12 @@ class CheckDomainResponse extends  AbstractModel {
         this.Premium = 'Premium' in params ? params.Premium : null;
         this.Price = 'Price' in params ? params.Price : null;
         this.BlackWord = 'BlackWord' in params ? params.BlackWord : null;
+        this.Describe = 'Describe' in params ? params.Describe : null;
+        this.FeeRenew = 'FeeRenew' in params ? params.FeeRenew : null;
+        this.RealPrice = 'RealPrice' in params ? params.RealPrice : null;
+        this.FeeTransfer = 'FeeTransfer' in params ? params.FeeTransfer : null;
+        this.FeeRestore = 'FeeRestore' in params ? params.FeeRestore : null;
+        this.Period = 'Period' in params ? params.Period : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -143,6 +189,12 @@ class CheckDomainRequest extends  AbstractModel {
          */
         this.DomainName = null;
 
+        /**
+         * 年限
+         * @type {string || null}
+         */
+        this.Period = null;
+
     }
 
     /**
@@ -153,6 +205,7 @@ class CheckDomainRequest extends  AbstractModel {
             return;
         }
         this.DomainName = 'DomainName' in params ? params.DomainName : null;
+        this.Period = 'Period' in params ? params.Period : null;
 
     }
 }
@@ -227,6 +280,18 @@ class DescribeDomainPriceListRequest extends  AbstractModel {
          */
         this.TldList = null;
 
+        /**
+         * 查询购买的年份，默认会列出所有年份的价格
+         * @type {Array.<number> || null}
+         */
+        this.Year = null;
+
+        /**
+         * 域名的购买类型：new  新购，renew 续费，redem 赎回，tran 转入
+         * @type {Array.<string> || null}
+         */
+        this.Operation = null;
+
     }
 
     /**
@@ -237,6 +302,8 @@ class DescribeDomainPriceListRequest extends  AbstractModel {
             return;
         }
         this.TldList = 'TldList' in params ? params.TldList : null;
+        this.Year = 'Year' in params ? params.Year : null;
+        this.Operation = 'Operation' in params ? params.Operation : null;
 
     }
 }

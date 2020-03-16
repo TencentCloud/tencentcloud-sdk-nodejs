@@ -43,6 +43,7 @@ const DeleteDirectConnectTunnelResponse = models.DeleteDirectConnectTunnelRespon
 const AccessPoint = models.AccessPoint;
 const DeleteDirectConnectRequest = models.DeleteDirectConnectRequest;
 const DescribeDirectConnectTunnelsResponse = models.DescribeDirectConnectTunnelsResponse;
+const Tag = models.Tag;
 const DirectConnectTunnel = models.DirectConnectTunnel;
 
 

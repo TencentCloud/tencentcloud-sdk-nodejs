@@ -505,6 +505,18 @@ zone - String - （过滤条件）可用区。
          */
         this.Limit = null;
 
+        /**
+         * 排序字段, 支持按“CreateTime”，“VlanId”
+         * @type {string || null}
+         */
+        this.OrderField = null;
+
+        /**
+         * 排序方向, “asc”、“desc”
+         * @type {string || null}
+         */
+        this.OrderDirection = null;
+
     }
 
     /**
@@ -526,6 +538,8 @@ zone - String - （过滤条件）可用区。
         }
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
+        this.OrderField = 'OrderField' in params ? params.OrderField : null;
+        this.OrderDirection = 'OrderDirection' in params ? params.OrderDirection : null;
 
     }
 }
@@ -991,7 +1005,7 @@ class SubnetInfo extends  AbstractModel {
         this.Type = null;
 
         /**
-         * 可用区ID。
+         * 子网可用区ID。
          * @type {number || null}
          */
         this.ZoneId = null;
@@ -1056,6 +1070,31 @@ class SubnetInfo extends  AbstractModel {
          */
         this.IsSmartNic = null;
 
+        /**
+         * 子网可用区。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Zone = null;
+
+        /**
+         * VPC所在可用区ID
+         * @type {number || null}
+         */
+        this.VpcZoneId = null;
+
+        /**
+         * VPC所在可用区
+         * @type {string || null}
+         */
+        this.VpcZone = null;
+
+        /**
+         * 是否开启广播，关闭为0，开启为1。
+         * @type {number || null}
+         */
+        this.BroadcastFlag = null;
+
     }
 
     /**
@@ -1083,6 +1122,10 @@ class SubnetInfo extends  AbstractModel {
         this.TotalIpNum = 'TotalIpNum' in params ? params.TotalIpNum : null;
         this.SubnetCreateTime = 'SubnetCreateTime' in params ? params.SubnetCreateTime : null;
         this.IsSmartNic = 'IsSmartNic' in params ? params.IsSmartNic : null;
+        this.Zone = 'Zone' in params ? params.Zone : null;
+        this.VpcZoneId = 'VpcZoneId' in params ? params.VpcZoneId : null;
+        this.VpcZone = 'VpcZone' in params ? params.VpcZone : null;
+        this.BroadcastFlag = 'BroadcastFlag' in params ? params.BroadcastFlag : null;
 
     }
 }
@@ -2449,6 +2492,25 @@ class VpnConnection extends  AbstractModel {
          */
         this.VpcName = null;
 
+        /**
+         * VPN网关名称
+         * @type {string || null}
+         */
+        this.VpnGatewayName = null;
+
+        /**
+         * 对端网关名称
+         * @type {string || null}
+         */
+        this.CustomerGatewayName = null;
+
+        /**
+         * IPSEC VPN通道路由策略
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
+         */
+        this.DestinationCidr = null;
+
     }
 
     /**
@@ -2492,6 +2554,9 @@ class VpnConnection extends  AbstractModel {
         this.Zone = 'Zone' in params ? params.Zone : null;
         this.VpcCidrBlock = 'VpcCidrBlock' in params ? params.VpcCidrBlock : null;
         this.VpcName = 'VpcName' in params ? params.VpcName : null;
+        this.VpnGatewayName = 'VpnGatewayName' in params ? params.VpnGatewayName : null;
+        this.CustomerGatewayName = 'CustomerGatewayName' in params ? params.CustomerGatewayName : null;
+        this.DestinationCidr = 'DestinationCidr' in params ? params.DestinationCidr : null;
 
     }
 }
@@ -3394,6 +3459,24 @@ class DescribeNatGatewaysRequest extends  AbstractModel {
          */
         this.Limit = null;
 
+        /**
+         * NAT所在可用区，形如：ap-guangzhou-2。
+         * @type {string || null}
+         */
+        this.Zone = null;
+
+        /**
+         * 排序字段, 支持"CreateTime"排序
+         * @type {string || null}
+         */
+        this.OrderField = null;
+
+        /**
+         * 排序方向, “asc”、“desc”
+         * @type {string || null}
+         */
+        this.OrderDirection = null;
+
     }
 
     /**
@@ -3409,6 +3492,9 @@ class DescribeNatGatewaysRequest extends  AbstractModel {
         this.VpcId = 'VpcId' in params ? params.VpcId : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Zone = 'Zone' in params ? params.Zone : null;
+        this.OrderField = 'OrderField' in params ? params.OrderField : null;
+        this.OrderDirection = 'OrderDirection' in params ? params.OrderDirection : null;
 
     }
 }
@@ -3633,6 +3719,30 @@ class DescribeVpnConnectionsRequest extends  AbstractModel {
          */
         this.Limit = null;
 
+        /**
+         * VPN网关实例ID
+         * @type {string || null}
+         */
+        this.VpnGatewayId = null;
+
+        /**
+         * VPN通道名称
+         * @type {string || null}
+         */
+        this.VpnConnectionName = null;
+
+        /**
+         * 排序字段, 支持"CreateTime"排序
+         * @type {string || null}
+         */
+        this.OrderField = null;
+
+        /**
+         * 排序方向, “asc”、“desc”
+         * @type {string || null}
+         */
+        this.OrderDirection = null;
+
     }
 
     /**
@@ -3654,6 +3764,10 @@ class DescribeVpnConnectionsRequest extends  AbstractModel {
         }
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
+        this.VpnGatewayId = 'VpnGatewayId' in params ? params.VpnGatewayId : null;
+        this.VpnConnectionName = 'VpnConnectionName' in params ? params.VpnConnectionName : null;
+        this.OrderField = 'OrderField' in params ? params.OrderField : null;
+        this.OrderDirection = 'OrderDirection' in params ? params.OrderDirection : null;
 
     }
 }
@@ -3953,6 +4067,18 @@ class DescribeVpnGatewaysRequest extends  AbstractModel {
          */
         this.Limit = null;
 
+        /**
+         * 排序字段, 支持"CreateTime"排序
+         * @type {string || null}
+         */
+        this.OrderField = null;
+
+        /**
+         * 排序方向, “asc”、“desc”
+         * @type {string || null}
+         */
+        this.OrderDirection = null;
+
     }
 
     /**
@@ -3974,6 +4100,8 @@ class DescribeVpnGatewaysRequest extends  AbstractModel {
         }
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
+        this.OrderField = 'OrderField' in params ? params.OrderField : null;
+        this.OrderDirection = 'OrderDirection' in params ? params.OrderDirection : null;
 
     }
 }
@@ -4053,7 +4181,7 @@ class NatGatewayInfo extends  AbstractModel {
         this.VpcName = null;
 
         /**
-         * 网关状态，其中0表示创建中，1表示运行中，2表示创建失败
+         * 网关创建状态，其中0表示创建中，1表示运行中，2表示创建失败
          * @type {number || null}
          */
         this.ProductionStatus = null;
@@ -4106,6 +4234,24 @@ class NatGatewayInfo extends  AbstractModel {
          */
         this.CreateTime = null;
 
+        /**
+         * 网关启用状态，1为禁用，0为启用。
+         * @type {number || null}
+         */
+        this.State = null;
+
+        /**
+         * 私有网络整型ID
+         * @type {number || null}
+         */
+        this.IntVpcId = null;
+
+        /**
+         * NAT资源ID
+         * @type {number || null}
+         */
+        this.NatResourceId = null;
+
     }
 
     /**
@@ -4128,6 +4274,9 @@ class NatGatewayInfo extends  AbstractModel {
         this.VpcCidrBlock = 'VpcCidrBlock' in params ? params.VpcCidrBlock : null;
         this.Type = 'Type' in params ? params.Type : null;
         this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.State = 'State' in params ? params.State : null;
+        this.IntVpcId = 'IntVpcId' in params ? params.IntVpcId : null;
+        this.NatResourceId = 'NatResourceId' in params ? params.NatResourceId : null;
 
     }
 }
@@ -4351,6 +4500,18 @@ class DescribeCustomerGatewaysRequest extends  AbstractModel {
          */
         this.Limit = null;
 
+        /**
+         * 排序字段, 支持"CreateTime"排序
+         * @type {string || null}
+         */
+        this.OrderField = null;
+
+        /**
+         * 排序方向, “asc”、“desc”
+         * @type {string || null}
+         */
+        this.OrderDirection = null;
+
     }
 
     /**
@@ -4372,6 +4533,8 @@ class DescribeCustomerGatewaysRequest extends  AbstractModel {
         }
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
+        this.OrderField = 'OrderField' in params ? params.OrderField : null;
+        this.OrderDirection = 'OrderDirection' in params ? params.OrderDirection : null;
 
     }
 }
@@ -4588,7 +4751,7 @@ class DescribeVpcResourceRequest extends  AbstractModel {
 vpc-id - String - （过滤条件）私有网络实例ID，形如：vpc-f49l6u0z。
 vpc-name - String - （过滤条件）私有网络名称。
 zone - String - （过滤条件）可用区。
-state - String - （过滤条件）VPC状态。
+state - String - （过滤条件）VPC状态。available: 运营中; pending: 创建中; failed: 创建失败; deleting: 删除中
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
@@ -4604,6 +4767,18 @@ state - String - （过滤条件）VPC状态。
          * @type {number || null}
          */
         this.Limit = null;
+
+        /**
+         * 排序字段
+         * @type {string || null}
+         */
+        this.OrderField = null;
+
+        /**
+         * 排序方向, “asc”、“desc”
+         * @type {string || null}
+         */
+        this.OrderDirection = null;
 
     }
 
@@ -4626,6 +4801,8 @@ state - String - （过滤条件）VPC状态。
         }
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
+        this.OrderField = 'OrderField' in params ? params.OrderField : null;
+        this.OrderDirection = 'OrderDirection' in params ? params.OrderDirection : null;
 
     }
 }
@@ -5159,6 +5336,12 @@ class IPSECOptionsSpecification extends  AbstractModel {
          */
         this.SecurityProto = null;
 
+        /**
+         * 报文封装模式:默认为Tunnel
+         * @type {string || null}
+         */
+        this.EncapMode = null;
+
     }
 
     /**
@@ -5174,6 +5357,7 @@ class IPSECOptionsSpecification extends  AbstractModel {
         this.IntegrityAlgorith = 'IntegrityAlgorith' in params ? params.IntegrityAlgorith : null;
         this.IPSECSaLifetimeSeconds = 'IPSECSaLifetimeSeconds' in params ? params.IPSECSaLifetimeSeconds : null;
         this.SecurityProto = 'SecurityProto' in params ? params.SecurityProto : null;
+        this.EncapMode = 'EncapMode' in params ? params.EncapMode : null;
 
     }
 }
@@ -5761,6 +5945,12 @@ class DescribeVpcPeerConnectionsRequest extends  AbstractModel {
          */
         this.Limit = null;
 
+        /**
+         * 私有网络ID
+         * @type {string || null}
+         */
+        this.VpcId = null;
+
     }
 
     /**
@@ -5782,6 +5972,7 @@ class DescribeVpcPeerConnectionsRequest extends  AbstractModel {
         }
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
 
     }
 }
@@ -6654,6 +6845,27 @@ class VpcResource extends  AbstractModel {
          */
         this.IsOld = null;
 
+        /**
+         * 云联网服务个数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.CcnServiceNum = null;
+
+        /**
+         * VPC允许创建的对等连接个数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.VpcPeerLimitToAllRegion = null;
+
+        /**
+         * VPC允许创建的同地域的对等连接的个数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.VpcPeerLimitToSameRegion = null;
+
     }
 
     /**
@@ -6683,6 +6895,9 @@ class VpcResource extends  AbstractModel {
         this.Zone = 'Zone' in params ? params.Zone : null;
         this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
         this.IsOld = 'IsOld' in params ? params.IsOld : null;
+        this.CcnServiceNum = 'CcnServiceNum' in params ? params.CcnServiceNum : null;
+        this.VpcPeerLimitToAllRegion = 'VpcPeerLimitToAllRegion' in params ? params.VpcPeerLimitToAllRegion : null;
+        this.VpcPeerLimitToSameRegion = 'VpcPeerLimitToSameRegion' in params ? params.VpcPeerLimitToSameRegion : null;
 
     }
 }

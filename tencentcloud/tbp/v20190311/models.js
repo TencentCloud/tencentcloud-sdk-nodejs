@@ -329,6 +329,48 @@ class TextResetResponse extends  AbstractModel {
 }
 
 /**
+ * CreateBot返回参数结构体
+ * @class
+ */
+class CreateBotResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 任务ID
+         * @type {string || null}
+         */
+        this.TaskRequestId = null;
+
+        /**
+         * 任务信息
+         * @type {string || null}
+         */
+        this.Msg = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskRequestId = 'TaskRequestId' in params ? params.TaskRequestId : null;
+        this.Msg = 'Msg' in params ? params.Msg : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * Reset返回参数结构体
  * @class
  */
@@ -436,6 +478,41 @@ class ResetResponse extends  AbstractModel {
 }
 
 /**
+ * CreateBot请求参数结构体
+ * @class
+ */
+class CreateBotRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 机器人名称
+         * @type {string || null}
+         */
+        this.BotName = null;
+
+        /**
+         * 机器人中文名称
+         * @type {string || null}
+         */
+        this.BotCnName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.BotName = 'BotName' in params ? params.BotName : null;
+        this.BotCnName = 'BotCnName' in params ? params.BotCnName : null;
+
+    }
+}
+
+/**
  * TextProcess请求参数结构体
  * @class
  */
@@ -497,7 +574,9 @@ module.exports = {
     TextResetRequest: TextResetRequest,
     ResetRequest: ResetRequest,
     TextResetResponse: TextResetResponse,
+    CreateBotResponse: CreateBotResponse,
     ResetResponse: ResetResponse,
+    CreateBotRequest: CreateBotRequest,
     TextProcessRequest: TextProcessRequest,
 
 }

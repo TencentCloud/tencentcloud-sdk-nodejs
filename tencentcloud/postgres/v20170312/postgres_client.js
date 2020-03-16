@@ -16,7 +16,6 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
-const CreateDBInstancesRequest = models.CreateDBInstancesRequest;
 const RestartDBInstanceRequest = models.RestartDBInstanceRequest;
 const InquiryPriceRenewDBInstanceRequest = models.InquiryPriceRenewDBInstanceRequest;
 const SetAutoRenewFlagRequest = models.SetAutoRenewFlagRequest;
@@ -30,7 +29,7 @@ const DescribeDBErrlogsResponse = models.DescribeDBErrlogsResponse;
 const InquiryPriceCreateDBInstancesRequest = models.InquiryPriceCreateDBInstancesRequest;
 const ModifyDBInstanceNameRequest = models.ModifyDBInstanceNameRequest;
 const InquiryPriceUpgradeDBInstanceResponse = models.InquiryPriceUpgradeDBInstanceResponse;
-const DescribeDBInstancesRequest = models.DescribeDBInstancesRequest;
+const InquiryPriceRenewDBInstanceResponse = models.InquiryPriceRenewDBInstanceResponse;
 const ErrLogDetail = models.ErrLogDetail;
 const ModifyAccountRemarkResponse = models.ModifyAccountRemarkResponse;
 const ModifyDBInstancesProjectResponse = models.ModifyDBInstancesProjectResponse;
@@ -41,25 +40,20 @@ const RegionInfo = models.RegionInfo;
 const InitDBInstancesRequest = models.InitDBInstancesRequest;
 const RestartDBInstanceResponse = models.RestartDBInstanceResponse;
 const SetAutoRenewFlagResponse = models.SetAutoRenewFlagResponse;
-const DescribeDBInstancesResponse = models.DescribeDBInstancesResponse;
-const UpgradeDBInstanceResponse = models.UpgradeDBInstanceResponse;
 const DBInstance = models.DBInstance;
 const DescribeProductConfigResponse = models.DescribeProductConfigResponse;
 const ResetAccountPasswordResponse = models.ResetAccountPasswordResponse;
 const ResetAccountPasswordRequest = models.ResetAccountPasswordRequest;
 const DescribeProductConfigRequest = models.DescribeProductConfigRequest;
-const CloseDBExtranetAccessRequest = models.CloseDBExtranetAccessRequest;
 const InitDBInstancesResponse = models.InitDBInstancesResponse;
 const DescribeDBBackupsRequest = models.DescribeDBBackupsRequest;
 const SpecItemInfo = models.SpecItemInfo;
-const OpenDBExtranetAccessResponse = models.OpenDBExtranetAccessResponse;
-const Filter = models.Filter;
 const RenewInstanceRequest = models.RenewInstanceRequest;
 const PgDeal = models.PgDeal;
 const DescribeRegionsResponse = models.DescribeRegionsResponse;
 const ZoneInfo = models.ZoneInfo;
 const DescribeAccountsResponse = models.DescribeAccountsResponse;
-const InquiryPriceRenewDBInstanceResponse = models.InquiryPriceRenewDBInstanceResponse;
+const OpenDBExtranetAccessRequest = models.OpenDBExtranetAccessRequest;
 const DescribeDBErrlogsRequest = models.DescribeDBErrlogsRequest;
 const DBBackup = models.DBBackup;
 const DBInstanceNetInfo = models.DBInstanceNetInfo;
@@ -69,18 +63,17 @@ const CloseDBExtranetAccessResponse = models.CloseDBExtranetAccessResponse;
 const SlowlogDetail = models.SlowlogDetail;
 const DescribeDBInstanceAttributeResponse = models.DescribeDBInstanceAttributeResponse;
 const DescribeDBSlowlogsRequest = models.DescribeDBSlowlogsRequest;
-const OpenDBExtranetAccessRequest = models.OpenDBExtranetAccessRequest;
+const OpenDBExtranetAccessResponse = models.OpenDBExtranetAccessResponse;
 const DescribeDBBackupsResponse = models.DescribeDBBackupsResponse;
 const DescribeRegionsRequest = models.DescribeRegionsRequest;
 const DescribeZonesResponse = models.DescribeZonesResponse;
 const NormalQueryItem = models.NormalQueryItem;
-const UpgradeDBInstanceRequest = models.UpgradeDBInstanceRequest;
 const DescribeDBXlogsResponse = models.DescribeDBXlogsResponse;
 const DescribeDBInstanceAttributeRequest = models.DescribeDBInstanceAttributeRequest;
 const DescribeOrdersRequest = models.DescribeOrdersRequest;
 const DescribeDBSlowlogsResponse = models.DescribeDBSlowlogsResponse;
 const ModifyAccountRemarkRequest = models.ModifyAccountRemarkRequest;
-const CreateDBInstancesResponse = models.CreateDBInstancesResponse;
+const CloseDBExtranetAccessRequest = models.CloseDBExtranetAccessRequest;
 const Xlog = models.Xlog;
 
 
@@ -139,14 +132,14 @@ class PostgresClient extends AbstractClient {
     }
 
     /**
-     * 本接口（RestartDBInstance）用于重启实例。
-     * @param {RestartDBInstanceRequest} req
-     * @param {function(string, RestartDBInstanceResponse):void} cb
+     * 本接口 (DescribeDBInstanceAttribute) 用于查询某个实例的详情信息。
+     * @param {DescribeDBInstanceAttributeRequest} req
+     * @param {function(string, DescribeDBInstanceAttributeResponse):void} cb
      * @public
      */
-    RestartDBInstance(req, cb) {
-        let resp = new RestartDBInstanceResponse();
-        this.request("RestartDBInstance", req, resp, cb);
+    DescribeDBInstanceAttribute(req, cb) {
+        let resp = new DescribeDBInstanceAttributeResponse();
+        this.request("DescribeDBInstanceAttribute", req, resp, cb);
     }
 
     /**
@@ -216,14 +209,14 @@ class PostgresClient extends AbstractClient {
     }
 
     /**
-     * 本接口 (DescribeDBInstanceAttribute) 用于查询某个实例的详情信息。
-     * @param {DescribeDBInstanceAttributeRequest} req
-     * @param {function(string, DescribeDBInstanceAttributeResponse):void} cb
+     * 本接口（RestartDBInstance）用于重启实例。
+     * @param {RestartDBInstanceRequest} req
+     * @param {function(string, RestartDBInstanceResponse):void} cb
      * @public
      */
-    DescribeDBInstanceAttribute(req, cb) {
-        let resp = new DescribeDBInstanceAttributeResponse();
-        this.request("DescribeDBInstanceAttribute", req, resp, cb);
+    RestartDBInstance(req, cb) {
+        let resp = new RestartDBInstanceResponse();
+        this.request("RestartDBInstance", req, resp, cb);
     }
 
     /**
@@ -238,17 +231,6 @@ class PostgresClient extends AbstractClient {
     }
 
     /**
-     * 本接口 (CreateDBInstances) 用于创建一个或者多个PostgreSQL实例。
-     * @param {CreateDBInstancesRequest} req
-     * @param {function(string, CreateDBInstancesResponse):void} cb
-     * @public
-     */
-    CreateDBInstances(req, cb) {
-        let resp = new CreateDBInstancesResponse();
-        this.request("CreateDBInstances", req, resp, cb);
-    }
-
-    /**
      * 本接口（RenewInstance）用于续费实例。
      * @param {RenewInstanceRequest} req
      * @param {function(string, RenewInstanceResponse):void} cb
@@ -257,17 +239,6 @@ class PostgresClient extends AbstractClient {
     RenewInstance(req, cb) {
         let resp = new RenewInstanceResponse();
         this.request("RenewInstance", req, resp, cb);
-    }
-
-    /**
-     * 本接口 (DescribeDBInstances) 用于查询一个或多个实例的详细信息。
-     * @param {DescribeDBInstancesRequest} req
-     * @param {function(string, DescribeDBInstancesResponse):void} cb
-     * @public
-     */
-    DescribeDBInstances(req, cb) {
-        let resp = new DescribeDBInstancesResponse();
-        this.request("DescribeDBInstances", req, resp, cb);
     }
 
     /**
@@ -345,17 +316,6 @@ class PostgresClient extends AbstractClient {
     DescribeAccounts(req, cb) {
         let resp = new DescribeAccountsResponse();
         this.request("DescribeAccounts", req, resp, cb);
-    }
-
-    /**
-     * 本接口（UpgradeDBInstance）用于升级实例。
-     * @param {UpgradeDBInstanceRequest} req
-     * @param {function(string, UpgradeDBInstanceResponse):void} cb
-     * @public
-     */
-    UpgradeDBInstance(req, cb) {
-        let resp = new UpgradeDBInstanceResponse();
-        this.request("UpgradeDBInstance", req, resp, cb);
     }
 
     /**

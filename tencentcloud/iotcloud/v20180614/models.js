@@ -179,7 +179,7 @@ class DescribeTasksRequest extends  AbstractModel {
         super();
 
         /**
-         * 偏移l量，从0开始
+         * 偏移量，从0开始
          * @type {number || null}
          */
         this.Offset = null;

@@ -2347,7 +2347,12 @@ class DrInfo extends  AbstractModel {
         this.Region = null;
 
         /**
-         * 实例同步状态
+         * 实例同步状态。可能的返回值为：
+0 - 灾备未同步；
+1 - 灾备同步中；
+2 - 灾备同步成功；
+3 - 灾备同步失败；
+4 - 灾备同步修复中。
          * @type {number || null}
          */
         this.SyncStatus = null;
@@ -7690,7 +7695,7 @@ class InstanceInfo extends  AbstractModel {
         this.RoVipInfo = null;
 
         /**
-         * 内存容量，单位为MB
+         * 内存容量，单位为 MB
          * @type {number || null}
          */
         this.Memory = null;
@@ -7702,7 +7707,7 @@ class InstanceInfo extends  AbstractModel {
         this.Status = null;
 
         /**
-         * 私有网络ID，例如：51102
+         * 私有网络 ID，例如：51102
          * @type {number || null}
          */
         this.VpcId = null;
@@ -7715,13 +7720,13 @@ class InstanceInfo extends  AbstractModel {
         this.SlaveInfo = null;
 
         /**
-         * 实例ID
+         * 实例 ID
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * 硬盘容量，单位为GB
+         * 硬盘容量，单位为 GB
          * @type {number || null}
          */
         this.Volume = null;
@@ -7746,7 +7751,7 @@ class InstanceInfo extends  AbstractModel {
         this.RoGroups = null;
 
         /**
-         * 子网ID，例如：2333
+         * 子网 ID，例如：2333
          * @type {number || null}
          */
         this.SubnetId = null;
@@ -7758,7 +7763,7 @@ class InstanceInfo extends  AbstractModel {
         this.InstanceType = null;
 
         /**
-         * 项目ID
+         * 项目 ID
          * @type {number || null}
          */
         this.ProjectId = null;
@@ -7844,7 +7849,7 @@ class InstanceInfo extends  AbstractModel {
         this.CreateTime = null;
 
         /**
-         * 实例IP
+         * 实例 IP
          * @type {string || null}
          */
         this.Vip = null;
@@ -7874,7 +7879,7 @@ class InstanceInfo extends  AbstractModel {
         this.UniqSubnetId = null;
 
         /**
-         * 物理ID
+         * 物理 ID
          * @type {string || null}
          */
         this.PhysicalId = null;
@@ -7905,11 +7910,18 @@ class InstanceInfo extends  AbstractModel {
         this.DeviceClass = null;
 
         /**
-         * 置放群组ID
+         * 置放群组 ID
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.DeployGroupId = null;
+
+        /**
+         * 可用区 ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.ZoneId = null;
 
     }
 
@@ -7991,6 +8003,7 @@ class InstanceInfo extends  AbstractModel {
         this.ZoneName = 'ZoneName' in params ? params.ZoneName : null;
         this.DeviceClass = 'DeviceClass' in params ? params.DeviceClass : null;
         this.DeployGroupId = 'DeployGroupId' in params ? params.DeployGroupId : null;
+        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
 
     }
 }
@@ -11233,7 +11246,7 @@ class ModifyRoGroupInfoRequest extends  AbstractModel {
         super();
 
         /**
-         * RO 组的实例 ID。
+         * RO 组的 ID。
          * @type {string || null}
          */
         this.RoGroupId = null;

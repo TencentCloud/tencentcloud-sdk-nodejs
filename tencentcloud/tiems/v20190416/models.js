@@ -405,13 +405,13 @@ class Scaler extends  AbstractModel {
         super();
 
         /**
-         * 最大副本数
+         * 最大副本数，ScaleMode 为 MANUAL 时辞会此值会被置为 StartReplicas 取值
          * @type {number || null}
          */
         this.MaxReplicas = null;
 
         /**
-         * 最小副本数
+         * 最小副本数，ScaleMode 为 MANUAL 时辞会此值会被置为 StartReplicas 取值
          * @type {number || null}
          */
         this.MinReplicas = null;
@@ -1254,6 +1254,18 @@ class UpdateRsgAsGroupRequest extends  AbstractModel {
          */
         this.Name = null;
 
+        /**
+         * 伸缩组最大节点数
+         * @type {number || null}
+         */
+        this.MaxSize = null;
+
+        /**
+         * 伸缩组最小节点数
+         * @type {number || null}
+         */
+        this.MinSize = null;
+
     }
 
     /**
@@ -1265,6 +1277,8 @@ class UpdateRsgAsGroupRequest extends  AbstractModel {
         }
         this.Id = 'Id' in params ? params.Id : null;
         this.Name = 'Name' in params ? params.Name : null;
+        this.MaxSize = 'MaxSize' in params ? params.MaxSize : null;
+        this.MinSize = 'MinSize' in params ? params.MinSize : null;
 
     }
 }
@@ -1685,6 +1699,13 @@ class Job extends  AbstractModel {
          */
         this.QuantizationInput = null;
 
+        /**
+         * Cls日志主题ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.LogTopicId = null;
+
     }
 
     /**
@@ -1733,6 +1754,7 @@ class Job extends  AbstractModel {
             obj.deserialize(params.QuantizationInput)
             this.QuantizationInput = obj;
         }
+        this.LogTopicId = 'LogTopicId' in params ? params.LogTopicId : null;
 
     }
 }
@@ -2326,6 +2348,13 @@ class JobStatus extends  AbstractModel {
          */
         this.Replicas = null;
 
+        /**
+         * 副本实例
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<ReplicaInfo> || null}
+         */
+        this.ReplicaInfos = null;
+
     }
 
     /**
@@ -2340,6 +2369,15 @@ class JobStatus extends  AbstractModel {
         this.DesiredWorkers = 'DesiredWorkers' in params ? params.DesiredWorkers : null;
         this.CurrentWorkers = 'CurrentWorkers' in params ? params.CurrentWorkers : null;
         this.Replicas = 'Replicas' in params ? params.Replicas : null;
+
+        if (params.ReplicaInfos) {
+            this.ReplicaInfos = new Array();
+            for (let z in params.ReplicaInfos) {
+                let obj = new ReplicaInfo();
+                obj.deserialize(params.ReplicaInfos[z]);
+                this.ReplicaInfos.push(obj);
+            }
+        }
 
     }
 }
@@ -3838,6 +3876,13 @@ class ModelService extends  AbstractModel {
          */
         this.GpuType = null;
 
+        /**
+         * Cls日志主题Id
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.LogTopicId = null;
+
     }
 
     /**
@@ -3890,6 +3935,7 @@ class ModelService extends  AbstractModel {
         this.ResourceGroupName = 'ResourceGroupName' in params ? params.ResourceGroupName : null;
         this.Description = 'Description' in params ? params.Description : null;
         this.GpuType = 'GpuType' in params ? params.GpuType : null;
+        this.LogTopicId = 'LogTopicId' in params ? params.LogTopicId : null;
 
     }
 }

@@ -59,7 +59,7 @@ class CreateLicenseResponse extends  AbstractModel {
 }
 
 /**
- * 设置加密秘钥所需的参数
+ * 设置加密密钥所需的参数
  * @class
  */
 class KeyParam extends  AbstractModel {

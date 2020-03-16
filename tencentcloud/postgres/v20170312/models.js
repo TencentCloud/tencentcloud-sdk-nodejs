@@ -17,118 +17,6 @@
 const AbstractModel = require("../../common/abstract_model");
 
 /**
- * CreateDBInstances请求参数结构体
- * @class
- */
-class CreateDBInstancesRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 售卖规格ID。该参数可以通过调用DescribeProductConfig的返回值中的SpecCode字段来获取。
-         * @type {string || null}
-         */
-        this.SpecCode = null;
-
-        /**
-         * PostgreSQL内核版本，目前只支持：9.3.5、9.5.4两种版本。
-         * @type {string || null}
-         */
-        this.DBVersion = null;
-
-        /**
-         * 实例容量大小，单位：GB。
-         * @type {number || null}
-         */
-        this.Storage = null;
-
-        /**
-         * 一次性购买的实例数量。取值1-100
-         * @type {number || null}
-         */
-        this.InstanceCount = null;
-
-        /**
-         * 购买时长，单位：月。目前只支持1,2,3,4,5,6,7,8,9,10,11,12,24,36这些值。
-         * @type {number || null}
-         */
-        this.Period = null;
-
-        /**
-         * 可用区ID。该参数可以通过调用 DescribeZones 接口的返回值中的Zone字段来获取。
-         * @type {string || null}
-         */
-        this.Zone = null;
-
-        /**
-         * 项目ID。
-         * @type {number || null}
-         */
-        this.ProjectId = null;
-
-        /**
-         * 实例计费类型。目前只支持：PREPAID（预付费，即包年包月）。
-         * @type {string || null}
-         */
-        this.InstanceChargeType = null;
-
-        /**
-         * 是否自动使用代金券。1（是），0（否），默认不使用。
-         * @type {number || null}
-         */
-        this.AutoVoucher = null;
-
-        /**
-         * 代金券ID列表，目前仅支持指定一张代金券。
-         * @type {Array.<string> || null}
-         */
-        this.VoucherIds = null;
-
-        /**
-         * 私有网络ID。
-         * @type {string || null}
-         */
-        this.VpcId = null;
-
-        /**
-         * 私有网络子网ID。
-         * @type {string || null}
-         */
-        this.SubnetId = null;
-
-        /**
-         * 续费标记：0-正常续费（默认）；1-自动续费；
-         * @type {number || null}
-         */
-        this.AutoRenewFlag = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.SpecCode = 'SpecCode' in params ? params.SpecCode : null;
-        this.DBVersion = 'DBVersion' in params ? params.DBVersion : null;
-        this.Storage = 'Storage' in params ? params.Storage : null;
-        this.InstanceCount = 'InstanceCount' in params ? params.InstanceCount : null;
-        this.Period = 'Period' in params ? params.Period : null;
-        this.Zone = 'Zone' in params ? params.Zone : null;
-        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
-        this.InstanceChargeType = 'InstanceChargeType' in params ? params.InstanceChargeType : null;
-        this.AutoVoucher = 'AutoVoucher' in params ? params.AutoVoucher : null;
-        this.VoucherIds = 'VoucherIds' in params ? params.VoucherIds : null;
-        this.VpcId = 'VpcId' in params ? params.VpcId : null;
-        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
-        this.AutoRenewFlag = 'AutoRenewFlag' in params ? params.AutoRenewFlag : null;
-
-    }
-}
-
-/**
  * RestartDBInstance请求参数结构体
  * @class
  */
@@ -740,30 +628,30 @@ class InquiryPriceUpgradeDBInstanceResponse extends  AbstractModel {
 }
 
 /**
- * DescribeDBInstances请求参数结构体
+ * InquiryPriceRenewDBInstance返回参数结构体
  * @class
  */
-class DescribeDBInstancesRequest extends  AbstractModel {
+class InquiryPriceRenewDBInstanceResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 过滤条件，目前支持：db-instance-id、db-instance-name两种。
-         * @type {Array.<Filter> || null}
-         */
-        this.Filters = null;
-
-        /**
-         * 每页显示数量，默认返回10条。
+         * 总费用，打折前的。比如24650表示246.5元
          * @type {number || null}
          */
-        this.Limit = null;
+        this.OriginalPrice = null;
 
         /**
-         * 分页序号，从0开始。
+         * 实际需要付款金额。比如24650表示246.5元
          * @type {number || null}
          */
-        this.Offset = null;
+        this.Price = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
 
     }
 
@@ -774,17 +662,9 @@ class DescribeDBInstancesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.Filters) {
-            this.Filters = new Array();
-            for (let z in params.Filters) {
-                let obj = new Filter();
-                obj.deserialize(params.Filters[z]);
-                this.Filters.push(obj);
-            }
-        }
-        this.Limit = 'Limit' in params ? params.Limit : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.OriginalPrice = 'OriginalPrice' in params ? params.OriginalPrice : null;
+        this.Price = 'Price' in params ? params.Price : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1176,91 +1056,6 @@ class SetAutoRenewFlagResponse extends  AbstractModel {
 }
 
 /**
- * DescribeDBInstances返回参数结构体
- * @class
- */
-class DescribeDBInstancesResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 查询到的实例数量。
-         * @type {number || null}
-         */
-        this.TotalCount = null;
-
-        /**
-         * 实例详细信息集合。
-         * @type {Array.<DBInstance> || null}
-         */
-        this.DBInstanceSet = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
-
-        if (params.DBInstanceSet) {
-            this.DBInstanceSet = new Array();
-            for (let z in params.DBInstanceSet) {
-                let obj = new DBInstance();
-                obj.deserialize(params.DBInstanceSet[z]);
-                this.DBInstanceSet.push(obj);
-            }
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * UpgradeDBInstance返回参数结构体
- * @class
- */
-class UpgradeDBInstanceResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 交易名字。
-         * @type {string || null}
-         */
-        this.DealName = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.DealName = 'DealName' in params ? params.DealName : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
  * 描述实例的详细信息
  * @class
  */
@@ -1599,34 +1394,6 @@ class DescribeProductConfigRequest extends  AbstractModel {
 }
 
 /**
- * CloseDBExtranetAccess请求参数结构体
- * @class
- */
-class CloseDBExtranetAccessRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 实例ID，形如postgres-6r233v55
-         * @type {string || null}
-         */
-        this.DBInstanceId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.DBInstanceId = 'DBInstanceId' in params ? params.DBInstanceId : null;
-
-    }
-}
-
-/**
  * InitDBInstances返回参数结构体
  * @class
  */
@@ -1811,78 +1578,6 @@ class SpecItemInfo extends  AbstractModel {
         this.Qps = 'Qps' in params ? params.Qps : null;
         this.Pid = 'Pid' in params ? params.Pid : null;
         this.Type = 'Type' in params ? params.Type : null;
-
-    }
-}
-
-/**
- * OpenDBExtranetAccess返回参数结构体
- * @class
- */
-class OpenDBExtranetAccessResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 异步任务流程ID
-         * @type {number || null}
-         */
-        this.FlowId = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.FlowId = 'FlowId' in params ? params.FlowId : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * 描述键值对过滤器，用于条件过滤查询。例如过滤ID、名称等
-* 若存在多个Filter时，Filter间的关系为逻辑与（AND）关系。
-* 若同一个Filter存在多个Values，同一Filter下Values间的关系为逻辑或（OR）关系。
- * @class
- */
-class Filter extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 过滤键的名称。
-         * @type {string || null}
-         */
-        this.Name = null;
-
-        /**
-         * 一个或者多个过滤值。
-         * @type {Array.<string> || null}
-         */
-        this.Values = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Name = 'Name' in params ? params.Name : null;
-        this.Values = 'Values' in params ? params.Values : null;
 
     }
 }
@@ -2149,30 +1844,18 @@ class DescribeAccountsResponse extends  AbstractModel {
 }
 
 /**
- * InquiryPriceRenewDBInstance返回参数结构体
+ * OpenDBExtranetAccess请求参数结构体
  * @class
  */
-class InquiryPriceRenewDBInstanceResponse extends  AbstractModel {
+class OpenDBExtranetAccessRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 总费用，打折前的。比如24650表示246.5元
-         * @type {number || null}
-         */
-        this.OriginalPrice = null;
-
-        /**
-         * 实际需要付款金额。比如24650表示246.5元
-         * @type {number || null}
-         */
-        this.Price = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * 实例ID，形如postgres-hez4fh0v
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.DBInstanceId = null;
 
     }
 
@@ -2183,9 +1866,7 @@ class InquiryPriceRenewDBInstanceResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.OriginalPrice = 'OriginalPrice' in params ? params.OriginalPrice : null;
-        this.Price = 'Price' in params ? params.Price : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.DBInstanceId = 'DBInstanceId' in params ? params.DBInstanceId : null;
 
     }
 }
@@ -2680,18 +2361,24 @@ class DescribeDBSlowlogsRequest extends  AbstractModel {
 }
 
 /**
- * OpenDBExtranetAccess请求参数结构体
+ * OpenDBExtranetAccess返回参数结构体
  * @class
  */
-class OpenDBExtranetAccessRequest extends  AbstractModel {
+class OpenDBExtranetAccessResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 实例ID，形如postgres-hez4fh0v
+         * 异步任务流程ID
+         * @type {number || null}
+         */
+        this.FlowId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.DBInstanceId = null;
+        this.RequestId = null;
 
     }
 
@@ -2702,7 +2389,8 @@ class OpenDBExtranetAccessRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.DBInstanceId = 'DBInstanceId' in params ? params.DBInstanceId : null;
+        this.FlowId = 'FlowId' in params ? params.FlowId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2955,62 +2643,6 @@ class NormalQueryItem extends  AbstractModel {
 }
 
 /**
- * UpgradeDBInstance请求参数结构体
- * @class
- */
-class UpgradeDBInstanceRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 升级后的实例内存大小，单位GB
-         * @type {number || null}
-         */
-        this.Memory = null;
-
-        /**
-         * 升级后的实例磁盘大小，单位GB
-         * @type {number || null}
-         */
-        this.Storage = null;
-
-        /**
-         * 实例ID，形如postgres-lnp6j617
-         * @type {string || null}
-         */
-        this.DBInstanceId = null;
-
-        /**
-         * 是否自动使用代金券,1是,0否，默认不使用
-         * @type {number || null}
-         */
-        this.AutoVoucher = null;
-
-        /**
-         * 代金券ID列表，目前仅支持指定一张代金券
-         * @type {Array.<string> || null}
-         */
-        this.VoucherIds = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Memory = 'Memory' in params ? params.Memory : null;
-        this.Storage = 'Storage' in params ? params.Storage : null;
-        this.DBInstanceId = 'DBInstanceId' in params ? params.DBInstanceId : null;
-        this.AutoVoucher = 'AutoVoucher' in params ? params.AutoVoucher : null;
-        this.VoucherIds = 'VoucherIds' in params ? params.VoucherIds : null;
-
-    }
-}
-
-/**
  * DescribeDBXlogs返回参数结构体
  * @class
  */
@@ -3206,24 +2838,18 @@ class ModifyAccountRemarkRequest extends  AbstractModel {
 }
 
 /**
- * CreateDBInstances返回参数结构体
+ * CloseDBExtranetAccess请求参数结构体
  * @class
  */
-class CreateDBInstancesResponse extends  AbstractModel {
+class CloseDBExtranetAccessRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 订单号列表。每个实例对应一个订单号。
-         * @type {Array.<string> || null}
-         */
-        this.DealNames = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * 实例ID，形如postgres-6r233v55
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.DBInstanceId = null;
 
     }
 
@@ -3234,8 +2860,7 @@ class CreateDBInstancesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.DealNames = 'DealNames' in params ? params.DealNames : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.DBInstanceId = 'DBInstanceId' in params ? params.DBInstanceId : null;
 
     }
 }
@@ -3297,7 +2922,6 @@ class Xlog extends  AbstractModel {
 }
 
 module.exports = {
-    CreateDBInstancesRequest: CreateDBInstancesRequest,
     RestartDBInstanceRequest: RestartDBInstanceRequest,
     InquiryPriceRenewDBInstanceRequest: InquiryPriceRenewDBInstanceRequest,
     SetAutoRenewFlagRequest: SetAutoRenewFlagRequest,
@@ -3311,7 +2935,7 @@ module.exports = {
     InquiryPriceCreateDBInstancesRequest: InquiryPriceCreateDBInstancesRequest,
     ModifyDBInstanceNameRequest: ModifyDBInstanceNameRequest,
     InquiryPriceUpgradeDBInstanceResponse: InquiryPriceUpgradeDBInstanceResponse,
-    DescribeDBInstancesRequest: DescribeDBInstancesRequest,
+    InquiryPriceRenewDBInstanceResponse: InquiryPriceRenewDBInstanceResponse,
     ErrLogDetail: ErrLogDetail,
     ModifyAccountRemarkResponse: ModifyAccountRemarkResponse,
     ModifyDBInstancesProjectResponse: ModifyDBInstancesProjectResponse,
@@ -3322,25 +2946,20 @@ module.exports = {
     InitDBInstancesRequest: InitDBInstancesRequest,
     RestartDBInstanceResponse: RestartDBInstanceResponse,
     SetAutoRenewFlagResponse: SetAutoRenewFlagResponse,
-    DescribeDBInstancesResponse: DescribeDBInstancesResponse,
-    UpgradeDBInstanceResponse: UpgradeDBInstanceResponse,
     DBInstance: DBInstance,
     DescribeProductConfigResponse: DescribeProductConfigResponse,
     ResetAccountPasswordResponse: ResetAccountPasswordResponse,
     ResetAccountPasswordRequest: ResetAccountPasswordRequest,
     DescribeProductConfigRequest: DescribeProductConfigRequest,
-    CloseDBExtranetAccessRequest: CloseDBExtranetAccessRequest,
     InitDBInstancesResponse: InitDBInstancesResponse,
     DescribeDBBackupsRequest: DescribeDBBackupsRequest,
     SpecItemInfo: SpecItemInfo,
-    OpenDBExtranetAccessResponse: OpenDBExtranetAccessResponse,
-    Filter: Filter,
     RenewInstanceRequest: RenewInstanceRequest,
     PgDeal: PgDeal,
     DescribeRegionsResponse: DescribeRegionsResponse,
     ZoneInfo: ZoneInfo,
     DescribeAccountsResponse: DescribeAccountsResponse,
-    InquiryPriceRenewDBInstanceResponse: InquiryPriceRenewDBInstanceResponse,
+    OpenDBExtranetAccessRequest: OpenDBExtranetAccessRequest,
     DescribeDBErrlogsRequest: DescribeDBErrlogsRequest,
     DBBackup: DBBackup,
     DBInstanceNetInfo: DBInstanceNetInfo,
@@ -3350,18 +2969,17 @@ module.exports = {
     SlowlogDetail: SlowlogDetail,
     DescribeDBInstanceAttributeResponse: DescribeDBInstanceAttributeResponse,
     DescribeDBSlowlogsRequest: DescribeDBSlowlogsRequest,
-    OpenDBExtranetAccessRequest: OpenDBExtranetAccessRequest,
+    OpenDBExtranetAccessResponse: OpenDBExtranetAccessResponse,
     DescribeDBBackupsResponse: DescribeDBBackupsResponse,
     DescribeRegionsRequest: DescribeRegionsRequest,
     DescribeZonesResponse: DescribeZonesResponse,
     NormalQueryItem: NormalQueryItem,
-    UpgradeDBInstanceRequest: UpgradeDBInstanceRequest,
     DescribeDBXlogsResponse: DescribeDBXlogsResponse,
     DescribeDBInstanceAttributeRequest: DescribeDBInstanceAttributeRequest,
     DescribeOrdersRequest: DescribeOrdersRequest,
     DescribeDBSlowlogsResponse: DescribeDBSlowlogsResponse,
     ModifyAccountRemarkRequest: ModifyAccountRemarkRequest,
-    CreateDBInstancesResponse: CreateDBInstancesResponse,
+    CloseDBExtranetAccessRequest: CloseDBExtranetAccessRequest,
     Xlog: Xlog,
 
 }

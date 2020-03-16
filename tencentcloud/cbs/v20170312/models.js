@@ -3602,6 +3602,12 @@ class Disk extends  AbstractModel {
          */
         this.SnapshotSize = null;
 
+        /**
+         * 云盘因欠费销毁或者期销毁时， 是否使用快照备份数据的标识。True， 销毁时创建快照进行数据备份。False 表示直接销毁，不进行数据备份。
+         * @type {boolean || null}
+         */
+        this.BackupDisk = null;
+
     }
 
     /**
@@ -3656,6 +3662,7 @@ class Disk extends  AbstractModel {
         this.InstanceIdList = 'InstanceIdList' in params ? params.InstanceIdList : null;
         this.SnapshotCount = 'SnapshotCount' in params ? params.SnapshotCount : null;
         this.SnapshotSize = 'SnapshotSize' in params ? params.SnapshotSize : null;
+        this.BackupDisk = 'BackupDisk' in params ? params.BackupDisk : null;
 
     }
 }

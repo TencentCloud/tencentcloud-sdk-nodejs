@@ -522,7 +522,7 @@ class ResourceInfo extends  AbstractModel {
         this.Status = null;
 
         /**
-         * 资源Ip
+         * 资源IP
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */

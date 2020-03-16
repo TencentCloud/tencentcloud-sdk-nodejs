@@ -385,6 +385,20 @@ class PriceResource extends  AbstractModel {
          */
         this.Tags = null;
 
+        /**
+         * 磁盘数量
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.DiskNum = null;
+
+        /**
+         * 本地盘的数量
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.LocalDiskNum = null;
+
     }
 
     /**
@@ -421,6 +435,8 @@ class PriceResource extends  AbstractModel {
                 this.Tags.push(obj);
             }
         }
+        this.DiskNum = 'DiskNum' in params ? params.DiskNum : null;
+        this.LocalDiskNum = 'LocalDiskNum' in params ? params.LocalDiskNum : null;
 
     }
 }
@@ -1639,7 +1655,7 @@ class Tag extends  AbstractModel {
 }
 
 /**
- * 描述集实例位置信息
+ * 描述集群实例位置信息
  * @class
  */
 class Placement extends  AbstractModel {
@@ -1647,7 +1663,7 @@ class Placement extends  AbstractModel {
         super();
 
         /**
-         * 实例所属项目ID。该参数可以通过调用 DescribeProject 的返回值中的 projectId 字段来获取。不填为默认项目。
+         * 实例所属项目ID。该参数可以通过调用 DescribeProject 的返回值中的 projectId 字段来获取。填0为默认项目。
          * @type {number || null}
          */
         this.ProjectId = null;
@@ -2133,6 +2149,13 @@ class ClusterInstancesInfo extends  AbstractModel {
          */
         this.HiveMetaDb = null;
 
+        /**
+         * 集群类型:EMR,CLICKHOUSE,DRUID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ServiceClass = null;
+
     }
 
     /**
@@ -2181,6 +2204,7 @@ class ClusterInstancesInfo extends  AbstractModel {
             }
         }
         this.HiveMetaDb = 'HiveMetaDb' in params ? params.HiveMetaDb : null;
+        this.ServiceClass = 'ServiceClass' in params ? params.ServiceClass : null;
 
     }
 }
@@ -2776,6 +2800,13 @@ class NodeHardwareInfo extends  AbstractModel {
          */
         this.Tags = null;
 
+        /**
+         * 是否是自动扩缩容节点，0为普通节点，1为自动扩缩容节点。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.AutoFlag = null;
+
     }
 
     /**
@@ -2841,6 +2872,7 @@ class NodeHardwareInfo extends  AbstractModel {
                 this.Tags.push(obj);
             }
         }
+        this.AutoFlag = 'AutoFlag' in params ? params.AutoFlag : null;
 
     }
 }

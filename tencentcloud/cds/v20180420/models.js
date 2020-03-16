@@ -203,6 +203,40 @@ class CdsAuditInstance extends  AbstractModel {
          */
         this.ExpireTime = null;
 
+        /**
+         * 实例名称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.InstanceName = null;
+
+        /**
+         * 实例公网IP
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.PublicIp = null;
+
+        /**
+         * 实例私网IP
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.PrivateIp = null;
+
+        /**
+         * 实例类型（版本）
+         * @type {string || null}
+         */
+        this.InstanceType = null;
+
+        /**
+         * 实例域名
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Pdomain = null;
+
     }
 
     /**
@@ -223,6 +257,11 @@ class CdsAuditInstance extends  AbstractModel {
         this.IsolatedTimestamp = 'IsolatedTimestamp' in params ? params.IsolatedTimestamp : null;
         this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
         this.ExpireTime = 'ExpireTime' in params ? params.ExpireTime : null;
+        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
+        this.PublicIp = 'PublicIp' in params ? params.PublicIp : null;
+        this.PrivateIp = 'PrivateIp' in params ? params.PrivateIp : null;
+        this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
+        this.Pdomain = 'Pdomain' in params ? params.Pdomain : null;
 
     }
 }
@@ -614,6 +653,69 @@ class InquiryPriceDbauditInstanceRequest extends  AbstractModel {
     }
 }
 
+/**
+ * DescribeDasbImageIds返回参数结构体
+ * @class
+ */
+class DescribeDasbImageIdsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 基础镜像ID
+         * @type {string || null}
+         */
+        this.BaseImageId = null;
+
+        /**
+         * AI镜像ID
+         * @type {string || null}
+         */
+        this.AiImageId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.BaseImageId = 'BaseImageId' in params ? params.BaseImageId : null;
+        this.AiImageId = 'AiImageId' in params ? params.AiImageId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeDasbImageIds请求参数结构体
+ * @class
+ */
+class DescribeDasbImageIdsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+    }
+}
+
 module.exports = {
     ModifyDbauditInstancesRenewFlagResponse: ModifyDbauditInstancesRenewFlagResponse,
     DescribeDbauditInstanceTypeResponse: DescribeDbauditInstanceTypeResponse,
@@ -628,5 +730,7 @@ module.exports = {
     DbauditTypesInfo: DbauditTypesInfo,
     DescribeDbauditUsedRegionsRequest: DescribeDbauditUsedRegionsRequest,
     InquiryPriceDbauditInstanceRequest: InquiryPriceDbauditInstanceRequest,
+    DescribeDasbImageIdsResponse: DescribeDasbImageIdsResponse,
+    DescribeDasbImageIdsRequest: DescribeDasbImageIdsRequest,
 
 }

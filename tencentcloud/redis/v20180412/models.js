@@ -5573,6 +5573,48 @@ class InstanceSet extends  AbstractModel {
          */
         this.NoAuth = null;
 
+        /**
+         * 客户端连接数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.ClientLimit = null;
+
+        /**
+         * DTS状态（内部参数，用户可忽略）
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.DtsStatus = null;
+
+        /**
+         * 分片带宽上限，单位MB
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.NetLimit = null;
+
+        /**
+         * 免密实例标识（内部参数，用户可忽略）
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.PasswordFree = null;
+
+        /**
+         * 实例只读标识（内部参数，用户可忽略）
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.ReadOnly = null;
+
+        /**
+         * 内部参数，用户可忽略
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Vip6 = null;
+
     }
 
     /**
@@ -5634,6 +5676,12 @@ class InstanceSet extends  AbstractModel {
         }
         this.ProjectName = 'ProjectName' in params ? params.ProjectName : null;
         this.NoAuth = 'NoAuth' in params ? params.NoAuth : null;
+        this.ClientLimit = 'ClientLimit' in params ? params.ClientLimit : null;
+        this.DtsStatus = 'DtsStatus' in params ? params.DtsStatus : null;
+        this.NetLimit = 'NetLimit' in params ? params.NetLimit : null;
+        this.PasswordFree = 'PasswordFree' in params ? params.PasswordFree : null;
+        this.ReadOnly = 'ReadOnly' in params ? params.ReadOnly : null;
+        this.Vip6 = 'Vip6' in params ? params.Vip6 : null;
 
     }
 }

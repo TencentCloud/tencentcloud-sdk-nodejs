@@ -1321,13 +1321,13 @@ class ListClsTopicDomainsRequest extends  AbstractModel {
         this.LogsetId = null;
 
         /**
-         * 主题ID
+         * 日志主题ID
          * @type {string || null}
          */
         this.TopicId = null;
 
         /**
-         * 接入渠道，默认值为cdn，后期可扩充dsa/ecdn等
+         * 接入渠道，默认值为cdn
          * @type {string || null}
          */
         this.Channel = null;

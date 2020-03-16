@@ -399,6 +399,19 @@ class DirectConnect extends  AbstractModel {
          */
         this.FaultReportContactNumber = null;
 
+        /**
+         * 标签键值对
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<Tag> || null}
+         */
+        this.TagSet = null;
+
+        /**
+         * 物理专线的接入点类型。
+         * @type {string || null}
+         */
+        this.AccessPointType = null;
+
     }
 
     /**
@@ -430,6 +443,16 @@ class DirectConnect extends  AbstractModel {
         this.ChargeType = 'ChargeType' in params ? params.ChargeType : null;
         this.FaultReportContactPerson = 'FaultReportContactPerson' in params ? params.FaultReportContactPerson : null;
         this.FaultReportContactNumber = 'FaultReportContactNumber' in params ? params.FaultReportContactNumber : null;
+
+        if (params.TagSet) {
+            this.TagSet = new Array();
+            for (let z in params.TagSet) {
+                let obj = new Tag();
+                obj.deserialize(params.TagSet[z]);
+                this.TagSet.push(obj);
+            }
+        }
+        this.AccessPointType = 'AccessPointType' in params ? params.AccessPointType : null;
 
     }
 }
@@ -1490,6 +1513,43 @@ class DescribeDirectConnectTunnelsResponse extends  AbstractModel {
 }
 
 /**
+ * 标签键值对
+ * @class
+ */
+class Tag extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 标签键
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Key = null;
+
+        /**
+         * 标签值
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Value = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Key = 'Key' in params ? params.Key : null;
+        this.Value = 'Value' in params ? params.Value : null;
+
+    }
+}
+
+/**
  * 专线通道信息列表
  * @class
  */
@@ -1544,7 +1604,7 @@ REJECTED:拒绝
         this.NetworkType = null;
 
         /**
-         * VPC地域
+         * VPC地域对应的网络名，如ap-guangzhou
          * @type {string || null}
          */
         this.NetworkRegion = null;
@@ -1615,6 +1675,54 @@ REJECTED:拒绝
          */
         this.Bandwidth = null;
 
+        /**
+         * 专线通道标签值
+         * @type {Array.<Tag> || null}
+         */
+        this.TagSet = null;
+
+        /**
+         * 关联的网络自定义探测ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.NetDetectId = null;
+
+        /**
+         * BGP community开关
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.EnableBGPCommunity = null;
+
+        /**
+         * 是否为Nat通道
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.NatType = null;
+
+        /**
+         * VPC地域简码，如gz、cd
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.VpcRegion = null;
+
+        /**
+         * 是否开启BFD
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.BfdEnable = null;
+
+        /**
+         * 专线通道接入点类型
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.AccessPointType = null;
+
     }
 
     /**
@@ -1656,6 +1764,21 @@ REJECTED:拒绝
         this.CreatedTime = 'CreatedTime' in params ? params.CreatedTime : null;
         this.Bandwidth = 'Bandwidth' in params ? params.Bandwidth : null;
 
+        if (params.TagSet) {
+            this.TagSet = new Array();
+            for (let z in params.TagSet) {
+                let obj = new Tag();
+                obj.deserialize(params.TagSet[z]);
+                this.TagSet.push(obj);
+            }
+        }
+        this.NetDetectId = 'NetDetectId' in params ? params.NetDetectId : null;
+        this.EnableBGPCommunity = 'EnableBGPCommunity' in params ? params.EnableBGPCommunity : null;
+        this.NatType = 'NatType' in params ? params.NatType : null;
+        this.VpcRegion = 'VpcRegion' in params ? params.VpcRegion : null;
+        this.BfdEnable = 'BfdEnable' in params ? params.BfdEnable : null;
+        this.AccessPointType = 'AccessPointType' in params ? params.AccessPointType : null;
+
     }
 }
 
@@ -1687,6 +1810,7 @@ module.exports = {
     AccessPoint: AccessPoint,
     DeleteDirectConnectRequest: DeleteDirectConnectRequest,
     DescribeDirectConnectTunnelsResponse: DescribeDirectConnectTunnelsResponse,
+    Tag: Tag,
     DirectConnectTunnel: DirectConnectTunnel,
 
 }

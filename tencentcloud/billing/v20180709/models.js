@@ -952,6 +952,24 @@ class BillResourceSummary extends  AbstractModel {
          */
         this.OperateUin = null;
 
+        /**
+         * 商品名称代码
+         * @type {string || null}
+         */
+        this.BusinessCode = null;
+
+        /**
+         * 子商品名称代码
+         * @type {string || null}
+         */
+        this.ProductCode = null;
+
+        /**
+         * 区域ID
+         * @type {number || null}
+         */
+        this.RegionId = null;
+
     }
 
     /**
@@ -999,6 +1017,9 @@ class BillResourceSummary extends  AbstractModel {
         this.PayerUin = 'PayerUin' in params ? params.PayerUin : null;
         this.OwnerUin = 'OwnerUin' in params ? params.OwnerUin : null;
         this.OperateUin = 'OperateUin' in params ? params.OperateUin : null;
+        this.BusinessCode = 'BusinessCode' in params ? params.BusinessCode : null;
+        this.ProductCode = 'ProductCode' in params ? params.ProductCode : null;
+        this.RegionId = 'RegionId' in params ? params.RegionId : null;
 
     }
 }
@@ -3258,6 +3279,13 @@ class BillDetail extends  AbstractModel {
          */
         this.ActionType = null;
 
+        /**
+         * 区域ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.RegionId = null;
+
     }
 
     /**
@@ -3305,6 +3333,7 @@ class BillDetail extends  AbstractModel {
         this.BusinessCode = 'BusinessCode' in params ? params.BusinessCode : null;
         this.ProductCode = 'ProductCode' in params ? params.ProductCode : null;
         this.ActionType = 'ActionType' in params ? params.ActionType : null;
+        this.RegionId = 'RegionId' in params ? params.RegionId : null;
 
     }
 }

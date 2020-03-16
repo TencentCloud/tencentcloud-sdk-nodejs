@@ -2323,6 +2323,20 @@ class Namespace extends  AbstractModel {
          */
         this.ClusterId = null;
 
+        /**
+         * 集群资源类型
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.NamespaceResourceType = null;
+
+        /**
+         * 命名空间类型
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.NamespaceType = null;
+
     }
 
     /**
@@ -2351,6 +2365,8 @@ class Namespace extends  AbstractModel {
             }
         }
         this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.NamespaceResourceType = 'NamespaceResourceType' in params ? params.NamespaceResourceType : null;
+        this.NamespaceType = 'NamespaceType' in params ? params.NamespaceType : null;
 
     }
 }

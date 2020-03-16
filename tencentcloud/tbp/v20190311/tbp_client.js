@@ -21,7 +21,9 @@ const SlotInfo = models.SlotInfo;
 const TextResetRequest = models.TextResetRequest;
 const ResetRequest = models.ResetRequest;
 const TextResetResponse = models.TextResetResponse;
+const CreateBotResponse = models.CreateBotResponse;
 const ResetResponse = models.ResetResponse;
+const CreateBotRequest = models.CreateBotRequest;
 const TextProcessRequest = models.TextProcessRequest;
 
 
@@ -44,6 +46,17 @@ class TbpClient extends AbstractClient {
     Reset(req, cb) {
         let resp = new ResetResponse();
         this.request("Reset", req, resp, cb);
+    }
+
+    /**
+     * 创建机器人
+     * @param {CreateBotRequest} req
+     * @param {function(string, CreateBotResponse):void} cb
+     * @public
+     */
+    CreateBot(req, cb) {
+        let resp = new CreateBotResponse();
+        this.request("CreateBot", req, resp, cb);
     }
 
     /**

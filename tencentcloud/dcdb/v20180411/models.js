@@ -217,6 +217,12 @@ class ParamDesc extends  AbstractModel {
          */
         this.Constraint = null;
 
+        /**
+         * 是否有设置过值，false:没有设置过值，true:有设置过值。
+         * @type {boolean || null}
+         */
+        this.HaveSetValue = null;
+
     }
 
     /**
@@ -236,6 +242,7 @@ class ParamDesc extends  AbstractModel {
             obj.deserialize(params.Constraint)
             this.Constraint = obj;
         }
+        this.HaveSetValue = 'HaveSetValue' in params ? params.HaveSetValue : null;
 
     }
 }
@@ -2107,6 +2114,12 @@ class DCDBInstanceInfo extends  AbstractModel {
          */
         this.IsAuditSupported = null;
 
+        /**
+         * Cpu核数
+         * @type {number || null}
+         */
+        this.Cpu = null;
+
     }
 
     /**
@@ -2162,6 +2175,7 @@ class DCDBInstanceInfo extends  AbstractModel {
         this.Locker = 'Locker' in params ? params.Locker : null;
         this.WanStatus = 'WanStatus' in params ? params.WanStatus : null;
         this.IsAuditSupported = 'IsAuditSupported' in params ? params.IsAuditSupported : null;
+        this.Cpu = 'Cpu' in params ? params.Cpu : null;
 
     }
 }
@@ -3029,6 +3043,12 @@ class ShardInfo extends  AbstractModel {
          */
         this.Pid = null;
 
+        /**
+         * Cpu核数
+         * @type {number || null}
+         */
+        this.Cpu = null;
+
     }
 
     /**
@@ -3047,6 +3067,7 @@ class ShardInfo extends  AbstractModel {
         this.ShardId = 'ShardId' in params ? params.ShardId : null;
         this.NodeCount = 'NodeCount' in params ? params.NodeCount : null;
         this.Pid = 'Pid' in params ? params.Pid : null;
+        this.Cpu = 'Cpu' in params ? params.Cpu : null;
 
     }
 }

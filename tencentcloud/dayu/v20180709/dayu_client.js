@@ -43,6 +43,7 @@ const IpBlackWhite = models.IpBlackWhite;
 const ModifyDDoSAlarmThresholdRequest = models.ModifyDDoSAlarmThresholdRequest;
 const CreateDDoSPolicyRequest = models.CreateDDoSPolicyRequest;
 const ModifyCCThresholdResponse = models.ModifyCCThresholdResponse;
+const ModifyNetReturnSwitchResponse = models.ModifyNetReturnSwitchResponse;
 const DescribeActionLogRequest = models.DescribeActionLogRequest;
 const CreateL7RuleCertRequest = models.CreateL7RuleCertRequest;
 const DescribePcapResponse = models.DescribePcapResponse;
@@ -111,6 +112,7 @@ const DescribleL4RulesRequest = models.DescribleL4RulesRequest;
 const L4RuleEntry = models.L4RuleEntry;
 const DescribeL4HealthConfigRequest = models.DescribeL4HealthConfigRequest;
 const ModifyL4RulesRequest = models.ModifyL4RulesRequest;
+const ModifyNetReturnSwitchRequest = models.ModifyNetReturnSwitchRequest;
 const DescribeDDoSIpLogRequest = models.DescribeDDoSIpLogRequest;
 const CreateL7RulesRequest = models.CreateL7RulesRequest;
 const CreateL4RulesRequest = models.CreateL4RulesRequest;
@@ -119,6 +121,7 @@ const ModifyCCFrequencyRulesStatusResponse = models.ModifyCCFrequencyRulesStatus
 const DescribeL4RulesErrHealthRequest = models.DescribeL4RulesErrHealthRequest;
 const L4RuleSource = models.L4RuleSource;
 const CreateBasicDDoSAlarmThresholdResponse = models.CreateBasicDDoSAlarmThresholdResponse;
+const CreateNetReturnResponse = models.CreateNetReturnResponse;
 const DeleteL4RulesRequest = models.DeleteL4RulesRequest;
 const ModifyCCAlarmThresholdResponse = models.ModifyCCAlarmThresholdResponse;
 const CreateL7HealthConfigRequest = models.CreateL7HealthConfigRequest;
@@ -153,6 +156,7 @@ const DescribeDDoSNetCountResponse = models.DescribeDDoSNetCountResponse;
 const CreateL7RulesResponse = models.CreateL7RulesResponse;
 const BaradData = models.BaradData;
 const ModifyDDoSSwitchRequest = models.ModifyDDoSSwitchRequest;
+const CreateNetReturnRequest = models.CreateNetReturnRequest;
 const ModifyDDoSAIStatusRequest = models.ModifyDDoSAIStatusRequest;
 const DescribeResourceListResponse = models.DescribeResourceListResponse;
 const ModifyCCThresholdRequest = models.ModifyCCThresholdRequest;
@@ -570,6 +574,17 @@ class DayuClient extends AbstractClient {
     }
 
     /**
+     * 在客户收攻击或者被封堵时，切回到源站，并设置回切的时长
+     * @param {ModifyNetReturnSwitchRequest} req
+     * @param {function(string, ModifyNetReturnSwitchResponse):void} cb
+     * @public
+     */
+    ModifyNetReturnSwitch(req, cb) {
+        let resp = new ModifyNetReturnSwitchResponse();
+        this.request("ModifyNetReturnSwitch", req, resp, cb);
+    }
+
+    /**
      * 获取回源IP段，支持的产品：高防IP，高防IP专业版；
      * @param {DescribeSourceIpSegmentRequest} req
      * @param {function(string, DescribeSourceIpSegmentResponse):void} cb
@@ -952,6 +967,17 @@ class DayuClient extends AbstractClient {
     DescribeDDoSTrend(req, cb) {
         let resp = new DescribeDDoSTrendResponse();
         this.request("DescribeDDoSTrend", req, resp, cb);
+    }
+
+    /**
+     * 高防IP专业版一键切回源站
+     * @param {CreateNetReturnRequest} req
+     * @param {function(string, CreateNetReturnResponse):void} cb
+     * @public
+     */
+    CreateNetReturn(req, cb) {
+        let resp = new CreateNetReturnResponse();
+        this.request("CreateNetReturn", req, resp, cb);
     }
 
     /**

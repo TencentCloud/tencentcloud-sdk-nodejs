@@ -122,6 +122,12 @@ class EvaluationRequest extends  AbstractModel {
          */
         this.RejectNonArithmeticImage = null;
 
+        /**
+         * 异步模式标识，0：同步模式，1：异步模式。默认为同步模式
+         * @type {number || null}
+         */
+        this.IsAsync = null;
+
     }
 
     /**
@@ -137,6 +143,7 @@ class EvaluationRequest extends  AbstractModel {
         this.Url = 'Url' in params ? params.Url : null;
         this.SupportHorizontalImage = 'SupportHorizontalImage' in params ? params.SupportHorizontalImage : null;
         this.RejectNonArithmeticImage = 'RejectNonArithmeticImage' in params ? params.RejectNonArithmeticImage : null;
+        this.IsAsync = 'IsAsync' in params ? params.IsAsync : null;
 
     }
 }
@@ -157,9 +164,16 @@ class EvaluationResponse extends  AbstractModel {
 
         /**
          * 识别出的算式信息；
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<Item> || null}
          */
         this.Items = null;
+
+        /**
+         * 任务 id，用于查询接口
+         * @type {string || null}
+         */
+        this.TaskId = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -186,6 +200,7 @@ class EvaluationResponse extends  AbstractModel {
                 this.Items.push(obj);
             }
         }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
