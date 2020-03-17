@@ -885,36 +885,42 @@ class UnifiedOrderInSubOrderList extends  AbstractModel {
 }
 
 /**
- * QuerySmallAmountTransfer请求参数结构体
+ * QueryAcctBinding请求参数结构体
  * @class
  */
-class QuerySmallAmountTransferRequest extends  AbstractModel {
+class QueryAcctBindingRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * String(22)，商户号（签约客户号）
+         * 聚鑫分配的支付主MidasAppId
          * @type {string || null}
          */
-        this.MrchCode = null;
+        this.MidasAppId = null;
 
         /**
-         * STRING(52)，原交易流水号（小额鉴权交易请求时的CnsmrSeqNo值）
+         * 聚鑫计费SubAppId，代表子商户
          * @type {string || null}
          */
-        this.OldTranSeqNo = null;
+        this.SubAppId = null;
 
         /**
-         * STRING(8)，交易日期（格式：20190101）
+         * 由平台客服提供的计费密钥Id
          * @type {string || null}
          */
-        this.TranDate = null;
+        this.MidasSecretId = null;
 
         /**
-         * STRING(1027)，保留域
+         * 计费签名
          * @type {string || null}
          */
-        this.ReservedMsg = null;
+        this.MidasSignature = null;
+
+        /**
+         * 平台参数，沙箱环境传sandbox，生产环境传release，默认release
+         * @type {string || null}
+         */
+        this.PlatformId = null;
 
     }
 
@@ -925,10 +931,11 @@ class QuerySmallAmountTransferRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.MrchCode = 'MrchCode' in params ? params.MrchCode : null;
-        this.OldTranSeqNo = 'OldTranSeqNo' in params ? params.OldTranSeqNo : null;
-        this.TranDate = 'TranDate' in params ? params.TranDate : null;
-        this.ReservedMsg = 'ReservedMsg' in params ? params.ReservedMsg : null;
+        this.MidasAppId = 'MidasAppId' in params ? params.MidasAppId : null;
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
+        this.MidasSecretId = 'MidasSecretId' in params ? params.MidasSecretId : null;
+        this.MidasSignature = 'MidasSignature' in params ? params.MidasSignature : null;
+        this.PlatformId = 'PlatformId' in params ? params.PlatformId : null;
 
     }
 }
@@ -2927,6 +2934,12 @@ class CreateAcctRequest extends  AbstractModel {
          */
         this.ShortName = null;
 
+        /**
+         * 平台参数，沙箱环境传sandbox，生产环境传release，默认release
+         * @type {string || null}
+         */
+        this.PlatformId = null;
+
     }
 
     /**
@@ -2947,6 +2960,7 @@ class CreateAcctRequest extends  AbstractModel {
         this.MidasSignature = 'MidasSignature' in params ? params.MidasSignature : null;
         this.SubMchType = 'SubMchType' in params ? params.SubMchType : null;
         this.ShortName = 'ShortName' in params ? params.ShortName : null;
+        this.PlatformId = 'PlatformId' in params ? params.PlatformId : null;
 
     }
 }
@@ -3121,6 +3135,55 @@ class QueryMemberBindRequest extends  AbstractModel {
         this.QueryFlag = 'QueryFlag' in params ? params.QueryFlag : null;
         this.PageNum = 'PageNum' in params ? params.PageNum : null;
         this.SubAcctNo = 'SubAcctNo' in params ? params.SubAcctNo : null;
+        this.ReservedMsg = 'ReservedMsg' in params ? params.ReservedMsg : null;
+
+    }
+}
+
+/**
+ * QuerySmallAmountTransfer请求参数结构体
+ * @class
+ */
+class QuerySmallAmountTransferRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * String(22)，商户号（签约客户号）
+         * @type {string || null}
+         */
+        this.MrchCode = null;
+
+        /**
+         * STRING(52)，原交易流水号（小额鉴权交易请求时的CnsmrSeqNo值）
+         * @type {string || null}
+         */
+        this.OldTranSeqNo = null;
+
+        /**
+         * STRING(8)，交易日期（格式：20190101）
+         * @type {string || null}
+         */
+        this.TranDate = null;
+
+        /**
+         * STRING(1027)，保留域
+         * @type {string || null}
+         */
+        this.ReservedMsg = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MrchCode = 'MrchCode' in params ? params.MrchCode : null;
+        this.OldTranSeqNo = 'OldTranSeqNo' in params ? params.OldTranSeqNo : null;
+        this.TranDate = 'TranDate' in params ? params.TranDate : null;
         this.ReservedMsg = 'ReservedMsg' in params ? params.ReservedMsg : null;
 
     }
@@ -4554,6 +4617,56 @@ class QueryItem extends  AbstractModel {
         this.AcctAvailBal = 'AcctAvailBal' in params ? params.AcctAvailBal : null;
         this.CashAmt = 'CashAmt' in params ? params.CashAmt : null;
         this.MaintenanceDate = 'MaintenanceDate' in params ? params.MaintenanceDate : null;
+
+    }
+}
+
+/**
+ * QueryAcctBinding返回参数结构体
+ * @class
+ */
+class QueryAcctBindingResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 总行数
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 银行卡信息列表
+         * @type {Array.<BankCardItem> || null}
+         */
+        this.BankCardItems = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.BankCardItems) {
+            this.BankCardItems = new Array();
+            for (let z in params.BankCardItems) {
+                let obj = new BankCardItem();
+                obj.deserialize(params.BankCardItems[z]);
+                this.BankCardItems.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -6218,6 +6331,113 @@ class CloseOrderResponse extends  AbstractModel {
 }
 
 /**
+ * 绑卡列表
+ * @class
+ */
+class BankCardItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 超级网银行号
+         * @type {string || null}
+         */
+        this.EiconBankBranchId = null;
+
+        /**
+         * 大小额行号
+         * @type {string || null}
+         */
+        this.CnapsBranchId = null;
+
+        /**
+         * 结算账户类型
+1 – 本行账户
+2 – 他行账户
+         * @type {number || null}
+         */
+        this.SettleAcctType = null;
+
+        /**
+         * 结算账户户名
+<敏感信息>
+         * @type {string || null}
+         */
+        this.SettleAcctName = null;
+
+        /**
+         * 开户行名称
+         * @type {string || null}
+         */
+        this.AcctBranchName = null;
+
+        /**
+         * 用于提现
+<敏感信息>
+         * @type {string || null}
+         */
+        this.SettleAcctNo = null;
+
+        /**
+         * 聚鑫计费SubAppId，代表子商户
+         * @type {string || null}
+         */
+        this.SubAppId = null;
+
+        /**
+         * 验证类型
+1 – 小额转账验证
+2 – 短信验证
+         * @type {number || null}
+         */
+        this.BindType = null;
+
+        /**
+         * 用于短信验证
+BindType==2时必填
+<敏感信息>
+         * @type {string || null}
+         */
+        this.Mobile = null;
+
+        /**
+         * 证件类型
+         * @type {string || null}
+         */
+        this.IdType = null;
+
+        /**
+         * 证件号码
+<敏感信息>
+         * @type {string || null}
+         */
+        this.IdCode = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.EiconBankBranchId = 'EiconBankBranchId' in params ? params.EiconBankBranchId : null;
+        this.CnapsBranchId = 'CnapsBranchId' in params ? params.CnapsBranchId : null;
+        this.SettleAcctType = 'SettleAcctType' in params ? params.SettleAcctType : null;
+        this.SettleAcctName = 'SettleAcctName' in params ? params.SettleAcctName : null;
+        this.AcctBranchName = 'AcctBranchName' in params ? params.AcctBranchName : null;
+        this.SettleAcctNo = 'SettleAcctNo' in params ? params.SettleAcctNo : null;
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
+        this.BindType = 'BindType' in params ? params.BindType : null;
+        this.Mobile = 'Mobile' in params ? params.Mobile : null;
+        this.IdType = 'IdType' in params ? params.IdType : null;
+        this.IdCode = 'IdCode' in params ? params.IdCode : null;
+
+    }
+}
+
+/**
  * 对账文件信息
  * @class
  */
@@ -6399,7 +6619,7 @@ module.exports = {
     CreateAcctResponse: CreateAcctResponse,
     QuerySingleTransactionStatusRequest: QuerySingleTransactionStatusRequest,
     UnifiedOrderInSubOrderList: UnifiedOrderInSubOrderList,
-    QuerySmallAmountTransferRequest: QuerySmallAmountTransferRequest,
+    QueryAcctBindingRequest: QueryAcctBindingRequest,
     QueryBankClearRequest: QueryBankClearRequest,
     ModifyMntMbrBindRelateAcctBankCodeRequest: ModifyMntMbrBindRelateAcctBankCodeRequest,
     RevokeMemberRechargeThirdPayResponse: RevokeMemberRechargeThirdPayResponse,
@@ -6429,6 +6649,7 @@ module.exports = {
     CreateAcctRequest: CreateAcctRequest,
     RechargeMemberThirdPayRequest: RechargeMemberThirdPayRequest,
     QueryMemberBindRequest: QueryMemberBindRequest,
+    QuerySmallAmountTransferRequest: QuerySmallAmountTransferRequest,
     BindRelateAcctSmallAmountResponse: BindRelateAcctSmallAmountResponse,
     QueryMemberTransactionResponse: QueryMemberTransactionResponse,
     RegisterBillSupportWithdrawRequest: RegisterBillSupportWithdrawRequest,
@@ -6448,6 +6669,7 @@ module.exports = {
     QueryMemberBindResponse: QueryMemberBindResponse,
     QueryCommonTransferRechargeRequest: QueryCommonTransferRechargeRequest,
     QueryItem: QueryItem,
+    QueryAcctBindingResponse: QueryAcctBindingResponse,
     TranItem: TranItem,
     ClearItem: ClearItem,
     BindRelateAcctUnionPayResponse: BindRelateAcctUnionPayResponse,
@@ -6468,6 +6690,7 @@ module.exports = {
     RefundRequest: RefundRequest,
     BindRelateAccReUnionPayResponse: BindRelateAccReUnionPayResponse,
     CloseOrderResponse: CloseOrderResponse,
+    BankCardItem: BankCardItem,
     FileItem: FileItem,
     WithdrawItem: WithdrawItem,
 

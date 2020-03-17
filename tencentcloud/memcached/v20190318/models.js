@@ -73,6 +73,18 @@ class DescribeInstancesRequest extends  AbstractModel {
         this.SearchKeys = null;
 
         /**
+         * 子网ID数组，数组下标从0开始，如：subnet-fdj24n34j2
+         * @type {Array.<string> || null}
+         */
+        this.UniqSubnetIds = null;
+
+        /**
+         * 私有网络ID数组，数组下标从0开始，如果不传则默认选择基础网络，如：vpc-sad23jfdfk
+         * @type {Array.<string> || null}
+         */
+        this.UniqVpcIds = null;
+
+        /**
          * 实例服务IP组成的数组，数组下标从0开始
          * @type {Array.<string> || null}
          */
@@ -95,6 +107,8 @@ class DescribeInstancesRequest extends  AbstractModel {
         this.OrderType = 'OrderType' in params ? params.OrderType : null;
         this.ProjectIds = 'ProjectIds' in params ? params.ProjectIds : null;
         this.SearchKeys = 'SearchKeys' in params ? params.SearchKeys : null;
+        this.UniqSubnetIds = 'UniqSubnetIds' in params ? params.UniqSubnetIds : null;
+        this.UniqVpcIds = 'UniqVpcIds' in params ? params.UniqVpcIds : null;
         this.Vips = 'Vips' in params ? params.Vips : null;
 
     }
