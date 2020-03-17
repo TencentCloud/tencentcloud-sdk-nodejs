@@ -27,7 +27,7 @@ const BindAcctResponse = models.BindAcctResponse;
 const CreateAcctResponse = models.CreateAcctResponse;
 const QuerySingleTransactionStatusRequest = models.QuerySingleTransactionStatusRequest;
 const UnifiedOrderInSubOrderList = models.UnifiedOrderInSubOrderList;
-const QuerySmallAmountTransferRequest = models.QuerySmallAmountTransferRequest;
+const QueryAcctBindingRequest = models.QueryAcctBindingRequest;
 const QueryBankClearRequest = models.QueryBankClearRequest;
 const ModifyMntMbrBindRelateAcctBankCodeRequest = models.ModifyMntMbrBindRelateAcctBankCodeRequest;
 const RevokeMemberRechargeThirdPayResponse = models.RevokeMemberRechargeThirdPayResponse;
@@ -57,6 +57,7 @@ const CheckAmountRequest = models.CheckAmountRequest;
 const CreateAcctRequest = models.CreateAcctRequest;
 const RechargeMemberThirdPayRequest = models.RechargeMemberThirdPayRequest;
 const QueryMemberBindRequest = models.QueryMemberBindRequest;
+const QuerySmallAmountTransferRequest = models.QuerySmallAmountTransferRequest;
 const BindRelateAcctSmallAmountResponse = models.BindRelateAcctSmallAmountResponse;
 const QueryMemberTransactionResponse = models.QueryMemberTransactionResponse;
 const RegisterBillSupportWithdrawRequest = models.RegisterBillSupportWithdrawRequest;
@@ -76,6 +77,7 @@ const QuerySingleTransactionStatusResponse = models.QuerySingleTransactionStatus
 const QueryMemberBindResponse = models.QueryMemberBindResponse;
 const QueryCommonTransferRechargeRequest = models.QueryCommonTransferRechargeRequest;
 const QueryItem = models.QueryItem;
+const QueryAcctBindingResponse = models.QueryAcctBindingResponse;
 const TranItem = models.TranItem;
 const ClearItem = models.ClearItem;
 const BindRelateAcctUnionPayResponse = models.BindRelateAcctUnionPayResponse;
@@ -96,6 +98,7 @@ const QueryOrderResponse = models.QueryOrderResponse;
 const RefundRequest = models.RefundRequest;
 const BindRelateAccReUnionPayResponse = models.BindRelateAccReUnionPayResponse;
 const CloseOrderResponse = models.CloseOrderResponse;
+const BankCardItem = models.BankCardItem;
 const FileItem = models.FileItem;
 const WithdrawItem = models.WithdrawItem;
 
@@ -282,6 +285,17 @@ class CpdpClient extends AbstractClient {
     DownloadBill(req, cb) {
         let resp = new DownloadBillResponse();
         this.request("DownloadBill", req, resp, cb);
+    }
+
+    /**
+     * 聚鑫-查询子账户绑定银行卡
+     * @param {QueryAcctBindingRequest} req
+     * @param {function(string, QueryAcctBindingResponse):void} cb
+     * @public
+     */
+    QueryAcctBinding(req, cb) {
+        let resp = new QueryAcctBindingResponse();
+        this.request("QueryAcctBinding", req, resp, cb);
     }
 
     /**

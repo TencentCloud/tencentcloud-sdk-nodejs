@@ -60,6 +60,7 @@ module.exports = {
     iotcloud: require("./iotcloud"),
     iotexplorer: require("./iotexplorer"),
     iottid: require("./iottid"),
+    iotvideo: require("./iotvideo"),
     kms: require("./kms"),
     live: require("./live"),
     mariadb: require("./mariadb"),

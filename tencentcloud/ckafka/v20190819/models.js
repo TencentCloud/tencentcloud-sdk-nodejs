@@ -168,7 +168,7 @@ class DeleteAclRequest extends  AbstractModel {
         this.PermissionType = null;
 
         /**
-         * 默认为*，表示任何host都可以访问，当前ckafka不支持host为*，但是后面开源kafka的产品化会直接支持
+         * 默认为\*，表示任何host都可以访问，当前ckafka不支持host为\*，但是后面开源kafka的产品化会直接支持
          * @type {string || null}
          */
         this.Host = null;
@@ -1335,7 +1335,7 @@ class CreateAclRequest extends  AbstractModel {
         this.PermissionType = null;
 
         /**
-         * 默认为*，表示任何host都可以访问，当前ckafka不支持host为*，但是后面开源kafka的产品化会直接支持
+         * 默认为\*，表示任何host都可以访问，当前ckafka不支持host为\*，但是后面开源kafka的产品化会直接支持
          * @type {string || null}
          */
         this.Host = null;
@@ -2171,7 +2171,7 @@ class DescribeTopicRequest extends  AbstractModel {
         this.Offset = null;
 
         /**
-         * 返回数量，不填则默认为10，最大值为20
+         * 返回数量，不填则默认为10，最大值为50
          * @type {number || null}
          */
         this.Limit = null;

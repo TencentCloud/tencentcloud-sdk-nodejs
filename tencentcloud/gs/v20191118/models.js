@@ -583,6 +583,12 @@ class CreateSessionRequest extends  AbstractModel {
          */
         this.UserIp = null;
 
+        /**
+         * 优化项，便于客户灰度开启新的优化项，默认为0
+         * @type {number || null}
+         */
+        this.Optimization = null;
+
     }
 
     /**
@@ -605,6 +611,7 @@ class CreateSessionRequest extends  AbstractModel {
         this.MinBitrate = 'MinBitrate' in params ? params.MinBitrate : null;
         this.Fps = 'Fps' in params ? params.Fps : null;
         this.UserIp = 'UserIp' in params ? params.UserIp : null;
+        this.Optimization = 'Optimization' in params ? params.Optimization : null;
 
     }
 }
