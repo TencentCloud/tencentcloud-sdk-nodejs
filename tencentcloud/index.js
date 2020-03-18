@@ -42,6 +42,7 @@ module.exports = {
     ds: require("./ds"),
     dts: require("./dts"),
     ecc: require("./ecc"),
+    ecdn: require("./ecdn"),
     emr: require("./emr"),
     es: require("./es"),
     facefusion: require("./facefusion"),

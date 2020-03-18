@@ -131,7 +131,7 @@ class CatClient extends AbstractClient {
     }
 
     /**
-     * 创建拨测任务(扩充)
+     * 创建拨测任务(扩展)
      * @param {CreateTaskExRequest} req
      * @param {function(string, CreateTaskExResponse):void} cb
      * @public

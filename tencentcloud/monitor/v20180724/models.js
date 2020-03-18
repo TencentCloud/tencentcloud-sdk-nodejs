@@ -1511,13 +1511,13 @@ class DescribeBasicAlarmListRequest extends  AbstractModel {
         this.EndTime = null;
 
         /**
-         * 每页返回的数量，默认20
+         * 分页参数，每页返回的数量，取值1~100，默认20
          * @type {number || null}
          */
         this.Limit = null;
 
         /**
-         * 页偏移量，默认0
+         * 分页参数，页偏移量，从0开始计数，默认0
          * @type {number || null}
          */
         this.Offset = null;
@@ -2234,13 +2234,13 @@ class DescribeAccidentEventListRequest extends  AbstractModel {
         this.EndTime = null;
 
         /**
-         * 每页返回的数量，默认20
+         * 分页参数，每页返回的数量，取值1~100，默认20
          * @type {number || null}
          */
         this.Limit = null;
 
         /**
-         * 页偏移量，默认0
+         * 分页参数，页偏移量，从0开始计数，默认0
          * @type {number || null}
          */
         this.Offset = null;
