@@ -3320,6 +3320,12 @@ class ReloadDeviceOsRequest extends  AbstractModel {
          */
         this.ReserveSgConfig = null;
 
+        /**
+         * /data分区大小，可不填。除root、swap、usr/local的剩余空间会自动分配到data分区
+         * @type {number || null}
+         */
+        this.SysDataSpace = null;
+
     }
 
     /**
@@ -3348,6 +3354,7 @@ class ReloadDeviceOsRequest extends  AbstractModel {
         this.NeedEMRAgent = 'NeedEMRAgent' in params ? params.NeedEMRAgent : null;
         this.NeedEMRSoftware = 'NeedEMRSoftware' in params ? params.NeedEMRSoftware : null;
         this.ReserveSgConfig = 'ReserveSgConfig' in params ? params.ReserveSgConfig : null;
+        this.SysDataSpace = 'SysDataSpace' in params ? params.SysDataSpace : null;
 
     }
 }

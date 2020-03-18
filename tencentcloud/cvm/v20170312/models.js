@@ -2810,7 +2810,7 @@ class Placement extends  AbstractModel {
         super();
 
         /**
-         * 实例所属的[可用区](/https://cloud.tencent.com/document/product/213/15753#ZoneInfo)ID。该参数也可以通过调用  [DescribeZones](https://cloud.tencent.com/document/api/213/15707) 的返回值中的Zone字段来获取。
+         * 实例所属的[可用区](https://cloud.tencent.com/document/product/213/15753#ZoneInfo)ID。该参数也可以通过调用  [DescribeZones](https://cloud.tencent.com/document/product/213/15707) 的返回值中的Zone字段来获取。
          * @type {string || null}
          */
         this.Zone = null;
@@ -5300,7 +5300,7 @@ class CreateKeyPairRequest extends  AbstractModel {
 }
 
 /**
- * 描述实例的状态。状态类型详见[实例状态表](/document/api/213/9452#INSTANCE_STATE)
+ * 描述实例的状态。状态类型详见[实例状态表](/document/api/213/15753#InstanceStatus)
  * @class
  */
 class InstanceStatus extends  AbstractModel {

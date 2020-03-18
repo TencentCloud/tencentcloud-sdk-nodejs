@@ -32,7 +32,7 @@ const DomainFilter = models.DomainFilter;
 const SpecificConfig = models.SpecificConfig;
 const FollowRedirect = models.FollowRedirect;
 const RequestHeader = models.RequestHeader;
-const HttpHeaderPathRule = models.HttpHeaderPathRule;
+const DescribePurgeQuotaRequest = models.DescribePurgeQuotaRequest;
 const Referer = models.Referer;
 const AdvanceCacheRule = models.AdvanceCacheRule;
 const DescribeIpStatusResponse = models.DescribeIpStatusResponse;
@@ -69,10 +69,12 @@ const TopDetailData = models.TopDetailData;
 const ErrorPage = models.ErrorPage;
 const MaxAgeRule = models.MaxAgeRule;
 const DescribePayTypeRequest = models.DescribePayTypeRequest;
+const DescribeCertDomainsRequest = models.DescribeCertDomainsRequest;
 const DescribeDomainsConfigRequest = models.DescribeDomainsConfigRequest;
 const AdvancedCache = models.AdvancedCache;
 const StartCdnDomainRequest = models.StartCdnDomainRequest;
 const MapInfo = models.MapInfo;
+const DescribeCertDomainsResponse = models.DescribeCertDomainsResponse;
 const AuthenticationTypeD = models.AuthenticationTypeD;
 const AuthenticationTypeC = models.AuthenticationTypeC;
 const AuthenticationTypeB = models.AuthenticationTypeB;
@@ -83,6 +85,7 @@ const IpStatus = models.IpStatus;
 const AddCdnDomainResponse = models.AddCdnDomainResponse;
 const DownstreamCapping = models.DownstreamCapping;
 const ServerCert = models.ServerCert;
+const HttpHeaderPathRule = models.HttpHeaderPathRule;
 const DisableCachesRequest = models.DisableCachesRequest;
 const SimpleCacheRule = models.SimpleCacheRule;
 const DisableClsLogTopicResponse = models.DisableClsLogTopicResponse;
@@ -133,7 +136,6 @@ const BandwidthAlert = models.BandwidthAlert;
 const ClsLogObject = models.ClsLogObject;
 const RegionMapRelation = models.RegionMapRelation;
 const PurgePathCacheRequest = models.PurgePathCacheRequest;
-const DescribePurgeQuotaRequest = models.DescribePurgeQuotaRequest;
 const CdnData = models.CdnData;
 const PurgeUrlsCacheRequest = models.PurgeUrlsCacheRequest;
 const OriginPullOptimization = models.OriginPullOptimization;
@@ -502,6 +504,17 @@ class CdnClient extends AbstractClient {
     DescribePushTasks(req, cb) {
         let resp = new DescribePushTasksResponse();
         this.request("DescribePushTasks", req, resp, cb);
+    }
+
+    /**
+     * 校验证书并提取SSL证书中包含的域名，返回CDN已接入的域名列表，及已配置证书的域名列表
+     * @param {DescribeCertDomainsRequest} req
+     * @param {function(string, DescribeCertDomainsResponse):void} cb
+     * @public
+     */
+    DescribeCertDomains(req, cb) {
+        let resp = new DescribeCertDomainsResponse();
+        this.request("DescribeCertDomains", req, resp, cb);
     }
 
     /**

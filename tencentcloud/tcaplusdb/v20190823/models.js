@@ -2613,7 +2613,7 @@ class ModifyTableGroupNameRequest extends  AbstractModel {
         this.TableGroupId = null;
 
         /**
-         * 新的大区名称，可以使用中英文字符和符号
+         * 新的表格组名称，可以使用中英文字符和符号
          * @type {string || null}
          */
         this.TableGroupName = null;

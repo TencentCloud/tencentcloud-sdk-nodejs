@@ -852,60 +852,12 @@ off：关闭
 }
 
 /**
- * Http 头部设置规则，最多可设置 100 条
+ * DescribePurgeQuota请求参数结构体
  * @class
  */
-class HttpHeaderPathRule extends  AbstractModel {
+class DescribePurgeQuotaRequest extends  AbstractModel {
     constructor(){
         super();
-
-        /**
-         * http 头部设置方式
-add：添加头部，若已存在头部，则会存在重复头部
-set：仅回源头部配置支持，若头部已存在则会覆盖原有头部值，若不存在，则会增加该头部及值
-del：删除头部
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.HeaderMode = null;
-
-        /**
-         * http 头部名称，最多可设置 100 个字符
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.HeaderName = null;
-
-        /**
-         * http 头部值，最多可设置 1000 个字符
-Mode 为 del 时非必填
-Mode 为 add/set 时必填
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.HeaderValue = null;
-
-        /**
-         * 规则类型：
-all：所有文件生效
-file：指定文件后缀生效
-directory：指定路径生效
-path：指定绝对路径生效
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.RuleType = null;
-
-        /**
-         * RuleType 对应类型下的匹配内容：
-all 时填充 *
-file 时填充后缀名，如 jpg、txt
-directory 时填充路径，如 /xxx/test/
-path 时填充绝对路径，如 /xxx/test.html
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {Array.<string> || null}
-         */
-        this.RulePaths = null;
 
     }
 
@@ -916,11 +868,6 @@ path 时填充绝对路径，如 /xxx/test.html
         if (!params) {
             return;
         }
-        this.HeaderMode = 'HeaderMode' in params ? params.HeaderMode : null;
-        this.HeaderName = 'HeaderName' in params ? params.HeaderName : null;
-        this.HeaderValue = 'HeaderValue' in params ? params.HeaderValue : null;
-        this.RuleType = 'RuleType' in params ? params.RuleType : null;
-        this.RulePaths = 'RulePaths' in params ? params.RulePaths : null;
 
     }
 }
@@ -3571,6 +3518,34 @@ overseas：境外计费方式查询
 }
 
 /**
+ * DescribeCertDomains请求参数结构体
+ * @class
+ */
+class DescribeCertDomainsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * PEM格式证书Base64编码后的字符串
+         * @type {string || null}
+         */
+        this.Cert = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Cert = 'Cert' in params ? params.Cert : null;
+
+    }
+}
+
+/**
  * DescribeDomainsConfig请求参数结构体
  * @class
  */
@@ -3753,6 +3728,50 @@ class MapInfo extends  AbstractModel {
         }
         this.Id = 'Id' in params ? params.Id : null;
         this.Name = 'Name' in params ? params.Name : null;
+
+    }
+}
+
+/**
+ * DescribeCertDomains返回参数结构体
+ * @class
+ */
+class DescribeCertDomainsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 已接入CDN的域名列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
+         */
+        this.Domains = null;
+
+        /**
+         * CDN已配置证书的域名列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
+         */
+        this.CertifiedDomains = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Domains = 'Domains' in params ? params.Domains : null;
+        this.CertifiedDomains = 'CertifiedDomains' in params ? params.CertifiedDomains : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -4331,6 +4350,80 @@ class ServerCert extends  AbstractModel {
         this.ExpireTime = 'ExpireTime' in params ? params.ExpireTime : null;
         this.DeployTime = 'DeployTime' in params ? params.DeployTime : null;
         this.Message = 'Message' in params ? params.Message : null;
+
+    }
+}
+
+/**
+ * Http 头部设置规则，最多可设置 100 条
+ * @class
+ */
+class HttpHeaderPathRule extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * http 头部设置方式
+add：添加头部，若已存在头部，则会存在重复头部
+set：仅回源头部配置支持，若头部已存在则会覆盖原有头部值，若不存在，则会增加该头部及值
+del：删除头部
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.HeaderMode = null;
+
+        /**
+         * http 头部名称，最多可设置 100 个字符
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.HeaderName = null;
+
+        /**
+         * http 头部值，最多可设置 1000 个字符
+Mode 为 del 时非必填
+Mode 为 add/set 时必填
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.HeaderValue = null;
+
+        /**
+         * 规则类型：
+all：所有文件生效
+file：指定文件后缀生效
+directory：指定路径生效
+path：指定绝对路径生效
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.RuleType = null;
+
+        /**
+         * RuleType 对应类型下的匹配内容：
+all 时填充 *
+file 时填充后缀名，如 jpg、txt
+directory 时填充路径，如 /xxx/test/
+path 时填充绝对路径，如 /xxx/test.html
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
+         */
+        this.RulePaths = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.HeaderMode = 'HeaderMode' in params ? params.HeaderMode : null;
+        this.HeaderName = 'HeaderName' in params ? params.HeaderName : null;
+        this.HeaderValue = 'HeaderValue' in params ? params.HeaderValue : null;
+        this.RuleType = 'RuleType' in params ? params.RuleType : null;
+        this.RulePaths = 'RulePaths' in params ? params.RulePaths : null;
 
     }
 }
@@ -7422,27 +7515,6 @@ delete：刷新全部资源
 }
 
 /**
- * DescribePurgeQuota请求参数结构体
- * @class
- */
-class DescribePurgeQuotaRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-    }
-}
-
-/**
  * 访问明细数据类型
  * @class
  */
@@ -9512,7 +9584,7 @@ module.exports = {
     SpecificConfig: SpecificConfig,
     FollowRedirect: FollowRedirect,
     RequestHeader: RequestHeader,
-    HttpHeaderPathRule: HttpHeaderPathRule,
+    DescribePurgeQuotaRequest: DescribePurgeQuotaRequest,
     Referer: Referer,
     AdvanceCacheRule: AdvanceCacheRule,
     DescribeIpStatusResponse: DescribeIpStatusResponse,
@@ -9549,10 +9621,12 @@ module.exports = {
     ErrorPage: ErrorPage,
     MaxAgeRule: MaxAgeRule,
     DescribePayTypeRequest: DescribePayTypeRequest,
+    DescribeCertDomainsRequest: DescribeCertDomainsRequest,
     DescribeDomainsConfigRequest: DescribeDomainsConfigRequest,
     AdvancedCache: AdvancedCache,
     StartCdnDomainRequest: StartCdnDomainRequest,
     MapInfo: MapInfo,
+    DescribeCertDomainsResponse: DescribeCertDomainsResponse,
     AuthenticationTypeD: AuthenticationTypeD,
     AuthenticationTypeC: AuthenticationTypeC,
     AuthenticationTypeB: AuthenticationTypeB,
@@ -9563,6 +9637,7 @@ module.exports = {
     AddCdnDomainResponse: AddCdnDomainResponse,
     DownstreamCapping: DownstreamCapping,
     ServerCert: ServerCert,
+    HttpHeaderPathRule: HttpHeaderPathRule,
     DisableCachesRequest: DisableCachesRequest,
     SimpleCacheRule: SimpleCacheRule,
     DisableClsLogTopicResponse: DisableClsLogTopicResponse,
@@ -9613,7 +9688,6 @@ module.exports = {
     ClsLogObject: ClsLogObject,
     RegionMapRelation: RegionMapRelation,
     PurgePathCacheRequest: PurgePathCacheRequest,
-    DescribePurgeQuotaRequest: DescribePurgeQuotaRequest,
     CdnData: CdnData,
     PurgeUrlsCacheRequest: PurgeUrlsCacheRequest,
     OriginPullOptimization: OriginPullOptimization,
