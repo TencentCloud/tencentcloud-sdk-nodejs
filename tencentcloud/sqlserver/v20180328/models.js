@@ -3282,6 +3282,18 @@ class DBInstance extends  AbstractModel {
          */
         this.Pid = null;
 
+        /**
+         * 实例所属VPC的唯一字符串ID，格式如：vpc-xxx，基础网络时为空字符串
+         * @type {string || null}
+         */
+        this.UniqVpcId = null;
+
+        /**
+         * 实例所属子网的唯一字符串ID，格式如： subnet-xxx，基础网络时为空字符串
+         * @type {string || null}
+         */
+        this.UniqSubnetId = null;
+
     }
 
     /**
@@ -3321,6 +3333,8 @@ class DBInstance extends  AbstractModel {
         this.Version = 'Version' in params ? params.Version : null;
         this.Type = 'Type' in params ? params.Type : null;
         this.Pid = 'Pid' in params ? params.Pid : null;
+        this.UniqVpcId = 'UniqVpcId' in params ? params.UniqVpcId : null;
+        this.UniqSubnetId = 'UniqSubnetId' in params ? params.UniqSubnetId : null;
 
     }
 }

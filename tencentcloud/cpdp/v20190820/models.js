@@ -916,12 +916,6 @@ class QueryAcctBindingRequest extends  AbstractModel {
          */
         this.MidasSignature = null;
 
-        /**
-         * 平台参数，沙箱环境传sandbox，生产环境传release，默认release
-         * @type {string || null}
-         */
-        this.PlatformId = null;
-
     }
 
     /**
@@ -935,7 +929,6 @@ class QueryAcctBindingRequest extends  AbstractModel {
         this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
         this.MidasSecretId = 'MidasSecretId' in params ? params.MidasSecretId : null;
         this.MidasSignature = 'MidasSignature' in params ? params.MidasSignature : null;
-        this.PlatformId = 'PlatformId' in params ? params.PlatformId : null;
 
     }
 }
@@ -2934,12 +2927,6 @@ class CreateAcctRequest extends  AbstractModel {
          */
         this.ShortName = null;
 
-        /**
-         * 平台参数，沙箱环境传sandbox，生产环境传release，默认release
-         * @type {string || null}
-         */
-        this.PlatformId = null;
-
     }
 
     /**
@@ -2960,7 +2947,6 @@ class CreateAcctRequest extends  AbstractModel {
         this.MidasSignature = 'MidasSignature' in params ? params.MidasSignature : null;
         this.SubMchType = 'SubMchType' in params ? params.SubMchType : null;
         this.ShortName = 'ShortName' in params ? params.ShortName : null;
-        this.PlatformId = 'PlatformId' in params ? params.PlatformId : null;
 
     }
 }

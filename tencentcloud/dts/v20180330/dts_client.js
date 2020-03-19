@@ -54,6 +54,7 @@ const SyncStepDetailInfo = models.SyncStepDetailInfo;
 const StopMigrateJobResponse = models.StopMigrateJobResponse;
 const DeleteSyncJobResponse = models.DeleteSyncJobResponse;
 const CreateSyncCheckJobRequest = models.CreateSyncCheckJobRequest;
+const ModifySyncJobRequest = models.ModifySyncJobRequest;
 const SwitchDrToMasterResponse = models.SwitchDrToMasterResponse;
 const CompleteMigrateJobResponse = models.CompleteMigrateJobResponse;
 const StartMigrateJobResponse = models.StartMigrateJobResponse;
@@ -61,7 +62,7 @@ const CreateMigrateJobResponse = models.CreateMigrateJobResponse;
 const DeleteMigrateJobRequest = models.DeleteMigrateJobRequest;
 const DeleteSyncJobRequest = models.DeleteSyncJobRequest;
 const MigrateJobInfo = models.MigrateJobInfo;
-const ModifySyncJobRequest = models.ModifySyncJobRequest;
+const ErrorInfo = models.ErrorInfo;
 const DescribeSyncCheckJobResponse = models.DescribeSyncCheckJobResponse;
 
 

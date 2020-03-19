@@ -2006,6 +2006,62 @@ class CreateSyncCheckJobRequest extends  AbstractModel {
 }
 
 /**
+ * ModifySyncJob请求参数结构体
+ * @class
+ */
+class ModifySyncJobRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 待修改的灾备同步任务ID
+         * @type {string || null}
+         */
+        this.JobId = null;
+
+        /**
+         * 灾备同步任务名称
+         * @type {string || null}
+         */
+        this.JobName = null;
+
+        /**
+         * 灾备同步任务配置选项
+         * @type {SyncOption || null}
+         */
+        this.SyncOption = null;
+
+        /**
+         * 当选择'指定库表'灾备同步的时候, 需要设置待同步的源数据库表信息,用符合json数组格式的字符串描述, 如下所例。
+对于database-table两级结构的数据库：
+[{"Database":"db1","Table":["table1","table2"]},{"Database":"db2"}]
+         * @type {string || null}
+         */
+        this.DatabaseInfo = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.JobId = 'JobId' in params ? params.JobId : null;
+        this.JobName = 'JobName' in params ? params.JobName : null;
+
+        if (params.SyncOption) {
+            let obj = new SyncOption();
+            obj.deserialize(params.SyncOption)
+            this.SyncOption = obj;
+        }
+        this.DatabaseInfo = 'DatabaseInfo' in params ? params.DatabaseInfo : null;
+
+    }
+}
+
+/**
  * SwitchDrToMaster返回参数结构体
  * @class
  */
@@ -2285,6 +2341,12 @@ class MigrateJobInfo extends  AbstractModel {
          */
         this.Detail = null;
 
+        /**
+         * 任务错误信息提示，当任务发生错误时，不为null或者空值
+         * @type {Array.<ErrorInfo> || null}
+         */
+        this.ErrorInfo = null;
+
     }
 
     /**
@@ -2330,42 +2392,37 @@ class MigrateJobInfo extends  AbstractModel {
             this.Detail = obj;
         }
 
+        if (params.ErrorInfo) {
+            this.ErrorInfo = new Array();
+            for (let z in params.ErrorInfo) {
+                let obj = new ErrorInfo();
+                obj.deserialize(params.ErrorInfo[z]);
+                this.ErrorInfo.push(obj);
+            }
+        }
+
     }
 }
 
 /**
- * ModifySyncJob请求参数结构体
+ * 迁移任务错误信息及提示
  * @class
  */
-class ModifySyncJobRequest extends  AbstractModel {
+class ErrorInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 待修改的灾备同步任务ID
+         * 具体的报错日志, 包含错误码和错误信息
          * @type {string || null}
          */
-        this.JobId = null;
+        this.ErrorLog = null;
 
         /**
-         * 灾备同步任务名称
+         * 报错对应的帮助文档Ur
          * @type {string || null}
          */
-        this.JobName = null;
-
-        /**
-         * 灾备同步任务配置选项
-         * @type {SyncOption || null}
-         */
-        this.SyncOption = null;
-
-        /**
-         * 当选择'指定库表'灾备同步的时候, 需要设置待同步的源数据库表信息,用符合json数组格式的字符串描述, 如下所例。
-对于database-table两级结构的数据库：
-[{"Database":"db1","Table":["table1","table2"]},{"Database":"db2"}]
-         * @type {string || null}
-         */
-        this.DatabaseInfo = null;
+        this.HelpDoc = null;
 
     }
 
@@ -2376,15 +2433,8 @@ class ModifySyncJobRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.JobId = 'JobId' in params ? params.JobId : null;
-        this.JobName = 'JobName' in params ? params.JobName : null;
-
-        if (params.SyncOption) {
-            let obj = new SyncOption();
-            obj.deserialize(params.SyncOption)
-            this.SyncOption = obj;
-        }
-        this.DatabaseInfo = 'DatabaseInfo' in params ? params.DatabaseInfo : null;
+        this.ErrorLog = 'ErrorLog' in params ? params.ErrorLog : null;
+        this.HelpDoc = 'HelpDoc' in params ? params.HelpDoc : null;
 
     }
 }
@@ -2499,6 +2549,7 @@ module.exports = {
     StopMigrateJobResponse: StopMigrateJobResponse,
     DeleteSyncJobResponse: DeleteSyncJobResponse,
     CreateSyncCheckJobRequest: CreateSyncCheckJobRequest,
+    ModifySyncJobRequest: ModifySyncJobRequest,
     SwitchDrToMasterResponse: SwitchDrToMasterResponse,
     CompleteMigrateJobResponse: CompleteMigrateJobResponse,
     StartMigrateJobResponse: StartMigrateJobResponse,
@@ -2506,7 +2557,7 @@ module.exports = {
     DeleteMigrateJobRequest: DeleteMigrateJobRequest,
     DeleteSyncJobRequest: DeleteSyncJobRequest,
     MigrateJobInfo: MigrateJobInfo,
-    ModifySyncJobRequest: ModifySyncJobRequest,
+    ErrorInfo: ErrorInfo,
     DescribeSyncCheckJobResponse: DescribeSyncCheckJobResponse,
 
 }

@@ -85,7 +85,7 @@ const DescribeDDoSNetEvInfoRequest = models.DescribeDDoSNetEvInfoRequest;
 const ModifyResourceRenewFlagRequest = models.ModifyResourceRenewFlagRequest;
 const DescribeCCEvListResponse = models.DescribeCCEvListResponse;
 const DescribeCCFrequencyRulesRequest = models.DescribeCCFrequencyRulesRequest;
-const CreateDDoSPolicyCaseRequest = models.CreateDDoSPolicyCaseRequest;
+const CreateL4HealthConfigRequest = models.CreateL4HealthConfigRequest;
 const ModifyDDoSPolicyNameResponse = models.ModifyDDoSPolicyNameResponse;
 const DescribeCCAlarmThresholdRequest = models.DescribeCCAlarmThresholdRequest;
 const ModifyCCUrlAllowRequest = models.ModifyCCUrlAllowRequest;
@@ -106,14 +106,15 @@ const DescribeInsurePacksRequest = models.DescribeInsurePacksRequest;
 const DescribeDDoSNetCountRequest = models.DescribeDDoSNetCountRequest;
 const Paging = models.Paging;
 const ModifyCCSelfDefinePolicyRequest = models.ModifyCCSelfDefinePolicyRequest;
+const L4HealthConfig = models.L4HealthConfig;
 const CreateCCSelfDefinePolicyRequest = models.CreateCCSelfDefinePolicyRequest;
 const SuccessCode = models.SuccessCode;
 const DescribleL4RulesRequest = models.DescribleL4RulesRequest;
 const L4RuleEntry = models.L4RuleEntry;
 const DescribeL4HealthConfigRequest = models.DescribeL4HealthConfigRequest;
-const ModifyL4RulesRequest = models.ModifyL4RulesRequest;
+const CreateL7CCRuleResponse = models.CreateL7CCRuleResponse;
 const ModifyNetReturnSwitchRequest = models.ModifyNetReturnSwitchRequest;
-const DescribeDDoSIpLogRequest = models.DescribeDDoSIpLogRequest;
+const CreateL7CCRuleRequest = models.CreateL7CCRuleRequest;
 const CreateL7RulesRequest = models.CreateL7RulesRequest;
 const CreateL4RulesRequest = models.CreateL4RulesRequest;
 const DescribeDDoSNetEvListResponse = models.DescribeDDoSNetEvListResponse;
@@ -139,7 +140,7 @@ const L4RuleHealth = models.L4RuleHealth;
 const ModifyCCFrequencyRulesRequest = models.ModifyCCFrequencyRulesRequest;
 const ModifyCCPolicySwitchResponse = models.ModifyCCPolicySwitchResponse;
 const ModifyDDoSThresholdResponse = models.ModifyDDoSThresholdResponse;
-const CreateL4HealthConfigRequest = models.CreateL4HealthConfigRequest;
+const CreateDDoSPolicyCaseRequest = models.CreateDDoSPolicyCaseRequest;
 const ModifyCCIpAllowDenyResponse = models.ModifyCCIpAllowDenyResponse;
 const ModifyCCAlarmThresholdRequest = models.ModifyCCAlarmThresholdRequest;
 const DescribeCCFrequencyRulesResponse = models.DescribeCCFrequencyRulesResponse;
@@ -161,10 +162,11 @@ const ModifyDDoSAIStatusRequest = models.ModifyDDoSAIStatusRequest;
 const DescribeResourceListResponse = models.DescribeResourceListResponse;
 const ModifyCCThresholdRequest = models.ModifyCCThresholdRequest;
 const CreateBasicDDoSAlarmThresholdRequest = models.CreateBasicDDoSAlarmThresholdRequest;
-const L4HealthConfig = models.L4HealthConfig;
+const CCRuleConfig = models.CCRuleConfig;
 const DescribeDDoSEvInfoResponse = models.DescribeDDoSEvInfoResponse;
 const DescribleRegionCountRequest = models.DescribleRegionCountRequest;
 const ModifyCCSelfDefinePolicyResponse = models.ModifyCCSelfDefinePolicyResponse;
+const DescribeDDoSIpLogRequest = models.DescribeDDoSIpLogRequest;
 const DescribeDDoSAlarmThresholdRequest = models.DescribeDDoSAlarmThresholdRequest;
 const DescribePolicyCaseRequest = models.DescribePolicyCaseRequest;
 const WaterPrintPolicy = models.WaterPrintPolicy;
@@ -179,6 +181,7 @@ const ModifyElasticLimitResponse = models.ModifyElasticLimitResponse;
 const DDoSAttackSourceRecord = models.DDoSAttackSourceRecord;
 const CreateUnblockIpResponse = models.CreateUnblockIpResponse;
 const DescribePackIndexRequest = models.DescribePackIndexRequest;
+const ModifyL4RulesRequest = models.ModifyL4RulesRequest;
 const DescribeDDoSEvListResponse = models.DescribeDDoSEvListResponse;
 const DescribeDDoSPolicyRequest = models.DescribeDDoSPolicyRequest;
 const DescribeL7HealthConfigResponse = models.DescribeL7HealthConfigResponse;
@@ -285,6 +288,17 @@ class DayuClient extends AbstractClient {
     DescribeRuleSets(req, cb) {
         let resp = new DescribeRuleSetsResponse();
         this.request("DescribeRuleSets", req, resp, cb);
+    }
+
+    /**
+     * 此接口是7层CC的访问频控自定义规则（IP+Host维度，不支持具体的URI），此接口已弃用，请调用新接口CreateCCFrequencyRules，新接口同时支持IP+Host维度以及具体的URI；
+     * @param {CreateL7CCRuleRequest} req
+     * @param {function(string, CreateL7CCRuleResponse):void} cb
+     * @public
+     */
+    CreateL7CCRule(req, cb) {
+        let resp = new CreateL7CCRuleResponse();
+        this.request("CreateL7CCRule", req, resp, cb);
     }
 
     /**

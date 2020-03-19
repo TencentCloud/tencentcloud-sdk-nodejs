@@ -2505,11 +2505,18 @@ class VpnConnection extends  AbstractModel {
         this.CustomerGatewayName = null;
 
         /**
-         * IPSEC VPN通道路由策略
+         * IPSEC VPN通道路由策略目的端地址
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<string> || null}
          */
         this.DestinationCidr = null;
+
+        /**
+         * IPSEC VPN通道路由策略源端地址
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
+         */
+        this.SourceCidr = null;
 
     }
 
@@ -2557,6 +2564,7 @@ class VpnConnection extends  AbstractModel {
         this.VpnGatewayName = 'VpnGatewayName' in params ? params.VpnGatewayName : null;
         this.CustomerGatewayName = 'CustomerGatewayName' in params ? params.CustomerGatewayName : null;
         this.DestinationCidr = 'DestinationCidr' in params ? params.DestinationCidr : null;
+        this.SourceCidr = 'SourceCidr' in params ? params.SourceCidr : null;
 
     }
 }
