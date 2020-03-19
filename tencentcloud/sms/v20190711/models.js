@@ -914,9 +914,9 @@ class DescribeSignListStatus extends  AbstractModel {
         this.SignId = null;
 
         /**
-         * 是否国际短信。其中：
+         * 是否国际/港澳台短信：
 0：表示国内短信。
-1：表示海外短信。
+1：表示国际/港澳台短信。
          * @type {number || null}
          */
         this.International = null;
@@ -1358,9 +1358,9 @@ class DescribeTemplateListStatus extends  AbstractModel {
         this.TemplateId = null;
 
         /**
-         * 是否国际短信。其中：
+         * 是否国际/港澳台短信：
 0：表示国内短信。
-1：表示海外短信。
+1：表示国际/港澳台短信。
          * @type {number || null}
          */
         this.International = null;

@@ -1814,6 +1814,12 @@ class SpecConfigInfo extends  AbstractModel {
          */
         this.Qps = null;
 
+        /**
+         * CPU核数
+         * @type {number || null}
+         */
+        this.Cpu = null;
+
     }
 
     /**
@@ -1830,6 +1836,7 @@ class SpecConfigInfo extends  AbstractModel {
         this.SuitInfo = 'SuitInfo' in params ? params.SuitInfo : null;
         this.Pid = 'Pid' in params ? params.Pid : null;
         this.Qps = 'Qps' in params ? params.Qps : null;
+        this.Cpu = 'Cpu' in params ? params.Cpu : null;
 
     }
 }
@@ -2421,6 +2428,12 @@ class DCDBShardInfo extends  AbstractModel {
          */
         this.ShardSlaveZones = null;
 
+        /**
+         * CPU核数
+         * @type {number || null}
+         */
+        this.Cpu = null;
+
     }
 
     /**
@@ -2453,6 +2466,7 @@ class DCDBShardInfo extends  AbstractModel {
         this.Paymode = 'Paymode' in params ? params.Paymode : null;
         this.ShardMasterZone = 'ShardMasterZone' in params ? params.ShardMasterZone : null;
         this.ShardSlaveZones = 'ShardSlaveZones' in params ? params.ShardSlaveZones : null;
+        this.Cpu = 'Cpu' in params ? params.Cpu : null;
 
     }
 }

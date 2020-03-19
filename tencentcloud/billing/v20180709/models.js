@@ -668,7 +668,7 @@ class CostDetail extends  AbstractModel {
 
         /**
          * 组件明细
-         * @type {CostComponentSet || null}
+         * @type {Array.<CostComponentSet> || null}
          */
         this.ComponentSet = null;
 
@@ -703,9 +703,12 @@ class CostDetail extends  AbstractModel {
         this.FeeEndTime = 'FeeEndTime' in params ? params.FeeEndTime : null;
 
         if (params.ComponentSet) {
-            let obj = new CostComponentSet();
-            obj.deserialize(params.ComponentSet)
-            this.ComponentSet = obj;
+            this.ComponentSet = new Array();
+            for (let z in params.ComponentSet) {
+                let obj = new CostComponentSet();
+                obj.deserialize(params.ComponentSet[z]);
+                this.ComponentSet.push(obj);
+            }
         }
         this.ProductCode = 'ProductCode' in params ? params.ProductCode : null;
 

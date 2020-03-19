@@ -472,6 +472,18 @@ class CreateRecTaskRequest extends  AbstractModel {
          */
         this.HotwordId = null;
 
+        /**
+         * 是否过滤脏词（目前支持中文普通话引擎）。0：不过滤脏词；1：过滤脏词；2：将脏词替换为 * 。
+         * @type {number || null}
+         */
+        this.FilterDirty = null;
+
+        /**
+         * 是否过语气词（目前支持中文普通话引擎）。0：不过滤语气词；1：部分过滤；2：严格过滤 。
+         * @type {number || null}
+         */
+        this.FilterModal = null;
+
     }
 
     /**
@@ -490,6 +502,8 @@ class CreateRecTaskRequest extends  AbstractModel {
         this.Data = 'Data' in params ? params.Data : null;
         this.DataLen = 'DataLen' in params ? params.DataLen : null;
         this.HotwordId = 'HotwordId' in params ? params.HotwordId : null;
+        this.FilterDirty = 'FilterDirty' in params ? params.FilterDirty : null;
+        this.FilterModal = 'FilterModal' in params ? params.FilterModal : null;
 
     }
 }
@@ -912,6 +926,24 @@ class SentenceRecognitionRequest extends  AbstractModel {
          */
         this.HotwordId = null;
 
+        /**
+         * 是否过滤脏词（目前支持中文普通话引擎）。0：不过滤脏词；1：过滤脏词；2：将脏词替换为 * 。
+         * @type {number || null}
+         */
+        this.FilterDirty = null;
+
+        /**
+         * 是否过语气词（目前支持中文普通话引擎）。0：不过滤语气词；1：部分过滤；2：严格过滤 。
+         * @type {number || null}
+         */
+        this.FilterModal = null;
+
+        /**
+         * 是否过滤句末的句号（目前支持中文普通话引擎）。0：不过滤句末的句号；1：过滤句末的句号。
+         * @type {number || null}
+         */
+        this.FilterPunc = null;
+
     }
 
     /**
@@ -931,6 +963,9 @@ class SentenceRecognitionRequest extends  AbstractModel {
         this.Data = 'Data' in params ? params.Data : null;
         this.DataLen = 'DataLen' in params ? params.DataLen : null;
         this.HotwordId = 'HotwordId' in params ? params.HotwordId : null;
+        this.FilterDirty = 'FilterDirty' in params ? params.FilterDirty : null;
+        this.FilterModal = 'FilterModal' in params ? params.FilterModal : null;
+        this.FilterPunc = 'FilterPunc' in params ? params.FilterPunc : null;
 
     }
 }

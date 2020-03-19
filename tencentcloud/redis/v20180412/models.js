@@ -5615,6 +5615,13 @@ class InstanceSet extends  AbstractModel {
          */
         this.Vip6 = null;
 
+        /**
+         * 内部参数，用户可忽略
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.RemainBandwidthDuration = null;
+
     }
 
     /**
@@ -5682,6 +5689,7 @@ class InstanceSet extends  AbstractModel {
         this.PasswordFree = 'PasswordFree' in params ? params.PasswordFree : null;
         this.ReadOnly = 'ReadOnly' in params ? params.ReadOnly : null;
         this.Vip6 = 'Vip6' in params ? params.Vip6 : null;
+        this.RemainBandwidthDuration = 'RemainBandwidthDuration' in params ? params.RemainBandwidthDuration : null;
 
     }
 }

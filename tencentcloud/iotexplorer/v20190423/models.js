@@ -1076,22 +1076,28 @@ class ControlDeviceDataRequest extends  AbstractModel {
         this.DeviceName = null;
 
         /**
-         * 属性数据
+         * 属性数据, JSON格式字符串, 注意字段需要在物模型属性里定义
          * @type {string || null}
          */
         this.Data = null;
 
         /**
-         * 请求类型
+         * 请求类型 , 不填该参数或者 desired 表示下发属性给设备,  reported 表示模拟设备上报属性
          * @type {string || null}
          */
         this.Method = null;
 
         /**
-         * 设备ID，该字段有值将代替 ProductId/DeviceName
+         * 设备ID，该字段有值将代替 ProductId/DeviceName , 通常情况不需要填写
          * @type {string || null}
          */
         this.DeviceId = null;
+
+        /**
+         * 上报数据UNIX时间戳(毫秒), 仅对Method:reported有效
+         * @type {number || null}
+         */
+        this.DataTimestamp = null;
 
     }
 
@@ -1107,6 +1113,7 @@ class ControlDeviceDataRequest extends  AbstractModel {
         this.Data = 'Data' in params ? params.Data : null;
         this.Method = 'Method' in params ? params.Method : null;
         this.DeviceId = 'DeviceId' in params ? params.DeviceId : null;
+        this.DataTimestamp = 'DataTimestamp' in params ? params.DataTimestamp : null;
 
     }
 }

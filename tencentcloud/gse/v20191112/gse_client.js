@@ -17,35 +17,30 @@
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const GameProperty = models.GameProperty;
-const DeleteScalingPolicyRequest = models.DeleteScalingPolicyRequest;
 const UpdateGameServerSessionResponse = models.UpdateGameServerSessionResponse;
 const DescribeGameServerSessionsResponse = models.DescribeGameServerSessionsResponse;
-const InstanceCounts = models.InstanceCounts;
+const Instance = models.Instance;
+const GetInstanceAccessResponse = models.GetInstanceAccessResponse;
 const JoinGameServerSessionRequest = models.JoinGameServerSessionRequest;
 const DescribePlayerSessionsResponse = models.DescribePlayerSessionsResponse;
 const PlayerLatency = models.PlayerLatency;
 const StopGameServerSessionPlacementRequest = models.StopGameServerSessionPlacementRequest;
-const ScalingPolicy = models.ScalingPolicy;
+const GetInstanceAccessRequest = models.GetInstanceAccessRequest;
 const DescribeGameServerSessionsRequest = models.DescribeGameServerSessionsRequest;
 const UpdateGameServerSessionRequest = models.UpdateGameServerSessionRequest;
-const DescribeGameServerSessionDetailsResponse = models.DescribeGameServerSessionDetailsResponse;
-const StartGameServerSessionPlacementResponse = models.StartGameServerSessionPlacementResponse;
-const GetGameServerSessionLogUrlRequest = models.GetGameServerSessionLogUrlRequest;
-const DescribeFleetCapacityResponse = models.DescribeFleetCapacityResponse;
-const DescribeFleetCapacityRequest = models.DescribeFleetCapacityRequest;
-const CreateGameServerSessionResponse = models.CreateGameServerSessionResponse;
-const DescribeScalingPoliciesRequest = models.DescribeScalingPoliciesRequest;
 const DescribePlayerSessionsRequest = models.DescribePlayerSessionsRequest;
-const PutScalingPolicyResponse = models.PutScalingPolicyResponse;
+const StartGameServerSessionPlacementResponse = models.StartGameServerSessionPlacementResponse;
+const Credentials = models.Credentials;
+const DescribeInstancesResponse = models.DescribeInstancesResponse;
+const GetGameServerSessionLogUrlRequest = models.GetGameServerSessionLogUrlRequest;
+const CreateGameServerSessionResponse = models.CreateGameServerSessionResponse;
+const DescribeInstancesRequest = models.DescribeInstancesRequest;
+const DescribeGameServerSessionDetailsResponse = models.DescribeGameServerSessionDetailsResponse;
 const JoinGameServerSessionResponse = models.JoinGameServerSessionResponse;
 const DesiredPlayerSession = models.DesiredPlayerSession;
-const TargetConfiguration = models.TargetConfiguration;
 const DescribeGameServerSessionPlacementRequest = models.DescribeGameServerSessionPlacementRequest;
-const DescribeScalingPoliciesResponse = models.DescribeScalingPoliciesResponse;
 const PlacedPlayerSession = models.PlacedPlayerSession;
 const GameServerSessionPlacement = models.GameServerSessionPlacement;
-const FleetCapacity = models.FleetCapacity;
-const UpdateFleetCapacityResponse = models.UpdateFleetCapacityResponse;
 const PlayerSession = models.PlayerSession;
 const CreateGameServerSessionRequest = models.CreateGameServerSessionRequest;
 const GetGameServerSessionLogUrlResponse = models.GetGameServerSessionLogUrlResponse;
@@ -53,11 +48,9 @@ const GameServerSessionDetail = models.GameServerSessionDetail;
 const DescribeGameServerSessionDetailsRequest = models.DescribeGameServerSessionDetailsRequest;
 const StartGameServerSessionPlacementRequest = models.StartGameServerSessionPlacementRequest;
 const GameServerSession = models.GameServerSession;
-const DeleteScalingPolicyResponse = models.DeleteScalingPolicyResponse;
-const UpdateFleetCapacityRequest = models.UpdateFleetCapacityRequest;
 const DescribeGameServerSessionPlacementResponse = models.DescribeGameServerSessionPlacementResponse;
-const PutScalingPolicyRequest = models.PutScalingPolicyRequest;
 const StopGameServerSessionPlacementResponse = models.StopGameServerSessionPlacementResponse;
+const InstanceAccess = models.InstanceAccess;
 
 
 /**
@@ -71,25 +64,25 @@ class GseClient extends AbstractClient {
     }
     
     /**
-     * 用于查询服务部署的动态扩缩容配置
-     * @param {DescribeScalingPoliciesRequest} req
-     * @param {function(string, DescribeScalingPoliciesResponse):void} cb
+     * 本接口（UpdateGameServerSession）用于更新游戏服务器会话
+     * @param {UpdateGameServerSessionRequest} req
+     * @param {function(string, UpdateGameServerSessionResponse):void} cb
      * @public
      */
-    DescribeScalingPolicies(req, cb) {
-        let resp = new DescribeScalingPoliciesResponse();
-        this.request("DescribeScalingPolicies", req, resp, cb);
+    UpdateGameServerSession(req, cb) {
+        let resp = new UpdateGameServerSessionResponse();
+        this.request("UpdateGameServerSession", req, resp, cb);
     }
 
     /**
-     * 本接口（StopGameServerSessionPlacement）用于停止放置游戏服务器会话
-     * @param {StopGameServerSessionPlacementRequest} req
-     * @param {function(string, StopGameServerSessionPlacementResponse):void} cb
+     * 用于查询服务器实例列表
+     * @param {DescribeInstancesRequest} req
+     * @param {function(string, DescribeInstancesResponse):void} cb
      * @public
      */
-    StopGameServerSessionPlacement(req, cb) {
-        let resp = new StopGameServerSessionPlacementResponse();
-        this.request("StopGameServerSessionPlacement", req, resp, cb);
+    DescribeInstances(req, cb) {
+        let resp = new DescribeInstancesResponse();
+        this.request("DescribeInstances", req, resp, cb);
     }
 
     /**
@@ -104,14 +97,14 @@ class GseClient extends AbstractClient {
     }
 
     /**
-     * 用于更新服务部署容量配置
-     * @param {UpdateFleetCapacityRequest} req
-     * @param {function(string, UpdateFleetCapacityResponse):void} cb
+     * 获取实例登录所需要的凭据
+     * @param {GetInstanceAccessRequest} req
+     * @param {function(string, GetInstanceAccessResponse):void} cb
      * @public
      */
-    UpdateFleetCapacity(req, cb) {
-        let resp = new UpdateFleetCapacityResponse();
-        this.request("UpdateFleetCapacity", req, resp, cb);
+    GetInstanceAccess(req, cb) {
+        let resp = new GetInstanceAccessResponse();
+        this.request("GetInstanceAccess", req, resp, cb);
     }
 
     /**
@@ -148,17 +141,6 @@ class GseClient extends AbstractClient {
     }
 
     /**
-     * 用于设置动态扩缩容配置
-     * @param {PutScalingPolicyRequest} req
-     * @param {function(string, PutScalingPolicyResponse):void} cb
-     * @public
-     */
-    PutScalingPolicy(req, cb) {
-        let resp = new PutScalingPolicyResponse();
-        this.request("PutScalingPolicy", req, resp, cb);
-    }
-
-    /**
      * 本接口（StartGameServerSessionPlacement）用于开始放置游戏服务器会话
      * @param {StartGameServerSessionPlacementRequest} req
      * @param {function(string, StartGameServerSessionPlacementResponse):void} cb
@@ -167,17 +149,6 @@ class GseClient extends AbstractClient {
     StartGameServerSessionPlacement(req, cb) {
         let resp = new StartGameServerSessionPlacementResponse();
         this.request("StartGameServerSessionPlacement", req, resp, cb);
-    }
-
-    /**
-     * 本接口（UpdateGameServerSession）用于更新游戏服务器会话
-     * @param {UpdateGameServerSessionRequest} req
-     * @param {function(string, UpdateGameServerSessionResponse):void} cb
-     * @public
-     */
-    UpdateGameServerSession(req, cb) {
-        let resp = new UpdateGameServerSessionResponse();
-        this.request("UpdateGameServerSession", req, resp, cb);
     }
 
     /**
@@ -203,25 +174,14 @@ class GseClient extends AbstractClient {
     }
 
     /**
-     * 用于查询服务部署容量配置
-     * @param {DescribeFleetCapacityRequest} req
-     * @param {function(string, DescribeFleetCapacityResponse):void} cb
+     * 本接口（StopGameServerSessionPlacement）用于停止放置游戏服务器会话
+     * @param {StopGameServerSessionPlacementRequest} req
+     * @param {function(string, StopGameServerSessionPlacementResponse):void} cb
      * @public
      */
-    DescribeFleetCapacity(req, cb) {
-        let resp = new DescribeFleetCapacityResponse();
-        this.request("DescribeFleetCapacity", req, resp, cb);
-    }
-
-    /**
-     * 用于删除扩缩容配置
-     * @param {DeleteScalingPolicyRequest} req
-     * @param {function(string, DeleteScalingPolicyResponse):void} cb
-     * @public
-     */
-    DeleteScalingPolicy(req, cb) {
-        let resp = new DeleteScalingPolicyResponse();
-        this.request("DeleteScalingPolicy", req, resp, cb);
+    StopGameServerSessionPlacement(req, cb) {
+        let resp = new StopGameServerSessionPlacementResponse();
+        this.request("StopGameServerSessionPlacement", req, resp, cb);
     }
 
     /**

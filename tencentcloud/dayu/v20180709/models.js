@@ -3859,156 +3859,30 @@ class DescribeCCFrequencyRulesRequest extends  AbstractModel {
 }
 
 /**
- * CreateDDoSPolicyCase请求参数结构体
+ * CreateL4HealthConfig请求参数结构体
  * @class
  */
-class CreateDDoSPolicyCaseRequest extends  AbstractModel {
+class CreateL4HealthConfigRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 大禹子产品代号（bgpip表示高防IP；bgp表示独享包；bgp-multip表示共享包；net表示高防IP专业版）
+         * 大禹子产品代号（bgpip表示高防IP；net表示高防IP专业版）
          * @type {string || null}
          */
         this.Business = null;
 
         /**
-         * 策略场景名，字符串长度小于64
+         * 资源ID
          * @type {string || null}
          */
-        this.CaseName = null;
+        this.Id = null;
 
         /**
-         * 开发平台，取值[PC（PC客户端）， MOBILE（移动端）， TV（电视端）， SERVER（主机）]
-         * @type {Array.<string> || null}
+         * 四层健康检查配置数组
+         * @type {Array.<L4HealthConfig> || null}
          */
-        this.PlatformTypes = null;
-
-        /**
-         * 细分品类，取值[WEB（网站）， GAME（游戏）， APP（应用）， OTHER（其他）]
-         * @type {string || null}
-         */
-        this.AppType = null;
-
-        /**
-         * 应用协议，取值[tcp（TCP协议），udp（UDP协议），icmp（ICMP协议），all（其他协议）]
-         * @type {Array.<string> || null}
-         */
-        this.AppProtocols = null;
-
-        /**
-         * TCP业务起始端口，取值(0, 65535]
-         * @type {string || null}
-         */
-        this.TcpSportStart = null;
-
-        /**
-         * TCP业务结束端口，取值(0, 65535]，必须大于等于TCP业务起始端口
-         * @type {string || null}
-         */
-        this.TcpSportEnd = null;
-
-        /**
-         * UDP业务起始端口，取值范围(0, 65535]
-         * @type {string || null}
-         */
-        this.UdpSportStart = null;
-
-        /**
-         * UDP业务结束端口，取值范围(0, 65535)，必须大于等于UDP业务起始端口
-         * @type {string || null}
-         */
-        this.UdpSportEnd = null;
-
-        /**
-         * 是否有海外客户，取值[no（没有）, yes（有）]
-         * @type {string || null}
-         */
-        this.HasAbroad = null;
-
-        /**
-         * 是否会主动对外发起TCP请求，取值[no（不会）, yes（会）]
-         * @type {string || null}
-         */
-        this.HasInitiateTcp = null;
-
-        /**
-         * 是否会主动对外发起UDP业务请求，取值[no（不会）, yes（会）]
-         * @type {string || null}
-         */
-        this.HasInitiateUdp = null;
-
-        /**
-         * 主动发起TCP请求的端口，取值范围(0, 65535]
-         * @type {string || null}
-         */
-        this.PeerTcpPort = null;
-
-        /**
-         * 主动发起UDP请求的端口，取值范围(0, 65535]
-         * @type {string || null}
-         */
-        this.PeerUdpPort = null;
-
-        /**
-         * TCP载荷的固定特征码，字符串长度小于512
-         * @type {string || null}
-         */
-        this.TcpFootprint = null;
-
-        /**
-         * UDP载荷的固定特征码，字符串长度小于512
-         * @type {string || null}
-         */
-        this.UdpFootprint = null;
-
-        /**
-         * Web业务的API的URL
-         * @type {Array.<string> || null}
-         */
-        this.WebApiUrl = null;
-
-        /**
-         * TCP业务报文长度最小值，取值范围(0, 1500)
-         * @type {string || null}
-         */
-        this.MinTcpPackageLen = null;
-
-        /**
-         * TCP业务报文长度最大值，取值范围(0, 1500)，必须大于等于TCP业务报文长度最小值
-         * @type {string || null}
-         */
-        this.MaxTcpPackageLen = null;
-
-        /**
-         * UDP业务报文长度最小值，取值范围(0, 1500)
-         * @type {string || null}
-         */
-        this.MinUdpPackageLen = null;
-
-        /**
-         * UDP业务报文长度最大值，取值范围(0, 1500)，必须大于等于UDP业务报文长度最小值
-         * @type {string || null}
-         */
-        this.MaxUdpPackageLen = null;
-
-        /**
-         * 是否有VPN业务，取值[no（没有）, yes（有）]
-         * @type {string || null}
-         */
-        this.HasVPN = null;
-
-        /**
-         * TCP业务端口列表，同时支持单个端口和端口段，字符串格式，例如：80,443,700-800,53,1000-3000
-         * @type {string || null}
-         */
-        this.TcpPortList = null;
-
-        /**
-         * UDP业务端口列表，同时支持单个端口和端口段，字符串格式，例如：80,443,700-800,53,1000-3000
-         * @type {string || null}
-         */
-        this.UdpPortList = null;
+        this.HealthConfig = null;
 
     }
 
@@ -4020,29 +3894,16 @@ class CreateDDoSPolicyCaseRequest extends  AbstractModel {
             return;
         }
         this.Business = 'Business' in params ? params.Business : null;
-        this.CaseName = 'CaseName' in params ? params.CaseName : null;
-        this.PlatformTypes = 'PlatformTypes' in params ? params.PlatformTypes : null;
-        this.AppType = 'AppType' in params ? params.AppType : null;
-        this.AppProtocols = 'AppProtocols' in params ? params.AppProtocols : null;
-        this.TcpSportStart = 'TcpSportStart' in params ? params.TcpSportStart : null;
-        this.TcpSportEnd = 'TcpSportEnd' in params ? params.TcpSportEnd : null;
-        this.UdpSportStart = 'UdpSportStart' in params ? params.UdpSportStart : null;
-        this.UdpSportEnd = 'UdpSportEnd' in params ? params.UdpSportEnd : null;
-        this.HasAbroad = 'HasAbroad' in params ? params.HasAbroad : null;
-        this.HasInitiateTcp = 'HasInitiateTcp' in params ? params.HasInitiateTcp : null;
-        this.HasInitiateUdp = 'HasInitiateUdp' in params ? params.HasInitiateUdp : null;
-        this.PeerTcpPort = 'PeerTcpPort' in params ? params.PeerTcpPort : null;
-        this.PeerUdpPort = 'PeerUdpPort' in params ? params.PeerUdpPort : null;
-        this.TcpFootprint = 'TcpFootprint' in params ? params.TcpFootprint : null;
-        this.UdpFootprint = 'UdpFootprint' in params ? params.UdpFootprint : null;
-        this.WebApiUrl = 'WebApiUrl' in params ? params.WebApiUrl : null;
-        this.MinTcpPackageLen = 'MinTcpPackageLen' in params ? params.MinTcpPackageLen : null;
-        this.MaxTcpPackageLen = 'MaxTcpPackageLen' in params ? params.MaxTcpPackageLen : null;
-        this.MinUdpPackageLen = 'MinUdpPackageLen' in params ? params.MinUdpPackageLen : null;
-        this.MaxUdpPackageLen = 'MaxUdpPackageLen' in params ? params.MaxUdpPackageLen : null;
-        this.HasVPN = 'HasVPN' in params ? params.HasVPN : null;
-        this.TcpPortList = 'TcpPortList' in params ? params.TcpPortList : null;
-        this.UdpPortList = 'UdpPortList' in params ? params.UdpPortList : null;
+        this.Id = 'Id' in params ? params.Id : null;
+
+        if (params.HealthConfig) {
+            this.HealthConfig = new Array();
+            for (let z in params.HealthConfig) {
+                let obj = new L4HealthConfig();
+                obj.deserialize(params.HealthConfig[z]);
+                this.HealthConfig.push(obj);
+            }
+        }
 
     }
 }
@@ -5075,6 +4936,83 @@ class ModifyCCSelfDefinePolicyRequest extends  AbstractModel {
 }
 
 /**
+ * 四层健康检查配置
+ * @class
+ */
+class L4HealthConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 转发协议，取值[TCP, UDP]
+         * @type {string || null}
+         */
+        this.Protocol = null;
+
+        /**
+         * 转发端口
+         * @type {number || null}
+         */
+        this.VirtualPort = null;
+
+        /**
+         * =1表示开启；=0表示关闭
+         * @type {number || null}
+         */
+        this.Enable = null;
+
+        /**
+         * 响应超时时间，单位秒
+         * @type {number || null}
+         */
+        this.TimeOut = null;
+
+        /**
+         * 检测间隔时间，单位秒
+         * @type {number || null}
+         */
+        this.Interval = null;
+
+        /**
+         * 不健康阈值，单位次
+         * @type {number || null}
+         */
+        this.KickNum = null;
+
+        /**
+         * 健康阈值，单位次
+         * @type {number || null}
+         */
+        this.AliveNum = null;
+
+        /**
+         * 会话保持时间，单位秒
+         * @type {number || null}
+         */
+        this.KeepTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Protocol = 'Protocol' in params ? params.Protocol : null;
+        this.VirtualPort = 'VirtualPort' in params ? params.VirtualPort : null;
+        this.Enable = 'Enable' in params ? params.Enable : null;
+        this.TimeOut = 'TimeOut' in params ? params.TimeOut : null;
+        this.Interval = 'Interval' in params ? params.Interval : null;
+        this.KickNum = 'KickNum' in params ? params.KickNum : null;
+        this.AliveNum = 'AliveNum' in params ? params.AliveNum : null;
+        this.KeepTime = 'KeepTime' in params ? params.KeepTime : null;
+
+    }
+}
+
+/**
  * CreateCCSelfDefinePolicy请求参数结构体
  * @class
  */
@@ -5361,30 +5299,24 @@ class DescribeL4HealthConfigRequest extends  AbstractModel {
 }
 
 /**
- * ModifyL4Rules请求参数结构体
+ * CreateL7CCRule返回参数结构体
  * @class
  */
-class ModifyL4RulesRequest extends  AbstractModel {
+class CreateL7CCRuleResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 大禹子产品代号（bgpip表示高防IP；bgp表示独享包；bgp-multip表示共享包；net表示高防IP专业版）
-         * @type {string || null}
+         * 7层CC自定义规则参数，当没有开启CC自定义规则时，返回空数组
+         * @type {Array.<CCRuleConfig> || null}
          */
-        this.Business = null;
+        this.RuleConfig = null;
 
         /**
-         * 资源ID
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.Id = null;
-
-        /**
-         * 规则
-         * @type {L4RuleEntry || null}
-         */
-        this.Rule = null;
+        this.RequestId = null;
 
     }
 
@@ -5395,14 +5327,16 @@ class ModifyL4RulesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Business = 'Business' in params ? params.Business : null;
-        this.Id = 'Id' in params ? params.Id : null;
 
-        if (params.Rule) {
-            let obj = new L4RuleEntry();
-            obj.deserialize(params.Rule)
-            this.Rule = obj;
+        if (params.RuleConfig) {
+            this.RuleConfig = new Array();
+            for (let z in params.RuleConfig) {
+                let obj = new CCRuleConfig();
+                obj.deserialize(params.RuleConfig[z]);
+                this.RuleConfig.push(obj);
+            }
         }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -5457,15 +5391,15 @@ class ModifyNetReturnSwitchRequest extends  AbstractModel {
 }
 
 /**
- * DescribeDDoSIpLog请求参数结构体
+ * CreateL7CCRule请求参数结构体
  * @class
  */
-class DescribeDDoSIpLogRequest extends  AbstractModel {
+class CreateL7CCRuleRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 大禹子产品代号（net表示高防IP专业版）
+         * 大禹子产品代号（bgpip表示高防IP；net表示高防IP专业版）
          * @type {string || null}
          */
         this.Business = null;
@@ -5477,22 +5411,22 @@ class DescribeDDoSIpLogRequest extends  AbstractModel {
         this.Id = null;
 
         /**
-         * 资源的IP
+         * 操作码，取值[query(表示查询)，add(表示添加)，del(表示删除)]
          * @type {string || null}
          */
-        this.Ip = null;
+        this.Method = null;
 
         /**
-         * 攻击开始时间
+         * 7层转发规则ID，例如：rule-0000001
          * @type {string || null}
          */
-        this.StartTime = null;
+        this.RuleId = null;
 
         /**
-         * 攻击结束时间
-         * @type {string || null}
+         * 7层CC自定义规则参数，当操作码为query时，可以不用填写；当操作码为add或del时，必须填写，且数组长度只能为1；
+         * @type {Array.<CCRuleConfig> || null}
          */
-        this.EndTime = null;
+        this.RuleConfig = null;
 
     }
 
@@ -5505,9 +5439,17 @@ class DescribeDDoSIpLogRequest extends  AbstractModel {
         }
         this.Business = 'Business' in params ? params.Business : null;
         this.Id = 'Id' in params ? params.Id : null;
-        this.Ip = 'Ip' in params ? params.Ip : null;
-        this.StartTime = 'StartTime' in params ? params.StartTime : null;
-        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.Method = 'Method' in params ? params.Method : null;
+        this.RuleId = 'RuleId' in params ? params.RuleId : null;
+
+        if (params.RuleConfig) {
+            this.RuleConfig = new Array();
+            for (let z in params.RuleConfig) {
+                let obj = new CCRuleConfig();
+                obj.deserialize(params.RuleConfig[z]);
+                this.RuleConfig.push(obj);
+            }
+        }
 
     }
 }
@@ -6774,30 +6716,156 @@ class ModifyDDoSThresholdResponse extends  AbstractModel {
 }
 
 /**
- * CreateL4HealthConfig请求参数结构体
+ * CreateDDoSPolicyCase请求参数结构体
  * @class
  */
-class CreateL4HealthConfigRequest extends  AbstractModel {
+class CreateDDoSPolicyCaseRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 大禹子产品代号（bgpip表示高防IP；net表示高防IP专业版）
+         * 大禹子产品代号（bgpip表示高防IP；bgp表示独享包；bgp-multip表示共享包；net表示高防IP专业版）
          * @type {string || null}
          */
         this.Business = null;
 
         /**
-         * 资源ID
+         * 策略场景名，字符串长度小于64
          * @type {string || null}
          */
-        this.Id = null;
+        this.CaseName = null;
 
         /**
-         * 四层健康检查配置数组
-         * @type {Array.<L4HealthConfig> || null}
+         * 开发平台，取值[PC（PC客户端）， MOBILE（移动端）， TV（电视端）， SERVER（主机）]
+         * @type {Array.<string> || null}
          */
-        this.HealthConfig = null;
+        this.PlatformTypes = null;
+
+        /**
+         * 细分品类，取值[WEB（网站）， GAME（游戏）， APP（应用）， OTHER（其他）]
+         * @type {string || null}
+         */
+        this.AppType = null;
+
+        /**
+         * 应用协议，取值[tcp（TCP协议），udp（UDP协议），icmp（ICMP协议），all（其他协议）]
+         * @type {Array.<string> || null}
+         */
+        this.AppProtocols = null;
+
+        /**
+         * TCP业务起始端口，取值(0, 65535]
+         * @type {string || null}
+         */
+        this.TcpSportStart = null;
+
+        /**
+         * TCP业务结束端口，取值(0, 65535]，必须大于等于TCP业务起始端口
+         * @type {string || null}
+         */
+        this.TcpSportEnd = null;
+
+        /**
+         * UDP业务起始端口，取值范围(0, 65535]
+         * @type {string || null}
+         */
+        this.UdpSportStart = null;
+
+        /**
+         * UDP业务结束端口，取值范围(0, 65535)，必须大于等于UDP业务起始端口
+         * @type {string || null}
+         */
+        this.UdpSportEnd = null;
+
+        /**
+         * 是否有海外客户，取值[no（没有）, yes（有）]
+         * @type {string || null}
+         */
+        this.HasAbroad = null;
+
+        /**
+         * 是否会主动对外发起TCP请求，取值[no（不会）, yes（会）]
+         * @type {string || null}
+         */
+        this.HasInitiateTcp = null;
+
+        /**
+         * 是否会主动对外发起UDP业务请求，取值[no（不会）, yes（会）]
+         * @type {string || null}
+         */
+        this.HasInitiateUdp = null;
+
+        /**
+         * 主动发起TCP请求的端口，取值范围(0, 65535]
+         * @type {string || null}
+         */
+        this.PeerTcpPort = null;
+
+        /**
+         * 主动发起UDP请求的端口，取值范围(0, 65535]
+         * @type {string || null}
+         */
+        this.PeerUdpPort = null;
+
+        /**
+         * TCP载荷的固定特征码，字符串长度小于512
+         * @type {string || null}
+         */
+        this.TcpFootprint = null;
+
+        /**
+         * UDP载荷的固定特征码，字符串长度小于512
+         * @type {string || null}
+         */
+        this.UdpFootprint = null;
+
+        /**
+         * Web业务的API的URL
+         * @type {Array.<string> || null}
+         */
+        this.WebApiUrl = null;
+
+        /**
+         * TCP业务报文长度最小值，取值范围(0, 1500)
+         * @type {string || null}
+         */
+        this.MinTcpPackageLen = null;
+
+        /**
+         * TCP业务报文长度最大值，取值范围(0, 1500)，必须大于等于TCP业务报文长度最小值
+         * @type {string || null}
+         */
+        this.MaxTcpPackageLen = null;
+
+        /**
+         * UDP业务报文长度最小值，取值范围(0, 1500)
+         * @type {string || null}
+         */
+        this.MinUdpPackageLen = null;
+
+        /**
+         * UDP业务报文长度最大值，取值范围(0, 1500)，必须大于等于UDP业务报文长度最小值
+         * @type {string || null}
+         */
+        this.MaxUdpPackageLen = null;
+
+        /**
+         * 是否有VPN业务，取值[no（没有）, yes（有）]
+         * @type {string || null}
+         */
+        this.HasVPN = null;
+
+        /**
+         * TCP业务端口列表，同时支持单个端口和端口段，字符串格式，例如：80,443,700-800,53,1000-3000
+         * @type {string || null}
+         */
+        this.TcpPortList = null;
+
+        /**
+         * UDP业务端口列表，同时支持单个端口和端口段，字符串格式，例如：80,443,700-800,53,1000-3000
+         * @type {string || null}
+         */
+        this.UdpPortList = null;
 
     }
 
@@ -6809,16 +6877,29 @@ class CreateL4HealthConfigRequest extends  AbstractModel {
             return;
         }
         this.Business = 'Business' in params ? params.Business : null;
-        this.Id = 'Id' in params ? params.Id : null;
-
-        if (params.HealthConfig) {
-            this.HealthConfig = new Array();
-            for (let z in params.HealthConfig) {
-                let obj = new L4HealthConfig();
-                obj.deserialize(params.HealthConfig[z]);
-                this.HealthConfig.push(obj);
-            }
-        }
+        this.CaseName = 'CaseName' in params ? params.CaseName : null;
+        this.PlatformTypes = 'PlatformTypes' in params ? params.PlatformTypes : null;
+        this.AppType = 'AppType' in params ? params.AppType : null;
+        this.AppProtocols = 'AppProtocols' in params ? params.AppProtocols : null;
+        this.TcpSportStart = 'TcpSportStart' in params ? params.TcpSportStart : null;
+        this.TcpSportEnd = 'TcpSportEnd' in params ? params.TcpSportEnd : null;
+        this.UdpSportStart = 'UdpSportStart' in params ? params.UdpSportStart : null;
+        this.UdpSportEnd = 'UdpSportEnd' in params ? params.UdpSportEnd : null;
+        this.HasAbroad = 'HasAbroad' in params ? params.HasAbroad : null;
+        this.HasInitiateTcp = 'HasInitiateTcp' in params ? params.HasInitiateTcp : null;
+        this.HasInitiateUdp = 'HasInitiateUdp' in params ? params.HasInitiateUdp : null;
+        this.PeerTcpPort = 'PeerTcpPort' in params ? params.PeerTcpPort : null;
+        this.PeerUdpPort = 'PeerUdpPort' in params ? params.PeerUdpPort : null;
+        this.TcpFootprint = 'TcpFootprint' in params ? params.TcpFootprint : null;
+        this.UdpFootprint = 'UdpFootprint' in params ? params.UdpFootprint : null;
+        this.WebApiUrl = 'WebApiUrl' in params ? params.WebApiUrl : null;
+        this.MinTcpPackageLen = 'MinTcpPackageLen' in params ? params.MinTcpPackageLen : null;
+        this.MaxTcpPackageLen = 'MaxTcpPackageLen' in params ? params.MaxTcpPackageLen : null;
+        this.MinUdpPackageLen = 'MinUdpPackageLen' in params ? params.MinUdpPackageLen : null;
+        this.MaxUdpPackageLen = 'MaxUdpPackageLen' in params ? params.MaxUdpPackageLen : null;
+        this.HasVPN = 'HasVPN' in params ? params.HasVPN : null;
+        this.TcpPortList = 'TcpPortList' in params ? params.TcpPortList : null;
+        this.UdpPortList = 'UdpPortList' in params ? params.UdpPortList : null;
 
     }
 }
@@ -8009,60 +8090,36 @@ class CreateBasicDDoSAlarmThresholdRequest extends  AbstractModel {
 }
 
 /**
- * 四层健康检查配置
+ * 7层CC自定义规则
  * @class
  */
-class L4HealthConfig extends  AbstractModel {
+class CCRuleConfig extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 转发协议，取值[TCP, UDP]
+         * 统计周期，单位秒，取值[10, 30, 60]
+         * @type {number || null}
+         */
+        this.Period = null;
+
+        /**
+         * 访问次数，取值[1-10000]
+         * @type {number || null}
+         */
+        this.ReqNumber = null;
+
+        /**
+         * 执行动作，取值["alg"（人机识别）, "drop"（拦截）]
          * @type {string || null}
          */
-        this.Protocol = null;
+        this.Action = null;
 
         /**
-         * 转发端口
+         * 执行时间，单位秒，取值[1-900]
          * @type {number || null}
          */
-        this.VirtualPort = null;
-
-        /**
-         * =1表示开启；=0表示关闭
-         * @type {number || null}
-         */
-        this.Enable = null;
-
-        /**
-         * 响应超时时间，单位秒
-         * @type {number || null}
-         */
-        this.TimeOut = null;
-
-        /**
-         * 检测间隔时间，单位秒
-         * @type {number || null}
-         */
-        this.Interval = null;
-
-        /**
-         * 不健康阈值，单位次
-         * @type {number || null}
-         */
-        this.KickNum = null;
-
-        /**
-         * 健康阈值，单位次
-         * @type {number || null}
-         */
-        this.AliveNum = null;
-
-        /**
-         * 会话保持时间，单位秒
-         * @type {number || null}
-         */
-        this.KeepTime = null;
+        this.ExeDuration = null;
 
     }
 
@@ -8073,14 +8130,10 @@ class L4HealthConfig extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Protocol = 'Protocol' in params ? params.Protocol : null;
-        this.VirtualPort = 'VirtualPort' in params ? params.VirtualPort : null;
-        this.Enable = 'Enable' in params ? params.Enable : null;
-        this.TimeOut = 'TimeOut' in params ? params.TimeOut : null;
-        this.Interval = 'Interval' in params ? params.Interval : null;
-        this.KickNum = 'KickNum' in params ? params.KickNum : null;
-        this.AliveNum = 'AliveNum' in params ? params.AliveNum : null;
-        this.KeepTime = 'KeepTime' in params ? params.KeepTime : null;
+        this.Period = 'Period' in params ? params.Period : null;
+        this.ReqNumber = 'ReqNumber' in params ? params.ReqNumber : null;
+        this.Action = 'Action' in params ? params.Action : null;
+        this.ExeDuration = 'ExeDuration' in params ? params.ExeDuration : null;
 
     }
 }
@@ -8303,6 +8356,62 @@ class ModifyCCSelfDefinePolicyResponse extends  AbstractModel {
             this.Success = obj;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeDDoSIpLog请求参数结构体
+ * @class
+ */
+class DescribeDDoSIpLogRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 大禹子产品代号（net表示高防IP专业版）
+         * @type {string || null}
+         */
+        this.Business = null;
+
+        /**
+         * 资源ID
+         * @type {string || null}
+         */
+        this.Id = null;
+
+        /**
+         * 资源的IP
+         * @type {string || null}
+         */
+        this.Ip = null;
+
+        /**
+         * 攻击开始时间
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * 攻击结束时间
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Business = 'Business' in params ? params.Business : null;
+        this.Id = 'Id' in params ? params.Id : null;
+        this.Ip = 'Ip' in params ? params.Ip : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
 
     }
 }
@@ -8887,6 +8996,53 @@ class DescribePackIndexRequest extends  AbstractModel {
             return;
         }
         this.Business = 'Business' in params ? params.Business : null;
+
+    }
+}
+
+/**
+ * ModifyL4Rules请求参数结构体
+ * @class
+ */
+class ModifyL4RulesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 大禹子产品代号（bgpip表示高防IP；bgp表示独享包；bgp-multip表示共享包；net表示高防IP专业版）
+         * @type {string || null}
+         */
+        this.Business = null;
+
+        /**
+         * 资源ID
+         * @type {string || null}
+         */
+        this.Id = null;
+
+        /**
+         * 规则
+         * @type {L4RuleEntry || null}
+         */
+        this.Rule = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Business = 'Business' in params ? params.Business : null;
+        this.Id = 'Id' in params ? params.Id : null;
+
+        if (params.Rule) {
+            let obj = new L4RuleEntry();
+            obj.deserialize(params.Rule)
+            this.Rule = obj;
+        }
 
     }
 }
@@ -12862,7 +13018,7 @@ module.exports = {
     ModifyResourceRenewFlagRequest: ModifyResourceRenewFlagRequest,
     DescribeCCEvListResponse: DescribeCCEvListResponse,
     DescribeCCFrequencyRulesRequest: DescribeCCFrequencyRulesRequest,
-    CreateDDoSPolicyCaseRequest: CreateDDoSPolicyCaseRequest,
+    CreateL4HealthConfigRequest: CreateL4HealthConfigRequest,
     ModifyDDoSPolicyNameResponse: ModifyDDoSPolicyNameResponse,
     DescribeCCAlarmThresholdRequest: DescribeCCAlarmThresholdRequest,
     ModifyCCUrlAllowRequest: ModifyCCUrlAllowRequest,
@@ -12883,14 +13039,15 @@ module.exports = {
     DescribeDDoSNetCountRequest: DescribeDDoSNetCountRequest,
     Paging: Paging,
     ModifyCCSelfDefinePolicyRequest: ModifyCCSelfDefinePolicyRequest,
+    L4HealthConfig: L4HealthConfig,
     CreateCCSelfDefinePolicyRequest: CreateCCSelfDefinePolicyRequest,
     SuccessCode: SuccessCode,
     DescribleL4RulesRequest: DescribleL4RulesRequest,
     L4RuleEntry: L4RuleEntry,
     DescribeL4HealthConfigRequest: DescribeL4HealthConfigRequest,
-    ModifyL4RulesRequest: ModifyL4RulesRequest,
+    CreateL7CCRuleResponse: CreateL7CCRuleResponse,
     ModifyNetReturnSwitchRequest: ModifyNetReturnSwitchRequest,
-    DescribeDDoSIpLogRequest: DescribeDDoSIpLogRequest,
+    CreateL7CCRuleRequest: CreateL7CCRuleRequest,
     CreateL7RulesRequest: CreateL7RulesRequest,
     CreateL4RulesRequest: CreateL4RulesRequest,
     DescribeDDoSNetEvListResponse: DescribeDDoSNetEvListResponse,
@@ -12916,7 +13073,7 @@ module.exports = {
     ModifyCCFrequencyRulesRequest: ModifyCCFrequencyRulesRequest,
     ModifyCCPolicySwitchResponse: ModifyCCPolicySwitchResponse,
     ModifyDDoSThresholdResponse: ModifyDDoSThresholdResponse,
-    CreateL4HealthConfigRequest: CreateL4HealthConfigRequest,
+    CreateDDoSPolicyCaseRequest: CreateDDoSPolicyCaseRequest,
     ModifyCCIpAllowDenyResponse: ModifyCCIpAllowDenyResponse,
     ModifyCCAlarmThresholdRequest: ModifyCCAlarmThresholdRequest,
     DescribeCCFrequencyRulesResponse: DescribeCCFrequencyRulesResponse,
@@ -12938,10 +13095,11 @@ module.exports = {
     DescribeResourceListResponse: DescribeResourceListResponse,
     ModifyCCThresholdRequest: ModifyCCThresholdRequest,
     CreateBasicDDoSAlarmThresholdRequest: CreateBasicDDoSAlarmThresholdRequest,
-    L4HealthConfig: L4HealthConfig,
+    CCRuleConfig: CCRuleConfig,
     DescribeDDoSEvInfoResponse: DescribeDDoSEvInfoResponse,
     DescribleRegionCountRequest: DescribleRegionCountRequest,
     ModifyCCSelfDefinePolicyResponse: ModifyCCSelfDefinePolicyResponse,
+    DescribeDDoSIpLogRequest: DescribeDDoSIpLogRequest,
     DescribeDDoSAlarmThresholdRequest: DescribeDDoSAlarmThresholdRequest,
     DescribePolicyCaseRequest: DescribePolicyCaseRequest,
     WaterPrintPolicy: WaterPrintPolicy,
@@ -12956,6 +13114,7 @@ module.exports = {
     DDoSAttackSourceRecord: DDoSAttackSourceRecord,
     CreateUnblockIpResponse: CreateUnblockIpResponse,
     DescribePackIndexRequest: DescribePackIndexRequest,
+    ModifyL4RulesRequest: ModifyL4RulesRequest,
     DescribeDDoSEvListResponse: DescribeDDoSEvListResponse,
     DescribeDDoSPolicyRequest: DescribeDDoSPolicyRequest,
     DescribeL7HealthConfigResponse: DescribeL7HealthConfigResponse,

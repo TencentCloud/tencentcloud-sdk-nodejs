@@ -3436,6 +3436,13 @@ class AttachedPolicyOfRole extends  AbstractModel {
          */
         this.DeactivedDetail = null;
 
+        /**
+         * 策略描述
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Description = null;
+
     }
 
     /**
@@ -3452,6 +3459,7 @@ class AttachedPolicyOfRole extends  AbstractModel {
         this.CreateMode = 'CreateMode' in params ? params.CreateMode : null;
         this.Deactived = 'Deactived' in params ? params.Deactived : null;
         this.DeactivedDetail = 'DeactivedDetail' in params ? params.DeactivedDetail : null;
+        this.Description = 'Description' in params ? params.Description : null;
 
     }
 }
