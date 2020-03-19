@@ -27,6 +27,7 @@ module.exports = {
     cloudaudit: require("./cloudaudit"),
     cloudhsm: require("./cloudhsm"),
     cme: require("./cme"),
+    cmq: require("./cmq"),
     cms: require("./cms"),
     common: require("./common"),
     cpdp: require("./cpdp"),

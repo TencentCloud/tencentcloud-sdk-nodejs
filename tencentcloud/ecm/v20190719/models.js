@@ -2457,7 +2457,7 @@ class Position extends  AbstractModel {
 
         /**
          * 实例所在的国家的信息。
-         * @type { || null}
+         * @type {Country || null}
          */
         this.Country = null;
 
@@ -2469,13 +2469,13 @@ class Position extends  AbstractModel {
 
         /**
          * 实例所在的省份的信息。
-         * @type { || null}
+         * @type {Province || null}
          */
         this.Province = null;
 
         /**
          * 实例所在的城市的信息。
-         * @type { || null}
+         * @type {City || null}
          */
         this.City = null;
 
@@ -2502,7 +2502,7 @@ class Position extends  AbstractModel {
         }
 
         if (params.Country) {
-            let obj = new ();
+            let obj = new Country();
             obj.deserialize(params.Country)
             this.Country = obj;
         }
@@ -2514,13 +2514,13 @@ class Position extends  AbstractModel {
         }
 
         if (params.Province) {
-            let obj = new ();
+            let obj = new Province();
             obj.deserialize(params.Province)
             this.Province = obj;
         }
 
         if (params.City) {
-            let obj = new ();
+            let obj = new City();
             obj.deserialize(params.City)
             this.City = obj;
         }
