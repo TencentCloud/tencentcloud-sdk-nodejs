@@ -251,6 +251,55 @@ class CreateMigrateCheckJobRequest extends  AbstractModel {
 }
 
 /**
+ * ModifySubscribeVipVport请求参数结构体
+ * @class
+ */
+class ModifySubscribeVipVportRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 数据订阅实例的ID
+         * @type {string || null}
+         */
+        this.SubscribeId = null;
+
+        /**
+         * 指定目的子网，如果传此参数，DstIp必须在目的子网内
+         * @type {string || null}
+         */
+        this.DstUniqSubnetId = null;
+
+        /**
+         * 目标IP，与DstPort至少传一个
+         * @type {string || null}
+         */
+        this.DstIp = null;
+
+        /**
+         * 目标PORT，支持范围为：[1025-65535]
+         * @type {number || null}
+         */
+        this.DstPort = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SubscribeId = 'SubscribeId' in params ? params.SubscribeId : null;
+        this.DstUniqSubnetId = 'DstUniqSubnetId' in params ? params.DstUniqSubnetId : null;
+        this.DstIp = 'DstIp' in params ? params.DstIp : null;
+        this.DstPort = 'DstPort' in params ? params.DstPort : null;
+
+    }
+}
+
+/**
  * 灾备同步的实例信息，记录主实例或灾备实例的信息
  * @class
  */
@@ -281,6 +330,34 @@ class SyncInstanceInfo extends  AbstractModel {
         }
         this.Region = 'Region' in params ? params.Region : null;
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+    }
+}
+
+/**
+ * ModifySubscribeName返回参数结构体
+ * @class
+ */
+class ModifySubscribeNameResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -349,18 +426,18 @@ class DescribeMigrateCheckJobRequest extends  AbstractModel {
 }
 
 /**
- * StartMigrateJob请求参数结构体
+ * IsolateSubscribe返回参数结构体
  * @class
  */
-class StartMigrateJobRequest extends  AbstractModel {
+class IsolateSubscribeResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 数据迁移任务ID
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.JobId = null;
+        this.RequestId = null;
 
     }
 
@@ -371,7 +448,42 @@ class StartMigrateJobRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.JobId = 'JobId' in params ? params.JobId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifySubscribeObjects返回参数结构体
+ * @class
+ */
+class ModifySubscribeObjectsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 异步任务的ID
+         * @type {string || null}
+         */
+        this.AsyncRequestId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AsyncRequestId = 'AsyncRequestId' in params ? params.AsyncRequestId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -552,6 +664,209 @@ Schema:s1}]
 }
 
 /**
+ * 订阅实例信息
+ * @class
+ */
+class SubscribeInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 数据订阅的实例ID
+         * @type {string || null}
+         */
+        this.SubscribeId = null;
+
+        /**
+         * 数据订阅实例的名称
+         * @type {string || null}
+         */
+        this.SubscribeName = null;
+
+        /**
+         * 数据订阅实例绑定的通道ID
+         * @type {string || null}
+         */
+        this.ChannelId = null;
+
+        /**
+         * 数据订阅绑定实例对应的产品名称
+         * @type {string || null}
+         */
+        this.Product = null;
+
+        /**
+         * 数据订阅实例绑定的数据库实例ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 数据订阅实例绑定的数据库实例状态
+         * @type {string || null}
+         */
+        this.InstanceStatus = null;
+
+        /**
+         * 数据订阅实例的配置状态，unconfigure - 未配置， configuring - 配置中，configured - 已配置
+         * @type {string || null}
+         */
+        this.SubsStatus = null;
+
+        /**
+         * 上次修改时间
+         * @type {string || null}
+         */
+        this.ModifyTime = null;
+
+        /**
+         * 创建时间
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * 隔离时间
+         * @type {string || null}
+         */
+        this.IsolateTime = null;
+
+        /**
+         * 到期时间
+         * @type {string || null}
+         */
+        this.ExpireTime = null;
+
+        /**
+         * 下线时间
+         * @type {string || null}
+         */
+        this.OfflineTime = null;
+
+        /**
+         * 最近一次修改的消费时间起点，如果从未修改则为零值
+         * @type {string || null}
+         */
+        this.ConsumeStartTime = null;
+
+        /**
+         * 数据订阅实例所属地域
+         * @type {string || null}
+         */
+        this.Region = null;
+
+        /**
+         * 计费方式，0 - 包年包月，1 - 按量计费
+         * @type {number || null}
+         */
+        this.PayType = null;
+
+        /**
+         * 数据订阅实例的Vip
+         * @type {string || null}
+         */
+        this.Vip = null;
+
+        /**
+         * 数据订阅实例的Vport
+         * @type {number || null}
+         */
+        this.Vport = null;
+
+        /**
+         * 数据订阅实例Vip所在VPC的唯一ID
+         * @type {string || null}
+         */
+        this.UniqVpcId = null;
+
+        /**
+         * 数据订阅实例Vip所在子网的唯一ID
+         * @type {string || null}
+         */
+        this.UniqSubnetId = null;
+
+        /**
+         * 数据订阅实例的状态，creating - 创建中，normal - 正常运行，isolating - 隔离中，isolated - 已隔离，offlining - 下线中，offline - 已下线
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * SDK最后一条确认消息的时间戳，如果SDK一直消费，也可以作为SDK当前消费时间点
+         * @type {string || null}
+         */
+        this.SdkConsumedTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SubscribeId = 'SubscribeId' in params ? params.SubscribeId : null;
+        this.SubscribeName = 'SubscribeName' in params ? params.SubscribeName : null;
+        this.ChannelId = 'ChannelId' in params ? params.ChannelId : null;
+        this.Product = 'Product' in params ? params.Product : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.InstanceStatus = 'InstanceStatus' in params ? params.InstanceStatus : null;
+        this.SubsStatus = 'SubsStatus' in params ? params.SubsStatus : null;
+        this.ModifyTime = 'ModifyTime' in params ? params.ModifyTime : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.IsolateTime = 'IsolateTime' in params ? params.IsolateTime : null;
+        this.ExpireTime = 'ExpireTime' in params ? params.ExpireTime : null;
+        this.OfflineTime = 'OfflineTime' in params ? params.OfflineTime : null;
+        this.ConsumeStartTime = 'ConsumeStartTime' in params ? params.ConsumeStartTime : null;
+        this.Region = 'Region' in params ? params.Region : null;
+        this.PayType = 'PayType' in params ? params.PayType : null;
+        this.Vip = 'Vip' in params ? params.Vip : null;
+        this.Vport = 'Vport' in params ? params.Vport : null;
+        this.UniqVpcId = 'UniqVpcId' in params ? params.UniqVpcId : null;
+        this.UniqSubnetId = 'UniqSubnetId' in params ? params.UniqSubnetId : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.SdkConsumedTime = 'SdkConsumedTime' in params ? params.SdkConsumedTime : null;
+
+    }
+}
+
+/**
+ * ModifySubscribeName请求参数结构体
+ * @class
+ */
+class ModifySubscribeNameRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 数据订阅实例的ID
+         * @type {string || null}
+         */
+        this.SubscribeId = null;
+
+        /**
+         * 数据订阅实例的名称，长度限制为[1,60]
+         * @type {string || null}
+         */
+        this.SubscribeName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SubscribeId = 'SubscribeId' in params ? params.SubscribeId : null;
+        this.SubscribeName = 'SubscribeName' in params ? params.SubscribeName : null;
+
+    }
+}
+
+/**
  * 灾备同步任务信息
  * @class
  */
@@ -698,6 +1013,34 @@ class SyncJobInfo extends  AbstractModel {
 }
 
 /**
+ * ModifySubscribeConsumeTime返回参数结构体
+ * @class
+ */
+class ModifySubscribeConsumeTimeResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * 目的实例信息，具体内容跟迁移任务类型相关
  * @class
  */
@@ -754,12 +1097,156 @@ class DstInfo extends  AbstractModel {
 }
 
 /**
- * ModifyMigrateJob返回参数结构体
+ * DescribeSubscribeConf返回参数结构体
  * @class
  */
-class ModifyMigrateJobResponse extends  AbstractModel {
+class DescribeSubscribeConfResponse extends  AbstractModel {
     constructor(){
         super();
+
+        /**
+         * 订阅实例ID
+         * @type {string || null}
+         */
+        this.SubscribeId = null;
+
+        /**
+         * 订阅实例名称
+         * @type {string || null}
+         */
+        this.SubscribeName = null;
+
+        /**
+         * 订阅通道
+         * @type {string || null}
+         */
+        this.ChannelId = null;
+
+        /**
+         * 订阅数据库类型
+         * @type {string || null}
+         */
+        this.Product = null;
+
+        /**
+         * 被订阅的实例
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 被订阅的实例的状态，可能的值有running,offline,isolate
+         * @type {string || null}
+         */
+        this.InstanceStatus = null;
+
+        /**
+         * 订阅实例状态，可能的值有unconfigure-未配置，configuring-配置中，configured-已配置
+         * @type {string || null}
+         */
+        this.SubsStatus = null;
+
+        /**
+         * 订阅实例生命周期状态，可能的值有：normal-正常，isolating-隔离中，isolated-已隔离，offlining-下线中
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * 订阅实例创建时间
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * 订阅实例被隔离时间
+         * @type {string || null}
+         */
+        this.IsolateTime = null;
+
+        /**
+         * 订阅实例到期时间
+         * @type {string || null}
+         */
+        this.ExpireTime = null;
+
+        /**
+         * 订阅实例下线时间
+         * @type {string || null}
+         */
+        this.OfflineTime = null;
+
+        /**
+         * 订阅实例消费时间起点。
+         * @type {string || null}
+         */
+        this.ConsumeStartTime = null;
+
+        /**
+         * 订阅实例计费类型，1-小时计费，0-包年包月
+         * @type {number || null}
+         */
+        this.PayType = null;
+
+        /**
+         * 订阅通道Vip
+         * @type {string || null}
+         */
+        this.Vip = null;
+
+        /**
+         * 订阅通道Port
+         * @type {number || null}
+         */
+        this.Vport = null;
+
+        /**
+         * 订阅通道所在VpcId
+         * @type {string || null}
+         */
+        this.UniqVpcId = null;
+
+        /**
+         * 订阅通道所在SubnetId
+         * @type {string || null}
+         */
+        this.UniqSubnetId = null;
+
+        /**
+         * 当前SDK消费时间位点
+         * @type {string || null}
+         */
+        this.SdkConsumedTime = null;
+
+        /**
+         * 订阅SDK IP地址
+         * @type {string || null}
+         */
+        this.SdkHost = null;
+
+        /**
+         * 订阅对象类型0-全实例订阅，1-DDL数据订阅，2-DML结构订阅，3-DDL数据订阅+DML结构订阅
+         * @type {number || null}
+         */
+        this.SubscribeObjectType = null;
+
+        /**
+         * 订阅对象，当SubscribeObjectType 为0时，此字段为空数组
+         * @type {Array.<SubscribeObject> || null}
+         */
+        this.SubscribeObjects = null;
+
+        /**
+         * 修改时间
+         * @type {string || null}
+         */
+        this.ModifyTime = null;
+
+        /**
+         * 地域
+         * @type {string || null}
+         */
+        this.Region = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -776,7 +1263,67 @@ class ModifyMigrateJobResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.SubscribeId = 'SubscribeId' in params ? params.SubscribeId : null;
+        this.SubscribeName = 'SubscribeName' in params ? params.SubscribeName : null;
+        this.ChannelId = 'ChannelId' in params ? params.ChannelId : null;
+        this.Product = 'Product' in params ? params.Product : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.InstanceStatus = 'InstanceStatus' in params ? params.InstanceStatus : null;
+        this.SubsStatus = 'SubsStatus' in params ? params.SubsStatus : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.IsolateTime = 'IsolateTime' in params ? params.IsolateTime : null;
+        this.ExpireTime = 'ExpireTime' in params ? params.ExpireTime : null;
+        this.OfflineTime = 'OfflineTime' in params ? params.OfflineTime : null;
+        this.ConsumeStartTime = 'ConsumeStartTime' in params ? params.ConsumeStartTime : null;
+        this.PayType = 'PayType' in params ? params.PayType : null;
+        this.Vip = 'Vip' in params ? params.Vip : null;
+        this.Vport = 'Vport' in params ? params.Vport : null;
+        this.UniqVpcId = 'UniqVpcId' in params ? params.UniqVpcId : null;
+        this.UniqSubnetId = 'UniqSubnetId' in params ? params.UniqSubnetId : null;
+        this.SdkConsumedTime = 'SdkConsumedTime' in params ? params.SdkConsumedTime : null;
+        this.SdkHost = 'SdkHost' in params ? params.SdkHost : null;
+        this.SubscribeObjectType = 'SubscribeObjectType' in params ? params.SubscribeObjectType : null;
+
+        if (params.SubscribeObjects) {
+            this.SubscribeObjects = new Array();
+            for (let z in params.SubscribeObjects) {
+                let obj = new SubscribeObject();
+                obj.deserialize(params.SubscribeObjects[z]);
+                this.SubscribeObjects.push(obj);
+            }
+        }
+        this.ModifyTime = 'ModifyTime' in params ? params.ModifyTime : null;
+        this.Region = 'Region' in params ? params.Region : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeAsyncRequestInfo请求参数结构体
+ * @class
+ */
+class DescribeAsyncRequestInfoRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 任务 ID
+         * @type {string || null}
+         */
+        this.AsyncRequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AsyncRequestId = 'AsyncRequestId' in params ? params.AsyncRequestId : null;
 
     }
 }
@@ -958,440 +1505,6 @@ class ConsistencyParams extends  AbstractModel {
 }
 
 /**
- * 灾备同步任务配置选项
- * @class
- */
-class SyncOption extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 同步对象，1-整个实例，2-指定库表
-         * @type {number || null}
-         */
-        this.SyncObject = null;
-
-        /**
-         * 同步开始设置，1-立即开始
-         * @type {number || null}
-         */
-        this.RunMode = null;
-
-        /**
-         * 同步模式， 3-全量且增量同步
-         * @type {number || null}
-         */
-        this.SyncType = null;
-
-        /**
-         * 数据一致性检测， 1-无需配置
-         * @type {number || null}
-         */
-        this.ConsistencyType = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.SyncObject = 'SyncObject' in params ? params.SyncObject : null;
-        this.RunMode = 'RunMode' in params ? params.RunMode : null;
-        this.SyncType = 'SyncType' in params ? params.SyncType : null;
-        this.ConsistencyType = 'ConsistencyType' in params ? params.ConsistencyType : null;
-
-    }
-}
-
-/**
- * 迁移任务配置选项
- * @class
- */
-class MigrateOption extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 任务运行模式，值包括：1-立即执行，2-定时执行
-         * @type {number || null}
-         */
-        this.RunMode = null;
-
-        /**
-         * 期望执行时间，当runMode=2时，该字段必填，时间格式：yyyy-mm-dd hh:mm:ss
-         * @type {string || null}
-         */
-        this.ExpectTime = null;
-
-        /**
-         * 数据迁移类型，值包括：1-结构迁移,2-全量迁移,3-全量+增量迁移
-         * @type {number || null}
-         */
-        this.MigrateType = null;
-
-        /**
-         * 迁移对象，1-整个实例，2-指定库表
-         * @type {number || null}
-         */
-        this.MigrateObject = null;
-
-        /**
-         * 抽样数据一致性检测参数，1-未配置,2-全量检测,3-抽样检测, 4-仅校验不一致表,5-不检测
-         * @type {number || null}
-         */
-        this.ConsistencyType = null;
-
-        /**
-         * 是否用源库Root账户覆盖目标库，值包括：0-不覆盖，1-覆盖，选择库表或者结构迁移时应该为0
-         * @type {number || null}
-         */
-        this.IsOverrideRoot = null;
-
-        /**
-         * 不同数据库用到的额外参数.以JSON格式描述. 
-Redis可定义如下的参数: 
-{ 
-	"ClientOutputBufferHardLimit":512, 	从机缓冲区的硬性容量限制(MB) 
-	"ClientOutputBufferSoftLimit":512, 	从机缓冲区的软性容量限制(MB) 
-	"ClientOutputBufferPersistTime":60, 从机缓冲区的软性限制持续时间(秒) 
-	"ReplBacklogSize":512, 	环形缓冲区容量限制(MB) 
-	"ReplTimeout":120，		复制超时时间(秒) 
-}
-MongoDB可定义如下的参数: 
-{
-	'SrcAuthDatabase':'admin', 
-	'SrcAuthFlag': "1", 
-	'SrcAuthMechanism':"SCRAM-SHA-1"
-}
-MySQL暂不支持额外参数设置。
-         * @type {string || null}
-         */
-        this.ExternParams = null;
-
-        /**
-         * 仅用于“抽样数据一致性检测”，ConsistencyType配置为抽样检测时，必选
-         * @type {ConsistencyParams || null}
-         */
-        this.ConsistencyParams = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RunMode = 'RunMode' in params ? params.RunMode : null;
-        this.ExpectTime = 'ExpectTime' in params ? params.ExpectTime : null;
-        this.MigrateType = 'MigrateType' in params ? params.MigrateType : null;
-        this.MigrateObject = 'MigrateObject' in params ? params.MigrateObject : null;
-        this.ConsistencyType = 'ConsistencyType' in params ? params.ConsistencyType : null;
-        this.IsOverrideRoot = 'IsOverrideRoot' in params ? params.IsOverrideRoot : null;
-        this.ExternParams = 'ExternParams' in params ? params.ExternParams : null;
-
-        if (params.ConsistencyParams) {
-            let obj = new ConsistencyParams();
-            obj.deserialize(params.ConsistencyParams)
-            this.ConsistencyParams = obj;
-        }
-
-    }
-}
-
-/**
- * CreateMigrateCheckJob返回参数结构体
- * @class
- */
-class CreateMigrateCheckJobResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * 迁移中的步骤信息
- * @class
- */
-class MigrateStepDetailInfo extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 步骤序列
-         * @type {number || null}
-         */
-        this.StepNo = null;
-
-        /**
-         * 步骤展现名称
-         * @type {string || null}
-         */
-        this.StepName = null;
-
-        /**
-         * 步骤英文标识
-         * @type {string || null}
-         */
-        this.StepId = null;
-
-        /**
-         * 步骤状态:0-默认值,1-成功,2-失败,3-执行中,4-未执行
-         * @type {number || null}
-         */
-        this.Status = null;
-
-        /**
-         * 当前步骤开始的时间，格式为"yyyy-mm-dd hh:mm:ss"，该字段不存在或者为空是无意义
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.StartTime = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.StepNo = 'StepNo' in params ? params.StepNo : null;
-        this.StepName = 'StepName' in params ? params.StepName : null;
-        this.StepId = 'StepId' in params ? params.StepId : null;
-        this.Status = 'Status' in params ? params.Status : null;
-        this.StartTime = 'StartTime' in params ? params.StartTime : null;
-
-    }
-}
-
-/**
- * DescribeMigrateCheckJob返回参数结构体
- * @class
- */
-class DescribeMigrateCheckJobResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 校验任务状态：unavailable(当前不可用), starting(开始中)，running(校验中)，finished(校验完成)
-         * @type {string || null}
-         */
-        this.Status = null;
-
-        /**
-         * 任务的错误码
-         * @type {number || null}
-         */
-        this.ErrorCode = null;
-
-        /**
-         * 任务的错误信息
-         * @type {string || null}
-         */
-        this.ErrorMessage = null;
-
-        /**
-         * Check任务总进度,如："30"表示30%
-         * @type {string || null}
-         */
-        this.Progress = null;
-
-        /**
-         * 校验是否通过,0-未通过，1-校验通过, 3-未校验
-         * @type {number || null}
-         */
-        this.CheckFlag = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Status = 'Status' in params ? params.Status : null;
-        this.ErrorCode = 'ErrorCode' in params ? params.ErrorCode : null;
-        this.ErrorMessage = 'ErrorMessage' in params ? params.ErrorMessage : null;
-        this.Progress = 'Progress' in params ? params.Progress : null;
-        this.CheckFlag = 'CheckFlag' in params ? params.CheckFlag : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * StartSyncJob返回参数结构体
- * @class
- */
-class StartSyncJobResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * CreateSyncCheckJob返回参数结构体
- * @class
- */
-class CreateSyncCheckJobResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * DescribeSyncCheckJob请求参数结构体
- * @class
- */
-class DescribeSyncCheckJobRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 要查询的灾备同步任务ID
-         * @type {string || null}
-         */
-        this.JobId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.JobId = 'JobId' in params ? params.JobId : null;
-
-    }
-}
-
-/**
- * StopMigrateJob请求参数结构体
- * @class
- */
-class StopMigrateJobRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 数据迁移任务ID
-         * @type {string || null}
-         */
-        this.JobId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.JobId = 'JobId' in params ? params.JobId : null;
-
-    }
-}
-
-/**
- * ModifySyncJob返回参数结构体
- * @class
- */
-class ModifySyncJobResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
  * ModifyMigrateJob请求参数结构体
  * @class
  */
@@ -1491,18 +1604,42 @@ class ModifyMigrateJobRequest extends  AbstractModel {
 }
 
 /**
- * CompleteMigrateJob请求参数结构体
+ * CreateSubscribe请求参数结构体
  * @class
  */
-class CompleteMigrateJobRequest extends  AbstractModel {
+class CreateSubscribeRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 数据迁移任务ID
+         * 订阅的数据库类型，目前支持的有 mysql
          * @type {string || null}
          */
-        this.JobId = null;
+        this.Product = null;
+
+        /**
+         * 实例付费类型，1小时计费，0包年包月
+         * @type {number || null}
+         */
+        this.PayType = null;
+
+        /**
+         * 购买时长。PayType为0时必填。单位为月，最大支持120
+         * @type {number || null}
+         */
+        this.Duration = null;
+
+        /**
+         * 购买数量,默认为1，最大为10
+         * @type {number || null}
+         */
+        this.Count = null;
+
+        /**
+         * 是否自动续费，默认为0，1表示自动续费。小时计费实例设置该标识无效。
+         * @type {number || null}
+         */
+        this.AutoRenew = null;
 
     }
 
@@ -1513,7 +1650,570 @@ class CompleteMigrateJobRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.JobId = 'JobId' in params ? params.JobId : null;
+        this.Product = 'Product' in params ? params.Product : null;
+        this.PayType = 'PayType' in params ? params.PayType : null;
+        this.Duration = 'Duration' in params ? params.Duration : null;
+        this.Count = 'Count' in params ? params.Count : null;
+        this.AutoRenew = 'AutoRenew' in params ? params.AutoRenew : null;
+
+    }
+}
+
+/**
+ * CreateMigrateCheckJob返回参数结构体
+ * @class
+ */
+class CreateMigrateCheckJobResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 迁移中的步骤信息
+ * @class
+ */
+class MigrateStepDetailInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 步骤序列
+         * @type {number || null}
+         */
+        this.StepNo = null;
+
+        /**
+         * 步骤展现名称
+         * @type {string || null}
+         */
+        this.StepName = null;
+
+        /**
+         * 步骤英文标识
+         * @type {string || null}
+         */
+        this.StepId = null;
+
+        /**
+         * 步骤状态:0-默认值,1-成功,2-失败,3-执行中,4-未执行
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * 当前步骤开始的时间，格式为"yyyy-mm-dd hh:mm:ss"，该字段不存在或者为空是无意义
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.StepNo = 'StepNo' in params ? params.StepNo : null;
+        this.StepName = 'StepName' in params ? params.StepName : null;
+        this.StepId = 'StepId' in params ? params.StepId : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+
+    }
+}
+
+/**
+ * ModifySubscribeObjects请求参数结构体
+ * @class
+ */
+class ModifySubscribeObjectsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 数据订阅实例的ID
+         * @type {string || null}
+         */
+        this.SubscribeId = null;
+
+        /**
+         * 数据订阅的类型，可选的值有：0 - 全实例订阅；1 - 数据订阅；2 - 结构订阅；3 - 数据订阅+结构订阅
+         * @type {number || null}
+         */
+        this.SubscribeObjectType = null;
+
+        /**
+         * 订阅的数据库表信息
+         * @type {Array.<SubscribeObject> || null}
+         */
+        this.Objects = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SubscribeId = 'SubscribeId' in params ? params.SubscribeId : null;
+        this.SubscribeObjectType = 'SubscribeObjectType' in params ? params.SubscribeObjectType : null;
+
+        if (params.Objects) {
+            this.Objects = new Array();
+            for (let z in params.Objects) {
+                let obj = new SubscribeObject();
+                obj.deserialize(params.Objects[z]);
+                this.Objects.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * DescribeMigrateCheckJob返回参数结构体
+ * @class
+ */
+class DescribeMigrateCheckJobResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 校验任务状态：unavailable(当前不可用), starting(开始中)，running(校验中)，finished(校验完成)
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * 任务的错误码
+         * @type {number || null}
+         */
+        this.ErrorCode = null;
+
+        /**
+         * 任务的错误信息
+         * @type {string || null}
+         */
+        this.ErrorMessage = null;
+
+        /**
+         * Check任务总进度,如："30"表示30%
+         * @type {string || null}
+         */
+        this.Progress = null;
+
+        /**
+         * 校验是否通过,0-未通过，1-校验通过, 3-未校验
+         * @type {number || null}
+         */
+        this.CheckFlag = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Status = 'Status' in params ? params.Status : null;
+        this.ErrorCode = 'ErrorCode' in params ? params.ErrorCode : null;
+        this.ErrorMessage = 'ErrorMessage' in params ? params.ErrorMessage : null;
+        this.Progress = 'Progress' in params ? params.Progress : null;
+        this.CheckFlag = 'CheckFlag' in params ? params.CheckFlag : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 数据订阅地域售卖信息
+ * @class
+ */
+class SubscribeRegionConf extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 地域名称，如广州
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.RegionName = null;
+
+        /**
+         * 地区标识，如ap-guangzhou
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Region = null;
+
+        /**
+         * 地域名称，如华南地区
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Area = null;
+
+        /**
+         * 是否为默认地域，0 - 不是，1 - 是的
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.IsDefaultRegion = null;
+
+        /**
+         * 当前地域的售卖情况，1 - 正常， 2-灰度，3 - 停售
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Status = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RegionName = 'RegionName' in params ? params.RegionName : null;
+        this.Region = 'Region' in params ? params.Region : null;
+        this.Area = 'Area' in params ? params.Area : null;
+        this.IsDefaultRegion = 'IsDefaultRegion' in params ? params.IsDefaultRegion : null;
+        this.Status = 'Status' in params ? params.Status : null;
+
+    }
+}
+
+/**
+ * ActivateSubscribe请求参数结构体
+ * @class
+ */
+class ActivateSubscribeRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 订阅实例ID。
+         * @type {string || null}
+         */
+        this.SubscribeId = null;
+
+        /**
+         * 数据库实例ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 数据订阅类型0-全实例订阅，1数据订阅，2结构订阅，3数据订阅与结构订阅
+         * @type {number || null}
+         */
+        this.SubscribeObjectType = null;
+
+        /**
+         * 订阅对象
+         * @type {SubscribeObject || null}
+         */
+        this.Objects = null;
+
+        /**
+         * 数据订阅服务所在子网。默认为数据库实例所在的子网内。
+         * @type {string || null}
+         */
+        this.UniqSubnetId = null;
+
+        /**
+         * 订阅服务端口；默认为7507
+         * @type {number || null}
+         */
+        this.Vport = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SubscribeId = 'SubscribeId' in params ? params.SubscribeId : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.SubscribeObjectType = 'SubscribeObjectType' in params ? params.SubscribeObjectType : null;
+
+        if (params.Objects) {
+            let obj = new SubscribeObject();
+            obj.deserialize(params.Objects)
+            this.Objects = obj;
+        }
+        this.UniqSubnetId = 'UniqSubnetId' in params ? params.UniqSubnetId : null;
+        this.Vport = 'Vport' in params ? params.Vport : null;
+
+    }
+}
+
+/**
+ * OfflineIsolatedSubscribe请求参数结构体
+ * @class
+ */
+class OfflineIsolatedSubscribeRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 数据订阅实例的ID
+         * @type {string || null}
+         */
+        this.SubscribeId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SubscribeId = 'SubscribeId' in params ? params.SubscribeId : null;
+
+    }
+}
+
+/**
+ * DescribeSubscribes请求参数结构体
+ * @class
+ */
+class DescribeSubscribesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 数据订阅的实例ID
+         * @type {string || null}
+         */
+        this.SubscribeId = null;
+
+        /**
+         * 数据订阅的实例名称
+         * @type {string || null}
+         */
+        this.SubscribeName = null;
+
+        /**
+         * 绑定数据库实例的ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 数据订阅实例的通道ID
+         * @type {string || null}
+         */
+        this.ChannelId = null;
+
+        /**
+         * 计费模式筛选，可能的值：0-包年包月，1-按量计费
+         * @type {string || null}
+         */
+        this.PayType = null;
+
+        /**
+         * 订阅的数据库产品，如mysql
+         * @type {string || null}
+         */
+        this.Product = null;
+
+        /**
+         * 数据订阅实例的状态，creating - 创建中，normal - 正常运行，isolating - 隔离中，isolated - 已隔离，offlining - 下线中
+         * @type {Array.<string> || null}
+         */
+        this.Status = null;
+
+        /**
+         * 数据订阅实例的配置状态，unconfigure - 未配置， configuring - 配置中，configured - 已配置
+         * @type {Array.<string> || null}
+         */
+        this.SubsStatus = null;
+
+        /**
+         * 返回记录的起始偏移量
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 单次返回的记录数量
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 排序方向，可选的值为"DESC"和"ASC"，默认为"DESC"，按创建时间逆序排序
+         * @type {string || null}
+         */
+        this.OrderDirection = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SubscribeId = 'SubscribeId' in params ? params.SubscribeId : null;
+        this.SubscribeName = 'SubscribeName' in params ? params.SubscribeName : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.ChannelId = 'ChannelId' in params ? params.ChannelId : null;
+        this.PayType = 'PayType' in params ? params.PayType : null;
+        this.Product = 'Product' in params ? params.Product : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.SubsStatus = 'SubsStatus' in params ? params.SubsStatus : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.OrderDirection = 'OrderDirection' in params ? params.OrderDirection : null;
+
+    }
+}
+
+/**
+ * ResetSubscribe返回参数结构体
+ * @class
+ */
+class ResetSubscribeResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * StartSyncJob返回参数结构体
+ * @class
+ */
+class StartSyncJobResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeSubscribes返回参数结构体
+ * @class
+ */
+class DescribeSubscribesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 符合查询条件的实例总数
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 数据订阅实例的信息列表
+         * @type {Array.<SubscribeInfo> || null}
+         */
+        this.Items = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.Items) {
+            this.Items = new Array();
+            for (let z in params.Items) {
+                let obj = new SubscribeInfo();
+                obj.deserialize(params.Items[z]);
+                this.Items.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1563,6 +2263,364 @@ class SyncCheckStepInfo extends  AbstractModel {
         this.StepName = 'StepName' in params ? params.StepName : null;
         this.StepCode = 'StepCode' in params ? params.StepCode : null;
         this.StepMessage = 'StepMessage' in params ? params.StepMessage : null;
+
+    }
+}
+
+/**
+ * CreateSyncCheckJob返回参数结构体
+ * @class
+ */
+class CreateSyncCheckJobResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * StopMigrateJob请求参数结构体
+ * @class
+ */
+class StopMigrateJobRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 数据迁移任务ID
+         * @type {string || null}
+         */
+        this.JobId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.JobId = 'JobId' in params ? params.JobId : null;
+
+    }
+}
+
+/**
+ * DescribeSyncCheckJob请求参数结构体
+ * @class
+ */
+class DescribeSyncCheckJobRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 要查询的灾备同步任务ID
+         * @type {string || null}
+         */
+        this.JobId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.JobId = 'JobId' in params ? params.JobId : null;
+
+    }
+}
+
+/**
+ * DescribeRegionConf返回参数结构体
+ * @class
+ */
+class DescribeRegionConfResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 可售卖地域的数量
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 可售卖地域详情
+         * @type {Array.<SubscribeRegionConf> || null}
+         */
+        this.Items = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.Items) {
+            this.Items = new Array();
+            for (let z in params.Items) {
+                let obj = new SubscribeRegionConf();
+                obj.deserialize(params.Items[z]);
+                this.Items.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifySyncJob返回参数结构体
+ * @class
+ */
+class ModifySyncJobResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeAsyncRequestInfo返回参数结构体
+ * @class
+ */
+class DescribeAsyncRequestInfoResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 任务执行结果信息
+         * @type {string || null}
+         */
+        this.Info = null;
+
+        /**
+         * 任务执行状态，可能的值有：success，failed，running
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Info = 'Info' in params ? params.Info : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CompleteMigrateJob请求参数结构体
+ * @class
+ */
+class CompleteMigrateJobRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 数据迁移任务ID
+         * @type {string || null}
+         */
+        this.JobId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.JobId = 'JobId' in params ? params.JobId : null;
+
+    }
+}
+
+/**
+ * ResetSubscribe请求参数结构体
+ * @class
+ */
+class ResetSubscribeRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 数据订阅实例的ID
+         * @type {string || null}
+         */
+        this.SubscribeId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SubscribeId = 'SubscribeId' in params ? params.SubscribeId : null;
+
+    }
+}
+
+/**
+ * ModifySubscribeConsumeTime请求参数结构体
+ * @class
+ */
+class ModifySubscribeConsumeTimeRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 数据订阅实例的ID
+         * @type {string || null}
+         */
+        this.SubscribeId = null;
+
+        /**
+         * 消费时间起点，也即是指定订阅数据的时间起点，时间格式如：Y-m-d h:m:s，取值范围为过去24小时之内
+         * @type {string || null}
+         */
+        this.ConsumeStartTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SubscribeId = 'SubscribeId' in params ? params.SubscribeId : null;
+        this.ConsumeStartTime = 'ConsumeStartTime' in params ? params.ConsumeStartTime : null;
+
+    }
+}
+
+/**
+ * SwitchDrToMaster返回参数结构体
+ * @class
+ */
+class SwitchDrToMasterResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 后台异步任务请求id
+         * @type {string || null}
+         */
+        this.AsyncRequestId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AsyncRequestId = 'AsyncRequestId' in params ? params.AsyncRequestId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifyMigrateJob返回参数结构体
+ * @class
+ */
+class ModifyMigrateJobResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1873,6 +2931,111 @@ class SyncDetailInfo extends  AbstractModel {
 }
 
 /**
+ * StopMigrateJob返回参数结构体
+ * @class
+ */
+class StopMigrateJobResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 灾备同步任务配置选项
+ * @class
+ */
+class SyncOption extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 同步对象，1-整个实例，2-指定库表
+         * @type {number || null}
+         */
+        this.SyncObject = null;
+
+        /**
+         * 同步开始设置，1-立即开始
+         * @type {number || null}
+         */
+        this.RunMode = null;
+
+        /**
+         * 同步模式， 3-全量且增量同步
+         * @type {number || null}
+         */
+        this.SyncType = null;
+
+        /**
+         * 数据一致性检测， 1-无需配置
+         * @type {number || null}
+         */
+        this.ConsistencyType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SyncObject = 'SyncObject' in params ? params.SyncObject : null;
+        this.RunMode = 'RunMode' in params ? params.RunMode : null;
+        this.SyncType = 'SyncType' in params ? params.SyncType : null;
+        this.ConsistencyType = 'ConsistencyType' in params ? params.ConsistencyType : null;
+
+    }
+}
+
+/**
+ * OfflineIsolatedSubscribe返回参数结构体
+ * @class
+ */
+class OfflineIsolatedSubscribeResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * 同步任务进度
  * @class
  */
@@ -1922,18 +3085,18 @@ class SyncStepDetailInfo extends  AbstractModel {
 }
 
 /**
- * StopMigrateJob返回参数结构体
+ * IsolateSubscribe请求参数结构体
  * @class
  */
-class StopMigrateJobResponse extends  AbstractModel {
+class IsolateSubscribeRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * 订阅实例ID
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.SubscribeId = null;
 
     }
 
@@ -1944,7 +3107,7 @@ class StopMigrateJobResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.SubscribeId = 'SubscribeId' in params ? params.SubscribeId : null;
 
     }
 }
@@ -2062,24 +3225,12 @@ class ModifySyncJobRequest extends  AbstractModel {
 }
 
 /**
- * SwitchDrToMaster返回参数结构体
+ * DescribeRegionConf请求参数结构体
  * @class
  */
-class SwitchDrToMasterResponse extends  AbstractModel {
+class DescribeRegionConfRequest extends  AbstractModel {
     constructor(){
         super();
-
-        /**
-         * 后台异步任务请求id
-         * @type {string || null}
-         */
-        this.AsyncRequestId = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
 
     }
 
@@ -2090,8 +3241,6 @@ class SwitchDrToMasterResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.AsyncRequestId = 'AsyncRequestId' in params ? params.AsyncRequestId : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2153,6 +3302,51 @@ class StartMigrateJobResponse extends  AbstractModel {
 }
 
 /**
+ * 数据数据订阅的对象
+ * @class
+ */
+class SubscribeObject extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 数据订阅对象的类型，0-数据库，1-数据库内的表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.ObjectsType = null;
+
+        /**
+         * 订阅数据库的名称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.DatabaseName = null;
+
+        /**
+         * 订阅数据库中表名称数组
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
+         */
+        this.TableNames = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ObjectsType = 'ObjectsType' in params ? params.ObjectsType : null;
+        this.DatabaseName = 'DatabaseName' in params ? params.DatabaseName : null;
+        this.TableNames = 'TableNames' in params ? params.TableNames : null;
+
+    }
+}
+
+/**
  * CreateMigrateJob返回参数结构体
  * @class
  */
@@ -2188,18 +3382,18 @@ class CreateMigrateJobResponse extends  AbstractModel {
 }
 
 /**
- * DeleteMigrateJob请求参数结构体
+ * DescribeSubscribeConf请求参数结构体
  * @class
  */
-class DeleteMigrateJobRequest extends  AbstractModel {
+class DescribeSubscribeConfRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 数据迁移任务ID
+         * 订阅实例ID
          * @type {string || null}
          */
-        this.JobId = null;
+        this.SubscribeId = null;
 
     }
 
@@ -2210,24 +3404,24 @@ class DeleteMigrateJobRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.JobId = 'JobId' in params ? params.JobId : null;
+        this.SubscribeId = 'SubscribeId' in params ? params.SubscribeId : null;
 
     }
 }
 
 /**
- * DeleteSyncJob请求参数结构体
+ * ModifySubscribeVipVport返回参数结构体
  * @class
  */
-class DeleteSyncJobRequest extends  AbstractModel {
+class ModifySubscribeVipVportResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 待删除的灾备同步任务ID
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.JobId = null;
+        this.RequestId = null;
 
     }
 
@@ -2238,7 +3432,7 @@ class DeleteSyncJobRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.JobId = 'JobId' in params ? params.JobId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2405,6 +3599,230 @@ class MigrateJobInfo extends  AbstractModel {
 }
 
 /**
+ * DeleteMigrateJob请求参数结构体
+ * @class
+ */
+class DeleteMigrateJobRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 数据迁移任务ID
+         * @type {string || null}
+         */
+        this.JobId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.JobId = 'JobId' in params ? params.JobId : null;
+
+    }
+}
+
+/**
+ * DeleteSyncJob请求参数结构体
+ * @class
+ */
+class DeleteSyncJobRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 待删除的灾备同步任务ID
+         * @type {string || null}
+         */
+        this.JobId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.JobId = 'JobId' in params ? params.JobId : null;
+
+    }
+}
+
+/**
+ * ActivateSubscribe返回参数结构体
+ * @class
+ */
+class ActivateSubscribeResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 配置数据订阅任务任务ID。
+         * @type {string || null}
+         */
+        this.AsyncRequestId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AsyncRequestId = 'AsyncRequestId' in params ? params.AsyncRequestId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CreateSubscribe返回参数结构体
+ * @class
+ */
+class CreateSubscribeResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 数据订阅实例的ID数组
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
+         */
+        this.SubscribeIds = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SubscribeIds = 'SubscribeIds' in params ? params.SubscribeIds : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 迁移任务配置选项
+ * @class
+ */
+class MigrateOption extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 任务运行模式，值包括：1-立即执行，2-定时执行
+         * @type {number || null}
+         */
+        this.RunMode = null;
+
+        /**
+         * 期望执行时间，当runMode=2时，该字段必填，时间格式：yyyy-mm-dd hh:mm:ss
+         * @type {string || null}
+         */
+        this.ExpectTime = null;
+
+        /**
+         * 数据迁移类型，值包括：1-结构迁移,2-全量迁移,3-全量+增量迁移
+         * @type {number || null}
+         */
+        this.MigrateType = null;
+
+        /**
+         * 迁移对象，1-整个实例，2-指定库表
+         * @type {number || null}
+         */
+        this.MigrateObject = null;
+
+        /**
+         * 抽样数据一致性检测参数，1-未配置,2-全量检测,3-抽样检测, 4-仅校验不一致表,5-不检测
+         * @type {number || null}
+         */
+        this.ConsistencyType = null;
+
+        /**
+         * 是否用源库Root账户覆盖目标库，值包括：0-不覆盖，1-覆盖，选择库表或者结构迁移时应该为0
+         * @type {number || null}
+         */
+        this.IsOverrideRoot = null;
+
+        /**
+         * 不同数据库用到的额外参数.以JSON格式描述. 
+Redis可定义如下的参数: 
+{ 
+	"ClientOutputBufferHardLimit":512, 	从机缓冲区的硬性容量限制(MB) 
+	"ClientOutputBufferSoftLimit":512, 	从机缓冲区的软性容量限制(MB) 
+	"ClientOutputBufferPersistTime":60, 从机缓冲区的软性限制持续时间(秒) 
+	"ReplBacklogSize":512, 	环形缓冲区容量限制(MB) 
+	"ReplTimeout":120，		复制超时时间(秒) 
+}
+MongoDB可定义如下的参数: 
+{
+	'SrcAuthDatabase':'admin', 
+	'SrcAuthFlag': "1", 
+	'SrcAuthMechanism':"SCRAM-SHA-1"
+}
+MySQL暂不支持额外参数设置。
+         * @type {string || null}
+         */
+        this.ExternParams = null;
+
+        /**
+         * 仅用于“抽样数据一致性检测”，ConsistencyType配置为抽样检测时，必选
+         * @type {ConsistencyParams || null}
+         */
+        this.ConsistencyParams = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RunMode = 'RunMode' in params ? params.RunMode : null;
+        this.ExpectTime = 'ExpectTime' in params ? params.ExpectTime : null;
+        this.MigrateType = 'MigrateType' in params ? params.MigrateType : null;
+        this.MigrateObject = 'MigrateObject' in params ? params.MigrateObject : null;
+        this.ConsistencyType = 'ConsistencyType' in params ? params.ConsistencyType : null;
+        this.IsOverrideRoot = 'IsOverrideRoot' in params ? params.IsOverrideRoot : null;
+        this.ExternParams = 'ExternParams' in params ? params.ExternParams : null;
+
+        if (params.ConsistencyParams) {
+            let obj = new ConsistencyParams();
+            obj.deserialize(params.ConsistencyParams)
+            this.ConsistencyParams = obj;
+        }
+
+    }
+}
+
+/**
  * 迁移任务错误信息及提示
  * @class
  */
@@ -2510,54 +3928,111 @@ class DescribeSyncCheckJobResponse extends  AbstractModel {
     }
 }
 
+/**
+ * StartMigrateJob请求参数结构体
+ * @class
+ */
+class StartMigrateJobRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 数据迁移任务ID
+         * @type {string || null}
+         */
+        this.JobId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.JobId = 'JobId' in params ? params.JobId : null;
+
+    }
+}
+
 module.exports = {
     DescribeSyncJobsResponse: DescribeSyncJobsResponse,
     DescribeMigrateJobsResponse: DescribeMigrateJobsResponse,
     MigrateDetailInfo: MigrateDetailInfo,
     DeleteMigrateJobResponse: DeleteMigrateJobResponse,
     CreateMigrateCheckJobRequest: CreateMigrateCheckJobRequest,
+    ModifySubscribeVipVportRequest: ModifySubscribeVipVportRequest,
     SyncInstanceInfo: SyncInstanceInfo,
+    ModifySubscribeNameResponse: ModifySubscribeNameResponse,
     CreateSyncJobResponse: CreateSyncJobResponse,
     DescribeMigrateCheckJobRequest: DescribeMigrateCheckJobRequest,
-    StartMigrateJobRequest: StartMigrateJobRequest,
+    IsolateSubscribeResponse: IsolateSubscribeResponse,
+    ModifySubscribeObjectsResponse: ModifySubscribeObjectsResponse,
     SwitchDrToMasterRequest: SwitchDrToMasterRequest,
     StartSyncJobRequest: StartSyncJobRequest,
     CreateMigrateJobRequest: CreateMigrateJobRequest,
+    SubscribeInfo: SubscribeInfo,
+    ModifySubscribeNameRequest: ModifySubscribeNameRequest,
     SyncJobInfo: SyncJobInfo,
+    ModifySubscribeConsumeTimeResponse: ModifySubscribeConsumeTimeResponse,
     DstInfo: DstInfo,
-    ModifyMigrateJobResponse: ModifyMigrateJobResponse,
+    DescribeSubscribeConfResponse: DescribeSubscribeConfResponse,
+    DescribeAsyncRequestInfoRequest: DescribeAsyncRequestInfoRequest,
     SrcInfo: SrcInfo,
     ConsistencyParams: ConsistencyParams,
-    SyncOption: SyncOption,
-    MigrateOption: MigrateOption,
+    ModifyMigrateJobRequest: ModifyMigrateJobRequest,
+    CreateSubscribeRequest: CreateSubscribeRequest,
     CreateMigrateCheckJobResponse: CreateMigrateCheckJobResponse,
     MigrateStepDetailInfo: MigrateStepDetailInfo,
+    ModifySubscribeObjectsRequest: ModifySubscribeObjectsRequest,
     DescribeMigrateCheckJobResponse: DescribeMigrateCheckJobResponse,
+    SubscribeRegionConf: SubscribeRegionConf,
+    ActivateSubscribeRequest: ActivateSubscribeRequest,
+    OfflineIsolatedSubscribeRequest: OfflineIsolatedSubscribeRequest,
+    DescribeSubscribesRequest: DescribeSubscribesRequest,
+    ResetSubscribeResponse: ResetSubscribeResponse,
     StartSyncJobResponse: StartSyncJobResponse,
-    CreateSyncCheckJobResponse: CreateSyncCheckJobResponse,
-    DescribeSyncCheckJobRequest: DescribeSyncCheckJobRequest,
-    StopMigrateJobRequest: StopMigrateJobRequest,
-    ModifySyncJobResponse: ModifySyncJobResponse,
-    ModifyMigrateJobRequest: ModifyMigrateJobRequest,
-    CompleteMigrateJobRequest: CompleteMigrateJobRequest,
+    DescribeSubscribesResponse: DescribeSubscribesResponse,
     SyncCheckStepInfo: SyncCheckStepInfo,
+    CreateSyncCheckJobResponse: CreateSyncCheckJobResponse,
+    StopMigrateJobRequest: StopMigrateJobRequest,
+    DescribeSyncCheckJobRequest: DescribeSyncCheckJobRequest,
+    DescribeRegionConfResponse: DescribeRegionConfResponse,
+    ModifySyncJobResponse: ModifySyncJobResponse,
+    DescribeAsyncRequestInfoResponse: DescribeAsyncRequestInfoResponse,
+    CompleteMigrateJobRequest: CompleteMigrateJobRequest,
+    ResetSubscribeRequest: ResetSubscribeRequest,
+    ModifySubscribeConsumeTimeRequest: ModifySubscribeConsumeTimeRequest,
+    SwitchDrToMasterResponse: SwitchDrToMasterResponse,
+    ModifyMigrateJobResponse: ModifyMigrateJobResponse,
     CreateSyncJobRequest: CreateSyncJobRequest,
     DescribeSyncJobsRequest: DescribeSyncJobsRequest,
     DescribeMigrateJobsRequest: DescribeMigrateJobsRequest,
     SyncDetailInfo: SyncDetailInfo,
-    SyncStepDetailInfo: SyncStepDetailInfo,
     StopMigrateJobResponse: StopMigrateJobResponse,
+    SyncOption: SyncOption,
+    OfflineIsolatedSubscribeResponse: OfflineIsolatedSubscribeResponse,
+    SyncStepDetailInfo: SyncStepDetailInfo,
+    IsolateSubscribeRequest: IsolateSubscribeRequest,
     DeleteSyncJobResponse: DeleteSyncJobResponse,
     CreateSyncCheckJobRequest: CreateSyncCheckJobRequest,
     ModifySyncJobRequest: ModifySyncJobRequest,
-    SwitchDrToMasterResponse: SwitchDrToMasterResponse,
+    DescribeRegionConfRequest: DescribeRegionConfRequest,
     CompleteMigrateJobResponse: CompleteMigrateJobResponse,
     StartMigrateJobResponse: StartMigrateJobResponse,
+    SubscribeObject: SubscribeObject,
     CreateMigrateJobResponse: CreateMigrateJobResponse,
+    DescribeSubscribeConfRequest: DescribeSubscribeConfRequest,
+    ModifySubscribeVipVportResponse: ModifySubscribeVipVportResponse,
+    MigrateJobInfo: MigrateJobInfo,
     DeleteMigrateJobRequest: DeleteMigrateJobRequest,
     DeleteSyncJobRequest: DeleteSyncJobRequest,
-    MigrateJobInfo: MigrateJobInfo,
+    ActivateSubscribeResponse: ActivateSubscribeResponse,
+    CreateSubscribeResponse: CreateSubscribeResponse,
+    MigrateOption: MigrateOption,
     ErrorInfo: ErrorInfo,
     DescribeSyncCheckJobResponse: DescribeSyncCheckJobResponse,
+    StartMigrateJobRequest: StartMigrateJobRequest,
 
 }

@@ -8563,7 +8563,7 @@ class DescribeNetworkInterfaceLimitRequest extends  AbstractModel {
         super();
 
         /**
-         * 要查询的CVM实例ID
+         * 要查询的CVM实例ID或弹性网卡ID
          * @type {string || null}
          */
         this.InstanceId = null;

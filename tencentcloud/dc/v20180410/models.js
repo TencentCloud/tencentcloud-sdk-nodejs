@@ -412,6 +412,20 @@ class DirectConnect extends  AbstractModel {
          */
         this.AccessPointType = null;
 
+        /**
+         * IDC所在城市
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.IdcCity = null;
+
+        /**
+         * 计费状态
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ChargeState = null;
+
     }
 
     /**
@@ -453,6 +467,8 @@ class DirectConnect extends  AbstractModel {
             }
         }
         this.AccessPointType = 'AccessPointType' in params ? params.AccessPointType : null;
+        this.IdcCity = 'IdcCity' in params ? params.IdcCity : null;
+        this.ChargeState = 'ChargeState' in params ? params.ChargeState : null;
 
     }
 }
@@ -1723,6 +1739,20 @@ REJECTED:拒绝
          */
         this.AccessPointType = null;
 
+        /**
+         * 专线网关名称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.DirectConnectGatewayName = null;
+
+        /**
+         * VPC名称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.VpcName = null;
+
     }
 
     /**
@@ -1778,6 +1808,8 @@ REJECTED:拒绝
         this.VpcRegion = 'VpcRegion' in params ? params.VpcRegion : null;
         this.BfdEnable = 'BfdEnable' in params ? params.BfdEnable : null;
         this.AccessPointType = 'AccessPointType' in params ? params.AccessPointType : null;
+        this.DirectConnectGatewayName = 'DirectConnectGatewayName' in params ? params.DirectConnectGatewayName : null;
+        this.VpcName = 'VpcName' in params ? params.VpcName : null;
 
     }
 }

@@ -18,48 +18,59 @@ const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const DescribeImagePersonalResponse = models.DescribeImagePersonalResponse;
 const DescribeUserQuotaPersonalRequest = models.DescribeUserQuotaPersonalRequest;
+const ModifyRepositoryResponse = models.ModifyRepositoryResponse;
 const TriggerInvokePara = models.TriggerInvokePara;
 const TriggerLogResp = models.TriggerLogResp;
 const TagInfoResp = models.TagInfoResp;
 const CreateInstanceResponse = models.CreateInstanceResponse;
 const ValidateRepositoryExistPersonalRequest = models.ValidateRepositoryExistPersonalRequest;
+const ModifyRepositoryRequest = models.ModifyRepositoryRequest;
 const CreateApplicationTriggerPersonalRequest = models.CreateApplicationTriggerPersonalRequest;
 const AutoDelStrategyInfo = models.AutoDelStrategyInfo;
 const ValidateNamespaceExistPersonalRequest = models.ValidateNamespaceExistPersonalRequest;
 const Registry = models.Registry;
-const ModifyApplicationTriggerPersonalRequest = models.ModifyApplicationTriggerPersonalRequest;
+const DescribeRepositoriesResponse = models.DescribeRepositoriesResponse;
+const CreateRepositoryRequest = models.CreateRepositoryRequest;
 const DescribeInstancesResponse = models.DescribeInstancesResponse;
 const DescribeApplicationTriggerPersonalRequest = models.DescribeApplicationTriggerPersonalRequest;
 const FavorResp = models.FavorResp;
 const DeleteNamespacePersonalRequest = models.DeleteNamespacePersonalRequest;
 const Limit = models.Limit;
+const DeleteRepositoryResponse = models.DeleteRepositoryResponse;
 const DeleteImagePersonalResponse = models.DeleteImagePersonalResponse;
 const RegistryCondition = models.RegistryCondition;
 const DeleteImageLifecycleGlobalPersonalResponse = models.DeleteImageLifecycleGlobalPersonalResponse;
 const DuplicateImagePersonalResponse = models.DuplicateImagePersonalResponse;
 const DupImageTagResp = models.DupImageTagResp;
-const DeleteApplicationTriggerPersonalResponse = models.DeleteApplicationTriggerPersonalResponse;
-const DescribeRepositoryFilterPersonalRequest = models.DescribeRepositoryFilterPersonalRequest;
+const DescribeImagesResponse = models.DescribeImagesResponse;
+const ModifyApplicationTriggerPersonalRequest = models.ModifyApplicationTriggerPersonalRequest;
 const DescribeRepositoryPersonalRequest = models.DescribeRepositoryPersonalRequest;
 const AutoDelStrategyInfoResp = models.AutoDelStrategyInfoResp;
 const DeleteApplicationTriggerPersonalRequest = models.DeleteApplicationTriggerPersonalRequest;
 const SearchUserRepositoryResp = models.SearchUserRepositoryResp;
 const DescribeImageLifecyclePersonalResponse = models.DescribeImageLifecyclePersonalResponse;
 const DeleteImageLifecyclePersonalResponse = models.DeleteImageLifecyclePersonalResponse;
+const CreateNamespaceResponse = models.CreateNamespaceResponse;
 const DescribeRepositoryOwnerPersonalResponse = models.DescribeRepositoryOwnerPersonalResponse;
 const CreateImageLifecyclePersonalResponse = models.CreateImageLifecyclePersonalResponse;
 const RepoIsExistResp = models.RepoIsExistResp;
+const TcrImageInfo = models.TcrImageInfo;
 const DescribeImageLifecycleGlobalPersonalResponse = models.DescribeImageLifecycleGlobalPersonalResponse;
 const CreateNamespacePersonalResponse = models.CreateNamespacePersonalResponse;
 const DeleteImageLifecycleGlobalPersonalRequest = models.DeleteImageLifecycleGlobalPersonalRequest;
 const DescribeInstanceStatusRequest = models.DescribeInstanceStatusRequest;
 const DescribeInstanceStatusResponse = models.DescribeInstanceStatusResponse;
+const DeleteNamespaceResponse = models.DeleteNamespaceResponse;
 const Favors = models.Favors;
 const DescribeRepositoryPersonalResponse = models.DescribeRepositoryPersonalResponse;
-const CreateUserPersonalRequest = models.CreateUserPersonalRequest;
-const ModifyUserPasswordPersonalResponse = models.ModifyUserPasswordPersonalResponse;
-const ModifyRepositoryInfoPersonalResponse = models.ModifyRepositoryInfoPersonalResponse;
+const DescribeRepositoriesRequest = models.DescribeRepositoriesRequest;
 const DescribeImageFilterPersonalRequest = models.DescribeImageFilterPersonalRequest;
+const ModifyNamespaceResponse = models.ModifyNamespaceResponse;
+const ModifyUserPasswordPersonalResponse = models.ModifyUserPasswordPersonalResponse;
+const DeleteApplicationTriggerPersonalResponse = models.DeleteApplicationTriggerPersonalResponse;
+const ModifyRepositoryInfoPersonalResponse = models.ModifyRepositoryInfoPersonalResponse;
+const DescribeRepositoryFilterPersonalRequest = models.DescribeRepositoryFilterPersonalRequest;
+const CreateUserPersonalRequest = models.CreateUserPersonalRequest;
 const RepoInfoResp = models.RepoInfoResp;
 const ManageImageLifecycleGlobalPersonalResponse = models.ManageImageLifecycleGlobalPersonalResponse;
 const RegistryStatus = models.RegistryStatus;
@@ -81,10 +92,11 @@ const DescribeImageLifecyclePersonalRequest = models.DescribeImageLifecyclePerso
 const RepositoryInfoResp = models.RepositoryInfoResp;
 const CreateInstanceRequest = models.CreateInstanceRequest;
 const BatchDeleteRepositoryPersonalResponse = models.BatchDeleteRepositoryPersonalResponse;
+const CreateNamespaceRequest = models.CreateNamespaceRequest;
 const BatchDeleteRepositoryPersonalRequest = models.BatchDeleteRepositoryPersonalRequest;
 const TriggerInvokeCondition = models.TriggerInvokeCondition;
 const NamespaceIsExistsResp = models.NamespaceIsExistsResp;
-const DescribeInstancesRequest = models.DescribeInstancesRequest;
+const ModifyNamespaceRequest = models.ModifyNamespaceRequest;
 const Filter = models.Filter;
 const RepoInfo = models.RepoInfo;
 const ManageImageLifecycleGlobalPersonalRequest = models.ManageImageLifecycleGlobalPersonalRequest;
@@ -102,18 +114,24 @@ const DescribeApplicationTriggerLogPersonalResponse = models.DescribeApplication
 const DescribeRepositoryFilterPersonalResponse = models.DescribeRepositoryFilterPersonalResponse;
 const DescribeFavorRepositoryPersonalResponse = models.DescribeFavorRepositoryPersonalResponse;
 const ModifyRepositoryAccessPersonalResponse = models.ModifyRepositoryAccessPersonalResponse;
+const DescribeInstancesRequest = models.DescribeInstancesRequest;
 const CreateInstanceTokenRequest = models.CreateInstanceTokenRequest;
 const ModifyUserPasswordPersonalRequest = models.ModifyUserPasswordPersonalRequest;
 const ValidateNamespaceExistPersonalResponse = models.ValidateNamespaceExistPersonalResponse;
 const DescribeApplicationTriggerPersonalResp = models.DescribeApplicationTriggerPersonalResp;
 const TagInfo = models.TagInfo;
 const DuplicateImagePersonalRequest = models.DuplicateImagePersonalRequest;
+const DeleteNamespaceRequest = models.DeleteNamespaceRequest;
 const BatchDeleteImagePersonalRequest = models.BatchDeleteImagePersonalRequest;
+const DescribeImagesRequest = models.DescribeImagesRequest;
 const TriggerResp = models.TriggerResp;
+const CreateRepositoryResponse = models.CreateRepositoryResponse;
 const RespLimit = models.RespLimit;
 const SameImagesResp = models.SameImagesResp;
 const CreateNamespacePersonalRequest = models.CreateNamespacePersonalRequest;
 const DeleteRepositoryPersonalResponse = models.DeleteRepositoryPersonalResponse;
+const TcrRepositoryInfo = models.TcrRepositoryInfo;
+const DeleteRepositoryRequest = models.DeleteRepositoryRequest;
 const ValidateRepositoryExistPersonalResponse = models.ValidateRepositoryExistPersonalResponse;
 const CreateRepositoryPersonalResponse = models.CreateRepositoryPersonalResponse;
 const CreateApplicationTriggerPersonalResponse = models.CreateApplicationTriggerPersonalResponse;
@@ -132,14 +150,25 @@ class TcrClient extends AbstractClient {
     }
     
     /**
-     * 用于获取个人版全局镜像版本自动清理策略
-     * @param {DescribeImageLifecycleGlobalPersonalRequest} req
-     * @param {function(string, DescribeImageLifecycleGlobalPersonalResponse):void} cb
+     * 更新命名空间信息
+     * @param {ModifyNamespaceRequest} req
+     * @param {function(string, ModifyNamespaceResponse):void} cb
      * @public
      */
-    DescribeImageLifecycleGlobalPersonal(req, cb) {
-        let resp = new DescribeImageLifecycleGlobalPersonalResponse();
-        this.request("DescribeImageLifecycleGlobalPersonal", req, resp, cb);
+    ModifyNamespace(req, cb) {
+        let resp = new ModifyNamespaceResponse();
+        this.request("ModifyNamespace", req, resp, cb);
+    }
+
+    /**
+     * 用于在个人版中查询与指定tag镜像内容相同的tag列表
+     * @param {DescribeImageFilterPersonalRequest} req
+     * @param {function(string, DescribeImageFilterPersonalResponse):void} cb
+     * @public
+     */
+    DescribeImageFilterPersonal(req, cb) {
+        let resp = new DescribeImageFilterPersonalResponse();
+        this.request("DescribeImageFilterPersonal", req, resp, cb);
     }
 
     /**
@@ -165,6 +194,39 @@ class TcrClient extends AbstractClient {
     }
 
     /**
+     * 用于获取个人版仓库中自动清理策略
+     * @param {DescribeImageLifecyclePersonalRequest} req
+     * @param {function(string, DescribeImageLifecyclePersonalResponse):void} cb
+     * @public
+     */
+    DescribeImageLifecyclePersonal(req, cb) {
+        let resp = new DescribeImageLifecyclePersonalResponse();
+        this.request("DescribeImageLifecyclePersonal", req, resp, cb);
+    }
+
+    /**
+     * 用于获取个人版全局镜像版本自动清理策略
+     * @param {DescribeImageLifecycleGlobalPersonalRequest} req
+     * @param {function(string, DescribeImageLifecycleGlobalPersonalResponse):void} cb
+     * @public
+     */
+    DescribeImageLifecycleGlobalPersonal(req, cb) {
+        let resp = new DescribeImageLifecycleGlobalPersonalResponse();
+        this.request("DescribeImageLifecycleGlobalPersonal", req, resp, cb);
+    }
+
+    /**
+     * 用于在企业版中创建命名空间
+     * @param {CreateNamespaceRequest} req
+     * @param {function(string, CreateNamespaceResponse):void} cb
+     * @public
+     */
+    CreateNamespace(req, cb) {
+        let resp = new CreateNamespaceResponse();
+        this.request("CreateNamespace", req, resp, cb);
+    }
+
+    /**
      * 用于修改应用更新触发器
      * @param {ModifyApplicationTriggerPersonalRequest} req
      * @param {function(string, ModifyApplicationTriggerPersonalResponse):void} cb
@@ -176,14 +238,14 @@ class TcrClient extends AbstractClient {
     }
 
     /**
-     * 用于在个人版中查询与指定tag镜像内容相同的tag列表
-     * @param {DescribeImageFilterPersonalRequest} req
-     * @param {function(string, DescribeImageFilterPersonalResponse):void} cb
+     * 更新镜像仓库描述
+     * @param {ModifyRepositoryRequest} req
+     * @param {function(string, ModifyRepositoryResponse):void} cb
      * @public
      */
-    DescribeImageFilterPersonal(req, cb) {
-        let resp = new DescribeImageFilterPersonalResponse();
-        this.request("DescribeImageFilterPersonal", req, resp, cb);
+    ModifyRepository(req, cb) {
+        let resp = new ModifyRepositoryResponse();
+        this.request("ModifyRepository", req, resp, cb);
     }
 
     /**
@@ -198,14 +260,25 @@ class TcrClient extends AbstractClient {
     }
 
     /**
-     * 查询个人用户配额
-     * @param {DescribeUserQuotaPersonalRequest} req
-     * @param {function(string, DescribeUserQuotaPersonalResponse):void} cb
+     * 删除镜像仓库
+     * @param {DeleteRepositoryRequest} req
+     * @param {function(string, DeleteRepositoryResponse):void} cb
      * @public
      */
-    DescribeUserQuotaPersonal(req, cb) {
-        let resp = new DescribeUserQuotaPersonalResponse();
-        this.request("DescribeUserQuotaPersonal", req, resp, cb);
+    DeleteRepository(req, cb) {
+        let resp = new DeleteRepositoryResponse();
+        this.request("DeleteRepository", req, resp, cb);
+    }
+
+    /**
+     * 查询镜像仓库信息
+     * @param {DescribeRepositoriesRequest} req
+     * @param {function(string, DescribeRepositoriesResponse):void} cb
+     * @public
+     */
+    DescribeRepositories(req, cb) {
+        let resp = new DescribeRepositoriesResponse();
+        this.request("DescribeRepositories", req, resp, cb);
     }
 
     /**
@@ -231,6 +304,17 @@ class TcrClient extends AbstractClient {
     }
 
     /**
+     * 用于在企业版中查询镜像仓库内容器镜像信息，获取镜像版本列表
+     * @param {DescribeImagesRequest} req
+     * @param {function(string, DescribeImagesResponse):void} cb
+     * @public
+     */
+    DescribeImages(req, cb) {
+        let resp = new DescribeImagesResponse();
+        this.request("DescribeImages", req, resp, cb);
+    }
+
+    /**
      * 查询个人版命名空间信息
      * @param {DescribeNamespacePersonalRequest} req
      * @param {function(string, DescribeNamespacePersonalResponse):void} cb
@@ -239,6 +323,17 @@ class TcrClient extends AbstractClient {
     DescribeNamespacePersonal(req, cb) {
         let resp = new DescribeNamespacePersonalResponse();
         this.request("DescribeNamespacePersonal", req, resp, cb);
+    }
+
+    /**
+     * 删除命名空间
+     * @param {DeleteNamespaceRequest} req
+     * @param {function(string, DeleteNamespaceResponse):void} cb
+     * @public
+     */
+    DeleteNamespace(req, cb) {
+        let resp = new DeleteNamespaceResponse();
+        this.request("DeleteNamespace", req, resp, cb);
     }
 
     /**
@@ -341,6 +436,17 @@ class TcrClient extends AbstractClient {
     }
 
     /**
+     * 查询个人用户配额
+     * @param {DescribeUserQuotaPersonalRequest} req
+     * @param {function(string, DescribeUserQuotaPersonalResponse):void} cb
+     * @public
+     */
+    DescribeUserQuotaPersonal(req, cb) {
+        let resp = new DescribeUserQuotaPersonalResponse();
+        this.request("DescribeUserQuotaPersonal", req, resp, cb);
+    }
+
+    /**
      * 用于判断个人版仓库是否存在
      * @param {ValidateRepositoryExistPersonalRequest} req
      * @param {function(string, ValidateRepositoryExistPersonalResponse):void} cb
@@ -352,14 +458,14 @@ class TcrClient extends AbstractClient {
     }
 
     /**
-     * 用于获取个人版仓库中自动清理策略
-     * @param {DescribeImageLifecyclePersonalRequest} req
-     * @param {function(string, DescribeImageLifecyclePersonalResponse):void} cb
+     * 用于企业版创建镜像仓库
+     * @param {CreateRepositoryRequest} req
+     * @param {function(string, CreateRepositoryResponse):void} cb
      * @public
      */
-    DescribeImageLifecyclePersonal(req, cb) {
-        let resp = new DescribeImageLifecyclePersonalResponse();
-        this.request("DescribeImageLifecyclePersonal", req, resp, cb);
+    CreateRepository(req, cb) {
+        let resp = new CreateRepositoryResponse();
+        this.request("CreateRepository", req, resp, cb);
     }
 
     /**

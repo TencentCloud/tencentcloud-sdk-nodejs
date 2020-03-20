@@ -31,6 +31,7 @@ const DescribeInstancesDiskNumRequest = models.DescribeInstancesDiskNumRequest;
 const AutoSnapshotPolicy = models.AutoSnapshotPolicy;
 const Policy = models.Policy;
 const ModifySnapshotsSharePermissionResponse = models.ModifySnapshotsSharePermissionResponse;
+const GetSnapOverviewRequest = models.GetSnapOverviewRequest;
 const DescribeSnapshotOperationLogsRequest = models.DescribeSnapshotOperationLogsRequest;
 const ModifySnapshotAttributeRequest = models.ModifySnapshotAttributeRequest;
 const InquiryPriceRenewDisksRequest = models.InquiryPriceRenewDisksRequest;
@@ -53,7 +54,7 @@ const DiskChargePrepaid = models.DiskChargePrepaid;
 const DescribeSnapshotOperationLogsResponse = models.DescribeSnapshotOperationLogsResponse;
 const ModifyDisksRenewFlagResponse = models.ModifyDisksRenewFlagResponse;
 const DescribeDiskAssociatedAutoSnapshotPolicyResponse = models.DescribeDiskAssociatedAutoSnapshotPolicyResponse;
-const InquiryPriceResizeDiskRequest = models.InquiryPriceResizeDiskRequest;
+const GetSnapOverviewResponse = models.GetSnapOverviewResponse;
 const ApplySnapshotResponse = models.ApplySnapshotResponse;
 const DeleteAutoSnapshotPoliciesResponse = models.DeleteAutoSnapshotPoliciesResponse;
 const DescribeDisksResponse = models.DescribeDisksResponse;
@@ -90,6 +91,7 @@ const ResizeDiskResponse = models.ResizeDiskResponse;
 const DescribeSnapshotsRequest = models.DescribeSnapshotsRequest;
 const Placement = models.Placement;
 const CreateAutoSnapshotPolicyRequest = models.CreateAutoSnapshotPolicyRequest;
+const InquiryPriceResizeDiskRequest = models.InquiryPriceResizeDiskRequest;
 const Disk = models.Disk;
 const ModifyAutoSnapshotPolicyAttributeRequest = models.ModifyAutoSnapshotPolicyAttributeRequest;
 const Tag = models.Tag;
@@ -490,6 +492,17 @@ class CbsClient extends AbstractClient {
     CreateSnapshot(req, cb) {
         let resp = new CreateSnapshotResponse();
         this.request("CreateSnapshot", req, resp, cb);
+    }
+
+    /**
+     * 获取快照概览信息
+     * @param {GetSnapOverviewRequest} req
+     * @param {function(string, GetSnapOverviewResponse):void} cb
+     * @public
+     */
+    GetSnapOverview(req, cb) {
+        let resp = new GetSnapOverviewResponse();
+        this.request("GetSnapOverview", req, resp, cb);
     }
 
     /**

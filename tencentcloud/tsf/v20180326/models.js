@@ -3442,6 +3442,13 @@ class ContainerGroupDetail extends  AbstractModel {
          */
         this.MemRequest = null;
 
+        /**
+         * 子网id
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.SubnetId = null;
+
     }
 
     /**
@@ -3497,6 +3504,7 @@ class ContainerGroupDetail extends  AbstractModel {
         this.MicroserviceType = 'MicroserviceType' in params ? params.MicroserviceType : null;
         this.CpuRequest = 'CpuRequest' in params ? params.CpuRequest : null;
         this.MemRequest = 'MemRequest' in params ? params.MemRequest : null;
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
 
     }
 }
@@ -6682,6 +6690,12 @@ class ProtocolPort extends  AbstractModel {
          */
         this.TargetPort = null;
 
+        /**
+         * 主机端口
+         * @type {number || null}
+         */
+        this.NodePort = null;
+
     }
 
     /**
@@ -6694,6 +6708,7 @@ class ProtocolPort extends  AbstractModel {
         this.Protocol = 'Protocol' in params ? params.Protocol : null;
         this.Port = 'Port' in params ? params.Port : null;
         this.TargetPort = 'TargetPort' in params ? params.TargetPort : null;
+        this.NodePort = 'NodePort' in params ? params.NodePort : null;
 
     }
 }

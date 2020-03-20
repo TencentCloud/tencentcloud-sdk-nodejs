@@ -59,7 +59,7 @@ const CreateBindingRequest = models.CreateBindingRequest;
 const DeleteDeviceRequest = models.DeleteDeviceRequest;
 const TraceStatus = models.TraceStatus;
 const CreateDevTokenResponse = models.CreateDevTokenResponse;
-const VersionData = models.VersionData;
+const ModifyDevicePropertyRequest = models.ModifyDevicePropertyRequest;
 const RunDeviceStreamRequest = models.RunDeviceStreamRequest;
 const RunDeviceResponse = models.RunDeviceResponse;
 const DeleteIotDataTypeResponse = models.DeleteIotDataTypeResponse;
@@ -133,11 +133,13 @@ const DescribeMessageQueueResponse = models.DescribeMessageQueueResponse;
 const DescribeDevicesRequest = models.DescribeDevicesRequest;
 const CreateUploadTestResponse = models.CreateUploadTestResponse;
 const CreateIotDataTypeResponse = models.CreateIotDataTypeResponse;
+const ModifyDevicePropertyResponse = models.ModifyDevicePropertyResponse;
 const CreateUploadTestRequest = models.CreateUploadTestRequest;
 const DeleteBindingResponse = models.DeleteBindingResponse;
 const DisableDeviceStreamResponse = models.DisableDeviceStreamResponse;
 const DeleteDeviceResponse = models.DeleteDeviceResponse;
 const CreateUploadPathResponse = models.CreateUploadPathResponse;
+const VersionData = models.VersionData;
 
 
 /**
@@ -692,6 +694,23 @@ class IotvideoClient extends AbstractClient {
     DeleteMessageQueue(req, cb) {
         let resp = new DeleteMessageQueueResponse();
         this.request("DeleteMessageQueue", req, resp, cb);
+    }
+
+    /**
+     * 本接口（ModifyDeviceProperty）用于修改设备物模型的属性（ProWritable）。
+可对setVal数据属性进行写入,如:
+ProWritable.Pos.setVal
+对于嵌套类型的可写属性，可以仅对其部分数据内容进行写入，如:
+ProWritable.Pos.setVal.x;
+可写属性云端写入成功即返回;云端向设备端发布属性变更参数;若当前设备不在线,在设备下次上线时会自动更新这些属性参数;
+物模型写入数据时,不需要传入时标信息,平台以当前时标作为数据的时标更新物模型中的时标信息。
+     * @param {ModifyDevicePropertyRequest} req
+     * @param {function(string, ModifyDevicePropertyResponse):void} cb
+     * @public
+     */
+    ModifyDeviceProperty(req, cb) {
+        let resp = new ModifyDevicePropertyResponse();
+        this.request("ModifyDeviceProperty", req, resp, cb);
     }
 
     /**

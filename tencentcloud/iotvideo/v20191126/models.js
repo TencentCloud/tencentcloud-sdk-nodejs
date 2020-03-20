@@ -886,7 +886,7 @@ class CreateAppUsrRequest extends  AbstractModel {
 }
 
 /**
- * 设备证书及秘钥
+ * 设备证书及密钥
  * @class
  */
 class DeviceCertificate extends  AbstractModel {
@@ -1791,117 +1791,42 @@ class CreateDevTokenResponse extends  AbstractModel {
 }
 
 /**
- * 固件版本详细信息
+ * ModifyDeviceProperty请求参数结构体
  * @class
  */
-class VersionData extends  AbstractModel {
+class ModifyDevicePropertyRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 产品ID
-注意：此字段可能返回 null，表示取不到有效值。
+         * 设备TID
          * @type {string || null}
          */
-        this.ProductId = null;
+        this.Tid = null;
 
         /**
-         * 固件版本号
-注意：此字段可能返回 null，表示取不到有效值。
+         * 如果设备处于休眠状态，是否唤醒设备
+         * @type {boolean || null}
+         */
+        this.Wakeup = null;
+
+        /**
+         * 物模型的分支路径
          * @type {string || null}
          */
-        this.OtaVersion = null;
+        this.Branch = null;
 
         /**
-         * 版本类型 1未发布 2测试发布 3正式发布 4禁用
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.PubStatus = null;
-
-        /**
-         * 固件版本存储路径URL
-注意：此字段可能返回 null，表示取不到有效值。
+         * 写入的物模型数据，如果是json需要转义成字符串
          * @type {string || null}
          */
-        this.VersionUrl = null;
+        this.Value = null;
 
         /**
-         * 文件大小，byte
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
+         * Value字段是否为数值（float、int）
+         * @type {boolean || null}
          */
-        this.FileSize = null;
-
-        /**
-         * 文件校验码
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.Md5 = null;
-
-        /**
-         * 指定的允许升级的旧版本，PubStatus=3时有效
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.OldVersions = null;
-
-        /**
-         * 指定的允许升级的旧设备id，PubStatus=2时有效
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.Tids = null;
-
-        /**
-         * 灰度值（0-100）,PubStatus=3时有效，表示n%的升级总量
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.GrayValue = null;
-
-        /**
-         * 最近一次发布时间，UNIX时间戳，单位秒
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.PublishTime = null;
-
-        /**
-         * 此版本激活的设备总数
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.ActiveCount = null;
-
-        /**
-         * 此版本在线的设备总数
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.OnlineCount = null;
-
-        /**
-         * 上传固件文件的时间，UNIX时间戳，单位秒
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.UpdateTime = null;
-
-        /**
-         * 发布记录的最后变更时间，UNIX时间戳，单位秒
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.UploadTime = null;
-
-        /**
-         * 该固件版本发布的变更次数
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.ModifyTimes = null;
+        this.IsNum = null;
 
     }
 
@@ -1912,21 +1837,11 @@ class VersionData extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ProductId = 'ProductId' in params ? params.ProductId : null;
-        this.OtaVersion = 'OtaVersion' in params ? params.OtaVersion : null;
-        this.PubStatus = 'PubStatus' in params ? params.PubStatus : null;
-        this.VersionUrl = 'VersionUrl' in params ? params.VersionUrl : null;
-        this.FileSize = 'FileSize' in params ? params.FileSize : null;
-        this.Md5 = 'Md5' in params ? params.Md5 : null;
-        this.OldVersions = 'OldVersions' in params ? params.OldVersions : null;
-        this.Tids = 'Tids' in params ? params.Tids : null;
-        this.GrayValue = 'GrayValue' in params ? params.GrayValue : null;
-        this.PublishTime = 'PublishTime' in params ? params.PublishTime : null;
-        this.ActiveCount = 'ActiveCount' in params ? params.ActiveCount : null;
-        this.OnlineCount = 'OnlineCount' in params ? params.OnlineCount : null;
-        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
-        this.UploadTime = 'UploadTime' in params ? params.UploadTime : null;
-        this.ModifyTimes = 'ModifyTimes' in params ? params.ModifyTimes : null;
+        this.Tid = 'Tid' in params ? params.Tid : null;
+        this.Wakeup = 'Wakeup' in params ? params.Wakeup : null;
+        this.Branch = 'Branch' in params ? params.Branch : null;
+        this.Value = 'Value' in params ? params.Value : null;
+        this.IsNum = 'IsNum' in params ? params.IsNum : null;
 
     }
 }
@@ -4889,6 +4804,34 @@ class CreateIotDataTypeResponse extends  AbstractModel {
 }
 
 /**
+ * ModifyDeviceProperty返回参数结构体
+ * @class
+ */
+class ModifyDevicePropertyResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * CreateUploadTest请求参数结构体
  * @class
  */
@@ -5043,6 +4986,147 @@ class CreateUploadPathResponse extends  AbstractModel {
     }
 }
 
+/**
+ * 固件版本详细信息
+ * @class
+ */
+class VersionData extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 产品ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ProductId = null;
+
+        /**
+         * 固件版本号
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.OtaVersion = null;
+
+        /**
+         * 版本类型 1未发布 2测试发布 3正式发布 4禁用
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.PubStatus = null;
+
+        /**
+         * 固件版本存储路径URL
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.VersionUrl = null;
+
+        /**
+         * 文件大小，byte
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.FileSize = null;
+
+        /**
+         * 文件校验码
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Md5 = null;
+
+        /**
+         * 指定的允许升级的旧版本，PubStatus=3时有效
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.OldVersions = null;
+
+        /**
+         * 指定的允许升级的旧设备id，PubStatus=2时有效
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Tids = null;
+
+        /**
+         * 灰度值（0-100）,PubStatus=3时有效，表示n%的升级总量
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.GrayValue = null;
+
+        /**
+         * 最近一次发布时间，UNIX时间戳，单位秒
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.PublishTime = null;
+
+        /**
+         * 此版本激活的设备总数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.ActiveCount = null;
+
+        /**
+         * 此版本在线的设备总数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.OnlineCount = null;
+
+        /**
+         * 上传固件文件的时间，UNIX时间戳，单位秒
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.UpdateTime = null;
+
+        /**
+         * 发布记录的最后变更时间，UNIX时间戳，单位秒
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.UploadTime = null;
+
+        /**
+         * 该固件版本发布的变更次数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.ModifyTimes = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ProductId = 'ProductId' in params ? params.ProductId : null;
+        this.OtaVersion = 'OtaVersion' in params ? params.OtaVersion : null;
+        this.PubStatus = 'PubStatus' in params ? params.PubStatus : null;
+        this.VersionUrl = 'VersionUrl' in params ? params.VersionUrl : null;
+        this.FileSize = 'FileSize' in params ? params.FileSize : null;
+        this.Md5 = 'Md5' in params ? params.Md5 : null;
+        this.OldVersions = 'OldVersions' in params ? params.OldVersions : null;
+        this.Tids = 'Tids' in params ? params.Tids : null;
+        this.GrayValue = 'GrayValue' in params ? params.GrayValue : null;
+        this.PublishTime = 'PublishTime' in params ? params.PublishTime : null;
+        this.ActiveCount = 'ActiveCount' in params ? params.ActiveCount : null;
+        this.OnlineCount = 'OnlineCount' in params ? params.OnlineCount : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.UploadTime = 'UploadTime' in params ? params.UploadTime : null;
+        this.ModifyTimes = 'ModifyTimes' in params ? params.ModifyTimes : null;
+
+    }
+}
+
 module.exports = {
     UploadOtaVersionResponse: UploadOtaVersionResponse,
     CreateGencodeResponse: CreateGencodeResponse,
@@ -5087,7 +5171,7 @@ module.exports = {
     DeleteDeviceRequest: DeleteDeviceRequest,
     TraceStatus: TraceStatus,
     CreateDevTokenResponse: CreateDevTokenResponse,
-    VersionData: VersionData,
+    ModifyDevicePropertyRequest: ModifyDevicePropertyRequest,
     RunDeviceStreamRequest: RunDeviceStreamRequest,
     RunDeviceResponse: RunDeviceResponse,
     DeleteIotDataTypeResponse: DeleteIotDataTypeResponse,
@@ -5161,10 +5245,12 @@ module.exports = {
     DescribeDevicesRequest: DescribeDevicesRequest,
     CreateUploadTestResponse: CreateUploadTestResponse,
     CreateIotDataTypeResponse: CreateIotDataTypeResponse,
+    ModifyDevicePropertyResponse: ModifyDevicePropertyResponse,
     CreateUploadTestRequest: CreateUploadTestRequest,
     DeleteBindingResponse: DeleteBindingResponse,
     DisableDeviceStreamResponse: DisableDeviceStreamResponse,
     DeleteDeviceResponse: DeleteDeviceResponse,
     CreateUploadPathResponse: CreateUploadPathResponse,
+    VersionData: VersionData,
 
 }
