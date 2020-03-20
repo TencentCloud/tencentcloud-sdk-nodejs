@@ -2253,25 +2253,25 @@ class ListClsTopicDomainsResponse extends  AbstractModel {
         this.LogsetId = null;
 
         /**
-         * 主题ID
+         * 日志主题ID
          * @type {string || null}
          */
         this.TopicId = null;
 
         /**
-         * 域名区域配置，其中可能含有已删除的域名，如果要再传回ManageClsTopicDomains接口，需要结合ListCdnDomains接口排除掉已删除的域名。
+         * 域名区域配置，其中可能含有已删除的域名，如果要再传回ManageClsTopicDomains接口，需要结合ListCdnDomains接口排除掉已删除的域名
          * @type {Array.<DomainAreaConfig> || null}
          */
         this.DomainAreaConfigs = null;
 
         /**
-         * 主题名称
+         * 日志主题名称
          * @type {string || null}
          */
         this.TopicName = null;
 
         /**
-         * 主题最近更新时间
+         * 日志主题最近更新时间
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
@@ -2610,7 +2610,7 @@ class ListClsLogTopicsResponse extends  AbstractModel {
         this.Logset = null;
 
         /**
-         * 主题信息列表
+         * 日志主题信息列表
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<TopicInfo> || null}
          */

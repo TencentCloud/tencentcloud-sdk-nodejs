@@ -563,6 +563,19 @@ class DescribeEnvsRequest extends  AbstractModel {
          */
         this.EnvId = null;
 
+        /**
+         * 指定Channels字段为可见渠道列表或不可见渠道列表
+如只想获取渠道A的环境 就填写IsVisible= true,Channels = ["A"], 过滤渠道A拉取其他渠道环境时填写IsVisible= false,Channels = ["A"]
+         * @type {boolean || null}
+         */
+        this.IsVisible = null;
+
+        /**
+         * 渠道列表，代表可见或不可见渠道由IsVisible参数指定
+         * @type {Array.<string> || null}
+         */
+        this.Channels = null;
+
     }
 
     /**
@@ -573,6 +586,8 @@ class DescribeEnvsRequest extends  AbstractModel {
             return;
         }
         this.EnvId = 'EnvId' in params ? params.EnvId : null;
+        this.IsVisible = 'IsVisible' in params ? params.IsVisible : null;
+        this.Channels = 'Channels' in params ? params.Channels : null;
 
     }
 }

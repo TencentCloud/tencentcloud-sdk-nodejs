@@ -3709,7 +3709,7 @@ class CreateLiveRecordResponse extends  AbstractModel {
         super();
 
         /**
-         * 任务ID，全局唯一标识录制任务。
+         * 任务 ID，全局唯一标识录制任务。
          * @type {number || null}
          */
         this.TaskId = null;
@@ -4201,7 +4201,7 @@ class AddLiveWatermarkRequest extends  AbstractModel {
         super();
 
         /**
-         * 水印图片url。
+         * 水印图片 URL。
          * @type {string || null}
          */
         this.PictureUrl = null;
@@ -4213,7 +4213,7 @@ class AddLiveWatermarkRequest extends  AbstractModel {
         this.WatermarkName = null;
 
         /**
-         * 显示位置,X轴偏移。
+         * 显示位置, X轴偏移。
          * @type {number || null}
          */
         this.XPosition = null;
@@ -5787,7 +5787,7 @@ class CreatePullStreamConfigRequest extends  AbstractModel {
         super();
 
         /**
-         * 源Url。目前可支持直播流及点播文件。
+         * 源 Url。目前可支持直播流及点播文件。
 注意：
 1. 多个点播url之间使用空格拼接。
 2. 目前上限支持10个url。
@@ -5797,8 +5797,8 @@ class CreatePullStreamConfigRequest extends  AbstractModel {
         this.FromUrl = null;
 
         /**
-         * 目的Url，目前限制该目标地址为腾讯域名。
-仅支持：rtmp协议。
+         * 目的 Url，目前限制该目标地址为腾讯域名。
+仅支持：rtmp 协议。
          * @type {string || null}
          */
         this.ToUrl = null;
@@ -5819,14 +5819,14 @@ class CreatePullStreamConfigRequest extends  AbstractModel {
 2-移动，
 3-联通，
 4-其他。
-注：AreaId为4的时候,IspId只能为其他。
+注：AreaId 为4的时候，IspId 只能为其他。
          * @type {number || null}
          */
         this.IspId = null;
 
         /**
          * 开始时间。
-使用UTC格式时间，
+使用 UTC 格式时间，
 例如：2019-01-08T10:00:00Z。
 注意：北京时间值为 UTC 时间值 + 8 小时，格式按照 ISO 8601 标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#I)。
          * @type {string || null}
@@ -5838,7 +5838,7 @@ class CreatePullStreamConfigRequest extends  AbstractModel {
 1. 结束时间必须大于开始时间；
 2. 结束时间和开始时间必须大于当前时间；
 3. 结束时间 和 开始时间 间隔必须小于七天。
-使用UTC格式时间，
+使用 UTC 格式时间，
 例如：2019-01-08T10:00:00Z。
 注意：北京时间值为 UTC 时间值 + 8 小时，格式按照 ISO 8601 标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#I)。
          * @type {string || null}
@@ -6868,7 +6868,7 @@ class CreatePullStreamConfigResponse extends  AbstractModel {
         super();
 
         /**
-         * 配置成功后的id。
+         * 配置成功后的 ID。
          * @type {string || null}
          */
         this.ConfigId = null;
@@ -7563,7 +7563,7 @@ class CreateLiveRecordRequest extends  AbstractModel {
         this.StreamName = null;
 
         /**
-         * 推流路径，与推流和播放地址中的AppName保持一致，默认为 live。
+         * 推流路径，与推流和播放地址中的 AppName保持一致，默认为 live。
          * @type {string || null}
          */
         this.AppName = null;
@@ -7575,14 +7575,14 @@ class CreateLiveRecordRequest extends  AbstractModel {
         this.DomainName = null;
 
         /**
-         * 录制开始时间。中国标准时间，需要URLEncode(rfc3986)。如 2017-01-01 10:10:01，编码为：2017-01-01+10%3a10%3a01。
+         * 录制开始时间。中国标准时间，需要 URLEncode(rfc3986)。如 2017-01-01 10:10:01，编码为：2017-01-01+10%3a10%3a01。
 定时录制模式，必须设置该字段；实时视频录制模式，忽略该字段。
          * @type {string || null}
          */
         this.StartTime = null;
 
         /**
-         * 录制结束时间。中国标准时间，需要URLEncode(rfc3986)。如 2017-01-01 10:30:01，编码为：2017-01-01+10%3a30%3a01。
+         * 录制结束时间。中国标准时间，需要 URLEncode(rfc3986)。如 2017-01-01 10:30:01，编码为：2017-01-01+10%3a30%3a01。
 定时录制模式，必须设置该字段；实时录制模式，为可选字段。如果通过Highlight参数，设置录制为实时视频录制模式，其设置的结束时间不应超过当前时间+30分钟，如果设置的结束时间超过当前时间+30分钟或者小于当前时间或者不设置该参数，则实际结束时间为当前时间+30分钟。
          * @type {string || null}
          */
@@ -7614,9 +7614,9 @@ class CreateLiveRecordRequest extends  AbstractModel {
         this.Highlight = null;
 
         /**
-         * 开启A+B=C混流C流录制标志。
-0：不开启A+B=C混流C流录制【默认】。
-1：开启A+B=C混流C流录制。
+         * 开启 A+B=C混流C流录制标志。
+0：不开启 A+B=C混流C流录制【默认】。
+1：开启 A+B=C混流C流录制。
 在定时录制模式或实时视频录制模式下，该参数均有效。
          * @type {number || null}
          */
@@ -7624,9 +7624,9 @@ class CreateLiveRecordRequest extends  AbstractModel {
 
         /**
          * 录制流参数。当前支持以下参数：
-record_interval - 录制分片时长，单位 秒，1800 - 7200
-storage_time - 录制文件存储时长，单位 秒
-eg. record_interval=3600&storage_time=2592000
+record_interval - 录制分片时长，单位 秒，1800 - 7200。
+storage_time - 录制文件存储时长，单位 秒。
+eg. record_interval=3600&storage_time=2592000。
 注：参数需要url encode。
 在定时录制模式或实时视频录制模式下，该参数均有效。
          * @type {string || null}

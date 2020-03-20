@@ -96,6 +96,12 @@ class CreateDBInstancesRequest extends  AbstractModel {
          */
         this.DBVersion = null;
 
+        /**
+         * 自动续费标志：0-正常续费  1-自动续费，默认为1自动续费。只在购买预付费实例时有效。
+         * @type {number || null}
+         */
+        this.AutoRenewFlag = null;
+
     }
 
     /**
@@ -117,6 +123,7 @@ class CreateDBInstancesRequest extends  AbstractModel {
         this.AutoVoucher = 'AutoVoucher' in params ? params.AutoVoucher : null;
         this.VoucherIds = 'VoucherIds' in params ? params.VoucherIds : null;
         this.DBVersion = 'DBVersion' in params ? params.DBVersion : null;
+        this.AutoRenewFlag = 'AutoRenewFlag' in params ? params.AutoRenewFlag : null;
 
     }
 }
@@ -1752,6 +1759,18 @@ class DescribeDBInstancesRequest extends  AbstractModel {
          */
         this.PayMode = null;
 
+        /**
+         * 实例所属VPC的唯一字符串ID，格式如：vpc-xxx，传空字符串(“”)则按照基础网络筛选。
+         * @type {string || null}
+         */
+        this.VpcId = null;
+
+        /**
+         * 实例所属子网的唯一字符串ID，格式如： subnet-xxx，传空字符串(“”)则按照基础网络筛选。
+         * @type {string || null}
+         */
+        this.SubnetId = null;
+
     }
 
     /**
@@ -1767,6 +1786,8 @@ class DescribeDBInstancesRequest extends  AbstractModel {
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.InstanceIdSet = 'InstanceIdSet' in params ? params.InstanceIdSet : null;
         this.PayMode = 'PayMode' in params ? params.PayMode : null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
 
     }
 }
@@ -5070,6 +5091,12 @@ class CreateDBInstancesResponse extends  AbstractModel {
         this.DealName = null;
 
         /**
+         * 订单名称数组
+         * @type {Array.<string> || null}
+         */
+        this.DealNames = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -5085,6 +5112,7 @@ class CreateDBInstancesResponse extends  AbstractModel {
             return;
         }
         this.DealName = 'DealName' in params ? params.DealName : null;
+        this.DealNames = 'DealNames' in params ? params.DealNames : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }

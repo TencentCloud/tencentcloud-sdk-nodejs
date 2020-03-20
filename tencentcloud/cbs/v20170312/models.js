@@ -628,6 +628,27 @@ class ModifySnapshotsSharePermissionResponse extends  AbstractModel {
 }
 
 /**
+ * GetSnapOverview请求参数结构体
+ * @class
+ */
+class GetSnapOverviewRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+    }
+}
+
+/**
  * DescribeSnapshotOperationLogs请求参数结构体
  * @class
  */
@@ -1558,30 +1579,42 @@ class DescribeDiskAssociatedAutoSnapshotPolicyResponse extends  AbstractModel {
 }
 
 /**
- * InquiryPriceResizeDisk请求参数结构体
+ * GetSnapOverview返回参数结构体
  * @class
  */
-class InquiryPriceResizeDiskRequest extends  AbstractModel {
+class GetSnapOverviewResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 云硬盘ID， 通过[DescribeDisks](/document/product/362/16315)接口查询。
+         * 用户快照总大小
+         * @type {number || null}
+         */
+        this.TotalSize = null;
+
+        /**
+         * 用户快照总大小（用于计费）
+         * @type {number || null}
+         */
+        this.RealTradeSize = null;
+
+        /**
+         * 快照免费额度
+         * @type {number || null}
+         */
+        this.FreeQuota = null;
+
+        /**
+         * 快照总个数
+         * @type {number || null}
+         */
+        this.TotalNums = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.DiskId = null;
-
-        /**
-         * 云硬盘扩容后的大小，单位为GB，不得小于当前云硬盘大小。云盘大小取值范围参见云硬盘[产品分类](/document/product/362/2353)的说明。
-         * @type {number || null}
-         */
-        this.DiskSize = null;
-
-        /**
-         * 云盘所属项目ID。 如传入则仅用于鉴权。
-         * @type {number || null}
-         */
-        this.ProjectId = null;
+        this.RequestId = null;
 
     }
 
@@ -1592,9 +1625,11 @@ class InquiryPriceResizeDiskRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.DiskId = 'DiskId' in params ? params.DiskId : null;
-        this.DiskSize = 'DiskSize' in params ? params.DiskSize : null;
-        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+        this.TotalSize = 'TotalSize' in params ? params.TotalSize : null;
+        this.RealTradeSize = 'RealTradeSize' in params ? params.RealTradeSize : null;
+        this.FreeQuota = 'FreeQuota' in params ? params.FreeQuota : null;
+        this.TotalNums = 'TotalNums' in params ? params.TotalNums : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3392,6 +3427,48 @@ class CreateAutoSnapshotPolicyRequest extends  AbstractModel {
 }
 
 /**
+ * InquiryPriceResizeDisk请求参数结构体
+ * @class
+ */
+class InquiryPriceResizeDiskRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 云硬盘ID， 通过[DescribeDisks](/document/product/362/16315)接口查询。
+         * @type {string || null}
+         */
+        this.DiskId = null;
+
+        /**
+         * 云硬盘扩容后的大小，单位为GB，不得小于当前云硬盘大小。云盘大小取值范围参见云硬盘[产品分类](/document/product/362/2353)的说明。
+         * @type {number || null}
+         */
+        this.DiskSize = null;
+
+        /**
+         * 云盘所属项目ID。 如传入则仅用于鉴权。
+         * @type {number || null}
+         */
+        this.ProjectId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DiskId = 'DiskId' in params ? params.DiskId : null;
+        this.DiskSize = 'DiskSize' in params ? params.DiskSize : null;
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+
+    }
+}
+
+/**
  * 描述了云硬盘的详细信息
  * @class
  */
@@ -3824,6 +3901,7 @@ module.exports = {
     AutoSnapshotPolicy: AutoSnapshotPolicy,
     Policy: Policy,
     ModifySnapshotsSharePermissionResponse: ModifySnapshotsSharePermissionResponse,
+    GetSnapOverviewRequest: GetSnapOverviewRequest,
     DescribeSnapshotOperationLogsRequest: DescribeSnapshotOperationLogsRequest,
     ModifySnapshotAttributeRequest: ModifySnapshotAttributeRequest,
     InquiryPriceRenewDisksRequest: InquiryPriceRenewDisksRequest,
@@ -3846,7 +3924,7 @@ module.exports = {
     DescribeSnapshotOperationLogsResponse: DescribeSnapshotOperationLogsResponse,
     ModifyDisksRenewFlagResponse: ModifyDisksRenewFlagResponse,
     DescribeDiskAssociatedAutoSnapshotPolicyResponse: DescribeDiskAssociatedAutoSnapshotPolicyResponse,
-    InquiryPriceResizeDiskRequest: InquiryPriceResizeDiskRequest,
+    GetSnapOverviewResponse: GetSnapOverviewResponse,
     ApplySnapshotResponse: ApplySnapshotResponse,
     DeleteAutoSnapshotPoliciesResponse: DeleteAutoSnapshotPoliciesResponse,
     DescribeDisksResponse: DescribeDisksResponse,
@@ -3883,6 +3961,7 @@ module.exports = {
     DescribeSnapshotsRequest: DescribeSnapshotsRequest,
     Placement: Placement,
     CreateAutoSnapshotPolicyRequest: CreateAutoSnapshotPolicyRequest,
+    InquiryPriceResizeDiskRequest: InquiryPriceResizeDiskRequest,
     Disk: Disk,
     ModifyAutoSnapshotPolicyAttributeRequest: ModifyAutoSnapshotPolicyAttributeRequest,
     Tag: Tag,
