@@ -1848,7 +1848,7 @@ class DeleteClsLogTopicRequest extends  AbstractModel {
         super();
 
         /**
-         * 主日志题ID
+         * 日志主题ID
          * @type {string || null}
          */
         this.TopicId = null;

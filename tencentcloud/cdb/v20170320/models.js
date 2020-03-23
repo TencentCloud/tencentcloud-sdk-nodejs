@@ -1436,6 +1436,12 @@ class SellConfig extends  AbstractModel {
          */
         this.Status = null;
 
+        /**
+         * 标签值
+         * @type {number || null}
+         */
+        this.Tag = null;
+
     }
 
     /**
@@ -1458,6 +1464,7 @@ class SellConfig extends  AbstractModel {
         this.Iops = 'Iops' in params ? params.Iops : null;
         this.Info = 'Info' in params ? params.Info : null;
         this.Status = 'Status' in params ? params.Status : null;
+        this.Tag = 'Tag' in params ? params.Tag : null;
 
     }
 }
@@ -8671,6 +8678,19 @@ class ZoneSellConf extends  AbstractModel {
          */
         this.DrZone = null;
 
+        /**
+         * 是否支持跨可用区只读
+         * @type {boolean || null}
+         */
+        this.IsSupportRemoteRo = null;
+
+        /**
+         * 可支持的跨可用区只读区信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
+         */
+        this.RemoteRoZone = null;
+
     }
 
     /**
@@ -8707,6 +8727,8 @@ class ZoneSellConf extends  AbstractModel {
             this.ZoneConf = obj;
         }
         this.DrZone = 'DrZone' in params ? params.DrZone : null;
+        this.IsSupportRemoteRo = 'IsSupportRemoteRo' in params ? params.IsSupportRemoteRo : null;
+        this.RemoteRoZone = 'RemoteRoZone' in params ? params.RemoteRoZone : null;
 
     }
 }
