@@ -81,6 +81,27 @@ class CreateStaticStoreResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeEnvLimit请求参数结构体
+ * @class
+ */
+class DescribeEnvLimitRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+    }
+}
+
+/**
  * DescribeQuotaData返回参数结构体
  * @class
  */
@@ -459,12 +480,18 @@ class CommonServiceAPIResponse extends  AbstractModel {
 }
 
 /**
- * DescribeEnvLimit请求参数结构体
+ * CreateAuthDomain返回参数结构体
  * @class
  */
-class DescribeEnvLimitRequest extends  AbstractModel {
+class CreateAuthDomainResponse extends  AbstractModel {
     constructor(){
         super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
 
     }
 
@@ -475,6 +502,7 @@ class DescribeEnvLimitRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1781,9 +1809,45 @@ class DescribeEnvsResponse extends  AbstractModel {
     }
 }
 
+/**
+ * CreateAuthDomain请求参数结构体
+ * @class
+ */
+class CreateAuthDomainRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 环境ID
+         * @type {string || null}
+         */
+        this.EnvId = null;
+
+        /**
+         * 安全域名
+         * @type {Array.<string> || null}
+         */
+        this.Domains = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.EnvId = 'EnvId' in params ? params.EnvId : null;
+        this.Domains = 'Domains' in params ? params.Domains : null;
+
+    }
+}
+
 module.exports = {
     CreateHostingDomainResponse: CreateHostingDomainResponse,
     CreateStaticStoreResponse: CreateStaticStoreResponse,
+    DescribeEnvLimitRequest: DescribeEnvLimitRequest,
     DescribeQuotaDataResponse: DescribeQuotaDataResponse,
     CheckTcbServiceResponse: CheckTcbServiceResponse,
     StorageInfo: StorageInfo,
@@ -1793,7 +1857,7 @@ module.exports = {
     AuthDomain: AuthDomain,
     CreateStaticStoreRequest: CreateStaticStoreRequest,
     CommonServiceAPIResponse: CommonServiceAPIResponse,
-    DescribeEnvLimitRequest: DescribeEnvLimitRequest,
+    CreateAuthDomainResponse: CreateAuthDomainResponse,
     ModifyEnvRequest: ModifyEnvRequest,
     DescribeEndUsersRequest: DescribeEndUsersRequest,
     DescribeEnvsRequest: DescribeEnvsRequest,
@@ -1822,5 +1886,6 @@ module.exports = {
     DescribeEnvLimitResponse: DescribeEnvLimitResponse,
     DeleteEndUserRequest: DeleteEndUserRequest,
     DescribeEnvsResponse: DescribeEnvsResponse,
+    CreateAuthDomainRequest: CreateAuthDomainRequest,
 
 }

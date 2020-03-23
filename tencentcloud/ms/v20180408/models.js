@@ -1483,7 +1483,7 @@ class AppInfo extends  AbstractModel {
         this.AppSize = null;
 
         /**
-         * app的文件名，指定后加固后的文件名是{FileName}_legu.apk
+         * app的文件名
          * @type {string || null}
          */
         this.FileName = null;

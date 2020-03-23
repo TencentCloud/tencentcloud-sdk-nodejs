@@ -7938,7 +7938,7 @@ class LoadBalancer extends  AbstractModel {
         this.VpcCidrBlock = null;
 
         /**
-         * 负载均衡获得的公网IP地址,支持多个
+         * 负载均衡的IPV4的VIP。
          * @type {Array.<string> || null}
          */
         this.LoadBalancerVips = null;
@@ -8003,6 +8003,13 @@ class LoadBalancer extends  AbstractModel {
          */
         this.IntVpcId = null;
 
+        /**
+         * 负载均衡的IPV6或者IPV4的VIP。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
+         */
+        this.CurVips = null;
+
     }
 
     /**
@@ -8039,6 +8046,7 @@ class LoadBalancer extends  AbstractModel {
         this.BzL4Metrics = 'BzL4Metrics' in params ? params.BzL4Metrics : null;
         this.BzL7Metrics = 'BzL7Metrics' in params ? params.BzL7Metrics : null;
         this.IntVpcId = 'IntVpcId' in params ? params.IntVpcId : null;
+        this.CurVips = 'CurVips' in params ? params.CurVips : null;
 
     }
 }

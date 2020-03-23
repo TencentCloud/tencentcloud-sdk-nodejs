@@ -20,6 +20,7 @@ const DescribeImagePersonalResponse = models.DescribeImagePersonalResponse;
 const DescribeUserQuotaPersonalRequest = models.DescribeUserQuotaPersonalRequest;
 const ModifyRepositoryResponse = models.ModifyRepositoryResponse;
 const TriggerInvokePara = models.TriggerInvokePara;
+const DescribeNamespacesResponse = models.DescribeNamespacesResponse;
 const TriggerLogResp = models.TriggerLogResp;
 const TagInfoResp = models.TagInfoResp;
 const CreateInstanceResponse = models.CreateInstanceResponse;
@@ -36,6 +37,7 @@ const DescribeApplicationTriggerPersonalRequest = models.DescribeApplicationTrig
 const FavorResp = models.FavorResp;
 const DeleteNamespacePersonalRequest = models.DeleteNamespacePersonalRequest;
 const Limit = models.Limit;
+const DescribeApplicationTriggerLogPersonalResponse = models.DescribeApplicationTriggerLogPersonalResponse;
 const DeleteRepositoryResponse = models.DeleteRepositoryResponse;
 const DeleteImagePersonalResponse = models.DeleteImagePersonalResponse;
 const RegistryCondition = models.RegistryCondition;
@@ -67,6 +69,7 @@ const DescribeRepositoriesRequest = models.DescribeRepositoriesRequest;
 const DescribeImageFilterPersonalRequest = models.DescribeImageFilterPersonalRequest;
 const ModifyNamespaceResponse = models.ModifyNamespaceResponse;
 const ModifyUserPasswordPersonalResponse = models.ModifyUserPasswordPersonalResponse;
+const TcrNamespaceInfo = models.TcrNamespaceInfo;
 const DeleteApplicationTriggerPersonalResponse = models.DeleteApplicationTriggerPersonalResponse;
 const ModifyRepositoryInfoPersonalResponse = models.ModifyRepositoryInfoPersonalResponse;
 const DescribeRepositoryFilterPersonalRequest = models.DescribeRepositoryFilterPersonalRequest;
@@ -86,6 +89,7 @@ const DescribeImageFilterPersonalResponse = models.DescribeImageFilterPersonalRe
 const CreateImageLifecyclePersonalRequest = models.CreateImageLifecyclePersonalRequest;
 const TriggerInvokeResult = models.TriggerInvokeResult;
 const CreateUserPersonalResponse = models.CreateUserPersonalResponse;
+const ModifyNamespaceRequest = models.ModifyNamespaceRequest;
 const ModifyRepositoryAccessPersonalRequest = models.ModifyRepositoryAccessPersonalRequest;
 const DescribeImageLifecycleGlobalPersonalRequest = models.DescribeImageLifecycleGlobalPersonalRequest;
 const DescribeImageLifecyclePersonalRequest = models.DescribeImageLifecyclePersonalRequest;
@@ -96,7 +100,7 @@ const CreateNamespaceRequest = models.CreateNamespaceRequest;
 const BatchDeleteRepositoryPersonalRequest = models.BatchDeleteRepositoryPersonalRequest;
 const TriggerInvokeCondition = models.TriggerInvokeCondition;
 const NamespaceIsExistsResp = models.NamespaceIsExistsResp;
-const ModifyNamespaceRequest = models.ModifyNamespaceRequest;
+const DescribeInstancesRequest = models.DescribeInstancesRequest;
 const Filter = models.Filter;
 const RepoInfo = models.RepoInfo;
 const ManageImageLifecycleGlobalPersonalRequest = models.ManageImageLifecycleGlobalPersonalRequest;
@@ -110,11 +114,10 @@ const DescribeRepositoryOwnerPersonalRequest = models.DescribeRepositoryOwnerPer
 const ModifyRepositoryInfoPersonalRequest = models.ModifyRepositoryInfoPersonalRequest;
 const DescribeApplicationTriggerLogPersonalRequest = models.DescribeApplicationTriggerLogPersonalRequest;
 const DescribeFavorRepositoryPersonalRequest = models.DescribeFavorRepositoryPersonalRequest;
-const DescribeApplicationTriggerLogPersonalResponse = models.DescribeApplicationTriggerLogPersonalResponse;
+const DescribeNamespacesRequest = models.DescribeNamespacesRequest;
 const DescribeRepositoryFilterPersonalResponse = models.DescribeRepositoryFilterPersonalResponse;
 const DescribeFavorRepositoryPersonalResponse = models.DescribeFavorRepositoryPersonalResponse;
 const ModifyRepositoryAccessPersonalResponse = models.ModifyRepositoryAccessPersonalResponse;
-const DescribeInstancesRequest = models.DescribeInstancesRequest;
 const CreateInstanceTokenRequest = models.CreateInstanceTokenRequest;
 const ModifyUserPasswordPersonalRequest = models.ModifyUserPasswordPersonalRequest;
 const ValidateNamespaceExistPersonalResponse = models.ValidateNamespaceExistPersonalResponse;
@@ -150,7 +153,7 @@ class TcrClient extends AbstractClient {
     }
     
     /**
-     * 更新命名空间信息
+     * 更新命名空间信息，当前仅支持修改命名空间访问级别
      * @param {ModifyNamespaceRequest} req
      * @param {function(string, ModifyNamespaceResponse):void} cb
      * @public
@@ -488,6 +491,17 @@ class TcrClient extends AbstractClient {
     DescribeRepositoryOwnerPersonal(req, cb) {
         let resp = new DescribeRepositoryOwnerPersonalResponse();
         this.request("DescribeRepositoryOwnerPersonal", req, resp, cb);
+    }
+
+    /**
+     * 查询命名空间列表或指定命名空间信息
+     * @param {DescribeNamespacesRequest} req
+     * @param {function(string, DescribeNamespacesResponse):void} cb
+     * @public
+     */
+    DescribeNamespaces(req, cb) {
+        let resp = new DescribeNamespacesResponse();
+        this.request("DescribeNamespaces", req, resp, cb);
     }
 
     /**

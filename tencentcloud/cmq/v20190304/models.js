@@ -150,7 +150,7 @@ class RewindQueueRequest extends  AbstractModel {
         super();
 
         /**
-         * QueueName
+         * 队列名字，在单个地域同一帐号下唯一。队列名称是一个不超过64个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线(-)。
          * @type {string || null}
          */
         this.QueueName = null;
@@ -185,25 +185,25 @@ class DescribeSubscriptionDetailRequest extends  AbstractModel {
         super();
 
         /**
-         * TopicName
+         * 主题名字，在单个地域同一帐号下唯一。主题名称是一个不超过64个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线（-）。
          * @type {string || null}
          */
         this.TopicName = null;
 
         /**
-         * Offset
+         * 分页时本页获取主题列表的起始位置。如果填写了该值，必须也要填写 limit 。该值缺省时，后台取默认值 0
          * @type {number || null}
          */
         this.Offset = null;
 
         /**
-         * Limit
+         * 分页时本页获取主题的个数，如果不传递该参数，则该参数默认为20，最大值为50。
          * @type {number || null}
          */
         this.Limit = null;
 
         /**
-         * 目前只支持SubscriptionName，且仅支持一个关键字
+         * 筛选参数，目前只支持SubscriptionName，且仅支持一个关键字。
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
@@ -513,13 +513,13 @@ class DeleteSubscribeRequest extends  AbstractModel {
         super();
 
         /**
-         * TopicName
+         * 主题名字，在单个地域同一帐号下唯一。主题名称是一个不超过64个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线(-)。
          * @type {string || null}
          */
         this.TopicName = null;
 
         /**
-         * SubscriptionName
+         * 订阅名字，在单个地域同一帐号的同一主题下唯一。订阅名称是一个不超过64个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线(-)。
          * @type {string || null}
          */
         this.SubscriptionName = null;
@@ -599,49 +599,49 @@ class CreateSubscribeRequest extends  AbstractModel {
         super();
 
         /**
-         * TopicName
+         * 主题名字，在单个地域同一帐号下唯一。主题名称是一个不超过64个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线（-）。
          * @type {string || null}
          */
         this.TopicName = null;
 
         /**
-         * SubscriptionName
+         * 订阅名字，在单个地域同一帐号的同一主题下唯一。订阅名称是一个不超过64个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线(-)。
          * @type {string || null}
          */
         this.SubscriptionName = null;
 
         /**
-         * Protocol
+         * 订阅的协议，目前支持两种协议：http、queue。使用http协议，用户需自己搭建接受消息的web server。使用queue，消息会自动推送到CMQ queue，用户可以并发地拉取消息。
          * @type {string || null}
          */
         this.Protocol = null;
 
         /**
-         * Endpoint
+         * 接收通知的Endpoint，根据协议Protocol区分：对于http，Endpoint必须以“http://”开头，host可以是域名或IP；对于Queue，则填QueueName。 请注意，目前推送服务不能推送到私有网络中，因此Endpoint填写为私有网络域名或地址将接收不到推送的消息，目前支持推送到公网和基础网络。
          * @type {string || null}
          */
         this.Endpoint = null;
 
         /**
-         * NotifyStrategy
+         * 向Endpoint推送消息出现错误时，CMQ推送服务器的重试策略。取值有：1）BACKOFF_RETRY，退避重试。每隔一定时间重试一次，重试够一定次数后，就把该消息丢弃，继续推送下一条消息；2）EXPONENTIAL_DECAY_RETRY，指数衰退重试。每次重试的间隔是指数递增的，例如开始1s，后面是2s，4s，8s...由于Topic消息的周期是一天，所以最多重试一天就把消息丢弃。默认值是EXPONENTIAL_DECAY_RETRY。
          * @type {string || null}
          */
         this.NotifyStrategy = null;
 
         /**
-         * FilterTag
+         * 消息正文。消息标签（用于消息过滤)。标签数量不能超过5个，每个标签不超过16个字符。与(Batch)PublishMessage的MsgTag参数配合使用，规则：1）如果FilterTag没有设置，则无论MsgTag是否有设置，订阅接收所有发布到Topic的消息；2）如果FilterTag数组有值，则只有数组中至少有一个值在MsgTag数组中也存在时（即FilterTag和MsgTag有交集），订阅才接收该发布到Topic的消息；3）如果FilterTag数组有值，但MsgTag没设置，则不接收任何发布到Topic的消息，可以认为是2）的一种特例，此时FilterTag和MsgTag没有交集。规则整体的设计思想是以订阅者的意愿为主。
          * @type {Array.<string> || null}
          */
         this.FilterTag = null;
 
         /**
-         * BindingKey
+         * BindingKey数量不超过5个， 每个BindingKey长度不超过64字节，该字段表示订阅接收消息的过滤策略，每个BindingKey最多含有15个“.”， 即最多16个词组。
          * @type {Array.<string> || null}
          */
         this.BindingKey = null;
 
         /**
-         * NotifyContentFormat
+         * 推送内容的格式。取值：1）JSON；2）SIMPLIFIED，即raw格式。如果Protocol是queue，则取值必须为SIMPLIFIED。如果Protocol是http，两个值均可以，默认值是JSON。
          * @type {string || null}
          */
         this.NotifyContentFormat = null;
@@ -676,7 +676,7 @@ class ClearQueueRequest extends  AbstractModel {
         super();
 
         /**
-         * 队列名称
+         * 队列名字，在单个地域同一帐号下唯一。队列名称是一个不超过64个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线(-)。
          * @type {string || null}
          */
         this.QueueName = null;
@@ -832,13 +832,13 @@ class DescribeTopicDetailRequest extends  AbstractModel {
         super();
 
         /**
-         * Offset
+         * 分页时本页获取队列列表的起始位置。如果填写了该值，必须也要填写 limit 。该值缺省时，后台取默认值 0。
          * @type {number || null}
          */
         this.Offset = null;
 
         /**
-         * Limit
+         * 分页时本页获取队列的个数，如果不传递该参数，则该参数默认为20，最大值为50。
          * @type {number || null}
          */
         this.Limit = null;
@@ -850,7 +850,7 @@ class DescribeTopicDetailRequest extends  AbstractModel {
         this.Filters = null;
 
         /**
-         * TagKey
+         * 标签匹配
          * @type {string || null}
          */
         this.TagKey = null;
@@ -896,7 +896,7 @@ class DeleteTopicRequest extends  AbstractModel {
         super();
 
         /**
-         * TopicName
+         * 主题名字，在单个地域同一帐号下唯一。主题名称是一个不超过64个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线(-)。
          * @type {string || null}
          */
         this.TopicName = null;
@@ -1052,25 +1052,25 @@ class CreateTopicRequest extends  AbstractModel {
         super();
 
         /**
-         * TopicName
+         * 主题名字，在单个地域同一帐号下唯一。主题名称是一个不超过64个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线（-）。
          * @type {string || null}
          */
         this.TopicName = null;
 
         /**
-         * MaxMsgSize
+         * 消息最大长度。取值范围 1024-65536 Byte（即1-64K），默认值 65536。
          * @type {number || null}
          */
         this.MaxMsgSize = null;
 
         /**
-         * FilterType
+         * 用于指定主题的消息匹配策略。
          * @type {number || null}
          */
         this.FilterType = null;
 
         /**
-         * MsgRetentionSeconds
+         * 消息保存时间。取值范围60 - 86400 s（即1分钟 - 1天），默认值86400。
          * @type {number || null}
          */
         this.MsgRetentionSeconds = null;
@@ -1108,7 +1108,7 @@ class DeleteQueueRequest extends  AbstractModel {
         super();
 
         /**
-         * 队列名称
+         * 队列名字，在单个地域同一帐号下唯一。队列名称是一个不超过64个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线(-)。
          * @type {string || null}
          */
         this.QueueName = null;
@@ -1249,19 +1249,19 @@ class ModifyTopicAttributeRequest extends  AbstractModel {
         super();
 
         /**
-         * TopicName
+         * 主题名字，在单个地域同一帐号下唯一。主题名称是一个不超过64个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线(-)。
          * @type {string || null}
          */
         this.TopicName = null;
 
         /**
-         * MaxMsgSize
+         * 消息最大长度。取值范围1024 - 65536 Byte（即1 - 64K），默认值65536。
          * @type {number || null}
          */
         this.MaxMsgSize = null;
 
         /**
-         * MsgRetentionSeconds
+         * 消息保存时间。取值范围60 - 86400 s（即1分钟 - 1天），默认值86400。
          * @type {number || null}
          */
         this.MsgRetentionSeconds = null;
@@ -1635,13 +1635,13 @@ class ClearSubscriptionFilterTagsRequest extends  AbstractModel {
         super();
 
         /**
-         * TopicName
+         * 主题名字，在单个地域同一帐号下唯一。主题名称是一个不超过64个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线（-）。
          * @type {string || null}
          */
         this.TopicName = null;
 
         /**
-         * SubscriptionName
+         * 订阅名字，在单个地域同一帐号的同一主题下唯一。订阅名称是一个不超过64个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线(-)。
          * @type {string || null}
          */
         this.SubscriptionName = null;
@@ -1739,13 +1739,13 @@ class DescribeDeadLetterSourceQueuesRequest extends  AbstractModel {
         this.DeadLetterQueueName = null;
 
         /**
-         * limit
+         * 分页时本页获取主题列表的起始位置。如果填写了该值，必须也要填写 limit 。该值缺省时，后台取默认值 0。
          * @type {number || null}
          */
         this.Limit = null;
 
         /**
-         * offset
+         * 分页时本页获取主题的个数，如果不传递该参数，则该参数默认为20，最大值为50。
          * @type {number || null}
          */
         this.Offset = null;
@@ -1927,37 +1927,39 @@ class ModifySubscriptionAttributeRequest extends  AbstractModel {
         super();
 
         /**
-         * TopicName
+         * 主题名字，在单个地域同一帐号下唯一。主题名称是一个不超过64个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线（-）。
          * @type {string || null}
          */
         this.TopicName = null;
 
         /**
-         * SubscriptionName
+         * 订阅名字，在单个地域同一帐号的同一主题下唯一。订阅名称是一个不超过64个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线(-)。
          * @type {string || null}
          */
         this.SubscriptionName = null;
 
         /**
-         * NotifyStrategy
+         * 向 Endpoint 推送消息出现错误时，CMQ 推送服务器的重试策略。取值如下：
+（1）BACKOFF_RETRY，退避重试。每隔一定时间重试一次，重试够一定次数后，就把该消息丢弃，继续推送下一条消息。
+（2）EXPONENTIAL_DECAY_RETRY，指数衰退重试。每次重试的间隔是指数递增的，例如开始1s，后面是2s，4s，8s···由于 Topic 消息的周期是一天，所以最多重试一天就把消息丢弃。默认值是 EXPONENTIAL_DECAY_RETRY。
          * @type {string || null}
          */
         this.NotifyStrategy = null;
 
         /**
-         * NotifyContentFormat
+         * 推送内容的格式。取值：（1）JSON；（2）SIMPLIFIED，即 raw 格式。如果 Protocol 是 queue，则取值必须为 SIMPLIFIED。如果 Protocol 是 HTTP，两个值均可以，默认值是 JSON。
          * @type {string || null}
          */
         this.NotifyContentFormat = null;
 
         /**
-         * FilterTags
+         * 消息正文。消息标签（用于消息过滤)。标签数量不能超过5个，每个标签不超过16个字符。与(Batch)PublishMessage的MsgTag参数配合使用，规则：1）如果FilterTag没有设置，则无论MsgTag是否有设置，订阅接收所有发布到Topic的消息；2）如果FilterTag数组有值，则只有数组中至少有一个值在MsgTag数组中也存在时（即FilterTag和MsgTag有交集），订阅才接收该发布到Topic的消息；3）如果FilterTag数组有值，但MsgTag没设置，则不接收任何发布到Topic的消息，可以认为是2）的一种特例，此时FilterTag和MsgTag没有交集。规则整体的设计思想是以订阅者的意愿为主。
          * @type {Array.<string> || null}
          */
         this.FilterTags = null;
 
         /**
-         * BindingKey
+         * BindingKey数量不超过5个， 每个BindingKey长度不超过64字节，该字段表示订阅接收消息的过滤策略，每个BindingKey最多含有15个“.”， 即最多16个词组。
          * @type {Array.<string> || null}
          */
         this.BindingKey = null;
@@ -2135,79 +2137,79 @@ class ModifyQueueAttributeRequest extends  AbstractModel {
         super();
 
         /**
-         * QueueName
+         * 队列名字，在单个地域同一帐号下唯一。队列名称是一个不超过 64 个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线(-)。
          * @type {string || null}
          */
         this.QueueName = null;
 
         /**
-         * MaxMsgHeapNum
+         * 最大堆积消息数。取值范围在公测期间为 1,000,000 - 10,000,000，正式上线后范围可达到 1000,000-1000,000,000。默认取值在公测期间为 10,000,000，正式上线后为 100,000,000。
          * @type {number || null}
          */
         this.MaxMsgHeapNum = null;
 
         /**
-         * PollingWaitSeconds
+         * 消息接收长轮询等待时间。取值范围 0-30 秒，默认值 0。
          * @type {number || null}
          */
         this.PollingWaitSeconds = null;
 
         /**
-         * VisibilityTimeout
+         * 消息可见性超时。取值范围 1-43200 秒（即12小时内），默认值 30。
          * @type {number || null}
          */
         this.VisibilityTimeout = null;
 
         /**
-         * MaxMsgSize
+         * 消息最大长度。取值范围 1024-65536 Byte（即1-64K），默认值 65536。
          * @type {number || null}
          */
         this.MaxMsgSize = null;
 
         /**
-         * MsgRetentionSeconds
+         * 消息保留周期。取值范围 60-1296000 秒（1min-15天），默认值 345600 (4 天)。
          * @type {number || null}
          */
         this.MsgRetentionSeconds = null;
 
         /**
-         * RewindSeconds
+         * 消息最长回溯时间，取值范围0-msgRetentionSeconds，消息的最大回溯之间为消息在队列中的保存周期，0表示不开启消息回溯。
          * @type {number || null}
          */
         this.RewindSeconds = null;
 
         /**
-         * FirstQueryInterval
+         * 第一次查询时间
          * @type {number || null}
          */
         this.FirstQueryInterval = null;
 
         /**
-         * MaxQueryCount
+         * 最大查询次数
          * @type {number || null}
          */
         this.MaxQueryCount = null;
 
         /**
-         * DeadLetterQueueName
+         * 死信队列名称
          * @type {string || null}
          */
         this.DeadLetterQueueName = null;
 
         /**
-         * MaxTimeToLive
+         * MaxTimeToLivepolicy为1时必选。最大未消费过期时间。范围300-43200，单位秒，需要小于消息最大保留时间MsgRetentionSeconds
          * @type {number || null}
          */
         this.MaxTimeToLive = null;
 
         /**
-         * MaxReceiveCount
+         * 最大接收次数
          * @type {number || null}
          */
         this.MaxReceiveCount = null;
 
         /**
-         * Policy
+         * 死信队列策略
          * @type {number || null}
          */
         this.Policy = null;

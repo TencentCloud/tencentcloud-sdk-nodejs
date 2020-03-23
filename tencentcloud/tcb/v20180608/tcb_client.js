@@ -18,6 +18,7 @@ const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const CreateHostingDomainResponse = models.CreateHostingDomainResponse;
 const CreateStaticStoreResponse = models.CreateStaticStoreResponse;
+const DescribeEnvLimitRequest = models.DescribeEnvLimitRequest;
 const DescribeQuotaDataResponse = models.DescribeQuotaDataResponse;
 const CheckTcbServiceResponse = models.CheckTcbServiceResponse;
 const StorageInfo = models.StorageInfo;
@@ -27,7 +28,7 @@ const DescribeEndUsersResponse = models.DescribeEndUsersResponse;
 const AuthDomain = models.AuthDomain;
 const CreateStaticStoreRequest = models.CreateStaticStoreRequest;
 const CommonServiceAPIResponse = models.CommonServiceAPIResponse;
-const DescribeEnvLimitRequest = models.DescribeEnvLimitRequest;
+const CreateAuthDomainResponse = models.CreateAuthDomainResponse;
 const ModifyEnvRequest = models.ModifyEnvRequest;
 const DescribeEndUsersRequest = models.DescribeEndUsersRequest;
 const DescribeEnvsRequest = models.DescribeEnvsRequest;
@@ -56,6 +57,7 @@ const EndUserInfo = models.EndUserInfo;
 const DescribeEnvLimitResponse = models.DescribeEnvLimitResponse;
 const DeleteEndUserRequest = models.DeleteEndUserRequest;
 const DescribeEnvsResponse = models.DescribeEnvsResponse;
+const CreateAuthDomainRequest = models.CreateAuthDomainRequest;
 
 
 /**
@@ -77,6 +79,17 @@ class TcbClient extends AbstractClient {
     ModifyEnv(req, cb) {
         let resp = new ModifyEnvResponse();
         this.request("ModifyEnv", req, resp, cb);
+    }
+
+    /**
+     * 增加安全域名
+     * @param {CreateAuthDomainRequest} req
+     * @param {function(string, CreateAuthDomainResponse):void} cb
+     * @public
+     */
+    CreateAuthDomain(req, cb) {
+        let resp = new CreateAuthDomainResponse();
+        this.request("CreateAuthDomain", req, resp, cb);
     }
 
     /**

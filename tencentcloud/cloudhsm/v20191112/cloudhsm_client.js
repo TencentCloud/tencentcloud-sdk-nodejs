@@ -23,6 +23,8 @@ const InquiryPriceBuyVsmRequest = models.InquiryPriceBuyVsmRequest;
 const DescribeVpcResponse = models.DescribeVpcResponse;
 const ModifyVsmAttributesRequest = models.ModifyVsmAttributesRequest;
 const DescribeSubnetResponse = models.DescribeSubnetResponse;
+const DescribeHSMByVpcIdRequest = models.DescribeHSMByVpcIdRequest;
+const DescribeHSMByVpcIdResponse = models.DescribeHSMByVpcIdResponse;
 const DescribeUsgRuleResponse = models.DescribeUsgRuleResponse;
 const ResourceInfo = models.ResourceInfo;
 const DescribeVpcRequest = models.DescribeVpcRequest;
@@ -32,7 +34,9 @@ const DescribeVsmAttributesResponse = models.DescribeVsmAttributesResponse;
 const SgUnit = models.SgUnit;
 const UsgRuleDetail = models.UsgRuleDetail;
 const InquiryPriceBuyVsmResponse = models.InquiryPriceBuyVsmResponse;
+const DescribeHSMBySubnetIdResponse = models.DescribeHSMBySubnetIdResponse;
 const DescribeUsgResponse = models.DescribeUsgResponse;
+const DescribeHSMBySubnetIdRequest = models.DescribeHSMBySubnetIdRequest;
 const DescribeVsmsRequest = models.DescribeVsmsRequest;
 const DescribeUsgRuleRequest = models.DescribeUsgRuleRequest;
 const ModifyVsmAttributesResponse = models.ModifyVsmAttributesResponse;
@@ -92,6 +96,28 @@ class CloudhsmClient extends AbstractClient {
     DescribeVpc(req, cb) {
         let resp = new DescribeVpcResponse();
         this.request("DescribeVpc", req, resp, cb);
+    }
+
+    /**
+     * 通过VpcId获取Hsm资源数
+     * @param {DescribeHSMByVpcIdRequest} req
+     * @param {function(string, DescribeHSMByVpcIdResponse):void} cb
+     * @public
+     */
+    DescribeHSMByVpcId(req, cb) {
+        let resp = new DescribeHSMByVpcIdResponse();
+        this.request("DescribeHSMByVpcId", req, resp, cb);
+    }
+
+    /**
+     * 通过SubnetId获取Hsm资源数
+     * @param {DescribeHSMBySubnetIdRequest} req
+     * @param {function(string, DescribeHSMBySubnetIdResponse):void} cb
+     * @public
+     */
+    DescribeHSMBySubnetId(req, cb) {
+        let resp = new DescribeHSMBySubnetIdResponse();
+        this.request("DescribeHSMBySubnetId", req, resp, cb);
     }
 
     /**

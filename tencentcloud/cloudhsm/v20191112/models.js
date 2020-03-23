@@ -441,6 +441,76 @@ class DescribeSubnetResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeHSMByVpcId请求参数结构体
+ * @class
+ */
+class DescribeHSMByVpcIdRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * VPC标识符
+         * @type {string || null}
+         */
+        this.VpcId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+
+    }
+}
+
+/**
+ * DescribeHSMByVpcId返回参数结构体
+ * @class
+ */
+class DescribeHSMByVpcIdResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * HSM数量
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 作为查询条件的VpcId
+         * @type {string || null}
+         */
+        this.VpcId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeUsgRule返回参数结构体
  * @class
  */
@@ -1202,6 +1272,48 @@ class InquiryPriceBuyVsmResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeHSMBySubnetId返回参数结构体
+ * @class
+ */
+class DescribeHSMBySubnetIdResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * HSM数量
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 作为查询条件的SubnetId
+         * @type {string || null}
+         */
+        this.SubnetId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeUsg返回参数结构体
  * @class
  */
@@ -1248,6 +1360,34 @@ class DescribeUsgResponse extends  AbstractModel {
         }
         this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeHSMBySubnetId请求参数结构体
+ * @class
+ */
+class DescribeHSMBySubnetIdRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Subnet标识符
+         * @type {string || null}
+         */
+        this.SubnetId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
 
     }
 }
@@ -1471,6 +1611,8 @@ module.exports = {
     DescribeVpcResponse: DescribeVpcResponse,
     ModifyVsmAttributesRequest: ModifyVsmAttributesRequest,
     DescribeSubnetResponse: DescribeSubnetResponse,
+    DescribeHSMByVpcIdRequest: DescribeHSMByVpcIdRequest,
+    DescribeHSMByVpcIdResponse: DescribeHSMByVpcIdResponse,
     DescribeUsgRuleResponse: DescribeUsgRuleResponse,
     ResourceInfo: ResourceInfo,
     DescribeVpcRequest: DescribeVpcRequest,
@@ -1480,7 +1622,9 @@ module.exports = {
     SgUnit: SgUnit,
     UsgRuleDetail: UsgRuleDetail,
     InquiryPriceBuyVsmResponse: InquiryPriceBuyVsmResponse,
+    DescribeHSMBySubnetIdResponse: DescribeHSMBySubnetIdResponse,
     DescribeUsgResponse: DescribeUsgResponse,
+    DescribeHSMBySubnetIdRequest: DescribeHSMBySubnetIdRequest,
     DescribeVsmsRequest: DescribeVsmsRequest,
     DescribeUsgRuleRequest: DescribeUsgRuleRequest,
     ModifyVsmAttributesResponse: ModifyVsmAttributesResponse,
