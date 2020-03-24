@@ -59,6 +59,7 @@ module.exports = {
     hcm: require("./hcm"),
     iai: require("./iai"),
     ic: require("./ic"),
+    ie: require("./ie"),
     iot: require("./iot"),
     iotcloud: require("./iotcloud"),
     iotexplorer: require("./iotexplorer"),

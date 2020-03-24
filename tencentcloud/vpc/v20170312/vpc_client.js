@@ -66,12 +66,13 @@ const AssociateNetworkAclSubnetsResponse = models.AssociateNetworkAclSubnetsResp
 const DeleteNatGatewayDestinationIpPortTranslationNatRuleRequest = models.DeleteNatGatewayDestinationIpPortTranslationNatRuleRequest;
 const ResetRoutesRequest = models.ResetRoutesRequest;
 const CheckNetDetectStateRequest = models.CheckNetDetectStateRequest;
-const RouteTableAssociation = models.RouteTableAssociation;
+const DescribeAddressTemplateInstancesRequest = models.DescribeAddressTemplateInstancesRequest;
 const ModifyCustomerGatewayAttributeRequest = models.ModifyCustomerGatewayAttributeRequest;
 const DescribeRouteTablesResponse = models.DescribeRouteTablesResponse;
 const DeleteCcnResponse = models.DeleteCcnResponse;
 const ServiceTemplate = models.ServiceTemplate;
 const DescribeCcnAttachedInstancesRequest = models.DescribeCcnAttachedInstancesRequest;
+const RouteTableAssociation = models.RouteTableAssociation;
 const DescribeNatGatewaysRequest = models.DescribeNatGatewaysRequest;
 const ModifyFlowLogAttributeResponse = models.ModifyFlowLogAttributeResponse;
 const DescribeBandwidthPackagesResponse = models.DescribeBandwidthPackagesResponse;
@@ -153,6 +154,7 @@ const SecurityGroupPolicy = models.SecurityGroupPolicy;
 const DeleteVpcRequest = models.DeleteVpcRequest;
 const ModifyServiceTemplateAttributeResponse = models.ModifyServiceTemplateAttributeResponse;
 const DescribeCcnsResponse = models.DescribeCcnsResponse;
+const TemplateLimit = models.TemplateLimit;
 const CreateSubnetResponse = models.CreateSubnetResponse;
 const DescribeSecurityGroupPoliciesResponse = models.DescribeSecurityGroupPoliciesResponse;
 const ModifySecurityGroupPoliciesRequest = models.ModifySecurityGroupPoliciesRequest;
@@ -224,6 +226,7 @@ const DeleteDirectConnectGatewayResponse = models.DeleteDirectConnectGatewayResp
 const ModifyAddressesBandwidthRequest = models.ModifyAddressesBandwidthRequest;
 const ResetVpnGatewayInternetMaxBandwidthRequest = models.ResetVpnGatewayInternetMaxBandwidthRequest;
 const DirectConnectGateway = models.DirectConnectGateway;
+const DescribeAddressTemplateInstancesResponse = models.DescribeAddressTemplateInstancesResponse;
 const Price = models.Price;
 const HaVipDisassociateAddressIpRequest = models.HaVipDisassociateAddressIpRequest;
 const ModifyVpnGatewayAttributeResponse = models.ModifyVpnGatewayAttributeResponse;
@@ -301,6 +304,7 @@ const DescribeServiceTemplatesResponse = models.DescribeServiceTemplatesResponse
 const DescribeRouteTablesRequest = models.DescribeRouteTablesRequest;
 const ResetAttachCcnInstancesRequest = models.ResetAttachCcnInstancesRequest;
 const CreateHaVipResponse = models.CreateHaVipResponse;
+const DescribeTemplateLimitsResponse = models.DescribeTemplateLimitsResponse;
 const DisableRoutesRequest = models.DisableRoutesRequest;
 const EnableRoutesRequest = models.EnableRoutesRequest;
 const DescribeAddressTemplateGroupsResponse = models.DescribeAddressTemplateGroupsResponse;
@@ -452,6 +456,7 @@ const Route = models.Route;
 const ModifySubnetAttributeRequest = models.ModifySubnetAttributeRequest;
 const DescribeBandwidthPackageQuotaRequest = models.DescribeBandwidthPackageQuotaRequest;
 const DeleteVpcResponse = models.DeleteVpcResponse;
+const DescribeTemplateLimitsRequest = models.DescribeTemplateLimitsRequest;
 const AcceptAttachCcnInstancesResponse = models.AcceptAttachCcnInstancesResponse;
 const InstanceChargePrepaid = models.InstanceChargePrepaid;
 const DescribeNetDetectsResponse = models.DescribeNetDetectsResponse;
@@ -706,14 +711,14 @@ class VpcClient extends AbstractClient {
     }
 
     /**
-     * 本接口（ModifyCcnRegionBandwidthLimitsType）用于修改后付费云联网实例修改带宽限速策略。
-     * @param {ModifyCcnRegionBandwidthLimitsTypeRequest} req
-     * @param {function(string, ModifyCcnRegionBandwidthLimitsTypeResponse):void} cb
+     * 本接口（DescribeSecurityGroupPolicies）用于查询安全组规则。
+     * @param {DescribeSecurityGroupPoliciesRequest} req
+     * @param {function(string, DescribeSecurityGroupPoliciesResponse):void} cb
      * @public
      */
-    ModifyCcnRegionBandwidthLimitsType(req, cb) {
-        let resp = new ModifyCcnRegionBandwidthLimitsTypeResponse();
-        this.request("ModifyCcnRegionBandwidthLimitsType", req, resp, cb);
+    DescribeSecurityGroupPolicies(req, cb) {
+        let resp = new DescribeSecurityGroupPoliciesResponse();
+        this.request("DescribeSecurityGroupPolicies", req, resp, cb);
     }
 
     /**
@@ -916,6 +921,17 @@ class VpcClient extends AbstractClient {
     ReplaceRouteTableAssociation(req, cb) {
         let resp = new ReplaceRouteTableAssociationResponse();
         this.request("ReplaceRouteTableAssociation", req, resp, cb);
+    }
+
+    /**
+     * 本接口（DescribeTemplateLimits）用于查询参数模板配额列表。
+     * @param {DescribeTemplateLimitsRequest} req
+     * @param {function(string, DescribeTemplateLimitsResponse):void} cb
+     * @public
+     */
+    DescribeTemplateLimits(req, cb) {
+        let resp = new DescribeTemplateLimitsResponse();
+        this.request("DescribeTemplateLimits", req, resp, cb);
     }
 
     /**
@@ -1439,6 +1455,17 @@ class VpcClient extends AbstractClient {
     DetachNetworkInterface(req, cb) {
         let resp = new DetachNetworkInterfaceResponse();
         this.request("DetachNetworkInterface", req, resp, cb);
+    }
+
+    /**
+     * 本接口（ModifyCcnRegionBandwidthLimitsType）用于修改后付费云联网实例修改带宽限速策略。
+     * @param {ModifyCcnRegionBandwidthLimitsTypeRequest} req
+     * @param {function(string, ModifyCcnRegionBandwidthLimitsTypeResponse):void} cb
+     * @public
+     */
+    ModifyCcnRegionBandwidthLimitsType(req, cb) {
+        let resp = new ModifyCcnRegionBandwidthLimitsTypeResponse();
+        this.request("ModifyCcnRegionBandwidthLimitsType", req, resp, cb);
     }
 
     /**
@@ -2201,14 +2228,14 @@ class VpcClient extends AbstractClient {
     }
 
     /**
-     * 本接口（DescribeSecurityGroupPolicies）用于查询安全组规则。
-     * @param {DescribeSecurityGroupPoliciesRequest} req
-     * @param {function(string, DescribeSecurityGroupPoliciesResponse):void} cb
+     * 本接口（DescribeAddressTemplateInstances）用于查询参数模板IP地址关联的实例列表。本接口不会返回查询的结果，需要根据返回的RequestId调用DescribeVpcTaskResult接口获取结果。
+     * @param {DescribeAddressTemplateInstancesRequest} req
+     * @param {function(string, DescribeAddressTemplateInstancesResponse):void} cb
      * @public
      */
-    DescribeSecurityGroupPolicies(req, cb) {
-        let resp = new DescribeSecurityGroupPoliciesResponse();
-        this.request("DescribeSecurityGroupPolicies", req, resp, cb);
+    DescribeAddressTemplateInstances(req, cb) {
+        let resp = new DescribeAddressTemplateInstancesResponse();
+        this.request("DescribeAddressTemplateInstances", req, resp, cb);
     }
 
     /**

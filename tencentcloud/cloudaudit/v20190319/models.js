@@ -364,6 +364,12 @@ class LookUpEventsRequest extends  AbstractModel {
         this.MaxResults = null;
 
         /**
+         * 云审计模式，有效值：standard | quick，其中standard是标准模式，quick是极速模式。默认为标准模式
+         * @type {string || null}
+         */
+        this.Mode = null;
+
+        /**
          * 查看更多日志的凭证
          * @type {string || null}
          */
@@ -390,6 +396,7 @@ class LookUpEventsRequest extends  AbstractModel {
             }
         }
         this.MaxResults = 'MaxResults' in params ? params.MaxResults : null;
+        this.Mode = 'Mode' in params ? params.Mode : null;
         this.NextToken = 'NextToken' in params ? params.NextToken : null;
 
     }

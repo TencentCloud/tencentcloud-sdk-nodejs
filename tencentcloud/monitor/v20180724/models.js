@@ -1118,6 +1118,13 @@ class DescribePolicyGroupInfoReceiverInfo extends  AbstractModel {
          */
         this.RecoverNotify = null;
 
+        /**
+         * 告警发送语言
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ReceiveLanguage = null;
+
     }
 
     /**
@@ -1140,6 +1147,7 @@ class DescribePolicyGroupInfoReceiverInfo extends  AbstractModel {
         this.NeedSendNotice = 'NeedSendNotice' in params ? params.NeedSendNotice : null;
         this.SendFor = 'SendFor' in params ? params.SendFor : null;
         this.RecoverNotify = 'RecoverNotify' in params ? params.RecoverNotify : null;
+        this.ReceiveLanguage = 'ReceiveLanguage' in params ? params.ReceiveLanguage : null;
 
     }
 }
@@ -2824,6 +2832,12 @@ class ReceiverInfo extends  AbstractModel {
          */
         this.ReceiverUserList = null;
 
+        /**
+         * 告警接收语言，枚举值（zh-CN，en-US）
+         * @type {string || null}
+         */
+        this.ReceiveLanguage = null;
+
     }
 
     /**
@@ -2847,6 +2861,7 @@ class ReceiverInfo extends  AbstractModel {
         this.NeedSendNotice = 'NeedSendNotice' in params ? params.NeedSendNotice : null;
         this.ReceiverGroupList = 'ReceiverGroupList' in params ? params.ReceiverGroupList : null;
         this.ReceiverUserList = 'ReceiverUserList' in params ? params.ReceiverUserList : null;
+        this.ReceiveLanguage = 'ReceiveLanguage' in params ? params.ReceiveLanguage : null;
 
     }
 }

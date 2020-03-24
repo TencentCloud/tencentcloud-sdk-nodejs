@@ -906,7 +906,7 @@ class DeviceCertificate extends  AbstractModel {
         this.Certificate = null;
 
         /**
-         * 白盒私钥下载地址
+         * 设备私钥下载地址
          * @type {string || null}
          */
         this.WhiteBoxSoUrl = null;
@@ -1313,7 +1313,7 @@ class DeviceData extends  AbstractModel {
         this.Certificate = null;
 
         /**
-         * 白盒秘钥库文件下载地址
+         * 设备私钥下载地址
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
