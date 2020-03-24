@@ -2460,24 +2460,30 @@ NORMAL_CVM：普通云服务器；
 }
 
 /**
- * 路由表关联关系
+ * DescribeAddressTemplateInstances请求参数结构体
  * @class
  */
-class RouteTableAssociation extends  AbstractModel {
+class DescribeAddressTemplateInstancesRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 子网实例ID。
+         * IP地址实例ID。例如：ipm-12345678。
          * @type {string || null}
          */
-        this.SubnetId = null;
+        this.AddressTemplateId = null;
 
         /**
-         * 路由表实例ID。
-         * @type {string || null}
+         * 偏移量，默认为0。
+         * @type {number || null}
          */
-        this.RouteTableId = null;
+        this.Offset = null;
+
+        /**
+         * 返回数量，默认为20，最大值为100。
+         * @type {number || null}
+         */
+        this.Limit = null;
 
     }
 
@@ -2488,8 +2494,9 @@ class RouteTableAssociation extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
-        this.RouteTableId = 'RouteTableId' in params ? params.RouteTableId : null;
+        this.AddressTemplateId = 'AddressTemplateId' in params ? params.AddressTemplateId : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
 
     }
 }
@@ -2727,6 +2734,41 @@ class DescribeCcnAttachedInstancesRequest extends  AbstractModel {
         this.CcnId = 'CcnId' in params ? params.CcnId : null;
         this.OrderField = 'OrderField' in params ? params.OrderField : null;
         this.OrderDirection = 'OrderDirection' in params ? params.OrderDirection : null;
+
+    }
+}
+
+/**
+ * 路由表关联关系
+ * @class
+ */
+class RouteTableAssociation extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 子网实例ID。
+         * @type {string || null}
+         */
+        this.SubnetId = null;
+
+        /**
+         * 路由表实例ID。
+         * @type {string || null}
+         */
+        this.RouteTableId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
+        this.RouteTableId = 'RouteTableId' in params ? params.RouteTableId : null;
 
     }
 }
@@ -6619,6 +6661,55 @@ class DescribeCcnsResponse extends  AbstractModel {
 }
 
 /**
+ * 参数模板配额
+ * @class
+ */
+class TemplateLimit extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 参数模板IP地址成员配额。
+         * @type {number || null}
+         */
+        this.AddressTemplateMemberLimit = null;
+
+        /**
+         * 参数模板IP地址组成员配额。
+         * @type {number || null}
+         */
+        this.AddressTemplateGroupMemberLimit = null;
+
+        /**
+         * 参数模板I协议端口成员配额。
+         * @type {number || null}
+         */
+        this.ServiceTemplateMemberLimit = null;
+
+        /**
+         * 参数模板协议端口组成员配额。
+         * @type {number || null}
+         */
+        this.ServiceTemplateGroupMemberLimit = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AddressTemplateMemberLimit = 'AddressTemplateMemberLimit' in params ? params.AddressTemplateMemberLimit : null;
+        this.AddressTemplateGroupMemberLimit = 'AddressTemplateGroupMemberLimit' in params ? params.AddressTemplateGroupMemberLimit : null;
+        this.ServiceTemplateMemberLimit = 'ServiceTemplateMemberLimit' in params ? params.ServiceTemplateMemberLimit : null;
+        this.ServiceTemplateGroupMemberLimit = 'ServiceTemplateGroupMemberLimit' in params ? params.ServiceTemplateGroupMemberLimit : null;
+
+    }
+}
+
+/**
  * CreateSubnet返回参数结构体
  * @class
  */
@@ -9802,6 +9893,34 @@ NAT类型支持网络地址转换配置，类型确定后不能修改；一个�
         this.CcnRouteType = 'CcnRouteType' in params ? params.CcnRouteType : null;
         this.EnableBGP = 'EnableBGP' in params ? params.EnableBGP : null;
         this.EnableBGPCommunity = 'EnableBGPCommunity' in params ? params.EnableBGPCommunity : null;
+
+    }
+}
+
+/**
+ * DescribeAddressTemplateInstances返回参数结构体
+ * @class
+ */
+class DescribeAddressTemplateInstancesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -13082,6 +13201,46 @@ class CreateHaVipResponse extends  AbstractModel {
             let obj = new HaVip();
             obj.deserialize(params.HaVip)
             this.HaVip = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeTemplateLimits返回参数结构体
+ * @class
+ */
+class DescribeTemplateLimitsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 参数模板配额对象。
+         * @type {TemplateLimit || null}
+         */
+        this.TemplateLimit = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.TemplateLimit) {
+            let obj = new TemplateLimit();
+            obj.deserialize(params.TemplateLimit)
+            this.TemplateLimit = obj;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -19639,6 +19798,27 @@ class DeleteVpcResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeTemplateLimits请求参数结构体
+ * @class
+ */
+class DescribeTemplateLimitsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+    }
+}
+
+/**
  * AcceptAttachCcnInstances返回参数结构体
  * @class
  */
@@ -19804,12 +19984,13 @@ module.exports = {
     DeleteNatGatewayDestinationIpPortTranslationNatRuleRequest: DeleteNatGatewayDestinationIpPortTranslationNatRuleRequest,
     ResetRoutesRequest: ResetRoutesRequest,
     CheckNetDetectStateRequest: CheckNetDetectStateRequest,
-    RouteTableAssociation: RouteTableAssociation,
+    DescribeAddressTemplateInstancesRequest: DescribeAddressTemplateInstancesRequest,
     ModifyCustomerGatewayAttributeRequest: ModifyCustomerGatewayAttributeRequest,
     DescribeRouteTablesResponse: DescribeRouteTablesResponse,
     DeleteCcnResponse: DeleteCcnResponse,
     ServiceTemplate: ServiceTemplate,
     DescribeCcnAttachedInstancesRequest: DescribeCcnAttachedInstancesRequest,
+    RouteTableAssociation: RouteTableAssociation,
     DescribeNatGatewaysRequest: DescribeNatGatewaysRequest,
     ModifyFlowLogAttributeResponse: ModifyFlowLogAttributeResponse,
     DescribeBandwidthPackagesResponse: DescribeBandwidthPackagesResponse,
@@ -19891,6 +20072,7 @@ module.exports = {
     DeleteVpcRequest: DeleteVpcRequest,
     ModifyServiceTemplateAttributeResponse: ModifyServiceTemplateAttributeResponse,
     DescribeCcnsResponse: DescribeCcnsResponse,
+    TemplateLimit: TemplateLimit,
     CreateSubnetResponse: CreateSubnetResponse,
     DescribeSecurityGroupPoliciesResponse: DescribeSecurityGroupPoliciesResponse,
     ModifySecurityGroupPoliciesRequest: ModifySecurityGroupPoliciesRequest,
@@ -19962,6 +20144,7 @@ module.exports = {
     ModifyAddressesBandwidthRequest: ModifyAddressesBandwidthRequest,
     ResetVpnGatewayInternetMaxBandwidthRequest: ResetVpnGatewayInternetMaxBandwidthRequest,
     DirectConnectGateway: DirectConnectGateway,
+    DescribeAddressTemplateInstancesResponse: DescribeAddressTemplateInstancesResponse,
     Price: Price,
     HaVipDisassociateAddressIpRequest: HaVipDisassociateAddressIpRequest,
     ModifyVpnGatewayAttributeResponse: ModifyVpnGatewayAttributeResponse,
@@ -20039,6 +20222,7 @@ module.exports = {
     DescribeRouteTablesRequest: DescribeRouteTablesRequest,
     ResetAttachCcnInstancesRequest: ResetAttachCcnInstancesRequest,
     CreateHaVipResponse: CreateHaVipResponse,
+    DescribeTemplateLimitsResponse: DescribeTemplateLimitsResponse,
     DisableRoutesRequest: DisableRoutesRequest,
     EnableRoutesRequest: EnableRoutesRequest,
     DescribeAddressTemplateGroupsResponse: DescribeAddressTemplateGroupsResponse,
@@ -20190,6 +20374,7 @@ module.exports = {
     ModifySubnetAttributeRequest: ModifySubnetAttributeRequest,
     DescribeBandwidthPackageQuotaRequest: DescribeBandwidthPackageQuotaRequest,
     DeleteVpcResponse: DeleteVpcResponse,
+    DescribeTemplateLimitsRequest: DescribeTemplateLimitsRequest,
     AcceptAttachCcnInstancesResponse: AcceptAttachCcnInstancesResponse,
     InstanceChargePrepaid: InstanceChargePrepaid,
     DescribeNetDetectsResponse: DescribeNetDetectsResponse,

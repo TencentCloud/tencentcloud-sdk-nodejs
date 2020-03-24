@@ -1755,6 +1755,41 @@ class CreateL7RuleCertRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeBGPIPL7RuleMaxCnt返回参数结构体
+ * @class
+ */
+class DescribeBGPIPL7RuleMaxCntResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 高防IP最多可添加的7层规则数量
+         * @type {number || null}
+         */
+        this.Count = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Count = 'Count' in params ? params.Count : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribePcap返回参数结构体
  * @class
  */
@@ -3904,6 +3939,41 @@ class CreateL4HealthConfigRequest extends  AbstractModel {
                 this.HealthConfig.push(obj);
             }
         }
+
+    }
+}
+
+/**
+ * DescribeBGPIPL7RuleMaxCnt请求参数结构体
+ * @class
+ */
+class DescribeBGPIPL7RuleMaxCntRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 大禹子产品代号（bgpip表示高防IP）
+         * @type {string || null}
+         */
+        this.Business = null;
+
+        /**
+         * 资源实例ID
+         * @type {string || null}
+         */
+        this.Id = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Business = 'Business' in params ? params.Business : null;
+        this.Id = 'Id' in params ? params.Id : null;
 
     }
 }
@@ -12979,6 +13049,7 @@ module.exports = {
     ModifyNetReturnSwitchResponse: ModifyNetReturnSwitchResponse,
     DescribeActionLogRequest: DescribeActionLogRequest,
     CreateL7RuleCertRequest: CreateL7RuleCertRequest,
+    DescribeBGPIPL7RuleMaxCntResponse: DescribeBGPIPL7RuleMaxCntResponse,
     DescribePcapResponse: DescribePcapResponse,
     DescribePackIndexResponse: DescribePackIndexResponse,
     DescribeDDoSAttackSourceRequest: DescribeDDoSAttackSourceRequest,
@@ -13019,6 +13090,7 @@ module.exports = {
     DescribeCCEvListResponse: DescribeCCEvListResponse,
     DescribeCCFrequencyRulesRequest: DescribeCCFrequencyRulesRequest,
     CreateL4HealthConfigRequest: CreateL4HealthConfigRequest,
+    DescribeBGPIPL7RuleMaxCntRequest: DescribeBGPIPL7RuleMaxCntRequest,
     ModifyDDoSPolicyNameResponse: ModifyDDoSPolicyNameResponse,
     DescribeCCAlarmThresholdRequest: DescribeCCAlarmThresholdRequest,
     ModifyCCUrlAllowRequest: ModifyCCUrlAllowRequest,

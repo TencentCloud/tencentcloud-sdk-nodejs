@@ -46,6 +46,7 @@ const ModifyCCThresholdResponse = models.ModifyCCThresholdResponse;
 const ModifyNetReturnSwitchResponse = models.ModifyNetReturnSwitchResponse;
 const DescribeActionLogRequest = models.DescribeActionLogRequest;
 const CreateL7RuleCertRequest = models.CreateL7RuleCertRequest;
+const DescribeBGPIPL7RuleMaxCntResponse = models.DescribeBGPIPL7RuleMaxCntResponse;
 const DescribePcapResponse = models.DescribePcapResponse;
 const DescribePackIndexResponse = models.DescribePackIndexResponse;
 const DescribeDDoSAttackSourceRequest = models.DescribeDDoSAttackSourceRequest;
@@ -86,6 +87,7 @@ const ModifyResourceRenewFlagRequest = models.ModifyResourceRenewFlagRequest;
 const DescribeCCEvListResponse = models.DescribeCCEvListResponse;
 const DescribeCCFrequencyRulesRequest = models.DescribeCCFrequencyRulesRequest;
 const CreateL4HealthConfigRequest = models.CreateL4HealthConfigRequest;
+const DescribeBGPIPL7RuleMaxCntRequest = models.DescribeBGPIPL7RuleMaxCntRequest;
 const ModifyDDoSPolicyNameResponse = models.ModifyDDoSPolicyNameResponse;
 const DescribeCCAlarmThresholdRequest = models.DescribeCCAlarmThresholdRequest;
 const ModifyCCUrlAllowRequest = models.ModifyCCUrlAllowRequest;
@@ -1278,6 +1280,18 @@ class DayuClient extends AbstractClient {
     CreateInstanceName(req, cb) {
         let resp = new CreateInstanceNameResponse();
         this.request("CreateInstanceName", req, resp, cb);
+    }
+
+    /**
+     * 获取高防IP可添加的最多7层规则数量
+
+     * @param {DescribeBGPIPL7RuleMaxCntRequest} req
+     * @param {function(string, DescribeBGPIPL7RuleMaxCntResponse):void} cb
+     * @public
+     */
+    DescribeBGPIPL7RuleMaxCnt(req, cb) {
+        let resp = new DescribeBGPIPL7RuleMaxCntResponse();
+        this.request("DescribeBGPIPL7RuleMaxCnt", req, resp, cb);
     }
 
     /**
