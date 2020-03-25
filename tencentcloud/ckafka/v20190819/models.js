@@ -906,7 +906,7 @@ class Topic extends  AbstractModel {
 }
 
 /**
- * 实例详情中的标识对象
+ * 实例详情中的标签对象
  * @class
  */
 class Tag extends  AbstractModel {
@@ -914,13 +914,13 @@ class Tag extends  AbstractModel {
         super();
 
         /**
-         * 标识的key
+         * 标签的key
          * @type {string || null}
          */
         this.TagKey = null;
 
         /**
-         * 标识的值
+         * 标签的值
          * @type {string || null}
          */
         this.TagValue = null;

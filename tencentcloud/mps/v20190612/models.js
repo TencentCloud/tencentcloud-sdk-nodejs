@@ -11986,13 +11986,6 @@ class CreatePersonSampleRequest extends  AbstractModel {
         this.Name = null;
 
         /**
-         * 人脸图片 [Base64](https://tools.ietf.org/html/rfc4648) 编码后的字符串，仅支持 jpeg、png 图片格式。数组长度限制：5 张图片。
-注意：图片必须是单人像正面人脸较清晰的照片，像素不低于 200*200。
-         * @type {Array.<string> || null}
-         */
-        this.FaceContents = null;
-
-        /**
          * 人物应用场景，可选值：
 1. Recognition：用于内容识别，等价于 Recognition.Face。
 2. Review：用于内容审核，等价于 Review.Face。
@@ -12006,6 +11999,13 @@ class CreatePersonSampleRequest extends  AbstractModel {
          * @type {string || null}
          */
         this.Description = null;
+
+        /**
+         * 人脸图片 [Base64](https://tools.ietf.org/html/rfc4648) 编码后的字符串，仅支持 jpeg、png 图片格式。数组长度限制：5 张图片。
+注意：图片必须是单人像正面人脸较清晰的照片，像素不低于 200*200。
+         * @type {Array.<string> || null}
+         */
+        this.FaceContents = null;
 
         /**
          * 人物标签
@@ -12025,9 +12025,9 @@ class CreatePersonSampleRequest extends  AbstractModel {
             return;
         }
         this.Name = 'Name' in params ? params.Name : null;
-        this.FaceContents = 'FaceContents' in params ? params.FaceContents : null;
         this.Usages = 'Usages' in params ? params.Usages : null;
         this.Description = 'Description' in params ? params.Description : null;
+        this.FaceContents = 'FaceContents' in params ? params.FaceContents : null;
         this.Tags = 'Tags' in params ? params.Tags : null;
 
     }

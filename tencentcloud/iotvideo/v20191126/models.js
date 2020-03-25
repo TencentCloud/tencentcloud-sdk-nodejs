@@ -689,7 +689,7 @@ class CreateDevTokenRequest extends  AbstractModel {
         super();
 
         /**
-         * 客户的终端用户在IotVideo上的唯一标识id
+         * 客户的终端用户在IoT Video上的唯一标识ID
          * @type {string || null}
          */
         this.AccessId = null;
@@ -866,7 +866,7 @@ class CreateAppUsrRequest extends  AbstractModel {
         super();
 
         /**
-         * 标识用户的唯一id，防止同一个用户多次注册
+         * 标识用户的唯一ID，防止同一个用户多次注册
          * @type {string || null}
          */
         this.CunionId = null;
@@ -1643,7 +1643,7 @@ class CreateBindingRequest extends  AbstractModel {
         super();
 
         /**
-         * 终端用户在IotVideo上的唯一标识id
+         * 终端用户在IoT Video上的唯一标识ID
          * @type {string || null}
          */
         this.AccessId = null;
@@ -1967,13 +1967,13 @@ class CreateUsrTokenResponse extends  AbstractModel {
         super();
 
         /**
-         * 终端用户在IotVideo上的唯一标识id
+         * 终端用户在IoT Video上的唯一标识ID
          * @type {string || null}
          */
         this.AccessId = null;
 
         /**
-         * IotVideo平台的accessToken
+         * IoT Video平台的AccessToken
          * @type {string || null}
          */
         this.AccessToken = null;
@@ -1985,7 +1985,7 @@ class CreateUsrTokenResponse extends  AbstractModel {
         this.ExpireTime = null;
 
         /**
-         * 终端id
+         * 终端ID
          * @type {string || null}
          */
         this.TerminalId = null;
@@ -2134,7 +2134,7 @@ class DescribeOtaVersionsRequest extends  AbstractModel {
         this.Offset = null;
 
         /**
-         * 每页数量,,0<取值范围<=100
+         * 每页数量，0<取值范围<=100
          * @type {number || null}
          */
         this.Limit = null;
@@ -2571,81 +2571,6 @@ class SetMessageQueueResponse extends  AbstractModel {
 }
 
 /**
- * RenewUploadTest返回参数结构体
- * @class
- */
-class RenewUploadTestResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 刷新证书返回的信息
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {RenewCertificate || null}
-         */
-        this.Data = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-        if (params.Data) {
-            let obj = new RenewCertificate();
-            obj.deserialize(params.Data)
-            this.Data = obj;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * 刷新证书信息
- * @class
- */
-class RenewCertificate extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 刷新证书信息
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {CertificateInfo || null}
-         */
-        this.TempCertificate = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-        if (params.TempCertificate) {
-            let obj = new CertificateInfo();
-            obj.deserialize(params.TempCertificate)
-            this.TempCertificate = obj;
-        }
-
-    }
-}
-
-/**
  * DeleteOtaVersion返回参数结构体
  * @class
  */
@@ -2821,72 +2746,6 @@ class CreateTraceIdsResponse extends  AbstractModel {
 }
 
 /**
- * 申请上传证书回包
- * @class
- */
-class CosCertificate extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * cos存储桶
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.StorageBucket = null;
-
-        /**
-         * cos存储园区
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.StorageRegion = null;
-
-        /**
-         * 存储路径，录制场景下该值为存储目录
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.StoragePath = null;
-
-        /**
-         * 证书信息
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {CertificateInfo || null}
-         */
-        this.TempCertificate = null;
-
-        /**
-         * SessionKey
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.SessionKey = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.StorageBucket = 'StorageBucket' in params ? params.StorageBucket : null;
-        this.StorageRegion = 'StorageRegion' in params ? params.StorageRegion : null;
-        this.StoragePath = 'StoragePath' in params ? params.StoragePath : null;
-
-        if (params.TempCertificate) {
-            let obj = new CertificateInfo();
-            obj.deserialize(params.TempCertificate)
-            this.TempCertificate = obj;
-        }
-        this.SessionKey = 'SessionKey' in params ? params.SessionKey : null;
-
-    }
-}
-
-/**
  * DeleteBinding请求参数结构体
  * @class
  */
@@ -2895,7 +2754,7 @@ class DeleteBindingRequest extends  AbstractModel {
         super();
 
         /**
-         * 终端用户在IotVideo上的唯一标识id
+         * 终端用户在IoT Video上的唯一标识ID
          * @type {string || null}
          */
         this.AccessId = null;
@@ -3266,59 +3125,6 @@ class DescribeDeviceRequest extends  AbstractModel {
 }
 
 /**
- * 证书信息
- * @class
- */
-class CertificateInfo extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * SecretId
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.SecretId = null;
-
-        /**
-         * SecretKey
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.SecretKey = null;
-
-        /**
-         * Token
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.Token = null;
-
-        /**
-         * 过期时间，UNIX时间戳，单位秒
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.ExpiredTime = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.SecretId = 'SecretId' in params ? params.SecretId : null;
-        this.SecretKey = 'SecretKey' in params ? params.SecretKey : null;
-        this.Token = 'Token' in params ? params.Token : null;
-        this.ExpiredTime = 'ExpiredTime' in params ? params.ExpiredTime : null;
-
-    }
-}
-
-/**
  * DescribeRunLog返回参数结构体
  * @class
  */
@@ -3419,13 +3225,13 @@ class CreateAppUsrResponse extends  AbstractModel {
         super();
 
         /**
-         * 厂商云标识用户的唯一id
+         * 厂商云标识用户的唯一ID
          * @type {string || null}
          */
         this.CunionId = null;
 
         /**
-         * 客户的终端用户在IotVideo上的唯一标识id
+         * 客户的终端用户在IoT Video上的唯一标识ID
          * @type {string || null}
          */
         this.AccessId = null;
@@ -3524,13 +3330,13 @@ class CreateUsrTokenRequest extends  AbstractModel {
         super();
 
         /**
-         * 终端用户在IotVideo上的唯一标识id
+         * 终端用户在IoT Video上的唯一标识ID
          * @type {string || null}
          */
         this.AccessId = null;
 
         /**
-         * 终端唯一id,用于区分同一个用户的多个终端
+         * 终端唯一ID，用于区分同一个用户的多个终端
          * @type {string || null}
          */
         this.UniqueId = null;
@@ -3784,7 +3590,7 @@ class ModifyDeviceActionRequest extends  AbstractModel {
         super();
 
         /**
-         * 设备Tid
+         * 设备TID
          * @type {string || null}
          */
         this.Tid = null;
@@ -3918,7 +3724,7 @@ class DescribeBindDevRequest extends  AbstractModel {
         super();
 
         /**
-         * 终端用户在IotVideo上的唯一标识id
+         * 终端用户在IoT Video上的唯一标识ID
          * @type {string || null}
          */
         this.AccessId = null;
@@ -3933,48 +3739,6 @@ class DescribeBindDevRequest extends  AbstractModel {
             return;
         }
         this.AccessId = 'AccessId' in params ? params.AccessId : null;
-
-    }
-}
-
-/**
- * RenewUploadTest请求参数结构体
- * @class
- */
-class RenewUploadTestRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * package ID
-         * @type {string || null}
-         */
-        this.PkgId = null;
-
-        /**
-         * 设备TID
-         * @type {string || null}
-         */
-        this.Tid = null;
-
-        /**
-         * SessionKey
-         * @type {string || null}
-         */
-        this.SessionKey = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.PkgId = 'PkgId' in params ? params.PkgId : null;
-        this.Tid = 'Tid' in params ? params.Tid : null;
-        this.SessionKey = 'SessionKey' in params ? params.SessionKey : null;
 
     }
 }
@@ -4231,7 +3995,7 @@ class CreateBindingResponse extends  AbstractModel {
         super();
 
         /**
-         * 访问设备的accessToken
+         * 访问设备的AccessToken
          * @type {string || null}
          */
         this.AccessToken = null;
@@ -4735,47 +4499,6 @@ class DescribeDevicesRequest extends  AbstractModel {
 }
 
 /**
- * CreateUploadTest返回参数结构体
- * @class
- */
-class CreateUploadTestResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 申请设备证书返回的信息
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {CosCertificate || null}
-         */
-        this.Data = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-        if (params.Data) {
-            let obj = new CosCertificate();
-            obj.deserialize(params.Data)
-            this.Data = obj;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
  * CreateIotDataType返回参数结构体
  * @class
  */
@@ -4827,41 +4550,6 @@ class ModifyDevicePropertyResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * CreateUploadTest请求参数结构体
- * @class
- */
-class CreateUploadTestRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * package ID
-         * @type {string || null}
-         */
-        this.PkgId = null;
-
-        /**
-         * 设备TID
-         * @type {string || null}
-         */
-        this.Tid = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.PkgId = 'PkgId' in params ? params.PkgId : null;
-        this.Tid = 'Tid' in params ? params.Tid : null;
 
     }
 }
@@ -5191,14 +4879,11 @@ module.exports = {
     RunTestOtaVersionRequest: RunTestOtaVersionRequest,
     DescribeDeviceResponse: DescribeDeviceResponse,
     SetMessageQueueResponse: SetMessageQueueResponse,
-    RenewUploadTestResponse: RenewUploadTestResponse,
-    RenewCertificate: RenewCertificate,
     DeleteOtaVersionResponse: DeleteOtaVersionResponse,
     UploadOtaVersionRequest: UploadOtaVersionRequest,
     DescribeIotModelsRequest: DescribeIotModelsRequest,
     DescribeModelDataRetRequest: DescribeModelDataRetRequest,
     CreateTraceIdsResponse: CreateTraceIdsResponse,
-    CosCertificate: CosCertificate,
     DeleteBindingRequest: DeleteBindingRequest,
     DescribeOtaVersionsResponse: DescribeOtaVersionsResponse,
     DeleteProductResponse: DeleteProductResponse,
@@ -5208,7 +4893,6 @@ module.exports = {
     DescribeIotDataTypeRequest: DescribeIotDataTypeRequest,
     SendOnlineMsgRequest: SendOnlineMsgRequest,
     DescribeDeviceRequest: DescribeDeviceRequest,
-    CertificateInfo: CertificateInfo,
     DescribeRunLogResponse: DescribeRunLogResponse,
     DescribeIotModelRequest: DescribeIotModelRequest,
     DescribeTraceIdsRequest: DescribeTraceIdsRequest,
@@ -5225,7 +4909,6 @@ module.exports = {
     CreateIotModelResponse: CreateIotModelResponse,
     BindDevInfo: BindDevInfo,
     DescribeBindDevRequest: DescribeBindDevRequest,
-    RenewUploadTestRequest: RenewUploadTestRequest,
     MsgQueueData: MsgQueueData,
     RunDeviceStreamResponse: RunDeviceStreamResponse,
     RunOtaVersionResponse: RunOtaVersionResponse,
@@ -5243,10 +4926,8 @@ module.exports = {
     DescribeIotModelsResponse: DescribeIotModelsResponse,
     DescribeMessageQueueResponse: DescribeMessageQueueResponse,
     DescribeDevicesRequest: DescribeDevicesRequest,
-    CreateUploadTestResponse: CreateUploadTestResponse,
     CreateIotDataTypeResponse: CreateIotDataTypeResponse,
     ModifyDevicePropertyResponse: ModifyDevicePropertyResponse,
-    CreateUploadTestRequest: CreateUploadTestRequest,
     DeleteBindingResponse: DeleteBindingResponse,
     DisableDeviceStreamResponse: DisableDeviceStreamResponse,
     DeleteDeviceResponse: DeleteDeviceResponse,

@@ -514,6 +514,8 @@ class VodClient extends AbstractClient {
 7. 对点播中的多个流进行剪辑，然后拼接，生成一个新的视频。
 
 对于生成的新视频，还可以指定生成后的视频是否要执行任务流。
+
+>当对直播流做剪辑、拼接等操作时，请确保流结束后再操作。否则生成的视频可能不完整。
      * @param {EditMediaRequest} req
      * @param {function(string, EditMediaResponse):void} cb
      * @public
