@@ -1495,6 +1495,13 @@ class StrategyInfo extends  AbstractModel {
          */
         this.DeactivedDetail = null;
 
+        /**
+         * 是否是服务相关角色策略
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.IsServiceLinkedPolicy = null;
+
     }
 
     /**
@@ -1515,6 +1522,7 @@ class StrategyInfo extends  AbstractModel {
         this.IsAttached = 'IsAttached' in params ? params.IsAttached : null;
         this.Deactived = 'Deactived' in params ? params.Deactived : null;
         this.DeactivedDetail = 'DeactivedDetail' in params ? params.DeactivedDetail : null;
+        this.IsServiceLinkedPolicy = 'IsServiceLinkedPolicy' in params ? params.IsServiceLinkedPolicy : null;
 
     }
 }

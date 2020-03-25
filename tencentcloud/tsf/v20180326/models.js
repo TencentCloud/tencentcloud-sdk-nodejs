@@ -871,6 +871,20 @@ class VmGroup extends  AbstractModel {
          */
         this.MicroserviceType = null;
 
+        /**
+         * ApplicationType
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ApplicationType = null;
+
+        /**
+         * GroupResourceType
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.GroupResourceType = null;
+
     }
 
     /**
@@ -900,6 +914,8 @@ class VmGroup extends  AbstractModel {
         this.OffInstanceCount = 'OffInstanceCount' in params ? params.OffInstanceCount : null;
         this.GroupDesc = 'GroupDesc' in params ? params.GroupDesc : null;
         this.MicroserviceType = 'MicroserviceType' in params ? params.MicroserviceType : null;
+        this.ApplicationType = 'ApplicationType' in params ? params.ApplicationType : null;
+        this.GroupResourceType = 'GroupResourceType' in params ? params.GroupResourceType : null;
 
     }
 }
@@ -1493,6 +1509,20 @@ class SimpleApplication extends  AbstractModel {
          */
         this.UpdateTime = null;
 
+        /**
+         * ApigatewayServiceId
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ApigatewayServiceId = null;
+
+        /**
+         * ApplicationRuntimeType
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ApplicationRuntimeType = null;
+
     }
 
     /**
@@ -1511,6 +1541,8 @@ class SimpleApplication extends  AbstractModel {
         this.ApplicationResourceType = 'ApplicationResourceType' in params ? params.ApplicationResourceType : null;
         this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
         this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.ApigatewayServiceId = 'ApigatewayServiceId' in params ? params.ApigatewayServiceId : null;
+        this.ApplicationRuntimeType = 'ApplicationRuntimeType' in params ? params.ApplicationRuntimeType : null;
 
     }
 }
@@ -3924,6 +3956,66 @@ class DescribeConfigsRequest extends  AbstractModel {
 }
 
 /**
+ * 提供给前端，控制按钮是否显示
+ * @class
+ */
+class OperationInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 初始化按钮的控制信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {OperationInfoDetail || null}
+         */
+        this.Init = null;
+
+        /**
+         * 添加实例按钮的控制信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {OperationInfoDetail || null}
+         */
+        this.AddInstance = null;
+
+        /**
+         * 销毁机器的控制信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {OperationInfoDetail || null}
+         */
+        this.Destroy = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Init) {
+            let obj = new OperationInfoDetail();
+            obj.deserialize(params.Init)
+            this.Init = obj;
+        }
+
+        if (params.AddInstance) {
+            let obj = new OperationInfoDetail();
+            obj.deserialize(params.AddInstance)
+            this.AddInstance = obj;
+        }
+
+        if (params.Destroy) {
+            let obj = new OperationInfoDetail();
+            obj.deserialize(params.Destroy)
+            this.Destroy = obj;
+        }
+
+    }
+}
+
+/**
  * AddClusterInstances请求参数结构体
  * @class
  */
@@ -5079,6 +5171,13 @@ class VmGroupSimple extends  AbstractModel {
          */
         this.MicroserviceType = null;
 
+        /**
+         * GroupResourceType
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.GroupResourceType = null;
+
     }
 
     /**
@@ -5102,6 +5201,7 @@ class VmGroupSimple extends  AbstractModel {
         this.ApplicationName = 'ApplicationName' in params ? params.ApplicationName : null;
         this.NamespaceName = 'NamespaceName' in params ? params.NamespaceName : null;
         this.MicroserviceType = 'MicroserviceType' in params ? params.MicroserviceType : null;
+        this.GroupResourceType = 'GroupResourceType' in params ? params.GroupResourceType : null;
 
     }
 }
@@ -5310,6 +5410,55 @@ class Instance extends  AbstractModel {
          */
         this.OperationState = null;
 
+        /**
+         * NamespaceId
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.NamespaceId = null;
+
+        /**
+         * InstanceZoneId
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.InstanceZoneId = null;
+
+        /**
+         * InstanceImportMode
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.InstanceImportMode = null;
+
+        /**
+         * ApplicationType
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ApplicationType = null;
+
+        /**
+         * ApplicationResourceType
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ApplicationResourceType = null;
+
+        /**
+         * ServiceSidecarStatus
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ServiceSidecarStatus = null;
+
+        /**
+         * GroupName
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.GroupName = null;
+
     }
 
     /**
@@ -5347,6 +5496,13 @@ class Instance extends  AbstractModel {
         this.RestrictState = 'RestrictState' in params ? params.RestrictState : null;
         this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
         this.OperationState = 'OperationState' in params ? params.OperationState : null;
+        this.NamespaceId = 'NamespaceId' in params ? params.NamespaceId : null;
+        this.InstanceZoneId = 'InstanceZoneId' in params ? params.InstanceZoneId : null;
+        this.InstanceImportMode = 'InstanceImportMode' in params ? params.InstanceImportMode : null;
+        this.ApplicationType = 'ApplicationType' in params ? params.ApplicationType : null;
+        this.ApplicationResourceType = 'ApplicationResourceType' in params ? params.ApplicationResourceType : null;
+        this.ServiceSidecarStatus = 'ServiceSidecarStatus' in params ? params.ServiceSidecarStatus : null;
+        this.GroupName = 'GroupName' in params ? params.GroupName : null;
 
     }
 }
@@ -7244,6 +7400,20 @@ class Cluster extends  AbstractModel {
          */
         this.RunServiceInstanceCount = null;
 
+        /**
+         * 集群所属子网ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.SubnetId = null;
+
+        /**
+         * 返回给前端的控制信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {OperationInfo || null}
+         */
+        this.OperationInfo = null;
+
     }
 
     /**
@@ -7278,6 +7448,13 @@ class Cluster extends  AbstractModel {
         this.ClusterLimitCpu = 'ClusterLimitCpu' in params ? params.ClusterLimitCpu : null;
         this.ClusterLimitMem = 'ClusterLimitMem' in params ? params.ClusterLimitMem : null;
         this.RunServiceInstanceCount = 'RunServiceInstanceCount' in params ? params.RunServiceInstanceCount : null;
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
+
+        if (params.OperationInfo) {
+            let obj = new OperationInfo();
+            obj.deserialize(params.OperationInfo)
+            this.OperationInfo = obj;
+        }
 
     }
 }
@@ -7656,6 +7833,13 @@ class ApplicationForPage extends  AbstractModel {
          */
         this.ApplicationRuntimeType = null;
 
+        /**
+         * Apigateway的serviceId
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ApigatewayServiceId = null;
+
     }
 
     /**
@@ -7675,6 +7859,7 @@ class ApplicationForPage extends  AbstractModel {
         this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
         this.ApplicationResourceType = 'ApplicationResourceType' in params ? params.ApplicationResourceType : null;
         this.ApplicationRuntimeType = 'ApplicationRuntimeType' in params ? params.ApplicationRuntimeType : null;
+        this.ApigatewayServiceId = 'ApigatewayServiceId' in params ? params.ApigatewayServiceId : null;
 
     }
 }
@@ -8702,6 +8887,51 @@ class DescribeApplicationsRequest extends  AbstractModel {
         this.ApplicationType = 'ApplicationType' in params ? params.ApplicationType : null;
         this.MicroserviceType = 'MicroserviceType' in params ? params.MicroserviceType : null;
         this.ApplicationResourceTypeList = 'ApplicationResourceTypeList' in params ? params.ApplicationResourceTypeList : null;
+
+    }
+}
+
+/**
+ * 提供给前端控制按钮显示逻辑的字段
+ * @class
+ */
+class OperationInfoDetail extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 不显示的原因
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.DisabledReason = null;
+
+        /**
+         * 该按钮是否可点击
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.Enabled = null;
+
+        /**
+         * 是否显示该按钮
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.Supported = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DisabledReason = 'DisabledReason' in params ? params.DisabledReason : null;
+        this.Enabled = 'Enabled' in params ? params.Enabled : null;
+        this.Supported = 'Supported' in params ? params.Supported : null;
 
     }
 }
@@ -10317,6 +10547,7 @@ module.exports = {
     DescribeApplicationAttributeRequest: DescribeApplicationAttributeRequest,
     RollbackConfigRequest: RollbackConfigRequest,
     DescribeConfigsRequest: DescribeConfigsRequest,
+    OperationInfo: OperationInfo,
     AddClusterInstancesRequest: AddClusterInstancesRequest,
     DescribePublicConfigResponse: DescribePublicConfigResponse,
     DeleteConfigResponse: DeleteConfigResponse,
@@ -10401,6 +10632,7 @@ module.exports = {
     AddInstancesRequest: AddInstancesRequest,
     RollbackConfigResponse: RollbackConfigResponse,
     DescribeApplicationsRequest: DescribeApplicationsRequest,
+    OperationInfoDetail: OperationInfoDetail,
     StartContainerGroupResponse: StartContainerGroupResponse,
     CreateApplicationRequest: CreateApplicationRequest,
     DescribePublicConfigReleasesRequest: DescribePublicConfigReleasesRequest,

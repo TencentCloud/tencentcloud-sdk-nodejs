@@ -79,14 +79,11 @@ const RunTestOtaVersionResponse = models.RunTestOtaVersionResponse;
 const RunTestOtaVersionRequest = models.RunTestOtaVersionRequest;
 const DescribeDeviceResponse = models.DescribeDeviceResponse;
 const SetMessageQueueResponse = models.SetMessageQueueResponse;
-const RenewUploadTestResponse = models.RenewUploadTestResponse;
-const RenewCertificate = models.RenewCertificate;
 const DeleteOtaVersionResponse = models.DeleteOtaVersionResponse;
 const UploadOtaVersionRequest = models.UploadOtaVersionRequest;
 const DescribeIotModelsRequest = models.DescribeIotModelsRequest;
 const DescribeModelDataRetRequest = models.DescribeModelDataRetRequest;
 const CreateTraceIdsResponse = models.CreateTraceIdsResponse;
-const CosCertificate = models.CosCertificate;
 const DeleteBindingRequest = models.DeleteBindingRequest;
 const DescribeOtaVersionsResponse = models.DescribeOtaVersionsResponse;
 const DeleteProductResponse = models.DeleteProductResponse;
@@ -96,7 +93,6 @@ const DeviceModelData = models.DeviceModelData;
 const DescribeIotDataTypeRequest = models.DescribeIotDataTypeRequest;
 const SendOnlineMsgRequest = models.SendOnlineMsgRequest;
 const DescribeDeviceRequest = models.DescribeDeviceRequest;
-const CertificateInfo = models.CertificateInfo;
 const DescribeRunLogResponse = models.DescribeRunLogResponse;
 const DescribeIotModelRequest = models.DescribeIotModelRequest;
 const DescribeTraceIdsRequest = models.DescribeTraceIdsRequest;
@@ -113,7 +109,6 @@ const ModifyDeviceActionRequest = models.ModifyDeviceActionRequest;
 const CreateIotModelResponse = models.CreateIotModelResponse;
 const BindDevInfo = models.BindDevInfo;
 const DescribeBindDevRequest = models.DescribeBindDevRequest;
-const RenewUploadTestRequest = models.RenewUploadTestRequest;
 const MsgQueueData = models.MsgQueueData;
 const RunDeviceStreamResponse = models.RunDeviceStreamResponse;
 const RunOtaVersionResponse = models.RunOtaVersionResponse;
@@ -131,10 +126,8 @@ const SendOnlineMsgResponse = models.SendOnlineMsgResponse;
 const DescribeIotModelsResponse = models.DescribeIotModelsResponse;
 const DescribeMessageQueueResponse = models.DescribeMessageQueueResponse;
 const DescribeDevicesRequest = models.DescribeDevicesRequest;
-const CreateUploadTestResponse = models.CreateUploadTestResponse;
 const CreateIotDataTypeResponse = models.CreateIotDataTypeResponse;
 const ModifyDevicePropertyResponse = models.ModifyDevicePropertyResponse;
-const CreateUploadTestRequest = models.CreateUploadTestRequest;
 const DeleteBindingResponse = models.DeleteBindingResponse;
 const DisableDeviceStreamResponse = models.DisableDeviceStreamResponse;
 const DeleteDeviceResponse = models.DeleteDeviceResponse;
@@ -172,17 +165,6 @@ class IotvideoClient extends AbstractClient {
     DisableOtaVersion(req, cb) {
         let resp = new DisableOtaVersionResponse();
         this.request("DisableOtaVersion", req, resp, cb);
-    }
-
-    /**
-     * 设备申请cos上传证书
-     * @param {CreateUploadTestRequest} req
-     * @param {function(string, CreateUploadTestResponse):void} cb
-     * @public
-     */
-    CreateUploadTest(req, cb) {
-        let resp = new CreateUploadTestResponse();
-        this.request("CreateUploadTest", req, resp, cb);
     }
 
     /**
@@ -417,7 +399,7 @@ class IotvideoClient extends AbstractClient {
     }
 
     /**
-     * 本接口（CreateAppUsr）用于接收由厂商云发送过来的注册请求,建立厂商云终端用户与IotVideo终端用户的映射关系。
+     * 本接口（CreateAppUsr）用于接收由厂商云发送过来的注册请求,建立厂商云终端用户与IoT Video终端用户的映射关系。
      * @param {CreateAppUsrRequest} req
      * @param {function(string, CreateAppUsrResponse):void} cb
      * @public
@@ -454,14 +436,14 @@ class IotvideoClient extends AbstractClient {
     }
 
     /**
-     * 本接口（DeleteDevice）用于删除设备，可进行批量操作，每次操作最多100台设备。
-     * @param {DeleteDeviceRequest} req
-     * @param {function(string, DeleteDeviceResponse):void} cb
+     * 本接口（DeleteOtaVersion）用于删除固件版本信息。
+     * @param {DeleteOtaVersionRequest} req
+     * @param {function(string, DeleteOtaVersionResponse):void} cb
      * @public
      */
-    DeleteDevice(req, cb) {
-        let resp = new DeleteDeviceResponse();
-        this.request("DeleteDevice", req, resp, cb);
+    DeleteOtaVersion(req, cb) {
+        let resp = new DeleteOtaVersionResponse();
+        this.request("DeleteOtaVersion", req, resp, cb);
     }
 
     /**
@@ -485,6 +467,17 @@ class IotvideoClient extends AbstractClient {
     DescribeLogs(req, cb) {
         let resp = new DescribeLogsResponse();
         this.request("DescribeLogs", req, resp, cb);
+    }
+
+    /**
+     * 本接口（DeleteDevice）用于删除设备，可进行批量操作，每次操作最多100台设备。
+     * @param {DeleteDeviceRequest} req
+     * @param {function(string, DeleteDeviceResponse):void} cb
+     * @public
+     */
+    DeleteDevice(req, cb) {
+        let resp = new DeleteDeviceResponse();
+        this.request("DeleteDevice", req, resp, cb);
     }
 
     /**
@@ -540,17 +533,6 @@ class IotvideoClient extends AbstractClient {
     DescribeRunLog(req, cb) {
         let resp = new DescribeRunLogResponse();
         this.request("DescribeRunLog", req, resp, cb);
-    }
-
-    /**
-     * 本接口（DeleteOtaVersion）用于删除固件版本信息。
-     * @param {DeleteOtaVersionRequest} req
-     * @param {function(string, DeleteOtaVersionResponse):void} cb
-     * @public
-     */
-    DeleteOtaVersion(req, cb) {
-        let resp = new DeleteOtaVersionResponse();
-        this.request("DeleteOtaVersion", req, resp, cb);
     }
 
     /**
@@ -617,17 +599,6 @@ class IotvideoClient extends AbstractClient {
     RunDeviceStream(req, cb) {
         let resp = new RunDeviceStreamResponse();
         this.request("RunDeviceStream", req, resp, cb);
-    }
-
-    /**
-     * 设备刷新cos上传证书
-     * @param {RenewUploadTestRequest} req
-     * @param {function(string, RenewUploadTestResponse):void} cb
-     * @public
-     */
-    RenewUploadTest(req, cb) {
-        let resp = new RenewUploadTestResponse();
-        this.request("RenewUploadTest", req, resp, cb);
     }
 
     /**

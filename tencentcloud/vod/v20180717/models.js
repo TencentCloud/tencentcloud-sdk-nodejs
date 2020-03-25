@@ -3981,13 +3981,13 @@ class DescribeMediaProcessUsageDataRequest extends  AbstractModel {
         super();
 
         /**
-         * 起始日期。使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F)。
+         * 起始日期。使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#52)。
          * @type {string || null}
          */
         this.StartTime = null;
 
         /**
-         * 结束日期，需大于等于起始日期。使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F)。
+         * 结束日期，需大于等于起始日期。使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#52)。
          * @type {string || null}
          */
         this.EndTime = null;
@@ -4037,13 +4037,6 @@ class CreatePersonSampleRequest extends  AbstractModel {
         this.Name = null;
 
         /**
-         * 人脸图片 [Base64](https://tools.ietf.org/html/rfc4648) 编码后的字符串，仅支持 jpeg、png 图片格式。数组长度限制：5 张图片。
-注意：图片必须是单人像正面人脸较清晰的照片，像素不低于 200*200。
-         * @type {Array.<string> || null}
-         */
-        this.FaceContents = null;
-
-        /**
          * 人物应用场景，可选值：
 1. Recognition：用于内容识别，等价于 Recognition.Face。
 2. Review：用于内容审核，等价于 Review.Face。
@@ -4057,6 +4050,13 @@ class CreatePersonSampleRequest extends  AbstractModel {
          * @type {string || null}
          */
         this.Description = null;
+
+        /**
+         * 人脸图片 [Base64](https://tools.ietf.org/html/rfc4648) 编码后的字符串，仅支持 jpeg、png 图片格式。数组长度限制：5 张图片。
+注意：图片必须是单人像正面人脸较清晰的照片，像素不低于 200*200。
+         * @type {Array.<string> || null}
+         */
+        this.FaceContents = null;
 
         /**
          * 人物标签
@@ -4082,9 +4082,9 @@ class CreatePersonSampleRequest extends  AbstractModel {
             return;
         }
         this.Name = 'Name' in params ? params.Name : null;
-        this.FaceContents = 'FaceContents' in params ? params.FaceContents : null;
         this.Usages = 'Usages' in params ? params.Usages : null;
         this.Description = 'Description' in params ? params.Description : null;
+        this.FaceContents = 'FaceContents' in params ? params.FaceContents : null;
         this.Tags = 'Tags' in params ? params.Tags : null;
         this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
 
@@ -8038,7 +8038,6 @@ class CreatePersonSampleResponse extends  AbstractModel {
 
         /**
          * 处理失败的人脸信息。
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<AiSampleFailFaceInfo> || null}
          */
         this.FailFaceInfoSet = null;
@@ -25578,13 +25577,13 @@ class DescribeStorageDetailsRequest extends  AbstractModel {
         super();
 
         /**
-         * 起始时间，格式按照 ISO 8601 标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F)。
+         * 起始时间，格式按照 ISO 8601 标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#52)。
          * @type {string || null}
          */
         this.StartTime = null;
 
         /**
-         * 结束时间，需大于开始日期，格式按照 ISO 8601 标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F)。
+         * 结束时间，需大于开始日期，格式按照 ISO 8601 标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#52)。
          * @type {string || null}
          */
         this.EndTime = null;
