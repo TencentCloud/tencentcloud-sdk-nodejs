@@ -5459,6 +5459,13 @@ class Instance extends  AbstractModel {
          */
         this.GroupName = null;
 
+        /**
+         * NamespaceName
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.NamespaceName = null;
+
     }
 
     /**
@@ -5503,6 +5510,7 @@ class Instance extends  AbstractModel {
         this.ApplicationResourceType = 'ApplicationResourceType' in params ? params.ApplicationResourceType : null;
         this.ServiceSidecarStatus = 'ServiceSidecarStatus' in params ? params.ServiceSidecarStatus : null;
         this.GroupName = 'GroupName' in params ? params.GroupName : null;
+        this.NamespaceName = 'NamespaceName' in params ? params.NamespaceName : null;
 
     }
 }

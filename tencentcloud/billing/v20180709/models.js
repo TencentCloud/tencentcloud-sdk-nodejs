@@ -1759,13 +1759,13 @@ class DescribeBillDetailRequest extends  AbstractModel {
         this.Month = null;
 
         /**
-         * 周期开始时间，格式为Y-m-d H:i:s，Month和BeginTime&EndTime必传一个，如果有该字段则Month字段无效。BeginTime和EndTime必须一起传。不能早于开通账单2.0的月份，最多可拉取24个月内的数据。
+         * 周期开始时间，格式为Y-m-d H:i:s，Month和BeginTime&EndTime必传一个，如果有该字段则Month字段无效。BeginTime和EndTime必须一起传。不能早于开通账单2.0的月份，最多可拉取24个月内的数据。(不支持跨月查询)
          * @type {string || null}
          */
         this.BeginTime = null;
 
         /**
-         * 周期结束时间，格式为Y-m-d H:i:s，Month和BeginTime&EndTime必传一个，如果有该字段则Month字段无效。BeginTime和EndTime必须一起传。不能早于开通账单2.0的月份，最多可拉取24个月内的数据。
+         * 周期结束时间，格式为Y-m-d H:i:s，Month和BeginTime&EndTime必传一个，如果有该字段则Month字段无效。BeginTime和EndTime必须一起传。不能早于开通账单2.0的月份，最多可拉取24个月内的数据。（不支持跨月查询）
          * @type {string || null}
          */
         this.EndTime = null;
@@ -1795,6 +1795,12 @@ class DescribeBillDetailRequest extends  AbstractModel {
          */
         this.ResourceId = null;
 
+        /**
+         * 查询交易类型。如 按量计费日结，按量计费小时结 等
+         * @type {string || null}
+         */
+        this.ActionType = null;
+
     }
 
     /**
@@ -1814,6 +1820,7 @@ class DescribeBillDetailRequest extends  AbstractModel {
         this.ProductCode = 'ProductCode' in params ? params.ProductCode : null;
         this.PayMode = 'PayMode' in params ? params.PayMode : null;
         this.ResourceId = 'ResourceId' in params ? params.ResourceId : null;
+        this.ActionType = 'ActionType' in params ? params.ActionType : null;
 
     }
 }
@@ -3008,6 +3015,12 @@ class DescribeBillResourceSummaryRequest extends  AbstractModel {
          */
         this.NeedRecordNum = null;
 
+        /**
+         * 查询交易类型。如 按量计费日结，按量计费小时结 等
+         * @type {string || null}
+         */
+        this.ActionType = null;
+
     }
 
     /**
@@ -3022,6 +3035,7 @@ class DescribeBillResourceSummaryRequest extends  AbstractModel {
         this.PeriodType = 'PeriodType' in params ? params.PeriodType : null;
         this.Month = 'Month' in params ? params.Month : null;
         this.NeedRecordNum = 'NeedRecordNum' in params ? params.NeedRecordNum : null;
+        this.ActionType = 'ActionType' in params ? params.ActionType : null;
 
     }
 }

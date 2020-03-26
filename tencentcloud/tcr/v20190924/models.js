@@ -425,18 +425,24 @@ class CreateInstanceResponse extends  AbstractModel {
 }
 
 /**
- * ValidateRepositoryExistPersonal请求参数结构体
+ * DeleteInstanceToken请求参数结构体
  * @class
  */
-class ValidateRepositoryExistPersonalRequest extends  AbstractModel {
+class DeleteInstanceTokenRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 仓库名称
+         * 实例 ID
          * @type {string || null}
          */
-        this.RepoName = null;
+        this.RegistryId = null;
+
+        /**
+         * 访问凭证 ID
+         * @type {string || null}
+         */
+        this.TokenId = null;
 
     }
 
@@ -447,7 +453,8 @@ class ValidateRepositoryExistPersonalRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RepoName = 'RepoName' in params ? params.RepoName : null;
+        this.RegistryId = 'RegistryId' in params ? params.RegistryId : null;
+        this.TokenId = 'TokenId' in params ? params.TokenId : null;
 
     }
 }
@@ -467,28 +474,28 @@ class ModifyRepositoryRequest extends  AbstractModel {
         this.RegistryId = null;
 
         /**
+         * 命名空间名称
+         * @type {string || null}
+         */
+        this.NamespaceName = null;
+
+        /**
          * 镜像仓库名称
          * @type {string || null}
          */
         this.RepositoryName = null;
 
         /**
-         * 仓库描述
-         * @type {string || null}
-         */
-        this.Description = null;
-
-        /**
-         * 仓库的简短描述
+         * 仓库简短描述
          * @type {string || null}
          */
         this.BriefDescription = null;
 
         /**
-         * 命名空间名称
+         * 仓库详细描述
          * @type {string || null}
          */
-        this.NamespaceName = null;
+        this.Description = null;
 
     }
 
@@ -500,10 +507,10 @@ class ModifyRepositoryRequest extends  AbstractModel {
             return;
         }
         this.RegistryId = 'RegistryId' in params ? params.RegistryId : null;
-        this.RepositoryName = 'RepositoryName' in params ? params.RepositoryName : null;
-        this.Description = 'Description' in params ? params.Description : null;
-        this.BriefDescription = 'BriefDescription' in params ? params.BriefDescription : null;
         this.NamespaceName = 'NamespaceName' in params ? params.NamespaceName : null;
+        this.RepositoryName = 'RepositoryName' in params ? params.RepositoryName : null;
+        this.BriefDescription = 'BriefDescription' in params ? params.BriefDescription : null;
+        this.Description = 'Description' in params ? params.Description : null;
 
     }
 }
@@ -932,6 +939,34 @@ class DescribeInstancesResponse extends  AbstractModel {
                 obj.deserialize(params.Registries[z]);
                 this.Registries.push(obj);
             }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifyInstanceToken返回参数结构体
+ * @class
+ */
+class ModifyInstanceTokenResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -1387,78 +1422,42 @@ class DescribeImagesResponse extends  AbstractModel {
 }
 
 /**
- * ModifyApplicationTriggerPersonal请求参数结构体
+ * DescribeRepositoryFilterPersonal请求参数结构体
  * @class
  */
-class ModifyApplicationTriggerPersonalRequest extends  AbstractModel {
+class DescribeRepositoryFilterPersonalRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 触发器关联的镜像仓库，library/test格式
+         * 搜索镜像名
          * @type {string || null}
          */
         this.RepoName = null;
 
         /**
-         * 触发器名称
-         * @type {string || null}
+         * 偏移量，默认为0
+         * @type {number || null}
          */
-        this.TriggerName = null;
+        this.Offset = null;
 
         /**
-         * 触发方式，"all"全部触发，"taglist"指定tag触发，"regex"正则触发
-         * @type {string || null}
+         * 返回最大数量，默认 20，最大100
+         * @type {number || null}
          */
-        this.InvokeMethod = null;
+        this.Limit = null;
 
         /**
-         * 触发方式对应的表达式
-         * @type {string || null}
+         * 筛选条件：1表示public，0表示private
+         * @type {number || null}
          */
-        this.InvokeExpr = null;
+        this.Public = null;
 
         /**
-         * 应用所在TKE集群ID
-         * @type {string || null}
-         */
-        this.ClusterId = null;
-
-        /**
-         * 应用所在TKE集群命名空间
+         * 命名空间
          * @type {string || null}
          */
         this.Namespace = null;
-
-        /**
-         * 应用所在TKE集群工作负载类型,支持Deployment、StatefulSet、DaemonSet、CronJob、Job。
-         * @type {string || null}
-         */
-        this.WorkloadType = null;
-
-        /**
-         * 应用所在TKE集群工作负载名称
-         * @type {string || null}
-         */
-        this.WorkloadName = null;
-
-        /**
-         * 应用所在TKE集群工作负载下容器名称
-         * @type {string || null}
-         */
-        this.ContainerName = null;
-
-        /**
-         * 应用所在TKE集群地域数字ID，如1（广州）、16（成都）
-         * @type {number || null}
-         */
-        this.ClusterRegion = null;
-
-        /**
-         * 新触发器名称
-         * @type {string || null}
-         */
-        this.NewTriggerName = null;
 
     }
 
@@ -1470,16 +1469,10 @@ class ModifyApplicationTriggerPersonalRequest extends  AbstractModel {
             return;
         }
         this.RepoName = 'RepoName' in params ? params.RepoName : null;
-        this.TriggerName = 'TriggerName' in params ? params.TriggerName : null;
-        this.InvokeMethod = 'InvokeMethod' in params ? params.InvokeMethod : null;
-        this.InvokeExpr = 'InvokeExpr' in params ? params.InvokeExpr : null;
-        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Public = 'Public' in params ? params.Public : null;
         this.Namespace = 'Namespace' in params ? params.Namespace : null;
-        this.WorkloadType = 'WorkloadType' in params ? params.WorkloadType : null;
-        this.WorkloadName = 'WorkloadName' in params ? params.WorkloadName : null;
-        this.ContainerName = 'ContainerName' in params ? params.ContainerName : null;
-        this.ClusterRegion = 'ClusterRegion' in params ? params.ClusterRegion : null;
-        this.NewTriggerName = 'NewTriggerName' in params ? params.NewTriggerName : null;
 
     }
 }
@@ -1677,6 +1670,48 @@ class DescribeImageLifecyclePersonalResponse extends  AbstractModel {
             this.Data = obj;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifyInstanceToken请求参数结构体
+ * @class
+ */
+class ModifyInstanceTokenRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例长期访问凭证 ID
+         * @type {string || null}
+         */
+        this.TokenId = null;
+
+        /**
+         * 启用或禁用实例长期访问凭证
+         * @type {boolean || null}
+         */
+        this.Enable = null;
+
+        /**
+         * 实例 ID
+         * @type {string || null}
+         */
+        this.RegistryId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TokenId = 'TokenId' in params ? params.TokenId : null;
+        this.Enable = 'Enable' in params ? params.Enable : null;
+        this.RegistryId = 'RegistryId' in params ? params.RegistryId : null;
 
     }
 }
@@ -2216,7 +2251,13 @@ class DescribeRepositoriesRequest extends  AbstractModel {
         this.RegistryId = null;
 
         /**
-         * 仓库名称，用于查询
+         * 指定命名空间，不填写默认为查询所有命名空间下镜像仓库
+         * @type {string || null}
+         */
+        this.NamespaceName = null;
+
+        /**
+         * 指定镜像仓库，不填写默认查询指定命名空间下所有镜像仓库
          * @type {string || null}
          */
         this.RepositoryName = null;
@@ -2239,12 +2280,6 @@ class DescribeRepositoriesRequest extends  AbstractModel {
          */
         this.SortBy = null;
 
-        /**
-         * 命名空间名称，用于查询改命名空间下的仓库，如果不填写默认为所有命名空间下
-         * @type {string || null}
-         */
-        this.NamespaceName = null;
-
     }
 
     /**
@@ -2255,11 +2290,11 @@ class DescribeRepositoriesRequest extends  AbstractModel {
             return;
         }
         this.RegistryId = 'RegistryId' in params ? params.RegistryId : null;
+        this.NamespaceName = 'NamespaceName' in params ? params.NamespaceName : null;
         this.RepositoryName = 'RepositoryName' in params ? params.RepositoryName : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.SortBy = 'SortBy' in params ? params.SortBy : null;
-        this.NamespaceName = 'NamespaceName' in params ? params.NamespaceName : null;
 
     }
 }
@@ -2323,6 +2358,34 @@ class ModifyNamespaceResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ValidateRepositoryExistPersonal请求参数结构体
+ * @class
+ */
+class ValidateRepositoryExistPersonalRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 仓库名称
+         * @type {string || null}
+         */
+        this.RepoName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RepoName = 'RepoName' in params ? params.RepoName : null;
 
     }
 }
@@ -2449,62 +2512,6 @@ class ModifyRepositoryInfoPersonalResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * DescribeRepositoryFilterPersonal请求参数结构体
- * @class
- */
-class DescribeRepositoryFilterPersonalRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 搜索镜像名
-         * @type {string || null}
-         */
-        this.RepoName = null;
-
-        /**
-         * 偏移量，默认为0
-         * @type {number || null}
-         */
-        this.Offset = null;
-
-        /**
-         * 返回最大数量，默认 20，最大100
-         * @type {number || null}
-         */
-        this.Limit = null;
-
-        /**
-         * 筛选条件：1表示public，0表示private
-         * @type {number || null}
-         */
-        this.Public = null;
-
-        /**
-         * 命名空间
-         * @type {string || null}
-         */
-        this.Namespace = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RepoName = 'RepoName' in params ? params.RepoName : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
-        this.Public = 'Public' in params ? params.Public : null;
-        this.Namespace = 'Namespace' in params ? params.Namespace : null;
 
     }
 }
@@ -2759,13 +2766,13 @@ class CreateInstanceTokenResponse extends  AbstractModel {
         super();
 
         /**
-         * 临时密码
+         * 访问凭证
          * @type {string || null}
          */
         this.Token = null;
 
         /**
-         * 临时密码有效期时间戳
+         * 访问凭证过期时间戳
          * @type {number || null}
          */
         this.ExpTime = null;
@@ -3397,6 +3404,48 @@ class CreateInstanceRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeInstanceToken请求参数结构体
+ * @class
+ */
+class DescribeInstanceTokenRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例 ID
+         * @type {string || null}
+         */
+        this.RegistryId = null;
+
+        /**
+         * 分页单页数量
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 分页偏移量
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RegistryId = 'RegistryId' in params ? params.RegistryId : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+
+    }
+}
+
+/**
  * BatchDeleteRepositoryPersonal返回参数结构体
  * @class
  */
@@ -3661,6 +3710,34 @@ class Filter extends  AbstractModel {
         }
         this.Name = 'Name' in params ? params.Name : null;
         this.Values = 'Values' in params ? params.Values : null;
+
+    }
+}
+
+/**
+ * DeleteInstanceToken返回参数结构体
+ * @class
+ */
+class DeleteInstanceTokenResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -4344,6 +4421,104 @@ class ModifyRepositoryAccessPersonalResponse extends  AbstractModel {
 }
 
 /**
+ * ModifyApplicationTriggerPersonal请求参数结构体
+ * @class
+ */
+class ModifyApplicationTriggerPersonalRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 触发器关联的镜像仓库，library/test格式
+         * @type {string || null}
+         */
+        this.RepoName = null;
+
+        /**
+         * 触发器名称
+         * @type {string || null}
+         */
+        this.TriggerName = null;
+
+        /**
+         * 触发方式，"all"全部触发，"taglist"指定tag触发，"regex"正则触发
+         * @type {string || null}
+         */
+        this.InvokeMethod = null;
+
+        /**
+         * 触发方式对应的表达式
+         * @type {string || null}
+         */
+        this.InvokeExpr = null;
+
+        /**
+         * 应用所在TKE集群ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * 应用所在TKE集群命名空间
+         * @type {string || null}
+         */
+        this.Namespace = null;
+
+        /**
+         * 应用所在TKE集群工作负载类型,支持Deployment、StatefulSet、DaemonSet、CronJob、Job。
+         * @type {string || null}
+         */
+        this.WorkloadType = null;
+
+        /**
+         * 应用所在TKE集群工作负载名称
+         * @type {string || null}
+         */
+        this.WorkloadName = null;
+
+        /**
+         * 应用所在TKE集群工作负载下容器名称
+         * @type {string || null}
+         */
+        this.ContainerName = null;
+
+        /**
+         * 应用所在TKE集群地域数字ID，如1（广州）、16（成都）
+         * @type {number || null}
+         */
+        this.ClusterRegion = null;
+
+        /**
+         * 新触发器名称
+         * @type {string || null}
+         */
+        this.NewTriggerName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RepoName = 'RepoName' in params ? params.RepoName : null;
+        this.TriggerName = 'TriggerName' in params ? params.TriggerName : null;
+        this.InvokeMethod = 'InvokeMethod' in params ? params.InvokeMethod : null;
+        this.InvokeExpr = 'InvokeExpr' in params ? params.InvokeExpr : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.Namespace = 'Namespace' in params ? params.Namespace : null;
+        this.WorkloadType = 'WorkloadType' in params ? params.WorkloadType : null;
+        this.WorkloadName = 'WorkloadName' in params ? params.WorkloadName : null;
+        this.ContainerName = 'ContainerName' in params ? params.ContainerName : null;
+        this.ClusterRegion = 'ClusterRegion' in params ? params.ClusterRegion : null;
+        this.NewTriggerName = 'NewTriggerName' in params ? params.NewTriggerName : null;
+
+    }
+}
+
+/**
  * CreateInstanceToken请求参数结构体
  * @class
  */
@@ -4357,6 +4532,18 @@ class CreateInstanceTokenRequest extends  AbstractModel {
          */
         this.RegistryId = null;
 
+        /**
+         * 访问凭证类型，longterm 为长期访问凭证，temp 为临时访问凭证，默认是临时访问凭证，有效期1小时
+         * @type {string || null}
+         */
+        this.TokenType = null;
+
+        /**
+         * 长期访问凭证描述信息
+         * @type {string || null}
+         */
+        this.Desc = null;
+
     }
 
     /**
@@ -4367,6 +4554,8 @@ class CreateInstanceTokenRequest extends  AbstractModel {
             return;
         }
         this.RegistryId = 'RegistryId' in params ? params.RegistryId : null;
+        this.TokenType = 'TokenType' in params ? params.TokenType : null;
+        this.Desc = 'Desc' in params ? params.Desc : null;
 
     }
 }
@@ -4722,16 +4911,22 @@ class DescribeImagesRequest extends  AbstractModel {
         this.RegistryId = null;
 
         /**
+         * 命名空间名称
+         * @type {string || null}
+         */
+        this.NamespaceName = null;
+
+        /**
          * 镜像仓库名称
          * @type {string || null}
          */
         this.RepositoryName = null;
 
         /**
-         * 命名空间名称
+         * 指定镜像版本(Tag)，不填默认返回仓库内全部容器镜像
          * @type {string || null}
          */
-        this.NamespaceName = null;
+        this.ImageVersion = null;
 
         /**
          * 每页个数，用于分页，默认20
@@ -4745,12 +4940,6 @@ class DescribeImagesRequest extends  AbstractModel {
          */
         this.Offset = null;
 
-        /**
-         * 镜像版本(Tag)，置空则返回仓库内全部的容器镜像
-         * @type {string || null}
-         */
-        this.ImageVersion = null;
-
     }
 
     /**
@@ -4761,11 +4950,11 @@ class DescribeImagesRequest extends  AbstractModel {
             return;
         }
         this.RegistryId = 'RegistryId' in params ? params.RegistryId : null;
-        this.RepositoryName = 'RepositoryName' in params ? params.RepositoryName : null;
         this.NamespaceName = 'NamespaceName' in params ? params.NamespaceName : null;
+        this.RepositoryName = 'RepositoryName' in params ? params.RepositoryName : null;
+        this.ImageVersion = 'ImageVersion' in params ? params.ImageVersion : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
-        this.ImageVersion = 'ImageVersion' in params ? params.ImageVersion : null;
 
     }
 }
@@ -4917,6 +5106,56 @@ class RespLimit extends  AbstractModel {
                 this.LimitInfo.push(obj);
             }
         }
+
+    }
+}
+
+/**
+ * DescribeInstanceToken返回参数结构体
+ * @class
+ */
+class DescribeInstanceTokenResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 长期访问凭证总数
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 长期访问凭证列表
+         * @type {Array.<TcrInstanceToken> || null}
+         */
+        this.Tokens = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.Tokens) {
+            this.Tokens = new Array();
+            for (let z in params.Tokens) {
+                let obj = new TcrInstanceToken();
+                obj.deserialize(params.Tokens[z]);
+                this.Tokens.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -5074,6 +5313,69 @@ class TcrRepositoryInfo extends  AbstractModel {
         this.Description = 'Description' in params ? params.Description : null;
         this.BriefDescription = 'BriefDescription' in params ? params.BriefDescription : null;
         this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+
+    }
+}
+
+/**
+ * 实例登录令牌
+ * @class
+ */
+class TcrInstanceToken extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 令牌ID
+         * @type {string || null}
+         */
+        this.Id = null;
+
+        /**
+         * 令牌描述
+         * @type {string || null}
+         */
+        this.Desc = null;
+
+        /**
+         * 令牌所属实例ID
+         * @type {string || null}
+         */
+        this.RegistryId = null;
+
+        /**
+         * 令牌启用状态
+         * @type {boolean || null}
+         */
+        this.Enabled = null;
+
+        /**
+         * 令牌创建时间
+         * @type {string || null}
+         */
+        this.CreatedAt = null;
+
+        /**
+         * 令牌过期时间戳
+         * @type {number || null}
+         */
+        this.ExpiredAt = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Id = 'Id' in params ? params.Id : null;
+        this.Desc = 'Desc' in params ? params.Desc : null;
+        this.RegistryId = 'RegistryId' in params ? params.RegistryId : null;
+        this.Enabled = 'Enabled' in params ? params.Enabled : null;
+        this.CreatedAt = 'CreatedAt' in params ? params.CreatedAt : null;
+        this.ExpiredAt = 'ExpiredAt' in params ? params.ExpiredAt : null;
 
     }
 }
@@ -5281,7 +5583,7 @@ module.exports = {
     TriggerLogResp: TriggerLogResp,
     TagInfoResp: TagInfoResp,
     CreateInstanceResponse: CreateInstanceResponse,
-    ValidateRepositoryExistPersonalRequest: ValidateRepositoryExistPersonalRequest,
+    DeleteInstanceTokenRequest: DeleteInstanceTokenRequest,
     ModifyRepositoryRequest: ModifyRepositoryRequest,
     CreateApplicationTriggerPersonalRequest: CreateApplicationTriggerPersonalRequest,
     AutoDelStrategyInfo: AutoDelStrategyInfo,
@@ -5290,6 +5592,7 @@ module.exports = {
     DescribeRepositoriesResponse: DescribeRepositoriesResponse,
     CreateRepositoryRequest: CreateRepositoryRequest,
     DescribeInstancesResponse: DescribeInstancesResponse,
+    ModifyInstanceTokenResponse: ModifyInstanceTokenResponse,
     DescribeApplicationTriggerPersonalRequest: DescribeApplicationTriggerPersonalRequest,
     FavorResp: FavorResp,
     DeleteNamespacePersonalRequest: DeleteNamespacePersonalRequest,
@@ -5302,12 +5605,13 @@ module.exports = {
     DuplicateImagePersonalResponse: DuplicateImagePersonalResponse,
     DupImageTagResp: DupImageTagResp,
     DescribeImagesResponse: DescribeImagesResponse,
-    ModifyApplicationTriggerPersonalRequest: ModifyApplicationTriggerPersonalRequest,
+    DescribeRepositoryFilterPersonalRequest: DescribeRepositoryFilterPersonalRequest,
     DescribeRepositoryPersonalRequest: DescribeRepositoryPersonalRequest,
     AutoDelStrategyInfoResp: AutoDelStrategyInfoResp,
     DeleteApplicationTriggerPersonalRequest: DeleteApplicationTriggerPersonalRequest,
     SearchUserRepositoryResp: SearchUserRepositoryResp,
     DescribeImageLifecyclePersonalResponse: DescribeImageLifecyclePersonalResponse,
+    ModifyInstanceTokenRequest: ModifyInstanceTokenRequest,
     DeleteImageLifecyclePersonalResponse: DeleteImageLifecyclePersonalResponse,
     CreateNamespaceResponse: CreateNamespaceResponse,
     DescribeRepositoryOwnerPersonalResponse: DescribeRepositoryOwnerPersonalResponse,
@@ -5325,11 +5629,11 @@ module.exports = {
     DescribeRepositoriesRequest: DescribeRepositoriesRequest,
     DescribeImageFilterPersonalRequest: DescribeImageFilterPersonalRequest,
     ModifyNamespaceResponse: ModifyNamespaceResponse,
+    ValidateRepositoryExistPersonalRequest: ValidateRepositoryExistPersonalRequest,
     ModifyUserPasswordPersonalResponse: ModifyUserPasswordPersonalResponse,
     TcrNamespaceInfo: TcrNamespaceInfo,
     DeleteApplicationTriggerPersonalResponse: DeleteApplicationTriggerPersonalResponse,
     ModifyRepositoryInfoPersonalResponse: ModifyRepositoryInfoPersonalResponse,
-    DescribeRepositoryFilterPersonalRequest: DescribeRepositoryFilterPersonalRequest,
     CreateUserPersonalRequest: CreateUserPersonalRequest,
     RepoInfoResp: RepoInfoResp,
     ManageImageLifecycleGlobalPersonalResponse: ManageImageLifecycleGlobalPersonalResponse,
@@ -5352,6 +5656,7 @@ module.exports = {
     DescribeImageLifecyclePersonalRequest: DescribeImageLifecyclePersonalRequest,
     RepositoryInfoResp: RepositoryInfoResp,
     CreateInstanceRequest: CreateInstanceRequest,
+    DescribeInstanceTokenRequest: DescribeInstanceTokenRequest,
     BatchDeleteRepositoryPersonalResponse: BatchDeleteRepositoryPersonalResponse,
     CreateNamespaceRequest: CreateNamespaceRequest,
     BatchDeleteRepositoryPersonalRequest: BatchDeleteRepositoryPersonalRequest,
@@ -5359,6 +5664,7 @@ module.exports = {
     NamespaceIsExistsResp: NamespaceIsExistsResp,
     DescribeInstancesRequest: DescribeInstancesRequest,
     Filter: Filter,
+    DeleteInstanceTokenResponse: DeleteInstanceTokenResponse,
     RepoInfo: RepoInfo,
     ManageImageLifecycleGlobalPersonalRequest: ManageImageLifecycleGlobalPersonalRequest,
     DescribeUserQuotaPersonalResponse: DescribeUserQuotaPersonalResponse,
@@ -5375,6 +5681,7 @@ module.exports = {
     DescribeRepositoryFilterPersonalResponse: DescribeRepositoryFilterPersonalResponse,
     DescribeFavorRepositoryPersonalResponse: DescribeFavorRepositoryPersonalResponse,
     ModifyRepositoryAccessPersonalResponse: ModifyRepositoryAccessPersonalResponse,
+    ModifyApplicationTriggerPersonalRequest: ModifyApplicationTriggerPersonalRequest,
     CreateInstanceTokenRequest: CreateInstanceTokenRequest,
     ModifyUserPasswordPersonalRequest: ModifyUserPasswordPersonalRequest,
     ValidateNamespaceExistPersonalResponse: ValidateNamespaceExistPersonalResponse,
@@ -5387,10 +5694,12 @@ module.exports = {
     TriggerResp: TriggerResp,
     CreateRepositoryResponse: CreateRepositoryResponse,
     RespLimit: RespLimit,
+    DescribeInstanceTokenResponse: DescribeInstanceTokenResponse,
     SameImagesResp: SameImagesResp,
     CreateNamespacePersonalRequest: CreateNamespacePersonalRequest,
     DeleteRepositoryPersonalResponse: DeleteRepositoryPersonalResponse,
     TcrRepositoryInfo: TcrRepositoryInfo,
+    TcrInstanceToken: TcrInstanceToken,
     DeleteRepositoryRequest: DeleteRepositoryRequest,
     ValidateRepositoryExistPersonalResponse: ValidateRepositoryExistPersonalResponse,
     CreateRepositoryPersonalResponse: CreateRepositoryPersonalResponse,

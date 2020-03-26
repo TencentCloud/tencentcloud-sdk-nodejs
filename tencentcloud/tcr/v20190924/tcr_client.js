@@ -24,7 +24,7 @@ const DescribeNamespacesResponse = models.DescribeNamespacesResponse;
 const TriggerLogResp = models.TriggerLogResp;
 const TagInfoResp = models.TagInfoResp;
 const CreateInstanceResponse = models.CreateInstanceResponse;
-const ValidateRepositoryExistPersonalRequest = models.ValidateRepositoryExistPersonalRequest;
+const DeleteInstanceTokenRequest = models.DeleteInstanceTokenRequest;
 const ModifyRepositoryRequest = models.ModifyRepositoryRequest;
 const CreateApplicationTriggerPersonalRequest = models.CreateApplicationTriggerPersonalRequest;
 const AutoDelStrategyInfo = models.AutoDelStrategyInfo;
@@ -33,6 +33,7 @@ const Registry = models.Registry;
 const DescribeRepositoriesResponse = models.DescribeRepositoriesResponse;
 const CreateRepositoryRequest = models.CreateRepositoryRequest;
 const DescribeInstancesResponse = models.DescribeInstancesResponse;
+const ModifyInstanceTokenResponse = models.ModifyInstanceTokenResponse;
 const DescribeApplicationTriggerPersonalRequest = models.DescribeApplicationTriggerPersonalRequest;
 const FavorResp = models.FavorResp;
 const DeleteNamespacePersonalRequest = models.DeleteNamespacePersonalRequest;
@@ -45,12 +46,13 @@ const DeleteImageLifecycleGlobalPersonalResponse = models.DeleteImageLifecycleGl
 const DuplicateImagePersonalResponse = models.DuplicateImagePersonalResponse;
 const DupImageTagResp = models.DupImageTagResp;
 const DescribeImagesResponse = models.DescribeImagesResponse;
-const ModifyApplicationTriggerPersonalRequest = models.ModifyApplicationTriggerPersonalRequest;
+const DescribeRepositoryFilterPersonalRequest = models.DescribeRepositoryFilterPersonalRequest;
 const DescribeRepositoryPersonalRequest = models.DescribeRepositoryPersonalRequest;
 const AutoDelStrategyInfoResp = models.AutoDelStrategyInfoResp;
 const DeleteApplicationTriggerPersonalRequest = models.DeleteApplicationTriggerPersonalRequest;
 const SearchUserRepositoryResp = models.SearchUserRepositoryResp;
 const DescribeImageLifecyclePersonalResponse = models.DescribeImageLifecyclePersonalResponse;
+const ModifyInstanceTokenRequest = models.ModifyInstanceTokenRequest;
 const DeleteImageLifecyclePersonalResponse = models.DeleteImageLifecyclePersonalResponse;
 const CreateNamespaceResponse = models.CreateNamespaceResponse;
 const DescribeRepositoryOwnerPersonalResponse = models.DescribeRepositoryOwnerPersonalResponse;
@@ -68,11 +70,11 @@ const DescribeRepositoryPersonalResponse = models.DescribeRepositoryPersonalResp
 const DescribeRepositoriesRequest = models.DescribeRepositoriesRequest;
 const DescribeImageFilterPersonalRequest = models.DescribeImageFilterPersonalRequest;
 const ModifyNamespaceResponse = models.ModifyNamespaceResponse;
+const ValidateRepositoryExistPersonalRequest = models.ValidateRepositoryExistPersonalRequest;
 const ModifyUserPasswordPersonalResponse = models.ModifyUserPasswordPersonalResponse;
 const TcrNamespaceInfo = models.TcrNamespaceInfo;
 const DeleteApplicationTriggerPersonalResponse = models.DeleteApplicationTriggerPersonalResponse;
 const ModifyRepositoryInfoPersonalResponse = models.ModifyRepositoryInfoPersonalResponse;
-const DescribeRepositoryFilterPersonalRequest = models.DescribeRepositoryFilterPersonalRequest;
 const CreateUserPersonalRequest = models.CreateUserPersonalRequest;
 const RepoInfoResp = models.RepoInfoResp;
 const ManageImageLifecycleGlobalPersonalResponse = models.ManageImageLifecycleGlobalPersonalResponse;
@@ -95,6 +97,7 @@ const DescribeImageLifecycleGlobalPersonalRequest = models.DescribeImageLifecycl
 const DescribeImageLifecyclePersonalRequest = models.DescribeImageLifecyclePersonalRequest;
 const RepositoryInfoResp = models.RepositoryInfoResp;
 const CreateInstanceRequest = models.CreateInstanceRequest;
+const DescribeInstanceTokenRequest = models.DescribeInstanceTokenRequest;
 const BatchDeleteRepositoryPersonalResponse = models.BatchDeleteRepositoryPersonalResponse;
 const CreateNamespaceRequest = models.CreateNamespaceRequest;
 const BatchDeleteRepositoryPersonalRequest = models.BatchDeleteRepositoryPersonalRequest;
@@ -102,6 +105,7 @@ const TriggerInvokeCondition = models.TriggerInvokeCondition;
 const NamespaceIsExistsResp = models.NamespaceIsExistsResp;
 const DescribeInstancesRequest = models.DescribeInstancesRequest;
 const Filter = models.Filter;
+const DeleteInstanceTokenResponse = models.DeleteInstanceTokenResponse;
 const RepoInfo = models.RepoInfo;
 const ManageImageLifecycleGlobalPersonalRequest = models.ManageImageLifecycleGlobalPersonalRequest;
 const DescribeUserQuotaPersonalResponse = models.DescribeUserQuotaPersonalResponse;
@@ -118,6 +122,7 @@ const DescribeNamespacesRequest = models.DescribeNamespacesRequest;
 const DescribeRepositoryFilterPersonalResponse = models.DescribeRepositoryFilterPersonalResponse;
 const DescribeFavorRepositoryPersonalResponse = models.DescribeFavorRepositoryPersonalResponse;
 const ModifyRepositoryAccessPersonalResponse = models.ModifyRepositoryAccessPersonalResponse;
+const ModifyApplicationTriggerPersonalRequest = models.ModifyApplicationTriggerPersonalRequest;
 const CreateInstanceTokenRequest = models.CreateInstanceTokenRequest;
 const ModifyUserPasswordPersonalRequest = models.ModifyUserPasswordPersonalRequest;
 const ValidateNamespaceExistPersonalResponse = models.ValidateNamespaceExistPersonalResponse;
@@ -130,10 +135,12 @@ const DescribeImagesRequest = models.DescribeImagesRequest;
 const TriggerResp = models.TriggerResp;
 const CreateRepositoryResponse = models.CreateRepositoryResponse;
 const RespLimit = models.RespLimit;
+const DescribeInstanceTokenResponse = models.DescribeInstanceTokenResponse;
 const SameImagesResp = models.SameImagesResp;
 const CreateNamespacePersonalRequest = models.CreateNamespacePersonalRequest;
 const DeleteRepositoryPersonalResponse = models.DeleteRepositoryPersonalResponse;
 const TcrRepositoryInfo = models.TcrRepositoryInfo;
+const TcrInstanceToken = models.TcrInstanceToken;
 const DeleteRepositoryRequest = models.DeleteRepositoryRequest;
 const ValidateRepositoryExistPersonalResponse = models.ValidateRepositoryExistPersonalResponse;
 const CreateRepositoryPersonalResponse = models.CreateRepositoryPersonalResponse;
@@ -241,7 +248,7 @@ class TcrClient extends AbstractClient {
     }
 
     /**
-     * 更新镜像仓库描述
+     * 更新镜像仓库信息，可修改仓库描述信息
      * @param {ModifyRepositoryRequest} req
      * @param {function(string, ModifyRepositoryResponse):void} cb
      * @public
@@ -274,7 +281,7 @@ class TcrClient extends AbstractClient {
     }
 
     /**
-     * 查询镜像仓库信息
+     * 查询镜像仓库列表或指定镜像仓库信息
      * @param {DescribeRepositoriesRequest} req
      * @param {function(string, DescribeRepositoriesResponse):void} cb
      * @public
@@ -307,7 +314,7 @@ class TcrClient extends AbstractClient {
     }
 
     /**
-     * 用于在企业版中查询镜像仓库内容器镜像信息，获取镜像版本列表
+     * 查询镜像版本列表或指定容器镜像信息
      * @param {DescribeImagesRequest} req
      * @param {function(string, DescribeImagesResponse):void} cb
      * @public
@@ -351,6 +358,17 @@ class TcrClient extends AbstractClient {
     }
 
     /**
+     * 查询长期访问凭证信息
+     * @param {DescribeInstanceTokenRequest} req
+     * @param {function(string, DescribeInstanceTokenResponse):void} cb
+     * @public
+     */
+    DescribeInstanceToken(req, cb) {
+        let resp = new DescribeInstanceTokenResponse();
+        this.request("DescribeInstanceToken", req, resp, cb);
+    }
+
+    /**
      * 用于设置个人版全局镜像版本自动清理策略
      * @param {ManageImageLifecycleGlobalPersonalRequest} req
      * @param {function(string, ManageImageLifecycleGlobalPersonalResponse):void} cb
@@ -370,6 +388,17 @@ class TcrClient extends AbstractClient {
     DescribeApplicationTriggerLogPersonal(req, cb) {
         let resp = new DescribeApplicationTriggerLogPersonalResponse();
         this.request("DescribeApplicationTriggerLogPersonal", req, resp, cb);
+    }
+
+    /**
+     * 删除长期访问凭证
+     * @param {DeleteInstanceTokenRequest} req
+     * @param {function(string, DeleteInstanceTokenResponse):void} cb
+     * @public
+     */
+    DeleteInstanceToken(req, cb) {
+        let resp = new DeleteInstanceTokenResponse();
+        this.request("DeleteInstanceToken", req, resp, cb);
     }
 
     /**
@@ -403,6 +432,17 @@ class TcrClient extends AbstractClient {
     DeleteImagePersonal(req, cb) {
         let resp = new DeleteImagePersonalResponse();
         this.request("DeleteImagePersonal", req, resp, cb);
+    }
+
+    /**
+     * 更新实例内指定长期访问凭证的启用状态
+     * @param {ModifyInstanceTokenRequest} req
+     * @param {function(string, ModifyInstanceTokenResponse):void} cb
+     * @public
+     */
+    ModifyInstanceToken(req, cb) {
+        let resp = new ModifyInstanceTokenResponse();
+        this.request("ModifyInstanceToken", req, resp, cb);
     }
 
     /**
@@ -637,7 +677,7 @@ class TcrClient extends AbstractClient {
     }
 
     /**
-     * 获取临时登录密码
+     * 创建实例的临时或长期访问凭证
      * @param {CreateInstanceTokenRequest} req
      * @param {function(string, CreateInstanceTokenResponse):void} cb
      * @public

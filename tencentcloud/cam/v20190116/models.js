@@ -1232,7 +1232,7 @@ class RoleInfo extends  AbstractModel {
         this.ConsoleLogin = null;
 
         /**
-         * 角色类型，取user或system
+         * 角色类型，取user、system或service_linked
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
@@ -1244,6 +1244,13 @@ class RoleInfo extends  AbstractModel {
          * @type {number || null}
          */
         this.SessionDuration = null;
+
+        /**
+         * 服务相关角色删除TaskId
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.DeletionTaskId = null;
 
     }
 
@@ -1263,6 +1270,7 @@ class RoleInfo extends  AbstractModel {
         this.ConsoleLogin = 'ConsoleLogin' in params ? params.ConsoleLogin : null;
         this.RoleType = 'RoleType' in params ? params.RoleType : null;
         this.SessionDuration = 'SessionDuration' in params ? params.SessionDuration : null;
+        this.DeletionTaskId = 'DeletionTaskId' in params ? params.DeletionTaskId : null;
 
     }
 }
