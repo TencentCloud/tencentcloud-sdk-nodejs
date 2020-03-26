@@ -662,6 +662,13 @@ class TagResource extends  AbstractModel {
          */
         this.TagValueMd5 = null;
 
+        /**
+         * 资源类型
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ServiceType = null;
+
     }
 
     /**
@@ -676,6 +683,7 @@ class TagResource extends  AbstractModel {
         this.ResourceId = 'ResourceId' in params ? params.ResourceId : null;
         this.TagKeyMd5 = 'TagKeyMd5' in params ? params.TagKeyMd5 : null;
         this.TagValueMd5 = 'TagValueMd5' in params ? params.TagValueMd5 : null;
+        this.ServiceType = 'ServiceType' in params ? params.ServiceType : null;
 
     }
 }

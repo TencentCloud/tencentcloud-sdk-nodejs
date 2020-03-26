@@ -7751,6 +7751,13 @@ OPEN：公网属性， INTERNAL：内网属性。
          */
         this.IsBlock = null;
 
+        /**
+         * 封堵或解封时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.IsBlockTime = null;
+
     }
 
     /**
@@ -7857,6 +7864,7 @@ OPEN：公网属性， INTERNAL：内网属性。
         }
         this.SlaType = 'SlaType' in params ? params.SlaType : null;
         this.IsBlock = 'IsBlock' in params ? params.IsBlock : null;
+        this.IsBlockTime = 'IsBlockTime' in params ? params.IsBlockTime : null;
 
     }
 }

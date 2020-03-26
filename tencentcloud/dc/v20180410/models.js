@@ -1566,7 +1566,7 @@ class Tag extends  AbstractModel {
 }
 
 /**
- * 专线通道信息列表
+ * 专用通道信息列表
  * @class
  */
 class DirectConnectTunnel extends  AbstractModel {
@@ -1574,7 +1574,7 @@ class DirectConnectTunnel extends  AbstractModel {
         super();
 
         /**
-         * 专线通道ID
+         * 专用通道ID
          * @type {string || null}
          */
         this.DirectConnectTunnelId = null;
@@ -1586,7 +1586,7 @@ class DirectConnectTunnel extends  AbstractModel {
         this.DirectConnectId = null;
 
         /**
-         * 专线通道状态
+         * 专用通道状态
 AVAILABLE:就绪或者已连接
 PENDING:申请中
 ALLOCATING:配置中
@@ -1607,7 +1607,7 @@ REJECTED:拒绝
         this.DirectConnectOwnerAccount = null;
 
         /**
-         * 专线通道的拥有者，开发商账号 ID
+         * 专用通道的拥有者，开发商账号 ID
          * @type {string || null}
          */
         this.OwnerAccount = null;
@@ -1656,7 +1656,7 @@ REJECTED:拒绝
         this.RouteFilterPrefixes = null;
 
         /**
-         * 专线通道的Vlan
+         * 专用通道的Vlan
          * @type {number || null}
          */
         this.Vlan = null;
@@ -1674,25 +1674,25 @@ REJECTED:拒绝
         this.CustomerAddress = null;
 
         /**
-         * 专线通道名称
+         * 专用通道名称
          * @type {string || null}
          */
         this.DirectConnectTunnelName = null;
 
         /**
-         * 专线通道创建时间
+         * 专用通道创建时间
          * @type {string || null}
          */
         this.CreatedTime = null;
 
         /**
-         * 专线通道带宽值
+         * 专用通道带宽值
          * @type {number || null}
          */
         this.Bandwidth = null;
 
         /**
-         * 专线通道标签值
+         * 专用通道标签值
          * @type {Array.<Tag> || null}
          */
         this.TagSet = null;
@@ -1733,7 +1733,7 @@ REJECTED:拒绝
         this.BfdEnable = null;
 
         /**
-         * 专线通道接入点类型
+         * 专用通道接入点类型
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
