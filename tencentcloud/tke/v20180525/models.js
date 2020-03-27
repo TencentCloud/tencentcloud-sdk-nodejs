@@ -679,6 +679,58 @@ class DescribeExistedInstancesRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeRegions返回参数结构体
+ * @class
+ */
+class DescribeRegionsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 地域的数量
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 地域列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<RegionInstance> || null}
+         */
+        this.RegionInstanceSet = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.RegionInstanceSet) {
+            this.RegionInstanceSet = new Array();
+            for (let z in params.RegionInstanceSet) {
+                let obj = new RegionInstance();
+                obj.deserialize(params.RegionInstanceSet[z]);
+                this.RegionInstanceSet.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * CreateClusterRoute返回参数结构体
  * @class
  */
@@ -948,6 +1000,58 @@ class ClusterNetworkSettings extends  AbstractModel {
 }
 
 /**
+ * DescribeImages返回参数结构体
+ * @class
+ */
+class DescribeImagesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 镜像数量
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 镜像信息列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<ImageInstance> || null}
+         */
+        this.ImageInstanceSet = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.ImageInstanceSet) {
+            this.ImageInstanceSet = new Array();
+            for (let z in params.ImageInstanceSet) {
+                let obj = new ImageInstance();
+                obj.deserialize(params.ImageInstanceSet[z]);
+                this.ImageInstanceSet.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * 集群关联的伸缩组最大实例数最小值实例数
  * @class
  */
@@ -978,6 +1082,55 @@ class AutoScalingGroupRange extends  AbstractModel {
         }
         this.MinSize = 'MinSize' in params ? params.MinSize : null;
         this.MaxSize = 'MaxSize' in params ? params.MaxSize : null;
+
+    }
+}
+
+/**
+ * ModifyClusterAttribute请求参数结构体
+ * @class
+ */
+class ModifyClusterAttributeRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 集群ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * 集群所属项目
+         * @type {number || null}
+         */
+        this.ProjectId = null;
+
+        /**
+         * 集群名称
+         * @type {string || null}
+         */
+        this.ClusterName = null;
+
+        /**
+         * 集群描述
+         * @type {string || null}
+         */
+        this.ClusterDesc = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+        this.ClusterName = 'ClusterName' in params ? params.ClusterName : null;
+        this.ClusterDesc = 'ClusterDesc' in params ? params.ClusterDesc : null;
 
     }
 }
@@ -1149,6 +1302,75 @@ class DescribeClustersRequest extends  AbstractModel {
                 this.Filters.push(obj);
             }
         }
+
+    }
+}
+
+/**
+ * 地域属性信息
+ * @class
+ */
+class RegionInstance extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 地域名称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.RegionName = null;
+
+        /**
+         * 地域ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.RegionId = null;
+
+        /**
+         * 地域状态
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * 地域特性开关(按照JSON的形式返回所有属性)
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.FeatureGates = null;
+
+        /**
+         * 地域简称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Alias = null;
+
+        /**
+         * 地域白名单
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Remark = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RegionName = 'RegionName' in params ? params.RegionName : null;
+        this.RegionId = 'RegionId' in params ? params.RegionId : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.FeatureGates = 'FeatureGates' in params ? params.FeatureGates : null;
+        this.Alias = 'Alias' in params ? params.Alias : null;
+        this.Remark = 'Remark' in params ? params.Remark : null;
 
     }
 }
@@ -1819,19 +2041,26 @@ class DescribeRouteTableConflictsResponse extends  AbstractModel {
 }
 
 /**
- * 节点自定义参数
+ * 标签描述列表。通过指定该参数可以同时绑定标签到相应的资源实例，当前仅支持绑定标签到云主机实例。
  * @class
  */
-class InstanceExtraArgs extends  AbstractModel {
+class TagSpecification extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * kubelet自定义参数
+         * 标签绑定的资源类型，当前支持类型："cluster"
 注意：此字段可能返回 null，表示取不到有效值。
-         * @type {Array.<string> || null}
+         * @type {string || null}
          */
-        this.Kubelet = null;
+        this.ResourceType = null;
+
+        /**
+         * 标签对列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
 
     }
 
@@ -1842,7 +2071,37 @@ class InstanceExtraArgs extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Kubelet = 'Kubelet' in params ? params.Kubelet : null;
+        this.ResourceType = 'ResourceType' in params ? params.ResourceType : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * DescribeRegions请求参数结构体
+ * @class
+ */
+class DescribeRegionsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
 
     }
 }
@@ -2498,26 +2757,19 @@ class CreateClusterRequest extends  AbstractModel {
 }
 
 /**
- * 标签描述列表。通过指定该参数可以同时绑定标签到相应的资源实例，当前仅支持绑定标签到云主机实例。
+ * 节点自定义参数
  * @class
  */
-class TagSpecification extends  AbstractModel {
+class InstanceExtraArgs extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 标签绑定的资源类型，当前支持类型："cluster"
+         * kubelet自定义参数
 注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
+         * @type {Array.<string> || null}
          */
-        this.ResourceType = null;
-
-        /**
-         * 标签对列表
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {Array.<Tag> || null}
-         */
-        this.Tags = null;
+        this.Kubelet = null;
 
     }
 
@@ -2528,16 +2780,7 @@ class TagSpecification extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ResourceType = 'ResourceType' in params ? params.ResourceType : null;
-
-        if (params.Tags) {
-            this.Tags = new Array();
-            for (let z in params.Tags) {
-                let obj = new Tag();
-                obj.deserialize(params.Tags[z]);
-                this.Tags.push(obj);
-            }
-        }
+        this.Kubelet = 'Kubelet' in params ? params.Kubelet : null;
 
     }
 }
@@ -2710,6 +2953,59 @@ class Filter extends  AbstractModel {
         }
         this.Name = 'Name' in params ? params.Name : null;
         this.Values = 'Values' in params ? params.Values : null;
+
+    }
+}
+
+/**
+ * 镜像信息
+ * @class
+ */
+class ImageInstance extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 镜像别名
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Alias = null;
+
+        /**
+         * 操作系统名称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.OsName = null;
+
+        /**
+         * 镜像ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ImageId = null;
+
+        /**
+         * 容器的镜像版本，"DOCKER_CUSTOMIZE"(容器定制版),"GENERAL"(普通版本，默认值)
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.OsCustomizeType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Alias = 'Alias' in params ? params.Alias : null;
+        this.OsName = 'OsName' in params ? params.OsName : null;
+        this.ImageId = 'ImageId' in params ? params.ImageId : null;
+        this.OsCustomizeType = 'OsCustomizeType' in params ? params.OsCustomizeType : null;
 
     }
 }
@@ -3141,6 +3437,58 @@ class DescribeClusterAsGroupOptionRequest extends  AbstractModel {
             return;
         }
         this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+
+    }
+}
+
+/**
+ * ModifyClusterAttribute返回参数结构体
+ * @class
+ */
+class ModifyClusterAttributeResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 集群所属项目
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.ProjectId = null;
+
+        /**
+         * 集群名称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ClusterName = null;
+
+        /**
+         * 集群描述
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ClusterDesc = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+        this.ClusterName = 'ClusterName' in params ? params.ClusterName : null;
+        this.ClusterDesc = 'ClusterDesc' in params ? params.ClusterDesc : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3677,6 +4025,27 @@ class DescribeClusterAsGroupsRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeImages请求参数结构体
+ * @class
+ */
+class DescribeImagesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+    }
+}
+
+/**
  * ModifyClusterEndpointSP返回参数结构体
  * @class
  */
@@ -4178,17 +4547,21 @@ module.exports = {
     RunInstancesForNode: RunInstancesForNode,
     DeleteClusterAsGroupsRequest: DeleteClusterAsGroupsRequest,
     DescribeExistedInstancesRequest: DescribeExistedInstancesRequest,
+    DescribeRegionsResponse: DescribeRegionsResponse,
     CreateClusterRouteResponse: CreateClusterRouteResponse,
     RouteTableInfo: RouteTableInfo,
     ClusterAsGroup: ClusterAsGroup,
     DescribeClusterEndpointStatusRequest: DescribeClusterEndpointStatusRequest,
     Tag: Tag,
     ClusterNetworkSettings: ClusterNetworkSettings,
+    DescribeImagesResponse: DescribeImagesResponse,
     AutoScalingGroupRange: AutoScalingGroupRange,
+    ModifyClusterAttributeRequest: ModifyClusterAttributeRequest,
     DeleteClusterRouteResponse: DeleteClusterRouteResponse,
     CreateClusterEndpointVipResponse: CreateClusterEndpointVipResponse,
     DescribeClusterRoutesResponse: DescribeClusterRoutesResponse,
     DescribeClustersRequest: DescribeClustersRequest,
+    RegionInstance: RegionInstance,
     Label: Label,
     DeleteClusterEndpointVipResponse: DeleteClusterEndpointVipResponse,
     ClusterBasicSettings: ClusterBasicSettings,
@@ -4201,7 +4574,8 @@ module.exports = {
     CreateClusterEndpointVipRequest: CreateClusterEndpointVipRequest,
     ExistedInstance: ExistedInstance,
     DescribeRouteTableConflictsResponse: DescribeRouteTableConflictsResponse,
-    InstanceExtraArgs: InstanceExtraArgs,
+    TagSpecification: TagSpecification,
+    DescribeRegionsRequest: DescribeRegionsRequest,
     DescribeClustersResponse: DescribeClustersResponse,
     ClusterExtraArgs: ClusterExtraArgs,
     DataDisk: DataDisk,
@@ -4214,11 +4588,12 @@ module.exports = {
     RunSecurityServiceEnabled: RunSecurityServiceEnabled,
     DeleteClusterRouteTableRequest: DeleteClusterRouteTableRequest,
     CreateClusterRequest: CreateClusterRequest,
-    TagSpecification: TagSpecification,
+    InstanceExtraArgs: InstanceExtraArgs,
     CreateClusterAsGroupResponse: CreateClusterAsGroupResponse,
     DeleteClusterAsGroupsResponse: DeleteClusterAsGroupsResponse,
     DescribeClusterInstancesRequest: DescribeClusterInstancesRequest,
     Filter: Filter,
+    ImageInstance: ImageInstance,
     CreateClusterEndpointResponse: CreateClusterEndpointResponse,
     ClusterAdvancedSettings: ClusterAdvancedSettings,
     DeleteClusterEndpointVipRequest: DeleteClusterEndpointVipRequest,
@@ -4227,6 +4602,7 @@ module.exports = {
     AddExistedInstancesResponse: AddExistedInstancesResponse,
     DeleteClusterRouteTableResponse: DeleteClusterRouteTableResponse,
     DescribeClusterAsGroupOptionRequest: DescribeClusterAsGroupOptionRequest,
+    ModifyClusterAttributeResponse: ModifyClusterAttributeResponse,
     CreateClusterEndpointRequest: CreateClusterEndpointRequest,
     AddExistedInstancesRequest: AddExistedInstancesRequest,
     ClusterAsGroupOption: ClusterAsGroupOption,
@@ -4238,6 +4614,7 @@ module.exports = {
     DeleteClusterEndpointRequest: DeleteClusterEndpointRequest,
     CreateClusterRouteTableRequest: CreateClusterRouteTableRequest,
     DescribeClusterAsGroupsRequest: DescribeClusterAsGroupsRequest,
+    DescribeImagesRequest: DescribeImagesRequest,
     ModifyClusterEndpointSPResponse: ModifyClusterEndpointSPResponse,
     DescribeRouteTableConflictsRequest: DescribeRouteTableConflictsRequest,
     ExistedInstancesPara: ExistedInstancesPara,

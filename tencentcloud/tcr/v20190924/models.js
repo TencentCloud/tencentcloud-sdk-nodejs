@@ -2444,6 +2444,12 @@ class TcrNamespaceInfo extends  AbstractModel {
          */
         this.Public = null;
 
+        /**
+         * 命名空间的Id
+         * @type {number || null}
+         */
+        this.NamespaceId = null;
+
     }
 
     /**
@@ -2456,6 +2462,7 @@ class TcrNamespaceInfo extends  AbstractModel {
         this.Name = 'Name' in params ? params.Name : null;
         this.CreationTime = 'CreationTime' in params ? params.CreationTime : null;
         this.Public = 'Public' in params ? params.Public : null;
+        this.NamespaceId = 'NamespaceId' in params ? params.NamespaceId : null;
 
     }
 }

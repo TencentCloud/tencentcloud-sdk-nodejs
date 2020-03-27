@@ -6815,6 +6815,12 @@ class BizLicenseOCRResponse extends  AbstractModel {
         this.ComposingForm = null;
 
         /**
+         * 成立日期
+         * @type {string || null}
+         */
+        this.SetDate = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -6838,6 +6844,7 @@ class BizLicenseOCRResponse extends  AbstractModel {
         this.Type = 'Type' in params ? params.Type : null;
         this.Period = 'Period' in params ? params.Period : null;
         this.ComposingForm = 'ComposingForm' in params ? params.ComposingForm : null;
+        this.SetDate = 'SetDate' in params ? params.SetDate : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }

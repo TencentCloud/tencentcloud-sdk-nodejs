@@ -31,7 +31,7 @@ class PullSmsReplyStatusRequest extends  AbstractModel {
         this.Limit = null;
 
         /**
-         * 短信SdkAppid在 [短信控制台](https://console.cloud.tencent.com/sms/smslist) 添加应用后生成的实际SdkAppid,示例如1400006666。
+         * 短信 SdkAppid 在 [短信控制台](https://console.cloud.tencent.com/sms/smslist) 添加应用后生成的实际 SdkAppid，例如1400006666。
          * @type {string || null}
          */
         this.SmsSdkAppid = null;
@@ -439,7 +439,7 @@ class PullSmsSendStatusByPhoneNumberRequest extends  AbstractModel {
         this.PhoneNumber = null;
 
         /**
-         * 短信SdkAppid在 [短信控制台](https://console.cloud.tencent.com/sms/smslist) 添加应用后生成的实际SdkAppid，示例如1400006666。
+         * 短信SdkAppid在 [短信控制台](https://console.cloud.tencent.com/sms/smslist) 添加应用后生成的实际SdkAppid，例如1400006666。
          * @type {string || null}
          */
         this.SmsSdkAppid = null;
@@ -710,7 +710,7 @@ class PullSmsSendStatusRequest extends  AbstractModel {
         this.Limit = null;
 
         /**
-         * 短信SdkAppid在 [短信控制台](https://console.cloud.tencent.com/sms/smslist) 添加应用后生成的实际SdkAppid，示例如1400006666。
+         * 短信SdkAppid在 [短信控制台](https://console.cloud.tencent.com/sms/smslist) 添加应用后生成的实际SdkAppid，例如1400006666。
          * @type {string || null}
          */
         this.SmsSdkAppid = null;
@@ -2026,7 +2026,7 @@ class PullSmsReplyStatusByPhoneNumberRequest extends  AbstractModel {
         this.PhoneNumber = null;
 
         /**
-         * 短信SdkAppid在 [短信控制台](https://console.cloud.tencent.com/sms/smslist) 添加应用后生成的实际SdkAppid，示例如1400006666。
+         * 短信SdkAppid在 [短信控制台](https://console.cloud.tencent.com/sms/smslist) 添加应用后生成的实际SdkAppid，例如1400006666。
          * @type {string || null}
          */
         this.SmsSdkAppid = null;

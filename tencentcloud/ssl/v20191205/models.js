@@ -180,7 +180,7 @@ class CommitCertificateInformationResponse extends  AbstractModel {
         this.OrderId = null;
 
         /**
-         * 证书状态。
+         * 证书状态：0 = 审核中，1 = 已通过，2 = 审核失败，3 = 已过期，4 = 已添加DNS记录，5 = 企业证书，待提交，6 = 订单取消中，7 = 已取消，8 = 已提交资料， 待上传确认函，9 = 证书吊销中，10 = 已吊销，11 = 重颁发中，12 = 待上传吊销确认函。
          * @type {number || null}
          */
         this.Status = null;
@@ -703,7 +703,7 @@ class DescribeCertificateResponse extends  AbstractModel {
         this.CertificateType = null;
 
         /**
-         * 证书类型。
+         * 证书套餐类型：1 = GeoTrust DV SSL CA - G3， 2 = TrustAsia TLS RSA CA， 3 = Symantec 增强型企业版(EV Pro)， 4 = Symantec 增强型(EV)， 5 = Symantec 企业型专业版(OV Pro)， 6 = Symantec 企业型(OV)， 7 = Symantec 企业型(OV)通配符， 8 = Geotrust 增强型(EV)， 9 = Geotrust 企业型(OV)， 10 = Geotrust 企业型(OV)通配符， 11 = TrustAsia 域名型多域名 SSL证书， 12 = TrustAsia 域名型(DV)通配符， 13 = TrustAsia 企业型通配符 （OV）SSL证书(D3)， 14 = TrustAsia 企业型 （OV）SSL证书(D3)， 15 = TrustAsia 企业型多域名 （OV）SSL证书(D3)， 16 = TrustAsia 增强型 （EV）SSL证书(D3)， 17 = TrustAsia 增强型多域名（EV）SSL证书(D3)， 18 = GlobalSign 企业型（OV）SSL证， 19 = GlobalSign 企业型通配符 （OV）SSL证书， 20 = GlobalSign 增强型 （EV）SSL证书， 21 = TrustAsia 企业型通配符多域名 （OV）SSL证书(D3)， 22 = GlobalSign 企业型多域名 （OV）SSL证书， 23 = GlobalSign 企业型通配符多域名 （OV）SSL证书， 24 = GlobalSign 增强型多域名（EV） SSL证书。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
@@ -724,14 +724,14 @@ class DescribeCertificateResponse extends  AbstractModel {
         this.Domain = null;
 
         /**
-         * 别名。
+         * 备注名称。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.Alias = null;
 
         /**
-         * 证书类型。
+         * 证书状态：0 = 审核中，1 = 已通过，2 = 审核失败，3 = 已过期，4 = 已添加DNS记录，5 = 企业证书，待提交，6 = 订单取消中，7 = 已取消，8 = 已提交资料， 待上传确认函，9 = 证书吊销中，10 = 已吊销，11 = 重颁发中，12 = 待上传吊销确认函。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
@@ -745,7 +745,7 @@ class DescribeCertificateResponse extends  AbstractModel {
         this.StatusMsg = null;
 
         /**
-         * 证书验证类型。
+         * 验证类型：DNS_AUTO = 自动DNS验证，DNS = 手动DNS验证，FILE = 文件验证，EMAIL = 邮件验证。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
@@ -1013,7 +1013,7 @@ class UploadCertificateRequest extends  AbstractModel {
         this.CertificatePrivateKey = null;
 
         /**
-         * 证书类型，可选值：CA，SVR，默认SVR。
+         * 证书类型，默认SVR。CA = 客户端证书，SVR = 服务器证书。
          * @type {string || null}
          */
         this.CertificateType = null;
@@ -1085,7 +1085,7 @@ class ApplyCertificateRequest extends  AbstractModel {
         super();
 
         /**
-         * 验证方式（'DNS_AUTO'， 'DNS'， 'FILE'）：DNS_AUTO = 自动DNS验证。
+         * 验证方式：DNS_AUTO = 自动DNS验证，DNS = 手动DNS验证，FILE = 文件验证。
          * @type {string || null}
          */
         this.DvAuthMethod = null;
@@ -1103,7 +1103,7 @@ class ApplyCertificateRequest extends  AbstractModel {
         this.ProjectId = null;
 
         /**
-         * 证书类型，默认2。免费证书目前只有 2 了。
+         * 证书类型，目前仅支持类型2。2 = TrustAsia TLS RSA CA。
          * @type {string || null}
          */
         this.PackageType = null;
@@ -1121,7 +1121,7 @@ class ApplyCertificateRequest extends  AbstractModel {
         this.ContactPhone = null;
 
         /**
-         * 有效期，默认12。
+         * 有效期，默认12个月，目前仅支持12个月。
          * @type {string || null}
          */
         this.ValidityPeriod = null;
@@ -1196,13 +1196,13 @@ class ReplaceCertificateRequest extends  AbstractModel {
         this.CertificateId = null;
 
         /**
-         * 验证类型 DNS,DNS_AUTO,FILE
+         * 验证类型：DNS_AUTO = 自动DNS验证，DNS = 手动DNS验证，FILE = 文件验证。
          * @type {string || null}
          */
         this.ValidType = null;
 
         /**
-         * 类型，可选项：Original、Upload、Online，默认original。
+         * 类型，默认Original。可选项：Original = 原证书csr，Upload = 手动上传，Online = 在线生成。
          * @type {string || null}
          */
         this.CsrType = null;
@@ -1468,7 +1468,7 @@ class ModifyCertificateAliasRequest extends  AbstractModel {
         this.CertificateId = null;
 
         /**
-         * 证书备注。
+         * 备注名称。
          * @type {string || null}
          */
         this.Alias = null;
@@ -1765,14 +1765,14 @@ class DownloadCertificateResponse extends  AbstractModel {
         super();
 
         /**
-         * ZIP base64编码内容。
+         * ZIP base64编码内容，base64解码后可保存为ZIP文件。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.Content = null;
 
         /**
-         * MIME类型。
+         * MIME类型：application/zip = ZIP压缩文件。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
@@ -1872,14 +1872,14 @@ class DescribeCertificateDetailResponse extends  AbstractModel {
         this.CertificateType = null;
 
         /**
-         * 证书类型。
+         * 证书套餐类型：1 = GeoTrust DV SSL CA - G3， 2 = TrustAsia TLS RSA CA， 3 = Symantec 增强型企业版(EV Pro)， 4 = Symantec 增强型(EV)， 5 = Symantec 企业型专业版(OV Pro)， 6 = Symantec 企业型(OV)， 7 = Symantec 企业型(OV)通配符， 8 = Geotrust 增强型(EV)， 9 = Geotrust 企业型(OV)， 10 = Geotrust 企业型(OV)通配符， 11 = TrustAsia 域名型多域名 SSL证书， 12 = TrustAsia 域名型(DV)通配符， 13 = TrustAsia 企业型通配符 （OV）SSL证书(D3)， 14 = TrustAsia 企业型 （OV）SSL证书(D3)， 15 = TrustAsia 企业型多域名 （OV）SSL证书(D3)， 16 = TrustAsia 增强型 （EV）SSL证书(D3)， 17 = TrustAsia 增强型多域名（EV）SSL证书(D3)， 18 = GlobalSign 企业型（OV）SSL证， 19 = GlobalSign 企业型通配符 （OV）SSL证书， 20 = GlobalSign 增强型 （EV）SSL证书， 21 = TrustAsia 企业型通配符多域名 （OV）SSL证书(D3)， 22 = GlobalSign 企业型多域名 （OV）SSL证书， 23 = GlobalSign 企业型通配符多域名 （OV）SSL证书， 24 = GlobalSign 增强型多域名（EV） SSL证书。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.PackageType = null;
 
         /**
-         * 证书办法者名称。
+         * 颁发者。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
@@ -1893,14 +1893,14 @@ class DescribeCertificateDetailResponse extends  AbstractModel {
         this.Domain = null;
 
         /**
-         * 别名。
+         * 备注名称。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.Alias = null;
 
         /**
-         * 证书状态。
+         * 证书状态：0 = 审核中，1 = 已通过，2 = 审核失败，3 = 已过期，4 = 已添加DNS记录，5 = 企业证书，待提交，6 = 订单取消中，7 = 已取消，8 = 已提交资料， 待上传确认函，9 = 证书吊销中，10 = 已吊销，11 = 重颁发中，12 = 待上传吊销确认函。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
@@ -1914,7 +1914,7 @@ class DescribeCertificateDetailResponse extends  AbstractModel {
         this.StatusMsg = null;
 
         /**
-         * 证书验证类型。
+         * 验证类型：DNS_AUTO = 自动DNS验证，DNS = 手动DNS验证，FILE = 文件验证，EMAIL = 邮件验证。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
@@ -2068,6 +2068,13 @@ class DescribeCertificateDetailResponse extends  AbstractModel {
         this.RenewAble = null;
 
         /**
+         * 是否可部署。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.Deployable = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -2129,6 +2136,7 @@ class DescribeCertificateDetailResponse extends  AbstractModel {
             this.SubmittedData = obj;
         }
         this.RenewAble = 'RenewAble' in params ? params.RenewAble : null;
+        this.Deployable = 'Deployable' in params ? params.Deployable : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }

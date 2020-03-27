@@ -25,8 +25,8 @@ class SwapGenderPicRequest extends  AbstractModel {
         super();
 
         /**
-         * 人脸变化性别信息。 
-您可以输入最多3个 GenderInfo 来实现给一张图中的最多3张人脸变换性别。
+         * 人脸转化性别信息。 
+您可以输入最多3个 GenderInfo 来实现给一张图中的最多3张人脸转换性别。
          * @type {Array.<GenderInfo> || null}
          */
         this.GenderInfos = null;

@@ -1395,14 +1395,14 @@ class DetectAuthRequest extends  AbstractModel {
         this.TerminalType = null;
 
         /**
-         * 身份标识（与公安权威库比对时必须是身份证号）。
+         * 身份标识（未使用OCR服务时，必须传入）。
 规则：a-zA-Z0-9组合。最长长度32位。
          * @type {string || null}
          */
         this.IdCard = null;
 
         /**
-         * 姓名。最长长度32位。中文请使用UTF-8编码。
+         * 姓名。（未使用OCR服务时，必须传入）最长长度32位。中文请使用UTF-8编码。
          * @type {string || null}
          */
         this.Name = null;

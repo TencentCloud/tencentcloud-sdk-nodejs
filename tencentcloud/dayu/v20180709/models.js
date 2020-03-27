@@ -12701,6 +12701,13 @@ class DDoSEventRecord extends  AbstractModel {
          */
         this.ResourceName = null;
 
+        /**
+         * 攻击事件Id
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.EventId = null;
+
     }
 
     /**
@@ -12722,6 +12729,7 @@ class DDoSEventRecord extends  AbstractModel {
         this.OverLoad = 'OverLoad' in params ? params.OverLoad : null;
         this.AttackStatus = 'AttackStatus' in params ? params.AttackStatus : null;
         this.ResourceName = 'ResourceName' in params ? params.ResourceName : null;
+        this.EventId = 'EventId' in params ? params.EventId : null;
 
     }
 }
