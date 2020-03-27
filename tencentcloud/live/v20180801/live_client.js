@@ -1326,7 +1326,7 @@ class LiveClient extends AbstractClient {
     }
 
     /**
-     * 启用状态为停用的直播域名
+     * 启用状态为停用的直播域名。
      * @param {EnableLiveDomainRequest} req
      * @param {function(string, EnableLiveDomainResponse):void} cb
      * @public

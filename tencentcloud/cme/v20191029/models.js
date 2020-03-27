@@ -1146,6 +1146,12 @@ class MediaMetaData extends  AbstractModel {
         this.Duration = null;
 
         /**
+         * 视频拍摄时的选择角度，单位：度
+         * @type {number || null}
+         */
+        this.Rotate = null;
+
+        /**
          * 视频流信息。
          * @type {Array.<VideoStreamInfo> || null}
          */
@@ -1172,6 +1178,7 @@ class MediaMetaData extends  AbstractModel {
         this.Height = 'Height' in params ? params.Height : null;
         this.Width = 'Width' in params ? params.Width : null;
         this.Duration = 'Duration' in params ? params.Duration : null;
+        this.Rotate = 'Rotate' in params ? params.Rotate : null;
 
         if (params.VideoStreamInfoSet) {
             this.VideoStreamInfoSet = new Array();

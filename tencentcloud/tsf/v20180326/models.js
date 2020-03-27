@@ -4493,6 +4493,27 @@ class SimpleGroup extends  AbstractModel {
          */
         this.NamespaceName = null;
 
+        /**
+         * 启动参数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.StartupParameters = null;
+
+        /**
+         * 部署组资源类型
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.GroupResourceType = null;
+
+        /**
+         * 应用微服务类型
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.AppMicroServiceType = null;
+
     }
 
     /**
@@ -4512,6 +4533,9 @@ class SimpleGroup extends  AbstractModel {
         this.ClusterType = 'ClusterType' in params ? params.ClusterType : null;
         this.NamespaceId = 'NamespaceId' in params ? params.NamespaceId : null;
         this.NamespaceName = 'NamespaceName' in params ? params.NamespaceName : null;
+        this.StartupParameters = 'StartupParameters' in params ? params.StartupParameters : null;
+        this.GroupResourceType = 'GroupResourceType' in params ? params.GroupResourceType : null;
+        this.AppMicroServiceType = 'AppMicroServiceType' in params ? params.AppMicroServiceType : null;
 
     }
 }
