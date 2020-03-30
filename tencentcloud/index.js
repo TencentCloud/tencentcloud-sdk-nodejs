@@ -4,6 +4,7 @@ module.exports = {
     as: require("./as"),
     asr: require("./asr"),
     batch: require("./batch"),
+    bda: require("./bda"),
     billing: require("./billing"),
     bizlive: require("./bizlive"),
     bm: require("./bm"),

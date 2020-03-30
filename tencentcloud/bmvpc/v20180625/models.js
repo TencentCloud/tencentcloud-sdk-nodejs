@@ -1259,6 +1259,12 @@ class VpcInfo extends  AbstractModel {
          */
         this.CreateTime = null;
 
+        /**
+         * 整型私有网络ID。
+         * @type {number || null}
+         */
+        this.IntVpcId = null;
+
     }
 
     /**
@@ -1274,6 +1280,7 @@ class VpcInfo extends  AbstractModel {
         this.Zone = 'Zone' in params ? params.Zone : null;
         this.State = 'State' in params ? params.State : null;
         this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.IntVpcId = 'IntVpcId' in params ? params.IntVpcId : null;
 
     }
 }
@@ -3552,7 +3559,7 @@ class VpcPeerConnection extends  AbstractModel {
         this.VpcPeerConnectionName = null;
 
         /**
-         * 对等连接状态
+         * 对等连接状态。pending:申请中,available:运行中,expired:已过期,rejected:已拒绝,deleted:已删除
          * @type {string || null}
          */
         this.State = null;
@@ -6874,6 +6881,12 @@ class VpcResource extends  AbstractModel {
          */
         this.VpcPeerLimitToSameRegion = null;
 
+        /**
+         * 整型私有网络ID
+         * @type {number || null}
+         */
+        this.IntVpcId = null;
+
     }
 
     /**
@@ -6906,6 +6919,7 @@ class VpcResource extends  AbstractModel {
         this.CcnServiceNum = 'CcnServiceNum' in params ? params.CcnServiceNum : null;
         this.VpcPeerLimitToAllRegion = 'VpcPeerLimitToAllRegion' in params ? params.VpcPeerLimitToAllRegion : null;
         this.VpcPeerLimitToSameRegion = 'VpcPeerLimitToSameRegion' in params ? params.VpcPeerLimitToSameRegion : null;
+        this.IntVpcId = 'IntVpcId' in params ? params.IntVpcId : null;
 
     }
 }

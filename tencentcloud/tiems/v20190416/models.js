@@ -2714,6 +2714,12 @@ class RsgAsGroup extends  AbstractModel {
          */
         this.InstanceCount = null;
 
+        /**
+         * 伸缩组起始节点数
+         * @type {number || null}
+         */
+        this.DesiredSize = null;
+
     }
 
     /**
@@ -2736,6 +2742,7 @@ class RsgAsGroup extends  AbstractModel {
         this.Status = 'Status' in params ? params.Status : null;
         this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
         this.InstanceCount = 'InstanceCount' in params ? params.InstanceCount : null;
+        this.DesiredSize = 'DesiredSize' in params ? params.DesiredSize : null;
 
     }
 }
