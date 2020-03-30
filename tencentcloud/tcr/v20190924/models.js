@@ -2773,6 +2773,13 @@ class CreateInstanceTokenResponse extends  AbstractModel {
         super();
 
         /**
+         * 用户名
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Username = null;
+
+        /**
          * 访问凭证
          * @type {string || null}
          */
@@ -2799,6 +2806,7 @@ class CreateInstanceTokenResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.Username = 'Username' in params ? params.Username : null;
         this.Token = 'Token' in params ? params.Token : null;
         this.ExpTime = 'ExpTime' in params ? params.ExpTime : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;

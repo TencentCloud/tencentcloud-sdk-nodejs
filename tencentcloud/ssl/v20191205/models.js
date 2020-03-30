@@ -351,14 +351,14 @@ class Certificates extends  AbstractModel {
         super();
 
         /**
-         * 用户UIN。
+         * 用户 UIN。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.OwnerUin = null;
 
         /**
-         * 项目ID。
+         * 项目 ID。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
@@ -372,14 +372,14 @@ class Certificates extends  AbstractModel {
         this.From = null;
 
         /**
-         * 证书套餐类型：1 = GeoTrust DV SSL CA - G3， 2 = TrustAsia TLS RSA CA， 3 = Symantec 增强型企业版(EV Pro)， 4 = Symantec 增强型(EV)， 5 = Symantec 企业型专业版(OV Pro)， 6 = Symantec 企业型(OV)， 7 = Symantec 企业型(OV)通配符， 8 = Geotrust 增强型(EV)， 9 = Geotrust 企业型(OV)， 10 = Geotrust 企业型(OV)通配符， 11 = TrustAsia 域名型多域名 SSL证书， 12 = TrustAsia 域名型(DV)通配符， 13 = TrustAsia 企业型通配符 （OV）SSL证书(D3)， 14 = TrustAsia 企业型 （OV）SSL证书(D3)， 15 = TrustAsia 企业型多域名 （OV）SSL证书(D3)， 16 = TrustAsia 增强型 （EV）SSL证书(D3)， 17 = TrustAsia 增强型多域名（EV）SSL证书(D3)， 18 = GlobalSign 企业型（OV）SSL证， 19 = GlobalSign 企业型通配符 （OV）SSL证书， 20 = GlobalSign 增强型 （EV）SSL证书， 21 = TrustAsia 企业型通配符多域名 （OV）SSL证书(D3)， 22 = GlobalSign 企业型多域名 （OV）SSL证书， 23 = GlobalSign 企业型通配符多域名 （OV）SSL证书， 24 = GlobalSign 增强型多域名（EV） SSL证书。
+         * 证书套餐类型：1 = GeoTrust DV SSL CA - G3， 2 = TrustAsia TLS RSA CA， 3 = Symantec 增强型企业版（EV Pro）， 4 = Symantec 增强型（EV）， 5 = Symantec 企业型专业版（OV Pro）， 6 = Symantec 企业型（OV）， 7 = Symantec 企业型（OV）通配符， 8 = Geotrust 增强型（EV）， 9 = Geotrust 企业型（OV）， 10 = Geotrust 企业型（OV）通配符， 11 = TrustAsia 域名型多域名 SSL 证书， 12 = TrustAsia 域名型（DV）通配符， 13 = TrustAsia 企业型通配符（OV）SSL 证书（D3）， 14 = TrustAsia 企业型（OV）SSL 证书（D3）， 15 = TrustAsia 企业型多域名 （OV）SSL 证书（D3）， 16 = TrustAsia 增强型 （EV）SSL 证书（D3）， 17 = TrustAsia 增强型多域名（EV）SSL 证书（D3）， 18 = GlobalSign 企业型（OV）SSL 证书， 19 = GlobalSign 企业型通配符 （OV）SSL 证书， 20 = GlobalSign 增强型 （EV）SSL 证书， 21 = TrustAsia 企业型通配符多域名（OV）SSL 证书（D3）， 22 = GlobalSign 企业型多域名（OV）SSL 证书， 23 = GlobalSign 企业型通配符多域名（OV）SSL 证书， 24 = GlobalSign 增强型多域名（EV）SSL 证书。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.PackageType = null;
 
         /**
-         * 证书类型（目前支持：CA = 客户端证书，SVR = 服务器证书）。
+         * 证书类型：CA = 客户端证书，SVR = 服务器证书。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
@@ -470,7 +470,7 @@ class Certificates extends  AbstractModel {
         this.InsertTime = null;
 
         /**
-         * 证书ID
+         * 证书 ID。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
@@ -606,7 +606,7 @@ class Certificates extends  AbstractModel {
 }
 
 /**
- * 获取证书列表（DescribeCertificates）返回参数键为 Certificates数组下，key为CertificateExtra 的内容。
+ * 获取证书列表（DescribeCertificates）返回参数键为 Certificates 数组下，key为CertificateExtra 的内容。
  * @class
  */
 class CertificateExtra extends  AbstractModel {
@@ -621,28 +621,28 @@ class CertificateExtra extends  AbstractModel {
         this.DomainNumber = null;
 
         /**
-         * 原始证书ID。
+         * 原始证书 ID。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.OriginCertificateId = null;
 
         /**
-         * 重颁发证书原始ID。
+         * 重颁发证书原始 ID。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.ReplacedBy = null;
 
         /**
-         * 重颁发证书新ID。
+         * 重颁发证书新 ID。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.ReplacedFor = null;
 
         /**
-         * 新订单证书ID。
+         * 新订单证书 ID。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
@@ -958,7 +958,7 @@ class DescribeCertificateResponse extends  AbstractModel {
 }
 
 /**
- * 证书操作日志
+ * 证书操作日志。
  * @class
  */
 class OperationLog extends  AbstractModel {
@@ -966,13 +966,13 @@ class OperationLog extends  AbstractModel {
         super();
 
         /**
-         * 操作证书动作
+         * 操作证书动作。
          * @type {string || null}
          */
         this.Action = null;
 
         /**
-         * 操作时间
+         * 操作时间。
          * @type {string || null}
          */
         this.CreatedOn = null;
@@ -1273,7 +1273,7 @@ class DeleteCertificateResponse extends  AbstractModel {
 }
 
 /**
- * 获取证书列表（DescribeCertificate）返回参数键为 DvAuthDetail的内容。
+ * 获取证书列表（DescribeCertificate）返回参数键为 DvAuthDetail 的内容。
  * @class
  */
 class DvAuthDetail extends  AbstractModel {
@@ -1281,42 +1281,42 @@ class DvAuthDetail extends  AbstractModel {
         super();
 
         /**
-         * DV认证密钥。
+         * DV 认证密钥。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.DvAuthKey = null;
 
         /**
-         * DV认证值。
+         * DV 认证值。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.DvAuthValue = null;
 
         /**
-         * DV认证值域名。
+         * DV 认证值域名。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.DvAuthDomain = null;
 
         /**
-         * DV认证值路径。
+         * DV 认证值路径。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.DvAuthPath = null;
 
         /**
-         * DV认证子域名。
+         * DV 认证子域名。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.DvAuthKeySubDomain = null;
 
         /**
-         * DV认证信息。
+         * DV 认证信息。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<DvAuths> || null}
          */
@@ -1393,42 +1393,42 @@ class DvAuths extends  AbstractModel {
         super();
 
         /**
-         * DV认证密钥。
+         * DV 认证密钥。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.DvAuthKey = null;
 
         /**
-         * DV认证值。
+         * DV 认证值。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.DvAuthValue = null;
 
         /**
-         * DV认证值域名。
+         * DV 认证值域名。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.DvAuthDomain = null;
 
         /**
-         * DV认证值路径。
+         * DV 认证值路径。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.DvAuthPath = null;
 
         /**
-         * DV认证子域名，
+         * DV 认证子域名，
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.DvAuthSubDomain = null;
 
         /**
-         * DV认证类型。
+         * DV 认证类型。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
@@ -1517,7 +1517,7 @@ class DescribeCertificateRequest extends  AbstractModel {
 }
 
 /**
- * 获取证书列表（DescribeCertificates）返回参数键为 Certificates下，key为 ProjectInfo的内容。
+ * 获取证书列表（DescribeCertificates）返回参数键为 Certificates 下，key为 ProjectInfo 的内容。
  * @class
  */
 class ProjectInfo extends  AbstractModel {
@@ -1532,7 +1532,7 @@ class ProjectInfo extends  AbstractModel {
         this.ProjectName = null;
 
         /**
-         * 项目创建用户UIN。
+         * 项目创建用户 UIN。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
@@ -1553,14 +1553,14 @@ class ProjectInfo extends  AbstractModel {
         this.ProjectResume = null;
 
         /**
-         * 用户UIN。
+         * 用户 UIN。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.OwnerUin = null;
 
         /**
-         * 项目ID。
+         * 项目 ID。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
@@ -2381,7 +2381,7 @@ class SubmitCertificateInformationRequest extends  AbstractModel {
 }
 
 /**
- * 获取证书列表（DescribeCertificate）返回参数键为 SubmittedData的内容。
+ * 获取证书列表（DescribeCertificate）返回参数键为 SubmittedData 的内容。
  * @class
  */
 class SubmittedData extends  AbstractModel {
@@ -2389,14 +2389,14 @@ class SubmittedData extends  AbstractModel {
         super();
 
         /**
-         * CSR类型，（online = 在线生成CSR，parse = 粘贴CSR）。
+         * CSR 类型，（online = 在线生成CSR，parse = 粘贴 CSR）。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.CsrType = null;
 
         /**
-         * CSR内容。
+         * CSR 内容。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
@@ -2410,7 +2410,7 @@ class SubmittedData extends  AbstractModel {
         this.CertificateDomain = null;
 
         /**
-         * DNS信息。
+         * DNS 信息。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<string> || null}
          */

@@ -1603,6 +1603,18 @@ class DBInstance extends  AbstractModel {
          */
         this.Type = null;
 
+        /**
+         * 用户的AppId
+         * @type {number || null}
+         */
+        this.AppId = null;
+
+        /**
+         * 实例的Uid
+         * @type {number || null}
+         */
+        this.Uid = null;
+
     }
 
     /**
@@ -1644,6 +1656,8 @@ class DBInstance extends  AbstractModel {
             }
         }
         this.Type = 'Type' in params ? params.Type : null;
+        this.AppId = 'AppId' in params ? params.AppId : null;
+        this.Uid = 'Uid' in params ? params.Uid : null;
 
     }
 }
@@ -3590,6 +3604,12 @@ class Xlog extends  AbstractModel {
          */
         this.ExternalAddr = null;
 
+        /**
+         * 备份文件大小
+         * @type {number || null}
+         */
+        this.Size = null;
+
     }
 
     /**
@@ -3604,6 +3624,7 @@ class Xlog extends  AbstractModel {
         this.EndTime = 'EndTime' in params ? params.EndTime : null;
         this.InternalAddr = 'InternalAddr' in params ? params.InternalAddr : null;
         this.ExternalAddr = 'ExternalAddr' in params ? params.ExternalAddr : null;
+        this.Size = 'Size' in params ? params.Size : null;
 
     }
 }
