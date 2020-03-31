@@ -7735,36 +7735,72 @@ class DescribeAdaptiveDynamicStreamingTemplatesRequest extends  AbstractModel {
 }
 
 /**
- * 图片水印模板输入参数
+ * ModifyEventNotificationConfigForConsole请求参数结构体
  * @class
  */
-class ImageWatermarkInput extends  AbstractModel {
+class ModifyEventNotificationConfigForConsoleRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 水印图片 [Base64](https://tools.ietf.org/html/rfc4648) 编码后的字符串。支持 jpeg、png 图片格式。
+         * 接收事件通知的方式。默认 "PUSH" 为[ HTTP 回调通知](https://cloud.tencent.com/document/product/266/7829#http.E5.9B.9E.E8.B0.83)，"PULL" 为[基于消息队列的可靠通知](https://cloud.tencent.com/document/product/266/7829#.E5.9F.BA.E4.BA.8E.E6.B6.88.E6.81.AF.E9.98.9F.E5.88.97.E7.9A.84.E5.8F.AF.E9.9D.A0.E9.80.9A.E7.9F.A5)。
          * @type {string || null}
          */
-        this.ImageContent = null;
+        this.Mode = null;
 
         /**
-         * 水印的宽度。支持 %、px 两种格式：
-<li>当字符串以 % 结尾，表示水印 Width 为视频宽度的百分比大小，如 10% 表示 Width 为视频宽度的 10%；</li>
-<li>当字符串以 px 结尾，表示水印 Width 单位为像素，如 100px 表示 Width 为 100 像素。</li>
-默认值：10%。
+         * 采用[ HTTP 回调通知](https://cloud.tencent.com/document/product/266/7829#http.E5.9B.9E.E8.B0.83)接收方式时，用于接收 V3 版本事件通知的地址。
          * @type {string || null}
          */
-        this.Width = null;
+        this.NotificationUrlV3 = null;
 
         /**
-         * 水印的高度。支持 %、px 两种格式：
-<li>当字符串以 % 结尾，表示水印 Height 为视频高度的百分比大小，如 10% 表示 Height 为视频高度的 10%；</li>
-<li>当字符串以 px 结尾，表示水印 Width 单位为像素，如 100px 表示 Width 为 100 像素。</li>
-默认值：0px，表示 Height 按照原始水印图片的宽高比缩放。
+         * 采用[ HTTP 回调通知](https://cloud.tencent.com/document/product/266/7829#http.E5.9B.9E.E8.B0.83)接收方式时，用于接收 V2 版本事件通知的地址。
          * @type {string || null}
          */
-        this.Height = null;
+        this.NotificationUrlV2 = null;
+
+        /**
+         * 是否接收[视频上传完成](https://cloud.tencent.com/document/product/266/7830)事件通知， 默认 "OFF" 为忽略该事件通知，"ON" 为接收事件通知。
+         * @type {string || null}
+         */
+        this.UploadMediaCompleteEventSwitch = null;
+
+        /**
+         * 是否接收[视频转码完成](https://cloud.tencent.com/document/product/266/7832)事件通知， 默认 "OFF" 为忽略该事件通知，"ON" 为接收事件通知。
+         * @type {string || null}
+         */
+        this.TranscodeCompleteEventSwitch = null;
+
+        /**
+         * 是否接收[指定时间点截图完成](https://cloud.tencent.com/document/product/266/8105)事件通知，  默认 "OFF" 为忽略该事件通知，"ON" 为接收事件通知。
+         * @type {string || null}
+         */
+        this.CreateSnapshotByTimeOffsetCompleteEventSwitch = null;
+
+        /**
+         * 是否接收[视频截取雪碧图完成](https://cloud.tencent.com/document/product/266/8104)事件通知，  默认 "OFF" 为忽略该事件通知，"ON" 为接收事件通知。
+         * @type {string || null}
+         */
+        this.CreateImageSpriteCompleteEventSwitch = null;
+
+        /**
+         * 是否接收[视频拼接完成](https://cloud.tencent.com/document/product/266/7834)事件通知，  默认 "OFF" 为忽略该事件通知，"ON" 为接收事件通知。
+         * @type {string || null}
+         */
+        this.ConcatMediaCompleteEventSwitch = null;
+
+        /**
+         * 是否接收[视频删除完成](https://cloud.tencent.com/document/product/266/13434)事件通知，  默认 "OFF" 为忽略该事件通知，"ON" 为接收事件通知。
+         * @type {string || null}
+         */
+        this.DeleteMediaCompleteEventSwitch = null;
+
+        /**
+         * 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
+         * @type {number || null}
+         */
+        this.SubAppId = null;
 
     }
 
@@ -7775,9 +7811,16 @@ class ImageWatermarkInput extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ImageContent = 'ImageContent' in params ? params.ImageContent : null;
-        this.Width = 'Width' in params ? params.Width : null;
-        this.Height = 'Height' in params ? params.Height : null;
+        this.Mode = 'Mode' in params ? params.Mode : null;
+        this.NotificationUrlV3 = 'NotificationUrlV3' in params ? params.NotificationUrlV3 : null;
+        this.NotificationUrlV2 = 'NotificationUrlV2' in params ? params.NotificationUrlV2 : null;
+        this.UploadMediaCompleteEventSwitch = 'UploadMediaCompleteEventSwitch' in params ? params.UploadMediaCompleteEventSwitch : null;
+        this.TranscodeCompleteEventSwitch = 'TranscodeCompleteEventSwitch' in params ? params.TranscodeCompleteEventSwitch : null;
+        this.CreateSnapshotByTimeOffsetCompleteEventSwitch = 'CreateSnapshotByTimeOffsetCompleteEventSwitch' in params ? params.CreateSnapshotByTimeOffsetCompleteEventSwitch : null;
+        this.CreateImageSpriteCompleteEventSwitch = 'CreateImageSpriteCompleteEventSwitch' in params ? params.CreateImageSpriteCompleteEventSwitch : null;
+        this.ConcatMediaCompleteEventSwitch = 'ConcatMediaCompleteEventSwitch' in params ? params.ConcatMediaCompleteEventSwitch : null;
+        this.DeleteMediaCompleteEventSwitch = 'DeleteMediaCompleteEventSwitch' in params ? params.DeleteMediaCompleteEventSwitch : null;
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
 
     }
 }
@@ -11743,6 +11786,34 @@ class ComposeMediaTaskInput extends  AbstractModel {
             obj.deserialize(params.Output)
             this.Output = obj;
         }
+
+    }
+}
+
+/**
+ * ModifyEventNotificationConfigForConsole返回参数结构体
+ * @class
+ */
+class ModifyEventNotificationConfigForConsoleResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -25042,6 +25113,54 @@ class MediaAiAnalysisFrameTagItem extends  AbstractModel {
 }
 
 /**
+ * 图片水印模板输入参数
+ * @class
+ */
+class ImageWatermarkInput extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 水印图片 [Base64](https://tools.ietf.org/html/rfc4648) 编码后的字符串。支持 jpeg、png 图片格式。
+         * @type {string || null}
+         */
+        this.ImageContent = null;
+
+        /**
+         * 水印的宽度。支持 %、px 两种格式：
+<li>当字符串以 % 结尾，表示水印 Width 为视频宽度的百分比大小，如 10% 表示 Width 为视频宽度的 10%；</li>
+<li>当字符串以 px 结尾，表示水印 Width 单位为像素，如 100px 表示 Width 为 100 像素。</li>
+默认值：10%。
+         * @type {string || null}
+         */
+        this.Width = null;
+
+        /**
+         * 水印的高度。支持 %、px 两种格式：
+<li>当字符串以 % 结尾，表示水印 Height 为视频高度的百分比大小，如 10% 表示 Height 为视频高度的 10%；</li>
+<li>当字符串以 px 结尾，表示水印 Width 单位为像素，如 100px 表示 Width 为 100 像素。</li>
+默认值：0px，表示 Height 按照原始水印图片的宽高比缩放。
+         * @type {string || null}
+         */
+        this.Height = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ImageContent = 'ImageContent' in params ? params.ImageContent : null;
+        this.Width = 'Width' in params ? params.Width : null;
+        this.Height = 'Height' in params ? params.Height : null;
+
+    }
+}
+
+/**
  * 对视频做采样截图任务输入参数类型
  * @class
  */
@@ -26510,7 +26629,7 @@ module.exports = {
     MediaMiniProgramReviewInfo: MediaMiniProgramReviewInfo,
     ForbidMediaDistributionResponse: ForbidMediaDistributionResponse,
     DescribeAdaptiveDynamicStreamingTemplatesRequest: DescribeAdaptiveDynamicStreamingTemplatesRequest,
-    ImageWatermarkInput: ImageWatermarkInput,
+    ModifyEventNotificationConfigForConsoleRequest: ModifyEventNotificationConfigForConsoleRequest,
     ObjectConfigureInfo: ObjectConfigureInfo,
     AsrFullTextConfigureInfoForUpdate: AsrFullTextConfigureInfoForUpdate,
     AiRecognitionTaskHeadTailResult: AiRecognitionTaskHeadTailResult,
@@ -26587,6 +26706,7 @@ module.exports = {
     HeadTailConfigureInfoForUpdate: HeadTailConfigureInfoForUpdate,
     TranscodePlayInfo2017: TranscodePlayInfo2017,
     ComposeMediaTaskInput: ComposeMediaTaskInput,
+    ModifyEventNotificationConfigForConsoleResponse: ModifyEventNotificationConfigForConsoleResponse,
     AnimatedGraphicTaskInput: AnimatedGraphicTaskInput,
     MosaicInput: MosaicInput,
     AIAnalysisTemplateItem: AIAnalysisTemplateItem,
@@ -26815,6 +26935,7 @@ module.exports = {
     DeleteSnapshotByTimeOffsetTemplateRequest: DeleteSnapshotByTimeOffsetTemplateRequest,
     DescribeAnimatedGraphicsTemplatesResponse: DescribeAnimatedGraphicsTemplatesResponse,
     MediaAiAnalysisFrameTagItem: MediaAiAnalysisFrameTagItem,
+    ImageWatermarkInput: ImageWatermarkInput,
     SampleSnapshotTaskInput: SampleSnapshotTaskInput,
     TerrorismConfigureInfo: TerrorismConfigureInfo,
     PoliticalAsrReviewTemplateInfo: PoliticalAsrReviewTemplateInfo,

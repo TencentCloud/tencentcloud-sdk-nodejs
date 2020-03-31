@@ -885,6 +885,7 @@ class TaskSimpleInfo extends  AbstractModel {
         /**
          * 任务类型，包含：
 <li> WorkflowTask：工作流处理任务；</li>
+<li> EditMediaTask：视频编辑任务；</li>
 <li> LiveProcessTask：直播处理任务。</li>
          * @type {string || null}
          */
@@ -937,6 +938,7 @@ class DescribeTaskDetailResponse extends  AbstractModel {
         /**
          * 任务类型，目前取值有：
 <li>WorkflowTask：视频工作流处理任务。</li>
+<li>EditMediaTask：视频编辑任务。</li>
 <li>LiveStreamProcessTask：直播流处理任务。</li>
          * @type {string || null}
          */
@@ -975,6 +977,13 @@ class DescribeTaskDetailResponse extends  AbstractModel {
          * @type {WorkflowTask || null}
          */
         this.WorkflowTask = null;
+
+        /**
+         * 视频编辑任务信息，仅当 TaskType 为 EditMediaTask，该字段有值。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {EditMediaTask || null}
+         */
+        this.EditMediaTask = null;
 
         /**
          * 直播流处理任务信息，仅当 TaskType 为 LiveStreamProcessTask，该字段有值。
@@ -1033,6 +1042,12 @@ class DescribeTaskDetailResponse extends  AbstractModel {
             let obj = new WorkflowTask();
             obj.deserialize(params.WorkflowTask)
             this.WorkflowTask = obj;
+        }
+
+        if (params.EditMediaTask) {
+            let obj = new EditMediaTask();
+            obj.deserialize(params.EditMediaTask)
+            this.EditMediaTask = obj;
         }
 
         if (params.LiveStreamProcessTask) {
@@ -2976,25 +2991,46 @@ class SvgWatermarkInputForUpdate extends  AbstractModel {
 }
 
 /**
- * 输入规则，当上传视频命中该规则时，即触发工作流。
+ * 画面鉴恐任务控制参数。
  * @class
  */
-class WorkflowTrigger extends  AbstractModel {
+class TerrorismImgReviewTemplateInfoForUpdate extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 触发器的类型，目前仅支持 CosFileUpload。
+         * 画面鉴恐任务开关，可选值：
+<li>ON：开启画面鉴恐任务；</li>
+<li>OFF：关闭画面鉴恐任务。</li>
          * @type {string || null}
          */
-        this.Type = null;
+        this.Switch = null;
 
         /**
-         * 当 Type 为 CosFileUpload 时必填且有效，为 COS 触发规则。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {CosFileUploadTrigger || null}
+         * 画面鉴恐过滤标签，审核结果包含选择的标签则返回结果，如果过滤标签为空，则审核结果全部返回，可选值为：
+<li>guns：武器枪支；</li>
+<li>crowd：人群聚集；</li>
+<li>bloody：血腥画面；</li>
+<li>police：警察部队；</li>
+<li>banners：暴恐旗帜；</li>
+<li>militant：武装分子；</li>
+<li>explosion：爆炸火灾；</li>
+<li>terrorists：暴恐人物。</li>
+         * @type {Array.<string> || null}
          */
-        this.CosFileUploadTrigger = null;
+        this.LabelSet = null;
+
+        /**
+         * 判定涉嫌违规的分数阈值，当智能审核达到该分数以上，认为涉嫌违规。取值范围：0~100。
+         * @type {number || null}
+         */
+        this.BlockConfidence = null;
+
+        /**
+         * 判定需人工复核是否违规的分数阈值，当智能审核达到该分数以上，认为需人工复核。取值范围：0~100。
+         * @type {number || null}
+         */
+        this.ReviewConfidence = null;
 
     }
 
@@ -3005,13 +3041,10 @@ class WorkflowTrigger extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Type = 'Type' in params ? params.Type : null;
-
-        if (params.CosFileUploadTrigger) {
-            let obj = new CosFileUploadTrigger();
-            obj.deserialize(params.CosFileUploadTrigger)
-            this.CosFileUploadTrigger = obj;
-        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+        this.LabelSet = 'LabelSet' in params ? params.LabelSet : null;
+        this.BlockConfidence = 'BlockConfidence' in params ? params.BlockConfidence : null;
+        this.ReviewConfidence = 'ReviewConfidence' in params ? params.ReviewConfidence : null;
 
     }
 }
@@ -3202,30 +3235,54 @@ class AiReviewTerrorismOcrTaskOutput extends  AbstractModel {
 }
 
 /**
- * 点播文件指定时间点截图信息
+ * EditMedia请求参数结构体
  * @class
  */
-class MediaSnapshotByTimeOffsetItem extends  AbstractModel {
+class EditMediaRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 指定时间点截图规格，参见[指定时间点截图参数模板](https://cloud.tencent.com/document/product/266/33480#.E6.97.B6.E9.97.B4.E7.82.B9.E6.88.AA.E5.9B.BE.E6.A8.A1.E6.9D.BF)。
-         * @type {number || null}
+         * 输入的视频文件信息。
+         * @type {Array.<EditMediaFileInfo> || null}
          */
-        this.Definition = null;
+        this.FileInfos = null;
 
         /**
-         * 同一规格的截图信息集合，每个元素代表一张截图。
-         * @type {Array.<MediaSnapshotByTimePicInfoItem> || null}
-         */
-        this.PicInfoSet = null;
-
-        /**
-         * 指定时间点截图文件的存储位置。
+         * 视频处理输出文件的目标存储。
          * @type {TaskOutputStorage || null}
          */
-        this.Storage = null;
+        this.OutputStorage = null;
+
+        /**
+         * 视频处理输出文件的目标路径。
+         * @type {string || null}
+         */
+        this.OutputObjectPath = null;
+
+        /**
+         * 任务的事件通知信息，不填代表不获取事件通知。
+         * @type {TaskNotifyConfig || null}
+         */
+        this.TaskNotifyConfig = null;
+
+        /**
+         * 任务优先级，数值越大优先级越高，取值范围是-10到 10，不填代表0。
+         * @type {number || null}
+         */
+        this.TasksPriority = null;
+
+        /**
+         * 用于去重的识别码，如果七天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。
+         * @type {string || null}
+         */
+        this.SessionId = null;
+
+        /**
+         * 来源上下文，用于透传用户请求信息，任务流状态变更回调将返回该字段值，最长 1000 个字符。
+         * @type {string || null}
+         */
+        this.SessionContext = null;
 
     }
 
@@ -3236,22 +3293,31 @@ class MediaSnapshotByTimeOffsetItem extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Definition = 'Definition' in params ? params.Definition : null;
 
-        if (params.PicInfoSet) {
-            this.PicInfoSet = new Array();
-            for (let z in params.PicInfoSet) {
-                let obj = new MediaSnapshotByTimePicInfoItem();
-                obj.deserialize(params.PicInfoSet[z]);
-                this.PicInfoSet.push(obj);
+        if (params.FileInfos) {
+            this.FileInfos = new Array();
+            for (let z in params.FileInfos) {
+                let obj = new EditMediaFileInfo();
+                obj.deserialize(params.FileInfos[z]);
+                this.FileInfos.push(obj);
             }
         }
 
-        if (params.Storage) {
+        if (params.OutputStorage) {
             let obj = new TaskOutputStorage();
-            obj.deserialize(params.Storage)
-            this.Storage = obj;
+            obj.deserialize(params.OutputStorage)
+            this.OutputStorage = obj;
         }
+        this.OutputObjectPath = 'OutputObjectPath' in params ? params.OutputObjectPath : null;
+
+        if (params.TaskNotifyConfig) {
+            let obj = new TaskNotifyConfig();
+            obj.deserialize(params.TaskNotifyConfig)
+            this.TaskNotifyConfig = obj;
+        }
+        this.TasksPriority = 'TasksPriority' in params ? params.TasksPriority : null;
+        this.SessionId = 'SessionId' in params ? params.SessionId : null;
+        this.SessionContext = 'SessionContext' in params ? params.SessionContext : null;
 
     }
 }
@@ -3969,6 +4035,61 @@ class MediaInputInfo extends  AbstractModel {
             let obj = new CosInputInfo();
             obj.deserialize(params.CosInputInfo)
             this.CosInputInfo = obj;
+        }
+
+    }
+}
+
+/**
+ * 点播文件指定时间点截图信息
+ * @class
+ */
+class MediaSnapshotByTimeOffsetItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 指定时间点截图规格，参见[指定时间点截图参数模板](https://cloud.tencent.com/document/product/266/33480#.E6.97.B6.E9.97.B4.E7.82.B9.E6.88.AA.E5.9B.BE.E6.A8.A1.E6.9D.BF)。
+         * @type {number || null}
+         */
+        this.Definition = null;
+
+        /**
+         * 同一规格的截图信息集合，每个元素代表一张截图。
+         * @type {Array.<MediaSnapshotByTimePicInfoItem> || null}
+         */
+        this.PicInfoSet = null;
+
+        /**
+         * 指定时间点截图文件的存储位置。
+         * @type {TaskOutputStorage || null}
+         */
+        this.Storage = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Definition = 'Definition' in params ? params.Definition : null;
+
+        if (params.PicInfoSet) {
+            this.PicInfoSet = new Array();
+            for (let z in params.PicInfoSet) {
+                let obj = new MediaSnapshotByTimePicInfoItem();
+                obj.deserialize(params.PicInfoSet[z]);
+                this.PicInfoSet.push(obj);
+            }
+        }
+
+        if (params.Storage) {
+            let obj = new TaskOutputStorage();
+            obj.deserialize(params.Storage)
+            this.Storage = obj;
         }
 
     }
@@ -6936,6 +7057,47 @@ class AiContentReviewTaskInput extends  AbstractModel {
             return;
         }
         this.Definition = 'Definition' in params ? params.Definition : null;
+
+    }
+}
+
+/**
+ * 输入规则，当上传视频命中该规则时，即触发工作流。
+ * @class
+ */
+class WorkflowTrigger extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 触发器的类型，目前仅支持 CosFileUpload。
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * 当 Type 为 CosFileUpload 时必填且有效，为 COS 触发规则。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {CosFileUploadTrigger || null}
+         */
+        this.CosFileUploadTrigger = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Type = 'Type' in params ? params.Type : null;
+
+        if (params.CosFileUploadTrigger) {
+            let obj = new CosFileUploadTrigger();
+            obj.deserialize(params.CosFileUploadTrigger)
+            this.CosFileUploadTrigger = obj;
+        }
 
     }
 }
@@ -9926,46 +10088,24 @@ class ModifyAIAnalysisTemplateResponse extends  AbstractModel {
 }
 
 /**
- * 画面鉴恐任务控制参数。
+ * 编辑视频任务的输出
  * @class
  */
-class TerrorismImgReviewTemplateInfoForUpdate extends  AbstractModel {
+class EditMediaTaskOutput extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 画面鉴恐任务开关，可选值：
-<li>ON：开启画面鉴恐任务；</li>
-<li>OFF：关闭画面鉴恐任务。</li>
+         * 编辑后文件的目标存储。
+         * @type {TaskOutputStorage || null}
+         */
+        this.OutputStorage = null;
+
+        /**
+         * 编辑后的视频文件路径。
          * @type {string || null}
          */
-        this.Switch = null;
-
-        /**
-         * 画面鉴恐过滤标签，审核结果包含选择的标签则返回结果，如果过滤标签为空，则审核结果全部返回，可选值为：
-<li>guns：武器枪支；</li>
-<li>crowd：人群聚集；</li>
-<li>bloody：血腥画面；</li>
-<li>police：警察部队；</li>
-<li>banners：暴恐旗帜；</li>
-<li>militant：武装分子；</li>
-<li>explosion：爆炸火灾；</li>
-<li>terrorists：暴恐人物。</li>
-         * @type {Array.<string> || null}
-         */
-        this.LabelSet = null;
-
-        /**
-         * 判定涉嫌违规的分数阈值，当智能审核达到该分数以上，认为涉嫌违规。取值范围：0~100。
-         * @type {number || null}
-         */
-        this.BlockConfidence = null;
-
-        /**
-         * 判定需人工复核是否违规的分数阈值，当智能审核达到该分数以上，认为需人工复核。取值范围：0~100。
-         * @type {number || null}
-         */
-        this.ReviewConfidence = null;
+        this.Path = null;
 
     }
 
@@ -9976,10 +10116,13 @@ class TerrorismImgReviewTemplateInfoForUpdate extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Switch = 'Switch' in params ? params.Switch : null;
-        this.LabelSet = 'LabelSet' in params ? params.LabelSet : null;
-        this.BlockConfidence = 'BlockConfidence' in params ? params.BlockConfidence : null;
-        this.ReviewConfidence = 'ReviewConfidence' in params ? params.ReviewConfidence : null;
+
+        if (params.OutputStorage) {
+            let obj = new TaskOutputStorage();
+            obj.deserialize(params.OutputStorage)
+            this.OutputStorage = obj;
+        }
+        this.Path = 'Path' in params ? params.Path : null;
 
     }
 }
@@ -10252,6 +10395,53 @@ class DeleteTranscodeTemplateResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 图片水印模板
+ * @class
+ */
+class ImageWatermarkTemplate extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 水印图片地址。
+         * @type {string || null}
+         */
+        this.ImageUrl = null;
+
+        /**
+         * 水印的宽度。支持 %、px 两种格式：
+<li>当字符串以 % 结尾，表示水印 Width 为视频宽度的百分比大小，如 10% 表示 Width 为视频宽度的 10%；</li>
+<li>当字符串以 px 结尾，表示水印 Width 单位为像素，如 100px 表示 Width 为 100 像素。</li>
+         * @type {string || null}
+         */
+        this.Width = null;
+
+        /**
+         * 水印的高度。支持 %、px 两种格式：
+<li>当字符串以 % 结尾，表示水印 Height 为视频高度的百分比大小，如 10% 表示 Height 为视频高度的 10%；</li>
+<li>当字符串以 px 结尾，表示水印 Width 单位为像素，如 100px 表示 Width 为 100 像素；</li>
+0px：表示 Height 按照 Width 对视频宽度的比例缩放。
+         * @type {string || null}
+         */
+        this.Height = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ImageUrl = 'ImageUrl' in params ? params.ImageUrl : null;
+        this.Width = 'Width' in params ? params.Width : null;
+        this.Height = 'Height' in params ? params.Height : null;
 
     }
 }
@@ -10613,6 +10803,84 @@ class CreateSnapshotByTimeOffsetTemplateRequest extends  AbstractModel {
         this.Format = 'Format' in params ? params.Format : null;
         this.Comment = 'Comment' in params ? params.Comment : null;
         this.FillType = 'FillType' in params ? params.FillType : null;
+
+    }
+}
+
+/**
+ * 编辑视频任务信息
+ * @class
+ */
+class EditMediaTask extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 任务 ID。
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * 任务状态，取值：
+<li>PROCESSING：处理中；</li>
+<li>FINISH：已完成。</li>
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * 错误码
+<li>0：成功；</li>
+<li>其他值：失败。</li>
+         * @type {number || null}
+         */
+        this.ErrCode = null;
+
+        /**
+         * 错误信息。
+         * @type {string || null}
+         */
+        this.Message = null;
+
+        /**
+         * 视频编辑任务的输入。
+         * @type {EditMediaTaskInput || null}
+         */
+        this.Input = null;
+
+        /**
+         * 视频编辑任务的输出。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {EditMediaTaskOutput || null}
+         */
+        this.Output = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.ErrCode = 'ErrCode' in params ? params.ErrCode : null;
+        this.Message = 'Message' in params ? params.Message : null;
+
+        if (params.Input) {
+            let obj = new EditMediaTaskInput();
+            obj.deserialize(params.Input)
+            this.Input = obj;
+        }
+
+        if (params.Output) {
+            let obj = new EditMediaTaskOutput();
+            obj.deserialize(params.Output)
+            this.Output = obj;
+        }
 
     }
 }
@@ -12156,6 +12424,53 @@ class PoliticalImgReviewTemplateInfoForUpdate extends  AbstractModel {
 }
 
 /**
+ * 编辑点播视频文件信息
+ * @class
+ */
+class EditMediaFileInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 视频的输入信息。
+         * @type {MediaInputInfo || null}
+         */
+        this.InputInfo = null;
+
+        /**
+         * 视频剪辑的起始时间偏移，单位：秒。
+         * @type {number || null}
+         */
+        this.StartTimeOffset = null;
+
+        /**
+         * 视频剪辑的结束时间偏移，单位：秒。
+         * @type {number || null}
+         */
+        this.EndTimeOffset = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.InputInfo) {
+            let obj = new MediaInputInfo();
+            obj.deserialize(params.InputInfo)
+            this.InputInfo = obj;
+        }
+        this.StartTimeOffset = 'StartTimeOffset' in params ? params.StartTimeOffset : null;
+        this.EndTimeOffset = 'EndTimeOffset' in params ? params.EndTimeOffset : null;
+
+    }
+}
+
+/**
  * 智能封面信息
  * @class
  */
@@ -12624,6 +12939,7 @@ class ParseNotificationResponse extends  AbstractModel {
         /**
          * 支持事件类型，目前取值有：
 <li>WorkflowTask：视频工作流处理任务。</li>
+<li>EditMediaTask：视频编辑任务。</li>
          * @type {string || null}
          */
         this.EventType = null;
@@ -12634,6 +12950,13 @@ class ParseNotificationResponse extends  AbstractModel {
          * @type {WorkflowTask || null}
          */
         this.WorkflowTaskEvent = null;
+
+        /**
+         * 视频编辑任务信息，仅当 TaskType 为 EditMediaTask，该字段有值。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {EditMediaTask || null}
+         */
+        this.EditMediaTaskEvent = null;
 
         /**
          * 用于去重的识别码，如果七天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长50个字符，不带或者带空字符串表示不做去重。
@@ -12668,6 +12991,12 @@ class ParseNotificationResponse extends  AbstractModel {
             let obj = new WorkflowTask();
             obj.deserialize(params.WorkflowTaskEvent)
             this.WorkflowTaskEvent = obj;
+        }
+
+        if (params.EditMediaTaskEvent) {
+            let obj = new EditMediaTask();
+            obj.deserialize(params.EditMediaTaskEvent)
+            this.EditMediaTaskEvent = obj;
         }
         this.SessionId = 'SessionId' in params ? params.SessionId : null;
         this.SessionContext = 'SessionContext' in params ? params.SessionContext : null;
@@ -14008,35 +14337,18 @@ class AiRecognitionTaskOcrFullTextResultOutput extends  AbstractModel {
 }
 
 /**
- * 图片水印模板
+ * 编辑视频任务的输入。
  * @class
  */
-class ImageWatermarkTemplate extends  AbstractModel {
+class EditMediaTaskInput extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 水印图片地址。
-         * @type {string || null}
+         * 输入的视频文件信息。
+         * @type {Array.<EditMediaFileInfo> || null}
          */
-        this.ImageUrl = null;
-
-        /**
-         * 水印的宽度。支持 %、px 两种格式：
-<li>当字符串以 % 结尾，表示水印 Width 为视频宽度的百分比大小，如 10% 表示 Width 为视频宽度的 10%；</li>
-<li>当字符串以 px 结尾，表示水印 Width 单位为像素，如 100px 表示 Width 为 100 像素。</li>
-         * @type {string || null}
-         */
-        this.Width = null;
-
-        /**
-         * 水印的高度。支持 %、px 两种格式：
-<li>当字符串以 % 结尾，表示水印 Height 为视频高度的百分比大小，如 10% 表示 Height 为视频高度的 10%；</li>
-<li>当字符串以 px 结尾，表示水印 Width 单位为像素，如 100px 表示 Width 为 100 像素；</li>
-0px：表示 Height 按照 Width 对视频宽度的比例缩放。
-         * @type {string || null}
-         */
-        this.Height = null;
+        this.FileInfoSet = null;
 
     }
 
@@ -14047,9 +14359,15 @@ class ImageWatermarkTemplate extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ImageUrl = 'ImageUrl' in params ? params.ImageUrl : null;
-        this.Width = 'Width' in params ? params.Width : null;
-        this.Height = 'Height' in params ? params.Height : null;
+
+        if (params.FileInfoSet) {
+            this.FileInfoSet = new Array();
+            for (let z in params.FileInfoSet) {
+                let obj = new EditMediaFileInfo();
+                obj.deserialize(params.FileInfoSet[z]);
+                this.FileInfoSet.push(obj);
+            }
+        }
 
     }
 }
@@ -15739,6 +16057,41 @@ class LiveStreamAiReviewResultInfo extends  AbstractModel {
                 this.ResultSet.push(obj);
             }
         }
+
+    }
+}
+
+/**
+ * EditMedia返回参数结构体
+ * @class
+ */
+class EditMediaResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 编辑视频的任务 ID，可以通过该 ID 查询编辑任务的状态。
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -18502,12 +18855,12 @@ module.exports = {
     AiReviewPoliticalTaskOutput: AiReviewPoliticalTaskOutput,
     AiReviewTaskPoliticalResult: AiReviewTaskPoliticalResult,
     SvgWatermarkInputForUpdate: SvgWatermarkInputForUpdate,
-    WorkflowTrigger: WorkflowTrigger,
+    TerrorismImgReviewTemplateInfoForUpdate: TerrorismImgReviewTemplateInfoForUpdate,
     ProhibitedConfigureInfo: ProhibitedConfigureInfo,
     DeleteAIAnalysisTemplateRequest: DeleteAIAnalysisTemplateRequest,
     PornConfigureInfo: PornConfigureInfo,
     AiReviewTerrorismOcrTaskOutput: AiReviewTerrorismOcrTaskOutput,
-    MediaSnapshotByTimeOffsetItem: MediaSnapshotByTimeOffsetItem,
+    EditMediaRequest: EditMediaRequest,
     SampleSnapshotTemplate: SampleSnapshotTemplate,
     ModifySnapshotByTimeOffsetTemplateRequest: ModifySnapshotByTimeOffsetTemplateRequest,
     ModifySampleSnapshotTemplateRequest: ModifySampleSnapshotTemplateRequest,
@@ -18518,6 +18871,7 @@ module.exports = {
     ImageWatermarkInputForUpdate: ImageWatermarkInputForUpdate,
     DescribeAIAnalysisTemplatesRequest: DescribeAIAnalysisTemplatesRequest,
     MediaInputInfo: MediaInputInfo,
+    MediaSnapshotByTimeOffsetItem: MediaSnapshotByTimeOffsetItem,
     AiReviewTaskTerrorismOcrResult: AiReviewTaskTerrorismOcrResult,
     MediaProcessTaskImageSpriteResult: MediaProcessTaskImageSpriteResult,
     CreateWorkflowRequest: CreateWorkflowRequest,
@@ -18569,6 +18923,7 @@ module.exports = {
     PornConfigureInfoForUpdate: PornConfigureInfoForUpdate,
     AiRecognitionTaskOcrFullTextSegmentTextItem: AiRecognitionTaskOcrFullTextSegmentTextItem,
     AiContentReviewTaskInput: AiContentReviewTaskInput,
+    WorkflowTrigger: WorkflowTrigger,
     WorkflowTask: WorkflowTask,
     DeleteImageSpriteTemplateRequest: DeleteImageSpriteTemplateRequest,
     VideoTemplateInfo: VideoTemplateInfo,
@@ -18621,17 +18976,19 @@ module.exports = {
     AiAnalysisTaskTagResult: AiAnalysisTaskTagResult,
     PornOcrReviewTemplateInfoForUpdate: PornOcrReviewTemplateInfoForUpdate,
     ModifyAIAnalysisTemplateResponse: ModifyAIAnalysisTemplateResponse,
-    TerrorismImgReviewTemplateInfoForUpdate: TerrorismImgReviewTemplateInfoForUpdate,
+    EditMediaTaskOutput: EditMediaTaskOutput,
     ModifyPersonSampleResponse: ModifyPersonSampleResponse,
     ModifyTranscodeTemplateRequest: ModifyTranscodeTemplateRequest,
     NumberFormat: NumberFormat,
     AiAnalysisTaskTagOutput: AiAnalysisTaskTagOutput,
     DeleteTranscodeTemplateResponse: DeleteTranscodeTemplateResponse,
+    ImageWatermarkTemplate: ImageWatermarkTemplate,
     AiReviewTaskPoliticalAsrResult: AiReviewTaskPoliticalAsrResult,
     MediaTranscodeItem: MediaTranscodeItem,
     TagConfigureInfo: TagConfigureInfo,
     DescribePersonSamplesResponse: DescribePersonSamplesResponse,
     CreateSnapshotByTimeOffsetTemplateRequest: CreateSnapshotByTimeOffsetTemplateRequest,
+    EditMediaTask: EditMediaTask,
     TextWatermarkTemplateInputForUpdate: TextWatermarkTemplateInputForUpdate,
     LiveStreamProcessTask: LiveStreamProcessTask,
     ModifySampleSnapshotTemplateResponse: ModifySampleSnapshotTemplateResponse,
@@ -18661,6 +19018,7 @@ module.exports = {
     CreatePersonSampleRequest: CreatePersonSampleRequest,
     AiReviewTaskPornAsrResult: AiReviewTaskPornAsrResult,
     PoliticalImgReviewTemplateInfoForUpdate: PoliticalImgReviewTemplateInfoForUpdate,
+    EditMediaFileInfo: EditMediaFileInfo,
     MediaAiAnalysisCoverItem: MediaAiAnalysisCoverItem,
     UserDefineConfigureInfo: UserDefineConfigureInfo,
     CosInputInfo: CosInputInfo,
@@ -18699,7 +19057,7 @@ module.exports = {
     CreateAIAnalysisTemplateResponse: CreateAIAnalysisTemplateResponse,
     MediaProcessTaskSampleSnapshotResult: MediaProcessTaskSampleSnapshotResult,
     AiRecognitionTaskOcrFullTextResultOutput: AiRecognitionTaskOcrFullTextResultOutput,
-    ImageWatermarkTemplate: ImageWatermarkTemplate,
+    EditMediaTaskInput: EditMediaTaskInput,
     ImageWatermarkInput: ImageWatermarkInput,
     AsrWordsConfigureInfo: AsrWordsConfigureInfo,
     CosFileUploadTrigger: CosFileUploadTrigger,
@@ -18732,6 +19090,7 @@ module.exports = {
     AiReviewPornTaskOutput: AiReviewPornTaskOutput,
     CreateWorkflowResponse: CreateWorkflowResponse,
     LiveStreamAiReviewResultInfo: LiveStreamAiReviewResultInfo,
+    EditMediaResponse: EditMediaResponse,
     AiRecognitionTaskAsrFullTextResult: AiRecognitionTaskAsrFullTextResult,
     PoliticalOcrReviewTemplateInfoForUpdate: PoliticalOcrReviewTemplateInfoForUpdate,
     ModifyAIRecognitionTemplateResponse: ModifyAIRecognitionTemplateResponse,

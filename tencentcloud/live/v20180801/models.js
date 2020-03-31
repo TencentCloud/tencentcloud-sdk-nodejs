@@ -2123,8 +2123,9 @@ class DescribeBillBandwidthAndFluxListRequest extends  AbstractModel {
         /**
          * 可选值：
 Mainland：查询国内数据，
-Oversea：则查询国外数据。
+Oversea：则查询国外数据，
 默认：查询国内+国外的数据。
+注：LEB（快直播）只支持国内+国外数据查询。
          * @type {string || null}
          */
         this.MainlandOrOversea = null;
@@ -2138,6 +2139,12 @@ Oversea：则查询国外数据。
          * @type {number || null}
          */
         this.Granularity = null;
+
+        /**
+         * 服务名称，可选值包括LVB(标准直播)，LEB(快直播)，默认值是LVB。
+         * @type {string || null}
+         */
+        this.ServiceName = null;
 
     }
 
@@ -2153,6 +2160,7 @@ Oversea：则查询国外数据。
         this.PlayDomains = 'PlayDomains' in params ? params.PlayDomains : null;
         this.MainlandOrOversea = 'MainlandOrOversea' in params ? params.MainlandOrOversea : null;
         this.Granularity = 'Granularity' in params ? params.Granularity : null;
+        this.ServiceName = 'ServiceName' in params ? params.ServiceName : null;
 
     }
 }
@@ -5386,8 +5394,8 @@ class DescribeStreamDayPlayInfoListRequest extends  AbstractModel {
         super();
 
         /**
-         * 日期，
-格式：YYYY-mm-dd。
+         * 日期，格式：YYYY-mm-dd。
+第二天凌晨3点出昨天的数据，建议在这个时间点之后查询最新数据。
          * @type {string || null}
          */
         this.DayTime = null;
@@ -5399,7 +5407,7 @@ class DescribeStreamDayPlayInfoListRequest extends  AbstractModel {
         this.PlayDomain = null;
 
         /**
-         * 页号，范围[1,10]，默认值是1。
+         * 页号，范围[1,1000]，默认值是1。
          * @type {number || null}
          */
         this.PageNum = null;

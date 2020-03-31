@@ -359,6 +359,12 @@ class ListGroupsForUserRequest extends  AbstractModel {
          */
         this.Page = null;
 
+        /**
+         * 子账号UIN
+         * @type {number || null}
+         */
+        this.SubUin = null;
+
     }
 
     /**
@@ -371,6 +377,7 @@ class ListGroupsForUserRequest extends  AbstractModel {
         this.Uid = 'Uid' in params ? params.Uid : null;
         this.Rp = 'Rp' in params ? params.Rp : null;
         this.Page = 'Page' in params ? params.Page : null;
+        this.SubUin = 'SubUin' in params ? params.SubUin : null;
 
     }
 }
