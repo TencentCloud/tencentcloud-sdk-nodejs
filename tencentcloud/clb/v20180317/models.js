@@ -688,10 +688,22 @@ class ModifyRuleRequest extends  AbstractModel {
         this.SessionExpireTime = null;
 
         /**
-         * 负载均衡实例与后端服务之间的转发协议，默认HTTP，可取值：HTTP、HTTPS
+         * 负载均衡实例与后端服务之间的转发协议，默认HTTP，可取值：HTTP、HTTPS、TRPC
          * @type {string || null}
          */
         this.ForwardType = null;
+
+        /**
+         * TRPC被调服务器路由，ForwardType为TRPC时必填
+         * @type {string || null}
+         */
+        this.TrpcCallee = null;
+
+        /**
+         * TRPC调用服务接口，ForwardType为TRPC时必填
+         * @type {string || null}
+         */
+        this.TrpcFunc = null;
 
     }
 
@@ -715,6 +727,8 @@ class ModifyRuleRequest extends  AbstractModel {
         this.Scheduler = 'Scheduler' in params ? params.Scheduler : null;
         this.SessionExpireTime = 'SessionExpireTime' in params ? params.SessionExpireTime : null;
         this.ForwardType = 'ForwardType' in params ? params.ForwardType : null;
+        this.TrpcCallee = 'TrpcCallee' in params ? params.TrpcCallee : null;
+        this.TrpcFunc = 'TrpcFunc' in params ? params.TrpcFunc : null;
 
     }
 }

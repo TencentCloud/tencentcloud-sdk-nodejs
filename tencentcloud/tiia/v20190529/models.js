@@ -942,6 +942,13 @@ class Face extends  AbstractModel {
          */
         this.Height = null;
 
+        /**
+         * 公众人物的唯一编号，可以用于区分同名人物、一个人物不同称呼等情况。唯一编号为8个字符构成的字符串。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ID = null;
+
     }
 
     /**
@@ -967,6 +974,7 @@ class Face extends  AbstractModel {
         this.Y = 'Y' in params ? params.Y : null;
         this.Width = 'Width' in params ? params.Width : null;
         this.Height = 'Height' in params ? params.Height : null;
+        this.ID = 'ID' in params ? params.ID : null;
 
     }
 }

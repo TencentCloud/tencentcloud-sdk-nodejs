@@ -9770,6 +9770,13 @@ UNKNOWN，未知状态。
          */
         this.SupportSecurity = null;
 
+        /**
+         * 计费类型:(0:按带宽计费  1:按流量计费）
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.BillingType = null;
+
     }
 
     /**
@@ -9819,6 +9826,7 @@ UNKNOWN，未知状态。
             }
         }
         this.SupportSecurity = 'SupportSecurity' in params ? params.SupportSecurity : null;
+        this.BillingType = 'BillingType' in params ? params.BillingType : null;
 
     }
 }

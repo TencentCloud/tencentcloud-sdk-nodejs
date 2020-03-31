@@ -1150,7 +1150,6 @@ class CreateTrainingJobResponse extends  AbstractModel {
 
         /**
          * 训练任务名称
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.TrainingJobName = null;
@@ -1441,12 +1440,6 @@ class CreateTrainingJobRequest extends  AbstractModel {
         super();
 
         /**
-         * 训练任务名称
-         * @type {string || null}
-         */
-        this.TrainingJobName = null;
-
-        /**
          * 算法镜像配置
          * @type {AlgorithmSpecification || null}
          */
@@ -1471,6 +1464,12 @@ class CreateTrainingJobRequest extends  AbstractModel {
         this.ResourceConfig = null;
 
         /**
+         * 训练任务名称
+         * @type {string || null}
+         */
+        this.TrainingJobName = null;
+
+        /**
          * 中止条件
          * @type {StoppingCondition || null}
          */
@@ -1489,16 +1488,16 @@ class CreateTrainingJobRequest extends  AbstractModel {
         this.HyperParameters = null;
 
         /**
-         * 角色名称
-         * @type {string || null}
-         */
-        this.RoleName = null;
-
-        /**
          * 环境变量配置
          * @type {Array.<EnvConfig> || null}
          */
         this.EnvConfig = null;
+
+        /**
+         * 角色名称
+         * @type {string || null}
+         */
+        this.RoleName = null;
 
     }
 
@@ -1509,7 +1508,6 @@ class CreateTrainingJobRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TrainingJobName = 'TrainingJobName' in params ? params.TrainingJobName : null;
 
         if (params.AlgorithmSpecification) {
             let obj = new AlgorithmSpecification();
@@ -1537,6 +1535,7 @@ class CreateTrainingJobRequest extends  AbstractModel {
             obj.deserialize(params.ResourceConfig)
             this.ResourceConfig = obj;
         }
+        this.TrainingJobName = 'TrainingJobName' in params ? params.TrainingJobName : null;
 
         if (params.StoppingCondition) {
             let obj = new StoppingCondition();
@@ -1550,7 +1549,6 @@ class CreateTrainingJobRequest extends  AbstractModel {
             this.VpcConfig = obj;
         }
         this.HyperParameters = 'HyperParameters' in params ? params.HyperParameters : null;
-        this.RoleName = 'RoleName' in params ? params.RoleName : null;
 
         if (params.EnvConfig) {
             this.EnvConfig = new Array();
@@ -1560,6 +1558,7 @@ class CreateTrainingJobRequest extends  AbstractModel {
                 this.EnvConfig.push(obj);
             }
         }
+        this.RoleName = 'RoleName' in params ? params.RoleName : null;
 
     }
 }

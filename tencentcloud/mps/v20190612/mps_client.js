@@ -70,12 +70,12 @@ const PornImgReviewTemplateInfo = models.PornImgReviewTemplateInfo;
 const AiReviewPoliticalTaskOutput = models.AiReviewPoliticalTaskOutput;
 const AiReviewTaskPoliticalResult = models.AiReviewTaskPoliticalResult;
 const SvgWatermarkInputForUpdate = models.SvgWatermarkInputForUpdate;
-const WorkflowTrigger = models.WorkflowTrigger;
+const TerrorismImgReviewTemplateInfoForUpdate = models.TerrorismImgReviewTemplateInfoForUpdate;
 const ProhibitedConfigureInfo = models.ProhibitedConfigureInfo;
 const DeleteAIAnalysisTemplateRequest = models.DeleteAIAnalysisTemplateRequest;
 const PornConfigureInfo = models.PornConfigureInfo;
 const AiReviewTerrorismOcrTaskOutput = models.AiReviewTerrorismOcrTaskOutput;
-const MediaSnapshotByTimeOffsetItem = models.MediaSnapshotByTimeOffsetItem;
+const EditMediaRequest = models.EditMediaRequest;
 const SampleSnapshotTemplate = models.SampleSnapshotTemplate;
 const ModifySnapshotByTimeOffsetTemplateRequest = models.ModifySnapshotByTimeOffsetTemplateRequest;
 const ModifySampleSnapshotTemplateRequest = models.ModifySampleSnapshotTemplateRequest;
@@ -86,6 +86,7 @@ const LiveStreamAiReviewResultItem = models.LiveStreamAiReviewResultItem;
 const ImageWatermarkInputForUpdate = models.ImageWatermarkInputForUpdate;
 const DescribeAIAnalysisTemplatesRequest = models.DescribeAIAnalysisTemplatesRequest;
 const MediaInputInfo = models.MediaInputInfo;
+const MediaSnapshotByTimeOffsetItem = models.MediaSnapshotByTimeOffsetItem;
 const AiReviewTaskTerrorismOcrResult = models.AiReviewTaskTerrorismOcrResult;
 const MediaProcessTaskImageSpriteResult = models.MediaProcessTaskImageSpriteResult;
 const CreateWorkflowRequest = models.CreateWorkflowRequest;
@@ -137,6 +138,7 @@ const ModifyContentReviewTemplateResponse = models.ModifyContentReviewTemplateRe
 const PornConfigureInfoForUpdate = models.PornConfigureInfoForUpdate;
 const AiRecognitionTaskOcrFullTextSegmentTextItem = models.AiRecognitionTaskOcrFullTextSegmentTextItem;
 const AiContentReviewTaskInput = models.AiContentReviewTaskInput;
+const WorkflowTrigger = models.WorkflowTrigger;
 const WorkflowTask = models.WorkflowTask;
 const DeleteImageSpriteTemplateRequest = models.DeleteImageSpriteTemplateRequest;
 const VideoTemplateInfo = models.VideoTemplateInfo;
@@ -189,17 +191,19 @@ const DescribeAnimatedGraphicsTemplatesRequest = models.DescribeAnimatedGraphics
 const AiAnalysisTaskTagResult = models.AiAnalysisTaskTagResult;
 const PornOcrReviewTemplateInfoForUpdate = models.PornOcrReviewTemplateInfoForUpdate;
 const ModifyAIAnalysisTemplateResponse = models.ModifyAIAnalysisTemplateResponse;
-const TerrorismImgReviewTemplateInfoForUpdate = models.TerrorismImgReviewTemplateInfoForUpdate;
+const EditMediaTaskOutput = models.EditMediaTaskOutput;
 const ModifyPersonSampleResponse = models.ModifyPersonSampleResponse;
 const ModifyTranscodeTemplateRequest = models.ModifyTranscodeTemplateRequest;
 const NumberFormat = models.NumberFormat;
 const AiAnalysisTaskTagOutput = models.AiAnalysisTaskTagOutput;
 const DeleteTranscodeTemplateResponse = models.DeleteTranscodeTemplateResponse;
+const ImageWatermarkTemplate = models.ImageWatermarkTemplate;
 const AiReviewTaskPoliticalAsrResult = models.AiReviewTaskPoliticalAsrResult;
 const MediaTranscodeItem = models.MediaTranscodeItem;
 const TagConfigureInfo = models.TagConfigureInfo;
 const DescribePersonSamplesResponse = models.DescribePersonSamplesResponse;
 const CreateSnapshotByTimeOffsetTemplateRequest = models.CreateSnapshotByTimeOffsetTemplateRequest;
+const EditMediaTask = models.EditMediaTask;
 const TextWatermarkTemplateInputForUpdate = models.TextWatermarkTemplateInputForUpdate;
 const LiveStreamProcessTask = models.LiveStreamProcessTask;
 const ModifySampleSnapshotTemplateResponse = models.ModifySampleSnapshotTemplateResponse;
@@ -229,6 +233,7 @@ const MediaProcessTaskSnapshotByTimeOffsetResult = models.MediaProcessTaskSnapsh
 const CreatePersonSampleRequest = models.CreatePersonSampleRequest;
 const AiReviewTaskPornAsrResult = models.AiReviewTaskPornAsrResult;
 const PoliticalImgReviewTemplateInfoForUpdate = models.PoliticalImgReviewTemplateInfoForUpdate;
+const EditMediaFileInfo = models.EditMediaFileInfo;
 const MediaAiAnalysisCoverItem = models.MediaAiAnalysisCoverItem;
 const UserDefineConfigureInfo = models.UserDefineConfigureInfo;
 const CosInputInfo = models.CosInputInfo;
@@ -267,7 +272,7 @@ const MediaContentReviewPoliticalSegmentItem = models.MediaContentReviewPolitica
 const CreateAIAnalysisTemplateResponse = models.CreateAIAnalysisTemplateResponse;
 const MediaProcessTaskSampleSnapshotResult = models.MediaProcessTaskSampleSnapshotResult;
 const AiRecognitionTaskOcrFullTextResultOutput = models.AiRecognitionTaskOcrFullTextResultOutput;
-const ImageWatermarkTemplate = models.ImageWatermarkTemplate;
+const EditMediaTaskInput = models.EditMediaTaskInput;
 const ImageWatermarkInput = models.ImageWatermarkInput;
 const AsrWordsConfigureInfo = models.AsrWordsConfigureInfo;
 const CosFileUploadTrigger = models.CosFileUploadTrigger;
@@ -300,6 +305,7 @@ const AiAnalysisTaskFrameTagResult = models.AiAnalysisTaskFrameTagResult;
 const AiReviewPornTaskOutput = models.AiReviewPornTaskOutput;
 const CreateWorkflowResponse = models.CreateWorkflowResponse;
 const LiveStreamAiReviewResultInfo = models.LiveStreamAiReviewResultInfo;
+const EditMediaResponse = models.EditMediaResponse;
 const AiRecognitionTaskAsrFullTextResult = models.AiRecognitionTaskAsrFullTextResult;
 const PoliticalOcrReviewTemplateInfoForUpdate = models.PoliticalOcrReviewTemplateInfoForUpdate;
 const ModifyAIRecognitionTemplateResponse = models.ModifyAIRecognitionTemplateResponse;
@@ -406,15 +412,18 @@ class MpsClient extends AbstractClient {
     }
 
     /**
-     * 从 CMQ 获取到消息后，从消息的 msgBody 字段中解析出 MPS 直播流处理事件通知的内容。
-该接口不用于发起网络调用，而是用来帮助生成各个语言平台的 SDK，您可以参考 SDK 的中解析函数的实现事件通知的解析。
-     * @param {ParseLiveStreamProcessNotificationRequest} req
-     * @param {function(string, ParseLiveStreamProcessNotificationResponse):void} cb
+     * 对视频进行编辑（剪辑、拼接等），生成一个新的点播视频。编辑的功能包括：
+
+1. 对一个文件进行剪辑，生成一个新的视频；
+2. 对多个文件进行拼接，生成一个新的视频；
+3. 对多个文件进行剪辑，然后再拼接，生成一个新的视频。
+     * @param {EditMediaRequest} req
+     * @param {function(string, EditMediaResponse):void} cb
      * @public
      */
-    ParseLiveStreamProcessNotification(req, cb) {
-        let resp = new ParseLiveStreamProcessNotificationResponse();
-        this.request("ParseLiveStreamProcessNotification", req, resp, cb);
+    EditMedia(req, cb) {
+        let resp = new EditMediaResponse();
+        this.request("EditMedia", req, resp, cb);
     }
 
     /**
@@ -428,6 +437,18 @@ class MpsClient extends AbstractClient {
     DeleteAIAnalysisTemplate(req, cb) {
         let resp = new DeleteAIAnalysisTemplateResponse();
         this.request("DeleteAIAnalysisTemplate", req, resp, cb);
+    }
+
+    /**
+     * 从 CMQ 获取到消息后，从消息的 msgBody 字段中解析出 MPS 直播流处理事件通知的内容。
+该接口不用于发起网络调用，而是用来帮助生成各个语言平台的 SDK，您可以参考 SDK 的中解析函数的实现事件通知的解析。
+     * @param {ParseLiveStreamProcessNotificationRequest} req
+     * @param {function(string, ParseLiveStreamProcessNotificationResponse):void} cb
+     * @public
+     */
+    ParseLiveStreamProcessNotification(req, cb) {
+        let resp = new ParseLiveStreamProcessNotificationResponse();
+        this.request("ParseLiveStreamProcessNotification", req, resp, cb);
     }
 
     /**
