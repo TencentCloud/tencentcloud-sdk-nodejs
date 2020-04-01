@@ -6054,6 +6054,20 @@ class OsInfo extends  AbstractModel {
          */
         this.MaxPartitionSize = null;
 
+        /**
+         * 黑石版本号
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.OsMinorVersion = null;
+
+        /**
+         * 黑石版本
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.OsMinorClass = null;
+
     }
 
     /**
@@ -6070,6 +6084,8 @@ class OsInfo extends  AbstractModel {
         this.OsClass = 'OsClass' in params ? params.OsClass : null;
         this.ImageTag = 'ImageTag' in params ? params.ImageTag : null;
         this.MaxPartitionSize = 'MaxPartitionSize' in params ? params.MaxPartitionSize : null;
+        this.OsMinorVersion = 'OsMinorVersion' in params ? params.OsMinorVersion : null;
+        this.OsMinorClass = 'OsMinorClass' in params ? params.OsMinorClass : null;
 
     }
 }

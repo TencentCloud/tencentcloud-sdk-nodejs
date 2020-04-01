@@ -5386,12 +5386,6 @@ class UnifiedOrderRequest extends  AbstractModel {
         this.RealChannel = null;
 
         /**
-         * 子订单信息列表，格式：子订单号、子应用ID、金额。 压缩后最长不可超过65535字节(去除空格，换行，制表符等无意义字符)
-         * @type {Array.<UnifiedOrderInSubOrderList> || null}
-         */
-        this.SubOrderList = null;
-
-        /**
          * 原始金额
          * @type {number || null}
          */
@@ -5441,6 +5435,13 @@ class UnifiedOrderRequest extends  AbstractModel {
         this.SubAppId = null;
 
         /**
+         * 子订单信息列表，格式：子订单号、子应用ID、金额。 压缩后最长不可超过65535字节(去除空格，换行，制表符等无意义字符)
+注：接入银行或其他支付渠道服务商模式下，必传
+         * @type {Array.<UnifiedOrderInSubOrderList> || null}
+         */
+        this.SubOrderList = null;
+
+        /**
          * 结算应收金额，单位：分
          * @type {number || null}
          */
@@ -5482,6 +5483,14 @@ class UnifiedOrderRequest extends  AbstractModel {
         this.TotalAmt = 'TotalAmt' in params ? params.TotalAmt : null;
         this.UserId = 'UserId' in params ? params.UserId : null;
         this.RealChannel = 'RealChannel' in params ? params.RealChannel : null;
+        this.OriginalAmt = 'OriginalAmt' in params ? params.OriginalAmt : null;
+        this.MidasSecretId = 'MidasSecretId' in params ? params.MidasSecretId : null;
+        this.MidasSignature = 'MidasSignature' in params ? params.MidasSignature : null;
+        this.CallbackUrl = 'CallbackUrl' in params ? params.CallbackUrl : null;
+        this.Channel = 'Channel' in params ? params.Channel : null;
+        this.Metadata = 'Metadata' in params ? params.Metadata : null;
+        this.Quantity = 'Quantity' in params ? params.Quantity : null;
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
 
         if (params.SubOrderList) {
             this.SubOrderList = new Array();
@@ -5491,14 +5500,6 @@ class UnifiedOrderRequest extends  AbstractModel {
                 this.SubOrderList.push(obj);
             }
         }
-        this.OriginalAmt = 'OriginalAmt' in params ? params.OriginalAmt : null;
-        this.MidasSecretId = 'MidasSecretId' in params ? params.MidasSecretId : null;
-        this.MidasSignature = 'MidasSignature' in params ? params.MidasSignature : null;
-        this.CallbackUrl = 'CallbackUrl' in params ? params.CallbackUrl : null;
-        this.Channel = 'Channel' in params ? params.Channel : null;
-        this.Metadata = 'Metadata' in params ? params.Metadata : null;
-        this.Quantity = 'Quantity' in params ? params.Quantity : null;
-        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
         this.TotalMchIncome = 'TotalMchIncome' in params ? params.TotalMchIncome : null;
         this.TotalPlatformIncome = 'TotalPlatformIncome' in params ? params.TotalPlatformIncome : null;
         this.WxOpenId = 'WxOpenId' in params ? params.WxOpenId : null;

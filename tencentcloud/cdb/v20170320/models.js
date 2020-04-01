@@ -854,6 +854,69 @@ class StopDBImportJobResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeErrorLogData请求参数结构体
+ * @class
+ */
+class DescribeErrorLogDataRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例 ID 。
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 开始时间戳。
+         * @type {number || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * 结束时间戳。
+         * @type {number || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * 要匹配的关键字列表，最多支持15个关键字。
+         * @type {Array.<string> || null}
+         */
+        this.KeyWords = null;
+
+        /**
+         * 分页的返回数量，最大为400。
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 偏移量，默认为0。
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.KeyWords = 'KeyWords' in params ? params.KeyWords : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+
+    }
+}
+
+/**
  * 数据库实例参数
  * @class
  */
@@ -3209,6 +3272,57 @@ class SlaveConfig extends  AbstractModel {
         }
         this.ReplicationMode = 'ReplicationMode' in params ? params.ReplicationMode : null;
         this.Zone = 'Zone' in params ? params.Zone : null;
+
+    }
+}
+
+/**
+ * DescribeErrorLogData返回参数结构体
+ * @class
+ */
+class DescribeErrorLogDataResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 符合条件的记录总数。
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 返回的记录。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<ErrlogItem> || null}
+         */
+        this.Items = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.Items) {
+            this.Items = new Array();
+            for (let z in params.Items) {
+                let obj = new ErrlogItem();
+                obj.deserialize(params.Items[z]);
+                this.Items.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -6912,6 +7026,43 @@ class DescribeUploadedFilesRequest extends  AbstractModel {
         this.Path = 'Path' in params ? params.Path : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
+
+    }
+}
+
+/**
+ * 结构化的错误日志详情
+ * @class
+ */
+class ErrlogItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 错误发生时间。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Timestamp = null;
+
+        /**
+         * 错误详情
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Content = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Timestamp = 'Timestamp' in params ? params.Timestamp : null;
+        this.Content = 'Content' in params ? params.Content : null;
 
     }
 }
@@ -11778,6 +11929,7 @@ module.exports = {
     StopDBImportJobRequest: StopDBImportJobRequest,
     RoWeightValue: RoWeightValue,
     StopDBImportJobResponse: StopDBImportJobResponse,
+    DescribeErrorLogDataRequest: DescribeErrorLogDataRequest,
     Parameter: Parameter,
     DescribeDBInstanceRebootTimeRequest: DescribeDBInstanceRebootTimeRequest,
     DescribeSlowLogsRequest: DescribeSlowLogsRequest,
@@ -11826,6 +11978,7 @@ module.exports = {
     DescribeTasksRequest: DescribeTasksRequest,
     IsolateDBInstanceResponse: IsolateDBInstanceResponse,
     SlaveConfig: SlaveConfig,
+    DescribeErrorLogDataResponse: DescribeErrorLogDataResponse,
     AddTimeWindowRequest: AddTimeWindowRequest,
     ImportRecord: ImportRecord,
     CreateAccountsRequest: CreateAccountsRequest,
@@ -11902,6 +12055,7 @@ module.exports = {
     DescribeBackupOverviewResponse: DescribeBackupOverviewResponse,
     ColumnPrivilege: ColumnPrivilege,
     DescribeUploadedFilesRequest: DescribeUploadedFilesRequest,
+    ErrlogItem: ErrlogItem,
     DescribeDeviceMonitorInfoRequest: DescribeDeviceMonitorInfoRequest,
     DescribeDBPriceRequest: DescribeDBPriceRequest,
     AssociateSecurityGroupsResponse: AssociateSecurityGroupsResponse,

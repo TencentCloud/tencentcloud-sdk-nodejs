@@ -395,14 +395,14 @@ class FuseFaceRequest extends  AbstractModel {
 
         /**
          * 脸型融合比例，数值越高，融合后的脸型越像素材人物。取值范围[0,100] 
-若此参数不填写，则使用人脸融合控制台中脸型参数数值。
+若此参数不填写，则使用人脸融合控制台中脸型参数数值。（换脸版算法暂不支持此参数调整）
          * @type {number || null}
          */
         this.FuseProfileDegree = null;
 
         /**
          * 五官融合比例，数值越高，融合后的五官越像素材人物。取值范围[0,100] 
-若此参数不填写，则使用人脸融合控制台中五官参数数值。
+若此参数不填写，则使用人脸融合控制台中五官参数数值。（换脸版算法暂不支持此参数调整）
          * @type {number || null}
          */
         this.FuseFaceDegree = null;
