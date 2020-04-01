@@ -29,6 +29,7 @@ const DescribeAccountsRequest = models.DescribeAccountsRequest;
 const StopDBImportJobRequest = models.StopDBImportJobRequest;
 const RoWeightValue = models.RoWeightValue;
 const StopDBImportJobResponse = models.StopDBImportJobResponse;
+const DescribeErrorLogDataRequest = models.DescribeErrorLogDataRequest;
 const Parameter = models.Parameter;
 const DescribeDBInstanceRebootTimeRequest = models.DescribeDBInstanceRebootTimeRequest;
 const DescribeSlowLogsRequest = models.DescribeSlowLogsRequest;
@@ -77,6 +78,7 @@ const DeleteDeployGroupsResponse = models.DeleteDeployGroupsResponse;
 const DescribeTasksRequest = models.DescribeTasksRequest;
 const IsolateDBInstanceResponse = models.IsolateDBInstanceResponse;
 const SlaveConfig = models.SlaveConfig;
+const DescribeErrorLogDataResponse = models.DescribeErrorLogDataResponse;
 const AddTimeWindowRequest = models.AddTimeWindowRequest;
 const ImportRecord = models.ImportRecord;
 const CreateAccountsRequest = models.CreateAccountsRequest;
@@ -153,6 +155,7 @@ const UpgradeDBInstanceRequest = models.UpgradeDBInstanceRequest;
 const DescribeBackupOverviewResponse = models.DescribeBackupOverviewResponse;
 const ColumnPrivilege = models.ColumnPrivilege;
 const DescribeUploadedFilesRequest = models.DescribeUploadedFilesRequest;
+const ErrlogItem = models.ErrlogItem;
 const DescribeDeviceMonitorInfoRequest = models.DescribeDeviceMonitorInfoRequest;
 const DescribeDBPriceRequest = models.DescribeDBPriceRequest;
 const AssociateSecurityGroupsResponse = models.AssociateSecurityGroupsResponse;
@@ -462,6 +465,17 @@ class CdbClient extends AbstractClient {
     DescribeDatabases(req, cb) {
         let resp = new DescribeDatabasesResponse();
         this.request("DescribeDatabases", req, resp, cb);
+    }
+
+    /**
+     * 根据检索条件查询实例错误日志详情。只能查询一个月之内的错误日志。
+     * @param {DescribeErrorLogDataRequest} req
+     * @param {function(string, DescribeErrorLogDataResponse):void} cb
+     * @public
+     */
+    DescribeErrorLogData(req, cb) {
+        let resp = new DescribeErrorLogDataResponse();
+        this.request("DescribeErrorLogData", req, resp, cb);
     }
 
     /**

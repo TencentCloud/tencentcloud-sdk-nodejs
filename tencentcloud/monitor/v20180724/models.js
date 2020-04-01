@@ -3917,6 +3917,34 @@ class DescribeBaseMetricsResponse extends  AbstractModel {
 }
 
 /**
+ * SendCustomAlarmMsg返回参数结构体
+ * @class
+ */
+class SendCustomAlarmMsgResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribePolicyConditionList.ConfigManual.PeriodNum
  * @class
  */
@@ -4005,6 +4033,48 @@ class DescribeBindingPolicyObjectListInstance extends  AbstractModel {
         this.Dimensions = 'Dimensions' in params ? params.Dimensions : null;
         this.IsShielded = 'IsShielded' in params ? params.IsShielded : null;
         this.Region = 'Region' in params ? params.Region : null;
+
+    }
+}
+
+/**
+ * SendCustomAlarmMsg请求参数结构体
+ * @class
+ */
+class SendCustomAlarmMsgRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 接口模块名，当前取值monitor
+         * @type {string || null}
+         */
+        this.Module = null;
+
+        /**
+         * 消息策略ID，在云监控自定义消息页面配置
+         * @type {string || null}
+         */
+        this.PolicyId = null;
+
+        /**
+         * 用户想要发送的自定义消息内容
+         * @type {string || null}
+         */
+        this.Msg = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Module = 'Module' in params ? params.Module : null;
+        this.PolicyId = 'PolicyId' in params ? params.PolicyId : null;
+        this.Msg = 'Msg' in params ? params.Msg : null;
 
     }
 }
@@ -4809,8 +4879,10 @@ module.exports = {
     InstanceGroup: InstanceGroup,
     DescribePolicyGroupInfoEventCondition: DescribePolicyGroupInfoEventCondition,
     DescribeBaseMetricsResponse: DescribeBaseMetricsResponse,
+    SendCustomAlarmMsgResponse: SendCustomAlarmMsgResponse,
     DescribePolicyConditionListConfigManualPeriodNum: DescribePolicyConditionListConfigManualPeriodNum,
     DescribeBindingPolicyObjectListInstance: DescribeBindingPolicyObjectListInstance,
+    SendCustomAlarmMsgRequest: SendCustomAlarmMsgRequest,
     DescribePolicyConditionListConfigManualContinueTime: DescribePolicyConditionListConfigManualContinueTime,
     DescribePolicyGroupListRequest: DescribePolicyGroupListRequest,
     DescribeAccidentEventListResponse: DescribeAccidentEventListResponse,

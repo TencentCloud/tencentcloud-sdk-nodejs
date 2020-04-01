@@ -261,6 +261,12 @@ class CreateJobRequest extends  AbstractModel {
          */
         this.QuantizationInput = null;
 
+        /**
+         * Cls日志主题ID
+         * @type {string || null}
+         */
+        this.LogTopicId = null;
+
     }
 
     /**
@@ -293,6 +299,7 @@ class CreateJobRequest extends  AbstractModel {
             obj.deserialize(params.QuantizationInput)
             this.QuantizationInput = obj;
         }
+        this.LogTopicId = 'LogTopicId' in params ? params.LogTopicId : null;
 
     }
 }
@@ -1266,6 +1273,12 @@ class UpdateRsgAsGroupRequest extends  AbstractModel {
          */
         this.MinSize = null;
 
+        /**
+         * 伸缩组期望的节点数
+         * @type {number || null}
+         */
+        this.DesiredSize = null;
+
     }
 
     /**
@@ -1279,6 +1292,7 @@ class UpdateRsgAsGroupRequest extends  AbstractModel {
         this.Name = 'Name' in params ? params.Name : null;
         this.MaxSize = 'MaxSize' in params ? params.MaxSize : null;
         this.MinSize = 'MinSize' in params ? params.MinSize : null;
+        this.DesiredSize = 'DesiredSize' in params ? params.DesiredSize : null;
 
     }
 }
@@ -2247,6 +2261,12 @@ class CreateServiceRequest extends  AbstractModel {
          */
         this.GpuType = null;
 
+        /**
+         * Cls日志主题ID
+         * @type {string || null}
+         */
+        this.LogTopicId = null;
+
     }
 
     /**
@@ -2274,6 +2294,7 @@ class CreateServiceRequest extends  AbstractModel {
         this.GpuMemory = 'GpuMemory' in params ? params.GpuMemory : null;
         this.Description = 'Description' in params ? params.Description : null;
         this.GpuType = 'GpuType' in params ? params.GpuType : null;
+        this.LogTopicId = 'LogTopicId' in params ? params.LogTopicId : null;
 
     }
 }
@@ -2450,6 +2471,12 @@ class UpdateServiceRequest extends  AbstractModel {
          */
         this.Gpu = null;
 
+        /**
+         * Cls日志主题ID
+         * @type {string || null}
+         */
+        this.LogTopicId = null;
+
     }
 
     /**
@@ -2474,6 +2501,7 @@ class UpdateServiceRequest extends  AbstractModel {
         this.Cpu = 'Cpu' in params ? params.Cpu : null;
         this.Memory = 'Memory' in params ? params.Memory : null;
         this.Gpu = 'Gpu' in params ? params.Gpu : null;
+        this.LogTopicId = 'LogTopicId' in params ? params.LogTopicId : null;
 
     }
 }
@@ -3436,6 +3464,12 @@ class CreateRsgAsGroupRequest extends  AbstractModel {
         this.MinSize = null;
 
         /**
+         * 伸缩组的节点规格
+         * @type {string || null}
+         */
+        this.InstanceType = null;
+
+        /**
          * 资源组所在的集群名
          * @type {string || null}
          */
@@ -3446,6 +3480,12 @@ class CreateRsgAsGroupRequest extends  AbstractModel {
          * @type {string || null}
          */
         this.Name = null;
+
+        /**
+         * 伸缩组期望的节点数
+         * @type {number || null}
+         */
+        this.DesiredSize = null;
 
     }
 
@@ -3459,8 +3499,10 @@ class CreateRsgAsGroupRequest extends  AbstractModel {
         this.RsgId = 'RsgId' in params ? params.RsgId : null;
         this.MaxSize = 'MaxSize' in params ? params.MaxSize : null;
         this.MinSize = 'MinSize' in params ? params.MinSize : null;
+        this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
         this.Cluster = 'Cluster' in params ? params.Cluster : null;
         this.Name = 'Name' in params ? params.Name : null;
+        this.DesiredSize = 'DesiredSize' in params ? params.DesiredSize : null;
 
     }
 }
@@ -4070,7 +4112,7 @@ class DescribeServicesRequest extends  AbstractModel {
         super();
 
         /**
-         * 筛选选项，支持按照name等字段进行筛选
+         * 筛选选项，支持筛选的字段：id, region, zone, cluster, status, runtime, rsg_id
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;

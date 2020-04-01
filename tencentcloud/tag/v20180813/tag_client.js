@@ -25,16 +25,17 @@ const DescribeTagValuesRequest = models.DescribeTagValuesRequest;
 const ModifyResourceTagsRequest = models.ModifyResourceTagsRequest;
 const DescribeResourcesByTagsResponse = models.DescribeResourcesByTagsResponse;
 const DescribeTagKeysRequest = models.DescribeTagKeysRequest;
-const DescribeResourcesByTagsRequest = models.DescribeResourcesByTagsRequest;
+const DescribeResourceTagsResponse = models.DescribeResourceTagsResponse;
 const DescribeResourceTagsByResourceIdsRequest = models.DescribeResourceTagsByResourceIdsRequest;
-const Tag = models.Tag;
+const DescribeResourceTagsByResourceIdsResponse = models.DescribeResourceTagsByResourceIdsResponse;
 const TagResource = models.TagResource;
 const DescribeTagsRequest = models.DescribeTagsRequest;
 const AddResourceTagRequest = models.AddResourceTagRequest;
 const CreateTagRequest = models.CreateTagRequest;
 const TagFilter = models.TagFilter;
+const Tag = models.Tag;
+const DescribeResourceTagsRequest = models.DescribeResourceTagsRequest;
 const CreateTagResponse = models.CreateTagResponse;
-const DescribeResourceTagsByResourceIdsResponse = models.DescribeResourceTagsByResourceIdsResponse;
 const DeleteTagResponse = models.DeleteTagResponse;
 const AddResourceTagResponse = models.AddResourceTagResponse;
 const UpdateResourceTagValueRequest = models.UpdateResourceTagValueRequest;
@@ -42,8 +43,9 @@ const DescribeTagValuesResponse = models.DescribeTagValuesResponse;
 const DeleteResourceTagRequest = models.DeleteResourceTagRequest;
 const UpdateResourceTagValueResponse = models.UpdateResourceTagValueResponse;
 const TagKeyObject = models.TagKeyObject;
-const TagWithDelete = models.TagWithDelete;
 const ResourceTag = models.ResourceTag;
+const TagWithDelete = models.TagWithDelete;
+const DescribeResourcesByTagsRequest = models.DescribeResourcesByTagsRequest;
 
 
 /**
@@ -87,6 +89,17 @@ class TagClient extends AbstractClient {
     DescribeResourceTagsByResourceIds(req, cb) {
         let resp = new DescribeResourceTagsByResourceIdsResponse();
         this.request("DescribeResourceTagsByResourceIds", req, resp, cb);
+    }
+
+    /**
+     * 查询资源关联标签
+     * @param {DescribeResourceTagsRequest} req
+     * @param {function(string, DescribeResourceTagsResponse):void} cb
+     * @public
+     */
+    DescribeResourceTags(req, cb) {
+        let resp = new DescribeResourceTagsResponse();
+        this.request("DescribeResourceTags", req, resp, cb);
     }
 
     /**

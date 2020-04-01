@@ -82,6 +82,35 @@ class StopTrainingJobResponse extends  AbstractModel {
 }
 
 /**
+ * 终止条件
+ * @class
+ */
+class StoppingCondition extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 最长运行运行时间（秒）
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.MaxRuntimeInSeconds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MaxRuntimeInSeconds = 'MaxRuntimeInSeconds' in params ? params.MaxRuntimeInSeconds : null;
+
+    }
+}
+
+/**
  * 环境变量
  * @class
  */
@@ -278,6 +307,59 @@ class NotebookInstanceSummary extends  AbstractModel {
 }
 
 /**
+ *  二级状态流水
+ * @class
+ */
+class SecondaryStatusTransition extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 状态开始时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * 状态结束时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * 状态名
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * 状态详情
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.StatusMessage = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.StatusMessage = 'StatusMessage' in params ? params.StatusMessage : null;
+
+    }
+}
+
+/**
  * DescribeNotebookInstance请求参数结构体
  * @class
  */
@@ -334,19 +416,25 @@ class DeleteNotebookInstanceResponse extends  AbstractModel {
 }
 
 /**
- * 终止条件
+ * 存储库Git相关配置
  * @class
  */
-class StoppingCondition extends  AbstractModel {
+class GitConfig extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 最长运行运行时间（秒）
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
+         * git地址
+         * @type {string || null}
          */
-        this.MaxRuntimeInSeconds = null;
+        this.RepositoryUrl = null;
+
+        /**
+         * 代码分支
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Branch = null;
 
     }
 
@@ -357,7 +445,69 @@ class StoppingCondition extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.MaxRuntimeInSeconds = 'MaxRuntimeInSeconds' in params ? params.MaxRuntimeInSeconds : null;
+        this.RepositoryUrl = 'RepositoryUrl' in params ? params.RepositoryUrl : null;
+        this.Branch = 'Branch' in params ? params.Branch : null;
+
+    }
+}
+
+/**
+ * 存储库列表
+ * @class
+ */
+class CodeRepoSummary extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 创建时间
+         * @type {string || null}
+         */
+        this.CreationTime = null;
+
+        /**
+         * 更新时间
+         * @type {string || null}
+         */
+        this.LastModifiedTime = null;
+
+        /**
+         * 存储库名称
+         * @type {string || null}
+         */
+        this.CodeRepositoryName = null;
+
+        /**
+         * Git配置
+         * @type {GitConfig || null}
+         */
+        this.GitConfig = null;
+
+        /**
+         * 是否有Git凭证
+         * @type {boolean || null}
+         */
+        this.NoSecret = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CreationTime = 'CreationTime' in params ? params.CreationTime : null;
+        this.LastModifiedTime = 'LastModifiedTime' in params ? params.LastModifiedTime : null;
+        this.CodeRepositoryName = 'CodeRepositoryName' in params ? params.CodeRepositoryName : null;
+
+        if (params.GitConfig) {
+            let obj = new GitConfig();
+            obj.deserialize(params.GitConfig)
+            this.GitConfig = obj;
+        }
+        this.NoSecret = 'NoSecret' in params ? params.NoSecret : null;
 
     }
 }
@@ -408,131 +558,12 @@ class ResourceConfig extends  AbstractModel {
 }
 
 /**
- * DescribeTrainingJob返回参数结构体
+ * DeleteNotebookLifecycleScript返回参数结构体
  * @class
  */
-class DescribeTrainingJobResponse extends  AbstractModel {
+class DeleteNotebookLifecycleScriptResponse extends  AbstractModel {
     constructor(){
         super();
-
-        /**
-         * 算法镜像配置
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {AlgorithmSpecification || null}
-         */
-        this.AlgorithmSpecification = null;
-
-        /**
-         * 任务名称
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.TrainingJobName = null;
-
-        /**
-         * 算法超级参数
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.HyperParameters = null;
-
-        /**
-         * 输入数据配置
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {Array.<InputDataConfig> || null}
-         */
-        this.InputDataConfig = null;
-
-        /**
-         * 输出数据配置
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {OutputDataConfig || null}
-         */
-        this.OutputDataConfig = null;
-
-        /**
-         * 中止条件
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {StoppingCondition || null}
-         */
-        this.StoppingCondition = null;
-
-        /**
-         * 计算实例配置
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {ResourceConfig || null}
-         */
-        this.ResourceConfig = null;
-
-        /**
-         * 私有网络配置
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {VpcConfig || null}
-         */
-        this.VpcConfig = null;
-
-        /**
-         * 失败原因
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.FailureReason = null;
-
-        /**
-         * 最近修改时间
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.LastModifiedTime = null;
-
-        /**
-         * 任务开始时间
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.TrainingStartTime = null;
-
-        /**
-         * 任务完成时间
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.TrainingEndTime = null;
-
-        /**
-         * 模型输出配置
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {ModelArtifacts || null}
-         */
-        this.ModelArtifacts = null;
-
-        /**
-         * 详细状态
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.SecondaryStatus = null;
-
-        /**
-         * 详细状态事件记录
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {Array.<SecondaryStatusTransition> || null}
-         */
-        this.SecondaryStatusTransitions = null;
-
-        /**
-         * 角色名称
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.RoleName = null;
-
-        /**
-         * 任务状态
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.TrainingJobStatus = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -549,147 +580,46 @@ class DescribeTrainingJobResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.AlgorithmSpecification) {
-            let obj = new AlgorithmSpecification();
-            obj.deserialize(params.AlgorithmSpecification)
-            this.AlgorithmSpecification = obj;
-        }
-        this.TrainingJobName = 'TrainingJobName' in params ? params.TrainingJobName : null;
-        this.HyperParameters = 'HyperParameters' in params ? params.HyperParameters : null;
-
-        if (params.InputDataConfig) {
-            this.InputDataConfig = new Array();
-            for (let z in params.InputDataConfig) {
-                let obj = new InputDataConfig();
-                obj.deserialize(params.InputDataConfig[z]);
-                this.InputDataConfig.push(obj);
-            }
-        }
-
-        if (params.OutputDataConfig) {
-            let obj = new OutputDataConfig();
-            obj.deserialize(params.OutputDataConfig)
-            this.OutputDataConfig = obj;
-        }
-
-        if (params.StoppingCondition) {
-            let obj = new StoppingCondition();
-            obj.deserialize(params.StoppingCondition)
-            this.StoppingCondition = obj;
-        }
-
-        if (params.ResourceConfig) {
-            let obj = new ResourceConfig();
-            obj.deserialize(params.ResourceConfig)
-            this.ResourceConfig = obj;
-        }
-
-        if (params.VpcConfig) {
-            let obj = new VpcConfig();
-            obj.deserialize(params.VpcConfig)
-            this.VpcConfig = obj;
-        }
-        this.FailureReason = 'FailureReason' in params ? params.FailureReason : null;
-        this.LastModifiedTime = 'LastModifiedTime' in params ? params.LastModifiedTime : null;
-        this.TrainingStartTime = 'TrainingStartTime' in params ? params.TrainingStartTime : null;
-        this.TrainingEndTime = 'TrainingEndTime' in params ? params.TrainingEndTime : null;
-
-        if (params.ModelArtifacts) {
-            let obj = new ModelArtifacts();
-            obj.deserialize(params.ModelArtifacts)
-            this.ModelArtifacts = obj;
-        }
-        this.SecondaryStatus = 'SecondaryStatus' in params ? params.SecondaryStatus : null;
-
-        if (params.SecondaryStatusTransitions) {
-            this.SecondaryStatusTransitions = new Array();
-            for (let z in params.SecondaryStatusTransitions) {
-                let obj = new SecondaryStatusTransition();
-                obj.deserialize(params.SecondaryStatusTransitions[z]);
-                this.SecondaryStatusTransitions.push(obj);
-            }
-        }
-        this.RoleName = 'RoleName' in params ? params.RoleName : null;
-        this.TrainingJobStatus = 'TrainingJobStatus' in params ? params.TrainingJobStatus : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
 
 /**
- * DescribeNotebookInstances请求参数结构体
+ * DescribeNotebookLifecycleScripts请求参数结构体
  * @class
  */
-class DescribeNotebookInstancesRequest extends  AbstractModel {
+class DescribeNotebookLifecycleScriptsRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 偏移量
+         * 偏移量，默认为0
          * @type {number || null}
          */
         this.Offset = null;
 
         /**
-         * 限制数目
+         * 返回数量，默认为20
          * @type {number || null}
          */
         this.Limit = null;
 
         /**
-         * 排序字段
-         * @type {string || null}
+         * 过滤条件。
+instance-name - String - 是否必填：否 -（过滤条件）按照名称过滤。
+search-by-name - String - 是否必填：否 -（过滤条件）按照名称检索，模糊匹配。
+         * @type {Array.<Filter> || null}
          */
-        this.SortBy = null;
+        this.Filters = null;
 
         /**
-         * 排序方式
+         * 排序规则。默认取Descending
+Descending 按更新时间降序
+Ascending 按更新时间升序
          * @type {string || null}
          */
         this.SortOrder = null;
-
-        /**
-         * 创建时间晚于
-         * @type {string || null}
-         */
-        this.CreationTimeAfter = null;
-
-        /**
-         * 创建时间早于
-         * @type {string || null}
-         */
-        this.CreationTimeBefore = null;
-
-        /**
-         * 最近修改时间晚于
-         * @type {string || null}
-         */
-        this.LastModifiedTimeAfter = null;
-
-        /**
-         * 最近修改时间早于
-         * @type {string || null}
-         */
-        this.LastModifiedTimeBefore = null;
-
-        /**
-         * 根据名称过滤
-         * @type {string || null}
-         */
-        this.NameContains = null;
-
-        /**
-         * 根据状态过滤
-         * @type {string || null}
-         */
-        this.StatusEquals = null;
-
-        /**
-         * 最大返回个数
-         * @type {number || null}
-         */
-        this.MaxResults = null;
 
     }
 
@@ -702,15 +632,149 @@ class DescribeNotebookInstancesRequest extends  AbstractModel {
         }
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
-        this.SortBy = 'SortBy' in params ? params.SortBy : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
         this.SortOrder = 'SortOrder' in params ? params.SortOrder : null;
-        this.CreationTimeAfter = 'CreationTimeAfter' in params ? params.CreationTimeAfter : null;
-        this.CreationTimeBefore = 'CreationTimeBefore' in params ? params.CreationTimeBefore : null;
-        this.LastModifiedTimeAfter = 'LastModifiedTimeAfter' in params ? params.LastModifiedTimeAfter : null;
-        this.LastModifiedTimeBefore = 'LastModifiedTimeBefore' in params ? params.LastModifiedTimeBefore : null;
-        this.NameContains = 'NameContains' in params ? params.NameContains : null;
-        this.StatusEquals = 'StatusEquals' in params ? params.StatusEquals : null;
-        this.MaxResults = 'MaxResults' in params ? params.MaxResults : null;
+
+    }
+}
+
+/**
+ * Git凭证
+ * @class
+ */
+class GitSecret extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 无秘钥，默认选项
+         * @type {boolean || null}
+         */
+        this.None = null;
+
+        /**
+         * Git用户名密码base64编码后的字符串
+编码前的内容应为Json字符串，如
+{"UserName": "用户名", "Password":"密码"}
+         * @type {string || null}
+         */
+        this.Secret = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.None = 'None' in params ? params.None : null;
+        this.Secret = 'Secret' in params ? params.Secret : null;
+
+    }
+}
+
+/**
+ * DeleteCodeRepository请求参数结构体
+ * @class
+ */
+class DeleteCodeRepositoryRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 存储库名称
+         * @type {string || null}
+         */
+        this.CodeRepositoryName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CodeRepositoryName = 'CodeRepositoryName' in params ? params.CodeRepositoryName : null;
+
+    }
+}
+
+/**
+ * DescribeCodeRepository返回参数结构体
+ * @class
+ */
+class DescribeCodeRepositoryResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 创建时间
+         * @type {string || null}
+         */
+        this.CreationTime = null;
+
+        /**
+         * 更新时间
+         * @type {string || null}
+         */
+        this.LastModifiedTime = null;
+
+        /**
+         * 存储库名称
+         * @type {string || null}
+         */
+        this.CodeRepositoryName = null;
+
+        /**
+         * Git存储配置
+         * @type {GitConfig || null}
+         */
+        this.GitConfig = null;
+
+        /**
+         * 是否有Git凭证
+         * @type {boolean || null}
+         */
+        this.NoSecret = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CreationTime = 'CreationTime' in params ? params.CreationTime : null;
+        this.LastModifiedTime = 'LastModifiedTime' in params ? params.LastModifiedTime : null;
+        this.CodeRepositoryName = 'CodeRepositoryName' in params ? params.CodeRepositoryName : null;
+
+        if (params.GitConfig) {
+            let obj = new GitConfig();
+            obj.deserialize(params.GitConfig)
+            this.GitConfig = obj;
+        }
+        this.NoSecret = 'NoSecret' in params ? params.NoSecret : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -796,6 +860,41 @@ class StartNotebookInstanceResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * UpdateCodeRepository返回参数结构体
+ * @class
+ */
+class UpdateCodeRepositoryResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 存储库名称
+         * @type {string || null}
+         */
+        this.CodeRepositoryName = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CodeRepositoryName = 'CodeRepositoryName' in params ? params.CodeRepositoryName : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -891,6 +990,48 @@ class FileSystemDataSource extends  AbstractModel {
 }
 
 /**
+ * notebook生命周期脚本实例概览
+ * @class
+ */
+class NotebookLifecycleScriptsSummary extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * notebook生命周期脚本名称
+         * @type {string || null}
+         */
+        this.NotebookLifecycleScriptsName = null;
+
+        /**
+         * 创建时间
+         * @type {string || null}
+         */
+        this.CreationTime = null;
+
+        /**
+         * 修改时间
+         * @type {string || null}
+         */
+        this.LastModifiedTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.NotebookLifecycleScriptsName = 'NotebookLifecycleScriptsName' in params ? params.NotebookLifecycleScriptsName : null;
+        this.CreationTime = 'CreationTime' in params ? params.CreationTime : null;
+        this.LastModifiedTime = 'LastModifiedTime' in params ? params.LastModifiedTime : null;
+
+    }
+}
+
+/**
  * StopTrainingJob请求参数结构体
  * @class
  */
@@ -914,6 +1055,76 @@ class StopTrainingJobRequest extends  AbstractModel {
             return;
         }
         this.TrainingJobName = 'TrainingJobName' in params ? params.TrainingJobName : null;
+
+    }
+}
+
+/**
+ * UpdateNotebookInstance返回参数结构体
+ * @class
+ */
+class UpdateNotebookInstanceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * UpdateNotebookLifecycleScript请求参数结构体
+ * @class
+ */
+class UpdateNotebookLifecycleScriptRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * notebook生命周期脚本名称
+         * @type {string || null}
+         */
+        this.NotebookLifecycleScriptsName = null;
+
+        /**
+         * 创建脚本
+         * @type {string || null}
+         */
+        this.CreateScript = null;
+
+        /**
+         * 启动脚本
+         * @type {string || null}
+         */
+        this.StartScript = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.NotebookLifecycleScriptsName = 'NotebookLifecycleScriptsName' in params ? params.NotebookLifecycleScriptsName : null;
+        this.CreateScript = 'CreateScript' in params ? params.CreateScript : null;
+        this.StartScript = 'StartScript' in params ? params.StartScript : null;
 
     }
 }
@@ -1010,40 +1221,30 @@ class CreatePresignedNotebookInstanceUrlRequest extends  AbstractModel {
 }
 
 /**
- * cos路径
+ * CreateNotebookLifecycleScript请求参数结构体
  * @class
  */
-class CosDataSource extends  AbstractModel {
+class CreateNotebookLifecycleScriptRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * cos桶
-注意：此字段可能返回 null，表示取不到有效值。
+         * Notebook生命周期脚本名称
          * @type {string || null}
          */
-        this.Bucket = null;
+        this.NotebookLifecycleScriptsName = null;
 
         /**
-         * cos文件key
-注意：此字段可能返回 null，表示取不到有效值。
+         * 创建脚本，base64编码格式
          * @type {string || null}
          */
-        this.KeyPrefix = null;
+        this.CreateScript = null;
 
         /**
-         * 分布式数据下载方式
-注意：此字段可能返回 null，表示取不到有效值。
+         * 启动脚本，base64编码格式
          * @type {string || null}
          */
-        this.DataDistributionType = null;
-
-        /**
-         * 数据类型
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.DataType = null;
+        this.StartScript = null;
 
     }
 
@@ -1054,27 +1255,38 @@ class CosDataSource extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Bucket = 'Bucket' in params ? params.Bucket : null;
-        this.KeyPrefix = 'KeyPrefix' in params ? params.KeyPrefix : null;
-        this.DataDistributionType = 'DataDistributionType' in params ? params.DataDistributionType : null;
-        this.DataType = 'DataType' in params ? params.DataType : null;
+        this.NotebookLifecycleScriptsName = 'NotebookLifecycleScriptsName' in params ? params.NotebookLifecycleScriptsName : null;
+        this.CreateScript = 'CreateScript' in params ? params.CreateScript : null;
+        this.StartScript = 'StartScript' in params ? params.StartScript : null;
 
     }
 }
 
 /**
- * DescribeTrainingJob请求参数结构体
+ * CreateCodeRepository请求参数结构体
  * @class
  */
-class DescribeTrainingJobRequest extends  AbstractModel {
+class CreateCodeRepositoryRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 训练任务名称
+         * 存储库名称
          * @type {string || null}
          */
-        this.TrainingJobName = null;
+        this.CodeRepositoryName = null;
+
+        /**
+         * Git相关配置
+         * @type {GitConfig || null}
+         */
+        this.GitConfig = null;
+
+        /**
+         * Git凭证
+         * @type {GitSecret || null}
+         */
+        this.GitSecret = null;
 
     }
 
@@ -1085,7 +1297,137 @@ class DescribeTrainingJobRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TrainingJobName = 'TrainingJobName' in params ? params.TrainingJobName : null;
+        this.CodeRepositoryName = 'CodeRepositoryName' in params ? params.CodeRepositoryName : null;
+
+        if (params.GitConfig) {
+            let obj = new GitConfig();
+            obj.deserialize(params.GitConfig)
+            this.GitConfig = obj;
+        }
+
+        if (params.GitSecret) {
+            let obj = new GitSecret();
+            obj.deserialize(params.GitSecret)
+            this.GitSecret = obj;
+        }
+
+    }
+}
+
+/**
+ * DescribeNotebookInstances请求参数结构体
+ * @class
+ */
+class DescribeNotebookInstancesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 偏移量
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 限制数目
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 排序规则。默认取Descending
+Descending 按更新时间降序
+Ascending 按更新时间升序
+         * @type {string || null}
+         */
+        this.SortOrder = null;
+
+        /**
+         * 过滤条件。
+instance-name - String - 是否必填：否 -（过滤条件）按照名称过滤。
+search-by-name - String - 是否必填：否 -（过滤条件）按照名称检索，模糊匹配。
+lifecycle-name - String - 是否必填：否 -（过滤条件）按照生命周期脚本名称过滤。
+default-code-repo-name - String - 是否必填：否 -（过滤条件）按照默认存储库名称过滤。
+additional-code-repo-name - String - 是否必填：否 -（过滤条件）按照其他存储库名称过滤。
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * 【废弃字段】排序字段
+         * @type {string || null}
+         */
+        this.SortBy = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.SortOrder = 'SortOrder' in params ? params.SortOrder : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.SortBy = 'SortBy' in params ? params.SortBy : null;
+
+    }
+}
+
+/**
+ * 数据源
+ * @class
+ */
+class DataSource extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * cos数据源
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {CosDataSource || null}
+         */
+        this.CosDataSource = null;
+
+        /**
+         * 文件系统输入源
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {FileSystemDataSource || null}
+         */
+        this.FileSystemDataSource = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.CosDataSource) {
+            let obj = new CosDataSource();
+            obj.deserialize(params.CosDataSource)
+            this.CosDataSource = obj;
+        }
+
+        if (params.FileSystemDataSource) {
+            let obj = new FileSystemDataSource();
+            obj.deserialize(params.FileSystemDataSource)
+            this.FileSystemDataSource = obj;
+        }
 
     }
 }
@@ -1136,6 +1478,34 @@ class DescribeNotebookInstancesResponse extends  AbstractModel {
         }
         this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeCodeRepository请求参数结构体
+ * @class
+ */
+class DescribeCodeRepositoryRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 存储库名称
+         * @type {string || null}
+         */
+        this.CodeRepositoryName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CodeRepositoryName = 'CodeRepositoryName' in params ? params.CodeRepositoryName : null;
 
     }
 }
@@ -1331,6 +1701,34 @@ class DescribeNotebookInstanceResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeTrainingJob请求参数结构体
+ * @class
+ */
+class DescribeTrainingJobRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 训练任务名称
+         * @type {string || null}
+         */
+        this.TrainingJobName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TrainingJobName = 'TrainingJobName' in params ? params.TrainingJobName : null;
+
+    }
+}
+
+/**
  * 算法配置
  * @class
  */
@@ -1376,6 +1774,144 @@ class AlgorithmSpecification extends  AbstractModel {
 }
 
 /**
+ * cos路径
+ * @class
+ */
+class CosDataSource extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * cos桶
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Bucket = null;
+
+        /**
+         * cos文件key
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.KeyPrefix = null;
+
+        /**
+         * 分布式数据下载方式
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.DataDistributionType = null;
+
+        /**
+         * 数据类型
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.DataType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Bucket = 'Bucket' in params ? params.Bucket : null;
+        this.KeyPrefix = 'KeyPrefix' in params ? params.KeyPrefix : null;
+        this.DataDistributionType = 'DataDistributionType' in params ? params.DataDistributionType : null;
+        this.DataType = 'DataType' in params ? params.DataType : null;
+
+    }
+}
+
+/**
+ * DescribeNotebookLifecycleScripts返回参数结构体
+ * @class
+ */
+class DescribeNotebookLifecycleScriptsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Notebook生命周期脚本列表
+         * @type {Array.<NotebookLifecycleScriptsSummary> || null}
+         */
+        this.NotebookLifecycleScriptsSet = null;
+
+        /**
+         * Notebook生命周期脚本总数量
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.NotebookLifecycleScriptsSet) {
+            this.NotebookLifecycleScriptsSet = new Array();
+            for (let z in params.NotebookLifecycleScriptsSet) {
+                let obj = new NotebookLifecycleScriptsSummary();
+                obj.deserialize(params.NotebookLifecycleScriptsSet[z]);
+                this.NotebookLifecycleScriptsSet.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 过滤器
+ * @class
+ */
+class Filter extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 过滤字段名称
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 过滤字段取值
+         * @type {Array.<string> || null}
+         */
+        this.Values = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Values = 'Values' in params ? params.Values : null;
+
+    }
+}
+
+/**
  * StopNotebookInstance请求参数结构体
  * @class
  */
@@ -1404,6 +1940,308 @@ class StopNotebookInstanceRequest extends  AbstractModel {
 }
 
 /**
+ * DeleteNotebookLifecycleScript请求参数结构体
+ * @class
+ */
+class DeleteNotebookLifecycleScriptRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 生命周期脚本名称
+         * @type {string || null}
+         */
+        this.NotebookLifecycleScriptsName = null;
+
+        /**
+         * 是否忽略已关联的 notebook 实例强行删除生命周期脚本，默认 false
+         * @type {boolean || null}
+         */
+        this.Forcible = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.NotebookLifecycleScriptsName = 'NotebookLifecycleScriptsName' in params ? params.NotebookLifecycleScriptsName : null;
+        this.Forcible = 'Forcible' in params ? params.Forcible : null;
+
+    }
+}
+
+/**
+ * DescribeNotebookLifecycleScript返回参数结构体
+ * @class
+ */
+class DescribeNotebookLifecycleScriptResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 生命周期脚本名称
+         * @type {string || null}
+         */
+        this.NotebookLifecycleScriptsName = null;
+
+        /**
+         * 创建脚本
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.CreateScript = null;
+
+        /**
+         * 启动脚本
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.StartScript = null;
+
+        /**
+         * 创建时间
+         * @type {string || null}
+         */
+        this.CreationTime = null;
+
+        /**
+         * 最后修改时间
+         * @type {string || null}
+         */
+        this.LastModifiedTime = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.NotebookLifecycleScriptsName = 'NotebookLifecycleScriptsName' in params ? params.NotebookLifecycleScriptsName : null;
+        this.CreateScript = 'CreateScript' in params ? params.CreateScript : null;
+        this.StartScript = 'StartScript' in params ? params.StartScript : null;
+        this.CreationTime = 'CreationTime' in params ? params.CreationTime : null;
+        this.LastModifiedTime = 'LastModifiedTime' in params ? params.LastModifiedTime : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeTrainingJob返回参数结构体
+ * @class
+ */
+class DescribeTrainingJobResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 算法镜像配置
+         * @type {AlgorithmSpecification || null}
+         */
+        this.AlgorithmSpecification = null;
+
+        /**
+         * 任务名称
+         * @type {string || null}
+         */
+        this.TrainingJobName = null;
+
+        /**
+         * 算法超级参数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.HyperParameters = null;
+
+        /**
+         * 输入数据配置
+         * @type {Array.<InputDataConfig> || null}
+         */
+        this.InputDataConfig = null;
+
+        /**
+         * 输出数据配置
+         * @type {OutputDataConfig || null}
+         */
+        this.OutputDataConfig = null;
+
+        /**
+         * 中止条件
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {StoppingCondition || null}
+         */
+        this.StoppingCondition = null;
+
+        /**
+         * 计算实例配置
+         * @type {ResourceConfig || null}
+         */
+        this.ResourceConfig = null;
+
+        /**
+         * 私有网络配置
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {VpcConfig || null}
+         */
+        this.VpcConfig = null;
+
+        /**
+         * 失败原因
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.FailureReason = null;
+
+        /**
+         * 最近修改时间
+         * @type {string || null}
+         */
+        this.LastModifiedTime = null;
+
+        /**
+         * 任务开始时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.TrainingStartTime = null;
+
+        /**
+         * 任务完成时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.TrainingEndTime = null;
+
+        /**
+         * 模型输出配置
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {ModelArtifacts || null}
+         */
+        this.ModelArtifacts = null;
+
+        /**
+         * 详细状态
+         * @type {string || null}
+         */
+        this.SecondaryStatus = null;
+
+        /**
+         * 详细状态事件记录
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<SecondaryStatusTransition> || null}
+         */
+        this.SecondaryStatusTransitions = null;
+
+        /**
+         * 角色名称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.RoleName = null;
+
+        /**
+         * 任务状态
+         * @type {string || null}
+         */
+        this.TrainingJobStatus = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.AlgorithmSpecification) {
+            let obj = new AlgorithmSpecification();
+            obj.deserialize(params.AlgorithmSpecification)
+            this.AlgorithmSpecification = obj;
+        }
+        this.TrainingJobName = 'TrainingJobName' in params ? params.TrainingJobName : null;
+        this.HyperParameters = 'HyperParameters' in params ? params.HyperParameters : null;
+
+        if (params.InputDataConfig) {
+            this.InputDataConfig = new Array();
+            for (let z in params.InputDataConfig) {
+                let obj = new InputDataConfig();
+                obj.deserialize(params.InputDataConfig[z]);
+                this.InputDataConfig.push(obj);
+            }
+        }
+
+        if (params.OutputDataConfig) {
+            let obj = new OutputDataConfig();
+            obj.deserialize(params.OutputDataConfig)
+            this.OutputDataConfig = obj;
+        }
+
+        if (params.StoppingCondition) {
+            let obj = new StoppingCondition();
+            obj.deserialize(params.StoppingCondition)
+            this.StoppingCondition = obj;
+        }
+
+        if (params.ResourceConfig) {
+            let obj = new ResourceConfig();
+            obj.deserialize(params.ResourceConfig)
+            this.ResourceConfig = obj;
+        }
+
+        if (params.VpcConfig) {
+            let obj = new VpcConfig();
+            obj.deserialize(params.VpcConfig)
+            this.VpcConfig = obj;
+        }
+        this.FailureReason = 'FailureReason' in params ? params.FailureReason : null;
+        this.LastModifiedTime = 'LastModifiedTime' in params ? params.LastModifiedTime : null;
+        this.TrainingStartTime = 'TrainingStartTime' in params ? params.TrainingStartTime : null;
+        this.TrainingEndTime = 'TrainingEndTime' in params ? params.TrainingEndTime : null;
+
+        if (params.ModelArtifacts) {
+            let obj = new ModelArtifacts();
+            obj.deserialize(params.ModelArtifacts)
+            this.ModelArtifacts = obj;
+        }
+        this.SecondaryStatus = 'SecondaryStatus' in params ? params.SecondaryStatus : null;
+
+        if (params.SecondaryStatusTransitions) {
+            this.SecondaryStatusTransitions = new Array();
+            for (let z in params.SecondaryStatusTransitions) {
+                let obj = new SecondaryStatusTransition();
+                obj.deserialize(params.SecondaryStatusTransitions[z]);
+                this.SecondaryStatusTransitions.push(obj);
+            }
+        }
+        this.RoleName = 'RoleName' in params ? params.RoleName : null;
+        this.TrainingJobStatus = 'TrainingJobStatus' in params ? params.TrainingJobStatus : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * StopNotebookInstance返回参数结构体
  * @class
  */
@@ -1427,6 +2265,46 @@ class StopNotebookInstanceResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * UpdateCodeRepository请求参数结构体
+ * @class
+ */
+class UpdateCodeRepositoryRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 查询存储库名称
+         * @type {string || null}
+         */
+        this.CodeRepositoryName = null;
+
+        /**
+         * Git凭证
+         * @type {GitSecret || null}
+         */
+        this.GitSecret = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CodeRepositoryName = 'CodeRepositoryName' in params ? params.CodeRepositoryName : null;
+
+        if (params.GitSecret) {
+            let obj = new GitSecret();
+            obj.deserialize(params.GitSecret)
+            this.GitSecret = obj;
+        }
 
     }
 }
@@ -1592,6 +2470,34 @@ class DeleteNotebookInstanceRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeNotebookLifecycleScript请求参数结构体
+ * @class
+ */
+class DescribeNotebookLifecycleScriptRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 生命周期脚本名称
+         * @type {string || null}
+         */
+        this.NotebookLifecycleScriptsName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.NotebookLifecycleScriptsName = 'NotebookLifecycleScriptsName' in params ? params.NotebookLifecycleScriptsName : null;
+
+    }
+}
+
+/**
  * VPC配置
  * @class
  */
@@ -1624,6 +2530,41 @@ class VpcConfig extends  AbstractModel {
         }
         this.SecurityGroupIds = 'SecurityGroupIds' in params ? params.SecurityGroupIds : null;
         this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
+
+    }
+}
+
+/**
+ * CreateNotebookLifecycleScript返回参数结构体
+ * @class
+ */
+class CreateNotebookLifecycleScriptResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 生命周期脚本名称
+         * @type {string || null}
+         */
+        this.NotebookLifecycleScriptsName = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.NotebookLifecycleScriptsName = 'NotebookLifecycleScriptsName' in params ? params.NotebookLifecycleScriptsName : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1664,6 +2605,34 @@ class CreatePresignedNotebookInstanceUrlResponse extends  AbstractModel {
 }
 
 /**
+ * UpdateNotebookLifecycleScript返回参数结构体
+ * @class
+ */
+class UpdateNotebookLifecycleScriptResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * StartNotebookInstance请求参数结构体
  * @class
  */
@@ -1692,12 +2661,18 @@ class StartNotebookInstanceRequest extends  AbstractModel {
 }
 
 /**
- * UpdateNotebookInstance返回参数结构体
+ * CreateCodeRepository返回参数结构体
  * @class
  */
-class UpdateNotebookInstanceResponse extends  AbstractModel {
+class CreateCodeRepositoryResponse extends  AbstractModel {
     constructor(){
         super();
+
+        /**
+         * 存储库名称
+         * @type {string || null}
+         */
+        this.CodeRepositoryName = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1714,6 +2689,7 @@ class UpdateNotebookInstanceResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.CodeRepositoryName = 'CodeRepositoryName' in params ? params.CodeRepositoryName : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -1757,40 +2733,40 @@ class Tag extends  AbstractModel {
 }
 
 /**
- *  二级状态流水
+ * DescribeCodeRepositories请求参数结构体
  * @class
  */
-class SecondaryStatusTransition extends  AbstractModel {
+class DescribeCodeRepositoriesRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 状态开始时间
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
+         * 偏移量，默认为0
+         * @type {number || null}
          */
-        this.StartTime = null;
+        this.Offset = null;
 
         /**
-         * 状态结束时间
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
+         * 返回数量，默认为20
+         * @type {number || null}
          */
-        this.EndTime = null;
+        this.Limit = null;
 
         /**
-         * 状态名
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
+         * 过滤条件。
+instance-name - String - 是否必填：否 -（过滤条件）按照名称过滤。
+search-by-name - String - 是否必填：否 -（过滤条件）按照名称检索，模糊匹配。
+         * @type {Array.<Filter> || null}
          */
-        this.Status = null;
+        this.Filters = null;
 
         /**
-         * 状态详情
-注意：此字段可能返回 null，表示取不到有效值。
+         * 排序规则。默认取Descending
+Descending 按更新时间降序
+Ascending 按更新时间升序
          * @type {string || null}
          */
-        this.StatusMessage = null;
+        this.SortOrder = null;
 
     }
 
@@ -1801,35 +2777,48 @@ class SecondaryStatusTransition extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.StartTime = 'StartTime' in params ? params.StartTime : null;
-        this.EndTime = 'EndTime' in params ? params.EndTime : null;
-        this.Status = 'Status' in params ? params.Status : null;
-        this.StatusMessage = 'StatusMessage' in params ? params.StatusMessage : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.SortOrder = 'SortOrder' in params ? params.SortOrder : null;
 
     }
 }
 
 /**
- * 数据源
+ * DescribeCodeRepositories返回参数结构体
  * @class
  */
-class DataSource extends  AbstractModel {
+class DescribeCodeRepositoriesResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * cos数据源
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {CosDataSource || null}
+         * 存储库总数目
+         * @type {number || null}
          */
-        this.CosDataSource = null;
+        this.TotalCount = null;
 
         /**
-         * 文件系统输入源
+         * 存储库列表
 注意：此字段可能返回 null，表示取不到有效值。
-         * @type {FileSystemDataSource || null}
+         * @type {Array.<CodeRepoSummary> || null}
          */
-        this.FileSystemDataSource = null;
+        this.CodeRepoSet = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
 
     }
 
@@ -1840,18 +2829,17 @@ class DataSource extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
 
-        if (params.CosDataSource) {
-            let obj = new CosDataSource();
-            obj.deserialize(params.CosDataSource)
-            this.CosDataSource = obj;
+        if (params.CodeRepoSet) {
+            this.CodeRepoSet = new Array();
+            for (let z in params.CodeRepoSet) {
+                let obj = new CodeRepoSummary();
+                obj.deserialize(params.CodeRepoSet[z]);
+                this.CodeRepoSet.push(obj);
+            }
         }
-
-        if (params.FileSystemDataSource) {
-            let obj = new FileSystemDataSource();
-            obj.deserialize(params.FileSystemDataSource)
-            this.FileSystemDataSource = obj;
-        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1885,42 +2873,102 @@ class ModelArtifacts extends  AbstractModel {
     }
 }
 
+/**
+ * DeleteCodeRepository返回参数结构体
+ * @class
+ */
+class DeleteCodeRepositoryResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 存储库名称
+         * @type {string || null}
+         */
+        this.CodeRepositoryName = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CodeRepositoryName = 'CodeRepositoryName' in params ? params.CodeRepositoryName : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
 module.exports = {
     OutputDataConfig: OutputDataConfig,
     StopTrainingJobResponse: StopTrainingJobResponse,
+    StoppingCondition: StoppingCondition,
     EnvConfig: EnvConfig,
     CreateNotebookInstanceRequest: CreateNotebookInstanceRequest,
     NotebookInstanceSummary: NotebookInstanceSummary,
+    SecondaryStatusTransition: SecondaryStatusTransition,
     DescribeNotebookInstanceRequest: DescribeNotebookInstanceRequest,
     DeleteNotebookInstanceResponse: DeleteNotebookInstanceResponse,
-    StoppingCondition: StoppingCondition,
+    GitConfig: GitConfig,
+    CodeRepoSummary: CodeRepoSummary,
     ResourceConfig: ResourceConfig,
-    DescribeTrainingJobResponse: DescribeTrainingJobResponse,
-    DescribeNotebookInstancesRequest: DescribeNotebookInstancesRequest,
+    DeleteNotebookLifecycleScriptResponse: DeleteNotebookLifecycleScriptResponse,
+    DescribeNotebookLifecycleScriptsRequest: DescribeNotebookLifecycleScriptsRequest,
+    GitSecret: GitSecret,
+    DeleteCodeRepositoryRequest: DeleteCodeRepositoryRequest,
+    DescribeCodeRepositoryResponse: DescribeCodeRepositoryResponse,
     InputDataConfig: InputDataConfig,
     StartNotebookInstanceResponse: StartNotebookInstanceResponse,
+    UpdateCodeRepositoryResponse: UpdateCodeRepositoryResponse,
     CreateNotebookInstanceResponse: CreateNotebookInstanceResponse,
     FileSystemDataSource: FileSystemDataSource,
+    NotebookLifecycleScriptsSummary: NotebookLifecycleScriptsSummary,
     StopTrainingJobRequest: StopTrainingJobRequest,
+    UpdateNotebookInstanceResponse: UpdateNotebookInstanceResponse,
+    UpdateNotebookLifecycleScriptRequest: UpdateNotebookLifecycleScriptRequest,
     UpdateNotebookInstanceRequest: UpdateNotebookInstanceRequest,
     CreatePresignedNotebookInstanceUrlRequest: CreatePresignedNotebookInstanceUrlRequest,
-    CosDataSource: CosDataSource,
-    DescribeTrainingJobRequest: DescribeTrainingJobRequest,
+    CreateNotebookLifecycleScriptRequest: CreateNotebookLifecycleScriptRequest,
+    CreateCodeRepositoryRequest: CreateCodeRepositoryRequest,
+    DescribeNotebookInstancesRequest: DescribeNotebookInstancesRequest,
+    DataSource: DataSource,
     DescribeNotebookInstancesResponse: DescribeNotebookInstancesResponse,
+    DescribeCodeRepositoryRequest: DescribeCodeRepositoryRequest,
     CreateTrainingJobResponse: CreateTrainingJobResponse,
     DescribeNotebookInstanceResponse: DescribeNotebookInstanceResponse,
+    DescribeTrainingJobRequest: DescribeTrainingJobRequest,
     AlgorithmSpecification: AlgorithmSpecification,
+    CosDataSource: CosDataSource,
+    DescribeNotebookLifecycleScriptsResponse: DescribeNotebookLifecycleScriptsResponse,
+    Filter: Filter,
     StopNotebookInstanceRequest: StopNotebookInstanceRequest,
+    DeleteNotebookLifecycleScriptRequest: DeleteNotebookLifecycleScriptRequest,
+    DescribeNotebookLifecycleScriptResponse: DescribeNotebookLifecycleScriptResponse,
+    DescribeTrainingJobResponse: DescribeTrainingJobResponse,
     StopNotebookInstanceResponse: StopNotebookInstanceResponse,
+    UpdateCodeRepositoryRequest: UpdateCodeRepositoryRequest,
     CreateTrainingJobRequest: CreateTrainingJobRequest,
     DeleteNotebookInstanceRequest: DeleteNotebookInstanceRequest,
+    DescribeNotebookLifecycleScriptRequest: DescribeNotebookLifecycleScriptRequest,
     VpcConfig: VpcConfig,
+    CreateNotebookLifecycleScriptResponse: CreateNotebookLifecycleScriptResponse,
     CreatePresignedNotebookInstanceUrlResponse: CreatePresignedNotebookInstanceUrlResponse,
+    UpdateNotebookLifecycleScriptResponse: UpdateNotebookLifecycleScriptResponse,
     StartNotebookInstanceRequest: StartNotebookInstanceRequest,
-    UpdateNotebookInstanceResponse: UpdateNotebookInstanceResponse,
+    CreateCodeRepositoryResponse: CreateCodeRepositoryResponse,
     Tag: Tag,
-    SecondaryStatusTransition: SecondaryStatusTransition,
-    DataSource: DataSource,
+    DescribeCodeRepositoriesRequest: DescribeCodeRepositoriesRequest,
+    DescribeCodeRepositoriesResponse: DescribeCodeRepositoriesResponse,
     ModelArtifacts: ModelArtifacts,
+    DeleteCodeRepositoryResponse: DeleteCodeRepositoryResponse,
 
 }

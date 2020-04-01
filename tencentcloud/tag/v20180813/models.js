@@ -442,60 +442,43 @@ class DescribeTagKeysRequest extends  AbstractModel {
 }
 
 /**
- * DescribeResourcesByTags请求参数结构体
+ * DescribeResourceTags返回参数结构体
  * @class
  */
-class DescribeResourcesByTagsRequest extends  AbstractModel {
+class DescribeResourceTagsResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 标签过滤数组
-         * @type {Array.<TagFilter> || null}
-         */
-        this.TagFilters = null;
-
-        /**
-         * 创建标签者uin
+         * 结果总数
          * @type {number || null}
          */
-        this.CreateUin = null;
+        this.TotalCount = null;
 
         /**
-         * 数据偏移量，默认为 0, 必须为Limit参数的整数倍
+         * 数据位移偏量
          * @type {number || null}
          */
         this.Offset = null;
 
         /**
-         * 每页大小，默认为 15
+         * 每页大小
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.Limit = null;
 
         /**
-         * 资源前缀
-         * @type {string || null}
+         * 资源标签
+         * @type {Array.<TagResource> || null}
          */
-        this.ResourcePrefix = null;
+        this.Rows = null;
 
         /**
-         * 资源唯一标记
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.ResourceId = null;
-
-        /**
-         * 资源所在地域
-         * @type {string || null}
-         */
-        this.ResourceRegion = null;
-
-        /**
-         * 业务类型
-         * @type {string || null}
-         */
-        this.ServiceType = null;
+        this.RequestId = null;
 
     }
 
@@ -506,22 +489,19 @@ class DescribeResourcesByTagsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.TagFilters) {
-            this.TagFilters = new Array();
-            for (let z in params.TagFilters) {
-                let obj = new TagFilter();
-                obj.deserialize(params.TagFilters[z]);
-                this.TagFilters.push(obj);
-            }
-        }
-        this.CreateUin = 'CreateUin' in params ? params.CreateUin : null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
-        this.ResourcePrefix = 'ResourcePrefix' in params ? params.ResourcePrefix : null;
-        this.ResourceId = 'ResourceId' in params ? params.ResourceId : null;
-        this.ResourceRegion = 'ResourceRegion' in params ? params.ResourceRegion : null;
-        this.ServiceType = 'ServiceType' in params ? params.ServiceType : null;
+
+        if (params.Rows) {
+            this.Rows = new Array();
+            for (let z in params.Rows) {
+                let obj = new TagResource();
+                obj.deserialize(params.Rows[z]);
+                this.Rows.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -590,24 +570,42 @@ class DescribeResourceTagsByResourceIdsRequest extends  AbstractModel {
 }
 
 /**
- * 表示一个标签键值对
+ * DescribeResourceTagsByResourceIds返回参数结构体
  * @class
  */
-class Tag extends  AbstractModel {
+class DescribeResourceTagsByResourceIdsResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 标签键
-         * @type {string || null}
+         * 结果总数
+         * @type {number || null}
          */
-        this.TagKey = null;
+        this.TotalCount = null;
 
         /**
-         * 标签值
+         * 数据位移偏量
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 每页大小
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 标签列表
+         * @type {Array.<TagResource> || null}
+         */
+        this.Tags = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.TagValue = null;
+        this.RequestId = null;
 
     }
 
@@ -618,8 +616,19 @@ class Tag extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TagKey = 'TagKey' in params ? params.TagKey : null;
-        this.TagValue = 'TagValue' in params ? params.TagValue : null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new TagResource();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -857,6 +866,118 @@ class TagFilter extends  AbstractModel {
 }
 
 /**
+ * 表示一个标签键值对
+ * @class
+ */
+class Tag extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 标签键
+         * @type {string || null}
+         */
+        this.TagKey = null;
+
+        /**
+         * 标签值
+         * @type {string || null}
+         */
+        this.TagValue = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TagKey = 'TagKey' in params ? params.TagKey : null;
+        this.TagValue = 'TagValue' in params ? params.TagValue : null;
+
+    }
+}
+
+/**
+ * DescribeResourceTags请求参数结构体
+ * @class
+ */
+class DescribeResourceTagsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 创建者uin
+         * @type {number || null}
+         */
+        this.CreateUin = null;
+
+        /**
+         * 资源所在地域
+         * @type {string || null}
+         */
+        this.ResourceRegion = null;
+
+        /**
+         * 业务类型
+         * @type {string || null}
+         */
+        this.ServiceType = null;
+
+        /**
+         * 资源前缀
+         * @type {string || null}
+         */
+        this.ResourcePrefix = null;
+
+        /**
+         * 资源唯一标识
+         * @type {string || null}
+         */
+        this.ResourceId = null;
+
+        /**
+         * 数据偏移量，默认为 0, 必须为Limit参数的整数倍
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 每页大小，默认为 15
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 是否是Cos的资源id
+         * @type {number || null}
+         */
+        this.CosResourceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CreateUin = 'CreateUin' in params ? params.CreateUin : null;
+        this.ResourceRegion = 'ResourceRegion' in params ? params.ResourceRegion : null;
+        this.ServiceType = 'ServiceType' in params ? params.ServiceType : null;
+        this.ResourcePrefix = 'ResourcePrefix' in params ? params.ResourcePrefix : null;
+        this.ResourceId = 'ResourceId' in params ? params.ResourceId : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.CosResourceId = 'CosResourceId' in params ? params.CosResourceId : null;
+
+    }
+}
+
+/**
  * CreateTag返回参数结构体
  * @class
  */
@@ -878,70 +999,6 @@ class CreateTagResponse extends  AbstractModel {
     deserialize(params) {
         if (!params) {
             return;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * DescribeResourceTagsByResourceIds返回参数结构体
- * @class
- */
-class DescribeResourceTagsByResourceIdsResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 结果总数
-         * @type {number || null}
-         */
-        this.TotalCount = null;
-
-        /**
-         * 数据位移偏量
-         * @type {number || null}
-         */
-        this.Offset = null;
-
-        /**
-         * 每页大小
-         * @type {number || null}
-         */
-        this.Limit = null;
-
-        /**
-         * 标签列表
-         * @type {Array.<TagResource> || null}
-         */
-        this.Tags = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
-
-        if (params.Tags) {
-            this.Tags = new Array();
-            for (let z in params.Tags) {
-                let obj = new TagResource();
-                obj.deserialize(params.Tags[z]);
-                this.Tags.push(obj);
-            }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -1202,48 +1259,6 @@ class TagKeyObject extends  AbstractModel {
 }
 
 /**
- * 表示一个标签键值对以及是否允许删除
- * @class
- */
-class TagWithDelete extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 标签键
-         * @type {string || null}
-         */
-        this.TagKey = null;
-
-        /**
-         * 标签值
-         * @type {string || null}
-         */
-        this.TagValue = null;
-
-        /**
-         * 是否可以删除
-         * @type {number || null}
-         */
-        this.CanDelete = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.TagKey = 'TagKey' in params ? params.TagKey : null;
-        this.TagValue = 'TagValue' in params ? params.TagValue : null;
-        this.CanDelete = 'CanDelete' in params ? params.CanDelete : null;
-
-    }
-}
-
-/**
  * 资源标签
  * @class
  */
@@ -1312,6 +1327,133 @@ class ResourceTag extends  AbstractModel {
     }
 }
 
+/**
+ * 表示一个标签键值对以及是否允许删除
+ * @class
+ */
+class TagWithDelete extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 标签键
+         * @type {string || null}
+         */
+        this.TagKey = null;
+
+        /**
+         * 标签值
+         * @type {string || null}
+         */
+        this.TagValue = null;
+
+        /**
+         * 是否可以删除
+         * @type {number || null}
+         */
+        this.CanDelete = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TagKey = 'TagKey' in params ? params.TagKey : null;
+        this.TagValue = 'TagValue' in params ? params.TagValue : null;
+        this.CanDelete = 'CanDelete' in params ? params.CanDelete : null;
+
+    }
+}
+
+/**
+ * DescribeResourcesByTags请求参数结构体
+ * @class
+ */
+class DescribeResourcesByTagsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 标签过滤数组
+         * @type {Array.<TagFilter> || null}
+         */
+        this.TagFilters = null;
+
+        /**
+         * 创建标签者uin
+         * @type {number || null}
+         */
+        this.CreateUin = null;
+
+        /**
+         * 数据偏移量，默认为 0, 必须为Limit参数的整数倍
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 每页大小，默认为 15
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 资源前缀
+         * @type {string || null}
+         */
+        this.ResourcePrefix = null;
+
+        /**
+         * 资源唯一标记
+         * @type {string || null}
+         */
+        this.ResourceId = null;
+
+        /**
+         * 资源所在地域
+         * @type {string || null}
+         */
+        this.ResourceRegion = null;
+
+        /**
+         * 业务类型
+         * @type {string || null}
+         */
+        this.ServiceType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.TagFilters) {
+            this.TagFilters = new Array();
+            for (let z in params.TagFilters) {
+                let obj = new TagFilter();
+                obj.deserialize(params.TagFilters[z]);
+                this.TagFilters.push(obj);
+            }
+        }
+        this.CreateUin = 'CreateUin' in params ? params.CreateUin : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.ResourcePrefix = 'ResourcePrefix' in params ? params.ResourcePrefix : null;
+        this.ResourceId = 'ResourceId' in params ? params.ResourceId : null;
+        this.ResourceRegion = 'ResourceRegion' in params ? params.ResourceRegion : null;
+        this.ServiceType = 'ServiceType' in params ? params.ServiceType : null;
+
+    }
+}
+
 module.exports = {
     DescribeTagsResponse: DescribeTagsResponse,
     DeleteTagRequest: DeleteTagRequest,
@@ -1322,16 +1464,17 @@ module.exports = {
     ModifyResourceTagsRequest: ModifyResourceTagsRequest,
     DescribeResourcesByTagsResponse: DescribeResourcesByTagsResponse,
     DescribeTagKeysRequest: DescribeTagKeysRequest,
-    DescribeResourcesByTagsRequest: DescribeResourcesByTagsRequest,
+    DescribeResourceTagsResponse: DescribeResourceTagsResponse,
     DescribeResourceTagsByResourceIdsRequest: DescribeResourceTagsByResourceIdsRequest,
-    Tag: Tag,
+    DescribeResourceTagsByResourceIdsResponse: DescribeResourceTagsByResourceIdsResponse,
     TagResource: TagResource,
     DescribeTagsRequest: DescribeTagsRequest,
     AddResourceTagRequest: AddResourceTagRequest,
     CreateTagRequest: CreateTagRequest,
     TagFilter: TagFilter,
+    Tag: Tag,
+    DescribeResourceTagsRequest: DescribeResourceTagsRequest,
     CreateTagResponse: CreateTagResponse,
-    DescribeResourceTagsByResourceIdsResponse: DescribeResourceTagsByResourceIdsResponse,
     DeleteTagResponse: DeleteTagResponse,
     AddResourceTagResponse: AddResourceTagResponse,
     UpdateResourceTagValueRequest: UpdateResourceTagValueRequest,
@@ -1339,7 +1482,8 @@ module.exports = {
     DeleteResourceTagRequest: DeleteResourceTagRequest,
     UpdateResourceTagValueResponse: UpdateResourceTagValueResponse,
     TagKeyObject: TagKeyObject,
-    TagWithDelete: TagWithDelete,
     ResourceTag: ResourceTag,
+    TagWithDelete: TagWithDelete,
+    DescribeResourcesByTagsRequest: DescribeResourcesByTagsRequest,
 
 }

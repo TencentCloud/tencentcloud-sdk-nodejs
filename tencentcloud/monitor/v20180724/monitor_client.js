@@ -72,8 +72,10 @@ const CreatePolicyGroupResponse = models.CreatePolicyGroupResponse;
 const InstanceGroup = models.InstanceGroup;
 const DescribePolicyGroupInfoEventCondition = models.DescribePolicyGroupInfoEventCondition;
 const DescribeBaseMetricsResponse = models.DescribeBaseMetricsResponse;
+const SendCustomAlarmMsgResponse = models.SendCustomAlarmMsgResponse;
 const DescribePolicyConditionListConfigManualPeriodNum = models.DescribePolicyConditionListConfigManualPeriodNum;
 const DescribeBindingPolicyObjectListInstance = models.DescribeBindingPolicyObjectListInstance;
+const SendCustomAlarmMsgRequest = models.SendCustomAlarmMsgRequest;
 const DescribePolicyConditionListConfigManualContinueTime = models.DescribePolicyConditionListConfigManualContinueTime;
 const DescribePolicyGroupListRequest = models.DescribePolicyGroupListRequest;
 const DescribeAccidentEventListResponse = models.DescribeAccidentEventListResponse;
@@ -164,6 +166,17 @@ class MonitorClient extends AbstractClient {
     DescribeBindingPolicyObjectList(req, cb) {
         let resp = new DescribeBindingPolicyObjectListResponse();
         this.request("DescribeBindingPolicyObjectList", req, resp, cb);
+    }
+
+    /**
+     * 发送自定义消息告警
+     * @param {SendCustomAlarmMsgRequest} req
+     * @param {function(string, SendCustomAlarmMsgResponse):void} cb
+     * @public
+     */
+    SendCustomAlarmMsg(req, cb) {
+        let resp = new SendCustomAlarmMsgResponse();
+        this.request("SendCustomAlarmMsg", req, resp, cb);
     }
 
     /**
