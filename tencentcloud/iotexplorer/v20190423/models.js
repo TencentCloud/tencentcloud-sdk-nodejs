@@ -109,13 +109,13 @@ class DescribeDeviceDataHistoryRequest extends  AbstractModel {
         super();
 
         /**
-         * 区间开始时间
+         * 区间开始时间（Unix 时间戳，毫秒级）
          * @type {number || null}
          */
         this.MinTime = null;
 
         /**
-         * 区间结束时间
+         * 区间结束时间（Unix 时间戳，毫秒级）
          * @type {number || null}
          */
         this.MaxTime = null;
@@ -133,7 +133,7 @@ class DescribeDeviceDataHistoryRequest extends  AbstractModel {
         this.DeviceName = null;
 
         /**
-         * 属性字段名称
+         * 属性字段名称，对应数据模板中功能属性的标识符
          * @type {string || null}
          */
         this.FieldName = null;
@@ -350,19 +350,19 @@ class ListEventHistoryRequest extends  AbstractModel {
         this.DeviceName = null;
 
         /**
-         * 搜索的事件类型
+         * 搜索的事件类型：alert 表示告警，fault 表示故障，info 表示信息，为空则表示查询上述所有类型事件
          * @type {string || null}
          */
         this.Type = null;
 
         /**
-         * 起始时间, 为0 表示 当前时间 - 24h
+         * 起始时间（Unix 时间戳，秒级）, 为0 表示 当前时间 - 24h
          * @type {number || null}
          */
         this.StartTime = null;
 
         /**
-         * 结束时间, 为0 表示当前时间
+         * 结束时间（Unix 时间戳，秒级）, 为0 表示当前时间
          * @type {number || null}
          */
         this.EndTime = null;
@@ -1607,7 +1607,7 @@ class DescribeDeviceDataHistoryResponse extends  AbstractModel {
         super();
 
         /**
-         * 属性字段名称
+         * 属性字段名称，对应数据模板中功能属性的标识符
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */

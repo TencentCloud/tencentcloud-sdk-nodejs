@@ -166,10 +166,10 @@ class CreateNotebookInstanceRequest extends  AbstractModel {
         this.InstanceType = null;
 
         /**
-         * 角色的资源描述
-         * @type {string || null}
+         * 数据卷大小(GB)
+         * @type {number || null}
          */
-        this.RoleArn = null;
+        this.VolumeSizeInGB = null;
 
         /**
          * 外网访问权限，可取值Enabled/Disabled
@@ -184,28 +184,30 @@ class CreateNotebookInstanceRequest extends  AbstractModel {
         this.RootAccess = null;
 
         /**
-         * 安全组ID
-         * @type {Array.<string> || null}
-         */
-        this.SecurityGroupIds = null;
-
-        /**
          * 子网ID
          * @type {string || null}
          */
         this.SubnetId = null;
 
         /**
-         * 数据卷大小(GB)
-         * @type {number || null}
+         * 生命周期脚本名称
+         * @type {string || null}
          */
-        this.VolumeSizeInGB = null;
+        this.LifecycleScriptsName = null;
 
         /**
-         * Notebook标签
-         * @type {Array.<Tag> || null}
+         * 默认存储库名称
+可以是已创建的存储库名称或者已https://开头的公共git库
+         * @type {string || null}
          */
-        this.Tags = null;
+        this.DefaultCodeRepository = null;
+
+        /**
+         * 其他存储库列表
+每个元素可以是已创建的存储库名称或者已https://开头的公共git库
+         * @type {Array.<string> || null}
+         */
+        this.AdditionalCodeRepositories = null;
 
     }
 
@@ -218,21 +220,13 @@ class CreateNotebookInstanceRequest extends  AbstractModel {
         }
         this.NotebookInstanceName = 'NotebookInstanceName' in params ? params.NotebookInstanceName : null;
         this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
-        this.RoleArn = 'RoleArn' in params ? params.RoleArn : null;
+        this.VolumeSizeInGB = 'VolumeSizeInGB' in params ? params.VolumeSizeInGB : null;
         this.DirectInternetAccess = 'DirectInternetAccess' in params ? params.DirectInternetAccess : null;
         this.RootAccess = 'RootAccess' in params ? params.RootAccess : null;
-        this.SecurityGroupIds = 'SecurityGroupIds' in params ? params.SecurityGroupIds : null;
         this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
-        this.VolumeSizeInGB = 'VolumeSizeInGB' in params ? params.VolumeSizeInGB : null;
-
-        if (params.Tags) {
-            this.Tags = new Array();
-            for (let z in params.Tags) {
-                let obj = new Tag();
-                obj.deserialize(params.Tags[z]);
-                this.Tags.push(obj);
-            }
-        }
+        this.LifecycleScriptsName = 'LifecycleScriptsName' in params ? params.LifecycleScriptsName : null;
+        this.DefaultCodeRepository = 'DefaultCodeRepository' in params ? params.DefaultCodeRepository : null;
+        this.AdditionalCodeRepositories = 'AdditionalCodeRepositories' in params ? params.AdditionalCodeRepositories : null;
 
     }
 }
@@ -658,7 +652,7 @@ class GitSecret extends  AbstractModel {
          * 无秘钥，默认选项
          * @type {boolean || null}
          */
-        this.None = null;
+        this.NoSecret = null;
 
         /**
          * Git用户名密码base64编码后的字符串
@@ -677,7 +671,7 @@ class GitSecret extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.None = 'None' in params ? params.None : null;
+        this.NoSecret = 'NoSecret' in params ? params.NoSecret : null;
         this.Secret = 'Secret' in params ? params.Secret : null;
 
     }
@@ -910,7 +904,6 @@ class CreateNotebookInstanceResponse extends  AbstractModel {
 
         /**
          * Notebook实例名字
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.NotebookInstanceName = null;
@@ -1167,6 +1160,49 @@ class UpdateNotebookInstanceRequest extends  AbstractModel {
          */
         this.InstanceType = null;
 
+        /**
+         * notebook生命周期脚本名称
+         * @type {string || null}
+         */
+        this.LifecycleScriptsName = null;
+
+        /**
+         * 是否解绑生命周期脚本，默认 false。
+如果本来就没有绑定脚本，则忽略此参数；
+如果本来有绑定脚本，此参数为 true 则解绑；
+如果本来有绑定脚本，此参数为 false，则需要额外填入 LifecycleScriptsName
+         * @type {boolean || null}
+         */
+        this.DisassociateLifecycleScript = null;
+
+        /**
+         * 默认存储库名称
+可以是已创建的存储库名称或者已https://开头的公共git库
+         * @type {string || null}
+         */
+        this.DefaultCodeRepository = null;
+
+        /**
+         * 其他存储库列表
+每个元素可以是已创建的存储库名称或者已https://开头的公共git库
+         * @type {Array.<string> || null}
+         */
+        this.AdditionalCodeRepositories = null;
+
+        /**
+         * 是否取消关联默认存储库，默认false
+该值为true时，DefaultCodeRepository将被忽略
+         * @type {boolean || null}
+         */
+        this.DisassociateDefaultCodeRepository = null;
+
+        /**
+         * 是否取消关联其他存储库，默认false
+该值为true时，AdditionalCodeRepositories将被忽略
+         * @type {boolean || null}
+         */
+        this.DisassociateAdditionalCodeRepositories = null;
+
     }
 
     /**
@@ -1181,6 +1217,12 @@ class UpdateNotebookInstanceRequest extends  AbstractModel {
         this.RootAccess = 'RootAccess' in params ? params.RootAccess : null;
         this.VolumeSizeInGB = 'VolumeSizeInGB' in params ? params.VolumeSizeInGB : null;
         this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
+        this.LifecycleScriptsName = 'LifecycleScriptsName' in params ? params.LifecycleScriptsName : null;
+        this.DisassociateLifecycleScript = 'DisassociateLifecycleScript' in params ? params.DisassociateLifecycleScript : null;
+        this.DefaultCodeRepository = 'DefaultCodeRepository' in params ? params.DefaultCodeRepository : null;
+        this.AdditionalCodeRepositories = 'AdditionalCodeRepositories' in params ? params.AdditionalCodeRepositories : null;
+        this.DisassociateDefaultCodeRepository = 'DisassociateDefaultCodeRepository' in params ? params.DisassociateDefaultCodeRepository : null;
+        this.DisassociateAdditionalCodeRepositories = 'DisassociateAdditionalCodeRepositories' in params ? params.DisassociateAdditionalCodeRepositories : null;
 
     }
 }
@@ -1588,13 +1630,6 @@ class DescribeNotebookInstanceResponse extends  AbstractModel {
         this.RootAccess = null;
 
         /**
-         * 安全组ID
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {Array.<string> || null}
-         */
-        this.SecurityGroupIds = null;
-
-        /**
          * 子网ID
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
@@ -1607,13 +1642,6 @@ class DescribeNotebookInstanceResponse extends  AbstractModel {
          * @type {number || null}
          */
         this.VolumeSizeInGB = null;
-
-        /**
-         * Notebook实例链接
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.Url = null;
 
         /**
          * 创建失败原因
@@ -1637,13 +1665,6 @@ class DescribeNotebookInstanceResponse extends  AbstractModel {
         this.LastModifiedTime = null;
 
         /**
-         * Notebook实例网卡ID
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.NetworkInterfaceId = null;
-
-        /**
          * Notebook实例日志链接
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
@@ -1665,6 +1686,29 @@ class DescribeNotebookInstanceResponse extends  AbstractModel {
         this.InstanceId = null;
 
         /**
+         * notebook生命周期脚本名称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.LifecycleScriptsName = null;
+
+        /**
+         * 默认存储库名称
+可以是已创建的存储库名称或者已https://开头的公共git库
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.DefaultCodeRepository = null;
+
+        /**
+         * 其他存储库列表
+每个元素可以是已创建的存储库名称或者已https://开头的公共git库
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
+         */
+        this.AdditionalCodeRepositories = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -1684,17 +1728,17 @@ class DescribeNotebookInstanceResponse extends  AbstractModel {
         this.RoleArn = 'RoleArn' in params ? params.RoleArn : null;
         this.DirectInternetAccess = 'DirectInternetAccess' in params ? params.DirectInternetAccess : null;
         this.RootAccess = 'RootAccess' in params ? params.RootAccess : null;
-        this.SecurityGroupIds = 'SecurityGroupIds' in params ? params.SecurityGroupIds : null;
         this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
         this.VolumeSizeInGB = 'VolumeSizeInGB' in params ? params.VolumeSizeInGB : null;
-        this.Url = 'Url' in params ? params.Url : null;
         this.FailureReason = 'FailureReason' in params ? params.FailureReason : null;
         this.CreationTime = 'CreationTime' in params ? params.CreationTime : null;
         this.LastModifiedTime = 'LastModifiedTime' in params ? params.LastModifiedTime : null;
-        this.NetworkInterfaceId = 'NetworkInterfaceId' in params ? params.NetworkInterfaceId : null;
         this.LogUrl = 'LogUrl' in params ? params.LogUrl : null;
         this.NotebookInstanceStatus = 'NotebookInstanceStatus' in params ? params.NotebookInstanceStatus : null;
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.LifecycleScriptsName = 'LifecycleScriptsName' in params ? params.LifecycleScriptsName : null;
+        this.DefaultCodeRepository = 'DefaultCodeRepository' in params ? params.DefaultCodeRepository : null;
+        this.AdditionalCodeRepositories = 'AdditionalCodeRepositories' in params ? params.AdditionalCodeRepositories : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -2696,43 +2740,6 @@ class CreateCodeRepositoryResponse extends  AbstractModel {
 }
 
 /**
- * notebook标签
- * @class
- */
-class Tag extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * key
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.Key = null;
-
-        /**
-         * value
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.Value = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Key = 'Key' in params ? params.Key : null;
-        this.Value = 'Value' in params ? params.Value : null;
-
-    }
-}
-
-/**
  * DescribeCodeRepositories请求参数结构体
  * @class
  */
@@ -2965,7 +2972,6 @@ module.exports = {
     UpdateNotebookLifecycleScriptResponse: UpdateNotebookLifecycleScriptResponse,
     StartNotebookInstanceRequest: StartNotebookInstanceRequest,
     CreateCodeRepositoryResponse: CreateCodeRepositoryResponse,
-    Tag: Tag,
     DescribeCodeRepositoriesRequest: DescribeCodeRepositoriesRequest,
     DescribeCodeRepositoriesResponse: DescribeCodeRepositoriesResponse,
     ModelArtifacts: ModelArtifacts,

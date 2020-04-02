@@ -2156,6 +2156,13 @@ class ClusterInstancesInfo extends  AbstractModel {
          */
         this.ServiceClass = null;
 
+        /**
+         * 集群所有节点的别名序列化
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.AliasInfo = null;
+
     }
 
     /**
@@ -2205,6 +2212,7 @@ class ClusterInstancesInfo extends  AbstractModel {
         }
         this.HiveMetaDb = 'HiveMetaDb' in params ? params.HiveMetaDb : null;
         this.ServiceClass = 'ServiceClass' in params ? params.ServiceClass : null;
+        this.AliasInfo = 'AliasInfo' in params ? params.AliasInfo : null;
 
     }
 }

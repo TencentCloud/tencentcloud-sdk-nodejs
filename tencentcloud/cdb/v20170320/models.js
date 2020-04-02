@@ -2976,6 +2976,57 @@ class CreateDBInstanceHourResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeSLowLogData返回参数结构体
+ * @class
+ */
+class DescribeSLowLogDataResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 符合条件的记录总数。
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 查询到的记录。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<SlowLogItem> || null}
+         */
+        this.Items = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.Items) {
+            this.Items = new Array();
+            for (let z in params.Items) {
+                let obj = new SlowLogItem();
+                obj.deserialize(params.Items[z]);
+                this.Items.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * ReleaseIsolatedDBInstances请求参数结构体
  * @class
  */
@@ -4701,6 +4752,41 @@ class DescribeBackupSummariesRequest extends  AbstractModel {
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.OrderBy = 'OrderBy' in params ? params.OrderBy : null;
         this.OrderDirection = 'OrderDirection' in params ? params.OrderDirection : null;
+
+    }
+}
+
+/**
+ * StartBatchRollback返回参数结构体
+ * @class
+ */
+class StartBatchRollbackResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 异步任务的请求 ID，可使用此 ID 查询异步任务的执行结果。
+         * @type {string || null}
+         */
+        this.AsyncRequestId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AsyncRequestId = 'AsyncRequestId' in params ? params.AsyncRequestId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -9166,6 +9252,97 @@ class RoInstanceInfo extends  AbstractModel {
 }
 
 /**
+ * DescribeSLowLogData请求参数结构体
+ * @class
+ */
+class DescribeSLowLogDataRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例 ID。
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 开始时间戳。
+         * @type {number || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * 结束时间戳。
+         * @type {number || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * 客户端 Host 列表。
+         * @type {Array.<string> || null}
+         */
+        this.UserHosts = null;
+
+        /**
+         * 客户端 用户名 列表。
+         * @type {Array.<string> || null}
+         */
+        this.UserNames = null;
+
+        /**
+         * 访问的 数据库 列表。
+         * @type {Array.<string> || null}
+         */
+        this.DataBases = null;
+
+        /**
+         * 排序字段。当前支持：Timestamp,QueryTime,LockTime,RowsExamined,RowsSent 。
+         * @type {string || null}
+         */
+        this.SortBy = null;
+
+        /**
+         * 升序还是降序排列。当前支持：ASC,DESC 。
+         * @type {string || null}
+         */
+        this.OrderBy = null;
+
+        /**
+         * 偏移量，默认为0。
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 一次性返回的记录数量，最大为400。
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.UserHosts = 'UserHosts' in params ? params.UserHosts : null;
+        this.UserNames = 'UserNames' in params ? params.UserNames : null;
+        this.DataBases = 'DataBases' in params ? params.DataBases : null;
+        this.SortBy = 'SortBy' in params ? params.SortBy : null;
+        this.OrderBy = 'OrderBy' in params ? params.OrderBy : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+
+    }
+}
+
+/**
  * CreateParamTemplate请求参数结构体
  * @class
  */
@@ -10859,6 +11036,12 @@ class CreateDeployGroupRequest extends  AbstractModel {
          */
         this.LimitNum = null;
 
+        /**
+         * 置放群组机型属性，可选参数：SH12+SH02、TS85。
+         * @type {Array.<string> || null}
+         */
+        this.DevClass = null;
+
     }
 
     /**
@@ -10872,6 +11055,7 @@ class CreateDeployGroupRequest extends  AbstractModel {
         this.Description = 'Description' in params ? params.Description : null;
         this.Affinity = 'Affinity' in params ? params.Affinity : null;
         this.LimitNum = 'LimitNum' in params ? params.LimitNum : null;
+        this.DevClass = 'DevClass' in params ? params.DevClass : null;
 
     }
 }
@@ -11215,24 +11399,89 @@ class DescribeInstanceParamsRequest extends  AbstractModel {
 }
 
 /**
- * StartBatchRollback返回参数结构体
+ * 结构化的慢日志详情
  * @class
  */
-class StartBatchRollbackResponse extends  AbstractModel {
+class SlowLogItem extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 异步任务的请求 ID，可使用此 ID 查询异步任务的执行结果。
-         * @type {string || null}
+         * Sql的执行时间。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
          */
-        this.AsyncRequestId = null;
+        this.Timestamp = null;
 
         /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * Sql的执行时长。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.QueryTime = null;
+
+        /**
+         * Sql语句。
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.SqlText = null;
+
+        /**
+         * 客户端地址。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.UserHost = null;
+
+        /**
+         * 用户名。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.UserName = null;
+
+        /**
+         * 数据库名。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Database = null;
+
+        /**
+         * 锁时长。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.LockTime = null;
+
+        /**
+         * 扫描行数。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.RowsExamined = null;
+
+        /**
+         * 结果集行数。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.RowsSent = null;
+
+        /**
+         * Sql模板。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.SqlTemplate = null;
+
+        /**
+         * Sql语句的md5。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Md5 = null;
 
     }
 
@@ -11243,8 +11492,17 @@ class StartBatchRollbackResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.AsyncRequestId = 'AsyncRequestId' in params ? params.AsyncRequestId : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.Timestamp = 'Timestamp' in params ? params.Timestamp : null;
+        this.QueryTime = 'QueryTime' in params ? params.QueryTime : null;
+        this.SqlText = 'SqlText' in params ? params.SqlText : null;
+        this.UserHost = 'UserHost' in params ? params.UserHost : null;
+        this.UserName = 'UserName' in params ? params.UserName : null;
+        this.Database = 'Database' in params ? params.Database : null;
+        this.LockTime = 'LockTime' in params ? params.LockTime : null;
+        this.RowsExamined = 'RowsExamined' in params ? params.RowsExamined : null;
+        this.RowsSent = 'RowsSent' in params ? params.RowsSent : null;
+        this.SqlTemplate = 'SqlTemplate' in params ? params.SqlTemplate : null;
+        this.Md5 = 'Md5' in params ? params.Md5 : null;
 
     }
 }
@@ -11972,6 +12230,7 @@ module.exports = {
     ModifyInstanceTagResponse: ModifyInstanceTagResponse,
     CreateParamTemplateResponse: CreateParamTemplateResponse,
     CreateDBInstanceHourResponse: CreateDBInstanceHourResponse,
+    DescribeSLowLogDataResponse: DescribeSLowLogDataResponse,
     ReleaseIsolatedDBInstancesRequest: ReleaseIsolatedDBInstancesRequest,
     BinlogInfo: BinlogInfo,
     DeleteDeployGroupsResponse: DeleteDeployGroupsResponse,
@@ -12000,6 +12259,7 @@ module.exports = {
     DescribeProjectSecurityGroupsResponse: DescribeProjectSecurityGroupsResponse,
     ModifyDBInstanceProjectRequest: ModifyDBInstanceProjectRequest,
     DescribeBackupSummariesRequest: DescribeBackupSummariesRequest,
+    StartBatchRollbackResponse: StartBatchRollbackResponse,
     DescribeRoGroupsRequest: DescribeRoGroupsRequest,
     DescribeDBSwitchRecordsRequest: DescribeDBSwitchRecordsRequest,
     DescribeSupportedPrivilegesRequest: DescribeSupportedPrivilegesRequest,
@@ -12091,6 +12351,7 @@ module.exports = {
     DescribeBinlogBackupOverviewResponse: DescribeBinlogBackupOverviewResponse,
     InitDBInstancesRequest: InitDBInstancesRequest,
     RoInstanceInfo: RoInstanceInfo,
+    DescribeSLowLogDataRequest: DescribeSLowLogDataRequest,
     CreateParamTemplateRequest: CreateParamTemplateRequest,
     IsolateDBInstanceRequest: IsolateDBInstanceRequest,
     ModifyTimeWindowRequest: ModifyTimeWindowRequest,
@@ -12138,7 +12399,7 @@ module.exports = {
     DeleteBackupRequest: DeleteBackupRequest,
     ModifyNameOrDescByDpIdRequest: ModifyNameOrDescByDpIdRequest,
     DescribeInstanceParamsRequest: DescribeInstanceParamsRequest,
-    StartBatchRollbackResponse: StartBatchRollbackResponse,
+    SlowLogItem: SlowLogItem,
     DescribeDeviceMonitorInfoResponse: DescribeDeviceMonitorInfoResponse,
     UploadInfo: UploadInfo,
     DescribeRollbackRangeTimeResponse: DescribeRollbackRangeTimeResponse,
