@@ -23,7 +23,6 @@ const ClearTablesRequest = models.ClearTablesRequest;
 const DescribeClustersRequest = models.DescribeClustersRequest;
 const ModifyTableQuotasResponse = models.ModifyTableQuotasResponse;
 const DescribeIdlFileInfosResponse = models.DescribeIdlFileInfosResponse;
-const ModifyAppNameRequest = models.ModifyAppNameRequest;
 const CreateBackupRequest = models.CreateBackupRequest;
 const ModifyTableGroupNameResponse = models.ModifyTableGroupNameResponse;
 const RecoverRecycleTablesResponse = models.RecoverRecycleTablesResponse;
@@ -80,7 +79,6 @@ const DescribeTablesInRecycleRequest = models.DescribeTablesInRecycleRequest;
 const DescribeTablesRequest = models.DescribeTablesRequest;
 const DescribeRegionsRequest = models.DescribeRegionsRequest;
 const DescribeClustersResponse = models.DescribeClustersResponse;
-const ModifyAppNameResponse = models.ModifyAppNameResponse;
 const DeleteIdlFilesResponse = models.DeleteIdlFilesResponse;
 const CreateTableGroupRequest = models.CreateTableGroupRequest;
 const ModifyTableMemosRequest = models.ModifyTableMemosRequest;
@@ -194,17 +192,6 @@ class TcaplusdbClient extends AbstractClient {
     RecoverRecycleTables(req, cb) {
         let resp = new RecoverRecycleTablesResponse();
         this.request("RecoverRecycleTables", req, resp, cb);
-    }
-
-    /**
-     * 修改指定的应用名称
-     * @param {ModifyAppNameRequest} req
-     * @param {function(string, ModifyAppNameResponse):void} cb
-     * @public
-     */
-    ModifyAppName(req, cb) {
-        let resp = new ModifyAppNameResponse();
-        this.request("ModifyAppName", req, resp, cb);
     }
 
     /**

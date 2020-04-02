@@ -2473,25 +2473,25 @@ NORMAL_CVM：普通云服务器；
         this.NextHopDestination = null;
 
         /**
-         * 网络探测实例ID。形如：netd-12345678。
+         * 网络探测实例ID。形如：netd-12345678。该参数与（VpcId，SubnetId，NetDetectName），至少要有一个。当NetDetectId存在时，使用NetDetectId。
          * @type {string || null}
          */
         this.NetDetectId = null;
 
         /**
-         * `VPC`实例`ID`。形如：`vpc-12345678`
+         * `VPC`实例`ID`。形如：`vpc-12345678`。该参数与（SubnetId，NetDetectName）配合使用，与NetDetectId至少要有一个。当NetDetectId存在时，使用NetDetectId。
          * @type {string || null}
          */
         this.VpcId = null;
 
         /**
-         * 子网实例ID。形如：subnet-12345678。
+         * 子网实例ID。形如：subnet-12345678。该参数与（VpcId，NetDetectName）配合使用，与NetDetectId至少要有一个。当NetDetectId存在时，使用NetDetectId。
          * @type {string || null}
          */
         this.SubnetId = null;
 
         /**
-         * 网络探测名称，最大长度不能超过60个字节。
+         * 网络探测名称，最大长度不能超过60个字节。该参数与（VpcId，SubnetId）配合使用，与NetDetectId至少要有一个。当NetDetectId存在时，使用NetDetectId。
          * @type {string || null}
          */
         this.NetDetectName = null;

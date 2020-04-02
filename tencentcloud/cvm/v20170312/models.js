@@ -4539,7 +4539,7 @@ class Instance extends  AbstractModel {
         /**
          * 实例的IPv6地址。
 注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
+         * @type {Array.<string> || null}
          */
         this.IPv6Addresses = null;
 

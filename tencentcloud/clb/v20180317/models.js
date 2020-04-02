@@ -4134,6 +4134,13 @@ class RuleOutput extends  AbstractModel {
          */
         this.TrpcFunc = null;
 
+        /**
+         * QUIC状态
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.QuicStatus = null;
+
     }
 
     /**
@@ -4183,6 +4190,7 @@ class RuleOutput extends  AbstractModel {
         this.WafDomainId = 'WafDomainId' in params ? params.WafDomainId : null;
         this.TrpcCallee = 'TrpcCallee' in params ? params.TrpcCallee : null;
         this.TrpcFunc = 'TrpcFunc' in params ? params.TrpcFunc : null;
+        this.QuicStatus = 'QuicStatus' in params ? params.QuicStatus : null;
 
     }
 }
@@ -6284,6 +6292,12 @@ class RuleInput extends  AbstractModel {
          */
         this.TrpcFunc = null;
 
+        /**
+         * 是否开启QUIC，注意，只有HTTPS域名才能开启QUIC
+         * @type {boolean || null}
+         */
+        this.Quic = null;
+
     }
 
     /**
@@ -6315,6 +6329,7 @@ class RuleInput extends  AbstractModel {
         this.TargetType = 'TargetType' in params ? params.TargetType : null;
         this.TrpcCallee = 'TrpcCallee' in params ? params.TrpcCallee : null;
         this.TrpcFunc = 'TrpcFunc' in params ? params.TrpcFunc : null;
+        this.Quic = 'Quic' in params ? params.Quic : null;
 
     }
 }

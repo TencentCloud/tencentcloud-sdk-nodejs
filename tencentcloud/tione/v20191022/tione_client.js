@@ -72,7 +72,6 @@ const CreatePresignedNotebookInstanceUrlResponse = models.CreatePresignedNoteboo
 const UpdateNotebookLifecycleScriptResponse = models.UpdateNotebookLifecycleScriptResponse;
 const StartNotebookInstanceRequest = models.StartNotebookInstanceRequest;
 const CreateCodeRepositoryResponse = models.CreateCodeRepositoryResponse;
-const Tag = models.Tag;
 const DescribeCodeRepositoriesRequest = models.DescribeCodeRepositoriesRequest;
 const DescribeCodeRepositoriesResponse = models.DescribeCodeRepositoriesResponse;
 const ModelArtifacts = models.ModelArtifacts;

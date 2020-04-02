@@ -19,6 +19,7 @@ const AbstractClient = require('../../common/abstract_client')
 const DescribeTagsResponse = models.DescribeTagsResponse;
 const DeleteTagRequest = models.DeleteTagRequest;
 const DeleteResourceTagResponse = models.DeleteResourceTagResponse;
+const DescribeResourceTagsByTagKeysRequest = models.DescribeResourceTagsByTagKeysRequest;
 const ModifyResourceTagsResponse = models.ModifyResourceTagsResponse;
 const DescribeTagKeysResponse = models.DescribeTagKeysResponse;
 const DescribeTagValuesRequest = models.DescribeTagValuesRequest;
@@ -32,11 +33,13 @@ const TagResource = models.TagResource;
 const DescribeTagsRequest = models.DescribeTagsRequest;
 const AddResourceTagRequest = models.AddResourceTagRequest;
 const CreateTagRequest = models.CreateTagRequest;
+const DescribeResourceTagsByTagKeysResponse = models.DescribeResourceTagsByTagKeysResponse;
 const TagFilter = models.TagFilter;
 const Tag = models.Tag;
 const DescribeResourceTagsRequest = models.DescribeResourceTagsRequest;
 const CreateTagResponse = models.CreateTagResponse;
 const DeleteTagResponse = models.DeleteTagResponse;
+const ResourceIdTag = models.ResourceIdTag;
 const AddResourceTagResponse = models.AddResourceTagResponse;
 const UpdateResourceTagValueRequest = models.UpdateResourceTagValueRequest;
 const DescribeTagValuesResponse = models.DescribeTagValuesResponse;
@@ -58,6 +61,17 @@ class TagClient extends AbstractClient {
         super("tag.tencentcloudapi.com", "2018-08-13", credential, region, profile);
     }
     
+    /**
+     * 根据标签键获取资源标签
+     * @param {DescribeResourceTagsByTagKeysRequest} req
+     * @param {function(string, DescribeResourceTagsByTagKeysResponse):void} cb
+     * @public
+     */
+    DescribeResourceTagsByTagKeys(req, cb) {
+        let resp = new DescribeResourceTagsByTagKeysResponse();
+        this.request("DescribeResourceTagsByTagKeys", req, resp, cb);
+    }
+
     /**
      * 本接口用于修改资源已关联的标签值（标签键不变）
      * @param {UpdateResourceTagValueRequest} req

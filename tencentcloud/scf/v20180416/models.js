@@ -714,6 +714,20 @@ class FunctionVersion extends  AbstractModel {
          */
         this.Description = null;
 
+        /**
+         * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.AddTime = null;
+
+        /**
+         * 更新时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ModTime = null;
+
     }
 
     /**
@@ -725,6 +739,8 @@ class FunctionVersion extends  AbstractModel {
         }
         this.Version = 'Version' in params ? params.Version : null;
         this.Description = 'Description' in params ? params.Description : null;
+        this.AddTime = 'AddTime' in params ? params.AddTime : null;
+        this.ModTime = 'ModTime' in params ? params.ModTime : null;
 
     }
 }

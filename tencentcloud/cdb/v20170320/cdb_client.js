@@ -72,6 +72,7 @@ const SwitchForUpgradeRequest = models.SwitchForUpgradeRequest;
 const ModifyInstanceTagResponse = models.ModifyInstanceTagResponse;
 const CreateParamTemplateResponse = models.CreateParamTemplateResponse;
 const CreateDBInstanceHourResponse = models.CreateDBInstanceHourResponse;
+const DescribeSLowLogDataResponse = models.DescribeSLowLogDataResponse;
 const ReleaseIsolatedDBInstancesRequest = models.ReleaseIsolatedDBInstancesRequest;
 const BinlogInfo = models.BinlogInfo;
 const DeleteDeployGroupsResponse = models.DeleteDeployGroupsResponse;
@@ -100,6 +101,7 @@ const ModifyInstanceParamRequest = models.ModifyInstanceParamRequest;
 const DescribeProjectSecurityGroupsResponse = models.DescribeProjectSecurityGroupsResponse;
 const ModifyDBInstanceProjectRequest = models.ModifyDBInstanceProjectRequest;
 const DescribeBackupSummariesRequest = models.DescribeBackupSummariesRequest;
+const StartBatchRollbackResponse = models.StartBatchRollbackResponse;
 const DescribeRoGroupsRequest = models.DescribeRoGroupsRequest;
 const DescribeDBSwitchRecordsRequest = models.DescribeDBSwitchRecordsRequest;
 const DescribeSupportedPrivilegesRequest = models.DescribeSupportedPrivilegesRequest;
@@ -191,6 +193,7 @@ const ZoneSellConf = models.ZoneSellConf;
 const DescribeBinlogBackupOverviewResponse = models.DescribeBinlogBackupOverviewResponse;
 const InitDBInstancesRequest = models.InitDBInstancesRequest;
 const RoInstanceInfo = models.RoInstanceInfo;
+const DescribeSLowLogDataRequest = models.DescribeSLowLogDataRequest;
 const CreateParamTemplateRequest = models.CreateParamTemplateRequest;
 const IsolateDBInstanceRequest = models.IsolateDBInstanceRequest;
 const ModifyTimeWindowRequest = models.ModifyTimeWindowRequest;
@@ -238,7 +241,7 @@ const RollbackDBName = models.RollbackDBName;
 const DeleteBackupRequest = models.DeleteBackupRequest;
 const ModifyNameOrDescByDpIdRequest = models.ModifyNameOrDescByDpIdRequest;
 const DescribeInstanceParamsRequest = models.DescribeInstanceParamsRequest;
-const StartBatchRollbackResponse = models.StartBatchRollbackResponse;
+const SlowLogItem = models.SlowLogItem;
 const DescribeDeviceMonitorInfoResponse = models.DescribeDeviceMonitorInfoResponse;
 const UploadInfo = models.UploadInfo;
 const DescribeRollbackRangeTimeResponse = models.DescribeRollbackRangeTimeResponse;
@@ -860,7 +863,7 @@ class CdbClient extends AbstractClient {
     }
 
     /**
-     * 本接口(DeleteBackup)用于删除数据库备份。
+     * 本接口(DeleteBackup)用于删除数据库备份。本接口只支持删除手动发起的备份。
      * @param {DeleteBackupRequest} req
      * @param {function(string, DeleteBackupResponse):void} cb
      * @public
@@ -1123,6 +1126,17 @@ class CdbClient extends AbstractClient {
     DescribeDBPrice(req, cb) {
         let resp = new DescribeDBPriceResponse();
         this.request("DescribeDBPrice", req, resp, cb);
+    }
+
+    /**
+     * 条件检索实例的慢日志。只允许查看一个月之内的慢日志
+     * @param {DescribeSLowLogDataRequest} req
+     * @param {function(string, DescribeSLowLogDataResponse):void} cb
+     * @public
+     */
+    DescribeSLowLogData(req, cb) {
+        let resp = new DescribeSLowLogDataResponse();
+        this.request("DescribeSLowLogData", req, resp, cb);
     }
 
     /**

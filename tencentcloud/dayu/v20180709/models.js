@@ -11895,6 +11895,13 @@ class L7RuleEntry extends  AbstractModel {
          */
         this.CCLevel = null;
 
+        /**
+         * 是否开启Https协议使用Http回源，取值[0(关闭), 1(开启)]，不填写默认是关闭
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.HttpsToHttpEnable = null;
+
     }
 
     /**
@@ -11930,6 +11937,7 @@ class L7RuleEntry extends  AbstractModel {
         this.CCEnable = 'CCEnable' in params ? params.CCEnable : null;
         this.CCThreshold = 'CCThreshold' in params ? params.CCThreshold : null;
         this.CCLevel = 'CCLevel' in params ? params.CCLevel : null;
+        this.HttpsToHttpEnable = 'HttpsToHttpEnable' in params ? params.HttpsToHttpEnable : null;
 
     }
 }

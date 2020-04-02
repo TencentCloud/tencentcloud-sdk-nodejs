@@ -381,41 +381,6 @@ class DescribeIdlFileInfosResponse extends  AbstractModel {
 }
 
 /**
- * ModifyAppName请求参数结构体
- * @class
- */
-class ModifyAppNameRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 需要修改名称的应用实例ID
-         * @type {string || null}
-         */
-        this.ApplicationId = null;
-
-        /**
-         * 需要修改的应用名称，需要URLEncode
-         * @type {string || null}
-         */
-        this.AppName = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.ApplicationId = 'ApplicationId' in params ? params.ApplicationId : null;
-        this.AppName = 'AppName' in params ? params.AppName : null;
-
-    }
-}
-
-/**
  * CreateBackup请求参数结构体
  * @class
  */
@@ -3677,34 +3642,6 @@ class DescribeClustersResponse extends  AbstractModel {
 }
 
 /**
- * ModifyAppName返回参数结构体
- * @class
- */
-class ModifyAppNameResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
  * DeleteIdlFiles返回参数结构体
  * @class
  */
@@ -3903,7 +3840,6 @@ module.exports = {
     DescribeClustersRequest: DescribeClustersRequest,
     ModifyTableQuotasResponse: ModifyTableQuotasResponse,
     DescribeIdlFileInfosResponse: DescribeIdlFileInfosResponse,
-    ModifyAppNameRequest: ModifyAppNameRequest,
     CreateBackupRequest: CreateBackupRequest,
     ModifyTableGroupNameResponse: ModifyTableGroupNameResponse,
     RecoverRecycleTablesResponse: RecoverRecycleTablesResponse,
@@ -3960,7 +3896,6 @@ module.exports = {
     DescribeTablesRequest: DescribeTablesRequest,
     DescribeRegionsRequest: DescribeRegionsRequest,
     DescribeClustersResponse: DescribeClustersResponse,
-    ModifyAppNameResponse: ModifyAppNameResponse,
     DeleteIdlFilesResponse: DeleteIdlFilesResponse,
     CreateTableGroupRequest: CreateTableGroupRequest,
     ModifyTableMemosRequest: ModifyTableMemosRequest,
