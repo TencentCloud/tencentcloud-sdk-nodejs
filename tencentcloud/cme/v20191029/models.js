@@ -1412,12 +1412,13 @@ class Entity extends  AbstractModel {
         /**
          * 类型，取值有：
 <li>PERSON：个人。</li>
+<li>TEAM：团队。</li>
          * @type {string || null}
          */
         this.Type = null;
 
         /**
-         * Id，当 Type=PERSON，取值为用户 Id。
+         * Id，当 Type=PERSON，取值为用户 Id，当 Type=TEAM，取值为团队 Id。
          * @type {string || null}
          */
         this.Id = null;

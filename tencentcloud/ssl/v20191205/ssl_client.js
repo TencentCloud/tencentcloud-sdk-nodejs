@@ -64,7 +64,7 @@ class SslClient extends AbstractClient {
     }
     
     /**
-     * 本接口(DescribeCertificates)用于获取证书列表。
+     * 本接口（DescribeCertificates）用于获取证书列表。
      * @param {DescribeCertificatesRequest} req
      * @param {function(string, DescribeCertificatesResponse):void} cb
      * @public
@@ -75,7 +75,7 @@ class SslClient extends AbstractClient {
     }
 
     /**
-     * 批量修改证书所属项目
+     * 批量修改证书所属项目。
      * @param {ModifyCertificateProjectRequest} req
      * @param {function(string, ModifyCertificateProjectResponse):void} cb
      * @public
@@ -86,7 +86,7 @@ class SslClient extends AbstractClient {
     }
 
     /**
-     * 本接口(UploadCertificate)用于上传证书。
+     * 本接口（UploadCertificate）用于上传证书。
      * @param {UploadCertificateRequest} req
      * @param {function(string, UploadCertificateResponse):void} cb
      * @public
@@ -119,7 +119,7 @@ class SslClient extends AbstractClient {
     }
 
     /**
-     * 本接口(DeleteCertificate)用于删除证书。
+     * 本接口（DeleteCertificate）用于删除证书。
      * @param {DeleteCertificateRequest} req
      * @param {function(string, DeleteCertificateResponse):void} cb
      * @public
@@ -141,7 +141,7 @@ class SslClient extends AbstractClient {
     }
 
     /**
-     * 本接口(DownloadCertificate)用于下载证书。
+     * 本接口（DownloadCertificate）用于下载证书。
      * @param {DownloadCertificateRequest} req
      * @param {function(string, DownloadCertificateResponse):void} cb
      * @public
@@ -152,7 +152,7 @@ class SslClient extends AbstractClient {
     }
 
     /**
-     * 本接口(ReplaceCertificate)用于重颁发证书。已申请的免费证书仅支持RSA算法、密钥对参数为2048的证书重颁发。
+     * 本接口（ReplaceCertificate）用于重颁发证书。已申请的免费证书仅支持 RSA 算法、密钥对参数为2048的证书重颁发。
      * @param {ReplaceCertificateRequest} req
      * @param {function(string, ReplaceCertificateResponse):void} cb
      * @public
@@ -163,7 +163,7 @@ class SslClient extends AbstractClient {
     }
 
     /**
-     * 本接口(ApplyCertificate)用于免费证书申请。
+     * 本接口（ApplyCertificate）用于免费证书申请。
      * @param {ApplyCertificateRequest} req
      * @param {function(string, ApplyCertificateResponse):void} cb
      * @public
@@ -174,7 +174,7 @@ class SslClient extends AbstractClient {
     }
 
     /**
-     * 获取用户账号下有关证书的操作日志
+     * 获取用户账号下有关证书的操作日志。
      * @param {DescribeCertificateOperateLogsRequest} req
      * @param {function(string, DescribeCertificateOperateLogsResponse):void} cb
      * @public
@@ -196,7 +196,7 @@ class SslClient extends AbstractClient {
     }
 
     /**
-     * 获取证书详情
+     * 获取证书详情。
      * @param {DescribeCertificateDetailRequest} req
      * @param {function(string, DescribeCertificateDetailResponse):void} cb
      * @public
@@ -207,7 +207,7 @@ class SslClient extends AbstractClient {
     }
 
     /**
-     * 本接口(DescribeCertificate)用于获取证书信息。
+     * 本接口（DescribeCertificate）用于获取证书信息。
      * @param {DescribeCertificateRequest} req
      * @param {function(string, DescribeCertificateResponse):void} cb
      * @public

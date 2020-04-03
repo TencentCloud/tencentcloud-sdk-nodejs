@@ -639,68 +639,24 @@ class TsfPageSimpleGroup extends  AbstractModel {
 }
 
 /**
- * 包信息
+ * DescribePodInstances返回参数结构体
  * @class
  */
-class PkgInfo extends  AbstractModel {
+class DescribePodInstancesResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 程序包ID
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
+         * 查询的权限数据对象
+         * @type {GroupPodResult || null}
          */
-        this.PkgId = null;
+        this.Result = null;
 
         /**
-         * 程序包名
-注意：此字段可能返回 null，表示取不到有效值。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.PkgName = null;
-
-        /**
-         * 程序包类型
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.PkgType = null;
-
-        /**
-         * 程序包版本
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.PkgVersion = null;
-
-        /**
-         * 程序包描述
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.PkgDesc = null;
-
-        /**
-         * 上传时间
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.UploadTime = null;
-
-        /**
-         * 程序包MD5
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.Md5 = null;
-
-        /**
-         * 程序包状态
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.PkgPubStatus = null;
+        this.RequestId = null;
 
     }
 
@@ -711,14 +667,13 @@ class PkgInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.PkgId = 'PkgId' in params ? params.PkgId : null;
-        this.PkgName = 'PkgName' in params ? params.PkgName : null;
-        this.PkgType = 'PkgType' in params ? params.PkgType : null;
-        this.PkgVersion = 'PkgVersion' in params ? params.PkgVersion : null;
-        this.PkgDesc = 'PkgDesc' in params ? params.PkgDesc : null;
-        this.UploadTime = 'UploadTime' in params ? params.UploadTime : null;
-        this.Md5 = 'Md5' in params ? params.Md5 : null;
-        this.PkgPubStatus = 'PkgPubStatus' in params ? params.PkgPubStatus : null;
+
+        if (params.Result) {
+            let obj = new GroupPodResult();
+            obj.deserialize(params.Result)
+            this.Result = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -944,6 +899,131 @@ class RevocationConfigRequest extends  AbstractModel {
             return;
         }
         this.ConfigReleaseId = 'ConfigReleaseId' in params ? params.ConfigReleaseId : null;
+
+    }
+}
+
+/**
+ * 部署组实例列表
+ * @class
+ */
+class GroupPod extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例名称(对应到kubernetes的pod名称)
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.PodName = null;
+
+        /**
+         * 实例ID(对应到kubernetes的pod id)
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.PodId = null;
+
+        /**
+         * 实例状态，请参考后面的实例以及容器的状态定义
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * 实例处于当前状态的原因，例如容器下载镜像失败
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Reason = null;
+
+        /**
+         * 主机IP
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.NodeIp = null;
+
+        /**
+         * 实例IP
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Ip = null;
+
+        /**
+         * 实例中容器的重启次数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.RestartCount = null;
+
+        /**
+         * 实例中已就绪容器的个数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.ReadyCount = null;
+
+        /**
+         * 运行时长
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Runtime = null;
+
+        /**
+         * 实例启动时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.CreatedAt = null;
+
+        /**
+         * 服务实例状态
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ServiceInstanceStatus = null;
+
+        /**
+         * 机器实例可使用状态
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.InstanceAvailableStatus = null;
+
+        /**
+         * 机器实例状态
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.InstanceStatus = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PodName = 'PodName' in params ? params.PodName : null;
+        this.PodId = 'PodId' in params ? params.PodId : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.Reason = 'Reason' in params ? params.Reason : null;
+        this.NodeIp = 'NodeIp' in params ? params.NodeIp : null;
+        this.Ip = 'Ip' in params ? params.Ip : null;
+        this.RestartCount = 'RestartCount' in params ? params.RestartCount : null;
+        this.ReadyCount = 'ReadyCount' in params ? params.ReadyCount : null;
+        this.Runtime = 'Runtime' in params ? params.Runtime : null;
+        this.CreatedAt = 'CreatedAt' in params ? params.CreatedAt : null;
+        this.ServiceInstanceStatus = 'ServiceInstanceStatus' in params ? params.ServiceInstanceStatus : null;
+        this.InstanceAvailableStatus = 'InstanceAvailableStatus' in params ? params.InstanceAvailableStatus : null;
+        this.InstanceStatus = 'InstanceStatus' in params ? params.InstanceStatus : null;
 
     }
 }
@@ -3851,24 +3931,30 @@ class DescribeApplicationAttributeRequest extends  AbstractModel {
 }
 
 /**
- * RollbackConfig请求参数结构体
+ * DescribePodInstances请求参数结构体
  * @class
  */
-class RollbackConfigRequest extends  AbstractModel {
+class DescribePodInstancesRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 配置项发布历史ID
+         * 实例所属groupId
          * @type {string || null}
          */
-        this.ConfigReleaseLogId = null;
+        this.GroupId = null;
 
         /**
-         * 回滚描述
-         * @type {string || null}
+         * 偏移量，取值从0开始
+         * @type {number || null}
          */
-        this.ReleaseDesc = null;
+        this.Offset = null;
+
+        /**
+         * 分页个数，默认为20， 取值应为1~50
+         * @type {number || null}
+         */
+        this.Limit = null;
 
     }
 
@@ -3879,8 +3965,9 @@ class RollbackConfigRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ConfigReleaseLogId = 'ConfigReleaseLogId' in params ? params.ConfigReleaseLogId : null;
-        this.ReleaseDesc = 'ReleaseDesc' in params ? params.ReleaseDesc : null;
+        this.GroupId = 'GroupId' in params ? params.GroupId : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
 
     }
 }
@@ -4129,6 +4216,41 @@ class DescribePublicConfigResponse extends  AbstractModel {
             this.Result = obj;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * RollbackConfig请求参数结构体
+ * @class
+ */
+class RollbackConfigRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 配置项发布历史ID
+         * @type {string || null}
+         */
+        this.ConfigReleaseLogId = null;
+
+        /**
+         * 回滚描述
+         * @type {string || null}
+         */
+        this.ReleaseDesc = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ConfigReleaseLogId = 'ConfigReleaseLogId' in params ? params.ConfigReleaseLogId : null;
+        this.ReleaseDesc = 'ReleaseDesc' in params ? params.ReleaseDesc : null;
 
     }
 }
@@ -6880,6 +7002,7 @@ class ProtocolPort extends  AbstractModel {
 
         /**
          * 主机端口
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.NodePort = null;
@@ -7610,6 +7733,51 @@ class DescribeDownloadInfoResponse extends  AbstractModel {
 }
 
 /**
+ * 部署组实例列表
+ * @class
+ */
+class GroupPodResult extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 总记录数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 列表信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<GroupPod> || null}
+         */
+        this.Content = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.Content) {
+            this.Content = new Array();
+            for (let z in params.Content) {
+                let obj = new GroupPod();
+                obj.deserialize(params.Content[z]);
+                this.Content.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * DescribeApplication请求参数结构体
  * @class
  */
@@ -8335,6 +8503,91 @@ class AddClusterInstancesResponse extends  AbstractModel {
             this.Result = obj;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 包信息
+ * @class
+ */
+class PkgInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 程序包ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.PkgId = null;
+
+        /**
+         * 程序包名
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.PkgName = null;
+
+        /**
+         * 程序包类型
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.PkgType = null;
+
+        /**
+         * 程序包版本
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.PkgVersion = null;
+
+        /**
+         * 程序包描述
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.PkgDesc = null;
+
+        /**
+         * 上传时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.UploadTime = null;
+
+        /**
+         * 程序包MD5
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Md5 = null;
+
+        /**
+         * 程序包状态
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.PkgPubStatus = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PkgId = 'PkgId' in params ? params.PkgId : null;
+        this.PkgName = 'PkgName' in params ? params.PkgName : null;
+        this.PkgType = 'PkgType' in params ? params.PkgType : null;
+        this.PkgVersion = 'PkgVersion' in params ? params.PkgVersion : null;
+        this.PkgDesc = 'PkgDesc' in params ? params.PkgDesc : null;
+        this.UploadTime = 'UploadTime' in params ? params.UploadTime : null;
+        this.Md5 = 'Md5' in params ? params.Md5 : null;
+        this.PkgPubStatus = 'PkgPubStatus' in params ? params.PkgPubStatus : null;
 
     }
 }
@@ -10516,9 +10769,10 @@ module.exports = {
     DescribeImageTagsRequest: DescribeImageTagsRequest,
     ReleaseConfigResponse: ReleaseConfigResponse,
     TsfPageSimpleGroup: TsfPageSimpleGroup,
-    PkgInfo: PkgInfo,
+    DescribePodInstancesResponse: DescribePodInstancesResponse,
     VmGroup: VmGroup,
     RevocationConfigRequest: RevocationConfigRequest,
+    GroupPod: GroupPod,
     ModifyUploadInfoRequest: ModifyUploadInfoRequest,
     DescribeUploadInfoResponse: DescribeUploadInfoResponse,
     DescribeReleasedConfigRequest: DescribeReleasedConfigRequest,
@@ -10577,11 +10831,12 @@ module.exports = {
     ShrinkInstancesResponse: ShrinkInstancesResponse,
     DeleteImageTagsRequest: DeleteImageTagsRequest,
     DescribeApplicationAttributeRequest: DescribeApplicationAttributeRequest,
-    RollbackConfigRequest: RollbackConfigRequest,
+    DescribePodInstancesRequest: DescribePodInstancesRequest,
     DescribeConfigsRequest: DescribeConfigsRequest,
     OperationInfo: OperationInfo,
     AddClusterInstancesRequest: AddClusterInstancesRequest,
     DescribePublicConfigResponse: DescribePublicConfigResponse,
+    RollbackConfigRequest: RollbackConfigRequest,
     DeleteConfigResponse: DeleteConfigResponse,
     TsfPageNamespace: TsfPageNamespace,
     DescribeSimpleApplicationsRequest: DescribeSimpleApplicationsRequest,
@@ -10638,6 +10893,7 @@ module.exports = {
     ModifyMicroserviceResponse: ModifyMicroserviceResponse,
     DescribeMicroservicesResponse: DescribeMicroservicesResponse,
     DescribeDownloadInfoResponse: DescribeDownloadInfoResponse,
+    GroupPodResult: GroupPodResult,
     DescribeApplicationRequest: DescribeApplicationRequest,
     Microservice: Microservice,
     TsfPageConfigReleaseLog: TsfPageConfigReleaseLog,
@@ -10654,6 +10910,7 @@ module.exports = {
     TsfPageSimpleApplication: TsfPageSimpleApplication,
     CreateConfigResponse: CreateConfigResponse,
     AddClusterInstancesResponse: AddClusterInstancesResponse,
+    PkgInfo: PkgInfo,
     RevocationPublicConfigResponse: RevocationPublicConfigResponse,
     DescribeConfigReleaseLogsRequest: DescribeConfigReleaseLogsRequest,
     DescribeContainerGroupsResponse: DescribeContainerGroupsResponse,

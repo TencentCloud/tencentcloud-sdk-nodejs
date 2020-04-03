@@ -534,6 +534,8 @@ class VodClient extends AbstractClient {
 对于生成的新视频，还可以指定生成后的视频是否要执行任务流。
 
 >当对直播流做剪辑、拼接等操作时，请确保流结束后再操作。否则生成的视频可能不完整。
+
+如使用事件通知，事件通知的类型为 [视频编辑完成](https://cloud.tencent.com/document/product/266/33794)。
      * @param {EditMediaRequest} req
      * @param {function(string, EditMediaResponse):void} cb
      * @public
@@ -596,6 +598,8 @@ class VodClient extends AbstractClient {
 有两种方式创建任务流模板：
 1. 在控制台上创建和修改任务流模板；
 2. 通过任务流模板接口创建任务流模板。
+
+如使用事件通知，事件通知的类型为 [任务流状态变更](https://cloud.tencent.com/document/product/266/9636)。
      * @param {ProcessMediaByProcedureRequest} req
      * @param {function(string, ProcessMediaByProcedureResponse):void} cb
      * @public
@@ -688,7 +692,7 @@ class VodClient extends AbstractClient {
     }
 
     /**
-     * 删除自适应转码模板
+     * 删除转自适应码流模板
      * @param {DeleteAdaptiveDynamicStreamingTemplateRequest} req
      * @param {function(string, DeleteAdaptiveDynamicStreamingTemplateResponse):void} cb
      * @public
@@ -699,7 +703,7 @@ class VodClient extends AbstractClient {
     }
 
     /**
-     * 创建自适应转码模板，数量上限：100。
+     * 创建转自适应码流模板，数量上限：100。
      * @param {CreateAdaptiveDynamicStreamingTemplateRequest} req
      * @param {function(string, CreateAdaptiveDynamicStreamingTemplateResponse):void} cb
      * @public
@@ -866,7 +870,9 @@ class VodClient extends AbstractClient {
 
 1. 对一个媒体文件进行剪辑，生成一个新的媒体文件；
 2. 对多个媒体文件进行裁剪拼接，生成一个新的媒体文件；
-3. 对多个媒体文件的媒体流进行裁剪拼接，生成一个新的媒体文件；
+3. 对多个媒体文件的媒体流进行裁剪拼接，生成一个新的媒体文件。
+
+如使用事件通知，事件通知的类型为 [视频合成完成](https://cloud.tencent.com/document/product/266/43000)。
      * @param {ComposeMediaRequest} req
      * @param {function(string, ComposeMediaResponse):void} cb
      * @public
@@ -1437,7 +1443,7 @@ class VodClient extends AbstractClient {
     }
 
     /**
-     * 修改自适应转码模板
+     * 修改转自适应码流模板
      * @param {ModifyAdaptiveDynamicStreamingTemplateRequest} req
      * @param {function(string, ModifyAdaptiveDynamicStreamingTemplateResponse):void} cb
      * @public
@@ -1606,6 +1612,8 @@ class VodClient extends AbstractClient {
 8. 智能内容审核（鉴黄、鉴恐、鉴政）；
 9. 智能内容分析（标签、分类、封面、按帧标签）；
 10. 智能内容识别（视频片头片尾、人脸、文本全文、文本关键词、语音全文、语音关键词、物体）。
+
+如使用事件通知，事件通知的类型为 [任务流状态变更](https://cloud.tencent.com/document/product/266/9636)。
      * @param {ProcessMediaRequest} req
      * @param {function(string, ProcessMediaResponse):void} cb
      * @public
