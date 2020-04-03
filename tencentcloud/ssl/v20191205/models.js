@@ -25,7 +25,7 @@ class ApplyCertificateResponse extends  AbstractModel {
         super();
 
         /**
-         * 证书ID。
+         * 证书 ID。
          * @type {string || null}
          */
         this.CertificateId = null;
@@ -60,7 +60,7 @@ class DeleteCertificateRequest extends  AbstractModel {
         super();
 
         /**
-         * 证书ID。
+         * 证书 ID。
          * @type {string || null}
          */
         this.CertificateId = null;
@@ -146,7 +146,7 @@ class CommitCertificateInformationRequest extends  AbstractModel {
         super();
 
         /**
-         * 证书id。
+         * 证书 ID。
          * @type {string || null}
          */
         this.CertificateId = null;
@@ -216,7 +216,7 @@ class ReplaceCertificateResponse extends  AbstractModel {
         super();
 
         /**
-         * 证书ID。
+         * 证书 ID。
          * @type {string || null}
          */
         this.CertificateId = null;
@@ -251,7 +251,7 @@ class DownloadCertificateRequest extends  AbstractModel {
         super();
 
         /**
-         * 证书ID。
+         * 证书 ID。
          * @type {string || null}
          */
         this.CertificateId = null;
@@ -279,7 +279,7 @@ class CancelCertificateOrderRequest extends  AbstractModel {
         super();
 
         /**
-         * 证书id。
+         * 证书 ID。
          * @type {string || null}
          */
         this.CertificateId = null;
@@ -307,14 +307,14 @@ class ModifyCertificateProjectResponse extends  AbstractModel {
         super();
 
         /**
-         * 修改所属项目成功的证书集合
+         * 修改所属项目成功的证书集合。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<string> || null}
          */
         this.SuccessCertificates = null;
 
         /**
-         * 修改所属项目失败的证书集合
+         * 修改所属项目失败的证书集合。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<string> || null}
          */
@@ -675,35 +675,35 @@ class DescribeCertificateResponse extends  AbstractModel {
         super();
 
         /**
-         * 用户uin。
+         * 用户 UIN。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.OwnerUin = null;
 
         /**
-         * 项目ID。
+         * 项目 ID。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.ProjectId = null;
 
         /**
-         * 证书来源（trustasia = 亚洲诚信，upload = 用户上传）。
+         * 证书来源：trustasia = 亚洲诚信，upload = 用户上传。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.From = null;
 
         /**
-         * 证书类型（目前支持：CA = 客户端证书，SVR = 服务器证书）
+         * 证书类型：CA = 客户端证书，SVR = 服务器证书。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.CertificateType = null;
 
         /**
-         * 证书套餐类型：1 = GeoTrust DV SSL CA - G3， 2 = TrustAsia TLS RSA CA， 3 = Symantec 增强型企业版(EV Pro)， 4 = Symantec 增强型(EV)， 5 = Symantec 企业型专业版(OV Pro)， 6 = Symantec 企业型(OV)， 7 = Symantec 企业型(OV)通配符， 8 = Geotrust 增强型(EV)， 9 = Geotrust 企业型(OV)， 10 = Geotrust 企业型(OV)通配符， 11 = TrustAsia 域名型多域名 SSL证书， 12 = TrustAsia 域名型(DV)通配符， 13 = TrustAsia 企业型通配符 （OV）SSL证书(D3)， 14 = TrustAsia 企业型 （OV）SSL证书(D3)， 15 = TrustAsia 企业型多域名 （OV）SSL证书(D3)， 16 = TrustAsia 增强型 （EV）SSL证书(D3)， 17 = TrustAsia 增强型多域名（EV）SSL证书(D3)， 18 = GlobalSign 企业型（OV）SSL证， 19 = GlobalSign 企业型通配符 （OV）SSL证书， 20 = GlobalSign 增强型 （EV）SSL证书， 21 = TrustAsia 企业型通配符多域名 （OV）SSL证书(D3)， 22 = GlobalSign 企业型多域名 （OV）SSL证书， 23 = GlobalSign 企业型通配符多域名 （OV）SSL证书， 24 = GlobalSign 增强型多域名（EV） SSL证书。
+         * 证书套餐类型：1 = GeoTrust DV SSL CA - G3， 2 = TrustAsia TLS RSA CA， 3 = Symantec 增强型企业版（EV Pro）， 4 = Symantec 增强型（EV）， 5 = Symantec 企业型专业版（OV Pro）， 6 = Symantec 企业型（OV）， 7 = Symantec 企业型（OV）通配符， 8 = Geotrust 增强型（EV）， 9 = Geotrust 企业型（OV）， 10 = Geotrust 企业型（OV）通配符， 11 = TrustAsia 域名型多域名 SSL 证书， 12 = TrustAsia 域名型（DV）通配符， 13 = TrustAsia 企业型通配符（OV）SSL 证书（D3）， 14 = TrustAsia 企业型（OV）SSL 证书（D3）， 15 = TrustAsia 企业型多域名 （OV）SSL 证书（D3）， 16 = TrustAsia 增强型 （EV）SSL 证书（D3）， 17 = TrustAsia 增强型多域名（EV）SSL 证书（D3）， 18 = GlobalSign 企业型（OV）SSL 证书， 19 = GlobalSign 企业型通配符 （OV）SSL 证书， 20 = GlobalSign 增强型 （EV）SSL 证书， 21 = TrustAsia 企业型通配符多域名（OV）SSL 证书（D3）， 22 = GlobalSign 企业型多域名（OV）SSL 证书， 23 = GlobalSign 企业型通配符多域名（OV）SSL 证书， 24 = GlobalSign 增强型多域名（EV）SSL 证书。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
@@ -787,7 +787,7 @@ class DescribeCertificateResponse extends  AbstractModel {
         this.InsertTime = null;
 
         /**
-         * 订单ID。
+         * 订单 ID。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
@@ -801,7 +801,7 @@ class DescribeCertificateResponse extends  AbstractModel {
         this.CertificateExtra = null;
 
         /**
-         * DV认证信息。
+         * DV 认证信息。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {DvAuthDetail || null}
          */
@@ -815,7 +815,7 @@ class DescribeCertificateResponse extends  AbstractModel {
         this.VulnerabilityReport = null;
 
         /**
-         * 证书ID。
+         * 证书 ID。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
@@ -1007,25 +1007,25 @@ class UploadCertificateRequest extends  AbstractModel {
         this.CertificatePublicKey = null;
 
         /**
-         * 私钥内容，证书类型为SVR时必填，为CA时可不填。
+         * 私钥内容，证书类型为 SVR 时必填，为 CA 时可不填。
          * @type {string || null}
          */
         this.CertificatePrivateKey = null;
 
         /**
-         * 证书类型，默认SVR。CA = 客户端证书，SVR = 服务器证书。
+         * 证书类型，默认 SVR。CA = 客户端证书，SVR = 服务器证书。
          * @type {string || null}
          */
         this.CertificateType = null;
 
         /**
-         * 证书别名。
+         * 备注名称。
          * @type {string || null}
          */
         this.Alias = null;
 
         /**
-         * 项目id。
+         * 项目 ID。
          * @type {number || null}
          */
         this.ProjectId = null;
@@ -1057,7 +1057,7 @@ class DescribeCertificateDetailRequest extends  AbstractModel {
         super();
 
         /**
-         * 证书id
+         * 证书 ID。
          * @type {string || null}
          */
         this.CertificateId = null;
@@ -1097,7 +1097,7 @@ class ApplyCertificateRequest extends  AbstractModel {
         this.DomainName = null;
 
         /**
-         * 项目ID。
+         * 项目 ID。
          * @type {number || null}
          */
         this.ProjectId = null;
@@ -1127,7 +1127,7 @@ class ApplyCertificateRequest extends  AbstractModel {
         this.ValidityPeriod = null;
 
         /**
-         * 加密算法，仅支持RSA。
+         * 加密算法，仅支持 RSA。
          * @type {string || null}
          */
         this.CsrEncryptAlgo = null;
@@ -1139,7 +1139,7 @@ class ApplyCertificateRequest extends  AbstractModel {
         this.CsrKeyParameter = null;
 
         /**
-         * csr的加密密码。
+         * CSR 的加密密码。
          * @type {string || null}
          */
         this.CsrKeyPassword = null;
@@ -1151,7 +1151,7 @@ class ApplyCertificateRequest extends  AbstractModel {
         this.Alias = null;
 
         /**
-         * 原证书id，用于重新申请。
+         * 原证书 ID，用于重新申请。
          * @type {string || null}
          */
         this.OldCertificateId = null;
@@ -1190,7 +1190,7 @@ class ReplaceCertificateRequest extends  AbstractModel {
         super();
 
         /**
-         * 证书ID。
+         * 证书 ID。
          * @type {string || null}
          */
         this.CertificateId = null;
@@ -1202,19 +1202,19 @@ class ReplaceCertificateRequest extends  AbstractModel {
         this.ValidType = null;
 
         /**
-         * 类型，默认Original。可选项：Original = 原证书csr，Upload = 手动上传，Online = 在线生成。
+         * 类型，默认 Original。可选项：Original = 原证书 CSR，Upload = 手动上传，Online = 在线生成。
          * @type {string || null}
          */
         this.CsrType = null;
 
         /**
-         * CSR内容。
+         * CSR 内容。
          * @type {string || null}
          */
         this.CsrContent = null;
 
         /**
-         * key密码。
+         * KEY 密码。
          * @type {string || null}
          */
         this.CsrkeyPassword = null;
@@ -1358,13 +1358,13 @@ class ModifyCertificateProjectRequest extends  AbstractModel {
         super();
 
         /**
-         * 需要修改所属项目的证书id集合，最多100个证书
+         * 需要修改所属项目的证书 ID 集合，最多100个证书。
          * @type {Array.<string> || null}
          */
         this.CertificateIdList = null;
 
         /**
-         * 项目id。
+         * 项目 ID。
          * @type {number || null}
          */
         this.ProjectId = null;
@@ -1462,7 +1462,7 @@ class ModifyCertificateAliasRequest extends  AbstractModel {
         super();
 
         /**
-         * 证书id。
+         * 证书 ID。
          * @type {string || null}
          */
         this.CertificateId = null;
@@ -1497,7 +1497,7 @@ class DescribeCertificateRequest extends  AbstractModel {
         super();
 
         /**
-         * 证书ID。
+         * 证书 ID。
          * @type {string || null}
          */
         this.CertificateId = null;
@@ -1643,7 +1643,7 @@ class CancelCertificateOrderResponse extends  AbstractModel {
         super();
 
         /**
-         * 取消订单成功的证书id
+         * 取消订单成功的证书 ID。
          * @type {string || null}
          */
         this.CertificateId = null;
@@ -1678,7 +1678,7 @@ class SubmitCertificateInformationResponse extends  AbstractModel {
         super();
 
         /**
-         * 证书id。
+         * 证书 ID。
          * @type {string || null}
          */
         this.CertificateId = null;
@@ -1765,14 +1765,14 @@ class DownloadCertificateResponse extends  AbstractModel {
         super();
 
         /**
-         * ZIP base64编码内容，base64解码后可保存为ZIP文件。
+         * ZIP base64 编码内容，base64 解码后可保存为 ZIP 文件。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.Content = null;
 
         /**
-         * MIME类型：application/zip = ZIP压缩文件。
+         * MIME 类型：application/zip = ZIP 压缩文件。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
@@ -1809,7 +1809,7 @@ class UploadCertificateResponse extends  AbstractModel {
         super();
 
         /**
-         * 证书ID。
+         * 证书 ID。
          * @type {string || null}
          */
         this.CertificateId = null;
@@ -1844,35 +1844,35 @@ class DescribeCertificateDetailResponse extends  AbstractModel {
         super();
 
         /**
-         * 用户uin。
+         * 用户 UIN。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.OwnerUin = null;
 
         /**
-         * 项目ID。
+         * 项目 ID。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.ProjectId = null;
 
         /**
-         * 证书来源（trustasia = 亚洲诚信，upload = 用户上传）。
+         * 证书来源：trustasia = 亚洲诚信，upload = 用户上传。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.From = null;
 
         /**
-         * 证书类型（目前支持：CA = 客户端证书，SVR = 服务器证书）
+         * 证书类型：CA = 客户端证书，SVR = 服务器证书。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.CertificateType = null;
 
         /**
-         * 证书套餐类型：1 = GeoTrust DV SSL CA - G3， 2 = TrustAsia TLS RSA CA， 3 = Symantec 增强型企业版(EV Pro)， 4 = Symantec 增强型(EV)， 5 = Symantec 企业型专业版(OV Pro)， 6 = Symantec 企业型(OV)， 7 = Symantec 企业型(OV)通配符， 8 = Geotrust 增强型(EV)， 9 = Geotrust 企业型(OV)， 10 = Geotrust 企业型(OV)通配符， 11 = TrustAsia 域名型多域名 SSL证书， 12 = TrustAsia 域名型(DV)通配符， 13 = TrustAsia 企业型通配符 （OV）SSL证书(D3)， 14 = TrustAsia 企业型 （OV）SSL证书(D3)， 15 = TrustAsia 企业型多域名 （OV）SSL证书(D3)， 16 = TrustAsia 增强型 （EV）SSL证书(D3)， 17 = TrustAsia 增强型多域名（EV）SSL证书(D3)， 18 = GlobalSign 企业型（OV）SSL证， 19 = GlobalSign 企业型通配符 （OV）SSL证书， 20 = GlobalSign 增强型 （EV）SSL证书， 21 = TrustAsia 企业型通配符多域名 （OV）SSL证书(D3)， 22 = GlobalSign 企业型多域名 （OV）SSL证书， 23 = GlobalSign 企业型通配符多域名 （OV）SSL证书， 24 = GlobalSign 增强型多域名（EV） SSL证书。
+         * 证书套餐类型：1 = GeoTrust DV SSL CA - G3， 2 = TrustAsia TLS RSA CA， 3 = Symantec 增强型企业版（EV Pro）， 4 = Symantec 增强型（EV）， 5 = Symantec 企业型专业版（OV Pro）， 6 = Symantec 企业型（OV）， 7 = Symantec 企业型（OV）通配符， 8 = Geotrust 增强型（EV）， 9 = Geotrust 企业型（OV）， 10 = Geotrust 企业型（OV）通配符， 11 = TrustAsia 域名型多域名 SSL 证书， 12 = TrustAsia 域名型（DV）通配符， 13 = TrustAsia 企业型通配符（OV）SSL 证书（D3）， 14 = TrustAsia 企业型（OV）SSL 证书（D3）， 15 = TrustAsia 企业型多域名 （OV）SSL 证书（D3）， 16 = TrustAsia 增强型 （EV）SSL 证书（D3）， 17 = TrustAsia 增强型多域名（EV）SSL 证书（D3）， 18 = GlobalSign 企业型（OV）SSL 证书， 19 = GlobalSign 企业型通配符 （OV）SSL 证书， 20 = GlobalSign 增强型 （EV）SSL 证书， 21 = TrustAsia 企业型通配符多域名（OV）SSL 证书（D3）， 22 = GlobalSign 企业型多域名（OV）SSL 证书， 23 = GlobalSign 企业型通配符多域名（OV）SSL 证书， 24 = GlobalSign 增强型多域名（EV）SSL 证书。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
@@ -1942,7 +1942,7 @@ class DescribeCertificateDetailResponse extends  AbstractModel {
         this.CertEndTime = null;
 
         /**
-         * 证书有效期：单位(月)。
+         * 证书有效期：单位（月）。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
@@ -1956,7 +1956,7 @@ class DescribeCertificateDetailResponse extends  AbstractModel {
         this.InsertTime = null;
 
         /**
-         * 订单ID。
+         * 订单 ID。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
@@ -1984,7 +1984,7 @@ class DescribeCertificateDetailResponse extends  AbstractModel {
         this.CertificatePublicKey = null;
 
         /**
-         * DV认证信息。
+         * DV 认证信息。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {DvAuthDetail || null}
          */
@@ -1998,7 +1998,7 @@ class DescribeCertificateDetailResponse extends  AbstractModel {
         this.VulnerabilityReport = null;
 
         /**
-         * 证书ID。
+         * 证书 ID。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
@@ -2151,7 +2151,7 @@ class ModifyCertificateAliasResponse extends  AbstractModel {
         super();
 
         /**
-         * 修改成功的证书id。
+         * 修改成功的证书 ID。
          * @type {string || null}
          */
         this.CertificateId = null;
@@ -2186,19 +2186,19 @@ class SubmitCertificateInformationRequest extends  AbstractModel {
         super();
 
         /**
-         * 证书id。
+         * 证书 ID。
          * @type {string || null}
          */
         this.CertificateId = null;
 
         /**
-         * Csr生成方式: online = 在线生成, parse = 手动上传 。
+         * CSR 生成方式：online = 在线生成, parse = 手动上传 。
          * @type {string || null}
          */
         this.CsrType = null;
 
         /**
-         * 上传的Csr内容。
+         * 上传的 CSR 内容。
          * @type {string || null}
          */
         this.CsrContent = null;
@@ -2240,7 +2240,7 @@ class SubmitCertificateInformationRequest extends  AbstractModel {
         this.OrganizationAddress = null;
 
         /**
-         * 国家名称 如中国:CN 。
+         * 国家名称 如中国：CN 。
          * @type {string || null}
          */
         this.OrganizationCountry = null;
@@ -2610,7 +2610,7 @@ class DescribeCertificatesRequest extends  AbstractModel {
         super();
 
         /**
-         * 分页偏移量，从0开始
+         * 分页偏移量，从0开始。
          * @type {number || null}
          */
         this.Offset = null;
@@ -2628,19 +2628,19 @@ class DescribeCertificatesRequest extends  AbstractModel {
         this.SearchKey = null;
 
         /**
-         * 证书类型，可选值：CA，SVR。
+         * 证书类型：CA = 客户端证书，SVR = 服务器证书。
          * @type {string || null}
          */
         this.CertificateType = null;
 
         /**
-         * 项目ID。
+         * 项目 ID。
          * @type {number || null}
          */
         this.ProjectId = null;
 
         /**
-         * 按到期时间排序：DESC降序， ASC 升序。
+         * 按到期时间排序：DESC = 降序， ASC = 升序。
          * @type {string || null}
          */
         this.ExpirationSort = null;

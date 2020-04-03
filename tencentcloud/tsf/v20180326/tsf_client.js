@@ -29,9 +29,10 @@ const DeleteServerlessGroupRequest = models.DeleteServerlessGroupRequest;
 const DescribeImageTagsRequest = models.DescribeImageTagsRequest;
 const ReleaseConfigResponse = models.ReleaseConfigResponse;
 const TsfPageSimpleGroup = models.TsfPageSimpleGroup;
-const PkgInfo = models.PkgInfo;
+const DescribePodInstancesResponse = models.DescribePodInstancesResponse;
 const VmGroup = models.VmGroup;
 const RevocationConfigRequest = models.RevocationConfigRequest;
+const GroupPod = models.GroupPod;
 const ModifyUploadInfoRequest = models.ModifyUploadInfoRequest;
 const DescribeUploadInfoResponse = models.DescribeUploadInfoResponse;
 const DescribeReleasedConfigRequest = models.DescribeReleasedConfigRequest;
@@ -90,11 +91,12 @@ const ShrinkInstancesRequest = models.ShrinkInstancesRequest;
 const ShrinkInstancesResponse = models.ShrinkInstancesResponse;
 const DeleteImageTagsRequest = models.DeleteImageTagsRequest;
 const DescribeApplicationAttributeRequest = models.DescribeApplicationAttributeRequest;
-const RollbackConfigRequest = models.RollbackConfigRequest;
+const DescribePodInstancesRequest = models.DescribePodInstancesRequest;
 const DescribeConfigsRequest = models.DescribeConfigsRequest;
 const OperationInfo = models.OperationInfo;
 const AddClusterInstancesRequest = models.AddClusterInstancesRequest;
 const DescribePublicConfigResponse = models.DescribePublicConfigResponse;
+const RollbackConfigRequest = models.RollbackConfigRequest;
 const DeleteConfigResponse = models.DeleteConfigResponse;
 const TsfPageNamespace = models.TsfPageNamespace;
 const DescribeSimpleApplicationsRequest = models.DescribeSimpleApplicationsRequest;
@@ -151,6 +153,7 @@ const Cluster = models.Cluster;
 const ModifyMicroserviceResponse = models.ModifyMicroserviceResponse;
 const DescribeMicroservicesResponse = models.DescribeMicroservicesResponse;
 const DescribeDownloadInfoResponse = models.DescribeDownloadInfoResponse;
+const GroupPodResult = models.GroupPodResult;
 const DescribeApplicationRequest = models.DescribeApplicationRequest;
 const Microservice = models.Microservice;
 const TsfPageConfigReleaseLog = models.TsfPageConfigReleaseLog;
@@ -167,6 +170,7 @@ const ShrinkGroupRequest = models.ShrinkGroupRequest;
 const TsfPageSimpleApplication = models.TsfPageSimpleApplication;
 const CreateConfigResponse = models.CreateConfigResponse;
 const AddClusterInstancesResponse = models.AddClusterInstancesResponse;
+const PkgInfo = models.PkgInfo;
 const RevocationPublicConfigResponse = models.RevocationPublicConfigResponse;
 const DescribeConfigReleaseLogsRequest = models.DescribeConfigReleaseLogsRequest;
 const DescribeContainerGroupsResponse = models.DescribeContainerGroupsResponse;
@@ -327,6 +331,17 @@ class TsfClient extends AbstractClient {
     AddClusterInstances(req, cb) {
         let resp = new AddClusterInstancesResponse();
         this.request("AddClusterInstances", req, resp, cb);
+    }
+
+    /**
+     * 获取部署组实例列表
+     * @param {DescribePodInstancesRequest} req
+     * @param {function(string, DescribePodInstancesResponse):void} cb
+     * @public
+     */
+    DescribePodInstances(req, cb) {
+        let resp = new DescribePodInstancesResponse();
+        this.request("DescribePodInstances", req, resp, cb);
     }
 
     /**

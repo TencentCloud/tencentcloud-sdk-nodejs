@@ -18,7 +18,7 @@ const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const BusinessCardOCRResponse = models.BusinessCardOCRResponse;
 const TextArithmetic = models.TextArithmetic;
-const BankCardOCRRequest = models.BankCardOCRRequest;
+const QrcodeImgSize = models.QrcodeImgSize;
 const CarInvoiceOCRRequest = models.CarInvoiceOCRRequest;
 const MixedInvoiceItem = models.MixedInvoiceItem;
 const TrainTicketOCRRequest = models.TrainTicketOCRRequest;
@@ -47,6 +47,7 @@ const TextEduPaper = models.TextEduPaper;
 const QrcodeOCRResponse = models.QrcodeOCRResponse;
 const WaybillObj = models.WaybillObj;
 const InvoiceDetectInfo = models.InvoiceDetectInfo;
+const MainlandPermitOCRRequest = models.MainlandPermitOCRRequest;
 const EnterpriseLicenseOCRRequest = models.EnterpriseLicenseOCRRequest;
 const PropOwnerCertOCRResponse = models.PropOwnerCertOCRResponse;
 const FinanBillInfo = models.FinanBillInfo;
@@ -61,14 +62,14 @@ const BizLicenseOCRRequest = models.BizLicenseOCRRequest;
 const MixedInvoiceDetectResponse = models.MixedInvoiceDetectResponse;
 const InsuranceBillOCRResponse = models.InsuranceBillOCRResponse;
 const GeneralEfficientOCRResponse = models.GeneralEfficientOCRResponse;
-const TextTable = models.TextTable;
+const HmtResidentPermitOCRRequest = models.HmtResidentPermitOCRRequest;
 const QrcodeOCRRequest = models.QrcodeOCRRequest;
 const TaxiInvoiceOCRResponse = models.TaxiInvoiceOCRResponse;
 const GeneralBasicOCRResponse = models.GeneralBasicOCRResponse;
 const VinOCRRequest = models.VinOCRRequest;
 const QuotaInvoiceOCRRequest = models.QuotaInvoiceOCRRequest;
 const MixedInvoiceOCRResponse = models.MixedInvoiceOCRResponse;
-const QrcodeImgSize = models.QrcodeImgSize;
+const BankCardOCRRequest = models.BankCardOCRRequest;
 const VehicleLicenseOCRResponse = models.VehicleLicenseOCRResponse;
 const VatInvoiceOCRRequest = models.VatInvoiceOCRRequest;
 const IDCardOCRResponse = models.IDCardOCRResponse;
@@ -125,9 +126,12 @@ const ShipInvoiceOCRResponse = models.ShipInvoiceOCRResponse;
 const InsuranceBillInfo = models.InsuranceBillInfo;
 const VehicleRegCertOCRResponse = models.VehicleRegCertOCRResponse;
 const GeneralAccurateOCRResponse = models.GeneralAccurateOCRResponse;
+const TextTable = models.TextTable;
 const ResidenceBookletOCRRequest = models.ResidenceBookletOCRRequest;
 const BusInvoiceOCRResponse = models.BusInvoiceOCRResponse;
 const QrcodeResultsInfo = models.QrcodeResultsInfo;
+const MainlandPermitOCRResponse = models.MainlandPermitOCRResponse;
+const HmtResidentPermitOCRResponse = models.HmtResidentPermitOCRResponse;
 const EnglishOCRResponse = models.EnglishOCRResponse;
 const BusInvoiceOCRRequest = models.BusInvoiceOCRRequest;
 const QuotaInvoiceOCRResponse = models.QuotaInvoiceOCRResponse;
@@ -532,6 +536,17 @@ class OcrClient extends AbstractClient {
     }
 
     /**
+     * 港澳台居住证OCR支持港澳台居住证正反面全字段内容检测识别功能，包括姓名、性别、出生日期、地址、身份证ID、签发机关、有效期限、签发次数、通行证号码关键字段识别。可以应用于港澳台居住证信息有效性校验场景，例如银行开户、用户注册等场景。
+     * @param {HmtResidentPermitOCRRequest} req
+     * @param {function(string, HmtResidentPermitOCRResponse):void} cb
+     * @public
+     */
+    HmtResidentPermitOCR(req, cb) {
+        let resp = new HmtResidentPermitOCRResponse();
+        this.request("HmtResidentPermitOCR", req, resp, cb);
+    }
+
+    /**
      * 本接口支持作业算式题目的自动识别，目前覆盖 K12 学力范围内的 14 种题型，包括加减乘除四则运算、分数四则运算、竖式四则运算、脱式计算等。
      * @param {ArithmeticOCRRequest} req
      * @param {function(string, ArithmeticOCRResponse):void} cb
@@ -679,7 +694,11 @@ class OcrClient extends AbstractClient {
     }
 
     /**
-     * 本接口支持对驾驶证主页所有字段的自动定位与识别，包括证号、姓名、性别、国籍、住址、出生日期、初次领证日期、准驾车型、有效期限，重点字段的识别准确度达到99%以上。
+     * 本接口支持驾驶证主页和副页所有字段的自动定位与识别，重点字段的识别准确度达到99%以上。
+
+驾驶证主页：包括证号、姓名、性别、国籍、住址、出生日期、初次领证日期、准驾车型、有效期限。
+
+驾驶证副页：包括证号、姓名、档案编号、记录。
 
 另外，本接口还支持复印件、翻拍和PS告警功能。
      * @param {DriverLicenseOCRRequest} req
@@ -689,6 +708,17 @@ class OcrClient extends AbstractClient {
     DriverLicenseOCR(req, cb) {
         let resp = new DriverLicenseOCRResponse();
         this.request("DriverLicenseOCR", req, resp, cb);
+    }
+
+    /**
+     * 智能识别并结构化港澳台居民来往内地通行证正面全部字段，包含中文姓名、英文姓名、性别、出生日期、签发机关、有效期限、证件号、签发地点、签发次数、证件类别。
+     * @param {MainlandPermitOCRRequest} req
+     * @param {function(string, MainlandPermitOCRResponse):void} cb
+     * @public
+     */
+    MainlandPermitOCR(req, cb) {
+        let resp = new MainlandPermitOCRResponse();
+        this.request("MainlandPermitOCR", req, resp, cb);
     }
 
     /**

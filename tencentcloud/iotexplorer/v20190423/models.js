@@ -1705,7 +1705,7 @@ class CreateStudioProductRequest extends  AbstractModel {
         this.NetType = null;
 
         /**
-         * 数据协议 (1 使用物模型)
+         * 数据协议 (1 使用物模型 2 为自定义)
          * @type {number || null}
          */
         this.DataProtocol = null;

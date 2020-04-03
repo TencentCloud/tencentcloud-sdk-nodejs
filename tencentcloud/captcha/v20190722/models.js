@@ -1159,7 +1159,7 @@ class DescribeCaptchaResultRequest extends  AbstractModel {
         super();
 
         /**
-         * 验证码类型，9：滑块验证码
+         * 固定填值：9。可在控制台配置不同验证码类型。
          * @type {number || null}
          */
         this.CaptchaType = null;
