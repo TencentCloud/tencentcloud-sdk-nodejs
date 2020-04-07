@@ -61,6 +61,7 @@ const DescribeFlowLogsRequest = models.DescribeFlowLogsRequest;
 const AssociateNatGatewayAddressRequest = models.AssociateNatGatewayAddressRequest;
 const CreateDirectConnectGatewayRequest = models.CreateDirectConnectGatewayRequest;
 const ModifyBandwidthPackageAttributeRequest = models.ModifyBandwidthPackageAttributeRequest;
+const DisassociateNetworkInterfaceSecurityGroupsRequest = models.DisassociateNetworkInterfaceSecurityGroupsRequest;
 const SecurityGroupPolicySet = models.SecurityGroupPolicySet;
 const ModifyFlowLogAttributeRequest = models.ModifyFlowLogAttributeRequest;
 const AssociateNetworkAclSubnetsResponse = models.AssociateNetworkAclSubnetsResponse;
@@ -216,6 +217,7 @@ const DescribeAddressesRequest = models.DescribeAddressesRequest;
 const DescribeSecurityGroupPoliciesRequest = models.DescribeSecurityGroupPoliciesRequest;
 const ModifyNetworkInterfaceAttributeResponse = models.ModifyNetworkInterfaceAttributeResponse;
 const CreateSecurityGroupResponse = models.CreateSecurityGroupResponse;
+const DisassociateNetworkInterfaceSecurityGroupsResponse = models.DisassociateNetworkInterfaceSecurityGroupsResponse;
 const DescribeIp6TranslatorQuotaRequest = models.DescribeIp6TranslatorQuotaRequest;
 const DescribeNetworkInterfaceLimitResponse = models.DescribeNetworkInterfaceLimitResponse;
 const AssignIpv6CidrBlockResponse = models.AssignIpv6CidrBlockResponse;
@@ -321,6 +323,7 @@ const SubnetInput = models.SubnetInput;
 const UnassignIpv6SubnetCidrBlockResponse = models.UnassignIpv6SubnetCidrBlockResponse;
 const CreateNetDetectResponse = models.CreateNetDetectResponse;
 const DeleteCcnRequest = models.DeleteCcnRequest;
+const AssociateNetworkInterfaceSecurityGroupsResponse = models.AssociateNetworkInterfaceSecurityGroupsResponse;
 const ModifyVpnGatewayAttributeRequest = models.ModifyVpnGatewayAttributeRequest;
 const CreateNatGatewayRequest = models.CreateNatGatewayRequest;
 const DeleteNetDetectRequest = models.DeleteNetDetectRequest;
@@ -432,6 +435,7 @@ const ItemPrice = models.ItemPrice;
 const DescribeDirectConnectGatewayCcnRoutesResponse = models.DescribeDirectConnectGatewayCcnRoutesResponse;
 const ModifyPrivateIpAddressesAttributeRequest = models.ModifyPrivateIpAddressesAttributeRequest;
 const ResetNatGatewayConnectionResponse = models.ResetNatGatewayConnectionResponse;
+const AssociateNetworkInterfaceSecurityGroupsRequest = models.AssociateNetworkInterfaceSecurityGroupsRequest;
 const CreateSecurityGroupRequest = models.CreateSecurityGroupRequest;
 const ModifyCcnAttributeResponse = models.ModifyCcnAttributeResponse;
 const DescribeSecurityGroupLimitsRequest = models.DescribeSecurityGroupLimitsRequest;
@@ -658,14 +662,14 @@ class VpcClient extends AbstractClient {
     }
 
     /**
-     * 本接口（ModifyServiceTemplateGroupAttribute）用于修改协议端口模板集合。
-     * @param {ModifyServiceTemplateGroupAttributeRequest} req
-     * @param {function(string, ModifyServiceTemplateGroupAttributeResponse):void} cb
+     * 本接口（DisassociateNetworkInterfaceSecurityGroups）用于弹性网卡解绑安全组。支持弹性网卡完全解绑安全组。
+     * @param {DisassociateNetworkInterfaceSecurityGroupsRequest} req
+     * @param {function(string, DisassociateNetworkInterfaceSecurityGroupsResponse):void} cb
      * @public
      */
-    ModifyServiceTemplateGroupAttribute(req, cb) {
-        let resp = new ModifyServiceTemplateGroupAttributeResponse();
-        this.request("ModifyServiceTemplateGroupAttribute", req, resp, cb);
+    DisassociateNetworkInterfaceSecurityGroups(req, cb) {
+        let resp = new DisassociateNetworkInterfaceSecurityGroupsResponse();
+        this.request("DisassociateNetworkInterfaceSecurityGroups", req, resp, cb);
     }
 
     /**
@@ -1461,6 +1465,17 @@ class VpcClient extends AbstractClient {
     }
 
     /**
+     * 本接口（ModifyServiceTemplateGroupAttribute）用于修改协议端口模板集合。
+     * @param {ModifyServiceTemplateGroupAttributeRequest} req
+     * @param {function(string, ModifyServiceTemplateGroupAttributeResponse):void} cb
+     * @public
+     */
+    ModifyServiceTemplateGroupAttribute(req, cb) {
+        let resp = new ModifyServiceTemplateGroupAttributeResponse();
+        this.request("ModifyServiceTemplateGroupAttribute", req, resp, cb);
+    }
+
+    /**
      * 本接口（DeleteNetworkInterface）用于删除弹性网卡。
 * 弹性网卡上绑定了云服务器时，不能被删除。
 * 删除指定弹性网卡，弹性网卡必须先和子机解绑才能删除。删除之后弹性网卡上所有内网IP都将被退还。
@@ -2131,6 +2146,17 @@ LimitTypes取值范围：
     DescribeHaVips(req, cb) {
         let resp = new DescribeHaVipsResponse();
         this.request("DescribeHaVips", req, resp, cb);
+    }
+
+    /**
+     * 本接口（AssociateNetworkInterfaceSecurityGroups）用于弹性网卡绑定安全组（SecurityGroup）。
+     * @param {AssociateNetworkInterfaceSecurityGroupsRequest} req
+     * @param {function(string, AssociateNetworkInterfaceSecurityGroupsResponse):void} cb
+     * @public
+     */
+    AssociateNetworkInterfaceSecurityGroups(req, cb) {
+        let resp = new AssociateNetworkInterfaceSecurityGroupsResponse();
+        this.request("AssociateNetworkInterfaceSecurityGroups", req, resp, cb);
     }
 
     /**

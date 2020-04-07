@@ -818,6 +818,12 @@ class DescribeTagsRequest extends  AbstractModel {
          */
         this.TagKeys = null;
 
+        /**
+         * 是否展现项目标签
+         * @type {number || null}
+         */
+        this.ShowProject = null;
+
     }
 
     /**
@@ -833,6 +839,7 @@ class DescribeTagsRequest extends  AbstractModel {
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.CreateUin = 'CreateUin' in params ? params.CreateUin : null;
         this.TagKeys = 'TagKeys' in params ? params.TagKeys : null;
+        this.ShowProject = 'ShowProject' in params ? params.ShowProject : null;
 
     }
 }

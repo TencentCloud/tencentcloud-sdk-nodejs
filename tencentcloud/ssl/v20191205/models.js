@@ -2192,7 +2192,7 @@ class SubmitCertificateInformationRequest extends  AbstractModel {
         this.CertificateId = null;
 
         /**
-         * CSR 生成方式：online = 在线生成, parse = 手动上传 。
+         * CSR 生成方式：online = 在线生成, parse = 手动上传。
          * @type {string || null}
          */
         this.CsrType = null;
@@ -2204,7 +2204,7 @@ class SubmitCertificateInformationRequest extends  AbstractModel {
         this.CsrContent = null;
 
         /**
-         * 绑定证书的域名 。
+         * 绑定证书的域名。
          * @type {string || null}
          */
         this.CertificateDomain = null;
@@ -2216,13 +2216,13 @@ class SubmitCertificateInformationRequest extends  AbstractModel {
         this.DomainList = null;
 
         /**
-         * 私钥密码 。
+         * 私钥密码。
          * @type {string || null}
          */
         this.KeyPassword = null;
 
         /**
-         * 公司名称 。
+         * 公司名称。
          * @type {string || null}
          */
         this.OrganizationName = null;
@@ -2234,19 +2234,19 @@ class SubmitCertificateInformationRequest extends  AbstractModel {
         this.OrganizationDivision = null;
 
         /**
-         * 公司详细地址 。
+         * 公司详细地址。
          * @type {string || null}
          */
         this.OrganizationAddress = null;
 
         /**
-         * 国家名称 如中国：CN 。
+         * 国家名称，如中国：CN 。
          * @type {string || null}
          */
         this.OrganizationCountry = null;
 
         /**
-         * 公司所在城市 。
+         * 公司所在城市。
          * @type {string || null}
          */
         this.OrganizationCity = null;
@@ -2258,25 +2258,25 @@ class SubmitCertificateInformationRequest extends  AbstractModel {
         this.OrganizationRegion = null;
 
         /**
-         * 公司邮编 。
+         * 公司邮编。
          * @type {string || null}
          */
         this.PostalCode = null;
 
         /**
-         * 公司座机区号 。
+         * 公司座机区号。
          * @type {string || null}
          */
         this.PhoneAreaCode = null;
 
         /**
-         * 公司座机号码 。
+         * 公司座机号码。
          * @type {string || null}
          */
         this.PhoneNumber = null;
 
         /**
-         * 证书验证方式 。
+         * 证书验证方式。
          * @type {string || null}
          */
         this.VerifyType = null;
@@ -2324,13 +2324,13 @@ class SubmitCertificateInformationRequest extends  AbstractModel {
         this.ContactLastName = null;
 
         /**
-         * 联系人邮箱地址 。
+         * 联系人邮箱地址。
          * @type {string || null}
          */
         this.ContactEmail = null;
 
         /**
-         * 联系人手机号码 。
+         * 联系人手机号码。
          * @type {string || null}
          */
         this.ContactNumber = null;
@@ -2616,7 +2616,7 @@ class DescribeCertificatesRequest extends  AbstractModel {
         this.Offset = null;
 
         /**
-         * 每页数量。
+         * 每页数量，默认20。
          * @type {number || null}
          */
         this.Limit = null;

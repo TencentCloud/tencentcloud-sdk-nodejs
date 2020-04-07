@@ -6151,12 +6151,6 @@ class RefundRequest extends  AbstractModel {
         this.TotalRefundAmt = null;
 
         /**
-         * 支持多个子订单批量退款单 个子订单退款支持传 SubOutTradeNo ，也支持传 SubOutTradeNoList ，都传的时候以 SubOutTradeNoList 为准。  如果传了子单退款细节，外 部不需要再传退款金额，平 台应退，商户应退金额，我 们可以直接根据子单退款算出来总和。
-         * @type {Array.<RefundOutSubOrderRefundList> || null}
-         */
-        this.SubOrderRefundList = null;
-
-        /**
          * 聚鑫分配的安全ID
          * @type {string || null}
          */
@@ -6192,6 +6186,12 @@ class RefundRequest extends  AbstractModel {
          */
         this.PlatformRefundAmt = null;
 
+        /**
+         * 支持多个子订单批量退款单 个子订单退款支持传 SubOutTradeNo ，也支持传 SubOutTradeNoList ，都传的时候以 SubOutTradeNoList 为准。  如果传了子单退款细节，外 部不需要再传退款金额，平 台应退，商户应退金额，我 们可以直接根据子单退款算出来总和。
+         * @type {Array.<RefundOutSubOrderRefundList> || null}
+         */
+        this.SubOrderRefundList = null;
+
     }
 
     /**
@@ -6205,6 +6205,12 @@ class RefundRequest extends  AbstractModel {
         this.RefundId = 'RefundId' in params ? params.RefundId : null;
         this.MidasAppId = 'MidasAppId' in params ? params.MidasAppId : null;
         this.TotalRefundAmt = 'TotalRefundAmt' in params ? params.TotalRefundAmt : null;
+        this.MidasSecretId = 'MidasSecretId' in params ? params.MidasSecretId : null;
+        this.MidasSignature = 'MidasSignature' in params ? params.MidasSignature : null;
+        this.OutTradeNo = 'OutTradeNo' in params ? params.OutTradeNo : null;
+        this.MchRefundAmt = 'MchRefundAmt' in params ? params.MchRefundAmt : null;
+        this.TransactionId = 'TransactionId' in params ? params.TransactionId : null;
+        this.PlatformRefundAmt = 'PlatformRefundAmt' in params ? params.PlatformRefundAmt : null;
 
         if (params.SubOrderRefundList) {
             this.SubOrderRefundList = new Array();
@@ -6214,12 +6220,6 @@ class RefundRequest extends  AbstractModel {
                 this.SubOrderRefundList.push(obj);
             }
         }
-        this.MidasSecretId = 'MidasSecretId' in params ? params.MidasSecretId : null;
-        this.MidasSignature = 'MidasSignature' in params ? params.MidasSignature : null;
-        this.OutTradeNo = 'OutTradeNo' in params ? params.OutTradeNo : null;
-        this.MchRefundAmt = 'MchRefundAmt' in params ? params.MchRefundAmt : null;
-        this.TransactionId = 'TransactionId' in params ? params.TransactionId : null;
-        this.PlatformRefundAmt = 'PlatformRefundAmt' in params ? params.PlatformRefundAmt : null;
 
     }
 }
