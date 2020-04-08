@@ -42,6 +42,7 @@ const PeakFamilyInfo = models.PeakFamilyInfo;
 const DescribePeakNetworkOverviewResponse = models.DescribePeakNetworkOverviewResponse;
 const OperatorAction = models.OperatorAction;
 const DescribePeakBaseOverviewResponse = models.DescribePeakBaseOverviewResponse;
+const ImportImageResponse = models.ImportImageResponse;
 const TerminateInstancesRequest = models.TerminateInstancesRequest;
 const RegionInfo = models.RegionInfo;
 const DescribeImageResponse = models.DescribeImageResponse;
@@ -65,6 +66,7 @@ const DescribeInstanceTypeConfigResponse = models.DescribeInstanceTypeConfigResp
 const DescribeInstancesRequest = models.DescribeInstancesRequest;
 const Country = models.Country;
 const DescribeNodeResponse = models.DescribeNodeResponse;
+const ImportImageRequest = models.ImportImageRequest;
 const ModifyModuleImageResponse = models.ModifyModuleImageResponse;
 const Filter = models.Filter;
 const Tag = models.Tag;
@@ -199,6 +201,17 @@ class EcmClient extends AbstractClient {
     }
 
     /**
+     * 销毁实例
+     * @param {TerminateInstancesRequest} req
+     * @param {function(string, TerminateInstancesResponse):void} cb
+     * @public
+     */
+    TerminateInstances(req, cb) {
+        let resp = new TerminateInstancesResponse();
+        this.request("TerminateInstances", req, resp, cb);
+    }
+
+    /**
      * ModifyModuleImage
      * @param {ModifyModuleImageRequest} req
      * @param {function(string, ModifyModuleImageResponse):void} cb
@@ -276,14 +289,14 @@ class EcmClient extends AbstractClient {
     }
 
     /**
-     * 销毁实例
-     * @param {TerminateInstancesRequest} req
-     * @param {function(string, TerminateInstancesResponse):void} cb
+     * 从CVM产品导入镜像到ECM
+     * @param {ImportImageRequest} req
+     * @param {function(string, ImportImageResponse):void} cb
      * @public
      */
-    TerminateInstances(req, cb) {
-        let resp = new TerminateInstancesResponse();
-        this.request("TerminateInstances", req, resp, cb);
+    ImportImage(req, cb) {
+        let resp = new ImportImageResponse();
+        this.request("ImportImage", req, resp, cb);
     }
 
     /**

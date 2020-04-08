@@ -11630,6 +11630,12 @@ AnycastEIP是否用于绑定负载均衡。
         this.ApplicableForCLB = null;
 
         /**
+         * 需要关联的标签列表。
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
+        /**
          * BGP带宽包唯一ID参数。设定该参数且InternetChargeType为BANDWIDTH_PACKAGE，则表示创建的EIP加入该BGP带宽包并采用带宽包计费
          * @type {string || null}
          */
@@ -11651,6 +11657,15 @@ AnycastEIP是否用于绑定负载均衡。
         this.AddressType = 'AddressType' in params ? params.AddressType : null;
         this.AnycastZone = 'AnycastZone' in params ? params.AnycastZone : null;
         this.ApplicableForCLB = 'ApplicableForCLB' in params ? params.ApplicableForCLB : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
         this.BandwidthPackageId = 'BandwidthPackageId' in params ? params.BandwidthPackageId : null;
 
     }

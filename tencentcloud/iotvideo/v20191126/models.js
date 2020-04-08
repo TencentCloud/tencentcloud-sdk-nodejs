@@ -779,6 +779,34 @@ class DescribeMessageQueueRequest extends  AbstractModel {
 }
 
 /**
+ * DeleteAppUsr返回参数结构体
+ * @class
+ */
+class DeleteAppUsrResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeProduct请求参数结构体
  * @class
  */
@@ -4350,6 +4378,34 @@ class SendOnlineMsgResponse extends  AbstractModel {
 }
 
 /**
+ * DeleteAppUsr请求参数结构体
+ * @class
+ */
+class DeleteAppUsrRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 客户的终端用户在IoT Video上的唯一标识ID
+         * @type {string || null}
+         */
+        this.AccessId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AccessId = 'AccessId' in params ? params.AccessId : null;
+
+    }
+}
+
+/**
  * DescribeIotModels返回参数结构体
  * @class
  */
@@ -4837,6 +4893,7 @@ module.exports = {
     CreateDevTokenRequest: CreateDevTokenRequest,
     DeleteIotDataTypeRequest: DeleteIotDataTypeRequest,
     DescribeMessageQueueRequest: DescribeMessageQueueRequest,
+    DeleteAppUsrResponse: DeleteAppUsrResponse,
     DescribeProductRequest: DescribeProductRequest,
     DescribeProductsResponse: DescribeProductsResponse,
     CreateAppUsrRequest: CreateAppUsrRequest,
@@ -4923,6 +4980,7 @@ module.exports = {
     DescribeProductResponse: DescribeProductResponse,
     DescribeBindUsrRequest: DescribeBindUsrRequest,
     SendOnlineMsgResponse: SendOnlineMsgResponse,
+    DeleteAppUsrRequest: DeleteAppUsrRequest,
     DescribeIotModelsResponse: DescribeIotModelsResponse,
     DescribeMessageQueueResponse: DescribeMessageQueueResponse,
     DescribeDevicesRequest: DescribeDevicesRequest,

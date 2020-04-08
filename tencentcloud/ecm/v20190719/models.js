@@ -987,6 +987,34 @@ class DescribePeakBaseOverviewResponse extends  AbstractModel {
 }
 
 /**
+ * ImportImage返回参数结构体
+ * @class
+ */
+class ImportImageResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * TerminateInstances请求参数结构体
  * @class
  */
@@ -2181,6 +2209,48 @@ class DescribeNodeResponse extends  AbstractModel {
         }
         this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ImportImage请求参数结构体
+ * @class
+ */
+class ImportImageRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 镜像的Id。
+         * @type {string || null}
+         */
+        this.ImageId = null;
+
+        /**
+         * 镜像的描述。
+         * @type {string || null}
+         */
+        this.ImageDescription = null;
+
+        /**
+         * 源地域
+         * @type {string || null}
+         */
+        this.SourceRegion = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ImageId = 'ImageId' in params ? params.ImageId : null;
+        this.ImageDescription = 'ImageDescription' in params ? params.ImageDescription : null;
+        this.SourceRegion = 'SourceRegion' in params ? params.SourceRegion : null;
 
     }
 }
@@ -3996,6 +4066,7 @@ module.exports = {
     DescribePeakNetworkOverviewResponse: DescribePeakNetworkOverviewResponse,
     OperatorAction: OperatorAction,
     DescribePeakBaseOverviewResponse: DescribePeakBaseOverviewResponse,
+    ImportImageResponse: ImportImageResponse,
     TerminateInstancesRequest: TerminateInstancesRequest,
     RegionInfo: RegionInfo,
     DescribeImageResponse: DescribeImageResponse,
@@ -4019,6 +4090,7 @@ module.exports = {
     DescribeInstancesRequest: DescribeInstancesRequest,
     Country: Country,
     DescribeNodeResponse: DescribeNodeResponse,
+    ImportImageRequest: ImportImageRequest,
     ModifyModuleImageResponse: ModifyModuleImageResponse,
     Filter: Filter,
     Tag: Tag,
