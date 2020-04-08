@@ -203,6 +203,7 @@ class ImageTag extends  AbstractModel {
 
         /**
          * 操作系统
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.Os = null;
@@ -3561,6 +3562,20 @@ class ContainerGroupDetail extends  AbstractModel {
          */
         this.SubnetId = null;
 
+        /**
+         * 部署组资源类型
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.GroupResourceType = null;
+
+        /**
+         * 部署组实例个数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.InstanceCount = null;
+
     }
 
     /**
@@ -3617,6 +3632,8 @@ class ContainerGroupDetail extends  AbstractModel {
         this.CpuRequest = 'CpuRequest' in params ? params.CpuRequest : null;
         this.MemRequest = 'MemRequest' in params ? params.MemRequest : null;
         this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
+        this.GroupResourceType = 'GroupResourceType' in params ? params.GroupResourceType : null;
+        this.InstanceCount = 'InstanceCount' in params ? params.InstanceCount : null;
 
     }
 }

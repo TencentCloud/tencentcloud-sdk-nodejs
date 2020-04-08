@@ -37,6 +37,7 @@ const CreateUploadPathRequest = models.CreateUploadPathRequest;
 const CreateDevTokenRequest = models.CreateDevTokenRequest;
 const DeleteIotDataTypeRequest = models.DeleteIotDataTypeRequest;
 const DescribeMessageQueueRequest = models.DescribeMessageQueueRequest;
+const DeleteAppUsrResponse = models.DeleteAppUsrResponse;
 const DescribeProductRequest = models.DescribeProductRequest;
 const DescribeProductsResponse = models.DescribeProductsResponse;
 const CreateAppUsrRequest = models.CreateAppUsrRequest;
@@ -123,6 +124,7 @@ const DisableOtaVersionRequest = models.DisableOtaVersionRequest;
 const DescribeProductResponse = models.DescribeProductResponse;
 const DescribeBindUsrRequest = models.DescribeBindUsrRequest;
 const SendOnlineMsgResponse = models.SendOnlineMsgResponse;
+const DeleteAppUsrRequest = models.DeleteAppUsrRequest;
 const DescribeIotModelsResponse = models.DescribeIotModelsResponse;
 const DescribeMessageQueueResponse = models.DescribeMessageQueueResponse;
 const DescribeDevicesRequest = models.DescribeDevicesRequest;
@@ -444,6 +446,17 @@ class IotvideoClient extends AbstractClient {
     DeleteOtaVersion(req, cb) {
         let resp = new DeleteOtaVersionResponse();
         this.request("DeleteOtaVersion", req, resp, cb);
+    }
+
+    /**
+     * 本接口（DeleteAppUsr）用于删除终端用户。
+     * @param {DeleteAppUsrRequest} req
+     * @param {function(string, DeleteAppUsrResponse):void} cb
+     * @public
+     */
+    DeleteAppUsr(req, cb) {
+        let resp = new DeleteAppUsrResponse();
+        this.request("DeleteAppUsr", req, resp, cb);
     }
 
     /**
