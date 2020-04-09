@@ -66,6 +66,48 @@ class InstanceLog extends  AbstractModel {
 }
 
 /**
+ * 节点本地盘信息
+ * @class
+ */
+class LocalDiskInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 本地盘类型<li>LOCAL_SATA：大数据型</li><li>NVME_SSD：高IO型</li>
+         * @type {string || null}
+         */
+        this.LocalDiskType = null;
+
+        /**
+         * 本地盘单盘大小
+         * @type {number || null}
+         */
+        this.LocalDiskSize = null;
+
+        /**
+         * 本地盘块数
+         * @type {number || null}
+         */
+        this.LocalDiskCount = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LocalDiskType = 'LocalDiskType' in params ? params.LocalDiskType : null;
+        this.LocalDiskSize = 'LocalDiskSize' in params ? params.LocalDiskSize : null;
+        this.LocalDiskCount = 'LocalDiskCount' in params ? params.LocalDiskCount : null;
+
+    }
+}
+
+/**
  * 实例操作记录中的流程任务信息
  * @class
  */
@@ -163,6 +205,13 @@ class NodeInfo extends  AbstractModel {
          */
         this.DiskSize = null;
 
+        /**
+         * 节点本地盘信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {LocalDiskInfo || null}
+         */
+        this.LocalDiskInfo = null;
+
     }
 
     /**
@@ -177,6 +226,12 @@ class NodeInfo extends  AbstractModel {
         this.Type = 'Type' in params ? params.Type : null;
         this.DiskType = 'DiskType' in params ? params.DiskType : null;
         this.DiskSize = 'DiskSize' in params ? params.DiskSize : null;
+
+        if (params.LocalDiskInfo) {
+            let obj = new LocalDiskInfo();
+            obj.deserialize(params.LocalDiskInfo)
+            this.LocalDiskInfo = obj;
+        }
 
     }
 }
@@ -1783,6 +1838,12 @@ class UpdateInstanceRequest extends  AbstractModel {
          */
         this.KibanaPrivateAccess = null;
 
+        /**
+         * ES 6.8及以上版本基础版开启或关闭用户认证
+         * @type {number || null}
+         */
+        this.BasicSecurityType = null;
+
     }
 
     /**
@@ -1833,6 +1894,7 @@ class UpdateInstanceRequest extends  AbstractModel {
         }
         this.KibanaPublicAccess = 'KibanaPublicAccess' in params ? params.KibanaPublicAccess : null;
         this.KibanaPrivateAccess = 'KibanaPrivateAccess' in params ? params.KibanaPrivateAccess : null;
+        this.BasicSecurityType = 'BasicSecurityType' in params ? params.BasicSecurityType : null;
 
     }
 }
@@ -2373,6 +2435,7 @@ class Operation extends  AbstractModel {
 
 module.exports = {
     InstanceLog: InstanceLog,
+    LocalDiskInfo: LocalDiskInfo,
     TaskDetail: TaskDetail,
     NodeInfo: NodeInfo,
     DescribeInstanceOperationsRequest: DescribeInstanceOperationsRequest,

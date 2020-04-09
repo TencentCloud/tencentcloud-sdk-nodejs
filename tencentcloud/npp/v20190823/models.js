@@ -883,7 +883,7 @@ class GetVirtualNumRequest extends  AbstractModel {
         super();
 
         /**
-         * appId 值测试时由腾讯统一分配
+         * 业务appid
          * @type {string || null}
          */
         this.BizAppId = null;

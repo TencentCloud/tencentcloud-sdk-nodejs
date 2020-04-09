@@ -28,6 +28,7 @@ const SetSecurityGroupForLoadbalancersRequest = models.SetSecurityGroupForLoadba
 const CreateLoadBalancerRequest = models.CreateLoadBalancerRequest;
 const DeleteRuleRequest = models.DeleteRuleRequest;
 const ModifyLoadBalancerAttributesRequest = models.ModifyLoadBalancerAttributesRequest;
+const SetLoadBalancerClsLogResponse = models.SetLoadBalancerClsLogResponse;
 const ModifyRuleRequest = models.ModifyRuleRequest;
 const DescribeClassicalLBByInstanceIdResponse = models.DescribeClassicalLBByInstanceIdResponse;
 const DescribeBlockIPListResponse = models.DescribeBlockIPListResponse;
@@ -130,6 +131,7 @@ const TargetRegionInfo = models.TargetRegionInfo;
 const BatchRegisterTargetsResponse = models.BatchRegisterTargetsResponse;
 const ReplaceCertForLoadBalancersRequest = models.ReplaceCertForLoadBalancersRequest;
 const DeleteRuleResponse = models.DeleteRuleResponse;
+const SetLoadBalancerClsLogRequest = models.SetLoadBalancerClsLogRequest;
 const ModifyTargetGroupAttributeRequest = models.ModifyTargetGroupAttributeRequest;
 const ModifyDomainAttributesRequest = models.ModifyDomainAttributesRequest;
 const DeregisterTargetsRequest = models.DeregisterTargetsRequest;
@@ -281,6 +283,17 @@ class ClbClient extends AbstractClient {
     CreateRule(req, cb) {
         let resp = new CreateRuleResponse();
         this.request("CreateRule", req, resp, cb);
+    }
+
+    /**
+     * 增加、删除、更新负载均衡的日志服务(CLS)主题
+     * @param {SetLoadBalancerClsLogRequest} req
+     * @param {function(string, SetLoadBalancerClsLogResponse):void} cb
+     * @public
+     */
+    SetLoadBalancerClsLog(req, cb) {
+        let resp = new SetLoadBalancerClsLogResponse();
+        this.request("SetLoadBalancerClsLog", req, resp, cb);
     }
 
     /**

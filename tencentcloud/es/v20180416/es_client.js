@@ -17,6 +17,7 @@
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const InstanceLog = models.InstanceLog;
+const LocalDiskInfo = models.LocalDiskInfo;
 const TaskDetail = models.TaskDetail;
 const NodeInfo = models.NodeInfo;
 const DescribeInstanceOperationsRequest = models.DescribeInstanceOperationsRequest;
