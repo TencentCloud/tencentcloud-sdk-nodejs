@@ -1025,6 +1025,12 @@ class SubmitImageTaskRequest extends  AbstractModel {
         this.LightStandardSet = null;
 
         /**
+         * 结果更新回调地址。
+         * @type {string || null}
+         */
+        this.EventsCallBack = null;
+
+        /**
          * 抽帧的时间间隔，单位毫秒，默认值1000，保留字段，当前不支持填写。
          * @type {number || null}
          */
@@ -1074,6 +1080,7 @@ class SubmitImageTaskRequest extends  AbstractModel {
                 this.LightStandardSet.push(obj);
             }
         }
+        this.EventsCallBack = 'EventsCallBack' in params ? params.EventsCallBack : null;
         this.FrameInterval = 'FrameInterval' in params ? params.FrameInterval : null;
         this.LibrarySet = 'LibrarySet' in params ? params.LibrarySet : null;
         this.MaxVideoDuration = 'MaxVideoDuration' in params ? params.MaxVideoDuration : null;
@@ -4967,7 +4974,7 @@ class ImageTaskFunction extends  AbstractModel {
         this.EnableActionClass = null;
 
         /**
-         * 人脸检测选项
+         * 人脸检测选项（默认为true，目前不可编辑）
          * @type {boolean || null}
          */
         this.EnableFaceDetect = null;
@@ -4979,7 +4986,7 @@ class ImageTaskFunction extends  AbstractModel {
         this.EnableFaceExpression = null;
 
         /**
-         * 人脸检索选项
+         * 人脸检索选项（默认为true，目前不可编辑）
          * @type {boolean || null}
          */
         this.EnableFaceIdentify = null;
@@ -5015,7 +5022,7 @@ class ImageTaskFunction extends  AbstractModel {
         this.EnableTeacherBodyMovements = null;
 
         /**
-         * 判断老师是否在屏幕中
+         * 判断老师是否在屏幕中（该功能尚未支持）
          * @type {boolean || null}
          */
         this.EnableTeacherOutScreen = null;

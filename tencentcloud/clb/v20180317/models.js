@@ -637,6 +637,34 @@ class ModifyLoadBalancerAttributesRequest extends  AbstractModel {
 }
 
 /**
+ * SetLoadBalancerClsLog返回参数结构体
+ * @class
+ */
+class SetLoadBalancerClsLogResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * ModifyRule请求参数结构体
  * @class
  */
@@ -5696,6 +5724,48 @@ class DeleteRuleResponse extends  AbstractModel {
 }
 
 /**
+ * SetLoadBalancerClsLog请求参数结构体
+ * @class
+ */
+class SetLoadBalancerClsLogRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 负载均衡实例 ID
+         * @type {string || null}
+         */
+        this.LoadBalancerId = null;
+
+        /**
+         * 日志服务(CLS)的日志集ID
+         * @type {string || null}
+         */
+        this.LogSetId = null;
+
+        /**
+         * 日志服务(CLS)的日志主题ID
+         * @type {string || null}
+         */
+        this.LogTopicId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LoadBalancerId = 'LoadBalancerId' in params ? params.LoadBalancerId : null;
+        this.LogSetId = 'LogSetId' in params ? params.LogSetId : null;
+        this.LogTopicId = 'LogTopicId' in params ? params.LogTopicId : null;
+
+    }
+}
+
+/**
  * ModifyTargetGroupAttribute请求参数结构体
  * @class
  */
@@ -7929,6 +7999,7 @@ module.exports = {
     CreateLoadBalancerRequest: CreateLoadBalancerRequest,
     DeleteRuleRequest: DeleteRuleRequest,
     ModifyLoadBalancerAttributesRequest: ModifyLoadBalancerAttributesRequest,
+    SetLoadBalancerClsLogResponse: SetLoadBalancerClsLogResponse,
     ModifyRuleRequest: ModifyRuleRequest,
     DescribeClassicalLBByInstanceIdResponse: DescribeClassicalLBByInstanceIdResponse,
     DescribeBlockIPListResponse: DescribeBlockIPListResponse,
@@ -8031,6 +8102,7 @@ module.exports = {
     BatchRegisterTargetsResponse: BatchRegisterTargetsResponse,
     ReplaceCertForLoadBalancersRequest: ReplaceCertForLoadBalancersRequest,
     DeleteRuleResponse: DeleteRuleResponse,
+    SetLoadBalancerClsLogRequest: SetLoadBalancerClsLogRequest,
     ModifyTargetGroupAttributeRequest: ModifyTargetGroupAttributeRequest,
     ModifyDomainAttributesRequest: ModifyDomainAttributesRequest,
     DeregisterTargetsRequest: DeregisterTargetsRequest,

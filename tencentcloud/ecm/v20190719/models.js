@@ -2328,12 +2328,14 @@ class Tag extends  AbstractModel {
 
         /**
          * 标签的键。
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.Key = null;
 
         /**
          * 标签的值。
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.Value = null;

@@ -4309,16 +4309,16 @@ class DescribeBindUsrRequest extends  AbstractModel {
         super();
 
         /**
-         * 设备主人的AccessId
-         * @type {string || null}
-         */
-        this.AccessId = null;
-
-        /**
          * 设备TID
          * @type {string || null}
          */
         this.Tid = null;
+
+        /**
+         * 设备主人的AccessId
+         * @type {string || null}
+         */
+        this.AccessId = null;
 
     }
 
@@ -4329,8 +4329,8 @@ class DescribeBindUsrRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.AccessId = 'AccessId' in params ? params.AccessId : null;
         this.Tid = 'Tid' in params ? params.Tid : null;
+        this.AccessId = 'AccessId' in params ? params.AccessId : null;
 
     }
 }
