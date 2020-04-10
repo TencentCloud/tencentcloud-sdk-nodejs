@@ -8044,7 +8044,7 @@ class InstanceInfo extends  AbstractModel {
         this.MasterInfo = null;
 
         /**
-         * 实例类型，可能的返回值：“HA”-高可用版；“BASIC”-基础版
+         * 实例类型，可能的返回值：“HA”-高可用版；“FE”-金融版；“BASIC”-基础版
          * @type {string || null}
          */
         this.DeviceType = null;

@@ -65,7 +65,9 @@ const VODExportInfo = models.VODExportInfo;
 const SortBy = models.SortBy;
 const ImageMaterial = models.ImageMaterial;
 const DescribeClassRequest = models.DescribeClassRequest;
+const MoveClassRequest = models.MoveClassRequest;
 const DeleteTeamMembersResponse = models.DeleteTeamMembersResponse;
+const MoveClassResponse = models.MoveClassResponse;
 const ImportMediaToProjectResponse = models.ImportMediaToProjectResponse;
 const ModifyTeamMemberResponse = models.ModifyTeamMemberResponse;
 const DescribeTeamMembersResponse = models.DescribeTeamMembersResponse;
@@ -304,6 +306,18 @@ class CmeClient extends AbstractClient {
     AddTeamMember(req, cb) {
         let resp = new AddTeamMemberResponse();
         this.request("AddTeamMember", req, resp, cb);
+    }
+
+    /**
+     * 移动某一个分类到另外一个分类下，也可用于分类重命名。
+<li>如果 SourceClassPath = /素材/视频/NBA，DestinationClassPath = /素材/视频/篮球，当 DestinationClassPath 不存在时候，操作结果为重命名 ClassPath，如果 DestinationClassPath 存在时候，操作结果为产生新目录 /素材/视频/篮球/NBA。</li>
+     * @param {MoveClassRequest} req
+     * @param {function(string, MoveClassResponse):void} cb
+     * @public
+     */
+    MoveClass(req, cb) {
+        let resp = new MoveClassResponse();
+        this.request("MoveClass", req, resp, cb);
     }
 
     /**

@@ -72,6 +72,7 @@ const DeleteMessageQueueResponse = models.DeleteMessageQueueResponse;
 const DescribeOtaVersionsRequest = models.DescribeOtaVersionsRequest;
 const DescribeTraceIdsResponse = models.DescribeTraceIdsResponse;
 const CreateProductResponse = models.CreateProductResponse;
+const CreateStorageRequest = models.CreateStorageRequest;
 const UpgradeDeviceResponse = models.UpgradeDeviceResponse;
 const DisableOtaVersionResponse = models.DisableOtaVersionResponse;
 const DescribeBindDevResponse = models.DescribeBindDevResponse;
@@ -131,6 +132,7 @@ const DescribeDevicesRequest = models.DescribeDevicesRequest;
 const CreateIotDataTypeResponse = models.CreateIotDataTypeResponse;
 const ModifyDevicePropertyResponse = models.ModifyDevicePropertyResponse;
 const DeleteBindingResponse = models.DeleteBindingResponse;
+const CreateStorageResponse = models.CreateStorageResponse;
 const DisableDeviceStreamResponse = models.DisableDeviceStreamResponse;
 const DeleteDeviceResponse = models.DeleteDeviceResponse;
 const CreateUploadPathResponse = models.CreateUploadPathResponse;
@@ -656,6 +658,17 @@ class IotvideoClient extends AbstractClient {
     DeleteBinding(req, cb) {
         let resp = new DeleteBindingResponse();
         this.request("DeleteBinding", req, resp, cb);
+    }
+
+    /**
+     * 本接口（CreateStorage）用于购买云存套餐。
+     * @param {CreateStorageRequest} req
+     * @param {function(string, CreateStorageResponse):void} cb
+     * @public
+     */
+    CreateStorage(req, cb) {
+        let resp = new CreateStorageResponse();
+        this.request("CreateStorage", req, resp, cb);
     }
 
     /**

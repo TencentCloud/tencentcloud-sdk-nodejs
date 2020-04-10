@@ -1469,6 +1469,12 @@ GeneralBasicOcr接口返回段落信息Parag，包含ParagNo。
          */
         this.AdvancedInfo = null;
 
+        /**
+         * 文本行在旋转纠正之后的图像中的像素坐标，表示为（左上角x, 左上角y，宽width，高height）
+         * @type {ItemCoord || null}
+         */
+        this.ItemPolygon = null;
+
     }
 
     /**
@@ -1490,6 +1496,12 @@ GeneralBasicOcr接口返回段落信息Parag，包含ParagNo。
             }
         }
         this.AdvancedInfo = 'AdvancedInfo' in params ? params.AdvancedInfo : null;
+
+        if (params.ItemPolygon) {
+            let obj = new ItemCoord();
+            obj.deserialize(params.ItemPolygon)
+            this.ItemPolygon = obj;
+        }
 
     }
 }

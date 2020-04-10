@@ -2280,6 +2280,48 @@ class CreateProductResponse extends  AbstractModel {
 }
 
 /**
+ * CreateStorage请求参数结构体
+ * @class
+ */
+class CreateStorageRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 云存套餐ID
+         * @type {string || null}
+         */
+        this.PkgId = null;
+
+        /**
+         * 设备TID
+         * @type {string || null}
+         */
+        this.Tid = null;
+
+        /**
+         * 用户唯一标识，由厂商保证内部唯一性
+         * @type {string || null}
+         */
+        this.UserTag = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PkgId = 'PkgId' in params ? params.PkgId : null;
+        this.Tid = 'Tid' in params ? params.Tid : null;
+        this.UserTag = 'UserTag' in params ? params.UserTag : null;
+
+    }
+}
+
+/**
  * UpgradeDevice返回参数结构体
  * @class
  */
@@ -4639,6 +4681,34 @@ class DeleteBindingResponse extends  AbstractModel {
 }
 
 /**
+ * CreateStorage返回参数结构体
+ * @class
+ */
+class CreateStorageResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DisableDeviceStream返回参数结构体
  * @class
  */
@@ -4928,6 +4998,7 @@ module.exports = {
     DescribeOtaVersionsRequest: DescribeOtaVersionsRequest,
     DescribeTraceIdsResponse: DescribeTraceIdsResponse,
     CreateProductResponse: CreateProductResponse,
+    CreateStorageRequest: CreateStorageRequest,
     UpgradeDeviceResponse: UpgradeDeviceResponse,
     DisableOtaVersionResponse: DisableOtaVersionResponse,
     DescribeBindDevResponse: DescribeBindDevResponse,
@@ -4987,6 +5058,7 @@ module.exports = {
     CreateIotDataTypeResponse: CreateIotDataTypeResponse,
     ModifyDevicePropertyResponse: ModifyDevicePropertyResponse,
     DeleteBindingResponse: DeleteBindingResponse,
+    CreateStorageResponse: CreateStorageResponse,
     DisableDeviceStreamResponse: DisableDeviceStreamResponse,
     DeleteDeviceResponse: DeleteDeviceResponse,
     CreateUploadPathResponse: CreateUploadPathResponse,

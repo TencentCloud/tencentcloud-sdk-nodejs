@@ -92,6 +92,7 @@ module.exports = {
     ssl: require("./ssl"),
     ssm: require("./ssm"),
     sts: require("./sts"),
+    taf: require("./taf"),
     tag: require("./tag"),
     tav: require("./tav"),
     tbaas: require("./tbaas"),

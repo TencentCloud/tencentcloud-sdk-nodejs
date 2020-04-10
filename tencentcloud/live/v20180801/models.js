@@ -1920,13 +1920,13 @@ class DomainInfo extends  AbstractModel {
         this.CurrentCName = null;
 
         /**
-         * 是否租用域名
+         * 已无效，可忽略。
          * @type {number || null}
          */
         this.RentTag = null;
 
         /**
-         * 租用域名过期时间
+         * 已无效，可忽略。
          * @type {string || null}
          */
         this.RentExpireTime = null;

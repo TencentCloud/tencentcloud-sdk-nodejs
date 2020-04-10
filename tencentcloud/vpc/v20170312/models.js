@@ -5105,6 +5105,49 @@ NORMAL_CVM：普通云服务器；
 }
 
 /**
+ * DescribeVpcResourceDashboard返回参数结构体
+ * @class
+ */
+class DescribeVpcResourceDashboardResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 资源对象列表。
+         * @type {Array.<ResourceDashboard> || null}
+         */
+        this.ResourceDashboardSet = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.ResourceDashboardSet) {
+            this.ResourceDashboardSet = new Array();
+            for (let z in params.ResourceDashboardSet) {
+                let obj = new ResourceDashboard();
+                obj.deserialize(params.ResourceDashboardSet[z]);
+                this.ResourceDashboardSet.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * AllocateIp6AddressesBandwidth返回参数结构体
  * @class
  */
@@ -6559,6 +6602,34 @@ class ModifyCcnRegionBandwidthLimitsTypeRequest extends  AbstractModel {
         }
         this.CcnId = 'CcnId' in params ? params.CcnId : null;
         this.BandwidthLimitType = 'BandwidthLimitType' in params ? params.BandwidthLimitType : null;
+
+    }
+}
+
+/**
+ * DescribeVpcResourceDashboard请求参数结构体
+ * @class
+ */
+class DescribeVpcResourceDashboardRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Vpc实例ID，例如：vpc-f1xjkw1b。
+         * @type {Array.<string> || null}
+         */
+        this.VpcIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.VpcIds = 'VpcIds' in params ? params.VpcIds : null;
 
     }
 }
@@ -8804,6 +8875,321 @@ class NatGateway extends  AbstractModel {
         }
         this.VpcId = 'VpcId' in params ? params.VpcId : null;
         this.Zone = 'Zone' in params ? params.Zone : null;
+
+    }
+}
+
+/**
+ * VPC资源看板（各资源个数）
+ * @class
+ */
+class ResourceDashboard extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Vpc实例ID，例如：vpc-f1xjkw1b。
+         * @type {string || null}
+         */
+        this.VpcId = null;
+
+        /**
+         * 子网实例ID，例如：subnet-bthucmmy。
+         * @type {string || null}
+         */
+        this.SubnetId = null;
+
+        /**
+         * 基础网络互通。
+         * @type {number || null}
+         */
+        this.Classiclink = null;
+
+        /**
+         * 专线网关。
+         * @type {number || null}
+         */
+        this.Dcg = null;
+
+        /**
+         * 对等连接。
+         * @type {number || null}
+         */
+        this.Pcx = null;
+
+        /**
+         * 当前已使用的IP总数。
+         * @type {number || null}
+         */
+        this.Ip = null;
+
+        /**
+         * NAT网关。
+         * @type {number || null}
+         */
+        this.Nat = null;
+
+        /**
+         * VPN网关。
+         * @type {number || null}
+         */
+        this.Vpngw = null;
+
+        /**
+         * 流日志。
+         * @type {number || null}
+         */
+        this.FlowLog = null;
+
+        /**
+         * 网络探测。
+         * @type {number || null}
+         */
+        this.NetworkDetect = null;
+
+        /**
+         * 网络ACL。
+         * @type {number || null}
+         */
+        this.NetworkACL = null;
+
+        /**
+         * 云主机。
+         * @type {number || null}
+         */
+        this.CVM = null;
+
+        /**
+         * 负载均衡。
+         * @type {number || null}
+         */
+        this.LB = null;
+
+        /**
+         * 关系型数据库。
+         * @type {number || null}
+         */
+        this.CDB = null;
+
+        /**
+         * 云数据库 TencentDB for Memcached。
+         * @type {number || null}
+         */
+        this.Cmem = null;
+
+        /**
+         * 时序数据库。
+         * @type {number || null}
+         */
+        this.CTSDB = null;
+
+        /**
+         * 数据库 TencentDB for MariaDB（TDSQL）。
+         * @type {number || null}
+         */
+        this.MariaDB = null;
+
+        /**
+         * 数据库 TencentDB for SQL Server。
+         * @type {number || null}
+         */
+        this.SQLServer = null;
+
+        /**
+         * 云数据库 TencentDB for PostgreSQL。
+         * @type {number || null}
+         */
+        this.Postgres = null;
+
+        /**
+         * 网络附加存储。
+         * @type {number || null}
+         */
+        this.NAS = null;
+
+        /**
+         * Snova云数据仓库。
+         * @type {number || null}
+         */
+        this.Greenplumn = null;
+
+        /**
+         * 消息队列 CKAFKA。
+         * @type {number || null}
+         */
+        this.Ckafka = null;
+
+        /**
+         * Grocery。
+         * @type {number || null}
+         */
+        this.Grocery = null;
+
+        /**
+         * 数据加密服务。
+         * @type {number || null}
+         */
+        this.HSM = null;
+
+        /**
+         * 游戏存储 Tcaplus。
+         * @type {number || null}
+         */
+        this.Tcaplus = null;
+
+        /**
+         * Cnas。
+         * @type {number || null}
+         */
+        this.Cnas = null;
+
+        /**
+         * HTAP 数据库 TiDB。
+         * @type {number || null}
+         */
+        this.TiDB = null;
+
+        /**
+         * EMR 集群。
+         * @type {number || null}
+         */
+        this.Emr = null;
+
+        /**
+         * SEAL。
+         * @type {number || null}
+         */
+        this.SEAL = null;
+
+        /**
+         * 文件存储 CFS。
+         * @type {number || null}
+         */
+        this.CFS = null;
+
+        /**
+         * Oracle。
+         * @type {number || null}
+         */
+        this.Oracle = null;
+
+        /**
+         * ElasticSearch服务。
+         * @type {number || null}
+         */
+        this.ElasticSearch = null;
+
+        /**
+         * 区块链服务。
+         * @type {number || null}
+         */
+        this.TBaaS = null;
+
+        /**
+         * Itop。
+         * @type {number || null}
+         */
+        this.Itop = null;
+
+        /**
+         * 云数据库审计。
+         * @type {number || null}
+         */
+        this.DBAudit = null;
+
+        /**
+         * 企业级云数据库 CynosDB for Postgres。
+         * @type {number || null}
+         */
+        this.CynosDBPostgres = null;
+
+        /**
+         * 数据库 TencentDB for Redis。
+         * @type {number || null}
+         */
+        this.Redis = null;
+
+        /**
+         * 数据库 TencentDB for MongoDB。
+         * @type {number || null}
+         */
+        this.MongoDB = null;
+
+        /**
+         * 分布式数据库 TencentDB for TDSQL。
+         * @type {number || null}
+         */
+        this.DCDB = null;
+
+        /**
+         * 企业级云数据库 CynosDB for MySQL。
+         * @type {number || null}
+         */
+        this.CynosDBMySQL = null;
+
+        /**
+         * 子网。
+         * @type {number || null}
+         */
+        this.Subnet = null;
+
+        /**
+         * 路由表。
+         * @type {number || null}
+         */
+        this.RouteTable = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
+        this.Classiclink = 'Classiclink' in params ? params.Classiclink : null;
+        this.Dcg = 'Dcg' in params ? params.Dcg : null;
+        this.Pcx = 'Pcx' in params ? params.Pcx : null;
+        this.Ip = 'Ip' in params ? params.Ip : null;
+        this.Nat = 'Nat' in params ? params.Nat : null;
+        this.Vpngw = 'Vpngw' in params ? params.Vpngw : null;
+        this.FlowLog = 'FlowLog' in params ? params.FlowLog : null;
+        this.NetworkDetect = 'NetworkDetect' in params ? params.NetworkDetect : null;
+        this.NetworkACL = 'NetworkACL' in params ? params.NetworkACL : null;
+        this.CVM = 'CVM' in params ? params.CVM : null;
+        this.LB = 'LB' in params ? params.LB : null;
+        this.CDB = 'CDB' in params ? params.CDB : null;
+        this.Cmem = 'Cmem' in params ? params.Cmem : null;
+        this.CTSDB = 'CTSDB' in params ? params.CTSDB : null;
+        this.MariaDB = 'MariaDB' in params ? params.MariaDB : null;
+        this.SQLServer = 'SQLServer' in params ? params.SQLServer : null;
+        this.Postgres = 'Postgres' in params ? params.Postgres : null;
+        this.NAS = 'NAS' in params ? params.NAS : null;
+        this.Greenplumn = 'Greenplumn' in params ? params.Greenplumn : null;
+        this.Ckafka = 'Ckafka' in params ? params.Ckafka : null;
+        this.Grocery = 'Grocery' in params ? params.Grocery : null;
+        this.HSM = 'HSM' in params ? params.HSM : null;
+        this.Tcaplus = 'Tcaplus' in params ? params.Tcaplus : null;
+        this.Cnas = 'Cnas' in params ? params.Cnas : null;
+        this.TiDB = 'TiDB' in params ? params.TiDB : null;
+        this.Emr = 'Emr' in params ? params.Emr : null;
+        this.SEAL = 'SEAL' in params ? params.SEAL : null;
+        this.CFS = 'CFS' in params ? params.CFS : null;
+        this.Oracle = 'Oracle' in params ? params.Oracle : null;
+        this.ElasticSearch = 'ElasticSearch' in params ? params.ElasticSearch : null;
+        this.TBaaS = 'TBaaS' in params ? params.TBaaS : null;
+        this.Itop = 'Itop' in params ? params.Itop : null;
+        this.DBAudit = 'DBAudit' in params ? params.DBAudit : null;
+        this.CynosDBPostgres = 'CynosDBPostgres' in params ? params.CynosDBPostgres : null;
+        this.Redis = 'Redis' in params ? params.Redis : null;
+        this.MongoDB = 'MongoDB' in params ? params.MongoDB : null;
+        this.DCDB = 'DCDB' in params ? params.DCDB : null;
+        this.CynosDBMySQL = 'CynosDBMySQL' in params ? params.CynosDBMySQL : null;
+        this.Subnet = 'Subnet' in params ? params.Subnet : null;
+        this.RouteTable = 'RouteTable' in params ? params.RouteTable : null;
 
     }
 }
@@ -21617,6 +22003,7 @@ module.exports = {
     DescribeVpcsResponse: DescribeVpcsResponse,
     ModifySecurityGroupAttributeRequest: ModifySecurityGroupAttributeRequest,
     ModifyNetDetectRequest: ModifyNetDetectRequest,
+    DescribeVpcResourceDashboardResponse: DescribeVpcResourceDashboardResponse,
     AllocateIp6AddressesBandwidthResponse: AllocateIp6AddressesBandwidthResponse,
     DescribeNetDetectStatesRequest: DescribeNetDetectStatesRequest,
     DescribeNatGatewaysResponse: DescribeNatGatewaysResponse,
@@ -21644,6 +22031,7 @@ module.exports = {
     ResetAttachCcnInstancesResponse: ResetAttachCcnInstancesResponse,
     RejectAttachCcnInstancesRequest: RejectAttachCcnInstancesRequest,
     ModifyCcnRegionBandwidthLimitsTypeRequest: ModifyCcnRegionBandwidthLimitsTypeRequest,
+    DescribeVpcResourceDashboardRequest: DescribeVpcResourceDashboardRequest,
     ModifyIp6RuleRequest: ModifyIp6RuleRequest,
     ReplaceRouteTableAssociationRequest: ReplaceRouteTableAssociationRequest,
     AssociateNetworkAclSubnetsRequest: AssociateNetworkAclSubnetsRequest,
@@ -21693,6 +22081,7 @@ module.exports = {
     ModifyIpv6AddressesAttributeResponse: ModifyIpv6AddressesAttributeResponse,
     ReplaceSecurityGroupPolicyRequest: ReplaceSecurityGroupPolicyRequest,
     NatGateway: NatGateway,
+    ResourceDashboard: ResourceDashboard,
     DescribeCcnAttachedInstancesResponse: DescribeCcnAttachedInstancesResponse,
     DeleteCustomerGatewayResponse: DeleteCustomerGatewayResponse,
     CreateNetDetectRequest: CreateNetDetectRequest,

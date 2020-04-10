@@ -16,7 +16,9 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
+const CreateDBInstancesRequest = models.CreateDBInstancesRequest;
 const CloseServerlessDBExtranetAccessResponse = models.CloseServerlessDBExtranetAccessResponse;
+const DestroyDBInstanceRequest = models.DestroyDBInstanceRequest;
 const CreateServerlessDBInstanceRequest = models.CreateServerlessDBInstanceRequest;
 const InquiryPriceRenewDBInstanceRequest = models.InquiryPriceRenewDBInstanceRequest;
 const SetAutoRenewFlagRequest = models.SetAutoRenewFlagRequest;
@@ -30,57 +32,65 @@ const DescribeAccountsRequest = models.DescribeAccountsRequest;
 const DescribeDBErrlogsResponse = models.DescribeDBErrlogsResponse;
 const InquiryPriceCreateDBInstancesRequest = models.InquiryPriceCreateDBInstancesRequest;
 const ModifyDBInstanceNameRequest = models.ModifyDBInstanceNameRequest;
+const SpecItemInfo = models.SpecItemInfo;
 const DescribeProductConfigRequest = models.DescribeProductConfigRequest;
-const InquiryPriceUpgradeDBInstanceResponse = models.InquiryPriceUpgradeDBInstanceResponse;
+const CreateDBInstancesResponse = models.CreateDBInstancesResponse;
 const RestartDBInstanceRequest = models.RestartDBInstanceRequest;
-const InquiryPriceRenewDBInstanceResponse = models.InquiryPriceRenewDBInstanceResponse;
+const DescribeDBInstancesRequest = models.DescribeDBInstancesRequest;
 const ErrLogDetail = models.ErrLogDetail;
 const ServerlessDBInstance = models.ServerlessDBInstance;
 const DescribeServerlessDBInstancesResponse = models.DescribeServerlessDBInstancesResponse;
 const ModifyDBInstancesProjectResponse = models.ModifyDBInstancesProjectResponse;
 const RenewInstanceResponse = models.RenewInstanceResponse;
 const DescribeZonesRequest = models.DescribeZonesRequest;
+const UpgradeDBInstanceRequest = models.UpgradeDBInstanceRequest;
 const OpenServerlessDBExtranetAccessRequest = models.OpenServerlessDBExtranetAccessRequest;
 const RegionInfo = models.RegionInfo;
 const DeleteServerlessDBInstanceResponse = models.DeleteServerlessDBInstanceResponse;
+const SlowlogDetail = models.SlowlogDetail;
 const InitDBInstancesRequest = models.InitDBInstancesRequest;
 const RestartDBInstanceResponse = models.RestartDBInstanceResponse;
 const SetAutoRenewFlagResponse = models.SetAutoRenewFlagResponse;
+const DescribeDBInstancesResponse = models.DescribeDBInstancesResponse;
 const SpecInfo = models.SpecInfo;
 const DBInstance = models.DBInstance;
 const DescribeProductConfigResponse = models.DescribeProductConfigResponse;
 const ResetAccountPasswordResponse = models.ResetAccountPasswordResponse;
 const ResetAccountPasswordRequest = models.ResetAccountPasswordRequest;
 const DescribeOrdersRequest = models.DescribeOrdersRequest;
+const InquiryPriceUpgradeDBInstanceResponse = models.InquiryPriceUpgradeDBInstanceResponse;
 const InitDBInstancesResponse = models.InitDBInstancesResponse;
 const DescribeDBBackupsRequest = models.DescribeDBBackupsRequest;
-const SpecItemInfo = models.SpecItemInfo;
+const ServerlessDBAccount = models.ServerlessDBAccount;
+const OpenDBExtranetAccessResponse = models.OpenDBExtranetAccessResponse;
 const Filter = models.Filter;
 const RenewInstanceRequest = models.RenewInstanceRequest;
 const PgDeal = models.PgDeal;
 const DescribeRegionsResponse = models.DescribeRegionsResponse;
-const ServerlessDBAccount = models.ServerlessDBAccount;
+const DescribeDatabasesRequest = models.DescribeDatabasesRequest;
 const DescribeAccountsResponse = models.DescribeAccountsResponse;
-const OpenDBExtranetAccessRequest = models.OpenDBExtranetAccessRequest;
+const InquiryPriceRenewDBInstanceResponse = models.InquiryPriceRenewDBInstanceResponse;
 const DescribeDBErrlogsRequest = models.DescribeDBErrlogsRequest;
 const ZoneInfo = models.ZoneInfo;
 const DBBackup = models.DBBackup;
 const DBInstanceNetInfo = models.DBInstanceNetInfo;
 const ModifyDBInstancesProjectRequest = models.ModifyDBInstancesProjectRequest;
 const ServerlessDBInstanceNetInfo = models.ServerlessDBInstanceNetInfo;
+const UpgradeDBInstanceResponse = models.UpgradeDBInstanceResponse;
 const ModifyDBInstanceNameResponse = models.ModifyDBInstanceNameResponse;
 const OpenServerlessDBExtranetAccessResponse = models.OpenServerlessDBExtranetAccessResponse;
 const CloseDBExtranetAccessResponse = models.CloseDBExtranetAccessResponse;
-const SlowlogDetail = models.SlowlogDetail;
+const DestroyDBInstanceResponse = models.DestroyDBInstanceResponse;
 const DescribeDBInstanceAttributeResponse = models.DescribeDBInstanceAttributeResponse;
 const DescribeDBSlowlogsRequest = models.DescribeDBSlowlogsRequest;
 const DescribeServerlessDBInstancesRequest = models.DescribeServerlessDBInstancesRequest;
-const OpenDBExtranetAccessResponse = models.OpenDBExtranetAccessResponse;
+const OpenDBExtranetAccessRequest = models.OpenDBExtranetAccessRequest;
 const DescribeDBBackupsResponse = models.DescribeDBBackupsResponse;
 const DescribeRegionsRequest = models.DescribeRegionsRequest;
 const DescribeZonesResponse = models.DescribeZonesResponse;
 const NormalQueryItem = models.NormalQueryItem;
 const CreateServerlessDBInstanceResponse = models.CreateServerlessDBInstanceResponse;
+const DescribeDatabasesResponse = models.DescribeDatabasesResponse;
 const DescribeDBXlogsResponse = models.DescribeDBXlogsResponse;
 const DescribeDBInstanceAttributeRequest = models.DescribeDBInstanceAttributeRequest;
 const CloseServerlessDBExtranetAccessRequest = models.CloseServerlessDBExtranetAccessRequest;
@@ -110,6 +120,17 @@ class PostgresClient extends AbstractClient {
     DescribeOrders(req, cb) {
         let resp = new DescribeOrdersResponse();
         this.request("DescribeOrders", req, resp, cb);
+    }
+
+    /**
+     * 本接口 (DestroyDBInstance) 用于销毁指定DBInstanceId对应的实例。
+     * @param {DestroyDBInstanceRequest} req
+     * @param {function(string, DestroyDBInstanceResponse):void} cb
+     * @public
+     */
+    DestroyDBInstance(req, cb) {
+        let resp = new DestroyDBInstanceResponse();
+        this.request("DestroyDBInstance", req, resp, cb);
     }
 
     /**
@@ -256,6 +277,17 @@ class PostgresClient extends AbstractClient {
     }
 
     /**
+     * 本接口 (CreateDBInstances) 用于创建一个或者多个PostgreSQL实例。
+     * @param {CreateDBInstancesRequest} req
+     * @param {function(string, CreateDBInstancesResponse):void} cb
+     * @public
+     */
+    CreateDBInstances(req, cb) {
+        let resp = new CreateDBInstancesResponse();
+        this.request("CreateDBInstances", req, resp, cb);
+    }
+
+    /**
      * 本接口 (CreateServerlessDBInstance) 用于创建一个ServerlessDB实例，创建成功返回实例ID。
      * @param {CreateServerlessDBInstanceRequest} req
      * @param {function(string, CreateServerlessDBInstanceResponse):void} cb
@@ -264,6 +296,17 @@ class PostgresClient extends AbstractClient {
     CreateServerlessDBInstance(req, cb) {
         let resp = new CreateServerlessDBInstanceResponse();
         this.request("CreateServerlessDBInstance", req, resp, cb);
+    }
+
+    /**
+     * 本接口 (DescribeDBInstances) 用于查询一个或多个实例的详细信息。
+     * @param {DescribeDBInstancesRequest} req
+     * @param {function(string, DescribeDBInstancesResponse):void} cb
+     * @public
+     */
+    DescribeDBInstances(req, cb) {
+        let resp = new DescribeDBInstancesResponse();
+        this.request("DescribeDBInstances", req, resp, cb);
     }
 
     /**
@@ -385,6 +428,28 @@ class PostgresClient extends AbstractClient {
     RenewInstance(req, cb) {
         let resp = new RenewInstanceResponse();
         this.request("RenewInstance", req, resp, cb);
+    }
+
+    /**
+     * 接口（DescribeDatabases）用来拉取数据库列表
+     * @param {DescribeDatabasesRequest} req
+     * @param {function(string, DescribeDatabasesResponse):void} cb
+     * @public
+     */
+    DescribeDatabases(req, cb) {
+        let resp = new DescribeDatabasesResponse();
+        this.request("DescribeDatabases", req, resp, cb);
+    }
+
+    /**
+     * 本接口（UpgradeDBInstance）用于升级实例。
+     * @param {UpgradeDBInstanceRequest} req
+     * @param {function(string, UpgradeDBInstanceResponse):void} cb
+     * @public
+     */
+    UpgradeDBInstance(req, cb) {
+        let resp = new UpgradeDBInstanceResponse();
+        this.request("UpgradeDBInstance", req, resp, cb);
     }
 
     /**
