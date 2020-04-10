@@ -68,7 +68,7 @@ class TextToVoiceRequest extends  AbstractModel {
 
         /**
          * 合成语音的源文本，按UTF-8编码统一计算。
-中文最大支持100个汉字（全角标点符号算一个汉字）；英文最大支持400个字母（半角标点符号算一个字母）。包含空格等字符时需要url encode再传输。
+中文最大支持110个汉字（全角标点符号算一个汉字）；英文最大支持350个字母（半角标点符号算一个字母）。
          * @type {string || null}
          */
         this.Text = null;

@@ -1397,7 +1397,7 @@ class DetachRolePolicyRequest extends  AbstractModel {
         super();
 
         /**
-         * 策略ID
+         * 策略ID，入参PolicyId与PolicyName二选一
          * @type {number || null}
          */
         this.PolicyId = null;
@@ -1414,6 +1414,12 @@ class DetachRolePolicyRequest extends  AbstractModel {
          */
         this.DetachRoleName = null;
 
+        /**
+         * 策略名，入参PolicyId与PolicyName二选一
+         * @type {string || null}
+         */
+        this.PolicyName = null;
+
     }
 
     /**
@@ -1426,6 +1432,7 @@ class DetachRolePolicyRequest extends  AbstractModel {
         this.PolicyId = 'PolicyId' in params ? params.PolicyId : null;
         this.DetachRoleId = 'DetachRoleId' in params ? params.DetachRoleId : null;
         this.DetachRoleName = 'DetachRoleName' in params ? params.DetachRoleName : null;
+        this.PolicyName = 'PolicyName' in params ? params.PolicyName : null;
 
     }
 }
@@ -2360,7 +2367,7 @@ class AttachRolePolicyRequest extends  AbstractModel {
         super();
 
         /**
-         * 策略ID
+         * 策略ID，入参PolicyId与PolicyName二选一
          * @type {number || null}
          */
         this.PolicyId = null;
@@ -2377,6 +2384,12 @@ class AttachRolePolicyRequest extends  AbstractModel {
          */
         this.AttachRoleName = null;
 
+        /**
+         * 策略名，入参PolicyId与PolicyName二选一
+         * @type {string || null}
+         */
+        this.PolicyName = null;
+
     }
 
     /**
@@ -2389,6 +2402,7 @@ class AttachRolePolicyRequest extends  AbstractModel {
         this.PolicyId = 'PolicyId' in params ? params.PolicyId : null;
         this.AttachRoleId = 'AttachRoleId' in params ? params.AttachRoleId : null;
         this.AttachRoleName = 'AttachRoleName' in params ? params.AttachRoleName : null;
+        this.PolicyName = 'PolicyName' in params ? params.PolicyName : null;
 
     }
 }
@@ -2539,7 +2553,7 @@ class SetFlagRequest extends  AbstractModel {
         this.OffsiteFlag = null;
 
         /**
-         * 是否需要充值mfa
+         * 是否需要重置mfa
          * @type {number || null}
          */
         this.NeedResetMfa = null;

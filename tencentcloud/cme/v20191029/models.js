@@ -2441,10 +2441,99 @@ class DescribeClassRequest extends  AbstractModel {
 }
 
 /**
+ * MoveClass请求参数结构体
+ * @class
+ */
+class MoveClassRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 平台名称，指定访问的平台。
+         * @type {string || null}
+         */
+        this.Platform = null;
+
+        /**
+         * 归属者。
+         * @type {Entity || null}
+         */
+        this.Owner = null;
+
+        /**
+         * 源分类路径。
+         * @type {string || null}
+         */
+        this.SourceClassPath = null;
+
+        /**
+         * 目标分类路径。
+         * @type {string || null}
+         */
+        this.DestinationClassPath = null;
+
+        /**
+         * 操作者。填写用户的 Id，用于标识调用者及校验操作权限。
+         * @type {string || null}
+         */
+        this.Operator = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Platform = 'Platform' in params ? params.Platform : null;
+
+        if (params.Owner) {
+            let obj = new Entity();
+            obj.deserialize(params.Owner)
+            this.Owner = obj;
+        }
+        this.SourceClassPath = 'SourceClassPath' in params ? params.SourceClassPath : null;
+        this.DestinationClassPath = 'DestinationClassPath' in params ? params.DestinationClassPath : null;
+        this.Operator = 'Operator' in params ? params.Operator : null;
+
+    }
+}
+
+/**
  * DeleteTeamMembers返回参数结构体
  * @class
  */
 class DeleteTeamMembersResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * MoveClass返回参数结构体
+ * @class
+ */
+class MoveClassResponse extends  AbstractModel {
     constructor(){
         super();
 
@@ -5056,7 +5145,9 @@ module.exports = {
     SortBy: SortBy,
     ImageMaterial: ImageMaterial,
     DescribeClassRequest: DescribeClassRequest,
+    MoveClassRequest: MoveClassRequest,
     DeleteTeamMembersResponse: DeleteTeamMembersResponse,
+    MoveClassResponse: MoveClassResponse,
     ImportMediaToProjectResponse: ImportMediaToProjectResponse,
     ModifyTeamMemberResponse: ModifyTeamMemberResponse,
     DescribeTeamMembersResponse: DescribeTeamMembersResponse,

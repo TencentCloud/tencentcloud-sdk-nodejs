@@ -127,6 +127,7 @@ const CreateNatGatewayResponse = models.CreateNatGatewayResponse;
 const DescribeVpcsResponse = models.DescribeVpcsResponse;
 const ModifySecurityGroupAttributeRequest = models.ModifySecurityGroupAttributeRequest;
 const ModifyNetDetectRequest = models.ModifyNetDetectRequest;
+const DescribeVpcResourceDashboardResponse = models.DescribeVpcResourceDashboardResponse;
 const AllocateIp6AddressesBandwidthResponse = models.AllocateIp6AddressesBandwidthResponse;
 const DescribeNetDetectStatesRequest = models.DescribeNetDetectStatesRequest;
 const DescribeNatGatewaysResponse = models.DescribeNatGatewaysResponse;
@@ -154,6 +155,7 @@ const DescribeVpcIpv6AddressesResponse = models.DescribeVpcIpv6AddressesResponse
 const ResetAttachCcnInstancesResponse = models.ResetAttachCcnInstancesResponse;
 const RejectAttachCcnInstancesRequest = models.RejectAttachCcnInstancesRequest;
 const ModifyCcnRegionBandwidthLimitsTypeRequest = models.ModifyCcnRegionBandwidthLimitsTypeRequest;
+const DescribeVpcResourceDashboardRequest = models.DescribeVpcResourceDashboardRequest;
 const ModifyIp6RuleRequest = models.ModifyIp6RuleRequest;
 const ReplaceRouteTableAssociationRequest = models.ReplaceRouteTableAssociationRequest;
 const AssociateNetworkAclSubnetsRequest = models.AssociateNetworkAclSubnetsRequest;
@@ -203,6 +205,7 @@ const NetDetect = models.NetDetect;
 const ModifyIpv6AddressesAttributeResponse = models.ModifyIpv6AddressesAttributeResponse;
 const ReplaceSecurityGroupPolicyRequest = models.ReplaceSecurityGroupPolicyRequest;
 const NatGateway = models.NatGateway;
+const ResourceDashboard = models.ResourceDashboard;
 const DescribeCcnAttachedInstancesResponse = models.DescribeCcnAttachedInstancesResponse;
 const DeleteCustomerGatewayResponse = models.DeleteCustomerGatewayResponse;
 const CreateNetDetectRequest = models.CreateNetDetectRequest;
@@ -510,6 +513,17 @@ class VpcClient extends AbstractClient {
         super("vpc.tencentcloudapi.com", "2017-03-12", credential, region, profile);
     }
     
+    /**
+     * 查看VPC资源
+     * @param {DescribeVpcResourceDashboardRequest} req
+     * @param {function(string, DescribeVpcResourceDashboardResponse):void} cb
+     * @public
+     */
+    DescribeVpcResourceDashboard(req, cb) {
+        let resp = new DescribeVpcResourceDashboardResponse();
+        this.request("DescribeVpcResourceDashboard", req, resp, cb);
+    }
+
     /**
      * 本接口（DescribeCcnRegionBandwidthLimits）用于查询云联网各地域出带宽上限，该接口只返回已关联网络实例包含的地域
      * @param {DescribeCcnRegionBandwidthLimitsRequest} req
