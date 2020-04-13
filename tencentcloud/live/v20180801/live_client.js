@@ -111,7 +111,6 @@ const DescribeTopClientIpSumInfoListResponse = models.DescribeTopClientIpSumInfo
 const DropLiveStreamResponse = models.DropLiveStreamResponse;
 const DescribeLiveStreamStateResponse = models.DescribeLiveStreamStateResponse;
 const StopLiveRecordRequest = models.StopLiveRecordRequest;
-const DeletePullStreamConfigResponse = models.DeletePullStreamConfigResponse;
 const DeleteLiveWatermarkRuleRequest = models.DeleteLiveWatermarkRuleRequest;
 const StreamEventInfo = models.StreamEventInfo;
 const DescribeLiveWatermarksRequest = models.DescribeLiveWatermarksRequest;
@@ -144,7 +143,6 @@ const DescribeStreamPushInfoListRequest = models.DescribeStreamPushInfoListReque
 const DescribeLiveWatermarkResponse = models.DescribeLiveWatermarkResponse;
 const ResumeLiveStreamResponse = models.ResumeLiveStreamResponse;
 const ModifyLiveRecordTemplateRequest = models.ModifyLiveRecordTemplateRequest;
-const DeletePullStreamConfigRequest = models.DeletePullStreamConfigRequest;
 const ModifyPullStreamConfigRequest = models.ModifyPullStreamConfigRequest;
 const DescribeStreamPushInfoListResponse = models.DescribeStreamPushInfoListResponse;
 const DescribeLiveStreamPushInfoListRequest = models.DescribeLiveStreamPushInfoListRequest;
@@ -615,17 +613,6 @@ class LiveClient extends AbstractClient {
     DescribeLivePushAuthKey(req, cb) {
         let resp = new DescribeLivePushAuthKeyResponse();
         this.request("DescribeLivePushAuthKey", req, resp, cb);
-    }
-
-    /**
-     * 删除直播拉流配置
-     * @param {DeletePullStreamConfigRequest} req
-     * @param {function(string, DeletePullStreamConfigResponse):void} cb
-     * @public
-     */
-    DeletePullStreamConfig(req, cb) {
-        let resp = new DeletePullStreamConfigResponse();
-        this.request("DeletePullStreamConfig", req, resp, cb);
     }
 
     /**

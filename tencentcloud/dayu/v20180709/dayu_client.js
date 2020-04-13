@@ -153,6 +153,7 @@ const DescribeIpUnBlockListResponse = models.DescribeIpUnBlockListResponse;
 const ModifyCCPolicySwitchRequest = models.ModifyCCPolicySwitchRequest;
 const ModifyCCFrequencyRulesResponse = models.ModifyCCFrequencyRulesResponse;
 const ModifyL4KeepTimeRequest = models.ModifyL4KeepTimeRequest;
+const SchedulingDomain = models.SchedulingDomain;
 const ModifyCCHostProtectionRequest = models.ModifyCCHostProtectionRequest;
 const DescribeIpBlockListRequest = models.DescribeIpBlockListRequest;
 const DescribeDDoSNetCountResponse = models.DescribeDDoSNetCountResponse;
@@ -163,6 +164,7 @@ const CreateNetReturnRequest = models.CreateNetReturnRequest;
 const ModifyDDoSAIStatusRequest = models.ModifyDDoSAIStatusRequest;
 const DescribeResourceListResponse = models.DescribeResourceListResponse;
 const ModifyCCThresholdRequest = models.ModifyCCThresholdRequest;
+const ModifyDDoSDefendStatusResponse = models.ModifyDDoSDefendStatusResponse;
 const CreateBasicDDoSAlarmThresholdRequest = models.CreateBasicDDoSAlarmThresholdRequest;
 const CCRuleConfig = models.CCRuleConfig;
 const DescribeDDoSEvInfoResponse = models.DescribeDDoSEvInfoResponse;
@@ -218,11 +220,12 @@ const DescribeResourceListRequest = models.DescribeResourceListRequest;
 const L7HealthConfig = models.L7HealthConfig;
 const DescribeDDoSNetEvInfoResponse = models.DescribeDDoSNetEvInfoResponse;
 const DescribeRuleSetsRequest = models.DescribeRuleSetsRequest;
-const ModifyDDoSDefendStatusResponse = models.ModifyDDoSDefendStatusResponse;
+const DescribeSchedulingDomainListRequest = models.DescribeSchedulingDomainListRequest;
 const DescribleL7RulesResponse = models.DescribleL7RulesResponse;
 const CreateCCFrequencyRulesResponse = models.CreateCCFrequencyRulesResponse;
 const DescribeIpBlockListResponse = models.DescribeIpBlockListResponse;
 const DDoSPolicyPortLimit = models.DDoSPolicyPortLimit;
+const DescribeSchedulingDomainListResponse = models.DescribeSchedulingDomainListResponse;
 const DescribeDDoSNetTrendResponse = models.DescribeDDoSNetTrendResponse;
 const DescribeUnBlockStatisResponse = models.DescribeUnBlockStatisResponse;
 const DescribleL7RulesRequest = models.DescribleL7RulesRequest;
@@ -499,6 +502,17 @@ class DayuClient extends AbstractClient {
     DescribeSecIndex(req, cb) {
         let resp = new DescribeSecIndexResponse();
         this.request("DescribeSecIndex", req, resp, cb);
+    }
+
+    /**
+     * 获取调度域名列表
+     * @param {DescribeSchedulingDomainListRequest} req
+     * @param {function(string, DescribeSchedulingDomainListResponse):void} cb
+     * @public
+     */
+    DescribeSchedulingDomainList(req, cb) {
+        let resp = new DescribeSchedulingDomainListResponse();
+        this.request("DescribeSchedulingDomainList", req, resp, cb);
     }
 
     /**

@@ -577,6 +577,69 @@ failed：部署失败
 }
 
 /**
+ * CDN报表数据
+ * @class
+ */
+class ReportData extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 项目ID/域名ID。
+         * @type {string || null}
+         */
+        this.ResourceId = null;
+
+        /**
+         * 项目名称/域名。
+         * @type {string || null}
+         */
+        this.Resource = null;
+
+        /**
+         * 流量总和/带宽最大值，单位分别为bytes，bps。
+         * @type {number || null}
+         */
+        this.Value = null;
+
+        /**
+         * 单个资源占总体百分比。
+         * @type {number || null}
+         */
+        this.Percentage = null;
+
+        /**
+         * 计费流量总和/计费带宽最大值，单位分别为bytes，bps。
+         * @type {number || null}
+         */
+        this.BillingValue = null;
+
+        /**
+         * 计费数值占总体百分比。
+         * @type {number || null}
+         */
+        this.BillingPercentage = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ResourceId = 'ResourceId' in params ? params.ResourceId : null;
+        this.Resource = 'Resource' in params ? params.Resource : null;
+        this.Value = 'Value' in params ? params.Value : null;
+        this.Percentage = 'Percentage' in params ? params.Percentage : null;
+        this.BillingValue = 'BillingValue' in params ? params.BillingValue : null;
+        this.BillingPercentage = 'BillingPercentage' in params ? params.BillingPercentage : null;
+
+    }
+}
+
+/**
  * DescribeTrafficPackages请求参数结构体
  * @class
  */
@@ -2180,6 +2243,64 @@ class UpdatePayTypeRequest extends  AbstractModel {
         }
         this.Area = 'Area' in params ? params.Area : null;
         this.PayType = 'PayType' in params ? params.PayType : null;
+
+    }
+}
+
+/**
+ * DescribeReportData返回参数结构体
+ * @class
+ */
+class DescribeReportDataResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 域名维度数据详情
+         * @type {Array.<ReportData> || null}
+         */
+        this.DomainReport = null;
+
+        /**
+         * 项目维度数据详情
+         * @type {Array.<ReportData> || null}
+         */
+        this.ProjectReport = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.DomainReport) {
+            this.DomainReport = new Array();
+            for (let z in params.DomainReport) {
+                let obj = new ReportData();
+                obj.deserialize(params.DomainReport[z]);
+                this.DomainReport.push(obj);
+            }
+        }
+
+        if (params.ProjectReport) {
+            this.ProjectReport = new Array();
+            for (let z in params.ProjectReport) {
+                let obj = new ReportData();
+                obj.deserialize(params.ProjectReport[z]);
+                this.ProjectReport.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -6021,6 +6142,81 @@ class MainlandConfig extends  AbstractModel {
 }
 
 /**
+ * DescribeReportData请求参数结构体
+ * @class
+ */
+class DescribeReportDataRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 查询起始时间
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * 查询结束时间
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * 报表类型
+daily：日报表
+weekly：周报表
+monthly：月报表
+         * @type {string || null}
+         */
+        this.ReportType = null;
+
+        /**
+         * 域名加速区域
+mainland：中国境内
+overseas：中国境外
+         * @type {string || null}
+         */
+        this.Area = null;
+
+        /**
+         * 偏移量，默认0。
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 数据个数，默认1000。
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 按项目ID筛选
+         * @type {number || null}
+         */
+        this.Project = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.ReportType = 'ReportType' in params ? params.ReportType : null;
+        this.Area = 'Area' in params ? params.Area : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Project = 'Project' in params ? params.Project : null;
+
+    }
+}
+
+/**
  * DescribePushTasks请求参数结构体
  * @class
  */
@@ -9577,6 +9773,7 @@ module.exports = {
     DescribePurgeQuotaResponse: DescribePurgeQuotaResponse,
     Authentication: Authentication,
     Https: Https,
+    ReportData: ReportData,
     DescribeTrafficPackagesRequest: DescribeTrafficPackagesRequest,
     CreateClsLogTopicResponse: CreateClsLogTopicResponse,
     PurgePathCacheResponse: PurgePathCacheResponse,
@@ -9606,6 +9803,7 @@ module.exports = {
     DescribeDomainsConfigResponse: DescribeDomainsConfigResponse,
     BriefDomain: BriefDomain,
     UpdatePayTypeRequest: UpdatePayTypeRequest,
+    DescribeReportDataResponse: DescribeReportDataResponse,
     DisableClsLogTopicRequest: DisableClsLogTopicRequest,
     ListClsTopicDomainsResponse: ListClsTopicDomainsResponse,
     TrafficPackage: TrafficPackage,
@@ -9656,6 +9854,7 @@ module.exports = {
     SearchClsLogResponse: SearchClsLogResponse,
     PushUrlsCacheRequest: PushUrlsCacheRequest,
     MainlandConfig: MainlandConfig,
+    DescribeReportDataRequest: DescribeReportDataRequest,
     DescribePushTasksRequest: DescribePushTasksRequest,
     DescribeUrlViolationsRequest: DescribeUrlViolationsRequest,
     RefererRule: RefererRule,

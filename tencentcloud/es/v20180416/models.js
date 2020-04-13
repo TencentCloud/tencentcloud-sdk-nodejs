@@ -212,6 +212,12 @@ class NodeInfo extends  AbstractModel {
          */
         this.LocalDiskInfo = null;
 
+        /**
+         * 节点磁盘块数
+         * @type {number || null}
+         */
+        this.DiskCount = null;
+
     }
 
     /**
@@ -232,6 +238,7 @@ class NodeInfo extends  AbstractModel {
             obj.deserialize(params.LocalDiskInfo)
             this.LocalDiskInfo = obj;
         }
+        this.DiskCount = 'DiskCount' in params ? params.DiskCount : null;
 
     }
 }
@@ -2309,7 +2316,7 @@ class UpgradeInstanceRequest extends  AbstractModel {
         this.InstanceId = null;
 
         /**
-         * 目标ES版本
+         * 目标ES版本，支持：”6.4.3“, "6.8.2"，"7.5.1"
          * @type {string || null}
          */
         this.EsVersion = null;

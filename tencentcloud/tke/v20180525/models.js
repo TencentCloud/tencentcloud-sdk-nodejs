@@ -2405,6 +2405,13 @@ class Instance extends  AbstractModel {
          */
         this.CreatedTime = null;
 
+        /**
+         * 节点内网IP
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.LanIP = null;
+
     }
 
     /**
@@ -2426,6 +2433,7 @@ class Instance extends  AbstractModel {
             this.InstanceAdvancedSettings = obj;
         }
         this.CreatedTime = 'CreatedTime' in params ? params.CreatedTime : null;
+        this.LanIP = 'LanIP' in params ? params.LanIP : null;
 
     }
 }

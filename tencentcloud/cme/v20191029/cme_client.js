@@ -49,6 +49,7 @@ const DescribeLoginStatusRequest = models.DescribeLoginStatusRequest;
 const DeleteLoginStatusResponse = models.DeleteLoginStatusResponse;
 const MaterialBaseInfo = models.MaterialBaseInfo;
 const Resource = models.Resource;
+const CreateLinkResponse = models.CreateLinkResponse;
 const ListMediaResponse = models.ListMediaResponse;
 const SearchMaterialResponse = models.SearchMaterialResponse;
 const DescribeJoinTeamsRequest = models.DescribeJoinTeamsRequest;
@@ -56,6 +57,7 @@ const DeleteMaterialRequest = models.DeleteMaterialRequest;
 const CreateProjectResponse = models.CreateProjectResponse;
 const DeleteProjectResponse = models.DeleteProjectResponse;
 const DeleteClassRequest = models.DeleteClassRequest;
+const CreateLinkRequest = models.CreateLinkRequest;
 const CreateClassRequest = models.CreateClassRequest;
 const DescribeMaterialsResponse = models.DescribeMaterialsResponse;
 const GrantResourceAuthorizationResponse = models.GrantResourceAuthorizationResponse;
@@ -128,14 +130,14 @@ class CmeClient extends AbstractClient {
     }
     
     /**
-     * 获取任务列表，支持条件筛选，返回对应的任务基础信息列表。
-     * @param {DescribeTasksRequest} req
-     * @param {function(string, DescribeTasksResponse):void} cb
+     * 根据素材 Id 批量获取素材详情。
+     * @param {DescribeMaterialsRequest} req
+     * @param {function(string, DescribeMaterialsResponse):void} cb
      * @public
      */
-    DescribeTasks(req, cb) {
-        let resp = new DescribeTasksResponse();
-        this.request("DescribeTasks", req, resp, cb);
+    DescribeMaterials(req, cb) {
+        let resp = new DescribeMaterialsResponse();
+        this.request("DescribeMaterials", req, resp, cb);
     }
 
     /**
@@ -248,6 +250,17 @@ class CmeClient extends AbstractClient {
     DescribeTaskDetail(req, cb) {
         let resp = new DescribeTaskDetailResponse();
         this.request("DescribeTaskDetail", req, resp, cb);
+    }
+
+    /**
+     *  创建素材链接或分类路径链接，将源资源信息链接到目标。
+     * @param {CreateLinkRequest} req
+     * @param {function(string, CreateLinkResponse):void} cb
+     * @public
+     */
+    CreateLink(req, cb) {
+        let resp = new CreateLinkResponse();
+        this.request("CreateLink", req, resp, cb);
     }
 
     /**
@@ -376,14 +389,14 @@ class CmeClient extends AbstractClient {
     }
 
     /**
-     * 根据素材 Id 批量获取素材详情。
-     * @param {DescribeMaterialsRequest} req
-     * @param {function(string, DescribeMaterialsResponse):void} cb
+     * 获取任务列表，支持条件筛选，返回对应的任务基础信息列表。
+     * @param {DescribeTasksRequest} req
+     * @param {function(string, DescribeTasksResponse):void} cb
      * @public
      */
-    DescribeMaterials(req, cb) {
-        let resp = new DescribeMaterialsResponse();
-        this.request("DescribeMaterials", req, resp, cb);
+    DescribeTasks(req, cb) {
+        let resp = new DescribeTasksResponse();
+        this.request("DescribeTasks", req, resp, cb);
     }
 
     /**

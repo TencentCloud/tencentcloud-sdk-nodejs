@@ -746,6 +746,12 @@ class DescribeAccountsRequest extends  AbstractModel {
          */
         this.Limit = null;
 
+        /**
+         * 匹配账号名的正则表达式，规则同 MySQL 官网。
+         * @type {string || null}
+         */
+        this.AccountRegexp = null;
+
     }
 
     /**
@@ -758,6 +764,7 @@ class DescribeAccountsRequest extends  AbstractModel {
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
+        this.AccountRegexp = 'AccountRegexp' in params ? params.AccountRegexp : null;
 
     }
 }
@@ -821,6 +828,57 @@ class RoWeightValue extends  AbstractModel {
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
         this.Weight = 'Weight' in params ? params.Weight : null;
+
+    }
+}
+
+/**
+ * DescribeSlowLogData返回参数结构体
+ * @class
+ */
+class DescribeSlowLogDataResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 符合条件的记录总数。
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 查询到的记录。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<SlowLogItem> || null}
+         */
+        this.Items = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.Items) {
+            this.Items = new Array();
+            for (let z in params.Items) {
+                let obj = new SlowLogItem();
+                obj.deserialize(params.Items[z]);
+                this.Items.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2976,57 +3034,6 @@ class CreateDBInstanceHourResponse extends  AbstractModel {
 }
 
 /**
- * DescribeSLowLogData返回参数结构体
- * @class
- */
-class DescribeSLowLogDataResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 符合条件的记录总数。
-         * @type {number || null}
-         */
-        this.TotalCount = null;
-
-        /**
-         * 查询到的记录。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {Array.<SlowLogItem> || null}
-         */
-        this.Items = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
-
-        if (params.Items) {
-            this.Items = new Array();
-            for (let z in params.Items) {
-                let obj = new SlowLogItem();
-                obj.deserialize(params.Items[z]);
-                this.Items.push(obj);
-            }
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
  * ReleaseIsolatedDBInstances请求参数结构体
  * @class
  */
@@ -4377,7 +4384,8 @@ class ModifyDBInstanceVipVportResponse extends  AbstractModel {
         super();
 
         /**
-         * 异步任务ID。
+         * 异步任务ID。(该返回字段目前已废弃)
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.AsyncRequestId = null;
@@ -9252,97 +9260,6 @@ class RoInstanceInfo extends  AbstractModel {
 }
 
 /**
- * DescribeSLowLogData请求参数结构体
- * @class
- */
-class DescribeSLowLogDataRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 实例 ID。
-         * @type {string || null}
-         */
-        this.InstanceId = null;
-
-        /**
-         * 开始时间戳。
-         * @type {number || null}
-         */
-        this.StartTime = null;
-
-        /**
-         * 结束时间戳。
-         * @type {number || null}
-         */
-        this.EndTime = null;
-
-        /**
-         * 客户端 Host 列表。
-         * @type {Array.<string> || null}
-         */
-        this.UserHosts = null;
-
-        /**
-         * 客户端 用户名 列表。
-         * @type {Array.<string> || null}
-         */
-        this.UserNames = null;
-
-        /**
-         * 访问的 数据库 列表。
-         * @type {Array.<string> || null}
-         */
-        this.DataBases = null;
-
-        /**
-         * 排序字段。当前支持：Timestamp,QueryTime,LockTime,RowsExamined,RowsSent 。
-         * @type {string || null}
-         */
-        this.SortBy = null;
-
-        /**
-         * 升序还是降序排列。当前支持：ASC,DESC 。
-         * @type {string || null}
-         */
-        this.OrderBy = null;
-
-        /**
-         * 偏移量，默认为0。
-         * @type {number || null}
-         */
-        this.Offset = null;
-
-        /**
-         * 一次性返回的记录数量，最大为400。
-         * @type {number || null}
-         */
-        this.Limit = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.StartTime = 'StartTime' in params ? params.StartTime : null;
-        this.EndTime = 'EndTime' in params ? params.EndTime : null;
-        this.UserHosts = 'UserHosts' in params ? params.UserHosts : null;
-        this.UserNames = 'UserNames' in params ? params.UserNames : null;
-        this.DataBases = 'DataBases' in params ? params.DataBases : null;
-        this.SortBy = 'SortBy' in params ? params.SortBy : null;
-        this.OrderBy = 'OrderBy' in params ? params.OrderBy : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
-
-    }
-}
-
-/**
  * CreateParamTemplate请求参数结构体
  * @class
  */
@@ -10153,6 +10070,97 @@ class DeleteDeployGroupsRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeSlowLogData请求参数结构体
+ * @class
+ */
+class DescribeSlowLogDataRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例 ID。
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 开始时间戳。
+         * @type {number || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * 结束时间戳。
+         * @type {number || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * 客户端 Host 列表。
+         * @type {Array.<string> || null}
+         */
+        this.UserHosts = null;
+
+        /**
+         * 客户端 用户名 列表。
+         * @type {Array.<string> || null}
+         */
+        this.UserNames = null;
+
+        /**
+         * 访问的 数据库 列表。
+         * @type {Array.<string> || null}
+         */
+        this.DataBases = null;
+
+        /**
+         * 排序字段。当前支持：Timestamp,QueryTime,LockTime,RowsExamined,RowsSent 。
+         * @type {string || null}
+         */
+        this.SortBy = null;
+
+        /**
+         * 升序还是降序排列。当前支持：ASC,DESC 。
+         * @type {string || null}
+         */
+        this.OrderBy = null;
+
+        /**
+         * 偏移量，默认为0。
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 一次性返回的记录数量，最大为400。
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.UserHosts = 'UserHosts' in params ? params.UserHosts : null;
+        this.UserNames = 'UserNames' in params ? params.UserNames : null;
+        this.DataBases = 'DataBases' in params ? params.DataBases : null;
+        this.SortBy = 'SortBy' in params ? params.SortBy : null;
+        this.OrderBy = 'OrderBy' in params ? params.OrderBy : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+
+    }
+}
+
+/**
  * ModifyAccountDescription返回参数结构体
  * @class
  */
@@ -10267,6 +10275,12 @@ class ModifyDBInstanceVipVportRequest extends  AbstractModel {
          */
         this.UniqSubnetId = null;
 
+        /**
+         * 进行基础网络转 VPC 网络和 VPC 网络下的子网变更时，原网络中旧IP的回收时间，单位为小时，取值范围为0-168，默认值为24小时。
+         * @type {number || null}
+         */
+        this.ReleaseDuration = null;
+
     }
 
     /**
@@ -10281,6 +10295,7 @@ class ModifyDBInstanceVipVportRequest extends  AbstractModel {
         this.DstPort = 'DstPort' in params ? params.DstPort : null;
         this.UniqVpcId = 'UniqVpcId' in params ? params.UniqVpcId : null;
         this.UniqSubnetId = 'UniqSubnetId' in params ? params.UniqSubnetId : null;
+        this.ReleaseDuration = 'ReleaseDuration' in params ? params.ReleaseDuration : null;
 
     }
 }
@@ -12186,6 +12201,7 @@ module.exports = {
     DescribeAccountsRequest: DescribeAccountsRequest,
     StopDBImportJobRequest: StopDBImportJobRequest,
     RoWeightValue: RoWeightValue,
+    DescribeSlowLogDataResponse: DescribeSlowLogDataResponse,
     StopDBImportJobResponse: StopDBImportJobResponse,
     DescribeErrorLogDataRequest: DescribeErrorLogDataRequest,
     Parameter: Parameter,
@@ -12230,7 +12246,6 @@ module.exports = {
     ModifyInstanceTagResponse: ModifyInstanceTagResponse,
     CreateParamTemplateResponse: CreateParamTemplateResponse,
     CreateDBInstanceHourResponse: CreateDBInstanceHourResponse,
-    DescribeSLowLogDataResponse: DescribeSLowLogDataResponse,
     ReleaseIsolatedDBInstancesRequest: ReleaseIsolatedDBInstancesRequest,
     BinlogInfo: BinlogInfo,
     DeleteDeployGroupsResponse: DeleteDeployGroupsResponse,
@@ -12351,7 +12366,6 @@ module.exports = {
     DescribeBinlogBackupOverviewResponse: DescribeBinlogBackupOverviewResponse,
     InitDBInstancesRequest: InitDBInstancesRequest,
     RoInstanceInfo: RoInstanceInfo,
-    DescribeSLowLogDataRequest: DescribeSLowLogDataRequest,
     CreateParamTemplateRequest: CreateParamTemplateRequest,
     IsolateDBInstanceRequest: IsolateDBInstanceRequest,
     ModifyTimeWindowRequest: ModifyTimeWindowRequest,
@@ -12370,6 +12384,7 @@ module.exports = {
     ModifyAutoRenewFlagRequest: ModifyAutoRenewFlagRequest,
     UpgradeDBInstanceEngineVersionRequest: UpgradeDBInstanceEngineVersionRequest,
     DeleteDeployGroupsRequest: DeleteDeployGroupsRequest,
+    DescribeSlowLogDataRequest: DescribeSlowLogDataRequest,
     ModifyAccountDescriptionResponse: ModifyAccountDescriptionResponse,
     UpgradeDBInstanceResponse: UpgradeDBInstanceResponse,
     ModifyDBInstanceVipVportRequest: ModifyDBInstanceVipVportRequest,

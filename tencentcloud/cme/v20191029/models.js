@@ -1708,6 +1708,41 @@ class Resource extends  AbstractModel {
 }
 
 /**
+ * CreateLink返回参数结构体
+ * @class
+ */
+class CreateLinkResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 新建链接的素材 Id。
+         * @type {string || null}
+         */
+        this.MaterialId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MaterialId = 'MaterialId' in params ? params.MaterialId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * ListMedia返回参数结构体
  * @class
  */
@@ -2025,6 +2060,104 @@ class DeleteClassRequest extends  AbstractModel {
             this.Owner = obj;
         }
         this.ClassPath = 'ClassPath' in params ? params.ClassPath : null;
+        this.Operator = 'Operator' in params ? params.Operator : null;
+
+    }
+}
+
+/**
+ * CreateLink请求参数结构体
+ * @class
+ */
+class CreateLinkRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 平台名称，指定访问的平台。
+         * @type {string || null}
+         */
+        this.Platform = null;
+
+        /**
+         * 链接类型，取值有:
+<li>CLASS: 分类链接；</li>
+<li> MATERIAL：素材链接。</li>
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * 链接名称，不能超过30个字符。
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 链接归属实体。
+         * @type {Entity || null}
+         */
+        this.Owner = null;
+
+        /**
+         * 目标资源Id。取值：
+<li>当 Type 为 MATERIAL 时填素材 ID；</li>
+<li>当 Type 为 CLASS 时填写分类路径。</li>
+         * @type {string || null}
+         */
+        this.DestinationId = null;
+
+        /**
+         * 目标资源归属者。
+         * @type {Entity || null}
+         */
+        this.DestinationOwner = null;
+
+        /**
+         * 链接的分类路径，如填"/a/b"则代表链接属于该分类路径，不填则默认为根路径。
+         * @type {string || null}
+         */
+        this.ClassPath = null;
+
+        /**
+         * 链接标签，单个标签长度不能超过10，数组长度不能超过10。
+         * @type {Array.<string> || null}
+         */
+        this.Tags = null;
+
+        /**
+         * 操作者。填写用户的 Id，用于标识调用者及校验操作权限。
+         * @type {string || null}
+         */
+        this.Operator = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Platform = 'Platform' in params ? params.Platform : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Name = 'Name' in params ? params.Name : null;
+
+        if (params.Owner) {
+            let obj = new Entity();
+            obj.deserialize(params.Owner)
+            this.Owner = obj;
+        }
+        this.DestinationId = 'DestinationId' in params ? params.DestinationId : null;
+
+        if (params.DestinationOwner) {
+            let obj = new Entity();
+            obj.deserialize(params.DestinationOwner)
+            this.DestinationOwner = obj;
+        }
+        this.ClassPath = 'ClassPath' in params ? params.ClassPath : null;
+        this.Tags = 'Tags' in params ? params.Tags : null;
         this.Operator = 'Operator' in params ? params.Operator : null;
 
     }
@@ -5129,6 +5262,7 @@ module.exports = {
     DeleteLoginStatusResponse: DeleteLoginStatusResponse,
     MaterialBaseInfo: MaterialBaseInfo,
     Resource: Resource,
+    CreateLinkResponse: CreateLinkResponse,
     ListMediaResponse: ListMediaResponse,
     SearchMaterialResponse: SearchMaterialResponse,
     DescribeJoinTeamsRequest: DescribeJoinTeamsRequest,
@@ -5136,6 +5270,7 @@ module.exports = {
     CreateProjectResponse: CreateProjectResponse,
     DeleteProjectResponse: DeleteProjectResponse,
     DeleteClassRequest: DeleteClassRequest,
+    CreateLinkRequest: CreateLinkRequest,
     CreateClassRequest: CreateClassRequest,
     DescribeMaterialsResponse: DescribeMaterialsResponse,
     GrantResourceAuthorizationResponse: GrantResourceAuthorizationResponse,
