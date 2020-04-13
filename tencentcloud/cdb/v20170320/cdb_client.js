@@ -28,6 +28,7 @@ const RoVipInfo = models.RoVipInfo;
 const DescribeAccountsRequest = models.DescribeAccountsRequest;
 const StopDBImportJobRequest = models.StopDBImportJobRequest;
 const RoWeightValue = models.RoWeightValue;
+const DescribeSlowLogDataResponse = models.DescribeSlowLogDataResponse;
 const StopDBImportJobResponse = models.StopDBImportJobResponse;
 const DescribeErrorLogDataRequest = models.DescribeErrorLogDataRequest;
 const Parameter = models.Parameter;
@@ -72,7 +73,6 @@ const SwitchForUpgradeRequest = models.SwitchForUpgradeRequest;
 const ModifyInstanceTagResponse = models.ModifyInstanceTagResponse;
 const CreateParamTemplateResponse = models.CreateParamTemplateResponse;
 const CreateDBInstanceHourResponse = models.CreateDBInstanceHourResponse;
-const DescribeSLowLogDataResponse = models.DescribeSLowLogDataResponse;
 const ReleaseIsolatedDBInstancesRequest = models.ReleaseIsolatedDBInstancesRequest;
 const BinlogInfo = models.BinlogInfo;
 const DeleteDeployGroupsResponse = models.DeleteDeployGroupsResponse;
@@ -193,7 +193,6 @@ const ZoneSellConf = models.ZoneSellConf;
 const DescribeBinlogBackupOverviewResponse = models.DescribeBinlogBackupOverviewResponse;
 const InitDBInstancesRequest = models.InitDBInstancesRequest;
 const RoInstanceInfo = models.RoInstanceInfo;
-const DescribeSLowLogDataRequest = models.DescribeSLowLogDataRequest;
 const CreateParamTemplateRequest = models.CreateParamTemplateRequest;
 const IsolateDBInstanceRequest = models.IsolateDBInstanceRequest;
 const ModifyTimeWindowRequest = models.ModifyTimeWindowRequest;
@@ -212,6 +211,7 @@ const DeviceMemInfo = models.DeviceMemInfo;
 const ModifyAutoRenewFlagRequest = models.ModifyAutoRenewFlagRequest;
 const UpgradeDBInstanceEngineVersionRequest = models.UpgradeDBInstanceEngineVersionRequest;
 const DeleteDeployGroupsRequest = models.DeleteDeployGroupsRequest;
+const DescribeSlowLogDataRequest = models.DescribeSlowLogDataRequest;
 const ModifyAccountDescriptionResponse = models.ModifyAccountDescriptionResponse;
 const UpgradeDBInstanceResponse = models.UpgradeDBInstanceResponse;
 const ModifyDBInstanceVipVportRequest = models.ModifyDBInstanceVipVportRequest;
@@ -1081,6 +1081,17 @@ class CdbClient extends AbstractClient {
     }
 
     /**
+     * 条件检索实例的慢日志。只允许查看一个月之内的慢日志
+     * @param {DescribeSlowLogDataRequest} req
+     * @param {function(string, DescribeSlowLogDataResponse):void} cb
+     * @public
+     */
+    DescribeSlowLogData(req, cb) {
+        let resp = new DescribeSlowLogDataResponse();
+        this.request("DescribeSlowLogData", req, resp, cb);
+    }
+
+    /**
      * 本接口(ModifyBackupConfig)用于修改数据库备份配置信息。
      * @param {ModifyBackupConfigRequest} req
      * @param {function(string, ModifyBackupConfigResponse):void} cb
@@ -1126,17 +1137,6 @@ class CdbClient extends AbstractClient {
     DescribeDBPrice(req, cb) {
         let resp = new DescribeDBPriceResponse();
         this.request("DescribeDBPrice", req, resp, cb);
-    }
-
-    /**
-     * 条件检索实例的慢日志。只允许查看一个月之内的慢日志
-     * @param {DescribeSLowLogDataRequest} req
-     * @param {function(string, DescribeSLowLogDataResponse):void} cb
-     * @public
-     */
-    DescribeSLowLogData(req, cb) {
-        let resp = new DescribeSLowLogDataResponse();
-        this.request("DescribeSLowLogData", req, resp, cb);
     }
 
     /**

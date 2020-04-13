@@ -25,6 +25,7 @@ const DescribePushQuotaResponse = models.DescribePushQuotaResponse;
 const DescribePurgeQuotaResponse = models.DescribePurgeQuotaResponse;
 const Authentication = models.Authentication;
 const Https = models.Https;
+const ReportData = models.ReportData;
 const DescribeTrafficPackagesRequest = models.DescribeTrafficPackagesRequest;
 const CreateClsLogTopicResponse = models.CreateClsLogTopicResponse;
 const PurgePathCacheResponse = models.PurgePathCacheResponse;
@@ -54,6 +55,7 @@ const TopicInfo = models.TopicInfo;
 const DescribeDomainsConfigResponse = models.DescribeDomainsConfigResponse;
 const BriefDomain = models.BriefDomain;
 const UpdatePayTypeRequest = models.UpdatePayTypeRequest;
+const DescribeReportDataResponse = models.DescribeReportDataResponse;
 const DisableClsLogTopicRequest = models.DisableClsLogTopicRequest;
 const ListClsTopicDomainsResponse = models.ListClsTopicDomainsResponse;
 const TrafficPackage = models.TrafficPackage;
@@ -104,6 +106,7 @@ const ViolationUrl = models.ViolationUrl;
 const SearchClsLogResponse = models.SearchClsLogResponse;
 const PushUrlsCacheRequest = models.PushUrlsCacheRequest;
 const MainlandConfig = models.MainlandConfig;
+const DescribeReportDataRequest = models.DescribeReportDataRequest;
 const DescribePushTasksRequest = models.DescribePushTasksRequest;
 const DescribeUrlViolationsRequest = models.DescribeUrlViolationsRequest;
 const RefererRule = models.RefererRule;
@@ -628,6 +631,17 @@ class CdnClient extends AbstractClient {
     EnableClsLogTopic(req, cb) {
         let resp = new EnableClsLogTopicResponse();
         this.request("EnableClsLogTopic", req, resp, cb);
+    }
+
+    /**
+     * DescribeReportData 用于查询域名/项目维度的日/周/月报表数据。
+     * @param {DescribeReportDataRequest} req
+     * @param {function(string, DescribeReportDataResponse):void} cb
+     * @public
+     */
+    DescribeReportData(req, cb) {
+        let resp = new DescribeReportDataResponse();
+        this.request("DescribeReportData", req, resp, cb);
     }
 
     /**

@@ -4747,34 +4747,6 @@ class StopLiveRecordRequest extends  AbstractModel {
 }
 
 /**
- * DeletePullStreamConfig返回参数结构体
- * @class
- */
-class DeletePullStreamConfigResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
  * DeleteLiveWatermarkRule请求参数结构体
  * @class
  */
@@ -6454,34 +6426,6 @@ class ModifyLiveRecordTemplateRequest extends  AbstractModel {
             obj.deserialize(params.Mp3Param)
             this.Mp3Param = obj;
         }
-
-    }
-}
-
-/**
- * DeletePullStreamConfig请求参数结构体
- * @class
- */
-class DeletePullStreamConfigRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 配置id。
-         * @type {string || null}
-         */
-        this.ConfigId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.ConfigId = 'ConfigId' in params ? params.ConfigId : null;
 
     }
 }
@@ -11069,7 +11013,10 @@ class DescribeLiveRecordTemplatesRequest extends  AbstractModel {
         super();
 
         /**
-         * 是否属于慢直播模板
+         * 是否属于慢直播模板。默认：0。
+示例：
+0 - 标准直播。
+1 - 慢直播。
          * @type {number || null}
          */
         this.IsDelayLive = null;
@@ -12080,7 +12027,6 @@ module.exports = {
     DropLiveStreamResponse: DropLiveStreamResponse,
     DescribeLiveStreamStateResponse: DescribeLiveStreamStateResponse,
     StopLiveRecordRequest: StopLiveRecordRequest,
-    DeletePullStreamConfigResponse: DeletePullStreamConfigResponse,
     DeleteLiveWatermarkRuleRequest: DeleteLiveWatermarkRuleRequest,
     StreamEventInfo: StreamEventInfo,
     DescribeLiveWatermarksRequest: DescribeLiveWatermarksRequest,
@@ -12113,7 +12059,6 @@ module.exports = {
     DescribeLiveWatermarkResponse: DescribeLiveWatermarkResponse,
     ResumeLiveStreamResponse: ResumeLiveStreamResponse,
     ModifyLiveRecordTemplateRequest: ModifyLiveRecordTemplateRequest,
-    DeletePullStreamConfigRequest: DeletePullStreamConfigRequest,
     ModifyPullStreamConfigRequest: ModifyPullStreamConfigRequest,
     DescribeStreamPushInfoListResponse: DescribeStreamPushInfoListResponse,
     DescribeLiveStreamPushInfoListRequest: DescribeLiveStreamPushInfoListRequest,

@@ -274,6 +274,7 @@ const RejectAttachCcnInstancesResponse = models.RejectAttachCcnInstancesResponse
 const SetCcnRegionBandwidthLimitsResponse = models.SetCcnRegionBandwidthLimitsResponse;
 const DescribeAccountAttributesRequest = models.DescribeAccountAttributesRequest;
 const DescribeCcnRoutesRequest = models.DescribeCcnRoutesRequest;
+const CreateAndAttachNetworkInterfaceRequest = models.CreateAndAttachNetworkInterfaceRequest;
 const DownloadCustomerGatewayConfigurationResponse = models.DownloadCustomerGatewayConfigurationResponse;
 const ModifyGatewayFlowQosRequest = models.ModifyGatewayFlowQosRequest;
 const DeleteNetDetectResponse = models.DeleteNetDetectResponse;
@@ -351,6 +352,7 @@ const CreateNatGatewayRequest = models.CreateNatGatewayRequest;
 const DeleteNetDetectRequest = models.DeleteNetDetectRequest;
 const IPSECOptionsSpecification = models.IPSECOptionsSpecification;
 const UnassignIpv6AddressesRequest = models.UnassignIpv6AddressesRequest;
+const CreateAndAttachNetworkInterfaceResponse = models.CreateAndAttachNetworkInterfaceResponse;
 const ModifyCcnAttributeRequest = models.ModifyCcnAttributeRequest;
 const DeleteSecurityGroupPoliciesResponse = models.DeleteSecurityGroupPoliciesResponse;
 const ModifyNetworkAclAttributeRequest = models.ModifyNetworkAclAttributeRequest;
@@ -947,6 +949,22 @@ class VpcClient extends AbstractClient {
     }
 
     /**
+     * 本接口（CreateAndAttachNetworkInterface）用于创建弹性网卡并绑定云主机。
+* 创建弹性网卡时可以指定内网IP，并且可以指定一个主IP，指定的内网IP必须在弹性网卡所在子网内，而且不能被占用。
+* 创建弹性网卡时可以指定需要申请的内网IP数量，系统会随机生成内网IP地址。
+* 一个弹性网卡支持绑定的IP地址是有限制的，更多资源限制信息详见<a href="/document/product/576/18527">弹性网卡使用限制</a>。
+* 创建弹性网卡同时可以绑定已有安全组。
+* 创建弹性网卡同时可以绑定标签, 应答里的标签列表代表添加成功的标签。
+     * @param {CreateAndAttachNetworkInterfaceRequest} req
+     * @param {function(string, CreateAndAttachNetworkInterfaceResponse):void} cb
+     * @public
+     */
+    CreateAndAttachNetworkInterface(req, cb) {
+        let resp = new CreateAndAttachNetworkInterfaceResponse();
+        this.request("CreateAndAttachNetworkInterface", req, resp, cb);
+    }
+
+    /**
      * 本接口（DescribeNatGateways）用于查询 NAT 网关。
      * @param {DescribeNatGatewaysRequest} req
      * @param {function(string, DescribeNatGatewaysResponse):void} cb
@@ -1182,14 +1200,15 @@ class VpcClient extends AbstractClient {
     }
 
     /**
-     * 本接口(CreateNatGateway)用于创建NAT网关。
-     * @param {CreateNatGatewayRequest} req
-     * @param {function(string, CreateNatGatewayResponse):void} cb
+     * 本接口（DeleteSecurityGroupPolicies）用于用于删除安全组规则（SecurityGroupPolicy）。
+* SecurityGroupPolicySet.Version 用于指定要操作的安全组的版本。传入 Version 版本号若不等于当前安全组的最新版本，将返回失败；若不传 Version 则直接删除指定PolicyIndex的规则。
+     * @param {DeleteSecurityGroupPoliciesRequest} req
+     * @param {function(string, DeleteSecurityGroupPoliciesResponse):void} cb
      * @public
      */
-    CreateNatGateway(req, cb) {
-        let resp = new CreateNatGatewayResponse();
-        this.request("CreateNatGateway", req, resp, cb);
+    DeleteSecurityGroupPolicies(req, cb) {
+        let resp = new DeleteSecurityGroupPoliciesResponse();
+        this.request("DeleteSecurityGroupPolicies", req, resp, cb);
     }
 
     /**
@@ -1799,15 +1818,14 @@ class VpcClient extends AbstractClient {
     }
 
     /**
-     * 本接口（DeleteSecurityGroupPolicies）用于用于删除安全组规则（SecurityGroupPolicy）。
-* SecurityGroupPolicySet.Version 用于指定要操作的安全组的版本。传入 Version 版本号若不等于当前安全组的最新版本，将返回失败；若不传 Version 则直接删除指定PolicyIndex的规则。
-     * @param {DeleteSecurityGroupPoliciesRequest} req
-     * @param {function(string, DeleteSecurityGroupPoliciesResponse):void} cb
+     * 本接口(CreateNatGateway)用于创建NAT网关。
+     * @param {CreateNatGatewayRequest} req
+     * @param {function(string, CreateNatGatewayResponse):void} cb
      * @public
      */
-    DeleteSecurityGroupPolicies(req, cb) {
-        let resp = new DeleteSecurityGroupPoliciesResponse();
-        this.request("DeleteSecurityGroupPolicies", req, resp, cb);
+    CreateNatGateway(req, cb) {
+        let resp = new CreateNatGatewayResponse();
+        this.request("CreateNatGateway", req, resp, cb);
     }
 
     /**

@@ -12360,6 +12360,106 @@ class DescribeCcnRoutesRequest extends  AbstractModel {
 }
 
 /**
+ * CreateAndAttachNetworkInterface请求参数结构体
+ * @class
+ */
+class CreateAndAttachNetworkInterfaceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * VPC实例ID。可通过DescribeVpcs接口返回值中的VpcId获取。
+         * @type {string || null}
+         */
+        this.VpcId = null;
+
+        /**
+         * 弹性网卡名称，最大长度不能超过60个字节。
+         * @type {string || null}
+         */
+        this.NetworkInterfaceName = null;
+
+        /**
+         * 弹性网卡所在的子网实例ID，例如：subnet-0ap8nwca。
+         * @type {string || null}
+         */
+        this.SubnetId = null;
+
+        /**
+         * 云主机实例ID。
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 指定的内网IP信息，单次最多指定10个。
+         * @type {Array.<PrivateIpAddressSpecification> || null}
+         */
+        this.PrivateIpAddresses = null;
+
+        /**
+         * 新申请的内网IP地址个数，内网IP地址个数总和不能超过配数。
+         * @type {number || null}
+         */
+        this.SecondaryPrivateIpAddressCount = null;
+
+        /**
+         * 指定绑定的安全组，例如：['sg-1dd51d']。
+         * @type {Array.<string> || null}
+         */
+        this.SecurityGroupIds = null;
+
+        /**
+         * 弹性网卡描述，可任意命名，但不得超过60个字符。
+         * @type {string || null}
+         */
+        this.NetworkInterfaceDescription = null;
+
+        /**
+         * 指定绑定的标签列表，例如：[{"Key": "city", "Value": "shanghai"}]
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.NetworkInterfaceName = 'NetworkInterfaceName' in params ? params.NetworkInterfaceName : null;
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+        if (params.PrivateIpAddresses) {
+            this.PrivateIpAddresses = new Array();
+            for (let z in params.PrivateIpAddresses) {
+                let obj = new PrivateIpAddressSpecification();
+                obj.deserialize(params.PrivateIpAddresses[z]);
+                this.PrivateIpAddresses.push(obj);
+            }
+        }
+        this.SecondaryPrivateIpAddressCount = 'SecondaryPrivateIpAddressCount' in params ? params.SecondaryPrivateIpAddressCount : null;
+        this.SecurityGroupIds = 'SecurityGroupIds' in params ? params.SecurityGroupIds : null;
+        this.NetworkInterfaceDescription = 'NetworkInterfaceDescription' in params ? params.NetworkInterfaceDescription : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * DownloadCustomerGatewayConfiguration返回参数结构体
  * @class
  */
@@ -15415,6 +15515,46 @@ class UnassignIpv6AddressesRequest extends  AbstractModel {
                 this.Ipv6Addresses.push(obj);
             }
         }
+
+    }
+}
+
+/**
+ * CreateAndAttachNetworkInterface返回参数结构体
+ * @class
+ */
+class CreateAndAttachNetworkInterfaceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 弹性网卡实例。
+         * @type {NetworkInterface || null}
+         */
+        this.NetworkInterface = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.NetworkInterface) {
+            let obj = new NetworkInterface();
+            obj.deserialize(params.NetworkInterface)
+            this.NetworkInterface = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -22150,6 +22290,7 @@ module.exports = {
     SetCcnRegionBandwidthLimitsResponse: SetCcnRegionBandwidthLimitsResponse,
     DescribeAccountAttributesRequest: DescribeAccountAttributesRequest,
     DescribeCcnRoutesRequest: DescribeCcnRoutesRequest,
+    CreateAndAttachNetworkInterfaceRequest: CreateAndAttachNetworkInterfaceRequest,
     DownloadCustomerGatewayConfigurationResponse: DownloadCustomerGatewayConfigurationResponse,
     ModifyGatewayFlowQosRequest: ModifyGatewayFlowQosRequest,
     DeleteNetDetectResponse: DeleteNetDetectResponse,
@@ -22227,6 +22368,7 @@ module.exports = {
     DeleteNetDetectRequest: DeleteNetDetectRequest,
     IPSECOptionsSpecification: IPSECOptionsSpecification,
     UnassignIpv6AddressesRequest: UnassignIpv6AddressesRequest,
+    CreateAndAttachNetworkInterfaceResponse: CreateAndAttachNetworkInterfaceResponse,
     ModifyCcnAttributeRequest: ModifyCcnAttributeRequest,
     DeleteSecurityGroupPoliciesResponse: DeleteSecurityGroupPoliciesResponse,
     ModifyNetworkAclAttributeRequest: ModifyNetworkAclAttributeRequest,

@@ -7484,6 +7484,106 @@ class ModifyL4KeepTimeRequest extends  AbstractModel {
 }
 
 /**
+ * 调度域名信息
+ * @class
+ */
+class SchedulingDomain extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 调度域名
+         * @type {string || null}
+         */
+        this.Domain = null;
+
+        /**
+         * BGP线路IP列表
+         * @type {Array.<string> || null}
+         */
+        this.BGPIpList = null;
+
+        /**
+         * 电信线路IP列表
+         * @type {Array.<string> || null}
+         */
+        this.CTCCIpList = null;
+
+        /**
+         * 联通线路IP列表
+         * @type {Array.<string> || null}
+         */
+        this.CUCCIpList = null;
+
+        /**
+         * 移动线路IP列表
+         * @type {Array.<string> || null}
+         */
+        this.CMCCIpList = null;
+
+        /**
+         * 海外线路IP列表
+         * @type {Array.<string> || null}
+         */
+        this.OverseaIpList = null;
+
+        /**
+         * 调度方式，当前仅支持优先级, 取值为priority
+         * @type {string || null}
+         */
+        this.Method = null;
+
+        /**
+         * 创建时间
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * ttl
+         * @type {number || null}
+         */
+        this.TTL = null;
+
+        /**
+         * 状态
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * 修改时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ModifyTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Domain = 'Domain' in params ? params.Domain : null;
+        this.BGPIpList = 'BGPIpList' in params ? params.BGPIpList : null;
+        this.CTCCIpList = 'CTCCIpList' in params ? params.CTCCIpList : null;
+        this.CUCCIpList = 'CUCCIpList' in params ? params.CUCCIpList : null;
+        this.CMCCIpList = 'CMCCIpList' in params ? params.CMCCIpList : null;
+        this.OverseaIpList = 'OverseaIpList' in params ? params.OverseaIpList : null;
+        this.Method = 'Method' in params ? params.Method : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.TTL = 'TTL' in params ? params.TTL : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.ModifyTime = 'ModifyTime' in params ? params.ModifyTime : null;
+
+    }
+}
+
+/**
  * ModifyCCHostProtection请求参数结构体
  * @class
  */
@@ -8106,6 +8206,46 @@ class ModifyCCThresholdRequest extends  AbstractModel {
         this.BasicDeviceType = 'BasicDeviceType' in params ? params.BasicDeviceType : null;
         this.BasicIpInstance = 'BasicIpInstance' in params ? params.BasicIpInstance : null;
         this.BasicIspCode = 'BasicIspCode' in params ? params.BasicIspCode : null;
+
+    }
+}
+
+/**
+ * ModifyDDoSDefendStatus返回参数结构体
+ * @class
+ */
+class ModifyDDoSDefendStatusResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 成功码
+         * @type {SuccessCode || null}
+         */
+        this.Success = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Success) {
+            let obj = new SuccessCode();
+            obj.deserialize(params.Success)
+            this.Success = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -11180,24 +11320,30 @@ class DescribeRuleSetsRequest extends  AbstractModel {
 }
 
 /**
- * ModifyDDoSDefendStatus返回参数结构体
+ * DescribeSchedulingDomainList请求参数结构体
  * @class
  */
-class ModifyDDoSDefendStatusResponse extends  AbstractModel {
+class DescribeSchedulingDomainListRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 成功码
-         * @type {SuccessCode || null}
+         * 一页条数，填0表示不分页
+         * @type {number || null}
          */
-        this.Success = null;
+        this.Limit = null;
 
         /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * 页起始偏移，取值为(页码-1)*一页条数
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 可选，筛选特定的域名
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.Domain = null;
 
     }
 
@@ -11208,13 +11354,9 @@ class ModifyDDoSDefendStatusResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.Success) {
-            let obj = new SuccessCode();
-            obj.deserialize(params.Success)
-            this.Success = obj;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Domain = 'Domain' in params ? params.Domain : null;
 
     }
 }
@@ -11432,6 +11574,56 @@ class DDoSPolicyPortLimit extends  AbstractModel {
         this.SPortEnd = 'SPortEnd' in params ? params.SPortEnd : null;
         this.Action = 'Action' in params ? params.Action : null;
         this.Kind = 'Kind' in params ? params.Kind : null;
+
+    }
+}
+
+/**
+ * DescribeSchedulingDomainList返回参数结构体
+ * @class
+ */
+class DescribeSchedulingDomainListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 调度域名总数
+         * @type {number || null}
+         */
+        this.Total = null;
+
+        /**
+         * 调度域名列表信息
+         * @type {Array.<SchedulingDomain> || null}
+         */
+        this.DomainList = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Total = 'Total' in params ? params.Total : null;
+
+        if (params.DomainList) {
+            this.DomainList = new Array();
+            for (let z in params.DomainList) {
+                let obj = new SchedulingDomain();
+                obj.deserialize(params.DomainList[z]);
+                this.DomainList.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -13172,6 +13364,7 @@ module.exports = {
     ModifyCCPolicySwitchRequest: ModifyCCPolicySwitchRequest,
     ModifyCCFrequencyRulesResponse: ModifyCCFrequencyRulesResponse,
     ModifyL4KeepTimeRequest: ModifyL4KeepTimeRequest,
+    SchedulingDomain: SchedulingDomain,
     ModifyCCHostProtectionRequest: ModifyCCHostProtectionRequest,
     DescribeIpBlockListRequest: DescribeIpBlockListRequest,
     DescribeDDoSNetCountResponse: DescribeDDoSNetCountResponse,
@@ -13182,6 +13375,7 @@ module.exports = {
     ModifyDDoSAIStatusRequest: ModifyDDoSAIStatusRequest,
     DescribeResourceListResponse: DescribeResourceListResponse,
     ModifyCCThresholdRequest: ModifyCCThresholdRequest,
+    ModifyDDoSDefendStatusResponse: ModifyDDoSDefendStatusResponse,
     CreateBasicDDoSAlarmThresholdRequest: CreateBasicDDoSAlarmThresholdRequest,
     CCRuleConfig: CCRuleConfig,
     DescribeDDoSEvInfoResponse: DescribeDDoSEvInfoResponse,
@@ -13237,11 +13431,12 @@ module.exports = {
     L7HealthConfig: L7HealthConfig,
     DescribeDDoSNetEvInfoResponse: DescribeDDoSNetEvInfoResponse,
     DescribeRuleSetsRequest: DescribeRuleSetsRequest,
-    ModifyDDoSDefendStatusResponse: ModifyDDoSDefendStatusResponse,
+    DescribeSchedulingDomainListRequest: DescribeSchedulingDomainListRequest,
     DescribleL7RulesResponse: DescribleL7RulesResponse,
     CreateCCFrequencyRulesResponse: CreateCCFrequencyRulesResponse,
     DescribeIpBlockListResponse: DescribeIpBlockListResponse,
     DDoSPolicyPortLimit: DDoSPolicyPortLimit,
+    DescribeSchedulingDomainListResponse: DescribeSchedulingDomainListResponse,
     DescribeDDoSNetTrendResponse: DescribeDDoSNetTrendResponse,
     DescribeUnBlockStatisResponse: DescribeUnBlockStatisResponse,
     DescribleL7RulesRequest: DescribleL7RulesRequest,
