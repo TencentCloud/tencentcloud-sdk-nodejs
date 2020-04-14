@@ -4998,6 +4998,13 @@ global：全球锁定
          */
         this.AwsPrivateAccess = null;
 
+        /**
+         * Scdn配置
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<SecurityConfig> || null}
+         */
+        this.SecurityConfig = null;
+
     }
 
     /**
@@ -5186,6 +5193,15 @@ global：全球锁定
             let obj = new AwsPrivateAccess();
             obj.deserialize(params.AwsPrivateAccess)
             this.AwsPrivateAccess = obj;
+        }
+
+        if (params.SecurityConfig) {
+            this.SecurityConfig = new Array();
+            for (let z in params.SecurityConfig) {
+                let obj = new SecurityConfig();
+                obj.deserialize(params.SecurityConfig[z]);
+                this.SecurityConfig.push(obj);
+            }
         }
 
     }
@@ -8472,6 +8488,34 @@ class LogSetInfo extends  AbstractModel {
 }
 
 /**
+ * scdn相关的配置
+ * @class
+ */
+class SecurityConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * on|off
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+
+    }
+}
+
+/**
  * SearchClsLog请求参数结构体
  * @class
  */
@@ -9904,6 +9948,7 @@ module.exports = {
     MaxAge: MaxAge,
     UpdateDomainConfigResponse: UpdateDomainConfigResponse,
     LogSetInfo: LogSetInfo,
+    SecurityConfig: SecurityConfig,
     SearchClsLogRequest: SearchClsLogRequest,
     UpdateDomainConfigRequest: UpdateDomainConfigRequest,
     AwsPrivateAccess: AwsPrivateAccess,

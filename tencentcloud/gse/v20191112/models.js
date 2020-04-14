@@ -1824,6 +1824,34 @@ class GameServerSession extends  AbstractModel {
          */
         this.InstanceType = null;
 
+        /**
+         * 当前自定义数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.CurrentCustomCount = null;
+
+        /**
+         * 最大自定义数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.MaxCustomCount = null;
+
+        /**
+         * 权重
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Weight = null;
+
+        /**
+         * 会话可用性状态，是否被屏蔽
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.AvailabilityStatus = null;
+
     }
 
     /**
@@ -1859,6 +1887,10 @@ class GameServerSession extends  AbstractModel {
         this.StatusReason = 'StatusReason' in params ? params.StatusReason : null;
         this.TerminationTime = 'TerminationTime' in params ? params.TerminationTime : null;
         this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
+        this.CurrentCustomCount = 'CurrentCustomCount' in params ? params.CurrentCustomCount : null;
+        this.MaxCustomCount = 'MaxCustomCount' in params ? params.MaxCustomCount : null;
+        this.Weight = 'Weight' in params ? params.Weight : null;
+        this.AvailabilityStatus = 'AvailabilityStatus' in params ? params.AvailabilityStatus : null;
 
     }
 }

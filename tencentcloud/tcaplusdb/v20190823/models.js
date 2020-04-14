@@ -1517,6 +1517,13 @@ class TableInfoNew extends  AbstractModel {
          */
         this.SortRule = null;
 
+        /**
+         * 表格分布式索引信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.DbClusterInfoStruct = null;
+
     }
 
     /**
@@ -1565,6 +1572,7 @@ class TableInfoNew extends  AbstractModel {
         this.ApiAccessId = 'ApiAccessId' in params ? params.ApiAccessId : null;
         this.SortFieldNum = 'SortFieldNum' in params ? params.SortFieldNum : null;
         this.SortRule = 'SortRule' in params ? params.SortRule : null;
+        this.DbClusterInfoStruct = 'DbClusterInfoStruct' in params ? params.DbClusterInfoStruct : null;
 
     }
 }

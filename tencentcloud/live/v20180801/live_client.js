@@ -57,6 +57,7 @@ const DescribeLiveTranscodeRulesRequest = models.DescribeLiveTranscodeRulesReque
 const DeleteLiveSnapshotRuleRequest = models.DeleteLiveSnapshotRuleRequest;
 const DescribePlayErrorCodeDetailInfoListRequest = models.DescribePlayErrorCodeDetailInfoListRequest;
 const DescribeBillBandwidthAndFluxListRequest = models.DescribeBillBandwidthAndFluxListRequest;
+const CommonMixOutputParams = models.CommonMixOutputParams;
 const DescribeLiveSnapshotRulesResponse = models.DescribeLiveSnapshotRulesResponse;
 const DescribeLiveTranscodeDetailInfoResponse = models.DescribeLiveTranscodeDetailInfoResponse;
 const DescribeLiveDomainRequest = models.DescribeLiveDomainRequest;
@@ -70,9 +71,10 @@ const DescribeLiveRecordTemplateRequest = models.DescribeLiveRecordTemplateReque
 const ModifyLiveDomainCertRequest = models.ModifyLiveDomainCertRequest;
 const StreamOnlineInfo = models.StreamOnlineInfo;
 const CreateLiveWatermarkRuleResponse = models.CreateLiveWatermarkRuleResponse;
-const ForbidLiveStreamRequest = models.ForbidLiveStreamRequest;
+const DescribeProIspPlaySumInfoListRequest = models.DescribeProIspPlaySumInfoListRequest;
 const PlayCodeTotalInfo = models.PlayCodeTotalInfo;
 const DescribeConcurrentRecordStreamNumResponse = models.DescribeConcurrentRecordStreamNumResponse;
+const ModifyLiveTranscodeTemplateResponse = models.ModifyLiveTranscodeTemplateResponse;
 const ModifyLiveRecordTemplateResponse = models.ModifyLiveRecordTemplateResponse;
 const ModifyLivePlayDomainRequest = models.ModifyLivePlayDomainRequest;
 const DeleteLiveRecordTemplateResponse = models.DeleteLiveRecordTemplateResponse;
@@ -86,6 +88,8 @@ const CallBackTemplateInfo = models.CallBackTemplateInfo;
 const DescribePlayErrorCodeSumInfoListResponse = models.DescribePlayErrorCodeSumInfoListResponse;
 const UnBindLiveDomainCertRequest = models.UnBindLiveDomainCertRequest;
 const DeleteLiveRecordResponse = models.DeleteLiveRecordResponse;
+const DescribeScreenShotSheetNumListRequest = models.DescribeScreenShotSheetNumListRequest;
+const ForbidLiveStreamRequest = models.ForbidLiveStreamRequest;
 const DescribeLiveDomainsResponse = models.DescribeLiveDomainsResponse;
 const TimeValue = models.TimeValue;
 const PullStreamConfig = models.PullStreamConfig;
@@ -98,13 +102,14 @@ const DescribeVisitTopSumInfoListRequest = models.DescribeVisitTopSumInfoListReq
 const DayStreamPlayInfo = models.DayStreamPlayInfo;
 const ModifyPullStreamStatusResponse = models.ModifyPullStreamStatusResponse;
 const ModifyLivePlayDomainResponse = models.ModifyLivePlayDomainResponse;
-const DescribeScreenShotSheetNumListRequest = models.DescribeScreenShotSheetNumListRequest;
+const CancelCommonMixStreamResponse = models.CancelCommonMixStreamResponse;
 const AddLiveWatermarkRequest = models.AddLiveWatermarkRequest;
 const DescribeLiveCertsResponse = models.DescribeLiveCertsResponse;
+const CommonMixInputParam = models.CommonMixInputParam;
 const DescribeProvinceIspPlayInfoListResponse = models.DescribeProvinceIspPlayInfoListResponse;
 const DescribeLiveRecordTemplatesResponse = models.DescribeLiveRecordTemplatesResponse;
 const DescribeLiveCertRequest = models.DescribeLiveCertRequest;
-const DeleteLiveWatermarkResponse = models.DeleteLiveWatermarkResponse;
+const DescribeLiveCallbackTemplatesResponse = models.DescribeLiveCallbackTemplatesResponse;
 const ModifyLivePlayAuthKeyResponse = models.ModifyLivePlayAuthKeyResponse;
 const CreateLiveCallbackTemplateRequest = models.CreateLiveCallbackTemplateRequest;
 const DescribeTopClientIpSumInfoListResponse = models.DescribeTopClientIpSumInfoListResponse;
@@ -118,9 +123,10 @@ const DescribeLivePackageInfoResponse = models.DescribeLivePackageInfoResponse;
 const CreateLiveTranscodeRuleRequest = models.CreateLiveTranscodeRuleRequest;
 const DescribeLiveWatermarkRulesRequest = models.DescribeLiveWatermarkRulesRequest;
 const DropLiveStreamRequest = models.DropLiveStreamRequest;
+const CreateCommonMixStreamRequest = models.CreateCommonMixStreamRequest;
 const CreateLiveCertResponse = models.CreateLiveCertResponse;
 const PushDataInfo = models.PushDataInfo;
-const ModifyLiveCertResponse = models.ModifyLiveCertResponse;
+const CommonMixLayoutParams = models.CommonMixLayoutParams;
 const DescribeGroupProIspPlayInfoListRequest = models.DescribeGroupProIspPlayInfoListRequest;
 const ModifyPullStreamStatusRequest = models.ModifyPullStreamStatusRequest;
 const DescribeStreamDayPlayInfoListRequest = models.DescribeStreamDayPlayInfoListRequest;
@@ -132,7 +138,7 @@ const StreamName = models.StreamName;
 const DescribeLivePackageInfoRequest = models.DescribeLivePackageInfoRequest;
 const CreatePullStreamConfigRequest = models.CreatePullStreamConfigRequest;
 const DescribeLiveCertsRequest = models.DescribeLiveCertsRequest;
-const DescribeLiveCertResponse = models.DescribeLiveCertResponse;
+const CdnPlayStatData = models.CdnPlayStatData;
 const AddLiveDomainResponse = models.AddLiveDomainResponse;
 const DescribeHttpStatusInfoListRequest = models.DescribeHttpStatusInfoListRequest;
 const ModifyPullStreamConfigResponse = models.ModifyPullStreamConfigResponse;
@@ -156,7 +162,7 @@ const DescribeTopClientIpSumInfoListRequest = models.DescribeTopClientIpSumInfoL
 const CreateLiveCallbackRuleRequest = models.CreateLiveCallbackRuleRequest;
 const DeleteLiveWatermarkRuleResponse = models.DeleteLiveWatermarkRuleResponse;
 const PublishTime = models.PublishTime;
-const ModifyLiveTranscodeTemplateResponse = models.ModifyLiveTranscodeTemplateResponse;
+const ModifyLiveCertResponse = models.ModifyLiveCertResponse;
 const DescribeLiveTranscodeDetailInfoRequest = models.DescribeLiveTranscodeDetailInfoRequest;
 const ProIspPlayCodeDataInfo = models.ProIspPlayCodeDataInfo;
 const DeleteLiveWatermarkRequest = models.DeleteLiveWatermarkRequest;
@@ -168,6 +174,7 @@ const CreateLiveRecordRequest = models.CreateLiveRecordRequest;
 const ForbidLiveStreamResponse = models.ForbidLiveStreamResponse;
 const DescribeLiveSnapshotTemplatesResponse = models.DescribeLiveSnapshotTemplatesResponse;
 const DescribeLogDownloadListResponse = models.DescribeLogDownloadListResponse;
+const CancelCommonMixStreamRequest = models.CancelCommonMixStreamRequest;
 const UpdateLiveWatermarkRequest = models.UpdateLiveWatermarkRequest;
 const CertInfo = models.CertInfo;
 const ModifyLivePushAuthKeyResponse = models.ModifyLivePushAuthKeyResponse;
@@ -180,7 +187,7 @@ const CreateLiveSnapshotTemplateResponse = models.CreateLiveSnapshotTemplateResp
 const DescribeConcurrentRecordStreamNumRequest = models.DescribeConcurrentRecordStreamNumRequest;
 const DescribePlayErrorCodeSumInfoListRequest = models.DescribePlayErrorCodeSumInfoListRequest;
 const ModifyLiveCertRequest = models.ModifyLiveCertRequest;
-const DescribeProIspPlaySumInfoListRequest = models.DescribeProIspPlaySumInfoListRequest;
+const CommonMixControlParams = models.CommonMixControlParams;
 const UnBindLiveDomainCertResponse = models.UnBindLiveDomainCertResponse;
 const ForbidLiveDomainRequest = models.ForbidLiveDomainRequest;
 const DescribeLiveRecordRulesRequest = models.DescribeLiveRecordRulesRequest;
@@ -224,16 +231,17 @@ const DescribeLiveStreamOnlineListRequest = models.DescribeLiveStreamOnlineListR
 const DeleteLiveSnapshotTemplateResponse = models.DeleteLiveSnapshotTemplateResponse;
 const ModifyLiveCallbackTemplateRequest = models.ModifyLiveCallbackTemplateRequest;
 const DeleteLiveCertResponse = models.DeleteLiveCertResponse;
+const CreateCommonMixStreamResponse = models.CreateCommonMixStreamResponse;
 const CreateLiveCallbackTemplateResponse = models.CreateLiveCallbackTemplateResponse;
 const DescribeLivePushAuthKeyRequest = models.DescribeLivePushAuthKeyRequest;
 const PlayStatInfo = models.PlayStatInfo;
 const DescribeLiveCallbackTemplateRequest = models.DescribeLiveCallbackTemplateRequest;
 const ModifyLiveSnapshotTemplateRequest = models.ModifyLiveSnapshotTemplateRequest;
-const CdnPlayStatData = models.CdnPlayStatData;
+const DescribeLiveCertResponse = models.DescribeLiveCertResponse;
 const CreateLiveRecordRuleResponse = models.CreateLiveRecordRuleResponse;
 const DescribeLiveTranscodeTemplateRequest = models.DescribeLiveTranscodeTemplateRequest;
 const DescribeLogDownloadListRequest = models.DescribeLogDownloadListRequest;
-const DescribeLiveCallbackTemplatesResponse = models.DescribeLiveCallbackTemplatesResponse;
+const DeleteLiveWatermarkResponse = models.DeleteLiveWatermarkResponse;
 const DescribeLivePushAuthKeyResponse = models.DescribeLivePushAuthKeyResponse;
 const CreateLiveWatermarkRuleRequest = models.CreateLiveWatermarkRuleRequest;
 const DescribeLiveRecordTemplatesRequest = models.DescribeLiveRecordTemplatesRequest;
@@ -250,6 +258,7 @@ const ForbidStreamInfo = models.ForbidStreamInfo;
 const ResumeDelayLiveStreamResponse = models.ResumeDelayLiveStreamResponse;
 const GroupProIspDataInfo = models.GroupProIspDataInfo;
 const DeleteLiveDomainResponse = models.DeleteLiveDomainResponse;
+const CommonMixCropParams = models.CommonMixCropParams;
 const CreateLiveRecordTemplateRequest = models.CreateLiveRecordTemplateRequest;
 const DescribeProIspPlaySumInfoListResponse = models.DescribeProIspPlaySumInfoListResponse;
 const DeleteLiveCertRequest = models.DeleteLiveCertRequest;
@@ -624,6 +633,17 @@ class LiveClient extends AbstractClient {
     DescribeLiveRecordTemplate(req, cb) {
         let resp = new DescribeLiveRecordTemplateResponse();
         this.request("DescribeLiveRecordTemplate", req, resp, cb);
+    }
+
+    /**
+     * 该接口用来创建通用混流。用法与旧接口 mix_streamv2.start_mix_stream_advanced 基本一致。
+     * @param {CreateCommonMixStreamRequest} req
+     * @param {function(string, CreateCommonMixStreamResponse):void} cb
+     * @public
+     */
+    CreateCommonMixStream(req, cb) {
+        let resp = new CreateCommonMixStreamResponse();
+        this.request("CreateCommonMixStream", req, resp, cb);
     }
 
     /**
@@ -1321,6 +1341,17 @@ class LiveClient extends AbstractClient {
     EnableLiveDomain(req, cb) {
         let resp = new EnableLiveDomainResponse();
         this.request("EnableLiveDomain", req, resp, cb);
+    }
+
+    /**
+     * 该接口用来取消混流。用法与 mix_streamv2.cancel_mix_stream 基本一致。
+     * @param {CancelCommonMixStreamRequest} req
+     * @param {function(string, CancelCommonMixStreamResponse):void} cb
+     * @public
+     */
+    CancelCommonMixStream(req, cb) {
+        let resp = new CancelCommonMixStreamResponse();
+        this.request("CancelCommonMixStream", req, resp, cb);
     }
 
     /**

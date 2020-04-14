@@ -1108,6 +1108,120 @@ class CreateInvoiceResponse extends  AbstractModel {
 }
 
 /**
+ * CreateAcct请求参数结构体
+ * @class
+ */
+class CreateAcctRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 聚鑫平台分配的支付MidasAppId
+         * @type {string || null}
+         */
+        this.MidasAppId = null;
+
+        /**
+         * 业务平台的子商户ID，唯一
+         * @type {string || null}
+         */
+        this.SubMchId = null;
+
+        /**
+         * 子商户名称
+         * @type {string || null}
+         */
+        this.SubMchName = null;
+
+        /**
+         * 子商户地址
+         * @type {string || null}
+         */
+        this.Address = null;
+
+        /**
+         * 子商户联系人
+<敏感信息>加密详见《商户端接口敏感信息加密说明》
+         * @type {string || null}
+         */
+        this.Contact = null;
+
+        /**
+         * 联系人手机号
+<敏感信息>加密详见《商户端接口敏感信息加密说明》
+         * @type {string || null}
+         */
+        this.Mobile = null;
+
+        /**
+         * 邮箱 
+<敏感信息>加密详见《商户端接口敏感信息加密说明》
+         * @type {string || null}
+         */
+        this.Email = null;
+
+        /**
+         * 聚鑫分配的安全ID
+         * @type {string || null}
+         */
+        this.MidasSecretId = null;
+
+        /**
+         * 按照聚鑫安全密钥计算的签名
+         * @type {string || null}
+         */
+        this.MidasSignature = null;
+
+        /**
+         * 子商户类型：
+个人: personal
+企业：enterprise
+缺省： enterprise
+         * @type {string || null}
+         */
+        this.SubMchType = null;
+
+        /**
+         * 不填则默认子商户名称
+         * @type {string || null}
+         */
+        this.ShortName = null;
+
+        /**
+         * 子商户会员类型：
+general:普通子账户
+merchant:商户子账户
+缺省： general
+         * @type {string || null}
+         */
+        this.SubMerchantMemberType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MidasAppId = 'MidasAppId' in params ? params.MidasAppId : null;
+        this.SubMchId = 'SubMchId' in params ? params.SubMchId : null;
+        this.SubMchName = 'SubMchName' in params ? params.SubMchName : null;
+        this.Address = 'Address' in params ? params.Address : null;
+        this.Contact = 'Contact' in params ? params.Contact : null;
+        this.Mobile = 'Mobile' in params ? params.Mobile : null;
+        this.Email = 'Email' in params ? params.Email : null;
+        this.MidasSecretId = 'MidasSecretId' in params ? params.MidasSecretId : null;
+        this.MidasSignature = 'MidasSignature' in params ? params.MidasSignature : null;
+        this.SubMchType = 'SubMchType' in params ? params.SubMchType : null;
+        this.ShortName = 'ShortName' in params ? params.ShortName : null;
+        this.SubMerchantMemberType = 'SubMerchantMemberType' in params ? params.SubMerchantMemberType : null;
+
+    }
+}
+
+/**
  * 红票结果
  * @class
  */
@@ -1331,56 +1445,6 @@ class WithdrawCashMembershipResponse extends  AbstractModel {
         this.FrontSeqNo = 'FrontSeqNo' in params ? params.FrontSeqNo : null;
         this.TransferFee = 'TransferFee' in params ? params.TransferFee : null;
         this.ReservedMsg = 'ReservedMsg' in params ? params.ReservedMsg : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * QueryAcctBinding返回参数结构体
- * @class
- */
-class QueryAcctBindingResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 总行数
-         * @type {number || null}
-         */
-        this.TotalCount = null;
-
-        /**
-         * 银行卡信息列表
-         * @type {Array.<BankCardItem> || null}
-         */
-        this.BankCardItems = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
-
-        if (params.BankCardItems) {
-            this.BankCardItems = new Array();
-            for (let z in params.BankCardItems) {
-                let obj = new BankCardItem();
-                obj.deserialize(params.BankCardItems[z]);
-                this.BankCardItems.push(obj);
-            }
-        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -1852,36 +1916,30 @@ class QueryInvoiceResult extends  AbstractModel {
 }
 
 /**
- * QuerySmallAmountTransfer请求参数结构体
+ * QueryAcctBinding返回参数结构体
  * @class
  */
-class QuerySmallAmountTransferRequest extends  AbstractModel {
+class QueryAcctBindingResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * String(22)，商户号（签约客户号）
-         * @type {string || null}
+         * 总行数
+         * @type {number || null}
          */
-        this.MrchCode = null;
+        this.TotalCount = null;
 
         /**
-         * STRING(52)，原交易流水号（小额鉴权交易请求时的CnsmrSeqNo值）
-         * @type {string || null}
+         * 银行卡信息列表
+         * @type {Array.<BankCardItem> || null}
          */
-        this.OldTranSeqNo = null;
+        this.BankCardItems = null;
 
         /**
-         * STRING(8)，交易日期（格式：20190101）
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.TranDate = null;
-
-        /**
-         * STRING(1027)，保留域
-         * @type {string || null}
-         */
-        this.ReservedMsg = null;
+        this.RequestId = null;
 
     }
 
@@ -1892,10 +1950,52 @@ class QuerySmallAmountTransferRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.MrchCode = 'MrchCode' in params ? params.MrchCode : null;
-        this.OldTranSeqNo = 'OldTranSeqNo' in params ? params.OldTranSeqNo : null;
-        this.TranDate = 'TranDate' in params ? params.TranDate : null;
-        this.ReservedMsg = 'ReservedMsg' in params ? params.ReservedMsg : null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.BankCardItems) {
+            this.BankCardItems = new Array();
+            for (let z in params.BankCardItems) {
+                let obj = new BankCardItem();
+                obj.deserialize(params.BankCardItems[z]);
+                this.BankCardItems.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ApplyReWithdrawal返回参数结构体
+ * @class
+ */
+class ApplyReWithdrawalResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 重新提现业务订单号
+         * @type {string || null}
+         */
+        this.WithdrawOrderId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.WithdrawOrderId = 'WithdrawOrderId' in params ? params.WithdrawOrderId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2365,93 +2465,30 @@ class ReviseMbrPropertyResponse extends  AbstractModel {
 }
 
 /**
- * CreateAcct请求参数结构体
+ * 蓝票结果数据
  * @class
  */
-class CreateAcctRequest extends  AbstractModel {
+class CreateInvoiceResultData extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 聚鑫平台分配的支付MidasAppId
-         * @type {string || null}
+         * 开票状态
+         * @type {number || null}
          */
-        this.MidasAppId = null;
+        this.State = null;
 
         /**
-         * 业务平台的子商户ID，唯一
+         * 发票ID
          * @type {string || null}
          */
-        this.SubMchId = null;
+        this.InvoiceId = null;
 
         /**
-         * 子商户名称
+         * 业务开票号
          * @type {string || null}
          */
-        this.SubMchName = null;
-
-        /**
-         * 子商户地址
-         * @type {string || null}
-         */
-        this.Address = null;
-
-        /**
-         * 子商户联系人
-<敏感信息>加密详见《商户端接口敏感信息加密说明》
-         * @type {string || null}
-         */
-        this.Contact = null;
-
-        /**
-         * 联系人手机号
-<敏感信息>加密详见《商户端接口敏感信息加密说明》
-         * @type {string || null}
-         */
-        this.Mobile = null;
-
-        /**
-         * 邮箱 
-<敏感信息>加密详见《商户端接口敏感信息加密说明》
-         * @type {string || null}
-         */
-        this.Email = null;
-
-        /**
-         * 聚鑫分配的安全ID
-         * @type {string || null}
-         */
-        this.MidasSecretId = null;
-
-        /**
-         * 按照聚鑫安全密钥计算的签名
-         * @type {string || null}
-         */
-        this.MidasSignature = null;
-
-        /**
-         * 子商户类型：
-个人: personal
-企业：enterprise
-缺省： enterprise
-         * @type {string || null}
-         */
-        this.SubMchType = null;
-
-        /**
-         * 不填则默认子商户名称
-         * @type {string || null}
-         */
-        this.ShortName = null;
-
-        /**
-         * 子商户会员类型：
-general:普通子账户
-merchant:商户子账户
-缺省： general
-         * @type {string || null}
-         */
-        this.SubMerchantMemberType = null;
+        this.OrderSn = null;
 
     }
 
@@ -2462,18 +2499,9 @@ merchant:商户子账户
         if (!params) {
             return;
         }
-        this.MidasAppId = 'MidasAppId' in params ? params.MidasAppId : null;
-        this.SubMchId = 'SubMchId' in params ? params.SubMchId : null;
-        this.SubMchName = 'SubMchName' in params ? params.SubMchName : null;
-        this.Address = 'Address' in params ? params.Address : null;
-        this.Contact = 'Contact' in params ? params.Contact : null;
-        this.Mobile = 'Mobile' in params ? params.Mobile : null;
-        this.Email = 'Email' in params ? params.Email : null;
-        this.MidasSecretId = 'MidasSecretId' in params ? params.MidasSecretId : null;
-        this.MidasSignature = 'MidasSignature' in params ? params.MidasSignature : null;
-        this.SubMchType = 'SubMchType' in params ? params.SubMchType : null;
-        this.ShortName = 'ShortName' in params ? params.ShortName : null;
-        this.SubMerchantMemberType = 'SubMerchantMemberType' in params ? params.SubMerchantMemberType : null;
+        this.State = 'State' in params ? params.State : null;
+        this.InvoiceId = 'InvoiceId' in params ? params.InvoiceId : null;
+        this.OrderSn = 'OrderSn' in params ? params.OrderSn : null;
 
     }
 }
@@ -3349,6 +3377,126 @@ class CreateRedInvoiceRequest extends  AbstractModel {
 }
 
 /**
+ * QueryAcctInfoList返回参数结构体
+ * @class
+ */
+class QueryAcctInfoListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 本次交易返回查询结果记录数
+         * @type {number || null}
+         */
+        this.ResultCount = null;
+
+        /**
+         * 符合业务查询条件的记录总数
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 查询结果项 [object,object]
+         * @type {Array.<QueryAcctItem> || null}
+         */
+        this.QueryAcctItems = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ResultCount = 'ResultCount' in params ? params.ResultCount : null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.QueryAcctItems) {
+            this.QueryAcctItems = new Array();
+            for (let z in params.QueryAcctItems) {
+                let obj = new QueryAcctItem();
+                obj.deserialize(params.QueryAcctItems[z]);
+                this.QueryAcctItems.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * QueryAcctInfoList请求参数结构体
+ * @class
+ */
+class QueryAcctInfoListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 聚鑫分配的支付主MidasAppId
+         * @type {string || null}
+         */
+        this.MidasAppId = null;
+
+        /**
+         * 查询开始时间(以开户时间为准)
+         * @type {string || null}
+         */
+        this.QueryAcctBeginTime = null;
+
+        /**
+         * 查询结束时间(以开户时间为准)
+         * @type {string || null}
+         */
+        this.QueryAcctEndTime = null;
+
+        /**
+         * 分页号,  起始值为1，每次最多返回20条记录，第二页返回的记录数为第21至40条记录，第三页为41至60条记录，顺序均按照开户时间的先后
+         * @type {string || null}
+         */
+        this.PageOffset = null;
+
+        /**
+         * 由平台客服提供的计费密钥Id
+         * @type {string || null}
+         */
+        this.MidasSecretId = null;
+
+        /**
+         * 计费签名
+         * @type {string || null}
+         */
+        this.MidasSignature = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MidasAppId = 'MidasAppId' in params ? params.MidasAppId : null;
+        this.QueryAcctBeginTime = 'QueryAcctBeginTime' in params ? params.QueryAcctBeginTime : null;
+        this.QueryAcctEndTime = 'QueryAcctEndTime' in params ? params.QueryAcctEndTime : null;
+        this.PageOffset = 'PageOffset' in params ? params.PageOffset : null;
+        this.MidasSecretId = 'MidasSecretId' in params ? params.MidasSecretId : null;
+        this.MidasSignature = 'MidasSignature' in params ? params.MidasSignature : null;
+
+    }
+}
+
+/**
  * BindRelateAcctUnionPay请求参数结构体
  * @class
  */
@@ -3454,30 +3602,60 @@ class BindRelateAcctUnionPayRequest extends  AbstractModel {
 }
 
 /**
- * 蓝票结果数据
+ * QueryBankTransactionDetails请求参数结构体
  * @class
  */
-class CreateInvoiceResultData extends  AbstractModel {
+class QueryBankTransactionDetailsRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 开票状态
-         * @type {number || null}
-         */
-        this.State = null;
-
-        /**
-         * 发票ID
+         * String(22)，商户号（签约客户号）
          * @type {string || null}
          */
-        this.InvoiceId = null;
+        this.MrchCode = null;
 
         /**
-         * 业务开票号
+         * STRING(2)，功能标志（1: 当日; 2: 历史）
          * @type {string || null}
          */
-        this.OrderSn = null;
+        this.FunctionFlag = null;
+
+        /**
+         * STRING(50)，见证子帐户的帐号
+         * @type {string || null}
+         */
+        this.SubAcctNo = null;
+
+        /**
+         * STRING(4)，查询标志（1: 全部; 2: 转出; 3: 转入 ）
+         * @type {string || null}
+         */
+        this.QueryFlag = null;
+
+        /**
+         * STRING(10)，页码（起始值为1，每次最多返回20条记录，第二页返回的记录数为第21至40条记录，第三页为41至60条记录，顺序均按照建立时间的先后）
+         * @type {string || null}
+         */
+        this.PageNum = null;
+
+        /**
+         * STRING(8)，开始日期（若是历史查询，则必输，当日查询时，不起作用。格式：20190101）
+         * @type {string || null}
+         */
+        this.StartDate = null;
+
+        /**
+         * STRING(8)，终止日期（若是历史查询，则必输，当日查询时，不起作用。格式：20190101）
+         * @type {string || null}
+         */
+        this.EndDate = null;
+
+        /**
+         * STRING(1027)，保留域
+         * @type {string || null}
+         */
+        this.ReservedMsg = null;
 
     }
 
@@ -3488,9 +3666,14 @@ class CreateInvoiceResultData extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.State = 'State' in params ? params.State : null;
-        this.InvoiceId = 'InvoiceId' in params ? params.InvoiceId : null;
-        this.OrderSn = 'OrderSn' in params ? params.OrderSn : null;
+        this.MrchCode = 'MrchCode' in params ? params.MrchCode : null;
+        this.FunctionFlag = 'FunctionFlag' in params ? params.FunctionFlag : null;
+        this.SubAcctNo = 'SubAcctNo' in params ? params.SubAcctNo : null;
+        this.QueryFlag = 'QueryFlag' in params ? params.QueryFlag : null;
+        this.PageNum = 'PageNum' in params ? params.PageNum : null;
+        this.StartDate = 'StartDate' in params ? params.StartDate : null;
+        this.EndDate = 'EndDate' in params ? params.EndDate : null;
+        this.ReservedMsg = 'ReservedMsg' in params ? params.ReservedMsg : null;
 
     }
 }
@@ -3790,6 +3973,55 @@ class QuerySingleTransactionStatusResponse extends  AbstractModel {
         this.FailMsg = 'FailMsg' in params ? params.FailMsg : null;
         this.OldTranFrontSeqNo = 'OldTranFrontSeqNo' in params ? params.OldTranFrontSeqNo : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * QueryAcctInfo请求参数结构体
+ * @class
+ */
+class QueryAcctInfoRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 聚鑫平台分配的支付MidasAppId
+         * @type {string || null}
+         */
+        this.MidasAppId = null;
+
+        /**
+         * 业务平台的子商户Id，唯一
+         * @type {string || null}
+         */
+        this.SubMchId = null;
+
+        /**
+         * 由平台客服提供的计费密钥Id
+         * @type {string || null}
+         */
+        this.MidasSecretId = null;
+
+        /**
+         * 计费签名
+         * @type {string || null}
+         */
+        this.MidasSignature = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MidasAppId = 'MidasAppId' in params ? params.MidasAppId : null;
+        this.SubMchId = 'SubMchId' in params ? params.SubMchId : null;
+        this.MidasSecretId = 'MidasSecretId' in params ? params.MidasSecretId : null;
+        this.MidasSignature = 'MidasSignature' in params ? params.MidasSignature : null;
 
     }
 }
@@ -4540,6 +4772,83 @@ class BindAcctResponse extends  AbstractModel {
 }
 
 /**
+ * 聚鑫提现订单内容
+ * @class
+ */
+class WithdrawBill extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 业务提现订单号
+         * @type {string || null}
+         */
+        this.WithdrawOrderId = null;
+
+        /**
+         * 提现日期
+         * @type {string || null}
+         */
+        this.Date = null;
+
+        /**
+         * 提现金额，单位： 分
+         * @type {string || null}
+         */
+        this.PayAmt = null;
+
+        /**
+         * 聚鑫分配转入账户appid
+         * @type {string || null}
+         */
+        this.InSubAppId = null;
+
+        /**
+         * 聚鑫分配转出账户appid
+         * @type {string || null}
+         */
+        this.OutSubAppId = null;
+
+        /**
+         * ISO货币代码
+         * @type {string || null}
+         */
+        this.CurrencyType = null;
+
+        /**
+         * 透传字段
+         * @type {string || null}
+         */
+        this.MetaData = null;
+
+        /**
+         * 扩展字段
+         * @type {string || null}
+         */
+        this.ExtendFieldData = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.WithdrawOrderId = 'WithdrawOrderId' in params ? params.WithdrawOrderId : null;
+        this.Date = 'Date' in params ? params.Date : null;
+        this.PayAmt = 'PayAmt' in params ? params.PayAmt : null;
+        this.InSubAppId = 'InSubAppId' in params ? params.InSubAppId : null;
+        this.OutSubAppId = 'OutSubAppId' in params ? params.OutSubAppId : null;
+        this.CurrencyType = 'CurrencyType' in params ? params.CurrencyType : null;
+        this.MetaData = 'MetaData' in params ? params.MetaData : null;
+        this.ExtendFieldData = 'ExtendFieldData' in params ? params.ExtendFieldData : null;
+
+    }
+}
+
+/**
  * BindRelateAccReUnionPay请求参数结构体
  * @class
  */
@@ -4655,6 +4964,121 @@ class CreateCustAcctIdResponse extends  AbstractModel {
         this.TxnReturnCode = 'TxnReturnCode' in params ? params.TxnReturnCode : null;
         this.TxnReturnMsg = 'TxnReturnMsg' in params ? params.TxnReturnMsg : null;
         this.CnsmrSeqNo = 'CnsmrSeqNo' in params ? params.CnsmrSeqNo : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * QueryAcctInfo返回参数结构体
+ * @class
+ */
+class QueryAcctInfoResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 聚鑫计费SubAppId，代表子商户
+         * @type {string || null}
+         */
+        this.SubAppId = null;
+
+        /**
+         * 子商户名称
+         * @type {string || null}
+         */
+        this.SubMchName = null;
+
+        /**
+         * 子商户类型：
+个人: personal
+企业：enterprise
+缺省： enterprise
+         * @type {string || null}
+         */
+        this.SubMchType = null;
+
+        /**
+         * 不填则默认子商户名称
+         * @type {string || null}
+         */
+        this.ShortName = null;
+
+        /**
+         * 子商户地址
+         * @type {string || null}
+         */
+        this.Address = null;
+
+        /**
+         * 子商户联系人子商户联系人
+<敏感信息>
+         * @type {string || null}
+         */
+        this.Contact = null;
+
+        /**
+         * 联系人手机号
+<敏感信息>
+         * @type {string || null}
+         */
+        this.Mobile = null;
+
+        /**
+         * 邮箱 
+<敏感信息>
+         * @type {string || null}
+         */
+        this.Email = null;
+
+        /**
+         * 子商户id
+         * @type {string || null}
+         */
+        this.SubMchId = null;
+
+        /**
+         * 子账户
+         * @type {string || null}
+         */
+        this.SubAcctNo = null;
+
+        /**
+         * 子商户会员类型：
+general:普通子账户
+merchant:商户子账户
+缺省： general
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.SubMerchantMemberType = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
+        this.SubMchName = 'SubMchName' in params ? params.SubMchName : null;
+        this.SubMchType = 'SubMchType' in params ? params.SubMchType : null;
+        this.ShortName = 'ShortName' in params ? params.ShortName : null;
+        this.Address = 'Address' in params ? params.Address : null;
+        this.Contact = 'Contact' in params ? params.Contact : null;
+        this.Mobile = 'Mobile' in params ? params.Mobile : null;
+        this.Email = 'Email' in params ? params.Email : null;
+        this.SubMchId = 'SubMchId' in params ? params.SubMchId : null;
+        this.SubAcctNo = 'SubAcctNo' in params ? params.SubAcctNo : null;
+        this.SubMerchantMemberType = 'SubMerchantMemberType' in params ? params.SubMerchantMemberType : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -4943,6 +5367,67 @@ class RegisterBillSupportWithdrawResponse extends  AbstractModel {
         this.CnsmrSeqNo = 'CnsmrSeqNo' in params ? params.CnsmrSeqNo : null;
         this.ReservedMsg = 'ReservedMsg' in params ? params.ReservedMsg : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ApplyReWithdrawal请求参数结构体
+ * @class
+ */
+class ApplyReWithdrawalRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 聚鑫业务类型
+         * @type {number || null}
+         */
+        this.BusinessType = null;
+
+        /**
+         * 由平台客服提供的计费密钥Id
+         * @type {string || null}
+         */
+        this.MidasSecretId = null;
+
+        /**
+         * 计费签名
+         * @type {string || null}
+         */
+        this.MidasSignature = null;
+
+        /**
+         * 提现信息
+         * @type {WithdrawBill || null}
+         */
+        this.Body = null;
+
+        /**
+         * 聚鑫业务ID
+         * @type {string || null}
+         */
+        this.MidasAppId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.BusinessType = 'BusinessType' in params ? params.BusinessType : null;
+        this.MidasSecretId = 'MidasSecretId' in params ? params.MidasSecretId : null;
+        this.MidasSignature = 'MidasSignature' in params ? params.MidasSignature : null;
+
+        if (params.Body) {
+            let obj = new WithdrawBill();
+            obj.deserialize(params.Body)
+            this.Body = obj;
+        }
+        this.MidasAppId = 'MidasAppId' in params ? params.MidasAppId : null;
 
     }
 }
@@ -6204,60 +6689,24 @@ class TransactionItem extends  AbstractModel {
 }
 
 /**
- * QueryBankTransactionDetails请求参数结构体
+ * CheckAcct返回参数结构体
  * @class
  */
-class QueryBankTransactionDetailsRequest extends  AbstractModel {
+class CheckAcctResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * String(22)，商户号（签约客户号）
+         * 前置流水号，请保存
          * @type {string || null}
          */
-        this.MrchCode = null;
+        this.FrontSeqNo = null;
 
         /**
-         * STRING(2)，功能标志（1: 当日; 2: 历史）
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.FunctionFlag = null;
-
-        /**
-         * STRING(50)，见证子帐户的帐号
-         * @type {string || null}
-         */
-        this.SubAcctNo = null;
-
-        /**
-         * STRING(4)，查询标志（1: 全部; 2: 转出; 3: 转入 ）
-         * @type {string || null}
-         */
-        this.QueryFlag = null;
-
-        /**
-         * STRING(10)，页码（起始值为1，每次最多返回20条记录，第二页返回的记录数为第21至40条记录，第三页为41至60条记录，顺序均按照建立时间的先后）
-         * @type {string || null}
-         */
-        this.PageNum = null;
-
-        /**
-         * STRING(8)，开始日期（若是历史查询，则必输，当日查询时，不起作用。格式：20190101）
-         * @type {string || null}
-         */
-        this.StartDate = null;
-
-        /**
-         * STRING(8)，终止日期（若是历史查询，则必输，当日查询时，不起作用。格式：20190101）
-         * @type {string || null}
-         */
-        this.EndDate = null;
-
-        /**
-         * STRING(1027)，保留域
-         * @type {string || null}
-         */
-        this.ReservedMsg = null;
+        this.RequestId = null;
 
     }
 
@@ -6268,14 +6717,8 @@ class QueryBankTransactionDetailsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.MrchCode = 'MrchCode' in params ? params.MrchCode : null;
-        this.FunctionFlag = 'FunctionFlag' in params ? params.FunctionFlag : null;
-        this.SubAcctNo = 'SubAcctNo' in params ? params.SubAcctNo : null;
-        this.QueryFlag = 'QueryFlag' in params ? params.QueryFlag : null;
-        this.PageNum = 'PageNum' in params ? params.PageNum : null;
-        this.StartDate = 'StartDate' in params ? params.StartDate : null;
-        this.EndDate = 'EndDate' in params ? params.EndDate : null;
-        this.ReservedMsg = 'ReservedMsg' in params ? params.ReservedMsg : null;
+        this.FrontSeqNo = 'FrontSeqNo' in params ? params.FrontSeqNo : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -7073,6 +7516,114 @@ class QueryMemberTransactionResponse extends  AbstractModel {
 }
 
 /**
+ * 查询账户列表接口
+ * @class
+ */
+class QueryAcctItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 子商户类型：
+个人: personal
+企业：enterprise
+缺省： enterprise
+         * @type {string || null}
+         */
+        this.SubMchType = null;
+
+        /**
+         * 子商户名称
+         * @type {string || null}
+         */
+        this.SubMchName = null;
+
+        /**
+         * 子账号号
+         * @type {string || null}
+         */
+        this.SubAcctNo = null;
+
+        /**
+         * 不填则默认子商户名称
+         * @type {string || null}
+         */
+        this.ShortName = null;
+
+        /**
+         * 业务平台的子商户Id，唯一
+         * @type {string || null}
+         */
+        this.SubMchId = null;
+
+        /**
+         * 聚鑫计费SubAppId，代表子商户
+         * @type {string || null}
+         */
+        this.SubAppId = null;
+
+        /**
+         * 子商户联系人
+<敏感信息>
+         * @type {string || null}
+         */
+        this.Contact = null;
+
+        /**
+         * 子商户地址
+         * @type {string || null}
+         */
+        this.Address = null;
+
+        /**
+         * 联系人手机号
+<敏感信息>
+         * @type {string || null}
+         */
+        this.Mobile = null;
+
+        /**
+         * 邮箱 
+<敏感信息>
+         * @type {string || null}
+         */
+        this.Email = null;
+
+        /**
+         * 子商户会员类型：
+general:普通子账户
+merchant:商户子账户
+缺省： general
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.SubMerchantMemberType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SubMchType = 'SubMchType' in params ? params.SubMchType : null;
+        this.SubMchName = 'SubMchName' in params ? params.SubMchName : null;
+        this.SubAcctNo = 'SubAcctNo' in params ? params.SubAcctNo : null;
+        this.ShortName = 'ShortName' in params ? params.ShortName : null;
+        this.SubMchId = 'SubMchId' in params ? params.SubMchId : null;
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
+        this.Contact = 'Contact' in params ? params.Contact : null;
+        this.Address = 'Address' in params ? params.Address : null;
+        this.Mobile = 'Mobile' in params ? params.Mobile : null;
+        this.Email = 'Email' in params ? params.Email : null;
+        this.SubMerchantMemberType = 'SubMerchantMemberType' in params ? params.SubMerchantMemberType : null;
+
+    }
+}
+
+/**
  * QueryInvoiceForManagement请求参数结构体
  * @class
  */
@@ -7180,6 +7731,55 @@ class QueryInvoiceForManagementRequest extends  AbstractModel {
         this.InvoiceSn = 'InvoiceSn' in params ? params.InvoiceSn : null;
         this.InvoiceCode = 'InvoiceCode' in params ? params.InvoiceCode : null;
         this.Profile = 'Profile' in params ? params.Profile : null;
+
+    }
+}
+
+/**
+ * QuerySmallAmountTransfer请求参数结构体
+ * @class
+ */
+class QuerySmallAmountTransferRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * String(22)，商户号（签约客户号）
+         * @type {string || null}
+         */
+        this.MrchCode = null;
+
+        /**
+         * STRING(52)，原交易流水号（小额鉴权交易请求时的CnsmrSeqNo值）
+         * @type {string || null}
+         */
+        this.OldTranSeqNo = null;
+
+        /**
+         * STRING(8)，交易日期（格式：20190101）
+         * @type {string || null}
+         */
+        this.TranDate = null;
+
+        /**
+         * STRING(1027)，保留域
+         * @type {string || null}
+         */
+        this.ReservedMsg = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MrchCode = 'MrchCode' in params ? params.MrchCode : null;
+        this.OldTranSeqNo = 'OldTranSeqNo' in params ? params.OldTranSeqNo : null;
+        this.TranDate = 'TranDate' in params ? params.TranDate : null;
+        this.ReservedMsg = 'ReservedMsg' in params ? params.ReservedMsg : null;
 
     }
 }
@@ -8016,41 +8616,6 @@ class BindRelateAcctUnionPayResponse extends  AbstractModel {
 }
 
 /**
- * CheckAcct返回参数结构体
- * @class
- */
-class CheckAcctResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 前置流水号，请保存
-         * @type {string || null}
-         */
-        this.FrontSeqNo = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.FrontSeqNo = 'FrontSeqNo' in params ? params.FrontSeqNo : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
  * UnifiedOrder请求参数结构体
  * @class
  */
@@ -8587,22 +9152,23 @@ module.exports = {
     WithdrawCashMembershipRequest: WithdrawCashMembershipRequest,
     RevResigterBillSupportWithdrawRequest: RevResigterBillSupportWithdrawRequest,
     CreateInvoiceResponse: CreateInvoiceResponse,
+    CreateAcctRequest: CreateAcctRequest,
     CreateRedInvoiceResult: CreateRedInvoiceResult,
     QueryBankWithdrawCashDetailsResponse: QueryBankWithdrawCashDetailsResponse,
     WithdrawCashMembershipResponse: WithdrawCashMembershipResponse,
-    QueryAcctBindingResponse: QueryAcctBindingResponse,
     QueryReconciliationDocumentRequest: QueryReconciliationDocumentRequest,
     RefundOutSubOrderRefundList: RefundOutSubOrderRefundList,
     UnbindRelateAcctRequest: UnbindRelateAcctRequest,
     CreateMerchantRequest: CreateMerchantRequest,
     UnifiedOrderInSubOrderList: UnifiedOrderInSubOrderList,
     QueryInvoiceResult: QueryInvoiceResult,
-    QuerySmallAmountTransferRequest: QuerySmallAmountTransferRequest,
+    QueryAcctBindingResponse: QueryAcctBindingResponse,
+    ApplyReWithdrawalResponse: ApplyReWithdrawalResponse,
     QueryOrderOutOrderList: QueryOrderOutOrderList,
     CreateInvoiceItem: CreateInvoiceItem,
     QueryOrderOutSubOrderList: QueryOrderOutSubOrderList,
     ReviseMbrPropertyResponse: ReviseMbrPropertyResponse,
-    CreateAcctRequest: CreateAcctRequest,
+    CreateInvoiceResultData: CreateInvoiceResultData,
     Acct: Acct,
     QueryCommonTransferRechargeResponse: QueryCommonTransferRechargeResponse,
     CreateRedInvoiceItem: CreateRedInvoiceItem,
@@ -8616,12 +9182,15 @@ module.exports = {
     DownloadBillResponse: DownloadBillResponse,
     RevokeMemberRechargeThirdPayResponse: RevokeMemberRechargeThirdPayResponse,
     CreateRedInvoiceRequest: CreateRedInvoiceRequest,
+    QueryAcctInfoListResponse: QueryAcctInfoListResponse,
+    QueryAcctInfoListRequest: QueryAcctInfoListRequest,
     BindRelateAcctUnionPayRequest: BindRelateAcctUnionPayRequest,
-    CreateInvoiceResultData: CreateInvoiceResultData,
+    QueryBankTransactionDetailsRequest: QueryBankTransactionDetailsRequest,
     RevRegisterBillSupportWithdrawResponse: RevRegisterBillSupportWithdrawResponse,
     QuerySmallAmountTransferResponse: QuerySmallAmountTransferResponse,
     CreateRedInvoiceResponse: CreateRedInvoiceResponse,
     QuerySingleTransactionStatusResponse: QuerySingleTransactionStatusResponse,
+    QueryAcctInfoRequest: QueryAcctInfoRequest,
     TranItem: TranItem,
     ClearItem: ClearItem,
     QueryOrderRequest: QueryOrderRequest,
@@ -8633,11 +9202,14 @@ module.exports = {
     QueryOrderResponse: QueryOrderResponse,
     CreateAcctResponse: CreateAcctResponse,
     BindAcctResponse: BindAcctResponse,
+    WithdrawBill: WithdrawBill,
     BindRelateAccReUnionPayRequest: BindRelateAccReUnionPayRequest,
     CreateCustAcctIdResponse: CreateCustAcctIdResponse,
+    QueryAcctInfoResponse: QueryAcctInfoResponse,
     TransferItem: TransferItem,
     QueryInvoiceResultData: QueryInvoiceResultData,
     RegisterBillSupportWithdrawResponse: RegisterBillSupportWithdrawResponse,
+    ApplyReWithdrawalRequest: ApplyReWithdrawalRequest,
     UnbindRelateAcctResponse: UnbindRelateAcctResponse,
     CheckAmountRequest: CheckAmountRequest,
     CreateMerchantResultData: CreateMerchantResultData,
@@ -8653,7 +9225,7 @@ module.exports = {
     RevResigterBillSupportWithdrawResponse: RevResigterBillSupportWithdrawResponse,
     QueryBalanceResponse: QueryBalanceResponse,
     TransactionItem: TransactionItem,
-    QueryBankTransactionDetailsRequest: QueryBankTransactionDetailsRequest,
+    CheckAcctResponse: CheckAcctResponse,
     QueryReconciliationDocumentResponse: QueryReconciliationDocumentResponse,
     QueryBankTransactionDetailsResponse: QueryBankTransactionDetailsResponse,
     FileItem: FileItem,
@@ -8666,7 +9238,9 @@ module.exports = {
     RechargeMemberThirdPayResponse: RechargeMemberThirdPayResponse,
     CreateMerchantResponse: CreateMerchantResponse,
     QueryMemberTransactionResponse: QueryMemberTransactionResponse,
+    QueryAcctItem: QueryAcctItem,
     QueryInvoiceForManagementRequest: QueryInvoiceForManagementRequest,
+    QuerySmallAmountTransferRequest: QuerySmallAmountTransferRequest,
     BindRelateAcctSmallAmountResponse: BindRelateAcctSmallAmountResponse,
     ModifyMntMbrBindRelateAcctBankCodeResponse: ModifyMntMbrBindRelateAcctBankCodeResponse,
     QueryBalanceRequest: QueryBalanceRequest,
@@ -8678,7 +9252,6 @@ module.exports = {
     QueryMemberBindRequest: QueryMemberBindRequest,
     QueryRefundRequest: QueryRefundRequest,
     BindRelateAcctUnionPayResponse: BindRelateAcctUnionPayResponse,
-    CheckAcctResponse: CheckAcctResponse,
     UnifiedOrderRequest: UnifiedOrderRequest,
     UnBindAcctRequest: UnBindAcctRequest,
     RefundRequest: RefundRequest,

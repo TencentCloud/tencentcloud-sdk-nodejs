@@ -2166,6 +2166,100 @@ Oversea：则查询国外数据，
 }
 
 /**
+ * 通用混流输出参数。
+ * @class
+ */
+class CommonMixOutputParams extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 输出流名称。
+         * @type {string || null}
+         */
+        this.OutputStreamName = null;
+
+        /**
+         * 输出流类型，取值范围[0,1]。
+不填默认为0。
+当输出流为输入流 list 中的一条时，填写0。
+当期望生成的混流结果成为一条新流时，该值填为1。
+该值为1时，output_stream_id 不能出现在 input_stram_list 中，且直播后台中，不能存在相同 ID 的流。
+         * @type {number || null}
+         */
+        this.OutputStreamType = null;
+
+        /**
+         * 输出流比特率。取值范围[1，50000]。
+不填的情况下，系统会自动判断。
+         * @type {number || null}
+         */
+        this.OutputStreamBitRate = null;
+
+        /**
+         * 输出流GOP大小。取值范围[1,10]。
+不填的情况下，系统会自动判断。
+         * @type {number || null}
+         */
+        this.OutputStreamGop = null;
+
+        /**
+         * 输出流帧率大小。取值范围[1,60]。
+不填的情况下，系统会自动判断。
+         * @type {number || null}
+         */
+        this.OutputStreamFrameRate = null;
+
+        /**
+         * 输出流音频比特率。取值范围[1,500]
+不填的情况下，系统会自动判断。
+         * @type {number || null}
+         */
+        this.OutputAudioBitRate = null;
+
+        /**
+         * 输出流音频采样率。取值范围[96000, 88200, 64000, 48000, 44100, 32000,24000, 22050, 16000, 12000, 11025, 8000]。
+不填的情况下，系统会自动判断。
+         * @type {number || null}
+         */
+        this.OutputAudioSampleRate = null;
+
+        /**
+         * 输出流音频声道数。取值范围[1,2]。
+不填的情况下，系统会自动判断。
+         * @type {number || null}
+         */
+        this.OutputAudioChannels = null;
+
+        /**
+         * 输出流中的sei信息。如果无特殊需要，不填。
+         * @type {string || null}
+         */
+        this.MixSei = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.OutputStreamName = 'OutputStreamName' in params ? params.OutputStreamName : null;
+        this.OutputStreamType = 'OutputStreamType' in params ? params.OutputStreamType : null;
+        this.OutputStreamBitRate = 'OutputStreamBitRate' in params ? params.OutputStreamBitRate : null;
+        this.OutputStreamGop = 'OutputStreamGop' in params ? params.OutputStreamGop : null;
+        this.OutputStreamFrameRate = 'OutputStreamFrameRate' in params ? params.OutputStreamFrameRate : null;
+        this.OutputAudioBitRate = 'OutputAudioBitRate' in params ? params.OutputAudioBitRate : null;
+        this.OutputAudioSampleRate = 'OutputAudioSampleRate' in params ? params.OutputAudioSampleRate : null;
+        this.OutputAudioChannels = 'OutputAudioChannels' in params ? params.OutputAudioChannels : null;
+        this.MixSei = 'MixSei' in params ? params.MixSei : null;
+
+    }
+}
+
+/**
  * DescribeLiveSnapshotRules返回参数结构体
  * @class
  */
@@ -2741,47 +2835,63 @@ class CreateLiveWatermarkRuleResponse extends  AbstractModel {
 }
 
 /**
- * ForbidLiveStream请求参数结构体
+ * DescribeProIspPlaySumInfoList请求参数结构体
  * @class
  */
-class ForbidLiveStreamRequest extends  AbstractModel {
+class DescribeProIspPlaySumInfoListRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 推流路径，与推流和播放地址中的AppName保持一致，默认为 live。
+         * 起始时间，北京时间，
+格式：yyyy-mm-dd HH:MM:SS。
          * @type {string || null}
          */
-        this.AppName = null;
+        this.StartTime = null;
 
         /**
-         * 您的推流域名。
+         * 结束时间，北京时间，
+格式：yyyy-mm-dd HH:MM:SS。
+注：EndTime 和 StartTime 只支持最近1天的数据查询。
          * @type {string || null}
          */
-        this.DomainName = null;
+        this.EndTime = null;
 
         /**
-         * 流名称。
+         * 统计的类型，可选值：”Province”，”Isp”，“CountryOrArea”。
          * @type {string || null}
          */
-        this.StreamName = null;
+        this.StatType = null;
 
         /**
-         * 恢复流的时间。UTC 格式，例如：2018-11-29T19:00:00Z。
-注意：
-1. 默认禁播7天，且最长支持禁播90天。
-2. 北京时间值为 UTC 时间值 + 8 小时，格式按照 ISO 8601 标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#I)。
-         * @type {string || null}
+         * 不填则为总体数据。
+         * @type {Array.<string> || null}
          */
-        this.ResumeTime = null;
+        this.PlayDomains = null;
 
         /**
-         * 禁推原因。
-注明：请务必填写禁推原因，防止误操作。
-长度限制：2048字节。
+         * 页号，范围是[1,1000]，默认值是1。
+         * @type {number || null}
+         */
+        this.PageNum = null;
+
+        /**
+         * 每页个数，范围是[1,1000]，默认值是20。
+         * @type {number || null}
+         */
+        this.PageSize = null;
+
+        /**
+         * 地域，可选值：Mainland，Oversea，China，Foreign，Global（默认值）；如果为空，查询总的数据；如果为“Mainland”，查询中国大陆的数据；如果为“Oversea”，则查询中国大陆以外的数据；如果为China，查询中国的数据（包括港澳台）；如果为Foreign，查询国外的数据（不包括港澳台）。
          * @type {string || null}
          */
-        this.Reason = null;
+        this.MainlandOrOversea = null;
+
+        /**
+         * 输出字段使用的语言，可选值：Chinese（默认值），English；目前国家，省份和运营商支持多语言。
+         * @type {string || null}
+         */
+        this.OutLanguage = null;
 
     }
 
@@ -2792,11 +2902,14 @@ class ForbidLiveStreamRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.AppName = 'AppName' in params ? params.AppName : null;
-        this.DomainName = 'DomainName' in params ? params.DomainName : null;
-        this.StreamName = 'StreamName' in params ? params.StreamName : null;
-        this.ResumeTime = 'ResumeTime' in params ? params.ResumeTime : null;
-        this.Reason = 'Reason' in params ? params.Reason : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.StatType = 'StatType' in params ? params.StatType : null;
+        this.PlayDomains = 'PlayDomains' in params ? params.PlayDomains : null;
+        this.PageNum = 'PageNum' in params ? params.PageNum : null;
+        this.PageSize = 'PageSize' in params ? params.PageSize : null;
+        this.MainlandOrOversea = 'MainlandOrOversea' in params ? params.MainlandOrOversea : null;
+        this.OutLanguage = 'OutLanguage' in params ? params.OutLanguage : null;
 
     }
 }
@@ -2873,6 +2986,34 @@ class DescribeConcurrentRecordStreamNumResponse extends  AbstractModel {
                 obj.deserialize(params.DataInfoList[z]);
                 this.DataInfoList.push(obj);
             }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifyLiveTranscodeTemplate返回参数结构体
+ * @class
+ */
+class ModifyLiveTranscodeTemplateResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -3540,6 +3681,123 @@ class DeleteLiveRecordResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeScreenShotSheetNumList请求参数结构体
+ * @class
+ */
+class DescribeScreenShotSheetNumListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * utc起始时间，格式为yyyy-mm-ddTHH:MM:SSZ
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * utc结束时间，格式为yyyy-mm-ddTHH:MM:SSZ，支持查询最近1年数据。
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * 地域信息，可选值包括Mainland，Oversea，前者是查询中国大陆范围内的数据，后者是除中国大陆范围之外的数据，若不传该参数，则查询所有地区的数据。
+         * @type {string || null}
+         */
+        this.Zone = null;
+
+        /**
+         * 推流域名（支持查询2019年11 月1日之后的域名维度数据）。
+         * @type {Array.<string> || null}
+         */
+        this.PushDomains = null;
+
+        /**
+         * 数据维度，数据延迟1个半小时，可选值包括：1、Minute（5分钟粒度，最大支持查询时间范围是31天），2、Day（天粒度，默认值，最大支持查询时间范围是186天当天）。
+         * @type {string || null}
+         */
+        this.Granularity = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.Zone = 'Zone' in params ? params.Zone : null;
+        this.PushDomains = 'PushDomains' in params ? params.PushDomains : null;
+        this.Granularity = 'Granularity' in params ? params.Granularity : null;
+
+    }
+}
+
+/**
+ * ForbidLiveStream请求参数结构体
+ * @class
+ */
+class ForbidLiveStreamRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 推流路径，与推流和播放地址中的AppName保持一致，默认为 live。
+         * @type {string || null}
+         */
+        this.AppName = null;
+
+        /**
+         * 您的推流域名。
+         * @type {string || null}
+         */
+        this.DomainName = null;
+
+        /**
+         * 流名称。
+         * @type {string || null}
+         */
+        this.StreamName = null;
+
+        /**
+         * 恢复流的时间。UTC 格式，例如：2018-11-29T19:00:00Z。
+注意：
+1. 默认禁播7天，且最长支持禁播90天。
+2. 北京时间值为 UTC 时间值 + 8 小时，格式按照 ISO 8601 标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#I)。
+         * @type {string || null}
+         */
+        this.ResumeTime = null;
+
+        /**
+         * 禁推原因。
+注明：请务必填写禁推原因，防止误操作。
+长度限制：2048字节。
+         * @type {string || null}
+         */
+        this.Reason = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AppName = 'AppName' in params ? params.AppName : null;
+        this.DomainName = 'DomainName' in params ? params.DomainName : null;
+        this.StreamName = 'StreamName' in params ? params.StreamName : null;
+        this.ResumeTime = 'ResumeTime' in params ? params.ResumeTime : null;
+        this.Reason = 'Reason' in params ? params.Reason : null;
+
+    }
+}
+
+/**
  * DescribeLiveDomains返回参数结构体
  * @class
  */
@@ -4145,42 +4403,18 @@ class ModifyLivePlayDomainResponse extends  AbstractModel {
 }
 
 /**
- * DescribeScreenShotSheetNumList请求参数结构体
+ * CancelCommonMixStream返回参数结构体
  * @class
  */
-class DescribeScreenShotSheetNumListRequest extends  AbstractModel {
+class CancelCommonMixStreamResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * utc起始时间，格式为yyyy-mm-ddTHH:MM:SSZ
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.StartTime = null;
-
-        /**
-         * utc结束时间，格式为yyyy-mm-ddTHH:MM:SSZ，支持查询最近1年数据。
-         * @type {string || null}
-         */
-        this.EndTime = null;
-
-        /**
-         * 地域信息，可选值包括Mainland，Oversea，前者是查询中国大陆范围内的数据，后者是除中国大陆范围之外的数据，若不传该参数，则查询所有地区的数据。
-         * @type {string || null}
-         */
-        this.Zone = null;
-
-        /**
-         * 推流域名（支持查询2019年11 月1日之后的域名维度数据）。
-         * @type {Array.<string> || null}
-         */
-        this.PushDomains = null;
-
-        /**
-         * 数据维度，数据延迟1个半小时，可选值包括：1、Minute（5分钟粒度，最大支持查询时间范围是31天），2、Day（天粒度，默认值，最大支持查询时间范围是186天当天）。
-         * @type {string || null}
-         */
-        this.Granularity = null;
+        this.RequestId = null;
 
     }
 
@@ -4191,11 +4425,7 @@ class DescribeScreenShotSheetNumListRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.StartTime = 'StartTime' in params ? params.StartTime : null;
-        this.EndTime = 'EndTime' in params ? params.EndTime : null;
-        this.Zone = 'Zone' in params ? params.Zone : null;
-        this.PushDomains = 'PushDomains' in params ? params.PushDomains : null;
-        this.Granularity = 'Granularity' in params ? params.Granularity : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -4302,6 +4532,58 @@ class DescribeLiveCertsResponse extends  AbstractModel {
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 通用混流输入参数。
+ * @class
+ */
+class CommonMixInputParam extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 输入流名称。80字节以内，仅含字母、数字以及下划线的字符串。
+         * @type {string || null}
+         */
+        this.InputStreamName = null;
+
+        /**
+         * 输入流布局参数。
+         * @type {CommonMixLayoutParams || null}
+         */
+        this.LayoutParams = null;
+
+        /**
+         * 输入流裁剪参数。
+         * @type {CommonMixCropParams || null}
+         */
+        this.CropParams = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InputStreamName = 'InputStreamName' in params ? params.InputStreamName : null;
+
+        if (params.LayoutParams) {
+            let obj = new CommonMixLayoutParams();
+            obj.deserialize(params.LayoutParams)
+            this.LayoutParams = obj;
+        }
+
+        if (params.CropParams) {
+            let obj = new CommonMixCropParams();
+            obj.deserialize(params.CropParams)
+            this.CropParams = obj;
+        }
 
     }
 }
@@ -4428,12 +4710,18 @@ class DescribeLiveCertRequest extends  AbstractModel {
 }
 
 /**
- * DeleteLiveWatermark返回参数结构体
+ * DescribeLiveCallbackTemplates返回参数结构体
  * @class
  */
-class DeleteLiveWatermarkResponse extends  AbstractModel {
+class DescribeLiveCallbackTemplatesResponse extends  AbstractModel {
     constructor(){
         super();
+
+        /**
+         * 模板信息列表。
+         * @type {Array.<CallBackTemplateInfo> || null}
+         */
+        this.Templates = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -4449,6 +4737,15 @@ class DeleteLiveWatermarkResponse extends  AbstractModel {
     deserialize(params) {
         if (!params) {
             return;
+        }
+
+        if (params.Templates) {
+            this.Templates = new Array();
+            for (let z in params.Templates) {
+                let obj = new CallBackTemplateInfo();
+                obj.deserialize(params.Templates[z]);
+                this.Templates.push(obj);
+            }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -5054,6 +5351,86 @@ class DropLiveStreamRequest extends  AbstractModel {
 }
 
 /**
+ * CreateCommonMixStream请求参数结构体
+ * @class
+ */
+class CreateCommonMixStreamRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 混流会话（申请混流开始到取消混流结束）标识 ID。
+         * @type {string || null}
+         */
+        this.MixStreamSessionId = null;
+
+        /**
+         * 混流输入流列表。
+         * @type {Array.<CommonMixInputParam> || null}
+         */
+        this.InputStreamList = null;
+
+        /**
+         * 混流输出流参数。
+         * @type {CommonMixOutputParams || null}
+         */
+        this.OutputParams = null;
+
+        /**
+         * 输入模板 ID，若设置该参数，将按默认模板布局输出，无需填入自定义位置参数。
+不填默认为0。
+两输入源支持10，20，30，40，50。
+三输入源支持310，390，391。
+四输入源支持410。
+五输入源支持510，590。
+六输入源支持610。
+         * @type {number || null}
+         */
+        this.MixStreamTemplateId = null;
+
+        /**
+         * 混流的特殊控制参数。如无特殊需求，无需填写。
+         * @type {CommonMixControlParams || null}
+         */
+        this.ControlParams = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MixStreamSessionId = 'MixStreamSessionId' in params ? params.MixStreamSessionId : null;
+
+        if (params.InputStreamList) {
+            this.InputStreamList = new Array();
+            for (let z in params.InputStreamList) {
+                let obj = new CommonMixInputParam();
+                obj.deserialize(params.InputStreamList[z]);
+                this.InputStreamList.push(obj);
+            }
+        }
+
+        if (params.OutputParams) {
+            let obj = new CommonMixOutputParams();
+            obj.deserialize(params.OutputParams)
+            this.OutputParams = obj;
+        }
+        this.MixStreamTemplateId = 'MixStreamTemplateId' in params ? params.MixStreamTemplateId : null;
+
+        if (params.ControlParams) {
+            let obj = new CommonMixControlParams();
+            obj.deserialize(params.ControlParams)
+            this.ControlParams = obj;
+        }
+
+    }
+}
+
+/**
  * CreateLiveCert返回参数结构体
  * @class
  */
@@ -5231,18 +5608,94 @@ class PushDataInfo extends  AbstractModel {
 }
 
 /**
- * ModifyLiveCert返回参数结构体
+ * 通用混流布局参数。
  * @class
  */
-class ModifyLiveCertResponse extends  AbstractModel {
+class CommonMixLayoutParams extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * 输入图层。取值范围[1，16]。
+1)背景流（即大主播画面或画布）的 image_layer 填1。
+2)纯音频混流，该参数也需填。
+         * @type {number || null}
+         */
+        this.ImageLayer = null;
+
+        /**
+         * 输入类型。取值范围[0，5]。
+不填默认为0。
+0表示输入流为音视频。
+2表示输入流为图片。
+3表示输入流为画布。 
+4表示输入流为音频。
+5表示输入流为纯视频。
+         * @type {number || null}
+         */
+        this.InputType = null;
+
+        /**
+         * 输入画面在输出时的宽度。取值范围：
+像素：[0，3000]
+百分比：[0.01，0.99]
+不填默认为输入流的宽度。
+使用百分比时，期望输出为（百分比 * 背景宽）。
+         * @type {number || null}
+         */
+        this.ImageWidth = null;
+
+        /**
+         * 输入画面在输出时的高度。取值范围：
+像素：[0，3000]
+百分比：[0.01，0.99]
+不填默认为输入流的高度。
+使用百分比时，期望输出为（百分比 * 背景高）。
+         * @type {number || null}
+         */
+        this.ImageHeight = null;
+
+        /**
+         * 输入在输出画面的X偏移。取值范围：
+像素：[0，3000]
+百分比：[0.01，0.99]
+不填默认为0。
+相对于大主播背景画面左上角的横向偏移。 
+使用百分比时，期望输出为（百分比 * 背景宽）。
+         * @type {number || null}
+         */
+        this.LocationX = null;
+
+        /**
+         * 输入在输出画面的Y偏移。取值范围：
+像素：[0，3000]
+百分比：[0.01，0.99]
+不填默认为0。
+相对于大主播背景画面左上角的纵向偏移。 
+使用百分比时，期望输出为（百分比 * 背景宽）
+         * @type {number || null}
+         */
+        this.LocationY = null;
+
+        /**
+         * 当InputType为3(画布)时，该值表示画布的颜色。
+常用的颜色有：
+红色：0xcc0033。
+黄色：0xcc9900。
+绿色：0xcccc33。
+蓝色：0x99CCFF。
+黑色：0x000000。
+白色：0xFFFFFF。
+灰色：0x999999。
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.Color = null;
+
+        /**
+         * 当InputType为2(图片)时，该值是水印ID。
+         * @type {number || null}
+         */
+        this.WatermarkId = null;
 
     }
 
@@ -5253,7 +5706,14 @@ class ModifyLiveCertResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.ImageLayer = 'ImageLayer' in params ? params.ImageLayer : null;
+        this.InputType = 'InputType' in params ? params.InputType : null;
+        this.ImageWidth = 'ImageWidth' in params ? params.ImageWidth : null;
+        this.ImageHeight = 'ImageHeight' in params ? params.ImageHeight : null;
+        this.LocationX = 'LocationX' in params ? params.LocationX : null;
+        this.LocationY = 'LocationY' in params ? params.LocationY : null;
+        this.Color = 'Color' in params ? params.Color : null;
+        this.WatermarkId = 'WatermarkId' in params ? params.WatermarkId : null;
 
     }
 }
@@ -5866,24 +6326,42 @@ class DescribeLiveCertsRequest extends  AbstractModel {
 }
 
 /**
- * DescribeLiveCert返回参数结构体
+ * 下行播放统计指标
  * @class
  */
-class DescribeLiveCertResponse extends  AbstractModel {
+class CdnPlayStatData extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 证书信息。
-         * @type {CertInfo || null}
-         */
-        this.CertInfo = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * 时间点，格式为yyyy-mm-dd HH:MM:SS。
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.Time = null;
+
+        /**
+         * 带宽，（单位Mbps）。
+         * @type {number || null}
+         */
+        this.Bandwidth = null;
+
+        /**
+         * 流量，（单位MB）。
+         * @type {number || null}
+         */
+        this.Flux = null;
+
+        /**
+         * 新增请求数。
+         * @type {number || null}
+         */
+        this.Request = null;
+
+        /**
+         * 并发连接数。
+         * @type {number || null}
+         */
+        this.Online = null;
 
     }
 
@@ -5894,13 +6372,11 @@ class DescribeLiveCertResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.CertInfo) {
-            let obj = new CertInfo();
-            obj.deserialize(params.CertInfo)
-            this.CertInfo = obj;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.Time = 'Time' in params ? params.Time : null;
+        this.Bandwidth = 'Bandwidth' in params ? params.Bandwidth : null;
+        this.Flux = 'Flux' in params ? params.Flux : null;
+        this.Request = 'Request' in params ? params.Request : null;
+        this.Online = 'Online' in params ? params.Online : null;
 
     }
 }
@@ -7066,10 +7542,10 @@ UTC 格式，例如：2018-06-29T19:00:00Z。
 }
 
 /**
- * ModifyLiveTranscodeTemplate返回参数结构体
+ * ModifyLiveCert返回参数结构体
  * @class
  */
-class ModifyLiveTranscodeTemplateResponse extends  AbstractModel {
+class ModifyLiveCertResponse extends  AbstractModel {
     constructor(){
         super();
 
@@ -7730,6 +8206,34 @@ class DescribeLogDownloadListResponse extends  AbstractModel {
 }
 
 /**
+ * CancelCommonMixStream请求参数结构体
+ * @class
+ */
+class CancelCommonMixStreamRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 混流会话（申请混流开始到取消混流结束）标识 ID。
+         * @type {string || null}
+         */
+        this.MixStreamSessionId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MixStreamSessionId = 'MixStreamSessionId' in params ? params.MixStreamSessionId : null;
+
+    }
+}
+
+/**
  * UpdateLiveWatermark请求参数结构体
  * @class
  */
@@ -8339,63 +8843,19 @@ class ModifyLiveCertRequest extends  AbstractModel {
 }
 
 /**
- * DescribeProIspPlaySumInfoList请求参数结构体
+ * 通用混流控制参数
  * @class
  */
-class DescribeProIspPlaySumInfoListRequest extends  AbstractModel {
+class CommonMixControlParams extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 起始时间，北京时间，
-格式：yyyy-mm-dd HH:MM:SS。
-         * @type {string || null}
-         */
-        this.StartTime = null;
-
-        /**
-         * 结束时间，北京时间，
-格式：yyyy-mm-dd HH:MM:SS。
-注：EndTime 和 StartTime 只支持最近1天的数据查询。
-         * @type {string || null}
-         */
-        this.EndTime = null;
-
-        /**
-         * 统计的类型，可选值：”Province”，”Isp”，“CountryOrArea”。
-         * @type {string || null}
-         */
-        this.StatType = null;
-
-        /**
-         * 不填则为总体数据。
-         * @type {Array.<string> || null}
-         */
-        this.PlayDomains = null;
-
-        /**
-         * 页号，范围是[1,1000]，默认值是1。
+         * 取值范围[0,1]。
+填1时，当参数中图层分辨率参数与视频实际分辨率不一致时，自动从视频中按图层设置的分辨率比例进行裁剪。
          * @type {number || null}
          */
-        this.PageNum = null;
-
-        /**
-         * 每页个数，范围是[1,1000]，默认值是20。
-         * @type {number || null}
-         */
-        this.PageSize = null;
-
-        /**
-         * 地域，可选值：Mainland，Oversea，China，Foreign，Global（默认值）；如果为空，查询总的数据；如果为“Mainland”，查询中国大陆的数据；如果为“Oversea”，则查询中国大陆以外的数据；如果为China，查询中国的数据（包括港澳台）；如果为Foreign，查询国外的数据（不包括港澳台）。
-         * @type {string || null}
-         */
-        this.MainlandOrOversea = null;
-
-        /**
-         * 输出字段使用的语言，可选值：Chinese（默认值），English；目前国家，省份和运营商支持多语言。
-         * @type {string || null}
-         */
-        this.OutLanguage = null;
+        this.UseMixCropCenter = null;
 
     }
 
@@ -8406,14 +8866,7 @@ class DescribeProIspPlaySumInfoListRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.StartTime = 'StartTime' in params ? params.StartTime : null;
-        this.EndTime = 'EndTime' in params ? params.EndTime : null;
-        this.StatType = 'StatType' in params ? params.StatType : null;
-        this.PlayDomains = 'PlayDomains' in params ? params.PlayDomains : null;
-        this.PageNum = 'PageNum' in params ? params.PageNum : null;
-        this.PageSize = 'PageSize' in params ? params.PageSize : null;
-        this.MainlandOrOversea = 'MainlandOrOversea' in params ? params.MainlandOrOversea : null;
-        this.OutLanguage = 'OutLanguage' in params ? params.OutLanguage : null;
+        this.UseMixCropCenter = 'UseMixCropCenter' in params ? params.UseMixCropCenter : null;
 
     }
 }
@@ -10495,6 +10948,34 @@ class DeleteLiveCertResponse extends  AbstractModel {
 }
 
 /**
+ * CreateCommonMixStream返回参数结构体
+ * @class
+ */
+class CreateCommonMixStreamResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * CreateLiveCallbackTemplate返回参数结构体
  * @class
  */
@@ -10716,42 +11197,24 @@ class ModifyLiveSnapshotTemplateRequest extends  AbstractModel {
 }
 
 /**
- * 下行播放统计指标
+ * DescribeLiveCert返回参数结构体
  * @class
  */
-class CdnPlayStatData extends  AbstractModel {
+class DescribeLiveCertResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 时间点，格式为yyyy-mm-dd HH:MM:SS。
+         * 证书信息。
+         * @type {CertInfo || null}
+         */
+        this.CertInfo = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.Time = null;
-
-        /**
-         * 带宽，（单位Mbps）。
-         * @type {number || null}
-         */
-        this.Bandwidth = null;
-
-        /**
-         * 流量，（单位MB）。
-         * @type {number || null}
-         */
-        this.Flux = null;
-
-        /**
-         * 新增请求数。
-         * @type {number || null}
-         */
-        this.Request = null;
-
-        /**
-         * 并发连接数。
-         * @type {number || null}
-         */
-        this.Online = null;
+        this.RequestId = null;
 
     }
 
@@ -10762,11 +11225,13 @@ class CdnPlayStatData extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Time = 'Time' in params ? params.Time : null;
-        this.Bandwidth = 'Bandwidth' in params ? params.Bandwidth : null;
-        this.Flux = 'Flux' in params ? params.Flux : null;
-        this.Request = 'Request' in params ? params.Request : null;
-        this.Online = 'Online' in params ? params.Online : null;
+
+        if (params.CertInfo) {
+            let obj = new CertInfo();
+            obj.deserialize(params.CertInfo)
+            this.CertInfo = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -10873,18 +11338,12 @@ class DescribeLogDownloadListRequest extends  AbstractModel {
 }
 
 /**
- * DescribeLiveCallbackTemplates返回参数结构体
+ * DeleteLiveWatermark返回参数结构体
  * @class
  */
-class DescribeLiveCallbackTemplatesResponse extends  AbstractModel {
+class DeleteLiveWatermarkResponse extends  AbstractModel {
     constructor(){
         super();
-
-        /**
-         * 模板信息列表。
-         * @type {Array.<CallBackTemplateInfo> || null}
-         */
-        this.Templates = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -10900,15 +11359,6 @@ class DescribeLiveCallbackTemplatesResponse extends  AbstractModel {
     deserialize(params) {
         if (!params) {
             return;
-        }
-
-        if (params.Templates) {
-            this.Templates = new Array();
-            for (let z in params.Templates) {
-                let obj = new CallBackTemplateInfo();
-                obj.deserialize(params.Templates[z]);
-                this.Templates.push(obj);
-            }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -11619,6 +12069,55 @@ class DeleteLiveDomainResponse extends  AbstractModel {
 }
 
 /**
+ * 通用混流输入裁剪参数。
+ * @class
+ */
+class CommonMixCropParams extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 裁剪的宽度。取值范围[0，3000]。
+         * @type {number || null}
+         */
+        this.CropWidth = null;
+
+        /**
+         * 裁剪的高度。取值范围[0，3000]。
+         * @type {number || null}
+         */
+        this.CropHeight = null;
+
+        /**
+         * 裁剪的起始X坐标。取值范围[0，3000]。
+         * @type {number || null}
+         */
+        this.CropStartLocationX = null;
+
+        /**
+         * 裁剪的起始Y坐标。取值范围[0，3000]。
+         * @type {number || null}
+         */
+        this.CropStartLocationY = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CropWidth = 'CropWidth' in params ? params.CropWidth : null;
+        this.CropHeight = 'CropHeight' in params ? params.CropHeight : null;
+        this.CropStartLocationX = 'CropStartLocationX' in params ? params.CropStartLocationX : null;
+        this.CropStartLocationY = 'CropStartLocationY' in params ? params.CropStartLocationY : null;
+
+    }
+}
+
+/**
  * CreateLiveRecordTemplate请求参数结构体
  * @class
  */
@@ -11973,6 +12472,7 @@ module.exports = {
     DeleteLiveSnapshotRuleRequest: DeleteLiveSnapshotRuleRequest,
     DescribePlayErrorCodeDetailInfoListRequest: DescribePlayErrorCodeDetailInfoListRequest,
     DescribeBillBandwidthAndFluxListRequest: DescribeBillBandwidthAndFluxListRequest,
+    CommonMixOutputParams: CommonMixOutputParams,
     DescribeLiveSnapshotRulesResponse: DescribeLiveSnapshotRulesResponse,
     DescribeLiveTranscodeDetailInfoResponse: DescribeLiveTranscodeDetailInfoResponse,
     DescribeLiveDomainRequest: DescribeLiveDomainRequest,
@@ -11986,9 +12486,10 @@ module.exports = {
     ModifyLiveDomainCertRequest: ModifyLiveDomainCertRequest,
     StreamOnlineInfo: StreamOnlineInfo,
     CreateLiveWatermarkRuleResponse: CreateLiveWatermarkRuleResponse,
-    ForbidLiveStreamRequest: ForbidLiveStreamRequest,
+    DescribeProIspPlaySumInfoListRequest: DescribeProIspPlaySumInfoListRequest,
     PlayCodeTotalInfo: PlayCodeTotalInfo,
     DescribeConcurrentRecordStreamNumResponse: DescribeConcurrentRecordStreamNumResponse,
+    ModifyLiveTranscodeTemplateResponse: ModifyLiveTranscodeTemplateResponse,
     ModifyLiveRecordTemplateResponse: ModifyLiveRecordTemplateResponse,
     ModifyLivePlayDomainRequest: ModifyLivePlayDomainRequest,
     DeleteLiveRecordTemplateResponse: DeleteLiveRecordTemplateResponse,
@@ -12002,6 +12503,8 @@ module.exports = {
     DescribePlayErrorCodeSumInfoListResponse: DescribePlayErrorCodeSumInfoListResponse,
     UnBindLiveDomainCertRequest: UnBindLiveDomainCertRequest,
     DeleteLiveRecordResponse: DeleteLiveRecordResponse,
+    DescribeScreenShotSheetNumListRequest: DescribeScreenShotSheetNumListRequest,
+    ForbidLiveStreamRequest: ForbidLiveStreamRequest,
     DescribeLiveDomainsResponse: DescribeLiveDomainsResponse,
     TimeValue: TimeValue,
     PullStreamConfig: PullStreamConfig,
@@ -12014,13 +12517,14 @@ module.exports = {
     DayStreamPlayInfo: DayStreamPlayInfo,
     ModifyPullStreamStatusResponse: ModifyPullStreamStatusResponse,
     ModifyLivePlayDomainResponse: ModifyLivePlayDomainResponse,
-    DescribeScreenShotSheetNumListRequest: DescribeScreenShotSheetNumListRequest,
+    CancelCommonMixStreamResponse: CancelCommonMixStreamResponse,
     AddLiveWatermarkRequest: AddLiveWatermarkRequest,
     DescribeLiveCertsResponse: DescribeLiveCertsResponse,
+    CommonMixInputParam: CommonMixInputParam,
     DescribeProvinceIspPlayInfoListResponse: DescribeProvinceIspPlayInfoListResponse,
     DescribeLiveRecordTemplatesResponse: DescribeLiveRecordTemplatesResponse,
     DescribeLiveCertRequest: DescribeLiveCertRequest,
-    DeleteLiveWatermarkResponse: DeleteLiveWatermarkResponse,
+    DescribeLiveCallbackTemplatesResponse: DescribeLiveCallbackTemplatesResponse,
     ModifyLivePlayAuthKeyResponse: ModifyLivePlayAuthKeyResponse,
     CreateLiveCallbackTemplateRequest: CreateLiveCallbackTemplateRequest,
     DescribeTopClientIpSumInfoListResponse: DescribeTopClientIpSumInfoListResponse,
@@ -12034,9 +12538,10 @@ module.exports = {
     CreateLiveTranscodeRuleRequest: CreateLiveTranscodeRuleRequest,
     DescribeLiveWatermarkRulesRequest: DescribeLiveWatermarkRulesRequest,
     DropLiveStreamRequest: DropLiveStreamRequest,
+    CreateCommonMixStreamRequest: CreateCommonMixStreamRequest,
     CreateLiveCertResponse: CreateLiveCertResponse,
     PushDataInfo: PushDataInfo,
-    ModifyLiveCertResponse: ModifyLiveCertResponse,
+    CommonMixLayoutParams: CommonMixLayoutParams,
     DescribeGroupProIspPlayInfoListRequest: DescribeGroupProIspPlayInfoListRequest,
     ModifyPullStreamStatusRequest: ModifyPullStreamStatusRequest,
     DescribeStreamDayPlayInfoListRequest: DescribeStreamDayPlayInfoListRequest,
@@ -12048,7 +12553,7 @@ module.exports = {
     DescribeLivePackageInfoRequest: DescribeLivePackageInfoRequest,
     CreatePullStreamConfigRequest: CreatePullStreamConfigRequest,
     DescribeLiveCertsRequest: DescribeLiveCertsRequest,
-    DescribeLiveCertResponse: DescribeLiveCertResponse,
+    CdnPlayStatData: CdnPlayStatData,
     AddLiveDomainResponse: AddLiveDomainResponse,
     DescribeHttpStatusInfoListRequest: DescribeHttpStatusInfoListRequest,
     ModifyPullStreamConfigResponse: ModifyPullStreamConfigResponse,
@@ -12072,7 +12577,7 @@ module.exports = {
     CreateLiveCallbackRuleRequest: CreateLiveCallbackRuleRequest,
     DeleteLiveWatermarkRuleResponse: DeleteLiveWatermarkRuleResponse,
     PublishTime: PublishTime,
-    ModifyLiveTranscodeTemplateResponse: ModifyLiveTranscodeTemplateResponse,
+    ModifyLiveCertResponse: ModifyLiveCertResponse,
     DescribeLiveTranscodeDetailInfoRequest: DescribeLiveTranscodeDetailInfoRequest,
     ProIspPlayCodeDataInfo: ProIspPlayCodeDataInfo,
     DeleteLiveWatermarkRequest: DeleteLiveWatermarkRequest,
@@ -12084,6 +12589,7 @@ module.exports = {
     ForbidLiveStreamResponse: ForbidLiveStreamResponse,
     DescribeLiveSnapshotTemplatesResponse: DescribeLiveSnapshotTemplatesResponse,
     DescribeLogDownloadListResponse: DescribeLogDownloadListResponse,
+    CancelCommonMixStreamRequest: CancelCommonMixStreamRequest,
     UpdateLiveWatermarkRequest: UpdateLiveWatermarkRequest,
     CertInfo: CertInfo,
     ModifyLivePushAuthKeyResponse: ModifyLivePushAuthKeyResponse,
@@ -12096,7 +12602,7 @@ module.exports = {
     DescribeConcurrentRecordStreamNumRequest: DescribeConcurrentRecordStreamNumRequest,
     DescribePlayErrorCodeSumInfoListRequest: DescribePlayErrorCodeSumInfoListRequest,
     ModifyLiveCertRequest: ModifyLiveCertRequest,
-    DescribeProIspPlaySumInfoListRequest: DescribeProIspPlaySumInfoListRequest,
+    CommonMixControlParams: CommonMixControlParams,
     UnBindLiveDomainCertResponse: UnBindLiveDomainCertResponse,
     ForbidLiveDomainRequest: ForbidLiveDomainRequest,
     DescribeLiveRecordRulesRequest: DescribeLiveRecordRulesRequest,
@@ -12140,16 +12646,17 @@ module.exports = {
     DeleteLiveSnapshotTemplateResponse: DeleteLiveSnapshotTemplateResponse,
     ModifyLiveCallbackTemplateRequest: ModifyLiveCallbackTemplateRequest,
     DeleteLiveCertResponse: DeleteLiveCertResponse,
+    CreateCommonMixStreamResponse: CreateCommonMixStreamResponse,
     CreateLiveCallbackTemplateResponse: CreateLiveCallbackTemplateResponse,
     DescribeLivePushAuthKeyRequest: DescribeLivePushAuthKeyRequest,
     PlayStatInfo: PlayStatInfo,
     DescribeLiveCallbackTemplateRequest: DescribeLiveCallbackTemplateRequest,
     ModifyLiveSnapshotTemplateRequest: ModifyLiveSnapshotTemplateRequest,
-    CdnPlayStatData: CdnPlayStatData,
+    DescribeLiveCertResponse: DescribeLiveCertResponse,
     CreateLiveRecordRuleResponse: CreateLiveRecordRuleResponse,
     DescribeLiveTranscodeTemplateRequest: DescribeLiveTranscodeTemplateRequest,
     DescribeLogDownloadListRequest: DescribeLogDownloadListRequest,
-    DescribeLiveCallbackTemplatesResponse: DescribeLiveCallbackTemplatesResponse,
+    DeleteLiveWatermarkResponse: DeleteLiveWatermarkResponse,
     DescribeLivePushAuthKeyResponse: DescribeLivePushAuthKeyResponse,
     CreateLiveWatermarkRuleRequest: CreateLiveWatermarkRuleRequest,
     DescribeLiveRecordTemplatesRequest: DescribeLiveRecordTemplatesRequest,
@@ -12166,6 +12673,7 @@ module.exports = {
     ResumeDelayLiveStreamResponse: ResumeDelayLiveStreamResponse,
     GroupProIspDataInfo: GroupProIspDataInfo,
     DeleteLiveDomainResponse: DeleteLiveDomainResponse,
+    CommonMixCropParams: CommonMixCropParams,
     CreateLiveRecordTemplateRequest: CreateLiveRecordTemplateRequest,
     DescribeProIspPlaySumInfoListResponse: DescribeProIspPlaySumInfoListResponse,
     DeleteLiveCertRequest: DeleteLiveCertRequest,
