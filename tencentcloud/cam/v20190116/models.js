@@ -2838,34 +2838,6 @@ class AddUserToGroupResponse extends  AbstractModel {
 }
 
 /**
- * UpdatePolicy返回参数结构体
- * @class
- */
-class UpdatePolicyResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
  * CreateGroup请求参数结构体
  * @class
  */
@@ -4178,55 +4150,6 @@ class ListAttachedUserPoliciesRequest extends  AbstractModel {
 }
 
 /**
- * UpdatePolicy请求参数结构体
- * @class
- */
-class UpdatePolicyRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 策略ID
-         * @type {number || null}
-         */
-        this.PolicyId = null;
-
-        /**
-         * 策略名
-         * @type {string || null}
-         */
-        this.PolicyName = null;
-
-        /**
-         * 策略描述
-         * @type {string || null}
-         */
-        this.Description = null;
-
-        /**
-         * 策略文档，示例：{"version":"2.0","statement":[{"action":"name/sts:AssumeRole","effect":"allow","principal":{"service":["cloudaudit.cloud.tencent.com","cls.cloud.tencent.com"]}}]}，principal用于指定角色的授权对象。获取该参数可参阅 获取角色详情（https://cloud.tencent.com/document/product/598/36221） 输出参数RoleInfo
-         * @type {string || null}
-         */
-        this.PolicyDocument = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.PolicyId = 'PolicyId' in params ? params.PolicyId : null;
-        this.PolicyName = 'PolicyName' in params ? params.PolicyName : null;
-        this.Description = 'Description' in params ? params.Description : null;
-        this.PolicyDocument = 'PolicyDocument' in params ? params.PolicyDocument : null;
-
-    }
-}
-
-/**
  * 用户组用户信息
  * @class
  */
@@ -4423,7 +4346,6 @@ module.exports = {
     DeleteSAMLProviderResponse: DeleteSAMLProviderResponse,
     UpdateUserResponse: UpdateUserResponse,
     AddUserToGroupResponse: AddUserToGroupResponse,
-    UpdatePolicyResponse: UpdatePolicyResponse,
     CreateGroupRequest: CreateGroupRequest,
     UpdateGroupResponse: UpdateGroupResponse,
     ListEntitiesForPolicyRequest: ListEntitiesForPolicyRequest,
@@ -4455,7 +4377,6 @@ module.exports = {
     ListUsersRequest: ListUsersRequest,
     AttachUserPolicyResponse: AttachUserPolicyResponse,
     ListAttachedUserPoliciesRequest: ListAttachedUserPoliciesRequest,
-    UpdatePolicyRequest: UpdatePolicyRequest,
     GroupMemberInfo: GroupMemberInfo,
     CreateGroupResponse: CreateGroupResponse,
 

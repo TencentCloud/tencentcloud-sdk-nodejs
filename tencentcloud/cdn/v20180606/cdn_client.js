@@ -156,6 +156,7 @@ const ListTopDataResponse = models.ListTopDataResponse;
 const MaxAge = models.MaxAge;
 const UpdateDomainConfigResponse = models.UpdateDomainConfigResponse;
 const LogSetInfo = models.LogSetInfo;
+const SecurityConfig = models.SecurityConfig;
 const SearchClsLogRequest = models.SearchClsLogRequest;
 const UpdateDomainConfigRequest = models.UpdateDomainConfigRequest;
 const AwsPrivateAccess = models.AwsPrivateAccess;

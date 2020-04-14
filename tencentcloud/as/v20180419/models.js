@@ -2744,7 +2744,7 @@ class CreateNotificationConfigurationRequest extends  AbstractModel {
         this.NotificationTypes = null;
 
         /**
-         * 通知组ID，即为用户组ID集合，用户组ID可以通过[DescribeUserGroup](https://cloud.tencent.com/document/api/378/4404)查询。
+         * 通知组ID，即为用户组ID集合，用户组ID可以通过[ListGroups](https://cloud.tencent.com/document/product/598/34589)查询。
          * @type {Array.<string> || null}
          */
         this.NotificationUserGroupIds = null;
@@ -2842,7 +2842,7 @@ class ModifyNotificationConfigurationRequest extends  AbstractModel {
         this.NotificationTypes = null;
 
         /**
-         * 通知组ID，即为用户组ID集合，用户组ID可以通过[DescribeUserGroup](https://cloud.tencent.com/document/api/378/4404)查询。
+         * 通知组ID，即为用户组ID集合，用户组ID可以通过[ListGroups](https://cloud.tencent.com/document/product/598/34589)查询。
          * @type {Array.<string> || null}
          */
         this.NotificationUserGroupIds = null;
@@ -2992,7 +2992,7 @@ class ModifyScalingPolicyRequest extends  AbstractModel {
         this.MetricAlarm = null;
 
         /**
-         * 通知组ID，即为用户组ID集合，用户组ID可以通过[DescribeUserGroup](https://cloud.tencent.com/document/api/378/4404)查询。
+         * 通知组ID，即为用户组ID集合，用户组ID可以通过[ListGroups](https://cloud.tencent.com/document/product/598/34589)查询。
 如果需要清空通知用户组，需要在列表中传入特定字符串 "NULL"。
          * @type {Array.<string> || null}
          */
@@ -5296,7 +5296,7 @@ class CreateScalingPolicyRequest extends  AbstractModel {
         this.Cooldown = null;
 
         /**
-         * 通知组ID，即为用户组ID集合，用户组ID可以通过[DescribeUserGroup](https://cloud.tencent.com/document/api/378/4404)查询。
+         * 通知组ID，即为用户组ID集合，用户组ID可以通过[ListGroups](https://cloud.tencent.com/document/product/598/34589)查询。
          * @type {Array.<string> || null}
          */
         this.NotificationUserGroupIds = null;

@@ -424,6 +424,13 @@ class ListVersionByFunctionResponse extends  AbstractModel {
         this.Versions = null;
 
         /**
+         * 函数版本总数。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -448,6 +455,7 @@ class ListVersionByFunctionResponse extends  AbstractModel {
                 this.Versions.push(obj);
             }
         }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -1294,16 +1302,40 @@ class ListVersionByFunctionRequest extends  AbstractModel {
         super();
 
         /**
-         * 函数ID
+         * 函数名
          * @type {string || null}
          */
         this.FunctionName = null;
 
         /**
-         * 命名空间
+         * 函数所在命名空间
          * @type {string || null}
          */
         this.Namespace = null;
+
+        /**
+         * 数据偏移量，默认值为 0
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 返回数据长度，默认值为 20
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 以升序还是降序的方式返回结果，可选值 ASC 和 DESC
+         * @type {string || null}
+         */
+        this.Order = null;
+
+        /**
+         * 根据哪个字段进行返回结果排序,支持以下字段：AddTime, ModTime
+         * @type {string || null}
+         */
+        this.OrderBy = null;
 
     }
 
@@ -1316,6 +1348,10 @@ class ListVersionByFunctionRequest extends  AbstractModel {
         }
         this.FunctionName = 'FunctionName' in params ? params.FunctionName : null;
         this.Namespace = 'Namespace' in params ? params.Namespace : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Order = 'Order' in params ? params.Order : null;
+        this.OrderBy = 'OrderBy' in params ? params.OrderBy : null;
 
     }
 }
