@@ -108,6 +108,34 @@ class AlgorithmInfo extends  AbstractModel {
 }
 
 /**
+ * EnableWhiteBoxKeys返回参数结构体
+ * @class
+ */
+class EnableWhiteBoxKeysResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * UpdateAlias请求参数结构体
  * @class
  */
@@ -143,36 +171,18 @@ class UpdateAliasRequest extends  AbstractModel {
 }
 
 /**
- * ReEncrypt请求参数结构体
+ * DisableWhiteBoxKey请求参数结构体
  * @class
  */
-class ReEncryptRequest extends  AbstractModel {
+class DisableWhiteBoxKeyRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 需要重新加密的密文
+         * 白盒密钥的全局唯一标识符
          * @type {string || null}
          */
-        this.CiphertextBlob = null;
-
-        /**
-         * 重新加密使用的CMK，如果为空，则使用密文原有的CMK重新加密（若密钥没有轮换则密文不会刷新）
-         * @type {string || null}
-         */
-        this.DestinationKeyId = null;
-
-        /**
-         * CiphertextBlob 密文加密时使用的key/value对的json字符串。如果加密时未使用，则为空
-         * @type {string || null}
-         */
-        this.SourceEncryptionContext = null;
-
-        /**
-         * 重新加密使用的key/value对的json字符串，如果使用该字段，则返回的新密文在解密时需要填入相同的字符串
-         * @type {string || null}
-         */
-        this.DestinationEncryptionContext = null;
+        this.KeyId = null;
 
     }
 
@@ -183,10 +193,98 @@ class ReEncryptRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.CiphertextBlob = 'CiphertextBlob' in params ? params.CiphertextBlob : null;
-        this.DestinationKeyId = 'DestinationKeyId' in params ? params.DestinationKeyId : null;
-        this.SourceEncryptionContext = 'SourceEncryptionContext' in params ? params.SourceEncryptionContext : null;
-        this.DestinationEncryptionContext = 'DestinationEncryptionContext' in params ? params.DestinationEncryptionContext : null;
+        this.KeyId = 'KeyId' in params ? params.KeyId : null;
+
+    }
+}
+
+/**
+ * 白盒密钥信息
+ * @class
+ */
+class WhiteboxKeyInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 白盒密钥的全局唯一标识符
+         * @type {string || null}
+         */
+        this.KeyId = null;
+
+        /**
+         * 作为密钥更容易辨识，更容易被人看懂的别名， 不可为空，1-60个字母数字 - _ 的组合，首字符必须为字母或者数字. 不可重复
+         * @type {string || null}
+         */
+        this.Alias = null;
+
+        /**
+         * 创建者
+         * @type {number || null}
+         */
+        this.CreatorUin = null;
+
+        /**
+         * 密钥的描述信息
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * 密钥创建时间，Unix时间戳
+         * @type {number || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * 白盒密钥的状态， 取值为：Enabled | Disabled
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * 创建者
+         * @type {number || null}
+         */
+        this.OwnerUin = null;
+
+        /**
+         * 密钥所用的算法类型
+         * @type {string || null}
+         */
+        this.Algorithm = null;
+
+        /**
+         * 白盒加密密钥，base64编码
+         * @type {string || null}
+         */
+        this.EncryptKey = null;
+
+        /**
+         * 白盒解密密钥，base64编码
+         * @type {string || null}
+         */
+        this.DecryptKey = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.KeyId = 'KeyId' in params ? params.KeyId : null;
+        this.Alias = 'Alias' in params ? params.Alias : null;
+        this.CreatorUin = 'CreatorUin' in params ? params.CreatorUin : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.OwnerUin = 'OwnerUin' in params ? params.OwnerUin : null;
+        this.Algorithm = 'Algorithm' in params ? params.Algorithm : null;
+        this.EncryptKey = 'EncryptKey' in params ? params.EncryptKey : null;
+        this.DecryptKey = 'DecryptKey' in params ? params.DecryptKey : null;
 
     }
 }
@@ -236,6 +334,34 @@ class GenerateDataKeyRequest extends  AbstractModel {
         this.KeySpec = 'KeySpec' in params ? params.KeySpec : null;
         this.NumberOfBytes = 'NumberOfBytes' in params ? params.NumberOfBytes : null;
         this.EncryptionContext = 'EncryptionContext' in params ? params.EncryptionContext : null;
+
+    }
+}
+
+/**
+ * EnableWhiteBoxKey请求参数结构体
+ * @class
+ */
+class EnableWhiteBoxKeyRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 白盒密钥的全局唯一标识符
+         * @type {string || null}
+         */
+        this.KeyId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.KeyId = 'KeyId' in params ? params.KeyId : null;
 
     }
 }
@@ -332,6 +458,48 @@ class AsymmetricRsaDecryptRequest extends  AbstractModel {
 }
 
 /**
+ * CreateWhiteBoxKey请求参数结构体
+ * @class
+ */
+class CreateWhiteBoxKeyRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 作为密钥更容易辨识，更容易被人看懂的别名， 不可为空，1-60个字母数字 - _ 的组合，首字符必须为字母或者数字。Alias不可重复。
+         * @type {string || null}
+         */
+        this.Alias = null;
+
+        /**
+         * 创建密钥所有的算法类型，支持的取值：AES_256,SM4
+         * @type {string || null}
+         */
+        this.Algorithm = null;
+
+        /**
+         * 密钥的描述，最大1024字节
+         * @type {string || null}
+         */
+        this.Description = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Alias = 'Alias' in params ? params.Alias : null;
+        this.Algorithm = 'Algorithm' in params ? params.Algorithm : null;
+        this.Description = 'Description' in params ? params.Description : null;
+
+    }
+}
+
+/**
  * EnableKeyRotation请求参数结构体
  * @class
  */
@@ -388,6 +556,49 @@ class EnableKeyRotationResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeWhiteBoxKeyDetails返回参数结构体
+ * @class
+ */
+class DescribeWhiteBoxKeyDetailsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 白盒密钥信息列表
+         * @type {Array.<WhiteboxKeyInfo> || null}
+         */
+        this.KeyInfos = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.KeyInfos) {
+            this.KeyInfos = new Array();
+            for (let z in params.KeyInfos) {
+                let obj = new WhiteboxKeyInfo();
+                obj.deserialize(params.KeyInfos[z]);
+                this.KeyInfos.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * CreateKey请求参数结构体
  * @class
  */
@@ -437,6 +648,41 @@ class CreateKeyRequest extends  AbstractModel {
 }
 
 /**
+ * UpdateKeyDescription请求参数结构体
+ * @class
+ */
+class UpdateKeyDescriptionRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 新的描述信息，最大支持1024字节
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * 需要修改描述信息的CMK ID
+         * @type {string || null}
+         */
+        this.KeyId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Description = 'Description' in params ? params.Description : null;
+        this.KeyId = 'KeyId' in params ? params.KeyId : null;
+
+    }
+}
+
+/**
  * EnableKeys返回参数结构体
  * @class
  */
@@ -465,6 +711,127 @@ class EnableKeysResponse extends  AbstractModel {
 }
 
 /**
+ * ListKeys返回参数结构体
+ * @class
+ */
+class ListKeysResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * CMK列表数组
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<Key> || null}
+         */
+        this.Keys = null;
+
+        /**
+         * CMK的总数量
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Keys) {
+            this.Keys = new Array();
+            for (let z in params.Keys) {
+                let obj = new Key();
+                obj.deserialize(params.Keys[z]);
+                this.Keys.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DisableWhiteBoxKey返回参数结构体
+ * @class
+ */
+class DisableWhiteBoxKeyResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Encrypt请求参数结构体
+ * @class
+ */
+class EncryptRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 调用CreateKey生成的CMK全局唯一标识符
+         * @type {string || null}
+         */
+        this.KeyId = null;
+
+        /**
+         * 被加密的明文数据，该字段必须使用base64编码，原文最大长度支持4K
+         * @type {string || null}
+         */
+        this.Plaintext = null;
+
+        /**
+         * key/value对的json字符串，如果指定了该参数，则在调用Decrypt API时需要提供同样的参数，最大支持1024个字符
+         * @type {string || null}
+         */
+        this.EncryptionContext = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.KeyId = 'KeyId' in params ? params.KeyId : null;
+        this.Plaintext = 'Plaintext' in params ? params.Plaintext : null;
+        this.EncryptionContext = 'EncryptionContext' in params ? params.EncryptionContext : null;
+
+    }
+}
+
+/**
  * DisableKey返回参数结构体
  * @class
  */
@@ -488,6 +855,34 @@ class DisableKeyResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeWhiteBoxKey请求参数结构体
+ * @class
+ */
+class DescribeWhiteBoxKeyRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 白盒密钥的全局唯一标识符
+         * @type {string || null}
+         */
+        this.KeyId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.KeyId = 'KeyId' in params ? params.KeyId : null;
 
     }
 }
@@ -530,6 +925,34 @@ class GetParametersForImportRequest extends  AbstractModel {
         this.KeyId = 'KeyId' in params ? params.KeyId : null;
         this.WrappingAlgorithm = 'WrappingAlgorithm' in params ? params.WrappingAlgorithm : null;
         this.WrappingKeySpec = 'WrappingKeySpec' in params ? params.WrappingKeySpec : null;
+
+    }
+}
+
+/**
+ * DisableWhiteBoxKeys返回参数结构体
+ * @class
+ */
+class DisableWhiteBoxKeysResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -690,6 +1113,27 @@ class ReEncryptResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeWhiteBoxServiceStatus请求参数结构体
+ * @class
+ */
+class DescribeWhiteBoxServiceStatusRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+    }
+}
+
+/**
  * DescribeKey请求参数结构体
  * @class
  */
@@ -741,6 +1185,48 @@ class CancelKeyDeletionRequest extends  AbstractModel {
             return;
         }
         this.KeyId = 'KeyId' in params ? params.KeyId : null;
+
+    }
+}
+
+/**
+ * EncryptByWhiteBox请求参数结构体
+ * @class
+ */
+class EncryptByWhiteBoxRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 白盒密钥的全局唯一标识符
+         * @type {string || null}
+         */
+        this.KeyId = null;
+
+        /**
+         * 待加密的文本， base64编码，文本的原始长度最大不超过4KB
+         * @type {string || null}
+         */
+        this.PlainText = null;
+
+        /**
+         * 初始化向量，大小为 16 Bytes，加密算法会使用到, base64编码；如果不传，则由后端服务随机生成。用户需要自行保存该值，作为解密的参数。
+         * @type {string || null}
+         */
+        this.InitializationVector = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.KeyId = 'KeyId' in params ? params.KeyId : null;
+        this.PlainText = 'PlainText' in params ? params.PlainText : null;
+        this.InitializationVector = 'InitializationVector' in params ? params.InitializationVector : null;
 
     }
 }
@@ -916,47 +1402,18 @@ class EnableKeyResponse extends  AbstractModel {
 }
 
 /**
- * ScheduleKeyDeletion请求参数结构体
+ * GenerateRandom返回参数结构体
  * @class
  */
-class ScheduleKeyDeletionRequest extends  AbstractModel {
+class GenerateRandomResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * CMK的唯一标志
+         * 生成的随机数的明文，该明文使用base64编码，用户需要使用base64解码得到明文。
          * @type {string || null}
          */
-        this.KeyId = null;
-
-        /**
-         * 计划删除时间区间[7,30]
-         * @type {number || null}
-         */
-        this.PendingWindowInDays = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.KeyId = 'KeyId' in params ? params.KeyId : null;
-        this.PendingWindowInDays = 'PendingWindowInDays' in params ? params.PendingWindowInDays : null;
-
-    }
-}
-
-/**
- * DisableKeys返回参数结构体
- * @class
- */
-class DisableKeysResponse extends  AbstractModel {
-    constructor(){
-        super();
+        this.Plaintext = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -973,6 +1430,42 @@ class DisableKeysResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.Plaintext = 'Plaintext' in params ? params.Plaintext : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeWhiteBoxDecryptKey返回参数结构体
+ * @class
+ */
+class DescribeWhiteBoxDecryptKeyResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 白盒解密密钥，base64编码
+         * @type {string || null}
+         */
+        this.DecryptKey = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DecryptKey = 'DecryptKey' in params ? params.DecryptKey : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -1028,6 +1521,34 @@ class ImportKeyMaterialRequest extends  AbstractModel {
 }
 
 /**
+ * EnableKey请求参数结构体
+ * @class
+ */
+class EnableKeyRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * CMK唯一标识符
+         * @type {string || null}
+         */
+        this.KeyId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.KeyId = 'KeyId' in params ? params.KeyId : null;
+
+    }
+}
+
+/**
  * GetKeyRotationStatus返回参数结构体
  * @class
  */
@@ -1063,48 +1584,6 @@ class GetKeyRotationStatusResponse extends  AbstractModel {
 }
 
 /**
- * AsymmetricRsaDecrypt返回参数结构体
- * @class
- */
-class AsymmetricRsaDecryptResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * CMK的唯一标识
-         * @type {string || null}
-         */
-        this.KeyId = null;
-
-        /**
-         * 解密后的明文，base64编码
-         * @type {string || null}
-         */
-        this.Plaintext = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.KeyId = 'KeyId' in params ? params.KeyId : null;
-        this.Plaintext = 'Plaintext' in params ? params.Plaintext : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
  * ImportKeyMaterial返回参数结构体
  * @class
  */
@@ -1133,30 +1612,18 @@ class ImportKeyMaterialResponse extends  AbstractModel {
 }
 
 /**
- * Encrypt请求参数结构体
+ * DisableKey请求参数结构体
  * @class
  */
-class EncryptRequest extends  AbstractModel {
+class DisableKeyRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 调用CreateKey生成的CMK全局唯一标识符
+         * CMK唯一标识符
          * @type {string || null}
          */
         this.KeyId = null;
-
-        /**
-         * 被加密的明文数据，该字段必须使用base64编码，原文最大长度支持4K
-         * @type {string || null}
-         */
-        this.Plaintext = null;
-
-        /**
-         * key/value对的json字符串，如果指定了该参数，则在调用Decrypt API时需要提供同样的参数，最大支持1024个字符
-         * @type {string || null}
-         */
-        this.EncryptionContext = null;
 
     }
 
@@ -1168,8 +1635,109 @@ class EncryptRequest extends  AbstractModel {
             return;
         }
         this.KeyId = 'KeyId' in params ? params.KeyId : null;
-        this.Plaintext = 'Plaintext' in params ? params.Plaintext : null;
-        this.EncryptionContext = 'EncryptionContext' in params ? params.EncryptionContext : null;
+
+    }
+}
+
+/**
+ * DescribeWhiteBoxKey返回参数结构体
+ * @class
+ */
+class DescribeWhiteBoxKeyResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 白盒密钥信息
+         * @type {WhiteboxKeyInfo || null}
+         */
+        this.KeyInfo = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.KeyInfo) {
+            let obj = new WhiteboxKeyInfo();
+            obj.deserialize(params.KeyInfo)
+            this.KeyInfo = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * GetKeyRotationStatus请求参数结构体
+ * @class
+ */
+class GetKeyRotationStatusRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * CMK唯一标识符
+         * @type {string || null}
+         */
+        this.KeyId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.KeyId = 'KeyId' in params ? params.KeyId : null;
+
+    }
+}
+
+/**
+ * DescribeWhiteBoxServiceStatus返回参数结构体
+ * @class
+ */
+class DescribeWhiteBoxServiceStatusResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 用户的白盒密钥服务是否可用
+         * @type {boolean || null}
+         */
+        this.ServiceEnabled = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ServiceEnabled = 'ServiceEnabled' in params ? params.ServiceEnabled : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1252,18 +1820,18 @@ class DecryptResponse extends  AbstractModel {
 }
 
 /**
- * EnableKey请求参数结构体
+ * DeleteWhiteBoxKey返回参数结构体
  * @class
  */
-class EnableKeyRequest extends  AbstractModel {
+class DeleteWhiteBoxKeyResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * CMK唯一标识符
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.KeyId = null;
+        this.RequestId = null;
 
     }
 
@@ -1274,24 +1842,31 @@ class EnableKeyRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.KeyId = 'KeyId' in params ? params.KeyId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
 
 /**
- * GetKeyRotationStatus请求参数结构体
+ * DescribeKey返回参数结构体
  * @class
  */
-class GetKeyRotationStatusRequest extends  AbstractModel {
+class DescribeKeyResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * CMK唯一标识符
+         * 密钥属性信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {KeyMetadata || null}
+         */
+        this.KeyMetadata = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.KeyId = null;
+        this.RequestId = null;
 
     }
 
@@ -1302,7 +1877,83 @@ class GetKeyRotationStatusRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.KeyId = 'KeyId' in params ? params.KeyId : null;
+
+        if (params.KeyMetadata) {
+            let obj = new KeyMetadata();
+            obj.deserialize(params.KeyMetadata)
+            this.KeyMetadata = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * EnableWhiteBoxKeys请求参数结构体
+ * @class
+ */
+class EnableWhiteBoxKeysRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 白盒密钥的全局唯一标识符列表。注意：要确保所有提供的KeyId是格式有效的，没有重复，个数不超过50个，并且都是有效存在的。
+         * @type {Array.<string> || null}
+         */
+        this.KeyIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.KeyIds = 'KeyIds' in params ? params.KeyIds : null;
+
+    }
+}
+
+/**
+ * EncryptByWhiteBox返回参数结构体
+ * @class
+ */
+class EncryptByWhiteBoxResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 初始化向量，加密算法会使用到, base64编码。如果由调用方在入参中传入，则原样返回。如果调用方没有传入，则后端服务随机生成，并返回
+         * @type {string || null}
+         */
+        this.InitializationVector = null;
+
+        /**
+         * 加密后的密文，base64编码
+         * @type {string || null}
+         */
+        this.CipherText = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InitializationVector = 'InitializationVector' in params ? params.InitializationVector : null;
+        this.CipherText = 'CipherText' in params ? params.CipherText : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1388,6 +2039,34 @@ class DescribeKeysResponse extends  AbstractModel {
                 obj.deserialize(params.KeyMetadatas[z]);
                 this.KeyMetadatas.push(obj);
             }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * EnableWhiteBoxKey返回参数结构体
+ * @class
+ */
+class EnableWhiteBoxKeyResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -1572,25 +2251,52 @@ class ListKeysRequest extends  AbstractModel {
 }
 
 /**
- * ListKeys返回参数结构体
+ * DescribeWhiteBoxDecryptKey请求参数结构体
  * @class
  */
-class ListKeysResponse extends  AbstractModel {
+class DescribeWhiteBoxDecryptKeyRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * CMK列表数组
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {Array.<Key> || null}
+         * 白盒密钥的全局唯一标识符
+         * @type {string || null}
          */
-        this.Keys = null;
+        this.KeyId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.KeyId = 'KeyId' in params ? params.KeyId : null;
+
+    }
+}
+
+/**
+ * Encrypt返回参数结构体
+ * @class
+ */
+class EncryptResponse extends  AbstractModel {
+    constructor(){
+        super();
 
         /**
-         * CMK的总数量
-         * @type {number || null}
+         * 加密后经过base64编码的密文
+         * @type {string || null}
          */
-        this.TotalCount = null;
+        this.CiphertextBlob = null;
+
+        /**
+         * 加密使用的CMK的全局唯一标识
+         * @type {string || null}
+         */
+        this.KeyId = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1607,16 +2313,155 @@ class ListKeysResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.CiphertextBlob = 'CiphertextBlob' in params ? params.CiphertextBlob : null;
+        this.KeyId = 'KeyId' in params ? params.KeyId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
-        if (params.Keys) {
-            this.Keys = new Array();
-            for (let z in params.Keys) {
-                let obj = new Key();
-                obj.deserialize(params.Keys[z]);
-                this.Keys.push(obj);
-            }
+    }
+}
+
+/**
+ * AsymmetricSm2Decrypt返回参数结构体
+ * @class
+ */
+class AsymmetricSm2DecryptResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * CMK的唯一标识
+         * @type {string || null}
+         */
+        this.KeyId = null;
+
+        /**
+         * 解密后的明文，base64编码
+         * @type {string || null}
+         */
+        this.Plaintext = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
         }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.KeyId = 'KeyId' in params ? params.KeyId : null;
+        this.Plaintext = 'Plaintext' in params ? params.Plaintext : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DisableKeyRotation返回参数结构体
+ * @class
+ */
+class DisableKeyRotationResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ListAlgorithms请求参数结构体
+ * @class
+ */
+class ListAlgorithmsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+    }
+}
+
+/**
+ * DisableKeys返回参数结构体
+ * @class
+ */
+class DisableKeysResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * UpdateAlias返回参数结构体
+ * @class
+ */
+class UpdateAliasResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -1745,30 +2590,18 @@ class KeyMetadata extends  AbstractModel {
 }
 
 /**
- * AsymmetricSm2Decrypt返回参数结构体
+ * DisableWhiteBoxKeys请求参数结构体
  * @class
  */
-class AsymmetricSm2DecryptResponse extends  AbstractModel {
+class DisableWhiteBoxKeysRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * CMK的唯一标识
-         * @type {string || null}
+         * 白盒密钥的全局唯一标识符列表。注意：要确保所有提供的KeyId是格式有效的，没有重复，个数不超过50个，并且都是有效存在的。
+         * @type {Array.<string> || null}
          */
-        this.KeyId = null;
-
-        /**
-         * 解密后的明文，base64编码
-         * @type {string || null}
-         */
-        this.Plaintext = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
+        this.KeyIds = null;
 
     }
 
@@ -1779,86 +2612,7 @@ class AsymmetricSm2DecryptResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.KeyId = 'KeyId' in params ? params.KeyId : null;
-        this.Plaintext = 'Plaintext' in params ? params.Plaintext : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * DisableKeyRotation返回参数结构体
- * @class
- */
-class DisableKeyRotationResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * ListAlgorithms请求参数结构体
- * @class
- */
-class ListAlgorithmsRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-    }
-}
-
-/**
- * UpdateAlias返回参数结构体
- * @class
- */
-class UpdateAliasResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.KeyIds = 'KeyIds' in params ? params.KeyIds : null;
 
     }
 }
@@ -2074,24 +2828,18 @@ class ListKeyDetailRequest extends  AbstractModel {
 }
 
 /**
- * UpdateKeyDescription请求参数结构体
+ * DescribeWhiteBoxKeyDetails请求参数结构体
  * @class
  */
-class UpdateKeyDescriptionRequest extends  AbstractModel {
+class DescribeWhiteBoxKeyDetailsRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 新的描述信息，最大支持1024字节
-         * @type {string || null}
+         * 过滤条件：密钥的状态，0：disabled，1：enabled
+         * @type {number || null}
          */
-        this.Description = null;
-
-        /**
-         * 需要修改描述信息的CMK ID
-         * @type {string || null}
-         */
-        this.KeyId = null;
+        this.KeyStatus = null;
 
     }
 
@@ -2102,36 +2850,7 @@ class UpdateKeyDescriptionRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Description = 'Description' in params ? params.Description : null;
-        this.KeyId = 'KeyId' in params ? params.KeyId : null;
-
-    }
-}
-
-/**
- * DisableKey请求参数结构体
- * @class
- */
-class DisableKeyRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * CMK唯一标识符
-         * @type {string || null}
-         */
-        this.KeyId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.KeyId = 'KeyId' in params ? params.KeyId : null;
+        this.KeyStatus = 'KeyStatus' in params ? params.KeyStatus : null;
 
     }
 }
@@ -2165,24 +2884,24 @@ class EnableKeysRequest extends  AbstractModel {
 }
 
 /**
- * GenerateRandom返回参数结构体
+ * ScheduleKeyDeletion请求参数结构体
  * @class
  */
-class GenerateRandomResponse extends  AbstractModel {
+class ScheduleKeyDeletionRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 生成的随机数的明文，该明文使用base64编码，用户需要使用base64解码得到明文。
+         * CMK的唯一标志
          * @type {string || null}
          */
-        this.Plaintext = null;
+        this.KeyId = null;
 
         /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
+         * 计划删除时间区间[7,30]
+         * @type {number || null}
          */
-        this.RequestId = null;
+        this.PendingWindowInDays = null;
 
     }
 
@@ -2193,69 +2912,34 @@ class GenerateRandomResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Plaintext = 'Plaintext' in params ? params.Plaintext : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.KeyId = 'KeyId' in params ? params.KeyId : null;
+        this.PendingWindowInDays = 'PendingWindowInDays' in params ? params.PendingWindowInDays : null;
 
     }
 }
 
 /**
- * DescribeKey返回参数结构体
+ * CreateWhiteBoxKey返回参数结构体
  * @class
  */
-class DescribeKeyResponse extends  AbstractModel {
+class CreateWhiteBoxKeyResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 密钥属性信息
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {KeyMetadata || null}
-         */
-        this.KeyMetadata = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * 用于加密的密钥，base64编码
          * @type {string || null}
          */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-        if (params.KeyMetadata) {
-            let obj = new KeyMetadata();
-            obj.deserialize(params.KeyMetadata)
-            this.KeyMetadata = obj;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * Encrypt返回参数结构体
- * @class
- */
-class EncryptResponse extends  AbstractModel {
-    constructor(){
-        super();
+        this.EncryptKey = null;
 
         /**
-         * 加密后经过base64编码的密文
+         * 用于解密的密钥，base64编码
          * @type {string || null}
          */
-        this.CiphertextBlob = null;
+        this.DecryptKey = null;
 
         /**
-         * 加密使用的CMK的全局唯一标识
+         * 白盒密钥的全局唯一标识符
          * @type {string || null}
          */
         this.KeyId = null;
@@ -2275,9 +2959,80 @@ class EncryptResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.CiphertextBlob = 'CiphertextBlob' in params ? params.CiphertextBlob : null;
+        this.EncryptKey = 'EncryptKey' in params ? params.EncryptKey : null;
+        this.DecryptKey = 'DecryptKey' in params ? params.DecryptKey : null;
         this.KeyId = 'KeyId' in params ? params.KeyId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * AsymmetricRsaDecrypt返回参数结构体
+ * @class
+ */
+class AsymmetricRsaDecryptResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * CMK的唯一标识
+         * @type {string || null}
+         */
+        this.KeyId = null;
+
+        /**
+         * 解密后的明文，base64编码
+         * @type {string || null}
+         */
+        this.Plaintext = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.KeyId = 'KeyId' in params ? params.KeyId : null;
+        this.Plaintext = 'Plaintext' in params ? params.Plaintext : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DeleteWhiteBoxKey请求参数结构体
+ * @class
+ */
+class DeleteWhiteBoxKeyRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 白盒密钥的全局唯一标识符
+         * @type {string || null}
+         */
+        this.KeyId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.KeyId = 'KeyId' in params ? params.KeyId : null;
 
     }
 }
@@ -2306,6 +3061,55 @@ class DescribeKeysRequest extends  AbstractModel {
             return;
         }
         this.KeyIds = 'KeyIds' in params ? params.KeyIds : null;
+
+    }
+}
+
+/**
+ * ReEncrypt请求参数结构体
+ * @class
+ */
+class ReEncryptRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 需要重新加密的密文
+         * @type {string || null}
+         */
+        this.CiphertextBlob = null;
+
+        /**
+         * 重新加密使用的CMK，如果为空，则使用密文原有的CMK重新加密（若密钥没有轮换则密文不会刷新）
+         * @type {string || null}
+         */
+        this.DestinationKeyId = null;
+
+        /**
+         * CiphertextBlob 密文加密时使用的key/value对的json字符串。如果加密时未使用，则为空
+         * @type {string || null}
+         */
+        this.SourceEncryptionContext = null;
+
+        /**
+         * 重新加密使用的key/value对的json字符串，如果使用该字段，则返回的新密文在解密时需要填入相同的字符串
+         * @type {string || null}
+         */
+        this.DestinationEncryptionContext = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CiphertextBlob = 'CiphertextBlob' in params ? params.CiphertextBlob : null;
+        this.DestinationKeyId = 'DestinationKeyId' in params ? params.DestinationKeyId : null;
+        this.SourceEncryptionContext = 'SourceEncryptionContext' in params ? params.SourceEncryptionContext : null;
+        this.DestinationEncryptionContext = 'DestinationEncryptionContext' in params ? params.DestinationEncryptionContext : null;
 
     }
 }
@@ -2391,61 +3195,84 @@ module.exports = {
     UpdateKeyDescriptionResponse: UpdateKeyDescriptionResponse,
     DisableKeysRequest: DisableKeysRequest,
     AlgorithmInfo: AlgorithmInfo,
+    EnableWhiteBoxKeysResponse: EnableWhiteBoxKeysResponse,
     UpdateAliasRequest: UpdateAliasRequest,
-    ReEncryptRequest: ReEncryptRequest,
+    DisableWhiteBoxKeyRequest: DisableWhiteBoxKeyRequest,
+    WhiteboxKeyInfo: WhiteboxKeyInfo,
     GenerateDataKeyRequest: GenerateDataKeyRequest,
+    EnableWhiteBoxKeyRequest: EnableWhiteBoxKeyRequest,
     GenerateDataKeyResponse: GenerateDataKeyResponse,
     AsymmetricRsaDecryptRequest: AsymmetricRsaDecryptRequest,
+    CreateWhiteBoxKeyRequest: CreateWhiteBoxKeyRequest,
     EnableKeyRotationRequest: EnableKeyRotationRequest,
     EnableKeyRotationResponse: EnableKeyRotationResponse,
+    DescribeWhiteBoxKeyDetailsResponse: DescribeWhiteBoxKeyDetailsResponse,
     CreateKeyRequest: CreateKeyRequest,
+    UpdateKeyDescriptionRequest: UpdateKeyDescriptionRequest,
     EnableKeysResponse: EnableKeysResponse,
+    ListKeysResponse: ListKeysResponse,
+    DisableWhiteBoxKeyResponse: DisableWhiteBoxKeyResponse,
+    EncryptRequest: EncryptRequest,
     DisableKeyResponse: DisableKeyResponse,
+    DescribeWhiteBoxKeyRequest: DescribeWhiteBoxKeyRequest,
     GetParametersForImportRequest: GetParametersForImportRequest,
+    DisableWhiteBoxKeysResponse: DisableWhiteBoxKeysResponse,
     DeleteImportedKeyMaterialResponse: DeleteImportedKeyMaterialResponse,
     CreateKeyResponse: CreateKeyResponse,
     ReEncryptResponse: ReEncryptResponse,
+    DescribeWhiteBoxServiceStatusRequest: DescribeWhiteBoxServiceStatusRequest,
     DescribeKeyRequest: DescribeKeyRequest,
     CancelKeyDeletionRequest: CancelKeyDeletionRequest,
+    EncryptByWhiteBoxRequest: EncryptByWhiteBoxRequest,
     GenerateRandomRequest: GenerateRandomRequest,
     Key: Key,
     DeleteImportedKeyMaterialRequest: DeleteImportedKeyMaterialRequest,
     ListAlgorithmsResponse: ListAlgorithmsResponse,
     EnableKeyResponse: EnableKeyResponse,
-    ScheduleKeyDeletionRequest: ScheduleKeyDeletionRequest,
-    DisableKeysResponse: DisableKeysResponse,
+    GenerateRandomResponse: GenerateRandomResponse,
+    DescribeWhiteBoxDecryptKeyResponse: DescribeWhiteBoxDecryptKeyResponse,
     ImportKeyMaterialRequest: ImportKeyMaterialRequest,
+    EnableKeyRequest: EnableKeyRequest,
     GetKeyRotationStatusResponse: GetKeyRotationStatusResponse,
-    AsymmetricRsaDecryptResponse: AsymmetricRsaDecryptResponse,
     ImportKeyMaterialResponse: ImportKeyMaterialResponse,
-    EncryptRequest: EncryptRequest,
+    DisableKeyRequest: DisableKeyRequest,
+    DescribeWhiteBoxKeyResponse: DescribeWhiteBoxKeyResponse,
+    GetKeyRotationStatusRequest: GetKeyRotationStatusRequest,
+    DescribeWhiteBoxServiceStatusResponse: DescribeWhiteBoxServiceStatusResponse,
     AsymmetricSm2DecryptRequest: AsymmetricSm2DecryptRequest,
     DecryptResponse: DecryptResponse,
-    EnableKeyRequest: EnableKeyRequest,
-    GetKeyRotationStatusRequest: GetKeyRotationStatusRequest,
+    DeleteWhiteBoxKeyResponse: DeleteWhiteBoxKeyResponse,
+    DescribeKeyResponse: DescribeKeyResponse,
+    EnableWhiteBoxKeysRequest: EnableWhiteBoxKeysRequest,
+    EncryptByWhiteBoxResponse: EncryptByWhiteBoxResponse,
     GetServiceStatusResponse: GetServiceStatusResponse,
     DescribeKeysResponse: DescribeKeysResponse,
+    EnableWhiteBoxKeyResponse: EnableWhiteBoxKeyResponse,
     GetPublicKeyResponse: GetPublicKeyResponse,
     ListKeyDetailResponse: ListKeyDetailResponse,
     CancelKeyDeletionResponse: CancelKeyDeletionResponse,
     ListKeysRequest: ListKeysRequest,
-    ListKeysResponse: ListKeysResponse,
-    KeyMetadata: KeyMetadata,
+    DescribeWhiteBoxDecryptKeyRequest: DescribeWhiteBoxDecryptKeyRequest,
+    EncryptResponse: EncryptResponse,
     AsymmetricSm2DecryptResponse: AsymmetricSm2DecryptResponse,
     DisableKeyRotationResponse: DisableKeyRotationResponse,
     ListAlgorithmsRequest: ListAlgorithmsRequest,
+    DisableKeysResponse: DisableKeysResponse,
     UpdateAliasResponse: UpdateAliasResponse,
+    KeyMetadata: KeyMetadata,
+    DisableWhiteBoxKeysRequest: DisableWhiteBoxKeysRequest,
     ScheduleKeyDeletionResponse: ScheduleKeyDeletionResponse,
     GetParametersForImportResponse: GetParametersForImportResponse,
     DecryptRequest: DecryptRequest,
     ListKeyDetailRequest: ListKeyDetailRequest,
-    UpdateKeyDescriptionRequest: UpdateKeyDescriptionRequest,
-    DisableKeyRequest: DisableKeyRequest,
+    DescribeWhiteBoxKeyDetailsRequest: DescribeWhiteBoxKeyDetailsRequest,
     EnableKeysRequest: EnableKeysRequest,
-    GenerateRandomResponse: GenerateRandomResponse,
-    DescribeKeyResponse: DescribeKeyResponse,
-    EncryptResponse: EncryptResponse,
+    ScheduleKeyDeletionRequest: ScheduleKeyDeletionRequest,
+    CreateWhiteBoxKeyResponse: CreateWhiteBoxKeyResponse,
+    AsymmetricRsaDecryptResponse: AsymmetricRsaDecryptResponse,
+    DeleteWhiteBoxKeyRequest: DeleteWhiteBoxKeyRequest,
     DescribeKeysRequest: DescribeKeysRequest,
+    ReEncryptRequest: ReEncryptRequest,
     GetPublicKeyRequest: GetPublicKeyRequest,
     GetServiceStatusRequest: GetServiceStatusRequest,
     DisableKeyRotationRequest: DisableKeyRotationRequest,

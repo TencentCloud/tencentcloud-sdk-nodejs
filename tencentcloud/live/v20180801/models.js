@@ -2750,63 +2750,6 @@ class ModifyLiveDomainCertRequest extends  AbstractModel {
 }
 
 /**
- * 查询当前正在推流的信息
- * @class
- */
-class StreamOnlineInfo extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 流名称。
-         * @type {string || null}
-         */
-        this.StreamName = null;
-
-        /**
-         * 推流时间列表
-         * @type {Array.<PublishTime> || null}
-         */
-        this.PublishTimeList = null;
-
-        /**
-         * 应用名称。
-         * @type {string || null}
-         */
-        this.AppName = null;
-
-        /**
-         * 推流域名。
-         * @type {string || null}
-         */
-        this.DomainName = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.StreamName = 'StreamName' in params ? params.StreamName : null;
-
-        if (params.PublishTimeList) {
-            this.PublishTimeList = new Array();
-            for (let z in params.PublishTimeList) {
-                let obj = new PublishTime();
-                obj.deserialize(params.PublishTimeList[z]);
-                this.PublishTimeList.push(obj);
-            }
-        }
-        this.AppName = 'AppName' in params ? params.AppName : null;
-        this.DomainName = 'DomainName' in params ? params.DomainName : null;
-
-    }
-}
-
-/**
  * CreateLiveWatermarkRule返回参数结构体
  * @class
  */
@@ -3385,34 +3328,6 @@ UTC 格式，例如：2018-12-29T20:00:00Z。
 }
 
 /**
- * DescribePullStreamConfigs请求参数结构体
- * @class
- */
-class DescribePullStreamConfigsRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 配置id。
-         * @type {string || null}
-         */
-        this.ConfigId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.ConfigId = 'ConfigId' in params ? params.ConfigId : null;
-
-    }
-}
-
-/**
  * 回调模板信息
  * @class
  */
@@ -3883,67 +3798,36 @@ class TimeValue extends  AbstractModel {
 }
 
 /**
- * 拉流配置
+ * 查询当前正在推流的信息
  * @class
  */
-class PullStreamConfig extends  AbstractModel {
+class StreamOnlineInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 拉流配置Id。
+         * 流名称。
          * @type {string || null}
          */
-        this.ConfigId = null;
+        this.StreamName = null;
 
         /**
-         * 源Url。
-         * @type {string || null}
+         * 推流时间列表
+         * @type {Array.<PublishTime> || null}
          */
-        this.FromUrl = null;
+        this.PublishTimeList = null;
 
         /**
-         * 目的Url。
+         * 应用名称。
          * @type {string || null}
          */
-        this.ToUrl = null;
+        this.AppName = null;
 
         /**
-         * 区域名。
+         * 推流域名。
          * @type {string || null}
          */
-        this.AreaName = null;
-
-        /**
-         * 运营商名。
-         * @type {string || null}
-         */
-        this.IspName = null;
-
-        /**
-         * 开始时间。
-UTC格式时间，
-例如：2019-01-08T10:00:00Z。
-注意：北京时间值为 UTC 时间值 + 8 小时，格式按照 ISO 8601 标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#I)。
-         * @type {string || null}
-         */
-        this.StartTime = null;
-
-        /**
-         * 结束时间。
-
-UTC格式时间，
-例如：2019-01-08T10:00:00Z。
-注意：北京时间值为 UTC 时间值 + 8 小时，格式按照 ISO 8601 标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#I)。
-         * @type {string || null}
-         */
-        this.EndTime = null;
-
-        /**
-         * 0无效，1初始状态，2正在运行，3拉起失败，4暂停。
-         * @type {string || null}
-         */
-        this.Status = null;
+        this.DomainName = null;
 
     }
 
@@ -3954,14 +3838,18 @@ UTC格式时间，
         if (!params) {
             return;
         }
-        this.ConfigId = 'ConfigId' in params ? params.ConfigId : null;
-        this.FromUrl = 'FromUrl' in params ? params.FromUrl : null;
-        this.ToUrl = 'ToUrl' in params ? params.ToUrl : null;
-        this.AreaName = 'AreaName' in params ? params.AreaName : null;
-        this.IspName = 'IspName' in params ? params.IspName : null;
-        this.StartTime = 'StartTime' in params ? params.StartTime : null;
-        this.EndTime = 'EndTime' in params ? params.EndTime : null;
-        this.Status = 'Status' in params ? params.Status : null;
+        this.StreamName = 'StreamName' in params ? params.StreamName : null;
+
+        if (params.PublishTimeList) {
+            this.PublishTimeList = new Array();
+            for (let z in params.PublishTimeList) {
+                let obj = new PublishTime();
+                obj.deserialize(params.PublishTimeList[z]);
+                this.PublishTimeList.push(obj);
+            }
+        }
+        this.AppName = 'AppName' in params ? params.AppName : null;
+        this.DomainName = 'DomainName' in params ? params.DomainName : null;
 
     }
 }
@@ -4342,34 +4230,6 @@ class DayStreamPlayInfo extends  AbstractModel {
         this.Flux = 'Flux' in params ? params.Flux : null;
         this.Request = 'Request' in params ? params.Request : null;
         this.Online = 'Online' in params ? params.Online : null;
-
-    }
-}
-
-/**
- * ModifyPullStreamStatus返回参数结构体
- * @class
- */
-class ModifyPullStreamStatusResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -5783,41 +5643,6 @@ class DescribeGroupProIspPlayInfoListRequest extends  AbstractModel {
 }
 
 /**
- * ModifyPullStreamStatus请求参数结构体
- * @class
- */
-class ModifyPullStreamStatusRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 配置id列表。
-         * @type {Array.<string> || null}
-         */
-        this.ConfigIds = null;
-
-        /**
-         * 目标状态。0无效，2正在运行，4暂停。
-         * @type {string || null}
-         */
-        this.Status = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.ConfigIds = 'ConfigIds' in params ? params.ConfigIds : null;
-        this.Status = 'Status' in params ? params.Status : null;
-
-    }
-}
-
-/**
  * DescribeStreamDayPlayInfoList请求参数结构体
  * @class
  */
@@ -6456,34 +6281,6 @@ StartTime不能为3个月前。
 }
 
 /**
- * ModifyPullStreamConfig返回参数结构体
- * @class
- */
-class ModifyPullStreamConfigResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
  * DescribeProvinceIspPlayInfoList请求参数结构体
  * @class
  */
@@ -6902,91 +6699,6 @@ class ModifyLiveRecordTemplateRequest extends  AbstractModel {
             obj.deserialize(params.Mp3Param)
             this.Mp3Param = obj;
         }
-
-    }
-}
-
-/**
- * ModifyPullStreamConfig请求参数结构体
- * @class
- */
-class ModifyPullStreamConfigRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 配置id。
-         * @type {string || null}
-         */
-        this.ConfigId = null;
-
-        /**
-         * 源Url。
-         * @type {string || null}
-         */
-        this.FromUrl = null;
-
-        /**
-         * 目的Url。
-         * @type {string || null}
-         */
-        this.ToUrl = null;
-
-        /**
-         * 区域id：
-1-深圳，
-2-上海，
-3-天津，
-4-中国香港。
-如有改动，需同时传入IspId。
-         * @type {number || null}
-         */
-        this.AreaId = null;
-
-        /**
-         * 运营商id,1-电信,2-移动,3-联通,4-其他,AreaId为4的时候,IspId只能为其他。如有改动，需同时传入AreaId。
-         * @type {number || null}
-         */
-        this.IspId = null;
-
-        /**
-         * 开始时间。
-使用UTC格式时间，
-例如：2019-01-08T10:00:00Z。
-注意：北京时间值为 UTC 时间值 + 8 小时，格式按照 ISO 8601 标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#I)。
-         * @type {string || null}
-         */
-        this.StartTime = null;
-
-        /**
-         * 结束时间，注意：
-1. 结束时间必须大于开始时间；
-2. 结束时间和开始时间必须大于当前时间；
-3. 结束时间 和 开始时间 间隔必须小于七天。
-
-使用UTC格式时间，
-例如：2019-01-08T10:00:00Z。
-注意：北京时间值为 UTC 时间值 + 8 小时，格式按照 ISO 8601 标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#I)。
-         * @type {string || null}
-         */
-        this.EndTime = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.ConfigId = 'ConfigId' in params ? params.ConfigId : null;
-        this.FromUrl = 'FromUrl' in params ? params.FromUrl : null;
-        this.ToUrl = 'ToUrl' in params ? params.ToUrl : null;
-        this.AreaId = 'AreaId' in params ? params.AreaId : null;
-        this.IspId = 'IspId' in params ? params.IspId : null;
-        this.StartTime = 'StartTime' in params ? params.StartTime : null;
-        this.EndTime = 'EndTime' in params ? params.EndTime : null;
 
     }
 }
@@ -11835,49 +11547,6 @@ class DescribeLiveStreamEventListResponse extends  AbstractModel {
 }
 
 /**
- * DescribePullStreamConfigs返回参数结构体
- * @class
- */
-class DescribePullStreamConfigsResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 拉流配置。
-         * @type {Array.<PullStreamConfig> || null}
-         */
-        this.PullStreamConfigs = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-        if (params.PullStreamConfigs) {
-            this.PullStreamConfigs = new Array();
-            for (let z in params.PullStreamConfigs) {
-                let obj = new PullStreamConfig();
-                obj.deserialize(params.PullStreamConfigs[z]);
-                this.PullStreamConfigs.push(obj);
-            }
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
  * DescribeLiveCallbackRules返回参数结构体
  * @class
  */
@@ -12484,7 +12153,6 @@ module.exports = {
     DescribeLiveDomainCertResponse: DescribeLiveDomainCertResponse,
     DescribeLiveRecordTemplateRequest: DescribeLiveRecordTemplateRequest,
     ModifyLiveDomainCertRequest: ModifyLiveDomainCertRequest,
-    StreamOnlineInfo: StreamOnlineInfo,
     CreateLiveWatermarkRuleResponse: CreateLiveWatermarkRuleResponse,
     DescribeProIspPlaySumInfoListRequest: DescribeProIspPlaySumInfoListRequest,
     PlayCodeTotalInfo: PlayCodeTotalInfo,
@@ -12498,7 +12166,6 @@ module.exports = {
     AddDelayLiveStreamRequest: AddDelayLiveStreamRequest,
     DescribeLiveDomainCertRequest: DescribeLiveDomainCertRequest,
     DescribeLiveStreamEventListRequest: DescribeLiveStreamEventListRequest,
-    DescribePullStreamConfigsRequest: DescribePullStreamConfigsRequest,
     CallBackTemplateInfo: CallBackTemplateInfo,
     DescribePlayErrorCodeSumInfoListResponse: DescribePlayErrorCodeSumInfoListResponse,
     UnBindLiveDomainCertRequest: UnBindLiveDomainCertRequest,
@@ -12507,7 +12174,7 @@ module.exports = {
     ForbidLiveStreamRequest: ForbidLiveStreamRequest,
     DescribeLiveDomainsResponse: DescribeLiveDomainsResponse,
     TimeValue: TimeValue,
-    PullStreamConfig: PullStreamConfig,
+    StreamOnlineInfo: StreamOnlineInfo,
     CreateLiveRecordResponse: CreateLiveRecordResponse,
     RuleInfo: RuleInfo,
     UpdateLiveWatermarkResponse: UpdateLiveWatermarkResponse,
@@ -12515,7 +12182,6 @@ module.exports = {
     CreateLiveTranscodeTemplateResponse: CreateLiveTranscodeTemplateResponse,
     DescribeVisitTopSumInfoListRequest: DescribeVisitTopSumInfoListRequest,
     DayStreamPlayInfo: DayStreamPlayInfo,
-    ModifyPullStreamStatusResponse: ModifyPullStreamStatusResponse,
     ModifyLivePlayDomainResponse: ModifyLivePlayDomainResponse,
     CancelCommonMixStreamResponse: CancelCommonMixStreamResponse,
     AddLiveWatermarkRequest: AddLiveWatermarkRequest,
@@ -12543,7 +12209,6 @@ module.exports = {
     PushDataInfo: PushDataInfo,
     CommonMixLayoutParams: CommonMixLayoutParams,
     DescribeGroupProIspPlayInfoListRequest: DescribeGroupProIspPlayInfoListRequest,
-    ModifyPullStreamStatusRequest: ModifyPullStreamStatusRequest,
     DescribeStreamDayPlayInfoListRequest: DescribeStreamDayPlayInfoListRequest,
     TranscodeDetailInfo: TranscodeDetailInfo,
     DescribeLiveSnapshotTemplateResponse: DescribeLiveSnapshotTemplateResponse,
@@ -12556,7 +12221,6 @@ module.exports = {
     CdnPlayStatData: CdnPlayStatData,
     AddLiveDomainResponse: AddLiveDomainResponse,
     DescribeHttpStatusInfoListRequest: DescribeHttpStatusInfoListRequest,
-    ModifyPullStreamConfigResponse: ModifyPullStreamConfigResponse,
     DescribeProvinceIspPlayInfoListRequest: DescribeProvinceIspPlayInfoListRequest,
     DescribeLivePlayAuthKeyRequest: DescribeLivePlayAuthKeyRequest,
     DescribeLiveForbidStreamListResponse: DescribeLiveForbidStreamListResponse,
@@ -12564,7 +12228,6 @@ module.exports = {
     DescribeLiveWatermarkResponse: DescribeLiveWatermarkResponse,
     ResumeLiveStreamResponse: ResumeLiveStreamResponse,
     ModifyLiveRecordTemplateRequest: ModifyLiveRecordTemplateRequest,
-    ModifyPullStreamConfigRequest: ModifyPullStreamConfigRequest,
     DescribeStreamPushInfoListResponse: DescribeStreamPushInfoListResponse,
     DescribeLiveStreamPushInfoListRequest: DescribeLiveStreamPushInfoListRequest,
     DescribeLiveWatermarksResponse: DescribeLiveWatermarksResponse,
@@ -12667,7 +12330,6 @@ module.exports = {
     CreateLiveSnapshotRuleResponse: CreateLiveSnapshotRuleResponse,
     DelayInfo: DelayInfo,
     DescribeLiveStreamEventListResponse: DescribeLiveStreamEventListResponse,
-    DescribePullStreamConfigsResponse: DescribePullStreamConfigsResponse,
     DescribeLiveCallbackRulesResponse: DescribeLiveCallbackRulesResponse,
     ForbidStreamInfo: ForbidStreamInfo,
     ResumeDelayLiveStreamResponse: ResumeDelayLiveStreamResponse,

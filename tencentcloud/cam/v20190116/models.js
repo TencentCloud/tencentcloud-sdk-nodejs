@@ -171,6 +171,73 @@ class DetachGroupPolicyRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeMfaCodeStatus返回参数结构体
+ * @class
+ */
+class DescribeMfaCodeStatusResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 微信mfa code状态
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * 记住设备
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.RmDevice = null;
+
+        /**
+         * 临时Code
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Tmpcode = null;
+
+        /**
+         * 昵称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Nickname = null;
+
+        /**
+         * 是否有OpenId
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.HasOpenId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Status = 'Status' in params ? params.Status : null;
+        this.RmDevice = 'RmDevice' in params ? params.RmDevice : null;
+        this.Tmpcode = 'Tmpcode' in params ? params.Tmpcode : null;
+        this.Nickname = 'Nickname' in params ? params.Nickname : null;
+        this.HasOpenId = 'HasOpenId' in params ? params.HasOpenId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeRoleList返回参数结构体
  * @class
  */
@@ -334,6 +401,90 @@ class ListAttachedGroupPoliciesRequest extends  AbstractModel {
 }
 
 /**
+ * DetectState返回参数结构体
+ * @class
+ */
+class DetectStateResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 用户uin
+         * @type {string || null}
+         */
+        this.Uin = null;
+
+        /**
+         * 名字
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 身份证号码
+         * @type {string || null}
+         */
+        this.Idcard = null;
+
+        /**
+         * 业务token
+         * @type {string || null}
+         */
+        this.BizToken = null;
+
+        /**
+         * ulr地址
+         * @type {string || null}
+         */
+        this.Url = null;
+
+        /**
+         * 规则id
+         * @type {number || null}
+         */
+        this.RuleId = null;
+
+        /**
+         * 状态
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * 类型
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Uin = 'Uin' in params ? params.Uin : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Idcard = 'Idcard' in params ? params.Idcard : null;
+        this.BizToken = 'BizToken' in params ? params.BizToken : null;
+        this.Url = 'Url' in params ? params.Url : null;
+        this.RuleId = 'RuleId' in params ? params.RuleId : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * ListGroupsForUser请求参数结构体
  * @class
  */
@@ -482,6 +633,34 @@ class ListUsersResponse extends  AbstractModel {
 }
 
 /**
+ * Check返回参数结构体
+ * @class
+ */
+class CheckResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * UpdateRoleDescription返回参数结构体
  * @class
  */
@@ -540,6 +719,90 @@ class DetachUserPolicyRequest extends  AbstractModel {
         }
         this.PolicyId = 'PolicyId' in params ? params.PolicyId : null;
         this.DetachUin = 'DetachUin' in params ? params.DetachUin : null;
+
+    }
+}
+
+/**
+ * DetectAuth请求参数结构体
+ * @class
+ */
+class DetectAuthRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 登录态Skey
+         * @type {string || null}
+         */
+        this.Skey = null;
+
+        /**
+         * IP
+         * @type {string || null}
+         */
+        this.ClientIP = null;
+
+        /**
+         * 浏览器UA
+         * @type {string || null}
+         */
+        this.ClientUA = null;
+
+        /**
+         * 人脸类型
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * 名称
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 身份证号
+         * @type {string || null}
+         */
+        this.Idcard = null;
+
+        /**
+         * 是否使用用户提交信息
+         * @type {number || null}
+         */
+        this.UseAuthInfo = null;
+
+        /**
+         * 场景
+         * @type {string || null}
+         */
+        this.Scene = null;
+
+        /**
+         * 主账号uin
+         * @type {number || null}
+         */
+        this.OwnerUin = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Skey = 'Skey' in params ? params.Skey : null;
+        this.ClientIP = 'ClientIP' in params ? params.ClientIP : null;
+        this.ClientUA = 'ClientUA' in params ? params.ClientUA : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Idcard = 'Idcard' in params ? params.Idcard : null;
+        this.UseAuthInfo = 'UseAuthInfo' in params ? params.UseAuthInfo : null;
+        this.Scene = 'Scene' in params ? params.Scene : null;
+        this.OwnerUin = 'OwnerUin' in params ? params.OwnerUin : null;
 
     }
 }
@@ -1283,6 +1546,76 @@ class RoleInfo extends  AbstractModel {
 }
 
 /**
+ * Check请求参数结构体
+ * @class
+ */
+class CheckRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 登录态Skey
+         * @type {string || null}
+         */
+        this.Skey = null;
+
+        /**
+         * IP
+         * @type {string || null}
+         */
+        this.ClientIP = null;
+
+        /**
+         * 浏览器UA
+         * @type {string || null}
+         */
+        this.ClientUA = null;
+
+        /**
+         * 接口名
+         * @type {string || null}
+         */
+        this.Interface = null;
+
+        /**
+         * 验证类型
+         * @type {number || null}
+         */
+        this.AuthType = null;
+
+        /**
+         * 验证码
+         * @type {string || null}
+         */
+        this.Code = null;
+
+        /**
+         * 主账号
+         * @type {number || null}
+         */
+        this.OwnerUin = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Skey = 'Skey' in params ? params.Skey : null;
+        this.ClientIP = 'ClientIP' in params ? params.ClientIP : null;
+        this.ClientUA = 'ClientUA' in params ? params.ClientUA : null;
+        this.Interface = 'Interface' in params ? params.Interface : null;
+        this.AuthType = 'AuthType' in params ? params.AuthType : null;
+        this.Code = 'Code' in params ? params.Code : null;
+        this.OwnerUin = 'OwnerUin' in params ? params.OwnerUin : null;
+
+    }
+}
+
+/**
  * DeleteGroup请求参数结构体
  * @class
  */
@@ -1306,6 +1639,41 @@ class DeleteGroupRequest extends  AbstractModel {
             return;
         }
         this.GroupId = 'GroupId' in params ? params.GroupId : null;
+
+    }
+}
+
+/**
+ * DetectMaskAuth返回参数结构体
+ * @class
+ */
+class DetectMaskAuthResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 人脸核身Token
+         * @type {string || null}
+         */
+        this.Token = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Token = 'Token' in params ? params.Token : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1860,6 +2228,48 @@ class UpdateAssumeRolePolicyResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DetectState请求参数结构体
+ * @class
+ */
+class DetectStateRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * IP
+         * @type {string || null}
+         */
+        this.ClientIP = null;
+
+        /**
+         * 浏览器UA
+         * @type {string || null}
+         */
+        this.ClientUA = null;
+
+        /**
+         * token
+         * @type {string || null}
+         */
+        this.FaceIdToken = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClientIP = 'ClientIP' in params ? params.ClientIP : null;
+        this.ClientUA = 'ClientUA' in params ? params.ClientUA : null;
+        this.FaceIdToken = 'FaceIdToken' in params ? params.FaceIdToken : null;
 
     }
 }
@@ -2521,6 +2931,209 @@ class ListAttachedGroupPoliciesResponse extends  AbstractModel {
 }
 
 /**
+ * CheckNewMfaCode请求参数结构体
+ * @class
+ */
+class CheckNewMfaCodeRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 登录态Skey
+         * @type {string || null}
+         */
+        this.Skey = null;
+
+        /**
+         * 接口名
+         * @type {string || null}
+         */
+        this.Interface = null;
+
+        /**
+         * IP
+         * @type {string || null}
+         */
+        this.ClientIP = null;
+
+        /**
+         * 浏览器UA
+         * @type {string || null}
+         */
+        this.ClientUA = null;
+
+        /**
+         * 验证类型
+         * @type {number || null}
+         */
+        this.AuthType = null;
+
+        /**
+         * 主账号uin
+         * @type {number || null}
+         */
+        this.OwnerUin = null;
+
+        /**
+         * 手机验证码
+         * @type {number || null}
+         */
+        this.PhoneCode = null;
+
+        /**
+         * 手机号码
+         * @type {number || null}
+         */
+        this.PhoneNumber = null;
+
+        /**
+         * 邮箱验证码
+         * @type {number || null}
+         */
+        this.MailCode = null;
+
+        /**
+         * 邮箱
+         * @type {string || null}
+         */
+        this.Mail = null;
+
+        /**
+         * 手机国码
+         * @type {number || null}
+         */
+        this.CountryCode = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Skey = 'Skey' in params ? params.Skey : null;
+        this.Interface = 'Interface' in params ? params.Interface : null;
+        this.ClientIP = 'ClientIP' in params ? params.ClientIP : null;
+        this.ClientUA = 'ClientUA' in params ? params.ClientUA : null;
+        this.AuthType = 'AuthType' in params ? params.AuthType : null;
+        this.OwnerUin = 'OwnerUin' in params ? params.OwnerUin : null;
+        this.PhoneCode = 'PhoneCode' in params ? params.PhoneCode : null;
+        this.PhoneNumber = 'PhoneNumber' in params ? params.PhoneNumber : null;
+        this.MailCode = 'MailCode' in params ? params.MailCode : null;
+        this.Mail = 'Mail' in params ? params.Mail : null;
+        this.CountryCode = 'CountryCode' in params ? params.CountryCode : null;
+
+    }
+}
+
+/**
+ * DetectMaskAuth请求参数结构体
+ * @class
+ */
+class DetectMaskAuthRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 登录态Skey
+         * @type {string || null}
+         */
+        this.Skey = null;
+
+        /**
+         * IP
+         * @type {string || null}
+         */
+        this.ClientIP = null;
+
+        /**
+         * 浏览器UA
+         * @type {string || null}
+         */
+        this.ClientUA = null;
+
+        /**
+         * 人脸类型
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * 用户名称
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 用户Idcard
+         * @type {string || null}
+         */
+        this.Idcard = null;
+
+        /**
+         * 主账号
+         * @type {number || null}
+         */
+        this.OwnerUin = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Skey = 'Skey' in params ? params.Skey : null;
+        this.ClientIP = 'ClientIP' in params ? params.ClientIP : null;
+        this.ClientUA = 'ClientUA' in params ? params.ClientUA : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Idcard = 'Idcard' in params ? params.Idcard : null;
+        this.OwnerUin = 'OwnerUin' in params ? params.OwnerUin : null;
+
+    }
+}
+
+/**
+ * DetectAuth返回参数结构体
+ * @class
+ */
+class DetectAuthResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 人脸核身token
+         * @type {string || null}
+         */
+        this.Token = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Token = 'Token' in params ? params.Token : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * SetFlag请求参数结构体
  * @class
  */
@@ -2810,18 +3423,12 @@ class UpdateUserResponse extends  AbstractModel {
 }
 
 /**
- * AddUserToGroup返回参数结构体
+ * ListUsers请求参数结构体
  * @class
  */
-class AddUserToGroupResponse extends  AbstractModel {
+class ListUsersRequest extends  AbstractModel {
     constructor(){
         super();
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
 
     }
 
@@ -2832,7 +3439,6 @@ class AddUserToGroupResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -4059,12 +4665,18 @@ class ListEntitiesForPolicyResponse extends  AbstractModel {
 }
 
 /**
- * ListUsers请求参数结构体
+ * AddUserToGroup返回参数结构体
  * @class
  */
-class ListUsersRequest extends  AbstractModel {
+class AddUserToGroupResponse extends  AbstractModel {
     constructor(){
         super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
 
     }
 
@@ -4075,6 +4687,7 @@ class ListUsersRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -4103,6 +4716,97 @@ class AttachUserPolicyResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CheckNewMfaCode返回参数结构体
+ * @class
+ */
+class CheckNewMfaCodeResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeMfaCodeStatus请求参数结构体
+ * @class
+ */
+class DescribeMfaCodeStatusRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * mfaKey
+         * @type {string || null}
+         */
+        this.Tmpcode = null;
+
+        /**
+         * 登录态skey
+         * @type {string || null}
+         */
+        this.Skey = null;
+
+        /**
+         * 用户浏览器UA
+         * @type {string || null}
+         */
+        this.ClientUA = null;
+
+        /**
+         * 接口名
+         * @type {string || null}
+         */
+        this.Interface = null;
+
+        /**
+         * 用户IP
+         * @type {string || null}
+         */
+        this.ClientIP = null;
+
+        /**
+         * 主账号
+         * @type {number || null}
+         */
+        this.OwnerUin = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Tmpcode = 'Tmpcode' in params ? params.Tmpcode : null;
+        this.Skey = 'Skey' in params ? params.Skey : null;
+        this.ClientUA = 'ClientUA' in params ? params.ClientUA : null;
+        this.Interface = 'Interface' in params ? params.Interface : null;
+        this.ClientIP = 'ClientIP' in params ? params.ClientIP : null;
+        this.OwnerUin = 'OwnerUin' in params ? params.OwnerUin : null;
 
     }
 }
@@ -4286,16 +4990,20 @@ module.exports = {
     GetUserResponse: GetUserResponse,
     DeleteUserRequest: DeleteUserRequest,
     DetachGroupPolicyRequest: DetachGroupPolicyRequest,
+    DescribeMfaCodeStatusResponse: DescribeMfaCodeStatusResponse,
     DescribeRoleListResponse: DescribeRoleListResponse,
     CreatePolicyResponse: CreatePolicyResponse,
     GetRoleRequest: GetRoleRequest,
     ListAttachedGroupPoliciesRequest: ListAttachedGroupPoliciesRequest,
+    DetectStateResponse: DetectStateResponse,
     ListGroupsForUserRequest: ListGroupsForUserRequest,
     AttachRolePolicyResponse: AttachRolePolicyResponse,
     AttachGroupPolicyResponse: AttachGroupPolicyResponse,
     ListUsersResponse: ListUsersResponse,
+    CheckResponse: CheckResponse,
     UpdateRoleDescriptionResponse: UpdateRoleDescriptionResponse,
     DetachUserPolicyRequest: DetachUserPolicyRequest,
+    DetectAuthRequest: DetectAuthRequest,
     ListGroupsResponse: ListGroupsResponse,
     GetCustomMFATokenInfoRequest: GetCustomMFATokenInfoRequest,
     DescribeRoleListRequest: DescribeRoleListRequest,
@@ -4313,7 +5021,9 @@ module.exports = {
     GroupIdOfUidInfo: GroupIdOfUidInfo,
     UpdateRoleDescriptionRequest: UpdateRoleDescriptionRequest,
     RoleInfo: RoleInfo,
+    CheckRequest: CheckRequest,
     DeleteGroupRequest: DeleteGroupRequest,
+    DetectMaskAuthResponse: DetectMaskAuthResponse,
     ListAttachedRolePoliciesResponse: ListAttachedRolePoliciesResponse,
     DeleteUserResponse: DeleteUserResponse,
     DetachRolePolicyRequest: DetachRolePolicyRequest,
@@ -4325,6 +5035,7 @@ module.exports = {
     DeleteRoleRequest: DeleteRoleRequest,
     GetCustomMFATokenInfoResponse: GetCustomMFATokenInfoResponse,
     UpdateAssumeRolePolicyResponse: UpdateAssumeRolePolicyResponse,
+    DetectStateRequest: DetectStateRequest,
     ListAttachedUserPoliciesResponse: ListAttachedUserPoliciesResponse,
     CreateSAMLProviderResponse: CreateSAMLProviderResponse,
     GetUserRequest: GetUserRequest,
@@ -4338,6 +5049,9 @@ module.exports = {
     ConsumeCustomMFATokenResponse: ConsumeCustomMFATokenResponse,
     AttachUserPolicyRequest: AttachUserPolicyRequest,
     ListAttachedGroupPoliciesResponse: ListAttachedGroupPoliciesResponse,
+    CheckNewMfaCodeRequest: CheckNewMfaCodeRequest,
+    DetectMaskAuthRequest: DetectMaskAuthRequest,
+    DetectAuthResponse: DetectAuthResponse,
     SetFlagRequest: SetFlagRequest,
     DeletePolicyResponse: DeletePolicyResponse,
     ConsumeCustomMFATokenRequest: ConsumeCustomMFATokenRequest,
@@ -4345,7 +5059,7 @@ module.exports = {
     DeleteSAMLProviderRequest: DeleteSAMLProviderRequest,
     DeleteSAMLProviderResponse: DeleteSAMLProviderResponse,
     UpdateUserResponse: UpdateUserResponse,
-    AddUserToGroupResponse: AddUserToGroupResponse,
+    ListUsersRequest: ListUsersRequest,
     CreateGroupRequest: CreateGroupRequest,
     UpdateGroupResponse: UpdateGroupResponse,
     ListEntitiesForPolicyRequest: ListEntitiesForPolicyRequest,
@@ -4374,8 +5088,10 @@ module.exports = {
     ListUsersForGroupResponse: ListUsersForGroupResponse,
     AddUserResponse: AddUserResponse,
     ListEntitiesForPolicyResponse: ListEntitiesForPolicyResponse,
-    ListUsersRequest: ListUsersRequest,
+    AddUserToGroupResponse: AddUserToGroupResponse,
     AttachUserPolicyResponse: AttachUserPolicyResponse,
+    CheckNewMfaCodeResponse: CheckNewMfaCodeResponse,
+    DescribeMfaCodeStatusRequest: DescribeMfaCodeStatusRequest,
     ListAttachedUserPoliciesRequest: ListAttachedUserPoliciesRequest,
     GroupMemberInfo: GroupMemberInfo,
     CreateGroupResponse: CreateGroupResponse,

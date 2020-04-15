@@ -522,6 +522,18 @@ class ModifyProductRequest extends  AbstractModel {
          */
         this.ProductDescription = null;
 
+        /**
+         * 主芯片产商ID
+         * @type {string || null}
+         */
+        this.ChipManufactureId = null;
+
+        /**
+         * 主芯片ID
+         * @type {string || null}
+         */
+        this.ChipId = null;
+
     }
 
     /**
@@ -534,6 +546,8 @@ class ModifyProductRequest extends  AbstractModel {
         this.ProductId = 'ProductId' in params ? params.ProductId : null;
         this.ProductName = 'ProductName' in params ? params.ProductName : null;
         this.ProductDescription = 'ProductDescription' in params ? params.ProductDescription : null;
+        this.ChipManufactureId = 'ChipManufactureId' in params ? params.ChipManufactureId : null;
+        this.ChipId = 'ChipId' in params ? params.ChipId : null;
 
     }
 }
@@ -800,6 +814,49 @@ class DeleteAppUsrResponse extends  AbstractModel {
     deserialize(params) {
         if (!params) {
             return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeRegistrationStatus返回参数结构体
+ * @class
+ */
+class DescribeRegistrationStatusResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 终端用户注册状态列表
+         * @type {Array.<RegisteredStatus> || null}
+         */
+        this.Data = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Data) {
+            this.Data = new Array();
+            for (let z in params.Data) {
+                let obj = new RegisteredStatus();
+                obj.deserialize(params.Data[z]);
+                this.Data.push(obj);
+            }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -2275,6 +2332,34 @@ class CreateProductResponse extends  AbstractModel {
             this.Data = obj;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeRegistrationStatus请求参数结构体
+ * @class
+ */
+class DescribeRegistrationStatusRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 终端用户的唯一ID列表，0<元素数量<=100
+         * @type {Array.<string> || null}
+         */
+        this.CunionIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CunionIds = 'CunionIds' in params ? params.CunionIds : null;
 
     }
 }
@@ -3870,6 +3955,41 @@ class MsgQueueData extends  AbstractModel {
 }
 
 /**
+ * 终端用户注册状态
+ * @class
+ */
+class RegisteredStatus extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 终端用户的唯一ID
+         * @type {string || null}
+         */
+        this.CunionId = null;
+
+        /**
+         * 注册状态
+         * @type {boolean || null}
+         */
+        this.IsRegisted = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CunionId = 'CunionId' in params ? params.CunionId : null;
+        this.IsRegisted = 'IsRegisted' in params ? params.IsRegisted : null;
+
+    }
+}
+
+/**
  * RunDeviceStream返回参数结构体
  * @class
  */
@@ -4964,6 +5084,7 @@ module.exports = {
     DeleteIotDataTypeRequest: DeleteIotDataTypeRequest,
     DescribeMessageQueueRequest: DescribeMessageQueueRequest,
     DeleteAppUsrResponse: DeleteAppUsrResponse,
+    DescribeRegistrationStatusResponse: DescribeRegistrationStatusResponse,
     DescribeProductRequest: DescribeProductRequest,
     DescribeProductsResponse: DescribeProductsResponse,
     CreateAppUsrRequest: CreateAppUsrRequest,
@@ -4998,6 +5119,7 @@ module.exports = {
     DescribeOtaVersionsRequest: DescribeOtaVersionsRequest,
     DescribeTraceIdsResponse: DescribeTraceIdsResponse,
     CreateProductResponse: CreateProductResponse,
+    DescribeRegistrationStatusRequest: DescribeRegistrationStatusRequest,
     CreateStorageRequest: CreateStorageRequest,
     UpgradeDeviceResponse: UpgradeDeviceResponse,
     DisableOtaVersionResponse: DisableOtaVersionResponse,
@@ -5038,6 +5160,7 @@ module.exports = {
     BindDevInfo: BindDevInfo,
     DescribeBindDevRequest: DescribeBindDevRequest,
     MsgQueueData: MsgQueueData,
+    RegisteredStatus: RegisteredStatus,
     RunDeviceStreamResponse: RunDeviceStreamResponse,
     RunOtaVersionResponse: RunOtaVersionResponse,
     DescribeDeviceModelRequest: DescribeDeviceModelRequest,

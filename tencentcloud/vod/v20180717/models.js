@@ -3439,9 +3439,7 @@ class CreateAdaptiveDynamicStreamingTemplateRequest extends  AbstractModel {
 
         /**
          * DRM方案类型，取值范围：
-<li>FairPlay；</li>
-<li>SimpleAES；</li>
-<li>Widevine。</li>
+<li>SimpleAES。</li>
 如果取值为空字符串，代表不对视频做 DRM 保护。
          * @type {string || null}
          */
