@@ -69,7 +69,6 @@ const AddLiveWatermarkResponse = models.AddLiveWatermarkResponse;
 const DescribeLiveDomainCertResponse = models.DescribeLiveDomainCertResponse;
 const DescribeLiveRecordTemplateRequest = models.DescribeLiveRecordTemplateRequest;
 const ModifyLiveDomainCertRequest = models.ModifyLiveDomainCertRequest;
-const StreamOnlineInfo = models.StreamOnlineInfo;
 const CreateLiveWatermarkRuleResponse = models.CreateLiveWatermarkRuleResponse;
 const DescribeProIspPlaySumInfoListRequest = models.DescribeProIspPlaySumInfoListRequest;
 const PlayCodeTotalInfo = models.PlayCodeTotalInfo;
@@ -83,7 +82,6 @@ const LogInfo = models.LogInfo;
 const AddDelayLiveStreamRequest = models.AddDelayLiveStreamRequest;
 const DescribeLiveDomainCertRequest = models.DescribeLiveDomainCertRequest;
 const DescribeLiveStreamEventListRequest = models.DescribeLiveStreamEventListRequest;
-const DescribePullStreamConfigsRequest = models.DescribePullStreamConfigsRequest;
 const CallBackTemplateInfo = models.CallBackTemplateInfo;
 const DescribePlayErrorCodeSumInfoListResponse = models.DescribePlayErrorCodeSumInfoListResponse;
 const UnBindLiveDomainCertRequest = models.UnBindLiveDomainCertRequest;
@@ -92,7 +90,7 @@ const DescribeScreenShotSheetNumListRequest = models.DescribeScreenShotSheetNumL
 const ForbidLiveStreamRequest = models.ForbidLiveStreamRequest;
 const DescribeLiveDomainsResponse = models.DescribeLiveDomainsResponse;
 const TimeValue = models.TimeValue;
-const PullStreamConfig = models.PullStreamConfig;
+const StreamOnlineInfo = models.StreamOnlineInfo;
 const CreateLiveRecordResponse = models.CreateLiveRecordResponse;
 const RuleInfo = models.RuleInfo;
 const UpdateLiveWatermarkResponse = models.UpdateLiveWatermarkResponse;
@@ -100,7 +98,6 @@ const LivePackageInfo = models.LivePackageInfo;
 const CreateLiveTranscodeTemplateResponse = models.CreateLiveTranscodeTemplateResponse;
 const DescribeVisitTopSumInfoListRequest = models.DescribeVisitTopSumInfoListRequest;
 const DayStreamPlayInfo = models.DayStreamPlayInfo;
-const ModifyPullStreamStatusResponse = models.ModifyPullStreamStatusResponse;
 const ModifyLivePlayDomainResponse = models.ModifyLivePlayDomainResponse;
 const CancelCommonMixStreamResponse = models.CancelCommonMixStreamResponse;
 const AddLiveWatermarkRequest = models.AddLiveWatermarkRequest;
@@ -128,7 +125,6 @@ const CreateLiveCertResponse = models.CreateLiveCertResponse;
 const PushDataInfo = models.PushDataInfo;
 const CommonMixLayoutParams = models.CommonMixLayoutParams;
 const DescribeGroupProIspPlayInfoListRequest = models.DescribeGroupProIspPlayInfoListRequest;
-const ModifyPullStreamStatusRequest = models.ModifyPullStreamStatusRequest;
 const DescribeStreamDayPlayInfoListRequest = models.DescribeStreamDayPlayInfoListRequest;
 const TranscodeDetailInfo = models.TranscodeDetailInfo;
 const DescribeLiveSnapshotTemplateResponse = models.DescribeLiveSnapshotTemplateResponse;
@@ -141,7 +137,6 @@ const DescribeLiveCertsRequest = models.DescribeLiveCertsRequest;
 const CdnPlayStatData = models.CdnPlayStatData;
 const AddLiveDomainResponse = models.AddLiveDomainResponse;
 const DescribeHttpStatusInfoListRequest = models.DescribeHttpStatusInfoListRequest;
-const ModifyPullStreamConfigResponse = models.ModifyPullStreamConfigResponse;
 const DescribeProvinceIspPlayInfoListRequest = models.DescribeProvinceIspPlayInfoListRequest;
 const DescribeLivePlayAuthKeyRequest = models.DescribeLivePlayAuthKeyRequest;
 const DescribeLiveForbidStreamListResponse = models.DescribeLiveForbidStreamListResponse;
@@ -149,7 +144,6 @@ const DescribeStreamPushInfoListRequest = models.DescribeStreamPushInfoListReque
 const DescribeLiveWatermarkResponse = models.DescribeLiveWatermarkResponse;
 const ResumeLiveStreamResponse = models.ResumeLiveStreamResponse;
 const ModifyLiveRecordTemplateRequest = models.ModifyLiveRecordTemplateRequest;
-const ModifyPullStreamConfigRequest = models.ModifyPullStreamConfigRequest;
 const DescribeStreamPushInfoListResponse = models.DescribeStreamPushInfoListResponse;
 const DescribeLiveStreamPushInfoListRequest = models.DescribeLiveStreamPushInfoListRequest;
 const DescribeLiveWatermarksResponse = models.DescribeLiveWatermarksResponse;
@@ -252,7 +246,6 @@ const DescribeStreamDayPlayInfoListResponse = models.DescribeStreamDayPlayInfoLi
 const CreateLiveSnapshotRuleResponse = models.CreateLiveSnapshotRuleResponse;
 const DelayInfo = models.DelayInfo;
 const DescribeLiveStreamEventListResponse = models.DescribeLiveStreamEventListResponse;
-const DescribePullStreamConfigsResponse = models.DescribePullStreamConfigsResponse;
 const DescribeLiveCallbackRulesResponse = models.DescribeLiveCallbackRulesResponse;
 const ForbidStreamInfo = models.ForbidStreamInfo;
 const ResumeDelayLiveStreamResponse = models.ResumeDelayLiveStreamResponse;
@@ -392,14 +385,14 @@ class LiveClient extends AbstractClient {
     }
 
     /**
-     * 查询直播拉流配置。
-     * @param {DescribePullStreamConfigsRequest} req
-     * @param {function(string, DescribePullStreamConfigsResponse):void} cb
+     * 该接口用来创建通用混流。用法与旧接口 mix_streamv2.start_mix_stream_advanced 基本一致。
+     * @param {CreateCommonMixStreamRequest} req
+     * @param {function(string, CreateCommonMixStreamResponse):void} cb
      * @public
      */
-    DescribePullStreamConfigs(req, cb) {
-        let resp = new DescribePullStreamConfigsResponse();
-        this.request("DescribePullStreamConfigs", req, resp, cb);
+    CreateCommonMixStream(req, cb) {
+        let resp = new CreateCommonMixStreamResponse();
+        this.request("CreateCommonMixStream", req, resp, cb);
     }
 
     /**
@@ -481,17 +474,6 @@ class LiveClient extends AbstractClient {
     }
 
     /**
-     * 修改直播拉流配置的状态。
-     * @param {ModifyPullStreamStatusRequest} req
-     * @param {function(string, ModifyPullStreamStatusResponse):void} cb
-     * @public
-     */
-    ModifyPullStreamStatus(req, cb) {
-        let resp = new ModifyPullStreamStatusResponse();
-        this.request("ModifyPullStreamStatus", req, resp, cb);
-    }
-
-    /**
      * 获取录制模板列表
      * @param {DescribeLiveRecordTemplatesRequest} req
      * @param {function(string, DescribeLiveRecordTemplatesResponse):void} cb
@@ -569,17 +551,6 @@ class LiveClient extends AbstractClient {
     }
 
     /**
-     * 更新拉流配置。
-     * @param {ModifyPullStreamConfigRequest} req
-     * @param {function(string, ModifyPullStreamConfigResponse):void} cb
-     * @public
-     */
-    ModifyPullStreamConfig(req, cb) {
-        let resp = new ModifyPullStreamConfigResponse();
-        this.request("ModifyPullStreamConfig", req, resp, cb);
-    }
-
-    /**
      * 创建截图模板，成功返回模板id后，需要调用[CreateLiveSnapshotRule](/document/product/267/32625)接口，将模板id绑定到流使用。
 <br>截图相关文档：[直播截图](/document/product/267/32737)。
      * @param {CreateLiveSnapshotTemplateRequest} req
@@ -633,17 +604,6 @@ class LiveClient extends AbstractClient {
     DescribeLiveRecordTemplate(req, cb) {
         let resp = new DescribeLiveRecordTemplateResponse();
         this.request("DescribeLiveRecordTemplate", req, resp, cb);
-    }
-
-    /**
-     * 该接口用来创建通用混流。用法与旧接口 mix_streamv2.start_mix_stream_advanced 基本一致。
-     * @param {CreateCommonMixStreamRequest} req
-     * @param {function(string, CreateCommonMixStreamResponse):void} cb
-     * @public
-     */
-    CreateCommonMixStream(req, cb) {
-        let resp = new CreateCommonMixStreamResponse();
-        this.request("CreateCommonMixStream", req, resp, cb);
     }
 
     /**

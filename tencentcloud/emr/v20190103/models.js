@@ -519,13 +519,15 @@ class InquiryPriceCreateInstanceRequest extends  AbstractModel {
         /**
          * 购买实例的时间单位。取值范围：
 <li>s：表示秒。PayMode取值为0时，TimeUnit只能取值为s。</li>
-<li>m：表示月份。PayMode取值为1时，TimeUnit只能取值为m。</li>
+<li>m：表示月份。PayMode取值为1时，TimeUnit只能取值为m。</li>
          * @type {string || null}
          */
         this.TimeUnit = null;
 
         /**
-         * 购买实例的时长。需要结合TimeUnit一起使用。
+         * 购买实例的时长。结合TimeUnit一起使用。
+<li>TimeUnit为s时，该参数只能填写3600，表示按量计费实例。</li>
+<li>TimeUnit为m时，该参数填写的数字表示包年包月实例的购买时长，如1表示购买一个月</li>
          * @type {number || null}
          */
         this.TimeSpan = null;
@@ -546,7 +548,7 @@ class InquiryPriceCreateInstanceRequest extends  AbstractModel {
         /**
          * 实例计费模式。取值范围：
 <li>0：表示按量计费。</li>
-<li>1：表示包年包月。</li>
+<li>1：表示包年包月。</li>
          * @type {number || null}
          */
         this.PayMode = null;
@@ -560,7 +562,11 @@ class InquiryPriceCreateInstanceRequest extends  AbstractModel {
         this.SupportHA = null;
 
         /**
-         * 部署的组件列表。
+         * 部署的组件列表。不同的EMR产品ID（ProductId：具体含义参考入参ProductId字段）需要选择不同的必选组件：
+<li>ProductId为1的时候，必选组件包括：hadoop-2.7.3、knox-1.2.0、zookeeper-3.4.9</li>
+<li>ProductId为2的时候，必选组件包括：hadoop-2.7.3、knox-1.2.0、zookeeper-3.4.9</li>
+<li>ProductId为4的时候，必选组件包括：hadoop-2.8.4、knox-1.2.0、zookeeper-3.4.9</li>
+<li>ProductId为7的时候，必选组件包括：hadoop-3.1.2、knox-1.2.0、zookeeper-3.4.9</li>
          * @type {Array.<string> || null}
          */
         this.Software = null;
@@ -1225,7 +1231,11 @@ class CreateInstanceRequest extends  AbstractModel {
         this.VPCSettings = null;
 
         /**
-         * 部署的组件列表。不同ProductId对应特定版本的组件。例如，当ProductId取值为4时，该参数可以填写Software.0=hadoop-2.8.4&Software.1=zookeeper-3.4.9；当ProductId取值为2时，该参数可以填写Software.0=hadoop-2.7.3&Software.1=zookeeper-3.4.9。
+         * 部署的组件列表。不同的EMR产品ID（ProductId：具体含义参考入参ProductId字段）需要选择不同的必选组件：
+<li>ProductId为1的时候，必选组件包括：hadoop-2.7.3、knox-1.2.0、zookeeper-3.4.9</li>
+<li>ProductId为2的时候，必选组件包括：hadoop-2.7.3、knox-1.2.0、zookeeper-3.4.9</li>
+<li>ProductId为4的时候，必选组件包括：hadoop-2.8.4、knox-1.2.0、zookeeper-3.4.9</li>
+<li>ProductId为7的时候，必选组件包括：hadoop-3.1.2、knox-1.2.0、zookeeper-3.4.9</li>
          * @type {Array.<string> || null}
          */
         this.Software = null;
@@ -1267,8 +1277,9 @@ class CreateInstanceRequest extends  AbstractModel {
         this.Placement = null;
 
         /**
-         * 购买实例的时长。需要结合TimeUnit一起使用。
-<li>PayMode取值为0时，TimeSpan只能取值为3600。</li>
+         * 购买实例的时长。结合TimeUnit一起使用。
+<li>TimeUnit为s时，该参数只能填写3600，表示按量计费实例。</li>
+<li>TimeUnit为m时，该参数填写的数字表示包年包月实例的购买时长，如1表示购买一个月</li>
          * @type {number || null}
          */
         this.TimeSpan = null;
@@ -1541,13 +1552,15 @@ class InquiryPriceScaleOutInstanceRequest extends  AbstractModel {
         /**
          * 扩容的时间单位。取值范围：
 <li>s：表示秒。PayMode取值为0时，TimeUnit只能取值为s。</li>
-<li>m：表示月份。PayMode取值为1时，TimeUnit只能取值为m。</li>
+<li>m：表示月份。PayMode取值为1时，TimeUnit只能取值为m。</li>
          * @type {string || null}
          */
         this.TimeUnit = null;
 
         /**
-         * 扩容的时长。需要结合TimeUnit一起使用。
+         * 扩容的时长。结合TimeUnit一起使用。
+<li>TimeUnit为s时，该参数只能填写3600，表示按量计费实例。</li>
+<li>TimeUnit为m时，该参数填写的数字表示包年包月实例的购买时长，如1表示购买一个月</li>
          * @type {number || null}
          */
         this.TimeSpan = null;
@@ -1561,7 +1574,7 @@ class InquiryPriceScaleOutInstanceRequest extends  AbstractModel {
         /**
          * 实例计费模式。取值范围：
 <li>0：表示按量计费。</li>
-<li>1：表示包年包月。</li>
+<li>1：表示包年包月。</li>
          * @type {number || null}
          */
         this.PayMode = null;
@@ -1828,8 +1841,9 @@ class InquiryPriceUpdateInstanceRequest extends  AbstractModel {
         this.TimeUnit = null;
 
         /**
-         * 变配的时长。需要结合TimeUnit一起使用。
-<li>PayMode取值为0时，TimeSpan只能取值为3600。</li>
+         * 变配的时长。结合TimeUnit一起使用。
+<li>TimeUnit为s时，该参数只能填写3600，表示按量计费实例。</li>
+<li>TimeUnit为m时，该参数填写的数字表示包年包月实例的购买时长，如1表示购买一个月</li>
          * @type {number || null}
          */
         this.TimeSpan = null;
@@ -3053,7 +3067,7 @@ class InquiryPriceRenewInstanceRequest extends  AbstractModel {
         super();
 
         /**
-         * 实例续费的时长。需要结合TimeUnit一起使用。
+         * 实例续费的时长。需要结合TimeUnit一起使用。1表示续费1一个月
          * @type {number || null}
          */
         this.TimeSpan = null;
@@ -3078,7 +3092,7 @@ class InquiryPriceRenewInstanceRequest extends  AbstractModel {
 
         /**
          * 实例续费的时间单位。取值范围：
-<li>m：表示月份。</li>
+<li>m：表示月份。</li>
          * @type {string || null}
          */
         this.TimeUnit = null;
@@ -3272,7 +3286,9 @@ class ScaleOutInstanceRequest extends  AbstractModel {
         this.TimeUnit = null;
 
         /**
-         * 扩容的时长。需要结合TimeUnit一起使用。
+         * 扩容的时长。结合TimeUnit一起使用。
+<li>TimeUnit为s时，该参数只能填写3600，表示按量计费实例。</li>
+<li>TimeUnit为m时，该参数填写的数字表示包年包月实例的购买时长，如1表示购买一个月</li>
          * @type {number || null}
          */
         this.TimeSpan = null;

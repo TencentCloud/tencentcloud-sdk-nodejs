@@ -38,6 +38,7 @@ const CreateDevTokenRequest = models.CreateDevTokenRequest;
 const DeleteIotDataTypeRequest = models.DeleteIotDataTypeRequest;
 const DescribeMessageQueueRequest = models.DescribeMessageQueueRequest;
 const DeleteAppUsrResponse = models.DeleteAppUsrResponse;
+const DescribeRegistrationStatusResponse = models.DescribeRegistrationStatusResponse;
 const DescribeProductRequest = models.DescribeProductRequest;
 const DescribeProductsResponse = models.DescribeProductsResponse;
 const CreateAppUsrRequest = models.CreateAppUsrRequest;
@@ -72,6 +73,7 @@ const DeleteMessageQueueResponse = models.DeleteMessageQueueResponse;
 const DescribeOtaVersionsRequest = models.DescribeOtaVersionsRequest;
 const DescribeTraceIdsResponse = models.DescribeTraceIdsResponse;
 const CreateProductResponse = models.CreateProductResponse;
+const DescribeRegistrationStatusRequest = models.DescribeRegistrationStatusRequest;
 const CreateStorageRequest = models.CreateStorageRequest;
 const UpgradeDeviceResponse = models.UpgradeDeviceResponse;
 const DisableOtaVersionResponse = models.DisableOtaVersionResponse;
@@ -112,6 +114,7 @@ const CreateIotModelResponse = models.CreateIotModelResponse;
 const BindDevInfo = models.BindDevInfo;
 const DescribeBindDevRequest = models.DescribeBindDevRequest;
 const MsgQueueData = models.MsgQueueData;
+const RegisteredStatus = models.RegisteredStatus;
 const RunDeviceStreamResponse = models.RunDeviceStreamResponse;
 const RunOtaVersionResponse = models.RunOtaVersionResponse;
 const DescribeDeviceModelRequest = models.DescribeDeviceModelRequest;
@@ -213,6 +216,17 @@ class IotvideoClient extends AbstractClient {
     DeleteTraceIds(req, cb) {
         let resp = new DeleteTraceIdsResponse();
         this.request("DeleteTraceIds", req, resp, cb);
+    }
+
+    /**
+     * 本接口（RunOtaVersion）用于固件版本正式发布。
+     * @param {RunOtaVersionRequest} req
+     * @param {function(string, RunOtaVersionResponse):void} cb
+     * @public
+     */
+    RunOtaVersion(req, cb) {
+        let resp = new RunOtaVersionResponse();
+        this.request("RunOtaVersion", req, resp, cb);
     }
 
     /**
@@ -529,14 +543,14 @@ class IotvideoClient extends AbstractClient {
     }
 
     /**
-     * 本接口（RunOtaVersion）用于固件版本正式发布。
-     * @param {RunOtaVersionRequest} req
-     * @param {function(string, RunOtaVersionResponse):void} cb
+     * 本接口（DescribeRegistrationStatus）用于查询终端用户的注册状态。
+     * @param {DescribeRegistrationStatusRequest} req
+     * @param {function(string, DescribeRegistrationStatusResponse):void} cb
      * @public
      */
-    RunOtaVersion(req, cb) {
-        let resp = new RunOtaVersionResponse();
-        this.request("RunOtaVersion", req, resp, cb);
+    DescribeRegistrationStatus(req, cb) {
+        let resp = new DescribeRegistrationStatusResponse();
+        this.request("DescribeRegistrationStatus", req, resp, cb);
     }
 
     /**

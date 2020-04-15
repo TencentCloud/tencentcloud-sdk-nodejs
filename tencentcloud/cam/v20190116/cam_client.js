@@ -19,16 +19,20 @@ const AbstractClient = require('../../common/abstract_client')
 const GetUserResponse = models.GetUserResponse;
 const DeleteUserRequest = models.DeleteUserRequest;
 const DetachGroupPolicyRequest = models.DetachGroupPolicyRequest;
+const DescribeMfaCodeStatusResponse = models.DescribeMfaCodeStatusResponse;
 const DescribeRoleListResponse = models.DescribeRoleListResponse;
 const CreatePolicyResponse = models.CreatePolicyResponse;
 const GetRoleRequest = models.GetRoleRequest;
 const ListAttachedGroupPoliciesRequest = models.ListAttachedGroupPoliciesRequest;
+const DetectStateResponse = models.DetectStateResponse;
 const ListGroupsForUserRequest = models.ListGroupsForUserRequest;
 const AttachRolePolicyResponse = models.AttachRolePolicyResponse;
 const AttachGroupPolicyResponse = models.AttachGroupPolicyResponse;
 const ListUsersResponse = models.ListUsersResponse;
+const CheckResponse = models.CheckResponse;
 const UpdateRoleDescriptionResponse = models.UpdateRoleDescriptionResponse;
 const DetachUserPolicyRequest = models.DetachUserPolicyRequest;
+const DetectAuthRequest = models.DetectAuthRequest;
 const ListGroupsResponse = models.ListGroupsResponse;
 const GetCustomMFATokenInfoRequest = models.GetCustomMFATokenInfoRequest;
 const DescribeRoleListRequest = models.DescribeRoleListRequest;
@@ -46,7 +50,9 @@ const OffsiteFlag = models.OffsiteFlag;
 const GroupIdOfUidInfo = models.GroupIdOfUidInfo;
 const UpdateRoleDescriptionRequest = models.UpdateRoleDescriptionRequest;
 const RoleInfo = models.RoleInfo;
+const CheckRequest = models.CheckRequest;
 const DeleteGroupRequest = models.DeleteGroupRequest;
+const DetectMaskAuthResponse = models.DetectMaskAuthResponse;
 const ListAttachedRolePoliciesResponse = models.ListAttachedRolePoliciesResponse;
 const DeleteUserResponse = models.DeleteUserResponse;
 const DetachRolePolicyRequest = models.DetachRolePolicyRequest;
@@ -58,6 +64,7 @@ const LoginActionFlag = models.LoginActionFlag;
 const DeleteRoleRequest = models.DeleteRoleRequest;
 const GetCustomMFATokenInfoResponse = models.GetCustomMFATokenInfoResponse;
 const UpdateAssumeRolePolicyResponse = models.UpdateAssumeRolePolicyResponse;
+const DetectStateRequest = models.DetectStateRequest;
 const ListAttachedUserPoliciesResponse = models.ListAttachedUserPoliciesResponse;
 const CreateSAMLProviderResponse = models.CreateSAMLProviderResponse;
 const GetUserRequest = models.GetUserRequest;
@@ -71,6 +78,9 @@ const AttachRolePolicyRequest = models.AttachRolePolicyRequest;
 const ConsumeCustomMFATokenResponse = models.ConsumeCustomMFATokenResponse;
 const AttachUserPolicyRequest = models.AttachUserPolicyRequest;
 const ListAttachedGroupPoliciesResponse = models.ListAttachedGroupPoliciesResponse;
+const CheckNewMfaCodeRequest = models.CheckNewMfaCodeRequest;
+const DetectMaskAuthRequest = models.DetectMaskAuthRequest;
+const DetectAuthResponse = models.DetectAuthResponse;
 const SetFlagRequest = models.SetFlagRequest;
 const DeletePolicyResponse = models.DeletePolicyResponse;
 const ConsumeCustomMFATokenRequest = models.ConsumeCustomMFATokenRequest;
@@ -78,7 +88,7 @@ const GetGroupResponse = models.GetGroupResponse;
 const DeleteSAMLProviderRequest = models.DeleteSAMLProviderRequest;
 const DeleteSAMLProviderResponse = models.DeleteSAMLProviderResponse;
 const UpdateUserResponse = models.UpdateUserResponse;
-const AddUserToGroupResponse = models.AddUserToGroupResponse;
+const ListUsersRequest = models.ListUsersRequest;
 const CreateGroupRequest = models.CreateGroupRequest;
 const UpdateGroupResponse = models.UpdateGroupResponse;
 const ListEntitiesForPolicyRequest = models.ListEntitiesForPolicyRequest;
@@ -107,8 +117,10 @@ const AttachEntityOfPolicy = models.AttachEntityOfPolicy;
 const ListUsersForGroupResponse = models.ListUsersForGroupResponse;
 const AddUserResponse = models.AddUserResponse;
 const ListEntitiesForPolicyResponse = models.ListEntitiesForPolicyResponse;
-const ListUsersRequest = models.ListUsersRequest;
+const AddUserToGroupResponse = models.AddUserToGroupResponse;
 const AttachUserPolicyResponse = models.AttachUserPolicyResponse;
+const CheckNewMfaCodeResponse = models.CheckNewMfaCodeResponse;
+const DescribeMfaCodeStatusRequest = models.DescribeMfaCodeStatusRequest;
 const ListAttachedUserPoliciesRequest = models.ListAttachedUserPoliciesRequest;
 const GroupMemberInfo = models.GroupMemberInfo;
 const CreateGroupResponse = models.CreateGroupResponse;
@@ -136,14 +148,14 @@ class CamClient extends AbstractClient {
     }
 
     /**
-     * 查询SAML身份提供商详情
-     * @param {GetSAMLProviderRequest} req
-     * @param {function(string, GetSAMLProviderResponse):void} cb
+     * 获取并且更新人联合身状态
+     * @param {DetectStateRequest} req
+     * @param {function(string, DetectStateResponse):void} cb
      * @public
      */
-    GetSAMLProvider(req, cb) {
-        let resp = new GetSAMLProviderResponse();
-        this.request("GetSAMLProvider", req, resp, cb);
+    DetectState(req, cb) {
+        let resp = new DetectStateResponse();
+        this.request("DetectState", req, resp, cb);
     }
 
     /**
@@ -290,6 +302,17 @@ class CamClient extends AbstractClient {
     }
 
     /**
+     * 查询微信code状态
+     * @param {DescribeMfaCodeStatusRequest} req
+     * @param {function(string, DescribeMfaCodeStatusResponse):void} cb
+     * @public
+     */
+    DescribeMfaCodeStatus(req, cb) {
+        let resp = new DescribeMfaCodeStatusResponse();
+        this.request("DescribeMfaCodeStatus", req, resp, cb);
+    }
+
+    /**
      * 获取自定义多因子Token关联信息
      * @param {GetCustomMFATokenInfoRequest} req
      * @param {function(string, GetCustomMFATokenInfoResponse):void} cb
@@ -356,6 +379,17 @@ class CamClient extends AbstractClient {
     }
 
     /**
+     * 列出用户关联的用户组
+     * @param {ListGroupsForUserRequest} req
+     * @param {function(string, ListGroupsForUserResponse):void} cb
+     * @public
+     */
+    ListGroupsForUser(req, cb) {
+        let resp = new ListGroupsForUserResponse();
+        this.request("ListGroupsForUser", req, resp, cb);
+    }
+
+    /**
      * 验证自定义多因子Token
      * @param {ConsumeCustomMFATokenRequest} req
      * @param {function(string, ConsumeCustomMFATokenResponse):void} cb
@@ -375,6 +409,39 @@ class CamClient extends AbstractClient {
     GetGroup(req, cb) {
         let resp = new GetGroupResponse();
         this.request("GetGroup", req, resp, cb);
+    }
+
+    /**
+     * 获取并更新人脸核身校验状态实名传递参数比对
+     * @param {DetectMaskAuthRequest} req
+     * @param {function(string, DetectMaskAuthResponse):void} cb
+     * @public
+     */
+    DetectMaskAuth(req, cb) {
+        let resp = new DetectMaskAuthResponse();
+        this.request("DetectMaskAuth", req, resp, cb);
+    }
+
+    /**
+     * 查询SAML身份提供商详情
+     * @param {GetSAMLProviderRequest} req
+     * @param {function(string, GetSAMLProviderResponse):void} cb
+     * @public
+     */
+    GetSAMLProvider(req, cb) {
+        let resp = new GetSAMLProviderResponse();
+        this.request("GetSAMLProvider", req, resp, cb);
+    }
+
+    /**
+     * 校验新手机新邮箱接口
+     * @param {CheckNewMfaCodeRequest} req
+     * @param {function(string, CheckNewMfaCodeResponse):void} cb
+     * @public
+     */
+    CheckNewMfaCode(req, cb) {
+        let resp = new CheckNewMfaCodeResponse();
+        this.request("CheckNewMfaCode", req, resp, cb);
     }
 
     /**
@@ -430,6 +497,17 @@ class CamClient extends AbstractClient {
     UpdateSAMLProvider(req, cb) {
         let resp = new UpdateSAMLProviderResponse();
         this.request("UpdateSAMLProvider", req, resp, cb);
+    }
+
+    /**
+     * 发起人脸核身
+     * @param {DetectAuthRequest} req
+     * @param {function(string, DetectAuthResponse):void} cb
+     * @public
+     */
+    DetectAuth(req, cb) {
+        let resp = new DetectAuthResponse();
+        this.request("DetectAuth", req, resp, cb);
     }
 
     /**
@@ -576,14 +654,14 @@ class CamClient extends AbstractClient {
     }
 
     /**
-     * 列出用户关联的用户组
-     * @param {ListGroupsForUserRequest} req
-     * @param {function(string, ListGroupsForUserResponse):void} cb
+     * mfa校验
+     * @param {CheckRequest} req
+     * @param {function(string, CheckResponse):void} cb
      * @public
      */
-    ListGroupsForUser(req, cb) {
-        let resp = new ListGroupsForUserResponse();
-        this.request("ListGroupsForUser", req, resp, cb);
+    Check(req, cb) {
+        let resp = new CheckResponse();
+        this.request("Check", req, resp, cb);
     }
 
 

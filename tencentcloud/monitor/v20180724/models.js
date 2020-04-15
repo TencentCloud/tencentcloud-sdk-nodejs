@@ -896,7 +896,7 @@ class CreatePolicyGroupRequest extends  AbstractModel {
         this.Conditions = null;
 
         /**
-         * 策略组中的时间告警规则
+         * 策略组中的事件告警规则
          * @type {Array.<CreatePolicyGroupEventCondition> || null}
          */
         this.EventConditions = null;

@@ -230,6 +230,12 @@ class CreateDBInstanceRequest extends  AbstractModel {
          */
         this.ClientToken = null;
 
+        /**
+         * 实例类型。支持值包括： "HA" - 高可用版实例， "BASIC" - 基础版实例。 不指定则默认为高可用版。
+         * @type {string || null}
+         */
+        this.DeviceType = null;
+
     }
 
     /**
@@ -286,6 +292,7 @@ class CreateDBInstanceRequest extends  AbstractModel {
         }
         this.DeployGroupId = 'DeployGroupId' in params ? params.DeployGroupId : null;
         this.ClientToken = 'ClientToken' in params ? params.ClientToken : null;
+        this.DeviceType = 'DeviceType' in params ? params.DeviceType : null;
 
     }
 }
@@ -614,7 +621,7 @@ class DescribeDatabasesRequest extends  AbstractModel {
         this.Limit = null;
 
         /**
-         * 匹配数据库库名的正则表达式，规则同 MySQL 官网
+         * 匹配数据库库名的正则表达式。
          * @type {string || null}
          */
         this.DatabaseRegexp = null;
@@ -3789,6 +3796,12 @@ class CreateDBInstanceHourRequest extends  AbstractModel {
          */
         this.ClientToken = null;
 
+        /**
+         * 实例类型。支持值包括： "HA" - 高可用版实例， "BASIC" - 基础版实例。 不指定则默认为高可用版。
+         * @type {string || null}
+         */
+        this.DeviceType = null;
+
     }
 
     /**
@@ -3844,6 +3857,7 @@ class CreateDBInstanceHourRequest extends  AbstractModel {
         }
         this.DeployGroupId = 'DeployGroupId' in params ? params.DeployGroupId : null;
         this.ClientToken = 'ClientToken' in params ? params.ClientToken : null;
+        this.DeviceType = 'DeviceType' in params ? params.DeviceType : null;
 
     }
 }

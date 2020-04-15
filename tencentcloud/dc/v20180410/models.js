@@ -1753,6 +1753,13 @@ REJECTED:拒绝
          */
         this.VpcName = null;
 
+        /**
+         * TencentBackupAddress，腾讯侧备用互联 IP
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.TencentBackupAddress = null;
+
     }
 
     /**
@@ -1810,6 +1817,7 @@ REJECTED:拒绝
         this.AccessPointType = 'AccessPointType' in params ? params.AccessPointType : null;
         this.DirectConnectGatewayName = 'DirectConnectGatewayName' in params ? params.DirectConnectGatewayName : null;
         this.VpcName = 'VpcName' in params ? params.VpcName : null;
+        this.TencentBackupAddress = 'TencentBackupAddress' in params ? params.TencentBackupAddress : null;
 
     }
 }
