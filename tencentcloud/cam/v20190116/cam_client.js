@@ -62,6 +62,7 @@ const GroupInfo = models.GroupInfo;
 const AddUserRequest = models.AddUserRequest;
 const LoginActionFlag = models.LoginActionFlag;
 const DeleteRoleRequest = models.DeleteRoleRequest;
+const UpdateRoleConsoleLoginRequest = models.UpdateRoleConsoleLoginRequest;
 const GetCustomMFATokenInfoResponse = models.GetCustomMFATokenInfoResponse;
 const UpdateAssumeRolePolicyResponse = models.UpdateAssumeRolePolicyResponse;
 const DetectStateRequest = models.DetectStateRequest;
@@ -74,6 +75,7 @@ const UpdateSAMLProviderResponse = models.UpdateSAMLProviderResponse;
 const UpdateUserRequest = models.UpdateUserRequest;
 const CreateSAMLProviderRequest = models.CreateSAMLProviderRequest;
 const AttachPolicyInfo = models.AttachPolicyInfo;
+const UpdateRoleConsoleLoginResponse = models.UpdateRoleConsoleLoginResponse;
 const AttachRolePolicyRequest = models.AttachRolePolicyRequest;
 const ConsumeCustomMFATokenResponse = models.ConsumeCustomMFATokenResponse;
 const AttachUserPolicyRequest = models.AttachUserPolicyRequest;
@@ -89,6 +91,7 @@ const DeleteSAMLProviderRequest = models.DeleteSAMLProviderRequest;
 const DeleteSAMLProviderResponse = models.DeleteSAMLProviderResponse;
 const UpdateUserResponse = models.UpdateUserResponse;
 const ListUsersRequest = models.ListUsersRequest;
+const ListCollaboratorsRequest = models.ListCollaboratorsRequest;
 const CreateGroupRequest = models.CreateGroupRequest;
 const UpdateGroupResponse = models.UpdateGroupResponse;
 const ListEntitiesForPolicyRequest = models.ListEntitiesForPolicyRequest;
@@ -120,6 +123,7 @@ const ListEntitiesForPolicyResponse = models.ListEntitiesForPolicyResponse;
 const AddUserToGroupResponse = models.AddUserToGroupResponse;
 const AttachUserPolicyResponse = models.AttachUserPolicyResponse;
 const CheckNewMfaCodeResponse = models.CheckNewMfaCodeResponse;
+const ListCollaboratorsResponse = models.ListCollaboratorsResponse;
 const DescribeMfaCodeStatusRequest = models.DescribeMfaCodeStatusRequest;
 const ListAttachedUserPoliciesRequest = models.ListAttachedUserPoliciesRequest;
 const GroupMemberInfo = models.GroupMemberInfo;
@@ -136,6 +140,17 @@ class CamClient extends AbstractClient {
         super("cam.tencentcloudapi.com", "2019-01-16", credential, region, profile);
     }
     
+    /**
+     * 本接口（UpdateRoleConsoleLogin）用于修改角色是否可登录。
+     * @param {UpdateRoleConsoleLoginRequest} req
+     * @param {function(string, UpdateRoleConsoleLoginResponse):void} cb
+     * @public
+     */
+    UpdateRoleConsoleLogin(req, cb) {
+        let resp = new UpdateRoleConsoleLoginResponse();
+        this.request("UpdateRoleConsoleLogin", req, resp, cb);
+    }
+
     /**
      * 添加子用户
      * @param {AddUserRequest} req
@@ -541,6 +556,17 @@ class CamClient extends AbstractClient {
     DeleteUser(req, cb) {
         let resp = new DeleteUserResponse();
         this.request("DeleteUser", req, resp, cb);
+    }
+
+    /**
+     * 获取协作者列表
+     * @param {ListCollaboratorsRequest} req
+     * @param {function(string, ListCollaboratorsResponse):void} cb
+     * @public
+     */
+    ListCollaborators(req, cb) {
+        let resp = new ListCollaboratorsResponse();
+        this.request("ListCollaborators", req, resp, cb);
     }
 
     /**

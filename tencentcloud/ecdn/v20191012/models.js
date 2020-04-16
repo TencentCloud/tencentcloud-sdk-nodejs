@@ -394,6 +394,16 @@ class Cache extends  AbstractModel {
          */
         this.CacheRules = null;
 
+        /**
+         * 遵循源站 Cache-Control: max-age 配置
+on：开启
+off：关闭
+开启后，未能匹配 CacheRules 规则的资源将根据源站返回的 max-age 值进行节点缓存；匹配了 CacheRules 规则的资源将按照 CacheRules 中设置的缓存过期时间在节点进行缓存
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.FollowOrigin = null;
+
     }
 
     /**
@@ -412,6 +422,7 @@ class Cache extends  AbstractModel {
                 this.CacheRules.push(obj);
             }
         }
+        this.FollowOrigin = 'FollowOrigin' in params ? params.FollowOrigin : null;
 
     }
 }

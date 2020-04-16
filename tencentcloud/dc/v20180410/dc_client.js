@@ -81,7 +81,7 @@ class DcClient extends AbstractClient {
 
     /**
      * 删除物理专线。
-只能删除处于状态的物理专线。
+只能删除处于已连接状态的物理专线。
      * @param {DeleteDirectConnectRequest} req
      * @param {function(string, DeleteDirectConnectResponse):void} cb
      * @public

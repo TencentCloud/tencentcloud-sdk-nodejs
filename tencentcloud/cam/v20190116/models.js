@@ -2170,6 +2170,48 @@ class DeleteRoleRequest extends  AbstractModel {
 }
 
 /**
+ * UpdateRoleConsoleLogin请求参数结构体
+ * @class
+ */
+class UpdateRoleConsoleLoginRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 是否可登录，可登录：1，不可登录：0
+         * @type {number || null}
+         */
+        this.ConsoleLogin = null;
+
+        /**
+         * 角色ID
+         * @type {number || null}
+         */
+        this.RoleId = null;
+
+        /**
+         * 角色名
+         * @type {string || null}
+         */
+        this.RoleName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ConsoleLogin = 'ConsoleLogin' in params ? params.ConsoleLogin : null;
+        this.RoleId = 'RoleId' in params ? params.RoleId : null;
+        this.RoleName = 'RoleName' in params ? params.RoleName : null;
+
+    }
+}
+
+/**
  * GetCustomMFATokenInfo返回参数结构体
  * @class
  */
@@ -2764,6 +2806,34 @@ class AttachPolicyInfo extends  AbstractModel {
         this.OperateUinType = 'OperateUinType' in params ? params.OperateUinType : null;
         this.Deactived = 'Deactived' in params ? params.Deactived : null;
         this.DeactivedDetail = 'DeactivedDetail' in params ? params.DeactivedDetail : null;
+
+    }
+}
+
+/**
+ * UpdateRoleConsoleLogin返回参数结构体
+ * @class
+ */
+class UpdateRoleConsoleLoginResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3439,6 +3509,41 @@ class ListUsersRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+
+    }
+}
+
+/**
+ * ListCollaborators请求参数结构体
+ * @class
+ */
+class ListCollaboratorsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 分页条数，缺省为20
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 分页起始值，缺省为0
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
 
     }
 }
@@ -4388,6 +4493,20 @@ class GetPolicyResponse extends  AbstractModel {
         this.PolicyDocument = null;
 
         /**
+         * 备注
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.PresetAlias = null;
+
+        /**
+         * 是否服务相关策略
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.IsServiceLinkedRolePolicy = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -4408,6 +4527,8 @@ class GetPolicyResponse extends  AbstractModel {
         this.AddTime = 'AddTime' in params ? params.AddTime : null;
         this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
         this.PolicyDocument = 'PolicyDocument' in params ? params.PolicyDocument : null;
+        this.PresetAlias = 'PresetAlias' in params ? params.PresetAlias : null;
+        this.IsServiceLinkedRolePolicy = 'IsServiceLinkedRolePolicy' in params ? params.IsServiceLinkedRolePolicy : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -4749,6 +4870,56 @@ class CheckNewMfaCodeResponse extends  AbstractModel {
 }
 
 /**
+ * ListCollaborators返回参数结构体
+ * @class
+ */
+class ListCollaboratorsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 总数
+         * @type {number || null}
+         */
+        this.TotalNum = null;
+
+        /**
+         * 协作者信息
+         * @type {Array.<SubAccountInfo> || null}
+         */
+        this.Data = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalNum = 'TotalNum' in params ? params.TotalNum : null;
+
+        if (params.Data) {
+            this.Data = new Array();
+            for (let z in params.Data) {
+                let obj = new SubAccountInfo();
+                obj.deserialize(params.Data[z]);
+                this.Data.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeMfaCodeStatus请求参数结构体
  * @class
  */
@@ -5033,6 +5204,7 @@ module.exports = {
     AddUserRequest: AddUserRequest,
     LoginActionFlag: LoginActionFlag,
     DeleteRoleRequest: DeleteRoleRequest,
+    UpdateRoleConsoleLoginRequest: UpdateRoleConsoleLoginRequest,
     GetCustomMFATokenInfoResponse: GetCustomMFATokenInfoResponse,
     UpdateAssumeRolePolicyResponse: UpdateAssumeRolePolicyResponse,
     DetectStateRequest: DetectStateRequest,
@@ -5045,6 +5217,7 @@ module.exports = {
     UpdateUserRequest: UpdateUserRequest,
     CreateSAMLProviderRequest: CreateSAMLProviderRequest,
     AttachPolicyInfo: AttachPolicyInfo,
+    UpdateRoleConsoleLoginResponse: UpdateRoleConsoleLoginResponse,
     AttachRolePolicyRequest: AttachRolePolicyRequest,
     ConsumeCustomMFATokenResponse: ConsumeCustomMFATokenResponse,
     AttachUserPolicyRequest: AttachUserPolicyRequest,
@@ -5060,6 +5233,7 @@ module.exports = {
     DeleteSAMLProviderResponse: DeleteSAMLProviderResponse,
     UpdateUserResponse: UpdateUserResponse,
     ListUsersRequest: ListUsersRequest,
+    ListCollaboratorsRequest: ListCollaboratorsRequest,
     CreateGroupRequest: CreateGroupRequest,
     UpdateGroupResponse: UpdateGroupResponse,
     ListEntitiesForPolicyRequest: ListEntitiesForPolicyRequest,
@@ -5091,6 +5265,7 @@ module.exports = {
     AddUserToGroupResponse: AddUserToGroupResponse,
     AttachUserPolicyResponse: AttachUserPolicyResponse,
     CheckNewMfaCodeResponse: CheckNewMfaCodeResponse,
+    ListCollaboratorsResponse: ListCollaboratorsResponse,
     DescribeMfaCodeStatusRequest: DescribeMfaCodeStatusRequest,
     ListAttachedUserPoliciesRequest: ListAttachedUserPoliciesRequest,
     GroupMemberInfo: GroupMemberInfo,

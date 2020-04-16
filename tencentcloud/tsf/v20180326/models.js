@@ -1269,6 +1269,12 @@ class CreateGroupRequest extends  AbstractModel {
          */
         this.GroupDesc = null;
 
+        /**
+         * 部署组资源类型
+         * @type {string || null}
+         */
+        this.GroupResourceType = null;
+
     }
 
     /**
@@ -1283,6 +1289,7 @@ class CreateGroupRequest extends  AbstractModel {
         this.GroupName = 'GroupName' in params ? params.GroupName : null;
         this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
         this.GroupDesc = 'GroupDesc' in params ? params.GroupDesc : null;
+        this.GroupResourceType = 'GroupResourceType' in params ? params.GroupResourceType : null;
 
     }
 }
@@ -5863,7 +5870,7 @@ class CreateClusterResponse extends  AbstractModel {
          * 创建集群操作是否成功。
 true：操作成功。
 false：操作失败。
-         * @type {boolean || null}
+         * @type {string || null}
          */
         this.Result = null;
 
@@ -9802,13 +9809,13 @@ class DeployContainerGroupRequest extends  AbstractModel {
         this.Reponame = null;
 
         /**
-         * 最大的 CPU 核数，对应 K8S 的 limit；不填时默认为 request 的 2 倍
+         * 业务容器最大的 CPU 核数，对应 K8S 的 limit；不填时默认为 request 的 2 倍
          * @type {string || null}
          */
         this.CpuLimit = null;
 
         /**
-         * 最大的内存 MiB 数，对应 K8S 的 limit；不填时默认为 request 的 2 倍
+         * 业务容器最大的内存 MiB 数，对应 K8S 的 limit；不填时默认为 request 的 2 倍
          * @type {string || null}
          */
         this.MemLimit = null;
@@ -9820,13 +9827,13 @@ class DeployContainerGroupRequest extends  AbstractModel {
         this.JvmOpts = null;
 
         /**
-         * 分配的 CPU 核数，对应 K8S 的 request
+         * 业务容器分配的 CPU 核数，对应 K8S 的 request
          * @type {string || null}
          */
         this.CpuRequest = null;
 
         /**
-         * 分配的内存 MiB 数，对应 K8S 的 request
+         * 业务容器分配的内存 MiB 数，对应 K8S 的 request
          * @type {string || null}
          */
         this.MemRequest = null;
@@ -9855,6 +9862,54 @@ class DeployContainerGroupRequest extends  AbstractModel {
          */
         this.UpdateIvl = null;
 
+        /**
+         * agent 容器分配的 CPU 核数，对应 K8S 的 request
+         * @type {string || null}
+         */
+        this.AgentCpuRequest = null;
+
+        /**
+         * agent 容器最大的 CPU 核数，对应 K8S 的 limit
+         * @type {string || null}
+         */
+        this.AgentCpuLimit = null;
+
+        /**
+         * agent 容器分配的内存 MiB 数，对应 K8S 的 request
+         * @type {string || null}
+         */
+        this.AgentMemRequest = null;
+
+        /**
+         * agent 容器最大的内存 MiB 数，对应 K8S 的 limit
+         * @type {string || null}
+         */
+        this.AgentMemLimit = null;
+
+        /**
+         * istioproxy 容器分配的 CPU 核数，对应 K8S 的 request
+         * @type {string || null}
+         */
+        this.IstioCpuRequest = null;
+
+        /**
+         * istioproxy 容器最大的 CPU 核数，对应 K8S 的 limit
+         * @type {string || null}
+         */
+        this.IstioCpuLimit = null;
+
+        /**
+         * istioproxy 容器分配的内存 MiB 数，对应 K8S 的 request
+         * @type {string || null}
+         */
+        this.IstioMemRequest = null;
+
+        /**
+         * istioproxy 容器最大的内存 MiB 数，对应 K8S 的 limit
+         * @type {string || null}
+         */
+        this.IstioMemLimit = null;
+
     }
 
     /**
@@ -9878,6 +9933,14 @@ class DeployContainerGroupRequest extends  AbstractModel {
         this.RepoName = 'RepoName' in params ? params.RepoName : null;
         this.UpdateType = 'UpdateType' in params ? params.UpdateType : null;
         this.UpdateIvl = 'UpdateIvl' in params ? params.UpdateIvl : null;
+        this.AgentCpuRequest = 'AgentCpuRequest' in params ? params.AgentCpuRequest : null;
+        this.AgentCpuLimit = 'AgentCpuLimit' in params ? params.AgentCpuLimit : null;
+        this.AgentMemRequest = 'AgentMemRequest' in params ? params.AgentMemRequest : null;
+        this.AgentMemLimit = 'AgentMemLimit' in params ? params.AgentMemLimit : null;
+        this.IstioCpuRequest = 'IstioCpuRequest' in params ? params.IstioCpuRequest : null;
+        this.IstioCpuLimit = 'IstioCpuLimit' in params ? params.IstioCpuLimit : null;
+        this.IstioMemRequest = 'IstioMemRequest' in params ? params.IstioMemRequest : null;
+        this.IstioMemLimit = 'IstioMemLimit' in params ? params.IstioMemLimit : null;
 
     }
 }
@@ -10152,6 +10215,66 @@ class CreateContainGroupRequest extends  AbstractModel {
          */
         this.MemRequest = null;
 
+        /**
+         * 部署组资源类型
+         * @type {string || null}
+         */
+        this.GroupResourceType = null;
+
+        /**
+         * 子网ID
+         * @type {string || null}
+         */
+        this.SubnetId = null;
+
+        /**
+         * agent 容器分配的 CPU 核数，对应 K8S 的 request
+         * @type {string || null}
+         */
+        this.AgentCpuRequest = null;
+
+        /**
+         * agent 容器最大的 CPU 核数，对应 K8S 的 limit
+         * @type {string || null}
+         */
+        this.AgentCpuLimit = null;
+
+        /**
+         * agent 容器分配的内存 MiB 数，对应 K8S 的 request
+         * @type {string || null}
+         */
+        this.AgentMemRequest = null;
+
+        /**
+         * agent 容器最大的内存 MiB 数，对应 K8S 的 limit
+         * @type {string || null}
+         */
+        this.AgentMemLimit = null;
+
+        /**
+         * istioproxy 容器分配的 CPU 核数，对应 K8S 的 request
+         * @type {string || null}
+         */
+        this.IstioCpuRequest = null;
+
+        /**
+         * istioproxy 容器最大的 CPU 核数，对应 K8S 的 limit
+         * @type {string || null}
+         */
+        this.IstioCpuLimit = null;
+
+        /**
+         * istioproxy 容器分配的内存 MiB 数，对应 K8S 的 request
+         * @type {string || null}
+         */
+        this.IstioMemRequest = null;
+
+        /**
+         * istioproxy 容器最大的内存 MiB 数，对应 K8S 的 limit
+         * @type {string || null}
+         */
+        this.IstioMemLimit = null;
+
     }
 
     /**
@@ -10183,6 +10306,16 @@ class CreateContainGroupRequest extends  AbstractModel {
         this.UpdateIvl = 'UpdateIvl' in params ? params.UpdateIvl : null;
         this.CpuRequest = 'CpuRequest' in params ? params.CpuRequest : null;
         this.MemRequest = 'MemRequest' in params ? params.MemRequest : null;
+        this.GroupResourceType = 'GroupResourceType' in params ? params.GroupResourceType : null;
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
+        this.AgentCpuRequest = 'AgentCpuRequest' in params ? params.AgentCpuRequest : null;
+        this.AgentCpuLimit = 'AgentCpuLimit' in params ? params.AgentCpuLimit : null;
+        this.AgentMemRequest = 'AgentMemRequest' in params ? params.AgentMemRequest : null;
+        this.AgentMemLimit = 'AgentMemLimit' in params ? params.AgentMemLimit : null;
+        this.IstioCpuRequest = 'IstioCpuRequest' in params ? params.IstioCpuRequest : null;
+        this.IstioCpuLimit = 'IstioCpuLimit' in params ? params.IstioCpuLimit : null;
+        this.IstioMemRequest = 'IstioMemRequest' in params ? params.IstioMemRequest : null;
+        this.IstioMemLimit = 'IstioMemLimit' in params ? params.IstioMemLimit : null;
 
     }
 }
