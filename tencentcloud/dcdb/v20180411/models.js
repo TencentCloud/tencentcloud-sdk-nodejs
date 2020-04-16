@@ -304,18 +304,24 @@ class DescribeAccountsRequest extends  AbstractModel {
 }
 
 /**
- * OpenDBExtranetAccess请求参数结构体
+ * 按机型分类的规格配置
  * @class
  */
-class OpenDBExtranetAccessRequest extends  AbstractModel {
+class SpecConfig extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 待开放外网访问的实例ID。形如：dcdbt-ow728lmc。
+         * 规格机型
          * @type {string || null}
          */
-        this.InstanceId = null;
+        this.Machine = null;
+
+        /**
+         * 规格列表
+         * @type {Array.<SpecConfigInfo> || null}
+         */
+        this.SpecConfigInfos = null;
 
     }
 
@@ -326,7 +332,16 @@ class OpenDBExtranetAccessRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Machine = 'Machine' in params ? params.Machine : null;
+
+        if (params.SpecConfigInfos) {
+            this.SpecConfigInfos = new Array();
+            for (let z in params.SpecConfigInfos) {
+                let obj = new SpecConfigInfo();
+                obj.deserialize(params.SpecConfigInfos[z]);
+                this.SpecConfigInfos.push(obj);
+            }
+        }
 
     }
 }
@@ -565,30 +580,78 @@ class CreateAccountRequest extends  AbstractModel {
 }
 
 /**
- * DescribeDBParameters返回参数结构体
+ * 项目信息描述
  * @class
  */
-class DescribeDBParametersResponse extends  AbstractModel {
+class Project extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 实例 ID，形如：dcdbt-ow7t8lmc。
-         * @type {string || null}
+         * 项目ID
+         * @type {number || null}
          */
-        this.InstanceId = null;
+        this.ProjectId = null;
 
         /**
-         * 请求DB的当前参数值
-         * @type {Array.<ParamDesc> || null}
+         * 资源拥有者（主账号）uin
+         * @type {number || null}
          */
-        this.Params = null;
+        this.OwnerUin = null;
 
         /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * 应用Id
+         * @type {number || null}
+         */
+        this.AppId = null;
+
+        /**
+         * 项目名称
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.Name = null;
+
+        /**
+         * 创建者uin
+         * @type {number || null}
+         */
+        this.CreatorUin = null;
+
+        /**
+         * 来源平台
+         * @type {string || null}
+         */
+        this.SrcPlat = null;
+
+        /**
+         * 来源AppId
+         * @type {number || null}
+         */
+        this.SrcAppId = null;
+
+        /**
+         * 项目状态,0正常，-1关闭。默认项目为3
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * 创建时间
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * 是否默认项目，1 是，0 不是
+         * @type {number || null}
+         */
+        this.IsDefault = null;
+
+        /**
+         * 描述信息
+         * @type {string || null}
+         */
+        this.Info = null;
 
     }
 
@@ -599,17 +662,17 @@ class DescribeDBParametersResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-
-        if (params.Params) {
-            this.Params = new Array();
-            for (let z in params.Params) {
-                let obj = new ParamDesc();
-                obj.deserialize(params.Params[z]);
-                this.Params.push(obj);
-            }
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+        this.OwnerUin = 'OwnerUin' in params ? params.OwnerUin : null;
+        this.AppId = 'AppId' in params ? params.AppId : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.CreatorUin = 'CreatorUin' in params ? params.CreatorUin : null;
+        this.SrcPlat = 'SrcPlat' in params ? params.SrcPlat : null;
+        this.SrcAppId = 'SrcAppId' in params ? params.SrcAppId : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.IsDefault = 'IsDefault' in params ? params.IsDefault : null;
+        this.Info = 'Info' in params ? params.Info : null;
 
     }
 }
@@ -3087,24 +3150,18 @@ class ShardInfo extends  AbstractModel {
 }
 
 /**
- * 按机型分类的规格配置
+ * OpenDBExtranetAccess请求参数结构体
  * @class
  */
-class SpecConfig extends  AbstractModel {
+class OpenDBExtranetAccessRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 规格机型
+         * 待开放外网访问的实例ID。形如：dcdbt-ow728lmc。
          * @type {string || null}
          */
-        this.Machine = null;
-
-        /**
-         * 规格列表
-         * @type {Array.<SpecConfigInfo> || null}
-         */
-        this.SpecConfigInfos = null;
+        this.InstanceId = null;
 
     }
 
@@ -3115,16 +3172,7 @@ class SpecConfig extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Machine = 'Machine' in params ? params.Machine : null;
-
-        if (params.SpecConfigInfos) {
-            this.SpecConfigInfos = new Array();
-            for (let z in params.SpecConfigInfos) {
-                let obj = new SpecConfigInfo();
-                obj.deserialize(params.SpecConfigInfos[z]);
-                this.SpecConfigInfos.push(obj);
-            }
-        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
 
     }
 }
@@ -3280,6 +3328,27 @@ class ModifyAccountDescriptionRequest extends  AbstractModel {
         this.UserName = 'UserName' in params ? params.UserName : null;
         this.Host = 'Host' in params ? params.Host : null;
         this.Description = 'Description' in params ? params.Description : null;
+
+    }
+}
+
+/**
+ * DescribeProjects请求参数结构体
+ * @class
+ */
+class DescribeProjectsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
 
     }
 }
@@ -3698,6 +3767,7 @@ class CreateDCDBInstanceRequest extends  AbstractModel {
 
         /**
          * 分片节点可用区分布，最多可填两个可用区。当分片规格为一主两从时，其中两个节点在第一个可用区。
+注意当前可售卖的可用区需要通过DescribeDCDBSaleInfo接口拉取。
          * @type {Array.<string> || null}
          */
         this.Zones = null;
@@ -3996,6 +4066,49 @@ class ModifyDBSyncModeRequest extends  AbstractModel {
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
         this.SyncMode = 'SyncMode' in params ? params.SyncMode : null;
+
+    }
+}
+
+/**
+ * DescribeProjects返回参数结构体
+ * @class
+ */
+class DescribeProjectsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 项目列表
+         * @type {Array.<Project> || null}
+         */
+        this.Projects = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Projects) {
+            this.Projects = new Array();
+            for (let z in params.Projects) {
+                let obj = new Project();
+                obj.deserialize(params.Projects[z]);
+                this.Projects.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -4802,6 +4915,56 @@ class DescribeDCDBInstancesRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeDBParameters返回参数结构体
+ * @class
+ */
+class DescribeDBParametersResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例 ID，形如：dcdbt-ow7t8lmc。
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 请求DB的当前参数值
+         * @type {Array.<ParamDesc> || null}
+         */
+        this.Params = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+        if (params.Params) {
+            this.Params = new Array();
+            for (let z in params.Params) {
+                let obj = new ParamDesc();
+                obj.deserialize(params.Params[z]);
+                this.Params.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * ModifyDBInstancesProject请求参数结构体
  * @class
  */
@@ -4907,13 +5070,13 @@ module.exports = {
     ParamDesc: ParamDesc,
     DescribeDBParametersRequest: DescribeDBParametersRequest,
     DescribeAccountsRequest: DescribeAccountsRequest,
-    OpenDBExtranetAccessRequest: OpenDBExtranetAccessRequest,
+    SpecConfig: SpecConfig,
     DescribeDCDBPriceResponse: DescribeDCDBPriceResponse,
     RenewDCDBInstanceResponse: RenewDCDBInstanceResponse,
     DescribeDBSyncModeResponse: DescribeDBSyncModeResponse,
     DescribeDCDBUpgradePriceResponse: DescribeDCDBUpgradePriceResponse,
     CreateAccountRequest: CreateAccountRequest,
-    DescribeDBParametersResponse: DescribeDBParametersResponse,
+    Project: Project,
     CloneAccountResponse: CloneAccountResponse,
     ModifyAccountDescriptionResponse: ModifyAccountDescriptionResponse,
     CreateDCDBInstanceResponse: CreateDCDBInstanceResponse,
@@ -4959,11 +5122,12 @@ module.exports = {
     Database: Database,
     GrantAccountPrivilegesResponse: GrantAccountPrivilegesResponse,
     ShardInfo: ShardInfo,
-    SpecConfig: SpecConfig,
+    OpenDBExtranetAccessRequest: OpenDBExtranetAccessRequest,
     DescribeDCDBSaleInfoResponse: DescribeDCDBSaleInfoResponse,
     DescribeDBSyncModeRequest: DescribeDBSyncModeRequest,
     CloseDBExtranetAccessResponse: CloseDBExtranetAccessResponse,
     ModifyAccountDescriptionRequest: ModifyAccountDescriptionRequest,
+    DescribeProjectsRequest: DescribeProjectsRequest,
     DescribeDatabasesResponse: DescribeDatabasesResponse,
     DescribeOrdersRequest: DescribeOrdersRequest,
     DescribeDBLogFilesResponse: DescribeDBLogFilesResponse,
@@ -4977,6 +5141,7 @@ module.exports = {
     DatabaseProcedure: DatabaseProcedure,
     AddShardConfig: AddShardConfig,
     ModifyDBSyncModeRequest: ModifyDBSyncModeRequest,
+    DescribeProjectsResponse: DescribeProjectsResponse,
     CreateAccountResponse: CreateAccountResponse,
     RegionInfo: RegionInfo,
     DescribeDatabaseObjectsRequest: DescribeDatabaseObjectsRequest,
@@ -4989,6 +5154,7 @@ module.exports = {
     SqlLogItem: SqlLogItem,
     DescribeAccountsResponse: DescribeAccountsResponse,
     DescribeDCDBInstancesRequest: DescribeDCDBInstancesRequest,
+    DescribeDBParametersResponse: DescribeDBParametersResponse,
     ModifyDBInstancesProjectRequest: ModifyDBInstancesProjectRequest,
     ModifyDBSyncModeResponse: ModifyDBSyncModeResponse,
     DeleteAccountResponse: DeleteAccountResponse,

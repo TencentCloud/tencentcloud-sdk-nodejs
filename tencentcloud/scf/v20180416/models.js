@@ -1083,6 +1083,12 @@ class InvokeRequest extends  AbstractModel {
          */
         this.Namespace = null;
 
+        /**
+         * 函数灰度流量控制调用，以json格式传入，例如{"k":"v"}，注意kv都需要是字符串类型，最大支持的参数长度是1024字节
+         * @type {string || null}
+         */
+        this.RoutingKey = null;
+
     }
 
     /**
@@ -1098,6 +1104,7 @@ class InvokeRequest extends  AbstractModel {
         this.ClientContext = 'ClientContext' in params ? params.ClientContext : null;
         this.LogType = 'LogType' in params ? params.LogType : null;
         this.Namespace = 'Namespace' in params ? params.Namespace : null;
+        this.RoutingKey = 'RoutingKey' in params ? params.RoutingKey : null;
 
     }
 }

@@ -23,13 +23,13 @@ const DescribeDatabasesRequest = models.DescribeDatabasesRequest;
 const ParamDesc = models.ParamDesc;
 const DescribeDBParametersRequest = models.DescribeDBParametersRequest;
 const DescribeAccountsRequest = models.DescribeAccountsRequest;
-const OpenDBExtranetAccessRequest = models.OpenDBExtranetAccessRequest;
+const SpecConfig = models.SpecConfig;
 const DescribeDCDBPriceResponse = models.DescribeDCDBPriceResponse;
 const RenewDCDBInstanceResponse = models.RenewDCDBInstanceResponse;
 const DescribeDBSyncModeResponse = models.DescribeDBSyncModeResponse;
 const DescribeDCDBUpgradePriceResponse = models.DescribeDCDBUpgradePriceResponse;
 const CreateAccountRequest = models.CreateAccountRequest;
-const DescribeDBParametersResponse = models.DescribeDBParametersResponse;
+const Project = models.Project;
 const CloneAccountResponse = models.CloneAccountResponse;
 const ModifyAccountDescriptionResponse = models.ModifyAccountDescriptionResponse;
 const CreateDCDBInstanceResponse = models.CreateDCDBInstanceResponse;
@@ -75,11 +75,12 @@ const DescribeDCDBShardsResponse = models.DescribeDCDBShardsResponse;
 const Database = models.Database;
 const GrantAccountPrivilegesResponse = models.GrantAccountPrivilegesResponse;
 const ShardInfo = models.ShardInfo;
-const SpecConfig = models.SpecConfig;
+const OpenDBExtranetAccessRequest = models.OpenDBExtranetAccessRequest;
 const DescribeDCDBSaleInfoResponse = models.DescribeDCDBSaleInfoResponse;
 const DescribeDBSyncModeRequest = models.DescribeDBSyncModeRequest;
 const CloseDBExtranetAccessResponse = models.CloseDBExtranetAccessResponse;
 const ModifyAccountDescriptionRequest = models.ModifyAccountDescriptionRequest;
+const DescribeProjectsRequest = models.DescribeProjectsRequest;
 const DescribeDatabasesResponse = models.DescribeDatabasesResponse;
 const DescribeOrdersRequest = models.DescribeOrdersRequest;
 const DescribeDBLogFilesResponse = models.DescribeDBLogFilesResponse;
@@ -93,6 +94,7 @@ const DescribeDCDBUpgradePriceRequest = models.DescribeDCDBUpgradePriceRequest;
 const DatabaseProcedure = models.DatabaseProcedure;
 const AddShardConfig = models.AddShardConfig;
 const ModifyDBSyncModeRequest = models.ModifyDBSyncModeRequest;
+const DescribeProjectsResponse = models.DescribeProjectsResponse;
 const CreateAccountResponse = models.CreateAccountResponse;
 const RegionInfo = models.RegionInfo;
 const DescribeDatabaseObjectsRequest = models.DescribeDatabaseObjectsRequest;
@@ -105,6 +107,7 @@ const DescribeAccountPrivilegesRequest = models.DescribeAccountPrivilegesRequest
 const SqlLogItem = models.SqlLogItem;
 const DescribeAccountsResponse = models.DescribeAccountsResponse;
 const DescribeDCDBInstancesRequest = models.DescribeDCDBInstancesRequest;
+const DescribeDBParametersResponse = models.DescribeDBParametersResponse;
 const ModifyDBInstancesProjectRequest = models.ModifyDBInstancesProjectRequest;
 const ModifyDBSyncModeResponse = models.ModifyDBSyncModeResponse;
 const DeleteAccountResponse = models.DeleteAccountResponse;
@@ -386,6 +389,17 @@ class DcdbClient extends AbstractClient {
     ModifyDBSyncMode(req, cb) {
         let resp = new ModifyDBSyncModeResponse();
         this.request("ModifyDBSyncMode", req, resp, cb);
+    }
+
+    /**
+     * 本接口（DescribeProjects）用于查询项目列表
+     * @param {DescribeProjectsRequest} req
+     * @param {function(string, DescribeProjectsResponse):void} cb
+     * @public
+     */
+    DescribeProjects(req, cb) {
+        let resp = new DescribeProjectsResponse();
+        this.request("DescribeProjects", req, resp, cb);
     }
 
     /**

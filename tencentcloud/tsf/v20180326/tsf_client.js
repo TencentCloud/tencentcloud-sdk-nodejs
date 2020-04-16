@@ -246,7 +246,7 @@ class TsfClient extends AbstractClient {
     }
 
     /**
-     * 创建容器部署组
+     * 创建虚拟机部署组
      * @param {CreateGroupRequest} req
      * @param {function(string, CreateGroupResponse):void} cb
      * @public

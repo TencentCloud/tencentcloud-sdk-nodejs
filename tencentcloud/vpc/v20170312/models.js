@@ -3143,13 +3143,13 @@ class DescribeVpcsRequest extends  AbstractModel {
         this.Filters = null;
 
         /**
-         * 偏移量
+         * 偏移量，默认为0。
          * @type {string || null}
          */
         this.Offset = null;
 
         /**
-         * 返回数量
+         * 返回数量，默认为20，最大值为100。
          * @type {string || null}
          */
         this.Limit = null;
