@@ -392,6 +392,7 @@ const DescribeCustomerGatewaysResponse = models.DescribeCustomerGatewaysResponse
 const CheckAssistantCidrResponse = models.CheckAssistantCidrResponse;
 const InquiryPriceRenewVpnGatewayRequest = models.InquiryPriceRenewVpnGatewayRequest;
 const DeleteHaVipRequest = models.DeleteHaVipRequest;
+const ModifyVpnGatewayCcnRoutesResponse = models.ModifyVpnGatewayCcnRoutesResponse;
 const DetachCcnInstancesResponse = models.DetachCcnInstancesResponse;
 const ModifyServiceTemplateGroupAttributeResponse = models.ModifyServiceTemplateGroupAttributeResponse;
 const DeleteSubnetRequest = models.DeleteSubnetRequest;
@@ -399,6 +400,7 @@ const DescribeAddressTemplateGroupsRequest = models.DescribeAddressTemplateGroup
 const CheckNetDetectStateResponse = models.CheckNetDetectStateResponse;
 const AssociateNatGatewayAddressResponse = models.AssociateNatGatewayAddressResponse;
 const RemoveBandwidthPackageResourcesRequest = models.RemoveBandwidthPackageResourcesRequest;
+const VpngwCcnRoutes = models.VpngwCcnRoutes;
 const RouteTable = models.RouteTable;
 const DeleteNetworkInterfaceRequest = models.DeleteNetworkInterfaceRequest;
 const InquiryPriceResetVpnGatewayInternetMaxBandwidthResponse = models.InquiryPriceResetVpnGatewayInternetMaxBandwidthResponse;
@@ -426,6 +428,7 @@ const RemoveBandwidthPackageResourcesResponse = models.RemoveBandwidthPackageRes
 const AssignIpv6AddressesResponse = models.AssignIpv6AddressesResponse;
 const CreateRoutesResponse = models.CreateRoutesResponse;
 const DescribeSecurityGroupsResponse = models.DescribeSecurityGroupsResponse;
+const ModifyVpnGatewayCcnRoutesRequest = models.ModifyVpnGatewayCcnRoutesRequest;
 const DescribeGatewayFlowQosRequest = models.DescribeGatewayFlowQosRequest;
 const ReplaceDirectConnectGatewayCcnRoutesResponse = models.ReplaceDirectConnectGatewayCcnRoutesResponse;
 const ModifySecurityGroupPoliciesResponse = models.ModifySecurityGroupPoliciesResponse;
@@ -1551,6 +1554,17 @@ class VpcClient extends AbstractClient {
     HaVipDisassociateAddressIp(req, cb) {
         let resp = new HaVipDisassociateAddressIpResponse();
         this.request("HaVipDisassociateAddressIp", req, resp, cb);
+    }
+
+    /**
+     * 本接口（ModifyVpnGatewayCcnRoutes）用于修改VPN网关云联网路由
+     * @param {ModifyVpnGatewayCcnRoutesRequest} req
+     * @param {function(string, ModifyVpnGatewayCcnRoutesResponse):void} cb
+     * @public
+     */
+    ModifyVpnGatewayCcnRoutes(req, cb) {
+        let resp = new ModifyVpnGatewayCcnRoutesResponse();
+        this.request("ModifyVpnGatewayCcnRoutes", req, resp, cb);
     }
 
     /**

@@ -797,6 +797,12 @@ STATIC：静态
          */
         this.CustomerAddress = null;
 
+        /**
+         * TencentBackupAddress，腾讯侧备用互联 IP
+         * @type {string || null}
+         */
+        this.TencentBackupAddress = null;
+
     }
 
     /**
@@ -833,6 +839,7 @@ STATIC：静态
         this.Vlan = 'Vlan' in params ? params.Vlan : null;
         this.TencentAddress = 'TencentAddress' in params ? params.TencentAddress : null;
         this.CustomerAddress = 'CustomerAddress' in params ? params.CustomerAddress : null;
+        this.TencentBackupAddress = 'TencentBackupAddress' in params ? params.TencentBackupAddress : null;
 
     }
 }

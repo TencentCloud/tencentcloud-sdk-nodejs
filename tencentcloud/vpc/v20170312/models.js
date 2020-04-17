@@ -10454,13 +10454,13 @@ class NetworkAclEntry extends  AbstractModel {
         this.ModifyTime = null;
 
         /**
-         * 协议, 取值: TCP,UDP, ICMP。
+         * 协议, 取值: TCP,UDP, ICMP, ALL。
          * @type {string || null}
          */
         this.Protocol = null;
 
         /**
-         * 端口(all, 单个port,  range)。
+         * 端口(all, 单个port,  range)。当Protocol为ALL或ICMP时，不能指定Port。
          * @type {string || null}
          */
         this.Port = null;
@@ -17431,6 +17431,34 @@ class DeleteHaVipRequest extends  AbstractModel {
 }
 
 /**
+ * ModifyVpnGatewayCcnRoutes返回参数结构体
+ * @class
+ */
+class ModifyVpnGatewayCcnRoutesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DetachCcnInstances返回参数结构体
  * @class
  */
@@ -17675,6 +17703,43 @@ class RemoveBandwidthPackageResourcesRequest extends  AbstractModel {
         this.BandwidthPackageId = 'BandwidthPackageId' in params ? params.BandwidthPackageId : null;
         this.ResourceType = 'ResourceType' in params ? params.ResourceType : null;
         this.ResourceIds = 'ResourceIds' in params ? params.ResourceIds : null;
+
+    }
+}
+
+/**
+ * VPN网关云联网路由信息
+ * @class
+ */
+class VpngwCcnRoutes extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 路由信息ID
+         * @type {string || null}
+         */
+        this.RouteId = null;
+
+        /**
+         * 路由信息是否启用
+ENABLE：启用该路由
+DISABLE：不启用该路由
+         * @type {string || null}
+         */
+        this.Status = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RouteId = 'RouteId' in params ? params.RouteId : null;
+        this.Status = 'Status' in params ? params.Status : null;
 
     }
 }
@@ -18140,6 +18205,12 @@ class CreateVpnGatewayRequest extends  AbstractModel {
          */
         this.Zone = null;
 
+        /**
+         * VPN网关类型。值“CCN”云联网类型VPN网关
+         * @type {string || null}
+         */
+        this.Type = null;
+
     }
 
     /**
@@ -18160,6 +18231,7 @@ class CreateVpnGatewayRequest extends  AbstractModel {
             this.InstanceChargePrepaid = obj;
         }
         this.Zone = 'Zone' in params ? params.Zone : null;
+        this.Type = 'Type' in params ? params.Type : null;
 
     }
 }
@@ -18749,6 +18821,49 @@ class DescribeSecurityGroupsResponse extends  AbstractModel {
         }
         this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifyVpnGatewayCcnRoutes请求参数结构体
+ * @class
+ */
+class ModifyVpnGatewayCcnRoutesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * VPN网关实例ID
+         * @type {string || null}
+         */
+        this.VpnGatewayId = null;
+
+        /**
+         * 云联网路由（IDC网段）列表
+         * @type {Array.<VpngwCcnRoutes> || null}
+         */
+        this.Routes = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.VpnGatewayId = 'VpnGatewayId' in params ? params.VpnGatewayId : null;
+
+        if (params.Routes) {
+            this.Routes = new Array();
+            for (let z in params.Routes) {
+                let obj = new VpngwCcnRoutes();
+                obj.deserialize(params.Routes[z]);
+                this.Routes.push(obj);
+            }
+        }
 
     }
 }
@@ -22408,6 +22523,7 @@ module.exports = {
     CheckAssistantCidrResponse: CheckAssistantCidrResponse,
     InquiryPriceRenewVpnGatewayRequest: InquiryPriceRenewVpnGatewayRequest,
     DeleteHaVipRequest: DeleteHaVipRequest,
+    ModifyVpnGatewayCcnRoutesResponse: ModifyVpnGatewayCcnRoutesResponse,
     DetachCcnInstancesResponse: DetachCcnInstancesResponse,
     ModifyServiceTemplateGroupAttributeResponse: ModifyServiceTemplateGroupAttributeResponse,
     DeleteSubnetRequest: DeleteSubnetRequest,
@@ -22415,6 +22531,7 @@ module.exports = {
     CheckNetDetectStateResponse: CheckNetDetectStateResponse,
     AssociateNatGatewayAddressResponse: AssociateNatGatewayAddressResponse,
     RemoveBandwidthPackageResourcesRequest: RemoveBandwidthPackageResourcesRequest,
+    VpngwCcnRoutes: VpngwCcnRoutes,
     RouteTable: RouteTable,
     DeleteNetworkInterfaceRequest: DeleteNetworkInterfaceRequest,
     InquiryPriceResetVpnGatewayInternetMaxBandwidthResponse: InquiryPriceResetVpnGatewayInternetMaxBandwidthResponse,
@@ -22442,6 +22559,7 @@ module.exports = {
     AssignIpv6AddressesResponse: AssignIpv6AddressesResponse,
     CreateRoutesResponse: CreateRoutesResponse,
     DescribeSecurityGroupsResponse: DescribeSecurityGroupsResponse,
+    ModifyVpnGatewayCcnRoutesRequest: ModifyVpnGatewayCcnRoutesRequest,
     DescribeGatewayFlowQosRequest: DescribeGatewayFlowQosRequest,
     ReplaceDirectConnectGatewayCcnRoutesResponse: ReplaceDirectConnectGatewayCcnRoutesResponse,
     ModifySecurityGroupPoliciesResponse: ModifySecurityGroupPoliciesResponse,
