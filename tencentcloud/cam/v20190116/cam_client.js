@@ -90,6 +90,7 @@ const GetGroupResponse = models.GetGroupResponse;
 const DeleteSAMLProviderRequest = models.DeleteSAMLProviderRequest;
 const DeleteSAMLProviderResponse = models.DeleteSAMLProviderResponse;
 const UpdateUserResponse = models.UpdateUserResponse;
+const DescribeMFADeviceCollRequest = models.DescribeMFADeviceCollRequest;
 const ListUsersRequest = models.ListUsersRequest;
 const ListCollaboratorsRequest = models.ListCollaboratorsRequest;
 const CreateGroupRequest = models.CreateGroupRequest;
@@ -114,6 +115,7 @@ const GetSAMLProviderRequest = models.GetSAMLProviderRequest;
 const DetachUserPolicyResponse = models.DetachUserPolicyResponse;
 const GetRoleResponse = models.GetRoleResponse;
 const CreateRoleRequest = models.CreateRoleRequest;
+const DescribeMFADeviceCollResponse = models.DescribeMFADeviceCollResponse;
 const GetPolicyResponse = models.GetPolicyResponse;
 const DeleteGroupResponse = models.DeleteGroupResponse;
 const AttachEntityOfPolicy = models.AttachEntityOfPolicy;
@@ -292,6 +294,17 @@ class CamClient extends AbstractClient {
     UpdateUser(req, cb) {
         let resp = new UpdateUserResponse();
         this.request("UpdateUser", req, resp, cb);
+    }
+
+    /**
+     * 查询mfa设备
+     * @param {DescribeMFADeviceCollRequest} req
+     * @param {function(string, DescribeMFADeviceCollResponse):void} cb
+     * @public
+     */
+    DescribeMFADeviceColl(req, cb) {
+        let resp = new DescribeMFADeviceCollResponse();
+        this.request("DescribeMFADeviceColl", req, resp, cb);
     }
 
     /**

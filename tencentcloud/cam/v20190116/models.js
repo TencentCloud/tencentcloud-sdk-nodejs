@@ -3493,6 +3493,34 @@ class UpdateUserResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeMFADeviceColl请求参数结构体
+ * @class
+ */
+class DescribeMFADeviceCollRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 子用户Uin
+         * @type {number || null}
+         */
+        this.SubUin = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SubUin = 'SubUin' in params ? params.SubUin : null;
+
+    }
+}
+
+/**
  * ListUsers请求参数结构体
  * @class
  */
@@ -4443,6 +4471,57 @@ class CreateRoleRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeMFADeviceColl返回参数结构体
+ * @class
+ */
+class DescribeMFADeviceCollResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Token状态
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * Token值
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.TokenSn = null;
+
+        /**
+         * token类型
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.TokenType = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Status = 'Status' in params ? params.Status : null;
+        this.TokenSn = 'TokenSn' in params ? params.TokenSn : null;
+        this.TokenType = 'TokenType' in params ? params.TokenType : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * GetPolicy返回参数结构体
  * @class
  */
@@ -5232,6 +5311,7 @@ module.exports = {
     DeleteSAMLProviderRequest: DeleteSAMLProviderRequest,
     DeleteSAMLProviderResponse: DeleteSAMLProviderResponse,
     UpdateUserResponse: UpdateUserResponse,
+    DescribeMFADeviceCollRequest: DescribeMFADeviceCollRequest,
     ListUsersRequest: ListUsersRequest,
     ListCollaboratorsRequest: ListCollaboratorsRequest,
     CreateGroupRequest: CreateGroupRequest,
@@ -5256,6 +5336,7 @@ module.exports = {
     DetachUserPolicyResponse: DetachUserPolicyResponse,
     GetRoleResponse: GetRoleResponse,
     CreateRoleRequest: CreateRoleRequest,
+    DescribeMFADeviceCollResponse: DescribeMFADeviceCollResponse,
     GetPolicyResponse: GetPolicyResponse,
     DeleteGroupResponse: DeleteGroupResponse,
     AttachEntityOfPolicy: AttachEntityOfPolicy,

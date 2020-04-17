@@ -2430,6 +2430,12 @@ class GeneralEfficientOCRResponse extends  AbstractModel {
         this.TextDetections = null;
 
         /**
+         * 图片旋转角度（角度制），文本的水平方向为0°；顺时针为正，逆时针为负
+         * @type {number || null}
+         */
+        this.Angel = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -2453,6 +2459,7 @@ class GeneralEfficientOCRResponse extends  AbstractModel {
                 this.TextDetections.push(obj);
             }
         }
+        this.Angel = 'Angel' in params ? params.Angel : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -2686,6 +2693,12 @@ class GeneralBasicOCRResponse extends  AbstractModel {
         this.Language = null;
 
         /**
+         * 图片旋转角度（角度制），文本的水平方向为0°；顺时针为正，逆时针为负
+         * @type {number || null}
+         */
+        this.Angel = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -2710,6 +2723,7 @@ class GeneralBasicOCRResponse extends  AbstractModel {
             }
         }
         this.Language = 'Language' in params ? params.Language : null;
+        this.Angel = 'Angel' in params ? params.Angel : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -5862,6 +5876,12 @@ class GeneralAccurateOCRResponse extends  AbstractModel {
         this.TextDetections = null;
 
         /**
+         * 图片旋转角度（角度制），文本的水平方向为0°；顺时针为正，逆时针为负
+         * @type {number || null}
+         */
+        this.Angel = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -5885,6 +5905,7 @@ class GeneralAccurateOCRResponse extends  AbstractModel {
                 this.TextDetections.push(obj);
             }
         }
+        this.Angel = 'Angel' in params ? params.Angel : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -7423,6 +7444,12 @@ class GeneralFastOCRResponse extends  AbstractModel {
         this.Language = null;
 
         /**
+         * 图片旋转角度（角度制），文本的水平方向为0°；顺时针为正，逆时针为负
+         * @type {number || null}
+         */
+        this.Angel = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -7447,6 +7474,7 @@ class GeneralFastOCRResponse extends  AbstractModel {
             }
         }
         this.Language = 'Language' in params ? params.Language : null;
+        this.Angel = 'Angel' in params ? params.Angel : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }

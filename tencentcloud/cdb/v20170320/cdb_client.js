@@ -1151,7 +1151,7 @@ class CdbClient extends AbstractClient {
     }
 
     /**
-     * 本接口(RenewDBInstance)用于续费云数据库实例，仅支持付费模式为包年包月的实例。按量计费实例不需要续费。
+     * 本接口(RenewDBInstance)用于续费云数据库实例，支持付费模式为包年包月的实例。按量计费实例可通过该接口续费为包年包月的实例。
      * @param {RenewDBInstanceRequest} req
      * @param {function(string, RenewDBInstanceResponse):void} cb
      * @public

@@ -4523,6 +4523,12 @@ class RenewDBInstanceRequest extends  AbstractModel {
          */
         this.TimeSpan = null;
 
+        /**
+         * 如果需要将按量计费实例续费为包年包月的实例，该入参的值需要指定为 "PREPAID" 。
+         * @type {string || null}
+         */
+        this.ModifyPayType = null;
+
     }
 
     /**
@@ -4534,6 +4540,7 @@ class RenewDBInstanceRequest extends  AbstractModel {
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
         this.TimeSpan = 'TimeSpan' in params ? params.TimeSpan : null;
+        this.ModifyPayType = 'ModifyPayType' in params ? params.ModifyPayType : null;
 
     }
 }
