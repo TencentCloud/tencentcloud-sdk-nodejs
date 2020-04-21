@@ -5867,9 +5867,7 @@ class CreateClusterResponse extends  AbstractModel {
         super();
 
         /**
-         * 创建集群操作是否成功。
-true：操作成功。
-false：操作失败。
+         * 集群ID
          * @type {string || null}
          */
         this.Result = null;

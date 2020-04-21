@@ -4073,13 +4073,13 @@ class DescribeSecurityGroupsRequest extends  AbstractModel {
         this.Filters = null;
 
         /**
-         * 偏移量。
+         * 偏移量，默认为0。
          * @type {string || null}
          */
         this.Offset = null;
 
         /**
-         * 返回数量。
+         * 返回数量，默认为20，最大值为100。
          * @type {string || null}
          */
         this.Limit = null;
@@ -10923,18 +10923,30 @@ class ModifyVpnGatewayAttributeResponse extends  AbstractModel {
 }
 
 /**
- * UnassignIpv6CidrBlock返回参数结构体
+ * DescribeVpnGatewayCcnRoutes请求参数结构体
  * @class
  */
-class UnassignIpv6CidrBlockResponse extends  AbstractModel {
+class DescribeVpnGatewayCcnRoutesRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * VPN网关实例ID
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.VpnGatewayId = null;
+
+        /**
+         * 偏移量
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 返回数量
+         * @type {number || null}
+         */
+        this.Limit = null;
 
     }
 
@@ -10945,7 +10957,9 @@ class UnassignIpv6CidrBlockResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.VpnGatewayId = 'VpnGatewayId' in params ? params.VpnGatewayId : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
 
     }
 }
@@ -11030,6 +11044,56 @@ class DescribeClassicLinkInstancesResponse extends  AbstractModel {
                 this.ClassicLinkInstanceSet.push(obj);
             }
         }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeVpnGatewayCcnRoutes返回参数结构体
+ * @class
+ */
+class DescribeVpnGatewayCcnRoutesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 云联网路由（IDC网段）列表。
+         * @type {Array.<VpngwCcnRoutes> || null}
+         */
+        this.RouteSet = null;
+
+        /**
+         * 符合条件的对象数。
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.RouteSet) {
+            this.RouteSet = new Array();
+            for (let z in params.RouteSet) {
+                let obj = new VpngwCcnRoutes();
+                obj.deserialize(params.RouteSet[z]);
+                this.RouteSet.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -18290,6 +18354,34 @@ class DescribeVpcInstancesRequest extends  AbstractModel {
 }
 
 /**
+ * UnassignIpv6CidrBlock返回参数结构体
+ * @class
+ */
+class UnassignIpv6CidrBlockResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * CreateBandwidthPackage返回参数结构体
  * @class
  */
@@ -22377,9 +22469,10 @@ module.exports = {
     Price: Price,
     HaVipDisassociateAddressIpRequest: HaVipDisassociateAddressIpRequest,
     ModifyVpnGatewayAttributeResponse: ModifyVpnGatewayAttributeResponse,
-    UnassignIpv6CidrBlockResponse: UnassignIpv6CidrBlockResponse,
+    DescribeVpnGatewayCcnRoutesRequest: DescribeVpnGatewayCcnRoutesRequest,
     CreateServiceTemplateGroupRequest: CreateServiceTemplateGroupRequest,
     DescribeClassicLinkInstancesResponse: DescribeClassicLinkInstancesResponse,
+    DescribeVpnGatewayCcnRoutesResponse: DescribeVpnGatewayCcnRoutesResponse,
     DetachCcnInstancesRequest: DetachCcnInstancesRequest,
     CreateFlowLogResponse: CreateFlowLogResponse,
     DeleteDirectConnectGatewayRequest: DeleteDirectConnectGatewayRequest,
@@ -22544,6 +22637,7 @@ module.exports = {
     DeleteRouteTableRequest: DeleteRouteTableRequest,
     CreateVpnGatewayRequest: CreateVpnGatewayRequest,
     DescribeVpcInstancesRequest: DescribeVpcInstancesRequest,
+    UnassignIpv6CidrBlockResponse: UnassignIpv6CidrBlockResponse,
     CreateBandwidthPackageResponse: CreateBandwidthPackageResponse,
     ResetVpnConnectionRequest: ResetVpnConnectionRequest,
     ReleaseAddressesResponse: ReleaseAddressesResponse,

@@ -662,7 +662,6 @@ class AudioTrackItem extends  AbstractModel {
 
         /**
          * 对音频片段进行的操作，如音量调节等。
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<AudioTransform> || null}
          */
         this.AudioOperations = null;
@@ -1299,7 +1298,6 @@ class MediaSnapshotByTimeOffsetItem extends  AbstractModel {
 
         /**
          * 同一规格的截图信息集合，每个元素代表一张截图。
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<MediaSnapshotByTimePicInfoItem> || null}
          */
         this.PicInfoSet = null;
@@ -1671,14 +1669,12 @@ class AiReviewTaskPoliticalOcrResult extends  AbstractModel {
 <li>40000：输入参数不合法，请检查输入参数；</li>
 <li>60000：源文件错误（如视频数据损坏），请确认源文件是否正常；</li>
 <li>70000：内部服务错误，建议重试。</li>
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.ErrCode = null;
 
         /**
          * 错误信息。
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.Message = null;
@@ -1901,21 +1897,18 @@ class MediaSnapshotByTimePicInfoItem extends  AbstractModel {
 
         /**
          * 该张截图对应视频文件中的时间偏移，单位为<font color=red>毫秒</font>。
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.TimeOffset = null;
 
         /**
          * 该张截图的 URL 地址。
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.Url = null;
 
         /**
          * 截图如果被打上了水印，被打水印的模板 ID 列表。
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<number> || null}
          */
         this.WaterMarkDefinition = null;
@@ -4325,7 +4318,6 @@ class MediaTransitionItem extends  AbstractModel {
 
         /**
          * 转场操作列表。图像转场操作和音频转场操作各自最多支持一个。
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<TransitionOpertion> || null}
          */
         this.Transitions = null;
@@ -5116,7 +5108,6 @@ class WatermarkTemplate extends  AbstractModel {
 
         /**
          * 水印模板名称。
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.Name = null;
@@ -5923,7 +5914,6 @@ class MediaAnimatedGraphicsInfo extends  AbstractModel {
 
         /**
          * 视频转动图结果信息
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<MediaAnimatedGraphicsItem> || null}
          */
         this.AnimatedGraphicsSet = null;
@@ -6058,7 +6048,6 @@ class MediaMiniProgramReviewInfoItem extends  AbstractModel {
 
         /**
          * 小程序审核视频播放地址。
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.Url = null;
@@ -6073,7 +6062,6 @@ class MediaMiniProgramReviewInfoItem extends  AbstractModel {
 
         /**
          * 小程序审核元素。
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<MediaMiniProgramReviewElem> || null}
          */
         this.ReviewSummary = null;
@@ -8766,7 +8754,6 @@ class StickerTrackItem extends  AbstractModel {
 
         /**
          * 对贴图进行的操作，如图像旋转等。
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<ImageTransform> || null}
          */
         this.ImageOperations = null;
@@ -8838,7 +8825,6 @@ class VideoTemplateInfo extends  AbstractModel {
 <li>open：开启，此时，Width 代表视频的长边，Height 表示视频的短边；</li>
 <li>close：关闭，此时，Width 代表视频的宽度，Height 表示视频的高度。</li>
 默认值：open。
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.ResolutionAdaptive = null;
@@ -8850,7 +8836,6 @@ class VideoTemplateInfo extends  AbstractModel {
 <li>当 Width 非 0，Height 为 0，则 Height 按比例缩放；</li>
 <li>当 Width、Height 均非 0，则分辨率按用户指定。</li>
 默认值：0。
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.Width = null;
@@ -8862,7 +8847,6 @@ class VideoTemplateInfo extends  AbstractModel {
 <li>当 Width 非 0，Height 为 0，则 Height 按比例缩放；</li>
 <li>当 Width、Height 均非 0，则分辨率按用户指定。</li>
 默认值：0。
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.Height = null;
@@ -8872,7 +8856,6 @@ class VideoTemplateInfo extends  AbstractModel {
 <li> stretch：拉伸，对每一帧进行拉伸，填满整个画面，可能导致转码后的视频被“压扁“或者“拉长“；</li>
 <li>black：留黑，保持视频宽高比不变，边缘剩余部分使用黑色填充。</li>
 默认值：black 。
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.FillType = null;
@@ -9004,14 +8987,12 @@ class AiReviewTaskPornOcrResult extends  AbstractModel {
 <li>40000：输入参数不合法，请检查输入参数；</li>
 <li>60000：源文件错误（如视频数据损坏），请确认源文件是否正常；</li>
 <li>70000：内部服务错误，建议重试。</li>
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.ErrCode = null;
 
         /**
          * 错误信息。
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.Message = null;
@@ -11071,7 +11052,6 @@ class AiSamplePerson extends  AbstractModel {
 
         /**
          * 人物描述。
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.Description = null;
@@ -11084,7 +11064,6 @@ class AiSamplePerson extends  AbstractModel {
 
         /**
          * 人物标签。
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<string> || null}
          */
         this.TagSet = null;
@@ -11146,7 +11125,6 @@ class MediaAdaptiveDynamicStreamingInfo extends  AbstractModel {
 
         /**
          * 转自适应码流信息数组。
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<AdaptiveDynamicStreamingInfoItem> || null}
          */
         this.AdaptiveDynamicStreamingSet = null;
@@ -12028,7 +12006,6 @@ class ComposeMediaTask extends  AbstractModel {
          * 任务流状态，取值：
 <li>PROCESSING：处理中；</li>
 <li>FINISH：已完成。</li>
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.Status = null;
@@ -12037,14 +12014,12 @@ class ComposeMediaTask extends  AbstractModel {
          * 错误码
 <li>0：成功；</li>
 <li>其他值：失败。</li>
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.ErrCode = null;
 
         /**
          * 错误信息。
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.Message = null;
@@ -12544,7 +12519,6 @@ class MediaSnapshotByTimeOffsetInfo extends  AbstractModel {
 
         /**
          * 特定规格的指定时间点截图信息集合。目前每种规格只能有一套截图。
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<MediaSnapshotByTimeOffsetItem> || null}
          */
         this.SnapshotByTimeOffsetSet = null;
@@ -12968,7 +12942,6 @@ class AiReviewTerrorismTaskOutput extends  AbstractModel {
 
         /**
          * 视频暴恐评分，分值为0到100。
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.Confidence = null;
@@ -12978,7 +12951,6 @@ class AiReviewTerrorismTaskOutput extends  AbstractModel {
 <li>pass。</li>
 <li>review。</li>
 <li>block。</li>
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.Suggestion = null;
@@ -12993,14 +12965,12 @@ class AiReviewTerrorismTaskOutput extends  AbstractModel {
 <li>militant：武装分子。</li>
 <li>explosion：爆炸火灾。</li>
 <li>terrorists：暴恐人物。</li>
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.Label = null;
 
         /**
          * 有暴恐嫌疑的视频片段列表。
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<MediaContentReviewSegmentItem> || null}
          */
         this.SegmentSet = null;
@@ -13343,7 +13313,6 @@ class MediaTranscodeInfo extends  AbstractModel {
 
         /**
          * 各规格的转码信息集合，每个元素代表一个规格的转码结果。
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<MediaTranscodeItem> || null}
          */
         this.TranscodeSet = null;
@@ -13928,14 +13897,12 @@ class AiReviewTaskTerrorismResult extends  AbstractModel {
 <li>40000：输入参数不合法，请检查输入参数；</li>
 <li>60000：源文件错误（如视频数据损坏），请确认源文件是否正常；</li>
 <li>70000：内部服务错误，建议重试。</li>
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.ErrCode = null;
 
         /**
          * 错误信息。
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.Message = null;
@@ -14026,21 +13993,18 @@ class MediaContentReviewAsrTextSegmentItem extends  AbstractModel {
 
         /**
          * 嫌疑片段起始的偏移时间，单位：秒。
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.StartTimeOffset = null;
 
         /**
          * 嫌疑片段结束的偏移时间，单位：秒。
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.EndTimeOffset = null;
 
         /**
          * 嫌疑片段置信度。
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.Confidence = null;
@@ -14050,14 +14014,12 @@ class MediaContentReviewAsrTextSegmentItem extends  AbstractModel {
 <li>pass。</li>
 <li>review。</li>
 <li>block。</li>
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.Suggestion = null;
 
         /**
          * 嫌疑关键词列表。
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<string> || null}
          */
         this.KeywordSet = null;
@@ -15110,77 +15072,66 @@ class MediaBasicInfo extends  AbstractModel {
 
         /**
          * 媒体文件名称。
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.Name = null;
 
         /**
          * 媒体文件描述。
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.Description = null;
 
         /**
          * 媒体文件的创建时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.CreateTime = null;
 
         /**
          * 媒体文件的最近更新时间（如修改视频属性、发起视频处理等会触发更新媒体文件信息的操作），使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.UpdateTime = null;
 
         /**
          * 媒体文件的过期时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。过期后该媒体文件及其相关资源（转码结果、雪碧图等）将被永久删除。“9999-12-31T23:59:59Z”表示永不过期。
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.ExpireTime = null;
 
         /**
          * 媒体文件的分类 ID。
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.ClassId = null;
 
         /**
          * 媒体文件的分类名称。
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.ClassName = null;
 
         /**
          * 媒体文件的分类路径，分类间以“-”分隔，如“新的一级分类 - 新的二级分类”。
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.ClassPath = null;
 
         /**
          * 媒体文件的封面图片地址。
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.CoverUrl = null;
 
         /**
          * 媒体文件的封装格式，例如 mp4、flv 等。
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.Type = null;
 
         /**
          * 原始媒体文件的 URL 地址。
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.MediaUrl = null;
@@ -15194,21 +15145,18 @@ class MediaBasicInfo extends  AbstractModel {
 
         /**
          * 媒体文件存储地区，如 ap-guangzhou，参见[地域列表](https://cloud.tencent.com/document/api/213/15692#.E5.9C.B0.E5.9F.9F.E5.88.97.E8.A1.A8)。
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.StorageRegion = null;
 
         /**
          * 媒体文件的标签信息。
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<string> || null}
          */
         this.TagSet = null;
 
         /**
          * 直播录制文件的唯一标识
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.Vid = null;
@@ -15477,14 +15425,12 @@ class TranscodeTemplate extends  AbstractModel {
 
         /**
          * 转码模板名称。
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.Name = null;
 
         /**
          * 模板描述信息。
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.Comment = null;
@@ -15779,14 +15725,12 @@ class AiReviewTaskPoliticalAsrResult extends  AbstractModel {
 <li>40000：输入参数不合法，请检查输入参数；</li>
 <li>60000：源文件错误（如视频数据损坏），请确认源文件是否正常；</li>
 <li>70000：内部服务错误，建议重试。</li>
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.ErrCode = null;
 
         /**
          * 错误信息。
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.Message = null;
@@ -16144,14 +16088,12 @@ class AiReviewTaskPornResult extends  AbstractModel {
 <li>40000：输入参数不合法，请检查输入参数；</li>
 <li>60000：源文件错误（如视频数据损坏），请确认源文件是否正常；</li>
 <li>70000：内部服务错误，建议重试。</li>
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.ErrCode = null;
 
         /**
          * 错误信息。
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.Message = null;
@@ -16903,35 +16845,30 @@ FINISH：已完成。
          * 错误码
 <li>0：成功；</li>
 <li>其他值：失败。</li>
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.ErrCode = null;
 
         /**
          * 错误信息。
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.Message = null;
 
         /**
          * 发布视频文件 ID。
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.FileId = null;
 
         /**
          * 微信发布模板 ID。
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.Definition = null;
 
         /**
          * 发布视频所对应的转码模板 ID，为 0 代表原始视频。
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.SourceDefinition = null;
@@ -16942,21 +16879,18 @@ FINISH：已完成。
 <li>SUCCESS：成功；</li>
 <li>AUDITNOTPASS：审核未通过；</li>
 <li>NOTTRIGGERED：尚未发起微信发布。</li>
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.WechatStatus = null;
 
         /**
          * 微信 Vid。
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.WechatVid = null;
 
         /**
          * 微信地址。
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.WechatUrl = null;
@@ -17102,14 +17036,12 @@ class MediaSourceData extends  AbstractModel {
 <li>Upload：来自上传。如拉取上传、服务端上传、客户端 UGC 上传等。</li>
 <li>VideoProcessing：来自视频处理。如视频拼接、视频剪辑等。</li>
 <li>Unknown：未知来源。</li>
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.SourceType = null;
 
         /**
          * 用户创建文件时透传的字段
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.SourceContext = null;
@@ -18345,7 +18277,6 @@ class AiReviewPornTaskOutput extends  AbstractModel {
 <li>pass。</li>
 <li>review。</li>
 <li>block。</li>
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.Suggestion = null;
@@ -18356,14 +18287,12 @@ class AiReviewPornTaskOutput extends  AbstractModel {
 <li>sexy：性感。</li>
 <li>vulgar：低俗。</li>
 <li>intimacy：亲密行为。</li>
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.Label = null;
 
         /**
          * 有涉黄嫌疑的视频片段列表。
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<MediaContentReviewSegmentItem> || null}
          */
         this.SegmentSet = null;
@@ -19245,14 +19174,12 @@ class MediaMetaData extends  AbstractModel {
 
         /**
          * 视频流信息。
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<MediaVideoStreamItem> || null}
          */
         this.VideoStreamSet = null;
 
         /**
          * 音频流信息。
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<MediaAudioStreamItem> || null}
          */
         this.AudioStreamSet = null;
@@ -19319,7 +19246,6 @@ class MediaSampleSnapshotInfo extends  AbstractModel {
 
         /**
          * 特定规格的采样截图信息集合，每个元素代表一套相同规格的采样截图。
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<MediaSampleSnapshotItem> || null}
          */
         this.SampleSnapshotSet = null;
@@ -20284,7 +20210,6 @@ class MediaKeyFrameDescInfo extends  AbstractModel {
 
         /**
          * 视频打点信息数组。
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<MediaKeyFrameDescItem> || null}
          */
         this.KeyFrameDescSet = null;
@@ -20836,7 +20761,6 @@ class AiReviewPoliticalTaskOutput extends  AbstractModel {
 
         /**
          * 视频涉政评分，分值为0到100。
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.Confidence = null;
@@ -20846,7 +20770,6 @@ class AiReviewPoliticalTaskOutput extends  AbstractModel {
 <li>pass。</li>
 <li>review。</li>
 <li>block。</li>
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.Suggestion = null;
@@ -20855,14 +20778,12 @@ class AiReviewPoliticalTaskOutput extends  AbstractModel {
          * 视频鉴政结果标签，取值范围：
 <li>politician：政治人物。</li>
 <li>violation_photo：违规图标。</li>
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.Label = null;
 
         /**
          * 有涉政嫌疑的视频片段列表。
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<MediaContentReviewPoliticalSegmentItem> || null}
          */
         this.SegmentSet = null;
@@ -20911,14 +20832,12 @@ class AiReviewTaskPoliticalResult extends  AbstractModel {
 <li>40000：输入参数不合法，请检查输入参数；</li>
 <li>60000：源文件错误（如视频数据损坏），请确认源文件是否正常；</li>
 <li>70000：内部服务错误，建议重试。</li>
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.ErrCode = null;
 
         /**
          * 错误信息。
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.Message = null;
@@ -21133,28 +21052,24 @@ class ProcedureTask extends  AbstractModel {
 
         /**
          * 视频处理任务的执行状态与结果。
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<MediaProcessTaskResult> || null}
          */
         this.MediaProcessResultSet = null;
 
         /**
          * 视频内容审核任务的执行状态与结果。
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<AiContentReviewResult> || null}
          */
         this.AiContentReviewResultSet = null;
 
         /**
          * 视频内容分析任务的执行状态与结果。
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<AiAnalysisResult> || null}
          */
         this.AiAnalysisResultSet = null;
 
         /**
          * 视频内容识别任务的执行状态与结果。
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<AiRecognitionResult> || null}
          */
         this.AiRecognitionResultSet = null;
@@ -21374,14 +21289,12 @@ class TaskSimpleInfo extends  AbstractModel {
 
         /**
          * 任务开始执行时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。若任务尚未开始，该字段为空。
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.BeginProcessTime = null;
 
         /**
          * 任务结束时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。若任务尚未完成，该字段为空。
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.FinishTime = null;
@@ -22119,7 +22032,6 @@ class MediaImageSpriteInfo extends  AbstractModel {
 
         /**
          * 特定规格的雪碧图信息集合，每个元素代表一套相同规格的雪碧图。
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<MediaImageSpriteItem> || null}
          */
         this.ImageSpriteSet = null;
@@ -23747,14 +23659,12 @@ class VideoTrackItem extends  AbstractModel {
 
         /**
          * 对图像进行的操作，如图像旋转等。
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<ImageTransform> || null}
          */
         this.ImageOperations = null;
 
         /**
          * 对音频进行操作，如静音等。
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<AudioTransform> || null}
          */
         this.AudioOperations = null;
@@ -23836,77 +23746,66 @@ class MediaTranscodeItem extends  AbstractModel {
 
         /**
          * 转码后的视频文件地址。
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.Url = null;
 
         /**
          * 转码规格 ID，参见[转码参数模板](https://cloud.tencent.com/document/product/266/33476)。
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.Definition = null;
 
         /**
          * 视频流码率平均值与音频流码率平均值之和， 单位：bps。
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.Bitrate = null;
 
         /**
          * 视频流高度的最大值，单位：px。
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.Height = null;
 
         /**
          * 视频流宽度的最大值，单位：px。
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.Width = null;
 
         /**
          * 媒体文件总大小（视频为 HLS 时，大小是 m3u8 和 ts 文件大小的总和），单位：字节。
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.Size = null;
 
         /**
          * 视频时长，单位：秒。
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.Duration = null;
 
         /**
          * 容器类型，例如 m4a，mp4 等。
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.Container = null;
 
         /**
          * 视频的 md5 值。
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.Md5 = null;
 
         /**
          * 音频流信息。
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<MediaAudioStreamItem> || null}
          */
         this.AudioStreamSet = null;
 
         /**
          * 视频流信息。
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<MediaVideoStreamItem> || null}
          */
         this.VideoStreamSet = null;
@@ -24765,21 +24664,18 @@ class MediaContentReviewOcrTextSegmentItem extends  AbstractModel {
 
         /**
          * 嫌疑片段起始的偏移时间，单位：秒。
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.StartTimeOffset = null;
 
         /**
          * 嫌疑片段结束的偏移时间，单位：秒。
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.EndTimeOffset = null;
 
         /**
          * 嫌疑片段置信度。
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.Confidence = null;
@@ -24789,21 +24685,18 @@ class MediaContentReviewOcrTextSegmentItem extends  AbstractModel {
 <li>pass。</li>
 <li>review。</li>
 <li>block。</li>
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.Suggestion = null;
 
         /**
          * 嫌疑关键词列表。
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<string> || null}
          */
         this.KeywordSet = null;
 
         /**
          * 嫌疑文字出现的区域坐标 (像素级)，[x1, y1, x2, y2]，即左上角坐标、右下角坐标。
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<number> || null}
          */
         this.AreaCoordSet = null;
@@ -24903,14 +24796,12 @@ class AiReviewTaskPornAsrResult extends  AbstractModel {
 <li>40000：输入参数不合法，请检查输入参数；</li>
 <li>60000：源文件错误（如视频数据损坏），请确认源文件是否正常；</li>
 <li>70000：内部服务错误，建议重试。</li>
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.ErrCode = null;
 
         /**
          * 错误信息。
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.Message = null;
@@ -25273,7 +25164,6 @@ class EditMediaTask extends  AbstractModel {
          * 任务流状态，取值：
 <li>PROCESSING：处理中；</li>
 <li>FINISH：已完成。</li>
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.Status = null;
@@ -25283,14 +25173,12 @@ class EditMediaTask extends  AbstractModel {
 <li>40000：输入参数不合法，请检查输入参数；</li>
 <li>60000：源文件错误（如视频数据损坏），请确认源文件是否正常；</li>
 <li>70000：内部服务错误，建议重试。</li>
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.ErrCode = null;
 
         /**
          * 错误信息。
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.Message = null;
@@ -25311,21 +25199,18 @@ class EditMediaTask extends  AbstractModel {
 
         /**
          * 若发起视频编辑任务时指定了视频处理流程，则该字段为流程任务 ID。
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.ProcedureTaskId = null;
 
         /**
          * 来源上下文，用于透传用户请求信息，任务流状态变更回调将返回该字段值，最长 1000 个字符。
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.SessionContext = null;
 
         /**
          * 用于去重的识别码，如果七天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.SessionId = null;
@@ -25669,7 +25554,6 @@ class MediaClassInfo extends  AbstractModel {
 
         /**
          * 当前分类的第一级子类 ID 集合
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<number> || null}
          */
         this.SubClassIdSet = null;
@@ -26511,7 +26395,6 @@ class MediaTrack extends  AbstractModel {
 
         /**
          * 轨道上的媒体片段列表。
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<MediaTrackItem> || null}
          */
         this.TrackItems = null;
@@ -26591,28 +26474,24 @@ class EditMediaTaskOutput extends  AbstractModel {
 
         /**
          * 文件类型，例如 mp4、flv 等。
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.FileType = null;
 
         /**
          * 媒体文件播放地址。
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.FileUrl = null;
 
         /**
          * 媒体文件 ID。
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.FileId = null;
 
         /**
          * 输出文件名，最长 64 个字符。缺省由系统指定生成文件名。
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.MediaName = null;
@@ -26620,14 +26499,12 @@ class EditMediaTaskOutput extends  AbstractModel {
         /**
          * 分类ID，用于对媒体进行分类管理，可通过 [创建分类](/document/product/266/7812) 接口，创建分类，获得分类 ID。
 <li>默认值：0，表示其他分类。</li>
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.ClassId = null;
 
         /**
          * 输出文件的过期时间，超过该时间文件将被删除，默认为永久不过期，格式按照 ISO 8601标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#I)。
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.ExpireTime = null;

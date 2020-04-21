@@ -20,35 +20,43 @@ const DescribeSpecInfoRequest = models.DescribeSpecInfoRequest;
 const CreateDBInstanceRequest = models.CreateDBInstanceRequest;
 const IsolateDBInstanceRequest = models.IsolateDBInstanceRequest;
 const DescribeBackupAccessResponse = models.DescribeBackupAccessResponse;
+const DescribeSlowLogPatternsResponse = models.DescribeSlowLogPatternsResponse;
 const CreateDBInstanceHourRequest = models.CreateDBInstanceHourRequest;
 const AssignProjectRequest = models.AssignProjectRequest;
+const DescribeSlowLogsResponse = models.DescribeSlowLogsResponse;
 const ClientConnection = models.ClientConnection;
 const BackupInfo = models.BackupInfo;
 const DescribeDBInstancesRequest = models.DescribeDBInstancesRequest;
 const SpecificationInfo = models.SpecificationInfo;
-const ModifyDBInstanceSpecRequest = models.ModifyDBInstanceSpecRequest;
+const DescribeSlowLogsRequest = models.DescribeSlowLogsRequest;
+const DescribeSlowLogPatternsRequest = models.DescribeSlowLogPatternsRequest;
 const DescribeSpecInfoResponse = models.DescribeSpecInfoResponse;
 const TagInfo = models.TagInfo;
 const DescribeDBInstancesResponse = models.DescribeDBInstancesResponse;
 const OfflineIsolatedDBInstanceRequest = models.OfflineIsolatedDBInstanceRequest;
+const SlowLogPattern = models.SlowLogPattern;
 const CreateDBInstanceResponse = models.CreateDBInstanceResponse;
 const AssignProjectResponse = models.AssignProjectResponse;
 const DescribeDBBackupsRequest = models.DescribeDBBackupsRequest;
 const DescribeClientConnectionsRequest = models.DescribeClientConnectionsRequest;
+const ModifyDBInstanceSpecResponse = models.ModifyDBInstanceSpecResponse;
 const ShardInfo = models.ShardInfo;
 const OfflineIsolatedDBInstanceResponse = models.OfflineIsolatedDBInstanceResponse;
 const IsolateDBInstanceResponse = models.IsolateDBInstanceResponse;
 const DescribeBackupAccessRequest = models.DescribeBackupAccessRequest;
 const RenameInstanceRequest = models.RenameInstanceRequest;
+const RenewDBInstancesResponse = models.RenewDBInstancesResponse;
 const RenameInstanceResponse = models.RenameInstanceResponse;
 const DescribeClientConnectionsResponse = models.DescribeClientConnectionsResponse;
 const DBInstanceInfo = models.DBInstanceInfo;
 const BackupFile = models.BackupFile;
 const DescribeDBBackupsResponse = models.DescribeDBBackupsResponse;
 const InstanceDetail = models.InstanceDetail;
-const ModifyDBInstanceSpecResponse = models.ModifyDBInstanceSpecResponse;
+const ModifyDBInstanceSpecRequest = models.ModifyDBInstanceSpecRequest;
 const CreateDBInstanceHourResponse = models.CreateDBInstanceHourResponse;
+const InstanceChargePrepaid = models.InstanceChargePrepaid;
 const SpecItem = models.SpecItem;
+const RenewDBInstancesRequest = models.RenewDBInstancesRequest;
 
 
 /**
@@ -62,6 +70,17 @@ class MongodbClient extends AbstractClient {
     }
     
     /**
+     * 本接口（DescribeSlowLogPatterns）用于获取数据库实例慢日志的统计信息。
+     * @param {DescribeSlowLogPatternsRequest} req
+     * @param {function(string, DescribeSlowLogPatternsResponse):void} cb
+     * @public
+     */
+    DescribeSlowLogPatterns(req, cb) {
+        let resp = new DescribeSlowLogPatternsResponse();
+        this.request("DescribeSlowLogPatterns", req, resp, cb);
+    }
+
+    /**
      * 本接口(AssignProject)用于指定云数据库实例的所属项目。
 
      * @param {AssignProjectRequest} req
@@ -71,6 +90,17 @@ class MongodbClient extends AbstractClient {
     AssignProject(req, cb) {
         let resp = new AssignProjectResponse();
         this.request("AssignProject", req, resp, cb);
+    }
+
+    /**
+     * 本接口（DescribeSlowLogs）用于获取云数据库慢日志信息。接口只支持查询最近7天内慢日志。
+     * @param {DescribeSlowLogsRequest} req
+     * @param {function(string, DescribeSlowLogsResponse):void} cb
+     * @public
+     */
+    DescribeSlowLogs(req, cb) {
+        let resp = new DescribeSlowLogsResponse();
+        this.request("DescribeSlowLogs", req, resp, cb);
     }
 
     /**
@@ -107,7 +137,7 @@ class MongodbClient extends AbstractClient {
     }
 
     /**
-     * 本接口(DescribeClientConnections)用于查询实例客户端连接信息，包括连接IP和连接数量。目前只支持3.2版本的MongoDB实例。
+     * 本接口(DescribeClientConnections)用于查询实例客户端连接信息，包括连接IP和连接数量。
      * @param {DescribeClientConnectionsRequest} req
      * @param {function(string, DescribeClientConnectionsResponse):void} cb
      * @public
@@ -137,6 +167,17 @@ class MongodbClient extends AbstractClient {
     RenameInstance(req, cb) {
         let resp = new RenameInstanceResponse();
         this.request("RenameInstance", req, resp, cb);
+    }
+
+    /**
+     * 本接口(RenewDBInstance)用于续费云数据库实例，仅支持付费模式为包年包月的实例。按量计费实例不需要续费。
+     * @param {RenewDBInstancesRequest} req
+     * @param {function(string, RenewDBInstancesResponse):void} cb
+     * @public
+     */
+    RenewDBInstances(req, cb) {
+        let resp = new RenewDBInstancesResponse();
+        this.request("RenewDBInstances", req, resp, cb);
     }
 
     /**

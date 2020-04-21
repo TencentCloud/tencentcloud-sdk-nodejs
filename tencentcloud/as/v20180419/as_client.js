@@ -114,6 +114,7 @@ const DeleteNotificationConfigurationRequest = models.DeleteNotificationConfigur
 const DescribeLaunchConfigurationsRequest = models.DescribeLaunchConfigurationsRequest;
 const NotificationTarget = models.NotificationTarget;
 const DeleteAutoScalingGroupResponse = models.DeleteAutoScalingGroupResponse;
+const LifecycleActionResultInfo = models.LifecycleActionResultInfo;
 const AutoScalingGroupAbstract = models.AutoScalingGroupAbstract;
 const EnableAutoScalingGroupRequest = models.EnableAutoScalingGroupRequest;
 const MetricAlarm = models.MetricAlarm;

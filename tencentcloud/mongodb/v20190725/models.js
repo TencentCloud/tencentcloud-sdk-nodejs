@@ -271,6 +271,56 @@ class DescribeBackupAccessResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeSlowLogPatterns返回参数结构体
+ * @class
+ */
+class DescribeSlowLogPatternsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 慢日志统计信息总数
+         * @type {number || null}
+         */
+        this.Count = null;
+
+        /**
+         * 慢日志统计信息
+         * @type {Array.<SlowLogPattern> || null}
+         */
+        this.SlowLogPatterns = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Count = 'Count' in params ? params.Count : null;
+
+        if (params.SlowLogPatterns) {
+            this.SlowLogPatterns = new Array();
+            for (let z in params.SlowLogPatterns) {
+                let obj = new SlowLogPattern();
+                obj.deserialize(params.SlowLogPatterns[z]);
+                this.SlowLogPatterns.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * CreateDBInstanceHour请求参数结构体
  * @class
  */
@@ -428,6 +478,49 @@ class AssignProjectRequest extends  AbstractModel {
         }
         this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
         this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+
+    }
+}
+
+/**
+ * DescribeSlowLogs返回参数结构体
+ * @class
+ */
+class DescribeSlowLogsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 慢日志总数
+         * @type {number || null}
+         */
+        this.Count = null;
+
+        /**
+         * 慢日志详情
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
+         */
+        this.SlowLogs = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Count = 'Count' in params ? params.Count : null;
+        this.SlowLogs = 'SlowLogs' in params ? params.SlowLogs : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -718,10 +811,10 @@ class SpecificationInfo extends  AbstractModel {
 }
 
 /**
- * ModifyDBInstanceSpec请求参数结构体
+ * DescribeSlowLogs请求参数结构体
  * @class
  */
-class ModifyDBInstanceSpecRequest extends  AbstractModel {
+class DescribeSlowLogsRequest extends  AbstractModel {
     constructor(){
         super();
 
@@ -732,22 +825,34 @@ class ModifyDBInstanceSpecRequest extends  AbstractModel {
         this.InstanceId = null;
 
         /**
-         * 实例配置变更后的内存大小，单位：GB。内存和磁盘必须同时升配或同时降配
-         * @type {number || null}
+         * 慢日志起始时间，格式：yyyy-mm-dd hh:mm:ss，如：2019-06-01 10:00:00。查询起止时间间隔不能超过24小时，只允许查询最近7天内慢日志。
+         * @type {string || null}
          */
-        this.Memory = null;
+        this.StartTime = null;
 
         /**
-         * 实例配置变更后的硬盘大小，单位：GB。内存和磁盘必须同时升配或同时降配。降配时，新的磁盘参数必须大于已用磁盘容量的1.2倍
-         * @type {number || null}
+         * 慢日志终止时间，格式：yyyy-mm-dd hh:mm:ss，如：2019-06-02 12:00:00。查询起止时间间隔不能超过24小时，只允许查询最近7天内慢日志。
+         * @type {string || null}
          */
-        this.Volume = null;
+        this.EndTime = null;
 
         /**
-         * 实例配置变更后oplog的大小，单位：GB，默认为磁盘空间的10%，允许设置的最小值为磁盘的10%，最大值为磁盘的90%
+         * 慢日志执行时间阈值，返回执行时间超过该阈值的慢日志，单位为毫秒(ms)，最小为100毫秒。
          * @type {number || null}
          */
-        this.OplogSize = null;
+        this.SlowMS = null;
+
+        /**
+         * 偏移量，最小值为0，最大值为10000，默认值为0。
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 分页大小，最小值为1，最大值为100，默认值为20。
+         * @type {number || null}
+         */
+        this.Limit = null;
 
     }
 
@@ -759,9 +864,74 @@ class ModifyDBInstanceSpecRequest extends  AbstractModel {
             return;
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.Memory = 'Memory' in params ? params.Memory : null;
-        this.Volume = 'Volume' in params ? params.Volume : null;
-        this.OplogSize = 'OplogSize' in params ? params.OplogSize : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.SlowMS = 'SlowMS' in params ? params.SlowMS : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+
+    }
+}
+
+/**
+ * DescribeSlowLogPatterns请求参数结构体
+ * @class
+ */
+class DescribeSlowLogPatternsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例ID，格式如：cmgo-p8vnipr5。与云数据库控制台页面中显示的实例ID相同
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 慢日志起始时间，格式：yyyy-mm-dd hh:mm:ss，如：2019-06-01 10:00:00。查询起止时间间隔不能超过24小时，只允许查询最近7天内慢日志。
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * 慢日志终止时间，格式：yyyy-mm-dd hh:mm:ss，如：2019-06-02 12:00:00。查询起止时间间隔不能超过24小时，只允许查询最近7天内慢日志。
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * 慢日志执行时间阈值，返回执行时间超过该阈值的慢日志，单位为毫秒(ms)，最小为100毫秒。
+         * @type {number || null}
+         */
+        this.SlowMS = null;
+
+        /**
+         * 偏移量，最小值为0，最大值为10000，默认值为0。
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 分页大小，最小值为1，最大值为100，默认值为20。
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.SlowMS = 'SlowMS' in params ? params.SlowMS : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
 
     }
 }
@@ -923,6 +1093,55 @@ class OfflineIsolatedDBInstanceRequest extends  AbstractModel {
 }
 
 /**
+ * 用于描述MongoDB数据库慢日志统计信息
+ * @class
+ */
+class SlowLogPattern extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 慢日志模式
+         * @type {string || null}
+         */
+        this.Pattern = null;
+
+        /**
+         * 最大执行时间
+         * @type {number || null}
+         */
+        this.MaxTime = null;
+
+        /**
+         * 平均执行时间
+         * @type {number || null}
+         */
+        this.AverageTime = null;
+
+        /**
+         * 该模式慢日志条数
+         * @type {number || null}
+         */
+        this.Total = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Pattern = 'Pattern' in params ? params.Pattern : null;
+        this.MaxTime = 'MaxTime' in params ? params.MaxTime : null;
+        this.AverageTime = 'AverageTime' in params ? params.AverageTime : null;
+        this.Total = 'Total' in params ? params.Total : null;
+
+    }
+}
+
+/**
  * CreateDBInstance返回参数结构体
  * @class
  */
@@ -1041,6 +1260,18 @@ class DescribeClientConnectionsRequest extends  AbstractModel {
          */
         this.InstanceId = null;
 
+        /**
+         * 查询返回记录条数，默认为10000。
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 偏移量，默认值为0。
+         * @type {number || null}
+         */
+        this.Offset = null;
+
     }
 
     /**
@@ -1051,6 +1282,43 @@ class DescribeClientConnectionsRequest extends  AbstractModel {
             return;
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+
+    }
+}
+
+/**
+ * ModifyDBInstanceSpec返回参数结构体
+ * @class
+ */
+class ModifyDBInstanceSpecResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 订单ID
+         * @type {string || null}
+         */
+        this.DealId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DealId = 'DealId' in params ? params.DealId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1273,6 +1541,34 @@ class RenameInstanceRequest extends  AbstractModel {
 }
 
 /**
+ * RenewDBInstances返回参数结构体
+ * @class
+ */
+class RenewDBInstancesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * RenameInstance返回参数结构体
  * @class
  */
@@ -1309,10 +1605,16 @@ class DescribeClientConnectionsResponse extends  AbstractModel {
         super();
 
         /**
-         * 客户端连接信息，包括客户端IP和对应IP的连接数量
+         * 客户端连接信息，包括客户端IP和对应IP的连接数量。
          * @type {Array.<ClientConnection> || null}
          */
         this.Clients = null;
+
+        /**
+         * 满足条件的记录总条数，可用于分页查询。
+         * @type {number || null}
+         */
+        this.TotalCount = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1338,6 +1640,7 @@ class DescribeClientConnectionsResponse extends  AbstractModel {
                 this.Clients.push(obj);
             }
         }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -1796,24 +2099,36 @@ class InstanceDetail extends  AbstractModel {
 }
 
 /**
- * ModifyDBInstanceSpec返回参数结构体
+ * ModifyDBInstanceSpec请求参数结构体
  * @class
  */
-class ModifyDBInstanceSpecResponse extends  AbstractModel {
+class ModifyDBInstanceSpecRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 订单ID
+         * 实例ID，格式如：cmgo-p8vnipr5。与云数据库控制台页面中显示的实例ID相同
          * @type {string || null}
          */
-        this.DealId = null;
+        this.InstanceId = null;
 
         /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
+         * 实例配置变更后的内存大小，单位：GB。内存和磁盘必须同时升配或同时降配
+         * @type {number || null}
          */
-        this.RequestId = null;
+        this.Memory = null;
+
+        /**
+         * 实例配置变更后的硬盘大小，单位：GB。内存和磁盘必须同时升配或同时降配。降配时，新的磁盘参数必须大于已用磁盘容量的1.2倍
+         * @type {number || null}
+         */
+        this.Volume = null;
+
+        /**
+         * 实例配置变更后oplog的大小，单位：GB，默认为磁盘空间的10%，允许设置的最小值为磁盘的10%，最大值为磁盘的90%
+         * @type {number || null}
+         */
+        this.OplogSize = null;
 
     }
 
@@ -1824,8 +2139,10 @@ class ModifyDBInstanceSpecResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.DealId = 'DealId' in params ? params.DealId : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Memory = 'Memory' in params ? params.Memory : null;
+        this.Volume = 'Volume' in params ? params.Volume : null;
+        this.OplogSize = 'OplogSize' in params ? params.OplogSize : null;
 
     }
 }
@@ -1868,6 +2185,46 @@ class CreateDBInstanceHourResponse extends  AbstractModel {
         this.DealId = 'DealId' in params ? params.DealId : null;
         this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 描述了实例的计费模式
+ * @class
+ */
+class InstanceChargePrepaid extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 购买实例的时长，单位：月。取值范围：1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36。默认为1。
+         * @type {number || null}
+         */
+        this.Period = null;
+
+        /**
+         * 自动续费标识。取值范围：
+NOTIFY_AND_AUTO_RENEW：通知过期且自动续费
+NOTIFY_AND_MANUAL_RENEW：通知过期不自动续费
+DISABLE_NOTIFY_AND_MANUAL_RENEW：不通知过期不自动续费
+
+默认取值：NOTIFY_AND_MANUAL_RENEW。若该参数指定为NOTIFY_AND_AUTO_RENEW，在账户余额充足的情况下，实例到期后将按月自动续费。
+         * @type {string || null}
+         */
+        this.RenewFlag = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Period = 'Period' in params ? params.Period : null;
+        this.RenewFlag = 'RenewFlag' in params ? params.RenewFlag : null;
 
     }
 }
@@ -2040,39 +2397,87 @@ class SpecItem extends  AbstractModel {
     }
 }
 
+/**
+ * RenewDBInstances请求参数结构体
+ * @class
+ */
+class RenewDBInstancesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 一个或多个待操作的实例ID。可通过DescribeInstances接口返回值中的InstanceId获取。每次请求批量实例的上限为100。
+         * @type {Array.<string> || null}
+         */
+        this.InstanceIds = null;
+
+        /**
+         * 预付费模式，即包年包月相关参数设置。通过该参数可以指定包年包月实例的续费时长、是否设置自动续费等属性。包年包月实例该参数为必传参数。
+         * @type {InstanceChargePrepaid || null}
+         */
+        this.InstanceChargePrepaid = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
+
+        if (params.InstanceChargePrepaid) {
+            let obj = new InstanceChargePrepaid();
+            obj.deserialize(params.InstanceChargePrepaid)
+            this.InstanceChargePrepaid = obj;
+        }
+
+    }
+}
+
 module.exports = {
     DescribeSpecInfoRequest: DescribeSpecInfoRequest,
     CreateDBInstanceRequest: CreateDBInstanceRequest,
     IsolateDBInstanceRequest: IsolateDBInstanceRequest,
     DescribeBackupAccessResponse: DescribeBackupAccessResponse,
+    DescribeSlowLogPatternsResponse: DescribeSlowLogPatternsResponse,
     CreateDBInstanceHourRequest: CreateDBInstanceHourRequest,
     AssignProjectRequest: AssignProjectRequest,
+    DescribeSlowLogsResponse: DescribeSlowLogsResponse,
     ClientConnection: ClientConnection,
     BackupInfo: BackupInfo,
     DescribeDBInstancesRequest: DescribeDBInstancesRequest,
     SpecificationInfo: SpecificationInfo,
-    ModifyDBInstanceSpecRequest: ModifyDBInstanceSpecRequest,
+    DescribeSlowLogsRequest: DescribeSlowLogsRequest,
+    DescribeSlowLogPatternsRequest: DescribeSlowLogPatternsRequest,
     DescribeSpecInfoResponse: DescribeSpecInfoResponse,
     TagInfo: TagInfo,
     DescribeDBInstancesResponse: DescribeDBInstancesResponse,
     OfflineIsolatedDBInstanceRequest: OfflineIsolatedDBInstanceRequest,
+    SlowLogPattern: SlowLogPattern,
     CreateDBInstanceResponse: CreateDBInstanceResponse,
     AssignProjectResponse: AssignProjectResponse,
     DescribeDBBackupsRequest: DescribeDBBackupsRequest,
     DescribeClientConnectionsRequest: DescribeClientConnectionsRequest,
+    ModifyDBInstanceSpecResponse: ModifyDBInstanceSpecResponse,
     ShardInfo: ShardInfo,
     OfflineIsolatedDBInstanceResponse: OfflineIsolatedDBInstanceResponse,
     IsolateDBInstanceResponse: IsolateDBInstanceResponse,
     DescribeBackupAccessRequest: DescribeBackupAccessRequest,
     RenameInstanceRequest: RenameInstanceRequest,
+    RenewDBInstancesResponse: RenewDBInstancesResponse,
     RenameInstanceResponse: RenameInstanceResponse,
     DescribeClientConnectionsResponse: DescribeClientConnectionsResponse,
     DBInstanceInfo: DBInstanceInfo,
     BackupFile: BackupFile,
     DescribeDBBackupsResponse: DescribeDBBackupsResponse,
     InstanceDetail: InstanceDetail,
-    ModifyDBInstanceSpecResponse: ModifyDBInstanceSpecResponse,
+    ModifyDBInstanceSpecRequest: ModifyDBInstanceSpecRequest,
     CreateDBInstanceHourResponse: CreateDBInstanceHourResponse,
+    InstanceChargePrepaid: InstanceChargePrepaid,
     SpecItem: SpecItem,
+    RenewDBInstancesRequest: RenewDBInstancesRequest,
 
 }

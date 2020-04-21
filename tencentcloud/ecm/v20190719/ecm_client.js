@@ -16,90 +16,153 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
-const City = models.City;
-const PrivateIPAddressInfo = models.PrivateIPAddressInfo;
-const ResetInstancesRequest = models.ResetInstancesRequest;
-const ModifyModuleNameResponse = models.ModifyModuleNameResponse;
-const Area = models.Area;
-const DescribeNodeRequest = models.DescribeNodeRequest;
-const DescribeConfigRequest = models.DescribeConfigRequest;
-const SimpleModule = models.SimpleModule;
-const ISP = models.ISP;
-const ISPCounter = models.ISPCounter;
-const RunSecurityServiceEnabled = models.RunSecurityServiceEnabled;
-const DescribeModuleResponse = models.DescribeModuleResponse;
-const DescribePeakNetworkOverviewRequest = models.DescribePeakNetworkOverviewRequest;
-const EnhancedService = models.EnhancedService;
+const DescribeTaskResultResponse = models.DescribeTaskResultResponse;
+const Ipv6Address = models.Ipv6Address;
+const DescribePeakBaseOverviewRequest = models.DescribePeakBaseOverviewRequest;
+const CreateNetworkInterfaceRequest = models.CreateNetworkInterfaceRequest;
 const DescribeInstancesDeniedActionsRequest = models.DescribeInstancesDeniedActionsRequest;
 const Internet = models.Internet;
+const DescribeModuleResponse = models.DescribeModuleResponse;
+const Province = models.Province;
+const ModifyModuleNameResponse = models.ModifyModuleNameResponse;
+const DescribeNetworkInterfacesRequest = models.DescribeNetworkInterfacesRequest;
+const DescribeSubnetsRequest = models.DescribeSubnetsRequest;
+const CreateSubnetRequest = models.CreateSubnetRequest;
 const DeleteModuleResponse = models.DeleteModuleResponse;
-const DescribeInstanceTypeConfigRequest = models.DescribeInstanceTypeConfigRequest;
-const RebootInstancesResponse = models.RebootInstancesResponse;
-const ModifyInstancesAttributeResponse = models.ModifyInstancesAttributeResponse;
-const DescribeModuleDetailRequest = models.DescribeModuleDetailRequest;
-const DescribeInstancesDeniedActionsResponse = models.DescribeInstancesDeniedActionsResponse;
-const PeakFamilyInfo = models.PeakFamilyInfo;
-const DescribePeakNetworkOverviewResponse = models.DescribePeakNetworkOverviewResponse;
-const OperatorAction = models.OperatorAction;
-const DescribePeakBaseOverviewResponse = models.DescribePeakBaseOverviewResponse;
-const ImportImageResponse = models.ImportImageResponse;
-const TerminateInstancesRequest = models.TerminateInstancesRequest;
-const RegionInfo = models.RegionInfo;
-const DescribeImageResponse = models.DescribeImageResponse;
-const ModuleCounter = models.ModuleCounter;
-const DescribePeakBaseOverviewRequest = models.DescribePeakBaseOverviewRequest;
-const PeakNetworkRegionInfo = models.PeakNetworkRegionInfo;
-const DescribeBaseOverviewRequest = models.DescribeBaseOverviewRequest;
-const DeleteImageResponse = models.DeleteImageResponse;
-const DiskInfo = models.DiskInfo;
-const InstanceTypeConfig = models.InstanceTypeConfig;
-const ResetInstancesMaxBandwidthResponse = models.ResetInstancesMaxBandwidthResponse;
-const NodeInstanceNum = models.NodeInstanceNum;
+const EipQuota = models.EipQuota;
+const DeleteSubnetResponse = models.DeleteSubnetResponse;
+const ModifyAddressesBandwidthResponse = models.ModifyAddressesBandwidthResponse;
+const DescribeSubnetsResponse = models.DescribeSubnetsResponse;
+const RunInstancesRequest = models.RunInstancesRequest;
 const DescribeInstancesResponse = models.DescribeInstancesResponse;
-const PublicIPAddressInfo = models.PublicIPAddressInfo;
-const Node = models.Node;
-const NetworkStorageRange = models.NetworkStorageRange;
-const CreateModuleRequest = models.CreateModuleRequest;
-const ModifyModuleNameRequest = models.ModifyModuleNameRequest;
-const InstanceFamilyConfig = models.InstanceFamilyConfig;
-const DescribeInstanceTypeConfigResponse = models.DescribeInstanceTypeConfigResponse;
-const DescribeInstancesRequest = models.DescribeInstancesRequest;
-const Country = models.Country;
+const InstanceTypeConfig = models.InstanceTypeConfig;
 const DescribeNodeResponse = models.DescribeNodeResponse;
-const ImportImageRequest = models.ImportImageRequest;
+const RemovePrivateIpAddressesResponse = models.RemovePrivateIpAddressesResponse;
 const ModifyModuleImageResponse = models.ModifyModuleImageResponse;
-const Filter = models.Filter;
-const Tag = models.Tag;
-const ZoneInfo = models.ZoneInfo;
-const TerminateInstancesResponse = models.TerminateInstancesResponse;
+const VpcInfo = models.VpcInfo;
+const DeleteSubnetRequest = models.DeleteSubnetRequest;
 const DescribeModuleRequest = models.DescribeModuleRequest;
-const ModifyModuleImageRequest = models.ModifyModuleImageRequest;
 const Position = models.Position;
-const DeleteModuleRequest = models.DeleteModuleRequest;
 const CreateModuleResponse = models.CreateModuleResponse;
 const RebootInstancesRequest = models.RebootInstancesRequest;
-const Province = models.Province;
-const ResetInstancesMaxBandwidthRequest = models.ResetInstancesMaxBandwidthRequest;
-const SrcImage = models.SrcImage;
-const PeakBase = models.PeakBase;
-const ZoneInstanceInfo = models.ZoneInstanceInfo;
-const ModifyModuleNetworkResponse = models.ModifyModuleNetworkResponse;
-const ModuleItem = models.ModuleItem;
-const Instance = models.Instance;
-const DeleteImageRequest = models.DeleteImageRequest;
-const Image = models.Image;
-const ModifyModuleNetworkRequest = models.ModifyModuleNetworkRequest;
-const PeakNetwork = models.PeakNetwork;
-const DescribeConfigResponse = models.DescribeConfigResponse;
-const DescribeBaseOverviewResponse = models.DescribeBaseOverviewResponse;
+const DiskInfo = models.DiskInfo;
+const AllocateAddressesRequest = models.AllocateAddressesRequest;
+const DeleteNetworkInterfaceRequest = models.DeleteNetworkInterfaceRequest;
+const RemovePrivateIpAddressesRequest = models.RemovePrivateIpAddressesRequest;
 const ModifyInstancesAttributeRequest = models.ModifyInstancesAttributeRequest;
 const InstanceFamilyTypeConfig = models.InstanceFamilyTypeConfig;
 const ResetInstancesResponse = models.ResetInstancesResponse;
 const DescribeImageRequest = models.DescribeImageRequest;
+const MigratePrivateIpAddressRequest = models.MigratePrivateIpAddressRequest;
+const ModifySubnetAttributeResponse = models.ModifySubnetAttributeResponse;
+const ZoneInfo = models.ZoneInfo;
+const DescribeNodeRequest = models.DescribeNodeRequest;
+const CreateSubnetResponse = models.CreateSubnetResponse;
+const Area = models.Area;
+const DescribeConfigRequest = models.DescribeConfigRequest;
+const NetworkInterfaceAttachment = models.NetworkInterfaceAttachment;
+const NetworkStorageRange = models.NetworkStorageRange;
+const CreateVpcResponse = models.CreateVpcResponse;
+const AssistantCidr = models.AssistantCidr;
+const NetworkInterface = models.NetworkInterface;
+const CreateModuleRequest = models.CreateModuleRequest;
+const ModifyInstancesAttributeResponse = models.ModifyInstancesAttributeResponse;
+const ReleaseAddressesResponse = models.ReleaseAddressesResponse;
+const DescribeInstancesDeniedActionsResponse = models.DescribeInstancesDeniedActionsResponse;
+const DisassociateAddressRequest = models.DisassociateAddressRequest;
+const ModuleCounter = models.ModuleCounter;
+const ZoneInstanceCountISP = models.ZoneInstanceCountISP;
+const Tag = models.Tag;
+const ResetInstancesMaxBandwidthResponse = models.ResetInstancesMaxBandwidthResponse;
+const DeleteVpcRequest = models.DeleteVpcRequest;
+const CreateNetworkInterfaceResponse = models.CreateNetworkInterfaceResponse;
+const Node = models.Node;
+const RunInstancesResponse = models.RunInstancesResponse;
+const DescribeAddressQuotaRequest = models.DescribeAddressQuotaRequest;
+const DescribeInstanceTypeConfigResponse = models.DescribeInstanceTypeConfigResponse;
+const NodeInstanceNum = models.NodeInstanceNum;
+const DescribeAddressesResponse = models.DescribeAddressesResponse;
+const DetachNetworkInterfaceResponse = models.DetachNetworkInterfaceResponse;
+const InstanceFamilyConfig = models.InstanceFamilyConfig;
+const DeleteModuleRequest = models.DeleteModuleRequest;
+const ResetInstancesMaxBandwidthRequest = models.ResetInstancesMaxBandwidthRequest;
+const PeakBase = models.PeakBase;
+const ModifyModuleNetworkRequest = models.ModifyModuleNetworkRequest;
+const Image = models.Image;
+const TagSpecification = models.TagSpecification;
+const DetachNetworkInterfaceRequest = models.DetachNetworkInterfaceRequest;
+const DescribeConfigResponse = models.DescribeConfigResponse;
+const DescribeModuleDetailResponse = models.DescribeModuleDetailResponse;
+const Subnet = models.Subnet;
+const ModifyVpcAttributeResponse = models.ModifyVpcAttributeResponse;
+const DeleteVpcResponse = models.DeleteVpcResponse;
+const ISP = models.ISP;
+const PrivateIpAddressSpecification = models.PrivateIpAddressSpecification;
+const ISPCounter = models.ISPCounter;
+const MigratePrivateIpAddressResponse = models.MigratePrivateIpAddressResponse;
+const Instance = models.Instance;
+const EnhancedService = models.EnhancedService;
+const DisassociateAddressResponse = models.DisassociateAddressResponse;
+const DescribeInstanceTypeConfigRequest = models.DescribeInstanceTypeConfigRequest;
+const DescribeModuleDetailRequest = models.DescribeModuleDetailRequest;
+const AssociateAddressRequest = models.AssociateAddressRequest;
+const ModifyVpcAttributeRequest = models.ModifyVpcAttributeRequest;
+const DescribePeakNetworkOverviewResponse = models.DescribePeakNetworkOverviewResponse;
+const AttachNetworkInterfaceResponse = models.AttachNetworkInterfaceResponse;
+const DescribeBaseOverviewRequest = models.DescribeBaseOverviewRequest;
+const ModifyModuleNetworkResponse = models.ModifyModuleNetworkResponse;
+const ImportImageRequest = models.ImportImageRequest;
+const ModifyModuleNameRequest = models.ModifyModuleNameRequest;
+const SimpleModule = models.SimpleModule;
+const DescribeInstancesRequest = models.DescribeInstancesRequest;
+const DescribeTaskResultRequest = models.DescribeTaskResultRequest;
+const AssociateAddressResponse = models.AssociateAddressResponse;
+const Filter = models.Filter;
+const PublicIPAddressInfo = models.PublicIPAddressInfo;
+const TerminateInstancesResponse = models.TerminateInstancesResponse;
+const DescribeAddressesRequest = models.DescribeAddressesRequest;
+const MigrateNetworkInterfaceRequest = models.MigrateNetworkInterfaceRequest;
+const DescribeAddressQuotaResponse = models.DescribeAddressQuotaResponse;
+const SrcImage = models.SrcImage;
+const ZoneInstanceInfo = models.ZoneInstanceInfo;
+const ModifyAddressAttributeRequest = models.ModifyAddressAttributeRequest;
+const ResetInstancesRequest = models.ResetInstancesRequest;
+const PeakNetwork = models.PeakNetwork;
+const DeleteImageRequest = models.DeleteImageRequest;
+const ModifyAddressAttributeResponse = models.ModifyAddressAttributeResponse;
+const ImportImageResponse = models.ImportImageResponse;
+const City = models.City;
+const PrivateIPAddressInfo = models.PrivateIPAddressInfo;
+const TerminateInstancesRequest = models.TerminateInstancesRequest;
+const DeleteNetworkInterfaceResponse = models.DeleteNetworkInterfaceResponse;
+const DescribePeakNetworkOverviewRequest = models.DescribePeakNetworkOverviewRequest;
+const AssignPrivateIpAddressesResponse = models.AssignPrivateIpAddressesResponse;
+const PeakNetworkRegionInfo = models.PeakNetworkRegionInfo;
+const RebootInstancesResponse = models.RebootInstancesResponse;
+const ModifyAddressesBandwidthRequest = models.ModifyAddressesBandwidthRequest;
+const OperatorAction = models.OperatorAction;
+const PeakFamilyInfo = models.PeakFamilyInfo;
+const DescribePeakBaseOverviewResponse = models.DescribePeakBaseOverviewResponse;
+const DescribeImageResponse = models.DescribeImageResponse;
+const RegionInfo = models.RegionInfo;
+const DeleteImageResponse = models.DeleteImageResponse;
+const Address = models.Address;
+const DescribeNetworkInterfacesResponse = models.DescribeNetworkInterfacesResponse;
+const AssignPrivateIpAddressesRequest = models.AssignPrivateIpAddressesRequest;
+const ReleaseAddressesRequest = models.ReleaseAddressesRequest;
+const CreateVpcRequest = models.CreateVpcRequest;
+const RunSecurityServiceEnabled = models.RunSecurityServiceEnabled;
+const Country = models.Country;
+const ModifySubnetAttributeRequest = models.ModifySubnetAttributeRequest;
+const AllocateAddressesResponse = models.AllocateAddressesResponse;
+const AttachNetworkInterfaceRequest = models.AttachNetworkInterfaceRequest;
+const ModuleItem = models.ModuleItem;
+const ModifyModuleImageRequest = models.ModifyModuleImageRequest;
+const RunMonitorServiceEnabled = models.RunMonitorServiceEnabled;
+const MigrateNetworkInterfaceResponse = models.MigrateNetworkInterfaceResponse;
 const InstanceOperator = models.InstanceOperator;
 const Module = models.Module;
-const DescribeModuleDetailResponse = models.DescribeModuleDetailResponse;
-const RunMonitorServiceEnabled = models.RunMonitorServiceEnabled;
+const DescribeBaseOverviewResponse = models.DescribeBaseOverviewResponse;
 
 
 /**
@@ -121,6 +184,17 @@ class EcmClient extends AbstractClient {
     ResetInstancesMaxBandwidth(req, cb) {
         let resp = new ResetInstancesMaxBandwidthResponse();
         this.request("ResetInstancesMaxBandwidth", req, resp, cb);
+    }
+
+    /**
+     * 销毁实例
+     * @param {TerminateInstancesRequest} req
+     * @param {function(string, TerminateInstancesResponse):void} cb
+     * @public
+     */
+    TerminateInstances(req, cb) {
+        let resp = new TerminateInstancesResponse();
+        this.request("TerminateInstances", req, resp, cb);
     }
 
     /**
@@ -168,14 +242,106 @@ class EcmClient extends AbstractClient {
     }
 
     /**
-     * 修改实例的属性。
-     * @param {ModifyInstancesAttributeRequest} req
-     * @param {function(string, ModifyInstancesAttributeResponse):void} cb
+     * 解绑弹性公网IP（简称 EIP）
+只有状态为 BIND 和 BIND_ENI 的 EIP 才能进行解绑定操作。
+EIP 如果被封堵，则不能进行解绑定操作。
+     * @param {DisassociateAddressRequest} req
+     * @param {function(string, DisassociateAddressResponse):void} cb
      * @public
      */
-    ModifyInstancesAttribute(req, cb) {
-        let resp = new ModifyInstancesAttributeResponse();
-        this.request("ModifyInstancesAttribute", req, resp, cb);
+    DisassociateAddress(req, cb) {
+        let resp = new DisassociateAddressResponse();
+        this.request("DisassociateAddress", req, resp, cb);
+    }
+
+    /**
+     * 弹性网卡绑定云主机
+     * @param {AttachNetworkInterfaceRequest} req
+     * @param {function(string, AttachNetworkInterfaceResponse):void} cb
+     * @public
+     */
+    AttachNetworkInterface(req, cb) {
+        let resp = new AttachNetworkInterfaceResponse();
+        this.request("AttachNetworkInterface", req, resp, cb);
+    }
+
+    /**
+     * 释放一个或多个弹性公网IP（简称 EIP）。
+该操作不可逆，释放后 EIP 关联的 IP 地址将不再属于您的名下。
+只有状态为 UNBIND 的 EIP 才能进行释放操作。
+     * @param {ReleaseAddressesRequest} req
+     * @param {function(string, ReleaseAddressesResponse):void} cb
+     * @public
+     */
+    ReleaseAddresses(req, cb) {
+        let resp = new ReleaseAddressesResponse();
+        this.request("ReleaseAddresses", req, resp, cb);
+    }
+
+    /**
+     * 创建私有网络
+     * @param {CreateVpcRequest} req
+     * @param {function(string, CreateVpcResponse):void} cb
+     * @public
+     */
+    CreateVpc(req, cb) {
+        let resp = new CreateVpcResponse();
+        this.request("CreateVpc", req, resp, cb);
+    }
+
+    /**
+     * 查询您账户的弹性公网IP（简称 EIP）在当前地域的配额信息
+     * @param {DescribeAddressQuotaRequest} req
+     * @param {function(string, DescribeAddressQuotaResponse):void} cb
+     * @public
+     */
+    DescribeAddressQuota(req, cb) {
+        let resp = new DescribeAddressQuotaResponse();
+        this.request("DescribeAddressQuota", req, resp, cb);
+    }
+
+    /**
+     * 删除私有网络
+     * @param {DeleteVpcRequest} req
+     * @param {function(string, DeleteVpcResponse):void} cb
+     * @public
+     */
+    DeleteVpc(req, cb) {
+        let resp = new DeleteVpcResponse();
+        this.request("DeleteVpc", req, resp, cb);
+    }
+
+    /**
+     * 查询子网列表
+     * @param {DescribeSubnetsRequest} req
+     * @param {function(string, DescribeSubnetsResponse):void} cb
+     * @public
+     */
+    DescribeSubnets(req, cb) {
+        let resp = new DescribeSubnetsResponse();
+        this.request("DescribeSubnets", req, resp, cb);
+    }
+
+    /**
+     * 修改弹性公网IP属性
+     * @param {ModifyAddressAttributeRequest} req
+     * @param {function(string, ModifyAddressAttributeResponse):void} cb
+     * @public
+     */
+    ModifyAddressAttribute(req, cb) {
+        let resp = new ModifyAddressAttributeResponse();
+        this.request("ModifyAddressAttribute", req, resp, cb);
+    }
+
+    /**
+     * 申请一个或多个弹性公网IP（简称 EIP）
+     * @param {AllocateAddressesRequest} req
+     * @param {function(string, AllocateAddressesResponse):void} cb
+     * @public
+     */
+    AllocateAddresses(req, cb) {
+        let resp = new AllocateAddressesResponse();
+        this.request("AllocateAddresses", req, resp, cb);
     }
 
     /**
@@ -201,14 +367,75 @@ class EcmClient extends AbstractClient {
     }
 
     /**
-     * 销毁实例
-     * @param {TerminateInstancesRequest} req
-     * @param {function(string, TerminateInstancesResponse):void} cb
+     * 创建ECM实例
+     * @param {RunInstancesRequest} req
+     * @param {function(string, RunInstancesResponse):void} cb
      * @public
      */
-    TerminateInstances(req, cb) {
-        let resp = new TerminateInstancesResponse();
-        this.request("TerminateInstances", req, resp, cb);
+    RunInstances(req, cb) {
+        let resp = new RunInstancesResponse();
+        this.request("RunInstances", req, resp, cb);
+    }
+
+    /**
+     * 从CVM产品导入镜像到ECM
+     * @param {ImportImageRequest} req
+     * @param {function(string, ImportImageResponse):void} cb
+     * @public
+     */
+    ImportImage(req, cb) {
+        let resp = new ImportImageResponse();
+        this.request("ImportImage", req, resp, cb);
+    }
+
+    /**
+     * 查询弹性公网IP列表
+     * @param {DescribeAddressesRequest} req
+     * @param {function(string, DescribeAddressesResponse):void} cb
+     * @public
+     */
+    DescribeAddresses(req, cb) {
+        let resp = new DescribeAddressesResponse();
+        this.request("DescribeAddresses", req, resp, cb);
+    }
+
+    /**
+     * 将弹性公网IP（简称 EIP）绑定到实例或弹性网卡的指定内网 IP 上。
+将 EIP 绑定到实例（CVM）上，其本质是将 EIP 绑定到实例上主网卡的主内网 IP 上。
+将 EIP 绑定到主网卡的主内网IP上，绑定过程会把其上绑定的普通公网 IP 自动解绑并释放。
+将 EIP 绑定到指定网卡的内网 IP上（非主网卡的主内网IP），则必须先解绑该 EIP，才能再绑定新的。
+将 EIP 绑定到NAT网关，请使用接口EipBindNatGateway
+EIP 如果欠费或被封堵，则不能被绑定。
+只有状态为 UNBIND 的 EIP 才能够被绑定。
+     * @param {AssociateAddressRequest} req
+     * @param {function(string, AssociateAddressResponse):void} cb
+     * @public
+     */
+    AssociateAddress(req, cb) {
+        let resp = new AssociateAddressResponse();
+        this.request("AssociateAddress", req, resp, cb);
+    }
+
+    /**
+     * 查询EIP异步任务执行结果
+     * @param {DescribeTaskResultRequest} req
+     * @param {function(string, DescribeTaskResultResponse):void} cb
+     * @public
+     */
+    DescribeTaskResult(req, cb) {
+        let resp = new DescribeTaskResultResponse();
+        this.request("DescribeTaskResult", req, resp, cb);
+    }
+
+    /**
+     * 创建模块
+     * @param {CreateModuleRequest} req
+     * @param {function(string, CreateModuleResponse):void} cb
+     * @public
+     */
+    CreateModule(req, cb) {
+        let resp = new CreateModuleResponse();
+        this.request("CreateModule", req, resp, cb);
     }
 
     /**
@@ -223,14 +450,47 @@ class EcmClient extends AbstractClient {
     }
 
     /**
-     * 创建模块
-     * @param {CreateModuleRequest} req
-     * @param {function(string, CreateModuleResponse):void} cb
+     * 删除子网
+     * @param {DeleteSubnetRequest} req
+     * @param {function(string, DeleteSubnetResponse):void} cb
      * @public
      */
-    CreateModule(req, cb) {
-        let resp = new CreateModuleResponse();
-        this.request("CreateModule", req, resp, cb);
+    DeleteSubnet(req, cb) {
+        let resp = new DeleteSubnetResponse();
+        this.request("DeleteSubnet", req, resp, cb);
+    }
+
+    /**
+     * 修改子网属性
+     * @param {ModifySubnetAttributeRequest} req
+     * @param {function(string, ModifySubnetAttributeResponse):void} cb
+     * @public
+     */
+    ModifySubnetAttribute(req, cb) {
+        let resp = new ModifySubnetAttributeResponse();
+        this.request("ModifySubnetAttribute", req, resp, cb);
+    }
+
+    /**
+     * 查询弹性网卡列表
+     * @param {DescribeNetworkInterfacesRequest} req
+     * @param {function(string, DescribeNetworkInterfacesResponse):void} cb
+     * @public
+     */
+    DescribeNetworkInterfaces(req, cb) {
+        let resp = new DescribeNetworkInterfacesResponse();
+        this.request("DescribeNetworkInterfaces", req, resp, cb);
+    }
+
+    /**
+     * 弹性网卡迁移
+     * @param {MigrateNetworkInterfaceRequest} req
+     * @param {function(string, MigrateNetworkInterfaceResponse):void} cb
+     * @public
+     */
+    MigrateNetworkInterface(req, cb) {
+        let resp = new MigrateNetworkInterfaceResponse();
+        this.request("MigrateNetworkInterface", req, resp, cb);
     }
 
     /**
@@ -253,6 +513,17 @@ class EcmClient extends AbstractClient {
     DescribeInstancesDeniedActions(req, cb) {
         let resp = new DescribeInstancesDeniedActionsResponse();
         this.request("DescribeInstancesDeniedActions", req, resp, cb);
+    }
+
+    /**
+     * 创建弹性网卡
+     * @param {CreateNetworkInterfaceRequest} req
+     * @param {function(string, CreateNetworkInterfaceResponse):void} cb
+     * @public
+     */
+    CreateNetworkInterface(req, cb) {
+        let resp = new CreateNetworkInterfaceResponse();
+        this.request("CreateNetworkInterface", req, resp, cb);
     }
 
     /**
@@ -289,14 +560,25 @@ class EcmClient extends AbstractClient {
     }
 
     /**
-     * 从CVM产品导入镜像到ECM
-     * @param {ImportImageRequest} req
-     * @param {function(string, ImportImageResponse):void} cb
+     * 弹性网卡解绑云主机
+     * @param {DetachNetworkInterfaceRequest} req
+     * @param {function(string, DetachNetworkInterfaceResponse):void} cb
      * @public
      */
-    ImportImage(req, cb) {
-        let resp = new ImportImageResponse();
-        this.request("ImportImage", req, resp, cb);
+    DetachNetworkInterface(req, cb) {
+        let resp = new DetachNetworkInterfaceResponse();
+        this.request("DetachNetworkInterface", req, resp, cb);
+    }
+
+    /**
+     * 弹性网卡申请内网 IP
+     * @param {AssignPrivateIpAddressesRequest} req
+     * @param {function(string, AssignPrivateIpAddressesResponse):void} cb
+     * @public
+     */
+    AssignPrivateIpAddresses(req, cb) {
+        let resp = new AssignPrivateIpAddressesResponse();
+        this.request("AssignPrivateIpAddresses", req, resp, cb);
     }
 
     /**
@@ -311,6 +593,28 @@ class EcmClient extends AbstractClient {
     }
 
     /**
+     * 修改私有网络（VPC）的相关属性
+     * @param {ModifyVpcAttributeRequest} req
+     * @param {function(string, ModifyVpcAttributeResponse):void} cb
+     * @public
+     */
+    ModifyVpcAttribute(req, cb) {
+        let resp = new ModifyVpcAttributeResponse();
+        this.request("ModifyVpcAttribute", req, resp, cb);
+    }
+
+    /**
+     * 修改实例的属性。
+     * @param {ModifyInstancesAttributeRequest} req
+     * @param {function(string, ModifyInstancesAttributeResponse):void} cb
+     * @public
+     */
+    ModifyInstancesAttribute(req, cb) {
+        let resp = new ModifyInstancesAttributeResponse();
+        this.request("ModifyInstancesAttribute", req, resp, cb);
+    }
+
+    /**
      * CPU 内存 硬盘等基础信息峰值数据
      * @param {DescribePeakBaseOverviewRequest} req
      * @param {function(string, DescribePeakBaseOverviewResponse):void} cb
@@ -319,6 +623,17 @@ class EcmClient extends AbstractClient {
     DescribePeakBaseOverview(req, cb) {
         let resp = new DescribePeakBaseOverviewResponse();
         this.request("DescribePeakBaseOverview", req, resp, cb);
+    }
+
+    /**
+     * 删除弹性网卡
+     * @param {DeleteNetworkInterfaceRequest} req
+     * @param {function(string, DeleteNetworkInterfaceResponse):void} cb
+     * @public
+     */
+    DeleteNetworkInterface(req, cb) {
+        let resp = new DeleteNetworkInterfaceResponse();
+        this.request("DeleteNetworkInterface", req, resp, cb);
     }
 
     /**
@@ -344,6 +659,19 @@ class EcmClient extends AbstractClient {
     }
 
     /**
+     * 弹性网卡内网IP迁移。
+该接口用于将一个内网IP从一个弹性网卡上迁移到另外一个弹性网卡，主IP地址不支持迁移。
+迁移前后的弹性网卡必须在同一个子网内。
+     * @param {MigratePrivateIpAddressRequest} req
+     * @param {function(string, MigratePrivateIpAddressResponse):void} cb
+     * @public
+     */
+    MigratePrivateIpAddress(req, cb) {
+        let resp = new MigratePrivateIpAddressResponse();
+        this.request("MigratePrivateIpAddress", req, resp, cb);
+    }
+
+    /**
      * 展示镜像列表
      * @param {DescribeImageRequest} req
      * @param {function(string, DescribeImageResponse):void} cb
@@ -363,6 +691,41 @@ class EcmClient extends AbstractClient {
     DeleteImage(req, cb) {
         let resp = new DeleteImageResponse();
         this.request("DeleteImage", req, resp, cb);
+    }
+
+    /**
+     * 调整弹性公网IP带宽
+
+     * @param {ModifyAddressesBandwidthRequest} req
+     * @param {function(string, ModifyAddressesBandwidthResponse):void} cb
+     * @public
+     */
+    ModifyAddressesBandwidth(req, cb) {
+        let resp = new ModifyAddressesBandwidthResponse();
+        this.request("ModifyAddressesBandwidth", req, resp, cb);
+    }
+
+    /**
+     * 弹性网卡退还内网 IP。
+退还弹性网卡上的辅助内网IP，接口自动解关联弹性公网 IP。不能退还弹性网卡的主内网IP。
+     * @param {RemovePrivateIpAddressesRequest} req
+     * @param {function(string, RemovePrivateIpAddressesResponse):void} cb
+     * @public
+     */
+    RemovePrivateIpAddresses(req, cb) {
+        let resp = new RemovePrivateIpAddressesResponse();
+        this.request("RemovePrivateIpAddresses", req, resp, cb);
+    }
+
+    /**
+     * 创建子网
+     * @param {CreateSubnetRequest} req
+     * @param {function(string, CreateSubnetResponse):void} cb
+     * @public
+     */
+    CreateSubnet(req, cb) {
+        let resp = new CreateSubnetResponse();
+        this.request("CreateSubnet", req, resp, cb);
     }
 
 

@@ -17,107 +17,143 @@
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const QueryInvoiceResponse = models.QueryInvoiceResponse;
+const ApplyTradeRequest = models.ApplyTradeRequest;
+const QueryOutwardOrderResponse = models.QueryOutwardOrderResponse;
+const QueryExchangeRateResponse = models.QueryExchangeRateResponse;
 const QueryInvoiceForManagementResponse = models.QueryInvoiceForManagementResponse;
 const QueryAcctBindingRequest = models.QueryAcctBindingRequest;
 const ModifyMntMbrBindRelateAcctBankCodeRequest = models.ModifyMntMbrBindRelateAcctBankCodeRequest;
 const CreateMerchantResult = models.CreateMerchantResult;
+const ApplyPayerInfoResponse = models.ApplyPayerInfoResponse;
 const RefundResponse = models.RefundResponse;
 const UnifiedOrderResponse = models.UnifiedOrderResponse;
 const QueryBankWithdrawCashDetailsRequest = models.QueryBankWithdrawCashDetailsRequest;
-const RevRegisterBillSupportWithdrawRequest = models.RevRegisterBillSupportWithdrawRequest;
+const ApplyPayerinfoResult = models.ApplyPayerinfoResult;
 const QueryCustAcctIdBalanceRequest = models.QueryCustAcctIdBalanceRequest;
+const QueryPayerInfoResponse = models.QueryPayerInfoResponse;
 const WithdrawItem = models.WithdrawItem;
-const QueryMemberTransactionRequest = models.QueryMemberTransactionRequest;
+const BindAcctRequest = models.BindAcctRequest;
 const ReviseMbrPropertyRequest = models.ReviseMbrPropertyRequest;
 const WithdrawCashMembershipRequest = models.WithdrawCashMembershipRequest;
 const RevResigterBillSupportWithdrawRequest = models.RevResigterBillSupportWithdrawRequest;
 const CreateInvoiceResponse = models.CreateInvoiceResponse;
-const CreateAcctRequest = models.CreateAcctRequest;
+const QueryOutwardOrderRequest = models.QueryOutwardOrderRequest;
 const CreateRedInvoiceResult = models.CreateRedInvoiceResult;
 const QueryBankWithdrawCashDetailsResponse = models.QueryBankWithdrawCashDetailsResponse;
 const WithdrawCashMembershipResponse = models.WithdrawCashMembershipResponse;
-const QueryReconciliationDocumentRequest = models.QueryReconciliationDocumentRequest;
+const ApplyTradeResult = models.ApplyTradeResult;
 const RefundOutSubOrderRefundList = models.RefundOutSubOrderRefundList;
 const UnbindRelateAcctRequest = models.UnbindRelateAcctRequest;
+const QueryTradeData = models.QueryTradeData;
 const CreateMerchantRequest = models.CreateMerchantRequest;
+const ApplyDeclareResult = models.ApplyDeclareResult;
 const UnifiedOrderInSubOrderList = models.UnifiedOrderInSubOrderList;
 const QueryInvoiceResult = models.QueryInvoiceResult;
 const QueryAcctBindingResponse = models.QueryAcctBindingResponse;
+const ApplyOutwardOrderResponse = models.ApplyOutwardOrderResponse;
 const ApplyReWithdrawalResponse = models.ApplyReWithdrawalResponse;
-const QueryOrderOutOrderList = models.QueryOrderOutOrderList;
 const CreateInvoiceItem = models.CreateInvoiceItem;
-const QueryOrderOutSubOrderList = models.QueryOrderOutSubOrderList;
+const ApplyOutwardOrderData = models.ApplyOutwardOrderData;
 const ReviseMbrPropertyResponse = models.ReviseMbrPropertyResponse;
-const CreateInvoiceResultData = models.CreateInvoiceResultData;
+const CreateAcctRequest = models.CreateAcctRequest;
 const Acct = models.Acct;
-const QueryCommonTransferRechargeResponse = models.QueryCommonTransferRechargeResponse;
+const CloseOrderResponse = models.CloseOrderResponse;
+const ApplyPayerinfoData = models.ApplyPayerinfoData;
 const CreateRedInvoiceItem = models.CreateRedInvoiceItem;
 const CheckAcctRequest = models.CheckAcctRequest;
 const CheckAmountResponse = models.CheckAmountResponse;
+const QueryOrderOutSubOrderList = models.QueryOrderOutSubOrderList;
+const QueryOutwardOrderResult = models.QueryOutwardOrderResult;
+const RevRegisterBillSupportWithdrawResponse = models.RevRegisterBillSupportWithdrawResponse;
+const QueryPayerInfoRequest = models.QueryPayerInfoRequest;
+const QueryMerchantInfoForManagementResponse = models.QueryMerchantInfoForManagementResponse;
 const QuerySingleTransactionStatusRequest = models.QuerySingleTransactionStatusRequest;
 const MerchantManagementList = models.MerchantManagementList;
 const CreateInvoiceResult = models.CreateInvoiceResult;
-const QueryMerchantInfoForManagementResponse = models.QueryMerchantInfoForManagementResponse;
+const QueryApplicationMaterialResponse = models.QueryApplicationMaterialResponse;
+const QueryMerchantBalanceResult = models.QueryMerchantBalanceResult;
 const QueryCustAcctIdBalanceResponse = models.QueryCustAcctIdBalanceResponse;
+const QueryTradeResponse = models.QueryTradeResponse;
 const DownloadBillResponse = models.DownloadBillResponse;
 const RevokeMemberRechargeThirdPayResponse = models.RevokeMemberRechargeThirdPayResponse;
 const CreateRedInvoiceRequest = models.CreateRedInvoiceRequest;
 const QueryAcctInfoListResponse = models.QueryAcctInfoListResponse;
 const QueryAcctInfoListRequest = models.QueryAcctInfoListRequest;
 const BindRelateAcctUnionPayRequest = models.BindRelateAcctUnionPayRequest;
-const QueryBankTransactionDetailsRequest = models.QueryBankTransactionDetailsRequest;
-const RevRegisterBillSupportWithdrawResponse = models.RevRegisterBillSupportWithdrawResponse;
+const CreateInvoiceResultData = models.CreateInvoiceResultData;
+const RevRegisterBillSupportWithdrawRequest = models.RevRegisterBillSupportWithdrawRequest;
 const QuerySmallAmountTransferResponse = models.QuerySmallAmountTransferResponse;
 const CreateRedInvoiceResponse = models.CreateRedInvoiceResponse;
+const QueryMerchantBalanceResponse = models.QueryMerchantBalanceResponse;
 const QuerySingleTransactionStatusResponse = models.QuerySingleTransactionStatusResponse;
 const QueryAcctInfoRequest = models.QueryAcctInfoRequest;
+const ApplyDeclareData = models.ApplyDeclareData;
 const TranItem = models.TranItem;
-const ClearItem = models.ClearItem;
-const QueryOrderRequest = models.QueryOrderRequest;
+const QueryCommonTransferRechargeResponse = models.QueryCommonTransferRechargeResponse;
+const MerchantManagementResult = models.MerchantManagementResult;
 const ApplyWithdrawalResponse = models.ApplyWithdrawalResponse;
-const QueryMerchantInfoForManagementRequest = models.QueryMerchantInfoForManagementRequest;
-const RevokeMemberRechargeThirdPayRequest = models.RevokeMemberRechargeThirdPayRequest;
-const BindAcctRequest = models.BindAcctRequest;
-const CloseOrderResponse = models.CloseOrderResponse;
+const QueryBankTransactionDetailsResponse = models.QueryBankTransactionDetailsResponse;
+const QueryPayerinfoData = models.QueryPayerinfoData;
+const QueryMerchantBalanceData = models.QueryMerchantBalanceData;
+const QueryMemberTransactionRequest = models.QueryMemberTransactionRequest;
+const QueryExchangerateResult = models.QueryExchangerateResult;
 const QueryOrderResponse = models.QueryOrderResponse;
+const QueryMerchantBalanceRequest = models.QueryMerchantBalanceRequest;
 const CreateAcctResponse = models.CreateAcctResponse;
+const QueryTradeRequest = models.QueryTradeRequest;
 const BindAcctResponse = models.BindAcctResponse;
+const QueryExchangerateData = models.QueryExchangerateData;
 const WithdrawBill = models.WithdrawBill;
 const BindRelateAccReUnionPayRequest = models.BindRelateAccReUnionPayRequest;
 const CreateCustAcctIdResponse = models.CreateCustAcctIdResponse;
 const QueryAcctInfoResponse = models.QueryAcctInfoResponse;
+const QueryPayerinfoResult = models.QueryPayerinfoResult;
 const TransferItem = models.TransferItem;
 const QueryInvoiceResultData = models.QueryInvoiceResultData;
 const RegisterBillSupportWithdrawResponse = models.RegisterBillSupportWithdrawResponse;
 const ApplyReWithdrawalRequest = models.ApplyReWithdrawalRequest;
 const UnbindRelateAcctResponse = models.UnbindRelateAcctResponse;
 const CheckAmountRequest = models.CheckAmountRequest;
-const CreateMerchantResultData = models.CreateMerchantResultData;
+const ApplyOutwardOrderRequest = models.ApplyOutwardOrderRequest;
 const RechargeMemberThirdPayRequest = models.RechargeMemberThirdPayRequest;
 const CreateInvoiceRequest = models.CreateInvoiceRequest;
+const QueryTradeResult = models.QueryTradeResult;
 const RegisterBillSupportWithdrawRequest = models.RegisterBillSupportWithdrawRequest;
+const ClearItem = models.ClearItem;
 const CreateCustAcctIdRequest = models.CreateCustAcctIdRequest;
 const UnBindAcctResponse = models.UnBindAcctResponse;
+const QueryOrderOutOrderList = models.QueryOrderOutOrderList;
 const QueryCommonTransferRechargeRequest = models.QueryCommonTransferRechargeRequest;
 const QueryItem = models.QueryItem;
-const MerchantManagementResult = models.MerchantManagementResult;
+const QueryOrderRequest = models.QueryOrderRequest;
 const CloseOrderRequest = models.CloseOrderRequest;
 const RevResigterBillSupportWithdrawResponse = models.RevResigterBillSupportWithdrawResponse;
 const QueryBalanceResponse = models.QueryBalanceResponse;
+const QueryOutwardOrderData = models.QueryOutwardOrderData;
+const UnBindAcctRequest = models.UnBindAcctRequest;
 const TransactionItem = models.TransactionItem;
-const CheckAcctResponse = models.CheckAcctResponse;
+const QueryBankTransactionDetailsRequest = models.QueryBankTransactionDetailsRequest;
 const QueryReconciliationDocumentResponse = models.QueryReconciliationDocumentResponse;
-const QueryBankTransactionDetailsResponse = models.QueryBankTransactionDetailsResponse;
-const FileItem = models.FileItem;
+const CreateMerchantResultData = models.CreateMerchantResultData;
+const QueryExchangeRateRequest = models.QueryExchangeRateRequest;
+const QueryMerchantInfoForManagementRequest = models.QueryMerchantInfoForManagementRequest;
+const ApplyOutwardOrderResult = models.ApplyOutwardOrderResult;
+const ApplyPayerInfoRequest = models.ApplyPayerInfoRequest;
 const QueryBankClearRequest = models.QueryBankClearRequest;
 const QueryInvoiceRequest = models.QueryInvoiceRequest;
+const ApplyApplicationMaterialResponse = models.ApplyApplicationMaterialResponse;
 const InvoiceManangementResult = models.InvoiceManangementResult;
 const DownloadBillRequest = models.DownloadBillRequest;
+const RevokeMemberRechargeThirdPayRequest = models.RevokeMemberRechargeThirdPayRequest;
 const CreateRedInvoiceResultData = models.CreateRedInvoiceResultData;
+const ApplyTradeResponse = models.ApplyTradeResponse;
 const QueryBankClearResponse = models.QueryBankClearResponse;
 const RechargeMemberThirdPayResponse = models.RechargeMemberThirdPayResponse;
+const QueryApplicationMaterialRequest = models.QueryApplicationMaterialRequest;
 const CreateMerchantResponse = models.CreateMerchantResponse;
 const QueryMemberTransactionResponse = models.QueryMemberTransactionResponse;
+const ApplyTradeData = models.ApplyTradeData;
+const ApplyApplicationMaterialRequest = models.ApplyApplicationMaterialRequest;
 const QueryAcctItem = models.QueryAcctItem;
 const QueryInvoiceForManagementRequest = models.QueryInvoiceForManagementRequest;
 const QuerySmallAmountTransferRequest = models.QuerySmallAmountTransferRequest;
@@ -129,14 +165,18 @@ const InvoiceManagementList = models.InvoiceManagementList;
 const BindRelateAcctSmallAmountRequest = models.BindRelateAcctSmallAmountRequest;
 const QueryRefundResponse = models.QueryRefundResponse;
 const QueryMemberBindResponse = models.QueryMemberBindResponse;
+const QueryDeclareData = models.QueryDeclareData;
 const QueryMemberBindRequest = models.QueryMemberBindRequest;
 const QueryRefundRequest = models.QueryRefundRequest;
 const BindRelateAcctUnionPayResponse = models.BindRelateAcctUnionPayResponse;
+const QueryReconciliationDocumentRequest = models.QueryReconciliationDocumentRequest;
+const CheckAcctResponse = models.CheckAcctResponse;
 const UnifiedOrderRequest = models.UnifiedOrderRequest;
-const UnBindAcctRequest = models.UnBindAcctRequest;
+const BankCardItem = models.BankCardItem;
+const QueryDeclareResult = models.QueryDeclareResult;
 const RefundRequest = models.RefundRequest;
 const BindRelateAccReUnionPayResponse = models.BindRelateAccReUnionPayResponse;
-const BankCardItem = models.BankCardItem;
+const FileItem = models.FileItem;
 
 
 /**
@@ -149,6 +189,28 @@ class CpdpClient extends AbstractClient {
         super("cpdp.tencentcloudapi.com", "2019-08-20", credential, region, profile);
     }
     
+    /**
+     * 跨境-付款人查询
+     * @param {QueryPayerInfoRequest} req
+     * @param {function(string, QueryPayerInfoResponse):void} cb
+     * @public
+     */
+    QueryPayerInfo(req, cb) {
+        let resp = new QueryPayerInfoResponse();
+        this.request("QueryPayerInfo", req, resp, cb);
+    }
+
+    /**
+     * 查询银行时间段内交易明细。查询时间段的会员成功交易。
+     * @param {QueryBankTransactionDetailsRequest} req
+     * @param {function(string, QueryBankTransactionDetailsResponse):void} cb
+     * @public
+     */
+    QueryBankTransactionDetails(req, cb) {
+        let resp = new QueryBankTransactionDetailsResponse();
+        this.request("QueryBankTransactionDetails", req, resp, cb);
+    }
+
     /**
      * 商户绑定提现银行卡，每个商户只能绑定一张提现银行卡
      * @param {BindAcctRequest} req
@@ -220,6 +282,17 @@ class CpdpClient extends AbstractClient {
     }
 
     /**
+     * 登记挂账(支持撤销)。此接口可实现把不明来账或自有资金等已登记在挂账子账户下的资金调整到普通会员子账户。即通过申请调用此接口，将会减少挂账子账户的资金，调增指定的普通会员子账户的可提现余额及可用余额。此接口不支持把挂账子账户资金清分到功能子账户。
+     * @param {RegisterBillSupportWithdrawRequest} req
+     * @param {function(string, RegisterBillSupportWithdrawResponse):void} cb
+     * @public
+     */
+    RegisterBillSupportWithdraw(req, cb) {
+        let resp = new RegisterBillSupportWithdrawResponse();
+        this.request("RegisterBillSupportWithdraw", req, resp, cb);
+    }
+
+    /**
      * 会员子账户开立。会员在银行注册，并开立会员子账户，交易网会员代码即会员在平台端系统的会员编号。
 平台需保存银行返回的子账户账号，后续交易接口都会用到。会员属性字段为预留扩展字段，当前必须送默认值。
      * @param {CreateCustAcctIdRequest} req
@@ -240,6 +313,17 @@ class CpdpClient extends AbstractClient {
     CloseOrder(req, cb) {
         let resp = new CloseOrderResponse();
         this.request("CloseOrder", req, resp, cb);
+    }
+
+    /**
+     * 跨境-查询汇率
+     * @param {QueryExchangeRateRequest} req
+     * @param {function(string, QueryExchangeRateResponse):void} cb
+     * @public
+     */
+    QueryExchangeRate(req, cb) {
+        let resp = new QueryExchangeRateResponse();
+        this.request("QueryExchangeRate", req, resp, cb);
     }
 
     /**
@@ -302,14 +386,14 @@ class CpdpClient extends AbstractClient {
     }
 
     /**
-     * 查询银行时间段内交易明细。查询时间段的会员成功交易。
-     * @param {QueryBankTransactionDetailsRequest} req
-     * @param {function(string, QueryBankTransactionDetailsResponse):void} cb
+     * 跨境-成功申报材料查询
+     * @param {QueryApplicationMaterialRequest} req
+     * @param {function(string, QueryApplicationMaterialResponse):void} cb
      * @public
      */
-    QueryBankTransactionDetails(req, cb) {
-        let resp = new QueryBankTransactionDetailsResponse();
-        this.request("QueryBankTransactionDetails", req, resp, cb);
+    QueryApplicationMaterial(req, cb) {
+        let resp = new QueryApplicationMaterialResponse();
+        this.request("QueryApplicationMaterial", req, resp, cb);
     }
 
     /**
@@ -379,36 +463,69 @@ class CpdpClient extends AbstractClient {
     }
 
     /**
-     * 查询银行子账户余额。查询会员子账户以及平台的功能子账户的余额。
-     * @param {QueryCustAcctIdBalanceRequest} req
-     * @param {function(string, QueryCustAcctIdBalanceResponse):void} cb
+     * 正常结算提现失败情况下，发起重新提现的请求接口
+     * @param {ApplyReWithdrawalRequest} req
+     * @param {function(string, ApplyReWithdrawalResponse):void} cb
      * @public
      */
-    QueryCustAcctIdBalance(req, cb) {
-        let resp = new QueryCustAcctIdBalanceResponse();
-        this.request("QueryCustAcctIdBalance", req, resp, cb);
+    ApplyReWithdrawal(req, cb) {
+        let resp = new ApplyReWithdrawalResponse();
+        this.request("ApplyReWithdrawal", req, resp, cb);
     }
 
     /**
-     * 提交退款申请后，通过调用该接口查询退款状态。退款可能有一定延时，用微信零钱支付的退款约20分钟内到账，银行卡支付的退款约3个工作日后到账。
-     * @param {QueryRefundRequest} req
-     * @param {function(string, QueryRefundResponse):void} cb
+     * 跨境-查询汇出结果
+     * @param {QueryOutwardOrderRequest} req
+     * @param {function(string, QueryOutwardOrderResponse):void} cb
      * @public
      */
-    QueryRefund(req, cb) {
-        let resp = new QueryRefundResponse();
-        this.request("QueryRefund", req, resp, cb);
+    QueryOutwardOrder(req, cb) {
+        let resp = new QueryOutwardOrderResponse();
+        this.request("QueryOutwardOrder", req, resp, cb);
     }
 
     /**
-     * 登记挂账(支持撤销)。此接口可实现把不明来账或自有资金等已登记在挂账子账户下的资金调整到普通会员子账户。即通过申请调用此接口，将会减少挂账子账户的资金，调增指定的普通会员子账户的可提现余额及可用余额。此接口不支持把挂账子账户资金清分到功能子账户。
-     * @param {RegisterBillSupportWithdrawRequest} req
-     * @param {function(string, RegisterBillSupportWithdrawResponse):void} cb
+     * 跨境-付款人申请
+     * @param {ApplyPayerInfoRequest} req
+     * @param {function(string, ApplyPayerInfoResponse):void} cb
      * @public
      */
-    RegisterBillSupportWithdraw(req, cb) {
-        let resp = new RegisterBillSupportWithdrawResponse();
-        this.request("RegisterBillSupportWithdraw", req, resp, cb);
+    ApplyPayerInfo(req, cb) {
+        let resp = new ApplyPayerInfoResponse();
+        this.request("ApplyPayerInfo", req, resp, cb);
+    }
+
+    /**
+     * 跨境-对接方账户余额查询
+     * @param {QueryMerchantBalanceRequest} req
+     * @param {function(string, QueryMerchantBalanceResponse):void} cb
+     * @public
+     */
+    QueryMerchantBalance(req, cb) {
+        let resp = new QueryMerchantBalanceResponse();
+        this.request("QueryMerchantBalance", req, resp, cb);
+    }
+
+    /**
+     * 跨境-贸易材料明细查询
+     * @param {QueryTradeRequest} req
+     * @param {function(string, QueryTradeResponse):void} cb
+     * @public
+     */
+    QueryTrade(req, cb) {
+        let resp = new QueryTradeResponse();
+        this.request("QueryTrade", req, resp, cb);
+    }
+
+    /**
+     * 跨境-提交贸易材料
+     * @param {ApplyTradeRequest} req
+     * @param {function(string, ApplyTradeResponse):void} cb
+     * @public
+     */
+    ApplyTrade(req, cb) {
+        let resp = new ApplyTradeResponse();
+        this.request("ApplyTrade", req, resp, cb);
     }
 
     /**
@@ -500,14 +617,25 @@ class CpdpClient extends AbstractClient {
     }
 
     /**
-     * 正常结算提现失败情况下，发起重新提现的请求接口
-     * @param {ApplyReWithdrawalRequest} req
-     * @param {function(string, ApplyReWithdrawalResponse):void} cb
+     * 跨境-提交申报材料
+     * @param {ApplyApplicationMaterialRequest} req
+     * @param {function(string, ApplyApplicationMaterialResponse):void} cb
      * @public
      */
-    ApplyReWithdrawal(req, cb) {
-        let resp = new ApplyReWithdrawalResponse();
-        this.request("ApplyReWithdrawal", req, resp, cb);
+    ApplyApplicationMaterial(req, cb) {
+        let resp = new ApplyApplicationMaterialResponse();
+        this.request("ApplyApplicationMaterial", req, resp, cb);
+    }
+
+    /**
+     * 跨境-汇出指令申请
+     * @param {ApplyOutwardOrderRequest} req
+     * @param {function(string, ApplyOutwardOrderResponse):void} cb
+     * @public
+     */
+    ApplyOutwardOrder(req, cb) {
+        let resp = new ApplyOutwardOrderResponse();
+        this.request("ApplyOutwardOrder", req, resp, cb);
     }
 
     /**
@@ -519,6 +647,17 @@ class CpdpClient extends AbstractClient {
     Refund(req, cb) {
         let resp = new RefundResponse();
         this.request("Refund", req, resp, cb);
+    }
+
+    /**
+     * 查询银行子账户余额。查询会员子账户以及平台的功能子账户的余额。
+     * @param {QueryCustAcctIdBalanceRequest} req
+     * @param {function(string, QueryCustAcctIdBalanceResponse):void} cb
+     * @public
+     */
+    QueryCustAcctIdBalance(req, cb) {
+        let resp = new QueryCustAcctIdBalanceResponse();
+        this.request("QueryCustAcctIdBalance", req, resp, cb);
     }
 
     /**
@@ -662,6 +801,17 @@ class CpdpClient extends AbstractClient {
     CheckAcct(req, cb) {
         let resp = new CheckAcctResponse();
         this.request("CheckAcct", req, resp, cb);
+    }
+
+    /**
+     * 提交退款申请后，通过调用该接口查询退款状态。退款可能有一定延时，用微信零钱支付的退款约20分钟内到账，银行卡支付的退款约3个工作日后到账。
+     * @param {QueryRefundRequest} req
+     * @param {function(string, QueryRefundResponse):void} cb
+     * @public
+     */
+    QueryRefund(req, cb) {
+        let resp = new QueryRefundResponse();
+        this.request("QueryRefund", req, resp, cb);
     }
 
 

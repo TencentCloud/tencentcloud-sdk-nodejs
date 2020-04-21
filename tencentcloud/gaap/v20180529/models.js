@@ -1824,6 +1824,12 @@ Bandwidth与Concurrent必须至少设置一个。取值范围根据DescribeAcces
          */
         this.ProxyId = null;
 
+        /**
+         * 计费方式 (0:按带宽计费，1:按流量计费 默认按带宽计费）
+         * @type {number || null}
+         */
+        this.BillingType = null;
+
     }
 
     /**
@@ -1838,6 +1844,7 @@ Bandwidth与Concurrent必须至少设置一个。取值范围根据DescribeAcces
         this.Concurrent = 'Concurrent' in params ? params.Concurrent : null;
         this.ClientToken = 'ClientToken' in params ? params.ClientToken : null;
         this.ProxyId = 'ProxyId' in params ? params.ProxyId : null;
+        this.BillingType = 'BillingType' in params ? params.BillingType : null;
 
     }
 }
@@ -5706,6 +5713,12 @@ class CreateProxyRequest extends  AbstractModel {
          */
         this.ClonedProxyId = null;
 
+        /**
+         * 计费方式 (0:按带宽计费，1:按流量计费 默认按带宽计费）
+         * @type {number || null}
+         */
+        this.BillingType = null;
+
     }
 
     /**
@@ -5733,6 +5746,7 @@ class CreateProxyRequest extends  AbstractModel {
             }
         }
         this.ClonedProxyId = 'ClonedProxyId' in params ? params.ClonedProxyId : null;
+        this.BillingType = 'BillingType' in params ? params.BillingType : null;
 
     }
 }
@@ -6919,6 +6933,7 @@ class InquiryPriceCreateProxyResponse extends  AbstractModel {
 
         /**
          * 通道带宽费用梯度价格。
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<BandwidthPriceGradient> || null}
          */
         this.BandwidthUnitPrice = null;
@@ -6934,6 +6949,20 @@ class InquiryPriceCreateProxyResponse extends  AbstractModel {
          * @type {string || null}
          */
         this.Currency = null;
+
+        /**
+         * 通道的流量费用价格，单位: 元/GB
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.FlowUnitPrice = null;
+
+        /**
+         * 通道的流量费用折扣价格，单位:元/GB
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.DiscountFlowUnitPrice = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -6962,6 +6991,8 @@ class InquiryPriceCreateProxyResponse extends  AbstractModel {
         }
         this.DiscountProxyDailyPrice = 'DiscountProxyDailyPrice' in params ? params.DiscountProxyDailyPrice : null;
         this.Currency = 'Currency' in params ? params.Currency : null;
+        this.FlowUnitPrice = 'FlowUnitPrice' in params ? params.FlowUnitPrice : null;
+        this.DiscountFlowUnitPrice = 'DiscountFlowUnitPrice' in params ? params.DiscountFlowUnitPrice : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -9440,6 +9471,12 @@ class InquiryPriceCreateProxyRequest extends  AbstractModel {
          */
         this.Concurrent = null;
 
+        /**
+         * 计费方式 (0:按带宽计费，1:按流量计费 默认按带宽计费）
+         * @type {number || null}
+         */
+        this.BillingType = null;
+
     }
 
     /**
@@ -9455,6 +9492,7 @@ class InquiryPriceCreateProxyRequest extends  AbstractModel {
         this.Concurrency = 'Concurrency' in params ? params.Concurrency : null;
         this.RealServerRegion = 'RealServerRegion' in params ? params.RealServerRegion : null;
         this.Concurrent = 'Concurrent' in params ? params.Concurrent : null;
+        this.BillingType = 'BillingType' in params ? params.BillingType : null;
 
     }
 }

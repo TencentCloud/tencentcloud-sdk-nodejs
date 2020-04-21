@@ -246,9 +246,10 @@ const DirectConnectGateway = models.DirectConnectGateway;
 const Price = models.Price;
 const HaVipDisassociateAddressIpRequest = models.HaVipDisassociateAddressIpRequest;
 const ModifyVpnGatewayAttributeResponse = models.ModifyVpnGatewayAttributeResponse;
-const UnassignIpv6CidrBlockResponse = models.UnassignIpv6CidrBlockResponse;
+const DescribeVpnGatewayCcnRoutesRequest = models.DescribeVpnGatewayCcnRoutesRequest;
 const CreateServiceTemplateGroupRequest = models.CreateServiceTemplateGroupRequest;
 const DescribeClassicLinkInstancesResponse = models.DescribeClassicLinkInstancesResponse;
+const DescribeVpnGatewayCcnRoutesResponse = models.DescribeVpnGatewayCcnRoutesResponse;
 const DetachCcnInstancesRequest = models.DetachCcnInstancesRequest;
 const CreateFlowLogResponse = models.CreateFlowLogResponse;
 const DeleteDirectConnectGatewayRequest = models.DeleteDirectConnectGatewayRequest;
@@ -413,6 +414,7 @@ const DescribeServiceTemplatesRequest = models.DescribeServiceTemplatesRequest;
 const DeleteRouteTableRequest = models.DeleteRouteTableRequest;
 const CreateVpnGatewayRequest = models.CreateVpnGatewayRequest;
 const DescribeVpcInstancesRequest = models.DescribeVpcInstancesRequest;
+const UnassignIpv6CidrBlockResponse = models.UnassignIpv6CidrBlockResponse;
 const CreateBandwidthPackageResponse = models.CreateBandwidthPackageResponse;
 const ResetVpnConnectionRequest = models.ResetVpnConnectionRequest;
 const ReleaseAddressesResponse = models.ReleaseAddressesResponse;
@@ -1261,6 +1263,17 @@ class VpcClient extends AbstractClient {
     AssignIpv6SubnetCidrBlock(req, cb) {
         let resp = new AssignIpv6SubnetCidrBlockResponse();
         this.request("AssignIpv6SubnetCidrBlock", req, resp, cb);
+    }
+
+    /**
+     * 本接口（DescribeVpnGatewayCcnRoutes）用于查询VPN网关云联网路由
+     * @param {DescribeVpnGatewayCcnRoutesRequest} req
+     * @param {function(string, DescribeVpnGatewayCcnRoutesResponse):void} cb
+     * @public
+     */
+    DescribeVpnGatewayCcnRoutes(req, cb) {
+        let resp = new DescribeVpnGatewayCcnRoutesResponse();
+        this.request("DescribeVpnGatewayCcnRoutes", req, resp, cb);
     }
 
     /**
