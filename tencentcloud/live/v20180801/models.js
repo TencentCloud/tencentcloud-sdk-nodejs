@@ -6111,6 +6111,15 @@ class AddLiveDomainRequest extends  AbstractModel {
          */
         this.IsDelayLive = null;
 
+        /**
+         * 是否是小程序直播：
+0： 标准直播，
+1 ：小程序直播 。
+默认值： 0。
+         * @type {number || null}
+         */
+        this.IsMiniProgramLive = null;
+
     }
 
     /**
@@ -6124,6 +6133,7 @@ class AddLiveDomainRequest extends  AbstractModel {
         this.DomainType = 'DomainType' in params ? params.DomainType : null;
         this.PlayType = 'PlayType' in params ? params.PlayType : null;
         this.IsDelayLive = 'IsDelayLive' in params ? params.IsDelayLive : null;
+        this.IsMiniProgramLive = 'IsMiniProgramLive' in params ? params.IsMiniProgramLive : null;
 
     }
 }

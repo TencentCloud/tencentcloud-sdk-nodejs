@@ -78,6 +78,126 @@ class DescribeUserQuotaPersonalRequest extends  AbstractModel {
 }
 
 /**
+ * 触发器目标
+ * @class
+ */
+class WebhookTarget extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 目标地址
+         * @type {string || null}
+         */
+        this.Address = null;
+
+        /**
+         * 自定义 Headers
+         * @type {Array.<Header> || null}
+         */
+        this.Headers = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Address = 'Address' in params ? params.Address : null;
+
+        if (params.Headers) {
+            this.Headers = new Array();
+            for (let z in params.Headers) {
+                let obj = new Header();
+                obj.deserialize(params.Headers[z]);
+                this.Headers.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * 触发器日志
+ * @class
+ */
+class WebhookTriggerLog extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 日志 Id
+         * @type {number || null}
+         */
+        this.Id = null;
+
+        /**
+         * 触发器 Id
+         * @type {number || null}
+         */
+        this.TriggerId = null;
+
+        /**
+         * 事件类型
+         * @type {string || null}
+         */
+        this.EventType = null;
+
+        /**
+         * 通知类型
+         * @type {string || null}
+         */
+        this.NotifyType = null;
+
+        /**
+         * 详情
+         * @type {string || null}
+         */
+        this.Detail = null;
+
+        /**
+         * 创建时间
+         * @type {string || null}
+         */
+        this.CreationTime = null;
+
+        /**
+         * 更新时间
+         * @type {string || null}
+         */
+        this.UpdateTime = null;
+
+        /**
+         * 状态
+         * @type {string || null}
+         */
+        this.Status = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Id = 'Id' in params ? params.Id : null;
+        this.TriggerId = 'TriggerId' in params ? params.TriggerId : null;
+        this.EventType = 'EventType' in params ? params.EventType : null;
+        this.NotifyType = 'NotifyType' in params ? params.NotifyType : null;
+        this.Detail = 'Detail' in params ? params.Detail : null;
+        this.CreationTime = 'CreationTime' in params ? params.CreationTime : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.Status = 'Status' in params ? params.Status : null;
+
+    }
+}
+
+/**
  * ModifyRepository返回参数结构体
  * @class
  */
@@ -516,6 +636,56 @@ class ModifyRepositoryRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeWebhookTriggerLog返回参数结构体
+ * @class
+ */
+class DescribeWebhookTriggerLogResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 总数
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 日志列表
+         * @type {Array.<WebhookTriggerLog> || null}
+         */
+        this.Logs = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.Logs) {
+            this.Logs = new Array();
+            for (let z in params.Logs) {
+                let obj = new WebhookTriggerLog();
+                obj.deserialize(params.Logs[z]);
+                this.Logs.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * CreateApplicationTriggerPersonal请求参数结构体
  * @class
  */
@@ -839,42 +1009,18 @@ class DescribeRepositoriesResponse extends  AbstractModel {
 }
 
 /**
- * CreateRepository请求参数结构体
+ * DeleteInstanceToken返回参数结构体
  * @class
  */
-class CreateRepositoryRequest extends  AbstractModel {
+class DeleteInstanceTokenResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 实例ID
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.RegistryId = null;
-
-        /**
-         * 命名空间名称
-         * @type {string || null}
-         */
-        this.NamespaceName = null;
-
-        /**
-         * 仓库名称
-         * @type {string || null}
-         */
-        this.RepositoryName = null;
-
-        /**
-         * 仓库简短描述
-         * @type {string || null}
-         */
-        this.BriefDescription = null;
-
-        /**
-         * 仓库详细描述
-         * @type {string || null}
-         */
-        this.Description = null;
+        this.RequestId = null;
 
     }
 
@@ -885,11 +1031,7 @@ class CreateRepositoryRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RegistryId = 'RegistryId' in params ? params.RegistryId : null;
-        this.NamespaceName = 'NamespaceName' in params ? params.NamespaceName : null;
-        this.RepositoryName = 'RepositoryName' in params ? params.RepositoryName : null;
-        this.BriefDescription = 'BriefDescription' in params ? params.BriefDescription : null;
-        this.Description = 'Description' in params ? params.Description : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -974,36 +1116,24 @@ class ModifyInstanceTokenResponse extends  AbstractModel {
 }
 
 /**
- * DescribeApplicationTriggerPersonal请求参数结构体
+ * DescribeApplicationTriggerLogPersonal返回参数结构体
  * @class
  */
-class DescribeApplicationTriggerPersonalRequest extends  AbstractModel {
+class DescribeApplicationTriggerLogPersonalResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 仓库名称
+         * 触发日志返回值
+         * @type {DescribeApplicationTriggerLogPersonalResp || null}
+         */
+        this.Data = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.RepoName = null;
-
-        /**
-         * 触发器名称
-         * @type {string || null}
-         */
-        this.TriggerName = null;
-
-        /**
-         * 偏移量，默认为0
-         * @type {number || null}
-         */
-        this.Offset = null;
-
-        /**
-         * 返回最大数量，默认 20, 最大值 100
-         * @type {number || null}
-         */
-        this.Limit = null;
+        this.RequestId = null;
 
     }
 
@@ -1014,10 +1144,13 @@ class DescribeApplicationTriggerPersonalRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RepoName = 'RepoName' in params ? params.RepoName : null;
-        this.TriggerName = 'TriggerName' in params ? params.TriggerName : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
+
+        if (params.Data) {
+            let obj = new DescribeApplicationTriggerLogPersonalResp();
+            obj.deserialize(params.Data)
+            this.Data = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1067,6 +1200,55 @@ class FavorResp extends  AbstractModel {
 }
 
 /**
+ * DescribeApplicationTriggerPersonal请求参数结构体
+ * @class
+ */
+class DescribeApplicationTriggerPersonalRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 仓库名称
+         * @type {string || null}
+         */
+        this.RepoName = null;
+
+        /**
+         * 触发器名称
+         * @type {string || null}
+         */
+        this.TriggerName = null;
+
+        /**
+         * 偏移量，默认为0
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 返回最大数量，默认 20, 最大值 100
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RepoName = 'RepoName' in params ? params.RepoName : null;
+        this.TriggerName = 'TriggerName' in params ? params.TriggerName : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+
+    }
+}
+
+/**
  * DeleteNamespacePersonal请求参数结构体
  * @class
  */
@@ -1090,6 +1272,48 @@ class DeleteNamespacePersonalRequest extends  AbstractModel {
             return;
         }
         this.Namespace = 'Namespace' in params ? params.Namespace : null;
+
+    }
+}
+
+/**
+ * 命名空间信息
+ * @class
+ */
+class NamespaceInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 命名空间
+         * @type {string || null}
+         */
+        this.Namespace = null;
+
+        /**
+         * 创建时间
+         * @type {string || null}
+         */
+        this.CreationTime = null;
+
+        /**
+         * 命名空间下仓库数量
+         * @type {number || null}
+         */
+        this.RepoCount = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Namespace = 'Namespace' in params ? params.Namespace : null;
+        this.CreationTime = 'CreationTime' in params ? params.CreationTime : null;
+        this.RepoCount = 'RepoCount' in params ? params.RepoCount : null;
 
     }
 }
@@ -1132,46 +1356,6 @@ class Limit extends  AbstractModel {
         this.Username = 'Username' in params ? params.Username : null;
         this.Type = 'Type' in params ? params.Type : null;
         this.Value = 'Value' in params ? params.Value : null;
-
-    }
-}
-
-/**
- * DescribeApplicationTriggerLogPersonal返回参数结构体
- * @class
- */
-class DescribeApplicationTriggerLogPersonalResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 触发日志返回值
-         * @type {DescribeApplicationTriggerLogPersonalResp || null}
-         */
-        this.Data = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-        if (params.Data) {
-            let obj = new DescribeApplicationTriggerLogPersonalResp();
-            obj.deserialize(params.Data)
-            this.Data = obj;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1271,6 +1455,34 @@ class RegistryCondition extends  AbstractModel {
         this.Type = 'Type' in params ? params.Type : null;
         this.Status = 'Status' in params ? params.Status : null;
         this.Reason = 'Reason' in params ? params.Reason : null;
+
+    }
+}
+
+/**
+ * DeleteWebhookTrigger返回参数结构体
+ * @class
+ */
+class DeleteWebhookTriggerResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1813,6 +2025,34 @@ class DescribeRepositoryOwnerPersonalResponse extends  AbstractModel {
 }
 
 /**
+ * ModifyWebhookTrigger返回参数结构体
+ * @class
+ */
+class ModifyWebhookTriggerResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * CreateImageLifecyclePersonal返回参数结构体
  * @class
  */
@@ -1894,6 +2134,12 @@ class TcrImageInfo extends  AbstractModel {
          */
         this.ImageVersion = null;
 
+        /**
+         * 更新时间
+         * @type {string || null}
+         */
+        this.UpdateTime = null;
+
     }
 
     /**
@@ -1906,6 +2152,7 @@ class TcrImageInfo extends  AbstractModel {
         this.Digest = 'Digest' in params ? params.Digest : null;
         this.Size = 'Size' in params ? params.Size : null;
         this.ImageVersion = 'ImageVersion' in params ? params.ImageVersion : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
 
     }
 }
@@ -2023,6 +2270,53 @@ class DescribeInstanceStatusRequest extends  AbstractModel {
             return;
         }
         this.RegistryIds = 'RegistryIds' in params ? params.RegistryIds : null;
+
+    }
+}
+
+/**
+ * ModifyWebhookTrigger请求参数结构体
+ * @class
+ */
+class ModifyWebhookTriggerRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例Id
+         * @type {string || null}
+         */
+        this.RegistryId = null;
+
+        /**
+         * 触发器参数
+         * @type {WebhookTrigger || null}
+         */
+        this.Trigger = null;
+
+        /**
+         * 命名空间
+         * @type {string || null}
+         */
+        this.Namespace = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RegistryId = 'RegistryId' in params ? params.RegistryId : null;
+
+        if (params.Trigger) {
+            let obj = new WebhookTrigger();
+            obj.deserialize(params.Trigger)
+            this.Trigger = obj;
+        }
+        this.Namespace = 'Namespace' in params ? params.Namespace : null;
 
     }
 }
@@ -2524,6 +2818,62 @@ class ModifyRepositoryInfoPersonalResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeWebhookTriggerLog请求参数结构体
+ * @class
+ */
+class DescribeWebhookTriggerLogRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例 Id
+         * @type {string || null}
+         */
+        this.RegistryId = null;
+
+        /**
+         * 命名空间
+         * @type {string || null}
+         */
+        this.Namespace = null;
+
+        /**
+         * 触发器 Id
+         * @type {number || null}
+         */
+        this.Id = null;
+
+        /**
+         * 分页单页数量
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 分页偏移量
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RegistryId = 'RegistryId' in params ? params.RegistryId : null;
+        this.Namespace = 'Namespace' in params ? params.Namespace : null;
+        this.Id = 'Id' in params ? params.Id : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+
+    }
+}
+
+/**
  * CreateUserPersonal请求参数结构体
  * @class
  */
@@ -2723,30 +3073,18 @@ class DescribeNamespacePersonalRequest extends  AbstractModel {
 }
 
 /**
- * 命名空间信息
+ * DeleteRepositoryPersonal返回参数结构体
  * @class
  */
-class NamespaceInfo extends  AbstractModel {
+class DeleteRepositoryPersonalResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 命名空间
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.Namespace = null;
-
-        /**
-         * 创建时间
-         * @type {string || null}
-         */
-        this.CreationTime = null;
-
-        /**
-         * 命名空间下仓库数量
-         * @type {number || null}
-         */
-        this.RepoCount = null;
+        this.RequestId = null;
 
     }
 
@@ -2757,9 +3095,7 @@ class NamespaceInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Namespace = 'Namespace' in params ? params.Namespace : null;
-        this.CreationTime = 'CreationTime' in params ? params.CreationTime : null;
-        this.RepoCount = 'RepoCount' in params ? params.RepoCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3101,6 +3437,48 @@ class CreateImageLifecyclePersonalRequest extends  AbstractModel {
 }
 
 /**
+ * DeleteWebhookTrigger请求参数结构体
+ * @class
+ */
+class DeleteWebhookTriggerRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例Id
+         * @type {string || null}
+         */
+        this.RegistryId = null;
+
+        /**
+         * 命名空间
+         * @type {string || null}
+         */
+        this.Namespace = null;
+
+        /**
+         * 触发器 Id
+         * @type {number || null}
+         */
+        this.Id = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RegistryId = 'RegistryId' in params ? params.RegistryId : null;
+        this.Namespace = 'Namespace' in params ? params.Namespace : null;
+        this.Id = 'Id' in params ? params.Id : null;
+
+    }
+}
+
+/**
  * 触发器触发结果
  * @class
  */
@@ -3161,6 +3539,105 @@ class CreateUserPersonalResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeWebhookTrigger返回参数结构体
+ * @class
+ */
+class DescribeWebhookTriggerResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 触发器总数
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 触发器列表
+         * @type {Array.<WebhookTrigger> || null}
+         */
+        this.Triggers = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.Triggers) {
+            this.Triggers = new Array();
+            for (let z in params.Triggers) {
+                let obj = new WebhookTrigger();
+                obj.deserialize(params.Triggers[z]);
+                this.Triggers.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeImageManifests请求参数结构体
+ * @class
+ */
+class DescribeImageManifestsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例ID
+         * @type {string || null}
+         */
+        this.RegistryId = null;
+
+        /**
+         * 命名空间名称
+         * @type {string || null}
+         */
+        this.NamespaceName = null;
+
+        /**
+         * 镜像仓库名称
+         * @type {string || null}
+         */
+        this.RepositoryName = null;
+
+        /**
+         * 镜像版本
+         * @type {string || null}
+         */
+        this.ImageVersion = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RegistryId = 'RegistryId' in params ? params.RegistryId : null;
+        this.NamespaceName = 'NamespaceName' in params ? params.NamespaceName : null;
+        this.RepositoryName = 'RepositoryName' in params ? params.RepositoryName : null;
+        this.ImageVersion = 'ImageVersion' in params ? params.ImageVersion : null;
 
     }
 }
@@ -3730,34 +4207,6 @@ class Filter extends  AbstractModel {
 }
 
 /**
- * DeleteInstanceToken返回参数结构体
- * @class
- */
-class DeleteInstanceTokenResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
  * 仓库的信息
  * @class
  */
@@ -4036,6 +4485,48 @@ class ModifyApplicationTriggerPersonalResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeImageManifests返回参数结构体
+ * @class
+ */
+class DescribeImageManifestsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 镜像的Manifest信息
+         * @type {string || null}
+         */
+        this.Manifest = null;
+
+        /**
+         * 镜像的配置信息
+         * @type {string || null}
+         */
+        this.Config = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Manifest = 'Manifest' in params ? params.Manifest : null;
+        this.Config = 'Config' in params ? params.Config : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeNamespacePersonal返回参数结构体
  * @class
  */
@@ -4099,6 +4590,88 @@ class DeleteNamespacePersonalResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Header KV
+ * @class
+ */
+class Header extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Header Key
+         * @type {string || null}
+         */
+        this.Key = null;
+
+        /**
+         * Header Values
+         * @type {Array.<string> || null}
+         */
+        this.Values = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Key = 'Key' in params ? params.Key : null;
+        this.Values = 'Values' in params ? params.Values : null;
+
+    }
+}
+
+/**
+ * CreateWebhookTrigger请求参数结构体
+ * @class
+ */
+class CreateWebhookTriggerRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例 Id
+         * @type {string || null}
+         */
+        this.RegistryId = null;
+
+        /**
+         * 触发器参数
+         * @type {WebhookTrigger || null}
+         */
+        this.Trigger = null;
+
+        /**
+         * 命名空间
+         * @type {string || null}
+         */
+        this.Namespace = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RegistryId = 'RegistryId' in params ? params.RegistryId : null;
+
+        if (params.Trigger) {
+            let obj = new WebhookTrigger();
+            obj.deserialize(params.Trigger)
+            this.Trigger = obj;
+        }
+        this.Namespace = 'Namespace' in params ? params.Namespace : null;
 
     }
 }
@@ -4807,24 +5380,42 @@ class TagInfo extends  AbstractModel {
 }
 
 /**
- * DuplicateImagePersonal请求参数结构体
+ * CreateRepository请求参数结构体
  * @class
  */
-class DuplicateImagePersonalRequest extends  AbstractModel {
+class CreateRepositoryRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 源镜像名称，不包含domain。例如： tencentyun/foo:v1
+         * 实例ID
          * @type {string || null}
          */
-        this.SrcImage = null;
+        this.RegistryId = null;
 
         /**
-         * 目的镜像名称，不包含domain。例如： tencentyun/foo:latest
+         * 命名空间名称
          * @type {string || null}
          */
-        this.DestImage = null;
+        this.NamespaceName = null;
+
+        /**
+         * 仓库名称
+         * @type {string || null}
+         */
+        this.RepositoryName = null;
+
+        /**
+         * 仓库简短描述
+         * @type {string || null}
+         */
+        this.BriefDescription = null;
+
+        /**
+         * 仓库详细描述
+         * @type {string || null}
+         */
+        this.Description = null;
 
     }
 
@@ -4835,8 +5426,60 @@ class DuplicateImagePersonalRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.SrcImage = 'SrcImage' in params ? params.SrcImage : null;
-        this.DestImage = 'DestImage' in params ? params.DestImage : null;
+        this.RegistryId = 'RegistryId' in params ? params.RegistryId : null;
+        this.NamespaceName = 'NamespaceName' in params ? params.NamespaceName : null;
+        this.RepositoryName = 'RepositoryName' in params ? params.RepositoryName : null;
+        this.BriefDescription = 'BriefDescription' in params ? params.BriefDescription : null;
+        this.Description = 'Description' in params ? params.Description : null;
+
+    }
+}
+
+/**
+ * DescribeWebhookTrigger请求参数结构体
+ * @class
+ */
+class DescribeWebhookTriggerRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例Id
+         * @type {string || null}
+         */
+        this.RegistryId = null;
+
+        /**
+         * 分页单页数量
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 分页偏移量
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 命名空间
+         * @type {string || null}
+         */
+        this.Namespace = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RegistryId = 'RegistryId' in params ? params.RegistryId : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Namespace = 'Namespace' in params ? params.Namespace : null;
 
     }
 }
@@ -5126,6 +5769,41 @@ class RespLimit extends  AbstractModel {
 }
 
 /**
+ * DuplicateImagePersonal请求参数结构体
+ * @class
+ */
+class DuplicateImagePersonalRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 源镜像名称，不包含domain。例如： tencentyun/foo:v1
+         * @type {string || null}
+         */
+        this.SrcImage = null;
+
+        /**
+         * 目的镜像名称，不包含domain。例如： tencentyun/foo:latest
+         * @type {string || null}
+         */
+        this.DestImage = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SrcImage = 'SrcImage' in params ? params.SrcImage : null;
+        this.DestImage = 'DestImage' in params ? params.DestImage : null;
+
+    }
+}
+
+/**
  * DescribeInstanceToken返回参数结构体
  * @class
  */
@@ -5233,10 +5911,88 @@ class CreateNamespacePersonalRequest extends  AbstractModel {
 }
 
 /**
- * DeleteRepositoryPersonal返回参数结构体
+ * Webhook 触发器
  * @class
  */
-class DeleteRepositoryPersonalResponse extends  AbstractModel {
+class WebhookTrigger extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 触发器名称
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 触发器目标
+         * @type {Array.<WebhookTarget> || null}
+         */
+        this.Targets = null;
+
+        /**
+         * 触发动作
+         * @type {Array.<string> || null}
+         */
+        this.EventTypes = null;
+
+        /**
+         * 触发规则
+         * @type {string || null}
+         */
+        this.Condition = null;
+
+        /**
+         * 启用触发器
+         * @type {boolean || null}
+         */
+        this.Enabled = null;
+
+        /**
+         * 触发器Id
+         * @type {number || null}
+         */
+        this.Id = null;
+
+        /**
+         * 触发器描述
+         * @type {string || null}
+         */
+        this.Description = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+
+        if (params.Targets) {
+            this.Targets = new Array();
+            for (let z in params.Targets) {
+                let obj = new WebhookTarget();
+                obj.deserialize(params.Targets[z]);
+                this.Targets.push(obj);
+            }
+        }
+        this.EventTypes = 'EventTypes' in params ? params.EventTypes : null;
+        this.Condition = 'Condition' in params ? params.Condition : null;
+        this.Enabled = 'Enabled' in params ? params.Enabled : null;
+        this.Id = 'Id' in params ? params.Id : null;
+        this.Description = 'Description' in params ? params.Description : null;
+
+    }
+}
+
+/**
+ * CreateWebhookTrigger返回参数结构体
+ * @class
+ */
+class CreateWebhookTriggerResponse extends  AbstractModel {
     constructor(){
         super();
 
@@ -5592,6 +6348,8 @@ class DeleteRepositoryPersonalRequest extends  AbstractModel {
 module.exports = {
     DescribeImagePersonalResponse: DescribeImagePersonalResponse,
     DescribeUserQuotaPersonalRequest: DescribeUserQuotaPersonalRequest,
+    WebhookTarget: WebhookTarget,
+    WebhookTriggerLog: WebhookTriggerLog,
     ModifyRepositoryResponse: ModifyRepositoryResponse,
     TriggerInvokePara: TriggerInvokePara,
     DescribeNamespacesResponse: DescribeNamespacesResponse,
@@ -5600,22 +6358,25 @@ module.exports = {
     CreateInstanceResponse: CreateInstanceResponse,
     DeleteInstanceTokenRequest: DeleteInstanceTokenRequest,
     ModifyRepositoryRequest: ModifyRepositoryRequest,
+    DescribeWebhookTriggerLogResponse: DescribeWebhookTriggerLogResponse,
     CreateApplicationTriggerPersonalRequest: CreateApplicationTriggerPersonalRequest,
     AutoDelStrategyInfo: AutoDelStrategyInfo,
     ValidateNamespaceExistPersonalRequest: ValidateNamespaceExistPersonalRequest,
     Registry: Registry,
     DescribeRepositoriesResponse: DescribeRepositoriesResponse,
-    CreateRepositoryRequest: CreateRepositoryRequest,
+    DeleteInstanceTokenResponse: DeleteInstanceTokenResponse,
     DescribeInstancesResponse: DescribeInstancesResponse,
     ModifyInstanceTokenResponse: ModifyInstanceTokenResponse,
-    DescribeApplicationTriggerPersonalRequest: DescribeApplicationTriggerPersonalRequest,
-    FavorResp: FavorResp,
-    DeleteNamespacePersonalRequest: DeleteNamespacePersonalRequest,
-    Limit: Limit,
     DescribeApplicationTriggerLogPersonalResponse: DescribeApplicationTriggerLogPersonalResponse,
+    FavorResp: FavorResp,
+    DescribeApplicationTriggerPersonalRequest: DescribeApplicationTriggerPersonalRequest,
+    DeleteNamespacePersonalRequest: DeleteNamespacePersonalRequest,
+    NamespaceInfo: NamespaceInfo,
+    Limit: Limit,
     DeleteRepositoryResponse: DeleteRepositoryResponse,
     DeleteImagePersonalResponse: DeleteImagePersonalResponse,
     RegistryCondition: RegistryCondition,
+    DeleteWebhookTriggerResponse: DeleteWebhookTriggerResponse,
     DeleteImageLifecycleGlobalPersonalResponse: DeleteImageLifecycleGlobalPersonalResponse,
     DuplicateImagePersonalResponse: DuplicateImagePersonalResponse,
     DupImageTagResp: DupImageTagResp,
@@ -5630,6 +6391,7 @@ module.exports = {
     DeleteImageLifecyclePersonalResponse: DeleteImageLifecyclePersonalResponse,
     CreateNamespaceResponse: CreateNamespaceResponse,
     DescribeRepositoryOwnerPersonalResponse: DescribeRepositoryOwnerPersonalResponse,
+    ModifyWebhookTriggerResponse: ModifyWebhookTriggerResponse,
     CreateImageLifecyclePersonalResponse: CreateImageLifecyclePersonalResponse,
     RepoIsExistResp: RepoIsExistResp,
     TcrImageInfo: TcrImageInfo,
@@ -5637,6 +6399,7 @@ module.exports = {
     CreateNamespacePersonalResponse: CreateNamespacePersonalResponse,
     DeleteImageLifecycleGlobalPersonalRequest: DeleteImageLifecycleGlobalPersonalRequest,
     DescribeInstanceStatusRequest: DescribeInstanceStatusRequest,
+    ModifyWebhookTriggerRequest: ModifyWebhookTriggerRequest,
     DescribeInstanceStatusResponse: DescribeInstanceStatusResponse,
     DeleteNamespaceResponse: DeleteNamespaceResponse,
     Favors: Favors,
@@ -5649,12 +6412,13 @@ module.exports = {
     TcrNamespaceInfo: TcrNamespaceInfo,
     DeleteApplicationTriggerPersonalResponse: DeleteApplicationTriggerPersonalResponse,
     ModifyRepositoryInfoPersonalResponse: ModifyRepositoryInfoPersonalResponse,
+    DescribeWebhookTriggerLogRequest: DescribeWebhookTriggerLogRequest,
     CreateUserPersonalRequest: CreateUserPersonalRequest,
     RepoInfoResp: RepoInfoResp,
     ManageImageLifecycleGlobalPersonalResponse: ManageImageLifecycleGlobalPersonalResponse,
     RegistryStatus: RegistryStatus,
     DescribeNamespacePersonalRequest: DescribeNamespacePersonalRequest,
-    NamespaceInfo: NamespaceInfo,
+    DeleteRepositoryPersonalResponse: DeleteRepositoryPersonalResponse,
     CreateInstanceTokenResponse: CreateInstanceTokenResponse,
     DescribeApplicationTriggerLogPersonalResp: DescribeApplicationTriggerLogPersonalResp,
     DeleteImagePersonalRequest: DeleteImagePersonalRequest,
@@ -5663,8 +6427,11 @@ module.exports = {
     CreateRepositoryPersonalRequest: CreateRepositoryPersonalRequest,
     DescribeImageFilterPersonalResponse: DescribeImageFilterPersonalResponse,
     CreateImageLifecyclePersonalRequest: CreateImageLifecyclePersonalRequest,
+    DeleteWebhookTriggerRequest: DeleteWebhookTriggerRequest,
     TriggerInvokeResult: TriggerInvokeResult,
     CreateUserPersonalResponse: CreateUserPersonalResponse,
+    DescribeWebhookTriggerResponse: DescribeWebhookTriggerResponse,
+    DescribeImageManifestsRequest: DescribeImageManifestsRequest,
     ModifyNamespaceRequest: ModifyNamespaceRequest,
     ModifyRepositoryAccessPersonalRequest: ModifyRepositoryAccessPersonalRequest,
     DescribeImageLifecycleGlobalPersonalRequest: DescribeImageLifecycleGlobalPersonalRequest,
@@ -5679,15 +6446,17 @@ module.exports = {
     NamespaceIsExistsResp: NamespaceIsExistsResp,
     DescribeInstancesRequest: DescribeInstancesRequest,
     Filter: Filter,
-    DeleteInstanceTokenResponse: DeleteInstanceTokenResponse,
     RepoInfo: RepoInfo,
     ManageImageLifecycleGlobalPersonalRequest: ManageImageLifecycleGlobalPersonalRequest,
     DescribeUserQuotaPersonalResponse: DescribeUserQuotaPersonalResponse,
     DescribeImagePersonalRequest: DescribeImagePersonalRequest,
     DeleteImageLifecyclePersonalRequest: DeleteImageLifecyclePersonalRequest,
     ModifyApplicationTriggerPersonalResponse: ModifyApplicationTriggerPersonalResponse,
+    DescribeImageManifestsResponse: DescribeImageManifestsResponse,
     DescribeNamespacePersonalResponse: DescribeNamespacePersonalResponse,
     DeleteNamespacePersonalResponse: DeleteNamespacePersonalResponse,
+    Header: Header,
+    CreateWebhookTriggerRequest: CreateWebhookTriggerRequest,
     DescribeRepositoryOwnerPersonalRequest: DescribeRepositoryOwnerPersonalRequest,
     ModifyRepositoryInfoPersonalRequest: ModifyRepositoryInfoPersonalRequest,
     DescribeApplicationTriggerLogPersonalRequest: DescribeApplicationTriggerLogPersonalRequest,
@@ -5702,17 +6471,20 @@ module.exports = {
     ValidateNamespaceExistPersonalResponse: ValidateNamespaceExistPersonalResponse,
     DescribeApplicationTriggerPersonalResp: DescribeApplicationTriggerPersonalResp,
     TagInfo: TagInfo,
-    DuplicateImagePersonalRequest: DuplicateImagePersonalRequest,
+    CreateRepositoryRequest: CreateRepositoryRequest,
+    DescribeWebhookTriggerRequest: DescribeWebhookTriggerRequest,
     DeleteNamespaceRequest: DeleteNamespaceRequest,
     BatchDeleteImagePersonalRequest: BatchDeleteImagePersonalRequest,
     DescribeImagesRequest: DescribeImagesRequest,
     TriggerResp: TriggerResp,
     CreateRepositoryResponse: CreateRepositoryResponse,
     RespLimit: RespLimit,
+    DuplicateImagePersonalRequest: DuplicateImagePersonalRequest,
     DescribeInstanceTokenResponse: DescribeInstanceTokenResponse,
     SameImagesResp: SameImagesResp,
     CreateNamespacePersonalRequest: CreateNamespacePersonalRequest,
-    DeleteRepositoryPersonalResponse: DeleteRepositoryPersonalResponse,
+    WebhookTrigger: WebhookTrigger,
+    CreateWebhookTriggerResponse: CreateWebhookTriggerResponse,
     TcrRepositoryInfo: TcrRepositoryInfo,
     TcrInstanceToken: TcrInstanceToken,
     DeleteRepositoryRequest: DeleteRepositoryRequest,

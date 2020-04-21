@@ -5001,7 +5001,7 @@ global：全球锁定
         /**
          * Scdn配置
 注意：此字段可能返回 null，表示取不到有效值。
-         * @type {Array.<SecurityConfig> || null}
+         * @type {SecurityConfig || null}
          */
         this.SecurityConfig = null;
 
@@ -5196,12 +5196,9 @@ global：全球锁定
         }
 
         if (params.SecurityConfig) {
-            this.SecurityConfig = new Array();
-            for (let z in params.SecurityConfig) {
-                let obj = new SecurityConfig();
-                obj.deserialize(params.SecurityConfig[z]);
-                this.SecurityConfig.push(obj);
-            }
+            let obj = new SecurityConfig();
+            obj.deserialize(params.SecurityConfig)
+            this.SecurityConfig = obj;
         }
 
     }

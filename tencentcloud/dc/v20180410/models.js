@@ -1073,6 +1073,12 @@ class ModifyDirectConnectTunnelAttributeRequest extends  AbstractModel {
          */
         this.Bandwidth = null;
 
+        /**
+         * 腾讯侧备用互联IP
+         * @type {string || null}
+         */
+        this.TencentBackupAddress = null;
+
     }
 
     /**
@@ -1102,6 +1108,7 @@ class ModifyDirectConnectTunnelAttributeRequest extends  AbstractModel {
         this.TencentAddress = 'TencentAddress' in params ? params.TencentAddress : null;
         this.CustomerAddress = 'CustomerAddress' in params ? params.CustomerAddress : null;
         this.Bandwidth = 'Bandwidth' in params ? params.Bandwidth : null;
+        this.TencentBackupAddress = 'TencentBackupAddress' in params ? params.TencentBackupAddress : null;
 
     }
 }

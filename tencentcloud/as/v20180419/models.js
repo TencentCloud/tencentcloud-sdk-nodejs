@@ -5488,6 +5488,62 @@ class DeleteAutoScalingGroupResponse extends  AbstractModel {
 }
 
 /**
+ * 生命周期挂钩动作的执行结果信息。
+ * @class
+ */
+class LifecycleActionResultInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 生命周期挂钩标识。
+         * @type {string || null}
+         */
+        this.LifecycleHookId = null;
+
+        /**
+         * 实例标识。
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 通知的结果，表示通知CMQ是否成功。
+         * @type {string || null}
+         */
+        this.NotificationResult = null;
+
+        /**
+         * 生命周期挂钩动作的执行结果，取值包括 CONTINUE、ABANDON。
+         * @type {string || null}
+         */
+        this.LifecycleActionResult = null;
+
+        /**
+         * 结果的原因。
+         * @type {string || null}
+         */
+        this.ResultReason = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LifecycleHookId = 'LifecycleHookId' in params ? params.LifecycleHookId : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.NotificationResult = 'NotificationResult' in params ? params.NotificationResult : null;
+        this.LifecycleActionResult = 'LifecycleActionResult' in params ? params.LifecycleActionResult : null;
+        this.ResultReason = 'ResultReason' in params ? params.ResultReason : null;
+
+    }
+}
+
+/**
  * 伸缩组简明信息。
  * @class
  */
@@ -6140,6 +6196,12 @@ class Activity extends  AbstractModel {
          */
         this.StatusMessageSimplified = null;
 
+        /**
+         * 伸缩活动中生命周期挂钩的执行结果。
+         * @type {Array.<LifecycleActionResultInfo> || null}
+         */
+        this.LifecycleActionResultSet = null;
+
     }
 
     /**
@@ -6169,6 +6231,15 @@ class Activity extends  AbstractModel {
             }
         }
         this.StatusMessageSimplified = 'StatusMessageSimplified' in params ? params.StatusMessageSimplified : null;
+
+        if (params.LifecycleActionResultSet) {
+            this.LifecycleActionResultSet = new Array();
+            for (let z in params.LifecycleActionResultSet) {
+                let obj = new LifecycleActionResultInfo();
+                obj.deserialize(params.LifecycleActionResultSet[z]);
+                this.LifecycleActionResultSet.push(obj);
+            }
+        }
 
     }
 }
@@ -6662,6 +6733,7 @@ module.exports = {
     DescribeLaunchConfigurationsRequest: DescribeLaunchConfigurationsRequest,
     NotificationTarget: NotificationTarget,
     DeleteAutoScalingGroupResponse: DeleteAutoScalingGroupResponse,
+    LifecycleActionResultInfo: LifecycleActionResultInfo,
     AutoScalingGroupAbstract: AutoScalingGroupAbstract,
     EnableAutoScalingGroupRequest: EnableAutoScalingGroupRequest,
     MetricAlarm: MetricAlarm,

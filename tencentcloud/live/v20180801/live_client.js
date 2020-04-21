@@ -650,6 +650,7 @@ class LiveClient extends AbstractClient {
 
     /**
      * 该接口用来创建通用混流。用法与旧接口 mix_streamv2.start_mix_stream_advanced 基本一致。
+注意：当前最多支持16路混流。
      * @param {CreateCommonMixStreamRequest} req
      * @param {function(string, CreateCommonMixStreamResponse):void} cb
      * @public

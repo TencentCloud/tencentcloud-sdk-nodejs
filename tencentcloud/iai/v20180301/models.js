@@ -1089,6 +1089,12 @@ Url、Image必须提供一个，如果都提供，只使用 Url。
          */
         this.QualityControl = null;
 
+        /**
+         * 是否开启图片旋转识别支持。0为不开启，1为开启。默认为0。本参数的作用为，当图片中的人脸被旋转且图片没有exif信息时，如果不开启图片旋转识别支持则无法正确检测、识别图片中的人脸。若您确认图片包含exif信息或者您确认输入图中人脸不会出现被旋转情况，请不要开启本参数。开启后，整体耗时将可能增加数百毫秒。
+         * @type {number || null}
+         */
+        this.NeedRotateDetection = null;
+
     }
 
     /**
@@ -1115,6 +1121,7 @@ Url、Image必须提供一个，如果都提供，只使用 Url。
         this.Url = 'Url' in params ? params.Url : null;
         this.UniquePersonControl = 'UniquePersonControl' in params ? params.UniquePersonControl : null;
         this.QualityControl = 'QualityControl' in params ? params.QualityControl : null;
+        this.NeedRotateDetection = 'NeedRotateDetection' in params ? params.NeedRotateDetection : null;
 
     }
 }
@@ -1908,6 +1915,12 @@ Url、Image必须提供一个，如果都提供，只使用 Url。
          */
         this.QualityControl = null;
 
+        /**
+         * 是否开启图片旋转识别支持。0为不开启，1为开启。默认为0。本参数的作用为，当图片中的人脸被旋转且图片没有exif信息时，如果不开启图片旋转识别支持则无法正确检测、识别图片中的人脸。若您确认图片包含exif信息或者您确认输入图中人脸不会出现被旋转情况，请不要开启本参数。开启后，整体耗时将可能增加数百毫秒。
+         * @type {number || null}
+         */
+        this.NeedRotateDetection = null;
+
     }
 
     /**
@@ -1922,6 +1935,7 @@ Url、Image必须提供一个，如果都提供，只使用 Url。
         this.Urls = 'Urls' in params ? params.Urls : null;
         this.FaceMatchThreshold = 'FaceMatchThreshold' in params ? params.FaceMatchThreshold : null;
         this.QualityControl = 'QualityControl' in params ? params.QualityControl : null;
+        this.NeedRotateDetection = 'NeedRotateDetection' in params ? params.NeedRotateDetection : null;
 
     }
 }
@@ -2005,6 +2019,12 @@ MaxFaceNum用于，当输入的待识别图片包含多张人脸时，设定要�
          */
         this.FaceMatchThreshold = null;
 
+        /**
+         * 是否开启图片旋转识别支持。0为不开启，1为开启。默认为0。本参数的作用为，当图片中的人脸被旋转且图片没有exif信息时，如果不开启图片旋转识别支持则无法正确检测、识别图片中的人脸。若您确认图片包含exif信息或者您确认输入图中人脸不会出现被旋转情况，请不要开启本参数。开启后，整体耗时将可能增加数百毫秒。
+         * @type {number || null}
+         */
+        this.NeedRotateDetection = null;
+
     }
 
     /**
@@ -2023,6 +2043,7 @@ MaxFaceNum用于，当输入的待识别图片包含多张人脸时，设定要�
         this.NeedPersonInfo = 'NeedPersonInfo' in params ? params.NeedPersonInfo : null;
         this.QualityControl = 'QualityControl' in params ? params.QualityControl : null;
         this.FaceMatchThreshold = 'FaceMatchThreshold' in params ? params.FaceMatchThreshold : null;
+        this.NeedRotateDetection = 'NeedRotateDetection' in params ? params.NeedRotateDetection : null;
 
     }
 }
@@ -2319,6 +2340,12 @@ class VerifyPersonRequest extends  AbstractModel {
          */
         this.QualityControl = null;
 
+        /**
+         * 是否开启图片旋转识别支持。0为不开启，1为开启。默认为0。本参数的作用为，当图片中的人脸被旋转且图片没有exif信息时，如果不开启图片旋转识别支持则无法正确检测、识别图片中的人脸。若您确认图片包含exif信息或者您确认输入图中人脸不会出现被旋转情况，请不要开启本参数。开启后，整体耗时将可能增加数百毫秒。
+         * @type {number || null}
+         */
+        this.NeedRotateDetection = null;
+
     }
 
     /**
@@ -2332,6 +2359,7 @@ class VerifyPersonRequest extends  AbstractModel {
         this.Url = 'Url' in params ? params.Url : null;
         this.PersonId = 'PersonId' in params ? params.PersonId : null;
         this.QualityControl = 'QualityControl' in params ? params.QualityControl : null;
+        this.NeedRotateDetection = 'NeedRotateDetection' in params ? params.NeedRotateDetection : null;
 
     }
 }
@@ -2522,6 +2550,12 @@ MaxFaceNum用于，当输入的待识别图片包含多张人脸时，设定要�
          */
         this.NeedPersonInfo = null;
 
+        /**
+         * 是否开启图片旋转识别支持。0为不开启，1为开启。默认为0。本参数的作用为，当图片中的人脸被旋转且图片没有exif信息时，如果不开启图片旋转识别支持则无法正确检测、识别图片中的人脸。若您确认图片包含exif信息或者您确认输入图中人脸不会出现被旋转情况，请不要开启本参数。开启后，整体耗时将可能增加数百毫秒。
+         * @type {number || null}
+         */
+        this.NeedRotateDetection = null;
+
     }
 
     /**
@@ -2540,6 +2574,7 @@ MaxFaceNum用于，当输入的待识别图片包含多张人脸时，设定要�
         this.QualityControl = 'QualityControl' in params ? params.QualityControl : null;
         this.FaceMatchThreshold = 'FaceMatchThreshold' in params ? params.FaceMatchThreshold : null;
         this.NeedPersonInfo = 'NeedPersonInfo' in params ? params.NeedPersonInfo : null;
+        this.NeedRotateDetection = 'NeedRotateDetection' in params ? params.NeedRotateDetection : null;
 
     }
 }
@@ -2646,6 +2681,12 @@ B 图片的 Url、Image必须提供一个，如果都提供，只使用 Url。
          */
         this.QualityControl = null;
 
+        /**
+         * 是否开启图片旋转识别支持。0为不开启，1为开启。默认为0。本参数的作用为，当图片中的人脸被旋转且图片没有exif信息时，如果不开启图片旋转识别支持则无法正确检测、识别图片中的人脸。若您确认图片包含exif信息或者您确认输入图中人脸不会出现被旋转情况，请不要开启本参数。开启后，整体耗时将可能增加数百毫秒。
+         * @type {number || null}
+         */
+        this.NeedRotateDetection = null;
+
     }
 
     /**
@@ -2661,6 +2702,7 @@ B 图片的 Url、Image必须提供一个，如果都提供，只使用 Url。
         this.UrlB = 'UrlB' in params ? params.UrlB : null;
         this.FaceModelVersion = 'FaceModelVersion' in params ? params.FaceModelVersion : null;
         this.QualityControl = 'QualityControl' in params ? params.QualityControl : null;
+        this.NeedRotateDetection = 'NeedRotateDetection' in params ? params.NeedRotateDetection : null;
 
     }
 }
@@ -3135,6 +3177,12 @@ MaxFaceNum用于，当输入的待识别图片包含多张人脸时，设定要�
          */
         this.NeedPersonInfo = null;
 
+        /**
+         * 是否开启图片旋转识别支持。0为不开启，1为开启。默认为0。本参数的作用为，当图片中的人脸被旋转且图片没有exif信息时，如果不开启图片旋转识别支持则无法正确检测、识别图片中的人脸。若您确认图片包含exif信息或者您确认输入图中人脸不会出现被旋转情况，请不要开启本参数。开启后，整体耗时将可能增加数百毫秒。
+         * @type {number || null}
+         */
+        this.NeedRotateDetection = null;
+
     }
 
     /**
@@ -3153,6 +3201,7 @@ MaxFaceNum用于，当输入的待识别图片包含多张人脸时，设定要�
         this.QualityControl = 'QualityControl' in params ? params.QualityControl : null;
         this.FaceMatchThreshold = 'FaceMatchThreshold' in params ? params.FaceMatchThreshold : null;
         this.NeedPersonInfo = 'NeedPersonInfo' in params ? params.NeedPersonInfo : null;
+        this.NeedRotateDetection = 'NeedRotateDetection' in params ? params.NeedRotateDetection : null;
 
     }
 }
@@ -3502,6 +3551,12 @@ Url、Image必须提供一个，如果都提供，只使用 Url。
          */
         this.FaceModelVersion = null;
 
+        /**
+         * 是否开启图片旋转识别支持。0为不开启，1为开启。默认为0。本参数的作用为，当图片中的人脸被旋转且图片没有exif信息时，如果不开启图片旋转识别支持则无法正确检测、识别图片中的人脸。若您确认图片包含exif信息或者您确认输入图中人脸不会出现被旋转情况，请不要开启本参数。开启后，整体耗时将可能增加数百毫秒。
+         * @type {number || null}
+         */
+        this.NeedRotateDetection = null;
+
     }
 
     /**
@@ -3515,6 +3570,7 @@ Url、Image必须提供一个，如果都提供，只使用 Url。
         this.Image = 'Image' in params ? params.Image : null;
         this.Url = 'Url' in params ? params.Url : null;
         this.FaceModelVersion = 'FaceModelVersion' in params ? params.FaceModelVersion : null;
+        this.NeedRotateDetection = 'NeedRotateDetection' in params ? params.NeedRotateDetection : null;
 
     }
 }
@@ -3620,6 +3676,12 @@ Url、Image必须提供一个，如果都提供，只使用 Url。
          */
         this.FaceModelVersion = null;
 
+        /**
+         * 是否开启图片旋转识别支持。0为不开启，1为开启。默认为0。本参数的作用为，当图片中的人脸被旋转且图片没有exif信息时，如果不开启图片旋转识别支持则无法正确检测、识别图片中的人脸。若您确认图片包含exif信息或者您确认输入图中人脸不会出现被旋转情况，请不要开启本参数。开启后，整体耗时将可能增加数百毫秒。
+         * @type {number || null}
+         */
+        this.NeedRotateDetection = null;
+
     }
 
     /**
@@ -3636,6 +3698,7 @@ Url、Image必须提供一个，如果都提供，只使用 Url。
         this.NeedFaceAttributes = 'NeedFaceAttributes' in params ? params.NeedFaceAttributes : null;
         this.NeedQualityDetection = 'NeedQualityDetection' in params ? params.NeedQualityDetection : null;
         this.FaceModelVersion = 'FaceModelVersion' in params ? params.FaceModelVersion : null;
+        this.NeedRotateDetection = 'NeedRotateDetection' in params ? params.NeedRotateDetection : null;
 
     }
 }
@@ -3870,6 +3933,12 @@ Url、Image必须提供一个，如果都提供，只使用 Url。
          */
         this.QualityControl = null;
 
+        /**
+         * 是否开启图片旋转识别支持。0为不开启，1为开启。默认为0。本参数的作用为，当图片中的人脸被旋转且图片没有exif信息时，如果不开启图片旋转识别支持则无法正确检测、识别图片中的人脸。若您确认图片包含exif信息或者您确认输入图中人脸不会出现被旋转情况，请不要开启本参数。开启后，整体耗时将可能增加数百毫秒。
+         * @type {number || null}
+         */
+        this.NeedRotateDetection = null;
+
     }
 
     /**
@@ -3883,6 +3952,7 @@ Url、Image必须提供一个，如果都提供，只使用 Url。
         this.Image = 'Image' in params ? params.Image : null;
         this.Url = 'Url' in params ? params.Url : null;
         this.QualityControl = 'QualityControl' in params ? params.QualityControl : null;
+        this.NeedRotateDetection = 'NeedRotateDetection' in params ? params.NeedRotateDetection : null;
 
     }
 }
@@ -4257,6 +4327,12 @@ MaxFaceNum用于，当输入的待识别图片包含多张人脸时，设定要�
          */
         this.FaceMatchThreshold = null;
 
+        /**
+         * 是否开启图片旋转识别支持。0为不开启，1为开启。默认为0。本参数的作用为，当图片中的人脸被旋转且图片没有exif信息时，如果不开启图片旋转识别支持则无法正确检测、识别图片中的人脸。若您确认图片包含exif信息或者您确认输入图中人脸不会出现被旋转情况，请不要开启本参数。开启后，整体耗时将可能增加数百毫秒。
+         * @type {number || null}
+         */
+        this.NeedRotateDetection = null;
+
     }
 
     /**
@@ -4275,6 +4351,7 @@ MaxFaceNum用于，当输入的待识别图片包含多张人脸时，设定要�
         this.NeedPersonInfo = 'NeedPersonInfo' in params ? params.NeedPersonInfo : null;
         this.QualityControl = 'QualityControl' in params ? params.QualityControl : null;
         this.FaceMatchThreshold = 'FaceMatchThreshold' in params ? params.FaceMatchThreshold : null;
+        this.NeedRotateDetection = 'NeedRotateDetection' in params ? params.NeedRotateDetection : null;
 
     }
 }

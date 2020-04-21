@@ -18,6 +18,8 @@ const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const DescribeImagePersonalResponse = models.DescribeImagePersonalResponse;
 const DescribeUserQuotaPersonalRequest = models.DescribeUserQuotaPersonalRequest;
+const WebhookTarget = models.WebhookTarget;
+const WebhookTriggerLog = models.WebhookTriggerLog;
 const ModifyRepositoryResponse = models.ModifyRepositoryResponse;
 const TriggerInvokePara = models.TriggerInvokePara;
 const DescribeNamespacesResponse = models.DescribeNamespacesResponse;
@@ -26,22 +28,25 @@ const TagInfoResp = models.TagInfoResp;
 const CreateInstanceResponse = models.CreateInstanceResponse;
 const DeleteInstanceTokenRequest = models.DeleteInstanceTokenRequest;
 const ModifyRepositoryRequest = models.ModifyRepositoryRequest;
+const DescribeWebhookTriggerLogResponse = models.DescribeWebhookTriggerLogResponse;
 const CreateApplicationTriggerPersonalRequest = models.CreateApplicationTriggerPersonalRequest;
 const AutoDelStrategyInfo = models.AutoDelStrategyInfo;
 const ValidateNamespaceExistPersonalRequest = models.ValidateNamespaceExistPersonalRequest;
 const Registry = models.Registry;
 const DescribeRepositoriesResponse = models.DescribeRepositoriesResponse;
-const CreateRepositoryRequest = models.CreateRepositoryRequest;
+const DeleteInstanceTokenResponse = models.DeleteInstanceTokenResponse;
 const DescribeInstancesResponse = models.DescribeInstancesResponse;
 const ModifyInstanceTokenResponse = models.ModifyInstanceTokenResponse;
-const DescribeApplicationTriggerPersonalRequest = models.DescribeApplicationTriggerPersonalRequest;
-const FavorResp = models.FavorResp;
-const DeleteNamespacePersonalRequest = models.DeleteNamespacePersonalRequest;
-const Limit = models.Limit;
 const DescribeApplicationTriggerLogPersonalResponse = models.DescribeApplicationTriggerLogPersonalResponse;
+const FavorResp = models.FavorResp;
+const DescribeApplicationTriggerPersonalRequest = models.DescribeApplicationTriggerPersonalRequest;
+const DeleteNamespacePersonalRequest = models.DeleteNamespacePersonalRequest;
+const NamespaceInfo = models.NamespaceInfo;
+const Limit = models.Limit;
 const DeleteRepositoryResponse = models.DeleteRepositoryResponse;
 const DeleteImagePersonalResponse = models.DeleteImagePersonalResponse;
 const RegistryCondition = models.RegistryCondition;
+const DeleteWebhookTriggerResponse = models.DeleteWebhookTriggerResponse;
 const DeleteImageLifecycleGlobalPersonalResponse = models.DeleteImageLifecycleGlobalPersonalResponse;
 const DuplicateImagePersonalResponse = models.DuplicateImagePersonalResponse;
 const DupImageTagResp = models.DupImageTagResp;
@@ -56,6 +61,7 @@ const ModifyInstanceTokenRequest = models.ModifyInstanceTokenRequest;
 const DeleteImageLifecyclePersonalResponse = models.DeleteImageLifecyclePersonalResponse;
 const CreateNamespaceResponse = models.CreateNamespaceResponse;
 const DescribeRepositoryOwnerPersonalResponse = models.DescribeRepositoryOwnerPersonalResponse;
+const ModifyWebhookTriggerResponse = models.ModifyWebhookTriggerResponse;
 const CreateImageLifecyclePersonalResponse = models.CreateImageLifecyclePersonalResponse;
 const RepoIsExistResp = models.RepoIsExistResp;
 const TcrImageInfo = models.TcrImageInfo;
@@ -63,6 +69,7 @@ const DescribeImageLifecycleGlobalPersonalResponse = models.DescribeImageLifecyc
 const CreateNamespacePersonalResponse = models.CreateNamespacePersonalResponse;
 const DeleteImageLifecycleGlobalPersonalRequest = models.DeleteImageLifecycleGlobalPersonalRequest;
 const DescribeInstanceStatusRequest = models.DescribeInstanceStatusRequest;
+const ModifyWebhookTriggerRequest = models.ModifyWebhookTriggerRequest;
 const DescribeInstanceStatusResponse = models.DescribeInstanceStatusResponse;
 const DeleteNamespaceResponse = models.DeleteNamespaceResponse;
 const Favors = models.Favors;
@@ -75,12 +82,13 @@ const ModifyUserPasswordPersonalResponse = models.ModifyUserPasswordPersonalResp
 const TcrNamespaceInfo = models.TcrNamespaceInfo;
 const DeleteApplicationTriggerPersonalResponse = models.DeleteApplicationTriggerPersonalResponse;
 const ModifyRepositoryInfoPersonalResponse = models.ModifyRepositoryInfoPersonalResponse;
+const DescribeWebhookTriggerLogRequest = models.DescribeWebhookTriggerLogRequest;
 const CreateUserPersonalRequest = models.CreateUserPersonalRequest;
 const RepoInfoResp = models.RepoInfoResp;
 const ManageImageLifecycleGlobalPersonalResponse = models.ManageImageLifecycleGlobalPersonalResponse;
 const RegistryStatus = models.RegistryStatus;
 const DescribeNamespacePersonalRequest = models.DescribeNamespacePersonalRequest;
-const NamespaceInfo = models.NamespaceInfo;
+const DeleteRepositoryPersonalResponse = models.DeleteRepositoryPersonalResponse;
 const CreateInstanceTokenResponse = models.CreateInstanceTokenResponse;
 const DescribeApplicationTriggerLogPersonalResp = models.DescribeApplicationTriggerLogPersonalResp;
 const DeleteImagePersonalRequest = models.DeleteImagePersonalRequest;
@@ -89,8 +97,11 @@ const NamespaceInfoResp = models.NamespaceInfoResp;
 const CreateRepositoryPersonalRequest = models.CreateRepositoryPersonalRequest;
 const DescribeImageFilterPersonalResponse = models.DescribeImageFilterPersonalResponse;
 const CreateImageLifecyclePersonalRequest = models.CreateImageLifecyclePersonalRequest;
+const DeleteWebhookTriggerRequest = models.DeleteWebhookTriggerRequest;
 const TriggerInvokeResult = models.TriggerInvokeResult;
 const CreateUserPersonalResponse = models.CreateUserPersonalResponse;
+const DescribeWebhookTriggerResponse = models.DescribeWebhookTriggerResponse;
+const DescribeImageManifestsRequest = models.DescribeImageManifestsRequest;
 const ModifyNamespaceRequest = models.ModifyNamespaceRequest;
 const ModifyRepositoryAccessPersonalRequest = models.ModifyRepositoryAccessPersonalRequest;
 const DescribeImageLifecycleGlobalPersonalRequest = models.DescribeImageLifecycleGlobalPersonalRequest;
@@ -105,15 +116,17 @@ const TriggerInvokeCondition = models.TriggerInvokeCondition;
 const NamespaceIsExistsResp = models.NamespaceIsExistsResp;
 const DescribeInstancesRequest = models.DescribeInstancesRequest;
 const Filter = models.Filter;
-const DeleteInstanceTokenResponse = models.DeleteInstanceTokenResponse;
 const RepoInfo = models.RepoInfo;
 const ManageImageLifecycleGlobalPersonalRequest = models.ManageImageLifecycleGlobalPersonalRequest;
 const DescribeUserQuotaPersonalResponse = models.DescribeUserQuotaPersonalResponse;
 const DescribeImagePersonalRequest = models.DescribeImagePersonalRequest;
 const DeleteImageLifecyclePersonalRequest = models.DeleteImageLifecyclePersonalRequest;
 const ModifyApplicationTriggerPersonalResponse = models.ModifyApplicationTriggerPersonalResponse;
+const DescribeImageManifestsResponse = models.DescribeImageManifestsResponse;
 const DescribeNamespacePersonalResponse = models.DescribeNamespacePersonalResponse;
 const DeleteNamespacePersonalResponse = models.DeleteNamespacePersonalResponse;
+const Header = models.Header;
+const CreateWebhookTriggerRequest = models.CreateWebhookTriggerRequest;
 const DescribeRepositoryOwnerPersonalRequest = models.DescribeRepositoryOwnerPersonalRequest;
 const ModifyRepositoryInfoPersonalRequest = models.ModifyRepositoryInfoPersonalRequest;
 const DescribeApplicationTriggerLogPersonalRequest = models.DescribeApplicationTriggerLogPersonalRequest;
@@ -128,17 +141,20 @@ const ModifyUserPasswordPersonalRequest = models.ModifyUserPasswordPersonalReque
 const ValidateNamespaceExistPersonalResponse = models.ValidateNamespaceExistPersonalResponse;
 const DescribeApplicationTriggerPersonalResp = models.DescribeApplicationTriggerPersonalResp;
 const TagInfo = models.TagInfo;
-const DuplicateImagePersonalRequest = models.DuplicateImagePersonalRequest;
+const CreateRepositoryRequest = models.CreateRepositoryRequest;
+const DescribeWebhookTriggerRequest = models.DescribeWebhookTriggerRequest;
 const DeleteNamespaceRequest = models.DeleteNamespaceRequest;
 const BatchDeleteImagePersonalRequest = models.BatchDeleteImagePersonalRequest;
 const DescribeImagesRequest = models.DescribeImagesRequest;
 const TriggerResp = models.TriggerResp;
 const CreateRepositoryResponse = models.CreateRepositoryResponse;
 const RespLimit = models.RespLimit;
+const DuplicateImagePersonalRequest = models.DuplicateImagePersonalRequest;
 const DescribeInstanceTokenResponse = models.DescribeInstanceTokenResponse;
 const SameImagesResp = models.SameImagesResp;
 const CreateNamespacePersonalRequest = models.CreateNamespacePersonalRequest;
-const DeleteRepositoryPersonalResponse = models.DeleteRepositoryPersonalResponse;
+const WebhookTrigger = models.WebhookTrigger;
+const CreateWebhookTriggerResponse = models.CreateWebhookTriggerResponse;
 const TcrRepositoryInfo = models.TcrRepositoryInfo;
 const TcrInstanceToken = models.TcrInstanceToken;
 const DeleteRepositoryRequest = models.DeleteRepositoryRequest;
@@ -314,6 +330,17 @@ class TcrClient extends AbstractClient {
     }
 
     /**
+     * 获取触发器日志
+     * @param {DescribeWebhookTriggerLogRequest} req
+     * @param {function(string, DescribeWebhookTriggerLogResponse):void} cb
+     * @public
+     */
+    DescribeWebhookTriggerLog(req, cb) {
+        let resp = new DescribeWebhookTriggerLogResponse();
+        this.request("DescribeWebhookTriggerLog", req, resp, cb);
+    }
+
+    /**
      * 查询镜像版本列表或指定容器镜像信息
      * @param {DescribeImagesRequest} req
      * @param {function(string, DescribeImagesResponse):void} cb
@@ -355,6 +382,17 @@ class TcrClient extends AbstractClient {
     DescribeRepositoryPersonal(req, cb) {
         let resp = new DescribeRepositoryPersonalResponse();
         this.request("DescribeRepositoryPersonal", req, resp, cb);
+    }
+
+    /**
+     * 查询容器镜像Manifest信息
+     * @param {DescribeImageManifestsRequest} req
+     * @param {function(string, DescribeImageManifestsResponse):void} cb
+     * @public
+     */
+    DescribeImageManifests(req, cb) {
+        let resp = new DescribeImageManifestsResponse();
+        this.request("DescribeImageManifests", req, resp, cb);
     }
 
     /**
@@ -424,6 +462,17 @@ class TcrClient extends AbstractClient {
     }
 
     /**
+     * 查询触发器
+     * @param {DescribeWebhookTriggerRequest} req
+     * @param {function(string, DescribeWebhookTriggerResponse):void} cb
+     * @public
+     */
+    DescribeWebhookTrigger(req, cb) {
+        let resp = new DescribeWebhookTriggerResponse();
+        this.request("DescribeWebhookTrigger", req, resp, cb);
+    }
+
+    /**
      * 用于在个人版中删除tag
      * @param {DeleteImagePersonalRequest} req
      * @param {function(string, DeleteImagePersonalResponse):void} cb
@@ -432,6 +481,17 @@ class TcrClient extends AbstractClient {
     DeleteImagePersonal(req, cb) {
         let resp = new DeleteImagePersonalResponse();
         this.request("DeleteImagePersonal", req, resp, cb);
+    }
+
+    /**
+     * 更新触发器
+     * @param {ModifyWebhookTriggerRequest} req
+     * @param {function(string, ModifyWebhookTriggerResponse):void} cb
+     * @public
+     */
+    ModifyWebhookTrigger(req, cb) {
+        let resp = new ModifyWebhookTriggerResponse();
+        this.request("ModifyWebhookTrigger", req, resp, cb);
     }
 
     /**
@@ -454,6 +514,17 @@ class TcrClient extends AbstractClient {
     CreateInstance(req, cb) {
         let resp = new CreateInstanceResponse();
         this.request("CreateInstance", req, resp, cb);
+    }
+
+    /**
+     * 创建触发器
+     * @param {CreateWebhookTriggerRequest} req
+     * @param {function(string, CreateWebhookTriggerResponse):void} cb
+     * @public
+     */
+    CreateWebhookTrigger(req, cb) {
+        let resp = new CreateWebhookTriggerResponse();
+        this.request("CreateWebhookTrigger", req, resp, cb);
     }
 
     /**
@@ -490,14 +561,14 @@ class TcrClient extends AbstractClient {
     }
 
     /**
-     * 用于判断个人版仓库是否存在
-     * @param {ValidateRepositoryExistPersonalRequest} req
-     * @param {function(string, ValidateRepositoryExistPersonalResponse):void} cb
+     * 删除触发器
+     * @param {DeleteWebhookTriggerRequest} req
+     * @param {function(string, DeleteWebhookTriggerResponse):void} cb
      * @public
      */
-    ValidateRepositoryExistPersonal(req, cb) {
-        let resp = new ValidateRepositoryExistPersonalResponse();
-        this.request("ValidateRepositoryExistPersonal", req, resp, cb);
+    DeleteWebhookTrigger(req, cb) {
+        let resp = new DeleteWebhookTriggerResponse();
+        this.request("DeleteWebhookTrigger", req, resp, cb);
     }
 
     /**
@@ -677,14 +748,14 @@ class TcrClient extends AbstractClient {
     }
 
     /**
-     * 创建实例的临时或长期访问凭证
-     * @param {CreateInstanceTokenRequest} req
-     * @param {function(string, CreateInstanceTokenResponse):void} cb
+     * 用于判断个人版仓库是否存在
+     * @param {ValidateRepositoryExistPersonalRequest} req
+     * @param {function(string, ValidateRepositoryExistPersonalResponse):void} cb
      * @public
      */
-    CreateInstanceToken(req, cb) {
-        let resp = new CreateInstanceTokenResponse();
-        this.request("CreateInstanceToken", req, resp, cb);
+    ValidateRepositoryExistPersonal(req, cb) {
+        let resp = new ValidateRepositoryExistPersonalResponse();
+        this.request("ValidateRepositoryExistPersonal", req, resp, cb);
     }
 
     /**
@@ -696,6 +767,17 @@ class TcrClient extends AbstractClient {
     DescribeApplicationTriggerPersonal(req, cb) {
         let resp = new DescribeApplicationTriggerPersonalResponse();
         this.request("DescribeApplicationTriggerPersonal", req, resp, cb);
+    }
+
+    /**
+     * 创建实例的临时或长期访问凭证
+     * @param {CreateInstanceTokenRequest} req
+     * @param {function(string, CreateInstanceTokenResponse):void} cb
+     * @public
+     */
+    CreateInstanceToken(req, cb) {
+        let resp = new CreateInstanceTokenResponse();
+        this.request("CreateInstanceToken", req, resp, cb);
     }
 
 
