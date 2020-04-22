@@ -17,42 +17,33 @@
 const AbstractModel = require("../../common/abstract_model");
 
 /**
- * CheckKol
+ * 业务出参
  * @class
  */
-class InputKolDataList extends  AbstractModel {
+class OutputDetectAccountActivity extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 账号类型[1：微信；2：qq；3：微博]
+         * 返回码（0，成功，其他失败）
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
-        this.Type = null;
+        this.Code = null;
 
         /**
-         * KOL账号ID[比如微信公众号ID]
+         * 返回码对应的信息
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
-        this.Id = null;
+        this.Message = null;
 
         /**
-         * KOL名称
-         * @type {string || null}
+         * 返回活跃度信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {OutputDetectAccountActivityValue || null}
          */
-        this.Name = null;
-
-        /**
-         * 手机号
-         * @type {string || null}
-         */
-        this.Phone = null;
-
-        /**
-         * 代理商名称
-         * @type {string || null}
-         */
-        this.AgentInfo = null;
+        this.Value = null;
 
     }
 
@@ -63,11 +54,14 @@ class InputKolDataList extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Type = 'Type' in params ? params.Type : null;
-        this.Id = 'Id' in params ? params.Id : null;
-        this.Name = 'Name' in params ? params.Name : null;
-        this.Phone = 'Phone' in params ? params.Phone : null;
-        this.AgentInfo = 'AgentInfo' in params ? params.AgentInfo : null;
+        this.Code = 'Code' in params ? params.Code : null;
+        this.Message = 'Message' in params ? params.Message : null;
+
+        if (params.Value) {
+            let obj = new OutputDetectAccountActivityValue();
+            obj.deserialize(params.Value)
+            this.Value = obj;
+        }
 
     }
 }
@@ -645,6 +639,60 @@ class InputTaBspData extends  AbstractModel {
 }
 
 /**
+ * 业务出参
+ * @class
+ */
+class OutputDetectAccountActivityValue extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 用户 ID accountType 不同对应不同的用户 ID。如是 QQ 或微信用户则填入对应的 openId
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Uid = null;
+
+        /**
+         * 操作时间戳，单位：秒
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.PostTime = null;
+
+        /**
+         * 用户操作的真实外网 IP
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.UserIp = null;
+
+        /**
+         * 0：表示不活跃
+1 - 4：活跃等级由低到高
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Level = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Uid = 'Uid' in params ? params.Uid : null;
+        this.PostTime = 'PostTime' in params ? params.PostTime : null;
+        this.UserIp = 'UserIp' in params ? params.UserIp : null;
+        this.Level = 'Level' in params ? params.Level : null;
+
+    }
+}
+
+/**
  * 返回结果
  * @class
  */
@@ -684,6 +732,39 @@ class OutputSendTrafficSecuritySmsMsg extends  AbstractModel {
         this.Code = 'Code' in params ? params.Code : null;
         this.Message = 'Message' in params ? params.Message : null;
         this.Value = 'Value' in params ? params.Value : null;
+
+    }
+}
+
+/**
+ * RecognizeTargetAudience请求参数结构体
+ * @class
+ */
+class RecognizeTargetAudienceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 业务数据
+         * @type {InputRecognizeTargetAudience || null}
+         */
+        this.BspData = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.BspData) {
+            let obj = new InputRecognizeTargetAudience();
+            obj.deserialize(params.BspData)
+            this.BspData = obj;
+        }
 
     }
 }
@@ -1243,18 +1324,80 @@ class RecognizePreciseTargetAudienceRequest extends  AbstractModel {
 }
 
 /**
- * RecognizeTargetAudience请求参数结构体
+ * CheckKol
  * @class
  */
-class RecognizeTargetAudienceRequest extends  AbstractModel {
+class InputKolDataList extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 业务数据
-         * @type {InputRecognizeTargetAudience || null}
+         * 账号类型[1：微信；2：qq；3：微博]
+         * @type {number || null}
          */
-        this.BspData = null;
+        this.Type = null;
+
+        /**
+         * KOL账号ID[比如微信公众号ID]
+         * @type {string || null}
+         */
+        this.Id = null;
+
+        /**
+         * KOL名称
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 手机号
+         * @type {string || null}
+         */
+        this.Phone = null;
+
+        /**
+         * 代理商名称
+         * @type {string || null}
+         */
+        this.AgentInfo = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Id = 'Id' in params ? params.Id : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Phone = 'Phone' in params ? params.Phone : null;
+        this.AgentInfo = 'AgentInfo' in params ? params.AgentInfo : null;
+
+    }
+}
+
+/**
+ * DetectAccountActivity返回参数结构体
+ * @class
+ */
+class DetectAccountActivityResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 回包数据
+         * @type {OutputDetectAccountActivity || null}
+         */
+        this.Data = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
 
     }
 
@@ -1266,10 +1409,44 @@ class RecognizeTargetAudienceRequest extends  AbstractModel {
             return;
         }
 
-        if (params.BspData) {
-            let obj = new InputRecognizeTargetAudience();
-            obj.deserialize(params.BspData)
-            this.BspData = obj;
+        if (params.Data) {
+            let obj = new OutputDetectAccountActivity();
+            obj.deserialize(params.Data)
+            this.Data = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DetectAccountActivity请求参数结构体
+ * @class
+ */
+class DetectAccountActivityRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 业务入参
+         * @type {InputDetectAccountActivity || null}
+         */
+        this.BusinessSecurityData = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.BusinessSecurityData) {
+            let obj = new InputDetectAccountActivity();
+            obj.deserialize(params.BusinessSecurityData)
+            this.BusinessSecurityData = obj;
         }
 
     }
@@ -1372,6 +1549,129 @@ class OutputRecognizeTargetAudience extends  AbstractModel {
  * 业务入参
  * @class
  */
+class InputDetectAccountActivity extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 用户ID值，如微信/QQ openid，或 手机号等（如15912345687）
+         * @type {string || null}
+         */
+        this.Uid = null;
+
+        /**
+         * 用户账号类型 
+1：QQ开放帐号 
+2：微信开放账号 
+4：手机号 （暂仅支持国内手机号）
+10004： 手机号MD5
+         * @type {number || null}
+         */
+        this.AccountType = null;
+
+        /**
+         * 用户真实外网IP
+         * @type {string || null}
+         */
+        this.UserIp = null;
+
+        /**
+         * 用户操作时间戳，单位秒（格林威治时间精确到秒，如1501590972）
+         * @type {number || null}
+         */
+        this.PostTime = null;
+
+        /**
+         * accountType是QQ或微信开放账号时，该参数必填，表示QQ或微信分配给网站或应用的appId，用来唯一标识网站或应用
+         * @type {string || null}
+         */
+        this.AppIdU = null;
+
+        /**
+         * 昵称，UTF-8 编码
+         * @type {string || null}
+         */
+        this.NickName = null;
+
+        /**
+         * 手机号。若 accountType 选4（手机号）、或10004（手机号 MD5），则无需重复填写。否则填入对应的手机号（如15912345687）
+         * @type {string || null}
+         */
+        this.PhoneNumber = null;
+
+        /**
+         * 用户邮箱地址（非系统自动生成）
+         * @type {string || null}
+         */
+        this.EmailAddress = null;
+
+        /**
+         * 用户 HTTP 请求中的 cookie 进行2次 hash 的值，只要保证相同 cookie 的 hash 值一致即可
+         * @type {number || null}
+         */
+        this.CookieHash = null;
+
+        /**
+         * 用户HTTP请求的 userAgent
+         * @type {string || null}
+         */
+        this.UserAgent = null;
+
+        /**
+         * 用户HTTP请求中的 x_forward_for
+         * @type {string || null}
+         */
+        this.XForwardedFor = null;
+
+        /**
+         * Mac地址或设备唯一标识
+         * @type {string || null}
+         */
+        this.MacAddress = null;
+
+        /**
+         * 手机制造商ID，如果手机注册，请带上此信息
+         * @type {string || null}
+         */
+        this.VendorId = null;
+
+        /**
+         * 手机设备号
+         * @type {string || null}
+         */
+        this.Imei = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Uid = 'Uid' in params ? params.Uid : null;
+        this.AccountType = 'AccountType' in params ? params.AccountType : null;
+        this.UserIp = 'UserIp' in params ? params.UserIp : null;
+        this.PostTime = 'PostTime' in params ? params.PostTime : null;
+        this.AppIdU = 'AppIdU' in params ? params.AppIdU : null;
+        this.NickName = 'NickName' in params ? params.NickName : null;
+        this.PhoneNumber = 'PhoneNumber' in params ? params.PhoneNumber : null;
+        this.EmailAddress = 'EmailAddress' in params ? params.EmailAddress : null;
+        this.CookieHash = 'CookieHash' in params ? params.CookieHash : null;
+        this.UserAgent = 'UserAgent' in params ? params.UserAgent : null;
+        this.XForwardedFor = 'XForwardedFor' in params ? params.XForwardedFor : null;
+        this.MacAddress = 'MacAddress' in params ? params.MacAddress : null;
+        this.VendorId = 'VendorId' in params ? params.VendorId : null;
+        this.Imei = 'Imei' in params ? params.Imei : null;
+
+    }
+}
+
+/**
+ * 业务入参
+ * @class
+ */
 class InputSendTrafficSecuritySmsMsg extends  AbstractModel {
     constructor(){
         super();
@@ -1404,7 +1704,7 @@ class InputSendTrafficSecuritySmsMsg extends  AbstractModel {
 }
 
 module.exports = {
-    InputKolDataList: InputKolDataList,
+    OutputDetectAccountActivity: OutputDetectAccountActivity,
     OutputKolData: OutputKolData,
     InputKolBspData: InputKolBspData,
     EnhanceTaDegreeRequest: EnhanceTaDegreeRequest,
@@ -1415,7 +1715,9 @@ module.exports = {
     OutputKolValue: OutputKolValue,
     EnhanceTaDegreeResponse: EnhanceTaDegreeResponse,
     InputTaBspData: InputTaBspData,
+    OutputDetectAccountActivityValue: OutputDetectAccountActivityValue,
     OutputSendTrafficSecuritySmsMsg: OutputSendTrafficSecuritySmsMsg,
+    RecognizeTargetAudienceRequest: RecognizeTargetAudienceRequest,
     SendTrafficSecuritySmsMessageResponse: SendTrafficSecuritySmsMessageResponse,
     DetectFraudKOLRequest: DetectFraudKOLRequest,
     RecognizeCustomizedAudienceRequest: RecognizeCustomizedAudienceRequest,
@@ -1424,9 +1726,12 @@ module.exports = {
     OutputTaData: OutputTaData,
     OutputTaValue: OutputTaValue,
     RecognizePreciseTargetAudienceRequest: RecognizePreciseTargetAudienceRequest,
-    RecognizeTargetAudienceRequest: RecognizeTargetAudienceRequest,
+    InputKolDataList: InputKolDataList,
+    DetectAccountActivityResponse: DetectAccountActivityResponse,
+    DetectAccountActivityRequest: DetectAccountActivityRequest,
     RecognizePreciseTargetAudienceResponse: RecognizePreciseTargetAudienceResponse,
     OutputRecognizeTargetAudience: OutputRecognizeTargetAudience,
+    InputDetectAccountActivity: InputDetectAccountActivity,
     InputSendTrafficSecuritySmsMsg: InputSendTrafficSecuritySmsMsg,
 
 }

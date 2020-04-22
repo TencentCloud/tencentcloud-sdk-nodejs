@@ -85,6 +85,7 @@ const DescribeAddressesResponse = models.DescribeAddressesResponse;
 const DetachNetworkInterfaceResponse = models.DetachNetworkInterfaceResponse;
 const InstanceFamilyConfig = models.InstanceFamilyConfig;
 const DeleteModuleRequest = models.DeleteModuleRequest;
+const DescribeVpcsRequest = models.DescribeVpcsRequest;
 const ResetInstancesMaxBandwidthRequest = models.ResetInstancesMaxBandwidthRequest;
 const PeakBase = models.PeakBase;
 const ModifyModuleNetworkRequest = models.ModifyModuleNetworkRequest;
@@ -160,6 +161,7 @@ const ModuleItem = models.ModuleItem;
 const ModifyModuleImageRequest = models.ModifyModuleImageRequest;
 const RunMonitorServiceEnabled = models.RunMonitorServiceEnabled;
 const MigrateNetworkInterfaceResponse = models.MigrateNetworkInterfaceResponse;
+const DescribeVpcsResponse = models.DescribeVpcsResponse;
 const InstanceOperator = models.InstanceOperator;
 const Module = models.Module;
 const DescribeBaseOverviewResponse = models.DescribeBaseOverviewResponse;
@@ -656,6 +658,17 @@ EIP 如果欠费或被封堵，则不能被绑定。
     RebootInstances(req, cb) {
         let resp = new RebootInstancesResponse();
         this.request("RebootInstances", req, resp, cb);
+    }
+
+    /**
+     * 查询私有网络列表
+     * @param {DescribeVpcsRequest} req
+     * @param {function(string, DescribeVpcsResponse):void} cb
+     * @public
+     */
+    DescribeVpcs(req, cb) {
+        let resp = new DescribeVpcsResponse();
+        this.request("DescribeVpcs", req, resp, cb);
     }
 
     /**

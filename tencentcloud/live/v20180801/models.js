@@ -31,13 +31,13 @@ class CreateLiveSnapshotRuleRequest extends  AbstractModel {
         this.DomainName = null;
 
         /**
-         * 模板Id。
+         * 模板 ID。
          * @type {number || null}
          */
         this.TemplateId = null;
 
         /**
-         * 推流路径，与推流和播放地址中的AppName保持一致，默认为 live。
+         * 推流路径，与推流和播放地址中的 AppName 保持一致，默认为 live。
          * @type {string || null}
          */
         this.AppName = null;
@@ -67,7 +67,7 @@ class CreateLiveSnapshotRuleRequest extends  AbstractModel {
 }
 
 /**
- * 带宽和流量信息
+ * 带宽和流量信息。
  * @class
  */
 class BillDataInfo extends  AbstractModel {
@@ -75,25 +75,25 @@ class BillDataInfo extends  AbstractModel {
         super();
 
         /**
-         * 时间点，格式为yyyy-mm-dd HH:MM:SS。
+         * 时间点，格式: yyyy-mm-dd HH:MM:SS。
          * @type {string || null}
          */
         this.Time = null;
 
         /**
-         * 带宽，单位是Mbps。
+         * 带宽，单位是 Mbps。
          * @type {number || null}
          */
         this.Bandwidth = null;
 
         /**
-         * 流量，单位是MB。
+         * 流量，单位是 MB。
          * @type {number || null}
          */
         this.Flux = null;
 
         /**
-         * 峰值时间点，格式为yyyy-mm-dd HH:MM:SS，原始数据为5分钟粒度，如果查询小时和天粒度数据，则返回对应粒度内的带宽峰值时间点。
+         * 峰值时间点，格式: yyyy-mm-dd HH:MM:SS，原始数据为5分钟粒度，如果查询小时和天粒度数据，则返回对应粒度内的带宽峰值时间点。
          * @type {string || null}
          */
         this.PeakTime = null;
@@ -353,14 +353,15 @@ class CreateLiveSnapshotTemplateRequest extends  AbstractModel {
         super();
 
         /**
-         * 模板名称，非空的字符串。
+         * 模板名称。
 长度上限：255字节。
+仅支持中文、英文、数字、_、-。
          * @type {string || null}
          */
         this.TemplateName = null;
 
         /**
-         * Cos AppId。
+         * Cos 应用 ID。
          * @type {number || null}
          */
         this.CosAppId = null;
@@ -380,6 +381,7 @@ class CreateLiveSnapshotTemplateRequest extends  AbstractModel {
         /**
          * 描述信息。
 长度上限：1024字节。
+仅支持中文、英文、数字、_、-。
          * @type {string || null}
          */
         this.Description = null;
@@ -432,7 +434,7 @@ class CreateLiveSnapshotTemplateRequest extends  AbstractModel {
 }
 
 /**
- * 转码模板信息
+ * 转码模板信息。
  * @class
  */
 class TemplateInfo extends  AbstractModel {
@@ -447,57 +449,56 @@ h264/h265。
         this.Vcodec = null;
 
         /**
-         * 视频码率。100-8000kbps
+         * 视频码率，取值范围：100kbps - 8000kbps。
          * @type {number || null}
          */
         this.VideoBitrate = null;
 
         /**
-         * 音频编码：aac/mp3
-aac/mp3。
+         * 音频编码，可选 aac 或 mp3。
          * @type {string || null}
          */
         this.Acodec = null;
 
         /**
-         * 音频码率。0-500
+         * 音频码率。取值范围：0kbps - 500kbps。
          * @type {number || null}
          */
         this.AudioBitrate = null;
 
         /**
-         * 宽。0-3000
+         * 宽，取值范围：0-3000。
          * @type {number || null}
          */
         this.Width = null;
 
         /**
-         * 高。0-3000
+         * 高，取值范围：0-3000。
          * @type {number || null}
          */
         this.Height = null;
 
         /**
-         * 帧率。0-200
+         * 帧率。取值范围：0fps - 200fps。
          * @type {number || null}
          */
         this.Fps = null;
 
         /**
-         * 关键帧间隔，单位：秒。1-50
+         * 关键帧间隔，取值范围：1秒 - 50秒。
          * @type {number || null}
          */
         this.Gop = null;
 
         /**
-         * 旋转角度。0 90 180 270
+         * 旋转角度。可选择：0 90 180 270。
          * @type {number || null}
          */
         this.Rotate = null;
 
         /**
-         * 编码质量：
-baseline/main/high。
+         * 编码质量，可选择：
+baseline，main，high。
          * @type {string || null}
          */
         this.Profile = null;
@@ -533,31 +534,31 @@ baseline/main/high。
         this.NeedAudio = null;
 
         /**
-         * 模板Id。
+         * 模板 ID。
          * @type {number || null}
          */
         this.TemplateId = null;
 
         /**
-         * 模板名称
+         * 模板名称。
          * @type {string || null}
          */
         this.TemplateName = null;
 
         /**
-         * 模板描述
+         * 模板描述。
          * @type {string || null}
          */
         this.Description = null;
 
         /**
-         * 是否是急速高清模板，0：否，1：是。默认0。
+         * 是否是极速高清模板，0：否，1：是。默认0。
          * @type {number || null}
          */
         this.AiTransCode = null;
 
         /**
-         * 急速高清相比VideoBitrate少多少码率，0.1到0.5
+         * 极速高清相比 VideoBitrate 少多少码率，0.1到0.5。
          * @type {number || null}
          */
         this.AdaptBitratePercent = null;
@@ -757,7 +758,9 @@ class DeleteLiveSnapshotTemplateRequest extends  AbstractModel {
         super();
 
         /**
-         * 模板Id。
+         * 模板 ID。
+1. 在创建截图模板接口 [CreateLiveSnapshotTemplate](/document/product/267/32624) 调用的返回值中获取。
+2. 可以从接口 [DescribeLiveSnapshotTemplates](/document/product/267/32619) 中查询已创建的截图模板列表。
          * @type {number || null}
          */
         this.TemplateId = null;
@@ -820,7 +823,7 @@ class DescribeGroupProIspPlayInfoListResponse extends  AbstractModel {
 }
 
 /**
- * 推流鉴权key信息
+ * 推流鉴权key信息。
  * @class
  */
 class PushAuthKeyInfo extends  AbstractModel {
@@ -840,13 +843,13 @@ class PushAuthKeyInfo extends  AbstractModel {
         this.Enable = null;
 
         /**
-         * 主鉴权key。
+         * 主鉴权 Key。
          * @type {string || null}
          */
         this.MasterAuthKey = null;
 
         /**
-         * 备鉴权key。
+         * 备鉴权 Key。
          * @type {string || null}
          */
         this.BackupAuthKey = null;
@@ -927,7 +930,7 @@ class DeleteLiveRecordTemplateRequest extends  AbstractModel {
         super();
 
         /**
-         * 模板ID。
+         * 模板 ID。
          * @type {number || null}
          */
         this.TemplateId = null;
@@ -1054,7 +1057,7 @@ class PushQualityData extends  AbstractModel {
         super();
 
         /**
-         * 数据时间，格式是%Y-%m-%d %H:%M:%S.%ms，精确到毫秒级。
+         * 数据时间，格式: %Y-%m-%d %H:%M:%S.%ms，精确到毫秒级。
          * @type {string || null}
          */
         this.Time = null;
@@ -1072,13 +1075,13 @@ class PushQualityData extends  AbstractModel {
         this.AppName = null;
 
         /**
-         * 推流客户端ip。
+         * 推流客户端 IP。
          * @type {string || null}
          */
         this.ClientIp = null;
 
         /**
-         * 开始推流时间，格式是%Y-%m-%d %H:%M:%S.%ms，精确到毫秒级。
+         * 开始推流时间，格式: %Y-%m-%d %H:%M:%S.%ms，精确到毫秒级。
          * @type {string || null}
          */
         this.BeginPushTime = null;
@@ -1114,7 +1117,7 @@ class PushQualityData extends  AbstractModel {
         this.VideoFps = null;
 
         /**
-         * 视频码率，单位是bps。
+         * 视频码率，单位: bps。
          * @type {number || null}
          */
         this.VideoRate = null;
@@ -1126,43 +1129,43 @@ class PushQualityData extends  AbstractModel {
         this.AudioFps = null;
 
         /**
-         * 音频码率，单位是bps。
+         * 音频码率，单位: bps。
          * @type {number || null}
          */
         this.AudioRate = null;
 
         /**
-         * 本地流逝时间，单位是ms，音视频流逝时间与本地流逝时间的差距越大表示推流质量越差，上行卡顿越严重。
+         * 本地流逝时间，单位: ms，音视频流逝时间与本地流逝时间的差距越大表示推流质量越差，上行卡顿越严重。
          * @type {number || null}
          */
         this.LocalTs = null;
 
         /**
-         * 视频流逝时间，单位是ms。
+         * 视频流逝时间，单位: ms。
          * @type {number || null}
          */
         this.VideoTs = null;
 
         /**
-         * 音频流逝时间，单位是ms。
+         * 音频流逝时间，单位: ms。
          * @type {number || null}
          */
         this.AudioTs = null;
 
         /**
-         * metadata中的视频码率，单位是kbps。
+         * metadata 中的视频码率，单位: kbps。
          * @type {number || null}
          */
         this.MetaVideoRate = null;
 
         /**
-         * metadata中的音频码率，单位是kbps。
+         * metadata 中的音频码率，单位: kbps。
          * @type {number || null}
          */
         this.MetaAudioRate = null;
 
         /**
-         * metadata中的帧率。
+         * metadata 中的帧率。
          * @type {number || null}
          */
         this.MateFps = null;
@@ -1371,7 +1374,7 @@ class RecordTemplateInfo extends  AbstractModel {
         super();
 
         /**
-         * 模板Id。
+         * 模板 ID。
          * @type {number || null}
          */
         this.TemplateId = null;
@@ -1389,25 +1392,25 @@ class RecordTemplateInfo extends  AbstractModel {
         this.Description = null;
 
         /**
-         * Flv录制参数。
+         * FLV 录制参数。
          * @type {RecordParam || null}
          */
         this.FlvParam = null;
 
         /**
-         * Hls录制参数。
+         * HLS 录制参数。
          * @type {RecordParam || null}
          */
         this.HlsParam = null;
 
         /**
-         * Mp4录制参数。
+         * MP4 录制参数。
          * @type {RecordParam || null}
          */
         this.Mp4Param = null;
 
         /**
-         * Aac录制参数。
+         * AAC 录制参数。
          * @type {RecordParam || null}
          */
         this.AacParam = null;
@@ -1420,13 +1423,13 @@ class RecordTemplateInfo extends  AbstractModel {
         this.IsDelayLive = null;
 
         /**
-         * HLS录制定制参数
+         * HLS 录制定制参数
          * @type {HlsSpecialParam || null}
          */
         this.HlsSpecialParam = null;
 
         /**
-         * Mp3录制参数。
+         * MP3 录制参数。
          * @type {RecordParam || null}
          */
         this.Mp3Param = null;
@@ -1726,7 +1729,9 @@ class DeleteLiveCallbackTemplateRequest extends  AbstractModel {
         super();
 
         /**
-         * 模板Id。
+         * 模板 ID。
+1. 在创建回调模板接口 [CreateLiveCallbackTemplate](/document/product/267/32637) 调用的返回值中获取模板 ID。
+2. 可以从接口 [DescribeLiveCallbackTemplates](/document/product/267/32632) 查询已经创建的过的模板列表。
          * @type {number || null}
          */
         this.TemplateId = null;
@@ -1836,7 +1841,8 @@ class DescribeLiveSnapshotTemplateRequest extends  AbstractModel {
         super();
 
         /**
-         * 模板Id。
+         * 模板 ID。
+调用 [CreateLiveSnapshotTemplate](/document/product/267/32624) 时返回的模板 ID。
          * @type {number || null}
          */
         this.TemplateId = null;
@@ -1864,76 +1870,85 @@ class DomainInfo extends  AbstractModel {
         super();
 
         /**
-         * 直播域名
+         * 直播域名。
          * @type {string || null}
          */
         this.Name = null;
 
         /**
-         * 域名类型。0-推流，1-播放
+         * 域名类型:
+0: 推流。
+1: 播放。
          * @type {number || null}
          */
         this.Type = null;
 
         /**
-         * 域名状态。0-停用，1-启用
+         * 域名状态:
+0: 停用。
+1: 启用。
          * @type {number || null}
          */
         this.Status = null;
 
         /**
-         * 添加时间
+         * 添加时间。
          * @type {string || null}
          */
         this.CreateTime = null;
 
         /**
-         * 是否有CName到固定规则域名。0-否，1-是
+         * 是否有 CName 到固定规则域名:
+0: 否。
+1: 是。
          * @type {number || null}
          */
         this.BCName = null;
 
         /**
-         * cname对应的域名
+         * cname 对应的域名。
          * @type {string || null}
          */
         this.TargetDomain = null;
 
         /**
-         * 播放区域，只在Type=1时该参数有意义。
-1-国内，2-全球，3-海外。
+         * 播放区域，只在 Type=1 时该参数有意义。
+1: 国内。
+2: 全球。
+3: 海外。
          * @type {number || null}
          */
         this.PlayType = null;
 
         /**
-         * 0：普通直播，
-1：慢直播。
+         * 是否慢直播:
+0: 普通直播。
+1: 慢直播。
          * @type {number || null}
          */
         this.IsDelayLive = null;
 
         /**
-         * 当前客户使用的cname信息
+         * 当前客户使用的 cname 信息。
          * @type {string || null}
          */
         this.CurrentCName = null;
 
         /**
-         * 已无效，可忽略。
+         * 失效参数，可忽略。
          * @type {number || null}
          */
         this.RentTag = null;
 
         /**
-         * 已无效，可忽略。
+         * 失效参数，可忽略。
          * @type {string || null}
          */
         this.RentExpireTime = null;
 
         /**
-         * 0：标准直播，
-1：小程序直播。
+         * 0: 标准直播。
+1: 小程序直播。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
@@ -2000,7 +2015,7 @@ class DeleteLiveSnapshotRuleRequest extends  AbstractModel {
         this.DomainName = null;
 
         /**
-         * 推流路径，与推流和播放地址中的AppName保持一致，默认为 live。
+         * 推流路径，与推流和播放地址中的 AppName 保持一致，默认为 live。
          * @type {string || null}
          */
         this.AppName = null;
@@ -2433,7 +2448,7 @@ UTC 格式，例如：2016-06-29T19:00:00Z。
         this.StartTime = null;
 
         /**
-         * 推流路径，与推流和播放地址中的AppName保持一致，默认为 live。不支持模糊匹配。
+         * 推流路径，与推流和播放地址中的 AppName 保持一致，默认为 live。不支持模糊匹配。
          * @type {string || null}
          */
         this.AppName = null;
@@ -2548,7 +2563,7 @@ class CreateLiveRecordRuleRequest extends  AbstractModel {
         this.DomainName = null;
 
         /**
-         * 模板Id。
+         * 模板 ID。
          * @type {number || null}
          */
         this.TemplateId = null;
@@ -2688,7 +2703,7 @@ class DescribeLiveRecordTemplateRequest extends  AbstractModel {
         super();
 
         /**
-         * 模板Id。
+         * 模板 ID。
          * @type {number || null}
          */
         this.TemplateId = null;
@@ -2915,7 +2930,7 @@ class DescribeProIspPlaySumInfoListRequest extends  AbstractModel {
 }
 
 /**
- * 各状态码的总次数，支持大多数的http协议返回码
+ * 各状态码的总次数，支持大多数的 HTTP 协议返回码。
  * @class
  */
 class PlayCodeTotalInfo extends  AbstractModel {
@@ -2923,13 +2938,14 @@ class PlayCodeTotalInfo extends  AbstractModel {
         super();
 
         /**
-         * HTTP code，可选值包括400,403,404,500,502,503,504
+         * HTTP code，可选值包括:
+400，403，404，500，502，503，504。
          * @type {string || null}
          */
         this.Code = null;
 
         /**
-         * 总次数
+         * 总次数。
          * @type {number || null}
          */
         this.Num = null;
@@ -3120,7 +3136,7 @@ class DescribeLiveWatermarkRequest extends  AbstractModel {
         super();
 
         /**
-         * 水印ID。
+         * 水印 ID。
          * @type {number || null}
          */
         this.WatermarkId = null;
@@ -3140,7 +3156,7 @@ class DescribeLiveWatermarkRequest extends  AbstractModel {
 }
 
 /**
- * 日志url信息
+ * 日志url信息。
  * @class
  */
 class LogInfo extends  AbstractModel {
@@ -3154,19 +3170,19 @@ class LogInfo extends  AbstractModel {
         this.LogName = null;
 
         /**
-         * 日志Url。
+         * 日志 URL。
          * @type {string || null}
          */
         this.LogUrl = null;
 
         /**
-         * 日志生成时间
+         * 日志生成时间。
          * @type {string || null}
          */
         this.LogTime = null;
 
         /**
-         * 文件大小
+         * 文件大小。
          * @type {number || null}
          */
         this.FileSize = null;
@@ -3393,7 +3409,7 @@ class DescribePullStreamConfigsRequest extends  AbstractModel {
         super();
 
         /**
-         * 配置id。
+         * 配置 ID。
          * @type {string || null}
          */
         this.ConfigId = null;
@@ -3413,7 +3429,7 @@ class DescribePullStreamConfigsRequest extends  AbstractModel {
 }
 
 /**
- * 回调模板信息
+ * 回调模板信息。
  * @class
  */
 class CallBackTemplateInfo extends  AbstractModel {
@@ -3421,7 +3437,7 @@ class CallBackTemplateInfo extends  AbstractModel {
         super();
 
         /**
-         * 模板Id。
+         * 模板 ID。
          * @type {number || null}
          */
         this.TemplateId = null;
@@ -3439,43 +3455,43 @@ class CallBackTemplateInfo extends  AbstractModel {
         this.Description = null;
 
         /**
-         * 开播回调URL。
+         * 开播回调 URL。
          * @type {string || null}
          */
         this.StreamBeginNotifyUrl = null;
 
         /**
-         * 断流回调URL。
+         * 断流回调 URL。
          * @type {string || null}
          */
         this.StreamEndNotifyUrl = null;
 
         /**
-         * 混流回调URL。
+         * 混流回调 URL。
          * @type {string || null}
          */
         this.StreamMixNotifyUrl = null;
 
         /**
-         * 录制回调URL。
+         * 录制回调 URL。
          * @type {string || null}
          */
         this.RecordNotifyUrl = null;
 
         /**
-         * 截图回调URL。
+         * 截图回调 URL。
          * @type {string || null}
          */
         this.SnapshotNotifyUrl = null;
 
         /**
-         * 鉴黄回调URL。
+         * 鉴黄回调 URL。
          * @type {string || null}
          */
         this.PornCensorshipNotifyUrl = null;
 
         /**
-         * 回调的鉴权key
+         * 回调的鉴权 key。
          * @type {string || null}
          */
         this.CallbackKey = null;
@@ -3856,7 +3872,7 @@ class TimeValue extends  AbstractModel {
         super();
 
         /**
-         * utc时间，时间格式为yyyy-mm-ddTHH:MM:SSZ。
+         * UTC 时间，时间格式：yyyy-mm-ddTHH:MM:SSZ。
          * @type {string || null}
          */
         this.Time = null;
@@ -3883,7 +3899,7 @@ class TimeValue extends  AbstractModel {
 }
 
 /**
- * 拉流配置
+ * 拉流配置。
  * @class
  */
 class PullStreamConfig extends  AbstractModel {
@@ -3891,19 +3907,19 @@ class PullStreamConfig extends  AbstractModel {
         super();
 
         /**
-         * 拉流配置Id。
+         * 拉流配置 ID。
          * @type {string || null}
          */
         this.ConfigId = null;
 
         /**
-         * 源Url。
+         * 源 URL。
          * @type {string || null}
          */
         this.FromUrl = null;
 
         /**
-         * 目的Url。
+         * 目的 URL。
          * @type {string || null}
          */
         this.ToUrl = null;
@@ -3922,8 +3938,7 @@ class PullStreamConfig extends  AbstractModel {
 
         /**
          * 开始时间。
-UTC格式时间，
-例如：2019-01-08T10:00:00Z。
+UTC格式时间，例如: 2019-01-08T10:00:00Z。
 注意：北京时间值为 UTC 时间值 + 8 小时，格式按照 ISO 8601 标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#I)。
          * @type {string || null}
          */
@@ -3932,15 +3947,19 @@ UTC格式时间，
         /**
          * 结束时间。
 
-UTC格式时间，
-例如：2019-01-08T10:00:00Z。
+UTC格式时间，例如：2019-01-08T10:00:00Z。
 注意：北京时间值为 UTC 时间值 + 8 小时，格式按照 ISO 8601 标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#I)。
          * @type {string || null}
          */
         this.EndTime = null;
 
         /**
-         * 0无效，1初始状态，2正在运行，3拉起失败，4暂停。
+         * 状态:
+0: 无效。
+1: 初始状态。
+2: 正在运行。
+3: 拉起失败。
+4: 暂停。
          * @type {string || null}
          */
         this.Status = null;
@@ -4002,7 +4021,7 @@ class CreateLiveRecordResponse extends  AbstractModel {
 }
 
 /**
- * 规则信息
+ * 规则信息。
  * @class
  */
 class RuleInfo extends  AbstractModel {
@@ -4022,7 +4041,7 @@ class RuleInfo extends  AbstractModel {
         this.UpdateTime = null;
 
         /**
-         * 模板Id。
+         * 模板 ID。
          * @type {number || null}
          */
         this.TemplateId = null;
@@ -4093,7 +4112,7 @@ class UpdateLiveWatermarkResponse extends  AbstractModel {
 }
 
 /**
- * 直播包信息
+ * 直播包信息。
  * @class
  */
 class LivePackageInfo extends  AbstractModel {
@@ -4101,14 +4120,14 @@ class LivePackageInfo extends  AbstractModel {
         super();
 
         /**
-         * 包ID。
+         * 包 ID。
          * @type {string || null}
          */
         this.Id = null;
 
         /**
          * 总量。
-注意：当为流量包时单位为字节；
+注意：当为流量包时单位为字节。
 当为转码包时单位为分钟。
          * @type {number || null}
          */
@@ -4116,7 +4135,7 @@ class LivePackageInfo extends  AbstractModel {
 
         /**
          * 使用量。
-注意：当为流量包时单位为字节；
+注意：当为流量包时单位为字节。
 当为转码包时单位为分钟。
          * @type {number || null}
          */
@@ -4124,7 +4143,7 @@ class LivePackageInfo extends  AbstractModel {
 
         /**
          * 剩余量。
-注意：当为流量包时单位为字节；
+注意：当为流量包时单位为字节。
 当为转码包时单位为分钟。
          * @type {number || null}
          */
@@ -4143,19 +4162,19 @@ class LivePackageInfo extends  AbstractModel {
         this.ExpireTime = null;
 
         /**
-         * 包类型，可选值：
-0：流量包；
-1：普通转码包；
-2：极速高清包。
+         * 包类型，可选值:
+0: 流量包。
+1: 普通转码包。
+2: 极速高清包。
          * @type {number || null}
          */
         this.Type = null;
 
         /**
-         * 包状态，可选值：
-0：未使用；
-1：使用中；
-2：已过期。
+         * 包状态，可选值:
+0: 未使用。
+1: 使用中。
+2: 已过期。
          * @type {number || null}
          */
         this.Status = null;
@@ -4451,25 +4470,25 @@ class AddLiveWatermarkRequest extends  AbstractModel {
         this.WatermarkName = null;
 
         /**
-         * 显示位置, X轴偏移。
+         * 显示位置，X轴偏移，默认 0。
          * @type {number || null}
          */
         this.XPosition = null;
 
         /**
-         * 显示位置,Y轴偏移。
+         * 显示位置，Y轴偏移，默认 0。
          * @type {number || null}
          */
         this.YPosition = null;
 
         /**
-         * 水印宽度，占直播原始画面宽度百分比，建议高宽只设置一项，另外一项会自适应缩放，避免变形。
+         * 水印宽度，占直播原始画面宽度百分比，建议高宽只设置一项，另外一项会自适应缩放，避免变形。默认原始宽度。
          * @type {number || null}
          */
         this.Width = null;
 
         /**
-         * 水印高度，占直播原始画面宽度百分比，建议高宽只设置一项，另外一项会自适应缩放，避免变形。
+         * 水印高度，占直播原始画面宽度百分比，建议高宽只设置一项，另外一项会自适应缩放，避免变形。默认原始高度。
          * @type {number || null}
          */
         this.Height = null;
@@ -4789,8 +4808,9 @@ class CreateLiveCallbackTemplateRequest extends  AbstractModel {
         super();
 
         /**
-         * 模板名称，非空的字符串。
+         * 模板名称。
 长度上限：255字节。
+仅支持中文、英文、数字、_、-。
          * @type {string || null}
          */
         this.TemplateName = null;
@@ -4798,47 +4818,49 @@ class CreateLiveCallbackTemplateRequest extends  AbstractModel {
         /**
          * 描述信息。
 长度上限：1024字节。
+仅支持中文、英文、数字、_、-。
          * @type {string || null}
          */
         this.Description = null;
 
         /**
-         * 开播回调URL，
+         * 开播回调 URL，
 相关协议文档：[事件消息通知](/document/product/267/32744)。
          * @type {string || null}
          */
         this.StreamBeginNotifyUrl = null;
 
         /**
-         * 断流回调URL，
+         * 断流回调 URL，
 相关协议文档：[事件消息通知](/document/product/267/32744)。
          * @type {string || null}
          */
         this.StreamEndNotifyUrl = null;
 
         /**
-         * 录制回调URL，
+         * 录制回调 URL，
 相关协议文档：[事件消息通知](/document/product/267/32744)。
          * @type {string || null}
          */
         this.RecordNotifyUrl = null;
 
         /**
-         * 截图回调URL，
+         * 截图回调 URL，
 相关协议文档：[事件消息通知](/document/product/267/32744)。
          * @type {string || null}
          */
         this.SnapshotNotifyUrl = null;
 
         /**
-         * 鉴黄回调URL，
+         * 鉴黄回调 URL，
 相关协议文档：[事件消息通知](/document/product/267/32741)。
          * @type {string || null}
          */
         this.PornCensorshipNotifyUrl = null;
 
         /**
-         * 回调key，回调URL公用，鉴权回调说明详见回调格式文档
+         * 回调 Key，回调 URL 公用，回调签名详见事件消息通知文档。
+[事件消息通知](/document/product/267/32744)。
          * @type {string || null}
          */
         this.CallbackKey = null;
@@ -5086,7 +5108,7 @@ class DeleteLiveWatermarkRuleRequest extends  AbstractModel {
         this.DomainName = null;
 
         /**
-         * 推流路径。
+         * 推流路径。与推流和播放地址中的 AppName 保持一致，默认为live。
          * @type {string || null}
          */
         this.AppName = null;
@@ -5141,16 +5163,14 @@ class StreamEventInfo extends  AbstractModel {
 
         /**
          * 推流开始时间。
-UTC格式时间，
-例如：2019-01-07T12:00:00Z。
+UTC 格式时间，例如：2019-01-07T12:00:00Z。
          * @type {string || null}
          */
         this.StreamStartTime = null;
 
         /**
          * 推流结束时间。
-UTC格式时间，
-例如：2019-01-07T15:00:00Z。
+UTC 格式时间，例如：2019-01-07T15:00:00Z。
          * @type {string || null}
          */
         this.StreamEndTime = null;
@@ -5168,7 +5188,7 @@ UTC格式时间，
         this.Duration = null;
 
         /**
-         * 主播IP。
+         * 主播 IP。
          * @type {string || null}
          */
         this.ClientIp = null;
@@ -5514,37 +5534,37 @@ class PushDataInfo extends  AbstractModel {
         this.AppName = null;
 
         /**
-         * 推流客户端ip。
+         * 推流客户端 IP。
          * @type {string || null}
          */
         this.ClientIp = null;
 
         /**
-         * 接流服务器ip。
+         * 接流服务器 IP。
          * @type {string || null}
          */
         this.ServerIp = null;
 
         /**
-         * 推流视频帧率，单位是Hz。
+         * 推流视频帧率，单位: Hz。
          * @type {number || null}
          */
         this.VideoFps = null;
 
         /**
-         * 推流视频码率，单位是bps。
+         * 推流视频码率，单位: bps。
          * @type {number || null}
          */
         this.VideoSpeed = null;
 
         /**
-         * 推流音频帧率，单位是Hz。
+         * 推流音频帧率，单位: Hz。
          * @type {number || null}
          */
         this.AudioFps = null;
 
         /**
-         * 推流音频码率，单位是bps。
+         * 推流音频码率，单位: bps。
          * @type {number || null}
          */
         this.AudioSpeed = null;
@@ -5588,19 +5608,19 @@ class PushDataInfo extends  AbstractModel {
         this.AsampleRate = null;
 
         /**
-         * metadata中的音频码率，单位是Kbps。
+         * metadata 中的音频码率，单位: Kbps。
          * @type {number || null}
          */
         this.MetaAudioSpeed = null;
 
         /**
-         * metadata中的视频码率，单位是Kbps。
+         * metadata 中的视频码率，单位: Kbps。
          * @type {number || null}
          */
         this.MetaVideoSpeed = null;
 
         /**
-         * metadata中的帧率。
+         * metadata 中的帧率。
          * @type {number || null}
          */
         this.MetaFps = null;
@@ -5819,7 +5839,7 @@ class ModifyPullStreamStatusRequest extends  AbstractModel {
         super();
 
         /**
-         * 配置id列表。
+         * 配置 ID 列表。
          * @type {Array.<string> || null}
          */
         this.ConfigIds = null;
@@ -5896,7 +5916,7 @@ class DescribeStreamDayPlayInfoListRequest extends  AbstractModel {
 }
 
 /**
- * 转码详细信息
+ * 转码详细信息。
  * @class
  */
 class TranscodeDetailInfo extends  AbstractModel {
@@ -5910,15 +5930,13 @@ class TranscodeDetailInfo extends  AbstractModel {
         this.StreamName = null;
 
         /**
-         * 开始时间，北京时间，
-格式：yyyy-mm-dd HH:MM。
+         * 开始时间（北京时间），格式：yyyy-mm-dd HH:MM。
          * @type {string || null}
          */
         this.StartTime = null;
 
         /**
-         * 结束时间，北京时间，
-格式：yyyy-mm-dd HH:MM。
+         * 结束时间（北京时间），格式：yyyy-mm-dd HH:MM。
          * @type {string || null}
          */
         this.EndTime = null;
@@ -5933,10 +5951,10 @@ class TranscodeDetailInfo extends  AbstractModel {
         /**
          * 编码方式，带模块，
 示例：
-liveprocessor_H264 =》直播转码-H264，
-liveprocessor_H265 =》 直播转码-H265，
-topspeed_H264 =》极速高清-H264，
-topspeed_H265 =》极速高清-H265。
+liveprocessor_H264：直播转码-H264，
+liveprocessor_H265： 直播转码-H265，
+topspeed_H264：极速高清-H264，
+topspeed_H265：极速高清-H265。
          * @type {string || null}
          */
         this.ModuleCodec = null;
@@ -5948,7 +5966,7 @@ topspeed_H265 =》极速高清-H265。
         this.Bitrate = null;
 
         /**
-         * 类型，包含：转码(Transcode)，混流(MixStream)，水印(WaterMark)。
+         * 类型，包含：转码（Transcode），混流（MixStream），水印（WaterMark）。
          * @type {string || null}
          */
         this.Type = null;
@@ -6139,7 +6157,7 @@ class AddLiveDomainRequest extends  AbstractModel {
 }
 
 /**
- * 流名称列表
+ * 流名称列表。
  * @class
  */
 class StreamName extends  AbstractModel {
@@ -6166,16 +6184,14 @@ class StreamName extends  AbstractModel {
 
         /**
          * 推流开始时间。
-UTC格式时间，
-例如：2019-01-07T12:00:00Z。
+UTC格式时间，例如：2019-01-07T12:00:00Z。
          * @type {string || null}
          */
         this.StreamStartTime = null;
 
         /**
          * 推流结束时间。
-UTC格式时间，
-例如：2019-01-07T15:00:00Z。
+UTC格式时间，例如：2019-01-07T15:00:00Z。
          * @type {string || null}
          */
         this.StreamEndTime = null;
@@ -6193,7 +6209,7 @@ UTC格式时间，
         this.Duration = null;
 
         /**
-         * 主播IP。
+         * 主播 IP。
          * @type {string || null}
          */
         this.ClientIp = null;
@@ -6372,19 +6388,19 @@ class CdnPlayStatData extends  AbstractModel {
         super();
 
         /**
-         * 时间点，格式为yyyy-mm-dd HH:MM:SS。
+         * 时间点，格式: yyyy-mm-dd HH:MM:SS。
          * @type {string || null}
          */
         this.Time = null;
 
         /**
-         * 带宽，（单位Mbps）。
+         * 带宽，单位: Mbps。
          * @type {number || null}
          */
         this.Bandwidth = null;
 
         /**
-         * 流量，（单位MB）。
+         * 流量，单位: MB。
          * @type {number || null}
          */
         this.Flux = null;
@@ -6839,7 +6855,7 @@ class ModifyLiveRecordTemplateRequest extends  AbstractModel {
         super();
 
         /**
-         * 模板Id。
+         * 模板 ID。
          * @type {number || null}
          */
         this.TemplateId = null;
@@ -6857,37 +6873,37 @@ class ModifyLiveRecordTemplateRequest extends  AbstractModel {
         this.Description = null;
 
         /**
-         * Flv录制参数，开启Flv录制时设置。
+         * FLV 录制参数，开启 FLV 录制时设置。
          * @type {RecordParam || null}
          */
         this.FlvParam = null;
 
         /**
-         * Hls录制参数，开启hls录制时设置。
+         * HLS 录制参数，开启 HLS 录制时设置。
          * @type {RecordParam || null}
          */
         this.HlsParam = null;
 
         /**
-         * Mp4录制参数，开启Mp4录制时设置。
+         * MP4 录制参数，开启 MP4 录制时设置。
          * @type {RecordParam || null}
          */
         this.Mp4Param = null;
 
         /**
-         * Aac录制参数，开启Aac录制时设置。
+         * AAC 录制参数，开启 AAC 录制时设置。
          * @type {RecordParam || null}
          */
         this.AacParam = null;
 
         /**
-         * HLS录制定制参数
+         * HLS 录制定制参数。
          * @type {HlsSpecialParam || null}
          */
         this.HlsSpecialParam = null;
 
         /**
-         * Mp3录制参数，开启Mp3录制时设置。
+         * MP3 录制参数，开启 MP3 录制时设置。
          * @type {RecordParam || null}
          */
         this.Mp3Param = null;
@@ -6953,7 +6969,9 @@ class DeletePullStreamConfigRequest extends  AbstractModel {
         super();
 
         /**
-         * 配置id。
+         * 配置 ID。
+1. 在添加拉流配置接口 [CreatePullStreamConfig](/document/api/267/30159) 调用返回值中获取配置 ID。
+2. 可以从接口 [DescribePullStreamConfigs](/document/api/267/30158) 中查询已创建过的拉流配置列表。
          * @type {string || null}
          */
         this.ConfigId = null;
@@ -7204,8 +7222,7 @@ class DescribeLiveWatermarksResponse extends  AbstractModel {
 }
 
 /**
- * 水印信息
-
+ * 水印信息。
  * @class
  */
 class WatermarkInfo extends  AbstractModel {
@@ -7213,25 +7230,25 @@ class WatermarkInfo extends  AbstractModel {
         super();
 
         /**
-         * 水印ID。
+         * 水印 ID。
          * @type {number || null}
          */
         this.WatermarkId = null;
 
         /**
-         * 水印图片url。
+         * 水印图片 URL。
          * @type {string || null}
          */
         this.PictureUrl = null;
 
         /**
-         * 显示位置，X轴偏移。
+         * 显示位置，X 轴偏移。
          * @type {number || null}
          */
         this.XPosition = null;
 
         /**
-         * 显示位置，Y轴偏移。
+         * 显示位置，Y 轴偏移。
          * @type {number || null}
          */
         this.YPosition = null;
@@ -7255,13 +7272,13 @@ class WatermarkInfo extends  AbstractModel {
         this.CreateTime = null;
 
         /**
-         * 水印宽
+         * 水印宽。
          * @type {number || null}
          */
         this.Width = null;
 
         /**
-         * 水印高
+         * 水印高。
          * @type {number || null}
          */
         this.Height = null;
@@ -7579,7 +7596,7 @@ class DeleteLiveWatermarkRuleResponse extends  AbstractModel {
 }
 
 /**
- * 推流时间
+ * 推流时间。
  * @class
  */
 class PublishTime extends  AbstractModel {
@@ -7587,7 +7604,7 @@ class PublishTime extends  AbstractModel {
         super();
 
         /**
-         * 推流时间
+         * 推流时间。
 UTC 格式，例如：2018-06-29T19:00:00Z。
          * @type {string || null}
          */
@@ -7792,7 +7809,8 @@ class DeleteLiveWatermarkRequest extends  AbstractModel {
         super();
 
         /**
-         * 水印ID。
+         * 水印 ID。
+在添加水印接口 [AddLiveWatermark](/document/product/267/30154) 调用返回值中获取水印 ID。
          * @type {number || null}
          */
         this.WatermarkId = null;
@@ -7875,7 +7893,7 @@ class DescribeLiveDomainsRequest extends  AbstractModel {
 }
 
 /**
- * 获取省份/运营商的播放信息
+ * 获取省份/运营商的播放信息。
  * @class
  */
 class ProIspPlaySumInfo extends  AbstractModel {
@@ -7889,7 +7907,7 @@ class ProIspPlaySumInfo extends  AbstractModel {
         this.Name = null;
 
         /**
-         * 总流量，单位：MB。
+         * 总流量，单位: MB。
          * @type {number || null}
          */
         this.TotalFlux = null;
@@ -7901,7 +7919,7 @@ class ProIspPlaySumInfo extends  AbstractModel {
         this.TotalRequest = null;
 
         /**
-         * 平均下载流量，单位：MB/s
+         * 平均下载流量，单位: MB/s。
          * @type {number || null}
          */
         this.AvgFluxPerSecond = null;
@@ -7924,7 +7942,7 @@ class ProIspPlaySumInfo extends  AbstractModel {
 }
 
 /**
- * 截图模板信息
+ * 截图模板信息。
  * @class
  */
 class SnapshotTemplateInfo extends  AbstractModel {
@@ -7932,7 +7950,7 @@ class SnapshotTemplateInfo extends  AbstractModel {
         super();
 
         /**
-         * 模板Id。
+         * 模板 ID。
          * @type {number || null}
          */
         this.TemplateId = null;
@@ -7944,19 +7962,21 @@ class SnapshotTemplateInfo extends  AbstractModel {
         this.TemplateName = null;
 
         /**
-         * 截图时间间隔。5-300秒。
+         * 截图时间间隔，5-300秒。
          * @type {number || null}
          */
         this.SnapshotInterval = null;
 
         /**
-         * 截图宽度。0-3000 0原始宽度并适配原始比例
+         * 截图宽度，范围：0-3000。 
+0：原始宽度并适配原始比例。
          * @type {number || null}
          */
         this.Width = null;
 
         /**
-         * 截图高度。0-2000 0原始高度并适配原始比例
+         * 截图高度，范围：0-2000。
+0：原始高度并适配原始比例。
          * @type {number || null}
          */
         this.Height = null;
@@ -7968,7 +7988,7 @@ class SnapshotTemplateInfo extends  AbstractModel {
         this.PornFlag = null;
 
         /**
-         * Cos AppId。
+         * Cos 应用 ID。
          * @type {number || null}
          */
         this.CosAppId = null;
@@ -7986,7 +8006,7 @@ class SnapshotTemplateInfo extends  AbstractModel {
         this.CosRegion = null;
 
         /**
-         * 模板描述
+         * 模板描述。
          * @type {string || null}
          */
         this.Description = null;
@@ -8308,25 +8328,26 @@ class UpdateLiveWatermarkRequest extends  AbstractModel {
         super();
 
         /**
-         * 水印ID。
+         * 水印 ID。
+在添加水印接口 [AddLiveWatermark](/document/product/267/30154) 调用返回值中获取水印 ID。
          * @type {number || null}
          */
         this.WatermarkId = null;
 
         /**
-         * 水印图片url。
+         * 水印图片 URL。
          * @type {string || null}
          */
         this.PictureUrl = null;
 
         /**
-         * 显示位置，X轴偏移。
+         * 显示位置，X轴偏移，默认 0。
          * @type {number || null}
          */
         this.XPosition = null;
 
         /**
-         * 显示位置，Y轴偏移。
+         * 显示位置，Y轴偏移，默认 0。
          * @type {number || null}
          */
         this.YPosition = null;
@@ -8338,13 +8359,13 @@ class UpdateLiveWatermarkRequest extends  AbstractModel {
         this.WatermarkName = null;
 
         /**
-         * 水印宽度，占直播原始画面宽度百分比，建议高宽只设置一项，另外一项会自适应缩放，避免变形。
+         * 水印宽度，占直播原始画面宽度百分比，建议高宽只设置一项，另外一项会自适应缩放，避免变形。默认原始宽度。
          * @type {number || null}
          */
         this.Width = null;
 
         /**
-         * 水印高度，占直播原始画面宽度百分比，建议高宽只设置一项，另外一项会自适应缩放，避免变形。
+         * 水印高度，占直播原始画面宽度百分比，建议高宽只设置一项，另外一项会自适应缩放，避免变形。默认原始高度。
          * @type {number || null}
          */
         this.Height = null;
@@ -8370,7 +8391,7 @@ class UpdateLiveWatermarkRequest extends  AbstractModel {
 }
 
 /**
- * 证书信息
+ * 证书信息。
  * @class
  */
 class CertInfo extends  AbstractModel {
@@ -8378,7 +8399,7 @@ class CertInfo extends  AbstractModel {
         super();
 
         /**
-         * 证书Id。
+         * 证书 ID。
          * @type {number || null}
          */
         this.CertId = null;
@@ -8396,7 +8417,7 @@ class CertInfo extends  AbstractModel {
         this.Description = null;
 
         /**
-         * 创建时间，UTC格式。
+         * 创建时间，UTC 格式。
          * @type {string || null}
          */
         this.CreateTime = null;
@@ -8408,15 +8429,15 @@ class CertInfo extends  AbstractModel {
         this.HttpsCrt = null;
 
         /**
-         * 证书类型。
-0：腾讯云托管证书
+         * 证书类型:
+0：腾讯云托管证书。
 1：用户添加证书。
          * @type {number || null}
          */
         this.CertType = null;
 
         /**
-         * 证书过期时间，UTC格式。
+         * 证书过期时间，UTC 格式。
          * @type {string || null}
          */
         this.CertExpireTime = null;
@@ -8569,7 +8590,7 @@ class DescribeLiveCallbackRulesRequest extends  AbstractModel {
 }
 
 /**
- * 客户端ip播放汇总信息
+ * 客户端ip播放汇总信息。
  * @class
  */
 class ClientIpPlaySumInfo extends  AbstractModel {
@@ -8577,7 +8598,7 @@ class ClientIpPlaySumInfo extends  AbstractModel {
         super();
 
         /**
-         * 客户端ip，点分型。
+         * 客户端 IP，点分型。
          * @type {string || null}
          */
         this.ClientIp = null;
@@ -9100,7 +9121,7 @@ class CreateLiveRecordTemplateResponse extends  AbstractModel {
 }
 
 /**
- * 录制模板参数
+ * 录制模板参数。
  * @class
  */
 class RecordParam extends  AbstractModel {
@@ -9109,8 +9130,8 @@ class RecordParam extends  AbstractModel {
 
         /**
          * 录制间隔。
-单位秒，默认值1800。
-取值范围:300-7200。
+单位秒，默认：1800。
+取值范围：300-7200。
 此参数对 HLS 无效，当录制 HLS 时从推流到断流生成一个文件。
          * @type {number || null}
          */
@@ -9118,20 +9139,20 @@ class RecordParam extends  AbstractModel {
 
         /**
          * 录制存储时长。
-单位秒，取值范围： 0-93312000。
-0表示永久存储。
+单位秒，取值范围： 0 - 93312000。
+0：表示永久存储。
          * @type {number || null}
          */
         this.StorageTime = null;
 
         /**
-         * 是否开启当前格式录制，0 否 1是。默认值0。
+         * 是否开启当前格式录制，默认值为0，0：否， 1：是。
          * @type {number || null}
          */
         this.Enable = null;
 
         /**
-         * 点播子应用ID。
+         * 点播子应用 ID。
          * @type {number || null}
          */
         this.VodSubAppId = null;
@@ -9154,7 +9175,7 @@ class RecordParam extends  AbstractModel {
 }
 
 /**
- * 每个域名的统计信息
+ * 每个域名的统计信息。
  * @class
  */
 class DomainDetailInfo extends  AbstractModel {
@@ -9162,19 +9183,21 @@ class DomainDetailInfo extends  AbstractModel {
         super();
 
         /**
-         * 国内还是国外，可选值包括Mainland和Oversea，如果为“Mainland”，表示国内数据；如果为“Oversea”，表示国外数据。
+         * 国内还是国外:
+Mainland: 表示国内数据。
+Oversea: 表示国外数据。
          * @type {string || null}
          */
         this.MainlandOrOversea = null;
 
         /**
-         * 带宽，单位是Mbps。
+         * 带宽，单位: Mbps。
          * @type {number || null}
          */
         this.Bandwidth = null;
 
         /**
-         * 流量，单位是MB。
+         * 流量，单位: MB。
          * @type {number || null}
          */
         this.Flux = null;
@@ -9260,6 +9283,7 @@ class DeleteLiveRecordRequest extends  AbstractModel {
 
         /**
          * 任务ID，全局唯一标识录制任务。
+从接口 [CreateLiveRecord](/document/product/267/30148) 的返回值中获取TaskId。
          * @type {number || null}
          */
         this.TaskId = null;
@@ -9849,7 +9873,7 @@ class DeleteLiveCallbackRuleRequest extends  AbstractModel {
         this.DomainName = null;
 
         /**
-         * 推流路径，与推流和播放地址中的AppName保持一致，默认为live。
+         * 推流路径，与推流和播放地址中的 AppName 保持一致，默认为 live。
          * @type {string || null}
          */
         this.AppName = null;
@@ -9870,7 +9894,7 @@ class DeleteLiveCallbackRuleRequest extends  AbstractModel {
 }
 
 /**
- * 播放鉴权key信息
+ * 播放鉴权key信息。
  * @class
  */
 class PlayAuthKeyInfo extends  AbstractModel {
@@ -9884,13 +9908,15 @@ class PlayAuthKeyInfo extends  AbstractModel {
         this.DomainName = null;
 
         /**
-         * 是否启用，0：关闭，1：启用。
+         * 是否启用:
+0: 关闭。
+1: 启用。
          * @type {number || null}
          */
         this.Enable = null;
 
         /**
-         * 鉴权key。
+         * 鉴权 Key。
          * @type {string || null}
          */
         this.AuthKey = null;
@@ -9902,7 +9928,7 @@ class PlayAuthKeyInfo extends  AbstractModel {
         this.AuthDelta = null;
 
         /**
-         * 鉴权BackKey。
+         * 鉴权 BackKey。
          * @type {string || null}
          */
         this.AuthBackKey = null;
@@ -9934,7 +9960,7 @@ class ModifyLiveTranscodeTemplateRequest extends  AbstractModel {
         super();
 
         /**
-         * 模板Id。
+         * 模板 Id。
          * @type {number || null}
          */
         this.TemplateId = null;
@@ -9954,7 +9980,8 @@ aac/mp3。
         this.Acodec = null;
 
         /**
-         * 音频码率，默认0。0-500
+         * 音频码率，默认0。
+范围：0-500。
          * @type {number || null}
          */
         this.AudioBitrate = null;
@@ -9966,13 +9993,14 @@ aac/mp3。
         this.Description = null;
 
         /**
-         * 视频码率。100-8000
+         * 视频码率。
+范围：100-8000。
          * @type {number || null}
          */
         this.VideoBitrate = null;
 
         /**
-         * 宽。0-3000
+         * 宽。0-3000。
          * @type {number || null}
          */
         this.Width = null;
@@ -9990,25 +10018,26 @@ aac/mp3。
         this.NeedAudio = null;
 
         /**
-         * 高。0-3000
+         * 高。0-3000。
          * @type {number || null}
          */
         this.Height = null;
 
         /**
-         * 帧率。0-200
+         * 帧率。0-200。
          * @type {number || null}
          */
         this.Fps = null;
 
         /**
-         * 关键帧间隔，单位：秒。0-50
+         * 关键帧间隔，单位：秒。0-50。
          * @type {number || null}
          */
         this.Gop = null;
 
         /**
-         * 旋转角度。0 90 180 270
+         * 旋转角度。
+0 90 180 270。
          * @type {number || null}
          */
         this.Rotate = null;
@@ -10039,7 +10068,7 @@ baseline/main/high。
         this.FpsToOrig = null;
 
         /**
-         * 急速高清相比VideoBitrate少多少码率，0.1到0.5
+         * 极速高清相比 VideoBitrate 少多少码率，0.1到0.5。
          * @type {number || null}
          */
         this.AdaptBitratePercent = null;
@@ -10441,7 +10470,7 @@ class CallBackRuleInfo extends  AbstractModel {
         this.UpdateTime = null;
 
         /**
-         * 模板Id。
+         * 模板 ID。
          * @type {number || null}
          */
         this.TemplateId = null;
@@ -10477,7 +10506,7 @@ class CallBackRuleInfo extends  AbstractModel {
 }
 
 /**
- * 播放汇总统计信息
+ * 播放汇总统计信息。
  * @class
  */
 class PlaySumStatInfo extends  AbstractModel {
@@ -10485,19 +10514,21 @@ class PlaySumStatInfo extends  AbstractModel {
         super();
 
         /**
-         * 域名或流id。
+         * 域名或流 ID。
          * @type {string || null}
          */
         this.Name = null;
 
         /**
-         * 平均下载速度，单位是MB/s，计算公式是每分钟的下载速度求平均值。
+         * 平均下载速度，
+单位: MB/s。
+计算公式: 每分钟的下载速度求平均值。
          * @type {number || null}
          */
         this.AvgFluxPerSecond = null;
 
         /**
-         * 总流量，单位是MB。
+         * 总流量，单位: MB。
          * @type {number || null}
          */
         this.TotalFlux = null;
@@ -10824,13 +10855,13 @@ class DescribeLiveStreamOnlineListRequest extends  AbstractModel {
         super();
 
         /**
-         * 推流域名。多域名用户需要填写DomainName。
+         * 推流域名。多域名用户需要填写 DomainName。
          * @type {string || null}
          */
         this.DomainName = null;
 
         /**
-         * 推流路径，与推流和播放地址中的AppName保持一致，默认为 live。多路径用户需要填写AppName。
+         * 推流路径，与推流和播放地址中的 AppName 保持一致，默认为 live。多路径用户需要填写 AppName。
          * @type {string || null}
          */
         this.AppName = null;
@@ -10910,7 +10941,7 @@ class ModifyLiveCallbackTemplateRequest extends  AbstractModel {
         super();
 
         /**
-         * 模板Id。
+         * 模板 ID。
          * @type {number || null}
          */
         this.TemplateId = null;
@@ -10928,37 +10959,38 @@ class ModifyLiveCallbackTemplateRequest extends  AbstractModel {
         this.Description = null;
 
         /**
-         * 开播回调URL。
+         * 开播回调 URL。
          * @type {string || null}
          */
         this.StreamBeginNotifyUrl = null;
 
         /**
-         * 断流回调URL。
+         * 断流回调 URL。
          * @type {string || null}
          */
         this.StreamEndNotifyUrl = null;
 
         /**
-         * 录制回调URL。
+         * 录制回调 URL。
          * @type {string || null}
          */
         this.RecordNotifyUrl = null;
 
         /**
-         * 截图回调URL。
+         * 截图回调 URL。
          * @type {string || null}
          */
         this.SnapshotNotifyUrl = null;
 
         /**
-         * 鉴黄回调URL。
+         * 鉴黄回调 URL。
          * @type {string || null}
          */
         this.PornCensorshipNotifyUrl = null;
 
         /**
-         * 回调key，回调URL公用，鉴权回调说明详见回调格式文档。
+         * 回调 Key，回调 URL 公用，回调签名详见事件消息通知文档。
+[事件消息通知](/document/product/267/32744)。
          * @type {string || null}
          */
         this.CallbackKey = null;
@@ -11105,7 +11137,7 @@ class DescribeLivePushAuthKeyRequest extends  AbstractModel {
 }
 
 /**
- * 按省份运营商查询的播放信息
+ * 按省份运营商查询的播放信息。
  * @class
  */
 class PlayStatInfo extends  AbstractModel {
@@ -11119,7 +11151,7 @@ class PlayStatInfo extends  AbstractModel {
         this.Time = null;
 
         /**
-         * 带宽/流量/请求数/并发连接数/下载速度的值，若没数据返回时该值为0
+         * 带宽/流量/请求数/并发连接数/下载速度的值，若没数据返回时该值为0。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
@@ -11149,7 +11181,9 @@ class DescribeLiveCallbackTemplateRequest extends  AbstractModel {
         super();
 
         /**
-         * 模板Id。
+         * 模板 ID。
+1. 在创建回调模板接口 [CreateLiveCallbackTemplate](/document/product/267/32637) 调用的返回值中获取模板 ID。
+2. 可以从接口 [DescribeLiveCallbackTemplates](/document/product/267/32632) 查询已经创建的过的模板列表。
          * @type {number || null}
          */
         this.TemplateId = null;
@@ -11177,7 +11211,7 @@ class ModifyLiveSnapshotTemplateRequest extends  AbstractModel {
         super();
 
         /**
-         * 模板Id。
+         * 模板 ID。
          * @type {number || null}
          */
         this.TemplateId = null;
@@ -11216,13 +11250,15 @@ class ModifyLiveSnapshotTemplateRequest extends  AbstractModel {
         this.Height = null;
 
         /**
-         * 是否开启鉴黄，0：不开启，1：开启。
+         * 是否开启鉴黄，默认 0 。
+0：不开启。
+1：开启。
          * @type {number || null}
          */
         this.PornFlag = null;
 
         /**
-         * Cos AppId。
+         * Cos 应用 ID。
          * @type {number || null}
          */
         this.CosAppId = null;
@@ -11529,10 +11565,9 @@ class DescribeLiveRecordTemplatesRequest extends  AbstractModel {
         super();
 
         /**
-         * 是否属于慢直播模板。默认：0。
-示例：
-0 - 标准直播。
-1 - 慢直播。
+         * 是否属于慢直播模板，默认：0。
+0： 标准直播。
+1：慢直播。
          * @type {number || null}
          */
         this.IsDelayLive = null;
@@ -11592,7 +11627,7 @@ class DescribeLiveDomainResponse extends  AbstractModel {
 }
 
 /**
- * 流维度的播放信息
+ * 流维度的播放信息。
  * @class
  */
 class PlayDataInfoByStream extends  AbstractModel {
@@ -11606,7 +11641,7 @@ class PlayDataInfoByStream extends  AbstractModel {
         this.StreamName = null;
 
         /**
-         * 总流量（单位MB）。
+         * 总流量，单位: MB。
          * @type {number || null}
          */
         this.TotalFlux = null;
@@ -11754,7 +11789,7 @@ class CreateLiveSnapshotRuleResponse extends  AbstractModel {
 }
 
 /**
- * 延播信息
+ * 延播信息。
  * @class
  */
 class DelayInfo extends  AbstractModel {
@@ -11768,7 +11803,8 @@ class DelayInfo extends  AbstractModel {
         this.DomainName = null;
 
         /**
-         * 推流路径，与推流和播放地址中的AppName保持一致，默认为 live。
+         * 推流路径，与推流和播放地址中的 
+ AppName 保持一致，默认为 live。
          * @type {string || null}
          */
         this.AppName = null;
@@ -11786,7 +11822,7 @@ class DelayInfo extends  AbstractModel {
         this.DelayInterval = null;
 
         /**
-         * 创建时间，UTC时间。
+         * 创建时间，UTC 时间。
 注意：UTC时间和北京时间相差8小时。
 例如：2019-06-18T12:00:00Z（为北京时间 2019 年 6 月 18 日 20 点 0 分 0 秒）。
          * @type {string || null}
@@ -11794,7 +11830,7 @@ class DelayInfo extends  AbstractModel {
         this.CreateTime = null;
 
         /**
-         * 过期时间，UTC时间。
+         * 过期时间，UTC 时间。
 注意：UTC时间和北京时间相差8小时。
 例如：2019-06-18T12:00:00Z（为北京时间 2019 年 6 月 18 日 20 点 0 分 0 秒）。
          * @type {string || null}
@@ -11802,8 +11838,8 @@ class DelayInfo extends  AbstractModel {
         this.ExpireTime = null;
 
         /**
-         * 当前状态，
--1：已过期，
+         * 当前状态:
+-1：已过期。
 1： 生效中。
          * @type {number || null}
          */
@@ -12192,7 +12228,7 @@ class CreateLiveRecordTemplateRequest extends  AbstractModel {
         super();
 
         /**
-         * 模板名。非空的字符串
+         * 模板名。仅支持中文、英文、数字、_、-。
          * @type {string || null}
          */
         this.TemplateName = null;
@@ -12228,7 +12264,8 @@ class CreateLiveRecordTemplateRequest extends  AbstractModel {
         this.AacParam = null;
 
         /**
-         * 0：普通直播，
+         * 直播类型，默认 0。
+0：普通直播，
 1：慢直播。
          * @type {number || null}
          */

@@ -290,7 +290,7 @@ class LiveClient extends AbstractClient {
     }
 
     /**
-     * 查询水印列表
+     * 查询水印列表。
      * @param {DescribeLiveWatermarksRequest} req
      * @param {function(string, DescribeLiveWatermarksResponse):void} cb
      * @public
@@ -337,7 +337,7 @@ class LiveClient extends AbstractClient {
     }
 
     /**
-     * 更新水印
+     * 更新水印。
      * @param {UpdateLiveWatermarkRequest} req
      * @param {function(string, UpdateLiveWatermarkResponse):void} cb
      * @public
@@ -348,7 +348,7 @@ class LiveClient extends AbstractClient {
     }
 
     /**
-     * 修改截图模板配置
+     * 修改截图模板配置。
      * @param {ModifyLiveSnapshotTemplateRequest} req
      * @param {function(string, ModifyLiveSnapshotTemplateResponse):void} cb
      * @public
@@ -359,7 +359,7 @@ class LiveClient extends AbstractClient {
     }
 
     /**
-     * 修改录制模板配置
+     * 修改录制模板配置。
      * @param {ModifyLiveRecordTemplateRequest} req
      * @param {function(string, ModifyLiveRecordTemplateResponse):void} cb
      * @public
@@ -494,7 +494,7 @@ class LiveClient extends AbstractClient {
     }
 
     /**
-     * 获取录制模板列表
+     * 获取录制模板列表。
      * @param {DescribeLiveRecordTemplatesRequest} req
      * @param {function(string, DescribeLiveRecordTemplatesResponse):void} cb
      * @public
@@ -560,7 +560,7 @@ class LiveClient extends AbstractClient {
     }
 
     /**
-     * 删除回调规则
+     * 删除回调规则。
      * @param {DeleteLiveCallbackRuleRequest} req
      * @param {function(string, DeleteLiveCallbackRuleResponse):void} cb
      * @public
@@ -594,7 +594,7 @@ class LiveClient extends AbstractClient {
     }
 
     /**
-     * 返回正在直播中的流列表
+     * 返回正在直播中的流列表。
      * @param {DescribeLiveStreamOnlineListRequest} req
      * @param {function(string, DescribeLiveStreamOnlineListResponse):void} cb
      * @public
@@ -605,7 +605,7 @@ class LiveClient extends AbstractClient {
     }
 
     /**
-     * 删除回调模板
+     * 删除回调模板。
      * @param {DeleteLiveCallbackTemplateRequest} req
      * @param {function(string, DeleteLiveCallbackTemplateResponse):void} cb
      * @public
@@ -627,7 +627,7 @@ class LiveClient extends AbstractClient {
     }
 
     /**
-     * 删除直播拉流配置
+     * 删除直播拉流配置。
      * @param {DeletePullStreamConfigRequest} req
      * @param {function(string, DeletePullStreamConfigResponse):void} cb
      * @public
@@ -638,7 +638,7 @@ class LiveClient extends AbstractClient {
     }
 
     /**
-     * 获取单个录制模板
+     * 获取单个录制模板。
      * @param {DescribeLiveRecordTemplateRequest} req
      * @param {function(string, DescribeLiveRecordTemplateResponse):void} cb
      * @public
@@ -661,7 +661,7 @@ class LiveClient extends AbstractClient {
     }
 
     /**
-     * 删除水印
+     * 删除水印。
      * @param {DeleteLiveWatermarkRequest} req
      * @param {function(string, DeleteLiveWatermarkResponse):void} cb
      * @public
@@ -719,7 +719,7 @@ class LiveClient extends AbstractClient {
     }
 
     /**
-     * 修改转码模板配置
+     * 修改转码模板配置。
      * @param {ModifyLiveTranscodeTemplateRequest} req
      * @param {function(string, ModifyLiveTranscodeTemplateResponse):void} cb
      * @public
@@ -741,7 +741,7 @@ class LiveClient extends AbstractClient {
     }
 
     /**
-     * 删除截图规则
+     * 删除截图规则。
      * @param {DeleteLiveSnapshotRuleRequest} req
      * @param {function(string, DeleteLiveSnapshotRuleResponse):void} cb
      * @public
@@ -752,7 +752,7 @@ class LiveClient extends AbstractClient {
     }
 
     /**
-     * 获取禁推流列表
+     * 获取禁推流列表。
      * @param {DescribeLiveForbidStreamListRequest} req
      * @param {function(string, DescribeLiveForbidStreamListResponse):void} cb
      * @public
@@ -807,7 +807,7 @@ class LiveClient extends AbstractClient {
     }
 
     /**
-     * 创建回调模板，成功返回模板id后，需要调用[CreateLiveCallbackRule](/document/product/267/32638)接口将模板id绑定到域名/路径使用。
+     * 创建回调模板，成功返回模板id后，需要调用[CreateLiveCallbackRule](/document/product/267/32638)接口将模板 ID 绑定到域名/路径使用。
 <br>回调协议相关文档：[事件消息通知](/document/product/267/32744)。
      * @param {CreateLiveCallbackTemplateRequest} req
      * @param {function(string, CreateLiveCallbackTemplateResponse):void} cb
@@ -830,7 +830,7 @@ class LiveClient extends AbstractClient {
     }
 
     /**
-     * 获取单个回调模板
+     * 获取单个回调模板。
      * @param {DescribeLiveCallbackTemplateRequest} req
      * @param {function(string, DescribeLiveCallbackTemplateResponse):void} cb
      * @public
@@ -908,7 +908,7 @@ class LiveClient extends AbstractClient {
     }
 
     /**
-     * 获取单个截图模板
+     * 获取单个截图模板。
      * @param {DescribeLiveSnapshotTemplateRequest} req
      * @param {function(string, DescribeLiveSnapshotTemplateResponse):void} cb
      * @public
@@ -930,7 +930,7 @@ class LiveClient extends AbstractClient {
     }
 
     /**
-     * 获取截图模板列表
+     * 获取截图模板列表。
      * @param {DescribeLiveSnapshotTemplatesRequest} req
      * @param {function(string, DescribeLiveSnapshotTemplatesResponse):void} cb
      * @public
@@ -1040,7 +1040,7 @@ class LiveClient extends AbstractClient {
     }
 
     /**
-     * 删除录制规则
+     * 删除录制规则。
      * @param {DeleteLiveRecordRuleRequest} req
      * @param {function(string, DeleteLiveRecordRuleResponse):void} cb
      * @public
@@ -1167,7 +1167,7 @@ class LiveClient extends AbstractClient {
     }
 
     /**
-     * 获取单个水印信息
+     * 获取单个水印信息。
      * @param {DescribeLiveWatermarkRequest} req
      * @param {function(string, DescribeLiveWatermarkResponse):void} cb
      * @public
@@ -1235,7 +1235,7 @@ class LiveClient extends AbstractClient {
     }
 
     /**
-     * 获取水印规则列表
+     * 获取水印规则列表。
      * @param {DescribeLiveWatermarkRulesRequest} req
      * @param {function(string, DescribeLiveWatermarkRulesResponse):void} cb
      * @public
@@ -1257,8 +1257,9 @@ class LiveClient extends AbstractClient {
     }
 
     /**
-     * 创建截图规则，需要先调用[CreateLiveSnapshotTemplate](/document/product/267/32624)接口创建截图模板，然后将返回的模板id绑定到流进行使用。
+     * 创建截图规则，需要先调用[CreateLiveSnapshotTemplate](/document/product/267/32624)接口创建截图模板，然后将返回的模板 ID 绑定到流进行使用。
 <br>截图相关文档：[直播截图](/document/product/267/32737)。
+注意：单个域名仅支持关联一个截图模板。
      * @param {CreateLiveSnapshotRuleRequest} req
      * @param {function(string, CreateLiveSnapshotRuleResponse):void} cb
      * @public
@@ -1302,7 +1303,7 @@ class LiveClient extends AbstractClient {
     }
 
     /**
-     * 删除录制模板
+     * 删除录制模板。
      * @param {DeleteLiveRecordTemplateRequest} req
      * @param {function(string, DeleteLiveRecordTemplateResponse):void} cb
      * @public

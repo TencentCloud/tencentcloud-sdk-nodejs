@@ -19,26 +19,35 @@ const AbstractClient = require('../../common/abstract_client')
 const DescribeSpecInfoRequest = models.DescribeSpecInfoRequest;
 const CreateDBInstanceRequest = models.CreateDBInstanceRequest;
 const IsolateDBInstanceRequest = models.IsolateDBInstanceRequest;
+const DBInstancePrice = models.DBInstancePrice;
 const DescribeBackupAccessResponse = models.DescribeBackupAccessResponse;
 const DescribeSlowLogPatternsResponse = models.DescribeSlowLogPatternsResponse;
+const SlowLogPattern = models.SlowLogPattern;
 const CreateDBInstanceHourRequest = models.CreateDBInstanceHourRequest;
 const AssignProjectRequest = models.AssignProjectRequest;
 const DescribeSlowLogsResponse = models.DescribeSlowLogsResponse;
 const ClientConnection = models.ClientConnection;
+const InquirePriceModifyDBInstanceSpecRequest = models.InquirePriceModifyDBInstanceSpecRequest;
 const BackupInfo = models.BackupInfo;
+const InquirePriceRenewDBInstancesRequest = models.InquirePriceRenewDBInstancesRequest;
 const DescribeDBInstancesRequest = models.DescribeDBInstancesRequest;
 const SpecificationInfo = models.SpecificationInfo;
 const DescribeSlowLogsRequest = models.DescribeSlowLogsRequest;
 const DescribeSlowLogPatternsRequest = models.DescribeSlowLogPatternsRequest;
+const InquirePriceModifyDBInstanceSpecResponse = models.InquirePriceModifyDBInstanceSpecResponse;
+const SpecItem = models.SpecItem;
 const DescribeSpecInfoResponse = models.DescribeSpecInfoResponse;
+const InquirePriceRenewDBInstancesResponse = models.InquirePriceRenewDBInstancesResponse;
 const TagInfo = models.TagInfo;
 const DescribeDBInstancesResponse = models.DescribeDBInstancesResponse;
 const OfflineIsolatedDBInstanceRequest = models.OfflineIsolatedDBInstanceRequest;
-const SlowLogPattern = models.SlowLogPattern;
+const DescribeDBInstanceDealRequest = models.DescribeDBInstanceDealRequest;
+const InquirePriceCreateDBInstancesRequest = models.InquirePriceCreateDBInstancesRequest;
 const CreateDBInstanceResponse = models.CreateDBInstanceResponse;
 const AssignProjectResponse = models.AssignProjectResponse;
 const DescribeDBBackupsRequest = models.DescribeDBBackupsRequest;
 const DescribeClientConnectionsRequest = models.DescribeClientConnectionsRequest;
+const DescribeDBInstanceDealResponse = models.DescribeDBInstanceDealResponse;
 const ModifyDBInstanceSpecResponse = models.ModifyDBInstanceSpecResponse;
 const ShardInfo = models.ShardInfo;
 const OfflineIsolatedDBInstanceResponse = models.OfflineIsolatedDBInstanceResponse;
@@ -55,7 +64,7 @@ const InstanceDetail = models.InstanceDetail;
 const ModifyDBInstanceSpecRequest = models.ModifyDBInstanceSpecRequest;
 const CreateDBInstanceHourResponse = models.CreateDBInstanceHourResponse;
 const InstanceChargePrepaid = models.InstanceChargePrepaid;
-const SpecItem = models.SpecItem;
+const InquirePriceCreateDBInstancesResponse = models.InquirePriceCreateDBInstancesResponse;
 const RenewDBInstancesRequest = models.RenewDBInstancesRequest;
 
 
@@ -81,6 +90,17 @@ class MongodbClient extends AbstractClient {
     }
 
     /**
+     * 本接口 (InquirePriceModifyDBInstanceSpec) 用于调整实例的配置询价。
+     * @param {InquirePriceModifyDBInstanceSpecRequest} req
+     * @param {function(string, InquirePriceModifyDBInstanceSpecResponse):void} cb
+     * @public
+     */
+    InquirePriceModifyDBInstanceSpec(req, cb) {
+        let resp = new InquirePriceModifyDBInstanceSpecResponse();
+        this.request("InquirePriceModifyDBInstanceSpec", req, resp, cb);
+    }
+
+    /**
      * 本接口(AssignProject)用于指定云数据库实例的所属项目。
 
      * @param {AssignProjectRequest} req
@@ -101,6 +121,28 @@ class MongodbClient extends AbstractClient {
     DescribeSlowLogs(req, cb) {
         let resp = new DescribeSlowLogsResponse();
         this.request("DescribeSlowLogs", req, resp, cb);
+    }
+
+    /**
+     * 本接口 (InquiryPriceRenewDBInstances) 用于续费包年包月实例询价。
+     * @param {InquirePriceRenewDBInstancesRequest} req
+     * @param {function(string, InquirePriceRenewDBInstancesResponse):void} cb
+     * @public
+     */
+    InquirePriceRenewDBInstances(req, cb) {
+        let resp = new InquirePriceRenewDBInstancesResponse();
+        this.request("InquirePriceRenewDBInstances", req, resp, cb);
+    }
+
+    /**
+     * 本接口（DescribeDBInstanceDeal）用于获取MongoDB购买、续费及变配订单详细。
+     * @param {DescribeDBInstanceDealRequest} req
+     * @param {function(string, DescribeDBInstanceDealResponse):void} cb
+     * @public
+     */
+    DescribeDBInstanceDeal(req, cb) {
+        let resp = new DescribeDBInstanceDealResponse();
+        this.request("DescribeDBInstanceDeal", req, resp, cb);
     }
 
     /**
@@ -200,6 +242,17 @@ class MongodbClient extends AbstractClient {
     DescribeDBBackups(req, cb) {
         let resp = new DescribeDBBackupsResponse();
         this.request("DescribeDBBackups", req, resp, cb);
+    }
+
+    /**
+     * 本接口用于创建数据库实例询价。本接口参数中必须传入region参数，否则无法通过校验。本接口仅允许针对购买限制范围内的实例配置进行询价。
+     * @param {InquirePriceCreateDBInstancesRequest} req
+     * @param {function(string, InquirePriceCreateDBInstancesResponse):void} cb
+     * @public
+     */
+    InquirePriceCreateDBInstances(req, cb) {
+        let resp = new InquirePriceCreateDBInstancesResponse();
+        this.request("InquirePriceCreateDBInstances", req, resp, cb);
     }
 
     /**

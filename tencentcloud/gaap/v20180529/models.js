@@ -2759,13 +2759,13 @@ class RuleInfo extends  AbstractModel {
         this.Scheduler = null;
 
         /**
-         * 是否开启健康检查标志，1开启，0关闭
+         * 是否开启健康检查标志，1表示开启，0表示关闭
          * @type {number || null}
          */
         this.HealthCheck = null;
 
         /**
-         * 规则状态，0运行中，1创建中，2销毁中，3绑定解绑源站中，4配置更新中
+         * 规则状态，0表示运行中，1表示创建中，2表示销毁中，3表示绑定解绑源站中，4表示配置更新中
          * @type {number || null}
          */
         this.RuleStatus = null;
@@ -2783,7 +2783,7 @@ class RuleInfo extends  AbstractModel {
         this.RealServerSet = null;
 
         /**
-         * 源站的服务状态，0：异常，1：正常。
+         * 源站的服务状态，0表示异常，1表示正常。
 未开启健康检查时，该状态始终未正常。
 只要有一个源站健康状态为异常时，该状态为异常，具体源站的状态请查看RealServerSet。
          * @type {number || null}
@@ -2850,7 +2850,7 @@ class RealServerStatus extends  AbstractModel {
         this.RealServerId = null;
 
         /**
-         * 0: 未被绑定 1：被规则或者监听器绑定。
+         * 0表示未被绑定 1表示被规则或者监听器绑定。
          * @type {number || null}
          */
         this.BindStatus = null;
@@ -3929,20 +3929,20 @@ class TCPListener extends  AbstractModel {
 
         /**
          * 监听器状态，其中：
-0， 运行中；
-1， 创建中；
-2，销毁中；
-3，源站调整中；
-4，配置变更中。
+0表示运行中；
+1表示创建中；
+2表示销毁中；
+3表示源站调整中；
+4表示配置变更中。
          * @type {number || null}
          */
         this.ListenerStatus = null;
 
         /**
          * 监听器源站访问策略，其中：
-rr，轮询；
-wrr，加权轮询；
-lc，最小连接数。
+rr表示轮询；
+wrr表示加权轮询；
+lc表示最小连接数。
          * @type {string || null}
          */
         this.Scheduler = null;
@@ -3961,16 +3961,16 @@ lc，最小连接数。
 
         /**
          * 监听器是否开启健康检查，其中：
-0，关闭；
-1，开启
+0表示关闭；
+1表示开启
          * @type {number || null}
          */
         this.HealthCheck = null;
 
         /**
          * 监听器绑定的源站状态， 其中：
-0，异常；
-1，正常。
+0表示异常；
+1表示正常。
          * @type {number || null}
          */
         this.BindStatus = null;
@@ -4305,11 +4305,11 @@ class HTTPSListener extends  AbstractModel {
 
         /**
          * 监听器状态，其中：
-0， 运行中；
-1， 创建中；
-2，销毁中；
-3，源站调整中；
-4，配置变更中。
+0表示运行中；
+1表示创建中；
+2表示销毁中；
+3表示源站调整中；
+4表示配置变更中。
          * @type {number || null}
          */
         this.ListenerStatus = null;
@@ -4724,16 +4724,16 @@ class ProxyStatus extends  AbstractModel {
         /**
          * 通道状态。
 其中：
-RUNNING，运行中；
-CREATING，创建中；
-DESTROYING，销毁中；
-OPENING，开启中；
-CLOSING，关闭中；
-CLOSED，已关闭；
-ADJUSTING，配置变更中；
-ISOLATING，隔离中；
-ISOLATED，已隔离；
-UNKNOWN，未知状态。
+RUNNING表示运行中；
+CREATING表示创建中；
+DESTROYING表示销毁中；
+OPENING表示开启中；
+CLOSING表示关闭中；
+CLOSED表示已关闭；
+ADJUSTING表示配置变更中；
+ISOLATING表示隔离中；
+ISOLATED表示已隔离；
+UNKNOWN表示未知状态。
          * @type {string || null}
          */
         this.Status = null;
@@ -5244,10 +5244,10 @@ class ProxyGroupInfo extends  AbstractModel {
         /**
          * 通道组状态。
 其中，
-0，运行中；
-1，创建中；
-4，销毁中；
-11，通道迁移中。
+0表示运行中；
+1表示创建中；
+4表示销毁中；
+11表示通道迁移中。
          * @type {string || null}
          */
         this.Status = null;
@@ -6094,11 +6094,11 @@ class HTTPListener extends  AbstractModel {
 
         /**
          * 监听器状态，其中：
-0， 运行中；
-1， 创建中；
-2，销毁中；
-3，源站调整中；
-4，配置变更中。
+0表示运行中；
+1表示创建中；
+2表示销毁中；
+3表示源站调整中；
+4表示配置变更中。
          * @type {number || null}
          */
         this.ListenerStatus = null;
@@ -6150,10 +6150,10 @@ class ProxyGroupDetail extends  AbstractModel {
 
         /**
          * 通道组状态：
-0 正常运行
-1 创建中
-4 销毁中
-11 迁移中
+0表示正常运行；
+1表示创建中；
+4表示销毁中；
+11表示迁移中；
          * @type {number || null}
          */
         this.Status = null;
@@ -7628,8 +7628,8 @@ class BindRealServer extends  AbstractModel {
 
         /**
          * 源站健康检查状态，其中：
-0，正常；
-1，异常。
+0表示正常；
+1表示异常。
 未开启健康检查状态时，该状态始终为正常。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
@@ -9584,11 +9584,11 @@ class UDPListener extends  AbstractModel {
 
         /**
          * 监听器状态，其中：
-0， 运行中；
-1， 创建中；
-2，销毁中；
-3，源站调整中；
-4，配置变更中。
+0表示运行中；
+1表示创建中；
+2表示销毁中；
+3表示源站调整中；
+4表示配置变更中。
          * @type {number || null}
          */
         this.ListenerStatus = null;
@@ -9600,7 +9600,7 @@ class UDPListener extends  AbstractModel {
         this.Scheduler = null;
 
         /**
-         * 监听器绑定源站状态， 0正常，1IP异常，2域名解析异常
+         * 监听器绑定源站状态， 0表示正常，1表示IP异常，2表示域名解析异常
          * @type {number || null}
          */
         this.BindStatus = null;
@@ -9708,17 +9708,17 @@ class ProxyInfo extends  AbstractModel {
 
         /**
          * 通道状态。其中：
-RUNNING，运行中；
-CREATING，创建中；
-DESTROYING，销毁中；
-OPENING，开启中；
-CLOSING，关闭中；
-CLOSED，已关闭；
-ADJUSTING，配置变更中；
-ISOLATING，隔离中（欠费触发）；
-ISOLATED，已隔离（欠费触发）；
-CLONING，复制中；
-UNKNOWN，未知状态。
+RUNNING表示运行中；
+CREATING表示创建中；
+DESTROYING表示销毁中；
+OPENING表示开启中；
+CLOSING表示关闭中；
+CLOSED表示已关闭；
+ADJUSTING表示配置变更中；
+ISOLATING表示隔离中（欠费触发）；
+ISOLATED表示已隔离（欠费触发）；
+CLONING表示复制中；
+UNKNOWN表示未知状态。
          * @type {string || null}
          */
         this.Status = null;
