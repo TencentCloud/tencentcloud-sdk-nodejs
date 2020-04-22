@@ -214,6 +214,49 @@ class IsolateDBInstanceRequest extends  AbstractModel {
 }
 
 /**
+ * 数据库实例价格
+ * @class
+ */
+class DBInstancePrice extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 单价
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.UnitPrice = null;
+
+        /**
+         * 原价
+         * @type {number || null}
+         */
+        this.OriginalPrice = null;
+
+        /**
+         * 折扣加
+         * @type {number || null}
+         */
+        this.DiscountPrice = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.UnitPrice = 'UnitPrice' in params ? params.UnitPrice : null;
+        this.OriginalPrice = 'OriginalPrice' in params ? params.OriginalPrice : null;
+        this.DiscountPrice = 'DiscountPrice' in params ? params.DiscountPrice : null;
+
+    }
+}
+
+/**
  * DescribeBackupAccess返回参数结构体
  * @class
  */
@@ -316,6 +359,55 @@ class DescribeSlowLogPatternsResponse extends  AbstractModel {
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 用于描述MongoDB数据库慢日志统计信息
+ * @class
+ */
+class SlowLogPattern extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 慢日志模式
+         * @type {string || null}
+         */
+        this.Pattern = null;
+
+        /**
+         * 最大执行时间
+         * @type {number || null}
+         */
+        this.MaxTime = null;
+
+        /**
+         * 平均执行时间
+         * @type {number || null}
+         */
+        this.AverageTime = null;
+
+        /**
+         * 该模式慢日志条数
+         * @type {number || null}
+         */
+        this.Total = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Pattern = 'Pattern' in params ? params.Pattern : null;
+        this.MaxTime = 'MaxTime' in params ? params.MaxTime : null;
+        this.AverageTime = 'AverageTime' in params ? params.AverageTime : null;
+        this.Total = 'Total' in params ? params.Total : null;
 
     }
 }
@@ -561,6 +653,48 @@ class ClientConnection extends  AbstractModel {
 }
 
 /**
+ * InquirePriceModifyDBInstanceSpec请求参数结构体
+ * @class
+ */
+class InquirePriceModifyDBInstanceSpecRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例ID，格式如：cmgo-p8vnipr5。与云数据库控制台页面中显示的实例ID相同。
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 变更配置后实例内存大小，单位：GB。
+         * @type {number || null}
+         */
+        this.Memory = null;
+
+        /**
+         * 变更配置后实例磁盘大小，单位：GB。
+         * @type {number || null}
+         */
+        this.Volume = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Memory = 'Memory' in params ? params.Memory : null;
+        this.Volume = 'Volume' in params ? params.Volume : null;
+
+    }
+}
+
+/**
  * 备份信息
  * @class
  */
@@ -644,6 +778,46 @@ class BackupInfo extends  AbstractModel {
         this.EndTime = 'EndTime' in params ? params.EndTime : null;
         this.Status = 'Status' in params ? params.Status : null;
         this.BackupMethod = 'BackupMethod' in params ? params.BackupMethod : null;
+
+    }
+}
+
+/**
+ * InquirePriceRenewDBInstances请求参数结构体
+ * @class
+ */
+class InquirePriceRenewDBInstancesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例ID，格式如：cmgo-p8vnipr5。与云数据库控制台页面中显示的实例ID相同，接口单次最多只支持5个实例进行操作。
+         * @type {Array.<string> || null}
+         */
+        this.InstanceIds = null;
+
+        /**
+         * 预付费模式（即包年包月）相关参数设置。通过该参数可以指定包年包月实例的续费时长、是否设置自动续费等属性。
+         * @type {InstanceChargePrepaid || null}
+         */
+        this.InstanceChargePrepaid = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
+
+        if (params.InstanceChargePrepaid) {
+            let obj = new InstanceChargePrepaid();
+            obj.deserialize(params.InstanceChargePrepaid)
+            this.InstanceChargePrepaid = obj;
+        }
 
     }
 }
@@ -937,6 +1111,214 @@ class DescribeSlowLogPatternsRequest extends  AbstractModel {
 }
 
 /**
+ * InquirePriceModifyDBInstanceSpec返回参数结构体
+ * @class
+ */
+class InquirePriceModifyDBInstanceSpecResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 价格。
+         * @type {DBInstancePrice || null}
+         */
+        this.Price = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Price) {
+            let obj = new DBInstancePrice();
+            obj.deserialize(params.Price)
+            this.Price = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * mongodb售卖规格
+ * @class
+ */
+class SpecItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 规格信息标识
+         * @type {string || null}
+         */
+        this.SpecCode = null;
+
+        /**
+         * 规格有效标志，取值：0-停止售卖，1-开放售卖
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * 规格有效标志，取值：0-停止售卖，1-开放售卖
+         * @type {number || null}
+         */
+        this.Cpu = null;
+
+        /**
+         * 内存规格，单位为MB
+         * @type {number || null}
+         */
+        this.Memory = null;
+
+        /**
+         * 默认磁盘规格，单位MB
+         * @type {number || null}
+         */
+        this.DefaultStorage = null;
+
+        /**
+         * 最大磁盘规格，单位MB
+         * @type {number || null}
+         */
+        this.MaxStorage = null;
+
+        /**
+         * 最小磁盘规格，单位MB
+         * @type {number || null}
+         */
+        this.MinStorage = null;
+
+        /**
+         * 可承载qps信息
+         * @type {number || null}
+         */
+        this.Qps = null;
+
+        /**
+         * 连接数限制
+         * @type {number || null}
+         */
+        this.Conns = null;
+
+        /**
+         * 实例mongodb版本信息
+         * @type {string || null}
+         */
+        this.MongoVersionCode = null;
+
+        /**
+         * 实例mongodb版本号
+         * @type {number || null}
+         */
+        this.MongoVersionValue = null;
+
+        /**
+         * 实例mongodb版本号（短）
+         * @type {string || null}
+         */
+        this.Version = null;
+
+        /**
+         * 存储引擎
+         * @type {string || null}
+         */
+        this.EngineName = null;
+
+        /**
+         * 集群类型，取值：1-分片集群，0-副本集集群
+         * @type {number || null}
+         */
+        this.ClusterType = null;
+
+        /**
+         * 最小副本集从节点数
+         * @type {number || null}
+         */
+        this.MinNodeNum = null;
+
+        /**
+         * 最大副本集从节点数
+         * @type {number || null}
+         */
+        this.MaxNodeNum = null;
+
+        /**
+         * 最小分片数
+         * @type {number || null}
+         */
+        this.MinReplicateSetNum = null;
+
+        /**
+         * 最大分片数
+         * @type {number || null}
+         */
+        this.MaxReplicateSetNum = null;
+
+        /**
+         * 最小分片从节点数
+         * @type {number || null}
+         */
+        this.MinReplicateSetNodeNum = null;
+
+        /**
+         * 最大分片从节点数
+         * @type {number || null}
+         */
+        this.MaxReplicateSetNodeNum = null;
+
+        /**
+         * 机器类型，取值：0-HIO，4-HIO10G
+         * @type {string || null}
+         */
+        this.MachineType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SpecCode = 'SpecCode' in params ? params.SpecCode : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.Cpu = 'Cpu' in params ? params.Cpu : null;
+        this.Memory = 'Memory' in params ? params.Memory : null;
+        this.DefaultStorage = 'DefaultStorage' in params ? params.DefaultStorage : null;
+        this.MaxStorage = 'MaxStorage' in params ? params.MaxStorage : null;
+        this.MinStorage = 'MinStorage' in params ? params.MinStorage : null;
+        this.Qps = 'Qps' in params ? params.Qps : null;
+        this.Conns = 'Conns' in params ? params.Conns : null;
+        this.MongoVersionCode = 'MongoVersionCode' in params ? params.MongoVersionCode : null;
+        this.MongoVersionValue = 'MongoVersionValue' in params ? params.MongoVersionValue : null;
+        this.Version = 'Version' in params ? params.Version : null;
+        this.EngineName = 'EngineName' in params ? params.EngineName : null;
+        this.ClusterType = 'ClusterType' in params ? params.ClusterType : null;
+        this.MinNodeNum = 'MinNodeNum' in params ? params.MinNodeNum : null;
+        this.MaxNodeNum = 'MaxNodeNum' in params ? params.MaxNodeNum : null;
+        this.MinReplicateSetNum = 'MinReplicateSetNum' in params ? params.MinReplicateSetNum : null;
+        this.MaxReplicateSetNum = 'MaxReplicateSetNum' in params ? params.MaxReplicateSetNum : null;
+        this.MinReplicateSetNodeNum = 'MinReplicateSetNodeNum' in params ? params.MinReplicateSetNodeNum : null;
+        this.MaxReplicateSetNodeNum = 'MaxReplicateSetNodeNum' in params ? params.MaxReplicateSetNodeNum : null;
+        this.MachineType = 'MachineType' in params ? params.MachineType : null;
+
+    }
+}
+
+/**
  * DescribeSpecInfo返回参数结构体
  * @class
  */
@@ -973,6 +1355,46 @@ class DescribeSpecInfoResponse extends  AbstractModel {
                 obj.deserialize(params.SpecInfoList[z]);
                 this.SpecInfoList.push(obj);
             }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * InquirePriceRenewDBInstances返回参数结构体
+ * @class
+ */
+class InquirePriceRenewDBInstancesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 价格
+         * @type {DBInstancePrice || null}
+         */
+        this.Price = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Price) {
+            let obj = new DBInstancePrice();
+            obj.deserialize(params.Price)
+            this.Price = obj;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -1093,36 +1515,18 @@ class OfflineIsolatedDBInstanceRequest extends  AbstractModel {
 }
 
 /**
- * 用于描述MongoDB数据库慢日志统计信息
+ * DescribeDBInstanceDeal请求参数结构体
  * @class
  */
-class SlowLogPattern extends  AbstractModel {
+class DescribeDBInstanceDealRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 慢日志模式
+         * 订单ID，通过CreateDBInstance等接口返回
          * @type {string || null}
          */
-        this.Pattern = null;
-
-        /**
-         * 最大执行时间
-         * @type {number || null}
-         */
-        this.MaxTime = null;
-
-        /**
-         * 平均执行时间
-         * @type {number || null}
-         */
-        this.AverageTime = null;
-
-        /**
-         * 该模式慢日志条数
-         * @type {number || null}
-         */
-        this.Total = null;
+        this.DealId = null;
 
     }
 
@@ -1133,10 +1537,98 @@ class SlowLogPattern extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Pattern = 'Pattern' in params ? params.Pattern : null;
-        this.MaxTime = 'MaxTime' in params ? params.MaxTime : null;
-        this.AverageTime = 'AverageTime' in params ? params.AverageTime : null;
-        this.Total = 'Total' in params ? params.Total : null;
+        this.DealId = 'DealId' in params ? params.DealId : null;
+
+    }
+}
+
+/**
+ * InquirePriceCreateDBInstances请求参数结构体
+ * @class
+ */
+class InquirePriceCreateDBInstancesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例所属区域名称，格式如：ap-guangzhou-2
+         * @type {string || null}
+         */
+        this.Zone = null;
+
+        /**
+         * 每个副本集内节点个数，当前副本集节点数固定为3，分片从节点数可选，具体参照查询云数据库的售卖规格返回参数
+         * @type {number || null}
+         */
+        this.NodeNum = null;
+
+        /**
+         * 实例内存大小，单位：GB
+         * @type {number || null}
+         */
+        this.Memory = null;
+
+        /**
+         * 实例硬盘大小，单位：GB
+         * @type {number || null}
+         */
+        this.Volume = null;
+
+        /**
+         * 版本号，具体支持的售卖版本请参照查询云数据库的售卖规格（DescribeSpecInfo）返回结果。参数与版本对应关系是MONGO_3_WT：MongoDB 3.2 WiredTiger存储引擎版本，MONGO_3_ROCKS：MongoDB 3.2 RocksDB存储引擎版本，MONGO_36_WT：MongoDB 3.6 WiredTiger存储引擎版本，MONGO_40_WT：MongoDB 4.0 WiredTiger存储引擎版本
+         * @type {string || null}
+         */
+        this.MongoVersion = null;
+
+        /**
+         * 机器类型，HIO：高IO型；HIO10G：高IO万兆型；STDS5：标准型
+         * @type {string || null}
+         */
+        this.MachineCode = null;
+
+        /**
+         * 实例数量, 最小值1，最大值为10
+         * @type {number || null}
+         */
+        this.GoodsNum = null;
+
+        /**
+         * 实例时长，单位：月，可选值包括[1,2,3,4,5,6,7,8,9,10,11,12,24,36]
+         * @type {number || null}
+         */
+        this.Period = null;
+
+        /**
+         * 实例类型，REPLSET-副本集，SHARD-分片集群，STANDALONE-单节点
+         * @type {string || null}
+         */
+        this.ClusterType = null;
+
+        /**
+         * 副本集个数，创建副本集实例时，该参数必须设置为1；创建分片实例时，具体参照查询云数据库的售卖规格返回参数；若为单节点实例，该参数设置为0
+         * @type {number || null}
+         */
+        this.ReplicateSetNum = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Zone = 'Zone' in params ? params.Zone : null;
+        this.NodeNum = 'NodeNum' in params ? params.NodeNum : null;
+        this.Memory = 'Memory' in params ? params.Memory : null;
+        this.Volume = 'Volume' in params ? params.Volume : null;
+        this.MongoVersion = 'MongoVersion' in params ? params.MongoVersion : null;
+        this.MachineCode = 'MachineCode' in params ? params.MachineCode : null;
+        this.GoodsNum = 'GoodsNum' in params ? params.GoodsNum : null;
+        this.Period = 'Period' in params ? params.Period : null;
+        this.ClusterType = 'ClusterType' in params ? params.ClusterType : null;
+        this.ReplicateSetNum = 'ReplicateSetNum' in params ? params.ReplicateSetNum : null;
 
     }
 }
@@ -1284,6 +1776,62 @@ class DescribeClientConnectionsRequest extends  AbstractModel {
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
+
+    }
+}
+
+/**
+ * DescribeDBInstanceDeal返回参数结构体
+ * @class
+ */
+class DescribeDBInstanceDealResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 订单状态，1：未支付，2：已支付，3：发货中，4：发货成功，5：发货失败，6：退款，7：订单关闭，8：超时未支付关闭。
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * 订单原价。
+         * @type {number || null}
+         */
+        this.OriginalPrice = null;
+
+        /**
+         * 订单折扣价格。
+         * @type {number || null}
+         */
+        this.DiscountPrice = null;
+
+        /**
+         * 订单行为，purchase：新购，renew：续费，upgrade：升配，downgrade：降配，refund：退货退款。
+         * @type {string || null}
+         */
+        this.Action = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Status = 'Status' in params ? params.Status : null;
+        this.OriginalPrice = 'OriginalPrice' in params ? params.OriginalPrice : null;
+        this.DiscountPrice = 'DiscountPrice' in params ? params.DiscountPrice : null;
+        this.Action = 'Action' in params ? params.Action : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2230,138 +2778,24 @@ DISABLE_NOTIFY_AND_MANUAL_RENEW：不通知过期不自动续费
 }
 
 /**
- * mongodb售卖规格
+ * InquirePriceCreateDBInstances返回参数结构体
  * @class
  */
-class SpecItem extends  AbstractModel {
+class InquirePriceCreateDBInstancesResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 规格信息标识
+         * 价格
+         * @type {DBInstancePrice || null}
+         */
+        this.Price = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.SpecCode = null;
-
-        /**
-         * 规格有效标志，取值：0-停止售卖，1-开放售卖
-         * @type {number || null}
-         */
-        this.Status = null;
-
-        /**
-         * 规格有效标志，取值：0-停止售卖，1-开放售卖
-         * @type {number || null}
-         */
-        this.Cpu = null;
-
-        /**
-         * 内存规格，单位为MB
-         * @type {number || null}
-         */
-        this.Memory = null;
-
-        /**
-         * 默认磁盘规格，单位MB
-         * @type {number || null}
-         */
-        this.DefaultStorage = null;
-
-        /**
-         * 最大磁盘规格，单位MB
-         * @type {number || null}
-         */
-        this.MaxStorage = null;
-
-        /**
-         * 最小磁盘规格，单位MB
-         * @type {number || null}
-         */
-        this.MinStorage = null;
-
-        /**
-         * 可承载qps信息
-         * @type {number || null}
-         */
-        this.Qps = null;
-
-        /**
-         * 连接数限制
-         * @type {number || null}
-         */
-        this.Conns = null;
-
-        /**
-         * 实例mongodb版本信息
-         * @type {string || null}
-         */
-        this.MongoVersionCode = null;
-
-        /**
-         * 实例mongodb版本号
-         * @type {number || null}
-         */
-        this.MongoVersionValue = null;
-
-        /**
-         * 实例mongodb版本号（短）
-         * @type {string || null}
-         */
-        this.Version = null;
-
-        /**
-         * 存储引擎
-         * @type {string || null}
-         */
-        this.EngineName = null;
-
-        /**
-         * 集群类型，取值：1-分片集群，0-副本集集群
-         * @type {number || null}
-         */
-        this.ClusterType = null;
-
-        /**
-         * 最小副本集从节点数
-         * @type {number || null}
-         */
-        this.MinNodeNum = null;
-
-        /**
-         * 最大副本集从节点数
-         * @type {number || null}
-         */
-        this.MaxNodeNum = null;
-
-        /**
-         * 最小分片数
-         * @type {number || null}
-         */
-        this.MinReplicateSetNum = null;
-
-        /**
-         * 最大分片数
-         * @type {number || null}
-         */
-        this.MaxReplicateSetNum = null;
-
-        /**
-         * 最小分片从节点数
-         * @type {number || null}
-         */
-        this.MinReplicateSetNodeNum = null;
-
-        /**
-         * 最大分片从节点数
-         * @type {number || null}
-         */
-        this.MaxReplicateSetNodeNum = null;
-
-        /**
-         * 机器类型，取值：0-HIO，4-HIO10G
-         * @type {string || null}
-         */
-        this.MachineType = null;
+        this.RequestId = null;
 
     }
 
@@ -2372,27 +2806,13 @@ class SpecItem extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.SpecCode = 'SpecCode' in params ? params.SpecCode : null;
-        this.Status = 'Status' in params ? params.Status : null;
-        this.Cpu = 'Cpu' in params ? params.Cpu : null;
-        this.Memory = 'Memory' in params ? params.Memory : null;
-        this.DefaultStorage = 'DefaultStorage' in params ? params.DefaultStorage : null;
-        this.MaxStorage = 'MaxStorage' in params ? params.MaxStorage : null;
-        this.MinStorage = 'MinStorage' in params ? params.MinStorage : null;
-        this.Qps = 'Qps' in params ? params.Qps : null;
-        this.Conns = 'Conns' in params ? params.Conns : null;
-        this.MongoVersionCode = 'MongoVersionCode' in params ? params.MongoVersionCode : null;
-        this.MongoVersionValue = 'MongoVersionValue' in params ? params.MongoVersionValue : null;
-        this.Version = 'Version' in params ? params.Version : null;
-        this.EngineName = 'EngineName' in params ? params.EngineName : null;
-        this.ClusterType = 'ClusterType' in params ? params.ClusterType : null;
-        this.MinNodeNum = 'MinNodeNum' in params ? params.MinNodeNum : null;
-        this.MaxNodeNum = 'MaxNodeNum' in params ? params.MaxNodeNum : null;
-        this.MinReplicateSetNum = 'MinReplicateSetNum' in params ? params.MinReplicateSetNum : null;
-        this.MaxReplicateSetNum = 'MaxReplicateSetNum' in params ? params.MaxReplicateSetNum : null;
-        this.MinReplicateSetNodeNum = 'MinReplicateSetNodeNum' in params ? params.MinReplicateSetNodeNum : null;
-        this.MaxReplicateSetNodeNum = 'MaxReplicateSetNodeNum' in params ? params.MaxReplicateSetNodeNum : null;
-        this.MachineType = 'MachineType' in params ? params.MachineType : null;
+
+        if (params.Price) {
+            let obj = new DBInstancePrice();
+            obj.deserialize(params.Price)
+            this.Price = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2441,26 +2861,35 @@ module.exports = {
     DescribeSpecInfoRequest: DescribeSpecInfoRequest,
     CreateDBInstanceRequest: CreateDBInstanceRequest,
     IsolateDBInstanceRequest: IsolateDBInstanceRequest,
+    DBInstancePrice: DBInstancePrice,
     DescribeBackupAccessResponse: DescribeBackupAccessResponse,
     DescribeSlowLogPatternsResponse: DescribeSlowLogPatternsResponse,
+    SlowLogPattern: SlowLogPattern,
     CreateDBInstanceHourRequest: CreateDBInstanceHourRequest,
     AssignProjectRequest: AssignProjectRequest,
     DescribeSlowLogsResponse: DescribeSlowLogsResponse,
     ClientConnection: ClientConnection,
+    InquirePriceModifyDBInstanceSpecRequest: InquirePriceModifyDBInstanceSpecRequest,
     BackupInfo: BackupInfo,
+    InquirePriceRenewDBInstancesRequest: InquirePriceRenewDBInstancesRequest,
     DescribeDBInstancesRequest: DescribeDBInstancesRequest,
     SpecificationInfo: SpecificationInfo,
     DescribeSlowLogsRequest: DescribeSlowLogsRequest,
     DescribeSlowLogPatternsRequest: DescribeSlowLogPatternsRequest,
+    InquirePriceModifyDBInstanceSpecResponse: InquirePriceModifyDBInstanceSpecResponse,
+    SpecItem: SpecItem,
     DescribeSpecInfoResponse: DescribeSpecInfoResponse,
+    InquirePriceRenewDBInstancesResponse: InquirePriceRenewDBInstancesResponse,
     TagInfo: TagInfo,
     DescribeDBInstancesResponse: DescribeDBInstancesResponse,
     OfflineIsolatedDBInstanceRequest: OfflineIsolatedDBInstanceRequest,
-    SlowLogPattern: SlowLogPattern,
+    DescribeDBInstanceDealRequest: DescribeDBInstanceDealRequest,
+    InquirePriceCreateDBInstancesRequest: InquirePriceCreateDBInstancesRequest,
     CreateDBInstanceResponse: CreateDBInstanceResponse,
     AssignProjectResponse: AssignProjectResponse,
     DescribeDBBackupsRequest: DescribeDBBackupsRequest,
     DescribeClientConnectionsRequest: DescribeClientConnectionsRequest,
+    DescribeDBInstanceDealResponse: DescribeDBInstanceDealResponse,
     ModifyDBInstanceSpecResponse: ModifyDBInstanceSpecResponse,
     ShardInfo: ShardInfo,
     OfflineIsolatedDBInstanceResponse: OfflineIsolatedDBInstanceResponse,
@@ -2477,7 +2906,7 @@ module.exports = {
     ModifyDBInstanceSpecRequest: ModifyDBInstanceSpecRequest,
     CreateDBInstanceHourResponse: CreateDBInstanceHourResponse,
     InstanceChargePrepaid: InstanceChargePrepaid,
-    SpecItem: SpecItem,
+    InquirePriceCreateDBInstancesResponse: InquirePriceCreateDBInstancesResponse,
     RenewDBInstancesRequest: RenewDBInstancesRequest,
 
 }

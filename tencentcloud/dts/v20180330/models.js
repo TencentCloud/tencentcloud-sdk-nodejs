@@ -137,13 +137,13 @@ class MigrateDetailInfo extends  AbstractModel {
         this.StepNow = null;
 
         /**
-         * 总进度,如：
+         * 总进度,如："10"
          * @type {string || null}
          */
         this.Progress = null;
 
         /**
-         * 当前步骤进度,如:
+         * 当前步骤进度,如:"1"
          * @type {string || null}
          */
         this.CurrentStepProgress = null;
@@ -3663,7 +3663,7 @@ class ActivateSubscribeResponse extends  AbstractModel {
         super();
 
         /**
-         * 配置数据订阅任务任务ID。
+         * 配置数据订阅任务ID。
          * @type {string || null}
          */
         this.AsyncRequestId = null;

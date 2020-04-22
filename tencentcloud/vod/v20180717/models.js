@@ -3461,6 +3461,12 @@ class CreateAdaptiveDynamicStreamingTemplateRequest extends  AbstractModel {
          */
         this.Comment = null;
 
+        /**
+         * 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
     }
 
     /**
@@ -3485,6 +3491,7 @@ class CreateAdaptiveDynamicStreamingTemplateRequest extends  AbstractModel {
         this.DisableHigherVideoBitrate = 'DisableHigherVideoBitrate' in params ? params.DisableHigherVideoBitrate : null;
         this.DisableHigherVideoResolution = 'DisableHigherVideoResolution' in params ? params.DisableHigherVideoResolution : null;
         this.Comment = 'Comment' in params ? params.Comment : null;
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
 
     }
 }
@@ -4574,7 +4581,6 @@ class FileUploadTask extends  AbstractModel {
 
         /**
          * 若视频上传时指定了视频处理流程，则该字段为流程任务 ID。
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.ProcedureTaskId = null;
@@ -4796,14 +4802,12 @@ class EditMediaTaskInput extends  AbstractModel {
 
         /**
          * 输入的视频文件信息，当 InputType 为 File 时，该字段有值。
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<EditMediaFileInfo> || null}
          */
         this.FileInfoSet = null;
 
         /**
          * 输入的流信息，当 InputType 为 Stream 时，该字段有值。
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<EditMediaStreamInfo> || null}
          */
         this.StreamInfoSet = null;
@@ -6309,49 +6313,42 @@ class MediaProcessTaskInput extends  AbstractModel {
 
         /**
          * 视频转码任务列表。
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<TranscodeTaskInput> || null}
          */
         this.TranscodeTaskSet = null;
 
         /**
          * 视频转动图任务列表。
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<AnimatedGraphicTaskInput> || null}
          */
         this.AnimatedGraphicTaskSet = null;
 
         /**
          * 对视频按时间点截图任务列表。
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<SnapshotByTimeOffsetTaskInput> || null}
          */
         this.SnapshotByTimeOffsetTaskSet = null;
 
         /**
          * 对视频采样截图任务列表。
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<SampleSnapshotTaskInput> || null}
          */
         this.SampleSnapshotTaskSet = null;
 
         /**
          * 对视频截雪碧图任务列表。
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<ImageSpriteTaskInput> || null}
          */
         this.ImageSpriteTaskSet = null;
 
         /**
          * 对视频截图做封面任务列表。
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<CoverBySnapshotTaskInput> || null}
          */
         this.CoverBySnapshotTaskSet = null;
 
         /**
          * 对视频转自适应码流任务列表。
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<AdaptiveDynamicStreamingTaskInput> || null}
          */
         this.AdaptiveDynamicStreamingTaskSet = null;
@@ -7320,6 +7317,12 @@ class DeleteAdaptiveDynamicStreamingTemplateRequest extends  AbstractModel {
          */
         this.Definition = null;
 
+        /**
+         * 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
     }
 
     /**
@@ -7330,6 +7333,7 @@ class DeleteAdaptiveDynamicStreamingTemplateRequest extends  AbstractModel {
             return;
         }
         this.Definition = 'Definition' in params ? params.Definition : null;
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
 
     }
 }
@@ -9158,7 +9162,6 @@ class CoverBySnapshotTaskInput extends  AbstractModel {
 
         /**
          * 水印列表，支持多张图片或文字水印，最大可支持 10 张。
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<WatermarkInput> || null}
          */
         this.WatermarkSet = null;
@@ -9534,6 +9537,12 @@ class ModifyAdaptiveDynamicStreamingTemplateRequest extends  AbstractModel {
          */
         this.Comment = null;
 
+        /**
+         * 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
     }
 
     /**
@@ -9558,6 +9567,7 @@ class ModifyAdaptiveDynamicStreamingTemplateRequest extends  AbstractModel {
             }
         }
         this.Comment = 'Comment' in params ? params.Comment : null;
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
 
     }
 }
@@ -14690,7 +14700,6 @@ class SnapshotByTimeOffsetTaskInput extends  AbstractModel {
 
         /**
          * 水印列表，支持多张图片或文字水印，最大可支持 10 张。
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<WatermarkInput> || null}
          */
         this.WatermarkSet = null;
@@ -16623,7 +16632,6 @@ class TranscodeTaskInput extends  AbstractModel {
 
         /**
          * 水印列表，支持多张图片或文字水印，最大可支持 10 张。
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<WatermarkInput> || null}
          */
         this.WatermarkSet = null;
@@ -18267,7 +18275,6 @@ class AiReviewPornTaskOutput extends  AbstractModel {
 
         /**
          * 视频鉴黄评分，分值为0到100。
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.Confidence = null;
@@ -19744,7 +19751,6 @@ class AdaptiveDynamicStreamingTaskInput extends  AbstractModel {
 
         /**
          * 水印列表，支持多张图片或文字水印，最大可支持 10 张。
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<WatermarkInput> || null}
          */
         this.WatermarkSet = null;
@@ -22347,14 +22353,12 @@ class EditMediaStreamInfo extends  AbstractModel {
 
         /**
          * 流剪辑的起始时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.StartTime = null;
 
         /**
          * 流剪辑的结束时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.EndTime = null;
@@ -24891,14 +24895,12 @@ class EditMediaFileInfo extends  AbstractModel {
 
         /**
          * 视频剪辑的起始偏移时间偏移，单位：秒。
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.StartTimeOffset = null;
 
         /**
          * 视频剪辑的起始结束时间偏移，单位：秒。
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.EndTimeOffset = null;
@@ -25798,7 +25800,6 @@ class SampleSnapshotTaskInput extends  AbstractModel {
 
         /**
          * 水印列表，支持多张图片或文字水印，最大可支持 10 张。
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<WatermarkInput> || null}
          */
         this.WatermarkSet = null;

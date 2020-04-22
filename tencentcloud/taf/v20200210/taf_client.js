@@ -16,7 +16,7 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
-const InputKolDataList = models.InputKolDataList;
+const OutputDetectAccountActivity = models.OutputDetectAccountActivity;
 const OutputKolData = models.OutputKolData;
 const InputKolBspData = models.InputKolBspData;
 const EnhanceTaDegreeRequest = models.EnhanceTaDegreeRequest;
@@ -27,7 +27,9 @@ const RecognizeCustomizedAudienceResponse = models.RecognizeCustomizedAudienceRe
 const OutputKolValue = models.OutputKolValue;
 const EnhanceTaDegreeResponse = models.EnhanceTaDegreeResponse;
 const InputTaBspData = models.InputTaBspData;
+const OutputDetectAccountActivityValue = models.OutputDetectAccountActivityValue;
 const OutputSendTrafficSecuritySmsMsg = models.OutputSendTrafficSecuritySmsMsg;
+const RecognizeTargetAudienceRequest = models.RecognizeTargetAudienceRequest;
 const SendTrafficSecuritySmsMessageResponse = models.SendTrafficSecuritySmsMessageResponse;
 const DetectFraudKOLRequest = models.DetectFraudKOLRequest;
 const RecognizeCustomizedAudienceRequest = models.RecognizeCustomizedAudienceRequest;
@@ -36,9 +38,12 @@ const InputRecognizeTargetAudience = models.InputRecognizeTargetAudience;
 const OutputTaData = models.OutputTaData;
 const OutputTaValue = models.OutputTaValue;
 const RecognizePreciseTargetAudienceRequest = models.RecognizePreciseTargetAudienceRequest;
-const RecognizeTargetAudienceRequest = models.RecognizeTargetAudienceRequest;
+const InputKolDataList = models.InputKolDataList;
+const DetectAccountActivityResponse = models.DetectAccountActivityResponse;
+const DetectAccountActivityRequest = models.DetectAccountActivityRequest;
 const RecognizePreciseTargetAudienceResponse = models.RecognizePreciseTargetAudienceResponse;
 const OutputRecognizeTargetAudience = models.OutputRecognizeTargetAudience;
+const InputDetectAccountActivity = models.InputDetectAccountActivity;
 const InputSendTrafficSecuritySmsMsg = models.InputSendTrafficSecuritySmsMsg;
 
 
@@ -72,6 +77,17 @@ class TafClient extends AbstractClient {
     RecognizeTargetAudience(req, cb) {
         let resp = new RecognizeTargetAudienceResponse();
         this.request("RecognizeTargetAudience", req, resp, cb);
+    }
+
+    /**
+     * DetectAccountActivity
+     * @param {DetectAccountActivityRequest} req
+     * @param {function(string, DetectAccountActivityResponse):void} cb
+     * @public
+     */
+    DetectAccountActivity(req, cb) {
+        let resp = new DetectAccountActivityResponse();
+        this.request("DetectAccountActivity", req, resp, cb);
     }
 
     /**

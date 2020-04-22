@@ -3534,6 +3534,76 @@ class DeleteModuleRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeVpcs请求参数结构体
+ * @class
+ */
+class DescribeVpcsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * VPC实例ID。形如：vpc-f49l6u0z。每次请求的实例的上限为100。参数不支持同时指定VpcIds和Filters。
+         * @type {Array.<string> || null}
+         */
+        this.VpcIds = null;
+
+        /**
+         * 过滤条件，参数不支持同时指定VpcIds和Filters。
+vpc-name - String - （过滤条件）VPC实例名称。
+is-default - String - （过滤条件）是否默认VPC。
+vpc-id - String - （过滤条件）VPC实例ID形如：vpc-f49l6u0z。
+cidr-block - String - （过滤条件）vpc的cidr。
+tag-key - String -是否必填：否- （过滤条件）按照标签键进行过滤。
+tag:tag-key - String - 是否必填：否 - （过滤条件）按照标签键值对进行过滤。 tag-key使用具体的标签键进行替换。使用请参考示例
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * 偏移量
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 返回数量
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 地域
+         * @type {string || null}
+         */
+        this.EcmRegion = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.VpcIds = 'VpcIds' in params ? params.VpcIds : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.EcmRegion = 'EcmRegion' in params ? params.EcmRegion : null;
+
+    }
+}
+
+/**
  * ResetInstancesMaxBandwidth请求参数结构体
  * @class
  */
@@ -7097,6 +7167,57 @@ class MigrateNetworkInterfaceResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeVpcs返回参数结构体
+ * @class
+ */
+class DescribeVpcsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 符合条件的对象数。
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 私有网络对象。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<VpcInfo> || null}
+         */
+        this.VpcSet = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.VpcSet) {
+            this.VpcSet = new Array();
+            for (let z in params.VpcSet) {
+                let obj = new VpcInfo();
+                obj.deserialize(params.VpcSet[z]);
+                this.VpcSet.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * 实例可执行操作
  * @class
  */
@@ -7412,6 +7533,7 @@ module.exports = {
     DetachNetworkInterfaceResponse: DetachNetworkInterfaceResponse,
     InstanceFamilyConfig: InstanceFamilyConfig,
     DeleteModuleRequest: DeleteModuleRequest,
+    DescribeVpcsRequest: DescribeVpcsRequest,
     ResetInstancesMaxBandwidthRequest: ResetInstancesMaxBandwidthRequest,
     PeakBase: PeakBase,
     ModifyModuleNetworkRequest: ModifyModuleNetworkRequest,
@@ -7487,6 +7609,7 @@ module.exports = {
     ModifyModuleImageRequest: ModifyModuleImageRequest,
     RunMonitorServiceEnabled: RunMonitorServiceEnabled,
     MigrateNetworkInterfaceResponse: MigrateNetworkInterfaceResponse,
+    DescribeVpcsResponse: DescribeVpcsResponse,
     InstanceOperator: InstanceOperator,
     Module: Module,
     DescribeBaseOverviewResponse: DescribeBaseOverviewResponse,
