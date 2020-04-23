@@ -1955,7 +1955,7 @@ class ClusterInstancesInfo extends  AbstractModel {
         super();
 
         /**
-         * ID
+         * ID号
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
@@ -2177,6 +2177,13 @@ class ClusterInstancesInfo extends  AbstractModel {
          */
         this.AliasInfo = null;
 
+        /**
+         * 集群版本Id
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.ProductId = null;
+
     }
 
     /**
@@ -2227,6 +2234,7 @@ class ClusterInstancesInfo extends  AbstractModel {
         this.HiveMetaDb = 'HiveMetaDb' in params ? params.HiveMetaDb : null;
         this.ServiceClass = 'ServiceClass' in params ? params.ServiceClass : null;
         this.AliasInfo = 'AliasInfo' in params ? params.AliasInfo : null;
+        this.ProductId = 'ProductId' in params ? params.ProductId : null;
 
     }
 }

@@ -43,6 +43,7 @@ const Labels = models.Labels;
 const Product = models.Product;
 const RegionDetected = models.RegionDetected;
 const CarTagItem = models.CarTagItem;
+const Threshold = models.Threshold;
 const RecognizeCarResponse = models.RecognizeCarResponse;
 const DetectMisbehaviorRequest = models.DetectMisbehaviorRequest;
 

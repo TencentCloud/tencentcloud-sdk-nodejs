@@ -9499,7 +9499,7 @@ class DescribeStreamPlayInfoListRequest extends  AbstractModel {
         this.StreamName = null;
 
         /**
-         * 推流路径，与推流和播放地址中的AppName保持一致，默认为live。精确匹配，不支持。
+         * 推流路径，与播放地址中的AppName保持一致，会精确匹配，在同时传递了StreamName时生效。
 若不填，则为查询总体播放数据。
 注意：按AppName查询，需要联系客服同学提单支持。
          * @type {string || null}

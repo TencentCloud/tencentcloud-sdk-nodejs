@@ -101,6 +101,7 @@ class SmsClient extends AbstractClient {
 
     /**
      * 拉取短信下发状态。
+>- 目前也支持 [配置回调](https://cloud.tencent.com/document/product/382/37809#.E8.AE.BE.E7.BD.AE.E4.BA.8B.E4.BB.B6.E5.9B.9E.E8.B0.83.E9.85.8D.E7.BD.AE) 的方式来获取下发状态。
      * @param {PullSmsSendStatusRequest} req
      * @param {function(string, PullSmsSendStatusResponse):void} cb
      * @public
@@ -180,6 +181,7 @@ class SmsClient extends AbstractClient {
 
     /**
      * 拉取短信回复状态。
+目前也支持 [配置回复回调](https://cloud.tencent.com/document/product/382/42907) 的方式来获取上行回复。
      * @param {PullSmsReplyStatusRequest} req
      * @param {function(string, PullSmsReplyStatusResponse):void} cb
      * @public
@@ -202,6 +204,7 @@ class SmsClient extends AbstractClient {
 
     /**
      * 拉取单个号码短信下发状态。
+>- 目前也支持 [配置回调](https://cloud.tencent.com/document/product/382/37809#.E8.AE.BE.E7.BD.AE.E4.BA.8B.E4.BB.B6.E5.9B.9E.E8.B0.83.E9.85.8D.E7.BD.AE) 的方式来获取下发状态。
      * @param {PullSmsSendStatusByPhoneNumberRequest} req
      * @param {function(string, PullSmsSendStatusByPhoneNumberResponse):void} cb
      * @public
@@ -226,6 +229,7 @@ class SmsClient extends AbstractClient {
 
     /**
      * 拉取单个号码短信回复状态。
+目前也支持 [配置回复回调](https://cloud.tencent.com/document/product/382/42907) 的方式来获取上行回复。
      * @param {PullSmsReplyStatusByPhoneNumberRequest} req
      * @param {function(string, PullSmsReplyStatusByPhoneNumberResponse):void} cb
      * @public

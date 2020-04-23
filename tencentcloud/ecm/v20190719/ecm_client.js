@@ -35,6 +35,7 @@ const ModifyAddressesBandwidthResponse = models.ModifyAddressesBandwidthResponse
 const DescribeSubnetsResponse = models.DescribeSubnetsResponse;
 const RunInstancesRequest = models.RunInstancesRequest;
 const DescribeInstancesResponse = models.DescribeInstancesResponse;
+const ResetInstancesPasswordResponse = models.ResetInstancesPasswordResponse;
 const InstanceTypeConfig = models.InstanceTypeConfig;
 const DescribeNodeResponse = models.DescribeNodeResponse;
 const RemovePrivateIpAddressesResponse = models.RemovePrivateIpAddressesResponse;
@@ -58,10 +59,12 @@ const ModifySubnetAttributeResponse = models.ModifySubnetAttributeResponse;
 const ZoneInfo = models.ZoneInfo;
 const DescribeNodeRequest = models.DescribeNodeRequest;
 const CreateSubnetResponse = models.CreateSubnetResponse;
+const ResetInstancesPasswordRequest = models.ResetInstancesPasswordRequest;
 const Area = models.Area;
 const DescribeConfigRequest = models.DescribeConfigRequest;
 const NetworkInterfaceAttachment = models.NetworkInterfaceAttachment;
 const NetworkStorageRange = models.NetworkStorageRange;
+const StartInstancesResponse = models.StartInstancesResponse;
 const CreateVpcResponse = models.CreateVpcResponse;
 const AssistantCidr = models.AssistantCidr;
 const NetworkInterface = models.NetworkInterface;
@@ -72,6 +75,7 @@ const DescribeInstancesDeniedActionsResponse = models.DescribeInstancesDeniedAct
 const DisassociateAddressRequest = models.DisassociateAddressRequest;
 const ModuleCounter = models.ModuleCounter;
 const ZoneInstanceCountISP = models.ZoneInstanceCountISP;
+const StartInstancesRequest = models.StartInstancesRequest;
 const Tag = models.Tag;
 const ResetInstancesMaxBandwidthResponse = models.ResetInstancesMaxBandwidthResponse;
 const DeleteVpcRequest = models.DeleteVpcRequest;
@@ -94,6 +98,7 @@ const TagSpecification = models.TagSpecification;
 const DetachNetworkInterfaceRequest = models.DetachNetworkInterfaceRequest;
 const DescribeConfigResponse = models.DescribeConfigResponse;
 const DescribeModuleDetailResponse = models.DescribeModuleDetailResponse;
+const StopInstancesRequest = models.StopInstancesRequest;
 const Subnet = models.Subnet;
 const ModifyVpcAttributeResponse = models.ModifyVpcAttributeResponse;
 const DeleteVpcResponse = models.DeleteVpcResponse;
@@ -113,6 +118,7 @@ const AttachNetworkInterfaceResponse = models.AttachNetworkInterfaceResponse;
 const DescribeBaseOverviewRequest = models.DescribeBaseOverviewRequest;
 const ModifyModuleNetworkResponse = models.ModifyModuleNetworkResponse;
 const ImportImageRequest = models.ImportImageRequest;
+const StopInstancesResponse = models.StopInstancesResponse;
 const ModifyModuleNameRequest = models.ModifyModuleNameRequest;
 const SimpleModule = models.SimpleModule;
 const DescribeInstancesRequest = models.DescribeInstancesRequest;
@@ -230,6 +236,17 @@ class EcmClient extends AbstractClient {
     DescribeBaseOverview(req, cb) {
         let resp = new DescribeBaseOverviewResponse();
         this.request("DescribeBaseOverview", req, resp, cb);
+    }
+
+    /**
+     * 只有状态为STOPPED的实例才可以进行此操作；接口调用成功时，实例会进入STARTING状态；启动实例成功时，实例会进入RUNNING状态。
+     * @param {StartInstancesRequest} req
+     * @param {function(string, StartInstancesResponse):void} cb
+     * @public
+     */
+    StartInstances(req, cb) {
+        let resp = new StartInstancesResponse();
+        this.request("StartInstances", req, resp, cb);
     }
 
     /**
@@ -507,6 +524,17 @@ EIP 如果欠费或被封堵，则不能被绑定。
     }
 
     /**
+     * 重置处于运行中状态的实例的密码，需要显式指定强制关机参数ForceStop。如果没有显式指定强制关机参数，则只有处于关机状态的实例才允许执行重置密码操作。
+     * @param {ResetInstancesPasswordRequest} req
+     * @param {function(string, ResetInstancesPasswordResponse):void} cb
+     * @public
+     */
+    ResetInstancesPassword(req, cb) {
+        let resp = new ResetInstancesPasswordResponse();
+        this.request("ResetInstancesPassword", req, resp, cb);
+    }
+
+    /**
      * 通过实例id获取当前禁止的操作
      * @param {DescribeInstancesDeniedActionsRequest} req
      * @param {function(string, DescribeInstancesDeniedActionsResponse):void} cb
@@ -537,6 +565,19 @@ EIP 如果欠费或被封堵，则不能被绑定。
     DescribePeakNetworkOverview(req, cb) {
         let resp = new DescribePeakNetworkOverviewResponse();
         this.request("DescribePeakNetworkOverview", req, resp, cb);
+    }
+
+    /**
+     * 只有处于"RUNNING"状态的实例才能够进行关机操作；
+调用成功时，实例会进入STOPPING状态；关闭实例成功时，实例会进入STOPPED状态；
+支持强制关闭，强制关机的效果等同于关闭物理计算机的电源开关，强制关机可能会导致数据丢失或文件系统损坏，请仅在服务器不能正常关机时使用。
+     * @param {StopInstancesRequest} req
+     * @param {function(string, StopInstancesResponse):void} cb
+     * @public
+     */
+    StopInstances(req, cb) {
+        let resp = new StopInstancesResponse();
+        this.request("StopInstances", req, resp, cb);
     }
 
     /**

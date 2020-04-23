@@ -132,6 +132,16 @@ class DetectCelebrityResponse extends  AbstractModel {
         this.Faces = null;
 
         /**
+         * 本服务在不同误识率水平下（将图片中的人物识别错误的比例）的推荐阈值，可以用于控制识别结果的精度。 
+FalseRate1Percent, FalseRate5Permil, FalseRate1Permil分别代表误识率在百分之一、千分之五、千分之一情况下的推荐阈值。 
+因为阈值会存在变动，请勿将此处输出的固定值处理，而是每次取值与confidence对比，来判断本次的识别结果是否可信。
+ 例如，如果您业务中可以接受的误识率是1%，则可以将所有confidence>=FalseRate1Percent的结论认为是正确的。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Threshold || null}
+         */
+        this.Threshold = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -154,6 +164,12 @@ class DetectCelebrityResponse extends  AbstractModel {
                 obj.deserialize(params.Faces[z]);
                 this.Faces.push(obj);
             }
+        }
+
+        if (params.Threshold) {
+            let obj = new Threshold();
+            obj.deserialize(params.Threshold)
+            this.Threshold = obj;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -1480,6 +1496,51 @@ class CarTagItem extends  AbstractModel {
 }
 
 /**
+ * 本服务在不同误识率水平下（将图片中的人物识别错误的比例）的推荐阈值，可以用于控制识别结果的精度。
+{FalseRate1Percent, FalseRate5Permil, FalseRate1Permil}分别代表误识率在百分之一、千分之五、千分之一情况下的推荐阈值。
+因为阈值会存在变动，请勿将此处输出的固定值处理，而是每次取值与confidence对比，来判断本次的识别结果是否可信。
+例如，如果您业务中可以接受的误识率是1%，则可以将所有confidence>=FalseRate1Percent的结论认为是正确的。
+ * @class
+ */
+class Threshold extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 误识率在百分之一时的推荐阈值。
+         * @type {number || null}
+         */
+        this.FalseRate1Percent = null;
+
+        /**
+         * 误识率在千分之五时的推荐阈值。
+         * @type {number || null}
+         */
+        this.FalseRate5Permil = null;
+
+        /**
+         * 误识率在千分之一时的推荐阈值。
+         * @type {number || null}
+         */
+        this.FalseRate1Permil = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FalseRate1Percent = 'FalseRate1Percent' in params ? params.FalseRate1Percent : null;
+        this.FalseRate5Permil = 'FalseRate5Permil' in params ? params.FalseRate5Permil : null;
+        this.FalseRate1Permil = 'FalseRate1Permil' in params ? params.FalseRate1Permil : null;
+
+    }
+}
+
+/**
  * RecognizeCar返回参数结构体
  * @class
  */
@@ -1608,6 +1669,7 @@ module.exports = {
     Product: Product,
     RegionDetected: RegionDetected,
     CarTagItem: CarTagItem,
+    Threshold: Threshold,
     RecognizeCarResponse: RecognizeCarResponse,
     DetectMisbehaviorRequest: DetectMisbehaviorRequest,
 

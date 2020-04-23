@@ -1043,6 +1043,34 @@ class DescribeInstancesResponse extends  AbstractModel {
 }
 
 /**
+ * ResetInstancesPassword返回参数结构体
+ * @class
+ */
+class ResetInstancesPasswordResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * 机型配置
  * @class
  */
@@ -2161,6 +2189,57 @@ class CreateSubnetResponse extends  AbstractModel {
 }
 
 /**
+ * ResetInstancesPassword请求参数结构体
+ * @class
+ */
+class ResetInstancesPasswordRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 待重置密码的实例ID列表。在单次请求的过程中，单个region下的请求实例数上限为100。
+         * @type {Array.<string> || null}
+         */
+        this.InstanceIdSet = null;
+
+        /**
+         * 新密码，Linux实例密码必须8到16位，至少包括两项[a-z，A-Z]、[0-9]和[( ) ~ ~ ! @ # $ % ^ & * - + = _ | { } [ ] : ; ' < > , . ? /]中的符号。密码不允许以/符号开头。
+Windows实例密码必须12到16位，至少包括三项[a-z]，[A-Z]，[0-9]和[( ) ~ ~ ! @ # $ % ^ & * - + = _ | { } [ ] : ; ' < > , . ? /]中的符号。密码不允许以/符号开头。
+如果实例即包含Linux实例又包含Windows实例，则密码复杂度限制按照Windows实例的限制。
+         * @type {string || null}
+         */
+        this.Password = null;
+
+        /**
+         * 是否强制关机，默认为false。
+         * @type {boolean || null}
+         */
+        this.ForceStop = null;
+
+        /**
+         * 待重置密码的实例的用户名，不得超过64个字符。若未指定用户名，则对于Linux而言，默认重置root用户的密码，对于Windows而言，默认重置administrator的密码。
+         * @type {string || null}
+         */
+        this.UserName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceIdSet = 'InstanceIdSet' in params ? params.InstanceIdSet : null;
+        this.Password = 'Password' in params ? params.Password : null;
+        this.ForceStop = 'ForceStop' in params ? params.ForceStop : null;
+        this.UserName = 'UserName' in params ? params.UserName : null;
+
+    }
+}
+
+/**
  * 区域信息
  * @class
  */
@@ -2387,6 +2466,34 @@ class NetworkStorageRange extends  AbstractModel {
         this.PerBandwidth = 'PerBandwidth' in params ? params.PerBandwidth : null;
         this.PerDataDisk = 'PerDataDisk' in params ? params.PerDataDisk : null;
         this.MaxModuleNum = 'MaxModuleNum' in params ? params.MaxModuleNum : null;
+
+    }
+}
+
+/**
+ * StartInstances返回参数结构体
+ * @class
+ */
+class StartInstancesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2983,6 +3090,34 @@ class ZoneInstanceCountISP extends  AbstractModel {
         this.Zone = 'Zone' in params ? params.Zone : null;
         this.InstanceCount = 'InstanceCount' in params ? params.InstanceCount : null;
         this.ISP = 'ISP' in params ? params.ISP : null;
+
+    }
+}
+
+/**
+ * StartInstances请求参数结构体
+ * @class
+ */
+class StartInstancesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 待开启的实例ID列表。在单次请求的过程中，单个region下的请求实例数上限为100。
+         * @type {Array.<string> || null}
+         */
+        this.InstanceIdSet = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceIdSet = 'InstanceIdSet' in params ? params.InstanceIdSet : null;
 
     }
 }
@@ -4034,6 +4169,52 @@ class DescribeModuleDetailResponse extends  AbstractModel {
 }
 
 /**
+ * StopInstances请求参数结构体
+ * @class
+ */
+class StopInstancesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 需要关机的实例ID列表。在单次请求的过程中，单个region下的请求实例数上限为100。
+         * @type {Array.<string> || null}
+         */
+        this.InstanceIdSet = null;
+
+        /**
+         * 是否在正常关闭失败后选择强制关闭实例，默认为false，即否。
+         * @type {boolean || null}
+         */
+        this.ForceStop = null;
+
+        /**
+         * 实例的关闭模式。取值范围：
+SOFT_FIRST：表示在正常关闭失败后进行强制关闭;
+HARD：直接强制关闭;
+SOFT：仅软关机；
+默认为SOFT。
+         * @type {string || null}
+         */
+        this.StopType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceIdSet = 'InstanceIdSet' in params ? params.InstanceIdSet : null;
+        this.ForceStop = 'ForceStop' in params ? params.ForceStop : null;
+        this.StopType = 'StopType' in params ? params.StopType : null;
+
+    }
+}
+
+/**
  * 子网对象
  * @class
  */
@@ -5060,6 +5241,34 @@ class ImportImageRequest extends  AbstractModel {
         this.ImageId = 'ImageId' in params ? params.ImageId : null;
         this.ImageDescription = 'ImageDescription' in params ? params.ImageDescription : null;
         this.SourceRegion = 'SourceRegion' in params ? params.SourceRegion : null;
+
+    }
+}
+
+/**
+ * StopInstances返回参数结构体
+ * @class
+ */
+class StopInstancesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -7483,6 +7692,7 @@ module.exports = {
     DescribeSubnetsResponse: DescribeSubnetsResponse,
     RunInstancesRequest: RunInstancesRequest,
     DescribeInstancesResponse: DescribeInstancesResponse,
+    ResetInstancesPasswordResponse: ResetInstancesPasswordResponse,
     InstanceTypeConfig: InstanceTypeConfig,
     DescribeNodeResponse: DescribeNodeResponse,
     RemovePrivateIpAddressesResponse: RemovePrivateIpAddressesResponse,
@@ -7506,10 +7716,12 @@ module.exports = {
     ZoneInfo: ZoneInfo,
     DescribeNodeRequest: DescribeNodeRequest,
     CreateSubnetResponse: CreateSubnetResponse,
+    ResetInstancesPasswordRequest: ResetInstancesPasswordRequest,
     Area: Area,
     DescribeConfigRequest: DescribeConfigRequest,
     NetworkInterfaceAttachment: NetworkInterfaceAttachment,
     NetworkStorageRange: NetworkStorageRange,
+    StartInstancesResponse: StartInstancesResponse,
     CreateVpcResponse: CreateVpcResponse,
     AssistantCidr: AssistantCidr,
     NetworkInterface: NetworkInterface,
@@ -7520,6 +7732,7 @@ module.exports = {
     DisassociateAddressRequest: DisassociateAddressRequest,
     ModuleCounter: ModuleCounter,
     ZoneInstanceCountISP: ZoneInstanceCountISP,
+    StartInstancesRequest: StartInstancesRequest,
     Tag: Tag,
     ResetInstancesMaxBandwidthResponse: ResetInstancesMaxBandwidthResponse,
     DeleteVpcRequest: DeleteVpcRequest,
@@ -7542,6 +7755,7 @@ module.exports = {
     DetachNetworkInterfaceRequest: DetachNetworkInterfaceRequest,
     DescribeConfigResponse: DescribeConfigResponse,
     DescribeModuleDetailResponse: DescribeModuleDetailResponse,
+    StopInstancesRequest: StopInstancesRequest,
     Subnet: Subnet,
     ModifyVpcAttributeResponse: ModifyVpcAttributeResponse,
     DeleteVpcResponse: DeleteVpcResponse,
@@ -7561,6 +7775,7 @@ module.exports = {
     DescribeBaseOverviewRequest: DescribeBaseOverviewRequest,
     ModifyModuleNetworkResponse: ModifyModuleNetworkResponse,
     ImportImageRequest: ImportImageRequest,
+    StopInstancesResponse: StopInstancesResponse,
     ModifyModuleNameRequest: ModifyModuleNameRequest,
     SimpleModule: SimpleModule,
     DescribeInstancesRequest: DescribeInstancesRequest,
