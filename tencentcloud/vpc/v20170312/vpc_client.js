@@ -521,7 +521,7 @@ class VpcClient extends AbstractClient {
     }
     
     /**
-     * 查看VPC资源
+     * 本接口(DescribeVpcResourceDashboard)用于查看VPC资源信息。
      * @param {DescribeVpcResourceDashboardRequest} req
      * @param {function(string, DescribeVpcResourceDashboardResponse):void} cb
      * @public

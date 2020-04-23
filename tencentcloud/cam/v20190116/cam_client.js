@@ -22,9 +22,11 @@ const DetachGroupPolicyRequest = models.DetachGroupPolicyRequest;
 const DescribeRoleListResponse = models.DescribeRoleListResponse;
 const CreatePolicyResponse = models.CreatePolicyResponse;
 const GetRoleRequest = models.GetRoleRequest;
+const CreateServiceLinkedRoleRequest = models.CreateServiceLinkedRoleRequest;
 const ListAttachedGroupPoliciesRequest = models.ListAttachedGroupPoliciesRequest;
 const ListGroupsForUserRequest = models.ListGroupsForUserRequest;
 const AttachRolePolicyResponse = models.AttachRolePolicyResponse;
+const GetServiceLinkedRoleDeletionStatusResponse = models.GetServiceLinkedRoleDeletionStatusResponse;
 const AttachGroupPolicyResponse = models.AttachGroupPolicyResponse;
 const ListUsersResponse = models.ListUsersResponse;
 const UpdateRoleDescriptionResponse = models.UpdateRoleDescriptionResponse;
@@ -42,10 +44,10 @@ const ListGroupsForUserResponse = models.ListGroupsForUserResponse;
 const ListUsersForGroupRequest = models.ListUsersForGroupRequest;
 const RemoveUserFromGroupRequest = models.RemoveUserFromGroupRequest;
 const ListPoliciesResponse = models.ListPoliciesResponse;
-const OffsiteFlag = models.OffsiteFlag;
 const GroupIdOfUidInfo = models.GroupIdOfUidInfo;
 const UpdateRoleDescriptionRequest = models.UpdateRoleDescriptionRequest;
 const RoleInfo = models.RoleInfo;
+const DeleteServiceLinkedRoleResponse = models.DeleteServiceLinkedRoleResponse;
 const DeleteGroupRequest = models.DeleteGroupRequest;
 const ListAttachedRolePoliciesResponse = models.ListAttachedRolePoliciesResponse;
 const DeleteUserResponse = models.DeleteUserResponse;
@@ -54,7 +56,6 @@ const StrategyInfo = models.StrategyInfo;
 const DeletePolicyRequest = models.DeletePolicyRequest;
 const GroupInfo = models.GroupInfo;
 const AddUserRequest = models.AddUserRequest;
-const LoginActionFlag = models.LoginActionFlag;
 const DeleteRoleRequest = models.DeleteRoleRequest;
 const UpdateRoleConsoleLoginRequest = models.UpdateRoleConsoleLoginRequest;
 const GetCustomMFATokenInfoResponse = models.GetCustomMFATokenInfoResponse;
@@ -73,25 +74,24 @@ const AttachRolePolicyRequest = models.AttachRolePolicyRequest;
 const ConsumeCustomMFATokenResponse = models.ConsumeCustomMFATokenResponse;
 const AttachUserPolicyRequest = models.AttachUserPolicyRequest;
 const ListAttachedGroupPoliciesResponse = models.ListAttachedGroupPoliciesResponse;
-const CheckNewMfaCodeRequest = models.CheckNewMfaCodeRequest;
-const SetFlagRequest = models.SetFlagRequest;
 const DeletePolicyResponse = models.DeletePolicyResponse;
 const ConsumeCustomMFATokenRequest = models.ConsumeCustomMFATokenRequest;
 const GetGroupResponse = models.GetGroupResponse;
 const DeleteSAMLProviderRequest = models.DeleteSAMLProviderRequest;
 const DeleteSAMLProviderResponse = models.DeleteSAMLProviderResponse;
 const UpdateUserResponse = models.UpdateUserResponse;
+const CreateServiceLinkedRoleResponse = models.CreateServiceLinkedRoleResponse;
 const AddUserToGroupResponse = models.AddUserToGroupResponse;
 const ListCollaboratorsRequest = models.ListCollaboratorsRequest;
 const CreateGroupRequest = models.CreateGroupRequest;
 const UpdateGroupResponse = models.UpdateGroupResponse;
 const ListEntitiesForPolicyRequest = models.ListEntitiesForPolicyRequest;
 const ListPoliciesRequest = models.ListPoliciesRequest;
+const GetServiceLinkedRoleDeletionStatusRequest = models.GetServiceLinkedRoleDeletionStatusRequest;
 const DetachGroupPolicyResponse = models.DetachGroupPolicyResponse;
 const CreatePolicyRequest = models.CreatePolicyRequest;
 const UpdateGroupRequest = models.UpdateGroupRequest;
 const AttachGroupPolicyRequest = models.AttachGroupPolicyRequest;
-const SetFlagResponse = models.SetFlagResponse;
 const CreateRoleResponse = models.CreateRoleResponse;
 const GetSAMLProviderResponse = models.GetSAMLProviderResponse;
 const GetPolicyRequest = models.GetPolicyRequest;
@@ -107,13 +107,13 @@ const GetRoleResponse = models.GetRoleResponse;
 const CreateRoleRequest = models.CreateRoleRequest;
 const GetPolicyResponse = models.GetPolicyResponse;
 const DeleteGroupResponse = models.DeleteGroupResponse;
+const DeleteServiceLinkedRoleRequest = models.DeleteServiceLinkedRoleRequest;
 const AttachEntityOfPolicy = models.AttachEntityOfPolicy;
 const ListUsersForGroupResponse = models.ListUsersForGroupResponse;
 const AddUserResponse = models.AddUserResponse;
 const ListEntitiesForPolicyResponse = models.ListEntitiesForPolicyResponse;
 const ListUsersRequest = models.ListUsersRequest;
 const AttachUserPolicyResponse = models.AttachUserPolicyResponse;
-const CheckNewMfaCodeResponse = models.CheckNewMfaCodeResponse;
 const ListCollaboratorsResponse = models.ListCollaboratorsResponse;
 const ListAttachedUserPoliciesRequest = models.ListAttachedUserPoliciesRequest;
 const GroupMemberInfo = models.GroupMemberInfo;
@@ -142,6 +142,17 @@ class CamClient extends AbstractClient {
     }
 
     /**
+     * 删除服务相关角色
+     * @param {DeleteServiceLinkedRoleRequest} req
+     * @param {function(string, DeleteServiceLinkedRoleResponse):void} cb
+     * @public
+     */
+    DeleteServiceLinkedRole(req, cb) {
+        let resp = new DeleteServiceLinkedRoleResponse();
+        this.request("DeleteServiceLinkedRole", req, resp, cb);
+    }
+
+    /**
      * 添加子用户
      * @param {AddUserRequest} req
      * @param {function(string, AddUserResponse):void} cb
@@ -150,6 +161,17 @@ class CamClient extends AbstractClient {
     AddUser(req, cb) {
         let resp = new AddUserResponse();
         this.request("AddUser", req, resp, cb);
+    }
+
+    /**
+     * 创建服务相关角色
+     * @param {CreateServiceLinkedRoleRequest} req
+     * @param {function(string, CreateServiceLinkedRoleResponse):void} cb
+     * @public
+     */
+    CreateServiceLinkedRole(req, cb) {
+        let resp = new CreateServiceLinkedRoleResponse();
+        this.request("CreateServiceLinkedRole", req, resp, cb);
     }
 
     /**
@@ -296,14 +318,14 @@ class CamClient extends AbstractClient {
     }
 
     /**
-     * 设置用户的登录保护和敏感操作校验方式
-     * @param {SetFlagRequest} req
-     * @param {function(string, SetFlagResponse):void} cb
+     * 更新SAML身份提供商信息
+     * @param {UpdateSAMLProviderRequest} req
+     * @param {function(string, UpdateSAMLProviderResponse):void} cb
      * @public
      */
-    SetFlag(req, cb) {
-        let resp = new SetFlagResponse();
-        this.request("SetFlag", req, resp, cb);
+    UpdateSAMLProvider(req, cb) {
+        let resp = new UpdateSAMLProviderResponse();
+        this.request("UpdateSAMLProvider", req, resp, cb);
     }
 
     /**
@@ -373,6 +395,17 @@ class CamClient extends AbstractClient {
     }
 
     /**
+     * 根据删除TaskId获取服务相关角色删除状态
+     * @param {GetServiceLinkedRoleDeletionStatusRequest} req
+     * @param {function(string, GetServiceLinkedRoleDeletionStatusResponse):void} cb
+     * @public
+     */
+    GetServiceLinkedRoleDeletionStatus(req, cb) {
+        let resp = new GetServiceLinkedRoleDeletionStatusResponse();
+        this.request("GetServiceLinkedRoleDeletionStatus", req, resp, cb);
+    }
+
+    /**
      * 验证自定义多因子Token
      * @param {ConsumeCustomMFATokenRequest} req
      * @param {function(string, ConsumeCustomMFATokenResponse):void} cb
@@ -392,17 +425,6 @@ class CamClient extends AbstractClient {
     GetGroup(req, cb) {
         let resp = new GetGroupResponse();
         this.request("GetGroup", req, resp, cb);
-    }
-
-    /**
-     * 校验新手机新邮箱接口
-     * @param {CheckNewMfaCodeRequest} req
-     * @param {function(string, CheckNewMfaCodeResponse):void} cb
-     * @public
-     */
-    CheckNewMfaCode(req, cb) {
-        let resp = new CheckNewMfaCodeResponse();
-        this.request("CheckNewMfaCode", req, resp, cb);
     }
 
     /**
@@ -447,17 +469,6 @@ class CamClient extends AbstractClient {
     UpdateRoleDescription(req, cb) {
         let resp = new UpdateRoleDescriptionResponse();
         this.request("UpdateRoleDescription", req, resp, cb);
-    }
-
-    /**
-     * 更新SAML身份提供商信息
-     * @param {UpdateSAMLProviderRequest} req
-     * @param {function(string, UpdateSAMLProviderResponse):void} cb
-     * @public
-     */
-    UpdateSAMLProvider(req, cb) {
-        let resp = new UpdateSAMLProviderResponse();
-        this.request("UpdateSAMLProvider", req, resp, cb);
     }
 
     /**
@@ -527,7 +538,7 @@ class CamClient extends AbstractClient {
     }
 
     /**
-     * 本接口（ListPolicies）可用于查询策略列表
+     * 本接口（ListPolicies）可用于查询策略列表。
      * @param {ListPoliciesRequest} req
      * @param {function(string, ListPoliciesResponse):void} cb
      * @public

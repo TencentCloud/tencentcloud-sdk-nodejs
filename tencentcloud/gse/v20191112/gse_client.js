@@ -38,6 +38,7 @@ const DescribeInstancesRequest = models.DescribeInstancesRequest;
 const DescribeGameServerSessionDetailsResponse = models.DescribeGameServerSessionDetailsResponse;
 const JoinGameServerSessionResponse = models.JoinGameServerSessionResponse;
 const DesiredPlayerSession = models.DesiredPlayerSession;
+const SearchGameServerSessionsResponse = models.SearchGameServerSessionsResponse;
 const DescribeGameServerSessionPlacementRequest = models.DescribeGameServerSessionPlacementRequest;
 const PlacedPlayerSession = models.PlacedPlayerSession;
 const GameServerSessionPlacement = models.GameServerSessionPlacement;
@@ -49,6 +50,7 @@ const DescribeGameServerSessionDetailsRequest = models.DescribeGameServerSession
 const StartGameServerSessionPlacementRequest = models.StartGameServerSessionPlacementRequest;
 const GameServerSession = models.GameServerSession;
 const DescribeGameServerSessionPlacementResponse = models.DescribeGameServerSessionPlacementResponse;
+const SearchGameServerSessionsRequest = models.SearchGameServerSessionsRequest;
 const StopGameServerSessionPlacementResponse = models.StopGameServerSessionPlacementResponse;
 const InstanceAccess = models.InstanceAccess;
 
@@ -171,6 +173,17 @@ class GseClient extends AbstractClient {
     GetGameServerSessionLogUrl(req, cb) {
         let resp = new GetGameServerSessionLogUrlResponse();
         this.request("GetGameServerSessionLogUrl", req, resp, cb);
+    }
+
+    /**
+     * 本接口（SearchGameServerSessions）用于搜索游戏服务器会话列表
+     * @param {SearchGameServerSessionsRequest} req
+     * @param {function(string, SearchGameServerSessionsResponse):void} cb
+     * @public
+     */
+    SearchGameServerSessions(req, cb) {
+        let resp = new SearchGameServerSessionsResponse();
+        this.request("SearchGameServerSessions", req, resp, cb);
     }
 
     /**

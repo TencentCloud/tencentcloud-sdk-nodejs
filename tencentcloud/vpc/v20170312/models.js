@@ -15966,6 +15966,12 @@ class Address extends  AbstractModel {
          */
         this.EipAlgType = null;
 
+        /**
+         * 弹性公网IP的运营商信息，当前可能返回值包括"CMCC","CTCC","CUCC","BGP"
+         * @type {string || null}
+         */
+        this.InternetServiceProvider = null;
+
     }
 
     /**
@@ -15994,6 +16000,7 @@ class Address extends  AbstractModel {
             obj.deserialize(params.EipAlgType)
             this.EipAlgType = obj;
         }
+        this.InternetServiceProvider = 'InternetServiceProvider' in params ? params.InternetServiceProvider : null;
 
     }
 }

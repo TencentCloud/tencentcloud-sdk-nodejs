@@ -1025,6 +1025,58 @@ class DesiredPlayerSession extends  AbstractModel {
 }
 
 /**
+ * SearchGameServerSessions返回参数结构体
+ * @class
+ */
+class SearchGameServerSessionsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 游戏服务器会话列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<GameServerSession> || null}
+         */
+        this.GameServerSessions = null;
+
+        /**
+         * 页偏移，用于查询下一页
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.NextToken = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.GameServerSessions) {
+            this.GameServerSessions = new Array();
+            for (let z in params.GameServerSessions) {
+                let obj = new GameServerSession();
+                obj.deserialize(params.GameServerSessions[z]);
+                this.GameServerSessions.push(obj);
+            }
+        }
+        this.NextToken = 'NextToken' in params ? params.NextToken : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeGameServerSessionPlacement请求参数结构体
  * @class
  */
@@ -1936,6 +1988,85 @@ class DescribeGameServerSessionPlacementResponse extends  AbstractModel {
 }
 
 /**
+ * SearchGameServerSessions请求参数结构体
+ * @class
+ */
+class SearchGameServerSessionsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 别名ID
+         * @type {string || null}
+         */
+        this.AliasId = null;
+
+        /**
+         * 舰队ID
+         * @type {string || null}
+         */
+        this.FleetId = null;
+
+        /**
+         * 单次查询记录数上限
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 页偏移，用于查询下一页
+         * @type {string || null}
+         */
+        this.NextToken = null;
+
+        /**
+         * 搜索条件表达式，支持如下变量
+gameServerSessionName 游戏会话名称 String
+gameServerSessionId 游戏会话ID String
+maximumSessions 最大的玩家会话数 Number
+creationTimeMillis 创建时间，单位：毫秒 Number
+playerSessionCount 当前玩家会话数 Number
+hasAvailablePlayerSessions 是否有可用玩家数 String 取值true或false
+gameServerSessionProperties 游戏会话属性 String
+
+表达式String类型 等于=，不等于<>判断
+表示Number类型支持 =,<>,>,>=,<,<=
+         * @type {string || null}
+         */
+        this.FilterExpression = null;
+
+        /**
+         * 排序条件关键字
+支持排序字段
+gameServerSessionName 游戏会话名称 String
+gameServerSessionId 游戏会话ID String
+maximumSessions 最大的玩家会话数 Number
+creationTimeMillis 创建时间，单位：毫秒 Number
+playerSessionCount 当前玩家会话数 Number
+         * @type {string || null}
+         */
+        this.SortExpression = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AliasId = 'AliasId' in params ? params.AliasId : null;
+        this.FleetId = 'FleetId' in params ? params.FleetId : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.NextToken = 'NextToken' in params ? params.NextToken : null;
+        this.FilterExpression = 'FilterExpression' in params ? params.FilterExpression : null;
+        this.SortExpression = 'SortExpression' in params ? params.SortExpression : null;
+
+    }
+}
+
+/**
  * StopGameServerSessionPlacement返回参数结构体
  * @class
  */
@@ -2059,6 +2190,7 @@ module.exports = {
     DescribeGameServerSessionDetailsResponse: DescribeGameServerSessionDetailsResponse,
     JoinGameServerSessionResponse: JoinGameServerSessionResponse,
     DesiredPlayerSession: DesiredPlayerSession,
+    SearchGameServerSessionsResponse: SearchGameServerSessionsResponse,
     DescribeGameServerSessionPlacementRequest: DescribeGameServerSessionPlacementRequest,
     PlacedPlayerSession: PlacedPlayerSession,
     GameServerSessionPlacement: GameServerSessionPlacement,
@@ -2070,6 +2202,7 @@ module.exports = {
     StartGameServerSessionPlacementRequest: StartGameServerSessionPlacementRequest,
     GameServerSession: GameServerSession,
     DescribeGameServerSessionPlacementResponse: DescribeGameServerSessionPlacementResponse,
+    SearchGameServerSessionsRequest: SearchGameServerSessionsRequest,
     StopGameServerSessionPlacementResponse: StopGameServerSessionPlacementResponse,
     InstanceAccess: InstanceAccess,
 
