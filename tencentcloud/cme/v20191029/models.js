@@ -3725,7 +3725,7 @@ class VideoMaterial extends  AbstractModel {
         this.CoverUrl = null;
 
         /**
-         * 媒体文件分辨率。
+         * 媒体文件分辨率。取值为：LD/SD/HD/FHD/2K/4K。
          * @type {string || null}
          */
         this.Resolution = null;

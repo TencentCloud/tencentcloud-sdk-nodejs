@@ -464,6 +464,66 @@ off：关闭
 }
 
 /**
+ * ImageOptimization配置
+ * @class
+ */
+class ImageOptimization extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * WebpAdapter配置
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {WebpAdapter || null}
+         */
+        this.WebpAdapter = null;
+
+        /**
+         * TpgAdapter配置
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {TpgAdapter || null}
+         */
+        this.TpgAdapter = null;
+
+        /**
+         * GuetzliAdapter配置
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {GuetzliAdapter || null}
+         */
+        this.GuetzliAdapter = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.WebpAdapter) {
+            let obj = new WebpAdapter();
+            obj.deserialize(params.WebpAdapter)
+            this.WebpAdapter = obj;
+        }
+
+        if (params.TpgAdapter) {
+            let obj = new TpgAdapter();
+            obj.deserialize(params.TpgAdapter)
+            this.TpgAdapter = obj;
+        }
+
+        if (params.GuetzliAdapter) {
+            let obj = new GuetzliAdapter();
+            obj.deserialize(params.GuetzliAdapter)
+            this.GuetzliAdapter = obj;
+        }
+
+    }
+}
+
+/**
  * 域名 https 加速配置，默认为关闭状态
  * @class
  */
@@ -1532,6 +1592,35 @@ brotli：需要同时指定 GZIP 压缩才可启用
 }
 
 /**
+ * 图片优化-GuetzliAdapter配置
+ * @class
+ */
+class GuetzliAdapter extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 开关，"on/off"
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+
+    }
+}
+
+/**
  * 源站配置复杂类型，支持以下配置：
 + 源站指定为单个域名
 + 源站指定为多个 IP，可配置端口（1~65535），可配置权重（1~100），格式为 IP:端口:权重
@@ -2243,6 +2332,35 @@ class UpdatePayTypeRequest extends  AbstractModel {
         }
         this.Area = 'Area' in params ? params.Area : null;
         this.PayType = 'PayType' in params ? params.PayType : null;
+
+    }
+}
+
+/**
+ * 图片优化-TpgAdapter配置
+ * @class
+ */
+class TpgAdapter extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 开关，"on/off"
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
 
     }
 }
@@ -3790,6 +3908,35 @@ off：关闭
 }
 
 /**
+ * 图片优化-WebpAdapter配置
+ * @class
+ */
+class WebpAdapter extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 开关，"on/off"
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+
+    }
+}
+
+/**
  * StartCdnDomain请求参数结构体
  * @class
  */
@@ -5005,6 +5152,13 @@ global：全球锁定
          */
         this.SecurityConfig = null;
 
+        /**
+         * ImageOptimization配置
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {ImageOptimization || null}
+         */
+        this.ImageOptimization = null;
+
     }
 
     /**
@@ -5199,6 +5353,12 @@ global：全球锁定
             let obj = new SecurityConfig();
             obj.deserialize(params.SecurityConfig)
             this.SecurityConfig = obj;
+        }
+
+        if (params.ImageOptimization) {
+            let obj = new ImageOptimization();
+            obj.deserialize(params.ImageOptimization)
+            this.ImageOptimization = obj;
         }
 
     }
@@ -9813,6 +9973,7 @@ module.exports = {
     DescribePushQuotaResponse: DescribePushQuotaResponse,
     DescribePurgeQuotaResponse: DescribePurgeQuotaResponse,
     Authentication: Authentication,
+    ImageOptimization: ImageOptimization,
     Https: Https,
     ReportData: ReportData,
     DescribeTrafficPackagesRequest: DescribeTrafficPackagesRequest,
@@ -9833,6 +9994,7 @@ module.exports = {
     DescribeDomainsResponse: DescribeDomainsResponse,
     CreateClsLogTopicRequest: CreateClsLogTopicRequest,
     CompressionRule: CompressionRule,
+    GuetzliAdapter: GuetzliAdapter,
     Origin: Origin,
     EnableCachesRequest: EnableCachesRequest,
     Quota: Quota,
@@ -9844,6 +10006,7 @@ module.exports = {
     DescribeDomainsConfigResponse: DescribeDomainsConfigResponse,
     BriefDomain: BriefDomain,
     UpdatePayTypeRequest: UpdatePayTypeRequest,
+    TpgAdapter: TpgAdapter,
     DescribeReportDataResponse: DescribeReportDataResponse,
     DisableClsLogTopicRequest: DisableClsLogTopicRequest,
     ListClsTopicDomainsResponse: ListClsTopicDomainsResponse,
@@ -9863,6 +10026,7 @@ module.exports = {
     DescribeCertDomainsRequest: DescribeCertDomainsRequest,
     DescribeDomainsConfigRequest: DescribeDomainsConfigRequest,
     AdvancedCache: AdvancedCache,
+    WebpAdapter: WebpAdapter,
     StartCdnDomainRequest: StartCdnDomainRequest,
     MapInfo: MapInfo,
     DescribeCertDomainsResponse: DescribeCertDomainsResponse,

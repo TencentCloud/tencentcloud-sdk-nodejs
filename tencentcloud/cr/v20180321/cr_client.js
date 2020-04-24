@@ -18,15 +18,19 @@ const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const UploadFileRequest = models.UploadFileRequest;
 const UploadFileResponse = models.UploadFileResponse;
+const UploadDataJsonResponse = models.UploadDataJsonResponse;
 const DescribeTaskStatusResponse = models.DescribeTaskStatusResponse;
 const DownloadReportRequest = models.DownloadReportRequest;
 const ApplyCreditAuditResponse = models.ApplyCreditAuditResponse;
 const UploadDataFileResponse = models.UploadDataFileResponse;
 const SingleBlackApply = models.SingleBlackApply;
 const SingleRecord = models.SingleRecord;
+const QueryInstantDataResponse = models.QueryInstantDataResponse;
 const DownloadRecordListRequest = models.DownloadRecordListRequest;
+const UploadDataJsonRequest = models.UploadDataJsonRequest;
 const DescribeCreditResultResponse = models.DescribeCreditResultResponse;
 const DownloadDialogueTextResponse = models.DownloadDialogueTextResponse;
+const QueryInstantDataRequest = models.QueryInstantDataRequest;
 const ApplyBlackListResponse = models.ApplyBlackListResponse;
 const DescribeRecordsRequest = models.DescribeRecordsRequest;
 const DescribeCreditResultRequest = models.DescribeCreditResultRequest;
@@ -70,6 +74,17 @@ class CrClient extends AbstractClient {
     UploadFile(req, cb) {
         let resp = new UploadFileResponse();
         this.request("UploadFile", req, resp, cb);
+    }
+
+    /**
+     * 上传Json格式数据，接口返回数据任务ID
+     * @param {UploadDataJsonRequest} req
+     * @param {function(string, UploadDataJsonResponse):void} cb
+     * @public
+     */
+    UploadDataJson(req, cb) {
+        let resp = new UploadDataJsonResponse();
+        this.request("UploadDataJson", req, resp, cb);
     }
 
     /**
@@ -128,6 +143,17 @@ class CrClient extends AbstractClient {
             multipart: true
         };
         this.request("UploadDataFile", req, resp, cb);
+    }
+
+    /**
+     * 实时数据查询
+     * @param {QueryInstantDataRequest} req
+     * @param {function(string, QueryInstantDataResponse):void} cb
+     * @public
+     */
+    QueryInstantData(req, cb) {
+        let resp = new QueryInstantDataResponse();
+        this.request("QueryInstantData", req, resp, cb);
     }
 
     /**

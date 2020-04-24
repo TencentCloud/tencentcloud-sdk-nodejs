@@ -8458,20 +8458,85 @@ class CreateContentReviewTemplateResponse extends  AbstractModel {
 }
 
 /**
- * 智能精彩片段任务控制参数
+ * ModifyAnimatedGraphicsTemplate请求参数结构体
  * @class
  */
-class HighlightsConfigureInfo extends  AbstractModel {
+class ModifyAnimatedGraphicsTemplateRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 智能精彩片段任务开关，可选值：
-<li>ON：开启智能精彩片段任务；</li>
-<li>OFF：关闭智能精彩片段任务。</li>
+         * 转动图模板唯一标识。
+         * @type {number || null}
+         */
+        this.Definition = null;
+
+        /**
+         * 转动图模板名称，长度限制：64 个字符。
          * @type {string || null}
          */
-        this.Switch = null;
+        this.Name = null;
+
+        /**
+         * 动图宽度（或长边）的最大值，取值范围：0 和 [128, 4096]，单位：px。
+<li>当 Width、Height 均为 0，则分辨率同源；</li>
+<li>当 Width 为 0，Height 非 0，则 Width 按比例缩放；</li>
+<li>当 Width 非 0，Height 为 0，则 Height 按比例缩放；</li>
+<li>当 Width、Height 均非 0，则分辨率按用户指定。</li>
+默认值：0。
+         * @type {number || null}
+         */
+        this.Width = null;
+
+        /**
+         * 动图高度（或短边）的最大值，取值范围：0 和 [128, 4096]，单位：px。
+<li>当 Width、Height 均为 0，则分辨率同源；</li>
+<li>当 Width 为 0，Height 非 0，则 Width 按比例缩放；</li>
+<li>当 Width 非 0，Height 为 0，则 Height 按比例缩放；</li>
+<li>当 Width、Height 均非 0，则分辨率按用户指定。</li>
+默认值：0。
+         * @type {number || null}
+         */
+        this.Height = null;
+
+        /**
+         * 分辨率自适应，可选值：
+<li>open：开启，此时，Width 代表视频的长边，Height 表示视频的短边；</li>
+<li>close：关闭，此时，Width 代表视频的宽度，Height 表示视频的高度。</li>
+默认值：open。
+         * @type {string || null}
+         */
+        this.ResolutionAdaptive = null;
+
+        /**
+         * 动图格式，取值为 gif 和 webp。
+         * @type {string || null}
+         */
+        this.Format = null;
+
+        /**
+         * 帧率，取值范围：[1, 30]，单位：Hz。
+         * @type {number || null}
+         */
+        this.Fps = null;
+
+        /**
+         * 图片质量，取值范围：[1, 100]，默认值为 75。
+         * @type {number || null}
+         */
+        this.Quality = null;
+
+        /**
+         * 模板描述信息，长度限制：256 个字符。
+         * @type {string || null}
+         */
+        this.Comment = null;
+
+        /**
+         * 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
+         * @type {number || null}
+         */
+        this.SubAppId = null;
 
     }
 
@@ -8482,7 +8547,16 @@ class HighlightsConfigureInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Switch = 'Switch' in params ? params.Switch : null;
+        this.Definition = 'Definition' in params ? params.Definition : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Width = 'Width' in params ? params.Width : null;
+        this.Height = 'Height' in params ? params.Height : null;
+        this.ResolutionAdaptive = 'ResolutionAdaptive' in params ? params.ResolutionAdaptive : null;
+        this.Format = 'Format' in params ? params.Format : null;
+        this.Fps = 'Fps' in params ? params.Fps : null;
+        this.Quality = 'Quality' in params ? params.Quality : null;
+        this.Comment = 'Comment' in params ? params.Comment : null;
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
 
     }
 }
@@ -12751,6 +12825,12 @@ class PlayerConfig extends  AbstractModel {
          */
         this.UpdateTime = null;
 
+        /**
+         * 模板描述信息。
+         * @type {string || null}
+         */
+        this.Comment = null;
+
     }
 
     /**
@@ -12782,6 +12862,7 @@ class PlayerConfig extends  AbstractModel {
         }
         this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
         this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.Comment = 'Comment' in params ? params.Comment : null;
 
     }
 }
@@ -12897,6 +12978,41 @@ class ModifySubAppIdStatusRequest extends  AbstractModel {
         }
         this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
         this.Status = 'Status' in params ? params.Status : null;
+
+    }
+}
+
+/**
+ * CreateSubAppId返回参数结构体
+ * @class
+ */
+class CreateSubAppIdResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 新创建的子应用 ID。
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -13796,6 +13912,12 @@ class ProcedureTemplate extends  AbstractModel {
         this.Type = null;
 
         /**
+         * 模板描述信息，长度限制：256 个字符。
+         * @type {string || null}
+         */
+        this.Comment = null;
+
+        /**
          * 视频处理类型任务参数。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {MediaProcessTaskInput || null}
@@ -13853,6 +13975,7 @@ class ProcedureTemplate extends  AbstractModel {
         }
         this.Name = 'Name' in params ? params.Name : null;
         this.Type = 'Type' in params ? params.Type : null;
+        this.Comment = 'Comment' in params ? params.Comment : null;
 
         if (params.MediaProcessTask) {
             let obj = new MediaProcessTaskInput();
@@ -14611,6 +14734,12 @@ class ImageSpriteTemplate extends  AbstractModel {
          */
         this.FillType = null;
 
+        /**
+         * 模板描述信息。
+         * @type {string || null}
+         */
+        this.Comment = null;
+
     }
 
     /**
@@ -14633,6 +14762,7 @@ class ImageSpriteTemplate extends  AbstractModel {
         this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
         this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
         this.FillType = 'FillType' in params ? params.FillType : null;
+        this.Comment = 'Comment' in params ? params.Comment : null;
 
     }
 }
@@ -18541,85 +18671,20 @@ class PoliticalConfigureInfo extends  AbstractModel {
 }
 
 /**
- * ModifyAnimatedGraphicsTemplate请求参数结构体
+ * 智能精彩片段任务控制参数
  * @class
  */
-class ModifyAnimatedGraphicsTemplateRequest extends  AbstractModel {
+class HighlightsConfigureInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 转动图模板唯一标识。
-         * @type {number || null}
-         */
-        this.Definition = null;
-
-        /**
-         * 转动图模板名称，长度限制：64 个字符。
+         * 智能精彩片段任务开关，可选值：
+<li>ON：开启智能精彩片段任务；</li>
+<li>OFF：关闭智能精彩片段任务。</li>
          * @type {string || null}
          */
-        this.Name = null;
-
-        /**
-         * 动图宽度（或长边）的最大值，取值范围：0 和 [128, 4096]，单位：px。
-<li>当 Width、Height 均为 0，则分辨率同源；</li>
-<li>当 Width 为 0，Height 非 0，则 Width 按比例缩放；</li>
-<li>当 Width 非 0，Height 为 0，则 Height 按比例缩放；</li>
-<li>当 Width、Height 均非 0，则分辨率按用户指定。</li>
-默认值：0。
-         * @type {number || null}
-         */
-        this.Width = null;
-
-        /**
-         * 动图高度（或短边）的最大值，取值范围：0 和 [128, 4096]，单位：px。
-<li>当 Width、Height 均为 0，则分辨率同源；</li>
-<li>当 Width 为 0，Height 非 0，则 Width 按比例缩放；</li>
-<li>当 Width 非 0，Height 为 0，则 Height 按比例缩放；</li>
-<li>当 Width、Height 均非 0，则分辨率按用户指定。</li>
-默认值：0。
-         * @type {number || null}
-         */
-        this.Height = null;
-
-        /**
-         * 分辨率自适应，可选值：
-<li>open：开启，此时，Width 代表视频的长边，Height 表示视频的短边；</li>
-<li>close：关闭，此时，Width 代表视频的宽度，Height 表示视频的高度。</li>
-默认值：open。
-         * @type {string || null}
-         */
-        this.ResolutionAdaptive = null;
-
-        /**
-         * 动图格式，取值为 gif 和 webp。
-         * @type {string || null}
-         */
-        this.Format = null;
-
-        /**
-         * 帧率，取值范围：[1, 30]，单位：Hz。
-         * @type {number || null}
-         */
-        this.Fps = null;
-
-        /**
-         * 图片质量，取值范围：[1, 100]，默认值为 75。
-         * @type {number || null}
-         */
-        this.Quality = null;
-
-        /**
-         * 模板描述信息，长度限制：256 个字符。
-         * @type {string || null}
-         */
-        this.Comment = null;
-
-        /**
-         * 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
-         * @type {number || null}
-         */
-        this.SubAppId = null;
+        this.Switch = null;
 
     }
 
@@ -18630,16 +18695,7 @@ class ModifyAnimatedGraphicsTemplateRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Definition = 'Definition' in params ? params.Definition : null;
-        this.Name = 'Name' in params ? params.Name : null;
-        this.Width = 'Width' in params ? params.Width : null;
-        this.Height = 'Height' in params ? params.Height : null;
-        this.ResolutionAdaptive = 'ResolutionAdaptive' in params ? params.ResolutionAdaptive : null;
-        this.Format = 'Format' in params ? params.Format : null;
-        this.Fps = 'Fps' in params ? params.Fps : null;
-        this.Quality = 'Quality' in params ? params.Quality : null;
-        this.Comment = 'Comment' in params ? params.Comment : null;
-        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
+        this.Switch = 'Switch' in params ? params.Switch : null;
 
     }
 }
@@ -24377,6 +24433,41 @@ class AiRecognitionTaskAsrWordsResult extends  AbstractModel {
 }
 
 /**
+ * CreateSubAppId请求参数结构体
+ * @class
+ */
+class CreateSubAppIdRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 子应用名称，长度限制：40个字符。
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 子应用简介，长度限制： 300个字符。
+         * @type {string || null}
+         */
+        this.Description = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Description = 'Description' in params ? params.Description : null;
+
+    }
+}
+
+/**
  * DescribeProcedureTemplates返回参数结构体
  * @class
  */
@@ -27260,7 +27351,7 @@ module.exports = {
     TranscodeTask2017: TranscodeTask2017,
     CreatePersonSampleResponse: CreatePersonSampleResponse,
     CreateContentReviewTemplateResponse: CreateContentReviewTemplateResponse,
-    HighlightsConfigureInfo: HighlightsConfigureInfo,
+    ModifyAnimatedGraphicsTemplateRequest: ModifyAnimatedGraphicsTemplateRequest,
     DescribeProcedureTemplatesRequest: DescribeProcedureTemplatesRequest,
     ProhibitedConfigureInfoForUpdate: ProhibitedConfigureInfoForUpdate,
     TagConfigureInfoForUpdate: TagConfigureInfoForUpdate,
@@ -27344,6 +27435,7 @@ module.exports = {
     ConfirmEventsRequest: ConfirmEventsRequest,
     CreateAIRecognitionTemplateResponse: CreateAIRecognitionTemplateResponse,
     ModifySubAppIdStatusRequest: ModifySubAppIdStatusRequest,
+    CreateSubAppIdResponse: CreateSubAppIdResponse,
     CreateWatermarkTemplateResponse: CreateWatermarkTemplateResponse,
     AiReviewTerrorismTaskOutput: AiReviewTerrorismTaskOutput,
     ResetProcedureTemplateResponse: ResetProcedureTemplateResponse,
@@ -27445,7 +27537,7 @@ module.exports = {
     ModifyAIRecognitionTemplateResponse: ModifyAIRecognitionTemplateResponse,
     PoliticalImgReviewTemplateInfo: PoliticalImgReviewTemplateInfo,
     PoliticalConfigureInfo: PoliticalConfigureInfo,
-    ModifyAnimatedGraphicsTemplateRequest: ModifyAnimatedGraphicsTemplateRequest,
+    HighlightsConfigureInfo: HighlightsConfigureInfo,
     AiRecognitionTaskOcrWordsSegmentItem: AiRecognitionTaskOcrWordsSegmentItem,
     MediaProcessTaskResult: MediaProcessTaskResult,
     DeleteWordSamplesResponse: DeleteWordSamplesResponse,
@@ -27542,6 +27634,7 @@ module.exports = {
     DescribeAIAnalysisTemplatesResponse: DescribeAIAnalysisTemplatesResponse,
     CreateSnapshotByTimeOffsetTemplateRequest: CreateSnapshotByTimeOffsetTemplateRequest,
     AiRecognitionTaskAsrWordsResult: AiRecognitionTaskAsrWordsResult,
+    CreateSubAppIdRequest: CreateSubAppIdRequest,
     DescribeProcedureTemplatesResponse: DescribeProcedureTemplatesResponse,
     SearchMediaRequest: SearchMediaRequest,
     CreateSampleSnapshotTemplateRequest: CreateSampleSnapshotTemplateRequest,

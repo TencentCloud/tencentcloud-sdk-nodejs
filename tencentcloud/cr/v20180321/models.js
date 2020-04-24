@@ -108,6 +108,42 @@ class UploadFileResponse extends  AbstractModel {
 }
 
 /**
+ * UploadDataJson返回参数结构体
+ * @class
+ */
+class UploadDataJsonResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 响应报文信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Data = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Data = 'Data' in params ? params.Data : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeTaskStatus返回参数结构体
  * @class
  */
@@ -412,6 +448,50 @@ class SingleRecord extends  AbstractModel {
 }
 
 /**
+ * QueryInstantData返回参数结构体
+ * @class
+ */
+class QueryInstantDataResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 总数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 返回内容
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Data = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.Data = 'Data' in params ? params.Data : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DownloadRecordList请求参数结构体
  * @class
  */
@@ -456,6 +536,62 @@ class DownloadRecordListRequest extends  AbstractModel {
         this.Operation = 'Operation' in params ? params.Operation : null;
         this.BizDate = 'BizDate' in params ? params.BizDate : null;
         this.InstId = 'InstId' in params ? params.InstId : null;
+
+    }
+}
+
+/**
+ * UploadDataJson请求参数结构体
+ * @class
+ */
+class UploadDataJsonRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 模块名，本接口取值：Data
+         * @type {string || null}
+         */
+        this.Module = null;
+
+        /**
+         * 操作名，本接口取值：UploadJson
+         * @type {string || null}
+         */
+        this.Operation = null;
+
+        /**
+         * 报文信息
+         * @type {string || null}
+         */
+        this.Data = null;
+
+        /**
+         * <p>上传类型，不填默认到期/逾期提醒数据，取值范围：</p><ul style="margin-bottom:0px;"><li>data：到期/逾期提醒数据</li><li>repay：到期/逾期提醒停拨数据</li></ul>
+         * @type {string || null}
+         */
+        this.UploadModel = null;
+
+        /**
+         * 实例ID，不传默认为系统分配的初始实例。
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Module = 'Module' in params ? params.Module : null;
+        this.Operation = 'Operation' in params ? params.Operation : null;
+        this.Data = 'Data' in params ? params.Data : null;
+        this.UploadModel = 'UploadModel' in params ? params.UploadModel : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
 
     }
 }
@@ -564,6 +700,69 @@ class DownloadDialogueTextResponse extends  AbstractModel {
         }
         this.TextReportUrl = 'TextReportUrl' in params ? params.TextReportUrl : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * QueryInstantData请求参数结构体
+ * @class
+ */
+class QueryInstantDataRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 模块名，本接口取值：Data
+         * @type {string || null}
+         */
+        this.Module = null;
+
+        /**
+         * 操作名，本接口取值：Query
+         * @type {string || null}
+         */
+        this.Operation = null;
+
+        /**
+         * 产品ID
+         * @type {string || null}
+         */
+        this.ProductId = null;
+
+        /**
+         * 实例ID，不传默认为系统分配的初始实例
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 查询类型：callRecord 通话记录
+         * @type {string || null}
+         */
+        this.QueryModel = null;
+
+        /**
+         * 查询参数
+         * @type {string || null}
+         */
+        this.Data = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Module = 'Module' in params ? params.Module : null;
+        this.Operation = 'Operation' in params ? params.Operation : null;
+        this.ProductId = 'ProductId' in params ? params.ProductId : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.QueryModel = 'QueryModel' in params ? params.QueryModel : null;
+        this.Data = 'Data' in params ? params.Data : null;
 
     }
 }
@@ -1210,15 +1409,19 @@ class DownloadDialogueTextRequest extends  AbstractModel {
 module.exports = {
     UploadFileRequest: UploadFileRequest,
     UploadFileResponse: UploadFileResponse,
+    UploadDataJsonResponse: UploadDataJsonResponse,
     DescribeTaskStatusResponse: DescribeTaskStatusResponse,
     DownloadReportRequest: DownloadReportRequest,
     ApplyCreditAuditResponse: ApplyCreditAuditResponse,
     UploadDataFileResponse: UploadDataFileResponse,
     SingleBlackApply: SingleBlackApply,
     SingleRecord: SingleRecord,
+    QueryInstantDataResponse: QueryInstantDataResponse,
     DownloadRecordListRequest: DownloadRecordListRequest,
+    UploadDataJsonRequest: UploadDataJsonRequest,
     DescribeCreditResultResponse: DescribeCreditResultResponse,
     DownloadDialogueTextResponse: DownloadDialogueTextResponse,
+    QueryInstantDataRequest: QueryInstantDataRequest,
     ApplyBlackListResponse: ApplyBlackListResponse,
     DescribeRecordsRequest: DescribeRecordsRequest,
     DescribeCreditResultRequest: DescribeCreditResultRequest,
