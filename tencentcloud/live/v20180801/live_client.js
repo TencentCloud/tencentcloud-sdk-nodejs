@@ -165,6 +165,7 @@ const CreateLiveCallbackRuleRequest = models.CreateLiveCallbackRuleRequest;
 const DeleteLiveWatermarkRuleResponse = models.DeleteLiveWatermarkRuleResponse;
 const PublishTime = models.PublishTime;
 const ModifyLiveCertResponse = models.ModifyLiveCertResponse;
+const MonitorStreamPlayInfo = models.MonitorStreamPlayInfo;
 const DescribeLiveTranscodeDetailInfoRequest = models.DescribeLiveTranscodeDetailInfoRequest;
 const ProIspPlayCodeDataInfo = models.ProIspPlayCodeDataInfo;
 const DeleteLiveWatermarkRequest = models.DeleteLiveWatermarkRequest;
@@ -214,6 +215,7 @@ const ModifyLiveTranscodeTemplateRequest = models.ModifyLiveTranscodeTemplateReq
 const ModifyLiveDomainCertResponse = models.ModifyLiveDomainCertResponse;
 const ModifyLiveCallbackTemplateResponse = models.ModifyLiveCallbackTemplateResponse;
 const EnableLiveDomainRequest = models.EnableLiveDomainRequest;
+const DescribeAllStreamPlayInfoListResponse = models.DescribeAllStreamPlayInfoListResponse;
 const ForbidLiveDomainResponse = models.ForbidLiveDomainResponse;
 const DescribeLiveSnapshotRulesRequest = models.DescribeLiveSnapshotRulesRequest;
 const CreateLiveTranscodeRuleResponse = models.CreateLiveTranscodeRuleResponse;
@@ -247,6 +249,7 @@ const DeleteLiveWatermarkResponse = models.DeleteLiveWatermarkResponse;
 const DescribeLivePushAuthKeyResponse = models.DescribeLivePushAuthKeyResponse;
 const CreateLiveWatermarkRuleRequest = models.CreateLiveWatermarkRuleRequest;
 const DescribeLiveRecordTemplatesRequest = models.DescribeLiveRecordTemplatesRequest;
+const DescribeAllStreamPlayInfoListRequest = models.DescribeAllStreamPlayInfoListRequest;
 const DescribeLiveDomainResponse = models.DescribeLiveDomainResponse;
 const PlayDataInfoByStream = models.PlayDataInfoByStream;
 const StopLiveRecordResponse = models.StopLiveRecordResponse;
@@ -1278,6 +1281,17 @@ class LiveClient extends AbstractClient {
     DescribeGroupProIspPlayInfoList(req, cb) {
         let resp = new DescribeGroupProIspPlayInfoListResponse();
         this.request("DescribeGroupProIspPlayInfoList", req, resp, cb);
+    }
+
+    /**
+     * 输入某个时间点（1分钟维度），查询该时间点所有流的下行信息。
+     * @param {DescribeAllStreamPlayInfoListRequest} req
+     * @param {function(string, DescribeAllStreamPlayInfoListResponse):void} cb
+     * @public
+     */
+    DescribeAllStreamPlayInfoList(req, cb) {
+        let resp = new DescribeAllStreamPlayInfoListResponse();
+        this.request("DescribeAllStreamPlayInfoList", req, resp, cb);
     }
 
     /**

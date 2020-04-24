@@ -5342,11 +5342,18 @@ class VmGroupSimple extends  AbstractModel {
         this.MicroserviceType = null;
 
         /**
-         * GroupResourceType
+         * 部署组资源类型
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.GroupResourceType = null;
+
+        /**
+         * 部署组更新时间戳
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.UpdatedTime = null;
 
     }
 
@@ -5372,6 +5379,7 @@ class VmGroupSimple extends  AbstractModel {
         this.NamespaceName = 'NamespaceName' in params ? params.NamespaceName : null;
         this.MicroserviceType = 'MicroserviceType' in params ? params.MicroserviceType : null;
         this.GroupResourceType = 'GroupResourceType' in params ? params.GroupResourceType : null;
+        this.UpdatedTime = 'UpdatedTime' in params ? params.UpdatedTime : null;
 
     }
 }

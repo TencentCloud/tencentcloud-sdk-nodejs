@@ -477,6 +477,20 @@ UNAVAILABLE-不可用
          */
         this.ServiceState = null;
 
+        /**
+         * 用户ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.UserId = null;
+
+        /**
+         * 游戏ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.GameId = null;
+
     }
 
     /**
@@ -493,6 +507,8 @@ UNAVAILABLE-不可用
         this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
         this.Ip = 'Ip' in params ? params.Ip : null;
         this.ServiceState = 'ServiceState' in params ? params.ServiceState : null;
+        this.UserId = 'UserId' in params ? params.UserId : null;
+        this.GameId = 'GameId' in params ? params.GameId : null;
 
     }
 }

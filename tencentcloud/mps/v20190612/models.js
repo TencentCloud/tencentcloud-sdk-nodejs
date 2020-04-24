@@ -7680,6 +7680,12 @@ class ImageSpriteTemplate extends  AbstractModel {
          */
         this.FillType = null;
 
+        /**
+         * 模板描述信息。
+         * @type {string || null}
+         */
+        this.Comment = null;
+
     }
 
     /**
@@ -7702,6 +7708,7 @@ class ImageSpriteTemplate extends  AbstractModel {
         this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
         this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
         this.FillType = 'FillType' in params ? params.FillType : null;
+        this.Comment = 'Comment' in params ? params.Comment : null;
 
     }
 }

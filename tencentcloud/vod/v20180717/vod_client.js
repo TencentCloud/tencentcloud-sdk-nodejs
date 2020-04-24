@@ -167,7 +167,7 @@ const AiRecognitionTaskHeadTailResult = models.AiRecognitionTaskHeadTailResult;
 const TranscodeTask2017 = models.TranscodeTask2017;
 const CreatePersonSampleResponse = models.CreatePersonSampleResponse;
 const CreateContentReviewTemplateResponse = models.CreateContentReviewTemplateResponse;
-const HighlightsConfigureInfo = models.HighlightsConfigureInfo;
+const ModifyAnimatedGraphicsTemplateRequest = models.ModifyAnimatedGraphicsTemplateRequest;
 const DescribeProcedureTemplatesRequest = models.DescribeProcedureTemplatesRequest;
 const ProhibitedConfigureInfoForUpdate = models.ProhibitedConfigureInfoForUpdate;
 const TagConfigureInfoForUpdate = models.TagConfigureInfoForUpdate;
@@ -251,6 +251,7 @@ const PlayerConfig = models.PlayerConfig;
 const ConfirmEventsRequest = models.ConfirmEventsRequest;
 const CreateAIRecognitionTemplateResponse = models.CreateAIRecognitionTemplateResponse;
 const ModifySubAppIdStatusRequest = models.ModifySubAppIdStatusRequest;
+const CreateSubAppIdResponse = models.CreateSubAppIdResponse;
 const CreateWatermarkTemplateResponse = models.CreateWatermarkTemplateResponse;
 const AiReviewTerrorismTaskOutput = models.AiReviewTerrorismTaskOutput;
 const ResetProcedureTemplateResponse = models.ResetProcedureTemplateResponse;
@@ -352,7 +353,7 @@ const AiRecognitionTaskAsrFullTextResult = models.AiRecognitionTaskAsrFullTextRe
 const ModifyAIRecognitionTemplateResponse = models.ModifyAIRecognitionTemplateResponse;
 const PoliticalImgReviewTemplateInfo = models.PoliticalImgReviewTemplateInfo;
 const PoliticalConfigureInfo = models.PoliticalConfigureInfo;
-const ModifyAnimatedGraphicsTemplateRequest = models.ModifyAnimatedGraphicsTemplateRequest;
+const HighlightsConfigureInfo = models.HighlightsConfigureInfo;
 const AiRecognitionTaskOcrWordsSegmentItem = models.AiRecognitionTaskOcrWordsSegmentItem;
 const MediaProcessTaskResult = models.MediaProcessTaskResult;
 const DeleteWordSamplesResponse = models.DeleteWordSamplesResponse;
@@ -449,6 +450,7 @@ const DescribeVideoTrackTemplatesResponse = models.DescribeVideoTrackTemplatesRe
 const DescribeAIAnalysisTemplatesResponse = models.DescribeAIAnalysisTemplatesResponse;
 const CreateSnapshotByTimeOffsetTemplateRequest = models.CreateSnapshotByTimeOffsetTemplateRequest;
 const AiRecognitionTaskAsrWordsResult = models.AiRecognitionTaskAsrWordsResult;
+const CreateSubAppIdRequest = models.CreateSubAppIdRequest;
 const DescribeProcedureTemplatesResponse = models.DescribeProcedureTemplatesResponse;
 const SearchMediaRequest = models.SearchMediaRequest;
 const CreateSampleSnapshotTemplateRequest = models.CreateSampleSnapshotTemplateRequest;
@@ -1248,6 +1250,17 @@ class VodClient extends AbstractClient {
     DeleteAIRecognitionTemplate(req, cb) {
         let resp = new DeleteAIRecognitionTemplateResponse();
         this.request("DeleteAIRecognitionTemplate", req, resp, cb);
+    }
+
+    /**
+     * 该接口用于创建点播子应用。
+     * @param {CreateSubAppIdRequest} req
+     * @param {function(string, CreateSubAppIdResponse):void} cb
+     * @public
+     */
+    CreateSubAppId(req, cb) {
+        let resp = new CreateSubAppIdResponse();
+        this.request("CreateSubAppId", req, resp, cb);
     }
 
     /**

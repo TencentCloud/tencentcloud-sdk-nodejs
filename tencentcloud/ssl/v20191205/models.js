@@ -2622,7 +2622,7 @@ class DescribeCertificatesRequest extends  AbstractModel {
         this.Limit = null;
 
         /**
-         * 搜索关键词。
+         * 搜索关键词，可搜索证书 ID、备注名称、域名。例如： a8xHcaIs。
          * @type {string || null}
          */
         this.SearchKey = null;

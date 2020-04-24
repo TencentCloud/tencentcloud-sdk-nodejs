@@ -99,6 +99,24 @@ class CreateDBInstanceRequest extends  AbstractModel {
          */
         this.DbVersionId = null;
 
+        /**
+         * 实例名称， 可以通过该字段自主的设置实例的名字
+         * @type {string || null}
+         */
+        this.InstanceName = null;
+
+        /**
+         * 安全组ID列表
+         * @type {Array.<string> || null}
+         */
+        this.SecurityGroupIds = null;
+
+        /**
+         * 自动续费标志，1:自动续费，2:不自动续费
+         * @type {number || null}
+         */
+        this.AutoRenewFlag = null;
+
     }
 
     /**
@@ -120,6 +138,9 @@ class CreateDBInstanceRequest extends  AbstractModel {
         this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
         this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
         this.DbVersionId = 'DbVersionId' in params ? params.DbVersionId : null;
+        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
+        this.SecurityGroupIds = 'SecurityGroupIds' in params ? params.SecurityGroupIds : null;
+        this.AutoRenewFlag = 'AutoRenewFlag' in params ? params.AutoRenewFlag : null;
 
     }
 }
@@ -2066,6 +2087,12 @@ class DescribePriceRequest extends  AbstractModel {
          */
         this.Count = null;
 
+        /**
+         * 付费类型。postpaid：按量付费   prepaid：预付费
+         * @type {string || null}
+         */
+        this.Paymode = null;
+
     }
 
     /**
@@ -2081,6 +2108,7 @@ class DescribePriceRequest extends  AbstractModel {
         this.Storage = 'Storage' in params ? params.Storage : null;
         this.Period = 'Period' in params ? params.Period : null;
         this.Count = 'Count' in params ? params.Count : null;
+        this.Paymode = 'Paymode' in params ? params.Paymode : null;
 
     }
 }
@@ -3426,6 +3454,12 @@ class ModifyDBInstanceNameResponse extends  AbstractModel {
         super();
 
         /**
+         * 实例ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -3440,6 +3474,7 @@ class ModifyDBInstanceNameResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }

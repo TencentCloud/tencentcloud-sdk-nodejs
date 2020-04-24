@@ -7653,6 +7653,76 @@ class ModifyLiveCertResponse extends  AbstractModel {
 }
 
 /**
+ * 监控播放数据
+ * @class
+ */
+class MonitorStreamPlayInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 播放域名。
+         * @type {string || null}
+         */
+        this.PlayDomain = null;
+
+        /**
+         * 流id。
+         * @type {string || null}
+         */
+        this.StreamName = null;
+
+        /**
+         * 播放码率，0表示原始码率。
+         * @type {number || null}
+         */
+        this.Rate = null;
+
+        /**
+         * 播放协议，可选值包括 Unknown，Flv，Hls，Rtmp，Huyap2p。
+         * @type {string || null}
+         */
+        this.Protocol = null;
+
+        /**
+         * 带宽，单位是Mbps。
+         * @type {number || null}
+         */
+        this.Bandwidth = null;
+
+        /**
+         * 在线人数，1分钟采样一个点，统计采样点的tcp链接数目。
+         * @type {number || null}
+         */
+        this.Online = null;
+
+        /**
+         * 请求数。
+         * @type {number || null}
+         */
+        this.Request = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PlayDomain = 'PlayDomain' in params ? params.PlayDomain : null;
+        this.StreamName = 'StreamName' in params ? params.StreamName : null;
+        this.Rate = 'Rate' in params ? params.Rate : null;
+        this.Protocol = 'Protocol' in params ? params.Protocol : null;
+        this.Bandwidth = 'Bandwidth' in params ? params.Bandwidth : null;
+        this.Online = 'Online' in params ? params.Online : null;
+        this.Request = 'Request' in params ? params.Request : null;
+
+    }
+}
+
+/**
  * DescribeLiveTranscodeDetailInfo请求参数结构体
  * @class
  */
@@ -10189,6 +10259,56 @@ class EnableLiveDomainRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeAllStreamPlayInfoList返回参数结构体
+ * @class
+ */
+class DescribeAllStreamPlayInfoListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 查询时间点，回传的输入参数中的查询时间。
+         * @type {string || null}
+         */
+        this.QueryTime = null;
+
+        /**
+         * 数据信息列表。
+         * @type {Array.<MonitorStreamPlayInfo> || null}
+         */
+        this.DataInfoList = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.QueryTime = 'QueryTime' in params ? params.QueryTime : null;
+
+        if (params.DataInfoList) {
+            this.DataInfoList = new Array();
+            for (let z in params.DataInfoList) {
+                let obj = new MonitorStreamPlayInfo();
+                obj.deserialize(params.DataInfoList[z]);
+                this.DataInfoList.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * ForbidLiveDomain返回参数结构体
  * @class
  */
@@ -11587,6 +11707,34 @@ class DescribeLiveRecordTemplatesRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeAllStreamPlayInfoList请求参数结构体
+ * @class
+ */
+class DescribeAllStreamPlayInfoListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 查询时间点，精确到分钟粒度，支持最近1个月的数据查询，数据延迟为5分钟左右，如果要查询实时的数据，建议传递5分钟前的时间点，格式为yyyy-mm-dd HH:MM:SS。
+         * @type {string || null}
+         */
+        this.QueryTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.QueryTime = 'QueryTime' in params ? params.QueryTime : null;
+
+    }
+}
+
+/**
  * DescribeLiveDomain返回参数结构体
  * @class
  */
@@ -12683,6 +12831,7 @@ module.exports = {
     DeleteLiveWatermarkRuleResponse: DeleteLiveWatermarkRuleResponse,
     PublishTime: PublishTime,
     ModifyLiveCertResponse: ModifyLiveCertResponse,
+    MonitorStreamPlayInfo: MonitorStreamPlayInfo,
     DescribeLiveTranscodeDetailInfoRequest: DescribeLiveTranscodeDetailInfoRequest,
     ProIspPlayCodeDataInfo: ProIspPlayCodeDataInfo,
     DeleteLiveWatermarkRequest: DeleteLiveWatermarkRequest,
@@ -12732,6 +12881,7 @@ module.exports = {
     ModifyLiveDomainCertResponse: ModifyLiveDomainCertResponse,
     ModifyLiveCallbackTemplateResponse: ModifyLiveCallbackTemplateResponse,
     EnableLiveDomainRequest: EnableLiveDomainRequest,
+    DescribeAllStreamPlayInfoListResponse: DescribeAllStreamPlayInfoListResponse,
     ForbidLiveDomainResponse: ForbidLiveDomainResponse,
     DescribeLiveSnapshotRulesRequest: DescribeLiveSnapshotRulesRequest,
     CreateLiveTranscodeRuleResponse: CreateLiveTranscodeRuleResponse,
@@ -12765,6 +12915,7 @@ module.exports = {
     DescribeLivePushAuthKeyResponse: DescribeLivePushAuthKeyResponse,
     CreateLiveWatermarkRuleRequest: CreateLiveWatermarkRuleRequest,
     DescribeLiveRecordTemplatesRequest: DescribeLiveRecordTemplatesRequest,
+    DescribeAllStreamPlayInfoListRequest: DescribeAllStreamPlayInfoListRequest,
     DescribeLiveDomainResponse: DescribeLiveDomainResponse,
     PlayDataInfoByStream: PlayDataInfoByStream,
     StopLiveRecordResponse: StopLiveRecordResponse,

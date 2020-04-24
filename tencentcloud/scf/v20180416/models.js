@@ -49,13 +49,13 @@ class CreateFunctionRequest extends  AbstractModel {
         this.Description = null;
 
         /**
-         * 函数运行时内存大小，默认为 128M，可选范围 128MB-1536MB，并且以 128MB 为阶梯
+         * 函数运行时内存大小，默认为 128M，可选范围 64、128MB-3072MB，并且以 128MB 为阶梯
          * @type {number || null}
          */
         this.MemorySize = null;
 
         /**
-         * 函数最长执行时间，单位为秒，可选值范围 1-300 秒，默认为 3 秒
+         * 函数最长执行时间，单位为秒，可选值范围 1-900 秒，默认为 3 秒
          * @type {number || null}
          */
         this.Timeout = null;
@@ -67,7 +67,7 @@ class CreateFunctionRequest extends  AbstractModel {
         this.Environment = null;
 
         /**
-         * 函数运行环境，目前仅支持 Python2.7，Python3.6，Nodejs6.10， PHP5， PHP7，Golang1 和 Java8，默认Python2.7
+         * 函数运行环境，目前仅支持 Python2.7，Python3.6，Nodejs6.10，Nodejs8.9，Nodejs10.15， PHP5， PHP7，Golang1 和 Java8，默认Python2.7
          * @type {string || null}
          */
         this.Runtime = null;
@@ -1130,19 +1130,19 @@ class UpdateFunctionConfigurationRequest extends  AbstractModel {
         this.Description = null;
 
         /**
-         * 函数运行时内存大小，默认为 128 M，可选范 128 M-1536 M
+         * 函数运行时内存大小，默认为 128 M，可选范64M、128 M-3072 M，以 128MB 为阶梯。
          * @type {number || null}
          */
         this.MemorySize = null;
 
         /**
-         * 函数最长执行时间，单位为秒，可选值范 1-300 秒，默认为 3 秒
+         * 函数最长执行时间，单位为秒，可选值范 1-900 秒，默认为 3 秒
          * @type {number || null}
          */
         this.Timeout = null;
 
         /**
-         * 函数运行环境，目前仅支持 Python2.7，Python3.6，Nodejs6.10，PHP5， PHP7，Golang1 和 Java8
+         * 函数运行环境，目前仅支持 Python2.7，Python3.6，Nodejs6.10，Nodejs8.9，Nodejs10.15，PHP5， PHP7，Golang1 和 Java8
          * @type {string || null}
          */
         this.Runtime = null;
@@ -2246,6 +2246,12 @@ class Trigger extends  AbstractModel {
          */
         this.CustomArgument = null;
 
+        /**
+         * 触发器状态
+         * @type {string || null}
+         */
+        this.AvailableStatus = null;
+
     }
 
     /**
@@ -2262,6 +2268,7 @@ class Trigger extends  AbstractModel {
         this.AddTime = 'AddTime' in params ? params.AddTime : null;
         this.Enable = 'Enable' in params ? params.Enable : null;
         this.CustomArgument = 'CustomArgument' in params ? params.CustomArgument : null;
+        this.AvailableStatus = 'AvailableStatus' in params ? params.AvailableStatus : null;
 
     }
 }
