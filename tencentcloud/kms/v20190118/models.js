@@ -266,6 +266,12 @@ class WhiteboxKeyInfo extends  AbstractModel {
          */
         this.DecryptKey = null;
 
+        /**
+         * 资源ID，格式：creatorUin/$creatorUin/$keyId
+         * @type {string || null}
+         */
+        this.ResourceId = null;
+
     }
 
     /**
@@ -285,6 +291,7 @@ class WhiteboxKeyInfo extends  AbstractModel {
         this.Algorithm = 'Algorithm' in params ? params.Algorithm : null;
         this.EncryptKey = 'EncryptKey' in params ? params.EncryptKey : null;
         this.DecryptKey = 'DecryptKey' in params ? params.DecryptKey : null;
+        this.ResourceId = 'ResourceId' in params ? params.ResourceId : null;
 
     }
 }
@@ -2562,6 +2569,12 @@ class KeyMetadata extends  AbstractModel {
          */
         this.ValidTo = null;
 
+        /**
+         * 资源ID，格式：creatorUin/$creatorUin/$keyId
+         * @type {string || null}
+         */
+        this.ResourceId = null;
+
     }
 
     /**
@@ -2585,6 +2598,7 @@ class KeyMetadata extends  AbstractModel {
         this.DeletionDate = 'DeletionDate' in params ? params.DeletionDate : null;
         this.Origin = 'Origin' in params ? params.Origin : null;
         this.ValidTo = 'ValidTo' in params ? params.ValidTo : null;
+        this.ResourceId = 'ResourceId' in params ? params.ResourceId : null;
 
     }
 }

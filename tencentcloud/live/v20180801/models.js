@@ -411,6 +411,18 @@ class CreateLiveSnapshotTemplateRequest extends  AbstractModel {
          */
         this.PornFlag = null;
 
+        /**
+         * Cos Bucket文件夹前缀。
+         * @type {string || null}
+         */
+        this.CosPrefix = null;
+
+        /**
+         * Cos 文件名称。
+         * @type {string || null}
+         */
+        this.CosFileName = null;
+
     }
 
     /**
@@ -429,6 +441,8 @@ class CreateLiveSnapshotTemplateRequest extends  AbstractModel {
         this.Width = 'Width' in params ? params.Width : null;
         this.Height = 'Height' in params ? params.Height : null;
         this.PornFlag = 'PornFlag' in params ? params.PornFlag : null;
+        this.CosPrefix = 'CosPrefix' in params ? params.CosPrefix : null;
+        this.CosFileName = 'CosFileName' in params ? params.CosFileName : null;
 
     }
 }
@@ -8081,6 +8095,20 @@ class SnapshotTemplateInfo extends  AbstractModel {
          */
         this.Description = null;
 
+        /**
+         * Cos Bucket文件夹前缀。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.CosPrefix = null;
+
+        /**
+         * Cos 文件名称。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.CosFileName = null;
+
     }
 
     /**
@@ -8100,6 +8128,8 @@ class SnapshotTemplateInfo extends  AbstractModel {
         this.CosBucket = 'CosBucket' in params ? params.CosBucket : null;
         this.CosRegion = 'CosRegion' in params ? params.CosRegion : null;
         this.Description = 'Description' in params ? params.Description : null;
+        this.CosPrefix = 'CosPrefix' in params ? params.CosPrefix : null;
+        this.CosFileName = 'CosFileName' in params ? params.CosFileName : null;
 
     }
 }
@@ -11395,6 +11425,18 @@ class ModifyLiveSnapshotTemplateRequest extends  AbstractModel {
          */
         this.CosRegion = null;
 
+        /**
+         * Cos Bucket文件夹前缀。
+         * @type {string || null}
+         */
+        this.CosPrefix = null;
+
+        /**
+         * Cos 文件名称。
+         * @type {string || null}
+         */
+        this.CosFileName = null;
+
     }
 
     /**
@@ -11414,6 +11456,8 @@ class ModifyLiveSnapshotTemplateRequest extends  AbstractModel {
         this.CosAppId = 'CosAppId' in params ? params.CosAppId : null;
         this.CosBucket = 'CosBucket' in params ? params.CosBucket : null;
         this.CosRegion = 'CosRegion' in params ? params.CosRegion : null;
+        this.CosPrefix = 'CosPrefix' in params ? params.CosPrefix : null;
+        this.CosFileName = 'CosFileName' in params ? params.CosFileName : null;
 
     }
 }

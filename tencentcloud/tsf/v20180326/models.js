@@ -828,18 +828,25 @@ class VmGroup extends  AbstractModel {
         this.MicroserviceType = null;
 
         /**
-         * ApplicationType
+         * 应用类型
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.ApplicationType = null;
 
         /**
-         * GroupResourceType
+         * 部署组资源类型
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.GroupResourceType = null;
+
+        /**
+         * 部署组更新时间戳
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.UpdatedTime = null;
 
     }
 
@@ -872,6 +879,7 @@ class VmGroup extends  AbstractModel {
         this.MicroserviceType = 'MicroserviceType' in params ? params.MicroserviceType : null;
         this.ApplicationType = 'ApplicationType' in params ? params.ApplicationType : null;
         this.GroupResourceType = 'GroupResourceType' in params ? params.GroupResourceType : null;
+        this.UpdatedTime = 'UpdatedTime' in params ? params.UpdatedTime : null;
 
     }
 }
@@ -3155,6 +3163,13 @@ class ServerlessGroup extends  AbstractModel {
          */
         this.InstanceCount = null;
 
+        /**
+         * 应用名称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
+         */
+        this.ApplicationName = null;
+
     }
 
     /**
@@ -3182,6 +3197,7 @@ class ServerlessGroup extends  AbstractModel {
         this.StartupParameters = 'StartupParameters' in params ? params.StartupParameters : null;
         this.ApplicationId = 'ApplicationId' in params ? params.ApplicationId : null;
         this.InstanceCount = 'InstanceCount' in params ? params.InstanceCount : null;
+        this.ApplicationName = 'ApplicationName' in params ? params.ApplicationName : null;
 
     }
 }
@@ -3583,6 +3599,13 @@ class ContainerGroupDetail extends  AbstractModel {
          */
         this.InstanceCount = null;
 
+        /**
+         * 部署组更新时间戳
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.UpdatedTime = null;
+
     }
 
     /**
@@ -3641,6 +3664,7 @@ class ContainerGroupDetail extends  AbstractModel {
         this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
         this.GroupResourceType = 'GroupResourceType' in params ? params.GroupResourceType : null;
         this.InstanceCount = 'InstanceCount' in params ? params.InstanceCount : null;
+        this.UpdatedTime = 'UpdatedTime' in params ? params.UpdatedTime : null;
 
     }
 }

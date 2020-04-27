@@ -90,6 +90,7 @@ const DeleteFlowLogRequest = models.DeleteFlowLogRequest;
 const NetDetectState = models.NetDetectState;
 const HaVipDisassociateAddressIpResponse = models.HaVipDisassociateAddressIpResponse;
 const DescribeTaskResultRequest = models.DescribeTaskResultRequest;
+const ModifyAddressInternetChargeTypeResponse = models.ModifyAddressInternetChargeTypeResponse;
 const UnassignIpv6SubnetCidrBlockRequest = models.UnassignIpv6SubnetCidrBlockRequest;
 const ModifyVpcAttributeRequest = models.ModifyVpcAttributeRequest;
 const AssignIpv6CidrBlockRequest = models.AssignIpv6CidrBlockRequest;
@@ -110,6 +111,7 @@ const DescribeNatGatewayDestinationIpPortTranslationNatRulesRequest = models.Des
 const AddBandwidthPackageResourcesResponse = models.AddBandwidthPackageResourcesResponse;
 const DisassociateNetworkAclSubnetsResponse = models.DisassociateNetworkAclSubnetsResponse;
 const SetCcnRegionBandwidthLimitsRequest = models.SetCcnRegionBandwidthLimitsRequest;
+const ModifyAddressInternetChargeTypeRequest = models.ModifyAddressInternetChargeTypeRequest;
 const ModifyIp6AddressesBandwidthRequest = models.ModifyIp6AddressesBandwidthRequest;
 const DescribeDirectConnectGatewaysResponse = models.DescribeDirectConnectGatewaysResponse;
 const Ip6RuleInfo = models.Ip6RuleInfo;
@@ -308,6 +310,7 @@ const ModifyIpv6AddressesAttributeRequest = models.ModifyIpv6AddressesAttributeR
 const DescribeCustomerGatewayVendorsRequest = models.DescribeCustomerGatewayVendorsRequest;
 const DisableRoutesResponse = models.DisableRoutesResponse;
 const ResetVpnGatewayInternetMaxBandwidthResponse = models.ResetVpnGatewayInternetMaxBandwidthResponse;
+const AddressChargePrepaid = models.AddressChargePrepaid;
 const DescribeNetworkAclsResponse = models.DescribeNetworkAclsResponse;
 const DeleteFlowLogResponse = models.DeleteFlowLogResponse;
 const AttachCcnInstancesResponse = models.AttachCcnInstancesResponse;
@@ -722,6 +725,19 @@ class VpcClient extends AbstractClient {
     DisassociateNetworkInterfaceSecurityGroups(req, cb) {
         let resp = new DisassociateNetworkInterfaceSecurityGroupsResponse();
         this.request("DisassociateNetworkInterfaceSecurityGroups", req, resp, cb);
+    }
+
+    /**
+     * 该接口用于调整具有带宽属性弹性公网IP的网络计费模式
+* 支持BANDWIDTH_PREPAID_BY_MONTH和TRAFFIC_POSTPAID_BY_HOUR两种网络计费模式之间的切换。
+* 每个弹性公网IP支持调整两次，次数超出则无法调整。
+     * @param {ModifyAddressInternetChargeTypeRequest} req
+     * @param {function(string, ModifyAddressInternetChargeTypeResponse):void} cb
+     * @public
+     */
+    ModifyAddressInternetChargeType(req, cb) {
+        let resp = new ModifyAddressInternetChargeTypeResponse();
+        this.request("ModifyAddressInternetChargeType", req, resp, cb);
     }
 
     /**

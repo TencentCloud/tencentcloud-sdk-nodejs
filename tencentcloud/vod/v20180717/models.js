@@ -1819,6 +1819,21 @@ class CreateImageSpriteTemplateRequest extends  AbstractModel {
         this.Name = null;
 
         /**
+         * 模板描述信息，长度限制：256 个字符。
+         * @type {string || null}
+         */
+        this.Comment = null;
+
+        /**
+         * 填充方式，当视频流配置宽高参数与原始视频的宽高比不一致时，对转码的处理方式，即为“填充”。可选填充方式：
+<li> stretch：拉伸，对每一帧进行拉伸，填满整个画面，可能导致转码后的视频被“压扁“或者“拉长“；</li>
+<li>black：留黑，保持视频宽高比不变，边缘剩余部分使用黑色填充。</li>
+默认值：black 。
+         * @type {string || null}
+         */
+        this.FillType = null;
+
+        /**
          * 雪碧图中小图的宽度（或长边）的最大值，取值范围：0 和 [128, 4096]，单位：px。
 <li>当 Width、Height 均为 0，则分辨率同源；</li>
 <li>当 Width 为 0，Height 非 0，则 Width 按比例缩放；</li>
@@ -1855,15 +1870,6 @@ class CreateImageSpriteTemplateRequest extends  AbstractModel {
          */
         this.SubAppId = null;
 
-        /**
-         * 填充方式，当视频流配置宽高参数与原始视频的宽高比不一致时，对转码的处理方式，即为“填充”。可选填充方式：
-<li> stretch：拉伸，对每一帧进行拉伸，填满整个画面，可能导致转码后的视频被“压扁“或者“拉长“；</li>
-<li>black：留黑，保持视频宽高比不变，边缘剩余部分使用黑色填充。</li>
-默认值：black 。
-         * @type {string || null}
-         */
-        this.FillType = null;
-
     }
 
     /**
@@ -1878,11 +1884,12 @@ class CreateImageSpriteTemplateRequest extends  AbstractModel {
         this.RowCount = 'RowCount' in params ? params.RowCount : null;
         this.ColumnCount = 'ColumnCount' in params ? params.ColumnCount : null;
         this.Name = 'Name' in params ? params.Name : null;
+        this.Comment = 'Comment' in params ? params.Comment : null;
+        this.FillType = 'FillType' in params ? params.FillType : null;
         this.Width = 'Width' in params ? params.Width : null;
         this.Height = 'Height' in params ? params.Height : null;
         this.ResolutionAdaptive = 'ResolutionAdaptive' in params ? params.ResolutionAdaptive : null;
         this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
-        this.FillType = 'FillType' in params ? params.FillType : null;
 
     }
 }
@@ -2404,6 +2411,12 @@ class ResetProcedureTemplateRequest extends  AbstractModel {
         this.Name = null;
 
         /**
+         * 模板描述信息，长度限制：256 个字符。
+         * @type {string || null}
+         */
+        this.Comment = null;
+
+        /**
          * 视频处理类型任务参数。
          * @type {MediaProcessTaskInput || null}
          */
@@ -2443,6 +2456,7 @@ class ResetProcedureTemplateRequest extends  AbstractModel {
             return;
         }
         this.Name = 'Name' in params ? params.Name : null;
+        this.Comment = 'Comment' in params ? params.Comment : null;
 
         if (params.MediaProcessTask) {
             let obj = new MediaProcessTaskInput();
@@ -4122,6 +4136,12 @@ class CreateProcedureTemplateRequest extends  AbstractModel {
         this.Name = null;
 
         /**
+         * 模板描述信息，长度限制：256 个字符。
+         * @type {string || null}
+         */
+        this.Comment = null;
+
+        /**
          * 视频处理类型任务参数。
          * @type {MediaProcessTaskInput || null}
          */
@@ -4161,6 +4181,7 @@ class CreateProcedureTemplateRequest extends  AbstractModel {
             return;
         }
         this.Name = 'Name' in params ? params.Name : null;
+        this.Comment = 'Comment' in params ? params.Comment : null;
 
         if (params.MediaProcessTask) {
             let obj = new MediaProcessTaskInput();
@@ -10808,6 +10829,12 @@ class CreateSuperPlayerConfigRequest extends  AbstractModel {
         this.Name = null;
 
         /**
+         * 模板描述信息，长度限制：256 个字符。
+         * @type {string || null}
+         */
+        this.Comment = null;
+
+        /**
          * 播放 DRM 保护的自适应码流开关：
 <li>ON：开启，表示仅播放 DRM  保护的自适应码流输出；</li>
 <li>OFF：关闭，表示播放未加密的自适应码流输出。</li>
@@ -10863,6 +10890,7 @@ class CreateSuperPlayerConfigRequest extends  AbstractModel {
             return;
         }
         this.Name = 'Name' in params ? params.Name : null;
+        this.Comment = 'Comment' in params ? params.Comment : null;
         this.DrmSwitch = 'DrmSwitch' in params ? params.DrmSwitch : null;
         this.AdaptiveDynamicStreamingDefinition = 'AdaptiveDynamicStreamingDefinition' in params ? params.AdaptiveDynamicStreamingDefinition : null;
 
@@ -15301,6 +15329,15 @@ class MediaBasicInfo extends  AbstractModel {
          */
         this.Vid = null;
 
+        /**
+         * 文件类型：
+<li>Video: 视频文件</li>
+<li>Audio: 音频文件</li>
+<li>Image: 图片文件</li>
+         * @type {string || null}
+         */
+        this.Category = null;
+
     }
 
     /**
@@ -15330,6 +15367,7 @@ class MediaBasicInfo extends  AbstractModel {
         this.StorageRegion = 'StorageRegion' in params ? params.StorageRegion : null;
         this.TagSet = 'TagSet' in params ? params.TagSet : null;
         this.Vid = 'Vid' in params ? params.Vid : null;
+        this.Category = 'Category' in params ? params.Category : null;
 
     }
 }
@@ -21277,6 +21315,12 @@ class ModifySuperPlayerConfigRequest extends  AbstractModel {
         this.ResolutionNames = null;
 
         /**
+         * 模板描述信息，长度限制：256 个字符。
+         * @type {string || null}
+         */
+        this.Comment = null;
+
+        /**
          * 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
          * @type {number || null}
          */
@@ -21310,6 +21354,7 @@ class ModifySuperPlayerConfigRequest extends  AbstractModel {
                 this.ResolutionNames.push(obj);
             }
         }
+        this.Comment = 'Comment' in params ? params.Comment : null;
         this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
 
     }
@@ -22293,12 +22338,6 @@ class ModifyImageSpriteTemplateRequest extends  AbstractModel {
         this.ColumnCount = null;
 
         /**
-         * 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
-         * @type {number || null}
-         */
-        this.SubAppId = null;
-
-        /**
          * 填充方式，当视频流配置宽高参数与原始视频的宽高比不一致时，对转码的处理方式，即为“填充”。可选填充方式：
 <li> stretch：拉伸，对每一帧进行拉伸，填满整个画面，可能导致转码后的视频被“压扁“或者“拉长“；</li>
 <li>black：留黑，保持视频宽高比不变，边缘剩余部分使用黑色填充。</li>
@@ -22306,6 +22345,18 @@ class ModifyImageSpriteTemplateRequest extends  AbstractModel {
          * @type {string || null}
          */
         this.FillType = null;
+
+        /**
+         * 模板描述信息，长度限制：256 个字符。
+         * @type {string || null}
+         */
+        this.Comment = null;
+
+        /**
+         * 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
+         * @type {number || null}
+         */
+        this.SubAppId = null;
 
     }
 
@@ -22325,8 +22376,9 @@ class ModifyImageSpriteTemplateRequest extends  AbstractModel {
         this.SampleInterval = 'SampleInterval' in params ? params.SampleInterval : null;
         this.RowCount = 'RowCount' in params ? params.RowCount : null;
         this.ColumnCount = 'ColumnCount' in params ? params.ColumnCount : null;
-        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
         this.FillType = 'FillType' in params ? params.FillType : null;
+        this.Comment = 'Comment' in params ? params.Comment : null;
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
 
     }
 }

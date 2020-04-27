@@ -20,7 +20,7 @@ const QueryInvoiceResponse = models.QueryInvoiceResponse;
 const ApplyTradeRequest = models.ApplyTradeRequest;
 const QueryOutwardOrderResponse = models.QueryOutwardOrderResponse;
 const QueryExchangeRateResponse = models.QueryExchangeRateResponse;
-const QueryInvoiceForManagementResponse = models.QueryInvoiceForManagementResponse;
+const UnifiedOrderInSubOrderList = models.UnifiedOrderInSubOrderList;
 const QueryAcctBindingRequest = models.QueryAcctBindingRequest;
 const ModifyMntMbrBindRelateAcctBankCodeRequest = models.ModifyMntMbrBindRelateAcctBankCodeRequest;
 const CreateMerchantResult = models.CreateMerchantResult;
@@ -47,7 +47,7 @@ const UnbindRelateAcctRequest = models.UnbindRelateAcctRequest;
 const QueryTradeData = models.QueryTradeData;
 const CreateMerchantRequest = models.CreateMerchantRequest;
 const ApplyDeclareResult = models.ApplyDeclareResult;
-const UnifiedOrderInSubOrderList = models.UnifiedOrderInSubOrderList;
+const ClearItem = models.ClearItem;
 const QueryInvoiceResult = models.QueryInvoiceResult;
 const QueryAcctBindingResponse = models.QueryAcctBindingResponse;
 const ApplyOutwardOrderResponse = models.ApplyOutwardOrderResponse;
@@ -66,9 +66,7 @@ const QueryOrderOutSubOrderList = models.QueryOrderOutSubOrderList;
 const QueryOutwardOrderResult = models.QueryOutwardOrderResult;
 const RevRegisterBillSupportWithdrawResponse = models.RevRegisterBillSupportWithdrawResponse;
 const QueryPayerInfoRequest = models.QueryPayerInfoRequest;
-const QueryMerchantInfoForManagementResponse = models.QueryMerchantInfoForManagementResponse;
 const QuerySingleTransactionStatusRequest = models.QuerySingleTransactionStatusRequest;
-const MerchantManagementList = models.MerchantManagementList;
 const CreateInvoiceResult = models.CreateInvoiceResult;
 const QueryApplicationMaterialResponse = models.QueryApplicationMaterialResponse;
 const QueryMerchantBalanceResult = models.QueryMerchantBalanceResult;
@@ -90,10 +88,9 @@ const QueryAcctInfoRequest = models.QueryAcctInfoRequest;
 const ApplyDeclareData = models.ApplyDeclareData;
 const TranItem = models.TranItem;
 const QueryCommonTransferRechargeResponse = models.QueryCommonTransferRechargeResponse;
-const MerchantManagementResult = models.MerchantManagementResult;
+const QueryOrderRequest = models.QueryOrderRequest;
 const ApplyWithdrawalResponse = models.ApplyWithdrawalResponse;
 const QueryBankTransactionDetailsResponse = models.QueryBankTransactionDetailsResponse;
-const QueryPayerinfoData = models.QueryPayerinfoData;
 const QueryMerchantBalanceData = models.QueryMerchantBalanceData;
 const QueryMemberTransactionRequest = models.QueryMemberTransactionRequest;
 const QueryExchangerateResult = models.QueryExchangerateResult;
@@ -119,13 +116,12 @@ const RechargeMemberThirdPayRequest = models.RechargeMemberThirdPayRequest;
 const CreateInvoiceRequest = models.CreateInvoiceRequest;
 const QueryTradeResult = models.QueryTradeResult;
 const RegisterBillSupportWithdrawRequest = models.RegisterBillSupportWithdrawRequest;
-const ClearItem = models.ClearItem;
+const QueryDeclareResult = models.QueryDeclareResult;
 const CreateCustAcctIdRequest = models.CreateCustAcctIdRequest;
 const UnBindAcctResponse = models.UnBindAcctResponse;
 const QueryOrderOutOrderList = models.QueryOrderOutOrderList;
 const QueryCommonTransferRechargeRequest = models.QueryCommonTransferRechargeRequest;
 const QueryItem = models.QueryItem;
-const QueryOrderRequest = models.QueryOrderRequest;
 const CloseOrderRequest = models.CloseOrderRequest;
 const RevResigterBillSupportWithdrawResponse = models.RevResigterBillSupportWithdrawResponse;
 const QueryBalanceResponse = models.QueryBalanceResponse;
@@ -136,13 +132,12 @@ const QueryBankTransactionDetailsRequest = models.QueryBankTransactionDetailsReq
 const QueryReconciliationDocumentResponse = models.QueryReconciliationDocumentResponse;
 const CreateMerchantResultData = models.CreateMerchantResultData;
 const QueryExchangeRateRequest = models.QueryExchangeRateRequest;
-const QueryMerchantInfoForManagementRequest = models.QueryMerchantInfoForManagementRequest;
+const QueryPayerinfoData = models.QueryPayerinfoData;
 const ApplyOutwardOrderResult = models.ApplyOutwardOrderResult;
 const ApplyPayerInfoRequest = models.ApplyPayerInfoRequest;
 const QueryBankClearRequest = models.QueryBankClearRequest;
 const QueryInvoiceRequest = models.QueryInvoiceRequest;
 const ApplyApplicationMaterialResponse = models.ApplyApplicationMaterialResponse;
-const InvoiceManangementResult = models.InvoiceManangementResult;
 const DownloadBillRequest = models.DownloadBillRequest;
 const RevokeMemberRechargeThirdPayRequest = models.RevokeMemberRechargeThirdPayRequest;
 const CreateRedInvoiceResultData = models.CreateRedInvoiceResultData;
@@ -155,13 +150,11 @@ const QueryMemberTransactionResponse = models.QueryMemberTransactionResponse;
 const ApplyTradeData = models.ApplyTradeData;
 const ApplyApplicationMaterialRequest = models.ApplyApplicationMaterialRequest;
 const QueryAcctItem = models.QueryAcctItem;
-const QueryInvoiceForManagementRequest = models.QueryInvoiceForManagementRequest;
 const QuerySmallAmountTransferRequest = models.QuerySmallAmountTransferRequest;
 const BindRelateAcctSmallAmountResponse = models.BindRelateAcctSmallAmountResponse;
 const ModifyMntMbrBindRelateAcctBankCodeResponse = models.ModifyMntMbrBindRelateAcctBankCodeResponse;
 const QueryBalanceRequest = models.QueryBalanceRequest;
 const ApplyWithdrawalRequest = models.ApplyWithdrawalRequest;
-const InvoiceManagementList = models.InvoiceManagementList;
 const BindRelateAcctSmallAmountRequest = models.BindRelateAcctSmallAmountRequest;
 const QueryRefundResponse = models.QueryRefundResponse;
 const QueryMemberBindResponse = models.QueryMemberBindResponse;
@@ -173,7 +166,6 @@ const QueryReconciliationDocumentRequest = models.QueryReconciliationDocumentReq
 const CheckAcctResponse = models.CheckAcctResponse;
 const UnifiedOrderRequest = models.UnifiedOrderRequest;
 const BankCardItem = models.BankCardItem;
-const QueryDeclareResult = models.QueryDeclareResult;
 const RefundRequest = models.RefundRequest;
 const BindRelateAccReUnionPayResponse = models.BindRelateAccReUnionPayResponse;
 const FileItem = models.FileItem;
@@ -327,17 +319,6 @@ class CpdpClient extends AbstractClient {
     }
 
     /**
-     * 智慧零售-查询管理端商户
-     * @param {QueryMerchantInfoForManagementRequest} req
-     * @param {function(string, QueryMerchantInfoForManagementResponse):void} cb
-     * @public
-     */
-    QueryMerchantInfoForManagement(req, cb) {
-        let resp = new QueryMerchantInfoForManagementResponse();
-        this.request("QueryMerchantInfoForManagement", req, resp, cb);
-    }
-
-    /**
      * 修改会员属性-普通商户子账户。修改会员的会员属性。
      * @param {ReviseMbrPropertyRequest} req
      * @param {function(string, ReviseMbrPropertyResponse):void} cb
@@ -471,17 +452,6 @@ class CpdpClient extends AbstractClient {
     ApplyReWithdrawal(req, cb) {
         let resp = new ApplyReWithdrawalResponse();
         this.request("ApplyReWithdrawal", req, resp, cb);
-    }
-
-    /**
-     * 跨境-查询汇出结果
-     * @param {QueryOutwardOrderRequest} req
-     * @param {function(string, QueryOutwardOrderResponse):void} cb
-     * @public
-     */
-    QueryOutwardOrder(req, cb) {
-        let resp = new QueryOutwardOrderResponse();
-        this.request("QueryOutwardOrder", req, resp, cb);
     }
 
     /**
@@ -749,14 +719,14 @@ class CpdpClient extends AbstractClient {
     }
 
     /**
-     * 智慧零售-查询管理端发票
-     * @param {QueryInvoiceForManagementRequest} req
-     * @param {function(string, QueryInvoiceForManagementResponse):void} cb
+     * 跨境-查询汇出结果
+     * @param {QueryOutwardOrderRequest} req
+     * @param {function(string, QueryOutwardOrderResponse):void} cb
      * @public
      */
-    QueryInvoiceForManagement(req, cb) {
-        let resp = new QueryInvoiceForManagementResponse();
-        this.request("QueryInvoiceForManagement", req, resp, cb);
+    QueryOutwardOrder(req, cb) {
+        let resp = new QueryOutwardOrderResponse();
+        this.request("QueryOutwardOrder", req, resp, cb);
     }
 
     /**
