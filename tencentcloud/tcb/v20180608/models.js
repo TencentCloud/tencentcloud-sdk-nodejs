@@ -712,6 +712,50 @@ class ReinstateEnvResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeEnvFreeQuota返回参数结构体
+ * @class
+ */
+class DescribeEnvFreeQuotaResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 免费抵扣配额详情
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<PostpayEnvQuota> || null}
+         */
+        this.QuotaItems = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.QuotaItems) {
+            this.QuotaItems = new Array();
+            for (let z in params.QuotaItems) {
+                let obj = new PostpayEnvQuota();
+                obj.deserialize(params.QuotaItems[z]);
+                this.QuotaItems.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * CheckTcbService请求参数结构体
  * @class
  */
@@ -873,6 +917,42 @@ class LogServiceInfo extends  AbstractModel {
         this.TopicName = 'TopicName' in params ? params.TopicName : null;
         this.TopicId = 'TopicId' in params ? params.TopicId : null;
         this.Region = 'Region' in params ? params.Region : null;
+
+    }
+}
+
+/**
+ * DescribeEnvFreeQuota请求参数结构体
+ * @class
+ */
+class DescribeEnvFreeQuotaRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 环境ID
+         * @type {string || null}
+         */
+        this.EnvId = null;
+
+        /**
+         * 资源类型：可选值：CDN, COS, FLEXDB, HOSTING, SCF
+不传则返回全部资源指标
+         * @type {Array.<string> || null}
+         */
+        this.ResourceTypes = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.EnvId = 'EnvId' in params ? params.EnvId : null;
+        this.ResourceTypes = 'ResourceTypes' in params ? params.ResourceTypes : null;
 
     }
 }
@@ -1543,6 +1623,64 @@ class DestroyStaticStoreRequest extends  AbstractModel {
 }
 
 /**
+ * 按量付费免费配额信息
+ * @class
+ */
+class PostpayEnvQuota extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 资源类型
+         * @type {string || null}
+         */
+        this.ResourceType = null;
+
+        /**
+         * 指标名
+         * @type {string || null}
+         */
+        this.MetricName = null;
+
+        /**
+         * 配额值
+         * @type {number || null}
+         */
+        this.Value = null;
+
+        /**
+         * 配额生效时间
+为空表示没有时间限制
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * 配额失效时间
+为空表示没有时间限制
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ResourceType = 'ResourceType' in params ? params.ResourceType : null;
+        this.MetricName = 'MetricName' in params ? params.MetricName : null;
+        this.Value = 'Value' in params ? params.Value : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+
+    }
+}
+
+/**
  * 终端用户信息
  * @class
  */
@@ -1863,10 +2001,12 @@ module.exports = {
     DescribeEnvsRequest: DescribeEnvsRequest,
     DescribeQuotaDataRequest: DescribeQuotaDataRequest,
     ReinstateEnvResponse: ReinstateEnvResponse,
+    DescribeEnvFreeQuotaResponse: DescribeEnvFreeQuotaResponse,
     CheckTcbServiceRequest: CheckTcbServiceRequest,
     StaticStorageInfo: StaticStorageInfo,
     ModifyEnvResponse: ModifyEnvResponse,
     LogServiceInfo: LogServiceInfo,
+    DescribeEnvFreeQuotaRequest: DescribeEnvFreeQuotaRequest,
     DatabasesInfo: DatabasesInfo,
     DescribeAuthDomainsRequest: DescribeAuthDomainsRequest,
     DescribeAuthDomainsResponse: DescribeAuthDomainsResponse,
@@ -1882,6 +2022,7 @@ module.exports = {
     DestroyEnvResponse: DestroyEnvResponse,
     ModifyDatabaseACLRequest: ModifyDatabaseACLRequest,
     DestroyStaticStoreRequest: DestroyStaticStoreRequest,
+    PostpayEnvQuota: PostpayEnvQuota,
     EndUserInfo: EndUserInfo,
     DescribeEnvLimitResponse: DescribeEnvLimitResponse,
     DeleteEndUserRequest: DeleteEndUserRequest,

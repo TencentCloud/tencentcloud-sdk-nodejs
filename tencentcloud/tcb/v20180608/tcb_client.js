@@ -34,10 +34,12 @@ const DescribeEndUsersRequest = models.DescribeEndUsersRequest;
 const DescribeEnvsRequest = models.DescribeEnvsRequest;
 const DescribeQuotaDataRequest = models.DescribeQuotaDataRequest;
 const ReinstateEnvResponse = models.ReinstateEnvResponse;
+const DescribeEnvFreeQuotaResponse = models.DescribeEnvFreeQuotaResponse;
 const CheckTcbServiceRequest = models.CheckTcbServiceRequest;
 const StaticStorageInfo = models.StaticStorageInfo;
 const ModifyEnvResponse = models.ModifyEnvResponse;
 const LogServiceInfo = models.LogServiceInfo;
+const DescribeEnvFreeQuotaRequest = models.DescribeEnvFreeQuotaRequest;
 const DatabasesInfo = models.DatabasesInfo;
 const DescribeAuthDomainsRequest = models.DescribeAuthDomainsRequest;
 const DescribeAuthDomainsResponse = models.DescribeAuthDomainsResponse;
@@ -53,6 +55,7 @@ const DestroyEnvRequest = models.DestroyEnvRequest;
 const DestroyEnvResponse = models.DestroyEnvResponse;
 const ModifyDatabaseACLRequest = models.ModifyDatabaseACLRequest;
 const DestroyStaticStoreRequest = models.DestroyStaticStoreRequest;
+const PostpayEnvQuota = models.PostpayEnvQuota;
 const EndUserInfo = models.EndUserInfo;
 const DescribeEnvLimitResponse = models.DescribeEnvLimitResponse;
 const DeleteEndUserRequest = models.DeleteEndUserRequest;
@@ -255,6 +258,17 @@ class TcbClient extends AbstractClient {
     DescribeQuotaData(req, cb) {
         let resp = new DescribeQuotaDataResponse();
         this.request("DescribeQuotaData", req, resp, cb);
+    }
+
+    /**
+     * 查询后付费免费配额信息
+     * @param {DescribeEnvFreeQuotaRequest} req
+     * @param {function(string, DescribeEnvFreeQuotaResponse):void} cb
+     * @public
+     */
+    DescribeEnvFreeQuota(req, cb) {
+        let resp = new DescribeEnvFreeQuotaResponse();
+        this.request("DescribeEnvFreeQuota", req, resp, cb);
     }
 
 

@@ -1148,6 +1148,34 @@ class DescribeIpStatusResponse extends  AbstractModel {
 }
 
 /**
+ * UpdateImageConfig返回参数结构体
+ * @class
+ */
+class UpdateImageConfigResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DeleteCdnDomain请求参数结构体
  * @class
  */
@@ -1465,6 +1493,70 @@ class DescribeDomainsResponse extends  AbstractModel {
         }
         this.TotalNumber = 'TotalNumber' in params ? params.TotalNumber : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * UpdateImageConfig请求参数结构体
+ * @class
+ */
+class UpdateImageConfigRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 域名
+         * @type {string || null}
+         */
+        this.Domain = null;
+
+        /**
+         * WebpAdapter配置项
+         * @type {WebpAdapter || null}
+         */
+        this.WebpAdapter = null;
+
+        /**
+         * TpgAdapter配置项
+         * @type {TpgAdapter || null}
+         */
+        this.TpgAdapter = null;
+
+        /**
+         * GuetzliAdapter配置项
+         * @type {GuetzliAdapter || null}
+         */
+        this.GuetzliAdapter = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Domain = 'Domain' in params ? params.Domain : null;
+
+        if (params.WebpAdapter) {
+            let obj = new WebpAdapter();
+            obj.deserialize(params.WebpAdapter)
+            this.WebpAdapter = obj;
+        }
+
+        if (params.TpgAdapter) {
+            let obj = new TpgAdapter();
+            obj.deserialize(params.TpgAdapter)
+            this.TpgAdapter = obj;
+        }
+
+        if (params.GuetzliAdapter) {
+            let obj = new GuetzliAdapter();
+            obj.deserialize(params.GuetzliAdapter)
+            this.GuetzliAdapter = obj;
+        }
 
     }
 }
@@ -7368,6 +7460,34 @@ class DisableCachesResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeImageConfig请求参数结构体
+ * @class
+ */
+class DescribeImageConfigRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 域名
+         * @type {string || null}
+         */
+        this.Domain = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Domain = 'Domain' in params ? params.Domain : null;
+
+    }
+}
+
+/**
  * DescribeCdnIp返回参数结构体
  * @class
  */
@@ -9915,6 +10035,73 @@ client：指定查询客户端地区（用户请求终端所在地区）数据
 }
 
 /**
+ * DescribeImageConfig返回参数结构体
+ * @class
+ */
+class DescribeImageConfigResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * WebpAdapter配置
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {WebpAdapter || null}
+         */
+        this.WebpAdapter = null;
+
+        /**
+         * TpgAdapter配置
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {TpgAdapter || null}
+         */
+        this.TpgAdapter = null;
+
+        /**
+         * GuetzliAdapter配置
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {GuetzliAdapter || null}
+         */
+        this.GuetzliAdapter = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.WebpAdapter) {
+            let obj = new WebpAdapter();
+            obj.deserialize(params.WebpAdapter)
+            this.WebpAdapter = obj;
+        }
+
+        if (params.TpgAdapter) {
+            let obj = new TpgAdapter();
+            obj.deserialize(params.TpgAdapter)
+            this.TpgAdapter = obj;
+        }
+
+        if (params.GuetzliAdapter) {
+            let obj = new GuetzliAdapter();
+            obj.deserialize(params.GuetzliAdapter)
+            this.GuetzliAdapter = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeDomains请求参数结构体
  * @class
  */
@@ -9987,11 +10174,13 @@ module.exports = {
     Referer: Referer,
     AdvanceCacheRule: AdvanceCacheRule,
     DescribeIpStatusResponse: DescribeIpStatusResponse,
+    UpdateImageConfigResponse: UpdateImageConfigResponse,
     DeleteCdnDomainRequest: DeleteCdnDomainRequest,
     DescribePayTypeResponse: DescribePayTypeResponse,
     ListTopDataRequest: ListTopDataRequest,
     ListClsTopicDomainsRequest: ListClsTopicDomainsRequest,
     DescribeDomainsResponse: DescribeDomainsResponse,
+    UpdateImageConfigRequest: UpdateImageConfigRequest,
     CreateClsLogTopicRequest: CreateClsLogTopicRequest,
     CompressionRule: CompressionRule,
     GuetzliAdapter: GuetzliAdapter,
@@ -10080,6 +10269,7 @@ module.exports = {
     DeleteClsLogTopicResponse: DeleteClsLogTopicResponse,
     DescribeBillingDataResponse: DescribeBillingDataResponse,
     DisableCachesResponse: DisableCachesResponse,
+    DescribeImageConfigRequest: DescribeImageConfigRequest,
     DescribeCdnIpResponse: DescribeCdnIpResponse,
     DescribeCdnDataResponse: DescribeCdnDataResponse,
     EnableClsLogTopicRequest: EnableClsLogTopicRequest,
@@ -10127,6 +10317,7 @@ module.exports = {
     DeleteCdnDomainResponse: DeleteCdnDomainResponse,
     CdnIp: CdnIp,
     DescribeCdnDataRequest: DescribeCdnDataRequest,
+    DescribeImageConfigResponse: DescribeImageConfigResponse,
     DescribeDomainsRequest: DescribeDomainsRequest,
 
 }

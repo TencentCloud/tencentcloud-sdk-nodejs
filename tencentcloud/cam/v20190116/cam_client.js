@@ -16,7 +16,7 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
-const GetUserResponse = models.GetUserResponse;
+const ListAttachedRolePoliciesResponse = models.ListAttachedRolePoliciesResponse;
 const DeleteUserRequest = models.DeleteUserRequest;
 const DetachGroupPolicyRequest = models.DetachGroupPolicyRequest;
 const DescribeRoleListResponse = models.DescribeRoleListResponse;
@@ -32,24 +32,29 @@ const ListUsersResponse = models.ListUsersResponse;
 const UpdateRoleDescriptionResponse = models.UpdateRoleDescriptionResponse;
 const DetachUserPolicyRequest = models.DetachUserPolicyRequest;
 const ListGroupsResponse = models.ListGroupsResponse;
+const ListPolicyVersionsRequest = models.ListPolicyVersionsRequest;
 const GetCustomMFATokenInfoRequest = models.GetCustomMFATokenInfoRequest;
 const DescribeRoleListRequest = models.DescribeRoleListRequest;
 const GetGroupRequest = models.GetGroupRequest;
 const DeleteRoleResponse = models.DeleteRoleResponse;
+const PolicyVersionItem = models.PolicyVersionItem;
 const ListSAMLProvidersRequest = models.ListSAMLProvidersRequest;
 const ListGroupsRequest = models.ListGroupsRequest;
+const DeletePolicyVersionResponse = models.DeletePolicyVersionResponse;
 const UpdateSAMLProviderRequest = models.UpdateSAMLProviderRequest;
 const UpdateAssumeRolePolicyRequest = models.UpdateAssumeRolePolicyRequest;
 const ListGroupsForUserResponse = models.ListGroupsForUserResponse;
 const ListUsersForGroupRequest = models.ListUsersForGroupRequest;
 const RemoveUserFromGroupRequest = models.RemoveUserFromGroupRequest;
+const CreatePolicyVersionResponse = models.CreatePolicyVersionResponse;
 const ListPoliciesResponse = models.ListPoliciesResponse;
 const GroupIdOfUidInfo = models.GroupIdOfUidInfo;
 const UpdateRoleDescriptionRequest = models.UpdateRoleDescriptionRequest;
+const SetDefaultPolicyVersionRequest = models.SetDefaultPolicyVersionRequest;
 const RoleInfo = models.RoleInfo;
-const DeleteServiceLinkedRoleResponse = models.DeleteServiceLinkedRoleResponse;
+const CreatePolicyVersionRequest = models.CreatePolicyVersionRequest;
 const DeleteGroupRequest = models.DeleteGroupRequest;
-const ListAttachedRolePoliciesResponse = models.ListAttachedRolePoliciesResponse;
+const GetUserResponse = models.GetUserResponse;
 const DeleteUserResponse = models.DeleteUserResponse;
 const DetachRolePolicyRequest = models.DetachRolePolicyRequest;
 const StrategyInfo = models.StrategyInfo;
@@ -74,6 +79,7 @@ const AttachRolePolicyRequest = models.AttachRolePolicyRequest;
 const ConsumeCustomMFATokenResponse = models.ConsumeCustomMFATokenResponse;
 const AttachUserPolicyRequest = models.AttachUserPolicyRequest;
 const ListAttachedGroupPoliciesResponse = models.ListAttachedGroupPoliciesResponse;
+const GetPolicyVersionRequest = models.GetPolicyVersionRequest;
 const DeletePolicyResponse = models.DeletePolicyResponse;
 const ConsumeCustomMFATokenRequest = models.ConsumeCustomMFATokenRequest;
 const GetGroupResponse = models.GetGroupResponse;
@@ -81,7 +87,7 @@ const DeleteSAMLProviderRequest = models.DeleteSAMLProviderRequest;
 const DeleteSAMLProviderResponse = models.DeleteSAMLProviderResponse;
 const UpdateUserResponse = models.UpdateUserResponse;
 const CreateServiceLinkedRoleResponse = models.CreateServiceLinkedRoleResponse;
-const AddUserToGroupResponse = models.AddUserToGroupResponse;
+const ListUsersRequest = models.ListUsersRequest;
 const ListCollaboratorsRequest = models.ListCollaboratorsRequest;
 const CreateGroupRequest = models.CreateGroupRequest;
 const UpdateGroupResponse = models.UpdateGroupResponse;
@@ -90,29 +96,35 @@ const ListPoliciesRequest = models.ListPoliciesRequest;
 const GetServiceLinkedRoleDeletionStatusRequest = models.GetServiceLinkedRoleDeletionStatusRequest;
 const DetachGroupPolicyResponse = models.DetachGroupPolicyResponse;
 const CreatePolicyRequest = models.CreatePolicyRequest;
+const DeletePolicyVersionRequest = models.DeletePolicyVersionRequest;
 const UpdateGroupRequest = models.UpdateGroupRequest;
-const AttachGroupPolicyRequest = models.AttachGroupPolicyRequest;
+const GetPolicyVersionResponse = models.GetPolicyVersionResponse;
 const CreateRoleResponse = models.CreateRoleResponse;
 const GetSAMLProviderResponse = models.GetSAMLProviderResponse;
+const ListPolicyVersionsResponse = models.ListPolicyVersionsResponse;
 const GetPolicyRequest = models.GetPolicyRequest;
 const AddUserToGroupRequest = models.AddUserToGroupRequest;
 const RemoveUserFromGroupResponse = models.RemoveUserFromGroupResponse;
 const DetachRolePolicyResponse = models.DetachRolePolicyResponse;
 const AttachedPolicyOfRole = models.AttachedPolicyOfRole;
 const ListSAMLProvidersResponse = models.ListSAMLProvidersResponse;
+const SetDefaultPolicyVersionResponse = models.SetDefaultPolicyVersionResponse;
 const ListAttachedRolePoliciesRequest = models.ListAttachedRolePoliciesRequest;
 const GetSAMLProviderRequest = models.GetSAMLProviderRequest;
 const DetachUserPolicyResponse = models.DetachUserPolicyResponse;
 const GetRoleResponse = models.GetRoleResponse;
 const CreateRoleRequest = models.CreateRoleRequest;
+const DeleteServiceLinkedRoleResponse = models.DeleteServiceLinkedRoleResponse;
 const GetPolicyResponse = models.GetPolicyResponse;
 const DeleteGroupResponse = models.DeleteGroupResponse;
+const AttachGroupPolicyRequest = models.AttachGroupPolicyRequest;
 const DeleteServiceLinkedRoleRequest = models.DeleteServiceLinkedRoleRequest;
 const AttachEntityOfPolicy = models.AttachEntityOfPolicy;
 const ListUsersForGroupResponse = models.ListUsersForGroupResponse;
+const PolicyVersionDetail = models.PolicyVersionDetail;
 const AddUserResponse = models.AddUserResponse;
 const ListEntitiesForPolicyResponse = models.ListEntitiesForPolicyResponse;
-const ListUsersRequest = models.ListUsersRequest;
+const AddUserToGroupResponse = models.AddUserToGroupResponse;
 const AttachUserPolicyResponse = models.AttachUserPolicyResponse;
 const ListCollaboratorsResponse = models.ListCollaboratorsResponse;
 const ListAttachedUserPoliciesRequest = models.ListAttachedUserPoliciesRequest;
@@ -139,6 +151,17 @@ class CamClient extends AbstractClient {
     UpdateRoleConsoleLogin(req, cb) {
         let resp = new UpdateRoleConsoleLoginResponse();
         this.request("UpdateRoleConsoleLogin", req, resp, cb);
+    }
+
+    /**
+     * 创建用户组
+     * @param {CreateGroupRequest} req
+     * @param {function(string, CreateGroupResponse):void} cb
+     * @public
+     */
+    CreateGroup(req, cb) {
+        let resp = new CreateGroupResponse();
+        this.request("CreateGroup", req, resp, cb);
     }
 
     /**
@@ -241,14 +264,14 @@ class CamClient extends AbstractClient {
     }
 
     /**
-     * 创建用户组
-     * @param {CreateGroupRequest} req
-     * @param {function(string, CreateGroupResponse):void} cb
+     * 本接口（DeletePolicyVersion）可用于删除一个策略的策略版本。
+     * @param {DeletePolicyVersionRequest} req
+     * @param {function(string, DeletePolicyVersionResponse):void} cb
      * @public
      */
-    CreateGroup(req, cb) {
-        let resp = new CreateGroupResponse();
-        this.request("CreateGroup", req, resp, cb);
+    DeletePolicyVersion(req, cb) {
+        let resp = new DeletePolicyVersionResponse();
+        this.request("DeletePolicyVersion", req, resp, cb);
     }
 
     /**
@@ -428,6 +451,28 @@ class CamClient extends AbstractClient {
     }
 
     /**
+     * 该接口（GetPolicyVersion）用于查询策略版本详情
+     * @param {GetPolicyVersionRequest} req
+     * @param {function(string, GetPolicyVersionResponse):void} cb
+     * @public
+     */
+    GetPolicyVersion(req, cb) {
+        let resp = new GetPolicyVersionResponse();
+        this.request("GetPolicyVersion", req, resp, cb);
+    }
+
+    /**
+     * 本接口（SetDefaultPolicyVersion）可用于设置生效的策略版本。
+     * @param {SetDefaultPolicyVersionRequest} req
+     * @param {function(string, SetDefaultPolicyVersionResponse):void} cb
+     * @public
+     */
+    SetDefaultPolicyVersion(req, cb) {
+        let resp = new SetDefaultPolicyVersionResponse();
+        this.request("SetDefaultPolicyVersion", req, resp, cb);
+    }
+
+    /**
      * 查询用户组列表
      * @param {ListGroupsRequest} req
      * @param {function(string, ListGroupsResponse):void} cb
@@ -472,6 +517,17 @@ class CamClient extends AbstractClient {
     }
 
     /**
+     * 该接口（ListPolicyVersions）用于获取策略版本列表
+     * @param {ListPolicyVersionsRequest} req
+     * @param {function(string, ListPolicyVersionsResponse):void} cb
+     * @public
+     */
+    ListPolicyVersions(req, cb) {
+        let resp = new ListPolicyVersionsResponse();
+        this.request("ListPolicyVersions", req, resp, cb);
+    }
+
+    /**
      * 本接口（GetRole）用于获取指定角色的详细信息。
      * @param {GetRoleRequest} req
      * @param {function(string, GetRoleResponse):void} cb
@@ -502,6 +558,17 @@ class CamClient extends AbstractClient {
     DeleteUser(req, cb) {
         let resp = new DeleteUserResponse();
         this.request("DeleteUser", req, resp, cb);
+    }
+
+    /**
+     * 该接口（CreatePolicyVersion）用于新增策略版本，用户创建了一个策略版本之后可以方便的通过变更策略版本的方式来变更策略。
+     * @param {CreatePolicyVersionRequest} req
+     * @param {function(string, CreatePolicyVersionResponse):void} cb
+     * @public
+     */
+    CreatePolicyVersion(req, cb) {
+        let resp = new CreatePolicyVersionResponse();
+        this.request("CreatePolicyVersion", req, resp, cb);
     }
 
     /**

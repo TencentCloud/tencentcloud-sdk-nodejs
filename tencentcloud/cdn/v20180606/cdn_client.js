@@ -38,11 +38,13 @@ const DescribePurgeQuotaRequest = models.DescribePurgeQuotaRequest;
 const Referer = models.Referer;
 const AdvanceCacheRule = models.AdvanceCacheRule;
 const DescribeIpStatusResponse = models.DescribeIpStatusResponse;
+const UpdateImageConfigResponse = models.UpdateImageConfigResponse;
 const DeleteCdnDomainRequest = models.DeleteCdnDomainRequest;
 const DescribePayTypeResponse = models.DescribePayTypeResponse;
 const ListTopDataRequest = models.ListTopDataRequest;
 const ListClsTopicDomainsRequest = models.ListClsTopicDomainsRequest;
 const DescribeDomainsResponse = models.DescribeDomainsResponse;
+const UpdateImageConfigRequest = models.UpdateImageConfigRequest;
 const CreateClsLogTopicRequest = models.CreateClsLogTopicRequest;
 const CompressionRule = models.CompressionRule;
 const GuetzliAdapter = models.GuetzliAdapter;
@@ -131,6 +133,7 @@ const PurgeUrlsCacheResponse = models.PurgeUrlsCacheResponse;
 const DeleteClsLogTopicResponse = models.DeleteClsLogTopicResponse;
 const DescribeBillingDataResponse = models.DescribeBillingDataResponse;
 const DisableCachesResponse = models.DisableCachesResponse;
+const DescribeImageConfigRequest = models.DescribeImageConfigRequest;
 const DescribeCdnIpResponse = models.DescribeCdnIpResponse;
 const DescribeCdnDataResponse = models.DescribeCdnDataResponse;
 const EnableClsLogTopicRequest = models.EnableClsLogTopicRequest;
@@ -178,6 +181,7 @@ const OriginPullTimeout = models.OriginPullTimeout;
 const DeleteCdnDomainResponse = models.DeleteCdnDomainResponse;
 const CdnIp = models.CdnIp;
 const DescribeCdnDataRequest = models.DescribeCdnDataRequest;
+const DescribeImageConfigResponse = models.DescribeImageConfigResponse;
 const DescribeDomainsRequest = models.DescribeDomainsRequest;
 
 
@@ -371,6 +375,17 @@ class CdnClient extends AbstractClient {
     }
 
     /**
+     * 获取域名图片优化的当前配置，支持Webp、TPG、Guetzli 
+     * @param {DescribeImageConfigRequest} req
+     * @param {function(string, DescribeImageConfigResponse):void} cb
+     * @public
+     */
+    DescribeImageConfig(req, cb) {
+        let resp = new DescribeImageConfigResponse();
+        this.request("DescribeImageConfig", req, resp, cb);
+    }
+
+    /**
      * SearchClsLog 用于 CLS 日志检索。支持检索今天，24小时（可选近7中的某一天），近7天的日志数据。
      * @param {SearchClsLogRequest} req
      * @param {function(string, SearchClsLogResponse):void} cb
@@ -547,6 +562,17 @@ class CdnClient extends AbstractClient {
     PushUrlsCache(req, cb) {
         let resp = new PushUrlsCacheResponse();
         this.request("PushUrlsCache", req, resp, cb);
+    }
+
+    /**
+     * 更新控制台图片优化的相关配置，支持Webp、TPG、Guetzli 
+     * @param {UpdateImageConfigRequest} req
+     * @param {function(string, UpdateImageConfigResponse):void} cb
+     * @public
+     */
+    UpdateImageConfig(req, cb) {
+        let resp = new UpdateImageConfigResponse();
+        this.request("UpdateImageConfig", req, resp, cb);
     }
 
     /**

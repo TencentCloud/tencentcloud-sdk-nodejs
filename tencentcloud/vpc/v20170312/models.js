@@ -441,6 +441,12 @@ class SecurityGroupAssociationStatistics extends  AbstractModel {
          */
         this.InstanceStatistics = null;
 
+        /**
+         * 所有资源的总计数。
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
     }
 
     /**
@@ -465,6 +471,7 @@ class SecurityGroupAssociationStatistics extends  AbstractModel {
                 this.InstanceStatistics.push(obj);
             }
         }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
 
     }
 }
@@ -3457,6 +3464,34 @@ class DescribeTaskResultRequest extends  AbstractModel {
 }
 
 /**
+ * ModifyAddressInternetChargeType返回参数结构体
+ * @class
+ */
+class ModifyAddressInternetChargeTypeResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * UnassignIpv6SubnetCidrBlock请求参数结构体
  * @class
  */
@@ -4268,6 +4303,60 @@ class SetCcnRegionBandwidthLimitsRequest extends  AbstractModel {
                 obj.deserialize(params.CcnRegionBandwidthLimits[z]);
                 this.CcnRegionBandwidthLimits.push(obj);
             }
+        }
+
+    }
+}
+
+/**
+ * ModifyAddressInternetChargeType请求参数结构体
+ * @class
+ */
+class ModifyAddressInternetChargeTypeRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 弹性公网IP的唯一ID，形如eip-xxx
+         * @type {string || null}
+         */
+        this.AddressId = null;
+
+        /**
+         * 弹性公网IP调整目标计费模式，只支持"BANDWIDTH_PREPAID_BY_MONTH"和"TRAFFIC_POSTPAID_BY_HOUR"
+         * @type {string || null}
+         */
+        this.InternetChargeType = null;
+
+        /**
+         * 弹性公网IP调整目标带宽值
+         * @type {number || null}
+         */
+        this.InternetMaxBandwidthOut = null;
+
+        /**
+         * 包月带宽网络计费模式参数。弹性公网IP的调整目标计费模式是"BANDWIDTH_PREPAID_BY_MONTH"时，必传该参数。
+         * @type {AddressChargePrepaid || null}
+         */
+        this.AddressChargePrepaid = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AddressId = 'AddressId' in params ? params.AddressId : null;
+        this.InternetChargeType = 'InternetChargeType' in params ? params.InternetChargeType : null;
+        this.InternetMaxBandwidthOut = 'InternetMaxBandwidthOut' in params ? params.InternetMaxBandwidthOut : null;
+
+        if (params.AddressChargePrepaid) {
+            let obj = new AddressChargePrepaid();
+            obj.deserialize(params.AddressChargePrepaid)
+            this.AddressChargePrepaid = obj;
         }
 
     }
@@ -13770,6 +13859,41 @@ class ResetVpnGatewayInternetMaxBandwidthResponse extends  AbstractModel {
 }
 
 /**
+ * 用于描述弹性公网IP的费用对象
+ * @class
+ */
+class AddressChargePrepaid extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 购买实例的时长
+         * @type {number || null}
+         */
+        this.Period = null;
+
+        /**
+         * 自动续费标志
+         * @type {string || null}
+         */
+        this.RenewFlag = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Period = 'Period' in params ? params.Period : null;
+        this.RenewFlag = 'RenewFlag' in params ? params.RenewFlag : null;
+
+    }
+}
+
+/**
  * DescribeNetworkAcls返回参数结构体
  * @class
  */
@@ -22320,6 +22444,7 @@ module.exports = {
     NetDetectState: NetDetectState,
     HaVipDisassociateAddressIpResponse: HaVipDisassociateAddressIpResponse,
     DescribeTaskResultRequest: DescribeTaskResultRequest,
+    ModifyAddressInternetChargeTypeResponse: ModifyAddressInternetChargeTypeResponse,
     UnassignIpv6SubnetCidrBlockRequest: UnassignIpv6SubnetCidrBlockRequest,
     ModifyVpcAttributeRequest: ModifyVpcAttributeRequest,
     AssignIpv6CidrBlockRequest: AssignIpv6CidrBlockRequest,
@@ -22340,6 +22465,7 @@ module.exports = {
     AddBandwidthPackageResourcesResponse: AddBandwidthPackageResourcesResponse,
     DisassociateNetworkAclSubnetsResponse: DisassociateNetworkAclSubnetsResponse,
     SetCcnRegionBandwidthLimitsRequest: SetCcnRegionBandwidthLimitsRequest,
+    ModifyAddressInternetChargeTypeRequest: ModifyAddressInternetChargeTypeRequest,
     ModifyIp6AddressesBandwidthRequest: ModifyIp6AddressesBandwidthRequest,
     DescribeDirectConnectGatewaysResponse: DescribeDirectConnectGatewaysResponse,
     Ip6RuleInfo: Ip6RuleInfo,
@@ -22538,6 +22664,7 @@ module.exports = {
     DescribeCustomerGatewayVendorsRequest: DescribeCustomerGatewayVendorsRequest,
     DisableRoutesResponse: DisableRoutesResponse,
     ResetVpnGatewayInternetMaxBandwidthResponse: ResetVpnGatewayInternetMaxBandwidthResponse,
+    AddressChargePrepaid: AddressChargePrepaid,
     DescribeNetworkAclsResponse: DescribeNetworkAclsResponse,
     DeleteFlowLogResponse: DeleteFlowLogResponse,
     AttachCcnInstancesResponse: AttachCcnInstancesResponse,

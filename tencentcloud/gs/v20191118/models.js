@@ -186,6 +186,41 @@ class TrylockWorkerResponse extends  AbstractModel {
 }
 
 /**
+ * QuitQueue请求参数结构体
+ * @class
+ */
+class QuitQueueRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 用户ID
+         * @type {string || null}
+         */
+        this.UserId = null;
+
+        /**
+         * 资源池编号
+         * @type {number || null}
+         */
+        this.SetNumber = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.UserId = 'UserId' in params ? params.UserId : null;
+        this.SetNumber = 'SetNumber' in params ? params.SetNumber : null;
+
+    }
+}
+
+/**
  * DescribeWorkers返回参数结构体
  * @class
  */
@@ -329,6 +364,83 @@ class CreateSessionResponse extends  AbstractModel {
         }
         this.ServerSession = 'ServerSession' in params ? params.ServerSession : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * QuitQueue返回参数结构体
+ * @class
+ */
+class QuitQueueResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * EnterQueue请求参数结构体
+ * @class
+ */
+class EnterQueueRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * true：第一次请求排队 false：已在排队中，查询当前排名
+         * @type {boolean || null}
+         */
+        this.First = null;
+
+        /**
+         * 游戏ID
+         * @type {string || null}
+         */
+        this.GameId = null;
+
+        /**
+         * 用户ID
+         * @type {string || null}
+         */
+        this.UserId = null;
+
+        /**
+         * 资源池编号
+         * @type {number || null}
+         */
+        this.SetNumber = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.First = 'First' in params ? params.First : null;
+        this.GameId = 'GameId' in params ? params.GameId : null;
+        this.UserId = 'UserId' in params ? params.UserId : null;
+        this.SetNumber = 'SetNumber' in params ? params.SetNumber : null;
 
     }
 }
@@ -633,6 +745,48 @@ class CreateSessionRequest extends  AbstractModel {
 }
 
 /**
+ * EnterQueue返回参数结构体
+ * @class
+ */
+class EnterQueueResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 排名
+         * @type {number || null}
+         */
+        this.Rank = null;
+
+        /**
+         * 机器锁定成功
+         * @type {boolean || null}
+         */
+        this.LockSuccess = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Rank = 'Rank' in params ? params.Rank : null;
+        this.LockSuccess = 'LockSuccess' in params ? params.LockSuccess : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeWorkers请求参数结构体
  * @class
  */
@@ -666,14 +820,18 @@ module.exports = {
     StopGameResponse: StopGameResponse,
     WorkerRegionInfo: WorkerRegionInfo,
     TrylockWorkerResponse: TrylockWorkerResponse,
+    QuitQueueRequest: QuitQueueRequest,
     DescribeWorkersResponse: DescribeWorkersResponse,
     ModifyWorkersRequest: ModifyWorkersRequest,
     DescribeWorkersInfoRequest: DescribeWorkersInfoRequest,
     CreateSessionResponse: CreateSessionResponse,
+    QuitQueueResponse: QuitQueueResponse,
+    EnterQueueRequest: EnterQueueRequest,
     StopGameRequest: StopGameRequest,
     TrylockWorkerRequest: TrylockWorkerRequest,
     WorkerDetail: WorkerDetail,
     CreateSessionRequest: CreateSessionRequest,
+    EnterQueueResponse: EnterQueueResponse,
     DescribeWorkersRequest: DescribeWorkersRequest,
 
 }

@@ -21,14 +21,18 @@ const ModifyWorkersResponse = models.ModifyWorkersResponse;
 const StopGameResponse = models.StopGameResponse;
 const WorkerRegionInfo = models.WorkerRegionInfo;
 const TrylockWorkerResponse = models.TrylockWorkerResponse;
+const QuitQueueRequest = models.QuitQueueRequest;
 const DescribeWorkersResponse = models.DescribeWorkersResponse;
 const ModifyWorkersRequest = models.ModifyWorkersRequest;
 const DescribeWorkersInfoRequest = models.DescribeWorkersInfoRequest;
 const CreateSessionResponse = models.CreateSessionResponse;
+const QuitQueueResponse = models.QuitQueueResponse;
+const EnterQueueRequest = models.EnterQueueRequest;
 const StopGameRequest = models.StopGameRequest;
 const TrylockWorkerRequest = models.TrylockWorkerRequest;
 const WorkerDetail = models.WorkerDetail;
 const CreateSessionRequest = models.CreateSessionRequest;
+const EnterQueueResponse = models.EnterQueueResponse;
 const DescribeWorkersRequest = models.DescribeWorkersRequest;
 
 
@@ -42,6 +46,17 @@ class GsClient extends AbstractClient {
         super("gs.tencentcloudapi.com", "2019-11-18", credential, region, profile);
     }
     
+    /**
+     * 进入排队锁定机器
+     * @param {EnterQueueRequest} req
+     * @param {function(string, EnterQueueResponse):void} cb
+     * @public
+     */
+    EnterQueue(req, cb) {
+        let resp = new EnterQueueResponse();
+        this.request("EnterQueue", req, resp, cb);
+    }
+
     /**
      * 尝试锁定机器
      * @param {TrylockWorkerRequest} req
@@ -62,6 +77,17 @@ class GsClient extends AbstractClient {
     StopGame(req, cb) {
         let resp = new StopGameResponse();
         this.request("StopGame", req, resp, cb);
+    }
+
+    /**
+     * 退出排队
+     * @param {QuitQueueRequest} req
+     * @param {function(string, QuitQueueResponse):void} cb
+     * @public
+     */
+    QuitQueue(req, cb) {
+        let resp = new QuitQueueResponse();
+        this.request("QuitQueue", req, resp, cb);
     }
 
     /**

@@ -3921,6 +3921,7 @@ class RollbackInstancesInfo extends  AbstractModel {
 
         /**
          * 云数据库实例ID
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -3939,12 +3940,14 @@ class RollbackInstancesInfo extends  AbstractModel {
 
         /**
          * 待回档的数据库信息，表示整库回档
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<RollbackDBName> || null}
          */
         this.Databases = null;
 
         /**
          * 待回档的数据库表信息，表示按表回档
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<RollbackTables> || null}
          */
         this.Tables = null;
@@ -4555,12 +4558,14 @@ class RollbackTableName extends  AbstractModel {
 
         /**
          * 回档前的原数据库表名
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.TableName = null;
 
         /**
          * 回档后的新数据库表名
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.NewTableName = null;
@@ -9833,12 +9838,14 @@ class RollbackTables extends  AbstractModel {
 
         /**
          * 数据库名
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.Database = null;
 
         /**
          * 数据库表详情
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<RollbackTableName> || null}
          */
         this.Table = null;
@@ -11304,12 +11311,14 @@ class RollbackDBName extends  AbstractModel {
 
         /**
          * 回档前的原数据库名
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.DatabaseName = null;
 
         /**
          * 回档后的新数据库名
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.NewDatabaseName = null;

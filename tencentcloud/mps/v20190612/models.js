@@ -5541,6 +5541,12 @@ class CreateImageSpriteTemplateRequest extends  AbstractModel {
          */
         this.FillType = null;
 
+        /**
+         * 模板描述信息，长度限制：256 个字符。
+         * @type {string || null}
+         */
+        this.Comment = null;
+
     }
 
     /**
@@ -5559,6 +5565,7 @@ class CreateImageSpriteTemplateRequest extends  AbstractModel {
         this.Height = 'Height' in params ? params.Height : null;
         this.ResolutionAdaptive = 'ResolutionAdaptive' in params ? params.ResolutionAdaptive : null;
         this.FillType = 'FillType' in params ? params.FillType : null;
+        this.Comment = 'Comment' in params ? params.Comment : null;
 
     }
 }
@@ -6224,6 +6231,12 @@ class ModifyImageSpriteTemplateRequest extends  AbstractModel {
          */
         this.FillType = null;
 
+        /**
+         * 模板描述信息，长度限制：256 个字符。
+         * @type {string || null}
+         */
+        this.Comment = null;
+
     }
 
     /**
@@ -6243,6 +6256,7 @@ class ModifyImageSpriteTemplateRequest extends  AbstractModel {
         this.RowCount = 'RowCount' in params ? params.RowCount : null;
         this.ColumnCount = 'ColumnCount' in params ? params.ColumnCount : null;
         this.FillType = 'FillType' in params ? params.FillType : null;
+        this.Comment = 'Comment' in params ? params.Comment : null;
 
     }
 }
