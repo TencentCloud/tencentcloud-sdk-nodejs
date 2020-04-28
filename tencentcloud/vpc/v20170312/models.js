@@ -442,7 +442,7 @@ class SecurityGroupAssociationStatistics extends  AbstractModel {
         this.InstanceStatistics = null;
 
         /**
-         * 所有资源的总计数。
+         * 所有资源的总计数（不包含被安全组引用数）。
          * @type {number || null}
          */
         this.TotalCount = null;

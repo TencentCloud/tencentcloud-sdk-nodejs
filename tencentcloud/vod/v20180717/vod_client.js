@@ -48,7 +48,6 @@ const AiReviewTaskPoliticalOcrResult = models.AiReviewTaskPoliticalOcrResult;
 const AiSampleWord = models.AiSampleWord;
 const CreateImageSpriteTemplateRequest = models.CreateImageSpriteTemplateRequest;
 const MediaSnapshotByTimePicInfoItem = models.MediaSnapshotByTimePicInfoItem;
-const VideoTrackTemplateInfo = models.VideoTrackTemplateInfo;
 const UserDefineFaceReviewTemplateInfo = models.UserDefineFaceReviewTemplateInfo;
 const ContentReviewTemplateItem = models.ContentReviewTemplateItem;
 const DeleteAIRecognitionTemplateResponse = models.DeleteAIRecognitionTemplateResponse;
@@ -63,7 +62,6 @@ const AudioTemplateInfoForUpdate = models.AudioTemplateInfoForUpdate;
 const ModifySubAppIdInfoRequest = models.ModifySubAppIdInfoRequest;
 const DeletePersonSampleRequest = models.DeletePersonSampleRequest;
 const MediaSampleSnapshotItem = models.MediaSampleSnapshotItem;
-const DescribeVideoTrackTemplatesRequest = models.DescribeVideoTrackTemplatesRequest;
 const AiRecognitionTaskInput = models.AiRecognitionTaskInput;
 const AudioTemplateInfo = models.AudioTemplateInfo;
 const ExecuteFunctionResponse = models.ExecuteFunctionResponse;
@@ -114,7 +112,6 @@ const ForbidMediaDistributionRequest = models.ForbidMediaDistributionRequest;
 const DescribeAIRecognitionTemplatesResponse = models.DescribeAIRecognitionTemplatesResponse;
 const EditMediaResponse = models.EditMediaResponse;
 const PoliticalOcrReviewTemplateInfoForUpdate = models.PoliticalOcrReviewTemplateInfoForUpdate;
-const AudioTrackTemplateInfo = models.AudioTrackTemplateInfo;
 const ProcessMediaByUrlRequest = models.ProcessMediaByUrlRequest;
 const ModifyMediaInfoRequest = models.ModifyMediaInfoRequest;
 const DeleteTranscodeTemplateRequest = models.DeleteTranscodeTemplateRequest;
@@ -167,7 +164,7 @@ const AiRecognitionTaskHeadTailResult = models.AiRecognitionTaskHeadTailResult;
 const TranscodeTask2017 = models.TranscodeTask2017;
 const CreatePersonSampleResponse = models.CreatePersonSampleResponse;
 const CreateContentReviewTemplateResponse = models.CreateContentReviewTemplateResponse;
-const ModifyAnimatedGraphicsTemplateRequest = models.ModifyAnimatedGraphicsTemplateRequest;
+const HighlightsConfigureInfo = models.HighlightsConfigureInfo;
 const DescribeProcedureTemplatesRequest = models.DescribeProcedureTemplatesRequest;
 const ProhibitedConfigureInfoForUpdate = models.ProhibitedConfigureInfoForUpdate;
 const TagConfigureInfoForUpdate = models.TagConfigureInfoForUpdate;
@@ -302,7 +299,6 @@ const SortBy = models.SortBy;
 const ClipTask2017 = models.ClipTask2017;
 const TranscodeTemplate = models.TranscodeTemplate;
 const DescribeCDNUsageDataRequest = models.DescribeCDNUsageDataRequest;
-const DescribeAudioTrackTemplatesResponse = models.DescribeAudioTrackTemplatesResponse;
 const PornOcrReviewTemplateInfo = models.PornOcrReviewTemplateInfo;
 const AiReviewTaskPoliticalAsrResult = models.AiReviewTaskPoliticalAsrResult;
 const AiRecognitionTaskAsrWordsSegmentItem = models.AiRecognitionTaskAsrWordsSegmentItem;
@@ -353,7 +349,7 @@ const AiRecognitionTaskAsrFullTextResult = models.AiRecognitionTaskAsrFullTextRe
 const ModifyAIRecognitionTemplateResponse = models.ModifyAIRecognitionTemplateResponse;
 const PoliticalImgReviewTemplateInfo = models.PoliticalImgReviewTemplateInfo;
 const PoliticalConfigureInfo = models.PoliticalConfigureInfo;
-const HighlightsConfigureInfo = models.HighlightsConfigureInfo;
+const ModifyAnimatedGraphicsTemplateRequest = models.ModifyAnimatedGraphicsTemplateRequest;
 const AiRecognitionTaskOcrWordsSegmentItem = models.AiRecognitionTaskOcrWordsSegmentItem;
 const MediaProcessTaskResult = models.MediaProcessTaskResult;
 const DeleteWordSamplesResponse = models.DeleteWordSamplesResponse;
@@ -388,7 +384,6 @@ const DescribeMediaProcessUsageDataResponse = models.DescribeMediaProcessUsageDa
 const DescribeSuperPlayerConfigsRequest = models.DescribeSuperPlayerConfigsRequest;
 const AiRecognitionTaskOcrFullTextResultInput = models.AiRecognitionTaskOcrFullTextResultInput;
 const AiRecognitionTaskSegmentResultInput = models.AiRecognitionTaskSegmentResultInput;
-const DescribeAudioTrackTemplatesRequest = models.DescribeAudioTrackTemplatesRequest;
 const DescribeTasksResponse = models.DescribeTasksResponse;
 const DescribeSubAppIdsRequest = models.DescribeSubAppIdsRequest;
 const AiRecognitionTaskFaceResultInput = models.AiRecognitionTaskFaceResultInput;
@@ -446,7 +441,6 @@ const PornConfigureInfo = models.PornConfigureInfo;
 const AiRecognitionTaskObjectSeqmentItem = models.AiRecognitionTaskObjectSeqmentItem;
 const PullEventsRequest = models.PullEventsRequest;
 const FaceConfigureInfoForUpdate = models.FaceConfigureInfoForUpdate;
-const DescribeVideoTrackTemplatesResponse = models.DescribeVideoTrackTemplatesResponse;
 const DescribeAIAnalysisTemplatesResponse = models.DescribeAIAnalysisTemplatesResponse;
 const CreateSnapshotByTimeOffsetTemplateRequest = models.CreateSnapshotByTimeOffsetTemplateRequest;
 const AiRecognitionTaskAsrWordsResult = models.AiRecognitionTaskAsrWordsResult;
@@ -724,17 +718,6 @@ class VodClient extends AbstractClient {
     DescribeSampleSnapshotTemplates(req, cb) {
         let resp = new DescribeSampleSnapshotTemplatesResponse();
         this.request("DescribeSampleSnapshotTemplates", req, resp, cb);
-    }
-
-    /**
-     * 获取转自适应码流音频轨模板列表，支持根据条件，分页查询。
-     * @param {DescribeAudioTrackTemplatesRequest} req
-     * @param {function(string, DescribeAudioTrackTemplatesResponse):void} cb
-     * @public
-     */
-    DescribeAudioTrackTemplates(req, cb) {
-        let resp = new DescribeAudioTrackTemplatesResponse();
-        this.request("DescribeAudioTrackTemplates", req, resp, cb);
     }
 
     /**
@@ -1554,17 +1537,6 @@ class VodClient extends AbstractClient {
     WeChatMiniProgramPublish(req, cb) {
         let resp = new WeChatMiniProgramPublishResponse();
         this.request("WeChatMiniProgramPublish", req, resp, cb);
-    }
-
-    /**
-     * 获取转自适应码流视频轨模板列表，支持根据条件，分页查询。
-     * @param {DescribeVideoTrackTemplatesRequest} req
-     * @param {function(string, DescribeVideoTrackTemplatesResponse):void} cb
-     * @public
-     */
-    DescribeVideoTrackTemplates(req, cb) {
-        let resp = new DescribeVideoTrackTemplatesResponse();
-        this.request("DescribeVideoTrackTemplates", req, resp, cb);
     }
 
     /**
