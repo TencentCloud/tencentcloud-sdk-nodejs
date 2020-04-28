@@ -466,7 +466,7 @@ class KmsClient extends AbstractClient {
     }
 
     /**
-     * 批量启用白盒密钥
+     * 启用白盒密钥
      * @param {EnableWhiteBoxKeyRequest} req
      * @param {function(string, EnableWhiteBoxKeyResponse):void} cb
      * @public

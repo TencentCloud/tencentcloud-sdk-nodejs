@@ -2172,6 +2172,12 @@ class CreatePublicConfigRequest extends  AbstractModel {
          */
         this.ConfigType = null;
 
+        /**
+         * Base64编码的配置项
+         * @type {boolean || null}
+         */
+        this.EncodeWithBase64 = null;
+
     }
 
     /**
@@ -2186,6 +2192,7 @@ class CreatePublicConfigRequest extends  AbstractModel {
         this.ConfigValue = 'ConfigValue' in params ? params.ConfigValue : null;
         this.ConfigVersionDesc = 'ConfigVersionDesc' in params ? params.ConfigVersionDesc : null;
         this.ConfigType = 'ConfigType' in params ? params.ConfigType : null;
+        this.EncodeWithBase64 = 'EncodeWithBase64' in params ? params.EncodeWithBase64 : null;
 
     }
 }
@@ -6625,6 +6632,12 @@ class CreateConfigRequest extends  AbstractModel {
          */
         this.ConfigType = null;
 
+        /**
+         * Base64编码的配置项
+         * @type {boolean || null}
+         */
+        this.EncodeWithBase64 = null;
+
     }
 
     /**
@@ -6640,6 +6653,7 @@ class CreateConfigRequest extends  AbstractModel {
         this.ApplicationId = 'ApplicationId' in params ? params.ApplicationId : null;
         this.ConfigVersionDesc = 'ConfigVersionDesc' in params ? params.ConfigVersionDesc : null;
         this.ConfigType = 'ConfigType' in params ? params.ConfigType : null;
+        this.EncodeWithBase64 = 'EncodeWithBase64' in params ? params.EncodeWithBase64 : null;
 
     }
 }
@@ -8495,6 +8509,7 @@ class CreateConfigResponse extends  AbstractModel {
 
         /**
          * true：创建成功；false：创建失败
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {boolean || null}
          */
         this.Result = null;
