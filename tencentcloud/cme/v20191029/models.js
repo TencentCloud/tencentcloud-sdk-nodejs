@@ -1031,6 +1031,13 @@ class AudioMaterial extends  AbstractModel {
          */
         this.CoverUrl = null;
 
+        /**
+         * 素材状态。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {MaterialStatus || null}
+         */
+        this.MaterialStatus = null;
+
     }
 
     /**
@@ -1048,6 +1055,12 @@ class AudioMaterial extends  AbstractModel {
         }
         this.MaterialUrl = 'MaterialUrl' in params ? params.MaterialUrl : null;
         this.CoverUrl = 'CoverUrl' in params ? params.CoverUrl : null;
+
+        if (params.MaterialStatus) {
+            let obj = new MaterialStatus();
+            obj.deserialize(params.MaterialStatus)
+            this.MaterialStatus = obj;
+        }
 
     }
 }
@@ -1206,13 +1219,6 @@ class VideoEditProjectOutput extends  AbstractModel {
          */
         this.MetaData = null;
 
-        /**
-         * 素材基础信息。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {MaterialBaseInfo || null}
-         */
-        this.MaterialBaseInfo = null;
-
     }
 
     /**
@@ -1229,12 +1235,6 @@ class VideoEditProjectOutput extends  AbstractModel {
             let obj = new MediaMetaData();
             obj.deserialize(params.MetaData)
             this.MetaData = obj;
-        }
-
-        if (params.MaterialBaseInfo) {
-            let obj = new MaterialBaseInfo();
-            obj.deserialize(params.MaterialBaseInfo)
-            this.MaterialBaseInfo = obj;
         }
 
     }
@@ -1577,95 +1577,6 @@ class DeleteLoginStatusResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * 素材基础信息。
- * @class
- */
-class MaterialBaseInfo extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 素材名称。
-         * @type {string || null}
-         */
-        this.Name = null;
-
-        /**
-         * 描述信息。
-         * @type {string || null}
-         */
-        this.Description = null;
-
-        /**
-         * 分类路径。
-         * @type {string || null}
-         */
-        this.ClassPath = null;
-
-        /**
-         * 标签集合。
-         * @type {Array.<string> || null}
-         */
-        this.TagSet = null;
-
-        /**
-         * 归属者。
-         * @type {Entity || null}
-         */
-        this.Owner = null;
-
-        /**
-         * 素材类型。
-         * @type {string || null}
-         */
-        this.MaterialType = null;
-
-        /**
-         * 素材 URL。
-         * @type {string || null}
-         */
-        this.MaterialUrl = null;
-
-        /**
-         * 云点播媒资 FileId。
-         * @type {string || null}
-         */
-        this.VodFileId = null;
-
-        /**
-         * 创建时间，格式按照 ISO 8601 标准表示。
-         * @type {string || null}
-         */
-        this.CreateTime = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Name = 'Name' in params ? params.Name : null;
-        this.Description = 'Description' in params ? params.Description : null;
-        this.ClassPath = 'ClassPath' in params ? params.ClassPath : null;
-        this.TagSet = 'TagSet' in params ? params.TagSet : null;
-
-        if (params.Owner) {
-            let obj = new Entity();
-            obj.deserialize(params.Owner)
-            this.Owner = obj;
-        }
-        this.MaterialType = 'MaterialType' in params ? params.MaterialType : null;
-        this.MaterialUrl = 'MaterialUrl' in params ? params.MaterialUrl : null;
-        this.VodFileId = 'VodFileId' in params ? params.VodFileId : null;
-        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
 
     }
 }
@@ -3730,6 +3641,13 @@ class VideoMaterial extends  AbstractModel {
          */
         this.Resolution = null;
 
+        /**
+         * 素材状态。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {MaterialStatus || null}
+         */
+        this.MaterialStatus = null;
+
     }
 
     /**
@@ -3754,6 +3672,12 @@ class VideoMaterial extends  AbstractModel {
         this.MaterialUrl = 'MaterialUrl' in params ? params.MaterialUrl : null;
         this.CoverUrl = 'CoverUrl' in params ? params.CoverUrl : null;
         this.Resolution = 'Resolution' in params ? params.Resolution : null;
+
+        if (params.MaterialStatus) {
+            let obj = new MaterialStatus();
+            obj.deserialize(params.MaterialStatus)
+            this.MaterialStatus = obj;
+        }
 
     }
 }
@@ -4145,6 +4069,37 @@ class DescribeTeamMembersRequest extends  AbstractModel {
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.Operator = 'Operator' in params ? params.Operator : null;
+
+    }
+}
+
+/**
+ * 素材的状态，目前仅包含素材编辑可用状态。
+ * @class
+ */
+class MaterialStatus extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 素材编辑可用状态，取值有：
+<li>NORMAL：正常，可直接用于编辑；</li>
+<li>ABNORMAL : 异常，不可用于编辑；</li>
+<li>PROCESSING：处理中，暂不可用于编辑。</li>
+         * @type {string || null}
+         */
+        this.EditorUsableStatus = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.EditorUsableStatus = 'EditorUsableStatus' in params ? params.EditorUsableStatus : null;
 
     }
 }
@@ -5260,7 +5215,6 @@ module.exports = {
     TimeRange: TimeRange,
     DescribeLoginStatusRequest: DescribeLoginStatusRequest,
     DeleteLoginStatusResponse: DeleteLoginStatusResponse,
-    MaterialBaseInfo: MaterialBaseInfo,
     Resource: Resource,
     CreateLinkResponse: CreateLinkResponse,
     ListMediaResponse: ListMediaResponse,
@@ -5312,6 +5266,7 @@ module.exports = {
     TeamMemberInfo: TeamMemberInfo,
     DescribeJoinTeamsResponse: DescribeJoinTeamsResponse,
     DescribeTeamMembersRequest: DescribeTeamMembersRequest,
+    MaterialStatus: MaterialStatus,
     MediaImageSpriteInfo: MediaImageSpriteInfo,
     AuthorizationInfo: AuthorizationInfo,
     ModifyProjectResponse: ModifyProjectResponse,

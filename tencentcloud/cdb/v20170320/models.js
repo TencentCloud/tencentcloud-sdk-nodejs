@@ -3582,6 +3582,57 @@ class ImportRecord extends  AbstractModel {
 }
 
 /**
+ * DescribeRollbackTaskDetail返回参数结构体
+ * @class
+ */
+class DescribeRollbackTaskDetailResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 符合条件的记录总数。
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 回档任务详情。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<RollbackTask> || null}
+         */
+        this.Items = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.Items) {
+            this.Items = new Array();
+            for (let z in params.Items) {
+                let obj = new RollbackTask();
+                obj.deserialize(params.Items[z]);
+                this.Items.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * CreateAccounts请求参数结构体
  * @class
  */
@@ -5476,6 +5527,78 @@ class DescribeBinlogBackupOverviewRequest extends  AbstractModel {
 }
 
 /**
+ * 回档任务详情
+ * @class
+ */
+class RollbackTask extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 任务执行信息描述。
+         * @type {string || null}
+         */
+        this.Info = null;
+
+        /**
+         * 任务执行结果。可能的取值：INITIAL - 初始化，RUNNING - 运行中，SUCCESS - 执行成功，FAILED - 执行失败，KILLED - 已终止，REMOVED - 已删除，PAUSED - 终止中。
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * 任务执行进度。取值范围为[0, 100]。
+         * @type {number || null}
+         */
+        this.Progress = null;
+
+        /**
+         * 任务开始时间。
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * 任务结束时间。
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * 回档任务详情。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<RollbackInstancesInfo> || null}
+         */
+        this.Detail = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Info = 'Info' in params ? params.Info : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.Progress = 'Progress' in params ? params.Progress : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+
+        if (params.Detail) {
+            this.Detail = new Array();
+            for (let z in params.Detail) {
+                let obj = new RollbackInstancesInfo();
+                obj.deserialize(params.Detail[z]);
+                this.Detail.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * DescribeBackups返回参数结构体
  * @class
  */
@@ -5849,6 +5972,55 @@ class DescribeBackupConfigResponse extends  AbstractModel {
             this.BackupTimeWindow = obj;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeRollbackTaskDetail请求参数结构体
+ * @class
+ */
+class DescribeRollbackTaskDetailRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例 ID。与云数据库控制台页面中显示的实例 ID 相同，可使用 [查询实例列表] (https://cloud.tencent.com/document/api/236/15872)。
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 异步任务 ID。
+         * @type {string || null}
+         */
+        this.AsyncRequestId = null;
+
+        /**
+         * 分页参数，每次请求返回的记录数。默认值为 20，最大值为 100。
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 分页偏移量。默认为 0。
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.AsyncRequestId = 'AsyncRequestId' in params ? params.AsyncRequestId : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
 
     }
 }
@@ -12285,6 +12457,7 @@ module.exports = {
     DescribeErrorLogDataResponse: DescribeErrorLogDataResponse,
     AddTimeWindowRequest: AddTimeWindowRequest,
     ImportRecord: ImportRecord,
+    DescribeRollbackTaskDetailResponse: DescribeRollbackTaskDetailResponse,
     CreateAccountsRequest: CreateAccountsRequest,
     CreateDBInstanceHourRequest: CreateDBInstanceHourRequest,
     DescribeDeployGroupListRequest: DescribeDeployGroupListRequest,
@@ -12322,6 +12495,7 @@ module.exports = {
     ModifyAutoRenewFlagResponse: ModifyAutoRenewFlagResponse,
     DeleteTimeWindowResponse: DeleteTimeWindowResponse,
     DescribeBinlogBackupOverviewRequest: DescribeBinlogBackupOverviewRequest,
+    RollbackTask: RollbackTask,
     DescribeBackupsResponse: DescribeBackupsResponse,
     DescribeTimeWindowRequest: DescribeTimeWindowRequest,
     ModifyInstanceParamResponse: ModifyInstanceParamResponse,
@@ -12330,6 +12504,7 @@ module.exports = {
     BackupItem: BackupItem,
     DatabaseName: DatabaseName,
     DescribeBackupConfigResponse: DescribeBackupConfigResponse,
+    DescribeRollbackTaskDetailRequest: DescribeRollbackTaskDetailRequest,
     ModifyDBInstanceSecurityGroupsRequest: ModifyDBInstanceSecurityGroupsRequest,
     DescribeParamTemplatesResponse: DescribeParamTemplatesResponse,
     DescribeBackupTablesResponse: DescribeBackupTablesResponse,

@@ -18706,7 +18706,7 @@ class AdaptiveDynamicStreamingInfoItem extends  AbstractModel {
         this.Definition = null;
 
         /**
-         * 打包格式，可能为 hls 和 dash 两种。
+         * 打包格式，只能为 HLS。
          * @type {string || null}
          */
         this.Package = null;

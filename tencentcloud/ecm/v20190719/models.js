@@ -4711,7 +4711,7 @@ PROTECTIVELY_ISOLATED：表示被安全隔离的实例。
         this.DataDiskSize = null;
 
         /**
-         * UUID
+         * 实例UUID
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
@@ -4772,6 +4772,13 @@ PROTECTIVELY_ISOLATED：表示被安全隔离的实例。
          * @type {Array.<DiskInfo> || null}
          */
         this.DataDisks = null;
+
+        /**
+         * 新实例标志
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.NewFlag = null;
 
     }
 
@@ -4851,6 +4858,7 @@ PROTECTIVELY_ISOLATED：表示被安全隔离的实例。
                 this.DataDisks.push(obj);
             }
         }
+        this.NewFlag = 'NewFlag' in params ? params.NewFlag : null;
 
     }
 }

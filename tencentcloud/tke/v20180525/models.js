@@ -95,6 +95,13 @@ class DescribeClusterSecurityResponse extends  AbstractModel {
         this.SecurityPolicy = null;
 
         /**
+         * 集群Kubeconfig文件
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Kubeconfig = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -116,6 +123,7 @@ class DescribeClusterSecurityResponse extends  AbstractModel {
         this.Domain = 'Domain' in params ? params.Domain : null;
         this.PgwEndpoint = 'PgwEndpoint' in params ? params.PgwEndpoint : null;
         this.SecurityPolicy = 'SecurityPolicy' in params ? params.SecurityPolicy : null;
+        this.Kubeconfig = 'Kubeconfig' in params ? params.Kubeconfig : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -493,6 +501,12 @@ class DeleteClusterRequest extends  AbstractModel {
          */
         this.InstanceDeleteMode = null;
 
+        /**
+         * 集群删除时资源的删除策略，目前支持CBS（默认保留CBS）
+         * @type {Array.<ResourceDeleteOption> || null}
+         */
+        this.ResourceDeleteOptions = null;
+
     }
 
     /**
@@ -504,6 +518,15 @@ class DeleteClusterRequest extends  AbstractModel {
         }
         this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
         this.InstanceDeleteMode = 'InstanceDeleteMode' in params ? params.InstanceDeleteMode : null;
+
+        if (params.ResourceDeleteOptions) {
+            this.ResourceDeleteOptions = new Array();
+            for (let z in params.ResourceDeleteOptions) {
+                let obj = new ResourceDeleteOption();
+                obj.deserialize(params.ResourceDeleteOptions[z]);
+                this.ResourceDeleteOptions.push(obj);
+            }
+        }
 
     }
 }
@@ -2304,6 +2327,41 @@ class DescribeExistedInstancesResponse extends  AbstractModel {
         }
         this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 资源删除选项
+ * @class
+ */
+class ResourceDeleteOption extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 资源类型，例如CBS
+         * @type {string || null}
+         */
+        this.ResourceType = null;
+
+        /**
+         * 集群删除时资源的删除模式：terminate（销毁），retain （保留）
+         * @type {string || null}
+         */
+        this.DeleteMode = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ResourceType = 'ResourceType' in params ? params.ResourceType : null;
+        this.DeleteMode = 'DeleteMode' in params ? params.DeleteMode : null;
 
     }
 }
@@ -4588,6 +4646,7 @@ module.exports = {
     ClusterExtraArgs: ClusterExtraArgs,
     DataDisk: DataDisk,
     DescribeExistedInstancesResponse: DescribeExistedInstancesResponse,
+    ResourceDeleteOption: ResourceDeleteOption,
     LoginSettings: LoginSettings,
     Instance: Instance,
     EnhancedService: EnhancedService,

@@ -16,10 +16,25 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
-const RemoveUserResponse = models.RemoveUserResponse;
+const QualityData = models.QualityData;
+const DescribeRealtimeScaleRequest = models.DescribeRealtimeScaleRequest;
 const DismissRoomRequest = models.DismissRoomRequest;
-const RemoveUserRequest = models.RemoveUserRequest;
+const DescribeCallDetailResponse = models.DescribeCallDetailResponse;
+const DescribeRealtimeQualityRequest = models.DescribeRealtimeQualityRequest;
+const DescribeRealtimeQualityResponse = models.DescribeRealtimeQualityResponse;
+const TimeValue = models.TimeValue;
+const DescribeRoomInformationRequest = models.DescribeRoomInformationRequest;
+const DescribeRoomInformationResponse = models.DescribeRoomInformationResponse;
+const UserInformation = models.UserInformation;
+const DescribeRealtimeScaleResponse = models.DescribeRealtimeScaleResponse;
+const RealtimeData = models.RealtimeData;
+const RoomState = models.RoomState;
 const DismissRoomResponse = models.DismissRoomResponse;
+const DescribeRealtimeNetworkResponse = models.DescribeRealtimeNetworkResponse;
+const RemoveUserResponse = models.RemoveUserResponse;
+const RemoveUserRequest = models.RemoveUserRequest;
+const DescribeCallDetailRequest = models.DescribeCallDetailRequest;
+const DescribeRealtimeNetworkRequest = models.DescribeRealtimeNetworkRequest;
 
 
 /**
@@ -33,6 +48,50 @@ class TrtcClient extends AbstractClient {
     }
     
     /**
+     * 查询sdkappid维度下实时质量数据，包括：进房成功率，首帧秒开率，音频卡顿率，视频卡顿率。可查询24小时内数据，查询起止时间不超过1个小时。
+     * @param {DescribeRealtimeQualityRequest} req
+     * @param {function(string, DescribeRealtimeQualityResponse):void} cb
+     * @public
+     */
+    DescribeRealtimeQuality(req, cb) {
+        let resp = new DescribeRealtimeQualityResponse();
+        this.request("DescribeRealtimeQuality", req, resp, cb);
+    }
+
+    /**
+     * 查询sdkappid维度下实时规模，可查询24小时内数据，查询起止时间不超过1个小时。
+     * @param {DescribeRealtimeScaleRequest} req
+     * @param {function(string, DescribeRealtimeScaleResponse):void} cb
+     * @public
+     */
+    DescribeRealtimeScale(req, cb) {
+        let resp = new DescribeRealtimeScaleResponse();
+        this.request("DescribeRealtimeScale", req, resp, cb);
+    }
+
+    /**
+     * 查询sdkappid维度下实时网络状态，包括上行丢包与下行丢包。可查询24小时内数据，查询起止时间不超过1个小时。
+     * @param {DescribeRealtimeNetworkRequest} req
+     * @param {function(string, DescribeRealtimeNetworkResponse):void} cb
+     * @public
+     */
+    DescribeRealtimeNetwork(req, cb) {
+        let resp = new DescribeRealtimeNetworkResponse();
+        this.request("DescribeRealtimeNetwork", req, resp, cb);
+    }
+
+    /**
+     * 查询sdkappid下的房间列表。默认返回10条通话，一次最多返回100条通话。可查询最近5天的数据。
+     * @param {DescribeRoomInformationRequest} req
+     * @param {function(string, DescribeRoomInformationResponse):void} cb
+     * @public
+     */
+    DescribeRoomInformation(req, cb) {
+        let resp = new DescribeRoomInformationResponse();
+        this.request("DescribeRoomInformation", req, resp, cb);
+    }
+
+    /**
      * 接口说明：将用户从房间移出，适用于主播/房主/管理员踢人等场景。支持所有平台，Android、iOS、Windows 和 macOS 需升级到 TRTC SDK 6.6及以上版本。
      * @param {RemoveUserRequest} req
      * @param {function(string, RemoveUserResponse):void} cb
@@ -41,6 +100,17 @@ class TrtcClient extends AbstractClient {
     RemoveUser(req, cb) {
         let resp = new RemoveUserResponse();
         this.request("RemoveUser", req, resp, cb);
+    }
+
+    /**
+     * 查询指定时间内的用户列表及用户通话质量数据。
+     * @param {DescribeCallDetailRequest} req
+     * @param {function(string, DescribeCallDetailResponse):void} cb
+     * @public
+     */
+    DescribeCallDetail(req, cb) {
+        let resp = new DescribeCallDetailResponse();
+        this.request("DescribeCallDetail", req, resp, cb);
     }
 
     /**

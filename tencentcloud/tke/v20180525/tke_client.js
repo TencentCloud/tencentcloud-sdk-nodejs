@@ -65,6 +65,7 @@ const DescribeClustersResponse = models.DescribeClustersResponse;
 const ClusterExtraArgs = models.ClusterExtraArgs;
 const DataDisk = models.DataDisk;
 const DescribeExistedInstancesResponse = models.DescribeExistedInstancesResponse;
+const ResourceDeleteOption = models.ResourceDeleteOption;
 const LoginSettings = models.LoginSettings;
 const Instance = models.Instance;
 const EnhancedService = models.EnhancedService;

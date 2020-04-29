@@ -2748,6 +2748,12 @@ class DelayDistribution extends  AbstractModel {
          */
         this.Size = null;
 
+        /**
+         * 修改时间
+         * @type {number || null}
+         */
+        this.Updatetime = null;
+
     }
 
     /**
@@ -2759,6 +2765,7 @@ class DelayDistribution extends  AbstractModel {
         }
         this.Ladder = 'Ladder' in params ? params.Ladder : null;
         this.Size = 'Size' in params ? params.Size : null;
+        this.Updatetime = 'Updatetime' in params ? params.Updatetime : null;
 
     }
 }
