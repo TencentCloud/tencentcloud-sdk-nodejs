@@ -20,7 +20,7 @@ const CreateFunctionRequest = models.CreateFunctionRequest;
 const AccessInfo = models.AccessInfo;
 const LayerVersionInfo = models.LayerVersionInfo;
 const ListLayerVersionsResponse = models.ListLayerVersionsResponse;
-const DeleteFunctionRequest = models.DeleteFunctionRequest;
+const DeleteAliasResponse = models.DeleteAliasResponse;
 const CopyFunctionResponse = models.CopyFunctionResponse;
 const ListVersionByFunctionResponse = models.ListVersionByFunctionResponse;
 const Namespace = models.Namespace;
@@ -29,6 +29,7 @@ const ListLayersResponse = models.ListLayersResponse;
 const Environment = models.Environment;
 const ListNamespacesRequest = models.ListNamespacesRequest;
 const FunctionVersion = models.FunctionVersion;
+const DeleteAliasRequest = models.DeleteAliasRequest;
 const GetFunctionAddressRequest = models.GetFunctionAddressRequest;
 const DeleteLayerVersionResponse = models.DeleteLayerVersionResponse;
 const InvokeResponse = models.InvokeResponse;
@@ -42,7 +43,7 @@ const ListVersionByFunctionRequest = models.ListVersionByFunctionRequest;
 const PublicNetConfigOut = models.PublicNetConfigOut;
 const ListFunctionsResponse = models.ListFunctionsResponse;
 const UpdateNamespaceResponse = models.UpdateNamespaceResponse;
-const ListLayerVersionsRequest = models.ListLayerVersionsRequest;
+const DeleteFunctionRequest = models.DeleteFunctionRequest;
 const CreateTriggerResponse = models.CreateTriggerResponse;
 const PublishLayerVersionRequest = models.PublishLayerVersionRequest;
 const CreateNamespaceRequest = models.CreateNamespaceRequest;
@@ -56,6 +57,7 @@ const UpdateFunctionConfigurationResponse = models.UpdateFunctionConfigurationRe
 const PublishLayerVersionResponse = models.PublishLayerVersionResponse;
 const PublishVersionResponse = models.PublishVersionResponse;
 const DeleteLayerVersionRequest = models.DeleteLayerVersionRequest;
+const ListLayerVersionsRequest = models.ListLayerVersionsRequest;
 const CreateFunctionResponse = models.CreateFunctionResponse;
 const LayerVersionSimple = models.LayerVersionSimple;
 const Trigger = models.Trigger;
@@ -231,6 +233,17 @@ class ScfClient extends AbstractClient {
     GetFunction(req, cb) {
         let resp = new GetFunctionResponse();
         this.request("GetFunction", req, resp, cb);
+    }
+
+    /**
+     * 删除一个函数版本的别名
+     * @param {DeleteAliasRequest} req
+     * @param {function(string, DeleteAliasResponse):void} cb
+     * @public
+     */
+    DeleteAlias(req, cb) {
+        let resp = new DeleteAliasResponse();
+        this.request("DeleteAlias", req, resp, cb);
     }
 
     /**

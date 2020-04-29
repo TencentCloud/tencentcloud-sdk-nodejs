@@ -82,6 +82,7 @@ const SlaveConfig = models.SlaveConfig;
 const DescribeErrorLogDataResponse = models.DescribeErrorLogDataResponse;
 const AddTimeWindowRequest = models.AddTimeWindowRequest;
 const ImportRecord = models.ImportRecord;
+const DescribeRollbackTaskDetailResponse = models.DescribeRollbackTaskDetailResponse;
 const CreateAccountsRequest = models.CreateAccountsRequest;
 const CreateDBInstanceHourRequest = models.CreateDBInstanceHourRequest;
 const DescribeDeployGroupListRequest = models.DescribeDeployGroupListRequest;
@@ -119,6 +120,7 @@ const DescribeInstanceParamRecordsRequest = models.DescribeInstanceParamRecordsR
 const ModifyAutoRenewFlagResponse = models.ModifyAutoRenewFlagResponse;
 const DeleteTimeWindowResponse = models.DeleteTimeWindowResponse;
 const DescribeBinlogBackupOverviewRequest = models.DescribeBinlogBackupOverviewRequest;
+const RollbackTask = models.RollbackTask;
 const DescribeBackupsResponse = models.DescribeBackupsResponse;
 const DescribeTimeWindowRequest = models.DescribeTimeWindowRequest;
 const ModifyInstanceParamResponse = models.ModifyInstanceParamResponse;
@@ -127,6 +129,7 @@ const DescribeTimeWindowResponse = models.DescribeTimeWindowResponse;
 const BackupItem = models.BackupItem;
 const DatabaseName = models.DatabaseName;
 const DescribeBackupConfigResponse = models.DescribeBackupConfigResponse;
+const DescribeRollbackTaskDetailRequest = models.DescribeRollbackTaskDetailRequest;
 const ModifyDBInstanceSecurityGroupsRequest = models.ModifyDBInstanceSecurityGroupsRequest;
 const DescribeParamTemplatesResponse = models.DescribeParamTemplatesResponse;
 const DescribeBackupTablesResponse = models.DescribeBackupTablesResponse;
@@ -391,6 +394,17 @@ class CdbClient extends AbstractClient {
     OpenDBInstanceGTID(req, cb) {
         let resp = new OpenDBInstanceGTIDResponse();
         this.request("OpenDBInstanceGTID", req, resp, cb);
+    }
+
+    /**
+     * 本接口(DescribeRollbackTaskDetail)用于查询云数据库实例回档任务详情。
+     * @param {DescribeRollbackTaskDetailRequest} req
+     * @param {function(string, DescribeRollbackTaskDetailResponse):void} cb
+     * @public
+     */
+    DescribeRollbackTaskDetail(req, cb) {
+        let resp = new DescribeRollbackTaskDetailResponse();
+        this.request("DescribeRollbackTaskDetail", req, resp, cb);
     }
 
     /**

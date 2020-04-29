@@ -1078,6 +1078,18 @@ class DstInfo extends  AbstractModel {
          */
         this.ReadOnly = null;
 
+        /**
+         * 目标数据库账号
+         * @type {string || null}
+         */
+        this.User = null;
+
+        /**
+         * 目标数据库密码
+         * @type {string || null}
+         */
+        this.Password = null;
+
     }
 
     /**
@@ -1092,6 +1104,8 @@ class DstInfo extends  AbstractModel {
         this.Ip = 'Ip' in params ? params.Ip : null;
         this.Port = 'Port' in params ? params.Port : null;
         this.ReadOnly = 'ReadOnly' in params ? params.ReadOnly : null;
+        this.User = 'User' in params ? params.User : null;
+        this.Password = 'Password' in params ? params.Password : null;
 
     }
 }

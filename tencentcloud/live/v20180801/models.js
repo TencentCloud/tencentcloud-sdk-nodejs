@@ -2519,28 +2519,24 @@ class DeleteLiveTranscodeRuleRequest extends  AbstractModel {
 
         /**
          * 播放域名。
-域名维度转码，域名+AppName+StreamName唯一标识单个转码规则，如需删除需要强匹配，例如AppName为空也需要传空字符串进行强匹配。
          * @type {string || null}
          */
         this.DomainName = null;
 
         /**
          * 推流路径，与推流和播放地址中的AppName保持一致，默认为 live。
-域名+AppName+StreamName+TemplateId唯一标识单个转码规则，如需删除需要强匹配，例如AppName为空也需要传空字符串进行强匹配。
          * @type {string || null}
          */
         this.AppName = null;
 
         /**
          * 流名称。
-域名+AppName+StreamName+TemplateId唯一标识单个转码规则，如需删除需要强匹配，例如AppName为空也需要传空字符串进行强匹配。
          * @type {string || null}
          */
         this.StreamName = null;
 
         /**
          * 模板ID。
-域名+AppName+StreamName+TemplateId唯一标识单个转码规则，如需删除需要强匹配，例如AppName为空也需要传空字符串进行强匹配。
          * @type {number || null}
          */
         this.TemplateId = null;
@@ -8649,7 +8645,9 @@ class DeleteLiveTranscodeTemplateRequest extends  AbstractModel {
         super();
 
         /**
-         * 模板Id。
+         * 模板 ID。
+1. 在创建转码模板接口 [CreateLiveTranscodeTemplate](/document/product/267/32646) 调用的返回值中获取模板 ID。
+2. 可以从接口 [DescribeLiveTranscodeTemplates](/document/product/267/32641) 查询已经创建的过的模板列表。
          * @type {number || null}
          */
         this.TemplateId = null;
@@ -10093,8 +10091,8 @@ aac/mp3。
         this.Description = null;
 
         /**
-         * 视频码率。
-范围：100-8000。
+         * 视频码率。范围：100kbps - 8000kbps。
+注意：码率必须是100的倍数。
          * @type {number || null}
          */
         this.VideoBitrate = null;
@@ -11539,7 +11537,8 @@ class DescribeLiveTranscodeTemplateRequest extends  AbstractModel {
         super();
 
         /**
-         * 模板Id。
+         * 模板 ID。
+注意：在创建转码模板接口 [CreateLiveTranscodeTemplate](/document/product/267/32646) 调用的返回值中获取模板 ID。
          * @type {number || null}
          */
         this.TemplateId = null;

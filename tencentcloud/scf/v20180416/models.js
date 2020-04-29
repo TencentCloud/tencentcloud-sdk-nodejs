@@ -340,24 +340,18 @@ class ListLayerVersionsResponse extends  AbstractModel {
 }
 
 /**
- * DeleteFunction请求参数结构体
+ * DeleteAlias返回参数结构体
  * @class
  */
-class DeleteFunctionRequest extends  AbstractModel {
+class DeleteAliasResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 要删除的函数名称
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.FunctionName = null;
-
-        /**
-         * 函数所属命名空间
-         * @type {string || null}
-         */
-        this.Namespace = null;
+        this.RequestId = null;
 
     }
 
@@ -368,8 +362,7 @@ class DeleteFunctionRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.FunctionName = 'FunctionName' in params ? params.FunctionName : null;
-        this.Namespace = 'Namespace' in params ? params.Namespace : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -749,6 +742,48 @@ class FunctionVersion extends  AbstractModel {
         this.Description = 'Description' in params ? params.Description : null;
         this.AddTime = 'AddTime' in params ? params.AddTime : null;
         this.ModTime = 'ModTime' in params ? params.ModTime : null;
+
+    }
+}
+
+/**
+ * DeleteAlias请求参数结构体
+ * @class
+ */
+class DeleteAliasRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 函数名称
+         * @type {string || null}
+         */
+        this.FunctionName = null;
+
+        /**
+         * 别名的名称
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 函数所在的命名空间
+         * @type {string || null}
+         */
+        this.Namespace = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FunctionName = 'FunctionName' in params ? params.FunctionName : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Namespace = 'Namespace' in params ? params.Namespace : null;
 
     }
 }
@@ -1190,12 +1225,6 @@ class UpdateFunctionConfigurationRequest extends  AbstractModel {
         this.Publish = null;
 
         /**
-         * 是否开启L5访问能力，TRUE 为开启，FALSE为关闭
-         * @type {string || null}
-         */
-        this.L5Enable = null;
-
-        /**
          * 函数要关联的层版本列表，层的版本会按照在列表中顺序依次覆盖。
          * @type {Array.<LayerVersionSimple> || null}
          */
@@ -1206,12 +1235,6 @@ class UpdateFunctionConfigurationRequest extends  AbstractModel {
          * @type {DeadLetterConfig || null}
          */
         this.DeadLetterConfig = null;
-
-        /**
-         * 是否开启Ons访问能力，TRUE 为开启，FALSE为关闭
-         * @type {string || null}
-         */
-        this.OnsEnable = null;
 
     }
 
@@ -1244,7 +1267,6 @@ class UpdateFunctionConfigurationRequest extends  AbstractModel {
         this.ClsLogsetId = 'ClsLogsetId' in params ? params.ClsLogsetId : null;
         this.ClsTopicId = 'ClsTopicId' in params ? params.ClsTopicId : null;
         this.Publish = 'Publish' in params ? params.Publish : null;
-        this.L5Enable = 'L5Enable' in params ? params.L5Enable : null;
 
         if (params.Layers) {
             this.Layers = new Array();
@@ -1260,7 +1282,6 @@ class UpdateFunctionConfigurationRequest extends  AbstractModel {
             obj.deserialize(params.DeadLetterConfig)
             this.DeadLetterConfig = obj;
         }
-        this.OnsEnable = 'OnsEnable' in params ? params.OnsEnable : null;
 
     }
 }
@@ -1482,24 +1503,24 @@ class UpdateNamespaceResponse extends  AbstractModel {
 }
 
 /**
- * ListLayerVersions请求参数结构体
+ * DeleteFunction请求参数结构体
  * @class
  */
-class ListLayerVersionsRequest extends  AbstractModel {
+class DeleteFunctionRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 层名称
+         * 要删除的函数名称
          * @type {string || null}
          */
-        this.LayerName = null;
+        this.FunctionName = null;
 
         /**
-         * 适配的运行时
-         * @type {Array.<string> || null}
+         * 函数所属命名空间
+         * @type {string || null}
          */
-        this.CompatibleRuntime = null;
+        this.Namespace = null;
 
     }
 
@@ -1510,8 +1531,8 @@ class ListLayerVersionsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.LayerName = 'LayerName' in params ? params.LayerName : null;
-        this.CompatibleRuntime = 'CompatibleRuntime' in params ? params.CompatibleRuntime : null;
+        this.FunctionName = 'FunctionName' in params ? params.FunctionName : null;
+        this.Namespace = 'Namespace' in params ? params.Namespace : null;
 
     }
 }
@@ -2129,6 +2150,41 @@ class DeleteLayerVersionRequest extends  AbstractModel {
         }
         this.LayerName = 'LayerName' in params ? params.LayerName : null;
         this.LayerVersion = 'LayerVersion' in params ? params.LayerVersion : null;
+
+    }
+}
+
+/**
+ * ListLayerVersions请求参数结构体
+ * @class
+ */
+class ListLayerVersionsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 层名称
+         * @type {string || null}
+         */
+        this.LayerName = null;
+
+        /**
+         * 适配的运行时
+         * @type {Array.<string> || null}
+         */
+        this.CompatibleRuntime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LayerName = 'LayerName' in params ? params.LayerName : null;
+        this.CompatibleRuntime = 'CompatibleRuntime' in params ? params.CompatibleRuntime : null;
 
     }
 }
@@ -3941,7 +3997,7 @@ module.exports = {
     AccessInfo: AccessInfo,
     LayerVersionInfo: LayerVersionInfo,
     ListLayerVersionsResponse: ListLayerVersionsResponse,
-    DeleteFunctionRequest: DeleteFunctionRequest,
+    DeleteAliasResponse: DeleteAliasResponse,
     CopyFunctionResponse: CopyFunctionResponse,
     ListVersionByFunctionResponse: ListVersionByFunctionResponse,
     Namespace: Namespace,
@@ -3950,6 +4006,7 @@ module.exports = {
     Environment: Environment,
     ListNamespacesRequest: ListNamespacesRequest,
     FunctionVersion: FunctionVersion,
+    DeleteAliasRequest: DeleteAliasRequest,
     GetFunctionAddressRequest: GetFunctionAddressRequest,
     DeleteLayerVersionResponse: DeleteLayerVersionResponse,
     InvokeResponse: InvokeResponse,
@@ -3963,7 +4020,7 @@ module.exports = {
     PublicNetConfigOut: PublicNetConfigOut,
     ListFunctionsResponse: ListFunctionsResponse,
     UpdateNamespaceResponse: UpdateNamespaceResponse,
-    ListLayerVersionsRequest: ListLayerVersionsRequest,
+    DeleteFunctionRequest: DeleteFunctionRequest,
     CreateTriggerResponse: CreateTriggerResponse,
     PublishLayerVersionRequest: PublishLayerVersionRequest,
     CreateNamespaceRequest: CreateNamespaceRequest,
@@ -3977,6 +4034,7 @@ module.exports = {
     PublishLayerVersionResponse: PublishLayerVersionResponse,
     PublishVersionResponse: PublishVersionResponse,
     DeleteLayerVersionRequest: DeleteLayerVersionRequest,
+    ListLayerVersionsRequest: ListLayerVersionsRequest,
     CreateFunctionResponse: CreateFunctionResponse,
     LayerVersionSimple: LayerVersionSimple,
     Trigger: Trigger,

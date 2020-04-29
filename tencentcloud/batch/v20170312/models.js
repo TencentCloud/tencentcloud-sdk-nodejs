@@ -4956,7 +4956,7 @@ class ItemPrice extends  AbstractModel {
         this.DiscountPrice = null;
 
         /**
-         * 折扣，如20代表2折
+         * 折扣，如20.0代表2折
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */

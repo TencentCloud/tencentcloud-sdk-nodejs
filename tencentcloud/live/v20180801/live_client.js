@@ -464,7 +464,7 @@ class LiveClient extends AbstractClient {
     }
 
     /**
-     * 删除转码模板
+     * 删除转码模板。
      * @param {DeleteLiveTranscodeTemplateRequest} req
      * @param {function(string, DeleteLiveTranscodeTemplateResponse):void} cb
      * @public
@@ -733,7 +733,8 @@ class LiveClient extends AbstractClient {
     }
 
     /**
-     * 删除转码规则
+     * 删除转码规则。
+DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需删除需要强匹配。其中TemplateId必填，其余参数为空时也需要传空字符串进行强匹配。
      * @param {DeleteLiveTranscodeRuleRequest} req
      * @param {function(string, DeleteLiveTranscodeRuleResponse):void} cb
      * @public
@@ -966,7 +967,7 @@ class LiveClient extends AbstractClient {
     }
 
     /**
-     * 获取单个转码模板
+     * 获取单个转码模板。
      * @param {DescribeLiveTranscodeTemplateRequest} req
      * @param {function(string, DescribeLiveTranscodeTemplateResponse):void} cb
      * @public
@@ -1181,7 +1182,7 @@ class LiveClient extends AbstractClient {
     }
 
     /**
-     * 获取转码模板列表
+     * 获取转码模板列表。
      * @param {DescribeLiveTranscodeTemplatesRequest} req
      * @param {function(string, DescribeLiveTranscodeTemplatesResponse):void} cb
      * @public

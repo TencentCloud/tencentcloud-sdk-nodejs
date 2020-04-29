@@ -935,6 +935,12 @@ class Registry extends  AbstractModel {
          */
         this.TokenValidTime = null;
 
+        /**
+         * 实例内部访问地址
+         * @type {string || null}
+         */
+        this.InternalEndpoint = null;
+
     }
 
     /**
@@ -954,6 +960,7 @@ class Registry extends  AbstractModel {
         this.RegionId = 'RegionId' in params ? params.RegionId : null;
         this.EnableAnonymous = 'EnableAnonymous' in params ? params.EnableAnonymous : null;
         this.TokenValidTime = 'TokenValidTime' in params ? params.TokenValidTime : null;
+        this.InternalEndpoint = 'InternalEndpoint' in params ? params.InternalEndpoint : null;
 
     }
 }
