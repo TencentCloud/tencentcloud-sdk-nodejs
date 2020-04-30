@@ -220,6 +220,57 @@ class AccessInfo extends  AbstractModel {
 }
 
 /**
+ * ListAliases返回参数结构体
+ * @class
+ */
+class ListAliasesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 别名列表
+         * @type {Array.<Alias> || null}
+         */
+        this.Aliases = null;
+
+        /**
+         * 别名总数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Aliases) {
+            this.Aliases = new Array();
+            for (let z in params.Aliases) {
+                let obj = new Alias();
+                obj.deserialize(params.Aliases[z]);
+                this.Aliases.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * 层版本信息
  * @class
  */
@@ -340,18 +391,24 @@ class ListLayerVersionsResponse extends  AbstractModel {
 }
 
 /**
- * DeleteAlias返回参数结构体
+ * DeleteFunction请求参数结构体
  * @class
  */
-class DeleteAliasResponse extends  AbstractModel {
+class DeleteFunctionRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * 要删除的函数名称
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.FunctionName = null;
+
+        /**
+         * 函数所属命名空间
+         * @type {string || null}
+         */
+        this.Namespace = null;
 
     }
 
@@ -362,7 +419,8 @@ class DeleteAliasResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.FunctionName = 'FunctionName' in params ? params.FunctionName : null;
+        this.Namespace = 'Namespace' in params ? params.Namespace : null;
 
     }
 }
@@ -899,6 +957,48 @@ class InvokeResponse extends  AbstractModel {
 }
 
 /**
+ * GetAlias请求参数结构体
+ * @class
+ */
+class GetAliasRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 函数名称
+         * @type {string || null}
+         */
+        this.FunctionName = null;
+
+        /**
+         * 别名的名称
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 函数所在的命名空间
+         * @type {string || null}
+         */
+        this.Namespace = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FunctionName = 'FunctionName' in params ? params.FunctionName : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Namespace = 'Namespace' in params ? params.Namespace : null;
+
+    }
+}
+
+/**
  * CreateNamespace返回参数结构体
  * @class
  */
@@ -1225,6 +1325,12 @@ class UpdateFunctionConfigurationRequest extends  AbstractModel {
         this.Publish = null;
 
         /**
+         * 是否开启L5访问能力，TRUE 为开启，FALSE为关闭
+         * @type {string || null}
+         */
+        this.L5Enable = null;
+
+        /**
          * 函数要关联的层版本列表，层的版本会按照在列表中顺序依次覆盖。
          * @type {Array.<LayerVersionSimple> || null}
          */
@@ -1267,6 +1373,7 @@ class UpdateFunctionConfigurationRequest extends  AbstractModel {
         this.ClsLogsetId = 'ClsLogsetId' in params ? params.ClsLogsetId : null;
         this.ClsTopicId = 'ClsTopicId' in params ? params.ClsTopicId : null;
         this.Publish = 'Publish' in params ? params.Publish : null;
+        this.L5Enable = 'L5Enable' in params ? params.L5Enable : null;
 
         if (params.Layers) {
             this.Layers = new Array();
@@ -1287,24 +1394,48 @@ class UpdateFunctionConfigurationRequest extends  AbstractModel {
 }
 
 /**
- * 私有网络参数配置
+ * CreateAlias请求参数结构体
  * @class
  */
-class VpcConfig extends  AbstractModel {
+class CreateAliasRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 私有网络 的 Id
+         * 别名的名称，在函数级别中唯一，只能包含字母、数字、'_'和‘-’，且必须以字母开头，长度限制为1-64
          * @type {string || null}
          */
-        this.VpcId = null;
+        this.Name = null;
 
         /**
-         * 子网的 Id
+         * 函数名称
          * @type {string || null}
          */
-        this.SubnetId = null;
+        this.FunctionName = null;
+
+        /**
+         * 别名指向的主版本
+         * @type {string || null}
+         */
+        this.FunctionVersion = null;
+
+        /**
+         * 函数所在的命名空间
+         * @type {string || null}
+         */
+        this.Namespace = null;
+
+        /**
+         * 别名的请求路由配置
+         * @type {RoutingConfig || null}
+         */
+        this.RoutingConfig = null;
+
+        /**
+         * 别名的描述信息
+         * @type {string || null}
+         */
+        this.Description = null;
 
     }
 
@@ -1315,8 +1446,17 @@ class VpcConfig extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.VpcId = 'VpcId' in params ? params.VpcId : null;
-        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.FunctionName = 'FunctionName' in params ? params.FunctionName : null;
+        this.FunctionVersion = 'FunctionVersion' in params ? params.FunctionVersion : null;
+        this.Namespace = 'Namespace' in params ? params.Namespace : null;
+
+        if (params.RoutingConfig) {
+            let obj = new RoutingConfig();
+            obj.deserialize(params.RoutingConfig)
+            this.RoutingConfig = obj;
+        }
+        this.Description = 'Description' in params ? params.Description : null;
 
     }
 }
@@ -1380,6 +1520,113 @@ class ListVersionByFunctionRequest extends  AbstractModel {
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.Order = 'Order' in params ? params.Order : null;
         this.OrderBy = 'OrderBy' in params ? params.OrderBy : null;
+
+    }
+}
+
+/**
+ * 带有匹配规则的函数版本
+ * @class
+ */
+class VersionMatch extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 函数版本名称
+         * @type {string || null}
+         */
+        this.Version = null;
+
+        /**
+         * 匹配规则的key，调用时通过传key来匹配规则路由到指定版本
+header方式：
+key填写"invoke.headers.User"，并在 invoke 调用函数时传参 RoutingKey：{"User":"value"}规则匹配调用
+         * @type {string || null}
+         */
+        this.Key = null;
+
+        /**
+         * 匹配方式。取值范围：
+range：范围匹配
+exact：字符串精确匹配
+         * @type {string || null}
+         */
+        this.Method = null;
+
+        /**
+         * range 匹配规则要求：
+需要为开区间或闭区间描述 (a,b) [a,b]，其中 a、b 均为整数
+exact 匹配规则要求：
+字符串精确匹配
+         * @type {string || null}
+         */
+        this.Expression = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Version = 'Version' in params ? params.Version : null;
+        this.Key = 'Key' in params ? params.Key : null;
+        this.Method = 'Method' in params ? params.Method : null;
+        this.Expression = 'Expression' in params ? params.Expression : null;
+
+    }
+}
+
+/**
+ * 别名的版本路由配置
+ * @class
+ */
+class RoutingConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 随机权重路由附加版本
+         * @type {Array.<VersionWeight> || null}
+         */
+        this.AdditionalVersionWeights = null;
+
+        /**
+         * 规则路由附加版本
+         * @type {Array.<VersionMatch> || null}
+         */
+        this.AddtionVersionMatchs = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.AdditionalVersionWeights) {
+            this.AdditionalVersionWeights = new Array();
+            for (let z in params.AdditionalVersionWeights) {
+                let obj = new VersionWeight();
+                obj.deserialize(params.AdditionalVersionWeights[z]);
+                this.AdditionalVersionWeights.push(obj);
+            }
+        }
+
+        if (params.AddtionVersionMatchs) {
+            this.AddtionVersionMatchs = new Array();
+            for (let z in params.AddtionVersionMatchs) {
+                let obj = new VersionMatch();
+                obj.deserialize(params.AddtionVersionMatchs[z]);
+                this.AddtionVersionMatchs.push(obj);
+            }
+        }
 
     }
 }
@@ -1503,24 +1750,18 @@ class UpdateNamespaceResponse extends  AbstractModel {
 }
 
 /**
- * DeleteFunction请求参数结构体
+ * DeleteAlias返回参数结构体
  * @class
  */
-class DeleteFunctionRequest extends  AbstractModel {
+class DeleteAliasResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 要删除的函数名称
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.FunctionName = null;
-
-        /**
-         * 函数所属命名空间
-         * @type {string || null}
-         */
-        this.Namespace = null;
+        this.RequestId = null;
 
     }
 
@@ -1531,8 +1772,7 @@ class DeleteFunctionRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.FunctionName = 'FunctionName' in params ? params.FunctionName : null;
-        this.Namespace = 'Namespace' in params ? params.Namespace : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2036,66 +2276,42 @@ class PublishLayerVersionResponse extends  AbstractModel {
 }
 
 /**
- * PublishVersion返回参数结构体
+ * ListAliases请求参数结构体
  * @class
  */
-class PublishVersionResponse extends  AbstractModel {
+class ListAliasesRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 函数的版本
+         * 函数名称
          * @type {string || null}
          */
-        this.FunctionVersion = null;
+        this.FunctionName = null;
 
         /**
-         * 代码大小
-         * @type {number || null}
-         */
-        this.CodeSize = null;
-
-        /**
-         * 最大可用内存
-         * @type {number || null}
-         */
-        this.MemorySize = null;
-
-        /**
-         * 函数的描述
-         * @type {string || null}
-         */
-        this.Description = null;
-
-        /**
-         * 函数的入口
-         * @type {string || null}
-         */
-        this.Handler = null;
-
-        /**
-         * 函数的超时时间
-         * @type {number || null}
-         */
-        this.Timeout = null;
-
-        /**
-         * 函数的运行环境
-         * @type {string || null}
-         */
-        this.Runtime = null;
-
-        /**
-         * 函数的命名空间
+         * 函数所在的命名空间
          * @type {string || null}
          */
         this.Namespace = null;
 
         /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * 如果提供此参数，则只返回与该函数版本有关联的别名
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.FunctionVersion = null;
+
+        /**
+         * 数据偏移量，默认值为 0
+         * @type {string || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 返回数据长度，默认值为 20
+         * @type {string || null}
+         */
+        this.Limit = null;
 
     }
 
@@ -2106,15 +2322,11 @@ class PublishVersionResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.FunctionVersion = 'FunctionVersion' in params ? params.FunctionVersion : null;
-        this.CodeSize = 'CodeSize' in params ? params.CodeSize : null;
-        this.MemorySize = 'MemorySize' in params ? params.MemorySize : null;
-        this.Description = 'Description' in params ? params.Description : null;
-        this.Handler = 'Handler' in params ? params.Handler : null;
-        this.Timeout = 'Timeout' in params ? params.Timeout : null;
-        this.Runtime = 'Runtime' in params ? params.Runtime : null;
+        this.FunctionName = 'FunctionName' in params ? params.FunctionName : null;
         this.Namespace = 'Namespace' in params ? params.Namespace : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.FunctionVersion = 'FunctionVersion' in params ? params.FunctionVersion : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
 
     }
 }
@@ -2365,24 +2577,52 @@ class EipOutConfig extends  AbstractModel {
 }
 
 /**
- * 变量参数
+ * 函数的版本别名
  * @class
  */
-class Variable extends  AbstractModel {
+class Alias extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 变量的名称
+         * 别名指向的主版本
          * @type {string || null}
          */
-        this.Key = null;
+        this.FunctionVersion = null;
 
         /**
-         * 变量的值
+         * 别名的名称
          * @type {string || null}
          */
-        this.Value = null;
+        this.Name = null;
+
+        /**
+         * 别名的路由信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {RoutingConfig || null}
+         */
+        this.RoutingConfig = null;
+
+        /**
+         * 描述信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.AddTime = null;
+
+        /**
+         * 更新时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ModTime = null;
 
     }
 
@@ -2393,8 +2633,17 @@ class Variable extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Key = 'Key' in params ? params.Key : null;
-        this.Value = 'Value' in params ? params.Value : null;
+        this.FunctionVersion = 'FunctionVersion' in params ? params.FunctionVersion : null;
+        this.Name = 'Name' in params ? params.Name : null;
+
+        if (params.RoutingConfig) {
+            let obj = new RoutingConfig();
+            obj.deserialize(params.RoutingConfig)
+            this.RoutingConfig = obj;
+        }
+        this.Description = 'Description' in params ? params.Description : null;
+        this.AddTime = 'AddTime' in params ? params.AddTime : null;
+        this.ModTime = 'ModTime' in params ? params.ModTime : null;
 
     }
 }
@@ -2785,6 +3034,187 @@ class GetFunctionLogsResponse extends  AbstractModel {
             obj.deserialize(params.SearchContext)
             this.SearchContext = obj;
         }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * UpdateAlias请求参数结构体
+ * @class
+ */
+class UpdateAliasRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 函数名称
+         * @type {string || null}
+         */
+        this.FunctionName = null;
+
+        /**
+         * 别名的名称
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 别名指向的主版本
+         * @type {string || null}
+         */
+        this.FunctionVersion = null;
+
+        /**
+         * 函数所在的命名空间
+         * @type {string || null}
+         */
+        this.Namespace = null;
+
+        /**
+         * 别名的路由信息，需要为别名指定附加版本时，必须提供此参数
+         * @type {RoutingConfig || null}
+         */
+        this.RoutingConfig = null;
+
+        /**
+         * 别名的描述
+         * @type {string || null}
+         */
+        this.Description = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FunctionName = 'FunctionName' in params ? params.FunctionName : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.FunctionVersion = 'FunctionVersion' in params ? params.FunctionVersion : null;
+        this.Namespace = 'Namespace' in params ? params.Namespace : null;
+
+        if (params.RoutingConfig) {
+            let obj = new RoutingConfig();
+            obj.deserialize(params.RoutingConfig)
+            this.RoutingConfig = obj;
+        }
+        this.Description = 'Description' in params ? params.Description : null;
+
+    }
+}
+
+/**
+ * 私有网络参数配置
+ * @class
+ */
+class VpcConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 私有网络 的 Id
+         * @type {string || null}
+         */
+        this.VpcId = null;
+
+        /**
+         * 子网的 Id
+         * @type {string || null}
+         */
+        this.SubnetId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
+
+    }
+}
+
+/**
+ * GetAlias返回参数结构体
+ * @class
+ */
+class GetAliasResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 别名指向的主版本
+         * @type {string || null}
+         */
+        this.FunctionVersion = null;
+
+        /**
+         * 别名的名称
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 别名的路由信息
+         * @type {RoutingConfig || null}
+         */
+        this.RoutingConfig = null;
+
+        /**
+         * 别名的描述
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.AddTime = null;
+
+        /**
+         * 更新时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ModTime = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FunctionVersion = 'FunctionVersion' in params ? params.FunctionVersion : null;
+        this.Name = 'Name' in params ? params.Name : null;
+
+        if (params.RoutingConfig) {
+            let obj = new RoutingConfig();
+            obj.deserialize(params.RoutingConfig)
+            this.RoutingConfig = obj;
+        }
+        this.Description = 'Description' in params ? params.Description : null;
+        this.AddTime = 'AddTime' in params ? params.AddTime : null;
+        this.ModTime = 'ModTime' in params ? params.ModTime : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -3449,6 +3879,34 @@ class UpdateNamespaceRequest extends  AbstractModel {
 }
 
 /**
+ * UpdateAlias返回参数结构体
+ * @class
+ */
+class UpdateAliasResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * GetFunctionAddress返回参数结构体
  * @class
  */
@@ -3486,6 +3944,41 @@ class GetFunctionAddressResponse extends  AbstractModel {
         this.Url = 'Url' in params ? params.Url : null;
         this.CodeSha256 = 'CodeSha256' in params ? params.CodeSha256 : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 带有权重的函数版本
+ * @class
+ */
+class VersionWeight extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 函数版本名称
+         * @type {string || null}
+         */
+        this.Version = null;
+
+        /**
+         * 该版本的权重
+         * @type {number || null}
+         */
+        this.Weight = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Version = 'Version' in params ? params.Version : null;
+        this.Weight = 'Weight' in params ? params.Weight : null;
 
     }
 }
@@ -3787,6 +4280,34 @@ class FunctionLog extends  AbstractModel {
 }
 
 /**
+ * CreateAlias返回参数结构体
+ * @class
+ */
+class CreateAliasResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * 日志搜索上下文
  * @class
  */
@@ -3959,6 +4480,41 @@ class UpdateFunctionCodeResponse extends  AbstractModel {
 }
 
 /**
+ * 变量参数
+ * @class
+ */
+class Variable extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 变量的名称
+         * @type {string || null}
+         */
+        this.Key = null;
+
+        /**
+         * 变量的值
+         * @type {string || null}
+         */
+        this.Value = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Key = 'Key' in params ? params.Key : null;
+        this.Value = 'Value' in params ? params.Value : null;
+
+    }
+}
+
+/**
  * 日志过滤条件，用于区分正确与错误日志
  * @class
  */
@@ -3992,12 +4548,97 @@ UserCodeException 返回函数调用发生用户代码错误的日志，
     }
 }
 
+/**
+ * PublishVersion返回参数结构体
+ * @class
+ */
+class PublishVersionResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 函数的版本
+         * @type {string || null}
+         */
+        this.FunctionVersion = null;
+
+        /**
+         * 代码大小
+         * @type {number || null}
+         */
+        this.CodeSize = null;
+
+        /**
+         * 最大可用内存
+         * @type {number || null}
+         */
+        this.MemorySize = null;
+
+        /**
+         * 函数的描述
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * 函数的入口
+         * @type {string || null}
+         */
+        this.Handler = null;
+
+        /**
+         * 函数的超时时间
+         * @type {number || null}
+         */
+        this.Timeout = null;
+
+        /**
+         * 函数的运行环境
+         * @type {string || null}
+         */
+        this.Runtime = null;
+
+        /**
+         * 函数的命名空间
+         * @type {string || null}
+         */
+        this.Namespace = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FunctionVersion = 'FunctionVersion' in params ? params.FunctionVersion : null;
+        this.CodeSize = 'CodeSize' in params ? params.CodeSize : null;
+        this.MemorySize = 'MemorySize' in params ? params.MemorySize : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.Handler = 'Handler' in params ? params.Handler : null;
+        this.Timeout = 'Timeout' in params ? params.Timeout : null;
+        this.Runtime = 'Runtime' in params ? params.Runtime : null;
+        this.Namespace = 'Namespace' in params ? params.Namespace : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
 module.exports = {
     CreateFunctionRequest: CreateFunctionRequest,
     AccessInfo: AccessInfo,
+    ListAliasesResponse: ListAliasesResponse,
     LayerVersionInfo: LayerVersionInfo,
     ListLayerVersionsResponse: ListLayerVersionsResponse,
-    DeleteAliasResponse: DeleteAliasResponse,
+    DeleteFunctionRequest: DeleteFunctionRequest,
     CopyFunctionResponse: CopyFunctionResponse,
     ListVersionByFunctionResponse: ListVersionByFunctionResponse,
     Namespace: Namespace,
@@ -4010,17 +4651,20 @@ module.exports = {
     GetFunctionAddressRequest: GetFunctionAddressRequest,
     DeleteLayerVersionResponse: DeleteLayerVersionResponse,
     InvokeResponse: InvokeResponse,
+    GetAliasRequest: GetAliasRequest,
     CreateNamespaceResponse: CreateNamespaceResponse,
     Function: Function,
     DeadLetterConfig: DeadLetterConfig,
     InvokeRequest: InvokeRequest,
     UpdateFunctionConfigurationRequest: UpdateFunctionConfigurationRequest,
-    VpcConfig: VpcConfig,
+    CreateAliasRequest: CreateAliasRequest,
     ListVersionByFunctionRequest: ListVersionByFunctionRequest,
+    VersionMatch: VersionMatch,
+    RoutingConfig: RoutingConfig,
     PublicNetConfigOut: PublicNetConfigOut,
     ListFunctionsResponse: ListFunctionsResponse,
     UpdateNamespaceResponse: UpdateNamespaceResponse,
-    DeleteFunctionRequest: DeleteFunctionRequest,
+    DeleteAliasResponse: DeleteAliasResponse,
     CreateTriggerResponse: CreateTriggerResponse,
     PublishLayerVersionRequest: PublishLayerVersionRequest,
     CreateNamespaceRequest: CreateNamespaceRequest,
@@ -4032,16 +4676,19 @@ module.exports = {
     DeleteNamespaceResponse: DeleteNamespaceResponse,
     UpdateFunctionConfigurationResponse: UpdateFunctionConfigurationResponse,
     PublishLayerVersionResponse: PublishLayerVersionResponse,
-    PublishVersionResponse: PublishVersionResponse,
+    ListAliasesRequest: ListAliasesRequest,
     DeleteLayerVersionRequest: DeleteLayerVersionRequest,
     ListLayerVersionsRequest: ListLayerVersionsRequest,
     CreateFunctionResponse: CreateFunctionResponse,
     LayerVersionSimple: LayerVersionSimple,
     Trigger: Trigger,
     EipOutConfig: EipOutConfig,
-    Variable: Variable,
+    Alias: Alias,
     GetFunctionResponse: GetFunctionResponse,
     GetFunctionLogsResponse: GetFunctionLogsResponse,
+    UpdateAliasRequest: UpdateAliasRequest,
+    VpcConfig: VpcConfig,
+    GetAliasResponse: GetAliasResponse,
     ListFunctionsRequest: ListFunctionsRequest,
     DeleteTriggerResponse: DeleteTriggerResponse,
     Filter: Filter,
@@ -4051,16 +4698,21 @@ module.exports = {
     GetFunctionLogsRequest: GetFunctionLogsRequest,
     CreateTriggerRequest: CreateTriggerRequest,
     UpdateNamespaceRequest: UpdateNamespaceRequest,
+    UpdateAliasResponse: UpdateAliasResponse,
     GetFunctionAddressResponse: GetFunctionAddressResponse,
+    VersionWeight: VersionWeight,
     GetLayerVersionRequest: GetLayerVersionRequest,
     DeleteFunctionResponse: DeleteFunctionResponse,
     ListNamespacesResponse: ListNamespacesResponse,
     EipConfigOut: EipConfigOut,
     PublishVersionRequest: PublishVersionRequest,
     FunctionLog: FunctionLog,
+    CreateAliasResponse: CreateAliasResponse,
     LogSearchContext: LogSearchContext,
     GetLayerVersionResponse: GetLayerVersionResponse,
     UpdateFunctionCodeResponse: UpdateFunctionCodeResponse,
+    Variable: Variable,
     LogFilter: LogFilter,
+    PublishVersionResponse: PublishVersionResponse,
 
 }

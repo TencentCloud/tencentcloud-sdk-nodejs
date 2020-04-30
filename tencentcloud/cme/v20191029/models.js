@@ -1194,6 +1194,91 @@ class TeamInfo extends  AbstractModel {
 }
 
 /**
+ * ExportVideoByEditorTrackData请求参数结构体
+ * @class
+ */
+class ExportVideoByEditorTrackDataRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 平台名称，指定访问的平台。
+         * @type {string || null}
+         */
+        this.Platform = null;
+
+        /**
+         * 导出模板 Id，目前不支持自定义创建，只支持下面的预置模板 Id。
+<li>10：分辨率为 480P，输出视频格式为 MP4；</li>
+<li>11：分辨率为 720P，输出视频格式为 MP4；</li>
+<li>12：分辨率为 1080P，输出视频格式为 MP4。</li>
+         * @type {number || null}
+         */
+        this.Definition = null;
+
+        /**
+         * 导出目标。
+<li>CME：云剪，即导出为云剪素材；</li>
+<li>VOD：云点播，即导出为云点播媒资。</li>
+         * @type {string || null}
+         */
+        this.ExportDestination = null;
+
+        /**
+         * 在线编辑轨道数据。
+         * @type {string || null}
+         */
+        this.TrackData = null;
+
+        /**
+         * 导出的云剪素材信息。指定 ExportDestination = CME 时有效。
+         * @type {CMEExportInfo || null}
+         */
+        this.CMEExportInfo = null;
+
+        /**
+         * 导出的云点播媒资信息。指定 ExportDestination = VOD 时有效。
+         * @type {VODExportInfo || null}
+         */
+        this.VODExportInfo = null;
+
+        /**
+         * 操作者。填写用户的 Id，用于标识调用者及校验操作权限。
+         * @type {string || null}
+         */
+        this.Operator = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Platform = 'Platform' in params ? params.Platform : null;
+        this.Definition = 'Definition' in params ? params.Definition : null;
+        this.ExportDestination = 'ExportDestination' in params ? params.ExportDestination : null;
+        this.TrackData = 'TrackData' in params ? params.TrackData : null;
+
+        if (params.CMEExportInfo) {
+            let obj = new CMEExportInfo();
+            obj.deserialize(params.CMEExportInfo)
+            this.CMEExportInfo = obj;
+        }
+
+        if (params.VODExportInfo) {
+            let obj = new VODExportInfo();
+            obj.deserialize(params.VODExportInfo)
+            this.VODExportInfo = obj;
+        }
+        this.Operator = 'Operator' in params ? params.Operator : null;
+
+    }
+}
+
+/**
  * 项目导出信息。
  * @class
  */
@@ -1215,6 +1300,7 @@ class VideoEditProjectOutput extends  AbstractModel {
 
         /**
          * 元信息。
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {MediaMetaData || null}
          */
         this.MetaData = null;
@@ -4995,6 +5081,41 @@ class LinkMaterialInfo extends  AbstractModel {
 }
 
 /**
+ * ExportVideoByEditorTrackData返回参数结构体
+ * @class
+ */
+class ExportVideoByEditorTrackDataResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 任务 Id。
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeProjects返回参数结构体
  * @class
  */
@@ -5207,6 +5328,7 @@ module.exports = {
     AddMemberInfo: AddMemberInfo,
     Entity: Entity,
     TeamInfo: TeamInfo,
+    ExportVideoByEditorTrackDataRequest: ExportVideoByEditorTrackDataRequest,
     VideoEditProjectOutput: VideoEditProjectOutput,
     CreateProjectRequest: CreateProjectRequest,
     ModifyMaterialRequest: ModifyMaterialRequest,
@@ -5282,6 +5404,7 @@ module.exports = {
     DeleteClassResponse: DeleteClassResponse,
     GrantResourceAuthorizationRequest: GrantResourceAuthorizationRequest,
     LinkMaterialInfo: LinkMaterialInfo,
+    ExportVideoByEditorTrackDataResponse: ExportVideoByEditorTrackDataResponse,
     DescribeProjectsResponse: DescribeProjectsResponse,
     ImportMaterialRequest: ImportMaterialRequest,
     DescribeMaterialsRequest: DescribeMaterialsRequest,

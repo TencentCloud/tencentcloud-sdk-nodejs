@@ -9255,6 +9255,12 @@ class RecordParam extends  AbstractModel {
          */
         this.VodSubAppId = null;
 
+        /**
+         * 录制文件名。
+         * @type {string || null}
+         */
+        this.VodFileName = null;
+
     }
 
     /**
@@ -9268,6 +9274,7 @@ class RecordParam extends  AbstractModel {
         this.StorageTime = 'StorageTime' in params ? params.StorageTime : null;
         this.Enable = 'Enable' in params ? params.Enable : null;
         this.VodSubAppId = 'VodSubAppId' in params ? params.VodSubAppId : null;
+        this.VodFileName = 'VodFileName' in params ? params.VodFileName : null;
 
     }
 }

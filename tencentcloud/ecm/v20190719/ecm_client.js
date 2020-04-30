@@ -62,7 +62,7 @@ const CreateSubnetResponse = models.CreateSubnetResponse;
 const ResetInstancesPasswordRequest = models.ResetInstancesPasswordRequest;
 const Area = models.Area;
 const DescribeConfigRequest = models.DescribeConfigRequest;
-const NetworkInterfaceAttachment = models.NetworkInterfaceAttachment;
+const DescribeInstanceVncUrlRequest = models.DescribeInstanceVncUrlRequest;
 const NetworkStorageRange = models.NetworkStorageRange;
 const StartInstancesResponse = models.StartInstancesResponse;
 const CreateVpcResponse = models.CreateVpcResponse;
@@ -108,6 +108,7 @@ const ISPCounter = models.ISPCounter;
 const MigratePrivateIpAddressResponse = models.MigratePrivateIpAddressResponse;
 const Instance = models.Instance;
 const EnhancedService = models.EnhancedService;
+const DescribeInstanceVncUrlResponse = models.DescribeInstanceVncUrlResponse;
 const DisassociateAddressResponse = models.DisassociateAddressResponse;
 const DescribeInstanceTypeConfigRequest = models.DescribeInstanceTypeConfigRequest;
 const DescribeModuleDetailRequest = models.DescribeModuleDetailRequest;
@@ -118,6 +119,7 @@ const AttachNetworkInterfaceResponse = models.AttachNetworkInterfaceResponse;
 const DescribeBaseOverviewRequest = models.DescribeBaseOverviewRequest;
 const ModifyModuleNetworkResponse = models.ModifyModuleNetworkResponse;
 const ImportImageRequest = models.ImportImageRequest;
+const NetworkInterfaceAttachment = models.NetworkInterfaceAttachment;
 const StopInstancesResponse = models.StopInstancesResponse;
 const ModifyModuleNameRequest = models.ModifyModuleNameRequest;
 const SimpleModule = models.SimpleModule;
@@ -633,6 +635,17 @@ EIP 如果欠费或被封堵，则不能被绑定。
     ResetInstances(req, cb) {
         let resp = new ResetInstancesResponse();
         this.request("ResetInstances", req, resp, cb);
+    }
+
+    /**
+     * 查询实例管理终端地址
+     * @param {DescribeInstanceVncUrlRequest} req
+     * @param {function(string, DescribeInstanceVncUrlResponse):void} cb
+     * @public
+     */
+    DescribeInstanceVncUrl(req, cb) {
+        let resp = new DescribeInstanceVncUrlResponse();
+        this.request("DescribeInstanceVncUrl", req, resp, cb);
     }
 
     /**

@@ -16,25 +16,28 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
-const QualityData = models.QualityData;
-const DescribeRealtimeScaleRequest = models.DescribeRealtimeScaleRequest;
-const DismissRoomRequest = models.DismissRoomRequest;
-const DescribeCallDetailResponse = models.DescribeCallDetailResponse;
-const DescribeRealtimeQualityRequest = models.DescribeRealtimeQualityRequest;
-const DescribeRealtimeQualityResponse = models.DescribeRealtimeQualityResponse;
-const TimeValue = models.TimeValue;
-const DescribeRoomInformationRequest = models.DescribeRoomInformationRequest;
-const DescribeRoomInformationResponse = models.DescribeRoomInformationResponse;
-const UserInformation = models.UserInformation;
-const DescribeRealtimeScaleResponse = models.DescribeRealtimeScaleResponse;
 const RealtimeData = models.RealtimeData;
-const RoomState = models.RoomState;
+const TimeValue = models.TimeValue;
+const DescribeRealtimeScaleResponse = models.DescribeRealtimeScaleResponse;
 const DismissRoomResponse = models.DismissRoomResponse;
-const DescribeRealtimeNetworkResponse = models.DescribeRealtimeNetworkResponse;
-const RemoveUserResponse = models.RemoveUserResponse;
+const DescribeRealtimeQualityRequest = models.DescribeRealtimeQualityRequest;
 const RemoveUserRequest = models.RemoveUserRequest;
 const DescribeCallDetailRequest = models.DescribeCallDetailRequest;
 const DescribeRealtimeNetworkRequest = models.DescribeRealtimeNetworkRequest;
+const DismissRoomRequest = models.DismissRoomRequest;
+const DescribeRealtimeQualityResponse = models.DescribeRealtimeQualityResponse;
+const DescribeHistoryScaleRequest = models.DescribeHistoryScaleRequest;
+const DescribeRoomInformationResponse = models.DescribeRoomInformationResponse;
+const QualityData = models.QualityData;
+const DescribeRealtimeNetworkResponse = models.DescribeRealtimeNetworkResponse;
+const ScaleInfomation = models.ScaleInfomation;
+const DescribeRealtimeScaleRequest = models.DescribeRealtimeScaleRequest;
+const DescribeCallDetailResponse = models.DescribeCallDetailResponse;
+const DescribeRoomInformationRequest = models.DescribeRoomInformationRequest;
+const UserInformation = models.UserInformation;
+const RoomState = models.RoomState;
+const RemoveUserResponse = models.RemoveUserResponse;
+const DescribeHistoryScaleResponse = models.DescribeHistoryScaleResponse;
 
 
 /**
@@ -56,6 +59,17 @@ class TrtcClient extends AbstractClient {
     DescribeRealtimeQuality(req, cb) {
         let resp = new DescribeRealtimeQualityResponse();
         this.request("DescribeRealtimeQuality", req, resp, cb);
+    }
+
+    /**
+     * 查询历史房间和用户数，每分钟1次，可查询最近5天的数据
+     * @param {DescribeHistoryScaleRequest} req
+     * @param {function(string, DescribeHistoryScaleResponse):void} cb
+     * @public
+     */
+    DescribeHistoryScale(req, cb) {
+        let resp = new DescribeHistoryScaleResponse();
+        this.request("DescribeHistoryScale", req, resp, cb);
     }
 
     /**

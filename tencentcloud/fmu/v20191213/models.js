@@ -198,6 +198,12 @@ ModelId 和 RGBA 两个参数只需提供一个，若都提供只使用 ModelId�
          */
         this.FaceRect = null;
 
+        /**
+         * 涂妆浓淡[0,100]。建议取值50。本参数仅控制ModelId对应的涂妆浓淡。
+         * @type {number || null}
+         */
+        this.ModelAlpha = null;
+
     }
 
     /**
@@ -220,6 +226,7 @@ ModelId 和 RGBA 两个参数只需提供一个，若都提供只使用 ModelId�
             obj.deserialize(params.FaceRect)
             this.FaceRect = obj;
         }
+        this.ModelAlpha = 'ModelAlpha' in params ? params.ModelAlpha : null;
 
     }
 }

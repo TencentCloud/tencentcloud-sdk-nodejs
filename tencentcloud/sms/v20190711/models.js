@@ -31,7 +31,7 @@ class PullSmsReplyStatusRequest extends  AbstractModel {
         this.Limit = null;
 
         /**
-         * 短信 SdkAppid 在 [短信控制台](https://console.cloud.tencent.com/sms/smslist) 添加应用后生成的实际 SdkAppid，例如1400006666。
+         * 短信 SdkAppid 在 [短信控制台](https://console.cloud.tencent.com/smsv2) 添加应用后生成的实际 SdkAppid，例如1400006666。
          * @type {string || null}
          */
         this.SmsSdkAppid = null;
@@ -439,7 +439,7 @@ class PullSmsSendStatusByPhoneNumberRequest extends  AbstractModel {
         this.PhoneNumber = null;
 
         /**
-         * 短信SdkAppid在 [短信控制台](https://console.cloud.tencent.com/sms/smslist) 添加应用后生成的实际SdkAppid，例如1400006666。
+         * 短信SdkAppid在 [短信控制台](https://console.cloud.tencent.com/smsv2) 添加应用后生成的实际SdkAppid，例如1400006666。
          * @type {string || null}
          */
         this.SmsSdkAppid = null;
@@ -710,7 +710,7 @@ class PullSmsSendStatusRequest extends  AbstractModel {
         this.Limit = null;
 
         /**
-         * 短信SdkAppid在 [短信控制台](https://console.cloud.tencent.com/sms/smslist) 添加应用后生成的实际SdkAppid，例如1400006666。
+         * 短信SdkAppid在 [短信控制台](https://console.cloud.tencent.com/smsv2) 添加应用后生成的实际SdkAppid，例如1400006666。
          * @type {string || null}
          */
         this.SmsSdkAppid = null;
@@ -1065,19 +1065,19 @@ class SendSmsRequest extends  AbstractModel {
         this.PhoneNumberSet = null;
 
         /**
-         * 模板 ID，必须填写已审核通过的模板 ID。模板ID可登录 [短信控制台](https://console.cloud.tencent.com/sms/smslist) 查看。
+         * 模板 ID，必须填写已审核通过的模板 ID。模板ID可登录 [短信控制台](https://console.cloud.tencent.com/smsv2) 查看。
          * @type {string || null}
          */
         this.TemplateID = null;
 
         /**
-         * 短信SdkAppid在 [短信控制台](https://console.cloud.tencent.com/sms/smslist)  添加应用后生成的实际SdkAppid，示例如1400006666。
+         * 短信SdkAppid在 [短信控制台](https://console.cloud.tencent.com/smsv2)  添加应用后生成的实际SdkAppid，示例如1400006666。
          * @type {string || null}
          */
         this.SmsSdkAppid = null;
 
         /**
-         * 短信签名内容，使用 UTF-8 编码，必须填写已审核通过的签名，签名信息可登录 [短信控制台](https://console.cloud.tencent.com/sms/smslist)  查看。注：国内短信为必填参数。
+         * 短信签名内容，使用 UTF-8 编码，必须填写已审核通过的签名，签名信息可登录 [短信控制台](https://console.cloud.tencent.com/smsv2)  查看。注：国内短信为必填参数。
          * @type {string || null}
          */
         this.Sign = null;
@@ -1191,7 +1191,7 @@ class CallbackStatusStatisticsRequest extends  AbstractModel {
         this.EndDataTime = null;
 
         /**
-         * 短信SdkAppid在 [短信控制台](https://console.cloud.tencent.com/sms/smslist) 添加应用后生成的实际SdkAppid，示例如1400006666。
+         * 短信SdkAppid在 [短信控制台](https://console.cloud.tencent.com/smsv2) 添加应用后生成的实际SdkAppid，示例如1400006666。
          * @type {string || null}
          */
         this.SmsSdkAppid = null;
@@ -1309,7 +1309,7 @@ class SmsPackagesStatisticsRequest extends  AbstractModel {
         super();
 
         /**
-         * 短信SdkAppid在 [短信控制台](https://console.cloud.tencent.com/sms/smslist) 添加应用后生成的实际SdkAppid，示例如1400006666。
+         * 短信SdkAppid在 [短信控制台](https://console.cloud.tencent.com/smsv2) 添加应用后生成的实际SdkAppid，示例如1400006666。
          * @type {string || null}
          */
         this.SmsSdkAppid = null;
@@ -1713,7 +1713,7 @@ class SendStatusStatisticsRequest extends  AbstractModel {
         this.EndDataTime = null;
 
         /**
-         * 短信SdkAppid在 [短信控制台](https://console.cloud.tencent.com/sms/smslist) 添加应用后生成的实际SdkAppid，示例如1400006666。
+         * 短信SdkAppid在 [短信控制台](https://console.cloud.tencent.com/smsv2) 添加应用后生成的实际SdkAppid，示例如1400006666。
          * @type {string || null}
          */
         this.SmsSdkAppid = null;
@@ -2026,7 +2026,7 @@ class PullSmsReplyStatusByPhoneNumberRequest extends  AbstractModel {
         this.PhoneNumber = null;
 
         /**
-         * 短信SdkAppid在 [短信控制台](https://console.cloud.tencent.com/sms/smslist) 添加应用后生成的实际SdkAppid，例如1400006666。
+         * 短信SdkAppid在 [短信控制台](https://console.cloud.tencent.com/smsv2) 添加应用后生成的实际SdkAppid，例如1400006666。
          * @type {string || null}
          */
         this.SmsSdkAppid = null;

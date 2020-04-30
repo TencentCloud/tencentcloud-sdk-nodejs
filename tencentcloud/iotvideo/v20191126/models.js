@@ -1746,7 +1746,7 @@ class CreateBindingRequest extends  AbstractModel {
         this.Role = null;
 
         /**
-         * 是否踢掉之前的主人，true：踢掉；false：不踢掉。当role为owner时，可以不填
+         * 是否踢掉之前的主人，true：踢掉；false：不踢掉。当role为guest时，可以不填
          * @type {boolean || null}
          */
         this.ForceBind = null;

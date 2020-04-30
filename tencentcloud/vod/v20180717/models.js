@@ -3700,14 +3700,12 @@ class ApplyUploadResponse extends  AbstractModel {
 
         /**
          * 媒体存储路径，用于上传接口存储媒体的对象键（Key）。
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.MediaStoragePath = null;
 
         /**
          * 封面存储路径，用于上传接口存储封面的对象键（Key）。
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.CoverStoragePath = null;
@@ -14708,6 +14706,12 @@ class ApplyUploadRequest extends  AbstractModel {
         this.SessionContext = null;
 
         /**
+         * 保留字段，特殊用途时使用。
+         * @type {string || null}
+         */
+        this.ExtInfo = null;
+
+        /**
          * 点播 [子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
          * @type {number || null}
          */
@@ -14731,6 +14735,7 @@ class ApplyUploadRequest extends  AbstractModel {
         this.ClassId = 'ClassId' in params ? params.ClassId : null;
         this.SourceContext = 'SourceContext' in params ? params.SourceContext : null;
         this.SessionContext = 'SessionContext' in params ? params.SessionContext : null;
+        this.ExtInfo = 'ExtInfo' in params ? params.ExtInfo : null;
         this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
 
     }

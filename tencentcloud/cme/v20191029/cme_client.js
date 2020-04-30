@@ -39,6 +39,7 @@ const AudioMaterial = models.AudioMaterial;
 const AddMemberInfo = models.AddMemberInfo;
 const Entity = models.Entity;
 const TeamInfo = models.TeamInfo;
+const ExportVideoByEditorTrackDataRequest = models.ExportVideoByEditorTrackDataRequest;
 const VideoEditProjectOutput = models.VideoEditProjectOutput;
 const CreateProjectRequest = models.CreateProjectRequest;
 const ModifyMaterialRequest = models.ModifyMaterialRequest;
@@ -114,6 +115,7 @@ const TaskBaseInfo = models.TaskBaseInfo;
 const DeleteClassResponse = models.DeleteClassResponse;
 const GrantResourceAuthorizationRequest = models.GrantResourceAuthorizationRequest;
 const LinkMaterialInfo = models.LinkMaterialInfo;
+const ExportVideoByEditorTrackDataResponse = models.ExportVideoByEditorTrackDataResponse;
 const DescribeProjectsResponse = models.DescribeProjectsResponse;
 const ImportMaterialRequest = models.ImportMaterialRequest;
 const DescribeMaterialsRequest = models.DescribeMaterialsRequest;
@@ -237,6 +239,17 @@ class CmeClient extends AbstractClient {
     ImportMaterial(req, cb) {
         let resp = new ImportMaterialResponse();
         this.request("ImportMaterial", req, resp, cb);
+    }
+
+    /**
+     * 使用在线编辑轨道数据直接导出视频。
+     * @param {ExportVideoByEditorTrackDataRequest} req
+     * @param {function(string, ExportVideoByEditorTrackDataResponse):void} cb
+     * @public
+     */
+    ExportVideoByEditorTrackData(req, cb) {
+        let resp = new ExportVideoByEditorTrackDataResponse();
+        this.request("ExportVideoByEditorTrackData", req, resp, cb);
     }
 
     /**
