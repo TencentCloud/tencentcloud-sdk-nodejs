@@ -18,9 +18,10 @@ const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const CreateFunctionRequest = models.CreateFunctionRequest;
 const AccessInfo = models.AccessInfo;
+const ListAliasesResponse = models.ListAliasesResponse;
 const LayerVersionInfo = models.LayerVersionInfo;
 const ListLayerVersionsResponse = models.ListLayerVersionsResponse;
-const DeleteAliasResponse = models.DeleteAliasResponse;
+const DeleteFunctionRequest = models.DeleteFunctionRequest;
 const CopyFunctionResponse = models.CopyFunctionResponse;
 const ListVersionByFunctionResponse = models.ListVersionByFunctionResponse;
 const Namespace = models.Namespace;
@@ -33,17 +34,20 @@ const DeleteAliasRequest = models.DeleteAliasRequest;
 const GetFunctionAddressRequest = models.GetFunctionAddressRequest;
 const DeleteLayerVersionResponse = models.DeleteLayerVersionResponse;
 const InvokeResponse = models.InvokeResponse;
+const GetAliasRequest = models.GetAliasRequest;
 const CreateNamespaceResponse = models.CreateNamespaceResponse;
 const Function = models.Function;
 const DeadLetterConfig = models.DeadLetterConfig;
 const InvokeRequest = models.InvokeRequest;
 const UpdateFunctionConfigurationRequest = models.UpdateFunctionConfigurationRequest;
-const VpcConfig = models.VpcConfig;
+const CreateAliasRequest = models.CreateAliasRequest;
 const ListVersionByFunctionRequest = models.ListVersionByFunctionRequest;
+const VersionMatch = models.VersionMatch;
+const RoutingConfig = models.RoutingConfig;
 const PublicNetConfigOut = models.PublicNetConfigOut;
 const ListFunctionsResponse = models.ListFunctionsResponse;
 const UpdateNamespaceResponse = models.UpdateNamespaceResponse;
-const DeleteFunctionRequest = models.DeleteFunctionRequest;
+const DeleteAliasResponse = models.DeleteAliasResponse;
 const CreateTriggerResponse = models.CreateTriggerResponse;
 const PublishLayerVersionRequest = models.PublishLayerVersionRequest;
 const CreateNamespaceRequest = models.CreateNamespaceRequest;
@@ -55,16 +59,19 @@ const Tag = models.Tag;
 const DeleteNamespaceResponse = models.DeleteNamespaceResponse;
 const UpdateFunctionConfigurationResponse = models.UpdateFunctionConfigurationResponse;
 const PublishLayerVersionResponse = models.PublishLayerVersionResponse;
-const PublishVersionResponse = models.PublishVersionResponse;
+const ListAliasesRequest = models.ListAliasesRequest;
 const DeleteLayerVersionRequest = models.DeleteLayerVersionRequest;
 const ListLayerVersionsRequest = models.ListLayerVersionsRequest;
 const CreateFunctionResponse = models.CreateFunctionResponse;
 const LayerVersionSimple = models.LayerVersionSimple;
 const Trigger = models.Trigger;
 const EipOutConfig = models.EipOutConfig;
-const Variable = models.Variable;
+const Alias = models.Alias;
 const GetFunctionResponse = models.GetFunctionResponse;
 const GetFunctionLogsResponse = models.GetFunctionLogsResponse;
+const UpdateAliasRequest = models.UpdateAliasRequest;
+const VpcConfig = models.VpcConfig;
+const GetAliasResponse = models.GetAliasResponse;
 const ListFunctionsRequest = models.ListFunctionsRequest;
 const DeleteTriggerResponse = models.DeleteTriggerResponse;
 const Filter = models.Filter;
@@ -74,17 +81,22 @@ const UpdateFunctionCodeRequest = models.UpdateFunctionCodeRequest;
 const GetFunctionLogsRequest = models.GetFunctionLogsRequest;
 const CreateTriggerRequest = models.CreateTriggerRequest;
 const UpdateNamespaceRequest = models.UpdateNamespaceRequest;
+const UpdateAliasResponse = models.UpdateAliasResponse;
 const GetFunctionAddressResponse = models.GetFunctionAddressResponse;
+const VersionWeight = models.VersionWeight;
 const GetLayerVersionRequest = models.GetLayerVersionRequest;
 const DeleteFunctionResponse = models.DeleteFunctionResponse;
 const ListNamespacesResponse = models.ListNamespacesResponse;
 const EipConfigOut = models.EipConfigOut;
 const PublishVersionRequest = models.PublishVersionRequest;
 const FunctionLog = models.FunctionLog;
+const CreateAliasResponse = models.CreateAliasResponse;
 const LogSearchContext = models.LogSearchContext;
 const GetLayerVersionResponse = models.GetLayerVersionResponse;
 const UpdateFunctionCodeResponse = models.UpdateFunctionCodeResponse;
+const Variable = models.Variable;
 const LogFilter = models.LogFilter;
+const PublishVersionResponse = models.PublishVersionResponse;
 
 
 /**
@@ -106,6 +118,17 @@ class ScfClient extends AbstractClient {
     DeleteFunction(req, cb) {
         let resp = new DeleteFunctionResponse();
         this.request("DeleteFunction", req, resp, cb);
+    }
+
+    /**
+     * 更新别名的配置
+     * @param {UpdateAliasRequest} req
+     * @param {function(string, UpdateAliasResponse):void} cb
+     * @public
+     */
+    UpdateAlias(req, cb) {
+        let resp = new UpdateAliasResponse();
+        this.request("UpdateAlias", req, resp, cb);
     }
 
     /**
@@ -167,6 +190,17 @@ class ScfClient extends AbstractClient {
     DeleteTrigger(req, cb) {
         let resp = new DeleteTriggerResponse();
         this.request("DeleteTrigger", req, resp, cb);
+    }
+
+    /**
+     * 返回一个函数下的全部别名，可以根据特定函数版本过滤。
+     * @param {ListAliasesRequest} req
+     * @param {function(string, ListAliasesResponse):void} cb
+     * @public
+     */
+    ListAliases(req, cb) {
+        let resp = new ListAliasesResponse();
+        this.request("ListAliases", req, resp, cb);
     }
 
     /**
@@ -258,6 +292,18 @@ class ScfClient extends AbstractClient {
     }
 
     /**
+     * 为某个函数版本创建一个别名，您可以使用别名来标记特定的函数版本，如DEV/RELEASE版本，也可以随时修改别名指向的版本。
+一个别名必须指向一个主版本，此外还可以同时指向一个附加版本。调用函数时指定特定的别名，则请求会被发送到别名指向的版本上，您可以配置请求发送到主版本和附加版本的比例。
+     * @param {CreateAliasRequest} req
+     * @param {function(string, CreateAliasResponse):void} cb
+     * @public
+     */
+    CreateAlias(req, cb) {
+        let resp = new CreateAliasResponse();
+        this.request("CreateAlias", req, resp, cb);
+    }
+
+    /**
      * 该接口根据传入的参数查询函数的版本。
      * @param {ListVersionByFunctionRequest} req
      * @param {function(string, ListVersionByFunctionResponse):void} cb
@@ -332,6 +378,17 @@ class ScfClient extends AbstractClient {
     GetFunctionAddress(req, cb) {
         let resp = new GetFunctionAddressResponse();
         this.request("GetFunctionAddress", req, resp, cb);
+    }
+
+    /**
+     * 获取别名的详细信息，包括名称、描述、版本、路由信息等。
+     * @param {GetAliasRequest} req
+     * @param {function(string, GetAliasResponse):void} cb
+     * @public
+     */
+    GetAlias(req, cb) {
+        let resp = new GetAliasResponse();
+        this.request("GetAlias", req, resp, cb);
     }
 
     /**

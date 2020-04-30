@@ -36,6 +36,7 @@ const FollowRedirect = models.FollowRedirect;
 const RequestHeader = models.RequestHeader;
 const DescribePurgeQuotaRequest = models.DescribePurgeQuotaRequest;
 const Referer = models.Referer;
+const UserAgentFilter = models.UserAgentFilter;
 const AdvanceCacheRule = models.AdvanceCacheRule;
 const DescribeIpStatusResponse = models.DescribeIpStatusResponse;
 const UpdateImageConfigResponse = models.UpdateImageConfigResponse;
@@ -72,6 +73,7 @@ const EnableClsLogTopicResponse = models.EnableClsLogTopicResponse;
 const ListClsLogTopicsResponse = models.ListClsLogTopicsResponse;
 const OverseaConfig = models.OverseaConfig;
 const AddCdnDomainRequest = models.AddCdnDomainRequest;
+const UserAgentFilterRule = models.UserAgentFilterRule;
 const TopDetailData = models.TopDetailData;
 const ErrorPage = models.ErrorPage;
 const MaxAgeRule = models.MaxAgeRule;
@@ -97,6 +99,7 @@ const HttpHeaderPathRule = models.HttpHeaderPathRule;
 const DisableCachesRequest = models.DisableCachesRequest;
 const SimpleCacheRule = models.SimpleCacheRule;
 const DisableClsLogTopicResponse = models.DisableClsLogTopicResponse;
+const Hsts = models.Hsts;
 const DescribeIpStatusRequest = models.DescribeIpStatusRequest;
 const DetailDomain = models.DetailDomain;
 const GetDisableRecordsResponse = models.GetDisableRecordsResponse;
@@ -196,8 +199,7 @@ class CdnClient extends AbstractClient {
     }
     
     /**
-     * DescribeIpStatus 用于查询域名所在加速平台的边缘节点、回源节点明细
-注意事项：接口尚未全量开放，未在内测名单中的账号不支持调用
+     * DescribeIpStatus 用于查询域名所在加速平台的边缘节点、回源节点明细。注意事项：边缘节点（edge）尚未全量开放，未在内测名单中的账号不支持调用
      * @param {DescribeIpStatusRequest} req
      * @param {function(string, DescribeIpStatusResponse):void} cb
      * @public

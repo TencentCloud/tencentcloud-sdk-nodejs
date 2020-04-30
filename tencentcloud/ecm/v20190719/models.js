@@ -2296,36 +2296,18 @@ class DescribeConfigRequest extends  AbstractModel {
 }
 
 /**
- * 弹性网卡绑定关系
+ * DescribeInstanceVncUrl请求参数结构体
  * @class
  */
-class NetworkInterfaceAttachment extends  AbstractModel {
+class DescribeInstanceVncUrlRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 云主机实例ID。
+         * 一个操作的实例ID。可通过DescribeInstances API返回值中的InstanceId获取。
          * @type {string || null}
          */
         this.InstanceId = null;
-
-        /**
-         * 网卡在云主机实例内的序号。
-         * @type {number || null}
-         */
-        this.DeviceIndex = null;
-
-        /**
-         * 云主机所有者账户信息。
-         * @type {string || null}
-         */
-        this.InstanceAccountId = null;
-
-        /**
-         * 绑定时间。
-         * @type {string || null}
-         */
-        this.AttachTime = null;
 
     }
 
@@ -2337,9 +2319,6 @@ class NetworkInterfaceAttachment extends  AbstractModel {
             return;
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.DeviceIndex = 'DeviceIndex' in params ? params.DeviceIndex : null;
-        this.InstanceAccountId = 'InstanceAccountId' in params ? params.InstanceAccountId : null;
-        this.AttachTime = 'AttachTime' in params ? params.AttachTime : null;
 
     }
 }
@@ -4909,6 +4888,41 @@ class EnhancedService extends  AbstractModel {
 }
 
 /**
+ * DescribeInstanceVncUrl返回参数结构体
+ * @class
+ */
+class DescribeInstanceVncUrlResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例的管理终端地址。
+         * @type {string || null}
+         */
+        this.InstanceVncUrl = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceVncUrl = 'InstanceVncUrl' in params ? params.InstanceVncUrl : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DisassociateAddress返回参数结构体
  * @class
  */
@@ -5249,6 +5263,55 @@ class ImportImageRequest extends  AbstractModel {
         this.ImageId = 'ImageId' in params ? params.ImageId : null;
         this.ImageDescription = 'ImageDescription' in params ? params.ImageDescription : null;
         this.SourceRegion = 'SourceRegion' in params ? params.SourceRegion : null;
+
+    }
+}
+
+/**
+ * 弹性网卡绑定关系
+ * @class
+ */
+class NetworkInterfaceAttachment extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 云主机实例ID。
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 网卡在云主机实例内的序号。
+         * @type {number || null}
+         */
+        this.DeviceIndex = null;
+
+        /**
+         * 云主机所有者账户信息。
+         * @type {string || null}
+         */
+        this.InstanceAccountId = null;
+
+        /**
+         * 绑定时间。
+         * @type {string || null}
+         */
+        this.AttachTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.DeviceIndex = 'DeviceIndex' in params ? params.DeviceIndex : null;
+        this.InstanceAccountId = 'InstanceAccountId' in params ? params.InstanceAccountId : null;
+        this.AttachTime = 'AttachTime' in params ? params.AttachTime : null;
 
     }
 }
@@ -7727,7 +7790,7 @@ module.exports = {
     ResetInstancesPasswordRequest: ResetInstancesPasswordRequest,
     Area: Area,
     DescribeConfigRequest: DescribeConfigRequest,
-    NetworkInterfaceAttachment: NetworkInterfaceAttachment,
+    DescribeInstanceVncUrlRequest: DescribeInstanceVncUrlRequest,
     NetworkStorageRange: NetworkStorageRange,
     StartInstancesResponse: StartInstancesResponse,
     CreateVpcResponse: CreateVpcResponse,
@@ -7773,6 +7836,7 @@ module.exports = {
     MigratePrivateIpAddressResponse: MigratePrivateIpAddressResponse,
     Instance: Instance,
     EnhancedService: EnhancedService,
+    DescribeInstanceVncUrlResponse: DescribeInstanceVncUrlResponse,
     DisassociateAddressResponse: DisassociateAddressResponse,
     DescribeInstanceTypeConfigRequest: DescribeInstanceTypeConfigRequest,
     DescribeModuleDetailRequest: DescribeModuleDetailRequest,
@@ -7783,6 +7847,7 @@ module.exports = {
     DescribeBaseOverviewRequest: DescribeBaseOverviewRequest,
     ModifyModuleNetworkResponse: ModifyModuleNetworkResponse,
     ImportImageRequest: ImportImageRequest,
+    NetworkInterfaceAttachment: NetworkInterfaceAttachment,
     StopInstancesResponse: StopInstancesResponse,
     ModifyModuleNameRequest: ModifyModuleNameRequest,
     SimpleModule: SimpleModule,

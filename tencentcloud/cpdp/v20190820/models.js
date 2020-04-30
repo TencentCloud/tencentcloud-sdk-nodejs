@@ -6821,6 +6821,12 @@ class CreateInvoiceRequest extends  AbstractModel {
          */
         this.Profile = null;
 
+        /**
+         * 撤销部分商品。0-不撤销，1-撤销
+         * @type {number || null}
+         */
+        this.UndoPart = null;
+
     }
 
     /**
@@ -6869,6 +6875,7 @@ class CreateInvoiceRequest extends  AbstractModel {
             }
         }
         this.Profile = 'Profile' in params ? params.Profile : null;
+        this.UndoPart = 'UndoPart' in params ? params.UndoPart : null;
 
     }
 }

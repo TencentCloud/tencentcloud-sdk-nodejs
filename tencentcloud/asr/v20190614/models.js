@@ -485,6 +485,12 @@ class CreateRecTaskRequest extends  AbstractModel {
          */
         this.FilterModal = null;
 
+        /**
+         * 是否进行阿拉伯数字智能转换。0：不转换，直接输出中文数字，1：根据场景智能转换为阿拉伯数字。默认值为1
+         * @type {number || null}
+         */
+        this.ConvertNumMode = null;
+
     }
 
     /**
@@ -505,6 +511,7 @@ class CreateRecTaskRequest extends  AbstractModel {
         this.HotwordId = 'HotwordId' in params ? params.HotwordId : null;
         this.FilterDirty = 'FilterDirty' in params ? params.FilterDirty : null;
         this.FilterModal = 'FilterModal' in params ? params.FilterModal : null;
+        this.ConvertNumMode = 'ConvertNumMode' in params ? params.ConvertNumMode : null;
 
     }
 }
@@ -945,6 +952,12 @@ class SentenceRecognitionRequest extends  AbstractModel {
          */
         this.FilterPunc = null;
 
+        /**
+         * 是否进行阿拉伯数字智能转换。0：不转换，直接输出中文数字，1：根据场景智能转换为阿拉伯数字。默认值为1
+         * @type {number || null}
+         */
+        this.ConvertNumMode = null;
+
     }
 
     /**
@@ -967,6 +980,7 @@ class SentenceRecognitionRequest extends  AbstractModel {
         this.FilterDirty = 'FilterDirty' in params ? params.FilterDirty : null;
         this.FilterModal = 'FilterModal' in params ? params.FilterModal : null;
         this.FilterPunc = 'FilterPunc' in params ? params.FilterPunc : null;
+        this.ConvertNumMode = 'ConvertNumMode' in params ? params.ConvertNumMode : null;
 
     }
 }

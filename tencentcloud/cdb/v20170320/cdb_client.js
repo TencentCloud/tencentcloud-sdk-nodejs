@@ -30,6 +30,7 @@ const StopDBImportJobRequest = models.StopDBImportJobRequest;
 const RoWeightValue = models.RoWeightValue;
 const DescribeSlowLogDataResponse = models.DescribeSlowLogDataResponse;
 const StopDBImportJobResponse = models.StopDBImportJobResponse;
+const DescribeDBInstanceInfoResponse = models.DescribeDBInstanceInfoResponse;
 const DescribeErrorLogDataRequest = models.DescribeErrorLogDataRequest;
 const Parameter = models.Parameter;
 const DescribeDBInstanceRebootTimeRequest = models.DescribeDBInstanceRebootTimeRequest;
@@ -232,6 +233,7 @@ const DescribeDataBackupOverviewRequest = models.DescribeDataBackupOverviewReque
 const DescribeParamTemplateInfoResponse = models.DescribeParamTemplateInfoResponse;
 const ParamRecord = models.ParamRecord;
 const RestartDBInstancesRequest = models.RestartDBInstancesRequest;
+const DescribeDBInstanceInfoRequest = models.DescribeDBInstanceInfoRequest;
 const DescribeInstanceParamsResponse = models.DescribeInstanceParamsResponse;
 const DescribeDBZoneConfigResponse = models.DescribeDBZoneConfigResponse;
 const CreateDeployGroupRequest = models.CreateDeployGroupRequest;
@@ -852,6 +854,17 @@ class CdbClient extends AbstractClient {
     DeleteAccounts(req, cb) {
         let resp = new DeleteAccountsResponse();
         this.request("DeleteAccounts", req, resp, cb);
+    }
+
+    /**
+     * 查询实例基本信息（实例 ID ，实例名称，是否开通加密 ）
+     * @param {DescribeDBInstanceInfoRequest} req
+     * @param {function(string, DescribeDBInstanceInfoResponse):void} cb
+     * @public
+     */
+    DescribeDBInstanceInfo(req, cb) {
+        let resp = new DescribeDBInstanceInfoResponse();
+        this.request("DescribeDBInstanceInfo", req, resp, cb);
     }
 
     /**

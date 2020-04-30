@@ -605,6 +605,21 @@ failed：部署失败
          */
         this.SslStatus = null;
 
+        /**
+         * TLS版本列表，支持填写以下值：
+TLSv1.0, TLSv1.1, TLSv1.2
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
+         */
+        this.TlsVersion = null;
+
+        /**
+         * Hsts配置
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Hsts || null}
+         */
+        this.Hsts = null;
+
     }
 
     /**
@@ -632,6 +647,13 @@ failed：部署失败
         }
         this.Spdy = 'Spdy' in params ? params.Spdy : null;
         this.SslStatus = 'SslStatus' in params ? params.SslStatus : null;
+        this.TlsVersion = 'TlsVersion' in params ? params.TlsVersion : null;
+
+        if (params.Hsts) {
+            let obj = new Hsts();
+            obj.deserialize(params.Hsts)
+            this.Hsts = obj;
+        }
 
     }
 }
@@ -1035,6 +1057,51 @@ off：关闭
                 let obj = new RefererRule();
                 obj.deserialize(params.RefererRules[z]);
                 this.RefererRules.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * UserAgent黑白名单配置
+ * @class
+ */
+class UserAgentFilter extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 开关，on或off
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+        /**
+         * UA黑白名单生效规则列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<UserAgentFilterRule> || null}
+         */
+        this.FilterRules = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+
+        if (params.FilterRules) {
+            this.FilterRules = new Array();
+            for (let z in params.FilterRules) {
+                let obj = new UserAgentFilterRule();
+                obj.deserialize(params.FilterRules[z]);
+                this.FilterRules.push(obj);
             }
         }
 
@@ -3686,6 +3753,63 @@ global：全球加速
 }
 
 /**
+ * UserAgent黑白名单规则配置
+ * @class
+ */
+class UserAgentFilterRule extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 访问路径生效类型
+all: 所有访问路径生效
+file: 根据文件后缀类型生效
+directory: 根据目录生效
+path: 根据完整访问路径生效
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.RuleType = null;
+
+        /**
+         * 访问路径生效内容
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
+         */
+        this.RulePaths = null;
+
+        /**
+         * UserAgent列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
+         */
+        this.UserAgents = null;
+
+        /**
+         * 黑名单或白名单，blacklist或whitelist
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.FilterType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RuleType = 'RuleType' in params ? params.RuleType : null;
+        this.RulePaths = 'RulePaths' in params ? params.RulePaths : null;
+        this.UserAgents = 'UserAgents' in params ? params.UserAgents : null;
+        this.FilterType = 'FilterType' in params ? params.FilterType : null;
+
+    }
+}
+
+/**
  * 排序类型的数据结构
  * @class
  */
@@ -4899,6 +5023,50 @@ class DisableClsLogTopicResponse extends  AbstractModel {
 }
 
 /**
+ * HSTS 配置。
+ * @class
+ */
+class Hsts extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 是否开启，on或off。
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+        /**
+         * MaxAge数值。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.MaxAge = null;
+
+        /**
+         * 是否包含子域名，on或off。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.IncludeSubDomains = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+        this.MaxAge = 'MaxAge' in params ? params.MaxAge : null;
+        this.IncludeSubDomains = 'IncludeSubDomains' in params ? params.IncludeSubDomains : null;
+
+    }
+}
+
+/**
  * DescribeIpStatus请求参数结构体
  * @class
  */
@@ -5251,6 +5419,13 @@ global：全球锁定
          */
         this.ImageOptimization = null;
 
+        /**
+         * UA黑白名单配置
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {UserAgentFilter || null}
+         */
+        this.UserAgentFilter = null;
+
     }
 
     /**
@@ -5451,6 +5626,12 @@ global：全球锁定
             let obj = new ImageOptimization();
             obj.deserialize(params.ImageOptimization)
             this.ImageOptimization = obj;
+        }
+
+        if (params.UserAgentFilter) {
+            let obj = new UserAgentFilter();
+            obj.deserialize(params.UserAgentFilter)
+            this.UserAgentFilter = obj;
         }
 
     }
@@ -7642,6 +7823,13 @@ off：关闭全路径缓存（即开启参数过滤）
          */
         this.FullUrlCache = null;
 
+        /**
+         * 缓存是否忽略大小写
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.CaseSensitive = null;
+
     }
 
     /**
@@ -7652,6 +7840,7 @@ off：关闭全路径缓存（即开启参数过滤）
             return;
         }
         this.FullUrlCache = 'FullUrlCache' in params ? params.FullUrlCache : null;
+        this.CaseSensitive = 'CaseSensitive' in params ? params.CaseSensitive : null;
 
     }
 }
@@ -10172,6 +10361,7 @@ module.exports = {
     RequestHeader: RequestHeader,
     DescribePurgeQuotaRequest: DescribePurgeQuotaRequest,
     Referer: Referer,
+    UserAgentFilter: UserAgentFilter,
     AdvanceCacheRule: AdvanceCacheRule,
     DescribeIpStatusResponse: DescribeIpStatusResponse,
     UpdateImageConfigResponse: UpdateImageConfigResponse,
@@ -10208,6 +10398,7 @@ module.exports = {
     ListClsLogTopicsResponse: ListClsLogTopicsResponse,
     OverseaConfig: OverseaConfig,
     AddCdnDomainRequest: AddCdnDomainRequest,
+    UserAgentFilterRule: UserAgentFilterRule,
     TopDetailData: TopDetailData,
     ErrorPage: ErrorPage,
     MaxAgeRule: MaxAgeRule,
@@ -10233,6 +10424,7 @@ module.exports = {
     DisableCachesRequest: DisableCachesRequest,
     SimpleCacheRule: SimpleCacheRule,
     DisableClsLogTopicResponse: DisableClsLogTopicResponse,
+    Hsts: Hsts,
     DescribeIpStatusRequest: DescribeIpStatusRequest,
     DetailDomain: DetailDomain,
     GetDisableRecordsResponse: GetDisableRecordsResponse,

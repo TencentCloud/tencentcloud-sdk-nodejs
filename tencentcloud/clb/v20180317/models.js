@@ -7875,6 +7875,13 @@ OPEN：公网属性， INTERNAL：内网属性。
          */
         this.IsBlockTime = null;
 
+        /**
+         * IP类型是否是本地BGP
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.LocalBgp = null;
+
     }
 
     /**
@@ -7982,6 +7989,7 @@ OPEN：公网属性， INTERNAL：内网属性。
         this.SlaType = 'SlaType' in params ? params.SlaType : null;
         this.IsBlock = 'IsBlock' in params ? params.IsBlock : null;
         this.IsBlockTime = 'IsBlockTime' in params ? params.IsBlockTime : null;
+        this.LocalBgp = 'LocalBgp' in params ? params.LocalBgp : null;
 
     }
 }

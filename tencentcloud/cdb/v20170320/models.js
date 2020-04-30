@@ -919,6 +919,71 @@ class StopDBImportJobResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeDBInstanceInfo返回参数结构体
+ * @class
+ */
+class DescribeDBInstanceInfoResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例 ID 。
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 实例名称。
+         * @type {string || null}
+         */
+        this.InstanceName = null;
+
+        /**
+         * 是否开通加密，YES 已开通，NO 未开通。
+         * @type {string || null}
+         */
+        this.Encryption = null;
+
+        /**
+         * 加密使用的密钥 ID 。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.KeyId = null;
+
+        /**
+         * 密钥所在地域。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.KeyRegion = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
+        this.Encryption = 'Encryption' in params ? params.Encryption : null;
+        this.KeyId = 'KeyId' in params ? params.KeyId : null;
+        this.KeyRegion = 'KeyRegion' in params ? params.KeyRegion : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeErrorLogData请求参数结构体
  * @class
  */
@@ -5985,7 +6050,7 @@ class DescribeRollbackTaskDetailRequest extends  AbstractModel {
         super();
 
         /**
-         * 实例 ID。与云数据库控制台页面中显示的实例 ID 相同，可使用 [查询实例列表] (https://cloud.tencent.com/document/api/236/15872)。
+         * 实例 ID。与云数据库控制台页面中显示的实例 ID 相同，可使用 [查询实例列表](https://cloud.tencent.com/document/api/236/15872)。
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -11120,6 +11185,34 @@ class RestartDBInstancesRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeDBInstanceInfo请求参数结构体
+ * @class
+ */
+class DescribeDBInstanceInfoRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例 ID 。
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+    }
+}
+
+/**
  * DescribeInstanceParams返回参数结构体
  * @class
  */
@@ -12405,6 +12498,7 @@ module.exports = {
     RoWeightValue: RoWeightValue,
     DescribeSlowLogDataResponse: DescribeSlowLogDataResponse,
     StopDBImportJobResponse: StopDBImportJobResponse,
+    DescribeDBInstanceInfoResponse: DescribeDBInstanceInfoResponse,
     DescribeErrorLogDataRequest: DescribeErrorLogDataRequest,
     Parameter: Parameter,
     DescribeDBInstanceRebootTimeRequest: DescribeDBInstanceRebootTimeRequest,
@@ -12607,6 +12701,7 @@ module.exports = {
     DescribeParamTemplateInfoResponse: DescribeParamTemplateInfoResponse,
     ParamRecord: ParamRecord,
     RestartDBInstancesRequest: RestartDBInstancesRequest,
+    DescribeDBInstanceInfoRequest: DescribeDBInstanceInfoRequest,
     DescribeInstanceParamsResponse: DescribeInstanceParamsResponse,
     DescribeDBZoneConfigResponse: DescribeDBZoneConfigResponse,
     CreateDeployGroupRequest: CreateDeployGroupRequest,
