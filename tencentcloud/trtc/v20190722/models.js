@@ -61,6 +61,48 @@ class RealtimeData extends  AbstractModel {
 }
 
 /**
+ * MCU混流布局参数
+ * @class
+ */
+class LayoutParams extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 混流布局模板ID，0为悬浮模板(默认);1为九宫格模板;2为屏幕分享模板
+         * @type {number || null}
+         */
+        this.Template = null;
+
+        /**
+         * 屏幕分享模板中有效，代表左侧大画面对应的用户ID
+         * @type {string || null}
+         */
+        this.MainVideoUserId = null;
+
+        /**
+         * 屏幕分享模板中有效，代表左侧大画面对应的流类型，0为摄像头，1为屏幕分享
+         * @type {number || null}
+         */
+        this.MainVideoStreamType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Template = 'Template' in params ? params.Template : null;
+        this.MainVideoUserId = 'MainVideoUserId' in params ? params.MainVideoUserId : null;
+        this.MainVideoStreamType = 'MainVideoStreamType' in params ? params.MainVideoStreamType : null;
+
+    }
+}
+
+/**
  * 返回的质量数据，时间:值
  * @class
  */
@@ -91,6 +133,34 @@ class TimeValue extends  AbstractModel {
         }
         this.Time = 'Time' in params ? params.Time : null;
         this.Value = 'Value' in params ? params.Value : null;
+
+    }
+}
+
+/**
+ * StopMCUMixTranscode返回参数结构体
+ * @class
+ */
+class StopMCUMixTranscodeResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -270,7 +340,7 @@ class DescribeCallDetailRequest extends  AbstractModel {
         super();
 
         /**
-         * 通话ID
+         * 通话ID（唯一标识一次通话）= sdkappid+roomgString（房间号）+房间创建时间（unix时间戳，s）。通过 DescribeRoomInformation（查询房间列表）接口获取。
          * @type {string || null}
          */
         this.CommId = null;
@@ -294,7 +364,7 @@ class DescribeCallDetailRequest extends  AbstractModel {
         this.SdkAppId = null;
 
         /**
-         * 需查询的用户数组，不填默认返回6个用户
+         * 需查询的用户数组，不填默认返回6个用户,最多可填6个用户
          * @type {Array.<string> || null}
          */
         this.UserIds = null;
@@ -424,6 +494,161 @@ class DismissRoomRequest extends  AbstractModel {
 }
 
 /**
+ * MCU混流输出流编码参数
+ * @class
+ */
+class EncodeParams extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 混流-输出流音频采样率
+         * @type {number || null}
+         */
+        this.AudioSampleRate = null;
+
+        /**
+         * 混流-输出流音频码率，单位Kbps
+         * @type {number || null}
+         */
+        this.AudioBitrate = null;
+
+        /**
+         * 混流-输出流音频声道数
+         * @type {number || null}
+         */
+        this.AudioChannels = null;
+
+        /**
+         * 混流-输出流宽，音视频输出时必填
+         * @type {number || null}
+         */
+        this.VideoWidth = null;
+
+        /**
+         * 混流-输出流高，音视频输出时必填
+         * @type {number || null}
+         */
+        this.VideoHeight = null;
+
+        /**
+         * 混流-输出流码率，单位Kbps，音视频输出时必填
+         * @type {number || null}
+         */
+        this.VideoBitrate = null;
+
+        /**
+         * 混流-输出流帧率，音视频输出时必填
+         * @type {number || null}
+         */
+        this.VideoFramerate = null;
+
+        /**
+         * 混流-输出流gop，音视频输出时必填
+         * @type {number || null}
+         */
+        this.VideoGop = null;
+
+        /**
+         * 混流-输出流背景色
+         * @type {number || null}
+         */
+        this.BackgroundColor = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AudioSampleRate = 'AudioSampleRate' in params ? params.AudioSampleRate : null;
+        this.AudioBitrate = 'AudioBitrate' in params ? params.AudioBitrate : null;
+        this.AudioChannels = 'AudioChannels' in params ? params.AudioChannels : null;
+        this.VideoWidth = 'VideoWidth' in params ? params.VideoWidth : null;
+        this.VideoHeight = 'VideoHeight' in params ? params.VideoHeight : null;
+        this.VideoBitrate = 'VideoBitrate' in params ? params.VideoBitrate : null;
+        this.VideoFramerate = 'VideoFramerate' in params ? params.VideoFramerate : null;
+        this.VideoGop = 'VideoGop' in params ? params.VideoGop : null;
+        this.BackgroundColor = 'BackgroundColor' in params ? params.BackgroundColor : null;
+
+    }
+}
+
+/**
+ * StartMCUMixTranscode请求参数结构体
+ * @class
+ */
+class StartMCUMixTranscodeRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * TRTC的SDKAppId。
+         * @type {number || null}
+         */
+        this.SdkAppId = null;
+
+        /**
+         * 房间号。
+         * @type {number || null}
+         */
+        this.RoomId = null;
+
+        /**
+         * 混流输出控制参数。
+         * @type {OutputParams || null}
+         */
+        this.OutputParams = null;
+
+        /**
+         * 混流输出编码参数。
+         * @type {EncodeParams || null}
+         */
+        this.EncodeParams = null;
+
+        /**
+         * 混流输出布局参数。
+         * @type {LayoutParams || null}
+         */
+        this.LayoutParams = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
+        this.RoomId = 'RoomId' in params ? params.RoomId : null;
+
+        if (params.OutputParams) {
+            let obj = new OutputParams();
+            obj.deserialize(params.OutputParams)
+            this.OutputParams = obj;
+        }
+
+        if (params.EncodeParams) {
+            let obj = new EncodeParams();
+            obj.deserialize(params.EncodeParams)
+            this.EncodeParams = obj;
+        }
+
+        if (params.LayoutParams) {
+            let obj = new LayoutParams();
+            obj.deserialize(params.LayoutParams)
+            this.LayoutParams = obj;
+        }
+
+    }
+}
+
+/**
  * DescribeRealtimeQuality返回参数结构体
  * @class
  */
@@ -462,6 +687,41 @@ class DescribeRealtimeQualityResponse extends  AbstractModel {
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * StopMCUMixTranscode请求参数结构体
+ * @class
+ */
+class StopMCUMixTranscodeRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * TRTC的SDKAppId。
+         * @type {number || null}
+         */
+        this.SdkAppId = null;
+
+        /**
+         * 房间号。
+         * @type {number || null}
+         */
+        this.RoomId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
+        this.RoomId = 'RoomId' in params ? params.RoomId : null;
 
     }
 }
@@ -554,6 +814,55 @@ class DescribeRoomInformationResponse extends  AbstractModel {
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * MCU混流的输出参数
+ * @class
+ */
+class OutputParams extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 直播流ID
+         * @type {string || null}
+         */
+        this.StreamId = null;
+
+        /**
+         * 填0：直播流为音视频(默认); 填1：直播流为纯音频
+         * @type {number || null}
+         */
+        this.PureAudioStream = null;
+
+        /**
+         * 自定义录制文件名
+         * @type {string || null}
+         */
+        this.RecordId = null;
+
+        /**
+         * 填1：纯音频录制为mp3
+         * @type {number || null}
+         */
+        this.RecordAudioOnly = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.StreamId = 'StreamId' in params ? params.StreamId : null;
+        this.PureAudioStream = 'PureAudioStream' in params ? params.PureAudioStream : null;
+        this.RecordId = 'RecordId' in params ? params.RecordId : null;
+        this.RecordAudioOnly = 'RecordAudioOnly' in params ? params.RecordAudioOnly : null;
 
     }
 }
@@ -707,6 +1016,34 @@ class ScaleInfomation extends  AbstractModel {
         this.UserNumber = 'UserNumber' in params ? params.UserNumber : null;
         this.UserCount = 'UserCount' in params ? params.UserCount : null;
         this.RoomNumbers = 'RoomNumbers' in params ? params.RoomNumbers : null;
+
+    }
+}
+
+/**
+ * StartMCUMixTranscode返回参数结构体
+ * @class
+ */
+class StartMCUMixTranscodeResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1106,7 +1443,9 @@ class DescribeHistoryScaleResponse extends  AbstractModel {
 
 module.exports = {
     RealtimeData: RealtimeData,
+    LayoutParams: LayoutParams,
     TimeValue: TimeValue,
+    StopMCUMixTranscodeResponse: StopMCUMixTranscodeResponse,
     DescribeRealtimeScaleResponse: DescribeRealtimeScaleResponse,
     DismissRoomResponse: DismissRoomResponse,
     DescribeRealtimeQualityRequest: DescribeRealtimeQualityRequest,
@@ -1114,12 +1453,17 @@ module.exports = {
     DescribeCallDetailRequest: DescribeCallDetailRequest,
     DescribeRealtimeNetworkRequest: DescribeRealtimeNetworkRequest,
     DismissRoomRequest: DismissRoomRequest,
+    EncodeParams: EncodeParams,
+    StartMCUMixTranscodeRequest: StartMCUMixTranscodeRequest,
     DescribeRealtimeQualityResponse: DescribeRealtimeQualityResponse,
+    StopMCUMixTranscodeRequest: StopMCUMixTranscodeRequest,
     DescribeHistoryScaleRequest: DescribeHistoryScaleRequest,
     DescribeRoomInformationResponse: DescribeRoomInformationResponse,
+    OutputParams: OutputParams,
     QualityData: QualityData,
     DescribeRealtimeNetworkResponse: DescribeRealtimeNetworkResponse,
     ScaleInfomation: ScaleInfomation,
+    StartMCUMixTranscodeResponse: StartMCUMixTranscodeResponse,
     DescribeRealtimeScaleRequest: DescribeRealtimeScaleRequest,
     DescribeCallDetailResponse: DescribeCallDetailResponse,
     DescribeRoomInformationRequest: DescribeRoomInformationRequest,

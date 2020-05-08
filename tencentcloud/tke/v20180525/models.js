@@ -3154,6 +3154,12 @@ class ClusterAdvancedSettings extends  AbstractModel {
          */
         this.IsNonStaticIpMode = null;
 
+        /**
+         * 是否启用集群删除保护
+         * @type {boolean || null}
+         */
+        this.DeletionProtection = null;
+
     }
 
     /**
@@ -3175,6 +3181,7 @@ class ClusterAdvancedSettings extends  AbstractModel {
         }
         this.NetworkType = 'NetworkType' in params ? params.NetworkType : null;
         this.IsNonStaticIpMode = 'IsNonStaticIpMode' in params ? params.IsNonStaticIpMode : null;
+        this.DeletionProtection = 'DeletionProtection' in params ? params.DeletionProtection : null;
 
     }
 }

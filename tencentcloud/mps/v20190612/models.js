@@ -869,45 +869,74 @@ class PoliticalAsrReviewTemplateInfoForUpdate extends  AbstractModel {
 }
 
 /**
- * 任务概要信息
+ * 视频处理任务中的马赛克参数类型
  * @class
  */
-class TaskSimpleInfo extends  AbstractModel {
+class MosaicInput extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 任务 ID。
+         * 原点位置，目前仅支持：
+<li>TopLeft：表示坐标原点位于视频图像左上角，马赛克原点为图片或文字的左上角。</li>
+默认值：TopLeft。
          * @type {string || null}
          */
-        this.TaskId = null;
+        this.CoordinateOrigin = null;
 
         /**
-         * 任务类型，包含：
-<li> WorkflowTask：工作流处理任务；</li>
-<li> EditMediaTask：视频编辑任务；</li>
-<li> LiveProcessTask：直播处理任务。</li>
+         * 马赛克原点距离视频图像坐标原点的水平位置。支持 %、px 两种格式：
+<li>当字符串以 % 结尾，表示马赛克 XPos 为视频宽度指定百分比，如 10% 表示 XPos 为视频宽度的 10%；</li>
+<li>当字符串以 px 结尾，表示马赛克 XPos 为指定像素，如 100px 表示 XPos 为 100 像素。</li>
+默认值：0px。
          * @type {string || null}
          */
-        this.TaskType = null;
+        this.XPos = null;
 
         /**
-         * 任务创建时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710#52)。
+         * 马赛克原点距离视频图像坐标原点的垂直位置。支持 %、px 两种格式：
+<li>当字符串以 % 结尾，表示马赛克 YPos 为视频高度指定百分比，如 10% 表示 YPos 为视频高度的 10%；</li>
+<li>当字符串以 px 结尾，表示马赛克 YPos 为指定像素，如 100px 表示 YPos 为 100 像素。</li>
+默认值：0px。
          * @type {string || null}
          */
-        this.CreateTime = null;
+        this.YPos = null;
 
         /**
-         * 任务开始执行时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710#52)。若任务尚未开始，该字段为：0000-00-00T00:00:00Z。
+         * 马赛克的宽度。支持 %、px 两种格式：
+<li>当字符串以 % 结尾，表示马赛克 Width 为视频宽度的百分比大小，如 10% 表示 Width 为视频宽度的 10%；</li>
+<li>当字符串以 px 结尾，表示马赛克 Width 单位为像素，如 100px 表示 Width 为 100 像素。</li>
+默认值：10%。
          * @type {string || null}
          */
-        this.BeginProcessTime = null;
+        this.Width = null;
 
         /**
-         * 任务结束时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710#52)。若任务尚未完成，该字段为：0000-00-00T00:00:00Z。
+         * 马赛克的高度。支持 %、px 两种格式：
+<li>当字符串以 % 结尾，表示马赛克 Height 为视频高度的百分比大小，如 10% 表示 Height 为视频高度的 10%；</li>
+<li>当字符串以 px 结尾，表示马赛克 Height 单位为像素，如 100px 表示 Height 为 100 像素。</li>
+默认值：10%。
          * @type {string || null}
          */
-        this.FinishTime = null;
+        this.Height = null;
+
+        /**
+         * 马赛克的起始时间偏移，单位：秒。不填或填0，表示马赛克从画面出现时开始显现。
+<li>不填或填0，表示马赛克从画面开始就出现；</li>
+<li>当数值大于0时（假设为 n），表示马赛克从画面开始的第 n 秒出现；</li>
+<li>当数值小于0时（假设为 -n），表示马赛克从离画面结束 n 秒前开始出现。</li>
+         * @type {number || null}
+         */
+        this.StartTimeOffset = null;
+
+        /**
+         * 马赛克的结束时间偏移，单位：秒。
+<li>不填或填0，表示马赛克持续到画面结束；</li>
+<li>当数值大于0时（假设为 n），表示马赛克持续到第 n 秒时消失；</li>
+<li>当数值小于0时（假设为 -n），表示马赛克持续到离画面结束 n 秒前消失。</li>
+         * @type {number || null}
+         */
+        this.EndTimeOffset = null;
 
     }
 
@@ -918,11 +947,13 @@ class TaskSimpleInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TaskId = 'TaskId' in params ? params.TaskId : null;
-        this.TaskType = 'TaskType' in params ? params.TaskType : null;
-        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
-        this.BeginProcessTime = 'BeginProcessTime' in params ? params.BeginProcessTime : null;
-        this.FinishTime = 'FinishTime' in params ? params.FinishTime : null;
+        this.CoordinateOrigin = 'CoordinateOrigin' in params ? params.CoordinateOrigin : null;
+        this.XPos = 'XPos' in params ? params.XPos : null;
+        this.YPos = 'YPos' in params ? params.YPos : null;
+        this.Width = 'Width' in params ? params.Width : null;
+        this.Height = 'Height' in params ? params.Height : null;
+        this.StartTimeOffset = 'StartTimeOffset' in params ? params.StartTimeOffset : null;
+        this.EndTimeOffset = 'EndTimeOffset' in params ? params.EndTimeOffset : null;
 
     }
 }
@@ -8236,7 +8267,15 @@ class SnapshotByTimeOffsetTaskInput extends  AbstractModel {
         this.Definition = null;
 
         /**
-         * 截图时间点列表，单位为<font color=red>秒</font>。
+         * 截图时间点列表，时间点支持 s、% 两种格式：
+<li>当字符串以 s 结尾，表示时间点单位为秒，如 3.5s 表示时间点为第3.5秒；</li>
+<li>当字符串以 % 结尾，表示时间点为视频时长的百分比大小，如10%表示时间点为视频前第10%的时间。</li>
+         * @type {Array.<string> || null}
+         */
+        this.ExtTimeOffsetSet = null;
+
+        /**
+         * 截图时间点列表，单位为<font color=red>秒</font>。此参数已不再建议使用，建议您使用 ExtTimeOffsetSet 参数。
          * @type {Array.<number> || null}
          */
         this.TimeOffsetSet = null;
@@ -8277,6 +8316,7 @@ class SnapshotByTimeOffsetTaskInput extends  AbstractModel {
             return;
         }
         this.Definition = 'Definition' in params ? params.Definition : null;
+        this.ExtTimeOffsetSet = 'ExtTimeOffsetSet' in params ? params.ExtTimeOffsetSet : null;
         this.TimeOffsetSet = 'TimeOffsetSet' in params ? params.TimeOffsetSet : null;
 
         if (params.WatermarkSet) {
@@ -12699,6 +12739,12 @@ class TranscodeTaskInput extends  AbstractModel {
         this.WatermarkSet = null;
 
         /**
+         * 马赛克列表，最大可支持 10 张。
+         * @type {Array.<MosaicInput> || null}
+         */
+        this.MosaicSet = null;
+
+        /**
          * 转码后文件的目标存储，不填则继承上层的 OutputStorage 值。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {TaskOutputStorage || null}
@@ -12747,6 +12793,15 @@ class TranscodeTaskInput extends  AbstractModel {
                 let obj = new WatermarkInput();
                 obj.deserialize(params.WatermarkSet[z]);
                 this.WatermarkSet.push(obj);
+            }
+        }
+
+        if (params.MosaicSet) {
+            this.MosaicSet = new Array();
+            for (let z in params.MosaicSet) {
+                let obj = new MosaicInput();
+                obj.deserialize(params.MosaicSet[z]);
+                this.MosaicSet.push(obj);
             }
         }
 
@@ -17681,6 +17736,65 @@ class DeleteWatermarkTemplateResponse extends  AbstractModel {
 }
 
 /**
+ * 任务概要信息
+ * @class
+ */
+class TaskSimpleInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 任务 ID。
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * 任务类型，包含：
+<li> WorkflowTask：工作流处理任务；</li>
+<li> EditMediaTask：视频编辑任务；</li>
+<li> LiveProcessTask：直播处理任务。</li>
+         * @type {string || null}
+         */
+        this.TaskType = null;
+
+        /**
+         * 任务创建时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710#52)。
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * 任务开始执行时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710#52)。若任务尚未开始，该字段为：0000-00-00T00:00:00Z。
+         * @type {string || null}
+         */
+        this.BeginProcessTime = null;
+
+        /**
+         * 任务结束时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710#52)。若任务尚未完成，该字段为：0000-00-00T00:00:00Z。
+         * @type {string || null}
+         */
+        this.FinishTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.TaskType = 'TaskType' in params ? params.TaskType : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.BeginProcessTime = 'BeginProcessTime' in params ? params.BeginProcessTime : null;
+        this.FinishTime = 'FinishTime' in params ? params.FinishTime : null;
+
+    }
+}
+
+/**
  * DeleteWatermarkTemplate请求参数结构体
  * @class
  */
@@ -18838,7 +18952,7 @@ module.exports = {
     MediaAiAnalysisTagItem: MediaAiAnalysisTagItem,
     AnimatedGraphicTaskInput: AnimatedGraphicTaskInput,
     PoliticalAsrReviewTemplateInfoForUpdate: PoliticalAsrReviewTemplateInfoForUpdate,
-    TaskSimpleInfo: TaskSimpleInfo,
+    MosaicInput: MosaicInput,
     DescribeTaskDetailResponse: DescribeTaskDetailResponse,
     LiveStreamAiRecognitionResultItem: LiveStreamAiRecognitionResultItem,
     AiSampleFaceOperation: AiSampleFaceOperation,
@@ -19139,6 +19253,7 @@ module.exports = {
     ProhibitedOcrReviewTemplateInfo: ProhibitedOcrReviewTemplateInfo,
     LiveStreamOcrFullTextRecognitionResult: LiveStreamOcrFullTextRecognitionResult,
     DeleteWatermarkTemplateResponse: DeleteWatermarkTemplateResponse,
+    TaskSimpleInfo: TaskSimpleInfo,
     DeleteWatermarkTemplateRequest: DeleteWatermarkTemplateRequest,
     AiRecognitionTaskAsrFullTextResultInput: AiRecognitionTaskAsrFullTextResultInput,
     ModifyTranscodeTemplateResponse: ModifyTranscodeTemplateResponse,

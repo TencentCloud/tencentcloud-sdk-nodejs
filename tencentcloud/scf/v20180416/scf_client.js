@@ -33,6 +33,7 @@ const FunctionVersion = models.FunctionVersion;
 const DeleteAliasRequest = models.DeleteAliasRequest;
 const GetFunctionAddressRequest = models.GetFunctionAddressRequest;
 const DeleteLayerVersionResponse = models.DeleteLayerVersionResponse;
+const UpdateNamespaceResponse = models.UpdateNamespaceResponse;
 const InvokeResponse = models.InvokeResponse;
 const GetAliasRequest = models.GetAliasRequest;
 const CreateNamespaceResponse = models.CreateNamespaceResponse;
@@ -43,10 +44,12 @@ const UpdateFunctionConfigurationRequest = models.UpdateFunctionConfigurationReq
 const CreateAliasRequest = models.CreateAliasRequest;
 const ListVersionByFunctionRequest = models.ListVersionByFunctionRequest;
 const VersionMatch = models.VersionMatch;
+const ListTriggersResponse = models.ListTriggersResponse;
 const RoutingConfig = models.RoutingConfig;
 const PublicNetConfigOut = models.PublicNetConfigOut;
 const ListFunctionsResponse = models.ListFunctionsResponse;
-const UpdateNamespaceResponse = models.UpdateNamespaceResponse;
+const ListTriggersRequest = models.ListTriggersRequest;
+const UpdateFunctionCodeResponse = models.UpdateFunctionCodeResponse;
 const DeleteAliasResponse = models.DeleteAliasResponse;
 const CreateTriggerResponse = models.CreateTriggerResponse;
 const PublishLayerVersionRequest = models.PublishLayerVersionRequest;
@@ -93,7 +96,7 @@ const FunctionLog = models.FunctionLog;
 const CreateAliasResponse = models.CreateAliasResponse;
 const LogSearchContext = models.LogSearchContext;
 const GetLayerVersionResponse = models.GetLayerVersionResponse;
-const UpdateFunctionCodeResponse = models.UpdateFunctionCodeResponse;
+const TriggerInfo = models.TriggerInfo;
 const Variable = models.Variable;
 const LogFilter = models.LogFilter;
 const PublishVersionResponse = models.PublishVersionResponse;
@@ -129,6 +132,17 @@ class ScfClient extends AbstractClient {
     UpdateAlias(req, cb) {
         let resp = new UpdateAliasResponse();
         this.request("UpdateAlias", req, resp, cb);
+    }
+
+    /**
+     * 获取函数触发器列表
+     * @param {ListTriggersRequest} req
+     * @param {function(string, ListTriggersResponse):void} cb
+     * @public
+     */
+    ListTriggers(req, cb) {
+        let resp = new ListTriggersResponse();
+        this.request("ListTriggers", req, resp, cb);
     }
 
     /**

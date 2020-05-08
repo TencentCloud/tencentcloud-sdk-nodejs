@@ -14447,7 +14447,15 @@ class SnapshotByTimeOffsetTaskInput extends  AbstractModel {
         this.Definition = null;
 
         /**
-         * 截图时间点列表，单位为<font color=red>毫秒</font>。
+         * 截图时间点列表，时间点支持 s、% 两种格式：
+<li>当字符串以 s 结尾，表示时间点单位为秒，如 3.5s 表示时间点为第3.5秒；</li>
+<li>当字符串以 % 结尾，表示时间点为视频时长的百分比大小，如10%表示时间点为视频前第10%的时间。</li>
+         * @type {Array.<string> || null}
+         */
+        this.ExtTimeOffsetSet = null;
+
+        /**
+         * 截图时间点列表，单位为<font color=red>毫秒</font>。此参数已不再建议使用，建议您使用 ExtTimeOffsetSet 参数。
          * @type {Array.<number> || null}
          */
         this.TimeOffsetSet = null;
@@ -14468,6 +14476,7 @@ class SnapshotByTimeOffsetTaskInput extends  AbstractModel {
             return;
         }
         this.Definition = 'Definition' in params ? params.Definition : null;
+        this.ExtTimeOffsetSet = 'ExtTimeOffsetSet' in params ? params.ExtTimeOffsetSet : null;
         this.TimeOffsetSet = 'TimeOffsetSet' in params ? params.TimeOffsetSet : null;
 
         if (params.WatermarkSet) {

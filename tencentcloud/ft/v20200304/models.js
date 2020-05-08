@@ -81,7 +81,7 @@ class AgeInfo extends  AbstractModel {
         super();
 
         /**
-         * 当前只支持设置为10且不可调整（后续放开后再知会）。
+         * 变化到的人脸年龄 [10,80]。
          * @type {number || null}
          */
         this.Age = null;
