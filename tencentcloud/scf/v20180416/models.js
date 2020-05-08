@@ -917,6 +917,34 @@ class DeleteLayerVersionResponse extends  AbstractModel {
 }
 
 /**
+ * UpdateNamespace返回参数结构体
+ * @class
+ */
+class UpdateNamespaceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * Invoke返回参数结构体
  * @class
  */
@@ -1581,6 +1609,56 @@ exact 匹配规则要求：
 }
 
 /**
+ * ListTriggers返回参数结构体
+ * @class
+ */
+class ListTriggersResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 触发器总数
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 触发器列表
+         * @type {Array.<TriggerInfo> || null}
+         */
+        this.Triggers = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.Triggers) {
+            this.Triggers = new Array();
+            for (let z in params.Triggers) {
+                let obj = new TriggerInfo();
+                obj.deserialize(params.Triggers[z]);
+                this.Triggers.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * 别名的版本路由配置
  * @class
  */
@@ -1722,10 +1800,89 @@ class ListFunctionsResponse extends  AbstractModel {
 }
 
 /**
- * UpdateNamespace返回参数结构体
+ * ListTriggers请求参数结构体
  * @class
  */
-class UpdateNamespaceResponse extends  AbstractModel {
+class ListTriggersRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 函数名称
+         * @type {string || null}
+         */
+        this.FunctionName = null;
+
+        /**
+         * 命名空间，默认是default
+         * @type {string || null}
+         */
+        this.Namespace = null;
+
+        /**
+         * 数据偏移量，默认值为 0
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 返回数据长度，默认值为 20
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 根据哪个字段进行返回结果排序,支持以下字段：AddTime, ModTime，默认ModTime
+         * @type {string || null}
+         */
+        this.OrderBy = null;
+
+        /**
+         * 以升序还是降序的方式返回结果，可选值 ASC 和 DESC，默认DESC
+         * @type {string || null}
+         */
+        this.Order = null;
+
+        /**
+         * * Qualifier:
+函数版本，别名
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FunctionName = 'FunctionName' in params ? params.FunctionName : null;
+        this.Namespace = 'Namespace' in params ? params.Namespace : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.OrderBy = 'OrderBy' in params ? params.OrderBy : null;
+        this.Order = 'Order' in params ? params.Order : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * UpdateFunctionCode返回参数结构体
+ * @class
+ */
+class UpdateFunctionCodeResponse extends  AbstractModel {
     constructor(){
         super();
 
@@ -4452,18 +4609,67 @@ Deleted 已删除
 }
 
 /**
- * UpdateFunctionCode返回参数结构体
+ * 触发器信息
  * @class
  */
-class UpdateFunctionCodeResponse extends  AbstractModel {
+class TriggerInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * 使能开关
+         * @type {number || null}
+         */
+        this.Enable = null;
+
+        /**
+         * 函数版本或别名
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.Qualifier = null;
+
+        /**
+         * 触发器名称
+         * @type {string || null}
+         */
+        this.TriggerName = null;
+
+        /**
+         * 触发器类型
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * 触发器详细配置
+         * @type {string || null}
+         */
+        this.TriggerDesc = null;
+
+        /**
+         * 触发器是否可用
+         * @type {string || null}
+         */
+        this.AvailableStatus = null;
+
+        /**
+         * 客户自定义参数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.CustomArgument = null;
+
+        /**
+         * 触发器创建时间
+         * @type {string || null}
+         */
+        this.AddTime = null;
+
+        /**
+         * 触发器最后修改时间
+         * @type {string || null}
+         */
+        this.ModTime = null;
 
     }
 
@@ -4474,7 +4680,15 @@ class UpdateFunctionCodeResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.Enable = 'Enable' in params ? params.Enable : null;
+        this.Qualifier = 'Qualifier' in params ? params.Qualifier : null;
+        this.TriggerName = 'TriggerName' in params ? params.TriggerName : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.TriggerDesc = 'TriggerDesc' in params ? params.TriggerDesc : null;
+        this.AvailableStatus = 'AvailableStatus' in params ? params.AvailableStatus : null;
+        this.CustomArgument = 'CustomArgument' in params ? params.CustomArgument : null;
+        this.AddTime = 'AddTime' in params ? params.AddTime : null;
+        this.ModTime = 'ModTime' in params ? params.ModTime : null;
 
     }
 }
@@ -4650,6 +4864,7 @@ module.exports = {
     DeleteAliasRequest: DeleteAliasRequest,
     GetFunctionAddressRequest: GetFunctionAddressRequest,
     DeleteLayerVersionResponse: DeleteLayerVersionResponse,
+    UpdateNamespaceResponse: UpdateNamespaceResponse,
     InvokeResponse: InvokeResponse,
     GetAliasRequest: GetAliasRequest,
     CreateNamespaceResponse: CreateNamespaceResponse,
@@ -4660,10 +4875,12 @@ module.exports = {
     CreateAliasRequest: CreateAliasRequest,
     ListVersionByFunctionRequest: ListVersionByFunctionRequest,
     VersionMatch: VersionMatch,
+    ListTriggersResponse: ListTriggersResponse,
     RoutingConfig: RoutingConfig,
     PublicNetConfigOut: PublicNetConfigOut,
     ListFunctionsResponse: ListFunctionsResponse,
-    UpdateNamespaceResponse: UpdateNamespaceResponse,
+    ListTriggersRequest: ListTriggersRequest,
+    UpdateFunctionCodeResponse: UpdateFunctionCodeResponse,
     DeleteAliasResponse: DeleteAliasResponse,
     CreateTriggerResponse: CreateTriggerResponse,
     PublishLayerVersionRequest: PublishLayerVersionRequest,
@@ -4710,7 +4927,7 @@ module.exports = {
     CreateAliasResponse: CreateAliasResponse,
     LogSearchContext: LogSearchContext,
     GetLayerVersionResponse: GetLayerVersionResponse,
-    UpdateFunctionCodeResponse: UpdateFunctionCodeResponse,
+    TriggerInfo: TriggerInfo,
     Variable: Variable,
     LogFilter: LogFilter,
     PublishVersionResponse: PublishVersionResponse,

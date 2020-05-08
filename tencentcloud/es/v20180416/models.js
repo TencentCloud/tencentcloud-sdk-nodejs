@@ -1851,6 +1851,12 @@ class UpdateInstanceRequest extends  AbstractModel {
          */
         this.BasicSecurityType = null;
 
+        /**
+         * Kibana内网端口
+         * @type {number || null}
+         */
+        this.KibanaPrivatePort = null;
+
     }
 
     /**
@@ -1902,6 +1908,7 @@ class UpdateInstanceRequest extends  AbstractModel {
         this.KibanaPublicAccess = 'KibanaPublicAccess' in params ? params.KibanaPublicAccess : null;
         this.KibanaPrivateAccess = 'KibanaPrivateAccess' in params ? params.KibanaPrivateAccess : null;
         this.BasicSecurityType = 'BasicSecurityType' in params ? params.BasicSecurityType : null;
+        this.KibanaPrivatePort = 'KibanaPrivatePort' in params ? params.KibanaPrivatePort : null;
 
     }
 }

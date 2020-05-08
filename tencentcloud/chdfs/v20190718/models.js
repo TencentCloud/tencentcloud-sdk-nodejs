@@ -127,10 +127,18 @@ class DescribeFileSystemResponse extends  AbstractModel {
         this.FileSystem = null;
 
         /**
-         * 文件系统已使用大小（byte）
+         * 文件系统已使用容量（byte）
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.FileSystemCapacityUsed = null;
+
+        /**
+         * 已使用容量（byte）
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.CapacityUsed = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -154,6 +162,7 @@ class DescribeFileSystemResponse extends  AbstractModel {
             this.FileSystem = obj;
         }
         this.FileSystemCapacityUsed = 'FileSystemCapacityUsed' in params ? params.FileSystemCapacityUsed : null;
+        this.CapacityUsed = 'CapacityUsed' in params ? params.CapacityUsed : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }

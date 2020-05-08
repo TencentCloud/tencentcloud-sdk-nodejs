@@ -1029,6 +1029,12 @@ class SentimentAnalysisResponse extends  AbstractModel {
         this.Negative = null;
 
         /**
+         * 中性情感概率，当输入参数Mode取值为3class时有效，否则值为空
+         * @type {number || null}
+         */
+        this.Neutral = null;
+
+        /**
          * 正面情感概率
          * @type {number || null}
          */
@@ -1056,6 +1062,7 @@ class SentimentAnalysisResponse extends  AbstractModel {
             return;
         }
         this.Negative = 'Negative' in params ? params.Negative : null;
+        this.Neutral = 'Neutral' in params ? params.Neutral : null;
         this.Positive = 'Positive' in params ? params.Positive : null;
         this.Sentiment = 'Sentiment' in params ? params.Sentiment : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
@@ -1497,7 +1504,7 @@ class SentimentAnalysisRequest extends  AbstractModel {
         this.Text = null;
 
         /**
-         * 文本所属类型（默认取4值）：
+         * 待分析文本所属的类型，仅当输入参数Mode取值为2class时有效（默认取4值）：
 1、商品评论类
 2、社交类
 3、美食酒店类
@@ -1505,6 +1512,14 @@ class SentimentAnalysisRequest extends  AbstractModel {
          * @type {number || null}
          */
         this.Flag = null;
+
+        /**
+         * 情感分类模式选项，可取2class或3class（默认值为2class）
+1、2class：返回正负面二分类情感结果
+2、3class：返回正负面及中性三分类情感结果
+         * @type {string || null}
+         */
+        this.Mode = null;
 
     }
 
@@ -1517,6 +1532,7 @@ class SentimentAnalysisRequest extends  AbstractModel {
         }
         this.Text = 'Text' in params ? params.Text : null;
         this.Flag = 'Flag' in params ? params.Flag : null;
+        this.Mode = 'Mode' in params ? params.Mode : null;
 
     }
 }

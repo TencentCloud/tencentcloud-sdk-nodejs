@@ -7100,7 +7100,7 @@ class BizLicenseOCRResponse extends  AbstractModel {
         super();
 
         /**
-         * 注册号
+         * 统一社会信用代码（三合一之前为注册号）
          * @type {string || null}
          */
         this.RegNum = null;

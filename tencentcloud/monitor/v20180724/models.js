@@ -1566,6 +1566,12 @@ class DescribeBasicAlarmListRequest extends  AbstractModel {
          */
         this.InstanceGroupIds = null;
 
+        /**
+         * 根据指标名过滤
+         * @type {Array.<string> || null}
+         */
+        this.MetricNames = null;
+
     }
 
     /**
@@ -1586,6 +1592,7 @@ class DescribeBasicAlarmListRequest extends  AbstractModel {
         this.AlarmStatus = 'AlarmStatus' in params ? params.AlarmStatus : null;
         this.ObjLike = 'ObjLike' in params ? params.ObjLike : null;
         this.InstanceGroupIds = 'InstanceGroupIds' in params ? params.InstanceGroupIds : null;
+        this.MetricNames = 'MetricNames' in params ? params.MetricNames : null;
 
     }
 }
@@ -2768,12 +2775,12 @@ class ReceiverInfo extends  AbstractModel {
 
         /**
          * 接收人类型。“group” 或 “user”
-         * @type {Array.<string> || null}
+         * @type {string || null}
          */
         this.ReceiverType = null;
 
         /**
-         * Id
+         * ReceiverId
          * @type {number || null}
          */
         this.Id = null;
