@@ -666,7 +666,7 @@ class CreateFileSystemRequest extends  AbstractModel {
         this.FileSystemName = null;
 
         /**
-         * 文件系统容量（byte），下限为1M，上限为1P，且必须是1M的整数倍
+         * 文件系统容量（byte），下限为1G，上限为1P，且必须是1G的整数倍
          * @type {number || null}
          */
         this.CapacityQuota = null;
@@ -720,7 +720,7 @@ class ModifyFileSystemRequest extends  AbstractModel {
         this.Description = null;
 
         /**
-         * 文件系统容量（byte），下限为1M，上限为1P，且必须是1M的整数倍
+         * 文件系统容量（byte），下限为1G，上限为1P，且必须是1G的整数倍
 注意：修改的文件系统容量不能小于当前使用量
          * @type {number || null}
          */

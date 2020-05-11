@@ -23,6 +23,7 @@ const DeletePolicyGroupResponse = models.DeletePolicyGroupResponse;
 const DescribeAccidentEventListAlarms = models.DescribeAccidentEventListAlarms;
 const CreatePolicyGroupEventCondition = models.CreatePolicyGroupEventCondition;
 const DescribeProductEventListRequest = models.DescribeProductEventListRequest;
+const DescribeProductListResponse = models.DescribeProductListResponse;
 const Instance = models.Instance;
 const DescribeProductEventListEvents = models.DescribeProductEventListEvents;
 const BindingPolicyObjectDimension = models.BindingPolicyObjectDimension;
@@ -42,7 +43,7 @@ const DescribePolicyGroupInfoRequest = models.DescribePolicyGroupInfoRequest;
 const DimensionsDesc = models.DimensionsDesc;
 const DescribePolicyGroupListGroup = models.DescribePolicyGroupListGroup;
 const DescribeBasicAlarmListAlarms = models.DescribeBasicAlarmListAlarms;
-const GetMonitorDataRequest = models.GetMonitorDataRequest;
+const DescribeProductListRequest = models.DescribeProductListRequest;
 const PeriodsSt = models.PeriodsSt;
 const DescribeAccidentEventListRequest = models.DescribeAccidentEventListRequest;
 const DescribeProductEventListOverView = models.DescribeProductEventListOverView;
@@ -60,6 +61,7 @@ const ModifyAlarmReceiversRequest = models.ModifyAlarmReceiversRequest;
 const DescribeProductEventListDimensions = models.DescribeProductEventListDimensions;
 const DescribePolicyGroupInfoResponse = models.DescribePolicyGroupInfoResponse;
 const DescribeBasicAlarmListResponse = models.DescribeBasicAlarmListResponse;
+const ProductSimple = models.ProductSimple;
 const DescribeBindingPolicyObjectListDimension = models.DescribeBindingPolicyObjectListDimension;
 const DescribePolicyGroupInfoCondition = models.DescribePolicyGroupInfoCondition;
 const UnBindingPolicyObjectResponse = models.UnBindingPolicyObjectResponse;
@@ -73,6 +75,7 @@ const InstanceGroup = models.InstanceGroup;
 const DescribePolicyGroupInfoEventCondition = models.DescribePolicyGroupInfoEventCondition;
 const DescribeBaseMetricsResponse = models.DescribeBaseMetricsResponse;
 const SendCustomAlarmMsgResponse = models.SendCustomAlarmMsgResponse;
+const GetMonitorDataRequest = models.GetMonitorDataRequest;
 const DescribePolicyConditionListConfigManualPeriodNum = models.DescribePolicyConditionListConfigManualPeriodNum;
 const DescribeBindingPolicyObjectListInstance = models.DescribeBindingPolicyObjectListInstance;
 const SendCustomAlarmMsgRequest = models.SendCustomAlarmMsgRequest;
@@ -210,6 +213,17 @@ class MonitorClient extends AbstractClient {
     DescribePolicyGroupInfo(req, cb) {
         let resp = new DescribePolicyGroupInfoResponse();
         this.request("DescribePolicyGroupInfo", req, resp, cb);
+    }
+
+    /**
+     * 查询云监控产品列表
+     * @param {DescribeProductListRequest} req
+     * @param {function(string, DescribeProductListResponse):void} cb
+     * @public
+     */
+    DescribeProductList(req, cb) {
+        let resp = new DescribeProductListResponse();
+        this.request("DescribeProductList", req, resp, cb);
     }
 
     /**

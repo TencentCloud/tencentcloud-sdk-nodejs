@@ -36,6 +36,7 @@ const WaybillOCRResponse = models.WaybillOCRResponse;
 const SingleInvoiceInfo = models.SingleInvoiceInfo;
 const TextFormula = models.TextFormula;
 const MLIDCardOCRRequest = models.MLIDCardOCRRequest;
+const VatInvoiceItem = models.VatInvoiceItem;
 const VehicleRegCertInfo = models.VehicleRegCertInfo;
 const VehicleLicenseOCRRequest = models.VehicleLicenseOCRRequest;
 const EnterpriseLicenseOCRResponse = models.EnterpriseLicenseOCRResponse;

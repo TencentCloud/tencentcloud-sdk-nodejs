@@ -489,6 +489,58 @@ class DescribeProductEventListRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeProductList返回参数结构体
+ * @class
+ */
+class DescribeProductListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 产品信息列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<ProductSimple> || null}
+         */
+        this.ProductList = null;
+
+        /**
+         * 产品总数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.ProductList) {
+            this.ProductList = new Array();
+            for (let z in params.ProductList) {
+                let obj = new ProductSimple();
+                obj.deserialize(params.ProductList[z]);
+                this.ProductList.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * 实例维度组合数组
  * @class
  */
@@ -2117,48 +2169,36 @@ class DescribeBasicAlarmListAlarms extends  AbstractModel {
 }
 
 /**
- * GetMonitorData请求参数结构体
+ * DescribeProductList请求参数结构体
  * @class
  */
-class GetMonitorDataRequest extends  AbstractModel {
+class DescribeProductListRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 命名空间，每个云产品会有一个命名空间
+         * 固定传值monitor
          * @type {string || null}
          */
-        this.Namespace = null;
+        this.Module = null;
 
         /**
-         * 指标名称，各个云产品的详细指标说明请参阅各个产品[监控接口](https://cloud.tencent.com/document/product/248/30384)文档
+         * 排序方式：DESC/ASC（区分大小写），默认值DESC
          * @type {string || null}
          */
-        this.MetricName = null;
+        this.Order = null;
 
         /**
-         * 实例对象的维度组合
-         * @type {Array.<Instance> || null}
-         */
-        this.Instances = null;
-
-        /**
-         * 监控统计周期。默认为取值为300，单位为s
+         * 分页查询的偏移量，默认值0
          * @type {number || null}
          */
-        this.Period = null;
+        this.Offset = null;
 
         /**
-         * 起始时间，如2018-09-22T19:51:23+08:00
-         * @type {string || null}
+         * 分页查询的每页数据量，默认值20
+         * @type {number || null}
          */
-        this.StartTime = null;
-
-        /**
-         * 结束时间，默认为当前时间。 EndTime不能小于StartTime
-         * @type {string || null}
-         */
-        this.EndTime = null;
+        this.Limit = null;
 
     }
 
@@ -2169,20 +2209,10 @@ class GetMonitorDataRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Namespace = 'Namespace' in params ? params.Namespace : null;
-        this.MetricName = 'MetricName' in params ? params.MetricName : null;
-
-        if (params.Instances) {
-            this.Instances = new Array();
-            for (let z in params.Instances) {
-                let obj = new Instance();
-                obj.deserialize(params.Instances[z]);
-                this.Instances.push(obj);
-            }
-        }
-        this.Period = 'Period' in params ? params.Period : null;
-        this.StartTime = 'StartTime' in params ? params.StartTime : null;
-        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.Module = 'Module' in params ? params.Module : null;
+        this.Order = 'Order' in params ? params.Order : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
 
     }
 }
@@ -3198,6 +3228,41 @@ class DescribeBasicAlarmListResponse extends  AbstractModel {
 }
 
 /**
+ * 云监控支持的产品简要信息
+ * @class
+ */
+class ProductSimple extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 命名空间
+         * @type {string || null}
+         */
+        this.Namespace = null;
+
+        /**
+         * 产品名称
+         * @type {string || null}
+         */
+        this.ProductName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Namespace = 'Namespace' in params ? params.Namespace : null;
+        this.ProductName = 'ProductName' in params ? params.ProductName : null;
+
+    }
+}
+
+/**
  * DescribeBindingPolicyObjectList接口的Dimension
  * @class
  */
@@ -3947,6 +4012,77 @@ class SendCustomAlarmMsgResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * GetMonitorData请求参数结构体
+ * @class
+ */
+class GetMonitorDataRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 命名空间，每个云产品会有一个命名空间
+         * @type {string || null}
+         */
+        this.Namespace = null;
+
+        /**
+         * 指标名称，各个云产品的详细指标说明请参阅各个产品[监控接口](https://cloud.tencent.com/document/product/248/30384)文档
+         * @type {string || null}
+         */
+        this.MetricName = null;
+
+        /**
+         * 实例对象的维度组合
+         * @type {Array.<Instance> || null}
+         */
+        this.Instances = null;
+
+        /**
+         * 监控统计周期。默认为取值为300，单位为s
+         * @type {number || null}
+         */
+        this.Period = null;
+
+        /**
+         * 起始时间，如2018-09-22T19:51:23+08:00
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * 结束时间，默认为当前时间。 EndTime不能小于StartTime
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Namespace = 'Namespace' in params ? params.Namespace : null;
+        this.MetricName = 'MetricName' in params ? params.MetricName : null;
+
+        if (params.Instances) {
+            this.Instances = new Array();
+            for (let z in params.Instances) {
+                let obj = new Instance();
+                obj.deserialize(params.Instances[z]);
+                this.Instances.push(obj);
+            }
+        }
+        this.Period = 'Period' in params ? params.Period : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
 
     }
 }
@@ -4837,6 +4973,7 @@ module.exports = {
     DescribeAccidentEventListAlarms: DescribeAccidentEventListAlarms,
     CreatePolicyGroupEventCondition: CreatePolicyGroupEventCondition,
     DescribeProductEventListRequest: DescribeProductEventListRequest,
+    DescribeProductListResponse: DescribeProductListResponse,
     Instance: Instance,
     DescribeProductEventListEvents: DescribeProductEventListEvents,
     BindingPolicyObjectDimension: BindingPolicyObjectDimension,
@@ -4856,7 +4993,7 @@ module.exports = {
     DimensionsDesc: DimensionsDesc,
     DescribePolicyGroupListGroup: DescribePolicyGroupListGroup,
     DescribeBasicAlarmListAlarms: DescribeBasicAlarmListAlarms,
-    GetMonitorDataRequest: GetMonitorDataRequest,
+    DescribeProductListRequest: DescribeProductListRequest,
     PeriodsSt: PeriodsSt,
     DescribeAccidentEventListRequest: DescribeAccidentEventListRequest,
     DescribeProductEventListOverView: DescribeProductEventListOverView,
@@ -4874,6 +5011,7 @@ module.exports = {
     DescribeProductEventListDimensions: DescribeProductEventListDimensions,
     DescribePolicyGroupInfoResponse: DescribePolicyGroupInfoResponse,
     DescribeBasicAlarmListResponse: DescribeBasicAlarmListResponse,
+    ProductSimple: ProductSimple,
     DescribeBindingPolicyObjectListDimension: DescribeBindingPolicyObjectListDimension,
     DescribePolicyGroupInfoCondition: DescribePolicyGroupInfoCondition,
     UnBindingPolicyObjectResponse: UnBindingPolicyObjectResponse,
@@ -4887,6 +5025,7 @@ module.exports = {
     DescribePolicyGroupInfoEventCondition: DescribePolicyGroupInfoEventCondition,
     DescribeBaseMetricsResponse: DescribeBaseMetricsResponse,
     SendCustomAlarmMsgResponse: SendCustomAlarmMsgResponse,
+    GetMonitorDataRequest: GetMonitorDataRequest,
     DescribePolicyConditionListConfigManualPeriodNum: DescribePolicyConditionListConfigManualPeriodNum,
     DescribeBindingPolicyObjectListInstance: DescribeBindingPolicyObjectListInstance,
     SendCustomAlarmMsgRequest: SendCustomAlarmMsgRequest,

@@ -658,7 +658,7 @@ class ResetInstancesTypeRequest extends  AbstractModel {
         super();
 
         /**
-         * 一个或多个待操作的实例ID。可通过[`DescribeInstances`](https://cloud.tencent.com/document/api/213/15728)接口返回值中的`InstanceId`获取。本接口每次请求批量实例的上限为1。
+         * 一个或多个待操作的实例ID。可通过[`DescribeInstances`](https://cloud.tencent.com/document/api/213/15728)接口返回值中的`InstanceId`获取。本接口目前仅支持每次操作1个实例。
          * @type {Array.<string> || null}
          */
         this.InstanceIds = null;
@@ -1952,7 +1952,7 @@ Windows实例密码必须12~30位，不能以“/”开头且不包括用户名�
         this.Password = null;
 
         /**
-         * 待重置密码的实例操作系统的管理员账户。不得超过64个字符。
+         * 待重置密码的实例操作系统的用户名。不得超过64个字符。
          * @type {string || null}
          */
         this.UserName = null;
@@ -4188,7 +4188,7 @@ class Externals extends  AbstractModel {
         this.ReleaseAddress = null;
 
         /**
-         * 不支持的网络类型
+         * 不支持的网络类型，取值范围：<br><li>BASIC：基础网络<br><li>VPC1.0：私有网络VPC1.0
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<string> || null}
          */
@@ -5724,7 +5724,7 @@ class ModifyInstancesVpcAttributeRequest extends  AbstractModel {
         this.InstanceIds = null;
 
         /**
-         * 私有网络相关信息配置。通过该参数指定私有网络的ID，子网ID，私有网络ip等信息。当指定私有网络ID和子网ID（子网必须在实例所在的可用区）与指定实例所在私有网络不一致时，会将实例迁移至指定的私有网络的子网下。可通过`PrivateIpAddresses`指定私有网络子网IP，若需指定则所有已指定的实例均需要指定子网IP，此时`InstanceIds`与`PrivateIpAddresses`一一对应。不指定`PrivateIpAddresses`时随机分配私有网络子网IP。
+         * 私有网络相关信息配置，通过该参数指定私有网络的ID，子网ID，私有网络ip等信息。<br><li>当指定私有网络ID和子网ID（子网必须在实例所在的可用区）与指定实例所在私有网络不一致时，会将实例迁移至指定的私有网络的子网下。<br><li>可通过`PrivateIpAddresses`指定私有网络子网IP，若需指定则所有已指定的实例均需要指定子网IP，此时`InstanceIds`与`PrivateIpAddresses`一一对应。<br><li>不指定`PrivateIpAddresses`时随机分配私有网络子网IP。
          * @type {VirtualPrivateCloud || null}
          */
         this.VirtualPrivateCloud = null;

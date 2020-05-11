@@ -371,7 +371,7 @@ class DescribeSmsTemplateListResponse extends  AbstractModel {
         super();
 
         /**
-         * 获取短信签名信息响应
+         * 获取短信模板信息响应
          * @type {Array.<DescribeTemplateListStatus> || null}
          */
         this.DescribeTemplateStatusSet = null;

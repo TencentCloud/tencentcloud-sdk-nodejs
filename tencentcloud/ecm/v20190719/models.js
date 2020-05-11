@@ -3628,7 +3628,7 @@ class DeleteModuleRequest extends  AbstractModel {
         super();
 
         /**
-         * 模块ID。如：es-qn46snq8
+         * 模块ID。如：em-qn46snq8
          * @type {string || null}
          */
         this.ModuleId = null;
