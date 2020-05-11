@@ -1151,6 +1151,90 @@ class MLIDCardOCRRequest extends  AbstractModel {
 }
 
 /**
+ * 增值税发票项目明细
+ * @class
+ */
+class VatInvoiceItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 行号
+         * @type {string || null}
+         */
+        this.LineNo = null;
+
+        /**
+         * 名称
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 规格
+         * @type {string || null}
+         */
+        this.Spec = null;
+
+        /**
+         * 单位
+         * @type {string || null}
+         */
+        this.Unit = null;
+
+        /**
+         * 数量
+         * @type {string || null}
+         */
+        this.Quantity = null;
+
+        /**
+         * 单价
+         * @type {string || null}
+         */
+        this.UnitPrice = null;
+
+        /**
+         * 不含税金额
+         * @type {string || null}
+         */
+        this.AmountWithoutTax = null;
+
+        /**
+         * 税率
+         * @type {string || null}
+         */
+        this.TaxRate = null;
+
+        /**
+         * 税额
+         * @type {string || null}
+         */
+        this.TaxAmount = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LineNo = 'LineNo' in params ? params.LineNo : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Spec = 'Spec' in params ? params.Spec : null;
+        this.Unit = 'Unit' in params ? params.Unit : null;
+        this.Quantity = 'Quantity' in params ? params.Quantity : null;
+        this.UnitPrice = 'UnitPrice' in params ? params.UnitPrice : null;
+        this.AmountWithoutTax = 'AmountWithoutTax' in params ? params.AmountWithoutTax : null;
+        this.TaxRate = 'TaxRate' in params ? params.TaxRate : null;
+        this.TaxAmount = 'TaxAmount' in params ? params.TaxAmount : null;
+
+    }
+}
+
+/**
  * 机动车登记证书识别结果
  * @class
  */
@@ -7204,6 +7288,12 @@ class VatInvoiceOCRResponse extends  AbstractModel {
         this.VatInvoiceInfos = null;
 
         /**
+         * 明细条目。VatInvoiceInfos中关于明细项的具体条目。
+         * @type {Array.<VatInvoiceItem> || null}
+         */
+        this.Items = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -7225,6 +7315,15 @@ class VatInvoiceOCRResponse extends  AbstractModel {
                 let obj = new TextVatInvoice();
                 obj.deserialize(params.VatInvoiceInfos[z]);
                 this.VatInvoiceInfos.push(obj);
+            }
+        }
+
+        if (params.Items) {
+            this.Items = new Array();
+            for (let z in params.Items) {
+                let obj = new VatInvoiceItem();
+                obj.deserialize(params.Items[z]);
+                this.Items.push(obj);
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
@@ -7570,6 +7669,7 @@ module.exports = {
     SingleInvoiceInfo: SingleInvoiceInfo,
     TextFormula: TextFormula,
     MLIDCardOCRRequest: MLIDCardOCRRequest,
+    VatInvoiceItem: VatInvoiceItem,
     VehicleRegCertInfo: VehicleRegCertInfo,
     VehicleLicenseOCRRequest: VehicleLicenseOCRRequest,
     EnterpriseLicenseOCRResponse: EnterpriseLicenseOCRResponse,

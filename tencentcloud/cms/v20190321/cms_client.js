@@ -53,6 +53,7 @@ const RrectF = models.RrectF;
 const CreateFileSampleResponse = models.CreateFileSampleResponse;
 const LogoDetail = models.LogoDetail;
 const Logo = models.Logo;
+const PhoneDetect = models.PhoneDetect;
 const DeleteTextSampleRequest = models.DeleteTextSampleRequest;
 
 

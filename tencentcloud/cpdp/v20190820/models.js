@@ -2239,6 +2239,12 @@ class DeleteAgentTaxPaymentInfoRequest extends  AbstractModel {
          */
         this.BatchNum = null;
 
+        /**
+         * 接入环境。沙箱环境填sandbox
+         * @type {string || null}
+         */
+        this.Profile = null;
+
     }
 
     /**
@@ -2249,6 +2255,7 @@ class DeleteAgentTaxPaymentInfoRequest extends  AbstractModel {
             return;
         }
         this.BatchNum = 'BatchNum' in params ? params.BatchNum : null;
+        this.Profile = 'Profile' in params ? params.Profile : null;
 
     }
 }
@@ -2912,6 +2919,12 @@ class CreateAgentTaxPaymentInfosRequest extends  AbstractModel {
          */
         this.AgentTaxPaymentInfos = null;
 
+        /**
+         * 接入环境。沙箱环境填sandbox
+         * @type {string || null}
+         */
+        this.Profile = null;
+
     }
 
     /**
@@ -2935,6 +2948,7 @@ class CreateAgentTaxPaymentInfosRequest extends  AbstractModel {
                 this.AgentTaxPaymentInfos.push(obj);
             }
         }
+        this.Profile = 'Profile' in params ? params.Profile : null;
 
     }
 }
@@ -6141,6 +6155,12 @@ class QueryAgentTaxPaymentBatchRequest extends  AbstractModel {
          */
         this.BatchNum = null;
 
+        /**
+         * 接入环境。沙箱环境填sandbox
+         * @type {string || null}
+         */
+        this.Profile = null;
+
     }
 
     /**
@@ -6151,6 +6171,7 @@ class QueryAgentTaxPaymentBatchRequest extends  AbstractModel {
             return;
         }
         this.BatchNum = 'BatchNum' in params ? params.BatchNum : null;
+        this.Profile = 'Profile' in params ? params.Profile : null;
 
     }
 }
@@ -9946,6 +9967,12 @@ class ModifyAgentTaxPaymentInfoRequest extends  AbstractModel {
          */
         this.FileName = null;
 
+        /**
+         * 接入环境。沙箱环境填sandbox
+         * @type {string || null}
+         */
+        this.Profile = null;
+
     }
 
     /**
@@ -9958,6 +9985,7 @@ class ModifyAgentTaxPaymentInfoRequest extends  AbstractModel {
         this.BatchNum = 'BatchNum' in params ? params.BatchNum : null;
         this.RawElectronicCertUrl = 'RawElectronicCertUrl' in params ? params.RawElectronicCertUrl : null;
         this.FileName = 'FileName' in params ? params.FileName : null;
+        this.Profile = 'Profile' in params ? params.Profile : null;
 
     }
 }

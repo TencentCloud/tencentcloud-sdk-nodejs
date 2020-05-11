@@ -1394,7 +1394,7 @@ class Externals extends  AbstractModel {
         this.ReleaseAddress = null;
 
         /**
-         * 不支持的网络类型
+         * 不支持的网络类型，取值范围：<br><li>BASIC：基础网络<br><li>VPC1.0：私有网络VPC1.0
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<string> || null}
          */

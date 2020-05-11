@@ -389,6 +389,12 @@ class ImageData extends  AbstractModel {
         this.OCRDetect = null;
 
         /**
+         * 手机检测详情
+         * @type {PhoneDetect || null}
+         */
+        this.PhoneDetect = null;
+
+        /**
          * 图片涉政详情
          * @type {ImagePolityDetect || null}
          */
@@ -452,6 +458,12 @@ class ImageData extends  AbstractModel {
             let obj = new OCRDetect();
             obj.deserialize(params.OCRDetect)
             this.OCRDetect = obj;
+        }
+
+        if (params.PhoneDetect) {
+            let obj = new PhoneDetect();
+            obj.deserialize(params.PhoneDetect)
+            this.PhoneDetect = obj;
         }
 
         if (params.PolityDetect) {
@@ -2020,6 +2032,57 @@ class Logo extends  AbstractModel {
 }
 
 /**
+ * 手机模型识别检测
+ * @class
+ */
+class PhoneDetect extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 恶意类型
+100：正常
+21000：综合
+         * @type {number || null}
+         */
+        this.EvilType = null;
+
+        /**
+         * 处置判定 0：正常 1：可疑
+         * @type {number || null}
+         */
+        this.HitFlag = null;
+
+        /**
+         * 特征中文描述
+         * @type {Array.<string> || null}
+         */
+        this.Labels = null;
+
+        /**
+         * 分值范围 0-100，分数越高倾向越明显
+         * @type {number || null}
+         */
+        this.Score = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.EvilType = 'EvilType' in params ? params.EvilType : null;
+        this.HitFlag = 'HitFlag' in params ? params.HitFlag : null;
+        this.Labels = 'Labels' in params ? params.Labels : null;
+        this.Score = 'Score' in params ? params.Score : null;
+
+    }
+}
+
+/**
  * DeleteTextSample请求参数结构体
  * @class
  */
@@ -2085,6 +2148,7 @@ module.exports = {
     CreateFileSampleResponse: CreateFileSampleResponse,
     LogoDetail: LogoDetail,
     Logo: Logo,
+    PhoneDetect: PhoneDetect,
     DeleteTextSampleRequest: DeleteTextSampleRequest,
 
 }
