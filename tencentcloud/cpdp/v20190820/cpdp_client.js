@@ -54,6 +54,7 @@ const QueryAcctBindingResponse = models.QueryAcctBindingResponse;
 const QueryCommonTransferRechargeResponse = models.QueryCommonTransferRechargeResponse;
 const ApplyReWithdrawalResponse = models.ApplyReWithdrawalResponse;
 const ModifyAgentTaxPaymentInfoResponse = models.ModifyAgentTaxPaymentInfoResponse;
+const RegisterBillRequest = models.RegisterBillRequest;
 const CreateInvoiceItem = models.CreateInvoiceItem;
 const ApplyOutwardOrderData = models.ApplyOutwardOrderData;
 const ReviseMbrPropertyResponse = models.ReviseMbrPropertyResponse;
@@ -116,6 +117,7 @@ const QueryPayerinfoResult = models.QueryPayerinfoResult;
 const TransferItem = models.TransferItem;
 const QueryInvoiceResultData = models.QueryInvoiceResultData;
 const RegisterBillSupportWithdrawResponse = models.RegisterBillSupportWithdrawResponse;
+const RegisterBillResponse = models.RegisterBillResponse;
 const ApplyReWithdrawalRequest = models.ApplyReWithdrawalRequest;
 const UnbindRelateAcctResponse = models.UnbindRelateAcctResponse;
 const CheckAmountRequest = models.CheckAmountRequest;
@@ -761,6 +763,17 @@ class CpdpClient extends AbstractClient {
     UnifiedOrder(req, cb) {
         let resp = new UnifiedOrderResponse();
         this.request("UnifiedOrder", req, resp, cb);
+    }
+
+    /**
+     * 登记挂账(支持撤销)
+     * @param {RegisterBillRequest} req
+     * @param {function(string, RegisterBillResponse):void} cb
+     * @public
+     */
+    RegisterBill(req, cb) {
+        let resp = new RegisterBillResponse();
+        this.request("RegisterBill", req, resp, cb);
     }
 
     /**

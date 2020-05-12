@@ -561,7 +561,7 @@ class SpeechTranslateRequest extends  AbstractModel {
         this.IsEnd = null;
 
         /**
-         * 语音分片内容的base64字符串，音频内容应含有效并可识别的文本
+         * 语音分片内容进行 Base64 编码后的字符串。音频内容需包含有效并可识别的文本信息。
          * @type {string || null}
          */
         this.Data = null;

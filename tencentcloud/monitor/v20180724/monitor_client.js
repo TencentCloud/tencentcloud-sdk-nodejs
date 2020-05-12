@@ -24,6 +24,7 @@ const DescribeAccidentEventListAlarms = models.DescribeAccidentEventListAlarms;
 const CreatePolicyGroupEventCondition = models.CreatePolicyGroupEventCondition;
 const DescribeProductEventListRequest = models.DescribeProductEventListRequest;
 const DescribeProductListResponse = models.DescribeProductListResponse;
+const UnBindingAllPolicyObjectRequest = models.UnBindingAllPolicyObjectRequest;
 const Instance = models.Instance;
 const DescribeProductEventListEvents = models.DescribeProductEventListEvents;
 const BindingPolicyObjectDimension = models.BindingPolicyObjectDimension;
@@ -33,7 +34,7 @@ const CreatePolicyGroupCondition = models.CreatePolicyGroupCondition;
 const DescribePolicyGroupInfoReceiverInfo = models.DescribePolicyGroupInfoReceiverInfo;
 const BindingPolicyObjectRequest = models.BindingPolicyObjectRequest;
 const DescribeProductEventListEventsGroupInfo = models.DescribeProductEventListEventsGroupInfo;
-const PutMonitorDataRequest = models.PutMonitorDataRequest;
+const ModifyPolicyGroupRequest = models.ModifyPolicyGroupRequest;
 const DescribePolicyConditionListConfigManualPeriod = models.DescribePolicyConditionListConfigManualPeriod;
 const DescribePolicyConditionListEventMetric = models.DescribePolicyConditionListEventMetric;
 const DescribePolicyConditionListCondition = models.DescribePolicyConditionListCondition;
@@ -54,7 +55,7 @@ const DescribePolicyGroupInfoCallback = models.DescribePolicyGroupInfoCallback;
 const DescribeBindingPolicyObjectListInstanceGroup = models.DescribeBindingPolicyObjectListInstanceGroup;
 const DescribePolicyConditionListResponse = models.DescribePolicyConditionListResponse;
 const DescribePolicyConditionListConfigManualCalcType = models.DescribePolicyConditionListConfigManualCalcType;
-const UnBindingAllPolicyObjectRequest = models.UnBindingAllPolicyObjectRequest;
+const ModifyPolicyGroupResponse = models.ModifyPolicyGroupResponse;
 const PutMonitorDataResponse = models.PutMonitorDataResponse;
 const ReceiverInfo = models.ReceiverInfo;
 const ModifyAlarmReceiversRequest = models.ModifyAlarmReceiversRequest;
@@ -71,6 +72,7 @@ const DescribeBindingPolicyObjectListResponse = models.DescribeBindingPolicyObje
 const DescribePolicyGroupInfoConditionTpl = models.DescribePolicyGroupInfoConditionTpl;
 const DescribeBindingPolicyObjectListRequest = models.DescribeBindingPolicyObjectListRequest;
 const CreatePolicyGroupResponse = models.CreatePolicyGroupResponse;
+const PutMonitorDataRequest = models.PutMonitorDataRequest;
 const InstanceGroup = models.InstanceGroup;
 const DescribePolicyGroupInfoEventCondition = models.DescribePolicyGroupInfoEventCondition;
 const DescribeBaseMetricsResponse = models.DescribeBaseMetricsResponse;
@@ -78,7 +80,8 @@ const SendCustomAlarmMsgResponse = models.SendCustomAlarmMsgResponse;
 const GetMonitorDataRequest = models.GetMonitorDataRequest;
 const DescribePolicyConditionListConfigManualPeriodNum = models.DescribePolicyConditionListConfigManualPeriodNum;
 const DescribeBindingPolicyObjectListInstance = models.DescribeBindingPolicyObjectListInstance;
-const SendCustomAlarmMsgRequest = models.SendCustomAlarmMsgRequest;
+const ModifyPolicyGroupCondition = models.ModifyPolicyGroupCondition;
+const ModifyPolicyGroupEventCondition = models.ModifyPolicyGroupEventCondition;
 const DescribePolicyConditionListConfigManualContinueTime = models.DescribePolicyConditionListConfigManualContinueTime;
 const DescribePolicyGroupListRequest = models.DescribePolicyGroupListRequest;
 const DescribeAccidentEventListResponse = models.DescribeAccidentEventListResponse;
@@ -88,6 +91,7 @@ const Dimension = models.Dimension;
 const DataPoint = models.DataPoint;
 const UnBindingAllPolicyObjectResponse = models.UnBindingAllPolicyObjectResponse;
 const DescribePolicyConditionListConfigManualStatType = models.DescribePolicyConditionListConfigManualStatType;
+const SendCustomAlarmMsgRequest = models.SendCustomAlarmMsgRequest;
 const DescribeProductEventListEventsDimensions = models.DescribeProductEventListEventsDimensions;
 const DescribePolicyConditionListConfigManualCalcValue = models.DescribePolicyConditionListConfigManualCalcValue;
 const ModifyAlarmReceiversResponse = models.ModifyAlarmReceiversResponse;
@@ -262,20 +266,14 @@ class MonitorClient extends AbstractClient {
     }
 
     /**
-     * 默认接口请求频率限制：50次/秒。
-默认单租户指标上限：100个。
-单次上报最多 30 个指标/值对，请求返回错误时，请求中所有的指标/值均不会被保存。
-
-上报的时间戳为期望保存的时间戳，建议构造整数分钟时刻的时间戳。
-时间戳时间范围必须为当前时间到 300 秒前之间。
-同一 IP 指标对的数据需按分钟先后顺序上报。
-     * @param {PutMonitorDataRequest} req
-     * @param {function(string, PutMonitorDataResponse):void} cb
+     * 更新策略组
+     * @param {ModifyPolicyGroupRequest} req
+     * @param {function(string, ModifyPolicyGroupResponse):void} cb
      * @public
      */
-    PutMonitorData(req, cb) {
-        let resp = new PutMonitorDataResponse();
-        this.request("PutMonitorData", req, resp, cb);
+    ModifyPolicyGroup(req, cb) {
+        let resp = new ModifyPolicyGroupResponse();
+        this.request("ModifyPolicyGroup", req, resp, cb);
     }
 
     /**
@@ -298,6 +296,23 @@ class MonitorClient extends AbstractClient {
     UnBindingAllPolicyObject(req, cb) {
         let resp = new UnBindingAllPolicyObjectResponse();
         this.request("UnBindingAllPolicyObject", req, resp, cb);
+    }
+
+    /**
+     * 默认接口请求频率限制：50次/秒。
+默认单租户指标上限：100个。
+单次上报最多 30 个指标/值对，请求返回错误时，请求中所有的指标/值均不会被保存。
+
+上报的时间戳为期望保存的时间戳，建议构造整数分钟时刻的时间戳。
+时间戳时间范围必须为当前时间到 300 秒前之间。
+同一 IP 指标对的数据需按分钟先后顺序上报。
+     * @param {PutMonitorDataRequest} req
+     * @param {function(string, PutMonitorDataResponse):void} cb
+     * @public
+     */
+    PutMonitorData(req, cb) {
+        let resp = new PutMonitorDataResponse();
+        this.request("PutMonitorData", req, resp, cb);
     }
 
     /**

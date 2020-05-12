@@ -2539,6 +2539,153 @@ class ModifyAgentTaxPaymentInfoResponse extends  AbstractModel {
 }
 
 /**
+ * RegisterBill请求参数结构体
+ * @class
+ */
+class RegisterBillRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 请求类型此接口固定填：RegBillSupportWithdrawReq
+         * @type {string || null}
+         */
+        this.RequestType = null;
+
+        /**
+         * 商户号
+         * @type {string || null}
+         */
+        this.MerchantCode = null;
+
+        /**
+         * 支付渠道
+         * @type {string || null}
+         */
+        this.PayChannel = null;
+
+        /**
+         * 子渠道
+         * @type {number || null}
+         */
+        this.PayChannelSubId = null;
+
+        /**
+         * 交易订单号
+         * @type {string || null}
+         */
+        this.OrderId = null;
+
+        /**
+         * 父账户账号，资金汇总账号
+         * @type {string || null}
+         */
+        this.BankAccountNo = null;
+
+        /**
+         * 平台短号(银行分配)
+         * @type {string || null}
+         */
+        this.PlatformShortNo = null;
+
+        /**
+         * 聚鑫分配的安全ID
+         * @type {string || null}
+         */
+        this.MidasSecretId = null;
+
+        /**
+         * 聚鑫分配的支付主MidasAppId
+         * @type {string || null}
+         */
+        this.MidasAppId = null;
+
+        /**
+         * 计费签名
+         * @type {string || null}
+         */
+        this.MidasSignature = null;
+
+        /**
+         * 交易流水号
+         * @type {string || null}
+         */
+        this.TransSeqNo = null;
+
+        /**
+         * 暂未使用，默认传0.0
+         * @type {string || null}
+         */
+        this.TranFee = null;
+
+        /**
+         * 挂账金额
+         * @type {string || null}
+         */
+        this.OrderAmt = null;
+
+        /**
+         * 子账户账号
+         * @type {string || null}
+         */
+        this.BankSubAccountNo = null;
+
+        /**
+         * 交易网会员代码
+         * @type {string || null}
+         */
+        this.TranNetMemberCode = null;
+
+        /**
+         * 0,登记挂账，1，撤销挂账
+         * @type {string || null}
+         */
+        this.TranType = null;
+
+        /**
+         * 保留域
+         * @type {string || null}
+         */
+        this.ReservedMessage = null;
+
+        /**
+         * 备注
+         * @type {string || null}
+         */
+        this.Remark = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestType = 'RequestType' in params ? params.RequestType : null;
+        this.MerchantCode = 'MerchantCode' in params ? params.MerchantCode : null;
+        this.PayChannel = 'PayChannel' in params ? params.PayChannel : null;
+        this.PayChannelSubId = 'PayChannelSubId' in params ? params.PayChannelSubId : null;
+        this.OrderId = 'OrderId' in params ? params.OrderId : null;
+        this.BankAccountNo = 'BankAccountNo' in params ? params.BankAccountNo : null;
+        this.PlatformShortNo = 'PlatformShortNo' in params ? params.PlatformShortNo : null;
+        this.MidasSecretId = 'MidasSecretId' in params ? params.MidasSecretId : null;
+        this.MidasAppId = 'MidasAppId' in params ? params.MidasAppId : null;
+        this.MidasSignature = 'MidasSignature' in params ? params.MidasSignature : null;
+        this.TransSeqNo = 'TransSeqNo' in params ? params.TransSeqNo : null;
+        this.TranFee = 'TranFee' in params ? params.TranFee : null;
+        this.OrderAmt = 'OrderAmt' in params ? params.OrderAmt : null;
+        this.BankSubAccountNo = 'BankSubAccountNo' in params ? params.BankSubAccountNo : null;
+        this.TranNetMemberCode = 'TranNetMemberCode' in params ? params.TranNetMemberCode : null;
+        this.TranType = 'TranType' in params ? params.TranType : null;
+        this.ReservedMessage = 'ReservedMessage' in params ? params.ReservedMessage : null;
+        this.Remark = 'Remark' in params ? params.Remark : null;
+
+    }
+}
+
+/**
  * 发票开具明细
  * @class
  */
@@ -6498,6 +6645,55 @@ class RegisterBillSupportWithdrawResponse extends  AbstractModel {
         this.FrontSeqNo = 'FrontSeqNo' in params ? params.FrontSeqNo : null;
         this.CnsmrSeqNo = 'CnsmrSeqNo' in params ? params.CnsmrSeqNo : null;
         this.ReservedMsg = 'ReservedMsg' in params ? params.ReservedMsg : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * RegisterBill返回参数结构体
+ * @class
+ */
+class RegisterBillResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 银行流水号
+         * @type {string || null}
+         */
+        this.FrontSeqNo = null;
+
+        /**
+         * 保留字段
+         * @type {string || null}
+         */
+        this.ReservedMessage = null;
+
+        /**
+         * 请求类型
+         * @type {string || null}
+         */
+        this.RequestType = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FrontSeqNo = 'FrontSeqNo' in params ? params.FrontSeqNo : null;
+        this.ReservedMessage = 'ReservedMessage' in params ? params.ReservedMessage : null;
+        this.RequestType = 'RequestType' in params ? params.RequestType : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -11512,6 +11708,7 @@ module.exports = {
     QueryCommonTransferRechargeResponse: QueryCommonTransferRechargeResponse,
     ApplyReWithdrawalResponse: ApplyReWithdrawalResponse,
     ModifyAgentTaxPaymentInfoResponse: ModifyAgentTaxPaymentInfoResponse,
+    RegisterBillRequest: RegisterBillRequest,
     CreateInvoiceItem: CreateInvoiceItem,
     ApplyOutwardOrderData: ApplyOutwardOrderData,
     ReviseMbrPropertyResponse: ReviseMbrPropertyResponse,
@@ -11574,6 +11771,7 @@ module.exports = {
     TransferItem: TransferItem,
     QueryInvoiceResultData: QueryInvoiceResultData,
     RegisterBillSupportWithdrawResponse: RegisterBillSupportWithdrawResponse,
+    RegisterBillResponse: RegisterBillResponse,
     ApplyReWithdrawalRequest: ApplyReWithdrawalRequest,
     UnbindRelateAcctResponse: UnbindRelateAcctResponse,
     CheckAmountRequest: CheckAmountRequest,

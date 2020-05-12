@@ -541,6 +541,41 @@ class DescribeProductListResponse extends  AbstractModel {
 }
 
 /**
+ * UnBindingAllPolicyObject请求参数结构体
+ * @class
+ */
+class UnBindingAllPolicyObjectRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 固定值，为"monitor"
+         * @type {string || null}
+         */
+        this.Module = null;
+
+        /**
+         * 策略组id
+         * @type {number || null}
+         */
+        this.GroupId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Module = 'Module' in params ? params.Module : null;
+        this.GroupId = 'GroupId' in params ? params.GroupId : null;
+
+    }
+}
+
+/**
  * 实例维度组合数组
  * @class
  */
@@ -1299,36 +1334,60 @@ class DescribeProductEventListEventsGroupInfo extends  AbstractModel {
 }
 
 /**
- * PutMonitorData请求参数结构体
+ * ModifyPolicyGroup请求参数结构体
  * @class
  */
-class PutMonitorDataRequest extends  AbstractModel {
+class ModifyPolicyGroupRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 一组指标和数据
-         * @type {Array.<MetricDatum> || null}
-         */
-        this.Metrics = null;
-
-        /**
-         * 上报时自行指定的 IP
+         * 固定值，为"monitor"
          * @type {string || null}
          */
-        this.AnnounceIp = null;
+        this.Module = null;
 
         /**
-         * 上报时自行指定的时间戳
+         * 策略组id
          * @type {number || null}
          */
-        this.AnnounceTimestamp = null;
+        this.GroupId = null;
 
         /**
-         * 上报时自行指定的 IP 或 产品实例ID
+         * 告警类型
          * @type {string || null}
          */
-        this.AnnounceInstance = null;
+        this.ViewName = null;
+
+        /**
+         * 策略组名称
+         * @type {string || null}
+         */
+        this.GroupName = null;
+
+        /**
+         * 指标告警条件的且或关系，1表示且告警，所有指标告警条件都达到才告警，0表示或告警，任意指标告警条件达到都告警
+         * @type {number || null}
+         */
+        this.IsUnionRule = null;
+
+        /**
+         * 指标告警条件规则，不填表示删除已有的所有指标告警条件规则
+         * @type {Array.<ModifyPolicyGroupCondition> || null}
+         */
+        this.Conditions = null;
+
+        /**
+         * 事件告警条件，不填表示删除已有的事件告警条件
+         * @type {Array.<ModifyPolicyGroupEventCondition> || null}
+         */
+        this.EventConditions = null;
+
+        /**
+         * 模板策略组id
+         * @type {number || null}
+         */
+        this.ConditionTempGroupId = null;
 
     }
 
@@ -1339,18 +1398,30 @@ class PutMonitorDataRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.Module = 'Module' in params ? params.Module : null;
+        this.GroupId = 'GroupId' in params ? params.GroupId : null;
+        this.ViewName = 'ViewName' in params ? params.ViewName : null;
+        this.GroupName = 'GroupName' in params ? params.GroupName : null;
+        this.IsUnionRule = 'IsUnionRule' in params ? params.IsUnionRule : null;
 
-        if (params.Metrics) {
-            this.Metrics = new Array();
-            for (let z in params.Metrics) {
-                let obj = new MetricDatum();
-                obj.deserialize(params.Metrics[z]);
-                this.Metrics.push(obj);
+        if (params.Conditions) {
+            this.Conditions = new Array();
+            for (let z in params.Conditions) {
+                let obj = new ModifyPolicyGroupCondition();
+                obj.deserialize(params.Conditions[z]);
+                this.Conditions.push(obj);
             }
         }
-        this.AnnounceIp = 'AnnounceIp' in params ? params.AnnounceIp : null;
-        this.AnnounceTimestamp = 'AnnounceTimestamp' in params ? params.AnnounceTimestamp : null;
-        this.AnnounceInstance = 'AnnounceInstance' in params ? params.AnnounceInstance : null;
+
+        if (params.EventConditions) {
+            this.EventConditions = new Array();
+            for (let z in params.EventConditions) {
+                let obj = new ModifyPolicyGroupEventCondition();
+                obj.deserialize(params.EventConditions[z]);
+                this.EventConditions.push(obj);
+            }
+        }
+        this.ConditionTempGroupId = 'ConditionTempGroupId' in params ? params.ConditionTempGroupId : null;
 
     }
 }
@@ -2715,24 +2786,24 @@ class DescribePolicyConditionListConfigManualCalcType extends  AbstractModel {
 }
 
 /**
- * UnBindingAllPolicyObject请求参数结构体
+ * ModifyPolicyGroup返回参数结构体
  * @class
  */
-class UnBindingAllPolicyObjectRequest extends  AbstractModel {
+class ModifyPolicyGroupResponse extends  AbstractModel {
     constructor(){
         super();
-
-        /**
-         * 固定值，为"monitor"
-         * @type {string || null}
-         */
-        this.Module = null;
 
         /**
          * 策略组id
          * @type {number || null}
          */
         this.GroupId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
 
     }
 
@@ -2743,8 +2814,8 @@ class UnBindingAllPolicyObjectRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Module = 'Module' in params ? params.Module : null;
         this.GroupId = 'GroupId' in params ? params.GroupId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3242,10 +3313,17 @@ class ProductSimple extends  AbstractModel {
         this.Namespace = null;
 
         /**
-         * 产品名称
+         * 产品中文名称
          * @type {string || null}
          */
         this.ProductName = null;
+
+        /**
+         * 产品英文名称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ProductEnName = null;
 
     }
 
@@ -3258,6 +3336,7 @@ class ProductSimple extends  AbstractModel {
         }
         this.Namespace = 'Namespace' in params ? params.Namespace : null;
         this.ProductName = 'ProductName' in params ? params.ProductName : null;
+        this.ProductEnName = 'ProductEnName' in params ? params.ProductEnName : null;
 
     }
 }
@@ -3853,6 +3932,63 @@ class CreatePolicyGroupResponse extends  AbstractModel {
 }
 
 /**
+ * PutMonitorData请求参数结构体
+ * @class
+ */
+class PutMonitorDataRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 一组指标和数据
+         * @type {Array.<MetricDatum> || null}
+         */
+        this.Metrics = null;
+
+        /**
+         * 上报时自行指定的 IP
+         * @type {string || null}
+         */
+        this.AnnounceIp = null;
+
+        /**
+         * 上报时自行指定的时间戳
+         * @type {number || null}
+         */
+        this.AnnounceTimestamp = null;
+
+        /**
+         * 上报时自行指定的 IP 或 产品实例ID
+         * @type {string || null}
+         */
+        this.AnnounceInstance = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Metrics) {
+            this.Metrics = new Array();
+            for (let z in params.Metrics) {
+                let obj = new MetricDatum();
+                obj.deserialize(params.Metrics[z]);
+                this.Metrics.push(obj);
+            }
+        }
+        this.AnnounceIp = 'AnnounceIp' in params ? params.AnnounceIp : null;
+        this.AnnounceTimestamp = 'AnnounceTimestamp' in params ? params.AnnounceTimestamp : null;
+        this.AnnounceInstance = 'AnnounceInstance' in params ? params.AnnounceInstance : null;
+
+    }
+}
+
+/**
  * DescribeBasicAlarmList返回的Alarms里的InstanceGroup
  * @class
  */
@@ -4181,30 +4317,60 @@ class DescribeBindingPolicyObjectListInstance extends  AbstractModel {
 }
 
 /**
- * SendCustomAlarmMsg请求参数结构体
+ * 修改告警策略组传入的指标阈值条件
  * @class
  */
-class SendCustomAlarmMsgRequest extends  AbstractModel {
+class ModifyPolicyGroupCondition extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 接口模块名，当前取值monitor
-         * @type {string || null}
+         * 指标id
+         * @type {number || null}
          */
-        this.Module = null;
+        this.MetricId = null;
 
         /**
-         * 消息策略ID，在云监控自定义消息页面配置
-         * @type {string || null}
+         * 比较类型，1表示大于，2表示大于等于，3表示小于，4表示小于等于，5表示相等，6表示不相等
+         * @type {number || null}
          */
-        this.PolicyId = null;
+        this.CalcType = null;
 
         /**
-         * 用户想要发送的自定义消息内容
+         * 检测阈值
          * @type {string || null}
          */
-        this.Msg = null;
+        this.CalcValue = null;
+
+        /**
+         * 检测指标的数据周期
+         * @type {number || null}
+         */
+        this.CalcPeriod = null;
+
+        /**
+         * 持续周期个数
+         * @type {number || null}
+         */
+        this.ContinuePeriod = null;
+
+        /**
+         * 告警发送收敛类型。0连续告警，1指数告警
+         * @type {number || null}
+         */
+        this.AlarmNotifyType = null;
+
+        /**
+         * 告警发送周期单位秒。<0 不触发, 0 只触发一次, >0 每隔triggerTime秒触发一次
+         * @type {number || null}
+         */
+        this.AlarmNotifyPeriod = null;
+
+        /**
+         * 规则id，不填表示新增，填写了ruleId表示在已存在的规则基础上进行修改
+         * @type {number || null}
+         */
+        this.RuleId = null;
 
     }
 
@@ -4215,9 +4381,63 @@ class SendCustomAlarmMsgRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Module = 'Module' in params ? params.Module : null;
-        this.PolicyId = 'PolicyId' in params ? params.PolicyId : null;
-        this.Msg = 'Msg' in params ? params.Msg : null;
+        this.MetricId = 'MetricId' in params ? params.MetricId : null;
+        this.CalcType = 'CalcType' in params ? params.CalcType : null;
+        this.CalcValue = 'CalcValue' in params ? params.CalcValue : null;
+        this.CalcPeriod = 'CalcPeriod' in params ? params.CalcPeriod : null;
+        this.ContinuePeriod = 'ContinuePeriod' in params ? params.ContinuePeriod : null;
+        this.AlarmNotifyType = 'AlarmNotifyType' in params ? params.AlarmNotifyType : null;
+        this.AlarmNotifyPeriod = 'AlarmNotifyPeriod' in params ? params.AlarmNotifyPeriod : null;
+        this.RuleId = 'RuleId' in params ? params.RuleId : null;
+
+    }
+}
+
+/**
+ * 修改告警策略组传入的事件告警条件
+ * @class
+ */
+class ModifyPolicyGroupEventCondition extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 事件id
+         * @type {number || null}
+         */
+        this.EventId = null;
+
+        /**
+         * 告警发送收敛类型。0连续告警，1指数告警
+         * @type {number || null}
+         */
+        this.AlarmNotifyType = null;
+
+        /**
+         * 告警发送周期单位秒。<0 不触发, 0 只触发一次, >0 每隔triggerTime秒触发一次
+         * @type {number || null}
+         */
+        this.AlarmNotifyPeriod = null;
+
+        /**
+         * 规则id，不填表示新增，填写了ruleId表示在已存在的规则基础上进行修改
+         * @type {number || null}
+         */
+        this.RuleId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.EventId = 'EventId' in params ? params.EventId : null;
+        this.AlarmNotifyType = 'AlarmNotifyType' in params ? params.AlarmNotifyType : null;
+        this.AlarmNotifyPeriod = 'AlarmNotifyPeriod' in params ? params.AlarmNotifyPeriod : null;
+        this.RuleId = 'RuleId' in params ? params.RuleId : null;
 
     }
 }
@@ -4735,6 +4955,48 @@ class DescribePolicyConditionListConfigManualStatType extends  AbstractModel {
 }
 
 /**
+ * SendCustomAlarmMsg请求参数结构体
+ * @class
+ */
+class SendCustomAlarmMsgRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 接口模块名，当前取值monitor
+         * @type {string || null}
+         */
+        this.Module = null;
+
+        /**
+         * 消息策略ID，在云监控自定义消息页面配置
+         * @type {string || null}
+         */
+        this.PolicyId = null;
+
+        /**
+         * 用户想要发送的自定义消息内容
+         * @type {string || null}
+         */
+        this.Msg = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Module = 'Module' in params ? params.Module : null;
+        this.PolicyId = 'PolicyId' in params ? params.PolicyId : null;
+        this.Msg = 'Msg' in params ? params.Msg : null;
+
+    }
+}
+
+/**
  * DescribeProductEventList返回的Events的Dimensions
  * @class
  */
@@ -4974,6 +5236,7 @@ module.exports = {
     CreatePolicyGroupEventCondition: CreatePolicyGroupEventCondition,
     DescribeProductEventListRequest: DescribeProductEventListRequest,
     DescribeProductListResponse: DescribeProductListResponse,
+    UnBindingAllPolicyObjectRequest: UnBindingAllPolicyObjectRequest,
     Instance: Instance,
     DescribeProductEventListEvents: DescribeProductEventListEvents,
     BindingPolicyObjectDimension: BindingPolicyObjectDimension,
@@ -4983,7 +5246,7 @@ module.exports = {
     DescribePolicyGroupInfoReceiverInfo: DescribePolicyGroupInfoReceiverInfo,
     BindingPolicyObjectRequest: BindingPolicyObjectRequest,
     DescribeProductEventListEventsGroupInfo: DescribeProductEventListEventsGroupInfo,
-    PutMonitorDataRequest: PutMonitorDataRequest,
+    ModifyPolicyGroupRequest: ModifyPolicyGroupRequest,
     DescribePolicyConditionListConfigManualPeriod: DescribePolicyConditionListConfigManualPeriod,
     DescribePolicyConditionListEventMetric: DescribePolicyConditionListEventMetric,
     DescribePolicyConditionListCondition: DescribePolicyConditionListCondition,
@@ -5004,7 +5267,7 @@ module.exports = {
     DescribeBindingPolicyObjectListInstanceGroup: DescribeBindingPolicyObjectListInstanceGroup,
     DescribePolicyConditionListResponse: DescribePolicyConditionListResponse,
     DescribePolicyConditionListConfigManualCalcType: DescribePolicyConditionListConfigManualCalcType,
-    UnBindingAllPolicyObjectRequest: UnBindingAllPolicyObjectRequest,
+    ModifyPolicyGroupResponse: ModifyPolicyGroupResponse,
     PutMonitorDataResponse: PutMonitorDataResponse,
     ReceiverInfo: ReceiverInfo,
     ModifyAlarmReceiversRequest: ModifyAlarmReceiversRequest,
@@ -5021,6 +5284,7 @@ module.exports = {
     DescribePolicyGroupInfoConditionTpl: DescribePolicyGroupInfoConditionTpl,
     DescribeBindingPolicyObjectListRequest: DescribeBindingPolicyObjectListRequest,
     CreatePolicyGroupResponse: CreatePolicyGroupResponse,
+    PutMonitorDataRequest: PutMonitorDataRequest,
     InstanceGroup: InstanceGroup,
     DescribePolicyGroupInfoEventCondition: DescribePolicyGroupInfoEventCondition,
     DescribeBaseMetricsResponse: DescribeBaseMetricsResponse,
@@ -5028,7 +5292,8 @@ module.exports = {
     GetMonitorDataRequest: GetMonitorDataRequest,
     DescribePolicyConditionListConfigManualPeriodNum: DescribePolicyConditionListConfigManualPeriodNum,
     DescribeBindingPolicyObjectListInstance: DescribeBindingPolicyObjectListInstance,
-    SendCustomAlarmMsgRequest: SendCustomAlarmMsgRequest,
+    ModifyPolicyGroupCondition: ModifyPolicyGroupCondition,
+    ModifyPolicyGroupEventCondition: ModifyPolicyGroupEventCondition,
     DescribePolicyConditionListConfigManualContinueTime: DescribePolicyConditionListConfigManualContinueTime,
     DescribePolicyGroupListRequest: DescribePolicyGroupListRequest,
     DescribeAccidentEventListResponse: DescribeAccidentEventListResponse,
@@ -5038,6 +5303,7 @@ module.exports = {
     DataPoint: DataPoint,
     UnBindingAllPolicyObjectResponse: UnBindingAllPolicyObjectResponse,
     DescribePolicyConditionListConfigManualStatType: DescribePolicyConditionListConfigManualStatType,
+    SendCustomAlarmMsgRequest: SendCustomAlarmMsgRequest,
     DescribeProductEventListEventsDimensions: DescribeProductEventListEventsDimensions,
     DescribePolicyConditionListConfigManualCalcValue: DescribePolicyConditionListConfigManualCalcValue,
     ModifyAlarmReceiversResponse: ModifyAlarmReceiversResponse,
