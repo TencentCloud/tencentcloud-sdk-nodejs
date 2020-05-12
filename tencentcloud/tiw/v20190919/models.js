@@ -296,6 +296,12 @@ class DescribeOnlineRecordCallbackResponse extends  AbstractModel {
         this.Callback = null;
 
         /**
+         * 实时录制回调鉴权密钥
+         * @type {string || null}
+         */
+        this.CallbackKey = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -311,6 +317,7 @@ class DescribeOnlineRecordCallbackResponse extends  AbstractModel {
             return;
         }
         this.Callback = 'Callback' in params ? params.Callback : null;
+        this.CallbackKey = 'CallbackKey' in params ? params.CallbackKey : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -1255,6 +1262,12 @@ class DescribeTranscodeCallbackResponse extends  AbstractModel {
         this.Callback = null;
 
         /**
+         * 文档转码回调鉴权密钥
+         * @type {string || null}
+         */
+        this.CallbackKey = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -1270,6 +1283,7 @@ class DescribeTranscodeCallbackResponse extends  AbstractModel {
             return;
         }
         this.Callback = 'Callback' in params ? params.Callback : null;
+        this.CallbackKey = 'CallbackKey' in params ? params.CallbackKey : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }

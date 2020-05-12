@@ -5967,6 +5967,12 @@ class WebhookTrigger extends  AbstractModel {
          */
         this.Description = null;
 
+        /**
+         * 触发器所属命名空间 Id
+         * @type {number || null}
+         */
+        this.NamespaceId = null;
+
     }
 
     /**
@@ -5991,6 +5997,7 @@ class WebhookTrigger extends  AbstractModel {
         this.Enabled = 'Enabled' in params ? params.Enabled : null;
         this.Id = 'Id' in params ? params.Id : null;
         this.Description = 'Description' in params ? params.Description : null;
+        this.NamespaceId = 'NamespaceId' in params ? params.NamespaceId : null;
 
     }
 }
