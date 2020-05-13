@@ -90,6 +90,7 @@ class DescribeClusterSecurityResponse extends  AbstractModel {
 
         /**
          * 集群访问策略组
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<string> || null}
          */
         this.SecurityPolicy = null;
@@ -100,6 +101,13 @@ class DescribeClusterSecurityResponse extends  AbstractModel {
          * @type {string || null}
          */
         this.Kubeconfig = null;
+
+        /**
+         * 集群JnsGw的访问地址
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.JnsGwEndpoint = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -124,6 +132,7 @@ class DescribeClusterSecurityResponse extends  AbstractModel {
         this.PgwEndpoint = 'PgwEndpoint' in params ? params.PgwEndpoint : null;
         this.SecurityPolicy = 'SecurityPolicy' in params ? params.SecurityPolicy : null;
         this.Kubeconfig = 'Kubeconfig' in params ? params.Kubeconfig : null;
+        this.JnsGwEndpoint = 'JnsGwEndpoint' in params ? params.JnsGwEndpoint : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -166,6 +175,27 @@ class DeleteClusterInstancesResponse extends  AbstractModel {
         super();
 
         /**
+         * 删除成功的实例ID列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
+         */
+        this.SuccInstanceIds = null;
+
+        /**
+         * 删除失败的实例ID列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
+         */
+        this.FailedInstanceIds = null;
+
+        /**
+         * 未匹配到的实例ID列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
+         */
+        this.NotFoundInstanceIds = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -180,6 +210,9 @@ class DeleteClusterInstancesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.SuccInstanceIds = 'SuccInstanceIds' in params ? params.SuccInstanceIds : null;
+        this.FailedInstanceIds = 'FailedInstanceIds' in params ? params.FailedInstanceIds : null;
+        this.NotFoundInstanceIds = 'NotFoundInstanceIds' in params ? params.NotFoundInstanceIds : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -857,6 +890,12 @@ class ClusterAsGroup extends  AbstractModel {
          */
         this.Labels = null;
 
+        /**
+         * 创建时间
+         * @type {string || null}
+         */
+        this.CreatedTime = null;
+
     }
 
     /**
@@ -878,6 +917,7 @@ class ClusterAsGroup extends  AbstractModel {
                 this.Labels.push(obj);
             }
         }
+        this.CreatedTime = 'CreatedTime' in params ? params.CreatedTime : null;
 
     }
 }
@@ -1949,16 +1989,6 @@ class ExistedInstance extends  AbstractModel {
         this.CreatedTime = null;
 
         /**
-         * 实例计费模式。取值范围：
-PREPAID：表示预付费，即包年包月
-POSTPAID_BY_HOUR：表示后付费，即按量计费
-CDHPAID：CDH付费，即只对CDH计费，不对CDH上的实例计费。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.InstanceChargeType = null;
-
-        /**
          * 实例的CPU核数，单位：核。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
@@ -1986,6 +2016,20 @@ CDHPAID：CDH付费，即只对CDH计费，不对CDH上的实例计费。
          */
         this.InstanceType = null;
 
+        /**
+         * 伸缩组ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.AutoscalingGroupId = null;
+
+        /**
+         * 实例计费模式。取值范围： PREPAID：表示预付费，即包年包月 POSTPAID_BY_HOUR：表示后付费，即按量计费 CDHPAID：CDH付费，即只对CDH计费，不对CDH上的实例计费。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.InstanceChargeType = null;
+
     }
 
     /**
@@ -2003,11 +2047,12 @@ CDHPAID：CDH付费，即只对CDH计费，不对CDH上的实例计费。
         this.PrivateIpAddresses = 'PrivateIpAddresses' in params ? params.PrivateIpAddresses : null;
         this.PublicIpAddresses = 'PublicIpAddresses' in params ? params.PublicIpAddresses : null;
         this.CreatedTime = 'CreatedTime' in params ? params.CreatedTime : null;
-        this.InstanceChargeType = 'InstanceChargeType' in params ? params.InstanceChargeType : null;
         this.CPU = 'CPU' in params ? params.CPU : null;
         this.Memory = 'Memory' in params ? params.Memory : null;
         this.OsName = 'OsName' in params ? params.OsName : null;
         this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
+        this.AutoscalingGroupId = 'AutoscalingGroupId' in params ? params.AutoscalingGroupId : null;
+        this.InstanceChargeType = 'InstanceChargeType' in params ? params.InstanceChargeType : null;
 
     }
 }
@@ -2234,30 +2279,35 @@ class DataDisk extends  AbstractModel {
 
         /**
          * 云盘类型
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.DiskType = null;
 
         /**
          * 文件系统(ext3/ext4/xfs)
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.FileSystem = null;
 
         /**
          * 云盘大小(G）
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.DiskSize = null;
 
         /**
          * 是否自动化格式盘并挂载
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {boolean || null}
          */
         this.AutoFormatAndMount = null;
 
         /**
          * 挂载目录
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.MountTarget = null;
@@ -2470,6 +2520,20 @@ class Instance extends  AbstractModel {
          */
         this.LanIP = null;
 
+        /**
+         * 资源池ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.NodePoolId = null;
+
+        /**
+         * 自动伸缩组ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.AutoscalingGroupId = null;
+
     }
 
     /**
@@ -2492,6 +2556,8 @@ class Instance extends  AbstractModel {
         }
         this.CreatedTime = 'CreatedTime' in params ? params.CreatedTime : null;
         this.LanIP = 'LanIP' in params ? params.LanIP : null;
+        this.NodePoolId = 'NodePoolId' in params ? params.NodePoolId : null;
+        this.AutoscalingGroupId = 'AutoscalingGroupId' in params ? params.AutoscalingGroupId : null;
 
     }
 }
@@ -3764,6 +3830,34 @@ class ClusterAsGroupOption extends  AbstractModel {
          */
         this.IgnoreDaemonSetsUtilization = null;
 
+        /**
+         * CA做健康性判断的个数，默认3，即超过OkTotalUnreadyCount个数后，CA会进行健康性判断。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.OkTotalUnreadyCount = null;
+
+        /**
+         * 未就绪节点的最大百分比，此后CA会停止操作
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.MaxTotalUnreadyPercentage = null;
+
+        /**
+         * 表示未准备就绪的节点在有资格进行缩减之前应该停留多长时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.ScaleDownUnreadyTime = null;
+
+        /**
+         * CA删除未在Kubernetes中注册的节点之前等待的时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.UnregisteredNodeRemovalTime = null;
+
     }
 
     /**
@@ -3782,6 +3876,10 @@ class ClusterAsGroupOption extends  AbstractModel {
         this.SkipNodesWithLocalStorage = 'SkipNodesWithLocalStorage' in params ? params.SkipNodesWithLocalStorage : null;
         this.SkipNodesWithSystemPods = 'SkipNodesWithSystemPods' in params ? params.SkipNodesWithSystemPods : null;
         this.IgnoreDaemonSetsUtilization = 'IgnoreDaemonSetsUtilization' in params ? params.IgnoreDaemonSetsUtilization : null;
+        this.OkTotalUnreadyCount = 'OkTotalUnreadyCount' in params ? params.OkTotalUnreadyCount : null;
+        this.MaxTotalUnreadyPercentage = 'MaxTotalUnreadyPercentage' in params ? params.MaxTotalUnreadyPercentage : null;
+        this.ScaleDownUnreadyTime = 'ScaleDownUnreadyTime' in params ? params.ScaleDownUnreadyTime : null;
+        this.UnregisteredNodeRemovalTime = 'UnregisteredNodeRemovalTime' in params ? params.UnregisteredNodeRemovalTime : null;
 
     }
 }
@@ -4385,18 +4483,21 @@ class InstanceAdvancedSettings extends  AbstractModel {
 
         /**
          * 数据盘挂载点, 默认不挂载数据盘. 已格式化的 ext3，ext4，xfs 文件系统的数据盘将直接挂载，其他文件系统或未格式化的数据盘将自动格式化为ext4 并挂载，请注意备份数据! 无数据盘或有多块数据盘的云主机此设置不生效。
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.MountTarget = null;
 
         /**
          * dockerd --graph 指定值, 默认为 /var/lib/docker
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.DockerGraphPath = null;
 
         /**
          * base64 编码的用户脚本, 此脚本会在 k8s 组件运行后执行, 需要用户保证脚本的可重入及重试逻辑, 脚本及其生成的日志文件可在节点的 /data/ccs_userscript/ 路径查看, 如果要求节点需要在进行初始化完成后才可加入调度, 可配合 unschedulable 参数使用, 在 userScript 最后初始化完成后, 添加 kubectl uncordon nodename --kubeconfig=/root/.kube/config 命令使节点加入调度
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.UserScript = null;
@@ -4409,18 +4510,21 @@ class InstanceAdvancedSettings extends  AbstractModel {
 
         /**
          * 节点Label数组
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<Label> || null}
          */
         this.Labels = null;
 
         /**
          * 数据盘相关信息
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<DataDisk> || null}
          */
         this.DataDisks = null;
 
         /**
          * 节点相关的自定义参数信息
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {InstanceExtraArgs || null}
          */
         this.ExtraArgs = null;
@@ -4572,7 +4676,7 @@ class DescribeClusterAsGroupsResponse extends  AbstractModel {
 
         /**
          * 集群关联的伸缩组列表
-         * @type {ClusterAsGroup || null}
+         * @type {Array.<ClusterAsGroup> || null}
          */
         this.ClusterAsGroupSet = null;
 
@@ -4594,9 +4698,12 @@ class DescribeClusterAsGroupsResponse extends  AbstractModel {
         this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
 
         if (params.ClusterAsGroupSet) {
-            let obj = new ClusterAsGroup();
-            obj.deserialize(params.ClusterAsGroupSet)
-            this.ClusterAsGroupSet = obj;
+            this.ClusterAsGroupSet = new Array();
+            for (let z in params.ClusterAsGroupSet) {
+                let obj = new ClusterAsGroup();
+                obj.deserialize(params.ClusterAsGroupSet[z]);
+                this.ClusterAsGroupSet.push(obj);
+            }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 

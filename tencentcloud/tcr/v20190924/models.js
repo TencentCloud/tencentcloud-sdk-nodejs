@@ -6011,6 +6011,12 @@ class CreateWebhookTriggerResponse extends  AbstractModel {
         super();
 
         /**
+         * 新建的触发器
+         * @type {WebhookTrigger || null}
+         */
+        this.Trigger = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -6024,6 +6030,12 @@ class CreateWebhookTriggerResponse extends  AbstractModel {
     deserialize(params) {
         if (!params) {
             return;
+        }
+
+        if (params.Trigger) {
+            let obj = new WebhookTrigger();
+            obj.deserialize(params.Trigger)
+            this.Trigger = obj;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
