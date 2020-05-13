@@ -1352,7 +1352,7 @@ class DomainCertInfo extends  AbstractModel {
         this.DomainName = null;
 
         /**
-         * 证书状态
+         * 证书状态。
          * @type {number || null}
          */
         this.Status = null;

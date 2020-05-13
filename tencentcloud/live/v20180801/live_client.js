@@ -530,7 +530,7 @@ class LiveClient extends AbstractClient {
     }
 
     /**
-     * 获取域名证书信息
+     * 获取域名证书信息。
      * @param {DescribeLiveDomainCertRequest} req
      * @param {function(string, DescribeLiveDomainCertResponse):void} cb
      * @public
