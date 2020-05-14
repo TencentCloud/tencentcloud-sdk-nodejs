@@ -560,15 +560,16 @@ class DescribeImageTagsRequest extends  AbstractModel {
 }
 
 /**
- * ReleaseConfig返回参数结构体
+ * ModifyLaneRule返回参数结构体
  * @class
  */
-class ReleaseConfigResponse extends  AbstractModel {
+class ModifyLaneRuleResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * true：发布成功；false：发布失败
+         * 操作状态
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {boolean || null}
          */
         this.Result = null;
@@ -1415,6 +1416,76 @@ class DescribeConfigReleasesRequest extends  AbstractModel {
 }
 
 /**
+ * DeleteLane返回参数结构体
+ * @class
+ */
+class DeleteLaneResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * true / false
+         * @type {boolean || null}
+         */
+        this.Result = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Result = 'Result' in params ? params.Result : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifyLane返回参数结构体
+ * @class
+ */
+class ModifyLaneResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 操作状态
+         * @type {boolean || null}
+         */
+        this.Result = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Result = 'Result' in params ? params.Result : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * TSF配置项发布信息分页对象
  * @class
  */
@@ -1804,6 +1875,56 @@ class CreateServerlessGroupResponse extends  AbstractModel {
 }
 
 /**
+ * CreateLane请求参数结构体
+ * @class
+ */
+class CreateLaneRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 泳道名称
+         * @type {string || null}
+         */
+        this.LaneName = null;
+
+        /**
+         * 泳道备注
+         * @type {string || null}
+         */
+        this.Remark = null;
+
+        /**
+         * 泳道部署组信息
+         * @type {Array.<LaneGroup> || null}
+         */
+        this.LaneGroupList = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LaneName = 'LaneName' in params ? params.LaneName : null;
+        this.Remark = 'Remark' in params ? params.Remark : null;
+
+        if (params.LaneGroupList) {
+            this.LaneGroupList = new Array();
+            for (let z in params.LaneGroupList) {
+                let obj = new LaneGroup();
+                obj.deserialize(params.LaneGroupList[z]);
+                this.LaneGroupList.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * DeleteApplication返回参数结构体
  * @class
  */
@@ -2062,26 +2183,30 @@ class ModifyContainerReplicasRequest extends  AbstractModel {
 }
 
 /**
- * 微服务实例的分页内容
+ * ModifyLane请求参数结构体
  * @class
  */
-class TsfPageMsInstance extends  AbstractModel {
+class ModifyLaneRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 微服务实例总数目
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
+         * 泳道ID
+         * @type {string || null}
          */
-        this.TotalCount = null;
+        this.LaneId = null;
 
         /**
-         * 微服务实例列表内容
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {Array.<MsInstance> || null}
+         * 泳道名称
+         * @type {string || null}
          */
-        this.Content = null;
+        this.LaneName = null;
+
+        /**
+         * 备注
+         * @type {string || null}
+         */
+        this.Remark = null;
 
     }
 
@@ -2092,16 +2217,51 @@ class TsfPageMsInstance extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.LaneId = 'LaneId' in params ? params.LaneId : null;
+        this.LaneName = 'LaneName' in params ? params.LaneName : null;
+        this.Remark = 'Remark' in params ? params.Remark : null;
 
-        if (params.Content) {
-            this.Content = new Array();
-            for (let z in params.Content) {
-                let obj = new MsInstance();
-                obj.deserialize(params.Content[z]);
-                this.Content.push(obj);
-            }
+    }
+}
+
+/**
+ * DescribeLanes请求参数结构体
+ * @class
+ */
+class DescribeLanesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 每页展示的条数
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 翻页偏移量
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 搜索关键字
+         * @type {string || null}
+         */
+        this.SearchWord = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
         }
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.SearchWord = 'SearchWord' in params ? params.SearchWord : null;
 
     }
 }
@@ -3037,6 +3197,51 @@ class TsfPageConfig extends  AbstractModel {
 }
 
 /**
+ * 微服务实例的分页内容
+ * @class
+ */
+class TsfPageMsInstance extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 微服务实例总数目
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 微服务实例列表内容
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<MsInstance> || null}
+         */
+        this.Content = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.Content) {
+            this.Content = new Array();
+            for (let z in params.Content) {
+                let obj = new MsInstance();
+                obj.deserialize(params.Content[z]);
+                this.Content.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * Serverless部署组信息
  * @class
  */
@@ -3246,6 +3451,99 @@ class DescribeApplicationResponse extends  AbstractModel {
             this.Result = obj;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 泳道
+ * @class
+ */
+class LaneInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 泳道ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.LaneId = null;
+
+        /**
+         * 泳道名称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.LaneName = null;
+
+        /**
+         * 泳道备注
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Remark = null;
+
+        /**
+         * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * 更新时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.UpdateTime = null;
+
+        /**
+         * 泳道部署组
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<LaneGroup> || null}
+         */
+        this.LaneGroupList = null;
+
+        /**
+         * 是否入口应用
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.Entrance = null;
+
+        /**
+         * 泳道已经关联部署组的命名空间列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
+         */
+        this.NamespaceIdList = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LaneId = 'LaneId' in params ? params.LaneId : null;
+        this.LaneName = 'LaneName' in params ? params.LaneName : null;
+        this.Remark = 'Remark' in params ? params.Remark : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+
+        if (params.LaneGroupList) {
+            this.LaneGroupList = new Array();
+            for (let z in params.LaneGroupList) {
+                let obj = new LaneGroup();
+                obj.deserialize(params.LaneGroupList[z]);
+                this.LaneGroupList.push(obj);
+            }
+        }
+        this.Entrance = 'Entrance' in params ? params.Entrance : null;
+        this.NamespaceIdList = 'NamespaceIdList' in params ? params.NamespaceIdList : null;
 
     }
 }
@@ -3842,6 +4140,76 @@ class DescribePkgsRequest extends  AbstractModel {
         this.OrderType = 'OrderType' in params ? params.OrderType : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
+
+    }
+}
+
+/**
+ * ReleaseConfig返回参数结构体
+ * @class
+ */
+class ReleaseConfigResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * true：发布成功；false：发布失败
+         * @type {boolean || null}
+         */
+        this.Result = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Result = 'Result' in params ? params.Result : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * RemoveInstances请求参数结构体
+ * @class
+ */
+class RemoveInstancesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 集群 ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * 云主机 ID 列表
+         * @type {Array.<string> || null}
+         */
+        this.InstanceIdList = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.InstanceIdList = 'InstanceIdList' in params ? params.InstanceIdList : null;
 
     }
 }
@@ -4593,103 +4961,82 @@ class DescribeSimpleNamespacesRequest extends  AbstractModel {
 }
 
 /**
- * 部署组
+ * 泳道规则
  * @class
  */
-class SimpleGroup extends  AbstractModel {
+class LaneRule extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 部署组ID
+         * 泳道规则ID
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
-        this.GroupId = null;
+        this.RuleId = null;
 
         /**
-         * 部署组名称
+         * 泳道规则名称
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
-        this.GroupName = null;
+        this.RuleName = null;
 
         /**
-         * 应用ID
+         * 优先级
 注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
+         * @type {number || null}
          */
-        this.ApplicationId = null;
+        this.Priority = null;
 
         /**
-         * 应用名称
+         * 备注
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
-        this.ApplicationName = null;
+        this.Remark = null;
 
         /**
-         * 应用类型
+         * 泳道规则标签列表
 注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
+         * @type {Array.<LaneRuleTag> || null}
          */
-        this.ApplicationType = null;
+        this.RuleTagList = null;
 
         /**
-         * 集群ID
+         * 泳道规则标签关系
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
-        this.ClusterId = null;
+        this.RuleTagRelationship = null;
 
         /**
-         * 集群名称
+         * 泳道ID
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
-        this.ClusterName = null;
+        this.LaneId = null;
 
         /**
-         * 集群类型
+         * 开启状态
 注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
+         * @type {boolean || null}
          */
-        this.ClusterType = null;
+        this.Enable = null;
 
         /**
-         * 命名空间ID
+         * 创建时间
 注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
+         * @type {number || null}
          */
-        this.NamespaceId = null;
+        this.CreateTime = null;
 
         /**
-         * 命名空间名称
+         * 更新时间
 注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
+         * @type {number || null}
          */
-        this.NamespaceName = null;
-
-        /**
-         * 启动参数
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.StartupParameters = null;
-
-        /**
-         * 部署组资源类型
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.GroupResourceType = null;
-
-        /**
-         * 应用微服务类型
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.AppMicroServiceType = null;
+        this.UpdateTime = null;
 
     }
 
@@ -4700,19 +5047,24 @@ class SimpleGroup extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.GroupId = 'GroupId' in params ? params.GroupId : null;
-        this.GroupName = 'GroupName' in params ? params.GroupName : null;
-        this.ApplicationId = 'ApplicationId' in params ? params.ApplicationId : null;
-        this.ApplicationName = 'ApplicationName' in params ? params.ApplicationName : null;
-        this.ApplicationType = 'ApplicationType' in params ? params.ApplicationType : null;
-        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
-        this.ClusterName = 'ClusterName' in params ? params.ClusterName : null;
-        this.ClusterType = 'ClusterType' in params ? params.ClusterType : null;
-        this.NamespaceId = 'NamespaceId' in params ? params.NamespaceId : null;
-        this.NamespaceName = 'NamespaceName' in params ? params.NamespaceName : null;
-        this.StartupParameters = 'StartupParameters' in params ? params.StartupParameters : null;
-        this.GroupResourceType = 'GroupResourceType' in params ? params.GroupResourceType : null;
-        this.AppMicroServiceType = 'AppMicroServiceType' in params ? params.AppMicroServiceType : null;
+        this.RuleId = 'RuleId' in params ? params.RuleId : null;
+        this.RuleName = 'RuleName' in params ? params.RuleName : null;
+        this.Priority = 'Priority' in params ? params.Priority : null;
+        this.Remark = 'Remark' in params ? params.Remark : null;
+
+        if (params.RuleTagList) {
+            this.RuleTagList = new Array();
+            for (let z in params.RuleTagList) {
+                let obj = new LaneRuleTag();
+                obj.deserialize(params.RuleTagList[z]);
+                this.RuleTagList.push(obj);
+            }
+        }
+        this.RuleTagRelationship = 'RuleTagRelationship' in params ? params.RuleTagRelationship : null;
+        this.LaneId = 'LaneId' in params ? params.LaneId : null;
+        this.Enable = 'Enable' in params ? params.Enable : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
 
     }
 }
@@ -5017,6 +5369,84 @@ class DescribePublicConfigsResponse extends  AbstractModel {
             this.Result = obj;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifyLaneRule请求参数结构体
+ * @class
+ */
+class ModifyLaneRuleRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 泳道规则ID
+         * @type {string || null}
+         */
+        this.RuleId = null;
+
+        /**
+         * 泳道规则名称
+         * @type {string || null}
+         */
+        this.RuleName = null;
+
+        /**
+         * 泳道规则备注
+         * @type {string || null}
+         */
+        this.Remark = null;
+
+        /**
+         * 泳道规则标签列表
+         * @type {Array.<LaneRuleTag> || null}
+         */
+        this.RuleTagList = null;
+
+        /**
+         * 泳道规则标签关系
+         * @type {string || null}
+         */
+        this.RuleTagRelationship = null;
+
+        /**
+         * 泳道ID
+         * @type {string || null}
+         */
+        this.LaneId = null;
+
+        /**
+         * 开启状态
+         * @type {boolean || null}
+         */
+        this.Enable = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RuleId = 'RuleId' in params ? params.RuleId : null;
+        this.RuleName = 'RuleName' in params ? params.RuleName : null;
+        this.Remark = 'Remark' in params ? params.Remark : null;
+
+        if (params.RuleTagList) {
+            this.RuleTagList = new Array();
+            for (let z in params.RuleTagList) {
+                let obj = new LaneRuleTag();
+                obj.deserialize(params.RuleTagList[z]);
+                this.RuleTagList.push(obj);
+            }
+        }
+        this.RuleTagRelationship = 'RuleTagRelationship' in params ? params.RuleTagRelationship : null;
+        this.LaneId = 'LaneId' in params ? params.LaneId : null;
+        this.Enable = 'Enable' in params ? params.Enable : null;
 
     }
 }
@@ -7043,37 +7473,25 @@ class ImageTagsResult extends  AbstractModel {
 }
 
 /**
- * 	端口对象
+ * CreateLane返回参数结构体
  * @class
  */
-class ProtocolPort extends  AbstractModel {
+class CreateLaneResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * TCP UDP
+         * 泳道ID
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
-        this.Protocol = null;
+        this.Result = null;
 
         /**
-         * 服务端口
-         * @type {number || null}
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
          */
-        this.Port = null;
-
-        /**
-         * 容器端口
-         * @type {number || null}
-         */
-        this.TargetPort = null;
-
-        /**
-         * 主机端口
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.NodePort = null;
+        this.RequestId = null;
 
     }
 
@@ -7084,10 +7502,8 @@ class ProtocolPort extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Protocol = 'Protocol' in params ? params.Protocol : null;
-        this.Port = 'Port' in params ? params.Port : null;
-        this.TargetPort = 'TargetPort' in params ? params.TargetPort : null;
-        this.NodePort = 'NodePort' in params ? params.NodePort : null;
+        this.Result = 'Result' in params ? params.Result : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -8284,6 +8700,47 @@ false：操作失败。
 }
 
 /**
+ * DescribeLanes返回参数结构体
+ * @class
+ */
+class DescribeLanesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 泳道列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {LaneInfos || null}
+         */
+        this.Result = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Result) {
+            let obj = new LaneInfos();
+            obj.deserialize(params.Result)
+            this.Result = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * 部署组列表（应用下钻）
  * @class
  */
@@ -8323,6 +8780,99 @@ class ContainGroupResult extends  AbstractModel {
             }
         }
         this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+    }
+}
+
+/**
+ * 	端口对象
+ * @class
+ */
+class ProtocolPort extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * TCP UDP
+         * @type {string || null}
+         */
+        this.Protocol = null;
+
+        /**
+         * 服务端口
+         * @type {number || null}
+         */
+        this.Port = null;
+
+        /**
+         * 容器端口
+         * @type {number || null}
+         */
+        this.TargetPort = null;
+
+        /**
+         * 主机端口
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.NodePort = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Protocol = 'Protocol' in params ? params.Protocol : null;
+        this.Port = 'Port' in params ? params.Port : null;
+        this.TargetPort = 'TargetPort' in params ? params.TargetPort : null;
+        this.NodePort = 'NodePort' in params ? params.NodePort : null;
+
+    }
+}
+
+/**
+ * 泳道规则分页查询
+ * @class
+ */
+class LaneRules extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 总数
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 泳道规则列表
+         * @type {Array.<LaneRule> || null}
+         */
+        this.Content = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.Content) {
+            this.Content = new Array();
+            for (let z in params.Content) {
+                let obj = new LaneRule();
+                obj.deserialize(params.Content[z]);
+                this.Content.push(obj);
+            }
+        }
 
     }
 }
@@ -8673,6 +9223,42 @@ class RevocationPublicConfigResponse extends  AbstractModel {
          * true：撤销成功；false：撤销失败
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {boolean || null}
+         */
+        this.Result = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Result = 'Result' in params ? params.Result : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CreateLaneRule返回参数结构体
+ * @class
+ */
+class CreateLaneRuleResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 泳道规则Id
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
          */
         this.Result = null;
 
@@ -9134,6 +9720,83 @@ class AddInstancesRequest extends  AbstractModel {
 }
 
 /**
+ * 泳道规则标签
+ * @class
+ */
+class LaneRuleTag extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 标签ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.TagId = null;
+
+        /**
+         * 标签名
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.TagName = null;
+
+        /**
+         * 标签操作符
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.TagOperator = null;
+
+        /**
+         * 标签值
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.TagValue = null;
+
+        /**
+         * 泳道规则ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.LaneRuleId = null;
+
+        /**
+         * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * 更新时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.UpdateTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TagId = 'TagId' in params ? params.TagId : null;
+        this.TagName = 'TagName' in params ? params.TagName : null;
+        this.TagOperator = 'TagOperator' in params ? params.TagOperator : null;
+        this.TagValue = 'TagValue' in params ? params.TagValue : null;
+        this.LaneRuleId = 'LaneRuleId' in params ? params.LaneRuleId : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+
+    }
+}
+
+/**
  * RollbackConfig返回参数结构体
  * @class
  */
@@ -9454,6 +10117,131 @@ class DescribePublicConfigReleasesRequest extends  AbstractModel {
 }
 
 /**
+ * 部署组
+ * @class
+ */
+class SimpleGroup extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 部署组ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.GroupId = null;
+
+        /**
+         * 部署组名称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.GroupName = null;
+
+        /**
+         * 应用ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ApplicationId = null;
+
+        /**
+         * 应用名称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ApplicationName = null;
+
+        /**
+         * 应用类型
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ApplicationType = null;
+
+        /**
+         * 集群ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * 集群名称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ClusterName = null;
+
+        /**
+         * 集群类型
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ClusterType = null;
+
+        /**
+         * 命名空间ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.NamespaceId = null;
+
+        /**
+         * 命名空间名称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.NamespaceName = null;
+
+        /**
+         * 启动参数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.StartupParameters = null;
+
+        /**
+         * 部署组资源类型
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.GroupResourceType = null;
+
+        /**
+         * 应用微服务类型
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.AppMicroServiceType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.GroupId = 'GroupId' in params ? params.GroupId : null;
+        this.GroupName = 'GroupName' in params ? params.GroupName : null;
+        this.ApplicationId = 'ApplicationId' in params ? params.ApplicationId : null;
+        this.ApplicationName = 'ApplicationName' in params ? params.ApplicationName : null;
+        this.ApplicationType = 'ApplicationType' in params ? params.ApplicationType : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.ClusterName = 'ClusterName' in params ? params.ClusterName : null;
+        this.ClusterType = 'ClusterType' in params ? params.ClusterType : null;
+        this.NamespaceId = 'NamespaceId' in params ? params.NamespaceId : null;
+        this.NamespaceName = 'NamespaceName' in params ? params.NamespaceName : null;
+        this.StartupParameters = 'StartupParameters' in params ? params.StartupParameters : null;
+        this.GroupResourceType = 'GroupResourceType' in params ? params.GroupResourceType : null;
+        this.AppMicroServiceType = 'AppMicroServiceType' in params ? params.AppMicroServiceType : null;
+
+    }
+}
+
+/**
  * DeleteNamespace请求参数结构体
  * @class
  */
@@ -9489,24 +10277,36 @@ class DeleteNamespaceRequest extends  AbstractModel {
 }
 
 /**
- * RemoveInstances请求参数结构体
+ * DescribeLaneRules请求参数结构体
  * @class
  */
-class RemoveInstancesRequest extends  AbstractModel {
+class DescribeLaneRulesRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 集群 ID
-         * @type {string || null}
+         * 每页展示的条数
+         * @type {number || null}
          */
-        this.ClusterId = null;
+        this.Limit = null;
 
         /**
-         * 云主机 ID 列表
-         * @type {Array.<string> || null}
+         * 翻页偏移量
+         * @type {number || null}
          */
-        this.InstanceIdList = null;
+        this.Offset = null;
+
+        /**
+         * 搜索关键词
+         * @type {string || null}
+         */
+        this.SearchWord = null;
+
+        /**
+         * 泳道规则ID（用于精确搜索）
+         * @type {string || null}
+         */
+        this.RuleId = null;
 
     }
 
@@ -9517,8 +10317,10 @@ class RemoveInstancesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
-        this.InstanceIdList = 'InstanceIdList' in params ? params.InstanceIdList : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.SearchWord = 'SearchWord' in params ? params.SearchWord : null;
+        this.RuleId = 'RuleId' in params ? params.RuleId : null;
 
     }
 }
@@ -9566,24 +10368,24 @@ class DeployGroupRequest extends  AbstractModel {
 }
 
 /**
- * TSF机器实例分页对象
+ * 泳道分页查询
  * @class
  */
-class TsfPageInstance extends  AbstractModel {
+class LaneInfos extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 机器实例总数目
+         * 总数
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.TotalCount = null;
 
         /**
-         * 机器实例列表
+         * 泳道信息列表
 注意：此字段可能返回 null，表示取不到有效值。
-         * @type {Array.<Instance> || null}
+         * @type {Array.<LaneInfo> || null}
          */
         this.Content = null;
 
@@ -9601,7 +10403,7 @@ class TsfPageInstance extends  AbstractModel {
         if (params.Content) {
             this.Content = new Array();
             for (let z in params.Content) {
-                let obj = new Instance();
+                let obj = new LaneInfo();
                 obj.deserialize(params.Content[z]);
                 this.Content.push(obj);
             }
@@ -9734,6 +10536,70 @@ false：操作失败。
         }
         this.Result = 'Result' in params ? params.Result : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CreateLaneRule请求参数结构体
+ * @class
+ */
+class CreateLaneRuleRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 泳道规则名称
+         * @type {string || null}
+         */
+        this.RuleName = null;
+
+        /**
+         * 泳道规则备注
+         * @type {string || null}
+         */
+        this.Remark = null;
+
+        /**
+         * 泳道规则标签列表
+         * @type {Array.<LaneRuleTag> || null}
+         */
+        this.RuleTagList = null;
+
+        /**
+         * 泳道规则标签关系
+         * @type {string || null}
+         */
+        this.RuleTagRelationship = null;
+
+        /**
+         * 泳道Id
+         * @type {string || null}
+         */
+        this.LaneId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RuleName = 'RuleName' in params ? params.RuleName : null;
+        this.Remark = 'Remark' in params ? params.Remark : null;
+
+        if (params.RuleTagList) {
+            this.RuleTagList = new Array();
+            for (let z in params.RuleTagList) {
+                let obj = new LaneRuleTag();
+                obj.deserialize(params.RuleTagList[z]);
+                this.RuleTagList.push(obj);
+            }
+        }
+        this.RuleTagRelationship = 'RuleTagRelationship' in params ? params.RuleTagRelationship : null;
+        this.LaneId = 'LaneId' in params ? params.LaneId : null;
 
     }
 }
@@ -10079,6 +10945,51 @@ class DeletePkgsRequest extends  AbstractModel {
         }
         this.ApplicationId = 'ApplicationId' in params ? params.ApplicationId : null;
         this.PkgIds = 'PkgIds' in params ? params.PkgIds : null;
+
+    }
+}
+
+/**
+ * TSF机器实例分页对象
+ * @class
+ */
+class TsfPageInstance extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 机器实例总数目
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 机器实例列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<Instance> || null}
+         */
+        this.Content = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.Content) {
+            this.Content = new Array();
+            for (let z in params.Content) {
+                let obj = new Instance();
+                obj.deserialize(params.Content[z]);
+                this.Content.push(obj);
+            }
+        }
 
     }
 }
@@ -10540,6 +11451,47 @@ class DescribePublicConfigReleasesResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeLaneRules返回参数结构体
+ * @class
+ */
+class DescribeLaneRulesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 泳道规则列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {LaneRules || null}
+         */
+        this.Result = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Result) {
+            let obj = new LaneRules();
+            obj.deserialize(params.Result)
+            this.Result = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * CreateApplication返回参数结构体
  * @class
  */
@@ -10620,6 +11572,34 @@ class DescribeConfigSummaryRequest extends  AbstractModel {
         this.SearchWord = 'SearchWord' in params ? params.SearchWord : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
+
+    }
+}
+
+/**
+ * DeleteLane请求参数结构体
+ * @class
+ */
+class DeleteLaneRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 泳道Idl
+         * @type {string || null}
+         */
+        this.LaneId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LaneId = 'LaneId' in params ? params.LaneId : null;
 
     }
 }
@@ -10823,6 +11803,123 @@ class DescribeServerlessGroupResponse extends  AbstractModel {
 }
 
 /**
+ * 泳道部署组
+ * @class
+ */
+class LaneGroup extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 泳道ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.LaneId = null;
+
+        /**
+         * 部署组ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.GroupId = null;
+
+        /**
+         * 是否入口应用
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.Entrance = null;
+
+        /**
+         * 泳道部署组ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.LaneGroupId = null;
+
+        /**
+         * 部署组名
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.GroupName = null;
+
+        /**
+         * 应用ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ApplicationId = null;
+
+        /**
+         * 应用名
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ApplicationName = null;
+
+        /**
+         * 命名空间ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.NamespaceId = null;
+
+        /**
+         * 命名空间名称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.NamespaceName = null;
+
+        /**
+         * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * 更新时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.UpdateTime = null;
+
+        /**
+         * 集群类型
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ClusterType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LaneId = 'LaneId' in params ? params.LaneId : null;
+        this.GroupId = 'GroupId' in params ? params.GroupId : null;
+        this.Entrance = 'Entrance' in params ? params.Entrance : null;
+        this.LaneGroupId = 'LaneGroupId' in params ? params.LaneGroupId : null;
+        this.GroupName = 'GroupName' in params ? params.GroupName : null;
+        this.ApplicationId = 'ApplicationId' in params ? params.ApplicationId : null;
+        this.ApplicationName = 'ApplicationName' in params ? params.ApplicationName : null;
+        this.NamespaceId = 'NamespaceId' in params ? params.NamespaceId : null;
+        this.NamespaceName = 'NamespaceName' in params ? params.NamespaceName : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.ClusterType = 'ClusterType' in params ? params.ClusterType : null;
+
+    }
+}
+
+/**
  * 任务id
  * @class
  */
@@ -10962,7 +12059,7 @@ module.exports = {
     ExpandGroupRequest: ExpandGroupRequest,
     DeleteServerlessGroupRequest: DeleteServerlessGroupRequest,
     DescribeImageTagsRequest: DescribeImageTagsRequest,
-    ReleaseConfigResponse: ReleaseConfigResponse,
+    ModifyLaneRuleResponse: ModifyLaneRuleResponse,
     TsfPageSimpleGroup: TsfPageSimpleGroup,
     DescribePodInstancesResponse: DescribePodInstancesResponse,
     VmGroup: VmGroup,
@@ -10976,6 +12073,8 @@ module.exports = {
     CreateGroupRequest: CreateGroupRequest,
     ModifyMicroserviceRequest: ModifyMicroserviceRequest,
     DescribeConfigReleasesRequest: DescribeConfigReleasesRequest,
+    DeleteLaneResponse: DeleteLaneResponse,
+    ModifyLaneResponse: ModifyLaneResponse,
     TsfPageConfigRelease: TsfPageConfigRelease,
     CreateContainGroupResponse: CreateContainGroupResponse,
     DescribeContainerGroupDetailResponse: DescribeContainerGroupDetailResponse,
@@ -10984,6 +12083,7 @@ module.exports = {
     DescribeSimpleClustersResponse: DescribeSimpleClustersResponse,
     DescribePublicConfigReleaseLogsRequest: DescribePublicConfigReleaseLogsRequest,
     CreateServerlessGroupResponse: CreateServerlessGroupResponse,
+    CreateLaneRequest: CreateLaneRequest,
     DeleteApplicationResponse: DeleteApplicationResponse,
     StartGroupRequest: StartGroupRequest,
     DeployServerlessGroupResponse: DeployServerlessGroupResponse,
@@ -10991,7 +12091,8 @@ module.exports = {
     DescribeApplicationAttributeResponse: DescribeApplicationAttributeResponse,
     DescribeApplicationsResponse: DescribeApplicationsResponse,
     ModifyContainerReplicasRequest: ModifyContainerReplicasRequest,
-    TsfPageMsInstance: TsfPageMsInstance,
+    ModifyLaneRequest: ModifyLaneRequest,
+    DescribeLanesRequest: DescribeLanesRequest,
     DeleteMicroserviceRequest: DeleteMicroserviceRequest,
     CreatePublicConfigRequest: CreatePublicConfigRequest,
     RemoveInstancesResponse: RemoveInstancesResponse,
@@ -11012,8 +12113,10 @@ module.exports = {
     DescribeImageTagsResponse: DescribeImageTagsResponse,
     DeleteGroupRequest: DeleteGroupRequest,
     TsfPageConfig: TsfPageConfig,
+    TsfPageMsInstance: TsfPageMsInstance,
     ServerlessGroup: ServerlessGroup,
     DescribeApplicationResponse: DescribeApplicationResponse,
+    LaneInfo: LaneInfo,
     DescribeConfigReleaseLogsResponse: DescribeConfigReleaseLogsResponse,
     RevocationConfigResponse: RevocationConfigResponse,
     DescribeSimpleGroupsResponse: DescribeSimpleGroupsResponse,
@@ -11022,6 +12125,8 @@ module.exports = {
     DeleteNamespaceResponse: DeleteNamespaceResponse,
     CreateMicroserviceRequest: CreateMicroserviceRequest,
     DescribePkgsRequest: DescribePkgsRequest,
+    ReleaseConfigResponse: ReleaseConfigResponse,
+    RemoveInstancesRequest: RemoveInstancesRequest,
     ShrinkInstancesRequest: ShrinkInstancesRequest,
     ShrinkInstancesResponse: ShrinkInstancesResponse,
     DeleteImageTagsRequest: DeleteImageTagsRequest,
@@ -11037,11 +12142,12 @@ module.exports = {
     DescribeSimpleApplicationsRequest: DescribeSimpleApplicationsRequest,
     DescribeConfigResponse: DescribeConfigResponse,
     DescribeSimpleNamespacesRequest: DescribeSimpleNamespacesRequest,
-    SimpleGroup: SimpleGroup,
+    LaneRule: LaneRule,
     MsInstance: MsInstance,
     ExpandGroupResponse: ExpandGroupResponse,
     DescribeServerlessGroupsResponse: DescribeServerlessGroupsResponse,
     DescribePublicConfigsResponse: DescribePublicConfigsResponse,
+    ModifyLaneRuleRequest: ModifyLaneRuleRequest,
     AddInstancesResponse: AddInstancesResponse,
     DeleteApplicationRequest: DeleteApplicationRequest,
     RevocationPublicConfigRequest: RevocationPublicConfigRequest,
@@ -11074,7 +12180,7 @@ module.exports = {
     TsfPageApplication: TsfPageApplication,
     DescribeGroupRequest: DescribeGroupRequest,
     ImageTagsResult: ImageTagsResult,
-    ProtocolPort: ProtocolPort,
+    CreateLaneResponse: CreateLaneResponse,
     DescribeServerlessGroupRequest: DescribeServerlessGroupRequest,
     TsfPageVmGroup: TsfPageVmGroup,
     AddInstanceResult: AddInstanceResult,
@@ -11098,7 +12204,10 @@ module.exports = {
     DeployContainerGroupResponse: DeployContainerGroupResponse,
     CreatePublicConfigResponse: CreatePublicConfigResponse,
     DeleteMicroserviceResponse: DeleteMicroserviceResponse,
+    DescribeLanesResponse: DescribeLanesResponse,
     ContainGroupResult: ContainGroupResult,
+    ProtocolPort: ProtocolPort,
+    LaneRules: LaneRules,
     DescribeReleasedConfigResponse: DescribeReleasedConfigResponse,
     DescribeMicroservicesRequest: DescribeMicroservicesRequest,
     ShrinkGroupRequest: ShrinkGroupRequest,
@@ -11107,6 +12216,7 @@ module.exports = {
     AddClusterInstancesResponse: AddClusterInstancesResponse,
     PkgInfo: PkgInfo,
     RevocationPublicConfigResponse: RevocationPublicConfigResponse,
+    CreateLaneRuleResponse: CreateLaneRuleResponse,
     DescribeConfigReleaseLogsRequest: DescribeConfigReleaseLogsRequest,
     DescribeContainerGroupsResponse: DescribeContainerGroupsResponse,
     DescribeGroupsRequest: DescribeGroupsRequest,
@@ -11114,35 +12224,42 @@ module.exports = {
     TsfPageMicroservice: TsfPageMicroservice,
     DescribePublicConfigsRequest: DescribePublicConfigsRequest,
     AddInstancesRequest: AddInstancesRequest,
+    LaneRuleTag: LaneRuleTag,
     RollbackConfigResponse: RollbackConfigResponse,
     DescribeApplicationsRequest: DescribeApplicationsRequest,
     OperationInfoDetail: OperationInfoDetail,
     StartContainerGroupResponse: StartContainerGroupResponse,
     CreateApplicationRequest: CreateApplicationRequest,
     DescribePublicConfigReleasesRequest: DescribePublicConfigReleasesRequest,
+    SimpleGroup: SimpleGroup,
     DeleteNamespaceRequest: DeleteNamespaceRequest,
-    RemoveInstancesRequest: RemoveInstancesRequest,
+    DescribeLaneRulesRequest: DescribeLaneRulesRequest,
     DeployGroupRequest: DeployGroupRequest,
-    TsfPageInstance: TsfPageInstance,
+    LaneInfos: LaneInfos,
     CreateServerlessGroupRequest: CreateServerlessGroupRequest,
     DescribeMicroserviceResponse: DescribeMicroserviceResponse,
     DeleteGroupResponse: DeleteGroupResponse,
+    CreateLaneRuleRequest: CreateLaneRuleRequest,
     DescribeServerlessGroupsRequest: DescribeServerlessGroupsRequest,
     DeployContainerGroupRequest: DeployContainerGroupRequest,
     CosDownloadInfo: CosDownloadInfo,
     DeletePkgsRequest: DeletePkgsRequest,
+    TsfPageInstance: TsfPageInstance,
     ServerlessGroupPage: ServerlessGroupPage,
     DescribeConfigSummaryResponse: DescribeConfigSummaryResponse,
     CreateContainGroupRequest: CreateContainGroupRequest,
     ContainGroup: ContainGroup,
     DescribePublicConfigReleasesResponse: DescribePublicConfigReleasesResponse,
+    DescribeLaneRulesResponse: DescribeLaneRulesResponse,
     CreateApplicationResponse: CreateApplicationResponse,
     DescribeConfigSummaryRequest: DescribeConfigSummaryRequest,
+    DeleteLaneRequest: DeleteLaneRequest,
     DeployGroupResponse: DeployGroupResponse,
     ModifyContainerGroupResponse: ModifyContainerGroupResponse,
     ReleasePublicConfigResponse: ReleasePublicConfigResponse,
     ReleasePublicConfigRequest: ReleasePublicConfigRequest,
     DescribeServerlessGroupResponse: DescribeServerlessGroupResponse,
+    LaneGroup: LaneGroup,
     TaskId: TaskId,
     DescribeGroupInstancesRequest: DescribeGroupInstancesRequest,
     CreateGroupResponse: CreateGroupResponse,

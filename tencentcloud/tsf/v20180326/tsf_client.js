@@ -27,7 +27,7 @@ const CosCredentials = models.CosCredentials;
 const ExpandGroupRequest = models.ExpandGroupRequest;
 const DeleteServerlessGroupRequest = models.DeleteServerlessGroupRequest;
 const DescribeImageTagsRequest = models.DescribeImageTagsRequest;
-const ReleaseConfigResponse = models.ReleaseConfigResponse;
+const ModifyLaneRuleResponse = models.ModifyLaneRuleResponse;
 const TsfPageSimpleGroup = models.TsfPageSimpleGroup;
 const DescribePodInstancesResponse = models.DescribePodInstancesResponse;
 const VmGroup = models.VmGroup;
@@ -41,6 +41,8 @@ const StopContainerGroupResponse = models.StopContainerGroupResponse;
 const CreateGroupRequest = models.CreateGroupRequest;
 const ModifyMicroserviceRequest = models.ModifyMicroserviceRequest;
 const DescribeConfigReleasesRequest = models.DescribeConfigReleasesRequest;
+const DeleteLaneResponse = models.DeleteLaneResponse;
+const ModifyLaneResponse = models.ModifyLaneResponse;
 const TsfPageConfigRelease = models.TsfPageConfigRelease;
 const CreateContainGroupResponse = models.CreateContainGroupResponse;
 const DescribeContainerGroupDetailResponse = models.DescribeContainerGroupDetailResponse;
@@ -49,6 +51,7 @@ const DescribePublicConfigSummaryResponse = models.DescribePublicConfigSummaryRe
 const DescribeSimpleClustersResponse = models.DescribeSimpleClustersResponse;
 const DescribePublicConfigReleaseLogsRequest = models.DescribePublicConfigReleaseLogsRequest;
 const CreateServerlessGroupResponse = models.CreateServerlessGroupResponse;
+const CreateLaneRequest = models.CreateLaneRequest;
 const DeleteApplicationResponse = models.DeleteApplicationResponse;
 const StartGroupRequest = models.StartGroupRequest;
 const DeployServerlessGroupResponse = models.DeployServerlessGroupResponse;
@@ -56,7 +59,8 @@ const DescribeConfigsResponse = models.DescribeConfigsResponse;
 const DescribeApplicationAttributeResponse = models.DescribeApplicationAttributeResponse;
 const DescribeApplicationsResponse = models.DescribeApplicationsResponse;
 const ModifyContainerReplicasRequest = models.ModifyContainerReplicasRequest;
-const TsfPageMsInstance = models.TsfPageMsInstance;
+const ModifyLaneRequest = models.ModifyLaneRequest;
+const DescribeLanesRequest = models.DescribeLanesRequest;
 const DeleteMicroserviceRequest = models.DeleteMicroserviceRequest;
 const CreatePublicConfigRequest = models.CreatePublicConfigRequest;
 const RemoveInstancesResponse = models.RemoveInstancesResponse;
@@ -77,8 +81,10 @@ const ModifyUploadInfoResponse = models.ModifyUploadInfoResponse;
 const DescribeImageTagsResponse = models.DescribeImageTagsResponse;
 const DeleteGroupRequest = models.DeleteGroupRequest;
 const TsfPageConfig = models.TsfPageConfig;
+const TsfPageMsInstance = models.TsfPageMsInstance;
 const ServerlessGroup = models.ServerlessGroup;
 const DescribeApplicationResponse = models.DescribeApplicationResponse;
+const LaneInfo = models.LaneInfo;
 const DescribeConfigReleaseLogsResponse = models.DescribeConfigReleaseLogsResponse;
 const RevocationConfigResponse = models.RevocationConfigResponse;
 const DescribeSimpleGroupsResponse = models.DescribeSimpleGroupsResponse;
@@ -87,6 +93,8 @@ const DeletePublicConfigRequest = models.DeletePublicConfigRequest;
 const DeleteNamespaceResponse = models.DeleteNamespaceResponse;
 const CreateMicroserviceRequest = models.CreateMicroserviceRequest;
 const DescribePkgsRequest = models.DescribePkgsRequest;
+const ReleaseConfigResponse = models.ReleaseConfigResponse;
+const RemoveInstancesRequest = models.RemoveInstancesRequest;
 const ShrinkInstancesRequest = models.ShrinkInstancesRequest;
 const ShrinkInstancesResponse = models.ShrinkInstancesResponse;
 const DeleteImageTagsRequest = models.DeleteImageTagsRequest;
@@ -102,11 +110,12 @@ const TsfPageNamespace = models.TsfPageNamespace;
 const DescribeSimpleApplicationsRequest = models.DescribeSimpleApplicationsRequest;
 const DescribeConfigResponse = models.DescribeConfigResponse;
 const DescribeSimpleNamespacesRequest = models.DescribeSimpleNamespacesRequest;
-const SimpleGroup = models.SimpleGroup;
+const LaneRule = models.LaneRule;
 const MsInstance = models.MsInstance;
 const ExpandGroupResponse = models.ExpandGroupResponse;
 const DescribeServerlessGroupsResponse = models.DescribeServerlessGroupsResponse;
 const DescribePublicConfigsResponse = models.DescribePublicConfigsResponse;
+const ModifyLaneRuleRequest = models.ModifyLaneRuleRequest;
 const AddInstancesResponse = models.AddInstancesResponse;
 const DeleteApplicationRequest = models.DeleteApplicationRequest;
 const RevocationPublicConfigRequest = models.RevocationPublicConfigRequest;
@@ -139,7 +148,7 @@ const StopContainerGroupRequest = models.StopContainerGroupRequest;
 const TsfPageApplication = models.TsfPageApplication;
 const DescribeGroupRequest = models.DescribeGroupRequest;
 const ImageTagsResult = models.ImageTagsResult;
-const ProtocolPort = models.ProtocolPort;
+const CreateLaneResponse = models.CreateLaneResponse;
 const DescribeServerlessGroupRequest = models.DescribeServerlessGroupRequest;
 const TsfPageVmGroup = models.TsfPageVmGroup;
 const AddInstanceResult = models.AddInstanceResult;
@@ -163,7 +172,10 @@ const StartGroupResponse = models.StartGroupResponse;
 const DeployContainerGroupResponse = models.DeployContainerGroupResponse;
 const CreatePublicConfigResponse = models.CreatePublicConfigResponse;
 const DeleteMicroserviceResponse = models.DeleteMicroserviceResponse;
+const DescribeLanesResponse = models.DescribeLanesResponse;
 const ContainGroupResult = models.ContainGroupResult;
+const ProtocolPort = models.ProtocolPort;
+const LaneRules = models.LaneRules;
 const DescribeReleasedConfigResponse = models.DescribeReleasedConfigResponse;
 const DescribeMicroservicesRequest = models.DescribeMicroservicesRequest;
 const ShrinkGroupRequest = models.ShrinkGroupRequest;
@@ -172,6 +184,7 @@ const CreateConfigResponse = models.CreateConfigResponse;
 const AddClusterInstancesResponse = models.AddClusterInstancesResponse;
 const PkgInfo = models.PkgInfo;
 const RevocationPublicConfigResponse = models.RevocationPublicConfigResponse;
+const CreateLaneRuleResponse = models.CreateLaneRuleResponse;
 const DescribeConfigReleaseLogsRequest = models.DescribeConfigReleaseLogsRequest;
 const DescribeContainerGroupsResponse = models.DescribeContainerGroupsResponse;
 const DescribeGroupsRequest = models.DescribeGroupsRequest;
@@ -179,35 +192,42 @@ const ModifyContainerGroupRequest = models.ModifyContainerGroupRequest;
 const TsfPageMicroservice = models.TsfPageMicroservice;
 const DescribePublicConfigsRequest = models.DescribePublicConfigsRequest;
 const AddInstancesRequest = models.AddInstancesRequest;
+const LaneRuleTag = models.LaneRuleTag;
 const RollbackConfigResponse = models.RollbackConfigResponse;
 const DescribeApplicationsRequest = models.DescribeApplicationsRequest;
 const OperationInfoDetail = models.OperationInfoDetail;
 const StartContainerGroupResponse = models.StartContainerGroupResponse;
 const CreateApplicationRequest = models.CreateApplicationRequest;
 const DescribePublicConfigReleasesRequest = models.DescribePublicConfigReleasesRequest;
+const SimpleGroup = models.SimpleGroup;
 const DeleteNamespaceRequest = models.DeleteNamespaceRequest;
-const RemoveInstancesRequest = models.RemoveInstancesRequest;
+const DescribeLaneRulesRequest = models.DescribeLaneRulesRequest;
 const DeployGroupRequest = models.DeployGroupRequest;
-const TsfPageInstance = models.TsfPageInstance;
+const LaneInfos = models.LaneInfos;
 const CreateServerlessGroupRequest = models.CreateServerlessGroupRequest;
 const DescribeMicroserviceResponse = models.DescribeMicroserviceResponse;
 const DeleteGroupResponse = models.DeleteGroupResponse;
+const CreateLaneRuleRequest = models.CreateLaneRuleRequest;
 const DescribeServerlessGroupsRequest = models.DescribeServerlessGroupsRequest;
 const DeployContainerGroupRequest = models.DeployContainerGroupRequest;
 const CosDownloadInfo = models.CosDownloadInfo;
 const DeletePkgsRequest = models.DeletePkgsRequest;
+const TsfPageInstance = models.TsfPageInstance;
 const ServerlessGroupPage = models.ServerlessGroupPage;
 const DescribeConfigSummaryResponse = models.DescribeConfigSummaryResponse;
 const CreateContainGroupRequest = models.CreateContainGroupRequest;
 const ContainGroup = models.ContainGroup;
 const DescribePublicConfigReleasesResponse = models.DescribePublicConfigReleasesResponse;
+const DescribeLaneRulesResponse = models.DescribeLaneRulesResponse;
 const CreateApplicationResponse = models.CreateApplicationResponse;
 const DescribeConfigSummaryRequest = models.DescribeConfigSummaryRequest;
+const DeleteLaneRequest = models.DeleteLaneRequest;
 const DeployGroupResponse = models.DeployGroupResponse;
 const ModifyContainerGroupResponse = models.ModifyContainerGroupResponse;
 const ReleasePublicConfigResponse = models.ReleasePublicConfigResponse;
 const ReleasePublicConfigRequest = models.ReleasePublicConfigRequest;
 const DescribeServerlessGroupResponse = models.DescribeServerlessGroupResponse;
+const LaneGroup = models.LaneGroup;
 const TaskId = models.TaskId;
 const DescribeGroupInstancesRequest = models.DescribeGroupInstancesRequest;
 const CreateGroupResponse = models.CreateGroupResponse;
@@ -224,14 +244,14 @@ class TsfClient extends AbstractClient {
     }
     
     /**
-     * 停止容器部署组
-     * @param {StopContainerGroupRequest} req
-     * @param {function(string, StopContainerGroupResponse):void} cb
+     * 发布公共配置
+     * @param {ReleasePublicConfigRequest} req
+     * @param {function(string, ReleasePublicConfigResponse):void} cb
      * @public
      */
-    StopContainerGroup(req, cb) {
-        let resp = new StopContainerGroupResponse();
-        this.request("StopContainerGroup", req, resp, cb);
+    ReleasePublicConfig(req, cb) {
+        let resp = new ReleasePublicConfigResponse();
+        this.request("ReleasePublicConfig", req, resp, cb);
     }
 
     /**
@@ -279,14 +299,14 @@ class TsfClient extends AbstractClient {
     }
 
     /**
-     * 修改容器部署组实例数
-     * @param {ModifyContainerReplicasRequest} req
-     * @param {function(string, ModifyContainerReplicasResponse):void} cb
+     *  容器部署组详情
+     * @param {DescribeContainerGroupDetailRequest} req
+     * @param {function(string, DescribeContainerGroupDetailResponse):void} cb
      * @public
      */
-    ModifyContainerReplicas(req, cb) {
-        let resp = new ModifyContainerReplicasResponse();
-        this.request("ModifyContainerReplicas", req, resp, cb);
+    DescribeContainerGroupDetail(req, cb) {
+        let resp = new DescribeContainerGroupDetailResponse();
+        this.request("DescribeContainerGroupDetail", req, resp, cb);
     }
 
     /**
@@ -566,6 +586,28 @@ class TsfClient extends AbstractClient {
     }
 
     /**
+     * 停止容器部署组
+     * @param {StopContainerGroupRequest} req
+     * @param {function(string, StopContainerGroupResponse):void} cb
+     * @public
+     */
+    StopContainerGroup(req, cb) {
+        let resp = new StopContainerGroupResponse();
+        this.request("StopContainerGroup", req, resp, cb);
+    }
+
+    /**
+     * 发布配置
+     * @param {ReleaseConfigRequest} req
+     * @param {function(string, ReleaseConfigResponse):void} cb
+     * @public
+     */
+    ReleaseConfig(req, cb) {
+        let resp = new ReleaseConfigResponse();
+        this.request("ReleaseConfig", req, resp, cb);
+    }
+
+    /**
      * 虚拟机部署组添加实例
      * @param {ExpandGroupRequest} req
      * @param {function(string, ExpandGroupResponse):void} cb
@@ -574,6 +616,18 @@ class TsfClient extends AbstractClient {
     ExpandGroup(req, cb) {
         let resp = new ExpandGroupResponse();
         this.request("ExpandGroup", req, resp, cb);
+    }
+
+    /**
+     * 调用该接口和COS的上传接口后，需要调用此接口更新TSF中保存的程序包状态。
+调用此接口完成后，才标志上传包流程结束。
+     * @param {ModifyUploadInfoRequest} req
+     * @param {function(string, ModifyUploadInfoResponse):void} cb
+     * @public
+     */
+    ModifyUploadInfo(req, cb) {
+        let resp = new ModifyUploadInfoResponse();
+        this.request("ModifyUploadInfo", req, resp, cb);
     }
 
     /**
@@ -588,14 +642,14 @@ class TsfClient extends AbstractClient {
     }
 
     /**
-     *  容器部署组详情
-     * @param {DescribeContainerGroupDetailRequest} req
-     * @param {function(string, DescribeContainerGroupDetailResponse):void} cb
+     * 创建泳道规则
+     * @param {CreateLaneRuleRequest} req
+     * @param {function(string, CreateLaneRuleResponse):void} cb
      * @public
      */
-    DescribeContainerGroupDetail(req, cb) {
-        let resp = new DescribeContainerGroupDetailResponse();
-        this.request("DescribeContainerGroupDetail", req, resp, cb);
+    CreateLaneRule(req, cb) {
+        let resp = new CreateLaneRuleResponse();
+        this.request("CreateLaneRule", req, resp, cb);
     }
 
     /**
@@ -621,14 +675,14 @@ class TsfClient extends AbstractClient {
     }
 
     /**
-     * 修改微服务详情
-     * @param {ModifyMicroserviceRequest} req
-     * @param {function(string, ModifyMicroserviceResponse):void} cb
+     * 删除泳道
+     * @param {DeleteLaneRequest} req
+     * @param {function(string, DeleteLaneResponse):void} cb
      * @public
      */
-    ModifyMicroservice(req, cb) {
-        let resp = new ModifyMicroserviceResponse();
-        this.request("ModifyMicroservice", req, resp, cb);
+    DeleteLane(req, cb) {
+        let resp = new DeleteLaneResponse();
+        this.request("DeleteLane", req, resp, cb);
     }
 
     /**
@@ -665,6 +719,17 @@ class TsfClient extends AbstractClient {
     }
 
     /**
+     * 创建泳道
+     * @param {CreateLaneRequest} req
+     * @param {function(string, CreateLaneResponse):void} cb
+     * @public
+     */
+    CreateLane(req, cb) {
+        let resp = new CreateLaneResponse();
+        this.request("CreateLane", req, resp, cb);
+    }
+
+    /**
      * 撤回已发布的公共配置
      * @param {RevocationPublicConfigRequest} req
      * @param {function(string, RevocationPublicConfigResponse):void} cb
@@ -673,6 +738,17 @@ class TsfClient extends AbstractClient {
     RevocationPublicConfig(req, cb) {
         let resp = new RevocationPublicConfigResponse();
         this.request("RevocationPublicConfig", req, resp, cb);
+    }
+
+    /**
+     * 修改容器部署组实例数
+     * @param {ModifyContainerReplicasRequest} req
+     * @param {function(string, ModifyContainerReplicasResponse):void} cb
+     * @public
+     */
+    ModifyContainerReplicas(req, cb) {
+        let resp = new ModifyContainerReplicasResponse();
+        this.request("ModifyContainerReplicas", req, resp, cb);
     }
 
     /**
@@ -709,25 +785,25 @@ class TsfClient extends AbstractClient {
     }
 
     /**
-     * 发布公共配置
-     * @param {ReleasePublicConfigRequest} req
-     * @param {function(string, ReleasePublicConfigResponse):void} cb
+     * 查询泳道规则列表
+     * @param {DescribeLaneRulesRequest} req
+     * @param {function(string, DescribeLaneRulesResponse):void} cb
      * @public
      */
-    ReleasePublicConfig(req, cb) {
-        let resp = new ReleasePublicConfigResponse();
-        this.request("ReleasePublicConfig", req, resp, cb);
+    DescribeLaneRules(req, cb) {
+        let resp = new DescribeLaneRulesResponse();
+        this.request("DescribeLaneRules", req, resp, cb);
     }
 
     /**
-     * 发布配置
-     * @param {ReleaseConfigRequest} req
-     * @param {function(string, ReleaseConfigResponse):void} cb
+     * 更新泳道规则
+     * @param {ModifyLaneRuleRequest} req
+     * @param {function(string, ModifyLaneRuleResponse):void} cb
      * @public
      */
-    ReleaseConfig(req, cb) {
-        let resp = new ReleaseConfigResponse();
-        this.request("ReleaseConfig", req, resp, cb);
+    ModifyLaneRule(req, cb) {
+        let resp = new ModifyLaneRuleResponse();
+        this.request("ModifyLaneRule", req, resp, cb);
     }
 
     /**
@@ -775,6 +851,17 @@ class TsfClient extends AbstractClient {
     }
 
     /**
+     * 更新泳道信息
+     * @param {ModifyLaneRequest} req
+     * @param {function(string, ModifyLaneResponse):void} cb
+     * @public
+     */
+    ModifyLane(req, cb) {
+        let resp = new ModifyLaneResponse();
+        this.request("ModifyLane", req, resp, cb);
+    }
+
+    /**
      * 查询简单命名空间列表 
      * @param {DescribeSimpleNamespacesRequest} req
      * @param {function(string, DescribeSimpleNamespacesResponse):void} cb
@@ -786,15 +873,14 @@ class TsfClient extends AbstractClient {
     }
 
     /**
-     * 调用该接口和COS的上传接口后，需要调用此接口更新TSF中保存的程序包状态。
-调用此接口完成后，才标志上传包流程结束。
-     * @param {ModifyUploadInfoRequest} req
-     * @param {function(string, ModifyUploadInfoResponse):void} cb
+     * 查询泳道列表
+     * @param {DescribeLanesRequest} req
+     * @param {function(string, DescribeLanesResponse):void} cb
      * @public
      */
-    ModifyUploadInfo(req, cb) {
-        let resp = new ModifyUploadInfoResponse();
-        this.request("ModifyUploadInfo", req, resp, cb);
+    DescribeLanes(req, cb) {
+        let resp = new DescribeLanesResponse();
+        this.request("DescribeLanes", req, resp, cb);
     }
 
     /**
@@ -828,6 +914,17 @@ class TsfClient extends AbstractClient {
     DeployServerlessGroup(req, cb) {
         let resp = new DeployServerlessGroupResponse();
         this.request("DeployServerlessGroup", req, resp, cb);
+    }
+
+    /**
+     * 修改微服务详情
+     * @param {ModifyMicroserviceRequest} req
+     * @param {function(string, ModifyMicroserviceResponse):void} cb
+     * @public
+     */
+    ModifyMicroservice(req, cb) {
+        let resp = new ModifyMicroserviceResponse();
+        this.request("ModifyMicroservice", req, resp, cb);
     }
 
     /**

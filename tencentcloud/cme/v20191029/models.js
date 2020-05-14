@@ -1423,12 +1423,6 @@ class ModifyMaterialRequest extends  AbstractModel {
         this.Name = null;
 
         /**
-         * 素材标签，单个标签长度不能超过10个字符，数组长度不能超过10。
-         * @type {Array.<string> || null}
-         */
-        this.Tags = null;
-
-        /**
          * 素材分类路径，例如填写"/a/b"，则代表该素材存储的路径为"/a/b"。
          * @type {string || null}
          */
@@ -1458,7 +1452,6 @@ class ModifyMaterialRequest extends  AbstractModel {
             this.Owner = obj;
         }
         this.Name = 'Name' in params ? params.Name : null;
-        this.Tags = 'Tags' in params ? params.Tags : null;
         this.ClassPath = 'ClassPath' in params ? params.ClassPath : null;
         this.Operator = 'Operator' in params ? params.Operator : null;
 
@@ -3091,13 +3084,6 @@ class MaterialBasicInfo extends  AbstractModel {
         this.ClassPath = null;
 
         /**
-         * 素材标签信息。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {Array.<string> || null}
-         */
-        this.TagSet = null;
-
-        /**
          * 素材媒体文件的预览图。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
@@ -3125,7 +3111,6 @@ class MaterialBasicInfo extends  AbstractModel {
         this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
         this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
         this.ClassPath = 'ClassPath' in params ? params.ClassPath : null;
-        this.TagSet = 'TagSet' in params ? params.TagSet : null;
         this.PreviewUrl = 'PreviewUrl' in params ? params.PreviewUrl : null;
 
     }
@@ -5204,12 +5189,6 @@ class ImportMaterialRequest extends  AbstractModel {
         this.ClassPath = null;
 
         /**
-         * 素材标签，单个标签长度不能超过10，数组长度不能超过10。
-         * @type {Array.<string> || null}
-         */
-        this.Tags = null;
-
-        /**
          * 素材预处理任务模板 ID。取值：
 <li>10：进行编辑预处理。</li>
          * @type {number || null}
@@ -5241,7 +5220,6 @@ class ImportMaterialRequest extends  AbstractModel {
         }
         this.Name = 'Name' in params ? params.Name : null;
         this.ClassPath = 'ClassPath' in params ? params.ClassPath : null;
-        this.Tags = 'Tags' in params ? params.Tags : null;
         this.PreProcessDefinition = 'PreProcessDefinition' in params ? params.PreProcessDefinition : null;
         this.Operator = 'Operator' in params ? params.Operator : null;
 

@@ -67,6 +67,34 @@ class ListAttachedRolePoliciesResponse extends  AbstractModel {
 }
 
 /**
+ * SetMfaFlag返回参数结构体
+ * @class
+ */
+class SetMfaFlagResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DeleteUser请求参数结构体
  * @class
  */
@@ -2217,6 +2245,48 @@ class GetUserRequest extends  AbstractModel {
             return;
         }
         this.Name = 'Name' in params ? params.Name : null;
+
+    }
+}
+
+/**
+ * 登录和敏感操作flag
+ * @class
+ */
+class LoginActionMfaFlag extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 手机
+         * @type {number || null}
+         */
+        this.Phone = null;
+
+        /**
+         * 软token
+         * @type {number || null}
+         */
+        this.Stoken = null;
+
+        /**
+         * 微信
+         * @type {number || null}
+         */
+        this.Wechat = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Phone = 'Phone' in params ? params.Phone : null;
+        this.Stoken = 'Stoken' in params ? params.Stoken : null;
+        this.Wechat = 'Wechat' in params ? params.Wechat : null;
 
     }
 }
@@ -4730,6 +4800,58 @@ class AttachUserPolicyResponse extends  AbstractModel {
 }
 
 /**
+ * SetMfaFlag请求参数结构体
+ * @class
+ */
+class SetMfaFlagRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 设置用户的uin
+         * @type {number || null}
+         */
+        this.OpUin = null;
+
+        /**
+         * 登录保护设置
+         * @type {LoginActionMfaFlag || null}
+         */
+        this.LoginFlag = null;
+
+        /**
+         * 操作保护设置
+         * @type {LoginActionMfaFlag || null}
+         */
+        this.ActionFlag = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.OpUin = 'OpUin' in params ? params.OpUin : null;
+
+        if (params.LoginFlag) {
+            let obj = new LoginActionMfaFlag();
+            obj.deserialize(params.LoginFlag)
+            this.LoginFlag = obj;
+        }
+
+        if (params.ActionFlag) {
+            let obj = new LoginActionMfaFlag();
+            obj.deserialize(params.ActionFlag)
+            this.ActionFlag = obj;
+        }
+
+    }
+}
+
+/**
  * ListCollaborators返回参数结构体
  * @class
  */
@@ -5012,6 +5134,7 @@ class CreateGroupResponse extends  AbstractModel {
 
 module.exports = {
     ListAttachedRolePoliciesResponse: ListAttachedRolePoliciesResponse,
+    SetMfaFlagResponse: SetMfaFlagResponse,
     DeleteUserRequest: DeleteUserRequest,
     DetachGroupPolicyRequest: DetachGroupPolicyRequest,
     DescribeRoleListResponse: DescribeRoleListResponse,
@@ -5063,6 +5186,7 @@ module.exports = {
     ListAttachedUserPoliciesResponse: ListAttachedUserPoliciesResponse,
     CreateSAMLProviderResponse: CreateSAMLProviderResponse,
     GetUserRequest: GetUserRequest,
+    LoginActionMfaFlag: LoginActionMfaFlag,
     SubAccountInfo: SubAccountInfo,
     SAMLProviderInfo: SAMLProviderInfo,
     UpdateSAMLProviderResponse: UpdateSAMLProviderResponse,
@@ -5122,6 +5246,7 @@ module.exports = {
     ListEntitiesForPolicyResponse: ListEntitiesForPolicyResponse,
     AddUserToGroupResponse: AddUserToGroupResponse,
     AttachUserPolicyResponse: AttachUserPolicyResponse,
+    SetMfaFlagRequest: SetMfaFlagRequest,
     ListCollaboratorsResponse: ListCollaboratorsResponse,
     ListAttachedUserPoliciesRequest: ListAttachedUserPoliciesRequest,
     UpdatePolicyRequest: UpdatePolicyRequest,

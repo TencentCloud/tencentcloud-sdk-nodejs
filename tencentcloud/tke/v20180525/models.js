@@ -3485,18 +3485,21 @@ class AddExistedInstancesResponse extends  AbstractModel {
 
         /**
          * 失败的节点ID
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<string> || null}
          */
         this.FailedInstanceIds = null;
 
         /**
          * 成功的节点ID
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<string> || null}
          */
         this.SuccInstanceIds = null;
 
         /**
          * 超时未返回出来节点的ID(可能失败，也可能成功)
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<string> || null}
          */
         this.TimeoutInstanceIds = null;
