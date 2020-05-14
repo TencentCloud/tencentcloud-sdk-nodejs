@@ -93,7 +93,7 @@ class DescribeCdnDomainLogsRequest extends  AbstractModel {
         this.EndTime = null;
 
         /**
-         * 分页查询偏移量，默认为 0 （第一页）
+         * 分页查询偏移量，默认为 0
          * @type {number || null}
          */
         this.Offset = null;
@@ -114,6 +114,13 @@ global：同时获取境内、境外加速日志包下载链接（分开打包�
          */
         this.Area = null;
 
+        /**
+         * 指定下载日志的类型。
+access：获取访问日志
+         * @type {string || null}
+         */
+        this.LogType = null;
+
     }
 
     /**
@@ -129,6 +136,7 @@ global：同时获取境内、境外加速日志包下载链接（分开打包�
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.Area = 'Area' in params ? params.Area : null;
+        this.LogType = 'LogType' in params ? params.LogType : null;
 
     }
 }
@@ -730,7 +738,7 @@ class DescribeTrafficPackagesRequest extends  AbstractModel {
         super();
 
         /**
-         * 分页查询起始地址，默认 0（第一页）
+         * 分页查询起始地址，默认 0
          * @type {number || null}
          */
         this.Offset = null;
@@ -6696,7 +6704,7 @@ TaskId 和起始时间必须指定一项
         this.Keyword = null;
 
         /**
-         * 分页查询偏移量，默认为 0 （第一页）
+         * 分页查询偏移量，默认为 0
          * @type {number || null}
          */
         this.Offset = null;
@@ -6755,7 +6763,7 @@ class DescribeUrlViolationsRequest extends  AbstractModel {
         super();
 
         /**
-         * 分页查询偏移量，默认为 0 （第一页）
+         * 分页查询偏移量，默认为 0
          * @type {number || null}
          */
         this.Offset = null;
@@ -7452,7 +7460,7 @@ enable：当前为可用状态，已解禁，可正常访问
         this.Status = null;
 
         /**
-         * 分页查询偏移量，默认为 0 （第一页）。
+         * 分页查询偏移量，默认为 0
          * @type {number || null}
          */
         this.Offset = null;
@@ -8637,7 +8645,7 @@ path：目录刷新记录
         this.TaskId = null;
 
         /**
-         * 分页查询偏移量，默认为 0 （第一页）
+         * 分页查询偏移量，默认为 0
          * @type {number || null}
          */
         this.Offset = null;
@@ -10299,7 +10307,7 @@ class DescribeDomainsRequest extends  AbstractModel {
         super();
 
         /**
-         * 分页查询偏移量，默认为 0 （第一页）
+         * 分页查询偏移量，默认为 0
          * @type {number || null}
          */
         this.Offset = null;

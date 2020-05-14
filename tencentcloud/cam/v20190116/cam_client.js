@@ -17,6 +17,7 @@
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const ListAttachedRolePoliciesResponse = models.ListAttachedRolePoliciesResponse;
+const SetMfaFlagResponse = models.SetMfaFlagResponse;
 const DeleteUserRequest = models.DeleteUserRequest;
 const DetachGroupPolicyRequest = models.DetachGroupPolicyRequest;
 const DescribeRoleListResponse = models.DescribeRoleListResponse;
@@ -68,6 +69,7 @@ const UpdateAssumeRolePolicyResponse = models.UpdateAssumeRolePolicyResponse;
 const ListAttachedUserPoliciesResponse = models.ListAttachedUserPoliciesResponse;
 const CreateSAMLProviderResponse = models.CreateSAMLProviderResponse;
 const GetUserRequest = models.GetUserRequest;
+const LoginActionMfaFlag = models.LoginActionMfaFlag;
 const SubAccountInfo = models.SubAccountInfo;
 const SAMLProviderInfo = models.SAMLProviderInfo;
 const UpdateSAMLProviderResponse = models.UpdateSAMLProviderResponse;
@@ -127,6 +129,7 @@ const AddUserResponse = models.AddUserResponse;
 const ListEntitiesForPolicyResponse = models.ListEntitiesForPolicyResponse;
 const AddUserToGroupResponse = models.AddUserToGroupResponse;
 const AttachUserPolicyResponse = models.AttachUserPolicyResponse;
+const SetMfaFlagRequest = models.SetMfaFlagRequest;
 const ListCollaboratorsResponse = models.ListCollaboratorsResponse;
 const ListAttachedUserPoliciesRequest = models.ListAttachedUserPoliciesRequest;
 const UpdatePolicyRequest = models.UpdatePolicyRequest;
@@ -144,6 +147,17 @@ class CamClient extends AbstractClient {
         super("cam.tencentcloudapi.com", "2019-01-16", credential, region, profile);
     }
     
+    /**
+     * 设置用户的登录保护和敏感操作校验方式
+     * @param {SetMfaFlagRequest} req
+     * @param {function(string, SetMfaFlagResponse):void} cb
+     * @public
+     */
+    SetMfaFlag(req, cb) {
+        let resp = new SetMfaFlagResponse();
+        this.request("SetMfaFlag", req, resp, cb);
+    }
+
     /**
      * 本接口（UpdateRoleConsoleLogin）用于修改角色是否可登录。
      * @param {UpdateRoleConsoleLoginRequest} req
