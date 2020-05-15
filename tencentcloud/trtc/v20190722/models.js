@@ -245,13 +245,13 @@ class DescribeRealtimeQualityRequest extends  AbstractModel {
         super();
 
         /**
-         * 查询开始时间
+         * 查询开始时间，24小时内。本地unix时间戳（1588031999s）
          * @type {number || null}
          */
         this.StartTime = null;
 
         /**
-         * 查询结束时间
+         * 查询结束时间，本地unix时间戳（1588031999s）
          * @type {number || null}
          */
         this.EndTime = null;
@@ -346,13 +346,13 @@ class DescribeCallDetailRequest extends  AbstractModel {
         this.CommId = null;
 
         /**
-         * 查询开始时间
+         * 查询开始时间，5天内。本地unix时间戳（1588031999s）
          * @type {number || null}
          */
         this.StartTime = null;
 
         /**
-         * 查询结束时间
+         * 查询结束时间，本地unix时间戳（1588031999s）
          * @type {number || null}
          */
         this.EndTime = null;
@@ -416,13 +416,13 @@ class DescribeRealtimeNetworkRequest extends  AbstractModel {
         super();
 
         /**
-         * 查询开始时间
+         * 查询开始时间，24小时内，，本地unix时间戳（1588031999s）
          * @type {number || null}
          */
         this.StartTime = null;
 
         /**
-         * 查询结束时间
+         * 查询结束时间，本地unix时间戳（1588031999s）
          * @type {number || null}
          */
         this.EndTime = null;
@@ -741,13 +741,13 @@ class DescribeHistoryScaleRequest extends  AbstractModel {
         this.SdkAppId = null;
 
         /**
-         * 查询开始时间
+         * 查询开始时间，5天内。本地unix时间戳（1588031999s）
          * @type {number || null}
          */
         this.StartTime = null;
 
         /**
-         * 查询结束时间
+         * 查询结束时间，本地unix时间戳（1588031999s）
          * @type {number || null}
          */
         this.EndTime = null;
@@ -1057,13 +1057,13 @@ class DescribeRealtimeScaleRequest extends  AbstractModel {
         super();
 
         /**
-         * 查询开始时间
+         * 查询开始时间，24小时内。本地unix时间戳（1588031999s）
          * @type {number || null}
          */
         this.StartTime = null;
 
         /**
-         * 查询结束时间
+         * 查询结束时间，本地unix时间戳（1588031999s）
          * @type {number || null}
          */
         this.EndTime = null;
@@ -1181,13 +1181,13 @@ class DescribeRoomInformationRequest extends  AbstractModel {
         this.SdkAppId = null;
 
         /**
-         * 查询开始时间
+         * 查询开始时间，5天内。本地unix时间戳（1588031999s）
          * @type {number || null}
          */
         this.StartTime = null;
 
         /**
-         * 查询结束时间
+         * 查询结束时间，本地unix时间戳（1588031999s）
          * @type {number || null}
          */
         this.EndTime = null;

@@ -513,7 +513,7 @@ class SearchMaterialRequest extends  AbstractModel {
         this.MaterialTypes = null;
 
         /**
-         * 搜索文本，模糊匹配素材名称或描述信息，匹配项越多，匹配度越高，排序越优先。长度限制：64 个字符。
+         * 搜索文本，模糊匹配素材名称或描述信息，匹配项越多，匹配度越高，排序越优先。长度限制：15个字符。
          * @type {string || null}
          */
         this.Text = null;
@@ -535,12 +535,6 @@ class SearchMaterialRequest extends  AbstractModel {
          * @type {TimeRange || null}
          */
         this.CreateTimeRange = null;
-
-        /**
-         * 标签集合，匹配集合中任意元素。单个标签长度限制：10 个字符。数组长度限制：10。
-         * @type {Array.<string> || null}
-         */
-        this.Tags = null;
 
         /**
          * 排序方式。Sort.Field 可选值：CreateTime。指定 Text 搜索时，将根据匹配度排序，该字段无效。
@@ -600,7 +594,6 @@ class SearchMaterialRequest extends  AbstractModel {
             obj.deserialize(params.CreateTimeRange)
             this.CreateTimeRange = obj;
         }
-        this.Tags = 'Tags' in params ? params.Tags : null;
 
         if (params.Sort) {
             let obj = new SortBy();
@@ -2110,12 +2103,6 @@ class CreateLinkRequest extends  AbstractModel {
         this.ClassPath = null;
 
         /**
-         * 链接标签，单个标签长度不能超过10，数组长度不能超过10。
-         * @type {Array.<string> || null}
-         */
-        this.Tags = null;
-
-        /**
          * 操作者。填写用户的 Id，用于标识调用者及校验操作权限。
          * @type {string || null}
          */
@@ -2147,7 +2134,6 @@ class CreateLinkRequest extends  AbstractModel {
             this.DestinationOwner = obj;
         }
         this.ClassPath = 'ClassPath' in params ? params.ClassPath : null;
-        this.Tags = 'Tags' in params ? params.Tags : null;
         this.Operator = 'Operator' in params ? params.Operator : null;
 
     }

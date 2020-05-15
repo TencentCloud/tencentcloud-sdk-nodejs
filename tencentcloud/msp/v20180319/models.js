@@ -824,18 +824,6 @@ class RegisterMigrationTaskRequest extends  AbstractModel {
         this.ServiceSupplier = null;
 
         /**
-         * 迁移任务源信息
-         * @type {SrcInfo || null}
-         */
-        this.SrcInfo = null;
-
-        /**
-         * 迁移任务目的信息
-         * @type {DstInfo || null}
-         */
-        this.DstInfo = null;
-
-        /**
          * 迁移任务创建时间
          * @type {string || null}
          */
@@ -852,6 +840,18 @@ class RegisterMigrationTaskRequest extends  AbstractModel {
          * @type {string || null}
          */
         this.MigrateClass = null;
+
+        /**
+         * 迁移任务源信息
+         * @type {SrcInfo || null}
+         */
+        this.SrcInfo = null;
+
+        /**
+         * 迁移任务目的信息
+         * @type {DstInfo || null}
+         */
+        this.DstInfo = null;
 
         /**
          * 源实例接入类型，数据库迁移时填写值为：extranet(外网),cvm(cvm自建实例),dcg(专线接入的实例),vpncloud(云vpn接入的实例),vpnselfbuild(自建vpn接入的实例)，cdb(云上cdb实例)
@@ -889,6 +889,9 @@ class RegisterMigrationTaskRequest extends  AbstractModel {
         this.TaskType = 'TaskType' in params ? params.TaskType : null;
         this.TaskName = 'TaskName' in params ? params.TaskName : null;
         this.ServiceSupplier = 'ServiceSupplier' in params ? params.ServiceSupplier : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.MigrateClass = 'MigrateClass' in params ? params.MigrateClass : null;
 
         if (params.SrcInfo) {
             let obj = new SrcInfo();
@@ -901,9 +904,6 @@ class RegisterMigrationTaskRequest extends  AbstractModel {
             obj.deserialize(params.DstInfo)
             this.DstInfo = obj;
         }
-        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
-        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
-        this.MigrateClass = 'MigrateClass' in params ? params.MigrateClass : null;
         this.SrcAccessType = 'SrcAccessType' in params ? params.SrcAccessType : null;
         this.SrcDatabaseType = 'SrcDatabaseType' in params ? params.SrcDatabaseType : null;
         this.DstAccessType = 'DstAccessType' in params ? params.DstAccessType : null;
