@@ -126,7 +126,7 @@ TRTC 的一个房间中可能会同时存在多路音视频流，您可以通过
     }
 
     /**
-     * 查询sdkappid下的房间列表。默认返回10条通话，一次最多返回100条通话。可查询最近5天的数据。
+     * 查询sdkappid下的房间列表。默认返回10条通话，一次最多返回100条通话。可查询5天内的数据。
      * @param {DescribeRoomInformationRequest} req
      * @param {function(string, DescribeRoomInformationResponse):void} cb
      * @public
@@ -148,7 +148,7 @@ TRTC 的一个房间中可能会同时存在多路音视频流，您可以通过
     }
 
     /**
-     * 查询指定时间内的用户列表及用户通话质量数据。
+     * 查询指定时间内的用户列表及用户通话质量数据。可查询5天内数据，查询起止时间不超过1个小时，查询用户不超过6个
      * @param {DescribeCallDetailRequest} req
      * @param {function(string, DescribeCallDetailResponse):void} cb
      * @public

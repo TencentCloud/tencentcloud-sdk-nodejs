@@ -1041,7 +1041,10 @@ class SentimentAnalysisResponse extends  AbstractModel {
         this.Positive = null;
 
         /**
-         * 情感属性
+         * 情感分类结果：
+1、positive，表示正面情感
+2、negative，表示负面情感
+3、neutral，表示中性、无情感
          * @type {string || null}
          */
         this.Sentiment = null;

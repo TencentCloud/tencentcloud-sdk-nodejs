@@ -773,6 +773,13 @@ class CreateClsLogTopicResponse extends  AbstractModel {
         super();
 
         /**
+         * 主题ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.TopicId = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -787,6 +794,7 @@ class CreateClsLogTopicResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.TopicId = 'TopicId' in params ? params.TopicId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }

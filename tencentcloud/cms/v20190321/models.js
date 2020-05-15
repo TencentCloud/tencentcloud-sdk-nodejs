@@ -17,30 +17,30 @@
 const AbstractModel = require("../../common/abstract_model");
 
 /**
- * TextModeration返回参数结构体
+ * 文本返回的自定义词库结果
  * @class
  */
-class TextModerationResponse extends  AbstractModel {
+class CustomResult extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 识别结果
-         * @type {TextData || null}
+         * 命中的自定义关键词
+         * @type {Array.<string> || null}
          */
-        this.Data = null;
+        this.Keywords = null;
 
         /**
-         * 业务返回码
-         * @type {number || null}
-         */
-        this.BusinessCode = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * 自定义库id
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.LibId = null;
+
+        /**
+         * 自定义词库名称
+         * @type {string || null}
+         */
+        this.LibName = null;
 
     }
 
@@ -51,14 +51,9 @@ class TextModerationResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.Data) {
-            let obj = new TextData();
-            obj.deserialize(params.Data)
-            this.Data = obj;
-        }
-        this.BusinessCode = 'BusinessCode' in params ? params.BusinessCode : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.Keywords = 'Keywords' in params ? params.Keywords : null;
+        this.LibId = 'LibId' in params ? params.LibId : null;
+        this.LibName = 'LibName' in params ? params.LibName : null;
 
     }
 }
@@ -97,6 +92,18 @@ class TextData extends  AbstractModel {
         this.Common = null;
 
         /**
+         * 返回的自定义词库结果
+         * @type {Array.<CustomResult> || null}
+         */
+        this.CustomResult = null;
+
+        /**
+         * 返回的详细结果
+         * @type {Array.<DetailResult> || null}
+         */
+        this.DetailResult = null;
+
+        /**
          * 消息类ID信息
          * @type {TextOutputID || null}
          */
@@ -109,10 +116,34 @@ class TextData extends  AbstractModel {
         this.Res = null;
 
         /**
+         * 最终使用的BizType
+         * @type {number || null}
+         */
+        this.BizType = null;
+
+        /**
+         * 恶意标签，Normal：正常，Polity：涉政，Porn：色情，Illegal：违法，Abuse：谩骂，Terror：暴恐，Ad：广告，Custom：自定义关键词
+         * @type {string || null}
+         */
+        this.EvilLabel = null;
+
+        /**
          * 命中的关键词
          * @type {Array.<string> || null}
          */
         this.Keywords = null;
+
+        /**
+         * 命中的模型分值
+         * @type {number || null}
+         */
+        this.Score = null;
+
+        /**
+         * 建议值,Block：打击,Review：待复审,Normal：正常
+         * @type {string || null}
+         */
+        this.Suggestion = null;
 
     }
 
@@ -132,6 +163,24 @@ class TextData extends  AbstractModel {
             this.Common = obj;
         }
 
+        if (params.CustomResult) {
+            this.CustomResult = new Array();
+            for (let z in params.CustomResult) {
+                let obj = new CustomResult();
+                obj.deserialize(params.CustomResult[z]);
+                this.CustomResult.push(obj);
+            }
+        }
+
+        if (params.DetailResult) {
+            this.DetailResult = new Array();
+            for (let z in params.DetailResult) {
+                let obj = new DetailResult();
+                obj.deserialize(params.DetailResult[z]);
+                this.DetailResult.push(obj);
+            }
+        }
+
         if (params.ID) {
             let obj = new TextOutputID();
             obj.deserialize(params.ID)
@@ -143,7 +192,11 @@ class TextData extends  AbstractModel {
             obj.deserialize(params.Res)
             this.Res = obj;
         }
+        this.BizType = 'BizType' in params ? params.BizType : null;
+        this.EvilLabel = 'EvilLabel' in params ? params.EvilLabel : null;
         this.Keywords = 'Keywords' in params ? params.Keywords : null;
+        this.Score = 'Score' in params ? params.Score : null;
+        this.Suggestion = 'Suggestion' in params ? params.Suggestion : null;
 
     }
 }
@@ -162,6 +215,24 @@ class TextModerationRequest extends  AbstractModel {
          */
         this.Content = null;
 
+        /**
+         * 该字段用于标识业务场景。您可以在内容安全控制台创建对应的ID，配置不同的内容审核策略，通过接口调用，默认不填为0，后端使用默认策略
+         * @type {number || null}
+         */
+        this.BizType = null;
+
+        /**
+         * 数据ID，英文字母、下划线、-组成，不超过64个字符
+         * @type {string || null}
+         */
+        this.DataId = null;
+
+        /**
+         * 业务应用ID
+         * @type {number || null}
+         */
+        this.SdkAppId = null;
+
     }
 
     /**
@@ -172,6 +243,65 @@ class TextModerationRequest extends  AbstractModel {
             return;
         }
         this.Content = 'Content' in params ? params.Content : null;
+        this.BizType = 'BizType' in params ? params.BizType : null;
+        this.DataId = 'DataId' in params ? params.DataId : null;
+        this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
+
+    }
+}
+
+/**
+ * 文本返回的详细结果
+ * @class
+ */
+class DetailResult extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 恶意标签，Normal：正常，Polity：涉政，Porn：色情，Illegal：违法，Abuse：谩骂，Terror：暴恐，Ad：广告，Custom：自定义关键词
+         * @type {string || null}
+         */
+        this.EvilLabel = null;
+
+        /**
+         * 恶意类型
+100：正常
+20001：政治
+20002：色情 
+20006：涉毒违法
+20007：谩骂
+20105：广告引流 
+24001：暴恐
+         * @type {number || null}
+         */
+        this.EvilType = null;
+
+        /**
+         * 该标签下命中的关键词
+         * @type {Array.<string> || null}
+         */
+        this.Keywords = null;
+
+        /**
+         * 该标签模型命中的分值
+         * @type {number || null}
+         */
+        this.Score = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.EvilLabel = 'EvilLabel' in params ? params.EvilLabel : null;
+        this.EvilType = 'EvilType' in params ? params.EvilType : null;
+        this.Keywords = 'Keywords' in params ? params.Keywords : null;
+        this.Score = 'Score' in params ? params.Score : null;
 
     }
 }
@@ -214,6 +344,53 @@ class ImageModerationResponse extends  AbstractModel {
 
         if (params.Data) {
             let obj = new ImageData();
+            obj.deserialize(params.Data)
+            this.Data = obj;
+        }
+        this.BusinessCode = 'BusinessCode' in params ? params.BusinessCode : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * TextModeration返回参数结构体
+ * @class
+ */
+class TextModerationResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 识别结果
+         * @type {TextData || null}
+         */
+        this.Data = null;
+
+        /**
+         * 业务返回码
+         * @type {number || null}
+         */
+        this.BusinessCode = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Data) {
+            let obj = new TextData();
             obj.deserialize(params.Data)
             this.Data = obj;
         }
@@ -1422,6 +1599,12 @@ class OCRDetect extends  AbstractModel {
         super();
 
         /**
+         * 识别到的详细信息
+         * @type {Array.<OCRItem> || null}
+         */
+        this.Item = null;
+
+        /**
          * 识别到的文本信息
          * @type {string || null}
          */
@@ -1436,7 +1619,65 @@ class OCRDetect extends  AbstractModel {
         if (!params) {
             return;
         }
+
+        if (params.Item) {
+            this.Item = new Array();
+            for (let z in params.Item) {
+                let obj = new OCRItem();
+                obj.deserialize(params.Item[z]);
+                this.Item.push(obj);
+            }
+        }
         this.TextInfo = 'TextInfo' in params ? params.TextInfo : null;
+
+    }
+}
+
+/**
+ * 坐标
+ * @class
+ */
+class Coordinate extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 左上角横坐标
+         * @type {number || null}
+         */
+        this.Cx = null;
+
+        /**
+         * 左上角纵坐标
+         * @type {number || null}
+         */
+        this.Cy = null;
+
+        /**
+         * 高度
+         * @type {number || null}
+         */
+        this.Height = null;
+
+        /**
+         * 宽度
+         * @type {number || null}
+         */
+        this.Width = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Cx = 'Cx' in params ? params.Cx : null;
+        this.Cy = 'Cy' in params ? params.Cy : null;
+        this.Height = 'Height' in params ? params.Height : null;
+        this.Width = 'Width' in params ? params.Width : null;
 
     }
 }
@@ -1798,6 +2039,74 @@ class ImagePolityDetect extends  AbstractModel {
 }
 
 /**
+ * OCR详情
+ * @class
+ */
+class OCRItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 检测到的文本坐标信息
+         * @type {Coordinate || null}
+         */
+        this.TextPosition = null;
+
+        /**
+         * 文本命中具体标签
+         * @type {string || null}
+         */
+        this.EvilLabel = null;
+
+        /**
+         * 文本命中恶意违规类型
+         * @type {number || null}
+         */
+        this.EvilType = null;
+
+        /**
+         * 文本命中违规的关键词
+         * @type {Array.<string> || null}
+         */
+        this.Keywords = null;
+
+        /**
+         * 文本涉嫌违规分值
+         * @type {number || null}
+         */
+        this.Rate = null;
+
+        /**
+         * 检测到的文本信息
+         * @type {string || null}
+         */
+        this.TextContent = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.TextPosition) {
+            let obj = new Coordinate();
+            obj.deserialize(params.TextPosition)
+            this.TextPosition = obj;
+        }
+        this.EvilLabel = 'EvilLabel' in params ? params.EvilLabel : null;
+        this.EvilType = 'EvilType' in params ? params.EvilType : null;
+        this.Keywords = 'Keywords' in params ? params.Keywords : null;
+        this.Rate = 'Rate' in params ? params.Rate : null;
+        this.TextContent = 'TextContent' in params ? params.TextContent : null;
+
+    }
+}
+
+/**
  * 图片违法详情
  * @class
  */
@@ -2111,10 +2420,12 @@ class DeleteTextSampleRequest extends  AbstractModel {
 }
 
 module.exports = {
-    TextModerationResponse: TextModerationResponse,
+    CustomResult: CustomResult,
     TextData: TextData,
     TextModerationRequest: TextModerationRequest,
+    DetailResult: DetailResult,
     ImageModerationResponse: ImageModerationResponse,
+    TextModerationResponse: TextModerationResponse,
     ImageModerationRequest: ImageModerationRequest,
     CreateFileSampleRequest: CreateFileSampleRequest,
     ImageData: ImageData,
@@ -2137,12 +2448,14 @@ module.exports = {
     DeleteFileSampleRequest: DeleteFileSampleRequest,
     Filter: Filter,
     OCRDetect: OCRDetect,
+    Coordinate: Coordinate,
     Similar: Similar,
     ImageHotDetect: ImageHotDetect,
     TextOutputComm: TextOutputComm,
     DescribeTextSampleRequest: DescribeTextSampleRequest,
     CodeDetail: CodeDetail,
     ImagePolityDetect: ImagePolityDetect,
+    OCRItem: OCRItem,
     ImageIllegalDetect: ImageIllegalDetect,
     RrectF: RrectF,
     CreateFileSampleResponse: CreateFileSampleResponse,

@@ -209,6 +209,12 @@ class CreateNotebookInstanceRequest extends  AbstractModel {
          */
         this.AdditionalCodeRepositories = null;
 
+        /**
+         * 是否开启CLS日志服务，可取值Enabled/Disabled，默认为Disabled
+         * @type {string || null}
+         */
+        this.ClsAccess = null;
+
     }
 
     /**
@@ -227,6 +233,7 @@ class CreateNotebookInstanceRequest extends  AbstractModel {
         this.LifecycleScriptsName = 'LifecycleScriptsName' in params ? params.LifecycleScriptsName : null;
         this.DefaultCodeRepository = 'DefaultCodeRepository' in params ? params.DefaultCodeRepository : null;
         this.AdditionalCodeRepositories = 'AdditionalCodeRepositories' in params ? params.AdditionalCodeRepositories : null;
+        this.ClsAccess = 'ClsAccess' in params ? params.ClsAccess : null;
 
     }
 }
@@ -1203,6 +1210,12 @@ class UpdateNotebookInstanceRequest extends  AbstractModel {
          */
         this.DisassociateAdditionalCodeRepositories = null;
 
+        /**
+         * 是否开启CLS日志服务，可取值Enabled/Disabled
+         * @type {string || null}
+         */
+        this.ClsAccess = null;
+
     }
 
     /**
@@ -1223,6 +1236,7 @@ class UpdateNotebookInstanceRequest extends  AbstractModel {
         this.AdditionalCodeRepositories = 'AdditionalCodeRepositories' in params ? params.AdditionalCodeRepositories : null;
         this.DisassociateDefaultCodeRepository = 'DisassociateDefaultCodeRepository' in params ? params.DisassociateDefaultCodeRepository : null;
         this.DisassociateAdditionalCodeRepositories = 'DisassociateAdditionalCodeRepositories' in params ? params.DisassociateAdditionalCodeRepositories : null;
+        this.ClsAccess = 'ClsAccess' in params ? params.ClsAccess : null;
 
     }
 }
@@ -1709,6 +1723,13 @@ class DescribeNotebookInstanceResponse extends  AbstractModel {
         this.AdditionalCodeRepositories = null;
 
         /**
+         * 是否开启CLS日志服务
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ClsAccess = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -1739,6 +1760,7 @@ class DescribeNotebookInstanceResponse extends  AbstractModel {
         this.LifecycleScriptsName = 'LifecycleScriptsName' in params ? params.LifecycleScriptsName : null;
         this.DefaultCodeRepository = 'DefaultCodeRepository' in params ? params.DefaultCodeRepository : null;
         this.AdditionalCodeRepositories = 'AdditionalCodeRepositories' in params ? params.AdditionalCodeRepositories : null;
+        this.ClsAccess = 'ClsAccess' in params ? params.ClsAccess : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }

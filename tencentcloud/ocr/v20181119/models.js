@@ -7082,6 +7082,7 @@ class MLIDCardOCRResponse extends  AbstractModel {
          * 告警码
 -9103	证照翻拍告警
 -9102	证照复印件告警
+-9106       证件遮挡告警
          * @type {Array.<number> || null}
          */
         this.Warn = null;
@@ -7107,6 +7108,18 @@ class MLIDCardOCRResponse extends  AbstractModel {
         this.AdvancedInfo = null;
 
         /**
+         * 证件类型
+MyKad  身份证
+MyPR    永居证
+MyTentera   军官证
+MyKAS    临时身份证
+POLIS  警察
+IKAD   劳工证
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -7128,6 +7141,7 @@ class MLIDCardOCRResponse extends  AbstractModel {
         this.Warn = 'Warn' in params ? params.Warn : null;
         this.Image = 'Image' in params ? params.Image : null;
         this.AdvancedInfo = 'AdvancedInfo' in params ? params.AdvancedInfo : null;
+        this.Type = 'Type' in params ? params.Type : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
