@@ -545,6 +545,12 @@ class DeleteRuleRequest extends  AbstractModel {
          */
         this.Url = null;
 
+        /**
+         * 监听器下必须配置一个默认域名，当需要删除默认域名时，可以指定另一个域名作为新的默认域名。
+         * @type {string || null}
+         */
+        this.NewDefaultServerDomain = null;
+
     }
 
     /**
@@ -559,6 +565,7 @@ class DeleteRuleRequest extends  AbstractModel {
         this.LocationIds = 'LocationIds' in params ? params.LocationIds : null;
         this.Domain = 'Domain' in params ? params.Domain : null;
         this.Url = 'Url' in params ? params.Url : null;
+        this.NewDefaultServerDomain = 'NewDefaultServerDomain' in params ? params.NewDefaultServerDomain : null;
 
     }
 }
@@ -1896,19 +1903,19 @@ class AutoRewriteRequest extends  AbstractModel {
         super();
 
         /**
-         * 负载均衡实例ID
+         * 负载均衡实例ID。
          * @type {string || null}
          */
         this.LoadBalancerId = null;
 
         /**
-         * HTTPS:443监听器的ID
+         * HTTPS:443监听器的ID。
          * @type {string || null}
          */
         this.ListenerId = null;
 
         /**
-         * HTTPS:443监听器下需要重定向的域名
+         * HTTPS:443监听器下需要重定向的域名，若不填，对HTTPS:443监听器下的所有域名都设置重定向。
          * @type {Array.<string> || null}
          */
         this.Domains = null;
@@ -5857,6 +5864,12 @@ class ModifyDomainAttributesRequest extends  AbstractModel {
          */
         this.DefaultServer = null;
 
+        /**
+         * 监听器下必须配置一个默认域名，若要关闭原默认域名，必须同时指定另一个域名作为新的默认域名。
+         * @type {string || null}
+         */
+        this.NewDefaultServerDomain = null;
+
     }
 
     /**
@@ -5878,6 +5891,7 @@ class ModifyDomainAttributesRequest extends  AbstractModel {
         }
         this.Http2 = 'Http2' in params ? params.Http2 : null;
         this.DefaultServer = 'DefaultServer' in params ? params.DefaultServer : null;
+        this.NewDefaultServerDomain = 'NewDefaultServerDomain' in params ? params.NewDefaultServerDomain : null;
 
     }
 }
