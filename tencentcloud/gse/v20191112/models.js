@@ -52,24 +52,19 @@ class GameProperty extends  AbstractModel {
 }
 
 /**
- * UpdateGameServerSession返回参数结构体
+ * 基于规则的动态扩缩容配置项
  * @class
  */
-class UpdateGameServerSessionResponse extends  AbstractModel {
+class TargetConfiguration extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 更新后的游戏会话
-         * @type {GameServerSession || null}
+         * 预留存率
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
          */
-        this.GameServerSession = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
+        this.TargetValue = null;
 
     }
 
@@ -80,13 +75,77 @@ class UpdateGameServerSessionResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.TargetValue = 'TargetValue' in params ? params.TargetValue : null;
 
-        if (params.GameServerSession) {
-            let obj = new GameServerSession();
-            obj.deserialize(params.GameServerSession)
-            this.GameServerSession = obj;
+    }
+}
+
+/**
+ * DeleteScalingPolicy请求参数结构体
+ * @class
+ */
+class DeleteScalingPolicyRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 服务部署ID
+         * @type {string || null}
+         */
+        this.FleetId = null;
+
+        /**
+         * 名称
+         * @type {string || null}
+         */
+        this.Name = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.FleetId = 'FleetId' in params ? params.FleetId : null;
+        this.Name = 'Name' in params ? params.Name : null;
+
+    }
+}
+
+/**
+ * 部署的玩家游戏会话
+ * @class
+ */
+class PlacedPlayerSession extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 玩家Id
+         * @type {string || null}
+         */
+        this.PlayerId = null;
+
+        /**
+         * 玩家会话Id
+         * @type {string || null}
+         */
+        this.PlayerSessionId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PlayerId = 'PlayerId' in params ? params.PlayerId : null;
+        this.PlayerSessionId = 'PlayerSessionId' in params ? params.PlayerSessionId : null;
 
     }
 }
@@ -229,6 +288,57 @@ class Instance extends  AbstractModel {
 }
 
 /**
+ * DescribeGameServerSessionQueues返回参数结构体
+ * @class
+ */
+class DescribeGameServerSessionQueuesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 游戏服务器会话队列数组
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<GameServerSessionQueue> || null}
+         */
+        this.GameServerSessionQueues = null;
+
+        /**
+         * 总数
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.GameServerSessionQueues) {
+            this.GameServerSessionQueues = new Array();
+            for (let z in params.GameServerSessionQueues) {
+                let obj = new GameServerSessionQueue();
+                obj.deserialize(params.GameServerSessionQueues[z]);
+                this.GameServerSessionQueues.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * GetInstanceAccess返回参数结构体
  * @class
  */
@@ -363,6 +473,34 @@ class DescribePlayerSessionsResponse extends  AbstractModel {
 }
 
 /**
+ * SetServerWeight返回参数结构体
+ * @class
+ */
+class SetServerWeightResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * 玩家延迟信息
  * @class
  */
@@ -430,6 +568,160 @@ class StopGameServerSessionPlacementRequest extends  AbstractModel {
             return;
         }
         this.PlacementId = 'PlacementId' in params ? params.PlacementId : null;
+
+    }
+}
+
+/**
+ * UpdateGameServerSession返回参数结构体
+ * @class
+ */
+class UpdateGameServerSessionResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 更新后的游戏会话
+         * @type {GameServerSession || null}
+         */
+        this.GameServerSession = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.GameServerSession) {
+            let obj = new GameServerSession();
+            obj.deserialize(params.GameServerSession)
+            this.GameServerSession = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 动态扩缩容配置
+ * @class
+ */
+class ScalingPolicy extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 服务部署ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.FleetId = null;
+
+        /**
+         * 名称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 状态
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * 保留参数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ScalingAdjustment = null;
+
+        /**
+         * 保留参数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ScalingAdjustmentType = null;
+
+        /**
+         * 保留参数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ComparisonOperator = null;
+
+        /**
+         * 保留参数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Threshold = null;
+
+        /**
+         * 保留参数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.EvaluationPeriods = null;
+
+        /**
+         * 保留参数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.MetricName = null;
+
+        /**
+         * 策略类型
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.PolicyType = null;
+
+        /**
+         * 基于规则的配置
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {TargetConfiguration || null}
+         */
+        this.TargetConfiguration = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FleetId = 'FleetId' in params ? params.FleetId : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.ScalingAdjustment = 'ScalingAdjustment' in params ? params.ScalingAdjustment : null;
+        this.ScalingAdjustmentType = 'ScalingAdjustmentType' in params ? params.ScalingAdjustmentType : null;
+        this.ComparisonOperator = 'ComparisonOperator' in params ? params.ComparisonOperator : null;
+        this.Threshold = 'Threshold' in params ? params.Threshold : null;
+        this.EvaluationPeriods = 'EvaluationPeriods' in params ? params.EvaluationPeriods : null;
+        this.MetricName = 'MetricName' in params ? params.MetricName : null;
+        this.PolicyType = 'PolicyType' in params ? params.PolicyType : null;
+
+        if (params.TargetConfiguration) {
+            let obj = new TargetConfiguration();
+            obj.deserialize(params.TargetConfiguration)
+            this.TargetConfiguration = obj;
+        }
 
     }
 }
@@ -508,7 +800,7 @@ class DescribeGameServerSessionsRequest extends  AbstractModel {
         this.NextToken = null;
 
         /**
-         * 游戏服务器会话状态
+         * 游戏服务器会话状态(ACTIVE,ACTIVATING,TERMINATED,TERMINATING,ERROR)
          * @type {string || null}
          */
         this.StatusFilter = null;
@@ -897,6 +1189,55 @@ class DescribeInstancesRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeScalingPolicies请求参数结构体
+ * @class
+ */
+class DescribeScalingPoliciesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 服务部署ID
+         * @type {string || null}
+         */
+        this.FleetId = null;
+
+        /**
+         * 状态过滤条件
+         * @type {string || null}
+         */
+        this.StatusFilter = null;
+
+        /**
+         * 结果返回最大数量
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 返回结果偏移
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FleetId = 'FleetId' in params ? params.FleetId : null;
+        this.StatusFilter = 'StatusFilter' in params ? params.StatusFilter : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+
+    }
+}
+
+/**
  * DescribeGameServerSessionDetails返回参数结构体
  * @class
  */
@@ -943,6 +1284,79 @@ class DescribeGameServerSessionDetailsResponse extends  AbstractModel {
             }
         }
         this.NextToken = 'NextToken' in params ? params.NextToken : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 延迟策略
+ * @class
+ */
+class PlayerLatencyPolicy extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 任意player允许的最大延迟，单位：毫秒
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.MaximumIndividualPlayerLatencyMilliseconds = null;
+
+        /**
+         * 放置新GameServerSession时强制实施策略的时间长度，单位：秒
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.PolicyDurationSeconds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MaximumIndividualPlayerLatencyMilliseconds = 'MaximumIndividualPlayerLatencyMilliseconds' in params ? params.MaximumIndividualPlayerLatencyMilliseconds : null;
+        this.PolicyDurationSeconds = 'PolicyDurationSeconds' in params ? params.PolicyDurationSeconds : null;
+
+    }
+}
+
+/**
+ * PutScalingPolicy返回参数结构体
+ * @class
+ */
+class PutScalingPolicyResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 规则名称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -1105,24 +1519,32 @@ class DescribeGameServerSessionPlacementRequest extends  AbstractModel {
 }
 
 /**
- * 部署的玩家游戏会话
+ * DescribeScalingPolicies返回参数结构体
  * @class
  */
-class PlacedPlayerSession extends  AbstractModel {
+class DescribeScalingPoliciesResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 玩家Id
-         * @type {string || null}
+         * 动态扩缩容配置
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<ScalingPolicy> || null}
          */
-        this.PlayerId = null;
+        this.ScalingPolicies = null;
 
         /**
-         * 玩家会话Id
+         * 返回总数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.PlayerSessionId = null;
+        this.RequestId = null;
 
     }
 
@@ -1133,8 +1555,46 @@ class PlacedPlayerSession extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.PlayerId = 'PlayerId' in params ? params.PlayerId : null;
-        this.PlayerSessionId = 'PlayerSessionId' in params ? params.PlayerSessionId : null;
+
+        if (params.ScalingPolicies) {
+            this.ScalingPolicies = new Array();
+            for (let z in params.ScalingPolicies) {
+                let obj = new ScalingPolicy();
+                obj.deserialize(params.ScalingPolicies[z]);
+                this.ScalingPolicies.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 服务部署组目的集合
+ * @class
+ */
+class GameServerSessionQueueDestination extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 服务部署组目的的资源描述
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.DestinationArn = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DestinationArn = 'DestinationArn' in params ? params.DestinationArn : null;
 
     }
 }
@@ -1311,6 +1771,122 @@ class GameServerSessionPlacement extends  AbstractModel {
         }
         this.StartTime = 'StartTime' in params ? params.StartTime : null;
         this.EndTime = 'EndTime' in params ? params.EndTime : null;
+
+    }
+}
+
+/**
+ * 服务部署组对象
+ * @class
+ */
+class GameServerSessionQueue extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 服务部署组名字
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 服务部署组资源
+         * @type {string || null}
+         */
+        this.GameServerSessionQueueArn = null;
+
+        /**
+         * 目的fleet（可为别名）列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<GameServerSessionQueueDestination> || null}
+         */
+        this.Destinations = null;
+
+        /**
+         * 延迟策略集合
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<PlayerLatencyPolicy> || null}
+         */
+        this.PlayerLatencyPolicies = null;
+
+        /**
+         * 超时时间
+         * @type {number || null}
+         */
+        this.TimeoutInSeconds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.GameServerSessionQueueArn = 'GameServerSessionQueueArn' in params ? params.GameServerSessionQueueArn : null;
+
+        if (params.Destinations) {
+            this.Destinations = new Array();
+            for (let z in params.Destinations) {
+                let obj = new GameServerSessionQueueDestination();
+                obj.deserialize(params.Destinations[z]);
+                this.Destinations.push(obj);
+            }
+        }
+
+        if (params.PlayerLatencyPolicies) {
+            this.PlayerLatencyPolicies = new Array();
+            for (let z in params.PlayerLatencyPolicies) {
+                let obj = new PlayerLatencyPolicy();
+                obj.deserialize(params.PlayerLatencyPolicies[z]);
+                this.PlayerLatencyPolicies.push(obj);
+            }
+        }
+        this.TimeoutInSeconds = 'TimeoutInSeconds' in params ? params.TimeoutInSeconds : null;
+
+    }
+}
+
+/**
+ * SetServerWeight请求参数结构体
+ * @class
+ */
+class SetServerWeightRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 服务舰队ID
+         * @type {string || null}
+         */
+        this.FleetId = null;
+
+        /**
+         * 实例ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 权重
+         * @type {number || null}
+         */
+        this.Weight = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FleetId = 'FleetId' in params ? params.FleetId : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Weight = 'Weight' in params ? params.Weight : null;
 
     }
 }
@@ -1948,6 +2524,76 @@ class GameServerSession extends  AbstractModel {
 }
 
 /**
+ * DescribeGameServerSessionQueues请求参数结构体
+ * @class
+ */
+class DescribeGameServerSessionQueuesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 游戏服务器会话队列数组
+         * @type {Array.<string> || null}
+         */
+        this.Names = null;
+
+        /**
+         * 要返回的最大结果数
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 偏移
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Names = 'Names' in params ? params.Names : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+
+    }
+}
+
+/**
+ * DeleteScalingPolicy返回参数结构体
+ * @class
+ */
+class DeleteScalingPolicyResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeGameServerSessionPlacement返回参数结构体
  * @class
  */
@@ -2067,6 +2713,102 @@ playerSessionCount 当前玩家会话数 Number
 }
 
 /**
+ * PutScalingPolicy请求参数结构体
+ * @class
+ */
+class PutScalingPolicyRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 基于规则的扩缩容配置
+         * @type {string || null}
+         */
+        this.FleetId = null;
+
+        /**
+         * 名称
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 调整值
+         * @type {number || null}
+         */
+        this.ScalingAdjustment = null;
+
+        /**
+         * 调整类型
+         * @type {string || null}
+         */
+        this.ScalingAdjustmentType = null;
+
+        /**
+         * 指标阈值
+         * @type {number || null}
+         */
+        this.Threshold = null;
+
+        /**
+         * 比较符
+         * @type {string || null}
+         */
+        this.ComparisonOperator = null;
+
+        /**
+         * 时间长度（分钟）
+         * @type {number || null}
+         */
+        this.EvaluationPeriods = null;
+
+        /**
+         * 指标名称
+         * @type {string || null}
+         */
+        this.MetricName = null;
+
+        /**
+         * 策略类型
+         * @type {string || null}
+         */
+        this.PolicyType = null;
+
+        /**
+         * 扩缩容配置类型
+         * @type {TargetConfiguration || null}
+         */
+        this.TargetConfiguration = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FleetId = 'FleetId' in params ? params.FleetId : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.ScalingAdjustment = 'ScalingAdjustment' in params ? params.ScalingAdjustment : null;
+        this.ScalingAdjustmentType = 'ScalingAdjustmentType' in params ? params.ScalingAdjustmentType : null;
+        this.Threshold = 'Threshold' in params ? params.Threshold : null;
+        this.ComparisonOperator = 'ComparisonOperator' in params ? params.ComparisonOperator : null;
+        this.EvaluationPeriods = 'EvaluationPeriods' in params ? params.EvaluationPeriods : null;
+        this.MetricName = 'MetricName' in params ? params.MetricName : null;
+        this.PolicyType = 'PolicyType' in params ? params.PolicyType : null;
+
+        if (params.TargetConfiguration) {
+            let obj = new TargetConfiguration();
+            obj.deserialize(params.TargetConfiguration)
+            this.TargetConfiguration = obj;
+        }
+
+    }
+}
+
+/**
  * StopGameServerSessionPlacement返回参数结构体
  * @class
  */
@@ -2169,14 +2911,20 @@ class InstanceAccess extends  AbstractModel {
 
 module.exports = {
     GameProperty: GameProperty,
-    UpdateGameServerSessionResponse: UpdateGameServerSessionResponse,
+    TargetConfiguration: TargetConfiguration,
+    DeleteScalingPolicyRequest: DeleteScalingPolicyRequest,
+    PlacedPlayerSession: PlacedPlayerSession,
     DescribeGameServerSessionsResponse: DescribeGameServerSessionsResponse,
     Instance: Instance,
+    DescribeGameServerSessionQueuesResponse: DescribeGameServerSessionQueuesResponse,
     GetInstanceAccessResponse: GetInstanceAccessResponse,
     JoinGameServerSessionRequest: JoinGameServerSessionRequest,
     DescribePlayerSessionsResponse: DescribePlayerSessionsResponse,
+    SetServerWeightResponse: SetServerWeightResponse,
     PlayerLatency: PlayerLatency,
     StopGameServerSessionPlacementRequest: StopGameServerSessionPlacementRequest,
+    UpdateGameServerSessionResponse: UpdateGameServerSessionResponse,
+    ScalingPolicy: ScalingPolicy,
     GetInstanceAccessRequest: GetInstanceAccessRequest,
     DescribeGameServerSessionsRequest: DescribeGameServerSessionsRequest,
     UpdateGameServerSessionRequest: UpdateGameServerSessionRequest,
@@ -2187,13 +2935,19 @@ module.exports = {
     GetGameServerSessionLogUrlRequest: GetGameServerSessionLogUrlRequest,
     CreateGameServerSessionResponse: CreateGameServerSessionResponse,
     DescribeInstancesRequest: DescribeInstancesRequest,
+    DescribeScalingPoliciesRequest: DescribeScalingPoliciesRequest,
     DescribeGameServerSessionDetailsResponse: DescribeGameServerSessionDetailsResponse,
+    PlayerLatencyPolicy: PlayerLatencyPolicy,
+    PutScalingPolicyResponse: PutScalingPolicyResponse,
     JoinGameServerSessionResponse: JoinGameServerSessionResponse,
     DesiredPlayerSession: DesiredPlayerSession,
     SearchGameServerSessionsResponse: SearchGameServerSessionsResponse,
     DescribeGameServerSessionPlacementRequest: DescribeGameServerSessionPlacementRequest,
-    PlacedPlayerSession: PlacedPlayerSession,
+    DescribeScalingPoliciesResponse: DescribeScalingPoliciesResponse,
+    GameServerSessionQueueDestination: GameServerSessionQueueDestination,
     GameServerSessionPlacement: GameServerSessionPlacement,
+    GameServerSessionQueue: GameServerSessionQueue,
+    SetServerWeightRequest: SetServerWeightRequest,
     PlayerSession: PlayerSession,
     CreateGameServerSessionRequest: CreateGameServerSessionRequest,
     GetGameServerSessionLogUrlResponse: GetGameServerSessionLogUrlResponse,
@@ -2201,8 +2955,11 @@ module.exports = {
     DescribeGameServerSessionDetailsRequest: DescribeGameServerSessionDetailsRequest,
     StartGameServerSessionPlacementRequest: StartGameServerSessionPlacementRequest,
     GameServerSession: GameServerSession,
+    DescribeGameServerSessionQueuesRequest: DescribeGameServerSessionQueuesRequest,
+    DeleteScalingPolicyResponse: DeleteScalingPolicyResponse,
     DescribeGameServerSessionPlacementResponse: DescribeGameServerSessionPlacementResponse,
     SearchGameServerSessionsRequest: SearchGameServerSessionsRequest,
+    PutScalingPolicyRequest: PutScalingPolicyRequest,
     StopGameServerSessionPlacementResponse: StopGameServerSessionPlacementResponse,
     InstanceAccess: InstanceAccess,
 
