@@ -846,6 +846,42 @@ class TextClassificationRequest extends  AbstractModel {
 }
 
 /**
+ * TextSimilarity请求参数结构体
+ * @class
+ */
+class TextSimilarityRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 需要与目标句子计算相似度的源句子（仅支持UTF-8格式，不超过500字）
+         * @type {string || null}
+         */
+        this.SrcText = null;
+
+        /**
+         * 需要与源句子计算相似度的一个或多个目标句子（仅支持UTF-8格式，目标句子的数量不超过100个，每个句子不超过500字）
+注意：每成功计算1个目标句子与源句子的相似度算1次调用
+         * @type {Array.<string> || null}
+         */
+        this.TargetText = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SrcText = 'SrcText' in params ? params.SrcText : null;
+        this.TargetText = 'TargetText' in params ? params.TargetText : null;
+
+    }
+}
+
+/**
  * 关键词提取结果
  * @class
  */
@@ -958,6 +994,49 @@ class DescribeTripleResponse extends  AbstractModel {
                 let obj = new TripleContent();
                 obj.deserialize(params.Content[z]);
                 this.Content.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * TextSimilarity返回参数结构体
+ * @class
+ */
+class TextSimilarityResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 每个目标句子与源句子的相似度分值，按照分值降序排列
+         * @type {Array.<Similarity> || null}
+         */
+        this.Similarity = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Similarity) {
+            this.Similarity = new Array();
+            for (let z in params.Similarity) {
+                let obj = new Similarity();
+                obj.deserialize(params.Similarity[z]);
+                this.Similarity.push(obj);
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
@@ -1414,6 +1493,41 @@ class DependencyParsingResponse extends  AbstractModel {
 }
 
 /**
+ * 文本相似度
+ * @class
+ */
+class Similarity extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 相似度分数
+         * @type {number || null}
+         */
+        this.Score = null;
+
+        /**
+         * 目标文本句子
+         * @type {string || null}
+         */
+        this.Text = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Score = 'Score' in params ? params.Score : null;
+        this.Text = 'Text' in params ? params.Text : null;
+
+    }
+}
+
+/**
  * 文本纠错结果
  * @class
  */
@@ -1747,9 +1861,11 @@ module.exports = {
     SimilarWordsRequest: SimilarWordsRequest,
     TextClassificationResponse: TextClassificationResponse,
     TextClassificationRequest: TextClassificationRequest,
+    TextSimilarityRequest: TextSimilarityRequest,
     Keyword: Keyword,
     WordEmbeddingResponse: WordEmbeddingResponse,
     DescribeTripleResponse: DescribeTripleResponse,
+    TextSimilarityResponse: TextSimilarityResponse,
     PosToken: PosToken,
     SentimentAnalysisResponse: SentimentAnalysisResponse,
     KeywordsExtractionResponse: KeywordsExtractionResponse,
@@ -1760,6 +1876,7 @@ module.exports = {
     NerToken: NerToken,
     SimilarWordsResponse: SimilarWordsResponse,
     DependencyParsingResponse: DependencyParsingResponse,
+    Similarity: Similarity,
     CCIToken: CCIToken,
     LexicalAnalysisRequest: LexicalAnalysisRequest,
     SentimentAnalysisRequest: SentimentAnalysisRequest,

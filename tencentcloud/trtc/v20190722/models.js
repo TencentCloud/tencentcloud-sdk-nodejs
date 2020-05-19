@@ -868,6 +868,34 @@ class OutputParams extends  AbstractModel {
 }
 
 /**
+ * CreateTroubleInfo返回参数结构体
+ * @class
+ */
+class CreateTroubleInfoResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * Es返回的质量数据
  * @class
  */
@@ -1016,6 +1044,83 @@ class ScaleInfomation extends  AbstractModel {
         this.UserNumber = 'UserNumber' in params ? params.UserNumber : null;
         this.UserCount = 'UserCount' in params ? params.UserCount : null;
         this.RoomNumbers = 'RoomNumbers' in params ? params.RoomNumbers : null;
+
+    }
+}
+
+/**
+ * CreateTroubleInfo请求参数结构体
+ * @class
+ */
+class CreateTroubleInfoRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 应用的ID
+         * @type {string || null}
+         */
+        this.SdkAppId = null;
+
+        /**
+         * 房间ID
+         * @type {string || null}
+         */
+        this.RoomId = null;
+
+        /**
+         * 老师用户ID
+         * @type {string || null}
+         */
+        this.TeacherUserId = null;
+
+        /**
+         * 学生用户ID
+         * @type {string || null}
+         */
+        this.StudentUserId = null;
+
+        /**
+         * 体验异常端（老师或学生）的用户 ID。
+         * @type {string || null}
+         */
+        this.TroubleUserId = null;
+
+        /**
+         * 异常类型
+         * @type {number || null}
+         */
+        this.TroubleType = null;
+
+        /**
+         * 异常发生的UNIX 时间戳，单位为秒。
+         * @type {number || null}
+         */
+        this.TroubleTime = null;
+
+        /**
+         * 异常详情
+         * @type {string || null}
+         */
+        this.TroubleMsg = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
+        this.RoomId = 'RoomId' in params ? params.RoomId : null;
+        this.TeacherUserId = 'TeacherUserId' in params ? params.TeacherUserId : null;
+        this.StudentUserId = 'StudentUserId' in params ? params.StudentUserId : null;
+        this.TroubleUserId = 'TroubleUserId' in params ? params.TroubleUserId : null;
+        this.TroubleType = 'TroubleType' in params ? params.TroubleType : null;
+        this.TroubleTime = 'TroubleTime' in params ? params.TroubleTime : null;
+        this.TroubleMsg = 'TroubleMsg' in params ? params.TroubleMsg : null;
 
     }
 }
@@ -1460,9 +1565,11 @@ module.exports = {
     DescribeHistoryScaleRequest: DescribeHistoryScaleRequest,
     DescribeRoomInformationResponse: DescribeRoomInformationResponse,
     OutputParams: OutputParams,
+    CreateTroubleInfoResponse: CreateTroubleInfoResponse,
     QualityData: QualityData,
     DescribeRealtimeNetworkResponse: DescribeRealtimeNetworkResponse,
     ScaleInfomation: ScaleInfomation,
+    CreateTroubleInfoRequest: CreateTroubleInfoRequest,
     StartMCUMixTranscodeResponse: StartMCUMixTranscodeResponse,
     DescribeRealtimeScaleRequest: DescribeRealtimeScaleRequest,
     DescribeCallDetailResponse: DescribeCallDetailResponse,

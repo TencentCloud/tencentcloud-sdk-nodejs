@@ -34,9 +34,11 @@ const StopMCUMixTranscodeRequest = models.StopMCUMixTranscodeRequest;
 const DescribeHistoryScaleRequest = models.DescribeHistoryScaleRequest;
 const DescribeRoomInformationResponse = models.DescribeRoomInformationResponse;
 const OutputParams = models.OutputParams;
+const CreateTroubleInfoResponse = models.CreateTroubleInfoResponse;
 const QualityData = models.QualityData;
 const DescribeRealtimeNetworkResponse = models.DescribeRealtimeNetworkResponse;
 const ScaleInfomation = models.ScaleInfomation;
+const CreateTroubleInfoRequest = models.CreateTroubleInfoRequest;
 const StartMCUMixTranscodeResponse = models.StartMCUMixTranscodeResponse;
 const DescribeRealtimeScaleRequest = models.DescribeRealtimeScaleRequest;
 const DescribeCallDetailResponse = models.DescribeCallDetailResponse;
@@ -167,6 +169,17 @@ TRTC 的一个房间中可能会同时存在多路音视频流，您可以通过
     StopMCUMixTranscode(req, cb) {
         let resp = new StopMCUMixTranscodeResponse();
         this.request("StopMCUMixTranscode", req, resp, cb);
+    }
+
+    /**
+     * 创建异常信息
+     * @param {CreateTroubleInfoRequest} req
+     * @param {function(string, CreateTroubleInfoResponse):void} cb
+     * @public
+     */
+    CreateTroubleInfo(req, cb) {
+        let resp = new CreateTroubleInfoResponse();
+        this.request("CreateTroubleInfo", req, resp, cb);
     }
 
     /**
