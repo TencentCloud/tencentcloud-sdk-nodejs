@@ -2335,6 +2335,12 @@ class InquiryPriceResizeInstanceDisksRequest extends  AbstractModel {
          */
         this.ForceStop = null;
 
+        /**
+         * 待扩容的系统盘配置信息。只支持扩容云盘。
+         * @type {SystemDisk || null}
+         */
+        this.SystemDisk = null;
+
     }
 
     /**
@@ -2355,6 +2361,12 @@ class InquiryPriceResizeInstanceDisksRequest extends  AbstractModel {
             }
         }
         this.ForceStop = 'ForceStop' in params ? params.ForceStop : null;
+
+        if (params.SystemDisk) {
+            let obj = new SystemDisk();
+            obj.deserialize(params.SystemDisk)
+            this.SystemDisk = obj;
+        }
 
     }
 }
@@ -7953,6 +7965,12 @@ class ResizeInstanceDisksRequest extends  AbstractModel {
          */
         this.ForceStop = null;
 
+        /**
+         * 待扩容的系统盘配置信息。只支持扩容云盘。
+         * @type {SystemDisk || null}
+         */
+        this.SystemDisk = null;
+
     }
 
     /**
@@ -7973,6 +7991,12 @@ class ResizeInstanceDisksRequest extends  AbstractModel {
             }
         }
         this.ForceStop = 'ForceStop' in params ? params.ForceStop : null;
+
+        if (params.SystemDisk) {
+            let obj = new SystemDisk();
+            obj.deserialize(params.SystemDisk)
+            this.SystemDisk = obj;
+        }
 
     }
 }

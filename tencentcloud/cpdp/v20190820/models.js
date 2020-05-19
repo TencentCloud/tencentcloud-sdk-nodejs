@@ -992,6 +992,8 @@ class BindAcctRequest extends  AbstractModel {
         /**
          * 1 – 小额转账验证
 2 – 短信验证
+3 - 一分钱转账验证，无需再调CheckAcct验证绑卡
+4 - 银行四要素验证，无需再调CheckAcct验证绑卡
 每个结算账户每天只能使用一次小额转账验证
          * @type {number || null}
          */
@@ -1071,6 +1073,15 @@ BindType==2时必填
          */
         this.EiconBankBranchId = null;
 
+        /**
+         * 敏感信息加密类型:
+RSA, rsa非对称加密，使用RSA-PKCS1-v1_5
+AES,  aes对称加密，使用AES256-CBC-PCKS7padding
+默认RSA
+         * @type {string || null}
+         */
+        this.EncryptType = null;
+
     }
 
     /**
@@ -1094,6 +1105,7 @@ BindType==2时必填
         this.Mobile = 'Mobile' in params ? params.Mobile : null;
         this.CnapsBranchId = 'CnapsBranchId' in params ? params.CnapsBranchId : null;
         this.EiconBankBranchId = 'EiconBankBranchId' in params ? params.EiconBankBranchId : null;
+        this.EncryptType = 'EncryptType' in params ? params.EncryptType : null;
 
     }
 }
@@ -2990,12 +3002,41 @@ class CreateAcctRequest extends  AbstractModel {
 
         /**
          * 子商户会员类型：
-general:普通子账户
-merchant:商户子账户
-缺省： general
+general: 普通子账户
+merchant: 商户子账户
+缺省: general
          * @type {string || null}
          */
         this.SubMerchantMemberType = null;
+
+        /**
+         * 子商户密钥
+<敏感信息>加密详见《商户端接口敏感信息加密说明》
+         * @type {string || null}
+         */
+        this.SubMerchantKey = null;
+
+        /**
+         * 子商户私钥
+<敏感信息>加密详见《商户端接口敏感信息加密说明》
+         * @type {string || null}
+         */
+        this.SubMerchantPrivateKey = null;
+
+        /**
+         * 敏感信息加密类型:
+RSA, rsa非对称加密，使用RSA-PKCS1-v1_5
+AES,  aes对称加密，使用AES256-CBC-PCKS7padding
+默认RSA
+         * @type {string || null}
+         */
+        this.EncryptType = null;
+
+        /**
+         * 银行生成的子商户账户，已开户的场景需要录入
+         * @type {string || null}
+         */
+        this.SubAcctNo = null;
 
     }
 
@@ -3018,6 +3059,10 @@ merchant:商户子账户
         this.SubMchType = 'SubMchType' in params ? params.SubMchType : null;
         this.ShortName = 'ShortName' in params ? params.ShortName : null;
         this.SubMerchantMemberType = 'SubMerchantMemberType' in params ? params.SubMerchantMemberType : null;
+        this.SubMerchantKey = 'SubMerchantKey' in params ? params.SubMerchantKey : null;
+        this.SubMerchantPrivateKey = 'SubMerchantPrivateKey' in params ? params.SubMerchantPrivateKey : null;
+        this.EncryptType = 'EncryptType' in params ? params.EncryptType : null;
+        this.SubAcctNo = 'SubAcctNo' in params ? params.SubAcctNo : null;
 
     }
 }
@@ -5829,7 +5874,7 @@ class CreateAcctResponse extends  AbstractModel {
         this.SubAppId = null;
 
         /**
-         * 平安银行生成的子商户账户
+         * 银行生成的子商户账户
          * @type {string || null}
          */
         this.SubAcctNo = null;

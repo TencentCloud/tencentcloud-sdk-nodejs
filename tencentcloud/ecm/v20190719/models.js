@@ -6013,6 +6013,12 @@ class ResetInstancesRequest extends  AbstractModel {
          */
         this.EnhancedService = null;
 
+        /**
+         * 是否保留数据盘数据，取值"true"/"false"。默认为"true"
+         * @type {string || null}
+         */
+        this.KeepData = null;
+
     }
 
     /**
@@ -6031,6 +6037,7 @@ class ResetInstancesRequest extends  AbstractModel {
             obj.deserialize(params.EnhancedService)
             this.EnhancedService = obj;
         }
+        this.KeepData = 'KeepData' in params ? params.KeepData : null;
 
     }
 }

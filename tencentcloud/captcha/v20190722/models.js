@@ -1165,7 +1165,7 @@ class DescribeCaptchaResultRequest extends  AbstractModel {
         this.CaptchaType = null;
 
         /**
-         * 验证码返回给用户的票据
+         * 前端回调函数返回的用户验证票据
          * @type {string || null}
          */
         this.Ticket = null;
@@ -1177,7 +1177,7 @@ class DescribeCaptchaResultRequest extends  AbstractModel {
         this.UserIp = null;
 
         /**
-         * 验证票据需要的随机字符串
+         * 前端回调函数返回的随机字符串
          * @type {string || null}
          */
         this.Randstr = null;
