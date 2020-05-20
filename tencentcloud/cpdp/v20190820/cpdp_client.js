@@ -71,7 +71,9 @@ const QueryOutwardOrderResult = models.QueryOutwardOrderResult;
 const RevRegisterBillSupportWithdrawResponse = models.RevRegisterBillSupportWithdrawResponse;
 const CreateAgentTaxPaymentInfosResponse = models.CreateAgentTaxPaymentInfosResponse;
 const QueryPayerInfoRequest = models.QueryPayerInfoRequest;
+const QueryMerchantInfoForManagementResponse = models.QueryMerchantInfoForManagementResponse;
 const QuerySingleTransactionStatusRequest = models.QuerySingleTransactionStatusRequest;
+const MerchantManagementList = models.MerchantManagementList;
 const CreateInvoiceResult = models.CreateInvoiceResult;
 const QueryApplicationMaterialResponse = models.QueryApplicationMaterialResponse;
 const QueryMerchantBalanceResult = models.QueryMerchantBalanceResult;
@@ -96,9 +98,10 @@ const QueryAcctInfoRequest = models.QueryAcctInfoRequest;
 const ApplyDeclareData = models.ApplyDeclareData;
 const TranItem = models.TranItem;
 const ClearItem = models.ClearItem;
-const QueryOrderRequest = models.QueryOrderRequest;
+const MerchantManagementResult = models.MerchantManagementResult;
 const ApplyWithdrawalResponse = models.ApplyWithdrawalResponse;
 const QueryBankTransactionDetailsResponse = models.QueryBankTransactionDetailsResponse;
+const QueryPayerinfoData = models.QueryPayerinfoData;
 const QueryMerchantBalanceData = models.QueryMerchantBalanceData;
 const QueryMemberTransactionRequest = models.QueryMemberTransactionRequest;
 const QueryExchangerateResult = models.QueryExchangerateResult;
@@ -133,16 +136,17 @@ const RechargeMemberThirdPayResponse = models.RechargeMemberThirdPayResponse;
 const QueryOrderOutOrderList = models.QueryOrderOutOrderList;
 const QueryCommonTransferRechargeRequest = models.QueryCommonTransferRechargeRequest;
 const QueryItem = models.QueryItem;
+const QueryOrderRequest = models.QueryOrderRequest;
 const CloseOrderRequest = models.CloseOrderRequest;
 const RevResigterBillSupportWithdrawResponse = models.RevResigterBillSupportWithdrawResponse;
 const QueryBalanceResponse = models.QueryBalanceResponse;
 const QueryOutwardOrderData = models.QueryOutwardOrderData;
 const TransactionItem = models.TransactionItem;
-const QueryBankTransactionDetailsRequest = models.QueryBankTransactionDetailsRequest;
+const CheckAcctResponse = models.CheckAcctResponse;
 const QueryReconciliationDocumentResponse = models.QueryReconciliationDocumentResponse;
 const CreateMerchantResultData = models.CreateMerchantResultData;
 const QueryExchangeRateRequest = models.QueryExchangeRateRequest;
-const QueryPayerinfoData = models.QueryPayerinfoData;
+const QueryMerchantInfoForManagementRequest = models.QueryMerchantInfoForManagementRequest;
 const FileItem = models.FileItem;
 const RechargeMemberThirdPayRequest = models.RechargeMemberThirdPayRequest;
 const ApplyOutwardOrderResult = models.ApplyOutwardOrderResult;
@@ -150,6 +154,7 @@ const ApplyPayerInfoRequest = models.ApplyPayerInfoRequest;
 const QueryBankClearRequest = models.QueryBankClearRequest;
 const QueryInvoiceRequest = models.QueryInvoiceRequest;
 const ApplyApplicationMaterialResponse = models.ApplyApplicationMaterialResponse;
+const QueryBankTransactionDetailsRequest = models.QueryBankTransactionDetailsRequest;
 const DownloadBillRequest = models.DownloadBillRequest;
 const RevokeMemberRechargeThirdPayRequest = models.RevokeMemberRechargeThirdPayRequest;
 const CreateRedInvoiceResultData = models.CreateRedInvoiceResultData;
@@ -176,7 +181,6 @@ const QueryMemberBindRequest = models.QueryMemberBindRequest;
 const QueryRefundRequest = models.QueryRefundRequest;
 const BindRelateAcctUnionPayResponse = models.BindRelateAcctUnionPayResponse;
 const QueryReconciliationDocumentRequest = models.QueryReconciliationDocumentRequest;
-const CheckAcctResponse = models.CheckAcctResponse;
 const UnifiedOrderRequest = models.UnifiedOrderRequest;
 const UnBindAcctRequest = models.UnBindAcctRequest;
 const DeleteAgentTaxPaymentInfoResponse = models.DeleteAgentTaxPaymentInfoResponse;
@@ -363,6 +367,17 @@ class CpdpClient extends AbstractClient {
     QueryExchangeRate(req, cb) {
         let resp = new QueryExchangeRateResponse();
         this.request("QueryExchangeRate", req, resp, cb);
+    }
+
+    /**
+     * 智慧零售-查询管理端商户
+     * @param {QueryMerchantInfoForManagementRequest} req
+     * @param {function(string, QueryMerchantInfoForManagementResponse):void} cb
+     * @public
+     */
+    QueryMerchantInfoForManagement(req, cb) {
+        let resp = new QueryMerchantInfoForManagementResponse();
+        this.request("QueryMerchantInfoForManagement", req, resp, cb);
     }
 
     /**

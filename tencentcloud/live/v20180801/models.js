@@ -5381,7 +5381,7 @@ class DropLiveStreamRequest extends  AbstractModel {
         this.StreamName = null;
 
         /**
-         * 您的加速域名。
+         * 您的推流域名。
          * @type {string || null}
          */
         this.DomainName = null;

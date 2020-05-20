@@ -13374,6 +13374,7 @@ class CcnInstance extends  AbstractModel {
 <li>`VPC`：私有网络</li>
 <li>`DIRECTCONNECT`：专线网关</li>
 <li>`BMVPC`：黑石私有网络</li>
+<li>`VPNGW`：VPNGW类型</li>
          * @type {string || null}
          */
         this.InstanceType = null;
