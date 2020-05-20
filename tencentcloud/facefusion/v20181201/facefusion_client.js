@@ -16,14 +16,19 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
-const FaceFusionResponse = models.FaceFusionResponse;
+const PublicMaterialInfos = models.PublicMaterialInfos;
 const FaceFusionRequest = models.FaceFusionRequest;
+const FaceFusionResponse = models.FaceFusionResponse;
+const DescribeMaterialListResponse = models.DescribeMaterialListResponse;
+const MaterialFaceList = models.MaterialFaceList;
+const FaceInfo = models.FaceInfo;
 const FuseFaceReviewDetail = models.FuseFaceReviewDetail;
 const MergeInfo = models.MergeInfo;
 const FuseFaceReviewResult = models.FuseFaceReviewResult;
 const FuseFaceResponse = models.FuseFaceResponse;
 const FuseFaceRequest = models.FuseFaceRequest;
 const FaceRect = models.FaceRect;
+const DescribeMaterialListRequest = models.DescribeMaterialListRequest;
 
 
 /**
@@ -36,6 +41,17 @@ class FacefusionClient extends AbstractClient {
         super("facefusion.tencentcloudapi.com", "2018-12-01", credential, region, profile);
     }
     
+    /**
+     * 通常通过腾讯云人脸融合的控制台可以查看到素材相关的参数数据，可以满足使用。本接口返回活动的素材数据，包括素材状态等。用于用户通过Api查看素材相关数据，方便使用。
+     * @param {DescribeMaterialListRequest} req
+     * @param {function(string, DescribeMaterialListResponse):void} cb
+     * @public
+     */
+    DescribeMaterialList(req, cb) {
+        let resp = new DescribeMaterialListResponse();
+        this.request("DescribeMaterialList", req, resp, cb);
+    }
+
     /**
      * 本接口用于人脸融合，用户上传人脸图片，获取与模板融合后的人脸图片。未发布的活动请求频率限制为1次/秒，已发布的活动请求频率限制50次/秒。如有需要提高活动的请求频率限制，请在控制台中申请。
 >     

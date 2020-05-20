@@ -21,34 +21,42 @@ const CreateStaticStoreResponse = models.CreateStaticStoreResponse;
 const DescribeEnvLimitRequest = models.DescribeEnvLimitRequest;
 const DescribeQuotaDataResponse = models.DescribeQuotaDataResponse;
 const CheckTcbServiceResponse = models.CheckTcbServiceResponse;
+const DescribeEndUserLoginStatisticRequest = models.DescribeEndUserLoginStatisticRequest;
 const StorageInfo = models.StorageInfo;
+const LoginStatistic = models.LoginStatistic;
 const FunctionInfo = models.FunctionInfo;
 const CommonServiceAPIRequest = models.CommonServiceAPIRequest;
 const DescribeEndUsersResponse = models.DescribeEndUsersResponse;
 const AuthDomain = models.AuthDomain;
+const LogServiceInfo = models.LogServiceInfo;
 const CreateStaticStoreRequest = models.CreateStaticStoreRequest;
 const CommonServiceAPIResponse = models.CommonServiceAPIResponse;
+const DescribeEndUserStatisticResponse = models.DescribeEndUserStatisticResponse;
 const CreateAuthDomainResponse = models.CreateAuthDomainResponse;
 const ModifyEnvRequest = models.ModifyEnvRequest;
 const DescribeEndUsersRequest = models.DescribeEndUsersRequest;
 const DescribeEnvsRequest = models.DescribeEnvsRequest;
 const DescribeQuotaDataRequest = models.DescribeQuotaDataRequest;
 const ReinstateEnvResponse = models.ReinstateEnvResponse;
+const DescribeEndUserStatisticRequest = models.DescribeEndUserStatisticRequest;
 const DescribeEnvFreeQuotaResponse = models.DescribeEnvFreeQuotaResponse;
 const CheckTcbServiceRequest = models.CheckTcbServiceRequest;
+const ModifyDatabaseACLResponse = models.ModifyDatabaseACLResponse;
 const StaticStorageInfo = models.StaticStorageInfo;
-const ModifyEnvResponse = models.ModifyEnvResponse;
-const LogServiceInfo = models.LogServiceInfo;
+const DescribeExtraPkgBillingInfoResponse = models.DescribeExtraPkgBillingInfoResponse;
+const DescribeExtraPkgBillingInfoRequest = models.DescribeExtraPkgBillingInfoRequest;
 const DescribeEnvFreeQuotaRequest = models.DescribeEnvFreeQuotaRequest;
 const DatabasesInfo = models.DatabasesInfo;
 const DescribeAuthDomainsRequest = models.DescribeAuthDomainsRequest;
+const DeleteEndUserRequest = models.DeleteEndUserRequest;
 const DescribeAuthDomainsResponse = models.DescribeAuthDomainsResponse;
 const ReinstateEnvRequest = models.ReinstateEnvRequest;
 const DescribeDatabaseACLRequest = models.DescribeDatabaseACLRequest;
 const CreateHostingDomainRequest = models.CreateHostingDomainRequest;
 const DestroyStaticStoreResponse = models.DestroyStaticStoreResponse;
 const DeleteEndUserResponse = models.DeleteEndUserResponse;
-const ModifyDatabaseACLResponse = models.ModifyDatabaseACLResponse;
+const EnvBillingInfoItem = models.EnvBillingInfoItem;
+const PlatformStatistic = models.PlatformStatistic;
 const DescribeDatabaseACLResponse = models.DescribeDatabaseACLResponse;
 const EnvInfo = models.EnvInfo;
 const DestroyEnvRequest = models.DestroyEnvRequest;
@@ -58,8 +66,10 @@ const DestroyStaticStoreRequest = models.DestroyStaticStoreRequest;
 const PostpayEnvQuota = models.PostpayEnvQuota;
 const EndUserInfo = models.EndUserInfo;
 const DescribeEnvLimitResponse = models.DescribeEnvLimitResponse;
-const DeleteEndUserRequest = models.DeleteEndUserRequest;
+const DescribeEndUserLoginStatisticResponse = models.DescribeEndUserLoginStatisticResponse;
 const DescribeEnvsResponse = models.DescribeEnvsResponse;
+const ModifyEnvResponse = models.ModifyEnvResponse;
+const OrderInfo = models.OrderInfo;
 const CreateAuthDomainRequest = models.CreateAuthDomainRequest;
 
 
@@ -93,6 +103,17 @@ class TcbClient extends AbstractClient {
     CreateAuthDomain(req, cb) {
         let resp = new CreateAuthDomainResponse();
         this.request("CreateAuthDomain", req, resp, cb);
+    }
+
+    /**
+     * 获取终端用户总量与平台分布情况
+     * @param {DescribeEndUserStatisticRequest} req
+     * @param {function(string, DescribeEndUserStatisticResponse):void} cb
+     * @public
+     */
+    DescribeEndUserStatistic(req, cb) {
+        let resp = new DescribeEndUserStatisticResponse();
+        this.request("DescribeEndUserStatistic", req, resp, cb);
     }
 
     /**
@@ -206,6 +227,17 @@ class TcbClient extends AbstractClient {
     }
 
     /**
+     * 获取环境终端用户新增与登录信息
+     * @param {DescribeEndUserLoginStatisticRequest} req
+     * @param {function(string, DescribeEndUserLoginStatisticResponse):void} cb
+     * @public
+     */
+    DescribeEndUserLoginStatistic(req, cb) {
+        let resp = new DescribeEndUserLoginStatisticResponse();
+        this.request("DescribeEndUserLoginStatistic", req, resp, cb);
+    }
+
+    /**
      * TCB云API统一入口
      * @param {CommonServiceAPIRequest} req
      * @param {function(string, CommonServiceAPIResponse):void} cb
@@ -269,6 +301,17 @@ class TcbClient extends AbstractClient {
     DescribeEnvFreeQuota(req, cb) {
         let resp = new DescribeEnvFreeQuotaResponse();
         this.request("DescribeEnvFreeQuota", req, resp, cb);
+    }
+
+    /**
+     * 获取增值包计费相关信息
+     * @param {DescribeExtraPkgBillingInfoRequest} req
+     * @param {function(string, DescribeExtraPkgBillingInfoResponse):void} cb
+     * @public
+     */
+    DescribeExtraPkgBillingInfo(req, cb) {
+        let resp = new DescribeExtraPkgBillingInfoResponse();
+        this.request("DescribeExtraPkgBillingInfo", req, resp, cb);
     }
 
 

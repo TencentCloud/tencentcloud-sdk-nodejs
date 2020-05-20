@@ -17,30 +17,72 @@
 const AbstractModel = require("../../common/abstract_model");
 
 /**
- * FaceFusion返回参数结构体
+ * 素材信息
  * @class
  */
-class FaceFusionResponse extends  AbstractModel {
+class PublicMaterialInfos extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * RspImgType 为 url 时，返回结果的 url， RspImgType 为 base64 时返回 base64 数据。
+         * 素材Id
          * @type {string || null}
          */
-        this.Image = null;
+        this.MaterialId = null;
 
         /**
-         * 鉴政结果
-         * @type {Array.<FuseFaceReviewResult> || null}
+         * 素材状态
+         * @type {number || null}
          */
-        this.ReviewResultSet = null;
+        this.MaterialStatus = null;
 
         /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * 脸型参数P图
+         * @type {number || null}
+         */
+        this.BlendParamPtu = null;
+
+        /**
+         * 五官参数P图
+         * @type {number || null}
+         */
+        this.PositionParamPtu = null;
+
+        /**
+         * 脸型参数优图
+         * @type {number || null}
+         */
+        this.BlendParamYoutu = null;
+
+        /**
+         * 五官参数优图
+         * @type {number || null}
+         */
+        this.PositionParamYoutu = null;
+
+        /**
+         * 素材COS地址
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.Url = null;
+
+        /**
+         * 创建时间
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * 修改时间
+         * @type {string || null}
+         */
+        this.UpdateTime = null;
+
+        /**
+         * 人脸信息
+         * @type {Array.<MaterialFaceList> || null}
+         */
+        this.MaterialFaceList = null;
 
     }
 
@@ -51,17 +93,24 @@ class FaceFusionResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Image = 'Image' in params ? params.Image : null;
+        this.MaterialId = 'MaterialId' in params ? params.MaterialId : null;
+        this.MaterialStatus = 'MaterialStatus' in params ? params.MaterialStatus : null;
+        this.BlendParamPtu = 'BlendParamPtu' in params ? params.BlendParamPtu : null;
+        this.PositionParamPtu = 'PositionParamPtu' in params ? params.PositionParamPtu : null;
+        this.BlendParamYoutu = 'BlendParamYoutu' in params ? params.BlendParamYoutu : null;
+        this.PositionParamYoutu = 'PositionParamYoutu' in params ? params.PositionParamYoutu : null;
+        this.Url = 'Url' in params ? params.Url : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
 
-        if (params.ReviewResultSet) {
-            this.ReviewResultSet = new Array();
-            for (let z in params.ReviewResultSet) {
-                let obj = new FuseFaceReviewResult();
-                obj.deserialize(params.ReviewResultSet[z]);
-                this.ReviewResultSet.push(obj);
+        if (params.MaterialFaceList) {
+            this.MaterialFaceList = new Array();
+            for (let z in params.MaterialFaceList) {
+                let obj = new MaterialFaceList();
+                obj.deserialize(params.MaterialFaceList[z]);
+                this.MaterialFaceList.push(obj);
             }
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -126,6 +175,195 @@ class FaceFusionRequest extends  AbstractModel {
         this.RspImgType = 'RspImgType' in params ? params.RspImgType : null;
         this.PornDetect = 'PornDetect' in params ? params.PornDetect : null;
         this.CelebrityIdentify = 'CelebrityIdentify' in params ? params.CelebrityIdentify : null;
+
+    }
+}
+
+/**
+ * FaceFusion返回参数结构体
+ * @class
+ */
+class FaceFusionResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * RspImgType 为 url 时，返回结果的 url， RspImgType 为 base64 时返回 base64 数据。
+         * @type {string || null}
+         */
+        this.Image = null;
+
+        /**
+         * 鉴政结果
+         * @type {Array.<FuseFaceReviewResult> || null}
+         */
+        this.ReviewResultSet = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Image = 'Image' in params ? params.Image : null;
+
+        if (params.ReviewResultSet) {
+            this.ReviewResultSet = new Array();
+            for (let z in params.ReviewResultSet) {
+                let obj = new FuseFaceReviewResult();
+                obj.deserialize(params.ReviewResultSet[z]);
+                this.ReviewResultSet.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeMaterialList返回参数结构体
+ * @class
+ */
+class DescribeMaterialListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 素材列表数据
+         * @type {Array.<PublicMaterialInfos> || null}
+         */
+        this.MaterialInfos = null;
+
+        /**
+         * 素材条数
+         * @type {number || null}
+         */
+        this.Count = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.MaterialInfos) {
+            this.MaterialInfos = new Array();
+            for (let z in params.MaterialInfos) {
+                let obj = new PublicMaterialInfos();
+                obj.deserialize(params.MaterialInfos[z]);
+                this.MaterialInfos.push(obj);
+            }
+        }
+        this.Count = 'Count' in params ? params.Count : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 人脸信息
+ * @class
+ */
+class MaterialFaceList extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 人脸序号
+         * @type {string || null}
+         */
+        this.FaceId = null;
+
+        /**
+         * 人脸框信息
+         * @type {FaceInfo || null}
+         */
+        this.FaceInfo = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FaceId = 'FaceId' in params ? params.FaceId : null;
+
+        if (params.FaceInfo) {
+            let obj = new FaceInfo();
+            obj.deserialize(params.FaceInfo)
+            this.FaceInfo = obj;
+        }
+
+    }
+}
+
+/**
+ * 人脸信息
+ * @class
+ */
+class FaceInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 人脸框的横坐标
+         * @type {number || null}
+         */
+        this.X = null;
+
+        /**
+         * 人脸框的纵坐标
+         * @type {number || null}
+         */
+        this.Y = null;
+
+        /**
+         * 人脸框的宽度
+         * @type {number || null}
+         */
+        this.Width = null;
+
+        /**
+         * 人脸框的高度
+         * @type {number || null}
+         */
+        this.Height = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.X = 'X' in params ? params.X : null;
+        this.Y = 'Y' in params ? params.Y : null;
+        this.Width = 'Width' in params ? params.Width : null;
+        this.Height = 'Height' in params ? params.Height : null;
 
     }
 }
@@ -491,14 +729,68 @@ class FaceRect extends  AbstractModel {
     }
 }
 
+/**
+ * DescribeMaterialList请求参数结构体
+ * @class
+ */
+class DescribeMaterialListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 活动Id
+         * @type {number || null}
+         */
+        this.ActivityId = null;
+
+        /**
+         * 素材Id
+         * @type {string || null}
+         */
+        this.MaterialId = null;
+
+        /**
+         * 每次拉取条数
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 偏移量
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ActivityId = 'ActivityId' in params ? params.ActivityId : null;
+        this.MaterialId = 'MaterialId' in params ? params.MaterialId : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+
+    }
+}
+
 module.exports = {
-    FaceFusionResponse: FaceFusionResponse,
+    PublicMaterialInfos: PublicMaterialInfos,
     FaceFusionRequest: FaceFusionRequest,
+    FaceFusionResponse: FaceFusionResponse,
+    DescribeMaterialListResponse: DescribeMaterialListResponse,
+    MaterialFaceList: MaterialFaceList,
+    FaceInfo: FaceInfo,
     FuseFaceReviewDetail: FuseFaceReviewDetail,
     MergeInfo: MergeInfo,
     FuseFaceReviewResult: FuseFaceReviewResult,
     FuseFaceResponse: FuseFaceResponse,
     FuseFaceRequest: FuseFaceRequest,
     FaceRect: FaceRect,
+    DescribeMaterialListRequest: DescribeMaterialListRequest,
 
 }

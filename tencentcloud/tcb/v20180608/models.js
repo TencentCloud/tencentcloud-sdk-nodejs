@@ -179,6 +179,43 @@ class CheckTcbServiceResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeEndUserLoginStatistic请求参数结构体
+ * @class
+ */
+class DescribeEndUserLoginStatisticRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 环境id
+         * @type {string || null}
+         */
+        this.EnvId = null;
+
+        /**
+         * 终端用户来源
+<li> qcloud </li>
+<li>miniapp</li>
+         * @type {string || null}
+         */
+        this.Source = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.EnvId = 'EnvId' in params ? params.EnvId : null;
+        this.Source = 'Source' in params ? params.Source : null;
+
+    }
+}
+
+/**
  * StorageInfo 资源信息
  * @class
  */
@@ -224,6 +261,59 @@ class StorageInfo extends  AbstractModel {
         this.Bucket = 'Bucket' in params ? params.Bucket : null;
         this.CdnDomain = 'CdnDomain' in params ? params.CdnDomain : null;
         this.AppId = 'AppId' in params ? params.AppId : null;
+
+    }
+}
+
+/**
+ * 终端用户登录新增统计
+ * @class
+ */
+class LoginStatistic extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 统计类型 新增NEWUSER 和登录 LOGIN
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.StatisticalType = null;
+
+        /**
+         * 统计周期：日DAY，周WEEK，月MONTH
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.StatisticalCycle = null;
+
+        /**
+         * 统计总量
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Count = null;
+
+        /**
+         * 更新时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.UpdateTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.StatisticalType = 'StatisticalType' in params ? params.StatisticalType : null;
+        this.StatisticalCycle = 'StatisticalCycle' in params ? params.StatisticalCycle : null;
+        this.Count = 'Count' in params ? params.Count : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
 
     }
 }
@@ -417,6 +507,62 @@ class AuthDomain extends  AbstractModel {
 }
 
 /**
+ * 云日志服务相关信息
+ * @class
+ */
+class LogServiceInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * log名
+         * @type {string || null}
+         */
+        this.LogsetName = null;
+
+        /**
+         * log-id
+         * @type {string || null}
+         */
+        this.LogsetId = null;
+
+        /**
+         * topic名
+         * @type {string || null}
+         */
+        this.TopicName = null;
+
+        /**
+         * topic-id
+         * @type {string || null}
+         */
+        this.TopicId = null;
+
+        /**
+         * cls日志所属地域
+         * @type {string || null}
+         */
+        this.Region = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LogsetName = 'LogsetName' in params ? params.LogsetName : null;
+        this.LogsetId = 'LogsetId' in params ? params.LogsetId : null;
+        this.TopicName = 'TopicName' in params ? params.TopicName : null;
+        this.TopicId = 'TopicId' in params ? params.TopicId : null;
+        this.Region = 'Region' in params ? params.Region : null;
+
+    }
+}
+
+/**
  * CreateStaticStore请求参数结构体
  * @class
  */
@@ -474,6 +620,57 @@ class CommonServiceAPIResponse extends  AbstractModel {
             return;
         }
         this.JSONResp = 'JSONResp' in params ? params.JSONResp : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeEndUserStatistic返回参数结构体
+ * @class
+ */
+class DescribeEndUserStatisticResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 终端用户各平台统计
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<PlatformStatistic> || null}
+         */
+        this.PlatformStatistics = null;
+
+        /**
+         * 终端用户总数
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.PlatformStatistics) {
+            this.PlatformStatistics = new Array();
+            for (let z in params.PlatformStatistics) {
+                let obj = new PlatformStatistic();
+                obj.deserialize(params.PlatformStatistics[z]);
+                this.PlatformStatistics.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -714,6 +911,34 @@ class ReinstateEnvResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeEndUserStatistic请求参数结构体
+ * @class
+ */
+class DescribeEndUserStatisticRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 环境id
+         * @type {string || null}
+         */
+        this.EnvId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.EnvId = 'EnvId' in params ? params.EnvId : null;
+
+    }
+}
+
+/**
  * DescribeEnvFreeQuota返回参数结构体
  * @class
  */
@@ -774,6 +999,34 @@ class CheckTcbServiceRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+
+    }
+}
+
+/**
+ * ModifyDatabaseACL返回参数结构体
+ * @class
+ */
+class ModifyDatabaseACLResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -840,12 +1093,24 @@ class StaticStorageInfo extends  AbstractModel {
 }
 
 /**
- * ModifyEnv返回参数结构体
+ * DescribeExtraPkgBillingInfo返回参数结构体
  * @class
  */
-class ModifyEnvResponse extends  AbstractModel {
+class DescribeExtraPkgBillingInfoResponse extends  AbstractModel {
     constructor(){
         super();
+
+        /**
+         * 增值包计费信息列表
+         * @type {Array.<EnvBillingInfoItem> || null}
+         */
+        this.EnvInfoList = null;
+
+        /**
+         * 增值包数目
+         * @type {number || null}
+         */
+        this.Total = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -862,48 +1127,34 @@ class ModifyEnvResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+
+        if (params.EnvInfoList) {
+            this.EnvInfoList = new Array();
+            for (let z in params.EnvInfoList) {
+                let obj = new EnvBillingInfoItem();
+                obj.deserialize(params.EnvInfoList[z]);
+                this.EnvInfoList.push(obj);
+            }
+        }
+        this.Total = 'Total' in params ? params.Total : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
 
 /**
- * 云日志服务相关信息
+ * DescribeExtraPkgBillingInfo请求参数结构体
  * @class
  */
-class LogServiceInfo extends  AbstractModel {
+class DescribeExtraPkgBillingInfoRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * log名
+         * 已购买增值包的环境ID
          * @type {string || null}
          */
-        this.LogsetName = null;
-
-        /**
-         * log-id
-         * @type {string || null}
-         */
-        this.LogsetId = null;
-
-        /**
-         * topic名
-         * @type {string || null}
-         */
-        this.TopicName = null;
-
-        /**
-         * topic-id
-         * @type {string || null}
-         */
-        this.TopicId = null;
-
-        /**
-         * cls日志所属地域
-         * @type {string || null}
-         */
-        this.Region = null;
+        this.EnvId = null;
 
     }
 
@@ -914,11 +1165,7 @@ class LogServiceInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.LogsetName = 'LogsetName' in params ? params.LogsetName : null;
-        this.LogsetId = 'LogsetId' in params ? params.LogsetId : null;
-        this.TopicName = 'TopicName' in params ? params.TopicName : null;
-        this.TopicId = 'TopicId' in params ? params.TopicId : null;
-        this.Region = 'Region' in params ? params.Region : null;
+        this.EnvId = 'EnvId' in params ? params.EnvId : null;
 
     }
 }
@@ -1030,6 +1277,41 @@ class DescribeAuthDomainsRequest extends  AbstractModel {
             return;
         }
         this.EnvId = 'EnvId' in params ? params.EnvId : null;
+
+    }
+}
+
+/**
+ * DeleteEndUser请求参数结构体
+ * @class
+ */
+class DeleteEndUserRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 环境ID
+         * @type {string || null}
+         */
+        this.EnvId = null;
+
+        /**
+         * 用户列表，每一项都是uuid
+         * @type {Array.<string> || null}
+         */
+        this.UserList = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.EnvId = 'EnvId' in params ? params.EnvId : null;
+        this.UserList = 'UserList' in params ? params.UserList : null;
 
     }
 }
@@ -1246,18 +1528,99 @@ class DeleteEndUserResponse extends  AbstractModel {
 }
 
 /**
- * ModifyDatabaseACL返回参数结构体
+ * 环境计费信息
  * @class
  */
-class ModifyDatabaseACLResponse extends  AbstractModel {
+class EnvBillingInfoItem extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * 环境ID
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.EnvId = null;
+
+        /**
+         * tcb产品套餐ID，参考DescribePackages接口的返回值。
+         * @type {string || null}
+         */
+        this.PackageId = null;
+
+        /**
+         * 自动续费标记
+         * @type {boolean || null}
+         */
+        this.IsAutoRenew = null;
+
+        /**
+         * 状态。包含以下取值：
+<li> NORMAL：正常</li>
+<li> ISOLATE：隔离</li>
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * 支付方式。包含以下取值：
+<li> PREPAYMENT：预付费</li>
+<li> POSTPAID：后付费</li>
+         * @type {string || null}
+         */
+        this.PayMode = null;
+
+        /**
+         * 隔离时间，最近一次隔离的时间
+         * @type {string || null}
+         */
+        this.IsolatedTime = null;
+
+        /**
+         * 过期时间，套餐即将到期的时间
+         * @type {string || null}
+         */
+        this.ExpireTime = null;
+
+        /**
+         * 创建时间，第一次接入计费方案的时间。
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * 更新时间，计费信息最近一次更新的时间。
+         * @type {string || null}
+         */
+        this.UpdateTime = null;
+
+        /**
+         * true表示从未升级过付费版。
+         * @type {boolean || null}
+         */
+        this.IsAlwaysFree = null;
+
+        /**
+         * 付费渠道。
+<li> miniapp：小程序</li>
+<li> qcloud：腾讯云</li>
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.PaymentChannel = null;
+
+        /**
+         * 最新的订单信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {OrderInfo || null}
+         */
+        this.OrderInfo = null;
+
+        /**
+         * 免费配额信息。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.FreeQuota = null;
 
     }
 
@@ -1268,7 +1631,69 @@ class ModifyDatabaseACLResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.EnvId = 'EnvId' in params ? params.EnvId : null;
+        this.PackageId = 'PackageId' in params ? params.PackageId : null;
+        this.IsAutoRenew = 'IsAutoRenew' in params ? params.IsAutoRenew : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.PayMode = 'PayMode' in params ? params.PayMode : null;
+        this.IsolatedTime = 'IsolatedTime' in params ? params.IsolatedTime : null;
+        this.ExpireTime = 'ExpireTime' in params ? params.ExpireTime : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.IsAlwaysFree = 'IsAlwaysFree' in params ? params.IsAlwaysFree : null;
+        this.PaymentChannel = 'PaymentChannel' in params ? params.PaymentChannel : null;
+
+        if (params.OrderInfo) {
+            let obj = new OrderInfo();
+            obj.deserialize(params.OrderInfo)
+            this.OrderInfo = obj;
+        }
+        this.FreeQuota = 'FreeQuota' in params ? params.FreeQuota : null;
+
+    }
+}
+
+/**
+ * 终端用户平台统计信息
+ * @class
+ */
+class PlatformStatistic extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 终端用户从属平台
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Platform = null;
+
+        /**
+         * 平台终端用户数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Count = null;
+
+        /**
+         * 更新时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.UpdateTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Platform = 'Platform' in params ? params.Platform : null;
+        this.Count = 'Count' in params ? params.Count : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
 
     }
 }
@@ -1872,24 +2297,25 @@ class DescribeEnvLimitResponse extends  AbstractModel {
 }
 
 /**
- * DeleteEndUser请求参数结构体
+ * DescribeEndUserLoginStatistic返回参数结构体
  * @class
  */
-class DeleteEndUserRequest extends  AbstractModel {
+class DescribeEndUserLoginStatisticResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 环境ID
-         * @type {string || null}
+         * 环境终端用户新增与登录统计
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<LoginStatistic> || null}
          */
-        this.EnvId = null;
+        this.LoginStatistics = null;
 
         /**
-         * 用户列表，每一项都是uuid
-         * @type {Array.<string> || null}
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
          */
-        this.UserList = null;
+        this.RequestId = null;
 
     }
 
@@ -1900,8 +2326,16 @@ class DeleteEndUserRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.EnvId = 'EnvId' in params ? params.EnvId : null;
-        this.UserList = 'UserList' in params ? params.UserList : null;
+
+        if (params.LoginStatistics) {
+            this.LoginStatistics = new Array();
+            for (let z in params.LoginStatistics) {
+                let obj = new LoginStatistic();
+                obj.deserialize(params.LoginStatistics[z]);
+                this.LoginStatistics.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1950,6 +2384,117 @@ class DescribeEnvsResponse extends  AbstractModel {
 }
 
 /**
+ * ModifyEnv返回参数结构体
+ * @class
+ */
+class ModifyEnvResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 订单信息
+ * @class
+ */
+class OrderInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 订单号
+         * @type {string || null}
+         */
+        this.TranId = null;
+
+        /**
+         * 订单要切换的套餐ID
+         * @type {string || null}
+         */
+        this.PackageId = null;
+
+        /**
+         * 订单类型
+<li>1 购买</li>
+<li>2 续费</li>
+<li>3 变配</li>
+         * @type {string || null}
+         */
+        this.TranType = null;
+
+        /**
+         * 订单状态。
+<li>1未支付</li>
+<li>2 支付中</li>
+<li>3 发货中</li>
+<li>4 发货成功</li>
+<li>5 发货失败</li>
+<li>6 已退款</li>
+<li>7 已取消</li>
+<li>100 已删除</li>
+         * @type {string || null}
+         */
+        this.TranStatus = null;
+
+        /**
+         * 订单更新时间
+         * @type {string || null}
+         */
+        this.UpdateTime = null;
+
+        /**
+         * 订单创建时间
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * 付费模式.
+<li>prepayment 预付费</li>
+<li>postpaid 后付费</li>
+         * @type {string || null}
+         */
+        this.PayMode = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TranId = 'TranId' in params ? params.TranId : null;
+        this.PackageId = 'PackageId' in params ? params.PackageId : null;
+        this.TranType = 'TranType' in params ? params.TranType : null;
+        this.TranStatus = 'TranStatus' in params ? params.TranStatus : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.PayMode = 'PayMode' in params ? params.PayMode : null;
+
+    }
+}
+
+/**
  * CreateAuthDomain请求参数结构体
  * @class
  */
@@ -1990,34 +2535,42 @@ module.exports = {
     DescribeEnvLimitRequest: DescribeEnvLimitRequest,
     DescribeQuotaDataResponse: DescribeQuotaDataResponse,
     CheckTcbServiceResponse: CheckTcbServiceResponse,
+    DescribeEndUserLoginStatisticRequest: DescribeEndUserLoginStatisticRequest,
     StorageInfo: StorageInfo,
+    LoginStatistic: LoginStatistic,
     FunctionInfo: FunctionInfo,
     CommonServiceAPIRequest: CommonServiceAPIRequest,
     DescribeEndUsersResponse: DescribeEndUsersResponse,
     AuthDomain: AuthDomain,
+    LogServiceInfo: LogServiceInfo,
     CreateStaticStoreRequest: CreateStaticStoreRequest,
     CommonServiceAPIResponse: CommonServiceAPIResponse,
+    DescribeEndUserStatisticResponse: DescribeEndUserStatisticResponse,
     CreateAuthDomainResponse: CreateAuthDomainResponse,
     ModifyEnvRequest: ModifyEnvRequest,
     DescribeEndUsersRequest: DescribeEndUsersRequest,
     DescribeEnvsRequest: DescribeEnvsRequest,
     DescribeQuotaDataRequest: DescribeQuotaDataRequest,
     ReinstateEnvResponse: ReinstateEnvResponse,
+    DescribeEndUserStatisticRequest: DescribeEndUserStatisticRequest,
     DescribeEnvFreeQuotaResponse: DescribeEnvFreeQuotaResponse,
     CheckTcbServiceRequest: CheckTcbServiceRequest,
+    ModifyDatabaseACLResponse: ModifyDatabaseACLResponse,
     StaticStorageInfo: StaticStorageInfo,
-    ModifyEnvResponse: ModifyEnvResponse,
-    LogServiceInfo: LogServiceInfo,
+    DescribeExtraPkgBillingInfoResponse: DescribeExtraPkgBillingInfoResponse,
+    DescribeExtraPkgBillingInfoRequest: DescribeExtraPkgBillingInfoRequest,
     DescribeEnvFreeQuotaRequest: DescribeEnvFreeQuotaRequest,
     DatabasesInfo: DatabasesInfo,
     DescribeAuthDomainsRequest: DescribeAuthDomainsRequest,
+    DeleteEndUserRequest: DeleteEndUserRequest,
     DescribeAuthDomainsResponse: DescribeAuthDomainsResponse,
     ReinstateEnvRequest: ReinstateEnvRequest,
     DescribeDatabaseACLRequest: DescribeDatabaseACLRequest,
     CreateHostingDomainRequest: CreateHostingDomainRequest,
     DestroyStaticStoreResponse: DestroyStaticStoreResponse,
     DeleteEndUserResponse: DeleteEndUserResponse,
-    ModifyDatabaseACLResponse: ModifyDatabaseACLResponse,
+    EnvBillingInfoItem: EnvBillingInfoItem,
+    PlatformStatistic: PlatformStatistic,
     DescribeDatabaseACLResponse: DescribeDatabaseACLResponse,
     EnvInfo: EnvInfo,
     DestroyEnvRequest: DestroyEnvRequest,
@@ -2027,8 +2580,10 @@ module.exports = {
     PostpayEnvQuota: PostpayEnvQuota,
     EndUserInfo: EndUserInfo,
     DescribeEnvLimitResponse: DescribeEnvLimitResponse,
-    DeleteEndUserRequest: DeleteEndUserRequest,
+    DescribeEndUserLoginStatisticResponse: DescribeEndUserLoginStatisticResponse,
     DescribeEnvsResponse: DescribeEnvsResponse,
+    ModifyEnvResponse: ModifyEnvResponse,
+    OrderInfo: OrderInfo,
     CreateAuthDomainRequest: CreateAuthDomainRequest,
 
 }
