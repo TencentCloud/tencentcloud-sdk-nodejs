@@ -117,7 +117,7 @@ class TimeValue extends  AbstractModel {
         this.Time = null;
 
         /**
-         * 当前时间取值
+         * 当前时间取值，unix时间戳
          * @type {number || null}
          */
         this.Value = null;

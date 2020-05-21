@@ -8592,6 +8592,7 @@ class Sort extends  AbstractModel {
          * 排序字段，当前支持：
 createTime，域名创建时间
 certExpireTime，证书过期时间
+默认createTime。
          * @type {string || null}
          */
         this.Key = null;

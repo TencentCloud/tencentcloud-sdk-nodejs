@@ -444,6 +444,13 @@ class CardInfo extends  AbstractModel {
          */
         this.Provider = null;
 
+        /**
+         * 实名验证(浙江联通)
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.CertificationState = null;
+
     }
 
     /**
@@ -479,6 +486,7 @@ class CardInfo extends  AbstractModel {
         this.AllowArrears = 'AllowArrears' in params ? params.AllowArrears : null;
         this.NeedSms = 'NeedSms' in params ? params.NeedSms : null;
         this.Provider = 'Provider' in params ? params.Provider : null;
+        this.CertificationState = 'CertificationState' in params ? params.CertificationState : null;
 
     }
 }
