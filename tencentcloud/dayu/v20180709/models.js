@@ -8766,6 +8766,12 @@ class ModifyCCThresholdRequest extends  AbstractModel {
          */
         this.BasicIspCode = null;
 
+        /**
+         * 可选字段，当协议取值HTTPS时，必填
+         * @type {string || null}
+         */
+        this.Domain = null;
+
     }
 
     /**
@@ -8786,6 +8792,7 @@ class ModifyCCThresholdRequest extends  AbstractModel {
         this.BasicDeviceType = 'BasicDeviceType' in params ? params.BasicDeviceType : null;
         this.BasicIpInstance = 'BasicIpInstance' in params ? params.BasicIpInstance : null;
         this.BasicIspCode = 'BasicIspCode' in params ? params.BasicIspCode : null;
+        this.Domain = 'Domain' in params ? params.Domain : null;
 
     }
 }
