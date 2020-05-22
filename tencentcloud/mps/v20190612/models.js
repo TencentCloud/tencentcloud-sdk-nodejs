@@ -8013,7 +8013,6 @@ class AiContentReviewResult extends  AbstractModel {
 <li>Political：图片鉴政</li>
 <li>Porn.Asr：Asr 文字鉴黄</li>
 <li>Porn.Ocr：Ocr 文字鉴黄</li>
-<li>Porn.Voice：声音鉴黄</li>
 <li>Political.Asr：Asr 文字鉴政</li>
 <li>Political.Ocr：Ocr 文字鉴政</li>
 <li>Terrorism.Ocr：Ocr 文字鉴恐</li>
@@ -18844,9 +18843,7 @@ class AiRecognitionResult extends  AbstractModel {
 <li>AsrWordsRecognition：语音关键词识别，</li>
 <li>OcrWordsRecognition：文本关键词识别，</li>
 <li>AsrFullTextRecognition：语音全文识别，</li>
-<li>OcrFullTextRecognition：文本全文识别，</li>
-<li>HeadTailRecognition：视频片头片尾识别，</li>
-<li>ObjectRecognition：物体识别。</li>
+<li>OcrFullTextRecognition：文本全文识别。</li>
          * @type {string || null}
          */
         this.Type = null;
