@@ -1444,6 +1444,9 @@ class DescribeModuleRequest extends  AbstractModel {
          * 过滤条件。
 module-name - string - 是否必填：否 - （过滤条件）按照模块名称过滤。
 module-id - string - 是否必填：否 - （过滤条件）按照模块ID过滤。
+image-id      String      是否必填：否      （过滤条件）按照镜像ID过滤。
+instance-family      String      是否必填：否      （过滤条件）按照机型family过滤。
+
 每次请求的Filters的上限为10，Filter.Values的上限为5。
          * @type {Array.<Filter> || null}
          */
@@ -1460,6 +1463,22 @@ module-id - string - 是否必填：否 - （过滤条件）按照模块ID过滤
          * @type {number || null}
          */
         this.Limit = null;
+
+        /**
+         * 指定排序字段。目前支持的可选值如下
+instance-num 按实例数量排序。
+node-num 按节点数量排序。
+timestamp 按实例创建时间排序。
+如果不传，默认按实例创建时间排序
+         * @type {string || null}
+         */
+        this.OrderByField = null;
+
+        /**
+         * 指定排序是降序还是升序。0表示降序； 1表示升序。如果不传默认为降序
+         * @type {number || null}
+         */
+        this.OrderDirection = null;
 
     }
 
@@ -1481,6 +1500,8 @@ module-id - string - 是否必填：否 - （过滤条件）按照模块ID过滤
         }
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
+        this.OrderByField = 'OrderByField' in params ? params.OrderByField : null;
+        this.OrderDirection = 'OrderDirection' in params ? params.OrderDirection : null;
 
     }
 }
@@ -5424,7 +5445,8 @@ class DescribeInstancesRequest extends  AbstractModel {
 
         /**
          * 过滤条件。
-zone      String      是否必填：否     （过滤条件）按照可用区中文名过滤,支持模糊匹配。
+zone      String      是否必填：否     （过滤条件）按照可用区英文标识符过滤。
+zone-name      String      是否必填：否     （过滤条件）按照可用区中文名过滤,支持模糊匹配。
 module-id      String      是否必填：否     （过滤条件）按照模块ID过滤。
 instance-id      String      是否必填：否      （过滤条件）按照实例ID过滤。
 instance-name      String      是否必填：否      （过滤条件）按照实例名称过滤,支持模糊匹配。
@@ -5434,6 +5456,10 @@ instance-state  string  是否必填：否 （过滤条件）按照实例状态�
 internet-service-provider      String      是否必填：否      （过滤条件）按照实例公网IP所属的运营商进行过滤。
 tag-key      String      是否必填：否      （过滤条件）按照标签键进行过滤。
 tag:tag-key      String      是否必填：否      （过滤条件）按照标签键值对进行过滤。 tag-key使用具体的标签键进行替换。
+instance-family      String      是否必填：否      （过滤条件）按照机型family过滤。
+module-name      String      是否必填：否      （过滤条件）按照模块名称过滤,支持模糊匹配。
+image-id      String      是否必填：否      （过滤条件）按照实例的镜像ID过滤。
+
 若不传Filters参数则表示查询所有相关的实例信息。
 单次请求的Filter.Values的上限为5。
          * @type {Array.<Filter> || null}
@@ -5451,6 +5477,21 @@ tag:tag-key      String      是否必填：否      （过滤条件）按照标
          * @type {number || null}
          */
         this.Limit = null;
+
+        /**
+         * 指定排序字段。目前支持的可选值如下
+timestamp 按实例创建时间排序。
+注意：目前仅支持按创建时间排序，后续可能会有扩展。
+如果不传，默认按实例创建时间排序
+         * @type {string || null}
+         */
+        this.OrderByField = null;
+
+        /**
+         * 指定排序是降序还是升序。0表示降序； 1表示升序。如果不传默认为降序
+         * @type {number || null}
+         */
+        this.OrderDirection = null;
 
     }
 
@@ -5472,6 +5513,8 @@ tag:tag-key      String      是否必填：否      （过滤条件）按照标
         }
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
+        this.OrderByField = 'OrderByField' in params ? params.OrderByField : null;
+        this.OrderDirection = 'OrderDirection' in params ? params.OrderDirection : null;
 
     }
 }

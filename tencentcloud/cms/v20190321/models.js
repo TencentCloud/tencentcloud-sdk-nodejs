@@ -17,6 +17,55 @@
 const AbstractModel = require("../../common/abstract_model");
 
 /**
+ * 广交会公共参数
+ * @class
+ */
+class MessageCommonGjh extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 密码（由腾讯提供）
+         * @type {string || null}
+         */
+        this.StrPassword = null;
+
+        /**
+         * 账号（由腾讯提供）
+         * @type {number || null}
+         */
+        this.UiAppID = null;
+
+        /**
+         * 业务场景ID: 1：媒体类；2：流媒体类；3：即时通讯类；4：社交日志；5：评论类；6：资料类；7：文件类；8：互动类；9：论坛类
+         * @type {number || null}
+         */
+        this.UiAppSceneID = null;
+
+        /**
+         * 请求序列号，会原样回到给业务侧请求序列号，会原样回到给业务侧，用于上游异步处理
+         * @type {number || null}
+         */
+        this.UiSeq = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.StrPassword = 'StrPassword' in params ? params.StrPassword : null;
+        this.UiAppID = 'UiAppID' in params ? params.UiAppID : null;
+        this.UiAppSceneID = 'UiAppSceneID' in params ? params.UiAppSceneID : null;
+        this.UiSeq = 'UiSeq' in params ? params.UiSeq : null;
+
+    }
+}
+
+/**
  * 文本返回的自定义词库结果
  * @class
  */
@@ -509,6 +558,83 @@ class CreateFileSampleRequest extends  AbstractModel {
 }
 
 /**
+ * 媒体信息
+ * @class
+ */
+class MediaInfoTypeGjh extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 动作
+         * @type {string || null}
+         */
+        this.StrAction = null;
+
+        /**
+         * 内容
+         * @type {string || null}
+         */
+        this.StrContent = null;
+
+        /**
+         * 文件ID
+         * @type {string || null}
+         */
+        this.StrFileID = null;
+
+        /**
+         * md5，填了可提高识别率
+         * @type {string || null}
+         */
+        this.StrMD5 = null;
+
+        /**
+         * Sha
+         * @type {string || null}
+         */
+        this.StrSha = null;
+
+        /**
+         * 标题
+         * @type {string || null}
+         */
+        this.StrTitle = null;
+
+        /**
+         * url
+         * @type {string || null}
+         */
+        this.StrUrl = null;
+
+        /**
+         * 大小
+         * @type {number || null}
+         */
+        this.UiSize = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.StrAction = 'StrAction' in params ? params.StrAction : null;
+        this.StrContent = 'StrContent' in params ? params.StrContent : null;
+        this.StrFileID = 'StrFileID' in params ? params.StrFileID : null;
+        this.StrMD5 = 'StrMD5' in params ? params.StrMD5 : null;
+        this.StrSha = 'StrSha' in params ? params.StrSha : null;
+        this.StrTitle = 'StrTitle' in params ? params.StrTitle : null;
+        this.StrUrl = 'StrUrl' in params ? params.StrUrl : null;
+        this.UiSize = 'UiSize' in params ? params.UiSize : null;
+
+    }
+}
+
+/**
  * 图片识别结果详情
  * @class
  */
@@ -665,6 +791,72 @@ class ImageData extends  AbstractModel {
             let obj = new ImageTerrorDetect();
             obj.deserialize(params.TerrorDetect)
             this.TerrorDetect = obj;
+        }
+
+    }
+}
+
+/**
+ * 广角会媒体信息
+ * @class
+ */
+class MediaGjh extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 数组类图片信息
+         * @type {Array.<MediaInfoTypeGjh> || null}
+         */
+        this.Pic = null;
+
+        /**
+         * 数组类文本信息
+         * @type {Array.<MediaInfoTypeGjh> || null}
+         */
+        this.Text = null;
+
+        /**
+         * 数组类视频信息
+         * @type {Array.<MediaInfoTypeGjh> || null}
+         */
+        this.Video = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Pic) {
+            this.Pic = new Array();
+            for (let z in params.Pic) {
+                let obj = new MediaInfoTypeGjh();
+                obj.deserialize(params.Pic[z]);
+                this.Pic.push(obj);
+            }
+        }
+
+        if (params.Text) {
+            this.Text = new Array();
+            for (let z in params.Text) {
+                let obj = new MediaInfoTypeGjh();
+                obj.deserialize(params.Text[z]);
+                this.Text.push(obj);
+            }
+        }
+
+        if (params.Video) {
+            this.Video = new Array();
+            for (let z in params.Video) {
+                let obj = new MediaInfoTypeGjh();
+                obj.deserialize(params.Video[z]);
+                this.Video.push(obj);
+            }
         }
 
     }
@@ -891,6 +1083,63 @@ class CreateTextSampleResponse extends  AbstractModel {
 }
 
 /**
+ * CommonMediaRecognition请求参数结构体
+ * @class
+ */
+class CommonMediaRecognitionRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 公共参数Common类
+         * @type {MessageCommonGjh || null}
+         */
+        this.MessageCommon = null;
+
+        /**
+         * 内容相关参数
+         * @type {MessageContentGjh || null}
+         */
+        this.MessageContent = null;
+
+        /**
+         * 内容ID参数
+         * @type {MessageIdGjh || null}
+         */
+        this.MessageId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.MessageCommon) {
+            let obj = new MessageCommonGjh();
+            obj.deserialize(params.MessageCommon)
+            this.MessageCommon = obj;
+        }
+
+        if (params.MessageContent) {
+            let obj = new MessageContentGjh();
+            obj.deserialize(params.MessageContent)
+            this.MessageContent = obj;
+        }
+
+        if (params.MessageId) {
+            let obj = new MessageIdGjh();
+            obj.deserialize(params.MessageId)
+            this.MessageId = obj;
+        }
+
+    }
+}
+
+/**
  * 消息类输出ID参数
  * @class
  */
@@ -1034,42 +1283,24 @@ class FileSampleInfo extends  AbstractModel {
 }
 
 /**
- * DescribeFileSample请求参数结构体
+ * 回调ACK
  * @class
  */
-class DescribeFileSampleRequest extends  AbstractModel {
+class CallBackAck extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 支持通过标签值进行筛选
-         * @type {Array.<Filter> || null}
-         */
-        this.Filters = null;
-
-        /**
-         * 数量限制，默认为20，最大值为100
+         * 异步ACK-CODE
          * @type {number || null}
          */
-        this.Limit = null;
+        this.StdRetCode = null;
 
         /**
-         * 偏移量，默认为0
-         * @type {number || null}
-         */
-        this.Offset = null;
-
-        /**
-         * 升序（asc）还是降序（desc），默认：desc
+         * 异步ACK
          * @type {string || null}
          */
-        this.OrderDirection = null;
-
-        /**
-         * 按某个字段排序，目前仅支持CreatedAt排序
-         * @type {string || null}
-         */
-        this.OrderField = null;
+        this.StdRetMsg = null;
 
     }
 
@@ -1080,19 +1311,113 @@ class DescribeFileSampleRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.StdRetCode = 'StdRetCode' in params ? params.StdRetCode : null;
+        this.StdRetMsg = 'StdRetMsg' in params ? params.StdRetMsg : null;
 
-        if (params.Filters) {
-            this.Filters = new Array();
-            for (let z in params.Filters) {
-                let obj = new Filter();
-                obj.deserialize(params.Filters[z]);
-                this.Filters.push(obj);
-            }
+    }
+}
+
+/**
+ * logo位置信息
+ * @class
+ */
+class RrectF extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * logo横坐标
+         * @type {number || null}
+         */
+        this.Cx = null;
+
+        /**
+         * logo纵坐标
+         * @type {number || null}
+         */
+        this.Cy = null;
+
+        /**
+         * logo图标高度
+         * @type {number || null}
+         */
+        this.Height = null;
+
+        /**
+         * logo图标中心旋转度
+         * @type {number || null}
+         */
+        this.Rotate = null;
+
+        /**
+         * logo图标宽度
+         * @type {number || null}
+         */
+        this.Width = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
         }
-        this.Limit = 'Limit' in params ? params.Limit : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
-        this.OrderDirection = 'OrderDirection' in params ? params.OrderDirection : null;
-        this.OrderField = 'OrderField' in params ? params.OrderField : null;
+        this.Cx = 'Cx' in params ? params.Cx : null;
+        this.Cy = 'Cy' in params ? params.Cy : null;
+        this.Height = 'Height' in params ? params.Height : null;
+        this.Rotate = 'Rotate' in params ? params.Rotate : null;
+        this.Width = 'Width' in params ? params.Width : null;
+
+    }
+}
+
+/**
+ * 发送消息设备描述
+ * @class
+ */
+class ContentMsgGjh extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 发表消息设备IP类型，0x0代表IP地址是ipv4，0x1代表是IPv6，默认为0，即IPv4。
+         * @type {string || null}
+         */
+        this.CIPType = null;
+
+        /**
+         * 发表消息设备IPv4地址，没有可以为空字符串；
+         * @type {string || null}
+         */
+        this.StrMsgIP = null;
+
+        /**
+         * 发表消息设备IPv6地址，没有可以为空字符串。
+         * @type {string || null}
+         */
+        this.StrMsgIPv6 = null;
+
+        /**
+         * 消息发表时间戳。
+         * @type {number || null}
+         */
+        this.UiPostTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CIPType = 'CIPType' in params ? params.CIPType : null;
+        this.StrMsgIP = 'StrMsgIP' in params ? params.StrMsgIP : null;
+        this.StrMsgIPv6 = 'StrMsgIPv6' in params ? params.StrMsgIPv6 : null;
+        this.UiPostTime = 'UiPostTime' in params ? params.UiPostTime : null;
 
     }
 }
@@ -1470,6 +1795,70 @@ class TextOutputRes extends  AbstractModel {
 }
 
 /**
+ * DescribeFileSample请求参数结构体
+ * @class
+ */
+class DescribeFileSampleRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 支持通过标签值进行筛选
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * 数量限制，默认为20，最大值为100
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 偏移量，默认为0
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 升序（asc）还是降序（desc），默认：desc
+         * @type {string || null}
+         */
+        this.OrderDirection = null;
+
+        /**
+         * 按某个字段排序，目前仅支持CreatedAt排序
+         * @type {string || null}
+         */
+        this.OrderField = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.OrderDirection = 'OrderDirection' in params ? params.OrderDirection : null;
+        this.OrderField = 'OrderField' in params ? params.OrderField : null;
+
+    }
+}
+
+/**
  * CreateTextSample请求参数结构体
  * @class
  */
@@ -1586,6 +1975,35 @@ class Filter extends  AbstractModel {
         }
         this.Name = 'Name' in params ? params.Name : null;
         this.Value = 'Value' in params ? params.Value : null;
+
+    }
+}
+
+/**
+ * 广交会消息Id
+
+ * @class
+ */
+class MessageIdGjh extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 消息Id，异步是回传改值
+         * @type {string || null}
+         */
+        this.StrMsgID = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.StrMsgID = 'StrMsgID' in params ? params.StrMsgID : null;
 
     }
 }
@@ -1833,6 +2251,46 @@ class TextOutputComm extends  AbstractModel {
         this.BUCtrlID = 'BUCtrlID' in params ? params.BUCtrlID : null;
         this.SendTime = 'SendTime' in params ? params.SendTime : null;
         this.Uin = 'Uin' in params ? params.Uin : null;
+
+    }
+}
+
+/**
+ * CommonMediaRecognition返回参数结构体
+ * @class
+ */
+class CommonMediaRecognitionResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 返回数据
+         * @type {CallBackData || null}
+         */
+        this.Data = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Data) {
+            let obj = new CallBackData();
+            obj.deserialize(params.Data)
+            this.Data = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2107,6 +2565,62 @@ class OCRItem extends  AbstractModel {
 }
 
 /**
+ * 广交会用户信息
+ * @class
+ */
+class UserInfoGjh extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 消息发表人简介，非必填，如填写，会结合简介内容判定该条是否有害。评论消息如展示简介则建议填写。
+         * @type {string || null}
+         */
+        this.StrDesc = null;
+
+        /**
+         * 消息发表人头像url，非必填，如填写，头像有害，该条消息会被判断为有害。评论消息如展示头像则建议填写。
+         * @type {string || null}
+         */
+        this.StrHeadUrl = null;
+
+        /**
+         * 消息发表人昵称，非必填，如填写，会结合昵称信息判断该条内容是否有害。评论消息如展示昵称则建议填写。
+         * @type {string || null}
+         */
+        this.StrNick = null;
+
+        /**
+         * 发表评论账号ID，如填写，会根据账号历史恶意情况，判定消息有害结果.
+         * @type {string || null}
+         */
+        this.StrUin = null;
+
+        /**
+         * 1-微信uin 2-QQ号 3-微信群uin 4-qq群号 5-微信openid 6-QQopenid 7-其它string
+         * @type {number || null}
+         */
+        this.UiAcntType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.StrDesc = 'StrDesc' in params ? params.StrDesc : null;
+        this.StrHeadUrl = 'StrHeadUrl' in params ? params.StrHeadUrl : null;
+        this.StrNick = 'StrNick' in params ? params.StrNick : null;
+        this.StrUin = 'StrUin' in params ? params.StrUin : null;
+        this.UiAcntType = 'UiAcntType' in params ? params.UiAcntType : null;
+
+    }
+}
+
+/**
  * 图片违法详情
  * @class
  */
@@ -2165,42 +2679,30 @@ class ImageIllegalDetect extends  AbstractModel {
 }
 
 /**
- * logo位置信息
+ * 广交会消息内容
  * @class
  */
-class RrectF extends  AbstractModel {
+class MessageContentGjh extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * logo横坐标
-         * @type {number || null}
+         * 具体消息内容
+         * @type {MediaGjh || null}
          */
-        this.Cx = null;
+        this.Media = null;
 
         /**
-         * logo纵坐标
-         * @type {number || null}
+         * 发表该信息的用户的信息
+         * @type {UserInfoGjh || null}
          */
-        this.Cy = null;
+        this.User = null;
 
         /**
-         * logo图标高度
-         * @type {number || null}
+         * 发表该消息的设备的消息
+         * @type {ContentMsgGjh || null}
          */
-        this.Height = null;
-
-        /**
-         * logo图标中心旋转度
-         * @type {number || null}
-         */
-        this.Rotate = null;
-
-        /**
-         * logo图标宽度
-         * @type {number || null}
-         */
-        this.Width = null;
+        this.Msg = null;
 
     }
 
@@ -2211,11 +2713,24 @@ class RrectF extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Cx = 'Cx' in params ? params.Cx : null;
-        this.Cy = 'Cy' in params ? params.Cy : null;
-        this.Height = 'Height' in params ? params.Height : null;
-        this.Rotate = 'Rotate' in params ? params.Rotate : null;
-        this.Width = 'Width' in params ? params.Width : null;
+
+        if (params.Media) {
+            let obj = new MediaGjh();
+            obj.deserialize(params.Media)
+            this.Media = obj;
+        }
+
+        if (params.User) {
+            let obj = new UserInfoGjh();
+            obj.deserialize(params.User)
+            this.User = obj;
+        }
+
+        if (params.Msg) {
+            let obj = new ContentMsgGjh();
+            obj.deserialize(params.Msg)
+            this.Msg = obj;
+        }
 
     }
 }
@@ -2392,6 +2907,39 @@ class PhoneDetect extends  AbstractModel {
 }
 
 /**
+ * 异步接口返回ACK数据
+ * @class
+ */
+class CallBackData extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 异步请求ACK内容
+         * @type {CallBackAck || null}
+         */
+        this.Res = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Res) {
+            let obj = new CallBackAck();
+            obj.deserialize(params.Res)
+            this.Res = obj;
+        }
+
+    }
+}
+
+/**
  * DeleteTextSample请求参数结构体
  * @class
  */
@@ -2420,6 +2968,7 @@ class DeleteTextSampleRequest extends  AbstractModel {
 }
 
 module.exports = {
+    MessageCommonGjh: MessageCommonGjh,
     CustomResult: CustomResult,
     TextData: TextData,
     TextModerationRequest: TextModerationRequest,
@@ -2428,14 +2977,19 @@ module.exports = {
     TextModerationResponse: TextModerationResponse,
     ImageModerationRequest: ImageModerationRequest,
     CreateFileSampleRequest: CreateFileSampleRequest,
+    MediaInfoTypeGjh: MediaInfoTypeGjh,
     ImageData: ImageData,
+    MediaGjh: MediaGjh,
     ImagePornDetect: ImagePornDetect,
     DeleteTextSampleResponse: DeleteTextSampleResponse,
     TextSample: TextSample,
     CreateTextSampleResponse: CreateTextSampleResponse,
+    CommonMediaRecognitionRequest: CommonMediaRecognitionRequest,
     TextOutputID: TextOutputID,
     FileSampleInfo: FileSampleInfo,
-    DescribeFileSampleRequest: DescribeFileSampleRequest,
+    CallBackAck: CallBackAck,
+    RrectF: RrectF,
+    ContentMsgGjh: ContentMsgGjh,
     CodeDetect: CodeDetect,
     ImageTerrorDetect: ImageTerrorDetect,
     DescribeTextSampleResponse: DescribeTextSampleResponse,
@@ -2444,24 +2998,29 @@ module.exports = {
     FileSample: FileSample,
     DescribeFileSampleResponse: DescribeFileSampleResponse,
     TextOutputRes: TextOutputRes,
+    DescribeFileSampleRequest: DescribeFileSampleRequest,
     CreateTextSampleRequest: CreateTextSampleRequest,
     DeleteFileSampleRequest: DeleteFileSampleRequest,
     Filter: Filter,
+    MessageIdGjh: MessageIdGjh,
     OCRDetect: OCRDetect,
     Coordinate: Coordinate,
     Similar: Similar,
     ImageHotDetect: ImageHotDetect,
     TextOutputComm: TextOutputComm,
+    CommonMediaRecognitionResponse: CommonMediaRecognitionResponse,
     DescribeTextSampleRequest: DescribeTextSampleRequest,
     CodeDetail: CodeDetail,
     ImagePolityDetect: ImagePolityDetect,
     OCRItem: OCRItem,
+    UserInfoGjh: UserInfoGjh,
     ImageIllegalDetect: ImageIllegalDetect,
-    RrectF: RrectF,
+    MessageContentGjh: MessageContentGjh,
     CreateFileSampleResponse: CreateFileSampleResponse,
     LogoDetail: LogoDetail,
     Logo: Logo,
     PhoneDetect: PhoneDetect,
+    CallBackData: CallBackData,
     DeleteTextSampleRequest: DeleteTextSampleRequest,
 
 }
