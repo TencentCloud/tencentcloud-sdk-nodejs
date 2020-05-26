@@ -237,6 +237,66 @@ class DismissRoomResponse extends  AbstractModel {
 }
 
 /**
+ * 事件信息，包括，事件时间戳，事件ID,
+ * @class
+ */
+class EventMessage extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 视频流类型：
+0：与视频无关的事件；
+2：视频为大画面；
+3：视频为小画面；
+7：视频为旁路画面；
+         * @type {number || null}
+         */
+        this.Type = null;
+
+        /**
+         * 事件上报的时间戳，unix时间（1589891188801ms)
+         * @type {number || null}
+         */
+        this.Time = null;
+
+        /**
+         * 事件Id：分为sdk的事件和webrtc的事件，具体映射，查看：事件ID映射表
+         * @type {number || null}
+         */
+        this.EventId = null;
+
+        /**
+         * 事件的第一个参数，如视频分辨率宽
+         * @type {number || null}
+         */
+        this.ParamOne = null;
+
+        /**
+         * 事件的第二个参数，如视频分辨率高
+         * @type {number || null}
+         */
+        this.ParamTwo = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Time = 'Time' in params ? params.Time : null;
+        this.EventId = 'EventId' in params ? params.EventId : null;
+        this.ParamOne = 'ParamOne' in params ? params.ParamOne : null;
+        this.ParamTwo = 'ParamTwo' in params ? params.ParamTwo : null;
+
+    }
+}
+
+/**
  * DescribeRealtimeQuality请求参数结构体
  * @class
  */
@@ -340,7 +400,7 @@ class DescribeCallDetailRequest extends  AbstractModel {
         super();
 
         /**
-         * 通话ID（唯一标识一次通话）= sdkappid+roomgString（房间号）+房间创建时间（unix时间戳，s）。通过 DescribeRoomInformation（查询房间列表）接口获取。
+         * 通话 ID（唯一标识一次通话）： sdkappid_roomgString（房间号_createTime（房间创建时间，unix时间戳，单位为s）。通过 DescribeRoomInformation（查询房间列表）接口获取。
          * @type {string || null}
          */
         this.CommId = null;
@@ -1087,7 +1147,15 @@ class CreateTroubleInfoRequest extends  AbstractModel {
         this.TroubleUserId = null;
 
         /**
-         * 异常类型
+         * 异常类型。
+1. 仅视频异常
+2. 仅声音异常
+3. 音视频都异常
+5. 进房异常
+4. 切课
+6. 求助
+7. 问题反馈
+8. 投诉
          * @type {number || null}
          */
         this.TroubleType = null;
@@ -1121,6 +1189,92 @@ class CreateTroubleInfoRequest extends  AbstractModel {
         this.TroubleType = 'TroubleType' in params ? params.TroubleType : null;
         this.TroubleTime = 'TroubleTime' in params ? params.TroubleTime : null;
         this.TroubleMsg = 'TroubleMsg' in params ? params.TroubleMsg : null;
+
+    }
+}
+
+/**
+ * sdk或webrtc的事件列表。
+ * @class
+ */
+class EventList extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 数据内容
+         * @type {Array.<EventMessage> || null}
+         */
+        this.Content = null;
+
+        /**
+         * 发送端的userId
+         * @type {string || null}
+         */
+        this.PeerId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Content) {
+            this.Content = new Array();
+            for (let z in params.Content) {
+                let obj = new EventMessage();
+                obj.deserialize(params.Content[z]);
+                this.Content.push(obj);
+            }
+        }
+        this.PeerId = 'PeerId' in params ? params.PeerId : null;
+
+    }
+}
+
+/**
+ * DescribeDetailEvent返回参数结构体
+ * @class
+ */
+class DescribeDetailEventResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 返回的事件列表
+         * @type {Array.<EventList> || null}
+         */
+        this.Data = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Data) {
+            this.Data = new Array();
+            for (let z in params.Data) {
+                let obj = new EventList();
+                obj.deserialize(params.Data[z]);
+                this.Data.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1335,6 +1489,62 @@ class DescribeRoomInformationRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeDetailEvent请求参数结构体
+ * @class
+ */
+class DescribeDetailEventRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 通话 ID（唯一标识一次通话）： sdkappid_roomgString（房间号_createTime（房间创建时间，unix时间戳，单位s）。通过 DescribeRoomInformation（查询房间列表）接口获取。
+         * @type {string || null}
+         */
+        this.CommId = null;
+
+        /**
+         * 查询开始时间，5天内。本地unix时间戳（1588031999s）
+         * @type {number || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * 查询结束时间，本地unix时间戳（1588031999s）
+         * @type {number || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * 用户id
+         * @type {string || null}
+         */
+        this.UserId = null;
+
+        /**
+         * 房间号
+         * @type {string || null}
+         */
+        this.RoomId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CommId = 'CommId' in params ? params.CommId : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.UserId = 'UserId' in params ? params.UserId : null;
+        this.RoomId = 'RoomId' in params ? params.RoomId : null;
+
+    }
+}
+
+/**
  * 用户信息，包括用户进房时间，退房时间等
  * @class
  */
@@ -1384,6 +1594,12 @@ class UserInformation extends  AbstractModel {
          */
         this.ClientIp = null;
 
+        /**
+         * 判断用户是否已经离开房间
+         * @type {boolean || null}
+         */
+        this.Finished = null;
+
     }
 
     /**
@@ -1400,6 +1616,7 @@ class UserInformation extends  AbstractModel {
         this.DeviceType = 'DeviceType' in params ? params.DeviceType : null;
         this.SdkVersion = 'SdkVersion' in params ? params.SdkVersion : null;
         this.ClientIp = 'ClientIp' in params ? params.ClientIp : null;
+        this.Finished = 'Finished' in params ? params.Finished : null;
 
     }
 }
@@ -1553,6 +1770,7 @@ module.exports = {
     StopMCUMixTranscodeResponse: StopMCUMixTranscodeResponse,
     DescribeRealtimeScaleResponse: DescribeRealtimeScaleResponse,
     DismissRoomResponse: DismissRoomResponse,
+    EventMessage: EventMessage,
     DescribeRealtimeQualityRequest: DescribeRealtimeQualityRequest,
     RemoveUserRequest: RemoveUserRequest,
     DescribeCallDetailRequest: DescribeCallDetailRequest,
@@ -1570,10 +1788,13 @@ module.exports = {
     DescribeRealtimeNetworkResponse: DescribeRealtimeNetworkResponse,
     ScaleInfomation: ScaleInfomation,
     CreateTroubleInfoRequest: CreateTroubleInfoRequest,
+    EventList: EventList,
+    DescribeDetailEventResponse: DescribeDetailEventResponse,
     StartMCUMixTranscodeResponse: StartMCUMixTranscodeResponse,
     DescribeRealtimeScaleRequest: DescribeRealtimeScaleRequest,
     DescribeCallDetailResponse: DescribeCallDetailResponse,
     DescribeRoomInformationRequest: DescribeRoomInformationRequest,
+    DescribeDetailEventRequest: DescribeDetailEventRequest,
     UserInformation: UserInformation,
     RoomState: RoomState,
     RemoveUserResponse: RemoveUserResponse,

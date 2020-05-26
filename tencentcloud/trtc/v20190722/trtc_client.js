@@ -22,6 +22,7 @@ const TimeValue = models.TimeValue;
 const StopMCUMixTranscodeResponse = models.StopMCUMixTranscodeResponse;
 const DescribeRealtimeScaleResponse = models.DescribeRealtimeScaleResponse;
 const DismissRoomResponse = models.DismissRoomResponse;
+const EventMessage = models.EventMessage;
 const DescribeRealtimeQualityRequest = models.DescribeRealtimeQualityRequest;
 const RemoveUserRequest = models.RemoveUserRequest;
 const DescribeCallDetailRequest = models.DescribeCallDetailRequest;
@@ -39,10 +40,13 @@ const QualityData = models.QualityData;
 const DescribeRealtimeNetworkResponse = models.DescribeRealtimeNetworkResponse;
 const ScaleInfomation = models.ScaleInfomation;
 const CreateTroubleInfoRequest = models.CreateTroubleInfoRequest;
+const EventList = models.EventList;
+const DescribeDetailEventResponse = models.DescribeDetailEventResponse;
 const StartMCUMixTranscodeResponse = models.StartMCUMixTranscodeResponse;
 const DescribeRealtimeScaleRequest = models.DescribeRealtimeScaleRequest;
 const DescribeCallDetailResponse = models.DescribeCallDetailResponse;
 const DescribeRoomInformationRequest = models.DescribeRoomInformationRequest;
+const DescribeDetailEventRequest = models.DescribeDetailEventRequest;
 const UserInformation = models.UserInformation;
 const RoomState = models.RoomState;
 const RemoveUserResponse = models.RemoveUserResponse;
@@ -59,6 +63,17 @@ class TrtcClient extends AbstractClient {
         super("trtc.tencentcloudapi.com", "2019-07-22", credential, region, profile);
     }
     
+    /**
+     * 接口说明：将用户从房间移出，适用于主播/房主/管理员踢人等场景。支持所有平台，Android、iOS、Windows 和 macOS 需升级到 TRTC SDK 6.6及以上版本。
+     * @param {RemoveUserRequest} req
+     * @param {function(string, RemoveUserResponse):void} cb
+     * @public
+     */
+    RemoveUser(req, cb) {
+        let resp = new RemoveUserResponse();
+        this.request("RemoveUser", req, resp, cb);
+    }
+
     /**
      * 查询sdkappid维度下实时质量数据，包括：进房成功率，首帧秒开率，音频卡顿率，视频卡顿率。可查询24小时内数据，查询起止时间不超过1个小时。
      * @param {DescribeRealtimeQualityRequest} req
@@ -139,14 +154,14 @@ TRTC 的一个房间中可能会同时存在多路音视频流，您可以通过
     }
 
     /**
-     * 接口说明：将用户从房间移出，适用于主播/房主/管理员踢人等场景。支持所有平台，Android、iOS、Windows 和 macOS 需升级到 TRTC SDK 6.6及以上版本。
-     * @param {RemoveUserRequest} req
-     * @param {function(string, RemoveUserResponse):void} cb
+     * 查询用户某次通话内的进退房，视频开关等详细事件。可查询5天内数据。
+     * @param {DescribeDetailEventRequest} req
+     * @param {function(string, DescribeDetailEventResponse):void} cb
      * @public
      */
-    RemoveUser(req, cb) {
-        let resp = new RemoveUserResponse();
-        this.request("RemoveUser", req, resp, cb);
+    DescribeDetailEvent(req, cb) {
+        let resp = new DescribeDetailEventResponse();
+        this.request("DescribeDetailEvent", req, resp, cb);
     }
 
     /**

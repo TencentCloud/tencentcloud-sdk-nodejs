@@ -537,6 +537,12 @@ class SearchMaterialRequest extends  AbstractModel {
         this.CreateTimeRange = null;
 
         /**
+         * 按标签检索，填入检索的标签名。
+         * @type {Array.<string> || null}
+         */
+        this.Tags = null;
+
+        /**
          * 排序方式。Sort.Field 可选值：CreateTime。指定 Text 搜索时，将根据匹配度排序，该字段无效。
          * @type {SortBy || null}
          */
@@ -594,6 +600,7 @@ class SearchMaterialRequest extends  AbstractModel {
             obj.deserialize(params.CreateTimeRange)
             this.CreateTimeRange = obj;
         }
+        this.Tags = 'Tags' in params ? params.Tags : null;
 
         if (params.Sort) {
             let obj = new SortBy();
@@ -1267,6 +1274,49 @@ class ExportVideoByEditorTrackDataRequest extends  AbstractModel {
             this.VODExportInfo = obj;
         }
         this.Operator = 'Operator' in params ? params.Operator : null;
+
+    }
+}
+
+/**
+ * 素材标签信息
+ * @class
+ */
+class MaterialTagInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 标签类型，取值为：
+<li>PRESET：预置标签；</li>
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * 标签 Id 。当标签类型为 PRESET 时，标签 Id 为预置标签 Id 。
+         * @type {string || null}
+         */
+        this.Id = null;
+
+        /**
+         * 标签名称。
+         * @type {string || null}
+         */
+        this.Name = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Id = 'Id' in params ? params.Id : null;
+        this.Name = 'Name' in params ? params.Name : null;
 
     }
 }
@@ -3070,6 +3120,12 @@ class MaterialBasicInfo extends  AbstractModel {
         this.ClassPath = null;
 
         /**
+         * 素材绑定的标签信息列表。
+         * @type {Array.<MaterialTagInfo> || null}
+         */
+        this.TagInfoSet = null;
+
+        /**
          * 素材媒体文件的预览图。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
@@ -3097,6 +3153,15 @@ class MaterialBasicInfo extends  AbstractModel {
         this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
         this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
         this.ClassPath = 'ClassPath' in params ? params.ClassPath : null;
+
+        if (params.TagInfoSet) {
+            this.TagInfoSet = new Array();
+            for (let z in params.TagInfoSet) {
+                let obj = new MaterialTagInfo();
+                obj.deserialize(params.TagInfoSet[z]);
+                this.TagInfoSet.push(obj);
+            }
+        }
         this.PreviewUrl = 'PreviewUrl' in params ? params.PreviewUrl : null;
 
     }
@@ -5293,6 +5358,7 @@ module.exports = {
     Entity: Entity,
     TeamInfo: TeamInfo,
     ExportVideoByEditorTrackDataRequest: ExportVideoByEditorTrackDataRequest,
+    MaterialTagInfo: MaterialTagInfo,
     VideoEditProjectOutput: VideoEditProjectOutput,
     CreateProjectRequest: CreateProjectRequest,
     ModifyMaterialRequest: ModifyMaterialRequest,

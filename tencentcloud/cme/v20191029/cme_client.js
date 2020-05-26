@@ -40,6 +40,7 @@ const AddMemberInfo = models.AddMemberInfo;
 const Entity = models.Entity;
 const TeamInfo = models.TeamInfo;
 const ExportVideoByEditorTrackDataRequest = models.ExportVideoByEditorTrackDataRequest;
+const MaterialTagInfo = models.MaterialTagInfo;
 const VideoEditProjectOutput = models.VideoEditProjectOutput;
 const CreateProjectRequest = models.CreateProjectRequest;
 const ModifyMaterialRequest = models.ModifyMaterialRequest;
