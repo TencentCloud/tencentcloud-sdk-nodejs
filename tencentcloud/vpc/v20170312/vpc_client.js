@@ -1568,7 +1568,9 @@ class VpcClient extends AbstractClient {
     }
 
     /**
-     * 本接口（ModifyNetworkAclEntries）用于修改（包括添加和删除）网络ACL的入站规则和出站规则。
+     * 本接口（ModifyNetworkAclEntries）用于修改（包括添加和删除）网络ACL的入站规则和出站规则。在NetworkAclEntrySet参数中：
+* 若同时传入入站规则和出站规则，则重置原有的入站规则和出站规则，并分别导入传入的规则。
+* 若仅传入入站规则，则仅重置原有的入站规则，并导入传入的规则，不影响原有的出站规则（若仅传入出站规则，处理方式类似入站方向）。
      * @param {ModifyNetworkAclEntriesRequest} req
      * @param {function(string, ModifyNetworkAclEntriesResponse):void} cb
      * @public
@@ -2582,7 +2584,7 @@ LimitTypes取值范围：
     }
 
     /**
-     * 本接口（SetCcnRegionBandwidthLimits）用于设置云联网（CCN）各地域出带宽上限，该接口只能设置已关联网络实例包含的地域的出带宽上限
+     * 本接口（SetCcnRegionBandwidthLimits）用于设置云联网（CCN）各地域出带宽上限，或者地域间带宽上限。
      * @param {SetCcnRegionBandwidthLimitsRequest} req
      * @param {function(string, SetCcnRegionBandwidthLimitsResponse):void} cb
      * @public

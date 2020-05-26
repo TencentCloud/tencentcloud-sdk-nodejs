@@ -597,7 +597,7 @@ class LiveClient extends AbstractClient {
     }
 
     /**
-     * 返回正在直播中的流列表。
+     * 返回正在直播中的流列表。适用于推流成功后查询在线流信息。
      * @param {DescribeLiveStreamOnlineListRequest} req
      * @param {function(string, DescribeLiveStreamOnlineListResponse):void} cb
      * @public

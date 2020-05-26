@@ -218,7 +218,7 @@ class NlpClient extends AbstractClient {
 
 https://ai.tencent.com/ailab/zh/news/detial?id=22
 
-https://ai.tencent.com/ailab/nlp/embedding.html 
+https://ai.tencent.com/ailab/nlp/zh/embedding.html
      * @param {WordEmbeddingRequest} req
      * @param {function(string, WordEmbeddingResponse):void} cb
      * @public
