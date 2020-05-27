@@ -16,7 +16,6 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
-const MessageCommonGjh = models.MessageCommonGjh;
 const CustomResult = models.CustomResult;
 const TextData = models.TextData;
 const TextModerationRequest = models.TextModerationRequest;
@@ -25,19 +24,14 @@ const ImageModerationResponse = models.ImageModerationResponse;
 const TextModerationResponse = models.TextModerationResponse;
 const ImageModerationRequest = models.ImageModerationRequest;
 const CreateFileSampleRequest = models.CreateFileSampleRequest;
-const MediaInfoTypeGjh = models.MediaInfoTypeGjh;
 const ImageData = models.ImageData;
-const MediaGjh = models.MediaGjh;
 const ImagePornDetect = models.ImagePornDetect;
 const DeleteTextSampleResponse = models.DeleteTextSampleResponse;
 const TextSample = models.TextSample;
 const CreateTextSampleResponse = models.CreateTextSampleResponse;
-const CommonMediaRecognitionRequest = models.CommonMediaRecognitionRequest;
 const TextOutputID = models.TextOutputID;
 const FileSampleInfo = models.FileSampleInfo;
-const CallBackAck = models.CallBackAck;
-const RrectF = models.RrectF;
-const ContentMsgGjh = models.ContentMsgGjh;
+const DescribeFileSampleRequest = models.DescribeFileSampleRequest;
 const CodeDetect = models.CodeDetect;
 const ImageTerrorDetect = models.ImageTerrorDetect;
 const DescribeTextSampleResponse = models.DescribeTextSampleResponse;
@@ -46,29 +40,24 @@ const DeleteFileSampleResponse = models.DeleteFileSampleResponse;
 const FileSample = models.FileSample;
 const DescribeFileSampleResponse = models.DescribeFileSampleResponse;
 const TextOutputRes = models.TextOutputRes;
-const DescribeFileSampleRequest = models.DescribeFileSampleRequest;
 const CreateTextSampleRequest = models.CreateTextSampleRequest;
 const DeleteFileSampleRequest = models.DeleteFileSampleRequest;
 const Filter = models.Filter;
-const MessageIdGjh = models.MessageIdGjh;
 const OCRDetect = models.OCRDetect;
 const Coordinate = models.Coordinate;
 const Similar = models.Similar;
 const ImageHotDetect = models.ImageHotDetect;
 const TextOutputComm = models.TextOutputComm;
-const CommonMediaRecognitionResponse = models.CommonMediaRecognitionResponse;
 const DescribeTextSampleRequest = models.DescribeTextSampleRequest;
 const CodeDetail = models.CodeDetail;
 const ImagePolityDetect = models.ImagePolityDetect;
 const OCRItem = models.OCRItem;
-const UserInfoGjh = models.UserInfoGjh;
 const ImageIllegalDetect = models.ImageIllegalDetect;
-const MessageContentGjh = models.MessageContentGjh;
+const RrectF = models.RrectF;
 const CreateFileSampleResponse = models.CreateFileSampleResponse;
 const LogoDetail = models.LogoDetail;
 const Logo = models.Logo;
 const PhoneDetect = models.PhoneDetect;
-const CallBackData = models.CallBackData;
 const DeleteTextSampleRequest = models.DeleteTextSampleRequest;
 
 
@@ -109,17 +98,6 @@ class CmsClient extends AbstractClient {
     }
 
     /**
-     * 文本内容检测（Text Moderation）服务使用了深度学习技术，识别涉黄、涉政、涉恐等有害内容，同时支持用户配置词库，打击自定义的违规文本。
-     * @param {TextModerationRequest} req
-     * @param {function(string, TextModerationResponse):void} cb
-     * @public
-     */
-    TextModeration(req, cb) {
-        let resp = new TextModerationResponse();
-        this.request("TextModeration", req, resp, cb);
-    }
-
-    /**
      * 本文档适用于图片内容安全、视频内容安全自定义识别库的管理。
 <br>
 通过该接口可以将图片新增到样本库。
@@ -130,30 +108,6 @@ class CmsClient extends AbstractClient {
     CreateFileSample(req, cb) {
         let resp = new CreateFileSampleResponse();
         this.request("CreateFileSample", req, resp, cb);
-    }
-
-    /**
-     * 本文档适用于图片内容安全、视频内容安全自定义识别库的管理。
-<br>
-查询图片样本库，支持批量查询。
-     * @param {DescribeFileSampleRequest} req
-     * @param {function(string, DescribeFileSampleResponse):void} cb
-     * @public
-     */
-    DescribeFileSample(req, cb) {
-        let resp = new DescribeFileSampleResponse();
-        this.request("DescribeFileSample", req, resp, cb);
-    }
-
-    /**
-     * 图片内容检测服务（Image Moderation, IM）能自动扫描图片，识别涉黄、涉恐、涉政、涉毒等有害内容，同时支持用户配置图片黑名单，打击自定义的违规图片。
-     * @param {ImageModerationRequest} req
-     * @param {function(string, ImageModerationResponse):void} cb
-     * @public
-     */
-    ImageModeration(req, cb) {
-        let resp = new ImageModerationResponse();
-        this.request("ImageModeration", req, resp, cb);
     }
 
     /**
@@ -170,14 +124,38 @@ class CmsClient extends AbstractClient {
     }
 
     /**
-     * 广交会商品企业信息发布内容审核
-     * @param {CommonMediaRecognitionRequest} req
-     * @param {function(string, CommonMediaRecognitionResponse):void} cb
+     * 本文档适用于图片内容安全、视频内容安全自定义识别库的管理。
+<br>
+查询图片样本库，支持批量查询。
+     * @param {DescribeFileSampleRequest} req
+     * @param {function(string, DescribeFileSampleResponse):void} cb
      * @public
      */
-    CommonMediaRecognition(req, cb) {
-        let resp = new CommonMediaRecognitionResponse();
-        this.request("CommonMediaRecognition", req, resp, cb);
+    DescribeFileSample(req, cb) {
+        let resp = new DescribeFileSampleResponse();
+        this.request("DescribeFileSample", req, resp, cb);
+    }
+
+    /**
+     * 文本内容检测（Text Moderation）服务使用了深度学习技术，识别涉黄、涉政、涉恐等有害内容，同时支持用户配置词库，打击自定义的违规文本。
+     * @param {TextModerationRequest} req
+     * @param {function(string, TextModerationResponse):void} cb
+     * @public
+     */
+    TextModeration(req, cb) {
+        let resp = new TextModerationResponse();
+        this.request("TextModeration", req, resp, cb);
+    }
+
+    /**
+     * 图片内容检测服务（Image Moderation, IM）能自动扫描图片，识别涉黄、涉恐、涉政、涉毒等有害内容，同时支持用户配置图片黑名单，打击自定义的违规图片。
+     * @param {ImageModerationRequest} req
+     * @param {function(string, ImageModerationResponse):void} cb
+     * @public
+     */
+    ImageModeration(req, cb) {
+        let resp = new ImageModerationResponse();
+        this.request("ImageModeration", req, resp, cb);
     }
 
     /**
