@@ -173,7 +173,7 @@ class IotexplorerClient extends AbstractClient {
     }
 
     /**
-     * 为用户提供同步调用设备动作的能力。
+     * 为用户提供同步调用设备行为的能力。
      * @param {CallDeviceActionSyncRequest} req
      * @param {function(string, CallDeviceActionSyncResponse):void} cb
      * @public
@@ -305,7 +305,7 @@ class IotexplorerClient extends AbstractClient {
     }
 
     /**
-     * 提供给用户异步调用设备动作的能力
+     * 提供给用户异步调用设备行为的能力
      * @param {CallDeviceActionAsyncRequest} req
      * @param {function(string, CallDeviceActionAsyncResponse):void} cb
      * @public
