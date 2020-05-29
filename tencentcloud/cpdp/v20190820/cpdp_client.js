@@ -41,7 +41,7 @@ const AgentTaxPayment = models.AgentTaxPayment;
 const QueryOutwardOrderRequest = models.QueryOutwardOrderRequest;
 const CreateRedInvoiceResult = models.CreateRedInvoiceResult;
 const QueryBankWithdrawCashDetailsResponse = models.QueryBankWithdrawCashDetailsResponse;
-const WithdrawCashMembershipResponse = models.WithdrawCashMembershipResponse;
+const QueryItem = models.QueryItem;
 const ApplyTradeResult = models.ApplyTradeResult;
 const RefundOutSubOrderRefundList = models.RefundOutSubOrderRefundList;
 const UnbindRelateAcctRequest = models.UnbindRelateAcctRequest;
@@ -112,6 +112,7 @@ const QueryTradeRequest = models.QueryTradeRequest;
 const BindAcctResponse = models.BindAcctResponse;
 const QueryExchangerateData = models.QueryExchangerateData;
 const WithdrawBill = models.WithdrawBill;
+const QueryRefundRequest = models.QueryRefundRequest;
 const BindRelateAccReUnionPayRequest = models.BindRelateAccReUnionPayRequest;
 const CreateCustAcctIdResponse = models.CreateCustAcctIdResponse;
 const QueryAcctInfoResponse = models.QueryAcctInfoResponse;
@@ -135,7 +136,7 @@ const UnBindAcctResponse = models.UnBindAcctResponse;
 const RechargeMemberThirdPayResponse = models.RechargeMemberThirdPayResponse;
 const QueryOrderOutOrderList = models.QueryOrderOutOrderList;
 const QueryCommonTransferRechargeRequest = models.QueryCommonTransferRechargeRequest;
-const QueryItem = models.QueryItem;
+const QueryAgentStatementsResponse = models.QueryAgentStatementsResponse;
 const QueryOrderRequest = models.QueryOrderRequest;
 const CloseOrderRequest = models.CloseOrderRequest;
 const RevResigterBillSupportWithdrawResponse = models.RevResigterBillSupportWithdrawResponse;
@@ -161,6 +162,7 @@ const CreateRedInvoiceResultData = models.CreateRedInvoiceResultData;
 const ApplyTradeResponse = models.ApplyTradeResponse;
 const QueryBankClearResponse = models.QueryBankClearResponse;
 const ApplyOutwardOrderResponse = models.ApplyOutwardOrderResponse;
+const WithdrawCashMembershipResponse = models.WithdrawCashMembershipResponse;
 const QueryApplicationMaterialRequest = models.QueryApplicationMaterialRequest;
 const CreateMerchantResponse = models.CreateMerchantResponse;
 const QueryMemberTransactionResponse = models.QueryMemberTransactionResponse;
@@ -178,7 +180,7 @@ const QueryRefundResponse = models.QueryRefundResponse;
 const QueryMemberBindResponse = models.QueryMemberBindResponse;
 const QueryDeclareData = models.QueryDeclareData;
 const QueryMemberBindRequest = models.QueryMemberBindRequest;
-const QueryRefundRequest = models.QueryRefundRequest;
+const QueryAgentStatementsRequest = models.QueryAgentStatementsRequest;
 const BindRelateAcctUnionPayResponse = models.BindRelateAcctUnionPayResponse;
 const QueryReconciliationDocumentRequest = models.QueryReconciliationDocumentRequest;
 const UnifiedOrderRequest = models.UnifiedOrderRequest;
@@ -605,14 +607,14 @@ class CpdpClient extends AbstractClient {
     }
 
     /**
-     * 商户解除绑定的提现银行卡
-     * @param {UnBindAcctRequest} req
-     * @param {function(string, UnBindAcctResponse):void} cb
+     * 直播平台-查询代理商结算单链接
+     * @param {QueryAgentStatementsRequest} req
+     * @param {function(string, QueryAgentStatementsResponse):void} cb
      * @public
      */
-    UnBindAcct(req, cb) {
-        let resp = new UnBindAcctResponse();
-        this.request("UnBindAcct", req, resp, cb);
+    QueryAgentStatements(req, cb) {
+        let resp = new QueryAgentStatementsResponse();
+        this.request("QueryAgentStatements", req, resp, cb);
     }
 
     /**
@@ -822,6 +824,17 @@ class CpdpClient extends AbstractClient {
     QueryOutwardOrder(req, cb) {
         let resp = new QueryOutwardOrderResponse();
         this.request("QueryOutwardOrder", req, resp, cb);
+    }
+
+    /**
+     * 商户解除绑定的提现银行卡
+     * @param {UnBindAcctRequest} req
+     * @param {function(string, UnBindAcctResponse):void} cb
+     * @public
+     */
+    UnBindAcct(req, cb) {
+        let resp = new UnBindAcctResponse();
+        this.request("UnBindAcct", req, resp, cb);
     }
 
     /**

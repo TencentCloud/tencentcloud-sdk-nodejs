@@ -380,6 +380,25 @@ class QueryAcctBindingRequest extends  AbstractModel {
          */
         this.MidasSignature = null;
 
+        /**
+         * 敏感信息加密类型:
+RSA: rsa非对称加密，使用RSA-PKCS1-v1_5
+AES: aes对称加密，使用AES256-CBC-PCKS7padding
+缺省: RSA
+         * @type {string || null}
+         */
+        this.EncryptType = null;
+
+        /**
+         * 环境名:
+release: 现网环境
+sandbox: 沙箱环境
+development: 开发环境
+缺省: release
+         * @type {string || null}
+         */
+        this.MidasEnvironment = null;
+
     }
 
     /**
@@ -393,6 +412,8 @@ class QueryAcctBindingRequest extends  AbstractModel {
         this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
         this.MidasSecretId = 'MidasSecretId' in params ? params.MidasSecretId : null;
         this.MidasSignature = 'MidasSignature' in params ? params.MidasSignature : null;
+        this.EncryptType = 'EncryptType' in params ? params.EncryptType : null;
+        this.MidasEnvironment = 'MidasEnvironment' in params ? params.MidasEnvironment : null;
 
     }
 }
@@ -1075,12 +1096,22 @@ BindType==2时必填
 
         /**
          * 敏感信息加密类型:
-RSA, rsa非对称加密，使用RSA-PKCS1-v1_5
-AES,  aes对称加密，使用AES256-CBC-PCKS7padding
-默认RSA
+RSA: rsa非对称加密，使用RSA-PKCS1-v1_5
+AES: aes对称加密，使用AES256-CBC-PCKS7padding
+缺省: RSA
          * @type {string || null}
          */
         this.EncryptType = null;
+
+        /**
+         * 环境名:
+release: 现网环境
+sandbox: 沙箱环境
+development: 开发环境
+缺省: release
+         * @type {string || null}
+         */
+        this.MidasEnvironment = null;
 
     }
 
@@ -1106,6 +1137,7 @@ AES,  aes对称加密，使用AES256-CBC-PCKS7padding
         this.CnapsBranchId = 'CnapsBranchId' in params ? params.CnapsBranchId : null;
         this.EiconBankBranchId = 'EiconBankBranchId' in params ? params.EiconBankBranchId : null;
         this.EncryptType = 'EncryptType' in params ? params.EncryptType : null;
+        this.MidasEnvironment = 'MidasEnvironment' in params ? params.MidasEnvironment : null;
 
     }
 }
@@ -1657,57 +1689,59 @@ class QueryBankWithdrawCashDetailsResponse extends  AbstractModel {
 }
 
 /**
- * WithdrawCashMembership返回参数结构体
+ * 聚鑫商户余额查询输出项
  * @class
  */
-class WithdrawCashMembershipResponse extends  AbstractModel {
+class QueryItem extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * String(20)，返回码
+         * 子商户账户
          * @type {string || null}
          */
-        this.TxnReturnCode = null;
+        this.SubAcctNo = null;
 
         /**
-         * String(100)，返回信息
+         * 子账户属性 
+1：普通会员子账号 
+2：挂账子账号 
+3：手续费子账号 
+4：利息子账号
+5：平台担保子账号
          * @type {string || null}
          */
-        this.TxnReturnMsg = null;
+        this.SubAcctProperty = null;
 
         /**
-         * String(22)，交易流水号
+         * 业务平台的子商户Id，唯一
          * @type {string || null}
          */
-        this.CnsmrSeqNo = null;
+        this.SubMchId = null;
 
         /**
-         * STRING(52)，见证系统流水号
-注意：此字段可能返回 null，表示取不到有效值。
+         * 子账户名称
          * @type {string || null}
          */
-        this.FrontSeqNo = null;
+        this.SubAcctName = null;
 
         /**
-         * STRING(20)，转账手续费（固定返回0.00）
-注意：此字段可能返回 null，表示取不到有效值。
+         * 账户可用余额
          * @type {string || null}
          */
-        this.TransferFee = null;
+        this.AcctAvailBal = null;
 
         /**
-         * STRING(1027)，保留域
-注意：此字段可能返回 null，表示取不到有效值。
+         * 可提现金额
          * @type {string || null}
          */
-        this.ReservedMsg = null;
+        this.CashAmt = null;
 
         /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * 维护日期 开户日期或修改日期
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.MaintenanceDate = null;
 
     }
 
@@ -1718,13 +1752,13 @@ class WithdrawCashMembershipResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TxnReturnCode = 'TxnReturnCode' in params ? params.TxnReturnCode : null;
-        this.TxnReturnMsg = 'TxnReturnMsg' in params ? params.TxnReturnMsg : null;
-        this.CnsmrSeqNo = 'CnsmrSeqNo' in params ? params.CnsmrSeqNo : null;
-        this.FrontSeqNo = 'FrontSeqNo' in params ? params.FrontSeqNo : null;
-        this.TransferFee = 'TransferFee' in params ? params.TransferFee : null;
-        this.ReservedMsg = 'ReservedMsg' in params ? params.ReservedMsg : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.SubAcctNo = 'SubAcctNo' in params ? params.SubAcctNo : null;
+        this.SubAcctProperty = 'SubAcctProperty' in params ? params.SubAcctProperty : null;
+        this.SubMchId = 'SubMchId' in params ? params.SubMchId : null;
+        this.SubAcctName = 'SubAcctName' in params ? params.SubAcctName : null;
+        this.AcctAvailBal = 'AcctAvailBal' in params ? params.AcctAvailBal : null;
+        this.CashAmt = 'CashAmt' in params ? params.CashAmt : null;
+        this.MaintenanceDate = 'MaintenanceDate' in params ? params.MaintenanceDate : null;
 
     }
 }
@@ -2988,8 +3022,8 @@ class CreateAcctRequest extends  AbstractModel {
         /**
          * 子商户类型：
 个人: personal
-企业：enterprise
-缺省： enterprise
+企业: enterprise
+缺省: enterprise
          * @type {string || null}
          */
         this.SubMchType = null;
@@ -3025,9 +3059,9 @@ merchant: 商户子账户
 
         /**
          * 敏感信息加密类型:
-RSA, rsa非对称加密，使用RSA-PKCS1-v1_5
-AES,  aes对称加密，使用AES256-CBC-PCKS7padding
-默认RSA
+RSA: rsa非对称加密，使用RSA-PKCS1-v1_5
+AES: aes对称加密，使用AES256-CBC-PCKS7padding
+缺省: RSA
          * @type {string || null}
          */
         this.EncryptType = null;
@@ -3037,6 +3071,16 @@ AES,  aes对称加密，使用AES256-CBC-PCKS7padding
          * @type {string || null}
          */
         this.SubAcctNo = null;
+
+        /**
+         * 环境名:
+release: 现网环境
+sandbox: 沙箱环境
+development: 开发环境
+缺省: release
+         * @type {string || null}
+         */
+        this.MidasEnvironment = null;
 
     }
 
@@ -3063,6 +3107,7 @@ AES,  aes对称加密，使用AES256-CBC-PCKS7padding
         this.SubMerchantPrivateKey = 'SubMerchantPrivateKey' in params ? params.SubMerchantPrivateKey : null;
         this.EncryptType = 'EncryptType' in params ? params.EncryptType : null;
         this.SubAcctNo = 'SubAcctNo' in params ? params.SubAcctNo : null;
+        this.MidasEnvironment = 'MidasEnvironment' in params ? params.MidasEnvironment : null;
 
     }
 }
@@ -3370,8 +3415,9 @@ class CheckAcctRequest extends  AbstractModel {
         this.SubAppId = null;
 
         /**
-         * 1：小额鉴权
-2：短信校验鉴权
+         * 1 – 小额转账验证
+2 – 短信验证
+每个结算账户每天只能使用一次小额转账验证
          * @type {number || null}
          */
         this.BindType = null;
@@ -3424,6 +3470,25 @@ BindType==1必填
          */
         this.CurrencyAmt = null;
 
+        /**
+         * 敏感信息加密类型:
+RSA: rsa非对称加密，使用RSA-PKCS1-v1_5
+AES: aes对称加密，使用AES256-CBC-PCKS7padding
+缺省: RSA
+         * @type {string || null}
+         */
+        this.EncryptType = null;
+
+        /**
+         * 环境名:
+release: 现网环境
+sandbox: 沙箱环境
+development: 开发环境
+缺省: release
+         * @type {string || null}
+         */
+        this.MidasEnvironment = null;
+
     }
 
     /**
@@ -3443,6 +3508,8 @@ BindType==1必填
         this.CurrencyType = 'CurrencyType' in params ? params.CurrencyType : null;
         this.CurrencyUnit = 'CurrencyUnit' in params ? params.CurrencyUnit : null;
         this.CurrencyAmt = 'CurrencyAmt' in params ? params.CurrencyAmt : null;
+        this.EncryptType = 'EncryptType' in params ? params.EncryptType : null;
+        this.MidasEnvironment = 'MidasEnvironment' in params ? params.MidasEnvironment : null;
 
     }
 }
@@ -4508,6 +4575,25 @@ class QueryAcctInfoListRequest extends  AbstractModel {
          */
         this.MidasSignature = null;
 
+        /**
+         * 敏感信息加密类型:
+RSA: rsa非对称加密，使用RSA-PKCS1-v1_5
+AES: aes对称加密，使用AES256-CBC-PCKS7padding
+缺省: RSA
+         * @type {string || null}
+         */
+        this.EncryptType = null;
+
+        /**
+         * 环境名:
+release: 现网环境
+sandbox: 沙箱环境
+development: 开发环境
+缺省: release
+         * @type {string || null}
+         */
+        this.MidasEnvironment = null;
+
     }
 
     /**
@@ -4523,6 +4609,8 @@ class QueryAcctInfoListRequest extends  AbstractModel {
         this.PageOffset = 'PageOffset' in params ? params.PageOffset : null;
         this.MidasSecretId = 'MidasSecretId' in params ? params.MidasSecretId : null;
         this.MidasSignature = 'MidasSignature' in params ? params.MidasSignature : null;
+        this.EncryptType = 'EncryptType' in params ? params.EncryptType : null;
+        this.MidasEnvironment = 'MidasEnvironment' in params ? params.MidasEnvironment : null;
 
     }
 }
@@ -5132,6 +5220,25 @@ class QueryAcctInfoRequest extends  AbstractModel {
          */
         this.MidasSignature = null;
 
+        /**
+         * 敏感信息加密类型:
+RSA: rsa非对称加密，使用RSA-PKCS1-v1_5
+AES: aes对称加密，使用AES256-CBC-PCKS7padding
+缺省: RSA
+         * @type {string || null}
+         */
+        this.EncryptType = null;
+
+        /**
+         * 环境名:
+release: 现网环境
+sandbox: 沙箱环境
+development: 开发环境
+缺省: release
+         * @type {string || null}
+         */
+        this.MidasEnvironment = null;
+
     }
 
     /**
@@ -5145,6 +5252,8 @@ class QueryAcctInfoRequest extends  AbstractModel {
         this.SubMchId = 'SubMchId' in params ? params.SubMchId : null;
         this.MidasSecretId = 'MidasSecretId' in params ? params.MidasSecretId : null;
         this.MidasSignature = 'MidasSignature' in params ? params.MidasSignature : null;
+        this.EncryptType = 'EncryptType' in params ? params.EncryptType : null;
+        this.MidasEnvironment = 'MidasEnvironment' in params ? params.MidasEnvironment : null;
 
     }
 }
@@ -6236,6 +6345,62 @@ class WithdrawBill extends  AbstractModel {
         this.CurrencyType = 'CurrencyType' in params ? params.CurrencyType : null;
         this.MetaData = 'MetaData' in params ? params.MetaData : null;
         this.ExtendFieldData = 'ExtendFieldData' in params ? params.ExtendFieldData : null;
+
+    }
+}
+
+/**
+ * QueryRefund请求参数结构体
+ * @class
+ */
+class QueryRefundRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 用户ID，长度不小于5位，仅支持字母和数字的组合。
+         * @type {string || null}
+         */
+        this.UserId = null;
+
+        /**
+         * 退款订单号，仅支持数字、字母、下划线（_）、横杠字符（-）、点（.）的组合。
+         * @type {string || null}
+         */
+        this.RefundId = null;
+
+        /**
+         * 聚鑫分配的支付主MidasAppId
+         * @type {string || null}
+         */
+        this.MidasAppId = null;
+
+        /**
+         * 聚鑫分配的安全ID
+         * @type {string || null}
+         */
+        this.MidasSecretId = null;
+
+        /**
+         * 按照聚鑫安全密钥计算的签名
+         * @type {string || null}
+         */
+        this.MidasSignature = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.UserId = 'UserId' in params ? params.UserId : null;
+        this.RefundId = 'RefundId' in params ? params.RefundId : null;
+        this.MidasAppId = 'MidasAppId' in params ? params.MidasAppId : null;
+        this.MidasSecretId = 'MidasSecretId' in params ? params.MidasSecretId : null;
+        this.MidasSignature = 'MidasSignature' in params ? params.MidasSignature : null;
 
     }
 }
@@ -8228,59 +8393,25 @@ class QueryCommonTransferRechargeRequest extends  AbstractModel {
 }
 
 /**
- * 聚鑫商户余额查询输出项
+ * QueryAgentStatements返回参数结构体
  * @class
  */
-class QueryItem extends  AbstractModel {
+class QueryAgentStatementsResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 子商户账户
+         * 文件下载链接
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
-        this.SubAcctNo = null;
+        this.FileUrl = null;
 
         /**
-         * 子账户属性 
-1：普通会员子账号 
-2：挂账子账号 
-3：手续费子账号 
-4：利息子账号
-5：平台担保子账号
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.SubAcctProperty = null;
-
-        /**
-         * 业务平台的子商户Id，唯一
-         * @type {string || null}
-         */
-        this.SubMchId = null;
-
-        /**
-         * 子账户名称
-         * @type {string || null}
-         */
-        this.SubAcctName = null;
-
-        /**
-         * 账户可用余额
-         * @type {string || null}
-         */
-        this.AcctAvailBal = null;
-
-        /**
-         * 可提现金额
-         * @type {string || null}
-         */
-        this.CashAmt = null;
-
-        /**
-         * 维护日期 开户日期或修改日期
-         * @type {string || null}
-         */
-        this.MaintenanceDate = null;
+        this.RequestId = null;
 
     }
 
@@ -8291,13 +8422,8 @@ class QueryItem extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.SubAcctNo = 'SubAcctNo' in params ? params.SubAcctNo : null;
-        this.SubAcctProperty = 'SubAcctProperty' in params ? params.SubAcctProperty : null;
-        this.SubMchId = 'SubMchId' in params ? params.SubMchId : null;
-        this.SubAcctName = 'SubAcctName' in params ? params.SubAcctName : null;
-        this.AcctAvailBal = 'AcctAvailBal' in params ? params.AcctAvailBal : null;
-        this.CashAmt = 'CashAmt' in params ? params.CashAmt : null;
-        this.MaintenanceDate = 'MaintenanceDate' in params ? params.MaintenanceDate : null;
+        this.FileUrl = 'FileUrl' in params ? params.FileUrl : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -9998,6 +10124,79 @@ class ApplyOutwardOrderResponse extends  AbstractModel {
 }
 
 /**
+ * WithdrawCashMembership返回参数结构体
+ * @class
+ */
+class WithdrawCashMembershipResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * String(20)，返回码
+         * @type {string || null}
+         */
+        this.TxnReturnCode = null;
+
+        /**
+         * String(100)，返回信息
+         * @type {string || null}
+         */
+        this.TxnReturnMsg = null;
+
+        /**
+         * String(22)，交易流水号
+         * @type {string || null}
+         */
+        this.CnsmrSeqNo = null;
+
+        /**
+         * STRING(52)，见证系统流水号
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.FrontSeqNo = null;
+
+        /**
+         * STRING(20)，转账手续费（固定返回0.00）
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.TransferFee = null;
+
+        /**
+         * STRING(1027)，保留域
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ReservedMsg = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TxnReturnCode = 'TxnReturnCode' in params ? params.TxnReturnCode : null;
+        this.TxnReturnMsg = 'TxnReturnMsg' in params ? params.TxnReturnMsg : null;
+        this.CnsmrSeqNo = 'CnsmrSeqNo' in params ? params.CnsmrSeqNo : null;
+        this.FrontSeqNo = 'FrontSeqNo' in params ? params.FrontSeqNo : null;
+        this.TransferFee = 'TransferFee' in params ? params.TransferFee : null;
+        this.ReservedMsg = 'ReservedMsg' in params ? params.ReservedMsg : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * QueryApplicationMaterial请求参数结构体
  * @class
  */
@@ -10656,6 +10855,16 @@ class QueryBalanceRequest extends  AbstractModel {
          */
         this.MidasSignature = null;
 
+        /**
+         * 环境名:
+release: 现网环境
+sandbox: 沙箱环境
+development: 开发环境
+缺省: release
+         * @type {string || null}
+         */
+        this.MidasEnvironment = null;
+
     }
 
     /**
@@ -10671,6 +10880,7 @@ class QueryBalanceRequest extends  AbstractModel {
         this.PageOffset = 'PageOffset' in params ? params.PageOffset : null;
         this.MidasSecretId = 'MidasSecretId' in params ? params.MidasSecretId : null;
         this.MidasSignature = 'MidasSignature' in params ? params.MidasSignature : null;
+        this.MidasEnvironment = 'MidasEnvironment' in params ? params.MidasEnvironment : null;
 
     }
 }
@@ -10758,6 +10968,25 @@ class ApplyWithdrawalRequest extends  AbstractModel {
          */
         this.MidasSignature = null;
 
+        /**
+         * 敏感信息加密类型:
+RSA: rsa非对称加密，使用RSA-PKCS1-v1_5
+AES: aes对称加密，使用AES256-CBC-PCKS7padding
+缺省: RSA
+         * @type {string || null}
+         */
+        this.EncryptType = null;
+
+        /**
+         * 环境名:
+release: 现网环境
+sandbox: 沙箱环境
+development: 开发环境
+缺省: release
+         * @type {string || null}
+         */
+        this.MidasEnvironment = null;
+
     }
 
     /**
@@ -10779,6 +11008,8 @@ class ApplyWithdrawalRequest extends  AbstractModel {
         this.IdCode = 'IdCode' in params ? params.IdCode : null;
         this.MidasSecretId = 'MidasSecretId' in params ? params.MidasSecretId : null;
         this.MidasSignature = 'MidasSignature' in params ? params.MidasSignature : null;
+        this.EncryptType = 'EncryptType' in params ? params.EncryptType : null;
+        this.MidasEnvironment = 'MidasEnvironment' in params ? params.MidasEnvironment : null;
 
     }
 }
@@ -11187,42 +11418,25 @@ class QueryMemberBindRequest extends  AbstractModel {
 }
 
 /**
- * QueryRefund请求参数结构体
+ * QueryAgentStatements请求参数结构体
  * @class
  */
-class QueryRefundRequest extends  AbstractModel {
+class QueryAgentStatementsRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 用户ID，长度不小于5位，仅支持字母和数字的组合。
+         * 结算单日期，月结算单填每月1日
          * @type {string || null}
          */
-        this.UserId = null;
+        this.Date = null;
 
         /**
-         * 退款订单号，仅支持数字、字母、下划线（_）、横杠字符（-）、点（.）的组合。
+         * 日结算单:daily
+月结算单:monthly
          * @type {string || null}
          */
-        this.RefundId = null;
-
-        /**
-         * 聚鑫分配的支付主MidasAppId
-         * @type {string || null}
-         */
-        this.MidasAppId = null;
-
-        /**
-         * 聚鑫分配的安全ID
-         * @type {string || null}
-         */
-        this.MidasSecretId = null;
-
-        /**
-         * 按照聚鑫安全密钥计算的签名
-         * @type {string || null}
-         */
-        this.MidasSignature = null;
+        this.Type = null;
 
     }
 
@@ -11233,11 +11447,8 @@ class QueryRefundRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.UserId = 'UserId' in params ? params.UserId : null;
-        this.RefundId = 'RefundId' in params ? params.RefundId : null;
-        this.MidasAppId = 'MidasAppId' in params ? params.MidasAppId : null;
-        this.MidasSecretId = 'MidasSecretId' in params ? params.MidasSecretId : null;
-        this.MidasSignature = 'MidasSignature' in params ? params.MidasSignature : null;
+        this.Date = 'Date' in params ? params.Date : null;
+        this.Type = 'Type' in params ? params.Type : null;
 
     }
 }
@@ -11572,6 +11783,25 @@ class UnBindAcctRequest extends  AbstractModel {
          */
         this.MidasSignature = null;
 
+        /**
+         * 敏感信息加密类型:
+RSA: rsa非对称加密，使用RSA-PKCS1-v1_5
+AES: aes对称加密，使用AES256-CBC-PCKS7padding
+缺省: RSA
+         * @type {string || null}
+         */
+        this.EncryptType = null;
+
+        /**
+         * 环境名:
+release: 现网环境
+sandbox: 沙箱环境
+development: 开发环境
+缺省: release
+         * @type {string || null}
+         */
+        this.MidasEnvironment = null;
+
     }
 
     /**
@@ -11586,6 +11816,8 @@ class UnBindAcctRequest extends  AbstractModel {
         this.SettleAcctNo = 'SettleAcctNo' in params ? params.SettleAcctNo : null;
         this.MidasSecretId = 'MidasSecretId' in params ? params.MidasSecretId : null;
         this.MidasSignature = 'MidasSignature' in params ? params.MidasSignature : null;
+        this.EncryptType = 'EncryptType' in params ? params.EncryptType : null;
+        this.MidasEnvironment = 'MidasEnvironment' in params ? params.MidasEnvironment : null;
 
     }
 }
@@ -11922,7 +12154,7 @@ module.exports = {
     QueryOutwardOrderRequest: QueryOutwardOrderRequest,
     CreateRedInvoiceResult: CreateRedInvoiceResult,
     QueryBankWithdrawCashDetailsResponse: QueryBankWithdrawCashDetailsResponse,
-    WithdrawCashMembershipResponse: WithdrawCashMembershipResponse,
+    QueryItem: QueryItem,
     ApplyTradeResult: ApplyTradeResult,
     RefundOutSubOrderRefundList: RefundOutSubOrderRefundList,
     UnbindRelateAcctRequest: UnbindRelateAcctRequest,
@@ -11993,6 +12225,7 @@ module.exports = {
     BindAcctResponse: BindAcctResponse,
     QueryExchangerateData: QueryExchangerateData,
     WithdrawBill: WithdrawBill,
+    QueryRefundRequest: QueryRefundRequest,
     BindRelateAccReUnionPayRequest: BindRelateAccReUnionPayRequest,
     CreateCustAcctIdResponse: CreateCustAcctIdResponse,
     QueryAcctInfoResponse: QueryAcctInfoResponse,
@@ -12016,7 +12249,7 @@ module.exports = {
     RechargeMemberThirdPayResponse: RechargeMemberThirdPayResponse,
     QueryOrderOutOrderList: QueryOrderOutOrderList,
     QueryCommonTransferRechargeRequest: QueryCommonTransferRechargeRequest,
-    QueryItem: QueryItem,
+    QueryAgentStatementsResponse: QueryAgentStatementsResponse,
     QueryOrderRequest: QueryOrderRequest,
     CloseOrderRequest: CloseOrderRequest,
     RevResigterBillSupportWithdrawResponse: RevResigterBillSupportWithdrawResponse,
@@ -12042,6 +12275,7 @@ module.exports = {
     ApplyTradeResponse: ApplyTradeResponse,
     QueryBankClearResponse: QueryBankClearResponse,
     ApplyOutwardOrderResponse: ApplyOutwardOrderResponse,
+    WithdrawCashMembershipResponse: WithdrawCashMembershipResponse,
     QueryApplicationMaterialRequest: QueryApplicationMaterialRequest,
     CreateMerchantResponse: CreateMerchantResponse,
     QueryMemberTransactionResponse: QueryMemberTransactionResponse,
@@ -12059,7 +12293,7 @@ module.exports = {
     QueryMemberBindResponse: QueryMemberBindResponse,
     QueryDeclareData: QueryDeclareData,
     QueryMemberBindRequest: QueryMemberBindRequest,
-    QueryRefundRequest: QueryRefundRequest,
+    QueryAgentStatementsRequest: QueryAgentStatementsRequest,
     BindRelateAcctUnionPayResponse: BindRelateAcctUnionPayResponse,
     QueryReconciliationDocumentRequest: QueryReconciliationDocumentRequest,
     UnifiedOrderRequest: UnifiedOrderRequest,

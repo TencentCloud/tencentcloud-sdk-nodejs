@@ -1394,7 +1394,7 @@ class CallDeviceActionSyncRequest extends  AbstractModel {
         this.DeviceName = null;
 
         /**
-         * 动作Id
+         * 产品数据模板中行为功能的标识符，由开发者自行根据设备的应用场景定义
          * @type {string || null}
          */
         this.ActionId = null;
@@ -1994,7 +1994,7 @@ class CallDeviceActionAsyncRequest extends  AbstractModel {
         this.DeviceName = null;
 
         /**
-         * 动作Id
+         * 产品数据模板中行为功能的标识符，由开发者自行根据设备的应用场景定义
          * @type {string || null}
          */
         this.ActionId = null;
