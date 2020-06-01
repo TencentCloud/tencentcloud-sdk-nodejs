@@ -604,6 +604,34 @@ class CustomLayout extends  AbstractModel {
 }
 
 /**
+ * SetTranscodeCallbackKey返回参数结构体
+ * @class
+ */
+class SetTranscodeCallbackKeyResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * 实时录制视频拼接参数
  * @class
  */
@@ -705,6 +733,48 @@ class StartOnlineRecordResponse extends  AbstractModel {
         }
         this.TaskId = 'TaskId' in params ? params.TaskId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 实时录制白板参数，例如白板宽高等
+ * @class
+ */
+class Whiteboard extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实时录制结果里白板视频宽，默认为1280
+         * @type {number || null}
+         */
+        this.Width = null;
+
+        /**
+         * 实时录制结果里白板视频高，默认为960
+         * @type {number || null}
+         */
+        this.Height = null;
+
+        /**
+         * 白板初始化参数，透传到白板 SDK
+         * @type {string || null}
+         */
+        this.InitParam = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Width = 'Width' in params ? params.Width : null;
+        this.Height = 'Height' in params ? params.Height : null;
+        this.InitParam = 'InitParam' in params ? params.InitParam : null;
 
     }
 }
@@ -917,30 +987,18 @@ tar.gz： 生成`.tar.gz`压缩包
 }
 
 /**
- * 实时录制白板参数，例如白板宽高等
+ * SetOnlineRecordCallbackKey返回参数结构体
  * @class
  */
-class Whiteboard extends  AbstractModel {
+class SetOnlineRecordCallbackKeyResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 实时录制结果里白板视频宽，默认为1280
-         * @type {number || null}
-         */
-        this.Width = null;
-
-        /**
-         * 实时录制结果里白板视频高，默认为960
-         * @type {number || null}
-         */
-        this.Height = null;
-
-        /**
-         * 白板初始化参数，透传到白板 SDK
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.InitParam = null;
+        this.RequestId = null;
 
     }
 
@@ -951,9 +1009,7 @@ class Whiteboard extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Width = 'Width' in params ? params.Width : null;
-        this.Height = 'Height' in params ? params.Height : null;
-        this.InitParam = 'InitParam' in params ? params.InitParam : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -982,6 +1038,41 @@ class PauseOnlineRecordResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * SetTranscodeCallbackKey请求参数结构体
+ * @class
+ */
+class SetTranscodeCallbackKeyRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 应用的SdkAppId
+         * @type {number || null}
+         */
+        this.SdkAppId = null;
+
+        /**
+         * 设置文档转码回调鉴权密钥，最长64字符，如果传入空字符串，那么删除现有的鉴权回调密钥
+         * @type {string || null}
+         */
+        this.CallbackKey = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
+        this.CallbackKey = 'CallbackKey' in params ? params.CallbackKey : null;
 
     }
 }
@@ -1152,6 +1243,41 @@ class SetOnlineRecordCallbackResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * SetOnlineRecordCallbackKey请求参数结构体
+ * @class
+ */
+class SetOnlineRecordCallbackKeyRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 应用的SdkAppId
+         * @type {number || null}
+         */
+        this.SdkAppId = null;
+
+        /**
+         * 设置实时录制回调鉴权密钥，最长64字符，如果传入空字符串，那么删除现有的鉴权回调密钥
+         * @type {string || null}
+         */
+        this.CallbackKey = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
+        this.CallbackKey = 'CallbackKey' in params ? params.CallbackKey : null;
 
     }
 }
@@ -1514,16 +1640,20 @@ module.exports = {
     CreateTranscodeResponse: CreateTranscodeResponse,
     VideoInfo: VideoInfo,
     CustomLayout: CustomLayout,
+    SetTranscodeCallbackKeyResponse: SetTranscodeCallbackKeyResponse,
     Concat: Concat,
     DescribeOnlineRecordRequest: DescribeOnlineRecordRequest,
     StartOnlineRecordResponse: StartOnlineRecordResponse,
+    Whiteboard: Whiteboard,
     DescribeOnlineRecordResponse: DescribeOnlineRecordResponse,
     CreateTranscodeRequest: CreateTranscodeRequest,
-    Whiteboard: Whiteboard,
+    SetOnlineRecordCallbackKeyResponse: SetOnlineRecordCallbackKeyResponse,
     PauseOnlineRecordResponse: PauseOnlineRecordResponse,
+    SetTranscodeCallbackKeyRequest: SetTranscodeCallbackKeyRequest,
     DescribeTranscodeRequest: DescribeTranscodeRequest,
     DescribeTranscodeResponse: DescribeTranscodeResponse,
     SetOnlineRecordCallbackResponse: SetOnlineRecordCallbackResponse,
+    SetOnlineRecordCallbackKeyRequest: SetOnlineRecordCallbackKeyRequest,
     StopOnlineRecordResponse: StopOnlineRecordResponse,
     DescribeTranscodeCallbackRequest: DescribeTranscodeCallbackRequest,
     ResumeOnlineRecordRequest: ResumeOnlineRecordRequest,

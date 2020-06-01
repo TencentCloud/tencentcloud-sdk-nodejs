@@ -432,6 +432,7 @@ class DetectLabelRequest extends  AbstractModel {
 WEB，针对网络图片优化;
 CAMERA，针对手机摄像头拍摄图片优化;
 ALBUM，针对手机相册、网盘产品优化;
+NEWS，针对新闻、资讯、广电等行业优化
 如果不传此参数，则默认为WEB。
 
 支持多场景（Scenes）一起检测。例如，使用 Scenes=["WEB", "CAMERA"]，即对一张图片使用两个模型同时检测，输出两套识别结果。
@@ -485,6 +486,14 @@ class DetectLabelResponse extends  AbstractModel {
         this.AlbumLabels = null;
 
         /**
+         * News新闻版标签结果数组。如未选择NEWS场景，则为空。
+新闻版目前为测试阶段，暂不提供每个标签的一级、二级分类信息的输出。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<DetectLabelItem> || null}
+         */
+        this.NewsLabels = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -524,6 +533,15 @@ class DetectLabelResponse extends  AbstractModel {
                 let obj = new DetectLabelItem();
                 obj.deserialize(params.AlbumLabels[z]);
                 this.AlbumLabels.push(obj);
+            }
+        }
+
+        if (params.NewsLabels) {
+            this.NewsLabels = new Array();
+            for (let z in params.NewsLabels) {
+                let obj = new DetectLabelItem();
+                obj.deserialize(params.NewsLabels[z]);
+                this.NewsLabels.push(obj);
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;

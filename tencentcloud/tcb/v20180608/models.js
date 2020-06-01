@@ -677,6 +677,41 @@ class DescribeEndUserStatisticResponse extends  AbstractModel {
 }
 
 /**
+ * DescribePostpayPackageFreeQuotas请求参数结构体
+ * @class
+ */
+class DescribePostpayPackageFreeQuotasRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 环境ID
+         * @type {string || null}
+         */
+        this.EnvId = null;
+
+        /**
+         * 免费额度类型标识
+         * @type {string || null}
+         */
+        this.FreeQuotaType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.EnvId = 'EnvId' in params ? params.EnvId : null;
+        this.FreeQuotaType = 'FreeQuotaType' in params ? params.FreeQuotaType : null;
+
+    }
+}
+
+/**
  * CreateAuthDomain返回参数结构体
  * @class
  */
@@ -934,6 +969,83 @@ class DescribeEndUserStatisticRequest extends  AbstractModel {
             return;
         }
         this.EnvId = 'EnvId' in params ? params.EnvId : null;
+
+    }
+}
+
+/**
+ * 后付费免费额度
+ * @class
+ */
+class PackageFreeQuotaInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 资源类型
+<li>COS</li>
+<li>CDN</li>
+<li>FLEXDB</li>
+<li>SCF</li>
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ResourceType = null;
+
+        /**
+         * 资源指标名称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ResourceMetric = null;
+
+        /**
+         * 资源指标免费量
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.FreeQuota = null;
+
+        /**
+         * 指标单位
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.MetricUnit = null;
+
+        /**
+         * 免费量抵扣周期
+<li>sum-month:以月为单位抵扣</li>
+<li>sum-day:以天为单位抵扣</li>
+<li>totalize:总容量抵扣</li>
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.DeductType = null;
+
+        /**
+         * 免费量类型
+<li>basic:通用量抵扣</li>
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.FreeQuotaType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ResourceType = 'ResourceType' in params ? params.ResourceType : null;
+        this.ResourceMetric = 'ResourceMetric' in params ? params.ResourceMetric : null;
+        this.FreeQuota = 'FreeQuota' in params ? params.FreeQuota : null;
+        this.MetricUnit = 'MetricUnit' in params ? params.MetricUnit : null;
+        this.DeductType = 'DeductType' in params ? params.DeductType : null;
+        this.FreeQuotaType = 'FreeQuotaType' in params ? params.FreeQuotaType : null;
 
     }
 }
@@ -1838,6 +1950,13 @@ class EnvInfo extends  AbstractModel {
          */
         this.IsAutoDegrade = null;
 
+        /**
+         * 环境渠道
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.EnvChannel = null;
+
     }
 
     /**
@@ -1901,6 +2020,7 @@ class EnvInfo extends  AbstractModel {
             }
         }
         this.IsAutoDegrade = 'IsAutoDegrade' in params ? params.IsAutoDegrade : null;
+        this.EnvChannel = 'EnvChannel' in params ? params.EnvChannel : null;
 
     }
 }
@@ -2297,6 +2417,50 @@ class DescribeEnvLimitResponse extends  AbstractModel {
 }
 
 /**
+ * DescribePostpayPackageFreeQuotas返回参数结构体
+ * @class
+ */
+class DescribePostpayPackageFreeQuotasResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 免费量资源信息列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<PackageFreeQuotaInfo> || null}
+         */
+        this.PackageFreeQuotaInfos = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.PackageFreeQuotaInfos) {
+            this.PackageFreeQuotaInfos = new Array();
+            for (let z in params.PackageFreeQuotaInfos) {
+                let obj = new PackageFreeQuotaInfo();
+                obj.deserialize(params.PackageFreeQuotaInfos[z]);
+                this.PackageFreeQuotaInfos.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeEndUserLoginStatistic返回参数结构体
  * @class
  */
@@ -2546,6 +2710,7 @@ module.exports = {
     CreateStaticStoreRequest: CreateStaticStoreRequest,
     CommonServiceAPIResponse: CommonServiceAPIResponse,
     DescribeEndUserStatisticResponse: DescribeEndUserStatisticResponse,
+    DescribePostpayPackageFreeQuotasRequest: DescribePostpayPackageFreeQuotasRequest,
     CreateAuthDomainResponse: CreateAuthDomainResponse,
     ModifyEnvRequest: ModifyEnvRequest,
     DescribeEndUsersRequest: DescribeEndUsersRequest,
@@ -2553,6 +2718,7 @@ module.exports = {
     DescribeQuotaDataRequest: DescribeQuotaDataRequest,
     ReinstateEnvResponse: ReinstateEnvResponse,
     DescribeEndUserStatisticRequest: DescribeEndUserStatisticRequest,
+    PackageFreeQuotaInfo: PackageFreeQuotaInfo,
     DescribeEnvFreeQuotaResponse: DescribeEnvFreeQuotaResponse,
     CheckTcbServiceRequest: CheckTcbServiceRequest,
     ModifyDatabaseACLResponse: ModifyDatabaseACLResponse,
@@ -2580,6 +2746,7 @@ module.exports = {
     PostpayEnvQuota: PostpayEnvQuota,
     EndUserInfo: EndUserInfo,
     DescribeEnvLimitResponse: DescribeEnvLimitResponse,
+    DescribePostpayPackageFreeQuotasResponse: DescribePostpayPackageFreeQuotasResponse,
     DescribeEndUserLoginStatisticResponse: DescribeEndUserLoginStatisticResponse,
     DescribeEnvsResponse: DescribeEnvsResponse,
     ModifyEnvResponse: ModifyEnvResponse,

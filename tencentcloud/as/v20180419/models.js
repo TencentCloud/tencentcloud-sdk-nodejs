@@ -1861,7 +1861,8 @@ class CreateLaunchConfigurationRequest extends  AbstractModel {
         this.ImageId = null;
 
         /**
-         * 实例所属项目ID。该参数可以通过调用 [DescribeProject](https://cloud.tencent.com/document/api/378/4400) 的返回值中的`projectId`字段来获取。不填为默认项目。
+         * 启动配置所属项目ID。该参数可以通过调用 [DescribeProject](https://cloud.tencent.com/document/api/378/4400) 的返回值中的`projectId`字段来获取。不填为默认项目。
+注意：伸缩组内实例所属项目ID取伸缩组项目ID，与这里取值无关。
          * @type {number || null}
          */
         this.ProjectId = null;
@@ -3226,7 +3227,7 @@ class CreateAutoScalingGroupRequest extends  AbstractModel {
         this.LoadBalancerIds = null;
 
         /**
-         * 项目ID
+         * 伸缩组内实例所属项目ID。该参数可以通过调用 [DescribeProject](https://cloud.tencent.com/document/api/378/4400) 的返回值中的`projectId`字段来获取。不填为默认项目。
          * @type {number || null}
          */
         this.ProjectId = null;
