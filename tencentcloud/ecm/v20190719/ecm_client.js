@@ -39,7 +39,7 @@ const ResetInstancesPasswordResponse = models.ResetInstancesPasswordResponse;
 const InstanceTypeConfig = models.InstanceTypeConfig;
 const DescribeNodeResponse = models.DescribeNodeResponse;
 const RemovePrivateIpAddressesResponse = models.RemovePrivateIpAddressesResponse;
-const ModifyModuleImageResponse = models.ModifyModuleImageResponse;
+const DescribeDefaultSubnetResponse = models.DescribeDefaultSubnetResponse;
 const VpcInfo = models.VpcInfo;
 const DeleteSubnetRequest = models.DeleteSubnetRequest;
 const DescribeModuleRequest = models.DescribeModuleRequest;
@@ -77,6 +77,7 @@ const ModuleCounter = models.ModuleCounter;
 const ZoneInstanceCountISP = models.ZoneInstanceCountISP;
 const StartInstancesRequest = models.StartInstancesRequest;
 const Tag = models.Tag;
+const DescribeDefaultSubnetRequest = models.DescribeDefaultSubnetRequest;
 const ResetInstancesMaxBandwidthResponse = models.ResetInstancesMaxBandwidthResponse;
 const DeleteVpcRequest = models.DeleteVpcRequest;
 const CreateNetworkInterfaceResponse = models.CreateNetworkInterfaceResponse;
@@ -97,6 +98,7 @@ const Image = models.Image;
 const TagSpecification = models.TagSpecification;
 const DetachNetworkInterfaceRequest = models.DetachNetworkInterfaceRequest;
 const DescribeConfigResponse = models.DescribeConfigResponse;
+const ModifyDefaultSubnetResponse = models.ModifyDefaultSubnetResponse;
 const DescribeModuleDetailResponse = models.DescribeModuleDetailResponse;
 const StopInstancesRequest = models.StopInstancesRequest;
 const Subnet = models.Subnet;
@@ -122,7 +124,7 @@ const ImportImageRequest = models.ImportImageRequest;
 const NetworkInterfaceAttachment = models.NetworkInterfaceAttachment;
 const StopInstancesResponse = models.StopInstancesResponse;
 const ModifyModuleNameRequest = models.ModifyModuleNameRequest;
-const SimpleModule = models.SimpleModule;
+const ModifyDefaultSubnetRequest = models.ModifyDefaultSubnetRequest;
 const DescribeInstancesRequest = models.DescribeInstancesRequest;
 const DescribeTaskResultRequest = models.DescribeTaskResultRequest;
 const AssociateAddressResponse = models.AssociateAddressResponse;
@@ -135,6 +137,7 @@ const DescribeAddressQuotaResponse = models.DescribeAddressQuotaResponse;
 const SrcImage = models.SrcImage;
 const ZoneInstanceInfo = models.ZoneInstanceInfo;
 const ModifyAddressAttributeRequest = models.ModifyAddressAttributeRequest;
+const ModifyModuleImageResponse = models.ModifyModuleImageResponse;
 const ResetInstancesRequest = models.ResetInstancesRequest;
 const PeakNetwork = models.PeakNetwork;
 const DeleteImageRequest = models.DeleteImageRequest;
@@ -144,6 +147,7 @@ const City = models.City;
 const PrivateIPAddressInfo = models.PrivateIPAddressInfo;
 const TerminateInstancesRequest = models.TerminateInstancesRequest;
 const DeleteNetworkInterfaceResponse = models.DeleteNetworkInterfaceResponse;
+const SimpleModule = models.SimpleModule;
 const DescribePeakNetworkOverviewRequest = models.DescribePeakNetworkOverviewRequest;
 const AssignPrivateIpAddressesResponse = models.AssignPrivateIpAddressesResponse;
 const PeakNetworkRegionInfo = models.PeakNetworkRegionInfo;
@@ -410,14 +414,14 @@ EIP 如果被封堵，则不能进行解绑定操作。
     }
 
     /**
-     * 查询弹性公网IP列表
-     * @param {DescribeAddressesRequest} req
-     * @param {function(string, DescribeAddressesResponse):void} cb
+     * 查询可用区的默认子网
+     * @param {DescribeDefaultSubnetRequest} req
+     * @param {function(string, DescribeDefaultSubnetResponse):void} cb
      * @public
      */
-    DescribeAddresses(req, cb) {
-        let resp = new DescribeAddressesResponse();
-        this.request("DescribeAddresses", req, resp, cb);
+    DescribeDefaultSubnet(req, cb) {
+        let resp = new DescribeDefaultSubnetResponse();
+        this.request("DescribeDefaultSubnet", req, resp, cb);
     }
 
     /**
@@ -460,18 +464,18 @@ EIP 如果欠费或被封堵，则不能被绑定。
     }
 
     /**
-     * ModifyModuleImage
-     * @param {ModifyModuleImageRequest} req
-     * @param {function(string, ModifyModuleImageResponse):void} cb
+     * 查询弹性公网IP列表
+     * @param {DescribeAddressesRequest} req
+     * @param {function(string, DescribeAddressesResponse):void} cb
      * @public
      */
-    ModifyModuleImage(req, cb) {
-        let resp = new ModifyModuleImageResponse();
-        this.request("ModifyModuleImage", req, resp, cb);
+    DescribeAddresses(req, cb) {
+        let resp = new DescribeAddressesResponse();
+        this.request("DescribeAddresses", req, resp, cb);
     }
 
     /**
-     * 删除子网
+     * 删除子网，若子网为可用区下的默认子网，则默认子网会回退到系统自动创建的默认子网，非用户最新创建的子网。若默认子网不满足需求，可调用设置默认子网接口设置。
      * @param {DeleteSubnetRequest} req
      * @param {function(string, DeleteSubnetResponse):void} cb
      * @public
@@ -660,6 +664,17 @@ EIP 如果欠费或被封堵，则不能被绑定。
     }
 
     /**
+     * ModifyModuleImage
+     * @param {ModifyModuleImageRequest} req
+     * @param {function(string, ModifyModuleImageResponse):void} cb
+     * @public
+     */
+    ModifyModuleImage(req, cb) {
+        let resp = new ModifyModuleImageResponse();
+        this.request("ModifyModuleImage", req, resp, cb);
+    }
+
+    /**
      * 修改实例的属性。
      * @param {ModifyInstancesAttributeRequest} req
      * @param {function(string, ModifyInstancesAttributeResponse):void} cb
@@ -679,6 +694,17 @@ EIP 如果欠费或被封堵，则不能被绑定。
     DescribePeakBaseOverview(req, cb) {
         let resp = new DescribePeakBaseOverviewResponse();
         this.request("DescribePeakBaseOverview", req, resp, cb);
+    }
+
+    /**
+     * 修改在一个可用区下创建实例时使用的默认子网（创建实例时，未填写VPC参数时使用的sunbetId）
+     * @param {ModifyDefaultSubnetRequest} req
+     * @param {function(string, ModifyDefaultSubnetResponse):void} cb
+     * @public
+     */
+    ModifyDefaultSubnet(req, cb) {
+        let resp = new ModifyDefaultSubnetResponse();
+        this.request("ModifyDefaultSubnet", req, resp, cb);
     }
 
     /**
@@ -785,7 +811,7 @@ EIP 如果欠费或被封堵，则不能被绑定。
     }
 
     /**
-     * 创建子网
+     * 创建子网，若创建成功，则此子网会成为此可用区的默认子网。
      * @param {CreateSubnetRequest} req
      * @param {function(string, CreateSubnetResponse):void} cb
      * @public

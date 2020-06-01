@@ -1238,12 +1238,18 @@ class RemovePrivateIpAddressesResponse extends  AbstractModel {
 }
 
 /**
- * ModifyModuleImage返回参数结构体
+ * DescribeDefaultSubnet返回参数结构体
  * @class
  */
-class ModifyModuleImageResponse extends  AbstractModel {
+class DescribeDefaultSubnetResponse extends  AbstractModel {
     constructor(){
         super();
+
+        /**
+         * 默认子网信息，若无子网，则为空数据。
+         * @type {Subnet || null}
+         */
+        this.Subnet = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1259,6 +1265,12 @@ class ModifyModuleImageResponse extends  AbstractModel {
     deserialize(params) {
         if (!params) {
             return;
+        }
+
+        if (params.Subnet) {
+            let obj = new Subnet();
+            obj.deserialize(params.Subnet)
+            this.Subnet = obj;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -3160,6 +3172,41 @@ class Tag extends  AbstractModel {
 }
 
 /**
+ * DescribeDefaultSubnet请求参数结构体
+ * @class
+ */
+class DescribeDefaultSubnetRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * ECM地域
+         * @type {string || null}
+         */
+        this.EcmRegion = null;
+
+        /**
+         * ECM可用区
+         * @type {string || null}
+         */
+        this.Zone = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.EcmRegion = 'EcmRegion' in params ? params.EcmRegion : null;
+        this.Zone = 'Zone' in params ? params.Zone : null;
+
+    }
+}
+
+/**
  * ResetInstancesMaxBandwidth返回参数结构体
  * @class
  */
@@ -4109,6 +4156,34 @@ class DescribeConfigResponse extends  AbstractModel {
             this.NetworkStorageRange = obj;
         }
         this.ImageWhiteSet = 'ImageWhiteSet' in params ? params.ImageWhiteSet : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifyDefaultSubnet返回参数结构体
+ * @class
+ */
+class ModifyDefaultSubnetResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -5401,24 +5476,36 @@ class ModifyModuleNameRequest extends  AbstractModel {
 }
 
 /**
- * Module的简要信息
+ * ModifyDefaultSubnet请求参数结构体
  * @class
  */
-class SimpleModule extends  AbstractModel {
+class ModifyDefaultSubnetRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 模块ID
+         * ECM地域
          * @type {string || null}
          */
-        this.ModuleId = null;
+        this.EcmRegion = null;
 
         /**
-         * 模块名称
+         * ECM可用区
          * @type {string || null}
          */
-        this.ModuleName = null;
+        this.Zone = null;
+
+        /**
+         * 私有网络ID
+         * @type {string || null}
+         */
+        this.VpcId = null;
+
+        /**
+         * 子网ID
+         * @type {string || null}
+         */
+        this.SubnetId = null;
 
     }
 
@@ -5429,8 +5516,10 @@ class SimpleModule extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ModuleId = 'ModuleId' in params ? params.ModuleId : null;
-        this.ModuleName = 'ModuleName' in params ? params.ModuleName : null;
+        this.EcmRegion = 'EcmRegion' in params ? params.EcmRegion : null;
+        this.Zone = 'Zone' in params ? params.Zone : null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
 
     }
 }
@@ -6025,6 +6114,34 @@ class ModifyAddressAttributeRequest extends  AbstractModel {
 }
 
 /**
+ * ModifyModuleImage返回参数结构体
+ * @class
+ */
+class ModifyModuleImageResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * ResetInstances请求参数结构体
  * @class
  */
@@ -6341,6 +6458,41 @@ class DeleteNetworkInterfaceResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Module的简要信息
+ * @class
+ */
+class SimpleModule extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 模块ID
+         * @type {string || null}
+         */
+        this.ModuleId = null;
+
+        /**
+         * 模块名称
+         * @type {string || null}
+         */
+        this.ModuleName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ModuleId = 'ModuleId' in params ? params.ModuleId : null;
+        this.ModuleName = 'ModuleName' in params ? params.ModuleName : null;
 
     }
 }
@@ -7817,7 +7969,7 @@ module.exports = {
     InstanceTypeConfig: InstanceTypeConfig,
     DescribeNodeResponse: DescribeNodeResponse,
     RemovePrivateIpAddressesResponse: RemovePrivateIpAddressesResponse,
-    ModifyModuleImageResponse: ModifyModuleImageResponse,
+    DescribeDefaultSubnetResponse: DescribeDefaultSubnetResponse,
     VpcInfo: VpcInfo,
     DeleteSubnetRequest: DeleteSubnetRequest,
     DescribeModuleRequest: DescribeModuleRequest,
@@ -7855,6 +8007,7 @@ module.exports = {
     ZoneInstanceCountISP: ZoneInstanceCountISP,
     StartInstancesRequest: StartInstancesRequest,
     Tag: Tag,
+    DescribeDefaultSubnetRequest: DescribeDefaultSubnetRequest,
     ResetInstancesMaxBandwidthResponse: ResetInstancesMaxBandwidthResponse,
     DeleteVpcRequest: DeleteVpcRequest,
     CreateNetworkInterfaceResponse: CreateNetworkInterfaceResponse,
@@ -7875,6 +8028,7 @@ module.exports = {
     TagSpecification: TagSpecification,
     DetachNetworkInterfaceRequest: DetachNetworkInterfaceRequest,
     DescribeConfigResponse: DescribeConfigResponse,
+    ModifyDefaultSubnetResponse: ModifyDefaultSubnetResponse,
     DescribeModuleDetailResponse: DescribeModuleDetailResponse,
     StopInstancesRequest: StopInstancesRequest,
     Subnet: Subnet,
@@ -7900,7 +8054,7 @@ module.exports = {
     NetworkInterfaceAttachment: NetworkInterfaceAttachment,
     StopInstancesResponse: StopInstancesResponse,
     ModifyModuleNameRequest: ModifyModuleNameRequest,
-    SimpleModule: SimpleModule,
+    ModifyDefaultSubnetRequest: ModifyDefaultSubnetRequest,
     DescribeInstancesRequest: DescribeInstancesRequest,
     DescribeTaskResultRequest: DescribeTaskResultRequest,
     AssociateAddressResponse: AssociateAddressResponse,
@@ -7913,6 +8067,7 @@ module.exports = {
     SrcImage: SrcImage,
     ZoneInstanceInfo: ZoneInstanceInfo,
     ModifyAddressAttributeRequest: ModifyAddressAttributeRequest,
+    ModifyModuleImageResponse: ModifyModuleImageResponse,
     ResetInstancesRequest: ResetInstancesRequest,
     PeakNetwork: PeakNetwork,
     DeleteImageRequest: DeleteImageRequest,
@@ -7922,6 +8077,7 @@ module.exports = {
     PrivateIPAddressInfo: PrivateIPAddressInfo,
     TerminateInstancesRequest: TerminateInstancesRequest,
     DeleteNetworkInterfaceResponse: DeleteNetworkInterfaceResponse,
+    SimpleModule: SimpleModule,
     DescribePeakNetworkOverviewRequest: DescribePeakNetworkOverviewRequest,
     AssignPrivateIpAddressesResponse: AssignPrivateIpAddressesResponse,
     PeakNetworkRegionInfo: PeakNetworkRegionInfo,

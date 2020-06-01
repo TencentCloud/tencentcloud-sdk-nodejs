@@ -83,7 +83,7 @@ class ApplyTradeRequest extends  AbstractModel {
         this.PayerId = null;
 
         /**
-         * 付款人姓名
+         * 收款人姓名
          * @type {string || null}
          */
         this.PayeeName = null;
@@ -7274,7 +7274,7 @@ class ApplyOutwardOrderRequest extends  AbstractModel {
         this.TargetCurrency = null;
 
         /**
-         * 收款人类型
+         * 收款人类型（银行卡填"BANK_ACCOUNT"）
          * @type {string || null}
          */
         this.PayeeType = null;
@@ -7298,49 +7298,51 @@ class ApplyOutwardOrderRequest extends  AbstractModel {
         this.TargetAmount = null;
 
         /**
-         * 收款人姓名
+         * 收款人姓名（PayeeType为"BANK_COUNT"时必填）
          * @type {string || null}
          */
         this.PayeeName = null;
 
         /**
-         * 收款人地址
+         * 收款人地址（PayeeType为"BANK_COUNT"时必填）
          * @type {string || null}
          */
         this.PayeeAddress = null;
 
         /**
-         * 收款人银行账号类型
+         * 收款人银行账号类型（PayeeType为"BANK_COUNT"时必填）
+个人填"INDIVIDUAL"
+企业填"CORPORATE"
          * @type {string || null}
          */
         this.PayeeBankAccountType = null;
 
         /**
-         * 收款人国家或地区编码
+         * 收款人国家或地区编码（PayeeType为"BANK_COUNT"时必填）
          * @type {string || null}
          */
         this.PayeeCountryCode = null;
 
         /**
-         * 收款人开户银行名称
+         * 收款人开户银行名称（PayeeType为"BANK_COUNT"时必填）
          * @type {string || null}
          */
         this.PayeeBankName = null;
 
         /**
-         * 收款人开户银行地址
+         * 收款人开户银行地址（PayeeType为"BANK_COUNT"时必填）
          * @type {string || null}
          */
         this.PayeeBankAddress = null;
 
         /**
-         * 收款人开户银行所在国家或地区编码
+         * 收款人开户银行所在国家或地区编码（PayeeType为"BANK_COUNT"时必填）
          * @type {string || null}
          */
         this.PayeeBankDistrict = null;
 
         /**
-         * 收款银行SwiftCode
+         * 收款银行SwiftCode（PayeeType为"BANK_COUNT"时必填）
          * @type {string || null}
          */
         this.PayeeBankSwiftCode = null;
@@ -9464,7 +9466,7 @@ class ApplyPayerInfoRequest extends  AbstractModel {
         this.PayerContactName = null;
 
         /**
-         * 付款人联系电话 (PayerType=CORPORATE 必填)
+         * 付款人联系电话
          * @type {string || null}
          */
         this.PayerContactNumber = null;

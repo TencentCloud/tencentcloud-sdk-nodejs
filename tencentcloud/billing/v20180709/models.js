@@ -2957,6 +2957,12 @@ class DescribeDealsByCondRequest extends  AbstractModel {
          */
         this.OrderId = null;
 
+        /**
+         * 大订单号
+         * @type {string || null}
+         */
+        this.BigDealId = null;
+
     }
 
     /**
@@ -2972,6 +2978,7 @@ class DescribeDealsByCondRequest extends  AbstractModel {
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Status = 'Status' in params ? params.Status : null;
         this.OrderId = 'OrderId' in params ? params.OrderId : null;
+        this.BigDealId = 'BigDealId' in params ? params.BigDealId : null;
 
     }
 }
@@ -3119,7 +3126,7 @@ class PayDealsResponse extends  AbstractModel {
         super();
 
         /**
-         * 此次操作支付成功的订单号数组
+         * 此次操作支付成功的子订单号数组
          * @type {Array.<string> || null}
          */
         this.OrderIds = null;
@@ -3129,6 +3136,12 @@ class PayDealsResponse extends  AbstractModel {
          * @type {Array.<string> || null}
          */
         this.ResourceIds = null;
+
+        /**
+         * 此次操作支付成功的大订单号数组
+         * @type {Array.<string> || null}
+         */
+        this.BigDealIds = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -3147,6 +3160,7 @@ class PayDealsResponse extends  AbstractModel {
         }
         this.OrderIds = 'OrderIds' in params ? params.OrderIds : null;
         this.ResourceIds = 'ResourceIds' in params ? params.ResourceIds : null;
+        this.BigDealIds = 'BigDealIds' in params ? params.BigDealIds : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -3785,6 +3799,12 @@ class Deal extends  AbstractModel {
          */
         this.SubProductCode = null;
 
+        /**
+         * 大订单号
+         * @type {string || null}
+         */
+        this.BigDealId = null;
+
     }
 
     /**
@@ -3820,6 +3840,7 @@ class Deal extends  AbstractModel {
         this.TotalCost = 'TotalCost' in params ? params.TotalCost : null;
         this.ProductCode = 'ProductCode' in params ? params.ProductCode : null;
         this.SubProductCode = 'SubProductCode' in params ? params.SubProductCode : null;
+        this.BigDealId = 'BigDealId' in params ? params.BigDealId : null;
 
     }
 }
@@ -4293,7 +4314,7 @@ class PayDealsRequest extends  AbstractModel {
         super();
 
         /**
-         * 需要支付的一个或者多个订单号
+         * 需要支付的一个或者多个子订单号，与BigDealIds字段两者必须且仅传一个参数
          * @type {Array.<string> || null}
          */
         this.OrderIds = null;
@@ -4310,6 +4331,12 @@ class PayDealsRequest extends  AbstractModel {
          */
         this.VoucherIds = null;
 
+        /**
+         * 需要支付的一个或者多个大订单号，与OrderIds字段两者必须且仅传一个参数
+         * @type {Array.<string> || null}
+         */
+        this.BigDealIds = null;
+
     }
 
     /**
@@ -4322,6 +4349,7 @@ class PayDealsRequest extends  AbstractModel {
         this.OrderIds = 'OrderIds' in params ? params.OrderIds : null;
         this.AutoVoucher = 'AutoVoucher' in params ? params.AutoVoucher : null;
         this.VoucherIds = 'VoucherIds' in params ? params.VoucherIds : null;
+        this.BigDealIds = 'BigDealIds' in params ? params.BigDealIds : null;
 
     }
 }

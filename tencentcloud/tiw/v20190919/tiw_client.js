@@ -28,16 +28,20 @@ const StreamLayout = models.StreamLayout;
 const CreateTranscodeResponse = models.CreateTranscodeResponse;
 const VideoInfo = models.VideoInfo;
 const CustomLayout = models.CustomLayout;
+const SetTranscodeCallbackKeyResponse = models.SetTranscodeCallbackKeyResponse;
 const Concat = models.Concat;
 const DescribeOnlineRecordRequest = models.DescribeOnlineRecordRequest;
 const StartOnlineRecordResponse = models.StartOnlineRecordResponse;
+const Whiteboard = models.Whiteboard;
 const DescribeOnlineRecordResponse = models.DescribeOnlineRecordResponse;
 const CreateTranscodeRequest = models.CreateTranscodeRequest;
-const Whiteboard = models.Whiteboard;
+const SetOnlineRecordCallbackKeyResponse = models.SetOnlineRecordCallbackKeyResponse;
 const PauseOnlineRecordResponse = models.PauseOnlineRecordResponse;
+const SetTranscodeCallbackKeyRequest = models.SetTranscodeCallbackKeyRequest;
 const DescribeTranscodeRequest = models.DescribeTranscodeRequest;
 const DescribeTranscodeResponse = models.DescribeTranscodeResponse;
 const SetOnlineRecordCallbackResponse = models.SetOnlineRecordCallbackResponse;
+const SetOnlineRecordCallbackKeyRequest = models.SetOnlineRecordCallbackKeyRequest;
 const StopOnlineRecordResponse = models.StopOnlineRecordResponse;
 const DescribeTranscodeCallbackRequest = models.DescribeTranscodeCallbackRequest;
 const ResumeOnlineRecordRequest = models.ResumeOnlineRecordRequest;
@@ -71,6 +75,17 @@ class TiwClient extends AbstractClient {
     }
 
     /**
+     * 设置文档转码回调鉴权密钥
+     * @param {SetTranscodeCallbackKeyRequest} req
+     * @param {function(string, SetTranscodeCallbackKeyResponse):void} cb
+     * @public
+     */
+    SetTranscodeCallbackKey(req, cb) {
+        let resp = new SetTranscodeCallbackKeyResponse();
+        this.request("SetTranscodeCallbackKey", req, resp, cb);
+    }
+
+    /**
      * 查询文档转码任务的执行进度与转码结果
      * @param {DescribeTranscodeRequest} req
      * @param {function(string, DescribeTranscodeResponse):void} cb
@@ -90,6 +105,17 @@ class TiwClient extends AbstractClient {
     CreateTranscode(req, cb) {
         let resp = new CreateTranscodeResponse();
         this.request("CreateTranscode", req, resp, cb);
+    }
+
+    /**
+     * 停止实时录制
+     * @param {StopOnlineRecordRequest} req
+     * @param {function(string, StopOnlineRecordResponse):void} cb
+     * @public
+     */
+    StopOnlineRecord(req, cb) {
+        let resp = new StopOnlineRecordResponse();
+        this.request("StopOnlineRecord", req, resp, cb);
     }
 
     /**
@@ -115,14 +141,14 @@ class TiwClient extends AbstractClient {
     }
 
     /**
-     * 停止实时录制
-     * @param {StopOnlineRecordRequest} req
-     * @param {function(string, StopOnlineRecordResponse):void} cb
+     * 设置实时录制回调鉴权密钥
+     * @param {SetOnlineRecordCallbackKeyRequest} req
+     * @param {function(string, SetOnlineRecordCallbackKeyResponse):void} cb
      * @public
      */
-    StopOnlineRecord(req, cb) {
-        let resp = new StopOnlineRecordResponse();
-        this.request("StopOnlineRecord", req, resp, cb);
+    SetOnlineRecordCallbackKey(req, cb) {
+        let resp = new SetOnlineRecordCallbackKeyResponse();
+        this.request("SetOnlineRecordCallbackKey", req, resp, cb);
     }
 
     /**

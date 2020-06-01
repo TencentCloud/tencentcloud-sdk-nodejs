@@ -32,6 +32,7 @@ const LogServiceInfo = models.LogServiceInfo;
 const CreateStaticStoreRequest = models.CreateStaticStoreRequest;
 const CommonServiceAPIResponse = models.CommonServiceAPIResponse;
 const DescribeEndUserStatisticResponse = models.DescribeEndUserStatisticResponse;
+const DescribePostpayPackageFreeQuotasRequest = models.DescribePostpayPackageFreeQuotasRequest;
 const CreateAuthDomainResponse = models.CreateAuthDomainResponse;
 const ModifyEnvRequest = models.ModifyEnvRequest;
 const DescribeEndUsersRequest = models.DescribeEndUsersRequest;
@@ -39,6 +40,7 @@ const DescribeEnvsRequest = models.DescribeEnvsRequest;
 const DescribeQuotaDataRequest = models.DescribeQuotaDataRequest;
 const ReinstateEnvResponse = models.ReinstateEnvResponse;
 const DescribeEndUserStatisticRequest = models.DescribeEndUserStatisticRequest;
+const PackageFreeQuotaInfo = models.PackageFreeQuotaInfo;
 const DescribeEnvFreeQuotaResponse = models.DescribeEnvFreeQuotaResponse;
 const CheckTcbServiceRequest = models.CheckTcbServiceRequest;
 const ModifyDatabaseACLResponse = models.ModifyDatabaseACLResponse;
@@ -66,6 +68,7 @@ const DestroyStaticStoreRequest = models.DestroyStaticStoreRequest;
 const PostpayEnvQuota = models.PostpayEnvQuota;
 const EndUserInfo = models.EndUserInfo;
 const DescribeEnvLimitResponse = models.DescribeEnvLimitResponse;
+const DescribePostpayPackageFreeQuotasResponse = models.DescribePostpayPackageFreeQuotasResponse;
 const DescribeEndUserLoginStatisticResponse = models.DescribeEndUserLoginStatisticResponse;
 const DescribeEnvsResponse = models.DescribeEnvsResponse;
 const ModifyEnvResponse = models.ModifyEnvResponse;
@@ -84,14 +87,25 @@ class TcbClient extends AbstractClient {
     }
     
     /**
-     * 更新环境信息
-     * @param {ModifyEnvRequest} req
-     * @param {function(string, ModifyEnvResponse):void} cb
+     * 创建托管域名
+     * @param {CreateHostingDomainRequest} req
+     * @param {function(string, CreateHostingDomainResponse):void} cb
      * @public
      */
-    ModifyEnv(req, cb) {
-        let resp = new ModifyEnvResponse();
-        this.request("ModifyEnv", req, resp, cb);
+    CreateHostingDomain(req, cb) {
+        let resp = new CreateHostingDomainResponse();
+        this.request("CreateHostingDomain", req, resp, cb);
+    }
+
+    /**
+     * 获取终端用户列表
+     * @param {DescribeEndUsersRequest} req
+     * @param {function(string, DescribeEndUsersResponse):void} cb
+     * @public
+     */
+    DescribeEndUsers(req, cb) {
+        let resp = new DescribeEndUsersResponse();
+        this.request("DescribeEndUsers", req, resp, cb);
     }
 
     /**
@@ -106,28 +120,6 @@ class TcbClient extends AbstractClient {
     }
 
     /**
-     * 获取终端用户总量与平台分布情况
-     * @param {DescribeEndUserStatisticRequest} req
-     * @param {function(string, DescribeEndUserStatisticResponse):void} cb
-     * @public
-     */
-    DescribeEndUserStatistic(req, cb) {
-        let resp = new DescribeEndUserStatisticResponse();
-        this.request("DescribeEndUserStatistic", req, resp, cb);
-    }
-
-    /**
-     * 销毁环境
-     * @param {DestroyEnvRequest} req
-     * @param {function(string, DestroyEnvResponse):void} cb
-     * @public
-     */
-    DestroyEnv(req, cb) {
-        let resp = new DestroyEnvResponse();
-        this.request("DestroyEnv", req, resp, cb);
-    }
-
-    /**
      * 获取安全域名列表
      * @param {DescribeAuthDomainsRequest} req
      * @param {function(string, DescribeAuthDomainsResponse):void} cb
@@ -139,14 +131,135 @@ class TcbClient extends AbstractClient {
     }
 
     /**
-     * 创建托管域名
-     * @param {CreateHostingDomainRequest} req
-     * @param {function(string, CreateHostingDomainResponse):void} cb
+     * 针对已隔离的免费环境，可以通过本接口将其恢复访问。
+     * @param {ReinstateEnvRequest} req
+     * @param {function(string, ReinstateEnvResponse):void} cb
      * @public
      */
-    CreateHostingDomain(req, cb) {
-        let resp = new CreateHostingDomainResponse();
-        this.request("CreateHostingDomain", req, resp, cb);
+    ReinstateEnv(req, cb) {
+        let resp = new ReinstateEnvResponse();
+        this.request("ReinstateEnv", req, resp, cb);
+    }
+
+    /**
+     * 获取终端用户总量与平台分布情况
+     * @param {DescribeEndUserStatisticRequest} req
+     * @param {function(string, DescribeEndUserStatisticResponse):void} cb
+     * @public
+     */
+    DescribeEndUserStatistic(req, cb) {
+        let resp = new DescribeEndUserStatisticResponse();
+        this.request("DescribeEndUserStatistic", req, resp, cb);
+    }
+
+    /**
+     * 获取后付费免费额度
+     * @param {DescribePostpayPackageFreeQuotasRequest} req
+     * @param {function(string, DescribePostpayPackageFreeQuotasResponse):void} cb
+     * @public
+     */
+    DescribePostpayPackageFreeQuotas(req, cb) {
+        let resp = new DescribePostpayPackageFreeQuotasResponse();
+        this.request("DescribePostpayPackageFreeQuotas", req, resp, cb);
+    }
+
+    /**
+     * TCB云API统一入口
+     * @param {CommonServiceAPIRequest} req
+     * @param {function(string, CommonServiceAPIResponse):void} cb
+     * @public
+     */
+    CommonServiceAPI(req, cb) {
+        let resp = new CommonServiceAPIResponse();
+        this.request("CommonServiceAPI", req, resp, cb);
+    }
+
+    /**
+     * 检查是否开通Tcb服务
+     * @param {CheckTcbServiceRequest} req
+     * @param {function(string, CheckTcbServiceResponse):void} cb
+     * @public
+     */
+    CheckTcbService(req, cb) {
+        let resp = new CheckTcbServiceResponse();
+        this.request("CheckTcbService", req, resp, cb);
+    }
+
+    /**
+     * 删除终端用户
+     * @param {DeleteEndUserRequest} req
+     * @param {function(string, DeleteEndUserResponse):void} cb
+     * @public
+     */
+    DeleteEndUser(req, cb) {
+        let resp = new DeleteEndUserResponse();
+        this.request("DeleteEndUser", req, resp, cb);
+    }
+
+    /**
+     * 获取环境终端用户新增与登录信息
+     * @param {DescribeEndUserLoginStatisticRequest} req
+     * @param {function(string, DescribeEndUserLoginStatisticResponse):void} cb
+     * @public
+     */
+    DescribeEndUserLoginStatistic(req, cb) {
+        let resp = new DescribeEndUserLoginStatisticResponse();
+        this.request("DescribeEndUserLoginStatistic", req, resp, cb);
+    }
+
+    /**
+     * 查询指定指标的配额使用量
+     * @param {DescribeQuotaDataRequest} req
+     * @param {function(string, DescribeQuotaDataResponse):void} cb
+     * @public
+     */
+    DescribeQuotaData(req, cb) {
+        let resp = new DescribeQuotaDataResponse();
+        this.request("DescribeQuotaData", req, resp, cb);
+    }
+
+    /**
+     * 获取增值包计费相关信息
+     * @param {DescribeExtraPkgBillingInfoRequest} req
+     * @param {function(string, DescribeExtraPkgBillingInfoResponse):void} cb
+     * @public
+     */
+    DescribeExtraPkgBillingInfo(req, cb) {
+        let resp = new DescribeExtraPkgBillingInfoResponse();
+        this.request("DescribeExtraPkgBillingInfo", req, resp, cb);
+    }
+
+    /**
+     * 更新环境信息
+     * @param {ModifyEnvRequest} req
+     * @param {function(string, ModifyEnvResponse):void} cb
+     * @public
+     */
+    ModifyEnv(req, cb) {
+        let resp = new ModifyEnvResponse();
+        this.request("ModifyEnv", req, resp, cb);
+    }
+
+    /**
+     * 获取数据库权限
+     * @param {DescribeDatabaseACLRequest} req
+     * @param {function(string, DescribeDatabaseACLResponse):void} cb
+     * @public
+     */
+    DescribeDatabaseACL(req, cb) {
+        let resp = new DescribeDatabaseACLResponse();
+        this.request("DescribeDatabaseACL", req, resp, cb);
+    }
+
+    /**
+     * 销毁环境
+     * @param {DestroyEnvRequest} req
+     * @param {function(string, DestroyEnvResponse):void} cb
+     * @public
+     */
+    DestroyEnv(req, cb) {
+        let resp = new DestroyEnvResponse();
+        this.request("DestroyEnv", req, resp, cb);
     }
 
     /**
@@ -194,61 +307,6 @@ class TcbClient extends AbstractClient {
     }
 
     /**
-     * 获取终端用户列表
-     * @param {DescribeEndUsersRequest} req
-     * @param {function(string, DescribeEndUsersResponse):void} cb
-     * @public
-     */
-    DescribeEndUsers(req, cb) {
-        let resp = new DescribeEndUsersResponse();
-        this.request("DescribeEndUsers", req, resp, cb);
-    }
-
-    /**
-     * 检查是否开通Tcb服务
-     * @param {CheckTcbServiceRequest} req
-     * @param {function(string, CheckTcbServiceResponse):void} cb
-     * @public
-     */
-    CheckTcbService(req, cb) {
-        let resp = new CheckTcbServiceResponse();
-        this.request("CheckTcbService", req, resp, cb);
-    }
-
-    /**
-     * 删除终端用户
-     * @param {DeleteEndUserRequest} req
-     * @param {function(string, DeleteEndUserResponse):void} cb
-     * @public
-     */
-    DeleteEndUser(req, cb) {
-        let resp = new DeleteEndUserResponse();
-        this.request("DeleteEndUser", req, resp, cb);
-    }
-
-    /**
-     * 获取环境终端用户新增与登录信息
-     * @param {DescribeEndUserLoginStatisticRequest} req
-     * @param {function(string, DescribeEndUserLoginStatisticResponse):void} cb
-     * @public
-     */
-    DescribeEndUserLoginStatistic(req, cb) {
-        let resp = new DescribeEndUserLoginStatisticResponse();
-        this.request("DescribeEndUserLoginStatistic", req, resp, cb);
-    }
-
-    /**
-     * TCB云API统一入口
-     * @param {CommonServiceAPIRequest} req
-     * @param {function(string, CommonServiceAPIResponse):void} cb
-     * @public
-     */
-    CommonServiceAPI(req, cb) {
-        let resp = new CommonServiceAPIResponse();
-        this.request("CommonServiceAPI", req, resp, cb);
-    }
-
-    /**
      * 查询环境个数上限
      * @param {DescribeEnvLimitRequest} req
      * @param {function(string, DescribeEnvLimitResponse):void} cb
@@ -260,39 +318,6 @@ class TcbClient extends AbstractClient {
     }
 
     /**
-     * 针对已隔离的免费环境，可以通过本接口将其恢复访问。
-     * @param {ReinstateEnvRequest} req
-     * @param {function(string, ReinstateEnvResponse):void} cb
-     * @public
-     */
-    ReinstateEnv(req, cb) {
-        let resp = new ReinstateEnvResponse();
-        this.request("ReinstateEnv", req, resp, cb);
-    }
-
-    /**
-     * 获取数据库权限
-     * @param {DescribeDatabaseACLRequest} req
-     * @param {function(string, DescribeDatabaseACLResponse):void} cb
-     * @public
-     */
-    DescribeDatabaseACL(req, cb) {
-        let resp = new DescribeDatabaseACLResponse();
-        this.request("DescribeDatabaseACL", req, resp, cb);
-    }
-
-    /**
-     * 查询指定指标的配额使用量
-     * @param {DescribeQuotaDataRequest} req
-     * @param {function(string, DescribeQuotaDataResponse):void} cb
-     * @public
-     */
-    DescribeQuotaData(req, cb) {
-        let resp = new DescribeQuotaDataResponse();
-        this.request("DescribeQuotaData", req, resp, cb);
-    }
-
-    /**
      * 查询后付费免费配额信息
      * @param {DescribeEnvFreeQuotaRequest} req
      * @param {function(string, DescribeEnvFreeQuotaResponse):void} cb
@@ -301,17 +326,6 @@ class TcbClient extends AbstractClient {
     DescribeEnvFreeQuota(req, cb) {
         let resp = new DescribeEnvFreeQuotaResponse();
         this.request("DescribeEnvFreeQuota", req, resp, cb);
-    }
-
-    /**
-     * 获取增值包计费相关信息
-     * @param {DescribeExtraPkgBillingInfoRequest} req
-     * @param {function(string, DescribeExtraPkgBillingInfoResponse):void} cb
-     * @public
-     */
-    DescribeExtraPkgBillingInfo(req, cb) {
-        let resp = new DescribeExtraPkgBillingInfoResponse();
-        this.request("DescribeExtraPkgBillingInfo", req, resp, cb);
     }
 
 

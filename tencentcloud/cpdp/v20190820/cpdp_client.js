@@ -453,7 +453,7 @@ class CpdpClient extends AbstractClient {
     }
 
     /**
-     * 跨境-成功申报材料查询
+     * 跨境-成功申报材料查询。查询成功入库的申报材料。
      * @param {QueryApplicationMaterialRequest} req
      * @param {function(string, QueryApplicationMaterialResponse):void} cb
      * @public
@@ -541,7 +541,7 @@ class CpdpClient extends AbstractClient {
     }
 
     /**
-     * 跨境-付款人申请
+     * 跨境-付款人申请。通过该接口提交付款人信息并进行 kyc 审核。
      * @param {ApplyPayerInfoRequest} req
      * @param {function(string, ApplyPayerInfoResponse):void} cb
      * @public
@@ -563,7 +563,7 @@ class CpdpClient extends AbstractClient {
     }
 
     /**
-     * 跨境-贸易材料明细查询
+     * 跨境-贸易材料明细查询。
      * @param {QueryTradeRequest} req
      * @param {function(string, QueryTradeResponse):void} cb
      * @public
@@ -574,7 +574,7 @@ class CpdpClient extends AbstractClient {
     }
 
     /**
-     * 跨境-提交贸易材料
+     * 跨境-提交贸易材料。通过提交贸易材料接口可为对接方累计贸易额度，在额度范围内可发起汇兑汇出交易。
      * @param {ApplyTradeRequest} req
      * @param {function(string, ApplyTradeResponse):void} cb
      * @public
@@ -673,7 +673,7 @@ class CpdpClient extends AbstractClient {
     }
 
     /**
-     * 跨境-提交申报材料
+     * 跨境-提交申报材料。申报材料的主体是付款人，需要提前调用【跨境-付款人申请】接口提交付款人信息且审核通过后调用。
      * @param {ApplyApplicationMaterialRequest} req
      * @param {function(string, ApplyApplicationMaterialResponse):void} cb
      * @public
@@ -684,7 +684,7 @@ class CpdpClient extends AbstractClient {
     }
 
     /**
-     * 跨境-汇出指令申请
+     * 跨境-汇出指令申请。通过该接口可将对接方账户中的人民币余额汇兑成外币，再汇出至指定银行账户。
      * @param {ApplyOutwardOrderRequest} req
      * @param {function(string, ApplyOutwardOrderResponse):void} cb
      * @public
