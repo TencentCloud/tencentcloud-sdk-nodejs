@@ -403,6 +403,50 @@ class DescribeLyricResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeItemById返回参数结构体
+ * @class
+ */
+class DescribeItemByIdResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 歌曲信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<Item> || null}
+         */
+        this.Items = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Items) {
+            this.Items = new Array();
+            for (let z in params.Items) {
+                let obj = new Item();
+                obj.deserialize(params.Items[z]);
+                this.Items.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * ReportData返回参数结构体
  * @class
  */
@@ -842,6 +886,34 @@ https://github.com/ame-demo/doc
 }
 
 /**
+ * DescribeItemById请求参数结构体
+ * @class
+ */
+class DescribeItemByIdRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 歌曲ID，目前暂不支持批量查询
+         * @type {string || null}
+         */
+        this.ItemIDs = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ItemIDs = 'ItemIDs' in params ? params.ItemIDs : null;
+
+    }
+}
+
+/**
  * DescribeMusic请求参数结构体
  * @class
  */
@@ -900,6 +972,7 @@ module.exports = {
     Music: Music,
     Artist: Artist,
     DescribeLyricResponse: DescribeLyricResponse,
+    DescribeItemByIdResponse: DescribeItemByIdResponse,
     ReportDataResponse: ReportDataResponse,
     DescribeItemsRequest: DescribeItemsRequest,
     DescribeStationsRequest: DescribeStationsRequest,
@@ -909,6 +982,7 @@ module.exports = {
     DescribeLyricRequest: DescribeLyricRequest,
     DescribeStationsResponse: DescribeStationsResponse,
     ReportDataRequest: ReportDataRequest,
+    DescribeItemByIdRequest: DescribeItemByIdRequest,
     DescribeMusicRequest: DescribeMusicRequest,
 
 }

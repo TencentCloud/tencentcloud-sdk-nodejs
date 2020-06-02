@@ -120,7 +120,7 @@ class LivenessRequest extends  AbstractModel {
 
         /**
          * 用于活体检测的视频，视频的BASE64值；
-BASE64编码后的大小不超过5M，支持mp4、avi、flv格式。
+BASE64编码后的大小不超过8M，支持mp4、avi、flv格式。
          * @type {string || null}
          */
         this.VideoBase64 = null;
@@ -141,7 +141,10 @@ LIP为数字模式，ACTION为动作模式，SILENT为静默模式，三种模�
         this.ValidateData = null;
 
         /**
-         * 本接口不需要传递此参数。
+         * 额外配置，传入JSON字符串。
+{
+"BestFrameNum": 2  //需要返回多张最佳截图，取值范围1-10
+}
          * @type {string || null}
          */
         this.Optional = null;
@@ -173,6 +176,7 @@ class LivenessCompareResponse extends  AbstractModel {
 
         /**
          * 验证通过后的视频最佳截图照片，照片为BASE64编码后的值，jpg格式。
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.BestFrameBase64 = null;
@@ -196,6 +200,13 @@ class LivenessCompareResponse extends  AbstractModel {
         this.Description = null;
 
         /**
+         * 最佳截图列表，仅在配置了返回多张最佳截图时返回。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
+         */
+        this.BestFrameList = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -214,6 +225,7 @@ class LivenessCompareResponse extends  AbstractModel {
         this.Sim = 'Sim' in params ? params.Sim : null;
         this.Result = 'Result' in params ? params.Result : null;
         this.Description = 'Description' in params ? params.Description : null;
+        this.BestFrameList = 'BestFrameList' in params ? params.BestFrameList : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -795,6 +807,7 @@ class LivenessRecognitionResponse extends  AbstractModel {
 
         /**
          * 验证通过后的视频最佳截图照片，照片为BASE64编码后的值，jpg格式。
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.BestFrameBase64 = null;
@@ -818,6 +831,13 @@ class LivenessRecognitionResponse extends  AbstractModel {
         this.Description = null;
 
         /**
+         * 最佳截图列表，仅在配置了返回多张最佳截图时返回。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
+         */
+        this.BestFrameList = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -836,6 +856,7 @@ class LivenessRecognitionResponse extends  AbstractModel {
         this.Sim = 'Sim' in params ? params.Sim : null;
         this.Result = 'Result' in params ? params.Result : null;
         this.Description = 'Description' in params ? params.Description : null;
+        this.BestFrameList = 'BestFrameList' in params ? params.BestFrameList : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -920,6 +941,9 @@ LIP为数字模式，ACTION为动作模式，SILENT为静默模式，三种模�
 
         /**
          * 额外配置，传入JSON字符串。
+{
+"BestFrameNum": 2  //需要返回多张最佳截图，取值范围1-10
+}
          * @type {string || null}
          */
         this.Optional = null;
@@ -1138,6 +1162,7 @@ class LivenessResponse extends  AbstractModel {
 
         /**
          * 验证通过后的视频最佳截图照片，照片为BASE64编码后的值，jpg格式。
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.BestFrameBase64 = null;
@@ -1153,6 +1178,13 @@ class LivenessResponse extends  AbstractModel {
          * @type {string || null}
          */
         this.Description = null;
+
+        /**
+         * 最佳最佳截图列表，仅在配置了返回多张最佳截图时有效。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
+         */
+        this.BestFrameList = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1172,6 +1204,7 @@ class LivenessResponse extends  AbstractModel {
         this.BestFrameBase64 = 'BestFrameBase64' in params ? params.BestFrameBase64 : null;
         this.Result = 'Result' in params ? params.Result : null;
         this.Description = 'Description' in params ? params.Description : null;
+        this.BestFrameList = 'BestFrameList' in params ? params.BestFrameList : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -1822,6 +1855,12 @@ class GetActionSequenceRequest extends  AbstractModel {
     constructor(){
         super();
 
+        /**
+         * 取值FourAction时 返回四种动作的动作序列
+         * @type {string || null}
+         */
+        this.ActionType = null;
+
     }
 
     /**
@@ -1831,6 +1870,7 @@ class GetActionSequenceRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.ActionType = 'ActionType' in params ? params.ActionType : null;
 
     }
 }
@@ -2207,6 +2247,9 @@ LIP为数字模式，ACTION为动作模式，SILENT为静默模式，三种模�
 
         /**
          * 额外配置，传入JSON字符串。
+{
+"BestFrameNum": 2  //需要返回多张最佳截图，取值范围1-10
+}
          * @type {string || null}
          */
         this.Optional = null;

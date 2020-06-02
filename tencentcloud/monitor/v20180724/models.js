@@ -3461,6 +3461,13 @@ class DescribePolicyGroupInfoCondition extends  AbstractModel {
          */
         this.ContinueTime = null;
 
+        /**
+         * 告警指标名
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.MetricName = null;
+
     }
 
     /**
@@ -3480,6 +3487,7 @@ class DescribePolicyGroupInfoCondition extends  AbstractModel {
         this.CalcType = 'CalcType' in params ? params.CalcType : null;
         this.CalcValue = 'CalcValue' in params ? params.CalcValue : null;
         this.ContinueTime = 'ContinueTime' in params ? params.ContinueTime : null;
+        this.MetricName = 'MetricName' in params ? params.MetricName : null;
 
     }
 }

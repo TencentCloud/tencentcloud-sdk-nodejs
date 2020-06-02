@@ -24,6 +24,7 @@ const DescribeItemsResponse = models.DescribeItemsResponse;
 const Music = models.Music;
 const Artist = models.Artist;
 const DescribeLyricResponse = models.DescribeLyricResponse;
+const DescribeItemByIdResponse = models.DescribeItemByIdResponse;
 const ReportDataResponse = models.ReportDataResponse;
 const DescribeItemsRequest = models.DescribeItemsRequest;
 const DescribeStationsRequest = models.DescribeStationsRequest;
@@ -33,6 +34,7 @@ const Lyric = models.Lyric;
 const DescribeLyricRequest = models.DescribeLyricRequest;
 const DescribeStationsResponse = models.DescribeStationsResponse;
 const ReportDataRequest = models.ReportDataRequest;
+const DescribeItemByIdRequest = models.DescribeItemByIdRequest;
 const DescribeMusicRequest = models.DescribeMusicRequest;
 
 
@@ -47,36 +49,14 @@ class AmeClient extends AbstractClient {
     }
     
     /**
-     * 获取素材库列表时使用
-     * @param {DescribeStationsRequest} req
-     * @param {function(string, DescribeStationsResponse):void} cb
+     * 根据歌曲ID查询歌曲信息
+     * @param {DescribeItemByIdRequest} req
+     * @param {function(string, DescribeItemByIdResponse):void} cb
      * @public
      */
-    DescribeStations(req, cb) {
-        let resp = new DescribeStationsResponse();
-        this.request("DescribeStations", req, resp, cb);
-    }
-
-    /**
-     * 分类内容下歌曲列表获取，根据CategoryID或CategoryCode
-     * @param {DescribeItemsRequest} req
-     * @param {function(string, DescribeItemsResponse):void} cb
-     * @public
-     */
-    DescribeItems(req, cb) {
-        let resp = new DescribeItemsResponse();
-        this.request("DescribeItems", req, resp, cb);
-    }
-
-    /**
-     * 根据接口的模式及歌曲ID来取得歌词信息。
-     * @param {DescribeLyricRequest} req
-     * @param {function(string, DescribeLyricResponse):void} cb
-     * @public
-     */
-    DescribeLyric(req, cb) {
-        let resp = new DescribeLyricResponse();
-        this.request("DescribeLyric", req, resp, cb);
+    DescribeItemById(req, cb) {
+        let resp = new DescribeItemByIdResponse();
+        this.request("DescribeItemById", req, resp, cb);
     }
 
     /**
@@ -91,6 +71,28 @@ class AmeClient extends AbstractClient {
     }
 
     /**
+     * 根据接口的模式及歌曲ID来取得歌词信息。
+     * @param {DescribeLyricRequest} req
+     * @param {function(string, DescribeLyricResponse):void} cb
+     * @public
+     */
+    DescribeLyric(req, cb) {
+        let resp = new DescribeLyricResponse();
+        this.request("DescribeLyric", req, resp, cb);
+    }
+
+    /**
+     * 分类内容下歌曲列表获取，根据CategoryID或CategoryCode
+     * @param {DescribeItemsRequest} req
+     * @param {function(string, DescribeItemsResponse):void} cb
+     * @public
+     */
+    DescribeItems(req, cb) {
+        let resp = new DescribeItemsResponse();
+        this.request("DescribeItems", req, resp, cb);
+    }
+
+    /**
      * 根据接口的模式及歌曲ID来取得对应权限的歌曲播放地址等信息。
      * @param {DescribeMusicRequest} req
      * @param {function(string, DescribeMusicResponse):void} cb
@@ -99,6 +101,17 @@ class AmeClient extends AbstractClient {
     DescribeMusic(req, cb) {
         let resp = new DescribeMusicResponse();
         this.request("DescribeMusic", req, resp, cb);
+    }
+
+    /**
+     * 获取素材库列表时使用
+     * @param {DescribeStationsRequest} req
+     * @param {function(string, DescribeStationsResponse):void} cb
+     * @public
+     */
+    DescribeStations(req, cb) {
+        let resp = new DescribeStationsResponse();
+        this.request("DescribeStations", req, resp, cb);
     }
 
 

@@ -179,42 +179,18 @@ class ModifyAddressTemplateAttributeResponse extends  AbstractModel {
 }
 
 /**
- * 协议端口模板集合
+ * DisassociateDhcpIpWithAddressIp请求参数结构体
  * @class
  */
-class ServiceTemplateGroup extends  AbstractModel {
+class DisassociateDhcpIpWithAddressIpRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 协议端口模板集合实例ID，例如：ppmg-2klmrefu。
+         * `DhcpIp`唯一`ID`，形如：`dhcpip-9o233uri`。必须是已绑定`EIP`的`DhcpIp`。
          * @type {string || null}
          */
-        this.ServiceTemplateGroupId = null;
-
-        /**
-         * 协议端口模板集合名称。
-         * @type {string || null}
-         */
-        this.ServiceTemplateGroupName = null;
-
-        /**
-         * 协议端口模板实例ID。
-         * @type {Array.<string> || null}
-         */
-        this.ServiceTemplateIdSet = null;
-
-        /**
-         * 创建时间。
-         * @type {string || null}
-         */
-        this.CreatedTime = null;
-
-        /**
-         * 协议端口模板实例信息。
-         * @type {Array.<ServiceTemplate> || null}
-         */
-        this.ServiceTemplateSet = null;
+        this.DhcpIpId = null;
 
     }
 
@@ -225,19 +201,7 @@ class ServiceTemplateGroup extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ServiceTemplateGroupId = 'ServiceTemplateGroupId' in params ? params.ServiceTemplateGroupId : null;
-        this.ServiceTemplateGroupName = 'ServiceTemplateGroupName' in params ? params.ServiceTemplateGroupName : null;
-        this.ServiceTemplateIdSet = 'ServiceTemplateIdSet' in params ? params.ServiceTemplateIdSet : null;
-        this.CreatedTime = 'CreatedTime' in params ? params.CreatedTime : null;
-
-        if (params.ServiceTemplateSet) {
-            this.ServiceTemplateSet = new Array();
-            for (let z in params.ServiceTemplateSet) {
-                let obj = new ServiceTemplate();
-                obj.deserialize(params.ServiceTemplateSet[z]);
-                this.ServiceTemplateSet.push(obj);
-            }
-        }
+        this.DhcpIpId = 'DhcpIpId' in params ? params.DhcpIpId : null;
 
     }
 }
@@ -1144,30 +1108,42 @@ class DescribeVpnGatewaysResponse extends  AbstractModel {
 }
 
 /**
- * ModifyServiceTemplateAttribute请求参数结构体
+ * 协议端口模板集合
  * @class
  */
-class ModifyServiceTemplateAttributeRequest extends  AbstractModel {
+class ServiceTemplateGroup extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 协议端口模板实例ID，例如：ppm-529nwwj8。
+         * 协议端口模板集合实例ID，例如：ppmg-2klmrefu。
          * @type {string || null}
          */
-        this.ServiceTemplateId = null;
+        this.ServiceTemplateGroupId = null;
 
         /**
-         * 协议端口模板名称。
+         * 协议端口模板集合名称。
          * @type {string || null}
          */
-        this.ServiceTemplateName = null;
+        this.ServiceTemplateGroupName = null;
 
         /**
-         * 支持单个端口、多个端口、连续端口及所有端口，协议支持：TCP、UDP、ICMP、GRE 协议。
+         * 协议端口模板实例ID。
          * @type {Array.<string> || null}
          */
-        this.Services = null;
+        this.ServiceTemplateIdSet = null;
+
+        /**
+         * 创建时间。
+         * @type {string || null}
+         */
+        this.CreatedTime = null;
+
+        /**
+         * 协议端口模板实例信息。
+         * @type {Array.<ServiceTemplate> || null}
+         */
+        this.ServiceTemplateSet = null;
 
     }
 
@@ -1178,9 +1154,62 @@ class ModifyServiceTemplateAttributeRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ServiceTemplateId = 'ServiceTemplateId' in params ? params.ServiceTemplateId : null;
-        this.ServiceTemplateName = 'ServiceTemplateName' in params ? params.ServiceTemplateName : null;
-        this.Services = 'Services' in params ? params.Services : null;
+        this.ServiceTemplateGroupId = 'ServiceTemplateGroupId' in params ? params.ServiceTemplateGroupId : null;
+        this.ServiceTemplateGroupName = 'ServiceTemplateGroupName' in params ? params.ServiceTemplateGroupName : null;
+        this.ServiceTemplateIdSet = 'ServiceTemplateIdSet' in params ? params.ServiceTemplateIdSet : null;
+        this.CreatedTime = 'CreatedTime' in params ? params.CreatedTime : null;
+
+        if (params.ServiceTemplateSet) {
+            this.ServiceTemplateSet = new Array();
+            for (let z in params.ServiceTemplateSet) {
+                let obj = new ServiceTemplate();
+                obj.deserialize(params.ServiceTemplateSet[z]);
+                this.ServiceTemplateSet.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * CreateDhcpIp返回参数结构体
+ * @class
+ */
+class CreateDhcpIpResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 新创建的`DhcpIp`信息
+         * @type {Array.<DhcpIp> || null}
+         */
+        this.DhcpIpSet = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.DhcpIpSet) {
+            this.DhcpIpSet = new Array();
+            for (let z in params.DhcpIpSet) {
+                let obj = new DhcpIp();
+                obj.deserialize(params.DhcpIpSet[z]);
+                this.DhcpIpSet.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1740,12 +1769,24 @@ class ModifyNetworkAclEntriesRequest extends  AbstractModel {
 }
 
 /**
- * DescribeAddressQuota请求参数结构体
+ * DescribeVpcPrivateIpAddresses请求参数结构体
  * @class
  */
-class DescribeAddressQuotaRequest extends  AbstractModel {
+class DescribeVpcPrivateIpAddressesRequest extends  AbstractModel {
     constructor(){
         super();
+
+        /**
+         * `VPC`实例`ID`，形如：`vpc-f49l6u0z`。
+         * @type {string || null}
+         */
+        this.VpcId = null;
+
+        /**
+         * 内网`IP`地址列表，批量查询单次请求最多支持`10`个。
+         * @type {Array.<string> || null}
+         */
+        this.PrivateIpAddresses = null;
 
     }
 
@@ -1756,6 +1797,8 @@ class DescribeAddressQuotaRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.PrivateIpAddresses = 'PrivateIpAddresses' in params ? params.PrivateIpAddresses : null;
 
     }
 }
@@ -3825,6 +3868,48 @@ class ModifyAssistantCidrResponse extends  AbstractModel {
 }
 
 /**
+ * NAT网关绑定的弹性IP
+ * @class
+ */
+class NatGatewayAddress extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 弹性公网IP（EIP）的唯一 ID，形如：`eip-11112222`。
+         * @type {string || null}
+         */
+        this.AddressId = null;
+
+        /**
+         * 外网IP地址，形如：`123.121.34.33`。
+         * @type {string || null}
+         */
+        this.PublicIpAddress = null;
+
+        /**
+         * 资源封堵状态。true表示弹性ip处于封堵状态，false表示弹性ip处于未封堵状态。
+         * @type {boolean || null}
+         */
+        this.IsBlocked = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AddressId = 'AddressId' in params ? params.AddressId : null;
+        this.PublicIpAddress = 'PublicIpAddress' in params ? params.PublicIpAddress : null;
+        this.IsBlocked = 'IsBlocked' in params ? params.IsBlocked : null;
+
+    }
+}
+
+/**
  * ModifyNetworkAclEntries返回参数结构体
  * @class
  */
@@ -4630,6 +4715,34 @@ class ResetNatGatewayConnectionRequest extends  AbstractModel {
         }
         this.NatGatewayId = 'NatGatewayId' in params ? params.NatGatewayId : null;
         this.MaxConcurrentConnection = 'MaxConcurrentConnection' in params ? params.MaxConcurrentConnection : null;
+
+    }
+}
+
+/**
+ * ReplaceDirectConnectGatewayCcnRoutes返回参数结构体
+ * @class
+ */
+class ReplaceDirectConnectGatewayCcnRoutesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -7400,6 +7513,41 @@ class RemoveIp6RulesResponse extends  AbstractModel {
 }
 
 /**
+ * AssociateDhcpIpWithAddressIp请求参数结构体
+ * @class
+ */
+class AssociateDhcpIpWithAddressIpRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * `DhcpIp`唯一`ID`，形如：`dhcpip-9o233uri`。必须是没有绑定`EIP`的`DhcpIp`
+         * @type {string || null}
+         */
+        this.DhcpIpId = null;
+
+        /**
+         * 弹性公网`IP`。必须是没有绑定`DhcpIp`的`EIP`
+         * @type {string || null}
+         */
+        this.AddressIp = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DhcpIpId = 'DhcpIpId' in params ? params.DhcpIpId : null;
+        this.AddressIp = 'AddressIp' in params ? params.AddressIp : null;
+
+    }
+}
+
+/**
  * ReplaceRoutes请求参数结构体
  * @class
  */
@@ -8406,6 +8554,41 @@ class DescribeNetDetectStatesResponse extends  AbstractModel {
         }
         this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifyDhcpIpAttribute请求参数结构体
+ * @class
+ */
+class ModifyDhcpIpAttributeRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * `DhcpIp`唯一`ID`，形如：`dhcpip-9o233uri`。
+         * @type {string || null}
+         */
+        this.DhcpIpId = null;
+
+        /**
+         * `DhcpIp`名称，可任意命名，但不得超过60个字符。
+         * @type {string || null}
+         */
+        this.DhcpIpName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DhcpIpId = 'DhcpIpId' in params ? params.DhcpIpId : null;
+        this.DhcpIpName = 'DhcpIpName' in params ? params.DhcpIpName : null;
 
     }
 }
@@ -9961,6 +10144,48 @@ class CreateSubnetsRequest extends  AbstractModel {
 }
 
 /**
+ * ModifyServiceTemplateAttribute请求参数结构体
+ * @class
+ */
+class ModifyServiceTemplateAttributeRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 协议端口模板实例ID，例如：ppm-529nwwj8。
+         * @type {string || null}
+         */
+        this.ServiceTemplateId = null;
+
+        /**
+         * 协议端口模板名称。
+         * @type {string || null}
+         */
+        this.ServiceTemplateName = null;
+
+        /**
+         * 支持单个端口、多个端口、连续端口及所有端口，协议支持：TCP、UDP、ICMP、GRE 协议。
+         * @type {Array.<string> || null}
+         */
+        this.Services = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ServiceTemplateId = 'ServiceTemplateId' in params ? params.ServiceTemplateId : null;
+        this.ServiceTemplateName = 'ServiceTemplateName' in params ? params.ServiceTemplateName : null;
+        this.Services = 'Services' in params ? params.Services : null;
+
+    }
+}
+
+/**
  * AssociateAddress返回参数结构体
  * @class
  */
@@ -10594,6 +10819,68 @@ class NetworkAclEntry extends  AbstractModel {
         this.Ipv6CidrBlock = 'Ipv6CidrBlock' in params ? params.Ipv6CidrBlock : null;
         this.Action = 'Action' in params ? params.Action : null;
         this.Description = 'Description' in params ? params.Description : null;
+
+    }
+}
+
+/**
+ * DescribeDhcpIps请求参数结构体
+ * @class
+ */
+class DescribeDhcpIpsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * DhcpIp实例ID。形如：dhcpip-pxir56ns。每次请求的实例的上限为100。参数不支持同时指定DhcpIpIds和Filters。
+         * @type {Array.<string> || null}
+         */
+        this.DhcpIpIds = null;
+
+        /**
+         * 过滤条件，参数不支持同时指定DhcpIpIds和Filters。
+<li>vpc-id - String - （过滤条件）VPC实例ID，形如：vpc-f49l6u0z。</li>
+<li>subnet-id - String - （过滤条件）所属子网实例ID，形如：subnet-f49l6u0z。</li>
+<li>dhcpip-id - String - （过滤条件）DhcpIp实例ID，形如：dhcpip-pxir56ns。</li>
+<li>dhcpip-name - String - （过滤条件）DhcpIp实例名称。</li>
+<li>address-ip - String - （过滤条件）DhcpIp实例的IP，根据IP精确查找。</li>
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * 偏移量，默认为0。
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 返回数量，默认为20，最大值为100。
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DhcpIpIds = 'DhcpIpIds' in params ? params.DhcpIpIds : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
 
     }
 }
@@ -12513,6 +12800,34 @@ class DescribeCcnRoutesRequest extends  AbstractModel {
 }
 
 /**
+ * ModifyDhcpIpAttribute返回参数结构体
+ * @class
+ */
+class ModifyDhcpIpAttributeResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * CreateAndAttachNetworkInterface请求参数结构体
  * @class
  */
@@ -12642,6 +12957,34 @@ class DownloadCustomerGatewayConfigurationResponse extends  AbstractModel {
             return;
         }
         this.CustomerGatewayConfiguration = 'CustomerGatewayConfiguration' in params ? params.CustomerGatewayConfiguration : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DeleteDhcpIp返回参数结构体
+ * @class
+ */
+class DeleteDhcpIpResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -12829,30 +13172,48 @@ AnycastEIP是否用于绑定负载均衡。
 }
 
 /**
- * NAT网关绑定的弹性IP
+ * ModifyVpnConnectionAttribute请求参数结构体
  * @class
  */
-class NatGatewayAddress extends  AbstractModel {
+class ModifyVpnConnectionAttributeRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 弹性公网IP（EIP）的唯一 ID，形如：`eip-11112222`。
+         * VPN通道实例ID。形如：vpnx-f49l6u0z。
          * @type {string || null}
          */
-        this.AddressId = null;
+        this.VpnConnectionId = null;
 
         /**
-         * 外网IP地址，形如：`123.121.34.33`。
+         * VPN通道名称，可任意命名，但不得超过60个字符。
          * @type {string || null}
          */
-        this.PublicIpAddress = null;
+        this.VpnConnectionName = null;
 
         /**
-         * 资源封堵状态。true表示弹性ip处于封堵状态，false表示弹性ip处于未封堵状态。
-         * @type {boolean || null}
+         * 预共享密钥。
+         * @type {string || null}
          */
-        this.IsBlocked = null;
+        this.PreShareKey = null;
+
+        /**
+         * SPD策略组，例如：{"10.0.0.5/24":["172.123.10.5/16"]}，10.0.0.5/24是vpc内网段172.123.10.5/16是IDC网段。用户指定VPC内哪些网段可以和您IDC中哪些网段通信。
+         * @type {Array.<SecurityPolicyDatabase> || null}
+         */
+        this.SecurityPolicyDatabases = null;
+
+        /**
+         * IKE配置（Internet Key Exchange，因特网密钥交换），IKE具有一套自我保护机制，用户配置网络安全协议。
+         * @type {IKEOptionsSpecification || null}
+         */
+        this.IKEOptionsSpecification = null;
+
+        /**
+         * IPSec配置，腾讯云提供IPSec安全会话设置。
+         * @type {IPSECOptionsSpecification || null}
+         */
+        this.IPSECOptionsSpecification = null;
 
     }
 
@@ -12863,9 +13224,30 @@ class NatGatewayAddress extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.AddressId = 'AddressId' in params ? params.AddressId : null;
-        this.PublicIpAddress = 'PublicIpAddress' in params ? params.PublicIpAddress : null;
-        this.IsBlocked = 'IsBlocked' in params ? params.IsBlocked : null;
+        this.VpnConnectionId = 'VpnConnectionId' in params ? params.VpnConnectionId : null;
+        this.VpnConnectionName = 'VpnConnectionName' in params ? params.VpnConnectionName : null;
+        this.PreShareKey = 'PreShareKey' in params ? params.PreShareKey : null;
+
+        if (params.SecurityPolicyDatabases) {
+            this.SecurityPolicyDatabases = new Array();
+            for (let z in params.SecurityPolicyDatabases) {
+                let obj = new SecurityPolicyDatabase();
+                obj.deserialize(params.SecurityPolicyDatabases[z]);
+                this.SecurityPolicyDatabases.push(obj);
+            }
+        }
+
+        if (params.IKEOptionsSpecification) {
+            let obj = new IKEOptionsSpecification();
+            obj.deserialize(params.IKEOptionsSpecification)
+            this.IKEOptionsSpecification = obj;
+        }
+
+        if (params.IPSECOptionsSpecification) {
+            let obj = new IPSECOptionsSpecification();
+            obj.deserialize(params.IPSECOptionsSpecification)
+            this.IPSECOptionsSpecification = obj;
+        }
 
     }
 }
@@ -12950,6 +13332,34 @@ class CreateIp6TranslatorsRequest extends  AbstractModel {
         this.Ip6TranslatorName = 'Ip6TranslatorName' in params ? params.Ip6TranslatorName : null;
         this.Ip6TranslatorCount = 'Ip6TranslatorCount' in params ? params.Ip6TranslatorCount : null;
         this.Ip6InternetServiceProvider = 'Ip6InternetServiceProvider' in params ? params.Ip6InternetServiceProvider : null;
+
+    }
+}
+
+/**
+ * AssociateDhcpIpWithAddressIp返回参数结构体
+ * @class
+ */
+class AssociateDhcpIpWithAddressIpResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -14001,24 +14411,24 @@ class AttachCcnInstancesResponse extends  AbstractModel {
 }
 
 /**
- * DisassociateNetworkAclSubnets请求参数结构体
+ * CreateDefaultVpc返回参数结构体
  * @class
  */
-class DisassociateNetworkAclSubnetsRequest extends  AbstractModel {
+class CreateDefaultVpcResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 网络ACL实例ID。例如：acl-12345678。
-         * @type {string || null}
+         * 默认VPC和子网ID
+         * @type {DefaultVpcSubnet || null}
          */
-        this.NetworkAclId = null;
+        this.Vpc = null;
 
         /**
-         * 子网实例ID数组。例如：[subnet-12345678]
-         * @type {Array.<string> || null}
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
          */
-        this.SubnetIds = null;
+        this.RequestId = null;
 
     }
 
@@ -14029,8 +14439,13 @@ class DisassociateNetworkAclSubnetsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.NetworkAclId = 'NetworkAclId' in params ? params.NetworkAclId : null;
-        this.SubnetIds = 'SubnetIds' in params ? params.SubnetIds : null;
+
+        if (params.Vpc) {
+            let obj = new DefaultVpcSubnet();
+            obj.deserialize(params.Vpc)
+            this.Vpc = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -15247,6 +15662,99 @@ class ModifyAddressAttributeRequest extends  AbstractModel {
 }
 
 /**
+ * 描述 DhcpIp 信息
+ * @class
+ */
+class DhcpIp extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * `DhcpIp`的`ID`，是`DhcpIp`的唯一标识。
+         * @type {string || null}
+         */
+        this.DhcpIpId = null;
+
+        /**
+         * `DhcpIp`所在私有网络`ID`。
+         * @type {string || null}
+         */
+        this.VpcId = null;
+
+        /**
+         * `DhcpIp`所在子网`ID`。
+         * @type {string || null}
+         */
+        this.SubnetId = null;
+
+        /**
+         * `DhcpIp`的名称。
+         * @type {string || null}
+         */
+        this.DhcpIpName = null;
+
+        /**
+         * IP地址。
+         * @type {string || null}
+         */
+        this.PrivateIpAddress = null;
+
+        /**
+         * 绑定`EIP`。
+         * @type {string || null}
+         */
+        this.AddressIp = null;
+
+        /**
+         * `DhcpIp`关联弹性网卡`ID`。
+         * @type {string || null}
+         */
+        this.NetworkInterfaceId = null;
+
+        /**
+         * 被绑定的实例`ID`。
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 状态：
+<li>`AVAILABLE`：运行中</li>
+<li>`UNBIND`：未绑定</li>
+         * @type {string || null}
+         */
+        this.State = null;
+
+        /**
+         * 创建时间。
+         * @type {string || null}
+         */
+        this.CreatedTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DhcpIpId = 'DhcpIpId' in params ? params.DhcpIpId : null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
+        this.DhcpIpName = 'DhcpIpName' in params ? params.DhcpIpName : null;
+        this.PrivateIpAddress = 'PrivateIpAddress' in params ? params.PrivateIpAddress : null;
+        this.AddressIp = 'AddressIp' in params ? params.AddressIp : null;
+        this.NetworkInterfaceId = 'NetworkInterfaceId' in params ? params.NetworkInterfaceId : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.State = 'State' in params ? params.State : null;
+        this.CreatedTime = 'CreatedTime' in params ? params.CreatedTime : null;
+
+    }
+}
+
+/**
  * DeleteAssistantCidr请求参数结构体
  * @class
  */
@@ -15819,6 +16327,34 @@ class DeleteSecurityGroupPoliciesResponse extends  AbstractModel {
 }
 
 /**
+ * DisassociateDhcpIpWithAddressIp返回参数结构体
+ * @class
+ */
+class DisassociateDhcpIpWithAddressIpResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * ModifyNetworkAclAttribute请求参数结构体
  * @class
  */
@@ -16356,36 +16892,18 @@ class Resource extends  AbstractModel {
 }
 
 /**
- * 对端网关
+ * DeleteDhcpIp请求参数结构体
  * @class
  */
-class CustomerGateway extends  AbstractModel {
+class DeleteDhcpIpRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 用户网关唯一ID
+         * `DhcpIp`的`ID`，是`DhcpIp`的唯一标识。
          * @type {string || null}
          */
-        this.CustomerGatewayId = null;
-
-        /**
-         * 网关名称
-         * @type {string || null}
-         */
-        this.CustomerGatewayName = null;
-
-        /**
-         * 公网地址
-         * @type {string || null}
-         */
-        this.IpAddress = null;
-
-        /**
-         * 创建时间
-         * @type {string || null}
-         */
-        this.CreatedTime = null;
+        this.DhcpIpId = null;
 
     }
 
@@ -16396,10 +16914,7 @@ class CustomerGateway extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.CustomerGatewayId = 'CustomerGatewayId' in params ? params.CustomerGatewayId : null;
-        this.CustomerGatewayName = 'CustomerGatewayName' in params ? params.CustomerGatewayName : null;
-        this.IpAddress = 'IpAddress' in params ? params.IpAddress : null;
-        this.CreatedTime = 'CreatedTime' in params ? params.CreatedTime : null;
+        this.DhcpIpId = 'DhcpIpId' in params ? params.DhcpIpId : null;
 
     }
 }
@@ -16945,24 +17460,24 @@ class DescribeTaskResultResponse extends  AbstractModel {
 }
 
 /**
- * CreateDefaultVpc返回参数结构体
+ * DisassociateNetworkAclSubnets请求参数结构体
  * @class
  */
-class CreateDefaultVpcResponse extends  AbstractModel {
+class DisassociateNetworkAclSubnetsRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 默认VPC和子网ID
-         * @type {DefaultVpcSubnet || null}
-         */
-        this.Vpc = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * 网络ACL实例ID。例如：acl-12345678。
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.NetworkAclId = null;
+
+        /**
+         * 子网实例ID数组。例如：[subnet-12345678]
+         * @type {Array.<string> || null}
+         */
+        this.SubnetIds = null;
 
     }
 
@@ -16973,13 +17488,8 @@ class CreateDefaultVpcResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.Vpc) {
-            let obj = new DefaultVpcSubnet();
-            obj.deserialize(params.Vpc)
-            this.Vpc = obj;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.NetworkAclId = 'NetworkAclId' in params ? params.NetworkAclId : null;
+        this.SubnetIds = 'SubnetIds' in params ? params.SubnetIds : null;
 
     }
 }
@@ -18236,30 +18746,36 @@ class EnableRoutesResponse extends  AbstractModel {
 }
 
 /**
- * MigratePrivateIpAddress请求参数结构体
+ * 对端网关
  * @class
  */
-class MigratePrivateIpAddressRequest extends  AbstractModel {
+class CustomerGateway extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 当内网IP绑定的弹性网卡实例ID，例如：eni-m6dyj72l。
+         * 用户网关唯一ID
          * @type {string || null}
          */
-        this.SourceNetworkInterfaceId = null;
+        this.CustomerGatewayId = null;
 
         /**
-         * 待迁移的目的弹性网卡实例ID。
+         * 网关名称
          * @type {string || null}
          */
-        this.DestinationNetworkInterfaceId = null;
+        this.CustomerGatewayName = null;
 
         /**
-         * 迁移的内网IP地址，例如：10.0.0.6。
+         * 公网地址
          * @type {string || null}
          */
-        this.PrivateIpAddress = null;
+        this.IpAddress = null;
+
+        /**
+         * 创建时间
+         * @type {string || null}
+         */
+        this.CreatedTime = null;
 
     }
 
@@ -18270,9 +18786,10 @@ class MigratePrivateIpAddressRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.SourceNetworkInterfaceId = 'SourceNetworkInterfaceId' in params ? params.SourceNetworkInterfaceId : null;
-        this.DestinationNetworkInterfaceId = 'DestinationNetworkInterfaceId' in params ? params.DestinationNetworkInterfaceId : null;
-        this.PrivateIpAddress = 'PrivateIpAddress' in params ? params.PrivateIpAddress : null;
+        this.CustomerGatewayId = 'CustomerGatewayId' in params ? params.CustomerGatewayId : null;
+        this.CustomerGatewayName = 'CustomerGatewayName' in params ? params.CustomerGatewayName : null;
+        this.IpAddress = 'IpAddress' in params ? params.IpAddress : null;
+        this.CreatedTime = 'CreatedTime' in params ? params.CreatedTime : null;
 
     }
 }
@@ -18844,24 +19361,12 @@ class CreateNetworkInterfaceResponse extends  AbstractModel {
 }
 
 /**
- * DescribeVpcPrivateIpAddresses请求参数结构体
+ * DescribeAddressQuota请求参数结构体
  * @class
  */
-class DescribeVpcPrivateIpAddressesRequest extends  AbstractModel {
+class DescribeAddressQuotaRequest extends  AbstractModel {
     constructor(){
         super();
-
-        /**
-         * `VPC`实例`ID`，形如：`vpc-f49l6u0z`。
-         * @type {string || null}
-         */
-        this.VpcId = null;
-
-        /**
-         * 内网`IP`地址列表，批量查询单次请求最多支持`10`个。
-         * @type {Array.<string> || null}
-         */
-        this.PrivateIpAddresses = null;
 
     }
 
@@ -18872,8 +19377,6 @@ class DescribeVpcPrivateIpAddressesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.VpcId = 'VpcId' in params ? params.VpcId : null;
-        this.PrivateIpAddresses = 'PrivateIpAddresses' in params ? params.PrivateIpAddresses : null;
 
     }
 }
@@ -19145,18 +19648,30 @@ VPN网关实例ID，形如，`vpn-ltjahce6`。
 }
 
 /**
- * ReplaceDirectConnectGatewayCcnRoutes返回参数结构体
+ * MigratePrivateIpAddress请求参数结构体
  * @class
  */
-class ReplaceDirectConnectGatewayCcnRoutesResponse extends  AbstractModel {
+class MigratePrivateIpAddressRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * 当内网IP绑定的弹性网卡实例ID，例如：eni-m6dyj72l。
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.SourceNetworkInterfaceId = null;
+
+        /**
+         * 待迁移的目的弹性网卡实例ID。
+         * @type {string || null}
+         */
+        this.DestinationNetworkInterfaceId = null;
+
+        /**
+         * 迁移的内网IP地址，例如：10.0.0.6。
+         * @type {string || null}
+         */
+        this.PrivateIpAddress = null;
 
     }
 
@@ -19167,7 +19682,9 @@ class ReplaceDirectConnectGatewayCcnRoutesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.SourceNetworkInterfaceId = 'SourceNetworkInterfaceId' in params ? params.SourceNetworkInterfaceId : null;
+        this.DestinationNetworkInterfaceId = 'DestinationNetworkInterfaceId' in params ? params.DestinationNetworkInterfaceId : null;
+        this.PrivateIpAddress = 'PrivateIpAddress' in params ? params.PrivateIpAddress : null;
 
     }
 }
@@ -20679,48 +21196,30 @@ class DeleteSecurityGroupRequest extends  AbstractModel {
 }
 
 /**
- * ModifyVpnConnectionAttribute请求参数结构体
+ * DescribeDhcpIps返回参数结构体
  * @class
  */
-class ModifyVpnConnectionAttributeRequest extends  AbstractModel {
+class DescribeDhcpIpsResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * VPN通道实例ID。形如：vpnx-f49l6u0z。
+         * 实例详细信息列表。
+         * @type {Array.<DhcpIp> || null}
+         */
+        this.DhcpIpSet = null;
+
+        /**
+         * 符合条件的实例数量。
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.VpnConnectionId = null;
-
-        /**
-         * VPN通道名称，可任意命名，但不得超过60个字符。
-         * @type {string || null}
-         */
-        this.VpnConnectionName = null;
-
-        /**
-         * 预共享密钥。
-         * @type {string || null}
-         */
-        this.PreShareKey = null;
-
-        /**
-         * SPD策略组，例如：{"10.0.0.5/24":["172.123.10.5/16"]}，10.0.0.5/24是vpc内网段172.123.10.5/16是IDC网段。用户指定VPC内哪些网段可以和您IDC中哪些网段通信。
-         * @type {Array.<SecurityPolicyDatabase> || null}
-         */
-        this.SecurityPolicyDatabases = null;
-
-        /**
-         * IKE配置（Internet Key Exchange，因特网密钥交换），IKE具有一套自我保护机制，用户配置网络安全协议。
-         * @type {IKEOptionsSpecification || null}
-         */
-        this.IKEOptionsSpecification = null;
-
-        /**
-         * IPSec配置，腾讯云提供IPSec安全会话设置。
-         * @type {IPSECOptionsSpecification || null}
-         */
-        this.IPSECOptionsSpecification = null;
+        this.RequestId = null;
 
     }
 
@@ -20731,30 +21230,17 @@ class ModifyVpnConnectionAttributeRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.VpnConnectionId = 'VpnConnectionId' in params ? params.VpnConnectionId : null;
-        this.VpnConnectionName = 'VpnConnectionName' in params ? params.VpnConnectionName : null;
-        this.PreShareKey = 'PreShareKey' in params ? params.PreShareKey : null;
 
-        if (params.SecurityPolicyDatabases) {
-            this.SecurityPolicyDatabases = new Array();
-            for (let z in params.SecurityPolicyDatabases) {
-                let obj = new SecurityPolicyDatabase();
-                obj.deserialize(params.SecurityPolicyDatabases[z]);
-                this.SecurityPolicyDatabases.push(obj);
+        if (params.DhcpIpSet) {
+            this.DhcpIpSet = new Array();
+            for (let z in params.DhcpIpSet) {
+                let obj = new DhcpIp();
+                obj.deserialize(params.DhcpIpSet[z]);
+                this.DhcpIpSet.push(obj);
             }
         }
-
-        if (params.IKEOptionsSpecification) {
-            let obj = new IKEOptionsSpecification();
-            obj.deserialize(params.IKEOptionsSpecification)
-            this.IKEOptionsSpecification = obj;
-        }
-
-        if (params.IPSECOptionsSpecification) {
-            let obj = new IPSECOptionsSpecification();
-            obj.deserialize(params.IPSECOptionsSpecification)
-            this.IPSECOptionsSpecification = obj;
-        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -21517,6 +22003,55 @@ class ConflictSource extends  AbstractModel {
                 this.ConflictItemSet.push(obj);
             }
         }
+
+    }
+}
+
+/**
+ * CreateDhcpIp请求参数结构体
+ * @class
+ */
+class CreateDhcpIpRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 私有网络`ID`。
+         * @type {string || null}
+         */
+        this.VpcId = null;
+
+        /**
+         * 子网`ID`。
+         * @type {string || null}
+         */
+        this.SubnetId = null;
+
+        /**
+         * `DhcpIp`名称。
+         * @type {string || null}
+         */
+        this.DhcpIpName = null;
+
+        /**
+         * 新申请的内网IP地址个数。总数不能超过64个。
+         * @type {number || null}
+         */
+        this.SecondaryPrivateIpAddressCount = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
+        this.DhcpIpName = 'DhcpIpName' in params ? params.DhcpIpName : null;
+        this.SecondaryPrivateIpAddressCount = 'SecondaryPrivateIpAddressCount' in params ? params.SecondaryPrivateIpAddressCount : null;
 
     }
 }
@@ -22374,7 +22909,7 @@ module.exports = {
     CreateNetworkAclResponse: CreateNetworkAclResponse,
     NetworkAcl: NetworkAcl,
     ModifyAddressTemplateAttributeResponse: ModifyAddressTemplateAttributeResponse,
-    ServiceTemplateGroup: ServiceTemplateGroup,
+    DisassociateDhcpIpWithAddressIpRequest: DisassociateDhcpIpWithAddressIpRequest,
     SecurityGroupLimitSet: SecurityGroupLimitSet,
     CreateRoutesRequest: CreateRoutesRequest,
     DescribeHaVipsResponse: DescribeHaVipsResponse,
@@ -22394,7 +22929,8 @@ module.exports = {
     ModifyIp6RuleResponse: ModifyIp6RuleResponse,
     ModifyNetworkAclAttributeResponse: ModifyNetworkAclAttributeResponse,
     DescribeVpnGatewaysResponse: DescribeVpnGatewaysResponse,
-    ModifyServiceTemplateAttributeRequest: ModifyServiceTemplateAttributeRequest,
+    ServiceTemplateGroup: ServiceTemplateGroup,
+    CreateDhcpIpResponse: CreateDhcpIpResponse,
     FlowLog: FlowLog,
     CreateDefaultSecurityGroupRequest: CreateDefaultSecurityGroupRequest,
     DescribeServiceTemplateGroupsResponse: DescribeServiceTemplateGroupsResponse,
@@ -22407,7 +22943,7 @@ module.exports = {
     CreateVpcResponse: CreateVpcResponse,
     AssistantCidr: AssistantCidr,
     ModifyNetworkAclEntriesRequest: ModifyNetworkAclEntriesRequest,
-    DescribeAddressQuotaRequest: DescribeAddressQuotaRequest,
+    DescribeVpcPrivateIpAddressesRequest: DescribeVpcPrivateIpAddressesRequest,
     AddressTemplate: AddressTemplate,
     DescribeIp6TranslatorQuotaResponse: DescribeIp6TranslatorQuotaResponse,
     VpnGatewayQuota: VpnGatewayQuota,
@@ -22455,6 +22991,7 @@ module.exports = {
     DeleteRoutesResponse: DeleteRoutesResponse,
     DescribeSecurityGroupAssociationStatisticsResponse: DescribeSecurityGroupAssociationStatisticsResponse,
     ModifyAssistantCidrResponse: ModifyAssistantCidrResponse,
+    NatGatewayAddress: NatGatewayAddress,
     ModifyNetworkAclEntriesResponse: ModifyNetworkAclEntriesResponse,
     DescribeFlowLogRequest: DescribeFlowLogRequest,
     DescribeIp6AddressesRequest: DescribeIp6AddressesRequest,
@@ -22474,6 +23011,7 @@ module.exports = {
     DeleteAddressTemplateResponse: DeleteAddressTemplateResponse,
     ModifySubnetAttributeResponse: ModifySubnetAttributeResponse,
     ResetNatGatewayConnectionRequest: ResetNatGatewayConnectionRequest,
+    ReplaceDirectConnectGatewayCcnRoutesResponse: ReplaceDirectConnectGatewayCcnRoutesResponse,
     DeleteAddressTemplateRequest: DeleteAddressTemplateRequest,
     NetworkInterface: NetworkInterface,
     TransformAddressRequest: TransformAddressRequest,
@@ -22528,6 +23066,7 @@ module.exports = {
     DescribeGatewayFlowQosResponse: DescribeGatewayFlowQosResponse,
     ModifySecurityGroupPoliciesRequest: ModifySecurityGroupPoliciesRequest,
     RemoveIp6RulesResponse: RemoveIp6RulesResponse,
+    AssociateDhcpIpWithAddressIpRequest: AssociateDhcpIpWithAddressIpRequest,
     ReplaceRoutesRequest: ReplaceRoutesRequest,
     CreateCustomerGatewayResponse: CreateCustomerGatewayResponse,
     DeleteServiceTemplateGroupResponse: DeleteServiceTemplateGroupResponse,
@@ -22552,6 +23091,7 @@ module.exports = {
     DeleteNetworkAclRequest: DeleteNetworkAclRequest,
     NatGatewayDestinationIpPortTranslationNatRule: NatGatewayDestinationIpPortTranslationNatRule,
     DescribeNetDetectStatesResponse: DescribeNetDetectStatesResponse,
+    ModifyDhcpIpAttributeRequest: ModifyDhcpIpAttributeRequest,
     ModifyIp6TranslatorRequest: ModifyIp6TranslatorRequest,
     CreateVpnConnectionResponse: CreateVpnConnectionResponse,
     AddressTemplateSpecification: AddressTemplateSpecification,
@@ -22578,6 +23118,7 @@ module.exports = {
     NetDetectIpState: NetDetectIpState,
     ModifyIp6AddressesBandwidthResponse: ModifyIp6AddressesBandwidthResponse,
     CreateSubnetsRequest: CreateSubnetsRequest,
+    ModifyServiceTemplateAttributeRequest: ModifyServiceTemplateAttributeRequest,
     AssociateAddressResponse: AssociateAddressResponse,
     ResetVpnConnectionResponse: ResetVpnConnectionResponse,
     CreateNetworkAclRequest: CreateNetworkAclRequest,
@@ -22594,6 +23135,7 @@ module.exports = {
     AddIp6RulesResponse: AddIp6RulesResponse,
     DeleteVpnConnectionRequest: DeleteVpnConnectionRequest,
     NetworkAclEntry: NetworkAclEntry,
+    DescribeDhcpIpsRequest: DescribeDhcpIpsRequest,
     DescribeAssistantCidrRequest: DescribeAssistantCidrRequest,
     RenewVpnGatewayResponse: RenewVpnGatewayResponse,
     DeleteDirectConnectGatewayResponse: DeleteDirectConnectGatewayResponse,
@@ -22632,14 +23174,17 @@ module.exports = {
     SetCcnRegionBandwidthLimitsResponse: SetCcnRegionBandwidthLimitsResponse,
     DescribeAccountAttributesRequest: DescribeAccountAttributesRequest,
     DescribeCcnRoutesRequest: DescribeCcnRoutesRequest,
+    ModifyDhcpIpAttributeResponse: ModifyDhcpIpAttributeResponse,
     CreateAndAttachNetworkInterfaceRequest: CreateAndAttachNetworkInterfaceRequest,
     DownloadCustomerGatewayConfigurationResponse: DownloadCustomerGatewayConfigurationResponse,
+    DeleteDhcpIpResponse: DeleteDhcpIpResponse,
     ModifyGatewayFlowQosRequest: ModifyGatewayFlowQosRequest,
     DeleteNetDetectResponse: DeleteNetDetectResponse,
     AllocateAddressesRequest: AllocateAddressesRequest,
-    NatGatewayAddress: NatGatewayAddress,
+    ModifyVpnConnectionAttributeRequest: ModifyVpnConnectionAttributeRequest,
     ModifyAssistantCidrRequest: ModifyAssistantCidrRequest,
     CreateIp6TranslatorsRequest: CreateIp6TranslatorsRequest,
+    AssociateDhcpIpWithAddressIpResponse: AssociateDhcpIpWithAddressIpResponse,
     ModifyGatewayFlowQosResponse: ModifyGatewayFlowQosResponse,
     ModifySecurityGroupAttributeResponse: ModifySecurityGroupAttributeResponse,
     AddressTemplateItem: AddressTemplateItem,
@@ -22669,7 +23214,7 @@ module.exports = {
     DescribeNetworkAclsResponse: DescribeNetworkAclsResponse,
     DeleteFlowLogResponse: DeleteFlowLogResponse,
     AttachCcnInstancesResponse: AttachCcnInstancesResponse,
-    DisassociateNetworkAclSubnetsRequest: DisassociateNetworkAclSubnetsRequest,
+    CreateDefaultVpcResponse: CreateDefaultVpcResponse,
     ModifyVpcAttributeResponse: ModifyVpcAttributeResponse,
     ModifyVpnConnectionAttributeResponse: ModifyVpnConnectionAttributeResponse,
     PrivateIpAddressSpecification: PrivateIpAddressSpecification,
@@ -22700,6 +23245,7 @@ module.exports = {
     MigrateNetworkInterfaceRequest: MigrateNetworkInterfaceRequest,
     DisableCcnRoutesRequest: DisableCcnRoutesRequest,
     ModifyAddressAttributeRequest: ModifyAddressAttributeRequest,
+    DhcpIp: DhcpIp,
     DeleteAssistantCidrRequest: DeleteAssistantCidrRequest,
     SubnetInput: SubnetInput,
     UnassignIpv6SubnetCidrBlockResponse: UnassignIpv6SubnetCidrBlockResponse,
@@ -22714,6 +23260,7 @@ module.exports = {
     CreateAndAttachNetworkInterfaceResponse: CreateAndAttachNetworkInterfaceResponse,
     ModifyCcnAttributeRequest: ModifyCcnAttributeRequest,
     DeleteSecurityGroupPoliciesResponse: DeleteSecurityGroupPoliciesResponse,
+    DisassociateDhcpIpWithAddressIpResponse: DisassociateDhcpIpWithAddressIpResponse,
     ModifyNetworkAclAttributeRequest: ModifyNetworkAclAttributeRequest,
     DeleteVpnGatewayResponse: DeleteVpnGatewayResponse,
     EnableCcnRoutesResponse: EnableCcnRoutesResponse,
@@ -22723,7 +23270,7 @@ module.exports = {
     VpnGateway: VpnGateway,
     EnableGatewayFlowMonitorResponse: EnableGatewayFlowMonitorResponse,
     Resource: Resource,
-    CustomerGateway: CustomerGateway,
+    DeleteDhcpIpRequest: DeleteDhcpIpRequest,
     AllocateAddressesResponse: AllocateAddressesResponse,
     BandwidthPackage: BandwidthPackage,
     DescribeIp6TranslatorsResponse: DescribeIp6TranslatorsResponse,
@@ -22737,7 +23284,7 @@ module.exports = {
     DeleteNatGatewayResponse: DeleteNatGatewayResponse,
     CreateDirectConnectGatewayResponse: CreateDirectConnectGatewayResponse,
     DescribeTaskResultResponse: DescribeTaskResultResponse,
-    CreateDefaultVpcResponse: CreateDefaultVpcResponse,
+    DisassociateNetworkAclSubnetsRequest: DisassociateNetworkAclSubnetsRequest,
     ModifyAddressTemplateGroupAttributeRequest: ModifyAddressTemplateGroupAttributeRequest,
     ModifyServiceTemplateGroupAttributeRequest: ModifyServiceTemplateGroupAttributeRequest,
     UnassignIpv6CidrBlockRequest: UnassignIpv6CidrBlockRequest,
@@ -22767,7 +23314,7 @@ module.exports = {
     ReplaceRoutesResponse: ReplaceRoutesResponse,
     DirectConnectGatewayCcnRoute: DirectConnectGatewayCcnRoute,
     EnableRoutesResponse: EnableRoutesResponse,
-    MigratePrivateIpAddressRequest: MigratePrivateIpAddressRequest,
+    CustomerGateway: CustomerGateway,
     DescribeServiceTemplatesRequest: DescribeServiceTemplatesRequest,
     DeleteRouteTableRequest: DeleteRouteTableRequest,
     CreateVpnGatewayRequest: CreateVpnGatewayRequest,
@@ -22783,14 +23330,14 @@ module.exports = {
     ModifyHaVipAttributeResponse: ModifyHaVipAttributeResponse,
     DeleteSecurityGroupResponse: DeleteSecurityGroupResponse,
     CreateNetworkInterfaceResponse: CreateNetworkInterfaceResponse,
-    DescribeVpcPrivateIpAddressesRequest: DescribeVpcPrivateIpAddressesRequest,
+    DescribeAddressQuotaRequest: DescribeAddressQuotaRequest,
     RemoveBandwidthPackageResourcesResponse: RemoveBandwidthPackageResourcesResponse,
     AssignIpv6AddressesResponse: AssignIpv6AddressesResponse,
     CreateRoutesResponse: CreateRoutesResponse,
     DescribeSecurityGroupsResponse: DescribeSecurityGroupsResponse,
     ModifyVpnGatewayCcnRoutesRequest: ModifyVpnGatewayCcnRoutesRequest,
     DescribeGatewayFlowQosRequest: DescribeGatewayFlowQosRequest,
-    ReplaceDirectConnectGatewayCcnRoutesResponse: ReplaceDirectConnectGatewayCcnRoutesResponse,
+    MigratePrivateIpAddressRequest: MigratePrivateIpAddressRequest,
     ModifySecurityGroupPoliciesResponse: ModifySecurityGroupPoliciesResponse,
     ModifyNatGatewayDestinationIpPortTranslationNatRuleRequest: ModifyNatGatewayDestinationIpPortTranslationNatRuleRequest,
     ServiceTemplateSpecification: ServiceTemplateSpecification,
@@ -22826,7 +23373,7 @@ module.exports = {
     DescribeAddressQuotaResponse: DescribeAddressQuotaResponse,
     CreateCustomerGatewayRequest: CreateCustomerGatewayRequest,
     DeleteSecurityGroupRequest: DeleteSecurityGroupRequest,
-    ModifyVpnConnectionAttributeRequest: ModifyVpnConnectionAttributeRequest,
+    DescribeDhcpIpsResponse: DescribeDhcpIpsResponse,
     CreateRouteTableResponse: CreateRouteTableResponse,
     ItemPrice: ItemPrice,
     DescribeDirectConnectGatewayCcnRoutesResponse: DescribeDirectConnectGatewayCcnRoutesResponse,
@@ -22846,6 +23393,7 @@ module.exports = {
     CustomerGatewayVendor: CustomerGatewayVendor,
     DescribeAddressTemplatesRequest: DescribeAddressTemplatesRequest,
     ConflictSource: ConflictSource,
+    CreateDhcpIpRequest: CreateDhcpIpRequest,
     DescribeVpnConnectionsResponse: DescribeVpnConnectionsResponse,
     DeleteCustomerGatewayRequest: DeleteCustomerGatewayRequest,
     DescribeAddressTemplatesResponse: DescribeAddressTemplatesResponse,

@@ -25,9 +25,9 @@ const ModifyTableQuotasResponse = models.ModifyTableQuotasResponse;
 const DescribeIdlFileInfosResponse = models.DescribeIdlFileInfosResponse;
 const CreateBackupRequest = models.CreateBackupRequest;
 const ModifyTableGroupNameResponse = models.ModifyTableGroupNameResponse;
-const RecoverRecycleTablesResponse = models.RecoverRecycleTablesResponse;
+const DescribeTableTagsRequest = models.DescribeTableTagsRequest;
 const ModifyClusterPasswordResponse = models.ModifyClusterPasswordResponse;
-const DeleteClusterResponse = models.DeleteClusterResponse;
+const CreateClusterRequest = models.CreateClusterRequest;
 const VerifyIdlFilesRequest = models.VerifyIdlFilesRequest;
 const ModifyClusterNameRequest = models.ModifyClusterNameRequest;
 const ClearTablesResponse = models.ClearTablesResponse;
@@ -36,11 +36,13 @@ const TableResultNew = models.TableResultNew;
 const CreateClusterResponse = models.CreateClusterResponse;
 const ErrorInfo = models.ErrorInfo;
 const CreateTablesRequest = models.CreateTablesRequest;
-const ClusterInfo = models.ClusterInfo;
+const DescribeClusterTagsRequest = models.DescribeClusterTagsRequest;
+const RecoverRecycleTablesResponse = models.RecoverRecycleTablesResponse;
 const ParsedTableInfoNew = models.ParsedTableInfoNew;
 const RegionInfo = models.RegionInfo;
 const TableInfoNew = models.TableInfoNew;
-const TaskInfoNew = models.TaskInfoNew;
+const TagInfoUnit = models.TagInfoUnit;
+const ModifyTableTagsResponse = models.ModifyTableTagsResponse;
 const RollbackTablesResponse = models.RollbackTablesResponse;
 const DescribeTablesInRecycleResponse = models.DescribeTablesInRecycleResponse;
 const DescribeTableGroupsResponse = models.DescribeTableGroupsResponse;
@@ -49,40 +51,54 @@ const ModifyTableMemosResponse = models.ModifyTableMemosResponse;
 const RollbackTablesRequest = models.RollbackTablesRequest;
 const DeleteIdlFilesRequest = models.DeleteIdlFilesRequest;
 const DeleteTableGroupResponse = models.DeleteTableGroupResponse;
+const ModifyClusterTagsRequest = models.ModifyClusterTagsRequest;
 const CreateBackupResponse = models.CreateBackupResponse;
 const TableRollbackResultNew = models.TableRollbackResultNew;
-const VerifyIdlFilesResponse = models.VerifyIdlFilesResponse;
+const DescribeTableGroupTagsResponse = models.DescribeTableGroupTagsResponse;
 const DeleteClusterRequest = models.DeleteClusterRequest;
 const DescribeTablesResponse = models.DescribeTablesResponse;
+const TaskInfoNew = models.TaskInfoNew;
+const TagsInfoOfCluster = models.TagsInfoOfCluster;
 const ModifyClusterNameResponse = models.ModifyClusterNameResponse;
 const RecoverRecycleTablesRequest = models.RecoverRecycleTablesRequest;
+const DescribeTableTagsResponse = models.DescribeTableTagsResponse;
 const DescribeTasksResponse = models.DescribeTasksResponse;
 const DeleteTablesRequest = models.DeleteTablesRequest;
 const DescribeUinInWhitelistRequest = models.DescribeUinInWhitelistRequest;
 const CreateTableGroupResponse = models.CreateTableGroupResponse;
 const ModifyTableGroupNameRequest = models.ModifyTableGroupNameRequest;
 const DescribeRegionsResponse = models.DescribeRegionsResponse;
+const ModifyTableTagsRequest = models.ModifyTableTagsRequest;
 const DescribeTableGroupsRequest = models.DescribeTableGroupsRequest;
+const ModifyTableGroupTagsResponse = models.ModifyTableGroupTagsResponse;
 const CompareIdlFilesRequest = models.CompareIdlFilesRequest;
 const SelectedTableInfoNew = models.SelectedTableInfoNew;
 const IdlFileInfoWithoutContent = models.IdlFileInfoWithoutContent;
 const ModifyClusterPasswordRequest = models.ModifyClusterPasswordRequest;
-const CreateClusterRequest = models.CreateClusterRequest;
+const ClusterInfo = models.ClusterInfo;
+const ModifyTableGroupTagsRequest = models.ModifyTableGroupTagsRequest;
 const Filter = models.Filter;
 const DeleteTablesResponse = models.DeleteTablesResponse;
 const ModifyTableQuotasRequest = models.ModifyTableQuotasRequest;
 const CompareIdlFilesResponse = models.CompareIdlFilesResponse;
 const ModifyTablesRequest = models.ModifyTablesRequest;
 const DeleteTableGroupRequest = models.DeleteTableGroupRequest;
+const DescribeTableGroupTagsRequest = models.DescribeTableGroupTagsRequest;
 const CreateTablesResponse = models.CreateTablesResponse;
+const TagsInfoOfTableGroup = models.TagsInfoOfTableGroup;
 const DescribeTablesInRecycleRequest = models.DescribeTablesInRecycleRequest;
 const DescribeTablesRequest = models.DescribeTablesRequest;
 const DescribeRegionsRequest = models.DescribeRegionsRequest;
+const TableGroupInfo = models.TableGroupInfo;
 const DescribeClustersResponse = models.DescribeClustersResponse;
+const VerifyIdlFilesResponse = models.VerifyIdlFilesResponse;
+const ModifyClusterTagsResponse = models.ModifyClusterTagsResponse;
 const DeleteIdlFilesResponse = models.DeleteIdlFilesResponse;
+const DescribeClusterTagsResponse = models.DescribeClusterTagsResponse;
 const CreateTableGroupRequest = models.CreateTableGroupRequest;
 const ModifyTableMemosRequest = models.ModifyTableMemosRequest;
-const TableGroupInfo = models.TableGroupInfo;
+const TagsInfoOfTable = models.TagsInfoOfTable;
+const DeleteClusterResponse = models.DeleteClusterResponse;
 
 
 /**
@@ -95,6 +111,28 @@ class TcaplusdbClient extends AbstractClient {
         super("tcaplusdb.tencentcloudapi.com", "2019-08-23", credential, region, profile);
     }
     
+    /**
+     * 获取表格标签
+     * @param {DescribeTableTagsRequest} req
+     * @param {function(string, DescribeTableTagsResponse):void} cb
+     * @public
+     */
+    DescribeTableTags(req, cb) {
+        let resp = new DescribeTableTagsResponse();
+        this.request("DescribeTableTags", req, resp, cb);
+    }
+
+    /**
+     * 修改表格标签
+     * @param {ModifyTableTagsRequest} req
+     * @param {function(string, ModifyTableTagsResponse):void} cb
+     * @public
+     */
+    ModifyTableTags(req, cb) {
+        let resp = new ModifyTableTagsResponse();
+        this.request("ModifyTableTags", req, resp, cb);
+    }
+
     /**
      * 本接口用于创建TcaplusDB集群
      * @param {CreateClusterRequest} req
@@ -294,6 +332,39 @@ class TcaplusdbClient extends AbstractClient {
     }
 
     /**
+     * 修改集群标签
+     * @param {ModifyClusterTagsRequest} req
+     * @param {function(string, ModifyClusterTagsResponse):void} cb
+     * @public
+     */
+    ModifyClusterTags(req, cb) {
+        let resp = new ModifyClusterTagsResponse();
+        this.request("ModifyClusterTags", req, resp, cb);
+    }
+
+    /**
+     * 修改表格组标签
+     * @param {ModifyTableGroupTagsRequest} req
+     * @param {function(string, ModifyTableGroupTagsResponse):void} cb
+     * @public
+     */
+    ModifyTableGroupTags(req, cb) {
+        let resp = new ModifyTableGroupTagsResponse();
+        this.request("ModifyTableGroupTags", req, resp, cb);
+    }
+
+    /**
+     * 获取表格组关联的标签列表
+     * @param {DescribeTableGroupTagsRequest} req
+     * @param {function(string, DescribeTableGroupTagsResponse):void} cb
+     * @public
+     */
+    DescribeTableGroupTags(req, cb) {
+        let resp = new DescribeTableGroupTagsResponse();
+        this.request("DescribeTableGroupTags", req, resp, cb);
+    }
+
+    /**
      * 查询表格组列表
      * @param {DescribeTableGroupsRequest} req
      * @param {function(string, DescribeTableGroupsResponse):void} cb
@@ -360,6 +431,17 @@ class TcaplusdbClient extends AbstractClient {
     }
 
     /**
+     * 根据给定的表信息，清除表数据。
+     * @param {ClearTablesRequest} req
+     * @param {function(string, ClearTablesResponse):void} cb
+     * @public
+     */
+    ClearTables(req, cb) {
+        let resp = new ClearTablesResponse();
+        this.request("ClearTables", req, resp, cb);
+    }
+
+    /**
      * 根据用户选定的表定义IDL文件，批量修改指定的表
      * @param {ModifyTablesRequest} req
      * @param {function(string, ModifyTablesResponse):void} cb
@@ -382,14 +464,14 @@ class TcaplusdbClient extends AbstractClient {
     }
 
     /**
-     * 根据给定的表信息，清除表数据。
-     * @param {ClearTablesRequest} req
-     * @param {function(string, ClearTablesResponse):void} cb
+     * 获取集群关联的标签列表
+     * @param {DescribeClusterTagsRequest} req
+     * @param {function(string, DescribeClusterTagsResponse):void} cb
      * @public
      */
-    ClearTables(req, cb) {
-        let resp = new ClearTablesResponse();
-        this.request("ClearTables", req, resp, cb);
+    DescribeClusterTags(req, cb) {
+        let resp = new DescribeClusterTagsResponse();
+        this.request("DescribeClusterTags", req, resp, cb);
     }
 
 

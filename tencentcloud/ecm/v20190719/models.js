@@ -877,12 +877,6 @@ class RunInstancesRequest extends  AbstractModel {
         this.ZoneInstanceCountISPSet = null;
 
         /**
-         * 模块ID
-         * @type {string || null}
-         */
-        this.ModuleId = null;
-
-        /**
          * 实例登录密码。不同操作系统类型密码复杂度限制不一样，具体如下：
 Linux实例密码必须8到30位，至少包括两项[a-z]，[A-Z]、[0-9] 和 [( ) ` ~ ! @ # $ % ^ & - + = | { } [ ] : ; ' , . ? / ]中的特殊符。Windows实例密码必须12到30位，至少包括三项[a-z]，[A-Z]，[0-9] 和 [( ) ` ~ ! @ # $ % ^ & - + = | { } [ ] : ; ' , . ? /]中的特殊符号。
          * @type {string || null}
@@ -890,13 +884,19 @@ Linux实例密码必须8到30位，至少包括两项[a-z]，[A-Z]、[0-9] 和 [
         this.Password = null;
 
         /**
-         * 公网出带宽上限，单位：Mbps
+         * 公网出带宽上限，单位：Mbps。如果未传该参数或者传的值为0，则使用模块下的默认值
          * @type {number || null}
          */
         this.InternetMaxBandwidthOut = null;
 
         /**
-         * 镜像ID，不传则使用模块下的默认值
+         * 模块ID。如果未传该参数，则必须传ImageId，InstanceType，DataDiskSize，InternetMaxBandwidthOut参数
+         * @type {string || null}
+         */
+        this.ModuleId = null;
+
+        /**
+         * 镜像ID。如果未传该参数或者传的值为空，则使用模块下的默认值
          * @type {string || null}
          */
         this.ImageId = null;
@@ -946,6 +946,18 @@ Windows 实例：名字符长度为[2, 15]，允许字母（不限制大小写�
          */
         this.UserData = null;
 
+        /**
+         * 机型。如果未传该参数或者传的值为空，则使用模块下的默认值
+         * @type {string || null}
+         */
+        this.InstanceType = null;
+
+        /**
+         * 数据盘大小，单位是G。如果未传该参数或者传的值为0，则使用模块下的默认值
+         * @type {number || null}
+         */
+        this.DataDiskSize = null;
+
     }
 
     /**
@@ -964,9 +976,9 @@ Windows 实例：名字符长度为[2, 15]，允许字母（不限制大小写�
                 this.ZoneInstanceCountISPSet.push(obj);
             }
         }
-        this.ModuleId = 'ModuleId' in params ? params.ModuleId : null;
         this.Password = 'Password' in params ? params.Password : null;
         this.InternetMaxBandwidthOut = 'InternetMaxBandwidthOut' in params ? params.InternetMaxBandwidthOut : null;
+        this.ModuleId = 'ModuleId' in params ? params.ModuleId : null;
         this.ImageId = 'ImageId' in params ? params.ImageId : null;
         this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
         this.HostName = 'HostName' in params ? params.HostName : null;
@@ -987,6 +999,8 @@ Windows 实例：名字符长度为[2, 15]，允许字母（不限制大小写�
             }
         }
         this.UserData = 'UserData' in params ? params.UserData : null;
+        this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
+        this.DataDiskSize = 'DataDiskSize' in params ? params.DataDiskSize : null;
 
     }
 }

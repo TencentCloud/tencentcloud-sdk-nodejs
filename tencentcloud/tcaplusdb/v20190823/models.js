@@ -459,30 +459,24 @@ class ModifyTableGroupNameResponse extends  AbstractModel {
 }
 
 /**
- * RecoverRecycleTables返回参数结构体
+ * DescribeTableTags请求参数结构体
  * @class
  */
-class RecoverRecycleTablesResponse extends  AbstractModel {
+class DescribeTableTagsRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 恢复表结果数量
-         * @type {number || null}
-         */
-        this.TotalCount = null;
-
-        /**
-         * 恢复表信息列表
-         * @type {Array.<TableResultNew> || null}
-         */
-        this.TableResults = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * 表格所属集群ID
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.ClusterId = null;
+
+        /**
+         * 表格列表
+         * @type {Array.<SelectedTableInfoNew> || null}
+         */
+        this.SelectedTables = null;
 
     }
 
@@ -493,17 +487,16 @@ class RecoverRecycleTablesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
 
-        if (params.TableResults) {
-            this.TableResults = new Array();
-            for (let z in params.TableResults) {
-                let obj = new TableResultNew();
-                obj.deserialize(params.TableResults[z]);
-                this.TableResults.push(obj);
+        if (params.SelectedTables) {
+            this.SelectedTables = new Array();
+            for (let z in params.SelectedTables) {
+                let obj = new SelectedTableInfoNew();
+                obj.deserialize(params.SelectedTables[z]);
+                this.SelectedTables.push(obj);
             }
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -537,24 +530,48 @@ class ModifyClusterPasswordResponse extends  AbstractModel {
 }
 
 /**
- * DeleteCluster返回参数结构体
+ * CreateCluster请求参数结构体
  * @class
  */
-class DeleteClusterResponse extends  AbstractModel {
+class CreateClusterRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 删除集群生成的任务ID
+         * 集群数据描述语言类型，如：`PROTO`，`TDR`或`MIX`
          * @type {string || null}
          */
-        this.TaskId = null;
+        this.IdlType = null;
 
         /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * 集群名称，可使用中文或英文字符，最大长度32个字符
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.ClusterName = null;
+
+        /**
+         * 集群所绑定的私有网络实例ID，形如：vpc-f49l6u0z
+         * @type {string || null}
+         */
+        this.VpcId = null;
+
+        /**
+         * 集群所绑定的子网实例ID，形如：subnet-pxir56ns
+         * @type {string || null}
+         */
+        this.SubnetId = null;
+
+        /**
+         * 集群访问密码，必须是a-zA-Z0-9的字符,且必须包含数字和大小写字母
+         * @type {string || null}
+         */
+        this.Password = null;
+
+        /**
+         * 集群标签列表
+         * @type {Array.<TagInfoUnit> || null}
+         */
+        this.ResourceTags = null;
 
     }
 
@@ -565,8 +582,20 @@ class DeleteClusterResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TaskId = 'TaskId' in params ? params.TaskId : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.IdlType = 'IdlType' in params ? params.IdlType : null;
+        this.ClusterName = 'ClusterName' in params ? params.ClusterName : null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
+        this.Password = 'Password' in params ? params.Password : null;
+
+        if (params.ResourceTags) {
+            this.ResourceTags = new Array();
+            for (let z in params.ResourceTags) {
+                let obj = new TagInfoUnit();
+                obj.deserialize(params.ResourceTags[z]);
+                this.ResourceTags.push(obj);
+            }
+        }
 
     }
 }
@@ -963,6 +992,12 @@ class CreateTablesRequest extends  AbstractModel {
          */
         this.SelectedTables = null;
 
+        /**
+         * 表格标签列表
+         * @type {Array.<TagInfoUnit> || null}
+         */
+        this.ResourceTags = null;
+
     }
 
     /**
@@ -992,101 +1027,31 @@ class CreateTablesRequest extends  AbstractModel {
             }
         }
 
+        if (params.ResourceTags) {
+            this.ResourceTags = new Array();
+            for (let z in params.ResourceTags) {
+                let obj = new TagInfoUnit();
+                obj.deserialize(params.ResourceTags[z]);
+                this.ResourceTags.push(obj);
+            }
+        }
+
     }
 }
 
 /**
- * 集群详细信息
+ * DescribeClusterTags请求参数结构体
  * @class
  */
-class ClusterInfo extends  AbstractModel {
+class DescribeClusterTagsRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 集群名称
-         * @type {string || null}
+         * 集群ID列表
+         * @type {Array.<string> || null}
          */
-        this.ClusterName = null;
-
-        /**
-         * 集群ID
-         * @type {string || null}
-         */
-        this.ClusterId = null;
-
-        /**
-         * 集群所在地域
-         * @type {string || null}
-         */
-        this.Region = null;
-
-        /**
-         * 集群数据描述语言类型，如：`PROTO`,`TDR`或`MIX`
-         * @type {string || null}
-         */
-        this.IdlType = null;
-
-        /**
-         * 网络类型
-         * @type {string || null}
-         */
-        this.NetworkType = null;
-
-        /**
-         * 集群关联的用户私有网络实例ID
-         * @type {string || null}
-         */
-        this.VpcId = null;
-
-        /**
-         * 集群关联的用户子网实例ID
-         * @type {string || null}
-         */
-        this.SubnetId = null;
-
-        /**
-         * 创建时间
-         * @type {string || null}
-         */
-        this.CreatedTime = null;
-
-        /**
-         * 集群密码
-         * @type {string || null}
-         */
-        this.Password = null;
-
-        /**
-         * 密码状态
-         * @type {string || null}
-         */
-        this.PasswordStatus = null;
-
-        /**
-         * TcaplusDB SDK连接参数，接入ID
-         * @type {string || null}
-         */
-        this.ApiAccessId = null;
-
-        /**
-         * TcaplusDB SDK连接参数，接入地址
-         * @type {string || null}
-         */
-        this.ApiAccessIp = null;
-
-        /**
-         * TcaplusDB SDK连接参数，接入端口
-         * @type {number || null}
-         */
-        this.ApiAccessPort = null;
-
-        /**
-         * 如果PasswordStatus是unmodifiable说明有旧密码还未过期，此字段将显示旧密码过期的时间，否则为空
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.OldPasswordExpireTime = null;
+        this.ClusterIds = null;
 
     }
 
@@ -1097,20 +1062,57 @@ class ClusterInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ClusterName = 'ClusterName' in params ? params.ClusterName : null;
-        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
-        this.Region = 'Region' in params ? params.Region : null;
-        this.IdlType = 'IdlType' in params ? params.IdlType : null;
-        this.NetworkType = 'NetworkType' in params ? params.NetworkType : null;
-        this.VpcId = 'VpcId' in params ? params.VpcId : null;
-        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
-        this.CreatedTime = 'CreatedTime' in params ? params.CreatedTime : null;
-        this.Password = 'Password' in params ? params.Password : null;
-        this.PasswordStatus = 'PasswordStatus' in params ? params.PasswordStatus : null;
-        this.ApiAccessId = 'ApiAccessId' in params ? params.ApiAccessId : null;
-        this.ApiAccessIp = 'ApiAccessIp' in params ? params.ApiAccessIp : null;
-        this.ApiAccessPort = 'ApiAccessPort' in params ? params.ApiAccessPort : null;
-        this.OldPasswordExpireTime = 'OldPasswordExpireTime' in params ? params.OldPasswordExpireTime : null;
+        this.ClusterIds = 'ClusterIds' in params ? params.ClusterIds : null;
+
+    }
+}
+
+/**
+ * RecoverRecycleTables返回参数结构体
+ * @class
+ */
+class RecoverRecycleTablesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 恢复表结果数量
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 恢复表信息列表
+         * @type {Array.<TableResultNew> || null}
+         */
+        this.TableResults = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.TableResults) {
+            this.TableResults = new Array();
+            for (let z in params.TableResults) {
+                let obj = new TableResultNew();
+                obj.deserialize(params.TableResults[z]);
+                this.TableResults.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1578,72 +1580,25 @@ class TableInfoNew extends  AbstractModel {
 }
 
 /**
- * 任务信息详情
+ * 标签信息单元
  * @class
  */
-class TaskInfoNew extends  AbstractModel {
+class TagInfoUnit extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 任务ID
+         * 标签键
          * @type {string || null}
          */
-        this.TaskId = null;
+        this.TagKey = null;
 
         /**
-         * 任务类型
+         * 标签值
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
-        this.TaskType = null;
-
-        /**
-         * 任务所关联的TcaplusDB内部事务ID
-         * @type {string || null}
-         */
-        this.TransId = null;
-
-        /**
-         * 任务所属集群ID
-         * @type {string || null}
-         */
-        this.ClusterId = null;
-
-        /**
-         * 任务所属集群名称
-         * @type {string || null}
-         */
-        this.ClusterName = null;
-
-        /**
-         * 任务进度
-         * @type {number || null}
-         */
-        this.Progress = null;
-
-        /**
-         * 任务创建时间
-         * @type {string || null}
-         */
-        this.StartTime = null;
-
-        /**
-         * 任务最后更新时间
-         * @type {string || null}
-         */
-        this.UpdateTime = null;
-
-        /**
-         * 操作者
-         * @type {string || null}
-         */
-        this.Operator = null;
-
-        /**
-         * 任务详情
-         * @type {string || null}
-         */
-        this.Content = null;
+        this.TagValue = null;
 
     }
 
@@ -1654,16 +1609,58 @@ class TaskInfoNew extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TaskId = 'TaskId' in params ? params.TaskId : null;
-        this.TaskType = 'TaskType' in params ? params.TaskType : null;
-        this.TransId = 'TransId' in params ? params.TransId : null;
-        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
-        this.ClusterName = 'ClusterName' in params ? params.ClusterName : null;
-        this.Progress = 'Progress' in params ? params.Progress : null;
-        this.StartTime = 'StartTime' in params ? params.StartTime : null;
-        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
-        this.Operator = 'Operator' in params ? params.Operator : null;
-        this.Content = 'Content' in params ? params.Content : null;
+        this.TagKey = 'TagKey' in params ? params.TagKey : null;
+        this.TagValue = 'TagValue' in params ? params.TagValue : null;
+
+    }
+}
+
+/**
+ * ModifyTableTags返回参数结构体
+ * @class
+ */
+class ModifyTableTagsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 返回结果总数
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 返回结果
+         * @type {Array.<TableResultNew> || null}
+         */
+        this.TableResults = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.TableResults) {
+            this.TableResults = new Array();
+            for (let z in params.TableResults) {
+                let obj = new TableResultNew();
+                obj.deserialize(params.TableResults[z]);
+                this.TableResults.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2054,6 +2051,64 @@ class DeleteTableGroupResponse extends  AbstractModel {
 }
 
 /**
+ * ModifyClusterTags请求参数结构体
+ * @class
+ */
+class ModifyClusterTagsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 待修改标签的集群ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * 待增加或修改的标签列表
+         * @type {Array.<TagInfoUnit> || null}
+         */
+        this.ReplaceTags = null;
+
+        /**
+         * 待删除的标签
+         * @type {Array.<TagInfoUnit> || null}
+         */
+        this.DeleteTags = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+
+        if (params.ReplaceTags) {
+            this.ReplaceTags = new Array();
+            for (let z in params.ReplaceTags) {
+                let obj = new TagInfoUnit();
+                obj.deserialize(params.ReplaceTags[z]);
+                this.ReplaceTags.push(obj);
+            }
+        }
+
+        if (params.DeleteTags) {
+            this.DeleteTags = new Array();
+            for (let z in params.DeleteTags) {
+                let obj = new TagInfoUnit();
+                obj.deserialize(params.DeleteTags[z]);
+                this.DeleteTags.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * CreateBackup返回参数结构体
  * @class
  */
@@ -2203,30 +2258,26 @@ class TableRollbackResultNew extends  AbstractModel {
 }
 
 /**
- * VerifyIdlFiles返回参数结构体
+ * DescribeTableGroupTags返回参数结构体
  * @class
  */
-class VerifyIdlFilesResponse extends  AbstractModel {
+class DescribeTableGroupTagsResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 本次上传校验所有的IDL文件信息列表
-         * @type {Array.<IdlFileInfo> || null}
+         * 表格组标签信息列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<TagsInfoOfTableGroup> || null}
          */
-        this.IdlFiles = null;
+        this.Rows = null;
 
         /**
-         * 读取IDL描述文件后解析出的合法表数量，不包含已经创建的表
+         * 返回结果个数
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.TotalCount = null;
-
-        /**
-         * 读取IDL描述文件后解析出的合法表列表，不包含已经创建的表
-         * @type {Array.<ParsedTableInfoNew> || null}
-         */
-        this.TableInfos = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2244,24 +2295,15 @@ class VerifyIdlFilesResponse extends  AbstractModel {
             return;
         }
 
-        if (params.IdlFiles) {
-            this.IdlFiles = new Array();
-            for (let z in params.IdlFiles) {
-                let obj = new IdlFileInfo();
-                obj.deserialize(params.IdlFiles[z]);
-                this.IdlFiles.push(obj);
+        if (params.Rows) {
+            this.Rows = new Array();
+            for (let z in params.Rows) {
+                let obj = new TagsInfoOfTableGroup();
+                obj.deserialize(params.Rows[z]);
+                this.Rows.push(obj);
             }
         }
         this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
-
-        if (params.TableInfos) {
-            this.TableInfos = new Array();
-            for (let z in params.TableInfos) {
-                let obj = new ParsedTableInfoNew();
-                obj.deserialize(params.TableInfos[z]);
-                this.TableInfos.push(obj);
-            }
-        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -2346,6 +2388,155 @@ class DescribeTablesResponse extends  AbstractModel {
 }
 
 /**
+ * 任务信息详情
+ * @class
+ */
+class TaskInfoNew extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 任务ID
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * 任务类型
+         * @type {string || null}
+         */
+        this.TaskType = null;
+
+        /**
+         * 任务所关联的TcaplusDB内部事务ID
+         * @type {string || null}
+         */
+        this.TransId = null;
+
+        /**
+         * 任务所属集群ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * 任务所属集群名称
+         * @type {string || null}
+         */
+        this.ClusterName = null;
+
+        /**
+         * 任务进度
+         * @type {number || null}
+         */
+        this.Progress = null;
+
+        /**
+         * 任务创建时间
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * 任务最后更新时间
+         * @type {string || null}
+         */
+        this.UpdateTime = null;
+
+        /**
+         * 操作者
+         * @type {string || null}
+         */
+        this.Operator = null;
+
+        /**
+         * 任务详情
+         * @type {string || null}
+         */
+        this.Content = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.TaskType = 'TaskType' in params ? params.TaskType : null;
+        this.TransId = 'TransId' in params ? params.TransId : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.ClusterName = 'ClusterName' in params ? params.ClusterName : null;
+        this.Progress = 'Progress' in params ? params.Progress : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.Operator = 'Operator' in params ? params.Operator : null;
+        this.Content = 'Content' in params ? params.Content : null;
+
+    }
+}
+
+/**
+ * 集群的标签信息
+ * @class
+ */
+class TagsInfoOfCluster extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 集群ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * 标签信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<TagInfoUnit> || null}
+         */
+        this.Tags = null;
+
+        /**
+         * 错误信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {ErrorInfo || null}
+         */
+        this.Error = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new TagInfoUnit();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
+
+        if (params.Error) {
+            let obj = new ErrorInfo();
+            obj.deserialize(params.Error)
+            this.Error = obj;
+        }
+
+    }
+}
+
+/**
  * ModifyClusterName返回参数结构体
  * @class
  */
@@ -2412,6 +2603,56 @@ class RecoverRecycleTablesRequest extends  AbstractModel {
                 this.SelectedTables.push(obj);
             }
         }
+
+    }
+}
+
+/**
+ * DescribeTableTags返回参数结构体
+ * @class
+ */
+class DescribeTableTagsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 返回结果总数
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 表格标签信息列表
+         * @type {Array.<TagsInfoOfTable> || null}
+         */
+        this.Rows = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.Rows) {
+            this.Rows = new Array();
+            for (let z in params.Rows) {
+                let obj = new TagsInfoOfTable();
+                obj.deserialize(params.Rows[z]);
+                this.Rows.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2658,6 +2899,79 @@ class DescribeRegionsResponse extends  AbstractModel {
 }
 
 /**
+ * ModifyTableTags请求参数结构体
+ * @class
+ */
+class ModifyTableTagsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 待修改标签表格所属集群ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * 待修改标签表格列表
+         * @type {Array.<SelectedTableInfoNew> || null}
+         */
+        this.SelectedTables = null;
+
+        /**
+         * 待增加或修改的标签列表
+         * @type {Array.<TagInfoUnit> || null}
+         */
+        this.ReplaceTags = null;
+
+        /**
+         * 待删除的标签列表
+         * @type {Array.<TagInfoUnit> || null}
+         */
+        this.DeleteTags = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+
+        if (params.SelectedTables) {
+            this.SelectedTables = new Array();
+            for (let z in params.SelectedTables) {
+                let obj = new SelectedTableInfoNew();
+                obj.deserialize(params.SelectedTables[z]);
+                this.SelectedTables.push(obj);
+            }
+        }
+
+        if (params.ReplaceTags) {
+            this.ReplaceTags = new Array();
+            for (let z in params.ReplaceTags) {
+                let obj = new TagInfoUnit();
+                obj.deserialize(params.ReplaceTags[z]);
+                this.ReplaceTags.push(obj);
+            }
+        }
+
+        if (params.DeleteTags) {
+            this.DeleteTags = new Array();
+            for (let z in params.DeleteTags) {
+                let obj = new TagInfoUnit();
+                obj.deserialize(params.DeleteTags[z]);
+                this.DeleteTags.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * DescribeTableGroups请求参数结构体
  * @class
  */
@@ -2717,6 +3031,42 @@ class DescribeTableGroupsRequest extends  AbstractModel {
         }
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
+
+    }
+}
+
+/**
+ * ModifyTableGroupTags返回参数结构体
+ * @class
+ */
+class ModifyTableGroupTagsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 任务ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3044,42 +3394,97 @@ class ModifyClusterPasswordRequest extends  AbstractModel {
 }
 
 /**
- * CreateCluster请求参数结构体
+ * 集群详细信息
  * @class
  */
-class CreateClusterRequest extends  AbstractModel {
+class ClusterInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 集群数据描述语言类型，如：`PROTO`，`TDR`或`MIX`
-         * @type {string || null}
-         */
-        this.IdlType = null;
-
-        /**
-         * 集群名称，可使用中文或英文字符，最大长度32个字符
+         * 集群名称
          * @type {string || null}
          */
         this.ClusterName = null;
 
         /**
-         * 集群所绑定的私有网络实例ID，形如：vpc-f49l6u0z
+         * 集群ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * 集群所在地域
+         * @type {string || null}
+         */
+        this.Region = null;
+
+        /**
+         * 集群数据描述语言类型，如：`PROTO`,`TDR`或`MIX`
+         * @type {string || null}
+         */
+        this.IdlType = null;
+
+        /**
+         * 网络类型
+         * @type {string || null}
+         */
+        this.NetworkType = null;
+
+        /**
+         * 集群关联的用户私有网络实例ID
          * @type {string || null}
          */
         this.VpcId = null;
 
         /**
-         * 集群所绑定的子网实例ID，形如：subnet-pxir56ns
+         * 集群关联的用户子网实例ID
          * @type {string || null}
          */
         this.SubnetId = null;
 
         /**
-         * 集群访问密码，必须是a-zA-Z0-9的字符,且必须包含数字和大小写字母
+         * 创建时间
+         * @type {string || null}
+         */
+        this.CreatedTime = null;
+
+        /**
+         * 集群密码
          * @type {string || null}
          */
         this.Password = null;
+
+        /**
+         * 密码状态
+         * @type {string || null}
+         */
+        this.PasswordStatus = null;
+
+        /**
+         * TcaplusDB SDK连接参数，接入ID
+         * @type {string || null}
+         */
+        this.ApiAccessId = null;
+
+        /**
+         * TcaplusDB SDK连接参数，接入地址
+         * @type {string || null}
+         */
+        this.ApiAccessIp = null;
+
+        /**
+         * TcaplusDB SDK连接参数，接入端口
+         * @type {number || null}
+         */
+        this.ApiAccessPort = null;
+
+        /**
+         * 如果PasswordStatus是unmodifiable说明有旧密码还未过期，此字段将显示旧密码过期的时间，否则为空
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.OldPasswordExpireTime = null;
 
     }
 
@@ -3090,11 +3495,85 @@ class CreateClusterRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.IdlType = 'IdlType' in params ? params.IdlType : null;
         this.ClusterName = 'ClusterName' in params ? params.ClusterName : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.Region = 'Region' in params ? params.Region : null;
+        this.IdlType = 'IdlType' in params ? params.IdlType : null;
+        this.NetworkType = 'NetworkType' in params ? params.NetworkType : null;
         this.VpcId = 'VpcId' in params ? params.VpcId : null;
         this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
+        this.CreatedTime = 'CreatedTime' in params ? params.CreatedTime : null;
         this.Password = 'Password' in params ? params.Password : null;
+        this.PasswordStatus = 'PasswordStatus' in params ? params.PasswordStatus : null;
+        this.ApiAccessId = 'ApiAccessId' in params ? params.ApiAccessId : null;
+        this.ApiAccessIp = 'ApiAccessIp' in params ? params.ApiAccessIp : null;
+        this.ApiAccessPort = 'ApiAccessPort' in params ? params.ApiAccessPort : null;
+        this.OldPasswordExpireTime = 'OldPasswordExpireTime' in params ? params.OldPasswordExpireTime : null;
+
+    }
+}
+
+/**
+ * ModifyTableGroupTags请求参数结构体
+ * @class
+ */
+class ModifyTableGroupTagsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 待修改标签表格组所属集群ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * 待修改标签表格组ID
+         * @type {string || null}
+         */
+        this.TableGroupId = null;
+
+        /**
+         * 待增加或修改的标签列表
+         * @type {Array.<TagInfoUnit> || null}
+         */
+        this.ReplaceTags = null;
+
+        /**
+         * 待删除的标签
+         * @type {Array.<TagInfoUnit> || null}
+         */
+        this.DeleteTags = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.TableGroupId = 'TableGroupId' in params ? params.TableGroupId : null;
+
+        if (params.ReplaceTags) {
+            this.ReplaceTags = new Array();
+            for (let z in params.ReplaceTags) {
+                let obj = new TagInfoUnit();
+                obj.deserialize(params.ReplaceTags[z]);
+                this.ReplaceTags.push(obj);
+            }
+        }
+
+        if (params.DeleteTags) {
+            this.DeleteTags = new Array();
+            for (let z in params.DeleteTags) {
+                let obj = new TagInfoUnit();
+                obj.deserialize(params.DeleteTags[z]);
+                this.DeleteTags.push(obj);
+            }
+        }
 
     }
 }
@@ -3386,6 +3865,41 @@ class DeleteTableGroupRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeTableGroupTags请求参数结构体
+ * @class
+ */
+class DescribeTableGroupTagsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 待查询标签表格组所属集群ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * 待查询标签表格组ID列表
+         * @type {Array.<string> || null}
+         */
+        this.TableGroupIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.TableGroupIds = 'TableGroupIds' in params ? params.TableGroupIds : null;
+
+    }
+}
+
+/**
  * CreateTables返回参数结构体
  * @class
  */
@@ -3431,6 +3945,72 @@ class CreateTablesResponse extends  AbstractModel {
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 表格组标签信息
+ * @class
+ */
+class TagsInfoOfTableGroup extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 集群ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * 表格组ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.TableGroupId = null;
+
+        /**
+         * 标签信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<TagInfoUnit> || null}
+         */
+        this.Tags = null;
+
+        /**
+         * 错误信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {ErrorInfo || null}
+         */
+        this.Error = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.TableGroupId = 'TableGroupId' in params ? params.TableGroupId : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new TagInfoUnit();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
+
+        if (params.Error) {
+            let obj = new ErrorInfo();
+            obj.deserialize(params.Error)
+            this.Error = obj;
+        }
 
     }
 }
@@ -3600,6 +4180,62 @@ class DescribeRegionsRequest extends  AbstractModel {
 }
 
 /**
+ * 表格组详细信息
+ * @class
+ */
+class TableGroupInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 表格组ID
+         * @type {string || null}
+         */
+        this.TableGroupId = null;
+
+        /**
+         * 表格组名称
+         * @type {string || null}
+         */
+        this.TableGroupName = null;
+
+        /**
+         * 表格组创建时间
+         * @type {string || null}
+         */
+        this.CreatedTime = null;
+
+        /**
+         * 表格组包含的表格数量
+         * @type {number || null}
+         */
+        this.TableCount = null;
+
+        /**
+         * 表格组包含的表格存储总量（MB）
+         * @type {number || null}
+         */
+        this.TotalSize = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TableGroupId = 'TableGroupId' in params ? params.TableGroupId : null;
+        this.TableGroupName = 'TableGroupName' in params ? params.TableGroupName : null;
+        this.CreatedTime = 'CreatedTime' in params ? params.CreatedTime : null;
+        this.TableCount = 'TableCount' in params ? params.TableCount : null;
+        this.TotalSize = 'TotalSize' in params ? params.TotalSize : null;
+
+    }
+}
+
+/**
  * DescribeClusters返回参数结构体
  * @class
  */
@@ -3644,6 +4280,107 @@ class DescribeClustersResponse extends  AbstractModel {
                 this.Clusters.push(obj);
             }
         }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * VerifyIdlFiles返回参数结构体
+ * @class
+ */
+class VerifyIdlFilesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 本次上传校验所有的IDL文件信息列表
+         * @type {Array.<IdlFileInfo> || null}
+         */
+        this.IdlFiles = null;
+
+        /**
+         * 读取IDL描述文件后解析出的合法表数量，不包含已经创建的表
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 读取IDL描述文件后解析出的合法表列表，不包含已经创建的表
+         * @type {Array.<ParsedTableInfoNew> || null}
+         */
+        this.TableInfos = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.IdlFiles) {
+            this.IdlFiles = new Array();
+            for (let z in params.IdlFiles) {
+                let obj = new IdlFileInfo();
+                obj.deserialize(params.IdlFiles[z]);
+                this.IdlFiles.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.TableInfos) {
+            this.TableInfos = new Array();
+            for (let z in params.TableInfos) {
+                let obj = new ParsedTableInfoNew();
+                obj.deserialize(params.TableInfos[z]);
+                this.TableInfos.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifyClusterTags返回参数结构体
+ * @class
+ */
+class ModifyClusterTagsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 任务ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -3700,6 +4437,58 @@ class DeleteIdlFilesResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeClusterTags返回参数结构体
+ * @class
+ */
+class DescribeClusterTagsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 集群标签信息列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<TagsInfoOfCluster> || null}
+         */
+        this.Rows = null;
+
+        /**
+         * 返回结果个数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Rows) {
+            this.Rows = new Array();
+            for (let z in params.Rows) {
+                let obj = new TagsInfoOfCluster();
+                obj.deserialize(params.Rows[z]);
+                this.Rows.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * CreateTableGroup请求参数结构体
  * @class
  */
@@ -3725,6 +4514,12 @@ class CreateTableGroupRequest extends  AbstractModel {
          */
         this.TableGroupId = null;
 
+        /**
+         * 表格组标签列表
+         * @type {Array.<TagInfoUnit> || null}
+         */
+        this.ResourceTags = null;
+
     }
 
     /**
@@ -3737,6 +4532,15 @@ class CreateTableGroupRequest extends  AbstractModel {
         this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
         this.TableGroupName = 'TableGroupName' in params ? params.TableGroupName : null;
         this.TableGroupId = 'TableGroupId' in params ? params.TableGroupId : null;
+
+        if (params.ResourceTags) {
+            this.ResourceTags = new Array();
+            for (let z in params.ResourceTags) {
+                let obj = new TagInfoUnit();
+                obj.deserialize(params.ResourceTags[z]);
+                this.ResourceTags.push(obj);
+            }
+        }
 
     }
 }
@@ -3785,42 +4589,47 @@ class ModifyTableMemosRequest extends  AbstractModel {
 }
 
 /**
- * 表格组详细信息
+ * 表格标签信息
  * @class
  */
-class TableGroupInfo extends  AbstractModel {
+class TagsInfoOfTable extends  AbstractModel {
     constructor(){
         super();
 
         /**
+         * 表格实例ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.TableInstanceId = null;
+
+        /**
+         * 表格名称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.TableName = null;
+
+        /**
          * 表格组ID
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.TableGroupId = null;
 
         /**
-         * 表格组名称
-         * @type {string || null}
+         * 标签信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<TagInfoUnit> || null}
          */
-        this.TableGroupName = null;
+        this.Tags = null;
 
         /**
-         * 表格组创建时间
-         * @type {string || null}
+         * 错误信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {ErrorInfo || null}
          */
-        this.CreatedTime = null;
-
-        /**
-         * 表格组包含的表格数量
-         * @type {number || null}
-         */
-        this.TableCount = null;
-
-        /**
-         * 表格组包含的表格存储总量（MB）
-         * @type {number || null}
-         */
-        this.TotalSize = null;
+        this.Error = null;
 
     }
 
@@ -3831,11 +4640,59 @@ class TableGroupInfo extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.TableInstanceId = 'TableInstanceId' in params ? params.TableInstanceId : null;
+        this.TableName = 'TableName' in params ? params.TableName : null;
         this.TableGroupId = 'TableGroupId' in params ? params.TableGroupId : null;
-        this.TableGroupName = 'TableGroupName' in params ? params.TableGroupName : null;
-        this.CreatedTime = 'CreatedTime' in params ? params.CreatedTime : null;
-        this.TableCount = 'TableCount' in params ? params.TableCount : null;
-        this.TotalSize = 'TotalSize' in params ? params.TotalSize : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new TagInfoUnit();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
+
+        if (params.Error) {
+            let obj = new ErrorInfo();
+            obj.deserialize(params.Error)
+            this.Error = obj;
+        }
+
+    }
+}
+
+/**
+ * DeleteCluster返回参数结构体
+ * @class
+ */
+class DeleteClusterResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 删除集群生成的任务ID
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3850,9 +4707,9 @@ module.exports = {
     DescribeIdlFileInfosResponse: DescribeIdlFileInfosResponse,
     CreateBackupRequest: CreateBackupRequest,
     ModifyTableGroupNameResponse: ModifyTableGroupNameResponse,
-    RecoverRecycleTablesResponse: RecoverRecycleTablesResponse,
+    DescribeTableTagsRequest: DescribeTableTagsRequest,
     ModifyClusterPasswordResponse: ModifyClusterPasswordResponse,
-    DeleteClusterResponse: DeleteClusterResponse,
+    CreateClusterRequest: CreateClusterRequest,
     VerifyIdlFilesRequest: VerifyIdlFilesRequest,
     ModifyClusterNameRequest: ModifyClusterNameRequest,
     ClearTablesResponse: ClearTablesResponse,
@@ -3861,11 +4718,13 @@ module.exports = {
     CreateClusterResponse: CreateClusterResponse,
     ErrorInfo: ErrorInfo,
     CreateTablesRequest: CreateTablesRequest,
-    ClusterInfo: ClusterInfo,
+    DescribeClusterTagsRequest: DescribeClusterTagsRequest,
+    RecoverRecycleTablesResponse: RecoverRecycleTablesResponse,
     ParsedTableInfoNew: ParsedTableInfoNew,
     RegionInfo: RegionInfo,
     TableInfoNew: TableInfoNew,
-    TaskInfoNew: TaskInfoNew,
+    TagInfoUnit: TagInfoUnit,
+    ModifyTableTagsResponse: ModifyTableTagsResponse,
     RollbackTablesResponse: RollbackTablesResponse,
     DescribeTablesInRecycleResponse: DescribeTablesInRecycleResponse,
     DescribeTableGroupsResponse: DescribeTableGroupsResponse,
@@ -3874,39 +4733,53 @@ module.exports = {
     RollbackTablesRequest: RollbackTablesRequest,
     DeleteIdlFilesRequest: DeleteIdlFilesRequest,
     DeleteTableGroupResponse: DeleteTableGroupResponse,
+    ModifyClusterTagsRequest: ModifyClusterTagsRequest,
     CreateBackupResponse: CreateBackupResponse,
     TableRollbackResultNew: TableRollbackResultNew,
-    VerifyIdlFilesResponse: VerifyIdlFilesResponse,
+    DescribeTableGroupTagsResponse: DescribeTableGroupTagsResponse,
     DeleteClusterRequest: DeleteClusterRequest,
     DescribeTablesResponse: DescribeTablesResponse,
+    TaskInfoNew: TaskInfoNew,
+    TagsInfoOfCluster: TagsInfoOfCluster,
     ModifyClusterNameResponse: ModifyClusterNameResponse,
     RecoverRecycleTablesRequest: RecoverRecycleTablesRequest,
+    DescribeTableTagsResponse: DescribeTableTagsResponse,
     DescribeTasksResponse: DescribeTasksResponse,
     DeleteTablesRequest: DeleteTablesRequest,
     DescribeUinInWhitelistRequest: DescribeUinInWhitelistRequest,
     CreateTableGroupResponse: CreateTableGroupResponse,
     ModifyTableGroupNameRequest: ModifyTableGroupNameRequest,
     DescribeRegionsResponse: DescribeRegionsResponse,
+    ModifyTableTagsRequest: ModifyTableTagsRequest,
     DescribeTableGroupsRequest: DescribeTableGroupsRequest,
+    ModifyTableGroupTagsResponse: ModifyTableGroupTagsResponse,
     CompareIdlFilesRequest: CompareIdlFilesRequest,
     SelectedTableInfoNew: SelectedTableInfoNew,
     IdlFileInfoWithoutContent: IdlFileInfoWithoutContent,
     ModifyClusterPasswordRequest: ModifyClusterPasswordRequest,
-    CreateClusterRequest: CreateClusterRequest,
+    ClusterInfo: ClusterInfo,
+    ModifyTableGroupTagsRequest: ModifyTableGroupTagsRequest,
     Filter: Filter,
     DeleteTablesResponse: DeleteTablesResponse,
     ModifyTableQuotasRequest: ModifyTableQuotasRequest,
     CompareIdlFilesResponse: CompareIdlFilesResponse,
     ModifyTablesRequest: ModifyTablesRequest,
     DeleteTableGroupRequest: DeleteTableGroupRequest,
+    DescribeTableGroupTagsRequest: DescribeTableGroupTagsRequest,
     CreateTablesResponse: CreateTablesResponse,
+    TagsInfoOfTableGroup: TagsInfoOfTableGroup,
     DescribeTablesInRecycleRequest: DescribeTablesInRecycleRequest,
     DescribeTablesRequest: DescribeTablesRequest,
     DescribeRegionsRequest: DescribeRegionsRequest,
+    TableGroupInfo: TableGroupInfo,
     DescribeClustersResponse: DescribeClustersResponse,
+    VerifyIdlFilesResponse: VerifyIdlFilesResponse,
+    ModifyClusterTagsResponse: ModifyClusterTagsResponse,
     DeleteIdlFilesResponse: DeleteIdlFilesResponse,
+    DescribeClusterTagsResponse: DescribeClusterTagsResponse,
     CreateTableGroupRequest: CreateTableGroupRequest,
     ModifyTableMemosRequest: ModifyTableMemosRequest,
-    TableGroupInfo: TableGroupInfo,
+    TagsInfoOfTable: TagsInfoOfTable,
+    DeleteClusterResponse: DeleteClusterResponse,
 
 }
