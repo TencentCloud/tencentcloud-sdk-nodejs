@@ -6160,6 +6160,30 @@ class InstanceTypeQuotaItem extends  AbstractModel {
          */
         this.SoldOutReason = null;
 
+        /**
+         * 内网带宽，单位Gbps。
+         * @type {number || null}
+         */
+        this.InstanceBandwidth = null;
+
+        /**
+         * 网络收发包能力，单位万PPS。
+         * @type {number || null}
+         */
+        this.InstancePps = null;
+
+        /**
+         * 本地存储块数量。
+         * @type {number || null}
+         */
+        this.StorageBlockAmount = null;
+
+        /**
+         * 处理器型号。
+         * @type {string || null}
+         */
+        this.CpuType = null;
+
     }
 
     /**
@@ -6200,6 +6224,10 @@ class InstanceTypeQuotaItem extends  AbstractModel {
             this.Price = obj;
         }
         this.SoldOutReason = 'SoldOutReason' in params ? params.SoldOutReason : null;
+        this.InstanceBandwidth = 'InstanceBandwidth' in params ? params.InstanceBandwidth : null;
+        this.InstancePps = 'InstancePps' in params ? params.InstancePps : null;
+        this.StorageBlockAmount = 'StorageBlockAmount' in params ? params.StorageBlockAmount : null;
+        this.CpuType = 'CpuType' in params ? params.CpuType : null;
 
     }
 }

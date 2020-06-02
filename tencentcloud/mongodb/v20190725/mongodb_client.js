@@ -34,6 +34,7 @@ const DescribeDBInstancesRequest = models.DescribeDBInstancesRequest;
 const SpecificationInfo = models.SpecificationInfo;
 const DescribeSlowLogsRequest = models.DescribeSlowLogsRequest;
 const DescribeSlowLogPatternsRequest = models.DescribeSlowLogPatternsRequest;
+const FlushInstanceRouterConfigResponse = models.FlushInstanceRouterConfigResponse;
 const InquirePriceModifyDBInstanceSpecResponse = models.InquirePriceModifyDBInstanceSpecResponse;
 const SpecItem = models.SpecItem;
 const DescribeSpecInfoResponse = models.DescribeSpecInfoResponse;
@@ -57,6 +58,7 @@ const RenameInstanceRequest = models.RenameInstanceRequest;
 const RenewDBInstancesResponse = models.RenewDBInstancesResponse;
 const RenameInstanceResponse = models.RenameInstanceResponse;
 const DescribeClientConnectionsResponse = models.DescribeClientConnectionsResponse;
+const FlushInstanceRouterConfigRequest = models.FlushInstanceRouterConfigRequest;
 const DBInstanceInfo = models.DBInstanceInfo;
 const BackupFile = models.BackupFile;
 const DescribeDBBackupsResponse = models.DescribeDBBackupsResponse;
@@ -209,6 +211,17 @@ class MongodbClient extends AbstractClient {
     RenameInstance(req, cb) {
         let resp = new RenameInstanceResponse();
         this.request("RenameInstance", req, resp, cb);
+    }
+
+    /**
+     * 在所有mongos上执行FlushRouterConfig命令
+     * @param {FlushInstanceRouterConfigRequest} req
+     * @param {function(string, FlushInstanceRouterConfigResponse):void} cb
+     * @public
+     */
+    FlushInstanceRouterConfig(req, cb) {
+        let resp = new FlushInstanceRouterConfigResponse();
+        this.request("FlushInstanceRouterConfig", req, resp, cb);
     }
 
     /**

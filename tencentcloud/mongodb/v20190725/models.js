@@ -1111,6 +1111,34 @@ class DescribeSlowLogPatternsRequest extends  AbstractModel {
 }
 
 /**
+ * FlushInstanceRouterConfig返回参数结构体
+ * @class
+ */
+class FlushInstanceRouterConfigResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * InquirePriceModifyDBInstanceSpec返回参数结构体
  * @class
  */
@@ -2195,6 +2223,34 @@ class DescribeClientConnectionsResponse extends  AbstractModel {
 }
 
 /**
+ * FlushInstanceRouterConfig请求参数结构体
+ * @class
+ */
+class FlushInstanceRouterConfigRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+    }
+}
+
+/**
  * 实例信息
  * @class
  */
@@ -2876,6 +2932,7 @@ module.exports = {
     SpecificationInfo: SpecificationInfo,
     DescribeSlowLogsRequest: DescribeSlowLogsRequest,
     DescribeSlowLogPatternsRequest: DescribeSlowLogPatternsRequest,
+    FlushInstanceRouterConfigResponse: FlushInstanceRouterConfigResponse,
     InquirePriceModifyDBInstanceSpecResponse: InquirePriceModifyDBInstanceSpecResponse,
     SpecItem: SpecItem,
     DescribeSpecInfoResponse: DescribeSpecInfoResponse,
@@ -2899,6 +2956,7 @@ module.exports = {
     RenewDBInstancesResponse: RenewDBInstancesResponse,
     RenameInstanceResponse: RenameInstanceResponse,
     DescribeClientConnectionsResponse: DescribeClientConnectionsResponse,
+    FlushInstanceRouterConfigRequest: FlushInstanceRouterConfigRequest,
     DBInstanceInfo: DBInstanceInfo,
     BackupFile: BackupFile,
     DescribeDBBackupsResponse: DescribeDBBackupsResponse,
