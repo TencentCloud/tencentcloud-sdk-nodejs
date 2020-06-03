@@ -99,6 +99,7 @@ const DescribeKeysRequest = models.DescribeKeysRequest;
 const ReEncryptRequest = models.ReEncryptRequest;
 const GetPublicKeyRequest = models.GetPublicKeyRequest;
 const GetServiceStatusRequest = models.GetServiceStatusRequest;
+const Tag = models.Tag;
 const DisableKeyRotationRequest = models.DisableKeyRotationRequest;
 
 

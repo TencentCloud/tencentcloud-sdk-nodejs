@@ -25,84 +25,86 @@ class TopicSet extends  AbstractModel {
         super();
 
         /**
-         * TopicId
+         * 主题的 ID。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.TopicId = null;
 
         /**
-         * TopicName
+         * 主题名称。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.TopicName = null;
 
         /**
-         * MsgRetentionSeconds
+         * 消息在主题中最长存活时间，从发送到该主题开始经过此参数指定的时间后，不论消息是否被成功推送给用户都将被删除，单位为秒。固定为一天（86400秒），该属性不能修改。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.MsgRetentionSeconds = null;
 
         /**
-         * MaxMsgSize
+         * 消息最大长度。取值范围1024 - 1048576Byte（即1 - 1024K），默认值为65536。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.MaxMsgSize = null;
 
         /**
-         * Qps
+         * 每秒钟发布消息的条数。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.Qps = null;
 
         /**
-         * FilterType
+         * 描述用户创建订阅时选择的过滤策略：
+FilterType = 1表示用户使用 FilterTag 标签过滤;
+FilterType = 2表示用户使用 BindingKey 过滤。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.FilterType = null;
 
         /**
-         * CreateTime
+         * 主题的创建时间。返回 Unix 时间戳，精确到秒。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.CreateTime = null;
 
         /**
-         * LastModifyTime
+         * 最后一次修改主题属性的时间。返回 Unix 时间戳，精确到秒。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.LastModifyTime = null;
 
         /**
-         * MsgCount
+         * 当前该主题中消息数目（消息堆积数）。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.MsgCount = null;
 
         /**
-         * CreateUin
+         * 创建者 Uin，CAM 鉴权 resource 由该字段组合而成。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.CreateUin = null;
 
         /**
-         * Tags
+         * 关联的标签。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<Tag> || null}
          */
         this.Tags = null;
 
         /**
-         * 主题是否开启消息轨迹，true表示开启，false表示不开启
+         * 主题是否开启消息轨迹。true表示开启，false表示不开启
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {boolean || null}
          */
@@ -424,35 +426,35 @@ class DeadLetterPolicy extends  AbstractModel {
         super();
 
         /**
-         * DeadLetterQueueName
+         * 死信队列名字。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.DeadLetterQueueName = null;
 
         /**
-         * DeadLetterQueue
+         * 死信队列。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.DeadLetterQueue = null;
 
         /**
-         * Policy
+         * 死信队列策略。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.Policy = null;
 
         /**
-         * MaxTimeToLive
+         * 最大未消费过期时间。Policy为1时必选。范围300-43200，单位秒，需要小于消息最大保留时间MsgRetentionSeconds。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.MaxTimeToLive = null;
 
         /**
-         * MaxReceiveCount
+         * 最大接收次数。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
@@ -795,14 +797,14 @@ class TransactionPolicy extends  AbstractModel {
         super();
 
         /**
-         * FirstQueryInterval
+         * 第一次回查时间。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.FirstQueryInterval = null;
 
         /**
-         * MaxQueryCount
+         * 最大查询次数。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
@@ -844,19 +846,19 @@ class DescribeTopicDetailRequest extends  AbstractModel {
         this.Limit = null;
 
         /**
-         * 目前只支持过滤TopicName ， 且只能填一个过滤值
+         * 目前只支持过滤TopicName ， 且只能填一个过滤值。
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
 
         /**
-         * 标签匹配
+         * 标签匹配。
          * @type {string || null}
          */
         this.TagKey = null;
 
         /**
-         * 精确匹配TopicName
+         * 精确匹配TopicName。
          * @type {string || null}
          */
         this.TopicName = null;
@@ -924,13 +926,13 @@ class DescribeTopicDetailResponse extends  AbstractModel {
         super();
 
         /**
-         * TotalCount
+         * 主题列表总数。
          * @type {number || null}
          */
         this.TotalCount = null;
 
         /**
-         * TopicSet
+         * 主题详情列表。
          * @type {Array.<TopicSet> || null}
          */
         this.TopicSet = null;
@@ -974,13 +976,13 @@ class DescribeQueueDetailResponse extends  AbstractModel {
         super();
 
         /**
-         * queue总数量
+         * 总队列数。
          * @type {number || null}
          */
         this.TotalCount = null;
 
         /**
-         * queue列表
+         * 队列详情列表。
          * @type {Array.<QueueSet> || null}
          */
         this.QueueSet = null;
@@ -1362,173 +1364,173 @@ class QueueSet extends  AbstractModel {
         super();
 
         /**
-         * QueueId
+         * 消息队列ID。
          * @type {string || null}
          */
         this.QueueId = null;
 
         /**
-         * QueueName
+         * 消息队列名字。
          * @type {string || null}
          */
         this.QueueName = null;
 
         /**
-         * Qps
+         * 每秒钟生产消息条数的限制，消费消息的大小是该值的1.1倍。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.Qps = null;
 
         /**
-         * Bps
+         * 带宽限制。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.Bps = null;
 
         /**
-         * MaxDelaySeconds
+         * 飞行消息最大保留时间。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.MaxDelaySeconds = null;
 
         /**
-         * MaxMsgHeapNum
+         * 最大堆积消息数。取值范围在公测期间为 1,000,000 - 10,000,000，正式上线后范围可达到 1000,000-1000,000,000。默认取值在公测期间为 10,000,000，正式上线后为 100,000,000。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.MaxMsgHeapNum = null;
 
         /**
-         * PollingWaitSeconds
+         * 消息接收长轮询等待时间。取值范围0 - 30秒，默认值0。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.PollingWaitSeconds = null;
 
         /**
-         * MsgRetentionSeconds
+         * 消息保留周期。取值范围60-1296000秒（1min-15天），默认值345600秒（4 天）。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.MsgRetentionSeconds = null;
 
         /**
-         * VisibilityTimeout
+         * 消息可见性超时。取值范围1 - 43200秒（即12小时内），默认值30。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.VisibilityTimeout = null;
 
         /**
-         * MaxMsgSize
+         * 消息最大长度。取值范围1024 - 1048576 Byte（即1K - 1024K），默认值65536。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.MaxMsgSize = null;
 
         /**
-         * RewindSeconds
+         * 回溯队列的消息回溯时间最大值，取值范围0 - 43200秒，0表示不开启消息回溯。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.RewindSeconds = null;
 
         /**
-         * CreateTime
+         * 队列的创建时间。返回 Unix 时间戳，精确到秒。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.CreateTime = null;
 
         /**
-         * LastModifyTime
+         * 最后一次修改队列属性的时间。返回 Unix 时间戳，精确到秒。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.LastModifyTime = null;
 
         /**
-         * ActiveMsgNum
+         * 在队列中处于 Active 状态（不处于被消费状态）的消息总数，为近似值。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.ActiveMsgNum = null;
 
         /**
-         * InactiveMsgNum
+         * 在队列中处于 Inactive 状态（正处于被消费状态）的消息总数，为近似值。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.InactiveMsgNum = null;
 
         /**
-         * DelayMsgNum
+         * 延迟消息数。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.DelayMsgNum = null;
 
         /**
-         * RewindMsgNum
+         * 已调用 DelMsg 接口删除，但还在回溯保留时间内的消息数量。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.RewindMsgNum = null;
 
         /**
-         * MinMsgTime
+         * 消息最小未消费时间，单位为秒。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.MinMsgTime = null;
 
         /**
-         * Transaction
+         * 事务消息队列。true表示是事务消息，false表示不是事务消息。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {boolean || null}
          */
         this.Transaction = null;
 
         /**
-         * DeadLetterSource
+         * 死信队列。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<DeadLetterSource> || null}
          */
         this.DeadLetterSource = null;
 
         /**
-         * DeadLetterPolicy
+         * 死信队列策略。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {DeadLetterPolicy || null}
          */
         this.DeadLetterPolicy = null;
 
         /**
-         * TransactionPolicy
+         * 事务消息策略。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {TransactionPolicy || null}
          */
         this.TransactionPolicy = null;
 
         /**
-         * 创建者uin
+         * 创建者Uin。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.CreateUin = null;
 
         /**
-         * 标签
+         * 关联的标签。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<Tag> || null}
          */
         this.Tags = null;
 
         /**
-         * 消息轨迹表示，true表示开启，false表示不开启
+         * 消息轨迹。true表示开启，false表示不开启。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {boolean || null}
          */
@@ -1827,14 +1829,14 @@ class DeadLetterSource extends  AbstractModel {
         super();
 
         /**
-         * QueueId
+         * 消息队列ID。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.QueueId = null;
 
         /**
-         * QueueName
+         * 消息队列名字。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */

@@ -1150,7 +1150,7 @@ class LookUpEventsResponse extends  AbstractModel {
 }
 
 /**
- * cmq地域信息
+ * cos地域信息
  * @class
  */
 class CosRegionInfo extends  AbstractModel {

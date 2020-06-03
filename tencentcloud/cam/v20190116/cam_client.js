@@ -17,6 +17,7 @@
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const ListAttachedRolePoliciesResponse = models.ListAttachedRolePoliciesResponse;
+const ListAccessKeysRequest = models.ListAccessKeysRequest;
 const SetMfaFlagResponse = models.SetMfaFlagResponse;
 const DeleteUserRequest = models.DeleteUserRequest;
 const DetachGroupPolicyRequest = models.DetachGroupPolicyRequest;
@@ -84,6 +85,7 @@ const ListAttachedGroupPoliciesResponse = models.ListAttachedGroupPoliciesRespon
 const GetPolicyVersionRequest = models.GetPolicyVersionRequest;
 const DeletePolicyResponse = models.DeletePolicyResponse;
 const ConsumeCustomMFATokenRequest = models.ConsumeCustomMFATokenRequest;
+const AccessKey = models.AccessKey;
 const GetGroupResponse = models.GetGroupResponse;
 const DeleteSAMLProviderRequest = models.DeleteSAMLProviderRequest;
 const DeleteSAMLProviderResponse = models.DeleteSAMLProviderResponse;
@@ -131,6 +133,7 @@ const AddUserToGroupResponse = models.AddUserToGroupResponse;
 const AttachUserPolicyResponse = models.AttachUserPolicyResponse;
 const SetMfaFlagRequest = models.SetMfaFlagRequest;
 const ListCollaboratorsResponse = models.ListCollaboratorsResponse;
+const ListAccessKeysResponse = models.ListAccessKeysResponse;
 const ListAttachedUserPoliciesRequest = models.ListAttachedUserPoliciesRequest;
 const UpdatePolicyRequest = models.UpdatePolicyRequest;
 const GroupMemberInfo = models.GroupMemberInfo;
@@ -376,6 +379,17 @@ class CamClient extends AbstractClient {
     GetCustomMFATokenInfo(req, cb) {
         let resp = new GetCustomMFATokenInfoResponse();
         this.request("GetCustomMFATokenInfo", req, resp, cb);
+    }
+
+    /**
+     * 列出指定CAM用户的访问密钥
+     * @param {ListAccessKeysRequest} req
+     * @param {function(string, ListAccessKeysResponse):void} cb
+     * @public
+     */
+    ListAccessKeys(req, cb) {
+        let resp = new ListAccessKeysResponse();
+        this.request("ListAccessKeys", req, resp, cb);
     }
 
     /**
