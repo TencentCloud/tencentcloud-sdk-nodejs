@@ -537,7 +537,7 @@ class SpeechTranslateRequest extends  AbstractModel {
         this.Source = null;
 
         /**
-         * 翻译目标语⾔言类型 ，支持的语言列表<li> zh : 中文 </li> <li> en : 英文 </li>
+         * 翻译目标语言类型，支持的语言列表<li> zh : 中文 </li> <li> en : 英文 </li>
          * @type {string || null}
          */
         this.Target = null;

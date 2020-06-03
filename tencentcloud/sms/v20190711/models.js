@@ -415,6 +415,7 @@ class PullSmsSendStatusByPhoneNumberRequest extends  AbstractModel {
 
         /**
          * 拉取起始时间，UNIX 时间戳（时间：秒）。
+注：最大可拉取当前时期7天前的数据。
          * @type {number || null}
          */
         this.SendDateTime = null;
@@ -444,6 +445,12 @@ class PullSmsSendStatusByPhoneNumberRequest extends  AbstractModel {
          */
         this.SmsSdkAppid = null;
 
+        /**
+         * 拉取截止时间，UNIX 时间戳（时间：秒）。
+         * @type {number || null}
+         */
+        this.EndDateTime = null;
+
     }
 
     /**
@@ -458,6 +465,7 @@ class PullSmsSendStatusByPhoneNumberRequest extends  AbstractModel {
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.PhoneNumber = 'PhoneNumber' in params ? params.PhoneNumber : null;
         this.SmsSdkAppid = 'SmsSdkAppid' in params ? params.SmsSdkAppid : null;
+        this.EndDateTime = 'EndDateTime' in params ? params.EndDateTime : null;
 
     }
 }
@@ -924,6 +932,7 @@ class DescribeSignListStatus extends  AbstractModel {
         /**
          * 申请签名状态。其中：
 0：表示审核通过。
+1：表示审核中。
 -1：表示审核未通过或审核失败。
          * @type {number || null}
          */
@@ -1368,6 +1377,7 @@ class DescribeTemplateListStatus extends  AbstractModel {
         /**
          * 申请签名状态。其中：
 0：表示审核通过。
+1：表示审核中。
 -1：表示审核未通过或审核失败。
          * @type {number || null}
          */
@@ -2002,6 +2012,7 @@ class PullSmsReplyStatusByPhoneNumberRequest extends  AbstractModel {
 
         /**
          * 拉取起始时间，UNIX 时间戳（时间：秒）。
+注：最大可拉取当前时期7天前的数据。
          * @type {number || null}
          */
         this.SendDateTime = null;
@@ -2031,6 +2042,12 @@ class PullSmsReplyStatusByPhoneNumberRequest extends  AbstractModel {
          */
         this.SmsSdkAppid = null;
 
+        /**
+         * 拉取截止时间，UNIX 时间戳（时间：秒）。
+         * @type {number || null}
+         */
+        this.EndDateTime = null;
+
     }
 
     /**
@@ -2045,6 +2062,7 @@ class PullSmsReplyStatusByPhoneNumberRequest extends  AbstractModel {
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.PhoneNumber = 'PhoneNumber' in params ? params.PhoneNumber : null;
         this.SmsSdkAppid = 'SmsSdkAppid' in params ? params.SmsSdkAppid : null;
+        this.EndDateTime = 'EndDateTime' in params ? params.EndDateTime : null;
 
     }
 }

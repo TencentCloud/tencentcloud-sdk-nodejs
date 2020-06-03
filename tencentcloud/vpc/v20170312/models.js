@@ -6977,13 +6977,13 @@ class CheckAssistantCidrRequest extends  AbstractModel {
         this.VpcId = null;
 
         /**
-         * 待添加的负载CIDR。CIDR数组，格式如["10.0.0.0/16", "172.16.0.0/16"]
+         * 待添加的负载CIDR。CIDR数组，格式如["10.0.0.0/16", "172.16.0.0/16"]。入参NewCidrBlocks和OldCidrBlocks至少需要其一。
          * @type {Array.<string> || null}
          */
         this.NewCidrBlocks = null;
 
         /**
-         * 待删除的负载CIDR。CIDR数组，格式如["10.0.0.0/16", "172.16.0.0/16"]
+         * 待删除的负载CIDR。CIDR数组，格式如["10.0.0.0/16", "172.16.0.0/16"]。入参NewCidrBlocks和OldCidrBlocks至少需要其一。
          * @type {Array.<string> || null}
          */
         this.OldCidrBlocks = null;

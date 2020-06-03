@@ -67,6 +67,34 @@ class ListAttachedRolePoliciesResponse extends  AbstractModel {
 }
 
 /**
+ * ListAccessKeys请求参数结构体
+ * @class
+ */
+class ListAccessKeysRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 指定用户Uin，不填默认列出当前用户访问密钥
+         * @type {number || null}
+         */
+        this.TargetUin = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TargetUin = 'TargetUin' in params ? params.TargetUin : null;
+
+    }
+}
+
+/**
  * SetMfaFlag返回参数结构体
  * @class
  */
@@ -2954,6 +2982,48 @@ class ConsumeCustomMFATokenRequest extends  AbstractModel {
 }
 
 /**
+ * 访问密钥列表
+ * @class
+ */
+class AccessKey extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 访问密钥标识
+         * @type {string || null}
+         */
+        this.AccessKeyId = null;
+
+        /**
+         * 密钥状态，激活（Active）或未激活（Inactive）
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * 创建时间
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AccessKeyId = 'AccessKeyId' in params ? params.AccessKeyId : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+
+    }
+}
+
+/**
  * GetGroup返回参数结构体
  * @class
  */
@@ -4902,6 +4972,50 @@ class ListCollaboratorsResponse extends  AbstractModel {
 }
 
 /**
+ * ListAccessKeys返回参数结构体
+ * @class
+ */
+class ListAccessKeysResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 访问密钥列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<AccessKey> || null}
+         */
+        this.AccessKeys = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.AccessKeys) {
+            this.AccessKeys = new Array();
+            for (let z in params.AccessKeys) {
+                let obj = new AccessKey();
+                obj.deserialize(params.AccessKeys[z]);
+                this.AccessKeys.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * ListAttachedUserPolicies请求参数结构体
  * @class
  */
@@ -5134,6 +5248,7 @@ class CreateGroupResponse extends  AbstractModel {
 
 module.exports = {
     ListAttachedRolePoliciesResponse: ListAttachedRolePoliciesResponse,
+    ListAccessKeysRequest: ListAccessKeysRequest,
     SetMfaFlagResponse: SetMfaFlagResponse,
     DeleteUserRequest: DeleteUserRequest,
     DetachGroupPolicyRequest: DetachGroupPolicyRequest,
@@ -5201,6 +5316,7 @@ module.exports = {
     GetPolicyVersionRequest: GetPolicyVersionRequest,
     DeletePolicyResponse: DeletePolicyResponse,
     ConsumeCustomMFATokenRequest: ConsumeCustomMFATokenRequest,
+    AccessKey: AccessKey,
     GetGroupResponse: GetGroupResponse,
     DeleteSAMLProviderRequest: DeleteSAMLProviderRequest,
     DeleteSAMLProviderResponse: DeleteSAMLProviderResponse,
@@ -5248,6 +5364,7 @@ module.exports = {
     AttachUserPolicyResponse: AttachUserPolicyResponse,
     SetMfaFlagRequest: SetMfaFlagRequest,
     ListCollaboratorsResponse: ListCollaboratorsResponse,
+    ListAccessKeysResponse: ListAccessKeysResponse,
     ListAttachedUserPoliciesRequest: ListAttachedUserPoliciesRequest,
     UpdatePolicyRequest: UpdatePolicyRequest,
     GroupMemberInfo: GroupMemberInfo,

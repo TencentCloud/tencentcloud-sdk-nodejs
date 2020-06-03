@@ -160,7 +160,7 @@ class CmqClient extends AbstractClient {
     }
 
     /**
-     * 查询主题详情
+     * 查询主题详情 
      * @param {DescribeTopicDetailRequest} req
      * @param {function(string, DescribeTopicDetailResponse):void} cb
      * @public

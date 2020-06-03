@@ -1856,7 +1856,7 @@ class GetActionSequenceRequest extends  AbstractModel {
         super();
 
         /**
-         * 取值FourAction时 返回四种动作的动作序列
+         * 默认不需要使用
          * @type {string || null}
          */
         this.ActionType = null;
