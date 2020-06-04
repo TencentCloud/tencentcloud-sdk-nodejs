@@ -1443,14 +1443,14 @@ class TableInfoNew extends  AbstractModel {
         this.ReservedVolume = null;
 
         /**
-         * 表格预留读QPS
+         * 表格预留读CU
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.ReservedReadQps = null;
 
         /**
-         * 表格预留写QPS
+         * 表格预留写CU
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
@@ -3195,13 +3195,13 @@ class SelectedTableInfoNew extends  AbstractModel {
         this.ReservedVolume = null;
 
         /**
-         * 表格预留读QPS
+         * 表格预留读CU
          * @type {number || null}
          */
         this.ReservedReadQps = null;
 
         /**
-         * 表格预留写QPS
+         * 表格预留写CU
          * @type {number || null}
          */
         this.ReservedWriteQps = null;
@@ -3420,7 +3420,7 @@ class ClusterInfo extends  AbstractModel {
         this.Region = null;
 
         /**
-         * 集群数据描述语言类型，如：`PROTO`,`TDR`或`MIX`
+         * 集群数据描述语言类型，如：`PROTO`,`TDR`
          * @type {string || null}
          */
         this.IdlType = null;

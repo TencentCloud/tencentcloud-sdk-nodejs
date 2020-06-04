@@ -355,6 +355,49 @@ class FunctionInfo extends  AbstractModel {
 }
 
 /**
+ * CreatePostpayPackage返回参数结构体
+ * @class
+ */
+class CreatePostpayPackageResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 后付费订单号
+         * @type {string || null}
+         */
+        this.TranId = null;
+
+        /**
+         * 环境ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.EnvId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TranId = 'TranId' in params ? params.TranId : null;
+        this.EnvId = 'EnvId' in params ? params.EnvId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * CommonServiceAPI请求参数结构体
  * @class
  */
@@ -1278,6 +1321,82 @@ class DescribeExtraPkgBillingInfoRequest extends  AbstractModel {
             return;
         }
         this.EnvId = 'EnvId' in params ? params.EnvId : null;
+
+    }
+}
+
+/**
+ * CreatePostpayPackage请求参数结构体
+ * @class
+ */
+class CreatePostpayPackageRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 环境ID
+         * @type {string || null}
+         */
+        this.EnvId = null;
+
+        /**
+         * 微信 AppId，微信必传
+         * @type {string || null}
+         */
+        this.WxAppId = null;
+
+        /**
+         * 付费来源
+<li>miniapp</li>
+<li>qcloud</li>
+         * @type {string || null}
+         */
+        this.Source = null;
+
+        /**
+         * 用户享有的免费额度级别，目前只能为“basic”，不传该字段或该字段为空，标识不享受免费额度。
+         * @type {string || null}
+         */
+        this.FreeQuota = null;
+
+        /**
+         * 环境别名，要以a-z开头，不能包含 a-zA-z0-9- 以外的字符
+         * @type {string || null}
+         */
+        this.Alias = null;
+
+        /**
+         * 环境创建来源，取值：
+<li>miniapp</li>
+<li>qcloud</li>
+用法同CreateEnv接口的Source参数
+         * @type {string || null}
+         */
+        this.EnvSource = null;
+
+        /**
+         * 如果envsource为miniapp, channel可以为ide或api;
+如果envsource为qcloud, channel可以为qc_console,cocos, qq, cloudgame,dcloud
+         * @type {string || null}
+         */
+        this.Channel = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.EnvId = 'EnvId' in params ? params.EnvId : null;
+        this.WxAppId = 'WxAppId' in params ? params.WxAppId : null;
+        this.Source = 'Source' in params ? params.Source : null;
+        this.FreeQuota = 'FreeQuota' in params ? params.FreeQuota : null;
+        this.Alias = 'Alias' in params ? params.Alias : null;
+        this.EnvSource = 'EnvSource' in params ? params.EnvSource : null;
+        this.Channel = 'Channel' in params ? params.Channel : null;
 
     }
 }
@@ -2703,6 +2822,7 @@ module.exports = {
     StorageInfo: StorageInfo,
     LoginStatistic: LoginStatistic,
     FunctionInfo: FunctionInfo,
+    CreatePostpayPackageResponse: CreatePostpayPackageResponse,
     CommonServiceAPIRequest: CommonServiceAPIRequest,
     DescribeEndUsersResponse: DescribeEndUsersResponse,
     AuthDomain: AuthDomain,
@@ -2725,6 +2845,7 @@ module.exports = {
     StaticStorageInfo: StaticStorageInfo,
     DescribeExtraPkgBillingInfoResponse: DescribeExtraPkgBillingInfoResponse,
     DescribeExtraPkgBillingInfoRequest: DescribeExtraPkgBillingInfoRequest,
+    CreatePostpayPackageRequest: CreatePostpayPackageRequest,
     DescribeEnvFreeQuotaRequest: DescribeEnvFreeQuotaRequest,
     DatabasesInfo: DatabasesInfo,
     DescribeAuthDomainsRequest: DescribeAuthDomainsRequest,
