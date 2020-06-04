@@ -25,6 +25,7 @@ const DescribeEndUserLoginStatisticRequest = models.DescribeEndUserLoginStatisti
 const StorageInfo = models.StorageInfo;
 const LoginStatistic = models.LoginStatistic;
 const FunctionInfo = models.FunctionInfo;
+const CreatePostpayPackageResponse = models.CreatePostpayPackageResponse;
 const CommonServiceAPIRequest = models.CommonServiceAPIRequest;
 const DescribeEndUsersResponse = models.DescribeEndUsersResponse;
 const AuthDomain = models.AuthDomain;
@@ -47,6 +48,7 @@ const ModifyDatabaseACLResponse = models.ModifyDatabaseACLResponse;
 const StaticStorageInfo = models.StaticStorageInfo;
 const DescribeExtraPkgBillingInfoResponse = models.DescribeExtraPkgBillingInfoResponse;
 const DescribeExtraPkgBillingInfoRequest = models.DescribeExtraPkgBillingInfoRequest;
+const CreatePostpayPackageRequest = models.CreatePostpayPackageRequest;
 const DescribeEnvFreeQuotaRequest = models.DescribeEnvFreeQuotaRequest;
 const DatabasesInfo = models.DatabasesInfo;
 const DescribeAuthDomainsRequest = models.DescribeAuthDomainsRequest;
@@ -128,6 +130,17 @@ class TcbClient extends AbstractClient {
     DescribeAuthDomains(req, cb) {
         let resp = new DescribeAuthDomainsResponse();
         this.request("DescribeAuthDomains", req, resp, cb);
+    }
+
+    /**
+     * 开通后付费资源
+     * @param {CreatePostpayPackageRequest} req
+     * @param {function(string, CreatePostpayPackageResponse):void} cb
+     * @public
+     */
+    CreatePostpayPackage(req, cb) {
+        let resp = new CreatePostpayPackageResponse();
+        this.request("CreatePostpayPackage", req, resp, cb);
     }
 
     /**

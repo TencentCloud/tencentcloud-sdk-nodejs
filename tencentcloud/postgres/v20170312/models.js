@@ -109,7 +109,7 @@ class CreateDBInstancesRequest extends  AbstractModel {
         this.ActivityId = null;
 
         /**
-         * 实例名
+         * 实例名(后续支持)
          * @type {string || null}
          */
         this.Name = null;
@@ -207,7 +207,7 @@ class CreateServerlessDBInstanceRequest extends  AbstractModel {
         super();
 
         /**
-         * 可用区ID。该参数可以通过调用 DescribeZones 接口的返回值中的Zone字段来获取。
+         * 可用区ID。公测阶段仅支持ap-shanghai-2、ap-beijing-1,ap-guangzhou-2.
          * @type {string || null}
          */
         this.Zone = null;
@@ -219,13 +219,13 @@ class CreateServerlessDBInstanceRequest extends  AbstractModel {
         this.DBInstanceName = null;
 
         /**
-         * PostgreSQL内核版本，目前只支持：9.3.5、9.5.4、10.4三种版本。
+         * PostgreSQL内核版本，目前只支持：10.4。
          * @type {string || null}
          */
         this.DBVersion = null;
 
         /**
-         * PostgreSQL数据库字符集，目前支持UTF8、LATIN1两种。
+         * PostgreSQL数据库字符集，目前支持UTF8。
          * @type {string || null}
          */
         this.DBCharset = null;
@@ -2350,7 +2350,7 @@ class DescribeDBBackupsRequest extends  AbstractModel {
         this.EndTime = null;
 
         /**
-         * 备份列表分页返回，每页返回数量，默认为 20，最小为1，最大值为 100。
+         * 备份列表分页返回，每页返回数量，默认为 20，最小为1，最大值为 100。（当该参数不传或者传0时按默认值处理）
          * @type {number || null}
          */
         this.Limit = null;

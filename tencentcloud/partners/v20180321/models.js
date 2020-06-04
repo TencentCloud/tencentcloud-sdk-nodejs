@@ -432,6 +432,55 @@ class AgentPayDealsRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeAgentClientGrade返回参数结构体
+ * @class
+ */
+class DescribeAgentClientGradeResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 审核状态：0待审核，1，已审核
+         * @type {number || null}
+         */
+        this.AuditStatus = null;
+
+        /**
+         * 实名认证状态：0，未实名认证，1实名认证
+         * @type {number || null}
+         */
+        this.AuthState = null;
+
+        /**
+         * 客户级别
+         * @type {string || null}
+         */
+        this.ClientGrade = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AuditStatus = 'AuditStatus' in params ? params.AuditStatus : null;
+        this.AuthState = 'AuthState' in params ? params.AuthState : null;
+        this.ClientGrade = 'ClientGrade' in params ? params.ClientGrade : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * 返佣信息定义
  * @class
  */
@@ -2051,6 +2100,34 @@ class DescribeRebateInfosResponse extends  AbstractModel {
     }
 }
 
+/**
+ * DescribeAgentClientGrade请求参数结构体
+ * @class
+ */
+class DescribeAgentClientGradeRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 代客uin
+         * @type {string || null}
+         */
+        this.ClientUin = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClientUin = 'ClientUin' in params ? params.ClientUin : null;
+
+    }
+}
+
 module.exports = {
     AgentClientElem: AgentClientElem,
     DescribeAgentDealsCacheRequest: DescribeAgentDealsCacheRequest,
@@ -2058,6 +2135,7 @@ module.exports = {
     DescribeAgentAuditedClientsRequest: DescribeAgentAuditedClientsRequest,
     RemovePayRelationForClientRequest: RemovePayRelationForClientRequest,
     AgentPayDealsRequest: AgentPayDealsRequest,
+    DescribeAgentClientGradeResponse: DescribeAgentClientGradeResponse,
     RebateInfoElem: RebateInfoElem,
     DescribeClientBalanceResponse: DescribeClientBalanceResponse,
     AgentTransferMoneyRequest: AgentTransferMoneyRequest,
@@ -2087,5 +2165,6 @@ module.exports = {
     AgentDealElem: AgentDealElem,
     AgentSalesmanElem: AgentSalesmanElem,
     DescribeRebateInfosResponse: DescribeRebateInfosResponse,
+    DescribeAgentClientGradeRequest: DescribeAgentClientGradeRequest,
 
 }

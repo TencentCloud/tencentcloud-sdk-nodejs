@@ -22,6 +22,7 @@ const DescribeSalesmansRequest = models.DescribeSalesmansRequest;
 const DescribeAgentAuditedClientsRequest = models.DescribeAgentAuditedClientsRequest;
 const RemovePayRelationForClientRequest = models.RemovePayRelationForClientRequest;
 const AgentPayDealsRequest = models.AgentPayDealsRequest;
+const DescribeAgentClientGradeResponse = models.DescribeAgentClientGradeResponse;
 const RebateInfoElem = models.RebateInfoElem;
 const DescribeClientBalanceResponse = models.DescribeClientBalanceResponse;
 const AgentTransferMoneyRequest = models.AgentTransferMoneyRequest;
@@ -51,6 +52,7 @@ const AgentPayDealsResponse = models.AgentPayDealsResponse;
 const AgentDealElem = models.AgentDealElem;
 const AgentSalesmanElem = models.AgentSalesmanElem;
 const DescribeRebateInfosResponse = models.DescribeRebateInfosResponse;
+const DescribeAgentClientGradeRequest = models.DescribeAgentClientGradeRequest;
 
 
 /**
@@ -182,6 +184,17 @@ class PartnersClient extends AbstractClient {
     DescribeClientBalance(req, cb) {
         let resp = new DescribeClientBalanceResponse();
         this.request("DescribeClientBalance", req, resp, cb);
+    }
+
+    /**
+     * 传入代客uin，查客户级别，客户审核状态，客户实名认证状态
+     * @param {DescribeAgentClientGradeRequest} req
+     * @param {function(string, DescribeAgentClientGradeResponse):void} cb
+     * @public
+     */
+    DescribeAgentClientGrade(req, cb) {
+        let resp = new DescribeAgentClientGradeResponse();
+        this.request("DescribeAgentClientGrade", req, resp, cb);
     }
 
     /**
