@@ -7090,6 +7090,16 @@ class ApplyReWithdrawalRequest extends  AbstractModel {
          */
         this.MidasAppId = null;
 
+        /**
+         * 环境名:
+release: 现网环境
+sandbox: 沙箱环境
+development: 开发环境
+缺省: release
+         * @type {string || null}
+         */
+        this.MidasEnvironment = null;
+
     }
 
     /**
@@ -7109,6 +7119,7 @@ class ApplyReWithdrawalRequest extends  AbstractModel {
             this.Body = obj;
         }
         this.MidasAppId = 'MidasAppId' in params ? params.MidasAppId : null;
+        this.MidasEnvironment = 'MidasEnvironment' in params ? params.MidasEnvironment : null;
 
     }
 }

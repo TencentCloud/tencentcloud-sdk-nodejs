@@ -17,24 +17,24 @@
 const AbstractModel = require("../../common/abstract_model");
 
 /**
- * PublishMessage请求参数结构体
+ * UnbindDevices请求参数结构体
  * @class
  */
-class PublishMessageRequest extends  AbstractModel {
+class UnbindDevicesRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 消息发往的主题。命名规则：${ProductId}/${DeviceName}/[a-zA-Z0-9:_-]{1,128}
+         * 网关设备的产品ID
          * @type {string || null}
          */
-        this.Topic = null;
+        this.GatewayProductId = null;
 
         /**
-         * 消息内容
+         * 网关设备的设备名
          * @type {string || null}
          */
-        this.Payload = null;
+        this.GatewayDeviceName = null;
 
         /**
          * 产品ID
@@ -43,51 +43,13 @@ class PublishMessageRequest extends  AbstractModel {
         this.ProductId = null;
 
         /**
-         * 设备名称
-         * @type {string || null}
+         * 多个设备名
+         * @type {Array.<string> || null}
          */
-        this.DeviceName = null;
+        this.DeviceNames = null;
 
         /**
-         * 服务质量等级，取值为0或1
-         * @type {number || null}
-         */
-        this.Qos = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Topic = 'Topic' in params ? params.Topic : null;
-        this.Payload = 'Payload' in params ? params.Payload : null;
-        this.ProductId = 'ProductId' in params ? params.ProductId : null;
-        this.DeviceName = 'DeviceName' in params ? params.DeviceName : null;
-        this.Qos = 'Qos' in params ? params.Qos : null;
-
-    }
-}
-
-/**
- * DeleteProduct请求参数结构体
- * @class
- */
-class DeleteProductRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 需要删除的产品 ID
-         * @type {string || null}
-         */
-        this.ProductId = null;
-
-        /**
-         * 删除LoRa产品需要skey
+         * 中兴CLAA设备的解绑需要Skey，普通设备不需要
          * @type {string || null}
          */
         this.Skey = null;
@@ -101,790 +63,11 @@ class DeleteProductRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.GatewayProductId = 'GatewayProductId' in params ? params.GatewayProductId : null;
+        this.GatewayDeviceName = 'GatewayDeviceName' in params ? params.GatewayDeviceName : null;
         this.ProductId = 'ProductId' in params ? params.ProductId : null;
+        this.DeviceNames = 'DeviceNames' in params ? params.DeviceNames : null;
         this.Skey = 'Skey' in params ? params.Skey : null;
-
-    }
-}
-
-/**
- * EnableTopicRule返回参数结构体
- * @class
- */
-class EnableTopicRuleResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * UpdateDeviceShadow返回参数结构体
- * @class
- */
-class UpdateDeviceShadowResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 设备影子数据，JSON字符串格式
-         * @type {string || null}
-         */
-        this.Data = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Data = 'Data' in params ? params.Data : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * DescribeTasks请求参数结构体
- * @class
- */
-class DescribeTasksRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 偏移量，从0开始
-         * @type {number || null}
-         */
-        this.Offset = null;
-
-        /**
-         * 分页的大小，数值范围 1-250
-         * @type {number || null}
-         */
-        this.Limit = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Offset = 'Offset' in params ? params.Offset : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
-
-    }
-}
-
-/**
- * DisableTopicRule返回参数结构体
- * @class
- */
-class DisableTopicRuleResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * UpdateDeviceAvailableState请求参数结构体
- * @class
- */
-class UpdateDeviceAvailableStateRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 设备所属产品id
-         * @type {string || null}
-         */
-        this.ProductId = null;
-
-        /**
-         * 设备名称
-         * @type {string || null}
-         */
-        this.DeviceName = null;
-
-        /**
-         * 要设置的设备状态，1为启用，0为禁用
-         * @type {number || null}
-         */
-        this.EnableState = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.ProductId = 'ProductId' in params ? params.ProductId : null;
-        this.DeviceName = 'DeviceName' in params ? params.DeviceName : null;
-        this.EnableState = 'EnableState' in params ? params.EnableState : null;
-
-    }
-}
-
-/**
- * 设备标签
- * @class
- */
-class DeviceLabel extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 标签标识
-         * @type {string || null}
-         */
-        this.Key = null;
-
-        /**
-         * 标签值
-         * @type {string || null}
-         */
-        this.Value = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Key = 'Key' in params ? params.Key : null;
-        this.Value = 'Value' in params ? params.Value : null;
-
-    }
-}
-
-/**
- * ReplaceTopicRule请求参数结构体
- * @class
- */
-class ReplaceTopicRuleRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 规则名称
-         * @type {string || null}
-         */
-        this.RuleName = null;
-
-        /**
-         * 替换的规则包体
-         * @type {TopicRulePayload || null}
-         */
-        this.TopicRulePayload = null;
-
-        /**
-         * 修改类型，0：其他，1：创建行为，2：更新行为，3：删除行为
-         * @type {number || null}
-         */
-        this.ModifyType = null;
-
-        /**
-         * action增删改变更填对应topicRulePayload里面第几个action
-         * @type {number || null}
-         */
-        this.ActionIndex = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RuleName = 'RuleName' in params ? params.RuleName : null;
-
-        if (params.TopicRulePayload) {
-            let obj = new TopicRulePayload();
-            obj.deserialize(params.TopicRulePayload)
-            this.TopicRulePayload = obj;
-        }
-        this.ModifyType = 'ModifyType' in params ? params.ModifyType : null;
-        this.ActionIndex = 'ActionIndex' in params ? params.ActionIndex : null;
-
-    }
-}
-
-/**
- * DeleteTopicRule请求参数结构体
- * @class
- */
-class DeleteTopicRuleRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 规则名
-         * @type {string || null}
-         */
-        this.RuleName = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RuleName = 'RuleName' in params ? params.RuleName : null;
-
-    }
-}
-
-/**
- * DescribeMultiDevices请求参数结构体
- * @class
- */
-class DescribeMultiDevicesRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 产品 ID，创建产品时腾讯云为用户分配全局唯一的 ID
-         * @type {string || null}
-         */
-        this.ProductId = null;
-
-        /**
-         * 任务 ID，由批量创建设备接口返回
-         * @type {string || null}
-         */
-        this.TaskId = null;
-
-        /**
-         * 分页偏移
-         * @type {number || null}
-         */
-        this.Offset = null;
-
-        /**
-         * 分页大小，每页返回的设备个数
-         * @type {number || null}
-         */
-        this.Limit = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.ProductId = 'ProductId' in params ? params.ProductId : null;
-        this.TaskId = 'TaskId' in params ? params.TaskId : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
-
-    }
-}
-
-/**
- * UpdateDeviceAvailableState返回参数结构体
- * @class
- */
-class UpdateDeviceAvailableStateResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * 创建设备时返回的设备信息
- * @class
- */
-class MultiDevicesInfo extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 设备名
-         * @type {string || null}
-         */
-        this.DeviceName = null;
-
-        /**
-         * 对称加密密钥，base64 编码，采用对称加密时返回该参数
-         * @type {string || null}
-         */
-        this.DevicePsk = null;
-
-        /**
-         * 设备证书，采用非对称加密时返回该参数
-         * @type {string || null}
-         */
-        this.DeviceCert = null;
-
-        /**
-         * 设备私钥，采用非对称加密时返回该参数，腾讯云为用户缓存起来，其生命周期与任务生命周期一致
-         * @type {string || null}
-         */
-        this.DevicePrivateKey = null;
-
-        /**
-         * 错误码
-         * @type {number || null}
-         */
-        this.Result = null;
-
-        /**
-         * 错误信息
-         * @type {string || null}
-         */
-        this.ErrMsg = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.DeviceName = 'DeviceName' in params ? params.DeviceName : null;
-        this.DevicePsk = 'DevicePsk' in params ? params.DevicePsk : null;
-        this.DeviceCert = 'DeviceCert' in params ? params.DeviceCert : null;
-        this.DevicePrivateKey = 'DevicePrivateKey' in params ? params.DevicePrivateKey : null;
-        this.Result = 'Result' in params ? params.Result : null;
-        this.ErrMsg = 'ErrMsg' in params ? params.ErrMsg : null;
-
-    }
-}
-
-/**
- * PublishAsDevice请求参数结构体
- * @class
- */
-class PublishAsDeviceRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 产品ID
-         * @type {string || null}
-         */
-        this.ProductId = null;
-
-        /**
-         * 设备名称
-         * @type {string || null}
-         */
-        this.DeviceName = null;
-
-        /**
-         * LoRa 设备端口
-         * @type {number || null}
-         */
-        this.Port = null;
-
-        /**
-         * 消息内容
-         * @type {string || null}
-         */
-        this.Payload = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.ProductId = 'ProductId' in params ? params.ProductId : null;
-        this.DeviceName = 'DeviceName' in params ? params.DeviceName : null;
-        this.Port = 'Port' in params ? params.Port : null;
-        this.Payload = 'Payload' in params ? params.Payload : null;
-
-    }
-}
-
-/**
- * DescribeDeviceClientKey请求参数结构体
- * @class
- */
-class DescribeDeviceClientKeyRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 所属产品的Id
-         * @type {string || null}
-         */
-        this.ProductId = null;
-
-        /**
-         * 设备名称
-         * @type {string || null}
-         */
-        this.DeviceName = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.ProductId = 'ProductId' in params ? params.ProductId : null;
-        this.DeviceName = 'DeviceName' in params ? params.DeviceName : null;
-
-    }
-}
-
-/**
- * DescribeTask返回参数结构体
- * @class
- */
-class DescribeTaskResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 任务类型，目前取值为 “UpdateShadow” 或者 “PublishMessage”
-         * @type {string || null}
-         */
-        this.Type = null;
-
-        /**
-         * 任务 ID
-         * @type {string || null}
-         */
-        this.Id = null;
-
-        /**
-         * 产品 ID
-         * @type {string || null}
-         */
-        this.ProductId = null;
-
-        /**
-         * 状态。1表示等待处理，2表示调度处理中，3表示已完成，4表示失败，5表示已取消
-         * @type {number || null}
-         */
-        this.Status = null;
-
-        /**
-         * 任务创建时间，Unix 时间戳
-         * @type {number || null}
-         */
-        this.CreateTime = null;
-
-        /**
-         * 最后任务更新时间，Unix 时间戳
-         * @type {number || null}
-         */
-        this.UpdateTime = null;
-
-        /**
-         * 任务完成时间，Unix 时间戳
-         * @type {number || null}
-         */
-        this.DoneTime = null;
-
-        /**
-         * 被调度时间，Unix 时间戳
-         * @type {number || null}
-         */
-        this.ScheduleTime = null;
-
-        /**
-         * 返回的错误码
-         * @type {number || null}
-         */
-        this.RetCode = null;
-
-        /**
-         * 返回的错误信息
-         * @type {string || null}
-         */
-        this.ErrMsg = null;
-
-        /**
-         * 完成任务的设备比例
-         * @type {number || null}
-         */
-        this.Percent = null;
-
-        /**
-         * 匹配到的需执行任务的设备数目
-         * @type {number || null}
-         */
-        this.AllDeviceCnt = null;
-
-        /**
-         * 已完成任务的设备数目
-         * @type {number || null}
-         */
-        this.DoneDeviceCnt = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Type = 'Type' in params ? params.Type : null;
-        this.Id = 'Id' in params ? params.Id : null;
-        this.ProductId = 'ProductId' in params ? params.ProductId : null;
-        this.Status = 'Status' in params ? params.Status : null;
-        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
-        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
-        this.DoneTime = 'DoneTime' in params ? params.DoneTime : null;
-        this.ScheduleTime = 'ScheduleTime' in params ? params.ScheduleTime : null;
-        this.RetCode = 'RetCode' in params ? params.RetCode : null;
-        this.ErrMsg = 'ErrMsg' in params ? params.ErrMsg : null;
-        this.Percent = 'Percent' in params ? params.Percent : null;
-        this.AllDeviceCnt = 'AllDeviceCnt' in params ? params.AllDeviceCnt : null;
-        this.DoneDeviceCnt = 'DoneDeviceCnt' in params ? params.DoneDeviceCnt : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * CancelTask请求参数结构体
- * @class
- */
-class CancelTaskRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 任务 ID
-         * @type {string || null}
-         */
-        this.Id = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Id = 'Id' in params ? params.Id : null;
-
-    }
-}
-
-/**
- * PublishToDevice返回参数结构体
- * @class
- */
-class PublishToDeviceResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * CreateTask返回参数结构体
- * @class
- */
-class CreateTaskResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 创建的任务ID
-         * @type {string || null}
-         */
-        this.TaskId = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.TaskId = 'TaskId' in params ? params.TaskId : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * 批量发消息请求
- * @class
- */
-class BatchPublishMessage extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 消息发往的主题。为 Topic 权限中去除 ProductID 和 DeviceName 的部分，如 “event”
-         * @type {string || null}
-         */
-        this.Topic = null;
-
-        /**
-         * 消息内容
-         * @type {string || null}
-         */
-        this.Payload = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Topic = 'Topic' in params ? params.Topic : null;
-        this.Payload = 'Payload' in params ? params.Payload : null;
-
-    }
-}
-
-/**
- * 批量更新设备影子任务
- * @class
- */
-class BatchUpdateShadow extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 设备影子的期望状态，格式为 Json 对象序列化之后的字符串
-         * @type {string || null}
-         */
-        this.Desired = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Desired = 'Desired' in params ? params.Desired : null;
 
     }
 }
@@ -946,178 +129,59 @@ class BindDevicesRequest extends  AbstractModel {
 }
 
 /**
- * UnbindDevices请求参数结构体
+ * DescribeProducts请求参数结构体
  * @class
  */
-class UnbindDevicesRequest extends  AbstractModel {
+class DescribeProductsRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 网关设备的产品ID
-         * @type {string || null}
-         */
-        this.GatewayProductId = null;
-
-        /**
-         * 网关设备的设备名
-         * @type {string || null}
-         */
-        this.GatewayDeviceName = null;
-
-        /**
-         * 产品ID
-         * @type {string || null}
-         */
-        this.ProductId = null;
-
-        /**
-         * 多个设备名
-         * @type {Array.<string> || null}
-         */
-        this.DeviceNames = null;
-
-        /**
-         * 中兴CLAA设备的解绑需要Skey，普通设备不需要
-         * @type {string || null}
-         */
-        this.Skey = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.GatewayProductId = 'GatewayProductId' in params ? params.GatewayProductId : null;
-        this.GatewayDeviceName = 'GatewayDeviceName' in params ? params.GatewayDeviceName : null;
-        this.ProductId = 'ProductId' in params ? params.ProductId : null;
-        this.DeviceNames = 'DeviceNames' in params ? params.DeviceNames : null;
-        this.Skey = 'Skey' in params ? params.Skey : null;
-
-    }
-}
-
-/**
- * DeleteDevice请求参数结构体
- * @class
- */
-class DeleteDeviceRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 设备所属的产品 ID
-         * @type {string || null}
-         */
-        this.ProductId = null;
-
-        /**
-         * 需要删除的设备名称
-         * @type {string || null}
-         */
-        this.DeviceName = null;
-
-        /**
-         * 删除LoRa设备以及LoRa网关设备需要skey
-         * @type {string || null}
-         */
-        this.Skey = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.ProductId = 'ProductId' in params ? params.ProductId : null;
-        this.DeviceName = 'DeviceName' in params ? params.DeviceName : null;
-        this.Skey = 'Skey' in params ? params.Skey : null;
-
-    }
-}
-
-/**
- * DeleteProduct返回参数结构体
- * @class
- */
-class DeleteProductResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * ResetDeviceState返回参数结构体
- * @class
- */
-class ResetDeviceStateResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * DescribeMultiDevTask返回参数结构体
- * @class
- */
-class DescribeMultiDevTaskResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 任务 ID
-         * @type {string || null}
-         */
-        this.TaskId = null;
-
-        /**
-         * 任务是否完成。0 代表任务未开始，1 代表任务正在执行，2 代表任务已完成
+         * 偏移量，Offset从0开始
          * @type {number || null}
          */
-        this.TaskStatus = null;
+        this.Offset = null;
+
+        /**
+         * 分页大小，当前页面中显示的最大数量，值范围 10-250。
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+
+    }
+}
+
+/**
+ * DescribeDevices返回参数结构体
+ * @class
+ */
+class DescribeDevicesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 设备总数
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 设备详细信息列表
+         * @type {Array.<DeviceInfo> || null}
+         */
+        this.Devices = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1134,167 +198,17 @@ class DescribeMultiDevTaskResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TaskId = 'TaskId' in params ? params.TaskId : null;
-        this.TaskStatus = 'TaskStatus' in params ? params.TaskStatus : null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.Devices) {
+            this.Devices = new Array();
+            for (let z in params.Devices) {
+                let obj = new DeviceInfo();
+                obj.deserialize(params.Devices[z]);
+                this.Devices.push(obj);
+            }
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * 创建规则请求包体
- * @class
- */
-class TopicRulePayload extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 规则的SQL语句，如： SELECT * FROM 'pid/dname/event'，然后对其进行base64编码，得：U0VMRUNUICogRlJPTSAncGlkL2RuYW1lL2V2ZW50Jw==
-         * @type {string || null}
-         */
-        this.Sql = null;
-
-        /**
-         * 行为的JSON字符串，大部分种类举例如下：
-[
-    {
-        "republish": {
-            "topic": "TEST/test"
-        }
-    },
-    {
-        "forward": {
-            "api": "http://127.0.0.1:8080"
-        }
-    },
-    {
-        "ckafka": {
-            "instance": {
-                "id": "ckafka-test",
-                "name": ""
-            },
-            "topic": {
-                "id": "topic-test",
-                "name": "test"
-            },
-            "region": "gz"
-        }
-    },
-    {
-        "cmqqueue": {
-            "queuename": "queue-test-TEST",
-            "region": "gz"
-        }
-    },
-    {
-        "mysql": {
-            "instanceid": "cdb-test",
-            "region": "gz",
-            "username": "test",
-            "userpwd": "*****",
-            "dbname": "d_mqtt",
-            "tablename": "t_test",
-            "fieldpairs": [
-                {
-                    "field": "test",
-                    "value": "test"
-                }
-            ],
-            "devicetype": "CUSTOM"
-        }
-    }
-]
-         * @type {string || null}
-         */
-        this.Actions = null;
-
-        /**
-         * 规则描述
-         * @type {string || null}
-         */
-        this.Description = null;
-
-        /**
-         * 是否禁用规则
-         * @type {boolean || null}
-         */
-        this.RuleDisabled = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Sql = 'Sql' in params ? params.Sql : null;
-        this.Actions = 'Actions' in params ? params.Actions : null;
-        this.Description = 'Description' in params ? params.Description : null;
-        this.RuleDisabled = 'RuleDisabled' in params ? params.RuleDisabled : null;
-
-    }
-}
-
-/**
- * UpdateTopicPolicy请求参数结构体
- * @class
- */
-class UpdateTopicPolicyRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 产品ID
-         * @type {string || null}
-         */
-        this.ProductID = null;
-
-        /**
-         * 更新前Topic名
-         * @type {string || null}
-         */
-        this.TopicName = null;
-
-        /**
-         * 更新后Topic名
-         * @type {string || null}
-         */
-        this.NewTopicName = null;
-
-        /**
-         * Topic权限
-         * @type {number || null}
-         */
-        this.Privilege = null;
-
-        /**
-         * 代理订阅信息
-         * @type {BrokerSubscribe || null}
-         */
-        this.BrokerSubscribe = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.ProductID = 'ProductID' in params ? params.ProductID : null;
-        this.TopicName = 'TopicName' in params ? params.TopicName : null;
-        this.NewTopicName = 'NewTopicName' in params ? params.NewTopicName : null;
-        this.Privilege = 'Privilege' in params ? params.Privilege : null;
-
-        if (params.BrokerSubscribe) {
-            let obj = new BrokerSubscribe();
-            obj.deserialize(params.BrokerSubscribe)
-            this.BrokerSubscribe = obj;
-        }
 
     }
 }
@@ -1359,24 +273,97 @@ class ProductInfo extends  AbstractModel {
 }
 
 /**
- * DescribeDevices返回参数结构体
+ * 任务描述细节
  * @class
  */
-class DescribeDevicesResponse extends  AbstractModel {
+class Task extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 设备总数
+         * 批量更新影子任务的描述细节，当 taskType 取值为 “UpdateShadow” 时，此字段必填。描述见下 BatchUpdateShadow
+         * @type {BatchUpdateShadow || null}
+         */
+        this.UpdateShadowTask = null;
+
+        /**
+         * 批量下发消息任务的描述细节，当 taskType 取值为 “PublishMessage” 时，此字段必填。描述见下 BatchPublishMessage
+         * @type {BatchPublishMessage || null}
+         */
+        this.PublishMessageTask = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.UpdateShadowTask) {
+            let obj = new BatchUpdateShadow();
+            obj.deserialize(params.UpdateShadowTask)
+            this.UpdateShadowTask = obj;
+        }
+
+        if (params.PublishMessageTask) {
+            let obj = new BatchPublishMessage();
+            obj.deserialize(params.PublishMessageTask)
+            this.PublishMessageTask = obj;
+        }
+
+    }
+}
+
+/**
+ * EnableTopicRule返回参数结构体
+ * @class
+ */
+class EnableTopicRuleResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeTasks返回参数结构体
+ * @class
+ */
+class DescribeTasksResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 用户一个月内创建的任务总数
          * @type {number || null}
          */
         this.TotalCount = null;
 
         /**
-         * 设备详细信息列表
-         * @type {Array.<DeviceInfo> || null}
+         * 此页任务对象的数组，按创建时间排序
+         * @type {Array.<TaskInfo> || null}
          */
-        this.Devices = null;
+        this.Tasks = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1395,12 +382,12 @@ class DescribeDevicesResponse extends  AbstractModel {
         }
         this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
 
-        if (params.Devices) {
-            this.Devices = new Array();
-            for (let z in params.Devices) {
-                let obj = new DeviceInfo();
-                obj.deserialize(params.Devices[z]);
-                this.Devices.push(obj);
+        if (params.Tasks) {
+            this.Tasks = new Array();
+            for (let z in params.Tasks) {
+                let obj = new TaskInfo();
+                obj.deserialize(params.Tasks[z]);
+                this.Tasks.push(obj);
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
@@ -1409,30 +396,42 @@ class DescribeDevicesResponse extends  AbstractModel {
 }
 
 /**
- * 设备属性
+ * UpdateDeviceShadow请求参数结构体
  * @class
  */
-class DeviceTag extends  AbstractModel {
+class UpdateDeviceShadowRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 属性名称
+         * 产品ID
          * @type {string || null}
          */
-        this.Tag = null;
+        this.ProductId = null;
 
         /**
-         * 属性值的类型，1 int，2 string
+         * 设备名称
+         * @type {string || null}
+         */
+        this.DeviceName = null;
+
+        /**
+         * 虚拟设备的状态，JSON字符串格式，由desired结构组成
+         * @type {string || null}
+         */
+        this.State = null;
+
+        /**
+         * 当前版本号，需要和后台的version保持一致，才能更新成功
          * @type {number || null}
          */
-        this.Type = null;
+        this.ShadowVersion = null;
 
         /**
-         * 属性的值
+         * 下发delta消息的topic前缀，可选类型: "$shadow","$template"。不填写默认"$shadow"。
          * @type {string || null}
          */
-        this.Value = null;
+        this.Prefix = null;
 
     }
 
@@ -1443,20 +442,69 @@ class DeviceTag extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Tag = 'Tag' in params ? params.Tag : null;
-        this.Type = 'Type' in params ? params.Type : null;
-        this.Value = 'Value' in params ? params.Value : null;
+        this.ProductId = 'ProductId' in params ? params.ProductId : null;
+        this.DeviceName = 'DeviceName' in params ? params.DeviceName : null;
+        this.State = 'State' in params ? params.State : null;
+        this.ShadowVersion = 'ShadowVersion' in params ? params.ShadowVersion : null;
+        this.Prefix = 'Prefix' in params ? params.Prefix : null;
 
     }
 }
 
 /**
- * DeleteTopicRule返回参数结构体
+ * DescribeMultiDevTask请求参数结构体
  * @class
  */
-class DeleteTopicRuleResponse extends  AbstractModel {
+class DescribeMultiDevTaskRequest extends  AbstractModel {
     constructor(){
         super();
+
+        /**
+         * 任务 ID，由批量创建设备接口返回
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * 产品 ID，创建产品时腾讯云为用户分配全局唯一的 ID
+         * @type {string || null}
+         */
+        this.ProductId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.ProductId = 'ProductId' in params ? params.ProductId : null;
+
+    }
+}
+
+/**
+ * DescribeProducts返回参数结构体
+ * @class
+ */
+class DescribeProductsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 产品总数
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 产品详细信息列表
+         * @type {Array.<ProductInfo> || null}
+         */
+        this.Products = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1473,6 +521,86 @@ class DeleteTopicRuleResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.Products) {
+            this.Products = new Array();
+            for (let z in params.Products) {
+                let obj = new ProductInfo();
+                obj.deserialize(params.Products[z]);
+                this.Products.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeDeviceShadow返回参数结构体
+ * @class
+ */
+class DescribeDeviceShadowResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 设备影子数据
+         * @type {string || null}
+         */
+        this.Data = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Data = 'Data' in params ? params.Data : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CreateMultiDevice返回参数结构体
+ * @class
+ */
+class CreateMultiDeviceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 任务ID，腾讯云生成全局唯一的任务 ID，有效期一个月，一个月之后任务失效。可以调用获取创建多设备任务状态接口获取该任务的执行状态，当状态为成功时，可以调用获取创建多设备任务结果接口获取该任务的结果
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -1592,10 +720,10 @@ class ProductProperties extends  AbstractModel {
 }
 
 /**
- * DeleteLoraDevice返回参数结构体
+ * UpdateTopicPolicy返回参数结构体
  * @class
  */
-class DeleteLoraDeviceResponse extends  AbstractModel {
+class UpdateTopicPolicyResponse extends  AbstractModel {
     constructor(){
         super();
 
@@ -1620,21 +748,313 @@ class DeleteLoraDeviceResponse extends  AbstractModel {
 }
 
 /**
- * DescribeDevice请求参数结构体
+ * 任务列表详细信息
  * @class
  */
-class DescribeDeviceRequest extends  AbstractModel {
+class TaskInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 产品ID
+         * 任务类型，目前取值为 “UpdateShadow” 或者 “PublishMessage”
          * @type {string || null}
          */
-        this.ProductID = null;
+        this.Type = null;
+
+        /**
+         * 任务 ID
+         * @type {string || null}
+         */
+        this.Id = null;
+
+        /**
+         * 产品 ID
+         * @type {string || null}
+         */
+        this.ProductId = null;
+
+        /**
+         * 状态。1表示等待处理，2表示调度处理中，3表示已完成，4表示失败，5表示已取消
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * 任务创建时间，Unix 时间戳
+         * @type {number || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * 最后任务更新时间，Unix 时间戳
+         * @type {number || null}
+         */
+        this.UpdateTime = null;
+
+        /**
+         * 返回的错误码
+         * @type {number || null}
+         */
+        this.RetCode = null;
+
+        /**
+         * 返回的错误信息
+         * @type {string || null}
+         */
+        this.ErrMsg = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Id = 'Id' in params ? params.Id : null;
+        this.ProductId = 'ProductId' in params ? params.ProductId : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.RetCode = 'RetCode' in params ? params.RetCode : null;
+        this.ErrMsg = 'ErrMsg' in params ? params.ErrMsg : null;
+
+    }
+}
+
+/**
+ * DeleteProduct请求参数结构体
+ * @class
+ */
+class DeleteProductRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 需要删除的产品 ID
+         * @type {string || null}
+         */
+        this.ProductId = null;
+
+        /**
+         * 删除LoRa产品需要skey
+         * @type {string || null}
+         */
+        this.Skey = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ProductId = 'ProductId' in params ? params.ProductId : null;
+        this.Skey = 'Skey' in params ? params.Skey : null;
+
+    }
+}
+
+/**
+ * DescribeTasks请求参数结构体
+ * @class
+ */
+class DescribeTasksRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 偏移量，从0开始
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 分页的大小，数值范围 1-250
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+
+    }
+}
+
+/**
+ * ReplaceTopicRule请求参数结构体
+ * @class
+ */
+class ReplaceTopicRuleRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 规则名称
+         * @type {string || null}
+         */
+        this.RuleName = null;
+
+        /**
+         * 替换的规则包体
+         * @type {TopicRulePayload || null}
+         */
+        this.TopicRulePayload = null;
+
+        /**
+         * 修改类型，0：其他，1：创建行为，2：更新行为，3：删除行为
+         * @type {number || null}
+         */
+        this.ModifyType = null;
+
+        /**
+         * action增删改变更填对应topicRulePayload里面第几个action
+         * @type {number || null}
+         */
+        this.ActionIndex = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RuleName = 'RuleName' in params ? params.RuleName : null;
+
+        if (params.TopicRulePayload) {
+            let obj = new TopicRulePayload();
+            obj.deserialize(params.TopicRulePayload)
+            this.TopicRulePayload = obj;
+        }
+        this.ModifyType = 'ModifyType' in params ? params.ModifyType : null;
+        this.ActionIndex = 'ActionIndex' in params ? params.ActionIndex : null;
+
+    }
+}
+
+/**
+ * 创建设备时返回的设备信息
+ * @class
+ */
+class MultiDevicesInfo extends  AbstractModel {
+    constructor(){
+        super();
 
         /**
          * 设备名
+         * @type {string || null}
+         */
+        this.DeviceName = null;
+
+        /**
+         * 对称加密密钥，base64 编码，采用对称加密时返回该参数
+         * @type {string || null}
+         */
+        this.DevicePsk = null;
+
+        /**
+         * 设备证书，采用非对称加密时返回该参数
+         * @type {string || null}
+         */
+        this.DeviceCert = null;
+
+        /**
+         * 设备私钥，采用非对称加密时返回该参数，腾讯云为用户缓存起来，其生命周期与任务生命周期一致
+         * @type {string || null}
+         */
+        this.DevicePrivateKey = null;
+
+        /**
+         * 错误码
+         * @type {number || null}
+         */
+        this.Result = null;
+
+        /**
+         * 错误信息
+         * @type {string || null}
+         */
+        this.ErrMsg = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DeviceName = 'DeviceName' in params ? params.DeviceName : null;
+        this.DevicePsk = 'DevicePsk' in params ? params.DevicePsk : null;
+        this.DeviceCert = 'DeviceCert' in params ? params.DeviceCert : null;
+        this.DevicePrivateKey = 'DevicePrivateKey' in params ? params.DevicePrivateKey : null;
+        this.Result = 'Result' in params ? params.Result : null;
+        this.ErrMsg = 'ErrMsg' in params ? params.ErrMsg : null;
+
+    }
+}
+
+/**
+ * ReplaceTopicRule返回参数结构体
+ * @class
+ */
+class ReplaceTopicRuleResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeDeviceClientKey请求参数结构体
+ * @class
+ */
+class DescribeDeviceClientKeyRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 所属产品的Id
+         * @type {string || null}
+         */
+        this.ProductId = null;
+
+        /**
+         * 设备名称
          * @type {string || null}
          */
         this.DeviceName = null;
@@ -1648,8 +1068,202 @@ class DescribeDeviceRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ProductID = 'ProductID' in params ? params.ProductID : null;
+        this.ProductId = 'ProductId' in params ? params.ProductId : null;
         this.DeviceName = 'DeviceName' in params ? params.DeviceName : null;
+
+    }
+}
+
+/**
+ * UpdateTopicPolicy请求参数结构体
+ * @class
+ */
+class UpdateTopicPolicyRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 产品ID
+         * @type {string || null}
+         */
+        this.ProductID = null;
+
+        /**
+         * 更新前Topic名
+         * @type {string || null}
+         */
+        this.TopicName = null;
+
+        /**
+         * 更新后Topic名
+         * @type {string || null}
+         */
+        this.NewTopicName = null;
+
+        /**
+         * Topic权限
+         * @type {number || null}
+         */
+        this.Privilege = null;
+
+        /**
+         * 代理订阅信息
+         * @type {BrokerSubscribe || null}
+         */
+        this.BrokerSubscribe = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ProductID = 'ProductID' in params ? params.ProductID : null;
+        this.TopicName = 'TopicName' in params ? params.TopicName : null;
+        this.NewTopicName = 'NewTopicName' in params ? params.NewTopicName : null;
+        this.Privilege = 'Privilege' in params ? params.Privilege : null;
+
+        if (params.BrokerSubscribe) {
+            let obj = new BrokerSubscribe();
+            obj.deserialize(params.BrokerSubscribe)
+            this.BrokerSubscribe = obj;
+        }
+
+    }
+}
+
+/**
+ * 批量更新设备影子任务
+ * @class
+ */
+class BatchUpdateShadow extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 设备影子的期望状态，格式为 Json 对象序列化之后的字符串
+         * @type {string || null}
+         */
+        this.Desired = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Desired = 'Desired' in params ? params.Desired : null;
+
+    }
+}
+
+/**
+ * DeleteDevice请求参数结构体
+ * @class
+ */
+class DeleteDeviceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 设备所属的产品 ID
+         * @type {string || null}
+         */
+        this.ProductId = null;
+
+        /**
+         * 需要删除的设备名称
+         * @type {string || null}
+         */
+        this.DeviceName = null;
+
+        /**
+         * 删除LoRa设备以及LoRa网关设备需要skey
+         * @type {string || null}
+         */
+        this.Skey = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ProductId = 'ProductId' in params ? params.ProductId : null;
+        this.DeviceName = 'DeviceName' in params ? params.DeviceName : null;
+        this.Skey = 'Skey' in params ? params.Skey : null;
+
+    }
+}
+
+/**
+ * CreateMultiDevicesTask请求参数结构体
+ * @class
+ */
+class CreateMultiDevicesTaskRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 产品ID
+         * @type {string || null}
+         */
+        this.ProductId = null;
+
+        /**
+         * 参数类型 cosfile-文件上传 random-随机创建
+         * @type {string || null}
+         */
+        this.ParametersType = null;
+
+        /**
+         * 文件上传类型时文件名
+         * @type {string || null}
+         */
+        this.FileName = null;
+
+        /**
+         * 文件上传类型时文件大小
+         * @type {number || null}
+         */
+        this.FileSize = null;
+
+        /**
+         * 随机创建时设备创建个数
+         * @type {number || null}
+         */
+        this.BatchCount = null;
+
+        /**
+         * 文件上传类型时文件md5值
+         * @type {string || null}
+         */
+        this.Hash = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ProductId = 'ProductId' in params ? params.ProductId : null;
+        this.ParametersType = 'ParametersType' in params ? params.ParametersType : null;
+        this.FileName = 'FileName' in params ? params.FileName : null;
+        this.FileSize = 'FileSize' in params ? params.FileSize : null;
+        this.BatchCount = 'BatchCount' in params ? params.BatchCount : null;
+        this.Hash = 'Hash' in params ? params.Hash : null;
 
     }
 }
@@ -1732,421 +1346,6 @@ class CreateLoraDeviceRequest extends  AbstractModel {
 }
 
 /**
- * DescribeTask请求参数结构体
- * @class
- */
-class DescribeTaskRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 任务ID
-         * @type {string || null}
-         */
-        this.Id = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Id = 'Id' in params ? params.Id : null;
-
-    }
-}
-
-/**
- * 任务描述细节
- * @class
- */
-class Task extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 批量更新影子任务的描述细节，当 taskType 取值为 “UpdateShadow” 时，此字段必填。描述见下 BatchUpdateShadow
-         * @type {BatchUpdateShadow || null}
-         */
-        this.UpdateShadowTask = null;
-
-        /**
-         * 批量下发消息任务的描述细节，当 taskType 取值为 “PublishMessage” 时，此字段必填。描述见下 BatchPublishMessage
-         * @type {BatchPublishMessage || null}
-         */
-        this.PublishMessageTask = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-        if (params.UpdateShadowTask) {
-            let obj = new BatchUpdateShadow();
-            obj.deserialize(params.UpdateShadowTask)
-            this.UpdateShadowTask = obj;
-        }
-
-        if (params.PublishMessageTask) {
-            let obj = new BatchPublishMessage();
-            obj.deserialize(params.PublishMessageTask)
-            this.PublishMessageTask = obj;
-        }
-
-    }
-}
-
-/**
- * ResetDeviceState请求参数结构体
- * @class
- */
-class ResetDeviceStateRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 产品ID
-         * @type {string || null}
-         */
-        this.ProductId = null;
-
-        /**
-         * 设备名称
-         * @type {Array.<string> || null}
-         */
-        this.DeviceNames = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.ProductId = 'ProductId' in params ? params.ProductId : null;
-        this.DeviceNames = 'DeviceNames' in params ? params.DeviceNames : null;
-
-    }
-}
-
-/**
- * CreateTopicPolicy请求参数结构体
- * @class
- */
-class CreateTopicPolicyRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 产品自身ID
-         * @type {string || null}
-         */
-        this.ProductID = null;
-
-        /**
-         * Topic名称
-         * @type {string || null}
-         */
-        this.TopicName = null;
-
-        /**
-         * Topic权限，1发布，2订阅，3订阅和发布
-         * @type {number || null}
-         */
-        this.Privilege = null;
-
-        /**
-         * 代理订阅信息，网关产品为绑定的子产品创建topic时需要填写，内容为子产品的ID和设备信息。
-         * @type {BrokerSubscribe || null}
-         */
-        this.BrokerSubscribe = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.ProductID = 'ProductID' in params ? params.ProductID : null;
-        this.TopicName = 'TopicName' in params ? params.TopicName : null;
-        this.Privilege = 'Privilege' in params ? params.Privilege : null;
-
-        if (params.BrokerSubscribe) {
-            let obj = new BrokerSubscribe();
-            obj.deserialize(params.BrokerSubscribe)
-            this.BrokerSubscribe = obj;
-        }
-
-    }
-}
-
-/**
- * PublishMessage返回参数结构体
- * @class
- */
-class PublishMessageResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * PublishToDevice请求参数结构体
- * @class
- */
-class PublishToDeviceRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 产品id
-         * @type {string || null}
-         */
-        this.ProductId = null;
-
-        /**
-         * 设备名称
-         * @type {string || null}
-         */
-        this.DeviceName = null;
-
-        /**
-         * LoRa 端口
-         * @type {number || null}
-         */
-        this.Port = null;
-
-        /**
-         * 消息内容
-         * @type {string || null}
-         */
-        this.Payload = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.ProductId = 'ProductId' in params ? params.ProductId : null;
-        this.DeviceName = 'DeviceName' in params ? params.DeviceName : null;
-        this.Port = 'Port' in params ? params.Port : null;
-        this.Payload = 'Payload' in params ? params.Payload : null;
-
-    }
-}
-
-/**
- * 产品元数据
- * @class
- */
-class ProductMetadata extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 产品创建时间
-         * @type {number || null}
-         */
-        this.CreationDate = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.CreationDate = 'CreationDate' in params ? params.CreationDate : null;
-
-    }
-}
-
-/**
- * DescribeLoraDevice返回参数结构体
- * @class
- */
-class DescribeLoraDeviceResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 设备名称
-         * @type {string || null}
-         */
-        this.DeviceName = null;
-
-        /**
-         * LoRa应用UUID
-         * @type {string || null}
-         */
-        this.AppEui = null;
-
-        /**
-         * LoRa设备UUID
-         * @type {string || null}
-         */
-        this.DeviceEui = null;
-
-        /**
-         * LoRa应用密钥
-         * @type {string || null}
-         */
-        this.AppKey = null;
-
-        /**
-         * 设备类型,目前支持A、B、C三种
-         * @type {string || null}
-         */
-        this.ClassType = null;
-
-        /**
-         * 设备所属产品id
-         * @type {string || null}
-         */
-        this.ProductId = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.DeviceName = 'DeviceName' in params ? params.DeviceName : null;
-        this.AppEui = 'AppEui' in params ? params.AppEui : null;
-        this.DeviceEui = 'DeviceEui' in params ? params.DeviceEui : null;
-        this.AppKey = 'AppKey' in params ? params.AppKey : null;
-        this.ClassType = 'ClassType' in params ? params.ClassType : null;
-        this.ProductId = 'ProductId' in params ? params.ProductId : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * DescribeTasks返回参数结构体
- * @class
- */
-class DescribeTasksResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 用户一个月内创建的任务总数
-         * @type {number || null}
-         */
-        this.TotalCount = null;
-
-        /**
-         * 此页任务对象的数组，按创建时间排序
-         * @type {Array.<TaskInfo> || null}
-         */
-        this.Tasks = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
-
-        if (params.Tasks) {
-            this.Tasks = new Array();
-            for (let z in params.Tasks) {
-                let obj = new TaskInfo();
-                obj.deserialize(params.Tasks[z]);
-                this.Tasks.push(obj);
-            }
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * BindDevices返回参数结构体
- * @class
- */
-class BindDevicesResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
  * CreateProduct返回参数结构体
  * @class
  */
@@ -2201,24 +1400,18 @@ class CreateProductResponse extends  AbstractModel {
 }
 
 /**
- * DescribeProducts请求参数结构体
+ * DeleteLoraDevice返回参数结构体
  * @class
  */
-class DescribeProductsRequest extends  AbstractModel {
+class DeleteLoraDeviceResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 偏移量，Offset从0开始
-         * @type {number || null}
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
          */
-        this.Offset = null;
-
-        /**
-         * 分页大小，当前页面中显示的最大数量，值范围 10-250。
-         * @type {number || null}
-         */
-        this.Limit = null;
+        this.RequestId = null;
 
     }
 
@@ -2229,92 +1422,7 @@ class DescribeProductsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Offset = 'Offset' in params ? params.Offset : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
-
-    }
-}
-
-/**
- * DescribeDevices请求参数结构体
- * @class
- */
-class DescribeDevicesRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 需要查看设备列表的产品 ID
-         * @type {string || null}
-         */
-        this.ProductId = null;
-
-        /**
-         * 偏移量，Offset从0开始
-         * @type {number || null}
-         */
-        this.Offset = null;
-
-        /**
-         * 分页的大小，数值范围 10-250
-         * @type {number || null}
-         */
-        this.Limit = null;
-
-        /**
-         * 设备固件版本号，若不带此参数会返回所有固件版本的设备
-         * @type {string || null}
-         */
-        this.FirmwareVersion = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.ProductId = 'ProductId' in params ? params.ProductId : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
-        this.FirmwareVersion = 'FirmwareVersion' in params ? params.FirmwareVersion : null;
-
-    }
-}
-
-/**
- * 代理订阅信息
- * @class
- */
-class BrokerSubscribe extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 产品ID
-         * @type {string || null}
-         */
-        this.ProductId = null;
-
-        /**
-         * 设备名
-         * @type {string || null}
-         */
-        this.DeviceName = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.ProductId = 'ProductId' in params ? params.ProductId : null;
-        this.DeviceName = 'DeviceName' in params ? params.DeviceName : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2388,18 +1496,84 @@ class CreateTaskRequest extends  AbstractModel {
 }
 
 /**
- * DisableTopicRule请求参数结构体
+ * 创建规则请求包体
  * @class
  */
-class DisableTopicRuleRequest extends  AbstractModel {
+class TopicRulePayload extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 规则名称
+         * 规则的SQL语句，如： SELECT * FROM 'pid/dname/event'，然后对其进行base64编码，得：U0VMRUNUICogRlJPTSAncGlkL2RuYW1lL2V2ZW50Jw==
          * @type {string || null}
          */
-        this.RuleName = null;
+        this.Sql = null;
+
+        /**
+         * 行为的JSON字符串，大部分种类举例如下：
+[
+    {
+        "republish": {
+            "topic": "TEST/test"
+        }
+    },
+    {
+        "forward": {
+            "api": "http://127.0.0.1:8080"
+        }
+    },
+    {
+        "ckafka": {
+            "instance": {
+                "id": "ckafka-test",
+                "name": ""
+            },
+            "topic": {
+                "id": "topic-test",
+                "name": "test"
+            },
+            "region": "gz"
+        }
+    },
+    {
+        "cmqqueue": {
+            "queuename": "queue-test-TEST",
+            "region": "gz"
+        }
+    },
+    {
+        "mysql": {
+            "instanceid": "cdb-test",
+            "region": "gz",
+            "username": "test",
+            "userpwd": "*****",
+            "dbname": "d_mqtt",
+            "tablename": "t_test",
+            "fieldpairs": [
+                {
+                    "field": "test",
+                    "value": "test"
+                }
+            ],
+            "devicetype": "CUSTOM"
+        }
+    }
+]
+         * @type {string || null}
+         */
+        this.Actions = null;
+
+        /**
+         * 规则描述
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * 是否禁用规则
+         * @type {boolean || null}
+         */
+        this.RuleDisabled = null;
 
     }
 
@@ -2410,44 +1584,19 @@ class DisableTopicRuleRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RuleName = 'RuleName' in params ? params.RuleName : null;
+        this.Sql = 'Sql' in params ? params.Sql : null;
+        this.Actions = 'Actions' in params ? params.Actions : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.RuleDisabled = 'RuleDisabled' in params ? params.RuleDisabled : null;
 
     }
 }
 
 /**
- * CreateTopicPolicy返回参数结构体
+ * DescribeMultiDevices返回参数结构体
  * @class
  */
-class CreateTopicPolicyResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * DescribeMultiDevTask请求参数结构体
- * @class
- */
-class DescribeMultiDevTaskRequest extends  AbstractModel {
+class DescribeMultiDevicesResponse extends  AbstractModel {
     constructor(){
         super();
 
@@ -2458,10 +1607,22 @@ class DescribeMultiDevTaskRequest extends  AbstractModel {
         this.TaskId = null;
 
         /**
-         * 产品 ID，创建产品时腾讯云为用户分配全局唯一的 ID
+         * 设备详细信息列表
+         * @type {Array.<MultiDevicesInfo> || null}
+         */
+        this.DevicesInfo = null;
+
+        /**
+         * 该任务创建设备的总数
+         * @type {number || null}
+         */
+        this.TotalDevNum = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.ProductId = null;
+        this.RequestId = null;
 
     }
 
@@ -2473,62 +1634,16 @@ class DescribeMultiDevTaskRequest extends  AbstractModel {
             return;
         }
         this.TaskId = 'TaskId' in params ? params.TaskId : null;
-        this.ProductId = 'ProductId' in params ? params.ProductId : null;
 
-    }
-}
-
-/**
- * CreateTopicRule返回参数结构体
- * @class
- */
-class CreateTopicRuleResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
+        if (params.DevicesInfo) {
+            this.DevicesInfo = new Array();
+            for (let z in params.DevicesInfo) {
+                let obj = new MultiDevicesInfo();
+                obj.deserialize(params.DevicesInfo[z]);
+                this.DevicesInfo.push(obj);
+            }
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * CancelTask返回参数结构体
- * @class
- */
-class CancelTaskResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
+        this.TotalDevNum = 'TotalDevNum' in params ? params.TotalDevNum : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -2614,46 +1729,6 @@ class CreateDeviceResponse extends  AbstractModel {
         this.LoraAppKey = 'LoraAppKey' in params ? params.LoraAppKey : null;
         this.LoraNwkKey = 'LoraNwkKey' in params ? params.LoraNwkKey : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * CreateTopicRule请求参数结构体
- * @class
- */
-class CreateTopicRuleRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 规则名称
-         * @type {string || null}
-         */
-        this.RuleName = null;
-
-        /**
-         * 规则内容
-         * @type {TopicRulePayload || null}
-         */
-        this.TopicRulePayload = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RuleName = 'RuleName' in params ? params.RuleName : null;
-
-        if (params.TopicRulePayload) {
-            let obj = new TopicRulePayload();
-            obj.deserialize(params.TopicRulePayload)
-            this.TopicRulePayload = obj;
-        }
 
     }
 }
@@ -2790,60 +1865,10 @@ class CreateDeviceRequest extends  AbstractModel {
 }
 
 /**
- * DescribeProducts返回参数结构体
+ * DescribeProductTask请求参数结构体
  * @class
  */
-class DescribeProductsResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 产品总数
-         * @type {number || null}
-         */
-        this.TotalCount = null;
-
-        /**
-         * 产品详细信息列表
-         * @type {Array.<ProductInfo> || null}
-         */
-        this.Products = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
-
-        if (params.Products) {
-            this.Products = new Array();
-            for (let z in params.Products) {
-                let obj = new ProductInfo();
-                obj.deserialize(params.Products[z]);
-                this.Products.push(obj);
-            }
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * UpdateDeviceShadow请求参数结构体
- * @class
- */
-class UpdateDeviceShadowRequest extends  AbstractModel {
+class DescribeProductTaskRequest extends  AbstractModel {
     constructor(){
         super();
 
@@ -2854,28 +1879,10 @@ class UpdateDeviceShadowRequest extends  AbstractModel {
         this.ProductId = null;
 
         /**
-         * 设备名称
-         * @type {string || null}
-         */
-        this.DeviceName = null;
-
-        /**
-         * 虚拟设备的状态，JSON字符串格式，由desired结构组成
-         * @type {string || null}
-         */
-        this.State = null;
-
-        /**
-         * 当前版本号，需要和后台的version保持一致，才能更新成功
+         * 任务ID
          * @type {number || null}
          */
-        this.ShadowVersion = null;
-
-        /**
-         * 下发delta消息的topic前缀，可选类型: "$shadow","$template"。不填写默认"$shadow"。
-         * @type {string || null}
-         */
-        this.Prefix = null;
+        this.TaskId = null;
 
     }
 
@@ -2887,10 +1894,7 @@ class UpdateDeviceShadowRequest extends  AbstractModel {
             return;
         }
         this.ProductId = 'ProductId' in params ? params.ProductId : null;
-        this.DeviceName = 'DeviceName' in params ? params.DeviceName : null;
-        this.State = 'State' in params ? params.State : null;
-        this.ShadowVersion = 'ShadowVersion' in params ? params.ShadowVersion : null;
-        this.Prefix = 'Prefix' in params ? params.Prefix : null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
 
     }
 }
@@ -2943,6 +1947,1004 @@ class CreateProductRequest extends  AbstractModel {
 }
 
 /**
+ * DisableTopicRule返回参数结构体
+ * @class
+ */
+class DisableTopicRuleResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 代理订阅信息
+ * @class
+ */
+class BrokerSubscribe extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 产品ID
+         * @type {string || null}
+         */
+        this.ProductId = null;
+
+        /**
+         * 设备名
+         * @type {string || null}
+         */
+        this.DeviceName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ProductId = 'ProductId' in params ? params.ProductId : null;
+        this.DeviceName = 'DeviceName' in params ? params.DeviceName : null;
+
+    }
+}
+
+/**
+ * DescribeProductTask返回参数结构体
+ * @class
+ */
+class DescribeProductTaskResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 产品任务详细信息
+         * @type {ProductTaskInfo || null}
+         */
+        this.TaskInfo = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.TaskInfo) {
+            let obj = new ProductTaskInfo();
+            obj.deserialize(params.TaskInfo)
+            this.TaskInfo = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeDevice返回参数结构体
+ * @class
+ */
+class DescribeDeviceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 设备名
+         * @type {string || null}
+         */
+        this.DeviceName = null;
+
+        /**
+         * 设备是否在线，0不在线，1在线
+         * @type {number || null}
+         */
+        this.Online = null;
+
+        /**
+         * 设备登录时间
+         * @type {number || null}
+         */
+        this.LoginTime = null;
+
+        /**
+         * 设备固件版本
+         * @type {string || null}
+         */
+        this.Version = null;
+
+        /**
+         * 设备最后更新时间
+         * @type {number || null}
+         */
+        this.LastUpdateTime = null;
+
+        /**
+         * 设备证书
+         * @type {string || null}
+         */
+        this.DeviceCert = null;
+
+        /**
+         * 设备密钥
+         * @type {string || null}
+         */
+        this.DevicePsk = null;
+
+        /**
+         * 设备属性
+         * @type {Array.<DeviceTag> || null}
+         */
+        this.Tags = null;
+
+        /**
+         * 设备类型
+         * @type {number || null}
+         */
+        this.DeviceType = null;
+
+        /**
+         * 国际移动设备识别码 IMEI
+         * @type {string || null}
+         */
+        this.Imei = null;
+
+        /**
+         * 运营商类型
+         * @type {number || null}
+         */
+        this.Isp = null;
+
+        /**
+         * IP地址
+         * @type {number || null}
+         */
+        this.ConnIP = null;
+
+        /**
+         * NB IoT运营商处的DeviceID
+         * @type {string || null}
+         */
+        this.NbiotDeviceID = null;
+
+        /**
+         * Lora设备的dev eui
+         * @type {string || null}
+         */
+        this.LoraDevEui = null;
+
+        /**
+         * Lora设备的mote type
+         * @type {number || null}
+         */
+        this.LoraMoteType = null;
+
+        /**
+         * 设备的sdk日志等级
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.LogLevel = null;
+
+        /**
+         * 首次上线时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.FirstOnlineTime = null;
+
+        /**
+         * 最近下线时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.LastOfflineTime = null;
+
+        /**
+         * 设备创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * 设备证书获取状态，0 未获取过设备密钥, 1 已获取过设备密钥
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.CertState = null;
+
+        /**
+         * 设备启用状态
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.EnableState = null;
+
+        /**
+         * 设备标签
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<DeviceLabel> || null}
+         */
+        this.Labels = null;
+
+        /**
+         * MQTT客户端IP地址
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ClientIP = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DeviceName = 'DeviceName' in params ? params.DeviceName : null;
+        this.Online = 'Online' in params ? params.Online : null;
+        this.LoginTime = 'LoginTime' in params ? params.LoginTime : null;
+        this.Version = 'Version' in params ? params.Version : null;
+        this.LastUpdateTime = 'LastUpdateTime' in params ? params.LastUpdateTime : null;
+        this.DeviceCert = 'DeviceCert' in params ? params.DeviceCert : null;
+        this.DevicePsk = 'DevicePsk' in params ? params.DevicePsk : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new DeviceTag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
+        this.DeviceType = 'DeviceType' in params ? params.DeviceType : null;
+        this.Imei = 'Imei' in params ? params.Imei : null;
+        this.Isp = 'Isp' in params ? params.Isp : null;
+        this.ConnIP = 'ConnIP' in params ? params.ConnIP : null;
+        this.NbiotDeviceID = 'NbiotDeviceID' in params ? params.NbiotDeviceID : null;
+        this.LoraDevEui = 'LoraDevEui' in params ? params.LoraDevEui : null;
+        this.LoraMoteType = 'LoraMoteType' in params ? params.LoraMoteType : null;
+        this.LogLevel = 'LogLevel' in params ? params.LogLevel : null;
+        this.FirstOnlineTime = 'FirstOnlineTime' in params ? params.FirstOnlineTime : null;
+        this.LastOfflineTime = 'LastOfflineTime' in params ? params.LastOfflineTime : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.CertState = 'CertState' in params ? params.CertState : null;
+        this.EnableState = 'EnableState' in params ? params.EnableState : null;
+
+        if (params.Labels) {
+            this.Labels = new Array();
+            for (let z in params.Labels) {
+                let obj = new DeviceLabel();
+                obj.deserialize(params.Labels[z]);
+                this.Labels.push(obj);
+            }
+        }
+        this.ClientIP = 'ClientIP' in params ? params.ClientIP : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * PublishMessage请求参数结构体
+ * @class
+ */
+class PublishMessageRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 消息发往的主题。命名规则：${ProductId}/${DeviceName}/[a-zA-Z0-9:_-]{1,128}
+         * @type {string || null}
+         */
+        this.Topic = null;
+
+        /**
+         * 消息内容
+         * @type {string || null}
+         */
+        this.Payload = null;
+
+        /**
+         * 产品ID
+         * @type {string || null}
+         */
+        this.ProductId = null;
+
+        /**
+         * 设备名称
+         * @type {string || null}
+         */
+        this.DeviceName = null;
+
+        /**
+         * 服务质量等级，取值为0或1
+         * @type {number || null}
+         */
+        this.Qos = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Topic = 'Topic' in params ? params.Topic : null;
+        this.Payload = 'Payload' in params ? params.Payload : null;
+        this.ProductId = 'ProductId' in params ? params.ProductId : null;
+        this.DeviceName = 'DeviceName' in params ? params.DeviceName : null;
+        this.Qos = 'Qos' in params ? params.Qos : null;
+
+    }
+}
+
+/**
+ * 设备标签
+ * @class
+ */
+class DeviceLabel extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 标签标识
+         * @type {string || null}
+         */
+        this.Key = null;
+
+        /**
+         * 标签值
+         * @type {string || null}
+         */
+        this.Value = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Key = 'Key' in params ? params.Key : null;
+        this.Value = 'Value' in params ? params.Value : null;
+
+    }
+}
+
+/**
+ * UpdateDeviceAvailableState返回参数结构体
+ * @class
+ */
+class UpdateDeviceAvailableStateResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CancelTask请求参数结构体
+ * @class
+ */
+class CancelTaskRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 任务 ID
+         * @type {string || null}
+         */
+        this.Id = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Id = 'Id' in params ? params.Id : null;
+
+    }
+}
+
+/**
+ * UpdateDeviceAvailableState请求参数结构体
+ * @class
+ */
+class UpdateDeviceAvailableStateRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 设备所属产品id
+         * @type {string || null}
+         */
+        this.ProductId = null;
+
+        /**
+         * 设备名称
+         * @type {string || null}
+         */
+        this.DeviceName = null;
+
+        /**
+         * 要设置的设备状态，1为启用，0为禁用
+         * @type {number || null}
+         */
+        this.EnableState = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ProductId = 'ProductId' in params ? params.ProductId : null;
+        this.DeviceName = 'DeviceName' in params ? params.DeviceName : null;
+        this.EnableState = 'EnableState' in params ? params.EnableState : null;
+
+    }
+}
+
+/**
+ * DeleteProduct返回参数结构体
+ * @class
+ */
+class DeleteProductResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CreateTopicPolicy返回参数结构体
+ * @class
+ */
+class CreateTopicPolicyResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * PublishToDevice请求参数结构体
+ * @class
+ */
+class PublishToDeviceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 产品id
+         * @type {string || null}
+         */
+        this.ProductId = null;
+
+        /**
+         * 设备名称
+         * @type {string || null}
+         */
+        this.DeviceName = null;
+
+        /**
+         * LoRa 端口
+         * @type {number || null}
+         */
+        this.Port = null;
+
+        /**
+         * 消息内容
+         * @type {string || null}
+         */
+        this.Payload = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ProductId = 'ProductId' in params ? params.ProductId : null;
+        this.DeviceName = 'DeviceName' in params ? params.DeviceName : null;
+        this.Port = 'Port' in params ? params.Port : null;
+        this.Payload = 'Payload' in params ? params.Payload : null;
+
+    }
+}
+
+/**
+ * DeleteTopicRule返回参数结构体
+ * @class
+ */
+class DeleteTopicRuleResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeDevice请求参数结构体
+ * @class
+ */
+class DescribeDeviceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 产品ID
+         * @type {string || null}
+         */
+        this.ProductID = null;
+
+        /**
+         * 设备名
+         * @type {string || null}
+         */
+        this.DeviceName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ProductID = 'ProductID' in params ? params.ProductID : null;
+        this.DeviceName = 'DeviceName' in params ? params.DeviceName : null;
+
+    }
+}
+
+/**
+ * CreateMultiDevicesTask返回参数结构体
+ * @class
+ */
+class CreateMultiDevicesTaskResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 任务ID
+         * @type {number || null}
+         */
+        this.Id = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Id = 'Id' in params ? params.Id : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CreateTopicPolicy请求参数结构体
+ * @class
+ */
+class CreateTopicPolicyRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 产品自身ID
+         * @type {string || null}
+         */
+        this.ProductID = null;
+
+        /**
+         * Topic名称
+         * @type {string || null}
+         */
+        this.TopicName = null;
+
+        /**
+         * Topic权限，1发布，2订阅，3订阅和发布
+         * @type {number || null}
+         */
+        this.Privilege = null;
+
+        /**
+         * 代理订阅信息，网关产品为绑定的子产品创建topic时需要填写，内容为子产品的ID和设备信息。
+         * @type {BrokerSubscribe || null}
+         */
+        this.BrokerSubscribe = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ProductID = 'ProductID' in params ? params.ProductID : null;
+        this.TopicName = 'TopicName' in params ? params.TopicName : null;
+        this.Privilege = 'Privilege' in params ? params.Privilege : null;
+
+        if (params.BrokerSubscribe) {
+            let obj = new BrokerSubscribe();
+            obj.deserialize(params.BrokerSubscribe)
+            this.BrokerSubscribe = obj;
+        }
+
+    }
+}
+
+/**
+ * 产品元数据
+ * @class
+ */
+class ProductMetadata extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 产品创建时间
+         * @type {number || null}
+         */
+        this.CreationDate = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CreationDate = 'CreationDate' in params ? params.CreationDate : null;
+
+    }
+}
+
+/**
+ * DescribeLoraDevice返回参数结构体
+ * @class
+ */
+class DescribeLoraDeviceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 设备名称
+         * @type {string || null}
+         */
+        this.DeviceName = null;
+
+        /**
+         * LoRa应用UUID
+         * @type {string || null}
+         */
+        this.AppEui = null;
+
+        /**
+         * LoRa设备UUID
+         * @type {string || null}
+         */
+        this.DeviceEui = null;
+
+        /**
+         * LoRa应用密钥
+         * @type {string || null}
+         */
+        this.AppKey = null;
+
+        /**
+         * 设备类型,目前支持A、B、C三种
+         * @type {string || null}
+         */
+        this.ClassType = null;
+
+        /**
+         * 设备所属产品id
+         * @type {string || null}
+         */
+        this.ProductId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DeviceName = 'DeviceName' in params ? params.DeviceName : null;
+        this.AppEui = 'AppEui' in params ? params.AppEui : null;
+        this.DeviceEui = 'DeviceEui' in params ? params.DeviceEui : null;
+        this.AppKey = 'AppKey' in params ? params.AppKey : null;
+        this.ClassType = 'ClassType' in params ? params.ClassType : null;
+        this.ProductId = 'ProductId' in params ? params.ProductId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 产品级任务详细信息
+ * @class
+ */
+class ProductTaskInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 任务ID
+         * @type {number || null}
+         */
+        this.Id = null;
+
+        /**
+         * 任务类型 0-批量创建设备类型
+         * @type {number || null}
+         */
+        this.Type = null;
+
+        /**
+         * 任务状态 0-创建中 1-待执行 2-执行中 3-执行失败 4-子任务部分失败 5-执行成功
+         * @type {number || null}
+         */
+        this.State = null;
+
+        /**
+         * 任务参数类型 cosfile-文件输入 random-随机生成
+         * @type {string || null}
+         */
+        this.ParametersType = null;
+
+        /**
+         * 任务参数
+         * @type {string || null}
+         */
+        this.Parameters = null;
+
+        /**
+         * 任务执行结果类型 cosfile-文件输出 errmsg-错误信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ResultType = null;
+
+        /**
+         * 任务执行结果
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Result = null;
+
+        /**
+         * 子任务总个数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.BatchCount = null;
+
+        /**
+         * 子任务已执行个数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.BatchOffset = null;
+
+        /**
+         * 任务创建时间
+         * @type {number || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * 任务更新时间
+         * @type {number || null}
+         */
+        this.UpdateTime = null;
+
+        /**
+         * 任务完成时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.CompleteTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Id = 'Id' in params ? params.Id : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.State = 'State' in params ? params.State : null;
+        this.ParametersType = 'ParametersType' in params ? params.ParametersType : null;
+        this.Parameters = 'Parameters' in params ? params.Parameters : null;
+        this.ResultType = 'ResultType' in params ? params.ResultType : null;
+        this.Result = 'Result' in params ? params.Result : null;
+        this.BatchCount = 'BatchCount' in params ? params.BatchCount : null;
+        this.BatchOffset = 'BatchOffset' in params ? params.BatchOffset : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.CompleteTime = 'CompleteTime' in params ? params.CompleteTime : null;
+
+    }
+}
+
+/**
+ * CancelTask返回参数结构体
+ * @class
+ */
+class CancelTaskResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * 设备属性
  * @class
  */
@@ -2974,34 +2976,6 @@ class Attribute extends  AbstractModel {
                 this.Tags.push(obj);
             }
         }
-
-    }
-}
-
-/**
- * DeleteDevice返回参数结构体
- * @class
- */
-class DeleteDeviceResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3057,6 +3031,1141 @@ class CreateLoraDeviceResponse extends  AbstractModel {
         this.DeviceEui = 'DeviceEui' in params ? params.DeviceEui : null;
         this.ClassType = 'ClassType' in params ? params.ClassType : null;
         this.DeviceName = 'DeviceName' in params ? params.DeviceName : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DeleteTopicRule请求参数结构体
+ * @class
+ */
+class DeleteTopicRuleRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 规则名
+         * @type {string || null}
+         */
+        this.RuleName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RuleName = 'RuleName' in params ? params.RuleName : null;
+
+    }
+}
+
+/**
+ * ResetDeviceState请求参数结构体
+ * @class
+ */
+class ResetDeviceStateRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 产品ID
+         * @type {string || null}
+         */
+        this.ProductId = null;
+
+        /**
+         * 设备名称
+         * @type {Array.<string> || null}
+         */
+        this.DeviceNames = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ProductId = 'ProductId' in params ? params.ProductId : null;
+        this.DeviceNames = 'DeviceNames' in params ? params.DeviceNames : null;
+
+    }
+}
+
+/**
+ * CreateMultiDevice请求参数结构体
+ * @class
+ */
+class CreateMultiDeviceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 产品 ID。创建产品时腾讯云为用户分配全局唯一的 ID
+         * @type {string || null}
+         */
+        this.ProductId = null;
+
+        /**
+         * 批量创建的设备名数组，单次最多创建 100 个设备。命名规则：[a-zA-Z0-9:_-]{1,48}
+         * @type {Array.<string> || null}
+         */
+        this.DeviceNames = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ProductId = 'ProductId' in params ? params.ProductId : null;
+        this.DeviceNames = 'DeviceNames' in params ? params.DeviceNames : null;
+
+    }
+}
+
+/**
+ * PublishToDevice返回参数结构体
+ * @class
+ */
+class PublishToDeviceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeDeviceShadow请求参数结构体
+ * @class
+ */
+class DescribeDeviceShadowRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 产品 ID
+         * @type {string || null}
+         */
+        this.ProductId = null;
+
+        /**
+         * 设备名称。命名规则：[a-zA-Z0-9:_-]{1,48}
+         * @type {string || null}
+         */
+        this.DeviceName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ProductId = 'ProductId' in params ? params.ProductId : null;
+        this.DeviceName = 'DeviceName' in params ? params.DeviceName : null;
+
+    }
+}
+
+/**
+ * UnbindDevices返回参数结构体
+ * @class
+ */
+class UnbindDevicesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CreateTaskFileUrl返回参数结构体
+ * @class
+ */
+class CreateTaskFileUrlResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 任务文件上传链接
+         * @type {string || null}
+         */
+        this.Url = null;
+
+        /**
+         * 任务文件名
+         * @type {string || null}
+         */
+        this.FileName = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Url = 'Url' in params ? params.Url : null;
+        this.FileName = 'FileName' in params ? params.FileName : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeMultiDevices请求参数结构体
+ * @class
+ */
+class DescribeMultiDevicesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 产品 ID，创建产品时腾讯云为用户分配全局唯一的 ID
+         * @type {string || null}
+         */
+        this.ProductId = null;
+
+        /**
+         * 任务 ID，由批量创建设备接口返回
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * 分页偏移
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 分页大小，每页返回的设备个数
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ProductId = 'ProductId' in params ? params.ProductId : null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+
+    }
+}
+
+/**
+ * CreateTaskFileUrl请求参数结构体
+ * @class
+ */
+class CreateTaskFileUrlRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 产品ID
+         * @type {string || null}
+         */
+        this.ProductId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ProductId = 'ProductId' in params ? params.ProductId : null;
+
+    }
+}
+
+/**
+ * UpdateDeviceShadow返回参数结构体
+ * @class
+ */
+class UpdateDeviceShadowResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 设备影子数据，JSON字符串格式
+         * @type {string || null}
+         */
+        this.Data = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Data = 'Data' in params ? params.Data : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeTask返回参数结构体
+ * @class
+ */
+class DescribeTaskResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 任务类型，目前取值为 “UpdateShadow” 或者 “PublishMessage”
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * 任务 ID
+         * @type {string || null}
+         */
+        this.Id = null;
+
+        /**
+         * 产品 ID
+         * @type {string || null}
+         */
+        this.ProductId = null;
+
+        /**
+         * 状态。1表示等待处理，2表示调度处理中，3表示已完成，4表示失败，5表示已取消
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * 任务创建时间，Unix 时间戳
+         * @type {number || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * 最后任务更新时间，Unix 时间戳
+         * @type {number || null}
+         */
+        this.UpdateTime = null;
+
+        /**
+         * 任务完成时间，Unix 时间戳
+         * @type {number || null}
+         */
+        this.DoneTime = null;
+
+        /**
+         * 被调度时间，Unix 时间戳
+         * @type {number || null}
+         */
+        this.ScheduleTime = null;
+
+        /**
+         * 返回的错误码
+         * @type {number || null}
+         */
+        this.RetCode = null;
+
+        /**
+         * 返回的错误信息
+         * @type {string || null}
+         */
+        this.ErrMsg = null;
+
+        /**
+         * 完成任务的设备比例
+         * @type {number || null}
+         */
+        this.Percent = null;
+
+        /**
+         * 匹配到的需执行任务的设备数目
+         * @type {number || null}
+         */
+        this.AllDeviceCnt = null;
+
+        /**
+         * 已完成任务的设备数目
+         * @type {number || null}
+         */
+        this.DoneDeviceCnt = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Id = 'Id' in params ? params.Id : null;
+        this.ProductId = 'ProductId' in params ? params.ProductId : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.DoneTime = 'DoneTime' in params ? params.DoneTime : null;
+        this.ScheduleTime = 'ScheduleTime' in params ? params.ScheduleTime : null;
+        this.RetCode = 'RetCode' in params ? params.RetCode : null;
+        this.ErrMsg = 'ErrMsg' in params ? params.ErrMsg : null;
+        this.Percent = 'Percent' in params ? params.Percent : null;
+        this.AllDeviceCnt = 'AllDeviceCnt' in params ? params.AllDeviceCnt : null;
+        this.DoneDeviceCnt = 'DoneDeviceCnt' in params ? params.DoneDeviceCnt : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CreateTask返回参数结构体
+ * @class
+ */
+class CreateTaskResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 创建的任务ID
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 批量发消息请求
+ * @class
+ */
+class BatchPublishMessage extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 消息发往的主题。为 Topic 权限中去除 ProductID 和 DeviceName 的部分，如 “event”
+         * @type {string || null}
+         */
+        this.Topic = null;
+
+        /**
+         * 消息内容
+         * @type {string || null}
+         */
+        this.Payload = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Topic = 'Topic' in params ? params.Topic : null;
+        this.Payload = 'Payload' in params ? params.Payload : null;
+
+    }
+}
+
+/**
+ * DescribeMultiDevTask返回参数结构体
+ * @class
+ */
+class DescribeMultiDevTaskResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 任务 ID
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * 任务是否完成。0 代表任务未开始，1 代表任务正在执行，2 代表任务已完成
+         * @type {number || null}
+         */
+        this.TaskStatus = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.TaskStatus = 'TaskStatus' in params ? params.TaskStatus : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeProductTasks请求参数结构体
+ * @class
+ */
+class DescribeProductTasksRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 产品ID
+         * @type {string || null}
+         */
+        this.ProductId = null;
+
+        /**
+         * 产品级别任务列表偏移量
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 产品级别任务列表拉取个数
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ProductId = 'ProductId' in params ? params.ProductId : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+
+    }
+}
+
+/**
+ * 设备属性
+ * @class
+ */
+class DeviceTag extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 属性名称
+         * @type {string || null}
+         */
+        this.Tag = null;
+
+        /**
+         * 属性值的类型，1 int，2 string
+         * @type {number || null}
+         */
+        this.Type = null;
+
+        /**
+         * 属性的值
+         * @type {string || null}
+         */
+        this.Value = null;
+
+        /**
+         * 属性描述名称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Name = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Tag = 'Tag' in params ? params.Tag : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Value = 'Value' in params ? params.Value : null;
+        this.Name = 'Name' in params ? params.Name : null;
+
+    }
+}
+
+/**
+ * DescribeLoraDevice请求参数结构体
+ * @class
+ */
+class DescribeLoraDeviceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 产品id
+         * @type {string || null}
+         */
+        this.ProductId = null;
+
+        /**
+         * 设备名称
+         * @type {string || null}
+         */
+        this.DeviceName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ProductId = 'ProductId' in params ? params.ProductId : null;
+        this.DeviceName = 'DeviceName' in params ? params.DeviceName : null;
+
+    }
+}
+
+/**
+ * DescribeTask请求参数结构体
+ * @class
+ */
+class DescribeTaskRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 任务ID
+         * @type {string || null}
+         */
+        this.Id = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Id = 'Id' in params ? params.Id : null;
+
+    }
+}
+
+/**
+ * PublishMessage返回参数结构体
+ * @class
+ */
+class PublishMessageResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * BindDevices返回参数结构体
+ * @class
+ */
+class BindDevicesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 重置设备状态结果
+ * @class
+ */
+class ResetDeviceResult extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 设备名
+         * @type {string || null}
+         */
+        this.DeviceName = null;
+
+        /**
+         * 是否成功
+         * @type {boolean || null}
+         */
+        this.Success = null;
+
+        /**
+         * 失败原因
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Reason = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DeviceName = 'DeviceName' in params ? params.DeviceName : null;
+        this.Success = 'Success' in params ? params.Success : null;
+        this.Reason = 'Reason' in params ? params.Reason : null;
+
+    }
+}
+
+/**
+ * DescribeDevices请求参数结构体
+ * @class
+ */
+class DescribeDevicesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 需要查看设备列表的产品 ID
+         * @type {string || null}
+         */
+        this.ProductId = null;
+
+        /**
+         * 偏移量，Offset从0开始
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 分页的大小，数值范围 10-250
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 设备固件版本号，若不带此参数会返回所有固件版本的设备
+         * @type {string || null}
+         */
+        this.FirmwareVersion = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ProductId = 'ProductId' in params ? params.ProductId : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.FirmwareVersion = 'FirmwareVersion' in params ? params.FirmwareVersion : null;
+
+    }
+}
+
+/**
+ * DescribeDeviceClientKey返回参数结构体
+ * @class
+ */
+class DescribeDeviceClientKeyResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 设备的私钥
+         * @type {string || null}
+         */
+        this.ClientKey = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClientKey = 'ClientKey' in params ? params.ClientKey : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DisableTopicRule请求参数结构体
+ * @class
+ */
+class DisableTopicRuleRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 规则名称
+         * @type {string || null}
+         */
+        this.RuleName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RuleName = 'RuleName' in params ? params.RuleName : null;
+
+    }
+}
+
+/**
+ * ResetDeviceState返回参数结构体
+ * @class
+ */
+class ResetDeviceStateResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 批量重置设备成功数
+         * @type {number || null}
+         */
+        this.SuccessCount = null;
+
+        /**
+         * 批量重置设备结果
+         * @type {Array.<ResetDeviceResult> || null}
+         */
+        this.ResetDeviceResults = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SuccessCount = 'SuccessCount' in params ? params.SuccessCount : null;
+
+        if (params.ResetDeviceResults) {
+            this.ResetDeviceResults = new Array();
+            for (let z in params.ResetDeviceResults) {
+                let obj = new ResetDeviceResult();
+                obj.deserialize(params.ResetDeviceResults[z]);
+                this.ResetDeviceResults.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CreateTopicRule返回参数结构体
+ * @class
+ */
+class CreateTopicRuleResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CreateTopicRule请求参数结构体
+ * @class
+ */
+class CreateTopicRuleRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 规则名称
+         * @type {string || null}
+         */
+        this.RuleName = null;
+
+        /**
+         * 规则内容
+         * @type {TopicRulePayload || null}
+         */
+        this.TopicRulePayload = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RuleName = 'RuleName' in params ? params.RuleName : null;
+
+        if (params.TopicRulePayload) {
+            let obj = new TopicRulePayload();
+            obj.deserialize(params.TopicRulePayload)
+            this.TopicRulePayload = obj;
+        }
+
+    }
+}
+
+/**
+ * PublishAsDevice请求参数结构体
+ * @class
+ */
+class PublishAsDeviceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 产品ID
+         * @type {string || null}
+         */
+        this.ProductId = null;
+
+        /**
+         * 设备名称
+         * @type {string || null}
+         */
+        this.DeviceName = null;
+
+        /**
+         * LoRa 设备端口
+         * @type {number || null}
+         */
+        this.Port = null;
+
+        /**
+         * 消息内容
+         * @type {string || null}
+         */
+        this.Payload = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ProductId = 'ProductId' in params ? params.ProductId : null;
+        this.DeviceName = 'DeviceName' in params ? params.DeviceName : null;
+        this.Port = 'Port' in params ? params.Port : null;
+        this.Payload = 'Payload' in params ? params.Payload : null;
+
+    }
+}
+
+/**
+ * DeleteDevice返回参数结构体
+ * @class
+ */
+class DeleteDeviceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -3261,18 +4370,24 @@ class DeviceInfo extends  AbstractModel {
 }
 
 /**
- * CreateMultiDevice返回参数结构体
+ * DescribeProductTasks返回参数结构体
  * @class
  */
-class CreateMultiDeviceResponse extends  AbstractModel {
+class DescribeProductTasksResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 任务ID，腾讯云生成全局唯一的任务 ID，有效期一个月，一个月之后任务失效。可以调用获取创建多设备任务状态接口获取该任务的执行状态，当状态为成功时，可以调用获取创建多设备任务结果接口获取该任务的结果
-         * @type {string || null}
+         * 符合条件的任务总个数
+         * @type {number || null}
          */
-        this.TaskId = null;
+        this.TotalCount = null;
+
+        /**
+         * 任务详细信息列表
+         * @type {Array.<ProductTaskInfo> || null}
+         */
+        this.TaskInfos = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -3289,168 +4404,16 @@ class CreateMultiDeviceResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TaskId = 'TaskId' in params ? params.TaskId : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
 
-    }
-}
-
-/**
- * ReplaceTopicRule返回参数结构体
- * @class
- */
-class ReplaceTopicRuleResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
+        if (params.TaskInfos) {
+            this.TaskInfos = new Array();
+            for (let z in params.TaskInfos) {
+                let obj = new ProductTaskInfo();
+                obj.deserialize(params.TaskInfos[z]);
+                this.TaskInfos.push(obj);
+            }
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * DescribeLoraDevice请求参数结构体
- * @class
- */
-class DescribeLoraDeviceRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 产品id
-         * @type {string || null}
-         */
-        this.ProductId = null;
-
-        /**
-         * 设备名称
-         * @type {string || null}
-         */
-        this.DeviceName = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.ProductId = 'ProductId' in params ? params.ProductId : null;
-        this.DeviceName = 'DeviceName' in params ? params.DeviceName : null;
-
-    }
-}
-
-/**
- * UnbindDevices返回参数结构体
- * @class
- */
-class UnbindDevicesResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * DescribeDeviceShadow返回参数结构体
- * @class
- */
-class DescribeDeviceShadowResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 设备影子数据
-         * @type {string || null}
-         */
-        this.Data = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Data = 'Data' in params ? params.Data : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * DescribeDeviceClientKey返回参数结构体
- * @class
- */
-class DescribeDeviceClientKeyResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 设备的私钥
-         * @type {string || null}
-         */
-        this.ClientKey = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.ClientKey = 'ClientKey' in params ? params.ClientKey : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -3485,41 +4448,6 @@ class PublishAsDeviceResponse extends  AbstractModel {
 }
 
 /**
- * CreateMultiDevice请求参数结构体
- * @class
- */
-class CreateMultiDeviceRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 产品 ID。创建产品时腾讯云为用户分配全局唯一的 ID
-         * @type {string || null}
-         */
-        this.ProductId = null;
-
-        /**
-         * 批量创建的设备名数组，单次最多创建 100 个设备。命名规则：[a-zA-Z0-9:_-]{1,48}
-         * @type {Array.<string> || null}
-         */
-        this.DeviceNames = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.ProductId = 'ProductId' in params ? params.ProductId : null;
-        this.DeviceNames = 'DeviceNames' in params ? params.DeviceNames : null;
-
-    }
-}
-
-/**
  * EnableTopicRule请求参数结构体
  * @class
  */
@@ -3547,490 +4475,98 @@ class EnableTopicRuleRequest extends  AbstractModel {
     }
 }
 
-/**
- * DescribeDevice返回参数结构体
- * @class
- */
-class DescribeDeviceResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 设备名
-         * @type {string || null}
-         */
-        this.DeviceName = null;
-
-        /**
-         * 设备是否在线，0不在线，1在线
-         * @type {number || null}
-         */
-        this.Online = null;
-
-        /**
-         * 设备登录时间
-         * @type {number || null}
-         */
-        this.LoginTime = null;
-
-        /**
-         * 设备固件版本
-         * @type {string || null}
-         */
-        this.Version = null;
-
-        /**
-         * 设备最后更新时间
-         * @type {number || null}
-         */
-        this.LastUpdateTime = null;
-
-        /**
-         * 设备证书
-         * @type {string || null}
-         */
-        this.DeviceCert = null;
-
-        /**
-         * 设备密钥
-         * @type {string || null}
-         */
-        this.DevicePsk = null;
-
-        /**
-         * 设备属性
-         * @type {Array.<DeviceTag> || null}
-         */
-        this.Tags = null;
-
-        /**
-         * 设备类型
-         * @type {number || null}
-         */
-        this.DeviceType = null;
-
-        /**
-         * IMEI
-         * @type {string || null}
-         */
-        this.Imei = null;
-
-        /**
-         * 运营商类型
-         * @type {number || null}
-         */
-        this.Isp = null;
-
-        /**
-         * IP地址
-         * @type {number || null}
-         */
-        this.ConnIP = null;
-
-        /**
-         * NB IoT运营商处的DeviceID
-         * @type {string || null}
-         */
-        this.NbiotDeviceID = null;
-
-        /**
-         * Lora设备的dev eui
-         * @type {string || null}
-         */
-        this.LoraDevEui = null;
-
-        /**
-         * Lora设备的mote type
-         * @type {number || null}
-         */
-        this.LoraMoteType = null;
-
-        /**
-         * 设备的sdk日志等级
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.LogLevel = null;
-
-        /**
-         * 首次上线时间
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.FirstOnlineTime = null;
-
-        /**
-         * 最近下线时间
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.LastOfflineTime = null;
-
-        /**
-         * 设备创建时间
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.CreateTime = null;
-
-        /**
-         * 设备证书获取状态，0 未获取过设备密钥, 1 已获取过设备密钥
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.CertState = null;
-
-        /**
-         * 设备启用状态
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.EnableState = null;
-
-        /**
-         * 设备标签
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {Array.<DeviceLabel> || null}
-         */
-        this.Labels = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.DeviceName = 'DeviceName' in params ? params.DeviceName : null;
-        this.Online = 'Online' in params ? params.Online : null;
-        this.LoginTime = 'LoginTime' in params ? params.LoginTime : null;
-        this.Version = 'Version' in params ? params.Version : null;
-        this.LastUpdateTime = 'LastUpdateTime' in params ? params.LastUpdateTime : null;
-        this.DeviceCert = 'DeviceCert' in params ? params.DeviceCert : null;
-        this.DevicePsk = 'DevicePsk' in params ? params.DevicePsk : null;
-
-        if (params.Tags) {
-            this.Tags = new Array();
-            for (let z in params.Tags) {
-                let obj = new DeviceTag();
-                obj.deserialize(params.Tags[z]);
-                this.Tags.push(obj);
-            }
-        }
-        this.DeviceType = 'DeviceType' in params ? params.DeviceType : null;
-        this.Imei = 'Imei' in params ? params.Imei : null;
-        this.Isp = 'Isp' in params ? params.Isp : null;
-        this.ConnIP = 'ConnIP' in params ? params.ConnIP : null;
-        this.NbiotDeviceID = 'NbiotDeviceID' in params ? params.NbiotDeviceID : null;
-        this.LoraDevEui = 'LoraDevEui' in params ? params.LoraDevEui : null;
-        this.LoraMoteType = 'LoraMoteType' in params ? params.LoraMoteType : null;
-        this.LogLevel = 'LogLevel' in params ? params.LogLevel : null;
-        this.FirstOnlineTime = 'FirstOnlineTime' in params ? params.FirstOnlineTime : null;
-        this.LastOfflineTime = 'LastOfflineTime' in params ? params.LastOfflineTime : null;
-        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
-        this.CertState = 'CertState' in params ? params.CertState : null;
-        this.EnableState = 'EnableState' in params ? params.EnableState : null;
-
-        if (params.Labels) {
-            this.Labels = new Array();
-            for (let z in params.Labels) {
-                let obj = new DeviceLabel();
-                obj.deserialize(params.Labels[z]);
-                this.Labels.push(obj);
-            }
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * DescribeDeviceShadow请求参数结构体
- * @class
- */
-class DescribeDeviceShadowRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 产品 ID
-         * @type {string || null}
-         */
-        this.ProductId = null;
-
-        /**
-         * 设备名称。命名规则：[a-zA-Z0-9:_-]{1,48}
-         * @type {string || null}
-         */
-        this.DeviceName = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.ProductId = 'ProductId' in params ? params.ProductId : null;
-        this.DeviceName = 'DeviceName' in params ? params.DeviceName : null;
-
-    }
-}
-
-/**
- * DescribeMultiDevices返回参数结构体
- * @class
- */
-class DescribeMultiDevicesResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 任务 ID，由批量创建设备接口返回
-         * @type {string || null}
-         */
-        this.TaskId = null;
-
-        /**
-         * 设备详细信息列表
-         * @type {Array.<MultiDevicesInfo> || null}
-         */
-        this.DevicesInfo = null;
-
-        /**
-         * 该任务创建设备的总数
-         * @type {number || null}
-         */
-        this.TotalDevNum = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.TaskId = 'TaskId' in params ? params.TaskId : null;
-
-        if (params.DevicesInfo) {
-            this.DevicesInfo = new Array();
-            for (let z in params.DevicesInfo) {
-                let obj = new MultiDevicesInfo();
-                obj.deserialize(params.DevicesInfo[z]);
-                this.DevicesInfo.push(obj);
-            }
-        }
-        this.TotalDevNum = 'TotalDevNum' in params ? params.TotalDevNum : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * UpdateTopicPolicy返回参数结构体
- * @class
- */
-class UpdateTopicPolicyResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * 任务列表详细信息
- * @class
- */
-class TaskInfo extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 任务类型，目前取值为 “UpdateShadow” 或者 “PublishMessage”
-         * @type {string || null}
-         */
-        this.Type = null;
-
-        /**
-         * 任务 ID
-         * @type {string || null}
-         */
-        this.Id = null;
-
-        /**
-         * 产品 ID
-         * @type {string || null}
-         */
-        this.ProductId = null;
-
-        /**
-         * 状态。1表示等待处理，2表示调度处理中，3表示已完成，4表示失败，5表示已取消
-         * @type {number || null}
-         */
-        this.Status = null;
-
-        /**
-         * 任务创建时间，Unix 时间戳
-         * @type {number || null}
-         */
-        this.CreateTime = null;
-
-        /**
-         * 最后任务更新时间，Unix 时间戳
-         * @type {number || null}
-         */
-        this.UpdateTime = null;
-
-        /**
-         * 返回的错误码
-         * @type {number || null}
-         */
-        this.RetCode = null;
-
-        /**
-         * 返回的错误信息
-         * @type {string || null}
-         */
-        this.ErrMsg = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Type = 'Type' in params ? params.Type : null;
-        this.Id = 'Id' in params ? params.Id : null;
-        this.ProductId = 'ProductId' in params ? params.ProductId : null;
-        this.Status = 'Status' in params ? params.Status : null;
-        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
-        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
-        this.RetCode = 'RetCode' in params ? params.RetCode : null;
-        this.ErrMsg = 'ErrMsg' in params ? params.ErrMsg : null;
-
-    }
-}
-
 module.exports = {
-    PublishMessageRequest: PublishMessageRequest,
-    DeleteProductRequest: DeleteProductRequest,
-    EnableTopicRuleResponse: EnableTopicRuleResponse,
-    UpdateDeviceShadowResponse: UpdateDeviceShadowResponse,
-    DescribeTasksRequest: DescribeTasksRequest,
-    DisableTopicRuleResponse: DisableTopicRuleResponse,
-    UpdateDeviceAvailableStateRequest: UpdateDeviceAvailableStateRequest,
-    DeviceLabel: DeviceLabel,
-    ReplaceTopicRuleRequest: ReplaceTopicRuleRequest,
-    DeleteTopicRuleRequest: DeleteTopicRuleRequest,
-    DescribeMultiDevicesRequest: DescribeMultiDevicesRequest,
-    UpdateDeviceAvailableStateResponse: UpdateDeviceAvailableStateResponse,
-    MultiDevicesInfo: MultiDevicesInfo,
-    PublishAsDeviceRequest: PublishAsDeviceRequest,
-    DescribeDeviceClientKeyRequest: DescribeDeviceClientKeyRequest,
-    DescribeTaskResponse: DescribeTaskResponse,
-    CancelTaskRequest: CancelTaskRequest,
-    PublishToDeviceResponse: PublishToDeviceResponse,
-    CreateTaskResponse: CreateTaskResponse,
-    BatchPublishMessage: BatchPublishMessage,
-    BatchUpdateShadow: BatchUpdateShadow,
-    BindDevicesRequest: BindDevicesRequest,
     UnbindDevicesRequest: UnbindDevicesRequest,
-    DeleteDeviceRequest: DeleteDeviceRequest,
-    DeleteProductResponse: DeleteProductResponse,
-    ResetDeviceStateResponse: ResetDeviceStateResponse,
-    DescribeMultiDevTaskResponse: DescribeMultiDevTaskResponse,
-    TopicRulePayload: TopicRulePayload,
-    UpdateTopicPolicyRequest: UpdateTopicPolicyRequest,
-    ProductInfo: ProductInfo,
-    DescribeDevicesResponse: DescribeDevicesResponse,
-    DeviceTag: DeviceTag,
-    DeleteTopicRuleResponse: DeleteTopicRuleResponse,
-    ProductProperties: ProductProperties,
-    DeleteLoraDeviceResponse: DeleteLoraDeviceResponse,
-    DescribeDeviceRequest: DescribeDeviceRequest,
-    CreateLoraDeviceRequest: CreateLoraDeviceRequest,
-    DescribeTaskRequest: DescribeTaskRequest,
-    Task: Task,
-    ResetDeviceStateRequest: ResetDeviceStateRequest,
-    CreateTopicPolicyRequest: CreateTopicPolicyRequest,
-    PublishMessageResponse: PublishMessageResponse,
-    PublishToDeviceRequest: PublishToDeviceRequest,
-    ProductMetadata: ProductMetadata,
-    DescribeLoraDeviceResponse: DescribeLoraDeviceResponse,
-    DescribeTasksResponse: DescribeTasksResponse,
-    BindDevicesResponse: BindDevicesResponse,
-    CreateProductResponse: CreateProductResponse,
+    BindDevicesRequest: BindDevicesRequest,
     DescribeProductsRequest: DescribeProductsRequest,
-    DescribeDevicesRequest: DescribeDevicesRequest,
-    BrokerSubscribe: BrokerSubscribe,
-    CreateTaskRequest: CreateTaskRequest,
-    DisableTopicRuleRequest: DisableTopicRuleRequest,
-    CreateTopicPolicyResponse: CreateTopicPolicyResponse,
-    DescribeMultiDevTaskRequest: DescribeMultiDevTaskRequest,
-    CreateTopicRuleResponse: CreateTopicRuleResponse,
-    CancelTaskResponse: CancelTaskResponse,
-    CreateDeviceResponse: CreateDeviceResponse,
-    CreateTopicRuleRequest: CreateTopicRuleRequest,
-    DeleteLoraDeviceRequest: DeleteLoraDeviceRequest,
-    CreateDeviceRequest: CreateDeviceRequest,
-    DescribeProductsResponse: DescribeProductsResponse,
+    DescribeDevicesResponse: DescribeDevicesResponse,
+    ProductInfo: ProductInfo,
+    Task: Task,
+    EnableTopicRuleResponse: EnableTopicRuleResponse,
+    DescribeTasksResponse: DescribeTasksResponse,
     UpdateDeviceShadowRequest: UpdateDeviceShadowRequest,
-    CreateProductRequest: CreateProductRequest,
-    Attribute: Attribute,
-    DeleteDeviceResponse: DeleteDeviceResponse,
-    CreateLoraDeviceResponse: CreateLoraDeviceResponse,
-    DeviceInfo: DeviceInfo,
-    CreateMultiDeviceResponse: CreateMultiDeviceResponse,
-    ReplaceTopicRuleResponse: ReplaceTopicRuleResponse,
-    DescribeLoraDeviceRequest: DescribeLoraDeviceRequest,
-    UnbindDevicesResponse: UnbindDevicesResponse,
+    DescribeMultiDevTaskRequest: DescribeMultiDevTaskRequest,
+    DescribeProductsResponse: DescribeProductsResponse,
     DescribeDeviceShadowResponse: DescribeDeviceShadowResponse,
-    DescribeDeviceClientKeyResponse: DescribeDeviceClientKeyResponse,
-    PublishAsDeviceResponse: PublishAsDeviceResponse,
-    CreateMultiDeviceRequest: CreateMultiDeviceRequest,
-    EnableTopicRuleRequest: EnableTopicRuleRequest,
-    DescribeDeviceResponse: DescribeDeviceResponse,
-    DescribeDeviceShadowRequest: DescribeDeviceShadowRequest,
-    DescribeMultiDevicesResponse: DescribeMultiDevicesResponse,
+    CreateMultiDeviceResponse: CreateMultiDeviceResponse,
+    ProductProperties: ProductProperties,
     UpdateTopicPolicyResponse: UpdateTopicPolicyResponse,
     TaskInfo: TaskInfo,
+    DeleteProductRequest: DeleteProductRequest,
+    DescribeTasksRequest: DescribeTasksRequest,
+    ReplaceTopicRuleRequest: ReplaceTopicRuleRequest,
+    MultiDevicesInfo: MultiDevicesInfo,
+    ReplaceTopicRuleResponse: ReplaceTopicRuleResponse,
+    DescribeDeviceClientKeyRequest: DescribeDeviceClientKeyRequest,
+    UpdateTopicPolicyRequest: UpdateTopicPolicyRequest,
+    BatchUpdateShadow: BatchUpdateShadow,
+    DeleteDeviceRequest: DeleteDeviceRequest,
+    CreateMultiDevicesTaskRequest: CreateMultiDevicesTaskRequest,
+    CreateLoraDeviceRequest: CreateLoraDeviceRequest,
+    CreateProductResponse: CreateProductResponse,
+    DeleteLoraDeviceResponse: DeleteLoraDeviceResponse,
+    CreateTaskRequest: CreateTaskRequest,
+    TopicRulePayload: TopicRulePayload,
+    DescribeMultiDevicesResponse: DescribeMultiDevicesResponse,
+    CreateDeviceResponse: CreateDeviceResponse,
+    DeleteLoraDeviceRequest: DeleteLoraDeviceRequest,
+    CreateDeviceRequest: CreateDeviceRequest,
+    DescribeProductTaskRequest: DescribeProductTaskRequest,
+    CreateProductRequest: CreateProductRequest,
+    DisableTopicRuleResponse: DisableTopicRuleResponse,
+    BrokerSubscribe: BrokerSubscribe,
+    DescribeProductTaskResponse: DescribeProductTaskResponse,
+    DescribeDeviceResponse: DescribeDeviceResponse,
+    PublishMessageRequest: PublishMessageRequest,
+    DeviceLabel: DeviceLabel,
+    UpdateDeviceAvailableStateResponse: UpdateDeviceAvailableStateResponse,
+    CancelTaskRequest: CancelTaskRequest,
+    UpdateDeviceAvailableStateRequest: UpdateDeviceAvailableStateRequest,
+    DeleteProductResponse: DeleteProductResponse,
+    CreateTopicPolicyResponse: CreateTopicPolicyResponse,
+    PublishToDeviceRequest: PublishToDeviceRequest,
+    DeleteTopicRuleResponse: DeleteTopicRuleResponse,
+    DescribeDeviceRequest: DescribeDeviceRequest,
+    CreateMultiDevicesTaskResponse: CreateMultiDevicesTaskResponse,
+    CreateTopicPolicyRequest: CreateTopicPolicyRequest,
+    ProductMetadata: ProductMetadata,
+    DescribeLoraDeviceResponse: DescribeLoraDeviceResponse,
+    ProductTaskInfo: ProductTaskInfo,
+    CancelTaskResponse: CancelTaskResponse,
+    Attribute: Attribute,
+    CreateLoraDeviceResponse: CreateLoraDeviceResponse,
+    DeleteTopicRuleRequest: DeleteTopicRuleRequest,
+    ResetDeviceStateRequest: ResetDeviceStateRequest,
+    CreateMultiDeviceRequest: CreateMultiDeviceRequest,
+    PublishToDeviceResponse: PublishToDeviceResponse,
+    DescribeDeviceShadowRequest: DescribeDeviceShadowRequest,
+    UnbindDevicesResponse: UnbindDevicesResponse,
+    CreateTaskFileUrlResponse: CreateTaskFileUrlResponse,
+    DescribeMultiDevicesRequest: DescribeMultiDevicesRequest,
+    CreateTaskFileUrlRequest: CreateTaskFileUrlRequest,
+    UpdateDeviceShadowResponse: UpdateDeviceShadowResponse,
+    DescribeTaskResponse: DescribeTaskResponse,
+    CreateTaskResponse: CreateTaskResponse,
+    BatchPublishMessage: BatchPublishMessage,
+    DescribeMultiDevTaskResponse: DescribeMultiDevTaskResponse,
+    DescribeProductTasksRequest: DescribeProductTasksRequest,
+    DeviceTag: DeviceTag,
+    DescribeLoraDeviceRequest: DescribeLoraDeviceRequest,
+    DescribeTaskRequest: DescribeTaskRequest,
+    PublishMessageResponse: PublishMessageResponse,
+    BindDevicesResponse: BindDevicesResponse,
+    ResetDeviceResult: ResetDeviceResult,
+    DescribeDevicesRequest: DescribeDevicesRequest,
+    DescribeDeviceClientKeyResponse: DescribeDeviceClientKeyResponse,
+    DisableTopicRuleRequest: DisableTopicRuleRequest,
+    ResetDeviceStateResponse: ResetDeviceStateResponse,
+    CreateTopicRuleResponse: CreateTopicRuleResponse,
+    CreateTopicRuleRequest: CreateTopicRuleRequest,
+    PublishAsDeviceRequest: PublishAsDeviceRequest,
+    DeleteDeviceResponse: DeleteDeviceResponse,
+    DeviceInfo: DeviceInfo,
+    DescribeProductTasksResponse: DescribeProductTasksResponse,
+    PublishAsDeviceResponse: PublishAsDeviceResponse,
+    EnableTopicRuleRequest: EnableTopicRuleRequest,
 
 }

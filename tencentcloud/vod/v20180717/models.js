@@ -24173,6 +24173,15 @@ class SearchMediaRequest extends  AbstractModel {
         this.Limit = null;
 
         /**
+         * 文件类型：
+<li>Video: 视频文件</li>
+<li>Audio: 音频文件</li>
+<li>Image: 图片文件</li>
+         * @type {Array.<string> || null}
+         */
+        this.Categories = null;
+
+        /**
          * 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
          * @type {number || null}
          */
@@ -24203,6 +24212,7 @@ class SearchMediaRequest extends  AbstractModel {
         }
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Categories = 'Categories' in params ? params.Categories : null;
         this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
 
     }

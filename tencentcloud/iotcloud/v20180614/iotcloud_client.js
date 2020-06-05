@@ -16,88 +16,98 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
-const PublishMessageRequest = models.PublishMessageRequest;
-const DeleteProductRequest = models.DeleteProductRequest;
-const EnableTopicRuleResponse = models.EnableTopicRuleResponse;
-const UpdateDeviceShadowResponse = models.UpdateDeviceShadowResponse;
-const DescribeTasksRequest = models.DescribeTasksRequest;
-const DisableTopicRuleResponse = models.DisableTopicRuleResponse;
-const UpdateDeviceAvailableStateRequest = models.UpdateDeviceAvailableStateRequest;
-const DeviceLabel = models.DeviceLabel;
-const ReplaceTopicRuleRequest = models.ReplaceTopicRuleRequest;
-const DeleteTopicRuleRequest = models.DeleteTopicRuleRequest;
-const DescribeMultiDevicesRequest = models.DescribeMultiDevicesRequest;
-const UpdateDeviceAvailableStateResponse = models.UpdateDeviceAvailableStateResponse;
-const MultiDevicesInfo = models.MultiDevicesInfo;
-const PublishAsDeviceRequest = models.PublishAsDeviceRequest;
-const DescribeDeviceClientKeyRequest = models.DescribeDeviceClientKeyRequest;
-const DescribeTaskResponse = models.DescribeTaskResponse;
-const CancelTaskRequest = models.CancelTaskRequest;
-const PublishToDeviceResponse = models.PublishToDeviceResponse;
-const CreateTaskResponse = models.CreateTaskResponse;
-const BatchPublishMessage = models.BatchPublishMessage;
-const BatchUpdateShadow = models.BatchUpdateShadow;
-const BindDevicesRequest = models.BindDevicesRequest;
 const UnbindDevicesRequest = models.UnbindDevicesRequest;
-const DeleteDeviceRequest = models.DeleteDeviceRequest;
-const DeleteProductResponse = models.DeleteProductResponse;
-const ResetDeviceStateResponse = models.ResetDeviceStateResponse;
-const DescribeMultiDevTaskResponse = models.DescribeMultiDevTaskResponse;
-const TopicRulePayload = models.TopicRulePayload;
-const UpdateTopicPolicyRequest = models.UpdateTopicPolicyRequest;
-const ProductInfo = models.ProductInfo;
-const DescribeDevicesResponse = models.DescribeDevicesResponse;
-const DeviceTag = models.DeviceTag;
-const DeleteTopicRuleResponse = models.DeleteTopicRuleResponse;
-const ProductProperties = models.ProductProperties;
-const DeleteLoraDeviceResponse = models.DeleteLoraDeviceResponse;
-const DescribeDeviceRequest = models.DescribeDeviceRequest;
-const CreateLoraDeviceRequest = models.CreateLoraDeviceRequest;
-const DescribeTaskRequest = models.DescribeTaskRequest;
-const Task = models.Task;
-const ResetDeviceStateRequest = models.ResetDeviceStateRequest;
-const CreateTopicPolicyRequest = models.CreateTopicPolicyRequest;
-const PublishMessageResponse = models.PublishMessageResponse;
-const PublishToDeviceRequest = models.PublishToDeviceRequest;
-const ProductMetadata = models.ProductMetadata;
-const DescribeLoraDeviceResponse = models.DescribeLoraDeviceResponse;
-const DescribeTasksResponse = models.DescribeTasksResponse;
-const BindDevicesResponse = models.BindDevicesResponse;
-const CreateProductResponse = models.CreateProductResponse;
+const BindDevicesRequest = models.BindDevicesRequest;
 const DescribeProductsRequest = models.DescribeProductsRequest;
-const DescribeDevicesRequest = models.DescribeDevicesRequest;
-const BrokerSubscribe = models.BrokerSubscribe;
-const CreateTaskRequest = models.CreateTaskRequest;
-const DisableTopicRuleRequest = models.DisableTopicRuleRequest;
-const CreateTopicPolicyResponse = models.CreateTopicPolicyResponse;
-const DescribeMultiDevTaskRequest = models.DescribeMultiDevTaskRequest;
-const CreateTopicRuleResponse = models.CreateTopicRuleResponse;
-const CancelTaskResponse = models.CancelTaskResponse;
-const CreateDeviceResponse = models.CreateDeviceResponse;
-const CreateTopicRuleRequest = models.CreateTopicRuleRequest;
-const DeleteLoraDeviceRequest = models.DeleteLoraDeviceRequest;
-const CreateDeviceRequest = models.CreateDeviceRequest;
-const DescribeProductsResponse = models.DescribeProductsResponse;
+const DescribeDevicesResponse = models.DescribeDevicesResponse;
+const ProductInfo = models.ProductInfo;
+const Task = models.Task;
+const EnableTopicRuleResponse = models.EnableTopicRuleResponse;
+const DescribeTasksResponse = models.DescribeTasksResponse;
 const UpdateDeviceShadowRequest = models.UpdateDeviceShadowRequest;
-const CreateProductRequest = models.CreateProductRequest;
-const Attribute = models.Attribute;
-const DeleteDeviceResponse = models.DeleteDeviceResponse;
-const CreateLoraDeviceResponse = models.CreateLoraDeviceResponse;
-const DeviceInfo = models.DeviceInfo;
-const CreateMultiDeviceResponse = models.CreateMultiDeviceResponse;
-const ReplaceTopicRuleResponse = models.ReplaceTopicRuleResponse;
-const DescribeLoraDeviceRequest = models.DescribeLoraDeviceRequest;
-const UnbindDevicesResponse = models.UnbindDevicesResponse;
+const DescribeMultiDevTaskRequest = models.DescribeMultiDevTaskRequest;
+const DescribeProductsResponse = models.DescribeProductsResponse;
 const DescribeDeviceShadowResponse = models.DescribeDeviceShadowResponse;
-const DescribeDeviceClientKeyResponse = models.DescribeDeviceClientKeyResponse;
-const PublishAsDeviceResponse = models.PublishAsDeviceResponse;
-const CreateMultiDeviceRequest = models.CreateMultiDeviceRequest;
-const EnableTopicRuleRequest = models.EnableTopicRuleRequest;
-const DescribeDeviceResponse = models.DescribeDeviceResponse;
-const DescribeDeviceShadowRequest = models.DescribeDeviceShadowRequest;
-const DescribeMultiDevicesResponse = models.DescribeMultiDevicesResponse;
+const CreateMultiDeviceResponse = models.CreateMultiDeviceResponse;
+const ProductProperties = models.ProductProperties;
 const UpdateTopicPolicyResponse = models.UpdateTopicPolicyResponse;
 const TaskInfo = models.TaskInfo;
+const DeleteProductRequest = models.DeleteProductRequest;
+const DescribeTasksRequest = models.DescribeTasksRequest;
+const ReplaceTopicRuleRequest = models.ReplaceTopicRuleRequest;
+const MultiDevicesInfo = models.MultiDevicesInfo;
+const ReplaceTopicRuleResponse = models.ReplaceTopicRuleResponse;
+const DescribeDeviceClientKeyRequest = models.DescribeDeviceClientKeyRequest;
+const UpdateTopicPolicyRequest = models.UpdateTopicPolicyRequest;
+const BatchUpdateShadow = models.BatchUpdateShadow;
+const DeleteDeviceRequest = models.DeleteDeviceRequest;
+const CreateMultiDevicesTaskRequest = models.CreateMultiDevicesTaskRequest;
+const CreateLoraDeviceRequest = models.CreateLoraDeviceRequest;
+const CreateProductResponse = models.CreateProductResponse;
+const DeleteLoraDeviceResponse = models.DeleteLoraDeviceResponse;
+const CreateTaskRequest = models.CreateTaskRequest;
+const TopicRulePayload = models.TopicRulePayload;
+const DescribeMultiDevicesResponse = models.DescribeMultiDevicesResponse;
+const CreateDeviceResponse = models.CreateDeviceResponse;
+const DeleteLoraDeviceRequest = models.DeleteLoraDeviceRequest;
+const CreateDeviceRequest = models.CreateDeviceRequest;
+const DescribeProductTaskRequest = models.DescribeProductTaskRequest;
+const CreateProductRequest = models.CreateProductRequest;
+const DisableTopicRuleResponse = models.DisableTopicRuleResponse;
+const BrokerSubscribe = models.BrokerSubscribe;
+const DescribeProductTaskResponse = models.DescribeProductTaskResponse;
+const DescribeDeviceResponse = models.DescribeDeviceResponse;
+const PublishMessageRequest = models.PublishMessageRequest;
+const DeviceLabel = models.DeviceLabel;
+const UpdateDeviceAvailableStateResponse = models.UpdateDeviceAvailableStateResponse;
+const CancelTaskRequest = models.CancelTaskRequest;
+const UpdateDeviceAvailableStateRequest = models.UpdateDeviceAvailableStateRequest;
+const DeleteProductResponse = models.DeleteProductResponse;
+const CreateTopicPolicyResponse = models.CreateTopicPolicyResponse;
+const PublishToDeviceRequest = models.PublishToDeviceRequest;
+const DeleteTopicRuleResponse = models.DeleteTopicRuleResponse;
+const DescribeDeviceRequest = models.DescribeDeviceRequest;
+const CreateMultiDevicesTaskResponse = models.CreateMultiDevicesTaskResponse;
+const CreateTopicPolicyRequest = models.CreateTopicPolicyRequest;
+const ProductMetadata = models.ProductMetadata;
+const DescribeLoraDeviceResponse = models.DescribeLoraDeviceResponse;
+const ProductTaskInfo = models.ProductTaskInfo;
+const CancelTaskResponse = models.CancelTaskResponse;
+const Attribute = models.Attribute;
+const CreateLoraDeviceResponse = models.CreateLoraDeviceResponse;
+const DeleteTopicRuleRequest = models.DeleteTopicRuleRequest;
+const ResetDeviceStateRequest = models.ResetDeviceStateRequest;
+const CreateMultiDeviceRequest = models.CreateMultiDeviceRequest;
+const PublishToDeviceResponse = models.PublishToDeviceResponse;
+const DescribeDeviceShadowRequest = models.DescribeDeviceShadowRequest;
+const UnbindDevicesResponse = models.UnbindDevicesResponse;
+const CreateTaskFileUrlResponse = models.CreateTaskFileUrlResponse;
+const DescribeMultiDevicesRequest = models.DescribeMultiDevicesRequest;
+const CreateTaskFileUrlRequest = models.CreateTaskFileUrlRequest;
+const UpdateDeviceShadowResponse = models.UpdateDeviceShadowResponse;
+const DescribeTaskResponse = models.DescribeTaskResponse;
+const CreateTaskResponse = models.CreateTaskResponse;
+const BatchPublishMessage = models.BatchPublishMessage;
+const DescribeMultiDevTaskResponse = models.DescribeMultiDevTaskResponse;
+const DescribeProductTasksRequest = models.DescribeProductTasksRequest;
+const DeviceTag = models.DeviceTag;
+const DescribeLoraDeviceRequest = models.DescribeLoraDeviceRequest;
+const DescribeTaskRequest = models.DescribeTaskRequest;
+const PublishMessageResponse = models.PublishMessageResponse;
+const BindDevicesResponse = models.BindDevicesResponse;
+const ResetDeviceResult = models.ResetDeviceResult;
+const DescribeDevicesRequest = models.DescribeDevicesRequest;
+const DescribeDeviceClientKeyResponse = models.DescribeDeviceClientKeyResponse;
+const DisableTopicRuleRequest = models.DisableTopicRuleRequest;
+const ResetDeviceStateResponse = models.ResetDeviceStateResponse;
+const CreateTopicRuleResponse = models.CreateTopicRuleResponse;
+const CreateTopicRuleRequest = models.CreateTopicRuleRequest;
+const PublishAsDeviceRequest = models.PublishAsDeviceRequest;
+const DeleteDeviceResponse = models.DeleteDeviceResponse;
+const DeviceInfo = models.DeviceInfo;
+const DescribeProductTasksResponse = models.DescribeProductTasksResponse;
+const PublishAsDeviceResponse = models.PublishAsDeviceResponse;
+const EnableTopicRuleRequest = models.EnableTopicRuleRequest;
 
 
 /**
@@ -166,7 +176,7 @@ class IotcloudClient extends AbstractClient {
     }
 
     /**
-     * 本接口（DescribeDevice）用于查看设备信息 
+     * 本接口（DescribeDevice）用于查看设备信息
      * @param {DescribeDeviceRequest} req
      * @param {function(string, DescribeDeviceResponse):void} cb
      * @public
@@ -265,6 +275,17 @@ class IotcloudClient extends AbstractClient {
     }
 
     /**
+     * 本接口（CreateMultiDevicesTask）用于创建产品级别的批量创建设备任务
+     * @param {CreateMultiDevicesTaskRequest} req
+     * @param {function(string, CreateMultiDevicesTaskResponse):void} cb
+     * @public
+     */
+    CreateMultiDevicesTask(req, cb) {
+        let resp = new CreateMultiDevicesTaskResponse();
+        this.request("CreateMultiDevicesTask", req, resp, cb);
+    }
+
+    /**
      * 获取lora类型设备的详细信息
      * @param {DescribeLoraDeviceRequest} req
      * @param {function(string, DescribeLoraDeviceResponse):void} cb
@@ -328,6 +349,17 @@ class IotcloudClient extends AbstractClient {
     DeleteProduct(req, cb) {
         let resp = new DeleteProductResponse();
         this.request("DeleteProduct", req, resp, cb);
+    }
+
+    /**
+     * 本接口（CreateTaskFileUrl）用于获取产品级任务文件上传链接
+     * @param {CreateTaskFileUrlRequest} req
+     * @param {function(string, CreateTaskFileUrlResponse):void} cb
+     * @public
+     */
+    CreateTaskFileUrl(req, cb) {
+        let resp = new CreateTaskFileUrlResponse();
+        this.request("CreateTaskFileUrl", req, resp, cb);
     }
 
     /**
@@ -430,6 +462,17 @@ class IotcloudClient extends AbstractClient {
     }
 
     /**
+     * 本接口（DescribeProductTasks）用于查看产品级别的任务列表
+     * @param {DescribeProductTasksRequest} req
+     * @param {function(string, DescribeProductTasksResponse):void} cb
+     * @public
+     */
+    DescribeProductTasks(req, cb) {
+        let resp = new DescribeProductTasksResponse();
+        this.request("DescribeProductTasks", req, resp, cb);
+    }
+
+    /**
      * 本接口（DescribeDevices）用于查询物联网通信设备的设备列表。 
      * @param {DescribeDevicesRequest} req
      * @param {function(string, DescribeDevicesResponse):void} cb
@@ -471,6 +514,17 @@ class IotcloudClient extends AbstractClient {
     EnableTopicRule(req, cb) {
         let resp = new EnableTopicRuleResponse();
         this.request("EnableTopicRule", req, resp, cb);
+    }
+
+    /**
+     * 本接口（DescribeProductTask）用于查看产品级别的任务信息
+     * @param {DescribeProductTaskRequest} req
+     * @param {function(string, DescribeProductTaskResponse):void} cb
+     * @public
+     */
+    DescribeProductTask(req, cb) {
+        let resp = new DescribeProductTaskResponse();
+        this.request("DescribeProductTask", req, resp, cb);
     }
 
     /**
