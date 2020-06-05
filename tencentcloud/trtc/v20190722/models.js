@@ -1071,21 +1071,21 @@ class ScaleInfomation extends  AbstractModel {
         this.Time = null;
 
         /**
-         * 房间人数
+         * 房间人数，用户重复进入同一个房间为1次
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.UserNumber = null;
 
         /**
-         * 房间人次
+         * 房间人次，用户每次进入房间为一次
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.UserCount = null;
 
         /**
-         * 房间数
+         * sdkappid下一天内的房间数
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
