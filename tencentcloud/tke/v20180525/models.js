@@ -3376,7 +3376,7 @@ class Cluster extends  AbstractModel {
         this.ImageId = null;
 
         /**
-         * OsCustomizeType
+         * OsCustomizeType 系统定制类型
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
@@ -3395,6 +3395,13 @@ class Cluster extends  AbstractModel {
          * @type {string || null}
          */
         this.CreatedTime = null;
+
+        /**
+         * 删除保护开关
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.DeletionProtection = null;
 
     }
 
@@ -3435,6 +3442,7 @@ class Cluster extends  AbstractModel {
         this.OsCustomizeType = 'OsCustomizeType' in params ? params.OsCustomizeType : null;
         this.ContainerRuntime = 'ContainerRuntime' in params ? params.ContainerRuntime : null;
         this.CreatedTime = 'CreatedTime' in params ? params.CreatedTime : null;
+        this.DeletionProtection = 'DeletionProtection' in params ? params.DeletionProtection : null;
 
     }
 }
