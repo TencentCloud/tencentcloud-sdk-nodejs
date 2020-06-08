@@ -1909,6 +1909,53 @@ ip：IP 列表作为源站
 }
 
 /**
+ * 排序类型数据结构
+ * @class
+ */
+class TopData extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 资源名称，根据查询条件不同分为以下几类：
+具体域名：表示该域名明细数据
+multiDomains：表示多域名汇总明细数据
+项目 ID：指定项目查询时，显示为项目 ID
+all：账号维度明细数据
+         * @type {string || null}
+         */
+        this.Resource = null;
+
+        /**
+         * 排序结果详情
+         * @type {Array.<TopDetailData> || null}
+         */
+        this.DetailData = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Resource = 'Resource' in params ? params.Resource : null;
+
+        if (params.DetailData) {
+            this.DetailData = new Array();
+            for (let z in params.DetailData) {
+                let obj = new TopDetailData();
+                obj.deserialize(params.DetailData[z]);
+                this.DetailData.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * EnableCaches请求参数结构体
  * @class
  */
@@ -1981,6 +2028,43 @@ class Quota extends  AbstractModel {
         this.Total = 'Total' in params ? params.Total : null;
         this.Available = 'Available' in params ? params.Available : null;
         this.Area = 'Area' in params ? params.Area : null;
+
+    }
+}
+
+/**
+ * 组成CacheKey
+ * @class
+ */
+class HeaderKey extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 是否组成Cachekey
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+        /**
+         * 组成CacheKey的header 逗号分隔
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Value = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+        this.Value = 'Value' in params ? params.Value : null;
 
     }
 }
@@ -7657,6 +7741,34 @@ class DisableCachesResponse extends  AbstractModel {
 }
 
 /**
+ * 作为CacheKey的一部分
+ * @class
+ */
+class SchemeKey extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * on | off 是否使用scheme作为cache key的一部分
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+
+    }
+}
+
+/**
  * DescribeImageConfig请求参数结构体
  * @class
  */
@@ -7840,6 +7952,41 @@ off：关闭全路径缓存（即开启参数过滤）
         this.FullUrlCache = null;
 
         /**
+         * 是否使用请求参数作为CacheKey的一部分
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {QueryStringKey || null}
+         */
+        this.QueryString = null;
+
+        /**
+         * 是否使用请求头部作为CacheKey的一部分
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {HeaderKey || null}
+         */
+        this.Header = null;
+
+        /**
+         * 是否使用Cookie作为CacheKey的一部分
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {CookieKey || null}
+         */
+        this.Cookie = null;
+
+        /**
+         * 是否使用请求协议作为CacheKey的一部分
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {SchemeKey || null}
+         */
+        this.Scheme = null;
+
+        /**
+         * 是否使用自定义字符串作为CacheKey的一部分
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {CacheTagKey || null}
+         */
+        this.CacheTag = null;
+
+        /**
          * 缓存是否忽略大小写
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
@@ -7856,34 +8003,61 @@ off：关闭全路径缓存（即开启参数过滤）
             return;
         }
         this.FullUrlCache = 'FullUrlCache' in params ? params.FullUrlCache : null;
+
+        if (params.QueryString) {
+            let obj = new QueryStringKey();
+            obj.deserialize(params.QueryString)
+            this.QueryString = obj;
+        }
+
+        if (params.Header) {
+            let obj = new HeaderKey();
+            obj.deserialize(params.Header)
+            this.Header = obj;
+        }
+
+        if (params.Cookie) {
+            let obj = new CookieKey();
+            obj.deserialize(params.Cookie)
+            this.Cookie = obj;
+        }
+
+        if (params.Scheme) {
+            let obj = new SchemeKey();
+            obj.deserialize(params.Scheme)
+            this.Scheme = obj;
+        }
+
+        if (params.CacheTag) {
+            let obj = new CacheTagKey();
+            obj.deserialize(params.CacheTag)
+            this.CacheTag = obj;
+        }
         this.CaseSensitive = 'CaseSensitive' in params ? params.CaseSensitive : null;
 
     }
 }
 
 /**
- * 排序类型数据结构
+ * 组成CacheKey的一部分
  * @class
  */
-class TopData extends  AbstractModel {
+class CookieKey extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 资源名称，根据查询条件不同分为以下几类：
-具体域名：表示该域名明细数据
-multiDomains：表示多域名汇总明细数据
-项目 ID：指定项目查询时，显示为项目 ID
-all：账号维度明细数据
+         * on | off 是否使用Cookie作为Cache的一部分
          * @type {string || null}
          */
-        this.Resource = null;
+        this.Switch = null;
 
         /**
-         * 排序结果详情
-         * @type {Array.<TopDetailData> || null}
+         * 使用的cookie 逗号分割
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
          */
-        this.DetailData = null;
+        this.Value = null;
 
     }
 
@@ -7894,16 +8068,8 @@ all：账号维度明细数据
         if (!params) {
             return;
         }
-        this.Resource = 'Resource' in params ? params.Resource : null;
-
-        if (params.DetailData) {
-            this.DetailData = new Array();
-            for (let z in params.DetailData) {
-                let obj = new TopDetailData();
-                obj.deserialize(params.DetailData[z]);
-                this.DetailData.push(obj);
-            }
-        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+        this.Value = 'Value' in params ? params.Value : null;
 
     }
 }
@@ -8770,6 +8936,59 @@ class StopCdnDomainResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 组成CacheKey的一部分
+ * @class
+ */
+class QueryStringKey extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * on | off CacheKey是否由QueryString组成
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+        /**
+         * 是否重新排序
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Reorder = null;
+
+        /**
+         * includeAll | excludeAll | includeCustom | excludeAll 使用/排除部分url参数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Action = null;
+
+        /**
+         * 使用/排除的url参数名
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Value = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+        this.Reorder = 'Reorder' in params ? params.Reorder : null;
+        this.Action = 'Action' in params ? params.Action : null;
+        this.Value = 'Value' in params ? params.Value : null;
 
     }
 }
@@ -10308,6 +10527,42 @@ class DescribeImageConfigResponse extends  AbstractModel {
 }
 
 /**
+ * 组成CacheKey的一部分
+ * @class
+ */
+class CacheTagKey extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 是否使用CacheTag作为CacheKey的一部分
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+        /**
+         * 自定义CacheTag的值
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Value = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+        this.Value = 'Value' in params ? params.Value : null;
+
+    }
+}
+
+/**
  * DescribeDomains请求参数结构体
  * @class
  */
@@ -10392,8 +10647,10 @@ module.exports = {
     CompressionRule: CompressionRule,
     GuetzliAdapter: GuetzliAdapter,
     Origin: Origin,
+    TopData: TopData,
     EnableCachesRequest: EnableCachesRequest,
     Quota: Quota,
+    HeaderKey: HeaderKey,
     DescribeBillingDataRequest: DescribeBillingDataRequest,
     SimpleCache: SimpleCache,
     DeleteClsLogTopicRequest: DeleteClsLogTopicRequest,
@@ -10478,12 +10735,13 @@ module.exports = {
     DeleteClsLogTopicResponse: DeleteClsLogTopicResponse,
     DescribeBillingDataResponse: DescribeBillingDataResponse,
     DisableCachesResponse: DisableCachesResponse,
+    SchemeKey: SchemeKey,
     DescribeImageConfigRequest: DescribeImageConfigRequest,
     DescribeCdnIpResponse: DescribeCdnIpResponse,
     DescribeCdnDataResponse: DescribeCdnDataResponse,
     EnableClsLogTopicRequest: EnableClsLogTopicRequest,
     CacheKey: CacheKey,
-    TopData: TopData,
+    CookieKey: CookieKey,
     CappingRule: CappingRule,
     ListClsLogTopicsRequest: ListClsLogTopicsRequest,
     Seo: Seo,
@@ -10504,6 +10762,7 @@ module.exports = {
     DescribePurgeTasksRequest: DescribePurgeTasksRequest,
     PushUrlsCacheResponse: PushUrlsCacheResponse,
     StopCdnDomainResponse: StopCdnDomainResponse,
+    QueryStringKey: QueryStringKey,
     ListTopDataResponse: ListTopDataResponse,
     MaxAge: MaxAge,
     UpdateDomainConfigResponse: UpdateDomainConfigResponse,
@@ -10527,6 +10786,7 @@ module.exports = {
     CdnIp: CdnIp,
     DescribeCdnDataRequest: DescribeCdnDataRequest,
     DescribeImageConfigResponse: DescribeImageConfigResponse,
+    CacheTagKey: CacheTagKey,
     DescribeDomainsRequest: DescribeDomainsRequest,
 
 }
