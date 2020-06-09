@@ -2199,7 +2199,16 @@ class DescribeTrainingJobResponse extends  AbstractModel {
         this.ModelArtifacts = null;
 
         /**
-         * 详细状态
+         * 详细状态，取值范围
+Starting：启动中
+Downloading: 准备训练数据
+Training: 正在训练
+Uploading: 上传训练结果
+Completed：已完成
+Failed: 失败
+MaxRuntimeExceeded: 任务超过最大运行时间
+Stopping: 停止中
+Stopped：已停止
          * @type {string || null}
          */
         this.SecondaryStatus = null;
@@ -2219,7 +2228,12 @@ class DescribeTrainingJobResponse extends  AbstractModel {
         this.RoleName = null;
 
         /**
-         * 任务状态
+         * 训练任务状态，取值范围
+InProgress：运行中
+Completed: 已完成
+Failed: 失败
+Stopping: 停止中
+Stopped：已停止
          * @type {string || null}
          */
         this.TrainingJobStatus = null;

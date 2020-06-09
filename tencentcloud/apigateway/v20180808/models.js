@@ -2734,7 +2734,7 @@ class ReqParameter extends  AbstractModel {
         this.Name = null;
 
         /**
-         * API 的前端参数位置，如 head。目前支持 head、qurey、path。
+         * API 的前端参数位置，如 head。目前支持 head、query、path。
          * @type {string || null}
          */
         this.Position = null;
@@ -3901,7 +3901,7 @@ class DomainSetList extends  AbstractModel {
         this.DomainName = null;
 
         /**
-         * 域名解析状态。True 表示正常解析，Flase 表示解析失败。
+         * 域名解析状态。True 表示正常解析，False 表示解析失败。
          * @type {number || null}
          */
         this.Status = null;
@@ -8170,7 +8170,7 @@ class RequestParameter extends  AbstractModel {
 }
 
 /**
- * 使用计划详情（由于yunapi对复杂类型的修改会直接同步到现网，且不能查询到复杂类型被拿哪个接口所引用，因为新建一个区别于之前UsagePlan的复杂类型）
+ * 使用计划详情。
  * @class
  */
 class UsagePlanInfo extends  AbstractModel {

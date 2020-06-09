@@ -1385,7 +1385,7 @@ class ModifyCertificateProjectRequest extends  AbstractModel {
 }
 
 /**
- * 获取证书列表（Certificate）返回参数键为 DvAuths 的内容。
+ * 返回参数键为 DvAuths 的内容。
  * @class
  */
 class DvAuths extends  AbstractModel {
@@ -2282,13 +2282,13 @@ class SubmitCertificateInformationRequest extends  AbstractModel {
         this.VerifyType = null;
 
         /**
-         * 管理人姓。
+         * 管理人名。
          * @type {string || null}
          */
         this.AdminFirstName = null;
 
         /**
-         * 管理人名。
+         * 管理人姓。
          * @type {string || null}
          */
         this.AdminLastName = null;
@@ -2312,13 +2312,13 @@ class SubmitCertificateInformationRequest extends  AbstractModel {
         this.AdminPosition = null;
 
         /**
-         * 联系人姓。
+         * 联系人名。
          * @type {string || null}
          */
         this.ContactFirstName = null;
 
         /**
-         * 联系人名。
+         * 联系人姓。
          * @type {string || null}
          */
         this.ContactLastName = null;

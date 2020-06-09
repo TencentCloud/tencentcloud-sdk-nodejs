@@ -6443,6 +6443,13 @@ class InternetAccessible extends  AbstractModel {
          */
         this.PublicIpAssigned = null;
 
+        /**
+         * 带宽包ID。可通过[DescribeBandwidthPackages](https://cloud.tencent.com/document/api/215/19209)接口返回值中的`BandwidthPackageId`获取。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.BandwidthPackageId = null;
+
     }
 
     /**
@@ -6455,6 +6462,7 @@ class InternetAccessible extends  AbstractModel {
         this.InternetChargeType = 'InternetChargeType' in params ? params.InternetChargeType : null;
         this.InternetMaxBandwidthOut = 'InternetMaxBandwidthOut' in params ? params.InternetMaxBandwidthOut : null;
         this.PublicIpAssigned = 'PublicIpAssigned' in params ? params.PublicIpAssigned : null;
+        this.BandwidthPackageId = 'BandwidthPackageId' in params ? params.BandwidthPackageId : null;
 
     }
 }
