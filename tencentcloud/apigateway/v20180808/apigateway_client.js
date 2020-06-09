@@ -249,7 +249,6 @@ API 网关使用的最大单元为服务，每个服务中可创建多个 API �
 
     /**
      * 本接口（DemoteServiceUsagePlan）用于将某个服务在某个环境的使用计划，降级到API上。
-服务若需要鉴权限流生效，则需要绑定使用计划到此服务中，本接口用于查询绑定到一个服务的所有使用计划。
 如果服务内没有API不允许进行此操作。
 如果当前环境没有发布，不允许进行此操作。
      * @param {DemoteServiceUsagePlanRequest} req

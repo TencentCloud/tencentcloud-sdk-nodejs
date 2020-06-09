@@ -11811,13 +11811,6 @@ class LaneGroup extends  AbstractModel {
         super();
 
         /**
-         * 泳道ID
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.LaneId = null;
-
-        /**
          * 部署组ID
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
@@ -11837,6 +11830,13 @@ class LaneGroup extends  AbstractModel {
          * @type {string || null}
          */
         this.LaneGroupId = null;
+
+        /**
+         * 泳道ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.LaneId = null;
 
         /**
          * 部署组名
@@ -11903,10 +11903,10 @@ class LaneGroup extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.LaneId = 'LaneId' in params ? params.LaneId : null;
         this.GroupId = 'GroupId' in params ? params.GroupId : null;
         this.Entrance = 'Entrance' in params ? params.Entrance : null;
         this.LaneGroupId = 'LaneGroupId' in params ? params.LaneGroupId : null;
+        this.LaneId = 'LaneId' in params ? params.LaneId : null;
         this.GroupName = 'GroupName' in params ? params.GroupName : null;
         this.ApplicationId = 'ApplicationId' in params ? params.ApplicationId : null;
         this.ApplicationName = 'ApplicationName' in params ? params.ApplicationName : null;

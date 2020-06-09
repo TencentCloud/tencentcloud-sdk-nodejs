@@ -283,7 +283,6 @@ class OcrClient extends AbstractClient {
 
     /**
      * 本接口支持条形码和二维码的识别（包括 DataMatrix 和 PDF417）。
-本接口暂未完全对外开放，如需咨询，请[联系商务](https://cloud.tencent.com/about/connect) 
      * @param {QrcodeOCRRequest} req
      * @param {function(string, QrcodeOCRResponse):void} cb
      * @public
