@@ -613,21 +613,6 @@ failed：部署失败
          */
         this.SslStatus = null;
 
-        /**
-         * TLS版本列表，支持填写以下值：
-TLSv1.0, TLSv1.1, TLSv1.2
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {Array.<string> || null}
-         */
-        this.TlsVersion = null;
-
-        /**
-         * Hsts配置
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {Hsts || null}
-         */
-        this.Hsts = null;
-
     }
 
     /**
@@ -655,13 +640,6 @@ TLSv1.0, TLSv1.1, TLSv1.2
         }
         this.Spdy = 'Spdy' in params ? params.Spdy : null;
         this.SslStatus = 'SslStatus' in params ? params.SslStatus : null;
-        this.TlsVersion = 'TlsVersion' in params ? params.TlsVersion : null;
-
-        if (params.Hsts) {
-            let obj = new Hsts();
-            obj.deserialize(params.Hsts)
-            this.Hsts = obj;
-        }
 
     }
 }
@@ -5123,50 +5101,6 @@ class DisableClsLogTopicResponse extends  AbstractModel {
 }
 
 /**
- * HSTS 配置。
- * @class
- */
-class Hsts extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 是否开启，on或off。
-         * @type {string || null}
-         */
-        this.Switch = null;
-
-        /**
-         * MaxAge数值。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.MaxAge = null;
-
-        /**
-         * 是否包含子域名，on或off。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.IncludeSubDomains = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Switch = 'Switch' in params ? params.Switch : null;
-        this.MaxAge = 'MaxAge' in params ? params.MaxAge : null;
-        this.IncludeSubDomains = 'IncludeSubDomains' in params ? params.IncludeSubDomains : null;
-
-    }
-}
-
-/**
  * DescribeIpStatus请求参数结构体
  * @class
  */
@@ -7986,13 +7920,6 @@ off：关闭全路径缓存（即开启参数过滤）
          */
         this.CacheTag = null;
 
-        /**
-         * 缓存是否忽略大小写
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.CaseSensitive = null;
-
     }
 
     /**
@@ -8033,7 +7960,6 @@ off：关闭全路径缓存（即开启参数过滤）
             obj.deserialize(params.CacheTag)
             this.CacheTag = obj;
         }
-        this.CaseSensitive = 'CaseSensitive' in params ? params.CaseSensitive : null;
 
     }
 }
@@ -10698,7 +10624,6 @@ module.exports = {
     DisableCachesRequest: DisableCachesRequest,
     SimpleCacheRule: SimpleCacheRule,
     DisableClsLogTopicResponse: DisableClsLogTopicResponse,
-    Hsts: Hsts,
     DescribeIpStatusRequest: DescribeIpStatusRequest,
     DetailDomain: DetailDomain,
     GetDisableRecordsResponse: GetDisableRecordsResponse,

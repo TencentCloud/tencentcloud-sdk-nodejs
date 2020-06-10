@@ -3951,6 +3951,12 @@ class FunctionLog extends  AbstractModel {
          */
         this.Source = null;
 
+        /**
+         * 重试次数
+         * @type {number || null}
+         */
+        this.RetryNum = null;
+
     }
 
     /**
@@ -3972,6 +3978,7 @@ class FunctionLog extends  AbstractModel {
         this.Log = 'Log' in params ? params.Log : null;
         this.Level = 'Level' in params ? params.Level : null;
         this.Source = 'Source' in params ? params.Source : null;
+        this.RetryNum = 'RetryNum' in params ? params.RetryNum : null;
 
     }
 }

@@ -6628,6 +6628,12 @@ class ExecuteScalingPolicyRequest extends  AbstractModel {
          */
         this.HonorCooldown = null;
 
+        /**
+         * 执行伸缩策略的触发来源，取值包括 API 和 CLOUD_MONITOR，默认值为 API。CLOUD_MONITOR 专门供云监控触发调用。
+         * @type {string || null}
+         */
+        this.TriggerSource = null;
+
     }
 
     /**
@@ -6639,6 +6645,7 @@ class ExecuteScalingPolicyRequest extends  AbstractModel {
         }
         this.AutoScalingPolicyId = 'AutoScalingPolicyId' in params ? params.AutoScalingPolicyId : null;
         this.HonorCooldown = 'HonorCooldown' in params ? params.HonorCooldown : null;
+        this.TriggerSource = 'TriggerSource' in params ? params.TriggerSource : null;
 
     }
 }

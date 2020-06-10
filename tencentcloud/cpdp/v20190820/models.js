@@ -468,6 +468,12 @@ class ModifyMntMbrBindRelateAcctBankCodeRequest extends  AbstractModel {
          */
         this.ReservedMsg = null;
 
+        /**
+         * STRING(12)，接入环境，默认接入沙箱环境。接入正式环境填"prod"
+         * @type {string || null}
+         */
+        this.Profile = null;
+
     }
 
     /**
@@ -484,6 +490,7 @@ class ModifyMntMbrBindRelateAcctBankCodeRequest extends  AbstractModel {
         this.CnapsBranchId = 'CnapsBranchId' in params ? params.CnapsBranchId : null;
         this.EiconBankBranchId = 'EiconBankBranchId' in params ? params.EiconBankBranchId : null;
         this.ReservedMsg = 'ReservedMsg' in params ? params.ReservedMsg : null;
+        this.Profile = 'Profile' in params ? params.Profile : null;
 
     }
 }
@@ -716,6 +723,12 @@ class QueryBankWithdrawCashDetailsRequest extends  AbstractModel {
          */
         this.ReservedMsg = null;
 
+        /**
+         * STRING(12)，接入环境，默认接入沙箱环境。接入正式环境填"prod"
+         * @type {string || null}
+         */
+        this.Profile = null;
+
     }
 
     /**
@@ -733,6 +746,7 @@ class QueryBankWithdrawCashDetailsRequest extends  AbstractModel {
         this.BeginDate = 'BeginDate' in params ? params.BeginDate : null;
         this.EndDate = 'EndDate' in params ? params.EndDate : null;
         this.ReservedMsg = 'ReservedMsg' in params ? params.ReservedMsg : null;
+        this.Profile = 'Profile' in params ? params.Profile : null;
 
     }
 }
@@ -815,6 +829,12 @@ class QueryCustAcctIdBalanceRequest extends  AbstractModel {
          */
         this.ReservedMsg = null;
 
+        /**
+         * STRING(12)，接入环境，默认接入沙箱环境。接入正式环境填"prod"
+         * @type {string || null}
+         */
+        this.Profile = null;
+
     }
 
     /**
@@ -829,6 +849,7 @@ class QueryCustAcctIdBalanceRequest extends  AbstractModel {
         this.PageNum = 'PageNum' in params ? params.PageNum : null;
         this.SubAcctNo = 'SubAcctNo' in params ? params.SubAcctNo : null;
         this.ReservedMsg = 'ReservedMsg' in params ? params.ReservedMsg : null;
+        this.Profile = 'Profile' in params ? params.Profile : null;
 
     }
 }
@@ -1174,6 +1195,12 @@ class ReviseMbrPropertyRequest extends  AbstractModel {
          */
         this.ReservedMsg = null;
 
+        /**
+         * STRING(12)，接入环境，默认接入沙箱环境。接入正式环境填"prod"
+         * @type {string || null}
+         */
+        this.Profile = null;
+
     }
 
     /**
@@ -1187,6 +1214,7 @@ class ReviseMbrPropertyRequest extends  AbstractModel {
         this.SubAcctNo = 'SubAcctNo' in params ? params.SubAcctNo : null;
         this.MemberProperty = 'MemberProperty' in params ? params.MemberProperty : null;
         this.ReservedMsg = 'ReservedMsg' in params ? params.ReservedMsg : null;
+        this.Profile = 'Profile' in params ? params.Profile : null;
 
     }
 }
@@ -1277,6 +1305,12 @@ class WithdrawCashMembershipRequest extends  AbstractModel {
          */
         this.WebSign = null;
 
+        /**
+         * STRING(12)，接入环境，默认接入沙箱环境。接入正式环境填"prod"
+         * @type {string || null}
+         */
+        this.Profile = null;
+
     }
 
     /**
@@ -1299,6 +1333,7 @@ class WithdrawCashMembershipRequest extends  AbstractModel {
         this.Remark = 'Remark' in params ? params.Remark : null;
         this.ReservedMsg = 'ReservedMsg' in params ? params.ReservedMsg : null;
         this.WebSign = 'WebSign' in params ? params.WebSign : null;
+        this.Profile = 'Profile' in params ? params.Profile : null;
 
     }
 }
@@ -1365,6 +1400,12 @@ class RevResigterBillSupportWithdrawRequest extends  AbstractModel {
          */
         this.ReservedMsgThree = null;
 
+        /**
+         * STRING(12)，接入环境，默认接入沙箱环境。接入正式环境填"prod"
+         * @type {string || null}
+         */
+        this.Profile = null;
+
     }
 
     /**
@@ -1383,6 +1424,7 @@ class RevResigterBillSupportWithdrawRequest extends  AbstractModel {
         this.ReservedMsgOne = 'ReservedMsgOne' in params ? params.ReservedMsgOne : null;
         this.ReservedMsgTwo = 'ReservedMsgTwo' in params ? params.ReservedMsgTwo : null;
         this.ReservedMsgThree = 'ReservedMsgThree' in params ? params.ReservedMsgThree : null;
+        this.Profile = 'Profile' in params ? params.Profile : null;
 
     }
 }
@@ -1897,6 +1939,12 @@ class UnbindRelateAcctRequest extends  AbstractModel {
          */
         this.ReservedMsg = null;
 
+        /**
+         * STRING(12)，接入环境，默认接入沙箱环境。接入正式环境填"prod"
+         * @type {string || null}
+         */
+        this.Profile = null;
+
     }
 
     /**
@@ -1911,6 +1959,7 @@ class UnbindRelateAcctRequest extends  AbstractModel {
         this.TranNetMemberCode = 'TranNetMemberCode' in params ? params.TranNetMemberCode : null;
         this.MemberAcctNo = 'MemberAcctNo' in params ? params.MemberAcctNo : null;
         this.ReservedMsg = 'ReservedMsg' in params ? params.ReservedMsg : null;
+        this.Profile = 'Profile' in params ? params.Profile : null;
 
     }
 }
@@ -3933,6 +3982,12 @@ class QuerySingleTransactionStatusRequest extends  AbstractModel {
          */
         this.ReservedMsg = null;
 
+        /**
+         * STRING(12)，接入环境，默认接入沙箱环境。接入正式环境填"prod"
+         * @type {string || null}
+         */
+        this.Profile = null;
+
     }
 
     /**
@@ -3948,6 +4003,7 @@ class QuerySingleTransactionStatusRequest extends  AbstractModel {
         this.SubAcctNo = 'SubAcctNo' in params ? params.SubAcctNo : null;
         this.TranDate = 'TranDate' in params ? params.TranDate : null;
         this.ReservedMsg = 'ReservedMsg' in params ? params.ReservedMsg : null;
+        this.Profile = 'Profile' in params ? params.Profile : null;
 
     }
 }
@@ -4695,6 +4751,12 @@ class BindRelateAcctUnionPayRequest extends  AbstractModel {
          */
         this.ReservedMsg = null;
 
+        /**
+         * STRING(12)，接入环境，默认接入沙箱环境。接入正式环境填"prod"
+         * @type {string || null}
+         */
+        this.Profile = null;
+
     }
 
     /**
@@ -4716,6 +4778,7 @@ class BindRelateAcctUnionPayRequest extends  AbstractModel {
         this.CnapsBranchId = 'CnapsBranchId' in params ? params.CnapsBranchId : null;
         this.EiconBankBranchId = 'EiconBankBranchId' in params ? params.EiconBankBranchId : null;
         this.ReservedMsg = 'ReservedMsg' in params ? params.ReservedMsg : null;
+        this.Profile = 'Profile' in params ? params.Profile : null;
 
     }
 }
@@ -5953,6 +6016,12 @@ class QueryMemberTransactionRequest extends  AbstractModel {
          */
         this.WebSign = null;
 
+        /**
+         * STRING(12)，接入环境，默认接入沙箱环境。接入正式环境填"prod"
+         * @type {string || null}
+         */
+        this.Profile = null;
+
     }
 
     /**
@@ -5979,6 +6048,7 @@ class QueryMemberTransactionRequest extends  AbstractModel {
         this.Remark = 'Remark' in params ? params.Remark : null;
         this.ReservedMsg = 'ReservedMsg' in params ? params.ReservedMsg : null;
         this.WebSign = 'WebSign' in params ? params.WebSign : null;
+        this.Profile = 'Profile' in params ? params.Profile : null;
 
     }
 }
@@ -6443,6 +6513,12 @@ class BindRelateAccReUnionPayRequest extends  AbstractModel {
          */
         this.ReservedMsg = null;
 
+        /**
+         * STRING(12)，接入环境，默认接入沙箱环境。接入正式环境填"prod"
+         * @type {string || null}
+         */
+        this.Profile = null;
+
     }
 
     /**
@@ -6457,6 +6533,7 @@ class BindRelateAccReUnionPayRequest extends  AbstractModel {
         this.MemberAcctNo = 'MemberAcctNo' in params ? params.MemberAcctNo : null;
         this.MessageCheckCode = 'MessageCheckCode' in params ? params.MessageCheckCode : null;
         this.ReservedMsg = 'ReservedMsg' in params ? params.ReservedMsg : null;
+        this.Profile = 'Profile' in params ? params.Profile : null;
 
     }
 }
@@ -7233,6 +7310,12 @@ class CheckAmountRequest extends  AbstractModel {
          */
         this.ReservedMsg = null;
 
+        /**
+         * STRING(12)，接入环境，默认接入沙箱环境。接入正式环境填"prod"
+         * @type {string || null}
+         */
+        this.Profile = null;
+
     }
 
     /**
@@ -7248,6 +7331,7 @@ class CheckAmountRequest extends  AbstractModel {
         this.AuthAmt = 'AuthAmt' in params ? params.AuthAmt : null;
         this.Ccy = 'Ccy' in params ? params.Ccy : null;
         this.ReservedMsg = 'ReservedMsg' in params ? params.ReservedMsg : null;
+        this.Profile = 'Profile' in params ? params.Profile : null;
 
     }
 }
@@ -7860,6 +7944,12 @@ class RegisterBillSupportWithdrawRequest extends  AbstractModel {
          */
         this.ReservedMsgThree = null;
 
+        /**
+         * STRING(12)，接入环境，默认接入沙箱环境。接入正式环境填"prod"
+         * @type {string || null}
+         */
+        this.Profile = null;
+
     }
 
     /**
@@ -7878,6 +7968,7 @@ class RegisterBillSupportWithdrawRequest extends  AbstractModel {
         this.ReservedMsgOne = 'ReservedMsgOne' in params ? params.ReservedMsgOne : null;
         this.ReservedMsgTwo = 'ReservedMsgTwo' in params ? params.ReservedMsgTwo : null;
         this.ReservedMsgThree = 'ReservedMsgThree' in params ? params.ReservedMsgThree : null;
+        this.Profile = 'Profile' in params ? params.Profile : null;
 
     }
 }
@@ -8014,6 +8105,12 @@ class CreateCustAcctIdRequest extends  AbstractModel {
          */
         this.ReservedMsg = null;
 
+        /**
+         * STRING(12)，接入环境，默认接入沙箱环境。接入正式环境填"prod"
+         * @type {string || null}
+         */
+        this.Profile = null;
+
     }
 
     /**
@@ -8037,6 +8134,7 @@ class CreateCustAcctIdRequest extends  AbstractModel {
         this.UserNickname = 'UserNickname' in params ? params.UserNickname : null;
         this.Email = 'Email' in params ? params.Email : null;
         this.ReservedMsg = 'ReservedMsg' in params ? params.ReservedMsg : null;
+        this.Profile = 'Profile' in params ? params.Profile : null;
 
     }
 }
@@ -8386,6 +8484,12 @@ class QueryCommonTransferRechargeRequest extends  AbstractModel {
          */
         this.ReservedMsg = null;
 
+        /**
+         * STRING(12)，接入环境，默认接入沙箱环境。接入正式环境填"prod"
+         * @type {string || null}
+         */
+        this.Profile = null;
+
     }
 
     /**
@@ -8401,6 +8505,7 @@ class QueryCommonTransferRechargeRequest extends  AbstractModel {
         this.EndDate = 'EndDate' in params ? params.EndDate : null;
         this.PageNum = 'PageNum' in params ? params.PageNum : null;
         this.ReservedMsg = 'ReservedMsg' in params ? params.ReservedMsg : null;
+        this.Profile = 'Profile' in params ? params.Profile : null;
 
     }
 }
@@ -9359,6 +9464,12 @@ class RechargeMemberThirdPayRequest extends  AbstractModel {
          */
         this.ReservedMsgThree = null;
 
+        /**
+         * STRING(12)，接入环境，默认接入沙箱环境。接入正式环境填"prod"
+         * @type {string || null}
+         */
+        this.Profile = null;
+
     }
 
     /**
@@ -9382,6 +9493,7 @@ class RechargeMemberThirdPayRequest extends  AbstractModel {
         this.ReservedMsgOne = 'ReservedMsgOne' in params ? params.ReservedMsgOne : null;
         this.ReservedMsgTwo = 'ReservedMsgTwo' in params ? params.ReservedMsgTwo : null;
         this.ReservedMsgThree = 'ReservedMsgThree' in params ? params.ReservedMsgThree : null;
+        this.Profile = 'Profile' in params ? params.Profile : null;
 
     }
 }
@@ -9561,6 +9673,12 @@ class QueryBankClearRequest extends  AbstractModel {
          */
         this.ReservedMsg = null;
 
+        /**
+         * STRING(12)，接入环境，默认接入沙箱环境。接入正式环境填"prod"
+         * @type {string || null}
+         */
+        this.Profile = null;
+
     }
 
     /**
@@ -9576,6 +9694,7 @@ class QueryBankClearRequest extends  AbstractModel {
         this.StartDate = 'StartDate' in params ? params.StartDate : null;
         this.EndDate = 'EndDate' in params ? params.EndDate : null;
         this.ReservedMsg = 'ReservedMsg' in params ? params.ReservedMsg : null;
+        this.Profile = 'Profile' in params ? params.Profile : null;
 
     }
 }
@@ -9734,6 +9853,12 @@ class QueryBankTransactionDetailsRequest extends  AbstractModel {
          */
         this.ReservedMsg = null;
 
+        /**
+         * STRING(12)，接入环境，默认接入沙箱环境。接入正式环境填"prod"
+         * @type {string || null}
+         */
+        this.Profile = null;
+
     }
 
     /**
@@ -9751,6 +9876,7 @@ class QueryBankTransactionDetailsRequest extends  AbstractModel {
         this.StartDate = 'StartDate' in params ? params.StartDate : null;
         this.EndDate = 'EndDate' in params ? params.EndDate : null;
         this.ReservedMsg = 'ReservedMsg' in params ? params.ReservedMsg : null;
+        this.Profile = 'Profile' in params ? params.Profile : null;
 
     }
 }
@@ -9878,6 +10004,12 @@ class RevokeMemberRechargeThirdPayRequest extends  AbstractModel {
          */
         this.ReservedMsgThree = null;
 
+        /**
+         * STRING(12)，接入环境，默认接入沙箱环境。接入正式环境填"prod"
+         * @type {string || null}
+         */
+        this.Profile = null;
+
     }
 
     /**
@@ -9898,6 +10030,7 @@ class RevokeMemberRechargeThirdPayRequest extends  AbstractModel {
         this.ReservedMsgOne = 'ReservedMsgOne' in params ? params.ReservedMsgOne : null;
         this.ReservedMsgTwo = 'ReservedMsgTwo' in params ? params.ReservedMsgTwo : null;
         this.ReservedMsgThree = 'ReservedMsgThree' in params ? params.ReservedMsgThree : null;
+        this.Profile = 'Profile' in params ? params.Profile : null;
 
     }
 }
@@ -10692,6 +10825,12 @@ class QuerySmallAmountTransferRequest extends  AbstractModel {
          */
         this.ReservedMsg = null;
 
+        /**
+         * STRING(12)，接入环境，默认接入沙箱环境。接入正式环境填"prod"
+         * @type {string || null}
+         */
+        this.Profile = null;
+
     }
 
     /**
@@ -10705,6 +10844,7 @@ class QuerySmallAmountTransferRequest extends  AbstractModel {
         this.OldTranSeqNo = 'OldTranSeqNo' in params ? params.OldTranSeqNo : null;
         this.TranDate = 'TranDate' in params ? params.TranDate : null;
         this.ReservedMsg = 'ReservedMsg' in params ? params.ReservedMsg : null;
+        this.Profile = 'Profile' in params ? params.Profile : null;
 
     }
 }
@@ -11107,6 +11247,12 @@ class BindRelateAcctSmallAmountRequest extends  AbstractModel {
          */
         this.ReservedMsg = null;
 
+        /**
+         * STRING(12)，接入环境，默认接入沙箱环境。接入正式环境填"prod"
+         * @type {string || null}
+         */
+        this.Profile = null;
+
     }
 
     /**
@@ -11128,6 +11274,7 @@ class BindRelateAcctSmallAmountRequest extends  AbstractModel {
         this.CnapsBranchId = 'CnapsBranchId' in params ? params.CnapsBranchId : null;
         this.EiconBankBranchId = 'EiconBankBranchId' in params ? params.EiconBankBranchId : null;
         this.ReservedMsg = 'ReservedMsg' in params ? params.ReservedMsg : null;
+        this.Profile = 'Profile' in params ? params.Profile : null;
 
     }
 }
@@ -11412,6 +11559,12 @@ class QueryMemberBindRequest extends  AbstractModel {
          */
         this.ReservedMsg = null;
 
+        /**
+         * STRING(12)，接入环境，默认接入沙箱环境。接入正式环境填"prod"
+         * @type {string || null}
+         */
+        this.Profile = null;
+
     }
 
     /**
@@ -11426,6 +11579,7 @@ class QueryMemberBindRequest extends  AbstractModel {
         this.PageNum = 'PageNum' in params ? params.PageNum : null;
         this.SubAcctNo = 'SubAcctNo' in params ? params.SubAcctNo : null;
         this.ReservedMsg = 'ReservedMsg' in params ? params.ReservedMsg : null;
+        this.Profile = 'Profile' in params ? params.Profile : null;
 
     }
 }
@@ -11555,6 +11709,12 @@ class QueryReconciliationDocumentRequest extends  AbstractModel {
          */
         this.ReservedMsg = null;
 
+        /**
+         * STRING(12)，接入环境，默认接入沙箱环境。接入正式环境填"prod"
+         * @type {string || null}
+         */
+        this.Profile = null;
+
     }
 
     /**
@@ -11568,6 +11728,7 @@ class QueryReconciliationDocumentRequest extends  AbstractModel {
         this.FileType = 'FileType' in params ? params.FileType : null;
         this.FileDate = 'FileDate' in params ? params.FileDate : null;
         this.ReservedMsg = 'ReservedMsg' in params ? params.ReservedMsg : null;
+        this.Profile = 'Profile' in params ? params.Profile : null;
 
     }
 }

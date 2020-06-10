@@ -20084,7 +20084,7 @@ class Subnet extends  AbstractModel {
         this.CreatedTime = null;
 
         /**
-         * 可用`IP`数。
+         * 可用`IPv4`数。
          * @type {number || null}
          */
         this.AvailableIpAddressCount = null;
@@ -20108,7 +20108,7 @@ class Subnet extends  AbstractModel {
         this.IsRemoteVpcSnat = null;
 
         /**
-         * 子网`IP`总数。
+         * 子网`IPv4`总数。
          * @type {number || null}
          */
         this.TotalIpAddressCount = null;
