@@ -1102,13 +1102,15 @@ class UpdateNotebookLifecycleScriptRequest extends  AbstractModel {
         this.NotebookLifecycleScriptsName = null;
 
         /**
-         * 创建脚本
+         * 创建脚本，base64编码
+base64后的脚本长度不能超过16384个字符
          * @type {string || null}
          */
         this.CreateScript = null;
 
         /**
-         * 启动脚本
+         * 启动脚本，base64编码
+base64后的脚本长度不能超过16384个字符
          * @type {string || null}
          */
         this.StartScript = null;
@@ -1251,12 +1253,13 @@ class CreatePresignedNotebookInstanceUrlRequest extends  AbstractModel {
 
         /**
          * Notebook实例名称
+规则：^[a-zA-Z0-9](-*[a-zA-Z0-9])*$
          * @type {string || null}
          */
         this.NotebookInstanceName = null;
 
         /**
-         * session有效时间，秒
+         * session有效时间，秒，取值范围[1800, 43200]
          * @type {number || null}
          */
         this.SessionExpirationDurationInSeconds = null;
@@ -1291,13 +1294,15 @@ class CreateNotebookLifecycleScriptRequest extends  AbstractModel {
         this.NotebookLifecycleScriptsName = null;
 
         /**
-         * 创建脚本，base64编码格式
+         * 创建脚本，base64编码
+base64后的脚本长度不能超过16384个字符
          * @type {string || null}
          */
         this.CreateScript = null;
 
         /**
-         * 启动脚本，base64编码格式
+         * 启动脚本，base64编码
+base64后的脚本长度不能超过16384个字符
          * @type {string || null}
          */
         this.StartScript = null;

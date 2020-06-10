@@ -426,6 +426,13 @@ class DirectConnect extends  AbstractModel {
          */
         this.ChargeState = null;
 
+        /**
+         * 物理专线开通时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
     }
 
     /**
@@ -469,6 +476,7 @@ class DirectConnect extends  AbstractModel {
         this.AccessPointType = 'AccessPointType' in params ? params.AccessPointType : null;
         this.IdcCity = 'IdcCity' in params ? params.IdcCity : null;
         this.ChargeState = 'ChargeState' in params ? params.ChargeState : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
 
     }
 }
