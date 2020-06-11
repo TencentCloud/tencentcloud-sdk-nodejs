@@ -38,6 +38,7 @@ const Topic = models.Topic;
 const Tag = models.Tag;
 const GroupResponse = models.GroupResponse;
 const DescribeTopicAttributesResponse = models.DescribeTopicAttributesResponse;
+const RouteResponse = models.RouteResponse;
 const DescribeGroupResponse = models.DescribeGroupResponse;
 const ModifyInstanceAttributesConfig = models.ModifyInstanceAttributesConfig;
 const OperateResponseData = models.OperateResponseData;
@@ -56,6 +57,7 @@ const Partition = models.Partition;
 const CreateAclResponse = models.CreateAclResponse;
 const CreateTopicRequest = models.CreateTopicRequest;
 const DeleteAclResponse = models.DeleteAclResponse;
+const DescribeRouteRequest = models.DescribeRouteRequest;
 const InstanceConfigDO = models.InstanceConfigDO;
 const UserResponse = models.UserResponse;
 const DescribeGroupInfoRequest = models.DescribeGroupInfoRequest;
@@ -96,10 +98,12 @@ const InstanceResponse = models.InstanceResponse;
 const DescribeGroup = models.DescribeGroup;
 const TopicPartitionDO = models.TopicPartitionDO;
 const CreateTopicResp = models.CreateTopicResp;
+const DescribeRouteResponse = models.DescribeRouteResponse;
 const DescribeTopicDetailRequest = models.DescribeTopicDetailRequest;
 const DescribeGroupOffsetsResponse = models.DescribeGroupOffsetsResponse;
 const ModifyGroupOffsetsRequest = models.ModifyGroupOffsetsRequest;
 const CreateTopicIpWhiteListRequest = models.CreateTopicIpWhiteListRequest;
+const Route = models.Route;
 const Acl = models.Acl;
 const ModifyTopicAttributesRequest = models.ModifyTopicAttributesRequest;
 const CreateTopicResponse = models.CreateTopicResponse;
@@ -121,6 +125,17 @@ class CkafkaClient extends AbstractClient {
         super("ckafka.tencentcloudapi.com", "2019-08-19", credential, region, profile);
     }
     
+    /**
+     * 查看路由信息
+     * @param {DescribeRouteRequest} req
+     * @param {function(string, DescribeRouteResponse):void} cb
+     * @public
+     */
+    DescribeRoute(req, cb) {
+        let resp = new DescribeRouteResponse();
+        this.request("DescribeRoute", req, resp, cb);
+    }
+
     /**
      * 获取消费分组信息
      * @param {DescribeGroupInfoRequest} req

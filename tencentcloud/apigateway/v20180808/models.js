@@ -1963,6 +1963,48 @@ class ModifySubDomainResponse extends  AbstractModel {
 }
 
 /**
+ * 检索条件入参
+ * @class
+ */
+class LogQuery extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 检索字段
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 操作符
+         * @type {string || null}
+         */
+        this.Operator = null;
+
+        /**
+         * 检索值
+         * @type {string || null}
+         */
+        this.Value = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Operator = 'Operator' in params ? params.Operator : null;
+        this.Value = 'Value' in params ? params.Value : null;
+
+    }
+}
+
+/**
  * ServiceParameter
  * @class
  */
@@ -8802,7 +8844,7 @@ class DescribeLogSearchRequest extends  AbstractModel {
         this.ServiceId = null;
 
         /**
-         * 精确查询，支持apiid/reqid搜索
+         * 保留字段
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
@@ -8826,10 +8868,26 @@ class DescribeLogSearchRequest extends  AbstractModel {
         this.Sort = null;
 
         /**
-         * 模糊查询，根据关键字检索日志
+         * 保留字段
          * @type {string || null}
          */
         this.Query = null;
+
+        /**
+         * 检索条件,支持的检索条件如下：
+req_id：“=”
+api_id：“=”
+cip：“=”
+uip：“:”
+err_msg：“:”
+rsp_st：“=” 、“!=” 、 “:” 、 “>” 、 “<”
+req_t：”>=“ 、 ”<=“
+
+说明：
+“:”表示包含，“!=”表示不等于，字段含义见输出参数的LogSet说明
+         * @type {Array.<LogQuery> || null}
+         */
+        this.LogQuerys = null;
 
     }
 
@@ -8856,6 +8914,15 @@ class DescribeLogSearchRequest extends  AbstractModel {
         this.ConText = 'ConText' in params ? params.ConText : null;
         this.Sort = 'Sort' in params ? params.Sort : null;
         this.Query = 'Query' in params ? params.Query : null;
+
+        if (params.LogQuerys) {
+            this.LogQuerys = new Array();
+            for (let z in params.LogQuerys) {
+                let obj = new LogQuery();
+                obj.deserialize(params.LogQuerys[z]);
+                this.LogQuerys.push(obj);
+            }
+        }
 
     }
 }
@@ -9805,6 +9872,7 @@ module.exports = {
     ConstantParameter: ConstantParameter,
     UsagePlansStatus: UsagePlansStatus,
     ModifySubDomainResponse: ModifySubDomainResponse,
+    LogQuery: LogQuery,
     ServiceParameter: ServiceParameter,
     ModifyServiceResponse: ModifyServiceResponse,
     DisableApiKeyRequest: DisableApiKeyRequest,

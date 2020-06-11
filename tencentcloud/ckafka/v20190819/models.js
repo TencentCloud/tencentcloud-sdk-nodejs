@@ -1026,6 +1026,43 @@ class DescribeTopicAttributesResponse extends  AbstractModel {
 }
 
 /**
+ * 路由信息返回对象
+ * @class
+ */
+class RouteResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 路由信息列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<Route> || null}
+         */
+        this.Routers = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Routers) {
+            this.Routers = new Array();
+            for (let z in params.Routers) {
+                let obj = new Route();
+                obj.deserialize(params.Routers[z]);
+                this.Routers.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * DescribeGroup返回参数结构体
  * @class
  */
@@ -1899,6 +1936,34 @@ class DeleteAclResponse extends  AbstractModel {
             this.Result = obj;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeRoute请求参数结构体
+ * @class
+ */
+class DescribeRouteRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例唯一id
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
 
     }
 }
@@ -3975,6 +4040,46 @@ class CreateTopicResp extends  AbstractModel {
 }
 
 /**
+ * DescribeRoute返回参数结构体
+ * @class
+ */
+class DescribeRouteResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 返回的路由信息结果集
+         * @type {RouteResponse || null}
+         */
+        this.Result = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Result) {
+            let obj = new RouteResponse();
+            obj.deserialize(params.Result)
+            this.Result = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeTopicDetail请求参数结构体
  * @class
  */
@@ -4171,6 +4276,83 @@ class CreateTopicIpWhiteListRequest extends  AbstractModel {
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
         this.TopicName = 'TopicName' in params ? params.TopicName : null;
         this.IpWhiteList = 'IpWhiteList' in params ? params.IpWhiteList : null;
+
+    }
+}
+
+/**
+ * 路由实体对象
+ * @class
+ */
+class Route extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例接入方式
+0：PLAINTEXT (明文方式，没有带用户信息老版本及社区版本都支持)
+1：SASL_PLAINTEXT（明文方式，不过在数据开始时，会通过SASL方式登录鉴权，仅社区版本支持）
+2：SSL（SSL加密通信，没有带用户信息，老版本及社区版本都支持）
+3：SASL_SSL（SSL加密通信，在数据开始时，会通过SASL方式登录鉴权，仅社区版本支持）
+         * @type {number || null}
+         */
+        this.AccessType = null;
+
+        /**
+         * 路由ID
+         * @type {number || null}
+         */
+        this.RouteId = null;
+
+        /**
+         * vip网络类型（1:外网TGW  2:基础网络 3:VPC网络 4:腾讯云支持环境(一般用于内部实例) 5:SSL外网访问方式访问 6:黑石环境vpc）
+         * @type {number || null}
+         */
+        this.VipType = null;
+
+        /**
+         * 虚拟IP列表
+         * @type {Array.<VipEntity> || null}
+         */
+        this.VipList = null;
+
+        /**
+         * 域名
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Domain = null;
+
+        /**
+         * 域名port
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.DomainPort = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AccessType = 'AccessType' in params ? params.AccessType : null;
+        this.RouteId = 'RouteId' in params ? params.RouteId : null;
+        this.VipType = 'VipType' in params ? params.VipType : null;
+
+        if (params.VipList) {
+            this.VipList = new Array();
+            for (let z in params.VipList) {
+                let obj = new VipEntity();
+                obj.deserialize(params.VipList[z]);
+                this.VipList.push(obj);
+            }
+        }
+        this.Domain = 'Domain' in params ? params.Domain : null;
+        this.DomainPort = 'DomainPort' in params ? params.DomainPort : null;
 
     }
 }
@@ -4834,6 +5016,7 @@ module.exports = {
     Tag: Tag,
     GroupResponse: GroupResponse,
     DescribeTopicAttributesResponse: DescribeTopicAttributesResponse,
+    RouteResponse: RouteResponse,
     DescribeGroupResponse: DescribeGroupResponse,
     ModifyInstanceAttributesConfig: ModifyInstanceAttributesConfig,
     OperateResponseData: OperateResponseData,
@@ -4852,6 +5035,7 @@ module.exports = {
     CreateAclResponse: CreateAclResponse,
     CreateTopicRequest: CreateTopicRequest,
     DeleteAclResponse: DeleteAclResponse,
+    DescribeRouteRequest: DescribeRouteRequest,
     InstanceConfigDO: InstanceConfigDO,
     UserResponse: UserResponse,
     DescribeGroupInfoRequest: DescribeGroupInfoRequest,
@@ -4892,10 +5076,12 @@ module.exports = {
     DescribeGroup: DescribeGroup,
     TopicPartitionDO: TopicPartitionDO,
     CreateTopicResp: CreateTopicResp,
+    DescribeRouteResponse: DescribeRouteResponse,
     DescribeTopicDetailRequest: DescribeTopicDetailRequest,
     DescribeGroupOffsetsResponse: DescribeGroupOffsetsResponse,
     ModifyGroupOffsetsRequest: ModifyGroupOffsetsRequest,
     CreateTopicIpWhiteListRequest: CreateTopicIpWhiteListRequest,
+    Route: Route,
     Acl: Acl,
     ModifyTopicAttributesRequest: ModifyTopicAttributesRequest,
     CreateTopicResponse: CreateTopicResponse,

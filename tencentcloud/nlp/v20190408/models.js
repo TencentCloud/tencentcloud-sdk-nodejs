@@ -1584,6 +1584,12 @@ class LexicalAnalysisRequest extends  AbstractModel {
         this.Text = null;
 
         /**
+         * 指定要加载的自定义词库ID。
+         * @type {string || null}
+         */
+        this.DictId = null;
+
+        /**
          * 词法分析模式（默认取2值）：
 1、高精度（混合粒度分词能力）；
 2、高性能（单粒度分词能力）；
@@ -1601,6 +1607,7 @@ class LexicalAnalysisRequest extends  AbstractModel {
             return;
         }
         this.Text = 'Text' in params ? params.Text : null;
+        this.DictId = 'DictId' in params ? params.DictId : null;
         this.Flag = 'Flag' in params ? params.Flag : null;
 
     }

@@ -36,11 +36,13 @@ const DescribeSubnetsResponse = models.DescribeSubnetsResponse;
 const RunInstancesRequest = models.RunInstancesRequest;
 const DescribeInstancesResponse = models.DescribeInstancesResponse;
 const ResetInstancesPasswordResponse = models.ResetInstancesPasswordResponse;
+const SrcImage = models.SrcImage;
 const InstanceTypeConfig = models.InstanceTypeConfig;
 const DescribeNodeResponse = models.DescribeNodeResponse;
 const RemovePrivateIpAddressesResponse = models.RemovePrivateIpAddressesResponse;
 const DescribeDefaultSubnetResponse = models.DescribeDefaultSubnetResponse;
 const VpcInfo = models.VpcInfo;
+const SecurityGroup = models.SecurityGroup;
 const DeleteSubnetRequest = models.DeleteSubnetRequest;
 const DescribeModuleRequest = models.DescribeModuleRequest;
 const Position = models.Position;
@@ -134,15 +136,16 @@ const TerminateInstancesResponse = models.TerminateInstancesResponse;
 const DescribeAddressesRequest = models.DescribeAddressesRequest;
 const MigrateNetworkInterfaceRequest = models.MigrateNetworkInterfaceRequest;
 const DescribeAddressQuotaResponse = models.DescribeAddressQuotaResponse;
-const SrcImage = models.SrcImage;
+const CreateSecurityGroupResponse = models.CreateSecurityGroupResponse;
 const ZoneInstanceInfo = models.ZoneInstanceInfo;
 const ModifyAddressAttributeRequest = models.ModifyAddressAttributeRequest;
 const ModifyModuleImageResponse = models.ModifyModuleImageResponse;
 const ResetInstancesRequest = models.ResetInstancesRequest;
 const PeakNetwork = models.PeakNetwork;
-const DeleteImageRequest = models.DeleteImageRequest;
+const InstanceOperator = models.InstanceOperator;
 const ModifyAddressAttributeResponse = models.ModifyAddressAttributeResponse;
 const ImportImageResponse = models.ImportImageResponse;
+const CreateSecurityGroupRequest = models.CreateSecurityGroupRequest;
 const City = models.City;
 const PrivateIPAddressInfo = models.PrivateIPAddressInfo;
 const TerminateInstancesRequest = models.TerminateInstancesRequest;
@@ -174,7 +177,7 @@ const ModifyModuleImageRequest = models.ModifyModuleImageRequest;
 const RunMonitorServiceEnabled = models.RunMonitorServiceEnabled;
 const MigrateNetworkInterfaceResponse = models.MigrateNetworkInterfaceResponse;
 const DescribeVpcsResponse = models.DescribeVpcsResponse;
-const InstanceOperator = models.InstanceOperator;
+const DeleteImageRequest = models.DeleteImageRequest;
 const Module = models.Module;
 const DescribeBaseOverviewResponse = models.DescribeBaseOverviewResponse;
 
@@ -584,6 +587,17 @@ EIP 如果欠费或被封堵，则不能被绑定。
     StopInstances(req, cb) {
         let resp = new StopInstancesResponse();
         this.request("StopInstances", req, resp, cb);
+    }
+
+    /**
+     * 创建安全组
+     * @param {CreateSecurityGroupRequest} req
+     * @param {function(string, CreateSecurityGroupResponse):void} cb
+     * @public
+     */
+    CreateSecurityGroup(req, cb) {
+        let resp = new CreateSecurityGroupResponse();
+        this.request("CreateSecurityGroup", req, resp, cb);
     }
 
     /**
