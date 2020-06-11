@@ -81,7 +81,7 @@ class LayoutParams extends  AbstractModel {
         this.MainVideoUserId = null;
 
         /**
-         * 屏幕分享模板中有效，代表左侧大画面对应的流类型，0为摄像头，1为屏幕分享
+         * 屏幕分享模板中有效，代表左侧大画面对应的流类型，0为摄像头，1为屏幕分享。左侧大画面为web用户时此值填0
          * @type {number || null}
          */
         this.MainVideoStreamType = null;
@@ -887,7 +887,7 @@ class OutputParams extends  AbstractModel {
         super();
 
         /**
-         * 直播流ID
+         * 直播流ID，该流ID不能与用户旁路的流ID相同。
          * @type {string || null}
          */
         this.StreamId = null;

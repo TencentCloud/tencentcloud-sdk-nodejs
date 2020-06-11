@@ -7388,21 +7388,23 @@ class DescribeSecurityGroupPoliciesResponse extends  AbstractModel {
 }
 
 /**
- * DescribeGatewayFlowQos返回参数结构体
+ * GetCcnRegionBandwidthLimits返回参数结构体
  * @class
  */
-class DescribeGatewayFlowQosResponse extends  AbstractModel {
+class GetCcnRegionBandwidthLimitsResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 实例详细信息列表。
-         * @type {Array.<GatewayQos> || null}
+         * 云联网（CCN）各地域出带宽带宽详情。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<CcnBandwidthInfo> || null}
          */
-        this.GatewayQosSet = null;
+        this.CcnBandwidthSet = null;
 
         /**
-         * 符合条件的实例数量。
+         * 符合条件的对象数。
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.TotalCount = null;
@@ -7423,12 +7425,12 @@ class DescribeGatewayFlowQosResponse extends  AbstractModel {
             return;
         }
 
-        if (params.GatewayQosSet) {
-            this.GatewayQosSet = new Array();
-            for (let z in params.GatewayQosSet) {
-                let obj = new GatewayQos();
-                obj.deserialize(params.GatewayQosSet[z]);
-                this.GatewayQosSet.push(obj);
+        if (params.CcnBandwidthSet) {
+            this.CcnBandwidthSet = new Array();
+            for (let z in params.CcnBandwidthSet) {
+                let obj = new CcnBandwidthInfo();
+                obj.deserialize(params.CcnBandwidthSet[z]);
+                this.CcnBandwidthSet.push(obj);
             }
         }
         this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
@@ -11562,18 +11564,50 @@ class CreateFlowLogResponse extends  AbstractModel {
 }
 
 /**
- * DeleteDirectConnectGateway请求参数结构体
+ * GetCcnRegionBandwidthLimits请求参数结构体
  * @class
  */
-class DeleteDirectConnectGatewayRequest extends  AbstractModel {
+class GetCcnRegionBandwidthLimitsRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 专线网关唯一`ID`，形如：`dcg-9o233uri`。
+         * CCN实例ID。形如：ccn-f49l6u0z。
          * @type {string || null}
          */
-        this.DirectConnectGatewayId = null;
+        this.CcnId = null;
+
+        /**
+         * 过滤条件。
+<li>sregion - String - （过滤条件）源地域，形如：ap-guangzhou。</li>
+<li>dregion - String - （过滤条件）目的地域，形如：ap-shanghai-bm</li>
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * 排序条件，目前支持带宽（BandwidthLimit）和过期时间（ExpireTime）
+         * @type {string || null}
+         */
+        this.SortedBy = null;
+
+        /**
+         * 偏移量
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 返回数量
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 排序方式，'ASC':升序,'DESC':降序。
+         * @type {string || null}
+         */
+        this.OrderBy = null;
 
     }
 
@@ -11584,7 +11618,20 @@ class DeleteDirectConnectGatewayRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.DirectConnectGatewayId = 'DirectConnectGatewayId' in params ? params.DirectConnectGatewayId : null;
+        this.CcnId = 'CcnId' in params ? params.CcnId : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.SortedBy = 'SortedBy' in params ? params.SortedBy : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.OrderBy = 'OrderBy' in params ? params.OrderBy : null;
 
     }
 }
@@ -13801,6 +13848,55 @@ class CcnInstance extends  AbstractModel {
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
         this.InstanceRegion = 'InstanceRegion' in params ? params.InstanceRegion : null;
         this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
+
+    }
+}
+
+/**
+ * 单项计费价格信息
+ * @class
+ */
+class ItemPrice extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 按量计费后付费单价，单位：元。
+         * @type {number || null}
+         */
+        this.UnitPrice = null;
+
+        /**
+         * 按量计费后付费计价单元，可取值范围： HOUR：表示计价单元是按每小时来计算。当前涉及该计价单元的场景有：实例按小时后付费（POSTPAID_BY_HOUR）、带宽按小时后付费（BANDWIDTH_POSTPAID_BY_HOUR）： GB：表示计价单元是按每GB来计算。当前涉及该计价单元的场景有：流量按小时后付费（TRAFFIC_POSTPAID_BY_HOUR）。
+         * @type {string || null}
+         */
+        this.ChargeUnit = null;
+
+        /**
+         * 预付费商品的原价，单位：元。
+         * @type {number || null}
+         */
+        this.OriginalPrice = null;
+
+        /**
+         * 预付费商品的折扣价，单位：元。
+         * @type {number || null}
+         */
+        this.DiscountPrice = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.UnitPrice = 'UnitPrice' in params ? params.UnitPrice : null;
+        this.ChargeUnit = 'ChargeUnit' in params ? params.ChargeUnit : null;
+        this.OriginalPrice = 'OriginalPrice' in params ? params.OriginalPrice : null;
+        this.DiscountPrice = 'DiscountPrice' in params ? params.DiscountPrice : null;
 
     }
 }
@@ -19293,6 +19389,80 @@ class ModifyHaVipAttributeResponse extends  AbstractModel {
 }
 
 /**
+ * 用于描述云联网地域间限速带宽实例的信息
+ * @class
+ */
+class CcnBandwidthInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 带宽所属的云联网ID。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.CcnId = null;
+
+        /**
+         * 实例的创建时间。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.CreatedTime = null;
+
+        /**
+         * 实例的过期时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ExpiredTime = null;
+
+        /**
+         * 带宽实例的唯一ID。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.RegionFlowControlId = null;
+
+        /**
+         * 带宽是否自动续费的标记。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.RenewFlag = null;
+
+        /**
+         * 描述带宽的地域和限速上限信息。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {CcnRegionBandwidthLimit || null}
+         */
+        this.CcnRegionBandwidthLimit = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CcnId = 'CcnId' in params ? params.CcnId : null;
+        this.CreatedTime = 'CreatedTime' in params ? params.CreatedTime : null;
+        this.ExpiredTime = 'ExpiredTime' in params ? params.ExpiredTime : null;
+        this.RegionFlowControlId = 'RegionFlowControlId' in params ? params.RegionFlowControlId : null;
+        this.RenewFlag = 'RenewFlag' in params ? params.RenewFlag : null;
+
+        if (params.CcnRegionBandwidthLimit) {
+            let obj = new CcnRegionBandwidthLimit();
+            obj.deserialize(params.CcnRegionBandwidthLimit)
+            this.CcnRegionBandwidthLimit = obj;
+        }
+
+    }
+}
+
+/**
  * DeleteSecurityGroup返回参数结构体
  * @class
  */
@@ -20424,6 +20594,56 @@ class DisassociateAddressResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeGatewayFlowQos返回参数结构体
+ * @class
+ */
+class DescribeGatewayFlowQosResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例详细信息列表。
+         * @type {Array.<GatewayQos> || null}
+         */
+        this.GatewayQosSet = null;
+
+        /**
+         * 符合条件的实例数量。
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.GatewayQosSet) {
+            this.GatewayQosSet = new Array();
+            for (let z in params.GatewayQosSet) {
+                let obj = new GatewayQos();
+                obj.deserialize(params.GatewayQosSet[z]);
+                this.GatewayQosSet.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DeleteRoutes请求参数结构体
  * @class
  */
@@ -21286,36 +21506,18 @@ class CreateRouteTableResponse extends  AbstractModel {
 }
 
 /**
- * 单项计费价格信息
+ * DeleteDirectConnectGateway请求参数结构体
  * @class
  */
-class ItemPrice extends  AbstractModel {
+class DeleteDirectConnectGatewayRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 按量计费后付费单价，单位：元。
-         * @type {number || null}
-         */
-        this.UnitPrice = null;
-
-        /**
-         * 按量计费后付费计价单元，可取值范围： HOUR：表示计价单元是按每小时来计算。当前涉及该计价单元的场景有：实例按小时后付费（POSTPAID_BY_HOUR）、带宽按小时后付费（BANDWIDTH_POSTPAID_BY_HOUR）： GB：表示计价单元是按每GB来计算。当前涉及该计价单元的场景有：流量按小时后付费（TRAFFIC_POSTPAID_BY_HOUR）。
+         * 专线网关唯一`ID`，形如：`dcg-9o233uri`。
          * @type {string || null}
          */
-        this.ChargeUnit = null;
-
-        /**
-         * 预付费商品的原价，单位：元。
-         * @type {number || null}
-         */
-        this.OriginalPrice = null;
-
-        /**
-         * 预付费商品的折扣价，单位：元。
-         * @type {number || null}
-         */
-        this.DiscountPrice = null;
+        this.DirectConnectGatewayId = null;
 
     }
 
@@ -21326,10 +21528,7 @@ class ItemPrice extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.UnitPrice = 'UnitPrice' in params ? params.UnitPrice : null;
-        this.ChargeUnit = 'ChargeUnit' in params ? params.ChargeUnit : null;
-        this.OriginalPrice = 'OriginalPrice' in params ? params.OriginalPrice : null;
-        this.DiscountPrice = 'DiscountPrice' in params ? params.DiscountPrice : null;
+        this.DirectConnectGatewayId = 'DirectConnectGatewayId' in params ? params.DirectConnectGatewayId : null;
 
     }
 }
@@ -23063,7 +23262,7 @@ module.exports = {
     TemplateLimit: TemplateLimit,
     CreateSubnetResponse: CreateSubnetResponse,
     DescribeSecurityGroupPoliciesResponse: DescribeSecurityGroupPoliciesResponse,
-    DescribeGatewayFlowQosResponse: DescribeGatewayFlowQosResponse,
+    GetCcnRegionBandwidthLimitsResponse: GetCcnRegionBandwidthLimitsResponse,
     ModifySecurityGroupPoliciesRequest: ModifySecurityGroupPoliciesRequest,
     RemoveIp6RulesResponse: RemoveIp6RulesResponse,
     AssociateDhcpIpWithAddressIpRequest: AssociateDhcpIpWithAddressIpRequest,
@@ -23151,7 +23350,7 @@ module.exports = {
     DescribeVpnGatewayCcnRoutesResponse: DescribeVpnGatewayCcnRoutesResponse,
     DetachCcnInstancesRequest: DetachCcnInstancesRequest,
     CreateFlowLogResponse: CreateFlowLogResponse,
-    DeleteDirectConnectGatewayRequest: DeleteDirectConnectGatewayRequest,
+    GetCcnRegionBandwidthLimitsRequest: GetCcnRegionBandwidthLimitsRequest,
     ReleaseIp6AddressesBandwidthRequest: ReleaseIp6AddressesBandwidthRequest,
     CcnAttachedInstance: CcnAttachedInstance,
     SecurityPolicyDatabase: SecurityPolicyDatabase,
@@ -23197,6 +23396,7 @@ module.exports = {
     AttachCcnInstancesRequest: AttachCcnInstancesRequest,
     DescribeDirectConnectGatewayCcnRoutesRequest: DescribeDirectConnectGatewayCcnRoutesRequest,
     CcnInstance: CcnInstance,
+    ItemPrice: ItemPrice,
     DeleteNatGatewayRequest: DeleteNatGatewayRequest,
     ModifyCustomerGatewayAttributeResponse: ModifyCustomerGatewayAttributeResponse,
     ConflictItem: ConflictItem,
@@ -23328,6 +23528,7 @@ module.exports = {
     EnableGatewayFlowMonitorRequest: EnableGatewayFlowMonitorRequest,
     ModifyPrivateIpAddressesAttributeResponse: ModifyPrivateIpAddressesAttributeResponse,
     ModifyHaVipAttributeResponse: ModifyHaVipAttributeResponse,
+    CcnBandwidthInfo: CcnBandwidthInfo,
     DeleteSecurityGroupResponse: DeleteSecurityGroupResponse,
     CreateNetworkInterfaceResponse: CreateNetworkInterfaceResponse,
     DescribeAddressQuotaRequest: DescribeAddressQuotaRequest,
@@ -23353,6 +23554,7 @@ module.exports = {
     SecurityGroup: SecurityGroup,
     DisableGatewayFlowMonitorResponse: DisableGatewayFlowMonitorResponse,
     DisassociateAddressResponse: DisassociateAddressResponse,
+    DescribeGatewayFlowQosResponse: DescribeGatewayFlowQosResponse,
     DeleteRoutesRequest: DeleteRoutesRequest,
     AssociateAddressRequest: AssociateAddressRequest,
     CcnRegionBandwidthLimit: CcnRegionBandwidthLimit,
@@ -23375,7 +23577,7 @@ module.exports = {
     DeleteSecurityGroupRequest: DeleteSecurityGroupRequest,
     DescribeDhcpIpsResponse: DescribeDhcpIpsResponse,
     CreateRouteTableResponse: CreateRouteTableResponse,
-    ItemPrice: ItemPrice,
+    DeleteDirectConnectGatewayRequest: DeleteDirectConnectGatewayRequest,
     DescribeDirectConnectGatewayCcnRoutesResponse: DescribeDirectConnectGatewayCcnRoutesResponse,
     ModifyPrivateIpAddressesAttributeRequest: ModifyPrivateIpAddressesAttributeRequest,
     ResetNatGatewayConnectionResponse: ResetNatGatewayConnectionResponse,

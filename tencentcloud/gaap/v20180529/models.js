@@ -144,6 +144,15 @@ class DeleteProxyGroupRequest extends  AbstractModel {
          */
         this.GroupId = null;
 
+        /**
+         * 强制删除标识。其中：
+0，不强制删除，
+1，强制删除。
+默认为0，当通道组中存在通道或通道组中存在监听器/规则绑定了源站时，且Force为0时，该操作会返回失败。
+         * @type {number || null}
+         */
+        this.Force = null;
+
     }
 
     /**
@@ -154,6 +163,7 @@ class DeleteProxyGroupRequest extends  AbstractModel {
             return;
         }
         this.GroupId = 'GroupId' in params ? params.GroupId : null;
+        this.Force = 'Force' in params ? params.Force : null;
 
     }
 }
@@ -599,6 +609,48 @@ class DomainErrorPageInfo extends  AbstractModel {
 }
 
 /**
+ * 通道组加速地域列表，包括加速地域，以及该加速地域对应的带宽和并发配置。
+ * @class
+ */
+class AccessConfiguration extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 加速地域。
+         * @type {string || null}
+         */
+        this.AccessRegion = null;
+
+        /**
+         * 通道带宽上限，单位：Mbps。
+         * @type {number || null}
+         */
+        this.Bandwidth = null;
+
+        /**
+         * 通道并发量上限，表示同时在线的连接数，单位：万。
+         * @type {number || null}
+         */
+        this.Concurrent = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AccessRegion = 'AccessRegion' in params ? params.AccessRegion : null;
+        this.Bandwidth = 'Bandwidth' in params ? params.Bandwidth : null;
+        this.Concurrent = 'Concurrent' in params ? params.Concurrent : null;
+
+    }
+}
+
+/**
  * DescribeCertificateDetail请求参数结构体
  * @class
  */
@@ -920,6 +972,12 @@ class DescribeHTTPListenersRequest extends  AbstractModel {
          */
         this.SearchValue = null;
 
+        /**
+         * 通道组ID
+         * @type {string || null}
+         */
+        this.GroupId = null;
+
     }
 
     /**
@@ -936,6 +994,7 @@ class DescribeHTTPListenersRequest extends  AbstractModel {
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.SearchValue = 'SearchValue' in params ? params.SearchValue : null;
+        this.GroupId = 'GroupId' in params ? params.GroupId : null;
 
     }
 }
@@ -1074,6 +1133,12 @@ class OpenSecurityPolicyRequest extends  AbstractModel {
          */
         this.ProxyId = null;
 
+        /**
+         * 安全策略ID
+         * @type {string || null}
+         */
+        this.PolicyId = null;
+
     }
 
     /**
@@ -1084,6 +1149,7 @@ class OpenSecurityPolicyRequest extends  AbstractModel {
             return;
         }
         this.ProxyId = 'ProxyId' in params ? params.ProxyId : null;
+        this.PolicyId = 'PolicyId' in params ? params.PolicyId : null;
 
     }
 }
@@ -1253,6 +1319,12 @@ class DescribeHTTPSListenersRequest extends  AbstractModel {
          */
         this.SearchValue = null;
 
+        /**
+         * 过滤条件，通道组ID
+         * @type {string || null}
+         */
+        this.GroupId = null;
+
     }
 
     /**
@@ -1269,6 +1341,7 @@ class DescribeHTTPSListenersRequest extends  AbstractModel {
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.SearchValue = 'SearchValue' in params ? params.SearchValue : null;
+        this.GroupId = 'GroupId' in params ? params.GroupId : null;
 
     }
 }
@@ -2529,6 +2602,7 @@ class DescribeSecurityPolicyDetailResponse extends  AbstractModel {
 
         /**
          * 通道ID
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.ProxyId = null;
@@ -2689,6 +2763,12 @@ class CreateProxyGroupRequest extends  AbstractModel {
          */
         this.TagSet = null;
 
+        /**
+         * 加速地域列表，包括加速地域名，及该地域对应的带宽和并发配置。
+         * @type {Array.<AccessConfiguration> || null}
+         */
+        this.AccessRegionSet = null;
+
     }
 
     /**
@@ -2708,6 +2788,15 @@ class CreateProxyGroupRequest extends  AbstractModel {
                 let obj = new TagPair();
                 obj.deserialize(params.TagSet[z]);
                 this.TagSet.push(obj);
+            }
+        }
+
+        if (params.AccessRegionSet) {
+            this.AccessRegionSet = new Array();
+            for (let z in params.AccessRegionSet) {
+                let obj = new AccessConfiguration();
+                obj.deserialize(params.AccessRegionSet[z]);
+                this.AccessRegionSet.push(obj);
             }
         }
 
@@ -4298,7 +4387,7 @@ class HTTPSListener extends  AbstractModel {
         this.Port = null;
 
         /**
-         * 监听器协议， 值为：HTTP
+         * 监听器协议， HTTP表示HTTP，HTTPS表示HTTPS，此结构取值HTTPS
          * @type {string || null}
          */
         this.Protocol = null;
@@ -4348,8 +4437,8 @@ class HTTPSListener extends  AbstractModel {
 
         /**
          * 监听器认证方式。其中，
-0，单向认证；
-1，双向认证。
+0表示单向认证；
+1表示双向认证。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
@@ -4496,6 +4585,12 @@ class CloseSecurityPolicyRequest extends  AbstractModel {
          */
         this.ProxyId = null;
 
+        /**
+         * 安全组策略ID
+         * @type {string || null}
+         */
+        this.PolicyId = null;
+
     }
 
     /**
@@ -4506,6 +4601,7 @@ class CloseSecurityPolicyRequest extends  AbstractModel {
             return;
         }
         this.ProxyId = 'ProxyId' in params ? params.ProxyId : null;
+        this.PolicyId = 'PolicyId' in params ? params.PolicyId : null;
 
     }
 }
@@ -5258,6 +5354,20 @@ MOVING表示通道迁移中。
          */
         this.TagSet = null;
 
+        /**
+         * 通道组版本
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Version = null;
+
+        /**
+         * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.CreateTime = null;
+
     }
 
     /**
@@ -5287,6 +5397,8 @@ MOVING表示通道迁移中。
                 this.TagSet.push(obj);
             }
         }
+        this.Version = 'Version' in params ? params.Version : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
 
     }
 }
@@ -6087,7 +6199,7 @@ class HTTPListener extends  AbstractModel {
         this.CreateTime = null;
 
         /**
-         * 监听器协议
+         * 监听器协议， HTTP表示HTTP，HTTPS表示HTTPS，此结构取值HTTP
          * @type {string || null}
          */
         this.Protocol = null;
@@ -6274,10 +6386,16 @@ class CreateHTTPListenerRequest extends  AbstractModel {
         this.Port = null;
 
         /**
-         * 通道ID
+         * 通道ID，与GroupId不能同时设置，对应为通道创建监听器
          * @type {string || null}
          */
         this.ProxyId = null;
+
+        /**
+         * 通道组ID，与ProxyId不能同时设置，对应为通道组创建监听器
+         * @type {string || null}
+         */
+        this.GroupId = null;
 
     }
 
@@ -6291,6 +6409,7 @@ class CreateHTTPListenerRequest extends  AbstractModel {
         this.ListenerName = 'ListenerName' in params ? params.ListenerName : null;
         this.Port = 'Port' in params ? params.Port : null;
         this.ProxyId = 'ProxyId' in params ? params.ProxyId : null;
+        this.GroupId = 'GroupId' in params ? params.GroupId : null;
 
     }
 }
@@ -7346,16 +7465,22 @@ class CreateSecurityPolicyRequest extends  AbstractModel {
         super();
 
         /**
+         * 默认策略：ACCEPT或DROP
+         * @type {string || null}
+         */
+        this.DefaultAction = null;
+
+        /**
          * 加速通道ID
          * @type {string || null}
          */
         this.ProxyId = null;
 
         /**
-         * 默认策略：ACCEPT或DROP
+         * 通道组ID
          * @type {string || null}
          */
-        this.DefaultAction = null;
+        this.GroupId = null;
 
     }
 
@@ -7366,8 +7491,9 @@ class CreateSecurityPolicyRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ProxyId = 'ProxyId' in params ? params.ProxyId : null;
         this.DefaultAction = 'DefaultAction' in params ? params.DefaultAction : null;
+        this.ProxyId = 'ProxyId' in params ? params.ProxyId : null;
+        this.GroupId = 'GroupId' in params ? params.GroupId : null;
 
     }
 }
@@ -8770,6 +8896,12 @@ class ModifyProxyGroupAttributeRequest extends  AbstractModel {
          */
         this.GroupName = null;
 
+        /**
+         * 项目ID
+         * @type {number || null}
+         */
+        this.ProjectId = null;
+
     }
 
     /**
@@ -8781,23 +8913,30 @@ class ModifyProxyGroupAttributeRequest extends  AbstractModel {
         }
         this.GroupId = 'GroupId' in params ? params.GroupId : null;
         this.GroupName = 'GroupName' in params ? params.GroupName : null;
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
 
     }
 }
 
 /**
- * DescribeCertificateDetail返回参数结构体
+ * CloseProxyGroup返回参数结构体
  * @class
  */
-class DescribeCertificateDetailResponse extends  AbstractModel {
+class CloseProxyGroupResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 证书详情。
-         * @type {CertificateDetail || null}
+         * 非运行状态下的通道实例ID列表，不可开启。
+         * @type {Array.<string> || null}
          */
-        this.CertificateDetail = null;
+        this.InvalidStatusInstanceSet = null;
+
+        /**
+         * 开启操作失败的通道实例ID列表。
+         * @type {Array.<string> || null}
+         */
+        this.OperationFailedInstanceSet = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -8814,12 +8953,8 @@ class DescribeCertificateDetailResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.CertificateDetail) {
-            let obj = new CertificateDetail();
-            obj.deserialize(params.CertificateDetail)
-            this.CertificateDetail = obj;
-        }
+        this.InvalidStatusInstanceSet = 'InvalidStatusInstanceSet' in params ? params.InvalidStatusInstanceSet : null;
+        this.OperationFailedInstanceSet = 'OperationFailedInstanceSet' in params ? params.OperationFailedInstanceSet : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -8941,6 +9076,12 @@ class CheckProxyCreateRequest extends  AbstractModel {
          */
         this.Concurrent = null;
 
+        /**
+         * 如果在通道组下创建通道，需要填写通道组的ID
+         * @type {string || null}
+         */
+        this.GroupId = null;
+
     }
 
     /**
@@ -8954,6 +9095,7 @@ class CheckProxyCreateRequest extends  AbstractModel {
         this.RealServerRegion = 'RealServerRegion' in params ? params.RealServerRegion : null;
         this.Bandwidth = 'Bandwidth' in params ? params.Bandwidth : null;
         this.Concurrent = 'Concurrent' in params ? params.Concurrent : null;
+        this.GroupId = 'GroupId' in params ? params.GroupId : null;
 
     }
 }
@@ -9204,7 +9346,7 @@ class CreateHTTPSListenerRequest extends  AbstractModel {
         this.ForwardProtocol = null;
 
         /**
-         * 通道ID
+         * 通道ID，与GroupId之间只能设置一个。表示创建通道的监听器。
          * @type {string || null}
          */
         this.ProxyId = null;
@@ -9230,6 +9372,12 @@ class CreateHTTPSListenerRequest extends  AbstractModel {
          */
         this.PolyClientCertificateIds = null;
 
+        /**
+         * 通道组ID，与ProxyId之间只能设置一个。表示创建通道组的监听器。
+         * @type {string || null}
+         */
+        this.GroupId = null;
+
     }
 
     /**
@@ -9247,6 +9395,7 @@ class CreateHTTPSListenerRequest extends  AbstractModel {
         this.AuthType = 'AuthType' in params ? params.AuthType : null;
         this.ClientCertificateId = 'ClientCertificateId' in params ? params.ClientCertificateId : null;
         this.PolyClientCertificateIds = 'PolyClientCertificateIds' in params ? params.PolyClientCertificateIds : null;
+        this.GroupId = 'GroupId' in params ? params.GroupId : null;
 
     }
 }
@@ -9282,6 +9431,88 @@ class DeleteSecurityRulesRequest extends  AbstractModel {
         }
         this.PolicyId = 'PolicyId' in params ? params.PolicyId : null;
         this.RuleIdList = 'RuleIdList' in params ? params.RuleIdList : null;
+
+    }
+}
+
+/**
+ * DescribeCertificateDetail返回参数结构体
+ * @class
+ */
+class DescribeCertificateDetailResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 证书详情。
+         * @type {CertificateDetail || null}
+         */
+        this.CertificateDetail = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.CertificateDetail) {
+            let obj = new CertificateDetail();
+            obj.deserialize(params.CertificateDetail)
+            this.CertificateDetail = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * OpenProxyGroup返回参数结构体
+ * @class
+ */
+class OpenProxyGroupResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 非关闭状态下的通道实例ID列表，不可开启。
+         * @type {Array.<string> || null}
+         */
+        this.InvalidStatusInstanceSet = null;
+
+        /**
+         * 开启操作失败的通道实例ID列表。
+         * @type {Array.<string> || null}
+         */
+        this.OperationFailedInstanceSet = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InvalidStatusInstanceSet = 'InvalidStatusInstanceSet' in params ? params.InvalidStatusInstanceSet : null;
+        this.OperationFailedInstanceSet = 'OperationFailedInstanceSet' in params ? params.OperationFailedInstanceSet : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -9472,7 +9703,7 @@ class InquiryPriceCreateProxyRequest extends  AbstractModel {
         this.Concurrent = null;
 
         /**
-         * 计费方式 (0:按带宽计费，1:按流量计费 默认按带宽计费）
+         * 计费方式，0表示按带宽计费，1表示按流量计费。默认按带宽计费
          * @type {number || null}
          */
         this.BillingType = null;
@@ -9533,6 +9764,34 @@ class DescribeProxyGroupDetailsResponse extends  AbstractModel {
             this.ProxyGroupDetail = obj;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * OpenProxyGroup请求参数结构体
+ * @class
+ */
+class OpenProxyGroupRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 通道组实例 ID
+         * @type {string || null}
+         */
+        this.GroupId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.GroupId = 'GroupId' in params ? params.GroupId : null;
 
     }
 }
@@ -9809,11 +10068,25 @@ UNKNOWN表示未知状态。
         this.SupportSecurity = null;
 
         /**
-         * 计费类型:(0:按带宽计费  1:按流量计费）
+         * 计费类型: 0表示按带宽计费  1表示按流量计费。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.BillingType = null;
+
+        /**
+         * 关联了解析的域名列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
+         */
+        this.RelatedGlobalDomains = null;
+
+        /**
+         * 配置变更时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.ModifyConfigTime = null;
 
     }
 
@@ -9865,6 +10138,8 @@ UNKNOWN表示未知状态。
         }
         this.SupportSecurity = 'SupportSecurity' in params ? params.SupportSecurity : null;
         this.BillingType = 'BillingType' in params ? params.BillingType : null;
+        this.RelatedGlobalDomains = 'RelatedGlobalDomains' in params ? params.RelatedGlobalDomains : null;
+        this.ModifyConfigTime = 'ModifyConfigTime' in params ? params.ModifyConfigTime : null;
 
     }
 }
@@ -9970,6 +10245,34 @@ class RealServerBindSetReq extends  AbstractModel {
         this.RealServerPort = 'RealServerPort' in params ? params.RealServerPort : null;
         this.RealServerIP = 'RealServerIP' in params ? params.RealServerIP : null;
         this.RealServerWeight = 'RealServerWeight' in params ? params.RealServerWeight : null;
+
+    }
+}
+
+/**
+ * CloseProxyGroup请求参数结构体
+ * @class
+ */
+class CloseProxyGroupRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 通道组的实例 ID。
+         * @type {string || null}
+         */
+        this.GroupId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.GroupId = 'GroupId' in params ? params.GroupId : null;
 
     }
 }
@@ -10134,6 +10437,7 @@ module.exports = {
     DescribeHTTPSListenersResponse: DescribeHTTPSListenersResponse,
     ModifyProxiesProjectRequest: ModifyProxiesProjectRequest,
     DomainErrorPageInfo: DomainErrorPageInfo,
+    AccessConfiguration: AccessConfiguration,
     DescribeCertificateDetailRequest: DescribeCertificateDetailRequest,
     TagResourceInfo: TagResourceInfo,
     SetAuthenticationResponse: SetAuthenticationResponse,
@@ -10301,7 +10605,7 @@ module.exports = {
     DescribeProxyStatisticsResponse: DescribeProxyStatisticsResponse,
     DescribeRealServersStatusResponse: DescribeRealServersStatusResponse,
     ModifyProxyGroupAttributeRequest: ModifyProxyGroupAttributeRequest,
-    DescribeCertificateDetailResponse: DescribeCertificateDetailResponse,
+    CloseProxyGroupResponse: CloseProxyGroupResponse,
     DeleteDomainErrorPageInfoResponse: DeleteDomainErrorPageInfoResponse,
     ModifyProxiesAttributeResponse: ModifyProxiesAttributeResponse,
     DescribeDomainErrorPageInfoByIdsRequest: DescribeDomainErrorPageInfoByIdsRequest,
@@ -10313,17 +10617,21 @@ module.exports = {
     CertificateAliasInfo: CertificateAliasInfo,
     CreateHTTPSListenerRequest: CreateHTTPSListenerRequest,
     DeleteSecurityRulesRequest: DeleteSecurityRulesRequest,
+    DescribeCertificateDetailResponse: DescribeCertificateDetailResponse,
+    OpenProxyGroupResponse: OpenProxyGroupResponse,
     ProxyIdDict: ProxyIdDict,
     Filter: Filter,
     CreateProxyResponse: CreateProxyResponse,
     OpenProxiesRequest: OpenProxiesRequest,
     InquiryPriceCreateProxyRequest: InquiryPriceCreateProxyRequest,
     DescribeProxyGroupDetailsResponse: DescribeProxyGroupDetailsResponse,
+    OpenProxyGroupRequest: OpenProxyGroupRequest,
     UDPListener: UDPListener,
     ProxyInfo: ProxyInfo,
     RemoveRealServersResponse: RemoveRealServersResponse,
     DescribeRulesByRuleIdsRequest: DescribeRulesByRuleIdsRequest,
     RealServerBindSetReq: RealServerBindSetReq,
+    CloseProxyGroupRequest: CloseProxyGroupRequest,
     OpenProxiesResponse: OpenProxiesResponse,
     ModifyProxyConfigurationResponse: ModifyProxyConfigurationResponse,
     CreateDomainErrorPageInfoRequest: CreateDomainErrorPageInfoRequest,

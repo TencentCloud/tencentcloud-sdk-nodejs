@@ -1085,6 +1085,76 @@ class ResetInstancesPasswordResponse extends  AbstractModel {
 }
 
 /**
+ * 镜像来源信息
+ * @class
+ */
+class SrcImage extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 镜像id
+         * @type {string || null}
+         */
+        this.ImageId = null;
+
+        /**
+         * 镜像名称
+         * @type {string || null}
+         */
+        this.ImageName = null;
+
+        /**
+         * 系统名称
+         * @type {string || null}
+         */
+        this.ImageOsName = null;
+
+        /**
+         * 镜像描述
+         * @type {string || null}
+         */
+        this.ImageDescription = null;
+
+        /**
+         * 区域
+         * @type {string || null}
+         */
+        this.Region = null;
+
+        /**
+         * 区域ID
+         * @type {number || null}
+         */
+        this.RegionID = null;
+
+        /**
+         * 区域名称
+         * @type {string || null}
+         */
+        this.RegionName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ImageId = 'ImageId' in params ? params.ImageId : null;
+        this.ImageName = 'ImageName' in params ? params.ImageName : null;
+        this.ImageOsName = 'ImageOsName' in params ? params.ImageOsName : null;
+        this.ImageDescription = 'ImageDescription' in params ? params.ImageDescription : null;
+        this.Region = 'Region' in params ? params.Region : null;
+        this.RegionID = 'RegionID' in params ? params.RegionID : null;
+        this.RegionName = 'RegionName' in params ? params.RegionName : null;
+
+    }
+}
+
+/**
  * 机型配置
  * @class
  */
@@ -1417,6 +1487,77 @@ class VpcInfo extends  AbstractModel {
                 let obj = new AssistantCidr();
                 obj.deserialize(params.AssistantCidrSet[z]);
                 this.AssistantCidrSet.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * 安全组对象
+ * @class
+ */
+class SecurityGroup extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 安全组实例ID，例如：esg-ohuuioma。
+         * @type {string || null}
+         */
+        this.SecurityGroupId = null;
+
+        /**
+         * 安全组名称，可任意命名，但不得超过60个字符。
+         * @type {string || null}
+         */
+        this.SecurityGroupName = null;
+
+        /**
+         * 安全组备注，最多100个字符。
+         * @type {string || null}
+         */
+        this.SecurityGroupDesc = null;
+
+        /**
+         * 是否是默认安全组，默认安全组不支持删除。
+         * @type {boolean || null}
+         */
+        this.IsDefault = null;
+
+        /**
+         * 安全组创建时间。
+         * @type {string || null}
+         */
+        this.CreatedTime = null;
+
+        /**
+         * 标签键值对。
+         * @type {Array.<Tag> || null}
+         */
+        this.TagSet = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SecurityGroupId = 'SecurityGroupId' in params ? params.SecurityGroupId : null;
+        this.SecurityGroupName = 'SecurityGroupName' in params ? params.SecurityGroupName : null;
+        this.SecurityGroupDesc = 'SecurityGroupDesc' in params ? params.SecurityGroupDesc : null;
+        this.IsDefault = 'IsDefault' in params ? params.IsDefault : null;
+        this.CreatedTime = 'CreatedTime' in params ? params.CreatedTime : null;
+
+        if (params.TagSet) {
+            this.TagSet = new Array();
+            for (let z in params.TagSet) {
+                let obj = new Tag();
+                obj.deserialize(params.TagSet[z]);
+                this.TagSet.push(obj);
             }
         }
 
@@ -4869,6 +5010,13 @@ PROTECTIVELY_ISOLATED：表示被安全隔离的实例。
          */
         this.NewFlag = null;
 
+        /**
+         * 实例所属安全组。该参数可以通过调用 DescribeSecurityGroups 的返回值中的sgId字段来获取。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
+         */
+        this.SecurityGroupIds = null;
+
     }
 
     /**
@@ -4948,6 +5096,7 @@ PROTECTIVELY_ISOLATED：表示被安全隔离的实例。
             }
         }
         this.NewFlag = 'NewFlag' in params ? params.NewFlag : null;
+        this.SecurityGroupIds = 'SecurityGroupIds' in params ? params.SecurityGroupIds : null;
 
     }
 }
@@ -5974,54 +6123,24 @@ class DescribeAddressQuotaResponse extends  AbstractModel {
 }
 
 /**
- * 镜像来源信息
+ * CreateSecurityGroup返回参数结构体
  * @class
  */
-class SrcImage extends  AbstractModel {
+class CreateSecurityGroupResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 镜像id
-         * @type {string || null}
+         * 安全组对象。
+         * @type {SecurityGroup || null}
          */
-        this.ImageId = null;
+        this.SecurityGroup = null;
 
         /**
-         * 镜像名称
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.ImageName = null;
-
-        /**
-         * 系统名称
-         * @type {string || null}
-         */
-        this.ImageOsName = null;
-
-        /**
-         * 镜像描述
-         * @type {string || null}
-         */
-        this.ImageDescription = null;
-
-        /**
-         * 区域
-         * @type {string || null}
-         */
-        this.Region = null;
-
-        /**
-         * 区域ID
-         * @type {number || null}
-         */
-        this.RegionID = null;
-
-        /**
-         * 区域名称
-         * @type {string || null}
-         */
-        this.RegionName = null;
+        this.RequestId = null;
 
     }
 
@@ -6032,13 +6151,13 @@ class SrcImage extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ImageId = 'ImageId' in params ? params.ImageId : null;
-        this.ImageName = 'ImageName' in params ? params.ImageName : null;
-        this.ImageOsName = 'ImageOsName' in params ? params.ImageOsName : null;
-        this.ImageDescription = 'ImageDescription' in params ? params.ImageDescription : null;
-        this.Region = 'Region' in params ? params.Region : null;
-        this.RegionID = 'RegionID' in params ? params.RegionID : null;
-        this.RegionName = 'RegionName' in params ? params.RegionName : null;
+
+        if (params.SecurityGroup) {
+            let obj = new SecurityGroup();
+            obj.deserialize(params.SecurityGroup)
+            this.SecurityGroup = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -6259,18 +6378,25 @@ class PeakNetwork extends  AbstractModel {
 }
 
 /**
- * DeleteImage请求参数结构体
+ * 实例可执行操作
  * @class
  */
-class DeleteImageRequest extends  AbstractModel {
+class InstanceOperator extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 镜像ID列表。
-         * @type {Array.<string> || null}
+         * 实例id
+         * @type {string || null}
          */
-        this.ImageIDSet = null;
+        this.InstanceId = null;
+
+        /**
+         * 实例禁止的操作
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<OperatorAction> || null}
+         */
+        this.DeniedActions = null;
 
     }
 
@@ -6281,7 +6407,16 @@ class DeleteImageRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ImageIDSet = 'ImageIDSet' in params ? params.ImageIDSet : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+        if (params.DeniedActions) {
+            this.DeniedActions = new Array();
+            for (let z in params.DeniedActions) {
+                let obj = new OperatorAction();
+                obj.deserialize(params.DeniedActions[z]);
+                this.DeniedActions.push(obj);
+            }
+        }
 
     }
 }
@@ -6338,6 +6473,56 @@ class ImportImageResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CreateSecurityGroup请求参数结构体
+ * @class
+ */
+class CreateSecurityGroupRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 安全组名称，可任意命名，但不得超过60个字符。
+         * @type {string || null}
+         */
+        this.GroupName = null;
+
+        /**
+         * 安全组备注，最多100个字符。
+         * @type {string || null}
+         */
+        this.GroupDescription = null;
+
+        /**
+         * 指定绑定的标签列表，例如：[{"Key": "city", "Value": "shanghai"}]
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.GroupName = 'GroupName' in params ? params.GroupName : null;
+        this.GroupDescription = 'GroupDescription' in params ? params.GroupDescription : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
 
     }
 }
@@ -7714,25 +7899,18 @@ class DescribeVpcsResponse extends  AbstractModel {
 }
 
 /**
- * 实例可执行操作
+ * DeleteImage请求参数结构体
  * @class
  */
-class InstanceOperator extends  AbstractModel {
+class DeleteImageRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 实例id
-         * @type {string || null}
+         * 镜像ID列表。
+         * @type {Array.<string> || null}
          */
-        this.InstanceId = null;
-
-        /**
-         * 实例禁止的操作
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {Array.<OperatorAction> || null}
-         */
-        this.DeniedActions = null;
+        this.ImageIDSet = null;
 
     }
 
@@ -7743,16 +7921,7 @@ class InstanceOperator extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-
-        if (params.DeniedActions) {
-            this.DeniedActions = new Array();
-            for (let z in params.DeniedActions) {
-                let obj = new OperatorAction();
-                obj.deserialize(params.DeniedActions[z]);
-                this.DeniedActions.push(obj);
-            }
-        }
+        this.ImageIDSet = 'ImageIDSet' in params ? params.ImageIDSet : null;
 
     }
 }
@@ -7980,11 +8149,13 @@ module.exports = {
     RunInstancesRequest: RunInstancesRequest,
     DescribeInstancesResponse: DescribeInstancesResponse,
     ResetInstancesPasswordResponse: ResetInstancesPasswordResponse,
+    SrcImage: SrcImage,
     InstanceTypeConfig: InstanceTypeConfig,
     DescribeNodeResponse: DescribeNodeResponse,
     RemovePrivateIpAddressesResponse: RemovePrivateIpAddressesResponse,
     DescribeDefaultSubnetResponse: DescribeDefaultSubnetResponse,
     VpcInfo: VpcInfo,
+    SecurityGroup: SecurityGroup,
     DeleteSubnetRequest: DeleteSubnetRequest,
     DescribeModuleRequest: DescribeModuleRequest,
     Position: Position,
@@ -8078,15 +8249,16 @@ module.exports = {
     DescribeAddressesRequest: DescribeAddressesRequest,
     MigrateNetworkInterfaceRequest: MigrateNetworkInterfaceRequest,
     DescribeAddressQuotaResponse: DescribeAddressQuotaResponse,
-    SrcImage: SrcImage,
+    CreateSecurityGroupResponse: CreateSecurityGroupResponse,
     ZoneInstanceInfo: ZoneInstanceInfo,
     ModifyAddressAttributeRequest: ModifyAddressAttributeRequest,
     ModifyModuleImageResponse: ModifyModuleImageResponse,
     ResetInstancesRequest: ResetInstancesRequest,
     PeakNetwork: PeakNetwork,
-    DeleteImageRequest: DeleteImageRequest,
+    InstanceOperator: InstanceOperator,
     ModifyAddressAttributeResponse: ModifyAddressAttributeResponse,
     ImportImageResponse: ImportImageResponse,
+    CreateSecurityGroupRequest: CreateSecurityGroupRequest,
     City: City,
     PrivateIPAddressInfo: PrivateIPAddressInfo,
     TerminateInstancesRequest: TerminateInstancesRequest,
@@ -8118,7 +8290,7 @@ module.exports = {
     RunMonitorServiceEnabled: RunMonitorServiceEnabled,
     MigrateNetworkInterfaceResponse: MigrateNetworkInterfaceResponse,
     DescribeVpcsResponse: DescribeVpcsResponse,
-    InstanceOperator: InstanceOperator,
+    DeleteImageRequest: DeleteImageRequest,
     Module: Module,
     DescribeBaseOverviewResponse: DescribeBaseOverviewResponse,
 

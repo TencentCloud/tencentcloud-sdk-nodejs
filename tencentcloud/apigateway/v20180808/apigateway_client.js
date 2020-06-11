@@ -55,6 +55,7 @@ const DescribeServiceEnvironmentStrategyResponse = models.DescribeServiceEnviron
 const ConstantParameter = models.ConstantParameter;
 const UsagePlansStatus = models.UsagePlansStatus;
 const ModifySubDomainResponse = models.ModifySubDomainResponse;
+const LogQuery = models.LogQuery;
 const ServiceParameter = models.ServiceParameter;
 const ModifyServiceResponse = models.ModifyServiceResponse;
 const DisableApiKeyRequest = models.DisableApiKeyRequest;
@@ -295,7 +296,7 @@ API 网关使用的最大单元为服务，每个服务中可创建多个 API �
     }
 
     /**
-     * 用于搜索日志
+     * 本接口DescribeLogSearch用于搜索日志
      * @param {DescribeLogSearchRequest} req
      * @param {function(string, DescribeLogSearchResponse):void} cb
      * @public

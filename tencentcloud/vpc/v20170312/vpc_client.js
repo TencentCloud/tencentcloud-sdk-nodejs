@@ -173,7 +173,7 @@ const DescribeCcnsResponse = models.DescribeCcnsResponse;
 const TemplateLimit = models.TemplateLimit;
 const CreateSubnetResponse = models.CreateSubnetResponse;
 const DescribeSecurityGroupPoliciesResponse = models.DescribeSecurityGroupPoliciesResponse;
-const DescribeGatewayFlowQosResponse = models.DescribeGatewayFlowQosResponse;
+const GetCcnRegionBandwidthLimitsResponse = models.GetCcnRegionBandwidthLimitsResponse;
 const ModifySecurityGroupPoliciesRequest = models.ModifySecurityGroupPoliciesRequest;
 const RemoveIp6RulesResponse = models.RemoveIp6RulesResponse;
 const AssociateDhcpIpWithAddressIpRequest = models.AssociateDhcpIpWithAddressIpRequest;
@@ -261,7 +261,7 @@ const DescribeClassicLinkInstancesResponse = models.DescribeClassicLinkInstances
 const DescribeVpnGatewayCcnRoutesResponse = models.DescribeVpnGatewayCcnRoutesResponse;
 const DetachCcnInstancesRequest = models.DetachCcnInstancesRequest;
 const CreateFlowLogResponse = models.CreateFlowLogResponse;
-const DeleteDirectConnectGatewayRequest = models.DeleteDirectConnectGatewayRequest;
+const GetCcnRegionBandwidthLimitsRequest = models.GetCcnRegionBandwidthLimitsRequest;
 const ReleaseIp6AddressesBandwidthRequest = models.ReleaseIp6AddressesBandwidthRequest;
 const CcnAttachedInstance = models.CcnAttachedInstance;
 const SecurityPolicyDatabase = models.SecurityPolicyDatabase;
@@ -307,6 +307,7 @@ const ReplaceRouteTableAssociationResponse = models.ReplaceRouteTableAssociation
 const AttachCcnInstancesRequest = models.AttachCcnInstancesRequest;
 const DescribeDirectConnectGatewayCcnRoutesRequest = models.DescribeDirectConnectGatewayCcnRoutesRequest;
 const CcnInstance = models.CcnInstance;
+const ItemPrice = models.ItemPrice;
 const DeleteNatGatewayRequest = models.DeleteNatGatewayRequest;
 const ModifyCustomerGatewayAttributeResponse = models.ModifyCustomerGatewayAttributeResponse;
 const ConflictItem = models.ConflictItem;
@@ -438,6 +439,7 @@ const ReplaceSecurityGroupPolicyResponse = models.ReplaceSecurityGroupPolicyResp
 const EnableGatewayFlowMonitorRequest = models.EnableGatewayFlowMonitorRequest;
 const ModifyPrivateIpAddressesAttributeResponse = models.ModifyPrivateIpAddressesAttributeResponse;
 const ModifyHaVipAttributeResponse = models.ModifyHaVipAttributeResponse;
+const CcnBandwidthInfo = models.CcnBandwidthInfo;
 const DeleteSecurityGroupResponse = models.DeleteSecurityGroupResponse;
 const CreateNetworkInterfaceResponse = models.CreateNetworkInterfaceResponse;
 const DescribeAddressQuotaRequest = models.DescribeAddressQuotaRequest;
@@ -463,6 +465,7 @@ const AllocateIp6AddressesBandwidthRequest = models.AllocateIp6AddressesBandwidt
 const SecurityGroup = models.SecurityGroup;
 const DisableGatewayFlowMonitorResponse = models.DisableGatewayFlowMonitorResponse;
 const DisassociateAddressResponse = models.DisassociateAddressResponse;
+const DescribeGatewayFlowQosResponse = models.DescribeGatewayFlowQosResponse;
 const DeleteRoutesRequest = models.DeleteRoutesRequest;
 const AssociateAddressRequest = models.AssociateAddressRequest;
 const CcnRegionBandwidthLimit = models.CcnRegionBandwidthLimit;
@@ -485,7 +488,7 @@ const CreateCustomerGatewayRequest = models.CreateCustomerGatewayRequest;
 const DeleteSecurityGroupRequest = models.DeleteSecurityGroupRequest;
 const DescribeDhcpIpsResponse = models.DescribeDhcpIpsResponse;
 const CreateRouteTableResponse = models.CreateRouteTableResponse;
-const ItemPrice = models.ItemPrice;
+const DeleteDirectConnectGatewayRequest = models.DeleteDirectConnectGatewayRequest;
 const DescribeDirectConnectGatewayCcnRoutesResponse = models.DescribeDirectConnectGatewayCcnRoutesResponse;
 const ModifyPrivateIpAddressesAttributeRequest = models.ModifyPrivateIpAddressesAttributeRequest;
 const ResetNatGatewayConnectionResponse = models.ResetNatGatewayConnectionResponse;
@@ -1933,6 +1936,17 @@ class VpcClient extends AbstractClient {
     ReplaceDirectConnectGatewayCcnRoutes(req, cb) {
         let resp = new ReplaceDirectConnectGatewayCcnRoutesResponse();
         this.request("ReplaceDirectConnectGatewayCcnRoutes", req, resp, cb);
+    }
+
+    /**
+     * 本接口（GetCcnRegionBandwidthLimits）用于查询云联网相关地域带宽信息，其中预付费模式的云联网仅支持地域间限速，后付费模式的云联网支持地域间限速和地域出口限速。
+     * @param {GetCcnRegionBandwidthLimitsRequest} req
+     * @param {function(string, GetCcnRegionBandwidthLimitsResponse):void} cb
+     * @public
+     */
+    GetCcnRegionBandwidthLimits(req, cb) {
+        let resp = new GetCcnRegionBandwidthLimitsResponse();
+        this.request("GetCcnRegionBandwidthLimits", req, resp, cb);
     }
 
     /**

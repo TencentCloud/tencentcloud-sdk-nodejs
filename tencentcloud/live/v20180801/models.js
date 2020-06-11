@@ -1573,7 +1573,7 @@ class DescribeStreamPlayInfoListResponse extends  AbstractModel {
         super();
 
         /**
-         * 统计信息列表。
+         * 统计信息列表，时间粒度是1分钟。
          * @type {Array.<DayStreamPlayInfo> || null}
          */
         this.DataInfoList = null;

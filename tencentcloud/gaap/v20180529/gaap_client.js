@@ -27,6 +27,7 @@ const BindRuleRealServersRequest = models.BindRuleRealServersRequest;
 const DescribeHTTPSListenersResponse = models.DescribeHTTPSListenersResponse;
 const ModifyProxiesProjectRequest = models.ModifyProxiesProjectRequest;
 const DomainErrorPageInfo = models.DomainErrorPageInfo;
+const AccessConfiguration = models.AccessConfiguration;
 const DescribeCertificateDetailRequest = models.DescribeCertificateDetailRequest;
 const TagResourceInfo = models.TagResourceInfo;
 const SetAuthenticationResponse = models.SetAuthenticationResponse;
@@ -194,7 +195,7 @@ const ModifyGroupDomainConfigResponse = models.ModifyGroupDomainConfigResponse;
 const DescribeProxyStatisticsResponse = models.DescribeProxyStatisticsResponse;
 const DescribeRealServersStatusResponse = models.DescribeRealServersStatusResponse;
 const ModifyProxyGroupAttributeRequest = models.ModifyProxyGroupAttributeRequest;
-const DescribeCertificateDetailResponse = models.DescribeCertificateDetailResponse;
+const CloseProxyGroupResponse = models.CloseProxyGroupResponse;
 const DeleteDomainErrorPageInfoResponse = models.DeleteDomainErrorPageInfoResponse;
 const ModifyProxiesAttributeResponse = models.ModifyProxiesAttributeResponse;
 const DescribeDomainErrorPageInfoByIdsRequest = models.DescribeDomainErrorPageInfoByIdsRequest;
@@ -206,17 +207,21 @@ const DescribeSecurityRulesResponse = models.DescribeSecurityRulesResponse;
 const CertificateAliasInfo = models.CertificateAliasInfo;
 const CreateHTTPSListenerRequest = models.CreateHTTPSListenerRequest;
 const DeleteSecurityRulesRequest = models.DeleteSecurityRulesRequest;
+const DescribeCertificateDetailResponse = models.DescribeCertificateDetailResponse;
+const OpenProxyGroupResponse = models.OpenProxyGroupResponse;
 const ProxyIdDict = models.ProxyIdDict;
 const Filter = models.Filter;
 const CreateProxyResponse = models.CreateProxyResponse;
 const OpenProxiesRequest = models.OpenProxiesRequest;
 const InquiryPriceCreateProxyRequest = models.InquiryPriceCreateProxyRequest;
 const DescribeProxyGroupDetailsResponse = models.DescribeProxyGroupDetailsResponse;
+const OpenProxyGroupRequest = models.OpenProxyGroupRequest;
 const UDPListener = models.UDPListener;
 const ProxyInfo = models.ProxyInfo;
 const RemoveRealServersResponse = models.RemoveRealServersResponse;
 const DescribeRulesByRuleIdsRequest = models.DescribeRulesByRuleIdsRequest;
 const RealServerBindSetReq = models.RealServerBindSetReq;
+const CloseProxyGroupRequest = models.CloseProxyGroupRequest;
 const OpenProxiesResponse = models.OpenProxiesResponse;
 const ModifyProxyConfigurationResponse = models.ModifyProxyConfigurationResponse;
 const CreateDomainErrorPageInfoRequest = models.CreateDomainErrorPageInfoRequest;
@@ -840,6 +845,17 @@ class GaapClient extends AbstractClient {
     }
 
     /**
+     * 本接口（CloseProxyGroup）用于关闭通道组。通道组关闭后，不再产生流量，但每天仍然收取通道基础配置费用。
+     * @param {CloseProxyGroupRequest} req
+     * @param {function(string, CloseProxyGroupResponse):void} cb
+     * @public
+     */
+    CloseProxyGroup(req, cb) {
+        let resp = new CloseProxyGroupResponse();
+        this.request("CloseProxyGroup", req, resp, cb);
+    }
+
+    /**
      * 本接口（ModifyTCPListenerAttribute）用于修改通道实例下TCP监听器配置，包括健康检查的配置，调度策略。
      * @param {ModifyTCPListenerAttributeRequest} req
      * @param {function(string, ModifyTCPListenerAttributeResponse):void} cb
@@ -970,6 +986,17 @@ class GaapClient extends AbstractClient {
     DescribeRealServersStatus(req, cb) {
         let resp = new DescribeRealServersStatusResponse();
         this.request("DescribeRealServersStatus", req, resp, cb);
+    }
+
+    /**
+     * 该接口（OpenProxyGroup）用于开启一条通道组中的所有通道
+     * @param {OpenProxyGroupRequest} req
+     * @param {function(string, OpenProxyGroupResponse):void} cb
+     * @public
+     */
+    OpenProxyGroup(req, cb) {
+        let resp = new OpenProxyGroupResponse();
+        this.request("OpenProxyGroup", req, resp, cb);
     }
 
     /**
