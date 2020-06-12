@@ -3844,6 +3844,151 @@ class VehicleRegCertOCRRequest extends  AbstractModel {
 }
 
 /**
+ * 商品码信息
+ * @class
+ */
+class ProductDataRecord extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 产品名称
+         * @type {string || null}
+         */
+        this.ProductName = null;
+
+        /**
+         * 产品名称(英文)
+         * @type {string || null}
+         */
+        this.EnName = null;
+
+        /**
+         * 品牌名称
+         * @type {string || null}
+         */
+        this.BrandName = null;
+
+        /**
+         * 规格型号
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * 宽度，单位毫米
+         * @type {string || null}
+         */
+        this.Width = null;
+
+        /**
+         * 高度，单位毫米
+         * @type {string || null}
+         */
+        this.Height = null;
+
+        /**
+         * 深度，单位毫米
+         * @type {string || null}
+         */
+        this.Depth = null;
+
+        /**
+         * 关键字
+         * @type {string || null}
+         */
+        this.KeyWord = null;
+
+        /**
+         * 简短描述
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * 图片链接
+         * @type {Array.<string> || null}
+         */
+        this.ImageLink = null;
+
+        /**
+         * 厂家名称
+         * @type {string || null}
+         */
+        this.ManufacturerName = null;
+
+        /**
+         * 厂家地址
+         * @type {string || null}
+         */
+        this.ManufacturerAddress = null;
+
+        /**
+         * 企业社会信用代码
+         * @type {string || null}
+         */
+        this.FirmCode = null;
+
+        /**
+         * 表示数据查询状态
+checkResult	状态说明
+1	 经查，该商品条码已在中国物品编码中心注册
+2	经查，该厂商识别代码已在中国物品编码中心注册，但编码信息未按规定通报。
+3	经查，该厂商识别代码已于xxxxx注销，请关注产品生产日期。
+4	经查，该企业以及条码未经条码中心注册，属于违法使用
+-1	经查，该商品条码被冒用
+-2	经查，该厂商识别代码已在中国物品编码中心注册，但该产品已经下市
+S001                未找到该厂商识别代码的注册信息。
+S002		该厂商识别代码已经在GS1注册，但编码信息未通报
+S003		该商品条码已在GS1通报
+S004		该商品条码已注销
+S005		数字不正确。GS1前缀（3位国家/地区代码）用于特殊用途。
+E001		完整性失败：此GTIN的长度无效。
+E002		完整性失败：校验位不正确。
+E003		完整性失败：字符串包含字母数字字符。
+E004		数字不正确。GS1前缀（3位国家/地区代码）不存在。
+E005		数字不正确。GS1前缀（3位国家/地区代码）用于特殊用途。
+E006		数字不正确。尚未分配该GS1公司前缀。
+E008	        经查，该企业厂商识别代码以及条码尚未通报
+         * @type {string || null}
+         */
+        this.CheckResult = null;
+
+        /**
+         * UNSPSC分类码
+         * @type {string || null}
+         */
+        this.CategoryCode = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ProductName = 'ProductName' in params ? params.ProductName : null;
+        this.EnName = 'EnName' in params ? params.EnName : null;
+        this.BrandName = 'BrandName' in params ? params.BrandName : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Width = 'Width' in params ? params.Width : null;
+        this.Height = 'Height' in params ? params.Height : null;
+        this.Depth = 'Depth' in params ? params.Depth : null;
+        this.KeyWord = 'KeyWord' in params ? params.KeyWord : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.ImageLink = 'ImageLink' in params ? params.ImageLink : null;
+        this.ManufacturerName = 'ManufacturerName' in params ? params.ManufacturerName : null;
+        this.ManufacturerAddress = 'ManufacturerAddress' in params ? params.ManufacturerAddress : null;
+        this.FirmCode = 'FirmCode' in params ? params.FirmCode : null;
+        this.CheckResult = 'CheckResult' in params ? params.CheckResult : null;
+        this.CategoryCode = 'CategoryCode' in params ? params.CategoryCode : null;
+
+    }
+}
+
+/**
  * LicensePlateOCR请求参数结构体
  * @class
  */
@@ -4697,6 +4842,56 @@ class FinanBillSliceInfo extends  AbstractModel {
 }
 
 /**
+ * QueryBarCode返回参数结构体
+ * @class
+ */
+class QueryBarCodeResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 条码
+         * @type {string || null}
+         */
+        this.BarCode = null;
+
+        /**
+         * 条码信息数组
+         * @type {Array.<ProductDataRecord> || null}
+         */
+        this.ProductDataRecords = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.BarCode = 'BarCode' in params ? params.BarCode : null;
+
+        if (params.ProductDataRecords) {
+            this.ProductDataRecords = new Array();
+            for (let z in params.ProductDataRecords) {
+                let obj = new ProductDataRecord();
+                obj.deserialize(params.ProductDataRecords[z]);
+                this.ProductDataRecords.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * EduPaperOCR请求参数结构体
  * @class
  */
@@ -5437,6 +5632,34 @@ class DutyPaidProofOCRRequest extends  AbstractModel {
         }
         this.ImageBase64 = 'ImageBase64' in params ? params.ImageBase64 : null;
         this.ImageUrl = 'ImageUrl' in params ? params.ImageUrl : null;
+
+    }
+}
+
+/**
+ * QueryBarCode请求参数结构体
+ * @class
+ */
+class QueryBarCodeRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 条形码
+         * @type {string || null}
+         */
+        this.BarCode = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.BarCode = 'BarCode' in params ? params.BarCode : null;
 
     }
 }
@@ -6957,6 +7180,7 @@ DetectPsWarn，PS检测告警
 TempIdWarn，临时身份证告警
 InvalidDateWarn，身份证有效日期不合法告警
 Quality，图片质量分数（评价图片的模糊程度）
+MultiCardDetect，是否开启多卡证检测
 
 SDK 设置方式参考：
 Config = Json.stringify({"CropIdCard":true,"CropPortrait":true})
@@ -7721,6 +7945,7 @@ module.exports = {
     TextGeneralHandwriting: TextGeneralHandwriting,
     TableOCRRequest: TableOCRRequest,
     VehicleRegCertOCRRequest: VehicleRegCertOCRRequest,
+    ProductDataRecord: ProductDataRecord,
     LicensePlateOCRRequest: LicensePlateOCRRequest,
     GeneralBasicOCRRequest: GeneralBasicOCRRequest,
     TextVehicleBack: TextVehicleBack,
@@ -7736,6 +7961,7 @@ module.exports = {
     FlightInvoiceInfo: FlightInvoiceInfo,
     TextVehicleFront: TextVehicleFront,
     FinanBillSliceInfo: FinanBillSliceInfo,
+    QueryBarCodeResponse: QueryBarCodeResponse,
     EduPaperOCRRequest: EduPaperOCRRequest,
     FinanBillSliceOCRRequest: FinanBillSliceOCRRequest,
     MLIDPassportOCRResponse: MLIDPassportOCRResponse,
@@ -7750,6 +7976,7 @@ module.exports = {
     FormulaOCRRequest: FormulaOCRRequest,
     PassportOCRRequest: PassportOCRRequest,
     DutyPaidProofOCRRequest: DutyPaidProofOCRRequest,
+    QueryBarCodeRequest: QueryBarCodeRequest,
     ItemCoord: ItemCoord,
     OrgCodeCertOCRResponse: OrgCodeCertOCRResponse,
     MixedInvoiceOCRRequest: MixedInvoiceOCRRequest,

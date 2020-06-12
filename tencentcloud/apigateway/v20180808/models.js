@@ -1613,7 +1613,7 @@ class DescribeServiceResponse extends  AbstractModel {
 }
 
 /**
- * 使用计划绑定详情
+ * 使用计划绑定环境的列表。
  * @class
  */
 class UsagePlanEnvironmentStatus extends  AbstractModel {
@@ -6544,7 +6544,7 @@ class DescribeUsagePlansStatusRequest extends  AbstractModel {
 }
 
 /**
- * 使用计划绑定详情
+ * 使用计划绑定环境详情。
  * @class
  */
 class UsagePlanEnvironment extends  AbstractModel {
@@ -9798,7 +9798,7 @@ class CreateApiKeyRequest extends  AbstractModel {
         this.SecretName = null;
 
         /**
-         * 密钥类型，支持 auto 和 manunal（自定义密钥），默认为 auto。
+         * 密钥类型，支持 auto 和 manual（自定义密钥），默认为 auto。
          * @type {string || null}
          */
         this.AccessKeyType = null;

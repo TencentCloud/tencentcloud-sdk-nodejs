@@ -3426,6 +3426,12 @@ class CreateRedInvoiceItem extends  AbstractModel {
          */
         this.RedSerialNo = null;
 
+        /**
+         * 门店编号
+         * @type {string || null}
+         */
+        this.StoreNo = null;
+
     }
 
     /**
@@ -3439,6 +3445,7 @@ class CreateRedInvoiceItem extends  AbstractModel {
         this.CallbackUrl = 'CallbackUrl' in params ? params.CallbackUrl : null;
         this.OrderSn = 'OrderSn' in params ? params.OrderSn : null;
         this.RedSerialNo = 'RedSerialNo' in params ? params.RedSerialNo : null;
+        this.StoreNo = 'StoreNo' in params ? params.StoreNo : null;
 
     }
 }
@@ -6457,6 +6464,16 @@ class QueryRefundRequest extends  AbstractModel {
          */
         this.MidasSignature = null;
 
+        /**
+         * 环境名:
+release: 现网环境
+sandbox: 沙箱环境
+development: 开发环境
+缺省: release
+         * @type {string || null}
+         */
+        this.MidasEnvironment = null;
+
     }
 
     /**
@@ -6471,6 +6488,7 @@ class QueryRefundRequest extends  AbstractModel {
         this.MidasAppId = 'MidasAppId' in params ? params.MidasAppId : null;
         this.MidasSecretId = 'MidasSecretId' in params ? params.MidasSecretId : null;
         this.MidasSignature = 'MidasSignature' in params ? params.MidasSignature : null;
+        this.MidasEnvironment = 'MidasEnvironment' in params ? params.MidasEnvironment : null;
 
     }
 }
@@ -7789,6 +7807,24 @@ class CreateInvoiceRequest extends  AbstractModel {
          */
         this.UndoPart = null;
 
+        /**
+         * 订单下单时间（格式 YYYMMDD）
+         * @type {string || null}
+         */
+        this.OrderDate = null;
+
+        /**
+         * 订单级别（单位为分）
+         * @type {number || null}
+         */
+        this.Discount = null;
+
+        /**
+         * 门店编码
+         * @type {string || null}
+         */
+        this.StoreNo = null;
+
     }
 
     /**
@@ -7838,6 +7874,9 @@ class CreateInvoiceRequest extends  AbstractModel {
         }
         this.Profile = 'Profile' in params ? params.Profile : null;
         this.UndoPart = 'UndoPart' in params ? params.UndoPart : null;
+        this.OrderDate = 'OrderDate' in params ? params.OrderDate : null;
+        this.Discount = 'Discount' in params ? params.Discount : null;
+        this.StoreNo = 'StoreNo' in params ? params.StoreNo : null;
 
     }
 }
@@ -8621,6 +8660,16 @@ type=by_user根据用户id 查订单 。
          */
         this.TransactionId = null;
 
+        /**
+         * 环境名:
+release: 现网环境
+sandbox: 沙箱环境
+development: 开发环境
+缺省: release
+         * @type {string || null}
+         */
+        this.MidasEnvironment = null;
+
     }
 
     /**
@@ -8641,6 +8690,7 @@ type=by_user根据用户id 查订单 。
         this.EndTime = 'EndTime' in params ? params.EndTime : null;
         this.OutTradeNo = 'OutTradeNo' in params ? params.OutTradeNo : null;
         this.TransactionId = 'TransactionId' in params ? params.TransactionId : null;
+        this.MidasEnvironment = 'MidasEnvironment' in params ? params.MidasEnvironment : null;
 
     }
 }
@@ -8689,6 +8739,16 @@ class CloseOrderRequest extends  AbstractModel {
          */
         this.TransactionId = null;
 
+        /**
+         * 环境名:
+release: 现网环境
+sandbox: 沙箱环境
+development: 开发环境
+缺省: release
+         * @type {string || null}
+         */
+        this.MidasEnvironment = null;
+
     }
 
     /**
@@ -8704,6 +8764,7 @@ class CloseOrderRequest extends  AbstractModel {
         this.MidasSignature = 'MidasSignature' in params ? params.MidasSignature : null;
         this.OutTradeNo = 'OutTradeNo' in params ? params.OutTradeNo : null;
         this.TransactionId = 'TransactionId' in params ? params.TransactionId : null;
+        this.MidasEnvironment = 'MidasEnvironment' in params ? params.MidasEnvironment : null;
 
     }
 }
@@ -11875,6 +11936,16 @@ class UnifiedOrderRequest extends  AbstractModel {
          */
         this.WxSubOpenId = null;
 
+        /**
+         * 环境名:
+release: 现网环境
+sandbox: 沙箱环境
+development: 开发环境
+缺省: release
+         * @type {string || null}
+         */
+        this.MidasEnvironment = null;
+
     }
 
     /**
@@ -11914,6 +11985,7 @@ class UnifiedOrderRequest extends  AbstractModel {
         this.TotalPlatformIncome = 'TotalPlatformIncome' in params ? params.TotalPlatformIncome : null;
         this.WxOpenId = 'WxOpenId' in params ? params.WxOpenId : null;
         this.WxSubOpenId = 'WxSubOpenId' in params ? params.WxSubOpenId : null;
+        this.MidasEnvironment = 'MidasEnvironment' in params ? params.MidasEnvironment : null;
 
     }
 }
@@ -12098,6 +12170,16 @@ class RefundRequest extends  AbstractModel {
          */
         this.SubOrderRefundList = null;
 
+        /**
+         * 环境名:
+release: 现网环境
+sandbox: 沙箱环境
+development: 开发环境
+缺省: release
+         * @type {string || null}
+         */
+        this.MidasEnvironment = null;
+
     }
 
     /**
@@ -12126,6 +12208,7 @@ class RefundRequest extends  AbstractModel {
                 this.SubOrderRefundList.push(obj);
             }
         }
+        this.MidasEnvironment = 'MidasEnvironment' in params ? params.MidasEnvironment : null;
 
     }
 }

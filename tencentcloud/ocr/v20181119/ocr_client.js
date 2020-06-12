@@ -88,6 +88,7 @@ const BusinessCardInfo = models.BusinessCardInfo;
 const TextGeneralHandwriting = models.TextGeneralHandwriting;
 const TableOCRRequest = models.TableOCRRequest;
 const VehicleRegCertOCRRequest = models.VehicleRegCertOCRRequest;
+const ProductDataRecord = models.ProductDataRecord;
 const LicensePlateOCRRequest = models.LicensePlateOCRRequest;
 const GeneralBasicOCRRequest = models.GeneralBasicOCRRequest;
 const TextVehicleBack = models.TextVehicleBack;
@@ -103,6 +104,7 @@ const CarInvoiceInfo = models.CarInvoiceInfo;
 const FlightInvoiceInfo = models.FlightInvoiceInfo;
 const TextVehicleFront = models.TextVehicleFront;
 const FinanBillSliceInfo = models.FinanBillSliceInfo;
+const QueryBarCodeResponse = models.QueryBarCodeResponse;
 const EduPaperOCRRequest = models.EduPaperOCRRequest;
 const FinanBillSliceOCRRequest = models.FinanBillSliceOCRRequest;
 const MLIDPassportOCRResponse = models.MLIDPassportOCRResponse;
@@ -117,6 +119,7 @@ const ArithmeticOCRRequest = models.ArithmeticOCRRequest;
 const FormulaOCRRequest = models.FormulaOCRRequest;
 const PassportOCRRequest = models.PassportOCRRequest;
 const DutyPaidProofOCRRequest = models.DutyPaidProofOCRRequest;
+const QueryBarCodeRequest = models.QueryBarCodeRequest;
 const ItemCoord = models.ItemCoord;
 const OrgCodeCertOCRResponse = models.OrgCodeCertOCRResponse;
 const MixedInvoiceOCRRequest = models.MixedInvoiceOCRRequest;
@@ -177,6 +180,21 @@ class OcrClient extends AbstractClient {
     InsuranceBillOCR(req, cb) {
         let resp = new InsuranceBillOCRResponse();
         this.request("InsuranceBillOCR", req, resp, cb);
+    }
+
+    /**
+     * 本接口支持条形码备案信息查询，返回条形码查询结果的相关信息，包括产品名称、产品英文名称、品牌名称、规格型号、宽度、高度、深度、关键字、产品描述、厂家名称、厂家地址、企业社会信用代码13个字段信息。
+
+产品优势：直联中国物品编码中心，查询结果更加准确、可靠。
+
+本接口目前为内测阶段，如需使用服务，请<a href="https://cloud.tencent.com/act/event/connect-service" target="_blank">联系商务</a>开通。
+     * @param {QueryBarCodeRequest} req
+     * @param {function(string, QueryBarCodeResponse):void} cb
+     * @public
+     */
+    QueryBarCode(req, cb) {
+        let resp = new QueryBarCodeResponse();
+        this.request("QueryBarCode", req, resp, cb);
     }
 
     /**

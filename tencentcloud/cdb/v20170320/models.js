@@ -10886,6 +10886,12 @@ class UpgradeDBInstanceEngineVersionRequest extends  AbstractModel {
          */
         this.WaitSwitch = null;
 
+        /**
+         * 是否是内核子版本升级，支持的值：1 - 升级内核子版本；0 - 升级数据库引擎版本。
+         * @type {number || null}
+         */
+        this.UpgradeSubversion = null;
+
     }
 
     /**
@@ -10898,6 +10904,7 @@ class UpgradeDBInstanceEngineVersionRequest extends  AbstractModel {
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
         this.EngineVersion = 'EngineVersion' in params ? params.EngineVersion : null;
         this.WaitSwitch = 'WaitSwitch' in params ? params.WaitSwitch : null;
+        this.UpgradeSubversion = 'UpgradeSubversion' in params ? params.UpgradeSubversion : null;
 
     }
 }
