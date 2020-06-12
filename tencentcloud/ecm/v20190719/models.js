@@ -958,6 +958,12 @@ Windows 实例：名字符长度为[2, 15]，允许字母（不限制大小写�
          */
         this.DataDiskSize = null;
 
+        /**
+         * 实例所属安全组。该参数可以通过调用 DescribeSecurityGroups 的返回值中的sgId字段来获取。若不指定该参数，则绑定默认安全组。
+         * @type {Array.<string> || null}
+         */
+        this.SecurityGroupIds = null;
+
     }
 
     /**
@@ -1001,6 +1007,7 @@ Windows 实例：名字符长度为[2, 15]，允许字母（不限制大小写�
         this.UserData = 'UserData' in params ? params.UserData : null;
         this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
         this.DataDiskSize = 'DataDiskSize' in params ? params.DataDiskSize : null;
+        this.SecurityGroupIds = 'SecurityGroupIds' in params ? params.SecurityGroupIds : null;
 
     }
 }
@@ -3240,10 +3247,28 @@ class ZoneInstanceCountISP extends  AbstractModel {
         this.InstanceCount = null;
 
         /**
-         * 运营商。
+         * 运营商，CTCC电信，CUCC联通，CMCC移动，多个运营商用英文分号连接";"。
          * @type {string || null}
          */
         this.ISP = null;
+
+        /**
+         * 指定私有网络编号，SubnetId与VpcId必须同时指定或不指定
+         * @type {string || null}
+         */
+        this.VpcId = null;
+
+        /**
+         * 指定子网编号，SubnetId与VpcId必须同时指定或不指定
+         * @type {string || null}
+         */
+        this.SubnetId = null;
+
+        /**
+         * 指定主网卡内网IP。条件：SubnetId与VpcId必须同时指定，并且IP数量与InstanceCount相同，多IP主机副网卡内网IP在相同子网内通过DHCP获取。
+         * @type {Array.<string> || null}
+         */
+        this.PrivateIpAddresses = null;
 
     }
 
@@ -3257,6 +3282,9 @@ class ZoneInstanceCountISP extends  AbstractModel {
         this.Zone = 'Zone' in params ? params.Zone : null;
         this.InstanceCount = 'InstanceCount' in params ? params.InstanceCount : null;
         this.ISP = 'ISP' in params ? params.ISP : null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
+        this.PrivateIpAddresses = 'PrivateIpAddresses' in params ? params.PrivateIpAddresses : null;
 
     }
 }
@@ -4531,6 +4559,12 @@ class Subnet extends  AbstractModel {
          */
         this.TagSet = null;
 
+        /**
+         * 所在区域
+         * @type {string || null}
+         */
+        this.Zone = null;
+
     }
 
     /**
@@ -4561,6 +4595,7 @@ class Subnet extends  AbstractModel {
                 this.TagSet.push(obj);
             }
         }
+        this.Zone = 'Zone' in params ? params.Zone : null;
 
     }
 }

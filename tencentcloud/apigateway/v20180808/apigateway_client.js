@@ -375,7 +375,7 @@ API 网关可绑定自定义域名到服务，用于服务调用。此接口用�
     }
 
     /**
-     * 本接口（DescribeIPStrategyApisStatus）用于查询IP策略绑定的API列表
+     * 本接口（DescribeIPStrategyApisStatus）用于查询IP策略可以绑定的API列表。即服务下所有API和该策略已绑定API的差集。
      * @param {DescribeIPStrategyApisStatusRequest} req
      * @param {function(string, DescribeIPStrategyApisStatusResponse):void} cb
      * @public
