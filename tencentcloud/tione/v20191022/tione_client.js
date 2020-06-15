@@ -18,13 +18,14 @@ const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const OutputDataConfig = models.OutputDataConfig;
 const StopTrainingJobResponse = models.StopTrainingJobResponse;
-const StoppingCondition = models.StoppingCondition;
+const BillingLabel = models.BillingLabel;
 const EnvConfig = models.EnvConfig;
 const CreateNotebookInstanceRequest = models.CreateNotebookInstanceRequest;
-const NotebookInstanceSummary = models.NotebookInstanceSummary;
+const DescribeNotebookSummaryRequest = models.DescribeNotebookSummaryRequest;
 const SecondaryStatusTransition = models.SecondaryStatusTransition;
 const DescribeNotebookInstanceRequest = models.DescribeNotebookInstanceRequest;
 const DeleteNotebookInstanceResponse = models.DeleteNotebookInstanceResponse;
+const NotebookInstanceSummary = models.NotebookInstanceSummary;
 const GitConfig = models.GitConfig;
 const CodeRepoSummary = models.CodeRepoSummary;
 const ResourceConfig = models.ResourceConfig;
@@ -47,7 +48,8 @@ const CreatePresignedNotebookInstanceUrlRequest = models.CreatePresignedNotebook
 const CreateNotebookLifecycleScriptRequest = models.CreateNotebookLifecycleScriptRequest;
 const CreateCodeRepositoryRequest = models.CreateCodeRepositoryRequest;
 const DescribeNotebookInstancesRequest = models.DescribeNotebookInstancesRequest;
-const DataSource = models.DataSource;
+const StoppingCondition = models.StoppingCondition;
+const DescribeCodeRepositoriesResponse = models.DescribeCodeRepositoriesResponse;
 const DescribeNotebookInstancesResponse = models.DescribeNotebookInstancesResponse;
 const DescribeCodeRepositoryRequest = models.DescribeCodeRepositoryRequest;
 const CreateTrainingJobResponse = models.CreateTrainingJobResponse;
@@ -56,6 +58,7 @@ const DescribeTrainingJobRequest = models.DescribeTrainingJobRequest;
 const AlgorithmSpecification = models.AlgorithmSpecification;
 const CosDataSource = models.CosDataSource;
 const DescribeNotebookLifecycleScriptsResponse = models.DescribeNotebookLifecycleScriptsResponse;
+const DescribeNotebookSummaryResponse = models.DescribeNotebookSummaryResponse;
 const Filter = models.Filter;
 const StopNotebookInstanceRequest = models.StopNotebookInstanceRequest;
 const DeleteNotebookLifecycleScriptRequest = models.DeleteNotebookLifecycleScriptRequest;
@@ -73,7 +76,7 @@ const UpdateNotebookLifecycleScriptResponse = models.UpdateNotebookLifecycleScri
 const StartNotebookInstanceRequest = models.StartNotebookInstanceRequest;
 const CreateCodeRepositoryResponse = models.CreateCodeRepositoryResponse;
 const DescribeCodeRepositoriesRequest = models.DescribeCodeRepositoriesRequest;
-const DescribeCodeRepositoriesResponse = models.DescribeCodeRepositoriesResponse;
+const DataSource = models.DataSource;
 const ModelArtifacts = models.ModelArtifacts;
 const DeleteCodeRepositoryResponse = models.DeleteCodeRepositoryResponse;
 
@@ -89,6 +92,17 @@ class TioneClient extends AbstractClient {
     }
     
     /**
+     * 更新Notebook实例
+     * @param {UpdateNotebookInstanceRequest} req
+     * @param {function(string, UpdateNotebookInstanceResponse):void} cb
+     * @public
+     */
+    UpdateNotebookInstance(req, cb) {
+        let resp = new UpdateNotebookInstanceResponse();
+        this.request("UpdateNotebookInstance", req, resp, cb);
+    }
+
+    /**
      * 查看notebook生命周期脚本列表
      * @param {DescribeNotebookLifecycleScriptsRequest} req
      * @param {function(string, DescribeNotebookLifecycleScriptsResponse):void} cb
@@ -97,6 +111,116 @@ class TioneClient extends AbstractClient {
     DescribeNotebookLifecycleScripts(req, cb) {
         let resp = new DescribeNotebookLifecycleScriptsResponse();
         this.request("DescribeNotebookLifecycleScripts", req, resp, cb);
+    }
+
+    /**
+     * 启动Notebook实例
+     * @param {StartNotebookInstanceRequest} req
+     * @param {function(string, StartNotebookInstanceResponse):void} cb
+     * @public
+     */
+    StartNotebookInstance(req, cb) {
+        let resp = new StartNotebookInstanceResponse();
+        this.request("StartNotebookInstance", req, resp, cb);
+    }
+
+    /**
+     * 删除notebook实例
+     * @param {DeleteNotebookInstanceRequest} req
+     * @param {function(string, DeleteNotebookInstanceResponse):void} cb
+     * @public
+     */
+    DeleteNotebookInstance(req, cb) {
+        let resp = new DeleteNotebookInstanceResponse();
+        this.request("DeleteNotebookInstance", req, resp, cb);
+    }
+
+    /**
+     * 查看notebook生命周期脚本详情
+     * @param {DescribeNotebookLifecycleScriptRequest} req
+     * @param {function(string, DescribeNotebookLifecycleScriptResponse):void} cb
+     * @public
+     */
+    DescribeNotebookLifecycleScript(req, cb) {
+        let resp = new DescribeNotebookLifecycleScriptResponse();
+        this.request("DescribeNotebookLifecycleScript", req, resp, cb);
+    }
+
+    /**
+     * 创建Notebook授权Url
+     * @param {CreatePresignedNotebookInstanceUrlRequest} req
+     * @param {function(string, CreatePresignedNotebookInstanceUrlResponse):void} cb
+     * @public
+     */
+    CreatePresignedNotebookInstanceUrl(req, cb) {
+        let resp = new CreatePresignedNotebookInstanceUrlResponse();
+        this.request("CreatePresignedNotebookInstanceUrl", req, resp, cb);
+    }
+
+    /**
+     * 创建存储库
+     * @param {CreateCodeRepositoryRequest} req
+     * @param {function(string, CreateCodeRepositoryResponse):void} cb
+     * @public
+     */
+    CreateCodeRepository(req, cb) {
+        let resp = new CreateCodeRepositoryResponse();
+        this.request("CreateCodeRepository", req, resp, cb);
+    }
+
+    /**
+     * 更新notebook生命周期脚本
+     * @param {UpdateNotebookLifecycleScriptRequest} req
+     * @param {function(string, UpdateNotebookLifecycleScriptResponse):void} cb
+     * @public
+     */
+    UpdateNotebookLifecycleScript(req, cb) {
+        let resp = new UpdateNotebookLifecycleScriptResponse();
+        this.request("UpdateNotebookLifecycleScript", req, resp, cb);
+    }
+
+    /**
+     * 查询训练任务
+     * @param {DescribeTrainingJobRequest} req
+     * @param {function(string, DescribeTrainingJobResponse):void} cb
+     * @public
+     */
+    DescribeTrainingJob(req, cb) {
+        let resp = new DescribeTrainingJobResponse();
+        this.request("DescribeTrainingJob", req, resp, cb);
+    }
+
+    /**
+     * 停止Notebook实例
+     * @param {StopNotebookInstanceRequest} req
+     * @param {function(string, StopNotebookInstanceResponse):void} cb
+     * @public
+     */
+    StopNotebookInstance(req, cb) {
+        let resp = new StopNotebookInstanceResponse();
+        this.request("StopNotebookInstance", req, resp, cb);
+    }
+
+    /**
+     * 创建Notebook实例
+     * @param {CreateNotebookInstanceRequest} req
+     * @param {function(string, CreateNotebookInstanceResponse):void} cb
+     * @public
+     */
+    CreateNotebookInstance(req, cb) {
+        let resp = new CreateNotebookInstanceResponse();
+        this.request("CreateNotebookInstance", req, resp, cb);
+    }
+
+    /**
+     * 查询存储库详情
+     * @param {DescribeCodeRepositoryRequest} req
+     * @param {function(string, DescribeCodeRepositoryResponse):void} cb
+     * @public
+     */
+    DescribeCodeRepository(req, cb) {
+        let resp = new DescribeCodeRepositoryResponse();
+        this.request("DescribeCodeRepository", req, resp, cb);
     }
 
     /**
@@ -111,14 +235,14 @@ class TioneClient extends AbstractClient {
     }
 
     /**
-     * 更新notebook生命周期脚本
-     * @param {UpdateNotebookLifecycleScriptRequest} req
-     * @param {function(string, UpdateNotebookLifecycleScriptResponse):void} cb
+     * 查询Notebook概览数据
+     * @param {DescribeNotebookSummaryRequest} req
+     * @param {function(string, DescribeNotebookSummaryResponse):void} cb
      * @public
      */
-    UpdateNotebookLifecycleScript(req, cb) {
-        let resp = new UpdateNotebookLifecycleScriptResponse();
-        this.request("UpdateNotebookLifecycleScript", req, resp, cb);
+    DescribeNotebookSummary(req, cb) {
+        let resp = new DescribeNotebookSummaryResponse();
+        this.request("DescribeNotebookSummary", req, resp, cb);
     }
 
     /**
@@ -144,39 +268,6 @@ class TioneClient extends AbstractClient {
     }
 
     /**
-     * 查询训练任务
-     * @param {DescribeTrainingJobRequest} req
-     * @param {function(string, DescribeTrainingJobResponse):void} cb
-     * @public
-     */
-    DescribeTrainingJob(req, cb) {
-        let resp = new DescribeTrainingJobResponse();
-        this.request("DescribeTrainingJob", req, resp, cb);
-    }
-
-    /**
-     * 更新存储库
-     * @param {UpdateCodeRepositoryRequest} req
-     * @param {function(string, UpdateCodeRepositoryResponse):void} cb
-     * @public
-     */
-    UpdateCodeRepository(req, cb) {
-        let resp = new UpdateCodeRepositoryResponse();
-        this.request("UpdateCodeRepository", req, resp, cb);
-    }
-
-    /**
-     * 更新Notebook实例
-     * @param {UpdateNotebookInstanceRequest} req
-     * @param {function(string, UpdateNotebookInstanceResponse):void} cb
-     * @public
-     */
-    UpdateNotebookInstance(req, cb) {
-        let resp = new UpdateNotebookInstanceResponse();
-        this.request("UpdateNotebookInstance", req, resp, cb);
-    }
-
-    /**
      * 查询Notebook实例详情
      * @param {DescribeNotebookInstanceRequest} req
      * @param {function(string, DescribeNotebookInstanceResponse):void} cb
@@ -188,36 +279,14 @@ class TioneClient extends AbstractClient {
     }
 
     /**
-     * 创建Notebook授权Url
-     * @param {CreatePresignedNotebookInstanceUrlRequest} req
-     * @param {function(string, CreatePresignedNotebookInstanceUrlResponse):void} cb
+     * 更新存储库
+     * @param {UpdateCodeRepositoryRequest} req
+     * @param {function(string, UpdateCodeRepositoryResponse):void} cb
      * @public
      */
-    CreatePresignedNotebookInstanceUrl(req, cb) {
-        let resp = new CreatePresignedNotebookInstanceUrlResponse();
-        this.request("CreatePresignedNotebookInstanceUrl", req, resp, cb);
-    }
-
-    /**
-     * 创建Notebook实例
-     * @param {CreateNotebookInstanceRequest} req
-     * @param {function(string, CreateNotebookInstanceResponse):void} cb
-     * @public
-     */
-    CreateNotebookInstance(req, cb) {
-        let resp = new CreateNotebookInstanceResponse();
-        this.request("CreateNotebookInstance", req, resp, cb);
-    }
-
-    /**
-     * 停止Notebook实例
-     * @param {StopNotebookInstanceRequest} req
-     * @param {function(string, StopNotebookInstanceResponse):void} cb
-     * @public
-     */
-    StopNotebookInstance(req, cb) {
-        let resp = new StopNotebookInstanceResponse();
-        this.request("StopNotebookInstance", req, resp, cb);
+    UpdateCodeRepository(req, cb) {
+        let resp = new UpdateCodeRepositoryResponse();
+        this.request("UpdateCodeRepository", req, resp, cb);
     }
 
     /**
@@ -254,28 +323,6 @@ class TioneClient extends AbstractClient {
     }
 
     /**
-     * 查询存储库详情
-     * @param {DescribeCodeRepositoryRequest} req
-     * @param {function(string, DescribeCodeRepositoryResponse):void} cb
-     * @public
-     */
-    DescribeCodeRepository(req, cb) {
-        let resp = new DescribeCodeRepositoryResponse();
-        this.request("DescribeCodeRepository", req, resp, cb);
-    }
-
-    /**
-     * 启动Notebook实例
-     * @param {StartNotebookInstanceRequest} req
-     * @param {function(string, StartNotebookInstanceResponse):void} cb
-     * @public
-     */
-    StartNotebookInstance(req, cb) {
-        let resp = new StartNotebookInstanceResponse();
-        this.request("StartNotebookInstance", req, resp, cb);
-    }
-
-    /**
      * 停止训练任务
      * @param {StopTrainingJobRequest} req
      * @param {function(string, StopTrainingJobResponse):void} cb
@@ -284,39 +331,6 @@ class TioneClient extends AbstractClient {
     StopTrainingJob(req, cb) {
         let resp = new StopTrainingJobResponse();
         this.request("StopTrainingJob", req, resp, cb);
-    }
-
-    /**
-     * 删除notebook实例
-     * @param {DeleteNotebookInstanceRequest} req
-     * @param {function(string, DeleteNotebookInstanceResponse):void} cb
-     * @public
-     */
-    DeleteNotebookInstance(req, cb) {
-        let resp = new DeleteNotebookInstanceResponse();
-        this.request("DeleteNotebookInstance", req, resp, cb);
-    }
-
-    /**
-     * 查看notebook生命周期脚本详情
-     * @param {DescribeNotebookLifecycleScriptRequest} req
-     * @param {function(string, DescribeNotebookLifecycleScriptResponse):void} cb
-     * @public
-     */
-    DescribeNotebookLifecycleScript(req, cb) {
-        let resp = new DescribeNotebookLifecycleScriptResponse();
-        this.request("DescribeNotebookLifecycleScript", req, resp, cb);
-    }
-
-    /**
-     * 创建存储库
-     * @param {CreateCodeRepositoryRequest} req
-     * @param {function(string, CreateCodeRepositoryResponse):void} cb
-     * @public
-     */
-    CreateCodeRepository(req, cb) {
-        let resp = new CreateCodeRepositoryResponse();
-        this.request("CreateCodeRepository", req, resp, cb);
     }
 
 

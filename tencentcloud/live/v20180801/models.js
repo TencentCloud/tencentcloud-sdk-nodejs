@@ -12590,7 +12590,7 @@ class DescribeProIspPlaySumInfoListResponse extends  AbstractModel {
         this.DataInfoList = null;
 
         /**
-         * 平均带宽。
+         * 下载速度，单位：MB/s，计算方式：总流量/总时长。
          * @type {number || null}
          */
         this.AvgFluxPerSecond = null;
