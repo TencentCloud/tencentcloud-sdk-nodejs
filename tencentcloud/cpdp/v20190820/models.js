@@ -7808,13 +7808,13 @@ class CreateInvoiceRequest extends  AbstractModel {
         this.UndoPart = null;
 
         /**
-         * 订单下单时间（格式 YYYMMDD）
+         * 订单下单时间（格式 YYYYMMDD）
          * @type {string || null}
          */
         this.OrderDate = null;
 
         /**
-         * 订单级别（单位为分）
+         * 订单级别折扣（单位为分）
          * @type {number || null}
          */
         this.Discount = null;

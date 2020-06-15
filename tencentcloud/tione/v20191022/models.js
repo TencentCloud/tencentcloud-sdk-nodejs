@@ -82,19 +82,34 @@ class StopTrainingJobResponse extends  AbstractModel {
 }
 
 /**
- * 终止条件
+ * 计费标签
  * @class
  */
-class StoppingCondition extends  AbstractModel {
+class BillingLabel extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 最长运行运行时间（秒）
+         * 计费项标识
 注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Label = null;
+
+        /**
+         * 存储大小
          * @type {number || null}
          */
-        this.MaxRuntimeInSeconds = null;
+        this.VolumeSize = null;
+
+        /**
+         * 计费状态
+None: 不计费
+StorageOnly: 仅存储计费
+Computing: 计算和存储都计费
+         * @type {string || null}
+         */
+        this.Status = null;
 
     }
 
@@ -105,7 +120,9 @@ class StoppingCondition extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.MaxRuntimeInSeconds = 'MaxRuntimeInSeconds' in params ? params.MaxRuntimeInSeconds : null;
+        this.Label = 'Label' in params ? params.Label : null;
+        this.VolumeSize = 'VolumeSize' in params ? params.VolumeSize : null;
+        this.Status = 'Status' in params ? params.Status : null;
 
     }
 }
@@ -154,43 +171,50 @@ class CreateNotebookInstanceRequest extends  AbstractModel {
         super();
 
         /**
-         * Notebook实例名称
+         * Notebook实例名称，不能超过63个字符
+规则：^[a-zA-Z0-9](-*[a-zA-Z0-9])*$
          * @type {string || null}
          */
         this.NotebookInstanceName = null;
 
         /**
          * Notebook算力类型
+参考https://cloud.tencent.com/document/product/851/41239
          * @type {string || null}
          */
         this.InstanceType = null;
 
         /**
          * 数据卷大小(GB)
+用户持久化Notebook实例的数据
          * @type {number || null}
          */
         this.VolumeSizeInGB = null;
 
         /**
          * 外网访问权限，可取值Enabled/Disabled
+开启后，Notebook实例可以具有访问外网80，443端口的权限
          * @type {string || null}
          */
         this.DirectInternetAccess = null;
 
         /**
          * Root用户权限，可取值Enabled/Disabled
+开启后，Notebook实例可以切换至root用户执行命令
          * @type {string || null}
          */
         this.RootAccess = null;
 
         /**
          * 子网ID
+如果需要Notebook实例访问VPC内的资源，则需要选择对应的子网
          * @type {string || null}
          */
         this.SubnetId = null;
 
         /**
          * 生命周期脚本名称
+必须是已存在的生命周期脚本，具体参考https://cloud.tencent.com/document/product/851/43140
          * @type {string || null}
          */
         this.LifecycleScriptsName = null;
@@ -198,6 +222,7 @@ class CreateNotebookInstanceRequest extends  AbstractModel {
         /**
          * 默认存储库名称
 可以是已创建的存储库名称或者已https://开头的公共git库
+参考https://cloud.tencent.com/document/product/851/43139
          * @type {string || null}
          */
         this.DefaultCodeRepository = null;
@@ -205,15 +230,32 @@ class CreateNotebookInstanceRequest extends  AbstractModel {
         /**
          * 其他存储库列表
 每个元素可以是已创建的存储库名称或者已https://开头的公共git库
+参考https://cloud.tencent.com/document/product/851/43139
          * @type {Array.<string> || null}
          */
         this.AdditionalCodeRepositories = null;
 
         /**
          * 是否开启CLS日志服务，可取值Enabled/Disabled，默认为Disabled
+开启后，Notebook运行的日志会收集到CLS中，CLS会产生费用，请根据需要选择
          * @type {string || null}
          */
         this.ClsAccess = null;
+
+        /**
+         * 自动停止配置
+选择定时停止Notebook实例
+         * @type {StoppingCondition || null}
+         */
+        this.StoppingCondition = null;
+
+        /**
+         * 自动停止，可取值Enabled/Disabled
+取值为Disabled的时候StoppingCondition将被忽略
+取值为Enabled的时候读取StoppingCondition作为自动停止的配置
+         * @type {string || null}
+         */
+        this.AutoStopping = null;
 
     }
 
@@ -235,58 +277,23 @@ class CreateNotebookInstanceRequest extends  AbstractModel {
         this.AdditionalCodeRepositories = 'AdditionalCodeRepositories' in params ? params.AdditionalCodeRepositories : null;
         this.ClsAccess = 'ClsAccess' in params ? params.ClsAccess : null;
 
+        if (params.StoppingCondition) {
+            let obj = new StoppingCondition();
+            obj.deserialize(params.StoppingCondition)
+            this.StoppingCondition = obj;
+        }
+        this.AutoStopping = 'AutoStopping' in params ? params.AutoStopping : null;
+
     }
 }
 
 /**
- * notebook实例概览
+ * DescribeNotebookSummary请求参数结构体
  * @class
  */
-class NotebookInstanceSummary extends  AbstractModel {
+class DescribeNotebookSummaryRequest extends  AbstractModel {
     constructor(){
         super();
-
-        /**
-         * 创建时间
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.CreationTime = null;
-
-        /**
-         * 最近修改时间
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.LastModifiedTime = null;
-
-        /**
-         * notebook实例名字
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.NotebookInstanceName = null;
-
-        /**
-         * notebook实例状态
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.NotebookInstanceStatus = null;
-
-        /**
-         * 算力类型
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.InstanceType = null;
-
-        /**
-         * 算力Id
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.InstanceId = null;
 
     }
 
@@ -297,12 +304,6 @@ class NotebookInstanceSummary extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.CreationTime = 'CreationTime' in params ? params.CreationTime : null;
-        this.LastModifiedTime = 'LastModifiedTime' in params ? params.LastModifiedTime : null;
-        this.NotebookInstanceName = 'NotebookInstanceName' in params ? params.NotebookInstanceName : null;
-        this.NotebookInstanceStatus = 'NotebookInstanceStatus' in params ? params.NotebookInstanceStatus : null;
-        this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
 
     }
 }
@@ -370,6 +371,7 @@ class DescribeNotebookInstanceRequest extends  AbstractModel {
 
         /**
          * Notebook实例名称
+规则：^[a-zA-Z0-9](-*[a-zA-Z0-9])*$
          * @type {string || null}
          */
         this.NotebookInstanceName = null;
@@ -412,6 +414,130 @@ class DeleteNotebookInstanceResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * notebook实例概览
+ * @class
+ */
+class NotebookInstanceSummary extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.CreationTime = null;
+
+        /**
+         * 最近修改时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.LastModifiedTime = null;
+
+        /**
+         * notebook实例名字
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.NotebookInstanceName = null;
+
+        /**
+         * notebook实例状态，取值范围：
+Pending: 创建中
+Inservice: 运行中
+Stopping: 停止中
+Stopped: 已停止
+Failed: 失败
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.NotebookInstanceStatus = null;
+
+        /**
+         * 算力类型
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.InstanceType = null;
+
+        /**
+         * 实例ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 启动时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.StartupTime = null;
+
+        /**
+         * 运行截止时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Deadline = null;
+
+        /**
+         * 自动停止配置
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {StoppingCondition || null}
+         */
+        this.StoppingCondition = null;
+
+        /**
+         * 是否是预付费实例
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.Prepay = null;
+
+        /**
+         * 计费标识
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {BillingLabel || null}
+         */
+        this.BillingLabel = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CreationTime = 'CreationTime' in params ? params.CreationTime : null;
+        this.LastModifiedTime = 'LastModifiedTime' in params ? params.LastModifiedTime : null;
+        this.NotebookInstanceName = 'NotebookInstanceName' in params ? params.NotebookInstanceName : null;
+        this.NotebookInstanceStatus = 'NotebookInstanceStatus' in params ? params.NotebookInstanceStatus : null;
+        this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.StartupTime = 'StartupTime' in params ? params.StartupTime : null;
+        this.Deadline = 'Deadline' in params ? params.Deadline : null;
+
+        if (params.StoppingCondition) {
+            let obj = new StoppingCondition();
+            obj.deserialize(params.StoppingCondition)
+            this.StoppingCondition = obj;
+        }
+        this.Prepay = 'Prepay' in params ? params.Prepay : null;
+
+        if (params.BillingLabel) {
+            let obj = new BillingLabel();
+            obj.deserialize(params.BillingLabel)
+            this.BillingLabel = obj;
+        }
 
     }
 }
@@ -1141,6 +1267,7 @@ class UpdateNotebookInstanceRequest extends  AbstractModel {
 
         /**
          * Notebook实例名称
+规则：^[a-zA-Z0-9](-*[a-zA-Z0-9])*$
          * @type {string || null}
          */
         this.NotebookInstanceName = null;
@@ -1177,9 +1304,7 @@ class UpdateNotebookInstanceRequest extends  AbstractModel {
 
         /**
          * 是否解绑生命周期脚本，默认 false。
-如果本来就没有绑定脚本，则忽略此参数；
-如果本来有绑定脚本，此参数为 true 则解绑；
-如果本来有绑定脚本，此参数为 false，则需要额外填入 LifecycleScriptsName
+该值为true时，LifecycleScriptsName将被忽略
          * @type {boolean || null}
          */
         this.DisassociateLifecycleScript = null;
@@ -1218,6 +1343,20 @@ class UpdateNotebookInstanceRequest extends  AbstractModel {
          */
         this.ClsAccess = null;
 
+        /**
+         * 自动停止，可取值Enabled/Disabled
+取值为Disabled的时候StoppingCondition将被忽略
+取值为Enabled的时候读取StoppingCondition作为自动停止的配置
+         * @type {string || null}
+         */
+        this.AutoStopping = null;
+
+        /**
+         * 自动停止配置，只在AutoStopping为Enabled的时候生效
+         * @type {StoppingCondition || null}
+         */
+        this.StoppingCondition = null;
+
     }
 
     /**
@@ -1239,6 +1378,13 @@ class UpdateNotebookInstanceRequest extends  AbstractModel {
         this.DisassociateDefaultCodeRepository = 'DisassociateDefaultCodeRepository' in params ? params.DisassociateDefaultCodeRepository : null;
         this.DisassociateAdditionalCodeRepositories = 'DisassociateAdditionalCodeRepositories' in params ? params.DisassociateAdditionalCodeRepositories : null;
         this.ClsAccess = 'ClsAccess' in params ? params.ClsAccess : null;
+        this.AutoStopping = 'AutoStopping' in params ? params.AutoStopping : null;
+
+        if (params.StoppingCondition) {
+            let obj = new StoppingCondition();
+            obj.deserialize(params.StoppingCondition)
+            this.StoppingCondition = obj;
+        }
 
     }
 }
@@ -1410,6 +1556,9 @@ search-by-name - String - 是否必填：否 -（过滤条件）按照名称检�
 lifecycle-name - String - 是否必填：否 -（过滤条件）按照生命周期脚本名称过滤。
 default-code-repo-name - String - 是否必填：否 -（过滤条件）按照默认存储库名称过滤。
 additional-code-repo-name - String - 是否必填：否 -（过滤条件）按照其他存储库名称过滤。
+billing-status - String - 是否必填：否 - （过滤条件）按照计费状态过滤，可取以下值
+   StorageOnly：仅存储计费的实例
+   Computing：计算和存储都计费的实例
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
@@ -1447,26 +1596,19 @@ additional-code-repo-name - String - 是否必填：否 -（过滤条件）按�
 }
 
 /**
- * 数据源
+ * 终止条件
  * @class
  */
-class DataSource extends  AbstractModel {
+class StoppingCondition extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * cos数据源
+         * 最长运行运行时间（秒）
 注意：此字段可能返回 null，表示取不到有效值。
-         * @type {CosDataSource || null}
+         * @type {number || null}
          */
-        this.CosDataSource = null;
-
-        /**
-         * 文件系统输入源
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {FileSystemDataSource || null}
-         */
-        this.FileSystemDataSource = null;
+        this.MaxRuntimeInSeconds = null;
 
     }
 
@@ -1477,18 +1619,58 @@ class DataSource extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.MaxRuntimeInSeconds = 'MaxRuntimeInSeconds' in params ? params.MaxRuntimeInSeconds : null;
 
-        if (params.CosDataSource) {
-            let obj = new CosDataSource();
-            obj.deserialize(params.CosDataSource)
-            this.CosDataSource = obj;
-        }
+    }
+}
 
-        if (params.FileSystemDataSource) {
-            let obj = new FileSystemDataSource();
-            obj.deserialize(params.FileSystemDataSource)
-            this.FileSystemDataSource = obj;
+/**
+ * DescribeCodeRepositories返回参数结构体
+ * @class
+ */
+class DescribeCodeRepositoriesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 存储库总数目
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 存储库列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<CodeRepoSummary> || null}
+         */
+        this.CodeRepoSet = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
         }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.CodeRepoSet) {
+            this.CodeRepoSet = new Array();
+            for (let z in params.CodeRepoSet) {
+                let obj = new CodeRepoSummary();
+                obj.deserialize(params.CodeRepoSet[z]);
+                this.CodeRepoSet.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1692,6 +1874,12 @@ class DescribeNotebookInstanceResponse extends  AbstractModel {
 
         /**
          * Notebook实例状态
+
+Pending: 创建中
+Inservice: 运行中
+Stopping: 停止中
+Stopped: 已停止
+Failed: 失败
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
@@ -1735,6 +1923,27 @@ class DescribeNotebookInstanceResponse extends  AbstractModel {
         this.ClsAccess = null;
 
         /**
+         * 是否预付费实例
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.Prepay = null;
+
+        /**
+         * 实例运行截止时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Deadline = null;
+
+        /**
+         * 自动停止配置
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {StoppingCondition || null}
+         */
+        this.StoppingCondition = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -1766,6 +1975,14 @@ class DescribeNotebookInstanceResponse extends  AbstractModel {
         this.DefaultCodeRepository = 'DefaultCodeRepository' in params ? params.DefaultCodeRepository : null;
         this.AdditionalCodeRepositories = 'AdditionalCodeRepositories' in params ? params.AdditionalCodeRepositories : null;
         this.ClsAccess = 'ClsAccess' in params ? params.ClsAccess : null;
+        this.Prepay = 'Prepay' in params ? params.Prepay : null;
+        this.Deadline = 'Deadline' in params ? params.Deadline : null;
+
+        if (params.StoppingCondition) {
+            let obj = new StoppingCondition();
+            obj.deserialize(params.StoppingCondition)
+            this.StoppingCondition = obj;
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -1942,6 +2159,62 @@ class DescribeNotebookLifecycleScriptsResponse extends  AbstractModel {
             }
         }
         this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeNotebookSummary返回参数结构体
+ * @class
+ */
+class DescribeNotebookSummaryResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例总数
+         * @type {number || null}
+         */
+        this.AllInstanceCnt = null;
+
+        /**
+         * 计费实例总数
+         * @type {number || null}
+         */
+        this.BillingInstanceCnt = null;
+
+        /**
+         * 仅存储计费的实例总数
+         * @type {number || null}
+         */
+        this.StorageOnlyBillingInstanceCnt = null;
+
+        /**
+         * 计算和存储都计费的实例总数
+         * @type {number || null}
+         */
+        this.ComputingBillingInstanceCnt = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AllInstanceCnt = 'AllInstanceCnt' in params ? params.AllInstanceCnt : null;
+        this.BillingInstanceCnt = 'BillingInstanceCnt' in params ? params.BillingInstanceCnt : null;
+        this.StorageOnlyBillingInstanceCnt = 'StorageOnlyBillingInstanceCnt' in params ? params.StorageOnlyBillingInstanceCnt : null;
+        this.ComputingBillingInstanceCnt = 'ComputingBillingInstanceCnt' in params ? params.ComputingBillingInstanceCnt : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -2727,9 +3000,24 @@ class StartNotebookInstanceRequest extends  AbstractModel {
 
         /**
          * Notebook实例名称
+规则：^[a-zA-Z0-9](-*[a-zA-Z0-9])*$
          * @type {string || null}
          */
         this.NotebookInstanceName = null;
+
+        /**
+         * 自动停止，可取值Enabled/Disabled
+取值为Disabled的时候StoppingCondition将被忽略
+取值为Enabled的时候读取StoppingCondition作为自动停止的配置
+         * @type {string || null}
+         */
+        this.AutoStopping = null;
+
+        /**
+         * 自动停止配置，只在AutoStopping为Enabled的时候生效
+         * @type {StoppingCondition || null}
+         */
+        this.StoppingCondition = null;
 
     }
 
@@ -2741,6 +3029,13 @@ class StartNotebookInstanceRequest extends  AbstractModel {
             return;
         }
         this.NotebookInstanceName = 'NotebookInstanceName' in params ? params.NotebookInstanceName : null;
+        this.AutoStopping = 'AutoStopping' in params ? params.AutoStopping : null;
+
+        if (params.StoppingCondition) {
+            let obj = new StoppingCondition();
+            obj.deserialize(params.StoppingCondition)
+            this.StoppingCondition = obj;
+        }
 
     }
 }
@@ -2842,31 +3137,26 @@ Ascending 按更新时间升序
 }
 
 /**
- * DescribeCodeRepositories返回参数结构体
+ * 数据源
  * @class
  */
-class DescribeCodeRepositoriesResponse extends  AbstractModel {
+class DataSource extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 存储库总数目
-         * @type {number || null}
-         */
-        this.TotalCount = null;
-
-        /**
-         * 存储库列表
+         * cos数据源
 注意：此字段可能返回 null，表示取不到有效值。
-         * @type {Array.<CodeRepoSummary> || null}
+         * @type {CosDataSource || null}
          */
-        this.CodeRepoSet = null;
+        this.CosDataSource = null;
 
         /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
+         * 文件系统输入源
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {FileSystemDataSource || null}
          */
-        this.RequestId = null;
+        this.FileSystemDataSource = null;
 
     }
 
@@ -2877,17 +3167,18 @@ class DescribeCodeRepositoriesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
 
-        if (params.CodeRepoSet) {
-            this.CodeRepoSet = new Array();
-            for (let z in params.CodeRepoSet) {
-                let obj = new CodeRepoSummary();
-                obj.deserialize(params.CodeRepoSet[z]);
-                this.CodeRepoSet.push(obj);
-            }
+        if (params.CosDataSource) {
+            let obj = new CosDataSource();
+            obj.deserialize(params.CosDataSource)
+            this.CosDataSource = obj;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+        if (params.FileSystemDataSource) {
+            let obj = new FileSystemDataSource();
+            obj.deserialize(params.FileSystemDataSource)
+            this.FileSystemDataSource = obj;
+        }
 
     }
 }
@@ -2959,13 +3250,14 @@ class DeleteCodeRepositoryResponse extends  AbstractModel {
 module.exports = {
     OutputDataConfig: OutputDataConfig,
     StopTrainingJobResponse: StopTrainingJobResponse,
-    StoppingCondition: StoppingCondition,
+    BillingLabel: BillingLabel,
     EnvConfig: EnvConfig,
     CreateNotebookInstanceRequest: CreateNotebookInstanceRequest,
-    NotebookInstanceSummary: NotebookInstanceSummary,
+    DescribeNotebookSummaryRequest: DescribeNotebookSummaryRequest,
     SecondaryStatusTransition: SecondaryStatusTransition,
     DescribeNotebookInstanceRequest: DescribeNotebookInstanceRequest,
     DeleteNotebookInstanceResponse: DeleteNotebookInstanceResponse,
+    NotebookInstanceSummary: NotebookInstanceSummary,
     GitConfig: GitConfig,
     CodeRepoSummary: CodeRepoSummary,
     ResourceConfig: ResourceConfig,
@@ -2988,7 +3280,8 @@ module.exports = {
     CreateNotebookLifecycleScriptRequest: CreateNotebookLifecycleScriptRequest,
     CreateCodeRepositoryRequest: CreateCodeRepositoryRequest,
     DescribeNotebookInstancesRequest: DescribeNotebookInstancesRequest,
-    DataSource: DataSource,
+    StoppingCondition: StoppingCondition,
+    DescribeCodeRepositoriesResponse: DescribeCodeRepositoriesResponse,
     DescribeNotebookInstancesResponse: DescribeNotebookInstancesResponse,
     DescribeCodeRepositoryRequest: DescribeCodeRepositoryRequest,
     CreateTrainingJobResponse: CreateTrainingJobResponse,
@@ -2997,6 +3290,7 @@ module.exports = {
     AlgorithmSpecification: AlgorithmSpecification,
     CosDataSource: CosDataSource,
     DescribeNotebookLifecycleScriptsResponse: DescribeNotebookLifecycleScriptsResponse,
+    DescribeNotebookSummaryResponse: DescribeNotebookSummaryResponse,
     Filter: Filter,
     StopNotebookInstanceRequest: StopNotebookInstanceRequest,
     DeleteNotebookLifecycleScriptRequest: DeleteNotebookLifecycleScriptRequest,
@@ -3014,7 +3308,7 @@ module.exports = {
     StartNotebookInstanceRequest: StartNotebookInstanceRequest,
     CreateCodeRepositoryResponse: CreateCodeRepositoryResponse,
     DescribeCodeRepositoriesRequest: DescribeCodeRepositoriesRequest,
-    DescribeCodeRepositoriesResponse: DescribeCodeRepositoriesResponse,
+    DataSource: DataSource,
     ModelArtifacts: ModelArtifacts,
     DeleteCodeRepositoryResponse: DeleteCodeRepositoryResponse,
 
