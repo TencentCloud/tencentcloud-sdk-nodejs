@@ -508,6 +508,20 @@ Failed: 失败
          */
         this.BillingLabel = null;
 
+        /**
+         * 运行时长，秒
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.RuntimeInSeconds = null;
+
+        /**
+         * 剩余时长，秒
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.RemainTimeInSeconds = null;
+
     }
 
     /**
@@ -538,6 +552,8 @@ Failed: 失败
             obj.deserialize(params.BillingLabel)
             this.BillingLabel = obj;
         }
+        this.RuntimeInSeconds = 'RuntimeInSeconds' in params ? params.RuntimeInSeconds : null;
+        this.RemainTimeInSeconds = 'RemainTimeInSeconds' in params ? params.RemainTimeInSeconds : null;
 
     }
 }
